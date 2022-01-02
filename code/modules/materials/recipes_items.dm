@@ -153,6 +153,12 @@
 	req_amount = 2
 	difficulty = 2
 
+/datum/stack_recipe/supermatter_alarm
+	title = "supermatter alarm frame"
+	result_type = /obj/item/frame/supermatter_alarm
+	req_amount = 1
+	difficulty = 2
+
 /datum/stack_recipe/computer/telescreen
 	title = "modular telescreen frame"
 	result_type = /obj/item/modular_computer/telescreen

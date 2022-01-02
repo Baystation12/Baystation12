@@ -38,10 +38,10 @@
 #define CYBORG_AIRLOCKCRUSH_RESISTANCE 2 // Damage caused to silicon mobs (usually cyborgs) from being crushed by airlocks is divided by this number. Unlike organics cyborgs don't have passive regeneration.
 
 /atom/movable/proc/airlock_crush(var/crush_damage)
-	return
+	damage_health(crush_damage, BRUTE)
 
 /obj/structure/window/airlock_crush(var/crush_damage)
-	ex_act(2)//Smashin windows
+	shatter(TRUE)
 
 /obj/machinery/portable_atmospherics/canister/airlock_crush(var/crush_damage)
 	. = ..()
@@ -52,11 +52,9 @@
 	Stress(crush_damage)
 
 /obj/structure/closet/airlock_crush(var/crush_damage)
-	..()
-	damage(crush_damage)
 	for(var/atom/movable/AM in src)
-		AM.airlock_crush()
-	return
+		AM.airlock_crush(crush_damage)
+	..()
 
 /mob/living/airlock_crush(var/crush_damage)
 	. = ..()

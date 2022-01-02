@@ -21,7 +21,7 @@
 	skin_material = null
 	skin_amount =   null
 
-	ai_holder_type = /datum/ai_holder/simple_animal/passive/tomato
+	ai_holder = /datum/ai_holder/simple_animal/passive/tomato
 
 /datum/ai_holder/simple_animal/passive/tomato
 	speak_chance = 0

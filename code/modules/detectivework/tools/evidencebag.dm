@@ -21,22 +21,6 @@
 	if (isturf(I.loc))
 		if (!user.Adjacent(I))
 			return
-	else
-		//If it isn't on the floor. Do some checks to see if it's in our hands or a box. Otherwise give up.
-		if(istype(I.loc,/obj/item/storage))	//in a container.
-			var/sdepth = I.storage_depth(user)
-			if (sdepth == -1 || sdepth > 1)
-				return	//too deeply nested to access
-
-			var/obj/item/storage/U = I.loc
-			user.client.screen -= I
-			U.contents.Remove(I)
-		else if(user.l_hand == I)					//in a hand
-			user.drop_l_hand()
-		else if(user.r_hand == I)					//in a hand
-			user.drop_r_hand()
-		else
-			return
 
 	if(!istype(I) || I.anchored)
 		return
@@ -52,6 +36,21 @@
 	if(stored_item)
 		to_chat(user, "<span class='notice'>[src] already has something inside it.</span>")
 		return
+
+	else
+		//If it isn't on the floor. Do some checks to see if it's in our hands or a box. Otherwise give up.
+		if(istype(I.loc,/obj/item/storage))	//in a container.
+			var/sdepth = I.storage_depth(user)
+			if (sdepth == -1 || sdepth > 1)
+				return	//too deeply nested to access
+
+			var/obj/item/storage/U = I.loc
+			user.client.screen -= I
+			U.contents.Remove(I)
+		else if(user.l_hand == I)					//in a hand
+			user.drop_l_hand()
+		else if(user.r_hand == I)					//in a hand
+			user.drop_r_hand()
 
 	user.visible_message("[user] puts [I] into [src]", "You put [I] inside [src].",\
 	"You hear a rustle as someone puts something into a plastic bag.")

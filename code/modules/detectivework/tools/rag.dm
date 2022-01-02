@@ -207,7 +207,7 @@
 
 /obj/item/reagent_containers/glass/rag/proc/can_ignite()
 	var/fuel = 0
-	FOR_BLIND(datum/reagent/R, reagents?.reagent_list)
+	for (var/datum/reagent/R as anything in reagents?.reagent_list)
 		if (R.gas_flags & XGM_GAS_FUEL)
 			fuel += R.volume
 	return (fuel >= 2 && fuel >= reagents?.total_volume * 0.8)

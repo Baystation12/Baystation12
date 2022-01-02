@@ -73,7 +73,7 @@
 		remaining_choices = shuffle(remaining_choices)
 		sortTim(remaining_choices, /proc/cmp_numeric_dsc, TRUE)
 		if(!length(remaining_votes) || !length(remaining_choices))  // we ran out of options or votes, you get what we have
-			result += remaining_choices.Copy(1, Clamp(result_length - length(result) + 1, 0, length(remaining_choices) + 1))
+			result += remaining_choices.Copy(1, clamp(result_length - length(result) + 1, 0, length(remaining_choices) + 1))
 			break
 		else 
 			// 50% majority or we don't have enough candidates to be picky, declare the winner and remove it from the possible candidates

@@ -79,7 +79,7 @@
 	else
 		use_env = 1
 
-	var/current_volume = Clamp(sound_copy.volume, 0, 100)
+	var/current_volume = clamp(sound_copy.volume, 0, 100)
 	sound_copy.volume = current_volume //Sanitize volume
 	var/datum/sound_token/token = new /datum/sound_token/instrument(src.player.actual_instrument, src.sound_id, sound_copy, src.player.range, FALSE, use_env, player)
 	var/delta_volume = player.volume / src.sustain_timer

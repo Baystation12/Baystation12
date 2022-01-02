@@ -21,7 +21,7 @@
 	attacktext = list("gripped")
 	attack_sound = 'sound/hallucinations/growl1.ogg'
 
-	ai_holder_type = /datum/ai_holder/simple_animal/melee
+	ai_holder = /datum/ai_holder/simple_animal/melee
 
 	taser_kill = FALSE
 

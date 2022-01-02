@@ -2,6 +2,9 @@
 	name = "Mountains"
 	var/rock_color
 
+/datum/exoplanet_theme/mountains/get_sensor_data()
+	return "Extensive cave systems and mountain regions detected."
+
 /datum/exoplanet_theme/mountains/before_map_generation(obj/effect/overmap/visitable/sector/exoplanet/E)
 	rock_color = pick(E.rock_colors)
 	for(var/zlevel in E.map_z)

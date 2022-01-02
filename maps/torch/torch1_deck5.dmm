@@ -42,28 +42,12 @@
 /turf/simulated/wall/titanium,
 /area/shuttle/petrov/toxins)
 "ah" = (
-/obj/effect/floor_decal/corner/red/half{
-	dir = 1;
-	icon_state = "bordercolorhalf"
-	},
-/obj/structure/table/rack,
-/obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
-	},
-/obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/machinery/door/window/brigdoor/westright{
-	dir = 2;
-	name = "suit storage"
+/obj/machinery/computer/modular/preset/supply_public,
+/obj/effect/floor_decal/corner/purple/half{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "ai" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
@@ -305,7 +289,7 @@
 	pixel_y = -21
 	},
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "aH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -905,7 +889,7 @@
 "bP" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "bQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
@@ -3010,8 +2994,7 @@
 "gi" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
@@ -3021,8 +3004,7 @@
 "gj" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
@@ -3062,8 +3044,7 @@
 "gm" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 8
@@ -9225,8 +9206,7 @@
 /area/hallway/primary/fifthdeck/aft)
 "tR" = (
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/structure/window/reinforced{
 	dir = 8
@@ -9243,7 +9223,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "tU" = (
 /obj/structure/railing/mapped,
 /obj/structure/railing/mapped{
@@ -10350,7 +10330,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "xg" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -10441,16 +10421,14 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/r_n_d/protolathe,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/rnd)
 "xC" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 10
@@ -10492,7 +10470,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "xO" = (
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced_phoron/titanium,
@@ -10793,7 +10771,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "yI" = (
 /turf/simulated/floor/plating,
 /area/vacant/bar)
@@ -11066,7 +11044,7 @@
 /area/shuttle/petrov/cockpit)
 "zC" = (
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "zH" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4;
@@ -11079,7 +11057,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "zL" = (
 /obj/structure/table/steel,
 /obj/item/device/flashlight/lamp/green,
@@ -11606,7 +11584,7 @@
 	level = 2
 	},
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "BO" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/table/standard,
@@ -11680,8 +11658,7 @@
 /area/exploration_shuttle/cargo)
 "Ch" = (
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -12625,8 +12602,7 @@
 /area/maintenance/fifthdeck/aftport)
 "Fo" = (
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/machinery/chemical_dispenser/full,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -13040,7 +13016,11 @@
 /area/shuttle/petrov/rd)
 "Hc" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/power/emitter,
+/obj/machinery/power/emitter{
+	desc = "A massive, heavy-duty industrial laser. This design is a fixed installation, capable of shooting in only one direction. It has a label on it reading 'SRV Petrov Analysis Lab.'";
+	name = "emitter (Petrov)";
+	req_lock_access = list("ACCESS_TORCH_PETROV_ANALYSIS")
+	},
 /obj/machinery/light{
 	dir = 8
 	},
@@ -13207,10 +13187,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "HJ" = (
-/obj/effect/floor_decal/corner/red/half{
-	dir = 8;
-	icon_state = "bordercolorhalf"
-	},
 /obj/machinery/alarm{
 	alarm_id = "xenobio2_alarm";
 	dir = 4;
@@ -13218,8 +13194,11 @@
 	pixel_x = -24
 	},
 /obj/item/stool/padded,
+/obj/effect/floor_decal/corner/purple/half{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "HK" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -14353,7 +14332,7 @@
 	pixel_y = 23
 	},
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "LE" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
@@ -14474,7 +14453,7 @@
 /obj/structure/table/steel,
 /obj/item/modular_computer/laptop/preset/custom_loadout/advanced,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "Mc" = (
 /obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/structure/railing/mapped{
@@ -14565,7 +14544,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "Mt" = (
 /obj/structure/handrail{
 	dir = 4;
@@ -14607,7 +14586,7 @@
 	pixel_x = 20
 	},
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "Mx" = (
 /obj/structure/table/rack{
 	dir = 8
@@ -14815,7 +14794,7 @@
 	opacity = 0
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "Nl" = (
 /obj/machinery/alarm{
 	dir = 1;
@@ -14928,7 +14907,7 @@
 	},
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "NF" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -14948,7 +14927,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "NJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/external{
@@ -14979,7 +14958,7 @@
 	},
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "NP" = (
 /obj/structure/table/rack{
 	dir = 8
@@ -15230,8 +15209,7 @@
 /obj/machinery/r_n_d/circuit_imprinter,
 /obj/item/reagent_containers/glass/beaker/sulphuric,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/machinery/alarm{
 	dir = 8;
@@ -15568,7 +15546,7 @@
 	name = "Petrov Interior Door Control";
 	pixel_x = -5;
 	pixel_y = 6;
-	req_access = list("ACCESS_TORCH_PETROV_SEC")
+	req_access = list("ACCESS_TORCH_PETROV_CONTROL")
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "PetrovBiohazard";
@@ -15590,7 +15568,7 @@
 	pixel_y = 6
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "Qp" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable/cyan{
@@ -16500,10 +16478,6 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/isolation)
 "TG" = (
-/obj/effect/floor_decal/corner/red/half{
-	dir = 8;
-	icon_state = "bordercolorhalf"
-	},
 /obj/machinery/power/apc{
 	dir = 8;
 	name = "west bump";
@@ -16514,8 +16488,12 @@
 	icon_state = "0-4"
 	},
 /obj/structure/table/steel,
+/obj/effect/floor_decal/corner/purple/half{
+	dir = 8
+	},
+/obj/item/deck/cards,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "TH" = (
 /obj/structure/table/standard,
 /obj/machinery/cell_charger,
@@ -16629,11 +16607,12 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/door/airlock/security/research{
-	name = "Checkpoint"
+/obj/machinery/door/airlock/research{
+	id_tag = null;
+	name = "Control Room"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "Um" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -16898,7 +16877,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "Vr" = (
 /obj/structure/sign/solgov,
 /turf/simulated/wall/r_wall/hull,
@@ -17335,7 +17314,7 @@
 "Xe" = (
 /obj/structure/bed/chair/office/comfy/red,
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "Xf" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
@@ -17595,7 +17574,7 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "Yi" = (
 /obj/structure/table/rack{
 	dir = 4
@@ -17749,7 +17728,7 @@
 	opacity = 0
 	},
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "YG" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -17927,14 +17906,12 @@
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/eva)
 "Ze" = (
-/obj/effect/floor_decal/corner/red/half{
-	dir = 1;
-	icon_state = "bordercolorhalf"
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/computer/modular/preset/civilian,
+/obj/effect/floor_decal/corner/purple/half{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/petrov/control)
 "Zg" = (
 /obj/effect/floor_decal/techfloor,
 /turf/simulated/floor/tiled/techfloor/grid,

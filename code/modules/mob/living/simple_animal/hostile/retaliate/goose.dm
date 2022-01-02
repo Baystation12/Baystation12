@@ -29,7 +29,7 @@
 	var/max_damage = 22
 	var/loose = FALSE //goose loose status
 
-	ai_holder_type = /datum/ai_holder/simple_animal/retaliate/goose
+	ai_holder = /datum/ai_holder/simple_animal/retaliate/goose
 	say_list_type = /datum/say_list/goose
 
 

@@ -441,10 +441,10 @@
 	name = "\improper SRV Petrov - Lower Hallway"
 	icon_state = "hallA"
 
-/area/shuttle/petrov/security
-	name = "\improper SRV Petrov - Security Office"
+/area/shuttle/petrov/control
+	name = "\improper SRV Petrov - Control Room"
 	icon_state = "checkpoint1"
-	req_access = list(access_petrov_security)
+	req_access = list(access_petrov_control)
 
 /area/shuttle/petrov/rd
 	icon_state = "heads_rd"

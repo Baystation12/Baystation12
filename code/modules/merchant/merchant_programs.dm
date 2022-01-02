@@ -201,7 +201,7 @@
 				scrolled = 1
 			if("left")
 				scrolled = -1
-		var/new_merchant  = Clamp(current_merchant + scrolled, 1, SStrade.traders.len)
+		var/new_merchant  = clamp(current_merchant + scrolled, 1, SStrade.traders.len)
 		if(new_merchant != current_merchant)
 			hailed_merchant = FALSE
 			last_comms = null

@@ -174,8 +174,8 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 				var/newy = input("Input new entry y coordinate", "Coordinate input", linked.y) as num
 				if(!CanInteract(user,state))
 					return TOPIC_NOACTION
-				R.fields["x"] = Clamp(newx, 1, world.maxx)
-				R.fields["y"] = Clamp(newy, 1, world.maxy)
+				R.fields["x"] = clamp(newx, 1, world.maxx)
+				R.fields["y"] = clamp(newy, 1, world.maxy)
 		known_sectors[sec_name] = R
 
 	if (href_list["remove"])
@@ -189,14 +189,14 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		if(!CanInteract(user,state))
 			return
 		if (newx)
-			dx = Clamp(newx, 1, world.maxx)
+			dx = clamp(newx, 1, world.maxx)
 
 	if (href_list["sety"])
 		var/newy = input("Input new destiniation y coordinate", "Coordinate input", dy) as num|null
 		if(!CanInteract(user,state))
 			return
 		if (newy)
-			dy = Clamp(newy, 1, world.maxy)
+			dy = clamp(newy, 1, world.maxy)
 
 	if (href_list["x"] && href_list["y"])
 		dx = text2num(href_list["x"])
@@ -209,12 +209,12 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	if (href_list["speedlimit"])
 		var/newlimit = input("Autopilot Speed Limit (0 ~ [round(linked.max_autopilot * 1000, 0.1)])", "Autopilot speed limit", speedlimit * 1000) as num|null
 		if (!isnull(newlimit))
-			speedlimit = round(Clamp(newlimit, 0, linked.max_autopilot * 1000), 0.1) * 0.001
+			speedlimit = round(clamp(newlimit, 0, linked.max_autopilot * 1000), 0.1) * 0.001
 
 	if (href_list["accellimit"])
 		var/newlimit = input("Input new acceleration limit (0 ~ 10)", "Acceleration limit", accellimit * 1000) as num|null
 		if (!isnull(newlimit))
-			accellimit = round(Clamp(newlimit, 0, 10)) * 0.001
+			accellimit = round(clamp(newlimit, 0, 10)) * 0.001
 
 	if (href_list["move"])
 		var/ndir = text2num(href_list["move"])

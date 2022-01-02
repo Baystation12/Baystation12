@@ -45,7 +45,7 @@
 	speak_emote = list("chitters")
 
 	say_list_type = /datum/say_list/spider
-	ai_holder_type = /datum/ai_holder/simple_animal/melee
+	ai_holder = /datum/ai_holder/simple_animal/melee
 
 	var/poison_type = /datum/reagent/toxin/venom	// The reagent that gets injected when it attacks.
 	var/poison_chance = 20			// Chance for injection to occur.
@@ -101,6 +101,9 @@
 
 // Does actual poison injection, after all checks passed.
 /mob/living/simple_animal/hostile/giant_spider/proc/inject_poison(mob/living/L, target_zone)
+	if (isSynthetic())
+		return
+
 	if(prob(poison_chance))
 		to_chat(L, SPAN_WARNING("You feel a tiny prick."))
 		L.reagents.add_reagent(poison_type, poison_per_bite)

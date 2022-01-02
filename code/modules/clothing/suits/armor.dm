@@ -10,6 +10,24 @@
 	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.6
 	equip_delay = 2 SECONDS
+	equip_delay_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT
+
+/obj/item/clothing/suit/armor/equip_delay_before(mob/user, slot, equip_flags)
+	user.setClickCooldown(1 SECOND)
+	user.visible_message(
+		SPAN_ITALIC("\The [user] begins to don \the [src]."),
+		SPAN_ITALIC("You begin to don \the [src]."),
+		SPAN_ITALIC("You can hear metal clicking and fabric rustling."),
+		range = 5
+	)
+
+
+/obj/item/clothing/suit/armor/equip_delay_after(mob/user, slot, equip_flags)
+	user.visible_message(
+		SPAN_ITALIC("\The [user] finishes putting on \the [src]."),
+		SPAN_NOTICE("You finish putting on \the [src]."),
+		range = 5
+	)
 
 /obj/item/clothing/suit/armor/vest/old //just realized these had never been removed
 	name = "armor"

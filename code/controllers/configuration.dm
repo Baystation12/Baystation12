@@ -112,7 +112,7 @@
 	/// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
 	var/static/continous_rounds = FALSE
 
-	var/static/fps = 20
+	var/static/fps = 30
 
 	/// SSinitialization throttling
 	var/static/tick_limit_mc_init = TICK_LIMIT_MC_INIT_DEFAULT
@@ -138,6 +138,9 @@
 
 	/// Whether or not secret modes show list of possible round types
 	var/static/secret_hide_possibilities = FALSE
+
+	/// Whether or not secret - a hidden random pick from available modes - can be voted for
+	var/static/secret_disabled = FALSE
 
 	/// enables random events mid-round when set to 1
 	var/static/allow_random_events = FALSE
@@ -204,13 +207,17 @@
 
 	var/static/banappeals
 
-	var/static/wikiurl
+	var/static/wiki_url
 
-	var/static/forumurl
+	var/static/rules_url
 
-	var/static/githuburl
+	var/static/lore_url
 
-	var/static/issuereporturl
+	var/static/forum_url
+
+	var/static/source_url
+
+	var/static/issue_url
 
 	var/static/list/chat_markup
 
@@ -418,6 +425,12 @@
 	/// Logs all timers in buckets on automatic bucket reset
 	var/static/log_timers_on_bucket_reset = FALSE
 
+	/// The maximum amount of time a round can last before it is forcefully ended.
+	var/static/maximum_round_length
+
+	/// The delay in deciseconds between stat() updates.
+	var/static/stat_delay = 5
+
 
 /configuration/New()
 	build_mode_cache()
@@ -572,14 +585,18 @@
 				server = value
 			if ("banappeals")
 				banappeals = value
-			if ("wikiurl")
-				wikiurl = value
-			if ("forumurl")
-				forumurl = value
-			if ("githuburl")
-				githuburl = value
-			if ("issuereporturl")
-				issuereporturl = value
+			if ("wiki_url")
+				wiki_url = value
+			if ("rules_url")
+				rules_url = value
+			if ("lore_url")
+				lore_url = value
+			if ("forum_url")
+				forum_url = value
+			if ("source_url")
+				source_url = value
+			if ("issue_url")
+				issue_url = value
 			if ("ghosts_can_possess_animals")
 				ghosts_can_possess_animals = TRUE
 			if ("guest_jobban")
@@ -658,6 +675,8 @@
 				antag_hud_restricted = TRUE
 			if ("secret_hide_possibilities")
 				secret_hide_possibilities = TRUE
+			if ("secret_disabled")
+				secret_disabled = TRUE
 			if ("usealienwhitelist")
 				usealienwhitelist = TRUE
 			if ("usealienwhitelist_sql")
@@ -815,6 +834,10 @@
 				game_version = value
 			if ("log_timers_on_bucket_reset")
 				log_timers_on_bucket_reset = TRUE
+			if ("maximum_round_length")
+				maximum_round_length = text2num(value) MINUTES
+			if ("stat_delay")
+				stat_delay = Floor(text2num(value))
 			else
 				log_misc("Unknown setting in config/config.txt: '[name]'")
 
@@ -905,7 +928,7 @@
 
 /configuration/proc/build_mode_cache()
 	gamemode_cache = list()
-	FOR_BLIND(datum/game_mode/M, subtypesof(/datum/game_mode))
+	for (var/datum/game_mode/M as anything in subtypesof(/datum/game_mode))
 		var/tag = initial(M.config_tag)
 		if (!tag)
 			continue
@@ -917,7 +940,6 @@
 		probabilities[tag] = M.probability
 		if (M.votable)
 			votable_modes += tag
-	votable_modes += "secret"
 
 
 /configuration/proc/pick_mode(mode_name)
@@ -930,9 +952,10 @@
 
 
 /configuration/proc/get_runnable_modes()
+	var/list/lobby_players = SSticker.lobby_players()
 	var/list/result = list()
 	for (var/tag in gamemode_cache)
-		var/datum/game_mode/M = gamemode_cache[tag]
-		if (probabilities[tag] > 0 && !M.startRequirements())
+		var/datum/game_mode/mode = gamemode_cache[tag]
+		if (probabilities[tag] > 0 && !mode.check_startable(lobby_players))
 			result[tag] = probabilities[tag]
 	return result

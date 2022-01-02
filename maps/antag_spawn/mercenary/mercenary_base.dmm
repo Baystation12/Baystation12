@@ -2270,7 +2270,7 @@
 	},
 /obj/machinery/door/window/brigdoor/eastright{
 	dir = 1;
-	health = 150;
+	health_max = 150;
 	name = "The Box";
 	req_access = list("ACCESS_SYNDICATE")
 	},

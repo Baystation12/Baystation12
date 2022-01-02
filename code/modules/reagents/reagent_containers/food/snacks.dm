@@ -932,18 +932,6 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 10)
 
-/obj/item/reagent_containers/food/snacks/wingfangchu
-	name = "wing fang chu"
-	desc = "A savory dish of alien wing wang in soy."
-	icon_state = "wingfangchu"
-	trash = /obj/item/trash/snack_bowl
-	filling_color = "#43de18"
-	center_of_mass = "x=17;y=9"
-	bitesize = 2
-/obj/item/reagent_containers/food/snacks/wingfangchu/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 6)
-
 /obj/item/reagent_containers/food/snacks/meatkabob
 	name = "meat-kabob"
 	icon_state = "kabob"

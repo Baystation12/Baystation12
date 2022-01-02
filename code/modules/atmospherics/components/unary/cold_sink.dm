@@ -106,7 +106,7 @@
 		else
 			set_temperature = max(set_temperature + amount, 0)
 	if(href_list["setPower"]) //setting power to 0 is redundant anyways
-		var/new_setting = between(0, text2num(href_list["setPower"]), 100)
+		var/new_setting = clamp(text2num(href_list["setPower"]), 0, 100)
 		set_power_level(new_setting)
 
 	add_fingerprint(usr)
@@ -144,9 +144,9 @@
 //upgrading parts
 /obj/machinery/atmospherics/unary/freezer/RefreshParts()
 	..()
-	var/cap_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 20)
-	var/manip_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 1, 10)
-	var/bin_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
+	var/cap_rating = clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 20)
+	var/manip_rating = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 1, 10)
+	var/bin_rating = clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
 
 	power_rating = initial(power_rating) * cap_rating / 2			//more powerful
 	heatsink_temperature = initial(heatsink_temperature) / ((manip_rating + bin_rating) / 2)	//more efficient

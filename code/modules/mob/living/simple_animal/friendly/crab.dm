@@ -29,7 +29,7 @@
 	var/obj/item/inventory_head
 	var/obj/item/inventory_mask
 
-	ai_holder_type = /datum/ai_holder/simple_animal/passive/crab
+	ai_holder = /datum/ai_holder/simple_animal/passive/crab
 	say_list_type = /datum/say_list/crab
 
 /mob/living/simple_animal/crab/Life()

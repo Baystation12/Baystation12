@@ -29,7 +29,7 @@
 	skin_material = null
 	skin_amount =   0
 
-	ai_holder_type = /datum/ai_holder/simple_animal/ranged/pointblank/malf_drone
+	ai_holder = /datum/ai_holder/simple_animal/ranged/pointblank/malf_drone
 
 	var/datum/effect/effect/system/trail/ion_trail
 

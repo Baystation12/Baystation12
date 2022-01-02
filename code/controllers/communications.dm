@@ -108,10 +108,13 @@ var/const/BOT_FREQ	= 1447
 var/const/COMM_FREQ = 1353
 var/const/ERT_FREQ	= 1345
 var/const/AI_FREQ	= 1343
+var/const/ENT_FREQ	= 1461 //entertainment frequency. This is not a diona exclusive frequency.
+
+//antagonist channels
 var/const/DTH_FREQ	= 1341
 var/const/SYND_FREQ = 1213
 var/const/RAID_FREQ	= 1277
-var/const/ENT_FREQ	= 1461 //entertainment frequency. This is not a diona exclusive frequency.
+var/const/V_RAID_FREQ = 1245
 
 // department channels
 var/const/PUB_FREQ = 1459
@@ -157,6 +160,7 @@ var/list/radiochannels = list(
 	"Special Ops" 	= DTH_FREQ,
 	"Mercenary" 	= SYND_FREQ,
 	"Raider"		= RAID_FREQ,
+	"Vox Raider"	= V_RAID_FREQ,
 	"Exploration"	= EXP_FREQ,
 	"Supply" 		= SUP_FREQ,
 	"Service" 		= SRV_FREQ,
@@ -191,7 +195,7 @@ var/list/channel_color_presets = list(
 var/list/CENT_FREQS = list(ERT_FREQ, DTH_FREQ)
 
 // Antag channels, i.e. Syndicate
-var/list/ANTAG_FREQS = list(SYND_FREQ, RAID_FREQ)
+var/list/ANTAG_FREQS = list(SYND_FREQ, RAID_FREQ, V_RAID_FREQ)
 
 //Department channels, arranged lexically
 var/list/DEPT_FREQS = list(AI_FREQ, COMM_FREQ, ENG_FREQ, MED_FREQ, SEC_FREQ, SCI_FREQ, SRV_FREQ, SUP_FREQ, EXP_FREQ, ENT_FREQ, MED_I_FREQ, SEC_I_FREQ)

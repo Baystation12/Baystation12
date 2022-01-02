@@ -5,7 +5,7 @@
 
 /mob/living/carbon/human/dummy/mannequin/Initialize()
 	. = ..()
-	STOP_PROCESSING(SSmobs, src)
+	STOP_PROCESSING_MOB(src)
 	GLOB.human_mob_list -= src
 	delete_inventory()
 

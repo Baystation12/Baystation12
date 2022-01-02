@@ -15,12 +15,12 @@
 			set_light(0)
 			last_glow = 0
 	else
-		var/mult = Clamp(radiation/200, 0.5, 1)
+		var/mult = clamp(radiation/200, 0.5, 1)
 		if(last_glow != mult)
 			set_light(mult, 0.5, (5*mult), 2, "#55ff55")
 			last_glow = mult
 
-	set_nutrition(Clamp(nutrition + Floor(radiation/100) + light_amount, 0, 500))
+	set_nutrition(clamp(nutrition + Floor(radiation/100) + light_amount, 0, 500))
 
 	if(radiation >= 50 || light_amount > 2) //if there's enough light, heal
 		adjustBruteLoss(-1)

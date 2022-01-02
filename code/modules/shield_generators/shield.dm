@@ -317,7 +317,7 @@
 
 // Small visual effect, makes the shield tiles brighten up by changing color for a moment, and spreads to nearby shields.
 /obj/effect/shield/proc/impact_effect(var/i, var/list/affected_shields = list())
-	i = between(1, i, 10)
+	i = clamp(i, 1, 10)
 	var/backcolor = color
 	if(gen && gen.check_flag(MODEFLAG_OVERCHARGE))
 		color = COLOR_PINK

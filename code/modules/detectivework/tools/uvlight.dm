@@ -1,6 +1,7 @@
 /obj/item/device/uv_light
 	name = "\improper UV light"
 	desc = "A small handheld black light."
+	icon = 'icons/obj/uv_light.dmi'
 	icon_state = "uv_off"
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL

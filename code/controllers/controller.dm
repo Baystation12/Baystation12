@@ -1,7 +1,6 @@
 /datum/controller
 	var/name
-	// The object used for the clickable stat() button.
-	var/obj/effect/statclick/statclick
+	var/atom/movable/clickable_stat/stat_line
 
 /datum/controller/proc/Initialize()
 

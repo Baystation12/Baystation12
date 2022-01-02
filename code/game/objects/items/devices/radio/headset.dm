@@ -103,6 +103,13 @@
 	. = ..()
 	set_frequency(RAID_FREQ)
 
+/obj/item/device/radio/headset/vox_raider
+	ks1type = /obj/item/device/encryptionkey/vox_raider
+
+/obj/item/device/radio/headset/vox_raider/Initialize()
+	. = ..()
+	set_frequency(V_RAID_FREQ)
+
 /obj/item/device/radio/headset/binary
 	origin_tech = list(TECH_ESOTERIC = 3)
 	ks1type = /obj/item/device/encryptionkey/binary

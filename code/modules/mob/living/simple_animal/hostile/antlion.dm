@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/antlion
+/mob/living/simple_animal/hostile/retaliate/beast/antlion
 	name = "antlion"
 	desc = "A large insectoid creature."
 	icon = 'icons/mob/simple_animal/antlion.dmi'
@@ -17,7 +17,10 @@
 	natural_armor = list(
 		melee = ARMOR_MELEE_KNIVES
 		)
-	ability_cooldown = 30 SECONDS
+
+	special_attack_min_range = 2
+	special_attack_max_range = 6
+	special_attack_cooldown = 30 SECONDS
 
 	meat_type =     /obj/item/reagent_containers/food/snacks/xenomeat
 	meat_amount =   5
@@ -29,10 +32,10 @@
 	var/healing = FALSE
 	var/heal_amount = 6
 
-	ai_holder_type = /datum/ai_holder/simple_animal/retaliate
+	ai_holder = /datum/ai_holder/simple_animal/retaliate
 	say_list = /datum/say_list/antlion
 
-/mob/living/simple_animal/hostile/antlion/Life()
+/mob/living/simple_animal/hostile/retaliate/beast/antlion/Life()
 	. = ..()
 
 	process_healing() //this needs to occur before if(!.) because of stop_automation
@@ -40,23 +43,17 @@
 	if(!.)
 		return
 
-	// if(can_perform_ability())
-	// 	vanish()
+/mob/living/simple_animal/hostile/retaliate/beast/antlion/do_special_attack(atom/A)
+	. = ..()
+	vanish()
 
-// /mob/living/simple_animal/hostile/antlion/can_perform_ability()
-// 	. = ..()
-// 	if(!.)
-// 		return FALSE
-// 	if(!target_mob)
-// 		return FALSE
-
-/mob/living/simple_animal/hostile/antlion/proc/vanish()
+/mob/living/simple_animal/hostile/retaliate/beast/antlion/proc/vanish()
 	visible_message(SPAN_NOTICE("\The [src] burrows into \the [get_turf(src)]!"))
 	set_invisibility(INVISIBILITY_OBSERVER)
 	prep_burrow(TRUE)
 	addtimer(CALLBACK(src, .proc/diggy), 5 SECONDS)
 
-/mob/living/simple_animal/hostile/antlion/proc/diggy()
+/mob/living/simple_animal/hostile/retaliate/beast/antlion/proc/diggy()
 	var/list/turf_targets
 	if(target_mob)
 		for(var/turf/T in range(1, get_turf(target_mob)))
@@ -80,7 +77,7 @@
 		forceMove(T)
 	addtimer(CALLBACK(src, .proc/emerge, 2 SECONDS))
 
-/mob/living/simple_animal/hostile/antlion/proc/emerge()
+/mob/living/simple_animal/hostile/retaliate/beast/antlion/proc/emerge()
 	var/turf/T = get_turf(src)
 	if(!T)
 		return
@@ -93,17 +90,17 @@
 		visible_message(SPAN_DANGER("\The [src] tears into \the [H] from below!"))
 		H.Weaken(1)
 
-/mob/living/simple_animal/hostile/antlion/proc/process_healing()
+/mob/living/simple_animal/hostile/retaliate/beast/antlion/proc/process_healing()
 	if(!incapacitated() && healing)
 		var/old_health = health
 		if(old_health < maxHealth)
 			health = old_health + heal_amount
 
-/mob/living/simple_animal/hostile/antlion/proc/prep_burrow(var/new_bool)
+/mob/living/simple_animal/hostile/retaliate/beast/antlion/proc/prep_burrow(var/new_bool)
 	set_AI_busy(new_bool)
 	healing = new_bool
 
-/mob/living/simple_animal/hostile/antlion/mega
+/mob/living/simple_animal/hostile/retaliate/beast/antlion/mega
 	name = "antlion queen"
 	desc = "A huge antlion. It looks displeased."
 	icon_state = "queen"
@@ -130,7 +127,7 @@
 	name = "mandibles"
 	force = 25
 
-/mob/living/simple_animal/hostile/antlion/mega/Initialize()
+/mob/living/simple_animal/hostile/retaliate/beast/antlion/mega/Initialize()
 	. = ..()
 	var/matrix/M = new
 	M.Scale(1.5)

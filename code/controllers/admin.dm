@@ -1,51 +1,44 @@
 // Clickable stat() button.
-/obj/effect/statclick
+/atom/movable/clickable_stat
 	name = "Initializing..."
 	var/target
-
-INITIALIZE_IMMEDIATE(/obj/effect/statclick)
-
-/obj/effect/statclick/Initialize(mapload, text, target) //Don't port this to Initialize it's too critical
-	. = ..()
-	name = text
-	src.target = target
-
-/obj/effect/statclick/proc/update(text)
-	name = text
-	return src
-
-/obj/effect/statclick/debug
 	var/class
 
-/obj/effect/statclick/debug/Click()
-	if(!usr.client.holder || !target)
+INITIALIZE_IMMEDIATE(/atom/movable/clickable_stat)
+
+
+/atom/movable/clickable_stat/Initialize(mapload, new_target)
+	. = ..()
+	target = new_target
+
+
+/atom/movable/clickable_stat/Click()
+	if (!target)
 		return
-	if(!class)
-		if(istype(target, /datum/controller/subsystem))
+	var/client/client = usr?.client
+	if (!check_rights(R_DEBUG, TRUE, client))
+		return
+	if (!class)
+		if (istype(target, /datum/controller/subsystem))
 			class = "subsystem"
-		else if(istype(target, /datum/controller))
+		else if (istype(target, /datum/controller))
 			class = "controller"
-		else if(istype(target, /datum))
+		else if (istype(target, /datum))
 			class = "datum"
 		else
 			class = "unknown"
+	message_admins("[key_name_admin(client)] is debugging the [target] [class].")
+	client.debug_variables(target)
 
-	usr.client.debug_variables(target)
-	message_admins("Admin [key_name_admin(usr)] is debugging the [target] [class].")
 
-
-// Debug verbs.
 /client/proc/restart_controller(controller in list("Master", "Failsafe"))
 	set category = "Debug"
 	set name = "Restart Controller"
-	set desc = "Restart one of the various periodic loop controllers for the game (be careful!)"
-
-	if(!holder)
+	var/client/client = usr?.client
+	if (!check_rights(R_ADMIN, TRUE, client))
 		return
-	switch(controller)
-		if("Master")
-			Recreate_MC()
-		if("Failsafe")
-			new /datum/controller/failsafe()
-
-	message_admins("Admin [key_name_admin(usr)] has restarted the [controller] controller.")
+	if (controller == "Master")
+		Recreate_MC()
+	else if (controller == "Failsafe")
+		new /datum/controller/failsafe
+	message_admins("[key_name_admin(client)] has restarted the [controller] controller.")

@@ -300,6 +300,7 @@
 		/obj/item/clothing/accessory/pronouns/sheher = 2,
 		/obj/item/clothing/accessory/pronouns/hethey = 2,
 		/obj/item/clothing/accessory/pronouns/shethey = 2,
+		/obj/item/clothing/accessory/pronouns/heshe = 2,
 		/obj/item/clothing/accessory/pronouns/zehir = 2,
 		/obj/item/clothing/accessory/pronouns/ask = 2
 	)

@@ -86,7 +86,7 @@
 
 /obj/item/device/electronic_assembly/post_health_change(health_mod, damage_type)
 	..()
-	if (get_damage_percentage() >= 0.75)
+	if (get_damage_percentage() >= 75)
 		if(battery && battery.charge > 0)
 			visible_message(SPAN_WARNING("\The [src] sputters and sparks!"))
 			spark_system.start()
@@ -135,7 +135,7 @@
 		P.make_energy()
 
 	var/power_failure = FALSE
-	if(get_damage_percentage() >= 0.75 && prob(1))
+	if(get_damage_percentage() >= 75 && prob(1))
 		if(battery && battery.charge > 0)
 			visible_message(SPAN_WARNING("\The [src] sparks violently!"))
 			spark_system.start()
@@ -222,7 +222,7 @@
 
 		if(length(assembly_components) > components_per_page)
 			HTML += "<br>\["
-			for(var/i = 1 to ceil(length(assembly_components)/components_per_page))
+			for(var/i = 1 to Ceil(length(assembly_components)/components_per_page))
 				if((i-1) == interact_page)
 					HTML += " [i]"
 				else
@@ -412,7 +412,7 @@
 	add_allowed_scanner(user.ckey)
 
 	// Make sure we're not on an invalid page
-	interact_page = Clamp(interact_page, 0, ceil(length(assembly_components)/components_per_page)-1)
+	interact_page = clamp(interact_page, 0, Ceil(length(assembly_components)/components_per_page)-1)
 
 	return TRUE
 
@@ -435,14 +435,19 @@
 
 
 /obj/item/device/electronic_assembly/attackby(obj/item/I, mob/living/user)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	if (user.a_intent == I_HURT)
+		..()
+		return
+
 	if(istype(I, /obj/item/wrench))
 		if(istype(loc, /turf) && (IC_FLAG_ANCHORABLE & circuit_flags))
 			user.visible_message(SPAN_NOTICE("\The [user] wrenches \the [src]'s anchoring bolts [anchored ? "back" : "into position"]."))
 			playsound(get_turf(user), 'sound/items/Ratchet.ogg',50)
 			if(user.do_skilled(5 SECONDS, SKILL_CONSTRUCTION, src))
 				anchored = !anchored
-	else if(istype(I, /obj/item/integrated_circuit))
+		return
+
+	if(istype(I, /obj/item/integrated_circuit))
 		if(!user.canUnEquip(I))
 			return FALSE
 		if(try_add_component(I, user))
@@ -451,7 +456,8 @@
 			for(var/obj/item/integrated_circuit/input/S in assembly_components)
 				S.attackby_react(I,user,user.a_intent)
 			return ..()
-	else if(istype(I, /obj/item/device/multitool) || istype(I, /obj/item/device/integrated_electronics/wirer) || istype(I, /obj/item/device/integrated_electronics/debugger))
+
+	if(istype(I, /obj/item/device/multitool) || istype(I, /obj/item/device/integrated_electronics/wirer) || istype(I, /obj/item/device/integrated_electronics/debugger))
 		if(opened)
 			interact(user)
 			return TRUE
@@ -460,7 +466,8 @@
 			for(var/obj/item/integrated_circuit/input/S in assembly_components)
 				S.attackby_react(I,user,user.a_intent)
 			return ..()
-	else if(istype(I, /obj/item/cell))
+
+	if(istype(I, /obj/item/cell))
 		if(!opened)
 			to_chat(user, SPAN_DANGER("\The [src]'s hatch is closed, so you can't access \the [src]'s power supply."))
 			for(var/obj/item/integrated_circuit/input/S in assembly_components)
@@ -480,11 +487,14 @@
 			to_chat(user, SPAN_NOTICE("You slot \the [cell] inside \the [src]."))
 			return TRUE
 		return FALSE
-	else if(istype(I, /obj/item/device/integrated_electronics/detailer))
+
+	if(istype(I, /obj/item/device/integrated_electronics/detailer))
 		var/obj/item/device/integrated_electronics/detailer/D = I
 		detail_color = D.detail_color
 		update_icon()
-	else if(istype(I, /obj/item/screwdriver))
+		return
+
+	if(istype(I, /obj/item/screwdriver))
 		var/hatch_locked = FALSE
 		for(var/obj/item/integrated_circuit/manipulation/hatchlock/H in assembly_components)
 			// If there's more than one hatch lock, only one needs to be enabled for the assembly to be locked
@@ -500,30 +510,28 @@
 		opened = !opened
 		to_chat(user, SPAN_NOTICE("You [opened ? "open" : "close"] the maintenance hatch of \the [src]."))
 		update_icon()
-	else if(isCoil(I))
+		return
+
+	if(isCoil(I))
 		var/obj/item/stack/cable_coil/C = I
-		if(get_damage_value() && do_after(user, 10, src) && C.use(1))
+		if(health_damaged() && do_after(user, 10, src) && C.use(1))
 			user.visible_message(SPAN_NOTICE("\The [user] patches up \the [src]."))
 			restore_health(5)
-	else
-		if(user.a_intent == I_HURT && (!(user.l_hand == src || user.r_hand == src))) // Kill it
-			user.do_attack_animation(src)
-			playsound(loc, 'sound/weapons/genhit1.ogg', 100, 1)
-			to_chat(user, SPAN_WARNING("\The [user] hits \the [src] with \the [I]!"))
-			damage_health(I.force)
-		else
-			for(var/obj/item/integrated_circuit/input/S in assembly_components)
-				S.attackby_react(I,user,user.a_intent)
+		return
+
+	for(var/obj/item/integrated_circuit/input/S in assembly_components)
+		S.attackby_react(I,user,user.a_intent)
+	..()
 
 /obj/item/device/electronic_assembly/attack_self(mob/user)
 	interact(user)
 
-/obj/item/device/electronic_assembly/bullet_act(var/obj/item/projectile/P)
+/obj/item/device/electronic_assembly/bullet_act(obj/item/projectile/P)
 	if(istype(P,/obj/item/projectile/beam))
 		playsound(loc, SOUNDS_LASER_METAL, 100, 1)
 	else if(istype(P,/obj/item/projectile/bullet))
 		playsound(loc, SOUNDS_BULLET_METAL, 100, 1)
-	damage_health(P.damage, P.damage_type)
+	..()
 
 /obj/item/device/electronic_assembly/attack_generic(mob/user, damage)
 	user.visible_message(SPAN_WARNING("\The [user] smashes \the [src]!"), SPAN_WARNING("You smash \the [src]!"))
@@ -531,10 +539,10 @@
 	damage_health(damage)
 
 /obj/item/device/electronic_assembly/emp_act(severity)
-	. = ..()
 	for(var/I in src)
 		var/atom/movable/AM = I
 		AM.emp_act(severity)
+	. = ..()
 
 // Returns true if power was successfully drawn.
 /obj/item/device/electronic_assembly/proc/draw_power(amount)

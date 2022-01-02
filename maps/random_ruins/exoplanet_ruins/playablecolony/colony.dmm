@@ -1024,7 +1024,9 @@
 "cf" = (
 /obj/structure/catwalk,
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/power/emitter/gyrotron,
+/obj/machinery/power/emitter/gyrotron{
+	req_lock_access = list()
+	},
 /turf/simulated/floor/exoplanet/concrete,
 /area/template_noop)
 "cg" = (
@@ -3885,8 +3887,7 @@
 	dir = 8
 	},
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/map_template/colony/atmospherics)
@@ -3895,8 +3896,7 @@
 	dir = 4
 	},
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -5807,8 +5807,7 @@
 /area/map_template/colony)
 "kc" = (
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -8263,8 +8262,7 @@
 /obj/item/storage/backpack/dufflebag/eng,
 /obj/machinery/door/window/northright,
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /obj/structure/window/reinforced{
 	dir = 4

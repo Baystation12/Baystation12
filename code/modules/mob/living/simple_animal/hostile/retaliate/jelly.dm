@@ -12,7 +12,7 @@
 	natural_weapon = /obj/item/natural_weapon/tentacles
 	var/gets_random_color = TRUE
 
-	ai_holder_type = /datum/ai_holder/simple_animal/retaliate/jelly
+	ai_holder = /datum/ai_holder/simple_animal/retaliate/jelly
 	say_list = /datum/say_list/jelly
 
 /obj/item/natural_weapon/tentacles

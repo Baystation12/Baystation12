@@ -4495,7 +4495,7 @@
 /area/errant_pisces/general_storage)
 "kU" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/reagent_containers/food/snacks/fish/poison,
+/obj/item/reagent_containers/food/snacks/fish/space_carp,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "kV" = (
@@ -4602,7 +4602,7 @@
 /area/errant_pisces/prod_storage)
 "lm" = (
 /obj/structure/closet/crate,
-/obj/item/reagent_containers/food/snacks/fish/poison,
+/obj/item/reagent_containers/food/snacks/fish/space_carp,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "ln" = (
@@ -4745,8 +4745,7 @@
 "lM" = (
 /obj/structure/closet/secure_closet/hydroponics,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
@@ -4757,8 +4756,7 @@
 "lO" = (
 /obj/machinery/vending/hydronutrients,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -4822,8 +4820,8 @@
 /area/errant_pisces/general_storage)
 "lW" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/reagent_containers/food/snacks/fish/poison,
-/obj/item/reagent_containers/food/snacks/fish/poison,
+/obj/item/reagent_containers/food/snacks/fish/space_carp,
+/obj/item/reagent_containers/food/snacks/fish/space_carp,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "lX" = (
@@ -4831,7 +4829,7 @@
 	dir = 8
 	},
 /obj/structure/closet/crate,
-/obj/item/reagent_containers/food/snacks/fish/poison,
+/obj/item/reagent_containers/food/snacks/fish/space_carp,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "lY" = (
@@ -6064,9 +6062,9 @@
 /area/errant_pisces/fishing_wing)
 "ox" = (
 /obj/structure/table/marble,
-/obj/item/reagent_containers/food/snacks/fish/poison,
-/obj/item/reagent_containers/food/snacks/fish/poison,
-/obj/item/reagent_containers/food/snacks/fish/poison,
+/obj/item/reagent_containers/food/snacks/fish/space_carp,
+/obj/item/reagent_containers/food/snacks/fish/space_carp,
+/obj/item/reagent_containers/food/snacks/fish/space_carp,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/fishing_wing)
 "oy" = (

@@ -230,21 +230,26 @@
 		construct.transfer_fingerprints_to(src)
 		set_dir(construct.dir)
 	else
-		var/light_color = null
-		var/area/A = get_area(src)
-		switch (A.lighting_tone)
-			if (AREA_LIGHTING_WHITE)
-				light_color = LIGHT_COLOUR_WHITE
-			if (AREA_LIGHTING_WARM)
-				light_color = LIGHT_COLOUR_WARM
-			if (AREA_LIGHTING_COOL)
-				light_color = LIGHT_COLOUR_COOL
+		var/light_color = get_color_from_area()
 		lightbulb = new light_type(src, light_color)
 		if(prob(lightbulb.broken_chance))
 			broken(TRUE)
 
 	on = powered()
 	update_icon(FALSE)
+
+/// Fetches the light's color based on area flags. Used for Init and for smartly installing new bulbs during runtime (See light replacers).
+/obj/machinery/light/proc/get_color_from_area()
+	var/light_color = null
+	var/area/A = get_area(src)
+	switch (A.lighting_tone)
+		if (AREA_LIGHTING_WHITE)
+			light_color = LIGHT_COLOUR_WHITE
+		if (AREA_LIGHTING_WARM)
+			light_color = LIGHT_COLOUR_WARM
+		if (AREA_LIGHTING_COOL)
+			light_color = LIGHT_COLOUR_COOL
+	return light_color
 
 /obj/machinery/light/Destroy()
 	QDEL_NULL(lightbulb)
@@ -718,6 +723,21 @@
 	)
 	sound_on = 'sound/machines/lightson.ogg'
 
+/obj/item/light/tube/warm
+	name = "light tube (warm)"
+	desc = "A replacement light tube. This one provides soft, warm lighting."
+	b_colour = LIGHT_COLOUR_WARM
+
+/obj/item/light/tube/cool
+	name = "light tube (cool)"
+	desc = "A replacement light tube. This one provides crisp, cool lighting."
+	b_colour = LIGHT_COLOUR_COOL
+
+/obj/item/light/tube/white
+	name = "light tube (white)"
+	desc = "A replacement light tube. This one provides clean, white lighting."
+	b_colour = LIGHT_COLOUR_WHITE
+
 /obj/item/light/tube/party/Initialize() //Randomly colored light tubes. Mostly for testing, but maybe someone will find a use for them.
 	. = ..()
 	b_colour = rgb(pick(0,255), pick(0,255), pick(0,255))
@@ -729,6 +749,21 @@
 	b_inner_range = 2
 	b_outer_range = 8
 	b_curve = 2.5
+
+/obj/item/light/tube/large/warm
+	name = "large light tube (warm)"
+	desc = "A replacement light tube. This one provides soft, warm lighting."
+	b_colour = LIGHT_COLOUR_WARM
+
+/obj/item/light/tube/large/cool
+	name = "large light tube (cool)"
+	desc = "A replacement light tube. This one provides crisp, cool lighting."
+	b_colour = LIGHT_COLOUR_COOL
+
+/obj/item/light/tube/large/white
+	name = "large light tube (white)"
+	desc = "A replacement light tube. This one provides clean, white lighting."
+	b_colour = LIGHT_COLOUR_WHITE
 
 /obj/item/light/tube/large/party/Initialize() //Randomly colored light tubes. Mostly for testing, but maybe someone will find a use for them.
 	. = ..()
@@ -751,9 +786,20 @@
 		LIGHTMODE_EMERGENCY = list(l_outer_range = 3, l_max_bright = 1, l_color = LIGHT_COLOUR_E_RED)
 	)
 
-/obj/item/light/bulb/warm/b_colour = LIGHT_COLOUR_WARM
-/obj/item/light/bulb/cool/b_colour = LIGHT_COLOUR_COOL
-/obj/item/light/bulb/white/b_colour = LIGHT_COLOUR_WHITE
+/obj/item/light/bulb/warm
+	name = "light bulb (warm)"
+	desc = "A replacement light bulb. This one provides soft, warm lighting."
+	b_colour = LIGHT_COLOUR_WARM
+
+/obj/item/light/bulb/cool
+	name = "light bulb (cool)"
+	desc = "A replacement light bulb. This one provides crisp, cool lighting."
+	b_colour = LIGHT_COLOUR_COOL
+
+/obj/item/light/bulb/white
+	name = "light bulb (white)"
+	desc = "A replacement light bulb. This one provides clean, white lighting."
+	b_colour = LIGHT_COLOUR_WHITE
 
 /obj/item/light/bulb/red
 	color = LIGHT_COLOUR_E_RED

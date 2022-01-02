@@ -53,7 +53,7 @@
 	. = ..()
 
 /obj/machinery/reagent_temperature/RefreshParts()
-	heating_power = initial(heating_power) * Clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 10)
+	heating_power = initial(heating_power) * clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 10)
 
 	var/comp = 0.25 KILOWATTS * total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
 	if(comp)
@@ -134,7 +134,7 @@
 		if(temperature > MINIMUM_GLOW_TEMPERATURE) // 50C
 			if(!glow_icon)
 				glow_icon = image(icon, "[icon_state]-glow")
-			glow_icon.alpha = Clamp(temperature - MINIMUM_GLOW_TEMPERATURE, MINIMUM_GLOW_VALUE, MAXIMUM_GLOW_VALUE)
+			glow_icon.alpha = clamp(temperature - MINIMUM_GLOW_TEMPERATURE, MINIMUM_GLOW_VALUE, MAXIMUM_GLOW_VALUE)
 			LAZYADD(adding_overlays, glow_icon)
 			set_light(0.2, 0.1, 1, l_color = COLOR_RED)
 		else
@@ -199,7 +199,7 @@
 /obj/machinery/reagent_temperature/OnTopic(var/mob/user, var/href_list)
 
 	if(href_list["adjust_temperature"])
-		target_temperature = Clamp(target_temperature + text2num(href_list["adjust_temperature"]), min_temperature, max_temperature)
+		target_temperature = clamp(target_temperature + text2num(href_list["adjust_temperature"]), min_temperature, max_temperature)
 		. = TOPIC_REFRESH
 
 	if(href_list["toggle_power"])

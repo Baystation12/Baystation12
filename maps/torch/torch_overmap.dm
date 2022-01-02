@@ -65,6 +65,7 @@
 		"nav_deck1_calypso",
 		"nav_deck1_guppy",
 		"nav_deck1_aquila",
+		"nav_vox_raider_dock",
 
 		//start Hanger Deck
 		"nav_merc_hanger",

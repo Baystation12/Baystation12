@@ -117,7 +117,7 @@
 	else
 		direction_mode = IC_REAGENTS_INJECT
 	if(isnum(new_amount))
-		new_amount = Clamp(new_amount, 0, volume)
+		new_amount = clamp(new_amount, 0, volume)
 		transfer_amount = new_amount
 
 
@@ -270,7 +270,7 @@
 	else
 		direction_mode = IC_REAGENTS_INJECT
 	if(isnum(new_amount))
-		new_amount = Clamp(new_amount, 0, 50)
+		new_amount = clamp(new_amount, 0, 50)
 		transfer_amount = new_amount
 
 /obj/item/integrated_circuit/reagent/pump/do_work()
@@ -465,7 +465,7 @@
 	else
 		direction_mode = IC_REAGENTS_INJECT
 	if(isnum(new_amount))
-		new_amount = Clamp(new_amount, 0, 50)
+		new_amount = clamp(new_amount, 0, 50)
 		transfer_amount = new_amount
 
 /obj/item/integrated_circuit/reagent/filter/do_work()
@@ -577,7 +577,7 @@
 				return
 
 			// +/- T0C to convert to/from kelvin
-			target_temp = Clamp(target_temp + T0C, min_temp, max_temp)
+			target_temp = clamp(target_temp + T0C, min_temp, max_temp)
 			set_pin_data(IC_INPUT, 1, target_temp - T0C)
 
 			active = !active

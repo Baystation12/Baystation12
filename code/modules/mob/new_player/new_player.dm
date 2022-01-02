@@ -20,38 +20,49 @@
 
 	virtual_mob = null // Hear no evil, speak no evil
 
+
 /mob/new_player/New()
 	..()
 	verbs += /mob/proc/toggle_antag_pool
 
-/mob/new_player/proc/new_player_panel(force = FALSE)
-	if(!SScharacter_setup.initialized && !force)
-		return // Not ready yet.
-	var/output = list()
+
+/mob/new_player/proc/new_player_panel(force)
+	if (!force && !SScharacter_setup.initialized)
+		return
+	var/list/output = list()
 	output += "<div align='center'>"
-	output += "<i>[GLOB.using_map.get_map_info()]</i>"
-	output +="<hr>"
-	output += "<a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A> "
-
-	if(GAME_STATE > RUNLEVEL_LOBBY)
-		output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A> "
-
-	output += "<a href='byond://?src=\ref[src];observe=1'>Observe</A> "
-	output += "<hr>Current character: <a href='byond://?src=\ref[client.prefs];load=1;details=1'>[client.prefs.real_name]</a>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
-	if(GAME_STATE <= RUNLEVEL_LOBBY)
-		if(ready)
-			output += "<a class='linkOn' href='byond://?src=\ref[src];ready=0'>Un-Ready</a>"
-		else
-			output += "<a href='byond://?src=\ref[src];ready=1'>Ready Up</a>"
+	if (config.wiki_url || config.rules_url || config.lore_url)
+		var/player_age = client?.player_age
+		if (isnum(player_age) && player_age < 7)
+			output += "<b>Welcome! Please check out these links:</b><br>"
+		if (config.wiki_url)
+			output += "<a href='byond://?src=\ref[src];show_wiki=1'>Wiki</a>"
+		if (config.rules_url)
+			output += "<a href='byond://?src=\ref[src];show_rules=1'>Rules</a>"
+		if (config.lore_url)
+			output += "<a href='byond://?src=\ref[src];show_lore=1'>Lore</a>"
+	output += "<hr>"
+	if (GAME_STATE > RUNLEVEL_LOBBY)
+		output += "<a href='byond://?src=\ref[src];manifest=1'>Manifest</a>"
+	output += "<a href='byond://?src=\ref[src];show_preferences=1'>Options</a>"
+	output += "<hr>"
+	output += "<b>Playing As</b><br>"
+	output += "<a href='byond://?src=\ref[client.prefs];load=1;details=1'>[client.prefs.real_name || "(Random)"]</a><br>"
+	output += client.prefs.job_high ? "[client.prefs.job_high]" : null
+	output += "<hr>"
+	output += "<a href='byond://?src=\ref[src];observe=1'>Join As Observer</a>"
+	if (GAME_STATE > RUNLEVEL_LOBBY)
+		output += "<a href='byond://?src=\ref[src];late_join=1'>Join As Selected</a>"
 	else
-		output += "<a href='byond://?src=\ref[src];late_join=1'>Join Game!</A>"
-
+		output += "<a [ready?"class='linkOn'":""] href='byond://?src=\ref[src];ready=[!ready]'>Round Start Join</a>"
+	output += "<hr>"
+	output += "<i>[GLOB.using_map.get_map_info()||"No information available for the current map."]</i>"
 	output += "</div>"
-
-	panel = new(src, "Welcome","Welcome to [GLOB.using_map.full_name]", 560, 280, src)
+	panel = new (src, "Welcome","Welcome to [GLOB.using_map.full_name]", 560, 340, src)
 	panel.set_window_options("can_close=0")
-	panel.set_content(JOINTEXT(output))
+	panel.set_content(output.Join())
 	panel.open()
+
 
 /mob/new_player/Stat()
 	. = ..()
@@ -85,22 +96,25 @@
 			stat("Next Continue Vote:", "[max(round(transfer_controller.time_till_transfer_vote() / 600, 1), 0)] minutes")
 
 /mob/new_player/Topic(href, href_list) // This is a full override; does not call parent.
-	if(usr != src)
+	if (usr != src)
 		return TOPIC_NOACTION
-	if(!client)
+	if (!client)
 		return TOPIC_NOACTION
-
-	if(href_list["show_preferences"])
+	if (href_list["show_preferences"])
 		client.prefs.open_setup_window(src)
 		return 1
-
-	if(href_list["ready"])
-		if(GAME_STATE <= RUNLEVEL_LOBBY) // Make sure we don't ready up after the round has started
-			ready = text2num(href_list["ready"])
-		else
-			ready = 0
-
-	if(href_list["refresh"])
+	if (href_list["show_wiki"])
+		client.link_url(config.wiki_url, "Wiki", TRUE)
+		return 1
+	if (href_list["show_rules"])
+		client.link_url(config.rules_url, "Rules", TRUE)
+		return 1
+	if (href_list["show_lore"])
+		client.link_url(config.lore_url, "Lore", TRUE)
+		return 1
+	if (href_list["ready"])
+		ready = GAME_STATE > RUNLEVEL_LOBBY ? 0 : text2num(href_list["ready"])
+	if (href_list["refresh"])
 		panel.close()
 		new_player_panel()
 

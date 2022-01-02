@@ -91,7 +91,7 @@
 	atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER
 
 /obj/machinery/chem_master/proc/get_remaining_volume()
-	return Clamp(reagent_limit - reagents.total_volume, 0, reagent_limit)
+	return clamp(reagent_limit - reagents.total_volume, 0, reagent_limit)
 
 /obj/machinery/chem_master/AltClick(mob/user)
 	if(CanDefaultInteract(user))
@@ -123,7 +123,7 @@
 				var/datum/reagent/their_reagent = locate(href_list["add"]) in R.reagent_list
 				if(their_reagent)
 					var/mult = 1
-					var/amount = Clamp((text2num(href_list["amount"])), 0, get_remaining_volume())
+					var/amount = clamp((text2num(href_list["amount"])), 0, get_remaining_volume())
 					if(sloppy)
 						var/contaminants = fetch_contaminants(user, R, their_reagent)
 						for(var/datum/reagent/reagent in contaminants)
@@ -137,14 +137,14 @@
 			if(their_reagent)
 				useramount = input("Select the amount of reagents to transfer.", 30, useramount) as null|num
 				if(useramount)
-					useramount = Clamp(useramount, 0, 200)
+					useramount = clamp(useramount, 0, 200)
 					Topic(href, list("amount" = "[useramount]", "add" = href_list["addcustom"]), state)
 
 		else if (href_list["remove"])
 			if(href_list["amount"] && beaker)
 				var/datum/reagent/my_reagents = locate(href_list["remove"]) in reagents.reagent_list
 				if(my_reagents)
-					var/amount = Clamp((text2num(href_list["amount"])), 0, 200)
+					var/amount = clamp((text2num(href_list["amount"])), 0, 200)
 					var/contaminants = fetch_contaminants(user, reagents, my_reagents)
 					if(to_beaker)
 						reagents.trans_type_to(beaker, my_reagents.type, amount)
@@ -160,7 +160,7 @@
 			if(my_reagents)
 				useramount = input("Select the amount to transfer.", 30, useramount) as null|num
 				if(useramount)
-					useramount = Clamp(useramount, 0, 200)
+					useramount = clamp(useramount, 0, 200)
 					Topic(href, list("amount" = "[useramount]", "remove" = href_list["removecustom"]), state)
 		
 		else if (href_list["pill_dosage"])
@@ -168,7 +168,7 @@
 			var/new_dosage = input("Select a new dosage for your pills.", initial_dosage, "Pill Dosage") as null|num
 			if (!new_dosage)
 				return
-			new_dosage = Clamp(new_dosage, 0, initial_dosage)
+			new_dosage = clamp(new_dosage, 0, initial_dosage)
 			pill_dosage = new_dosage
 			to_chat(user, SPAN_NOTICE("You configure \the [src] to create pills with a maximum dosage of [pill_dosage] units."))
 		
@@ -177,7 +177,7 @@
 			var/new_dosage = input("Select a new dosage for your bottles.", initial_dosage, "Bottle Dosage") as null|num
 			if (!new_dosage)
 				return
-			new_dosage = Clamp(new_dosage, 0, initial_dosage)
+			new_dosage = clamp(new_dosage, 0, initial_dosage)
 			bottle_dosage = new_dosage
 			to_chat(user, SPAN_NOTICE("You configure \the [src] to fill bottles with [bottle_dosage] units of reagents."))
 
@@ -207,7 +207,7 @@
 				count = input("Select the number of pills to make.", "Max [max_pill_count]", pillamount) as null|num
 				if (!count)
 					return
-				count = Clamp(count, 1, max_pill_count)
+				count = clamp(count, 1, max_pill_count)
 
 			if(reagents.total_volume/count < 1) //Sanity checking.
 				return

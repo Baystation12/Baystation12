@@ -240,7 +240,7 @@
 /obj/effect/rune/wall/cast(var/mob/living/user)
 	var/t
 	if(wall)
-		if(!wall.get_damage_value())
+		if(!wall.health_damaged())
 			to_chat(user, "<span class='notice'>The wall doesn't need mending.</span>")
 			return
 		t = wall.get_damage_value()
@@ -289,18 +289,12 @@
 		to_chat(user, "<span class='notice'>You touch \the [src]. It feels wet and becomes harder the further you push your arm.</span>")
 
 /obj/effect/cultwall/attackby(var/obj/item/I, var/mob/living/user)
-	if(istype(I, /obj/item/nullrod))
+	if (istype(I, /obj/item/nullrod))
 		user.visible_message("<span class='notice'>\The [user] touches \the [src] with \the [I], and it disappears.</span>", "<span class='notice'>You disrupt the vile magic with the deadening field of \the [I].</span>")
 		qdel(src)
-	else if(I.force)
-		user.visible_message("<span class='notice'>\The [user] hits \the [src] with \the [I].</span>", "<span class='notice'>You hit \the [src] with \the [I].</span>")
-		damage_health(I.force, I.damtype)
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		user.do_attack_animation(src)
+		return
 
-/obj/effect/cultwall/bullet_act(var/obj/item/projectile/Proj)
-	damage_health(Proj.get_structure_damage(), Proj.damage_type)
-	. = ..()
+	..()
 
 /obj/effect/cultwall/handle_death_change(new_death_state)
 	. = ..()

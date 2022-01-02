@@ -4,6 +4,7 @@
 /obj/item/device/suit_sensor_jammer
 	name = "small device"
 	desc = "This object menaces with tiny, dull spikes of plastic."
+	icon = 'icons/obj/suit_jammer.dmi'
 	icon_state = "jammer"
 	w_class = ITEM_SIZE_SMALL
 	var/active = FALSE
@@ -132,7 +133,7 @@ obj/item/device/suit_sensor_jammer/ui_interact(mob/user, ui_key = "main", var/da
 		"methods" = methods,
 		"current_method" = "\ref[jammer_method]",
 		"current_cost" = jammer_method.energy_cost,
-		"total_cost" = "[ceil(JAMMER_POWER_CONSUMPTION(10))]"
+		"total_cost" = "[Ceil(JAMMER_POWER_CONSUMPTION(10))]"
 	)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -193,7 +194,7 @@ obj/item/device/suit_sensor_jammer/OnTopic(var/mob/user, var/list/href_list, sta
 	return TRUE
 
 /obj/item/device/suit_sensor_jammer/proc/set_range(var/new_range)
-	range = Clamp(new_range, 0, JAMMER_MAX_RANGE) // 0 range still covers the current turf
+	range = clamp(new_range, 0, JAMMER_MAX_RANGE) // 0 range still covers the current turf
 	return range != new_range
 
 /obj/item/device/suit_sensor_jammer/proc/set_method(var/suit_sensor_jammer_method/sjm)

@@ -15,7 +15,7 @@
 	mob_size = MOB_TINY
 	var/corpse = /obj/effect/decal/cleanable/blood/gibs/robot
 
-	ai_holder_type = /datum/ai_holder/simple_animal/rogue_drone
+	ai_holder = /datum/ai_holder/simple_animal/rogue_drone
 	say_list_type = /datum/say_list/rogue_drone
 
 /mob/living/simple_animal/hostile/rogue_drone/Initialize()
@@ -39,7 +39,7 @@
 			. -= S
 		else if (ishuman(S))
 			var/mob/living/carbon/human/H = S
-			if (istype(H.wear_suit, /obj/item/clothing/suit/cardborg) && istype(H.head, /obj/item/clothing/head/cardborg))
+			if (H.species.name == SPECIES_ADHERENT || H.isFBP() || (istype(H.wear_suit, /obj/item/clothing/suit/cardborg) && istype(H.head, /obj/item/clothing/head/cardborg)))
 				. -= H
 
 /datum/say_list/rogue_drone

@@ -63,6 +63,22 @@
 
 #define LIGHT_STANDARD_COLORS list(LIGHT_COLOUR_WHITE, LIGHT_COLOUR_WARM, LIGHT_COLOUR_COOL) // List of standard light colors used for randomized lighting and selectable printed lights.
 
+// Light replacer color options
+#define LIGHT_REPLACE_AREA     "AREA"     // Match the areas defined light color(s)
+#define LIGHT_REPLACE_EXISTING "EXISTING" // Mimic the existing bulb's color
+#define LIGHT_REPLACE_RANDOM   "RANDOM"   // Default behaviour. Randomize the light color from LIGHT_STANDARD_COLORS.
+
+// Options available for users to set light replacer colors.
+#define LIGHT_REPLACE_OPTIONS list(\
+	"Random (Default)",\
+	"Match Blueprint",\
+	"Match Existing",\
+	"Warm",\
+	"Cool",\
+	"White",\
+	"Custom"\
+)
+
 // Area lighting modes
 #define AREA_LIGHTING_WHITE		"white"
 #define AREA_LIGHTING_WARM		"warm"

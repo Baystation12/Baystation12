@@ -31,7 +31,7 @@
 
 	bleed_colour = "#aad9de"
 
-	ai_holder_type = /datum/ai_holder/hostile/melee/vagrant
+	ai_holder = /datum/ai_holder/hostile/melee/vagrant
 
 /datum/ai_holder/hostile/melee/vagrant
 

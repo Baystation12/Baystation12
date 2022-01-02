@@ -83,15 +83,16 @@
 	if (turf_hand_priority)
 		set_extension(src, /datum/extension/turf_hand, turf_hand_priority)
 
+/obj/machinery/door/Initialize()
+	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
+	. = ..()
+
 	health = maxhealth
 	update_connections(1)
 	update_icon()
 
 	update_nearby_tiles(need_rebuild=1)
 
-/obj/machinery/door/Initialize()
-	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
-	. = ..()
 	if(autoset_access)
 #ifdef UNIT_TEST
 		if(length(req_access))
@@ -232,7 +233,7 @@
 
 		//figure out how much metal we need
 		var/amount_needed = (maxhealth - health) / DOOR_REPAIR_AMOUNT
-		amount_needed = ceil(amount_needed)
+		amount_needed = Ceil(amount_needed)
 
 		var/obj/item/stack/stack = I
 		var/transfer
@@ -265,7 +266,7 @@
 					return //the materials in the door have been removed before welding was finished.
 
 				to_chat(user, "<span class='notice'>You finish repairing the damage to \the [src].</span>")
-				health = between(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
+				health = clamp(health + repairing.amount * DOOR_REPAIR_AMOUNT, health, maxhealth)
 				update_icon()
 				qdel(repairing)
 				repairing = null

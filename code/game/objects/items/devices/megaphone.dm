@@ -1,6 +1,7 @@
 /obj/item/device/megaphone
 	name = "megaphone"
 	desc = "A device used to project your voice. Loudly."
+	icon = 'icons/obj/megaphone.dmi'
 	icon_state = "megaphone"
 	item_state = "radio"
 	w_class = ITEM_SIZE_SMALL

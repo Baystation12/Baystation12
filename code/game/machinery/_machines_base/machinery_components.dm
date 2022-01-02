@@ -269,20 +269,27 @@ Standard helpers for users interacting with machinery parts.
 			continue
 		if(!(component_part.part_flags & PART_FLAG_HAND_REMOVE))
 			continue
+
 		for(var/obj/item/stock_parts/new_component_part in part_replacer.contents)
 			if(istype(new_component_part, component_part.base_type) && new_component_part.rating > component_part.rating)
 				replace_part(user, part_replacer, component_part, new_component_part)
-				return TRUE
+				. = TRUE
+				break
+
 	for(var/path in uncreated_component_parts)
 		var/obj/item/stock_parts/component_part = path
+		var/part_count = uncreated_component_parts[path]
 		if(!(initial(component_part.part_flags) & PART_FLAG_HAND_REMOVE))
 			continue
 		var/base_type = initial(component_part.base_type)
 		if(base_type)
-			for(var/obj/item/stock_parts/new_component_part in part_replacer.contents)
-				if(istype(new_component_part, base_type) && new_component_part.rating > initial(component_part.rating))
-					replace_part(user, part_replacer, component_part, new_component_part)
-					return TRUE
+			for (var/i = 1 to part_count)
+				for(var/obj/item/stock_parts/new_component_part in part_replacer.contents)
+					if(istype(new_component_part, base_type) && new_component_part.rating > initial(component_part.rating))
+						replace_part(user, part_replacer, component_part, new_component_part)
+						. = TRUE
+						break
+
 
 /// Handles inserting a component or item into the machine by a user. Returns boolean. `TRUE` should halt further processing in `attack*()` procs.
 /obj/machinery/proc/part_insertion(mob/user, obj/item/stock_parts/part) // Second argument may actually be an arbitrary item.

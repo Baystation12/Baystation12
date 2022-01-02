@@ -102,8 +102,8 @@
 			alpha = 230
 		else
 			var/temp_mod = ((plasma_temperature-5000)/20000)
-			use_range = light_min_range + ceil((light_max_range-light_min_range)*temp_mod)
-			use_power = light_min_power + ceil((light_max_power-light_min_power)*temp_mod)
+			use_range = light_min_range + Ceil((light_max_range-light_min_range)*temp_mod)
+			use_power = light_min_power + Ceil((light_max_power-light_min_power)*temp_mod)
 			switch (plasma_temperature)
 				if (1000 to 6000)
 					light_color = COLOR_ORANGE
@@ -237,7 +237,7 @@
 /obj/effect/fusion_em_field/proc/Rupture()
 	visible_message("<span class='danger'>\The [src] shudders like a dying animal before flaring to eye-searing brightness and rupturing!</span>")
 	set_light(1, 0.1, 15, 2, "#ccccff")
-	empulse(get_turf(src), ceil(plasma_temperature/1000), ceil(plasma_temperature/300))
+	empulse(get_turf(src), Ceil(plasma_temperature/1000), Ceil(plasma_temperature/300))
 	sleep(5)
 	RadiateAll()
 	explosion(get_turf(owned_core),-1,-1,8,10) // Blow out all the windows.
@@ -312,7 +312,7 @@
 
 /obj/effect/fusion_em_field/proc/Radiate()
 	if(istype(loc, /turf))
-		var/empsev = max(1, min(3, ceil(size/2)))
+		var/empsev = max(1, min(3, Ceil(size/2)))
 		for(var/atom/movable/AM in range(max(1,Floor(size/2)), loc))
 
 			if(AM == src || AM == owned_core || !AM.simulated)

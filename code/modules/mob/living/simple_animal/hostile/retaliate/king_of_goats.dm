@@ -34,7 +34,7 @@
 	)
 	var/stun_chance = 5 //chance per attack to Weaken target
 
-	ai_holder_type = /datum/ai_holder/simple_animal/goat/king
+	ai_holder = /datum/ai_holder/simple_animal/goat/king
 	say_list = /datum/say_list/goat/king
 
 /datum/ai_holder/simple_animal/goat/king
@@ -156,7 +156,7 @@
 	break_stuff_probability = 40
 	stun_chance = 7
 
-	ai_holder_type = /datum/ai_holder/simple_animal/goat/king/phase2
+	ai_holder = /datum/ai_holder/simple_animal/goat/king/phase2
 
 	var/spellscast = 0
 	var/phase3 = FALSE

@@ -45,7 +45,7 @@
 /obj/item/implant/translator/natural
 	name = "lingophagic node"
 	desc = "A chunk of what could be discolored crystalized brain matter. It seems to pulse occasionally."
-	icon_state = "implant_melted"
+	icon_state = "implant_growth"
 	origin_tech = list(TECH_BIO = 5)
 	learning_threshold = 10
 	max_languages = 3

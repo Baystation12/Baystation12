@@ -157,8 +157,8 @@
 /datum/reagent/toxin/cryotoxin/affect_blood(mob/living/carbon/M, alien, removed)
 	if (alien == IS_DIONA)
 		return
-	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 215)
-	if (prob(20))
+	M.bodytemperature = max(M.bodytemperature - 15 * TEMPERATURE_DAMAGE_COEFFICIENT, 215)
+	if (prob(15))
 		to_chat(M, SPAN_DANGER("Your insides feel freezing cold!"))
 	if (prob(1))
 		M.emote("shiver")
@@ -307,8 +307,8 @@
 /datum/reagent/toxin/phoron/oxygen/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
 		return
-	T.assume_gas(GAS_OXYGEN, ceil(volume/2), T20C)
-	T.assume_gas(GAS_PHORON, ceil(volume/2), T20C)
+	T.assume_gas(GAS_OXYGEN, Ceil(volume/2), T20C)
+	T.assume_gas(GAS_PHORON, Ceil(volume/2), T20C)
 	remove_self(volume)
 
 /datum/reagent/toxin/cyanide //Fast and Lethal

@@ -25,7 +25,7 @@
 	var/obj/item/inventory_head
 	var/obj/item/inventory_back
 
-	ai_holder_type = /datum/ai_holder/simple_animal/passive/corgi
+	ai_holder = /datum/ai_holder/simple_animal/passive/corgi
 	say_list_type = /datum/say_list/corgi
 
 //IAN! SQUEEEEEEEEE~

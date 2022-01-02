@@ -29,6 +29,11 @@
 /obj/item/material/ashtray/attackby(obj/item/W as obj, mob/user as mob)
 	if (!is_alive())
 		return
+
+	if (user.a_intent == I_HURT)
+		..()
+		return
+
 	if (istype(W,/obj/item/trash/cigbutt) || istype(W,/obj/item/clothing/mask/smokable/cigarette) || istype(W, /obj/item/flame/match))
 		if (contents.len >= max_butts)
 			to_chat(user, "\The [src] is full.")
@@ -46,12 +51,12 @@
 			visible_message("[user] places [W] in [src].")
 			set_extension(src, /datum/extension/scent/ashtray)
 			update_icon()
-	else
-		..()
-		damage_health(W.force)
+		return
+
+	..()
 
 /obj/item/material/ashtray/throw_impact(atom/hit_atom)
-	if (has_health())
+	if (health_max)
 		if (contents.len)
 			visible_message("<span class='danger'>\The [src] slams into [hit_atom], spilling its contents!</span>")
 			for (var/obj/O in contents)

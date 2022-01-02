@@ -231,7 +231,7 @@ Helpers
 
 	//Find the relevant datum, resolving secret in the process.
 	var/list/base_runnable_modes = config.get_runnable_modes() //format: list(config_tag = weight)
-	if((mode_to_try=="random") || (mode_to_try=="secret"))
+	if (mode_to_try=="secret")
 		var/list/runnable_modes = base_runnable_modes - bad_modes
 		if(secret_force_mode != "secret") // Config option to force secret to be a specific mode.
 			mode_datum = config.pick_mode(secret_force_mode)
@@ -255,12 +255,13 @@ Helpers
 	mode_datum.create_antagonists() // Init operation on the mode; sets up antag datums and such.
 	mode_datum.pre_setup() // Makes lists of viable candidates; performs candidate draft for job-override roles; stores the draft result both internally and on the draftee.
 	SSjobs.divide_occupations(mode_datum) // Gives out jobs to everyone who was not selected to antag.
-
-	if(mode_datum.startRequirements())
+	var/list/lobby_players = SSticker.lobby_players()
+	var/result = mode_datum.check_startable(lobby_players)
+	if(result)
 		mode_datum.fail_setup()
 		SSjobs.reset_occupations()
 		bad_modes += mode_datum.config_tag
-		log_debug("Could not start game mode [mode_to_try] ([mode_datum.name]) - Failed to meet requirements.")
+		log_debug("Could not start game mode [mode_to_try] ([mode_datum.name]) - Failed to meet requirements - [result]")
 		return
 
 	//Declare victory, make an announcement.
@@ -292,6 +293,28 @@ Helpers
 			else
 				if(player.create_character())
 					qdel(player)
+
+/datum/controller/subsystem/ticker/proc/lobby_players(list/players)
+	if (!players)
+		players = GLOB.player_list
+	var/list/lobby_players = list()
+	for (var/mob/new_player/player in players)
+		if (!player.client)
+			continue
+		lobby_players += player
+	return lobby_players
+
+
+/datum/controller/subsystem/ticker/proc/ready_players(list/players)
+	if (!players)
+		players = lobby_players()
+	var/list/ready_players = list()
+	for (var/mob/new_player/player as anything in players)
+		if (!player.ready)
+			continue
+		ready_players += player
+	return ready_players
+
 
 /datum/controller/subsystem/ticker/proc/collect_minds()
 	for(var/mob/living/player in GLOB.player_list)

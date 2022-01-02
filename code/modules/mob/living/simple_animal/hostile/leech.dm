@@ -16,7 +16,7 @@
 	flash_vulnerability = 0
 	bleed_colour = COLOR_VIOLET
 
-	ai_holder_type = /datum/ai_holder/simple_animal/melee/leech
+	ai_holder = /datum/ai_holder/simple_animal/melee/leech
 
 	var/suck_potency = 8
 	var/belly = 100
@@ -33,7 +33,7 @@
 		H.remove_blood_simple(L.suck_potency)
 		if(L.health < L.maxHealth)
 			L.health += L.suck_potency / 1.5
-		L.belly += Clamp(L.suck_potency, 0, 100)
+		L.belly += clamp(L.suck_potency, 0, 100)
 
 
 /mob/living/simple_animal/hostile/leech/Life()

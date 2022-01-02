@@ -116,9 +116,6 @@
 	else
 		return ..()
 
-/obj/item/device
-	icon = 'icons/obj/device.dmi'
-
 //Checks if the item is being held by a mob, and if so, updates the held icons
 /obj/item/proc/update_twohanding()
 	update_held_icon()
@@ -154,6 +151,7 @@
 	return FALSE
 
 /obj/item/ex_act(severity)
+	..()
 	switch(severity)
 		if(1)
 			qdel(src)
@@ -536,7 +534,7 @@ var/list/global/slot_flags_enumeration = list(
 	if (user.a_intent == I_HELP)
 		. = 0
 	if (.)
-		. += Clamp((user.get_skill_value(SKILL_COMBAT) * 10) - 20, 0, 75)
+		. += clamp((user.get_skill_value(SKILL_COMBAT) * 10) - 20, 0, 75)
 
 /obj/item/proc/on_disarm_attempt(mob/target, mob/living/attacker)
 	if(force < 1)

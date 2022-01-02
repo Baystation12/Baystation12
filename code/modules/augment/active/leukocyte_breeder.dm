@@ -1,7 +1,7 @@
 /obj/item/organ/internal/augment/active/leukocyte_breeder
 	name = "leukocyte breeder"
 	augment_slots = AUGMENT_CHEST
-	icon_state = "booster"
+	icon_state = "leukosuite"
 	desc = "These stimulators augment the immune system and promote the growth of hunter-killer cells in the presence of a foreign invader, effectively boosting the body's immunity to parasites and disease."
 	action_button_name = "Toggle leukocyte breeder"
 	augment_flags = AUGMENT_BIOLOGICAL

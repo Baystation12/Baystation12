@@ -104,7 +104,7 @@
 					break
 
 /obj/machinery/mineral/processing_unit/proc/attempt_smelt(var/material/metal, var/max_result)
-	. = Clamp(Floor(ores_stored[metal.name]/metal.units_per_sheet),1,max_result)
+	. = clamp(Floor(ores_stored[metal.name]/metal.units_per_sheet),1,max_result)
 	ores_stored[metal.name] -= . * metal.units_per_sheet
 	var/material/M = SSmaterials.get_material_by_name(metal.ore_smelts_to)
 	if(istype(M))
@@ -113,7 +113,7 @@
 		. = -(.)
 
 /obj/machinery/mineral/processing_unit/proc/attempt_compression(var/material/metal, var/max_result)
-	var/making = Clamp(Floor(ores_stored[metal.name]/metal.units_per_sheet),1,max_result)
+	var/making = clamp(Floor(ores_stored[metal.name]/metal.units_per_sheet),1,max_result)
 	if(making >= 2)
 		ores_stored[metal.name] -= making * metal.units_per_sheet
 		. = Floor(making * 0.5)

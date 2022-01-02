@@ -119,7 +119,7 @@
 	desc = "Special mechanical module made to store, sort, and apply standard machine parts."
 	id = "rped"
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 3)
-	materials = list(MATERIAL_STEEL = 15000, MATERIAL_GLASS = 5000)
+	materials = list(MATERIAL_STEEL = 10000, MATERIAL_GLASS = 5000)
 	build_path = /obj/item/storage/part_replacer
 	sort_string = "CBAAA"
 

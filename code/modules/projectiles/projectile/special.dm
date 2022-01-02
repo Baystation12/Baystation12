@@ -32,22 +32,6 @@
 		explosion(target, -1, 0, 2)
 		return 1
 
-/obj/item/projectile/temp
-	name = "freeze beam"
-	icon_state = "ice_2"
-	fire_sound = 'sound/weapons/pulse3.ogg'
-	damage = 0
-	damage_type = BURN
-	damage_flags = 0
-	nodamage = TRUE
-	var/firing_temperature = 300
-
-	on_hit(var/atom/target, var/blocked = 0)//These two could likely check temp protection on the mob
-		if(istype(target, /mob/living))
-			var/mob/M = target
-			M.bodytemperature = firing_temperature
-		return 1
-
 /obj/item/projectile/meteor
 	name = "meteor"
 	icon = 'icons/obj/meteor.dmi'
@@ -179,7 +163,7 @@
 /obj/item/projectile/webball
 	name = "ball of web"
 	icon_state = "bola"
-	damage = 2
+	damage = 1
 	embed = FALSE
 	damage_type = BRUTE
 	muzzle_type = null
@@ -193,7 +177,13 @@
 
 			if (isliving(target))
 				var/mob/living/M = target
-				M.Weaken(1)
+				var/has_webs = FALSE
+				for (var/obj/aura/A in M.auras)
+					if (istype(A, /obj/aura/web))
+						has_webs = TRUE
+						break
+				if (!has_webs)
+					M.add_aura(new /obj/aura/web(M))
 	..()
 
 /obj/item/projectile/venom

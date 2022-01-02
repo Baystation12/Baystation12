@@ -2172,16 +2172,14 @@
 "hj" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod6/station)
 "hk" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod7/station)
@@ -4478,7 +4476,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/teleporter/fourthdeck)
 "pN" = (
-/obj/machinery/bluespace_beacon,
+/obj/machinery/tele_beacon,
 /obj/machinery/button/blast_door{
 	id_tag = "teleport4";
 	name = "Fourth Deck Teleporter Access Shutter Control";
@@ -5155,7 +5153,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/tele_beacon,
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9;
 	icon_state = "corner_white"
@@ -5295,6 +5292,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
 "sB" = (
@@ -5413,7 +5411,6 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/center)
 "sI" = (
@@ -5948,7 +5945,6 @@
 	dir = 1;
 	icon_state = "pipe-c"
 	},
-/obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled,
 /area/storage/primary)
 "ub" = (
@@ -7144,6 +7140,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
+"xO" = (
+/obj/effect/shuttle_landmark/vox_raider/dock,
+/turf/space,
+/area/space)
 "xP" = (
 /obj/machinery/door/airlock/glass/command{
 	name = "E.V.A. Suit Storage"
@@ -40481,7 +40481,7 @@ aa
 aa
 aa
 aa
-aa
+xO
 aa
 aa
 aa

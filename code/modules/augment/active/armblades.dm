@@ -59,8 +59,8 @@
 /obj/item/material/armblade/wrist
 	name = "wrist blade"
 	desc = "A thin and very sharp folding blade specially made for combat, made from a specialized alloy that prevents all that nasty blood and viscera from sticking to it. Its light weight allows for rapid slashing attacks."
-	icon_state = "armblade"
-	item_state = "wolverine"
+	icon_state = "wristblade"
+	item_state = "wristblade"
 	base_parry_chance = 0
 	force_multiplier = 0.2
 	attack_cooldown_modifier = -1

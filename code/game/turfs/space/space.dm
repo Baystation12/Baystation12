@@ -8,6 +8,7 @@
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	permit_ao = FALSE
+	turf_flags = TURF_DISALLOW_BLOB
 
 	z_eventually_space = TRUE
 

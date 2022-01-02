@@ -207,6 +207,10 @@ TORCH_ESCAPE_POD(17)
 	name = "East of Bridge"
 	landmark_tag = "nav_merc_deck5"
 
+/obj/effect/shuttle_landmark/vox_raider/dock
+	name = "4th Deck, Aft Starboard Airlock"
+	landmark_tag = "nav_vox_raider_dock"
+
 //Skipjack
 /datum/shuttle/autodock/multi/antag/skipjack
 	destination_tags = list(
