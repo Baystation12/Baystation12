@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - maptweak: The crashed survivor pod now has an atmosphere sensor console to see
+      what the air outside is like.
