@@ -193,7 +193,7 @@
 	new/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(target,air_transfer.get_by_flag(XGM_GAS_FUEL),get_dir(loc,target))
 	air_transfer.remove_by_flag(XGM_GAS_FUEL, 0)
 	target.assume_air(air_transfer)
-	//Burn it based on transfered gas
+	//Burn it based on transferred gas
 	//target.hotspot_expose(part4.air_contents.temperature*2,300)
 	target.hotspot_expose((tank.air_contents.temperature*2) + 380,500) // -- More of my "how do I shot fire?" dickery. -- TLE
 	//location.hotspot_expose(1000,500,1)

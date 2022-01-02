@@ -128,7 +128,7 @@
 		if(is_malf(usr))
 			var/datum/ai_laws/ALs = locate(href_list["transfer_laws"]) in (isadmin(usr) ? admin_laws : player_laws)
 			if(ALs)
-				log_and_message_admins("has transfered the [ALs.name] laws to [owner].")
+				log_and_message_admins("has transferred the [ALs.name] laws to [owner].")
 				ALs.sync(owner, 0)
 				current_view = 0
 		return 1

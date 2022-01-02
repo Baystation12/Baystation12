@@ -31,7 +31,7 @@
 /decl/cultural_info/faction/skrell/qonprri
 	name = FACTION_SKRELL_QONPRRI
 	description = "Qon'prri is, officially an independent security services corporation that operates in the Harr'Kelm system, providing private \
-	security services to a variety of Skrell vessels, traders and organisations, and, more recently, human corporations. Unofficially, it is rumoured that \
+	security services to a variety of Skrell vessels, traders and organizations, and, more recently, human corporations. Unofficially, it is rumored that \
 	Qonn'prri is a for-profit offshoot of Qala'oa tasked with information gathering in human space and along the frontier.So far such claims have been \
 	unfounded, and Qonn'prri is known for offering a professional, reliable and able service to Humans and Skrell alike."
 	additional_langs = list(LANGUAGE_HUMAN_EURO)

@@ -390,10 +390,10 @@
 
 /client/proc/cmd_analyse_health_panel()
 	set category = "Debug"
-	set name = "Analyse Health"
+	set name = "Analyze Health"
 	set desc = "Get an advanced health reading on a human mob."
 
-	var/mob/living/carbon/human/H = input("Select mob.", "Analyse Health") as null|anything in GLOB.human_mob_list
+	var/mob/living/carbon/human/H = input("Select mob.", "Analyze Health") as null|anything in GLOB.human_mob_list
 	if(!H)	return
 
 	cmd_analyse_health(H)
@@ -412,7 +412,7 @@
 
 /client/proc/cmd_analyse_health_context(mob/living/carbon/human/H as mob in GLOB.human_mob_list)
 	set category = null
-	set name = "Analyse Human Health"
+	set name = "Analyze Human Health"
 
 	if(!check_rights(R_DEBUG))
 		return

@@ -15,7 +15,7 @@ mob/attacked_with_item() should then do mob-type specific stuff (like determinin
 
 Item Hit Effects:
 
-item/apply_hit_effect() can be overriden to do whatever you want. However "standard" physical damage based weapons should make use of the target mob's hit_with_weapon() proc to
+item/apply_hit_effect() can be overridden to do whatever you want. However "standard" physical damage based weapons should make use of the target mob's hit_with_weapon() proc to
 avoid code duplication. This includes items that may sometimes act as a standard weapon in addition to having other effects (e.g. stunbatons on harm intent).
 */
 

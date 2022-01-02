@@ -245,7 +245,7 @@
 /obj/effect/shield/proc/overcharge_shock(var/mob/living/M)
 	M.adjustFireLoss(rand(20, 40))
 	M.Weaken(5)
-	to_chat(M, "<span class='danger'>As you come into contact with \the [src] a surge of energy paralyses you!</span>")
+	to_chat(M, "<span class='danger'>As you come into contact with \the [src] a surge of energy paralyzes you!</span>")
 	take_damage(10, SHIELD_DAMTYPE_EM)
 
 // Called when a flag is toggled. Can be used to add on-toggle behavior, such as visual changes.

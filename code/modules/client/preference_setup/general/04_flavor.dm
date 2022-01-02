@@ -65,11 +65,11 @@
 		switch(href_list["flavour_text_robot"])
 			if("open")
 			if("Default")
-				var/msg = sanitize(input(usr,"Set the default flavour text for your robot. It will be used for any module without individual setting.","Flavour Text",html_decode(pref.flavour_texts_robot["Default"])) as message, extra = 0)
+				var/msg = sanitize(input(usr,"Set the default flavor text for your robot. It will be used for any module without individual setting.","Flavor Text",html_decode(pref.flavour_texts_robot["Default"])) as message, extra = 0)
 				if(CanUseTopic(user))
 					pref.flavour_texts_robot[href_list["flavour_text_robot"]] = msg
 			else
-				var/msg = sanitize(input(usr,"Set the flavour text for your robot with [href_list["flavour_text_robot"]] module. If you leave this empty, default flavour text will be used for this module.","Flavour Text",html_decode(pref.flavour_texts_robot[href_list["flavour_text_robot"]])) as message, extra = 0)
+				var/msg = sanitize(input(usr,"Set the flavor text for your robot with [href_list["flavour_text_robot"]] module. If you leave this empty, default flavor text will be used for this module.","Flavor Text",html_decode(pref.flavour_texts_robot[href_list["flavour_text_robot"]])) as message, extra = 0)
 				if(CanUseTopic(user))
 					pref.flavour_texts_robot[href_list["flavour_text_robot"]] = msg
 		SetFlavourTextRobot(user)
@@ -80,7 +80,7 @@
 /datum/category_item/player_setup_item/physical/flavor/proc/SetFlavorText(mob/user)
 	var/HTML = "<body>"
 	HTML += "<tt><center>"
-	HTML += "<b>Set Flavour Text</b> <hr />"
+	HTML += "<b>Set Flavor Text</b> <hr />"
 	HTML += "<br></center>"
 	HTML += "<a href='?src=\ref[src];flavor_text=general'>General:</a> "
 	HTML += TextPreview(pref.flavor_texts["general"])
@@ -117,7 +117,7 @@
 /datum/category_item/player_setup_item/physical/flavor/proc/SetFlavourTextRobot(mob/user)
 	var/HTML = "<body>"
 	HTML += "<tt><center>"
-	HTML += "<b>Set Robot Flavour Text</b> <hr />"
+	HTML += "<b>Set Robot Flavor Text</b> <hr />"
 	HTML += "<br></center>"
 	HTML += "<a href='?src=\ref[src];flavour_text_robot=Default'>Default:</a> "
 	HTML += TextPreview(pref.flavour_texts_robot["Default"])

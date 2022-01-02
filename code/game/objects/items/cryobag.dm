@@ -2,7 +2,7 @@
 /obj/item/bodybag/cryobag
 	name = "stasis bag"
 	desc = "A folded, reusable bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
-	a hostile enviroment."
+	a hostile environment."
 	icon = 'icons/obj/closets/cryobag.dmi'
 	icon_state = "bodybag_folded"
 	origin_tech = list(TECH_BIO = 4)
@@ -19,7 +19,7 @@
 /obj/structure/closet/body_bag/cryobag
 	name = "stasis bag"
 	desc = "A reusable plastic bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
-	a hostile enviroment."
+	a hostile environment."
 	icon = 'icons/obj/closets/cryobag.dmi'
 	item_path = /obj/item/bodybag/cryobag
 

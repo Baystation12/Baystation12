@@ -94,7 +94,7 @@
 	var/mob/living/simple_animal/borer/borer = owner.has_brain_worms()
 
 	if(borer)
-		borer.detatch() //Should remove borer if the brain is removed - RR
+		borer.detach() //Should remove borer if the brain is removed - RR
 
 	transfer_identity(owner)
 

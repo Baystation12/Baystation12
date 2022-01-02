@@ -74,7 +74,7 @@
 	power_cost = 280 // Same number of shots, but it'll seem to recharge slightly faster
 
 	loaded = /obj/item/stack/material/rods
-	load_type = /obj/item/stack/material/rods // The Confederation learned that chunks of metal work just as well as fancy matter cartridges - actually they dont
+	load_type = /obj/item/stack/material/rods // The Confederation learned that chunks of metal work just as well as fancy matter cartridges - actually they don't
 	projectile_type = /obj/item/projectile/bullet/magnetic
 	load_sheet_max = 6 // Fewer shots per "magazine", but more abundant than matter cartridges.
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 3, TECH_MAGNET = 5)

@@ -40,7 +40,7 @@
 		if(!is_num_predicate(var_value, client))
 			return
 
-		// We set the default to 1,1,1 when at 0,0,0 (i.e. any non-turf location) to mimic the standard BYOND behaviour when adjusting x,y,z directly
+		// We set the default to 1,1,1 when at 0,0,0 (i.e. any non-turf location) to mimic the standard BYOND behavior when adjusting x,y,z directly
 		var/x = AM.x || 1
 		var/y = AM.y || 1
 		var/z = AM.z || 1

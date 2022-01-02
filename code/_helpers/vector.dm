@@ -32,7 +32,7 @@ return_hypotenuse()
 
 return_location()
 	Returns a vector_loc datum containing the current location data of the object (see /datum/vector_loc). This includes 
-	the turf it currently should be at, as well as the pixel offset from the centre of that turf. Typically increment() 
+	the turf it currently should be at, as well as the pixel offset from the center of that turf. Typically increment() 
 	would be called before this if you are going to move an object based on it's vector data.
 */
 

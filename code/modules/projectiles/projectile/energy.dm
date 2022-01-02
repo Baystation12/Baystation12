@@ -7,14 +7,14 @@
 	damage_flags = 0
 	distance_falloff = 2.5
 
-//releases a burst of light on impact or after travelling a distance
+//releases a burst of light on impact or after traveling a distance
 /obj/item/projectile/energy/flash
 	name = "chemical shell"
 	icon_state = "bullet"
 	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	damage = 5
 	agony = 20
-	life_span = 15 //if the shell hasn't hit anything after travelling this far it just explodes.
+	life_span = 15 //if the shell hasn't hit anything after traveling this far it just explodes.
 	muzzle_type = /obj/effect/projectile/bullet/muzzle
 	var/flash_range = 1
 	var/brightness = 7

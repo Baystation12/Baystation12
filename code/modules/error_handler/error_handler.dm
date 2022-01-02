@@ -53,7 +53,7 @@ GLOBAL_VAR_INIT(actual_error_file_line, new/regex("^%% (.*?),(.*?) %% "))
 		configured_error_silence_time = config.error_silence_time
 
 
-	//Each occurence of an unique error adds to its cooldown time...
+	//Each occurrence of an unique error adds to its cooldown time...
 	cooldown = max(0, cooldown - (world.time - last_seen)) + configured_error_cooldown
 	// ... which is used to silence an error if it occurs too often, too fast
 	if(cooldown > configured_error_cooldown * configured_error_limit)

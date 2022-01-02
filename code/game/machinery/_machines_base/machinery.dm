@@ -119,9 +119,9 @@ Class Procs:
 	var/global/gl_uid = 1
 	/// Boolean. Can the machine be interacted with while de-powered.
 	var/interact_offline = FALSE
-	/// Sound played on succesful interface use by a carbon lifeform.
+	/// Sound played on successful interface use by a carbon lifeform.
 	var/clicksound
-	/// Sound played on succesful interface use.
+	/// Sound played on successful interface use.
 	var/clickvol = 40
 	/// Value to compare with `world.time` for whether to play `clicksound` according to `CLICKSOUND_INTERVAL`.
 	var/next_clicksound = 0

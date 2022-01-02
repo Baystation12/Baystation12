@@ -147,7 +147,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/rd/get_description_blurb()
-	return "You are the Chief Science Officer. You are responsible for the research department. You handle the science aspects of the project and liase with the corporate interests of the Expeditionary Corps Organisation. Make sure science gets done, do some yourself, and get your scientists on away missions to find things to benefit the project. Advise the CO on science matters."
+	return "You are the Chief Science Officer. You are responsible for the research department. You handle the science aspects of the project and liaise with the corporate interests of the Expeditionary Corps Organization. Make sure science gets done, do some yourself, and get your scientists on away missions to find things to benefit the project. Advise the CO on science matters."
 
 /datum/job/cmo
 	title = "Chief Medical Officer"

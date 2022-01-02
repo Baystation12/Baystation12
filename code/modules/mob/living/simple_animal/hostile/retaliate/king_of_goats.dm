@@ -179,7 +179,7 @@
 	update_icon()
 
 /mob/living/simple_animal/hostile/retaliate/goat/guard
-	name = "honour guard"
+	name = "honor guard"
 	desc = "A very handsome and noble beast."
 	icon = 'icons/mob/simple_animal/king_of_goats.dmi'
 	icon_state = "goat_guard"

@@ -123,7 +123,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 		// 1 = view feed channels
 		// 2 = create feed channel
 		// 3 = create feed story
-		// 4 = feed story submited sucessfully
+		// 4 = feed story submitted successfully
 		// 5 = feed channel created successfully
 		// 6 = ERROR: Cannot create feed story
 		// 7 = ERROR: Cannot create feed channel
@@ -245,7 +245,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 					dat+="<BR><A href='?src=\ref[src];menu_wanted=1'>[(wanted_already) ? ("Manage") : ("Publish")] \"Wanted\" Issue</A>"
 					dat+="<BR><A href='?src=\ref[src];menu_censor_story=1'>Censor Feed Stories</A>"
 					dat+="<BR><A href='?src=\ref[src];menu_censor_channel=1'>Mark Feed Channel with [GLOB.using_map.company_name] D-Notice</A>"
-				dat+="<BR><HR>The newscaster recognises you as: <FONT COLOR='green'>[src.scanned_user]</FONT>"
+				dat+="<BR><HR>The newscaster recognizes you as: <FONT COLOR='green'>[src.scanned_user]</FONT>"
 			if(1)
 				dat+= "Local Feed Channels<HR>"
 				if( !length(connected_group.network_channels) )
@@ -321,7 +321,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				var/message_num=0
 				for(var/datum/feed_channel/FC in connected_group.network_channels)
 					if(!FC.censored)
-						message_num += length(FC.messages)    //Dont forget, datum/feed_channel's var messages is a list of datum/feed_message
+						message_num += length(FC.messages)    //Don't forget, datum/feed_channel's var messages is a list of datum/feed_message
 					else
 						active_num--
 				dat+="Network currently serves a total of [total_num] Feed channels, [active_num] of which are active, and a total of [message_num] Feed Stories." //TODO: CONTINUE
@@ -365,7 +365,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			if(11)
 				dat+="<B>[GLOB.using_map.company_name] D-Notice Handler</B><HR>"
 				dat+="<FONT SIZE=1>A D-Notice is to be bestowed upon the channel if the handling Authority deems it as harmful for the [station_name()]'s"
-				dat+="morale, integrity or disciplinary behaviour. A D-Notice will render a channel unable to be updated by anyone, without deleting any feed"
+				dat+="morale, integrity or disciplinary behavior. A D-Notice will render a channel unable to be updated by anyone, without deleting any feed"
 				dat+="stories it might contain at the time. You can lift a D-Notice if you have the required access at any time.</FONT><HR>"
 				if(!length(connected_group.network_channels))
 					dat+="<I>No feed channels found active...</I><BR>"

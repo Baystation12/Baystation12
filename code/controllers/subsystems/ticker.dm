@@ -98,7 +98,7 @@ SUBSYSTEM_DEF(ticker)
 
 	callHook("roundstart")
 
-	spawn(0)//Forking here so we dont have to wait for this to finish
+	spawn(0)//Forking here so we don't have to wait for this to finish
 		mode.post_setup() // Drafts antags who don't override jobs.
 		to_world("<span class='info'><B>Enjoy the game!</B></span>")
 		sound_to(world, sound(GLOB.using_map.welcome_sound))
@@ -459,7 +459,7 @@ Helpers
 			if(temprole in total_antagonists)	//If the role exists already, add the name to it
 				total_antagonists[temprole] += ", [Mind.name]([Mind.key])"
 			else
-				total_antagonists.Add(temprole) //If the role doesnt exist in the list, create it and add the mob
+				total_antagonists.Add(temprole) //If the role doesn't exist in the list, create it and add the mob
 				total_antagonists[temprole] += ": [Mind.name]([Mind.key])"
 
 	//Now print them all into the log!

@@ -47,7 +47,7 @@
 	if(!ismob(AM))
 		var/obj/O = AM
 		if(O.w_class <= ITEM_SIZE_SMALL)
-			return //Dont spam for small stuff
+			return //Don't spam for small stuff
 	playsound(src,'sound/effects/teleport.ogg',40,1)
 	return
 

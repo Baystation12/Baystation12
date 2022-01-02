@@ -361,7 +361,7 @@
 /obj/item/gun/proc/process_point_blank(obj/projectile, mob/user, atom/target)
 	var/obj/item/projectile/P = projectile
 	if(!istype(P))
-		return //default behaviour only applies to true projectiles
+		return //default behavior only applies to true projectiles
 
 	//default point blank multiplier
 	var/max_mult = 1
@@ -378,7 +378,7 @@
 /obj/item/gun/proc/process_accuracy(obj/projectile, mob/living/user, atom/target, var/burst, var/held_twohanded)
 	var/obj/item/projectile/P = projectile
 	if(!istype(P))
-		return //default behaviour only applies to true projectiles
+		return //default behavior only applies to true projectiles
 
 	var/acc_mod = burst_accuracy[min(burst, burst_accuracy.len)]
 	var/disp_mod = dispersion[min(burst, dispersion.len)]
@@ -406,7 +406,7 @@
 
 	//accuracy bonus from aiming
 	if (aim_targets && (target in aim_targets))
-		//If you aim at someone beforehead, it'll hit more often.
+		//If you aim at someone beforehand, it'll hit more often.
 		//Kinda balanced by fact you need like 2 seconds to aim
 		//As opposed to no-delay pew pew
 		acc_mod += 2
@@ -420,7 +420,7 @@
 /obj/item/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null)
 	var/obj/item/projectile/P = projectile
 	if(!istype(P))
-		return 0 //default behaviour only applies to true projectiles
+		return 0 //default behavior only applies to true projectiles
 
 	if(params)
 		P.set_clickpoint(params)

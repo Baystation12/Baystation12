@@ -2491,7 +2491,7 @@
 
 /obj/item/reagent_containers/food/snacks/sliceable/applecake
 	name = "apple cake"
-	desc = "A cake centred with apples."
+	desc = "A cake centered with apples."
 	icon_state = "applecake"
 	slice_path = /obj/item/reagent_containers/food/snacks/slice/applecake
 	slices_num = 5

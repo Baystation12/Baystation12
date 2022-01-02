@@ -1,5 +1,5 @@
 /obj/machinery/artifact_analyser
-	name = "Anomaly Analyser"
+	name = "Anomaly Analyzer"
 	desc = "Studies the emissions of anomalous materials to discover their uses."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "xenoarch_console"
@@ -135,11 +135,11 @@
 		if(/obj/machinery/power/supermatter)
 			return "Superdense phoron clump - appears to have been shaped or hewn, structure is composed of matter aproximately 20 times denser than ordinary refined phoron."
 		if(/obj/structure/constructshell)
-			return "Tribal idol - subject resembles statues/emblems built by superstitious pre-warp civilisations to honour their gods. Material appears to be a rock/plastcrete composite."
+			return "Tribal idol - subject resembles statues/emblems built by superstitious pre-warp civilizations to honor their gods. Material appears to be a rock/plastcrete composite."
 		if(/obj/machinery/giga_drill)
 			return "Automated mining drill - structure composed of titanium-carbide alloy, with tip and drill lines edged in an alloy of diamond and phoron."
 		if(/obj/structure/cult/pylon)
-			return "Tribal pylon - subject resembles statues/emblems built by cargo cult civilisations to honour energy systems from post-warp civilisations."
+			return "Tribal pylon - subject resembles statues/emblems built by cargo cult civilizations to honor energy systems from post-warp civilizations."
 		if(/obj/machinery/replicator)
 			return "Automated construction unit - subject appears to be able to synthesize various objects given a material, some with simple internal circuitry. Method unknown."
 		if(/obj/machinery/artifact)

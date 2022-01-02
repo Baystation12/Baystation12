@@ -230,7 +230,7 @@ About Reagents:
 			Called when [newamount] of reagent with [newdata] data is added to the current reagent. Used by paint.
 
 		get_data()
-			Returns data. Can be overriden.
+			Returns data. Can be overridden.
 
 About Recipes:
 

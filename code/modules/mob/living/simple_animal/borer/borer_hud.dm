@@ -136,7 +136,7 @@
 			to_chat(worm.host, SPAN_DANGER("Something slimy wiggles out of your ear and plops to the ground!"))
 			if(!worm.neutered)
 				to_chat(worm.host, SPAN_DANGER("As though waking from a dream, you shake off the insidious mind control of the brain worm. Your thoughts are your own again."))
-		worm.detatch()
+		worm.detach()
 		worm.leave_host()
 
 	return TRUE

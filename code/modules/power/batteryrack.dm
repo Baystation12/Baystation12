@@ -26,7 +26,7 @@
 	var/list/internal_cells = list()					// Cells stored in this PSU
 	var/max_cells = 3									// Maximal amount of stored cells at once. Capped at 9.
 	var/previous_charge = 0								// Charge previous tick.
-	var/equalise = 0									// If true try to equalise charge between cells
+	var/equalise = 0									// If true try to equalize charge between cells
 	var/icon_update = 0									// Timer in ticks for icon update.
 	var/ui_tick = 0
 
@@ -102,7 +102,7 @@
 		amount -= CL.give(amount)
 		if(!amount)
 			return
-	// We're still here, so it means the least charged cell was full OR we don't care about equalising the charge. Give power to other cells instead.
+	// We're still here, so it means the least charged cell was full OR we don't care about equalizing the charge. Give power to other cells instead.
 	for(var/obj/item/cell/C in internal_cells)
 		amount -= C.give(amount)
 		// No more power to input so return.
@@ -118,7 +118,7 @@
 		amount -= CL.use(amount)
 		if(!amount)
 			return
-	// We're still here, so it means the most charged cell didn't have enough power OR we don't care about equalising the charge. Use power from other cells instead.
+	// We're still here, so it means the most charged cell didn't have enough power OR we don't care about equalizing the charge. Use power from other cells instead.
 	for(var/obj/item/cell/C in internal_cells)
 		amount -= C.use(amount)
 		// No more power to output so return.
@@ -176,7 +176,7 @@
 	if(equalise)
 		var/obj/item/cell/least = get_least_charged_cell()
 		var/obj/item/cell/most = get_most_charged_cell()
-		// Don't bother equalising charge between two same cells. Also ensure we don't get NULLs or wrong types. Don't bother equalising when difference between charges is tiny.
+		// Don't bother equalizing charge between two same cells. Also ensure we don't get NULLs or wrong types. Don't bother equalizing when difference between charges is tiny.
 		if(!least || !most || least.percent() == most.percent())
 			return
 		var/percentdiff = (most.percent() - least.percent()) / 2 // Transfer only 50% of power. The reason is that it could lead to situations where least and most charged cells would "swap places" (45->50% and 50%->45%)

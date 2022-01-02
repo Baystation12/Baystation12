@@ -117,7 +117,7 @@
 
 //FALLING STUFF
 
-//Holds fall checks that should not be overriden by children
+//Holds fall checks that should not be overridden by children
 /atom/movable/proc/fall(var/lastloc)
 	if(!isturf(loc))
 		return

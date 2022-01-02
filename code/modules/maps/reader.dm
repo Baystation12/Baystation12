@@ -2,7 +2,7 @@
 //SS13 Optimized Map loader
 //////////////////////////////////////////////////////////////
 
-//global datum that will preload variables on atoms instanciation
+//global datum that will preload variables on atoms instantiation
 GLOBAL_VAR_INIT(use_preloader, FALSE)
 GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
@@ -317,7 +317,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		modelCache[model] = list(members, members_attributes)
 
 	////////////////
-	//Instanciation
+	//Instantiation
 	////////////////
 
 	//The next part of the code assumes there's ALWAYS an /area AND a /turf on a given tile
@@ -352,7 +352,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 	//turn off base new Initialization until the whole thing is loaded
 	SSatoms.map_loader_begin()
-	//since we've switched off autoinitialisation, record atoms to initialise later
+	//since we've switched off autoinitialization, record atoms to initialize later
 	var/list/atoms_to_initialise = list()
 
 	//instanciate the first /turf

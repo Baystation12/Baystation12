@@ -132,7 +132,7 @@ AI MODULES
 		target.set_zeroth_law(law)
 		GLOB.lawchanges.Add("The law specified [targetName]")
 	else
-		GLOB.lawchanges.Add("The law specified [targetName], but the AI's existing law zero cannot be overriden.")
+		GLOB.lawchanges.Add("The law specified [targetName], but the AI's existing law zero cannot be overridden.")
 
 /******************** ProtectStation ********************/
 

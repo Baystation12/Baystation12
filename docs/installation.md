@@ -30,7 +30,7 @@ If you see any errors or warnings, something has gone wrong - possibly a corrupt
 
 ### CONFIGURATION
 
-Copy the contents of the `/config/examples` folder into `/config`. You will now work with everthing contained within `/config`.
+Copy the contents of the `/config/examples` folder into `/config`. You will now work with everything contained within `/config`.
 
 Edit `config.txt` to set the probabilities for different gamemodes in Secret and to set your server location so that all your players don't get disconnected at the end of each round.  It's recommended you don't turn on the gamemodes with probability 0, as they have various issues and aren't currently being tested, they may have unknown and bizarre bugs.
 
@@ -38,7 +38,7 @@ Edit `admins.txt` to remove the default admins and add your own.  "Game Master" 
 
     byondkey - Rank
 
-where the BYOND key must be in lowercase and the admin rank must be properly capitalised.  There are a bunch more admin ranks, but these two should be enough for most servers, assuming you have trustworthy admins.
+where the BYOND key must be in lowercase and the admin rank must be properly capitalized.  There are a bunch more admin ranks, but these two should be enough for most servers, assuming you have trustworthy admins.
 
 To start the server, run Dream Daemon and enter the path to your compiled `baystation12.dmb` file.  Make sure to set the port to the one you  specified in the `config.txt`, and set the Security box to 'Trusted' so you don't have to confirm access to every single configuration and storage file for the server.  Then press GO and the server should start up and be ready to join.
 

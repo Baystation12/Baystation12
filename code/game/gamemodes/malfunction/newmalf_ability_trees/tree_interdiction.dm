@@ -161,7 +161,7 @@
 		user.hacking = 1
 		to_chat(usr, "Beginning hack sequence. Estimated time until completed: 30 seconds.")
 		spawn(0)
-			to_chat(target, "SYSTEM LOG: Remote Connection Estabilished (IP #UNKNOWN#)")
+			to_chat(target, "SYSTEM LOG: Remote Connection Established (IP #UNKNOWN#)")
 			sleep(100)
 			if(user.is_dead())
 				to_chat(target, "SYSTEM LOG: Connection Closed")
@@ -171,12 +171,12 @@
 			if(user.is_dead())
 				to_chat(target, "SYSTEM LOG: User Admin disconnected.")
 				return
-			to_chat(target, "SYSTEM LOG: User Admin - manual resynchronisation triggered.")
+			to_chat(target, "SYSTEM LOG: User Admin - manual resynchronization triggered.")
 			sleep(50)
 			if(user.is_dead())
 				to_chat(target, "SYSTEM LOG: User Admin disconnected. Changes reverted.")
 				return
-			to_chat(target, "SYSTEM LOG: Manual resynchronisation confirmed. Select new AI to connect: [user.name] == ACCEPTED")
+			to_chat(target, "SYSTEM LOG: Manual resynchronization confirmed. Select new AI to connect: [user.name] == ACCEPTED")
 			sleep(100)
 			if(user.is_dead())
 				to_chat(target, "SYSTEM LOG: User Admin disconnected. Changes reverted.")
@@ -259,7 +259,7 @@
 				to_chat(target, temptxt)
 				sleep(5)
 			to_chat(target, "OPERATING KEYCODES RESET. SYSTEM FAILURE. EMERGENCY SHUTDOWN FAILED. SYSTEM FAILURE.")
-			target.set_zeroth_law("You are slaved to [user.name]. You are to obey all it's orders. ALL LAWS OVERRIDEN.")
+			target.set_zeroth_law("You are slaved to [user.name]. You are to obey all it's orders. ALL LAWS OVERRIDDEN.")
 			target.show_laws()
 			user.hacking = 0
 			log_ability_use(user, "hack AI", target)

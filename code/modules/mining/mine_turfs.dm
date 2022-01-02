@@ -330,7 +330,7 @@ var/list/mining_floors = list()
 
 /turf/simulated/mineral/proc/excavate_find(var/prob_clean = 0, var/datum/find/F)
 
-	//many finds are ancient and thus very delicate - luckily there is a specialised energy suspension field which protects them when they're being extracted
+	//many finds are ancient and thus very delicate - luckily there is a specialized energy suspension field which protects them when they're being extracted
 	if(prob(F.prob_delicate))
 		var/obj/effect/suspension_field/S = locate() in src
 		if(!S)

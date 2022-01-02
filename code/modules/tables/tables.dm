@@ -123,7 +123,7 @@
 			return 1
 		else
 			to_chat(user, "<span class='warning'>You don't have enough carpet!</span>")
-	if(!reinforced && !carpeted && material && isWrench(W) && user.a_intent == I_HURT) //robots dont have disarm so it's harm
+	if(!reinforced && !carpeted && material && isWrench(W) && user.a_intent == I_HURT) //robots don't have disarm so it's harm
 		remove_material(W, user)
 		if(!material)
 			update_connections(1)
@@ -141,7 +141,7 @@
 	if(health < maxhealth && isWelder(W))
 		var/obj/item/weldingtool/F = W
 		if(F.welding)
-			to_chat(user, "<span class='notice'>You begin reparing damage to \the [src].</span>")
+			to_chat(user, "<span class='notice'>You begin repairing damage to \the [src].</span>")
 			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 			if(!do_after(user, 20, src) || !F.remove_fuel(1, user))
 				return

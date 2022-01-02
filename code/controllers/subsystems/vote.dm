@@ -12,7 +12,7 @@ SUBSYSTEM_DEF(vote)
 	var/list/old_votes           //Stores completed votes for reference.
 	var/queued_auto_vote         //Used if a vote queues another vote to happen after it.
 
-	var/list/voting = list()     //Clients recieving UI updates.
+	var/list/voting = list()     //Clients receiving UI updates.
 	var/list/vote_prototypes     //To run checks on whether they are available.
 
 /datum/controller/subsystem/vote/Initialize()

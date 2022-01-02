@@ -8,11 +8,11 @@ agree
 alert
 allow
 amuse
-analyse
+analyze
 announce
 annoy
 answer
-apologise
+apologies
 appear
 applaud
 appreciate
@@ -94,7 +94,7 @@ close
 coach
 coil
 collect
-colour
+color
 comb
 command
 communicate
@@ -416,9 +416,9 @@ radiate
 rain
 raise
 reach
-realise
+realize
 receive
-recognise
+recognize
 record
 reduce
 reflect

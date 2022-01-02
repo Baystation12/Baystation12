@@ -47,7 +47,7 @@
 		else
 			. += "<a href='?src=\ref[src];toggle_shackle=[pref.is_shackled]'>Off</a>"
 			. += "<span class='linkOn'>On</span>"
-			. += "<br>You are shackled and have laws that restrict your behaviour."
+			. += "<br>You are shackled and have laws that restrict your behavior."
 			. += "<hr>"
 
 			. += "<b>Your Current Laws:</b><br>"

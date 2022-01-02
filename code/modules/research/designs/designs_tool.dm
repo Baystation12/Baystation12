@@ -31,7 +31,7 @@
 
 /datum/design/item/tool/clamp
 	name = "stasis clamp"
-	desc = "A magnetic clamp which can halt the flow of gas in a pipe, via a localised stasis field."
+	desc = "A magnetic clamp which can halt the flow of gas in a pipe, via a localized stasis field."
 	id = "stasis_clamp"
 	req_tech = list(TECH_ENGINEERING = 4, TECH_MAGNET = 4)
 	materials = list(MATERIAL_STEEL = 500, MATERIAL_GLASS = 500)

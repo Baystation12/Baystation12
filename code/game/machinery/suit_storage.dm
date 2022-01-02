@@ -314,7 +314,7 @@
 		return
 	if(occupant && !islocked)
 		islocked = TRUE
-	to_chat(user, SPAN_NOTICE("You start the Unit's cauterisation cycle."))
+	to_chat(user, SPAN_NOTICE("You start the Unit's cauterization cycle."))
 	isUV = TRUE
 	update_use_power(POWER_USE_ACTIVE)
 	update_icon()

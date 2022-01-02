@@ -4,7 +4,7 @@
 
 /obj/item/gun/projectile/heavysniper/ant
 	name = "anti-material rifle"
-	desc = "A portable anti-armour rifle fitted with a scope, the HI PTR-7 Rifle was originally designed to used against armoured exosuits. It is capable of punching through windows and non-reinforced walls with ease. Fires armor piercing 14.5mm shells. This replica however fires pistol rounds."
+	desc = "A portable anti-armor rifle fitted with a scope, the HI PTR-7 Rifle was originally designed to used against armored exosuits. It is capable of punching through windows and non-reinforced walls with ease. Fires armor piercing 14.5mm shells. This replica however fires pistol rounds."
 	ammo_type = /obj/item/ammo_magazine/pistol/small
 	caliber = CALIBER_PISTOL_SMALL
 
@@ -16,5 +16,5 @@
 	return ..()
 
 /obj/item/gun/projectile/automatic/machine_pistol/usi
-	desc = "An uncommon machine pistol, sometimes refered to as an 'uzi' by the backwater spacers it is often associated with. This one looks especially run-down. Uses pistol rounds."
+	desc = "An uncommon machine pistol, sometimes referred to as an 'uzi' by the backwater spacers it is often associated with. This one looks especially run-down. Uses pistol rounds."
 	jam_chance = 20

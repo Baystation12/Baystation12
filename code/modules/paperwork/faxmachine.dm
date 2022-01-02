@@ -206,7 +206,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 
 	use_power_oneoff(200)
 
-	//recieved copies should not use toner since it's being used by admins only.
+	//received copies should not use toner since it's being used by admins only.
 	var/obj/item/rcvdcopy
 	if (istype(copyitem, /obj/item/paper))
 		rcvdcopy = copy(copyitem, 0)

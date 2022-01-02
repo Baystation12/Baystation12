@@ -64,4 +64,4 @@ That's it! You're probably done! Unless the unit tests explode on you.
 
 ### Some of the stuff I put in my map isn't behaving properly!
 
-The map loader works best when everything it's spawning does all its initialisation work in `Initialize`, instead of in `New`. Most likely your misbehaving thing is doing more initialisation than is healthy in `New`. It's fixable! Often not even that hard. Go talk to a dev.
+The map loader works best when everything it's spawning does all its initialization work in `Initialize`, instead of in `New`. Most likely your misbehaving thing is doing more initialization than is healthy in `New`. It's fixable! Often not even that hard. Go talk to a dev.

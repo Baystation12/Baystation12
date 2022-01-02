@@ -59,7 +59,7 @@ obj/structure/disposalpipe/Destroy()
 	return dpdir & (~turn(fromdir, 180))
 
 	// transfer the holder through this pipe segment
-	// overriden for special behaviour
+	// overridden for special behavior
 	//
 /obj/structure/disposalpipe/proc/transfer(var/obj/structure/disposalholder/H)
 	var/nextdir = nextdir(H.dir)

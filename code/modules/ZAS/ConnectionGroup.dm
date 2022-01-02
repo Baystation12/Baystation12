@@ -13,7 +13,7 @@ Class Vars:
 
 	connecting_turfs - This holds a list of connected turfs, mainly for the sake of airflow.
 
-	coefficent - This is a marker for how many connections are on this edge. Used to determine the ratio of flow.
+	coefficient - This is a marker for how many connections are on this edge. Used to determine the ratio of flow.
 
 	connection_edge/zone
 

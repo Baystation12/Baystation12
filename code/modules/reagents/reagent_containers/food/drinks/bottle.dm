@@ -268,7 +268,7 @@
 
 /obj/item/reagent_containers/food/drinks/bottle/kahlua
 	name = "Robert Robust's Coffee Liqueur"
-	desc = "A widely known, Mexican coffee-flavoured liqueur. In production since 1936, HONK!"
+	desc = "A widely known, Mexican coffee-flavored liqueur. In production since 1936, HONK!"
 	icon_state = "kahluabottle"
 	center_of_mass = "x=17;y=3"
 
@@ -292,7 +292,7 @@
 
 /obj/item/reagent_containers/food/drinks/bottle/cognac
 	name = "Chateau De Baton Premium Cognac"
-	desc = "A sweet and strongly alchoholic drink, made after numerous distillations and years of maturing. You might as well not scream 'SHITCURITY' this time."
+	desc = "A sweet and strongly alcoholic drink, made after numerous distillations and years of maturing. You might as well not scream 'SHITCURITY' this time."
 	icon_state = "cognacbottle"
 	center_of_mass = "x=16;y=6"
 

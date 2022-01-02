@@ -26,12 +26,12 @@
 	qdel(src)
 
 /obj/item/fossil/bone
-	name = "fossilised bone"
+	name = "fossilized bone"
 	icon_state = "bone"
-	desc = "A fossilised part of an alien, long dead."
+	desc = "A fossilized part of an alien, long dead."
 
 /obj/item/fossil/skull
-	name = "fossilised skull"
+	name = "fossilized skull"
 	icon_state = "skull"
 
 /obj/item/fossil/skull/horned
@@ -93,14 +93,14 @@
 
 //shells and plants do not make skeletons
 /obj/item/fossil/shell
-	name = "fossilised shell"
+	name = "fossilized shell"
 	icon_state = "shell"
-	desc = "A fossilised, pre-Stygian alien crustacean."
+	desc = "A fossilized, pre-Stygian alien crustacean."
 
 /obj/item/fossil/plant
-	name = "fossilised plant"
+	name = "fossilized plant"
 	icon_state = "plant1"
-	desc = " A fossilised shred of alien plant matter."
+	desc = " A fossilized shred of alien plant matter."
 	animal = 0
 
 /obj/item/fossil/plant/New()

@@ -19,7 +19,7 @@ var/list/weighted_mundaneevent_locations = list()
 //distance is measured in AU and co-relates to travel time
 /datum/trade_destination/centcomm
 	name = "CentComm"
-	description = "NanoTrasen's administrative centre for Tau Ceti."
+	description = "NanoTrasen's administrative center for Tau Ceti."
 	distance = 1.2
 	willing_to_buy = list()
 	willing_to_sell = list()
@@ -51,7 +51,7 @@ var/list/weighted_mundaneevent_locations = list()
 
 /datum/trade_destination/redolant
 	name = "OAV Redolant"
-	description = "Osiris Atmospherics station in orbit around the only gas giant insystem. They retain tight control over shipping rights, and Osiris warships protecting their prize are not an uncommon sight in Tau Ceti."
+	description = "Osiris Atmospherics station in orbit around the only gas giant in the system. They retain tight control over shipping rights, and Osiris warships protecting their prize are not an uncommon sight in Tau Ceti."
 	distance = 0.6
 	willing_to_buy = list()
 	willing_to_sell = list()
@@ -84,7 +84,7 @@ var/list/weighted_mundaneevent_locations = list()
 
 /datum/trade_destination/new_gibson
 	name = "New Gibson"
-	description = "Heavily industrialised rocky planet containing the majority of the planet-bound resources in the system, New Gibson is torn by unrest and has very little wealth to call it's own except in the hands of the corporations who jostle with NT for control."
+	description = "Heavily industrialized rocky planet containing the majority of the planet-bound resources in the system, New Gibson is torn by unrest and has very little wealth to call it's own except in the hands of the corporations who jostle with NT for control."
 	distance = 6.6
 	willing_to_buy = list()
 	willing_to_sell = list()

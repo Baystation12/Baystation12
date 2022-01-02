@@ -238,7 +238,7 @@
 				</ol>
 
 				<h2><a name="Repairs">Cyborg Repairs</h2>
-				Occasionally a Cyborg may become damaged. This could be in the form of impact damage from a heavy or fast-travelling object, or it could be heat damage from high temperatures, or even lasers or Electromagnetic Pulses (EMPs).
+				Occasionally a Cyborg may become damaged. This could be in the form of impact damage from a heavy or fast-traveling object, or it could be heat damage from high temperatures, or even lasers or Electromagnetic Pulses (EMPs).
 
 				<h3>Dents</h3>
 				If a cyborg becomes damaged due to impact from heavy or fast-moving objects, it will become dented. Sure, a dent may not seem like much, but it can compromise the structural integrity of the cyborg, possibly causing a critical failure.

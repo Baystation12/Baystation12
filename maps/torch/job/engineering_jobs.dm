@@ -110,7 +110,7 @@
 							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/engineer/get_description_blurb()
-	return "You are an Engineer. You operate under one of many titles and may be highly specialised in a specific area of engineering. You probably have at least a general familiarity with most other areas though this is not expected. You are subordinate to the Senior Engineer and the Chief Engineer and are expected to follow them."
+	return "You are an Engineer. You operate under one of many titles and may be highly specialized in a specific area of engineering. You probably have at least a general familiarity with most other areas though this is not expected. You are subordinate to the Senior Engineer and the Chief Engineer and are expected to follow them."
 
 /datum/job/engineer_trainee
 	title = "Engineer Trainee"

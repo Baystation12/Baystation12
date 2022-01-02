@@ -357,7 +357,7 @@
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[job.title];jobban4=\ref[M]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
 				counter++
 
-			if(counter >= 6) //So things dont get squiiiiished!
+			if(counter >= 6) //So things don't get squiiiiished!
 				jobs += "</tr><tr>"
 				counter = 0
 		jobs += "</tr></table>"
@@ -377,7 +377,7 @@
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[job.title];jobban4=\ref[M]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
 				counter++
 
-			if(counter >= 6) //So things dont get squiiiiished!
+			if(counter >= 6) //So things don't get squiiiiished!
 				jobs += "</tr><tr>"
 				counter = 0
 		jobs += "</tr></table>"
@@ -398,7 +398,7 @@
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[job.title];jobban4=\ref[M]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
 				counter++
 
-			if(counter >= 5) //So things dont get squiiiiished!
+			if(counter >= 5) //So things don't get squiiiiished!
 				jobs += "</tr><tr align='center'>"
 				counter = 0
 		jobs += "</tr></table>"
@@ -419,7 +419,7 @@
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[job.title];jobban4=\ref[M]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
 				counter++
 
-			if(counter >= 5) //So things dont get squiiiiished!
+			if(counter >= 5) //So things don't get squiiiiished!
 				jobs += "</tr><tr align='center'>"
 				counter = 0
 		jobs += "</tr></table>"
@@ -440,7 +440,7 @@
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[job.title];jobban4=\ref[M]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
 				counter++
 
-			if(counter >= 5) //So things dont get squiiiiished!
+			if(counter >= 5) //So things don't get squiiiiished!
 				jobs += "</tr><tr align='center'>"
 				counter = 0
 		jobs += "</tr></table>"
@@ -461,7 +461,7 @@
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[job.title];jobban4=\ref[M]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
 				counter++
 
-			if(counter >= 5) //So things dont get squiiiiished!
+			if(counter >= 5) //So things don't get squiiiiished!
 				jobs += "</tr><tr align='center'>"
 				counter = 0
 		jobs += "</tr></table>"
@@ -481,7 +481,7 @@
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[job.title];jobban4=\ref[M]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
 				counter++
 
-			if(counter >= 6) //So things dont get squiiiiished!
+			if(counter >= 6) //So things don't get squiiiiished!
 				jobs += "</tr><tr>"
 				counter = 0
 		jobs += "</tr></table>"
@@ -501,7 +501,7 @@
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[job.title];jobban4=\ref[M]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
 				counter++
 
-			if(counter >= 6) //So things dont get squiiiiished!
+			if(counter >= 6) //So things don't get squiiiiished!
 				jobs += "</tr><tr>"
 				counter = 0
 		jobs += "</tr></table>"
@@ -522,7 +522,7 @@
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[job.title];jobban4=\ref[M]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
 				counter++
 
-			if(counter >= 6) //So things dont get squiiiiished!
+			if(counter >= 6) //So things don't get squiiiiished!
 				jobs += "</tr><tr>"
 				counter = 0
 		jobs += "</tr></table>"
@@ -543,7 +543,7 @@
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[job.title];jobban4=\ref[M]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
 				counter++
 
-			if(counter >= 5) //So things dont get squiiiiished!
+			if(counter >= 5) //So things don't get squiiiiished!
 				jobs += "</tr><tr align='center'>"
 				counter = 0
 
@@ -570,7 +570,7 @@
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[job.title];jobban4=\ref[M]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
 				counter++
 
-			if(counter >= 5) //So things dont get squiiiiished!
+			if(counter >= 5) //So things don't get squiiiiished!
 				jobs += "</tr><tr align='center'>"
 				counter = 0
 

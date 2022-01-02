@@ -91,7 +91,7 @@ There are several things that need to be remembered:
 		update_inv_l_hand(0)
 		update_inv_r_hand()		//<---calls update_icons()
 
-	or equivillantly:
+	or equivalently:
 		update_inv_head(0)
 		update_inv_l_hand(0)
 		update_inv_r_hand(0)

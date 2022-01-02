@@ -10,7 +10,7 @@
 
 #define LIGHTING_ROUND_VALUE (1 / 64) // Value used to round lumcounts, values smaller than 1/69 don't matter (if they do, thanks sinking points), greater values will make lighting less precise, but in turn increase performance, VERY SLIGHTLY.
 
-#define LIGHTING_SOFT_THRESHOLD 0 // If the max of the lighting lumcounts of each spectrum drops below this, disable luminosity on the lighting overlays.  This also should be the transparancy of the "soft_dark" icon state.
+#define LIGHTING_SOFT_THRESHOLD 0 // If the max of the lighting lumcounts of each spectrum drops below this, disable luminosity on the lighting overlays.  This also should be the transparency of the "soft_dark" icon state.
 
 #define LIGHTING_MULT_FACTOR 0.9
 
@@ -25,7 +25,7 @@
 		0, 0, 0, 1           \
 	)
 
-// Helpers so we can (more easily) control the colour matrices.
+// Helpers so we can (more easily) control the color matrices.
 #define CL_MATRIX_RR 1
 #define CL_MATRIX_RG 2
 #define CL_MATRIX_RB 3

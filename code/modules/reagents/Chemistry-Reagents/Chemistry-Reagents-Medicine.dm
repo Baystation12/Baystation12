@@ -167,7 +167,7 @@
 
 /datum/reagent/cryoxadone
 	name = "Cryoxadone"
-	description = "A chemical mixture with almost magical healing powers. Its main limitation is that the targets body temperature must be under 170K for it to metabolise correctly."
+	description = "A chemical mixture with almost magical healing powers. Its main limitation is that the targets body temperature must be under 170K for it to metabolize correctly."
 	taste_description = "sludge"
 	reagent_state = LIQUID
 	color = "#8080ff"
@@ -385,7 +385,7 @@
 
 /datum/reagent/dylovene/venaxilin
 	name = "Venaxilin"
-	description = "Venixalin is a strong, specialised antivenom for dealing with advanced toxins and venoms."
+	description = "Venixalin is a strong, specialized antivenom for dealing with advanced toxins and venoms."
 	taste_description = "overpowering sweetness"
 	color = "#dadd98"
 	scannable = 1

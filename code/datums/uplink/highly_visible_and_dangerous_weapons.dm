@@ -196,7 +196,7 @@
 
 /datum/uplink_item/item/visible_weapons/railgun // Like a semi-auto AMR
 	name = "Railgun"
-	desc = "An anti-armour magnetic launching system fed by a high-capacity matter cartridge, \
+	desc = "An anti-armor magnetic launching system fed by a high-capacity matter cartridge, \
 			capable of firing slugs at intense speeds."
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT % 6)) / 6
 	antag_roles = list(MODE_MERCENARY)

@@ -195,7 +195,7 @@
 		else
 			add_flashes(W,user)
 
-/obj/item/robot_parts/head/proc/add_flashes(obj/item/W as obj, mob/user as mob) //Made into a seperate proc to avoid copypasta
+/obj/item/robot_parts/head/proc/add_flashes(obj/item/W as obj, mob/user as mob) //Made into a separate proc to avoid copypasta
 	if(src.flash1 && src.flash2)
 		to_chat(user, "<span class='notice'>You have already inserted the eyes!</span>")
 		return

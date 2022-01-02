@@ -10,7 +10,7 @@
 	if(B && B.host_brain)
 		to_chat(src, "<span class='danger'>You withdraw your probosci, releasing control of [B.host_brain]</span>")
 
-		B.detatch()
+		B.detach()
 
 		verbs -= /mob/living/carbon/proc/release_control
 		verbs -= /mob/living/carbon/proc/punish_host

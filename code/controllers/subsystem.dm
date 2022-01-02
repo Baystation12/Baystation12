@@ -3,7 +3,7 @@
 	name = "fire coderbus"               //name of the subsystem
 	var/init_order = SS_INIT_DEFAULT  //order of initialization. Higher numbers are initialized first, lower numbers later. Use defines in __DEFINES/subsystems.dm for easy understanding of order.
 	var/wait = 20                        //time to wait (in deciseconds) between each call to fire(). Must be a positive integer.
-	var/priority = SS_PRIORITY_DEFAULT //When mutiple subsystems need to run in the same tick, higher priority subsystems will run first and be given a higher share of the tick before MC_TICK_CHECK triggers a sleep
+	var/priority = SS_PRIORITY_DEFAULT //When multiple subsystems need to run in the same tick, higher priority subsystems will run first and be given a higher share of the tick before MC_TICK_CHECK triggers a sleep
 
 	var/flags = 0                        //see MC.dm in __DEFINES Most flags must be set on world start to take full effect. (You can also restart the mc to force them to process again)
 	// Similar to can_fire, but intended explicitly for subsystems that are asleep. Using this var instead of can_fire

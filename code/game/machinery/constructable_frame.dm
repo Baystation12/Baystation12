@@ -2,7 +2,7 @@
 
 //Circuit boards are in /code/game/objects/items/weapons/circuitboards/machinery/
 
-/obj/machinery/constructable_frame //Made into a seperate type to make future revisions easier.
+/obj/machinery/constructable_frame //Made into a separate type to make future revisions easier.
 	name = "machine frame"
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "box_0"

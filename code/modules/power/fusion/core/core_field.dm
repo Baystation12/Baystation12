@@ -366,7 +366,7 @@
 	//loop through the reactants in random order
 	var/list/react_pool = reactants.Copy()
 
-	//cant have any reactions if there aren't any reactants present
+	//can't have any reactions if there aren't any reactants present
 	if(react_pool.len)
 		//determine a random amount to actually react this cycle, and remove it from the standard pool
 		//this is a hack, and quite nonrealistic :(

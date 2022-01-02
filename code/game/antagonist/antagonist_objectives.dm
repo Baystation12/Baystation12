@@ -17,7 +17,7 @@
 
 /mob/proc/add_objectives()
 	set name = "Get Objectives"
-	set desc = "Recieve optional objectives."
+	set desc = "Receive optional objectives."
 	set category = "OOC"
 
 	src.verbs -= /mob/proc/add_objectives

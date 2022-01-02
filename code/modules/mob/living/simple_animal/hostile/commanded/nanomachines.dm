@@ -51,7 +51,7 @@
 		stance = COMMANDED_HEALING
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/proc/heal()
-	if(health <= 3 && !emergency_protocols) //dont die doing this.
+	if(health <= 3 && !emergency_protocols) //don't die doing this.
 		return 0
 	if(!target_mob)
 		return 0
@@ -69,7 +69,7 @@
 	target_mob.adjustFireLoss(-5)
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/misc_command(var/mob/speaker,var/text)
-	if(stance != COMMANDED_HEAL || stance != COMMANDED_HEALING) //dont want attack to bleed into heal.
+	if(stance != COMMANDED_HEAL || stance != COMMANDED_HEALING) //don't want attack to bleed into heal.
 		allowed_targets = list()
 		target_mob = null
 	if(findtext(text,"heal")) //heal shit pls

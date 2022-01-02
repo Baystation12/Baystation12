@@ -21,7 +21,7 @@
 
 	var/knockdown = 1 //whether shuttle downs non-buckled people when it moves
 
-	var/defer_initialisation = FALSE //this shuttle will/won't be initialised automatically. If set to true, you are responsible for initialzing the shuttle manually.
+	var/defer_initialisation = FALSE //this shuttle will/won't be initialized automatically. If set to true, you are responsible for initializing the shuttle manually.
 	                                 //Useful for shuttles that are initialed by map_template loading, or shuttles that are created in-game or not used.
 	var/logging_home_tag   //Whether in-game logs will be generated whenever the shuttle leaves/returns to the landmark with this landmark_tag.
 	var/logging_access     //Controls who has write access to log-related stuff; should correlate with pilot access.
@@ -84,7 +84,7 @@
 		if (moving_status == SHUTTLE_IDLE)
 			return //someone cancelled the launch
 
-		if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
+		if(!fuel_check()) //fuel error (probably out of fuel) occurred, so cancel the launch
 			var/datum/shuttle/autodock/S = src
 			if(istype(S))
 				S.cancel_launch(null)
@@ -113,7 +113,7 @@
 		if(moving_status == SHUTTLE_IDLE)
 			return	//someone cancelled the launch
 
-		if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
+		if(!fuel_check()) //fuel error (probably out of fuel) occurred, so cancel the launch
 			var/datum/shuttle/autodock/S = src
 			if(istype(S))
 				S.cancel_launch(null)

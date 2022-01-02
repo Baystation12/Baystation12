@@ -1,4 +1,4 @@
-## Server name: This appears at the top of the screen in-game. In this case it will read "tgstation: station_name" where station_name is the randomly generated name of the station for the round. Remove the # infront of SERVERNAME and replace 'tgstation' with the name of your choice
+## Server name: This appears at the top of the screen in-game. In this case it will read "tgstation: station_name" where station_name is the randomly generated name of the station for the round. Remove the # in front of SERVERNAME and replace 'tgstation' with the name of your choice
 # SERVERNAME spacestation13
 
 ## Game Version: The archetype of the server for topic status requests. Unless significantly deviated, avoid changing this. Default Baystation12
@@ -7,10 +7,10 @@
 ## Hub visibility: If you want to be visible on the hub, uncomment the below line and be sure that Dream Daemon is set to "Visible." This can be changed in-round as well with toggle-hub-visibility if Dream Daemon is set correctly.
 # HUB_VISIBLE
 
-## Add a # infront of this if you want to use the SQL based admin system, the legacy system uses admins.txt. You need to set up your database to use the SQL based system.
+## Add a # in front of this if you want to use the SQL based admin system, the legacy system uses admins.txt. You need to set up your database to use the SQL based system.
 ADMIN_LEGACY_SYSTEM
 
-## Add a # infront of this if you want to use the SQL based banning system. The legacy systems use the files in the data folder. You need to set up your database to use the SQL based system.
+## Add a # in front of this if you want to use the SQL based banning system. The legacy systems use the files in the data folder. You need to set up your database to use the SQL based system.
 BAN_LEGACY_SYSTEM
 
 ## Add a # here if you wish to use the setup where jobs have more access. This is intended for servers with low populations - where there are not enough players to fill all roles, so players need to do more than just one job. Also for servers where they don't want people to hide in their own departments.
@@ -31,7 +31,7 @@ JOBS_HAVE_MINIMAL_ACCESS
 ## Non-automatic antagonist recruitment, such as being converted to cultism is not affected. Has the same database requirements and notes as USE_AGE_RESTRICTION_FOR_JOBS.
 #USE_AGE_RESTRICTION_FOR_ANTAGS
 
-## Unhash this to use recursive explosions, keep it hashed to use circle explosions. Recursive explosions react to walls, airlocks and blast doors, making them look a lot cooler than the boring old circular explosions. They require more CPU and are (as of january 2013) experimental
+## Unhash this to use recursive explosions, keep it hashed to use circle explosions. Recursive explosions react to walls, airlocks and blast doors, making them look a lot cooler than the boring old circular explosions. They require more CPU and are (as of January 2013) experimental
 #USE_RECURSIVE_EXPLOSIONS
 
 ## Radiation weakens with distance from the source; stop calculating when the strength falls below this value.   Lower values mean radiation reaches smaller (with increasingly trivial damage) at the cost of more CPU usage.  Max range =  DISTANCE^2 * POWER / RADIATION_LOWER_LIMIT
@@ -82,9 +82,9 @@ LOG_ATTACK
 ## disconnect players who did nothing during the set amount of minutes
 # KICK_INACTIVE 10
 
-## probablities for game modes chosen in "secret" and "random" modes
+## probabilities for game modes chosen in "secret" and "random" modes
 ##
-## default probablity is 1, increase to make that mode more likely to be picked
+## default probability is 1, increase to make that mode more likely to be picked
 ## set to 0 to disable that mode
 PROBABILITY EXTENDED 1
 PROBABILITY MALFUNCTION 1
@@ -124,7 +124,7 @@ ALLOW_VOTE_RESTART
 ## Allow chat markup ingame.
 ALLOW_CHAT_MARKUP
 
-## allow players to initate a mode-change start
+## allow players to initiate a mode-change start
 ALLOW_VOTE_MODE
 
 ## min delay (deciseconds) between voting sessions (default 10 minutes)
@@ -215,7 +215,7 @@ SOCKET_TALK 0
 
 ## Uncomment to restrict non-admins from using humanoid alien races
 USEALIENWHITELIST
-## Uncomment to use the alien whitelist system with SQL instead. (requires the above uncommented aswell)
+## Uncomment to use the alien whitelist system with SQL instead. (requires the above uncommented as well)
 #USEALIENWHITELIST_SQL
 
 ## Password used for authorizing ircbot and other external tools.

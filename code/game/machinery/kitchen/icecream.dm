@@ -135,7 +135,7 @@
 		if(make_type > 6)
 			src.visible_message("<span class='info'>[user] cooks up some [flavour] cones.</span>")
 		else
-			src.visible_message("<span class='info'>[user] whips up some [flavour] icecream.</span>")
+			src.visible_message("<span class='info'>[user] whips up some [flavour] ice cream.</span>")
 	else
 		to_chat(user, "<span class='warning'>You don't have the ingredients to make this.</span>")
 
@@ -147,7 +147,7 @@
 	if(href_list["select"])
 		dispense_flavour = text2num(href_list["select"])
 		flavour_name = get_flavour_name(dispense_flavour)
-		src.visible_message("<span class='notice'>[user] sets [src] to dispense [flavour_name] flavoured icecream.</span>")
+		src.visible_message("<span class='notice'>[user] sets [src] to dispense [flavour_name] flavored ice cream.</span>")
 		. = TOPIC_HANDLED
 
 	else if(href_list["cone"])

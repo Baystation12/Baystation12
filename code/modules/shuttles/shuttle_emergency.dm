@@ -156,7 +156,7 @@
 		to_world("<span class='notice'><b>Alert: [req_authorizations - authorized.len] authorization\s needed to override the shuttle autopilot.</b></span>")
 
 	if(usr)
-		log_and_message_admins("has inserted [ID] into the shuttle control computer - [req_authorizations - authorized.len] authorisation\s needed")
+		log_and_message_admins("has inserted [ID] into the shuttle control computer - [req_authorizations - authorized.len] authorization\s needed")
 
 	return 1
 

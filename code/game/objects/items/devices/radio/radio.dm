@@ -351,7 +351,7 @@
 		actually transmit large mass. Headsets are the only radio devices capable
 		of sending subspace transmissions to the Communications Satellite.
 
-		A headset sends a signal to a subspace listener/reciever elsewhere in space,
+		A headset sends a signal to a subspace listener/receiver elsewhere in space,
 		the signal gets processed and logged, and an audible transmission gets sent
 		to each individual headset.
 	*/
@@ -564,7 +564,7 @@
 			return -1
 	if (!on)
 		return -1
-	if (!freq) //recieved on main frequency
+	if (!freq) //received on main frequency
 		if (!listening)
 			return -1
 	else

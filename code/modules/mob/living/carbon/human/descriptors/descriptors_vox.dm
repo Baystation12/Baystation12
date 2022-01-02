@@ -11,7 +11,7 @@
 		)
 	chargen_value_descriptors = list(
 		"servitor"  =     1,
-		"labourer" =      2,
+		"laborer" =      2,
 		"cannon fodder" = 3,
 		"raider" =        4,
 		"leader" =        5

@@ -38,7 +38,7 @@
 		resilience. Very traditional, they hold rather conservative views on the world, and their focus on the whole rather than self dampens \
 		much of their individualism. Their families are frequently large, three or four bondings, generally with a couple of partners, which does \
 		not leave them much in terms of money. The Kanin-Katish are among the less wealthy people of skrellkind, but they do not seem to mind, as \
-		their work is the life and blood of skrellian civilisation. Their clothing is made to last, the personality of the Skrell often being shown \
+		their work is the life and blood of skrellian civilization. Their clothing is made to last, the personality of the Skrell often being shown \
 		through arm bands or headtail decorations of any kind. Their skin is generally red, orange, pale yellow, dark orange or black."
 	economic_power = 1.2
 
@@ -53,18 +53,18 @@
 		taste for a busy social life. Highly cultured, they are the free-thinkers of skrellian society, often at odds with more traditionalist and conservative castes. \
 		A heterogeneous lot, it is hard to estimate their global financial capacities, they however tend to reproduce a lot, multiplying their encounters \
 		with various partners, which might put a strain on their savings. Their clothing is often an odd mix of Qerr-Katish and Kanin-Katish, as they often wear \
-		clothing that is colourful , adorned with embroidery and their headtails sparkling with various brilliant metals. Their skin is generally purple, blue, pink, orange, red or white."
+		clothing that is colorful, adorned with embroidery and their headtails sparkling with various brilliant metals. Their skin is generally purple, blue, pink, orange, red or white."
 	economic_power = 1.3
 
 /decl/cultural_info/culture/skrell/caste_raskinta
 	name = CULTURE_SKRELL_RASKINTA
-	description = "Rarely seen outside the skrellian society, the Raskinta-Katish are however recognised and respected by their entire species, for \
-		they are the ones who ensure the safety and stability of skrellian civilisation, both against internal and external threats. \
+	description = "Rarely seen outside the skrellian society, the Raskinta-Katish are however recognized and respected by their entire species, for \
+		they are the ones who ensure the safety and stability of skrellian civilization, both against internal and external threats. \
 		The military caste of the Skrell, most end up working for the various city-states, either in the police or as a career soldier,\
 		although some of them end up working for private security or as entertainment fighters. They are very conservative, almost reactionary, \
 		and deeply committed to their community, caring very little for self-development and personal satisfaction. Their martial training \
 		leaves very little time for most intellectual pursuits, although they are trained to be expert tacticians and are only beaten by the \
-		Qerr-Katish in terms of organisational skills. While they are wealthier than the Kanin-Katish overall, they are still among the poorer \
+		Qerr-Katish in terms of organizational skills. While they are wealthier than the Kanin-Katish overall, they are still among the poorer \
 		castes of skrellkind and their large families of three or four bondings put a heavy strain on their earnings, only compensated by their \
 		strong social cohesion. These are often the hardest to spot among a crowd because they intentionally wear clothing other castes are known \
 		for while not working, however they tend to stick to clothing that is easy to move in and are often dark blue. Their skin is generally green, blue, black, brown or yellow."

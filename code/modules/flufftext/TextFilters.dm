@@ -121,7 +121,7 @@ proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_spee
 					newletter = "srgt%$hjc< -BZZT-"
 				new_message += newletter
 				break
-			else if(prob(2.5 * distortion)) // Sound distortion. Still recognisable, mostly.
+			else if(prob(2.5 * distortion)) // Sound distortion. Still recognizable, mostly.
 				switch(lowertext(newletter))
 					if("s")
 						newletter = "$"

@@ -118,19 +118,19 @@
 /mob/living/silicon/robot/CtrlAltClickOn(atom/A)
 	A.BorgCtrlAltClick(src)
 
-/atom/proc/BorgCtrlShiftClick(var/mob/living/silicon/robot/user) //forward to human click if not overriden
+/atom/proc/BorgCtrlShiftClick(var/mob/living/silicon/robot/user) //forward to human click if not overridden
 	CtrlShiftClick(user)
 
 /obj/machinery/door/airlock/BorgCtrlShiftClick()
 	AICtrlShiftClick()
 
-/atom/proc/BorgShiftClick(var/mob/living/silicon/robot/user) //forward to human click if not overriden
+/atom/proc/BorgShiftClick(var/mob/living/silicon/robot/user) //forward to human click if not overridden
 	ShiftClick(user)
 
 /obj/machinery/door/airlock/BorgShiftClick()  // Opens and closes doors! Forwards to AI code.
 	AIShiftClick()
 
-/atom/proc/BorgCtrlClick(var/mob/living/silicon/robot/user) //forward to human click if not overriden
+/atom/proc/BorgCtrlClick(var/mob/living/silicon/robot/user) //forward to human click if not overridden
 	return CtrlClick(user)
 
 /obj/machinery/door/airlock/BorgCtrlClick() // Bolts doors. Forwards to AI code.

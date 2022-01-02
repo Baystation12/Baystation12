@@ -77,12 +77,12 @@
 /decl/poster/bay_16
 	icon_state="bsposter16"
 	name = "Dangerous Static"
-	desc = "This particular one depicts nothing remarkable other than a rather mesmerising pattern of monitor static. There's a tag on the sides of the poster, but it's ripped off."
+	desc = "This particular one depicts nothing remarkable other than a rather mesmerizing pattern of monitor static. There's a tag on the sides of the poster, but it's ripped off."
 
 /decl/poster/bay_17
 	icon_state="bsposter17"
 	name = "Pinup Girl Val"
-	desc = "Luscious Val McNeil, the vertically challenged Legal Extraordinaire, winner of Miss Space two years running and favoured pinup girl of Lawyers Weekly."
+	desc = "Luscious Val McNeil, the vertically challenged Legal Extraordinaire, winner of Miss Space two years running and favored pinup girl of Lawyers Weekly."
 
 /decl/poster/bay_18
 	icon_state="bsposter18"
@@ -162,7 +162,7 @@
 /decl/poster/bay_33
 	icon_state="bsposter33"
 	name = "Tools, tools, tools"
-	desc = "You can never have enough tools, thats for sure!"
+	desc = "You can never have enough tools, that's for sure!"
 
 /decl/poster/bay_34
 	icon_state="bsposter34"
@@ -242,7 +242,7 @@
 /decl/poster/bay_50
 	icon_state="bsposter50"
 	name = "Pinup Girl Cindy Kate"
-	desc = "This particular one is of Cindy Kate, a seductive performer well known among less savoury circles."
+	desc = "This particular one is of Cindy Kate, a seductive performer well known among less savory circles."
 
 /decl/poster/bay_51
 	icon_state="bsposter51"

@@ -14,7 +14,7 @@
 	var/safeties = 1        // The cycler won't start with a living thing inside it unless safeties are off.
 	var/irradiating = 0     // If this is > 0, the cycler is decontaminating whatever is inside it.
 	var/radiation_level = 2 // 1 is removing germs, 2 is removing blood, 3 is removing phoron.
-	var/model_text = ""     // Some flavour text for the topic box.
+	var/model_text = ""     // Some flavor text for the topic box.
 	var/locked = 1          // If locked, nothing can be taken from or added to the cycler.
 	var/can_repair = 1         // If set, the cycler can repair voidsuits.
 	var/electrified = 0
@@ -219,9 +219,9 @@
 		dat += "Output level: [radiation_level]<br>"
 		dat += "<A href='?src=\ref[src];select_rad_level=1'>\[select power level\]</a> <A href='?src=\ref[src];begin_decontamination=1'>\[begin decontamination cycle\]</a><br><hr>"
 
-		dat += "<h2>Customisation</h2>"
+		dat += "<h2>Customization</h2>"
 		dat += "<b>Target product:</b> <A href='?src=\ref[src];select_department=1'>[target_modification.name]</a>, <A href='?src=\ref[src];select_species=1'>[target_species]</a>."
-		dat += "<A href='?src=\ref[src];apply_paintjob=1'><br>\[apply customisation routine\]</a><br><hr>"
+		dat += "<A href='?src=\ref[src];apply_paintjob=1'><br>\[apply customization routine\]</a><br><hr>"
 
 	show_browser(user, JOINTEXT(dat), "window=suit_cycler")
 	onclose(user, "suit_cycler")

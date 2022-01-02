@@ -1,4 +1,4 @@
-/* The old single tank bombs that dont really work anymore
+/* The old single tank bombs that don't really work anymore
 /obj/effect/spawner/bomb
 	name = "bomb"
 	icon = 'icons/mob/screen1.dmi'

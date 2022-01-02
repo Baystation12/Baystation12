@@ -39,7 +39,7 @@
 	if(snap2grid) //Discard Pixel Values
 		screen_loc = "[screen_loc_X[1]],[screen_loc_Y[1]]"
 
-	else //Normalise Pixel Values (So the object drops at the center of the mouse, not 16 pixels off)
+	else //Normalize Pixel Values (So the object drops at the center of the mouse, not 16 pixels off)
 		var/pix_X = text2num(screen_loc_X[2]) - 16
 		var/pix_Y = text2num(screen_loc_Y[2]) - 16
 		screen_loc = "[screen_loc_X[1]]:[pix_X],[screen_loc_Y[1]]:[pix_Y]"

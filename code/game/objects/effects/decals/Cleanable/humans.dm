@@ -56,7 +56,7 @@ var/global/list/image/splatter_cache=list()
 		return INITIALIZE_HINT_QDEL
 	start_drying()
 
-// Returns true if overriden and needs deletion. If the argument is false, we will merge into any existing blood.
+// Returns true if overridden and needs deletion. If the argument is false, we will merge into any existing blood.
 /obj/effect/decal/cleanable/blood/proc/merge_with_blood(var/override = TRUE)
 	. = FALSE
 	if(blood_size == BLOOD_SIZE_NO_MERGE)

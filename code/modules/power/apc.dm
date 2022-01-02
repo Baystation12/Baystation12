@@ -6,7 +6,7 @@
 // Requires a wire connection to a power network through a terminal
 // Generates a terminal based on the direction of the APC on spawn
 
-// There are three different power channels, lighting, equipment, and enviroment
+// There are three different power channels, lighting, equipment, and environment
 // Each may have one of the following states
 
 #define POWERCHAN_OFF		0	// Power channel is off

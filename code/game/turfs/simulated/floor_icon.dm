@@ -61,7 +61,7 @@ var/list/flooring_cache = list()
 						overlays |= get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[direction]", "[flooring.icon_base]_edges", direction,(flooring.flags & TURF_HAS_EDGES))
 
 		/*
-		//Now lets handle those fancy floors which have many centre icons
+		//Now let's handle those fancy floors which have many center icons
 		if(flooring.has_base_range)
 			if (!has_border || (flooring.flags & TURF_HAS_RANDOM_BORDER))
 				//Some floors can have random tiles on the borders, some don't. It all depends on the sprite

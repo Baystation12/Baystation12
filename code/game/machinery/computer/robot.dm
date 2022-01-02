@@ -87,7 +87,7 @@
 
 		log_and_message_admins("emagged [target.name] using robotic console!")
 		target.emagged = TRUE
-		to_chat(target, "<span class='notice'>Failsafe protocols overriden. New tools available.</span>")
+		to_chat(target, "<span class='notice'>Failsafe protocols overridden. New tools available.</span>")
 		. = TOPIC_REFRESH
 
 	else if (href_list["message"])

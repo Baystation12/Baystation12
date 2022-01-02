@@ -38,7 +38,7 @@
 	memory["chamber_sensor_pressure"] = ONE_ATMOSPHERE
 	memory["external_sensor_pressure"] = 0					//assume vacuum for simple airlock controller
 	memory["internal_sensor_pressure"] = ONE_ATMOSPHERE
-	memory["exterior_status"] = list(state = "closed", lock = "locked")		//assume closed and locked in case the doors dont report in
+	memory["exterior_status"] = list(state = "closed", lock = "locked")		//assume closed and locked in case the doors don't report in
 	memory["interior_status"] = list(state = "closed", lock = "locked")
 	memory["pump_status"] = "unknown"
 	memory["target_pressure"] = ONE_ATMOSPHERE

@@ -17,7 +17,7 @@ Must be implemented by subtypes.
 // Reads off the var value and returns it
 /decl/public_access/public_variable/proc/access_var(datum/owner)
 
-// Writes to the var. Returns true if change occured, false otherwise.
+// Writes to the var. Returns true if change occurred, false otherwise.
 // Subtypes shall call parent, and perform the actual write if the return value is true.
 // If the var has_updates, you must never modify the var except through this proc.
 /decl/public_access/public_variable/proc/write_var(datum/owner, new_value)

@@ -421,7 +421,7 @@ var/global/floorIsLava = 0
 				<BR><A href='?src=\ref[src];ac_menu_wanted=1'>[(wanted_already) ? ("Manage") : ("Publish")] \"Wanted\" Issue</A>
 				<BR><A href='?src=\ref[src];ac_menu_censor_story=1'>Censor Feed Stories</A>
 				<BR><A href='?src=\ref[src];ac_menu_censor_channel=1'>Mark Feed Channel with [GLOB.using_map.company_name] D-Notice (disables and locks the channel.</A>
-				<BR><HR><A href='?src=\ref[src];ac_set_signature=1'>The newscaster recognises you as:<BR> <FONT COLOR='green'>[src.admincaster_signature]</FONT></A>
+				<BR><HR><A href='?src=\ref[src];ac_set_signature=1'>The newscaster recognizes you as:<BR> <FONT COLOR='green'>[src.admincaster_signature]</FONT></A>
 			"}
 		if(1)
 			dat+= "Feed Channels<HR>"
@@ -522,7 +522,7 @@ var/global/floorIsLava = 0
 			dat+={"
 				<B>[GLOB.using_map.company_name] D-Notice Handler</B><HR>
 				<FONT SIZE=1>A D-Notice is to be bestowed upon the channel if the handling Authority deems it as harmful for the [station_name()]'s
-				morale, integrity or disciplinary behaviour. A D-Notice will render a channel unable to be updated by anyone, without deleting any feed
+				morale, integrity or disciplinary behavior. A D-Notice will render a channel unable to be updated by anyone, without deleting any feed
 				stories it might contain at the time. You can lift a D-Notice if you have the required access at any time.</FONT><HR>
 			"}
 			if(!length(torch_network.network_channels))

@@ -25,7 +25,7 @@ nanoui is used to open and update nano browser uis
 	var/on_close_logic = 1
 	// an extra ref to use when the window is closed, usually null
 	var/atom/ref = null
-	// options for modifying window behaviour
+	// options for modifying window behavior
 	var/window_options = "focus=0;can_close=1;can_minimize=1;can_maximize=0;can_resize=1;titlebar=1;" // window option is set using window_id
 	// the list of stylesheets to apply to this ui
 	var/list/stylesheets = list()
@@ -384,7 +384,7 @@ nanoui is used to open and update nano browser uis
 		<script type='text/javascript'>
 			function receiveUpdateData(jsonString)
 			{
-				// We need both jQuery and NanoStateManager to be able to recieve data
+				// We need both jQuery and NanoStateManager to be able to receive data
 				// At the moment any data received before those libraries are loaded will be lost
 				if (typeof NanoStateManager != 'undefined' && typeof jQuery != 'undefined')
 				{
@@ -437,11 +437,11 @@ nanoui is used to open and update nano browser uis
 	SSnano.ui_opened(src)
 
  /**
-  * Reinitialise this UI, potentially with a different template and/or initial data
+  * Reinitialize this UI, potentially with a different template and/or initial data
   *
   * @return nothing
   */
-/datum/nanoui/proc/reinitialise(template, new_initial_data)
+/datum/nanoui/proc/reinitialize(template, new_initial_data)
 	if(template)
 		add_template("main", template)
 	if(new_initial_data)

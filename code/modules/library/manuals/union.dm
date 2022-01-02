@@ -1,18 +1,18 @@
 /obj/item/book/union_charter
 	name = "\improper Union Charter"
 	title = "Union Charter of Workplace Rights"
-	author = "Expeditionary Corps Organisation Corporate Union"
-	dat = {"<head><title>Expeditionary Corps Organisation Union Charter of Workplace Rights</title></head>
+	author = "Expeditionary Corps Organization Corporate Union"
+	dat = {"<head><title>Expeditionary Corps Organization Union Charter of Workplace Rights</title></head>
 	<body>
 	<h2>0. Summary</h2>
 	<hr>
 	<p>As a union representative, you are required to uphold the interests of contracted workers on your station or vessel. You are empowered to inspect workplaces and instigate cessation of contracted work when on green alert, with diminishing powers during a state of emergency. You do not have authority or jurisdiction over government or military workers, or any workers who are not card-carrying signatories to this Charter.</p>
 	<h2>1. Introduction</h2>
 	<p>This Charter of Rights sets out the rights and responsibilities of all workplace parties in the provision of decent and fair health, safety, compensation and rehabilitation systems and practices within Sol-affiliated workplaces. Regardless of jurisdiction, changes to occupational health and safety, compensation and rehabilitation law must not result in a diminution of the rights and entitlements of any worker.</p>
-	<p>This Charter does not apply to staff who are not signatory to the Solar Employee General Award, or are signatory to other workplace regulatory documents such as the internal protocols of the Expeditionary Corps or the Sol Defense Fleet. Union representatives must take care to ensure that their operations on mixed jurisdiction stations and vessels are restricted to those areas that have a union worker, contractor or labourer presence.</p>
+	<p>This Charter does not apply to staff who are not signatory to the Solar Employee General Award, or are signatory to other workplace regulatory documents such as the internal protocols of the Expeditionary Corps or the Sol Defense Fleet. Union representatives must take care to ensure that their operations on mixed jurisdiction stations and vessels are restricted to those areas that have a union worker, contractor or laborer presence.</p>
 	<p>Workers must not be adversely affected by any employer moving between jurisdictions in relation to their OHS and workers compensation entitlements. Any proposed move between jurisdictions will only occur following genuine consultation and agreement with workers and their representatives and a process of public review, including public tribunal hearings.</p>
 	<p>Consistent with OHS and Worker Compensation Policy and interstellar standards, Solar law must ensure healthy and safe workplaces and a compensation and rehabilitation system which ensures that no worker is disadvantaged should they be injured at work.</p>
-	<p>All workers have the right to join a genuine trade union. Union organised workplaces are safer workplaces.</p>
+	<p>All workers have the right to join a genuine trade union. Union organized workplaces are safer workplaces.</p>
 	<h2>2. Security Levels</h2>
 	<hr>
 	<p>On stations or vessels employing the standard SCG Alert Level protocol, the following conditions apply:</p>
@@ -36,7 +36,7 @@
 	<p>Union Representatives have the right to:</p>
 	<ul>
 	<li>Be democratically elected by a process determined by workers, in conjunction with their union;</li>
-	<li>Utilise legal rights and powers to represent workers on health and safety matters;</li>
+	<li>Utilize legal rights and powers to represent workers on health and safety matters;</li>
 	<li>Inspect the workplace, within the agreed-upon confines previously noted;</li>
 	<li>Access relevant information and be informed of all incidents;</li>
 	<li>Be consulted by the employer before workplace changes occur that may affect health and safety;</li>
@@ -69,7 +69,7 @@
 	<p>Following a physical or psychological injury, all workers have the right to a fair, just and equitable compensation system, which promotes the best medical and like support, the most effective rehabilitation for injured workers and facilitates a safe return to work that offers genuine job security. Workers' compensation standards are to:</p>
 	<li>Be available to all members of the workforce;</li>
 	<li>Provide compensation for all injuries that arise from travel to, from or during work including and during recess breaks;</li>
-	<li>Be available upon the death of a worker and for dependants of that worker;</li>
+	<li>Be available upon the death of a worker and for dependents of that worker;</li>
 	<li>Be based on the 100% replacement of loss of income;</li>
 	<li>Provide total cost of medical rehabilitation and other related expenses;</li>
 	<li>Provide lump sum compensation for permanent disability;</li>

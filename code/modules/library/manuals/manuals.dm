@@ -182,8 +182,8 @@
 				<ul>
 					<li>Place the nuclear device in the designated detonation zone.</li>
 					<li>Extend and anchor the nuclear device from its interface.</li>
-					<li>Insert the nuclear authorisation disk into the slot.</li>
-					<li>Type the numeric authorisation code into the keypad. This should have been provided.<br>
+					<li>Insert the nuclear authorization disk into the slot.</li>
+					<li>Type the numeric authorization code into the keypad. This should have been provided.<br>
 					<b>Note</b>: If you make a mistake, press R to reset the device.
 					<li>Press the E button to log on to the device.</li>
 				</ul><br>

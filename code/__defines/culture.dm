@@ -21,7 +21,7 @@
 #define FACTION_EXPEDITIONARY  "Expeditionary Corps"
 #define FACTION_PCRC           "Proxima Centauri Risk Control"
 #define FACTION_SAARE          "Strategic Assault and Asset Retention Enterprises"
-#define FACTION_CORPORATE       "Expeditionary Corps Organisation"
+#define FACTION_CORPORATE       "Expeditionary Corps Organization"
 #define FACTION_DAIS           "Deimos Advanced Information Systems"
 #define FACTION_OTHER          "Other Faction"
 #define FACTION_TEST_SUBJECTS  "Test Subjects"
@@ -130,7 +130,7 @@
 #define HOME_SYSTEM_VOX_SHIP   "Ship-Dweller"
 
 #define FACTION_VOX_RAIDER     "Raider"
-#define FACTION_VOX_CREW       "Ark Labourer"
+#define FACTION_VOX_CREW       "Ark Laborer"
 #define FACTION_VOX_APEX       "Apex Servant"
 
 #define RELIGION_VOX           "Auralis Reverence"
@@ -148,7 +148,7 @@
 #define HOME_SYSTEM_DIONAEA    "Epsilon Ursae Minoris"
 
 // Serpentid cultures.
-#define CULTURE_SERPENTID      "Serpentid Labourer"
+#define CULTURE_SERPENTID      "Serpentid Laborer"
 
 #define HOME_SYSTEM_SERPENTIDS "Tau-Wilo"
 

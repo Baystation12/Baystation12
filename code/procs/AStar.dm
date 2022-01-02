@@ -20,7 +20,7 @@ src.path_list = reverselist(src.pathlist)
 
 Then to start on the path, all you need to do it:
 Step_to(src, src.path_list[1])
-src.path_list -= src.path_list[1] or equivilent to remove that node from the list.
+src.path_list -= src.path_list[1] or equivalent to remove that node from the list.
 
 Optional extras to add on (in order):
 MaxNodes: The maximum number of nodes the returned path can be (0 = infinite)
@@ -34,7 +34,7 @@ length to avoid portals or something i guess?? Not that they're counted right no
 // Modified to provide ID argument - supplied to 'adjacent' proc, defaults to null
 // Used for checking if route exists through a door which can be opened
 
-// Also added 'exclude' turf to avoid travelling over; defaults to null
+// Also added 'exclude' turf to avoid traveling over; defaults to null
 
 PathNode
 	var/datum/position

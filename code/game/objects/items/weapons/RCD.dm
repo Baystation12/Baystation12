@@ -112,7 +112,7 @@
 	if(stored_matter < amount)
 		return 0
 	stored_matter -= amount
-	queue_icon_update()	//Updates the ammo counter if ammo is succesfully used
+	queue_icon_update()	//Updates the ammo counter if ammo is successfully used
 	return 1
 
 /obj/item/rcd/on_update_icon()	//For the fancy "ammo" counter

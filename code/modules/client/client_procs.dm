@@ -157,7 +157,7 @@
 	GLOB.clients += src
 	GLOB.ckey_directory[ckey] = src
 
-	//Admin Authorisation
+	//Admin Authorization
 	holder = admin_datums[ckey]
 	if(holder)
 		GLOB.admins += src
@@ -390,7 +390,7 @@ client/proc/MayRespawn()
 	if(mob)
 		return mob.MayRespawn()
 
-	// Something went wrong, client is usually kicked or transfered to a new mob at this point
+	// Something went wrong, client is usually kicked or transferred to a new mob at this point
 	return 0
 
 client/verb/character_setup()

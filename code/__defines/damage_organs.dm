@@ -44,7 +44,7 @@
 #define ORGAN_MUTATED    FLAG(4)  // The organ is unusable due to genetic damage.
 #define ORGAN_ARTERY_CUT FLAG(6)  // The organ has had its artery cut.
 #define ORGAN_TENDON_CUT FLAG(7)  // The organ has had its tendon cut.
-#define ORGAN_DISFIGURED FLAG(8)  // The organ is scarred/disfigured. Alters whether or not the face can be recognised.
+#define ORGAN_DISFIGURED FLAG(8)  // The organ is scarred/disfigured. Alters whether or not the face can be recognized.
 #define ORGAN_SABOTAGED  FLAG(9)  // The organ will explode if exposed to EMP, if prosthetic.
 #define ORGAN_ASSISTED   FLAG(10) // The organ is partially prosthetic. No mechanical effect.
 #define ORGAN_ROBOTIC    FLAG(11) // The organ is robotic. Changes numerous behaviors, search BP_IS_ROBOTIC for checks.

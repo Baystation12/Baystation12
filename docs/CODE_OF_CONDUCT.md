@@ -45,22 +45,22 @@ Warnings expire in six months from the date of warning.
 
 
 ## Developer Responsibilities
-The Head Developer has the responsiblity to:
-* Clarify the standards of acceptable behaviour
+The Head Developer has the responsibility to:
+* Clarify the standards of acceptable behavior
 * Handle the appeals process for all issued bans
 
 All Developers have the responsibility to:
-* Take appropriate and fair corrective action in response to any instances of unacceptable behaviour
+* Take appropriate and fair corrective action in response to any instances of unacceptable behavior
 * Properly log all corrective action they take in the relevant thread
 
 All Developers have the right to: 
 * Remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct
 * Issue warnings in accordance with the Code of Conduct (except in the cases elaborated in the second section of the Rules category, which require conference with the Head Developer)
-* Temporarily ban any contributor from Discord development channels for behaviour not aligned to this Code of Conduct, for a period up to three days
+* Temporarily ban any contributor from Discord development channels for behavior not aligned to this Code of Conduct, for a period up to three days
     * Any such ban issued will be accompanied by a warning, and will be logged
 
 ## Enforcement
-Instances of abusive, harassing, or otherwise unacceptable behaviour may be reported by contacting the Head Developer on Discord. The Head Developer will review and investigate all complaints, and will respond in a way that they deem appropriate to the circumstances. The Head Developer is obligated to maintain confidentiality with regard to the reporter of an incident.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the Head Developer on Discord. The Head Developer will review and investigate all complaints, and will respond in a way that they deem appropriate to the circumstances. The Head Developer is obligated to maintain confidentiality with regard to the reporter of an incident.
 
 Developers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by the Head Developer.
 

@@ -28,7 +28,7 @@
 			need_links_null = 1
 	// This bit checks if a nymphs is the only nymph in the list
 	// by seeing if it points to itself. If it is, it nulls it
-	// to stop list behaviour.
+	// to stop list behavior.
 	if (need_links_null)
 		if (previous_nymph)
 			previous_nymph.null_nymphs()

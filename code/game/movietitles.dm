@@ -194,7 +194,7 @@ client
 					 "Lordania", "Kingston", "Cinu", "Yuklid V", "Lorriman", "Tersten", "Gaia")].<br>"
 	disclaimer += pick("Use for parody prohibited. PROHIBITED.", 
 					   "All stunts were performed by underpaid interns. Do NOT try at home.",
-					   "[GLOB.using_map.company_name] does not endorse behaviour depicted. Attempt at your own risk.",
+					   "[GLOB.using_map.company_name] does not endorse behavior depicted. Attempt at your own risk.",
 					   "Any unauthorized exhibition, distribution, or copying of this film or any part thereof (including soundtrack)<br>\
 						may result in an ERT being called to storm your home and take it back by force.",
 						"The story, all names, characters, and incidents portrayed in this production are fictitious. No identification with actual<br>\

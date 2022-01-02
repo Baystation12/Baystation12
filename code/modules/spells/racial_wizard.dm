@@ -239,7 +239,7 @@
 /mob/observer/eye/wizard_eye
 	name_sufix = "Wizard Eye"
 
-/mob/observer/eye/wizard_eye/New() //we dont use the Ai one because it has AI specific procs imbedded in it.
+/mob/observer/eye/wizard_eye/New() //we don't use the Ai one because it has AI specific procs imbedded in it.
 	..()
 	visualnet = cameranet
 

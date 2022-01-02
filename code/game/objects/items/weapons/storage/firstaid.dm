@@ -115,7 +115,7 @@
 		)
 
 /obj/item/storage/firstaid/stab
-	name = "stabilisation first aid"
+	name = "stabilization first aid"
 	desc = "Stocked with medical pouches."
 	icon_state = "stabfirstaid"
 	item_state = "firstaid-advanced"

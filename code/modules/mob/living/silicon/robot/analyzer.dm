@@ -1,5 +1,5 @@
 //
-//Robotic Component Analyser, basically a health analyser for robots
+//Robotic Component Analyzer, basically a health analyzer for robots
 //
 /obj/item/device/robotanalyzer
 	name = "robot analyzer"

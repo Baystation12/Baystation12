@@ -24,5 +24,5 @@
 	name = CULTURE_VOX_RAIDER
 	description = "Amongst the vox, the prestige of being a raider is second only to working directly for an apex. They are \
 	the cutting talon of the vox and the dashing, charismatic figures of adventure that serve as examples for fresh hatchlings \
-	and ambitious labourers. Many raiders end up in positions of authority and power amid the ramshackle social structures of \
+	and ambitious laborers. Many raiders end up in positions of authority and power amid the ramshackle social structures of \
 	the arkships, though as always they remain under the authority of the local apex."

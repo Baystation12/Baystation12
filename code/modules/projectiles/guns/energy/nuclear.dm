@@ -82,7 +82,7 @@
 
 	var/fail_counter = 0
 
-//override for failcheck behaviour
+//override for failcheck behavior
 /obj/item/gun/energy/gun/nuclear/Process()
 	if(fail_counter > 0)
 		SSradiation.radiate(src, (fail_counter * 2))

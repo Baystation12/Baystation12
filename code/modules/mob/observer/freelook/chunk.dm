@@ -129,7 +129,7 @@
 	if(seenby.len)
 		updating = TRUE
 		spawn(UPDATE_BUFFER) // Batch large changes, such as many doors opening or closing at once
-			if(updating)     // Check if we're still updating, a forced update may have occured.
+			if(updating)     // Check if we're still updating, a forced update may have occurred.
 				update()
 	else
 		dirty = TRUE // If this chunk is seen by noone, simply mark it as dirty and do nothing

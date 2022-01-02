@@ -36,7 +36,7 @@
 
 /*one proc, four uses
 swapping: if it's 1, the mobs are trying to switch, if 0, non-passive is pushing passive
-default behaviour is:
+default behavior is:
  - non-passive mob passes the passive version
  - passive mob checks to see if its mob_bump_flag is in the non-passive's mob_bump_flags
  - if si, the proc returns

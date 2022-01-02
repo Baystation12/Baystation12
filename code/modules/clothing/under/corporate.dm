@@ -3,7 +3,7 @@
 //EXO
 /obj/item/clothing/under/rank/guard
 	name = "green security guard uniform"
-	desc = "A durable uniform worn by Expeditionary Corps Organisation security."
+	desc = "A durable uniform worn by Expeditionary Corps Organization security."
 	icon_state = "guard"
 	item_state = "w_suit"
 	worn_state = "guard"
@@ -36,7 +36,7 @@
 
 /obj/item/clothing/under/rank/scientist/executive
 	name = "\improper EXO polo and pants"
-	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a Expeditionary Corps Organisation higher-up."
+	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a Expeditionary Corps Organization higher-up."
 	icon_state = "smockexec"
 	worn_state = "smockexec"
 	accessories = list(/obj/item/clothing/accessory/tunic/exec)
@@ -59,7 +59,7 @@
 
 /obj/item/clothing/under/rank/ntpilot
 	name = "green flight suit"
-	desc = "A sleek green Expeditionary Corps Organisation flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
+	desc = "A sleek green Expeditionary Corps Organization flight suit. It proudly sports three different patches with corporate logos on them, as well as several unnecessary looking flaps and pockets for effect."
 	icon_state = "pilot"
 	item_state = "g_suit"
 	worn_state = "pilot"
@@ -71,7 +71,7 @@
 
 /obj/item/clothing/under/suit_jacket/corp
 	name = "\improper EXO executive suit"
-	desc = "A set of Expeditionary Corps Organisation-issued suit pants and shirt that particularly enthusiastic company executives tend to wear."
+	desc = "A set of Expeditionary Corps Organization-issued suit pants and shirt that particularly enthusiastic company executives tend to wear."
 	icon_state = "suit"
 	item_state = "bl_suit"
 	worn_state = "suit"

@@ -56,7 +56,7 @@
 		"Rigel Prime, the center of the Rigel system, burns hot, basking its planetary bodies in warmth and radiation.",
 		"Tau Ceti Beta has recently become a waypoint for colonists headed towards Orion. There are many ships and makeshift stations in the vicinity.",
 		"Sensors indicate that a black hole's gravitational field is affecting the region of space we were headed through. We could stay of course, but risk of being overcome by its gravity, or we could change course to go around, which will take longer.",
-		"You have come into range of the first man-made structure in this region of space. It has been constructed not by travellers from Sol, but by colonists from Orion. It stands as a monument to the colonists' success.",
+		"You have come into range of the first man-made structure in this region of space. It has been constructed not by travelers from Sol, but by colonists from Orion. It stands as a monument to the colonists' success.",
 		"You have made it to Orion! Congratulations! Your crew is one of the few to start a new foothold for mankind!"
 		)
 	var/list/stop_distance = list(10000,7000,25000,9000,5000,30000,25000,10000,0)
@@ -120,7 +120,7 @@
 				if(ORION_TRAIL_DERELICT)
 					event_desc = "You come across an unpowered ship drifting slowly in the vastness of space. Sensors indicate there are no lifeforms aboard."
 				if(ORION_TRAIL_ILLNESS)
-					event_desc = "A disease has spread amoungst your crew!"
+					event_desc = "A disease has spread amongst your crew!"
 				if(ORION_TRAIL_FLUX)
 					event_desc = "You've entered a turbulent region. Slowing down would be better for your ship but would cost more fuel."
 					event_actions  = "<a href='?src=\ref[src];continue=1;risky=25'>Continue as normal</a><BR>"
@@ -462,7 +462,7 @@
 		src.updateUsrDialog()
 
 /obj/machinery/computer/arcade/orion_trail/proc/win()
-	src.visible_message("\The [src] plays a triumpant tune, stating 'CONGRATULATIONS, YOU HAVE MADE IT TO ORION.'")
+	src.visible_message("\The [src] plays a triumphant tune, stating 'CONGRATULATIONS, YOU HAVE MADE IT TO ORION.'")
 	if(emagged)
 		new /obj/item/orion_ship(src.loc)
 		log_and_message_admins("made it to Orion on an emagged machine and got an explosive toy ship.")
@@ -473,7 +473,7 @@
 
 /obj/item/orion_ship
 	name = "model settler ship"
-	desc = "A model spaceship, it looks like those used back in the day when travelling to Orion! It even has a miniature FX-293 reactor, which was renowned for its instability and tendency to explode..."
+	desc = "A model spaceship, it looks like those used back in the day when traveling to Orion! It even has a miniature FX-293 reactor, which was renowned for its instability and tendency to explode..."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "ship"
 	w_class = ITEM_SIZE_SMALL

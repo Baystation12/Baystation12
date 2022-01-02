@@ -13,7 +13,7 @@
 
 /obj/item/stock_parts/keyboard
 	name = "input controller"
-	desc = "A standard part required by many machines to recieve user input."
+	desc = "A standard part required by many machines to receive user input."
 	icon_state = "input"
 	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list(MATERIAL_PLASTIC = 200)

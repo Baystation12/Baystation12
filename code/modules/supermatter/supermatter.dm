@@ -55,7 +55,7 @@
 
 	var/damage = 0
 	var/damage_archived = 0
-	var/safe_alert = "Crystaline hyperstructure returning to safe operating levels."
+	var/safe_alert = "Crystalline hyperstructure returning to safe operating levels."
 	var/safe_warned = 0
 	var/public_alert = 0 //Stick to Engineering frequency except for big warnings when integrity bad
 	var/warning_point = 100
@@ -103,7 +103,7 @@
 	var/aw_delam = FALSE
 	var/aw_EPR = FALSE
 
-	var/list/threshholds = list( // List of lists defining the amber/red labeling threshholds in readouts. Numbers are minminum red and amber and maximum amber and red, in that order
+	var/list/threshholds = list( // List of lists defining the amber/red labeling threshholds in readouts. Numbers are minimum red and amber and maximum amber and red, in that order
 		list("name" = SUPERMATTER_DATA_EER,         "min_h" = -1, "min_l" = -1,  "max_l" = 150,  "max_h" = 300),
 		list("name" = SUPERMATTER_DATA_TEMPERATURE, "min_h" = -1, "min_l" = -1,  "max_l" = 4000, "max_h" = 5000),
 		list("name" = SUPERMATTER_DATA_PRESSURE,    "min_h" = -1, "min_l" = -1,  "max_l" = 5000, "max_h" = 10000),
@@ -119,13 +119,12 @@
 		return
 
 	// Generic checks, similar to checks done by supermatter monitor program.
-	aw_normal = status_adminwarn_check(SUPERMATTER_NORMAL, aw_normal, "INFO: Supermatter crystal has been energised", FALSE)
+	aw_normal = status_adminwarn_check(SUPERMATTER_NORMAL, aw_normal, "INFO: Supermatter crystal has been energized", FALSE)
 	aw_warning = status_adminwarn_check(SUPERMATTER_WARNING, aw_warning, "WARN: Supermatter crystal is taking integrity damage", FALSE)
 	aw_danger = status_adminwarn_check(SUPERMATTER_DANGER, aw_danger, "WARN: Supermatter integrity is below 50%", TRUE)
 	aw_emerg = status_adminwarn_check(SUPERMATTER_EMERGENCY, aw_emerg, "CRIT: Supermatter integrity is below 25%", FALSE)
 	aw_delam = status_adminwarn_check(SUPERMATTER_DELAMINATING, aw_delam, "CRIT: Supermatter is delaminating", TRUE)
-
-	// EPR check. Only runs when supermatter is energised. Triggers when there is very low amount of coolant in the core (less than one standard canister).
+	// EPR check. Only runs when supermatter is energized. Triggers when there is very low amount of coolant in the core (less than one standard canister).
 	// This usually means a core breach or deliberate venting.
 	if(get_status() && (get_epr() < 0.5))
 		if(!aw_EPR)

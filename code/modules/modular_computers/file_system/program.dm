@@ -126,7 +126,7 @@
 		return computer.get_header_data()
 	return list()
 
-/// When implementing new program based device, use this to run the program. May be overriden to add extra logic. Remember to include ..() call.
+/// When implementing new program based device, use this to run the program. May be overridden to add extra logic. Remember to include ..() call.
 /datum/computer_file/program/proc/on_startup(mob/living/user, datum/extension/interactive/ntos/new_host)
 	program_state = PROGRAM_STATE_BACKGROUND
 	computer = new_host
@@ -148,7 +148,7 @@
 		NM = null
 	return TRUE
 
-/// This is called every tick when the program is enabled. Ensure you do parent call if you override it. If parent returns TRUE continue with UI initialisation. It returns FALSE if it can't run or if NanoModule was used instead. I suggest using NanoModules where applicable.
+/// This is called every tick when the program is enabled. Ensure you do parent call if you override it. If parent returns TRUE continue with UI initialization. It returns FALSE if it can't run or if NanoModule was used instead. I suggest using NanoModules where applicable.
 /datum/computer_file/program/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(program_state != PROGRAM_STATE_ACTIVE) // Our program was closed. Close the ui if it exists.
 		if(ui)

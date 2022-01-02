@@ -168,7 +168,7 @@
 	var/listening_to_closet = is_listening_to_movement(C, H)
 	var/listening_to_human = is_listening_to_movement(H, O)
 	if(listening_to_closet && listening_to_human)
-		pass("Recursive moved registration succesful.")
+		pass("Recursive moved registration successful.")
 	else
 		fail("Recursive moved registration failed. Human listening to closet: [listening_to_closet] - Observer listening to human: [listening_to_human]")
 
@@ -191,7 +191,7 @@
 	var/listening_to_closet = is_listening_to_movement(C, H)
 	var/listening_to_human = is_listening_to_movement(H, O)
 	if(listening_to_closet && listening_to_human)
-		pass("Recursive moved registration succesful.")
+		pass("Recursive moved registration successful.")
 	else
 		fail("Recursive moved registration failed. Human listening to closet: [listening_to_closet] - Observer listening to human: [listening_to_human]")
 

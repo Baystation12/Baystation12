@@ -1,4 +1,3 @@
-
 /*
 	*** STATE TABLE ***
 
@@ -39,7 +38,7 @@
 	*** Override, what is it? ***
 
 	The purpose of enabling the override is to prevent the docking program from automatically doing things with the docking port when docking or undocking.
-	Maybe the shuttle is full of plamsa/phoron for some reason, and you don't want the door to automatically open, or the airlock to cycle.
+	Maybe the shuttle is full of plasma/phoron for some reason, and you don't want the door to automatically open, or the airlock to cycle.
 	This means that the prepare_for_docking/undocking and finish_docking/undocking procs don't get called.
 
 	The docking controller will still check the state of the docking port, and thus prevent the shuttle from launching unless they force the launch (handling forced
@@ -58,7 +57,7 @@
 	var/resend_counter = 0		//for periodically resending confirmation messages in case they are missed
 
 	var/override_enabled = 0	//when enabled, do not open/close doors or cycle airlocks and wait for the player to do it manually
-	var/received_confirm = 0	//for undocking, whether the server has recieved a confirmation from the client
+	var/received_confirm = 0	//for undocking, whether the server has received a confirmation from the client
 	var/docking_codes			//would only allow docking when receiving signal with these, if set
 	var/display_name			//how would it show up on docking monitoring program, area name + coordinates if unset
 
@@ -272,7 +271,7 @@
 /datum/computer/file/embedded_program/docking/proc/undocked()
 	return (dock_state == STATE_UNDOCKED)
 
-//returns 1 if we are saftely undocked (and the shuttle can leave)
+//returns 1 if we are safely undocked (and the shuttle can leave)
 /datum/computer/file/embedded_program/docking/proc/can_launch()
 	return undocked()
 

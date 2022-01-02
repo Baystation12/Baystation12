@@ -27,7 +27,7 @@
 	item_state = "kilt"
 	worn_state = "plaid_purple"
 
-// discreet skirts, dont cover upper/arms etc
+// discreet skirts, don't cover upper/arms etc
 /obj/item/clothing/under/skirt/khaki
 	name = "khaki skirt"
 	desc = "A khaki skirt with a flare at the hem."
@@ -42,7 +42,7 @@
 	worn_state = "skirt_swept"
 	body_parts_covered = LOWER_TORSO
 
-// colour selection, needs to be different for loadout type selection
+// color selection, needs to be different for loadout type selection
 
 /obj/item/clothing/under/skirt_c
 	name = "short skirt"

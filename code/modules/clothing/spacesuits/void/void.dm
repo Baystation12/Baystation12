@@ -251,11 +251,11 @@ else if(##equipment_var) {\
 				user.put_in_hands(tank)
 				src.tank = null
 			else if(choice == helmet)
-				to_chat(user, "You detatch \the [helmet] from \the [src]'s helmet mount.")
+				to_chat(user, "You detach \the [helmet] from \the [src]'s helmet mount.")
 				user.put_in_hands(helmet)
 				src.helmet = null
 			else if(choice == boots)
-				to_chat(user, "You detatch \the [boots] from \the [src]'s boot mounts.")
+				to_chat(user, "You detach \the [boots] from \the [src]'s boot mounts.")
 				user.put_in_hands(boots)
 				src.boots = null
 		else

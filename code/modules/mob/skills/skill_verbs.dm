@@ -90,7 +90,7 @@ Robots and antags can instruct.
 		return
 
 	if(target.too_many_buffs(/datum/skill_buff/instruct))
-		to_chat(src, "<span class='notice'>\The [target] exhausted from all the training \he recieved.</span>")
+		to_chat(src, "<span class='notice'>\The [target] exhausted from all the training \he received.</span>")
 		return
 
 	var/options = list()
@@ -110,7 +110,7 @@ Robots and antags can instruct.
 		to_chat(src, "<span class='notice'>[incapacitated() ? "You are in no state to teach right now!" : "\the [target] is in no state to be taught right now!"]</span>")
 		return
 	if(target.too_many_buffs(/datum/skill_buff/instruct))
-		to_chat(src, "<span class='notice'>\The [target] exhausted from all the training \he recieved.</span>")
+		to_chat(src, "<span class='notice'>\The [target] exhausted from all the training \he received.</span>")
 		return
 	if(target.skill_check(skill.type, SKILL_BASIC))
 		to_chat(src, "<span class='notice'>\The [target] is too skilled to gain any benefit from a short lesson.</span>")
@@ -219,7 +219,3 @@ The Appraise verb. Used on objects to estimate their value.
 		add_client_color(/datum/client_color/noir)
 	else
 		to_chat(src, "You stop looking for clues.")
-
-
-
-

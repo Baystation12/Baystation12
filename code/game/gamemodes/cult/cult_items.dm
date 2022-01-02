@@ -129,9 +129,9 @@
 	siemens_coefficient = 0.3 //Bone is not very conducive to electricity.
 
 /obj/item/clothing/suit/space/cult
-	name = "cult armour"
+	name = "cult armor"
 	icon_state = "cult_armour"
-	desc = "A bulky suit of armour, bristling with spikes. It looks space proof."
+	desc = "A bulky suit of armor, bristling with spikes. It looks space proof."
 	allowed = list(/obj/item/book/tome,/obj/item/melee/cultblade,/obj/item/tank,/obj/item/device/suit_cooling_unit)
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,

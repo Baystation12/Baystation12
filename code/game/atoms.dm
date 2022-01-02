@@ -283,7 +283,7 @@ its easier to just keep the beam vertical.
 /atom/proc/relaymove()
 	return
 
-//called to set the atom's dir and used to add behaviour to dir-changes
+//called to set the atom's dir and used to add behavior to dir-changes
 /atom/proc/set_dir(new_dir)
 	var/old_dir = dir
 	if(new_dir == old_dir)
@@ -333,7 +333,7 @@ its easier to just keep the beam vertical.
 	if(atom_flags & ATOM_FLAG_NO_BLOOD)
 		return 0
 
-	if(!blood_DNA || !istype(blood_DNA, /list))	//if our list of DNA doesn't exist yet (or isn't a list) initialise it.
+	if(!blood_DNA || !istype(blood_DNA, /list))	//if our list of DNA doesn't exist yet (or isn't a list) initialize it.
 		blood_DNA = list()
 
 	was_bloodied = 1

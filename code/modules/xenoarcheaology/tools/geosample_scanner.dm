@@ -1,11 +1,11 @@
 /obj/machinery/radiocarbon_spectrometer
 	name = "radiocarbon spectrometer"
-	desc = "A specialised, complex scanner for gleaning information on all manner of small things."
+	desc = "A specialized, complex scanner for gleaning information on all manner of small things."
 	anchored = TRUE
 	density = TRUE
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	icon = 'icons/obj/virology.dmi'
-	icon_state = "analyser"
+	icon_state = "analyzer"
 
 	idle_power_usage = 20
 	active_power_usage = 300

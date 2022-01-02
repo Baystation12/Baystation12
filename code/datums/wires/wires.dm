@@ -1,12 +1,12 @@
 // Wire datums. Created by Giacomand.
-// Was created to replace a horrible case of copy and pasted code with no care for maintability.
+// Was created to replace a horrible case of copy and pasted code with no care for maintainability.
 // Goodbye Door wires, Cyborg wires, Vending Machine wires, Autolathe wires
 // Protolathe wires, APC wires and Camera wires!
 
 #define MAX_FLAG 65535
 
 var/list/same_wires = list()
-// 14 colours, if you're adding more than 14 wires then add more colours here
+// 14 colors, if you're adding more than 14 wires then add more colors here
 var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown", "gold", "gray", "cyan", "navy", "purple", "pink", "black", "yellow")
 
 /datum/wires

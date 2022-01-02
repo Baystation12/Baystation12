@@ -1,5 +1,5 @@
 /*
-	Small, mechanically supported physical customisation options.
+	Small, mechanically supported physical customization options.
 	Also allows for per-species physical information ('his neck markings are more important than yours').
 	ETA till a downstream ports this and adds boob and penis size: 2 days.
 */

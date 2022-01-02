@@ -6,7 +6,7 @@
 	The Union has been fairly intolerant towards human visitors (Full Body Prosthetics often notwithstanding), and wary of Skrell guests. As stands, \
 	the only fully organic habitants within Union space are representatives and diplomats from other stellar governments or corporations. \
 	The Union's population currently sits around 600,000 with roughly 80% of all its citizens residing on Root. The remainders float around the bubble \
-	performing various tasks for their government. This usually involves missions to recruit new members, as well as improve relations with neighbouring powers \
+	performing various tasks for their government. This usually involves missions to recruit new members, as well as improve relations with neighboring powers \
 	Of course, not all free synthetics are part of the Positronic Union. To this day, The Positronic Union represents approximately 68% of all free synthetics. \
 	The rest either remain citizens of their original government or declare no citizenship."
 	subversive_potential = 15

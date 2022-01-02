@@ -58,7 +58,7 @@ if (typeof doT == 'undefined') {
 	};
 })();
 
-// All scripts are initialised here, this allows control of init order
+// All scripts are initialized here, this allows control of init order
 $(document).ready(function () {
 	NanoUtility.init();
 	NanoStateManager.init();

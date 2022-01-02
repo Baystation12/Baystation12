@@ -229,7 +229,7 @@
 //Returns the amount of heat gained while in space due to thermal radiation (usually a negative value)
 //surface - the surface area in m^2
 //exposed_surface_ratio - the proportion of the surface that is exposed to sunlight
-//thermal_conductivity - a multipler on the heat transfer rate. See OPEN_HEAT_TRANSFER_COEFFICIENT and friends
+//thermal_conductivity - a multiplier on the heat transfer rate. See OPEN_HEAT_TRANSFER_COEFFICIENT and friends
 /proc/get_thermal_radiation(var/surface_temperature, var/surface, var/exposed_surface_ratio, var/thermal_conductivity)
 	//*** Gain heat from sunlight, then lose heat from radiation.
 
@@ -239,5 +239,5 @@
 
 	// Previously, the temperature would enter equilibrium at 26C or 294K.
 	// Only would happen if both sides (all 2 square meters of surface area) were exposed to sunlight.  We now assume it aligned edge on.
-	// It currently should stabilise at 129.6K or -143.6C
+	// It currently should stabilize at 129.6K or -143.6C
 	. -= surface * STEFAN_BOLTZMANN_CONSTANT * thermal_conductivity * (surface_temperature - COSMIC_RADIATION_TEMPERATURE) ** 4

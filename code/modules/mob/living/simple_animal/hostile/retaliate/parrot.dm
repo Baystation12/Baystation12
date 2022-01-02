@@ -27,7 +27,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/parrot
 	name = "parrot"
-	desc = "A large, colourful tropical bird native to Earth, known for its strong beak and ability to mimic speech."
+	desc = "A large, colorful tropical bird native to Earth, known for its strong beak and ability to mimic speech."
 	icon = 'icons/mob/simple_animal/parrot.dmi'
 	icon_state = "parrot_fly"
 	icon_living = "parrot_fly"

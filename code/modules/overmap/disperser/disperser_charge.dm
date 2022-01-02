@@ -12,7 +12,7 @@
 /obj/structure/ship_munition/disperser_charge/fire
 	name = "FR1-ENFER charge"
 	color = "#b95a00"
-	desc = "A charge to power the obstruction field disperser with. It looks impossibly round and shiny. This charge is designed to release a localised fire on impact."
+	desc = "A charge to power the obstruction field disperser with. It looks impossibly round and shiny. This charge is designed to release a localized fire on impact."
 	chargetype = OVERMAP_WEAKNESS_FIRE
 	chargedesc = "ENFER"
 

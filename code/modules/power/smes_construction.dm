@@ -28,14 +28,14 @@
 // 500% Charge Capacity, 40% I/O Capacity. Holds a lot of energy, but charges slowly if not combined with other coils. Ideal for backup storage.
 /obj/item/stock_parts/smes_coil/super_capacity
 	name = "superconductive capacitance coil"
-	desc = "Specialised version of standard superconductive magnetic coil. This one has significantly stronger containment field, allowing for significantly larger power storage. It's IO rating is much lower, however."
+	desc = "Specialized version of standard superconductive magnetic coil. This one has significantly stronger containment field, allowing for significantly larger power storage. It's IO rating is much lower, however."
 	ChargeCapacity = 250 KILOWATTS
 	IOCapacity = 100 KILOWATTS
 
 // 40% Charge Capacity, 500% I/O Capacity. Technically turns SMES into large super capacitor. Ideal for shields.
 /obj/item/stock_parts/smes_coil/super_io
 	name = "superconductive transmission coil"
-	desc = "Specialised version of standard superconductive magnetic coil. While this one won't store almost any power, it rapidly transfers power, making it useful in systems which require large throughput."
+	desc = "Specialized version of standard superconductive magnetic coil. While this one won't store almost any power, it rapidly transfers power, making it useful in systems which require large throughput."
 	ChargeCapacity = 20 KILOWATTS
 	IOCapacity = 1.25 MEGAWATTS
 
@@ -65,7 +65,7 @@
 // SMES itself
 /obj/machinery/power/smes/buildable
 	var/safeties_enabled = 1 	// If 0 modifications can be done without discharging the SMES, at risk of critical failure.
-	var/failing = 0 			// If 1 critical failure has occured and SMES explosion is imminent.
+	var/failing = 0 			// If 1 critical failure has occurred and SMES explosion is imminent.
 	wires = /datum/wires/smes
 	var/grounding = 1			// Cut to quickly discharge, at cost of "minor" electrical issues in output powernet.
 	var/RCon = 1				// Cut to disable AI and remote control.
@@ -111,7 +111,7 @@
 		s.set_up(5, 1, src)
 		s.start()
 		charge -= (output_level_max * CELLRATE)
-		if(powernet && prob(1)) // Small chance of overload occuring since grounding is disabled.
+		if(powernet && prob(1)) // Small chance of overload occurring since grounding is disabled.
 			powernet.apcs_overload(5,10,20)
 
 	..()
@@ -254,7 +254,7 @@
 				spawn(rand(300,600))
 					if(!failing) // Admin can manually set this var back to 0 to stop overload, for use when griffed.
 						update_icon()
-						src.ping("Magnetic containment stabilised.")
+						src.ping("Magnetic containment stabilized.")
 						return
 					src.ping("DANGER! Magnetic containment field failure in 3 ... 2 ... 1 ...")
 					explosion(src.loc,1,2,4,8)

@@ -210,7 +210,7 @@
 
 	var/list/override_limb_types // Used for species that only need to change one or two entries in has_limbs.
 
-	// The basic skin colours this species uses
+	// The basic skin colors this species uses
 	var/list/base_skin_colours
 
 	var/list/genders = list(MALE, FEMALE, PLURAL)
@@ -497,7 +497,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 /datum/species/proc/can_overcome_gravity(var/mob/living/carbon/human/H)
 	return FALSE
 
-// Used for any extra behaviour when falling and to see if a species will fall at all.
+// Used for any extra behavior when falling and to see if a species will fall at all.
 /datum/species/proc/can_fall(var/mob/living/carbon/human/H)
 	return TRUE
 
@@ -509,7 +509,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				return TRUE //Is not possible to swim while pulling big things
 	return FALSE
 
-// Used to override normal fall behaviour. Use only when the species does fall down a level.
+// Used to override normal fall behavior. Use only when the species does fall down a level.
 /datum/species/proc/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
 	return FALSE
 

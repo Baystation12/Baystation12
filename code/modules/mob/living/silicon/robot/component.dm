@@ -178,7 +178,7 @@
 		camera.status = 0
 
 // SELF DIAGNOSIS MODULE
-// Analyses cyborg's modules, providing damage readouts and basic information
+// Analyzes cyborg's modules, providing damage readouts and basic information
 // Uses 1kJ burst when analysis is done
 /datum/robot_component/diagnosis_unit
 	name = "self-diagnosis unit"

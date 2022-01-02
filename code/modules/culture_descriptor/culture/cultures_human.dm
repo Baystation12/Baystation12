@@ -20,7 +20,7 @@
 	name = CULTURE_HUMAN_MARTIAN
 	description = "You are from the surface of Mars. Raised in one of the many farming communities or one of the great cities such as Olympus. Most of the surfacers \
 	are known as Monsians, the largest cultural group on the planet. Most Surfacers have had a decent upbringing and represent the \
-	average level of comfort expected in Sol space. Most surfacers are like many across the galaxy, though a few harbour rivalries with other Martian cultural \
+	average level of comfort expected in Sol space. Most surfacers are like many across the galaxy, though a few harbor rivalries with other Martian cultural \
 	groups or are generally overly proud of their heritage, as is the case with the Gideons, to the point that they constantly refer to it."
 	economic_power = 1
 
@@ -29,7 +29,7 @@
 	description = "You are one of the people of the UnderCities of Mars. The UnderCities, originally built as 'temporary' living space while the cities above them \
 	were constructed, have since grown far beyond their original scope and have now spread out underneath the red planet. Tunnellers, despite typically having access \
 	to the same amenities and services as Surfacers are somewhat poorer than their aboveground brethren as a result of their less desirable locale as well as a strong \
-	criminal presence stemming from centuries of poor policing and a focus on the surface by the martian government. Most Tunnellers are resilient, though distrusting \
+	criminal presence stemming from centuries of poor policing and a focus on the surface by the Martian government. Most Tunnellers are resilient, though distrusting \
 	and wary of outsiders, and tend to strongly dislike non-Martians."
 	economic_power = 0.9
 
@@ -64,7 +64,7 @@
 	description = "You are from the surface of Venus, one of many employed in mining, industry and services industries. Venusian Surfacers are fairly poor, especially compared to Zoners and \
 	have far lower standards of living than those above. A hardy people who spend much of their time working in mostly unpleasant conditions in order to prop up the society above, \
 	surfacers are a people who value hard work, solidarity, unity and democracy. Unfortunately, while they support noble ideals, the reality of their situation does not always \
-	match them, and much of the surface of Venus finds itself rife with organised crime, separatist groups and other criminal organisations."
+	match them, and much of the surface of Venus finds itself rife with organized crime, separatist groups and other criminal organizations."
 	economic_power = 0.9
 
 /decl/cultural_info/culture/human/belter
@@ -80,7 +80,7 @@
 /decl/cultural_info/culture/human/plutonian
 	name = CULTURE_HUMAN_PLUTO
 	description = "You are from Pluto, one of many denizens of this cruel and unforgiving world. For centuries Pluto has been in a slow state of decay and decline, resulting in \
-	much of the planet's infrastructure being unstable or outright falling apart. This, coupled with rampant corruption and the large influence of criminal organisations across much of \
+	much of the planet's infrastructure being unstable or outright falling apart. This, coupled with rampant corruption and the large influence of criminal organizations across much of \
 	the planet has led to the people of Pluto having something of a seedy reputation, its citizens being viewed with disrepute. The people themselves, however, are usually \
 	just happy to get off the rock and to healthier locales. Unfortunately, despite the efforts of the wider SCG, many Plutonians tend to maintain criminal ties, even offworld."
 	economic_power = 0.8

@@ -170,7 +170,7 @@
 	var/obj/effect/meteor/M = target.resolve()
 	if(!istype(M))
 		return
-	//We throw a laser but it doesnt have to hit for meteor to explode
+	//We throw a laser but it doesn't have to hit for meteor to explode
 	var/obj/item/projectile/beam/pointdefense/beam = new (get_turf(src))
 	playsound(src, 'sound/effects/heavy_cannon_blast.ogg', 75, 1)
 	use_power_oneoff(idle_power_usage * 10)

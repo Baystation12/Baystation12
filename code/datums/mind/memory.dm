@@ -81,7 +81,7 @@
 	var/list/tags
 	var/weakref/owner
 	var/_owner_name
-	var/_owner_ckey   // The ckey of the original creator. Shouldn't be overriden once set
+	var/_owner_ckey   // The ckey of the original creator. Shouldn't be overridden once set
 
 /datum/memory/New(var/decl/memory_options/creation_source, var/weakref/owner, var/memory, var/tags)
 	..()

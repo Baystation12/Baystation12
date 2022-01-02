@@ -211,7 +211,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 		..()
 
 /obj/item/reagent_containers/ecig_cartridge
-	name = "tobacco flavour cartridge"
+	name = "tobacco flavor cartridge"
 	desc = "A small metal cartridge, used with electronic cigarettes, which contains an atomizing coil and a solution to be atomized."
 	w_class = ITEM_SIZE_TINY
 	icon = 'icons/obj/ecig.dmi'
@@ -238,7 +238,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 	reagents.add_reagent(/datum/reagent/water, 10)
 
 /obj/item/reagent_containers/ecig_cartridge/med_nicotine
-	name = "tobacco flavour cartridge"
+	name = "tobacco flavor cartridge"
 	desc =  "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says its tobacco flavored."
 /obj/item/reagent_containers/ecig_cartridge/med_nicotine/New()
 	..()
@@ -246,7 +246,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 	reagents.add_reagent(/datum/reagent/water, 15)
 
 /obj/item/reagent_containers/ecig_cartridge/high_nicotine
-	name = "high nicotine tobacco flavour cartridge"
+	name = "high nicotine tobacco flavor cartridge"
 	desc = "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says its tobacco flavored, with extra nicotine."
 /obj/item/reagent_containers/ecig_cartridge/high_nicotine/New()
 	..()
@@ -254,7 +254,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 	reagents.add_reagent(/datum/reagent/water, 10)
 
 /obj/item/reagent_containers/ecig_cartridge/orange
-	name = "orange flavour cartridge"
+	name = "orange flavor cartridge"
 	desc = "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says its orange flavored."
 /obj/item/reagent_containers/ecig_cartridge/orange/New()
 	..()
@@ -263,7 +263,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 	reagents.add_reagent(/datum/reagent/drink/juice/orange, 5)
 
 /obj/item/reagent_containers/ecig_cartridge/mint
-	name = "mint flavour cartridge"
+	name = "mint flavor cartridge"
 	desc = "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says its mint flavored."
 /obj/item/reagent_containers/ecig_cartridge/mint/New()
 	..()
@@ -272,7 +272,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 	reagents.add_reagent(/datum/reagent/menthol, 5)
 
 /obj/item/reagent_containers/ecig_cartridge/watermelon
-	name = "watermelon flavour cartridge"
+	name = "watermelon flavor cartridge"
 	desc = "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says its watermelon flavored."
 /obj/item/reagent_containers/ecig_cartridge/watermelon/New()
 	..()
@@ -281,7 +281,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 	reagents.add_reagent(/datum/reagent/drink/juice/watermelon, 5)
 
 /obj/item/reagent_containers/ecig_cartridge/grape
-	name = "grape flavour cartridge"
+	name = "grape flavor cartridge"
 	desc = "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says its grape flavored."
 /obj/item/reagent_containers/ecig_cartridge/grape/New()
 	..()
@@ -290,7 +290,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 	reagents.add_reagent(/datum/reagent/drink/juice/grape, 5)
 
 /obj/item/reagent_containers/ecig_cartridge/lemonlime
-	name = "lemon-lime flavour cartridge"
+	name = "lemon-lime flavor cartridge"
 	desc = "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says its lemon-lime flavored."
 /obj/item/reagent_containers/ecig_cartridge/lemonlime/New()
 	..()
@@ -299,7 +299,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 	reagents.add_reagent(/datum/reagent/drink/lemon_lime, 5)
 
 /obj/item/reagent_containers/ecig_cartridge/coffee
-	name = "coffee flavour cartridge"
+	name = "coffee flavor cartridge"
 	desc = "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says its coffee flavored."
 /obj/item/reagent_containers/ecig_cartridge/coffee/New()
 	..()

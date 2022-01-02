@@ -76,7 +76,7 @@
 	user.machine = nano_host()
 	user.reset_view(current_camera)
 
-// Intended to be overriden by subtypes to manually add non-station networks to the list.
+// Intended to be overridden by subtypes to manually add non-station networks to the list.
 /datum/nano_module/camera_monitor/proc/modify_networks_list(var/list/networks)
 	return networks
 

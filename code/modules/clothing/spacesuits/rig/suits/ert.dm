@@ -50,7 +50,7 @@
 
 /obj/item/rig/ert/engineer
 	name = "emergency response engineering hardsuit control module"
-	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has orange highlights. Armoured and space ready."
+	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has orange highlights. Armored and space ready."
 	suit_type = "emergency response engineer"
 	icon_state = "ert_engineer_rig"
 
@@ -69,7 +69,7 @@
 
 /obj/item/rig/ert/janitor
 	name = "emergency response sanitation hardsuit control module"
-	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has purple highlights. Armoured and space ready."
+	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has purple highlights. Armored and space ready."
 	suit_type = "emergency response sanitation"
 	icon_state = "ert_janitor_rig"
 
@@ -84,7 +84,7 @@
 
 /obj/item/rig/ert/medical
 	name = "emergency response medical hardsuit control module"
-	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has white highlights. Armoured and space ready."
+	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has white highlights. Armored and space ready."
 	suit_type = "emergency response medic"
 	icon_state = "ert_medical_rig"
 

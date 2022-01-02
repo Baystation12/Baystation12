@@ -69,7 +69,7 @@
 				" due to [pick("heart failure","kidney failure","liver failure","brain hemorrhage")]")]"
 
 			if(BARGAINS)
-				body += "BARGAINS! BARGAINS! BARGAINS! Commerce Control on [affected_dest.name] wants you to know that everything must go! Across all retail centres, \
+				body += "BARGAINS! BARGAINS! BARGAINS! Commerce Control on [affected_dest.name] wants you to know that everything must go! Across all retail centers, \
 				all goods are being slashed, and all retailors are onboard - so come on over for the \[shopping\] time of your life."
 
 			if(SONG_DEBUT)
@@ -115,8 +115,8 @@
 					[random_name(pick(MALE,FEMALE))] at [pick("a society ball","a new opening","a launch","a club")] on [affected_dest.name] yesterday, pundits are shocked."
 				else
 					body += "is recovering from plastic surgery in a clinic on [affected_dest.name] for the [pick("second","third","fourth")] time, reportedly having made the decision in response to "
-					body += "[pick("unkind comments by an ex","rumours started by jealous friends",\
-					"the decision to be dropped by a major sponsor","a disasterous interview on Nyx Tonight")]."
+					body += "[pick("unkind comments by an ex","rumors started by jealous friends",\
+					"the decision to be dropped by a major sponsor","a disastrous interview on Nyx Tonight")]."
 			if(TOURISM)
 				body += "Tourists are flocking to [affected_dest.name] after the surprise announcement of [pick("major shopping bargains by a wily retailer",\
 				"a huge new ARG by a popular entertainment company","a secret tour by popular artiste [random_name(pick(MALE,FEMALE))]")]. \
@@ -149,14 +149,14 @@
 	"Question mark worshipped as deity by ancient [affected_dest.name] dwellers.",\
 	"Spilled milk causes whole [affected_dest.name] populace to cry.",\
 	"World largest carp patty at display on [affected_dest.name].",\
-	"Man travels 7000 light years to retrieve lost hankie, 'It was my favourite'.",\
+	"Man travels 7000 light years to retrieve lost hankie, 'It was my favorite'.",\
 	"New bowling lane that shoots mini-meteors at bowlers very popular.",\
 	"[pick(SPECIES_UNATHI,"Spacer")] gets tattoo of Nyx on chest '[pick("[GLOB.using_map.boss_short]","star","starship","asteroid")] tickles most'.",\
 	"Skrell marries computer; wedding attended by 100 modems.",\
 	"Chef reports successfully using harmonica as cheese grater.",\
 	"[GLOB.using_map.company_name] invents handkerchief that says 'Bless you' after sneeze.",\
-	"Clone accused of posing for other clones's school photo.",\
-	"Clone accused of stealing other clones's employee of the month award.",\
+	"Clone accused of posing for other clone's school photo.",\
+	"Clone accused of stealing other clone's employee of the month award.",\
 	"Woman robs [station_name()] with hair dryer; crewmen love new style.",\
 	"This space for rent.",\
 	"[affected_dest.name] Baker Wins Pickled Crumpet Toss Three Years Running",\

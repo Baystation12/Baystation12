@@ -20,7 +20,7 @@
 
 	return TRUE
 
-//This can be overriden in case a game mode needs to do stuff when a player latejoins
+//This can be overridden in case a game mode needs to do stuff when a player latejoins
 /datum/game_mode/proc/handle_latejoin(var/mob/living/carbon/human/character)
 	if(character.mind)
 		character.mind.generate_goals(character.mind.assigned_job, is_spawning=TRUE)

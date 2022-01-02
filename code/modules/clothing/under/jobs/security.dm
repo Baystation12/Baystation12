@@ -160,7 +160,7 @@
 	siemens_coefficient = 0.8
 
 /obj/item/clothing/head/HoS/dermal
-	name = "Dermal Armour Patch"
+	name = "Dermal Armor Patch"
 	desc = "You're not quite sure how you manage to take it on and off, but it implants nicely in your head."
 	icon_state = "dermal"
 	armor = list(

@@ -90,7 +90,7 @@
 /obj/item/organ/internal/stomach/return_air()
 	return null
 
-// This call needs to be split out to make sure that all the ingested things are metabolised
+// This call needs to be split out to make sure that all the ingested things are metabolized
 // before the process call is made on any of the other organs
 /obj/item/organ/internal/stomach/proc/metabolize()
 	if(is_usable())

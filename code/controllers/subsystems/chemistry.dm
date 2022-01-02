@@ -18,7 +18,7 @@ SUBSYSTEM_DEF(chemistry)
 /datum/controller/subsystem/chemistry/Initialize()
 
 	// Init reaction list.
-	//Chemical Reactions - Initialises all /datum/chemical_reaction into a list
+	//Chemical Reactions - Initializes all /datum/chemical_reaction into a list
 	// It is filtered into multiple lists within a list.
 	// For example:
 	// chemical_reaction_list["phoron"] is a list of all reactions relating to phoron

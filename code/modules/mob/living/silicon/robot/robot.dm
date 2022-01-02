@@ -329,7 +329,7 @@
 	if(!custom_sprite) //Check for custom sprite
 		set_custom_sprite()
 
-	//Flavour text.
+	//Flavor text.
 	if(client)
 		var/module_flavour = client.prefs.flavour_texts_robot[modtype]
 		if(module_flavour)
@@ -1047,7 +1047,7 @@
 
 	if(opened) //Cover is open
 		if(emagged)
-			return //Prevents the X has hit Y with Z message also you cant emag them twice
+			return //Prevents the X has hit Y with Z message also you can't emag them twice
 		if(wiresexposed)
 			to_chat(user, "You must close the panel first")
 			return
@@ -1074,7 +1074,7 @@
 					sleep(20)
 					to_chat(src, "<span class='danger'>SynBorg v1.7.1 loaded.</span>")
 					sleep(5)
-					to_chat(src, "<span class='danger'>LAW SYNCHRONISATION ERROR</span>")
+					to_chat(src, "<span class='danger'>LAW SYNCHRONIZATION ERROR</span>")
 					sleep(5)
 					to_chat(src, "<span class='danger'>Would you like to send a report to NanoTraSoft? Y/N</span>")
 					sleep(10)

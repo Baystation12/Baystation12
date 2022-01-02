@@ -56,8 +56,8 @@
 	var/harm_action = "harm intent"
 
 /*
-	These procs shouldn't be overriden in the children unless you know what you're doing with them; they handle important core functions.
-	Even if you do override them, you should likely be using ..() if you want the behaviour to function properly. That is, of course,
+	These procs shouldn't be overridden in the children unless you know what you're doing with them; they handle important core functions.
+	Even if you do override them, you should likely be using ..() if you want the behavior to function properly. That is, of course,
 	unless you're writing your own custom handling of things.
 */
 
@@ -68,7 +68,7 @@
 	if(downgrab_name)
 		downgrab = all_grabstates[downgrab_name]
 
-// This is for the strings defined as datum variables. It takes them and swaps out keywords for relevent ones from the grab
+// This is for the strings defined as datum variables. It takes them and swaps out keywords for relevant ones from the grab
 // object involved.
 /datum/grab/proc/string_process(var/obj/item/grab/G, var/to_write, var/obj/item/used_item)
 	to_write = replacetext(to_write, "rep_affecting", G.affecting)
@@ -209,7 +209,7 @@
 
 /*
 	Override these procs to set how the grab state will work. Some of them are best
-	overriden in the parent of the grab set (for example, the behaviour for on_hit_intent(var/obj/item/grab/G)
+	overridden in the parent of the grab set (for example, the behavior for on_hit_intent(var/obj/item/grab/G)
 	procs is determined in /datum/grab/normal and then inherited by each intent).
 */
 

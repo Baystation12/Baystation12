@@ -53,7 +53,7 @@
 
 /obj/item/clothing/suit/storage/toggle/labcoat/xyn_machine
 	name = "\improper Xynergy labcoat"
-	desc = "A stiffened, stylised labcoat designed to fit IPCs. It has blue and purple trim, denoting it as a Xynergy labcoat."
+	desc = "A stiffened, stylized labcoat designed to fit IPCs. It has blue and purple trim, denoting it as a Xynergy labcoat."
 	icon_state = "labcoat_xy"
 	armor = list(
 		melee = ARMOR_MELEE_MINOR,
@@ -63,12 +63,12 @@
 
 /obj/item/clothing/suit/storage/toggle/labcoat/foundation
 	name = "\improper Foundation labcoat"
-	desc = "A medical labcoat with a Cuchulain Foundation crest stencilled on the back."
+	desc = "A medical labcoat with a Cuchulain Foundation crest stenciled on the back."
 	icon_state = "labcoat_foundation"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science
 	name = "\improper EXO labcoat"
-	desc = "A coat that protects against minor chemical spills. It has a green stripe on the shoulder and green trim on the sleeves, denoting it as a Expeditionary Corps Organisation labcoat."
+	desc = "A coat that protects against minor chemical spills. It has a green stripe on the shoulder and green trim on the sleeves, denoting it as a Expeditionary Corps Organization labcoat."
 	icon_state = "labcoat_TL"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science/ec
@@ -98,7 +98,7 @@
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science/xynergy
 	name = "\improper Xynergy labcoat"
-	desc = "A suit that protects against minor chemical spills. It is coloured magenta and cyan, as well as sporting the Xynergy logo, denoting it as a Xynergy labcoat."
+	desc = "A suit that protects against minor chemical spills. It is colored magenta and cyan, as well as sporting the Xynergy logo, denoting it as a Xynergy labcoat."
 	icon_state = "labcoat_xynergy"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science/dais
@@ -113,7 +113,7 @@
 
 /obj/item/clothing/suit/storage/toggle/labcoat/rd
 	name = "research director's labcoat"
-	desc = "A full-body labcoat covered in green and black designs, denoting it as an Expeditionary Corps Organisation management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
+	desc = "A full-body labcoat covered in green and black designs, denoting it as an Expeditionary Corps Organization management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
 	icon_state = "labcoat_rd"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 

@@ -335,7 +335,7 @@
 			to_chat(user, "<span class='notice'>You need to take the lid off first.</span>")
 			return
 		var/transfered = glass.reagents.trans_to_obj(src, chem_volume)
-		if(transfered)	//if reagents were transfered, show the message
+		if(transfered)	//if reagents were transferred, show the message
 			to_chat(user, "<span class='notice'>You dip \the [src] into \the [glass].</span>")
 		else			//if not, either the beaker was empty, or the cigarette was full
 			if(!glass.reagents.total_volume)

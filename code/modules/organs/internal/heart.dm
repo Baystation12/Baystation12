@@ -92,7 +92,7 @@
 	if(pulse && fibrillation)	//I SAID MOAR OXYGEN
 		pulse = PULSE_THREADY
 
-	// Stablising chemicals pull the heartbeat towards the center
+	// Stabilizing chemicals pull the heartbeat towards the center
 	if(pulse != PULSE_NORM && is_stable)
 		if(pulse > PULSE_NORM)
 			pulse--

@@ -114,7 +114,7 @@
 			var/mob/observer/ghost/observer = new()
 
 			spawning = 1
-			sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// MAD JAMS cant last forever yo
+			sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// MAD JAMS can't last forever yo
 
 
 			observer.started_as_observer = 1
@@ -369,7 +369,7 @@
 
 	client.prefs.copy_to(new_character)
 
-	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// MAD JAMS cant last forever yo
+	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// MAD JAMS can't last forever yo
 
 	if(mind)
 		mind.active = 0 //we wish to transfer the key manually

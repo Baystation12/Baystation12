@@ -34,7 +34,7 @@
 				if(71 to 80)
 					armor_strings += "This gives a very robust defense against [armour_to_descriptive_term[armor_type]]."
 				if(81 to 100)
-					armor_strings += "Wearing this would make you nigh-invulerable against [armour_to_descriptive_term[armor_type]]."
+					armor_strings += "Wearing this would make you nigh-invulnerable against [armour_to_descriptive_term[armor_type]]."
 
 	if(item_flags & ITEM_FLAG_AIRTIGHT)
 		armor_strings += "It is airtight."

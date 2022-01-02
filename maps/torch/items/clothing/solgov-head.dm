@@ -19,7 +19,7 @@
 
 /obj/item/clothing/head/soft/solgov/expedition
 	name = "\improper Expeditionary Corps cap"
-	desc = "It's a black ballcap bearing the Expeditonary Corps crest."
+	desc = "It's a black ballcap bearing the Expeditionary Corps crest."
 	icon_state = "expeditionsoft"
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi'
@@ -27,12 +27,12 @@
 
 /obj/item/clothing/head/soft/solgov/expedition/co
 	name = "\improper Expeditionary Corps captain's cap"
-	desc = "It's a black ballcap bearing the Expeditonary Corps crest. The brim has gold trim."
+	desc = "It's a black ballcap bearing the Expeditionary Corps crest. The brim has gold trim."
 	icon_state = "expeditioncomsoft"
 
 /obj/item/clothing/head/soft/solgov/fleet
 	name = "fleet cap"
-	desc = "It's a navy blue field cap with the SCG Fleet crest in a silver colour."
+	desc = "It's a navy blue field cap with the SCG Fleet crest in a silver color."
 	icon_state = "fleetsoft"
 
 /obj/item/clothing/head/solgov/utility

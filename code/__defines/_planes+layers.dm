@@ -10,13 +10,13 @@ What are planes?
 	Planes also have the added bonus of having planesmasters.
 
 What are Planesmasters?
-	Planesmasters, when in the sight of a player, will have its appearance properties (for example, colour matrices, alpha, transform, etc)
+	Planesmasters, when in the sight of a player, will have its appearance properties (for example, color matrices, alpha, transform, etc.)
 	applied to all the other objects in the plane. This is all client sided.
 	Usually you would want to add the planesmaster as an invisible image in the client's screen.
 
 What can I do with Planesmasters?
 	You can: Make certain players not see an entire plane,
-	Make an entire plane have a certain colour matrices,
+	Make an entire plane have a certain color matrices,
 	Make an entire plane transform in a certain way,
 	Make players see a plane which is hidden to normal players - I intend to implement this with the antag HUDs for example.
 	Planesmasters can be used as a neater way to deal with client images or potentially to do some neat things

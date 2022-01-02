@@ -302,7 +302,7 @@
 	return success
 /*
 	We want to ensure that a mob may only apply pressure to one organ of one mob at any given time. Currently this is done mostly implicitly through
-	the behaviour of do_after() and the fact that applying pressure to someone else requires a grab:
+	the behavior of do_after() and the fact that applying pressure to someone else requires a grab:
 
 	If you are applying pressure to yourself and attempt to grab someone else, you'll change what you are holding in your active hand which will stop do_after()
 	If you are applying pressure to another and attempt to apply pressure to yourself, you'll have to switch to an empty hand which will also stop do_after()

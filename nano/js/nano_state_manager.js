@@ -98,7 +98,7 @@ NanoStateManager = function ()
 		if (data === false)
 		{
             alert('data is false, return');
-			return; // A beforeUpdateCallback returned a false value, this prevents the render from occuring
+			return; // A beforeUpdateCallback returned a false value, this prevents the render from occurring
 		}
 		
 		_data = data;

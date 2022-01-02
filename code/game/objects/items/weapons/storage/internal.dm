@@ -25,7 +25,7 @@
 //If you are using these you will probably want to override attackby() as well.
 //See /obj/item/clothing/suit/storage for an example.
 
-//items that use internal storage have the option of calling this to emulate default storage MouseDrop behaviour.
+//items that use internal storage have the option of calling this to emulate default storage MouseDrop behavior.
 //returns 1 if the master item's parent's MouseDrop() should be called, 0 otherwise. It's strange, but no other way of
 //doing it without the ability to call another proc's parent, really.
 /obj/item/storage/internal/proc/handle_mousedrop(mob/user as mob, obj/over_object as obj)
@@ -56,7 +56,7 @@
 			return 0
 	return 0
 
-//items that use internal storage have the option of calling this to emulate default storage attack_hand behaviour.
+//items that use internal storage have the option of calling this to emulate default storage attack_hand behavior.
 //returns 1 if the master item's parent's attack_hand() should be called, 0 otherwise.
 //It's strange, but no other way of doing it without the ability to call another proc's parent, really.
 /obj/item/storage/internal/proc/handle_attack_hand(mob/user as mob)

@@ -280,7 +280,7 @@ var/list/organ_cache = list()
 	START_PROCESSING(SSobj, src)
 	rejecting = null
 	if(!BP_IS_ROBOTIC(src))
-		var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list //TODO fix this and all other occurences of locate(/datum/reagent/blood) horror
+		var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list //TODO fix this and all other occurrences of locate(/datum/reagent/blood) horror
 		if(!organ_blood || !organ_blood.data["blood_DNA"])
 			owner.vessel.trans_to(src, 5, 1, 1)
 

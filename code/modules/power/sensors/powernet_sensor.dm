@@ -129,7 +129,7 @@
 
 // Proc: return_reading_data()
 // Parameters: None
-// Description: Generates list containing all powernet data. Optimised for usage with NanoUI
+// Description: Generates list containing all powernet data. Optimized for usage with NanoUI
 /obj/machinery/power/sensor/proc/return_reading_data()
 	// No powernet. Try to connect to one first.
 	if(!powernet)

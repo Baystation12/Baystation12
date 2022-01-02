@@ -81,7 +81,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		matter[MATERIAL_STEEL] = w_class * SScircuit.cost_multiplier // Default cost.
 	. = ..()
 
-/obj/item/integrated_circuit/proc/on_data_written() //Override this for special behaviour when new data gets pushed to the circuit.
+/obj/item/integrated_circuit/proc/on_data_written() //Override this for special behavior when new data gets pushed to the circuit.
 	return
 
 /obj/item/integrated_circuit/Destroy()
@@ -320,7 +320,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	if(assembly)
 		return assembly.draw_power(power_draw_idle)
 
-// Override this for special behaviour when there's no power left.
+// Override this for special behavior when there's no power left.
 /obj/item/integrated_circuit/proc/power_fail()
 	return
 
@@ -333,7 +333,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	return FALSE // Not enough power.
 
 /obj/item/integrated_circuit/proc/check_then_do_work(ord,var/ignore_power = FALSE)
-	if(world.time < next_use) 	// All intergrated circuits have an internal cooldown, to protect from spam.
+	if(world.time < next_use) 	// All integrated circuits have an internal cooldown, to protect from spam.
 		return FALSE
 	if(assembly && ext_cooldown && (world.time < assembly.ext_next_use)) 	// Some circuits have external cooldown, to protect from spam.
 		return FALSE

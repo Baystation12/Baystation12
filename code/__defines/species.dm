@@ -23,11 +23,11 @@
 
 // Species appearance flags
 #define HAS_SKIN_TONE_NORMAL     FLAG(0)  // Skin tone selectable in chargen for baseline humans (0-220)
-#define HAS_SKIN_COLOR           FLAG(1)  // Skin colour selectable in chargen. (RGB)
+#define HAS_SKIN_COLOR           FLAG(1)  // Skin color selectable in chargen. (RGB)
 #define HAS_LIPS                 FLAG(2)  // Lips are drawn onto the mob icon. (lipstick)
 #define HAS_UNDERWEAR            FLAG(3)  // Underwear is drawn onto the mob icon.
-#define HAS_EYE_COLOR            FLAG(4)  // Eye colour selectable in chargen. (RGB)
-#define HAS_HAIR_COLOR           FLAG(5)  // Hair colour selectable in chargen. (RGB)
+#define HAS_EYE_COLOR            FLAG(4)  // Eye color selectable in chargen. (RGB)
+#define HAS_HAIR_COLOR           FLAG(5)  // Hair color selectable in chargen. (RGB)
 #define RADIATION_GLOWS          FLAG(6)  // Radiation causes this character to glow.
 #define HAS_SKIN_TONE_GRAV       FLAG(7)  // Skin tone selectable in chargen for grav-adapted humans (0-100)
 #define HAS_SKIN_TONE_SPCR       FLAG(8)  // Skin tone selectable in chargen for spacer humans (0-165)

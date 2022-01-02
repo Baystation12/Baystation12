@@ -58,7 +58,7 @@
 	is_hacking = 0
 
 	if(hack_result && in_hack_mode)
-		to_chat(user, "<span class='notice'>Your hacking attempt was succesful!</span>")
+		to_chat(user, "<span class='notice'>Your hacking attempt was successful!</span>")
 		user.playsound_local(get_turf(src), 'sound/piano/A#6.ogg', 50)
 		known_targets.Insert(1, target)	// Insert the newly hacked target first,
 		GLOB.destroyed_event.register(target, src, /obj/item/device/multitool/hacktool/proc/on_target_destroy)

@@ -24,9 +24,9 @@
 		R.SetName("Steps to success: Correct EFTPOS Usage")
 		/*
 		R.info += "<b>When first setting up your EFTPOS device:</b>"
-		R.info += "1. Memorise your EFTPOS command code (provided with all EFTPOS devices).<br>"
+		R.info += "1. Memorize your EFTPOS command code (provided with all EFTPOS devices).<br>"
 		R.info += "2. Confirm that your EFTPOS device is connected to your local accounts database. For additional assistance with this step, contact NanoTrasen IT Support<br>"
-		R.info += "3. Confirm that your EFTPOS device has been linked to the account that you wish to recieve funds for all transactions processed on this device.<br>"
+		R.info += "3. Confirm that your EFTPOS device has been linked to the account that you wish to receive funds for all transactions processed on this device.<br>"
 		R.info += "<b>When starting a new transaction with your EFTPOS device:</b>"
 		R.info += "1. Ensure the device is UNLOCKED so that new data may be entered.<br>"
 		R.info += "2. Enter a sum of money and reference message for the new transaction.<br>"
@@ -37,7 +37,7 @@
 		*/
 		//Temptative new manual:
 		R.info += "<b>First EFTPOS setup:</b><br>"
-		R.info += "1. Memorise your EFTPOS command code (provided with all EFTPOS devices).<br>"
+		R.info += "1. Memorize your EFTPOS command code (provided with all EFTPOS devices).<br>"
 		R.info += "2. Connect the EFTPOS to the account in which you want to receive the funds.<br><br>"
 		R.info += "<b>When starting a new transaction:</b><br>"
 		R.info += "1. Enter the amount of money you want to charge and a purpose message for the new transaction.<br>"

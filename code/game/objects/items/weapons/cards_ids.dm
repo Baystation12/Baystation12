@@ -371,7 +371,7 @@ var/const/NO_EMAG_ACT = -50
 
 /obj/item/card/id/silver
 	name = "identification card"
-	desc = "A silver card which shows honour and dedication."
+	desc = "A silver card which shows honor and dedication."
 	item_state = "silver_id"
 	job_access_type = /datum/job/hop
 

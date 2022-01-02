@@ -34,7 +34,7 @@
 		src.emote("roars in rage!")
 
 /mob/living/simple_animal/hostile/commanded/bear/listen()
-	if(stance != COMMANDED_MISC) //cant listen if its booty shakin'
+	if(stance != COMMANDED_MISC) //can't listen if its booty shakin'
 		..()
 
 //WE DANCE!

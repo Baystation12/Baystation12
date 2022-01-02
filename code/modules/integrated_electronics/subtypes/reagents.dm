@@ -191,7 +191,7 @@
 			if(!injection_status)
 				activate_pin(3)
 				return
-			//Always log attemped injections for admins
+			//Always log attempted injections for admins
 			log_admin("[key_name(L)] is getting injected with " + reagents.get_reagents() + " by \the [acting_object]")
 			L.visible_message("<span class='danger'>\The [acting_object] is trying to inject [L]!</span>", \
 								"<span class='danger'>\The [acting_object] is trying to inject you!</span>")
@@ -624,7 +624,7 @@
 	name = "reagent heater"
 	desc = "A small reagent container capable of heating reagents. It can hold up to 30u."
 	icon_state = "reagent_heater"
-	extended_desc = "This is effectively an internal beaker. It has a heating coil wrapped around it, which allows it to heat the contents of the beaker. Temperature is given in celsius."
+	extended_desc = "This is effectively an internal beaker. It has a heating coil wrapped around it, which allows it to heat the contents of the beaker. Temperature is given in Celsius."
 
 	spawn_flags = IC_SPAWN_RESEARCH
 
@@ -632,7 +632,7 @@
 	name = "reagent cooler"
 	desc = "A small reagent container capable of cooling reagents. It can hold up to 30u."
 	icon_state = "reagent_cooler"
-	extended_desc = "This is effectively an internal beaker. It has a cooling mechanism wrapped around it, which allows it to cool the contents of the beaker. Temperature is given in celsius."
+	extended_desc = "This is effectively an internal beaker. It has a cooling mechanism wrapped around it, which allows it to cool the contents of the beaker. Temperature is given in Celsius."
 
 	spawn_flags = IC_SPAWN_RESEARCH
 

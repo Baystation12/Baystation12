@@ -2,7 +2,7 @@
 	MouseDrop:
 
 	Called on the atom you're dragging.  In a lot of circumstances we want to use the
-	recieving object instead, so that's the default action.  This allows you to drag
+	receiving object instead, so that's the default action.  This allows you to drag
 	almost anything into a trash can.
 */
 

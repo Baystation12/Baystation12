@@ -1,5 +1,5 @@
 //** Shield Helpers
-//These are shared by various items that have shield-like behaviour
+//These are shared by various items that have shield-like behavior
 
 //bad_arc is the ABSOLUTE arc of directions from which we cannot block. If you want to fix it to e.g. the user's facing you will need to rotate the dirs yourself.
 /proc/check_shield_arc(mob/user, var/bad_arc, atom/damage_source = null, mob/attacker = null)

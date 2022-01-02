@@ -81,7 +81,7 @@
 
 // Mechs are handled in their attackby (mech_interaction.dm).
 /obj/item/device/kit/paint
-	name = "exosuit customisation kit"
+	name = "exosuit customization kit"
 	desc = "A kit containing all the needed tools and parts to repaint a exosuit."
 	var/removable = null
 
@@ -94,19 +94,19 @@
 	playsound(get_turf(user), 'sound/items/Screwdriver.ogg', 50, 1)
 	
 /obj/item/device/kit/paint/flames_red
-	name = "\"Firestarter\" exosuit customisation kit"
+	name = "\"Firestarter\" exosuit customization kit"
 	new_icon = "flames_red"
 
 /obj/item/device/kit/paint/flames_blue
-	name = "\"Burning Chrome\" exosuit customisation kit"
+	name = "\"Burning Chrome\" exosuit customization kit"
 	new_icon = "flames_blue"
 
 /obj/item/device/kit/paint/camouflage
-	name = "\"Guerilla\" exosuit customisation kit"
+	name = "\"Guerilla\" exosuit customization kit"
 	desc = "The exact same pattern the 76th Armored Gauntlet used in the Gaia war, now available for general use."
 	new_icon = "cammo1"
 
 /obj/item/device/kit/paint/camouflage/forest
-	name = "\"Alpine\" exosuit customisation kit"
+	name = "\"Alpine\" exosuit customization kit"
 	new_icon = "cammo2"
 	desc = "A muted pattern for alpine environments. Don't miss the forest for the trees!"

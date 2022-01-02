@@ -95,7 +95,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/lobby_tracks = list()                  // The list of lobby tracks to pick() from. If left unset will randomly select among all available decl/audio/track subtypes.
 	var/welcome_sound = 'sound/AI/welcome.ogg'		// Sound played on roundstart
 
-	var/default_law_type = /datum/ai_laws/nanotrasen  // The default lawset use by synth units, if not overriden by their laws var.
+	var/default_law_type = /datum/ai_laws/nanotrasen  // The default lawset use by synth units, if not overridden by their laws var.
 	var/security_state = /decl/security_state/default // The default security state system to use.
 
 	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
@@ -467,10 +467,10 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	return "No map information available"
 
 /datum/map/proc/bolt_saferooms()
-	return // overriden by torch
+	return // overridden by torch
 
 /datum/map/proc/unbolt_saferooms()
-	return // overriden by torch
+	return // overridden by torch
 
 /datum/map/proc/make_maint_all_access(var/radstorm = 0) // parameter used by torch
 	maint_all_access = 1

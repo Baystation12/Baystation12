@@ -20,7 +20,7 @@ GLOBAL_DATUM_INIT(cinematic, /datum/cinematic, new)
 	if(!override)
 		return
 
-	//initialise our cinematic screen object
+	//initialize our cinematic screen object
 	cinematic_screen = new(src)
 	cinematic_screen.icon = 'icons/effects/station_explosion.dmi'
 	cinematic_screen.icon_state = "station_intact"

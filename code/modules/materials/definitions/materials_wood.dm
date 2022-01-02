@@ -58,7 +58,7 @@
 
 /material/wood/ebony
 	name = MATERIAL_EBONY
-	lore_text = "Ebony is the name for a group of dark coloured, extremely dense, and fine grained hardwoods. \
+	lore_text = "Ebony is the name for a group of dark colored, extremely dense, and fine grained hardwoods. \
 				Despite gene modification to produce larger source trees and ample land to plant them on, \
 				genuine ebony remains a luxury for the very wealthy thanks to the price fixing efforts of intergalactic luxuries cartels. \
 				Most people will only ever touch ebony in small items, such as chess pieces, or the accent pieces of a fine musical instrument."
@@ -73,7 +73,7 @@
 /material/wood/walnut
 	name = MATERIAL_WALNUT
 	lore_text = "Walnut is a dense hardwood that polishes to a very fine finish. \
-				Walnut is especially favoured for construction of figurines (where it contrasts with lighter coloured woods) and tables. \
+				Walnut is especially favored for construction of figurines (where it contrasts with lighter colored woods) and tables. \
 				The ultimate aspiration of many professionals is an office with a vintage walnut desk, the bigger and heavier the better."
 	adjective_name = MATERIAL_WALNUT
 	icon_colour = WOOD_COLOR_CHOCOLATE
@@ -93,7 +93,7 @@
 
 /material/wood/yew
 	name = MATERIAL_YEW
-	lore_text = "Although favoured in days past for the construction of bows, yew has a multitude of uses, including medicine. The yew \
+	lore_text = "Although favored in days past for the construction of bows, yew has a multitude of uses, including medicine. The yew \
 				tree can live for nearly a thousand years thanks to its natural disease resistance."
 	adjective_name = MATERIAL_YEW
 	icon_colour = WOOD_COLOR_YELLOW

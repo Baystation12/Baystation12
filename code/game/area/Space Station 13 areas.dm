@@ -34,7 +34,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 	var/debug = 0
 	var/requires_power = 1
-	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
+	var/always_unpowered = 0	//this gets overridden to 1 for space in area/New()
 
 	var/power_equip = 1 // Status
 	var/power_light = 1

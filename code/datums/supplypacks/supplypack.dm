@@ -9,7 +9,7 @@
 	var/access = null
 	var/hidden = 0
 	var/contraband = 0
-	var/num_contained = 0 //number of items picked to be contained in a randomised crate
+	var/num_contained = 0 //number of items picked to be contained in a randomized crate
 	var/supply_method = /decl/supply_method
 	var/decl/security_level/security_level
 

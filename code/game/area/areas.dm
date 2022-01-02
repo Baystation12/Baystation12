@@ -199,7 +199,7 @@
 		else
 			icon_state = "blue-red"
 	else
-	//	new lighting behaviour with obj lights
+	//	new lighting behavior with obj lights
 		icon_state = null
 
 /area/proc/set_lightswitch(var/new_switch)

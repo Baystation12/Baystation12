@@ -27,7 +27,7 @@
 
 /obj/item/gun/projectile/automatic/machine_pistol
 	name = "machine pistol"
-	desc = "The Hephaestus Industries MP6 Vesper, A fairly common machine pistol. Sometimes refered to as an 'uzi' by the backwater spacers it is often associated with."
+	desc = "The Hephaestus Industries MP6 Vesper, A fairly common machine pistol. Sometimes referred to as an 'uzi' by the backwater spacers it is often associated with."
 	icon = 'icons/obj/guns/machine_pistol.dmi'
 	icon_state = "mpistolen"
 	safety_icon = "safety"
@@ -244,7 +244,7 @@
 
 /obj/item/gun/projectile/automatic/l6_saw
 	name = "light machine gun"
-	desc = "A rather traditionally made L6 SAW with a pleasantly lacquered wooden pistol grip. Has 'Aussec Armoury- 2281' engraved on the reciever." //probably should refluff this
+	desc = "A rather traditionally made L6 SAW with a pleasantly lacquered wooden pistol grip. Has 'Aussec Armory- 2281' engraved on the receiver." //probably should refluff this
 	icon = 'icons/obj/guns/saw.dmi'
 	icon_state = "l6closed50"
 	item_state = "l6closedmag"

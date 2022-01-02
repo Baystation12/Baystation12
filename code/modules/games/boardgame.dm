@@ -61,7 +61,7 @@ obj/item/board/attackby(obj/item/I as obj, mob/user as mob)
 
 
 /obj/item/board/interact(mob/user as mob)
-	if(user.is_physically_disabled() || (!isAI(user) && !user.Adjacent(src))) //can't see if you arent conscious. If you are not an AI you can't see it unless you are next to it, either.
+	if(user.is_physically_disabled() || (!isAI(user) && !user.Adjacent(src))) //can't see if you aren't conscious. If you are not an AI you can't see it unless you are next to it, either.
 		close_browser(user, "window=boardgame")
 		user.unset_machine()
 		return
@@ -117,7 +117,7 @@ obj/item/board/attackby(obj/item/I as obj, mob/user as mob)
 					selected = -1 //deselect it
 				else
 
-					if(I) //cant put items on other items.
+					if(I) //can't put items on other items.
 						return
 
 				//put item in new spot.
@@ -200,7 +200,7 @@ obj/item/board/attackby(obj/item/I as obj, mob/user as mob)
 
 /obj/item/reagent_containers/food/snacks/checker/bishop
 	name = "bishop"
-	desc = "What corruption occured, urging holy men to fight?"
+	desc = "What corruption occurred, urging holy men to fight?"
 
 /obj/item/reagent_containers/food/snacks/checker/bishop/red
 	piece_color ="red"

@@ -82,7 +82,7 @@
 
 #define NORMPIPERATE             30   // Pipe-insulation rate divisor.
 #define HEATPIPERATE             8    // Heat-exchange pipe insulation.
-#define FLOWFRAC                 0.99 // Fraction of gas transfered per process.
+#define FLOWFRAC                 0.99 // Fraction of gas transferred per process.
 
 //Flags for zone sleeping
 #define ZONE_ACTIVE   1

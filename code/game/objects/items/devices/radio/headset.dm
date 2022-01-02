@@ -214,7 +214,7 @@
 
 /obj/item/device/radio/headset/heads/ai_integrated/receive_range(freq, level)
 	if (disabledAi)
-		return -1 //Transciever Disabled.
+		return -1 //Transceiver Disabled.
 	return ..(freq, level, 1)
 
 /obj/item/device/radio/headset/heads/rd

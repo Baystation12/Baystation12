@@ -1,6 +1,6 @@
 /*   Unit Tests originally designed by Ccomp5950
  *
- *   Tests are created to prevent changes that would create bugs or change expected behaviour.
+ *   Tests are created to prevent changes that would create bugs or change expected behavior.
  *   For the most part I think any test can be created that doesn't require a client in a mob or require a game mode other then extended
  *
  *   The easiest way to make effective tests is to create a "template" if you intend to run the same test over and over and make your actual
