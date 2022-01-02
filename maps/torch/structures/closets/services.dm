@@ -17,10 +17,13 @@
 	return list(
 		/obj/item/clothing/head/soft/mime,
 		/obj/item/device/radio/headset/headset_service,
-		/obj/item/storage/box/mousetraps = 2,
+		/obj/item/storage/box/mousetraps,
 		/obj/item/clothing/under/rank/chef,
 		/obj/item/clothing/head/chefhat,
-		/obj/item/clothing/suit/chef/classic
+		/obj/item/clothing/suit/chef/classic,
+		/obj/item/storage/box/silverware,
+		/obj/item/clothing/mask/surgical,
+		/obj/item/clothing/gloves/latex
 	)
 
 /obj/structure/closet/secure_closet/hydroponics_torch //done so that it has no access reqs
@@ -78,4 +81,3 @@
 		/obj/item/clothing/under/rank/bartender,
 		/obj/item/clothing/shoes/laceup
 	)
-

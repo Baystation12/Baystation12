@@ -137,6 +137,7 @@
 	cost = 10
 	containername = "bar supplies crate"
 
+
 /decl/hierarchy/supply_pack/galley/beer_dispenser
 	name = "Equipment - Booze dispenser"
 	contains = list(
@@ -164,3 +165,13 @@
 	containertype = /obj/structure/largecrate
 	containername = "MRE dispenser crate"
 
+
+/decl/hierarchy/supply_pack/galley/silverware
+	name = "Equipment - Silver Cutlery"
+	cost = 50
+	containertype = /obj/structure/closet/crate/secure
+	containername = "silver cutlery crate"
+	access = access_kitchen
+	contains = list(
+		/obj/item/storage/box/silverware
+	)

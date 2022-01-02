@@ -40,16 +40,19 @@
 	sharp = FALSE
 	attack_verb = list("prodded")
 	applies_material_name = FALSE
-	w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_TINY
 
-/obj/item/material/knife/table/plastic
-	default_material = MATERIAL_PLASTIC
+/obj/item/material/knife/table/plastic/default_material = MATERIAL_PLASTIC
+/obj/item/material/knife/table/silver/default_material = MATERIAL_SILVER
+/obj/item/material/knife/table/titanium/default_material = MATERIAL_TITANIUM
 
-/obj/item/material/knife/table/unathi
+
+/obj/item/material/knife/unathi
 	name = "dueling knife"
 	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
 	icon_state = "unathiknife"
 	default_material = MATERIAL_WOOD
+	applies_material_name = FALSE
 	applies_material_colour = FALSE
 	w_class = ITEM_SIZE_NORMAL
 
