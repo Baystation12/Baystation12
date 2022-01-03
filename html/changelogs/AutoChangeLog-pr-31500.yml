@@ -1,5 +1,0 @@
-author: Lorwp
-delete-after: true
-changes:
-  - bugfix: Antag fake announcements (ion storm, fake centcom announcement, etc) now
-      again have an icon

@@ -1,7 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Warrant projectors now display the warrant type in the list of available
-      warrants.
-  - bugfix: Warrant projectors no longer hide a warrant if a person has both a search
-      and arrest warrant targeting them.
