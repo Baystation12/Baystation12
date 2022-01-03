@@ -15,7 +15,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 //GOT IT MEMORIZED?
 
 /datum/controller/master
-	name = "Master"
+	name = "Main"
 
 	// Are we processing (higher values increase the processing delay by n ticks)
 	var/processing = TRUE
@@ -585,11 +585,18 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 
 
 
-/datum/controller/master/stat_entry()
+/datum/controller/master/stat_entry(force)
 	if(!stat_line)
 		stat_line = new (null, src)
-	stat("Byond:", "(FPS:[world.fps]) (TickCount:[world.time/world.tick_lag]) (TickDrift:[round(Master.tickdrift,1)]([round((Master.tickdrift/(world.time/world.tick_lag))*100,0.1)]%))  Hub: [config.hub_visible?"Y":"N"]")
-	stat_line.name = "(TickRate:[Master.processing]) (Iteration:[Master.iteration])"
+	IF_UPDATE_STAT
+		stat_line.name = {"\
+			Hub: [config.hub_visible ? "Y" : "N"]  \
+			FPS: [world.fps]  \
+			Ticks: [world.time / world.tick_lag]  \
+			Alive: [Master.processing ? "Y" : "N"]  \
+			Cycle: [Master.iteration]  \
+			Drift: [Round(Master.tickdrift)] | [Percent(Master.tickdrift, world.time / world.tick_lag, 1)]%
+		"}
 	stat(name, stat_line)
 
 /datum/controller/master/StartLoadingMap()

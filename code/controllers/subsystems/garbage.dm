@@ -51,25 +51,29 @@ SUBSYSTEM_DEF(garbage)
 		pass_counts[i] = 0
 		fail_counts[i] = 0
 
-/datum/controller/subsystem/garbage/stat_entry(msg)
-	var/list/counts = list()
-	for (var/list/L in queues)
-		counts += length(L)
-	msg += "Q:[counts.Join(",")]|D:[delslasttick]|G:[gcedlasttick]|"
-	msg += "GR:"
-	if (!(delslasttick+gcedlasttick))
-		msg += "n/a|"
-	else
-		msg += "[round((gcedlasttick/(delslasttick+gcedlasttick))*100, 0.01)]%|"
 
-	msg += "TD:[totaldels]|TG:[totalgcs]|"
-	if (!(totaldels+totalgcs))
-		msg += "n/a|"
-	else
-		msg += "TGR:[round((totalgcs/(totaldels+totalgcs))*100, 0.01)]%"
-	msg += " P:[pass_counts.Join(",")]"
-	msg += "|F:[fail_counts.Join(",")]"
-	..(msg)
+/datum/controller/subsystem/garbage/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		var/list/counts = list()
+		for (var/list/L in queues)
+			counts += length(L)
+		text += "Q:[counts.Join(",")]|D:[delslasttick]|G:[gcedlasttick]|"
+		text += "GR:"
+		if (!(delslasttick+gcedlasttick))
+			text += "n/a|"
+		else
+			text += "[round((gcedlasttick/(delslasttick+gcedlasttick))*100, 0.01)]%|"
+
+		text += "TD:[totaldels]|TG:[totalgcs]|"
+		if (!(totaldels+totalgcs))
+			text += "n/a|"
+		else
+			text += "TGR:[round((totalgcs/(totaldels+totalgcs))*100, 0.01)]%"
+		text += " P:[pass_counts.Join(",")]"
+		text += "|F:[fail_counts.Join(",")]"
+	..(text, force)
+
 
 /datum/controller/subsystem/garbage/Shutdown()
 	//Adds the del() log to the qdel log file

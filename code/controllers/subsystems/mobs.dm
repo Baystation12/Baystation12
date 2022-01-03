@@ -9,8 +9,15 @@ SUBSYSTEM_DEF(mobs)
 	var/static/tmp/run_empty_levels
 
 
-/datum/controller/subsystem/mobs/stat_entry(msg)
-	..("[msg] | Active Mobs: [mob_list.len] | Run Empty Levels: [run_empty_levels ? "Y" : "N"]")
+/datum/controller/subsystem/mobs/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		text = {"\
+			[text] | \
+			Mobs: [mob_list.len] \
+			Run Empty Levels: [run_empty_levels ? "Y" : "N"]\
+		"}
+	..(text, force)
 
 
 /datum/controller/subsystem/mobs/Recover()

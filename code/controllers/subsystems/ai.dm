@@ -18,8 +18,15 @@ SUBSYSTEM_DEF(ai)
 	var/static/tmp/run_empty_levels
 
 
-/datum/controller/subsystem/ai/stat_entry(msg)
-	..("[msg] | Active AI: [active.len] | Run Empty Levels: [run_empty_levels ? "Y" : "N"]")
+/datum/controller/subsystem/ai/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		text = {"\
+			[text] | \
+			Active AI: [active.len] \
+			Run Empty Levels: [run_empty_levels ? "Y" : "N"]\
+		"}
+	..(text, force)
 
 
 /datum/controller/subsystem/ai/fire(resume, no_mc_tick)
@@ -52,8 +59,15 @@ SUBSYSTEM_DEF(aifast)
 	var/static/tmp/run_empty_levels
 
 
-/datum/controller/subsystem/aifast/stat_entry(msg)
-	..("[msg] | Active AI: [active.len] | Run Empty Levels: [run_empty_levels ? "Y" : "N"]")
+/datum/controller/subsystem/aifast/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		text = {"\
+			[text] | \
+			Active AI: [active.len] \
+			Run Empty Levels: [run_empty_levels ? "Y" : "N"]\
+		"}
+	..(text, force)
 
 
 /datum/controller/subsystem/aifast/fire(resume, no_mc_tick)

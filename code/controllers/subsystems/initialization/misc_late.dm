@@ -4,9 +4,9 @@ SUBSYSTEM_DEF(init_misc_late)
 	flags = SS_NO_FIRE
 
 
-/datum/controller/subsystem/init_misc_late/stat_entry(msg)
+/datum/controller/subsystem/init_misc_late/stat_entry(text, force)
 	if (!initialized)
-		return ..(msg)
+		return ..(text, force)
 
 
 /datum/controller/subsystem/init_misc_late/Initialize(start_timeofday)

@@ -32,12 +32,20 @@ SUBSYSTEM_DEF(lighting)
 	var/tmp/processed_corners = 0
 	var/tmp/processed_overlays = 0
 
-/datum/controller/subsystem/lighting/stat_entry()
-	var/list/out = list("Queued:{L:[light_queue.len] C:[corner_queue.len] O:[overlay_queue.len]}")
-	for (var/stype in stats_lists)
-		out += "[stype] updates: [jointext(stats_lists[stype], " | ")]"
+/datum/controller/subsystem/lighting/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		text = {"[text] | \
+			Queues: \
+			Source [light_queue.len] \
+			Corner [corner_queue.len] \
+			Overlay [overlay_queue.len]\n\
+			Source Updates [stats_lists["Source"]]\n\
+			Corner Updates [stats_lists["Corner"]]\n\
+			Overlay Updates [stats_lists["Overlay"]]\
+		"}
+	..(text, force)
 
-	..(out.Join("\n"))
 
 /datum/controller/subsystem/lighting/Initialize()
 	InitializeTurfs()

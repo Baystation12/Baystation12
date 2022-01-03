@@ -92,8 +92,9 @@ GLOBAL_REAL(Failsafe, /datum/controller/failsafe)
 			defcon = 5
 			sleep(initial(processing_interval))
 
-/datum/controller/failsafe/stat_entry()
+/datum/controller/failsafe/stat_entry(force)
 	if (!stat_line)
 		stat_line = new (null, src)
-	stat_line.name = "Defcon: [defcon] (Interval: [Failsafe.processing_interval] | Iteration: [Failsafe.master_iteration])"
+	IF_UPDATE_STAT
+		stat_line.name = "Danger: [5 - defcon]/5  Interval:  [processing_interval]  Iteration: [master_iteration]"
 	stat(name, stat_line)

@@ -110,20 +110,25 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 		machine.build_network()
 		CHECK_TICK
 
-/datum/controller/subsystem/machines/stat_entry()
-	var/msg = list()
-	msg += "C:{"
-	msg += "PI:[round(cost_pipenets,1)]|"
-	msg += "MC:[round(cost_machinery,1)]|"
-	msg += "PN:[round(cost_powernets,1)]|"
-	msg += "PO:[round(cost_power_objects,1)]"
-	msg += "} "
-	msg += "PI:[pipenets.len]|"
-	msg += "MC:[processing.len]|"
-	msg += "PN:[powernets.len]|"
-	msg += "PO:[power_objects.len]|"
-	msg += "MC/MS:[round((cost ? processing.len/cost : 0),0.1)]"
-	..(jointext(msg, null))
+
+/datum/controller/subsystem/machines/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		text = {"[text]\n\
+			Queues: \
+			Pipes [pipenets.len] \
+			Machines [processing.len] \
+			Networks [powernets.len] \
+			Objects [power_objects.len]\n\
+			Costs: \
+			Pipes [Round(cost_pipenets)] \
+			Machines [Round(cost_machinery)] \
+			Networks [Round(cost_powernets)] \
+			Objects [Round(cost_power_objects)]\n\
+			Overall [Roundm(cost ? processing.len / cost : 0, 0.1)]
+		"}
+	..(text, force)
+
 
 /datum/controller/subsystem/machines/proc/process_pipenets(resumed = 0)
 	if (!resumed)

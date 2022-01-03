@@ -12,8 +12,11 @@ SUBSYSTEM_DEF(chemistry)
 	var/static/tmp/list/current = list()
 
 
-/datum/controller/subsystem/chemistry/stat_entry()
-	..("reaction queue: [processing.len]")
+/datum/controller/subsystem/chemistry/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		text = "[text] | Reaction Queue: [processing.len]"
+	..(text, force)
 
 
 /datum/controller/subsystem/chemistry/Initialize()
