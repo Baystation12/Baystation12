@@ -1,0 +1,9 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Barricades and grilles no longer take damage from radiation, EMPs, and
+      other non-physical damage sources.
+  - tweak: Grilles no longer have a 90% resistance to brute damage (Why was that even
+      a thing?).
+  - tweak: Barricades now have a flat 133% health modifier instead of a resistance
+      boost to some damage types.
