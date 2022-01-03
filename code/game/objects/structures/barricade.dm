@@ -7,10 +7,6 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	layer = ABOVE_WINDOW_LAYER
 
-	health_resistances = list(
-		BRUTE = 0.75
-	)
-
 	var/spiky = FALSE
 
 /obj/structure/barricade/Initialize(var/mapload, var/material_name)
@@ -23,7 +19,7 @@
 	SetName("[material.display_name] barricade")
 	desc = "A heavy, solid barrier made of [material.display_name]."
 	color = material.icon_colour
-	set_max_health(material.integrity)
+	set_max_health(round(material.integrity * 1.33)) // Equivalent to a global resistance value of 0.75
 
 /obj/structure/barricade/get_material()
 	return material
