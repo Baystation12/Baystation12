@@ -11,9 +11,6 @@
 	explosion_resistance = 1
 	rad_resistance_modifier = 0.1
 	health_max = 10
-	health_resistances = list(
-		BRUTE = 0.1
-	)
 	damage_hitsound = 'sound/effects/grillehit.ogg'
 	var/init_material = MATERIAL_STEEL
 
