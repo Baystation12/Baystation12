@@ -4,7 +4,7 @@
 	icon = 'icons/obj/guns/pistol.dmi'
 	icon_state = "secguncomp"
 
-/obj/random/raider/lilgun/spawn_choices()
+/obj/random/lilgun/spawn_choices()
 	return list(/obj/item/gun/projectile/pistol/sec,
 				/obj/item/gun/energy/gun,
 				/obj/item/gun/energy/stunrevolver,
@@ -29,7 +29,7 @@
 	icon = 'icons/obj/guns/assault_rifle.dmi'
 	icon_state = "arifle"
 
-/obj/random/raider/biggun/spawn_choices()
+/obj/random/biggun/spawn_choices()
 	return list(/obj/item/gun/energy/lasercannon,
 				/obj/item/gun/energy/laser,
 				/obj/item/gun/energy/captain,
