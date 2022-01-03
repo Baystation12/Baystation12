@@ -1527,6 +1527,19 @@
 	for(var/i = 1, i <= created_volume, i++)
 		new /obj/item/reagent_containers/food/snacks/dough(location)
 
+/datum/chemical_reaction/butterstick
+	name = "Butter"
+	required_reagents = list(/datum/reagent/drink/milk/cream = 10)
+	catalysts = list(/datum/reagent/enzyme = 5)
+	result_amount = 1
+	mix_message = "The solution yellows into a stick of butter."
+
+/datum/chemical_reaction/butterstick/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
+	..()
+	var/location = get_turf(holder.my_atom)
+	for(var/i = Ceil(created_volume) to 1 step -1)
+		new /obj/item/reagent_containers/food/snacks/sliceable/butterstick(location)
+
 //batter reaction as food precursor, for things that don't use pliable dough precursor.
 
 /datum/chemical_reaction/batter

@@ -82,6 +82,12 @@
 	taste_description = "egg"
 	color = "#ffffaa"
 
+/datum/reagent/nutriment/protein/butter // Possibly even worse for Skrell.
+	name = "butter"
+	taste_description = "butter"
+	color = "#fbf976"
+	nutriment_factor = 20
+
 //vegetamarian alternative that is safe for skrell to ingest//rewired it from its intended nutriment/protein/egg/softtofu because it would not actually work, going with plan B, more recipes.
 
 /datum/reagent/nutriment/softtofu

@@ -2386,6 +2386,38 @@
 	bitesize = 2
 	center_of_mass = "x=16;y=10"
 
+/obj/item/reagent_containers/food/snacks/sliceable/butterstick
+	name = "butter stick"
+	icon_state = "butter"
+	desc = "Your average stick of butter."
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/butter
+	filling_color = "#fbf976"
+	nutriment_desc = list("butter" = 10)
+	nutriment_amt = 10
+	slices_num = 8
+	bitesize = 2
+
+/obj/item/reagent_containers/food/snacks/sliceable/butterstick/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein/butter, 10)
+
+/obj/item/reagent_containers/food/snacks/slice/butter
+	name = "butter slice"
+	icon_state = "butterslice"
+	desc = "Looks like the butter didn't fall too far from the stick."
+	filling_color = "#fbf976"
+	bitesize = 2
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/butterstick
+
+/obj/item/reagent_containers/food/snacks/slice/butter/afterattack(obj/O, mob/user, proximity)
+	if(istype(O, /obj/machinery/microwave))
+		return ..()
+	if(istype(O, /obj/item/reagent_containers/food))
+		user.visible_message(SPAN_NOTICE("\The [user] slathers \the [O] with \the [src]!"), SPAN_NOTICE("You slather \the [O] with \the [src]!"))
+		reagents.trans_to_obj(O, reagents.total_volume)
+		QDEL_NULL(src)
+		return
+
 /obj/item/reagent_containers/food/snacks/sliceable/birthdaycake
 	name = "birthday cake"
 	desc = "Happy birthday!"
@@ -2400,7 +2432,6 @@
 /obj/item/reagent_containers/food/snacks/sliceable/birthdaycake/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 10)
-
 
 /obj/item/reagent_containers/food/snacks/slice/birthdaycake
 	name = "birthday cake slice"
