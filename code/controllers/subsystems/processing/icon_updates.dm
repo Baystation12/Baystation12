@@ -7,8 +7,11 @@ PROCESSING_SUBSYSTEM_DEF(icon_update)
 
 	var/list/queue = list()
 
-/datum/controller/subsystem/processing/icon_update/stat_entry()
-	..("QU:[queue.len]")
+/datum/controller/subsystem/processing/icon_update/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		text = "[text] | Queue [queue.len]"
+	..(text, force)
 
 /datum/controller/subsystem/processing/icon_update/Initialize()
 	fire(FALSE, TRUE)

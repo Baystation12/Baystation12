@@ -5,8 +5,7 @@ SUBSYSTEM_DEF(misc_slow)
 	priority = SS_PRIORITY_MISC_SLOW
 
 
-/datum/controller/subsystem/misc_slow/stat_entry(msg)
+/datum/controller/subsystem/misc_slow/stat_entry(text, force)
 
 
 /datum/controller/subsystem/misc_slow/fire(resumed, no_mc_tick)
-

@@ -92,7 +92,7 @@ SUBSYSTEM_DEF(shuttle)
 	for(var/landmark_tag in given_sector.initial_generic_waypoints)
 		if(!try_add_landmark_tag(landmark_tag, given_sector))
 			landmarks_still_needed[landmark_tag] = given_sector
-	
+
 	for(var/shuttle_name in given_sector.initial_restricted_waypoints)
 		for(var/landmark_tag in given_sector.initial_restricted_waypoints[shuttle_name])
 			if(!try_add_landmark_tag(landmark_tag, given_sector))
@@ -155,5 +155,8 @@ SUBSYSTEM_DEF(shuttle)
 			return ship
 	return null
 
-/datum/controller/subsystem/shuttle/stat_entry()
-	..("Shuttles:[shuttles.len], Ships:[ships.len], L:[registered_shuttle_landmarks.len][overmap_halted ? ", HALT" : ""]")
+/datum/controller/subsystem/shuttle/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		text = "[text] | Shuttles [shuttles.len] Ships [ships.len] Landmarks [registered_shuttle_landmarks.len] Halted [overmap_halted ? "Y" : "N"]"
+	..(text, force)

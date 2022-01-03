@@ -30,8 +30,11 @@ SUBSYSTEM_DEF(trade)
 	if((traders.len <= max_traders) && prob(100 - 50 * traders.len / max_traders))
 		generate_trader()
 
-/datum/controller/subsystem/trade/stat_entry()
-	..("Traders: [traders.len]")
+/datum/controller/subsystem/trade/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		text = "[text] | Traders [traders.len]"
+	..(text, force)
 
 /datum/controller/subsystem/trade/proc/generate_trader(var/stations = 0)
 	var/list/possible = list()

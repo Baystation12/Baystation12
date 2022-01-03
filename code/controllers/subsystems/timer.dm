@@ -57,8 +57,20 @@ SUBSYSTEM_DEF(timer)
 	head_offset = world.time
 	bucket_resolution = world.tick_lag
 
-/datum/controller/subsystem/timer/stat_entry(msg)
-	..("B:[bucket_count] P:[length(second_queue)] H:[length(hashes)] C:[length(clienttime_timers)] S:[length(timer_id_dict)] RST:[bucket_reset_count]")
+/datum/controller/subsystem/timer/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		text = {"\
+			[text] | \
+			Buckets [bucket_count] \
+			Queue2 [length(second_queue)] \
+			Hashes [length(hashes)] \
+			Client Timers [length(clienttime_timers)] \
+			Size [length(timer_id_dict)] \
+			Resets [bucket_reset_count]\
+		"}
+	..(text, force)
+
 
 /datum/controller/subsystem/timer/proc/dump_timer_buckets(full = TRUE)
 	var/list/to_log = list("Timer bucket reset. world.time: [world.time], head_offset: [head_offset], practical_offset: [practical_offset]")

@@ -45,8 +45,11 @@ SUBSYSTEM_DEF(vote)
 			for(var/client/C in voting)
 				show_panel(C.mob)
 
-/datum/controller/subsystem/vote/stat_entry()
-	..("Vote:[active_vote ? "[active_vote.name], [active_vote.time_remaining]" : "none"]")
+/datum/controller/subsystem/vote/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		text = "[text] | Vote: [active_vote ? "[active_vote.name], [active_vote.time_remaining]" : "None"]"
+	..(text, force)
 
 /datum/controller/subsystem/vote/Recover()
 	last_started_time = SSvote.last_started_time
