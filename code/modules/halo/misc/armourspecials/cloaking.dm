@@ -65,3 +65,8 @@
 			disrupt_cloak(cloak_recover_time*2)
 		if(2)
 			disrupt_cloak(cloak_recover_time*4)
+
+/datum/armourspecials/cloaking/silentshadow
+	min_alpha=1 ///These are meant to be 100% admin-spawn kill-squads, so... have fun
+	cloak_recover_time = 2
+	cloak_toggle_time = 0.5

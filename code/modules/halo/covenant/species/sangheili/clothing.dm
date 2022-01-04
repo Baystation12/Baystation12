@@ -376,6 +376,49 @@
 	icon_state = "specops_gloves_obj"
 	item_state = "specops_gloves"
 
+/obj/item/clothing/head/helmet/sangheili/silentshadow
+	name = "Sangheili Helmet (Silent Shadow)"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon = SANGHEILI_ARMOUR_ICON
+	icon_state = "ss_helm_obj"
+	item_state = "ss_helm"
+	body_parts_covered = HEAD | FACE
+	item_flags = THICKMATERIAL | FLASH_PROTECTION_MAJOR
+	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
+	body_parts_covered = HEAD|FACE
+	cold_protection = HEAD
+	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
+
+/obj/item/clothing/suit/armor/special/combatharness/silentshadow
+	name = "Sangheili Combat Harness (Silent Shadow)"
+	icon_state = "ss_chest_obj"
+	item_state = "ss_chest"
+	slowdown_general = -2 //They're meant to be primarily melee-only and admemespawn anyway, so.
+	totalshields = 210
+	specials = list(/datum/armourspecials/shields/elite,/datum/armourspecials/shieldmonitor/sangheili,/datum/armourspecials/cloaking/silentshadow)
+	action_button_name = "Toggle Active Camouflage"
+	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+
+/obj/item/clothing/shoes/magboots/sangheili/silentshadow
+	name = "Sanghelli Leg Armour (Silent Shadow)"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "ss_legs_obj"
+	item_state = "ss_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/silentshadow
+	name = "Sanghelli Combat Gauntlets (Silent Shadow)"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "ss_gloves_obj"
+	item_state = "ss_gloves"
+	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
+	body_parts_covered = HANDS
+	cold_protection = HANDS
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+
 /obj/item/clothing/head/helmet/sangheili/ranger
 	name = "Sangheili Helmet (Ranger)"
 	desc = "Head armour, to be used with the Sangheili Combat Harness."
