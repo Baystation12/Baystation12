@@ -34,6 +34,7 @@
 		/datum/species/vox     = list(
 			/datum/mil_branch/expeditionary_corps,
 			/datum/mil_branch/fleet,
+			/datum/mil_branch/army,
 			/datum/mil_branch/civilian,
 			/datum/mil_branch/solgov,
 			/datum/mil_branch/skrell_fleet
@@ -81,6 +82,7 @@
 				/datum/mil_rank/army/e2,
 				/datum/mil_rank/army/e3,
 				/datum/mil_rank/army/e4,
+				/datum/mil_rank/army/e4_alt,
 				/datum/mil_rank/army/e5,
 				/datum/mil_rank/army/e6,
 				/datum/mil_rank/army/e7,
@@ -109,6 +111,7 @@
 				/datum/mil_rank/army/e2,
 				/datum/mil_rank/army/e3,
 				/datum/mil_rank/army/e4,
+				/datum/mil_rank/army/e4_alt,
 				/datum/mil_rank/army/e5,
 				/datum/mil_rank/army/e6,
 				/datum/mil_rank/army/e7,
