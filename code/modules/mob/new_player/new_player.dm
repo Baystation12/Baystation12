@@ -27,6 +27,10 @@
 /mob/new_player/proc/new_player_panel(force = FALSE)
 	if(!SScharacter_setup.initialized && !force)
 		return // Not ready yet.
+	if(client)
+		new_player_panel_proc()
+
+/mob/new_player/proc/new_player_panel_proc()
 	var/output = list()
 	output += "<div align='center'>"
 	output += "<i>[GLOB.using_map.get_map_info()]</i>"
@@ -61,6 +65,7 @@
 			stat("Game Mode:", "[SSticker.mode ? SSticker.mode.name : SSticker.master_mode] ([SSticker.master_mode])")
 		else
 			stat("Game Mode:", PUBLIC_GAME_MODE)
+
 		var/extra_antags = list2params(additional_antag_types)
 		stat("Added Antagonists:", extra_antags ? extra_antags : "None")
 		stat("Initial Continue Vote:", "[round(config.vote_autotransfer_initial / 600, 1)] minutes")
@@ -71,7 +76,10 @@
 			stat("Players: [totalPlayers]", "Players Ready: [totalPlayersReady]")
 			totalPlayers = 0
 			totalPlayersReady = 0
+			var/we_are_admin = isadmin(src)
 			for(var/mob/new_player/player in GLOB.player_list)
+				if(player.is_stealthed() && !we_are_admin)
+					continue
 				var/highjob
 				if (player.client)
 					var/show_ready = player.client.get_preference_value(/datum/client_preference/show_ready) == GLOB.PREF_SHOW
@@ -102,15 +110,17 @@
 
 	if(href_list["refresh"])
 		panel.close()
-		new_player_panel()
+		if(client)
+			new_player_panel()
 
 	if(href_list["observe"])
 		if(GAME_STATE < RUNLEVEL_LOBBY)
-			to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
+			to_chat(src, "<span class='warning'>Пожалуйста, подождите загрузки сервера.</span>")
 			return
 
-		if(!config.respawn_delay || client.holder || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
-			if(!client)	return 1
+		if(!config.respawn_delay || client.holder || alert(src,"Вы уверены, что хотите наблюдать? Вам придется ждать [OBSERV_SPAWN_DELAY] минут прежде чем получить возможность респавна.","Player Setup","Да","Нет") == "Да")
+			if(!client) return 1
+
 			var/mob/observer/ghost/observer = new()
 
 			spawning = 1
@@ -121,10 +131,10 @@
 			close_spawn_windows()
 			var/obj/O = locate("landmark*Observer-Start")
 			if(istype(O))
-				to_chat(src, "<span class='notice'>Now teleporting.</span>")
+				to_chat(src, "<span class='notice'>Телепортация.</span>")
 				observer.forceMove(O.loc)
 			else
-				to_chat(src, "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the map.</span>")
+				to_chat(src, "<span class='danger'>Не удалость обнаружить точку спавна наблюдателей. Используйте кнопку Teleport чтобы переместить к карте.</span>")
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
 			var/should_announce = client.get_preference_value(/datum/client_preference/announce_ghost_join) == GLOB.PREF_YES
@@ -150,7 +160,7 @@
 
 	if(href_list["late_join"])
 		if(GAME_STATE != RUNLEVEL_GAME)
-			to_chat(usr, SPAN_WARNING("The round has either not started yet or already ended."))
+			to_chat(usr, SPAN_WARNING("Раунд или не начался или уже закончился..."))
 			return
 		if (!client.holder)
 			var/dsdiff = config.respawn_menu_delay MINUTES - (world.time - respawned_time)
@@ -179,22 +189,27 @@
 		if(client)
 			client.prefs.process_link(src, href_list)
 
+	if(href_list["invalid_jobs"])
+		show_invalid_jobs = !show_invalid_jobs
+		LateChoices()
+
 	else if(!href_list["late_join"])
-		new_player_panel()
+		if(client)
+			new_player_panel()
 
 /mob/new_player/proc/AttemptLateSpawn(var/datum/job/job, var/spawning_at)
 
 	if(src != usr)
 		return 0
 	if(GAME_STATE != RUNLEVEL_GAME)
-		to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
+		to_chat(usr, "<span class='warning'>Раунд не начался или уже закончился...</span>")
 		return 0
 	if(!config.enter_allowed)
-		to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
+		to_chat(usr, "<span class='notice'>Возможность зайти за профессию отключена администрацией в ивентных целях. Пожалуйста, станьте наблюдателем.</span>")
 		return 0
 
 	if(!job || !job.is_available(client))
-		alert("[job.title] is not available. Please try another.")
+		alert("Позиция [job.title] недоступна. Пожалуйста, выберите другую.")
 		return 0
 	if(job.is_restricted(client.prefs, src))
 		return
@@ -210,7 +225,7 @@
 
 	// Just in case someone stole our position while we were waiting for input from alert() proc
 	if(!job || !job.is_available(client))
-		to_chat(src, alert("[job.title] is not available. Please try another."))
+		to_chat(src, alert("Позиция [job.title] недоступна. Пожалуйста, выберите другую."))
 		return 0
 
 	SSjobs.assign_role(src, job.title, 1)
@@ -265,7 +280,7 @@
 		if(character.mind.role_alt_title)
 			rank = character.mind.role_alt_title
 		// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
-		GLOB.global_announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived"].", "Arrivals Announcement Computer")
+		GLOB.global_announcer.autosay("Новый [rank ? "[rank]" : "visitor" ] [join_message ? join_message : "активировался"].", "Arrivals Announcement Computer")
 
 /mob/new_player/proc/LateChoices()
 	var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
@@ -275,17 +290,18 @@
 	header += "Round Duration: [roundduration2text()]<br>"
 
 	if(evacuation_controller.has_evacuated())
-		header += "<font color='red'><b>\The [station_name()] has been evacuated.</b></font><br>"
+		header += "<font color='red'><b>[station_name()] была эвакуирована.</b></font><br>"
 	else if(evacuation_controller.is_evacuating())
 		if(evacuation_controller.emergency_evacuation) // Emergency shuttle is past the point of no recall
-			header += "<font color='red'>\The [station_name()] is currently undergoing evacuation procedures.</font><br>"
+			header += "<font color='red'>[station_name()] в текущий момент эвакуируется.</font><br>"
 		else                                           // Crew transfer initiated
-			header += "<font color='red'>\The [station_name()] is currently undergoing crew transfer procedures.</font><br>"
+			header += "<font color='red'>[station_name()] в текущий момент перемещается в следующий сектор.</font><br>"
 
 	var/list/dat = list()
-	dat += "Choose from the following open/valid positions:<br>"
-	dat += "<a href='byond://?src=\ref[src];invalid_jobs=1'>[show_invalid_jobs ? "Hide":"Show"] unavailable jobs.</a><br>"
+	dat += "Выберите одну из доступных ролей:<br>"
+	dat += "<a href='byond://?src=\ref[src];invalid_jobs=1'>[show_invalid_jobs ? "Скрыть":"Показать"] недоступные профессии.</a><br>"
 	dat += "<table>"
+/*[ORIG]
 	dat += "<tr><td colspan = 3><b>[GLOB.using_map.station_name]:</b></td></tr>"
 
 	// TORCH JOBS
@@ -302,7 +318,7 @@
 	if(LAZYLEN(job_summaries))
 		dat += job_summaries
 	else
-		dat += "<tr><td>No available positions.</td></tr>"
+		dat += "<tr><td>Нет доступных ролей.</td></tr>"
 	// END TORCH JOBS
 
 	// SUBMAP JOBS
@@ -323,18 +339,148 @@
 			if(LAZYLEN(job_summaries))
 				dat += job_summaries
 			else
-				dat += "No available positions."
+				dat += "Нет доступных ролей."
 	// END SUBMAP JOBS
 
 	dat += "</table></center>"
 	if(LAZYLEN(hidden_reasons))
-		var/list/additional_dat = list("<br><b>Some roles have been hidden from this list for the following reasons:</b><br>")
+		var/list/additional_dat = list("<br><b>Некоторые роли были убраны из этого списка по следующим причинам:</b><br>")
 		for(var/raisin in hidden_reasons)
 			additional_dat += "[raisin]<br>"
 		additional_dat += "<br>"
 		dat = additional_dat + dat
 	dat = header + dat
 	show_browser(src, jointext(dat, null), "window=latechoices;size=450x640;can_close=1")
+[/ORIG]*/
+//[INF]
+	var/list/categorizedJobs = list(
+		"Command" = list(jobs = list(), dep = COM, color = "#aac1ee"),
+		"Command Support" = list(jobs = list(), dep = SPT, color = "#aac1ee"),
+		"Engineering" = list(jobs = list(), dep = ENG, color = "#ffd699"),
+		"Security" = list(jobs = list(), dep = SEC, color = "#ff9999"),
+		"Miscellaneous" = list(jobs = list(), dep = CIV, color = "#ffffff", colBreak = 1),
+		"Synthetic" = list(jobs = list(), dep = MSC, color = "#ccffcc"),
+		"Service" = list(jobs = list(), dep = SRV, color = "#cccccc"),
+		"Medical" = list(jobs = list(), dep = MED, color = "#99ffe6"),
+		"Science" = list(jobs = list(), dep = SCI, color = "#e6b3e6", colBreak = 1),
+		"Supply" = list(jobs = list(), dep = SUP, color = "#ead4ae"),
+		"Expedition" = list(jobs = list(), dep = EXP, color = "#ffd699"),
+		"ERROR" = list(jobs = list(), color = "#ffffff", colBreak = 1)
+		)
+
+	dat += "<tr><td align = 'center' colspan = 3><b>[GLOB.using_map.station_name]</b></td></tr>"
+
+	// TORCH JOBS
+	var/list/job_summaries
+	var/list/hidden_reasons = list()
+	var/catcheck
+	for(var/datum/job/job in SSjobs.primary_job_datums)
+		var/summary = job.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[job.title]", show_invalid_jobs)
+		if(job.department_flag)
+			catcheck |= job.department_flag
+		if(summary && summary != "")
+			for(var/category in categorizedJobs)
+				var/list/jobs = list()
+				if(job.department_flag & categorizedJobs[category]["dep"])
+					jobs += job
+				if(category == "ERROR")
+					if(!job.department_flag)
+						jobs += job
+						continue
+					var/check = FALSE
+					for(var/categ in categorizedJobs)
+						if(job in categorizedJobs[categ]["jobs"])
+							check = TRUE
+							continue
+					if(!check)
+						jobs += job
+				if(length(jobs))
+					categorizedJobs[category]["jobs"] += jobs
+		else
+			for(var/raisin in job.get_unavailable_reasons(client))
+				hidden_reasons[raisin] = TRUE
+	dat += "<tr><td valign='top'>"
+	for(var/jobcat in categorizedJobs)
+		if(categorizedJobs[jobcat]["colBreak"])
+			dat += "</td><td valign='top'>"
+		if((length(categorizedJobs[jobcat]["jobs"]) < 1) && (jobcat == "ERROR"))
+			continue
+		var/flag = categorizedJobs[jobcat]["dep"]
+		if(!flag)
+			log_admin("[jobcat] НЕТ ФЛАГА КАТЕГОРИИ.")
+			message_staff("[jobcat] НЕТ ФЛАГА КАТЕГОРИИ.")
+			continue
+		else if(!(catcheck & flag))
+//			log_admin("[jobcat] НЕ ПРЕДУСМОТРЕНЫ ПРОФЕСИИ.")
+//			message_staff("[jobcat] НЕ ПРЕДУСМОТРЕНЫ ПРОФЕСИИ.")
+			continue
+		var/color = categorizedJobs[jobcat]["color"]
+		dat += "<fieldset style='width: 300px; border: 2px solid [color]; display: inline'>"
+		dat += "<legend align='center' style='color: [color]'>[jobcat]</legend>"
+		dat += "<table align = 'center'>"
+		if(length(categorizedJobs[jobcat]["jobs"]) < 1)
+			dat += "<tr><td></td><td align = 'center'><i>Нет доступных ролей.</i><br></td></tr>"
+			dat += "</table>"
+			dat += "</fieldset><br>"
+			continue
+		for(var/datum/job/prof in categorizedJobs[jobcat]["jobs"])
+			if(jobcat == "Command")
+				if(istype(prof, /datum/job/captain))
+					dat += prof.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[prof.title]", show_invalid_jobs, TRUE)
+				else
+					dat += prof.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[prof.title]", show_invalid_jobs)
+			else if(prof.department_flag & COM)
+				dat += prof.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[prof.title]", show_invalid_jobs, TRUE)
+			else
+				dat += prof.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[prof.title]", show_invalid_jobs)
+		dat += "</table>"
+		dat += "</fieldset><br>"
+	dat += "</td></tr></table>"
+	// END TORCH JOBS
+
+	// SUBMAP JOBS
+	if(SSmapping.submaps)
+		dat += "<table><tr><td>"
+		for(var/thing in SSmapping.submaps)
+			var/datum/submap/submap = thing
+			if(submap && submap.available())
+				var/color = "ffffff"
+				dat += "<fieldset style='border: 2px solid [color]; display: inline'>"
+				dat += "<legend align='center' style='color: [color]'><b>[submap.name] ([submap.archetype.descriptor])</b></legend>"
+				dat += "<table align = 'center'>"
+				job_summaries = list()
+				for(var/otherthing in submap.jobs)
+					var/datum/job/job = submap.jobs[otherthing]
+					var/summary = job.get_join_link(client, "byond://?src=\ref[submap];joining=\ref[src];join_as=[otherthing]", show_invalid_jobs)
+					if(summary && summary != "")
+						job_summaries += summary
+					else
+						for(var/raisin in job.get_unavailable_reasons(client))
+							hidden_reasons[raisin] = TRUE
+
+				if(LAZYLEN(job_summaries))
+					dat += job_summaries
+					dat += "</table>"
+					dat += "</fieldset><br>"
+				else
+					dat += "<tr><td></td><td align = 'center'><i>Нет доступных ролей.</i></td></tr>"
+					dat += "</table>"
+					dat += "</fieldset><br>"
+		dat += "</td></tr></table>"
+	// END SUBMAP JOBS
+	dat += "</body></html>"
+	if(LAZYLEN(hidden_reasons))
+		var/list/additional_dat = list("<br><b>Некоторые роли были убраны из этого списка по следующим причинам:</b><br>")
+		for(var/raisin in hidden_reasons)
+			additional_dat += "[raisin]<br>"
+		additional_dat += "<br>"
+		dat = additional_dat + dat
+	dat = header + dat
+	var/datum/browser/popup = new(src, "latechoices", "Choose Profession", 1050, 900)
+	popup.add_stylesheet("playeroptions", 'html/browser/playeroptions.css')
+	popup.set_content(jointext(dat, null))
+	popup.open(0) // 0 is passed to open so that it doesn't use the onclose() proc
+//[/INF]
 
 /mob/new_player/proc/create_character(var/turf/spawn_turf)
 	spawning = 1
@@ -351,7 +497,13 @@
 		if(!job)
 			job = SSjobs.get_by_title(GLOB.using_map.default_assistant_title)
 		var/datum/spawnpoint/spawnpoint = job.get_spawnpoint(client, client.prefs.ranks[job.title])
-		spawn_turf = pick(spawnpoint.turfs)
+		if(spawnpoint)//inf
+			spawn_turf = pick(spawnpoint.turfs)
+//[INF]
+		else
+			spawning = 0
+			return null
+//[/INF]
 
 	if(chosen_species)
 		if(!check_species_allowed(chosen_species))
@@ -392,6 +544,7 @@
 	new_character.regenerate_icons()
 
 	new_character.key = key		//Manually transfer the key to log them in
+
 	return new_character
 
 /mob/new_player/proc/ViewManifest()
@@ -412,11 +565,11 @@
 /mob/new_player/proc/check_species_allowed(datum/species/S, var/show_alert=1)
 	if(!S.is_available_for_join() && !has_admin_rights())
 		if(show_alert)
-			to_chat(src, alert("Your current species, [client.prefs.species], is not available for play."))
+			to_chat(src, alert("Ваша текущая раса ([client.prefs.species]) недоступна для игры."))
 		return 0
 	if(!is_alien_whitelisted(src, S))
 		if(show_alert)
-			to_chat(src, alert("You are currently not whitelisted to play [client.prefs.species]."))
+			to_chat(src, alert("Вы не находитесь в списке ксенорас для игры за [client.prefs.species]."))
 		return 0
 	return 1
 

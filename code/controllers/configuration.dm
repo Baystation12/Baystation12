@@ -420,6 +420,7 @@
 
 	var/static/emojis = FALSE
 
+	var/observe_delay = 0
 
 /configuration/New()
 	build_mode_cache()
