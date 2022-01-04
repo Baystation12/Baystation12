@@ -293,6 +293,19 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 	background: [color2]; \
 	color: [color1]; \
 } \
+a img { \
+	border: none; \
+} \
+table { \
+	border: 4px double [color1]; \
+	border-collapse: separate;\
+	width: 100%;\
+	border-spacing: 7px;\
+}\
+td {\
+	padding: 5px;\
+	border: 1px solid [color1];\
+}\
 input { \
 	border:0; \
 	background:transparent; \
@@ -330,13 +343,15 @@ $(function() { \
 	// for(var/emoji in states)
 	var/len = LAZYLEN(states)
 	for(var/i = 1, i <= len, i++)
-		if(i%3 == 1) dat += "<tr>"
-		dat +="<td><a href=\"#\" data-emoji=\"[states[i]]\" title=\"Copy emoji\">" + icon2html(icon(GLOB.emojis, states[i]), owner, realsize= TRUE) + "</a></td><td>[states[i]]</td>"
-		if(!(i%3)) dat += "</tr>"
+		if(i%8 == 1) dat += "<tr>"
+		dat +="<td><a href=\"#\" data-emoji=\"[states[i]]\" title=\"[states[i]]\">" + icon2html(icon(GLOB.emojis, states[i]), owner, realsize= TRUE) + "</a></td>"
+		if(!(i%8)) dat += "</tr>"
 
 	dat += "</div><script type=\"text/javascript\">[js]</script></body></html>"
 
-	show_browser(owner, dat, "window=emojis;size=420x500")
+	var/len_y = min(94 + (round(len/8) + min(1, len%8))*45, 769)
+
+	show_browser(owner, dat, "window=emojis;size=420x[len_y]")
 
 #undef MAX_COOKIE_LENGTH
 #undef SPAM_TRIGGER_AUTOMUTE
