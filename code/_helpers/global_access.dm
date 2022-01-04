@@ -133,8 +133,6 @@
 			return global.SSskybox;
 		if("SSstatistics")
 			return global.SSstatistics;
-		if("SSsun")
-			return global.SSsun;
 		if("SSsupply")
 			return global.SSsupply;
 		if("SStemperature")
@@ -145,8 +143,6 @@
 			return global.SSticker;
 		if("SStimer")
 			return global.SStimer;
-		if("SStrade")
-			return global.SStrade;
 		if("SSturf")
 			return global.SSturf;
 		if("SSvines")
@@ -719,8 +715,6 @@
 			return global.slot_flags_enumeration;
 		if("solar_gen_rate")
 			return global.solar_gen_rate;
-		if("solars_list")
-			return global.solars_list;
 		if("sortInstance")
 			return global.sortInstance;
 		if("sounds_cache")
@@ -980,8 +974,6 @@
 			global.SSskybox=newval;
 		if("SSstatistics")
 			global.SSstatistics=newval;
-		if("SSsun")
-			global.SSsun=newval;
 		if("SSsupply")
 			global.SSsupply=newval;
 		if("SStemperature")
@@ -992,8 +984,6 @@
 			global.SSticker=newval;
 		if("SStimer")
 			global.SStimer=newval;
-		if("SStrade")
-			global.SStrade=newval;
 		if("SSturf")
 			global.SSturf=newval;
 		if("SSvines")
@@ -1566,8 +1556,6 @@
 			global.slot_flags_enumeration=newval;
 		if("solar_gen_rate")
 			global.solar_gen_rate=newval;
-		if("solars_list")
-			global.solars_list=newval;
 		if("sortInstance")
 			global.sortInstance=newval;
 		if("sounds_cache")
@@ -1760,13 +1748,11 @@
 	"SSshuttle",
 	"SSskybox",
 	"SSstatistics",
-	"SSsun",
 	"SSsupply",
 	"SStemperature",
 	"SSthrowing",
 	"SSticker",
 	"SStimer",
-	"SStrade",
 	"SSturf",
 	"SSvines",
 	"SSvote",
@@ -2053,7 +2039,6 @@
 	"skipped_unit_tests",
 	"slot_flags_enumeration",
 	"solar_gen_rate",
-	"solars_list",
 	"sortInstance",
 	"sounds_cache",
 	"spacevines_spawned",
