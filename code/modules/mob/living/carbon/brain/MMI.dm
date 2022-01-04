@@ -72,8 +72,6 @@
 
 		locked = 1
 
-		SSstatistics.add_field("cyborg_mmis_filled",1)
-
 		return
 
 	if((istype(O,/obj/item/card/id)||istype(O,/obj/item/modular_computer)) && brainmob)

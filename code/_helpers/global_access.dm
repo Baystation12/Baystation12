@@ -131,8 +131,6 @@
 			return global.SSshuttle;
 		if("SSskybox")
 			return global.SSskybox;
-		if("SSstatistics")
-			return global.SSstatistics;
 		if("SSsupply")
 			return global.SSsupply;
 		if("SStemperature")
@@ -972,8 +970,6 @@
 			global.SSshuttle=newval;
 		if("SSskybox")
 			global.SSskybox=newval;
-		if("SSstatistics")
-			global.SSstatistics=newval;
 		if("SSsupply")
 			global.SSsupply=newval;
 		if("SStemperature")
@@ -1747,7 +1743,6 @@
 	"SSrobots",
 	"SSshuttle",
 	"SSskybox",
-	"SSstatistics",
 	"SSsupply",
 	"SStemperature",
 	"SSthrowing",
