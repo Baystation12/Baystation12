@@ -346,6 +346,7 @@ var/global/floorIsLava = 0
 	var/client/user = resolve_client(usr)
 	if (!check_rights(R_INVESTIGATE, TRUE, user))
 		return
+	var/datum/admins/handler = user.holder
 	var/client/subject
 	for (var/client/client as anything in GLOB.clients)
 		if (client.ckey == target)
@@ -356,7 +357,7 @@ var/global/floorIsLava = 0
 		<div style="text-align: center;">\
 			<b>Player Age</b>: [subject ? subject.player_age : "Not Connected"]\
 			<hr>\
-			<a href="?src=\ref[src];add_player_info=[target]">Add Comment</a>\
+			<a href="?src=\ref[handler];add_player_info=[target]">Add Comment</a>\
 		</div>\
 		<hr>\
 	"}
@@ -369,7 +370,7 @@ var/global/floorIsLava = 0
 		var/datum/player_info/comment = infos[i]
 		var/remove_button = ""
 		if (comment.author == user.key || check_rights(R_HOST, FALSE, user))
-			remove_button = {"<a href="?src=\ref[src];remove_player_info=[target];remove_index=[i]">Remove</a>"}
+			remove_button = {"<a href="?src=\ref[handler];remove_player_info=[target];remove_index=[i]">Remove</a>"}
 		body += {"\
 			<div style="text-align: right; margin-bottom: 8px;">\
 				<div style="text-align: left; border: 1px dashed #808080; padding: 2px;">[comment.content]</div>\
