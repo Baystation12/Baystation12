@@ -1,6 +1,6 @@
 /obj/structure/closet/secure_closet/bar
 	name = "booze closet"
-	req_access = list(access_bar)
+	req_access = list(access_kitchen)
 	closet_appearance = /decl/closet_appearance/cabinet/secure
 
 /obj/structure/closet/secure_closet/bar/WillContain()

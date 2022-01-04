@@ -1,16 +1,3 @@
-//Food
-/datum/job/bartender
-	title = "Bartender"
-	department = "Service"
-	department_flag = SRV
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the head of personnel"
-	access = list(access_hydroponics, access_bar, access_kitchen)
-	minimal_access = list(access_bar)
-	alt_titles = list("Barista")
-	outfit_type = /decl/hierarchy/outfit/job/service/bartender
-
 /datum/job/chef
 	title = "Chef"
 	department = "Service"
@@ -18,7 +5,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the head of personnel"
-	access = list(access_hydroponics, access_bar, access_kitchen)
+	access = list(access_hydroponics, access_kitchen)
 	minimal_access = list(access_kitchen)
 	alt_titles = list("Cook")
 	outfit_type = /decl/hierarchy/outfit/job/service/chef
@@ -30,7 +17,7 @@
 	total_positions = 2
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	access = list(access_hydroponics, access_bar, access_kitchen)
+	access = list(access_hydroponics, access_kitchen)
 	minimal_access = list(access_hydroponics)
 	alt_titles = list("Hydroponicist")
 	outfit_type = /decl/hierarchy/outfit/job/service/gardener

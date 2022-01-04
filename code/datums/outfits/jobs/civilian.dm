@@ -5,12 +5,6 @@
 	l_ear = /obj/item/device/radio/headset/headset_service
 	hierarchy_type = /decl/hierarchy/outfit/job/service
 
-/decl/hierarchy/outfit/job/service/bartender
-	name = OUTFIT_JOB_NAME("Bartender")
-	uniform = /obj/item/clothing/under/rank/bartender
-	id_types = list(/obj/item/card/id/civilian/bartender)
-	pda_type = /obj/item/modular_computer/pda
-
 /decl/hierarchy/outfit/job/service/chef
 	name = OUTFIT_JOB_NAME("Chef")
 	uniform = /obj/item/clothing/under/rank/chef

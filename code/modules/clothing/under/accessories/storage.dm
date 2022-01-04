@@ -154,7 +154,7 @@
 			/obj/item/material/knife
 		)
 		for (var/i = 1 to abs(slots))
-			new /obj/item/material/knife/table/unathi (container)
+			new /obj/item/material/knife/unathi (container)
 
 
 /obj/item/clothing/accessory/storage/bandolier

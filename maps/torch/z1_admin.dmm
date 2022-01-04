@@ -2627,7 +2627,7 @@
 /area/centcom/living)
 "auK" = (
 /obj/structure/closet/secure_closet/bar{
-	req_access = list("ACCESS_BAR")
+	req_access = list("ACCESS_KITCHEN")
 	},
 /turf/unsimulated/floor{
 	dir = 2;
@@ -6466,7 +6466,7 @@
 /area/shuttle/transport1/centcom)
 "aIh" = (
 /obj/structure/closet/secure_closet/bar{
-	req_access = list("ACCESS_BAR")
+	req_access = list("ACCESS_KITCHEN")
 	},
 /turf/unsimulated/floor{
 	icon_state = "lino"
