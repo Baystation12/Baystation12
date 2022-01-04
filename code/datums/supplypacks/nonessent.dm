@@ -233,6 +233,13 @@
 	cost = 15
 	containername = "office toys crate"
 
+/decl/hierarchy/supply_pack/nonessent/holoplants
+	name = "Deco - Holoplants"
+	contains = list(/obj/structure/holoplant = 5)
+	cost = 40
+	containername = "holoplants crate"
+	containertype = /obj/structure/largecrate
+
 /decl/hierarchy/supply_pack/nonessent/chaplaingear
 	name = "Costume - Chaplain"
 	contains = list(/obj/item/clothing/under/rank/chaplain,

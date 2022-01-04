@@ -5517,7 +5517,6 @@
 "mI" = (
 /obj/structure/closet/secure_closet/cos,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/book/manual/sol_sop,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -9249,6 +9248,7 @@
 	},
 /obj/item/stamp/cos,
 /obj/random_multi/single_item/memo_security,
+/obj/item/book/manual/sol_sop,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/cos)
 "wD" = (
@@ -11443,6 +11443,7 @@
 /obj/item/device/radio,
 /obj/item/crowbar/prybar,
 /obj/item/device/binoculars,
+/obj/item/storage/box/armband/sec,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/cos)
 "Fg" = (
@@ -12278,6 +12279,7 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/co)
 "Ik" = (
@@ -14607,6 +14609,7 @@
 	pixel_x = 23;
 	pixel_y = -23
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "Sf" = (

@@ -200,3 +200,7 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 #define FONT_GIANT(X) "<font size='5'>[X]</font>"
 
 #define crash_with(X) crash_at(X, __FILE__, __LINE__)
+
+//proxima code start
+#define SET_L_RPC(r, p, c) set_light(p, l_outer_range = r, l_color = c)
+//proxima code end

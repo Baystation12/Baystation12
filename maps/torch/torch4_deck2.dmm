@@ -3656,6 +3656,7 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_x = 32
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled,
 /area/engineering/engineering_bay)
 "gZ" = (
@@ -13532,6 +13533,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled,
 /area/engineering/engine_monitoring)
 "GM" = (

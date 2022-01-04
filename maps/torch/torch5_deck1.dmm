@@ -10800,6 +10800,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/plating,
 /area/security/wing)
 "aLK" = (
@@ -21326,6 +21327,7 @@
 	dir = 4;
 	pixel_x = -21
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/dark,
 /area/security/questioning)
 "kWb" = (
@@ -29914,6 +29916,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled,
 /area/security/brig)
 "wXN" = (

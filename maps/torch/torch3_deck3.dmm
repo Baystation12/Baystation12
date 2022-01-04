@@ -10089,6 +10089,7 @@
 	dir = 1;
 	pixel_y = -24
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/recreation)
 "wz" = (

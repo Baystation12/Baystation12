@@ -3252,5 +3252,8 @@
 #include "proxima\code\music_player\_music_tape.dm"
 #include "proxima\code\music_player\subtypes_player.dm"
 #include "proxima\code\music_player\subtypes_tape.dm"
+#include "proxima\code\_helpers\colors.dm"
+#include "proxima\code\game\items\devices\remote_device.dm"
+#include "proxima\code\game\objects\structures\holoplants.dm"
 #include "~code\global_init.dm"
 // END_INCLUDE
