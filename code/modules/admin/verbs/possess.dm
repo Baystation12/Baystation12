@@ -13,7 +13,6 @@
 	usr.client.eye = O
 	usr.control_object = O
 	usr.ReplaceMovementHandler(/datum/movement_handler/mob/admin_possess)
-	SSstatistics.add_field_details("admin_verb","PO") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /proc/release(obj/O)
 	set name = "Release Obj"
@@ -32,7 +31,6 @@
 	usr.forceMove(O.loc) // Appear where the object you were controlling is -- TLE
 	usr.client.eye = usr
 	usr.control_object = null
-	SSstatistics.add_field_details("admin_verb","RO") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /proc/givetestverbs(mob/M as mob in SSmobs.mob_list)
 	set desc = "Give this guy possess/release verbs"
@@ -40,4 +38,3 @@
 	set name = "Give Possessing Verbs"
 	M.verbs += /proc/possess
 	M.verbs += /proc/release
-	SSstatistics.add_field_details("admin_verb","GPV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

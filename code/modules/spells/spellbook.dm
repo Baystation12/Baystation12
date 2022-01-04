@@ -193,7 +193,6 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 		if(uses < spellbook.spells[path])
 			to_chat(user, "<span class='notice'>You do not have enough spell slots to purchase this.</span>")
 			return TOPIC_HANDLED
-		send_feedback(path) //feedback stuff
 		if(ispath(path,/datum/spellbook))
 			src.set_spellbook(path)
 			temp = "You have chosen a new spellbook."
@@ -227,7 +226,6 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			has_sacrificed = 0
 			user.spellremove()
 			temp = "All spells and investments have been removed. You may now memorize a new set of spells."
-			SSstatistics.add_field_details("wizard_spell_learned","UM") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 		else
 			to_chat(user, "<span class='warning'>You must be in the wizard academy to re-memorize your spells.</span>")
 		. = TOPIC_REFRESH
@@ -258,16 +256,6 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 /obj/item/spellbook/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
-
-/obj/item/spellbook/proc/send_feedback(var/path)
-	if(ispath(path,/datum/spellbook))
-		var/datum/spellbook/S = path
-		SSstatistics.add_field_details("wizard_spell_learned","[initial(S.feedback)]")
-	else if(ispath(path,/spell))
-		var/spell/S = path
-		SSstatistics.add_field_details("wizard_spell_learned","[initial(S.feedback)]")
-	else if(ispath(path,/obj))
-		SSstatistics.add_field_details("wizard_spell_learned","[artefact_feedback[path]]")
 
 
 /obj/item/spellbook/proc/add_spell(var/mob/user, var/spell_path)

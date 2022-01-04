@@ -134,15 +134,10 @@ SUBSYSTEM_DEF(ticker)
 			end_game_state = END_GAME_ENDING
 			callHook("roundend")
 			if (universe_has_ended)
-				if(mode.station_was_nuked)
-					SSstatistics.set_field_details("end_proper","nuke")
-				else
-					SSstatistics.set_field_details("end_proper","universe destroyed")
 				if(!delay_end)
 					to_world("<span class='notice'><b>Rebooting due to destruction of [station_name()] in [restart_timeout/10] seconds</b></span>")
 
 			else
-				SSstatistics.set_field_details("end_proper","proper completion")
 				if(!delay_end)
 					to_world("<span class='notice'><b>Restarting in [restart_timeout/10] seconds</b></span>")
 			handle_tickets()

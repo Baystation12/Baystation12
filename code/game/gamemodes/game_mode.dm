@@ -238,11 +238,6 @@ var/global/list/additional_antag_types = list()
 
 	if(evacuation_controller && auto_recall_shuttle)
 		evacuation_controller.recall = 1
-
-	SSstatistics.set_field_details("round_start","[time2text(world.realtime)]")
-	if(SSticker.mode)
-		SSstatistics.set_field_details("game_mode","[SSticker.mode]")
-	SSstatistics.set_field_details("server_ip","[world.internet_address]:[world.port]")
 	return 1
 
 /datum/game_mode/proc/fail_setup()

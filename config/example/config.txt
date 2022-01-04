@@ -442,3 +442,9 @@ RADIATION_LOWER_LIMIT 0.15
 ## The delay in deciseconds between stat() updates.
 ## Lower can be more responsive to scene changes and updates but has a higher client/server overhead.
 # STAT_DELAY 5
+
+## The maximum number of times someone can be warned in a round before they are automatically banned.
+# WARN_AUTOBAN_THRESHOLD 3
+
+## The length in minutes of an automatic ban created by passing the warning threshold.
+# WARN_AUTOBAN_DURATION 30

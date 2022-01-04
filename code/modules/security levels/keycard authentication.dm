@@ -154,31 +154,25 @@
 			var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 			security_state.stored_security_level = security_state.current_security_level
 			security_state.set_security_level(security_state.high_security_level)
-			SSstatistics.add_field("alert_keycard_auth_red",1)
 		if("Revert alert")
 			var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 			security_state.set_security_level(security_state.stored_security_level)
-			SSstatistics.add_field("alert_keycard_revert_red",1)
 		if("Grant Emergency Maintenance Access")
 			GLOB.using_map.make_maint_all_access()
-			SSstatistics.add_field("alert_keycard_auth_maintGrant",1)
 		if("Revoke Emergency Maintenance Access")
 			GLOB.using_map.revoke_maint_all_access()
-			SSstatistics.add_field("alert_keycard_auth_maintRevoke",1)
 		if("Emergency Response Team")
 			if(is_ert_blocked())
 				to_chat(usr, "<span class='warning'>All emergency response teams are dispatched and can not be called at this time.</span>")
 				return
 
 			trigger_armed_response_team(1)
-			SSstatistics.add_field("alert_keycard_auth_ert",1)
 		if("Grant Nuclear Authorization Code")
 			var/obj/machinery/nuclearbomb/nuke = locate(/obj/machinery/nuclearbomb/station) in world
 			if(nuke)
 				to_chat(usr, "The nuclear authorization code is [nuke.r_code]")
 			else
 				to_chat(usr, "No self destruct terminal found.")
-			SSstatistics.add_field("alert_keycard_auth_nukecode",1)
 
 /obj/machinery/keycard_auth/proc/is_ert_blocked()
 	if(config.ert_admin_call_only) return 1

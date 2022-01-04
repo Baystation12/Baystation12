@@ -431,6 +431,12 @@
 	/// The delay in deciseconds between stat() updates.
 	var/static/stat_delay = 5
 
+	/// The maximum number of times someone can be warned in a round before they are automatically banned
+	var/static/warn_autoban_threshold = 3
+
+	/// The length in minutes of an automatic ban created by passing the warning threshold
+	var/static/warn_autoban_duration = 30
+
 
 /configuration/New()
 	build_mode_cache()
@@ -838,6 +844,10 @@
 				maximum_round_length = text2num(value) MINUTES
 			if ("stat_delay")
 				stat_delay = Floor(text2num(value))
+			if ("warn_autoban_threshold")
+				warn_autoban_threshold = max(0, text2num(value))
+			if ("warn_autoban_duration")
+				warn_autoban_duration = max(1, text2num(value))
 			else
 				log_misc("Unknown setting in config/config.txt: '[name]'")
 

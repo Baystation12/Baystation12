@@ -531,7 +531,6 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				src.screen=6
 			else
 				var/image = photo_data ? photo_data.photo : null
-				SSstatistics.add_field("newscaster_stories",1)
 				connected_group.SubmitArticle(src.msg, src.scanned_user, src.channel_name, image, 0)
 				if(photo_data)
 					qdel(photo_data)
@@ -942,7 +941,6 @@ obj/item/newspaper/attackby(obj/item/W as obj, mob/user as mob)
 
 
 /obj/machinery/newscaster/proc/print_paper()
-	SSstatistics.add_field("newscaster_newspapers_printed",1)
 	var/obj/item/newspaper/NEWSPAPER = new /obj/item/newspaper
 	for(var/datum/feed_channel/FC in connected_group.network_channels)
 		NEWSPAPER.news_content += FC

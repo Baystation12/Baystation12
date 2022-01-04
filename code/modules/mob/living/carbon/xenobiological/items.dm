@@ -27,7 +27,7 @@
 			qdel(O)
 
 /obj/item/slime_extract/New()
-	SSstatistics.extracted_slime_cores_amount++
+	GLOB.extracted_slime_cores_amount += 1
 	create_reagents(100)
 	reagents.add_reagent(/datum/reagent/slimejelly, 30)
 	..()
@@ -298,4 +298,3 @@
 			var/area/A = get_area(src)
 			if(A)
 				to_chat(G, "Golem rune created in [A.name].")
-

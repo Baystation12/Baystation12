@@ -2,7 +2,7 @@
 	user.set_machine(src)
 
 	var/list/dat = list()
-	
+
 	dat += "<h1>Keycard Authentication Device</h1>"
 
 	dat += "This device is used to trigger some high security events. It requires the simultaneous swipe of two high-level ID cards."
@@ -30,49 +30,41 @@
 	if(screen == 2)
 		dat += "Please swipe your card to authorize the following event: <b>[event]</b>"
 		dat += "<p><A href='?src=\ref[src];reset=1'>Back</A>"
-	
+
 	var/datum/browser/popup = new(user, "kad_window", "Keycard Authentication Device", 500, 250)
 	popup.set_content(JOINTEXT(dat))
 	popup.open()
 	return
 
-/obj/machinery/keycard_auth/torch/trigger_event()	
+/obj/machinery/keycard_auth/torch/trigger_event()
 	switch(event)
 		if("Red alert")
 			var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 			security_state.stored_security_level = security_state.current_security_level
 			security_state.set_security_level(security_state.high_security_level)
-			SSstatistics.add_field("alert_keycard_auth_red",1)
 		if("Revert alert")
 			var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 			security_state.set_security_level(security_state.stored_security_level)
-			SSstatistics.add_field("alert_keycard_revert_red",1)
 		if("Grant Emergency Maintenance Access")
 			GLOB.using_map.make_maint_all_access()
-			SSstatistics.add_field("alert_keycard_auth_maintGrant",1)
 		if("Revoke Emergency Maintenance Access")
 			GLOB.using_map.revoke_maint_all_access()
-			SSstatistics.add_field("alert_keycard_auth_maintRevoke",1)
 		if("Emergency Response Team")
 			if(is_ert_blocked())
 				to_chat(usr, "<span class='warning'>All emergency response teams are dispatched and can not be called at this time.</span>")
 				return
 
 			trigger_armed_response_team(1)
-			SSstatistics.add_field("alert_keycard_auth_ert",1)
 		if("Grant Nuclear Authorization Code")
 			var/obj/machinery/nuclearbomb/nuke = locate(/obj/machinery/nuclearbomb/station) in world
 			if(nuke)
 				to_chat(usr, "The nuclear authorization code is [nuke.r_code]")
 			else
 				to_chat(usr, "No self destruct terminal found.")
-			SSstatistics.add_field("alert_keycard_auth_nukecode",1)
 		if("Bolt All Saferooms")
 			GLOB.using_map.bolt_saferooms()
-			SSstatistics.add_field("bolted_saferoom",1)
 		if("Unbolt All Saferooms")
 			GLOB.using_map.unbolt_saferooms()
-			SSstatistics.add_field("unbolted_saferoom",1)
 		if("Evacuate")
 			if(!evacuation_controller)
 				to_chat(usr, "<span class='danger'>Unable to initiate evacuation!</span>")
