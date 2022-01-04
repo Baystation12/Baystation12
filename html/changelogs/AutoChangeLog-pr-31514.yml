@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Raider gun spawners now actually spawn weapons.
