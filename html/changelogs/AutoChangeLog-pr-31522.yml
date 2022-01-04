@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: The gentlemans suit no longer pokes through jackets when facing north.
