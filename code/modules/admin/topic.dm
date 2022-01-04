@@ -331,7 +331,7 @@
 			return
 
 		var/dat = ""
-		var/header = "<head><title>Job-Ban Panel: [M.name]</title></head>"
+		var/header = "<head><title>Job-Ban Panel: [M.name]</title><meta charset=\"utf-8\"></head>"
 		var/body
 		var/jobs = ""
 
