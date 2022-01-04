@@ -3246,5 +3246,11 @@
 #include "maps\~mapsystem\maps_jobs.dm"
 #include "maps\~mapsystem\maps_unit_testing.dm"
 #include "maps\~unit_tests\unit_testing.dm"
+#include "proxima\code\game\machinery\disk_writer.dm"
+#include "proxima\code\game\machinery\jukebox.dm"
+#include "proxima\code\music_player\_music_player.dm"
+#include "proxima\code\music_player\_music_tape.dm"
+#include "proxima\code\music_player\subtypes_player.dm"
+#include "proxima\code\music_player\subtypes_tape.dm"
 #include "~code\global_init.dm"
 // END_INCLUDE

@@ -113,6 +113,12 @@ var/list/_client_preferences_by_type
 	description ="Play jukeboxes and boomboxes"
 	key = "SOUND_JUKEBOXES"
 
+//start from infinity
+/datum/client_preference/play_pmps
+	description ="Play pmps"
+	key = "SOUND_PMPS"
+//end from infinity
+
 /datum/client_preference/play_announcement_sfx
 	description = "Play announcement sound effects"
 	key = "SOUND_ANNOUNCEMENT"

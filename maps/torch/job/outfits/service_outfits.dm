@@ -56,6 +56,7 @@
 	shoes = /obj/item/clothing/shoes/laceup
 	id_types = list(/obj/item/card/id/torch/contractor/service/bartender)
 	pda_type = /obj/item/modular_computer/pda
+	backpack_contents = list(/obj/item/music_tape/custom = 1)
 
 /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	name = OUTFIT_JOB_NAME("Crewman")

@@ -11842,6 +11842,10 @@
 	},
 /turf/simulated/wall/prepainted,
 /area/maintenance/fourthdeck/starboard)
+"NI" = (
+/obj/machinery/media/music_writer,
+/turf/simulated/wall/prepainted,
+/area/crew_quarters/lounge)
 "NM" = (
 /obj/effect/fluid_mapped,
 /turf/simulated/floor/reinforced,
@@ -33655,7 +33659,7 @@ Yd
 Wh
 TY
 Zk
-Sd
+NI
 Sd
 Sd
 Sd

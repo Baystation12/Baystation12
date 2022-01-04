@@ -65,9 +65,28 @@
 		wrench_floor_bolts(user, 0)
 		power_change()
 		return
+
+	// INF@CODE - START
+	if(istype(I, /obj/item/music_tape))
+		var/obj/item/music_tape/D = I
+		if(tape)
+			to_chat(user, "<span class='notice'>There is already \a [tape] inside.</span>")
+			return
+
+		if(D.ruined)
+			to_chat(user, "<span class='warning'>\The [D] is ruined, you can't use it.</span>")
+			return
+
+		if(user.drop_item())
+			visible_message("<span class='notice'>[usr] insert \a [tape] into \the [src].</span>")
+			D.forceMove(src)
+			tape = D
+			jukebox.tracks += tape.track
+			verbs += /obj/machinery/jukebox/verb/eject
+		return
+	// INF@CODE - END
+
 	return ..()
-
-
 
 /obj/machinery/jukebox/old
 	name = "space jukebox"

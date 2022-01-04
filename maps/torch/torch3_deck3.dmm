@@ -13000,6 +13000,15 @@
 "EJ" = (
 /turf/simulated/wall/r_wall/hull,
 /area/tcommsat/storage)
+"EK" = (
+/obj/effect/floor_decal/corner/blue/diagonal{
+	dir = 4
+	},
+/obj/machinery/media/music_writer{
+	pixel_x = 32
+	},
+/turf/simulated/floor/tiled/white,
+/area/crew_quarters/mess)
 "EL" = (
 /obj/machinery/firealarm{
 	dir = 4;
@@ -39243,7 +39252,7 @@ jc
 ZQ
 Xs
 nk
-jc
+EK
 OB
 fB
 qR
