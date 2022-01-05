@@ -806,41 +806,30 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
-"Mv" = (
-/obj/structure/table/rack,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/under/vox/vox_casual,
-/obj/item/clothing/suit/space/vox/stealth,
-/obj/item/clothing/head/helmet/space/vox/stealth,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
 "MZ" = (
 /obj/structure/table/rack,
 /obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/suit/space/vox/carapace,
 /obj/item/clothing/under/vox/vox_casual,
-/obj/item/clothing/head/helmet/space/vox/carapace,
 /obj/machinery/light/vox,
+/obj/item/clothing/suit/space/vox/raider,
+/obj/item/clothing/head/helmet/space/vox/raider,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "Ns" = (
 /obj/structure/table/rack,
 /obj/item/clothing/mask/gas/swat/vox,
 /obj/item/clothing/under/vox/vox_casual,
-/obj/item/clothing/suit/space/vox/medic,
-/obj/item/clothing/head/helmet/space/vox/medic,
+/obj/item/clothing/suit/space/vox/raider,
+/obj/item/clothing/head/helmet/space/vox/raider,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "Nt" = (
 /obj/structure/table/rack,
 /obj/item/clothing/mask/gas/swat/vox,
 /obj/item/clothing/under/vox/vox_casual,
-/obj/item/clothing/suit/space/vox/pressure,
-/obj/item/clothing/head/helmet/space/vox/pressure,
-/obj/machinery/light/small{
-	dir = 8
-	},
 /obj/effect/decal/cleanable/filth,
+/obj/item/clothing/suit/space/vox/raider,
+/obj/item/clothing/head/helmet/space/vox/raider,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "NI" = (
@@ -1513,7 +1502,7 @@ eW
 sE
 BI
 IF
-Mv
+Ns
 ae
 On
 ax
