@@ -129,6 +129,12 @@
 	desc = "Commissary"
 	region = ACCESS_REGION_GENERAL
 
+var/const/access_journalist = "ACCESS_TORCH_JOURNALIST" //97
+/datum/access/journalist
+	id = access_journalist
+	desc = "Journalist's Office"
+	region = ACCESS_REGION_SERVICE
+
 /datum/access/psychiatrist
 	desc = "Mental Health"
 

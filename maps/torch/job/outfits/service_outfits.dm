@@ -70,3 +70,22 @@
 	name = OUTFIT_JOB_NAME("Chaplain - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/service
 	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/service/journalist
+	name = OUTFIT_JOB_NAME("Journalist - Torch")
+	uniform = /obj/item/clothing/under/rank/internalaffairs/plain
+	shoes = /obj/item/clothing/shoes/dress
+	id_types = list(/obj/item/card/id/torch/crew/service/journalist)
+	backpack_contents = list(/obj/item/clothing/accessory/badge/press)
+
+/decl/hierarchy/outfit/job/torch/crew/service/journalist/ec
+	name = OUTFIT_JOB_NAME("Journalist - Expeditionary Corps")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/service
+	shoes = /obj/item/clothing/shoes/dutyboots
+	backpack_contents = null
+
+/decl/hierarchy/outfit/job/torch/crew/service/journalist/fleet
+	name = OUTFIT_JOB_NAME("Journalist - Fleet")
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/service
+	shoes = /obj/item/clothing/shoes/dutyboots
+	backpack_contents = null

@@ -8,6 +8,12 @@
 		"hydro" = COLOR_GREEN_GRAY
 	)
 
+/decl/closet_appearance/secure_closet/torch/journalist
+	color = COLOR_BABY_BLUE
+	extra_decals = list(
+		"stripe_vertical_right_full" = COLOR_DARK_BLUE_GRAY
+	)
+
 /obj/structure/closet/chefcloset_torch
 	name = "chef's closet"
 	desc = "It's a storage unit for foodservice equipment."
@@ -80,4 +86,19 @@
 		/obj/item/book/manual/barman_recipes,
 		/obj/item/clothing/under/rank/bartender,
 		/obj/item/clothing/shoes/laceup
+	)
+
+/obj/structure/closet/secure_closet/journalist
+	name = "journalist locker"
+	desc = "It's a storage unit for journalist equipment."
+	req_access = list(access_journalist)
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/journalist
+
+/obj/structure/closet/secure_closet/journalist/WillContain()
+	return list(
+		/obj/item/clothing/under/rank/internalaffairs/plain,
+		/obj/item/device/camera/tvcamera,
+		/obj/item/device/camera,
+		/obj/item/pen/multi,
+		/obj/item/material/clipboard
 	)

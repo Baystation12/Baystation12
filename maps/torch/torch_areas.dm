@@ -1610,6 +1610,11 @@ area/assembly/robotics/office
 /area/janitor/storage
 	name = "\improper Custodial Storage Closet"
 
+/area/journalist
+	name = "\improper Journalist's Office"
+	icon_state = "journalist"
+	req_access = list(access_journalist)
+
 // Tcomm
 /area/tcommsat/
 	ambience = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')

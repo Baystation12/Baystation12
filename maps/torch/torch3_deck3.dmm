@@ -7510,10 +7510,10 @@
 /obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/airlock/glass/civilian{
-	name = "Computer Lab"
+	name = "Journalist's Office"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
-/area/crew_quarters/office)
+/area/journalist)
 "pz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -8791,8 +8791,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/obj/structure/bed/chair/office/dark,
+/obj/effect/floor_decal/corner/green{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/journalist)
 "sI" = (
 /obj/machinery/door/airlock/glass/civilian{
 	name = "Gym"
@@ -9576,12 +9580,14 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/disperser)
 "vg" = (
-/obj/effect/wallframe_spawn/no_grille,
+/obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
+	id = "journalist_windows"
+	},
 /turf/simulated/floor/plating,
-/area/crew_quarters/office)
+/area/journalist)
 "vh" = (
 /turf/simulated/wall/prepainted,
-/area/crew_quarters/office)
+/area/journalist)
 "vi" = (
 /obj/machinery/papershredder,
 /obj/machinery/alarm{
@@ -9589,8 +9595,8 @@
 	pixel_x = 25;
 	pixel_y = 0
 	},
-/turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/turf/simulated/floor/tiled/white,
+/area/journalist)
 "vj" = (
 /obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
@@ -9907,7 +9913,7 @@
 /area/hydroponics)
 "wp" = (
 /turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/area/journalist)
 "wq" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -9947,8 +9953,13 @@
 	dir = 4;
 	pixel_x = 24
 	},
-/turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/obj/machinery/button/windowtint{
+	id = "journalist_windows";
+	pixel_x = 5;
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/white,
+/area/journalist)
 "wt" = (
 /obj/machinery/light{
 	dir = 8;
@@ -10304,15 +10315,18 @@
 "xo" = (
 /obj/structure/table/standard,
 /obj/item/material/bell,
+/obj/item/hand_labeler,
+/obj/item/stack/package_wrap/twenty_five,
 /turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/area/journalist)
 "xp" = (
-/obj/structure/bed/chair/office/dark{
-	dir = 8
-	},
 /obj/machinery/light,
+/obj/structure/bed/chair/office/dark{
+	dir = 1;
+	icon_state = "officechair_preview"
+	},
 /turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/area/journalist)
 "xr" = (
 /obj/structure/table/rack,
 /obj/random/maintenance/solgov,
@@ -10335,14 +10349,11 @@
 /turf/simulated/floor/tiled/dark,
 /area/chapel/main)
 "xu" = (
-/obj/structure/table/standard,
-/obj/item/hand_labeler,
-/obj/item/stack/package_wrap/twenty_five,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
 /turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/area/journalist)
 "xv" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 4;
@@ -10466,8 +10477,11 @@
 	dir = 1;
 	icon_state = "pipe-c"
 	},
-/turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/obj/effect/floor_decal/corner/green{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/journalist)
 "xP" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -10726,12 +10740,9 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/thirddeck/aft)
 "yq" = (
-/obj/machinery/computer/modular/preset/civilian{
-	dir = 4;
-	icon_state = "console"
-	},
+/obj/structure/closet/secure_closet/journalist,
 /turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/area/journalist)
 "yr" = (
 /obj/machinery/firealarm{
 	dir = 4;
@@ -10744,8 +10755,11 @@
 /area/chapel/memorial)
 "yt" = (
 /obj/machinery/light,
-/turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/obj/machinery/newscaster{
+	pixel_y = -32
+	},
+/turf/simulated/floor/tiled/white,
+/area/journalist)
 "yu" = (
 /obj/structure/hygiene/drain/bath,
 /turf/simulated/floor/pool,
@@ -12103,8 +12117,8 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/turf/simulated/floor/tiled/white,
+/area/journalist)
 "CS" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -14869,6 +14883,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/machinery/papershredder,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/recreation)
 "JN" = (
@@ -16094,11 +16109,11 @@
 /turf/simulated/wall/prepainted,
 /area/storage/tools)
 "MP" = (
-/obj/structure/table/woodentable,
 /obj/effect/floor_decal/spline/fancy/wood,
 /obj/machinery/camera/network/third_deck{
 	c_tag = "Recreation Room"
 	},
+/obj/machinery/photocopier,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/recreation)
 "MR" = (
@@ -16377,8 +16392,8 @@
 /area/maintenance/thirddeck/starboard)
 "NI" = (
 /obj/machinery/photocopier,
-/turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/turf/simulated/floor/tiled/white,
+/area/journalist)
 "NJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -16530,7 +16545,7 @@
 	pixel_x = -21
 	},
 /turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/area/journalist)
 "Oj" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/steel,
@@ -17328,11 +17343,9 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/aft)
 "QH" = (
-/obj/structure/bed/chair/office/dark{
-	dir = 8
-	},
+/obj/structure/bed/chair/office/dark,
 /turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/area/journalist)
 "QJ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled,
@@ -18255,8 +18268,8 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/turf/simulated/floor/tiled/white,
+/area/journalist)
 "Tw" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -18342,8 +18355,15 @@
 	c_tag = "Computer Lab";
 	dir = 1
 	},
-/turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/obj/machinery/computer/modular/preset/civilian{
+	dir = 1;
+	icon_state = "console"
+	},
+/obj/effect/floor_decal/corner/green{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/journalist)
 "TN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -18512,7 +18532,7 @@
 "Un" = (
 /obj/machinery/status_display,
 /turf/simulated/wall/prepainted,
-/area/crew_quarters/office)
+/area/journalist)
 "Uo" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -19837,7 +19857,7 @@
 	pixel_y = -24
 	},
 /turf/simulated/floor/lino,
-/area/crew_quarters/office)
+/area/journalist)
 "XH" = (
 /obj/effect/floor_decal/corner_techfloor_grid{
 	dir = 4;

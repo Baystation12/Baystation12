@@ -11,11 +11,6 @@
 	uniform = /obj/item/clothing/under/rank/psych/turtleneck
 	shoes = /obj/item/clothing/shoes/laceup
 
-/decl/hierarchy/outfit/job/torch/passenger/passenger/journalist
-	name = OUTFIT_JOB_NAME("Journalist - Torch")
-	backpack_contents = list(/obj/item/device/camera/tvcamera = 1,
-	/obj/item/clothing/accessory/badge/press = 1)
-
 /decl/hierarchy/outfit/job/torch/passenger/passenger/investor
 	name = OUTFIT_JOB_NAME("Investor - Torch")
 

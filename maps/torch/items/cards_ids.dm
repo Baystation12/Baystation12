@@ -120,6 +120,9 @@
 /obj/item/card/id/torch/crew/service/chaplain
 	job_access_type = /datum/job/chaplain
 
+/obj/item/card/id/torch/crew/service/journalist
+	job_access_type = /datum/job/journalist
+
 /obj/item/card/id/torch/contractor/service //unused
 	job_access_type = DEFAULT_JOB_TYPE
 	detail_color = COLOR_CIVIE_GREEN

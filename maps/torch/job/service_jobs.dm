@@ -103,6 +103,40 @@
 		access_solgov_crew
 	)
 
+/datum/job/journalist
+	title = "Journalist"
+	department = "Service"
+	department_flag = SRV
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the Executive Officer and your news agency (if applicable)"
+	minimum_character_age = list(SPECIES_HUMAN = 22)
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/journalist
+	allowed_branches = list(
+		/datum/mil_branch/civilian,
+		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/service/journalist/ec,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/journalist/fleet
+	)
+
+	allowed_ranks = list(
+		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/ec/e5,
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/fleet/e5
+	)
+
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_ADEPT
+	)
+
+	access = list(
+		access_journalist,
+		access_solgov_crew,
+		access_solgov_crew
+	)
+
 
 /datum/job/crew
 	title = "Crewman"
