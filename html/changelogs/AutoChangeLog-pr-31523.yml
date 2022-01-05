@@ -1,0 +1,5 @@
+author: 'Jux:'
+delete-after: true
+changes:
+  - tweak: The deployable sunglasses augment is now just sunglasses, and not welding
+      goggles.
