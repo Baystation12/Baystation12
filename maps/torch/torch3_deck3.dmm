@@ -11292,7 +11292,7 @@
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
-/obj/item/material/bell,
+/obj/item/material/bell/glass,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "At" = (
