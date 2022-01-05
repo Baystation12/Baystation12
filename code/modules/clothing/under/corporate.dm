@@ -17,7 +17,7 @@
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
 		)
 
-/obj/item/clothing/under/rank/guard/corporate_guard
+/obj/item/clothing/under/rank/guard/research_guard
 	accessories = list(/obj/item/clothing/accessory/corptie)
 
 /obj/item/clothing/under/rank/scientist

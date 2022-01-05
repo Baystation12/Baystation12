@@ -358,7 +358,7 @@
 		/obj/item/rig_module/grenade_launcher/light,
 		/obj/item/rig_module/cooling_unit)
 
-/obj/item/rig/hazard/corporate_guard
+/obj/item/rig/hazard/research_guard
 	name = "EXO hardsuit control module"
 	suit_type = "hazard hardsuit"
 	desc = "A security hardsuit designed for prolonged EVA in dangerous environments."
@@ -385,7 +385,7 @@
 
 	req_access = list(access_research_security)
 
-/obj/item/rig/hazard/corporate_guard/equipped
+/obj/item/rig/hazard/research_guard/equipped
 	initial_modules = list(
 		/obj/item/rig_module/vision/sechud,
 		/obj/item/rig_module/mounted/taser,

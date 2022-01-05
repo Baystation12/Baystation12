@@ -30,12 +30,3 @@
 /decl/hierarchy/outfit/job/torch/passenger/research/assist/testsubject
 	name = OUTFIT_JOB_NAME("Testing Assistant")
 	uniform = /obj/item/clothing/under/rank/ntwork
-
-/decl/hierarchy/outfit/job/torch/passenger/corporate_guard
-	name = OUTFIT_JOB_NAME("Corporate Security Officer")
-	l_ear = /obj/item/device/radio/headset/torchcorp_guard
-	uniform = /obj/item/clothing/under/rank/guard/corporate_guard
-	shoes = /obj/item/clothing/shoes/jackboots
-	id_types = list(/obj/item/card/id/torch/passenger/corporate/corporate_guard)
-	pda_type = /obj/item/modular_computer/pda/science
-	backpack_contents = list(/obj/item/clothing/accessory/badge/holo/NT = 1)

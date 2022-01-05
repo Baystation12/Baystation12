@@ -162,14 +162,14 @@
 	icon_state = "pilot_headset_alt"
 	item_state = "pilot_headset_alt"
 
-/obj/item/device/radio/headset/torchcorp_guard
-	name = "Corporate Security Officer's headset"
+/obj/item/device/radio/headset/research_guard
+	name = "research guard's headset"
 	desc = "Headset of the servants to the corporate overlords."
 	icon_state = "nt_headset"
 	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/headset_torchcorp_guard
+	ks1type = /obj/item/device/encryptionkey/headset_research_guard
 
-/obj/item/device/radio/headset/torchcorp_guard/alt
-	name = "Corporate Security Officer's bowman headset"
+/obj/item/device/radio/headset/research_guard/alt
+	name = "research guard's bowman headset"
 	icon_state = "nt_headset_alt"
 	item_state = "nt_headset_alt"

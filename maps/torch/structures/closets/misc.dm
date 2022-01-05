@@ -24,7 +24,7 @@
 		"command" = COLOR_OFF_WHITE
 	)
 
-/decl/closet_appearance/secure_closet/torch/corporate/corporate_guard
+/decl/closet_appearance/secure_closet/torch/corporate/research_guard
 	extra_decals = list(
 		"stripe_vertical_left_full" =  COLOR_OFF_WHITE,
 		"stripe_vertical_right_full" = COLOR_OFF_WHITE,
@@ -52,37 +52,6 @@
 		new /datum/atom_creator/simple(/obj/item/storage/backpack/messenger, 50),
 		/obj/item/device/radio/headset/heads/torchntcommand,
 		/obj/item/device/radio/headset/heads/torchntcommand/alt
-	)
-
-/obj/structure/closet/secure_closet/corporate_guard
-	name = "\improper corporate security officer's locker"
-	req_access = list(access_research_security)
-	closet_appearance = /decl/closet_appearance/secure_closet/torch/corporate/corporate_guard
-
-/obj/structure/closet/secure_closet/corporate_guard/WillContain()
-	return list(
-		/obj/item/clothing/suit/armor/pcarrier/medium/nt,
-		/obj/item/clothing/head/helmet/nt,
-		/obj/item/storage/belt/holster/security,
-		/obj/item/device/flash,
-		/obj/item/reagent_containers/spray/pepper,
-		/obj/item/melee/baton/loaded,
-		/obj/item/clothing/glasses/tacgoggles,
-		/obj/item/taperoll/police,
-		/obj/item/storage/firstaid/individual/military,
-		/obj/item/device/hailer,
-		/obj/item/clothing/accessory/storage/black_vest,
-		/obj/item/clothing/head/soft/sec/corp,
-		/obj/item/gun/energy/stunrevolver,
-		/obj/item/device/megaphone,
-		/obj/item/clothing/gloves/thick,
-		/obj/item/device/flashlight/maglight,
-		/obj/item/storage/belt/security,
-		/obj/item/material/knife/folding/swiss/loot,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/security/exo, /obj/item/storage/backpack/satchel/sec/exo)),
-		new /datum/atom_creator/simple(/obj/item/storage/backpack/messenger/sec/exo, 50),
-		/obj/item/device/radio/headset/torchcorp_guard,
-		/obj/item/device/radio/headset/torchcorp_guard/alt
 	)
 
 /obj/structure/closet/secure_closet/representative

@@ -30,3 +30,15 @@
 /decl/hierarchy/outfit/job/torch/passenger/research/scientist/solgov
 	name = OUTFIT_JOB_NAME("Scientist - SCG")
 	head = /obj/item/clothing/head/beret/solgov/research
+
+/decl/hierarchy/outfit/job/torch/passenger/research_guard
+	name = OUTFIT_JOB_NAME("Research Guard")
+	l_ear = /obj/item/device/radio/headset/research_guard
+	uniform = /obj/item/clothing/under/rank/guard/research_guard
+	shoes = /obj/item/clothing/shoes/jackboots
+	id_types = list(/obj/item/card/id/torch/crew/research/research_guard)
+	pda_type = /obj/item/modular_computer/pda/science
+
+/decl/hierarchy/outfit/job/torch/passenger/research_guard/ec
+	name = OUTFIT_JOB_NAME("Research Guard - Expeditionary Corps")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/research

@@ -24299,7 +24299,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/structure/closet/secure_closet/corporate_guard,
+/obj/structure/closet/secure_closet/research_guard,
 /obj/machinery/power/apc{
 	dir = 8;
 	name = "west bump";
@@ -30198,7 +30198,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/item/rig/hazard/corporate_guard/equipped,
+/obj/item/rig/hazard/research_guard/equipped,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/rnd/rnd_sec)
 "xJG" = (

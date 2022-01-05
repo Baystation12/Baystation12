@@ -172,6 +172,9 @@
 /obj/item/card/id/torch/crew/research/scientist
 	job_access_type = /datum/job/scientist
 
+/obj/item/card/id/torch/crew/research/research_guard
+	job_access_type = /datum/job/research_guard
+
 //NanoTrasen and Passengers
 
 /obj/item/card/id/torch/passenger
@@ -204,10 +207,6 @@
 /obj/item/card/id/torch/passenger/corporate/liaison
 	job_access_type = /datum/job/liaison
 	extra_details = list("onegoldstripe")
-
-/obj/item/card/id/torch/passenger/corporate/corporate_guard
-	desc = "A card issued to corporate personnel aboard the SEV Torch."
-	job_access_type = /datum/job/corporate_guard
 
 //Merchant
 /obj/item/card/id/torch/merchant
