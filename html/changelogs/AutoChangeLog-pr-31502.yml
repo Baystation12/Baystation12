@@ -1,9 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - tweak: The bartender job is gone, the bar uses kitchen access, cooks are re-titled
-      stewards by default and there can be two.
-  - tweak: There is silver cutlery for fancy purposes and shenanigans. The kitchen
-      starts with a small set and more can be ordered.
-  - tweak: Table knives are tiny instead of small, in line with other cutlery.
-  - tweak: Unathi dueling knives are real knives instead of a subtype of table knives.

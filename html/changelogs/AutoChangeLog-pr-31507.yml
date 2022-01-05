@@ -1,5 +1,0 @@
-author: cdbrunow
-delete-after: true
-changes:
-  - tweak: Faucets can be wrenched to place & remove them. Alt-clicking rotates them
-      like pipes. Gutters and faucets can be returned to pipe dispensers.
