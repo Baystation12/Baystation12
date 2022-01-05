@@ -1130,6 +1130,31 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	suit = /obj/item/clothing/suit/armor/special/spartan/pinstripe
 	head = /obj/item/clothing/head/helmet/spartan/pinstripe
 
+////////Planetary\\\\\\\\
+
+//Spartan
+
+/obj/item/clothing/head/helmet/spartan/planetary
+	icon_state = "planetary-helm-obj"
+	item_state = "planetary-helm-worn"
+
+/obj/item/clothing/suit/armor/special/spartan/planetary
+	icon_state = "planetary-obj"
+	item_state = "planetary-worn"
+
+/decl/hierarchy/outfit/planetary_spartan
+	name = "planetary - spartan"
+	head = /obj/item/clothing/head/helmet/spartan/planetary
+	suit = /obj/item/clothing/suit/armor/special/spartan/planetary
+
+/obj/item/weapon/storage/box/large/donator/planetary
+	startswith = list(/obj/item/clothing/head/helmet/spartan/planetary,
+					/obj/item/clothing/suit/armor/special/spartan/planetary
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/spartan/planetary,
+					/obj/item/clothing/suit/armor/special/spartan/planetary
+					)
+
 ////////ragnarok\\\\\\\\
 
 //ODST

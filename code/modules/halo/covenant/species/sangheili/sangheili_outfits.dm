@@ -139,3 +139,21 @@
 	//
 	id_type = /obj/item/weapon/card/id/elite_minor
 	id_slot = slot_wear_id
+
+/decl/hierarchy/outfit/sangheili/silentshadow
+	name = "Sangheili (Silent Shadow)"
+
+	suit = /obj/item/clothing/suit/armor/special/combatharness/silentshadow
+	suit_store = /obj/item/weapon/melee/energy/elite_sword/zane
+	back = null
+	belt = null
+	gloves = /obj/item/clothing/gloves/thick/sangheili/silentshadow
+	shoes = /obj/item/clothing/shoes/magboots/sangheili/silentshadow
+	head = /obj/item/clothing/head/helmet/sangheili/silentshadow
+	l_pocket = null
+	r_pocket = null
+	r_hand = /obj/item/weapon/melee/energy/elite_sword/zane
+	l_hand = /obj/item/language_learner/unggoy_to_common
+	//
+	id_type = /obj/item/weapon/card/id/elite_specops
+	id_slot = slot_wear_id
