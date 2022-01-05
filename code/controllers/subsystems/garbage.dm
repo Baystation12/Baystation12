@@ -17,28 +17,28 @@ SUBSYSTEM_DEF(garbage)
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 	init_order = SS_INIT_GARBAGE
 
-	var/list/collection_timeout = list(0, 30 SECONDS, 10 SECONDS)	// deciseconds to wait before moving something up in the queue to the next level
+	var/static/tmp/list/collection_timeout = list(0, 30 SECONDS, 10 SECONDS)	// deciseconds to wait before moving something up in the queue to the next level
 
 	//Stat tracking
-	var/delslasttick = 0            // number of del()'s we've done this tick
-	var/gcedlasttick = 0            // number of things that gc'ed last tick
-	var/totaldels = 0
-	var/totalgcs = 0
+	var/static/tmp/delslasttick = 0            // number of del()'s we've done this tick
+	var/static/tmp/gcedlasttick = 0            // number of things that gc'ed last tick
+	var/static/tmp/totaldels = 0
+	var/static/tmp/totalgcs = 0
 
-	var/highest_del_time = 0
-	var/highest_del_tickusage = 0
+	var/static/tmp/highest_del_time = 0
+	var/static/tmp/highest_del_tickusage = 0
 
-	var/list/pass_counts
-	var/list/fail_counts
+	var/static/tmp/list/pass_counts
+	var/static/tmp/list/fail_counts
 
-	var/list/items = list()         // Holds our qdel_item statistics datums
-	var/harddel_halt = FALSE        // If true, will avoid harddeleting from the final queue; will still respect HARDDEL_NOW.
+	var/static/tmp/list/items = list()         // Holds our qdel_item statistics datums
+	var/static/tmp/harddel_halt = FALSE        // If true, will avoid harddeleting from the final queue; will still respect HARDDEL_NOW.
 
 	//Queue
-	var/list/queues
+	var/static/tmp/list/queues
 
 	#ifdef TESTING
-	var/list/reference_find_on_fail = list()
+	var/static/tmp/list/reference_find_on_fail = list()
 	#endif
 
 
@@ -274,10 +274,6 @@ SUBSYSTEM_DEF(garbage)
 		queues[GC_QUEUE_PREQUEUE] += D
 		D.gc_destroyed = GC_QUEUED_FOR_HARD_DEL
 
-/datum/controller/subsystem/garbage/Recover()
-	if (istype(SSgarbage.queues))
-		for (var/i in 1 to SSgarbage.queues.len)
-			queues[i] |= SSgarbage.queues[i]
 
 /datum/controller/subsystem/garbage/proc/toggle_harddel_halt(new_state = FALSE)
 	if(new_state == harddel_halt)
