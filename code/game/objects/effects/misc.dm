@@ -66,6 +66,9 @@ obj/effect/paint/palegreengray
 /obj/effect/paint/brown
 	color = COLOR_DARK_BROWN
 
+/obj/effect/paint/gunmetal
+	color = COLOR_DARK_GUNMETAL
+
 //Stripes the wall it spawns on, then dies
 /obj/effect/paint_stripe
 	name = "stripe of paint"

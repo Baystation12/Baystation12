@@ -1,1688 +1,2626 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"ac" = (
-/obj/effect/paint/vox,
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"ae" = (
-/obj/effect/paint/vox,
-/turf/simulated/wall/titanium,
-/area/map_template/vox_raider)
-"af" = (
-/obj/structure/table/rack,
-/obj/item/tank/nitrogen,
-/obj/item/tank/nitrogen,
-/obj/item/tank/nitrogen,
-/obj/item/tank/nitrogen,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"aj" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/vox,
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"ak" = (
-/obj/item/reagent_containers/ivbag/nanoblood,
-/obj/item/reagent_containers/ivbag/nanoblood,
-/obj/structure/iv_drip,
-/obj/effect/floor_decal/corner/yellow/full,
-/turf/simulated/floor/tiled/freezer{
-	initial_gas = list("nitrogen" = 101.383)
-	},
-/area/map_template/vox_raider)
-"al" = (
-/obj/machinery/optable,
-/obj/effect/floor_decal/corner/yellow/full,
-/turf/simulated/floor/tiled/freezer{
-	initial_gas = list("nitrogen" = 101.383)
-	},
-/area/map_template/vox_raider)
-"at" = (
-/obj/structure/table/standard,
-/obj/item/stack/medical/advanced/bruise_pack,
-/obj/item/stack/medical/advanced/bruise_pack,
-/obj/item/stack/medical/advanced/bruise_pack,
-/obj/item/stack/medical/advanced/bruise_pack,
-/obj/item/storage/box/freezer,
-/obj/item/storage/firstaid/surgery,
-/obj/item/stack/nanopaste,
-/obj/effect/floor_decal/corner/yellow/full,
-/turf/simulated/floor/tiled/freezer{
-	initial_gas = list("nitrogen" = 101.383)
-	},
-/area/map_template/vox_raider)
-"ax" = (
+"aa" = (
 /turf/space,
 /area/space)
-"aX" = (
-/obj/machinery/bodyscanner{
+"ab" = (
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/prepainted,
+/area/map_template/vox_raider/storage)
+"ac" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/shutters{
+	name = "Window Shutters";
+	icon_state = "shutter1";
+	dir = 2;
+	opacity = 0;
+	density = 0;
+	id_tag = "vox_ship"
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/storage)
+"ad" = (
+/obj/structure/lattice,
+/obj/machinery/light/navigation,
+/turf/space,
+/area/map_template/vox_raider/storage)
+"ae" = (
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/storage)
+"af" = (
+/obj/structure/lattice,
+/obj/machinery/light/navigation/delay2,
+/turf/space,
+/area/map_template/vox_raider/storage)
+"ag" = (
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/vox_raider/engineering)
+"ah" = (
+/obj/machinery/atmospherics/pipe/vent/high_volume,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/engineering)
+"ai" = (
+/obj/structure/grille,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/engineering)
+"aj" = (
+/obj/structure/lattice,
+/turf/space,
+/area/map_template/vox_raider/storage)
+"ak" = (
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/yellow{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"al" = (
+/obj/structure/catwalk,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/storage)
+"am" = (
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/yellow/full,
-/turf/simulated/floor/tiled/freezer{
-	initial_gas = list("nitrogen" = 101.383)
+/obj/effect/floor_decal/corner/yellow{
+	dir = 4
 	},
-/area/map_template/vox_raider)
-"bb" = (
-/obj/machinery/body_scanconsole{
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"an" = (
+/obj/effect/floor_decal/corner/yellow/half{
+	dir = 1;
+	icon_state = "bordercolorhalf"
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"ao" = (
+/obj/machinery/door/airlock/external,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/storage)
+"ap" = (
+/obj/machinery/power/port_gen/pacman/super/potato,
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2";
+	pixel_y = 0
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/engineering)
+"aq" = (
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24;
+	req_access = newlist()
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2";
+	pixel_y = 0
+	},
+/obj/effect/floor_decal/industrial/radiation{
+	icon_state = "stripe";
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/yellow/full,
-/turf/simulated/floor/tiled/freezer{
-	initial_gas = list("nitrogen" = 101.383)
+/obj/effect/floor_decal/industrial/radiation{
+	icon_state = "stripe";
+	dir = 4
 	},
-/area/map_template/vox_raider)
-"be" = (
+/turf/simulated/floor/reinforced/vox,
+/area/map_template/vox_raider/engineering)
+"ar" = (
+/obj/machinery/power/smes/buildable/preset/voxship/ship,
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2";
+	pixel_y = 0
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/engineering)
+"as" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/vox_raider/engineering)
+"at" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 6;
+	icon_state = "intact"
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/vox_raider/engineering)
+"au" = (
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull/vox,
+/area/map_template/vox_raider/armory)
+"av" = (
+/obj/machinery/atmospherics/unary/engine{
+	dir = 8;
+	icon_state = "nozzle"
+	},
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/engineering)
+"aw" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/shutters{
+	name = "Window Shutters";
+	icon_state = "shutter1";
+	dir = 8;
+	opacity = 0;
+	density = 0;
+	id_tag = "vox_ship"
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/storage)
+"ax" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull/vox,
+/area/map_template/vox_raider/armory)
+"ay" = (
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"az" = (
+/obj/structure/catwalk,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/storage)
+"aA" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/yellow/full,
-/turf/simulated/floor/tiled/freezer{
-	initial_gas = list("nitrogen" = 101.383)
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 8
 	},
-/area/map_template/vox_raider)
-"bi" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/crate/med_crate,
+/obj/random/medical/lite,
+/obj/random/medical/lite,
+/obj/random/medical/lite,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"aB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/yellow/full,
-/turf/simulated/floor/tiled/freezer{
-	initial_gas = list("nitrogen" = 101.383)
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/crate,
+/obj/random/contraband,
+/obj/random/loot,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"aC" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
 	},
-/area/map_template/vox_raider)
-"bk" = (
-/obj/structure/closet/medical_wall/filled{
-	pixel_x = 32
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"aD" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8;
+	icon_state = "map_scrubber_on"
 	},
-/obj/item/reagent_containers/spray/cleaner,
-/obj/item/reagent_containers/spray/sterilizine,
-/obj/item/defibrillator/loaded,
-/obj/item/storage/firstaid/combat,
-/obj/item/bodybag/cryobag,
-/obj/item/reagent_containers/ivbag/nanoblood,
-/obj/item/storage/firstaid/adv,
-/obj/structure/table/standard,
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/crate/freezer,
+/obj/item/reagent_containers/food/snacks/meat/human,
+/obj/item/reagent_containers/food/snacks/meat/chicken,
+/obj/item/reagent_containers/food/snacks/meat/beef,
+/obj/item/reagent_containers/food/snacks/meat/syntiflesh,
+/obj/item/reagent_containers/food/snacks/meat/monkey,
+/obj/item/reagent_containers/food/snacks/meat/meatstationmeat,
+/obj/item/reagent_containers/food/snacks/meat/monkey,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"aE" = (
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"aF" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id_tag = "vox_ship";
+	name = "Window Shutters";
+	opacity = 0
+	},
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/storage)
+"aG" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/prepainted,
+/area/map_template/vox_raider/storage)
+"aH" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
 	level = 2
 	},
-/obj/machinery/light/vox{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/yellow/full,
-/turf/simulated/floor/tiled/freezer{
-	initial_gas = list("nitrogen" = 101.383)
-	},
-/area/map_template/vox_raider)
-"bv" = (
-/obj/structure/table/rack,
-/obj/item/gun/energy/darkmatter,
-/obj/effect/floor_decal/corner/b_green/mono,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"bw" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden{
-	dir = 1
-	},
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"bP" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 10
-	},
-/obj/machinery/telecomms/allinone{
-	intercept = 1
-	},
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"bU" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/light/vox,
-/obj/effect/floor_decal/corner/yellow/full,
-/turf/simulated/floor/tiled/freezer{
-	initial_gas = list("nitrogen" = 101.383)
-	},
-/area/map_template/vox_raider)
-"ck" = (
-/obj/structure/closet/crate/freezer,
-/obj/item/reagent_containers/glass/bottle/antitoxin,
-/obj/item/reagent_containers/glass/bottle/antitoxin,
-/obj/item/reagent_containers/glass/bottle/inaprovaline,
-/obj/item/reagent_containers/glass/bottle/inaprovaline,
-/obj/item/reagent_containers/glass/bottle/stoxin,
-/obj/item/reagent_containers/glass/bottle/stoxin,
-/obj/item/reagent_containers/glass/bottle/kelotane,
-/obj/item/reagent_containers/glass/bottle/kelotane,
-/obj/item/reagent_containers/glass/beaker/cryoxadone,
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4;
-	level = 2
-	},
-/obj/effect/floor_decal/corner/yellow/full,
-/obj/item/storage/box/detergent,
-/obj/item/storage/box/detergent,
-/turf/simulated/floor/tiled/freezer{
-	initial_gas = list("nitrogen" = 101.383)
-	},
-/area/map_template/vox_raider)
-"cm" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/yellow/full,
-/turf/simulated/floor/tiled/freezer{
-	initial_gas = list("nitrogen" = 101.383)
-	},
-/area/map_template/vox_raider)
-"cB" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/effect/landmark{
-	name = "Vox-Spawn"
-	},
-/obj/effect/floor_decal/corner/yellow/full,
-/turf/simulated/floor/tiled/freezer{
-	initial_gas = list("nitrogen" = 101.383)
-	},
-/area/map_template/vox_raider)
-"cJ" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/yellow/full,
-/turf/simulated/floor/tiled/freezer{
-	initial_gas = list("nitrogen" = 101.383)
-	},
-/area/map_template/vox_raider)
-"cU" = (
-/obj/machinery/vending/medical{
-	idle_power_usage = 100;
-	req_access = list("ACCESS_SYNDICATE")
-	},
-/obj/machinery/light/small{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/yellow/full,
-/turf/simulated/floor/tiled/freezer{
-	initial_gas = list("nitrogen" = 101.383)
-	},
-/area/map_template/vox_raider)
-"dj" = (
-/obj/machinery/atmospherics/unary/tank/nitrogen{
-	dir = 4
-	},
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"dq" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 2
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/b_green{
-	dir = 5
-	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"dr" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/meter,
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"dv" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden{
-	dir = 4
-	},
-/obj/effect/landmark{
-	name = "Vox-Spawn"
-	},
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"dH" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/universal,
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"dZ" = (
-/obj/machinery/ion_engine{
+/obj/machinery/light/small/red{
+	icon_state = "bulb_map";
 	dir = 8
 	},
-/turf/simulated/floor/shuttle_ceiling/vox,
-/area/map_template/vox_raider)
-"ee" = (
-/obj/effect/floor_decal/corner/b_green/half,
-/obj/machinery/door/airlock/hatch,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"ej" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/b_green/half,
-/obj/machinery/door/airlock/hatch,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"ek" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 9
-	},
-/obj/machinery/light/vox,
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"ew" = (
-/turf/simulated/floor/shuttle_ceiling/vox,
-/area/map_template/vox_raider)
-"ex" = (
-/obj/machinery/shipsensors,
-/turf/simulated/floor/shuttle_ceiling/vox,
-/area/map_template/vox_raider)
-"ez" = (
-/obj/machinery/computer/ship/engines{
-	req_access = list("ACCESS_SYNDICATE")
-	},
-/obj/machinery/light/vox{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"eB" = (
-/obj/machinery/computer/shuttle_control/explore/vox_raider,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"eE" = (
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"eF" = (
-/obj/machinery/fabricator/hacked,
-/obj/item/stack/material/plastic/ten,
-/obj/item/stack/material/aluminium/ten,
-/obj/item/stack/material/steel/ten,
-/obj/item/stack/material/glass/ten,
-/obj/item/stack/material/steel/fifty,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"eG" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/b_green{
-	dir = 9
-	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"eH" = (
-/obj/machinery/alarm/vox{
-	pixel_y = 18;
-	req_access = list("ACCESS_SYNDICATE")
-	},
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"eM" = (
-/obj/machinery/power/smes/buildable/preset/admin,
-/obj/effect/floor_decal/industrial/hatch/blue,
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"eP" = (
-/obj/machinery/power/port_gen/pacman,
-/obj/structure/cable/yellow{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/effect/floor_decal/industrial/hatch/orange,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"eQ" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/b_green{
-	dir = 9
-	},
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"eW" = (
-/obj/effect/floor_decal/corner/b_green/three_quarters{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"eX" = (
-/obj/structure/table/rack,
-/obj/item/gun/energy/sonic,
-/obj/machinery/light/vox{
-	dir = 1
-	},
-/obj/effect/floor_decal/corner/b_green/mono,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"ff" = (
-/obj/machinery/computer/ship/helm{
-	dir = 4;
-	req_access = list("ACCESS_SYNDICATE")
-	},
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"fi" = (
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"aI" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/b_green{
-	dir = 10
-	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"fl" = (
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"aJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/b_green/three_quarters{
-	dir = 4
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/prepainted,
+/area/map_template/vox_raider/storage)
+"aK" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
 	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"fo" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 4
+/obj/machinery/alarm/vox_raider{
+	dir = 4;
+	icon_state = "alarm0";
+	pixel_x = -16
 	},
-/obj/effect/landmark{
-	name = "Vox-Spawn"
-	},
-/obj/effect/floor_decal/corner/b_green/three_quarters,
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"fV" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/b_green/three_quarters{
+/obj/effect/floor_decal/industrial/radiation{
+	icon_state = "stripe";
 	dir = 1
 	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"kF" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	level = 2
+/turf/simulated/floor/reinforced/vox,
+/area/map_template/vox_raider/engineering)
+"aL" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
 	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/effect/floor_decal/corner/b_green{
-	dir = 10
-	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"kI" = (
-/obj/machinery/power/terminal{
-	dir = 1;
-	icon_state = "term"
-	},
-/obj/structure/cable/yellow{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/obj/effect/floor_decal/corner/b_green{
-	dir = 10
-	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"nN" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
-	dir = 4;
-	id_tag = "vox_raider_pump_out_internal"
-	},
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"on" = (
-/obj/structure/bed/chair/comfy/green{
-	dir = 8
-	},
-/obj/effect/floor_decal/corner/b_green,
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"pU" = (
-/obj/structure/cable/yellow{
+/obj/structure/cable{
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/effect/floor_decal/corner/b_green{
-	dir = 10
+/obj/effect/floor_decal/industrial/radiation/corner{
+	icon_state = "stripecorner";
+	dir = 1
 	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"qj" = (
-/obj/effect/floor_decal/corner/b_green/three_quarters,
+/obj/effect/floor_decal/industrial/radiation/corner{
+	icon_state = "stripecorner";
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/vox,
+/area/map_template/vox_raider/engineering)
+"aM" = (
+/obj/machinery/power/terminal{
+	dir = 1;
+	icon_state = "term"
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/obj/machinery/light/small/red{
+	icon_state = "bulb_map";
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/radiation{
+	icon_state = "stripe";
+	dir = 1
+	},
+/turf/simulated/floor/reinforced/vox,
+/area/map_template/vox_raider/engineering)
+"aN" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/engineering)
+"aO" = (
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/engineering)
+"aP" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
+	dir = 8;
+	icon_state = "map"
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/vox_raider/engineering)
+"aQ" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"aR" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/crate/radiation,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"aS" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/crate,
+/obj/random/loot,
+/obj/random/junk,
+/obj/random/junk,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"aT" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"aU" = (
+/obj/machinery/door/airlock/hatch,
+/obj/structure/catwalk,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/storage)
+"aV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"rM" = (
-/obj/effect/paint/vox,
-/obj/machinery/atmospherics/pipe/simple/hidden/black{
+/obj/machinery/door/airlock/external,
+/obj/structure/catwalk,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/storage)
+"aW" = (
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"aX" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/prepainted,
+/area/map_template/vox_raider/storage)
+"aY" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4;
+	icon_state = "map_universal"
+	},
+/turf/simulated/floor/airless,
+/area/map_template/vox_raider/storage)
+"aZ" = (
+/obj/machinery/atmospherics/pipe/vent/high_volume{
+	dir = 8;
 	icon_state = "intact"
 	},
-/turf/simulated/wall/titanium,
-/area/map_template/vox_raider)
-"sE" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 6
-	},
-/obj/effect/floor_decal/corner/b_green/full,
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"tN" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/b_green/full,
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"tU" = (
-/obj/structure/table/rack,
-/obj/item/gun/launcher/alien/spikethrower,
-/obj/item/gun/launcher/alien/spikethrower,
-/obj/item/gun/launcher/alien/spikethrower,
-/obj/effect/floor_decal/corner/b_green/mono,
-/obj/item/gun/launcher/alien/spikethrower,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"tW" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
-	},
-/obj/effect/floor_decal/corner/b_green/full,
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"vU" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9;
-	icon_state = "intact-supply"
-	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
-	},
-/obj/structure/table/steel,
-/obj/item/clothing/glasses/hud/health/goggle,
-/obj/item/clothing/glasses/meson,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"vX" = (
-/obj/effect/overmap/visitable/sector/vox_start,
-/turf/space,
-/area/space)
-"wm" = (
-/obj/machinery/computer/ship/sensors/vox{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"ww" = (
-/obj/machinery/light/vox,
-/obj/effect/landmark{
-	name = "Vox-Spawn"
-	},
-/obj/structure/bed/chair/comfy/green{
-	dir = 8
-	},
-/obj/effect/floor_decal/corner/b_green{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"wz" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4;
-	level = 2
-	},
-/obj/effect/floor_decal/corner/b_green{
-	dir = 5
-	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"wG" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/black,
-/obj/machinery/airlock_sensor{
-	frequency = 1331;
-	id_tag = "vox_raider_sensor";
-	pixel_y = -24
-	},
-/obj/structure/handrail{
-	dir = 1;
-	icon_state = "handrail"
-	},
-/obj/machinery/light/vox{
-	dir = 4
-	},
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"xx" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 8
-	},
-/obj/effect/floor_decal/corner/b_green/three_quarters{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"xE" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4;
-	level = 2
-	},
-/obj/structure/closet/crate/radiation,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"xK" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/b_green/half{
-	dir = 1
-	},
-/obj/machinery/door/airlock/multi_tile{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"yA" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 1
-	},
-/obj/effect/floor_decal/corner/b_green/three_quarters{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"yQ" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 2
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/obj/effect/floor_decal/corner/b_green{
-	dir = 5
-	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"zx" = (
-/obj/effect/floor_decal/corner/b_green/full,
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"Ah" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 2
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/cable/green{
+/turf/simulated/floor/airless,
+/area/map_template/vox_raider/storage)
+"ba" = (
+/obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/shuttle_landmark/vox_raider/start,
-/obj/effect/overmap/visitable/ship/landable/vox_raider,
-/obj/effect/floor_decal/corner/b_green{
-	dir = 5
+/obj/machinery/door/window,
+/obj/machinery/door/window{
+	dir = 1;
+	icon_state = "left"
 	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"Am" = (
-/obj/effect/floor_decal/corner/b_green{
-	dir = 6
+/turf/simulated/floor/reinforced/vox,
+/area/map_template/vox_raider/engineering)
+"bb" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 5;
+	icon_state = "intact"
 	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"Av" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/b_green{
-	dir = 5
-	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"BI" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/b_green/full,
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"Db" = (
-/obj/machinery/atmospherics/portables_connector{
-	dir = 1
-	},
-/obj/machinery/portable_atmospherics/canister/nitrogen,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"Dm" = (
-/obj/machinery/portable_atmospherics/canister/nitrogen,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"Dn" = (
-/obj/structure/table/rack,
-/obj/item/gun/launcher/alien/slugsling,
-/obj/machinery/light/vox{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"DR" = (
-/obj/machinery/recharge_station,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"DZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/b_green{
-	dir = 6
+/obj/effect/floor_decal/corner/yellow{
+	dir = 5;
+	icon_state = "corner_white"
 	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"EG" = (
-/obj/machinery/light/vox,
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"GJ" = (
-/obj/structure/cable/green,
-/obj/machinery/power/apc/hyper{
-	req_access = list("ACCESS_SYNDICATE")
-	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"HJ" = (
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1331;
-	master_tag = "vox_raider";
-	name = "interior access button";
-	pixel_x = -24;
-	pixel_y = -24;
-	req_access = list("ACCESS_SYNDICATE")
-	},
-/obj/effect/landmark{
-	name = "Vox-Spawn"
-	},
-/obj/effect/floor_decal/corner/b_green{
-	dir = 6
-	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"Im" = (
-/obj/structure/table/rack,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/rig/vox,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"IF" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 5
-	},
-/obj/effect/floor_decal/corner/b_green/three_quarters{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"Jj" = (
-/obj/machinery/door/airlock/external/bolted{
-	frequency = 1331;
-	id_tag = "vox_raider_outer"
-	},
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"JN" = (
-/obj/machinery/door/airlock/hatch,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/b_green/half{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"KM" = (
-/obj/machinery/door/airlock/hatch,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/b_green/half{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"KQ" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"Lc" = (
-/obj/machinery/door/airlock/external/bolted_open{
-	frequency = 1331;
-	id_tag = "vox_raider_inner"
-	},
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"Mv" = (
-/obj/structure/table/rack,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/under/vox/vox_casual,
-/obj/item/clothing/suit/space/vox/stealth,
-/obj/item/clothing/head/helmet/space/vox/stealth,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"MZ" = (
-/obj/structure/table/rack,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/suit/space/vox/carapace,
-/obj/item/clothing/under/vox/vox_casual,
-/obj/item/clothing/head/helmet/space/vox/carapace,
-/obj/machinery/light/vox,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"Ns" = (
-/obj/structure/table/rack,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/under/vox/vox_casual,
-/obj/item/clothing/suit/space/vox/medic,
-/obj/item/clothing/head/helmet/space/vox/medic,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"Nt" = (
-/obj/structure/table/rack,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/under/vox/vox_casual,
-/obj/item/clothing/suit/space/vox/pressure,
-/obj/item/clothing/head/helmet/space/vox/pressure,
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/effect/decal/cleanable/filth,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"NI" = (
-/obj/machinery/atmospherics/pipe/vent/high_volume{
-	dir = 4;
-	icon_state = "intact"
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/engineering)
+"bc" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/fuel,
+/obj/machinery/meter,
+/obj/effect/floor_decal/corner/yellow{
+	dir = 5;
+	icon_state = "corner_white"
 	},
-/turf/simulated/floor/shuttle_ceiling/vox,
-/area/map_template/vox_raider)
-"On" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
-	dir = 8;
-	id_tag = "vox_raider_pump_out_external"
-	},
-/obj/machinery/airlock_sensor{
-	frequency = 1331;
-	id_tag = "vox_raider_sensor_external";
-	pixel_y = 24
-	},
-/obj/machinery/access_button{
-	command = "cycle_exterior";
-	frequency = 1331;
-	master_tag = "vox_raider";
-	name = "exterior access button";
-	pixel_x = -24;
-	pixel_y = -6;
-	req_access = list("ACCESS_SYNDICATE")
-	},
-/turf/simulated/floor/shuttle_ceiling/vox,
-/area/map_template/vox_raider)
-"OH" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/vox,
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	dir = 8
-	},
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"Ph" = (
-/obj/structure/hygiene/sink/kitchen{
-	pixel_y = 26
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+/obj/effect/floor_decal/corner/yellow,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/engineering)
+"bd" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel,
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/vox_raider/engineering)
+"be" = (
+/obj/machinery/light/navigation/delay4,
+/obj/structure/lattice,
+/turf/space,
+/area/map_template/vox_raider/storage)
+"bf" = (
+/obj/machinery/shipsensors,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/bridge)
+"bg" = (
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"Pk" = (
+/obj/effect/floor_decal/corner/yellow{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"bh" = (
+/obj/structure/catwalk,
+/obj/machinery/light/small,
+/obj/machinery/alarm/vox_raider{
+	dir = 1;
+	icon_state = "alarm0";
+	pixel_x = 0;
+	pixel_y = -16
+	},
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/storage)
+"bi" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/yellow,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"bj" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/effect/floor_decal/corner/yellow/half,
+/obj/machinery/firealarm{
+	dir = 1;
+	icon_state = "casing";
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"bk" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/b_green{
-	dir = 6
+/obj/effect/floor_decal/corner/yellow/half,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"bl" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/power/apc{
+	name = "south bump";
+	pixel_x = 0;
+	pixel_y = -24
 	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"Rn" = (
-/obj/machinery/light/vox{
-	dir = 1
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
 	},
-/obj/effect/floor_decal/corner/b_green/full,
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"Ry" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/b_green/half,
-/obj/machinery/door/airlock/hatch,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"RP" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/yellow{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"Tw" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
-	dir = 1;
-	id_tag = "vox_raider_pump"
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"bm" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
-/obj/structure/handrail{
-	dir = 1;
-	icon_state = "handrail"
+/obj/machinery/light/small,
+/obj/structure/cable{
+	icon_state = "2-8"
 	},
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"Uh" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/storage)
+"bn" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/yellow,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/storage)
+"bo" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/prepainted,
+/area/map_template/vox_raider/storage)
+"bp" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/wall/prepainted,
+/area/map_template/vox_raider/storage)
+"bq" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/prepainted,
+/area/map_template/vox_raider/storage)
+"br" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/prepainted,
+/area/map_template/vox_raider/storage)
+"bs" = (
+/obj/machinery/atmospherics/unary/tank/nitrogen,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/engineering)
+"bt" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 6;
+	icon_state = "intact"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/engineering)
+"bu" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 4;
+	icon_state = "intact"
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/alarm/vox_raider,
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 8
+	},
+/obj/machinery/fabricator/hacked,
+/obj/item/stack/material/aluminium/ten,
+/obj/item/stack/material/glass/ten,
+/obj/item/stack/material/steel/ten,
+/obj/item/stack/material/steel/ten,
+/obj/item/stack/material/steel/ten,
+/obj/item/stack/material/plastic/ten,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/engineering)
+"bv" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 4;
+	icon_state = "intact"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/engineering)
+"bw" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 9;
+	icon_state = "intact"
+	},
+/obj/effect/floor_decal/corner/yellow/half{
+	icon_state = "bordercolorhalf";
+	dir = 4
+	},
+/obj/machinery/computer/ship/engines{
+	icon_state = "computer";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/engineering)
+"bx" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/blast/shutters{
+	name = "Window Shutters";
+	icon_state = "shutter1";
+	dir = 2;
+	opacity = 0;
+	density = 0;
+	id_tag = "vox_ship"
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/storage)
+"by" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/prepainted,
+/area/map_template/vox_raider/storage)
+"bz" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/effect/floor_decal/corner/yellow/half{
+	dir = 8;
+	icon_state = "bordercolorhalf"
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/engineering)
+"bA" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 4
+	},
+/obj/machinery/meter,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/engineering)
+"bB" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/engineering)
+"bC" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/engineering)
+"bD" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/engineering)
+"bE" = (
+/obj/effect/floor_decal/corner/yellow/half{
+	icon_state = "bordercolorhalf";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/engineering)
+"bF" = (
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/engineering)
+"bG" = (
+/obj/structure/lattice,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/space,
+/area/map_template/vox_raider/bridge)
+"bH" = (
+/turf/simulated/wall/prepainted,
+/area/map_template/vox_raider/bridge)
+"bI" = (
+/obj/structure/catwalk,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/bridge)
+"bJ" = (
+/obj/structure/lattice,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/shuttle_landmark/vox_raider,
+/obj/effect/overmap/visitable/ship/landable/vox_raider,
+/turf/space,
+/area/map_template/vox_raider/bridge)
+"bK" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/light/small,
+/obj/effect/floor_decal/corner/yellow{
+	dir = 10;
+	icon_state = "corner_white"
+	},
+/obj/effect/floor_decal/corner/yellow{
+	dir = 1
+	},
+/obj/machinery/vending/engivend{
+	req_access = list()
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/engineering)
+"bL" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/yellow{
+	dir = 8
+	},
+/obj/machinery/vending/tool,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/engineering)
+"bM" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/engineering)
+"bN" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8;
+	level = 2
+	},
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/yellow,
+/obj/item/tank/hydrogen,
+/obj/machinery/portable_atmospherics/canister/hydrogen,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/engineering)
+"bO" = (
+/obj/machinery/telecomms/allinone{
+	intercept = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/engineering)
+"bP" = (
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/obj/machinery/light/small,
+/obj/effect/floor_decal/corner/yellow/half,
+/obj/machinery/firealarm{
+	dir = 1;
+	icon_state = "casing";
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/engineering)
+"bQ" = (
+/obj/effect/floor_decal/corner/yellow{
+	dir = 10;
+	icon_state = "corner_white"
+	},
+/obj/effect/floor_decal/corner/yellow{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/engineering)
+"bR" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull/vox,
+/area/map_template/vox_raider/armory)
+"bS" = (
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull/vox,
+/area/map_template/vox_raider/bridge)
+"bT" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull/vox,
+/area/map_template/vox_raider/armory)
+"bU" = (
+/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id_tag = "vox_bridge";
+	name = "Window Shutters";
+	opacity = 0
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/bridge)
+"bV" = (
+/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id_tag = "vox_bridge";
+	name = "Window Shutters";
+	opacity = 0
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/bridge)
+"bW" = (
+/obj/structure/lattice,
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull/vox,
+/area/map_template/vox_raider/bridge)
+"bX" = (
+/obj/machinery/door/airlock/hatch,
+/obj/structure/catwalk,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/bridge)
+"bY" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull/vox,
+/area/map_template/vox_raider/bridge)
+"bZ" = (
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/prepainted,
+/area/map_template/vox_raider/med)
+"ca" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/vox_raider/engineering)
+"cb" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/obj/structure/catwalk,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/external/glass,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/engineering)
+"cc" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/obj/structure/catwalk,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/airlock/external/glass,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"cd" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/vox_raider/engineering)
+"ce" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/machinery/computer/ship/engines{
+	dir = 4;
+	icon_state = "computer";
+	req_access = ""
+	},
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"cf" = (
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24;
+	req_access = newlist()
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2";
+	pixel_y = 0
+	},
+/obj/structure/table/reinforced,
+/obj/effect/floor_decal/corner/blue/half{
+	icon_state = "bordercolorhalf";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"cg" = (
+/obj/structure/table/reinforced,
+/obj/machinery/button/blast_door{
+	id_tag = "vox_bridge";
+	name = "shutter control";
+	pixel_x = -26;
+	pixel_y = -8
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "vox_ship";
+	name = "shutter control";
+	pixel_x = -26;
+	pixel_y = 0
+	},
+/obj/effect/floor_decal/corner/blue/half{
+	icon_state = "bordercolorhalf";
+	dir = 1
+	},
+/obj/item/reagent_containers/food/drinks/glass2/flute,
+/obj/random/advdevice,
+/obj/random/hat,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"ch" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/corner/blue/half{
+	icon_state = "bordercolorhalf";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"ci" = (
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"cj" = (
+/obj/structure/bed/chair/shuttle/black{
+	icon_state = "shuttle_chair_preview";
+	dir = 4
+	},
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 4
 	},
 /obj/effect/landmark{
 	name = "Vox-Spawn"
 	},
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"UC" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	dir = 8
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"ck" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
 	},
-/obj/effect/paint/vox,
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"UY" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/red{
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/light/small{
 	dir = 1
 	},
-/obj/structure/handrail,
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"Vf" = (
-/obj/effect/floor_decal/corner/b_green/half,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"Ww" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
-	dir = 8;
-	id_tag = "vox_raider_pump"
+/obj/structure/table/reinforced,
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 1
 	},
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"Xq" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
-	id_tag = "vox_raider_pump_out_internal"
+/obj/effect/floor_decal/corner/blue,
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 4
 	},
-/obj/structure/handrail,
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	cycle_to_external_air = 1;
-	dir = 8;
-	frequency = 1331;
-	id_tag = "vox_raider";
-	pixel_x = 22;
-	req_access = list("ACCESS_SYNDICATE");
-	tag_exterior_sensor = "vox_raider_sensor_external"
+/obj/item/storage/backpack,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"cl" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
 	},
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"Xy" = (
-/obj/structure/closet/crate/freezer/meat,
-/obj/item/reagent_containers/food/snacks/meat/beef,
-/obj/item/reagent_containers/food/snacks/meat/beef,
-/obj/item/reagent_containers/food/snacks/meat/beef,
-/obj/item/reagent_containers/food/snacks/meat/beef,
-/obj/item/reagent_containers/food/snacks/meat/beef,
-/obj/item/reagent_containers/food/snacks/meat/beef,
-/obj/item/reagent_containers/food/snacks/meat/beef,
-/obj/item/reagent_containers/food/snacks/meat/beef,
-/obj/item/reagent_containers/food/snacks/meat/beef,
-/obj/item/reagent_containers/food/snacks/meat/beef,
-/obj/item/reagent_containers/food/snacks/meat/beef,
-/obj/item/reagent_containers/food/snacks/meat/beef,
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"ZC" = (
-/obj/structure/closet/crate{
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull/vox,
+/area/map_template/vox_raider/bridge)
+"cm" = (
+/obj/structure/lattice,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/turf/space,
+/area/map_template/vox_raider/bridge)
+"cn" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/prepainted,
+/area/map_template/vox_raider/med)
+"co" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 9
+	},
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 4
+	},
+/obj/machinery/bodyscanner{
+	icon_state = "body_scanner_0";
+	dir = 1
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/map_template/vox_raider/med)
+"cp" = (
+/obj/machinery/power/apc{
 	dir = 1;
-	name = "reserve equipment crate"
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24;
+	req_access = newlist()
 	},
-/obj/item/device/multitool,
-/obj/item/device/multitool,
-/obj/item/device/multitool,
-/obj/item/device/multitool,
-/obj/item/stack/material/rods/fifty,
-/obj/item/device/spaceflare,
-/obj/item/device/spaceflare,
-/obj/item/weldpack,
-/obj/item/weldpack,
-/turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2";
+	pixel_y = 0
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/obj/effect/floor_decal/corner/blue/half{
+	icon_state = "bordercolorhalf";
+	dir = 1
+	},
+/obj/structure/table/reinforced,
+/obj/item/storage/firstaid/fire{
+	pixel_y = 12
+	},
+/obj/item/storage/firstaid/trauma{
+	pixel_y = 8
+	},
+/obj/item/storage/firstaid/toxin{
+	pixel_y = 4
+	},
+/obj/item/storage/firstaid/adv,
+/obj/item/storage/box/detergent,
+/obj/item/defibrillator/loaded,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/map_template/vox_raider/med)
+"cq" = (
+/obj/machinery/alarm/vox_raider,
+/obj/effect/floor_decal/corner/blue/half{
+	icon_state = "bordercolorhalf";
+	dir = 1
+	},
+/obj/structure/table/reinforced,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/syringe/antiviral,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/map_template/vox_raider/med)
+"cr" = (
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 6
+	},
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 1
+	},
+/obj/structure/table/reinforced,
+/obj/item/storage/firstaid/surgery,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/map_template/vox_raider/med)
+"cs" = (
+/obj/structure/lattice,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/turf/space,
+/area/map_template/vox_raider/engineering)
+"ct" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/wall/prepainted,
+/area/map_template/vox_raider/engineering)
+"cu" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8;
+	level = 2
+	},
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/engineering)
+"cv" = (
+/turf/simulated/wall/prepainted,
+/area/map_template/vox_raider/engineering)
+"cw" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/effect/floor_decal/borderfloorblack,
+/obj/structure/table/rack,
+/obj/item/gun/launcher/alien/slugsling,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"cx" = (
+/obj/structure/lattice,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/space,
+/area/map_template/vox_raider/engineering)
+"cy" = (
+/obj/effect/overmap/visitable/sector/vox_start,
+/turf/space,
+/area/space)
+"cz" = (
+/obj/machinery/computer/ship/sensors/vox{
+	icon_state = "computer";
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/blue/half{
+	icon_state = "bordercolorhalf";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"cA" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/obj/effect/landmark{
+	name = "Vox-Spawn"
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"cB" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4;
+	level = 2
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"cC" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/landmark{
+	name = "Vox-Spawn"
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"cD" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"cE" = (
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 10
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"cF" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/table/reinforced,
+/obj/machinery/recharger,
+/obj/effect/floor_decal/borderfloor,
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"cG" = (
+/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/machinery/door/blast/shutters{
+	name = "Window Shutters";
+	icon_state = "shutter1";
+	dir = 2;
+	opacity = 0;
+	density = 0;
+	id_tag = "vox_ship"
+	},
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/bridge)
+"cH" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/blue/half{
+	icon_state = "bordercolorhalf";
+	dir = 8
+	},
+/obj/machinery/body_scanconsole{
+	icon_state = "body_scannerconsole";
+	dir = 1
+	},
+/obj/structure/bed/roller,
+/obj/item/auto_cpr,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/map_template/vox_raider/med)
+"cI" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/effect/floor_decal/borderfloorblack{
+	dir = 6;
+	icon_state = "borderfloor_white"
+	},
+/obj/structure/table/rack,
+/obj/item/gun/energy/sonic,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"cJ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"cK" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/table/rack,
+/obj/effect/floor_decal/borderfloorblack{
+	dir = 8;
+	icon_state = "borderfloor_white"
+	},
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/clothing/head/helmet/space/vox/carapace,
+/obj/item/clothing/suit/space/vox/carapace,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"cL" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/clothing/head/helmet/space/vox/medic,
+/obj/item/clothing/suit/space/vox/medic,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"cM" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 6;
+	icon_state = "intact"
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull/vox,
+/area/map_template/vox_raider/armory)
+"cN" = (
+/obj/machinery/atmospherics/unary/engine{
+	dir = 8;
+	icon_state = "nozzle"
+	},
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/armory)
+"cO" = (
+/obj/machinery/light/small{
+	dir = 4;
+	icon_state = "bulb1"
+	},
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/clothing/head/helmet/space/vox/pressure,
+/obj/item/clothing/suit/space/vox/pressure,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"cP" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/effect/floor_decal/corner/blue,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/map_template/vox_raider/med)
+"cQ" = (
+/obj/effect/floor_decal/corner/blue/half,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/map_template/vox_raider/med)
+"cR" = (
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 6
+	},
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 8
+	},
+/obj/machinery/optable,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/map_template/vox_raider/med)
+"cS" = (
+/obj/machinery/computer/ship/helm{
+	dir = 4;
+	icon_state = "computer"
+	},
+/obj/effect/floor_decal/corner/blue/half{
+	icon_state = "bordercolorhalf";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"cT" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/bed/chair/comfy/captain{
+	dir = 8;
+	icon_state = "capchair_preview"
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"cU" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/machinery/hologram/holopad/longrange/remoteship,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"cV" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"cW" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"cX" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/bridge)
+"cY" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/bridge)
+"cZ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/machinery/door/airlock/hatch,
+/obj/structure/catwalk,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/bridge)
+"da" = (
+/obj/machinery/door/airlock/hatch,
+/obj/structure/catwalk,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/med)
+"db" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/external/glass,
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/med)
+"dc" = (
+/obj/structure/catwalk,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/med)
+"dd" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/airlock/external/glass,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/med)
+"de" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9;
+	icon_state = "intact-supply"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"df" = (
+/obj/structure/catwalk,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"dg" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 5;
+	icon_state = "intact"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"dh" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/fuel,
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull/vox,
+/area/map_template/vox_raider/armory)
+"di" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9;
+	icon_state = "intact-supply"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull/vox,
+/area/map_template/vox_raider/armory)
+"dj" = (
+/obj/effect/floor_decal/corner/blue/half{
+	icon_state = "bordercolorhalf";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/map_template/vox_raider/med)
+"dk" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/effect/floor_decal/corner/blue/half{
+	icon_state = "bordercolorhalf";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/map_template/vox_raider/med)
+"dl" = (
+/obj/structure/lattice,
+/obj/structure/railing/mapped,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id_tag = "vox_ship";
+	name = "Window Shutters";
+	opacity = 0
+	},
+/turf/space,
+/area/map_template/vox_raider/med)
+"dm" = (
+/obj/structure/lattice,
+/obj/machinery/light/navigation,
+/turf/space,
+/area/map_template/vox_raider/bridge)
+"dn" = (
+/obj/effect/floor_decal/corner/blue/half{
+	icon_state = "bordercolorhalf";
+	dir = 8
+	},
+/obj/machinery/computer/shuttle_control/explore/vox_raider{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"do" = (
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/obj/effect/landmark{
+	name = "Vox-Spawn"
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"dp" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9;
+	icon_state = "intact-supply"
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"dq" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1;
+	icon_state = "map_scrubber_on"
+	},
+/obj/effect/floor_decal/borderfloor/corner{
+	icon_state = "borderfloorcorner_white";
+	dir = 4
+	},
+/obj/effect/landmark{
+	name = "Vox-Spawn"
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"dr" = (
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"ds" = (
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 1
+	},
+/obj/effect/landmark{
+	name = "Vox-Spawn"
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"dt" = (
+/obj/structure/table/reinforced,
+/obj/machinery/cell_charger,
+/obj/effect/floor_decal/borderfloor{
+	icon_state = "borderfloor_white";
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/blue,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"du" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull/vox,
+/area/map_template/vox_raider/bridge)
+"dv" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 10
+	},
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 1
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	icon_state = "casing";
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/map_template/vox_raider/med)
+"dw" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 4;
+	icon_state = "intact"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/effect/floor_decal/borderfloorblack{
+	dir = 8;
+	icon_state = "borderfloor_white"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"dx" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 4;
+	icon_state = "intact"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/machinery/meter,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"dy" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 10
+	},
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 4
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/map_template/vox_raider/med)
+"dz" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 4;
+	icon_state = "intact"
+	},
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24;
+	req_access = newlist()
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/structure/table/reinforced,
+/obj/item/storage/toolbox/mechanical,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"dA" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/effect/floor_decal/borderfloorblack{
+	dir = 1;
+	icon_state = "borderfloor_white"
+	},
+/obj/structure/table/rack,
+/obj/item/gun/launcher/alien/spikethrower,
+/obj/item/gun/launcher/alien/spikethrower,
+/obj/item/gun/launcher/alien/spikethrower,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"dB" = (
+/obj/effect/floor_decal/borderfloorblack{
+	dir = 1;
+	icon_state = "borderfloor_white"
+	},
+/obj/structure/table/rack,
+/obj/item/gun/energy/darkmatter,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"dC" = (
+/obj/machinery/portable_atmospherics/canister/nitrogen,
+/obj/effect/floor_decal/borderfloorblack{
+	dir = 1;
+	icon_state = "borderfloor_white"
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	icon_state = "casing";
+	pixel_y = -24
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"dD" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 5;
+	icon_state = "intact"
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull/vox,
+/area/map_template/vox_raider/armory)
+"dE" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/structure/catwalk,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/airlock/external/glass,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"dF" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/plating/vox_raiders,
+/area/map_template/vox_raider/med)
+"dG" = (
+/obj/structure/table/rack,
+/obj/effect/floor_decal/borderfloorblack/corner{
+	dir = 1;
+	icon_state = "borderfloorcorner_white"
+	},
+/obj/item/clothing/suit/armor/vox_scrap,
+/obj/item/clothing/suit/armor/vox_scrap,
+/obj/item/clothing/suit/armor/vox_scrap,
+/obj/item/clothing/under/vox/vox_casual,
+/obj/item/clothing/under/vox/vox_casual,
+/obj/item/clothing/under/vox/vox_casual,
+/obj/item/clothing/shoes/magboots/vox,
+/obj/item/clothing/shoes/magboots/vox,
+/obj/item/clothing/shoes/magboots/vox,
+/obj/item/clothing/gloves/vox,
+/obj/item/clothing/gloves/vox,
+/obj/item/clothing/gloves/vox,
+/obj/item/clothing/mask/gas/vox,
+/obj/item/clothing/mask/gas/vox,
+/obj/item/clothing/mask/gas/vox,
+/obj/item/clothing/mask/gas/vox,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"dH" = (
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/clothing/head/helmet/space/vox/stealth,
+/obj/item/clothing/suit/space/vox/stealth,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"dI" = (
+/obj/machinery/light/small,
+/obj/machinery/computer/power_monitor{
+	icon_state = "computer";
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/blue,
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"dJ" = (
+/obj/machinery/alarm/vox_raider{
+	dir = 1;
+	icon_state = "alarm0";
+	pixel_x = 0;
+	pixel_y = -16
+	},
+/obj/structure/table/reinforced,
+/obj/effect/floor_decal/corner/blue/half,
+/obj/random/toolbox,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"dK" = (
+/obj/structure/table/reinforced,
+/obj/effect/floor_decal/corner/blue/half,
+/obj/random/loot,
+/obj/random/loot,
+/obj/random/loot,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"dL" = (
+/obj/effect/floor_decal/corner/blue/half,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"dM" = (
+/obj/effect/floor_decal/corner/blue/half,
+/obj/machinery/firealarm{
+	dir = 1;
+	icon_state = "casing";
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"dN" = (
+/obj/structure/bed/chair/shuttle/black{
+	icon_state = "shuttle_chair_preview";
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/blue/half,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"dO" = (
+/obj/machinery/light/small,
+/obj/structure/table/reinforced,
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/blue,
+/obj/effect/floor_decal/corner/blue{
+	icon_state = "corner_white";
+	dir = 8
+	},
+/obj/item/pizzabox/meat,
+/turf/simulated/floor/tiled/techmaint/vox_raider,
+/area/map_template/vox_raider/bridge)
+"dP" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/r_wall/hull/vox,
+/area/map_template/vox_raider/bridge)
+"dQ" = (
+/obj/structure/lattice,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/space,
+/area/map_template/vox_raider/bridge)
+"dR" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/prepainted,
+/area/map_template/vox_raider/med)
+"dS" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/prepainted,
+/area/map_template/vox_raider/med)
+"dT" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/effect/paint/gunmetal,
+/turf/simulated/wall/prepainted,
+/area/map_template/vox_raider/med)
+"dU" = (
+/obj/structure/lattice,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/railing/mapped{
+	icon_state = "railing_preview";
+	dir = 1
+	},
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id_tag = "vox_ship";
+	name = "Window Shutters";
+	opacity = 0
+	},
+/turf/space,
+/area/map_template/vox_raider/med)
+"dV" = (
+/obj/machinery/light/small{
+	dir = 4;
+	icon_state = "bulb1"
+	},
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/rig/vox,
+/obj/item/rig/vox,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/vox_raider/armory)
+"dW" = (
+/obj/effect/paint/gunmetal,
+/obj/structure/fuel_port,
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/vox_raider/engineering)
 
 (1,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+aa
+aa
+aa
+aa
+be
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 "}
 (2,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+aa
+af
+aa
+aa
+aj
+aa
+cy
+aa
+aa
+dm
+aa
+dm
+aa
+aa
 "}
 (3,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-ax
-ax
-ax
-ew
-ae
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+aa
+aj
+aa
+aa
+bf
+aa
+aa
+bS
+bU
+bS
+bU
+bS
+bU
+bS
 "}
 (4,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-ew
-ax
-ax
-ax
-ew
-ae
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+ab
+ab
+aw
+aw
+ab
+ab
+aa
+bS
+ce
+cz
+cS
+dn
+dI
+bS
 "}
 (5,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-ex
-ax
-vX
-ax
-ax
-ew
-ae
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+ac
+ak
+ay
+ay
+bg
+ac
+aa
+bS
+cf
+cA
+cT
+do
+dJ
+bS
 "}
 (6,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-ae
-aj
-aj
-ae
-ax
-ew
-ae
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+ab
+al
+az
+az
+bh
+ab
+aa
+bU
+cg
+cB
+cU
+cB
+dK
+bU
 "}
 (7,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-ae
-ff
-wm
-ae
-ax
-NI
-ae
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+ac
+am
+aA
+aQ
+bi
+bx
+bG
+bV
+ch
+cC
+cV
+dp
+dL
+bU
 "}
 (8,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-ac
-ae
-ez
-on
-ww
-ae
-ae
-OH
-ae
-ae
-ax
-ax
-ax
-ax
-ax
-ax
+ab
+an
+aB
+aR
+bj
+ab
+bH
+bW
+ci
+cD
+cW
+dq
+dL
+bS
 "}
 (9,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ac
-ae
-ck
-ae
-eB
-fi
-wz
-DR
-ae
-Ph
-Xy
-ae
-ax
-ax
-ax
-ax
-ax
-ax
+ab
+an
+aC
+aS
+bk
+aU
+bI
+bX
+bI
+bI
+cX
+dr
+dM
+bS
 "}
 (10,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ac
-aX
-cm
-ee
-Am
-fl
-xx
-DZ
-JN
-Pk
-ZC
-ae
-ax
-ax
-ax
-ax
-ax
-ax
+ab
+ak
+aD
+aT
+bl
+ab
+bH
+bS
+cj
+cE
+cX
+ds
+dN
+bS
 "}
 (11,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-ac
-bb
-bU
-ae
-ae
-Vf
-xK
-ae
-ae
-Rn
-xE
-ae
-ax
-ax
-ax
-ax
-ax
-ax
+ab
+al
+az
+az
+bm
+by
+bJ
+bY
+ck
+cF
+cY
+dt
+dO
+bS
 "}
 (12,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-ak
-be
-cB
-ae
-eF
-fi
-yA
-eG
-KM
-eG
-vU
-ae
-ax
-ax
-ax
-ax
-ax
-ax
+ab
+am
+aE
+aE
+bn
+ab
+aa
+bS
+cl
+bS
+cZ
+du
+dP
+bS
 "}
 (13,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-al
-bi
-cJ
-ej
-eG
-fo
-yQ
-EG
-ae
-Uh
-Db
-ae
-ax
-ax
-ax
-ax
-ax
-ax
+ab
+ab
+ab
+aU
+bo
+ab
+aa
+aa
+cm
+cG
+bI
+cG
+dQ
+aa
 "}
 (14,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-at
-bk
-cU
-ae
-eH
-kF
-Ah
-GJ
-ae
-UC
-aj
-ae
-ax
-ax
-ax
-ax
-ax
-ax
+aa
+aa
+aF
+az
+bp
+aa
+aa
+bZ
+cn
+bZ
+da
+bZ
+dR
+aa
 "}
 (15,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-ae
-ae
-ae
-ae
-eM
-kI
-Av
-eE
-ae
-UY
-Tw
-ae
-ax
-ax
-ax
-ax
-ax
-ax
+ad
+ab
+aG
+aV
+bq
+ab
+aa
+bZ
+co
+cH
+dj
+dv
+dS
+aa
 "}
 (16,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
 ae
-dj
-dj
-dj
-ae
-eP
-pU
-fV
-HJ
-Lc
-Ww
-nN
-Jj
-ax
-ax
-ax
-ax
-ax
-ax
+ao
+aH
+aW
+aH
+ab
+aa
+bZ
+cp
+cP
+dk
+dy
+dT
+aa
 "}
 (17,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
 ae
-bw
-dv
-ek
-ae
-ae
-Vf
-xK
-ae
-ae
-Xq
-wG
-ae
-ax
-ax
-ax
-ax
-ax
-ax
+ao
+aI
+aW
+aI
+ab
+aa
+bZ
+cq
+cQ
+cn
+db
+dR
+aa
 "}
 (18,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-bP
-dH
-dr
-Ry
-eQ
-qj
-dq
-Im
-ae
-ae
-rM
-ae
-ax
-ax
-ax
-ax
-ax
-ax
+af
+ab
+aJ
+aX
+br
+ab
+aa
+bZ
+cr
+cR
+cn
+dF
+dS
+aa
 "}
 (19,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-ae
-ae
-ae
-ae
-eW
-sE
-BI
-IF
-Mv
-ae
-On
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+aa
+aa
+aj
+aY
+aj
+aa
+aa
+bZ
+bZ
+bZ
+cn
+dd
+dR
+aa
 "}
 (20,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-dZ
-dZ
-ae
-eX
-KQ
-Dm
-tN
-MZ
-ae
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+aa
+aa
+aj
+aZ
+aj
+aa
+aa
+aa
+aa
+aa
+dl
+dc
+dU
+aa
 "}
 (21,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-bv
-RP
-af
-tW
-Ns
-ae
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+aa
+au
+bT
+dE
+di
+au
 "}
 (22,1,1) = {"
+ag
+ap
+aK
+ag
+bs
+bz
+bK
+ca
+cs
 ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-tU
-eE
-Dn
-zx
-Nt
-ae
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+cw
+de
+dA
+au
 "}
 (23,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-ae
-ae
-ae
-ae
-ae
-ae
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+ag
+aq
+aL
+ag
+bs
+bA
+bL
+ag
+ct
+au
+cI
+df
+dB
+au
 "}
 (24,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ae
-dZ
-dZ
-dZ
-ae
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+ag
+ar
+aM
+ba
+bt
+bB
+bM
+cb
+cu
+cc
+cJ
+dg
+dC
+au
 "}
 (25,1,1) = {"
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+ag
+ag
+ag
+ag
+bu
+bC
+bN
+dW
+cv
+au
+cK
+dw
+dG
+au
+"}
+(26,1,1) = {"
+ah
+as
+aN
+bb
+bv
+bD
+bP
+cd
+cx
+bR
+cL
+dx
+dH
+au
+"}
+(27,1,1) = {"
+ai
+ag
+aO
+bc
+bw
+bE
+bQ
+ag
+aa
+au
+cO
+dz
+dV
+au
+"}
+(28,1,1) = {"
+ag
+at
+aP
+bd
+ag
+bF
+bO
+ag
+aa
+au
+cM
+dh
+dD
+au
+"}
+(29,1,1) = {"
+ag
+av
+av
+av
+ag
+ag
+ag
+ag
+aa
+au
+cN
+cN
+cN
+au
 "}
