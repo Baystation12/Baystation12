@@ -63,19 +63,27 @@
 	gear_tweaks += new /datum/gear_tweak/path (options)
 
 
-/datum/gear/augment/head_vision
-	display_name = "Head Augments (Vision)"
-	description = "Head augments with vision effects."
-	path = /obj/item/organ/internal/augment
+/datum/gear/augment/corrective_lenses
+	display_name = "corrective lenses"
+	path = /obj/item/organ/internal/augment/active/item/corrective_lenses
 
+/datum/gear/augment/glare_dampeners
+	display_name = "glare dampeners"
+	path = /obj/item/organ/internal/augment/active/item/glare_dampeners
 
-/datum/gear/augment/head_vision/New()
-	..()
-	var/list/options = list()
-	options["corrective lenses"] = /obj/item/organ/internal/augment/active/item/corrective_lenses
-	options["glare dampeners"] = /obj/item/organ/internal/augment/active/item/glare_dampeners
-	options["integrated health HUD"] = /obj/item/organ/internal/augment/active/hud/health
-	options["integrated security HUD"] = /obj/item/organ/internal/augment/active/hud/security
-	options["integrated filth HUD"] = /obj/item/organ/internal/augment/active/hud/janitor
-	options["integrated sciHUD"] = /obj/item/organ/internal/augment/active/hud/science
-	gear_tweaks += new /datum/gear_tweak/path (options)
+/datum/gear/augment/hud_health
+	display_name = "integrated health HUD"
+	path = /obj/item/organ/internal/augment/active/hud/health
+
+/datum/gear/augment/hud_security
+	display_name = "integrated security HUD"
+	path = /obj/item/organ/internal/augment/active/hud/security
+
+/datum/gear/augment/hud_janitor
+	display_name = "integrated janitorial HUD"
+	path = /obj/item/organ/internal/augment/active/hud/janitor
+
+/datum/gear/augment/hud_science
+	display_name = "integrated science HUD"
+	path = /obj/item/organ/internal/augment/active/hud/science
+
