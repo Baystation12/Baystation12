@@ -160,9 +160,6 @@
 	/// force disconnect for inactive players after this many minutes, if non-0
 	var/static/kick_inactive = FALSE
 
-	/// determines whether jobs use minimal access or expanded access.
-	var/static/jobs_have_minimal_access = FALSE
-
 	var/static/minimum_player_age = 0
 
 	/// Allows ghosts to write in blood in cult rounds...
@@ -489,8 +486,6 @@
 				use_age_restriction_for_jobs = TRUE
 			if ("use_age_restriction_for_antags")
 				use_age_restriction_for_antags = TRUE
-			if ("jobs_have_minimal_access")
-				jobs_have_minimal_access = TRUE
 			if ("use_recursive_explosions")
 				use_recursive_explosions = TRUE
 			if ("log_ooc")

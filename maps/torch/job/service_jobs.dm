@@ -27,8 +27,6 @@
 		access_radio_serv
 	)
 
-	minimal_access = list()
-
 /datum/job/janitor
 	title = "Sanitation Technician"
 	department = "Service"
@@ -60,8 +58,6 @@
 		access_janitor, access_solgov_crew,
 		access_radio_serv
 	)
-
-	minimal_access = list()
 
 
 /datum/job/chef
