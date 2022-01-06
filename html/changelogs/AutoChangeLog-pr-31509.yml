@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Movable atoms with health now actually take damage instead of just saying
-      'You hit the thing'.
