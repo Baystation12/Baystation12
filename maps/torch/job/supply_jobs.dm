@@ -36,8 +36,6 @@
 		access_radio_sup, access_radio_exp, access_radio_comm
 	)
 
-	minimal_access = list()
-
 	software_on_spawn = list(/datum/computer_file/program/supply,
 							 /datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
@@ -76,8 +74,6 @@
 		access_guppy, access_hangar, access_commissary, access_radio_sup
 	)
 
-	minimal_access = list()
-
 	software_on_spawn = list(/datum/computer_file/program/supply,
 							 /datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
@@ -111,5 +107,3 @@
 		access_guppy_helm, access_solgov_crew, access_eva,
 		access_radio_exp, access_radio_sup
 	)
-
-	minimal_access = list()
