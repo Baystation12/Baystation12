@@ -14,11 +14,16 @@
 	bump_climb = 1
 	mob_climb_time = 0.7 SECONDS
 
-/obj/structure/destructible/explosion_debris/CanPass(var/obj/vehicles/vpass)
+/obj/structure/destructible/Cross(var/obj/vehicles/crosser)
 	. = ..()
 	if(!.)
-		if(istype(vpass))
-			return 1
+		if(istype(crosser) && !crosser.can_overrun_cover)//Cover-overruners need to collide.
+			return 0
+
+/obj/structure/destructible/explosion_debris/CanPass(var/obj/vehicles/vpass)
+	if(istype(vpass) && !vpass.can_overrun_cover) //Cover-overrunners need to collide.
+		return 1
+	. = ..()
 
 //Debris Creation Code//
 /turf/simulated/floor

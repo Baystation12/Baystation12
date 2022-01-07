@@ -11,7 +11,7 @@
 	var/movement_destroyed = 0
 	var/block_enter_exit //Set this to block entering/exiting.
 	var/can_traverse_zs = 0
-	var/can_overrun_cover = 0 //Allows these vehicles, on collision, to destroy barricade cover and collapse covenant shield cover.
+	var/can_overrun_cover = 0 //Allows these vehicles, on collision, to destroy barricade cover and collapse covenant shield cover. This does, however, stop the vehicle in its tracks.
 
 	var/next_move_input_at = 0//When can we send our next movement input?
 	var/moving_x = 0
