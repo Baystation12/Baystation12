@@ -49,6 +49,9 @@
 /datum/build_mode/ai/TimerEvent()
 	. = ..()
 
+	if (!user)
+		return
+
 	for (var/mob/living/M in GLOB.living_mob_list_)
 		if (M.ai_status_image)
 			user.add_client_image(M.ai_status_image)
