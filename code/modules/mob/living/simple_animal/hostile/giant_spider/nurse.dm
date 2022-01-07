@@ -24,8 +24,6 @@
 	var/fed = 0 // Counter for how many egg laying 'charges' the spider has.
 	var/laying_eggs = FALSE	// Only allow one set of eggs to be laid at once.
 	var/egg_inject_chance = 25 // One in four chance to get eggs.
-	var/egg_type = /obj/effect/spider/eggcluster
-	var/web_type = /obj/effect/spider/stickyweb/dark
 
 	var/mob/living/simple_animal/hostile/giant_spider/guard/paired_guard
 
@@ -120,61 +118,50 @@
 		else
 			web_tile(loc)
 
-/mob/living/simple_animal/hostile/giant_spider/nurse/proc/web_tile(turf/T)
-	if(!istype(T))
+/mob/living/simple_animal/hostile/giant_spider/nurse/proc/web_tile(turf/turf)
+	if (!isturf(turf))
 		return FALSE
-
-	var/obj/effect/spider/stickyweb/W = locate() in T
-	if(W)
-		return FALSE // Already got webs here.
-
+	var/obj/spider_web/giant/web = locate() in turf
+	if (web)
+		return FALSE
 	visible_message(SPAN_NOTICE("\The [src] begins to secrete a sticky substance."))
-	// Get our AI to stay still.
 	set_AI_busy(TRUE)
 
-	if(!do_after(src, 5 SECONDS, T, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+	if(!do_after(src, 5 SECONDS, turf, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		set_AI_busy(FALSE)
 		return FALSE
-
-	W = locate() in T
-	if(W)
+	web = locate() in turf
+	if (web)
 		return FALSE // Spamclick protection.
-
 	set_AI_busy(FALSE)
-	new web_type(T)
+	new /obj/spider_web/giant (turf)
 	return TRUE
 
 
-/mob/living/simple_animal/hostile/giant_spider/nurse/proc/lay_eggs(turf/T)
-	if(!istype(T))
+/mob/living/simple_animal/hostile/giant_spider/nurse/proc/lay_eggs(turf/turf)
+	if (!isturf(turf))
 		return FALSE
-
-	if(!fed)
+	if (!fed)
 		return FALSE
-
-	var/obj/effect/spider/eggcluster/E = locate() in T
-	if(E)
-		return FALSE // Already got eggs here.
-
+	var/obj/item/spider_eggs/eggs = locate() in turf
+	if (eggs)
+		return FALSE
 	visible_message(SPAN_NOTICE("\The [src] begins to lay a cluster of eggs."))
-	// Get our AI to stay still.
 	set_AI_busy(TRUE)
-	// Stop players from spamming eggs.
 	laying_eggs = TRUE
 
-	if(!do_after(src, 5 SECONDS, T, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+	if(!do_after(src, 5 SECONDS, turf, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		set_AI_busy(FALSE)
 		return FALSE
-
-	E = locate() in T
-	if(E)
-		return FALSE // Spamclick protection.
-
+	eggs = locate() in turf
+	if (eggs)
+		return FALSE
 	set_AI_busy(FALSE)
-	new egg_type(T)
-	fed--
+	new /obj/item/spider_eggs (turf)
+	--fed
 	laying_eggs = FALSE
 	return TRUE
+
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/proc/divorce()
 	if(paired_guard)

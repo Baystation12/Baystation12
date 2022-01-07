@@ -105,7 +105,7 @@ They sell generic supplies and ask for generic supplies.
 								/obj/item/bee_pack                  = TRADER_THIS_TYPE,
 								/obj/item/bee_smoker                = TRADER_THIS_TYPE,
 								/obj/item/beehive_assembly          = TRADER_THIS_TYPE,
-								/obj/item/glass_jar                 = TRADER_THIS_TYPE,
+								/obj/item/material/jar              = TRADER_THIS_TYPE,
 								/obj/item/honey_frame               = TRADER_THIS_TYPE,
 								/obj/structure/dispenser            = TRADER_SUBTYPES_ONLY,
 								/obj/structure/filingcabinet        = TRADER_THIS_TYPE,

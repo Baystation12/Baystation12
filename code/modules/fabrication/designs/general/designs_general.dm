@@ -14,7 +14,7 @@
 	path = /obj/item/extinguisher/mini/empty
 
 /datum/fabricator_recipe/jar
-	path = /obj/item/glass_jar
+	path = /obj/item/material/jar/glass
 
 /datum/fabricator_recipe/radio_headset
 	path = /obj/item/device/radio/headset

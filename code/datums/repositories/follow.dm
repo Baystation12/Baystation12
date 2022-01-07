@@ -200,10 +200,10 @@ var/global/repository/follow/follow_repository = new()
 
 /datum/follow_holder/spiderling
 	sort_order = 6
-	followed_type = /obj/effect/spider/spiderling
+	followed_type = /obj/item/spiderling
 
 /datum/follow_holder/spiderling/show_entry()
-	var/obj/effect/spider/spiderling/S = followed_instance
+	var/obj/item/spiderling/S = followed_instance
 	return ..() && S.amount_grown > 0
 
 /datum/follow_holder/bot

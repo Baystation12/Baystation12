@@ -2999,7 +2999,7 @@
 /obj/random/donkpocket_box,
 /obj/item/material/kitchen/utensil/spork,
 /obj/random/loot,
-/mob/living/simple_animal/passive/mouse/brown/Tom,
+/mob/living/simple_animal/passive/mouse/tom,
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "wQ" = (

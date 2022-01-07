@@ -93,9 +93,11 @@
 			qdel(B)
 
 	//use up stored charges
-	if(charges >= 10)
-		charges -= 10
-		new /obj/effect/spider/eggcluster(pick(view(1,src)))
+	if (charges >= 10)
+		var/list/turfs = view(1, src)
+		if (length(turfs))
+			charges -= 10
+		new /obj/item/spider_eggs (pick(turfs))
 
 	if(charges >= 3)
 		if(prob(5))

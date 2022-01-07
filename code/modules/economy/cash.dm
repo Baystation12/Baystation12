@@ -1,6 +1,5 @@
 /obj/item/spacecash
 	name = "0 thalers"
-	desc = "It's worth 0 thalers."
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "spacecash1"
@@ -15,7 +14,8 @@
 	var/access = list()
 	access = access_crate_cash
 	var/worth = 0
-	var/static/denominations = list(1000,500,200,100,50,20,10,1)
+	var/static/denominations = list(1000, 500, 200, 100, 50, 20, 10, 1)
+
 
 /obj/item/spacecash/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/spacecash))
@@ -42,58 +42,68 @@
 		var/obj/item/gun/launcher/money/L = W
 		L.absorb_cash(src, user)
 
-/obj/item/spacecash/proc/getMoneyImages()
-	if(icon_state)
-		return list(icon_state)
+
+/obj/item/spacecash/proc/build_image_list()
+	var/list/images = list()
+	if (icon_state)
+		images += icon_state
+	return images
+
 
 /obj/item/spacecash/bundle
 	name = "pile of thalers"
 	icon_state = "spacecash1"
-	desc = "They are worth 0 Thalers."
 	worth = 0
+
 
 /obj/item/spacecash/bundle/Initialize()
 	. = ..()
-	update_icon()
+	queue_icon_update()
 
-/obj/item/spacecash/bundle/getMoneyImages()
-	if(icon_state)
-		return list(icon_state)
-	. = list()
-	var/sum = src.worth
-	var/num = 0
-	for(var/i in denominations)
-		while(sum >= i && num < 50)
-			sum -= i
-			num++
-			. += "spacecash[i]"
-	if(num == 0) // Less than one thaler, let's just make it look like 1 for ease
-		. += "spacecash1"
+
+/obj/item/spacecash/bundle/build_image_list()
+	var/list/images = list()
+	if (icon_state)
+		images += icon_state
+		return images
+	var/remaining = worth
+	if (remaining <= 1)
+		images += "spacecash1"
+		return images
+	for (var/value in denominations)
+		if (remaining <= 1)
+			break
+		for (var/i = 1 to 5)
+			if (remaining < value)
+				break
+			images += "spacecash[value]"
+			remaining -= value
+	return images
+
 
 /obj/item/spacecash/bundle/on_update_icon()
 	overlays.Cut()
-	var/list/images = src.getMoneyImages()
-
-	for(var/A in images)
+	var/list/images = build_image_list()
+	for (var/A in images)
 		var/image/banknote = image('icons/obj/items.dmi', A)
 		var/matrix/M = matrix()
 		M.Translate(rand(-6, 6), rand(-4, 8))
 		M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
 		banknote.transform = M
-		src.overlays += banknote
-
-	src.desc = "They are worth [worth] [GLOB.using_map.local_currency_name]."
+		overlays += banknote
+	icon_state = overlays.len ? null : initial(icon_state)
+	desc = "They are worth [worth] [GLOB.using_map.local_currency_name]."
 	if(worth in denominations)
-		src.SetName("[worth] [GLOB.using_map.local_currency_name]")
+		SetName("[worth] [GLOB.using_map.local_currency_name]")
 	else
-		src.SetName("pile of [worth] [GLOB.using_map.local_currency_name]")
-
+		SetName("pile of [worth] [GLOB.using_map.local_currency_name]")
 	if(overlays.len <= 2)
 		w_class = ITEM_SIZE_TINY
 	else
 		w_class = ITEM_SIZE_SMALL
 
-/obj/item/spacecash/bundle/attack_hand(mob/user as mob)
+
+/obj/item/spacecash/bundle/attack_hand(mob/living/user)
 	if (user.get_inactive_hand() == src)
 		var/amount = input(usr, "How many [GLOB.using_map.local_currency_name] do you want to take? (0 to [src.worth])", "Take Money", 20) as num
 		amount = round(clamp(amount, 0, src.worth))

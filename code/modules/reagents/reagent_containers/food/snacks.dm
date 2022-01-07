@@ -1428,11 +1428,11 @@
 
 /obj/item/reagent_containers/food/snacks/monkeycube/spidercube
 	name = "spider cube"
-	monkey_type = /obj/effect/spider/spiderling
+	monkey_type = /obj/item/spiderling
 
 /obj/item/reagent_containers/food/snacks/monkeycube/wrapped/spidercube
 	name = "spider cube"
-	monkey_type = /obj/effect/spider/spiderling
+	monkey_type = /obj/item/spiderling
 
 /obj/item/reagent_containers/food/snacks/monkeycube/pikecube
 	name = "strange-looking monkey cube"

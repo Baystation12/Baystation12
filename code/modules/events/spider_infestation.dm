@@ -29,10 +29,14 @@ var/global/sent_spiders_to_station = 0
 
 	while((spawncount >= 1) && vents.len)
 		var/obj/vent = pick(vents)
+		var/obj/item/spider
 		if (guaranteed_to_grow > 0)
-			new /obj/effect/spider/spiderling/growing(vent.loc)
+			spider = new /obj/item/spider/giant (vent.loc)
 			guaranteed_to_grow--
+		else if (prob(20))
+			spider = new /obj/item/spider/giant (vent.loc)
 		else
-			new /obj/effect/spider/spiderling(vent.loc)
+			spider = new /obj/item/spider (vent.loc)
+		spider.MakeActive(60)
 		vents -= vent
 		spawncount--

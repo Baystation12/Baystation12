@@ -420,7 +420,7 @@
 				/obj/effect/decal/cleanable/blood/gibs/robot,
 				/obj/effect/decal/cleanable/blood/oil,
 				/obj/effect/decal/cleanable/blood/oil/streak,
-				/obj/effect/decal/cleanable/spiderling_remains,
+				/obj/effect/decal/cleanable/spider_remains,
 				/obj/item/remains/mouse,
 				/obj/effect/decal/cleanable/vomit,
 				/obj/effect/decal/cleanable/blood/splatter,
@@ -1212,7 +1212,7 @@ var/global/list/random_useful_
 		if(!random_junk_)
 			random_junk_ = subtypesof(/obj/item/trash)
 			random_junk_ += typesof(/obj/item/trash/cigbutt)
-			random_junk_ += /obj/effect/decal/cleanable/spiderling_remains
+			random_junk_ += /obj/effect/decal/cleanable/spider_remains
 			random_junk_ += /obj/item/remains/mouse
 			random_junk_ += /obj/item/remains/robot
 			random_junk_ += /obj/item/paper/crumpled

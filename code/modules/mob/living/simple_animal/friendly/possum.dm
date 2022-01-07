@@ -96,6 +96,7 @@
 	item_state = "poppy"
 	icon_living = "poppy"
 	icon_dead = "poppy_dead"
+	gender = FEMALE
 	holder_type = /obj/item/holder/possum/poppy
 	var/aaa_words = list("delaminat", "meteor", "fire", "breach")
 

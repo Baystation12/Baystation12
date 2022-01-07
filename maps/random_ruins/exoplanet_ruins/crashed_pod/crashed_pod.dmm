@@ -518,7 +518,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/mob/living/simple_animal/passive/mouse/brown/Tom,
+/mob/living/simple_animal/passive/mouse/tom,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "fn" = (

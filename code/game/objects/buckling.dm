@@ -37,25 +37,34 @@
 	return ..()
 
 
-/obj/proc/buckle_mob(mob/living/M)
-	if(buckled_mob) //unless buckled_mob becomes a list this can cause problems
-		return 0
-	if(!istype(M) || (M.loc != loc) || !M.can_be_buckled || M.buckled || M.pinned.len || (buckle_require_restraints && !M.restrained()))
-		return 0
-	if(ismob(src))
-		var/mob/living/carbon/C = src //Don't wanna forget the xenos.
-		if(M != src && C.incapacitated())
-			return 0
+/obj/proc/buckle_mob(mob/living/living, force_loc)
+	if (buckled_mob)
+		return FALSE
+	if (!istype(living))
+		return FALSE
+	if (!living.can_be_buckled || living.buckled)
+		return FALSE
+	if (living.pinned.len)
+		return FALSE
+	if (buckle_require_restraints && !living.restrained())
+		return FALSE
+	if (ismob(src))
+		var/mob/living/carbon/carbon = src
+		if (living != src && carbon.incapacitated())
+			return FALSE
+	if (living.loc != loc)
+		if (!force_loc)
+			return FALSE
+		living.forceMove(loc)
+	living.buckled = src
+	living.facing_dir = null
+	living.set_dir(buckle_dir ? buckle_dir : dir)
+	living.UpdateLyingBuckledAndVerbStatus()
+	living.update_floating()
+	buckled_mob = living
+	post_buckle_mob(living)
+	return TRUE
 
-	M.buckled = src
-	M.facing_dir = null
-	M.set_dir(buckle_dir ? buckle_dir : dir)
-	M.UpdateLyingBuckledAndVerbStatus()
-	M.update_floating()
-	buckled_mob = M
-
-	post_buckle_mob(M)
-	return 1
 
 /obj/proc/unbuckle_mob()
 	if(buckled_mob && buckled_mob.buckled == src)
@@ -65,8 +74,8 @@
 		buckled_mob.UpdateLyingBuckledAndVerbStatus()
 		buckled_mob.update_floating()
 		buckled_mob = null
-
 		post_buckle_mob(.)
+
 
 /obj/proc/post_buckle_mob(mob/living/M)
 	if(buckle_pixel_shift)

@@ -1,8 +1,7 @@
 /mob/living/simple_animal/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
-	//Health
 	if(stat == DEAD)
 		if(health > 0)
 			icon_state = icon_living
@@ -10,28 +9,23 @@
 			set_stat(CONSCIOUS)
 			set_density(1)
 		return 0
-
 	handle_atmos()
-
 	if(health <= 0)
 		death()
 		return
-
 	if(health > maxHealth)
 		health = maxHealth
-
+	if ((resting || stat == UNCONSCIOUS) && icon_rest)
+		icon_state = icon_rest
 	handle_stunned()
 	handle_weakened()
 	handle_paralysed()
 	handle_confused()
 	handle_supernatural()
 	handle_impaired_vision()
-
 	handle_special()
-
 	if(can_bleed && bleed_ticks > 0)
 		handle_bleeding()
-
 	if(buckled && can_escape)
 		if(istype(buckled, /obj/effect/energy_net))
 			var/obj/effect/energy_net/Net = buckled
@@ -40,7 +34,6 @@
 			escape(src, buckled)
 		else if(prob(50))
 			visible_message("<span class='warning'>\The [src] struggles against \the [buckled]!</span>")
-
 	return 1
 
 

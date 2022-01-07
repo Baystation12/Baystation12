@@ -151,8 +151,31 @@
 /datum/proc/VV_static()
 	return list("parent_type")
 
+/atom/VV_hidden()
+	return list(
+		"pixel_w",
+		"pixel_z"
+	)
+
 /atom/VV_static()
-	return ..() + list("bound_x", "bound_y", "bound_height", "bound_width", "bounds", "step_x", "step_y", "step_size")
+	return ..() + list(
+		"overlays",
+		"underlays",
+		"filters"
+	)
+
+/atom/movable/VV_static()
+	return ..() + list(
+		"locs",
+		"bound_x",
+		"bound_y",
+		"bound_height",
+		"bound_width",
+		"bounds",
+		"step_x",
+		"step_y",
+		"step_size"
+	)
 
 /client/VV_static()
 	return ..() + list("holder", "prefs")

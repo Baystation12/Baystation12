@@ -12225,6 +12225,7 @@
 /obj/structure/noticeboard{
 	pixel_y = 30
 	},
+/obj/item/material/jar/glass/algernon,
 /obj/item/sticky_pad/random,
 /obj/machinery/button/alternate/door{
 	desc = "A remote control-switch for the office door.";

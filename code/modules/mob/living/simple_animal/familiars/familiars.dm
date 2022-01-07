@@ -119,23 +119,10 @@
 						/spell/targeted/heal_target/area)
 
 
-
-/mob/living/simple_animal/familiar/pet //basically variants of normal animals with spells.
-	icon = 'icons/mob/simple_animal/animal.dmi'
-	icon_rest //so that we can have resting little guys.
-
-/mob/living/simple_animal/familiar/pet/Life()
-	. = ..()
-	if(!.)
-		return FALSE
-	if(!icon_rest)
-		return
-	if(stat == UNCONSCIOUS || resting)
-		icon_state = icon_rest
-
 /mob/living/simple_animal/familiar/pet/mouse
 	name = "mouse"
 	desc = "A small rodent. It looks very old."
+	icon = 'icons/mob/simple_animal/mouse.dmi'
 	icon_state = "mouse_gray"
 	icon_living = "mouse_gray"
 	icon_dead = "mouse_gray_dead"

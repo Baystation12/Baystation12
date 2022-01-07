@@ -166,8 +166,9 @@
 			if(prob(10))
 				GLOB.cult.offer_uncult(M)
 			if(prob(2))
-				var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(M.loc)
-				M.visible_message("<span class='warning'>\The [M] coughs up \the [S]!</span>")
+				var/obj/item/spider/spider = new (M.loc)
+				M.visible_message("<span class='warning'>\The [M] coughs up \the [spider]!</span>")
+				spider.MakeActive()
 
 /datum/reagent/water/holywater/touch_turf(var/turf/T)
 	if(volume >= 5)

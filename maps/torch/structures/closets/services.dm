@@ -75,7 +75,7 @@
 		/obj/item/clothing/head/soft/black,
 		/obj/item/device/radio/headset/headset_service,
 		/obj/item/reagent_containers/food/drinks/shaker,
-		/obj/item/glass_jar,
+		/obj/item/material/jar/glass,
 		/obj/item/book/manual/barman_recipes,
 		/obj/item/clothing/under/rank/bartender,
 		/obj/item/clothing/shoes/laceup
