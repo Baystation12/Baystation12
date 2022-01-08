@@ -119,28 +119,30 @@
 	if (istype(P, /obj/item/projectile/webball))
 		add_stack()
 
-/obj/aura/web/hitby(obj/O, /mob/living/M)
+/obj/aura/web/hitby(obj/O, mob/living/M)
 	. = ..()
-	remove_webbing()
+	remove_webbing(M)
 
 /obj/aura/web/proc/remove_webbing(mob/living/M)
-	var/mob/living/H = M
-	var/body_type = "[H.isSynthetic() ? "chassis" : "body"]"
-	if (istype(H) && H.a_intent == I_HELP)
-		if (H == user)
+	if (!M)
+		return
+
+	var/body_type = "[M.isSynthetic() ? "chassis" : "body"]"
+	if (istype(M) && M.a_intent == I_HELP)
+		if (M == user)
 			user.visible_message(
-			SPAN_WARNING("\The [H] starts tearing at the webbing on their [body_type]!"),
+			SPAN_WARNING("\The [M] starts tearing at the webbing on their [body_type]!"),
 			SPAN_WARNING("You start tearing at the webbing on your [body_type]!"),
 			SPAN_WARNING("You hear the sound of something being torn up.")
 			)
 		else
 			user.visible_message(
-			SPAN_WARNING("\The [H] starts tearing at the webbing on \the [user]'s [body_type]!"),
-			SPAN_WARNING("\The [H] starts tearing off the webbing on you!"),
+			SPAN_WARNING("\The [M] starts tearing at the webbing on \the [user]'s [body_type]!"),
+			SPAN_WARNING("\The [M] starts tearing off the webbing on you!"),
 			SPAN_WARNING("You hear the sound of something being torn up.")
 			)
 
-		if (do_after(H, 2 SECONDS, user))
+		if (do_after(M, 2 SECONDS, user))
 			if (stacks <= 1)
 				user.visible_message(
 					SPAN_WARNING("\The [user] is freed from the webs!"),
@@ -149,7 +151,7 @@
 				)
 			else
 				user.visible_message(
-					SPAN_WARNING("\The [H] tears some of the webbing off [H == user ? "themselves" : "[user]"]!"),
+					SPAN_WARNING("\The [M] tears some of the webbing off of [M == user ? "themselves" : "\the [user]"]!"),
 					SPAN_WARNING("You feel some of the webbing get torn away, but you aren't free yet!"),
 					SPAN_WARNING("You hear the sound of something being torn up.")
 				)
