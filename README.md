@@ -1,6 +1,6 @@
 # Baystation [![CI Status](https://github.com/Baystation12/Baystation12/workflows/Run%20Tests/badge.svg)](https://github.com/baystation12/baystation12/actions)
 
-[Website](https://bay.ss13.me) - [Discord](https://bay.ss13.me/discord) - [Code](https://github.com/baystation12/baystation12)
+[Website](https://bay.ss13.me) - [Discord](https://bay.ss13.me/discord) - [Code](https://github.com/baystation12/baystation12) - [DMDoc](https://doc.ss13.me)
 
 ---
 
