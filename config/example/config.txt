@@ -208,6 +208,10 @@ GUEST_BAN
 ## Where your users can go to complain about problems with the code
 # ISSUE_URL https://example.com
 
+## Discord address
+## Where your users can go to complain at each other in real time
+# DISCORD_URL https://example.com
+
 ## Ban appeals URL
 ## Where your users can go to tell you they've changed
 # BANAPPEALS https://example.com
