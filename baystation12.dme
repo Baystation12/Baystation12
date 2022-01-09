@@ -1933,7 +1933,6 @@
 #include "code\modules\mechs\premade\combat.dm"
 #include "code\modules\mechs\premade\heavy.dm"
 #include "code\modules\mechs\premade\light.dm"
-#include "code\modules\mechs\premade\misc.dm"
 #include "code\modules\mechs\premade\powerloader.dm"
 #include "code\modules\merchant\merchant_guns.dm"
 #include "code\modules\merchant\merchant_machinery.dm"

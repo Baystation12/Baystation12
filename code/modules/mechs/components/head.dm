@@ -130,7 +130,7 @@
 
 	if(user)
 		to_chat(user, SPAN_NOTICE("You load \the [software] into \the [src]'s memory."))
-		
+
 	software.forceMove(src)
 	update_software()
 
@@ -138,3 +138,60 @@
 	installed_software = list()
 	for(var/obj/item/circuitboard/exosystem/program in contents)
 		installed_software |= program.contains_software
+
+
+/obj/item/mech_component/sensors/powerloader
+	name = "exosuit sensors"
+	gender = PLURAL
+	exosuit_desc_string = "simple collision detection sensors"
+	desc = "A primitive set of sensors designed to work in tandem with most MKI Eyeball platforms."
+	max_damage = 100
+	power_use = 0
+
+/obj/item/mech_component/sensors/powerloader/prebuild()
+	..()
+	software = new(src)
+	software.installed_software = list(MECH_SOFTWARE_UTILITY, MECH_SOFTWARE_ENGINEERING)
+
+/obj/item/mech_component/sensors/light
+	name = "light sensors"
+	gender = PLURAL
+	exosuit_desc_string = "advanced sensor array"
+	icon_state = "light_head"
+	max_damage = 30
+	vision_flags = SEE_TURFS
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
+	power_use = 50
+	desc = "A series of high resolution optical sensors. They can overlay several images to give the pilot a sense of location even in total darkness. "
+
+/obj/item/mech_component/sensors/light/prebuild()
+	..()
+	software = new(src)
+	software.installed_software = list(MECH_SOFTWARE_UTILITY, MECH_SOFTWARE_MEDICAL)
+
+/obj/item/mech_component/sensors/heavy
+	name = "heavy sensors"
+	exosuit_desc_string = "a reinforced monoeye"
+	desc = "A solitary sensor moves inside a recessed slit in the armour plates."
+	icon_state = "heavy_head"
+	max_damage = 120
+	power_use = 0
+
+/obj/item/mech_component/sensors/heavy/prebuild()
+	..()
+	software = new(src)
+	software.installed_software = list(MECH_SOFTWARE_WEAPONS)
+
+/obj/item/mech_component/sensors/combat
+	name = "combat sensors"
+	gender = PLURAL
+	exosuit_desc_string = "high-resolution thermal sensors"
+	icon_state = "combat_head"
+	vision_flags = SEE_MOBS
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
+	power_use = 200
+
+/obj/item/mech_component/sensors/combat/prebuild()
+	..()
+	software = new(src)
+	software.installed_software = list(MECH_SOFTWARE_WEAPONS)
