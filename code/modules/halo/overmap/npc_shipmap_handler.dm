@@ -1,3 +1,6 @@
+#define WAITFOR_TIMEFRAME 2 SECONDS
+#define PER_PASS_DELETE_LIMIT 175
+
 var/global/datum/npc_ship_map_handler/shipmap_handler = new
 
 /datum/npc_ship_map_handler
@@ -33,7 +36,9 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 		coords_end = list(our_om.map_bounds[2],our_om.map_bounds[3])
 	sleep(10)//Ensure above message is shown.
 	var/list/z_level_toclear = block(locate(coords_start[1],coords_start[2],z_level),locate(coords_end[1],coords_end[2],z_level))
+	var/turf_ticker = 0
 	for(var/turf/to_clear in z_level_toclear)
+		turf_ticker++
 		for(var/atom/movable/obj_to_clear in to_clear.contents)
 			var/del_me = 0
 			if(isliving(obj_to_clear))
@@ -48,6 +53,9 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 				GLOB.processing_objects -= obj_to_clear
 				qdel(obj_to_clear)
 		to_clear.ChangeTurf(/turf/space)
+		if(turf_ticker >= PER_PASS_DELETE_LIMIT)
+			turf_ticker = 0
+			sleep(WAITFOR_TIMEFRAME)
 
 /datum/npc_ship_map_handler/proc/un_free_map(var/z_to_un_free)
 	if(z_to_un_free in free_ship_map_zs)
