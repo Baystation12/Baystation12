@@ -41,7 +41,7 @@
 		var/sent_message = "[create_text_tag("ooc", "OOC:", target)] <EM>" + "[holder_rank]" + "[C.key]:</EM> <span class='message linkify'>[message]</span>"
 		sent_message = emoji_parse(sent_message, target)
 
-		if(!is_stealthed && can_select_ooc_color(C) && (C.prefs.ooccolor != initial(C.prefs.ooccolor)))
+		if(!is_stealthed && C.prefs.ooccolor != initial(C.prefs.ooccolor))
 			receive_communication(C, target, "<font color='[ooc_color]'><span class='ooc'>[sent_message]</font></span>")
 		else
 			receive_communication(C, target, "<span class='ooc'><span class='[ooc_style]'>[sent_message]</span></span>")

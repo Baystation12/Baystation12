@@ -470,14 +470,28 @@ var/list/admin_verbs_mod = list(
 /client/proc/colorooc()
 	set category = "Fun"
 	set name = "OOC Text Color"
-	if(!holder)	return
-	var/response = alert(src, "Please choose a distinct color that is easy to read and doesn't mix with all the other chat and radio frequency colors.", "Change own OOC color", "Pick new color", "Reset to default", "Cancel")
-	if(response == "Pick new color")
-		prefs.ooccolor = input(src, "Please select your OOC colour.", "OOC colour") as color
-	else if(response == "Reset to default")
-		prefs.ooccolor = initial(prefs.ooccolor)
-	SScharacter_setup.queue_preferences_save(prefs)
+	if(!can_select_ooc_color(src)) // INF, was	if(!check_rights(R_FUN))
+		return
 
+	var/client/C
+	if(alert(src, "Change for yourself or someone else?", "User pick", "For myself", "For another player") == "For another player")
+		C = input(src, "Please select a player.", "Player select") as null|anything in (GLOB.clients - src)
+	else
+		C = src
+	if(!C)
+		return
+
+	var/response = alert(src, "Please choose a distinct color that is easy to read and doesn't mix with all the other chat and radio frequency colors.", "Change [C] OOC color", "Pick new color", "Reset to default", "Cancel")
+	if(response == "Pick new color")
+		C.prefs.ooccolor = input(src, "Please select your OOC colour.", "OOC colour") as color
+	else if(response == "Reset to default")
+		C.prefs.ooccolor = initial(C.prefs.ooccolor)
+	else
+		return
+	if(C && C != src)
+		to_chat(C, SPAN_NOTICE("[src] changed your OOC color to [C.prefs.ooccolor == initial(C.prefs.ooccolor) ? "default" : C.prefs.ooccolor]."))
+	log_and_message_admins("changed [C == src ? "his own" : "[C]"] OOC color to [C.prefs.ooccolor == initial(C.prefs.ooccolor) ? "default" : C.prefs.ooccolor].")
+	SScharacter_setup.queue_preferences_save(C.prefs)
 	SSstatistics.add_field_details("admin_verb","OC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 
