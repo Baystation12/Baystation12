@@ -43,7 +43,7 @@
 			entry += " - [age]"
 
 			if(is_special_character(C.mob))
-				entry += " - <b><span class=\"who_antagonist\">Antagonist</span></b>"
+				entry += " - <b><span class=\"who_antagonist\">[C.mob.mind.special_role]</span></b>"
 			if(C.is_afk())
 				entry += " (AFK - [C.inactivity2text()])"
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
