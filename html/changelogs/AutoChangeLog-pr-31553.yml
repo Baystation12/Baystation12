@@ -1,0 +1,7 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: Power loader legs are slightly faster.
+  - tweak: Deck Techs and the Deck Chief all know how to exosuit.
+  - maptweak: The supply warehouse now has two powerloaders instead of the tug and
+      one loader.
