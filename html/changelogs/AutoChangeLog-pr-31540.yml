@@ -1,0 +1,5 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - tweak: Specifies that concealed powerfist antag augment is for synthetic arms
+      only.
