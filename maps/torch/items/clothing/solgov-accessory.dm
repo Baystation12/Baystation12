@@ -196,7 +196,7 @@ specialty pins
 /obj/item/clothing/accessory/solgov/specialty
 	name = "speciality blaze"
 	desc = "A color blaze denoting fleet personnel in some special role. This one is silver."
-	icon_state = "marinerank_command"
+	icon_state = "armyrank_command"
 	slot = ACCESSORY_SLOT_INSIGNIA
 	icon_state = "fleetspec"
 
@@ -732,7 +732,7 @@ ranks - marines
 **************/
 /obj/item/clothing/accessory/solgov/rank/army
 	name = "army ranks"
-	desc = "Insignia denoting marine rank of some kind. These appear blank."
+	desc = "Insignia denoting army rank of some kind. These appear blank."
 	icon_state = "armyrank_enlisted"
 	on_rolled = list("down" = "none")
 

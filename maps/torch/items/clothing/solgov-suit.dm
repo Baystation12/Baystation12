@@ -185,7 +185,7 @@
 
 /obj/item/clothing/suit/storage/solgov/service/army/command
 	name = "army command jacket"
-	desc = "An SCG Marine Corps service coat. This one has gold markings."
+	desc = "An SCG Army Corps service coat. This one has gold markings."
 	icon_state = "greenservice_com"
 	item_state = "greenservice_com"
 

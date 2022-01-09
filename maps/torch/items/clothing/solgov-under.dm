@@ -257,6 +257,30 @@
 	item_state = "gy_suit"
 	worn_state = "greyutility"
 
+/obj/item/clothing/under/solgov/utility/army/urban/command
+	accessories = list(/obj/item/clothing/accessory/solgov/department/command/army)
+
+/obj/item/clothing/under/solgov/utility/army/urban/engineering
+	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/army)
+
+/obj/item/clothing/under/solgov/utility/army/urban/security
+	accessories = list(/obj/item/clothing/accessory/solgov/department/security/army)
+
+/obj/item/clothing/under/solgov/utility/army/urban/medical
+	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/army)
+
+/obj/item/clothing/under/solgov/utility/army/urban/medical/banded
+	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/army, /obj/item/clothing/accessory/armband/medblue)
+
+/obj/item/clothing/under/solgov/utility/army/urban/supply
+	accessories = list(/obj/item/clothing/accessory/solgov/department/supply/army)
+
+/obj/item/clothing/under/solgov/utility/army/urban/service
+	accessories = list(/obj/item/clothing/accessory/solgov/department/service/army)
+
+/obj/item/clothing/under/solgov/utility/army/urban/exploration
+	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/army)
+
 /obj/item/clothing/under/solgov/utility/army/tan
 	name = "tan fatigues"
 	desc = "A tan version of the SCG Army utility uniform, made from durable material."
@@ -326,7 +350,7 @@
 	worn_state = "greenservicefem"
 
 /obj/item/clothing/under/solgov/service/army/command
-	name = "marine officer's service uniform"
+	name = "army officer's service uniform"
 	desc = "The service uniform of the SCG Army. Slimming and stylish."
 	icon_state = "greenservice_com"
 	item_state = "johnny"
@@ -334,7 +358,7 @@
 	accessories = list(/obj/item/clothing/accessory/brown)
 
 /obj/item/clothing/under/solgov/service/army/command/skirt
-	name = "marine officer's service skirt"
+	name = "army officer's service skirt"
 	desc = "The service uniform skirt of the SCG Army. Slimming and stylish."
 	icon_state = "greenservicefem_com"
 	worn_state = "greenservicefem_com"
