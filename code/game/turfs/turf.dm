@@ -91,9 +91,6 @@
 	..()
 	return QDEL_HINT_IWILLGC
 
-/turf/ex_act(severity)
-	return 0
-
 /turf/proc/is_solid_structure()
 	return 1
 
