@@ -6,7 +6,7 @@
 /obj/item/music_tape/custom/attack_self(mob/user)
 	if(!ruined && !track)
 		if(setup_tape(user))
-			log_and_message_admins("uploaded new sound <a href='?_src_=holder;listen_tape_sound=\ref[track.source]'>(preview)</a> in <a href='?_src_=holder;adminplayerobservefollow=\ref[src]'>\the [src]</a> with track name \"[track.title]\". <A HREF='?_src_=holder;wipe_tape_data=\ref[src]'>Wipe</A> data.")
+			log_and_message_admins("uploaded new sound <a href='?_src_=holder;listen_tape_sound=\ref[track.source]'>(preview)</a> in <a href='?_src_=holder;adminplayerobservefollow=\ref[src]'>\the [src]</a> with track name \"[track.title]\".")
 		return
 	..()
 

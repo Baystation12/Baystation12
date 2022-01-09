@@ -6,6 +6,8 @@
 	In future there's still an enthusiasts who like to repair and modify old electronics. For example this one may play music disks."
 	icon_state = "radio"
 	item_state = "radio"
+
+/obj/item/music_player/radio/custom_tape
 	tape = /obj/item/music_tape/custom
 
 // Cassett player
@@ -25,6 +27,9 @@
 		icon_state = "csplayer_loaded"
 	else
 		icon_state = "csplayer_empty"
+
+/obj/item/music_player/radio/csplayer
+	tape = /obj/item/music_tape/custom
 
 // Boombox
 /obj/item/music_player/boombox
@@ -47,6 +52,9 @@
 	throw_speed = 2
 	throw_range = 10
 	force = 10
+
+/obj/item/music_player/boombox/custom_tape
+	tape = /obj/item/music_tape/custom
 
 // This one for debug pruporses
 // I'll yell on you if you will use it in game without good reason >:(

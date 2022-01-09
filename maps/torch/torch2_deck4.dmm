@@ -6668,6 +6668,16 @@
 "vQ" = (
 /turf/simulated/wall/prepainted,
 /area/quartermaster/office)
+"vR" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 1;
+	icon_state = "spline_fancy"
+	},
+/obj/machinery/media/music_writer{
+	pixel_x = 32
+	},
+/turf/simulated/floor/carpet,
+/area/crew_quarters/lounge)
 "vW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -11843,7 +11853,9 @@
 /turf/simulated/wall/prepainted,
 /area/maintenance/fourthdeck/starboard)
 "NI" = (
-/obj/machinery/media/music_writer,
+/obj/machinery/media/music_writer{
+	pixel_x = 32
+	},
 /turf/simulated/wall/prepainted,
 /area/crew_quarters/lounge)
 "NM" = (
@@ -34472,7 +34484,7 @@ RV
 XW
 MN
 OO
-Jo
+vR
 ES
 pG
 sJ

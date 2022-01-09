@@ -580,7 +580,7 @@
 	sort_order = 4
 
 /datum/mil_rank/army/e4_alt
-	name = "Сorporal"
+	name = "Corporal"
 	name_short = "CPL"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e4_alt)
 	sort_order = 4
