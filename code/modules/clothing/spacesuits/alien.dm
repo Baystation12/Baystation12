@@ -83,6 +83,36 @@
 	icon_state = "vox-medic"
 	desc = "An almost organic looking nonhuman pressure suit."
 
+/obj/item/clothing/suit/space/vox/raider
+	name = "advanced alien armour"
+	icon_state = "vox-raider"
+	desc = "A sleek, greyish suit of armor over a tight bodysuit. Lighter than it looks."
+	allowed = list(/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/melee/energy/sword,/obj/item/handcuffs,/obj/item/tank,/obj/item/storage/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/inflatable_dispenser,/obj/item/rcd)
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_RIFLE,
+		laser = ARMOR_LASER_MAJOR,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SMALL,
+		rad = ARMOR_RAD_MINOR
+		)
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+
+/obj/item/clothing/head/helmet/space/vox/raider
+	name = "advanced alien helmet"
+	icon_state = "vox-raider"
+	desc = "A tight-fitting, beaked mask with three menacing eyeslits."
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_RIFLE,
+		laser = ARMOR_LASER_MAJOR,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SMALL,
+		rad = ARMOR_RAD_MINOR
+		)
+
 /obj/item/clothing/under/vox
 	has_sensor = 0
 	species_restricted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
