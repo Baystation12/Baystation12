@@ -177,6 +177,10 @@
 			set_internals(back)
 		else if(istype(s_store, /obj/item/tank))
 			set_internals(s_store)
+		else if(istype(r_store, /obj/item/tank))
+			set_internals(r_store)
+		else if(istype(l_store, /obj/item/tank))
+			set_internals(l_store)
 		else if(istype(belt, /obj/item/tank))
 			set_internals(belt)
 		else
