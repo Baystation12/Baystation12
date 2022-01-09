@@ -120,6 +120,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if (!health_max)
 		return
+	health_mod = round(health_mod)
 	var/death_state = !is_alive()
 	health_current = round(clamp(health_current + health_mod, 0, get_max_health()))
 	post_health_change(health_mod, damage_type)
