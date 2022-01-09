@@ -3903,10 +3903,11 @@
 /area/quartermaster/exploration)
 "iR" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/vehicle/train/cargo/engine,
 /obj/machinery/light/small{
 	dir = 1
 	},
+/obj/machinery/mech_recharger,
+/mob/living/exosuit/premade/powerloader/old,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/storage)
 "iS" = (
@@ -6636,7 +6637,8 @@
 /area/quartermaster/storage)
 "ou" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/vehicle/train/cargo/trolley,
+/obj/machinery/mech_recharger,
+/mob/living/exosuit/premade/powerloader/old,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/storage)
 "ov" = (
@@ -6650,35 +6652,28 @@
 /area/quartermaster/storage)
 "ow" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/industrial/warning{
-	dir = 8
-	},
 /obj/structure/disposalpipe/segment{
 	dir = 4;
 	icon_state = "pipe-c"
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/storage)
 "ox" = (
 /obj/structure/railing/mapped,
-/obj/machinery/mech_recharger,
-/mob/living/exosuit/premade/powerloader/old,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/storage)
 "oy" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 9
-	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/storage)
-"oz" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/floor_decal/industrial/warning/corner{
-	dir = 1;
+	dir = 8;
 	icon_state = "warningcorner"
 	},
-/obj/structure/disposalpipe/segment,
-/turf/simulated/floor/tiled/monotile,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
 /area/quartermaster/storage)
 "oB" = (
 /obj/structure/table/rack{
@@ -39063,8 +39058,8 @@ TL
 hy
 iR
 ou
-ou
 oy
+if
 if
 jd
 jf
@@ -39266,7 +39261,7 @@ Em
 ja
 ov
 ow
-oz
+jc
 jc
 je
 jg

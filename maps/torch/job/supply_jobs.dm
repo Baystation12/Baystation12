@@ -24,7 +24,8 @@
 	                    SKILL_FINANCE     = SKILL_BASIC,
 	                    SKILL_HAULING     = SKILL_BASIC,
 	                    SKILL_EVA         = SKILL_BASIC,
-	                    SKILL_PILOT       = SKILL_BASIC)
+	                    SKILL_PILOT       = SKILL_BASIC,
+						SKILL_MECH        =	SKILL_BASIC)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
 	skill_points = 18
@@ -64,7 +65,8 @@
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_BASIC,
-	                    SKILL_HAULING     = SKILL_BASIC)
+	                    SKILL_HAULING     = SKILL_BASIC,
+	                    SKILL_MECH        =	SKILL_BASIC)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
 

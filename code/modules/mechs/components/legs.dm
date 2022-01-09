@@ -67,7 +67,7 @@
 	exosuit_desc_string = "reinforced hydraulic legs"
 	desc = "Wide and stable but not particularly fast."
 	max_damage = 70
-	move_delay = 4
+	move_delay = 3
 	turn_delay = 4
 	power_use = 10
 
