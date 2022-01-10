@@ -17,7 +17,8 @@
 #   $ACTIVES - connected clients alive and not AFK
 # If this file is empty or not present the default is:
 #   <b>$SERVER</b> by <b>$HOST</b> &#8212; $ACTIVES of $PLAYERS alive
-# A more fully populated example is provided below:
+# A more fully populated example is provided below.
+# Note that the final entry will be truncated to 255 bytes long by BYOND.
 
 <b>$SERVER</b> by <b>$HOST</b> &#8212; playing <b>$MODE</b> on <b>$STATION</b> with $ACTIVES of $PLAYERS alive
 [<a href="$WIKI">Wiki</a>] [<a href="$DISCORD">Discord</a>] [<a href="$SOURCE">Source</a>]

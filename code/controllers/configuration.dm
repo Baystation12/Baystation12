@@ -989,6 +989,9 @@
 		entry = replacetext_char(entry, replace_actives, "[active_count]")
 	else
 		entry = "It Is A Mystery"
+	var/entry_size = length(entry)
+	if (entry_size > 255)
+		log_debug("The generated hub entry was [entry_size] bytes long! It will be truncated by the hub to 255.")
 	return entry
 
 
