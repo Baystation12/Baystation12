@@ -1,4 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - bugfix: Non-living mobs (ghosts, observers, etc) can't be targeted by AI by default.

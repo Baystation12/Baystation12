@@ -1,8 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: The 'Who' verb will now list the specific antag type next to a player's
-      name if they are playing as one.
-  - admin: Staff can now see all players' readied status regardless of hidden status,
-      and can now see what antag roles they are readied for in respect to the current
-      gamemode (other than secret).
