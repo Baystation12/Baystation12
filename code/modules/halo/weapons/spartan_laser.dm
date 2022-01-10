@@ -50,7 +50,7 @@
 	name = "spartan laser"
 	icon_state = "heavylaser"
 	damage = 100
-	shield_damage = 100 //No shields for you
+	shield_damage = 210 //No shields for you
 	armor_penetration = 100
 
 	fire_sound = 'code/modules/halo/sounds/Spartan_Laser_Beam_Shot_Sound_Effect.ogg'
