@@ -13,8 +13,8 @@
 	armor = list(melee = 30, bullet = 40, laser = 30, energy = 30, bomb = 25, bio = 0, rad = 0)
 	species_restricted = list("Tvaoan Kig-Yar")
 	var/datum/armourspecials/shields/tvoan/my_shield
-	var/shieldstrength = 1
-	var/totalshields = 1
+	var/shieldstrength = 25
+	var/totalshields = 25
 	var/intercept_chance = 100	//A 100% chance to block only a single bullet.
 	matter = list("nanolaminate" = 1)
 
