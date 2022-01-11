@@ -112,7 +112,7 @@
 	filling_color = "#7a3d11"
 	center_of_mass = "x=16;y=13"
 	bitesize = 40
-/obj/item/reagent_containers/food/snacks/meatsteak/Initialize()
+/obj/item/reagent_containers/food/snacks/meatsteak/toxin/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
 	reagents.add_reagent(/datum/reagent/sodiumchloride, 1)
