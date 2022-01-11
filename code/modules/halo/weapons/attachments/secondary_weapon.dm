@@ -26,7 +26,6 @@
 	if(eject == 1) //auto-ejecting
 		casing.eject(get_turf(src), angle2dir(dir2angle(loc.loc.dir)+90)) //loc = gun, loc.loc = the man firing
 
-
 /obj/item/weapon_attachment/secondary_weapon/proc/fire_attachment(var/atom/target, var/mob/living/user)
 	var/obj/item/ammo_casing/chambered
 	//checks if internal magazine is empty
@@ -93,7 +92,7 @@
 	ammotype = /obj/item/ammo_casing/shotgun
 	int_mag_size = 4
 	alt_fire_loadsound = 'code/modules/halo/sounds/Shotgun_Pump_Slide.ogg'
-	fire_delay = 15
+	fire_delay = 20
 
 /obj/item/weapon_attachment/secondary_weapon/underslung_shotgun_soe
 	name = "SOE underslung shotgun"
@@ -103,7 +102,7 @@
 	ammotype = /obj/item/ammo_casing/shotgun
 	int_mag_size = 2
 	alt_fire_loadsound = 'code/modules/halo/sounds/Shotgun_Pump_Slide.ogg'
-	fire_delay = 7
+	fire_delay = 10
 
 /obj/item/weapon_attachment/secondary_weapon/underslung_grenadelauncher
 	name = "M301 Grenade Launcher"
