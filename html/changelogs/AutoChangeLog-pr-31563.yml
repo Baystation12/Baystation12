@@ -1,0 +1,5 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: Adjusts the new vox armor sprite; the legs are now slightly less bulbous
+      and horrifying, and the chest should look slightly broader.
