@@ -2,7 +2,7 @@
 	name = "game mode"
 	additional_header = "<th>Required Players / Antags</th>"
 	win_x = 500
-	win_y = 1100
+	win_y = 800
 	result_length = 3
 
 /datum/vote/gamemode/can_run(mob/creator, automatic)

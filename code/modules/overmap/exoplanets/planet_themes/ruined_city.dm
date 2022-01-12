@@ -101,7 +101,7 @@
 
 /datum/random_map/city/get_appropriate_path(var/value)
 	if (value == ROAD_VALUE)
-		return /turf/simulated/floor/exoplanet/concrete/reinforced/road
+		return /turf/unsimulated/floor/exoplanet/concrete/reinforced/road
 
 /datum/random_map/city/apply_to_map()
 	..()
@@ -113,7 +113,7 @@
 //Generic ruin
 /datum/random_map/maze/concrete
 	wall_type =  /turf/simulated/wall/concrete
-	floor_type = /turf/simulated/floor/exoplanet/concrete/reinforced
+	floor_type = /turf/unsimulated/floor/exoplanet/concrete/reinforced
 	preserve_map = 0
 
 /datum/random_map/maze/concrete/get_appropriate_path(var/value)
@@ -121,7 +121,7 @@
 		if (prob(80))
 			return /turf/simulated/wall/concrete
 		else
-			return /turf/simulated/floor/exoplanet/concrete/reinforced/damaged
+			return /turf/unsimulated/floor/exoplanet/concrete/reinforced
 	return ..()
 
 /datum/random_map/maze/concrete/get_additional_spawns(var/value, var/turf/simulated/floor/T)
@@ -205,16 +205,14 @@
 
 #undef TRANSLATE_COORD
 
-/turf/simulated/floor/exoplanet/concrete/reinforced
+/turf/unsimulated/floor/exoplanet/concrete/reinforced
 	name = "reinforced concrete"
 	desc = "Stone-like artificial material. It has been reinforced with an unknown compound."
 	icon_state = "hexacrete"
 
-/turf/simulated/floor/exoplanet/concrete/reinforced/road
+/turf/unsimulated/floor/exoplanet/concrete/reinforced/road
 	icon_state = "hexacrete_dark"
 
-/turf/simulated/floor/exoplanet/concrete/reinforced/damaged
-	broken = TRUE
 
 /obj/item/remains/xeno/charred
 	color = COLOR_DARK_GRAY

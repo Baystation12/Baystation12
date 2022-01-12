@@ -12,7 +12,7 @@
 /turf/simulated/floor/fixed/alium,
 /area/template_noop)
 "y" = (
-/turf/simulated/floor/exoplanet/water/shallow,
+/turf/unsimulated/floor/exoplanet/water/shallow,
 /area/template_noop)
 "E" = (
 /obj/item/remains/xeno,
