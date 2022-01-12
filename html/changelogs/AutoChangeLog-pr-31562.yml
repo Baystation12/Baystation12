@@ -1,0 +1,8 @@
+author: Jux
+delete-after: true
+changes:
+  - maptweak: The Aquila now scrubs air to space instead of to a canister.
+  - maptweak: The Aquila now has a pressure canister for CO2, starting with a pittance
+      of spare gas.
+  - maptweak: The Aquila has three less thrusters, making it slightly more fuel efficient
+      at a cost of max acceleration per burn.
