@@ -4847,6 +4847,17 @@
 /obj/machinery/light/navigation/delay2,
 /turf/space,
 /area/space)
+"kH" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
+	dir = 8;
+	icon_state = "map_vent_in";
+	pressure_checks = 2;
+	pressure_checks_default = 2;
+	use_power = 1
+	},
+/turf/simulated/floor/airless,
+/area/aquila/passenger)
 "kI" = (
 /obj/effect/floor_decal/corner/yellow{
 	dir = 6
@@ -5375,8 +5386,9 @@
 	dir = 9;
 	pixel_y = 0
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 10
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1;
+	icon_state = "map-scrubbers"
 	},
 /obj/effect/floor_decal/corner/red{
 	dir = 9;
@@ -5833,6 +5845,9 @@
 /obj/structure/bed/chair/shuttle/blue{
 	dir = 8;
 	icon_state = "shuttle_chair_preview"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/passenger)
@@ -6313,6 +6328,22 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
+"oY" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "aquila_shutters";
+	name = "Protective Shutters";
+	opacity = 0
+	},
+/obj/effect/paint/hull,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/aquila/passenger)
 "oZ" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/device/radio,
@@ -6617,7 +6648,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/airlock)
 "pY" = (
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/simple/hidden,
@@ -7193,6 +7224,13 @@
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
+"rr" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 4
+	},
+/obj/effect/paint/red,
+/turf/simulated/wall/titanium,
+/area/aquila/secure_storage)
 "rt" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
@@ -7828,9 +7866,9 @@
 "tc" = (
 /obj/structure/catwalk,
 /obj/machinery/meter,
-/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	dir = 6;
-	icon_state = "intact"
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
+	dir = 8;
+	icon_state = "map"
 	},
 /turf/simulated/floor/plating,
 /area/aquila/maintenance)
@@ -8655,6 +8693,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/passenger)
 "vp" = (
@@ -9129,6 +9170,9 @@
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
 	},
 /turf/simulated/floor/tiled/dark,
 /area/aquila/passenger)
@@ -12831,11 +12875,11 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "KN" = (
-/obj/machinery/atmospherics/portables_connector{
-	dir = 8
-	},
-/obj/machinery/portable_atmospherics/canister/empty,
 /obj/effect/floor_decal/industrial/outline/red,
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide{
+	dir = 8;
+	start_pressure = 5000
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/aquila/medical)
 "KP" = (
@@ -13660,6 +13704,13 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bridgecheck)
+"Oq" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 4
+	},
+/obj/effect/paint/red,
+/turf/simulated/wall/titanium,
+/area/aquila/maintenance)
 "Os" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
@@ -13883,6 +13934,13 @@
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/co)
+"PA" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 4
+	},
+/obj/effect/paint/red,
+/turf/simulated/wall/titanium,
+/area/aquila/medical)
 "PB" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 1;
@@ -15037,7 +15095,6 @@
 	name = "Engineering"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -15471,9 +15528,6 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 5
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9;
 	icon_state = "intact"
@@ -15657,8 +15711,9 @@
 	dir = 2;
 	pixel_y = 24
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 6;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/aquila/maintenance)
@@ -15860,11 +15915,11 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
 "Yb" = (
-/obj/structure/catwalk,
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -33984,8 +34039,8 @@ JA
 sn
 sV
 tJ
-IL
-Vs
+rr
+Ws
 vL
 cP
 ah
@@ -35195,8 +35250,8 @@ Ub
 Wb
 ac
 Bc
-tL
-uw
+Oq
+yk
 vL
 ad
 cP
@@ -36408,8 +36463,8 @@ qd
 qd
 qd
 tN
-fX
-SQ
+PA
+RH
 vL
 cP
 ah
@@ -36600,8 +36655,8 @@ QF
 QF
 Ag
 Ag
-QF
-QF
+Ag
+oY
 gw
 pl
 qe
@@ -36802,8 +36857,8 @@ eg
 eg
 eg
 eg
-eg
 nr
+kH
 gw
 gw
 gw
@@ -37004,8 +37059,8 @@ ad
 ad
 ad
 ad
-ad
 fp
+eg
 eg
 eg
 eg
