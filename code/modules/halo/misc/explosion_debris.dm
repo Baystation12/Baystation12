@@ -1,4 +1,6 @@
 #define EXPLOSION_DEBRIS_CHANCE 30
+//Projectiles below will be ignored when checking if we should block them.//
+#define PROJECTILES_DEBRIS_IGNORE list(/obj/item/projectile/bullet/scorp_cannon,/obj/item/projectile/bullet/cobra_cannon,/obj/item/projectile/bullet/cobra_sniper)
 
 /obj/structure/destructible/explosion_debris
 	name = "explosion debris"
@@ -14,11 +16,19 @@
 	bump_climb = 1
 	mob_climb_time = 0.7 SECONDS
 
-/obj/structure/destructible/explosion_debris/CanPass(var/obj/vehicles/vpass)
+/obj/structure/destructible/Cross(var/obj/vehicles/crosser)
 	. = ..()
 	if(!.)
-		if(istype(vpass))
+		if(istype(crosser) && !crosser.can_overrun_cover)//Cover-overruners need to collide.
+			return 0
+
+/obj/structure/destructible/explosion_debris/CanPass(var/obj/vehicles/vpass)
+	if(istype(vpass) && !vpass.can_overrun_cover) //Cover-overrunners need to collide.
+		return 1
+	for(var/type in PROJECTILES_DEBRIS_IGNORE)
+		if(istype(vpass,type))
 			return 1
+	. = ..()
 
 //Debris Creation Code//
 /turf/simulated/floor
@@ -60,4 +70,5 @@
 /turf/simulated/floor/road
 	explosion_debris_file = 'code/modules/halo/icons/explosion_debris.dmi'
 
+#undef PROJECTILES_DEBRIS_IGNORE
 #undef EXPLOSION_DEBRIS_CHANCE
