@@ -1,7 +1,7 @@
 
 /obj/item/weapon/gun/energy/spartanlaser
 	name = "M6 Grindell/Galilean Nonlinear Rifle"
-	desc = "Also known as the spartan laser, is the most powerful handheld weapon produced by the UNSC. It can disable most vehicles and infantry in a single hit."
+	desc = "Also known as the spartan laser, this is the most powerful handheld weapon produced by the UNSC. It can disable most vehicles and infantry in a single hit."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "spartanlaser"
 	item_state = "spartanlaser"
