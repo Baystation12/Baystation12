@@ -1,6 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Teleporters now shut themselves off after 1 minute if inactivity. This
-      timer is reset whenever someone or something goes through it, or the teleporter
-      is re-engaged.
