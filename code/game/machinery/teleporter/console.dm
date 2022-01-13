@@ -11,6 +11,8 @@
 	var/atom/target
 	var/active
 	var/id
+	/// The timer ID for any active online timers, for stopping the timer if the teleporter is manually shut off, or dies before the timer ends.
+	var/active_timer
 
 
 /obj/machinery/computer/teleporter/Destroy()
@@ -104,6 +106,7 @@
 		var/obj/machinery/tele_beacon/beacon = old_target
 		beacon.disconnect_computer(src)
 	set_active(FALSE)
+	set_timer(TRUE)
 
 
 /obj/machinery/computer/teleporter/proc/lost_target()
@@ -129,6 +132,7 @@
 	if (active == effective)
 		return
 	active = effective
+	set_timer(!active)
 	if (notify && effective)
 		if (active)
 			visible_message(SPAN_NOTICE("The teleporter sparks and hums to life."))
@@ -138,6 +142,15 @@
 		projector.queue_icon_update()
 	if (pad)
 		pad.queue_icon_update()
+
+
+/obj/machinery/computer/teleporter/proc/set_timer(clear = FALSE)
+	if (clear)
+		if (active_timer)
+			deltimer(active_timer)
+			active_timer = null
+	else
+		active_timer = addtimer(CALLBACK(src, .proc/clear_target), 1 MINUTE, TIMER_UNIQUE | TIMER_OVERRIDE | TIMER_STOPPABLE)
 
 
 /obj/machinery/computer/teleporter/proc/get_targets()
