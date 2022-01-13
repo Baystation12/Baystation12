@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - tweak: Crashed pod's distress beacon will no longer be listed on the Torch's welcome
+      report.
