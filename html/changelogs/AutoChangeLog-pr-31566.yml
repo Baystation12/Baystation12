@@ -1,0 +1,5 @@
+author: Spookerton
+delete-after: true
+changes:
+  - tweak: Traitor can start without any roundstart traitors. Auto antag can fill
+      in later if people join with preferences opted in.
