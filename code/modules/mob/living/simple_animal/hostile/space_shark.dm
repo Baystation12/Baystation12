@@ -1,7 +1,7 @@
 /mob/living/simple_animal/hostile/carp/shark
 	name = "cosmoshark"
 	desc = "Enormous creature that resembles a shark with magenta glowing lines along its body and set of long deep-purple teeth."
-	icon = 'icons/mob/simple_animal/space_carp.dmi'
+	icon = 'icons/mob/simple_animal/space_shark.dmi'
 	icon_state = "shark"
 	icon_living = "shark"
 	icon_dead = "shark_dead"
