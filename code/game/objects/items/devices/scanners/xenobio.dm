@@ -11,8 +11,7 @@
 	var/list/valid_targets = list(
 		/mob/living/carbon/human,
 		/mob/living/simple_animal,
-		/mob/living/carbon/slime,
-		/mob/living/carbon/alien/chorus
+		/mob/living/carbon/slime
 	)
 
 /obj/item/device/scanner/xenobio/is_valid_scan_target(atom/O)
