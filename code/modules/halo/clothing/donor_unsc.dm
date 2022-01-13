@@ -1718,10 +1718,12 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 //MK.VII
 
 /obj/item/clothing/head/helmet/spartan/mkvii
+	name = "MJOLNIR Powered Assault Armor Helmet Mark VII"
 	icon_state = "mkvii-helm-obj"
 	item_state = "mkvii-helm-worn"
 
 /obj/item/clothing/suit/armor/special/spartan/mkvii
+	name = "MJOLNIR Powered Assault Armor Mark VII"
 	icon_state = "mkvii-obj"
 	item_state = "mkvii-worn"
 
