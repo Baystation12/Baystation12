@@ -101,6 +101,13 @@
 	armor_thickness = 26
 	armor_thickness_max = 26
 
+/obj/item/clothing/head/helmet/jiralhanae/covenant/chieftain
+	name = "Jiralhanae Helm (Chieftain)"
+	desc = "This modified helmet is signficant to Jiralhanae clans. It is a mark of importance and leadership, however now somewhat diminished by the covenant hierarchy."
+	icon_state = "helm_chieftain_red"
+	armor_thickness = 28
+	armor_thickness_max = 28
+
 /obj/item/clothing/head/helmet/jiralhanae/covenant/EVA
 	name = "Jiralhanae Softsuit Helmet"
 	desc = "This helmet was designed to keep Jiralhanae alive during EVA activity."
@@ -223,6 +230,25 @@
 	icon_state = "captainchest"
 	armor_thickness = 30
 	armor_thickness_max = 30
+
+/obj/item/clothing/suit/armor/special/chieftain
+	name = "Jiralhanae Armour (Chieftain)"
+	desc = "This modified armor used to be a mark of importance to Jiralhanae clans. The Covenant hierarchy has diminished it's power."
+	species_restricted = list("Jiralhanae")
+	icon = JIRALHANAE_ICON_PATH_OBJ
+	icon_state = "armour_chieftain_red"
+	sprite_sheets = list("Jiralhanae" = JIRALHANAE_ICON_PATH_MOB)
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	armor = list(melee = 50, bullet = 45, laser = 50, energy = 40, bomb = 35, bio = 20, rad = 20)
+	specials = list(/datum/armourspecials/shields/elite,/datum/armourspecials/shieldmonitor/sangheili)
+	totalshields = 210
+	armor_thickness = 30
+	matter = list("nanolaminate" = 2)
+	allowed = list(\
+		/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/frag/spike,/obj/item/weapon/grenade/brute_shot,/obj/item/weapon/grenade/toxic_gas,\
+		/obj/item/weapon/gun/projectile/spiker,/obj/item/weapon/gun/projectile/mauler,\
+		/obj/item/weapon/gun/energy/plasmapistol, /obj/item/weapon/gun/energy/plasmarifle, /obj/item/weapon/gun/energy/plasmarifle/brute)
+
 /* SHOES */
 
 
@@ -259,6 +285,9 @@
 	name = "Jiralhanae Greaves (Captain)"
 	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "captainfeet"
+
+/obj/item/clothing/shoes/jiralhanae/covenant/captain/chieftain
+	name = "Jiralhanae Greaves (Chieftain)"//We have no Chieftain sprites for these, but a rename still works.
 
 /obj/item/clothing/shoes/magboots/jiralhanaeEVA
 	name = "Jiralhanae Maggreaves"

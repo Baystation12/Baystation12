@@ -20,7 +20,11 @@
 	//
 	id_type = /obj/item/weapon/card/id/yanmee_minor
 	id_slot = slot_wear_id
-	
+
+/decl/hierarchy/outfit/yanmee/minor/armed
+	name = "Armed Yanmee Minor"
+	l_hand = /obj/item/weapon/gun/energy/plasmapistol
+
 /decl/hierarchy/outfit/yanmee/major
 	name = "Yanmee Major"
 
@@ -29,7 +33,11 @@
 	//
 	id_type = /obj/item/weapon/card/id/yanmee_major
 	id_slot = slot_wear_id
-	
+
+/decl/hierarchy/outfit/yanmee/major/armed
+	name = "Armed Yanmee Major"
+	l_hand = /obj/item/weapon/gun/energy/plasmapistol
+
 /decl/hierarchy/outfit/yanmee/ultra
 	name = "Yanmee Ultra"
 
@@ -39,7 +47,11 @@
 	//
 	id_type = /obj/item/weapon/card/id/yanmee_ultra
 	id_slot = slot_wear_id
-	
+
+/decl/hierarchy/outfit/yanmee/ultra/armed
+	name = "Armed Yanmee Ultra"
+	l_hand = /obj/item/weapon/gun/energy/plasmapistol
+
 /decl/hierarchy/outfit/yanmee/leader
 	name = "Yanmee Leader"
 
@@ -49,4 +61,7 @@
 	//
 	id_type = /obj/item/weapon/card/id/yanmee_leader
 	id_slot = slot_wear_id
-	
+
+/decl/hierarchy/outfit/yanmee/leader/armed
+	name = "Armed Yanmee Leader"
+	l_hand = /obj/item/weapon/gun/energy/plasmapistol

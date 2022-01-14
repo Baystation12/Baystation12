@@ -21,6 +21,12 @@
 	id_type = /obj/item/weapon/card/id/elite_minor
 	id_slot = slot_wear_id
 
+/decl/hierarchy/outfit/sangheili/minor/armed
+	name = "Armed Sangheili (Minor)"
+
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	belt = /obj/item/weapon/gun/energy/plasmarifle
+
 /decl/hierarchy/outfit/sangheili/major
 	name = "Sangheili (Major)"
 
@@ -36,6 +42,13 @@
 	//
 	id_type = /obj/item/weapon/card/id/elite_major
 	id_slot = slot_wear_id
+
+/decl/hierarchy/outfit/sangheili/major/armed
+	name = "Armed Sangheili (Major)"
+
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	belt = /obj/item/weapon/gun/energy/plasmarifle
+	l_pocket = /obj/item/weapon/grenade/plasma
 
 /decl/hierarchy/outfit/sangheili/honour_guard
 	name = "Sangheili (Honour Guard)"
@@ -53,6 +66,13 @@
 	//
 	id_type = /obj/item/weapon/card/id/elite_guard
 	id_slot = slot_wear_id
+
+/decl/hierarchy/outfit/sangheili/honour_guard/armed
+	name = "Armed Sangheili (Honour Guard)"
+
+	belt = /obj/item/weapon/gun/energy/plasmarifle
+	suit_store = /obj/item/weapon/gun/energy/plasmarifle
+	l_pocket = /obj/item/weapon/grenade/plasma
 
 /decl/hierarchy/outfit/sangheili/ultra
 	name = "Sangheili (Ultra)"
@@ -72,6 +92,13 @@
 	id_type = /obj/item/weapon/card/id/elite_ultra
 	id_slot = slot_wear_id
 
+/decl/hierarchy/outfit/sangheili/ultra/armed
+	name = "Armed Sangheili (Ultra)"
+
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	belt = /obj/item/weapon/gun/energy/plasmarifle
+	l_pocket = /obj/item/weapon/grenade/plasma
+
 /decl/hierarchy/outfit/sangheili/zealot
 	name = "Sangheili (Zealot)"
 
@@ -89,6 +116,13 @@
 	//
 	id_type = /obj/item/weapon/card/id/elite_zealot
 	id_slot = slot_wear_id
+
+/decl/hierarchy/outfit/sangheili/zealot/armed
+	name = "Armed Sangheili (Zealot)"
+
+	belt = /obj/item/weapon/gun/energy/plasmarifle
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	l_pocket = /obj/item/weapon/grenade/plasma
 
 /decl/hierarchy/outfit/sangheili/shipmaster
 	name = "Sangheili (Shipmaster)"
@@ -124,6 +158,13 @@
 	id_type = /obj/item/weapon/card/id/elite_specops
 	id_slot = slot_wear_id
 
+/decl/hierarchy/outfit/sangheili/specops/armed
+	name = "Armed Sangheili (Spec-Ops)"
+
+	l_pocket = /obj/item/weapon/grenade/plasma
+	belt = /obj/item/weapon/gun/energy/plasmarifle
+	back = /obj/item/weapon/gun/energy/plasmarifle
+
 /decl/hierarchy/outfit/sangheili/eva
 	name = "Sangheili (Ranger)"
 
@@ -139,6 +180,13 @@
 	//
 	id_type = /obj/item/weapon/card/id/elite_minor
 	id_slot = slot_wear_id
+
+/decl/hierarchy/outfit/sangheili/eva/armed
+	name = "Armed Sangheili (Ranger)"
+
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	belt = /obj/item/weapon/gun/energy/plasmarifle
+	l_pocket = /obj/item/weapon/grenade/plasma
 
 /decl/hierarchy/outfit/sangheili/silentshadow
 	name = "Sangheili (Silent Shadow)"

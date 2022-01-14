@@ -44,6 +44,10 @@
 	id_type = /obj/item/weapon/card/id/skirmisher_zealot
 	id_slot = slot_wear_id
 
+/decl/hierarchy/outfit/skirmisher_murmillo/armed
+	name = "Armed T\'Vaoan Skirmisher Murmillo"
+	belt = /obj/item/weapon/gun/energy/plasmapistol
+
 /decl/hierarchy/outfit/skirmisher_commando
 	name = "T\'Vaoan Skirmisher Commando"
 	l_ear = /obj/item/device/radio/headset/covenant
@@ -59,6 +63,10 @@
 	//
 	id_type = /obj/item/weapon/card/id/skirmisher_zealot
 	id_slot = slot_wear_id
+
+/decl/hierarchy/outfit/skirmisher_commando/armed
+	name = "Armed T\'Vaoan Skirmisher Commando"
+	belt = /obj/item/weapon/gun/energy/plasmapistol
 
 /decl/hierarchy/outfit/skirmisher_champion
 	name = "T\'Vaoan Skirmisher Champion"
