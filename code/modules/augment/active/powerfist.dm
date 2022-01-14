@@ -40,9 +40,15 @@
 	if (!istype(I, /obj/item/tank/emergency))
 		if (istype(I, /obj/item/tank))
 			to_chat(user, SPAN_WARNING("\The [I] is too big. Find a smaller tank."))
-		return
-	if (tank)
+			return	
+	else if (tank)
 		to_chat(user, SPAN_WARNING("\The [src] already has \a [tank] installed."))
+		return
+	else if (istype(I, /obj/item/tank/emergency/oxygen/double))
+		to_chat(user, SPAN_WARNING("\The [I] is slightly too big. Find a smaller tank."))
+		return
+	else if (istype(I, /obj/item/tank/emergency/nitrogen/double))
+		to_chat(user, SPAN_WARNING("\The [I] is slightly too big. Find a smaller tank."))
 		return
 	user.visible_message(
 		SPAN_ITALIC("\The [user] starts connecting \a [I] to \his [src]."),
@@ -203,7 +209,7 @@
 	return ..()
 
 /obj/item/powerfist/prepared
-	tank = /obj/item/tank/emergency/oxygen/double
+	tank = /obj/item/tank/emergency/oxygen/engi
 
 /obj/item/organ/internal/augment/active/item/powerfist/prepared
 	item = /obj/item/powerfist/prepared
