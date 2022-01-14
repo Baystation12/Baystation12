@@ -1,0 +1,4 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: Powerfists can no longer take double capacity emergency air tanks.
