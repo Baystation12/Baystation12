@@ -230,7 +230,7 @@
 	name = "Gear - Firefighting equipment"
 	contains = list(/obj/item/clothing/suit/fire/firefighter,
 			/obj/item/clothing/mask/gas,
-			/obj/item/tank/emergency/oxygen/double/red,
+			/obj/item/tank/oxygen_scba,
 			/obj/item/extinguisher,
 			/obj/item/clothing/head/hardhat/red,
 			/obj/item/scrubpack/standard,

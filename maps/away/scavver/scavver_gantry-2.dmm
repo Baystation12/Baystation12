@@ -565,8 +565,8 @@
 /obj/structure/table/rack,
 /obj/item/cell/device/high,
 /obj/item/cell/device/high,
-/obj/item/tank/emergency/oxygen/double,
-/obj/item/tank/emergency/oxygen/double,
+/obj/item/tank/oxygen_emergency_double,
+/obj/item/tank/oxygen_emergency_double,
 /obj/random/coin,
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 1

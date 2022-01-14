@@ -529,14 +529,14 @@ obj/random/closet //A couple of random closets to spice up maint
 
 /obj/random/tank/spawn_choices()
 	return list(/obj/item/tank/oxygen = 5,
-				/obj/item/tank/oxygen/yellow = 4,
-				/obj/item/tank/emergency/oxygen/double/red = 4,
+				/obj/item/tank/oxygen_yellow = 4,
+				/obj/item/tank/oxygen_scba = 4,
 				/obj/item/tank/air = 3,
-				/obj/item/tank/emergency/oxygen = 4,
-				/obj/item/tank/emergency/oxygen/engi = 3,
-				/obj/item/tank/emergency/oxygen/double = 2,
-				/obj/item/tank/emergency/nitrogen = 2,
-				/obj/item/tank/emergency/nitrogen/double = 1,
+				/obj/item/tank/oxygen_emergency = 4,
+				/obj/item/tank/oxygen_emergency_extended = 3,
+				/obj/item/tank/oxygen_emergency_double = 2,
+				/obj/item/tank/nitrogen_emergency = 2,
+				/obj/item/tank/nitrogen_emergency_double = 1,
 				/obj/item/tank/nitrogen = 1,
 				/obj/item/device/suit_cooling_unit = 1)
 

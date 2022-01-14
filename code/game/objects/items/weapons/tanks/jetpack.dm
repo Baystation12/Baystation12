@@ -6,6 +6,7 @@
 	icon_state = "jetpack"
 	gauge_icon = null
 	w_class = ITEM_SIZE_HUGE
+	tank_size = TANK_SIZE_HUGE
 	item_state = "jetpack"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	var/datum/effect/effect/system/trail/ion/ion_trail

@@ -119,7 +119,13 @@
 	permeability_coefficient = 0
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank/emergency,/obj/item/device/suit_cooling_unit)
+	allowed = list(
+		/obj/item/device/flashlight,
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/device/suit_cooling_unit
+	)
 	armor = list(
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL

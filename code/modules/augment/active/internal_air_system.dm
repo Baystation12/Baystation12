@@ -5,7 +5,7 @@
 	desc = "A flexible air sac, made from a complex, bio-compatible polymer, is installed into the respiratory system. It gradually replenishes itself with breathable gas from the surrounding environment as you breathe, and you can later use it as a source of internals."
 	augment_flags = AUGMENT_BIOLOGICAL | AUGMENT_SCANNABLE
 	origin_tech = list(TECH_MATERIAL = 3, TECH_BIO = 4)
-	var/obj/item/tank/emergency/air_sac/sac
+	var/obj/item/tank/air_sac/sac
 
 
 /obj/item/organ/internal/augment/active/internal_air_system/hidden

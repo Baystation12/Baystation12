@@ -301,11 +301,12 @@
 		/obj/item/hand_labeler,
 		/obj/item/clothing/gloves,
 		/obj/item/crowbar/prybar,
-		/obj/item/tank/emergency,
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/nitrogen_emergency,
 		/obj/item/clothing/mask/breath,
 		/obj/item/toy/bosunwhistle,
 		/obj/item/clothing/head/beret,
-		/obj/item/material/knife/folding/,
+		/obj/item/material/knife/folding,
 		/obj/item/device/tape
 		)
 
@@ -365,11 +366,12 @@
 		/obj/item/hand_labeler,
 		/obj/item/clothing/gloves,
 		/obj/item/crowbar/prybar,
-		/obj/item/tank/emergency,
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/nitrogen_emergency,
 		/obj/item/clothing/mask/breath,
 		/obj/item/toy/bosunwhistle,
 		/obj/item/clothing/head/beret,
-		/obj/item/material/knife/folding/,
+		/obj/item/material/knife/folding,
 		/obj/item/device/tape
 		)
 
