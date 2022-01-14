@@ -21,6 +21,8 @@
 	name = "Merchant's List"
 
 /datum/computer_file/program/merchant/proc/get_merchant(index)
+	if (!index)
+		return
 	var/count = GLOB.trader_types.len
 	if (!count)
 		return
