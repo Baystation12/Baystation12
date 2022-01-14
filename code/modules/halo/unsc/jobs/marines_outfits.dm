@@ -55,7 +55,7 @@
 ///"Armed" Variants for adminspawn memery.
 
 /decl/hierarchy/outfit/job/adminspawn_marine
-	name = "UNSC Marine (MA5B)"
+	name = "UNSC Marine - MA5B"
 
 	l_ear = /obj/item/device/radio/headset/unsc/marine
 	r_ear = /obj/item/weapon/reagent_containers/syringe/biofoam

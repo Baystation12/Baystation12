@@ -33,8 +33,8 @@
 		/obj/item/clothing/accessory/rank/marine/enlisted/e8,\
 		/obj/item/clothing/accessory/badge/tags)
 
-/decl/hierarchy/outfit/job/adminspawn_marine/odst
-	name = "ODST"
+/decl/hierarchy/outfit/job/adminspawn_marine/odsts
+	name = "Armed ODST"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	r_ear = /obj/item/weapon/reagent_containers/syringe/biofoam
 	head = /obj/item/clothing/head/helmet/odst
@@ -49,14 +49,14 @@
 	id_type = /obj/item/weapon/card/id/odst
 	starting_accessories = list(/obj/item/clothing/accessory/rank/marine/enlisted/e4,/obj/item/clothing/accessory/badge/tags)
 
-/decl/hierarchy/outfit/job/adminspawn_marine/odst/br55
+/decl/hierarchy/outfit/job/adminspawn_marine/odsts/br55
 	name = "ODST (BR55)"
 
 	back = /obj/item/weapon/gun/projectile/br55
 	belt = /obj/item/weapon/storage/belt/marine_ammo/mobilespawn_br55
 	suit_store = /obj/item/weapon/gun/projectile/m6d_magnum
 
-/decl/hierarchy/outfit/job/adminspawn_marine/odst/dmr
+/decl/hierarchy/outfit/job/adminspawn_marine/odsts/dmr
 	name = "ODST Marksman (DMR)"
 
 	back = /obj/item/weapon/gun/projectile/m392_dmr
@@ -65,7 +65,7 @@
 	suit = /obj/item/clothing/suit/armor/special/odst/sharpshooter
 	head = /obj/item/clothing/head/helmet/odst/sharpshooter
 
-/decl/hierarchy/outfit/job/adminspawn_marine/odst/sniper
+/decl/hierarchy/outfit/job/adminspawn_marine/odsts/sniper
 	name = "ODST Marksman (SRS99)"
 
 	back = /obj/item/weapon/gun/projectile/srs99_sniper
@@ -74,7 +74,7 @@
 	suit = /obj/item/clothing/suit/armor/special/odst/sharpshooter
 	head = /obj/item/clothing/head/helmet/odst/sharpshooter
 
-/decl/hierarchy/outfit/job/adminspawn_marine/odst/cqc
+/decl/hierarchy/outfit/job/adminspawn_marine/odsts/cqc
 	name = "ODST CQC Specialist (M90)"
 
 	back = /obj/item/weapon/gun/projectile/shotgun/pump/m90_ts
@@ -83,7 +83,7 @@
 	head = /obj/item/clothing/head/helmet/odst/cqb
 	suit = /obj/item/clothing/suit/armor/special/odst/cqb
 
-/decl/hierarchy/outfit/job/adminspawn_marine/odst/heavy
+/decl/hierarchy/outfit/job/adminspawn_marine/odsts/heavy
 	name = "ODST AT Specialist (M41)"
 
 	back = /obj/item/weapon/gun/projectile/m41

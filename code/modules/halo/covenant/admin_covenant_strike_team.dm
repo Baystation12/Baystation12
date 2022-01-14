@@ -74,7 +74,7 @@
 #define UNSC_MOBS list(/mob/living/carbon/human,/mob/living/carbon/human/spartan)
 #define UNSC_MARINE_OUTFITS typesof(/decl/hierarchy/outfit/job/adminspawn_marine) - typesof(/decl/hierarchy/outfit/job/adminspawn_marine/spartan)
 #define UNSC_SPARTAN_OUTFITS typesof(/decl/hierarchy/outfit/job/adminspawn_marine/spartan)
-#define UNSC_ODST_OUTFITS typesof(/decl/hierarchy/outfit/job/adminspawn_marine/odst)
+#define UNSC_ODST_OUTFITS typesof(/decl/hierarchy/outfit/job/adminspawn_marine/odsts)
 
 /datum/admin_secret_item/fun_secret/spawn_unsc_squad
 	name = "Create UNSC Squad"
