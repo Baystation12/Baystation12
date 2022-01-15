@@ -32,6 +32,7 @@
 	canremove = 0
 	armor_thickness = null
 	armor_thickness_max = null
+	stepsound = 'code/modules/halo/sounds/walk_sounds/marine_boots.ogg'
 
 /obj/item/clothing/shoes/grunt_boots/dropped(mob/user as mob)
 	. = ..()

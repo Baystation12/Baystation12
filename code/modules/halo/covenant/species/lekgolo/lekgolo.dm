@@ -97,6 +97,10 @@
 	if(active_weapon.charge_amount <= active_weapon.charge_max)
 		active_weapon.charge_amount += active_weapon.charge_recharge_amount
 
+/mob/living/simple_animal/mgalekgolo/get_move_sound()
+	. = ..()
+	if(!.) //If it's not nulled, then we'll apply our own instead of whatever we were going to use.
+		return 'code/modules/halo/sounds/walk_sounds/hunter_walk.ogg'
 /mob/living/simple_animal/mgalekgolo/verb/set_name()
 	set name = "Set Name"
 

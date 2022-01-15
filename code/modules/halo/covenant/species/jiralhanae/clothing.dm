@@ -236,6 +236,7 @@
 	sprite_sheets = list("Jiralhanae" = JIRALHANAE_ICON_PATH_MOB)
 	armor = list(melee = 30, bullet = 20, laser = 10, energy = 10, bomb = 10, bio = 0, rad = 0)
 	body_parts_covered = LEGS|FEET
+	stepsound = 'code/modules/halo/sounds/walk_sounds/brute_boots.ogg'
 	matter = list("nanolaminate" = 1)
 
 /obj/item/clothing/shoes/jiralhanae/covenant
