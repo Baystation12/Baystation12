@@ -58,7 +58,7 @@
 	icon_state = null
 	sprite_sheets = list("Sangheili" = SANGHEILI_ARMOUR_ICON)
 	species_restricted = list("Sangheili")
-	body_parts_covered = LEGS|FEET
+	body_parts_covered = FEET
 	armor = list(melee = 60, bullet = 45, laser = 35,energy = 35, bomb = 30, bio = 35, rad = 35)
 	armor_thickness = 20
 	matter = list("nanolaminate" = 1)

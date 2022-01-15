@@ -134,13 +134,12 @@
 	handle_casings = CASELESS
 	caliber = "needler"
 	load_method = MAGAZINE
-	one_hand_penalty = 1
+	one_hand_penalty = 2
 	burst = 3
 	burst_delay = 1.5
 	dispersion = list(0.2, 0.4, 0.7)
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_5x6.dmi'
 	hud_bullet_iconstate = "needle"
-	is_heavy = 1
 	irradiate_non_cov = 2
 	slowdown_general = 0
 	matter = list("nanolaminate" = 1)

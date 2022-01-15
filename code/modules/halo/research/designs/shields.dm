@@ -12,7 +12,7 @@
 
 /datum/research_design/shield_energy
 	name = "Handheld Energy Shield"
-	product_type = /obj/item/weapon/shield/energy
+	product_type = /obj/item/clothing/gloves/shield_gauntlet/unsc
 	build_type = PROTOLATHE
 	required_materials = list("plasteel" = 25)
 	required_reagents = list(/datum/reagent/tungsten = 20, /datum/reagent/mercury = 20)

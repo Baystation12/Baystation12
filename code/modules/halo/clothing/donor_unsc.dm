@@ -1713,6 +1713,31 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	/obj/item/clothing/suit/armor/special/spartan/ghostdex
 	)
 
+///////////Other/////////
+
+//MK.VII
+
+/obj/item/clothing/head/helmet/spartan/mkvii
+	name = "MJOLNIR Powered Assault Armor Helmet Mark VII"
+	icon_state = "mkvii-helm-obj"
+	item_state = "mkvii-helm-worn"
+
+/obj/item/clothing/suit/armor/special/spartan/mkvii
+	name = "MJOLNIR Powered Assault Armor Mark VII"
+	icon_state = "mkvii-obj"
+	item_state = "mkvii-worn"
+
+/obj/item/weapon/storage/box/large/donator/mkvii
+	startswith = list(\
+	/obj/item/clothing/head/helmet/spartan/mkvii,
+	/obj/item/clothing/suit/armor/special/spartan/mkvii
+	)
+	can_hold = list(\
+	/obj/item/clothing/head/helmet/spartan/mkvii,
+	/obj/item/clothing/suit/armor/special/spartan/mkvii
+	)
+
+
 #undef ODST_OVERRIDE
 #undef ITEM_INHAND
 #undef MARINE_OVERRIDE

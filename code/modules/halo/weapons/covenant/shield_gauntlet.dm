@@ -264,3 +264,10 @@
 	species_restricted = list("Kig-Yar")
 	body_parts_covered = HANDS
 	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 15, bio = 0, rad = 0)
+
+/obj/item/clothing/gloves/shield_gauntlet/unsc
+	name = "Experimental UNSC Energy-Shield Gauntlet"
+	desc = "A wrist-worn gauntlet that containes a reverse-engineered shield generator. It looks experimental and... dangerous."
+	species_restricted = list("Human","Spartan")
+	body_parts_covered = HANDS
+	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 15, bio = 0, rad = 0)

@@ -161,6 +161,7 @@
 /obj/item/projectile/bullet/cobra_cannon
 	name = "railgun round"
 	damage = 40
+	shield_damage = 40
 	armor_penetration = 50
 
 /obj/item/ammo_magazine/cobra_sniper
@@ -179,7 +180,7 @@
 	damage = 150
 	damage_type = "bomb"
 	damtype = "bomb"
-	armor_penetration = 200
+	armor_penetration = 210
 	shield_damage = 240
 
 /obj/item/projectile/bullet/cobra_sniper/get_structure_damage()
