@@ -1,0 +1,5 @@
+author: Spookerton
+delete-after: true
+changes:
+  - tweak: Exoplanet turfs are unsimulated. This means you can't burn a planet.
+  - tweak: The mode vote window is not taller than a 1080p screen.
