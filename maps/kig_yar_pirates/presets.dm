@@ -14,7 +14,7 @@
 /obj/structure/closet/secure_closet/ks7_cov/WillContain()
 	return list(\
 	/obj/item/clothing/under/kigyar,
-	/obj/item/clothing/under/kigyar/armless,
+	/obj/item/clothing/under/kigyar/variant,
 	/obj/item/clothing/head/helmet/kigyar/first_contact,
 	/obj/item/clothing/suit/armor/kigyar/first_contact,
 	/obj/item/clothing/gloves/shield_gauntlet/kigyar/first_contact,
