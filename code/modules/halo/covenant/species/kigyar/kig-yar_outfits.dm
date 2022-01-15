@@ -21,7 +21,7 @@
 	name = "Kig-Yar (Marksman)"
 
 	back = /obj/item/weapon/gun/projectile/type51carbine
-	uniform = /obj/item/clothing/under/kigyar/armless
+	uniform = /obj/item/clothing/under/kigyar/variant
 	gloves = null
 	l_pocket = /obj/item/ammo_magazine/type51mag
 	r_pocket = /obj/item/ammo_magazine/type51mag
