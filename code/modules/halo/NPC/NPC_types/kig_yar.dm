@@ -3,7 +3,7 @@
 	icon_state = "Kig-Yar_m"
 	species_type = /datum/species/kig_yar
 	npc_job_title = "NPC Kig-Yar"
-	jumpsuits = list(/obj/item/clothing/under/kigyar/armless)
+	jumpsuits = list(/obj/item/clothing/under/kigyar/kig_random)
 	accepted_currency = "gekz"
 	emote_hear = list("hisses softly","blinks and narrows their eyes","suns themself")
 	emote_see = list("shifts from side to side","scratches their arm","examines their nails","stares at at the ground aimlessly","looks bored")

@@ -28,12 +28,19 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	matter = list("cloth" = 1)
 	rolled_sleeves = 0
+	var/list/variations = list()
 
-/obj/item/clothing/under/kigyar/armless //Purposefully a visual change only so their armour still applies.
+/obj/item/clothing/under/kigyar/New()
+	. = ..()
+	if(variations.len > 0)
+		worn_state = pick(variations)
+
+/obj/item/clothing/under/kigyar/kig_random //Purposefully a visual change only so their armour still applies.
 	icon_state = "jackal_bodysuit_armless_obj"
 	worn_state = "jackal_bodysuit_r"
 	species_restricted = list("Kig-Yar")
 	rolled_sleeves = -1
+	variations = list("jackal_bodysuit_r","jackal_bodysuit_straps","jackal_bodysuit_top")
 
 /obj/item/clothing/suit/armor/kigyar
 	name = "Kig-Yar Combat Harness"

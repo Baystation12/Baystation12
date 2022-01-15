@@ -299,7 +299,7 @@
 		"Equipment" = -1,
 		/obj/item/flight_item/covenant_pack = 0,
 		/obj/item/clothing/gloves/shield_gauntlet/kigyar = 0,
-		/obj/item/clothing/under/kigyar/armless = 0,
+		/obj/item/clothing/under/kigyar/kig_random = 0,
 		/obj/item/weapon/pickaxe/plasma_drill = 0,
 		/obj/item/stack/barbedwire/covenant/fifteen = 0,
 		/obj/item/weapon/plastique/covenant = 0,
@@ -312,7 +312,7 @@
 	amounts = list(\
 		/obj/item/flight_item/covenant_pack = 1,
 		/obj/item/clothing/gloves/shield_gauntlet/kigyar = 6,
-		/obj/item/clothing/under/kigyar/armless = 8,
+		/obj/item/clothing/under/kigyar/kig_random = 8,
 		/obj/item/stack/barbedwire/covenant/fifteen = 5,
 		/obj/item/weapon/pickaxe/plasma_drill = 1,
 		/obj/item/weapon/plastique/covenant = 6,
