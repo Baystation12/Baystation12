@@ -106,7 +106,7 @@
 	item_state = "yoroi-worn"
 
 /obj/item/weapon/material/machete/tenrai
-	name = "\improper first principle blade"
+	name = "first principle blade"
 	desc = "A sword from the Imperial armory, granted to those charged with executing Covenant infiltrators and saboteurs. Extremely effective in melee combat."
 	icon_state = "tenrai"
 	item_state = "tenrai"
