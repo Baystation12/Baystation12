@@ -319,7 +319,7 @@
 
 			return
 
-	return ..()
+	return
 
 /obj/item/weapon/gun/launcher/grenade/brute_shot/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
 	. = ..()
