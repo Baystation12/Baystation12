@@ -218,7 +218,7 @@
 	if(use(1)) // Don't skip use() checks even if you only need one! Stacks with the amount of 0 are possible, e.g. on synthetics!
 		var/obj/item/stack/flag/newflag = new src.type(T, 1)
 		newflag.set_up()
-		if(istype(T, /turf/simulated/floor/asteroid) || istype(T, /turf/simulated/floor/exoplanet))
+		if(istype(T, /turf/simulated/floor/asteroid) || istype(T, /turf/unsimulated/floor/exoplanet))
 			user.visible_message("\The [user] plants \the [newflag.singular_name] firmly in the ground.")
 		else
 			user.visible_message("\The [user] attaches \the [newflag.singular_name] firmly to the ground.")

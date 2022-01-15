@@ -3,10 +3,6 @@
 	var/wet = 0
 	var/image/wet_overlay = null
 
-	//Mining resources (for the large drills).
-	var/has_resources
-	var/list/resources
-
 	var/thermite = 0
 	initial_gas = list(GAS_OXYGEN = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed

@@ -22,7 +22,7 @@
 		S.range = 4
 		SSradiation.add_source(S)
 		T.set_light(0.4, 1, 2, l_color = PIPE_COLOR_GREEN)
-		for (var/turf/simulated/floor/exoplanet/crater in circlerangeturfs(T, 3))
+		for (var/turf/unsimulated/floor/exoplanet/crater in circlerangeturfs(T, 3))
 			if (prob(10))
 				new/obj/item/remains/xeno/charred(crater)
 			crater.melt()
