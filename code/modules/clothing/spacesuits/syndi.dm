@@ -36,11 +36,6 @@
 		)
 	siemens_coefficient = 0.3
 
-/obj/item/clothing/suit/space/syndicate/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 1
-
-
 
 //Black syndicate space suit
 /obj/item/clothing/head/helmet/space/syndicate/black

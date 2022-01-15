@@ -19,8 +19,8 @@
 	species_restricted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
 	flags_inv = HIDEJUMPSUIT
 
-/obj/item/clothing/suit/space/vox/New()
-	..()
+/obj/item/clothing/suit/space/vox/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 0.75
 
 /obj/item/clothing/head/helmet/space/vox
