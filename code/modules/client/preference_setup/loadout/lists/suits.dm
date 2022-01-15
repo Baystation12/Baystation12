@@ -114,6 +114,7 @@
 	jackets += /obj/item/clothing/suit/storage/leather_jacket
 	jackets += /obj/item/clothing/suit/storage/toggle/brown_jacket
 	jackets += /obj/item/clothing/suit/storage/mbill
+	jackets += /obj/item/clothing/suit/storage/toggle/leather_hoodie
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(jackets)
 
 /datum/gear/suit/wintercoat

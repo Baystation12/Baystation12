@@ -361,6 +361,12 @@
 	icon_state = "brown_jacket"
 	body_parts_covered = UPPER_TORSO|ARMS
 
+/obj/item/clothing/suit/storage/toggle/leather_hoodie
+	name = "leather hoodie jacket"
+	desc = "A brown leather hoodie, coloured in a dark tone. It's fun to tug at the strings."
+	icon_state = "leather_hoodie"
+	body_parts_covered = UPPER_TORSO|ARMS
+
 /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
 	name = "\improper NanoTrasen leather jacket"
 	desc = "A brown leather coat. The NanoTrasen logo is proudly displayed on the back."
