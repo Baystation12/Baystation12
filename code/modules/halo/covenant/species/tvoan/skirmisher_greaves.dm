@@ -13,6 +13,7 @@
 	body_parts_covered = FEET|LEGS
 	species_restricted = list("Kig-Yar", "Tvaoan Kig-Yar")
 	matter = list("nanolaminate" = 1)
+	stepsound = 'code/modules/halo/sounds/walk_sounds/marine_boots.ogg'
 
 /obj/item/clothing/shoes/skirmisher/major
 	name = "Kig\'Yar Major greaves"

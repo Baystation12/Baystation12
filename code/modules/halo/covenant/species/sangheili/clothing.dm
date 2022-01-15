@@ -62,6 +62,7 @@
 	armor = list(melee = 60, bullet = 45, laser = 35,energy = 35, bomb = 30, bio = 35, rad = 35)
 	armor_thickness = 20
 	matter = list("nanolaminate" = 1)
+	stepsound = 'code/modules/halo/sounds/walk_sounds/spartan_boots.ogg'
 
 /obj/item/clothing/gloves/thick/sangheili
 	name = "Sangheili Combat Gauntlets"

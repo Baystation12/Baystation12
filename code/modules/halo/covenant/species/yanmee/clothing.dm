@@ -23,6 +23,7 @@
 	armor = list(melee = 35, bullet = 35, laser = 5, energy = 25, bomb = 15, bio = 0, rad = 0)
 	canremove = 0
 	unacidable = 1
+	stepsound = 'code/modules/halo/sounds/walk_sounds/marine_boots.ogg'
 
 /obj/item/clothing/gloves/drone_gloves
 	name = "Exoskeleton"
