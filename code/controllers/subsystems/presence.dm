@@ -24,7 +24,7 @@ SUBSYSTEM_DEF(presence)
 		player = queue[i]
 		if (QDELETED(player) || !istype(player))
 			continue
-		++build["[player.z]"]
+		++build["[get_z(player)]"]
 		if (no_mc_tick)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
