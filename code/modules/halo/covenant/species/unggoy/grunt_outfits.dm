@@ -21,6 +21,13 @@
 	. = ..()
 	H.internal = H.back
 
+/decl/hierarchy/outfit/unggoy/armed
+	name = "Armed Unggoy (Minor)"
+	belt = /obj/item/weapon/storage/belt/covenant_ammo/mobilespawn_unggoy
+	suit_store = /obj/item/weapon/gun/projectile/needler
+	l_pocket = /obj/item/weapon/grenade/plasma
+	r_pocket = /obj/item/weapon/grenade/plasma
+
 /decl/hierarchy/outfit/unggoy_thrall
 	name = "Unggoy Thrall"
 	l_ear = null
@@ -49,6 +56,13 @@
 	//
 	id_type = /obj/item/weapon/card/id/grunt_major
 
+/decl/hierarchy/outfit/unggoy/major/armed
+	name = "Armed Unggoy (Major)"
+	belt = /obj/item/weapon/storage/belt/covenant_ammo/mobilespawn_unggoy
+	suit_store = /obj/item/weapon/gun/projectile/needler
+	l_pocket = /obj/item/weapon/grenade/plasma
+	r_pocket = /obj/item/weapon/grenade/plasma
+
 /decl/hierarchy/outfit/unggoy/heavy
 	name = "Unggoy (Heavy)"
 
@@ -57,6 +71,25 @@
 	back = /obj/item/weapon/tank/methane/unggoy_internal/green
 	//
 	id_type = /obj/item/weapon/card/id/grunt_heavy
+
+/obj/item/weapon/storage/belt/covenant_ammo/loadedspawn_FRC
+	startswith = list(\
+	/obj/item/ammo_magazine/fuel_rod,
+	/obj/item/ammo_magazine/fuel_rod,
+	/obj/item/ammo_magazine/fuel_rod,
+	/obj/item/ammo_magazine/fuel_rod,
+	/obj/item/ammo_magazine/fuel_rod,
+	/obj/item/ammo_magazine/fuel_rod,
+	/obj/item/ammo_magazine/fuel_rod
+	)
+
+/decl/hierarchy/outfit/unggoy/heavy/armed
+	name = "Armed Unggoy (Heavy)"
+	belt = /obj/item/weapon/storage/belt/covenant_ammo/loadedspawn_FRC
+	suit_store = /obj/item/weapon/gun/energy/plasmapistol
+	l_pocket = /obj/item/weapon/grenade/plasma
+	r_pocket = /obj/item/weapon/grenade/plasma
+	r_hand = /obj/item/weapon/gun/projectile/fuel_rod
 
 /decl/hierarchy/outfit/unggoy/ultra
 	name = "Unggoy (Ultra)"
@@ -67,6 +100,13 @@
 	//
 	id_type = /obj/item/weapon/card/id/grunt_ultra
 
+/decl/hierarchy/outfit/unggoy/ultra/armed
+	name = "Armed Unggoy (Ultra)"
+	belt = /obj/item/weapon/storage/belt/covenant_ammo/mobilespawn_unggoy
+	suit_store = /obj/item/weapon/gun/projectile/needler
+	l_pocket = /obj/item/weapon/grenade/plasma
+	r_pocket = /obj/item/weapon/grenade/plasma
+
 /decl/hierarchy/outfit/unggoy/specops
 	name = "Unggoy (Spec-Ops)"
 
@@ -75,6 +115,13 @@
 	back = /obj/item/weapon/tank/methane/unggoy_internal/blue
 	//
 	id_type = /obj/item/weapon/card/id/grunt_specops
+
+/decl/hierarchy/outfit/unggoy/specops/armed
+	name = "Armed Unggoy (Spec-Ops)"
+	belt = /obj/item/weapon/storage/belt/covenant_ammo/mobilespawn_unggoy
+	suit_store = /obj/item/weapon/gun/projectile/needler
+	l_pocket = /obj/item/weapon/grenade/plasma
+	r_pocket = /obj/item/weapon/grenade/plasma
 
 /decl/hierarchy/outfit/unggoy/deacon
 	name = "Unggoy (Deacon)"
@@ -86,6 +133,13 @@
 	//
 	id_type = /obj/item/weapon/card/id/grunt_deacon
 
+/decl/hierarchy/outfit/unggoy/deacon/armed
+	name = "Armed Unggoy (Deacon)"
+	belt = /obj/item/weapon/storage/belt/covenant_ammo/mobilespawn_unggoy
+	suit_store = /obj/item/weapon/gun/projectile/needler
+	l_pocket = /obj/item/weapon/grenade/plasma
+	r_pocket = /obj/item/weapon/grenade/plasma
+
 /decl/hierarchy/outfit/unggoy/honour_guard
 	name = "Unggoy (Honour Guard)"
 
@@ -94,3 +148,10 @@
 	back = /obj/item/weapon/tank/methane/unggoy_internal/red
 	//
 	id_type = /obj/item/weapon/card/id/grunt_honour_guard
+
+/decl/hierarchy/outfit/unggoy/honour_guard/armed
+	name = "Armed Unggoy (Honour Guard)"
+	belt = /obj/item/weapon/storage/belt/covenant_ammo/mobilespawn_unggoy
+	suit_store = /obj/item/weapon/gun/projectile/needler
+	l_pocket = /obj/item/weapon/grenade/plasma
+	r_pocket = /obj/item/weapon/grenade/plasma

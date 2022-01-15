@@ -49,6 +49,30 @@
 	id_type = /obj/item/weapon/card/id/brute_captain
 	id_slot = slot_wear_id
 
+/* Covenant Jiralhanae */
+
+/obj/item/weapon/storage/belt/covenant_ammo/loadedspawn_spiker
+	startswith = list(\
+	/obj/item/ammo_magazine/spiker,
+	/obj/item/ammo_magazine/spiker,
+	/obj/item/ammo_magazine/spiker,
+	/obj/item/ammo_magazine/spiker,
+	/obj/item/ammo_magazine/spiker,
+	/obj/item/ammo_magazine/spiker,
+	/obj/item/ammo_magazine/spiker
+	)
+
+/obj/item/weapon/storage/belt/covenant_ammo/loadedspawn_mauler
+	startswith = list(\
+	/obj/item/ammo_magazine/mauler,
+	/obj/item/ammo_magazine/mauler,
+	/obj/item/ammo_magazine/mauler,
+	/obj/item/ammo_magazine/mauler,
+	/obj/item/ammo_magazine/mauler,
+	/obj/item/ammo_magazine/mauler,
+	/obj/item/ammo_magazine/mauler
+	)
+
 /decl/hierarchy/outfit/jiralhanae/covenant
 	name = "Covenant Jiralhanae Soldier"
 
@@ -61,6 +85,15 @@
 	id_type = /obj/item/weapon/card/id/brute_minor
 	id_slot = slot_wear_id
 
+/obj/item/weapon/storage/pocketstore/hardcase/grenade/cov/loadedspawn_bruteshot
+	startswith = list(\
+	/obj/item/weapon/grenade/brute_shot,
+	/obj/item/weapon/grenade/brute_shot,
+	/obj/item/weapon/grenade/brute_shot,
+	/obj/item/weapon/grenade/brute_shot,
+	/obj/item/weapon/grenade/brute_shot
+	)
+
 /decl/hierarchy/outfit/jiralhanae/covenant/minor
 	name = "Covenant Jiralhanae Minor"
 
@@ -71,12 +104,26 @@
 	id_type = /obj/item/weapon/card/id/brute_minor
 	id_slot = slot_wear_id
 
+/decl/hierarchy/outfit/jiralhanae/covenant/minor/armed
+	name = "Armed Covenant Jiralhanae Minor"
+
+	back = /obj/item/weapon/gun/projectile/spiker
+	belt = /obj/item/weapon/storage/belt/covenant_ammo/loadedspawn_spiker
+	l_pocket = /obj/item/weapon/grenade/frag/spike
+
 /decl/hierarchy/outfit/jiralhanae/covenant/major
 	name = "Covenant Jiralhanae Major"
 
 	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/major
 	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant/major
 	shoes = /obj/item/clothing/shoes/jiralhanae/covenant/major
+
+/decl/hierarchy/outfit/jiralhanae/covenant/major/armed
+	name = "Armed Covenant Jiralhanae Major"
+
+	back = /obj/item/weapon/gun/projectile/spiker
+	belt = /obj/item/weapon/storage/belt/covenant_ammo/loadedspawn_spiker
+	l_pocket = /obj/item/weapon/grenade/frag/spike
 
 /decl/hierarchy/outfit/jiralhanae/covenant/captain
 	name = "Covenant Jiralhanae Captain"
@@ -90,6 +137,33 @@
 	id_type = /obj/item/weapon/card/id/brute_captain
 	id_slot = slot_wear_id
 
+/decl/hierarchy/outfit/jiralhanae/covenant/captain/armed
+	name = "Armed Covenant Jiralhanae Captain"
+
+	suit_store = /obj/item/weapon/gun/projectile/mauler
+	belt = /obj/item/weapon/storage/belt/covenant_ammo/loadedspawn_mauler
+	r_hand = /obj/item/weapon/gun/launcher/grenade/brute_shot
+	l_pocket = /obj/item/weapon/grenade/frag/spike
+	r_pocket = /obj/item/weapon/storage/pocketstore/hardcase/grenade/cov/loadedspawn_bruteshot
+
+/decl/hierarchy/outfit/jiralhanae/covenant/chieftain
+	name = "Covenant Jiralhanae Chieftain"
+
+	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/chieftain
+	suit = /obj/item/clothing/suit/armor/special/chieftain
+	shoes = /obj/item/clothing/shoes/jiralhanae/covenant/captain
+	l_hand = /obj/item/language_learner/unggoy_to_common
+	//
+	id_type = /obj/item/weapon/card/id/brute_captain
+	id_slot = slot_wear_id
+
+/decl/hierarchy/outfit/jiralhanae/covenant/chieftain/armed
+	name = "Armed Covenant Jiralhanae Chieftain"
+
+	back = /obj/item/weapon/grav_hammer
+	belt = /obj/item/weapon/storage/belt/covenant_ammo/loadedspawn_mauler
+	suit_store = /obj/item/weapon/gun/projectile/mauler
+	l_pocket = /obj/item/weapon/grenade/frag/spike
 /* Ram Clan Jiralhanae */
 
 /decl/hierarchy/outfit/jiralhanae_ramclan

@@ -100,6 +100,84 @@
 	/obj/item/ammo_magazine/m6d/m224
 	)
 
+/obj/item/weapon/storage/belt/marine_ammo/mobilespawn_br55
+	startswith = list(\
+	/obj/item/ammo_magazine/br55/m634,
+	/obj/item/ammo_magazine/br55/m634,
+	/obj/item/ammo_magazine/br55/m634,
+	/obj/item/ammo_magazine/br55/m634,
+	/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224
+	)
+/obj/item/weapon/storage/belt/marine_ammo/mobilespawn_dmr
+	startswith = list(\
+	/obj/item/ammo_magazine/m392/m120,
+	/obj/item/ammo_magazine/m392/m120,
+	/obj/item/ammo_magazine/m392/m120,
+	/obj/item/ammo_magazine/m392/m120,
+	/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224
+	)
+
+/obj/item/weapon/storage/belt/marine_ammo/mobilespawn_sniper
+	startswith = list(\
+	/obj/item/ammo_magazine/srs99/m232,
+	/obj/item/ammo_magazine/srs99/m232,
+	/obj/item/ammo_magazine/srs99/m232,
+	/obj/item/ammo_magazine/srs99/m232,
+	/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224
+	)
+
+/obj/item/weapon/storage/belt/marine_ammo/mobilespawn_cqc
+	startswith = list(\
+	/obj/item/ammo_box/shotgun,
+	/obj/item/ammo_box/shotgun,
+	/obj/item/ammo_box/shotgun,
+	/obj/item/ammo_box/shotgun,
+	/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224
+	)
+
+/obj/item/weapon/storage/belt/marine_ammo/mobilespawn_heavy
+	startswith = list(\
+	/obj/item/ammo_magazine/spnkr,
+	/obj/item/ammo_magazine/spnkr,
+	/obj/item/ammo_magazine/spnkr,
+	/obj/item/ammo_magazine/spnkr,
+	/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224
+	)
+
+/obj/item/weapon/storage/belt/marine_ammo/mobilespawn_smg
+	startswith = list(\
+	/obj/item/ammo_magazine/m7/m443,
+	/obj/item/ammo_magazine/m7/m443,
+	/obj/item/ammo_magazine/m7/m443,
+	/obj/item/ammo_magazine/m7/m443,
+	/obj/item/ammo_magazine/m7/m443,
+	/obj/item/ammo_magazine/m7/m443
+	)
+
+/obj/item/weapon/storage/belt/marine_ammo/mobilespawn_odst
+	startswith = list(\
+	/obj/item/ammo_magazine/m7/m443/rnd48,
+	/obj/item/ammo_magazine/m7/m443/rnd48,
+	/obj/item/ammo_magazine/m7/m443/rnd48,
+	/obj/item/ammo_magazine/m7/m443/rnd48,
+	/obj/item/ammo_magazine/m6s/m225,
+	/obj/item/ammo_magazine/m6s/m225
+	)
+
+/obj/item/weapon/storage/belt/marine_ammo/mobilespawn_pistol
+	startswith = list(\
+	/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224
+	)
 /obj/item/weapon/storage/belt/marine_medic/mobilespawn_medic
 	startswith = list(\
 	/obj/item/weapon/storage/firstaid/unsc,
