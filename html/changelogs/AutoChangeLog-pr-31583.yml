@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fixed players in objects (mechs, lockers, etc) not counting toward z-level
-      counts for SSpresence.
