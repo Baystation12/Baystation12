@@ -35,6 +35,7 @@
 	desc = "A simple, rigid blade, designed to emphasise finesse and dexterity in combat. Likely belongs to someone of a high office."
 
 /decl/hierarchy/outfit/aroliacue_co
+	name = "Aroliacue - CO"
 	uniform = /obj/item/clothing/under/unsc/co/aroliacue
 	head = /obj/item/clothing/head/unsc/aroliacue
 	suit = /obj/item/clothing/suit/armor/special/odst/aroliacue
