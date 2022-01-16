@@ -194,7 +194,7 @@
 
 //Special world edge turf
 
-/turf/simulated/planet_edge
+/turf/unsimulated/planet_edge
 	name = "world's edge"
 	desc = "Government didn't want you to see this!"
 	density = TRUE
@@ -203,7 +203,7 @@
 	icon = null
 	icon_state = null
 
-/turf/simulated/planet_edge/Initialize()
+/turf/unsimulated/planet_edge/Initialize()
 	. = ..()
 	var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 	if(!istype(E))
@@ -230,7 +230,7 @@
 	O.name = "distant terrain"
 	O.desc = "You need to come over there to take a better look."
 
-/turf/simulated/planet_edge/Bumped(atom/movable/A)
+/turf/unsimulated/planet_edge/Bumped(atom/movable/A)
 	. = ..()
 	var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 	if(!istype(E))

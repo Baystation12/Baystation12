@@ -124,13 +124,13 @@
 			return /turf/unsimulated/floor/exoplanet/concrete/reinforced
 	return ..()
 
-/datum/random_map/maze/concrete/get_additional_spawns(var/value, var/turf/simulated/floor/T)
-	if (!istype(T))
+/datum/random_map/maze/concrete/get_additional_spawns(value, turf/floor)
+	if (!istype(floor))
 		return
 	if (prob(10))
-		new/obj/item/remains/xeno/charred(T)
-	if ((T.broken && prob(80)) || prob(10))
-		new/obj/structure/rubble/house(T)
+		new /obj/item/remains/xeno/charred (floor)
+	if (prob(20))
+		new /obj/structure/rubble/house (floor)
 
 //Artifact containment lab
 /turf/simulated/wall/containment
@@ -175,6 +175,7 @@
 		entrance_y = rand(2,limit_y-1)
 	map[get_map_cell(entrance_x,entrance_y)] = DOOR_VALUE
 
+
 /datum/random_map/maze/lab/get_appropriate_path(var/value)
 	if (value == ARTIFACT_VALUE)
 		return floor_type
@@ -182,25 +183,23 @@
 		return floor_type
 	. = ..()
 
-/datum/random_map/maze/lab/get_additional_spawns(var/value, var/turf/simulated/floor/T)
-	if (!istype(T))
-		return
 
-	if (value == DOOR_VALUE)
-		new/obj/machinery/door/airlock/alien(T)
+/datum/random_map/maze/lab/get_additional_spawns(value, turf/floor)
+	if (!isturf(floor))
 		return
-
-	if (value == ARTIFACT_VALUE)
-		var/datum/artifact_find/A = new()
-		new A.artifact_find_type(T)
+	else if (value == ARTIFACT_VALUE)
+		var/datum/artifact_find/A = new
+		new A.artifact_find_type(floor)
 		qdel(A)
+	else if (floor.density)
 		return
-
-	if (value == FLOOR_VALUE)
+	else if (value == DOOR_VALUE)
+		new /obj/machinery/door/airlock/alien (floor)
+	else if (value == FLOOR_VALUE)
 		if (prob(20))
-			new/obj/structure/rubble/lab(T)
-		if (prob(20))
-			new/obj/item/remains/xeno/charred(T)
+			new /obj/structure/rubble/lab (floor)
+		else if (prob(20))
+			new /obj/item/remains/xeno/charred (floor)
 
 
 #undef TRANSLATE_COORD
