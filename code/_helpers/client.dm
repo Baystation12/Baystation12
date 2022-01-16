@@ -33,10 +33,10 @@
 
 /// Null, or a client if thing is a client, a mob with a client, a connected ckey, or null
 /proc/resolve_client(client/thing)
-	if (!thing)
-		return usr
 	if (istype(thing))
 		return thing
+	if (!thing)
+		thing = usr
 	if (ismob(thing))
 		var/mob/M = thing
 		return M.client
