@@ -34,6 +34,14 @@
 	name = "Officer's Sabre"
 	desc = "A simple, rigid blade, designed to emphasise finesse and dexterity in combat. Likely belongs to someone of a high office."
 
+/decl/hierarchy/outfit/aroliacue_co
+	uniform = /obj/item/clothing/under/unsc/co/aroliacue
+	head = /obj/item/clothing/head/unsc/aroliacue
+	suit = /obj/item/clothing/suit/armor/special/odst/aroliacue
+	l_hand = /obj/item/clothing/head/helmet/odst/aroliacue
+	r_hand = /obj/item/weapon/material/machete/officersword/aroliacue
+
+
 //ODST
 
 /obj/item/clothing/head/helmet/odst/aroliacue

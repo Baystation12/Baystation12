@@ -605,3 +605,10 @@
 /obj/item/weapon/storage/box/large/donator/aroliacue/shipmaster
 	startswith = list(/obj/item/clothing/head/helmet/sangheili/aroliacue,/obj/item/clothing/suit/armor/special/combatharness/shipmaster/aroliacue,/obj/item/clothing/shoes/sangheili/aroliacue,/obj/item/clothing/gloves/thick/sangheili/aroliacue)
 	can_hold = list(/obj/item/clothing/head/helmet/sangheili/aroliacue,/obj/item/clothing/suit/armor/special/combatharness/shipmaster/aroliacue,/obj/item/clothing/shoes/sangheili/aroliacue,/obj/item/clothing/gloves/thick/sangheili/aroliacue)
+
+/decl/hierarchy/outfit/aroliacue_shipmaster
+	name = "Aroliacue - Shipmaster"
+	head = /obj/item/clothing/head/helmet/sangheili/aroliacue
+	suit = /obj/item/clothing/suit/armor/special/combatharness/shipmaster/aroliacue
+	gloves = /obj/item/clothing/gloves/thick/sangheili/aroliacue
+	shoes = /obj/item/clothing/shoes/sangheili/aroliacue
