@@ -1,0 +1,4 @@
+author: Spookerton
+delete-after: true
+changes:
+  - tweak: Carbines do 80% prior damage and 50% prior pen.
