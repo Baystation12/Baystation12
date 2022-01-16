@@ -1,0 +1,8 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: Vox raiders spawn with spikethrowers in-hand instead of them being in the
+      armory.
+  - maptweak: Vox have a water tank.
+  - tweak: Vox raider armor has had the ballistic and laser defense values dropped
+      a notch each.
