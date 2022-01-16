@@ -1,7 +1,7 @@
 /datum/gear/augment
 	sort_category = "Augments"
 	category = /datum/gear/augment
-	cost = 2
+	cost = 1 //proxima. was: cost = 2
 
 
 /datum/gear/augment/armor_minor
