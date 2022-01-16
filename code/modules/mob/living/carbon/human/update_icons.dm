@@ -181,7 +181,6 @@ Please contact me on #coderbus IRC. ~Carn x
 			for(var/i=1, i<=overlays_standing.len, i++)
 				var/entry = overlays_standing[i]
 				var/addto = overlays
-				var/image/hand_img
 				if(i == L_HAND_LAYER)
 					if(dir == NORTH || dir == EAST)
 						addto = underlays
