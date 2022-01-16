@@ -9,11 +9,7 @@
 /turf/simulated/wall/titanium,
 /area/map_template/vox_raider)
 "af" = (
-/obj/structure/table/rack,
-/obj/item/tank/nitrogen,
-/obj/item/tank/nitrogen,
-/obj/item/tank/nitrogen,
-/obj/item/tank/nitrogen,
+/obj/machinery/portable_atmospherics/canister/nitrogen,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "aj" = (
@@ -158,7 +154,6 @@
 /obj/item/reagent_containers/glass/bottle/stoxin,
 /obj/item/reagent_containers/glass/bottle/kelotane,
 /obj/item/reagent_containers/glass/bottle/kelotane,
-/obj/item/reagent_containers/glass/beaker/cryoxadone,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
 	level = 2
@@ -503,11 +498,8 @@
 /area/map_template/vox_raider)
 "tU" = (
 /obj/structure/table/rack,
-/obj/item/gun/launcher/alien/spikethrower,
-/obj/item/gun/launcher/alien/spikethrower,
-/obj/item/gun/launcher/alien/spikethrower,
 /obj/effect/floor_decal/corner/b_green/mono,
-/obj/item/gun/launcher/alien/spikethrower,
+/obj/item/gun/launcher/alien/slugsling,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "tW" = (
@@ -697,15 +689,17 @@
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "Dm" = (
-/obj/machinery/portable_atmospherics/canister/nitrogen,
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/rig/vox,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "Dn" = (
 /obj/structure/table/rack,
-/obj/item/gun/launcher/alien/slugsling,
-/obj/machinery/light/vox{
-	dir = 4
-	},
+/obj/item/tank/nitrogen,
+/obj/item/tank/nitrogen,
+/obj/item/tank/nitrogen,
+/obj/item/tank/nitrogen,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "DR" = (
@@ -749,9 +743,19 @@
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 "Im" = (
-/obj/structure/table/rack,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/rig/vox,
+/obj/structure/closet/crate{
+	dir = 1;
+	name = "reserve equipment crate"
+	},
+/obj/item/device/multitool,
+/obj/item/device/multitool,
+/obj/item/device/multitool,
+/obj/item/device/multitool,
+/obj/item/stack/material/rods/fifty,
+/obj/item/device/spaceflare,
+/obj/item/device/spaceflare,
+/obj/item/weldpack,
+/obj/item/weldpack,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "IF" = (
@@ -869,9 +873,6 @@
 /turf/simulated/floor/plating/vox,
 /area/map_template/vox_raider)
 "Ph" = (
-/obj/structure/hygiene/sink/kitchen{
-	pixel_y = 26
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
@@ -984,19 +985,7 @@
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 "ZC" = (
-/obj/structure/closet/crate{
-	dir = 1;
-	name = "reserve equipment crate"
-	},
-/obj/item/device/multitool,
-/obj/item/device/multitool,
-/obj/item/device/multitool,
-/obj/item/device/multitool,
-/obj/item/stack/material/rods/fifty,
-/obj/item/device/spaceflare,
-/obj/item/device/spaceflare,
-/obj/item/weldpack,
-/obj/item/weldpack,
+/obj/structure/reagent_dispensers/watertank,
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 
