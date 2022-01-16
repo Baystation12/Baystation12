@@ -16538,9 +16538,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/port)
 "Ol" = (
+/obj/effect/floor_decal/corner/blue/diagonal{
+	dir = 4
+	},
+/obj/structure/table/standard,
 /obj/random_multi/single_item/runtime,
-/turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/galleybackroom)
+/turf/simulated/floor/tiled/white,
+/area/crew_quarters/mess)
 "Om" = (
 /obj/machinery/computer/modular/preset/engineering{
 	dir = 8;
@@ -35268,7 +35272,7 @@ WQ
 dy
 iU
 gs
-Ol
+gs
 gs
 Uq
 ih
@@ -37900,7 +37904,7 @@ ev
 jX
 lz
 mp
-lz
+Ol
 ka
 RN
 pf

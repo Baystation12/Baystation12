@@ -4070,6 +4070,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
+"nR" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/random_multi/single_item/runtime,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/fourthdeck/aft)
 "nT" = (
 /obj/structure/bed/roller/ironingboard,
 /obj/effect/floor_decal/corner/blue/diagonal,
@@ -15788,7 +15795,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
-/obj/random_multi/single_item/runtime,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -37958,7 +37964,7 @@ yD
 ZS
 yC
 gM
-ZS
+nR
 bE
 fA
 Vb
