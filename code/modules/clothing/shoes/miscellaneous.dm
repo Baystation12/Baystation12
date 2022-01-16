@@ -151,8 +151,8 @@
 	species_restricted = null
 	can_add_hidden_item = FALSE
 
-/obj/item/clothing/shoes/clown_shoes/New()
-	..()
+/obj/item/clothing/shoes/clown_shoes/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_shoes]  = 1
 
 /obj/item/clothing/shoes/clown_shoes/handle_movement(var/turf/walking, var/running)
@@ -218,8 +218,8 @@
 	can_add_hidden_item = FALSE
 	can_add_cuffs = FALSE
 
-/obj/item/clothing/shoes/swimmingfins/New()
-	..()
+/obj/item/clothing/shoes/swimmingfins/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_shoes] = 1
 
 /obj/item/clothing/shoes/athletic

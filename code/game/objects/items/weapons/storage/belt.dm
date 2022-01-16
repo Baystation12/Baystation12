@@ -509,9 +509,6 @@
 	item_state = "swatbelt"
 	storage_slots = 10
 
-/obj/item/storage/belt/holster/security/tactical/Initialize()
-	.=..()
-	slowdown_per_slot[slot_belt] = 1
 
 /obj/item/storage/belt/waistpack
 	name = "waist pack"
@@ -532,9 +529,6 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = ITEM_SIZE_NORMAL * 4
 
-/obj/item/storage/belt/waistpack/big/Initialize()
-	.=..()
-	slowdown_per_slot[slot_belt] = 1
 
 /obj/item/storage/belt/fire_belt
 	name = "firefighting equipment belt"

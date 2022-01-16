@@ -59,8 +59,8 @@
 		SPECIES_VOX = 'icons/obj/clothing/species/vox/obj_suit_vox.dmi'
 		)
 
-/obj/item/clothing/suit/space/void/merc/New()
-	..()
+/obj/item/clothing/suit/space/void/merc/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/suit/space/void/merc/prepared

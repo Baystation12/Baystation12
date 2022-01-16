@@ -585,8 +585,8 @@
 		)
 	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/briefcase/inflatable)
 
-/obj/item/clothing/suit/space/void/command/New()
-	..()
+/obj/item/clothing/suit/space/void/command/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 0
 
 /obj/item/clothing/suit/space/void/command/prepared

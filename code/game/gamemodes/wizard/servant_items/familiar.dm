@@ -14,6 +14,6 @@
 	)
 	species_restricted = list(SPECIES_HUMAN)
 
-/obj/item/clothing/under/familiargard/New()
-	..()
-	slowdown_per_slot[slot_w_uniform] = -3
+/obj/item/clothing/under/familiargarb/Initialize()
+	. = ..()
+	slowdown_per_slot[slot_w_uniform] = -2
