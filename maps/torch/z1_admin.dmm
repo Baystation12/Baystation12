@@ -5167,9 +5167,9 @@
 /area/centcom/specops)
 "aCq" = (
 /obj/structure/table/rack,
-/obj/item/tank/emergency/oxygen/double,
-/obj/item/tank/emergency/oxygen/double,
-/obj/item/tank/emergency/oxygen/double,
+/obj/item/tank/oxygen_emergency_double,
+/obj/item/tank/oxygen_emergency_double,
+/obj/item/tank/oxygen_emergency_double,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -10866,7 +10866,7 @@
 	dir = 4;
 	pixel_y = 8
 	},
-/obj/item/tank/emergency/oxygen/double,
+/obj/item/tank/oxygen_emergency_double,
 /turf/simulated/floor/plating,
 /area/merchant_station)
 "aWV" = (

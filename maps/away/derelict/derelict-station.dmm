@@ -608,10 +608,10 @@
 /area/derelict/ship)
 "bU" = (
 /obj/structure/table/rack,
-/obj/item/tank/emergency/oxygen,
-/obj/item/tank/emergency/oxygen,
-/obj/item/tank/emergency/oxygen,
-/obj/item/tank/emergency/oxygen,
+/obj/item/tank/oxygen_emergency,
+/obj/item/tank/oxygen_emergency,
+/obj/item/tank/oxygen_emergency,
+/obj/item/tank/oxygen_emergency,
 /obj/random/tank,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)

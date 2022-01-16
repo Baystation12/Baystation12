@@ -36,36 +36,32 @@
 	augment_flags = AUGMENT_MECHANICAL | AUGMENT_SCANNABLE
 
 
-/obj/item/powerfist/attackby(obj/item/I, mob/user)
-	if (!istype(I, /obj/item/tank/emergency))
-		if (istype(I, /obj/item/tank))
-			to_chat(user, SPAN_WARNING("\The [I] is too big. Find a smaller tank."))
-			return	
-	else if (tank)
+/obj/item/powerfist/attackby(obj/item/item, mob/user)
+	if (!istype(item, /obj/item/tank))
+		return
+	var/obj/item/tank/other = item
+	if (other.tank_size > TANK_SIZE_SMALL)
+		to_chat(user, SPAN_WARNING("\The [other] is too big. Find a smaller tank."))
+		return
+	if (tank)
 		to_chat(user, SPAN_WARNING("\The [src] already has \a [tank] installed."))
 		return
-	else if (istype(I, /obj/item/tank/emergency/oxygen/double))
-		to_chat(user, SPAN_WARNING("\The [I] is slightly too big. Find a smaller tank."))
-		return
-	else if (istype(I, /obj/item/tank/emergency/nitrogen/double))
-		to_chat(user, SPAN_WARNING("\The [I] is slightly too big. Find a smaller tank."))
-		return
 	user.visible_message(
-		SPAN_ITALIC("\The [user] starts connecting \a [I] to \his [src]."),
-		SPAN_ITALIC("You start connecting \the [I] to \the [src]."),
+		SPAN_ITALIC("\The [user] starts connecting \a [item] to \his [src]."),
+		SPAN_ITALIC("You start connecting \the [item] to \the [src]."),
 		range = 5
 	)
-	if (!do_after(user, 3 SECONDS, I, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_USER_SAME_HAND))
+	if (!do_after(user, 3 SECONDS, item, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_USER_SAME_HAND))
 		return
-	if (!user.unEquip(I, src))
+	if (!user.unEquip(item, src))
 		return
 	user.visible_message(
-		SPAN_ITALIC("\The [user] finishes connecting \a [I] to \his [src]."),
-		SPAN_NOTICE("You finish connecting \the [I] to \the [src]."),
+		SPAN_ITALIC("\The [user] finishes connecting \a [item] to \his [src]."),
+		SPAN_NOTICE("You finish connecting \the [item] to \the [src]."),
 		range = 5
 	)
 	playsound(user, 'sound/effects/refill.ogg', 50, 1, -6)
-	tank = I
+	tank = item
 	update_force()
 	update_icon()
 
@@ -209,7 +205,7 @@
 	return ..()
 
 /obj/item/powerfist/prepared
-	tank = /obj/item/tank/emergency/oxygen/engi
+	tank = /obj/item/tank/oxygen_emergency_extended
 
 /obj/item/organ/internal/augment/active/item/powerfist/prepared
 	item = /obj/item/powerfist/prepared

@@ -2039,7 +2039,7 @@
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/scavship)
 "ex" = (
-/obj/item/tank/emergency/nitrogen,
+/obj/item/tank/nitrogen_emergency,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
 	d1 = 1;

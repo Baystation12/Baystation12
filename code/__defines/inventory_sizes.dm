@@ -21,3 +21,21 @@
 
 #define STORAGE_SLOTS *1
 #define STORAGE_FREEFORM *-1
+
+
+/**
+* Tank sizes for /obj/item/tank
+* Used for gating different gas tank roles without being too specific about volume or w_class
+*/
+
+/// Emergency tanks, except doubles
+#define TANK_SIZE_SMALL 10
+
+/// Double tanks & fuel tanks
+#define TANK_SIZE_MEDIUM 20
+
+/// Full size tanks
+#define TANK_SIZE_LARGE 30
+
+/// Scrubber tanks & jetpacks
+#define TANK_SIZE_HUGE 40

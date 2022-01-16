@@ -1120,9 +1120,9 @@
 /obj/machinery/light/skrell{
 	dir = 8
 	},
-/obj/item/tank/emergency/oxygen,
-/obj/item/tank/emergency/oxygen,
-/obj/item/tank/emergency/oxygen,
+/obj/item/tank/oxygen_emergency,
+/obj/item/tank/oxygen_emergency,
+/obj/item/tank/oxygen_emergency,
 /obj/item/clothing/mask/breath/emergency,
 /obj/item/clothing/mask/breath/emergency,
 /obj/item/clothing/mask/breath/emergency,

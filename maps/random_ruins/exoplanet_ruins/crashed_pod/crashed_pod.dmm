@@ -1012,7 +1012,7 @@
 /obj/item/crowbar,
 /obj/effect/floor_decal/industrial/outline/blue,
 /obj/item/clothing/suit/space/emergency,
-/obj/item/tank/emergency/oxygen/double,
+/obj/item/tank/oxygen_emergency_double,
 /obj/item/clothing/head/helmet/space/emergency,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
@@ -1020,7 +1020,7 @@
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/industrial/outline/blue,
 /obj/item/clothing/suit/space/emergency,
-/obj/item/tank/emergency/oxygen/double,
+/obj/item/tank/oxygen_emergency_double,
 /obj/item/clothing/head/helmet/space/emergency,
 /obj/item/storage/briefcase/inflatable,
 /turf/simulated/floor/tiled/dark,

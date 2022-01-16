@@ -16,7 +16,7 @@
 /obj/structure/closet/walllocker/emerglocker
 	name = "emergency locker"
 	desc = "A wall mounted locker with emergency supplies."
-	var/list/spawnitems = list(/obj/item/tank/emergency/oxygen,/obj/item/clothing/mask/breath)
+	var/list/spawnitems = list(/obj/item/tank/oxygen_emergency,/obj/item/clothing/mask/breath)
 	var/amount = 2 // spawns each items X times.
 	closet_appearance = /decl/closet_appearance/wall/emergency
 

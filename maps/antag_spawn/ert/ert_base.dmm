@@ -3076,8 +3076,8 @@
 /area/map_template/rescue_base/start)
 "fQ" = (
 /obj/structure/table/rack,
-/obj/item/tank/emergency/oxygen/double,
-/obj/item/tank/emergency/oxygen/double,
+/obj/item/tank/oxygen_emergency_double,
+/obj/item/tank/oxygen_emergency_double,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fR" = (
