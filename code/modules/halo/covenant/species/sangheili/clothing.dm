@@ -338,6 +338,15 @@
 	item_state = "zealot_chest"
 	totalshields = 270
 
+/obj/item/clothing/suit/armor/special/combatharness/shipmaster/regal
+	icon_state = "regal_chest_obj"
+	item_state = "regal_chest"
+	///Purely an alt-set for shipmaster, sprites by Dawson
+
+/obj/item/clothing/head/helmet/sangheili/shipmaster/regal
+	icon_state = "regal_helm_obj"
+	item_state = "regal_helm"
+
 /obj/item/clothing/shoes/sangheili/shipmaster
 	name = "Sanghelli Leg Armour (Shipmaster)"
 	desc = "Leg armour, to be used with the Sangheili Combat Harness."
