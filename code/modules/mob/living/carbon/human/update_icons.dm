@@ -154,6 +154,7 @@ Please contact me on #coderbus IRC. ~Carn x
 	lying_prev = lying	//so we don't update overlays for lying/standing unless our stance changes again
 	update_hud()		//TODO: remove the need for this
 	overlays.Cut()
+	underlays.Cut()
 
 	if (icon_update)
 
@@ -177,12 +178,21 @@ Please contact me on #coderbus IRC. ~Carn x
 			icon = stand_icon
 			icon_state = null
 
-			for(var/entry in overlays_standing)
+			for(var/i=1, i<=overlays_standing.len, i++)
+				var/entry = overlays_standing[i]
+				var/addto = overlays
+				var/image/hand_img
+				if(i == L_HAND_LAYER)
+					if(dir == NORTH || dir == EAST)
+						addto = underlays
+				if(i == R_HAND_LAYER)
+					if(dir == NORTH || dir == WEST)
+						addto = underlays
 				if(istype(entry, /image))
-					overlays += entry
+					addto += entry
 				else if(istype(entry, /list))
 					for(var/inner_entry in entry)
-						overlays += inner_entry
+						addto += inner_entry
 			if(species.has_floating_eyes)
 				overlays |= species.get_eyes(src)
 
