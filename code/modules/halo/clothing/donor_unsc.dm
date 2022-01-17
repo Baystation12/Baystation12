@@ -5,6 +5,61 @@
 #define SPARTAN_OVERRIDE 'code/modules/halo/clothing/SpartanHussarKit.dmi'
 #define ONI_OVERRIDE 'code/modules/halo/clothing/oni_guard.dmi'
 #define ONI_ITEM_INHAND 'code/modules/halo/clothing/item_oni.dmi'
+#define CREW_INHAND 'code/modules/halo/clothing/item_jumpsuit_ship.dmi'
+#define CREW_OVERRIDE 'code/modules/halo/clothing/mob_jumpsuit_ship.dmi'
+
+////////Aroliacue\\\\\\
+
+//CO
+
+/obj/item/clothing/under/unsc/co/aroliacue
+	icon = CREW_INHAND
+	icon_override = CREW_OVERRIDE
+	item_state = "arol-uniform-worn"
+	icon_state = "arol-uniform-obj"
+	name = "Officer's Dress"
+	desc = "An elegant, well-fitting suit for all kinds of whimsical occasions."
+
+/obj/item/clothing/head/unsc/aroliacue
+	icon = CREW_INHAND
+	icon_override = CREW_OVERRIDE
+	item_state = "arol-hat-worn"
+	icon_state = "arol-hat-obj"
+	name = "Officer's Service Cap."
+	desc = "A round, flat, visored combination cover to distinguish an Officer's position."
+
+/obj/item/weapon/material/machete/officersword/aroliacue
+	icon_state = "arol-officersword-obj"
+	item_state = "arol-officersword"
+	name = "Officer's Sabre"
+	desc = "A simple, rigid blade, designed to emphasise finesse and dexterity in combat. Likely belongs to someone of a high office."
+
+/decl/hierarchy/outfit/aroliacue_co
+	name = "Aroliacue - CO"
+	uniform = /obj/item/clothing/under/unsc/co/aroliacue
+	head = /obj/item/clothing/head/unsc/aroliacue
+	suit = /obj/item/clothing/suit/armor/special/odst/aroliacue
+	l_hand = /obj/item/clothing/head/helmet/odst/aroliacue
+	r_hand = /obj/item/weapon/material/machete/officersword/aroliacue
+
+
+//ODST
+
+/obj/item/clothing/head/helmet/odst/aroliacue
+	name = "Ornamental Chapeau"
+	desc = "A standard ODST Squad Leader Helmet decorated with golden engravings."
+	item_state = "arol-helmet-worn"
+	icon_state = "arol-helmet-obj"
+
+/obj/item/clothing/suit/armor/special/odst/aroliacue
+	name = "Ornamental Cuirass"
+	desc = "A Standard ODST Squad Leader chestplate decorated with golden engravings."
+	item_state = "arol-armour-worn"
+	icon_state = "arol-armour-obj"
+
+/obj/item/weapon/storage/box/large/donator/aroliacue/CO
+	startswith = list(/obj/item/clothing/under/unsc/co/aroliacue,/obj/item/clothing/head/unsc/aroliacue,/obj/item/weapon/material/machete/officersword/aroliacue,/obj/item/clothing/head/helmet/odst/aroliacue,/obj/item/clothing/suit/armor/special/odst/aroliacue)
+	can_hold = list(/obj/item/clothing/under/unsc/co/aroliacue,/obj/item/clothing/head/unsc/aroliacue,/obj/item/weapon/material/machete/officersword/aroliacue,/obj/item/clothing/head/helmet/odst/aroliacue,/obj/item/clothing/suit/armor/special/odst/aroliacue)
 
 ////////ashvor\\\\\\\\
 

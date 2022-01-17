@@ -583,3 +583,32 @@
 					)
 	can_hold = list(/obj/item/xor_harness_replacer,
 					)
+
+///////Aroliacue (SHIPMASTER)
+
+/obj/item/clothing/head/helmet/sangheili/aroliacue
+	icon_state = "arol_helm_obj"
+	item_state = "arol_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/shipmaster/aroliacue
+	icon_state = "arol_chest_obj"
+	item_state = "arol_chest"
+
+/obj/item/clothing/shoes/sangheili/aroliacue
+	icon_state = "arol_legs_obj"
+	item_state = "arol_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/aroliacue
+	icon_state = "arol_gloves_obj"
+	item_state = "arol_gloves"
+
+/obj/item/weapon/storage/box/large/donator/aroliacue/shipmaster
+	startswith = list(/obj/item/clothing/head/helmet/sangheili/aroliacue,/obj/item/clothing/suit/armor/special/combatharness/shipmaster/aroliacue,/obj/item/clothing/shoes/sangheili/aroliacue,/obj/item/clothing/gloves/thick/sangheili/aroliacue)
+	can_hold = list(/obj/item/clothing/head/helmet/sangheili/aroliacue,/obj/item/clothing/suit/armor/special/combatharness/shipmaster/aroliacue,/obj/item/clothing/shoes/sangheili/aroliacue,/obj/item/clothing/gloves/thick/sangheili/aroliacue)
+
+/decl/hierarchy/outfit/aroliacue_shipmaster
+	name = "Aroliacue - Shipmaster"
+	head = /obj/item/clothing/head/helmet/sangheili/aroliacue
+	suit = /obj/item/clothing/suit/armor/special/combatharness/shipmaster/aroliacue
+	gloves = /obj/item/clothing/gloves/thick/sangheili/aroliacue
+	shoes = /obj/item/clothing/shoes/sangheili/aroliacue
