@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - admin: The VV dropdown menu now has options for adding/removing movement handlers
+      to movable atoms.
