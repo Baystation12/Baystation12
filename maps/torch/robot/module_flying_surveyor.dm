@@ -42,7 +42,10 @@
 		/obj/item/device/multitool,
 		/obj/item/bioreactor,
 		/obj/item/inflatable_dispenser/robot,
-		/obj/item/robot_harvester
+		/obj/item/robot_harvester,
+		/obj/item/borg/sight/meson,
+		/obj/item/device/scanner/xenobio,
+		/obj/item/device/scanner/plant
 	)
 
 	emag = /obj/item/melee/energy/machete
@@ -68,4 +71,3 @@
 		if(flag.amount < flag.max_amount)
 			flag.add(1)
 	..()
-
