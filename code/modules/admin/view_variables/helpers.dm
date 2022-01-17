@@ -14,6 +14,12 @@
 		</font>
 		"}
 
+/atom/movable/get_view_variables_options()
+	return ..() + {"
+		<option value='?_src_=vars;addmovementhandler=\ref[src]'>Add Movement Handler</option>
+		<option value='?_src_=vars;removemovementhandler=\ref[src]'>Remove Movement Handler</option>
+		"}
+
 /mob/living/get_view_variables_header()
 	return {"
 		<a href='?_src_=vars;rename=\ref[src]'><b>[src]</b></a><font size='1'>
