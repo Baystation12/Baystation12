@@ -9,6 +9,7 @@
 	var/atom/selected_object
 	var/list/valid_gases = list()
 	var/mode = MODE_AREA
+	var/simmed = TRUE
 	var/help_text = {"\
 	***** Build Mode: Atmosphere ******
 	Left Click         - Open atmosphere editor
@@ -66,10 +67,13 @@
 
 	switch (mode)
 		if (MODE_AREA)
-			for (var/turf/T in get_area_turfs(env_area))
-				atmospheres += T.return_air()
+			if (ispath(env_area.base_turf, /turf/unsimulated))
+				simmed = FALSE
+			atmospheres = get_area_turfs(env_area)
 		if (MODE_SINGLE)
-			atmospheres += selected_object.return_air()
+			if (istype(selected_object.loc, /turf/unsimulated))
+				simmed = FALSE
+			atmospheres += selected_object
 
 	if (href_list["change_mode"])
 		var/new_mode = input("Change editor mode", "Change Mode") as null | anything in list(MODE_AREA, MODE_SINGLE)
@@ -82,18 +86,34 @@
 	if (href_list["temperature"])
 		var/temp = input("Set Temperature (Kelvin)", "Temperature") as num | null
 
+		if (!simmed)
+			for (var/turf/unsimulated/T in atmospheres)
+				T.temperature = temp
+			return
+
 		if (!isnull(temp))
-			for (var/datum/gas_mixture/G in atmospheres)
+			for (var/turf/T in atmospheres)
+				var/datum/gas_mixture/G = T.return_air()
 				G.temperature = temp
 				G.update_values()
+
 
 		. = TOPIC_HANDLED
 
 	if (href_list["moles_total"])
 		var/moles = input("Add/Subtract Moles", "Moles") as num | null
 
+		if (!simmed)
+			for (var/turf/unsimulated/T in atmospheres)
+				var/new_moles = T.initial_gas.len / moles
+
+				for (var/gas in T.initial_gas)
+					T.initial_gas[gas] = new_moles
+			return
+
 		if (!isnull(moles))
-			for (var/datum/gas_mixture/G in atmospheres)
+			for (var/turf/T in atmospheres)
+				var/datum/gas_mixture/G = T.return_air()
 				for (var/g in G.gas)
 					G.adjust_gas(g, moles)
 
@@ -103,8 +123,14 @@
 		var/gas_id = href_list["modify_gas"]
 		var/moles = input("Set [gas_id]'s Mole Count]", "Moles") as num | null
 
+		if (!simmed)
+			for (var/turf/unsimulated/T in atmospheres)
+				T.initial_gas[gas_id] = moles
+			return
+
 		if (!isnull(moles))
-			for (var/datum/gas_mixture/G in atmospheres)
+			for (var/turf/T in atmospheres)
+				var/datum/gas_mixture/G = T.return_air()
 				var/list/gases = G.gas
 
 				gases[gas_id] = moles
@@ -118,8 +144,14 @@
 		if (gas)
 			var/moles = input("How many moles?", "Moles") as num | null
 
+			if (!simmed)
+				for (var/turf/unsimulated/T in atmospheres)
+					T.initial_gas[gas] = moles
+				return
+
 			if (moles)
-				for (var/datum/gas_mixture/G in atmospheres)
+				for (var/turf/T in atmospheres)
+					var/datum/gas_mixture/G = T.return_air()
 					G.gas[gas] = moles
 					G.update_values()
 
@@ -129,7 +161,13 @@
 		var/gas = input("Remove a gas from the mix", "Remove Gas") as null | anything in enviroment.gas
 
 		if (gas)
-			for (var/datum/gas_mixture/G in atmospheres)
+			if (!simmed)
+				for (var/turf/unsimulated/T in atmospheres)
+					T.initial_gas[gas] = 0
+				return
+
+			for (var/turf/T in atmospheres)
+				var/datum/gas_mixture/G = T.return_air()
 				G.gas[gas] = 0
 				G.update_values()
 
@@ -144,12 +182,20 @@
 			gasses = list(GAS_OXYGEN = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
 			temperature = 294
 
+		if (!simmed)
+			for (var/turf/unsimulated/T in atmospheres)
+				T.initial_gas = gasses
+				T.temperature = temperature
+			return
+
 		if (length(gasses))
-			for (var/datum/gas_mixture/G in atmospheres)
+			for (var/turf/T in atmospheres)
+				var/datum/gas_mixture/G = T.return_air()
 				for (var/gas in G.gas)
 					G.gas[gas] = 0
 
-			for (var/datum/gas_mixture/G in atmospheres)
+			for (var/turf/T in atmospheres)
+				var/datum/gas_mixture/G = T.return_air()
 				for (var/new_gas in gasses)
 					G.gas = gasses.Copy()
 					G.adjust_gas_temp(new_gas, gasses[new_gas], temperature)
@@ -190,4 +236,3 @@
 			return TRUE
 
 	return FALSE
-
