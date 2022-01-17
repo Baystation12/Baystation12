@@ -1,5 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - bugfix: The crew once again only care about themselves for the purposes of body
-      count. How selfish.

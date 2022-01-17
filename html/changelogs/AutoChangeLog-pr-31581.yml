@@ -1,5 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - tweak: Double emergency tanks can't go in non-space suit slots.
-  - tweak: The power fist can't take tanks bigger than extended emergency.
