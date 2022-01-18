@@ -18,11 +18,12 @@
 	icon = 'code/modules/halo/unsc/items.dmi'
 	desc = "A technologically advanced combat exoskeleton system designed to vastly improve the strength, speed, agility, reflexes and durability of a Spartan supersoldier."
 	//suit_type = "Spartan" //Display is disabled, therefore redundant
-	armor = list(melee = 55, bullet = 50, laser = 55, energy = 55, bomb = 40, bio = 25, rad = 25) //Same values as the chest armor. Shouldn't have any impact on gameplay however.
-	emp_protection = 0 //Will change this value to 100 if it prove to be a burden.
+	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 40, bio = 25, rad = 25) //Same values as the chest armor. Shouldn't have any impact on gameplay however.
+	emp_protection = 100 //Will change this value to 100 if it prove to be a burden - EMP proved too easy to permanently damage modules with this. It still disables shields, so...
 	online_slowdown = 0 //Default = 6
 	offline_slowdown = 0 //Default = 10
 	hides_uniform = 0
+	ai_controlled_move_delay = -1 ///Lorewise, AI integration buffed Spartan reflexes and speed. This is... not as good, but could be in a pinch.
 
 	initial_modules = list(
 	/obj/item/rig_module/maneuvering_jets,\
@@ -52,6 +53,7 @@
 /obj/item/weapon/rig/spartan/mjolnir_mk6
 	name = "Mark VI Mjolnir Powered Assault Armor"
 	desc = "The Mjolnir Mark VI was the third major version of the MJOLNIR Powered Assault Armour Series, though it was issued to very few Spartan-IIs due to it being developed close to the end of the war, much like Mark V."
+	icon_state = "mjolnir"
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/mkvi
 	helm_type = /obj/item/clothing/head/helmet/spartan/mkvi
 

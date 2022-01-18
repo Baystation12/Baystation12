@@ -755,8 +755,9 @@
 	//drain some charge
 	if(cell) cell.emp_act(severity_class + 15)
 
-	//possibly damage some modules
-	take_hit((100/severity_class), "electrical pulse", 1)
+	if(emp_protection < 100) //Only for Spartans as of now.
+		//possibly damage some modules
+		take_hit((100/severity_class), "electrical pulse", 1)
 
 /obj/item/weapon/rig/proc/shock(mob/user)
 	if (electrocute_mob(user, cell, src)) //electrocute_mob() handles removing charge from the cell, no need to do that here.
@@ -768,6 +769,9 @@
 /obj/item/weapon/rig/proc/take_hit(damage, source, is_emp=0)
 
 	if(!installed_modules.len)
+		return
+
+	if(istype(chest, /obj/item/clothing/suit/armor/special/spartan))//This was happening too frequently for the modules to even be useful.
 		return
 
 	var/chance
