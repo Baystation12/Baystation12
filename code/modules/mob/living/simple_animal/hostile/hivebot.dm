@@ -120,6 +120,11 @@ Teleporter beacon, and its subtypes
 /*
 Special projectiles
 */
+/obj/item/projectile/bullet/gyro/megabot
+	name = "microrocket"
+	gyro_light_impact = 1
+	distance_falloff = 1.3
+
 /obj/item/projectile/beam/megabot
 	damage = 45
 	distance_falloff = 0.5
@@ -129,6 +134,7 @@ The megabot
 */
 #define ATTACK_MODE_MELEE    "melee"
 #define ATTACK_MODE_LASER    "laser"
+#define ATTACK_MODE_ROCKET   "rocket"
 
 /mob/living/simple_animal/hostile/hivebot/mega
 	name = "hivemind"
@@ -141,6 +147,7 @@ The megabot
 	maxHealth = 440
 	natural_weapon = /obj/item/natural_weapon/circular_saw
 	speed = 0
+	special_attack_cooldown = 3 MINUTES
 	natural_armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_PISTOL
@@ -166,7 +173,7 @@ The megabot
 
 /mob/living/simple_animal/hostile/hivebot/mega/Initialize()
 	. = ..()
-	switch_mode(ATTACK_MODE_LASER)
+	switch_mode(ATTACK_MODE_ROCKET)
 
 /mob/living/simple_animal/hostile/hivebot/mega/Life()
 	. = ..()
@@ -174,7 +181,7 @@ The megabot
 		return
 
 	if(time_last_used_ability < world.time)
-		switch_mode(ATTACK_MODE_LASER)
+		switch_mode(ATTACK_MODE_ROCKET)
 
 /mob/living/simple_animal/hostile/hivebot/mega/emp_act(severity)
 	. = ..()
@@ -195,6 +202,8 @@ The megabot
 				overlays += image(icon, "melee")
 			if(ATTACK_MODE_LASER)
 				overlays += image(icon, "laser")
+			if(ATTACK_MODE_ROCKET)
+				overlays += image(icon, "rocket")
 
 /mob/living/simple_animal/hostile/hivebot/mega/proc/switch_mode(var/new_mode)
 	if(!new_mode || new_mode == attack_mode)
@@ -217,6 +226,15 @@ The megabot
 			num_shots = 12
 			fire_desc = "fires a laser"
 			visible_message(SPAN_MFAUNA("\The [src]'s laser cannon whines!"))
+		if(ATTACK_MODE_ROCKET)
+			attack_mode = ATTACK_MODE_ROCKET
+			ranged = TRUE
+			projectilesound = 'sound/effects/Explosion1.ogg'
+			projectiletype = /obj/item/projectile/bullet/gyro/megabot
+			num_shots = 4
+			fire_desc = "launches a microrocket"
+			time_last_used_ability = special_attack_cooldown + world.time
+			visible_message(SPAN_MFAUNA("\The [src]'s missile pod rumbles!"))
 
 	update_icon()
 
@@ -241,14 +259,16 @@ The megabot
 
 /mob/living/simple_animal/hostile/hivebot/mega/shoot_target(target_mob)
 	if(num_shots <= 0)
-		if(attack_mode == ATTACK_MODE_LASER)
+		if(attack_mode == ATTACK_MODE_ROCKET)
+			switch_mode(ATTACK_MODE_LASER)
+		else
 			switch_mode(ATTACK_MODE_MELEE)
-		return
 	..()
 
 /mob/living/simple_animal/hostile/hivebot/mega/shoot(target, start, user, bullet)
-	..()
-	num_shots--
+	if (projectiletype)
+		..()
+		num_shots--
 
 /* AI */
 /datum/ai_holder/simple_animal/hivebot
@@ -292,6 +312,7 @@ The megabot
 
 #undef ATTACK_MODE_MELEE
 #undef ATTACK_MODE_LASER
+#undef ATTACK_MODE_ROCKET
 
 /obj/item/natural_weapon/hivebot
 	force = 15
