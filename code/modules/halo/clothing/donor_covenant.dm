@@ -612,3 +612,9 @@
 	suit = /obj/item/clothing/suit/armor/special/combatharness/shipmaster/aroliacue
 	gloves = /obj/item/clothing/gloves/thick/sangheili/aroliacue
 	shoes = /obj/item/clothing/shoes/sangheili/aroliacue
+
+//////FarFromtheTsar (MINOR)
+
+/obj/item/clothing/head/helmet/sangheili/tsar
+	icon_state = "tsar_helm_obj"
+	item_state = "tsar_helm"

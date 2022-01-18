@@ -543,8 +543,6 @@ decl/hierarchy/outfit/Jul
 	item_state = "karmac-marine_worn"
 	icon_state = "karmac-marine_obj"
 
-//For whatever goddamn reason I can only get jumpsuits to work with the urfc path... If you can change this to /unsc/marine_fatigues/ or whatever it is, please do and tell me what I did wrong -Stingray
-
 /obj/item/clothing/under/unsc/marine_fatigues/karmac
 	desc = "Standard issue uniform for UNSC Marine Corps."
 	name = "UNSC Marine fatigues"
