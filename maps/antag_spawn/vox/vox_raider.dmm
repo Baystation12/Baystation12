@@ -9,7 +9,11 @@
 /turf/simulated/wall/titanium,
 /area/map_template/vox_raider)
 "af" = (
-/obj/machinery/portable_atmospherics/canister/nitrogen,
+/obj/structure/table/rack,
+/obj/item/tank/nitrogen,
+/obj/item/tank/nitrogen,
+/obj/item/tank/nitrogen,
+/obj/item/tank/nitrogen,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "aj" = (
@@ -689,17 +693,23 @@
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "Dm" = (
-/obj/structure/table/rack,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/rig/vox,
+/obj/machinery/portable_atmospherics/canister/nitrogen,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "Dn" = (
-/obj/structure/table/rack,
-/obj/item/tank/nitrogen,
-/obj/item/tank/nitrogen,
-/obj/item/tank/nitrogen,
-/obj/item/tank/nitrogen,
+/obj/structure/closet/crate{
+	dir = 1;
+	name = "reserve equipment crate"
+	},
+/obj/item/device/multitool,
+/obj/item/device/multitool,
+/obj/item/device/multitool,
+/obj/item/device/multitool,
+/obj/item/stack/material/rods/fifty,
+/obj/item/device/spaceflare,
+/obj/item/device/spaceflare,
+/obj/item/weldpack,
+/obj/item/weldpack,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "DR" = (
@@ -741,22 +751,6 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"Im" = (
-/obj/structure/closet/crate{
-	dir = 1;
-	name = "reserve equipment crate"
-	},
-/obj/item/device/multitool,
-/obj/item/device/multitool,
-/obj/item/device/multitool,
-/obj/item/device/multitool,
-/obj/item/stack/material/rods/fifty,
-/obj/item/device/spaceflare,
-/obj/item/device/spaceflare,
-/obj/item/weldpack,
-/obj/item/weldpack,
-/turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "IF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1463,7 +1457,7 @@ Ry
 eQ
 qj
 dq
-Im
+Ns
 ae
 ae
 rM
