@@ -154,6 +154,9 @@ SUBSYSTEM_DEF(garbage)
 	var/type = A.type
 	var/refID = "\ref[A]"
 
+	if(Debug2)
+		message_admins("Error: [type]([refID]) was just hard-deleted.")
+
 	del(A)
 
 	tick = (world.tick_usage-tick+((world.time-ticktime)/world.tick_lag*100))
