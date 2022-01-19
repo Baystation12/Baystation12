@@ -43,6 +43,8 @@
 	if(!linked_vehicle.comp_prof.gunner_fire_check(user,linked_vehicle,src))
 		user.drop_from_inventory(src)
 		return
+	if(linked_vehicle.handle_melee(attacked,user)) //If we successfully melee'd, stop here.
+		return
 	. = ..()
 
 /obj/item/weapon/gun/vehicle_turret/proc/reconsider_magazine()
