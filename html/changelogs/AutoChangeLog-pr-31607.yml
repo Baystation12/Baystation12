@@ -1,0 +1,5 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: The ninja hardsuit protects against lasers and shock weapons slightly more.
+  - tweak: The ninja hardsuit is now slightly more protective against EMPs
