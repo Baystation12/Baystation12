@@ -48,7 +48,7 @@
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
-	armor_thickness = 20
+	armor_thickness = 22
 	species_restricted = list("Spartan")
 	max_suitstore_w_class = ITEM_SIZE_HUGE
 	unacidable = 1
@@ -61,7 +61,7 @@
 		/*/datum/armourspecials/gear/mjolnir_gloves,\
 		/datum/armourspecials/gear/mjolnir_boots,\
 		/datum/armourspecials/gear/mjolnir_jumpsuit)*/
-	totalshields = 140
+	totalshields = 170 //10 less than major.
 	item_state_slots = list(slot_l_hand_str = "syndicate-black", slot_r_hand_str = "syndicate-black")
 
 /obj/item/clothing/suit/armor/special/spartan/ui_action_click()
