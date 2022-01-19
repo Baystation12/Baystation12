@@ -23,7 +23,7 @@
 	update_object_sprites()
 	update_user_view(user,1)
 	add_remove_vehicle_actions(user,1)
-	remove_gunner_weapons(user)
+	comp_prof.remove_gunner_weapons(user)
 	return
 
 /obj/vehicles/verb/enter_vehicle()
