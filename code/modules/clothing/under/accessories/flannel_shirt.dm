@@ -61,7 +61,7 @@
 		if (!F)
 			return
 	F.rolled = !F.rolled
-	to_chat(usr, "You roll [rolled ? "up" : "down"] the sleeves of your [F.name].")
+	to_chat(usr, "You roll [F.rolled ? "up" : "down"] the sleeves of your [F.name].")
 	F.queue_icon_update()
 
 

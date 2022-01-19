@@ -24,7 +24,7 @@
 		if (!B)
 			return
 	B.untied = !B.untied
-	to_chat(usr, "You [untied ? "untie" : "tie"] your [B.name].")
+	to_chat(usr, "You [B.untied ? "untie" : "tie"] your [B.name].")
 	B.queue_icon_update()
 
 

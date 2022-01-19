@@ -59,7 +59,7 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 			var/atom/movable/AM = atom_movable
 			if(AM && AM.simulated && !T.protects_atom(AM))
 				AM.ex_act(severity)
-				if(!AM.anchored)
+				if(AM && !AM.anchored)
 					addtimer(CALLBACK(AM, /atom/movable/.proc/throw_at, throw_target, 9/severity, 9/severity), 0)
 
 	explosion_turfs.Cut()
