@@ -1,0 +1,6 @@
+author: Jux
+delete-after: true
+changes:
+  - maptweak: The single rigsuit vox raiders spawned with is now the raider armor
+      set.
+  - maptweak: The ninja dojo equipment room now has a single freedom implant.
