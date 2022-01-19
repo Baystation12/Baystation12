@@ -26,7 +26,7 @@
 	unacidable = 1
 
 	var/hides_uniform = 1 	//used to determinate if uniform should be visible whenever the suit is sealed or not
-
+	var/obj/item/weapon/weapon_stored = null
 	var/interface_path = "hardsuit.tmpl"
 	var/ai_interface_path = "hardsuit.tmpl"
 	var/interface_title = "Hardsuit Controller"

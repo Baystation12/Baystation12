@@ -23,7 +23,7 @@
 	online_slowdown = 0 //Default = 6
 	offline_slowdown = 0 //Default = 10
 	hides_uniform = 0
-	ai_controlled_move_delay = -1 ///Lorewise, AI integration buffed Spartan reflexes and speed. This is... not as good, but could be in a pinch.
+	ai_controlled_move_delay = 0 ///Lorewise, AI integration buffed Spartan reflexes and speed. This is... not as good, but could be in a pinch.
 
 	initial_modules = list(
 	/obj/item/rig_module/maneuvering_jets,\

@@ -2,6 +2,21 @@
 
 	if(!istype(user,/mob/living)) return 0
 
+	if(istype(user,/mob/living/carbon/human/spartan))
+		if(weapon_stored)
+			to_chat(user, "<span class='warning'>There is already something attached here!</span>")
+			return
+
+		if(istype(W, /obj/item/weapon/gun) || istype(W, /obj/item/weapon/melee)) //for now just weapons, basically a bigger holster
+			weapon_stored = W
+			user.drop_from_inventory(weapon_stored)
+			weapon_stored.loc = src
+			weapon_stored.add_fingerprint(user)
+			user.visible_message("<span class='notice'>[user] attaches \the [weapon_stored].</span>", "<span class='notice'>You attach \the [weapon_stored].</span>")
+		else
+			to_chat(user, "<span class='warning'>[W] won't fit on [src]!</span>")
+
+
 	if(electrified != 0)
 		if(shock(user)) //Handles removing charge from the cell, as well. No need to do that here.
 			return
@@ -174,11 +189,33 @@
 
 
 /obj/item/weapon/rig/attack_hand(var/mob/user)
+	. = ..()
 
 	if(electrified != 0)
 		if(shock(user)) //Handles removing charge from the cell, as well. No need to do that here.
 			return
 	..()
+
+	if(!weapon_stored)
+		return
+
+	if(istype(user.get_active_hand(),/obj) && istype(user.get_inactive_hand(),/obj))
+		to_chat(user, "<span class='warning'>You need an empty hand to deattach \the [weapon_stored]!</span>")
+	else
+		if(user.a_intent == I_HURT)
+			usr.visible_message(
+				"<span class='danger'>[user] deattach \the [weapon_stored], ready to shoot!</span>",
+				"<span class='warning'>You deattach \the [weapon_stored], ready to shoot!</span>"
+				)
+		else
+			user.visible_message(
+				"<span class='notice'>[user] deattach \the [weapon_stored], pointing it at the ground.</span>",
+				"<span class='notice'>You deattach \the [weapon_stored], pointing it at the ground.</span>"
+				)
+		user.put_in_hands(weapon_stored)
+		weapon_stored.add_fingerprint(user)
+		weapon_stored = FALSE
+
 
 /obj/item/weapon/rig/emag_act(var/remaining_charges, var/mob/user)
 	if(!subverted)
