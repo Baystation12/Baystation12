@@ -37,7 +37,9 @@ SUBSYSTEM_DEF(ai)
 		ai = queue[i]
 		if (QDELETED(ai) || ai.busy)
 			continue
-		if (!run_empty_levels && !SSpresence.population(ai.holder?.z))
+		if (!ai.holder)
+			continue
+		if (!run_empty_levels && !SSpresence.population(get_z(ai.holder)))
 			continue
 		ai.handle_strategicals()
 		if (no_mc_tick)
@@ -78,7 +80,9 @@ SUBSYSTEM_DEF(aifast)
 		ai = queue[i]
 		if (QDELETED(ai) || ai.busy)
 			continue
-		if (!run_empty_levels && !SSpresence.population(ai.holder?.z))
+		if (!ai.holder)
+			continue
+		if (!run_empty_levels && !SSpresence.population(get_z(ai.holder)))
 			continue
 		ai.handle_tactics()
 		if (no_mc_tick)
