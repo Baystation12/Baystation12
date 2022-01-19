@@ -48,7 +48,7 @@
 						if(!bar)
 							bar = new mon.bar_type (src)
 						if(statpanel("Status"))
-							stat("Shields: ","[shield_datum.shieldstrength/shield_datum.totalshields*100]%"
+							stat("Shields: ","[shield_datum.shieldstrength/shield_datum.totalshields*100]%")
 						bar.update(shield_datum.shieldstrength,shield_datum.totalshields)
 					return
 		if(bar)
