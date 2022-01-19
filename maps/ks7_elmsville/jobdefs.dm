@@ -46,6 +46,7 @@
 	/datum/job/covenant/yanmee_major,
 	/datum/job/covenant/yanmee_ultra,
 	/datum/job/covenant/yanmee_leader,
+	/datum/job/covenant/mgalekgolo,
 	/datum/job/soe_commando,\
 	/datum/job/soe_commando_officer,\
 	/datum/job/soe_commando_captain,\

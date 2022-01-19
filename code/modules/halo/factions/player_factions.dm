@@ -27,9 +27,7 @@
 		/mob/living/simple_animal/hostile/covenant/elite/ultra = 2,\
 		/mob/living/simple_animal/hostile/covenant/elite/zealot = 1)
 	default_radio_channel = RADIO_COV
-	special_jobs = list(/datum/job/covenant/brute_captain,\
-		/datum/job/covenant/skirmchampion,\
-		/datum/job/covenant/sangheili_zealot)
+	special_jobs = list(/datum/job/covenant/mgalekgolo)
 	income = 1000
 	contraband_gear = "Covenant"
 
