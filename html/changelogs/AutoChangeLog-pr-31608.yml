@@ -1,5 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - bugfix: Cryopods work again.
-  - bugfix: Being inside something in general no longer stops your life ticks.
