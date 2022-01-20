@@ -125,6 +125,8 @@
 
 	//did our shield absorb the shot?
 	if(drain_shield(damage))
+		if(istype(P, /obj/item/projectile))
+			P.on_impact(src)
 		//put a chatlog delay on warning the user
 		if(world.time >= time_next_warning)
 			time_next_warning = world.time + GAUNTLET_WARNING_DELAY
