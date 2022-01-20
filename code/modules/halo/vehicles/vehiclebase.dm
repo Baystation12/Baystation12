@@ -759,8 +759,7 @@
 			qdel(I)
 
 //Melee weapon handling
-/obj/vehicles/proc/handle_melee(var/mob/living/attacked,var/mob/user)
-	if(isnull(melee_weapon) || !istype(attacked) || !(attacked.Adjacent(src)))
-		return 0
-	attacked.hit_with_weapon(melee_weapon, user, melee_weapon.force, attacked.resolve_item_attack(melee_weapon,user))
-	return 1
+/obj/vehicles/proc/handle_melee(var/atom/attacked,var/mob/user,var/params)
+	if(isnull(melee_weapon))
+		return
+	melee_weapon.resolve_attackby(attacked,user,params)

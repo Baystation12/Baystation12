@@ -36,14 +36,16 @@
 	. = ..()
 	linked_vehicle.display_ammo_status(examiner)
 
+/obj/item/weapon/gun/vehicle_turret/resolve_attackby(atom/A, mob/user, var/click_params)
+	linked_vehicle.handle_melee(A,user,click_params)
+	return 1
+
 /obj/item/weapon/gun/vehicle_turret/afterattack(atom/attacked, mob/user, proximity)
 	if(attacked == linked_vehicle)
 		to_chat(user,"<span class = 'notice'>You can't fire at yourself.</span>")
 		return
 	if(!linked_vehicle.comp_prof.gunner_fire_check(user,linked_vehicle,src))
 		user.drop_from_inventory(src)
-		return
-	if(linked_vehicle.handle_melee(attacked,user)) //If we successfully melee'd, stop here.
 		return
 	. = ..()
 
