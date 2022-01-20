@@ -166,6 +166,27 @@
 		list("radium",        "radium",        /datum/reagent/radium,            20)
 		)
 
+/obj/item/rig_module/chem_dispenser/halo
+	name = "internal mjlonir chemical dispenser"
+	desc = "A complex web of tubing and needles designed for use with MJOLNIR assault armours"
+
+	max_reagent_volume = 100
+	charges = list(
+		list("tricordrazine",     "tricordrazine",     /datum/reagent/tricordrazine,     100),
+		list("tramadol",          "tramadol",          /datum/reagent/tramadol,          100),
+		list("inaprovaline",      "inaprovaline",      /datum/reagent/inaprovaline,      100),
+		list("oxycodone",         "oxycodone",         /datum/reagent/oxycodone,         100),
+		list("dermaline",         "dermaline",         /datum/reagent/dermaline,         100),
+		list("dexalin plus",      "dexalin plus",      /datum/reagent/dexalinp,          100),
+		list("bicaridine",        "bicaridine",        /datum/reagent/bicaridine,        100),
+		list("hyperzine",         "hyperzine",         /datum/reagent/hyperzine,         100),
+		list("otomax",            "otomax",            /datum/reagent/otomax,            100),
+		list("tri-adrenaline",    "tri-adrenaline",    /datum/reagent/triadrenaline,     100),
+		list("bio-foam",          "bio-foam",          /datum/reagent/biofoam,           100),
+		list("polypseudomorphine","polypseudomorphine",/datum/reagent/polypseudomorphine,100)
+		)/*Rigsuits are adminspawn only. I want to test the effectiveness of how player-AI can actually manage this considering they cannot see the user's chemical content.
+		I expect they will end up ODing a lot. If this ever gets implemented into normal rotation (doubt) it will need to be nerfed.*/
+
 /obj/item/rig_module/chem_dispenser/accepts_item(var/obj/item/input_item, var/mob/living/user)
 
 	if(!input_item.is_open_container())
