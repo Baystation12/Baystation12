@@ -30,6 +30,11 @@
 			return 1
 	. = ..()
 
+/obj/structure/destructible/explosion_debris/CheckExit(var/obj/vehicles/vpass, turf/target as turf)
+	if(istype(vpass) && !vpass.can_overrun_cover) //Cover-overrunners need to collide.
+		return 1
+	. = ..()
+
 //Debris Creation Code//
 /turf/simulated/floor
 	var/explosion_debris_file = null
