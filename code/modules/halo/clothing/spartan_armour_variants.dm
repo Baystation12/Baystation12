@@ -112,3 +112,17 @@
 	item_state = "tenrai"
 	force = 50///Meant to be admin-spawn to clash with the energy sword, so it does the same damage and will be unacidable
 	unacidable = 1
+
+// MK.VI //
+
+/obj/item/clothing/head/helmet/spartan/mkvi
+	name = "MJOLNIR Powered Assault Armour Helmet Mark VI"
+	icon_state = "mkvi-helm-obj"
+	item_state = "mkvi-helm-worn"
+
+/obj/item/clothing/suit/armor/special/spartan/mkvi
+	name = "MJOLNIR Powered Assault Armour Mark VI"
+	desc = "The Mjolnir Mark VI was the third major version of the MJOLNIR Powered Assault Armour Series, though it was issued to very few Spartan-IIs due to it being developed close to the end of the war, much like Mark V."
+	icon_state = "mkvi-obj"
+	item_state = "mkvi-worn"
+

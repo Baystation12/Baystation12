@@ -49,6 +49,12 @@
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/mkv
 	helm_type = /obj/item/clothing/head/helmet/spartan/mkv
 
+/obj/item/weapon/rig/spartan/mjolnir_mk6
+	name = "Mark VI Mjolnir Powered Assault Armor"
+	desc = "The Mjolnir Mark VI was the third major version of the MJOLNIR Powered Assault Armour Series, though it was issued to very few Spartan-IIs due to it being developed close to the end of the war, much like Mark V."
+	chest_type = /obj/item/clothing/suit/armor/special/spartan/mkvi
+	helm_type = /obj/item/clothing/head/helmet/spartan/mkvi
+
 /obj/item/weapon/rig/spartan/mjolnir_mk5_gungir
 	name = "Mark V GUNGIR-class Mjolnir Powered Assault Armor "
 	desc = "The Mark V GUNGIR-class MJOLNIR is the first major upgrade of the system and introduced two revolutionary technologies for battlefield purposes: energy shielding reverse-engineered from Covenant technology, providing the user added protection against plasma weapons, and the ability to link a soldier and an artificial intelligence together to provide the soldier instant intel in the field, along with other functions."
