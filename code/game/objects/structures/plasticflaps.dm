@@ -26,9 +26,6 @@
 	if (istype(A, /obj/structure/bed) && B.buckled_mob)//if it's a bed/chair and someone is buckled, it will not pass
 		return 0
 
-	if(istype(A, /obj/vehicle))	//no vehicles
-		return 0
-
 	var/mob/living/M = A
 	if(istype(M))
 		if(M.lying)
