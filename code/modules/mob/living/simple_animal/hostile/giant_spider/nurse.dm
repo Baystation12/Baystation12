@@ -12,7 +12,7 @@
 	maxHealth = 40
 	health = 40
 
-	movement_cooldown = 5	// A bit faster so that they can inject the eggs easier.
+	movement_cooldown = 3	// A bit faster so that they can inject the eggs easier.
 
 	poison_per_bite = 5
 	poison_type = /datum/reagent/soporific

@@ -15,7 +15,7 @@
 
 	poison_per_bite = 5
 
-	movement_cooldown = 5
+	movement_cooldown = 3
 
 	natural_weapon = /obj/item/natural_weapon/bite/spider/lurker
 	poison_chance = 30
