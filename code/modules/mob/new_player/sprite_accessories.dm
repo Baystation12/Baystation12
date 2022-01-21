@@ -1727,7 +1727,6 @@
 */
 /datum/sprite_accessory/marking
 	icon = 'icons/mob/human_races/markings.dmi'
-	do_colouration = 1 //Almost all of them have it, COLOR_ADD
 
 	//Empty list is unrestricted. Should only restrict the ones that make NO SENSE on other species,
 	//like Tajara inner-ear coloring overlay stuff.

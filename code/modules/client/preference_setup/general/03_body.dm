@@ -445,6 +445,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["marking_color"])
+		if(has_flag(mob_species, NO_MARKING_COLOUR))
+			return TOPIC_NOACTION
 		var/M = href_list["marking_color"]
 		var/mark_color = input(user, "Choose the [M] color: ", "Character Preference", pref.body_markings[M]) as color|null
 		if(mark_color && CanUseTopic(user))
@@ -661,6 +663,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		dat += "</br><b>Has a variety of skin colours.</b>"
 	if(current_species.appearance_flags & HAS_EYE_COLOR)
 		dat += "</br><b>Has a variety of eye colours.</b>"
+	if(current_species.appearance_flags & NO_MARKING_COLOUR)
+		dat += "</br><b>Cannot Select Markings colors.</b>"
 	if(current_species.flags & IS_PLANT)
 		dat += "</br><b>Has a plantlike physiology.</b>"
 	dat += "</small></td>"

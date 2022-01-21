@@ -26,6 +26,7 @@
 #define HAS_EYE_COLOR     0x10   // Eye colour selectable in chargen. (RGB)
 #define HAS_HAIR_COLOR    0x20   // Hair colour selectable in chargen. (RGB)
 #define RADIATION_GLOWS   0x40   // Radiation causes this character to glow.
+#define NO_MARKING_COLOUR 0x80
 
 // Languages.
 #define LANGUAGE_GALCOM "Galactic Common"

@@ -248,18 +248,18 @@ datum/preferences
 	dress_preview_mob(mannequin)
 
 	preview_icon = icon('icons/effects/effects.dmi', "nothing")
-	preview_icon.Scale(48+32, 16+32)
+	preview_icon.Scale(96+64, 24+48)
 
 	mannequin.dir = NORTH
 	var/icon/stamp = getFlatIcon(mannequin)
-	preview_icon.Blend(stamp, ICON_OVERLAY, 25, 17)
+	preview_icon.Blend(stamp, ICON_OVERLAY, 105, 15)
 
 	mannequin.dir = WEST
 	stamp = getFlatIcon(mannequin)
-	preview_icon.Blend(stamp, ICON_OVERLAY, 1, 9)
+	preview_icon.Blend(stamp, ICON_OVERLAY, 1, 15)
 
 	mannequin.dir = SOUTH
 	stamp = getFlatIcon(mannequin)
-	preview_icon.Blend(stamp, ICON_OVERLAY, 49, 1)
+	preview_icon.Blend(stamp, ICON_OVERLAY, 55, 1)
 
 	preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2) // Scaling here to prevent blurring in the browser.

@@ -1,6 +1,8 @@
 
 #define BRUTE_SHOT_GRENADE_MAX_THROW_DIST 6
 #define BRUTE_SHOT_GRENADE_MIN_THROW_DIST 2
+#define JIRALHANAE_WEAPONS 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_weapons_big.dmi'
+
 
 /* SPIKE GRENADE */
 
@@ -13,7 +15,7 @@
 	item_state = "spikegren1"
 	item_state_slots = list(slot_l_hand_str = "spnade", slot_r_hand_str = "spnade")
 	sprite_sheets = list(\
-	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
+	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_weapons.dmi'
 	)
 
 	force = 30
@@ -51,7 +53,7 @@
 	name = "Type-25 Spiker Carbine"
 	desc = "A sidearm with two wicked blades curving out from under the barrel."
 	icon = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_obj.dmi'
-	icon_override = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
+	icon_override = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_weapons.dmi'
 	icon_state = "spiker"
 	item_state = "blank"
 	slot_flags = SLOT_BACK | SLOT_BELT
@@ -75,7 +77,7 @@
 	//reload_sound = 'code/modules/halo/sounds/Spikershotfire.ogg'
 	item_state_slots = list(slot_l_hand_str = "spiker", slot_r_hand_str = "spiker")
 	sprite_sheets = list(\
-	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
+	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_weapons_big.dmi'
 	)
 	lunge_dist = 3
 	matter = list("duridium" = 1)
@@ -131,7 +133,7 @@
 	name = "Type-52 \"Mauler\""
 	desc = "A single shot, short range Jiralhanae sidearm with a powerful punch. Has a blade underneath."
 	icon = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_obj.dmi'
-	icon_override = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
+	icon_override = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_weapons.dmi'
 	icon_state = "mauler"
 	item_state = "blank"
 	slot_flags = SLOT_BACK | SLOT_BELT
@@ -152,9 +154,7 @@
 	hud_bullet_iconstate = "mauler"
 	w_class = ITEM_SIZE_NORMAL
 	item_state_slots = list(slot_l_hand_str = "mauler", slot_r_hand_str = "mauler")
-	sprite_sheets = list(\
-	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
-	)
+	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_weapons.dmi')
 	lunge_dist = 3
 	matter = list("duridium" = 1)
 
@@ -202,7 +202,7 @@
 	name = "Type-2 Energy Weapon/Hammer"
 	desc = "A long haft and a heavy head with a tungsten-alloy blade on the reverse end. Within the head is a short-range shock-field-generating gravity drive for extra punch."
 	icon = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_obj_heavy.dmi'
-	icon_override = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
+	icon_override = JIRALHANAE_WEAPONS
 	icon_state = "gravhammer"
 	item_state = "blank"
 	w_class = ITEM_SIZE_HUGE
@@ -214,7 +214,7 @@
 	lunge_dist = 2
 	hitsound = 'code/modules/halo/sounds/gravhammer.ogg'
 	sprite_sheets = list(
-	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi',
+	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_weapons_big.dmi',
 	)
 	item_state_slots = list(slot_l_hand_str = "gravhammer", slot_r_hand_str = "gravhammer", slot_back_str = "back_hammer")
 	matter = list("nanolaminate" = 2, "duridium" = 3)
@@ -258,6 +258,9 @@
 	lunge_dist = 4
 	hitsound = "swing_hit"
 	item_state_slots = list(slot_l_hand_str = "gravlesshammer", slot_r_hand_str = "gravlesshammer", slot_back_str = "back_hammer")
+	sprite_sheets = list(\
+	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_weapons_big.dmi'
+	)
 	unique_afterattack = 0
 
 /* BRUTE SHOT */
@@ -266,7 +269,7 @@
 	name = "Type-25 \"Brute Shot\" Grenade Launcher"
 	desc = "A hip fired fast firing launcher for HE munitions with a curved backwards facing blade mounted to its underside."
 	icon = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_obj_heavy.dmi'
-	icon_override = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
+	icon_override = JIRALHANAE_WEAPONS
 	icon_state = "bruteshot"
 	item_state = "blank"
 	pump_sound = null
@@ -280,8 +283,8 @@
 	edge = 1
 	armor_penetration = 70
 	item_state_slots = list(slot_l_hand_str = "bruteshot", slot_r_hand_str = "bruteshot", slot_back_str = "bruteshot back")
-	sprite_sheets = list(\
-	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
+	sprite_sheets = list("Default" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_weapons.dmi',
+	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_weapons_big.dmi'
 	)
 	matter = list("nanolaminate" = 2, "kemocite" = 1, "duridium" = 1)
 

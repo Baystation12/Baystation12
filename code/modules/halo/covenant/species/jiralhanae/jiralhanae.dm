@@ -26,7 +26,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 	language = LANGUAGE_SANGHEILI
 	additional_langs = list(LANGUAGE_BRUTE)
 	flags = NO_MINOR_CUT
-	appearance_flags = HAS_SKIN_TONE | HAS_EYE_COLOR
+	appearance_flags = HAS_SKIN_TONE | HAS_EYE_COLOR | NO_MARKING_COLOUR
 	radiation_mod = 0.6
 	spawn_flags = SPECIES_CAN_JOIN
 	brute_mod = 0.9
@@ -38,10 +38,10 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 	explosion_effect_mod = 0.5
 	can_force_door = 1
 	default_faction = "Covenant"
-	pixel_offset_x = -12
-	item_icon_offsets = list(list(14,4),list(10,4),null,list(6,2),null,null,null,list(6,2),null)
-	inhand_icon_offsets = list(list(6,0),list(-6,0),null,list(6,0),null,null,null,list(6,0),null)
-	inter_hand_dist = 15
+	pixel_offset_x = -8
+	//item_icon_offsets = list(list(9,6),list(9,6),null,list(6,6),null,null,null,list(6,6),null)
+	inhand_icon_offsets = list(list(13,1),list(3,1),null,list(7,1),null,null,null,list(10,1),null)
+	inter_hand_dist = 10
 	unarmed_types = list(/datum/unarmed_attack/brute_punch)
 	inherent_verbs = list()
 	gibbed_anim = null
