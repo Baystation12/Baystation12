@@ -1,0 +1,12 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Toggling bowties and flannel shirts should now display the correct messages
+      based on toggle state.
+  - bugfix: Cryopods should hopefully stop double-announcing flushing some people.
+      Admin/error logs will still occur though as the root issue hasn't been found
+      and fixed yet.
+  - bugfix: The replica anti-material rifle now properly accepts pistol bullets instead
+      of demanding pistol magazines that don't work with this rifle.
+  - admin: Additional debug logs have been added for certain runtimes to help troubleshoot
+      them when they occur.
