@@ -166,9 +166,10 @@
 	return
 
 /datum/explosion/New(var/obj/payload/b)
+	var/turf/t = get_turf(b)
 	if(config.oni_discord)
-		message2discord(config.oni_discord, "Nuclear detonation detected. [b.name] @ ([b.loc.x],[b.loc.y],[b.loc.z])")
-	var/obj/effect/overmap/OM = map_sectors["[b.z]"]
+		message2discord(config.oni_discord, "Nuclear detonation detected. [b.name] @ ([t.x],[t.y],[t.z])")
+	var/obj/effect/overmap/OM = map_sectors["[t.z]"]
 	if(OM)
 		OM.nuked_effects(b.loc)
 	explosion(get_turf(b),b.strength*20,b.strength*30,b.strength*35,b.strength*40)
