@@ -263,12 +263,15 @@ datum/ghosttrap/pai/transfer_personality(var/mob/candidate, var/mob/living/silic
 /datum/ghosttrap/cult/welcome_candidate(var/mob/target)
 	var/obj/item/device/soulstone/S = target.loc
 	if(istype(S))
-		if(S.is_evil)
-			GLOB.cult.add_antagonist(target.mind)
-			to_chat(target, "<b>Remember, you serve the one who summoned you first, and the cult second.</b>")
-		else
-			to_chat(target, "<b>This soultone has been purified. You do not belong to the cult.</b>")
-			to_chat(target, "<b>Remember, you only serve the one who summoned you.</b>")
+		switch (S.owner_flag)
+			if (SOULSTONE_OWNER_CULT)
+				GLOB.cult.add_antagonist(target.mind)
+				to_chat(target, "<b>Remember, you serve the one who summoned you first, and the cult second.</b>")
+			if (SOULSTONE_OWNER_WIZARD)
+				to_chat(target, "<b>Remember, you only serve the wizard who summoned you.</b>")
+			else
+				to_chat(target, "<b>This soultone has been purified. You do not belong to the cult.</b>")
+				to_chat(target, "<b>Remember, you only serve the one who summoned you.</b>")
 
 /datum/ghosttrap/cult/shade
 	object = "soul stone"

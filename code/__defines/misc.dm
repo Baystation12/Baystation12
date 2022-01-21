@@ -289,3 +289,9 @@
 #define INIT_MACHINERY_PROCESS_COMPONENTS FLAG(1)
 #define INIT_MACHINERY_PROCESS_ALL ( INIT_MACHINERY_PROCESS_SELF | INIT_MACHINERY_PROCESS_COMPONENTS )
 //--
+
+
+// Options for /obj/item/device/soulstone/var/owner_flag
+#define SOULSTONE_OWNER_CULT   "cult"   /// The soulstone is owned by the cult faction.
+#define SOULSTONE_OWNER_WIZARD "wizard" /// The soulstone is owned by a wizard.
+#define SOULSTONE_OWNER_PURE   "pure"   /// The soulstone has been purified.
