@@ -14,7 +14,7 @@
 	public_variables = list(
 		/decl/public_access/public_variable/gas,
 		/decl/public_access/public_variable/pressure,
-		/decl/public_access/public_variable/temperature		
+		/decl/public_access/public_variable/temperature
 	)
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/meter = 1)
 
@@ -37,7 +37,7 @@
 /obj/machinery/meter/proc/clear_target()
 	if(target)
 		GLOB.destroyed_event.unregister(target, src)
-		target = null	
+		target = null
 
 /obj/machinery/meter/return_air()
 	if(target)
@@ -99,6 +99,10 @@
 
 
 /obj/machinery/meter/interface_interact(mob/user)
+	if (!target)
+		log_debug(append_admin_tools("\A [src] interacted with by \the [user] had no target.", user, get_turf(src)))
+		to_chat(user, SPAN_WARNING("\The [src] has no target! This might be a bug. Please report it."))
+		return TRUE
 	var/datum/gas_mixture/environment = target.return_air()
 	to_chat(user, "The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]K ([round(environment.temperature-T0C,0.01)]&deg;C)")
 	return TRUE
