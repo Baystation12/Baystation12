@@ -47,7 +47,6 @@
 	icon_state = "plasma_torp_om_proj"
 	ship_damage_projectile = /obj/item/projectile/plas_torp_damage_proj
 	ship_hit_sound = 'code/modules/halo/sounds/plasma_torpedoes_impact.ogg'
-	penetrating = 1
 	damage = 100
 
 /obj/item/projectile/plas_torp_damage_proj
@@ -63,4 +62,3 @@
 		explosion(get_turf(loc),-1,4,3,5, adminlog = 0)
 	var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
 	S.adminwarn_attack()
-	. = ..()
