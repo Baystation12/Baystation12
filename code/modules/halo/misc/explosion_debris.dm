@@ -20,7 +20,7 @@
 	. = ..()
 	if(!.)
 		if(istype(crosser) && !crosser.can_overrun_cover)//Cover-overruners need to collide.
-			return 0
+			return 1
 
 /obj/structure/destructible/explosion_debris/CanPass(var/obj/vehicles/vpass)
 	if(istype(vpass) && !vpass.can_overrun_cover) //Cover-overrunners need to collide.
@@ -28,6 +28,11 @@
 	for(var/type in PROJECTILES_DEBRIS_IGNORE)
 		if(istype(vpass,type))
 			return 1
+	. = ..()
+
+/obj/structure/destructible/explosion_debris/CheckExit(var/obj/vehicles/vpass, turf/target as turf)
+	if(istype(vpass) && !vpass.can_overrun_cover) //Cover-overrunners need to collide.
+		return 1
 	. = ..()
 
 //Debris Creation Code//
@@ -54,8 +59,8 @@
 		create_cover(get_dir(epi,src))
 
 /turf/simulated/floor/ex_act(var/severity,var/turf/epi)
-	. = ..()
 	create_cover_precheck(severity,epi)
+	. = ..()
 
 //Relevant turf overrides//
 /turf/simulated/floor/asteroid

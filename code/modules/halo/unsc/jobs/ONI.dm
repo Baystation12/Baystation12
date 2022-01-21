@@ -11,6 +11,7 @@
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/unsc/oni/research
 	alt_titles = list("ONI Doctor","ONI Physicist","ONI Botanist","ONI Chemist","ONI Weapons Researcher","ONI Surgeon","ONI Geneticist")
+	access = list(access_unsc_armoury)
 
 /datum/job/unsc/oni/research/director
 	title = "ONI Research Director"

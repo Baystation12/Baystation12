@@ -26,7 +26,7 @@
 
 /datum/reagent/tallista_spice/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	M.add_chemical_effect(CE_SPEEDBOOST, 0.5)
-	M.add_chemical_effect(CE_SLOWREMOVE, 0.5)
+	M.add_chemical_effect(CE_SPEEDBOOST, 1)
+	M.add_chemical_effect(CE_SLOWREMOVE, 1)
 	M.add_chemical_effect(CE_PULSE, 0.1)
 	M.add_chemical_effect(CE_PAINKILLER, 50)

@@ -134,7 +134,7 @@
 		if(adjacent)
 			if(W)
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
-				if(istype(loc,/obj/vehicles))
+				if(istype(loc,/obj/vehicles) && !istype(W,/obj/item/weapon/gun/vehicle_turret))
 					return
 				var/resolved = W.resolve_attackby(A,src, params)
 				if(!resolved && A && W)

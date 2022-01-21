@@ -134,7 +134,7 @@
 	handle_casings = CASELESS
 	caliber = "needler"
 	load_method = MAGAZINE
-	one_hand_penalty = 2
+	one_hand_penalty = 3
 	burst = 3
 	burst_delay = 1.5
 	dispersion = list(0.2, 0.4, 0.7)
@@ -156,3 +156,9 @@
 	list(mode_name="short bursts",  burst=3, dispersion=list(0.2, 0.4, 0.7)),
 	list(mode_name="extended bursts",  burst=10, dispersion=list(0.3, 0.3, 0.5, 0.5, 0.7, 0.7, 0.9, 0.9))
 	)
+
+/obj/item/weapon/gun/projectile/needler/update_icon()
+	if(ammo_magazine)
+		icon_state = initial(icon_state)
+	else
+		icon_state = "[initial(icon_state)]_unloaded"

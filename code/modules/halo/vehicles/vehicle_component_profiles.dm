@@ -66,6 +66,14 @@
 		spawn(1)
 			source_vehicle.update_user_view(gunner)
 
+/datum/component_profile/proc/remove_gunner_weapons(var/mob/living/carbon/human/h)
+	if(!istype(h))
+		return
+	for(var/guntype in gunner_weapons)
+		var/obj/item/gun = locate(guntype) in h.contents
+		if(gun)
+			h.drop_from_inventory(gun)
+
 /datum/component_profile/proc/gunner_fire_check(var/mob/user,var/obj/vehicles/source_vehicle,var/obj/gun)
 	if(!(gun.type in gunner_weapons))
 		return 0

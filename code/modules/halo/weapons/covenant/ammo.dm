@@ -260,7 +260,7 @@
 	name = "Rifle Needles"
 	desc = "A pack of fewer, larger crystalline needles. For T-31 rifle."
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
-	icon_state = "needlerpack"
+	icon_state = "needlerpack-rifle"
 	max_ammo = 21
 	ammo_type = /obj/item/ammo_casing/rifleneedle
 	caliber = "needle_rifle"

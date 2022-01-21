@@ -56,6 +56,10 @@
 	var/smoke_start_amt = 3 //How many times should we pop the smoke effect's start() proc? Smokebombs do it 4 times.
 	var/smoke_type = /datum/effect/effect/system/smoke_spread/vehicle_smokescreen
 
+	//Melee (For Mechs)
+	var/melee_type = null //The melee weapon typepath, if any. This is stored and should probably have can_embed returning 0
+	var/obj/item/melee_weapon = null //The melee weapon itself. Used in all melee interactions. Also used in ramming, if it exists.
+
 	//Vehicle ferrying//
 	var/vehicle_size = ITEM_SIZE_VEHICLE//The size of the vehicle, used by vehicle cargo ferrying to determine allowed amount and allowed size.
 	var/vehicle_carry_size = 0		//the max size of a carried vehicle
@@ -136,6 +140,8 @@
 /obj/vehicles/New()
 	. = ..()
 	comp_prof = new comp_prof(src)
+	if(melee_type)
+		melee_weapon = new melee_type(null)
 	GLOB.processing_objects += src
 	update_object_sprites()
 	if(light_range != 0)
@@ -254,6 +260,8 @@
 	return pick(valid_exit_locs)
 //
 /obj/vehicles/Destroy()
+	if(melee_weapon)
+		qdel(melee_weapon)
 	GLOB.processing_objects -= src
 	kick_occupants()
 	GLOB.emp_candidates -= src
@@ -749,3 +757,9 @@
 		spawn(10)
 			overlays -= I
 			qdel(I)
+
+//Melee weapon handling
+/obj/vehicles/proc/handle_melee(var/atom/attacked,var/mob/user,var/params)
+	if(isnull(melee_weapon))
+		return
+	melee_weapon.resolve_attackby(attacked,user,params)

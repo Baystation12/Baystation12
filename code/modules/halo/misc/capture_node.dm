@@ -146,11 +146,12 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 	if(defenders_spawn.len == 0)
 		return
 	if(capture_npc_spawnlocs.len == 0)
-		var/list/view_turfs = dview(7,src)
-		for(var/turf/t in view_turfs)
-			if(t.density == 1)
-				view_turfs -= t
-		for(var/i = 0,i < FALLBACK_MOBSPAWN_AMOUNT,i++)
+		var/area/our_area = loc.loc
+		var/list/view_turfs = list()
+		for(var/turf/t in our_area.contents)
+			if(t.density != 1)
+				view_turfs += t
+		for(var/i = 0 to FALLBACK_MOBSPAWN_AMOUNT)
 			var/to_spawn = pickweight(defenders_spawn)
 			new to_spawn (pick(view_turfs))
 		return

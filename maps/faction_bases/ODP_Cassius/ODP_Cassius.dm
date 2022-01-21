@@ -40,8 +40,9 @@
 		//unlock some new job slots after a short delay
 		spawn(30)
 			GLOB.UNSC.unlock_special_job()
+			GLOB.UNSC.unlock_special_job()
 			GLOB.COVENANT.unlock_special_job()
-
+			GLOB.COVENANT.unlock_special_job()
 		//this is janky, i really should fix spawns instead
 		//its necessary because the AI initial spawn is on the ODP
 		//without the ODP the AI will spawn somewhere random like the Cov ship
