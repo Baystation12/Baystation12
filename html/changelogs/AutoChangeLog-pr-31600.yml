@@ -1,7 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Robots and drones can now drop modules back into their inventory using
-      CTRL+Q.
-  - tweak: Constructs now know their creator's languages. Non-cultist constructs no
-      longer have access to cult languages or hivemind.

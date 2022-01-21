@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fixed mobs not respecting their movement cooldowns. Most will now move
-      slower.
