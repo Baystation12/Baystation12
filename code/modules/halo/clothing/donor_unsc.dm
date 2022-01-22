@@ -5,24 +5,23 @@
 #define SPARTAN_OVERRIDE 'code/modules/halo/clothing/SpartanHussarKit.dmi'
 #define ONI_OVERRIDE 'code/modules/halo/clothing/oni_guard.dmi'
 #define ONI_ITEM_INHAND 'code/modules/halo/clothing/item_oni.dmi'
-#define CREW_INHAND 'code/modules/halo/clothing/item_jumpsuit_ship.dmi'
-#define CREW_OVERRIDE 'code/modules/halo/clothing/mob_jumpsuit_ship.dmi'
 
 ////////Aroliacue\\\\\\
 
 //CO
 
-/obj/item/clothing/under/unsc/co/aroliacue
-	icon = CREW_INHAND
-	icon_override = CREW_OVERRIDE
-	item_state = "arol-uniform-worn"
+/obj/item/clothing/under/mildress/aroliacue
+	icon = MARINE_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "arol-uniform"
 	icon_state = "arol-uniform-obj"
+	worn_state = "arol-uniform"
 	name = "Officer's Dress"
 	desc = "An elegant, well-fitting suit for all kinds of whimsical occasions."
 
-/obj/item/clothing/head/unsc/aroliacue
-	icon = CREW_INHAND
-	icon_override = CREW_OVERRIDE
+/obj/item/clothing/head/dress/aroliacue
+	icon = MARINE_INHAND
+	icon_override = MARINE_OVERRIDE
 	item_state = "arol-hat-worn"
 	icon_state = "arol-hat-obj"
 	name = "Officer's Service Cap."
@@ -36,8 +35,8 @@
 
 /decl/hierarchy/outfit/aroliacue_co
 	name = "Aroliacue - CO"
-	uniform = /obj/item/clothing/under/unsc/co/aroliacue
-	head = /obj/item/clothing/head/unsc/aroliacue
+	uniform = /obj/item/clothing/under/mildress/aroliacue
+	head = /obj/item/clothing/head/dress/aroliacue
 	suit = /obj/item/clothing/suit/armor/special/odst/aroliacue
 	l_hand = /obj/item/clothing/head/helmet/odst/aroliacue
 	r_hand = /obj/item/weapon/material/machete/officersword/aroliacue
@@ -58,8 +57,8 @@
 	icon_state = "arol-armour-obj"
 
 /obj/item/weapon/storage/box/large/donator/aroliacue/CO
-	startswith = list(/obj/item/clothing/under/unsc/co/aroliacue,/obj/item/clothing/head/unsc/aroliacue,/obj/item/weapon/material/machete/officersword/aroliacue,/obj/item/clothing/head/helmet/odst/aroliacue,/obj/item/clothing/suit/armor/special/odst/aroliacue)
-	can_hold = list(/obj/item/clothing/under/unsc/co/aroliacue,/obj/item/clothing/head/unsc/aroliacue,/obj/item/weapon/material/machete/officersword/aroliacue,/obj/item/clothing/head/helmet/odst/aroliacue,/obj/item/clothing/suit/armor/special/odst/aroliacue)
+	startswith = list(/obj/item/clothing/under/mildress/aroliacue,/obj/item/clothing/head/dress/aroliacue,/obj/item/weapon/material/machete/officersword/aroliacue,/obj/item/clothing/head/helmet/odst/aroliacue,/obj/item/clothing/suit/armor/special/odst/aroliacue)
+	can_hold = list(/obj/item/clothing/under/mildress/aroliacue,/obj/item/clothing/head/dress/aroliacue,/obj/item/weapon/material/machete/officersword/aroliacue,/obj/item/clothing/head/helmet/odst/aroliacue,/obj/item/clothing/suit/armor/special/odst/aroliacue)
 
 ////////ashvor\\\\\\\\
 
