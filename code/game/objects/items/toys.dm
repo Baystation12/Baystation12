@@ -676,31 +676,45 @@
 	item_state = "egg3" // It's the green egg in items_left/righthand
 	w_class = ITEM_SIZE_TINY
 
+
 /*
  * Plushies
  */
 
-//Large plushies.
 /obj/structure/plushie
 	name = "generic plush"
 	desc = "A very generic plushie. It seems to not want to exist."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "ianplushie"
+	atom_flags = ATOM_FLAG_CLIMBABLE
 	anchored = FALSE
 	density = TRUE
 	var/phrase = "I don't want to exist anymore!"
 
-/obj/structure/plushie/attack_hand(mob/user)
-	playsound(src.loc, 'sound/effects/rustle1.ogg', 100, 1)
-	if(user.a_intent == I_HELP)
-		user.visible_message("<span class='notice'><b>\The [user]</b> hugs [src]!</span>","<span class='notice'>You hug [src]!</span>")
-	else if (user.a_intent == I_HURT)
-		user.visible_message("<span class='warning'><b>\The [user]</b> punches [src]!</span>","<span class='warning'>You punch [src]!</span>")
+
+/obj/structure/plushie/Initialize()
+	. = ..()
+	INIT_DISALLOW_TYPE(/obj/structure/plushie)
+
+
+/obj/structure/plushie/attack_hand(mob/living/user)
+	var/action_word = "action"
+	if (user.a_intent == I_HELP)
+		action_word = "hug"
+	else if (user.a_intent == I_DISARM)
+		action_word = "poke"
 	else if (user.a_intent == I_GRAB)
-		user.visible_message("<span class='warning'><b>\The [user]</b> attempts to strangle [src]!</span>","<span class='warning'>You attempt to strangle [src]!</span>")
-	else
-		user.visible_message("<span class='notice'><b>\The [user]</b> pokes the [src].</span>","<span class='notice'>You poke the [src].</span>")
-		visible_message("[src] says, \"[phrase]\"")
+		action_word = "strangle"
+	else if (user.a_intent == I_HURT)
+		action_word = "bop"
+	user.visible_message(
+		SPAN_ITALIC("\The [user] [action_word]s \the [src]."),
+		SPAN_ITALIC("You [action_word] \the [src].")
+	)
+	if (phrase)
+		audible_message(phrase, hearing_distance = 3)
+	playsound(src, 'sound/effects/rustle1.ogg', 100, 1)
+
 
 /obj/structure/plushie/ian
 	name = "plush corgi"
@@ -708,11 +722,13 @@
 	icon_state = "ianplushie"
 	phrase = "Arf!"
 
+
 /obj/structure/plushie/drone
 	name = "plush drone"
 	desc = "A plushie of a happy drone! It appears to be smiling, and has a small tag which reads \"N.D.V. Icarus Gift Shop\"."
 	icon_state = "droneplushie"
 	phrase = "Beep boop!"
+
 
 /obj/structure/plushie/carp
 	name = "plush carp"
@@ -720,58 +736,78 @@
 	icon_state = "carpplushie"
 	phrase = "Glorf!"
 
+
 /obj/structure/plushie/beepsky
 	name = "plush Officer Sweepsky"
 	desc = "A plushie of a popular industrious cleaning robot! If it could feel emotions, it would love you."
 	icon_state = "beepskyplushie"
 	phrase = "Ping!"
 
-//Small plushies.
+
 /obj/item/toy/plushie
 	name = "generic small plush"
 	desc = "A very generic small plushie. It seems to not want to exist."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "nymphplushie"
+	w_class = ITEM_SIZE_SMALL
 
-/obj/item/toy/plushie/attack_self(mob/user as mob)
-	if(user.a_intent == I_HELP)
-		user.visible_message("<span class='notice'><b>\The [user]</b> hugs [src]!</span>","<span class='notice'>You hug [src]!</span>")
-	else if (user.a_intent == I_HURT)
-		user.visible_message("<span class='warning'><b>\The [user]</b> punches [src]!</span>","<span class='warning'>You punch [src]!</span>")
+
+/obj/item/toy/plushie/Initialize()
+	. = ..()
+	INIT_DISALLOW_TYPE(/obj/item/toy/plushie)
+
+
+/obj/item/toy/plushie/attack_self(mob/living/user)
+	var/action_word = "action"
+	if (user.a_intent == I_HELP)
+		action_word = "hug"
+	else if (user.a_intent == I_DISARM)
+		action_word = "poke"
 	else if (user.a_intent == I_GRAB)
-		user.visible_message("<span class='warning'><b>\The [user]</b> attempts to strangle [src]!</span>","<span class='warning'>You attempt to strangle [src]!</span>")
-	else
-		user.visible_message("<span class='notice'><b>\The [user]</b> pokes the [src].</span>","<span class='notice'>You poke the [src].</span>")
+		action_word = "strangle"
+	else if (user.a_intent == I_HURT)
+		action_word = "bop"
+	user.visible_message(
+		SPAN_ITALIC("\The [user] [action_word]s \the [src]."),
+		SPAN_ITALIC("You [action_word] \the [src].")
+	)
+
 
 /obj/item/toy/plushie/nymph
 	name = "diona nymph plush"
 	desc = "A plushie of an adorable diona nymph! While its level of self-awareness is still being debated, its level of cuteness is not."
 	icon_state = "nymphplushie"
 
+
 /obj/item/toy/plushie/mouse
 	name = "mouse plush"
 	desc = "A plushie of a delightful mouse! What was once considered a vile rodent is now your very best friend."
 	icon_state = "mouseplushie"
+
 
 /obj/item/toy/plushie/kitten
 	name = "kitten plush"
 	desc = "A plushie of a cute kitten! Watch as it purrs it's way right into your heart."
 	icon_state = "kittenplushie"
 
+
 /obj/item/toy/plushie/lizard
 	name = "lizard plush"
 	desc = "A plushie of a scaly lizard! Very controversial, after being accused as \"racist\" by some Unathi."
 	icon_state = "lizardplushie"
+
 
 /obj/item/toy/plushie/spider
 	name = "spider plush"
 	desc = "A plushie of a fuzzy spider! It has eight legs - all the better to hug you with."
 	icon_state = "spiderplushie"
 
+
 /obj/item/toy/plushie/farwa
 	name = "farwa plush"
 	desc = "A farwa plush doll. It's soft and comforting!"
 	icon_state = "farwaplushie"
+
 
 //Toy cult sword
 /obj/item/toy/cultsword
