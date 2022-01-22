@@ -12,7 +12,7 @@
 	spawn_positions = 8
 	selection_color = "#ff0000"
 	access = list(access_innie,access_innie_prowler,access_innie_asteroid, access_soe)
-	is_whitelisted = 1
+	faction_whitelist = "Insurrection"
 	whitelisted_species = list(/datum/species/human)
 
 /datum/job/soe_commando_officer
@@ -28,7 +28,7 @@
 	spawn_positions = 2
 	selection_color = "#ff0000"
 	access = list(access_innie,access_innie_prowler,access_innie_asteroid,access_innie_asteroid_boss, access_soe, access_soe_officer)
-	is_whitelisted = 1
+	faction_whitelist = "Insurrection"
 	whitelisted_species = list(/datum/species/human)
 
 /datum/job/soe_commando_captain
@@ -43,5 +43,5 @@
 	spawn_positions = 1
 	selection_color = "#ff0000"
 	access = list(access_innie,access_innie_prowler,access_innie_asteroid,access_innie_asteroid_boss,access_soe, access_soe_officer, access_soe_captain)
-	is_whitelisted = 1
+	faction_whitelist = "Insurrection"
 	whitelisted_species = list(/datum/species/human)
