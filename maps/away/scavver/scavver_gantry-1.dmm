@@ -724,14 +724,6 @@
 /obj/item/module/power_control,
 /turf/simulated/floor/airless,
 /area/scavver/gantry/down1)
-"lp" = (
-/obj/structure/railing/mapped{
-	dir = 4;
-	icon_state = "railing0-1"
-	},
-/obj/vehicle/train/cargo/engine,
-/turf/simulated/floor/airless,
-/area/scavver/gantry/down2)
 "lz" = (
 /obj/structure/closet/crate/plastic,
 /obj/item/seeds/algaeseed,
@@ -1192,7 +1184,6 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
-/obj/vehicle/train/cargo/trolley,
 /turf/simulated/floor/airless,
 /area/scavver/gantry/down2)
 "ua" = (
@@ -14889,7 +14880,7 @@ YV
 YV
 YV
 tX
-lp
+tX
 CZ
 QR
 gV

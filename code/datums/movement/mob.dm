@@ -101,13 +101,6 @@
 // Buckle movement
 /datum/movement_handler/mob/buckle_relay/DoMove(var/direction, var/mover)
 	// TODO: Datumlize buckle-handling
-	if(istype(mob.buckled, /obj/vehicle))
-		//drunk driving
-		if(mob.confused && prob(20)) //vehicles tend to keep moving in the same direction
-			direction = turn(direction, pick(90, -90))
-		mob.buckled.relaymove(mob, direction)
-		return MOVEMENT_HANDLED
-
 	if(mob.pulledby || mob.buckled) // Wheelchair driving!
 		if(istype(mob.loc, /turf/space))
 			return // No wheelchair driving in space

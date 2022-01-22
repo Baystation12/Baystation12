@@ -3760,7 +3760,6 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
-/obj/vehicle/bike/gyroscooter,
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/heads/office/rd)
 "hn" = (

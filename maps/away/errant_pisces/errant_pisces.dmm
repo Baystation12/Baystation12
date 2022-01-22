@@ -476,7 +476,6 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/obj/vehicle/train/cargo/trolley,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "bp" = (
@@ -625,10 +624,6 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
-/area/errant_pisces/enginering)
-"bK" = (
-/obj/vehicle/train/cargo/trolley,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "bL" = (
@@ -4810,14 +4805,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/science_wing)
-"lU" = (
-/obj/vehicle/train/cargo/engine,
-/turf/simulated/floor/plating,
-/area/errant_pisces/general_storage)
-"lV" = (
-/obj/vehicle/train/cargo/trolley,
-/turf/simulated/floor/plating,
-/area/errant_pisces/general_storage)
 "lW" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/item/reagent_containers/food/snacks/fish/space_carp,
@@ -28324,7 +28311,7 @@ aA
 aP
 aZ
 bp
-bK
+bn
 bn
 bn
 bn
@@ -28560,7 +28547,7 @@ ks
 kO
 lh
 kO
-lU
+kP
 mr
 mM
 na
@@ -28762,7 +28749,7 @@ ks
 kO
 kO
 kO
-lV
+kP
 kP
 mN
 kT

@@ -1,9 +1,6 @@
 /atom/movable/proc/get_mob()
 	return
 
-/obj/vehicle/train/get_mob()
-	return buckled_mob
-
 /mob/get_mob()
 	return src
 
