@@ -46,7 +46,7 @@
 	update_icon()
 
 /obj/structure/banner/attack_hand(mob/user)
-	if (!istype(user.mind.assigned_job, /datum/job/chaplain))
+	if (!user.mind || !istype(user.mind.assigned_job, /datum/job/chaplain))
 		to_chat(user, SPAN_WARNING("Only the Chaplain can change the banner!"))
 	else
 		var/banner = input(user, "Pick a symbol:") as null | anything in banner_type
