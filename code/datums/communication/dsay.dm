@@ -88,7 +88,7 @@
 	return "<span class='name'>[lname]</span>"
 
 /decl/dsay_communication/proc/get_message(var/client/C, var/mob/M, var/message)
-	var say_verb = pick("complains","moans","whines","laments","blubbers")
+	var say_verb = pick("complains","moans","whines","laments","blubbers","copes","seethes","malds")
 	return "[get_name(C, M)] [say_verb], <span class='message'>\"[message]\"</span>"
 
 /decl/dsay_communication/emote/get_message(var/client/C, var/mob/M, var/message)
