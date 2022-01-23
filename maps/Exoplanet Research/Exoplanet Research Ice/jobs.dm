@@ -10,7 +10,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/facil_researcher
 	alt_titles = list("Doctor","Physicist","Botanist","Chemist","Weapons Researcher","Surgeon","Geneticist")
 	selection_color = "#008000"
-	access = list(310,311)
+	access = list(access_unsc,access_unsc_bridge,access_unsc_medical,access_unsc_armoury,access_unsc_supplies,access_unsc_oni,access_unsc_cargo)
 	spawnpoint_override = "Research Facility Spawn"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
@@ -26,7 +26,7 @@
 	economic_modifier = 1
 	outfit_type = /decl/hierarchy/outfit/job/researchdirector
 	selection_color = "#008000"
-	access = list(310,311)
+	access = list(access_unsc,access_unsc_bridge,access_unsc_medical,access_unsc_armoury,access_unsc_supplies,access_unsc_oni,access_unsc_cargo)
 	spawnpoint_override = "Research Facility Director Spawn"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
