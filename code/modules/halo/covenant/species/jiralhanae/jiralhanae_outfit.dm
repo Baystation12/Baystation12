@@ -150,7 +150,7 @@
 
 	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/chieftain
 	suit = /obj/item/clothing/suit/armor/special/chieftain
-	shoes = /obj/item/clothing/shoes/jiralhanae/covenant/captain
+	shoes = /obj/item/clothing/shoes/jiralhanae/covenant/captain/chieftain
 	l_hand = /obj/item/language_learner/unggoy_to_common
 	//
 	id_type = /obj/item/weapon/card/id/brute_captain
