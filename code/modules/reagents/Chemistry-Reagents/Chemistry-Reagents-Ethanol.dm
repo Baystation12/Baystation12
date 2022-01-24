@@ -77,7 +77,7 @@
 
 /datum/reagent/ethanol/blackstrap
 	name = "Blackstrap"
-	description = "A classic mix of rum and molasses, typically consumed by Tersteners."
+	description = "A classic mix of rum and molasses, favorite of frontiersmen everywhere."
 	taste_description = "sweet and strong alcohol"
 	color = "#161612"
 	strength = 30
@@ -1120,13 +1120,13 @@
 
 /datum/reagent/ethanol/nevadan_gold
 	name = "Nevadan Gold Whiskey"
-	description = "A warm blend of 98 spices. Made in the heartlands of Tersten."
+	description = "A warm blend of 98 spices. Made on the homeworld."
 	taste_description = "strong, creamy whiskey"
 	color = "#ce1900"
 	strength = 10
 
 	glass_name = "Nevadan gold whiskey"
-	glass_desc = "A warm blend of 98 spices, brewed on Tersten. A delicious mix."
+	glass_desc = "A warm blend of 98 spices, brewed on Earth. A delicious mix."
 
 /datum/reagent/ethanol/patron
 	name = "Patron"

@@ -424,7 +424,7 @@
 
 /obj/item/reagent_containers/food/drinks/bottle/blackstrap
 	name = "Two Brothers Blackstrap"
-	desc = "A bottle of Blackstrap, distilled in Two Brothers, Tersten."
+	desc = "A bottle of Blackstrap, distilled in Two Brothers, Earth."
 	icon_state = "blackstrap"
 	center_of_mass = "x=16;y=4"
 
