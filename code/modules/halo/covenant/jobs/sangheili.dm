@@ -8,7 +8,7 @@
 	poplock_divisor = 9
 	track_players = TRUE
 	outfit_type = /decl/hierarchy/outfit/sangheili/shipmaster
-	faction_whitelist = "Covenant"
+	is_whitelisted = 1
 	whitelisted_species = list(/datum/species/sangheili)
 	access = list(access_covenant, access_covenant_command, access_covenant_slipspace, access_covenant_cargo)
 	pop_balance_mult = 3
