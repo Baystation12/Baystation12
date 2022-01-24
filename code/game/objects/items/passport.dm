@@ -110,11 +110,6 @@
 	icon_state = "passport_scg2"
 	desc = "A passport from Yuklid V, within Sol Central Government space."
 
-/obj/item/passport/tersten
-	name = "\improper Tersten passport"
-	icon_state = "passport_scg2"
-	desc = "A passport from Tersten, within Sol Central Government space."
-
 /obj/item/passport/south_gaia
 	name = "\improper Southern Gaian passport"
 	icon_state = "passport_scg2"
