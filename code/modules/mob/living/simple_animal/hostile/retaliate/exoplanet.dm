@@ -36,6 +36,8 @@
 		return
 	if(!CanInteract(usr, GLOB.conscious_state))
 		return
+	if (isghost(usr))
+		return
 
 	for(var/obj/effect/overmap/visitable/sector/exoplanet/E)
 		if(src in E.animals)
