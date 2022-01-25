@@ -15,6 +15,8 @@
 	/// Which `ai_holder` datum to give to the mob when initialized. If `null`, nothing happens.
 	var/ai_holder_type = null
 	var/image/ai_status_image
+	var/recoil = 0 //What our current recoil level is
+	var/recoil_reduction_timer
 
 /mob/living/Initialize()
 	if (ai_holder_type)

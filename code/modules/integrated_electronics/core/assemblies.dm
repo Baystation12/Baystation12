@@ -770,6 +770,7 @@
 	max_complexity = IC_COMPLEXITY_BASE
 
 /obj/item/device/electronic_assembly/pickup()
+	. = ..()
 	transform = matrix() //Reset the matrix.
 
 /obj/item/device/electronic_assembly/wallmount/proc/mount_assembly(turf/on_wall, mob/user) //Yeah, this is admittedly just an abridged and kitbashed version of the wallframe attach procs.

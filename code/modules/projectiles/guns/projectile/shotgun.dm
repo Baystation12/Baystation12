@@ -15,6 +15,7 @@
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	handle_casings = HOLD_CASINGS
 	one_hand_penalty = 8
+	recoil_buildup = 12
 	bulk = 6
 	var/recentpump = 0 // to prevent spammage
 	wielded_item_state = "shotgun-wielded"
@@ -95,7 +96,7 @@
 	wielded_item_state = "gun_wielded"
 
 	burst_delay = 0
-	firemodes = list(
+	init_firemodes = list(
 		list(mode_name="fire one barrel at a time", burst=1),
 		list(mode_name="fire both barrels at once", burst=2),
 		)

@@ -120,10 +120,10 @@
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_NO_CONTAINER
 
-	firemodes = list(
-		list(mode_name="semiauto",    burst=1, fire_delay=0,    move_delay=null, one_hand_penalty=1, burst_accuracy=null, dispersion=null),
-		list(mode_name="short bursts", burst=3, fire_delay=null, move_delay=5,    one_hand_penalty=2, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="long bursts",  burst=6, fire_delay=null, move_delay=10,    one_hand_penalty=2, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
+	init_firemodes = list(
+			SEMI_AUTO_NODELAY,
+			BURST_3_ROUND,
+			FULL_AUTO_400
 		)
 
 /obj/item/gun/magnetic/railgun/automatic/examine(mob/user, distance)
@@ -155,9 +155,9 @@
 	loaded = /obj/item/magnetic_ammo
 	wielded_item_state = "z8carbine-wielded"
 
-	firemodes = list(
-		list(mode_name="semiauto",    burst=1, fire_delay=0,    move_delay=null, one_hand_penalty=1, burst_accuracy=null, dispersion=null),
-		list(mode_name="short bursts", burst=3, fire_delay=null, move_delay=5,    one_hand_penalty=2, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
+	init_firemodes = list(
+			SEMI_AUTO_NODELAY,
+			BURST_3_ROUND
 		)
 
 /obj/item/gun/magnetic/railgun/flechette/out_of_ammo()
@@ -183,4 +183,4 @@
 	slot_flags = SLOT_BACK
 	power_cost = 100
 	wielded_item_state = "skrell_rifle-wielded"
-	firemodes = list()
+	init_firemodes = list()

@@ -579,8 +579,13 @@ var/list/admin_verbs_mod = list(
 	if(!check_rights(R_ADMIN))
 		return
 
-	if(!usr.RemoveClickHandler(/datum/click_handler/build_mode))
-		usr.PushClickHandler(/datum/click_handler/build_mode)
+	if(istype(CH, /datum/click_handler/build_mode))
+		CH.Exit()
+		QDEL_NULL(CH)
+	else
+		CH = new /datum/click_handler/build_mode(src)
+		CH.Enter()
+
 	SSstatistics.add_field_details("admin_verb","TBMS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/object_talk(var/msg as text) // -- TLE

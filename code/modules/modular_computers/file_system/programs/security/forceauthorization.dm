@@ -35,7 +35,7 @@
 			area_name = sanitize(A.name)
 
 		var/list/modes = list()
-		for(var/i = 1 to G.firemodes.len)
+		for(var/i = 1 to G.init_firemodes.len)
 			if(G.authorized_modes[i] == ALWAYS_AUTHORIZED)
 				continue
 			var/datum/firemode/firemode = G.firemodes[i]

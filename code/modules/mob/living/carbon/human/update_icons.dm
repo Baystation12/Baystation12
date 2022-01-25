@@ -706,6 +706,8 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/update_inv_handcuffed(var/update_icons=1)
 	if(handcuffed)
+		handcuffed.equip_slot = slot_handcuffed
+
 		overlays_standing[HO_HANDCUFF_LAYER] = handcuffed.get_mob_overlay(src,slot_handcuffed_str)
 	else
 		overlays_standing[HO_HANDCUFF_LAYER]	= null

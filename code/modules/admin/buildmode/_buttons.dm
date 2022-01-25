@@ -70,4 +70,6 @@
 	screen_loc = "NORTH,WEST+3"
 
 /obj/effect/bmode/quit/OnClick()
-	usr.RemoveClickHandler(/datum/click_handler/build_mode)
+	host.Exit()
+	if(usr.client)
+		QDEL_NULL(usr.client.CH)

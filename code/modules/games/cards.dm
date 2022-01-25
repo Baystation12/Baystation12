@@ -339,6 +339,7 @@
 		update_icon()
 
 /obj/item/hand/pickup(mob/user)
+	. = ..()
 	src.update_icon()
 
 /*** A special thing that steals a card from a deck, probably lost in maint somewhere. ***/

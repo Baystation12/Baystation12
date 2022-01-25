@@ -54,6 +54,7 @@
 #define BLOCKHAIR       0x40    // Hides the user's hair, facial and otherwise.
 
 // Slots.
+#define slot_none        0
 #define slot_first       1
 #define slot_back        1
 #define slot_wear_mask   2
@@ -175,8 +176,8 @@
 #define  FIRESUIT_MAX_PRESSURE 		100 * ONE_ATMOSPHERE   // Firesuis and atmos voidsuits
 #define  RIG_MAX_PRESSURE 			50 * ONE_ATMOSPHERE   // Rigs
 #define  LIGHT_RIG_MAX_PRESSURE 	25 * ONE_ATMOSPHERE   // Rigs
-#define  ENG_VOIDSUIT_MAX_PRESSURE 	50 * ONE_ATMOSPHERE 
-#define  VOIDSUIT_MAX_PRESSURE 		25 * ONE_ATMOSPHERE 
+#define  ENG_VOIDSUIT_MAX_PRESSURE 	50 * ONE_ATMOSPHERE
+#define  VOIDSUIT_MAX_PRESSURE 		25 * ONE_ATMOSPHERE
 #define  SPACE_SUIT_MAX_PRESSURE 	5 * ONE_ATMOSPHERE
 
 // Fire.

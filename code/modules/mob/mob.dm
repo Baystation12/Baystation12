@@ -1044,6 +1044,19 @@
 	if(src.throw_icon)
 		src.throw_icon.icon_state = "act_throw_on"
 
+/mob/proc/check_CH(CH_name as text, var/CH_type, var/second_arg = null)
+	if(!src.client.CH || !istype(src.client.CH, CH_type))//(src.client.CH.handler_name != CH_name))
+		src.client.CH = new CH_type(client, second_arg)
+		to_chat(src, SPAN_WARNING("You prepare [CH_name]."))
+	else
+		kill_CH()
+	return
+
+/mob/proc/kill_CH()
+	if (src.client.CH)
+		to_chat(src, SPAN_NOTICE ("You unprepare [src.client.CH.handler_name]."))
+		QDEL_NULL(src.client.CH)
+
 /mob/proc/toggle_antag_pool()
 	set name = "Toggle Add-Antag Candidacy"
 	set desc = "Toggles whether or not you will be considered a candidate by an add-antag vote."

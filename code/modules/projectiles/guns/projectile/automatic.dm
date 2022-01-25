@@ -1,3 +1,72 @@
+
+//Automatic firing
+//Todo: Way more checks and safety here
+/datum/firemode/automatic
+	settings = list(burst = 1, suppress_delay_warning = TRUE, dispersion=null)
+	//The full auto clickhandler we have
+	var/datum/click_handler/fullauto/CH
+
+/datum/firemode/automatic/update(force_state = null)
+	var/mob/living/L
+	if (gun && gun.is_held())
+		L = gun.loc
+
+	var/enable = FALSE
+	//Force state is used for forcing it to be disabled in circumstances where it'd normally be valid
+	if (!isnull(force_state))
+		enable = force_state
+	else if (L && L.client)
+
+		//First of all, lets determine whether we're enabling or disabling the click handler
+
+
+		//We enable it if the gun is held in the user's active hand and the safety is off
+		if (L.get_active_hand() == gun)
+			//Lets also make sure it can fire
+			var/can_fire = TRUE
+
+			//Safety stops it
+			if (gun.safety_state)
+				can_fire = FALSE
+
+			//Projectile weapons need to have enough ammo to fire
+			if(istype(gun, /obj/item/gun/projectile))
+				var/obj/item/gun/projectile/P = gun
+				if (!P.get_ammo())
+					can_fire = FALSE
+
+			//TODO: Centralise all this into some can_fire proc
+			if (can_fire)
+				enable = TRUE
+		else
+			enable = FALSE
+
+	//Ok now lets set the desired state
+	if (!enable)
+		if (!CH)
+			//If we're turning it off, but the click handler doesn't exist, then we have nothing to do
+			return
+
+		//Todo: make client click handlers into a list
+		if (CH.owner) //Remove our handler from the client
+			CH.owner.CH = null //wew
+		QDEL_NULL(CH) //And delete it
+		return
+
+	else
+		//We're trying to turn things on
+		if (CH)
+			return //The click handler exists, we dont need to do anything
+
+
+		//Create and assign the click handler
+		//A click handler intercepts mouseup/drag/down events which allow fullauto firing
+		CH = new /datum/click_handler/fullauto()
+		CH.reciever = gun //Reciever is the gun that gets the fire events
+		L.client.CH = CH //Put it on the client
+		CH.owner = L.client //And tell it where it is
+
+
 /obj/item/gun/projectile/automatic
 	name = "prototype SMG"
 	desc = "A protoype lightweight, fast firing submachine gun."
@@ -14,15 +83,19 @@
 	magazine_type = /obj/item/ammo_magazine/proto_smg
 	allowed_magazines = /obj/item/ammo_magazine/proto_smg
 	multi_aim = 1
+	recoil_buildup = 1.2
 	burst_delay = 2
 	mag_insert_sound = 'sound/weapons/guns/interaction/smg_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/smg_magout.ogg'
 
 	//machine pistol, easier to one-hand with
-	firemodes = list(
-		list(mode_name="semi auto",       burst=1, fire_delay=null,    move_delay=null, one_hand_penalty=0, burst_accuracy=null, dispersion=null),
-		list(mode_name="4-round bursts", burst=4, fire_delay=null, move_delay=4,    one_hand_penalty=1, burst_accuracy=list(0,0,-1,-1),       dispersion=list(0.0, 0.0, 0.5, 0.6)),
-		list(mode_name="long bursts",   burst=8, fire_delay=null, move_delay=4,    one_hand_penalty=2, burst_accuracy=list(0,0,-1,-1,-1,-1,-2,-2), dispersion=list(0.0, 0.0, 0.5, 0.6, 0.8, 1.0, 1.0, 1.2)),
+	init_firemodes = list(
+		// list(mode_name="semi auto",       burst=1, fire_delay=null,    move_delay=null, one_hand_penalty=0, burst_accuracy=null, dispersion=null),
+		// list(mode_name="4-round bursts", burst=4, fire_delay=null, move_delay=4,    one_hand_penalty=1, burst_accuracy=list(0,0,-1,-1),       dispersion=list(0.0, 0.0, 0.5, 0.6)),
+		// list(mode_name="long bursts",   burst=8, fire_delay=null, move_delay=4,    one_hand_penalty=2, burst_accuracy=list(0,0,-1,-1,-1,-1,-2,-2), dispersion=list(0.0, 0.0, 0.5, 0.6, 0.8, 1.0, 1.0, 1.2)),
+			SEMI_AUTO_NODELAY,
+			BURST_3_ROUND,
+			FULL_AUTO_600
 		)
 
 /obj/item/gun/projectile/automatic/machine_pistol
@@ -33,16 +106,16 @@
 	safety_icon = "safety"
 	item_state = "mpistolen"
 	caliber = CALIBER_PISTOL
+	burst_delay = 0.5
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ESOTERIC = 3)
 	ammo_type = /obj/item/ammo_casing/pistol
 	magazine_type = /obj/item/ammo_magazine/machine_pistol
 	allowed_magazines = /obj/item/ammo_magazine/machine_pistol //more damage compared to the wt550, smaller mag size
 	one_hand_penalty = 2
 
-	firemodes = list(
-		list(mode_name="semi auto",       burst=1, fire_delay=null,    move_delay=null, one_hand_penalty=0, burst_accuracy=null, dispersion=null),
-		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    one_hand_penalty=1, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    one_hand_penalty=2, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
+	init_firemodes = list(
+			SEMI_AUTO_NODELAY,
+			BURST_3_ROUND
 		)
 
 /obj/item/gun/projectile/automatic/machine_pistol/on_update_icon()
@@ -72,6 +145,7 @@
 	caliber = CALIBER_PISTOL
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ESOTERIC = 8)
 	slot_flags = SLOT_BELT|SLOT_BACK
+	recoil_buildup = 1.5
 	magazine_type = /obj/item/ammo_magazine/smg
 	allowed_magazines = /obj/item/ammo_magazine/smg
 	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
@@ -82,10 +156,10 @@
 	one_hand_penalty = 4
 
 	//SMG
-	firemodes = list(
-		list(mode_name="semi auto",       burst=1, fire_delay=null,    move_delay=null, one_hand_penalty=4, burst_accuracy=null, dispersion=null),
-		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    one_hand_penalty=5, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    one_hand_penalty=6, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
+	init_firemodes = list(
+			SEMI_AUTO_NODELAY,
+			BURST_3_ROUND,
+			FULL_AUTO_800
 		)
 
 /obj/item/gun/projectile/automatic/merc_smg/on_update_icon()
@@ -110,7 +184,7 @@
 	magazine_type = /obj/item/ammo_magazine/rifle
 	allowed_magazines = /obj/item/ammo_magazine/rifle
 	one_hand_penalty = 8
-	accuracy_power = 7
+	recoil_buildup = 2.4
 	accuracy = 2
 	bulk = GUN_BULK_RIFLE + 1
 	wielded_item_state = "arifle-wielded"
@@ -118,10 +192,10 @@
 	mag_remove_sound = 'sound/weapons/guns/interaction/ltrifle_magout.ogg'
 
 	//Assault rifle, burst fire degrades quicker than SMG, worse one-handing penalty, slightly increased move delay
-	firemodes = list(
-		list(mode_name="semi auto",       burst=1, fire_delay=null,    move_delay=null, one_hand_penalty=8, burst_accuracy=null, dispersion=null),
-		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=6,    one_hand_penalty=9, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=6,    one_hand_penalty=11, burst_accuracy=list(0,-1,-2,-3,-3), dispersion=list(0.6, 1.0, 1.2, 1.2, 1.5)),
+	init_firemodes = list(
+			SEMI_AUTO_NODELAY,
+			BURST_3_ROUND,
+			FULL_AUTO_400
 		)
 
 /obj/item/gun/projectile/automatic/assault_rifle/on_update_icon()
@@ -148,14 +222,13 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/smg_top/rubber
 	allowed_magazines = /obj/item/ammo_magazine/smg_top
-	accuracy_power = 7
 	one_hand_penalty = 3
 
 	//machine pistol, like SMG but easier to one-hand with
-	firemodes = list(
-		list(mode_name="semi auto",       burst=1, fire_delay=null,    move_delay=null, one_hand_penalty=3, burst_accuracy=null, dispersion=null),
-		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    one_hand_penalty=4, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    one_hand_penalty=5, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
+	init_firemodes = list(
+			SEMI_AUTO_NODELAY,
+			BURST_3_ROUND,
+			FULL_AUTO_600
 		)
 
 /obj/item/gun/projectile/automatic/sec_smg/on_update_icon()
@@ -185,17 +258,16 @@
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 	accuracy = 2
-	accuracy_power = 7
 	one_hand_penalty = 8
+	recoil_buildup = 1
 	bulk = GUN_BULK_RIFLE
-	burst_delay = 4
 	wielded_item_state = "z8carbine-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/batrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/batrifle_magout.ogg'
-	firemodes = list(
-		list(mode_name="semi auto",       burst=1,    fire_delay=null,    move_delay=null, use_launcher=null, one_hand_penalty=8, burst_accuracy=null, dispersion=null),
-		list(mode_name="3-round bursts", burst=3,    fire_delay=null, move_delay=6,    use_launcher=null, one_hand_penalty=9, burst_accuracy=list(0,-1,-1), dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="fire grenades",  burst=null, fire_delay=null, move_delay=null, use_launcher=1,    one_hand_penalty=10, burst_accuracy=null, dispersion=null)
+	init_firemodes = list(
+		list(mode_name = "semiauto",  mode_desc = "Fire as fast as you can pull the trigger", use_launcher=0, burst=1, fire_delay=0, move_delay=null),
+		list(mode_name = "full auto",  mode_desc = "400 rounds per minute", use_launcher=0, mode_type = /datum/firemode/automatic, fire_delay = 4, one_hand_penalty=3),
+		list(mode_name = "fire grenades",  burst=null, fire_delay=null, move_delay=null, use_launcher=1,    one_hand_penalty=10)
 		)
 
 	var/use_launcher = 0
@@ -204,6 +276,10 @@
 /obj/item/gun/projectile/automatic/bullpup_rifle/Initialize()
 	. = ..()
 	launcher = new(src)
+
+/obj/item/gun/projectile/automatic/bullpup_rifle/refresh_upgrades()
+	use_launcher = initial(use_launcher)
+	. = ..()
 
 /obj/item/gun/projectile/automatic/bullpup_rifle/attackby(obj/item/I, mob/user)
 	if((istype(I, /obj/item/grenade)))
@@ -261,6 +337,7 @@
 	magazine_type = /obj/item/ammo_magazine/box/machinegun
 	allowed_magazines = list(/obj/item/ammo_magazine/box/machinegun, /obj/item/ammo_magazine/rifle)
 	one_hand_penalty = 10
+	recoil_buildup = 3
 	wielded_item_state = "gun_wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/lmg_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/lmg_magout.ogg'
@@ -268,10 +345,10 @@
 
 	//LMG, better sustained fire accuracy than assault rifles (comparable to SMG), higer move delay and one-handing penalty
 	//No single-shot or 3-round-burst modes since using this weapon should come at a cost to flexibility.
-	firemodes = list(
-		list(mode_name="short bursts",	can_autofire=0, burst=5, fire_delay=5, move_delay=12, one_hand_penalty=8, burst_accuracy = list(0,-1,-1,-2,-2),          dispersion = list(0.6, 1.0, 1.0, 1.0, 1.2)),
-		list(mode_name="long bursts",	can_autofire=0, burst=8, fire_delay=5, one_hand_penalty=12, burst_accuracy = list(0,-1,-1,-2,-2,-2,-3,-3), dispersion = list(1.0, 1.0, 1.0, 1.0, 1.2)),
-		list(mode_name="full auto",		can_autofire=1, burst=1, fire_delay=1, one_hand_penalty=12, burst_accuracy = list(0,-1,-1,-2,-2,-2,-3,-3), dispersion = list(1.0, 1.0, 1.0, 1.0, 1.2)),
+	init_firemodes = list(
+			BURST_5_ROUND,
+			BURST_8_ROUND,
+			FULL_AUTO_600
 		)
 
 	var/cover_open = 0
@@ -305,7 +382,7 @@
 /obj/item/gun/projectile/automatic/l6_saw/on_update_icon()
 	..()
 	if(istype(ammo_magazine, /obj/item/ammo_magazine/box))
-		icon_state = "l6[cover_open ? "open" : "closed"][round(ammo_magazine.stored_ammo.len, 10)]"
+		icon_state = "l6[cover_open ? "open" : "closed"][min(round(ammo_magazine.stored_ammo.len, 10), 50)]"
 		item_state = "l6[cover_open ? "open" : "closed"]"
 	else if(ammo_magazine)
 		icon_state = "l6[cover_open ? "open" : "closed"]mag"
@@ -341,7 +418,6 @@
 	magazine_type = /obj/item/ammo_magazine/mil_rifle
 	allowed_magazines = /obj/item/ammo_magazine/mil_rifle
 	one_hand_penalty = 10
-	accuracy_power = 9
 	accuracy = 1
 	bulk = GUN_BULK_RIFLE + 1
 	wielded_item_state = "battlerifle-wielded"
@@ -349,9 +425,9 @@
 	mag_remove_sound = 'sound/weapons/guns/interaction/ltrifle_magout.ogg'
 
 	//Battle Rifle is only accurate in semi-automatic fire.
-	firemodes = list(
-		list(mode_name="semi auto",       burst=1, fire_delay=null,    move_delay=null, one_hand_penalty=8, burst_accuracy=null, dispersion=null),
-		list(mode_name="full auto",		can_autofire=1, burst=1, fire_delay=1, one_hand_penalty=12, burst_accuracy = list(0,-1,-2,-3,-4,-4,-4,-4,-4), dispersion = list(1.0, 1.0, 1.0, 1.0, 1.2)),
+	init_firemodes = list(
+			SEMI_AUTO_NODELAY,
+			FULL_AUTO_400
 		)
 
 /obj/item/gun/projectile/automatic/battlerifle/on_update_icon()
@@ -362,5 +438,3 @@
 	else
 		icon_state = "battlerifle-empty"
 		wielded_item_state = "battlerifle-wielded-empty"
-
-

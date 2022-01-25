@@ -8,7 +8,7 @@
 	projectile_type = /obj/item/projectile/beam/stun
 	combustion = 0
 
-	firemodes = list(
+	init_firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
 		)
@@ -28,7 +28,7 @@
 	projectile_type = /obj/item/projectile/beam/stun/heavy
 	wielded_item_state = "tasercarbine-wielded"
 
-	firemodes = list(
+	init_firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun/heavy),
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock/heavy),
 		)

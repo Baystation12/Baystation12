@@ -86,13 +86,13 @@
 
 //The base miss chance for the different defence zones
 var/list/global/base_miss_chance = list(
-	BP_HEAD = 70,
+	BP_HEAD = 60,
 	BP_CHEST = 10,
 	BP_GROIN = 20,
-	BP_L_LEG = 60,
-	BP_R_LEG = 60,
-	BP_L_ARM = 30,
-	BP_R_ARM = 30,
+	BP_L_LEG = 50,
+	BP_R_LEG = 50,
+	BP_L_ARM = 20,
+	BP_R_ARM = 20,
 	BP_L_HAND = 50,
 	BP_R_HAND = 50,
 	BP_L_FOOT = 70,
@@ -290,7 +290,7 @@ proc/Gibberish(t, p)//t is the inputted message, and any value higher than 70 fo
 	return returntext
 
 
-/proc/shake_camera(mob/M, duration, strength=1)
+/proc/shake_camera(mob/M, duration, strength=1, var/taper = 0.25)
 	if(!M || !M.client || M.shakecamera || M.stat || isEye(M) || isAI(M))
 		return
 	M.shakecamera = 1
@@ -312,6 +312,21 @@ proc/Gibberish(t, p)//t is the inputted message, and any value higher than 70 fo
 			sleep(1)
 			if(!M.client)
 				return
+		//Taper code added by nanako.
+		//Will make the strength falloff after the duration.
+		//This helps to reduce jarring effects of major screenshaking suddenly returning to stability
+		//Recommended taper values are 0.05-0.1
+
+		if (taper > 0)
+			while (strength > 0)
+				strength -= taper
+				if(aiEyeFlag)
+					M.client.eye = locate(dd_range(1,oldeye.loc.x+rand(-strength,strength),world.maxx),dd_range(1,oldeye.loc.y+rand(-strength,strength),world.maxy),oldeye.loc.z)
+				else
+					M.client.eye = locate(dd_range(1,M.loc.x+rand(-strength,strength),world.maxx),dd_range(1,M.loc.y+rand(-strength,strength),world.maxy),M.loc.z)
+				sleep(1)
+				if(!M.client)
+					return
 
 		M.client.eye=oldeye
 		M.shakecamera = 0

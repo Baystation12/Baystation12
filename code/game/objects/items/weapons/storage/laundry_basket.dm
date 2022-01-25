@@ -48,7 +48,7 @@
 	O.linked = src
 	user.put_in_inactive_hand(O)
 	linked = O
-	return
+	return ..()
 
 /obj/item/storage/laundry_basket/on_update_icon()
 	if(contents.len)
@@ -85,4 +85,3 @@
 	..()
 	user.drop_from_inventory(linked)
 	return
-

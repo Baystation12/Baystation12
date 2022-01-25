@@ -7,36 +7,43 @@
 */
 /datum/firemode
 	var/name = "default"
+	var/desc = "The default firemode"
 	var/list/settings = list()
-	var/list/original_settings
+	var/obj/item/gun/gun = null
 
-/datum/firemode/New(obj/item/gun/gun, list/properties = null)
+/datum/firemode/New(obj/item/gun/_gun, list/properties = null)
 	..()
-	if(!properties) return
+	if(!properties || !properties.len) return
 
+	gun = _gun
 	for(var/propname in properties)
 		var/propvalue = properties[propname]
-
 		if(propname == "mode_name")
 			name = propvalue
+		else if(propname == "mode_desc")
+			desc = propvalue
 		else if(isnull(propvalue))
-			settings[propname] = gun.vars[propname] //better than initial() as it handles list vars like burst_accuracy
+			settings[propname] = gun.vars[propname] //better than initial() as it handles list vars like dispersion
 		else
 			settings[propname] = propvalue
 
-/datum/firemode/proc/apply_to(obj/item/gun/gun)
-	LAZYINITLIST(original_settings)
+/datum/firemode/Destroy()
+	gun = null
+	return ..()
+
+/datum/firemode/proc/apply_to(obj/item/gun/_gun)
+	gun = _gun
 
 	for(var/propname in settings)
-		original_settings[propname] = gun.vars[propname]
-		gun.vars[propname] = settings[propname]
+		if(propname in gun.vars)
+			gun.vars[propname] = settings[propname]
 
-/datum/firemode/proc/restore_original_settings(obj/item/gun/gun)
-	if (LAZYLEN(original_settings))
-		for (var/propname in original_settings)
-			gun.vars[propname] = original_settings[propname]
+			// Apply gunmods effects that have been erased by the previous line
 
-		LAZYCLEARLIST(original_settings)
+//Called whenever the firemode is switched to, or the gun is picked up while its active
+/datum/firemode/proc/update()
+	return
+
 
 //Parent gun type. Guns are weapons that can be aimed at mobs and act over a distance
 /obj/item/gun
@@ -77,22 +84,27 @@
 	var/last_handled		//time when hand gun's in became active, for purposes of aiming bonuses
 	var/scoped_accuracy = null  //accuracy used when zoomed in a scope
 	var/scope_zoom = 0
+	var/projectile_color
 	var/list/burst_accuracy = list(0) //allows for different accuracies for each shot in a burst. Applied on top of accuracy
-	var/list/dispersion = list(0)
+	// var/list/dispersion = list(0)
 	var/one_hand_penalty
 	var/wielded_item_state
 	var/combustion	//whether it creates hotspot when fired
+	var/init_offset = 0
+	var/recoil_buildup = 2
 
 	var/next_fire_time = 0
 
 	var/sel_mode = 1 //index of the currently selected mode
 	var/list/firemodes = list()
+	var/list/init_firemodes = list()
 	var/selector_sound = 'sound/weapons/guns/selector.ogg'
 
 	//aiming system stuff
 	var/keep_aim = 1 	//1 for keep shooting until aim is lowered
 						//0 for one bullet after tarrget moves and aim is lowered
 	var/multi_aim = 0 //Used to determine if you can target multiple people.
+	var/aim_tag = 0 // for automatic shit
 	var/tmp/list/mob/living/aim_targets //List of who yer targeting.
 	var/tmp/mob/living/last_moved_mob //Used to fire faster at more than one person.
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
@@ -104,8 +116,11 @@
 
 /obj/item/gun/Initialize()
 	. = ..()
-	for(var/i in 1 to firemodes.len)
-		firemodes[i] = new /datum/firemode(src, firemodes[i])
+
+	initialize_firemodes()
+
+	if(firemodes.len)
+		set_firemode(sel_mode)
 
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
@@ -117,6 +132,16 @@
 	if(one_hand_penalty)
 		update_icon() // In case item_state is set somewhere else.
 	..()
+
+/obj/item/gun/projectile/proc/get_ammo()
+	var/bullets = 0
+	if(loaded)
+		bullets += loaded.len
+	if(ammo_magazine && ammo_magazine.stored_ammo)
+		bullets += ammo_magazine.stored_ammo.len
+	if(chambered)
+		bullets += 1
+	return bullets
 
 /obj/item/gun/on_update_icon()
 	var/mob/living/M = loc
@@ -209,16 +234,16 @@
 	else
 		return ..() //Pistolwhippin'
 
-/obj/item/gun/dropped(var/mob/living/user)
-	check_accidents(user)
-	update_icon()
-	return ..()
-
 /obj/item/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
 	if(target.z != user.z) return
 
 	add_fingerprint(user)
+
+	if(world.time < next_fire_time)
+		if (world.time % 3) //to prevent spam
+			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
+		return
 
 	if((!waterproof && submerged()) || !special_check(user))
 		return
@@ -230,15 +255,11 @@
 			handle_click_safety(user)
 			return
 
-	if(world.time < next_fire_time)
-		if (world.time % 3) //to prevent spam
-			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
-		return
 
 	last_safety_check = world.time
 	var/shoot_time = (burst - 1)* burst_delay
 	user.setClickCooldown(shoot_time) //no clicking on things while shooting
-	user.SetMoveCooldown(shoot_time) //no moving while shooting either
+	// user.SetMoveCooldown(shoot_time) //no moving while shooting either
 	next_fire_time = world.time + shoot_time
 
 	var/held_twohanded = (user.can_wield_item(src) && src.is_held_twohanded(user))
@@ -246,6 +267,8 @@
 	//actually attempt to shoot
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.
 	for(var/i in 1 to burst)
+		if(src.loc != user)
+			break
 		var/obj/projectile = consume_next_projectile(user)
 		if(!projectile)
 			handle_click_empty(user)
@@ -255,7 +278,11 @@
 
 		if(pointblank)
 			process_point_blank(projectile, user, target)
-
+		if(projectile_color)
+			projectile.icon = get_proj_icon_by_color(projectile, projectile_color)
+			if(istype(projectile, /obj/item/projectile))
+				var/obj/item/projectile/P = projectile
+				P.proj_color = projectile_color
 		if(process_projectile(projectile, user, target, user.zone_sel?.selecting, clickparams))
 			handle_post_fire(user, target, pointblank, reflex)
 			update_icon()
@@ -268,10 +295,9 @@
 			pointblank = 0
 
 	//update timing
-	var/delay = max(burst_delay+1, fire_delay)
-	user.setClickCooldown(min(delay, DEFAULT_QUICK_COOLDOWN))
+	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	user.SetMoveCooldown(move_delay)
-	next_fire_time = world.time + delay
+	next_fire_time = world.time + fire_delay
 
 //obtains the next projectile to fire
 /obj/item/gun/proc/consume_next_projectile()
@@ -292,12 +318,13 @@
 	else
 		src.visible_message("*click click*")
 	playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
+	update_firemode()
 
 /obj/item/gun/proc/handle_click_safety(mob/user)
 	user.visible_message(SPAN_WARNING("[user] squeezes the trigger of \the [src] but it doesn't move!"), SPAN_WARNING("You squeeze the trigger but it doesn't move!"), range = 3)
 
 //called after successfully firing
-/obj/item/gun/proc/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
+/obj/item/gun/proc/handle_post_fire(mob/living/user, atom/target, var/pointblank=0, var/reflex=0)
 	if(fire_anim)
 		flick(fire_anim, src)
 
@@ -319,8 +346,9 @@
 				"shot point blank (\a [type])"
 			)
 
+		var/is_twohanded = (user.can_wield_item(src) && src.is_held_twohanded(user))
 		if(one_hand_penalty)
-			if(!src.is_held_twohanded(user))
+			if(!is_twohanded)
 				switch(one_hand_penalty)
 					if(4 to 6)
 						if(prob(50)) //don't need to tell them every single time
@@ -329,19 +357,17 @@
 						to_chat(user, "<span class='warning'>You have trouble keeping \the [src] on target with just one hand.</span>")
 					if(8 to INFINITY)
 						to_chat(user, "<span class='warning'>You struggle to keep \the [src] on target with just one hand!</span>")
-			else if(!user.can_wield_item(src))
-				switch(one_hand_penalty)
-					if(4 to 6)
-						if(prob(50)) //don't need to tell them every single time
-							to_chat(user, "<span class='warning'>Your aim wavers slightly.</span>")
-					if(6 to 8)
-						to_chat(user, "<span class='warning'>You have trouble holding \the [src] steady.</span>")
-					if(8 to INFINITY)
-						to_chat(user, "<span class='warning'>You struggle to hold \the [src] steady!</span>")
 
 		if(screen_shake)
+			var/sv = user.get_skill_value(SKILL_WEAPONS)
+			var/skill_mod = (2-sv)*0.2
+			var/sh = max(screen_shake/2+skill_mod, 0)
 			spawn()
-				shake_camera(user, screen_shake+1, screen_shake)
+				shake_camera(user, screen_shake, sh, 0.5)
+			if (prob(40) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC) && screen_shake >= 2 || \
+							!user.skill_check(SKILL_WEAPONS, SKILL_ADEPT) && !is_twohanded)
+				user.visible_message(SPAN_WARNING("The [user] couldn't handle recoil and dropped their weapon!"))
+				user.drop_from_inventory(src)
 
 	if(combustion)
 		var/turf/curloc = get_turf(src)
@@ -355,6 +381,7 @@
 			for(var/obj/item/rig_module/stealth_field/S in R.installed_modules)
 				S.deactivate()
 
+	user.handle_recoil(src)
 	update_icon()
 
 
@@ -380,8 +407,7 @@
 	if(!istype(P))
 		return //default behaviour only applies to true projectiles
 
-	var/acc_mod = burst_accuracy[min(burst, burst_accuracy.len)]
-	var/disp_mod = dispersion[min(burst, dispersion.len)]
+	var/acc_mod = 0
 	var/stood_still = last_handled
 	//Not keeping gun active will throw off aim (for non-Masters)
 	if(user.skill_check(SKILL_WEAPONS, SKILL_PROF))
@@ -398,26 +424,19 @@
 
 	if(one_hand_penalty >= 4 && !held_twohanded)
 		acc_mod -= one_hand_penalty/2
-		disp_mod += one_hand_penalty*0.5 //dispersion per point of two-handedness
 
 	if(burst > 1 && !user.skill_check(SKILL_WEAPONS, SKILL_ADEPT))
 		acc_mod -= 1
-		disp_mod += 0.5
 
-	//accuracy bonus from aiming
 	if (aim_targets && (target in aim_targets))
-		//If you aim at someone beforehead, it'll hit more often.
-		//Kinda balanced by fact you need like 2 seconds to aim
-		//As opposed to no-delay pew pew
 		acc_mod += 2
 
 	acc_mod += user.ranged_accuracy_mods()
 	acc_mod += accuracy
 	P.hitchance_mod = accuracy_power*acc_mod
-	P.dispersion = disp_mod
 
 //does the actual launching of the projectile
-/obj/item/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null)
+/obj/item/gun/proc/process_projectile(obj/projectile, mob/living/user, atom/target, var/target_zone, var/params=null)
 	var/obj/item/projectile/P = projectile
 	if(!istype(P))
 		return 0 //default behaviour only applies to true projectiles
@@ -425,19 +444,22 @@
 	if(params)
 		P.set_clickpoint(params)
 
-	//shooting while in shock
-	var/x_offset = 0
-	var/y_offset = 0
+	var/offset
+	if(user.recoil)
+		offset += user.recoil
+
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/mob = user
 		if(mob.shock_stage > 120)
-			y_offset = rand(-2,2)
-			x_offset = rand(-2,2)
+			offset += 2
 		else if(mob.shock_stage > 70)
-			y_offset = rand(-1,1)
-			x_offset = rand(-1,1)
+			offset += 1
 
-	var/launched = !P.launch_from_gun(target, user, src, target_zone, x_offset, y_offset)
+	offset = min(offset, MAX_ACCURACY_OFFSET)
+	offset = rand(-offset, offset)
+
+
+	var/launched = !P.launch_from_gun(target, user, src, target_zone, angle_offset = offset)
 
 	if(launched)
 		play_fire_sound(user,P)
@@ -559,19 +581,14 @@
 	last_safety_check = world.time
 
 /obj/item/gun/proc/switch_firemodes()
-
-	var/next_mode = get_next_firemode()
-	if(!next_mode || next_mode == sel_mode)
+	if(firemodes.len <= 1)
 		return null
-
-	var/datum/firemode/old_mode = firemodes[sel_mode]
-	old_mode.restore_original_settings(src)
-
-	sel_mode = next_mode
-	var/datum/firemode/new_mode = firemodes[sel_mode]
-	new_mode.apply_to(src)
-	playsound(loc, selector_sound, 50, 1)
-	return new_mode
+	update_firemode(FALSE)
+	var/sel = get_next_firemode()
+	if(sel)
+		playsound(loc, selector_sound, 50, 1)
+		sel_mode = sel
+		return set_firemode(sel_mode)
 
 /obj/item/gun/proc/get_next_firemode()
 	if(firemodes.len <= 1)
@@ -579,6 +596,77 @@
 	. = sel_mode + 1
 	if(. > firemodes.len)
 		. = 1
+
+/obj/item/gun/proc/set_firemode(index)
+	refresh_upgrades()
+	if(index > firemodes.len)
+		index = 1
+	var/datum/firemode/new_mode = firemodes[sel_mode]
+	new_mode.apply_to(src)
+	new_mode.update()
+	return new_mode
+
+/obj/item/gun/proc/add_firemode(list/firemode)
+	//If this var is set, it means spawn a specific subclass of firemode
+	if (firemode["mode_type"])
+		var/newtype = firemode["mode_type"]
+		firemodes.Add(new newtype(src, firemode))
+	else
+		firemodes.Add(new /datum/firemode(src, firemode))
+
+/obj/item/gun/proc/very_unsafe_set_firemode(index)
+	if(index > firemodes.len)
+		index = 1
+	var/datum/firemode/new_mode = firemodes[sel_mode]
+	new_mode.apply_to(src)
+	new_mode.update()
+	return new_mode
+
+/obj/item/gun/proc/update_firemode(force_state = null)
+	if (sel_mode && firemodes && firemodes.len)
+		var/datum/firemode/new_mode = firemodes[sel_mode]
+		new_mode.update(force_state)
+
+/obj/item/gun/refresh_upgrades()
+	fire_delay = initial(fire_delay)
+	move_delay = initial(move_delay)
+	silenced = initial(silenced)
+	fire_sound = initial(fire_sound)
+	force = initial(force)
+	armor_penetration = initial(armor_penetration)
+	sharp = initial(sharp)
+	attack_verb = list()
+	one_hand_penalty = initial(one_hand_penalty)
+	initialize_firemodes()
+
+	if(firemodes.len)
+		very_unsafe_set_firemode(sel_mode) // Reset the firemode so it gets the new changes
+
+/obj/item/gun/proc/initialize_firemodes()
+	QDEL_CLEAR_LIST(firemodes)
+
+	for(var/i in 1 to init_firemodes.len)
+		var/list/L = init_firemodes[i]
+		add_firemode(L)
+
+/obj/item/gun/pickup(mob/user)
+	.=..()
+	update_firemode()
+
+/obj/item/gun/dropped(mob/user)
+	.=..()
+	check_accidents(user)
+	update_icon()
+	update_firemode(FALSE)
+
+/obj/item/gun/swapped_from()
+	.=..()
+	update_firemode(FALSE)
+
+/obj/item/gun/swapped_to()
+	.=..()
+	update_firemode()
+
 
 /obj/item/gun/attack_self(mob/user)
 	var/datum/firemode/new_mode = switch_firemodes(user)
@@ -612,12 +700,15 @@
 	. = ..()
 
 /obj/item/gun/proc/safety()
+	update_firemode()
 	return has_safety && safety_state
 
 /obj/item/gun/equipped()
-	..()
+	. = ..()
 	update_icon()
 	last_handled = world.time
+	if(!is_held())
+		update_firemode(FALSE)
 
 /obj/item/gun/on_active_hand()
 	last_handled = world.time

@@ -27,7 +27,6 @@
 	var/p_y = 16 // the pixel location of the tile that the player clicked. Default is the center
 
 	var/hitchance_mod = 0
-	var/dispersion = 0.0
 	var/distance_falloff = 2  //multiplier, higher value means accuracy drops faster with distance
 
 	var/damage = 10
@@ -64,6 +63,8 @@
 	var/shrapnel_type = /obj/item/material/shard/shrapnel
 
 	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
+
+	var/proj_color
 
 	var/datum/plot_vector/trajectory	// used to plot the path of the projectile
 	var/datum/vector_loc/location		// current location of the projectile in pixel space
@@ -130,11 +131,11 @@
 	if(mouse_control["icon-y"])
 		p_y = text2num(mouse_control["icon-y"])
 
-	//randomize clickpoint a bit based on dispersion
-	if(dispersion)
-		var/radius = round((dispersion*0.443)*world.icon_size*0.8) //0.443 = sqrt(pi)/4 = 2a, where a is the side length of a square that shares the same area as a circle with diameter = dispersion
-		p_x = between(0, p_x + rand(-radius, radius), world.icon_size)
-		p_y = between(0, p_y + rand(-radius, radius), world.icon_size)
+	// //randomize clickpoint a bit based on dispersion
+	// if(dispersion)
+	// 	var/radius = round((dispersion*0.443)*world.icon_size*0.8) //0.443 = sqrt(pi)/4 = 2a, where a is the side length of a square that shares the same area as a circle with diameter = dispersion
+	// 	p_x = between(0, p_x + rand(-radius, radius), world.icon_size)
+	// 	p_y = between(0, p_y + rand(-radius, radius), world.icon_size)
 
 //called to launch a projectile
 /obj/item/projectile/proc/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0, var/angle_offset=0)
@@ -172,7 +173,7 @@
 		QDEL_NULL_LIST(segments)
 
 //called to launch a projectile from a gun
-/obj/item/projectile/proc/launch_from_gun(atom/target, mob/user, obj/item/gun/launcher, var/target_zone, var/x_offset=0, var/y_offset=0)
+/obj/item/projectile/proc/launch_from_gun(atom/target, mob/user, obj/item/gun/launcher, var/target_zone, var/x_offset=0, var/y_offset=0, var/angle_offset)
 	if(user == target) //Shooting yourself
 		user.bullet_act(src, target_zone)
 		qdel(src)
@@ -184,7 +185,7 @@
 	shot_from = launcher.name
 	silenced = launcher.silenced
 
-	return launch(target, target_zone, x_offset, y_offset)
+	return launch(target, target_zone, x_offset, y_offset, angle_offset)
 
 //Used to change the direction of the projectile in flight.
 /obj/item/projectile/proc/redirect(var/new_x, var/new_y, var/atom/starting_loc, var/mob/new_firer=null)
@@ -266,6 +267,8 @@
 	var/passthrough = 0 //if the projectile should continue flying
 	var/distance = get_dist(starting,loc)
 
+	var/tempLoc = get_turf(A)
+
 	bumped = 1
 	if(ismob(A))
 		var/mob/M = A
@@ -297,10 +300,14 @@
 	//the bullet passes through a dense object!
 	if(passthrough)
 		//move ourselves onto A so we can continue on our way.
-		var/turf/T = get_turf(A)
-		if(T)
-			forceMove(T)
-		permutated.Add(A)
+		if(!tempLoc)
+			qdel(src)
+			return TRUE
+
+		loc = tempLoc
+		if(A)
+			permutated.Add(A)
+
 		bumped = 0 //reset bumped variable!
 		return 0
 
@@ -346,6 +353,8 @@
 
 		before_move()
 		Move(location.return_turf())
+		pixel_x = location.pixel_x
+		pixel_y = location.pixel_y
 
 		if(!bumped && !isturf(original))
 			if(loc == get_turf(original))
@@ -364,31 +373,28 @@
 /obj/item/projectile/proc/before_move()
 	return 0
 
-/obj/item/projectile/proc/setup_trajectory(turf/startloc, turf/targloc, var/x_offset = 0, var/y_offset = 0)
+/obj/item/projectile/proc/setup_trajectory(turf/startloc, turf/targloc, var/x_offset = 0, var/y_offset = 0, var/angle_offset)
 	// setup projectile state
 	starting = startloc
 	current = startloc
 	yo = round(targloc.y - startloc.y + y_offset, 1)
 	xo = round(targloc.x - startloc.x + x_offset, 1)
 
-	// trajectory dispersion
-	var/offset = 0
-	if(dispersion)
-		var/radius = round(dispersion*9, 1)
-		offset = rand(-radius, radius)
-
 	// plot the initial trajectory
 	trajectory = new()
-	trajectory.setup(starting, original, pixel_x, pixel_y, angle_offset=offset)
+	trajectory.setup(starting, original, pixel_x, pixel_y, angle_offset)
 
 	// generate this now since all visual effects the projectile makes can use it
 	effect_transform = new()
-	effect_transform.Scale(round(trajectory.return_hypotenuse() + 0.005, 0.001) , 1) //Seems like a weird spot to truncate, but it minimizes gaps.
-	effect_transform.Turn(round(-trajectory.return_angle(), 0.1))		//no idea why this has to be inverted, but it works
+	effect_transform.Scale(trajectory.return_hypotenuse(), 1)
+	effect_transform.Turn(-trajectory.return_angle())		//no idea why this has to be inverted, but it works
 
 	transform = turn(transform, -(trajectory.return_angle() + 90)) //no idea why 90 needs to be added, but it works
 
 /obj/item/projectile/proc/muzzle_effect(var/matrix/T)
+	if (!location)
+		return
+
 	if(silenced)
 		return
 
@@ -396,35 +402,53 @@
 		var/obj/effect/projectile/M = new muzzle_type(get_turf(src))
 
 		if(istype(M))
+			if(proj_color)
+				var/icon/I = new(M.icon, M.icon_state)
+				I.Blend(proj_color)
+				M.icon = I
 			M.set_transform(T)
-			M.pixel_x = round(location.pixel_x, 1)
-			M.pixel_y = round(location.pixel_y, 1)
+			M.pixel_x = location.pixel_x
+			M.pixel_y = location.pixel_y
 			if(!hitscan) //Bullets don't hit their target instantly, so we can't link the deletion of the muzzle flash to the bullet's Destroy()
 				QDEL_IN(M,1)
 			else
 				segments += M
 
 /obj/item/projectile/proc/tracer_effect(var/matrix/M)
+	if (!location)
+		return
+
 	if(ispath(tracer_type))
 		var/obj/effect/projectile/P = new tracer_type(location.loc)
 
 		if(istype(P))
+			if(proj_color)
+				var/icon/I = new(P.icon, P.icon_state)
+				I.Blend(proj_color)
+				P.icon = I
 			P.set_transform(M)
-			P.pixel_x = round(location.pixel_x, 1)
-			P.pixel_y = round(location.pixel_y, 1)
+			P.pixel_x = location.pixel_x
+			P.pixel_y = location.pixel_y
 			if(!hitscan)
 				QDEL_IN(M,1)
 			else
 				segments += P
 
 /obj/item/projectile/proc/impact_effect(var/matrix/M)
+	if (!location)
+		return
+
 	if(ispath(impact_type))
 		var/obj/effect/projectile/P = new impact_type(location ? location.loc : get_turf(src))
 
 		if(istype(P) && location)
+			if(proj_color)
+				var/icon/I = new(P.icon, P.icon_state)
+				I.Blend(proj_color)
+				P.icon = I
 			P.set_transform(M)
-			P.pixel_x = round(location.pixel_x, 1)
-			P.pixel_y = round(location.pixel_y, 1)
+			P.pixel_x = location.pixel_x
+			P.pixel_y = location.pixel_y
 			segments += P
 
 //"Tracing" projectile
@@ -527,3 +551,8 @@
 		SP.SetName((name != "shrapnel")? "[name] shrapnel" : "shrapnel")
 		SP.desc += " It looks like it was fired from [shot_from]."
 		return SP
+
+/proc/get_proj_icon_by_color(var/obj/item/projectile/P, var/color)
+	var/icon/I = new(P.icon, P.icon_state)
+	I.Blend(color)
+	return I

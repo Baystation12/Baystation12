@@ -8,14 +8,14 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	handle_casings = CYCLE_CASINGS
 	max_shells = 6
-	fire_delay = 12 //Revolvers are naturally slower-firing
+	fire_delay = 3  //Revolvers are naturally slower-firing
 	ammo_type = /obj/item/ammo_casing/pistol/magnum
 	var/chamber_offset = 0 //how many empty chambers in the cylinder until you hit a round
 	mag_insert_sound = 'sound/weapons/guns/interaction/rev_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/rev_magout.ogg'
 	accuracy = 2
-	accuracy_power = 8
-	one_hand_penalty = 2
+	one_hand_penalty = 3
+	recoil_buildup = 8
 	bulk = 3
 
 /obj/item/gun/projectile/revolver/AltClick()

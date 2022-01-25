@@ -38,18 +38,19 @@
 	if(selected_system)
 		return selected_system.MouseDragInteraction(src_object, over_object, src_location, over_location, src_control, over_control, params, user)
 
-/datum/click_handler/default/mech/OnClick(var/atom/A, var/params)
-	var/mob/living/exosuit/E = user.loc
+/datum/click_handler/mech/Click(atom/target, location, control, params)
+	var/mob/living/exosuit/E = owner.mob.loc
 	if(!istype(E))
 		//If this happens something broke tbh
-		user.RemoveClickHandler(src)
+		QDEL_NULL(src)
 		return
-	if(E.hatch_closed)
-		return E.ClickOn(A, params, user)
-	else return ..()
+	if(E.hatch_closed && !isHUDobj(target))
+		return E.ClickOn(target, params, owner.mob)
+	else return TRUE
 
-/datum/click_handler/default/mech/OnDblClick(var/atom/A, var/params)
-	OnClick(A, params)
+
+/datum/click_handler/mech/OnDblClick(var/atom/A, var/params)
+	return TRUE
 
 /mob/living/exosuit/allow_click_through(atom/A, params, mob/user)
 	if(LAZYISIN(pilots, user) && !hatch_closed)
@@ -250,7 +251,9 @@
 	if(user.client) user.client.screen |= hud_elements
 	LAZYDISTINCTADD(user.additional_vision_handlers, src)
 	update_pilots()
-	user.PushClickHandler(/datum/click_handler/default/mech)
+	if(user && user.client)
+		user.client.CH = new /datum/click_handler/mech(user.client)
+	// user.PushClickHandler(/datum/click_handler/mech)
 	return 1
 
 /mob/living/exosuit/proc/sync_access()
@@ -275,7 +278,10 @@
 		if(!silent)
 			to_chat(user, SPAN_NOTICE("You climb out of \the [src]."))
 
-	user.RemoveClickHandler(/datum/click_handler/default/mech)
+	// user.RemoveClickHandler(/datum/click_handler/mech)
+	if(user && user.client)
+		QDEL_NULL(user.client.CH)
+
 	user.dropInto(loc)
 	LAZYREMOVE(user.additional_vision_handlers, src)
 	if(user.client)

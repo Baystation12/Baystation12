@@ -18781,8 +18781,6 @@
 /obj/item/gun/energy/laser/secure,
 /obj/item/gun/energy/laser/secure,
 /obj/item/gun/energy/laser/secure,
-/obj/item/gun/energy/laser/secure,
-/obj/item/gun/energy/laser/secure,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "hGb" = (
@@ -19389,9 +19387,14 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/item/shield/riot/metal,
-/obj/item/shield/riot/metal,
-/obj/item/shield/riot/metal,
+/obj/item/cell/guncell/medium,
+/obj/item/cell/guncell/medium,
+/obj/item/cell/guncell/medium,
+/obj/item/cell/guncell/medium,
+/obj/item/cell/guncell/medium,
+/obj/item/cell/guncell/medium,
+/obj/item/gun/energy/k342,
+/obj/item/gun/energy/k342,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "iAZ" = (
@@ -25884,6 +25887,9 @@
 /obj/item/storage/box/flashbangs,
 /obj/item/storage/box/smokes,
 /obj/item/storage/box/handcuffs,
+/obj/item/shield/riot/metal,
+/obj/item/shield/riot/metal,
+/obj/item/shield/riot/metal,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "qKU" = (

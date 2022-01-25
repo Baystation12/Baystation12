@@ -131,6 +131,8 @@
 	desc = "Not much more than a tube and a firing mechanism, this grenade launcher is designed to be fitted to a rifle."
 	w_class = ITEM_SIZE_NORMAL
 	force = 5
+	has_safety = FALSE
+	safety_state = 0
 	max_grenades = 0
 
 /obj/item/gun/launcher/grenade/underslung/attack_self()

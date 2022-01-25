@@ -23,6 +23,41 @@
 // 1 decisecond click delay (above and beyond mob/next_move)
 /mob/var/next_click = 0
 
+
+/client/MouseDown(object,location,control,params)
+
+	if (CH)
+		if (!CH.MouseDown(object,location,control,params))
+			return
+	.=..()
+
+/client/MouseUp(object,location,control,params)
+	if (CH)
+		if (!CH.MouseUp(object,location,control,params))
+			return
+	.=..()
+
+/client/MouseDrag(over_object,src_location,over_location,src_control,over_control,params)
+	if (CH)
+		if (!CH.MouseDrag(over_object,src_location,over_location,src_control,over_control,params))
+			return
+	.=..()
+
+
+/client/Click(var/atom/target, location, control, params)
+	var/list/L = params2list(params) //convert params into a list
+	var/dragged = L["drag"] //grab what mouse button they are dragging with, if any.
+	if(dragged && !L[dragged]) //check to ensure they aren't using drag clicks to aimbot
+		return //if they are dragging, and they clicked with a different mouse button, reject the click as it will always go the atom they are currently dragging, even if out of view and not under the mouse
+
+	if (CH)
+		if (!CH.Click(target, location, control, params))
+			return
+
+
+	if(!target.Click(location, control, params))
+		usr.ClickOn(target, params)
+
 /*
 	Before anything else, defer these calls to a per-mobtype handler.  This allows us to
 	remove istype() spaghetti code, but requires the addition of other handler procs to simplify it.
@@ -33,18 +68,14 @@
 	Note that this proc can be overridden, and is in the case of screen objects.
 */
 
-/atom/Click(var/location, var/control, var/params) // This is their reaction to being clicked on (standard proc)
-	var/list/L = params2list(params)
-	var/dragged = L["drag"]
-	if(dragged && !L[dragged])
-		return
-
-	var/datum/click_handler/click_handler = usr.GetClickHandler()
-	click_handler.OnClick(src, params)
-
 /atom/DblClick(var/location, var/control, var/params)
-	var/datum/click_handler/click_handler = usr.GetClickHandler()
-	click_handler.OnDblClick(src, params)
+	if(usr.client)
+		if(usr.client.CH)
+			usr.client.CH.OnDblClick(src, params)
+			return
+
+	if(src)
+		usr.DblClickOn(src, params)
 
 /atom/proc/allow_click_through(var/atom/A, var/params, var/mob/user)
 	return FALSE
@@ -61,11 +92,13 @@
 	is recieving it.
 	The most common are:
 	* mob/UnarmedAttack(atom,adjacent) - used here only when adjacent, with no item in hand; in the case of humans, checks gloves
-	* atom/attackby(item,user) - used only when adjacent
+	* atom/attackby(item,usser) - used only when adjacent
 	* item/afterattack(atom,user,adjacent,params) - used both ranged and adjacent
 	* mob/RangedAttack(atom,params) - used only ranged, only used for tk and laser eyes but could be changed
 */
 /mob/proc/ClickOn(var/atom/A, var/params)
+	if(!canClick()) // in the year 2000...
+		return
 
 	if(world.time <= next_click) // Hard check, before anything else, to avoid crashing
 		return
@@ -98,9 +131,6 @@
 	// Do not allow player facing change in fixed chairs
 	if(!istype(buckled) || buckled.buckle_movable)
 		face_atom(A) // change direction to face what you clicked on
-
-	if(!canClick()) // in the year 2000...
-		return
 
 	if(restrained())
 		setClickCooldown(10)
@@ -408,5 +438,11 @@ GLOBAL_LIST_INIT(click_catchers, create_click_catcher())
 	else
 		var/turf/T = screen_loc2turf(screen_loc, get_turf(usr))
 		if(T)
-			T.Click(location, control, params)
+			// T.Click(location, control, params)
+			usr.client.Click(T, location, control, params)
+
 	. = 1
+
+/obj/screen/click_catcher/proc/resolve(var/mob/user)
+	var/turf/T = screen_loc2turf(screen_loc, get_turf(user))
+	return T

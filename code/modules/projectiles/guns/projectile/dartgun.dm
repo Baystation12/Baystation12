@@ -58,6 +58,7 @@
 	magazine_type = /obj/item/ammo_magazine/chemdart
 	allowed_magazines = /obj/item/ammo_magazine/chemdart
 	auto_eject = 0
+	recoil_buildup = 0
 	handle_casings = CLEAR_CASINGS //delete casings instead of dropping them
 
 	var/list/beakers = list() //All containers inside the gun.

@@ -6,7 +6,7 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	w_class = ITEM_SIZE_NORMAL
 	matter = list(MATERIAL_STEEL = 1000)
-	screen_shake = 1
+	screen_shake = 2
 	combustion = 1
 
 	var/caliber = CALIBER_PISTOL		//determines which casings will fit
@@ -30,7 +30,7 @@
 	var/mag_insert_sound = 'sound/weapons/guns/interaction/pistol_magin.ogg'
 	var/mag_remove_sound = 'sound/weapons/guns/interaction/pistol_magout.ogg'
 	var/can_special_reload = TRUE //Whether or not we can tactical/speed reload
-	
+
 	var/is_jammed = 0           //Whether this gun is jammed
 	var/jam_chance = 0          //Chance it jams on fire
 	//TODO generalize ammo icon states for guns
@@ -162,7 +162,7 @@
 								return
 							//Experienced gets a 0.5 second delay, master gets a 0.25 second delay
 							if(do_after(user, user.get_skill_value(SKILL_WEAPONS) == SKILL_PROF ? PROF_SPD_RELOAD : EXP_SPD_RELOAD, src))
-								ammo_magazine.update_icon()	
+								ammo_magazine.update_icon()
 								ammo_magazine.dropInto(user.loc)
 								user.visible_message(SPAN_WARNING("\The [user] reloads \the [src] with \the [AM]!"),
 													 SPAN_WARNING("You speed reload \the [src] with \the [AM]!"))
@@ -310,4 +310,4 @@
 	if(usr.stat || usr.restrained()) return
 
 	unload_ammo(usr)
-*/ 
+*/

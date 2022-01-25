@@ -52,3 +52,5 @@
 	preload_rsc = 0
 
 	var/fullscreen = FALSE
+
+	var/datum/click_handler/CH

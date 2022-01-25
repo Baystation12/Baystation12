@@ -6,7 +6,7 @@
 	starts_loaded = 0
 	req_access = list(access_hop)
 	authorized_modes = list(UNAUTHORIZED)
-	firemodes = list(
+	init_firemodes = list(
 		list(mode_name="fire"),
 		)
 	var/explosion_chance = 50
@@ -127,6 +127,24 @@
 		/obj/item/gun/projectile/shotgun/pump/exploration
 	)
 
+/obj/structure/closet/secure_closet/explo_gun/kasatka
+	desc = "A newly bolted box with the latest development from Nanotrasen"
+	closet_appearance = /decl/closet_appearance/wall/explo_gun_kasatka
+
+/obj/structure/closet/secure_closet/explo_gun/kasatka/WillContain()
+	return list(
+		/obj/item/cell/guncell/medium = 6,
+		/obj/item/gun/energy/k342/explo = 2
+	)
+
+/decl/closet_appearance/wall/explo_gun_kasatka
+	color = COLOR_WHITE
+	decals = null
+	can_lock = 1
+	extra_decals = list(
+		"stripe_outer" = COLOR_PURPLE
+	)
+
 /decl/closet_appearance/wall/explo_gun
 	color = COLOR_GRAY20
 	decals = null
@@ -134,3 +152,27 @@
 	extra_decals = list(
 		"stripe_outer" = COLOR_PURPLE
 	)
+
+//proxima code start
+/obj/item/gun/energy/k342/explo
+	desc = "K342 - Kasatka is the latest plasma weapon created by NanoTrasen. It can fire several types of charges: stunning, lethal and net-mode. This one designed specialy for expeditionary team"
+	icon_state = "kasatka_off"
+	item_state = "kasatka"
+	req_access = list(list("ACCESS_TORCH_EXPLORER"))
+	wielded_item_state = "kasatka-wielded"
+	authorized_modes = list(UNAUTHORIZED, UNAUTHORIZED, UNAUTHORIZED)
+	init_firemodes = list(
+		list(mode_name="stun charge", projectile_type=/obj/item/projectile/plasma/stun, charge_cost=20, fire_delay=4, projectile_color=COLOR_YELLOW),
+		list(mode_name="plasma charge", projectile_type=/obj/item/projectile/plasma, charge_cost=20, fire_delay=4, projectile_color=COLOR_BLUE_LIGHT),
+		list(mode_name="net charge", projectile_type=/obj/item/projectile/plasma/stun/net, charge_cost=150, fire_delay=20, projectile_color=COLOR_GREEN)
+	)
+
+/obj/item/gun/energy/k342/explo/free_fire()
+	var/my_z = get_z(src)
+	if(!list_find(GLOB.using_map.station_levels, my_z))
+		return TRUE
+	return ..()
+
+/obj/item/gun/energy/k342/explo/prereg
+	authorized_modes = list(AUTHORIZED, AUTHORIZED, ALWAYS_AUTHORIZED)
+//proxima code end

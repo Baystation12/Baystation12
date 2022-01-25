@@ -19,7 +19,7 @@
 /obj/item/projectile/bullet/on_hit(var/atom/target, var/blocked = 0)
 	if (..(target, blocked))
 		var/mob/living/L = target
-		shake_camera(L, 3, 2)
+		shake_camera(L, 1, 1, 0.5)
 
 /obj/item/projectile/bullet/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier)
 	if(penetrating > 0 && damage > 20 && prob(damage))
@@ -51,6 +51,11 @@
 		chance = P.PenetrationProbability(chance, damage, damage_type)
 
 	if(prob(chance))
+		var/maintainedVelocity = min(max(20, chance), 90) / 100 //the chance to penetrate is used to calculate leftover velocity, capped at 90%
+		armor_penetration *= maintainedVelocity
+		damage *= maintainedVelocity
+		step_delay = min(step_delay / maintainedVelocity, step_delay / 2)
+
 		if(A.opacity)
 			//display a message so that people on the other side aren't so confused
 			A.visible_message("<span class='warning'>\The [src] pierces through \the [A]!</span>")

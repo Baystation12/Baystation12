@@ -29,10 +29,10 @@
 	projectile_type = /obj/item/projectile/beam/stun/darkmatter
 	one_hand_penalty = 2 //a little bulky
 	self_recharge = 1
-	firemodes = list(
-		list(mode_name="stunning", burst=1, fire_delay=null, move_delay=null, burst_accuracy=list(30), dispersion=null, projectile_type=/obj/item/projectile/beam/stun/darkmatter, charge_cost = 50),
-		list(mode_name="focused", burst=1, fire_delay=null, move_delay=null, burst_accuracy=list(30), dispersion=null, projectile_type=/obj/item/projectile/beam/darkmatter, charge_cost = 75),
-		list(mode_name="scatter burst", burst=8, fire_delay=null, move_delay=4, burst_accuracy=list(0, 0, 0, 0, 0, 0, 0, 0), dispersion=list(0, 1, 2, 2, 3, 3, 3, 3, 3), projectile_type=/obj/item/projectile/energy/darkmatter, charge_cost = 10),
+	init_firemodes = list(
+		list(mode_name="stunning", burst=1, fire_delay=null, move_delay=null, projectile_type=/obj/item/projectile/beam/stun/darkmatter, charge_cost = 50),
+		list(mode_name="focused", burst=1, fire_delay=null, move_delay=null, projectile_type=/obj/item/projectile/beam/darkmatter, charge_cost = 75),
+		list(mode_name="scatter burst", burst=8, fire_delay=null, move_delay=4, projectile_type=/obj/item/projectile/energy/darkmatter, charge_cost = 10),
 		)
 
 /obj/item/gun/energy/darkmatter/Initialize()
@@ -54,7 +54,7 @@
 	recharge_time = 10
 	fire_delay = 15
 	projectile_type=/obj/item/projectile/energy/plasmastun/sonic/weak
-	firemodes = list(
+	init_firemodes = list(
 		list(mode_name="normal", projectile_type=/obj/item/projectile/energy/plasmastun/sonic/weak, charge_cost = 50),
 		list(mode_name="overcharge", projectile_type=/obj/item/projectile/energy/plasmastun/sonic/strong, charge_cost = 200),
 		)

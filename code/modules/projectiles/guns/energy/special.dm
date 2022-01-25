@@ -61,7 +61,7 @@
 	var/decl/plantgene/gene = null
 	combustion = 0
 
-	firemodes = list(
+	init_firemodes = list(
 		list(mode_name="induce mutations", projectile_type=/obj/item/projectile/energy/floramut, modifystate="floramut"),
 		list(mode_name="increase yield", projectile_type=/obj/item/projectile/energy/florayield, modifystate="florayield"),
 		list(mode_name="induce specific mutations", projectile_type=/obj/item/projectile/energy/floramut/gene, modifystate="floramut"),

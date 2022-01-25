@@ -1,5 +1,4 @@
 /datum/click_handler/build_mode
-	flags = CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT | CLICK_HANDLER_REMOVE_IF_NOT_TOP
 	var/dir
 
 	var/list/build_modes
@@ -8,7 +7,7 @@
 
 	var/datum/build_mode/current_build_mode
 
-/datum/click_handler/build_mode/New(var/mob/user)
+/datum/click_handler/build_mode/New(owner_)
 	..()
 
 	build_modes = list()
@@ -24,7 +23,7 @@
 		build_buttons += build_button
 	StartTimer()
 	current_build_mode.Selected()
-	to_chat(user, "Build Mode Enabled")
+	to_chat(owner.mob, "Build Mode Enabled")
 
 /datum/click_handler/build_mode/Destroy()
 	current_build_mode.Unselected()
@@ -32,7 +31,7 @@
 	QDEL_NULL(current_build_mode)
 	QDEL_NULL_LIST(build_modes)
 	QDEL_NULL_LIST(build_buttons)
-	to_chat(user, "Build Mode Disabled")
+	to_chat(owner.mob, "Build Mode Disabled")
 	. = ..()
 
 /datum/click_handler/build_mode/proc/StartTimer()
@@ -48,22 +47,22 @@
 			current_build_mode.overlay.TimerEvent()
 
 /datum/click_handler/build_mode/Enter()
-	user.client.show_popup_menus = FALSE
+	owner.show_popup_menus = FALSE
 	for(var/build_button in build_buttons)
-		user.client.screen += build_button
+		owner.screen += build_button
 
 /datum/click_handler/build_mode/Exit()
-	user.my_client.show_popup_menus = TRUE
+	owner.show_popup_menus = TRUE
 	for(var/build_button in build_buttons)
-		user.my_client.screen -= build_button
+		owner.screen -= build_button
 
-/datum/click_handler/build_mode/OnDblClick(var/atom/A, var/params)
-	OnClick(A, params) // We treat double-clicks as normal clicks
+// /datum/click_handler/build_mode/OnDblClick(var/atom/A, var/params)
+// 	Click(A, params) // We treat double-clicks as normal clicks
 
-/datum/click_handler/build_mode/OnClick(var/atom/A, var/params)
+/datum/click_handler/build_mode/Click(atom/target, location, control, params)
 	params = params2list(params)
-	if(A in build_buttons)
-		var/obj/effect/bmode/build_button = A
+	if(target in build_buttons)
+		var/obj/effect/bmode/build_button = target
 		build_button.OnClick(params)
 	else
-		current_build_mode.OnClick(A, params)
+		current_build_mode.OnClick(target, params)

@@ -108,7 +108,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "wrecharger0"
 	active_power_usage = 50 KILOWATTS	//It's more specialized than the standalone recharger (guns and batons only) so make it more powerful
-	allowed_devices = list(/obj/item/gun/magnetic/railgun, /obj/item/gun/energy, /obj/item/melee/baton, /obj/item/device/radio)
+	allowed_devices = list(/obj/item/gun/magnetic/railgun, /obj/item/gun/energy, /obj/item/melee/baton, /obj/item/device/radio, /obj/item/cell/guncell)
 	icon_state_charged = "wrecharger2"
 	icon_state_charging = "wrecharger1"
 	icon_state_idle = "wrecharger0"

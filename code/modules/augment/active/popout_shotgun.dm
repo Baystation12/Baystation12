@@ -23,6 +23,7 @@
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	caliber = CALIBER_SHOTGUN
 	load_method = SINGLE_CASING
+	recoil_buildup = 20
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
 	handle_casings = EJECT_CASINGS
 	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'

@@ -49,6 +49,8 @@
 		/obj/item/taperoll/police,
 		//rubay code,
 		/obj/item/storage/firstaid/individual/military,
+		/obj/item/cell/guncell/medium,
+		/obj/item/cell/guncell/medium,
 		//rubay code end,
 		/obj/item/device/hailer,
 		/obj/item/clothing/accessory/storage/black_vest,

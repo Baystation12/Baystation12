@@ -48,7 +48,7 @@
 		)
 	modifystate = "energyrevolverstun"
 	item_state = null
-	firemodes = list(
+	init_firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="energyrevolverstun"),
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="energyrevolvershock"),
 		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, modifystate="energyrevolverkill"),

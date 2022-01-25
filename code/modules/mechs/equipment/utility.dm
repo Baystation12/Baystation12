@@ -240,7 +240,7 @@
 	//Check our layers
 	if(owner && (owner.hardpoints[HARDPOINT_HEAD] == src))
 		mech_layer = MECH_INTERMEDIATE_LAYER
-	else mech_layer = initial(mech_layer)	
+	else mech_layer = initial(mech_layer)
 
 #define CATAPULT_SINGLE 1
 #define CATAPULT_AREA   2
@@ -573,9 +573,9 @@
 	name = "rotatory plasma cutter"
 	desc = "A state of the art rotating, variable intensity, sequential-cascade plasma cutter. Resist the urge to aim this at your coworkers."
 	max_shots = 15
-	firemodes = list(
-		list(mode_name="single shot",	can_autofire=0, burst=1, fire_delay=6,  dispersion = list(0.0)),
-		list(mode_name="full auto",		can_autofire=1, burst=1, fire_delay=1, burst_accuracy = list(0,-1,-1,-1,-1,-2,-2,-2), dispersion = list(1.0, 1.0, 1.0, 1.0, 1.1)),
+	init_firemodes = list(
+		list(mode_name="single shot",	can_autofire=0, burst=1, fire_delay=6),
+		list(mode_name="full auto",		can_autofire=1, burst=1, fire_delay=1),
 		)
 
 /obj/item/mech_equipment/ionjets
@@ -607,11 +607,11 @@
 	if (istype(C))
 		if (C.checked_use(movement_power * CELLRATE))
 			return TRUE
-		else 
+		else
 			deactivate()
 
 	return FALSE
-				
+
 /obj/item/mech_equipment/ionjets/attack_self(mob/user)
 	. = ..()
 	if (!.)
@@ -619,7 +619,7 @@
 
 	if (active)
 		deactivate()
-	else 
+	else
 		activate()
 
 /obj/item/mech_equipment/ionjets/CtrlClick(mob/user)
@@ -635,7 +635,7 @@
 	ion_trail.start()
 	active = TRUE
 	update_icon()
-	
+
 /obj/item/mech_equipment/ionjets/deactivate()
 	. = ..()
 	passive_power_use = 0 KILOWATTS
@@ -718,7 +718,7 @@
 	if(owner)
 		camera.c_tag = "[owner.name] camera feed"
 		invalidateCameraCache()
-	
+
 /obj/item/mech_equipment/camera/uninstalled()
 	. = ..()
 	camera.c_tag = "null"
@@ -740,7 +740,7 @@
 
 /obj/item/mech_equipment/camera/attackby(obj/item/W, mob/user)
 	. = ..()
-	
+
 	if(isScrewdriver(W))
 		var/list/all_networks = list()
 		for(var/network in GLOB.using_map.station_networks)

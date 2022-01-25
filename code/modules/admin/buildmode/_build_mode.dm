@@ -9,7 +9,7 @@
 /datum/build_mode/New(var/host)
 	..()
 	src.host = host
-	user = src.host.user
+	user = src.host.owner?.mob
 
 /datum/build_mode/Destroy()
 	QDEL_NULL(overlay)
