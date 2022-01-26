@@ -103,7 +103,7 @@
 
 		if(src.wet)
 
-			if(M.buckled || (MOVING_DELIBERATELY(M) && prob(min(100, 100/(wet/10))) ) )
+			if(M.buckled || (!MOVING_QUICKLY(M) && prob(min(100, 100/(wet/10))) ) )
 				return
 
 			// skillcheck for slipping
