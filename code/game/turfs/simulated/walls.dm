@@ -216,8 +216,6 @@
 	ChangeTurf(floor_type)
 
 /turf/simulated/wall/ex_act(severity)
-	if (prob(explosion_resistance))
-		return
 	if (severity == 1)
 		ChangeTurf(get_base_turf(src.z))
 		return
