@@ -215,12 +215,6 @@
 
 	ChangeTurf(floor_type)
 
-/turf/simulated/wall/ex_act(severity)
-	if (severity == 1)
-		ChangeTurf(get_base_turf(src.z))
-		return
-	..()
-
 // Wall-rot effect, a nasty fungus that destroys walls.
 /turf/simulated/wall/proc/rot()
 	if(locate(/obj/effect/overlay/wallrot) in src)
