@@ -2545,9 +2545,9 @@
 	required_reagents = list(/datum/reagent/drink/tea = 2, /datum/reagent/ethanol/rum = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/lordaniawine
-	name = "Lordanian Wine"
-	result = /datum/reagent/ethanol/lordaniawine
+/datum/chemical_reaction/tadmorwine
+	name = "Tadmoran Wine"
+	result = /datum/reagent/ethanol/tadmorwine
 	required_reagents = list(/datum/reagent/ethanol/wine = 2, /datum/reagent/drink/grenadine = 1)
 	catalysts = list(/datum/reagent/nutriment/mint)
 	result_amount = 3

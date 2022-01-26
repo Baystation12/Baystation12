@@ -35,7 +35,7 @@ flocked to the planet, with Markesheli communities growing quite rapidly in numb
 	name = HOME_SYSTEM_OFFWORLD
 	description = "Whether through unfortunate circumstances or your own volition, you've left Moghes behind in search of your \
 	purpose. You are one of many unathi who have braved the dangers and left their own planet to make their own destiny, whether \
-	that be on the scorching heats of Cinu, the tropical paradises of Kingston, or the bustling shipyards of Ceres."
+	that be on the scorching heats of Tadmor, the technophile cityscape of Ceti Epsilon, or the bustling shipyards of Ceres."
 	ruling_body = "Varies"
 	distance = "Varies"
 	secondary_langs = list(

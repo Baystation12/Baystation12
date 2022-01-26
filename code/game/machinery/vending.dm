@@ -646,7 +646,7 @@
 					/obj/item/reagent_containers/food/drinks/bottle/premiumvodka = 5,
 					/obj/item/reagent_containers/food/drinks/bottle/patron = 5,
 					/obj/item/reagent_containers/food/drinks/bottle/goldschlager = 5,
-					/obj/item/reagent_containers/food/drinks/bottle/lordaniawine = 5,
+					/obj/item/reagent_containers/food/drinks/bottle/tadmorwine = 5,
 					/obj/item/reagent_containers/food/drinks/bottle/brandy = 5)
 	vend_delay = 15
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
