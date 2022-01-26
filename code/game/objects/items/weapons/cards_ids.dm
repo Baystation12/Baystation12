@@ -465,7 +465,7 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/card/id/foundation/attack_self(var/mob/living/user)
 	. = ..()
 	if(istype(user))
-		for(var/mob/M in viewers(world.view, get_turf(user))-user)
+		for(var/mob/M as anything in viewers(world.view, get_turf(user))-user)
 			if(user.psi && isliving(M))
 				var/mob/living/L = M
 				if(!L.psi)

@@ -485,8 +485,7 @@
 /mob/living/carbon/human/pull_damage()
 	if(!lying || getBruteLoss() + getFireLoss() < 100)
 		return 0
-	for(var/thing in organs)
-		var/obj/item/organ/external/e = thing
+	for(var/obj/item/organ/external/e in organs)
 		if(!e || e.is_stump())
 			continue
 		if((e.status & ORGAN_BROKEN) && !e.splinted)
@@ -891,7 +890,7 @@
 /mob/living/carbon/human/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE, var/obj/item/organ/external/affected)
 	if(!affected) //Grab the organ holding the implant.
 		for(var/obj/item/organ/external/organ in organs)
-			for(var/obj/item/O in organ.implants)
+			for(var/obj/item/O as anything in organ.implants)
 				if(O == implant)
 					affected = organ
 					break

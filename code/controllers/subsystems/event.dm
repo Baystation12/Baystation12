@@ -141,7 +141,7 @@ SUBSYSTEM_DEF(event)
 		html += "<table[table_options]>"
 		html += "<tr><td[row_options2]>Name </td><td>Weight </td><td>MinWeight </td><td>MaxWeight </td><td>OneShot </td><td>Enabled </td><td><span class='alert'>CurrWeight </span></td><td>Remove</td></tr>"
 		var/list/active_with_role = number_active_with_role()
-		for(var/datum/event_meta/EM in selected_event_container.available_events)
+		for(var/datum/event_meta/EM as anything in selected_event_container.available_events)
 			html += "<tr>"
 			html += "<td>[EM.name]</td>"
 			html += "<td><A align='right' href='?src=\ref[src];set_weight=\ref[EM]'>[EM.weight]</A></td>"

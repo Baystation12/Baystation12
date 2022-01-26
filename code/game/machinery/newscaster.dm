@@ -957,7 +957,7 @@ obj/item/newspaper/attackby(obj/item/W as obj, mob/user as mob)
 /obj/machinery/newscaster/proc/newsAlert(var/news_call)   //This isn't Agouri's work, for it is ugly and vile.
 	var/turf/T = get_turf(src)                      //Who the fuck uses spawn(600) anyway, jesus christ
 	if(news_call)
-		for(var/mob/O in hearers(world.view-1, T))
+		for(var/mob/O as anything in hearers(world.view-1, T))
 			O.show_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"[news_call]\"</span>",2)
 		src.alert = 1
 		src.update_icon()
@@ -966,7 +966,7 @@ obj/item/newspaper/attackby(obj/item/W as obj, mob/user as mob)
 			src.update_icon()
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 75, 1)
 	else
-		for(var/mob/O in hearers(world.view-1, T))
+		for(var/mob/O as anything in hearers(world.view-1, T))
 			O.show_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"Attention! Wanted issue distributed!\"</span>",2)
 		playsound(src.loc, 'sound/machines/warning-buzzer.ogg', 75, 1)
 	return

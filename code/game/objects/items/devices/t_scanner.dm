@@ -127,7 +127,7 @@
 	if(!center) return
 
 	for(var/turf/T in range(scan_range, center))
-		for(var/mob/M in T.contents)
+		for(var/mob/M as anything in T.contents)
 			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
 				if(H.is_cloaked())

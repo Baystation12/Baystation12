@@ -3,7 +3,7 @@
 		return FALSE
 	if(isnull(fluid_can_pass))
 		fluid_can_pass = TRUE
-		for(var/atom/movable/AM in src)
+		for(var/atom/movable/AM as anything in src)
 			if(AM.simulated && !AM.CanFluidPass(coming_from))
 				fluid_can_pass = FALSE
 				break

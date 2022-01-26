@@ -48,7 +48,7 @@
 				LAZYADD(shuttles_registered, shuttle_datum)
 
 /datum/extension/event_registration/shuttle_stationary/proc/unregister_shuttles()
-	for(var/datum/shuttle_datum in shuttles_registered)
+	for(var/datum/shuttle_datum as anything in shuttles_registered)
 		GLOB.shuttle_moved_event.unregister(shuttle_datum, src)
 		GLOB.shuttle_pre_move_event.unregister(shuttle_datum, src)
 	shuttles_registered = null

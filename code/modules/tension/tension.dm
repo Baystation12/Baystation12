@@ -221,7 +221,7 @@
 
 	var/danger = FALSE
 	// Now to get all the threats.
-	for(var/atom/movable/AM in potential_threats)
+	for(var/atom/movable/AM as anything in potential_threats)
 		var/tension_from_AM = AM.get_threat(src)
 		tension += tension_from_AM
 		if(tension_from_AM > 0)

@@ -330,7 +330,7 @@ Helpers
 				SSjobs.equip_rank(player, player.mind.assigned_role, 0)
 				SScustomitems.equip_custom_items(player)
 	if(captainless)
-		for(var/mob/M in GLOB.player_list)
+		for(var/mob/M as anything in GLOB.player_list)
 			if(!istype(M,/mob/new_player))
 				to_chat(M, "Captainship not forced on anyone.")
 

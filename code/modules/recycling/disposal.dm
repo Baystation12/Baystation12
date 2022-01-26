@@ -314,7 +314,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 // eject the contents of the disposal unit
 /obj/machinery/disposal/proc/eject()
-	for(var/atom/movable/AM in (contents - component_parts))
+	for(var/atom/movable/AM as anything in (contents - component_parts))
 		AM.forceMove(src.loc)
 		AM.pipe_eject(0)
 	if(reagents.total_volume)
@@ -451,7 +451,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	var/turf/target
 	playsound(src, 'sound/machines/hiss.ogg', 50, 0, 0)
 	if(H) // Somehow, someone managed to flush a window which broke mid-transit and caused the disposal to go in an infinite loop trying to expel null, hopefully this fixes it
-		for(var/atom/movable/AM in H)
+		for(var/atom/movable/AM as anything in H)
 			target = get_offset_target_turf(src.loc, rand(5)-rand(5), rand(5)-rand(5))
 
 			AM.forceMove(src.loc)
@@ -594,7 +594,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 				H.reagents.trans_to_obj(splat, H.reagents.total_volume)
 				splat.update_icon()
 
-		for(var/atom/movable/AM in H)
+		for(var/atom/movable/AM as anything in H)
 			AM.forceMove(src.loc)
 			AM.pipe_eject(dir)
 			// Drones keep smashing windows from being fired out of chutes.

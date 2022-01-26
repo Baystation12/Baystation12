@@ -12,7 +12,7 @@
 		playsound(src.loc, mech_step_sound, 40, 1)
 
 /mob/living/exosuit/can_ztravel()
-	if(Allow_Spacemove()) //Handle here 
+	if(Allow_Spacemove()) //Handle here
 		return TRUE
 
 /mob/living/exosuit/Allow_Spacemove(check_drift)
@@ -43,7 +43,7 @@
 
 /mob/living/exosuit/can_float()
 	return FALSE //Nope
-	
+
 /datum/movement_handler/mob/delay/exosuit
 	expected_host_type = /mob/living/exosuit
 
@@ -140,7 +140,7 @@
 			return MOVEMENT_HANDLED
 		else
 			mob.inertia_dir = 0 //If not then we can reset inertia and move
-	else 
+	else
 		mob.anchored = TRUE
 		mob.inertia_dir = 0 //Reset inertia values as we are not going to be treated as floating
 
@@ -154,7 +154,7 @@
 	return MOVEMENT_PROCEED
 
 /mob/living/exosuit/lost_in_space()
-	for(var/atom/movable/AM in contents)
+	for(var/atom/movable/AM as anything in contents)
 		if(!AM.lost_in_space())
 			return FALSE
 	return !length(pilots)

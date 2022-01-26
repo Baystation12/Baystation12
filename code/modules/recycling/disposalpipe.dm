@@ -38,7 +38,7 @@ obj/structure/disposalpipe/Destroy()
 			// deleting pipe is inside a dense turf (wall)
 			// this is unlikely, but just dump out everything into the turf in case
 
-			for(var/atom/movable/AM in H)
+			for(var/atom/movable/AM as anything in H)
 				AM.forceMove(T)
 				AM.pipe_eject(0)
 			qdel(H)
@@ -105,7 +105,7 @@ obj/structure/disposalpipe/Destroy()
 	// Empty the holder if it is expelled into a dense turf.
 	// Leaving it intact and sitting in a wall is stupid.
 	if(T.density)
-		for(var/atom/movable/AM in H)
+		for(var/atom/movable/AM as anything in H)
 			AM.loc = T
 			AM.pipe_eject(0)
 		qdel(H)
@@ -126,7 +126,7 @@ obj/structure/disposalpipe/Destroy()
 
 		playsound(src, 'sound/machines/hiss.ogg', 50, 0, 0)
 		if(H)
-			for(var/atom/movable/AM in H)
+			for(var/atom/movable/AM as anything in H)
 				AM.forceMove(T)
 				AM.pipe_eject(direction)
 				spawn(1)
@@ -148,7 +148,7 @@ obj/structure/disposalpipe/Destroy()
 	else	// no specified direction, so throw in random direction
 		playsound(src, 'sound/machines/hiss.ogg', 50, 0, 0)
 		if(H)
-			for(var/atom/movable/AM in H)
+			for(var/atom/movable/AM as anything in H)
 				target = get_offset_target_turf(T, rand(5)-rand(5), rand(5)-rand(5))
 
 				AM.forceMove(T)
@@ -181,7 +181,7 @@ obj/structure/disposalpipe/Destroy()
 			// broken pipe is inside a dense turf (wall)
 			// this is unlikely, but just dump out everything into the turf in case
 
-			for(var/atom/movable/AM in H)
+			for(var/atom/movable/AM as anything in H)
 				AM.forceMove(T)
 				AM.pipe_eject(0)
 			qdel(H)
@@ -253,7 +253,7 @@ obj/structure/disposalpipe/Destroy()
 			// deleting pipe is inside a dense turf (wall)
 			// this is unlikely, but just dump out everything into the turf in case
 
-			for(var/atom/movable/AM in H)
+			for(var/atom/movable/AM as anything in H)
 				AM.forceMove(T)
 				AM.pipe_eject(0)
 			qdel(H)

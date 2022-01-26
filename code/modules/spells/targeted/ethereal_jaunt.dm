@@ -43,7 +43,7 @@
 			animation.set_density(FALSE)
 			animation.anchored = TRUE
 			animation.icon = 'icons/mob/mob.dmi'
-			animation.layer = FLY_LAYER 
+			animation.layer = FLY_LAYER
 			target.ExtinguishMob()
 			if(target.buckled)
 				target.buckled = null
@@ -107,7 +107,7 @@
 
 /obj/effect/dummy/spell_jaunt/Destroy()
 	// Eject contents if deleted somehow
-	for(var/atom/movable/AM in src)
+	for(var/atom/movable/AM as anything in src)
 		AM.dropInto(loc)
 	return ..()
 

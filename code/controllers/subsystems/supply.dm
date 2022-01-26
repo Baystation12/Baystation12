@@ -93,7 +93,7 @@ SUBSYSTEM_DEF(supply)
 				add_points_from_source(CR.points_per_crate, "crate")
 				var/find_slip = 1
 
-				for(var/atom in CR)
+				for(var/atom as anything in CR)
 					// Sell manifests
 					var/atom/A = atom
 					if(find_slip && istype(A,/obj/item/paper/manifest))

@@ -395,7 +395,7 @@ Ccomp's first proc.
 			to_chat(src, "There doesn't appear to be any ghosts for you to select.")
 		return
 
-	for(var/mob/M in mobs)
+	for(var/mob/M as anything in mobs)
 		var/name = M.name
 		ghosts[name] = M                                        //get the name of the mob for the popup list
 	if(what==1)

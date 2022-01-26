@@ -11,13 +11,13 @@ Lies, only the control computer draws power.
 
 1 fuel chamber
 contains procs for mixing gas and whatever other fuel it uses
-mix_gas()
+mix_gas anything
 
 1 gas holder WIP
 acts like a tank valve on the ground that you wrench gas tanks onto
 proc
-extract_gas()
-return_gas()
+extract_gas anything
+return_gas anything
 attach_tank()
 remove_tank()
 get_available_mix()

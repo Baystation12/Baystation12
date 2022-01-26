@@ -26,12 +26,12 @@ var/list/holder_mob_icon_cache = list()
 	START_PROCESSING(SSobj, src)
 
 /obj/item/holder/proc/destroy_all()
-	for(var/atom/movable/AM in src)
+	for(var/atom/movable/AM as anything in src)
 		qdel(AM)
 	qdel(src)
 
 /obj/item/holder/Destroy()
-	for(var/atom/movable/AM in src)
+	for(var/atom/movable/AM as anything in src)
 		AM.forceMove(get_turf(src))
 	last_holder = null
 	STOP_PROCESSING(SSobj, src)

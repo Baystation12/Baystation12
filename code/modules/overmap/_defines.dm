@@ -72,7 +72,7 @@ proc/toggle_move_stars(zlevel, direction)
 				T.icon_state = "white"
 			else
 				T.icon_state = "speedspace_[gen_dir]_[rand(1,15)]"
-				for(var/atom/movable/AM in T)
+				for(var/atom/movable/AM as anything in T)
 					if (AM.simulated && !AM.anchored)
 						AM.throw_at(get_step(T,reverse_direction(direction)), 5, 1)
 						CHECK_TICK

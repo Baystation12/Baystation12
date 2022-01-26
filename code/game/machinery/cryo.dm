@@ -18,7 +18,7 @@
 	active_power_usage = 200
 	clicksound = 'sound/machines/buttonbeep.ogg'
 	clickvol = 30
-	
+
 	machine_name = "cryo cell"
 	machine_desc = "Uses a supercooled chemical bath to hold living beings in something close to suspended animation. Often paired with specialized medicines to rapidly heal wounds of a patient inside."
 
@@ -399,4 +399,3 @@
 
 /datum/data/function/proc/display()
 	return
-

@@ -62,12 +62,12 @@
 			L.dust() //then dust the body
 
 /datum/universal_state/nuclear_explosion/proc/show_cinematic_to_players()
-	for(var/mob/M in GLOB.player_list)
+	for(var/mob/M as anything in GLOB.player_list)
 		if(M.client)
 			M.client.screen += cinematic
 
 /datum/universal_state/nuclear_explosion/proc/start_cinematic_intro()
-	for(var/mob/M in GLOB.player_list) //I guess so that people in the lobby only hear the explosion
+	for(var/mob/M as anything in GLOB.player_list) //I guess so that people in the lobby only hear the explosion
 		sound_to(M, sound('sound/machines/Alarm.ogg'))
 
 	sleep(100)
@@ -94,7 +94,7 @@
 
 //MALF
 /datum/universal_state/nuclear_explosion/malf/start_cinematic_intro()
-	for(var/mob/M in GLOB.player_list) //I guess so that people in the lobby only hear the explosion
+	for(var/mob/M as anything in GLOB.player_list) //I guess so that people in the lobby only hear the explosion
 		to_chat(M, sound('sound/machines/Alarm.ogg'))
 
 	sleep(28)
@@ -104,4 +104,3 @@
 	sleep(72)
 	flick("intro_nuke",cinematic)
 	sleep(30)
-

@@ -129,13 +129,13 @@ var/global/list/narsie_list = list()
 	spawn(0)
 		step(src, movement_dir)
 		narsiefloor(get_turf(loc))
-		for(var/mob/M in GLOB.player_list)
+		for(var/mob/M as anything in GLOB.player_list)
 			if(M.client)
 				M.see_narsie(src,movement_dir)
 	spawn(10)
 		step(src, movement_dir)
 		narsiefloor(get_turf(loc))
-		for(var/mob/M in GLOB.player_list)
+		for(var/mob/M as anything in GLOB.player_list)
 			if(M.client)
 				M.see_narsie(src,movement_dir)
 	return 1
@@ -329,7 +329,7 @@ var/global/list/narsie_list = list()
 	chained = 1
 	move_self = 0
 	icon_state ="narsie-chains"
-	for(var/mob/M in SSmobs.mob_list)//removing the client image of nar-sie while it is chained
+	for(var/mob/M as anything in SSmobs.mob_list)//removing the client image of nar-sie while it is chained
 		if(M.client)
 			M.see_narsie(src)
 

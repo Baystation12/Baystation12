@@ -233,7 +233,7 @@
 	s.set_up(3, 1, src)
 	s.start()
 
-	for(var/atom/movable/AM in shrapnel)
+	for(var/atom/movable/AM as anything in shrapnel)
 		AM.throw_at(pick(things),5)
 
 	qdel(src)

@@ -403,7 +403,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/list/names = list()
 	var/list/creatures = list()
 	var/list/namecounts = list()
-	for(var/mob/M in mobs)
+	for(var/mob/M as anything in mobs)
 		var/name = M.name
 		if (name in names)
 			namecounts[name]++
@@ -776,10 +776,10 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 						if(!istype(M,/mob) || !M.simulated) continue // If we need to check for more mobs, I'll add a variable
 						mobs += M
 
-					for(var/mob/M in mobs)
+					for(var/mob/M as anything in mobs)
 						newmobs += DuplicateObject(M , 1)
 
-					for(var/mob/M in newmobs)
+					for(var/mob/M as anything in newmobs)
 						M.forceMove(X)
 
 					copiedobjs += newobjs
@@ -835,7 +835,7 @@ proc/oview_or_orange(distance = world.view , center = usr , type)
 
 proc/get_mob_with_client_list()
 	var/list/mobs = list()
-	for(var/mob/M in SSmobs.mob_list)
+	for(var/mob/M as anything in SSmobs.mob_list)
 		if (M.client)
 			mobs += M
 	return mobs

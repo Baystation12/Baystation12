@@ -55,7 +55,7 @@
 	. = ..()
 	if(distance <= 1 && !opened)
 		var/content_size = 0
-		for(var/atom/movable/AM in src.contents)
+		for(var/atom/movable/AM as anything in src.contents)
 			if(!AM.anchored)
 				content_size += content_size(AM)
 		if(!content_size)
@@ -93,7 +93,7 @@
 			M.client.eye = M.client.mob
 			M.client.perspective = MOB_PERSPECTIVE
 
-	for(var/atom/movable/AM in src)
+	for(var/atom/movable/AM as anything in src)
 		AM.dropInto(loc)
 
 /obj/structure/closet/proc/store_contents()

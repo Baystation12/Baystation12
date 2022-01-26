@@ -19,7 +19,7 @@
 
 /proc/living_observers_present(var/list/zlevels)
 	if(LAZYLEN(zlevels))
-		for(var/mob/M in GLOB.player_list) //if a tree ticks on the empty zlevel does it really tick
+		for(var/mob/M as anything in GLOB.player_list) //if a tree ticks on the empty zlevel does it really tick
 			if(M.stat != DEAD) //(no it doesn't)
 				var/turf/T = get_turf(M)
 				if(T && (T.z in zlevels))
@@ -265,13 +265,13 @@
 			objs += AM
 			hearturfs += get_turf(AM)
 
-	for(var/mob/M in GLOB.player_list)
+	for(var/mob/M as anything in GLOB.player_list)
 		if(checkghosts && M.stat == DEAD && M.get_preference_value(checkghosts) != GLOB.PREF_NEARBY)
 			mobs |= M
 		else if(get_turf(M) in hearturfs)
 			mobs |= M
 
-	for(var/obj/O in GLOB.listening_objects)
+	for(var/obj/O as anything in GLOB.listening_objects)
 		if(get_turf(O) in hearturfs)
 			objs |= O
 
@@ -339,7 +339,7 @@ proc/isInSight(var/atom/A, var/atom/B)
 			return get_step(start, EAST)
 
 /proc/get_mob_by_key(var/key)
-	for(var/mob/M in SSmobs.mob_list)
+	for(var/mob/M as anything in SSmobs.mob_list)
 		if(M.ckey == lowertext(key))
 			return M
 	return null

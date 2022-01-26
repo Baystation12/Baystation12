@@ -114,7 +114,7 @@ Frequency:
 		if (istype(src.loc, /mob))
 			attack_self(src.loc)
 		else
-			for(var/mob/M in viewers(1, src))
+			for(var/mob/M as anything in viewers(1, src))
 				if (M.client)
 					src.attack_self(M)
 	return

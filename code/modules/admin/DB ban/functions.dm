@@ -97,7 +97,7 @@ datum/admins/proc/DB_ban_record(var/bantype, var/mob/banned_mob, var/duration = 
 		ckey = ckey(banckey)
 		computerid = bancid
 		ip = banip
-		for (var/mob/M in SSmobs.mob_list)
+		for (var/mob/M as anything in SSmobs.mob_list)
 			if (M.ckey == ckey)
 				M.ckey = null
 				break

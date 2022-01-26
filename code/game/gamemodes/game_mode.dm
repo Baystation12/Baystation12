@@ -434,7 +434,7 @@ var/global/list/additional_antag_types = list()
 		if(!station_missed)
 			end = cinematic_icon_states[2]
 			to_flick = "station_explode_fade_red"
-			for(var/mob/living/M in GLOB.living_mob_list_)
+			for(var/mob/living/M as anything in GLOB.living_mob_list_)
 				if(is_station_turf(get_turf(M)))
 					M.death()//No mercy
 		if(end)
@@ -492,7 +492,7 @@ proc/display_roundstart_logout_report()
 
 	msg += "</span>" // close the span from right at the top
 
-	for(var/mob/M in SSmobs.mob_list)
+	for(var/mob/M as anything in SSmobs.mob_list)
 		if(M.client && M.client.holder)
 			to_chat(M, msg)
 

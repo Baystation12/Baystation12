@@ -20,8 +20,7 @@
 	ShowMemory(remover)
 
 /datum/mind/proc/ClearMemories(var/list/tags)
-	for(var/mem in memories)
-		var/datum/memory/M = mem
+	for(var/datum/memory/M as anything  in memories)
 		// If no tags were supplied OR if there is any union between the given tags and memory tags
 		//  then remove the memory
 		if(!length(tags) || length(tags & M.tags))
@@ -31,8 +30,7 @@
 	if(!istype(target))
 		return
 
-	for(var/mem in memories)
-		var/datum/memory/M = mem
+	for(var/datum/memory/M as anything in memories)
 		M.Copy(target)
 
 /datum/mind/proc/MemoryTags()
@@ -50,8 +48,7 @@
 	var/list/output = list()
 	var/last_owner_name
 	// We pretend that memories are stored in some semblance of an order
-	for(var/mem in memories)
-		var/datum/memory/M = mem
+	for(var/datum/memory/M as anything in memories)
 		var/owner_name = M.OwnerName()
 		if(owner_name != last_owner_name && current)
 			output += "<B>[current.real_name]'s Memories</B><HR>"
@@ -159,8 +156,7 @@
 		return
 
 	var/relevant_memories = 0
-	for(var/mem in target.memories)
-		var/datum/memory/M = mem
+	for(var/datum/memory/M as anything in target.memories)
 		if(M.type == memory_type)
 			relevant_memories++
 

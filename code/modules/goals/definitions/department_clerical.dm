@@ -62,7 +62,7 @@
 
 /datum/goal/department/paperwork/proc/generate_signatory_list()
 	. = list()
-	for(var/mob/M in GLOB.living_mob_list_)
+	for(var/mob/M as anything in GLOB.living_mob_list_)
 		if(!M.mind?.assigned_job)
 			continue
 		for(var/job_type in signatory_job_list)
@@ -117,7 +117,7 @@
 
 /obj/item/paperwork/on_update_icon()
 	icon_state = "[icon_state][length(has_signed) || ""]"
-	
+
 /obj/item/paperwork/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)

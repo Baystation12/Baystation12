@@ -111,7 +111,7 @@
 
 	// Splatter anything under us that survived the explosion.
 	if(value != SD_EMPTY_TILE && T.contents.len)
-		for(var/atom/movable/AM in T)
+		for(var/atom/movable/AM as anything in T)
 			if(AM.simulated && !isobserver(AM))
 				qdel(AM)
 

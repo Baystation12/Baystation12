@@ -125,7 +125,7 @@ Please wait until completion...</TT><BR>
 					addtimer(CALLBACK(src, .proc/done_building), build_time)
 		return
 
-	for (var/mob/M in viewers(1, src))
+	for (var/mob/M as anything in viewers(1, src))
 		if (M.client && M.machine == src)
 			src.attack_hand(M)
 

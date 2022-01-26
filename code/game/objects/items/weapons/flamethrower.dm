@@ -158,7 +158,7 @@
 		lit = 0
 		usr.unset_machine()
 		close_browser(usr, "window=flamethrower")
-	for(var/mob/M in viewers(1, loc))
+	for(var/mob/M as anything in viewers(1, loc))
 		if((M.client && M.machine == src))
 			attack_self(M)
 	update_icon()
@@ -181,7 +181,7 @@
 		sleep(1)
 	previousturf = null
 	operating = 0
-	for(var/mob/M in viewers(1, loc))
+	for(var/mob/M as anything in viewers(1, loc))
 		if((M.client && M.machine == src))
 			attack_self(M)
 

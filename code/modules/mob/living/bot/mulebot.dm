@@ -314,7 +314,7 @@
 
 	load = null
 
-	for(var/atom/movable/AM in src)
+	for(var/atom/movable/AM as anything in src)
 		if(AM == botcard || AM == access_scanner) continue
 
 		AM.forceMove(loc)

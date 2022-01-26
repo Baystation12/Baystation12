@@ -44,7 +44,7 @@
 		update_values()
 
 
-//Same as adjust_gas(), but takes a temperature which is mixed in with the gas.
+//Same as adjust_gas anything, but takes a temperature which is mixed in with the gas.
 /datum/gas_mixture/proc/adjust_gas_temp(gasid, moles, temp, update = 1)
 	if(moles == 0)
 		return
@@ -65,7 +65,7 @@
 		update_values()
 
 
-//Variadic version of adjust_gas().  Takes any number of gas and mole pairs and applies them.
+//Variadic version of adjust_gas anything.  Takes any number of gas and mole pairs and applies them.
 /datum/gas_mixture/proc/adjust_multi()
 	ASSERT(!(args.len % 2))
 

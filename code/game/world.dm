@@ -44,7 +44,7 @@ GLOBAL_VAR(href_logfile)
 
 	var/list/match = list()
 
-	for(var/mob/M in SSmobs.mob_list)
+	for(var/mob/M as anything in SSmobs.mob_list)
 		if(restrict_type && !istype(M, restrict_type))
 			continue
 		var/strings = list(M.name, M.ckey)
@@ -64,9 +64,9 @@ GLOBAL_VAR(href_logfile)
 						match[M] += 1
 
 	var/maxstrength = 0
-	for(var/mob/M in match)
+	for(var/mob/M as anything in match)
 		maxstrength = max(match[M], maxstrength)
-	for(var/mob/M in match)
+	for(var/mob/M as anything in match)
 		if(match[M] < maxstrength)
 			match -= M
 
@@ -173,7 +173,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 
 	else if(T == "players")
 		var/n = 0
-		for(var/mob/M in GLOB.player_list)
+		for(var/mob/M as anything in GLOB.player_list)
 			if(M.client)
 				n++
 		return n
@@ -336,7 +336,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 
 		else
 			var/list/ret = list()
-			for(var/mob/M in match)
+			for(var/mob/M as anything in match)
 				ret[M.key] = M.name
 			return list2params(ret)
 
@@ -386,7 +386,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 			return list2params(info)
 		else
 			var/list/ret = list()
-			for(var/mob/M in match)
+			for(var/mob/M as anything in match)
 				ret[M.key] = M.name
 			return list2params(ret)
 

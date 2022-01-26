@@ -56,7 +56,7 @@ proc/get_deepspace(x,y)
 		return new /obj/effect/overmap/visitable/sector/temporary(x, y, ++world.maxz)
 
 /atom/movable/proc/lost_in_space()
-	for(var/atom/movable/AM in contents)
+	for(var/atom/movable/AM as anything in contents)
 		if(!AM.lost_in_space())
 			return FALSE
 	return TRUE

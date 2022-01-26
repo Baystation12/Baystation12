@@ -99,7 +99,7 @@
 				src.code += text("[]", href_list["type"])
 				if (length(src.code) > 5)
 					src.code = "ERROR"
-		for (var/mob/M in viewers(1, loc))
+		for (var/mob/M as anything in viewers(1, loc))
 			if ((M.client && M.machine == src))
 				attack_self(M)
 			return

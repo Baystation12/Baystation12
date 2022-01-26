@@ -14,14 +14,14 @@
 			text += "<br><span class='notice'>[ambition.summarize()]</span>"
 		if(!global_objectives.len && P.objectives && P.objectives.len)
 			var/num = 1
-			for(var/datum/objective/O in P.objectives)
+			for(var/datum/objective/O as anything in P.objectives)
 				text += print_objective(O, num)
 				num++
 
 	if(global_objectives && global_objectives.len)
 		text += "<BR><FONT size = 2>Their objectives were:</FONT>"
 		var/num = 1
-		for(var/datum/objective/O in global_objectives)
+		for(var/datum/objective/O as anything in global_objectives)
 			text += print_objective(O, num)
 			num++
 

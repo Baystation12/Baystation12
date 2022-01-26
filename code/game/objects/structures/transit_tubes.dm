@@ -48,7 +48,7 @@
 
 
 /obj/structure/transit_tube_pod/Destroy()
-	for(var/atom/movable/AM in contents)
+	for(var/atom/movable/AM as anything in contents)
 		AM.dropInto(loc)
 
 	..()
@@ -59,7 +59,7 @@
 /obj/structure/transit_tube_pod/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			for(var/atom/movable/AM in contents)
+			for(var/atom/movable/AM as anything in contents)
 				AM.dropInto(loc)
 				AM.ex_act(severity++)
 
@@ -67,7 +67,7 @@
 			return
 		if(2.0)
 			if(prob(50))
-				for(var/atom/movable/AM in contents)
+				for(var/atom/movable/AM as anything in contents)
 					AM.dropInto(loc)
 					AM.ex_act(severity++)
 

@@ -45,7 +45,7 @@
 	. = ..()
 	if(.)
 		for(var/turf/T in view(1, src) - oldlocs)
-			for(var/atom/movable/AM in T)
+			for(var/atom/movable/AM as anything in T)
 				if(!istype(AM, /obj/effect/effect/smoke/chem))
 					reagents.splash(AM, splash_amount, copy = 1)
 		if(loc == destination)
@@ -59,7 +59,7 @@
 
 /obj/effect/effect/smoke/chem/proc/initial_splash()
 	for(var/turf/T in view(1, src))
-		for(var/atom/movable/AM in T)
+		for(var/atom/movable/AM as anything in T)
 			if(!istype(AM, /obj/effect/effect/smoke/chem))
 				reagents.splash(AM, splash_amount, copy = 1)
 

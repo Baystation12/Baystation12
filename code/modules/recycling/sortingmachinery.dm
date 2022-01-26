@@ -117,7 +117,7 @@
 			O.welded = 0
 		wrapped = null
 	var/turf/T = get_turf(src)
-	for(var/atom/movable/AM in contents)
+	for(var/atom/movable/AM as anything in contents)
 		AM.forceMove(T)
 	return ..()
 

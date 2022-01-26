@@ -1267,7 +1267,7 @@ About the new airlock wires panel:
 
 	if(safe)
 		for(var/turf/turf in locs)
-			for(var/atom/movable/AM in turf)
+			for(var/atom/movable/AM as anything in turf)
 				if(AM.blocks_airlock())
 					if(world.time > next_beep_at)
 						playsound(src.loc, close_failure_blocked, 30, 0, -3)
@@ -1276,7 +1276,7 @@ About the new airlock wires panel:
 					return
 
 	for(var/turf/turf in locs)
-		for(var/atom/movable/AM in turf)
+		for(var/atom/movable/AM as anything in turf)
 			if(AM.airlock_crush(door_crush_damage))
 				take_damage(door_crush_damage)
 				use_power_oneoff(door_crush_damage * 100)		// Uses bunch extra power for crushing the target.

@@ -443,7 +443,7 @@ var/list/turret_icons
 	var/list/targets = list()			//list of primary targets
 	var/list/secondarytargets = list()	//targets that are least important
 
-	for(var/mob/M in mobs_in_view(world.view, src))
+	for(var/mob/M as anything in mobs_in_view(world.view, src))
 		assess_and_assign(M, targets, secondarytargets)
 
 	if(!tryToShootAt(targets))

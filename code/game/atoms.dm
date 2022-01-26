@@ -393,15 +393,13 @@ its easier to just keep the beam vertical.
 	var/list/objs = list()
 	get_mobs_and_objs_in_view_fast(T,range, mobs, objs, checkghosts)
 
-	for(var/o in objs)
-		var/obj/O = o
+	for(var/obj/O as anything in objs)
 		if (exclude_objs?.len && (O in exclude_objs))
 			exclude_objs -= O
 			continue
 		O.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 
-	for(var/m in mobs)
-		var/mob/M = m
+	for(var/mob/M as anything in mobs)
 		if (exclude_mobs?.len && (M in exclude_mobs))
 			exclude_mobs -= M
 			continue
@@ -421,15 +419,13 @@ its easier to just keep the beam vertical.
 	var/list/objs = list()
 	get_mobs_and_objs_in_view_fast(T, hearing_distance, mobs, objs, checkghosts)
 
-	for(var/m in mobs)
-		var/mob/M = m
+	for(var/mob/M as anything in mobs)
 		if (exclude_mobs?.len && (M in exclude_mobs))
 			exclude_mobs -= M
 			continue
 		M.show_message(message,2,deaf_message,1)
 
-	for(var/o in objs)
-		var/obj/O = o
+	for(var/obj/O as anything in objs)
 		if (exclude_objs?.len && (O in exclude_objs))
 			exclude_objs -= O
 			continue

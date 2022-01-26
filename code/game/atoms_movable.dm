@@ -79,7 +79,7 @@
 	if(origin)
 		origin.Exited(src, destination)
 		if(is_origin_turf)
-			for(var/atom/movable/AM in origin)
+			for(var/atom/movable/AM as anything in origin)
 				AM.Uncrossed(src)
 			if(is_new_area && is_origin_turf)
 				origin.loc.Exited(src, destination)
@@ -87,7 +87,7 @@
 	if(destination)
 		destination.Entered(src, origin)
 		if(is_destination_turf) // If we're entering a turf, cross all movable atoms
-			for(var/atom/movable/AM in loc)
+			for(var/atom/movable/AM as anything in loc)
 				if(AM != src)
 					AM.Crossed(src)
 			if(is_new_area && is_destination_turf)

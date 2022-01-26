@@ -115,7 +115,7 @@
 		return 0
 
 	for(var/turf/T in destination)
-		for(var/atom/movable/AM in T)
+		for(var/atom/movable/AM as anything in T)
 			if(istype(AM, /mob/living))
 				var/mob/living/M = AM
 				M.gib()

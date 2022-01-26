@@ -281,9 +281,8 @@
 	for(var/organ in loaded_species.has_limbs)
 		if ((loaded_species.name == SPECIES_NABBER) || (organ == BP_GROIN))
 			organs += loaded_species.has_limbs[organ]["path"]
-	for(var/organ in organs)
-		var/obj/item/organ/O = organ
-		if(check_printable(organ))
+	for(var/obj/item/organ/O as anything in organs)
+		if(check_printable(O))
 			.[initial(O.organ_tag)] = list(O, get_organ_cost(O))
 
 /obj/machinery/organ_printer/flesh/proc/get_organ_cost(var/obj/item/organ/O)

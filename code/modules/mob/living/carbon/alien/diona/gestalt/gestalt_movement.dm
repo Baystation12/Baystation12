@@ -30,7 +30,7 @@
 /obj/structure/diona_gestalt/Move()
 	. = ..()
 	if(.)
-		for(var/atom/movable/AM in loc)
+		for(var/atom/movable/AM as anything in loc)
 			if(can_roll_up_atom(AM))
 				roll_up_atom(AM)
 

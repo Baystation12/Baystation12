@@ -277,7 +277,7 @@ proc/age2agedescription(age)
 	var/mob/selected = null
 
 	if(include_observers)
-		for(var/mob/M in GLOB.player_list)
+		for(var/mob/M as anything in GLOB.player_list)
 			if((M.stat != DEAD) || (!M.client))
 				continue
 			if(M.ckey == find_key)

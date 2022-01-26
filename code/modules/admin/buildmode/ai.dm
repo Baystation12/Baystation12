@@ -40,10 +40,10 @@
 /datum/build_mode/ai/Unselected()
 	. = ..()
 
-	for (var/mob/M in selected_mobs)
+	for (var/mob/M as anything in selected_mobs)
 		deselect_AI_mob(M)
 
-	for (var/mob/living/M in GLOB.living_mob_list_)
+	for (var/mob/living/M as anything in GLOB.living_mob_list_)
 		user.remove_client_image(M.ai_status_image)
 
 /datum/build_mode/ai/TimerEvent()
@@ -52,7 +52,7 @@
 	if (!user)
 		return
 
-	for (var/mob/living/M in GLOB.living_mob_list_)
+	for (var/mob/living/M as anything in GLOB.living_mob_list_)
 		if (M.ai_status_image)
 			user.add_client_image(M.ai_status_image)
 

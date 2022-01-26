@@ -803,7 +803,7 @@
 			return
 		speak_incantation(user, "Uhrast ka'hfa heldsagen ver[pick("'","`")]lot!")
 		to_chat(user, "<span class='warning'>In the last moment of your humble life, you feel an immense pain as fabric of reality mends... with your blood.</span>")
-		for(var/mob/M in GLOB.living_mob_list_)
+		for(var/mob/M as anything in GLOB.living_mob_list_)
 			if (!iscultist(M))
 				to_chat(M, SPAN_OCCULT("You see a vision of \the [user] keeling over dead, their blood glowing blue as it escapes their body and dissipates into thin air; you hear an otherwordly scream and feel that a great disaster has just been averted."))
 			else

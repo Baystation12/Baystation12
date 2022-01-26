@@ -44,7 +44,7 @@
 				var/obj/item/stack/new_stack = stack.split(amount)
 				new_stack.dropInto(loc)
 				return new_stack
-	for(var/obj/item/item in materials)
+	for(var/obj/item/item as anything in materials)
 		if(istype(item, material_type))
 			materials -= item
 			item.dropInto(loc)

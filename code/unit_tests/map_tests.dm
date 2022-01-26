@@ -174,7 +174,7 @@
 	for(var/obj/structure/closet/C in world)
 		if(!C.opened && isPlayerLevel(C.z))
 			var/total_content_size = 0
-			for(var/atom/movable/AM in C.contents)
+			for(var/atom/movable/AM as anything in C.contents)
 				total_content_size += C.content_size(AM)
 			if(total_content_size > C.storage_capacity)
 				log_bad("[log_info_line(C)] contains more objects than able to hold ([total_content_size] / [C.storage_capacity]).")

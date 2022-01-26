@@ -166,7 +166,7 @@
 
 
 /datum/unit_test/atmos_machinery/conserve_moles/pump_gas
-	name = "ATMOS MACHINERY: pump_gas() Conserves Moles"
+	name = "ATMOS MACHINERY: pump_gas anything Conserves Moles"
 
 /datum/unit_test/atmos_machinery/conserve_moles/pump_gas/start_test()
 	for(var/case_name in test_cases)
@@ -196,7 +196,7 @@
 	return 1
 
 /datum/unit_test/atmos_machinery/conserve_moles/scrub_gas
-	name = "ATMOS MACHINERY: scrub_gas() Conserves Moles"
+	name = "ATMOS MACHINERY: scrub_gas anything Conserves Moles"
 
 /datum/unit_test/atmos_machinery/conserve_moles/scrub_gas/start_test()
 	var/list/filtering = gas_data.gases
@@ -213,7 +213,7 @@
 	return 1
 
 /datum/unit_test/atmos_machinery/conserve_moles/filter_gas
-	name = "ATMOS MACHINERY: filter_gas() Conserves Moles"
+	name = "ATMOS MACHINERY: filter_gas anything Conserves Moles"
 
 /datum/unit_test/atmos_machinery/conserve_moles/filter_gas/start_test()
 	var/list/filtering = gas_data.gases
@@ -249,7 +249,7 @@
 	return 1
 
 /datum/unit_test/atmos_machinery/conserve_moles/mix_gas
-	name = "ATMOS MACHINERY: mix_gas() Conserves Moles"
+	name = "ATMOS MACHINERY: mix_gas anything Conserves Moles"
 
 /datum/unit_test/atmos_machinery/conserve_moles/mix_gas/start_test()
 	for(var/case_name in test_cases)

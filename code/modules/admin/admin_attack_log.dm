@@ -105,7 +105,7 @@
 	if(!victims || !victims.len)
 		return
 
-	for(var/mob/victim in victims)
+	for(var/mob/victim as anything in victims)
 		admin_attack_log(attacker, victim, attacker_message, victim_message, admin_message)
 
 /proc/admin_inject_log(mob/attacker, mob/victim, obj/item/weapon, reagents, amount_transferred, violent=0)

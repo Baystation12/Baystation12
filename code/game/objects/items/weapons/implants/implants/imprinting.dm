@@ -18,7 +18,7 @@
 	It is HIGLY ILLEGAL and the seller does NOT endorse use of this device in such way.
 	Any amount of "Mind-Breaker"(TM) present in bloodstream will trigger this side-effect.<BR>"}
 	. += "<HR><B>Instructions:</B><BR>"
-	for(var/i = 1 to instructions.len)
+	for(var/i = 1 to length(instructions))
 		. += "- [instructions[i]] <A href='byond://?src=\ref[src];edit=[i]'>Edit</A> <A href='byond://?src=\ref[src];del=[i]'>Remove</A><br>"
 	. += "<A href='byond://?src=\ref[src];add=1'>Add</A>"
 
@@ -103,7 +103,7 @@
 	. = ..()
 
 /obj/item/implant/imprinting/can_implant(mob/M, mob/user, target_zone)
-	var/mob/living/carbon/human/H = M	
+	var/mob/living/carbon/human/H = M
 	if(istype(H))
 		var/obj/item/organ/internal/B = H.internal_organs_by_name[BP_BRAIN]
 		if(!B || H.isSynthetic())

@@ -36,7 +36,7 @@
 
 	// now everything inside the disposal gets put into the holder
 	// note AM since can contain mobs or objs
-	for(var/atom/movable/AM in stuff)
+	for(var/atom/movable/AM as anything in stuff)
 		AM.forceMove(src)
 		if(istype(AM, /obj/structure/bigDelivery) && !hasmob)
 			var/obj/structure/bigDelivery/T = AM
@@ -112,7 +112,7 @@
 	if(other.reagents?.total_volume)
 		src.create_reagents()
 		other.reagents.trans_to_holder(src.reagents, other.reagents.total_volume)
-	for(var/atom/movable/AM in other)
+	for(var/atom/movable/AM as anything in other)
 		AM.forceMove(src)		// move everything in other holder to this one
 		if(ismob(AM))
 			var/mob/M = AM

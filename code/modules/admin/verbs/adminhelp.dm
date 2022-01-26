@@ -10,7 +10,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	//explode the input msg into a list
 	var/list/msglist = splittext(msg, " ")
 
-	for(var/mob/M in SSmobs.mob_list)
+	for(var/mob/M as anything in SSmobs.mob_list)
 		var/list/indexing = list(M.real_name, M.name)
 		if(M.mind)	indexing += M.mind.name
 

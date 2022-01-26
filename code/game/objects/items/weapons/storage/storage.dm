@@ -211,7 +211,7 @@
 		add_fingerprint(usr)
 
 		if(!prevent_warning)
-			for(var/mob/M in viewers(usr, null))
+			for(var/mob/M as anything in viewers(usr, null))
 				if (M == usr)
 					to_chat(usr, "<span class='notice'>You put \the [W] into [src].</span>")
 				else if (M in range(1, src)) //If someone is standing close enough, they can tell what it is... TODO replace with distance check
