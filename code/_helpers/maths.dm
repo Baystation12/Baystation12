@@ -6,6 +6,10 @@
 #define RAD_TO_DEG 57.2957795
 
 
+/// The mathematical constant pi to f32 precision
+#define PI 3.141592
+
+
 /// A random real number between low and high inclusive
 #define Frand(low, high) ( rand() * ((high) - (low)) + (low) )
 
@@ -120,6 +124,20 @@
 /proc/VecMag(...)
 	var/squareMag = VecSquareMag(arglist(args))
 	return sqrt(squareMag)
+
+
+/// Returns a random real from an arbitrary XdY dice roll
+/proc/Drand(x, y, normalize)
+	var/sum = 0
+	for (var/i = 1 to x)
+		sum += Floor(rand() * y)
+	if (normalize)
+		return sum / ((x * y) - x)
+	return sum + x
+
+
+/// An aproximate, fairly granular random normal real number in 0..1
+#define Nrand Drand(4, 6, TRUE)
 
 
 /// Returns the angle of the matrix according to atan2 on the b, a parts
