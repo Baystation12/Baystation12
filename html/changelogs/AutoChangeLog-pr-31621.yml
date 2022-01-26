@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Ghosts can no longer open the prompt to rename exoplanet species.
