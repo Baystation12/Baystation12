@@ -221,6 +221,8 @@
 	if (severity == 1)
 		ChangeTurf(get_base_turf(src.z))
 		return
+
+	severity = min(1, severity * 0.2)
 	..()
 
 // Wall-rot effect, a nasty fungus that destroys walls.
