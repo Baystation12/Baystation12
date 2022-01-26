@@ -1239,6 +1239,7 @@
 #include "code\modules\admin\buildmode\relocate_to.dm"
 #include "code\modules\admin\buildmode\room_builder.dm"
 #include "code\modules\admin\buildmode\throw_at.dm"
+#include "code\modules\admin\buildmode\turret.dm"
 #include "code\modules\admin\buildmode\_datums\mob_spawner.dm"
 #include "code\modules\admin\callproc\callproc.dm"
 #include "code\modules\admin\DB ban\functions.dm"
