@@ -131,7 +131,7 @@ obj/item/clothing/under/covenant/jiralhanae/blue/rolled
 /obj/item/clothing/head/helmet/jiralhanae/covenant/chieftain
 	name = "Jiralhanae Helm (Chieftain)"
 	desc = "This modified helmet is signficant to Jiralhanae clans. It is a mark of importance and leadership, however now somewhat diminished by the covenant hierarchy."
-	icon_state = "helm_chieftain_red"
+	icon_state = "helm_chieftain"
 	armor_thickness = 28
 	armor_thickness_max = 28
 
@@ -263,7 +263,7 @@ obj/item/clothing/under/covenant/jiralhanae/blue/rolled
 	desc = "This modified armor used to be a mark of importance to Jiralhanae clans. The Covenant hierarchy has diminished it's power."
 	species_restricted = list("Jiralhanae")
 	icon = JIRALHANAE_ICON_PATH_OBJ
-	icon_state = "armour_chieftain_red"
+	icon_state = "armour_chieftain"
 	sprite_sheets = list("Jiralhanae" = JIRALHANAE_ICON_PATH_MOB)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	armor = list(melee = 50, bullet = 45, laser = 50, energy = 40, bomb = 35, bio = 20, rad = 20)
@@ -316,6 +316,8 @@ obj/item/clothing/under/covenant/jiralhanae/blue/rolled
 
 /obj/item/clothing/shoes/jiralhanae/covenant/captain/chieftain
 	name = "Jiralhanae Greaves (Chieftain)"//We have no Chieftain sprites for these, but a rename still works.
+	icon = JIRALHANAE_ICON_PATH_OBJ
+	icon_state = "chieftainfeet"
 
 /obj/item/clothing/shoes/magboots/jiralhanaeEVA
 	name = "Jiralhanae Maggreaves"

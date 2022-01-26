@@ -11,7 +11,7 @@
 	desc = "This device embeds itself into soft targets and explodes into a hail of deadly shards. Works well as a melee weapon."
 	icon = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_obj.dmi'
 	icon_state = "spikegren0"
-	icon_override = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
+	icon_override = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_weapons.dmi'
 	item_state = "spikegren1"
 	item_state_slots = list(slot_l_hand_str = "spnade", slot_r_hand_str = "spnade")
 	sprite_sheets = list(\
