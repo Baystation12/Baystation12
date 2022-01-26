@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - admin: Fix 'Who' verb not showing antag status next to players who late-joined
+      into antag roles.
