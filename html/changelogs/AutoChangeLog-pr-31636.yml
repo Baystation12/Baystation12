@@ -1,0 +1,4 @@
+author: SomeAngryMiner
+delete-after: true
+changes:
+  - tweak: Powerloader motivators had their speed dropped to regular again.
