@@ -9,4 +9,3 @@
 	performing various tasks for their government. This usually involves missions to recruit new members, as well as improve relations with neighbouring powers \
 	Of course, not all free synthetics are part of the Positronic Union. To this day, The Positronic Union represents approximately 68% of all free synthetics. \
 	The rest either remain citizens of their original government or declare no citizenship."
-	subversive_potential = 15
