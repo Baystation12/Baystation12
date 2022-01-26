@@ -43,6 +43,8 @@
 #define HOME_SYSTEM_IOLAUS     "Iolaus"
 #define HOME_SYSTEM_GAIA       "Gaia"
 #define HOME_SYSTEM_MAGNITKA   "Magnitka"
+#define HOME_SYSTEM_CASTILLA   "Nueva Castilla"
+#define HOME_SYSTEM_FOSTER	   "Foster's Planet"
 #define HOME_SYSTEM_STATELESS  "Stateless"
 #define HOME_SYSTEM_OTHER      "Other System"
 #define HOME_SYSTEM_DEEP_SPACE "Deep Space"
