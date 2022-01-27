@@ -1,0 +1,4 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: The new boot sprites no longer have a blurry-looking side state.
