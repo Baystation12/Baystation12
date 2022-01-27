@@ -1,5 +1,0 @@
-author: Imienny
-delete-after: true
-changes:
-  - bugfix: Fixed bug with walking not making floors dirty, Janitors rejoyce!
-  - tweak: Walking will now make you trigger beartraps and snap pops.
