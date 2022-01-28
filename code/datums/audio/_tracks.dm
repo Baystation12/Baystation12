@@ -43,13 +43,6 @@
 	license = /decl/license/grandfathered
 	url = "https://modarchive.org/index.php?request=view_by_moduleid&query=73980"
 
-/decl/audio/track/cloudsofneptune
-	source = 'sound/music/Clouds_of_Neptune.ogg'
-	title = "Clouds of Neptune"
-	author = "Dukica99"
-	license = /decl/license/cc_by_4_0
-	url = "https://soundcloud.com/user-472035237/clouds-of-neptune"
-
 /decl/audio/track/comet_haley
 	source = 'sound/music/comet_haley.ogg'
 	title = "Comet Halley"
