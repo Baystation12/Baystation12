@@ -30,7 +30,7 @@
 
 	if(do_after(src, 5))
 		crouched = !crouched
-		icon_state = "hunter[crouched]"
+		icon_state = "[initial(icon_state)][crouched]"
 		if(crouched)
 			speed = crouch_speed
 		else

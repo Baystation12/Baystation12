@@ -4,7 +4,7 @@
 	desc = "A hulking monstrosity of flowing worms encased in starship-grade alloy."
 
 	icon = 'code/modules/halo/covenant/species/lekgolo/hunters.dmi'
-	icon_state = "hunter0"
+	icon_state = "hunter"
 	icon_living = "hunter0"
 	icon_dead = "hunter_dead"
 
