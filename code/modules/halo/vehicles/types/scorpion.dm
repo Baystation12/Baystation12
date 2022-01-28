@@ -55,6 +55,8 @@
 	fire_delay = 40
 	fire_sound = 'code/modules/halo/sounds/scorp_cannon_fire.ogg'
 
+	scope_zoom_amount = 1.5
+
 	burst = 1
 
 	guns_switchto = newlist(/datum/vehicle_gun/scorp_cannon,/datum/vehicle_gun/scorp_machinegun)
