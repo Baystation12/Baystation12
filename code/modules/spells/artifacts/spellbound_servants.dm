@@ -179,7 +179,7 @@
 	desc = "A ghost, or an imaginary friend; the Overseer is immune to space and can turn invisible at a whim, but has little offensive capabilities."
 	spiel = "Physicality is not something you are familiar with. Indeed, injuries cannot slow you down, but you can't fight back, either! In addition to this, you can reach into the void and return the soul of a single departed crewmember via the revoke death verb, if so desired; this can even revive your Master, should they fall in combat before you do. Serve them well."
 	equipment = list(/obj/item/clothing/under/grimhoodie = slot_w_uniform,
-					/obj/item/clothing/shoes/sandals/grimboots = slot_shoes,
+					/obj/item/clothing/shoes/sandal/grimboots = slot_shoes,
 					/obj/item/contract/wizard/xray = slot_l_hand,
 					/obj/item/contract/wizard/telepathy = slot_r_hand)
 	spells = list(/spell/toggle_armor/overseer,

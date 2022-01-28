@@ -124,7 +124,7 @@
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
-	. += new/datum/stack_recipe/sandals(src)
+	. += new/datum/stack_recipe/sandal(src)
 	. += new/datum/stack_recipe/tile/wood(src)
 	. += create_recipe_list(/datum/stack_recipe/furniture/chair/wood)
 	. += new/datum/stack_recipe/crossbowframe(src)
