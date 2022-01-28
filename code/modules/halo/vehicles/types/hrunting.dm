@@ -33,8 +33,8 @@
 
 	acceleration = 2
 	drag = 2
-	min_speed = 3
-	max_speed = 3
+	min_speed = 8
+	max_speed = 6
 
 /obj/vehicles/hrunting/on_death()
 	. = ..()
