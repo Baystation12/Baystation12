@@ -75,7 +75,7 @@
 		icon_state = spent_icon
 	if(in_pile > 1 && overlays.len < in_pile-1)
 		for(var/i = 1 to in_pile)
-			var/image/img = image(icon,src,icon_state,layer,dir)
+			var/image/img = image(icon,icon_state,layer,dir)
 			img.pixel_x = rand(-16-i,16+i) - pixel_x
 			img.pixel_y = rand(-16-i,16+i) - pixel_y
 			img.transform = turn(matrix(), rand(120,300))
