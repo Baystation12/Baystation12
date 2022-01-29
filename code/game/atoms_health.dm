@@ -296,8 +296,8 @@
 /atom/ex_act(severity)
 	..()
 	// No hitsound here to avoid noise spam.
-	// Generalized - 75-125 damage at max, 38-63 at medium, 25-42 at minimum severities.
-	damage_health(rand(75, 125) / severity, DAMAGE_EXPLODE, severity = severity)
+	// Generalized - 250-350 damage at max, 125-175 at medium, 83-117 at minimum severities.
+	damage_health(rand(250, 350) / severity, DAMAGE_EXPLODE, severity = severity)
 
 
 /atom/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)

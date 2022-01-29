@@ -9,7 +9,7 @@
 	icon_state = "r_generic"
 
 /turf/simulated/wall/r_wall/New(var/newloc)
-	..(newloc, MATERIAL_PLASTEEL,MATERIAL_PLASTEEL) //3strong
+	..(newloc, MATERIAL_STEEL,MATERIAL_PLASTEEL) //3strong
 
 /turf/simulated/wall/r_wall/hull
 	name = "hull"
