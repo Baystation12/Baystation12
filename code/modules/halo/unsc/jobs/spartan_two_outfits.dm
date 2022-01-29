@@ -1,5 +1,5 @@
 
-/decl/hierarchy/outfit/spartan_two
+/decl/hierarchy/outfit/job/unsc/spartan_two
 	name = "Spartan II"
 	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan
@@ -9,8 +9,7 @@
 	l_ear = /obj/item/device/radio/headset/unsc/spartan
 	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e9)
-	pda_slot = null
-	pda_type = null
+	id_type = /obj/item/weapon/card/id/spartan
 	flags = 0
 
 /decl/hierarchy/outfit/job/adminspawn_marine/spartan
@@ -18,6 +17,7 @@
 
 	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan
+	mask = null
 	gloves = /obj/item/clothing/gloves/spartan
 	shoes = /obj/item/clothing/shoes/magboots/spartan
 	head = /obj/item/clothing/head/helmet/spartan
@@ -29,6 +29,7 @@
 	r_ear = /obj/item/weapon/reagent_containers/syringe/biofoam
 	l_pocket =/obj/item/weapon/grenade/frag/m9_hedp
 	r_pocket = /obj/item/weapon/armor_patch
+	id_type = /obj/item/weapon/card/id/spartan
 	flags = 0
 
 /decl/hierarchy/outfit/job/adminspawn_marine/spartan/br55

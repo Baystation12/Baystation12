@@ -46,7 +46,7 @@ Cael May 2020
 /datum/job/unsc/spartan_two/firefight
 	total_positions = 1
 	spawn_positions = 1
-	outfit_type = /decl/hierarchy/outfit/spartan_two/firefight
+	outfit_type = /decl/hierarchy/outfit/job/unsc/spartan_two/firefight
 	alt_titles = list()
 	spawnpoint_override = null
 	fallback_spawnpoint = null
@@ -114,7 +114,7 @@ Cael May 2020
 	l_pocket = /obj/item/ammo_magazine/m7/m443
 	r_pocket = /obj/item/weapon/gun/projectile/m6c_magnum_s
 
-/decl/hierarchy/outfit/spartan_two/firefight
+/decl/hierarchy/outfit/job/unsc/spartan_two/firefight
 	name = "Spartan II (firefight)"
 
 	//a starting weapon

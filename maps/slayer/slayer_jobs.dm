@@ -5,7 +5,7 @@
 	create_record = 0
 	account_allowed = 0
 	generate_email = 0
-	outfit_type = /decl/hierarchy/outfit/spartan_two/red_team
+	outfit_type = /decl/hierarchy/outfit/job/unsc/spartan_two/red_team
 	total_positions = -1
 	spawn_positions = -1
 	track_players = 1
@@ -18,7 +18,7 @@
 	create_record = 0
 	account_allowed = 0
 	generate_email = 0
-	outfit_type = /decl/hierarchy/outfit/spartan_two/blue_team
+	outfit_type = /decl/hierarchy/outfit/job/unsc/spartan_two/blue_team
 	total_positions = -1
 	spawn_positions = -1
 	track_players = 1
@@ -30,7 +30,7 @@
 	create_record = 0
 	account_allowed = 0
 	generate_email = 0
-	outfit_type = /decl/hierarchy/outfit/spartan_two/red_team
+	outfit_type = /decl/hierarchy/outfit/job/unsc/spartan_two/red_team
 	total_positions = -1
 	spawn_positions = -1
 	track_players = 1
@@ -54,7 +54,7 @@
 	create_record = 0
 	account_allowed = 0
 	generate_email = 0
-	outfit_type = /decl/hierarchy/outfit/spartan_two/red_team
+	outfit_type = /decl/hierarchy/outfit/job/unsc/spartan_two/red_team
 	total_positions = -1
 	spawn_positions = -1
 	track_players = 1

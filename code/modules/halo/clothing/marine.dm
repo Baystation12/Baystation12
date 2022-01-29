@@ -397,6 +397,13 @@
 	icon_state = "id"
 	item_state = "card-id"
 
+/obj/item/weapon/card/id/spartan
+	name = "Spartan ID Badge"
+	desc = "An identification card worn by members of the Spartan-II program."
+	icon = 'code/modules/halo/icons/objs/(Placeholder)card.dmi'
+	icon_state = "id"
+	item_state = "card-id"
+
 /obj/item/clothing/gloves/thick/unsc //Combined effect of SWAT gloves and insulated gloves
 	desc = "Standard Issue UNSC Marine Gloves."
 	name = "Olive UNSC Combat gloves"
