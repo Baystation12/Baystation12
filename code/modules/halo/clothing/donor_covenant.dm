@@ -618,3 +618,9 @@
 /obj/item/clothing/head/helmet/sangheili/tsar
 	icon_state = "tsar_helm_obj"
 	item_state = "tsar_helm"
+
+//////WoodenTucker
+/mob/living/simple_animal/mgalekgolo/WoodenTucker
+	icon_state = "woodentucker"
+	icon_living = "woodentucker0"
+	icon_dead = "woodentucker_dead"
