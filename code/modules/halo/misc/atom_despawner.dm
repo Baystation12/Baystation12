@@ -21,7 +21,6 @@ var/global/datum/controller/process/atom_despawner/atom_despawner = new
 		var/clean_amount = max_cleanup_per_tick
 		if(overcap_panic_clean)
 			clean_amount *= OVERCAP_PANIC_CLEAN_MULT
-			overcap_panic_clean = 0
 		for(var/i=0,i<clean_amount,i++)
 			if(!cleanables.len)
 				break
@@ -36,6 +35,8 @@ var/global/datum/controller/process/atom_despawner/atom_despawner = new
 
 			//move on next tick
 			list_index++
+		if(overcap_panic_clean && cleanables.len < max_cleanables)
+			overcap_panic_clean = 0
 
 /datum/controller/process/atom_despawner/proc/attempt_clean(var/list_index = 1)
 	var/atom/movable/target = cleanables[list_index]

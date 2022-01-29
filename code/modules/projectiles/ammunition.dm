@@ -75,7 +75,7 @@
 		icon_state = spent_icon
 	if(in_pile > 1 && overlays.len < in_pile-1)
 		for(var/i = 1 to in_pile)
-			var/image/img = image(icon,src,icon_state,layer,dir)
+			var/image/img = image(icon,icon_state,layer,dir)
 			img.pixel_x = rand(-16-i,16+i) - pixel_x
 			img.pixel_y = rand(-16-i,16+i) - pixel_y
 			img.transform = turn(matrix(), rand(120,300))
@@ -106,10 +106,16 @@
 		var/obj/item/ammo_casing/here = locate(type) in loc.contents - src
 		if(here)
 			here.add_to_pile()
-			spawn(20) //Let's wait for the casing to finish their animation before we delete them.
-				qdel(src)
+			qdel(src)
 		else
 			atom_despawner.mark_for_despawn(src)
+
+/obj/item/ammo_casing/Destroy()
+	in_pile = 0
+	overlays.Cut()
+	if(BB)
+		qdel(BB)
+	. = ..()
 
 //Gun loading types
 #define SINGLE_CASING 	1	//The gun only accepts ammo_casings. ammo_magazines should never have this as their mag_type.
@@ -261,4 +267,6 @@
 
 	magazine_icondata_keys["[M.type]"] = icon_keys
 	magazine_icondata_states["[M.type]"] = ammo_states
+
+
 

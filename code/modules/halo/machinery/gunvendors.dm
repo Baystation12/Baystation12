@@ -140,7 +140,7 @@
 /obj/machinery/pointbased_vending/armory/armor
 	name = "UNSC Misc Equipment Vendor"
 	desc = "A machine full of spare UNSC armor and equipment"
-	req_access = list(access_unsc_marine)
+	req_access = list(access_unsc_armoury)
 	products = list(
 					"Undersuits" = -1,
 					/obj/item/clothing/under/unsc/marine_fatigues = 0,

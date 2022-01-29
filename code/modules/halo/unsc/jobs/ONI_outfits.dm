@@ -10,6 +10,7 @@
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/brown
 	uniform = /obj/item/clothing/under/color/black
+	l_hand = /obj/item/language_learner/human_to_sang
 
 /decl/hierarchy/outfit/job/unsc/oni/research/director
 	name = "ONI Research Director"

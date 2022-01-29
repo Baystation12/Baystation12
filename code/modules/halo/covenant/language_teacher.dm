@@ -28,3 +28,8 @@
 /obj/item/language_learner/unggoy_to_common
 	name = "Heretic Assessment"
 	desc = "A sheet of paper holding outdated observations of the viability of this system's inhabitants for integration with the covenant empire. The observations of their language and it's structure seems most useful."
+
+/obj/item/language_learner/human_to_sang
+	name = "Compiled Research"
+	desc = "Research on the language structure of the main leader-species of the invading alien forces. A treatise on the language, known words, and even a preliminary pronounciation guide is contained within."
+	language_string = LANGUAGE_SANGHEILI
