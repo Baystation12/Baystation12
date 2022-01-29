@@ -114,7 +114,7 @@
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/setup_trajectory()
 	. = ..()
-	kill_count = get_dist(loc, original) + rand(0,1) //Only overshoot, don't undershoot. Undershoot is an irritating player experience.
+	kill_count = get_dist(loc, original) + rand(-1,5) //Only overshoot, don't undershoot. Undershoot is an irritating player experience.
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/Move(var/newloc,var/dir)
 	if(get_dist(loc,original) > (get_dist(starting,original)/2))

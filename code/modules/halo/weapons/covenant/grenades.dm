@@ -28,11 +28,11 @@
 	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "plasmagrenade"
 	throw_speed = 0 //sleep each tick
-	det_time = 30
+	det_time = 20
 	can_adjust_timer = 0
 	starttimer_on_hit = 1
 	arm_sound = 'code/modules/halo/sounds/Plasmanadethrow.ogg'
-	alt_explosion_range = 2
+	alt_explosion_range = 3
 	alt_explosion_damage_max = 40
 	matter = list("nanolaminate" = 1, "kemocite" = 1)
 	salvage_components = list(/obj/item/plasma_core)
@@ -101,7 +101,7 @@
 	desc = "For only the most devoted of troops, this grenade is unthrowable, but can be dropped for a near instant explosion."
 	det_time = 5
 	throw_range = 0
-	alt_explosion_range = 2
+	alt_explosion_range = 4
 	alt_explosion_damage_max = 60
 
 #undef ADHERENCE_TIME

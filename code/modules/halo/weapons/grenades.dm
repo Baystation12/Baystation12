@@ -7,9 +7,9 @@
 	num_fragments = 8
 	can_adjust_timer = 0
 	starttimer_on_hit = 1
-	det_time = 30
-	explosion_size = 2
-	alt_explosion_range = 2
+	det_time = 15
+	explosion_size = 3
+	alt_explosion_range = 3
 	alt_explosion_damage_max = 40
 
 /obj/item/weapon/grenade/frag/m9_hedp/on_explosion(var/turf/O)

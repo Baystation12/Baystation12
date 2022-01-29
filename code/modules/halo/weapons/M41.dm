@@ -25,6 +25,7 @@
 	crosshair_file = 'code/modules/halo/weapons/icons/dragaim_missile.dmi'
 	charge_sound = null
 	slowdown_general = 1
+	scope_zoom_amount = 1.5
 
 /obj/item/weapon/gun/projectile/m41/update_icon()
 	if(ammo_magazine)

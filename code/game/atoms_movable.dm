@@ -113,6 +113,7 @@
 	src.thrower = thrower
 	src.throw_source = get_turf(src)	//store the origin turf
 	src.pixel_z = 0
+	target = get_turf(target) //Get our turf's target so we don't home in on our throw-target.
 	if(usr)
 		if(HULK in usr.mutations)
 			src.throwing = 2 // really strong throw!

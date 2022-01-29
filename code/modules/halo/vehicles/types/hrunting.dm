@@ -33,8 +33,8 @@
 
 	acceleration = 2
 	drag = 2
-	min_speed = 3
-	max_speed = 3
+	min_speed = 8
+	max_speed = 6
 
 /obj/vehicles/hrunting/on_death()
 	. = ..()
@@ -55,7 +55,7 @@
 	name = "Hrunting MG"
 	desc = "A fast-firing, arm mounted gatling gun."
 
-	fire_delay = 6
+	fire_delay = 9
 	fire_sound = 'code/modules/halo/sounds/scorp_machinegun_fire.ogg'
 
 	burst = 15
@@ -70,7 +70,7 @@
 	burst_size = 15
 	burst_delay = 1.2
 	dispersion = list(0.55)
-	fire_delay = 6
+	fire_delay = 9
 	fire_sound = 'code/modules/halo/sounds/scorp_machinegun_fire.ogg'
 	mag_used = /obj/item/ammo_magazine/hrunting_mg
 

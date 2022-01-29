@@ -25,6 +25,8 @@
 	edge = 1
 
 	//less explosive power but more spikes
+	det_time = 20
+	starttimer_on_hit = 1
 	explosion_size = 0
 	num_fragments = 250 //50 more than a high yield frag bomb
 
