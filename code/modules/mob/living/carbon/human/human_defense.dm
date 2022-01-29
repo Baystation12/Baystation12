@@ -222,19 +222,10 @@ meteor_act
 		radio_interrupt_cooldown = world.time + (RADIO_INTERRUPT_DEFAULT * 0.8) //getting beat on can briefly prevent radio use
 	if((I.damtype == BRUTE || I.damtype == PAIN) && prob(25 + (unimpeded_force * 2)))
 		if(!stat)
-			if(headcheck(hit_zone))
-				//Harder to score a stun but if you do it lasts a bit longer
-				if(prob(unimpeded_force))
-					apply_effect(20, PARALYZE, 100 * blocked)
-					if(lying)
-						visible_message("<span class='danger'>[src] [species.knockout_message]</span>")
-			else
-				//Easier to score a stun but lasts less time
+			if(!headcheck(hit_zone))
 				if(prob(unimpeded_force + 5))
 					apply_effect(3, WEAKEN, 100 * blocked)
-					if(lying)
-						visible_message("<span class='danger'>[src] has been knocked down!</span>")
-
+					visible_message("<span class='danger'>[src] has been knocked down!</span>")
 		//Apply blood
 		attack_bloody(I, user, effective_force, hit_zone)
 
