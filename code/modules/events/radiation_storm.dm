@@ -28,7 +28,10 @@
 /datum/event/radiation_storm/tick()
 	if(activeFor == enterBelt)
 		command_announcement.Announce("The [location_name()] has entered the radiation belt. Please remain in a sheltered area until the all clear is given.", "[location_name()] Sensor Array", zlevels = affecting_z)
-		radiate()
+		if(prob(66))
+			radiate()
+		else
+			postStartTicks -= rand(5,30)
 
 	if(activeFor >= enterBelt && activeFor <= leaveBelt)
 		postStartTicks++
