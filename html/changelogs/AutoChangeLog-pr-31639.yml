@@ -1,6 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Walls now take more damage from explosions.
-  - tweak: Pre-mapped reinforced walls are now a steel/plasteel mix instead of 100%
-      plasteel.
