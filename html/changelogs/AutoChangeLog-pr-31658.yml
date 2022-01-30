@@ -1,0 +1,6 @@
+author: Kell-E
+delete-after: true
+changes:
+  - balance: Knockouts now require severe brain damage to occur.
+  - bugfix: Knockout is now only checked once instead of two separate times by different
+      metrics
