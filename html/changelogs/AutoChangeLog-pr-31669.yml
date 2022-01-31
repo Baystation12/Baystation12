@@ -1,0 +1,7 @@
+author: Jux
+delete-after: true
+changes:
+  - maptweak: The weird science storage that science can't access on D2 has been killed,
+      including the glut of matierials.
+  - maptweak: Sec no longer has a spare box of flashbangs, and the spare teargas has
+      been moved to sec-arm with the grenade launcher.
