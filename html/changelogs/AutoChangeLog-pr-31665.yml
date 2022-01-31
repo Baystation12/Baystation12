@@ -1,0 +1,4 @@
+author: Andischa
+delete-after: true
+changes:
+  - bugfix: Hand labeler labels on condiment containers no longer disappear
