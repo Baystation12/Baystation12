@@ -232,6 +232,14 @@
 		/obj/item/material/knife/folding/
 		)
 
+/obj/item/storage/belt/holster/security/full/Initialize()
+	. = ..()
+	new /obj/item/device/flash (src)
+	new /obj/item/reagent_containers/spray/pepper (src)
+	new /obj/item/melee/baton/loaded (src)
+	new /obj/item/device/holowarrant (src)
+	queue_icon_update()
+
 /obj/item/storage/belt/security
 	name = "security belt"
 	desc = "Can hold security gear like handcuffs and flashes."
