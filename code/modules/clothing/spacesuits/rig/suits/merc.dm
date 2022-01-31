@@ -45,7 +45,11 @@
 /obj/item/clothing/gloves/rig/merc
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_NOCUFFS | ITEM_FLAG_AIRTIGHT
 	siemens_coefficient = 0
-
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC, SPECIES_VOX)
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_hands_unathi.dmi',
+		SPECIES_VOX = 'icons/mob/species/vox/onmob_hands_vox.dmi'
+		)
 /obj/item/clothing/head/helmet/space/rig/merc
 	light_overlay = "explorer_light"
 	camera = /obj/machinery/camera/network/mercenary
@@ -68,13 +72,6 @@
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_feet_unathi.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_feet_vox.dmi'
-		)
-
-/obj/item/clothing/gloves/rig/merc
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC, SPECIES_VOX)
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_hands_unathi.dmi',
-		SPECIES_VOX = 'icons/mob/species/vox/onmob_hands_vox.dmi'
 		)
 
 /obj/item/rig/merc/heavy
