@@ -34,9 +34,7 @@
 	return list(
 		/obj/item/clothing/suit/bio_suit/cmo,
 		/obj/item/clothing/head/bio_hood/cmo,
-		/obj/item/clothing/shoes/white,
 		/obj/item/clothing/suit/storage/toggle/labcoat/cmo,
-		/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
 		/obj/item/device/radio/headset/heads/cmo,
 		/obj/item/device/radio/headset/heads/cmo/alt,
 		/obj/item/device/flash,
@@ -53,10 +51,8 @@
 		/obj/item/device/holowarrant,
 		/obj/item/storage/firstaid/adv,
 		/obj/item/storage/box/armband/med,
-		/obj/item/storage/belt/general,
 		/obj/item/material/knife/folding/swiss/officer,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/medic, /obj/item/storage/backpack/satchel/med)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag/med, /obj/item/storage/backpack/messenger/med)),
+		/obj/item/storage/backpack/dufflebag/med,
 		RANDOM_SCRUBS
 	)
 
@@ -67,10 +63,8 @@
 
 /obj/structure/closet/secure_closet/medical_torchsenior/WillContain()
 	return list(
-		/obj/item/clothing/under/sterile,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/surgicalapron,
-		/obj/item/clothing/shoes/white,
 		/obj/item/device/radio/headset/headset_med,
 		/obj/item/device/radio/headset/headset_med/alt,
 		/obj/item/taperoll/medical,
@@ -83,8 +77,7 @@
 		/obj/item/device/megaphone,
 		/obj/item/storage/firstaid/adv,
 		/obj/item/material/knife/folding/swiss/medic,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/medic, /obj/item/storage/backpack/satchel/med)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag/med, /obj/item/storage/backpack/messenger/med)),
+		/obj/item/storage/backpack/dufflebag/med,
 		RANDOM_SCRUBS = 2
 	)
 
@@ -95,10 +88,8 @@
 
 /obj/structure/closet/secure_closet/medical_torch/WillContain()
 	return list(
-		/obj/item/clothing/under/sterile,
 		/obj/item/clothing/accessory/storage/white_vest,
 		/obj/item/clothing/suit/storage/toggle/fr_jacket,
-		/obj/item/clothing/shoes/white,
 		/obj/item/device/radio/headset/headset_med,
 		/obj/item/device/radio/headset/headset_corpsman/alt,
 		/obj/item/taperoll/medical,
@@ -112,8 +103,7 @@
 		/obj/item/clothing/suit/storage/medical_chest_rig,
 		/obj/item/clothing/head/hardhat/EMS,
 		/obj/item/material/knife/folding/swiss/medic,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/medic, /obj/item/storage/backpack/satchel/med)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag/med, /obj/item/storage/backpack/messenger/med))
+		/obj/item/storage/backpack/dufflebag/med
 	)
 
 /obj/structure/closet/wardrobe/medic_torch

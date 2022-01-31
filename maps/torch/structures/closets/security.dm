@@ -40,24 +40,19 @@
 		/obj/item/clothing/head/helmet/solgov/security,
 		/obj/item/device/radio/headset/headset_sec,
 		/obj/item/device/radio/headset/headset_sec/alt,
-		/obj/item/storage/belt/holster/security,
-		/obj/item/device/flash,
-		/obj/item/reagent_containers/spray/pepper,
+		/obj/item/storage/belt/holster/security/full,
 		/obj/item/grenade/chem_grenade/teargas,
-		/obj/item/melee/baton/loaded,
 		/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 		/obj/item/taperoll/police,
 		/obj/item/device/hailer,
 		/obj/item/clothing/accessory/storage/black_vest,
-		/obj/item/gun/energy/gun/small/secure,
 		/obj/item/device/megaphone,
 		/obj/item/clothing/gloves/thick,
-		/obj/item/device/holowarrant,
 		/obj/item/device/flashlight/maglight,
 		/obj/item/storage/belt/security,
 		/obj/item/material/knife/folding/swiss/sec,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/security, /obj/item/storage/backpack/satchel/sec)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag/sec, /obj/item/storage/backpack/messenger/sec))
+		/obj/item/storage/backpack/dufflebag/sec,
+		/obj/item/gun/energy/gun/small/secure
 	)
 
 
@@ -75,28 +70,21 @@
 		/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 		/obj/item/taperoll/police,
 		/obj/item/handcuffs,
-		/obj/item/storage/belt/holster/security,
+		/obj/item/storage/belt/holster/security/full,
 		/obj/item/storage/belt/security,
-		/obj/item/storage/belt/holster/general,
-		/obj/item/storage/belt/general,
-		/obj/item/device/flash,
 		/obj/item/device/megaphone,
-		/obj/item/melee/baton/loaded,
 		/obj/item/gun/energy/gun/secure/preauthorized,
 		/obj/item/melee/telebaton,
-		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/device/hailer,
 		/obj/item/material/clipboard,
 		/obj/item/folder/red,
-		/obj/item/device/holowarrant,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/device/flashlight/maglight,
 		/obj/item/device/taperecorder,
 		/obj/item/material/knife/folding/swiss/officer,
 		/obj/item/device/personal_shield,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/security, /obj/item/storage/backpack/satchel/sec)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag/sec, /obj/item/storage/backpack/messenger/sec))
+		/obj/item/storage/backpack/dufflebag/sec
 	)
 
 /obj/structure/closet/secure_closet/brigchief
@@ -112,23 +100,18 @@
 		/obj/item/device/radio/headset/headset_sec/alt,
 		/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 		/obj/item/taperoll/police,
-		/obj/item/storage/belt/holster/security,
+		/obj/item/storage/belt/holster/security/full,
 		/obj/item/storage/belt/security,
-		/obj/item/reagent_containers/spray/pepper,
-		/obj/item/melee/baton/loaded,
 		/obj/item/gun/energy/gun/secure/preauthorized,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/handcuffs,
 		/obj/item/device/hailer,
-		/obj/item/device/flash,
 		/obj/item/device/megaphone,
 		/obj/item/hand_labeler,
-		/obj/item/device/holowarrant,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/device/flashlight/maglight,
 		/obj/item/material/knife/folding/swiss/sec,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/security, /obj/item/storage/backpack/satchel/sec)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag/sec, /obj/item/storage/backpack/messenger/sec))
+		/obj/item/storage/backpack/dufflebag/sec
 	)
 
 /obj/structure/closet/secure_closet/forensics
@@ -159,8 +142,7 @@
 		/obj/item/storage/belt/security,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/material/knife/folding/swiss/sec,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/security, /obj/item/storage/backpack/satchel/sec)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag/sec, /obj/item/storage/backpack/messenger/sec))
+		/obj/item/storage/backpack/dufflebag/sec
 	)
 
 /obj/structure/closet/bombclosetsecurity/WillContain()
