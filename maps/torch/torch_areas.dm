@@ -428,13 +428,20 @@
 	lighting_tone = AREA_LIGHTING_COOL
 
 /area/shuttle/petrov/cell1
-	name = "\improper SRV Petrov - Isolation Cell 1"
+	name = "\improper SRV Petrov - Anomaly Isolation Cell"
 	icon_state = "shuttle"
 /area/shuttle/petrov/cell2
-	name = "\improper SRV Petrov - Isolation Cell 2"
+	name = "\improper SRV Petrov - Xenobiology Isolation Cell 2"
 	icon_state = "shuttlegrn"
 /area/shuttle/petrov/cell3
-	name = "\improper SRV Petrov - Isolation Cell 3"
+	name = "\improper SRV Petrov - Xenobiology Isolation Cell 3"
+	icon_state = "shuttle"
+
+/area/shuttle/petrov/terrarium
+	name = "\improper SRV Petrov - Terrarium"
+	icon_state = "shuttlegrn"
+/area/shuttle/petrov/terrarium_access
+	name = "\improper SRV Petrov - Terrarium Access"
 	icon_state = "shuttle"
 
 /area/shuttle/petrov/hallwaya
@@ -446,11 +453,6 @@
 	icon_state = "checkpoint1"
 	req_access = list(access_petrov_control)
 
-/area/shuttle/petrov/rd
-	icon_state = "heads_rd"
-	name = "\improper SRV Petrov - CSO's Office"
-	icon_state = "head_quarters"
-	req_access = list(access_petrov_rd)
 
 /area/shuttle/petrov/cockpit
 	name = "\improper SRV Petrov - Cockpit"
@@ -468,8 +470,13 @@
 	icon_state = "devlab"
 	req_access = list(access_petrov_analysis)
 
+/area/shuttle/petrov/observation
+	name = "\improper SRV Petrov - Anomaly Observation"
+	icon_state = "exploration"
+	req_access = list(access_petrov_analysis)
+
 /area/shuttle/petrov/toxins
-	name = "\improper SRV Petrov - Toxins Lab"
+	name = "\improper SRV Petrov - Experimental Atmospherics"
 	icon_state = "toxstorage"
 	req_access = list(access_petrov_toxins)
 
@@ -478,13 +485,9 @@
 	icon_state = "devlab"
 
 /area/shuttle/petrov/isolation
-	name = "\improper SRV Petrov - Isolation Lab"
+	name = "\improper SRV Petrov - Xenobiology Lab"
 	icon_state = "xeno_lab"
-
-/area/shuttle/petrov/phoron
-	name = "\improper SRV Petrov - Sublimation Lab"
-	icon_state = "toxstorage"
-	req_access = list(access_petrov_phoron)
+	req_access = list(access_petrov_analysis)
 
 /area/shuttle/petrov/custodial
 	name = "\improper SRV Petrov - Custodial"
@@ -498,6 +501,11 @@
 /area/shuttle/petrov/eva
 	name = "\improper SRV Petrov - EVA Storage"
 	icon_state = "locker"
+
+/area/shuttle/petrov/deep_storage
+	name = "\improper SRV Petrov - Restricted Storage"
+	icon_state = "checkpoint1"
+	req_access = list(access_petrov_control)
 
 //Turbolift
 /area/turbolift
