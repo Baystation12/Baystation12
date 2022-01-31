@@ -555,7 +555,8 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftstarboard)
 "aY" = (
-/obj/machinery/suit_storage_unit/science,
+/obj/structure/closet/crate/trashcart,
+/obj/random/maintenance/solgov,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftstarboard)
@@ -571,10 +572,15 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftstarboard)
 "ba" = (
-/obj/structure/closet/crate/trashcart,
-/obj/random/maintenance/solgov,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/tiled/techfloor,
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/random/trash,
+/turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftstarboard)
 "bb" = (
 /obj/structure/sign/warning/docking_area,
@@ -674,10 +680,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/disposal)
 "bn" = (
-/obj/structure/closet/crate/hydroponics/prespawned,
-/obj/random/maintenance/solgov,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/tiled/techfloor,
+/turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftstarboard)
 "bo" = (
 /obj/machinery/meter,
@@ -698,7 +701,8 @@
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/engine_room)
 "bq" = (
-/obj/structure/closet/toolcloset/excavation,
+/obj/structure/closet/crate,
+/obj/random/maintenance/solgov,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftstarboard)
@@ -744,32 +748,14 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftstarboard)
 "bv" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/stack/material/aluminium/fifty,
 /obj/machinery/alarm{
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
-/turf/simulated/floor/tiled/techfloor,
+/obj/structure/railing/mapped,
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftstarboard)
 "bw" = (
 /obj/machinery/power/rad_collector,
@@ -797,34 +783,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/morgue)
 "bA" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass/reinforced{
-	amount = 50
-	},
-/obj/item/stack/material/glass/reinforced{
-	amount = 50
-	},
-/obj/item/stack/material/glass/reinforced{
-	amount = 50
-	},
-/obj/item/stack/material/glass/reinforced{
-	amount = 50
-	},
-/obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/power/apc{
 	dir = 4;
 	name = "east bump";
@@ -9969,8 +9927,20 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/structure/closet/secure_closet/medical_torch,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/structure/closet/crate/freezer,
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/medical)
 "xK" = (
@@ -16144,6 +16114,11 @@
 /obj/item/tank/oxygen_emergency_double,
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos)
+"PW" = (
+/obj/structure/closet/crate,
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/seconddeck/aftstarboard)
 "PX" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -17556,6 +17531,11 @@
 	},
 /turf/simulated/floor/tiled,
 /area/engineering/foyer)
+"UK" = (
+/obj/structure/railing/mapped,
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/aftstarboard)
 "UN" = (
 /obj/machinery/firealarm{
 	dir = 4;
@@ -18682,6 +18662,22 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
+"YE" = (
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1"
+	},
+/obj/structure/railing/mapped,
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 8;
+	icon_state = "warningcorner"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/aftstarboard)
 "YG" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -38340,8 +38336,8 @@ NU
 PD
 aQ
 aY
-GM
-aY
+bq
+PW
 dA
 iF
 iN
@@ -38541,9 +38537,9 @@ JJ
 JN
 PD
 aR
-aY
 GM
-aY
+GM
+GM
 dA
 iF
 iN
@@ -38946,7 +38942,7 @@ aw
 PD
 PD
 ba
-GM
+YE
 GM
 QJ
 hj
@@ -39148,7 +39144,7 @@ aB
 aI
 PD
 bn
-GM
+UK
 GM
 QJ
 iN
@@ -39349,7 +39345,7 @@ PD
 PD
 PD
 PD
-bq
+fN
 bv
 bA
 Hy
