@@ -1,6 +1,0 @@
-author: Kell-E
-delete-after: true
-changes:
-  - tweak: Radiation storms now may have a delay between the 'Entered storm' message
-      and radiation starting, to mitigate fake storm meta. Challenge Radstorms at
-      your peril, they care not for your expectations.
