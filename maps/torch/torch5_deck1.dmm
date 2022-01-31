@@ -10846,14 +10846,6 @@
 /obj/structure/table/rack{
 	dir = 4
 	},
-/obj/item/storage/box/teargas{
-	pixel_x = 3;
-	pixel_y = 2
-	},
-/obj/item/storage/box/flashbangs{
-	pixel_x = -2;
-	pixel_y = -2
-	},
 /obj/item/storage/box/smokes,
 /obj/item/storage/box/smokes,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -28138,6 +28130,7 @@
 /obj/structure/window/reinforced,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/item/gun/launcher/grenade,
+/obj/item/storage/box/teargas,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "sCb" = (
