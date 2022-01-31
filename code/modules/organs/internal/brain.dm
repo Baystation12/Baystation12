@@ -228,14 +228,6 @@
 		return
 	if((owner.disabilities & EPILEPSY) && prob(1))
 		owner.seizure()
-	else if((owner.disabilities & TOURETTES) && prob(10))
-		owner.Stun(10)
-		switch(rand(1, 3))
-			if(1)
-				owner.emote("twitch")
-			if(2 to 3)
-				owner.say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
-		owner.make_jittery(100)
 	else if((owner.disabilities & NERVOUS) && prob(10))
 		owner.stuttering = max(10, owner.stuttering)
 
