@@ -4,8 +4,9 @@
 	var/list/settings = list()
 	var/help_text = {"\
 	***** Build Mode: Turret ******
-	Left Click         - Spawn a turret.
-	Right Click        - Settings menu.
+	Left Click             - Spawn a turret or update an existing turret.
+	Right Click            - Delete a turret
+	Right Click build icon - Configure turret settings.
 	************************************\
 	"}
 
@@ -22,6 +23,9 @@
 
 /datum/build_mode/turret/Help()
 	to_chat(user, SPAN_NOTICE(help_text))
+
+/datum/build_mode/turret/Configurate()
+	ui_interact(user)
 
 /datum/build_mode/turret/ui_interact(mob/user, ui_key = "turret_editor", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	. = ..()
@@ -102,7 +106,7 @@
 		. = TOPIC_HANDLED
 
 	if (href_list["add_access"])
-		var/access_list = input("Add Access type", "Access List") as anything in get_all_access_datums() || null
+		var/access_list = input("Add Access type", "Access List") as anything in get_all_access_datums()|null
 
 		if (!access_list)
 			return
@@ -112,7 +116,7 @@
 		. = TOPIC_HANDLED
 
 	if (href_list["remove_access"])
-		var/access_list = input("Remove Access type", "Access List") as anything in settings["access_list"] || null
+		var/access_list = input("Remove Access type", "Access List") as anything in settings["access_list"]|null
 
 		if (!access_list)
 			return
@@ -123,18 +127,25 @@
 
 /datum/build_mode/turret/OnClick(atom/object, list/pa)
 	if (pa["right"])
-		ui_interact(user)
-		return
+		if (istype(object, /obj/machinery/porta_turret))
+			qdel(object)
 
 	if (pa["left"])
 		if (!object)
 			return
+
+
 		var/turf/T = get_turf(object)
 
 		if (!T)
 			return
 
-		var/obj/machinery/porta_turret/P = new /obj/machinery/porta_turret(T)
+		var/obj/machinery/porta_turret/P
+		if (istype(object, /obj/machinery/porta_turret))
+			P = object
+			to_chat(usr, SPAN_NOTICE("Updated turret settings."))
+		else
+			P = new /obj/machinery/porta_turret(T)
 
 		P.health = settings["health"]
 		P.maxhealth = settings["health"]
