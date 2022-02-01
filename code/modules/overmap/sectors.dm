@@ -21,6 +21,7 @@
 	var/in_space = 1	//can be accessed via lucky EVA
 
 	var/hide_from_reports = FALSE
+	var/move_to_start = FALSE
 
 /obj/effect/overmap/visitable/Initialize()
 	. = ..()
@@ -36,7 +37,20 @@
 	start_x = start_x || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
 	start_y = start_y || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
 
-	forceMove(locate(start_x, start_y, GLOB.using_map.overmap_z))
+	if(!move_to_start)
+		forceMove(locate(start_x, start_y, GLOB.using_map.overmap_z))
+	else
+		if (move_to_start > 0)
+			var/obj/effect/overmap/visitable/ship/torch = SSshuttle.ship_by_type(/obj/effect/overmap/visitable/ship/torch)
+			var/list/displacement = Crand(move_to_start, TRUE)
+			if ((torch.x + displacement[1]) < 1 || (torch.x + displacement[1]) > (GLOB.using_map.overmap_size - 1))
+				displacement[1] = -displacement[1]
+			if ((torch.y + displacement[2]) < 1 || (torch.y + displacement[2]) > (GLOB.using_map.overmap_size - 1))
+				displacement[2] = -displacement[2]
+			displacement[1] = clamp(displacement[1], 1, GLOB.using_map.overmap_size - 1)
+			displacement[2] = clamp(displacement[2], 1, GLOB.using_map.overmap_size - 1)
+			var/turf/home = locate(torch.x + displacement[1], torch.y + displacement[2], torch.z)
+			forceMove(home)
 
 	for(var/obj/effect/overmap/event/E in loc)
 		qdel(E)
