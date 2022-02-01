@@ -1219,6 +1219,22 @@
 	reagents.add_reagent(/datum/reagent/drink/juice/banana, 5)
 	reagents.add_reagent(/datum/reagent/water, 10)
 
+/obj/item/reagent_containers/food/snacks/onionsoup
+	name = "onion soup"
+	desc = "Best enjoyed with some bread and cheese."
+	icon_state = "onionsoup"
+	trash = /obj/item/trash/snack_bowl
+	filling_color = "#af8e5a"
+	center_of_mass = "x=16;y=8"
+	nutriment_desc = list("onion" = 2)
+	nutriment_amt = 8
+	bitesize = 5
+	eat_sound = list('sound/items/eatfood.ogg', 'sound/items/drink.ogg')
+
+/obj/item/reagent_containers/food/snacks/onionsoup/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/water, 5)
+
 /obj/item/reagent_containers/food/snacks/vegetablesoup
 	name = "vegetable soup"
 	desc = "A highly nutritious blend of vegetative goodness. Guaranteed to leave you with a, er, \"souped-up\" sense of wellbeing."
