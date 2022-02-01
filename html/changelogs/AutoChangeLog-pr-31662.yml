@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: Tweaked turret buildmode so you can delete turrets and update the settings
-      of already existing turrets.
