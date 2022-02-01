@@ -140,6 +140,45 @@
 #define Nrand Drand(4, 6, TRUE)
 
 
+/// A circular random coordinate pair from 0, unit by default, scaled by radius, then rounded if round.
+/proc/Crand(radius = 1, round)
+	var/angle = rand(0, 359)
+	var/x = cos(angle) * radius
+	var/y = sin(angle) * radius
+	if (round)
+		x = Round(x)
+		y = Round(y)
+	return list(x, y)
+
+/**
+* A circular random coordinate with radius on center_x, center_y,
+* reflected into low_x,low_y -> high_x,high_y, clamped in low,high,
+* and rounded if round is set
+*
+* Generally this proc is useful for placement around a point (eg a
+* player) that must stay within map boundaries, or some similar circle
+* in box constraint
+*
+* A "donut" pattern can be achieved by varying the number supplied as
+* radius outside the scope of the proc, eg as BCrand(Frand(1, 3), ...)
+*/
+/proc/BCrand(radius, center_x, center_y, low_x, low_y, high_x, high_y, round)
+	var/list/xy = Crand(radius, round)
+	var/dx = xy[1]
+	var/dy = xy[2]
+	var/x = center_x + dx
+	var/y = center_y + dy
+	if (x < low_x || x > high_x)
+		x = center_x - dx
+	if (y < low_y || y > high_y)
+		y = center_y - dy
+	return list(
+		clamp(x, low_x, high_x),
+		clamp(y, low_y, high_y)
+	)
+
+
+
 /// Returns the angle of the matrix according to atan2 on the b, a parts
 /matrix/proc/get_angle()
 	return Atan2(b, a)
