@@ -9418,7 +9418,7 @@
 "aRX" = (
 /obj/machinery/door/airlock/multi_tile/glass{
 	autoclose = 1;
-	dir = 2;
+	dir = 8;
 	name = "Warehouse"
 	},
 /obj/machinery/door/firedoor,
@@ -10229,7 +10229,7 @@
 "aUC" = (
 /obj/machinery/door/airlock/multi_tile/glass{
 	autoclose = 1;
-	dir = 2;
+	dir = 8;
 	name = "Warehouse"
 	},
 /obj/machinery/door/firedoor,
