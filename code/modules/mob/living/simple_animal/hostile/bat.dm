@@ -1,5 +1,11 @@
+/datum/say_list/bat
+	speak = list("Squeek!","SQUEEK!","Squeek?")
+	emote_hear = list("squeeks","squeaks")
+	emote_see = list("flies in a circle", "flutters", "scritches at something")
+
+
 /mob/living/simple_animal/hostile/scarybat
-	name = "space bat swarm"
+	name = "bat swarm"
 	desc = "A swarm of cute little blood sucking bats that looks pretty upset."
 	icon = 'icons/mob/simple_animal/bats.dmi'
 	icon_state = "bat"
@@ -19,17 +25,29 @@
 	response_disarm = "gently pushes aside the"
 	response_harm = "hits the"
 
+	speak_emote = list("squeeks","squeeks")
+
 	harm_intent_damage = 10
 
 	natural_weapon = /obj/item/natural_weapon/bite
 
 	ai_holder = /datum/ai_holder/simple_animal/melee/evasive
 
-	// meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
-
-	// say_list_type = /datum/say_list/mouse	// Close enough
+	say_list_type = /datum/say_list/bat
 
 	var/scare_chance = 15
+
+	see_in_dark = 20
+
+	min_gas = null
+	max_gas = null
+	min_oxy = 0
+	minbodytemp = 0
+
+
+/mob/living/simple_animal/hostile/scarybat/Allow_Spacemove()
+	return TRUE
+
 
 /mob/living/simple_animal/hostile/scarybat/apply_melee_effects(var/atom/A)
 	if(isliving(A))
@@ -49,3 +67,18 @@
 /mob/living/simple_animal/hostile/scarybat/cult/strong
 	maxHealth = 60
 	health = 60
+
+
+/mob/living/simple_animal/hostile/scarybat/wandering
+	break_stuff_probability = 1
+	ai_holder = /datum/ai_holder/simple_animal/melee/hit_and_run/aggressive
+
+
+/mob/living/simple_animal/hostile/scarybat/wandering/Initialize()
+	. = ..()
+	verbs += /mob/living/proc/ventcrawl
+
+
+/mob/living/simple_animal/hostile/scarybat/wandering/frenzied
+	scare_chance = 30
+	ai_holder = /datum/ai_holder/simple_animal/melee/evasive

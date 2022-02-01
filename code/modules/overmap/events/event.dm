@@ -86,11 +86,15 @@
 			E.kill()
 			LAZYREMOVE(ship_events[ship], E)
 
-/decl/overmap_event_handler/proc/is_event_active(var/ship, var/event_type, var/severity)
-	if(!ship_events[ship])	return
+
+/decl/overmap_event_handler/proc/is_event_active(ship, event_type, severity)
+	if(!ship_events[ship])
+		return
+
 	for(var/datum/event/E in ship_events[ship])
-		if(E.type == event_type && E.severity == severity)
-			return E
+		if(E.type == event_type)
+			if(severity == EVENT_ANY_SEVERITY || E.severity == severity)
+				return E
 
 /decl/overmap_event_handler/proc/on_turf_entered(var/turf/new_loc, var/obj/effect/overmap/visitable/ship/ship, var/old_loc)
 	if(!istype(ship))

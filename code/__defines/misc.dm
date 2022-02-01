@@ -71,6 +71,8 @@
 #define EVENT_LEVEL_MAJOR    3
 #define EVENT_LEVEL_EXO      4
 
+#define EVENT_ANY_SEVERITY 0
+
 //General-purpose life speed define for plants.
 #define HYDRO_SPEED_MULTIPLIER 1
 

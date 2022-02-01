@@ -141,6 +141,35 @@
 	return FALSE
 
 
+/datum/ai_holder/simple_animal/melee/hit_and_run/aggressive
+	destructive = TRUE
+	violent_breakthrough = TRUE
+	base_wander_delay = 2
+	var/flee_for = 0
+	var/cooldown = 0
+
+/datum/ai_holder/simple_animal/melee/hit_and_run/aggressive/special_flee_check()
+	if(holder.is_cloaked())
+		return FALSE
+
+	if(flee_for > 0)
+		flee_for -= 1
+		return TRUE
+	if(cooldown > 0)
+		cooldown -= 1
+		return FALSE
+
+	if(isliving(target))
+		var/mob/living/L = target
+		if(L && !L.incapacitated(INCAPACITATION_DISABLED))
+			cooldown = rand(5,10)
+			if(prob(50))
+				flee_for = rand(5,10)
+				return TRUE
+
+	return FALSE
+
+
 // Simple mobs that aren't hostile, but will fight back.
 /datum/ai_holder/simple_animal/retaliate
 	hostile = FALSE
