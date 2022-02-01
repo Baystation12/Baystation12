@@ -8,6 +8,7 @@
 	desc = "Sensor array detects an small, insignificant asteroid. The core appears to be reflecting scans."
 	in_space = 1
 	known = 0
+	place_near_main = list(2, 4)
 	icon_state = "meteor4"
 	hide_from_reports = TRUE
 	initial_generic_waypoints = list(

@@ -22,6 +22,9 @@
 
 	var/hide_from_reports = FALSE
 
+	/// null | num | list. If a num or a (num, num) list, the radius or random bounds for placing this sector near the main map's overmap icon.
+	var/list/place_near_main
+
 /obj/effect/overmap/visitable/Initialize()
 	. = ..()
 	if(. == INITIALIZE_HINT_QDEL)
@@ -33,10 +36,20 @@
 	if(!GLOB.using_map.overmap_z)
 		build_overmap()
 
-	start_x = start_x || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
-	start_y = start_y || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
-
-	forceMove(locate(start_x, start_y, GLOB.using_map.overmap_z))
+	var/map_low = OVERMAP_EDGE
+	var/map_high = GLOB.using_map.overmap_size - OVERMAP_EDGE
+	if (islist(place_near_main))
+		place_near_main = Frand(place_near_main[1], place_near_main[2])
+	if (place_near_main)
+		var/obj/effect/overmap/visitable/main = map_sectors["1"]
+		var/list/offset = BCrand(abs(place_near_main), main.x, main.y, map_low, map_low, map_high, map_high, TRUE)
+		start_x = offset[1]
+		start_y = offset[2]
+	else
+		start_x = start_x || rand(map_low, map_high)
+		start_y = start_y || rand(map_low, map_high)
+	var/turf/home = locate(start_x, start_y, GLOB.using_map.overmap_z)
+	forceMove(home)
 
 	for(var/obj/effect/overmap/event/E in loc)
 		qdel(E)
