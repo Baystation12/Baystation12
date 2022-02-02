@@ -101,13 +101,19 @@
 	if(!istype(user))
 		return 0
 
+	var/list/access_list = list()
 	var/obj/item/weapon/card/id/I = user.GetIdCard()
-	if(!I)
+	var/obj/item/organ/internal/stack/lace = user.GetLace()
+	if(I)
+		access_list += I.access
+	else if(lace)
+		access_list += lace.access
+	else
 		if(loud)
 			to_chat(user, "<span class='notice'>\The [computer] flashes an \"RFID Error - Unable to scan ID\" warning.</span>")
 		return 0
 
-	if(access_to_check in I.access)
+	if(access_to_check in access_list)
 		return 1
 	else if(loud)
 		to_chat(user, "<span class='notice'>\The [computer] flashes an \"Access Denied\" warning.</span>")
