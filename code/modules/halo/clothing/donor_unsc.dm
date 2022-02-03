@@ -1444,7 +1444,26 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	name = "stingray - spartan"
 	suit = /obj/item/clothing/suit/armor/special/spartan/stingray
 	head = /obj/item/clothing/head/helmet/spartan/stingray
+////////wildwehraboo\\\\\\\
 
+//ODST
+
+/obj/item/clothing/head/helmet/odst/donator/wildwehraboo
+	item_state = "wildwehraboo-helmet-worn"
+	icon_state = "wildwehraboo-helmet-obj"
+
+/obj/item/clothing/suit/armor/special/odst/donator/wildwehraboo
+	item_state = "wildwehraboo-armour-worn"
+	icon_state = "wildwehraboo-armour-obj"
+
+/obj/item/weapon/storage/box/large/donator/wildwehraboo
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/wildwehraboo,/obj/item/clothing/suit/armor/special/odst/donator/wildwehraboo)
+	can_hold = list(/obj/item/clothing/suit/armor/special/odst/donator/wildwehraboo)
+
+/decl/hierarchy/outfit/wildwehraboo_odst
+	name = "wildwehraboo - ODST"
+	head = /obj/item/clothing/head/helmet/odst/donator/wildwehraboo
+	suit = /obj/item/clothing/suit/armor/special/odst/donator/wildwehraboo
 ////////wehraboo\\\\\\\\\
 
 //ODST
