@@ -1,6 +1,6 @@
 
 /mob/living/simple_animal/mgalekgolo/bullet_act(var/obj/item/projectile/Proj)
-	if(!(get_dir(src,Proj.starting) in get_allowed_attack_dirs()))
+	if(crouched && !(get_dir(src,Proj.starting) in get_allowed_attack_dirs()))
 		visible_message("<span class = 'danger'>The [Proj.name] is stopped by \the [name]'s armor plating.</span>")
 		return
 	. = ..()
