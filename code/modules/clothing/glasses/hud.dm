@@ -103,7 +103,7 @@
 	name = "HUD sunglasses"
 	desc = "Glasses with a SECHUD and polarization toggle."
 	icon_state = "sunhud"
-	off_state = "glasses"
+	off_state = "sunhud_off"
 
 
 /obj/item/clothing/glasses/hud/security/prot/sunglasses/prescription
