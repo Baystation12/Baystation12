@@ -208,15 +208,22 @@
 				if(my_faction.type in ticker.mode.faction_balance)
 					if(debug_pop_balance)	to_debug_listeners("Faction: Balance checks active...")
 
+					var/list/minds_balance = list()
+
 					//work out how many players there are in total
 					var/total_faction_players = 1 //1, for ourselves.
 					for(var/faction_type in ticker.mode.faction_balance)
 						var/datum/faction/F = GLOB.factions_by_type[faction_type]
 						total_faction_players += F.players_alive()
+						minds_balance |= F.living_minds
 
 					//only try balancing if people have actually joined
 					if(debug_pop_balance)	to_debug_listeners("[total_faction_players] active")
 					if(total_faction_players > 0)
+
+						//Reset it so it doesn't interfere with any of our actual cost calcualations.
+						total_faction_players = 0
+
 						//what is the max players we can have?
 						var/max_ratio = 1 / num_balancing_factions
 						max_ratio += max_ratio * config.max_overpop
@@ -226,14 +233,18 @@
 						var/my_faction_players = pop_balance_mult //We need to take into account our own job pop balance cost.
 						var/my_ratio = 0
 						if(my_faction.living_minds.len != 0)
-							for(var/datum/mind/player in my_faction.living_minds)
+							for(var/datum/mind/player in minds_balance)
 								if(!istype(player.current,/mob/living) || !player.active || player.current.stat == DEAD)
 									continue
 								var/add_as_players = 1
-								if(player.assigned_job)
-									add_as_players = player.assigned_job.pop_balance_mult
-								my_faction_players += add_as_players
-							my_ratio = my_faction_players / total_faction_players
+								if(player.assigned_role)
+									var/datum/job/j = job_master.occupations_by_title[player.assigned_role]
+									add_as_players = j.pop_balance_mult
+								if(player.current.faction == my_faction.name)
+									my_faction_players += add_as_players
+								total_faction_players += add_as_players
+
+						my_ratio = my_faction_players / total_faction_players
 
 						//are we overpopped?
 						if(my_ratio >= max_ratio)

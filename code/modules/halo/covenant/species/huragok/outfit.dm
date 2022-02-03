@@ -6,7 +6,7 @@
 	var/turf/h_loc = H.loc
 	var/mob/living/silicon/robot/huragok/huragok = new(h_loc)
 	huragok.faction = "Covenant"
-	huragok.ckey = H.ckey
+	H.mind.transfer_to(huragok)
 	huragok.Login()
 	qdel(H)
 	return huragok
