@@ -72,11 +72,12 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 		else
 			var/list/exploded = list()
 			for(var/turf/T in trange(max_range, epicenter))
-				var/dist = sqrt((T.x - x0)**2 + (T.y - y0)**2)
+				var/dist_num = sqrt((T.x - x0)**2 + (T.y - y0)**2)
+				var/dist = 0
 
-				if(dist < devastation_range)		dist = 1
-				else if(dist < heavy_impact_range)	dist = 2
-				else if(dist < light_impact_range)	dist = 3
+				if(dist_num < devastation_range)		dist = 1
+				else if(dist_num < heavy_impact_range)	dist = 2
+				else if(dist_num < light_impact_range)	dist = 3
 				else								continue
 
 				T.ex_act(dist)
@@ -87,19 +88,20 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 					if(atom_movable in exploded)
 						continue
 					var/atom/movable/AM = atom_movable
-					if(AM && AM.simulated && !T.protects_atom(AM))
-						AM.ex_act(dist,epicenter)
-						exploded += AM
-		if(guaranteed_damage_range > 0)
-			for(var/mob/living/m in range(guaranteed_damage_range,epicenter))
-				var/mob/living/carbon/human/h = m
-				if(istype(h))
-					if(h.check_shields(guaranteed_damage*2, null, null, null, "the explosion"))
-						m.apply_damage(guaranteed_damage/2,BRUTE,,m.run_armor_check(null,"bomb"))
-						m.apply_damage(guaranteed_damage/2,BURN,,m.run_armor_check(null,"bomb"))
-				else
-					m.apply_damage(guaranteed_damage/2,BRUTE,,m.run_armor_check(null,"bomb"))
-					m.apply_damage(guaranteed_damage/2,BURN,,m.run_armor_check(null,"bomb"))
+					if(istype(AM,/mob/living/))
+						var/mob/living/m = AM
+						if(dist_num <= guaranteed_damage_range)
+							var/mob/living/carbon/human/h = m
+							if(istype(h))
+								if(h.check_shields(guaranteed_damage*2, null, null, null, "the explosion"))
+									m.apply_damage(guaranteed_damage/2,BRUTE,,m.run_armor_check(null,"bomb"))
+									m.apply_damage(guaranteed_damage/2,BURN,,m.run_armor_check(null,"bomb"))
+							else
+								m.apply_damage(guaranteed_damage/2,BRUTE,,m.run_armor_check(null,"bomb"))
+								m.apply_damage(guaranteed_damage/2,BURN,,m.run_armor_check(null,"bomb"))
+								if(AM && AM.simulated && !T.protects_atom(AM))
+									AM.ex_act(dist,epicenter)
+									exploded += AM
 
 		var/took = (world.timeofday-start)/10
 		//You need to press the DebugGame verb to see these now....they were getting annoying and we've collected a fair bit of data. Just -test- changes  to explosion code using this please so we can compare
