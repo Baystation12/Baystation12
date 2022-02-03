@@ -23,6 +23,8 @@
 
 	move_sound = 'code/modules/halo/sounds/ghost_move.ogg'
 
+	vehicle_view_modifier = 1.5
+
 	light_color = "#C1CEFF"
 
 	can_smoke = 1
