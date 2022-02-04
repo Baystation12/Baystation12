@@ -37,7 +37,7 @@
 /obj/item/organ/internal/augment/boost/muscle/onRemove()
 	if (!active)
 		return
-	FOR_BLIND(datum/skill_buff/augment/muscle/D, owner.fetch_buffs_of_type(buffpath, 0))
+	for (var/datum/skill_buff/augment/muscle/D as anything in owner.fetch_buffs_of_type(buffpath, 0))
 		if (D.id != id)
 			continue
 		D.remove()

@@ -103,6 +103,7 @@
 	// P.accuracy += calculate_accuracy()
 	// P.dispersion += calculate_dispersion()
 
+	P.firer = src
 	P.launch(target = A)
 	if(needs_reload)
 		reload_count++
@@ -161,6 +162,7 @@
 // Special attacks, like grenades or blinding spit or whatever.
 // Don't override this, override do_special_attack() for your blinding spit/etc.
 /mob/living/simple_animal/proc/special_attack_target(atom/A)
+	set waitfor = FALSE
 	face_atom(A)
 
 	if(special_attack_delay)

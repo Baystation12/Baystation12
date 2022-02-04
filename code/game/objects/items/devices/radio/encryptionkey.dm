@@ -42,6 +42,12 @@
 	origin_tech = list(TECH_ESOTERIC = 2)
 	syndie = 1
 
+/obj/item/device/encryptionkey/vox_raider
+	icon_state = "cypherkey"
+	channels = list("Vox Raider" = TRUE, "Hailing" = TRUE)
+	origin_tech = list(TECH_ESOTERIC = 2)
+	syndie = TRUE
+
 /obj/item/device/encryptionkey/binary
 	icon_state = "cypherkey"
 	translate_binary = 1

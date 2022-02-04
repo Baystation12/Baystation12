@@ -120,7 +120,7 @@
 		var/obj/item/clothing/C = get_equipped_item(text2num(slot_to_strip_text))
 		if (istype(C) && C.can_attach_accessory(held, user))
 			C.attach_accessory(user, held)
-		else if (!equip_to_slot_if_possible(held, text2num(slot_to_strip_text), del_on_fail = FALSE, disable_warning = FALSE, redraw_mob = TRUE))
+		else if (!equip_to_slot_if_possible(held, text2num(slot_to_strip_text), TRYEQUIP_REDRAW | TRYEQUIP_INSTANT))
 			user.put_in_active_hand(held)
 
 /mob/living/carbon/human/proc/empty_pockets(mob/living/user)
@@ -137,10 +137,10 @@
 	if(!user.unEquip(I))
 		return
 	if(!r_store)
-		if(equip_to_slot_if_possible(I, slot_r_store, del_on_fail=0, disable_warning=1, redraw_mob=1))
+		if(equip_to_slot_if_possible(I, slot_r_store, TRYEQUIP_REDRAW | TRYEQUIP_SILENT))
 			return
 	if(!l_store)
-		if(equip_to_slot_if_possible(I, slot_l_store, del_on_fail=0, disable_warning=1, redraw_mob=1))
+		if(equip_to_slot_if_possible(I, slot_l_store, TRYEQUIP_REDRAW | TRYEQUIP_SILENT))
 			return
 	to_chat(user, "<span class='warning'>You are unable to place [I] in [src]'s pockets.</span>")
 	user.put_in_active_hand(I)

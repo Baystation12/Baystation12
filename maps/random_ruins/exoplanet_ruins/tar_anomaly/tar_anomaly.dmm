@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/turf/simulated/floor/exoplanet/water/shallow/tar,
+/turf/unsimulated/floor/exoplanet/water/shallow/tar,
 /area/template_noop)
 "b" = (
 /turf/template_noop,
@@ -12,7 +12,7 @@
 "d" = (
 /obj/machinery/artifact,
 /obj/effect/landmark/clear,
-/turf/simulated/floor/exoplanet/shrouded,
+/turf/unsimulated/floor/exoplanet/shrouded,
 /area/template_noop)
 "e" = (
 /obj/structure/flora/ausbushes/fullgrass,
@@ -20,7 +20,7 @@
 /area/template_noop)
 "f" = (
 /obj/structure/monolith,
-/turf/simulated/floor/exoplanet/water/shallow/tar,
+/turf/unsimulated/floor/exoplanet/water/shallow/tar,
 /area/template_noop)
 
 (1,1,1) = {"

@@ -109,6 +109,7 @@ area/space/atmosalert()
 /area/chapel
 	name = "\improper Chapel"
 	icon_state = "chapel"
+	lighting_tone = AREA_LIGHTING_WARM
 
 /area/centcom/specops
 	name = "\improper Centcom Special Ops"
@@ -119,6 +120,7 @@ area/space/atmosalert()
 
 /area/medical
 	req_access = list(access_medical)
+	lighting_tone = AREA_LIGHTING_COOL
 
 /area/security
 	req_access = list(access_sec_doors)
@@ -142,6 +144,7 @@ area/space/atmosalert()
 
 /area/rnd
 	req_access = list(access_research)
+	lighting_tone = AREA_LIGHTING_COOL
 
 /area/rnd/xenobiology
 	name = "\improper Xenobiology Lab"
@@ -247,7 +250,6 @@ area/space/atmosalert()
 	for(var/mob/living/carbon/human/H in src)
 		if(H.client)
 			mysound.status = SOUND_UPDATE
-			to_chat(H, mysound)
 			if(S)
 				spawn(sound_delay)
 					sound_to(H, S)

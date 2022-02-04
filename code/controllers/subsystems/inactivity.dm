@@ -2,27 +2,37 @@ SUBSYSTEM_DEF(inactivity)
 	name = "Inactivity"
 	wait = 1 MINUTE
 	priority = SS_PRIORITY_INACTIVITY
-	flags = SS_NO_INIT
-	var/tmp/list/client_list
-	var/number_kicked = 0
+	flags = SS_BACKGROUND
+	var/static/tmp/list/current = list()
 
-/datum/controller/subsystem/inactivity/fire(resumed = FALSE)
+
+/datum/controller/subsystem/inactivity/Destroy()
+	current.Cut()
+	..()
+
+
+/datum/controller/subsystem/inactivity/Initialize(start_timeofday)
 	if (!config.kick_inactive)
 		suspend()
-		return
+
+
+/datum/controller/subsystem/inactivity/Recover()
+	current.Cut()
+
+
+/datum/controller/subsystem/inactivity/fire(resumed, no_mc_tick)
 	if (!resumed)
-		client_list = GLOB.clients.Copy()
-
-	while(client_list.len)
-		var/client/C = client_list[client_list.len]
-		client_list.len--
-		if(!C.holder && C.is_afk(config.kick_inactive MINUTES) && !isobserver(C.mob))
-			log_access("AFK: [key_name(C)]")
-			to_chat(C, "<SPAN CLASS='warning'>You have been inactive for more than [config.kick_inactive] minute\s and have been disconnected.</SPAN>")
-			qdel(C)
-			number_kicked++
+		current = GLOB.clients.Copy()
+	var/client/client
+	var/kick_time = config.kick_inactive MINUTES
+	for (var/i = current.len to 1 step -1)
+		client = current[i]
+		if (QDELETED(client))
+			continue
+		if (client.inactivity > kick_time && !client.holder)
+			log_access("AFK: [key_name(client)]")
+			to_chat_immediate(SPAN_WARNING("You were inactive for [config.kick_inactive] minutes and have been disconnected."))
+			qdel(client)
 		if (MC_TICK_CHECK)
+			current.Cut(i)
 			return
-
-/datum/controller/subsystem/inactivity/stat_entry()
-	..("Kicked: [number_kicked]")

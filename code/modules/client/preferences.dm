@@ -1,10 +1,10 @@
 #define SAVE_RESET -1
 
-#define JOB_PRIORITY_HIGH   0x1
-#define JOB_PRIORITY_MEDIUM 0x2
-#define JOB_PRIORITY_LOW    0x4
-#define JOB_PRIORITY_LIKELY 0x3
-#define JOB_PRIORITY_PICKED 0x7
+#define JOB_PRIORITY_HIGH   FLAG(0)
+#define JOB_PRIORITY_MEDIUM FLAG(1)
+#define JOB_PRIORITY_LOW    FLAG(2)
+#define JOB_PRIORITY_LIKELY (JOB_PRIORITY_HIGH | JOB_PRIORITY_MEDIUM)
+#define JOB_PRIORITY_PICKED (JOB_PRIORITY_HIGH | JOB_PRIORITY_MEDIUM | JOB_PRIORITY_LOW)
 
 #define MAX_LOAD_TRIES 5
 
@@ -173,8 +173,8 @@ datum/preferences
 	if(isliving(user)) return
 
 	if(href_list["preference"] == "open_whitelist_forum")
-		if(config.forumurl)
-			send_link(user, config.forumurl)
+		if(config.forum_url)
+			send_link(user, config.forum_url)
 		else
 			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
 			return

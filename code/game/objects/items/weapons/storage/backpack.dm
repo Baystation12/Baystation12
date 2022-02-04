@@ -186,9 +186,9 @@
 	w_class = ITEM_SIZE_HUGE
 	max_storage_space = DEFAULT_BACKPACK_STORAGE + 10
 
-/obj/item/storage/backpack/dufflebag/New()
-	..()
-	slowdown_per_slot[slot_back] = 3
+/obj/item/storage/backpack/dufflebag/Initialize()
+	. = ..()
+	slowdown_per_slot[slot_back] = 1
 	slowdown_per_slot[slot_r_hand] = 1
 	slowdown_per_slot[slot_l_hand] = 1
 
@@ -198,9 +198,10 @@
 	icon_state = "duffle_syndie"
 	item_state_slots = list(slot_l_hand_str = "duffle_syndie", slot_r_hand_str = "duffle_syndie")
 
-/obj/item/storage/backpack/dufflebag/syndie/New()
-	..()
-	slowdown_per_slot[slot_back] = 1
+/obj/item/storage/backpack/dufflebag/syndie/Initialize()
+	. = ..()
+	slowdown_per_slot[slot_r_hand] = 0
+	slowdown_per_slot[slot_l_hand] = 0
 
 /obj/item/storage/backpack/dufflebag/syndie/med
 	name = "medical dufflebag"
@@ -247,7 +248,7 @@
 		/obj/item/extinguisher,
 		/obj/item/clothing/gloves/fire,
 		/obj/item/clothing/accessory/fire_overpants,
-		/obj/item/tank/emergency/oxygen/double/red,
+		/obj/item/tank/oxygen_scba,
 		/obj/item/clothing/head/hardhat/firefighter,
 		/obj/item/extinguisher
 	)

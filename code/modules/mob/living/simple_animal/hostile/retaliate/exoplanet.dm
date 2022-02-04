@@ -2,7 +2,7 @@
 /mob/living/simple_animal/hostile/retaliate/beast
 	var/hunger = 0
 	var/list/prey = list()
-	ai_holder_type = /datum/ai_holder/simple_animal/beast
+	ai_holder = /datum/ai_holder/simple_animal/beast
 
 /mob/living/simple_animal/hostile/retaliate/beast/Life()
 	. = ..()
@@ -36,6 +36,8 @@
 		return
 	if(!CanInteract(usr, GLOB.conscious_state))
 		return
+	if (isghost(usr))
+		return
 
 	for(var/obj/effect/overmap/visitable/sector/exoplanet/E)
 		if(src in E.animals)
@@ -64,7 +66,7 @@
 		melee = ARMOR_MELEE_KNIVES
 		)
 
-	ai_holder_type = /datum/ai_holder/simple_animal/samak
+	ai_holder = /datum/ai_holder/simple_animal/samak
 	say_list_type = /datum/say_list/samak
 
 /mob/living/simple_animal/hostile/retaliate/beast/samak/alt
@@ -88,7 +90,7 @@
 	cold_damage_per_tick = 0
 	mob_size = MOB_SMALL
 
-	ai_holder_type = /datum/ai_holder/simple_animal/diyaab
+	ai_holder = /datum/ai_holder/simple_animal/diyaab
 	say_list_type = /datum/say_list/diyaab
 
 /mob/living/simple_animal/hostile/retaliate/beast/shantak
@@ -105,7 +107,7 @@
 	natural_weapon = /obj/item/natural_weapon/claws
 	cold_damage_per_tick = 0
 
-	ai_holder_type = /datum/ai_holder/simple_animal/shantak
+	ai_holder = /datum/ai_holder/simple_animal/shantak
 	say_list_type = /datum/say_list/shantak
 
 /mob/living/simple_animal/hostile/retaliate/beast/shantak/alt
@@ -123,7 +125,7 @@
 	mob_size = MOB_TINY
 	density = FALSE
 
-	ai_holder_type = /datum/ai_holder/simple_animal/passive
+	ai_holder = /datum/ai_holder/simple_animal/passive
 
 /mob/living/simple_animal/tindalos
 	name = "tindalos"
@@ -134,7 +136,7 @@
 	mob_size = MOB_TINY
 	density = FALSE
 
-	ai_holder_type = /datum/ai_holder/simple_animal/passive
+	ai_holder = /datum/ai_holder/simple_animal/passive
 
 /mob/living/simple_animal/thinbug
 	name = "taki"
@@ -145,7 +147,7 @@
 	mob_size = MOB_MINISCULE
 	density = FALSE
 
-	ai_holder_type = /datum/ai_holder/simple_animal/passive/thinbug
+	ai_holder = /datum/ai_holder/simple_animal/passive/thinbug
 	say_list_type = /datum/say_list/thinbug
 
 /mob/living/simple_animal/hostile/retaliate/royalcrab
@@ -164,7 +166,7 @@
 		melee = ARMOR_MELEE_RESISTANT
 		)
 
-	ai_holder_type = /datum/ai_holder/simple_animal/retaliate/royalcrab
+	ai_holder = /datum/ai_holder/simple_animal/retaliate/royalcrab
 	say_list = /datum/say_list/royalcrab
 
 /mob/living/simple_animal/hostile/retaliate/beast/charbaby
@@ -188,7 +190,7 @@
 	natural_armor = list(
 		laser = ARMOR_LASER_HANDGUNS
 		)
-	ai_holder_type = /datum/ai_holder/simple_animal/melee/charbaby
+	ai_holder = /datum/ai_holder/simple_animal/melee/charbaby
 
 /datum/ai_holder/simple_animal/melee/charbaby
 

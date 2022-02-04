@@ -124,9 +124,6 @@
 	job_access_type = DEFAULT_JOB_TYPE
 	detail_color = COLOR_CIVIE_GREEN
 
-/obj/item/card/id/torch/contractor/service/bartender
-	job_access_type = /datum/job/bartender
-
 
 /obj/item/card/id/torch/crew/representative
 	job_access_type = /datum/job/representative

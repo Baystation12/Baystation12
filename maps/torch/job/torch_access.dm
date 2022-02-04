@@ -228,11 +228,11 @@
 	desc = "Petrov Chief Science Officer's Office"
 	region = ACCESS_REGION_COMMAND
 
-/var/const/access_petrov_security = "ACCESS_TORCH_PETROV_SEC" //207
-/datum/access/petrov_security
-	id = access_petrov_security
-	desc = "Petrov Security Office"
-	region = ACCESS_REGION_SECURITY
+/var/const/access_petrov_control = "ACCESS_TORCH_PETROV_CONTROL" //207
+/datum/access/petrov_control
+	id = access_petrov_control
+	desc = "Petrov Control Room"
+	region = ACCESS_REGION_RESEARCH
 
 /var/const/access_petrov_maint = "ACCESS_TORCH_PETROV_MAINT" //208
 /datum/access/petrov_maint

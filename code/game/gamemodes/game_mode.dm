@@ -150,17 +150,18 @@ var/global/list/additional_antag_types = list()
 		else
 			message_admins("[antag_summary]")
 
-// startRequirements()
-// Checks to see if the game can be setup and ran with the current number of players or whatnot.
-// Returns 0 if the mode can start and a message explaining the reason why it can't otherwise.
-/datum/game_mode/proc/startRequirements()
-	var/playerC = 0
-	for(var/mob/new_player/player in GLOB.player_list)
-		if((player.client)&&(player.ready))
-			playerC++
 
-	if(playerC < required_players)
-		return "Not enough players, [src.required_players] players needed."
+/// Run prior to a mode vote to determine if the mode should be included. Falsy if yes, otherwise a status message.
+/datum/game_mode/proc/check_votable(list/lobby_players)
+	if (lobby_players.len < required_players)
+		return "Not enough players are in the lobby. [lobby_players.len] of the required [required_players]."
+
+
+/// Check to see if the currently selected mode can be started. Falsy if yes, otherwise a status message.
+/datum/game_mode/proc/check_startable(list/lobby_players)
+	var/list/ready_players = SSticker.ready_players(lobby_players)
+	if (ready_players.len < required_players)
+		return "Not enough players. [ready_players.len] ready of the required [required_players]."
 
 	var/enemy_count = 0
 	var/list/all_antag_types = GLOB.all_antag_types_
@@ -237,11 +238,6 @@ var/global/list/additional_antag_types = list()
 
 	if(evacuation_controller && auto_recall_shuttle)
 		evacuation_controller.recall = 1
-
-	SSstatistics.set_field_details("round_start","[time2text(world.realtime)]")
-	if(SSticker.mode)
-		SSstatistics.set_field_details("game_mode","[SSticker.mode]")
-	SSstatistics.set_field_details("server_ip","[world.internet_address]:[world.port]")
 	return 1
 
 /datum/game_mode/proc/fail_setup()

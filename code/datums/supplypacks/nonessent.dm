@@ -89,7 +89,7 @@
 	num_contained = 2
 	contains = list(/obj/item/clothing/suit/pirate,
 					/obj/item/clothing/suit/judgerobe,
-					/obj/item/clothing/accessory/wcoat/black,
+					/obj/item/clothing/accessory/waistcoat/black,
 					/obj/item/clothing/suit/hastur,
 					/obj/item/clothing/suit/holidaypriest,
 					/obj/item/clothing/suit/nun,
@@ -136,7 +136,7 @@
 					/obj/item/clothing/shoes/black,
 					/obj/item/clothing/shoes/black,
 					/obj/item/clothing/shoes/leather,
-					/obj/item/clothing/accessory/wcoat/black)
+					/obj/item/clothing/accessory/waistcoat/black)
 	name = "Costume - Formalwear"
 	cost = 30
 	containertype = /obj/structure/closet
@@ -287,14 +287,14 @@
 /decl/hierarchy/supply_pack/nonessent/pins
 	name = "Costume - Pride Pin Crate"
 	contains = list(
-		/obj/item/clothing/accessory/pridepins = 2,
-		/obj/item/clothing/accessory/pridepins/lesbianpin = 2,
-		/obj/item/clothing/accessory/pridepins/bisexualpin = 2,
-		/obj/item/clothing/accessory/pridepins/gaypin = 2,
-		/obj/item/clothing/accessory/pridepins/pansexualpin = 2,
-		/obj/item/clothing/accessory/pridepins/nonbinarypin = 2,
-		/obj/item/clothing/accessory/pridepins/asexualpin = 2,
-		/obj/item/clothing/accessory/pridepins/intersexpin = 2
+		/obj/item/clothing/accessory/pride_pin/transgender = 2,
+		/obj/item/clothing/accessory/pride_pin/lesbian = 2,
+		/obj/item/clothing/accessory/pride_pin/bisexual = 2,
+		/obj/item/clothing/accessory/pride_pin/gay = 2,
+		/obj/item/clothing/accessory/pride_pin/pansexual = 2,
+		/obj/item/clothing/accessory/pride_pin/nonbinary = 2,
+		/obj/item/clothing/accessory/pride_pin/asexual = 2,
+		/obj/item/clothing/accessory/pride_pin/intersex = 2
 	)
 	cost = 20
 	containername = "pin crate"
@@ -302,12 +302,13 @@
 /decl/hierarchy/supply_pack/nonessent/pronounbadges
 	name = "Costume - Pronoun Badge Crate"
 	contains = list(
-		/obj/item/clothing/accessory/pronouns = 2,
-		/obj/item/clothing/accessory/pronouns/hehimbadge = 2,
-		/obj/item/clothing/accessory/pronouns/sheherbadge = 2,
-		/obj/item/clothing/accessory/pronouns/hetheybadge = 2,
-		/obj/item/clothing/accessory/pronouns/shetheybadge = 2,
-		/obj/item/clothing/accessory/pronouns/pleaseaskbadge = 2
+		/obj/item/clothing/accessory/pronouns/they = 2,
+		/obj/item/clothing/accessory/pronouns/hehim = 2,
+		/obj/item/clothing/accessory/pronouns/sheher = 2,
+		/obj/item/clothing/accessory/pronouns/hethey = 2,
+		/obj/item/clothing/accessory/pronouns/shethey = 2,
+		/obj/item/clothing/accessory/pronouns/heshe = 2,
+		/obj/item/clothing/accessory/pronouns/ask = 2
 	)
 	cost = 20
 	containername = "pronoun badge crate"

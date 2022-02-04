@@ -241,6 +241,8 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 			//Send it to the old style output window.
 			legacy_chat(C, original_message)
 
+			if (C.get_preference_value(/datum/client_preference/goonchat) != GLOB.PREF_YES)
+				continue
 			if(!C.chatOutput || C.chatOutput.broken) // A player who hasn't updated his skin file.
 				continue
 
@@ -255,6 +257,8 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 		if (!C)
 			return
 		legacy_chat(C, original_message) //Send it to the old style output window.
+		if (C.get_preference_value(/datum/client_preference/goonchat) != GLOB.PREF_YES)
+			return
 		if(!C.chatOutput || C.chatOutput.broken) // A player who hasn't updated his skin file.
 			return
 		if(!C.chatOutput.loaded)

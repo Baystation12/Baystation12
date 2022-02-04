@@ -22,8 +22,6 @@
 
 	var/hide_from_reports = FALSE
 
-	var/has_distress_beacon
-
 /obj/effect/overmap/visitable/Initialize()
 	. = ..()
 	if(. == INITIALIZE_HINT_QDEL)

@@ -15,14 +15,14 @@
 
 	poison_per_bite = 5
 
-	movement_cooldown = 5
+	movement_cooldown = 3
 
 	natural_weapon = /obj/item/natural_weapon/bite/spider/lurker
 	poison_chance = 30
 	poison_type = /datum/reagent/cryptobiolin
 	poison_per_bite = 1
 
-	ai_holder_type = /datum/ai_holder/simple_animal/melee/hit_and_run
+	ai_holder = /datum/ai_holder/simple_animal/melee/hit_and_run
 
 	/// Lower = Harder to see.
 	var/cloaked_alpha = 45

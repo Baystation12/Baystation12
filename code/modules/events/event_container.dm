@@ -8,7 +8,7 @@
 #define ASSIGNMENT_SCIENTIST "Scientist"
 #define ASSIGNMENT_SECURITY "Security"
 
-var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT_LEVEL_MODERATE = "Moderate", EVENT_LEVEL_MAJOR = "Major")
+var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT_LEVEL_MODERATE = "Moderate", EVENT_LEVEL_MAJOR = "Major", EVENT_LEVEL_EXO = "Exoplanet")
 
 /datum/event_container
 	var/severity = -1
@@ -175,7 +175,6 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Toilet Flooding",						/datum/event/toilet_clog/flood,			50, 	list(ASSIGNMENT_JANITOR = 20)),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Drone Uprising",						/datum/event/rogue_maint_drones/,		25,		list(ASSIGNMENT_ENGINEER = 30)),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Supermatter Power Surge",				/datum/event/power_surge,				100,	list(ASSIGNMENT_ENGINEER = 10)),
-		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Exoplanet Awakening",					/datum/event/exo_awakening,             75)
 	)
 
 /datum/event_container/major
@@ -188,6 +187,13 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Space Vines",						/datum/event/spacevine, 			0,	list(ASSIGNMENT_ENGINEER = 15), 1),
 		new /datum/event_meta/no_overmap(EVENT_LEVEL_MAJOR, "Electrical Storm",		/datum/event/electrical_storm, 		0,	list(ASSIGNMENT_ENGINEER = 10, ASSIGNMENT_JANITOR = 5)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Drone Revolution",				/datum/event/rogue_maint_drones/,	0,	list(ASSIGNMENT_ENGINEER = 10,ASSIGNMENT_MEDICAL = 10,ASSIGNMENT_SECURITY = 10)),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Spider Infestation",				/datum/event/spider_infestation, 	25,	list(ASSIGNMENT_SECURITY = 35), 1),
+	)
+
+/datum/event_container/exo
+	severity = EVENT_LEVEL_EXO
+	available_events = list(
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Nothing",							/datum/event/nothing,				1230),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Exoplanet Awakening",				/datum/event/exo_awakening,         0,  list(ASSIGNMENT_ANY = 45))
 	)
 

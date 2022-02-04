@@ -3,7 +3,7 @@
 /obj/item/gripper
 	name = "magnetic gripper"
 	desc = "A simple grasping tool specialized in construction and engineering work."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/gripper.dmi'
 	icon_state = "gripper"
 
 	item_flags = ITEM_FLAG_NO_BLUDGEON
@@ -289,7 +289,7 @@
 
 	name = "matter decompiler"
 	desc = "Eating trash, bits of glass, or other debris will replenish your stores."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/gripper.dmi'
 	icon_state = "decompiler"
 
 	//Metal, glass, wood, plastic.
@@ -366,7 +366,7 @@
 				plastic.add_charge(2000)
 		else if(istype(W,/obj/item/light))
 			var/obj/item/light/L = W
-			if(L.status >= 2)
+			if(L.status >= LIGHT_BROKEN)
 				if(metal)
 					metal.add_charge(250)
 				if(glass)

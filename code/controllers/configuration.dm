@@ -112,7 +112,7 @@
 	/// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
 	var/static/continous_rounds = FALSE
 
-	var/static/fps = 20
+	var/static/fps = 30
 
 	/// SSinitialization throttling
 	var/static/tick_limit_mc_init = TICK_LIMIT_MC_INIT_DEFAULT
@@ -139,6 +139,9 @@
 	/// Whether or not secret modes show list of possible round types
 	var/static/secret_hide_possibilities = FALSE
 
+	/// Whether or not secret - a hidden random pick from available modes - can be voted for
+	var/static/secret_disabled = FALSE
+
 	/// enables random events mid-round when set to 1
 	var/static/allow_random_events = FALSE
 
@@ -156,9 +159,6 @@
 
 	/// force disconnect for inactive players after this many minutes, if non-0
 	var/static/kick_inactive = FALSE
-
-	/// determines whether jobs use minimal access or expanded access.
-	var/static/jobs_have_minimal_access = FALSE
 
 	var/static/minimum_player_age = 0
 
@@ -204,13 +204,19 @@
 
 	var/static/banappeals
 
-	var/static/wikiurl
+	var/static/wiki_url
 
-	var/static/forumurl
+	var/static/rules_url
 
-	var/static/githuburl
+	var/static/lore_url
 
-	var/static/issuereporturl
+	var/static/forum_url
+
+	var/static/source_url
+
+	var/static/discord_url
+
+	var/static/issue_url
 
 	var/static/list/chat_markup
 
@@ -321,13 +327,13 @@
 	var/static/expected_round_length = 3 HOURS
 
 	/// Whether the first delay per level has a custom start time
-	var/static/list/event_first_run = list(EVENT_LEVEL_MUNDANE = null, EVENT_LEVEL_MODERATE = null, EVENT_LEVEL_MAJOR = list("lower" = 80 MINUTES, "upper" = 100 MINUTES))
+	var/static/list/event_first_run = list(EVENT_LEVEL_MUNDANE = null, EVENT_LEVEL_MODERATE = null, EVENT_LEVEL_MAJOR = list("lower" = 80 MINUTES, "upper" = 100 MINUTES), EVENT_LEVEL_EXO = list("lower" = 50 MINUTES, "upper" = 80 MINUTES))
 
 	/// The lowest delay until next event
-	var/static/list/event_delay_lower = list(EVENT_LEVEL_MUNDANE = 10 MINUTES, EVENT_LEVEL_MODERATE = 30 MINUTES, EVENT_LEVEL_MAJOR = 50 MINUTES)
+	var/static/list/event_delay_lower = list(EVENT_LEVEL_MUNDANE = 10 MINUTES, EVENT_LEVEL_MODERATE = 30 MINUTES, EVENT_LEVEL_MAJOR = 50 MINUTES, EVENT_LEVEL_EXO = 40 MINUTES)
 
 	/// The upper delay until next event
-	var/static/list/event_delay_upper = list(EVENT_LEVEL_MUNDANE = 15 MINUTES, EVENT_LEVEL_MODERATE = 45 MINUTES, EVENT_LEVEL_MAJOR = 70 MINUTES)
+	var/static/list/event_delay_upper = list(EVENT_LEVEL_MUNDANE = 15 MINUTES, EVENT_LEVEL_MODERATE = 45 MINUTES, EVENT_LEVEL_MAJOR = 70 MINUTES, EVENT_LEVEL_EXO = 60 MINUTES)
 
 	var/static/abandon_allowed = TRUE
 
@@ -421,6 +427,20 @@
 	var/static/emojis = FALSE
 
 	var/observe_delay = 0
+	/// The maximum amount of time a round can last before it is forcefully ended.
+	var/static/maximum_round_length
+
+	/// The delay in deciseconds between stat() updates.
+	var/static/stat_delay = 5
+
+	/// The maximum number of times someone can be warned in a round before they are automatically banned
+	var/static/warn_autoban_threshold = 3
+
+	/// The length in minutes of an automatic ban created by passing the warning threshold
+	var/static/warn_autoban_duration = 30
+
+	var/static/hub_entry = "<b>$SERVER</b> by <b>$HOST</b> &#8212; $ACTIVES of $PLAYERS alive"
+
 
 /configuration/New()
 	build_mode_cache()
@@ -428,6 +448,7 @@
 	load_options()
 	load_map()
 	load_sql()
+	load_hub_entry()
 	motd = file2text("config/motd.txt") || ""
 	event = file2text("config/event.txt") || ""
 	fps = round(fps)
@@ -435,7 +456,8 @@
 		fps = initial(fps)
 
 
-/configuration/proc/read_config(filename)
+/// Read a text file, stripping lines starting with # and empties
+/configuration/proc/read_commentable(filename)
 	var/list/result = list()
 	var/list/lines = file2list(filename)
 	for (var/line in lines)
@@ -444,6 +466,14 @@
 		line = trim(line)
 		if (!line || line[1] == "#")
 			continue
+		result += line
+	return result
+
+
+/configuration/proc/read_config(filename)
+	var/list/result = list()
+	var/lines = read_commentable(filename)
+	for (var/line in lines)
 		var/index = findtext(line, " ")
 		var/name = index ? lowertext(copytext_char(line, 1, index)) : lowertext(line)
 		if (!name)
@@ -473,8 +503,6 @@
 				use_age_restriction_for_jobs = TRUE
 			if ("use_age_restriction_for_antags")
 				use_age_restriction_for_antags = TRUE
-			if ("jobs_have_minimal_access")
-				jobs_have_minimal_access = TRUE
 			if ("use_recursive_explosions")
 				use_recursive_explosions = TRUE
 			if ("log_ooc")
@@ -575,14 +603,20 @@
 				server = value
 			if ("banappeals")
 				banappeals = value
-			if ("wikiurl")
-				wikiurl = value
-			if ("forumurl")
-				forumurl = value
-			if ("githuburl")
-				githuburl = value
-			if ("issuereporturl")
-				issuereporturl = value
+			if ("wiki_url")
+				wiki_url = value
+			if ("rules_url")
+				rules_url = value
+			if ("lore_url")
+				lore_url = value
+			if ("forum_url")
+				forum_url = value
+			if ("source_url")
+				source_url = value
+			if ("issue_url")
+				issue_url = value
+			if ("discord_url")
+				discord_url = value
 			if ("ghosts_can_possess_animals")
 				ghosts_can_possess_animals = TRUE
 			if ("guest_jobban")
@@ -661,6 +695,8 @@
 				antag_hud_restricted = TRUE
 			if ("secret_hide_possibilities")
 				secret_hide_possibilities = TRUE
+			if ("secret_disabled")
+				secret_disabled = TRUE
 			if ("usealienwhitelist")
 				usealienwhitelist = TRUE
 			if ("usealienwhitelist_sql")
@@ -820,6 +856,14 @@
 				log_timers_on_bucket_reset = TRUE
 			if ("toggle_emojis")
 				emojis = TRUE
+			if ("maximum_round_length")
+				maximum_round_length = text2num(value) MINUTES
+			if ("stat_delay")
+				stat_delay = Floor(text2num(value))
+			if ("warn_autoban_threshold")
+				warn_autoban_threshold = max(0, text2num(value))
+			if ("warn_autoban_duration")
+				warn_autoban_duration = max(1, text2num(value))
 			else
 				log_misc("Unknown setting in config/config.txt: '[name]'")
 
@@ -908,9 +952,57 @@
 				log_misc("Unknown setting in config/dbconfig.txt: '[name]'")
 
 
+/configuration/proc/load_hub_entry()
+	var/list/file = read_commentable("config/hub.txt")
+	if (!length(file))
+		return
+	hub_entry = file.Join("<br>")
+
+
+/configuration/proc/generate_hub_entry()
+	var/static/regex/replace_server = new (@"\$SERVER", "g")
+	var/static/regex/replace_host = new (@"\$HOST", "g")
+	var/static/regex/replace_wiki = new (@"\$WIKI", "g")
+	var/static/regex/replace_rules = new (@"\$RULES", "g")
+	var/static/regex/replace_source = new (@"\$SOURCE", "g")
+	var/static/regex/replace_discord = new (@"\$DISCORD", "g")
+	var/static/regex/replace_forum = new (@"\$FORUM", "g")
+	var/static/regex/replace_mode = new (@"\$MODE", "g")
+	var/static/regex/replace_station = new (@"\$STATION", "g")
+	var/static/regex/replace_players = new (@"\$PLAYERS", "g")
+	var/static/regex/replace_actives = new (@"\$ACTIVES", "g")
+	var/entry = "[hub_entry]"
+	if (entry)
+		var/player_count = 0
+		var/active_count = 0
+		for (var/client/client as anything in GLOB.clients)
+			if (client.inactivity < 5 MINUTES && isliving(client.mob))
+				var/mob/living/living = client.mob
+				if (living.stat != DEAD)
+					++active_count
+			++player_count
+		entry = replacetext_char(entry, replace_server, server_name)
+		entry = replacetext_char(entry, replace_host, hostedby)
+		entry = replacetext_char(entry, replace_wiki, wiki_url)
+		entry = replacetext_char(entry, replace_rules, rules_url)
+		entry = replacetext_char(entry, replace_source, source_url)
+		entry = replacetext_char(entry, replace_discord, discord_url)
+		entry = replacetext_char(entry, replace_forum, forum_url)
+		entry = replacetext_char(entry, replace_mode, SSticker?.master_mode || "LOBBY")
+		entry = replacetext_char(entry, replace_station, station_name())
+		entry = replacetext_char(entry, replace_players, "[player_count]")
+		entry = replacetext_char(entry, replace_actives, "[active_count]")
+	else
+		entry = "It Is A Mystery"
+	var/entry_size = length(entry)
+	if (entry_size > 255)
+		log_debug("The generated hub entry was [entry_size] bytes long! It will be truncated by the hub to 255.")
+	return entry
+
+
 /configuration/proc/build_mode_cache()
 	gamemode_cache = list()
-	FOR_BLIND(datum/game_mode/M, subtypesof(/datum/game_mode))
+	for (var/datum/game_mode/M as anything in subtypesof(/datum/game_mode))
 		var/tag = initial(M.config_tag)
 		if (!tag)
 			continue
@@ -922,7 +1014,6 @@
 		probabilities[tag] = M.probability
 		if (M.votable)
 			votable_modes += tag
-	votable_modes += "secret"
 
 
 /configuration/proc/pick_mode(mode_name)
@@ -935,9 +1026,10 @@
 
 
 /configuration/proc/get_runnable_modes()
+	var/list/lobby_players = SSticker.lobby_players()
 	var/list/result = list()
 	for (var/tag in gamemode_cache)
-		var/datum/game_mode/M = gamemode_cache[tag]
-		if (probabilities[tag] > 0 && !M.startRequirements())
+		var/datum/game_mode/mode = gamemode_cache[tag]
+		if (probabilities[tag] > 0 && !mode.check_startable(lobby_players))
 			result[tag] = probabilities[tag]
 	return result

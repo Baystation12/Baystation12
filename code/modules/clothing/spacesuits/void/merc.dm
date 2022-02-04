@@ -14,9 +14,19 @@
 		rad = ARMOR_RAD_SMALL
 		)
 	siemens_coefficient = 0.3
-	species_restricted = list(SPECIES_HUMAN, SPECIES_IPC, SPECIES_SHELL)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC, SPECIES_VOX, SPECIES_SHELL)
+	sprite_sheets = list(
+		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_head_skrell.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_helmet_unathi.dmi',
+		SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi'
+		)
+	sprite_sheets_obj = list(
+		SPECIES_UNATHI = 'icons/obj/clothing/species/unathi/obj_head_unathi.dmi',
+		SPECIES_SKRELL = 'icons/obj/clothing/species/skrell/obj_head_skrell.dmi',
+		SPECIES_VOX = 'icons/obj/clothing/species/vox/obj_head_vox.dmi'
+		)
 	camera = /obj/machinery/camera/network/mercenary
-	light_overlay = "helmet_light_green" //todo: species-specific light overlays
+	light_overlay = "explorer_light"
 
 /obj/item/clothing/suit/space/void/merc
 	icon_state = "rig-syndie"
@@ -38,10 +48,19 @@
 		)
 	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/melee/energy/sword,/obj/item/handcuffs)
 	siemens_coefficient = 0.3
-	species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_IPC, SPECIES_SHELL)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC, SPECIES_VOX, SPECIES_SHELL)
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_suit_unathi.dmi',
+		SPECIES_VOX = 'icons/mob/species/vox/onmob_suit_vox.dmi'
+		)
+	sprite_sheets_obj = list(
+		SPECIES_UNATHI = 'icons/obj/clothing/species/unathi/obj_suit_unathi.dmi',
+		SPECIES_SKRELL = 'icons/obj/clothing/species/skrell/obj_suit_skrell.dmi',
+		SPECIES_VOX = 'icons/obj/clothing/species/vox/obj_suit_vox.dmi'
+		)
 
-/obj/item/clothing/suit/space/void/merc/New()
-	..()
+/obj/item/clothing/suit/space/void/merc/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/suit/space/void/merc/prepared

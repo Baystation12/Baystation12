@@ -32,11 +32,6 @@
 //
 // The explosion cannot insta-kill anyone with 30% or more health.
 
-#define LIGHT_OK 0
-#define LIGHT_EMPTY 1
-#define LIGHT_BROKEN 2
-#define LIGHT_BURNED 3
-
 
 /obj/item/device/lightreplacer
 	name = "light replacer"
@@ -53,11 +48,22 @@
 	var/uses = 32
 	var/emagged = FALSE
 	var/charge = 0
+	/// The lighting tone to use for placed light bulbs. One of `LIGHT_COLOR_*` or `LIGHT_REPLACE_*`, or a valid hex color code. Default `LIGHT_REPLACE_RANDOM`.
+	var/lighting_tone = LIGHT_REPLACE_RANDOM
 
 /obj/item/device/lightreplacer/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 2)
 		to_chat(user, "It has [uses] light\s remaining.")
+		switch (lighting_tone)
+			if (LIGHT_REPLACE_AREA)
+				to_chat(user, "It is configured to match the room's blueprints for bulb color and tone.")
+			if (LIGHT_REPLACE_EXISTING)
+				to_chat(user, "It is configured to match the replaced bulb's color and tone.")
+			if (LIGHT_REPLACE_RANDOM)
+				to_chat(user, "It is configured to print bulbs in random tones.")
+			else
+				to_chat(user, "It is configured to print bulbs in this color: <span style='color: [lighting_tone];'>■</span>")
 
 /obj/item/device/lightreplacer/resolve_attackby(var/atom/A, mob/user)
 
@@ -67,7 +73,7 @@
 		var/amt_inserted = 0
 		var/turf/T = get_turf(user)
 		for(var/obj/item/light/L in S.contents)
-			if(!user.stat && src.uses < src.max_uses && L.status == 0)
+			if(!user.stat && src.uses < src.max_uses && L.status == LIGHT_OK)
 				src.AddUses(1)
 				amt_inserted++
 				S.remove_from_storage(L, T, 1)
@@ -103,7 +109,7 @@
 
 	if(istype(W, /obj/item/light))
 		var/obj/item/light/L = W
-		if(L.status == 0) // LIGHT OKAY
+		if(L.status == LIGHT_OK)
 			if(uses < max_uses)
 				if(!user.unEquip(L))
 					return
@@ -128,6 +134,37 @@
 
 /obj/item/device/lightreplacer/on_update_icon()
 	icon_state = "lightreplacer[emagged]"
+
+
+/obj/item/device/lightreplacer/attack_self(mob/user)
+	var/selection = input(user, "Select a color, tone, or matching option:", "Light Replace Color", LIGHT_REPLACE_OPTIONS[1]) in LIGHT_REPLACE_OPTIONS
+	if (!selection)
+		return
+	switch (selection)
+		if ("Random (Default)")
+			lighting_tone = LIGHT_REPLACE_RANDOM
+			to_chat(user, SPAN_NOTICE("You configure \the [src] to print bulbs in random tones."))
+		if ("Match Blueprint")
+			lighting_tone = LIGHT_REPLACE_AREA
+			to_chat(user, SPAN_NOTICE("You configure \the [src] to match the room's blueprints for bulb color and tone."))
+		if ("Match Existing")
+			lighting_tone = LIGHT_REPLACE_EXISTING
+			to_chat(user, SPAN_NOTICE("You configure \the [src] to match the replaced bulb's color and tone."))
+		if ("Warm")
+			lighting_tone = LIGHT_COLOUR_WARM
+			to_chat(user, SPAN_NOTICE("You configure \the [src] to print bulbs in warm tones."))
+		if ("Cool")
+			lighting_tone = LIGHT_COLOUR_COOL
+			to_chat(user, SPAN_NOTICE("You configure \the [src] to print bulbs in cool tones."))
+		if ("White")
+			lighting_tone = LIGHT_COLOUR_WHITE
+			to_chat(user, SPAN_NOTICE("You configure \the [src] to print bulbs in white tones."))
+		if ("Custom")
+			var/new_lighting_tone = input(user, "Select a color:", "Light Replace Color") as color
+			if (!new_lighting_tone)
+				return
+			lighting_tone = new_lighting_tone
+			to_chat(user, SPAN_NOTICE("You configure \the [src] to print bulbs in the color: <span style='color: [lighting_tone];'>■</span>"))
 
 
 /obj/item/device/lightreplacer/proc/Use(var/mob/user)
@@ -155,13 +192,25 @@
 	else if(Use(U))
 		to_chat(U, "<span class='notice'>You replace the [target.get_fitting_name()] with the [src].</span>")
 
+		var/bulb_color = null
+		if (lighting_tone == LIGHT_REPLACE_AREA)
+			bulb_color = target.get_color_from_area()
+		else if (lighting_tone == LIGHT_REPLACE_EXISTING)
+			bulb_color = target.lightbulb?.get_color()
+		else if (lighting_tone == LIGHT_REPLACE_RANDOM)
+			bulb_color = pick(LIGHT_STANDARD_COLORS)
+		else
+			bulb_color = lighting_tone
+		if (!bulb_color)
+			bulb_color = pick(LIGHT_STANDARD_COLORS)
+
 		if(target.lightbulb)
 			var/obj/item/bulb = target.lightbulb
 			target.remove_bulb()
 			if (isrobot(U))
 				qdel(bulb)
 
-		var/obj/item/light/L = new target.light_type()
+		var/obj/item/light/L = new target.light_type(target, bulb_color)
 		if (emagged)
 			log_and_message_admins("used an emagged light replacer.", U)
 			L.create_reagents(5)
@@ -184,8 +233,3 @@
 		return 1
 	else
 		return 0
-
-#undef LIGHT_OK
-#undef LIGHT_EMPTY
-#undef LIGHT_BROKEN
-#undef LIGHT_BURNED

@@ -2,12 +2,12 @@
 // This class of weapons takes force and appearance data from a material datum.
 // They are also fragile based on material data and many can break/smash apart.
 /obj/item/material
-	health = 10
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	gender = NEUTER
 	throw_speed = 3
 	throw_range = 7
 	w_class = ITEM_SIZE_NORMAL
+	health_max = 10
 
 	var/default_material = MATERIAL_STEEL
 	var/material/material
@@ -24,6 +24,7 @@
 	var/unbreakable
 	var/drops_debris = 1
 	var/worth_multiplier = 1
+
 
 /obj/item/material/New(var/newloc, var/material_key)
 	if(!material_key)
@@ -67,7 +68,8 @@
 	if(!material)
 		qdel(src)
 	else
-		health = round(material.integrity/5)
+		set_max_health(round(material.integrity / 5))
+		restore_health(get_max_health())
 		if(material.products_need_process())
 			START_PROCESSING(SSobj, src)
 		if(material.conductive)
@@ -105,19 +107,19 @@
 /obj/item/material/proc/check_shatter()
 	if(!unbreakable && prob(material.hardness))
 		if(material.is_brittle())
-			health = 0
+			kill_health()
 		else
-			health--
-		check_health()
+			damage_health(1)
 
-/obj/item/material/proc/check_health(var/consumed)
-	if(health<=0)
-		shatter(consumed)
+/obj/item/material/handle_death_change(new_death_state)
+	. = ..()
+	if (new_death_state)
+		shatter()
 
-/obj/item/material/proc/shatter(var/consumed)
+/obj/item/material/proc/shatter()
 	var/turf/T = get_turf(src)
 	T.visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
 	playsound(src, "shatter", 70, 1)
-	if(!consumed && drops_debris)
+	if(drops_debris)
 		material.place_shard(T)
 	qdel(src)

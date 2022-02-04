@@ -57,12 +57,13 @@
 				/obj/item/weldingtool/largetank,
 				/obj/item/crowbar,
 				/obj/item/wrench,
-				/obj/item/device/flashlight)
+				/obj/item/device/flashlight,
+				/obj/item/device/flashlight/upgraded)
 
 /obj/random/technology_scanner
 	name = "random scanner"
 	desc = "This is a random technology scanner."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/atmos_analyzer.dmi'
 	icon_state = "atmos"
 
 /obj/random/technology_scanner/spawn_choices()
@@ -528,14 +529,14 @@ obj/random/closet //A couple of random closets to spice up maint
 
 /obj/random/tank/spawn_choices()
 	return list(/obj/item/tank/oxygen = 5,
-				/obj/item/tank/oxygen/yellow = 4,
-				/obj/item/tank/emergency/oxygen/double/red = 4,
+				/obj/item/tank/oxygen_yellow = 4,
+				/obj/item/tank/oxygen_scba = 4,
 				/obj/item/tank/air = 3,
-				/obj/item/tank/emergency/oxygen = 4,
-				/obj/item/tank/emergency/oxygen/engi = 3,
-				/obj/item/tank/emergency/oxygen/double = 2,
-				/obj/item/tank/emergency/nitrogen = 2,
-				/obj/item/tank/emergency/nitrogen/double = 1,
+				/obj/item/tank/oxygen_emergency = 4,
+				/obj/item/tank/oxygen_emergency_extended = 3,
+				/obj/item/tank/oxygen_emergency_double = 2,
+				/obj/item/tank/nitrogen_emergency = 2,
+				/obj/item/tank/nitrogen_emergency_double = 1,
 				/obj/item/tank/nitrogen = 1,
 				/obj/item/device/suit_cooling_unit = 1)
 
@@ -628,7 +629,8 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/device/flashlight/flare/glowstick/yellow,
 				/obj/item/device/flashlight/flare/glowstick/orange,
 				/obj/item/grenade/light,
-				/obj/item/device/oxycandle)
+				/obj/item/device/oxycandle,
+				/obj/item/device/flashlight/upgraded)
 
 /obj/random/smokes
 	name = "random smokeable"
@@ -883,6 +885,30 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/clothing/accessory/kneepads = 3,
 				/obj/item/clothing/accessory/stethoscope = 2)
 
+GLOBAL_LIST_INIT(random_backpacks, list(
+	/obj/item/storage/backpack/cultpack,
+	/obj/item/storage/backpack/clown,
+	/obj/item/storage/backpack/medic,
+	/obj/item/storage/backpack/security,
+	/obj/item/storage/backpack/security/exo,
+	/obj/item/storage/backpack/command,
+	/obj/item/storage/backpack/industrial,
+	/obj/item/storage/backpack/toxins,
+	/obj/item/storage/backpack/hydroponics,
+	/obj/item/storage/backpack/genetics,
+	/obj/item/storage/backpack/virology,
+	/obj/item/storage/backpack/chemistry
+))
+
+/obj/random/backpack
+	name = "random backpack"
+	desc = "This is a random backpack."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "backpack"
+
+/obj/random/backpack/spawn_choices()
+	return GLOB.random_backpacks
+
 /obj/random/cash
 	name = "random currency"
 	desc = "LOADSAMONEY!"
@@ -1035,7 +1061,9 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/clothing/head/helmet/space/void/atmos/alt,
 				/obj/item/clothing/head/helmet/space/void/merc,
 				/obj/item/clothing/head/helmet/space/void/medical,
-				/obj/item/clothing/head/helmet/space/void/medical/alt)
+				/obj/item/clothing/head/helmet/space/void/medical/alt,
+				/obj/item/clothing/head/helmet/space/void/retro
+			)
 
 /obj/random/voidsuit
 	name = "Random Voidsuit"
@@ -1056,7 +1084,9 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/clothing/suit/space/void/atmos/alt,
 				/obj/item/clothing/suit/space/void/merc,
 				/obj/item/clothing/suit/space/void/medical,
-				/obj/item/clothing/suit/space/void/medical/alt)
+				/obj/item/clothing/suit/space/void/medical/alt,
+				/obj/item/clothing/suit/space/void/retro
+			)
 
 /obj/random/hardsuit
 	name = "Random Hardsuit"

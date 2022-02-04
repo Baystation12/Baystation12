@@ -11,7 +11,21 @@
 	icon_state = "blackservice"
 	body_parts_covered = UPPER_TORSO|ARMS
 	siemens_coefficient = 0.9
-	allowed = list(/obj/item/tank/emergency,/obj/item/device/flashlight,/obj/item/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/storage/fancy/cigarettes,/obj/item/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll)
+	allowed = list(
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/device/flashlight,
+		/obj/item/pen,
+		/obj/item/clothing/head/soft,
+		/obj/item/clothing/head/beret,
+		/obj/item/storage/fancy/cigarettes,
+		/obj/item/flame/lighter,
+		/obj/item/device/taperecorder,
+		/obj/item/device/scanner/gas,
+		/obj/item/device/radio,
+		/obj/item/taperoll
+	)
 	valid_accessory_slots = list(
 		ACCESSORY_SLOT_ARMBAND,
 		ACCESSORY_SLOT_MEDAL,
@@ -280,7 +294,16 @@
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	body_parts_covered = UPPER_TORSO|ARMS
 	siemens_coefficient = 0.9
-	allowed = list(/obj/item/tank/emergency,/obj/item/device/flashlight,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/device/radio,/obj/item/pen)
+	allowed = list(
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/device/flashlight,
+		/obj/item/clothing/head/soft,
+		/obj/item/clothing/head/beret,
+		/obj/item/device/radio,
+		/obj/item/pen
+	)
 	valid_accessory_slots = list(ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_INSIGNIA)
 
 /obj/item/clothing/suit/dress/solgov/fleet/sailor
@@ -328,17 +351,61 @@
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
-	allowed = list (/obj/item/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/storage/fancy/cigarettes,/obj/item/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll,/obj/item/device/scanner/gas, /obj/item/device/flashlight, /obj/item/device/multitool, /obj/item/device/radio, /obj/item/device/t_scanner, \
-	/obj/item/crowbar, /obj/item/screwdriver, /obj/item/weldingtool, /obj/item/wirecutters, /obj/item/wrench, /obj/item/tank/emergency, \
-	/obj/item/clothing/mask/gas, /obj/item/taperoll/engineering,/obj/item/clothing/head/hardhat)
+	allowed = list (
+		/obj/item/pen,
+		/obj/item/clothing/head/soft,
+		/obj/item/clothing/head/beret,
+		/obj/item/storage/fancy/cigarettes,
+		/obj/item/flame/lighter,
+		/obj/item/device/taperecorder,
+		/obj/item/device/scanner/gas,
+		/obj/item/device/radio,
+		/obj/item/taperoll,
+		/obj/item/device/scanner/gas,
+		/obj/item/device/flashlight,
+		/obj/item/device/multitool,
+		/obj/item/device/radio,
+		/obj/item/device/t_scanner,
+		/obj/item/crowbar,
+		/obj/item/screwdriver,
+		/obj/item/weldingtool,
+		/obj/item/wirecutters,
+		/obj/item/wrench,
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/clothing/mask/gas,
+		/obj/item/taperoll/engineering,
+		/obj/item/clothing/head/hardhat
+	)
 
 /obj/item/clothing/suit/storage/jacket/solgov/fleet/medical
 	name = "fleet jacket"
 	desc = "A jacket commonly issued by the fleet to its medical staff. It sports some discrete blue markings, and has thin elbow pads."
 	icon_state = "navymedjacket"
 	item_state = "navymedjacket"
-	allowed = list (/obj/item/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/storage/fancy/cigarettes,/obj/item/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll,/obj/item/stack/medical, /obj/item/reagent_containers/dropper, /obj/item/reagent_containers/hypospray, /obj/item/reagent_containers/syringe, \
-	/obj/item/device/scanner/health, /obj/item/device/flashlight, /obj/item/device/radio, /obj/item/clothing/head/hardhat, /obj/item/tank/emergency, /obj/item/reagent_containers/ivbag
+	allowed = list (
+		/obj/item/pen,
+		/obj/item/clothing/head/soft,
+		/obj/item/clothing/head/beret,
+		/obj/item/storage/fancy/cigarettes,
+		/obj/item/flame/lighter,
+		/obj/item/device/taperecorder,
+		/obj/item/device/scanner/gas,
+		/obj/item/device/radio,
+		/obj/item/taperoll,
+		/obj/item/stack/medical,
+		/obj/item/reagent_containers/dropper,
+		/obj/item/reagent_containers/hypospray,
+		/obj/item/reagent_containers/syringe,
+		/obj/item/device/scanner/health,
+		/obj/item/device/flashlight,
+		/obj/item/device/radio,
+		/obj/item/clothing/head/hardhat,
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/reagent_containers/ivbag
 	)
 
 /obj/item/clothing/suit/storage/jacket/solgov/fleet/security
@@ -346,7 +413,30 @@
 	desc = "A jacket commonly issued by the fleet to its security staff. It sports some discrete red markings, and has elbow pads."
 	icon_state = "navysecjacket"
 	item_state = "navysecjacket"
-	allowed = list (/obj/item/tank/emergency,/obj/item/device/flashlight,/obj/item/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/storage/fancy/cigarettes,/obj/item/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll,/obj/item/gun/energy,/obj/item/device/radio,/obj/item/reagent_containers/spray/pepper,/obj/item/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/handcuffs,/obj/item/gun/magnetic,/obj/item/clothing/head/helmet
+	allowed = list (
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/device/flashlight,
+		/obj/item/pen,
+		/obj/item/clothing/head/soft,
+		/obj/item/clothing/head/beret,
+		/obj/item/storage/fancy/cigarettes,
+		/obj/item/flame/lighter,
+		/obj/item/device/taperecorder,
+		/obj/item/device/scanner/gas,
+		/obj/item/device/radio,
+		/obj/item/taperoll,
+		/obj/item/gun/energy,
+		/obj/item/device/radio,
+		/obj/item/reagent_containers/spray/pepper,
+		/obj/item/gun/projectile,
+		/obj/item/ammo_magazine,
+		/obj/item/ammo_casing,
+		/obj/item/melee/baton,
+		/obj/item/handcuffs,
+		/obj/item/gun/magnetic,
+		/obj/item/clothing/head/helmet
 	)
 
 /obj/item/clothing/suit/storage/jacket/solgov/fleet/service
@@ -354,7 +444,20 @@
 	desc = "A jacket commonly issued by the fleet to its service staff. It sports some discrete green markings."
 	icon_state = "navysrvjacket"
 	item_state = "navysrvjacket"
-	allowed = list (/obj/item/tank/emergency,/obj/item/device/flashlight,/obj/item/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/storage/fancy/cigarettes,/obj/item/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll
+	allowed = list (
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/device/flashlight,
+		/obj/item/pen,
+		/obj/item/clothing/head/soft,
+		/obj/item/clothing/head/beret,
+		/obj/item/storage/fancy/cigarettes,
+		/obj/item/flame/lighter,
+		/obj/item/device/taperecorder,
+		/obj/item/device/scanner/gas,
+		/obj/item/device/radio,
+		/obj/item/taperoll
 	)
 
 /obj/item/clothing/suit/storage/jacket/solgov/fleet/supply
@@ -362,7 +465,20 @@
 	desc = "A jacket commonly issued by the fleet to its deck staff. It sports some discrete brown markings, and has elbow pads."
 	icon_state = "navysupjacket"
 	item_state = "navysupjacket"
-	allowed = list (/obj/item/tank/emergency,/obj/item/device/flashlight,/obj/item/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/storage/fancy/cigarettes,/obj/item/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll
+	allowed = list (
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/device/flashlight,
+		/obj/item/pen,
+		/obj/item/clothing/head/soft,
+		/obj/item/clothing/head/beret,
+		/obj/item/storage/fancy/cigarettes,
+		/obj/item/flame/lighter,
+		/obj/item/device/taperecorder,
+		/obj/item/device/scanner/gas,
+		/obj/item/device/radio,
+		/obj/item/taperoll
 	)
 
 /obj/item/clothing/suit/storage/jacket/solgov/fleet/command
@@ -370,7 +486,20 @@
 	desc = "A jacket commonly issued by the fleet to its command staff. It sports some gold markings."
 	icon_state = "navycomjacket"
 	item_state = "navycomjacket"
-	allowed = list (/obj/item/tank/emergency,/obj/item/device/flashlight,/obj/item/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/storage/fancy/cigarettes,/obj/item/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll
+	allowed = list (
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/device/flashlight,
+		/obj/item/pen,
+		/obj/item/clothing/head/soft,
+		/obj/item/clothing/head/beret,
+		/obj/item/storage/fancy/cigarettes,
+		/obj/item/flame/lighter,
+		/obj/item/device/taperecorder,
+		/obj/item/device/scanner/gas,
+		/obj/item/device/radio,
+		/obj/item/taperoll
 	)
 
 //SolGov Hardsuits
@@ -456,8 +585,8 @@
 		)
 	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/briefcase/inflatable)
 
-/obj/item/clothing/suit/space/void/command/New()
-	..()
+/obj/item/clothing/suit/space/void/command/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 0
 
 /obj/item/clothing/suit/space/void/command/prepared

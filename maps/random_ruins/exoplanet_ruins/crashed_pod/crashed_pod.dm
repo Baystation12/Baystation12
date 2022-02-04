@@ -20,7 +20,7 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 	crew_jobs = list(/datum/job/submap/pod)
 
 /datum/submap/crashed_pod/sync_cell(var/obj/effect/overmap/visitable/cell)
-	cell.has_distress_beacon = name
+	return
 
 /datum/job/submap/pod
 	title = "Stranded Survivor"
@@ -38,8 +38,7 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 	if(_owner) // Might be called from admin tools, etc
 		info = "Your ship, the [_owner.name], has been destroyed by a terrible disaster, \
 		leaving you stranded in your survival pod on a hostile exoplanet. Your pod's distress \
-		signal might draw help, but even if you should be so lucky, you must survive long \
-		enough for it to arrive."
+		signal appear to be malfunctioning. All you can do now is survive, and hope for a passing ship..."
 
 /obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor
 	name = "Stranded Survivor"

@@ -7,7 +7,7 @@
 		return
 	if(!can_fall(location_override = lastloc) && prepared_maneuver && prepared_maneuver.can_be_used_by(src, silent = TRUE))
 		var/turf/check = get_turf(lastloc)
-		for(var/i = 1 to ceil((get_jump_distance() * get_acrobatics_multiplier()) * prepared_maneuver.reflexive_modifier))
+		for(var/i = 1 to Ceil((get_jump_distance() * get_acrobatics_multiplier()) * prepared_maneuver.reflexive_modifier))
 			var/turf/next_check = get_step(check, dir)
 			if(!next_check || next_check.density)
 				break

@@ -69,8 +69,8 @@
 	var/list/options = list()
 	options["HUD"] = /obj/item/clothing/glasses/hud/health
 	options["HUD, corrective"] = /obj/item/clothing/glasses/hud/health/prescription
-	options["Visor"] = /obj/item/clothing/glasses/hud/health/visor
-	options["Visor, corrective"] = /obj/item/clothing/glasses/hud/health/visor/prescription
+	options["Goggles"] = /obj/item/clothing/glasses/hud/health/goggle
+	options["Goggles, corrective"] = /obj/item/clothing/glasses/hud/health/goggle/prescription
 	options["Eyepatch"] = /obj/item/clothing/glasses/eyepatch/hud/medical
 	gear_tweaks += new /datum/gear_tweak/path (options)
 

@@ -91,10 +91,9 @@
 	var/datum/effect/effect/system/spark_spread/spark_system //So they can initialize sparks whenever/N
 	var/lawupdate = TRUE //Cyborgs will sync their laws with their AI by default
 	var/lockcharge //If a robot is locked down
-	var/speed = 0
 	var/scrambledcodes = FALSE // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
 	var/tracking_entities = 0 //The number of known entities currently accessing the internal camera
-	var/braintype = "Cyborg"
+	var/braintype = "Drone"
 	var/intenselight = FALSE	// Whether cyborg's integrated light was upgraded
 	var/vtec = FALSE
 	var/flash_protected = FALSE
@@ -298,7 +297,6 @@
 
 	if(hands)
 		hands.icon_state = lowertext(modtype)
-	SSstatistics.add_field("cyborg_[lowertext(modtype)]",1)
 	updatename()
 	recalculate_synth_capacities()
 	if(module)

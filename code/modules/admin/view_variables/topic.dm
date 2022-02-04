@@ -564,6 +564,30 @@
 		var/mob/living/L = locate(href_list["debug_mob_ai"])
 		log_debug("AI Debugging toggled [L.ai_holder.debug() ? "ON" : "OFF"] for \the [L]")
 
+	else if (href_list["addmovementhandler"])
+		if (!check_rights(R_DEBUG))
+			return
+		var/datum/movement_handler/M = input("Add a movement handler to the mob.", "Movement Handler", null) as null|anything in typesof(/datum/movement_handler)
+		if (!M)
+			return
+		var/atom/movable/A = locate(href_list["addmovementhandler"])
+		if (!istype(A))
+			return
+		A.AddMovementHandler(M)
+		log_and_message_admins("Added the [M] movement handler to \the [A]")
+
+	else if (href_list["removemovementhandler"])
+		if (!check_rights(R_DEBUG))
+			return
+		var/atom/movable/A = locate(href_list["removemovementhandler"])
+		if (!istype(A))
+			return
+		var/choice = input("Remove which movement handler?", "Movement Handler", null) as null|anything in A.movement_handlers
+		if (!choice)
+			return
+		A.RemoveMovementHandler(choice)
+		log_and_message_admins("Removed the [choice] movement handler from \the [A]")
+
 	if(href_list["datumrefresh"])
 		var/datum/DAT = locate(href_list["datumrefresh"])
 		if(istype(DAT, /datum) || istype(DAT, /client))

@@ -1,15 +1,16 @@
 // Vox space gear (vaccuum suit, low pressure armour)
 // Can't be equipped by any other species due to bone structure and vox cybernetics.
 /obj/item/clothing/suit/space/vox
+	icon = 'icons/obj/clothing/species/vox/obj_suit_vox.dmi'
 	w_class = ITEM_SIZE_NORMAL
 	allowed = list(/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/melee/energy/sword,/obj/item/handcuffs,/obj/item/tank)
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_PISTOL,
 		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SMALL, 
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SMALL,
 		rad = ARMOR_RAD_MINOR
 		)
 	siemens_coefficient = 0.6
@@ -18,18 +19,19 @@
 	species_restricted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
 	flags_inv = HIDEJUMPSUIT
 
-/obj/item/clothing/suit/space/vox/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 1
+/obj/item/clothing/suit/space/vox/Initialize()
+	. = ..()
+	slowdown_per_slot[slot_wear_suit] = 0.75
 
 /obj/item/clothing/head/helmet/space/vox
+	icon = 'icons/obj/clothing/species/vox/obj_head_vox.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_PISTOL,
 		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SMALL, 
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SMALL,
 		rad = ARMOR_RAD_MINOR
 		)
 	siemens_coefficient = 0.6
@@ -80,6 +82,36 @@
 	name = "alien armour"
 	icon_state = "vox-medic"
 	desc = "An almost organic looking nonhuman pressure suit."
+
+/obj/item/clothing/suit/space/vox/raider
+	name = "advanced alien armour"
+	icon_state = "vox-raider"
+	desc = "A sleek, greyish suit of armor over a tight bodysuit. Lighter than it looks."
+	allowed = list(/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/melee/energy/sword,/obj/item/handcuffs,/obj/item/tank,/obj/item/storage/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/inflatable_dispenser,/obj/item/rcd)
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SMALL,
+		rad = ARMOR_RAD_MINOR
+		)
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+
+/obj/item/clothing/head/helmet/space/vox/raider
+	name = "advanced alien helmet"
+	icon_state = "vox-raider"
+	desc = "A tight-fitting, beaked mask with three menacing eyeslits."
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SMALL,
+		rad = ARMOR_RAD_MINOR
+		)
 
 /obj/item/clothing/under/vox
 	has_sensor = 0

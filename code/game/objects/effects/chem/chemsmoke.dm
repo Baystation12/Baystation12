@@ -6,7 +6,7 @@
 	opacity = 0
 	layer = ABOVE_PROJECTILE_LAYER
 	time_to_live = 300
-	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE | PASS_FLAG_GLASS //PASS_FLAG_GLASS is fine here, it's just so the visual effect can "flow" around glass
+	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	var/splash_amount = 5 //atoms moving through a smoke cloud get splashed with up to 10 units of reagent
 	var/turf/destination
 
@@ -186,7 +186,7 @@
 	var/pressure = 0
 	var/datum/gas_mixture/environment = location.return_air()
 	if(environment) pressure = environment.return_pressure()
-	smoke_duration = between(5, smoke_duration*pressure/(ONE_ATMOSPHERE/3), smoke_duration)
+	smoke_duration = clamp(smoke_duration * pressure / (ONE_ATMOSPHERE / 3), 5, smoke_duration)
 
 	var/const/arcLength = 2.3559 //distance between each smoke cloud
 
@@ -199,7 +199,7 @@
 
 		var/offset = 0
 		var/points = round((radius * 2 * M_PI) / arcLength)
-		var/angle = round(ToDegrees(arcLength / radius), 1)
+		var/angle = round(RAD_TO_DEG * arcLength / radius, 1)
 
 		if(!IsInteger(radius))
 			offset = 45		//degrees

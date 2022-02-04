@@ -565,8 +565,8 @@
 /obj/structure/table/rack,
 /obj/item/cell/device/high,
 /obj/item/cell/device/high,
-/obj/item/tank/emergency/oxygen/double,
-/obj/item/tank/emergency/oxygen/double,
+/obj/item/tank/oxygen_emergency_double,
+/obj/item/tank/oxygen_emergency_double,
 /obj/random/coin,
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 1
@@ -1066,10 +1066,6 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space)
-"jc" = (
-/obj/vehicle/train/cargo/engine,
-/turf/simulated/floor/airless,
-/area/scavver/gantry/up2)
 "jd" = (
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -5591,10 +5587,6 @@
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 6
 	},
-/turf/simulated/floor/airless,
-/area/scavver/gantry/up2)
-"WU" = (
-/obj/vehicle/train/cargo/trolley,
 /turf/simulated/floor/airless,
 /area/scavver/gantry/up2)
 "WW" = (
@@ -17689,9 +17681,9 @@ In
 In
 In
 In
-WU
-WU
-jc
+In
+In
+In
 In
 In
 Qr

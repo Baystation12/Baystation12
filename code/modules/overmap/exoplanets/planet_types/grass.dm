@@ -51,7 +51,7 @@
 			S.set_trait(TRAIT_SPREAD,1)
 
 /area/exoplanet/grass
-	base_turf = /turf/simulated/floor/exoplanet/grass
+	base_turf = /turf/unsimulated/floor/exoplanet/grass
 	ambience = list('sound/effects/wind/wind_2_1.ogg','sound/effects/wind/wind_2_2.ogg','sound/effects/wind/wind_3_1.ogg','sound/effects/wind/wind_4_1.ogg','sound/ambience/eeriejungle2.ogg','sound/ambience/eeriejungle1.ogg')
 
 /area/exoplanet/grass/play_ambience(var/mob/living/L)
@@ -63,8 +63,8 @@
 /datum/random_map/noise/exoplanet/grass
 	descriptor = "grass exoplanet"
 	smoothing_iterations = 2
-	land_type = /turf/simulated/floor/exoplanet/grass
-	water_type = /turf/simulated/floor/exoplanet/water/shallow
+	land_type = /turf/unsimulated/floor/exoplanet/grass
+	water_type = /turf/unsimulated/floor/exoplanet/water/shallow
 
 	flora_prob = 10
 	grass_prob = 50

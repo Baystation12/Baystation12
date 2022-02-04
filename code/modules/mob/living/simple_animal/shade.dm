@@ -33,7 +33,7 @@
 	skin_material = null
 	skin_amount =   0
 
-	ai_holder_type = /datum/ai_holder/simple_animal/retaliate/shade
+	ai_holder = /datum/ai_holder/simple_animal/retaliate/shade
 	say_list_type = /datum/say_list/shade
 
 /obj/item/natural_weapon/shade

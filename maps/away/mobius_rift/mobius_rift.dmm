@@ -33,7 +33,7 @@
 /turf/simulated/floor/grass,
 /area/mobius_rift)
 "k" = (
-/turf/simulated/floor/exoplanet/water/shallow,
+/turf/unsimulated/floor/exoplanet/water/shallow,
 /area/mobius_rift)
 "l" = (
 /obj/structure/flora/ausbushes/fullgrass,

@@ -23,11 +23,11 @@
 					if(isghost(C.mob))
 						var/mob/observer/ghost/O = C.mob
 						if(O.started_as_observer)
-							entry += " - <font color='gray'>Observing</font>"
+							entry += " - <span class=\"who_observing\">Observing</span>"
 						else
-							entry += " - <font color='black'><b>DEAD</b></font>"
+							entry += " - <span class=\"who_dead\"><b>DEAD</b></span>"
 					else
-						entry += " - <font color='black'><b>DEAD</b></font>"
+						entry += " - <span class=\"who_dead\"><b>DEAD</b></span>"
 
 			var/age
 			if(isnum(C.player_age))
@@ -36,14 +36,14 @@
 				age = 0
 
 			if(age <= 1)
-				age = "<font color='#ff0000'><b>[age]</b></font>"
+				age = "<span class=\"who_new_account\"><b>[age]</b></span>"
 			else if(age < 10)
-				age = "<font color='#ff8c00'><b>[age]</b></font>"
+				age = "<span class=\"who_newish_account\"><b>[age]</b></span>"
 
 			entry += " - [age]"
 
 			if(is_special_character(C.mob))
-				entry += " - <b><font color='red'>Antagonist</font></b>"
+				entry += " - <b><span class=\"who_antagonist\">[C.mob.mind.special_role]</span></b>"
 			if(C.is_afk())
 				entry += " (AFK - [C.inactivity2text()])"
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"

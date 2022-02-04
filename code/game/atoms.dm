@@ -63,8 +63,8 @@
 		if(istype(T))
 			T.RecalculateOpacity()
 
-	if (use_health_handler)
-		initialize_health()
+	if (health_max)
+		health_current = health_max
 
 	return INITIALIZE_HINT_NORMAL
 
@@ -123,14 +123,6 @@
 /atom/proc/is_open_container()
 	return atom_flags & ATOM_FLAG_OPEN_CONTAINER
 
-/*//Convenience proc to see whether a container can be accessed in a certain way.
-
-	proc/can_subract_container()
-		return flags & EXTRACT_CONTAINER
-
-	proc/can_add_container()
-		return flags & INSERT_CONTAINER
-*/
 
 /atom/proc/CheckExit()
 	return 1
@@ -277,6 +269,8 @@ its easier to just keep the beam vertical.
 
 	to_chat(user, "[icon2html(src, user)] That's [f_name] [suffix]")
 	to_chat(user, desc)
+	if (health_max)
+		examine_damage_state(user)
 	return TRUE
 
 // called by mobs when e.g. having the atom as their machine, pulledby, loc (AKA mob being inside the atom) or buckled var set.

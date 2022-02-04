@@ -4,7 +4,7 @@
 
 /obj/item/device/paint_sprayer
 	name = "paint sprayer"
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/paint_sprayer.dmi'
 	icon_state = "paint_sprayer"
 	item_state = "paint_sprayer"
 	desc = "A slender and none-too-sophisticated device capable of applying paint on floors, walls, exosuits and certain airlocks."

@@ -2639,9 +2639,9 @@
 	required_reagents = list(/datum/reagent/ethanol/creme_de_cacao = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/milk/cream = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/between_the_sheets
-	name = "Between the Sheets"
-	result = /datum/reagent/ethanol/between_the_sheets
+/datum/chemical_reaction/drifter
+	name = "Drifter"
+	result = /datum/reagent/ethanol/drifter
 	required_reagents = list(/datum/reagent/ethanol/rum = 1, /datum/reagent/ethanol/cognac = 2, /datum/reagent/ethanol/triple_sec = 1, /datum/reagent/drink/juice/lemon = 1)
 	result_amount = 5
 

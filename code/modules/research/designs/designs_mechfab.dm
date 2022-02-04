@@ -488,6 +488,14 @@
 	materials = list(MATERIAL_STEEL = 20000, MATERIAL_ALUMINIUM = 10000, MATERIAL_PHORON = 2500)
 	req_tech = list(TECH_ENGINEERING = 2, TECH_MAGNET = 2)
 	build_path = /obj/item/mech_equipment/ionjets
+
+/datum/design/item/exosuit/mechshields/air
+	name = "exosuit atmospheric shields"
+	id = "mech_atmoshields"
+	time = 30
+	materials = list(MATERIAL_STEEL = 20000, MATERIAL_ALUMINIUM = 5000, MATERIAL_GLASS = 5000, MATERIAL_PHORON = 2500)
+	req_tech = list(TECH_ENGINEERING = 2, TECH_MAGNET = 2)
+	build_path = /obj/item/mech_equipment/atmos_shields
 // End mechs.
 
 /datum/design/item/synthetic_flash
@@ -523,6 +531,13 @@
 	materials = list(MATERIAL_TITANIUM = 4000, MATERIAL_DIAMOND = 250)
 	req_tech = list(TECH_ESOTERIC = 4, TECH_COMBAT = 5, TECH_BIO = 3)
 	id = "augment_wristblade"
+
+/datum/design/item/mechfab/augment/powerfist
+	name = "Pneumatic Powerfist"
+	build_path = /obj/item/organ/internal/augment/active/item/powerfist
+	materials = list(DEFAULT_WALL_MATERIAL = 6000, MATERIAL_PHORON = 1000, MATERIAL_URANIUM = 500)
+	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4, TECH_MATERIAL = 4, TECH_BIO = 3)
+	id = "augment_powerfist"
 
 /datum/design/item/mechfab/augment/armblade/popout_shotgun
 	name = "Pop-out shotgun"

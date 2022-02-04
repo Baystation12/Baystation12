@@ -7,7 +7,7 @@
 	icon_dead = "pine_1"
 	icon_gib = "pine_1"
 	turns_per_move = 5
-	meat_type = /obj/item/reagent_containers/food/snacks/fish
+	meat_type = /obj/item/reagent_containers/food/snacks/fish/unknown
 	response_help = "brushes"
 	response_disarm = "pushes"
 	response_harm = "hits"
@@ -19,7 +19,7 @@
 
 	natural_weapon = /obj/item/natural_weapon/bite
 
-	ai_holder_type = /datum/ai_holder/simple_animal/melee/tree
+	ai_holder = /datum/ai_holder/simple_animal/melee/tree
 
 	//Space carp aren't affected by atmos.
 	min_gas = null

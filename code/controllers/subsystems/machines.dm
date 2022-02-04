@@ -1,7 +1,8 @@
-#define SSMACHINES_PIPENETS      1
-#define SSMACHINES_MACHINERY     2
-#define SSMACHINES_POWERNETS     3
+#define SSMACHINES_PIPENETS 1
+#define SSMACHINES_MACHINERY 2
+#define SSMACHINES_POWERNETS 3
 #define SSMACHINES_POWER_OBJECTS 4
+
 
 #define START_PROCESSING_IN_LIST(Datum, List) \
 if (Datum.is_processing) {\
@@ -32,188 +33,201 @@ if(Datum.is_processing) {\
 #define START_PROCESSING_POWER_OBJECT(Datum) START_PROCESSING_IN_LIST(Datum, power_objects)
 #define STOP_PROCESSING_POWER_OBJECT(Datum) STOP_PROCESSING_IN_LIST(Datum, power_objects)
 
+
 SUBSYSTEM_DEF(machines)
 	name = "Machines"
 	init_order = SS_INIT_MACHINES
 	priority = SS_PRIORITY_MACHINERY
 	flags = SS_KEEP_TIMING
-	runlevels = RUNLEVEL_GAME|RUNLEVEL_POSTGAME
+	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
+	var/static/tmp/current_step = SSMACHINES_PIPENETS
+	var/static/tmp/cost_pipenets = 0
+	var/static/tmp/cost_machinery = 0
+	var/static/tmp/cost_powernets = 0
+	var/static/tmp/cost_power_objects = 0
+	var/static/tmp/list/pipenets = list()
+	var/static/tmp/list/machinery = list()
+	var/static/tmp/list/powernets = list()
+	var/static/tmp/list/power_objects = list()
+	var/static/tmp/list/processing = list()
+	var/static/tmp/list/queue = list()
 
-	var/current_step = SSMACHINES_PIPENETS
 
-	var/cost_pipenets      = 0
-	var/cost_machinery     = 0
-	var/cost_powernets     = 0
-	var/cost_power_objects = 0
+/datum/controller/subsystem/machines/Recover()
+	current_step = SSMACHINES_PIPENETS
+	queue.Cut()
 
-	var/list/pipenets      = list()
-	var/list/machinery     = list() // These are all machines.
-	var/list/powernets     = list()
-	var/list/power_objects = list()
 
-	var/list/processing  = list() // These are the machines which are processing.
-	var/list/current_run = list()
-
-/datum/controller/subsystem/machines/Initialize(timeofday)
+/datum/controller/subsystem/machines/Initialize()
 	makepowernets()
 	setup_atmos_machinery(machinery)
 	fire()
-	..()
 
-#define INTERNAL_PROCESS_STEP(this_step, check_resumed, proc_to_call, cost_var, next_step)\
-if(current_step == this_step || (check_resumed && !resumed)) {\
-	timer = TICK_USAGE_REAL;\
-	proc_to_call(resumed);\
-	cost_var = MC_AVERAGE(cost_var, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer));\
-	if(state != SS_RUNNING){\
-		return;\
-	}\
-	resumed = 0;\
-	current_step = next_step;\
-}
 
-/datum/controller/subsystem/machines/fire(resumed = 0)
-	var/timer = TICK_USAGE_REAL
+/datum/controller/subsystem/machines/fire(resumed, no_mc_tick)
+	var/timer
+	if (!resumed || current_step == SSMACHINES_PIPENETS)
+		timer = TICK_USAGE_REAL
+		process_pipenets(resumed, no_mc_tick)
+		cost_pipenets = MC_AVERAGE(cost_pipenets, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
+		if (state != SS_RUNNING)
+			return
+		current_step = SSMACHINES_MACHINERY
+		resumed = FALSE
+	if (current_step == SSMACHINES_MACHINERY)
+		timer = TICK_USAGE_REAL
+		process_machinery(resumed, no_mc_tick)
+		cost_machinery = MC_AVERAGE(cost_machinery, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
+		if(state != SS_RUNNING)
+			return
+		current_step = SSMACHINES_POWERNETS
+		resumed = FALSE
+	if (current_step == SSMACHINES_POWERNETS)
+		timer = TICK_USAGE_REAL
+		process_powernets(resumed, no_mc_tick)
+		cost_powernets = MC_AVERAGE(cost_powernets, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
+		if(state != SS_RUNNING)
+			return
+		current_step = SSMACHINES_POWER_OBJECTS
+		resumed = FALSE
+	if (current_step == SSMACHINES_POWER_OBJECTS)
+		timer = TICK_USAGE_REAL
+		process_power_objects(resumed, no_mc_tick)
+		cost_power_objects = MC_AVERAGE(cost_power_objects, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
+		if (state != SS_RUNNING)
+			return
+		current_step = SSMACHINES_PIPENETS
 
-	INTERNAL_PROCESS_STEP(SSMACHINES_PIPENETS,TRUE,process_pipenets,cost_pipenets,SSMACHINES_MACHINERY)
-	INTERNAL_PROCESS_STEP(SSMACHINES_MACHINERY,FALSE,process_machinery,cost_machinery,SSMACHINES_POWERNETS)
-	INTERNAL_PROCESS_STEP(SSMACHINES_POWERNETS,FALSE,process_powernets,cost_powernets,SSMACHINES_POWER_OBJECTS)
-	INTERNAL_PROCESS_STEP(SSMACHINES_POWER_OBJECTS,FALSE,process_power_objects,cost_power_objects,SSMACHINES_PIPENETS)
 
-#undef INTERNAL_PROCESS_STEP
-
-// rebuild all power networks from scratch - only called at world creation or by the admin verb
-// The above is a lie. Turbolifts also call this proc.
+/// Rebuilds power networks from scratch. Called by world initialization and elevators.
 /datum/controller/subsystem/machines/proc/makepowernets()
-	for(var/datum/powernet/PN in powernets)
-		qdel(PN)
+	for(var/datum/powernet/powernet as anything in powernets)
+		qdel(powernet)
 	powernets.Cut()
 	setup_powernets_for_cables(cable_list)
 
+
 /datum/controller/subsystem/machines/proc/setup_powernets_for_cables(list/cables)
-	for(var/obj/structure/cable/PC in cables)
-		if(!PC.powernet)
-			var/datum/powernet/NewPN = new()
-			NewPN.add_cable(PC)
-			propagate_network(PC,PC.powernet)
+	for (var/obj/structure/cable/cable as anything in cables)
+		if (cable.powernet)
+			continue
+		var/datum/powernet/network = new
+		network.add_cable(cable)
+		propagate_network(cable, cable.powernet)
+
 
 /datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
-	set background=1
-
+	set background = TRUE
+	var/list/atmos_machines = list()
+	for (var/obj/machinery/atmospherics/machine in machines)
+		atmos_machines += machine
 	report_progress("Initializing atmos machinery")
-	for(var/obj/machinery/atmospherics/A in machines)
-		A.atmos_init()
+	for (var/obj/machinery/atmospherics/machine as anything in atmos_machines)
+		machine.atmos_init()
 		CHECK_TICK
-
 	report_progress("Initializing pipe networks")
-	for(var/obj/machinery/atmospherics/machine in machines)
+	for (var/obj/machinery/atmospherics/machine as anything in atmos_machines)
 		machine.build_network()
 		CHECK_TICK
 
-/datum/controller/subsystem/machines/stat_entry()
-	var/msg = list()
-	msg += "C:{"
-	msg += "PI:[round(cost_pipenets,1)]|"
-	msg += "MC:[round(cost_machinery,1)]|"
-	msg += "PN:[round(cost_powernets,1)]|"
-	msg += "PO:[round(cost_power_objects,1)]"
-	msg += "} "
-	msg += "PI:[pipenets.len]|"
-	msg += "MC:[processing.len]|"
-	msg += "PN:[powernets.len]|"
-	msg += "PO:[power_objects.len]|"
-	msg += "MC/MS:[round((cost ? processing.len/cost : 0),0.1)]"
-	..(jointext(msg, null))
 
-/datum/controller/subsystem/machines/proc/process_pipenets(resumed = 0)
+/datum/controller/subsystem/machines/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		text = {"[text]\n\
+			Queues: \
+			Pipes [pipenets.len] \
+			Machines [processing.len] \
+			Networks [powernets.len] \
+			Objects [power_objects.len]\n\
+			Costs: \
+			Pipes [Round(cost_pipenets)] \
+			Machines [Round(cost_machinery)] \
+			Networks [Round(cost_powernets)] \
+			Objects [Round(cost_power_objects)]\n\
+			Overall [Roundm(cost ? processing.len / cost : 0, 0.1)]
+		"}
+	..(text, force)
+
+
+/datum/controller/subsystem/machines/proc/process_pipenets(resumed, no_mc_tick)
 	if (!resumed)
-		src.current_run = pipenets.Copy()
-	//cache for sanic speed (lists are references anyways)
-	var/list/current_run = src.current_run
-	while(current_run.len)
-		var/datum/pipe_network/PN = current_run[current_run.len]
-		current_run.len--
-		if(istype(PN) && !QDELETED(PN))
-			PN.Process(wait)
-		else
-			pipenets.Remove(PN)
-			PN.is_processing = null
-		if(MC_TICK_CHECK)
+		queue = pipenets.Copy()
+	var/datum/pipe_network/network
+	for (var/i = queue.len to 1 step -1)
+		network = queue[i]
+		if (QDELETED(network))
+			if (network)
+				network.is_processing = null
+			pipenets -= network
+			continue
+		network.Process(wait)
+		if (no_mc_tick)
+			CHECK_TICK
+		else if (MC_TICK_CHECK)
+			queue.Cut(i)
 			return
 
-/datum/controller/subsystem/machines/proc/process_machinery(resumed = 0)
+
+/datum/controller/subsystem/machines/proc/process_machinery(resumed, no_mc_tick)
 	if (!resumed)
-		src.current_run = processing.Copy()
-
-	var/list/current_run = src.current_run
-	while(current_run.len)
-		var/obj/machinery/M = current_run[current_run.len]
-		current_run.len--
-
-		if(!istype(M)) // Below is a debugging and recovery effort. This should never happen, but has been observed recently.
-			if(!M)
-				continue // Hard delete; unlikely but possible. Soft deletes are handled below and expected.
-			if(M in processing)
-				processing.Remove(M)
-				M.is_processing = null
-				crash_with("[log_info_line(M)] was found illegally queued on SSmachines.")
-				continue
-			else if(resumed)
-				current_run.Cut() // Abandon current run; assuming that we were improperly resumed with the wrong process queue.
-				crash_with("[log_info_line(M)] was in the wrong subqueue on SSmachines on a resumed fire.")
-				process_machinery(0)
-				return
-			else // ??? possibly dequeued by another machine or something ???
-				crash_with("[log_info_line(M)] was in the wrong subqueue on SSmachines on an unresumed fire.")
-				continue
-
-		if(!QDELETED(M) && (M.ProcessAll(wait) == PROCESS_KILL))
-			processing.Remove(M)
-			M.is_processing = null
-		if(MC_TICK_CHECK)
+		queue = processing.Copy()
+	var/obj/machinery/machine
+	for (var/i = queue.len to 1 step -1)
+		machine = queue[i]
+		if (QDELETED(machine))
+			if (machine)
+				machine.is_processing = null
+			processing -= machine
+			continue
+		if (machine.ProcessAll(wait) == PROCESS_KILL)
+			processing -= machine
+		if (no_mc_tick)
+			CHECK_TICK
+		else if (MC_TICK_CHECK)
+			queue.Cut(i)
 			return
 
-/datum/controller/subsystem/machines/proc/process_powernets(resumed = 0)
-	if (!resumed)
-		src.current_run = powernets.Copy()
 
-	var/list/current_run = src.current_run
-	while(current_run.len)
-		var/datum/powernet/PN = current_run[current_run.len]
-		current_run.len--
-		if(istype(PN) && !QDELETED(PN))
-			PN.reset(wait)
-		else
-			powernets.Remove(PN)
-			PN.is_processing = null
-		if(MC_TICK_CHECK)
+/datum/controller/subsystem/machines/proc/process_powernets(resumed, no_mc_tick)
+	if (!resumed)
+		queue = powernets.Copy()
+	var/datum/powernet/network
+	for (var/i = queue.len to 1 step -1)
+		network = queue[i]
+		if (QDELETED(network))
+			if (network)
+				network.is_processing = null
+			powernets -= network
+			continue
+		network.reset(wait)
+		if (no_mc_tick)
+			CHECK_TICK
+		else if (MC_TICK_CHECK)
+			queue.Cut(i)
 			return
 
-/datum/controller/subsystem/machines/proc/process_power_objects(resumed = 0)
-	if (!resumed)
-		src.current_run = power_objects.Copy()
 
-	var/list/current_run = src.current_run
-	while(current_run.len)
-		var/obj/item/I = current_run[current_run.len]
-		current_run.len--
-		if(!I.pwr_drain(wait)) // 0 = Process Kill, remove from processing list.
-			power_objects.Remove(I)
-			I.is_processing = null
-		if(MC_TICK_CHECK)
+/datum/controller/subsystem/machines/proc/process_power_objects(resumed, no_mc_tick)
+	if (!resumed)
+		queue = power_objects.Copy()
+	var/obj/item/item
+	for (var/i = queue.len to 1 step -1)
+		item = queue[i]
+		if (QDELETED(item))
+			if (item)
+				item.is_processing = null
+			power_objects -= item
+			continue
+		if (!item.pwr_drain(wait))
+			item.is_processing = null
+			power_objects -= item
+		if (no_mc_tick)
+			CHECK_TICK
+		else if (MC_TICK_CHECK)
+			queue.Cut(i)
 			return
 
-/datum/controller/subsystem/machines/Recover()
-	if (istype(SSmachines.pipenets))
-		pipenets = SSmachines.pipenets
-	if (istype(SSmachines.machinery))
-		machinery = SSmachines.machinery
-	if (istype(SSmachines.processing))
-		processing = SSmachines.processing
-	if (istype(SSmachines.powernets))
-		powernets = SSmachines.powernets
-	if (istype(SSmachines.power_objects))
-		power_objects = SSmachines.power_objects
 
 #undef SSMACHINES_PIPENETS
 #undef SSMACHINES_MACHINERY

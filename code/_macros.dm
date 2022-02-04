@@ -7,8 +7,7 @@
 
 #define PUBLIC_GAME_MODE SSticker.master_mode
 
-#define Clamp(value, low, high) (value <= low ? low : (value >= high ? high : value))
-#define CLAMP01(x) 		(Clamp(x, 0, 1))
+#define CLAMP01(x) clamp(x, 0, 1)
 
 var/const/POSITIVE_INFINITY = 1#INF // win: 1.#INF, lin: inf
 var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
@@ -204,3 +203,58 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 //proxima code start
 #define SET_L_RPC(r, p, c) set_light(p, l_outer_range = r, l_color = c)
 //proxima code end
+
+/// Semantic define for a 0 int intended for use as a bitfield
+#define EMPTY_BITFIELD 0
+
+
+/// Right-shift of INT by BITS
+#define SHIFTR(INT, BITS) ((INT) >> (BITS))
+
+
+/// Left-shift of INT by BITS
+#define SHIFTL(INT, BITS) ((INT) << (BITS))
+
+
+/// Convenience define for nth-bit flags, 0-indexed
+#define FLAG(BIT) SHIFTL(1, BIT)
+
+
+/// Test bit at index BIT is set in FIELD
+#define GET_BIT(FIELD, BIT) ((FIELD) & FLAG(BIT))
+
+
+/// Test bit at index BIT is set in FIELD; semantic alias of GET_BIT
+#define HAS_BIT(FIELD, BIT) GET_BIT(FIELD, BIT)
+
+
+/// Set bit at index BIT in FIELD
+#define SET_BIT(FIELD, BIT) ((FIELD) |= FLAG(BIT))
+
+
+/// Unset bit at index BIT in FIELD
+#define CLEAR_BIT(FIELD, BIT) ((FIELD) &= ~FLAG(BIT))
+
+
+/// Flip bit at index BIT in FIELD
+#define FLIP_BIT(FIELD, BIT) ((FIELD) ^= FLAG(BIT))
+
+
+/// Test any bits of MASK are set in FIELD
+#define GET_FLAGS(FIELD, MASK) ((FIELD) & (MASK))
+
+
+/// Test all bits of MASK are set in FIELD
+#define HAS_FLAGS(FIELD, MASK) (((FIELD) & (MASK)) == (MASK))
+
+
+/// Set bits of MASK in FIELD
+#define SET_FLAGS(FIELD, MASK) ((FIELD) |= (MASK))
+
+
+/// Unset bits of MASK in FIELD
+#define CLEAR_FLAGS(FIELD, MASK) ((FIELD) &= ~(MASK))
+
+
+/// Flip bits of MASK in FIELD
+#define FLIP_FLAGS(FIELD, MASK) ((FIELD) ^= (MASK))

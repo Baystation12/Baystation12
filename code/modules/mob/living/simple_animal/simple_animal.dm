@@ -172,17 +172,6 @@
 
 	. = ..()
 
-/mob/living/simple_animal/movement_delay()
-	var/tally = ..() //Incase I need to add stuff other than "speed" later
-
-	tally += speed
-	if(purge)//Purged creatures will move more slowly. The more time before their purge stops, the slower they'll move.
-		if(tally <= 0)
-			tally = 1
-		tally *= purge
-
-	return tally
-
 /mob/living/simple_animal/Stat()
 	. = ..()
 
@@ -354,6 +343,9 @@
 		. *= 1.5
 
 	 . += ..()
+
+/mob/living/simple_animal/get_inventory_slot(obj/item/I)
+	return -1
 
 /mob/living/simple_animal/proc/pry_door(var/mob/user, var/delay, var/obj/machinery/door/pesky_door)
 	visible_message(SPAN_WARNING("\The [user] begins [pry_desc] at \the [pesky_door]!"))

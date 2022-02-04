@@ -120,7 +120,7 @@
 	. = replacetext_char(.,"CURRENCY", GLOB.using_map.local_currency_name)
 
 /datum/trader/proc/print_trading_items(var/num)
-	num = Clamp(num,1,trading_items.len)
+	num = clamp(num,1,trading_items.len)
 	if(trading_items[num])
 		var/atom/movable/M = trading_items[num]
 		return "<b>[initial(M.name)]</b>"
@@ -166,7 +166,7 @@
 /datum/trader/proc/offer_items_for_bulk(quantity, list/offers, num, turf/location, skill = SKILL_MAX)
 	if(!offers?.len)
 		return make_response(TRADER_NOT_ENOUGH, "That's not enough.", 0, FALSE)
-	num = Clamp(num, 1, trading_items.len)
+	num = clamp(num, 1, trading_items.len)
 	var/offer_worth = 0
 	for(var/item in offers)
 		var/atom/movable/offer = item
@@ -243,7 +243,7 @@
 			to_chat(offer, replacetext_char(text, "ORIGIN", origin))
 		qdel(offer)
 
-	num = Clamp(num, 1, trading_items.len)
+	num = clamp(num, 1, trading_items.len)
 	var/type = trading_items[num]
 
 	var/list/M = list()
@@ -256,7 +256,7 @@
 	return M
 
 /datum/trader/proc/how_much_do_you_want(var/num, skill = SKILL_MAX)
-	num = Clamp(num, 1, trading_items.len)
+	num = clamp(num, 1, trading_items.len)
 	var/atom/movable/M = trading_items[num]
 	var/datum/trade_response/tr = make_response(TRADER_HOW_MUCH, "Hmm.... how about VALUE CURRENCY?", 0, FALSE)
 	tr.text = replacetext_char(replacetext_char(tr.text, "ITEM", initial(M.name)), "VALUE", get_item_value(num, skill))

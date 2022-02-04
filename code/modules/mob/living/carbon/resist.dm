@@ -58,23 +58,16 @@
 		if(do_after(src, breakouttime*0.25, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
 			if(!handcuffed || buckled)
 				return
-			visible_message(
-				SPAN_WARNING("\The [src] fiddles with \the [handcuffed]."),
-				SPAN_WARNING("You try to slip free of \the [handcuffed] ([i*100/stages]% done)."), range = 2
-				)
+			to_chat(src, SPAN_WARNING("You try to slip free of \the [handcuffed] ([i*100/stages]% done)."))
 		else
 			if(!handcuffed || buckled)
 				return
-			visible_message(
-				SPAN_WARNING("\The [src] stops fiddling with \the [handcuffed]."),
-				SPAN_WARNING("You stop trying to slip free of \the [handcuffed]."), range = 2
-				)
+			to_chat(src, SPAN_WARNING("You stop trying to slip free of \the [handcuffed]."))
 			return
 		if(!handcuffed || buckled)
 			return
-	if (handcuffed.health) // Improvised cuffs can break because their health is > 0
-		handcuffed.health = handcuffed.health - initial(handcuffed.health) / 2
-		if (handcuffed.health < 1)
+	if (handcuffed.health_max) // Improvised cuffs can break because their health is > 0
+		if (handcuffed.damage_health(handcuffed.get_max_health() / 2))
 			visible_message(
 				SPAN_DANGER("\The [src] manages to remove \the [handcuffed], breaking them!"),
 				SPAN_NOTICE("You successfully remove \the [handcuffed], breaking them!"), range = 2
@@ -151,21 +144,12 @@
 			if(!unbuckle_time || do_after(usr, unbuckle_time*0.5, incapacitation_flags = INCAPACITATION_DISABLED))
 				if(!buckled)
 					return
-				visible_message(
-					SPAN_WARNING("\The [src] tries to unbuckle themself."),
-					SPAN_WARNING("You try to unbuckle yourself ([i*100/stages]% done)."), range = 2
-					)
+				to_chat(src, SPAN_WARNING("You try to unbuckle yourself ([i*100/stages]% done)."))
 			else
 				if(!buckled)
 					return
-				visible_message(
-					SPAN_WARNING("\The [src] stops trying to unbuckle themself."),
-					SPAN_WARNING("You stop trying to unbuckle yourself."), range = 2
-					)
+				to_chat(src, SPAN_WARNING("You stop trying to unbuckle yourself."))
 				return
-		visible_message(
-			SPAN_DANGER("\The [src] manages to unbuckle themself!"),
-			SPAN_NOTICE("You successfully unbuckle yourself."), range = 2
-			)
+		to_chat(src, SPAN_NOTICE("You successfully unbuckle yourself."))
 		buckled.user_unbuckle_mob(src)
 		return

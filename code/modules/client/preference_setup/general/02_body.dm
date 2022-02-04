@@ -143,7 +143,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				if(isnull(last_descriptors[entry]))
 					pref.body_descriptors[entry] = descriptor.default_value // Species datums have initial default value.
 				else
-					pref.body_descriptors[entry] = Clamp(last_descriptors[entry], 1, LAZYLEN(descriptor.standalone_value_descriptors))
+					pref.body_descriptors[entry] = clamp(last_descriptors[entry], 1, LAZYLEN(descriptor.standalone_value_descriptors))
 
 	if(!pref.bgstate || !(pref.bgstate in pref.bgstate_options))
 		pref.bgstate = "000"
@@ -342,7 +342,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 		var/list/species_to_pick = list()
 		for(var/species in playable_species)
-			if(!check_rights(R_ADMIN, 0) && config.usealienwhitelist)
+			if(!GLOB.skip_allow_lists && !check_rights(R_ADMIN, 0) && config.usealienwhitelist)
 				var/datum/species/current_species = all_species[species]
 				if(!(current_species.spawn_flags & SPECIES_CAN_JOIN))
 					continue

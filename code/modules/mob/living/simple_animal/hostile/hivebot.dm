@@ -25,7 +25,7 @@
 	skin_material = null
 	skin_amount =   0
 
-	ai_holder_type = /datum/ai_holder/simple_animal/hivebot
+	ai_holder = /datum/ai_holder/simple_animal/hivebot
 	say_list_type = /datum/say_list/hivebot
 
 /mob/living/simple_animal/hostile/hivebot/range
@@ -35,7 +35,7 @@
 	projectiletype = /obj/item/projectile/beam/smalllaser
 	base_attack_cooldown = 3 SECONDS
 
-	ai_holder_type = /datum/ai_holder/simple_animal/hivebot/ranged
+	ai_holder = /datum/ai_holder/simple_animal/hivebot/ranged
 
 /mob/living/simple_animal/hostile/hivebot/rapid
 	ranged = 1
@@ -81,7 +81,7 @@ Teleporter beacon, and its subtypes
 	var/spawn_delay = 10 SECONDS
 	var/spawn_time = 0
 
-	ai_holder_type = /datum/ai_holder/simple_animal/hivebot/tele
+	ai_holder = /datum/ai_holder/simple_animal/hivebot/tele
 
 /mob/living/simple_animal/hostile/hivebot/tele/New()
 	..()

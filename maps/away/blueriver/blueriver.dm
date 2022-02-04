@@ -47,7 +47,7 @@
 
 	harm_intent_damage = 8
 	natural_weapon = /obj/item/natural_weapon/defender_blades
-	ai_holder_type = /datum/ai_holder/simple_animal/melee/defender
+	ai_holder = /datum/ai_holder/simple_animal/melee/defender
 	var/attack_mode = FALSE
 
 	var/transformation_delay_min = 4
@@ -182,7 +182,7 @@
 /obj/structure/deity
 	icon = 'icons/obj/cult.dmi'
 	icon_state = "tomealtar"
-	var/health = 10
+	health_max = 10
 	density = TRUE
 	anchored = TRUE
 
@@ -195,13 +195,12 @@
 		"<span class='danger'>You hit \the [src] with \the [W]!</span>",
 		"<span class='danger'>You hear something breaking!</span>"
 		)
-	take_damage(W.force)
+	damage_health(W.force, W.damtype)
 
-/obj/structure/deity/take_damage(var/amount)
-	health -= amount
-	if(health < 0)
-		src.visible_message("\The [src] crumbles!")
+/obj/structure/deity/handle_death_change(new_death_state)
+	if (new_death_state)
+		visible_message(SPAN_DANGER("\The [src] crumbles!"))
 		qdel(src)
 
 /obj/structure/deity/bullet_act(var/obj/item/projectile/P)
-	take_damage(P.damage)
+	damage_health(P.get_structure_damage(), P.damage_type)

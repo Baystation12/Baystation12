@@ -52,8 +52,8 @@
 #define CE_STIMULANT     "stimulants"   // Makes it harder to disarm someone
 
 //reagent flags
-#define IGNORE_MOB_SIZE 0x1
-#define AFFECTS_DEAD    0x2
+#define IGNORE_MOB_SIZE    FLAG(0)
+#define AFFECTS_DEAD       FLAG(1)
 
-#define HANDLE_REACTIONS(_reagents)  SSchemistry.active_holders[_reagents] = TRUE
-#define UNQUEUE_REACTIONS(_reagents) SSchemistry.active_holders -= _reagents
+#define HANDLE_REACTIONS(_reagents)  SSchemistry.processing[_reagents] = TRUE
+#define UNQUEUE_REACTIONS(_reagents) SSchemistry.processing -= _reagents

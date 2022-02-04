@@ -166,7 +166,6 @@
 					step_away(M, src)
 				M.Friends = Friends.Copy()
 				babies += M
-				SSstatistics.add_field_details("slime_babies_born","slimebirth_[replacetext_char(M.colour," ","_")]")
 
 			var/mob/living/carbon/slime/new_slime = babies[1]
 			new_slime.universal_speak = universal_speak

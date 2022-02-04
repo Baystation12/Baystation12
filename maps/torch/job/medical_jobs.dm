@@ -139,8 +139,6 @@
 		access_solgov_crew, access_hangar, access_radio_med
 	)
 
-	minimal_access = list()
-
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
 	skill_points = 22
@@ -234,8 +232,6 @@
 	 	access_virology, access_morgue, access_crematorium, access_radio_med
 	)
 
-	minimal_access = list()
-
 /datum/job/chemist/get_description_blurb()
 	return "You are the Pharmacist. You make medicine and other useful substances. You are not a doctor or medic; you should not be treating patients, but rather providing the medicine to do so. You are subordinate to Physicians and Medical Technicians."
 
@@ -276,8 +272,6 @@
 		access_medical, access_psychiatrist,
 		access_solgov_crew, access_medical_equip, access_radio_med
 	)
-
-	minimal_access = list()
 
 	software_on_spawn = list(
 		/datum/computer_file/program/suit_sensors,

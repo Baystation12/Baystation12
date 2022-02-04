@@ -13,7 +13,7 @@
 	if (~clothing_flags & CLOTHING_HAS_FIBERS)
 		return
 	var/list/others = list()
-	FOR_BLIND(obj/item/clothing/accessory/A, accessories)
+	for (var/obj/item/clothing/accessory/A as anything in accessories)
 		if ((A.clothing_flags & CLOTHING_HAS_FIBERS) && prob(50))
 			others += A.get_fibers()
 	return "material from \a [fiber_name || name][others.len ? " and [english_list(others)]" : ""]"
@@ -80,20 +80,20 @@
 /obj/item/clothing/accessory/storage/bandolier/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
 /obj/item/clothing/accessory/medal/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
 /obj/item/clothing/accessory/stethoscope/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
-/obj/item/clothing/accessory/pridepins/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
+/obj/item/clothing/accessory/pride_pin/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
 /obj/item/clothing/accessory/pronouns/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
-/obj/item/clothing/accessory/armguards/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
-/obj/item/clothing/accessory/legguards/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
+/obj/item/clothing/accessory/arm_guards/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
+/obj/item/clothing/accessory/leg_guards/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
 /obj/item/clothing/accessory/badge/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
-/obj/item/clothing/accessory/armorplate/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
+/obj/item/clothing/accessory/armor_plate/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
 /obj/item/clothing/accessory/locket/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
-/obj/item/clothing/accessory/armor/tag/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
+/obj/item/clothing/accessory/armor_tag/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
 /obj/item/clothing/accessory/necklace/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
 /obj/item/clothing/accessory/kneepads/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
 /obj/item/clothing/accessory/bracelet/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
-/obj/item/clothing/accessory/buddytag/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
-/obj/item/clothing/accessory/chaplaininsignia/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
-/obj/item/clothing/accessory/ftupin/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
+/obj/item/clothing/accessory/buddy_tag/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
+/obj/item/clothing/accessory/chaplain/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
+/obj/item/clothing/accessory/ftu_pin/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
 /obj/item/clothing/accessory/wristwatches/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
 /obj/item/clothing/accessory/solgov/skillbadge/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
 /obj/item/clothing/accessory/solgov/skillstripe/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS

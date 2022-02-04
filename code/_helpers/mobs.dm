@@ -1,9 +1,6 @@
 /atom/movable/proc/get_mob()
 	return
 
-/obj/vehicle/train/get_mob()
-	return buckled_mob
-
 /mob/get_mob()
 	return src
 
@@ -191,7 +188,7 @@ proc/age2agedescription(age)
 		if (target_dir && target_dir != target.dir)
 			. = DO_TARGET_CAN_TURN
 			break
-		if (!isnull(user_hand) && user_hand != user.hand)
+		if ((do_flags & DO_USER_SAME_HAND) && user_hand != user.hand)
 			. = DO_USER_SAME_HAND
 			break
 		if (initial_handle && initial_handle != user.do_unique_user_handle)
@@ -218,7 +215,7 @@ proc/age2agedescription(age)
 			if (DO_USER_SAME_HAND)
 				to_chat(user, SPAN_WARNING("You must remain on the same active hand to perform that action!"))
 			if (DO_USER_UNIQUE_ACT)
-				to_chat(user, SPAN_WARNING("You stop what you're doing with \the [user.do_unique_user_handle]."))
+				to_chat(user, SPAN_WARNING("You stop what you're doing with \the [target]."))
 			if (DO_USER_SAME_ZONE)
 				to_chat(user, SPAN_WARNING("You must remain targeting the same zone to perform that action!"))
 

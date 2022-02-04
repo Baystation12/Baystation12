@@ -23,7 +23,7 @@ var/global/list/protected_objects = list(/obj/machinery,
 	icon_state = "base"
 	icon_living = "base"
 
-	meat_type = /obj/item/reagent_containers/food/snacks/fish
+	meat_type = /obj/item/reagent_containers/food/snacks/fish/unknown
 	response_help = "touches"
 	response_disarm = "pushes"
 	response_harm = "hits"

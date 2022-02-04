@@ -27,7 +27,7 @@
 	next_stages = list(/decl/crafting_stage/ed209_armour)
 
 /decl/crafting_stage/ed209_armour
-	completion_trigger_type = /obj/item/clothing/accessory/armorplate
+	completion_trigger_type = /obj/item/clothing/accessory/armor_plate
 	progress_message = "You layer the armour plating over the frame."
 	item_icon_state = "ed209_4"
 	next_stages = list(/decl/crafting_stage/welding/ed209)

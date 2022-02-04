@@ -1,3 +1,24 @@
+/*
+	Custom click handling
+*/
+#define SETUP_CLICK_HANDLERS \
+if(!click_handlers) { \
+	click_handlers = new(); \
+	click_handlers += new/datum/click_handler/default(src) \
+}
+
+/mob
+	var/list/click_handlers
+
+/mob/Destroy()
+	QDEL_NULL_LIST(click_handlers)
+	. = ..()
+
+var/const/CLICK_HANDLER_NONE                 = EMPTY_BITFIELD
+var/const/CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT = FLAG(0)
+var/const/CLICK_HANDLER_REMOVE_IF_NOT_TOP    = FLAG(1)
+var/const/CLICK_HANDLER_ALL                  = ( CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT | CLICK_HANDLER_REMOVE_IF_NOT_TOP )
+
 /datum/click_handler
 //	var/mob_type
 	var/species

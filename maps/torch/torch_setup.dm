@@ -35,7 +35,6 @@
 				continue
 			space_things |= O
 
-		var/list/distress_calls
 		for(var/obj/effect/overmap/visitable/O in space_things)
 			var/location_desc = " at present co-ordinates."
 			if(O.loc != torch.loc)
@@ -43,14 +42,8 @@
 				if(bearing < 0)
 					bearing += 360
 				location_desc = ", bearing [bearing]."
-			if(O.has_distress_beacon)
-				LAZYADD(distress_calls, "[O.has_distress_beacon][location_desc]")
 			welcome_text += "<li>\A <b>[O.name]</b>[location_desc]</li>"
 
-		if(LAZYLEN(distress_calls))
-			welcome_text += "<br><b>Distress calls logged:</b><br>[jointext(distress_calls, "<br>")]<br>"
-		else
-			welcome_text += "<br>No distress calls logged.<br />"
 		welcome_text += "<hr>"
 
 	post_comm_message("SEV Torch Sensor Readings", welcome_text)

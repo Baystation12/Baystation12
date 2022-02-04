@@ -354,18 +354,6 @@
 /obj/structure/fuel_port,
 /turf/simulated/wall/titanium,
 /area/miningstation/fix)
-"aZ" = (
-/obj/vehicle/train/cargo/trolley,
-/turf/simulated/floor/tiled/monotile,
-/area/miningstation/hangar)
-"ba" = (
-/obj/vehicle/train/cargo/engine,
-/obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/miningstation/hangar)
 "bb" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 10;
@@ -750,14 +738,6 @@
 /area/miningstation/dorms)
 "bX" = (
 /obj/machinery/alarm,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/hangarhall)
-"bY" = (
-/obj/vehicle/train/cargo/trolley,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/hangarhall)
-"bZ" = (
-/obj/vehicle/train/cargo/engine,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "ca" = (
@@ -8584,7 +8564,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "TJ" = (
-/obj/vehicle/train/cargo/trolley,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -18390,7 +18369,7 @@ cE
 ag
 kj
 bP
-bY
+bS
 bS
 jO
 di
@@ -18694,7 +18673,7 @@ cE
 ag
 ag
 bP
-bY
+bS
 bS
 bS
 de
@@ -18846,7 +18825,7 @@ fe
 bv
 ag
 bP
-bZ
+bS
 bS
 bS
 de
@@ -20811,10 +20790,10 @@ ag
 ag
 aj
 ag
-aZ
-aZ
-aZ
-ba
+ag
+ag
+ag
+aj
 ag
 aD
 ag

@@ -15,10 +15,10 @@ var/global/list/minor_air_alarms = list()
 
 /obj/machinery/computer/atmos_alert/Initialize()
 	. = ..()
-	atmosphere_alarm.register_alarm(src, /atom/proc/update_icon)
+	GLOB.atmosphere_alarm.register_alarm(src, /atom/proc/update_icon)
 
 /obj/machinery/computer/atmos_alert/Destroy()
-	atmosphere_alarm.unregister_alarm(src)
+	GLOB.atmosphere_alarm.unregister_alarm(src)
 	. = ..()
 
 /obj/machinery/computer/atmos_alert/interface_interact(user)
@@ -30,10 +30,10 @@ var/global/list/minor_air_alarms = list()
 	var/major_alarms[0]
 	var/minor_alarms[0]
 
-	for(var/datum/alarm/alarm in atmosphere_alarm.major_alarms(get_z(src)))
+	for(var/datum/alarm/alarm in GLOB.atmosphere_alarm.major_alarms(get_z(src)))
 		major_alarms[++major_alarms.len] = list("name" = sanitize(alarm.alarm_name()), "ref" = "\ref[alarm]")
 
-	for(var/datum/alarm/alarm in atmosphere_alarm.minor_alarms(get_z(src)))
+	for(var/datum/alarm/alarm in GLOB.atmosphere_alarm.minor_alarms(get_z(src)))
 		minor_alarms[++minor_alarms.len] = list("name" = sanitize(alarm.alarm_name()), "ref" = "\ref[alarm]")
 
 	data["priority_alarms"] = major_alarms
@@ -48,9 +48,9 @@ var/global/list/minor_air_alarms = list()
 
 /obj/machinery/computer/atmos_alert/on_update_icon()
 	if(!(stat & (NOPOWER|BROKEN)))
-		if(atmosphere_alarm.has_major_alarms(get_z(src)))
+		if(GLOB.atmosphere_alarm.has_major_alarms(get_z(src)))
 			icon_screen = "alert:2"
-		else if (atmosphere_alarm.has_minor_alarms(get_z(src)))
+		else if (GLOB.atmosphere_alarm.has_minor_alarms(get_z(src)))
 			icon_screen = "alert:1"
 		else
 			icon_screen = initial(icon_screen)
@@ -58,7 +58,7 @@ var/global/list/minor_air_alarms = list()
 
 /obj/machinery/computer/atmos_alert/OnTopic(user, href_list)
 	if(href_list["clear_alarm"])
-		var/datum/alarm/alarm = locate(href_list["clear_alarm"]) in atmosphere_alarm.alarms
+		var/datum/alarm/alarm = locate(href_list["clear_alarm"]) in GLOB.atmosphere_alarm.alarms
 		if(alarm)
 			for(var/datum/alarm_source/alarm_source in alarm.sources)
 				var/obj/machinery/alarm/air_alarm = alarm_source.source

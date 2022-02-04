@@ -37,8 +37,8 @@
 /datum/random_map/noise/exoplanet/volcanic
 	descriptor = "volcanic exoplanet"
 	smoothing_iterations = 5
-	land_type = /turf/simulated/floor/exoplanet/volcanic
-	water_type = /turf/simulated/floor/exoplanet/lava
+	land_type = /turf/unsimulated/floor/exoplanet/volcanic
+	water_type = /turf/unsimulated/floor/exoplanet/lava
 	water_level_min = 5
 	water_level_max = 6
 
@@ -65,9 +65,9 @@
 
 /area/exoplanet/volcanic
 	forced_ambience = list('sound/ambience/magma.ogg')
-	base_turf = /turf/simulated/floor/exoplanet/volcanic
+	base_turf = /turf/unsimulated/floor/exoplanet/volcanic
 
-/turf/simulated/floor/exoplanet/volcanic
+/turf/unsimulated/floor/exoplanet/volcanic
 	name = "volcanic floor"
 	icon = 'icons/turf/flooring/lava.dmi'
 	icon_state = "cold"
@@ -83,28 +83,29 @@
 /datum/random_map/automata/cave_system/mountains/volcanic/get_additional_spawns(value, var/turf/simulated/mineral/T)
 	..()
 	if(use_area && istype(T))
-		T.mined_turf = prob(90) ? use_area.base_turf : /turf/simulated/floor/exoplanet/lava
+		T.mined_turf = prob(90) ? use_area.base_turf : /turf/unsimulated/floor/exoplanet/lava
 
-/turf/simulated/floor/exoplanet/lava
+/turf/unsimulated/floor/exoplanet/lava
 	name = "lava"
 	icon = 'icons/turf/flooring/lava.dmi'
 	icon_state = "lava"
 	movement_delay = 4
 	dirt_color = COLOR_GRAY20
+	turf_flags = TURF_DISALLOW_BLOB
 	var/list/victims
 
-/turf/simulated/floor/exoplanet/lava/on_update_icon()
+/turf/unsimulated/floor/exoplanet/lava/on_update_icon()
 	return
 
-/turf/simulated/floor/exoplanet/lava/Initialize()
+/turf/unsimulated/floor/exoplanet/lava/Initialize()
 	. = ..()
 	set_light(0.95, 0.5, 2, l_color = COLOR_ORANGE)
 
-/turf/simulated/floor/exoplanet/lava/Destroy()
+/turf/unsimulated/floor/exoplanet/lava/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/turf/simulated/floor/exoplanet/lava/Entered(atom/movable/AM)
+/turf/unsimulated/floor/exoplanet/lava/Entered(atom/movable/AM)
 	..()
 	if(locate(/obj/structure/catwalk/) in src)
 		return
@@ -115,11 +116,11 @@
 		LAZYADD(victims, weakref(AM))
 		START_PROCESSING(SSobj, src)
 
-/turf/simulated/floor/exoplanet/lava/Exited(atom/movable/AM)
+/turf/unsimulated/floor/exoplanet/lava/Exited(atom/movable/AM)
 	. = ..()
 	LAZYREMOVE(victims, weakref(AM))
 
-/turf/simulated/floor/exoplanet/lava/Process()
+/turf/unsimulated/floor/exoplanet/lava/Process()
 	if(locate(/obj/structure/catwalk/) in src)
 		victims = null
 		return PROCESS_KILL
@@ -136,7 +137,7 @@
 	if(!LAZYLEN(victims))
 		return PROCESS_KILL
 
-/turf/simulated/floor/exoplanet/lava/get_footstep_sound(var/mob/caller)
+/turf/unsimulated/floor/exoplanet/lava/get_footstep_sound(var/mob/caller)
 	return get_footstep(/decl/footsteps/lava, caller)
 
 /turf/simulated/mineral/volcanic

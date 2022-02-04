@@ -243,3 +243,21 @@
 			)
 		)
 	)
+
+/decl/item_modifier/space_suit/command
+	name = "Command"
+	type_setups = list(
+		/obj/item/clothing/head/helmet/space = list(
+			SETUP_NAME = "command voidsuit helmet",
+			SETUP_ICON_STATE = "rig0_command",
+			SETUP_ITEM_STATE = "command_helm"
+		),
+		/obj/item/clothing/suit/space/void = list(
+			SETUP_NAME = "command voidsuit",
+			SETUP_ICON_STATE = "rig_command",
+			SETUP_ITEM_STATE_SLOTS = list(
+				slot_l_hand_str = "s_suit",
+				slot_r_hand_str = "s_suit"
+			)
+		)
+	)

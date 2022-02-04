@@ -9,7 +9,7 @@
 
 /obj/structure/monolith
 	name = "monolith"
-	desc = "An obviously artifical structure of unknown origin. The symbols '<font face='Shage'>DWNbTX</font>' are engraved on the base."
+	desc = "An obviously artifical structure of unknown origin. The symbols '𒁀𒀝 𒋢𒌦 𒉡 𒋺𒂊' are engraved on the base." //for the sake of the reader, "BAKU SUUN NU TAKE"
 	icon = 'icons/obj/monolith.dmi'
 	icon_state = "jaggy1"
 	layer = ABOVE_HUMAN_LAYER
@@ -40,7 +40,7 @@
 		overlays += I
 		set_light(0.3, 0.1, 2, l_color = I.color)
 
-	var/turf/simulated/floor/exoplanet/T = get_turf(src)
+	var/turf/unsimulated/floor/exoplanet/T = get_turf(src)
 	if(istype(T))
 		var/image/I = overlay_image(icon, "dugin", T.dirt_color, RESET_COLOR)
 		overlays += I

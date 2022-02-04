@@ -27,8 +27,13 @@
 		overlays |= image('icons/obj/objects.dmi',"ashtray_half")
 
 /obj/item/material/ashtray/attackby(obj/item/W as obj, mob/user as mob)
-	if (health <= 0)
+	if (!is_alive())
 		return
+
+	if (user.a_intent == I_HURT)
+		..()
+		return
+
 	if (istype(W,/obj/item/trash/cigbutt) || istype(W,/obj/item/clothing/mask/smokable/cigarette) || istype(W, /obj/item/flame/match))
 		if (contents.len >= max_butts)
 			to_chat(user, "\The [src] is full.")
@@ -46,23 +51,18 @@
 			visible_message("[user] places [W] in [src].")
 			set_extension(src, /datum/extension/scent/ashtray)
 			update_icon()
-	else
-		..()
-		health = max(0,health - W.force)
-		if (health < 1)
-			shatter()
+		return
+
+	..()
 
 /obj/item/material/ashtray/throw_impact(atom/hit_atom)
-	if (health > 0)
-		health = max(0,health - 3)
+	if (health_max)
 		if (contents.len)
 			visible_message("<span class='danger'>\The [src] slams into [hit_atom], spilling its contents!</span>")
 			for (var/obj/O in contents)
 				O.dropInto(loc)
 			remove_extension(src, /datum/extension/scent)
-		if (health < 1)
-			shatter()
-			return
+		damage_health(3)
 		update_icon()
 	return ..()
 

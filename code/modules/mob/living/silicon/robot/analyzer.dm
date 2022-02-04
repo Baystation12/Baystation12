@@ -3,6 +3,7 @@
 //
 /obj/item/device/robotanalyzer
 	name = "robot analyzer"
+	icon = 'icons/obj/robot_analyzer.dmi'
 	icon_state = "robotanalyzer"
 	item_state = "analyzer"
 	desc = "A hand-held scanner able to diagnose robotic injuries."
@@ -16,7 +17,7 @@
 	matter = list(MATERIAL_STEEL = 250, MATERIAL_GLASS = 100, MATERIAL_PLASTIC = 75)
 	var/mode = 1;
 
-/obj/item/device/robotanalyzer/attack(mob/living/M as mob, mob/living/user as mob)
+/proc/roboscan(mob/living/M, mob/living/user)
 	if((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, text("<span class='warning'>You try to analyze the floor's vitals!</span>"))
 		for(var/mob/O in viewers(M, null))
@@ -93,6 +94,9 @@
 				to_chat(user, "[O.name]: <font color='red'>[(O.status & ORGAN_DEAD) ? "DESTROYED" : O.damage]</font>")
 			if(!organ_found)
 				to_chat(user, "No prosthetics located.")
+	return
 
+/obj/item/device/robotanalyzer/attack(mob/living/M, mob/living/user)
+	roboscan(M, user)
 	src.add_fingerprint(user)
 	return

@@ -120,7 +120,7 @@ var/list/holder_mob_icon_cache = list()
 /obj/item/holder/borer
 	origin_tech = list(TECH_BIO = 6)
 
-//need own subtype to work with recipies
+//need own subtype to work with recipes
 /obj/item/holder/corgi
 	origin_tech = list(TECH_BIO = 4)
 
@@ -150,7 +150,7 @@ var/list/holder_mob_icon_cache = list()
 	var/obj/item/holder/H = new holder_type(get_turf(src))
 
 	if(self_grab)
-		if(!grabber.equip_to_slot_if_possible(H, slot_back, del_on_fail=0, disable_warning=1))
+		if(!grabber.equip_to_slot_if_possible(H, slot_back, TRYEQUIP_REDRAW | TRYEQUIP_SILENT))
 			to_chat(src, "<span class='warning'>You can't climb onto [grabber]!</span>")
 			return
 
@@ -182,4 +182,3 @@ var/list/holder_mob_icon_cache = list()
 
 /mob/living/carbon/human/scoop_check(var/mob/living/scooper)
 	return (scooper.mob_size > src.mob_size && a_intent == I_HELP)
-

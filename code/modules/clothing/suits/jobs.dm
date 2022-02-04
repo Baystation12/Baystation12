@@ -89,7 +89,21 @@
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|ARMS
-	allowed = list(/obj/item/tank/emergency,/obj/item/device/flashlight,/obj/item/gun/energy,/obj/item/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/handcuffs,/obj/item/storage/fancy/cigarettes,/obj/item/flame/lighter,/obj/item/device/taperecorder)
+	allowed = list(
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/device/flashlight,
+		/obj/item/gun/energy,
+		/obj/item/gun/projectile,
+		/obj/item/ammo_magazine,
+		/obj/item/ammo_casing,
+		/obj/item/melee/baton,
+		/obj/item/handcuffs,
+		/obj/item/storage/fancy/cigarettes,
+		/obj/item/flame/lighter,
+		/obj/item/device/taperecorder
+	)
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
 		bullet = ARMOR_BALLISTIC_SMALL,
@@ -111,7 +125,19 @@
 	desc = "A forensics technician jacket."
 	item_state = "det_suit"
 	body_parts_covered = UPPER_TORSO|ARMS
-	allowed = list(/obj/item/tank/emergency,/obj/item/device/flashlight,/obj/item/gun/energy,/obj/item/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/handcuffs,/obj/item/device/taperecorder)
+	allowed = list(
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/device/flashlight,
+		/obj/item/gun/energy,
+		/obj/item/gun/projectile,
+		/obj/item/ammo_magazine,
+		/obj/item/ammo_casing,
+		/obj/item/melee/baton,
+		/obj/item/handcuffs,
+		/obj/item/device/taperecorder
+	)
 	armor = list(
 		melee = ARMOR_MELEE_SMALL,
 		bullet = ARMOR_BALLISTIC_MINOR,
@@ -136,9 +162,23 @@
 	icon_state = "hazard"
 	blood_overlay_type = "armor"
 	species_restricted = null
-	allowed = list (/obj/item/device/scanner/gas, /obj/item/device/flashlight, /obj/item/device/multitool, /obj/item/device/radio, /obj/item/device/t_scanner, \
-	/obj/item/crowbar, /obj/item/screwdriver, /obj/item/weldingtool, /obj/item/wirecutters, /obj/item/wrench, /obj/item/tank/emergency, \
-	/obj/item/clothing/mask/gas, /obj/item/taperoll/engineering)
+	allowed = list (
+		/obj/item/device/scanner/gas,
+		/obj/item/device/flashlight,
+		/obj/item/device/multitool,
+		/obj/item/device/radio,
+		/obj/item/device/t_scanner,
+		/obj/item/crowbar,
+		/obj/item/screwdriver,
+		/obj/item/weldingtool,
+		/obj/item/wirecutters,
+		/obj/item/wrench,
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/clothing/mask/gas,
+		/obj/item/taperoll/engineering
+	)
 	body_parts_covered = UPPER_TORSO
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 
@@ -175,6 +215,14 @@
 	body_parts_covered = UPPER_TORSO|ARMS
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 
+/obj/item/clothing/suit/storage/toggle/suit_double
+	name = "double-breasted suit jacket"
+	desc = "A snappy, double-breasted dress jacket."
+	icon_state = "suitjacket_double"
+	blood_overlay_type = "coat"
+	body_parts_covered = UPPER_TORSO|ARMS
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
+
 /obj/item/clothing/suit/storage/toggle/suit/blue
 	name = "blue suit jacket"
 	color = "#00326e"
@@ -193,8 +241,19 @@
 	desc = "A high-visibility jacket worn by medical first responders."
 	icon_state = "fr_jacket"
 	blood_overlay_type = "armor"
-	allowed = list(/obj/item/stack/medical, /obj/item/reagent_containers/dropper, /obj/item/reagent_containers/hypospray, /obj/item/reagent_containers/syringe, \
-	/obj/item/device/scanner/health, /obj/item/device/flashlight, /obj/item/device/radio, /obj/item/tank/emergency, /obj/item/reagent_containers/ivbag)
+	allowed = list(
+		/obj/item/stack/medical,
+		/obj/item/reagent_containers/dropper,
+		/obj/item/reagent_containers/hypospray,
+		/obj/item/reagent_containers/syringe,
+		/obj/item/device/scanner/health,
+		/obj/item/device/flashlight,
+		/obj/item/device/radio,
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/reagent_containers/ivbag
+	)
 	body_parts_covered = UPPER_TORSO|ARMS
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 
@@ -213,8 +272,20 @@
 	desc = "A black chest-rig with blue pouches worn by medical first responders, meant to carry their equipment. It has a blue 'Medic' tag on its chest."
 	icon_state = "Med-chest-rig"
 	blood_overlay_type = "armor"
-	allowed = list(/obj/item/stack/medical, /obj/item/reagent_containers/dropper, /obj/item/reagent_containers/hypospray, /obj/item/reagent_containers/syringe, \
-	/obj/item/device/scanner/health, /obj/item/device/flashlight, /obj/item/device/radio, /obj/item/tank/emergency, /obj/item/reagent_containers/ivbag,/obj/item/clothing/head/hardhat/EMS)
+	allowed = list(
+		/obj/item/stack/medical,
+		/obj/item/reagent_containers/dropper,
+		/obj/item/reagent_containers/hypospray,
+		/obj/item/reagent_containers/syringe,
+		/obj/item/device/scanner/health,
+		/obj/item/device/flashlight,
+		/obj/item/device/radio,
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/reagent_containers/ivbag,
+		/obj/item/clothing/head/hardhat/EMS
+	)
 	body_parts_covered = UPPER_TORSO
 
 /obj/item/clothing/suit/surgicalapron
@@ -223,6 +294,21 @@
 	icon_state = "surgical"
 	blood_overlay_type = "armor"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	allowed = list(/obj/item/stack/medical, /obj/item/reagent_containers/dropper, /obj/item/reagent_containers/hypospray, /obj/item/reagent_containers/syringe, \
-	/obj/item/device/scanner/health, /obj/item/device/flashlight, /obj/item/device/radio, /obj/item/tank/emergency,/obj/item/scalpel,/obj/item/retractor,/obj/item/hemostat, \
-	/obj/item/cautery,/obj/item/bonegel,/obj/item/FixOVein)
+	allowed = list(
+		/obj/item/stack/medical,
+		/obj/item/reagent_containers/dropper,
+		/obj/item/reagent_containers/hypospray,
+		/obj/item/reagent_containers/syringe,
+		/obj/item/device/scanner/health,
+		/obj/item/device/flashlight,
+		/obj/item/device/radio,
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/scalpel,
+		/obj/item/retractor,
+		/obj/item/hemostat,
+		/obj/item/cautery,
+		/obj/item/bonegel,
+		/obj/item/FixOVein
+	)

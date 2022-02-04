@@ -4,7 +4,7 @@
 
 /obj/item/implant
 	name = "implant"
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/implant.dmi'
 	icon_state = "implant"
 	w_class = ITEM_SIZE_TINY
 	var/implanted = null
@@ -60,7 +60,7 @@
 			affected.implants += src
 			part = affected
 
-		BITSET(H.hud_updateflag, IMPLOYAL_HUD)
+		SET_BIT(H.hud_updateflag, IMPLOYAL_HUD)
 
 	forceMove(M)
 	imp_in = M

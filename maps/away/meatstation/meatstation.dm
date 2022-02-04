@@ -74,7 +74,7 @@
 	meat_amount = 1
 	can_escape = TRUE
 
-	ai_holder_type = /datum/ai_holder/simple_animal/melee/meatstation
+	ai_holder = /datum/ai_holder/simple_animal/melee/meatstation
 
 /mob/living/simple_animal/hostile/meatstation/meatworm
 	name = "flesh worm"
@@ -218,7 +218,6 @@
 	desc = "A disgusting slab of meat."
 	icon = 'maps/away/meatstation/meatstation_sprites.dmi'
 	icon_state = "meat"
-	health = 150
 	filling_color = "#f41d7e"
 	slice_path = /obj/item/reagent_containers/food/snacks/rawcutlet/meatstation
 

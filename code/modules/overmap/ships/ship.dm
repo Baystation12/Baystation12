@@ -1,7 +1,7 @@
 var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 #define SHIP_MOVE_RESOLUTION 0.00001
 #define MOVING(speed) abs(speed) >= min_speed
-#define SANITIZE_SPEED(speed) SIGN(speed) * Clamp(abs(speed), 0, max_speed)
+#define SANITIZE_SPEED(speed) SIGN(speed) * clamp(abs(speed), 0, max_speed)
 #define CHANGE_SPEED_BY(speed_var, v_diff) \
 	v_diff = SANITIZE_SPEED(v_diff);\
 	if(!MOVING(speed_var + v_diff)) \
@@ -166,7 +166,7 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 			if(MOVING(speed[i]))
 				position[i] += speed[i] * OVERMAP_SPEED_CONSTANT
 				if(position[i] < 0)
-					deltas[i] = ceil(position[i])
+					deltas[i] = Ceil(position[i])
 				else if(position[i] > 0)
 					deltas[i] = Floor(position[i])
 				if(deltas[i] != 0)
@@ -218,7 +218,7 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	for(var/i = 1 to 2)
 		if(MOVING(speed[i]))
 			. = min(., ((speed[i] > 0 ? 1 : -1) - position[i]) / speed[i])
-	. = max(ceil(.),0)
+	. = max(Ceil(.),0)
 
 /obj/effect/overmap/visitable/ship/proc/handle_wraparound()
 	var/nx = x

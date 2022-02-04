@@ -42,3 +42,10 @@
 	Due to its bulk, it is impossible to conceal from body scanners, and will be discovered by anyone feeling your bones - install with caution!"
 	item_cost = 60
 	path = /obj/item/device/augment_implanter/popout_shotgun
+
+/datum/uplink_item/item/augment/aug_power_fist
+	name = "Concealed Powerfist CBM (arm)"
+	desc = "A bulky augment that slots in the AG-23 Pneumatic Powerfist. Perfect for when you need something with more oomph. Comes with it's own tank. \
+	It is unconcealable from body-scanners, and easily detectable due to it's weight. It requires NON-ORGANIC arms."
+	item_cost = 60
+	path = /obj/item/device/augment_implanter/powerfist

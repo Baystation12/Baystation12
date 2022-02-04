@@ -289,8 +289,8 @@
 					var/min_y = pixel_y <= -shift_range ? 0 : -2
 					var/max_y = pixel_y >=  shift_range ? 0 :  2
 
-					pixel_x = Clamp(pixel_x + rand(min_x, max_x), -shift_range, shift_range)
-					pixel_y = Clamp(pixel_y + rand(min_y, max_y), -shift_range, shift_range)
+					pixel_x = clamp(pixel_x + rand(min_x, max_x), -shift_range, shift_range)
+					pixel_y = clamp(pixel_y + rand(min_y, max_y), -shift_range, shift_range)
 		else if(prob(5))
 			//vent crawl!
 			for(var/obj/machinery/atmospherics/unary/vent_pump/v in view(7,src))
@@ -342,8 +342,22 @@
 	. = ..()
 	icon_state = pick("cocoon1","cocoon2","cocoon3")
 
+
+	for(var/atom/movable/O in loc)
+		if(!O.anchored)
+			O.forceMove(src)
+
+			if (istype(O, /mob/living))
+				var/mob/living/L = O
+				if (!(L.status_flags & NOTARGET))
+					L.status_flags ^= NOTARGET
+
 /obj/effect/spider/cocoon/Destroy()
 	src.visible_message("<span class='warning'>\The [src] splits open.</span>")
 	for(var/atom/movable/A in contents)
 		A.dropInto(loc)
+		if (istype(A, /mob/living))
+			var/mob/living/L = A
+			if (L.status_flags & NOTARGET)
+				L.status_flags ^= NOTARGET
 	return ..()

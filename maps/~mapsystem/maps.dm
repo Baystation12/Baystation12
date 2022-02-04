@@ -132,7 +132,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			HOME_SYSTEM_TAU_CETI,
 			HOME_SYSTEM_HELIOS,
 			HOME_SYSTEM_TERRA,
-			HOME_SYSTEM_TERSTEN,
 			HOME_SYSTEM_LORRIMAN,
 			HOME_SYSTEM_CINU,
 			HOME_SYSTEM_YUKLID,
@@ -572,20 +571,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 					data["offship_players"]++
 			else if(isghost(M))
 				data["ghosts"]++
-
-	if(data["clients"] > 0)
-		SSstatistics.set_field("round_end_clients",data["clients"])
-	if(data["ghosts"] > 0)
-		SSstatistics.set_field("round_end_ghosts",data["ghosts"])
-	if(data["surviving_humans"] > 0)
-		SSstatistics.set_field("survived_human",data["surviving_humans"])
-	if(data["surviving_total"] > 0)
-		SSstatistics.set_field("survived_total",data["surviving_total"])
-	if(data["escaped_humans"] > 0)
-		SSstatistics.set_field("escaped_human",data["escaped_humans"])
-	if(data["escaped_total"] > 0)
-		SSstatistics.set_field("escaped_total",data["escaped_total"])
-
 	return data
 
 /datum/map/proc/roundend_summary(list/data)

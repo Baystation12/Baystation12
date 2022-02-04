@@ -50,6 +50,11 @@
 	path = /obj/item/clothing/suit/storage/toggle/suit
 	flags = GEAR_HAS_COLOR_SELECTION
 
+/datum/gear/suit/custom_suit_jacket_double
+	display_name = "suit jacket (double-breasted), colour select"
+	path = /obj/item/clothing/suit/storage/toggle/suit_double
+	flags = GEAR_HAS_COLOR_SELECTION
+
 /datum/gear/suit/hazard
 	display_name = "hazard vests"
 	path = /obj/item/clothing/suit/storage/hazardvest
@@ -109,6 +114,7 @@
 	jackets += /obj/item/clothing/suit/storage/leather_jacket
 	jackets += /obj/item/clothing/suit/storage/toggle/brown_jacket
 	jackets += /obj/item/clothing/suit/storage/mbill
+	jackets += /obj/item/clothing/suit/storage/toggle/leather_hoodie
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(jackets)
 
 /datum/gear/suit/wintercoat

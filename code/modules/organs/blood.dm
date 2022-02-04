@@ -47,7 +47,7 @@
 	if(amt <= 0 || !istype(sprayloc))
 		return
 	var/spraydir = pick(GLOB.alldirs)
-	amt = ceil(amt/BLOOD_SPRAY_DISTANCE)
+	amt = Ceil(amt/BLOOD_SPRAY_DISTANCE)
 	var/bled = 0
 	spawn(0)
 		for(var/i = 1 to BLOOD_SPRAY_DISTANCE)

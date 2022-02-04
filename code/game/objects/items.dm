@@ -7,7 +7,6 @@
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/randpixel = 6
 	var/r_speed = 1.0
-	var/health = null
 	var/burn_point = null
 	var/burning = null
 	var/hitsound = "swing_hit"
@@ -89,6 +88,7 @@
 
 	var/attack_ignore_harm_check = FALSE
 
+
 /obj/item/New()
 	..()
 	if(randpixel && (!pixel_x && !pixel_y) && isturf(loc)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
@@ -126,9 +126,6 @@
 	if (ismob(loc))
 		return equip_slot in list(slot_l_hand, slot_r_hand)
 
-/obj/item/device
-	icon = 'icons/obj/device.dmi'
-
 //Checks if the item is being held by a mob, and if so, updates the held icons
 /obj/item/proc/update_twohanding()
 	update_held_icon()
@@ -164,6 +161,7 @@
 	return FALSE
 
 /obj/item/ex_act(severity)
+	..()
 	switch(severity)
 		if(1)
 			qdel(src)
@@ -567,7 +565,7 @@ var/list/global/slot_flags_enumeration = list(
 	if (user.a_intent == I_HELP)
 		. = 0
 	if (.)
-		. += Clamp((user.get_skill_value(SKILL_COMBAT) * 10) - 20, 0, 75)
+		. += clamp((user.get_skill_value(SKILL_COMBAT) * 10) - 20, 0, 75)
 
 /obj/item/proc/on_disarm_attempt(mob/target, mob/living/attacker)
 	if(force < 1)
@@ -929,4 +927,20 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	return "\a [src]"
 
 /obj/item/proc/refresh_upgrades()
+
+/// Optional delay for /mob/living/carbon/human/equip_to_slot_if_possible to do_after before succeeding
+/obj/item/var/equip_delay
+
+
+/// Flags to use for do_after when equip_delay is set
+/obj/item/var/equip_delay_flags
+
+
+/// Virtual for behavior to do before do_after if equip_delay is set
+/obj/item/proc/equip_delay_before(mob/user, slot, equip_flags)
+	return
+
+
+/// Virtual for behavior to do after successful do_after if equip_delay is set
+/obj/item/proc/equip_delay_after(mob/user, slot, equip_flags)
 	return

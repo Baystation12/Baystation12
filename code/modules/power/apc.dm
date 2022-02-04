@@ -997,7 +997,7 @@
 			lighting = autoset(lighting, 0)
 			environ = autoset(environ, 0)
 			if(!suppress_alarms)
-				power_alarm.triggerAlarm(loc, src)
+				GLOB.power_alarm.triggerAlarm(loc, src)
 			autoflag = 0
 	else if((percent > AUTO_THRESHOLD_LIGHTING) || longtermpower >= 0)              // Put most likely at the top so we don't check it last, effeciency 101
 		if(autoflag != 3)
@@ -1005,14 +1005,14 @@
 			lighting = autoset(lighting, 1)
 			environ = autoset(environ, 1)
 			autoflag = 3
-			power_alarm.clearAlarm(loc, src)
+			GLOB.power_alarm.clearAlarm(loc, src)
 	else if((percent <= AUTO_THRESHOLD_LIGHTING) && (percent > AUTO_THRESHOLD_EQUIPMENT) && longtermpower < 0)                       // <50%, turn off lighting
 		if(autoflag != 2)
 			equipment = autoset(equipment, 1)
 			lighting = autoset(lighting, 2)
 			environ = autoset(environ, 1)
 			if(!suppress_alarms)
-				power_alarm.triggerAlarm(loc, src)
+				GLOB.power_alarm.triggerAlarm(loc, src)
 			autoflag = 2
 	else if(percent <= AUTO_THRESHOLD_EQUIPMENT)        // <25%, turn off lighting & equipment
 		if(autoflag != 1)
@@ -1020,7 +1020,7 @@
 			lighting = autoset(lighting, 2)
 			environ = autoset(environ, 1)
 			if(!suppress_alarms)
-				power_alarm.triggerAlarm(loc, src)
+				GLOB.power_alarm.triggerAlarm(loc, src)
 			autoflag = 1
 
 // val 0=off, 1=off(auto) 2=on 3=on(auto)
@@ -1090,7 +1090,7 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	if(!new_state || (stat & BROKEN))
 		return ..()
 	visible_message("<span class='notice'>[src]'s screen flickers with warnings briefly!</span>")
-	power_alarm.triggerAlarm(loc, src)
+	GLOB.power_alarm.triggerAlarm(loc, src)
 	spawn(rand(2,5))
 		..()
 		visible_message("<span class='notice'>[src]'s screen suddenly explodes in rain of sparks and small debris!</span>")
@@ -1109,7 +1109,7 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	operating = 0
 
 	set_chargemode(initial(chargemode))
-	power_alarm.clearAlarm(loc, src)
+	GLOB.power_alarm.clearAlarm(loc, src)
 
 	lighting = POWERCHAN_ON_AUTO
 	equipment = POWERCHAN_ON_AUTO

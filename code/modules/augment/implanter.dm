@@ -100,7 +100,7 @@
 		working = TRUE
 		to_chat(user, SPAN_WARNING("\icon[src] Commencing procedure. " + SPAN_DANGER("Please remain calm.")))
 		user.visible_message(SPAN_WARNING("\The [user] places \his [parent.name] against \the [src]."))
-		if (!do_after(user, 2 SECONDS))
+		if (!do_after(user, 2 SECONDS, src))
 			goto FailedAugmentImplant
 		user.visible_message(SPAN_DANGER("\The [src] purrs maliciously and unfurls its armatures with frightening speed!"))
 		if (flavor != 1)
@@ -112,7 +112,7 @@
 		parent.clamp_organ()
 		parent.open_incision()
 		parent.fracture()
-		if (!do_after(user, 8 SECONDS))
+		if (!do_after(user, 8 SECONDS, src))
 			goto FailedAugmentImplant
 		user.visible_message(SPAN_DANGER("\The [src] begins to insert its payload into \the [user]'s [parent.name]!"))
 		if (flavor != 1)
@@ -123,10 +123,10 @@
 			playsound(user, 'sound/effects/squelch1.ogg', 25, TRUE)
 		else
 			playsound(user, 'sound/items/jaws_pry.ogg', 50, TRUE)
-		if (!do_after(user, 8 SECONDS))
+		if (!do_after(user, 8 SECONDS, src))
 			goto FailedAugmentImplant
 		user.visible_message(SPAN_WARNING("\The [src] withdraws from \the [user]'s [parent.name] and seals the [flavor != 1 ? "wound" : "hatch"]."))
-		if (!do_after(user, 2 SECONDS))
+		if (!do_after(user, 2 SECONDS, src))
 			goto FailedAugmentImplant
 		parent.status &= ~ORGAN_BROKEN
 		parent.stage = 0
@@ -171,3 +171,6 @@
 
 /obj/item/device/augment_implanter/engineering_toolset
 	augment = /obj/item/organ/internal/augment/active/polytool/engineer
+
+/obj/item/device/augment_implanter/powerfist
+	augment = /obj/item/organ/internal/augment/active/item/powerfist/prepared

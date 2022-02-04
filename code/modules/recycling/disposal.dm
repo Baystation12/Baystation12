@@ -365,7 +365,6 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		if( contents.len > LAZYLEN(component_parts) || reagents.total_volume)
 			if(mode == 2)
 				spawn(0)
-					SSstatistics.add_field("disposal_auto_flush",1)
 					flush()
 		flush_count = 0
 

@@ -6,7 +6,7 @@
 	density = TRUE
 	anchored = TRUE
 	setup = 0
-	health = 0 //destroying the statue kills the mob within
+	health_max = 0
 	var/intialTox = 0 	//these are here to keep the mob from taking damage from things that logically wouldn't affect a rock
 	var/intialFire = 0	//it's a little sloppy I know but it was this or the GODMODE flag. Lesser of two evils.
 	var/intialBrute = 0
@@ -23,7 +23,7 @@
 			L.client.eye = src
 		L.forceMove(src)
 		L.set_sdisability(MUTED)
-		health = L.health + 100 //stoning damaged mobs will result in easier to shatter statues
+		set_max_health(L.health + 100)
 		intialTox = L.getToxLoss()
 		intialFire = L.getFireLoss()
 		intialBrute = L.getBruteLoss()
@@ -40,7 +40,7 @@
 			icon_state = "corgi"
 			desc = "If it takes forever, I will wait for you..."
 
-	if(health == 0) //meaning if the statue didn't find a valid target
+	if(health_max == 0) //meaning if the statue didn't find a valid target
 		qdel(src)
 		return
 
@@ -66,7 +66,7 @@
 	for(var/mob/living/M in src)
 		M.dropInto(loc)
 		M.unset_sdisability(MUTED)
-		M.take_overall_damage((M.health - health - 100),0) //any new damage the statue incurred is transfered to the mob
+		M.take_overall_damage(M.health - get_damage_value(), 0) //any new damage the statue incurred is transfered to the mob
 		if(M.client)
 			M.client.eye = M.client.mob
 			M.client.perspective = MOB_PERSPECTIVE
@@ -80,33 +80,14 @@
 /obj/structure/closet/statue/toggle()
 	return
 
-/obj/structure/closet/statue/proc/check_health()
-	if(health <= 0)
-		for(var/mob/M in src)
+/obj/structure/closet/statue/handle_death_change(new_death_state)
+	if (new_death_state)
+		for (var/mob/M in src)
 			shatter(M)
-
-/obj/structure/closet/statue/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.get_structure_damage()
-	check_health()
-
-	return
 
 /obj/structure/closet/statue/attack_generic(var/mob/user, damage, attacktext, environment_smash)
 	if(damage && environment_smash)
-		for(var/mob/M in src)
-			shatter(M)
-
-/obj/structure/closet/statue/ex_act(severity)
-	for(var/mob/M in src)
-		M.ex_act(severity)
-		health -= 60 / severity
-		check_health()
-
-/obj/structure/closet/statue/attackby(obj/item/I as obj, mob/user as mob)
-	health -= I.force
-	user.do_attack_animation(src)
-	visible_message("<span class='danger'>[user] strikes [src] with [I].</span>")
-	check_health()
+		kill_health()
 
 /obj/structure/closet/statue/MouseDrop_T()
 	return

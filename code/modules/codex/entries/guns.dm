@@ -1,14 +1,10 @@
-/obj/item/gun
-	var/general_codex_key = "guns"
+/obj/item/gun/var/general_codex_key = "guns"
 
-/obj/item/gun/projectile
-	general_codex_key = "ballistic weapons"
+/obj/item/gun/projectile/general_codex_key = "ballistic weapons"
 
-/obj/item/gun/energy
-	general_codex_key = "energy weapons"
+/obj/item/gun/energy/general_codex_key = "energy weapons"
 
-/obj/item/gun/magnetic
-	general_codex_key = "magnetic weapons"
+/obj/item/gun/magnetic/general_codex_key = "magnetic weapons"
 
 /obj/item/gun/get_antag_info()
 	var/list/entries = SScodex.retrieve_entries_for_string(general_codex_key)

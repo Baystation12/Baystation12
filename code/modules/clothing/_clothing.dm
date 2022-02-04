@@ -142,7 +142,7 @@
 	if (length(visible))
 		var/list/display = list()
 		for (var/obj/item/clothing/accessory/A in visible)
-			if (!A.hidden && A.high_visibility)
+			if (!(A.accessory_flags & ACCESSORY_HIDDEN) && (A.accessory_flags & ACCESSORY_HIGH_VISIBILITY))
 				display += "\icon[A] \a [A]"
 		if (length(display))
 			. += " with [english_list(display)] attached"
@@ -184,7 +184,7 @@
 		if (length(visible))
 			var/list/display = list()
 			for (var/obj/item/clothing/accessory/A in visible)
-				if (!A.hidden)
+				if (!(A.accessory_flags & ACCESSORY_HIDDEN))
 					display += "[icon2html(A, user)] \a [A]"
 			to_chat(user, "Attached to \the [src] are [english_list(display)].")
 		return TOPIC_HANDLED
@@ -720,14 +720,11 @@ BLIND     // can't see anything
 	return TRUE
 
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
-	if (attached_cuffs && running)
-		if (attached_cuffs.health)
-			attached_cuffs.health -= 1
-			if (attached_cuffs.health < 1)
-				visible_message(SPAN_WARNING("\The [attached_cuffs] attached to \the [src] snap and fall away!"), range = 1)
-				verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
-				slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 10 : 15
-				QDEL_NULL(attached_cuffs)
+	if (running && attached_cuffs?.damage_health(1))
+		visible_message(SPAN_WARNING("\The [attached_cuffs] attached to \the [src] snap and fall away!"), range = 1)
+		verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
+		slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 10 : 15
+		QDEL_NULL(attached_cuffs)
 	return
 
 /obj/item/clothing/shoes/update_clothing_icon()
@@ -742,7 +739,13 @@ BLIND     // can't see anything
 	name = "suit"
 	var/fire_resist = T0C+100
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
-	allowed = list(/obj/item/tank/emergency)
+	allowed = list(
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/oxygen_emergency_double,
+		/obj/item/tank/oxygen_scba,
+		/obj/item/tank/nitrogen_emergency
+	)
 	slot_flags = SLOT_OCLOTHING
 	item_flags = ITEM_FLAG_WASHER_ALLOWED
 	blood_overlay_type = "suit"

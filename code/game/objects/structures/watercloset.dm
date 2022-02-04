@@ -83,7 +83,7 @@
 	if(fluid_here <= 0)
 		return
 
-	T.remove_fluid(ceil(fluid_here*drainage))
+	T.remove_fluid(Ceil(fluid_here*drainage))
 	T.show_bubbles()
 	if(world.time > last_gurgle + 80)
 		last_gurgle = world.time
@@ -320,7 +320,7 @@
 	if(!on || !istype(M)) return
 
 	var/water_temperature = temperature_settings[watertemp]
-	var/temp_adj = between(BODYTEMP_COOLING_MAX, water_temperature - M.bodytemperature, BODYTEMP_HEATING_MAX)
+	var/temp_adj = clamp(water_temperature - M.bodytemperature, BODYTEMP_COOLING_MAX, BODYTEMP_HEATING_MAX)
 	M.bodytemperature += temp_adj
 
 	if(ishuman(M))
@@ -545,6 +545,18 @@
 	var/fill_level = 500
 	var/open = FALSE
 
+/obj/structure/hygiene/faucet/attackby(obj/item/thing, mob/user)
+	if (isWrench(thing))
+		new /obj/item/faucet (loc)
+		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+		user.visible_message(
+			SPAN_WARNING("\The [user] unwrenches the \the [src]."),
+			SPAN_WARNING("You unwrench \the [src].")
+		)
+		qdel(src)
+		return TRUE
+	return ..()
+
 /obj/structure/hygiene/faucet/attack_hand(mob/user)
 	. = ..()
 	open = !open
@@ -559,6 +571,31 @@
 /obj/structure/hygiene/faucet/on_update_icon()
 	. = ..()
 	icon_state = icon_state = "[initial(icon_state)][open ? "-on" : ""]"
+
+/obj/item/faucet
+	name = "faucet"
+	desc = "An outlet for liquids. Water you waiting for?"
+	icon = 'icons/obj/watercloset.dmi'
+	icon_state = "faucet-item"
+	obj_flags = OBJ_FLAG_ROTATABLE
+	var/constructed_type = /obj/structure/hygiene/faucet
+
+/obj/item/faucet/attackby(obj/item/thing, mob/user)
+	if(isWrench(thing))
+		var/turf/simulated/floor/F = loc
+		if (istype(F) && istype(F.flooring, /decl/flooring/pool))
+			var/obj/O = new constructed_type (loc)
+			O.dir = dir
+			playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+			user.visible_message(
+				SPAN_WARNING("\The [user] wrenches the \the [src] down."),
+				SPAN_WARNING("You wrench \the [src] down.")
+			)
+			qdel(src)
+			return
+		else
+			to_chat(user, SPAN_WARNING("\The [src] can only be secured to pool tiles!"))
+	return ..()
 
 /obj/structure/hygiene/faucet/proc/water_flow()
 	if(!isturf(src.loc))

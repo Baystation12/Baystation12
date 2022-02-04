@@ -31,7 +31,7 @@
 	var/empowered_attack = FALSE
 	var/gas_spent = FALSE
 
-	ai_holder_type = /datum/ai_holder/simple_animal
+	ai_holder = /datum/ai_holder/simple_animal
 	say_list_type = /datum/say_list/drake
 
 /mob/living/simple_animal/hostile/drake/lava_act(datum/gas_mixture/air, temperature, pressure)

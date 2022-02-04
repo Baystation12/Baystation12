@@ -1,7 +1,7 @@
 /obj/item/device/personal_shield
 	name = "personal shield"
 	desc = "Truly a life-saver: this device protects its user from being hit by objects moving very, very fast, as long as it holds a charge."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/batterer.dmi'
 	icon_state = "battereroff"
 	slot_flags = SLOT_BELT
 	var/open = FALSE
@@ -76,7 +76,7 @@
 	if(open && (loc == user))
 		if(power_cell)
 			user.visible_message("\The [user] removes \the [power_cell] from \the [src].", SPAN_NOTICE("You remove \the [power_cell] from \the [src]."))
-			turn_off()	
+			turn_off()
 			user.put_in_active_hand(power_cell)
 			on_remove_cell()
 		else
@@ -156,7 +156,7 @@
 
 	currently_stored_power -= shield_power_cost
 	START_PROCESSING(SSobj, src)
-	
+
 	if(currently_stored_power < shield_power_cost)
 		enable_when_powered = TRUE
 		return FALSE

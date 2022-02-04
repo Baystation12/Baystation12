@@ -36,7 +36,7 @@
 /obj/item/plastique/attack_self(mob/user as mob)
 	var/newtime = input(usr, "Please set the timer.", "Timer", 10) as num
 	if(user.get_active_hand() == src)
-		newtime = Clamp(newtime, 10, 60000)
+		newtime = clamp(newtime, 10, 60000)
 		timer = newtime
 		to_chat(user, "Timer set for [timer] seconds.")
 
@@ -77,7 +77,7 @@
 	if(target)
 		if (istype(target, /turf/simulated/wall))
 			var/turf/simulated/wall/W = target
-			W.dismantle_wall(1)
+			W.kill_health()
 		else if(istype(target, /mob/living))
 			target.ex_act(2) // c4 can't gib mobs anymore.
 		else

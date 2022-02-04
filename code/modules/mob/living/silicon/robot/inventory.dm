@@ -18,6 +18,13 @@
 	set hidden = 1
 	toggle_module(module)
 
+/mob/living/silicon/robot/hotkey_drop()
+	if (!module)
+		to_chat(src, SPAN_WARNING("You haven't selected a module yet."))
+		return
+	uneq_active()
+	hud_used.update_robot_modules_display()
+
 /mob/living/silicon/robot/proc/uneq_active()
 	if(isnull(module_active))
 		return

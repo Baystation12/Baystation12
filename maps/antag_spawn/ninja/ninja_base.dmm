@@ -1089,8 +1089,8 @@
 /area/map_template/ninja_dojo/dojo)
 "cq" = (
 /obj/structure/table/rack,
-/obj/item/clothing/accessory/storage/brown_vest,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/item/device/multitool/hacktool,
 /turf/unsimulated/floor{
 	dir = 2;
 	icon_state = "dark"
@@ -1108,8 +1108,9 @@
 /area/map_template/ninja_dojo/dojo)
 "cs" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/device/multitool/hacktool,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/item/implanter/freedom,
+/obj/item/implantcase/freedom,
 /turf/unsimulated/floor{
 	dir = 2;
 	icon_state = "dark"

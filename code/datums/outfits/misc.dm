@@ -57,3 +57,20 @@
 /decl/hierarchy/outfit/clown/New()
 	..()
 	backpack_overrides[/decl/backpack_outfit/backpack] = /obj/item/storage/backpack/clown
+
+/decl/hierarchy/outfit/vox_raider
+	name = "Vox Raider"
+	uniform = /obj/item/clothing/under/vox/vox_casual
+	shoes = /obj/item/clothing/shoes/magboots/vox
+	l_ear = /obj/item/device/radio/headset/vox_raider
+	belt = /obj/item/storage/belt/utility/full
+	gloves = /obj/item/clothing/gloves/vox
+	r_hand = /obj/item/gun/launcher/alien/spikethrower
+
+	id_slot = slot_wear_id
+	id_types = list(/obj/item/card/id/syndicate)
+	id_pda_assignment = "Scavenger"
+
+
+	flags = OUTFIT_HAS_BACKPACK|OUTFIT_RESET_EQUIPMENT
+

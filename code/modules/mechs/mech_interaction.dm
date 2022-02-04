@@ -2,13 +2,8 @@
 	if(usr == src && usr != over)
 		if(istype(over, /mob/living/exosuit))
 			var/mob/living/exosuit/exosuit = over
-			if(exosuit.body)
-				if(usr.mob_size >= exosuit.body.min_pilot_size && usr.mob_size <= exosuit.body.max_pilot_size)
-					if(exosuit.enter(src))
-						return
-				else
-					to_chat(usr, SPAN_WARNING("You cannot pilot a exosuit of this size."))
-					return
+			if(exosuit.enter(src))
+				return
 	return ..()
 
 /mob/living/exosuit/MouseDrop_T(atom/dropping, mob/user)
@@ -217,37 +212,45 @@
 		selected_system = null
 	selected_hardpoint = null
 
-/mob/living/exosuit/proc/check_enter(var/mob/user)
-	if(!user || user.incapacitated())
+/mob/living/exosuit/proc/check_enter(mob/user, silent = FALSE, check_incap = TRUE)
+	if(!user || (check_incap && user.incapacitated()))
+		return FALSE
+	if(!(user.mob_size >= body.min_pilot_size && user.mob_size <= body.max_pilot_size))
+		if(!silent)
+			to_chat(user, SPAN_WARNING("You cannot pilot an exosuit of this size."))
 		return FALSE
 	if(!user.Adjacent(src))
 		return FALSE
 	if(hatch_locked)
-		to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is locked."))
+		if(!silent)
+			to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is locked."))
 		return FALSE
 	if(hatch_closed)
-		to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is closed."))
+		if(!silent)
+			to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is closed."))
 		return FALSE
 	if(LAZYLEN(pilots) >= LAZYLEN(body.pilot_positions))
-		to_chat(user, SPAN_WARNING("\The [src] is occupied to capacity."))
+		if(!silent)
+			to_chat(user, SPAN_WARNING("\The [src] is occupied to capacity."))
 		return FALSE
 	return TRUE
 
-/mob/living/exosuit/proc/enter(var/mob/user)
-	if(!check_enter(user))
-		return
+/mob/living/exosuit/proc/enter(mob/user, silent = FALSE, check_incap = TRUE, instant = FALSE)
+	if(!check_enter(user, silent, check_incap))
+		return FALSE
 	to_chat(user, SPAN_NOTICE("You start climbing into \the [src]..."))
-	if(!body || !do_after(user, body.climb_time))
-		return
 	if(!body)
-		return
-	if(!check_enter(user))
-		return
-	to_chat(user, SPAN_NOTICE("You climb into \the [src]."))
+		return FALSE
+	if(!instant && !do_after(user, body.climb_time))
+		return FALSE
+	if(!check_enter(user, silent, check_incap))
+		return FALSE
+	if(!silent)
+		to_chat(user, SPAN_NOTICE("You climb into \the [src]."))
+		playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
 	user.forceMove(src)
 	LAZYDISTINCTADD(pilots, user)
 	sync_access()
-	playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
 	if(user.client) user.client.screen |= hud_elements
 	LAZYDISTINCTADD(user.additional_vision_handlers, src)
 	update_pilots()

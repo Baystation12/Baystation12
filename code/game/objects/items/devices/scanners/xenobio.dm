@@ -1,6 +1,7 @@
 /obj/item/device/scanner/xenobio
 	name = "xenolife scanner"
 	desc = "Multipurpose organic life scanner. With spectral breath analyzer you can find out what snacks Ian had! Or what gasses alien life breathes."
+	icon = 'icons/obj/xenolife_scanner.dmi'
 	icon_state = "xenobio"
 	item_state = "analyzer"
 	scan_sound = 'sound/effects/scanbeep.ogg'
@@ -62,11 +63,7 @@
 		var/area/map = locate(/area/overmap)
 		for(var/obj/effect/overmap/visitable/sector/exoplanet/P in map)
 			if((A in P.animals) || is_type_in_list(A, P.repopulate_types))
-				var/list/discovered = SSstatistics.get_field(STAT_XENOFAUNA_SCANNED)
-				if(!discovered)
-					discovered = list()
-				discovered |= "[P.name]-[A.type]"
-				SSstatistics.set_field(STAT_XENOFAUNA_SCANNED, discovered)
+				GLOB.stat_fauna_scanned |= "[P.name]-[A.type]"
 				. += "New xenofauna species discovered!"
 				break
 	else if(istype(target, /mob/living/carbon/slime/))

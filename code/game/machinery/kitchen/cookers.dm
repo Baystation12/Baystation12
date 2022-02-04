@@ -1,9 +1,14 @@
 
 #define MAX_FOOD_COOK_COUNT 3
+#define MAX_FOOD_COMBINE_COUNT 4
 
-#define COOKER_STRIP_RAW 0x1
+
+#define COOKER_STRIP_RAW FLAG(0)
+
 
 /obj/item/reagent_containers/food/snacks/var/list/cooked_with
+/obj/item/reagent_containers/food/snacks/var/list/combined_names
+
 
 /obj/machinery/cooker
 	name = "cooker"
@@ -29,6 +34,7 @@
 	var/default_color //The fallback color to assign to cooked things if the mode does not supply one
 	var/datum/effect/effect/system/smoke_spread/bad/smoke
 
+
 /obj/machinery/cooker/Initialize()
 	. = ..()
 	if (type == /obj/machinery/cooker)
@@ -38,9 +44,11 @@
 	smoke.attach(src)
 	smoke.set_up(2, 0)
 
+
 /obj/machinery/cooker/Destroy()
 	QDEL_NULL_LIST(cooking)
 	. = ..()
+
 
 /obj/machinery/cooker/examine(mob/user, distance)
 	. = ..()
@@ -53,13 +61,16 @@
 			else
 				to_chat(user, "It is empty.")
 
+
 /obj/machinery/cooker/components_are_accessible(path)
 	return !is_processing && ..()
+
 
 /obj/machinery/cooker/cannot_transition_to(state_path, mob/user)
 	if(is_processing)
 		return SPAN_WARNING("Turn off \the [src] first.")
 	return ..()
+
 
 /obj/machinery/cooker/proc/enable()
 	update_use_power(active_power_usage)
@@ -68,15 +79,18 @@
 	started = world.time
 	threshold = 0
 
+
 /obj/machinery/cooker/proc/disable()
 	update_use_power(idle_power_usage)
 	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 	icon_state = initial(icon_state)
 
+
 /obj/machinery/cooker/proc/empty()
 	for (var/obj/item/I in cooking)
 		I.dropInto(loc)
 	cooking.Cut()
+
 
 /obj/machinery/cooker/attack_hand(mob/user)
 	. = ..()
@@ -119,6 +133,7 @@
 			cook_mode = mode
 			to_chat(user, "The contents of \the [src] will now be [cook_modes[mode]["desc"]].")
 
+
 /obj/machinery/cooker/attackby(obj/item/I, mob/user)
 	if (is_processing)
 		to_chat(user, SPAN_WARNING("Turn off \the [src] first."))
@@ -140,6 +155,7 @@
 	user.visible_message("\The [user] puts \the [I] into \the [src].")
 	I.forceMove(src)
 	cooking += I
+
 
 /obj/machinery/cooker/Process()
 	if (!cooking.len)
@@ -177,32 +193,42 @@
 		visible_message(SPAN_WARNING("\The [src] vomits a gout of rancid smoke!"))
 		smoke.start()
 
-/obj/machinery/cooker/proc/cook_item(obj/item/reagent_containers/food/snacks/S)
-	if (istype(S, /obj/item/reagent_containers/food/snacks/badrecipe))
-		return S
-	if (LAZYISIN(S.cooked_with, cook_mode) || length(S.cooked_with) > MAX_FOOD_COOK_COUNT)
+
+/obj/machinery/cooker/proc/cook_item(obj/item/reagent_containers/food/snacks/source)
+	if (istype(source, /obj/item/reagent_containers/food/snacks/badrecipe))
+		return source
+	if (LAZYISIN(source.cooked_with, cook_mode) || length(source.cooked_with) > MAX_FOOD_COOK_COUNT)
 		return new /obj/item/reagent_containers/food/snacks/badrecipe(src)
 	var/obj/item/reagent_containers/food/snacks/result = cook_modes[cook_mode]["type"]
-	result = new result(src)
-	if (S.reagents && S.reagents.total_volume)
-		S.reagents.trans_to(result, S.reagents.total_volume)
+	result = new result (src)
+	if (source.reagents && source.reagents.total_volume)
+		source.reagents.trans_to(result, source.reagents.total_volume)
 	var/flags = cook_modes[cook_mode]["flags"] || 0
-	modify_result_appearance(result, S, flags)
-	modify_result_text(result, S, flags)
-	result.cooked_with = S.cooked_with?.Copy()
+	for (var/hint in source.nutriment_desc)
+		result.nutriment_desc[hint] = source.nutriment_desc[hint]
+	result.combined_names = source.combined_names?.Copy()
+	result.cooked_with = source.cooked_with?.Copy()
 	LAZYADD(result.cooked_with, cook_mode)
+	modify_result_appearance(result, source, flags)
+	modify_result_text(result, source, flags)
 	return result
+
 
 /obj/machinery/cooker/proc/modify_result_text(obj/item/reagent_containers/food/snacks/result, obj/item/reagent_containers/food/snacks/source, flags)
 	var/prefix = cook_modes[cook_mode]["prefix"]
 	var/suffix = cook_modes[cook_mode]["suffix"]
-	var/result_desc = source.desc
 	var/result_name = source.name
 	if (flags & COOKER_STRIP_RAW)
 		if (text_starts_with(result_name, "raw"))
 			result_name = trim(copytext_char(result_name, 4))
 	result.SetName("[prefix ? "[prefix] " : ""][result_name][suffix ? " [suffix]" : ""]")
-	result.desc = "[result_desc] It has been [cook_modes[cook_mode]["desc"] || cook_mode]."
+	var/list/combined_names = result.combined_names
+	if (combined_names)
+		combined_names[1] = result.name
+		result.desc = "\A [combined_names[1]] with [english_list(combined_names.Copy(2))]"
+	else
+		result.desc = "\A [result.name]."
+
 
 /obj/machinery/cooker/proc/modify_result_appearance(obj/item/reagent_containers/food/snacks/result, obj/item/reagent_containers/food/snacks/source, flags)
 	if (!result.icon_state)
@@ -281,7 +307,7 @@
 	name = "griddle"
 	desc = "A flat, wide, and smooth cooking surface."
 	icon_state = "grill"
-	default_color = "#a34719"
+	default_color = "#c05b28"
 	capacity = 4
 	burn_time = 40 SECONDS
 	cook_modes = list(
@@ -289,6 +315,12 @@
 			"type" = /obj/item/reagent_containers/food/snacks/variable,
 			"prefix" = "grilled",
 			"desc" = "grilled",
+			"flags" = COOKER_STRIP_RAW
+		),
+		"Toasting" = list(
+			"type" = /obj/item/reagent_containers/food/snacks/variable,
+			"prefix" = "toasted",
+			"desc" = "toasted",
 			"flags" = COOKER_STRIP_RAW
 		),
 		"Frying" = list(
@@ -310,6 +342,18 @@
 			"desc" = "boiled",
 			"color" = null,
 			"flags" = COOKER_STRIP_RAW
+		),
+		"Stewing" = list(
+			"type" = /obj/item/reagent_containers/food/snacks/variable,
+			"suffix" = "stew",
+			"desc" = "stewed",
+			"flags" = COOKER_STRIP_RAW
+		),
+		"Searing" = list(
+			"type" = /obj/item/reagent_containers/food/snacks/variable,
+			"prefix" = "seared",
+			"desc" = "seared",
+			"flags" = COOKER_STRIP_RAW
 		)
 	)
 
@@ -318,7 +362,7 @@
 	name = "oven"
 	desc = "Cookies are ready, dear."
 	icon_state = "oven"
-	default_color = "#a34719"
+	default_color = "#99502c"
 	capacity = 4
 	burn_time = 40 SECONDS
 	cook_modes = list(
@@ -326,6 +370,12 @@
 			"type" = /obj/item/reagent_containers/food/snacks/variable,
 			"prefix" = "baked",
 			"desc" = "baked",
+			"flags" = COOKER_STRIP_RAW
+		),
+		"Roasting" = list(
+			"type" = /obj/item/reagent_containers/food/snacks/variable,
+			"prefix" = "roasted",
+			"desc" = "roasted",
 			"flags" = COOKER_STRIP_RAW
 		),
 		"Personal Pizza" = list(
@@ -397,30 +447,41 @@
 	icon_state = "cereal"
 	capacity = 2
 	cook_modes = list(
-		"Cerealizing" = list(
+		"Make Cereal" = list(
 			"type" = /obj/item/reagent_containers/food/snacks/variable,
 			"prefix" = "box of",
 			"suffix" = "cereal",
 			"desc" = "made into cereal"
+		),
+		"Make Stuffing" = list(
+			"type" = /obj/item/reagent_containers/food/snacks/variable/stuffing,
+			"suffix" = "stuffing",
+			"desc" = "turned into stuffing"
+		),
+		"Shred" = list(
+			"type" = /obj/item/reagent_containers/food/snacks/variable/shreds,
+			"prefix" = "shredded",
+			"desc" = "shredded"
 		)
 	)
 
+
 /obj/machinery/cooker/cereal/modify_result_appearance(obj/item/reagent_containers/food/snacks/result, obj/item/reagent_containers/food/snacks/source, flags)
 	..(result, source)
-	var/image/I = image(source.icon, source.icon_state)
-	I.color = source.color
-	I.overlays += source.overlays
-	I.transform *= 0.5
-	result.icon = 'icons/obj/food.dmi'
-	result.icon_state = "cereal_box"
-	result.color = null
-	result.overlays += I
+	if (cook_mode == "Make Cereal")
+		var/image/I = image(source.icon, source.icon_state)
+		I.color = source.color
+		I.overlays += source.overlays
+		I.transform *= 0.5
+		result.icon = 'icons/obj/food.dmi'
+		result.icon_state = "cereal_box"
+		result.color = null
+		result.overlays += I
 
 
 /obj/item/reagent_containers/food/snacks/variable
 	name = "cooked food"
 	icon = 'icons/obj/food_custom.dmi'
-	nutriment_amt = 5
 	bitesize = 2
 
 
@@ -510,5 +571,120 @@
 	icon_state = "jellycustom"
 
 
-#undef MAX_FOOD_COOK_COUNT
+/obj/item/reagent_containers/food/snacks/variable/stuffing
+	name = "stuffing"
+	desc = "Get stuffed."
+	icon_state = "stuffing"
+
+
+/obj/item/reagent_containers/food/snacks/variable/shreds
+	name = "shreds"
+	desc = "Gnarly."
+	icon_state = "shreds" //NB: there is no base icon state and that is intentional
+
+
+/obj/item/material/chopping_board
+	name = "chopping board"
+	desc = "A food preparation surface that allows you to combine food more easily."
+	icon = 'icons/obj/chopping_board.dmi'
+	icon_state = "chopping_board"
+	w_class = ITEM_SIZE_NORMAL
+	default_material = MATERIAL_MAPLE
+
+
+/obj/item/material/chopping_board/mahogany/default_material = MATERIAL_MAHOGANY
+
+
+/obj/item/material/chopping_board/bamboo/default_material = MATERIAL_BAMBOO
+
+
+/obj/item/material/chopping_board/attackby(obj/item/item, mob/living/user)
+	if (istype(item, /obj/item/reagent_containers/food/snacks))
+		if (istype(item, /obj/item/reagent_containers/food/snacks/variable))
+			to_chat(user, SPAN_WARNING("\The [item] is already combinable."))
+			return TRUE
+		if (!user.unEquip(item, src))
+			return TRUE
+		var/obj/item/reagent_containers/food/snacks/source = item
+		var/obj/item/reagent_containers/food/snacks/variable/result = new (get_turf(src))
+		if (source.reagents?.total_volume)
+			source.reagents.trans_to(result, source.reagents.total_volume)
+		for (var/hint in source.nutriment_desc)
+			result.nutriment_desc[hint] = source.nutriment_desc[hint]
+		result.combined_names = source.combined_names?.Copy()
+		result.cooked_with = source.cooked_with?.Copy()
+		result.icon = source.icon
+		result.icon_state = source.icon_state
+		result.color = source.color
+		result.overlays += source.overlays
+		result.name = source.name
+		result.desc = source.desc
+		qdel(source)
+		return TRUE
+	return ..()
+
+
+/obj/item/reagent_containers/food/snacks/variable/attackby(obj/item/I, mob/living/user)
+	if (istype(I, /obj/item/reagent_containers/food/snacks))
+		combine(I, user)
+		return TRUE
+	return ..()
+
+
+/obj/item/reagent_containers/food/snacks/variable/proc/combine(obj/item/reagent_containers/food/snacks/other, mob/user)
+	var/combined_count = length(combined_names)
+	var/other_combined_count = length(other.combined_names)
+	if (combined_count + other_combined_count > 4)
+		to_chat(user, SPAN_WARNING("This food combination is too large."))
+	var/response
+	if (bitecount || other.bitecount)
+		if (user.a_intent == I_HELP)
+			to_chat(user, SPAN_WARNING("This food is partially eaten. Combining it would be disgusting."))
+			return FALSE
+		if (user.a_intent == I_HURT)
+			to_chat(user, SPAN_WARNING("This food is partially eaten.") + SPAN_NOTICE(" You combine it anyway."))
+		else
+			response = alert(user, "Combine Food Scraps?", "Combine Food", "Yes", "No") == "Yes"
+			if (!response)
+				return FALSE
+	if (!response && user.a_intent == I_HELP)
+		response = alert(user, "Combine Food?", "Combine Food", "Yes", "No") == "Yes"
+		if (!response)
+			return FALSE
+	if (!user.unEquip(other, src))
+		return FALSE
+	if (!combined_count)
+		combined_names = list(name)
+		name = "[name] meal"
+	if (other_combined_count)
+		combined_names += other.combined_names
+	else
+		combined_names += other.name
+	desc = "\A [combined_names[1]] with [english_list(combined_names.Copy(2))]"
+	var/other_volume = other.reagents?.total_volume
+	if (other_volume)
+		var/volume = reagents.total_volume + other_volume
+		if (reagents.maximum_volume < volume)
+			reagents.maximum_volume = volume
+		other.reagents.trans_to(src, volume)
+	for (var/hint in other.nutriment_desc)
+		if (!nutriment_desc[hint])
+			nutriment_desc[hint] = 0
+		nutriment_desc[hint] += other.nutriment_desc[hint]
+	bitesize += (other.bitesize - other.bitecount)
+	var/image/I = image(other.icon, other.icon_state)
+	I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
+	I.pixel_x = rand(-8, 8)
+	I.pixel_y = rand(-8, 8)
+	I.color = other.color
+	I.overlays += other.overlays
+	I.transform *= 0.8
+	overlays += I
+	qdel(other)
+	return TRUE
+
+
 #undef COOKER_STRIP_RAW
+
+#undef MAX_FOOD_COMBINE_COUNT
+#undef MAX_FOOD_COOK_COUNT

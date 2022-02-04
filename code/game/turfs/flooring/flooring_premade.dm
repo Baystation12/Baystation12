@@ -367,7 +367,7 @@
 
 /turf/simulated/floor/beach/sand/desert
 	icon_state = "desert"
-	has_resources = 1
+	resources = TRUE
 
 /turf/simulated/floor/beach/sand/desert/New()
 	icon_state = "desert[rand(0,5)]"

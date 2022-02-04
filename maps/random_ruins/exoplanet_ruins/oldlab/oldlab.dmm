@@ -15,7 +15,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "ak" = (
 /obj/structure/hygiene/toilet{
@@ -81,7 +81,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "bl" = (
 /obj/structure/cable/yellow{
@@ -129,7 +129,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "bQ" = (
 /obj/machinery/computer/crew,
@@ -151,7 +151,7 @@
 /area/map_template/oldlab/station/chem)
 "cv" = (
 /obj/effect/landmark/clear,
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/station/southairlock)
 "cw" = (
 /obj/effect/floor_decal/techfloor{
@@ -217,7 +217,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "dz" = (
 /obj/structure/cable/yellow{
@@ -321,7 +321,7 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "eW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -545,7 +545,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "ix" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -560,7 +560,7 @@
 	icon_state = "0-2"
 	},
 /obj/structure/cable/yellow,
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "iG" = (
 /obj/machinery/door/firedoor,
@@ -767,7 +767,7 @@
 "lV" = (
 /obj/effect/landmark/clear,
 /obj/machinery/light/spot,
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/station/northairlockatmos)
 "mn" = (
 /obj/effect/floor_decal/techfloor{
@@ -947,7 +947,6 @@
 /area/map_template/oldlab/station/hall)
 "ol" = (
 /obj/machinery/access_button{
-	active_power_usage = "portlab_airlock";
 	command = "cycle_interior";
 	frequency = 1379;
 	master_tag = "labport_airlock";
@@ -1002,7 +1001,7 @@
 /obj/machinery/light/spot{
 	dir = 8
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/station/northairlockatmos)
 "pc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1127,7 +1126,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "rt" = (
 /turf/simulated/wall/r_wall/prepainted,
@@ -1266,7 +1265,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab/station/hall)
 "uj" = (
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "uq" = (
 /obj/structure/cable/yellow{
@@ -1399,7 +1398,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "wD" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -1460,14 +1459,14 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "xH" = (
 /obj/effect/landmark/clear,
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/station/southairlock)
 "xK" = (
 /obj/structure/cable/yellow{
@@ -1478,7 +1477,7 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "xU" = (
 /obj/machinery/bodyscanner{
@@ -1579,7 +1578,6 @@
 	pixel_y = -6
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	active_power_usage = "labport_sensor";
 	anchor_fall = "labport_airlock";
 	dir = 8;
 	id_tag = "labport_airlock";
@@ -1632,7 +1630,7 @@
 /obj/machinery/light/spot{
 	dir = 8
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/station/southairlock)
 "AP" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -1862,7 +1860,7 @@
 	icon_state = "1-2"
 	},
 /obj/effect/paint/black,
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "Fj" = (
 /turf/simulated/floor/tiled/white,
@@ -1906,7 +1904,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "FF" = (
 /obj/effect/floor_decal/techfloor{
@@ -1930,12 +1928,11 @@
 	},
 /obj/effect/landmark/clear,
 /obj/machinery/airlock_sensor{
-	frequency = 1550;
 	id_tag = "starboardlab_sensor_external";
 	pixel_x = -24;
 	pixel_y = 24
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/station/southairlock)
 "Gk" = (
 /obj/structure/table/steel,
@@ -2046,7 +2043,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "HV" = (
 /obj/effect/floor_decal/techfloor{
@@ -2077,7 +2074,7 @@
 "Is" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/black,
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "IV" = (
 /obj/structure/cable/yellow{
@@ -2319,7 +2316,7 @@
 /area/map_template/oldlab/station/xenobio)
 "Ms" = (
 /obj/effect/landmark/clear,
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/station/northairlockatmos)
 "Mx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2385,7 +2382,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "Nf" = (
 /obj/structure/cable/yellow{
@@ -2840,7 +2837,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "Vq" = (
 /obj/structure/cable/yellow{
@@ -2964,7 +2961,7 @@
 /area/map_template/oldlab/station/northairlockatmos)
 "Xx" = (
 /obj/structure/grille,
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "Yb" = (
 /obj/machinery/light{
@@ -3038,7 +3035,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "Ze" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3072,7 +3069,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "ZS" = (
 /obj/machinery/door/airlock/civilian,
@@ -3088,7 +3085,7 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/floor/exoplanet/concrete/reinforced,
+/turf/unsimulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 
 (1,1,1) = {"

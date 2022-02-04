@@ -3,6 +3,7 @@
 /obj/item/device/t_scanner
 	name = "\improper T-ray scanner"
 	desc = "A terahertz-ray emitter and scanner, capable of penetrating conventional hull materials."
+	icon = 'icons/obj/t_ray_scanner.dmi'
 	icon_state = "t-ray0"
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
@@ -38,7 +39,7 @@
 /obj/item/device/t_scanner/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	var/obj/structure/disposalpipe/D = target
 	if(D && istype(D))
-		to_chat(user, "<span class='info'>Pipe segment integrity: [(D.health / 10) * 100]%</span>")
+		to_chat(user, "<span class='info'>Pipe segment integrity: [100 - D.get_damage_percentage()]%</span>")
 
 /obj/item/device/t_scanner/proc/set_active(var/active)
 	on = active

@@ -1,6 +1,7 @@
 /obj/item/device/flash
 	name = "flash"
 	desc = "A device that produces a bright flash of light, designed to stun and disorient an attacker."
+	icon = 'icons/obj/flash.dmi'
 	icon_state = "flash"
 	item_state = "flashtool"
 	throwforce = 5
@@ -204,6 +205,7 @@
 /obj/item/device/flash/synthetic //not for regular use, weaker effects
 	name = "modified flash"
 	desc = "A device that produces a bright flash of light. This is a specialized version designed specifically for use in camera systems."
+	icon = 'icons/obj/flash_synthetic.dmi'
 	icon_state = "sflash"
 	str_min = 1
 	str_max = 4
@@ -211,6 +213,7 @@
 /obj/item/device/flash/advanced
 	name = "advanced flash"
 	desc = "A device that produces a very bright flash of light. This is an advanced and expensive version often issued to VIPs."
+	icon = 'icons/obj/flash_advanced.dmi'
 	icon_state = "advflash"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2)
 	str_min = 3

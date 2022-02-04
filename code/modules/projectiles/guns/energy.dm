@@ -176,7 +176,7 @@
 			if(power_supply.charge < charge_cost)
 				ratio = 0
 			else
-				ratio = Clamp(round(ratio, 25), 25, 100)
+				ratio = clamp(round(ratio, 25), 25, 100)
 		else
 			ratio = 0
 		//make sure that rounding down will not give us the empty state even if we have charge for a shot left.

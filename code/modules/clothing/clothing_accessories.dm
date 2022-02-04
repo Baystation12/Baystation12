@@ -73,7 +73,7 @@
 /obj/item/clothing/examine(mob/user)
 	. = ..()
 	for(var/obj/item/clothing/accessory/A in accessories)
-		if (!A.hidden)
+		if (!(A.accessory_flags & ACCESSORY_HIDDEN))
 			to_chat(user, "[icon2html(A, user)] \A [A] is attached to it.")
 	switch(ironed_state)
 		if(WRINKLES_WRINKLY)
@@ -101,7 +101,7 @@
 /obj/item/clothing/proc/attach_accessory(mob/user, obj/item/clothing/accessory/A)
 	accessories += A
 	A.on_attached(src, user)
-	if(A.removable)
+	if (A.accessory_flags & ACCESSORY_REMOVABLE)
 		src.verbs |= /obj/item/clothing/proc/removetie_verb
 	update_accessory_slowdown()
 	update_clothing_icon()
@@ -170,7 +170,7 @@
 	var/obj/item/clothing/accessory/A
 	var/list/removables = list()
 	for(var/obj/item/clothing/accessory/ass in accessories)
-		if(ass.removable)
+		if (ass.accessory_flags & ACCESSORY_REMOVABLE)
 			removables |= ass
 	if(accessories.len > 1)
 		A = input("Select an accessory to remove from [src]") as null|anything in removables

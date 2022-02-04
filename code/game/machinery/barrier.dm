@@ -16,7 +16,7 @@
 	. = ..()
 	if (distance < 5)
 		var/message
-		switch (PERCENT(health, initial(health), 0))
+		switch (Percent(health, initial(health), 0))
 			if (99 to INFINITY) message = "is in perfect condition"
 			if (67 to 99) message = "has seen some wear"
 			if (33 to 67) message = "is quite badly damaged"

@@ -14,7 +14,6 @@
 
 	log_admin("[key_name(usr)] made [key_name(M)] drop everything!")
 	message_admins("[key_name_admin(usr)] made [key_name_admin(M)] drop everything!", 1)
-	SSstatistics.add_field_details("admin_verb","DEVR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_prison(mob/M as mob in SSmobs.mob_list)
 	set category = "Admin"
@@ -40,7 +39,6 @@
 		spawn(50)
 			to_chat(M, "<span class='warning'>You have been sent to the prison station!</span>")
 		log_and_message_admins("sent [key_name_admin(M)] to the prison station.")
-		SSstatistics.add_field_details("admin_verb","PRISON") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_check_new_players()	//Allows admins to determine who the newer players are.
 	set category = "Admin"
@@ -77,19 +75,45 @@
 /client/proc/cmd_admin_world_narrate() // Allows administrators to fluff events a little easier -- TLE
 	set category = "Special Verbs"
 	set name = "Global Narrate"
-	set desc = "Narrate to everyone."
+	set desc = "Narrate to everyone, or players on specific z-levels."
 
 	if(!check_rights(R_ADMIN))
 		return
 
-	var/result = cmd_admin_narrate_helper(src)
-	if (!result)
+	var/region = input("Narrate Globally, single Z level, or connected Z levels?", "Region") as null | anything in list(
+		"Global",
+		"Single Z",
+		"Connected Zs"
+	)
+
+	if (!region)
 		return
 
-	to_world(result[1])
+	if (region != "Global")
+		var/chosen_z = input("Choose Z level: [region]", "Choose Z", "[get_z(usr) ? get_z(usr) : 0]") as null | num
+		if (!chosen_z)
+			return
 
-	log_and_message_staff(" - GlobalNarrate [result[2]]/[result[3]]: [result[4]]")
-	SSstatistics.add_field_details("admin_verb","GLN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		var/list/z_levels = list(chosen_z)
+		if (region == "Connected Zs")
+			z_levels = GetConnectedZlevels(chosen_z)
+
+		var/result = cmd_admin_narrate_helper(src)
+		if (!result)
+			return
+
+		for (var/mob/L in GLOB.player_list)
+			if (get_z(L) in z_levels)
+				to_chat(L, result[1])
+
+		log_and_message_staff(" - GlobalNarrate to z-level(s): ([english_list(z_levels)]), [result[2]]/[result[3]]: [result[4]]")
+	else
+		var/result = cmd_admin_narrate_helper(src)
+		if (!result)
+			return
+
+		to_world(result[1])
+		log_and_message_staff(" - GlobalNarrate [region] [result[2]]/[result[3]]: [result[4]]")
 
 
 /proc/cmd_admin_narrate_helper(var/user, var/style, var/size, var/message)
@@ -207,7 +231,6 @@
 
 	to_chat(M, result[1])
 	log_and_message_staff(" - DirectNarrate [result[2]]/[result[3]] to ([M.name]/[M.key]): [result[4]]")
-	SSstatistics.add_field_details("admin_verb","DIRN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 // Local narrate, narrates to everyone who can see where you are regardless of whether they are blind or deaf.
 /client/proc/cmd_admin_local_narrate()
@@ -285,7 +308,6 @@
 	to_chat(usr, "<span class='notice'>Toggled [(M.status_flags & GODMODE) ? "ON" : "OFF"]</span>")
 	log_admin("[key_name(usr)] has toggled [key_name(M)]'s nodamage to [(M.status_flags & GODMODE) ? "On" : "Off"]")
 	message_admins("[key_name_admin(usr)] has toggled [key_name_admin(M)]'s nodamage to [(M.status_flags & GODMODE) ? "On" : "Off"]", 1)
-	SSstatistics.add_field_details("admin_verb","GOD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_notarget(mob/living/M as mob in SSmobs.mob_list)
 	set category = "Special Verbs"
@@ -297,7 +319,6 @@
 
 	M.status_flags ^= NOTARGET
 	log_and_message_admins("has toggled [key_name(M)]'s notarget to [(M.status_flags & NOTARGET) ? "On" : "Off"]")
-	SSstatistics.add_field_details("admin_verb","NOTARGET") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 proc/cmd_admin_mute(mob/M as mob, mute_type)
 	if(!usr || !usr.client)
@@ -335,7 +356,6 @@ proc/cmd_admin_mute(mob/M as mob, mute_type)
 	log_admin("[key_name(usr)] has [muteunmute] [key_name(M)] from [mute_string]")
 	message_staff("[key_name_admin(usr)] has [muteunmute] [key_name_admin(M)] from [mute_string].", 1)
 	to_chat(M, "<span class = 'alert'>You have been [muteunmute] from [mute_string].</span>")
-	SSstatistics.add_field_details("admin_verb","MUTE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_add_random_ai_law()
 	set category = "Fun"
@@ -353,7 +373,6 @@ proc/cmd_admin_mute(mob/M as mob, mute_type)
 		command_announcement.Announce("Ion storm detected near the [station_name()]. Please check all AI-controlled equipment for errors.", "Anomaly Alert", new_sound = 'sound/AI/ionstorm.ogg')
 
 	IonStorm(0)
-	SSstatistics.add_field_details("admin_verb","ION") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /*
 Allow admins to set players to be able to respawn/bypass 30 min wait, without the admin having to edit variables directly
@@ -508,7 +527,6 @@ Ccomp's first proc.
 	var/show_log = alert(src, "Show ion message?", "Message", "Yes", "No")
 	if(show_log == "Yes")
 		command_announcement.Announce("Ion storm detected near the [station_name()]. Please check all AI-controlled equipment for errors.", "Anomaly Alert", new_sound = 'sound/AI/ionstorm.ogg')
-	SSstatistics.add_field_details("admin_verb","IONC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_rejuvenate(mob/living/M as mob in SSmobs.mob_list)
 	set category = "Special Verbs"
@@ -527,7 +545,6 @@ Ccomp's first proc.
 		log_and_message_admins("healed / revived [key_name_admin(M)]!")
 	else
 		alert("Admin revive disabled")
-	SSstatistics.add_field_details("admin_verb","REJU") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_create_centcom_report()
 	set category = "Special Verbs"
@@ -553,7 +570,6 @@ Ccomp's first proc.
 
 	log_admin("[key_name(src)] has created a command report: [input]")
 	message_admins("[key_name_admin(src)] has created a command report", 1)
-	SSstatistics.add_field_details("admin_verb","CCR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_delete(atom/O as obj|mob|turf in range(world.view))
 	set category = "Admin"
@@ -566,7 +582,6 @@ Ccomp's first proc.
 	if (alert(src, "Are you sure you want to delete:\n[O]\nat ([O.x], [O.y], [O.z])?", "Confirmation", "Yes", "No") == "Yes")
 		log_admin("[key_name(usr)] deleted [O] at ([O.x],[O.y],[O.z])")
 		message_admins("[key_name_admin(usr)] deleted [O] at ([O.x],[O.y],[O.z])", 1)
-		SSstatistics.add_field_details("admin_verb","DEL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 		// turfs are special snowflakes that'll explode if qdel'd
 		if (isturf(O))
@@ -584,7 +599,6 @@ Ccomp's first proc.
 		return
 	for(var/datum/job/job in SSjobs.primary_job_datums)
 		to_chat(src, "[job.title]: [job.total_positions]")
-	SSstatistics.add_field_details("admin_verb","LFS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_explosion(atom/O as obj|mob|turf in range(world.view))
 	set category = "Special Verbs"
@@ -613,7 +627,6 @@ Ccomp's first proc.
 		explosion(O, devastation, heavy, light, flash, shaped=shaped)
 		log_admin("[key_name(usr)] created an explosion ([devastation],[heavy],[light],[flash]) at ([O.x],[O.y],[O.z])")
 		message_admins("[key_name_admin(usr)] created an explosion ([devastation],[heavy],[light],[flash]) at ([O.x],[O.y],[O.z])", 1)
-		SSstatistics.add_field_details("admin_verb","EXPL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 		return
 	else
 		return
@@ -634,7 +647,6 @@ Ccomp's first proc.
 		empulse(O, heavy, light)
 		log_admin("[key_name(usr)] created an EM Pulse ([heavy],[light]) at ([O.x],[O.y],[O.z])")
 		message_admins("[key_name_admin(usr)] created an EM PUlse ([heavy],[light]) at ([O.x],[O.y],[O.z])", 1)
-		SSstatistics.add_field_details("admin_verb","EMP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 		return
 	else
@@ -659,7 +671,6 @@ Ccomp's first proc.
 		return
 
 	M.gib()
-	SSstatistics.add_field_details("admin_verb","GIB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_gib_self()
 	set name = "Gibself"
@@ -673,7 +684,6 @@ Ccomp's first proc.
 			mob.gib()
 
 		log_and_message_admins("used gibself.")
-		SSstatistics.add_field_details("admin_verb","GIBS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/update_world()
 	// If I see anyone granting powers to specific keys like the code that was here,
@@ -687,7 +697,6 @@ Ccomp's first proc.
 	var/list/L = M.get_contents()
 	for(var/t in L)
 		to_chat(usr, "[t]")
-	SSstatistics.add_field_details("admin_verb","CC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /* This proc is DEFERRED. Does not do anything.
 /client/proc/cmd_admin_remove_phoron()
@@ -696,7 +705,6 @@ Ccomp's first proc.
 	if(!holder)
 		to_chat(src, "Only administrators may use this command.")
 		return
-	SSstatistics.add_field_details("admin_verb","STATM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 // DEFERRED
 	spawn(0)
 		for(var/turf/T in view())
@@ -731,7 +739,6 @@ Ccomp's first proc.
 		view = world.view
 
 	log_and_message_admins("changed their view range to [view].")
-	SSstatistics.add_field_details("admin_verb","CVRA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/admin_call_shuttle()
 
@@ -751,8 +758,6 @@ Ccomp's first proc.
 
 	var/choice = input("Is this an emergency evacuation or a crew transfer?") in list("Emergency", "Crew Transfer")
 	evacuation_controller.call_evacuation(usr, (choice == "Emergency"))
-
-	SSstatistics.add_field_details("admin_verb","CSHUT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_and_message_admins("admin-called an evacuation.")
 	return
 
@@ -768,8 +773,6 @@ Ccomp's first proc.
 		return
 
 	evacuation_controller.cancel_evacuation()
-
-	SSstatistics.add_field_details("admin_verb","CCSHUT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_and_message_admins("admin-cancelled the evacuation.")
 
 /client/proc/admin_deny_shuttle()
@@ -793,7 +796,6 @@ Ccomp's first proc.
 	to_chat(usr, text("<span class='danger'>Attack Log for []</span>", mob))
 	for(var/t in M.attack_logs_)
 		to_chat(usr, t)
-	SSstatistics.add_field_details("admin_verb","ATTL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
 /client/proc/toggle_random_events()
@@ -811,4 +813,3 @@ Ccomp's first proc.
 		config.allow_random_events = 0
 		to_chat(usr, "Random events disabled")
 		message_admins("Admin [key_name_admin(usr)] has disabled random events.", 1)
-	SSstatistics.add_field_details("admin_verb","TRE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

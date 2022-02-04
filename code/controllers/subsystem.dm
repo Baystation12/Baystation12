@@ -183,22 +183,21 @@
 	// Stub, no default behavior here please.
 
 //hook for printing stats to the "MC" statuspanel for admins to see performance and related stats etc.
-/datum/controller/subsystem/stat_entry(msg)
-	if(!statclick)
-		statclick = new/obj/effect/statclick/debug(null, "Initializing...", src)
-
-	var/title = name
-	if (Master.initializing)
-		msg = "[stat_entry_init()]\t[msg]"
-		var/letter = init_state_letter()
-		if (letter)
-			title =  "\[[letter]] [title]"
-	else
-		msg = "[stat_entry_run()]\t[msg]"
-		if (can_fire && !suspended && !(flags & SS_NO_FIRE))
-			title = "\[[state_letter()]] [title]"
-
-	stat(title, statclick.update(msg))
+/datum/controller/subsystem/stat_entry(text, force)
+	if (!stat_line)
+		stat_line = new (null, src)
+	IF_UPDATE_STAT
+		if (Master.initializing)
+			text = "[stat_entry_init()]\t[text]"
+			var/letter = init_state_letter()
+			if (letter)
+				text = "\[[letter]] [text]"
+		else
+			text = "[stat_entry_run()]\t[text]"
+			if (can_fire && !suspended && !(flags & SS_NO_FIRE))
+				text = "\[[state_letter()]] [text]"
+		stat_line.name = text
+	stat(name, stat_line)
 
 /datum/controller/subsystem/proc/stat_entry_init()
 	if (init_state == SS_INITSTATE_DONE)

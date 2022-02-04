@@ -1,5 +1,3 @@
-#define TANK_IDEAL_PRESSURE 1015 //Arbitrary.
-
 var/list/global/tank_gauge_cache = list()
 
 /obj/item/tank
@@ -28,12 +26,13 @@ var/list/global/tank_gauge_cache = list()
 	var/obj/item/device/tankassemblyproxy/proxyassembly
 
 	var/volume = 70
+	var/tank_size = TANK_SIZE_MEDIUM
 	var/manipulated_by = null		//Used by _onclick/hud/screen_objects.dm internals to determine if someone has messed with our tank or not.
 						//If they have and we haven't scanned it with the PDA or gas analyzer then we might just breath whatever they put in it.
 	var/failure_temp = 173 //173 deg C Borate seal (yes it should be 153 F, but that's annoying)
 
 
-	var/tank_flags = 0x000000
+	var/tank_flags = EMPTY_BITFIELD
 
 	var/list/starting_pressure //list in format 'xgm gas id' = 'desired pressure at start'
 
@@ -398,6 +397,8 @@ var/list/global/tank_gauge_cache = list()
 	air_contents.react() //cooking up air tanks - add phoron and oxygen, then heat above PHORON_MINIMUM_BURN_TEMPERATURE
 	check_status()
 
+#define TANK_IDEAL_PRESSURE 1015
+
 /obj/item/tank/on_update_icon(var/override)
 
 	var/list/overlays_to_add
@@ -426,6 +427,8 @@ var/list/global/tank_gauge_cache = list()
 		previous_gauge_pressure = gauge_pressure
 
 	overlays = overlays_to_add
+
+#undef TANK_IDEAL_PRESSURE
 
 //Handle exploding, leaking, and rupturing of the tank
 /obj/item/tank/proc/check_status()
@@ -513,7 +516,7 @@ var/list/global/tank_gauge_cache = list()
 			var/datum/gas_mixture/environment = loc.return_air()
 			var/env_pressure = environment.return_pressure()
 
-			var/release_ratio = Clamp(0.002, sqrt(max(pressure-env_pressure,0)/pressure),1)
+			var/release_ratio = clamp(0.002, sqrt(max(pressure-env_pressure,0)/pressure),1)
 			var/datum/gas_mixture/leaked_gas = air_contents.remove_ratio(release_ratio)
 			//dynamic air release based on ambient pressure
 
@@ -655,4 +658,3 @@ var/list/global/tank_gauge_cache = list()
 /obj/item/projectile/bullet/pellet/fragment/tank/big
 	name = "large metal fragment"
 	damage = 17
-

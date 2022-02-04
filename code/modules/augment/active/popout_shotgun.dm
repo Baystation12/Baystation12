@@ -2,7 +2,7 @@
 	name = "pop-out shotgun"
 	desc = "A galvanized steel mechanism that replaces most of the flesh below the elbow. Using the arm's natural range of motion as a hinge, it can be flicked open to reveal a 12-gauge shotgun with room for a single shell."
 	action_button_name = "Deploy shotgun"
-	icon_state = "circuit"
+	icon_state = "popout_shotgun"
 	augment_slots = AUGMENT_ARM
 	item = /obj/item/gun/projectile/shotgun/popout
 	origin_tech = list(TECH_MATERIAL = 3, TECH_COMBAT = 3, TECH_ESOTERIC = 4)
@@ -15,7 +15,7 @@
 	name = "pop-out shotgun"
 	desc = "A specialized 12-gauge shotgun concealed in the forearm. A deadly surprise."
 	icon = 'icons/obj/augment.dmi'
-	icon_state = "circuit"
+	icon_state = "popout_shotgun"
 	item_state = "coilgun"
 	max_shells = 1
 	w_class = ITEM_SIZE_HUGE

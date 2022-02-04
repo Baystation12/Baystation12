@@ -2034,7 +2034,7 @@
 	dir = 4;
 	icon_state = "0-1"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "eM" = (
 /obj/effect/floor_decal/industrial/warning{

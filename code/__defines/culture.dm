@@ -37,7 +37,6 @@
 #define HOME_SYSTEM_TAU_CETI   "Ceti Epsilon"
 #define HOME_SYSTEM_HELIOS	   "Eos"
 #define HOME_SYSTEM_TERRA 	   "Terra"
-#define HOME_SYSTEM_TERSTEN    "Tersten"
 #define HOME_SYSTEM_LORRIMAN   "Lorriman"
 #define HOME_SYSTEM_CINU       "Cinu"
 #define HOME_SYSTEM_YUKLID     "Yuklid V"
@@ -162,15 +161,12 @@
 #define CULTURE_UNATHI_SAVANNAH       "Savannah Clans"
 #define CULTURE_UNATHI_SALT_SWAMP     "Salt Swamp Clans"
 #define CULTURE_UNATHI_SPACE          "Space-Faring Clans"
-#define CULTURE_UNATHI_TERSTEN        "Tersten Clans"
 
 #define HOME_SYSTEM_MOGHES          "Moghes"
 #define HOME_SYSTEM_OUERE           "Ouere"
-#define HOME_SYSTEM_UNATHI_TERSTEN  "Tersten - Unathi Clans"
 #define HOME_SYSTEM_OFFWORLD        "Off-world"
 
 #define FACTION_UNATHI_HEGEMONY          "Moghes Hegemony"
-#define FACTION_UNATHI_TERSTEN_HEGEMONY  "Tersten Hegemony"
 #define FACTION_UNATHI_SSEN_UUMA         "Ssen-Uuma Convent"
 #define FACTION_UNATHI_INDEPENDENT       "Independent Faction"
 #define FACTION_UNATHI_BAASK             "Ba'ask Krukzuz"

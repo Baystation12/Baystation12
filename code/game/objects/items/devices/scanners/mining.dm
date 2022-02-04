@@ -7,6 +7,7 @@
 /obj/item/device/scanner/mining
 	name = "ore detector"
 	desc = "A complex device used to locate ore deep underground."
+	icon = 'icons/obj/ore_analyzer.dmi'
 	icon_state = "ore"
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 	use_delay = 50
@@ -19,8 +20,8 @@
 	. = ..()
 	to_chat(user,"A tiny indicator on the [src] shows it holds [survey_data] good explorer points.")
 
-/obj/item/device/scanner/mining/is_valid_scan_target(turf/simulated/T)
-	return istype(T)
+/obj/item/device/scanner/mining/is_valid_scan_target(atom/atom)
+	return isturf(atom)
 
 /obj/item/device/scanner/mining/scan(turf/simulated/T, mob/user)
 	scan_title = "Mineral scan data"
@@ -89,7 +90,7 @@
 
 	for(var/turf/simulated/T in range(2, target))
 
-		if(!T.has_resources)
+		if(!T.resources)
 			continue
 
 		for(var/metal in T.resources)
@@ -126,7 +127,7 @@
 			if(76 to INFINITY) result = "huge quantities"
 
 		scandata += "- [result] of [ore_type]."
-	
+
 	return list(jointext(scandata, "<br>"), new_data)
 
 #undef  ORE_SURFACE

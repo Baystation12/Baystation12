@@ -355,7 +355,7 @@
 /obj/structure/table/rack,
 /obj/item/clothing/suit/space/emergency,
 /obj/item/clothing/head/helmet/space/emergency,
-/obj/item/tank/emergency/oxygen/double,
+/obj/item/tank/oxygen_emergency_double,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "mp" = (

@@ -101,7 +101,7 @@
 	if(stat == DEAD)
 		stamina = 0
 	else
-		stamina = Clamp(stamina + amt, 0, 100)
+		stamina = clamp(stamina + amt, 0, 100)
 		if(stamina <= 0)
 			to_chat(src, SPAN_WARNING("You are exhausted!"))
 			if(MOVING_QUICKLY(src))
@@ -154,7 +154,7 @@
 		if(zone_exposure >= 1)
 			return 1
 		pressure_adjustment_coefficient = max(pressure_adjustment_coefficient, zone_exposure)
-	pressure_adjustment_coefficient = Clamp(pressure_adjustment_coefficient, 0, 1) // So it isn't less than 0 or larger than 1.
+	pressure_adjustment_coefficient = clamp(pressure_adjustment_coefficient, 0, 1) // So it isn't less than 0 or larger than 1.
 
 	return pressure_adjustment_coefficient
 
@@ -227,7 +227,7 @@
 		if(gene.is_active(src))
 			gene.OnMobLife(src)
 
-	radiation = Clamp(radiation,0,500)
+	radiation = clamp(radiation,0,500)
 
 	if(!radiation)
 		if(species.appearance_flags & RADIATION_GLOWS)
@@ -242,7 +242,7 @@
 			var/rads = radiation/25
 
 			radiation -= rads
-			set_nutrition(Clamp(nutrition+rads, 0, 550))
+			set_nutrition(clamp(nutrition+rads, 0, 550))
 
 			if (radiation < 2)
 				radiation = 0
@@ -382,7 +382,7 @@
 				temp_adj = (1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR)
 
 		//Use heat transfer as proportional to the gas density. However, we only care about the relative density vs standard 101 kPa/20 C air. Therefore we can use mole ratios
-		bodytemperature += between(BODYTEMP_COOLING_MAX, temp_adj*relative_density, BODYTEMP_HEATING_MAX)
+		bodytemperature += clamp(temp_adj * relative_density, BODYTEMP_COOLING_MAX, BODYTEMP_HEATING_MAX)
 
 	// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
 	if(bodytemperature >= getSpeciesOrSynthTemp(HEAT_LEVEL_1))
@@ -619,9 +619,9 @@
 			if(sleeping)
 				if (!dream_timer && client)
 					dream_timer = addtimer(CALLBACK(src, .proc/dream), 10 SECONDS, TIMER_STOPPABLE)
-				if (mind)
+				if (mind || ai_holder)
 					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
-					if(client || sleeping > 3)
+					if (client || ai_holder || sleeping > 3)
 						AdjustSleeping(-1)
 				species.handle_sleeping(src)
 			if(prob(2) && is_asystole() && isSynthetic())
@@ -795,7 +795,7 @@
 		if(cells && isSynthetic())
 			var/obj/item/organ/internal/cell/C = internal_organs_by_name[BP_CELL]
 			if (istype(C))
-				var/chargeNum = Clamp(ceil(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
+				var/chargeNum = clamp(Ceil(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
 				cells.icon_state = "charge[chargeNum]"
 			else
 				cells.icon_state = "charge-empty"
@@ -963,7 +963,7 @@
 
 
 /mob/living/carbon/human/proc/handle_hud_list()
-	if (BITTEST(hud_updateflag, HEALTH_HUD) && hud_list[HEALTH_HUD])
+	if (GET_BIT(hud_updateflag, HEALTH_HUD) && hud_list[HEALTH_HUD])
 		var/image/holder = hud_list[HEALTH_HUD]
 		if(stat == DEAD)
 			holder.icon_state = "0" 	// X_X
@@ -973,7 +973,7 @@
 			holder.icon_state = "[pulse()]"
 		hud_list[HEALTH_HUD] = holder
 
-	if (BITTEST(hud_updateflag, LIFE_HUD) && hud_list[LIFE_HUD])
+	if (GET_BIT(hud_updateflag, LIFE_HUD) && hud_list[LIFE_HUD])
 		var/image/holder = hud_list[LIFE_HUD]
 		if(stat == DEAD)
 			holder.icon_state = "huddead"
@@ -981,7 +981,7 @@
 			holder.icon_state = "hudhealthy"
 		hud_list[LIFE_HUD] = holder
 
-	if (BITTEST(hud_updateflag, STATUS_HUD) && hud_list[STATUS_HUD] && hud_list[STATUS_HUD_OOC])
+	if (GET_BIT(hud_updateflag, STATUS_HUD) && hud_list[STATUS_HUD] && hud_list[STATUS_HUD_OOC])
 		var/image/holder = hud_list[STATUS_HUD]
 		if(stat == DEAD)
 			holder.icon_state = "huddead"
@@ -1006,7 +1006,7 @@
 		hud_list[STATUS_HUD] = holder
 		hud_list[STATUS_HUD_OOC] = holder2
 
-	if (BITTEST(hud_updateflag, ID_HUD) && hud_list[ID_HUD])
+	if (GET_BIT(hud_updateflag, ID_HUD) && hud_list[ID_HUD])
 		var/image/holder = hud_list[ID_HUD]
 		holder.icon_state = "hudunknown"
 		if(wear_id)
@@ -1023,7 +1023,7 @@
 
 		hud_list[ID_HUD] = holder
 
-	if (BITTEST(hud_updateflag, WANTED_HUD) && hud_list[WANTED_HUD])
+	if (GET_BIT(hud_updateflag, WANTED_HUD) && hud_list[WANTED_HUD])
 		var/image/holder = hud_list[WANTED_HUD]
 		holder.icon_state = "hudblank"
 		var/perpname = name
@@ -1045,9 +1045,9 @@
 					holder.icon_state = "hudreleased"
 		hud_list[WANTED_HUD] = holder
 
-	if (  BITTEST(hud_updateflag, IMPLOYAL_HUD) \
-	   || BITTEST(hud_updateflag,  IMPCHEM_HUD) \
-	   || BITTEST(hud_updateflag, IMPTRACK_HUD))
+	if (  GET_BIT(hud_updateflag, IMPLOYAL_HUD) \
+	   || GET_BIT(hud_updateflag,  IMPCHEM_HUD) \
+	   || GET_BIT(hud_updateflag, IMPTRACK_HUD))
 
 		var/image/holder1 = hud_list[IMPTRACK_HUD]
 		var/image/holder2 = hud_list[IMPLOYAL_HUD]
@@ -1070,7 +1070,7 @@
 		hud_list[IMPLOYAL_HUD] = holder2
 		hud_list[IMPCHEM_HUD]  = holder3
 
-	if (BITTEST(hud_updateflag, SPECIALROLE_HUD))
+	if (GET_BIT(hud_updateflag, SPECIALROLE_HUD))
 		var/image/holder = hud_list[SPECIALROLE_HUD]
 		holder.icon_state = "hudblank"
 		if(mind && mind.special_role)
@@ -1161,3 +1161,11 @@
 	..()
 	if((CE_THIRDEYE in chem_effects) || (MUTATION_XRAY in mutations))
 		set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)
+
+/mob/living/ssd_check()
+	. = ..()
+
+	if (!.)
+		return
+
+	return !ai_holder

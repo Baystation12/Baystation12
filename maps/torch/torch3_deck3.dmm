@@ -9507,7 +9507,6 @@
 /obj/machinery/computer/arcade,
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = 1e+006
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1;
@@ -11399,7 +11398,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/thirddeck)
 "Au" = (
-/obj/machinery/bluespace_beacon,
+/obj/machinery/tele_beacon,
 /obj/effect/floor_decal/techfloor{
 	dir = 1;
 	icon_state = "techfloor_edges"
@@ -18300,10 +18299,10 @@
 /obj/structure/table/rack{
 	dir = 8
 	},
-/obj/item/tank/emergency/oxygen/double,
-/obj/item/tank/emergency/oxygen/double,
-/obj/item/tank/emergency/oxygen/double,
-/obj/item/tank/emergency/oxygen/double,
+/obj/item/tank/oxygen_emergency_double,
+/obj/item/tank/oxygen_emergency_double,
+/obj/item/tank/oxygen_emergency_double,
+/obj/item/tank/oxygen_emergency_double,
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -19005,7 +19004,6 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = 1e+006
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1;
@@ -20725,7 +20723,6 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = 1e+006
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1;

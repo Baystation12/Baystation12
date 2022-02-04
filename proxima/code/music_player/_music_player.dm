@@ -303,7 +303,7 @@ GLOBAL_LIST_EMPTY(music_players)
 		frequency += 0.1
 	else if(operation == tighten)
 		frequency -= 0.1
-	frequency = Clamp(frequency, MIN_FREQUENCY, MAX_FREQUENCY)
+	frequency = clamp(frequency, MIN_FREQUENCY, MAX_FREQUENCY)
 
 	user.visible_message(SPAN_NOTICE("\The [user] adjusts \the [src]'s player head."), SPAN_NOTICE("You adjust \the [src]'s player head."))
 	playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
@@ -377,7 +377,7 @@ GLOBAL_LIST_EMPTY(music_players)
 	return
 
 /obj/item/music_player/proc/AdjustVolume(new_volume)
-	volume = Clamp(new_volume, 0, max_volume)
+	volume = clamp(new_volume, 0, max_volume)
 	if(sound_token)
 		sound_token.SetVolume(volume)
 

@@ -12,7 +12,7 @@
 		spawncount = 3 * severity
 	else
 		spawncount = 5 * severity
-	guaranteed_to_grow = round(rand(spawncount / 2, spawncount / 3))
+	guaranteed_to_grow = round(rand(spawncount / 3, spawncount / 2))
 	sent_spiders_to_station = 0
 
 /datum/event/spider_infestation/announce()

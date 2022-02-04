@@ -2,7 +2,7 @@
 /obj/item/device/scanner/plant
 	name = "plant analyzer"
 	desc = "A hand-held botanical scanner used to analyze plants."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/plant_analyzer.dmi'
 	icon_state = "hydro"
 	item_state = "analyzer"
 	scan_sound = 'sound/effects/fastbeep.ogg'
@@ -48,7 +48,7 @@
 		var/area/map = locate(/area/overmap)
 		for(var/obj/effect/overmap/visitable/sector/exoplanet/P in map)
 			if(grown_seed in P.seeds)
-				SSstatistics.add_field(STAT_XENOPLANTS_SCANNED, 1)
+				GLOB.stat_flora_scanned += 1
 				break
 
 	var/list/dat = list()

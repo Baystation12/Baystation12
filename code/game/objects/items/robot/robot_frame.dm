@@ -29,7 +29,6 @@
 	for(var/part in required_parts)
 		if(!parts[part])
 			return FALSE
-	SSstatistics.add_field("cyborg_frames_built",1)
 	return TRUE
 
 /obj/item/robot_parts/robot_suit/attackby(obj/item/W as obj, mob/user as mob)
@@ -106,8 +105,6 @@
 
 		if(!user.unEquip(W))
 			return
-
-		SSstatistics.add_field("cyborg_frames_built",1)
 		var/mob/living/silicon/robot/O = new product(get_turf(loc))
 		if(!O)
 			return
@@ -132,8 +129,6 @@
 			var/datum/robot_component/cell_component = O.components["power cell"]
 			cell_component.wrapped = O.cell
 			cell_component.installed = 1
-
-		SSstatistics.add_field("cyborg_birth",1)
 		callHook("borgify", list(O))
 		O.Namepick()
 		qdel(src)

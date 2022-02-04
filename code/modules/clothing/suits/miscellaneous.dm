@@ -42,7 +42,9 @@
 		/obj/item/ammo_casing,
 		/obj/item/melee/baton,
 		/obj/item/handcuffs,
-		/obj/item/tank/emergency
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency
 	)
 	armor = list(
 		melee = ARMOR_MELEE_MAJOR,
@@ -111,7 +113,13 @@
 	desc = "A plastic replica of the syndicate space suit, you'll look just like a real murderous syndicate agent in this! This is a toy, it is not made for use in space!"
 	w_class = ITEM_SIZE_NORMAL
 	item_flags = null
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank/emergency,/obj/item/toy)
+	allowed = list(
+		/obj/item/device/flashlight,
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/toy
+	)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS|LEGS|FEET
 
@@ -359,6 +367,12 @@
 	name = "leather jacket"
 	desc = "A brown leather coat."
 	icon_state = "brown_jacket"
+	body_parts_covered = UPPER_TORSO|ARMS
+
+/obj/item/clothing/suit/storage/toggle/leather_hoodie
+	name = "leather hoodie jacket"
+	desc = "A brown leather hoodie, coloured in a dark tone. It's fun to tug at the strings."
+	icon_state = "leather_hoodie"
 	body_parts_covered = UPPER_TORSO|ARMS
 
 /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen

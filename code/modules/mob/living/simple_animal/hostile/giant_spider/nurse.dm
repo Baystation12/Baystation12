@@ -12,14 +12,14 @@
 	maxHealth = 40
 	health = 40
 
-	movement_cooldown = 5	// A bit faster so that they can inject the eggs easier.
+	movement_cooldown = 3	// A bit faster so that they can inject the eggs easier.
 
 	poison_per_bite = 5
 	poison_type = /datum/reagent/soporific
 
 	natural_weapon = /obj/item/natural_weapon/bite/spider/nurse
 
-	ai_holder_type = /datum/ai_holder/simple_animal/melee/nurse_spider
+	ai_holder = /datum/ai_holder/simple_animal/melee/nurse_spider
 
 	var/fed = 0 // Counter for how many egg laying 'charges' the spider has.
 	var/laying_eggs = FALSE	// Only allow one set of eggs to be laid at once.
@@ -97,19 +97,13 @@
 	// Finally done with the checks.
 	var/obj/effect/spider/cocoon/C = new(AM.loc)
 	var/large_cocoon = FALSE
-	for(var/mob/living/L in C.loc)
+	for(var/mob/living/L in C.contents)
 		if(istype(L, /mob/living/simple_animal/hostile/giant_spider)) // Cannibalism is bad.
 			continue
 		fed++
 		visible_message(SPAN_WARNING("\The [src] sticks a proboscis into \the [L], and sucks a viscous substance out."))
-		L.forceMove(C)
 		large_cocoon = TRUE
 		break
-
-	// This part's pretty stupid.
-	for(var/obj/O in C.loc)
-		if(!O.anchored)
-			O.forceMove(C)
 
 	if(large_cocoon)
 		C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")

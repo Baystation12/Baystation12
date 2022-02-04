@@ -81,8 +81,23 @@ SUBSYSTEM_DEF(zcopy)
 
 	enable()
 
-/datum/controller/subsystem/zcopy/stat_entry()
-	..("Mx:[json_encode(zlev_maximums)]\n\tQ:{T:[queued_turfs.len - (qt_idex - 1)]|O:[queued_overlays.len - (qo_idex - 1)]}\n\tT:{T:[openspace_turfs]|O:[openspace_overlays]}\n\tSk:{T:[multiqueue_skips_turf]|O:[multiqueue_skips_object]}")
+/datum/controller/subsystem/zcopy/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		text = {"\
+			[text]\n\
+			Mx: [json_encode(zlev_maximums)]\n\
+			Queues: \
+			Turfs [queued_turfs.len - (qt_idex - 1)] \
+			Overlays [queued_overlays.len - (qo_idex - 1)]\n\
+			Open Turfs: \
+			Turfs [openspace_turfs] \
+			Overlays [openspace_overlays]\n\
+			Skips: \
+			Turfs [multiqueue_skips_turf] \
+			Objects [multiqueue_skips_object]\
+		"}
+	..(text, force)
 
 /datum/controller/subsystem/zcopy/Initialize(timeofday)
 	calculate_zstack_limits()

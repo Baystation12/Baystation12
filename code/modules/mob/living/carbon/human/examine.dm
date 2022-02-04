@@ -182,9 +182,9 @@
 	var/ssd_msg = species.get_ssd(src)
 	if(ssd_msg && (!should_have_organ(BP_BRAIN) || has_brain()) && stat != DEAD)
 		if(!key)
-			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg]. [T.He] won't be recovering any time soon.</span>\n"
+			msg += SPAN_DEBUG("[T.He] [T.is] [ssd_msg]. [T.He] won't be recovering any time soon. (Ghosted)") + "\n"
 		else if(!client)
-			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg].</span>\n"
+			msg += SPAN_DEBUG("[T.He] [T.is] [ssd_msg]. (Disconnected)") + "\n"
 
 	if (admin_paralyzed)
 		msg += SPAN_DEBUG("OOC: [T.He] [T.has] been paralyzed by staff. Please avoid interacting with [T.him] unless cleared to do so by staff.") + "\n"
@@ -197,6 +197,10 @@
 		msg += "[T.He] looks a lot younger than you remember.\n"
 	if(became_older)
 		msg += "[T.He] looks a lot older than you remember.\n"
+
+	for (var/obj/aura/web/W in auras)
+		msg += SPAN_WARNING("[T.He] is covered in webs!\n")
+		break
 
 	var/list/wound_flavor_text = list()
 	var/applying_pressure = ""

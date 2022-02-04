@@ -22,7 +22,7 @@
 	unsuitable_atmos_damage = 10
 	natural_weapon = /obj/item/natural_weapon/clown
 
-	ai_holder_type = /datum/ai_holder/simple_animal/retaliate/clown
+	ai_holder = /datum/ai_holder/simple_animal/retaliate/clown
 	say_list = /datum/say_list/clown
 
 /obj/item/natural_weapon/clown

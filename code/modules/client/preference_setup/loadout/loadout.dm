@@ -371,46 +371,35 @@ var/list/gear_datums = list()
 
 /datum/gear/proc/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
 	var/obj/item/item = spawn_item(H, H, metadata)
-	if(H.equip_to_slot_if_possible(item, slot, del_on_fail = 1, force = 1))
+	if(H.equip_to_slot_if_possible(item, slot, TRYEQUIP_REDRAW | TRYEQUIP_DESTROY | TRYEQUIP_FORCE))
 		. = item
 
-/datum/gear/proc/spawn_in_storage_or_drop(var/mob/living/carbon/human/H, var/metadata)
-	var/obj/item/item = spawn_item(H, H, metadata)
-	item.add_fingerprint(H)
 
-	// Roundstart augments require special handling in order to properly install
-	// Putting this in "spawn_on_mob" requires overriding a bunch of logic, so we hook into here instead
+/datum/gear/proc/spawn_in_storage_or_drop(mob/living/carbon/human/subject, metadata)
+	var/obj/item/item = spawn_item(subject, subject, metadata)
+	item.add_fingerprint(subject)
 	if (istype(item, /obj/item/organ/internal/augment))
-		var/obj/item/organ/internal/augment/A = item
-		var/obj/item/organ/external/affected = H.get_organ(A.parent_organ)
-		if (!affected)
-			to_chat(H, SPAN_WARNING("Failed to install \the [A]!"))
-			QDEL_NULL(A)
-		else
-			var/beep_boop = BP_IS_ROBOTIC(affected)
-			var/obj/item/organ/internal/I = H.internal_organs_by_name[A.organ_tag]
-			if (!(A.augment_flags & AUGMENT_MECHANICAL) && beep_boop)
-				to_chat(H, SPAN_WARNING("\The [A] cannot be installed in a robotic part!"))
-				QDEL_NULL(A)
-			else if (!(A.augment_flags & AUGMENT_BIOLOGICAL) && !beep_boop)
-				to_chat(H, SPAN_WARNING("\The [A] cannot be installed in an organic part!"))
-				QDEL_NULL(A)
-			else if(I && (I.parent_organ == A.parent_organ))
-				to_chat(H, SPAN_WARNING("\The [A] could not be installed because you can only have one [A.organ_tag] at a time."))
-				QDEL_NULL(A)
-			else
-				to_chat(H, SPAN_NOTICE("Installing \the [A] in your [affected.name]!"))
-				A.forceMove(H)
-				A.replaced(H, affected)
-				A.onRoundstart()
-				. = A
+		var/obj/item/organ/internal/augment/augment = item
+		var/obj/item/organ/external/parent = augment.get_valid_parent_organ(subject)
+		if (!parent)
+			to_chat(subject, SPAN_WARNING("Failed to find a valid organ to install \the [augment] into!"))
+			qdel(augment)
+			return
+		var/surgery_step = decls_repository.get_decl(/decl/surgery_step/internal/replace_organ)
+		if (augment.surgery_configure(subject, subject, parent, null, surgery_step))
+			to_chat(subject, SPAN_WARNING("Failed to set up \the [augment] for installation in your [parent.name]!"))
+			qdel(augment)
+			return
+		augment.forceMove(subject)
+		augment.replaced(subject, parent)
+		augment.onRoundstart()
+		return
+	var/atom/container = subject.equip_to_storage(item)
+	if (container)
+		to_chat(subject, SPAN_NOTICE("Placing \the [item] in your [container.name]!"))
+	else if (subject.equip_to_appropriate_slot(item))
+		to_chat(subject, SPAN_NOTICE("Placing \the [item] in your inventory!"))
+	else if (subject.put_in_hands(item))
+		to_chat(subject, SPAN_NOTICE("Placing \the [item] in your hands!"))
 	else
-		var/atom/placed_in = H.equip_to_storage(item)
-		if(placed_in)
-			to_chat(H, SPAN_NOTICE("Placing \the [item] in your [placed_in.name]!"))
-		else if(H.equip_to_appropriate_slot(item))
-			to_chat(H, SPAN_NOTICE("Placing \the [item] in your inventory!"))
-		else if(H.put_in_hands(item))
-			to_chat(H, SPAN_NOTICE("Placing \the [item] in your hands!"))
-		else
-			to_chat(H, SPAN_DANGER("Dropping \the [item] on the ground!"))
+		to_chat(subject, SPAN_WARNING("Dropping \the [item] on the ground!"))

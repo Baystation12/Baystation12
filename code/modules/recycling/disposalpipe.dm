@@ -10,7 +10,7 @@
 	level = 1			// underfloor only
 	var/dpdir = 0		// bitmask of pipe directions
 	dir = 0				// dir will contain dominant direction for junction pipes
-	var/health = 10 	// health points 0-10
+	health_max = 10
 	alpha = 192 // Plane and alpha modified for mapping, reset to normal on spawn.
 	layer = ABOVE_TILE_LAYER
 	var/base_icon_state	// initial icon state on map
@@ -194,41 +194,23 @@ obj/structure/disposalpipe/Destroy()
 	spawn(2)	// delete pipe after 2 ticks to ensure expel proc finished
 		qdel(src)
 
-
-// pipe affected by explosion
-/obj/structure/disposalpipe/ex_act(severity)
-
-	switch(severity)
-		if(1.0)
-			broken(0)
-			return
-		if(2.0)
-			health -= rand(5,15)
-			healthcheck()
-			return
-		if(3.0)
-			health -= rand(0,15)
-			healthcheck()
-			return
-
-
-	// test health for brokenness
-/obj/structure/disposalpipe/proc/healthcheck()
-	if(health < -2)
-		broken(0)
-	else if(health<1)
-		broken(1)
-	return
+/obj/structure/disposalpipe/handle_death_change(new_death_state)
+	if (new_death_state)
+		broken(prob(0.5))
 
 //attack by item
 //weldingtool: unfasten and convert to obj/disposalconstruct
 
-/obj/structure/disposalpipe/attackby(var/obj/item/I, var/mob/user)
-
+/obj/structure/disposalpipe/attackby(obj/item/I, mob/user)
 	var/turf/T = src.loc
 	if(!T.is_plating())
 		return		// prevent interaction with T-scanner revealed pipes
 	src.add_fingerprint(user, 0, I)
+
+	if (user.a_intent == I_HURT)
+		..()
+		return
+
 	if(istype(I, /obj/item/weldingtool))
 		var/obj/item/weldingtool/W = I
 		if(W.remove_fuel(0,user))
@@ -245,7 +227,9 @@ obj/structure/disposalpipe/Destroy()
 				to_chat(user, "You must stay still while welding the pipe.")
 		else
 			to_chat(user, "You need more welding fuel to cut the pipe.")
-			return
+		return
+
+	..()
 
 	// called when pipe is cut with welder
 /obj/structure/disposalpipe/proc/welded()
@@ -796,6 +780,9 @@ obj/structure/disposalpipe/Destroy()
 			sleep(30)
 			if(!W.isOn()) return
 			if(user.loc == uloc && wloc == W.loc)
+				if(linked && istype(linked,/obj/machinery/disposal))
+					var/obj/machinery/disposal/D = linked
+					D.trunk = null
 				welded()
 			else
 				to_chat(user, "You must stay still while welding the pipe.")

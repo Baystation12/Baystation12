@@ -9,7 +9,7 @@
 	var/obj/item/tank/airtank
 
 /obj/item/bodybag/rescue/loaded
-	airtank = /obj/item/tank/emergency/oxygen/double
+	airtank = /obj/item/tank/oxygen_emergency_double
 
 /obj/item/bodybag/rescue/Initialize()
 	. = ..()

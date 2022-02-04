@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/aquatic
 	icon = 'icons/mob/simple_animal/aquatic.dmi'
-	meat_type = /obj/item/reagent_containers/food/snacks/fish
+	meat_type = /obj/item/reagent_containers/food/snacks/fish/unknown
 	turns_per_move = 5
 	natural_weapon = /obj/item/natural_weapon/bite
 	speed = 4
@@ -11,7 +11,7 @@
 	min_gas = list()
 	minbodytemp = 0
 
-	ai_holder_type = /datum/ai_holder/simple_animal/melee/aquatic
+	ai_holder = /datum/ai_holder/simple_animal/melee/aquatic
 
 /mob/living/simple_animal/hostile/aquatic/Life()
 	if(!submerged())

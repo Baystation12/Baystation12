@@ -229,7 +229,7 @@
 	return "<h2>Exoplanetary outpost blueprints</h2><small>Property of [GLOB.using_map.company_name].</small><hr>"
 
 /obj/item/blueprints/outpost/check_tile_is_border(var/turf/T2,var/dir)
-	if (istype(T2, /turf/simulated/floor/exoplanet/))
+	if (istype(T2, /turf/unsimulated/floor/exoplanet/))
 		return BORDER_SPACE
 	. = ..()
 

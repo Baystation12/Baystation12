@@ -4,7 +4,6 @@
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "handcuff"
-	health = 0
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	throwforce = 5
@@ -18,14 +17,6 @@
 	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes
 	var/cuff_sound = 'sound/weapons/handcuffs.ogg'
 	var/cuff_type = "handcuffs"
-
-/obj/item/handcuffs/examine(mob/user)
-	. = ..()
-	if (health)
-		var display = health / initial(health) * 100
-		if (display > 66)
-			return
-		to_chat(user, SPAN_WARNING("They look [display < 33 ? "badly ": ""]damaged."))
 
 /obj/item/handcuffs/get_icon_state(mob/user_mob, slot)
 	if(slot == slot_handcuffed_str)
@@ -100,7 +91,6 @@
 		return 0
 
 	admin_attack_log(user, H, "Attempted to handcuff the victim", "Was target of an attempted handcuff", "attempted to handcuff")
-	SSstatistics.add_field_details("handcuffs","H")
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(H)
@@ -143,7 +133,7 @@ var/last_chew = 0
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
 	cuff_type = "cable restraints"
 	elastic = 1
-	health = 75
+	health_max = 75
 
 /obj/item/handcuffs/cable/red
 	color = COLOR_MAROON
@@ -180,4 +170,4 @@ var/last_chew = 0
 	icon = 'icons/obj/bureaucracy.dmi'
 	breakouttime = 200
 	cuff_type = "duct tape"
-	health = 50
+	health_max = 50

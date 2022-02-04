@@ -32,7 +32,7 @@
 
 	var/mob/living/simple_animal/hostile/retaliate/space_whale/parent
 
-	ai_holder_type = /datum/ai_holder/simple_animal/passive
+	ai_holder = /datum/ai_holder/simple_animal/passive
 	say_list_type = /datum/say_list/juvenile_space_whale
 
 /mob/living/simple_animal/passive/juvenile_space_whale/New()

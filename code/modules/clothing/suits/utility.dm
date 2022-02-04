@@ -21,7 +21,15 @@
 
 	body_parts_covered = UPPER_TORSO | LOWER_TORSO| ARMS
 	armor = list(laser = ARMOR_LASER_MINOR, energy = ARMOR_ENERGY_MINOR, bomb = ARMOR_BOMB_MINOR)
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank/emergency,/obj/item/extinguisher,/obj/item/crowbar/emergency_forcing_tool,/obj/item/clothing/head)
+	allowed = list(
+		/obj/item/device/flashlight,
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/extinguisher,
+		/obj/item/crowbar/emergency_forcing_tool,
+		/obj/item/clothing/head
+	)
 
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
@@ -54,7 +62,7 @@
 	w_class = ITEM_SIZE_HUGE//bulky item
 
 /obj/item/clothing/suit/fire/heavy/Initialize()
-	..()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 0.5
 
 /*
@@ -97,8 +105,8 @@
 	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0
 
-/obj/item/clothing/suit/bomb_suit/New()
-	..()
+/obj/item/clothing/suit/bomb_suit/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 2
 
 /obj/item/clothing/head/bomb_hood/security
@@ -137,13 +145,21 @@
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS|FEET
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank/emergency,/obj/item/clothing/head/radiation,/obj/item/clothing/mask/gas,/obj/item/device/geiger)
+	allowed = list(
+		/obj/item/device/flashlight,
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency,
+		/obj/item/clothing/head/radiation,
+		/obj/item/clothing/mask/gas,
+		/obj/item/device/geiger
+	)
 	armor = list(
 		bio = ARMOR_BIO_RESISTANT,
 		rad = ARMOR_RAD_SHIELDED
 		)
 	flags_inv = HIDEJUMPSUIT|HIDETAIL|HIDEGLOVES|HIDESHOES
 
-/obj/item/clothing/suit/radiation/New()
-	..()
+/obj/item/clothing/suit/radiation/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_shoes] = 1.5

@@ -117,9 +117,9 @@
 		)
 
 /obj/item/clothing/head/helmet/space/rig/eva
-	light_overlay = "helmet_light_dual"
+	light_overlay = "helmet_light_alt"
 	camera = /obj/machinery/camera/network/engineering
-	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
 	sprite_sheets = list(
 		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_head_skrell.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_helmet_unathi.dmi'

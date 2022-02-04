@@ -37,7 +37,7 @@
 
 /decl/hierarchy/outfit/reaper
 	name = "Reaper"
-	uniform = /obj/item/clothing/under/suit_jacket{ accessories=list(/obj/item/clothing/accessory/wcoat/black) }
+	uniform = /obj/item/clothing/under/suit_jacket{ accessories=list(/obj/item/clothing/accessory/waistcoat/black) }
 	shoes = /obj/item/clothing/shoes/black
 	gloves = /obj/item/clothing/gloves/thick
 	l_ear = /obj/item/device/radio/headset

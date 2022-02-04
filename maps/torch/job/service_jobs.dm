@@ -31,8 +31,6 @@
 		access_radio_serv
 	)
 
-	minimal_access = list()
-
 /datum/job/janitor
 	title = "Sanitation Technician"
 	department = "Service"
@@ -69,20 +67,20 @@
 		access_radio_serv
 	)
 
-	minimal_access = list()
 
 /datum/job/chef
-	title = "Cook"
+	title = "Steward"
 	department = "Service"
 	department_flag = SRV
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	minimum_character_age = list(SPECIES_HUMAN = 18)
 	supervisors = "the Executive Officer"
 	alt_titles = list(
-		"Chef",
+		"Bartender",
+		"Cook",
 		"Culinary Specialist"
-		)
+	)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/cook
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
@@ -100,39 +98,19 @@
 		/datum/mil_rank/army/e3,
 		/datum/mil_rank/army/e4
 	)
-	min_skill = list(   SKILL_COOKING   = SKILL_ADEPT,
-	                    SKILL_BOTANY    = SKILL_BASIC,
-	                    SKILL_CHEMISTRY = SKILL_BASIC)
-
+	min_skill = list(
+		SKILL_BOTANY = SKILL_BASIC,
+		SKILL_CHEMISTRY = SKILL_BASIC,
+		SKILL_COOKING = SKILL_ADEPT
+	)
 	access = list(
-		access_hydroponics, access_kitchen,
-		access_solgov_crew, access_bar,
-		access_commissary, access_radio_serv
+		access_commissary,
+		access_hydroponics,
+		access_kitchen,
+		access_radio_serv,
+		access_solgov_crew
 	)
 
-	minimal_access = list()
-
-/datum/job/bartender
-	department = "Service"
-	department_flag = SRV
-	supervisors = "the Executive Officer and the Corporate Liaison"
-	minimum_character_age = list(SPECIES_HUMAN = 18)
-	ideal_character_age = 30
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/bartender
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
-
-	access = list(
-		access_hydroponics, access_bar,
-		access_solgov_crew, access_kitchen,
-		access_commissary, access_radio_serv
-	)
-
-	minimal_access = list()
-
-	min_skill = list(   SKILL_COOKING   = SKILL_BASIC,
-	                    SKILL_BOTANY    = SKILL_BASIC,
-	                    SKILL_CHEMISTRY = SKILL_BASIC)
 
 /datum/job/crew
 	title = "Crewman"

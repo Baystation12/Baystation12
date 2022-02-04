@@ -3,6 +3,7 @@
 	desc = "A complex single use recharging injector that spreads a complex neurological serum that makes animals docile and friendly. Somewhat."
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_BIO = 5, TECH_MATERIAL = 2)
+	icon = 'icons/obj/dociler.dmi'
 	icon_state = "animal_tagger1"
 	item_icons = list(
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns.dmi',

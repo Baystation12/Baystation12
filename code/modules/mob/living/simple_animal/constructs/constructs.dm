@@ -34,7 +34,7 @@
 	var/nullblock = 0
 	var/list/construct_spells = list()
 
-	ai_holder_type = /datum/ai_holder/simple_animal/melee
+	ai_holder = /datum/ai_holder/simple_animal/melee
 	say_list = /datum/say_list/construct
 
 /mob/living/simple_animal/construct/cultify()

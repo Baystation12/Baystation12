@@ -91,41 +91,42 @@
 		O = A
 	if(C)
 		var/length = 10
-		var/done_any = FALSE
 		var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
 		sparks.set_up(1, 1, user.loc)
 		sparks.start()
 		if(C.charge >= C.maxcharge)
-			to_chat(user, "<span class='notice'>\The [A] is fully charged!</span>")
+			to_chat(user, SPAN_WARNING("\The [A] is already fully charged!"))
 			recharging = FALSE
 			return TRUE
-		user.visible_message("\The [user] starts recharging \the [A] with \the [src].","<span class='notice'>You start recharging \the [A] with \the [src].</span>")
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts recharging \the [A] with \the [src]."),
+			SPAN_NOTICE("You start recharging \the [A] with \the [src].")
+		)
 		if (istype(A, /obj/item/gun/energy))
 			length = 30
 			if (user.get_skill_value(SKILL_WEAPONS) <= SKILL_ADEPT)
 				length += rand(10, 30)
 		if (user.get_skill_value(SKILL_ELECTRICAL) < SKILL_ADEPT)
 			length += rand(40, 60)
-		while(C.charge < C.maxcharge)
-			if(MyC.charge > max(0, MyC.charge*failsafe) && do_after(user, length))
-				if(CannotUse(user))
-					return TRUE
-				if(QDELETED(C))
-					return TRUE
-				sparks.start()
-				done_any = TRUE
-				induce(C)
-				if(O)
-					O.update_icon()
-			else
-				qdel(sparks)
-				break
-		if(done_any) // Only show a message if we succeeded at least once
-			user.visible_message("\The [user] recharged \the [A]!","<span class='notice'>You recharged \the [A]!</span>")
+		if(MyC.charge > max(0, MyC.charge*failsafe) && do_after(user, length))
+			if(CannotUse(user))
+				return TRUE
+			if(QDELETED(C))
+				return TRUE
+			sparks.start()
+			induce(C)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] recharges \the [A] with \the [src]."),
+				SPAN_NOTICE("You recharge \the [A] with \the [src].")
+			)
+			if(O)
+				O.update_icon()
+		else
+			qdel(sparks)
 		recharging = FALSE
 		return TRUE
 	else
-		to_chat(user, "<span class='warning'>No cell detected!</span>")
+		to_chat(user, SPAN_WARNING("No cell detected!"))
 	recharging = FALSE
 
 // used only on the borg one, but here in case we invent inducer guns idk

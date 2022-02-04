@@ -184,7 +184,7 @@
 
 	var/list/dirList = list()
 
-	for(var/i=1,i<=16,i <<= 1)
+	for(var/i=1,i<=16, i = SHIFTL(i, 1))
 		if(direction & i)
 			dirList += i
 
@@ -279,7 +279,7 @@
 	return
 
 /obj/effect/vine/proc/adjust_health(value)
-	health = Clamp(health + value, 0, max_health)
+	health = clamp(health + value, 0, max_health)
 	if(health <= 0)
 		die_off()
 

@@ -138,7 +138,7 @@
 		/obj/item/storage/belt/utility/full,
 		/obj/item/device/radio/headset/headset_eng,
 		/obj/item/device/radio/headset/headset_eng/alt,
-		/obj/item/tank/emergency/oxygen/double,
+		/obj/item/tank/oxygen_emergency_double,
 		/obj/item/clothing/mask/gas,
 		/obj/item/taperoll/atmos,
 		/obj/item/device/scanner/gas,

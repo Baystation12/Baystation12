@@ -397,6 +397,7 @@
 
 /area/aquila/medical
 	name = "\improper SEV Aquila - Medical"
+	lighting_tone = AREA_LIGHTING_COOL
 
 /area/aquila/head
 	name = "\improper SEV Aquila - Head"
@@ -424,6 +425,7 @@
 	dynamic_lighting = 1
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 	req_access = list(access_petrov)
+	lighting_tone = AREA_LIGHTING_COOL
 
 /area/shuttle/petrov/cell1
 	name = "\improper SRV Petrov - Isolation Cell 1"
@@ -439,10 +441,10 @@
 	name = "\improper SRV Petrov - Lower Hallway"
 	icon_state = "hallA"
 
-/area/shuttle/petrov/security
-	name = "\improper SRV Petrov - Security Office"
+/area/shuttle/petrov/control
+	name = "\improper SRV Petrov - Control Room"
 	icon_state = "checkpoint1"
-	req_access = list(access_petrov_security)
+	req_access = list(access_petrov_control)
 
 /area/shuttle/petrov/rd
 	icon_state = "heads_rd"
@@ -459,6 +461,7 @@
 	name = "\improper SRV Petrov - Maintenance"
 	icon_state = "engine"
 	req_access = list(access_petrov_maint)
+	lighting_tone = AREA_LIGHTING_DEFAULT
 
 /area/shuttle/petrov/analysis
 	name = "\improper SRV Petrov - Analysis Lab"
@@ -486,6 +489,7 @@
 /area/shuttle/petrov/custodial
 	name = "\improper SRV Petrov - Custodial"
 	icon_state = "decontamination"
+	lighting_tone = AREA_LIGHTING_DEFAULT
 
 /area/shuttle/petrov/equipment
 	name = "\improper SRV Petrov - Equipment Storage"
@@ -541,6 +545,7 @@
 	name = "\improper Medical Lift"
 	icon_state = "shuttle3"
 	base_turf = /turf/simulated/open
+	lighting_tone = AREA_LIGHTING_COOL
 
 //Merchant
 
@@ -598,6 +603,7 @@
 	name = "Officer's Mess"
 	icon_state = "bar"
 	sound_env = MEDIUM_SOFTFLOOR
+	lighting_tone = AREA_LIGHTING_WARM
 
 /area/command/pathfinder
 	name = "\improper Pathfinder's Office"
@@ -638,27 +644,32 @@
 	name = "\improper Command - CO's Quarters"
 	sound_env = MEDIUM_SOFTFLOOR
 	req_access = list(access_captain)
+	lighting_tone = AREA_LIGHTING_WARM
 
 /area/crew_quarters/heads/office/co
 	icon_state = "heads_cap"
 	name = "\improper Command - CO's Office"
 	sound_env = MEDIUM_SOFTFLOOR
 	req_access = list(access_captain)
+	lighting_tone = AREA_LIGHTING_WARM
 
 /area/crew_quarters/heads/office/xo
 	icon_state = "heads_hop"
 	name = "\improper Command - XO's Office"
 	req_access = list(access_hop)
+	lighting_tone = AREA_LIGHTING_WARM
 
 /area/crew_quarters/heads/office/rd
 	icon_state = "heads_rd"
 	name = "\improper Command - CSO's Office"
 	req_access = list(access_rd)
+	lighting_tone = AREA_LIGHTING_COOL
 
 /area/crew_quarters/heads/office/cmo
 	icon_state = "heads_cmo"
 	name = "\improper Command - CMO's Office"
 	req_access = list(access_cmo)
+	lighting_tone = AREA_LIGHTING_COOL
 
 /area/crew_quarters/heads/office/ce
 	icon_state = "heads_ce"
@@ -674,6 +685,7 @@
 	icon_state = "heads_cl"
 	name = "\improper Command - CL's Office"
 	req_access = list(access_liaison)
+	lighting_tone = AREA_LIGHTING_WARM
 
 /area/crew_quarters/heads/office/cl/backroom
 	icon_state = "heads_cl"
@@ -684,6 +696,7 @@
 	icon_state = "heads_sr"
 	name = "\improper Command - SCGR's Office"
 	req_access = list(access_representative)
+	lighting_tone = AREA_LIGHTING_WARM
 
 /area/crew_quarters/heads/office/sea
 	icon_state = "heads_sea"
@@ -741,6 +754,7 @@
 /area/vacant/mess
 	name = "\improper Old Mess"
 	icon_state = "bar"
+	lighting_tone = AREA_LIGHTING_WARM
 
 /area/vacant/chapel
 	name = "\improper Unused Chapel"
@@ -749,6 +763,7 @@
 /area/vacant/infirmary
 	name = "\improper Auxiliary Infirmary"
 	icon_state = "medbay"
+	lighting_tone = AREA_LIGHTING_COOL
 
 /area/vacant/monitoring
 	name = "\improper Auxiliary Monitoring Room"
@@ -776,6 +791,7 @@
 /area/vacant/bar
 	name = "\improper Hidden Bar"
 	icon_state = "bar"
+	lighting_tone = AREA_LIGHTING_WARM
 
 // Storage
 /area/storage/auxillary
@@ -800,12 +816,14 @@
 	icon_state = "medbay4"
 	sound_env = SMALL_ENCLOSED
 	req_access = list(access_medical)
+	lighting_tone = AREA_LIGHTING_COOL
 
 /area/storage/research
 	name = "Research Storage"
 	icon_state = "toxstorage"
 	sound_env = SMALL_ENCLOSED
 	req_access = list(access_research)
+	lighting_tone = AREA_LIGHTING_COOL
 
 // Supply
 
@@ -911,7 +929,8 @@
 	name = "\improper Bar"
 	icon_state = "bar"
 	sound_env = LARGE_SOFTFLOOR
-	req_access = list(access_bar)
+	req_access = list(access_kitchen)
+	lighting_tone = AREA_LIGHTING_WARM
 
 /area/crew_quarters/cryolocker
 	name = "\improper Cryogenic Storage Wardrobe"
@@ -936,10 +955,12 @@
 /area/crew_quarters/mess
 	name = "\improper Mess Hall"
 	icon_state = "cafeteria"
+	lighting_tone = AREA_LIGHTING_WARM
 
 /area/crew_quarters/recreation
 	name = "\improper Recreation"
 	icon_state = "crew_quarters"
+	lighting_tone = AREA_LIGHTING_WARM
 
 /area/crew_quarters/observation
 	name = "\improper Observation"
@@ -949,11 +970,13 @@
 	name = "\improper Galley"
 	icon_state = "kitchen"
 	req_access = list(access_kitchen)
+	lighting_tone = AREA_LIGHTING_COOL
 
 /area/crew_quarters/galleybackroom
 	name = "\improper Galley Cold Storage"
 	icon_state = "kitchen"
 	req_access = list(access_kitchen)
+	lighting_tone = AREA_LIGHTING_COOL
 
 /area/crew_quarters/commissary
 	name = "\improper Commissary"
@@ -964,6 +987,7 @@
 	name = "\improper Lounge"
 	icon_state = "crew_quarters"
 	sound_env = MEDIUM_SOFTFLOOR
+	lighting_tone = AREA_LIGHTING_WARM
 
 /area/crew_quarters/safe_room
 	name = "\improper Safe Room"
@@ -976,6 +1000,7 @@
 	icon_state = "Sleep"
 	sound_env = SMALL_SOFTFLOOR
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	lighting_tone = AREA_LIGHTING_WARM
 
 /area/crew_quarters/sleep/cryo/aux
 	name = "\improper First Deck Cryogenic Storage"
@@ -1032,6 +1057,7 @@
 	icon_state = "detective"
 	sound_env = MEDIUM_SOFTFLOOR
 	req_access = list(access_forensics_lockers)
+	lighting_tone = AREA_LIGHTING_COOL
 
 /area/security/locker
 	name = "\improper Security - Locker Room"
@@ -1116,6 +1142,7 @@
 /area/medical/counselor/therapy
 	name = "\improper Counselor's Therapy Room"
 	icon_state = "medbay3"
+	lighting_tone = AREA_LIGHTING_WARM
 
 /area/medical/sleeper
 	name = "\improper Emergency Treatment Centre"
@@ -1469,20 +1496,10 @@
 	sound_env = SMALL_ENCLOSED
 	req_access = list(access_engine, access_engine_equip)
 
-/area/engineering/engineering_monitoring
-	name = "\improper Engineering Monitoring Room"
-	icon_state = "engine_monitoring"
-	req_access = list(access_engine)
-
 /area/engineering/foyer
 	name = "\improper Engineering Foyer"
 	icon_state = "engineering_foyer"
 	req_access = list()
-
-/area/engineering/locker_room
-	name = "\improper Engineering Locker Room"
-	icon_state = "engineering_locker"
-	req_access = list(access_engine)
 
 /area/engineering/engineering_bay
 	name = "\improper Engineering Bay"
@@ -1521,6 +1538,7 @@ area/assembly/robotics/office
 
 /area/assembly/robotics/surgery
 	name = "\improper Robotics Operating Theatre"
+	lighting_tone = AREA_LIGHTING_COOL
 
 /area/rnd/misc_lab
 	name = "\improper Miscellaneous Research"
@@ -1587,6 +1605,7 @@ area/assembly/robotics/office
 /area/hydroponics
 	name = "\improper Hydroponics"
 	icon_state = "hydro"
+	lighting_tone = AREA_LIGHTING_COOL
 
 /area/janitor
 	name = "\improper Custodial Closet"

@@ -1,6 +1,6 @@
 
 /obj/structure/table/proc/straight_table_check(var/direction)
-	if(health > 100)
+	if(get_current_health() > 100)
 		return 0
 	var/obj/structure/table/T
 	for(var/angle in list(-90,90))
@@ -94,7 +94,7 @@
 		var/obj/structure/table/T = locate() in get_step(src,D)
 		if(T && T.can_connect() && T.flipped == 0 && material && T.material && T.material.name == material.name)
 			T.flip(direction)
-	take_damage(rand(5, 10))
+	damage_health(rand(5, 10), BRUTE)
 	update_connections(1)
 	update_icon()
 

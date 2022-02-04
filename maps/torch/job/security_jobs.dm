@@ -40,8 +40,6 @@
 		access_radio_sec
 	)
 
-	minimal_access = list()
-
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
 
@@ -94,8 +92,6 @@
 		access_torch_fax, access_network, access_radio_sec
 	)
 
-	minimal_access = list()
-
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
 
@@ -141,8 +137,6 @@
 		access_eva, access_sec_doors, access_solgov_crew,
 		access_radio_sec
 	)
-
-	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)

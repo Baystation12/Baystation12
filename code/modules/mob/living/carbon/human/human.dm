@@ -239,6 +239,10 @@
 	if(handcuffed)
 		dat += "<BR><A href='?src=\ref[src];item=[slot_handcuffed]'>Handcuffed</A>"
 
+	for (var/obj/aura/web/W in auras)
+		dat += "<BR><A href='?src=\ref[src];webbed=1'>Webbed</A>"
+		break
+
 	for(var/entry in worn_underwear)
 		var/obj/item/underwear/UW = entry
 		dat += "<BR><a href='?src=\ref[src];item=\ref[UW]'>Remove \the [UW]</a>"
@@ -256,10 +260,6 @@
 	if(istype(AM, /mob/living/bot/mulebot))
 		var/mob/living/bot/mulebot/MB = AM
 		MB.runOver(src)
-
-	if(istype(AM, /obj/vehicle))
-		var/obj/vehicle/V = AM
-		V.RunOver(src)
 
 // Get rank from ID, ID inside PDA, PDA, ID in wallet, etc.
 /mob/living/carbon/human/proc/get_authentification_rank(var/if_no_id = "No id", var/if_no_job = "No job")
@@ -457,7 +457,7 @@
 					modified = 1
 
 					spawn()
-						BITSET(hud_updateflag, WANTED_HUD)
+						SET_BIT(hud_updateflag, WANTED_HUD)
 						if(istype(user,/mob/living/carbon/human))
 							var/mob/living/carbon/human/U = user
 							U.handle_regular_hud_updates()
@@ -544,6 +544,12 @@
 			if(!read)
 				to_chat(user, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
 			return TOPIC_HANDLED
+
+	if (href_list["webbed"])
+		for (var/obj/aura/web/W in auras)
+			W.remove_webbing(user)
+		return TOPIC_HANDLED
+
 
 	return ..()
 
@@ -728,25 +734,15 @@
 		handle_additional_vomit_reagents(splat)
 		splat.update_icon()
 
-/mob/living/carbon/human/proc/vomit(timevomit = 1, level = 3, delay = 0, deliberate = FALSE)
+/mob/living/carbon/human/proc/vomit(timevomit = 1, level = 3, delay = 0)
 
 	set waitfor = 0
 
 	if(!check_has_mouth() || isSynthetic() || !timevomit || !level || stat == DEAD || lastpuke)
 		return
 
-	if(deliberate)
-		if(incapacitated())
-			to_chat(src, SPAN_WARNING("You cannot do that right now."))
-			return
-		var/datum/gender/G = gender_datums[gender]
-		visible_message(SPAN_DANGER("\The [src] starts sticking a finger down [G.his] own throat. It looks like [G.he] [G.is] trying to throw up!"))
-		if(!do_after(src, 30))
-			return
-		timevomit = max(timevomit, 5)
-
-	timevomit = Clamp(timevomit, 1, 10)
-	level = Clamp(level, 1, 3)
+	timevomit = clamp(timevomit, 1, 10)
+	level = clamp(level, 1, 3)
 
 	lastpuke = TRUE
 	if(delay)
@@ -1688,7 +1684,7 @@
 				status += "MISSING"
 			if(org.status & ORGAN_MUTATED)
 				status += "misshapen"
-			if(org.dislocated == 2)
+			if(org.dislocated >= 1)
 				status += "dislocated"
 			if(org.status & ORGAN_BROKEN)
 				status += "hurts when touched"

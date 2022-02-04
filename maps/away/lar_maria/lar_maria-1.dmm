@@ -449,8 +449,7 @@
 "bm" = (
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/structure/hygiene/shower{
 	dir = 4;
@@ -577,8 +576,7 @@
 "bH" = (
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/structure/hygiene/shower{
 	dir = 4;
@@ -2186,8 +2184,7 @@
 	dir = 4
 	},
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -2201,8 +2198,7 @@
 	dir = 9
 	},
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/machinery/door/window/eastright,
 /turf/simulated/floor/tiled/white,

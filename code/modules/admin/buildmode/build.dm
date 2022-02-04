@@ -2,8 +2,7 @@
 	the_default = TRUE
 	name = "Build Mode"
 	icon_state = "mode_build"
-	var/build_type
-	var/help_text = {"\
+	var/static/help_text = {"\
 	***********Build Mode***********
 	Left Click = Create Atom
 	Right Click = Delete Atom
@@ -13,6 +12,7 @@
 	Directional Arrow Button = Direction On Creation
 	********************************
 	"}
+	var/build_type
 
 /datum/build_mode/build/Help()
 	to_chat(user, help_text)

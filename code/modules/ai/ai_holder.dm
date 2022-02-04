@@ -1,38 +1,54 @@
-// This is a datum-based artificial intelligence for simple mobs (and possibly others) to use.
-// The neat thing with having this here instead of on the mob is that it is independant of Life(), and that different mobs
-// can use a more or less complex AI by giving it a different datum.
-#define AI_NO_PROCESS			0
-#define AI_PROCESSING			(1<<0)
-#define AI_FASTPROCESSING		(1<<1)
+#define AI_NO_PROCESS 0
+#define AI_PROCESSING FLAG(0)
+#define AI_FASTPROCESSING FLAG(1)
 
-#define START_AIPROCESSING(Datum) if (!(Datum.process_flags & AI_PROCESSING)) {Datum.process_flags |= AI_PROCESSING;SSai.processing += Datum}
-#define STOP_AIPROCESSING(Datum) Datum.process_flags &= ~AI_PROCESSING;SSai.processing -= Datum
-#define START_AIFASTPROCESSING(Datum) if (!(Datum.process_flags & AI_FASTPROCESSING)) {Datum.process_flags |= AI_FASTPROCESSING;SSaifast.processing += Datum}
-#define STOP_AIFASTPROCESSING(Datum) Datum.process_flags &= ~AI_FASTPROCESSING;SSaifast.processing -= Datum
+
+#define START_AIPROCESSING(datum) \
+if (!(datum.process_flags & AI_PROCESSING)) { \
+	datum.process_flags |= AI_PROCESSING; \
+	SSai.active += datum \
+}
+
+
+#define STOP_AIPROCESSING(datum) \
+	datum.process_flags &= ~AI_PROCESSING; \
+	SSai.active -= datum
+
+
+#define START_AIFASTPROCESSING(datum) \
+if (!(datum.process_flags & AI_FASTPROCESSING)) { \
+	datum.process_flags |= AI_FASTPROCESSING; \
+	SSaifast.active += datum \
+}
+
+
+#define STOP_AIFASTPROCESSING(datum) \
+	datum.process_flags &= ~AI_FASTPROCESSING; \
+	SSaifast.active -= datum
+
 
 /mob/living
-	var/datum/ai_holder/ai_holder = null
-	/// Which `ai_holder` datum to give to the mob when initialized. If `null`, nothing happens.
-	var/ai_holder_type = null
+	var/datum/ai_holder/ai_holder
 	var/image/ai_status_image
 	var/recoil = 0 //What our current recoil level is
 	var/recoil_reduction_timer
 
+
 /mob/living/Initialize()
-	if (ai_holder_type)
-		ai_holder = new ai_holder_type(src)
-		if (istype(src, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = src
-			H.InitializeHud()
-		ai_status_image = image('icons/misc/buildmode.dmi', src, "ai_0")
-	return ..()
+	. = ..()
+	if (ispath(ai_holder))
+		ai_holder = new ai_holder (src)
+		if (ishuman(src))
+			InitializeHud()
+		ai_status_image = image('icons/misc/buildmode.dmi', src, "ai_0") //:anguish:
+
 
 /mob/living/Destroy()
 	if (ai_holder)
 		GLOB.stat_set_event.unregister(src, ai_holder, /datum/ai_holder/proc/holder_stat_change)
 		QDEL_NULL(ai_holder)
-
 	return ..()
+
 
 /mob/living/Login()
 	if (!stat && ai_holder)
@@ -120,6 +136,11 @@
 // Now for the actual AI stuff.
 /datum/ai_holder/proc/set_busy(value = FALSE)
 	busy = value
+
+/// Set the AI as 'busy' for a specific length of time.
+/datum/ai_holder/proc/set_busy_delay(time)
+	set_busy(TRUE)
+	addtimer(CALLBACK(src, .proc/set_busy, FALSE), time)
 
 /**
  * Makes this ai holder not get processed.

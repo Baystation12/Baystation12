@@ -119,15 +119,15 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/oldlab2/fixedsecurity)
 "aU" = (
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 4
+	},
 /obj/machinery/door/airlock/external/glass{
 	dir = 4;
 	frequency = 1379;
 	id_tag = "oldlab_interior";
 	locked = 1;
 	name = "Lab Interior Airlock"
-	},
-/obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/oldlab2/Airlock)
@@ -1221,7 +1221,7 @@
 /area/map_template/oldlab2/office)
 "gC" = (
 /obj/structure/largecrate,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "gG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1550,7 +1550,7 @@
 	dir = 4
 	},
 /obj/structure/largecrate,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "iE" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -2403,7 +2403,7 @@
 /area/map_template/oldlab2/office)
 "nw" = (
 /obj/machinery/floodlight,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "nx" = (
 /turf/simulated/wall/titanium,
@@ -3022,8 +3022,7 @@
 /area/map_template/oldlab2/medical)
 "qJ" = (
 /obj/machinery/light/spot,
-/obj/vehicle/train/cargo/trolley,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "qL" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -3178,15 +3177,14 @@
 /area/map_template/oldlab2/test1)
 "rs" = (
 /obj/machinery/access_button{
-	active_power_usage = "oldlab_airlock";
 	command = "cycle_exterior";
-	frequency = 1380;
+	frequency = 1379;
 	master_tag = "oldlab_airlock";
 	name = "interior access button";
 	pixel_x = 24;
 	pixel_y = -24
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "rt" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -4471,7 +4469,7 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "xy" = (
 /obj/machinery/power/smes/buildable/outpost_substation,
@@ -5127,10 +5125,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/oldlab2/test1)
-"Be" = (
-/obj/vehicle/train/cargo/engine,
-/turf/simulated/floor/reinforced,
-/area/map_template/oldlab2/Airlock)
 "Bi" = (
 /turf/simulated/wall/titanium,
 /area/map_template/oldlab2/living5)
@@ -6135,10 +6129,9 @@
 "FJ" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/access_button{
-	active_power_usage = "oldlab_airlock";
 	active_timers = "interior access button";
 	command = "cycle_exterior";
-	frequency = 1380;
+	frequency = 1379;
 	master_tag = "oldlab_airlock";
 	name = "exterior access button";
 	pixel_x = 24;
@@ -6306,10 +6299,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/oldlab2/server)
-"GO" = (
-/obj/vehicle/train/cargo/trolley,
-/turf/simulated/floor/reinforced,
-/area/map_template/oldlab2/Airlock)
 "GP" = (
 /obj/machinery/light{
 	dir = 1
@@ -6359,7 +6348,7 @@
 	id_tag = "oldlab_sensor_exterior";
 	pixel_y = -32
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "GX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -6489,7 +6478,7 @@
 "HC" = (
 /obj/structure/largecrate,
 /obj/machinery/light/spot,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "HF" = (
 /obj/structure/cable/yellow{
@@ -7395,10 +7384,8 @@
 	pixel_y = -6
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	active_power_usage = "oldlab_sensor";
 	anchor_fall = "labport_airlock";
 	dir = 8;
-	frequency = 1380;
 	id_tag = "oldlab_airlock";
 	pixel_x = 25;
 	pixel_y = 8;
@@ -7607,7 +7594,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab2/mess)
 "Nz" = (
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "NC" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -11763,7 +11750,7 @@ Nz
 Nz
 Nz
 Nz
-GO
+Nz
 gb
 uX
 DJ
@@ -11867,7 +11854,7 @@ Nz
 Nz
 Nz
 Nz
-Be
+Nz
 gb
 gb
 aU

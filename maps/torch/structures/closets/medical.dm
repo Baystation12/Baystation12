@@ -107,7 +107,7 @@
 		/obj/item/taperoll/medical,
 		/obj/item/storage/belt/medical/emt,
 		/obj/item/clothing/mask/gas/half,
-		/obj/item/tank/emergency/oxygen/engi,
+		/obj/item/tank/oxygen_emergency_extended,
 		/obj/item/storage/box/autoinjectors,
 		/obj/item/device/scanner/health,
 		/obj/item/clothing/glasses/hud/health,

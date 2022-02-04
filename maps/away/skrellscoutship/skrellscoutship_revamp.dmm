@@ -1120,9 +1120,9 @@
 /obj/machinery/light/skrell{
 	dir = 8
 	},
-/obj/item/tank/emergency/oxygen,
-/obj/item/tank/emergency/oxygen,
-/obj/item/tank/emergency/oxygen,
+/obj/item/tank/oxygen_emergency,
+/obj/item/tank/oxygen_emergency,
+/obj/item/tank/oxygen_emergency,
 /obj/item/clothing/mask/breath/emergency,
 /obj/item/clothing/mask/breath/emergency,
 /obj/item/clothing/mask/breath/emergency,
@@ -2175,9 +2175,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/structure/window/reinforced{
-	health = 1e+007
-	},
+/obj/structure/window/reinforced,
 /turf/simulated/floor/carpet/magenta,
 /area/ship/skrellscoutship/wings/starboard)
 "gS" = (
@@ -2220,9 +2218,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/structure/window/reinforced{
-	health = 1e+007
-	},
+/obj/structure/window/reinforced,
 /turf/simulated/floor/tiled/skrell/blue,
 /area/ship/skrellscoutship/command/bridge)
 "gY" = (
@@ -2282,8 +2278,7 @@
 /obj/item/device/integrated_circuit_printer,
 /obj/item/stack/cable_coil/yellow,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /turf/simulated/floor/tiled/skrell/orange,
 /area/ship/skrellscoutship/wings/starboard)
@@ -3654,9 +3649,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/structure/window/reinforced{
-	health = 1e+007
-	},
+/obj/structure/window/reinforced,
 /turf/simulated/floor/carpet/magenta,
 /area/ship/skrellscoutship/wings/starboard)
 "nc" = (
@@ -3818,9 +3811,7 @@
 /obj/machinery/computer/ship/navigation{
 	dir = 8
 	},
-/obj/structure/window/reinforced{
-	health = 1e+007
-	},
+/obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
 	dir = 4
 	},
@@ -4967,8 +4958,7 @@
 	pixel_y = 5
 	},
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/item/disk/integrated_circuit/upgrade/clone{
 	pixel_x = 7
@@ -5154,8 +5144,7 @@
 "LW" = (
 /obj/structure/flora/pottedplant/stoutbush,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/structure/window/reinforced{
 	dir = 8
@@ -5698,8 +5687,7 @@
 "Tj" = (
 /obj/structure/flora/pottedplant/large,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /turf/simulated/floor/tiled/skrell/orange,
 /area/ship/skrellscoutship/wings/starboard)

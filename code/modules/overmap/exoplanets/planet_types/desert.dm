@@ -11,8 +11,8 @@
 	habitability_distribution = list(HABITABILITY_IDEAL = 30, HABITABILITY_OKAY = 50, HABITABILITY_BAD = 10)
 	has_trees = FALSE
 	flora_diversity = 4
-	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/voxslug, /mob/living/simple_animal/hostile/antlion)
-	megafauna_types = list(/mob/living/simple_animal/hostile/antlion/mega)
+	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/voxslug, /mob/living/simple_animal/hostile/retaliate/beast/antlion)
+	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/beast/antlion/mega)
 
 /obj/effect/overmap/visitable/sector/exoplanet/desert/generate_map()
 	if(prob(70))
@@ -45,7 +45,7 @@
 /datum/random_map/noise/exoplanet/desert
 	descriptor = "desert exoplanet"
 	smoothing_iterations = 4
-	land_type = /turf/simulated/floor/exoplanet/desert
+	land_type = /turf/unsimulated/floor/exoplanet/desert
 
 	flora_prob = 5
 	large_flora_prob = 0
@@ -58,7 +58,7 @@
 
 /area/exoplanet/desert
 	ambience = list('sound/effects/wind/desert0.ogg','sound/effects/wind/desert1.ogg','sound/effects/wind/desert2.ogg','sound/effects/wind/desert3.ogg','sound/effects/wind/desert4.ogg','sound/effects/wind/desert5.ogg')
-	base_turf = /turf/simulated/floor/exoplanet/desert
+	base_turf = /turf/unsimulated/floor/exoplanet/desert
 
 /obj/effect/quicksand
 	name = "quicksand"

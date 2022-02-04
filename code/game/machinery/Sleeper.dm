@@ -308,7 +308,7 @@
 
 /obj/machinery/sleeper/RefreshParts()
 	..()
-	var/T = Clamp(total_component_rating_of_type(/obj/item/stock_parts/scanning_module), 1, 10)
+	var/T = clamp(total_component_rating_of_type(/obj/item/stock_parts/scanning_module), 1, 10)
 	T = max(T,1)
 	synth_modifier = 1/T
 	pump_speed = 2 + T

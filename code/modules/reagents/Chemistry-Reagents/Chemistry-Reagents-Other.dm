@@ -351,7 +351,7 @@
 		qdel(hotspot)
 
 	if (environment && environment.temperature > min_temperature) // Abstracted as steam or something
-		var/removed_heat = between(0, volume * COOLANT_LATENT_HEAT, -environment.get_thermal_energy_change(min_temperature))
+		var/removed_heat = clamp(volume * COOLANT_LATENT_HEAT, 0, -environment.get_thermal_energy_change(min_temperature))
 		environment.add_thermal_energy(-removed_heat)
 		if (prob(5) && environment && environment.temperature > T100C)
 			T.visible_message("<span class='warning'>The water sizzles as it lands on \the [T]!</span>")
@@ -576,4 +576,4 @@
 	description = "This hair dye can be any color! Only one way to find out what kind!"
 
 /datum/reagent/colored_hair_dye/chaos/affect_touch(mob/living/carbon/human/H, alien, removed)
-	apply_dye_color(H, RAND_F(1, 254), RAND_F(1, 254), RAND_F(1, 254))
+	apply_dye_color(H, Frand(1, 254), Frand(1, 254), Frand(1, 254))

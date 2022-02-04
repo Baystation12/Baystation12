@@ -1,14 +1,3 @@
-/*
-	Mining and plant bags, can store a ridiculous number of items in order to deal with the ridiculous amount of ores or plant products
-	that can be produced by mining or (xeno)botany, however it can only hold those items.
-
-	These storages typically should also support quick gather and quick empty to make managing large numbers of items easier.
-*/
-
-// -----------------------------
-//        Mining Satchel
-// -----------------------------
-
 /obj/item/storage/ore
 	name = "mining satchel"
 	desc = "This sturdy bag can be used to store and transport ores."
@@ -18,15 +7,14 @@
 	max_storage_space = 200
 	max_w_class = ITEM_SIZE_NORMAL
 	w_class = ITEM_SIZE_LARGE
-	can_hold = list(/obj/item/ore)
-	allow_quick_gather = 1
-	allow_quick_empty = 1
-	use_to_pickup = 1
+	can_hold = list(
+		/obj/item/ore
+	)
+	allow_quick_gather = TRUE
+	allow_quick_empty = TRUE
+	use_to_pickup = TRUE
 
 
-// -----------------------------
-//          Evidence bag
-// -----------------------------
 /obj/item/storage/evidence
 	name = "evidence case"
 	desc = "A heavy steel case for storing evidence."
@@ -43,13 +31,10 @@
 		/obj/item/paper,
 		/obj/item/paper_bundle
 	)
-	allow_quick_gather = 1
-	allow_quick_empty = 1
-	use_to_pickup = 1
+	allow_quick_gather = TRUE
+	allow_quick_empty = TRUE
+	use_to_pickup = TRUE
 
-// -----------------------------
-//          Plant bag
-// -----------------------------
 
 /obj/item/storage/plants
 	name = "botanical satchel"
@@ -60,122 +45,95 @@
 	max_storage_space = 100
 	max_w_class = ITEM_SIZE_NORMAL
 	w_class = ITEM_SIZE_NORMAL
-	can_hold = list(/obj/item/reagent_containers/food/snacks/grown,/obj/item/seeds)
-	allow_quick_gather = 1
-	allow_quick_empty = 1
-	use_to_pickup = 1
+	can_hold = list(
+		/obj/item/reagent_containers/food/snacks/grown,
+		/obj/item/seeds
+	)
+	allow_quick_gather = TRUE
+	allow_quick_empty = TRUE
+	use_to_pickup = TRUE
 
-
-// -----------------------------
-//        Sheet Snatcher
-// -----------------------------
-// Because it stacks stacks, this doesn't operate normally.
-// However, making it a storage/bag allows us to reuse existing code in some places. -Sayu
-// This is old and terrible
 
 /obj/item/storage/sheetsnatcher
 	name = "sheet snatcher"
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "sheetsnatcher"
 	desc = "A patented storage system designed for any kind of mineral sheet."
-
 	storage_ui = /datum/storage_ui/default/sheetsnatcher
-
-	var/capacity = 300; //the number of sheets it can carry.
 	w_class = ITEM_SIZE_NORMAL
 	storage_slots = 7
-
-	allow_quick_empty = 1 // this function is superceded
-	use_to_pickup = 1
-	New()
-		..()
-		//verbs -= /obj/item/storage/verb/quick_empty
-		//verbs += /obj/item/storage/sheetsnatcher/quick_empty
-
-	can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
-		if(!istype(W,/obj/item/stack/material))
-			if(!stop_messages)
-				to_chat(user, "The snatcher does not accept [W].")
-			return 0
-		var/current = 0
-		for(var/obj/item/stack/material/S in contents)
-			current += S.amount
-		if(capacity == current)//If it's full, you're done
-			if(!stop_messages)
-				to_chat(user, "<span class='warning'>The snatcher is full.</span>")
-			return 0
-		return 1
+	use_to_pickup = TRUE
+	virtual = TRUE
+	var/max_sheets = 300
+	var/cur_sheets = 0
 
 
-// Modified handle_item_insertion.  Would prefer not to, but...
-	handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
-		var/obj/item/stack/material/S = W
-		if(!istype(S)) return 0
+/obj/item/storage/sheetsnatcher/examine(mob/user, distance)
+	. = ..()
+	if (distance < 2)
+		to_chat(user, "It has a capacity of [max_sheets] sheets and current holds [cur_sheets].")
 
-		var/amount
-		var/inserted = 0
-		var/current = 0
-		for(var/obj/item/stack/material/S2 in contents)
-			current += S2.amount
-		if(capacity < current + S.amount)//If the stack will fill it up
-			amount = capacity - current
+
+/obj/item/storage/sheetsnatcher/can_be_inserted(obj/item/stack/material/stack, mob/user, silent)
+	if (!istype(stack))
+		if (!silent)
+			to_chat(user, SPAN_WARNING("The snatcher cannot hold \a [stack]."))
+		return FALSE
+	if (stack.amount > (max_sheets - cur_sheets))
+		if (!silent)
+			to_chat(user, SPAN_WARNING("The snatcher cannot hold \a [stack]."))
+		return FALSE
+	return TRUE
+
+
+/obj/item/storage/sheetsnatcher/handle_item_insertion(obj/item/stack/material/stack, silent)
+	if (!can_be_inserted(stack, null, silent))
+		return FALSE
+	if (!usr?.unEquip(stack, src))
+		return FALSE
+	cur_sheets += stack.amount
+	for (var/obj/item/stack/material/held as anything in contents)
+		if (stack.amount < 1)
+			break
+		if (held.type != stack.type)
+			continue
+		if (held.amount >= held.max_amount)
+			continue
+		var/free_space = held.max_amount - held.amount
+		if (free_space >= stack.amount)
+			held.amount += stack.amount
+			qdel(stack)
+			break
 		else
-			amount = S.amount
+			held.amount += free_space
+			stack.amount -= free_space
+	prepare_ui(usr)
+	update_icon()
+	return TRUE
 
-		for(var/obj/item/stack/material/sheet in contents)
-			if(S.type == sheet.type) // we are violating the amount limitation because these are not sane objects
-				sheet.amount += amount	// they should only be removed through procs in this file, which split them up.
-				S.amount -= amount
-				inserted = 1
-				break
 
-		if(!inserted || !S.amount)
-			usr.drop_from_inventory(S, src)
-			if(!S.amount)
-				qdel(S)
+/obj/item/storage/sheetsnatcher/attack_self(mob/user)
+	if (user.stat || !Adjacent(user) || user.restrained())
+		to_chat(user, SPAN_WARNING("You're in no condition to do that with \the [src]."))
+		return FALSE
+	if (cur_sheets < 1)
+		to_chat(user, SPAN_WARNING("\The [src] is empty."))
+		return FALSE
+	to_chat(user, SPAN_ITALIC("You empty out \the [src]."))
+	empty()
 
-		prepare_ui(usr)
-		update_icon()
-		return 1
 
-// Modified quick_empty verb drops appropriate sized stacks
-	quick_empty()
-		var/location = get_turf(src)
-		for(var/obj/item/stack/material/S in contents)
-			while(S.amount)
-				var/obj/item/stack/material/N = new S.type(location)
-				var/stacksize = min(S.amount,N.max_amount)
-				N.amount = stacksize
-				S.amount -= stacksize
-			if(!S.amount)
-				qdel(S) // todo: there's probably something missing here
-		prepare_ui()
-		if(usr.s_active)
-			usr.s_active.show_to(usr)
-		update_icon()
+/obj/item/storage/sheetsnatcher/proc/empty()
+	var/turf/turf = get_turf(src)
+	if (!turf)
+		return
+	for(var/obj/item/stack/material/held as anything in contents)
+		held.forceMove(turf)
+	cur_sheets = 0
+	update_icon()
 
-// Instead of removing
-	remove_from_storage(obj/item/W as obj, atom/new_location)
-		var/obj/item/stack/material/S = W
-		if(!istype(S)) return 0
-
-		//I would prefer to drop a new stack, but the item/attack_hand code
-		// that calls this can't receive a different object than you clicked on.
-		//Therefore, make a new stack internally that has the remainder.
-		// -Sayu
-
-		if(S.amount > S.max_amount)
-			var/obj/item/stack/material/temp = new S.type(src)
-			temp.amount = S.amount - S.max_amount
-			S.amount = S.max_amount
-
-		return ..(S,new_location)
-
-// -----------------------------
-//    Sheet Snatcher (Cyborg)
-// -----------------------------
 
 /obj/item/storage/sheetsnatcher/borg
 	name = "sheet snatcher 9000"
 	desc = ""
-	capacity = 500//Borgs get more because >specialization
+	max_sheets = 500

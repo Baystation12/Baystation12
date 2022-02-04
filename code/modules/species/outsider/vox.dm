@@ -40,10 +40,10 @@
 	cold_level_1 = 80
 	cold_level_2 = 50
 	cold_level_3 = -1
-	
+
 	min_age = 1
 	max_age = 100
-	
+
 	gluttonous = GLUT_TINY|GLUT_ITEM_NORMAL
 	stomach_capacity = 12
 
@@ -52,7 +52,7 @@
 	siemens_coefficient = 0.2
 
 	species_flags = SPECIES_FLAG_NO_SCAN
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
 	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
 
 	blood_color = "#2299fc"
@@ -136,7 +136,7 @@
 /datum/species/vox/disfigure_msg(var/mob/living/carbon/human/H)
 	var/datum/gender/T = gender_datums[H.get_gender()]
 	return "<span class='danger'>[T.His] beak-segments are cracked and chipped! [T.He] [T.is] not even recognizable.</span>\n"
-	
+
 /datum/species/vox/skills_from_age(age)
 	. = 8
 
@@ -197,7 +197,7 @@
 		return
 	if (allowed_role && user.mind?.special_role != allowed_role)
 		return
-	if (user.species.name == SPECIES_VOX || !is_alien_whitelisted(user, SPECIES_VOX))
+	if (user.species.name == SPECIES_VOX || !is_alien_whitelisted(user, all_species[SPECIES_VOX]))
 		return
 	var/data = input(user, "Become Vox?", "Become Vox") as null | anything in list("No", "Yes")
 	if (isnull(data) || data == "No")

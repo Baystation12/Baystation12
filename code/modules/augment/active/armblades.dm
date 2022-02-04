@@ -53,14 +53,14 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_ESOTERIC = 4)
 	deploy_sound = 'sound/effects/holster/sheathout.ogg'
 	retract_sound = 'sound/effects/holster/sheathin.ogg'
-	augment_flags = AUGMENT_MECHANICAL | AUGMENT_BIOLOGICAL| AUGMENT_SCANNABLE
+	augment_flags = AUGMENT_MECHANICAL | AUGMENT_BIOLOGICAL
 
 
 /obj/item/material/armblade/wrist
 	name = "wrist blade"
 	desc = "A thin and very sharp folding blade specially made for combat, made from a specialized alloy that prevents all that nasty blood and viscera from sticking to it. Its light weight allows for rapid slashing attacks."
-	icon_state = "armblade"
-	item_state = "wolverine"
+	icon_state = "wristblade"
+	item_state = "wristblade"
 	base_parry_chance = 0
 	force_multiplier = 0.2
 	attack_cooldown_modifier = -1

@@ -27,7 +27,8 @@
 		/decl/item_modifier/space_suit/security,
 		/decl/item_modifier/space_suit/atmos,
 		/decl/item_modifier/space_suit/science,
-		/decl/item_modifier/space_suit/pilot
+		/decl/item_modifier/space_suit/pilot,
+		/decl/item_modifier/space_suit/command
 	)
 
 	// Extra modifications to add when emagged, duplicates won't be added
@@ -39,6 +40,7 @@
 		/decl/item_modifier/space_suit/atmos,
 		/decl/item_modifier/space_suit/science,
 		/decl/item_modifier/space_suit/pilot,
+		/decl/item_modifier/space_suit/command,
 		/decl/item_modifier/space_suit/mercenary/emag
 	)
 
@@ -138,7 +140,7 @@
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		helmet = I
-		
+
 		updateUsrDialog()
 		return
 

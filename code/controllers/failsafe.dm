@@ -56,14 +56,14 @@ GLOBAL_REAL(Failsafe, /datum/controller/failsafe)
 						if(4,5)
 							--defcon
 						if(3)
-							to_chat(GLOB.admins, "<span class='adminnotice'>Notice: DEFCON [defcon_pretty()]. The Master Controller has not fired in the last [(5-defcon) * processing_interval] ticks.</span>")
+							to_chat(GLOB.admins, "<span class='adminnotice'>Notice: DEFCON [defcon]. The Master Controller has not fired in the last [(5-defcon) * processing_interval] ticks.</span>")
 							--defcon
 						if(2)
-							to_chat(GLOB.admins, "<span class='boldannounce'>Warning: DEFCON [defcon_pretty()]. The Master Controller has not fired in the last [(5-defcon) * processing_interval] ticks. Automatic restart in [processing_interval] ticks.</span>")
+							to_chat(GLOB.admins, "<span class='boldannounce'>Warning: DEFCON [defcon]. The Master Controller has not fired in the last [(5-defcon) * processing_interval] ticks. Automatic restart in [processing_interval] ticks.</span>")
 							--defcon
 						if(1)
 
-							to_chat(GLOB.admins, "<span class='boldannounce'>Warning: DEFCON [defcon_pretty()]. The Master Controller has still not fired within the last [(5-defcon) * processing_interval] ticks. Killing and restarting...</span>")
+							to_chat(GLOB.admins, "<span class='boldannounce'>Warning: DEFCON [defcon]. The Master Controller has still not fired within the last [(5-defcon) * processing_interval] ticks. Killing and restarting...</span>")
 							--defcon
 							var/rtn = Recreate_MC()
 							if(rtn > 0)
@@ -72,7 +72,7 @@ GLOBAL_REAL(Failsafe, /datum/controller/failsafe)
 								to_chat(GLOB.admins, "<span class='adminnotice'>MC restarted successfully</span>")
 							else if(rtn < 0)
 								log_game("FailSafe: Could not restart MC, runtime encountered. Entering defcon 0")
-								to_chat(GLOB.admins, "<span class='boldannounce'>ERROR: DEFCON [defcon_pretty()]. Could not restart MC, runtime encountered. I will silently keep retrying.</span>")
+								to_chat(GLOB.admins, "<span class='boldannounce'>ERROR: DEFCON [defcon]. Could not restart MC, runtime encountered. I will silently keep retrying.</span>")
 							//if the return number was 0, it just means the mc was restarted too recently, and it just needs some time before we try again
 							//no need to handle that specially when defcon 0 can handle it
 						if(0) //DEFCON 0! (mc failed to restart)
@@ -92,11 +92,9 @@ GLOBAL_REAL(Failsafe, /datum/controller/failsafe)
 			defcon = 5
 			sleep(initial(processing_interval))
 
-/datum/controller/failsafe/proc/defcon_pretty()
-	return defcon
-
-/datum/controller/failsafe/stat_entry()
-	if(!statclick)
-		statclick = new/obj/effect/statclick/debug(null, "Initializing...", src)
-
-	stat("Failsafe Controller:", statclick.update("Defcon: [defcon_pretty()] (Interval: [Failsafe.processing_interval] | Iteration: [Failsafe.master_iteration])"))
+/datum/controller/failsafe/stat_entry(force)
+	if (!stat_line)
+		stat_line = new (null, src)
+	IF_UPDATE_STAT
+		stat_line.name = "Danger: [5 - defcon]/5  Interval:  [processing_interval]  Iteration: [master_iteration]"
+	stat(name, stat_line)

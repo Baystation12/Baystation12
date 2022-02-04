@@ -32,8 +32,10 @@ SUBSYSTEM_DEF(event)
 		event_containers = list(
 				EVENT_LEVEL_MUNDANE 	= new/datum/event_container/mundane,
 				EVENT_LEVEL_MODERATE	= new/datum/event_container/moderate,
-				EVENT_LEVEL_MAJOR 		= new/datum/event_container/major
+				EVENT_LEVEL_MAJOR 		= new/datum/event_container/major,
+				EVENT_LEVEL_EXO         = new/datum/event_container/exo
 			)
+
 	if(GLOB.using_map.use_overmap)
 		overmap_event_handler.create_events(GLOB.using_map.overmap_z, GLOB.using_map.overmap_size, GLOB.using_map.overmap_event_areas)
 	GLOB.using_map.setup_events()
@@ -63,15 +65,18 @@ SUBSYSTEM_DEF(event)
 		if (MC_TICK_CHECK)
 			return
 
-	while (pos <= EVENT_LEVEL_MAJOR)
+	while (pos <= EVENT_LEVEL_EXO)
 		event_containers[pos].process()
 		pos++
-		
+
 		if (MC_TICK_CHECK)
 			return
 
-/datum/controller/subsystem/event/stat_entry()
-	..("E:[active_events.len]")
+/datum/controller/subsystem/event/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		text = "[text] | Active Events: [active_events.len]"
+	..(text, force)
 
 //Actual event handling
 /datum/controller/subsystem/event/proc/event_complete(var/datum/event/E)
@@ -122,7 +127,7 @@ SUBSYSTEM_DEF(event)
 
 		to_world(message)
 
-//Event manager UI 
+//Event manager UI
 /datum/controller/subsystem/event/proc/GetInteractWindow()
 	var/html = "<A align='right' href='?src=\ref[src];refresh=1'>Refresh</A>"
 	html += "<A align='right' href='?src=\ref[src];pause_all=[!config.allow_random_events]'>Pause All - [config.allow_random_events ? "Pause" : "Resume"]</A>"
@@ -170,7 +175,7 @@ SUBSYSTEM_DEF(event)
 
 		html += "<table[table_options]>"
 		html += "<tr><td[row_options1]>Severity</td><td[row_options1]>Starts At</td><td[row_options1]>Starts In</td><td[row_options3]>Adjust Start</td><td[row_options1]>Pause</td><td[row_options1]>Interval Mod</td></tr>"
-		for(var/severity = EVENT_LEVEL_MUNDANE to EVENT_LEVEL_MAJOR)
+		for(var/severity = EVENT_LEVEL_MUNDANE to EVENT_LEVEL_EXO)
 			var/datum/event_container/EC = event_containers[severity]
 			var/next_event_at = max(0, EC.next_event_time - world.time)
 			html += "<tr>"
@@ -197,7 +202,7 @@ SUBSYSTEM_DEF(event)
 		html += "<h2>Next Event</h2>"
 		html += "<table[table_options]>"
 		html += "<tr><td[row_options1]>Severity</td><td[row_options2]>Name</td><td[row_options3]>Event Rotation</td><td>Clear</td></tr>"
-		for(var/severity = EVENT_LEVEL_MUNDANE to EVENT_LEVEL_MAJOR)
+		for(var/severity = EVENT_LEVEL_MUNDANE to EVENT_LEVEL_EXO)
 			var/datum/event_container/EC = event_containers[severity]
 			var/datum/event_meta/EM = EC.next_event
 			html += "<tr>"
@@ -346,4 +351,3 @@ SUBSYSTEM_DEF(event)
 	set category = "Admin"
 	if(SSevent)
 		SSevent.Interact(usr)
-	SSstatistics.add_field_details("admin_verb","EMP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

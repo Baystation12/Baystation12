@@ -19,7 +19,7 @@
 
 	var/venom_charge = 16
 
-	ai_holder_type = /datum/ai_holder/simple_animal/spider/spitter
+	ai_holder = /datum/ai_holder/simple_animal/spider/spitter
 
 /datum/ai_holder/simple_animal/spider/spitter/post_ranged_attack(atom/A)
 	. = ..()

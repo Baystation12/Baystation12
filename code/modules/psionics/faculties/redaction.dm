@@ -68,7 +68,7 @@
 		var/redaction_rank = user.psi.get_rank(PSI_REDACTION)
 		var/pk_rank = user.psi.get_rank(PSI_PSYCHOKINESIS)
 		if(pk_rank >= PSI_RANK_LATENT && redaction_rank >= PSI_RANK_MASTER)
-			var/removal_size = Clamp(5-pk_rank, 0, 5)
+			var/removal_size = clamp(5-pk_rank, 0, 5)
 			var/valid_objects = list()
 			for(var/thing in E.implants)
 				var/obj/imp = thing

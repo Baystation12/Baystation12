@@ -235,11 +235,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "bY" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	dir = 2;
-	id_tag = "crashedpodWest_pump";
-	power_rating = 25000
-	},
 /obj/item/device/radio/intercom/hailing{
 	dir = 4;
 	pixel_x = -24
@@ -281,10 +276,10 @@
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/crashed_pod)
 "el" = (
-/obj/machinery/atmospherics/pipe/simple/visible/blue,
-/obj/machinery/door/airlock/external{
-	frequency = 1380;
-	id_tag = "crashedpodWest_interior_door"
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 2;
+	id_tag = "crashedpodWest_pump";
+	power_rating = 25000
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/crashed_pod)
@@ -293,6 +288,7 @@
 	frequency = 1380;
 	id_tag = "crashedpodWest_interior_door"
 	},
+/obj/machinery/atmospherics/pipe/simple/visible/blue,
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/crashed_pod)
 "en" = (
@@ -319,20 +315,22 @@
 /turf/simulated/floor/plating,
 /area/map_template/crashed_pod)
 "eC" = (
-/obj/machinery/access_button/airlock_interior{
-	frequency = 1380;
-	master_tag = "crashedpodWest";
-	pixel_x = -22;
-	pixel_y = 22
-	},
-/obj/machinery/atmospherics/pipe/simple/visible/blue{
-	dir = 5
+/obj/machinery/computer/air_control{
+	dir = 4;
+	name = "Atmospheric Sensors";
+	sensor_tag = "crashed_pod_out"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "eD" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
-	dir = 4
+	dir = 5
+	},
+/obj/machinery/access_button/airlock_interior{
+	frequency = 1380;
+	master_tag = "crashedpodWest";
+	pixel_x = -22;
+	pixel_y = 22
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -1014,7 +1012,7 @@
 /obj/item/crowbar,
 /obj/effect/floor_decal/industrial/outline/blue,
 /obj/item/clothing/suit/space/emergency,
-/obj/item/tank/emergency/oxygen/double,
+/obj/item/tank/oxygen_emergency_double,
 /obj/item/clothing/head/helmet/space/emergency,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
@@ -1022,7 +1020,7 @@
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/industrial/outline/blue,
 /obj/item/clothing/suit/space/emergency,
-/obj/item/tank/emergency/oxygen/double,
+/obj/item/tank/oxygen_emergency_double,
 /obj/item/clothing/head/helmet/space/emergency,
 /obj/item/storage/briefcase/inflatable,
 /turf/simulated/floor/tiled/dark,
@@ -1087,6 +1085,12 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/crashed_pod)
+"Hx" = (
+/obj/machinery/air_sensor{
+	id_tag = "crashed_pod_out"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/crashed_pod)
 "RN" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/device/radio/hailing,
@@ -1126,7 +1130,7 @@ ab
 bb
 ej
 ej
-ej
+Hx
 bu
 ej
 ej
@@ -1159,7 +1163,7 @@ ab
 ab
 bF
 bY
-el
+ab
 eC
 fb
 fg
@@ -1175,7 +1179,7 @@ ab
 (5,1,1) = {"
 ab
 bG
-ej
+el
 em
 eD
 eW

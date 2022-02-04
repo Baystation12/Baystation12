@@ -20,11 +20,14 @@
 /datum/nano_module/program/merchant
 	name = "Merchant's List"
 
-/datum/computer_file/program/merchant/proc/get_merchant(var/num)
-	if(num > SStrade.traders.len)
-		num = SStrade.traders.len
-	if(num)
-		return SStrade.traders[num]
+/datum/computer_file/program/merchant/proc/get_merchant(index)
+	if (!index)
+		return
+	var/count = GLOB.trader_types.len
+	if (!count)
+		return
+	var/trader_type = GLOB.trader_types[clamp(index, 1, count)]
+	return GLOB.traders[trader_type]
 
 /datum/nano_module/program/merchant/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
@@ -179,7 +182,7 @@
 		. = TOPIC_HANDLED
 		current_merchant = 0
 	if(href_list["PRG_merchant_list"])
-		if(SStrade.traders.len == 0)
+		if (!GLOB.trader_types.len)
 			. = TOPIC_NOACTION
 			temp = "Cannot find any traders within broadcasting range."
 		else
@@ -201,7 +204,7 @@
 				scrolled = 1
 			if("left")
 				scrolled = -1
-		var/new_merchant  = Clamp(current_merchant + scrolled, 1, SStrade.traders.len)
+		var/new_merchant  = clamp(current_merchant + scrolled, 1, GLOB.trader_types.len)
 		if(new_merchant != current_merchant)
 			hailed_merchant = FALSE
 			last_comms = null

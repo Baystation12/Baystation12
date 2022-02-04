@@ -36,8 +36,8 @@
 	icon_state = "santa"
 	allowed = list(/obj/item) //for stuffing exta special presents
 
-/obj/item/clothing/suit/space/santa/New()
-	..()
+/obj/item/clothing/suit/space/santa/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 0
 
 //Orange emergency space suit
@@ -53,9 +53,9 @@
 	icon_state = "space_emergency"
 	desc = "A thin, ungainly softsuit colored in blaze orange for rescuers to easily locate. Looks pretty fragile."
 
-/obj/item/clothing/suit/space/emergency/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 4
+/obj/item/clothing/suit/space/emergency/Initialize()
+	. = ..()
+	slowdown_per_slot[slot_wear_suit] = 3
 
 /obj/item/clothing/head/helmet/space/fishbowl
 	name = "spacesuit helmet"

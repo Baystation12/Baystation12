@@ -8,7 +8,6 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel"
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels)
-	minimal_access = list(access_morgue, access_chapel_office, access_crematorium)
 	outfit_type = /decl/hierarchy/outfit/job/chaplain
 
 	equip(var/mob/living/carbon/human/H, var/alt_title, var/ask_questions = TRUE)
@@ -51,7 +50,6 @@
 					B.SetName(pick("Principle of Relativity", "Quantum Enigma: Physics Encounters Consciousness", "Programming the Universe", "Quantum Physics and Theology", "String Theory for Dummies", "How To: Build Your Own Warp Drive", "The Mysteries of Bluespace", "Playing God: Collector's Edition"))
 				else
 					B.SetName("The Holy Book of [new_religion]")
-			SSstatistics.set_field_details("religion_name","[new_religion]")
 
 		spawn(1)
 			var/deity_name = "Space Jesus"
@@ -120,7 +118,4 @@
 						if(outoftime)
 							to_chat(H, "Welp, out of time, buddy. You're stuck. Next time choose faster.")
 							accepted = 1
-
-			SSstatistics.set_field_details("religion_deity","[new_deity]")
-			SSstatistics.set_field_details("religion_book","[new_book_style]")
 		return 1

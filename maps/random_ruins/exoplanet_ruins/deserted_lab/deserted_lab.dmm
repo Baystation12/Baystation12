@@ -204,7 +204,7 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/template_noop)
 "aP" = (
-/obj/machinery/door/airlock/external/bolted,
+/obj/machinery/door/airlock/external,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/template_noop)
 "aQ" = (

@@ -77,7 +77,7 @@
 
 /datum/reagent/ethanol/blackstrap
 	name = "Blackstrap"
-	description = "A classic mix of rum and molasses, typically consumed by Tersteners."
+	description = "A classic mix of rum and molasses, favorite of frontiersmen everywhere."
 	taste_description = "sweet and strong alcohol"
 	color = "#161612"
 	strength = 30
@@ -559,24 +559,24 @@
 	..()
 	M.Stun(2)
 
-/datum/reagent/ethanol/between_the_sheets
-	name = "Between the Sheets"
-	description = "The classic drink of Hypnos."
-	taste_description = "sleeping citruses"
+/datum/reagent/ethanol/drifter
+	name = "Drifter"
+	description = "Because you'll be drifting off to sleep pretty soon."
+	taste_description = "heavy, sticky booze and a hint of citrus"
 	color = "#e7d534"
 	strength = 12
 
-	glass_name = "Between the Sheets"
-	glass_desc = "Make sure to set it down after drinking."
+	glass_name = "Drifter"
+	glass_desc = "A heavy duty nightcap. The taste might wake you up, though."
 
-/datum/reagent/ethanol/between_the_sheets/affect_ingest(mob/living/carbon/M, alien, removed)
+/datum/reagent/ethanol/drifter/affect_ingest(mob/living/carbon/M, alien, removed)
 	. = ..()
-	var/strength_mod = 1
-	if(alien == IS_DIONA)
+	if (alien == IS_DIONA)
 		return
-	if(alien == IS_SKRELL)
-		strength_mod *= 2
-	if(prob(1*strength_mod))
+	var/sleep_chance = 1
+	if (alien == IS_SKRELL)
+		sleep_chance = 2
+	if (prob(sleep_chance))
 		M.sleeping = max(M.sleeping, 1)
 
 /datum/reagent/ethanol/bilk
@@ -1120,13 +1120,13 @@
 
 /datum/reagent/ethanol/nevadan_gold
 	name = "Nevadan Gold Whiskey"
-	description = "A warm blend of 98 spices. Made in the heartlands of Tersten."
+	description = "A warm blend of 98 spices. Made on the homeworld."
 	taste_description = "strong, creamy whiskey"
 	color = "#ce1900"
 	strength = 10
 
 	glass_name = "Nevadan gold whiskey"
-	glass_desc = "A warm blend of 98 spices, brewed on Tersten. A delicious mix."
+	glass_desc = "A warm blend of 98 spices, brewed on Earth. A delicious mix."
 
 /datum/reagent/ethanol/patron
 	name = "Patron"

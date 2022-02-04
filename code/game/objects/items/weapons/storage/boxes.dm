@@ -83,7 +83,7 @@
 	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and white stripe indicate this one contains oxygen."
 	icon_state = "survival"
 	startswith = list(/obj/item/clothing/mask/breath/scba = 1,
-					/obj/item/tank/emergency/oxygen = 1,
+					/obj/item/tank/oxygen_emergency = 1,
 					/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
 					/obj/item/device/flashlight/flare/glowstick = 1,
@@ -95,7 +95,7 @@
 	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and black stripe indicate this one contains nitrogen."
 	icon_state = "survivalvox"
 	startswith = list(/obj/item/clothing/mask/breath = 1,
-					/obj/item/tank/emergency/nitrogen = 1,
+					/obj/item/tank/nitrogen_emergency = 1,
 					/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
 					/obj/item/device/flashlight/flare/glowstick = 1,
@@ -106,7 +106,7 @@
 	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and orange stripe indicate this one as the engineering variant."
 	icon_state = "survivaleng"
 	startswith = list(/obj/item/clothing/mask/breath/scba = 1,
-					/obj/item/tank/emergency/oxygen/engi = 1,
+					/obj/item/tank/oxygen_emergency_extended = 1,
 					/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline = 1,
 					/obj/item/reagent_containers/hypospray/autoinjector/antirad = 1,
 					/obj/item/stack/medical/bruise_pack = 1,

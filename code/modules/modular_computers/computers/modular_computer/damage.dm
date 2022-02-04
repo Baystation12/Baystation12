@@ -26,7 +26,7 @@
 	amount = round(amount)
 	if(damage_casing)
 		damage += amount
-		damage = between(0, damage, max_damage)
+		damage = clamp(damage, 0, max_damage)
 
 	if(component_probability)
 		for(var/obj/item/stock_parts/computer/H in get_all_components())

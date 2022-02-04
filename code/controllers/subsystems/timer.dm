@@ -57,8 +57,20 @@ SUBSYSTEM_DEF(timer)
 	head_offset = world.time
 	bucket_resolution = world.tick_lag
 
-/datum/controller/subsystem/timer/stat_entry(msg)
-	..("B:[bucket_count] P:[length(second_queue)] H:[length(hashes)] C:[length(clienttime_timers)] S:[length(timer_id_dict)] RST:[bucket_reset_count]")
+/datum/controller/subsystem/timer/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		text = {"\
+			[text] | \
+			Buckets [bucket_count] \
+			Queue2 [length(second_queue)] \
+			Hashes [length(hashes)] \
+			Client Timers [length(clienttime_timers)] \
+			Size [length(timer_id_dict)] \
+			Resets [bucket_reset_count]\
+		"}
+	..(text, force)
+
 
 /datum/controller/subsystem/timer/proc/dump_timer_buckets(full = TRUE)
 	var/list/to_log = list("Timer bucket reset. world.time: [world.time], head_offset: [head_offset], practical_offset: [practical_offset]")
@@ -129,7 +141,7 @@ SUBSYSTEM_DEF(timer)
 		if(ctime_timer.flags & TIMER_LOOP)
 			ctime_timer.spent = 0
 			ctime_timer.timeToRun = REALTIMEOFDAY + ctime_timer.wait
-			BINARY_INSERT_TG(ctime_timer, clienttime_timers, /datum/timedevent, ctime_timer, timeToRun, COMPARE_KEY)
+			BINARY_INSERT(ctime_timer, clienttime_timers, /datum/timedevent, ctime_timer, timeToRun, COMPARE_KEY)
 		else
 			qdel(ctime_timer)
 
@@ -493,7 +505,7 @@ SUBSYSTEM_DEF(timer)
 	else if (timeToRun >= TIMER_MAX)
 		L = SStimer.second_queue
 	if(L)
-		BINARY_INSERT_TG(src, L, /datum/timedevent, src, timeToRun, COMPARE_KEY)
+		BINARY_INSERT(src, L, /datum/timedevent, src, timeToRun, COMPARE_KEY)
 		return
 
 	// Get a local reference to the bucket list, this is faster than referencing the datum
@@ -544,7 +556,7 @@ SUBSYSTEM_DEF(timer)
  * * wait deciseconds to run the timer for
  * * flags flags for this timer, see: code\__DEFINES\subsystems.dm
  */
-/proc/addtimer(datum/callback/callback, wait = 0, flags = 0)
+/proc/_addtimer(datum/callback/callback, wait = 0, flags = 0, file, line)
 	if (!callback)
 		CRASH("addtimer called without a callback")
 
@@ -555,7 +567,7 @@ SUBSYSTEM_DEF(timer)
 		stack_trace("addtimer called with a callback assigned to a qdeleted object. In the future such timers will not \
 			be supported and may refuse to run or run with a 0 wait")
 
-	wait = max(CEILING(wait, world.tick_lag), world.tick_lag)
+	wait = max(Ceilm(wait, world.tick_lag), world.tick_lag)
 
 	if(wait >= INFINITY)
 		CRASH("Attempted to create timer with INFINITY delay")
@@ -584,7 +596,7 @@ SUBSYSTEM_DEF(timer)
 	else if(flags & TIMER_OVERRIDE)
 		stack_trace("TIMER_OVERRIDE used without TIMER_UNIQUE")
 
-	var/datum/timedevent/timer = new(callback, wait, flags, hash)
+	var/datum/timedevent/timer = new(callback, wait, flags, hash, file && "[file]:[line]")
 	return timer.id
 
 /**

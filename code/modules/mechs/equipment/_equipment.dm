@@ -67,6 +67,9 @@
 	owner = null
 	canremove = TRUE
 
+/obj/item/mech_equipment/proc/wreck() //Module has been destroyed
+	return
+
 /obj/item/mech_equipment/Destroy()
 	owner = null
 	. = ..()

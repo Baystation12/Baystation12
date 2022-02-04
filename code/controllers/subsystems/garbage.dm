@@ -17,28 +17,28 @@ SUBSYSTEM_DEF(garbage)
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 	init_order = SS_INIT_GARBAGE
 
-	var/list/collection_timeout = list(0, 2 MINUTES, 10 SECONDS)	// deciseconds to wait before moving something up in the queue to the next level
+	var/static/tmp/list/collection_timeout = list(0, 30 SECONDS, 10 SECONDS)	// deciseconds to wait before moving something up in the queue to the next level
 
 	//Stat tracking
-	var/delslasttick = 0            // number of del()'s we've done this tick
-	var/gcedlasttick = 0            // number of things that gc'ed last tick
-	var/totaldels = 0
-	var/totalgcs = 0
+	var/static/tmp/delslasttick = 0            // number of del()'s we've done this tick
+	var/static/tmp/gcedlasttick = 0            // number of things that gc'ed last tick
+	var/static/tmp/totaldels = 0
+	var/static/tmp/totalgcs = 0
 
-	var/highest_del_time = 0
-	var/highest_del_tickusage = 0
+	var/static/tmp/highest_del_time = 0
+	var/static/tmp/highest_del_tickusage = 0
 
-	var/list/pass_counts
-	var/list/fail_counts
+	var/static/tmp/list/pass_counts
+	var/static/tmp/list/fail_counts
 
-	var/list/items = list()         // Holds our qdel_item statistics datums
-	var/harddel_halt = FALSE        // If true, will avoid harddeleting from the final queue; will still respect HARDDEL_NOW.
+	var/static/tmp/list/items = list()         // Holds our qdel_item statistics datums
+	var/static/tmp/harddel_halt = FALSE        // If true, will avoid harddeleting from the final queue; will still respect HARDDEL_NOW.
 
 	//Queue
-	var/list/queues
+	var/static/tmp/list/queues
 
 	#ifdef TESTING
-	var/list/reference_find_on_fail = list()
+	var/static/tmp/list/reference_find_on_fail = list()
 	#endif
 
 
@@ -51,25 +51,29 @@ SUBSYSTEM_DEF(garbage)
 		pass_counts[i] = 0
 		fail_counts[i] = 0
 
-/datum/controller/subsystem/garbage/stat_entry(msg)
-	var/list/counts = list()
-	for (var/list/L in queues)
-		counts += length(L)
-	msg += "Q:[counts.Join(",")]|D:[delslasttick]|G:[gcedlasttick]|"
-	msg += "GR:"
-	if (!(delslasttick+gcedlasttick))
-		msg += "n/a|"
-	else
-		msg += "[round((gcedlasttick/(delslasttick+gcedlasttick))*100, 0.01)]%|"
 
-	msg += "TD:[totaldels]|TG:[totalgcs]|"
-	if (!(totaldels+totalgcs))
-		msg += "n/a|"
-	else
-		msg += "TGR:[round((totalgcs/(totaldels+totalgcs))*100, 0.01)]%"
-	msg += " P:[pass_counts.Join(",")]"
-	msg += "|F:[fail_counts.Join(",")]"
-	..(msg)
+/datum/controller/subsystem/garbage/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		var/list/counts = list()
+		for (var/list/L in queues)
+			counts += length(L)
+		text += "Q:[counts.Join(",")]|D:[delslasttick]|G:[gcedlasttick]|"
+		text += "GR:"
+		if (!(delslasttick+gcedlasttick))
+			text += "n/a|"
+		else
+			text += "[round((gcedlasttick/(delslasttick+gcedlasttick))*100, 0.01)]%|"
+
+		text += "TD:[totaldels]|TG:[totalgcs]|"
+		if (!(totaldels+totalgcs))
+			text += "n/a|"
+		else
+			text += "TGR:[round((totalgcs/(totaldels+totalgcs))*100, 0.01)]%"
+		text += " P:[pass_counts.Join(",")]"
+		text += "|F:[fail_counts.Join(",")]"
+	..(text, force)
+
 
 /datum/controller/subsystem/garbage/Shutdown()
 	//Adds the del() log to the qdel log file
@@ -271,10 +275,6 @@ SUBSYSTEM_DEF(garbage)
 		queues[GC_QUEUE_PREQUEUE] += D
 		D.gc_destroyed = GC_QUEUED_FOR_HARD_DEL
 
-/datum/controller/subsystem/garbage/Recover()
-	if (istype(SSgarbage.queues))
-		for (var/i in 1 to SSgarbage.queues.len)
-			queues[i] |= SSgarbage.queues[i]
 
 /datum/controller/subsystem/garbage/proc/toggle_harddel_halt(new_state = FALSE)
 	if(new_state == harddel_halt)

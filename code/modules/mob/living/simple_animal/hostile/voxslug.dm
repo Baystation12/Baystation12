@@ -23,32 +23,25 @@ Small, little HP, poisonous.
 	can_escape = TRUE
 	pass_flags = PASS_FLAG_TABLE
 	natural_weapon = /obj/item/natural_weapon/bite
-	faction = SPECIES_VOX
 
-	ai_holder_type = /datum/ai_holder/hostile/melee/voxslug
+	ai_holder = /datum/ai_holder/hostile/melee/voxslug
 
 /datum/ai_holder/hostile/melee/voxslug/list_targets()
 	. = ..()
 
-	var/list/L = list()
-	for(var/a in hearers(src, vision_range))
-		if(istype(a,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = a
-			if(H.species.get_bodytype() == SPECIES_VOX)
-				continue
-		if(isliving(a))
-			var/mob/living/M = a
-			if(M.faction == holder.faction)
-				continue
-		L += a
-
-	return L
+	for (var/mob/living/carbon/human/H in .)
+		if (H.species.get_bodytype() == SPECIES_VOX)
+			. -= H
 
 /datum/ai_holder/hostile/melee/voxslug/engage_target()
+	if (isliving(holder.loc.loc))
+		return
+
 	. = ..()
+
 	var/mob/living/simple_animal/hostile/voxslug/V = holder
-	if(istype(., /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = .
+	if(istype(target, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = target
 		if(prob(H.getBruteLoss()/2))
 			V.attach(H)
 
@@ -65,10 +58,11 @@ Small, little HP, poisonous.
 		if(!length(S.breaches)) //unable to make a hole
 			return
 	var/obj/item/organ/external/chest = H.organs_by_name[BP_CHEST]
-	var/obj/item/holder/voxslug/holder = new(get_turf(src))
-	src.forceMove(holder)
-	chest.embed(holder,0,"\The [src] latches itself onto \the [H]!")
-	holder.sync(src)
+	var/obj/item/holder/voxslug/slug_holder = new(get_turf(src))
+	src.forceMove(slug_holder)
+	chest.embed(slug_holder,0,"\The [src] latches itself onto \the [H]!")
+	slug_holder.sync(src)
+
 
 /mob/living/simple_animal/hostile/voxslug/Life()
 	. = ..()

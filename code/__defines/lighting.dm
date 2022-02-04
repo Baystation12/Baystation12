@@ -46,3 +46,41 @@
 #define CL_MATRIX_CG 18
 #define CL_MATRIX_CB 19
 #define CL_MATRIX_CA 20
+
+// Lightbulb statuses
+#define LIGHT_OK 		0 // A light bulb is installed and functioning.
+#define LIGHT_EMPTY		1 // There is no light bulb installed.
+#define LIGHT_BROKEN	2 // The light bulb is broken/shattered.
+#define LIGHT_BURNED	3 // The light bulb is burned out.
+
+// Lighting color presets
+#define LIGHT_COLOUR_WHITE	"#fefefe" // Clinical white light bulbs
+#define LIGHT_COLOUR_WARM	"#fffee0" // Warm yellowish light bulbs
+#define LIGHT_COLOUR_COOL	"#e0fefe" // Cool bluish light bulbs
+#define LIGHT_COLOUR_E_RED	"#da0205" // Emergency red lighting
+#define LIGHT_COLOUR_READY	"#00ff00" // Green 'READY' lighting
+#define LIGHT_COLOUR_SKRELL	"#66ccff" // Skrellian cyan lighting
+
+#define LIGHT_STANDARD_COLORS list(LIGHT_COLOUR_WHITE, LIGHT_COLOUR_WARM, LIGHT_COLOUR_COOL) // List of standard light colors used for randomized lighting and selectable printed lights.
+
+// Light replacer color options
+#define LIGHT_REPLACE_AREA     "AREA"     // Match the areas defined light color(s)
+#define LIGHT_REPLACE_EXISTING "EXISTING" // Mimic the existing bulb's color
+#define LIGHT_REPLACE_RANDOM   "RANDOM"   // Default behaviour. Randomize the light color from LIGHT_STANDARD_COLORS.
+
+// Options available for users to set light replacer colors.
+#define LIGHT_REPLACE_OPTIONS list(\
+	"Random (Default)",\
+	"Match Blueprint",\
+	"Match Existing",\
+	"Warm",\
+	"Cool",\
+	"White",\
+	"Custom"\
+)
+
+// Area lighting modes
+#define AREA_LIGHTING_WHITE		"white"
+#define AREA_LIGHTING_WARM		"warm"
+#define AREA_LIGHTING_COOL		"cool"
+#define AREA_LIGHTING_DEFAULT	"default" // For light replacers, defaults to whatever the area is set to. For areas, uses the initial lighting value from the light bulb itself.

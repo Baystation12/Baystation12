@@ -59,11 +59,14 @@
 	var/fish_type = "fish"
 	var/slices = 1
 
-/obj/item/reagent_containers/food/snacks/sashimi/New(var/newloc, var/_fish_type)
-	..(newloc)
-	if(_fish_type) fish_type = _fish_type
+
+/obj/item/reagent_containers/food/snacks/sashimi/Initialize(mapload, _fish_type)
+	. = ..()
+	if (_fish_type)
+		fish_type = _fish_type
 	name = "[fish_type] sashimi"
 	update_icon()
+
 
 /obj/item/reagent_containers/food/snacks/sashimi/on_update_icon()
 	icon_state = "sashimi_base"

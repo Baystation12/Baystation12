@@ -304,11 +304,12 @@
 		/obj/item/hand_labeler,
 		/obj/item/clothing/gloves,
 		/obj/item/crowbar/prybar,
-		/obj/item/tank/emergency,
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/nitrogen_emergency,
 		/obj/item/clothing/mask/breath,
 		/obj/item/toy/bosunwhistle,
 		/obj/item/clothing/head/beret,
-		/obj/item/material/knife/folding/,
+		/obj/item/material/knife/folding,
 		/obj/item/device/tape
 		)
 
@@ -368,11 +369,12 @@
 		/obj/item/hand_labeler,
 		/obj/item/clothing/gloves,
 		/obj/item/crowbar/prybar,
-		/obj/item/tank/emergency,
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/nitrogen_emergency,
 		/obj/item/clothing/mask/breath,
 		/obj/item/toy/bosunwhistle,
 		/obj/item/clothing/head/beret,
-		/obj/item/material/knife/folding/,
+		/obj/item/material/knife/folding,
 		/obj/item/device/tape
 		)
 
@@ -510,9 +512,6 @@
 	item_state = "swatbelt"
 	storage_slots = 10
 
-/obj/item/storage/belt/holster/security/tactical/Initialize()
-	.=..()
-	slowdown_per_slot[slot_belt] = 1
 
 /obj/item/storage/belt/waistpack
 	name = "waist pack"
@@ -533,9 +532,6 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = ITEM_SIZE_NORMAL * 4
 
-/obj/item/storage/belt/waistpack/big/Initialize()
-	.=..()
-	slowdown_per_slot[slot_belt] = 1
 
 /obj/item/storage/belt/fire_belt
 	name = "firefighting equipment belt"

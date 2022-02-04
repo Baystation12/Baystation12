@@ -28,7 +28,7 @@ client
 			if(GLOB.end_credits_song == null)
 				var/title_song = pick('sound/music/THUNDERDOME.ogg', 'sound/music/europa/Chronox_-_03_-_In_Orbit.ogg', 'sound/music/europa/asfarasitgets.ogg')
 				sound_to(mob, sound(title_song, wait = 0, volume = 40, channel = GLOB.lobby_sound_channel))
-			else if(get_preference_value(/datum/client_preference/play_admin_midis) == GLOB.PREF_YES)				
+			else if(get_preference_value(/datum/client_preference/play_admin_midis) == GLOB.PREF_YES)
 				sound_to(mob, sound(GLOB.end_credits_song, wait = 0, volume = 40, channel = GLOB.lobby_sound_channel))
 	sleep(50)
 	var/list/_credits = credits
@@ -133,7 +133,7 @@ client
 			if(rank.name_short)
 				used_name = "[rank.name_short] [used_name]"
 		var/showckey = 0
-		if(H.ckey && H.client)			
+		if(H.ckey && H.client)
 			if(H.client.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW)
 				showckey = 1
 		var/decl/cultural_info/actor_culture = SSculture.get_culture(H.get_cultural_value(TAG_CULTURE))
@@ -142,7 +142,7 @@ client
 		if(!showckey)
 			if(prob(90))
 				chunk += "[actor_culture.get_random_name(H.gender)]\t \t \t \t[uppertext(used_name)][job]"
-			else				
+			else
 				var/datum/gender/G = gender_datums[H.gender]
 				chunk += "[used_name]\t \t \t \t[uppertext(G.him)]SELF"
 		else
@@ -191,8 +191,8 @@ client
 	var/disclaimer = "<br>Sponsored by [GLOB.using_map.company_name].<br>All rights reserved.<br>\
 					 This motion picture is protected under the copyright laws of the Sol Central Government<br> and other nations throughout the galaxy.<br>\
 					 Colony of First Publication: [pick("Mars", "Luna", "Earth", "Venus", "Phobos", "Ceres", "Tiamat", "Ceti Epsilon", "Eos", "Pluto", "Ouere",\
-					 "Lordania", "Kingston", "Cinu", "Yuklid V", "Lorriman", "Tersten", "Gaia")].<br>"
-	disclaimer += pick("Use for parody prohibited. PROHIBITED.", 
+					 "Lordania", "Kingston", "Cinu", "Yuklid V", "Lorriman", "Gaia")].<br>"
+	disclaimer += pick("Use for parody prohibited. PROHIBITED.",
 					   "All stunts were performed by underpaid interns. Do NOT try at home.",
 					   "[GLOB.using_map.company_name] does not endorse behaviour depicted. Attempt at your own risk.",
 					   "Any unauthorized exhibition, distribution, or copying of this film or any part thereof (including soundtrack)<br>\

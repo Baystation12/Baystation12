@@ -99,8 +99,6 @@
 		access_solgov_crew, access_hangar, access_network, access_radio_eng
 	)
 
-	minimal_access = list()
-
 	software_on_spawn = list(/datum/computer_file/program/power_monitor,
 							 /datum/computer_file/program/supermatter_monitor,
 							 /datum/computer_file/program/alarm_monitor,
@@ -211,8 +209,6 @@
 	access = list(
 		access_robotics, access_engine, access_solgov_crew, access_network, access_radio_eng
 	)
-
-	minimal_access = list()
 
 /datum/job/roboticist/get_description_blurb()
 	return "You are the Roboticist. You are responsible for repairing, upgrading and handling ship synthetics (like robots). You are also responsible for the production of exosuits(mechs) and bots for various departments. You answer to the Chief Engineer."

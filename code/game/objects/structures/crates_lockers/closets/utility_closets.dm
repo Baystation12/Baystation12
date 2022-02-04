@@ -20,7 +20,7 @@
 	closet_appearance = /decl/closet_appearance/oxygen
 
 /obj/structure/closet/emcloset/WillContain()
-	return list(/obj/item/tank/emergency/oxygen = 2,
+	return list(/obj/item/tank/oxygen_emergency = 2,
 				/obj/item/clothing/mask/breath = 2,
 				/obj/item/storage/toolbox/emergency,
 				/obj/item/inflatable/wall = 2,
@@ -55,7 +55,7 @@
 		/obj/item/clothing/suit/fire/firefighter,
 		/obj/item/clothing/mask/gas,
 		/obj/item/device/flashlight,
-		/obj/item/tank/emergency/oxygen/double/red,
+		/obj/item/tank/oxygen_scba,
 		/obj/item/extinguisher,
 		/obj/item/clothing/head/hardhat/firefighter/Chief)
 

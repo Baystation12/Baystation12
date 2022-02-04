@@ -40,10 +40,8 @@
 /decl/hierarchy/supply_pack/galley/seafood
 	name = "Perishables - Seafood"
 	contains = list(
-		/obj/item/reagent_containers/food/snacks/fish = 2,
-		/obj/item/reagent_containers/food/snacks/fish/shark = 2,
-		/obj/item/reagent_containers/food/snacks/fish/octopus = 2
-		)
+		/obj/random/fish = 8
+	)
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "seafood crate"
 	cost = 20
@@ -139,6 +137,7 @@
 	cost = 10
 	containername = "bar supplies crate"
 
+
 /decl/hierarchy/supply_pack/galley/beer_dispenser
 	name = "Equipment - Booze dispenser"
 	contains = list(
@@ -166,3 +165,13 @@
 	containertype = /obj/structure/largecrate
 	containername = "MRE dispenser crate"
 
+
+/decl/hierarchy/supply_pack/galley/silverware
+	name = "Equipment - Silver Cutlery"
+	cost = 50
+	containertype = /obj/structure/closet/crate/secure
+	containername = "silver cutlery crate"
+	access = access_kitchen
+	contains = list(
+		/obj/item/storage/box/silverware
+	)

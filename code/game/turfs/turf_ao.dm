@@ -1,13 +1,13 @@
 #define AO_TURF_CHECK(T) (!T.density || !T.opacity || !T.permit_ao)
 #define AO_SELF_CHECK(T) (!T.density && !T.opacity)
 
-/turf
-	var/permit_ao = TRUE
-	var/tmp/list/ao_overlays	// Current ambient occlusion overlays. Tracked so we can reverse them without dropping all priority overlays.
-	var/tmp/ao_neighbors
-	var/tmp/list/ao_overlays_mimic
-	var/tmp/ao_neighbors_mimic
-	var/ao_queued = AO_UPDATE_NONE
+/turf/var/permit_ao = TRUE
+/// Current ambient occlusion overlays. Tracked so we can reverse them without dropping all priority overlays.
+/turf/var/tmp/list/ao_overlays
+/turf/var/tmp/ao_neighbors
+/turf/var/tmp/list/ao_overlays_mimic
+/turf/var/tmp/ao_neighbors_mimic
+/turf/var/ao_queued = AO_UPDATE_NONE
 
 /turf/proc/regenerate_ao()
 	for (var/thing in RANGE_TURFS(src, 1))
@@ -32,7 +32,7 @@
 	var/cstr = "[corner]"
 	var/key = "[cstr]-[i]-[px]/[py]/[pz]/[pw]"
 
-	var/image/I = image('icons/turf/flooring/shadows.dmi', cstr, dir = 1 << (i-1))
+	var/image/I = image('icons/turf/flooring/shadows.dmi', cstr, dir = SHIFTL(1, i - 1))
 	I.alpha = WALL_AO_ALPHA
 	I.blend_mode = BLEND_OVERLAY
 	I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_ALPHA|RESET_COLOR|TILE_BOUND
@@ -56,13 +56,13 @@
 
 #define PROCESS_AO_CORNER(AO_LIST, NEIGHBORS, CORNER_INDEX, CDIR) \
 	corner = 0; \
-	if (NEIGHBORS & (1 << CDIR)) { \
+	if (NEIGHBORS & SHIFTL(1, CDIR)) { \
 		corner |= 2; \
 	} \
-	if (NEIGHBORS & (1 << turn(CDIR, 45))) { \
+	if (NEIGHBORS & SHIFTL(1, turn(CDIR, 45))) { \
 		corner |= 1; \
 	} \
-	if (NEIGHBORS & (1 << turn(CDIR, -45))) { \
+	if (NEIGHBORS & SHIFTL(1, turn(CDIR, -45))) { \
 		corner |= 4; \
 	} \
 	if (corner != 7) {	/* 7 is the 'no shadows' state, no reason to add overlays for it. */ \

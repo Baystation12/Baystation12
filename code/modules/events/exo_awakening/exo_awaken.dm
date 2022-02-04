@@ -12,19 +12,18 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	var/list/players_on_site = list()
 	var/target_mob_count = 0 //overall target mob count, set to nonzero during setup
 	var/datum/mob_list/chosen_mob_list //the chosen list of mobs we will pick from when spawning, also based on severity
-	var/original_severity
 	var/delay_time // Amount of time between the event starting and mobs beginning spawns
 	var/spawning = FALSE // Set to TRUE once the initial delay passes
 
 /datum/event/exo_awakening/setup()
 	announceWhen = rand(15, 45)
 	affecting_z = list()
-	original_severity = severity //incase we need to re-roll a different event.
-	if (severity == EVENT_LEVEL_MAJOR || prob(25))
-		severity = EVENT_LEVEL_MAJOR //if original event was moderate, this will need updating
+	if (prob(25))
+		severity = EVENT_LEVEL_MAJOR
 
 		chosen_mob_list = pick(typesof(/datum/mob_list/major) - /datum/mob_list/major)
 	else
+		severity = EVENT_LEVEL_MODERATE
 		chosen_mob_list = pick(typesof(/datum/mob_list/moderate) - /datum/mob_list/moderate)
 
 	for (var/area/A in world)
@@ -102,7 +101,6 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 		if (!length(sites))
 			log_debug("Exoplanet Awakening failed to run, not enough players on any planet. Aborting.")
-			severity = original_severity
 			kill()
 			return
 
@@ -112,7 +110,6 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 	if (!chosen_area)
 		log_debug("Exoplanet Awakening failed to start, could not find a planetary area.")
-		severity = original_severity
 		kill()
 
 //Notify all players on the planet that the event is beginning.
@@ -134,7 +131,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 /datum/event/exo_awakening/announce()
 	var/announcement = ""
 	if (severity > EVENT_LEVEL_MODERATE)
-		announcement = "Extreme biological activity spike detected on [location_name()]. Recommend away team evacuation."
+		announcement = "Extreme biological activity spike detected on [location_name()]."
 	else
 		announcement = "Anomalous biological activity detected on [location_name()]."
 

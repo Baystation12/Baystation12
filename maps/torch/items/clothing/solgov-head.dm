@@ -415,7 +415,7 @@
 //helmets and other such trash
 
 /obj/item/clothing/head/helmet/solgov
-	accessories = list(/obj/item/clothing/accessory/armor/helmcover/blue/sol)
+	accessories = list(/obj/item/clothing/accessory/helmet_cover/blue/sol)
 
 /obj/item/clothing/head/helmet/solgov/security
 	name = "security helmet"

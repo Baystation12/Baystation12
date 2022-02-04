@@ -1,5 +1,6 @@
 /* *
 DM version compatibility macros & procs
+Retain even if empty - the future exists
 */
 
 #if DM_VERSION < 513
@@ -84,21 +85,4 @@ DM version compatibility macros & procs
 			if (9) return list(hex2num("[T[2]][T[3]]"), hex2num("[T[4]][T[5]]"), hex2num("[T[6]][T[7]]"), hex2num("[T[8]][T[9]]")) //"#RRGGBBAA"
 	crash_with("bad color '[T]'")
 
-
-#endif
-
-
-/**
-	FOR_BLIND provides a common pattern for a typed for..in that SKIPS type checking.
-	This kind of loop provides a decent performance improvement but is best reserved
-	for hotspot code where the type of the members of the collection is never in doubt.
-	"as anything" became valid syntax in build 513.1540: <http://byond.com/docs/notes/513.html>
-	eg:
-	FOR_BLIND(client/C, GLOB.clients)
-		to_chat(C, "Hello [C].")
-*/
-#if DM_BUILD < 1540
-#define FOR_BLIND(V, C) for (var/V as() in C)
-#else
-#define FOR_BLIND(V, C) for (var/V as anything in C)
 #endif

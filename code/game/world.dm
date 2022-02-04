@@ -1,4 +1,4 @@
-#define RECOMMENDED_VERSION 512
+#define RECOMMENDED_VERSION 514
 #define FAILED_DB_CONNECTION_CUTOFF 5
 #define THROTTLE_MAX_BURST 15 SECONDS
 #define SET_THROTTLE(TIME, REASON) throttle[1] = base_throttle + (TIME); throttle[2] = (REASON);
@@ -84,6 +84,11 @@ GLOBAL_VAR(href_logfile)
 /proc/auxtools_expr_stub()
 	return
 
+
+#ifndef UNIT_TEST
+/hook/startup/proc/set_visibility()
+	world.update_hub_visibility(config.hub_visible)
+#endif
 
 /world/New()
 	var/debug_server = world.GetConfig("env", "AUXTOOLS_DEBUG_DLL")
@@ -446,13 +451,13 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		if(rank == "Unknown")
 			rank = "Staff"
 
-		var/message =	"<font color='red'>[rank] PM from <b><a href='?irc_msg=[input["sender"]]'>[input["sender"]]</a></b>: [input["msg"]]</font>"
-		var/amessage =  "<font color='blue'>[rank] PM from <a href='?irc_msg=[input["sender"]]'>[input["sender"]]</a> to <b>[key_name(C)]</b> : [input["msg"]]</font>"
+		var/message =	"<span class=\"pm\">[rank] PM from <b><a href='?irc_msg=[input["sender"]]'>[input["sender"]]</a></b>: [input["msg"]]</span>"
+		var/amessage =  "<span class=\"staff_pm\">[rank] PM from <a href='?irc_msg=[input["sender"]]'>[input["sender"]]</a> to <b>[key_name(C)]</b> : [input["msg"]]</span>"
 
 		C.received_irc_pm = world.time
 		C.irc_admin = input["sender"]
 
-		sound_to(C, 'sound/effects/adminhelp.ogg')
+		sound_to(C, 'sound/misc/staff_message.ogg')
 		to_chat(C, message)
 
 		for(var/client/A in GLOB.admins)
@@ -484,14 +489,6 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 				return "Ckey not found"
 		else
 			return "Database connection failed or not set up"
-
-	else if(copytext_char(T,1,19) == "prometheus_metrics")
-		if(input["key"] != config.comms_password)
-			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
-			return "Bad Key"
-		if(!GLOB || !GLOB.prometheus_metrics)
-			return "Metrics not ready"
-		return GLOB.prometheus_metrics.collect()
 
 
 /world/Reboot(var/reason)
@@ -564,54 +561,12 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 				var/datum/admins/D = new /datum/admins(title, rights, ckey)
 				D.associate(GLOB.ckey_directory[ckey])
 
+
 /world/proc/update_status()
-	var/s = ""
+	if (!config?.hub_visible || !config.hub_entry)
+		return
+	status = config.generate_hub_entry()
 
-	if (config && config.server_name)
-		s += "<b>[config.server_name]</b> &#8212; "
-
-	s += "<b>[station_name()]</b>";
-	s += " ("
-	s += "<a href=\"https://forums.baystation12.net/\">" //Change this to wherever you want the hub to link to.
-	s += "Forums"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
-	s += "</a>"
-	s += ")"
-
-	var/list/features = list()
-
-	if(SSticker.master_mode)
-		features += SSticker.master_mode
-	else
-		features += "<b>STARTING</b>"
-
-	if (!config.enter_allowed)
-		features += "closed"
-
-	features += config.abandon_allowed ? "respawn" : "no respawn"
-
-	if (config && config.allow_vote_mode)
-		features += "vote"
-
-	var/n = 0
-	for (var/mob/M in GLOB.player_list)
-		if (M.client)
-			n++
-
-	if (n > 1)
-		features += "~[n] players"
-	else if (n > 0)
-		features += "~[n] player"
-
-
-	if (config && config.hostedby)
-		features += "hosted by <b>[config.hostedby]</b>"
-
-	if (features)
-		s += ": [jointext(features, ", ")]"
-
-	/* does this help? I do not know */
-	if (src.status != s)
-		src.status = s
 
 /world/proc/SetupLogs()
 	GLOB.log_directory = "data/logs/[time2text(world.realtime, "YYYY/MM/DD")]/round-"

@@ -359,7 +359,7 @@
 		)
 		if (I)
 			var/obj/structure/inflatable/S = target
-			I.health = S.health
+			copy_health(S, I)
 		qdel(target)
 
 	else if (istype(target, /obj/item/inflatable))

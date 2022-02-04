@@ -82,17 +82,19 @@ LOG_ATTACK
 ## disconnect players who did nothing during the set amount of minutes
 # KICK_INACTIVE 10
 
-## probablities for game modes chosen in "secret" and "random" modes
-##
+## Prevent Secret from being added to mode votes
+# SECRET_DISABLED
+
+## probablities for game modes chosen in Secret
 ## default probablity is 1, increase to make that mode more likely to be picked
 ## set to 0 to disable that mode
 PROBABILITY EXTENDED 1
-PROBABILITY MALFUNCTION 1
+PROBABILITY TRAITOR 1
+PROBABILITY SPYVSPY 1
 PROBABILITY MERCENARY 1
-PROBABILITY WIZARD 1
-PROBABILITY CHANGELING 1
+PROBABILITY HEIST 1
 PROBABILITY CULT 1
-PROBABILITY EXTEND-A-TRAITORMONGOUS 6
+PROBABILITY CHANGELING 1
 
 ## if possible round types will be hidden from players for secret rounds
 #SECRET_HIDE_POSSIBILITIES
@@ -182,26 +184,43 @@ GUEST_BAN
 ## Unlike SERVER, this one shouldn't break auto-reconnect
 #SERVERURL server.net:port
 
-## forum address
-# FORUMURL http://example.com
-
 ## Wiki address
-# WIKIURL http://example.com
+## Where your server's documentation lives
+# WIKI_URL https://example.com
 
-## GitHub address
-# GITHUBURL https://github.com/example-user/example-repository
+## Rules address
+## Where your server's rules can be found
+# RULES_URL https://example.com
+
+## Lore address
+## Where your server's scintillating background material can be read
+# LORE_URL https://example.com
+
+## Forum address
+## Where your users can go to chat in the old fashion
+# FORUM_URL https://example.com
+
+## Source address
+## Where your users can go to stick their fingers in the code
+# SOURCE_URL https://example.com
 
 ## GitHub new issue address
-# ISSUEREPORTURL https://github.com/example-user/example-repository/issues/new
+## Where your users can go to complain about problems with the code
+# ISSUE_URL https://example.com
 
-## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
-# BANAPPEALS http://example.com
+## Discord address
+## Where your users can go to complain at each other in real time
+# DISCORD_URL https://example.com
 
-##Defines the ticklag for the world. 0.5 is smooth, 0.7 is less smooth.
-TICKLAG 0.5
+## Ban appeals URL
+## Where your users can go to tell you they've changed
+# BANAPPEALS https://example.com
 
-##Defines world FPS. Defaults to 20.
-# FPS 20
+## Defines world tick rate relative to 10/sec at 1 and 20/sec at 0.5. Use this OR fps, not both. Defaults to 0.333333
+# TICKLAG 0.333333
+
+## Defines world tick rate. Use this OR ticklag, not both. Defaults to 30.
+FPS 30
 
 ## Whether the server will talk to other processes through socket_talk
 SOCKET_TALK 0
@@ -422,3 +441,16 @@ RADIATION_LOWER_LIMIT 0.15
 
 ## Allow to use emojis in all OOC chats(looc, ooc, aooc, dsay, ahelp)
 #TOGGLE_EMOJIS
+## Maximum time a round can last for (in minutes). If this time is exceeded,
+## the round will autotransfer without a vote at the next continue vote. Leave disabled for no limit.
+#MAXIMUM_ROUND_LENGTH 120
+
+## The delay in deciseconds between stat() updates.
+## Lower can be more responsive to scene changes and updates but has a higher client/server overhead.
+# STAT_DELAY 5
+
+## The maximum number of times someone can be warned in a round before they are automatically banned.
+# WARN_AUTOBAN_THRESHOLD 3
+
+## The length in minutes of an automatic ban created by passing the warning threshold.
+# WARN_AUTOBAN_DURATION 30

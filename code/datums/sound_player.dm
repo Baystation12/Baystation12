@@ -72,6 +72,8 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 		sound_tokens_by_sound_id[sound_id] = sound_tokens
 	sound_tokens += sound_token
 
+#define SOUND_STOPPED FLAG(15)
+
 /*
 	Outwardly this is a merely a toke/little helper that a user utilize to adjust sounds as desired (and possible).
 	In reality this is where the heavy-lifting happens.
@@ -85,7 +87,6 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	var/sound_id       // The associated sound id, used for cleanup
 	var/status = 0     // Paused, muted, running? Global for all listeners
 	var/listener_status// Paused, muted, running? Specific for the given listener.
-	var/const/SOUND_STOPPED = 0x8000
 
 	var/datum/proximity_trigger/square/proxy_listener
 	var/list/can_be_heard_from
@@ -132,7 +133,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	. = ..()
 
 datum/sound_token/proc/SetVolume(var/new_volume)
-	new_volume = Clamp(new_volume, 0, 100)
+	new_volume = clamp(new_volume, 0, 100)
 	if(_sound.volume == new_volume)
 		return
 	_sound.volume = new_volume
@@ -241,7 +242,7 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 	_sound.y = 1
 	// Far as I can tell from testing, sound priority just doesn't work.
 	// Sounds happily steal channels from each other no matter what.
-	_sound.priority = Clamp(255 - distance, 0, 255)
+	_sound.priority = clamp(255 - distance, 0, 255)
 	PrivUpdateListener(listener, update_sound)
 
 /datum/sound_token/proc/PrivUpdateListeners()

@@ -43,15 +43,9 @@
 	return 1
 
 /obj/structure/table/bullet_act(obj/item/projectile/P)
-	if(!(P.damage_type == BRUTE || P.damage_type == BURN))
-		return 0
-
-	if(take_damage(P.damage/2))
-		//prevent tables with 1 health left from stopping bullets outright
-		return PROJECTILE_CONTINUE //the projectile destroyed the table, so it gets to keep going
-
-	visible_message("<span class='warning'>\The [P] hits [src]!</span>")
-	return 0
+	. = ..()
+	if (!is_alive())
+		return PROJECTILE_CONTINUE
 
 /obj/structure/table/CheckExit(atom/movable/O as mob|obj, target as turf)
 	if(istype(O) && O.checkpass(PASS_FLAG_TABLE))
@@ -72,35 +66,6 @@
 	if (target.loc != loc)
 		step(target, get_dir(target, loc))
 	..()
-
-/obj/structure/table/attackby(obj/item/W, mob/user, var/click_params)
-	if (!W) return
-
-	// Handle dismantling or placing things on the table from here on.
-	if(isrobot(user))
-		return
-
-	if(W.loc != user) // This should stop mounted modules ending up outside the module.
-		return
-
-	if(istype(W, /obj/item/melee/energy/blade) || istype(W,/obj/item/psychic_power/psiblade/master/grand/paramount))
-		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-		spark_system.set_up(5, 0, src.loc)
-		spark_system.start()
-		playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
-		playsound(src.loc, "sparks", 50, 1)
-		user.visible_message("<span class='danger'>\The [src] was sliced apart by [user]!</span>")
-		break_to_parts()
-		return
-
-	if(can_plate && !material)
-		to_chat(user, "<span class='warning'>There's nothing to put \the [W] on! Try adding plating to \the [src] first.</span>")
-		return
-
-	// Placing stuff on tables
-	if(user.unEquip(W, src.loc))
-		auto_align(W, click_params)
-		return 1
 
 /*
 Automatic alignment of items to an invisible grid, defined by CELLS and CELLSIZE, defined in code/__defines/misc.dm.
@@ -132,8 +97,8 @@ Note: This proc can be overwritten to allow for different types of auto-alignmen
 	var/mouse_x = text2num(click_data["icon-x"])-1 // Ranging from 0 to 31
 	var/mouse_y = text2num(click_data["icon-y"])-1
 
-	var/cell_x = Clamp(round(mouse_x/CELLSIZE), 0, CELLS-1) // Ranging from 0 to CELLS-1
-	var/cell_y = Clamp(round(mouse_y/CELLSIZE), 0, CELLS-1)
+	var/cell_x = clamp(round(mouse_x/CELLSIZE), 0, CELLS-1) // Ranging from 0 to CELLS-1
+	var/cell_y = clamp(round(mouse_y/CELLSIZE), 0, CELLS-1)
 
 	var/list/center = cached_key_number_decode(W.center_of_mass)
 

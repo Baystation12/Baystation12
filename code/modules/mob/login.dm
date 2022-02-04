@@ -51,7 +51,7 @@
 	if(check_rights((R_ADMIN|R_MOD),0,C))
 		to_chat(C,"<span class='staffwarn'>StaffWarn: [client.ckey] [action]</span><br><span class='notice'>[client.staffwarn]</span>")
 		if(noise && C.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == GLOB.PREF_HEAR)
-			sound_to(C, 'sound/effects/adminhelp.ogg')
+			sound_to(C, 'sound/misc/staff_message.ogg')
 
 /mob
 	var/client/my_client // Need to keep track of this ourselves, since by the time Logout() is called the client has already been nulled

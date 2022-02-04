@@ -49,8 +49,13 @@ SUBSYSTEM_DEF(supply)
 /datum/controller/subsystem/supply/fire()
 	add_points_from_source(points_per_process, "time")
 
-/datum/controller/subsystem/supply/stat_entry()
-	..("Points: [points]")
+
+/datum/controller/subsystem/supply/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		text = "[text] | Points [points]"
+	..(text, force)
+
 
 //Supply-related helper procs.
 

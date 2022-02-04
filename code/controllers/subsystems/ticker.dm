@@ -133,15 +133,10 @@ SUBSYSTEM_DEF(ticker)
 			end_game_state = END_GAME_ENDING
 			callHook("roundend")
 			if (universe_has_ended)
-				if(mode.station_was_nuked)
-					SSstatistics.set_field_details("end_proper","nuke")
-				else
-					SSstatistics.set_field_details("end_proper","universe destroyed")
 				if(!delay_end)
 					to_world("<span class='notice'><b>Rebooting due to destruction of [station_name()] in [restart_timeout/10] seconds</b></span>")
 
 			else
-				SSstatistics.set_field_details("end_proper","proper completion")
 				if(!delay_end)
 					to_world("<span class='notice'><b>Restarting in [restart_timeout/10] seconds</b></span>")
 			handle_tickets()
@@ -162,30 +157,34 @@ SUBSYSTEM_DEF(ticker)
 			log_error("Ticker arrived at round end in an unexpected endgame state.")
 
 
-/datum/controller/subsystem/ticker/stat_entry()
-	switch(GAME_STATE)
-		if(RUNLEVEL_LOBBY)
-			..("[round_progressing ? "START:[round(pregame_timeleft/10)]s" : "(PAUSED)"]")
-		if(RUNLEVEL_SETUP)
-			..("SETUP")
-		if(RUNLEVEL_GAME)
-			..("GAME")
-		if(RUNLEVEL_POSTGAME)
-			switch(end_game_state)
-				if(END_GAME_NOT_OVER)
-					..("ENDGAME ERROR")
-				if(END_GAME_AWAITING_MAP)
-					..("MAP VOTE")
-				if(END_GAME_MODE_FINISH_DONE)
-					..("MODE OVER, WAITING")
-				if(END_GAME_READY_TO_END)
-					..("ENDGAME PROCESSING")
-				if(END_GAME_DELAYED)
-					..("PAUSED")
-				if(END_GAME_AWAITING_TICKETS)
-					..("AWAITING TICKETS")
-				if(END_GAME_ENDING)
-					..("END IN [round(restart_timeout/10)]s")
+/datum/controller/subsystem/ticker/stat_entry(text, force)
+	IF_UPDATE_STAT
+		force = TRUE
+		switch (GAME_STATE)
+			if (RUNLEVEL_LOBBY)
+				text = "[round_progressing ? "START: [round(pregame_timeleft / 10)]s" : "(PAUSED)"]"
+			if (RUNLEVEL_SETUP)
+				text = "SETUP"
+			if (RUNLEVEL_GAME)
+				text = "GAME"
+			if (RUNLEVEL_POSTGAME)
+				switch (end_game_state)
+					if (END_GAME_NOT_OVER)
+						text = "ENDGAME ERROR"
+					if (END_GAME_AWAITING_MAP)
+						text = "MAP VOTE"
+					if (END_GAME_MODE_FINISH_DONE)
+						text = "MODE OVER, WAITING"
+					if (END_GAME_READY_TO_END)
+						text = "ENDGAME PROCESSING"
+					if (END_GAME_DELAYED)
+						text = "PAUSED"
+					if (END_GAME_AWAITING_TICKETS)
+						text = "AWAITING TICKETS"
+					if (END_GAME_ENDING)
+						text = "END IN [round(restart_timeout / 10)]s"
+	..(text, force)
+
 
 /datum/controller/subsystem/ticker/Recover()
 	pregame_timeleft = SSticker.pregame_timeleft
@@ -230,7 +229,7 @@ Helpers
 
 	//Find the relevant datum, resolving secret in the process.
 	var/list/base_runnable_modes = config.get_runnable_modes() //format: list(config_tag = weight)
-	if((mode_to_try=="random") || (mode_to_try=="secret"))
+	if (mode_to_try=="secret")
 		var/list/runnable_modes = base_runnable_modes - bad_modes
 		if(secret_force_mode != "secret") // Config option to force secret to be a specific mode.
 			mode_datum = config.pick_mode(secret_force_mode)
@@ -254,12 +253,13 @@ Helpers
 	mode_datum.create_antagonists() // Init operation on the mode; sets up antag datums and such.
 	mode_datum.pre_setup() // Makes lists of viable candidates; performs candidate draft for job-override roles; stores the draft result both internally and on the draftee.
 	SSjobs.divide_occupations(mode_datum) // Gives out jobs to everyone who was not selected to antag.
-
-	if(mode_datum.startRequirements())
+	var/list/lobby_players = SSticker.lobby_players()
+	var/result = mode_datum.check_startable(lobby_players)
+	if(result)
 		mode_datum.fail_setup()
 		SSjobs.reset_occupations()
 		bad_modes += mode_datum.config_tag
-		log_debug("Could not start game mode [mode_to_try] ([mode_datum.name]) - Failed to meet requirements.")
+		log_debug("Could not start game mode [mode_to_try] ([mode_datum.name]) - Failed to meet requirements - [result]")
 		return
 
 	//Declare victory, make an announcement.
@@ -291,6 +291,28 @@ Helpers
 			else
 				if(player.create_character())
 					qdel(player)
+
+/datum/controller/subsystem/ticker/proc/lobby_players(list/players)
+	if (!players)
+		players = GLOB.player_list
+	var/list/lobby_players = list()
+	for (var/mob/new_player/player in players)
+		if (!player.client)
+			continue
+		lobby_players += player
+	return lobby_players
+
+
+/datum/controller/subsystem/ticker/proc/ready_players(list/players)
+	if (!players)
+		players = lobby_players()
+	var/list/ready_players = list()
+	for (var/mob/new_player/player as anything in players)
+		if (!player.ready)
+			continue
+		ready_players += player
+	return ready_players
+
 
 /datum/controller/subsystem/ticker/proc/collect_minds()
 	for(var/mob/living/player in GLOB.player_list)

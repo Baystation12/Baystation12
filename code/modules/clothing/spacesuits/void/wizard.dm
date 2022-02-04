@@ -43,8 +43,8 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS
 
-/obj/item/clothing/suit/space/void/wizard/New()
-	..()
+/obj/item/clothing/suit/space/void/wizard/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/gloves/wizard

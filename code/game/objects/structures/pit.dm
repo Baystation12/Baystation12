@@ -37,8 +37,8 @@
 
 /obj/structure/pit/on_update_icon()
 	icon_state = "pit[open]"
-	if(istype(loc,/turf/simulated/floor/exoplanet))
-		var/turf/simulated/floor/exoplanet/E = loc
+	if(istype(loc,/turf/unsimulated/floor/exoplanet))
+		var/turf/unsimulated/floor/exoplanet/E = loc
 		if(E.dirt_color)
 			color = E.dirt_color
 

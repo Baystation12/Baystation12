@@ -29,7 +29,7 @@
 		/obj/item/device/radio/headset/headset_cargo,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/suit/fire/firefighter,
-		/obj/item/tank/emergency/oxygen,
+		/obj/item/tank/oxygen_emergency,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/glasses/meson,
 		/obj/item/clothing/head/soft,

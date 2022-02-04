@@ -33,6 +33,7 @@
 	var/flooded // Whether or not this turf is absolutely flooded ie. a water source.
 	var/height = 0 // Determines if fluids can overflow onto next turf
 	var/footstep_type
+	var/list/resources
 
 	var/tmp/changing_turf
 
@@ -91,11 +92,21 @@
 	..()
 	return QDEL_HINT_IWILLGC
 
-/turf/ex_act(severity)
-	return 0
-
 /turf/proc/is_solid_structure()
 	return 1
+
+
+/turf/proc/get_footstep_sound(mob/caller)
+	for(var/obj/structure/S in contents)
+		if(S.footstep_type)
+			return get_footstep(S.footstep_type, caller)
+	if(check_fluid_depth(10) && !is_flooded(TRUE))
+		return get_footstep(/decl/footsteps/water, caller)
+	if(footstep_type)
+		return get_footstep(footstep_type, caller)
+	if(is_plating())
+		return get_footstep(/decl/footsteps/plating, caller)
+
 
 /turf/attack_hand(mob/user)
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)

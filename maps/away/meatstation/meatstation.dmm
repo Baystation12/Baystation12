@@ -561,7 +561,6 @@
 /turf/simulated/floor/tiled,
 /area/meatstation/centerhallway)
 "bw" = (
-/obj/vehicle/train/cargo/trolley,
 /obj/effect/floor_decal/corner/brown/border{
 	dir = 9;
 	icon_state = "bordercolor"
@@ -610,10 +609,6 @@
 "bD" = (
 /turf/simulated/floor/tiled/white,
 /area/meatstation/lab)
-"bE" = (
-/obj/vehicle/train/cargo/engine,
-/turf/simulated/floor/tiled/dark/airless,
-/area/meatstation/cargo)
 "bF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2714,7 +2709,7 @@
 /turf/simulated/floor/airless,
 /area/space)
 "fP" = (
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "fQ" = (
 /obj/structure/window/basic{
@@ -2722,7 +2717,7 @@
 	},
 /obj/machinery/portable_atmospherics/hydroponics/soil,
 /obj/item/seeds/weeds,
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "fR" = (
 /obj/structure/window/basic{
@@ -2733,16 +2728,16 @@
 	},
 /obj/machinery/portable_atmospherics/hydroponics/soil,
 /obj/item/seeds/weeds,
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "fS" = (
 /obj/machinery/door/window/eastleft,
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "fT" = (
 /obj/machinery/portable_atmospherics/hydroponics/soil,
 /obj/item/seeds/weeds,
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "fU" = (
 /obj/structure/window/basic{
@@ -2750,7 +2745,7 @@
 	},
 /obj/machinery/portable_atmospherics/hydroponics/soil,
 /obj/item/seeds/weeds,
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "fV" = (
 /obj/structure/table/marble,
@@ -2867,7 +2862,7 @@
 /area/meatstation/hydroponics)
 "gj" = (
 /obj/structure/flora/ausbushes/sparsegrass,
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "gk" = (
 /obj/random/single/meatstation/wormscientist,
@@ -3513,8 +3508,7 @@
 "hL" = (
 /obj/structure/table/rack/dark,
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /obj/machinery/door/window/southright,
 /obj/item/reagent_containers/glass/beaker/vial/random,
@@ -3524,21 +3518,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/meatstation/lab)
-"hM" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/vehicle/bike/gyroscooter,
-/turf/simulated/floor/tiled,
-/area/meatstation/centerhallway)
 "hN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
@@ -3572,7 +3551,6 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/meatstation/cargo)
 "hP" = (
-/obj/vehicle/train/cargo/trolley,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -3769,7 +3747,7 @@
 /area/meatstation/bathroom)
 "im" = (
 /obj/machinery/beehive,
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "in" = (
 /obj/effect/floor_decal/corner/lime/border{
@@ -4416,8 +4394,7 @@
 	icon_state = "pipe-c"
 	},
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -4630,26 +4607,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/meatstation/lab)
-"ks" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/vehicle/bike/gyroscooter,
-/turf/simulated/floor/tiled/white,
-/area/meatstation/lab)
 "kt" = (
 /obj/structure/table/rack/dark,
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /obj/machinery/door/window/southright,
 /obj/random/single/meatstation/cell,
@@ -4671,8 +4632,7 @@
 "kw" = (
 /obj/structure/table/rack/dark,
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /obj/machinery/door/window/northright,
 /obj/item/reagent_containers/glass/beaker/vial/random,
@@ -4682,8 +4642,7 @@
 "kx" = (
 /obj/structure/table/rack/dark,
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /obj/machinery/door/window/northright,
 /obj/random/single/meatstation/low/biocell,
@@ -6236,14 +6195,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/meatstation/cargo)
-"oD" = (
-/obj/vehicle/train/cargo/trolley,
-/obj/effect/floor_decal/corner/brown/border{
-	dir = 1;
-	icon_state = "bordercolor"
-	},
-/turf/simulated/floor/tiled/dark/airless,
-/area/meatstation/cargo)
 "oE" = (
 /obj/effect/overmap/visitable/sector/meatstation,
 /turf/space,
@@ -6266,10 +6217,6 @@
 "oH" = (
 /turf/simulated/floor/airless,
 /area/meatstation/cargo)
-"oI" = (
-/obj/vehicle/train/cargo/trolley,
-/turf/space,
-/area/space)
 "oJ" = (
 /obj/item/book/manual/stasis,
 /turf/simulated/floor/tiled/airless,
@@ -6430,10 +6377,6 @@
 /obj/item/extinguisher,
 /turf/space,
 /area/space)
-"pj" = (
-/obj/vehicle/train/cargo/trolley,
-/turf/simulated/floor/airless,
-/area/meatstation/cargo)
 "pk" = (
 /obj/item/evidencebag,
 /turf/space,
@@ -6462,7 +6405,6 @@
 /turf/space,
 /area/space)
 "pq" = (
-/obj/vehicle/train/cargo/engine,
 /obj/effect/floor_decal/corner/brown/border{
 	dir = 1;
 	icon_state = "bordercolor"
@@ -8107,12 +8049,12 @@
 /area/meatstation/hydroponics)
 "tl" = (
 /obj/random/single/meatstation/low/wormguard,
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "tm" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /obj/random/single/meatstation/low/wormguard,
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "tn" = (
 /obj/random/single/meatstation/meatworm,
@@ -8776,8 +8718,8 @@
 "uI" = (
 /obj/structure/table/rack,
 /obj/random/trash,
-/obj/item/clothing/accessory/armguards/riot,
-/obj/item/clothing/accessory/legguards/riot,
+/obj/item/clothing/accessory/arm_guards/riot,
+/obj/item/clothing/accessory/leg_guards/riot,
 /obj/item/shield/riot,
 /obj/effect/floor_decal/corner/grey/border{
 	dir = 1;
@@ -9412,7 +9354,7 @@
 /obj/machinery/portable_atmospherics/hydroponics/soil,
 /obj/item/seeds/weeds,
 /obj/machinery/light,
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "wa" = (
 /obj/machinery/biogenerator,
@@ -22642,7 +22584,7 @@ aa
 aa
 aa
 aa
-oI
+aa
 aa
 aa
 aa
@@ -23659,7 +23601,7 @@ aa
 aa
 lk
 aa
-oI
+aa
 aa
 aa
 lY
@@ -24872,7 +24814,7 @@ pW
 pR
 sy
 oH
-pj
+oH
 cv
 wV
 fm
@@ -25054,7 +24996,7 @@ aD
 mb
 aD
 fe
-oD
+pq
 cv
 cv
 qt
@@ -25074,7 +25016,7 @@ pf
 ln
 oH
 oH
-bE
+cv
 oH
 wW
 fm
@@ -31930,7 +31872,7 @@ zT
 ac
 fA
 bD
-ks
+dm
 bI
 vL
 ac
@@ -35582,7 +35524,7 @@ ah
 ah
 ah
 yb
-hM
+bh
 yr
 ah
 aa

@@ -1099,25 +1099,25 @@ window "rpane"
 		saved-params = "splitter"
 		right = "outputwindow"
 		is-vert = false
-	elem "github"
+	elem "linksource"
 		type = BUTTON
 		pos = 476,0
 		size = 60x15
 		anchor1 = none
 		anchor2 = none
 		saved-params = "is-checked"
-		text = "GitHub"
-		command = "GitHub"
-	elem "BugReport"
+		text = "Source"
+		command = "link-source"
+	elem "linkissue"
 		type = BUTTON
 		pos = 536,0
 		size = 60x15
 		anchor1 = none
 		anchor2 = none
 		saved-params = "is-checked"
-		text = "Bug Report"
-		command = "Bug-Report"
-	elem "rulesb"
+		text = "Report Issue"
+		command = "link-issue"
+	elem "linkrules"
 		type = BUTTON
 		pos = 120,0
 		size = 60x15
@@ -1125,7 +1125,7 @@ window "rpane"
 		anchor2 = none
 		saved-params = "is-checked"
 		text = "Rules"
-		command = "rules"
+		command = "link-rules"
 		group = "rpanemode"
 	elem "changelog"
 		type = BUTTON
@@ -1137,7 +1137,7 @@ window "rpane"
 		text = "Changelog"
 		command = "Changelog"
 		group = "rpanemode"
-	elem "Lore"
+	elem "linklore"
 		type = BUTTON
 		pos = 208,0
 		size = 60x15
@@ -1145,9 +1145,9 @@ window "rpane"
 		anchor2 = none
 		saved-params = "is-checked"
 		text = "Lore"
-		command = "Lore"
+		command = "link-lore"
 		group = "rpanemode"
-	elem "forumb"
+	elem "linkforum"
 		type = BUTTON
 		pos = 328,0
 		size = 60x15
@@ -1155,9 +1155,9 @@ window "rpane"
 		anchor2 = none
 		saved-params = "is-checked"
 		text = "Forum"
-		command = "forum"
+		command = "link-forum"
 		group = "rpanemode"
-	elem "wikib"
+	elem "linkwiki"
 		type = BUTTON
 		pos = 268,0
 		size = 60x15
@@ -1165,7 +1165,7 @@ window "rpane"
 		anchor2 = none
 		saved-params = "is-checked"
 		text = "Wiki"
-		command = "wiki"
+		command = "link-wiki"
 		group = "rpanemode"
 	elem "textb"
 		type = BUTTON

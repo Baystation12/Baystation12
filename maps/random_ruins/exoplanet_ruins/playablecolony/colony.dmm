@@ -18,7 +18,7 @@
 /area/map_template/colony/tcomms)
 "af" = (
 /obj/structure/grille,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "ag" = (
 /obj/structure/table/steel_reinforced,
@@ -57,7 +57,7 @@
 /area/map_template/colony/tcomms)
 "aj" = (
 /obj/structure/catwalk,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "ak" = (
 /turf/simulated/wall,
@@ -278,7 +278,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "aN" = (
 /turf/simulated/wall,
@@ -380,7 +380,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "ba" = (
 /turf/simulated/wall/r_wall,
@@ -422,7 +422,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "bf" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -691,7 +691,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "bC" = (
 /obj/effect/floor_decal/techfloor{
@@ -782,7 +782,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "bJ" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -816,7 +816,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "bN" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,
@@ -874,7 +874,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "bS" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -898,7 +898,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "bU" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -1024,8 +1024,10 @@
 "cf" = (
 /obj/structure/catwalk,
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/power/emitter/gyrotron,
-/turf/simulated/floor/exoplanet/concrete,
+/obj/machinery/power/emitter/gyrotron{
+	req_lock_access = list()
+	},
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "cg" = (
 /obj/structure/cable{
@@ -1059,7 +1061,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "cj" = (
 /obj/structure/table/steel_reinforced,
@@ -1141,7 +1143,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "cr" = (
 /obj/structure/grille,
@@ -1155,7 +1157,7 @@
 	icon_state = "0-2";
 	pixel_y = 0
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "cs" = (
 /obj/structure/grille,
@@ -1169,7 +1171,7 @@
 	icon_state = "0-2";
 	pixel_y = 0
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "ct" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
@@ -1308,7 +1310,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "cL" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red,
@@ -1344,7 +1346,7 @@
 /obj/structure/sign/warning/compressed_gas{
 	pixel_y = -28
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "cQ" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
@@ -1564,7 +1566,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "dm" = (
 /obj/structure/catwalk,
@@ -1574,13 +1576,13 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/light/spot,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "dn" = (
 /obj/structure/catwalk,
 /obj/machinery/power/rad_collector,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "do" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1751,7 +1753,7 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/surgery)
 "dG" = (
 /obj/structure/cable{
@@ -2058,7 +2060,7 @@
 /obj/structure/catwalk,
 /obj/structure/closet/crate/solar_assembly,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "ei" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2112,7 +2114,7 @@
 /obj/structure/sign/warning/compressed_gas{
 	pixel_y = -28
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "em" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2148,7 +2150,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "ep" = (
 /obj/machinery/atmospherics/pipe/cap/hidden,
@@ -2228,7 +2230,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "ex" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2315,7 +2317,7 @@
 /obj/structure/catwalk,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/command)
 "eE" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
@@ -2414,7 +2416,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
 "eL" = (
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "eM" = (
 /obj/structure/table/steel_reinforced,
@@ -2603,7 +2605,7 @@
 /obj/structure/catwalk,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "fa" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -2621,7 +2623,7 @@
 "fc" = (
 /obj/structure/catwalk,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "fd" = (
 /obj/structure/table/steel_reinforced,
@@ -2671,7 +2673,7 @@
 /area/map_template/colony/atmospherics)
 "fi" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/atmospherics)
 "fj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -3885,8 +3887,7 @@
 	dir = 8
 	},
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/map_template/colony/atmospherics)
@@ -3895,8 +3896,7 @@
 	dir = 4
 	},
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -4084,7 +4084,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on{
 	dir = 4
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/atmospherics)
 "hr" = (
 /turf/simulated/wall,
@@ -5551,7 +5551,7 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/messhall)
 "jL" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -5807,8 +5807,7 @@
 /area/map_template/colony)
 "kc" = (
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -6209,11 +6208,11 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "kL" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "kM" = (
 /obj/structure/crematorium{
@@ -6221,7 +6220,7 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "kN" = (
 /obj/machinery/button/crematorium{
@@ -6233,7 +6232,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/recharger,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "kO" = (
 /obj/structure/closet/firecloset,
@@ -6261,7 +6260,7 @@
 "kR" = (
 /obj/machinery/mech_recharger,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "kS" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -6350,12 +6349,12 @@
 	dir = 8;
 	icon_state = "railing0-1"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "la" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lb" = (
 /obj/machinery/door/window/eastright,
@@ -6413,7 +6412,7 @@
 "lg" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lh" = (
 /obj/machinery/door/airlock/external{
@@ -6490,7 +6489,7 @@
 	dir = 9
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lo" = (
 /mob/living/simple_animal/passive/cow,
@@ -6533,7 +6532,7 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lu" = (
 /obj/structure/cable{
@@ -6546,12 +6545,12 @@
 	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lv" = (
 /obj/effect/floor_decal/industrial/warning/dust,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lw" = (
 /obj/machinery/door/firedoor,
@@ -6595,7 +6594,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lA" = (
 /obj/machinery/light/spot{
@@ -6606,7 +6605,7 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lB" = (
 /obj/machinery/door/firedoor,
@@ -6637,7 +6636,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lD" = (
 /obj/structure/catwalk,
@@ -6647,7 +6646,7 @@
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lG" = (
 /obj/machinery/door/firedoor,
@@ -6823,13 +6822,13 @@
 	dir = 10
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lT" = (
 /obj/structure/catwalk,
 /obj/effect/floor_decal/industrial/warning/dust,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lU" = (
 /obj/structure/catwalk,
@@ -6837,7 +6836,7 @@
 	dir = 6
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lV" = (
 /obj/effect/floor_decal/industrial/warning/dust{
@@ -6845,7 +6844,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -6884,7 +6883,7 @@
 	dir = 8;
 	pixel_x = 22
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lY" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
@@ -6911,7 +6910,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "ma" = (
 /obj/machinery/airlock_sensor/airlock_exterior{
@@ -6945,7 +6944,7 @@
 /obj/item/clothing/head/helmet/space/emergency,
 /obj/item/clothing/suit/space/emergency,
 /obj/item/clothing/suit/space/emergency,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "mb" = (
 /obj/effect/decal/cleanable/dirt,
@@ -6964,7 +6963,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "md" = (
 /obj/structure/grille,
@@ -6977,7 +6976,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "me" = (
 /obj/machinery/fabricator/hacked,
@@ -7048,7 +7047,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "ml" = (
 /obj/machinery/door/firedoor,
@@ -7089,7 +7088,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "mo" = (
 /obj/machinery/door/firedoor,
@@ -7167,7 +7166,7 @@
 /obj/effect/floor_decal/industrial/warning/dust,
 /obj/structure/ore_box,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "mw" = (
 /obj/machinery/door/firedoor,
@@ -7241,7 +7240,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/command)
 "mD" = (
 /obj/structure/table/rack,
@@ -7257,8 +7256,8 @@
 /obj/item/device/suit_cooling_unit,
 /obj/item/clothing/suit/space/void/atmos,
 /obj/item/clothing/head/helmet/space/void/atmos,
-/obj/item/tank/emergency/oxygen/engi,
-/obj/item/tank/emergency/oxygen/engi,
+/obj/item/tank/oxygen_emergency_extended,
+/obj/item/tank/oxygen_emergency_extended,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/airlock)
 "mE" = (
@@ -7430,7 +7429,7 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/device/flashlight/lamp/floodlamp,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "mQ" = (
 /obj/effect/decal/cleanable/dirt,
@@ -7440,7 +7439,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/machinery/recharge_station,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "mR" = (
 /obj/structure/bed/chair/comfy/beige{
@@ -7527,7 +7526,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "na" = (
 /obj/structure/catwalk,
@@ -7541,7 +7540,7 @@
 	dir = 5;
 	icon_state = "intact"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "nb" = (
 /obj/structure/window/reinforced{
@@ -7643,8 +7642,8 @@
 /obj/item/device/suit_cooling_unit,
 /obj/item/clothing/suit/space/void/engineering/salvage,
 /obj/item/clothing/head/helmet/space/void/engineering/salvage,
-/obj/item/tank/emergency/oxygen/engi,
-/obj/item/tank/emergency/oxygen/engi,
+/obj/item/tank/oxygen_emergency_extended,
+/obj/item/tank/oxygen_emergency_extended,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/airlock)
 "ni" = (
@@ -7691,7 +7690,7 @@
 "nm" = (
 /obj/machinery/mining/drill,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "nn" = (
 /obj/effect/floor_decal/techfloor{
@@ -7722,7 +7721,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "nr" = (
 /obj/machinery/atmospherics/unary/heater{
@@ -7786,8 +7785,8 @@
 /obj/item/device/suit_cooling_unit,
 /obj/item/clothing/suit/space/void/mining/alt,
 /obj/item/clothing/head/helmet/space/void/mining/alt,
-/obj/item/tank/emergency/oxygen/engi,
-/obj/item/tank/emergency/oxygen/engi,
+/obj/item/tank/oxygen_emergency_extended,
+/obj/item/tank/oxygen_emergency_extended,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/airlock)
 "nx" = (
@@ -7802,7 +7801,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "nz" = (
 /obj/structure/grille,
@@ -7815,7 +7814,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "nA" = (
 /obj/structure/grille,
@@ -7833,7 +7832,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "nB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -8029,7 +8028,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "nQ" = (
 /obj/machinery/door/firedoor,
@@ -8062,7 +8061,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "nS" = (
 /obj/structure/cable{
@@ -8217,33 +8216,33 @@
 	icon_state = "loadingarea"
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "oe" = (
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/industrial/warning/dust,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "of" = (
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/industrial/warning/dust,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "og" = (
 /obj/effect/floor_decal/industrial/warning/dust,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "oh" = (
 /obj/effect/floor_decal/industrial/warning/dust,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "oi" = (
 /obj/structure/railing/mapped,
@@ -8263,8 +8262,7 @@
 /obj/item/storage/backpack/dufflebag/eng,
 /obj/machinery/door/window/northright,
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -8279,7 +8277,7 @@
 /obj/item/stack/flag/yellow,
 /obj/item/stack/flag/yellow,
 /obj/item/stack/flag/yellow,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "oj" = (
 /obj/structure/railing/mapped,
@@ -8306,7 +8304,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "ok" = (
 /obj/structure/railing/mapped,
@@ -8321,7 +8319,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "ol" = (
 /obj/structure/railing/mapped{
@@ -8343,7 +8341,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/catwalk,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "om" = (
 /obj/structure/cable{
@@ -8359,7 +8357,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/catwalk,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "on" = (
 /obj/structure/railing/mapped{
@@ -8381,7 +8379,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/catwalk,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "oo" = (
 /obj/structure/grille,
@@ -8394,7 +8392,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "op" = (
 /obj/structure/catwalk,
@@ -8404,7 +8402,7 @@
 	icon_state = "1-4"
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "oq" = (
 /obj/structure/catwalk,
@@ -8414,7 +8412,7 @@
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "or" = (
 /obj/structure/cable{
@@ -8427,7 +8425,7 @@
 	pixel_y = 28
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "os" = (
 /obj/structure/cable{
@@ -8437,7 +8435,7 @@
 	},
 /obj/structure/catwalk,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "ot" = (
 /obj/structure/catwalk,
@@ -8445,7 +8443,7 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/hydroponics)
 "ou" = (
 /obj/effect/floor_decal/industrial/warning/dust{
@@ -8479,7 +8477,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "ow" = (
 /obj/structure/cable{
@@ -8525,7 +8523,7 @@
 	dir = 1;
 	icon_state = "map"
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "oz" = (
 /obj/effect/decal/cleanable/dirt,
@@ -8533,14 +8531,14 @@
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 5
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "oA" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/structure/catwalk,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "oB" = (
 /obj/effect/decal/cleanable/dirt,
@@ -8548,7 +8546,7 @@
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 4
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "oC" = (
 /obj/effect/decal/cleanable/dirt,
@@ -8558,7 +8556,7 @@
 	icon_state = "intact"
 	},
 /obj/structure/catwalk,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "oD" = (
 /obj/machinery/alarm{
@@ -8648,7 +8646,7 @@
 	icon_state = "0-4"
 	},
 /obj/structure/grille,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "tz" = (
 /obj/machinery/portable_atmospherics/hydroponics,
@@ -8705,7 +8703,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "vt" = (
 /mob/living/simple_animal/passive/chicken,
@@ -8835,7 +8833,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/template_noop)
 "JY" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -8872,7 +8870,7 @@
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/hydroponics)
 "KK" = (
 /obj/machinery/portable_atmospherics/hydroponics,
@@ -8933,7 +8931,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped,
-/turf/simulated/floor/exoplanet/concrete,
+/turf/unsimulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "Ot" = (
 /turf/simulated/floor/tiled/white,

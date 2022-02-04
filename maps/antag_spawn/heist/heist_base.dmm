@@ -114,13 +114,6 @@
 	icon_state = "white"
 	},
 /area/map_template/syndicate_mothership/raider_base)
-"av" = (
-/obj/vehicle/bike/thermal,
-/turf/unsimulated/floor{
-	icon_state = "plating";
-	name = "plating"
-	},
-/area/map_template/syndicate_mothership/raider_base)
 "aw" = (
 /obj/random/trash,
 /turf/unsimulated/floor{
@@ -1331,7 +1324,7 @@
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
 /obj/item/material/harpoon,
-/obj/random/raider/lilgun,
+/obj/random/lilgun,
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "db" = (
@@ -1425,7 +1418,7 @@
 /obj/item/tank/oxygen,
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
-/obj/random/raider/biggun,
+/obj/random/biggun,
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dk" = (
@@ -1474,7 +1467,7 @@
 /obj/item/tank/oxygen,
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
-/obj/random/raider/lilgun,
+/obj/random/lilgun,
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dr" = (
@@ -1561,7 +1554,7 @@
 /obj/item/grenade/empgrenade,
 /obj/item/grenade/flashbang,
 /obj/item/grenade/spawnergrenade/manhacks,
-/obj/random/raider/biggun,
+/obj/random/biggun,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "dD" = (
@@ -1715,7 +1708,7 @@
 "dY" = (
 /obj/item/deck/cards,
 /obj/structure/table/steel,
-/obj/random/raider/lilgun,
+/obj/random/lilgun,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "dZ" = (
@@ -1777,7 +1770,7 @@
 /area/map_template/skipjack_station/start)
 "ei" = (
 /obj/structure/table/steel,
-/obj/random/raider/lilgun,
+/obj/random/lilgun,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "ej" = (
@@ -5218,7 +5211,7 @@ ab
 ab
 ab
 ae
-av
+aj
 az
 aj
 aj

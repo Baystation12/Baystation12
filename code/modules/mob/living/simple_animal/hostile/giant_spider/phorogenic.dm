@@ -16,7 +16,7 @@
 
 	attack_armor_pen = 15
 
-	movement_cooldown = 15
+	movement_cooldown = 10
 
 	poison_chance = 30
 	poison_per_bite = 0.5

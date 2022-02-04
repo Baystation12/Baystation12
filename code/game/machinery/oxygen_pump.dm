@@ -13,7 +13,7 @@
 	var/mob/living/carbon/breather
 	var/obj/item/clothing/mask/breath/contained
 
-	var/spawn_type = /obj/item/tank/emergency/oxygen/engi
+	var/spawn_type = /obj/item/tank/oxygen_emergency_extended
 	var/mask_type = /obj/item/clothing/mask/breath/emergency
 	var/icon_state_open = "emerg_open"
 	var/icon_state_closed = "emerg"

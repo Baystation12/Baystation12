@@ -111,8 +111,8 @@
 		bomb = ARMOR_BOMB_PADDED
 	)
 
-/obj/item/clothing/suit/cultrobes/magusred/New()
-	..()
+/obj/item/clothing/suit/cultrobes/magusred/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/head/helmet/space/cult
@@ -147,6 +147,6 @@
 	siemens_coefficient = 0.2
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS
 
-/obj/item/clothing/suit/space/cult/New()
-	..()
+/obj/item/clothing/suit/space/cult/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1

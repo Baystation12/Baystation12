@@ -154,7 +154,7 @@ var/global/list/sparring_attack_cache = list()
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
 	var/organ = affecting.name
 
-	attack_damage = Clamp(attack_damage, 1, 5) // We expect damage input of 1 to 5 for this proc. But we leave this check juuust in case.
+	attack_damage = clamp(attack_damage, 1, 5) // We expect damage input of 1 to 5 for this proc. But we leave this check juuust in case.
 
 	if(target == user)
 		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in the [organ]!</span>")
@@ -221,7 +221,7 @@ var/global/list/sparring_attack_cache = list()
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
 	var/organ = affecting.name
 
-	attack_damage = Clamp(attack_damage, 1, 5)
+	attack_damage = clamp(attack_damage, 1, 5)
 
 	switch(attack_damage)
 		if(1 to 2)	user.visible_message("<span class='danger'>[user] threw [target] a glancing [pick(attack_noun)] to the [organ]!</span>") //it's not that they're kicking lightly, it's that the kick didn't quite connect
@@ -261,7 +261,7 @@ var/global/list/sparring_attack_cache = list()
 	var/organ = affecting.name
 	var/obj/item/clothing/shoes = user.shoes
 
-	attack_damage = Clamp(attack_damage, 1, 5)
+	attack_damage = clamp(attack_damage, 1, 5)
 
 	var/shoe_text = shoes ? copytext_char(shoes.name, 1, -1) : "foot"
 	switch(attack_damage)

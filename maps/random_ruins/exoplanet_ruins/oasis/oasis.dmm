@@ -12,37 +12,37 @@
 /area/template_noop)
 "e" = (
 /obj/structure/flora/grass/green,
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/template_noop)
 "f" = (
 /obj/structure/flora/grass/both,
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/template_noop)
 "g" = (
-/turf/simulated/floor/exoplanet/water/shallow,
+/turf/unsimulated/floor/exoplanet/water/shallow,
 /area/template_noop)
 "h" = (
 /obj/structure/flora/ausbushes/reedbush,
-/turf/simulated/floor/exoplanet/water/shallow,
+/turf/unsimulated/floor/exoplanet/water/shallow,
 /area/template_noop)
 "i" = (
 /obj/structure/flora/bush,
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/template_noop)
 "j" = (
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/template_noop)
 "k" = (
 /obj/structure/flora/ausbushes/palebush,
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/template_noop)
 "l" = (
 /obj/structure/flora/grass/brown,
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/template_noop)
 "m" = (
 /obj/structure/flora/ausbushes,
-/turf/simulated/floor/exoplanet/grass,
+/turf/unsimulated/floor/exoplanet/grass,
 /area/template_noop)
 
 (1,1,1) = {"

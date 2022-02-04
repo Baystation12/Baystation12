@@ -4,16 +4,16 @@
 #define DEAD        2
 
 // Bitflags defining which status effects could be or are inflicted on a mob.
-#define CANSTUN     0x1
-#define CANWEAKEN   0x2
-#define CANPARALYSE 0x4
-#define CANPUSH     0x8
-#define PASSEMOTES  0x10    // Mob has a cortical borer or holders inside of it that need to see emotes.
-#define LEAPING     0x16
-#define GODMODE     0x1000
-#define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
-#define NO_ANTAG    0x4000  // Players are restricted from gaining antag roles when occupying this mob
-#define NOTARGET    0x8000  // Player is invisible to all simple mobs
+#define CANSTUN     FLAG(0)
+#define CANWEAKEN   FLAG(1)
+#define CANPARALYSE FLAG(2)
+#define CANPUSH     FLAG(3)
+#define PASSEMOTES  FLAG(4)  // Mob has a cortical borer or holders inside of it that need to see emotes.
+#define LEAPING     FLAG(5)
+#define GODMODE     FLAG(6)
+#define FAKEDEATH   FLAG(7)  // Replaces stuff like changeling.changeling_fakedeath.
+#define NO_ANTAG    FLAG(8)  // Players are restricted from gaining antag roles when occupying this mob
+#define NOTARGET    FLAG(9)  // Player is invisible to all simple mobs
 
 // Grab Types
 #define GRAB_NORMAL			"normal"
@@ -31,10 +31,10 @@
 #define NAB_AGGRESSIVE	"nab aggressive"
 #define NAB_KILL		"nab kill"
 
-#define BORGMESON 0x1
-#define BORGTHERM 0x2
-#define BORGXRAY  0x4
-#define BORGMATERIAL  8
+#define BORGMESON FLAG(0)
+#define BORGTHERM FLAG(1)
+#define BORGXRAY  FLAG(2)
+#define BORGMATERIAL FLAG(3)
 
 
 #define STANCE_SLEEP        0	// Doing (almost) nothing, to save on CPU because nobody is around to notice or the mob died.
@@ -54,9 +54,9 @@
 
 #define STANCES_COMBAT      list(STANCE_ALERT, STANCE_APPROACH, STANCE_FIGHT, STANCE_BLINDFIGHT, STANCE_REPOSITION)
 
-#define LEFT  0x1
-#define RIGHT 0x2
-#define UNDER 0x4
+#define LEFT  FLAG(0)
+#define RIGHT FLAG(1)
+#define UNDER FLAG(2)
 
 // Pulse levels, very simplified.
 #define PULSE_NONE    0   // So !M.pulse checks would be possible.
@@ -76,13 +76,13 @@
 #define I_HURT		"harm"
 
 //These are used Bump() code for living mobs, in the mob_bump_flag, mob_swap_flags, and mob_push_flags vars to determine whom can bump/swap with whom.
-#define HUMAN 1
-#define MONKEY 2
-#define ALIEN 4
-#define ROBOT 8
-#define SLIME 16
-#define SIMPLE_ANIMAL 32
-#define HEAVY 64
+#define HUMAN FLAG(0)
+#define MONKEY FLAG(1)
+#define ALIEN FLAG(2)
+#define ROBOT FLAG(3)
+#define SLIME FLAG(4)
+#define SIMPLE_ANIMAL FLAG(5)
+#define HEAVY FLAG(6)
 #define ALLMOBS (HUMAN|MONKEY|ALIEN|ROBOT|SLIME|SIMPLE_ANIMAL|HEAVY)
 
 // Robot AI notifications
@@ -92,20 +92,20 @@
 #define ROBOT_NOTIFICATION_MODULE_RESET 4
 
 // Appearance change flags
-#define APPEARANCE_ALL 0xffffff
-#define APPEARANCE_DNA2 (1 << 0)
-#define APPEARANCE_RACE (1 << 1)
-#define APPEARANCE_GENDER (1 << 2)
-#define APPEARANCE_SKIN (1 << 3)
-#define APPEARANCE_HEAD (1 << 4)
-#define APPEARANCE_HEAD_COLOR (1 << 5)
-#define APPEARANCE_FACE (1 << 6)
-#define APPEARANCE_FACE_COLOR (1 << 7)
+#define APPEARANCE_ALL (~EMPTY_BITFIELD)
+#define APPEARANCE_DNA2 FLAG(0)
+#define APPEARANCE_RACE FLAG(1)
+#define APPEARANCE_GENDER FLAG(2)
+#define APPEARANCE_SKIN FLAG(3)
+#define APPEARANCE_HEAD FLAG(4)
+#define APPEARANCE_HEAD_COLOR FLAG(5)
+#define APPEARANCE_FACE FLAG(6)
+#define APPEARANCE_FACE_COLOR FLAG(7)
 #define APPEARANCE_ALL_HAIR (APPEARANCE_HEAD | APPEARANCE_HEAD_COLOR | APPEARANCE_FACE | APPEARANCE_FACE_COLOR)
-#define APPEARANCE_EYES (1 << 8)
-#define APPEARANCE_LANG (1 << 9)
-#define APPEARANCE_LANG_ANY_NUMBER (1 << 10)
-#define APPEARANCE_LANG_ANY_ORIGIN (1 << 11)
+#define APPEARANCE_EYES FLAG(8)
+#define APPEARANCE_LANG FLAG(9)
+#define APPEARANCE_LANG_ANY_NUMBER FLAG(10)
+#define APPEARANCE_LANG_ANY_ORIGIN FLAG(11)
 
 #define APPEARANCE_COMMON (APPEARANCE_DNA2|APPEARANCE_RACE|APPEARANCE_GENDER|APPEARANCE_SKIN|APPEARANCE_ALL_HAIR|APPEARANCE_EYES|APPEARANCE_LANG)
 
@@ -152,14 +152,13 @@
 #define STR_VLOW       -2
 
 // Gluttony levels.
-#define GLUT_TINY 1       // Eat anything tiny and smaller
-#define GLUT_SMALLER 2    // Eat anything smaller than we are
-#define GLUT_ANYTHING 4   // Eat anything, ever
-
-#define GLUT_ITEM_TINY 8         // Eat items with a w_class of small or smaller
-#define GLUT_ITEM_NORMAL 16      // Eat items with a w_class of normal or smaller
-#define GLUT_ITEM_ANYTHING 32    // Eat any item
-#define GLUT_PROJECTILE_VOMIT 64 // When vomitting, does it fly out?
+#define GLUT_TINY                FLAG(0)  // Eat mobs tiny and smaller
+#define GLUT_SMALLER             FLAG(1)  // Eat mobs smaller than we are
+#define GLUT_ANYTHING            FLAG(2)  // Eat any mob
+#define GLUT_ITEM_TINY           FLAG(3)  // Eat items with a w_class of small or smaller
+#define GLUT_ITEM_NORMAL         FLAG(4)  // Eat items with a w_class of normal or smaller
+#define GLUT_ITEM_ANYTHING       FLAG(5)  // Eat any item
+#define GLUT_PROJECTILE_VOMIT    FLAG(6)  // When vomitting, does it fly out?
 
 // Devour speeds, returned by can_devour()
 #define DEVOUR_SLOW 1
@@ -182,14 +181,14 @@
 #define OBSERV_SPAWN_DELAY round(config.respawn_delay / 2)
 
 // Incapacitation flags, used by the mob/proc/incapacitated() proc
-#define INCAPACITATION_NONE 0
-#define INCAPACITATION_RESTRAINED 1
-#define INCAPACITATION_BUCKLED_PARTIALLY 2
-#define INCAPACITATION_BUCKLED_FULLY 4
-#define INCAPACITATION_STUNNED 8
-#define INCAPACITATION_FORCELYING 16 //needs a better name - represents being knocked down BUT still conscious.
-#define INCAPACITATION_KNOCKOUT 32
-#define INCAPACITATION_WEAKENED 64
+#define INCAPACITATION_NONE EMPTY_BITFIELD
+#define INCAPACITATION_RESTRAINED FLAG(0)
+#define INCAPACITATION_BUCKLED_PARTIALLY FLAG(1)
+#define INCAPACITATION_BUCKLED_FULLY FLAG(2)
+#define INCAPACITATION_STUNNED FLAG(3)
+#define INCAPACITATION_FORCELYING FLAG(4)
+#define INCAPACITATION_KNOCKOUT FLAG(5)
+#define INCAPACITATION_WEAKENED FLAG(6)
 
 #define INCAPACITATION_UNRESISTING (INCAPACITATION_KNOCKOUT|INCAPACITATION_STUNNED)
 #define INCAPACITATION_DISRUPTED (INCAPACITATION_UNRESISTING|INCAPACITATION_WEAKENED)
@@ -245,28 +244,31 @@
 */
 
 /// The augment can be installed in arms
-#define AUGMENT_ARM 0x1
+#define AUGMENT_ARM FLAG(0)
 
 /// The augment can be installed in hands
-#define AUGMENT_HAND 0x2
+#define AUGMENT_HAND FLAG(1)
 
 /// The augment can be installed in legs
-#define AUGMENT_LEG 0x4
+#define AUGMENT_LEG FLAG(2)
 
 /// The augment can be installed in feet
-#define AUGMENT_FOOT 0x8
+#define AUGMENT_FOOT FLAG(3)
 
 /// The augment can be installed in the chest
-#define AUGMENT_CHEST 0x10
+#define AUGMENT_CHEST FLAG(4)
 
 /// The augment can be installed in the lower body
-#define AUGMENT_GROIN 0x20
+#define AUGMENT_GROIN FLAG(5)
 
 /// The augment can be installed in the head
-#define AUGMENT_HEAD 0x40
+#define AUGMENT_HEAD FLAG(6)
 
 /// The augment can be installed on the chest separately to AUGMENT_CHEST
-#define AUGMENT_ARMOR 0x80
+#define AUGMENT_ARMOR FLAG(7)
+
+/// The augment can be installed in the head separately to AUGMENT_HEAD
+#define AUGMENT_FLUFF FLAG(8)
 
 
 /**
@@ -276,19 +278,19 @@
 */
 
 /// The augment can be installed in mechanical organs
-#define AUGMENT_MECHANICAL 0x1
+#define AUGMENT_MECHANICAL FLAG(0)
 
 /// The augment can be installed in biological organs
-#define AUGMENT_BIOLOGICAL 0x2
+#define AUGMENT_BIOLOGICAL FLAG(1)
 
 /// The augment can be installed in crystaline organs
-#define AUGMENT_CRYSTALINE 0x4
+#define AUGMENT_CRYSTALINE FLAG(2)
 
 /// The augment is visible on body scanner results
-#define AUGMENT_SCANNABLE 0x10
+#define AUGMENT_SCANNABLE FLAG(3)
 
 /// The augment is visible via grab inspection
-#define AUGMENT_INSPECTABLE 0x20
+#define AUGMENT_INSPECTABLE FLAG(4)
 
 
 // Limbs.
@@ -414,24 +416,24 @@
 
 #define RADIO_INTERRUPT_DEFAULT 30
 
-#define MOB_FLAG_HOLY_BAD                0x001  // If this mob is allergic to holiness
+/// This mob is allergic to holiness
+#define MOB_FLAG_HOLY_BAD FLAG(0)
 
 // More refined version of SA_* ""intelligence"" seperators.
 // Now includes bitflags, so to target two classes you just do 'MOB_CLASS_ANIMAL|MOB_CLASS_HUMANOID'
-#define MOB_CLASS_NONE 			0	// Default value, and used to invert for _ALL.
+#define MOB_CLASS_NONE          EMPTY_BITFIELD
+#define MOB_CLASS_PLANT         FLAG(0)  // Unused at the moment.
+#define MOB_CLASS_ANIMAL        FLAG(1)  // Animals and beasts like spiders, saviks, and bears.
+#define MOB_CLASS_HUMANOID      FLAG(2)  // Non-robotic humanoids, including /simple_mob and /carbon/humans and their alien variants.
+#define MOB_CLASS_SYNTHETIC     FLAG(3)  // Silicons, mechanical simple mobs, FBPs, and anything else that would pass is_synthetic()
+#define MOB_CLASS_SLIME         FLAG(4)  // Everyone's favorite xenobiology specimen (and maybe prometheans?).
+#define MOB_CLASS_ABERRATION    FLAG(5)  // Weird shit.
+#define MOB_CLASS_DEMONIC		FLAG(6)  // Cult stuff.
+#define MOB_CLASS_BOSS			FLAG(7)  // Future megafauna hopefully someday.
+#define MOB_CLASS_ILLUSION		FLAG(8)  // Fake mobs, e.g. Technomancer illusions.
+#define MOB_CLASS_PHOTONIC		FLAG(9)  // Holographic mobs like holocarp, similar to _ILLUSION, but that make no attempt to hide their true nature.
 
-#define MOB_CLASS_PLANT			1	// Unused at the moment.
-#define MOB_CLASS_ANIMAL		2	// Animals and beasts like spiders, saviks, and bears.
-#define MOB_CLASS_HUMANOID		4	// Non-robotic humanoids, including /simple_mob and /carbon/humans and their alien variants.
-#define MOB_CLASS_SYNTHETIC		8	// Silicons, mechanical simple mobs, FBPs, and anything else that would pass is_synthetic()
-#define MOB_CLASS_SLIME			16	// Everyone's favorite xenobiology specimen (and maybe prometheans?).
-#define MOB_CLASS_ABERRATION	32	// Weird shit.
-#define MOB_CLASS_DEMONIC		64	// Cult stuff.
-#define MOB_CLASS_BOSS			128	// Future megafauna hopefully someday.
-#define MOB_CLASS_ILLUSION		256	// Fake mobs, e.g. Technomancer illusions.
-#define MOB_CLASS_PHOTONIC		512	// Holographic mobs like holocarp, similar to _ILLUSION, but that make no attempt to hide their true nature.
-
-#define MOB_CLASS_ALL (~MOB_CLASS_NONE)
+#define MOB_CLASS_ALL (~EMPTY_BITFIELD)
 
 // For slime commanding.  Higher numbers allow for more actions.
 #define SLIME_COMMAND_OBEY		1 // When disciplined.
@@ -449,18 +451,18 @@
 
 
 //used by /proc/do_after
-#define DO_USER_CAN_MOVE     0x1
-#define DO_USER_CAN_TURN     0x2
-#define DO_USER_UNIQUE_ACT   0x4
-#define DO_USER_SAME_HAND    0x8
-#define DO_USER_SAME_ZONE    0x10
-#define DO_TARGET_CAN_MOVE   0x20
-#define DO_TARGET_CAN_TURN   0x40
-#define DO_TARGET_UNIQUE_ACT 0x80
-#define DO_SHOW_PROGRESS     0x100
-#define DO_PUBLIC_PROGRESS   0x200
-#define DO_MOVE_CHECKS_TURFS 0x400
-#define DO_FAIL_FEEDBACK     0x800
+#define DO_USER_CAN_MOVE     FLAG(0)
+#define DO_USER_CAN_TURN     FLAG(1)
+#define DO_USER_UNIQUE_ACT   FLAG(2)
+#define DO_USER_SAME_HAND    FLAG(3)
+#define DO_USER_SAME_ZONE    FLAG(4)
+#define DO_TARGET_CAN_MOVE   FLAG(5)
+#define DO_TARGET_CAN_TURN   FLAG(6)
+#define DO_TARGET_UNIQUE_ACT FLAG(7)
+#define DO_SHOW_PROGRESS     FLAG(8)
+#define DO_PUBLIC_PROGRESS   FLAG(9)
+#define DO_MOVE_CHECKS_TURFS FLAG(10)
+#define DO_FAIL_FEEDBACK     FLAG(11)
 
 #define DO_BOTH_CAN_MOVE     (DO_USER_CAN_MOVE | DO_TARGET_CAN_MOVE)
 #define DO_BOTH_CAN_TURN     (DO_USER_CAN_TURN | DO_TARGET_CAN_TURN)

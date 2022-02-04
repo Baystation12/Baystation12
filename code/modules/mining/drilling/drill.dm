@@ -76,8 +76,8 @@
 		var/turf/simulated/floor/asteroid/T = get_turf(src)
 		if(!T.dug)
 			T.gets_dug()
-	else if(istype(get_turf(src), /turf/simulated/floor/exoplanet))
-		var/turf/simulated/floor/exoplanet/T = get_turf(src)
+	else if(istype(get_turf(src), /turf/unsimulated/floor/exoplanet))
+		var/turf/unsimulated/floor/exoplanet/T = get_turf(src)
 		if(T.diggable)
 			new /obj/structure/pit(T)
 			T.diggable = 0
@@ -90,7 +90,6 @@
 		var/turf/simulated/harvesting = pick(resource_field)
 
 		while(resource_field.len && !harvesting.resources)
-			harvesting.has_resources = 0
 			harvesting.resources = null
 			resource_field -= harvesting
 			if(resource_field.len)
@@ -134,7 +133,6 @@
 					new oretype(src)
 
 		if(!found_resource)
-			harvesting.has_resources = 0
 			harvesting.resources = null
 			resource_field -= harvesting
 	else
@@ -186,7 +184,7 @@
 	if(need_player_check)
 		icon_state = "mining_drill_error"
 	else if(active)
-		var/status = Clamp(round( (contents.len / capacity) * 4 ), 0, 3)
+		var/status = clamp(round( (contents.len / capacity) * 4 ), 0, 3)
 		icon_state = "mining_drill_active[status]"
 	else if(supported)
 		icon_state = "mining_drill_braced"
@@ -196,9 +194,9 @@
 
 /obj/machinery/mining/drill/RefreshParts()
 	..()
-	harvest_speed = Clamp(total_component_rating_of_type(/obj/item/stock_parts/micro_laser), 0, 10)
-	capacity = 200 * Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
-	var/charge_multiplier = Clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0.1, 10)
+	harvest_speed = clamp(total_component_rating_of_type(/obj/item/stock_parts/micro_laser), 0, 10)
+	capacity = 200 * clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
+	var/charge_multiplier = clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0.1, 10)
 	change_power_consumption(initial(active_power_usage) / charge_multiplier, POWER_USE_ACTIVE)
 
 /obj/machinery/mining/drill/proc/check_supports()
@@ -229,7 +227,7 @@
 	need_update_field = 0
 
 	for (var/turf/simulated/T in range(2, src))
-		if (T.has_resources)
+		if (T.resources)
 			resource_field += T
 
 	if (!length(resource_field))

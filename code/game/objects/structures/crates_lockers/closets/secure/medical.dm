@@ -83,7 +83,7 @@
 	    /obj/item/clothing/suit/storage/toggle/labcoat,
 	    /obj/item/device/radio/headset/headset_med,
 	    /obj/item/device/flashlight,
-	    /obj/item/tank/emergency/oxygen/engi,
+	    /obj/item/tank/oxygen_emergency_extended,
 	    /obj/item/clothing/glasses/hud/health,
 	    /obj/item/device/scanner/health,
 	    /obj/item/device/radio/off,

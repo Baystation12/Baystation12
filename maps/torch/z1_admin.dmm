@@ -2627,7 +2627,7 @@
 /area/centcom/living)
 "auK" = (
 /obj/structure/closet/secure_closet/bar{
-	req_access = list("ACCESS_BAR")
+	req_access = list("ACCESS_KITCHEN")
 	},
 /turf/unsimulated/floor{
 	dir = 2;
@@ -2908,8 +2908,7 @@
 /area/centcom/living)
 "avB" = (
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/structure/showcase{
 	desc = "A self-contained autopilot that controls supply drones.";
@@ -5168,9 +5167,9 @@
 /area/centcom/specops)
 "aCq" = (
 /obj/structure/table/rack,
-/obj/item/tank/emergency/oxygen/double,
-/obj/item/tank/emergency/oxygen/double,
-/obj/item/tank/emergency/oxygen/double,
+/obj/item/tank/oxygen_emergency_double,
+/obj/item/tank/oxygen_emergency_double,
+/obj/item/tank/oxygen_emergency_double,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -6467,7 +6466,7 @@
 /area/shuttle/transport1/centcom)
 "aIh" = (
 /obj/structure/closet/secure_closet/bar{
-	req_access = list("ACCESS_BAR")
+	req_access = list("ACCESS_KITCHEN")
 	},
 /turf/unsimulated/floor{
 	icon_state = "lino"
@@ -8411,8 +8410,7 @@
 	},
 /obj/structure/curtain/open/shower,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
@@ -9476,8 +9474,7 @@
 	},
 /obj/machinery/door/window/brigdoor/southright,
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/shuttle/merchant/home)
@@ -9721,8 +9718,7 @@
 "aTg" = (
 /obj/structure/table/reinforced,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/item/paper_bin{
 	pixel_x = 1;
@@ -9737,8 +9733,7 @@
 	},
 /obj/structure/table/reinforced,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/merchant/home)
@@ -10871,7 +10866,7 @@
 	dir = 4;
 	pixel_y = 8
 	},
-/obj/item/tank/emergency/oxygen/double,
+/obj/item/tank/oxygen_emergency_double,
 /turf/simulated/floor/plating,
 /area/merchant_station)
 "aWV" = (

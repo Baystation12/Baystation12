@@ -39,7 +39,7 @@
 	debuffing = FALSE
 	if (!active)
 		return
-	FOR_BLIND(datum/skill_buff/augment/D, owner.fetch_buffs_of_type(buffpath, 0))
+	for (var/datum/skill_buff/augment/D as anything in owner.fetch_buffs_of_type(buffpath, 0))
 		if (D.id != id)
 			continue
 		D.remove()
@@ -49,7 +49,7 @@
 /obj/item/organ/internal/augment/boost/proc/debuff()
 	if (!length(injury_debuffs))
 		return FALSE
-	FOR_BLIND(datum/skill_buff/augment/D, owner.fetch_buffs_of_type(buffpath, 0))
+	for (var/datum/skill_buff/augment/D as anything in owner.fetch_buffs_of_type(buffpath, 0))
 		if (D.id != id)
 			continue
 		D.recalculate(injury_debuffs)
@@ -61,7 +61,7 @@
 /obj/item/organ/internal/augment/boost/proc/buff()
 	if (!length(buffs))
 		return FALSE
-	FOR_BLIND(datum/skill_buff/augment/D, owner.fetch_buffs_of_type(buffpath, 0))
+	for (var/datum/skill_buff/augment/D as anything in owner.fetch_buffs_of_type(buffpath, 0))
 		if (D.id != id)
 			continue
 		D.recalculate(buffs)

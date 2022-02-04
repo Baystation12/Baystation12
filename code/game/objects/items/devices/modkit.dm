@@ -5,6 +5,7 @@
 /obj/item/device/modkit
 	name = "hardsuit modification kit"
 	desc = "A kit containing all the needed tools and parts to modify a hardsuit for another user."
+	icon = 'icons/obj/modkit.dmi'
 	icon_state = "modkit"
 	var/parts = MODKIT_FULL
 	var/target_species = SPECIES_HUMAN

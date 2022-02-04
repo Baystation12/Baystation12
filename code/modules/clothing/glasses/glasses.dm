@@ -260,8 +260,8 @@
 	icon_state = "welding-g"
 	item_state = "welding-g"
 	use_alt_layer = TRUE
-	flash_protection = FLASH_PROTECTION_MAJOR
-	tint = TINT_HEAVY
+	flash_protection = FLASH_PROTECTION_MODERATE
+	darkness_view = -1
 
 /obj/item/clothing/glasses/augment_binoculars
 	name = "adaptive binoculars"

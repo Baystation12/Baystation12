@@ -23,7 +23,7 @@
 
 	natural_weapon = /obj/item/natural_weapon/bite
 
-	ai_holder_type = /datum/ai_holder/simple_animal/melee/evasive
+	ai_holder = /datum/ai_holder/simple_animal/melee/evasive
 
 	// meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 

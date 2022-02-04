@@ -328,7 +328,7 @@ armbands
 /*****************
 armour attachments
 *****************/
-/obj/item/clothing/accessory/armor/tag/solgov
+/obj/item/clothing/accessory/armor_tag/solgov
 	name = "\improper SCG Flag"
 	desc = "An emblem depicting the Sol Central Government's flag."
 	icon_override = 'maps/torch/icons/obj/obj_accessories_solgov.dmi'
@@ -337,36 +337,36 @@ armour attachments
 	icon_state = "solflag"
 	slot = ACCESSORY_SLOT_ARMOR_M
 
-/obj/item/clothing/accessory/armor/tag/solgov/ec
+/obj/item/clothing/accessory/armor_tag/solgov/ec
 	name = "\improper Expeditionary Corps crest"
 	desc = "An emblem depicting the crest of the SCG Expeditionary Corps."
 	icon_state = "ecflag"
 
-/obj/item/clothing/accessory/armor/tag/solgov/sec
+/obj/item/clothing/accessory/armor_tag/solgov/sec
 	name = "\improper POLICE tag"
 	desc = "An armor tag with the word POLICE printed in silver lettering on it."
 	icon_state = "sectag"
 
-/obj/item/clothing/accessory/armor/tag/solgov/medic
+/obj/item/clothing/accessory/armor_tag/solgov/medic
 	name = "\improper MEDIC tag"
 	desc = "An armor tag with the word MEDIC printed in red lettering on it."
 	icon_state = "medictag"
 
-/obj/item/clothing/accessory/armor/tag/solgov/agent
+/obj/item/clothing/accessory/armor_tag/solgov/agent
 	name = "\improper SFP AGENT tag"
 	desc = "An armor tag with the words SFP AGENT printed in gold lettering on it."
 	icon_state = "agenttag"
 
-/obj/item/clothing/accessory/armor/tag/solgov/com
+/obj/item/clothing/accessory/armor_tag/solgov/com
 	name = "\improper SCG tag"
 	desc = "An armor tag with the words SOL CENTRAL GOVERNMENT printed in gold lettering on it."
 	icon_state = "comtag"
 
-/obj/item/clothing/accessory/armor/tag/solgov/com/sec
+/obj/item/clothing/accessory/armor_tag/solgov/com/sec
 	name = "\improper POLICE tag"
 	desc = "An armor tag with the words POLICE printed in gold lettering on it."
 
-/obj/item/clothing/accessory/armor/helmcover/blue/sol
+/obj/item/clothing/accessory/helmet_cover/blue/sol
 	name = "peacekeeper helmet cover"
 	desc = "A fabric cover for armored helmets. This one is in SCG peacekeeper colors."
 
@@ -379,7 +379,7 @@ department tags
 	icon_state = "dept_exped"
 	on_rolled = list("down" = "none", "rolled" = "dept_exped_sleeves")
 	slot = ACCESSORY_SLOT_DEPT
-	removable = FALSE
+	accessory_flags = EMPTY_BITFIELD
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_accessories_sol_unathi.dmi'
 		)
@@ -530,7 +530,7 @@ ranks - ec
 	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_RANK
 	gender = PLURAL
-	high_visibility = 1
+	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_accessories_sol_unathi.dmi'
 		)
