@@ -28,7 +28,7 @@
 	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "plasmagrenade"
 	throw_speed = 0 //sleep each tick
-	det_time = 20
+	det_time = 30
 	can_adjust_timer = 0
 	starttimer_on_hit = 1
 	arm_sound = 'code/modules/halo/sounds/Plasmanadethrow.ogg'

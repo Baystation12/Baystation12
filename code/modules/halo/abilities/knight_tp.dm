@@ -9,10 +9,10 @@
 	set name = "Activate Teleportation Evac"
 	set desc = "Allows you to teleport out of the system (functionally death) or to a marker, if it is placed."
 
-	var/obj/tp_to = locate(/obj/effect/landmark/knight_evac_to)
+	var/obj/tp_to = locate(/obj/effect/landmark/knight_evac_to) in world
 
 	visible_message("<span class = 'danger'>[src] starts preparing for long range slipspace translocation...</span>")
-	if(!do_after(src,5 SECONDS))
+	if(!do_after(src,1.5 SECONDS))
 		return
 	do_tele_evac(tp_to)
 
