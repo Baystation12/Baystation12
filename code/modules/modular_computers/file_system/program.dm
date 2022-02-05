@@ -105,14 +105,13 @@
 	var/obj/item/weapon/card/id/I = user.GetIdCard()
 	var/obj/item/organ/internal/stack/lace = user.GetLace()
 	if(I)
-		access_list += I.access
-	else if(lace)
-		access_list += lace.access
-	else
+		access_list |= I.access
+	if(lace)
+		access_list |= lace.access
+	if(!access_list.len)
 		if(loud)
 			to_chat(user, "<span class='notice'>\The [computer] flashes an \"RFID Error - Unable to scan ID\" warning.</span>")
 		return 0
-
 	if(access_to_check in access_list)
 		return 1
 	else if(loud)
