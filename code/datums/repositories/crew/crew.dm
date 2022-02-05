@@ -115,6 +115,9 @@ var/global/datum/repository/crew/crew_repository = new()
 	//for(var/mob/living/carbon/human/H in GLOB.mob_list)
 	for(var/datum/mind/M in my_faction.assigned_minds)
 		var/mob/living/carbon/human/H = M.current
+		if(M.current.faction != my_faction.name)
+			my_faction.assigned_minds -= M
+			continue
 		if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
 			var/obj/item/clothing/under/C = H.w_uniform
 			if (C.has_sensor)
