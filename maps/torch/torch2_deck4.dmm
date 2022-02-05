@@ -7108,6 +7108,10 @@
 /obj/random/maintenance/solgov/clean,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/fourthdeck/aft)
+"xH" = (
+/obj/structure/sign/poster/poraz,
+/turf/simulated/wall/prepainted,
+/area/crew_quarters/galley)
 "xL" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -33516,7 +33520,7 @@ ak
 Os
 ep
 XG
-af
+xH
 ao
 ao
 at

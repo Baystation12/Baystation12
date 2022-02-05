@@ -75,7 +75,7 @@
 
 /obj/structure/sign/memorial
 	name = "\improper memorial rock"
-	desc = "A large stone slab, engraved with the names of uniformed personnel who gave their lives for scientific progress. Not a list you'd want to make. Add the dog tags of the fallen to the monument to memorialize them."
+	desc = "A large stone slab, engraved with the names of uniformed personnel who gave their lives for scientific progress. Not a list you'd want to make. Add the dog tags of the fallen to the monument to memorialize them. At the foot of the memorial, at some distance from the rest of the pile of tokens, there is one with the inscription scratched on a steel frame \"Mr. Poraz, our eternal cook and comrade\"."
 	icon = 'maps/torch/icons/obj/solgov-64x.dmi'
 	icon_state = "memorial"
 	density = TRUE

@@ -3628,6 +3628,8 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/mob/living/simple_animal/passive/corgi/Ein,
+/obj/structure/dogbed,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/galleybackroom)
 "ho" = (
@@ -6203,6 +6205,7 @@
 	c_tag = "Mess Hall - Bar";
 	dir = 4
 	},
+/obj/item/toy/figure/poraz,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/bar)
 "mm" = (
