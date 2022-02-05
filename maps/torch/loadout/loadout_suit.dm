@@ -71,6 +71,20 @@
 	allowed_roles = DOCTOR_ROLES
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
 
+/datum/gear/suit/labcoat_cmo
+	display_name = "labcoat, chief medical officer"
+	allowed_roles = list(
+		/datum/job/cmo
+	)
+	path = /obj/item/clothing/suit/storage/toggle/labcoat
+
+/datum/gear/suit/labcoat_cmo/New()
+	..()
+	var/list/options = list()
+	options["chief medical officer's labcoat"] = /obj/item/clothing/suit/storage/toggle/labcoat/cmo
+	options["chief medical officer's command labcoat"] = /obj/item/clothing/suit/storage/toggle/labcoat/cmoalt
+	gear_tweaks += new/datum/gear_tweak/path(options)
+
 /datum/gear/suit/labcoat_ec_cso
 	display_name = "labcoat, chief science officer, Expeditionary Corps"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/rd/ec
