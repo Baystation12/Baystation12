@@ -45,7 +45,7 @@
 
 /obj/item/projectile/bullet/m228
 	damage = 40
-	armor_penetration = 50
+	armor_penetration = 40
 
 /obj/item/ammo_casing/m228
 	desc = "A 12.7mm HP bullet casing."
