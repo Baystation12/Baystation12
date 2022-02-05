@@ -4,7 +4,7 @@
 	icon_state = "object"
 	color = "#fffffe"
 
-	var/known = 1		//shows up on nav computers automatically
+	var/known = TRUE		//shows up on nav computers automatically
 	var/scannable       //if set to TRUE will show up on ship sensors for detailed scans
 
 //Overlay of how this object should look on other skyboxes

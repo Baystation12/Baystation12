@@ -4,7 +4,7 @@
 	name = "orbital station"
 	desc = "Sensors detect an orbital station above the exoplanet. Sporadic magentic impulses are registred inside it. Planet landing is impossible due to lower orbits being cluttered with chaotically moving metal chunks."
 	icon_state = "object"
-	known = 0
+	known = FALSE
 
 	initial_generic_waypoints = list(
 		"nav_magshield_1",

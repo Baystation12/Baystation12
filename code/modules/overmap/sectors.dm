@@ -18,7 +18,7 @@
 	var/start_y			//will use random values if unset
 
 	var/base = 0		//starting sector, counts as station_levels
-	var/in_space = 1	//can be accessed via lucky EVA
+	var/in_space = TRUE	//can be accessed via lucky EVA
 
 	var/hide_from_reports = FALSE
 
@@ -38,13 +38,14 @@
 
 	var/map_low = OVERMAP_EDGE
 	var/map_high = GLOB.using_map.overmap_size - OVERMAP_EDGE
-	if (islist(place_near_main))
-		place_near_main = Frand(place_near_main[1], place_near_main[2])
 	if (place_near_main)
+		if (islist(place_near_main))
+			place_near_main = Roundm(Frand(place_near_main[1], place_near_main[2]), 0.1)
 		var/obj/effect/overmap/visitable/main = map_sectors["1"]
 		var/list/offset = BCrand(abs(place_near_main), main.x, main.y, map_low, map_low, map_high, map_high, TRUE)
 		start_x = offset[1]
 		start_y = offset[2]
+		log_debug("place_near_main moving [src] near [main] ([main.x], [main.y]) with radius [place_near_main], got ([start_x], [start_y])")
 	else
 		start_x = start_x || rand(map_low, map_high)
 		start_y = start_y || rand(map_low, map_high)
