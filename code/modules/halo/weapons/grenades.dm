@@ -7,7 +7,7 @@
 	num_fragments = 8
 	can_adjust_timer = 0
 	starttimer_on_hit = 1
-	det_time = 15
+	det_time = 25
 	explosion_size = 3
 	alt_explosion_range = 3
 	alt_explosion_damage_max = 40
