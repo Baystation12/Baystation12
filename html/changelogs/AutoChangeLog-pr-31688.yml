@@ -1,0 +1,4 @@
+author: Ryan18062
+delete-after: true
+changes:
+  - tweak: Adds both CMO labcoats `cmo` and `cmoalt` to loadout
