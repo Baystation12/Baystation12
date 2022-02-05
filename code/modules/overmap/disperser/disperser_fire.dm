@@ -129,24 +129,33 @@
 /obj/machinery/computer/ship/disperser/proc/fire_at_sector(obj/effect/overmap/visitable/finaltarget, obj/structure/ship_munition/disperser_charge/charge, chargetype)
 	var/list/targetareas = finaltarget.get_areas()
 	targetareas -= locate(/area/space)
-	var/area/finalarea = pick(targetareas)
-	var/turf/targetturf = pick_area_turf(finalarea.type, list(/proc/is_not_space_turf))
+	var/area/finalarea = null
+	var/turf/targetturf = null
+	if(targetareas)
+		finalarea = pick(targetareas)
+		if(finalarea)
+			targetturf = pick_area_turf(finalarea.type, list(/proc/is_not_space_turf))
 
-	log_and_message_admins("Disperser beam hit sector at [get_area(targetturf)].", location=targetturf)
-	if(chargetype == OVERMAP_WEAKNESS_DROPPOD)
-		if(targetturf.density)
-			targetturf.ex_act(1)
-		for(var/atom/A in targetturf)
-			A.ex_act(3)
-		charge.forceMove(targetturf)
-		//The disperser is not a taxi
-		for(var/mob/living/L in charge)
-			to_chat(L, SPAN_DANGER("Your body shakes violently, immense and agonising forces tearing it apart."))
-			L.forceMove(targetturf)
-			L.ex_act(1)
-	else
-		charge.fire(targetturf, strength, range)
-		qdel(charge)
+	if(targetturf)
+		log_and_message_admins("Disperser beam hit sector at [get_area(targetturf)].", location=targetturf)
+
+		if(chargetype == OVERMAP_WEAKNESS_DROPPOD)
+			if(targetturf.density)
+				targetturf.ex_act(1)
+			for(var/atom/A in targetturf)
+				A.ex_act(3)
+			charge.forceMove(targetturf)
+			//The disperser is not a taxi
+			for(var/mob/living/L in charge)
+				to_chat(L, SPAN_DANGER("Your body shakes violently, immense and agonising forces tearing it apart."))
+				L.forceMove(targetturf)
+				L.ex_act(1)
+
+		else
+			charge.fire(targetturf, strength, range)
+
+	qdel(charge)
+
 
 /obj/machinery/computer/ship/disperser/proc/handle_beam(turf/start, direction)
 	set waitfor = FALSE
