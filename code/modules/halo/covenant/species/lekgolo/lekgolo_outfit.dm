@@ -6,7 +6,7 @@
 	var/turf/h_loc = H.loc
 	var/mob/living/simple_animal/mgalekgolo/mgalekgolo = new(h_loc)
 	mgalekgolo.faction = "Covenant"
-	mgalekgolo.ckey = H.ckey
+	H.mind.transfer_to(mgalekgolo)
 	mgalekgolo.Login()
 	qdel(H)
 	return mgalekgolo

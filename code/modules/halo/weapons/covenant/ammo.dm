@@ -356,8 +356,8 @@
 
 /obj/item/projectile/bullet/covenant/concussion_rifle
 	name = "heavy plasma round"
-	damage = 35
-	armor_penetration = 30
+	damage = 50
+	armor_penetration = 40
 	shield_damage = 50
 	step_delay = 0.75 //slower than most
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'

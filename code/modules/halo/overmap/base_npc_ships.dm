@@ -294,7 +294,7 @@ GLOBAL_LIST_INIT(om_base_sectors, list())
 	map_z = list()
 	lighting_overlays_initialised = FALSE
 	for(var/link in chosen_ship_datum.mapfile_links)
-		to_world("Loading Ship-Map: [link]... This may cause lag.")
+		message_admins("Loading Ship-Map: [link]... This may cause lag.")
 		sleep(10) //A small sleep to ensure the above message is printed before the loading operation commences.
 		var/z_to_load_at = shipmap_handler.get_next_usable_z()
 		sleep(10) //Wait a tick again, to ensure te map is actually loaded in
