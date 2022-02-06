@@ -129,6 +129,9 @@
 /obj/machinery/computer/ship/disperser/proc/fire_at_sector(obj/effect/overmap/visitable/finaltarget, obj/structure/ship_munition/disperser_charge/charge, chargetype)
 	var/list/targetareas = finaltarget.get_areas()
 	targetareas -= locate(/area/space)
+	if (!length(targetareas))
+		qdel(charge)
+		return
 	var/area/finalarea = pick(targetareas)
 	var/turf/targetturf = pick_area_turf(finalarea.type, list(/proc/is_not_space_turf))
 
