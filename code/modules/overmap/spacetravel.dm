@@ -6,7 +6,7 @@ var/list/cached_space = list()
 /obj/effect/overmap/visitable/sector/temporary
 	name = "Deep Space"
 	invisibility = 101
-	known = 0
+	known = FALSE
 
 /obj/effect/overmap/visitable/sector/temporary/New(var/nx, var/ny, var/nz)
 	map_z += nz
