@@ -131,7 +131,7 @@
 	targetareas -= locate(/area/space)
 	var/area/finalarea = null
 	var/turf/targetturf = null
-	if(targetareas)
+	if(length(targetareas))
 		finalarea = pick(targetareas)
 		if(finalarea)
 			targetturf = pick_area_turf(finalarea.type, list(/proc/is_not_space_turf))
