@@ -29,10 +29,10 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 	appearance_flags = HAS_SKIN_TONE | HAS_EYE_COLOR | NO_MARKING_COLOUR
 	radiation_mod = 0.6
 	spawn_flags = SPECIES_CAN_JOIN
-	brute_mod = 0.9
-	burn_mod = 0.9
+	brute_mod = 0.8
+	burn_mod = 0.8
 	pain_mod = 0.55
-	adrenal_break_threshold = 30//Originally, this was lower, however, the higher threshold allows brutes
+	adrenal_break_threshold = 200//Originally, this was lower, however, the higher threshold allows brutes
 	//to sustain a longer lasting lower-level painkill rather than having their adrenaline
 	//forcefully swapped for a very short term buff
 	explosion_effect_mod = 0.5
