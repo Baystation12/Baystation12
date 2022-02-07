@@ -31,7 +31,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 	spawn_flags = SPECIES_CAN_JOIN
 	brute_mod = 0.8
 	burn_mod = 0.8
-	pain_mod = 0.50
+	pain_mod = 0.55
 	adrenal_break_threshold = 200//Originally, this was lower, however, the higher threshold allows brutes
 	//to sustain a longer lasting lower-level painkill rather than having their adrenaline
 	//forcefully swapped for a very short term buff
