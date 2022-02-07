@@ -624,3 +624,64 @@
 	icon_state = "woodentucker"
 	icon_living = "woodentucker0"
 	icon_dead = "woodentucker_dead"
+
+/////Zagarnt
+
+
+/obj/item/clothing/head/helmet/sangheili/zagarnt
+	icon_state = "zagarnt_helm_obj"
+	item_state = "zagarnt_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/ultra/zagarnt
+	icon_state = "zagarnt_chest_obj"
+	item_state = "zagarnt_chest"
+
+/obj/item/clothing/suit/armor/special/combatharness/major/zagarnt
+	icon_state = "zagarnt_chest_obj"
+	item_state = "zagarnt_chest"
+
+/obj/item/clothing/shoes/sangheili/zagarnt
+	icon_state = "zagarnt_legs_obj"
+	item_state = "zagarnt_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/zagarnt
+	icon_state = "zagarnt_gloves_obj"
+	item_state = "zagarnt_gloves"
+
+/obj/item/weapon/storage/box/large/donator/zagarnt_ultra
+	startswith = list(/obj/item/clothing/head/helmet/sangheili/zagarnt,
+					/obj/item/clothing/suit/armor/special/combatharness/ultra/zagarnt,
+					/obj/item/clothing/shoes/sangheili/zagarnt,
+					/obj/item/clothing/gloves/thick/sangheili/zagarnt
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/sangheili/zagarnt,
+					/obj/item/clothing/suit/armor/special/combatharness/ultra/zagarnt,
+					/obj/item/clothing/shoes/sangheili/zagarnt,
+					/obj/item/clothing/gloves/thick/sangheili/zagarnt
+					)
+
+/obj/item/weapon/storage/box/large/donator/zagarnt_major
+	startswith = list(/obj/item/clothing/head/helmet/sangheili/zagarnt,
+					/obj/item/clothing/suit/armor/special/combatharness/major/zagarnt,
+					/obj/item/clothing/shoes/sangheili/zagarnt,
+					/obj/item/clothing/gloves/thick/sangheili/zagarnt
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/sangheili/zagarnt,
+					/obj/item/clothing/suit/armor/special/combatharness/major/zagarnt,
+					/obj/item/clothing/shoes/sangheili/zagarnt,
+					/obj/item/clothing/gloves/thick/sangheili/zagarnt
+					)
+
+/decl/hierarchy/outfit/zagarnt_ultra
+	name = "Zagarnt - Ultra"
+	head = /obj/item/clothing/head/helmet/sangheili/zagarnt
+	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra/zagarnt
+	gloves = /obj/item/clothing/gloves/thick/sangheili/zagarnt
+	shoes = /obj/item/clothing/shoes/sangheili/zagarnt
+
+/decl/hierarchy/outfit/zagarnt_major
+	name = "Zagarnt - Major"
+	head = /obj/item/clothing/head/helmet/sangheili/zagarnt
+	suit = /obj/item/clothing/suit/armor/special/combatharness/major/zagarnt
+	gloves = /obj/item/clothing/gloves/thick/sangheili/zagarnt
+	shoes = /obj/item/clothing/shoes/sangheili/zagarnt
