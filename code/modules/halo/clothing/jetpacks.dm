@@ -3,6 +3,7 @@
 	name = "Jetpack Item"
 	desc = "A pack that jets. Allows you limited timeframe flight, as well as maintaining altitude, although it is not strong enough to allow in-atmosphere z-level changing."
 
+	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 
 	var/flight_ticks_max = 65
