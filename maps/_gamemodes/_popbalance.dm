@@ -6,3 +6,5 @@ GLOBAL_VAR_INIT(min_players_balance, 3)
 /datum/game_mode
 	//put the faction types in here that you want to be balanced
 	var/list/faction_balance = list()
+	//Tracks factions that have recently failed the poplock; to avoid a deadlock situation.
+	var/list/last_checked_lock = list()

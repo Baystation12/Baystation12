@@ -54,7 +54,6 @@
 	//Seperate from the pop-lock system, this controls how many players this role counts as when present in-game to
 	//stop one faction from being heavily overpopulated
 	var/pop_balance_mult = 1
-	var/last_checked_lock = list() //Factions that have been checked, and have failed, the pop lock.
 
 	var/lace_access = 0 //Forces the job to have a neural lace, so we can store the access in it instead of in the ID..
 
@@ -247,12 +246,13 @@
 
 						my_ratio = my_faction_players / total_faction_players
 
+						var/list/last_checked_lock = ticker.mode.last_checked_lock
 						//are we overpopped?
 						if(my_ratio > max_ratio)
 							//If we're cost one, track us on the popbalance last-locked list.
 							var/block_role = TRUE
-							if(add_as_players == 1)
-								last_checked_lock |= my_faction.type
+							last_checked_lock |= my_faction.type
+							if(add_as_players <= 1)
 								var/force_role = 1
 								//If all factions have checked, and failed the pop lock, and this job is cost-1, then allow us through anyway.
 								for(var/f_type in ticker.mode.faction_balance)
@@ -265,7 +265,7 @@
 								to_chat(feedback, "<span class='boldannounce'>Joining as [title] is blocked due to [spawn_faction] faction overpop.</span>")
 							else
 								message_admins("NOTICE: Poplock check was failed, but we're in a deadlock state so we'll let it through.")
-
+								last_checked_lock -= my_faction.type
 							//tell the admins, but dont spam them too much
 							if(world.time > GLOB.last_admin_notice_overpop + 30 SECONDS)
 								GLOB.last_admin_notice_overpop = world.time
@@ -273,9 +273,9 @@
 									([my_faction_players]/[total_faction_players] or \
 									[round(100 * my_faction_players/total_faction_players)]% of living characters... \
 									max [round(100*max_ratio)]% or [round(max_ratio*total_faction_players,0.1)]/[total_faction_players] players)")
+
 							return block_role
 						else if(debug_pop_balance)	to_debug_listeners("my_ratio:[my_ratio], max_ratio:[max_ratio], my_faction_players:[my_faction_players]")
-						last_checked_lock -= my_faction.type
 
 	return FALSE
 
