@@ -180,7 +180,7 @@
 					/obj/item/weapon/storage/pocketstore/hardcase/materials = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/tools = 0,
 					"Miscellaneous" = -1,
-					/obj/item/flight_item/bullfrog_pack = 0,
+					/obj/item/flight_item/bullfrog_pack = 2,
 					/obj/item/stack/barbedwire/fifteen = 0,
 					/obj/item/device/multitool = 0,
 					/obj/item/weapon/armor_patch = 0,

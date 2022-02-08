@@ -235,7 +235,7 @@
 	amounts = list(\
 		/obj/item/weapon/storage/box/large/armorset/brute/eva = 4,
 		/obj/item/weapon/tank/air/covenant = 7,
-		/obj/item/flight_item/covenant_pack = 2,
+		/obj/item/flight_item/covenant_pack = 1,
 		/obj/item/dumb_ai_chip/cov = 2,
 		/obj/item/stack/barbedwire/covenant/fifteen = 5,
 		/obj/item/clothing/accessory/storage/IFAK/cov = 20,
