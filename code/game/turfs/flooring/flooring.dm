@@ -384,11 +384,11 @@
 	icon = 'icons/turf/flooring/flesh.dmi'
 	icon_base = "flesh"
 	descriptor = "flesh"
+	remove_timer = 60
 	has_base_range = 3
 	damage_temperature = T0C + 100
 	build_type = null
 	flags = TURF_ACID_IMMUNE | TURF_REMOVE_CROWBAR
-	remove_timer = 60
 	can_engrave = FALSE
 
 /decl/flooring/pool

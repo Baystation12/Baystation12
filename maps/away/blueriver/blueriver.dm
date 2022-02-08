@@ -177,29 +177,3 @@
 
 /turf/unsimulated/wall/supermatter/no_spread/Process()
 	return PROCESS_KILL
-
-/obj/structure/deity
-	icon = 'icons/obj/cult.dmi'
-	icon_state = "tomealtar"
-	health_max = 10
-	density = TRUE
-	anchored = TRUE
-
-/obj/structure/deity/attackby(obj/item/W as obj, mob/user as mob)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	user.do_attack_animation(src)
-	playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 50, 1)
-	user.visible_message(
-		"<span class='danger'>[user] hits \the [src] with \the [W]!</span>",
-		"<span class='danger'>You hit \the [src] with \the [W]!</span>",
-		"<span class='danger'>You hear something breaking!</span>"
-		)
-	damage_health(W.force, W.damtype)
-
-/obj/structure/deity/handle_death_change(new_death_state)
-	if (new_death_state)
-		visible_message(SPAN_DANGER("\The [src] crumbles!"))
-		qdel(src)
-
-/obj/structure/deity/bullet_act(var/obj/item/projectile/P)
-	damage_health(P.get_structure_damage(), P.damage_type)

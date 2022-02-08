@@ -273,7 +273,7 @@
 	name = "floor"
 	icon_state = "techfloor_grid"
 	initial_flooring = /decl/flooring/tiling/tech/grid
-
+	
 /turf/simulated/floor/tiled/skrell
 	icon = 'icons/turf/skrellturf.dmi'
 	icon_state = "skrellblack"
