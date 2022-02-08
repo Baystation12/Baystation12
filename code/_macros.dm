@@ -85,8 +85,6 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define isslime(A) istype(A, /mob/living/carbon/slime)
 
-#define ischorus(A) istype(A, /mob/living/carbon/alien/chorus)
-
 #define isunderwear(A) istype(A, /obj/item/underwear)
 
 #define isvirtualmob(A) istype(A, /mob/observer/virtual)
