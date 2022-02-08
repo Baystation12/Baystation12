@@ -12,7 +12,6 @@
 		/mob/living/carbon/human,
 		/mob/living/simple_animal,
 		/mob/living/carbon/slime,
-		/mob/living/carbon/alien/chorus
 	)
 
 /obj/item/device/scanner/xenobio/is_valid_scan_target(atom/O)
@@ -101,8 +100,6 @@
 		if (T.cores > 1)
 			. += "Anomalous slime core amount detected."
 		. += "Growth progress:\t[T.amount_grown]/10."
-	else if(istype(target, /mob/living/carbon/alien/chorus))
-		. += "Warning. Biological contaminant detected. Limit contact."
 	else
 		. += "Incompatible life form, analysis failed."
 
