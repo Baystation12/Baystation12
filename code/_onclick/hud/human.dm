@@ -187,7 +187,7 @@
 		mymob.healths.SetName("health")
 		mymob.healths.screen_loc = ui_health
 		hud_elements |= mymob.healths
-		
+
 		mymob.oxygen = new /obj/screen/oxygen()
 		mymob.oxygen.icon = 'icons/mob/status_indicators.dmi'
 		mymob.oxygen.icon_state = "oxy0"
@@ -282,6 +282,14 @@
 	mymob.radio_use_icon.color = ui_color
 	mymob.radio_use_icon.alpha = ui_alpha
 
+	if(ishuman(mymob))
+		target.film_grain = new /obj/screen/filmgraim(null)
+		target.film_grain.screen_loc = ui_entire_screen
+		target.film_grain.layer = FULLSCREEN_LAYER
+		target.film_grain.mouse_opacity = 0
+		if(GLOB.film_grain_stat)
+			hud_elements |= target.film_grain
+
 	mymob.client.screen = list()
 
 	mymob.client.screen += hud_elements
@@ -300,7 +308,7 @@
 		client.screen -= hud_used.hotkeybuttons
 		hud_used.hotkey_ui_hidden = 1
 
-// Yes, these use icon state. Yes, these are terrible. The alternative is duplicating 
+// Yes, these use icon state. Yes, these are terrible. The alternative is duplicating
 // a bunch of fairly blobby logic for every click override on these objects.
 
 /obj/screen/food/Click(var/location, var/control, var/params)

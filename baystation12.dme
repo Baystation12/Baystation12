@@ -3210,6 +3210,7 @@
 #include "proxima\code\game\machinery\disk_writer.dm"
 #include "proxima\code\game\machinery\jukebox.dm"
 #include "proxima\code\game\objects\structures\holoplants.dm"
+#include "proxima\code\modules\filmgrain.dm"
 #include "proxima\code\modules\poraz_corgi.dm"
 #include "proxima\code\music_player\_music_player.dm"
 #include "proxima\code\music_player\_music_tape.dm"
