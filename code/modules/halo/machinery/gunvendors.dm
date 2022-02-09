@@ -180,7 +180,7 @@
 					/obj/item/weapon/storage/pocketstore/hardcase/materials = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/tools = 0,
 					"Miscellaneous" = -1,
-					/obj/item/flight_item/bullfrog_pack = 2,
+					/obj/item/flight_item/bullfrog_pack = 0,
 					/obj/item/stack/barbedwire/fifteen = 0,
 					/obj/item/device/multitool = 0,
 					/obj/item/weapon/armor_patch = 0,
@@ -195,7 +195,7 @@
 		/obj/item/clothing/accessory/storage/IFAK/UNSC = 20,
 		/obj/item/weapon/storage/firstaid/unsc = 6,
 		/obj/item/stack/barbedwire/fifteen = 15,
-		/obj/item/flight_item/bullfrog_pack = 1
+		/obj/item/flight_item/bullfrog_pack = 2
 		)
 
 /obj/machinery/vending/armory/oni
@@ -551,7 +551,7 @@
 	amounts = list(\
 		/obj/item/clothing/accessory/storage/IFAK/UNSC = 20,
 		/obj/item/stack/barbedwire/fifteen = 15,
-		/obj/item/flight_item/bullfrog_pack = 1,
+		/obj/item/flight_item/bullfrog_pack = 2,
 		)
 
 /obj/machinery/vending/armory/medical
