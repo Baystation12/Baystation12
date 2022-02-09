@@ -34,19 +34,22 @@ var/datum/antagonist/traitor/traitors
 
 	else
 		var/obj_amt = rand(2,4)
+		var/list/targets = list()
 		for(var/i = 1 to obj_amt)
 			switch(rand(1,100))
 				if(1 to 50)
 					var/datum/objective/assassinate/kill_objective = new
 					kill_objective.owner = traitor
 					kill_objective.find_target()
+					targets += kill_objective.target
 					traitor.objectives += kill_objective
 					if(kill_objective.target)
-						var/datum/objective/t = new /datum/objective/survive/targeted
 						var/datum/mind/player = kill_objective.target
-						t.owner = player
-						player.objectives.Add(t)
-						show_objectives(player)
+						if(!(locate(/datum/objective/survive/targeted) in player.objectives))
+							var/datum/objective/t = new /datum/objective/survive/targeted
+							t.owner = player
+							player.objectives.Add(t)
+							show_objectives(player)
 				else
 					var/datum/objective/harm/harm_objective = new
 					harm_objective.owner = traitor

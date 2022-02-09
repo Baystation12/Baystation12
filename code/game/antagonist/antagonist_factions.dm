@@ -1,5 +1,5 @@
 /mob/living/proc/convert_to_rev(mob/M as mob in able_mobs_in_oview(src))
-	set name = "Convert Bourgeoise"
+	set name = "Convert Player"
 	set category = "Abilities"
 	if(!M.mind || !M.client)
 		return

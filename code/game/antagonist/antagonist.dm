@@ -36,7 +36,7 @@
 	var/hard_cap = 3                        // Autotraitor var. Won't spawn more than this many antags.
 	var/hard_cap_round = 5                  // As above but 'core' round antags ie. roundstart.
 	var/initial_spawn_req = 1               // Gamemode using this template won't start without this # candidates.
-	var/initial_spawn_target = 3            // Gamemode will attempt to spawn this many antags.
+	var/initial_spawn_target = 1            // Gamemode will attempt to spawn this many antags.
 	var/announced                           // Has an announcement been sent?
 	var/spawn_announcement                  // When the datum spawn proc is called, does it announce to the world? (ie. xenos)
 	var/spawn_announcement_title            // Report title.
