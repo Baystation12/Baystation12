@@ -23,5 +23,5 @@
 	overmap_size= 125
 	overmap_event_tokens = 20
 
-	allowed_gamemodes = list("reclamation")
+	allowed_gamemodes = list("reclamation","spicyextended")
 	map_admin_faxes = list("Ministry of Tranquility (General)","Ministry of Resolution (War Matters)","Ministry of Fervent Intercession (Internal Affairs)")
