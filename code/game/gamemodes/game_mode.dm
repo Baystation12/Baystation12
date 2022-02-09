@@ -224,7 +224,10 @@ var/global/list/additional_antag_types = list()
 		announce_ert_disabled()
 
 	//Assign all antag types for this game mode. Any players spawned as antags earlier should have been removed from the pending list, so no need to worry about those.
-	for(var/datum/antagonist/antag in antag_templates)
+	var/list/tmp_antag_templates = antag_templates.Copy()
+	while(tmp_antag_templates && tmp_antag_templates.len > 0)
+		var/datum/antagonist/antag = pick(tmp_antag_templates)
+		tmp_antag_templates -= antag
 		if(!(antag.flags & ANTAG_OVERRIDE_JOB))
 			antag.attempt_spawn() //select antags to be spawned
 		antag.finalize_spawn() //actually spawn antags
