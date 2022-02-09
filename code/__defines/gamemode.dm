@@ -52,6 +52,7 @@
 #define MODE_GODCULTIST "god cultist"
 #define MODE_INNIE "insurrection"
 #define MODE_INNIE_TRAITOR "innie sympathiser"
+#define MODE_TARGET "target"
 
 #define DEFAULT_TELECRYSTAL_AMOUNT 130
 
