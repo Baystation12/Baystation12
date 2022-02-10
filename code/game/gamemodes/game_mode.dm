@@ -439,9 +439,9 @@ var/global/list/additional_antag_types = list()
 		antag_scaling_coeff = 0
 
 	var/list/all_antag_types = all_antag_types()
-	if(antag_tags && antag_tags.len)
+	if((antag_tags && antag_tags.len) || (latejoin_antag_tags && latejoin_antag_tags.len))
 		antag_templates = list()
-		for(var/antag_tag in antag_tags)
+		for(var/antag_tag in antag_tags | latejoin_antag_tags)
 			var/datum/antagonist/antag = all_antag_types[antag_tag]
 			if(antag)
 				antag_templates |= antag
