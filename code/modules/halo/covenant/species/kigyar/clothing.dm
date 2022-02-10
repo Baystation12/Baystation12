@@ -14,6 +14,11 @@
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical/kigyar_nv
 	matter = list("nanolaminate" = 1)
 
+/obj/item/clothing/head/helmet/kigyar/major
+	name = "Kig-Yar Major Scout Helmet"
+	icon_state = "scouthelm_obj_major"
+	item_state = "scouthelm_major"
+
 /obj/item/clothing/under/kigyar
 	name = "Kig-Yar Bodysuit"
 	desc = "A Kig-Yar body suit for Ruuhtians and T\'vaoans. Meant to be worn underneath a combat harness"
@@ -58,6 +63,11 @@
 	armor_thickness_modifiers = list()
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	matter = list("nanolaminate" = 1)
+
+/obj/item/clothing/suit/armor/kigyar/major
+	name = "Kig-Yar Major Combat Harness"
+	icon_state = "scout_major"
+	item_state = "scout_major"
 
 //First Contact Variant
 /obj/item/clothing/head/helmet/kigyar/first_contact
