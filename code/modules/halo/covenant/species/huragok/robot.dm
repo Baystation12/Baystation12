@@ -59,15 +59,14 @@
 	default_language = all_languages[LANGUAGE_SIGN]
 	radio.create_channel_dongle(RADIO_COV)
 
-
 /mob/living/silicon/robot/huragok/get_move_sound()
 	. = null // Huragok hover, therefore make no sound when they move
 
 /mob/living/silicon/robot/huragok/handle_regular_status_updates()	// Override the proc, so we kill huragok at 0 hp
 	. = ..()
 	if (health <= 0)
-		death()
-
+		visible_message("<b>\The [src]</b> explodes in a cloud of blue mist!")
+		gib()
 
 /mob/living/silicon/robot/huragok/CtrlShiftClickOn(var/atom/A)	// Special Bonk
 	face_atom(A)
@@ -80,9 +79,5 @@
 			playsound(get_turf(src),'sound/effects/pop.ogg',25,1)
 		do_attack_animation(A)
 	return
-
-/mob/living/silicon/robot/huragok/death()
-	. = ..()
-	gib()
 
 #undef HURAGOK_REGEN
