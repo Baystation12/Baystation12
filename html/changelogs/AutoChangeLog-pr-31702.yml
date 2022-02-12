@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - bugfix: Fixed the atmos editor not updating air transferring from unsimmed to
+      simmed tiles.
