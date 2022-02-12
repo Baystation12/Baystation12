@@ -157,10 +157,11 @@
 /**
  * Damage's the atom's health by the given value. Returns `TRUE` if the damage resulted in a death state change.
  * Resistance and weakness modifiers are applied here.
+ * - `damage_type` should be one of the `DAMAGE_*` damage types, or `null`. Defining a damage type is preferable over not.
  * - `damage_flags` is a bitfield of `DAMAGE_FLAG_*` values.
  * - `severity` should be a passthrough of `severity` from `ex_act()` and `emp_act()` for `DAMAGE_EXPLODE` and `DAMAGE_EMP` types respectively.
  */
-/atom/proc/damage_health(damage, damage_type = null, damage_flags = EMPTY_BITFIELD, severity)
+/atom/proc/damage_health(damage, damage_type, damage_flags = EMPTY_BITFIELD, severity)
 	SHOULD_CALL_PARENT(TRUE)
 	if (!health_max)
 		return
@@ -295,11 +296,12 @@
 	damage_health(rand(75, 125) / severity, DAMAGE_EMP, severity = severity)
 
 
-/atom/ex_act(severity)
+/atom/ex_act(severity, turf_breaker)
 	..()
 	// No hitsound here to avoid noise spam.
 	// Generalized - 250-350 damage at max, 125-175 at medium, 83-117 at minimum severities.
-	damage_health(rand(250, 350) / severity, DAMAGE_EXPLODE, severity = severity)
+	var/damage_flags = turf_breaker ? DAMAGE_FLAG_TURF_BREAKER : EMPTY_BITFIELD
+	damage_health(rand(250, 350) / severity, DAMAGE_EXPLODE, damage_flags, severity)
 
 
 /atom/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
