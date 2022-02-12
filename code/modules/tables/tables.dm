@@ -42,7 +42,7 @@
 			new_health += reinforced.integrity / 2
 	set_max_health(new_health)
 
-/obj/structure/table/damage_health(damage, damage_type, skip_death_state_change, severity)
+/obj/structure/table/damage_health(damage, damage_type = null, damage_flags = EMPTY_BITFIELD, severity)
 	// If the table is made of a brittle material, and is *not* reinforced with a non-brittle material, damage is multiplied by TABLE_BRITTLE_MATERIAL_MULTIPLIER
 	if (material?.is_brittle())
 		if (reinforced)
