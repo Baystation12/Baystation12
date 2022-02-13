@@ -30,7 +30,7 @@
 	absorb_objective.gen_amount_goal(1, 2)
 	changeling.objectives += absorb_objective
 
-	var/max_hostile_objs = 4
+	var/max_hostile_objs = 2
 	var/list/targets = list()
 
 	if(max_hostile_objs)
