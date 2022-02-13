@@ -46,7 +46,7 @@ var/datum/antagonist/revolutionary/revs
 			break
 		var/mob/living/carbon/human/player = pick(players_temp)
 		players_temp -= player
-		if(!istype(player) || !player.mind || player.mind in current_antagonists || player.stat == DEAD)
+		if(!istype(player) || !player.loc || !player.mind || player.mind in current_antagonists || player.stat == DEAD)
 			continue
 		var/datum/objective/rev/rev_obj = new
 		rev_obj.target = player.mind
