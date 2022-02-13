@@ -625,6 +625,11 @@
 	icon_living = "woodentucker0"
 	icon_dead = "woodentucker_dead"
 
+/mob/living/simple_animal/mgalekgolo/WoodenTucker2
+	icon_state = "woodentucker2"
+	icon_living = "woodentucker20"
+	icon_dead = "woodentucker2_dead"
+
 /////Zagarnt
 
 
