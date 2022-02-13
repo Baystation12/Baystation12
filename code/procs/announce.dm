@@ -95,7 +95,11 @@ datum/announcement/proc/NewsCast(message as text, message_title as text, zlevels
 
 /proc/GetNameAndAssignmentFromId(var/obj/item/card/id/I)
 	// Format currently matches that of newscaster feeds: Registered Name (Assigned Rank)
-	return I.assignment ? "[I.registered_name] ([I.assignment])" : I.registered_name
+	if (!I)
+		return "Unknown"
+	if (I.assignment)
+		return "[I.registered_name] ([I.assignment])"
+	return "[I.registered_name]"
 
 /proc/level_seven_announcement()
 	GLOB.using_map.level_x_biohazard_announcement(7)
