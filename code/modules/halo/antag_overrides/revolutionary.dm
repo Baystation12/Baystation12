@@ -41,7 +41,7 @@ var/datum/antagonist/revolutionary/revs
 		return
 	global_objectives = list()
 	var/list/players_temp = GLOB.player_list.Copy()
-	for(var/i = 1 to rand(3,5))
+	for(var/i = 1 to rand(2,4))
 		if(players_temp.len == 0)
 			break
 		var/mob/living/carbon/human/player = pick(players_temp)

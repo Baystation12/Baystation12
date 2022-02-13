@@ -33,7 +33,7 @@ var/datum/antagonist/traitor/traitors
 		traitor.objectives += survive_objective
 
 	else
-		var/obj_amt = rand(2,4)
+		var/obj_amt = rand(1,2)
 		var/list/targets = list()
 		for(var/i = 1 to obj_amt)
 			switch(rand(1,100))

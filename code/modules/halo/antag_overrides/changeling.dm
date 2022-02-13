@@ -27,7 +27,7 @@
 
 	var/datum/objective/absorb/absorb_objective = new
 	absorb_objective.owner = changeling
-	absorb_objective.gen_amount_goal(2, 4)
+	absorb_objective.gen_amount_goal(1, 2)
 	changeling.objectives += absorb_objective
 
 	var/max_hostile_objs = 4
