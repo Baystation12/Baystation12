@@ -71,3 +71,33 @@
 	if (check_rights(R_BUILDMODE, TRUE, user))
 		return STATUS_INTERACTIVE
 	return ..()
+
+/datum/build_mode/proc/make_rectangle(turf/A, turf/B)
+	if(!A || !B) // No coords
+		return
+	if(A.z != B.z) // Not same z-level
+		return
+
+	var/height = A.y - B.y
+	var/width = A.x - B.x
+	var/z_level = A.z
+
+	var/turf/lower_left_corner = null
+	// First, try to find the lowest part
+	var/desired_y = 0
+	desired_y = min(A.y, B.y)
+
+	//Now for the left-most part.
+	var/desired_x = 0
+	desired_x = min(A.x, B.x)
+
+	lower_left_corner = locate(desired_x, desired_y, z_level)
+
+	// Now we can begin building the actual room.  This defines the boundries for the room.
+	var/low_bound_x = lower_left_corner.x
+	var/low_bound_y = lower_left_corner.y
+
+	var/high_bound_x = lower_left_corner.x + abs(width)
+	var/high_bound_y = lower_left_corner.y + abs(height)
+
+	return list(low_bound_x, low_bound_y, high_bound_x, high_bound_y, z_level)
