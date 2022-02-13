@@ -40,8 +40,8 @@ var/datum/antagonist/traitor/traitors
 				if(1 to 50)
 					var/datum/objective/assassinate/kill_objective = new
 					kill_objective.owner = traitor
-					kill_objective.find_target()
-					targets += kill_objective.target
+					kill_objective.find_target(targets)
+					targets += kill_objective.target.current
 					traitor.objectives += kill_objective
 					if(kill_objective.target)
 						var/datum/mind/player = kill_objective.target
@@ -53,7 +53,7 @@ var/datum/antagonist/traitor/traitors
 				else
 					var/datum/objective/harm/harm_objective = new
 					harm_objective.owner = traitor
-					harm_objective.find_target()
+					harm_objective.find_target(targets)
 					traitor.objectives += harm_objective
 		if (!(locate(/datum/objective/survive) in traitor.objectives))
 			var/datum/objective/survive/survive_objective = new

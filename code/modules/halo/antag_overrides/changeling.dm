@@ -31,13 +31,15 @@
 	changeling.objectives += absorb_objective
 
 	var/max_hostile_objs = 4
+	var/list/targets = list()
 
 	if(max_hostile_objs)
 		for(var/i = 1 to rand(1,max_hostile_objs))
 			max_hostile_objs--
 			var/datum/objective/assassinate/kill_objective = new
 			kill_objective.owner = changeling
-			kill_objective.find_target()
+			kill_objective.find_target(targets)
+			targets += kill_objective.target.current
 			changeling.objectives += kill_objective
 
 	if (!(locate(/datum/objective/survive) in changeling.objectives))

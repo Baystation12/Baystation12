@@ -21,17 +21,18 @@ datum/objective
 	proc/check_completion()
 		return completed
 
-	proc/find_target()
+	proc/find_target(var/list/exclude = list())
 		var/list/possible_targets = list()
-		for(var/datum/mind/possible_target in ticker.minds)
-			if(possible_target != owner && ishuman(possible_target.current) && (possible_target.current.stat != 2))
-				possible_targets += possible_target
+		for(var/mob/living/possible_target in GLOB.player_list - exclude)
+			if(possible_target != owner && possible_target.mind && ishuman(possible_target) && (possible_target.stat != 2))
+				possible_targets += possible_target.mind
 		if(possible_targets.len > 0)
 			target = pick(possible_targets)
 
 
 	proc/find_target_by_role(role, role_type=0)//Option sets either to check assigned role or special role. Default to assigned.
-		for(var/datum/mind/possible_target in ticker.minds)
+		for(var/mob/living/l in GLOB.player_list)
+			var/datum/mind/possible_target = l.mind
 			if((possible_target != owner) && ishuman(possible_target.current) && ((role_type ? possible_target.special_role : possible_target.assigned_role) == role) )
 				target = possible_target
 				break
