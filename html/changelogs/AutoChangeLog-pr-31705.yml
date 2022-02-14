@@ -1,0 +1,4 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - tweak: Command n Comms programme now only needs to be authorised once when opening.
