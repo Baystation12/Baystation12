@@ -60,3 +60,10 @@
 	DAMAGE_OXY = 0,\
 	DAMAGE_BRAIN = 0\
 )
+
+
+/// Damage Flags for damage_health()
+/// The damage proc chain should skip calling `handle_death_state_change()` if applicable
+#define DAMAGE_FLAG_SKIP_DEATH_STATE_CHANGE FLAG(0)
+/// The damage source should deal extra damage to turfs - Walls, floors,
+#define DAMAGE_FLAG_TURF_BREAKER            FLAG(1)

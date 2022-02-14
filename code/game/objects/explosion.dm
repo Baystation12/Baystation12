@@ -1,6 +1,6 @@
 //TODO: Flash range does nothing currently
 
-proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN, shaped)
+proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN, shaped, turf_breaker)
 	var/multi_z_scalar = 0.35
 	UNLINT(src = null)	//so we don't abort once src is deleted
 	spawn(0)
@@ -76,7 +76,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 				for(var/atom_movable in T.contents)	//bypass type checking since only atom/movable can be contained by turfs anyway
 					var/atom/movable/AM = atom_movable
 					if(AM && AM.simulated && !T.protects_atom(AM))
-						AM.ex_act(dist)
+						AM.ex_act(dist, turf_breaker)
 
 		sleep(8)
 
