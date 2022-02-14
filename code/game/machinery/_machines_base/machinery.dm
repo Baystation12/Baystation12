@@ -517,7 +517,7 @@ Class Procs:
 		switch (silicon_restriction)
 			if (STATUS_UPDATE)
 				. += "<p>Silicons are blocked from controlling it.</p>"
-			if (STATUS_DISABLED || STATUS_CLOSE)
+			if (STATUS_DISABLED, STATUS_CLOSE)
 				. += "<p>Silicons are blocked from viewing or controlling it.</p>"
 
 	var/power_channel_name
