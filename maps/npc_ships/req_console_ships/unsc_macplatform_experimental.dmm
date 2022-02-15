@@ -1,6 +1,7 @@
 "aa" = (/turf/space,/area/space)
 "ab" = (/obj/machinery/overmap_comms/receiver,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
-"ac" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/photocopier/faxmachine/unsc{dir = 4; pixel_x = 32},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"ac" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/photocopier/faxmachine/unsc{density = 0; dir = 4; pixel_x = 32},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"ad" = (/obj/item/modular_computer/console/unsc/crew{density = 0; dir = 1; pixel_y = -32},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "ak" = (/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "aW" = (/obj/machinery/mac_cannon/accelerator{icon_state = "mac_accelerator"; dir = 8},/obj/structure/lattice,/turf/space,/area/space)
 "bS" = (/obj/structure/janitorialcart,/obj/item/weapon/mop,/obj/item/weapon/reagent_containers/glass/bucket,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -13,7 +14,6 @@
 "eY" = (/obj/structure/table/steel,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "gJ" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "hb" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
-"hd" = (/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "hW" = (/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 1; level = 1; tag = "icon-computer (WEST)"},/obj/machinery/mac_cannon/ammo_loader{icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "comm"; dir = 8},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "jW" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/reagent_containers/spray/cleaner,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "lb" = (/obj/docking_umbilical/south,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -57,7 +57,6 @@
 "TG" = (/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "Ue" = (/obj/machinery/light{dir = 8},/obj/structure/closet/emcloset/legacy,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "UQ" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
-"Vw" = (/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "WF" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/reinforced/fifty,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "WG" = (/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "WV" = (/obj/machinery/door/airlock/halo/unsc_ship_preset,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
@@ -86,17 +85,17 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslsls
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslslslslslslsqXqXFcFcFcFcqXqXlslsaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslslslslslslslsqXqXqXqXqXqXqXqXnyFcFcFcqXqXqXlsaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslslslslslslsqXqXqXqXqXqXqXqXaaaaruqXqXqXqXqXFcFcILFcqXaaruaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslslslslslslslslslslsruruqXDjqXqXaaaaaaaaaaaaqXqXhdcOhdqXqXqXqXMTqXqXqXqXaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslslslsruaaaaaaaaaaruruuNezGvqXqXqXqXqXqXqXqXqXRkhdhdhdWWdMrMJNhdqXFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslsruaaaaaarururururuaaaaaaruruuNqNEdEdWVEdEdEdEdraqXDjqXXihdhdhdhdhdhdhdhdMTFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaarururuaarururururuaarururururururuaarururuIeEdEdEdqXEdEdTxEdEddDqXhdhdhdqXqXMTqXqXUehdDjTCFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaarutntnJatntntntntntntntnJatnJatntntntntnJahWEdgJqXqXSsEdeYOrEdTGqXBJqXBJqXFcFcFcqXWGhdqXFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslslslslslslslslslslsruruqXDjqXqXaaaaaaaaaaaaqXqXWGcOWGqXqXqXqXMTqXqXqXqXaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslslslsruaaaaaaaaaaruruuNezGvqXqXqXqXqXqXqXqXqXRkWGWGWGWWdMrMJNWGqXFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslsruaaaaaarururururuaaaaaaruruuNqNEdEdWVEdEdEdEdraqXDjqXXiWGWGWGWGWGWGWGWGMTFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaarururuaarururururuaarururururururuaarururuIeEdEdEdqXEdEdTxEdEddDqXWGWGWGqXqXMTqXqXUeWGDjTCFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaarutntnJatntntntntntntntnJatnJatntntntntnJahWEdgJqXqXSsEdeYOrEdTGqXBJqXBJqXFcFcFcqXWGWGqXFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaWHqaWaWaWHqaWHqaWaWrmHqHqaWHqHqaWaWaWHqHqzXEdEdqXHoebEdEdEdEdEdBJacqXRZqXUQcSakqXqXBJqXqXqXqXaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaarutntntntntntntntntntntnJatnJatntntntntnJasbEdgJqXqXSsEdeYOrEdTGqXBJqXBJqXFcFcFcqXVwhdqXFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaarururuaarururururuaarururururururuaarururuTtEdEdEdqXEdEdTxEdEdabqXhdhdhdqXqXMTqXqXUehdDjTCFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslsruaaaaaarururururuaaaaaaruruvdswEdEdWVEdEdEdEdJMqXqXqXXihdhdhdhdhdhdhdhdMTFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslslslsruaaaaaaaaaaruruvdezGvqXqXqXqXqXqXqXDjqXWFhdhdhdpAbShbjWhdqXFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslslslslslslslslslslsruruqXDjqXqXaaaaaaaaaaaaqXqXhdlbhdqXqXqXqXMTqXqXqXqXaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaarutntntntntntntntntntntnJatnJatntntntntnJasbEdgJqXqXSsEdeYOrEdTGqXBJqXBJqXFcFcFcqXWGWGqXFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaarururuaarururururuaarururururururuaarururuTtEdEdEdqXEdEdTxEdadabqXWGWGWGqXqXMTqXqXUeWGDjTCFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslsruaaaaaarururururuaaaaaaruruvdswEdEdWVEdEdEdEdJMqXqXqXXiWGWGWGWGWGWGWGWGMTFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslslslsruaaaaaaaaaaruruvdezGvqXqXqXqXqXqXqXDjqXWFWGWGWGpAbShbjWWGqXFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslslslslslslslslslslsruruqXDjqXqXaaaaaaaaaaaaqXqXWGlbWGqXqXqXqXMTqXqXqXqXaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslslslslslslsqXqXqXqXqXqXqXqXaaaaruqXqXqXqXqXFcFclqFcqXaaruaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslslslslslslslsqXqXqXqXqXqXqXqXFcFcFcFcqXqXqXlsaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslslslslslslsqXqXnyFcFcFcqXqXlslsaaaaaaaaaaaaaaaaaaaaaaaaaaaa
