@@ -14,19 +14,19 @@
 		)
 
 	one_hand_penalty = -1
-	self_recharge = 1
+	self_recharge = 0
 	recharge_time = 20
 	max_shots = 4
 	is_charged_weapon = TRUE
 
-	arm_time = 5 //Deciseconds
+	arm_time = 7 //Deciseconds
 	charge_meter = 0
 	force = 10
 	screen_shake = 0.5
 	fire_delay = 10
 	scope_zoom_amount = 3
 	overheat_capacity = 3
-	overheat_fullclear_delay = 18
+	overheat_fullclear_delay = 30
 
 	fire_sound = null
 

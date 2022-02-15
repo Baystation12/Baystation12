@@ -1,6 +1,6 @@
 /datum/game_mode/var/next_spawn = 0
-/datum/game_mode/var/min_autotraitor_delay = 4200  // Approx 7 minutes.
-/datum/game_mode/var/max_autotraitor_delay = 12000 // Approx 20 minutes.
+/datum/game_mode/var/min_autotraitor_delay = 5 MINUTES
+/datum/game_mode/var/max_autotraitor_delay = 12 MINUTES
 /datum/game_mode/var/process_count = 0
 
 ///process()

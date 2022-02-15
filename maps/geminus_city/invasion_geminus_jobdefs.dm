@@ -14,7 +14,7 @@
 		/datum/job/unsc/oni/research,\
 		/datum/job/unsc/oni/research/director,\
 		/datum/job/unsc_ai,\
-		/datum/job/colonist/unsc,\
+		/datum/job/colonist,\
 		/datum/job/covenant/AI,\
 		/datum/job/covenant/huragok,\
 		/datum/job/covenant/sangheili_minor,\

@@ -23,4 +23,5 @@
 	use_overmap = 1
 	overmap_event_tokens = 25
 
+	allowed_gamemodes = list("spicyextended")
 	map_admin_faxes = list("Ministry of Tranquility (General)","Ministry of Resolution (War Matters)","Ministry of Fervent Intercession (Internal Affairs)")

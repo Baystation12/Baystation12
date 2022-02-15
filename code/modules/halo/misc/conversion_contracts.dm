@@ -52,7 +52,7 @@
 	curr_target = target
 	log_admin("[user.name],([user.ckey]) is attempting to convert [target.name] ([target.ckey])")
 	to_chat(target,"<span class = 'notice'>[user.name] is attempting to convert you. You are under no obligation to accept.</span>")
-		user.say("Repeat after me.")
+	user.say("Repeat after me.")
 	for(var/line in lines)
 		if(!check_convert(user,target))
 			return

@@ -76,7 +76,7 @@
 /datum/antagonist/proc/update_current_antag_max()
 	cur_max = hard_cap
 	if(ticker && ticker.mode)
-		if(ticker.mode.antag_tags && (id in ticker.mode.antag_tags))
+		if((ticker.mode.antag_tags || ticker.mode.latejoin_antag_tags) && (id in ticker.mode.antag_tags | ticker.mode.latejoin_antag_tags))
 			cur_max = hard_cap_round
 
 	if(ticker.mode.antag_scaling_coeff)

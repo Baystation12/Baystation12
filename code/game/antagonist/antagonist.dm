@@ -30,13 +30,13 @@
 	var/faction_descriptor                  // Description of the cause. Mandatory for faction role.
 	var/faction_verb                        // Verb added when becoming a member of the faction, if any.
 	var/faction_welcome                     // Message shown to faction members.
-	var/faction = "neutral"					// Actual faction name. Used primarily in stuff like simple_animals seeing if you are a threat or not.
+	var/faction = null					// Actual faction name. Used primarily in stuff like simple_animals seeing if you are a threat or not.
 
 	// Spawn values (autotraitor and game mode)
 	var/hard_cap = 3                        // Autotraitor var. Won't spawn more than this many antags.
 	var/hard_cap_round = 5                  // As above but 'core' round antags ie. roundstart.
 	var/initial_spawn_req = 1               // Gamemode using this template won't start without this # candidates.
-	var/initial_spawn_target = 3            // Gamemode will attempt to spawn this many antags.
+	var/initial_spawn_target = 1            // Gamemode will attempt to spawn this many antags.
 	var/announced                           // Has an announcement been sent?
 	var/spawn_announcement                  // When the datum spawn proc is called, does it announce to the world? (ie. xenos)
 	var/spawn_announcement_title            // Report title.

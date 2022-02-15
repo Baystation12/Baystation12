@@ -224,10 +224,14 @@ var/global/list/additional_antag_types = list()
 		announce_ert_disabled()
 
 	//Assign all antag types for this game mode. Any players spawned as antags earlier should have been removed from the pending list, so no need to worry about those.
-	for(var/datum/antagonist/antag in antag_templates)
-		if(!(antag.flags & ANTAG_OVERRIDE_JOB))
-			antag.attempt_spawn() //select antags to be spawned
-		antag.finalize_spawn() //actually spawn antags
+	if(antag_templates && antag_templates.len > 0)
+		var/list/tmp_antag_templates = antag_templates.Copy()
+		while(tmp_antag_templates && tmp_antag_templates.len > 0)
+			var/datum/antagonist/antag = pick(tmp_antag_templates)
+			tmp_antag_templates -= antag
+			if(!(antag.flags & ANTAG_OVERRIDE_JOB))
+				antag.attempt_spawn() //select antags to be spawned
+			antag.finalize_spawn() //actually spawn antags
 
 	//Finally do post spawn antagonist stuff.
 	for(var/datum/antagonist/antag in antag_templates)
@@ -435,9 +439,9 @@ var/global/list/additional_antag_types = list()
 		antag_scaling_coeff = 0
 
 	var/list/all_antag_types = all_antag_types()
-	if(antag_tags && antag_tags.len)
+	if((antag_tags && antag_tags.len) || (latejoin_antag_tags && latejoin_antag_tags.len))
 		antag_templates = list()
-		for(var/antag_tag in antag_tags)
+		for(var/antag_tag in antag_tags | latejoin_antag_tags)
 			var/datum/antagonist/antag = all_antag_types[antag_tag]
 			if(antag)
 				antag_templates |= antag
