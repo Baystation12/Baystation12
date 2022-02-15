@@ -1,7 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: Added controls to area buildmode to change multiple turfs into different
-      areas at once (similar to room buildmode).
-  - admin: Added controls to room buildmode to allow you to create rooms of only floors
-      or only walls, without changing existing walls/flooring.
