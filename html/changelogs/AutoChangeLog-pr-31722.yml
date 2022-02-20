@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscadd: You can now remove ID cards from wallets with AltClick. This only works
+      for human mobs, and only if you're holding or wearing the wallet.
