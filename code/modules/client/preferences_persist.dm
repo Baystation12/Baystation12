@@ -1,7 +1,7 @@
 #define PREF_SER_VERSION 2
 
 /datum/preferences/proc/get_path(ckey, record_key, extension="json")
-	return "data/player_saves/[copytext(ckey,1,2)]/[ckey]/[record_key].[extension]"
+	return "data/player_saves/[copytext_char(ckey,1,2)]/[ckey]/[record_key].[extension]"
 
 // Returns null if there's no record file. Crashes on other error conditions.
 /datum/preferences/proc/load_pref_record(record_key)
