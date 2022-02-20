@@ -164,18 +164,22 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 				var/mob/M = pick(players_on_site[chosen_area])
 				var/turf/MT = get_turf(M)
 				if (MT)
-					T = pick(trange(10, MT) - trange(7, MT))
+					if (istype(chosen_planet, /obj/effect/overmap/visitable/sector/exoplanet))
+						var/obj/effect/overmap/visitable/sector/exoplanet/E = chosen_planet
+						var/list/offset = BCrand(Frand(3, 5), MT.x, MT.y, 0, 0, E.maxx, E.maxy, TRUE)
+						T = locate(offset[1], offset[2], MT.z)
 				else
 					T = pick(area_turfs)
 			else
 				T = pick(area_turfs)
 
-			if (is_edge_turf(T) || T.is_wall() || T.density)
+			if (!T || is_edge_turf(T) || T.is_wall() || T.density)
+				T = null
 				continue
 
 			break
 
-		if (is_edge_turf(T) || T.is_wall() || T.density)
+		if (!T)
 			return
 
 
