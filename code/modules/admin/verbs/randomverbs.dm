@@ -188,7 +188,7 @@
 	if(ismob(A))
 		options += list("Direct Narrate")
 
-	if(check_rights(R_ADMIN, FALSE))
+	if(check_rights(R_MOD, FALSE))
 		options += list("Visual Narrate", "Audible Narrate")
 
 	var/result = input("What type of narrate?") as null | anything in options
@@ -221,10 +221,6 @@
 	var/style
 	var/size
 
-	if (!check_rights(R_ADMIN, FALSE))
-		style = "subtle"
-		size = "normal"
-
 	var/result = cmd_admin_narrate_helper(src, style, size)
 	if (!result)
 		return
@@ -238,7 +234,7 @@
 	set name = "Local Narrate"
 	set desc = "Narrate to everyone who can see the turf your mob is on."
 
-	if(!check_rights(R_ADMIN))
+	if(!check_rights(R_MOD))
 		return
 
 	var/result = cmd_admin_narrate_helper(src)
@@ -258,7 +254,7 @@
 	set name = "Visible Narrate"
 	set desc = "Narrate to those who can see the given atom."
 
-	if(!check_rights(R_ADMIN))
+	if(!check_rights(R_MOD))
 		return
 
 	var/mob/M = mob
