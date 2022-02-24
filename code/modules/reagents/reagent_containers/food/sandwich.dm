@@ -23,7 +23,7 @@
 			sandwich_limit += 4
 
 	if(src.contents.len > sandwich_limit)
-		to_chat(user, "<span class='wwarning'>If you put anything else on \the [src] it's going to collapse.</span>")
+		to_chat(user, "<span class='warning'>If you put anything else on \the [src] it's going to collapse.</span>")
 		return
 	else if(istype(W,/obj/item/material/shard))
 		if(!user.unEquip(W, src))
