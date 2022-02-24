@@ -1,0 +1,4 @@
+author: Andischa
+delete-after: true
+changes:
+  - bugfix: Fixed a typo in a text-tag in the sandwich-system
