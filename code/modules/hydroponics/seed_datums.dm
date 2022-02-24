@@ -702,6 +702,29 @@
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
 
+/datum/seed/lettuce
+	name = "lettuce"
+	seed_name = "lettuce"
+	display_name = "lettuce"
+	chems = list(/datum/reagent/nutriment = list(1,5), /datum/reagent/drink/juice/lettuce = list (2, 4))
+	kitchen_tag = "lettuce"
+	fruit_size = ITEM_SIZE_NORMAL
+
+/datum/seed/lettuce/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,2)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"lettuce")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#59CA42")
+	set_trait(TRAIT_PLANT_COLOUR,"#4FCB5B")
+	set_trait(TRAIT_PLANT_ICON,"vine2")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
+
 /datum/seed/banana
 	name = "banana"
 	seed_name = "banana"
