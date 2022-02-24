@@ -226,6 +226,15 @@
 	glass_name = "cabbage juice"
 	glass_desc = "It's a health drink, apparently."
 
+/datum/reagent/drink/juice/lettuce
+	name = "Lettuce Juice"
+	description = "It's mostly water, just a bit more lettucy"
+	taste_description = "fresh greens"
+	color = "#29df4b"
+
+	glass_name = "lettuce juice"
+	glass_desc = "This is just lettuce water. Fresh but boring."
+
 // Everything else
 
 /datum/reagent/drink/milk

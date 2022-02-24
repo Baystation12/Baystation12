@@ -1555,7 +1555,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#d9be29"
 	center_of_mass = "x=16;y=4"
-	nutriment_desc = list("bread" = 3, "cheese" = 3)
+	nutriment_desc = list("bread" = 3, "cheese" = 2, "lettuce" = 1)
 	nutriment_amt = 3
 	bitesize = 2
 /obj/item/reagent_containers/food/snacks/sandwich/Initialize()
