@@ -1292,7 +1292,7 @@
 
 /datum/recipe/tossedsalad
 	fruit = list(
-		"cabbage" = 2,
+		"lettuce" = 2,
 		"tomato" = 1,
 		"carrot" = 1,
 		"apple" = 1
