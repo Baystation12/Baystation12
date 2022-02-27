@@ -2066,6 +2066,51 @@
 
 		show_player_panel(M)
 
+	if (href_list["cryo"])
+		var/mob/M = locate(href_list["cryo"])
+		if (!isliving(M))
+			return
+
+		var/response = alert("This will put [M] into a cryopod and despawn them. Are you sure?",,"Yes","No") == "Yes"
+		if (response)
+			if (M.client)
+				var/sanity_check = alert("This player is currently online. Do you really want to cryo them?",,"Yes","No") == "Yes"
+
+				if (!sanity_check)
+					return
+
+			var/last_ckey = LAST_CKEY(M)
+
+			if (isAI(M))
+				var/mob/living/silicon/ai/AI = M
+				AI.despawn()
+				log_and_message_admins("has forced [last_ckey]/([M]) to ghost and deactivate.")
+				return
+
+			var/obj/machinery/cryopod/C
+			if (isrobot(M))
+				for (var/obj/machinery/cryopod/robot/CP in SSmachines.machinery)
+					if (CP.occupant || !(CP.z in GLOB.using_map.station_levels))
+						continue
+					C = CP
+			else
+				for (var/obj/machinery/cryopod/CP in SSmachines.machinery)
+					if (CP.occupant || !(CP.z in GLOB.using_map.station_levels))
+						continue
+					C = CP
+
+			if (!C || C.occupant)
+				to_chat(usr, SPAN_WARNING("Could not find an empty cryopod!"))
+				return
+
+			log_and_message_admins("has put [last_ckey]/([M]) into a cryopod and ghosted them.")
+
+			C.set_occupant(M)
+			var/ghost = M.ghostize(FALSE)
+			if (ghost)
+				show_player_panel(M)
+			return
+
 
 mob/living/proc/can_centcom_reply()
 	return 0

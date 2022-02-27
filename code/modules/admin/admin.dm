@@ -79,11 +79,14 @@ var/global/floorIsLava = 0
 		<A href='?_src_=holder;warn=[last_ckey]'>Warn</A> |
 		<A href='?src=\ref[src];newban=\ref[M];last_key=[last_ckey]'>Ban</A> |
 		<A href='?src=\ref[src];jobban2=\ref[M]'>Jobban</A> |
-		<A href='?src=\ref[src];notes=show;mob=\ref[M]'>Notes</A>
+		<A href='?src=\ref[src];notes=show;mob=\ref[M]'>Notes</A> |
 	"}
 
+	if (!istype(M, /mob/new_player) && !istype(M, /mob/observer))
+		body += "<A HREF='?src=\ref[src];cryo=\ref[M]'>Cryo Character</A> | "
+
 	if(M.client)
-		body += "| <A HREF='?src=\ref[src];sendtoprison=\ref[M]'>Prison</A> | "
+		body += "<A HREF='?src=\ref[src];sendtoprison=\ref[M]'>Prison</A> | "
 		body += "<A HREF='?src=\ref[src];reloadsave=\ref[M]'>Reload Save</A> | "
 		body += "<A HREF='?src=\ref[src];reloadchar=\ref[M]'>Reload Character</A> | "
 		var/muted = M.client.prefs.muted
