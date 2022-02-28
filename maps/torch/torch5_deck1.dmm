@@ -10822,6 +10822,11 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/table/rack,
+/obj/item/clothing/accessory/arm_guards/navy,
+/obj/item/clothing/accessory/arm_guards/navy,
+/obj/item/clothing/accessory/leg_guards/navy,
+/obj/item/clothing/accessory/leg_guards/navy,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/storage)
 "aLx" = (
@@ -10829,6 +10834,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/structure/table/rack,
+/obj/item/clothing/accessory/arm_guards,
+/obj/item/clothing/accessory/arm_guards,
+/obj/item/clothing/accessory/leg_guards,
+/obj/item/clothing/accessory/leg_guards,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/storage)
 "aLy" = (
@@ -11614,16 +11624,16 @@
 /turf/simulated/floor/tiled/dark,
 /area/security/armoury)
 "aOG" = (
-/obj/structure/table/steel,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/cell_charger,
-/obj/item/screwdriver,
 /obj/machinery/recharger/wallcharger{
 	dir = 8;
 	icon_state = "wrecharger0";
 	pixel_x = 23;
 	pixel_y = -3
 	},
+/obj/structure/table/rack,
+/obj/item/clothing/head/helmet/riot,
+/obj/item/clothing/suit/armor/riot,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "aOI" = (
@@ -12077,11 +12087,9 @@
 /area/thruster/d1port)
 "aQp" = (
 /obj/structure/table/rack,
-/obj/item/clothing/suit/armor/riot,
-/obj/item/clothing/suit/armor/riot,
-/obj/item/clothing/suit/armor/riot,
-/obj/item/clothing/suit/armor/riot,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/item/clothing/accessory/leg_guards/ballistic,
+/obj/item/clothing/accessory/leg_guards/ballistic,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "aQq" = (
@@ -20097,7 +20105,6 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/firstdeck/aft)
 "jhf" = (
-/obj/structure/table/steel,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/recharger/wallcharger{
 	dir = 8;
@@ -20105,8 +20112,12 @@
 	pixel_x = 23;
 	pixel_y = -3
 	},
-/obj/item/storage/box/trackimp,
-/obj/item/storage/box/chemimp,
+/obj/structure/table/rack,
+/obj/item/clothing/head/helmet/ballistic,
+/obj/item/clothing/suit/armor/bulletproof{
+	pixel_x = -2;
+	pixel_y = -2
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "jhq" = (
@@ -21675,6 +21686,12 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/structure/table/rack,
+/obj/item/clothing/head/helmet/ablative,
+/obj/item/clothing/suit/armor/laserproof{
+	pixel_x = -2;
+	pixel_y = -2
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "lcL" = (
@@ -22997,12 +23014,10 @@
 /turf/simulated/floor/tiled,
 /area/security/detectives_office)
 "mKq" = (
-/obj/structure/table/rack,
-/obj/item/clothing/head/helmet/riot,
-/obj/item/clothing/head/helmet/riot,
-/obj/item/clothing/head/helmet/riot,
-/obj/item/clothing/head/helmet/riot,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/structure/table/rack,
+/obj/item/clothing/accessory/arm_guards/ballistic,
+/obj/item/clothing/accessory/arm_guards/ballistic,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "mKw" = (
@@ -24816,11 +24831,9 @@
 /area/security/armoury)
 "oXx" = (
 /obj/structure/table/rack,
-/obj/item/clothing/head/helmet/ablative,
-/obj/item/clothing/head/helmet/ablative,
-/obj/item/clothing/head/helmet/ablative,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/clothing/head/helmet/ablative,
+/obj/item/clothing/accessory/arm_guards/ablative,
+/obj/item/clothing/accessory/arm_guards/ablative,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "oZb" = (
@@ -26021,22 +26034,8 @@
 "qyX" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/clothing/suit/armor/laserproof{
-	pixel_x = -2;
-	pixel_y = -2
-	},
-/obj/item/clothing/suit/armor/laserproof{
-	pixel_x = -2;
-	pixel_y = -2
-	},
-/obj/item/clothing/suit/armor/laserproof{
-	pixel_x = -2;
-	pixel_y = -2
-	},
-/obj/item/clothing/suit/armor/laserproof{
-	pixel_x = -2;
-	pixel_y = -2
-	},
+/obj/item/clothing/accessory/leg_guards/ablative,
+/obj/item/clothing/accessory/leg_guards/ablative,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "qzb" = (
@@ -27228,17 +27227,15 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralport)
 "rKP" = (
-/obj/structure/table/rack,
-/obj/item/clothing/head/helmet/ballistic,
-/obj/item/clothing/head/helmet/ballistic,
-/obj/item/clothing/head/helmet/ballistic,
-/obj/item/clothing/head/helmet/ballistic,
-/obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/table/steel,
+/obj/machinery/cell_charger,
+/obj/item/screwdriver,
+/obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "rLb" = (
@@ -28131,6 +28128,7 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/item/gun/launcher/grenade,
 /obj/item/storage/box/teargas,
+/obj/item/storage/box/flashbangs,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "sCb" = (
@@ -30739,29 +30737,15 @@
 /turf/simulated/wall/prepainted,
 /area/security/processing)
 "xRu" = (
-/obj/structure/table/rack,
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/clothing/suit/armor/bulletproof{
-	pixel_x = -2;
-	pixel_y = -2
-	},
-/obj/item/clothing/suit/armor/bulletproof{
-	pixel_x = -2;
-	pixel_y = -2
-	},
-/obj/item/clothing/suit/armor/bulletproof{
-	pixel_x = -2;
-	pixel_y = -2
-	},
-/obj/item/clothing/suit/armor/bulletproof{
-	pixel_x = -2;
-	pixel_y = -2
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/table/steel,
+/obj/item/storage/box/trackimp,
+/obj/item/storage/box/chemimp,
+/obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "xSd" = (

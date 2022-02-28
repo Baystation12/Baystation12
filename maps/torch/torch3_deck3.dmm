@@ -3562,11 +3562,6 @@
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
 "hk" = (
-/obj/machinery/alarm{
-	dir = 1;
-	icon_state = "alarm0";
-	pixel_y = -22
-	},
 /obj/machinery/camera/network/engineering{
 	c_tag = "Substation - Third Deck";
 	dir = 1
@@ -10311,6 +10306,9 @@
 	dir = 8
 	},
 /obj/machinery/light,
+/obj/machinery/newscaster{
+	pixel_y = -30
+	},
 /turf/simulated/floor/lino,
 /area/crew_quarters/office)
 "xr" = (
