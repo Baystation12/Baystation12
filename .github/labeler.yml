@@ -1,0 +1,11 @@
+Repo:
+- any ['.github/**/*', '.vscode/**/*', 'docs/**/*', 'scripts/**/*', 'test/**/*', 'tools/**/*', '.editorconfig', '.git*', 'LICENSE', 'README.md', 'SpacemanDMM.toml']
+
+Map:
+- *.dmm
+
+Sprites:
+- *.dmi
+
+Sound:
+- any ['*.ogg', '*.wav', '*.mp3']
