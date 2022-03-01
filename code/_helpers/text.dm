@@ -596,3 +596,28 @@ proc/TextPreview(var/string,var/len=40)
 			var/regex/matcher = entry[1]
 			message = replacetext_char(message, matcher, entry[2])
 	return message
+
+
+/**
+* Connects either a list or variadic arguments with "/" and cleans up multiple joins.
+* eg:
+*   join_url("a", "b", "c") => "a/b/c"
+*   join_url(list("a", "b", "c")) => "a/b/c"
+*   join_url("https://some.tld/", "/cats", "~", "//dogs") => "https://some.tld/cats/~/dogs"
+*/
+/proc/join_url()
+	var/len = length(args)
+	if (!len)
+		return ""
+	var/list/parts
+	if (len == 1)
+		if (!islist(args[1]))
+			parts = list(args[1])
+		else
+			parts = args[1]
+	else
+		parts = args
+	var/static/regex/clean1 = regex(@"\/\/+", "g") //Squash //+ to /
+	var/static/regex/clean2 = regex(@"^([^:]+:)\/([^\/])") //Fix "blah://" if we killed it in clean1
+	parts = replacetext_char(parts.Join("/"), clean1, "/")
+	return replacetext_char(parts, clean2, "$1//$2")

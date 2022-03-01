@@ -426,8 +426,13 @@
 		popup.open()
 
 	else if(href_list["job_wiki"])
+		if (!config.wiki_url)
+			return
 		var/rank = href_list["job_wiki"]
-		send_link(user,"[config.wiki_url][rank]")
+		var/datum/job/job = SSjobs.get_by_title(rank)
+		if (!job)
+			return
+		send_link(user, join_url(config.wiki_url, "roles", ckey(rank)))
 
 	return ..()
 
