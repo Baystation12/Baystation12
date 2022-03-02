@@ -21,8 +21,6 @@
 	glove_type = /obj/item/clothing/gloves/rig/vox_rig
 	air_type =     /obj/item/tank/nitrogen
 
-	allowed = list(/obj/item/device/flashlight, /obj/item/tank, /obj/item/ammo_magazine, /obj/item/ammo_casing, /obj/item/ammo_magazine/shotholder, /obj/item/handcuffs, /obj/item/device/radio, /obj/item/melee/baton, /obj/item/gun, /obj/item/pickaxe)
-
 	online_slowdown = 0.75
 
 	initial_modules = list(
@@ -38,6 +36,18 @@
 
 /obj/item/clothing/suit/space/rig/vox_rig
 	species_restricted = list(SPECIES_VOX)
+	allowed = list(
+		/obj/item/device/flashlight,
+		/obj/item/tank,
+		/obj/item/ammo_magazine,
+		/obj/item/ammo_casing,
+		/obj/item/ammo_magazine/shotholder,
+		/obj/item/handcuffs,
+		/obj/item/device/radio,
+		/obj/item/melee/baton,
+		/obj/item/gun,
+		/obj/item/pickaxe
+	)
 
 /obj/item/clothing/shoes/magboots/rig/vox_rig
 	species_restricted = list(SPECIES_VOX)
