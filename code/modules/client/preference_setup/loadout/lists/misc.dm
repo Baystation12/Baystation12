@@ -126,6 +126,7 @@
 /datum/gear/passport
 	display_name = "passports selection"
 	description = "A selection of passports."
+	cost = 0
 	path = /obj/item/passport
 	flags = GEAR_HAS_SUBTYPE_SELECTION
 	custom_setup_proc = /obj/item/passport/proc/set_info
