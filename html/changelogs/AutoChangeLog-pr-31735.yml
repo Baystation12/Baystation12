@@ -1,0 +1,5 @@
+author: Spookerton
+delete-after: true
+changes:
+  - bugfix: Character setup wiki links for occupations work again, where a page exists
+      for the role.
