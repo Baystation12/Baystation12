@@ -1,7 +1,7 @@
 GLOBAL_VAR(planet_repopulation_disabled)
 
 /obj/effect/overmap/visitable/sector/exoplanet
-	name = "exoplanet"
+	name = "Unknown exoplanet"
 	icon_state = "globe"
 	in_space = FALSE
 	var/area/planetary_area
@@ -82,7 +82,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	maxy = max_y ? max_y : world.maxy
 
 	var/planet_name = generate_planet_name()
-	name = "[planet_name], \a [name]"
+	name = "[planet_name], an unknown exoplanet"
 
 	planetary_area = new planetary_area()
 	GLOB.using_map.area_purity_test_exempt_areas += planetary_area.type

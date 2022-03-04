@@ -1,7 +1,7 @@
 #include "meatstation_areas.dm"
 
 /obj/effect/overmap/visitable/sector/meatstation
-	name = "Unpowered Research Station"
+	name = "Unknown station"
 	desc = "An unpowered research station. A large quantity of nearby debris blocks more detail."
 	icon_state = "object"
 	known = FALSE

@@ -1,7 +1,7 @@
 //quality code theft
 #include "blueriver_areas.dm"
 /obj/effect/overmap/visitable/sector/arcticplanet
-	name = "arctic planetoid"
+	name = "Unknown planetoid"
 	desc = "Sensor array detects an arctic planet with a small vessel on the planet's surface. Scans further indicate strange energy emissions from below the planet's surface."
 	in_space = FALSE
 	icon_state = "globe"

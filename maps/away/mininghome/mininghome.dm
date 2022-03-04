@@ -1,5 +1,5 @@
 /obj/effect/overmap/visitable/sector/mininghome
-	name = "Asteroid Mining Station"
+	name = "Unknown station"
 	desc = "A small mining station. No active lifesigns found on the station. Sensors indicate an abundance of valuable ore."
 	icon_state = "object"
 	initial_generic_waypoints = list(

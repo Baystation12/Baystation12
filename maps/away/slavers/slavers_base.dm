@@ -2,7 +2,7 @@
 #include "../mining/mining_areas.dm"
 
 /obj/effect/overmap/visitable/sector/slavers_base
-	name = "large asteroid"
+	name = "Unknown asteroid"
 	desc = "Sensor array is reading an artificial structure inside the asteroid."
 	icon_state = "object"
 	known = FALSE

@@ -1,7 +1,7 @@
 #include "magshield_areas.dm"
 
 /obj/effect/overmap/visitable/sector/magshield
-	name = "orbital station"
+	name = "Unknown station"
 	desc = "Sensors detect an orbital station above the exoplanet. Sporadic magentic impulses are registred inside it. Planet landing is impossible due to lower orbits being cluttered with chaotically moving metal chunks."
 	icon_state = "object"
 	known = FALSE

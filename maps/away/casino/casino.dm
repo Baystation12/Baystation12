@@ -2,8 +2,8 @@
 #include "../mining/mining_areas.dm"
 
 /obj/effect/overmap/visitable/ship/casino
-	name = "passenger liner"
-	desc = "Sensors detect an undamaged vessel without any signs of activity."
+	name = "Unknown vessel"
+	desc = "Sensors detect an undamaged passenger vessel without any signs of activity."
 	color = "#bd6100"
 	vessel_mass = 5000
 	max_speed = 1/(2 SECONDS)

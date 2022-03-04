@@ -2,7 +2,7 @@
 
 //MINING-1 // CLUSTER
 /obj/effect/overmap/visitable/sector/cluster
-	name = "asteroid cluster"
+	name = "Unknown asteroid cluster"
 	desc = "Large group of asteroids. Mineral content detected."
 	icon_state = "sector"
 	initial_generic_waypoints = list(

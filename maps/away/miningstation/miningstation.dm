@@ -2,7 +2,7 @@
 
 
 /obj/effect/overmap/visitable/sector/miningstation
-	name = "Orbital Mining Station"
+	name = "Unknown station"
 	desc = "An orbital Mining Station bearing authentication codes from Grayson Mining Industries, sensors show inconsistant lifesigns aboard the station. It is emitting a weak signal on a public frequency, with no other discernible radio traffic."
 	icon_state = "object"
 	known = FALSE
