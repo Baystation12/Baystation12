@@ -4,9 +4,10 @@
 /// All /obj/structure/cable, managed by instances
 GLOBAL_LIST_EMPTY(cable_list)
 
+/// All medical side effects
+GLOBAL_LIST_EMPTY(side_effects)
 
 var/global/list/landmarks_list = list()				//list of all landmarks created
-var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
 var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mobs target tracking.
 
 #define all_genders_define_list list(MALE,FEMALE,PLURAL,NEUTER)
