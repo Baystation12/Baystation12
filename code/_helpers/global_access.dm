@@ -285,8 +285,6 @@
 			return global.blocked;
 		if("bomb_set")
 			return global.bomb_set;
-		if("cable_list")
-			return global.cable_list;
 		if("cached_icons")
 			return global.cached_icons;
 		if("cached_space")
@@ -1112,8 +1110,6 @@
 			global.blocked=newval;
 		if("bomb_set")
 			global.bomb_set=newval;
-		if("cable_list")
-			global.cable_list=newval;
 		if("cached_icons")
 			global.cached_icons=newval;
 		if("cached_space")
@@ -1796,7 +1792,6 @@
 	"basic_robolimb",
 	"blocked",
 	"bomb_set",
-	"cable_list",
 	"cached_icons",
 	"cached_space",
 	"camera_range_display_status",
