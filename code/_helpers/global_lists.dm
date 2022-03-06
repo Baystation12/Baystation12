@@ -7,6 +7,9 @@ GLOBAL_LIST_EMPTY(cable_list)
 /// All medical side effects
 GLOBAL_LIST_EMPTY(side_effects)
 
+/// All character setup mannequins
+GLOBAL_LIST_EMPTY(mannequins)
+
 var/global/list/landmarks_list = list()				//list of all landmarks created
 
 #define all_genders_define_list list(MALE,FEMALE,PLURAL,NEUTER)
@@ -18,7 +21,7 @@ var/global/list/datum/language/all_languages = list()
 var/global/list/language_keys[0]					// Table of say codes for all languages
 var/global/list/playable_species = list(SPECIES_HUMAN)    // A list of ALL playable species, whitelisted, latejoin or otherwise.
 
-var/list/mannequins_
+
 
 // Grabs
 var/global/list/all_grabstates[0]
@@ -82,13 +85,11 @@ var/global/list/string_slot_flags = list(
 /////Initial Building/////
 //////////////////////////
 
-/proc/get_mannequin(var/ckey)
-	if(!mannequins_)
-		mannequins_ = new()
-	. = mannequins_[ckey]
-	if(!.)
-		. = new/mob/living/carbon/human/dummy/mannequin()
-		mannequins_[ckey] = .
+/proc/get_mannequin(ckey)
+	if (!GLOB.mannequins[ckey])
+		GLOB.mannequins[ckey] = new /mob/living/carbon/human/dummy/mannequin
+	return GLOB.mannequins[ckey]
+
 
 /hook/global_init/proc/makeDatumRefLists()
 	var/list/paths

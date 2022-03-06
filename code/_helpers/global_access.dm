@@ -499,8 +499,6 @@
 			return global.magazine_icondata_keys;
 		if("magazine_icondata_states")
 			return global.magazine_icondata_states;
-		if("mannequins_")
-			return global.mannequins_;
 		if("map_count")
 			return global.map_count;
 		if("map_sectors")
@@ -1320,8 +1318,6 @@
 			global.magazine_icondata_keys=newval;
 		if("magazine_icondata_states")
 			global.magazine_icondata_states=newval;
-		if("mannequins_")
-			global.mannequins_=newval;
 		if("map_count")
 			global.map_count=newval;
 		if("map_sectors")
@@ -1891,7 +1887,6 @@
 	"lunchables_snacks_",
 	"magazine_icondata_keys",
 	"magazine_icondata_states",
-	"mannequins_",
 	"map_count",
 	"map_sectors",
 	"mark",
