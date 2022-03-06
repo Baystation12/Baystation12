@@ -223,8 +223,6 @@
 			return global.air_alarm_topic;
 		if("air_blocked")
 			return global.air_blocked;
-		if("airlock_overlays")
-			return global.airlock_overlays;
 		if("alien_whitelist")
 			return global.alien_whitelist;
 		if("allCasters")
@@ -1060,8 +1058,6 @@
 			global.air_alarm_topic=newval;
 		if("air_blocked")
 			global.air_blocked=newval;
-		if("airlock_overlays")
-			global.airlock_overlays=newval;
 		if("alien_whitelist")
 			global.alien_whitelist=newval;
 		if("allCasters")
@@ -1785,7 +1781,6 @@
 	"ai_verbs_default",
 	"air_alarm_topic",
 	"air_blocked",
-	"airlock_overlays",
 	"alien_whitelist",
 	"allCasters",
 	"allConsoles",
