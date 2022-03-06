@@ -12,18 +12,14 @@
 	req_access = list(access_cent_specops)
 
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR, 
-		bullet = ARMOR_BALLISTIC_RESISTANT, 
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
 		laser = ARMOR_LASER_MAJOR,
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 		)
-	allowed = list(/obj/item/device/flashlight, /obj/item/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/handcuffs, /obj/item/device/t_scanner, /obj/item/rcd, /obj/item/rpd, /obj/item/crowbar, \
-	/obj/item/screwdriver, /obj/item/weldingtool, /obj/item/wirecutters, /obj/item/wrench, /obj/item/device/multitool, \
-	/obj/item/device/radio, /obj/item/device/scanner/gas,/obj/item/storage/briefcase/inflatable, /obj/item/melee/baton, /obj/item/gun, \
-	/obj/item/storage/firstaid, /obj/item/reagent_containers/hypospray, /obj/item/roller)
 
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
@@ -39,6 +35,30 @@
 
 /obj/item/clothing/suit/space/rig/ert
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
+	allowed = list(
+		/obj/item/device/flashlight,
+		/obj/item/tank,
+		/obj/item/ammo_magazine,
+		/obj/item/ammo_casing,
+		/obj/item/handcuffs,
+		/obj/item/device/t_scanner,
+		/obj/item/rcd,
+		/obj/item/rpd,
+		/obj/item/crowbar,
+		/obj/item/screwdriver,
+		/obj/item/weldingtool,
+		/obj/item/wirecutters,
+		/obj/item/wrench,
+		/obj/item/device/multitool,
+		/obj/item/device/radio,
+		/obj/item/device/scanner/gas,
+		/obj/item/storage/briefcase/inflatable,
+		/obj/item/melee/baton,
+		/obj/item/gun,
+		/obj/item/storage/firstaid,
+		/obj/item/reagent_containers/hypospray,
+		/obj/item/roller
+	)
 
 /obj/item/clothing/shoes/magboots/rig/ert
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
@@ -116,12 +136,12 @@
 	suit_type = "heavy emergency response"
 	icon_state = "asset_protection_rig"
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH, 
-		bullet = ARMOR_BALLISTIC_RESISTANT, 
+		melee = ARMOR_MELEE_VERY_HIGH,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
 		laser = ARMOR_LASER_MAJOR,
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 		)
 
