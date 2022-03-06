@@ -5,7 +5,7 @@ Map:
 - any: ['*.dmm']
 
 Sprites:
-- any: ['*.dmi']
+- any: ['**/*.dmi']
 
 Sound:
 - any: ['*.ogg', '*.wav', '*.mp3']
