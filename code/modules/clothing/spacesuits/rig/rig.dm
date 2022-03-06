@@ -156,6 +156,8 @@
 		boots = new boot_type(src)
 	if(chest_type)
 		chest = new chest_type(src)
+		if(allowed)
+			chest.allowed = allowed
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
 		if(!istype(piece))
