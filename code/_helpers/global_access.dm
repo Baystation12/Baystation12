@@ -509,8 +509,6 @@
 			return global.mark;
 		if("maze_cell_count")
 			return global.maze_cell_count;
-		if("mechas_list")
-			return global.mechas_list;
 		if("merged")
 			return global.merged;
 		if("message_delay")
@@ -1332,8 +1330,6 @@
 			global.mark=newval;
 		if("maze_cell_count")
 			global.maze_cell_count=newval;
-		if("mechas_list")
-			global.mechas_list=newval;
 		if("merged")
 			global.merged=newval;
 		if("message_delay")
@@ -1900,7 +1896,6 @@
 	"map_sectors",
 	"mark",
 	"maze_cell_count",
-	"mechas_list",
 	"merged",
 	"message_delay",
 	"message_servers",

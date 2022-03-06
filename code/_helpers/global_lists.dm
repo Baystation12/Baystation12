@@ -8,7 +8,6 @@ GLOBAL_LIST_EMPTY(cable_list)
 GLOBAL_LIST_EMPTY(side_effects)
 
 var/global/list/landmarks_list = list()				//list of all landmarks created
-var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mobs target tracking.
 
 #define all_genders_define_list list(MALE,FEMALE,PLURAL,NEUTER)
 #define all_genders_text_list list("Male","Female","Plural","Neuter")
