@@ -337,8 +337,6 @@
 			return global.created;
 		if("crew_repository")
 			return global.crew_repository;
-		if("csrfz_check")
-			return global.csrfz_check;
 		if("damage_icon_parts")
 			return global.damage_icon_parts;
 		if("dbcon")
@@ -443,8 +441,6 @@
 			return global.global_message_listener;
 		if("global_vars_")
 			return global.global_vars_;
-		if("gzn_check")
-			return global.gzn_check;
 		if("hadevent")
 			return global.hadevent;
 		if("hivemind_bank")
@@ -1170,8 +1166,6 @@
 			global.created=newval;
 		if("crew_repository")
 			global.crew_repository=newval;
-		if("csrfz_check")
-			global.csrfz_check=newval;
 		if("damage_icon_parts")
 			global.damage_icon_parts=newval;
 		if("dbcon")
@@ -1276,8 +1270,6 @@
 			global.global_message_listener=newval;
 		if("global_vars_")
 			global.global_vars_=newval;
-		if("gzn_check")
-			global.gzn_check=newval;
 		if("hadevent")
 			global.hadevent=newval;
 		if("hivemind_bank")
@@ -1834,7 +1826,6 @@
 	"create_turf_html",
 	"created",
 	"crew_repository",
-	"csrfz_check",
 	"damage_icon_parts",
 	"dbcon",
 	"dbcon_old",
@@ -1887,7 +1878,6 @@
 	"ghost_traps",
 	"global_message_listener",
 	"global_vars_",
-	"gzn_check",
 	"hadevent",
 	"hivemind_bank",
 	"holder_mob_icon_cache",
