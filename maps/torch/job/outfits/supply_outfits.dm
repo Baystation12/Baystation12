@@ -57,6 +57,15 @@
 	flags = OUTFIT_FLAGS_JOB_DEFAULT | OUTFIT_EXTENDED_SURVIVAL
 	l_ear = /obj/item/device/radio/headset/headset_mining
 
+/decl/hierarchy/outfit/job/torch/passenger/research/prospector/ec
+	name = OUTFIT_JOB_NAME("Prospector - Expeditionary Corps")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/supply
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_types = list(/obj/item/card/id/torch/passenger/research/mining)
+	pda_type = /obj/item/modular_computer/pda/mining
+	flags = OUTFIT_FLAGS_JOB_DEFAULT | OUTFIT_EXTENDED_SURVIVAL
+	l_ear = /obj/item/device/radio/headset/headset_mining
+
 /decl/hierarchy/outfit/job/torch/passenger/research/prospector/New()
 	..()
 	BACKPACK_OVERRIDE_ENGINEERING

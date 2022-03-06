@@ -96,7 +96,8 @@
 		/datum/mil_branch/expeditionary_corps
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/o3
+		/datum/mil_rank/ec/o3,
+		/datum/mil_rank/ec/o5
 	)
 
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
@@ -193,7 +194,8 @@
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o3,
 		/datum/mil_rank/fleet/o2,
-		/datum/mil_rank/fleet/o3
+		/datum/mil_rank/fleet/o3,
+		/datum/mil_rank/fleet/o4
 	)
 	min_skill = list(   SKILL_BUREAUCRACY  = SKILL_BASIC,
 	                    SKILL_COMPUTER     = SKILL_ADEPT,
@@ -249,8 +251,8 @@
 		/datum/mil_rank/ec/o3,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o3,
-		/datum/mil_rank/army/o3,
-		/datum/mil_rank/army/o4
+		/datum/mil_rank/army/o2,
+		/datum/mil_rank/army/o3
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_EVA         = SKILL_BASIC,
@@ -377,7 +379,8 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o1,
-		/datum/mil_rank/fleet/o1
+		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/o2
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_PILOT       = SKILL_ADEPT)

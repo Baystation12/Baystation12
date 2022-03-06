@@ -18,11 +18,14 @@
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/ec/e7,
+		/datum/mil_rank/ec/o1,
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e8,
+		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/army/e6,
 		/datum/mil_rank/army/e7,
 		/datum/mil_rank/army/e8,
+		/datum/mil_rank/army/o1,
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_FINANCE     = SKILL_BASIC,
@@ -64,11 +67,14 @@
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e2,
 		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/army/e2,
 		/datum/mil_rank/army/e3,
 		/datum/mil_rank/army/e4,
+		/datum/mil_rank/army/e5,
 		/datum/mil_rank/civ/contractor
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
@@ -108,8 +114,14 @@
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/prospector
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	allowed_branches = list(
+		/datum/mil_branch/civilian,
+		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/passenger/research/prospector/ec
+		)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/ec/e3
+	)
 
 	access = list(
 		access_mining, access_mining_office, access_mining_station,

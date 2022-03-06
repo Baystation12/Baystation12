@@ -165,7 +165,9 @@
 	allowed_ranks = list(
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e2,
-		/datum/mil_rank/army/e2
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/army/e2,
+		/datum/mil_rank/army/e3,
 	)
 
 	skill_points = 4
@@ -215,8 +217,7 @@
 
 	allowed_ranks = list(
 		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/ec/e3,
-		/datum/mil_rank/ec/e5)
+		/datum/mil_rank/ec/o1)
 
 	min_skill = list(   SKILL_MEDICAL   = SKILL_BASIC,
 	                    SKILL_CHEMISTRY = SKILL_ADEPT)
@@ -259,7 +260,9 @@
 	allowed_ranks = list(
 		/datum/mil_rank/civ/contractor,
 		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/army/o1,
+		/datum/mil_rank/army/o2,
 		/datum/mil_rank/ec/o1)
 	min_skill = list(
 		SKILL_BUREAUCRACY = SKILL_BASIC,
