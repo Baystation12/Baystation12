@@ -1,0 +1,4 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - bugfix: Rigs can now carry the items in the `allowed` list.
