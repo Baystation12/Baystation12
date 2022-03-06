@@ -177,5 +177,3 @@
 /obj/machinery/keycard_auth/proc/is_ert_blocked()
 	if(config.ert_admin_call_only) return 1
 	return SSticker.mode && SSticker.mode.ert_disabled
-
-var/global/maint_all_access = 0

@@ -23,7 +23,7 @@
 
 /datum/event/radiation_storm/start()
 	..()
-	GLOB.using_map.make_maint_all_access(1)
+	GLOB.using_map.make_maint_all_access(TRUE)
 
 /datum/event/radiation_storm/tick()
 	if(activeFor == enterBelt)
@@ -65,7 +65,7 @@
 					domutcheck(H,null,MUTCHK_FORCED)
 
 /datum/event/radiation_storm/end()
-	GLOB.using_map.revoke_maint_all_access(1)
+	GLOB.using_map.revoke_maint_all_access(TRUE)
 
 /datum/event/radiation_storm/syndicate/radiate()
 	return

@@ -219,6 +219,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	// List of events specific to a map
 	var/list/map_event_container = list()
 
+	var/maint_all_access = FALSE
+
 /datum/map/New()
 	if(!map_levels)
 		map_levels = station_levels.Copy()
@@ -474,11 +476,11 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	return // overriden by torch
 
 /datum/map/proc/make_maint_all_access(var/radstorm = 0) // parameter used by torch
-	maint_all_access = 1
+	maint_all_access = TRUE
 	priority_announcement.Announce("The maintenance access requirement has been revoked on all maintenance airlocks.", "Attention!")
 
 /datum/map/proc/revoke_maint_all_access(var/radstorm = 0) // parameter used by torch
-	maint_all_access = 0
+	maint_all_access = FALSE
 	priority_announcement.Announce("The maintenance access requirement has been readded on all maintenance airlocks.", "Attention!")
 
 // Access check is of the type requires one. These have been carefully selected to avoid allowing the janitor to see channels he shouldn't
