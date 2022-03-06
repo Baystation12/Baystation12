@@ -12,12 +12,12 @@ Repo:
 - SpacemanDMM.toml
 
 Map:
-- '*.dmm'
+- '**/*.dmm'
 
 Sprites:
-- '*.dmi'
+- '**/*.dmi'
 
 Sound:
-- '*.ogg'
-- '*.wav'
-- '*.mp3'
+- '**/*.ogg'
+- '**/*.wav'
+- '**/*.mp3'
