@@ -21,3 +21,6 @@ Sound:
 - '**/*.ogg'
 - '**/*.wav'
 - '**/*.mp3'
+
+Config Update:
+- config/example/**/*
