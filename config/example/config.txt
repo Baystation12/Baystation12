@@ -452,3 +452,7 @@ RADIATION_LOWER_LIMIT 0.15
 
 ## The length in minutes of an automatic ban created by passing the warning threshold.
 # WARN_AUTOBAN_DURATION 30
+
+## Uncomment this to bypass empty z-level checks in certain subsystems. For testing and development purposes only.
+## Not recommended for live use.
+#RUN_EMPTY_LEVELS
