@@ -1,8 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Spider events should now occur less often.
-  - tweak: Spider event spawn counts are now limited by the number of active players
-      at the time of event start.
-  - bugfix: Spider events should now properly prevent future spider events from occurring
-      at the same time/in the same round.
