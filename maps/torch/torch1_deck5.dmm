@@ -2933,18 +2933,6 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
-"fW" = (
-/obj/effect/floor_decal/corner/mauve/half{
-	dir = 4;
-	icon_state = "bordercolorhalf"
-	},
-/obj/machinery/computer/modular/preset/civilian{
-	dir = 8;
-	icon_state = "console"
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/exploration)
 "fX" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/quartermaster/hangar)
@@ -3522,11 +3510,10 @@
 "hO" = (
 /obj/effect/floor_decal/corner/mauve/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/closet/secure_closet/explorer,
-/obj/item/material/hatchet/machete,
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/structure/closet/secure_closet/explorer/medic,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "hP" = (
@@ -3873,7 +3860,6 @@
 	pixel_y = 7
 	},
 /obj/item/folder/blue,
-/obj/effect/floor_decal/corner/mauve/mono,
 /obj/structure/sign/ecplaque{
 	pixel_y = 30
 	},
@@ -3889,16 +3875,17 @@
 	dir = 8;
 	icon_state = "camera"
 	},
+/obj/effect/floor_decal/corner/mauve/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "iP" = (
-/obj/machinery/portable_atmospherics/canister/oxygen,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/suit_storage_unit/pilot/sol,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "iQ" = (
-/obj/machinery/suit_cycler/exploration,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "iR" = (
@@ -4236,7 +4223,7 @@
 /area/quartermaster/expedition/eva)
 "jD" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/suit_storage_unit/pilot/sol,
+/obj/machinery/suit_storage_unit/explorer/engineer,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "jE" = (
@@ -4571,9 +4558,8 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/structure/closet/secure_closet/explorer,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/material/hatchet/machete,
+/obj/structure/closet/secure_closet/explorer/engineer,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "ki" = (
@@ -4616,7 +4602,8 @@
 	dir = 5;
 	icon_state = "corner_white"
 	},
-/turf/simulated/floor/tiled,
+/obj/item/device/camera,
+/turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "ko" = (
 /obj/machinery/suit_storage_unit/explorer,
@@ -4624,13 +4611,12 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "kp" = (
-/obj/machinery/computer/ship/navigation{
-	dir = 8;
-	icon_state = "computer"
+/obj/structure/closet/secure_closet/explorer/marine,
+/obj/effect/floor_decal/corner/red{
+	dir = 6
 	},
-/obj/effect/floor_decal/corner/mauve/half{
-	dir = 4;
-	icon_state = "bordercolorhalf"
+/obj/effect/floor_decal/corner/red{
+	dir = 5
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
@@ -4657,6 +4643,8 @@
 	},
 /obj/item/storage/box/ammo/flashshells,
 /obj/item/gun/projectile/flare,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "kt" = (
@@ -4683,7 +4671,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "kv" = (
-/obj/machinery/suit_cycler/pilot,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -4691,6 +4678,7 @@
 /obj/structure/sign/ecplaque{
 	pixel_y = -30
 	},
+/obj/machinery/suit_storage_unit/explorer/marine,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "kw" = (
@@ -4744,24 +4732,20 @@
 /obj/item/device/scanner/plant,
 /obj/item/device/scanner/plant,
 /obj/item/device/scanner/plant,
-/obj/effect/floor_decal/corner/mauve{
-	dir = 10;
-	icon_state = "corner_white"
-	},
 /obj/machinery/alarm{
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 21
 	},
+/obj/effect/floor_decal/corner/mauve/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "kA" = (
-/obj/effect/floor_decal/corner/mauve/half{
-	dir = 4;
-	icon_state = "bordercolorhalf"
+/obj/machinery/computer/modular/preset/civilian{
+	dir = 8;
+	icon_state = "console"
 	},
-/obj/structure/table/steel,
-/obj/item/device/camera,
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "kB" = (
@@ -4877,9 +4861,9 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "kP" = (
-/obj/machinery/suit_storage_unit/explorer,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/light,
+/obj/machinery/suit_storage_unit/explorer/medic,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "kQ" = (
@@ -10429,6 +10413,10 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/eva)
+"xZ" = (
+/obj/machinery/suit_cycler/exploration,
+/turf/simulated/floor/tiled,
+/area/quartermaster/exploration)
 "ya" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -11527,6 +11515,14 @@
 /obj/item/stack/material/phoron,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/analysis)
+"Cj" = (
+/obj/structure/closet/secure_closet/explorer/marine,
+/obj/effect/floor_decal/corner/red{
+	dir = 6
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/exploration)
 "Cm" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy{
 	dir = 4;
@@ -12074,6 +12070,11 @@
 /obj/effect/paint/red,
 /turf/simulated/wall/titanium,
 /area/shuttle/petrov/custodial)
+"DR" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/suit_storage_unit/explorer/marine,
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/exploration)
 "DT" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -16632,6 +16633,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/power)
+"Vc" = (
+/obj/machinery/suit_cycler/pilot,
+/turf/simulated/floor/tiled,
+/area/quartermaster/exploration)
 "Ve" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
@@ -32192,7 +32197,7 @@ eu
 jE
 ko
 kM
-ko
+jD
 kP
 eu
 hM
@@ -32595,9 +32600,9 @@ kL
 hl
 iP
 kg
-hz
+Vc
 ki
-jD
+DR
 eu
 nf
 si
@@ -32791,13 +32796,13 @@ oW
 hl
 kn
 fH
-hz
+fH
 kw
 ky
 hl
 iQ
 hz
-hz
+xZ
 kI
 kv
 eu
@@ -32993,7 +32998,7 @@ oX
 eu
 iO
 kp
-fW
+Cj
 kA
 kz
 OX

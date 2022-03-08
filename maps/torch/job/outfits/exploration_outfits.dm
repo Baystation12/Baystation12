@@ -39,3 +39,37 @@
 /decl/hierarchy/outfit/job/torch/crew/exploration/pilot/fleet
 	name = OUTFIT_JOB_NAME("Shuttle Pilot - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/exploration
+
+/decl/hierarchy/outfit/job/torch/crew/exploration/expmed
+	name = OUTFIT_JOB_NAME("Expedition Medic - Expeditionary Corps")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/exploration
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_types = list(/obj/item/card/id/torch/crew/expmed)
+	pda_type = /obj/item/modular_computer/pda/explorer
+	l_ear = /obj/item/device/radio/headset/expmed
+
+/decl/hierarchy/outfit/job/torch/crew/exploration/expmed/army
+	name = OUTFIT_JOB_NAME("Expedition Medic - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/medical
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/exploration/expeng
+	name = OUTFIT_JOB_NAME("Expedition Engineer - Expeditionary Corps")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/exploration
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_types = list(/obj/item/card/id/torch/crew/expeng)
+	pda_type = /obj/item/modular_computer/pda/explorer
+	l_ear = /obj/item/device/radio/headset/expeng
+
+/decl/hierarchy/outfit/job/torch/crew/exploration/expeng/army
+	name = OUTFIT_JOB_NAME("Expedition Engineer - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/engineering
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/exploration/expmar
+	name = OUTFIT_JOB_NAME("Expedition Guard - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/urban/security
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_types = list(/obj/item/card/id/torch/crew/expmar)
+	pda_type = /obj/item/modular_computer/pda/explorer
+	l_ear = /obj/item/device/radio/headset/exploration

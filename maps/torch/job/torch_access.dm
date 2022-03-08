@@ -123,6 +123,15 @@
 	desc = "Pilot"
 	region = ACCESS_REGION_GENERAL
 
+//proxima code
+/var/const/access_exploration_guard = "ACCESS_TORCH_EXPLORATION_GUARD"
+/datum/access/access_exploration_guard
+	id = access_exploration_guard
+	desc = "Exploration Guard"
+	region = ACCESS_REGION_GENERAL
+//proxima code end
+
+
 /var/const/access_commissary = "ACCESS_TORCH_SHOP" //96
 /datum/access/commissary
 	id = access_commissary

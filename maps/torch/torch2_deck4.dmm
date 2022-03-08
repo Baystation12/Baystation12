@@ -4752,10 +4752,6 @@
 /obj/effect/floor_decal/techfloor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/eva)
-"qP" = (
-/obj/structure/closet/secure_closet/explo_gun/kasatka,
-/turf/simulated/wall/prepainted,
-/area/command/pathfinder)
 "qQ" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
@@ -32519,7 +32515,7 @@ UJ
 QX
 Ti
 SV
-qP
+fl
 Ts
 QG
 Lh

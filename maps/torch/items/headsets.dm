@@ -173,3 +173,27 @@
 	name = "research guard's bowman headset"
 	icon_state = "nt_headset_alt"
 	item_state = "nt_headset_alt"
+
+/obj/item/device/radio/headset/expmed
+	name = "expedition medic's headset"
+	desc = "Headset for a one to bossy over medical dummies."
+	icon_state = "par_headset"
+	item_state = "headset"
+	ks1type = /obj/item/device/encryptionkey/headset_expedition_medic
+
+/obj/item/device/radio/headset/expmed/alt
+	name = "expedition medic's bowman headset"
+	icon_state = "par_headset_alt"
+	item_state = "headset_alt"
+
+/obj/item/device/radio/headset/expeng
+	name = "expedition engineer's headset"
+	desc = "Headset for a one to bossy over engineering dummies."
+	icon_state = "par_headset"
+	item_state = "headset"
+	ks1type = /obj/item/device/encryptionkey/headset_expedition_engineer
+
+/obj/item/device/radio/headset/expeng/alt
+	name = "expedition engineer's bowman headset"
+	icon_state = "par_headset_alt"
+	item_state = "headset_alt"

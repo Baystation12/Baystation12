@@ -78,6 +78,37 @@
 	req_access = list(access_bridge, access_keycard_auth)
 	islocked = 1
 
+//EC Specs suits
+/obj/machinery/suit_storage_unit/explorer/marine
+	name = "Marine Storage Unit"
+	suit = /obj/item/clothing/suit/space/void/security/alt/expo
+	helmet = /obj/item/clothing/head/helmet/space/void/security/alt/expo
+	boots = /obj/item/clothing/shoes/magboots
+	tank = /obj/item/tank/oxygen
+	mask = /obj/item/clothing/mask/breath
+	req_access = list(access_exploration_guard)
+	islocked = 1
+
+/obj/machinery/suit_storage_unit/explorer/medic
+	name = "Exploration Medic Voidsuit Storage Unit"
+	suit = /obj/item/clothing/suit/space/void/medical/alt/sol/expo
+	helmet = /obj/item/clothing/head/helmet/space/void/medical/alt/sol/expo
+	boots = /obj/item/clothing/shoes/magboots
+	tank = /obj/item/tank/oxygen
+	mask = /obj/item/clothing/mask/breath
+	req_access = list(access_explorer)
+	islocked = 1
+
+/obj/machinery/suit_storage_unit/explorer/engineer
+	name = "Exploration Engineer Voidsuit Storage Unit"
+	suit = /obj/item/clothing/suit/space/void/atmos/alt/sol/expo
+	helmet = /obj/item/clothing/head/helmet/space/void/atmos/alt/sol/expo
+	boots = /obj/item/clothing/shoes/magboots
+	tank = /obj/item/tank/oxygen
+	mask = /obj/item/clothing/mask/breath
+	req_access = list(access_explorer)
+	islocked = 1
+
 // Vending machines & dispensers
 /obj/machinery/vending/security
 	products = list(

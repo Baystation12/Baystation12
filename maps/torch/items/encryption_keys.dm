@@ -49,6 +49,16 @@
 	icon_state = "srv_cypherkey"
 	channels = list("Exploration" = 1, "Hailing" = 1)
 
+/obj/item/device/encryptionkey/headset_expedition_medic
+	name = "exploration medic's encryption key"
+	icon_state = "srv_cypherkey"
+	channels = list("Exploration" = 1, "Hailing" = 1, "Medical" = 1)
+
+/obj/item/device/encryptionkey/headset_expedition_engineer
+	name = "exploration engineer's encryption key"
+	icon_state = "srv_cypherkey"
+	channels = list("Exploration" = 1, "Hailing" = 1, "Engineering" = 1)
+
 /obj/item/device/encryptionkey/headset_pilot
 	name = "pilot radio encryption key"
 	icon_state = "srv_cypherkey"
