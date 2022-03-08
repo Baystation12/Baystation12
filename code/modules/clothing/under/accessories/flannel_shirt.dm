@@ -45,7 +45,7 @@
 		if (!F)
 			return
 	F.buttoned = !F.buttoned
-	to_chat(usr, "You [buttoned ? "button up" : "unbutton"] your [F.name].")
+	to_chat(usr, "You [F.buttoned ? "button up" : "unbutton"] your [F.name].")
 	F.queue_icon_update()
 
 
@@ -77,5 +77,5 @@
 		if (!F)
 			return
 	F.tucked = !F.tucked
-	to_chat(usr, "You [tucked ? "tuck in" : "untuck"] your [F.name].")
+	to_chat(usr, "You [F.tucked ? "tuck in" : "untuck"] your [F.name].")
 	F.queue_icon_update()
