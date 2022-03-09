@@ -3207,6 +3207,7 @@
 #include "proxima\code\game\items\poraz.dm"
 #include "proxima\code\game\items\devices\remote_device.dm"
 #include "proxima\code\game\items\weapons\gun\energy\k342.dm"
+#include "proxima\code\game\items\weapons\melee\swords.dm"
 #include "proxima\code\game\machinery\disk_writer.dm"
 #include "proxima\code\game\machinery\jukebox.dm"
 #include "proxima\code\game\objects\structures\holoplants.dm"
