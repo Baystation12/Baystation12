@@ -57,8 +57,8 @@
 
 	if((equip_preview_mob & EQUIP_PREVIEW_JOB) && previewJob)
 		mannequin.job = previewJob.title
-		var/datum/mil_branch/branch = mil_branches.get_branch(branches[previewJob.title])
-		var/datum/mil_rank/rank = mil_branches.get_rank(branches[previewJob.title], ranks[previewJob.title])
+		var/datum/mil_branch/branch = GLOB.mil_branches.get_branch(branches[previewJob.title])
+		var/datum/mil_rank/rank = GLOB.mil_branches.get_rank(branches[previewJob.title], ranks[previewJob.title])
 		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title], branch, rank)
 		update_icon = TRUE
 

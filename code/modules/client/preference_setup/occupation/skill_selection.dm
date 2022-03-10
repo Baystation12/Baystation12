@@ -24,7 +24,7 @@
 	if(job && job.min_skill)
 		. = job.min_skill[S.type]
 	if(!.)
-		var/datum/mil_branch/branch = mil_branches.get_branch(branches[job.title])
+		var/datum/mil_branch/branch = GLOB.mil_branches.get_branch(branches[job.title])
 		if(branch && branch.min_skill)
 			. = branch.min_skill[S.type]
 	if(!.)
