@@ -6,7 +6,6 @@ SUBSYSTEM_DEF(mobs)
 	wait = 2 SECONDS
 	var/static/tmp/list/mob_list = list()
 	var/static/tmp/list/queue = list()
-	var/static/tmp/run_empty_levels
 
 
 /datum/controller/subsystem/mobs/stat_entry(text, force)
@@ -15,7 +14,7 @@ SUBSYSTEM_DEF(mobs)
 		text = {"\
 			[text] | \
 			Mobs: [mob_list.len] \
-			Run Empty Levels: [run_empty_levels ? "Y" : "N"]\
+			Run Empty Levels: [config.run_empty_levels ? "Y" : "N"]\
 		"}
 	..(text, force)
 
@@ -32,7 +31,7 @@ SUBSYSTEM_DEF(mobs)
 		mob = queue[i]
 		if (QDELETED(mob))
 			continue
-		if (!run_empty_levels && !SSpresence.population(get_z(mob)))
+		if (!config.run_empty_levels && !SSpresence.population(get_z(mob)))
 			continue
 		mob.Life()
 		if (no_mc_tick)

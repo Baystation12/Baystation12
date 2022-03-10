@@ -438,6 +438,8 @@
 
 	var/static/hub_entry = "<b>$SERVER</b> by <b>$HOST</b> &#8212; $ACTIVES of $PLAYERS alive"
 
+	var/static/run_empty_levels = FALSE
+
 
 /configuration/New()
 	build_mode_cache()
@@ -859,6 +861,8 @@
 				warn_autoban_threshold = max(0, text2num(value))
 			if ("warn_autoban_duration")
 				warn_autoban_duration = max(1, text2num(value))
+			if ("run_empty_levels")
+				run_empty_levels = TRUE
 			else
 				log_misc("Unknown setting in config/config.txt: '[name]'")
 

@@ -15,7 +15,6 @@ SUBSYSTEM_DEF(ai)
 	wait = 2 SECONDS
 	var/static/tmp/list/active = list()
 	var/static/tmp/list/queue = list()
-	var/static/tmp/run_empty_levels
 
 
 /datum/controller/subsystem/ai/stat_entry(text, force)
@@ -24,7 +23,7 @@ SUBSYSTEM_DEF(ai)
 		text = {"\
 			[text] | \
 			Active AI: [active.len] \
-			Run Empty Levels: [run_empty_levels ? "Y" : "N"]\
+			Run Empty Levels: [config.run_empty_levels ? "Y" : "N"]\
 		"}
 	..(text, force)
 
@@ -39,7 +38,7 @@ SUBSYSTEM_DEF(ai)
 			continue
 		if (!ai.holder)
 			continue
-		if (!run_empty_levels && !SSpresence.population(get_z(ai.holder)))
+		if (!config.run_empty_levels && !SSpresence.population(get_z(ai.holder)))
 			continue
 		ai.handle_strategicals()
 		if (no_mc_tick)
@@ -58,7 +57,6 @@ SUBSYSTEM_DEF(aifast)
 	wait = 0.25 SECONDS
 	var/static/tmp/list/active = list()
 	var/static/tmp/list/queue = list()
-	var/static/tmp/run_empty_levels
 
 
 /datum/controller/subsystem/aifast/stat_entry(text, force)
@@ -67,7 +65,7 @@ SUBSYSTEM_DEF(aifast)
 		text = {"\
 			[text] | \
 			Active AI: [active.len] \
-			Run Empty Levels: [run_empty_levels ? "Y" : "N"]\
+			Run Empty Levels: [config.run_empty_levels ? "Y" : "N"]\
 		"}
 	..(text, force)
 
@@ -82,7 +80,7 @@ SUBSYSTEM_DEF(aifast)
 			continue
 		if (!ai.holder)
 			continue
-		if (!run_empty_levels && !SSpresence.population(get_z(ai.holder)))
+		if (!config.run_empty_levels && !SSpresence.population(get_z(ai.holder)))
 			continue
 		ai.handle_tactics()
 		if (no_mc_tick)
