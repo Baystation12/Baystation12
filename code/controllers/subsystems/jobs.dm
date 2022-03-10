@@ -11,6 +11,9 @@ var/const/SPT = FLAG(9)
 var/const/EXP = FLAG(10)
 var/const/ROB = FLAG(11)
 
+GLOBAL_VAR(antag_code_phrase)
+GLOBAL_VAR(antag_code_response)
+
 SUBSYSTEM_DEF(jobs)
 	name = "Jobs"
 	init_order = SS_INIT_JOBS
@@ -93,8 +96,8 @@ SUBSYSTEM_DEF(jobs)
 							LAZYDISTINCTADD(positions_by_department["[GLOB.bitflags[I]]"], job.alt_titles)
 
 	// Set up syndicate phrases.
-	syndicate_code_phrase = generate_code_phrase()
-	syndicate_code_response	= generate_code_phrase()
+	GLOB.antag_code_phrase = generate_code_phrase()
+	GLOB.antag_code_response = generate_code_phrase()
 
 	// Set up AI spawn locations
 	spawn_empty_ai()

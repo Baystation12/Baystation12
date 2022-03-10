@@ -64,24 +64,6 @@
 	return name
 
 
-//Traitors and traitor silicons will get these. Revs will not.
-var/syndicate_code_phrase //Code phrase for traitors.
-var/syndicate_code_response //Code response for traitors.
-
-	/*
-	Should be expanded.
-	How this works:
-	Instead of "I'm looking for James Smith," the traitor would say "James Smith" as part of a conversation.
-	Another traitor may then respond with: "They enjoy running through the void-filled vacuum of the derelict."
-	The phrase should then have the words: James Smith.
-	The response should then have the words: run, void, and derelict.
-	This way assures that the code is suited to the conversation and is unpredicatable.
-	Obviously, some people will be better at this than others but in theory, everyone should be able to do it and it only enhances roleplay.
-	Can probably be done through "{ }" but I don't really see the practical benefit.
-	One example of an earlier system is commented below.
-	-N
-	*/
-
 /proc/generate_code_phrase()//Proc is used for phrase and response in subsystem init.
 
 	var/code_phrase = ""//What is returned when the proc finishes.
