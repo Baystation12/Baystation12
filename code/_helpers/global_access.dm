@@ -733,8 +733,6 @@
 			return global.syndicate_code_phrase;
 		if("syndicate_code_response")
 			return global.syndicate_code_response;
-		if("syndicate_name")
-			return global.syndicate_name;
 		if("tail_icon_cache")
 			return global.tail_icon_cache;
 		if("tank_gauge_cache")
@@ -1540,8 +1538,6 @@
 			global.syndicate_code_phrase=newval;
 		if("syndicate_code_response")
 			global.syndicate_code_response=newval;
-		if("syndicate_name")
-			global.syndicate_name=newval;
 		if("tail_icon_cache")
 			global.tail_icon_cache=newval;
 		if("tank_gauge_cache")
@@ -1980,7 +1976,6 @@
 	"syndicate_access",
 	"syndicate_code_phrase",
 	"syndicate_code_response",
-	"syndicate_name",
 	"tail_icon_cache",
 	"tank_gauge_cache",
 	"tape_roll_applications",
