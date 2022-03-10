@@ -23,14 +23,10 @@
 			return global.Failsafe;
 		if("GLOB")
 			return global.GLOB;
-		if("IClog")
-			return global.IClog;
 		if("LIGHTING_CORNER_DIAGONAL")
 			return global.LIGHTING_CORNER_DIAGONAL;
 		if("Master")
 			return global.Master;
-		if("OOClog")
-			return global.OOClog;
 		if("SSai")
 			return global.SSai;
 		if("SSaifast")
@@ -211,8 +207,6 @@
 			return global.admin_verbs_spawn;
 		if("adminhelp_ignored_words")
 			return global.adminhelp_ignored_words;
-		if("adminlog")
-			return global.adminlog;
 		if("ai_list")
 			return global.ai_list;
 		if("ai_status_emotions")
@@ -313,8 +307,6 @@
 			return global.client_preference_stats_;
 		if("client_repository")
 			return global.client_repository;
-		if("combatlog")
-			return global.combatlog;
 		if("comm_message_listeners")
 			return global.comm_message_listeners;
 		if("command_announcement")
@@ -459,8 +451,6 @@
 			return global.intercom_range_display_status;
 		if("invalid_zone")
 			return global.invalid_zone;
-		if("jobMax")
-			return global.jobMax;
 		if("jobban_keylist")
 			return global.jobban_keylist;
 		if("jobban_runonce")
@@ -842,14 +832,10 @@
 			global.Failsafe=newval;
 		if("GLOB")
 			global.GLOB=newval;
-		if("IClog")
-			global.IClog=newval;
 		if("LIGHTING_CORNER_DIAGONAL")
 			global.LIGHTING_CORNER_DIAGONAL=newval;
 		if("Master")
 			global.Master=newval;
-		if("OOClog")
-			global.OOClog=newval;
 		if("SSai")
 			global.SSai=newval;
 		if("SSaifast")
@@ -1030,8 +1016,6 @@
 			global.admin_verbs_spawn=newval;
 		if("adminhelp_ignored_words")
 			global.adminhelp_ignored_words=newval;
-		if("adminlog")
-			global.adminlog=newval;
 		if("ai_list")
 			global.ai_list=newval;
 		if("ai_status_emotions")
@@ -1132,8 +1116,6 @@
 			global.client_preference_stats_=newval;
 		if("client_repository")
 			global.client_repository=newval;
-		if("combatlog")
-			global.combatlog=newval;
 		if("comm_message_listeners")
 			global.comm_message_listeners=newval;
 		if("command_announcement")
@@ -1278,8 +1260,6 @@
 			global.intercom_range_display_status=newval;
 		if("invalid_zone")
 			global.invalid_zone=newval;
-		if("jobMax")
-			global.jobMax=newval;
 		if("jobban_keylist")
 			global.jobban_keylist=newval;
 		if("jobban_runonce")
@@ -1649,10 +1629,8 @@
 	"DEPT_FREQS",
 	"Failsafe",
 	"GLOB",
-	"IClog",
 	"LIGHTING_CORNER_DIAGONAL",
 	"Master",
-	"OOClog",
 	"SSai",
 	"SSaifast",
 	"SSair",
@@ -1743,7 +1721,6 @@
 	"admin_verbs_sounds",
 	"admin_verbs_spawn",
 	"adminhelp_ignored_words",
-	"adminlog",
 	"ai_list",
 	"ai_status_emotions",
 	"ai_verbs_default",
@@ -1794,7 +1771,6 @@
 	"chicken_count",
 	"client_preference_stats_",
 	"client_repository",
-	"combatlog",
 	"comm_message_listeners",
 	"command_announcement",
 	"common_tools",
@@ -1867,7 +1843,6 @@
 	"intents",
 	"intercom_range_display_status",
 	"invalid_zone",
-	"jobMax",
 	"jobban_keylist",
 	"jobban_runonce",
 	"landmarks_list",
