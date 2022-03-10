@@ -311,8 +311,6 @@
 			return global.comm_message_listeners;
 		if("command_announcement")
 			return global.command_announcement;
-		if("common_tools")
-			return global.common_tools;
 		if("config")
 			return global.config;
 		if("contamination_overlay")
@@ -1112,8 +1110,6 @@
 			global.comm_message_listeners=newval;
 		if("command_announcement")
 			global.command_announcement=newval;
-		if("common_tools")
-			global.common_tools=newval;
 		if("config")
 			global.config=newval;
 		if("contamination_overlay")
@@ -1757,7 +1753,6 @@
 	"client_repository",
 	"comm_message_listeners",
 	"command_announcement",
-	"common_tools",
 	"config",
 	"contamination_overlay",
 	"create_mob_html",
