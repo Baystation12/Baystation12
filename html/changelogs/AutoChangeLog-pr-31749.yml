@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Deaf mobs no longer see 'You hear something about' messages while asleep.
