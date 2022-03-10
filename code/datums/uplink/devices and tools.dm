@@ -102,6 +102,12 @@
 	item_cost = 28
 	path = /obj/item/storage/backpack/satchel/syndie_kit/space
 
+/datum/uplink_item/item/tools/divinghelmet
+	name = "Diving Helmet"
+	desc = "An antique diver's helmet that was designed to withstand immense pressures. Works as a space helmet. Only fits humans."
+	item_cost = 12
+	path = /obj/item/clothing/head/helmet/divinghelmet
+
 /datum/uplink_item/item/tools/thermal
 	name = "Thermal Imaging Glasses"
 	desc = "A pair of meson goggles that have been modified to instead show synthetics or living creatures, through thermal imaging."
