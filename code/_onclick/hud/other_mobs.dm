@@ -1,5 +1,4 @@
-/mob/living/carbon/slime
-	hud_type = /datum/hud/slime
+/mob/living/carbon/slime/hud_type = /datum/hud/slime
 
 /datum/hud/slime/FinalizeInstantiation(ui_style = 'icons/mob/screen1_Midnight.dmi')
 	src.adding = list()
@@ -13,8 +12,7 @@
 	mymob.client.screen = list()
 	mymob.client.screen += src.adding
 
-/mob/living/simple_animal/construct
-	hud_type = /datum/hud/construct
+/mob/living/simple_animal/construct/hud_type = /datum/hud/construct
 
 /datum/hud/construct/FinalizeInstantiation()
 	var/constructtype
