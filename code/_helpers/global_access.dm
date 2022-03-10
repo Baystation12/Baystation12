@@ -349,8 +349,6 @@
 			return global.department_accounts;
 		if("department_radio_keys")
 			return global.department_radio_keys;
-		if("diary")
-			return global.diary;
 		if("dna_activity_bounds")
 			return global.dna_activity_bounds;
 		if("dna_genes")
@@ -1158,8 +1156,6 @@
 			global.department_accounts=newval;
 		if("department_radio_keys")
 			global.department_radio_keys=newval;
-		if("diary")
-			global.diary=newval;
 		if("dna_activity_bounds")
 			global.dna_activity_bounds=newval;
 		if("dna_genes")
@@ -1792,7 +1788,6 @@
 	"delta_index",
 	"department_accounts",
 	"department_radio_keys",
-	"diary",
 	"dna_activity_bounds",
 	"dna_genes",
 	"doppler_arrays",
