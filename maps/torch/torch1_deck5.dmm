@@ -3514,6 +3514,7 @@
 	dir = 8
 	},
 /obj/structure/closet/secure_closet/explorer/medic,
+/obj/item/material/hatchet/machete,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "hP" = (
@@ -4560,6 +4561,7 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/secure_closet/explorer/engineer,
+/obj/item/material/hatchet/machete,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "ki" = (

@@ -19,7 +19,8 @@
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_EVA         = SKILL_ADEPT,
 	                    SKILL_SCIENCE     = SKILL_ADEPT,
-	                    SKILL_PILOT       = SKILL_BASIC)
+	                    SKILL_PILOT       = SKILL_BASIC,
+						SKILL_MEDICAL = SKILL_BASIC)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX,
@@ -74,7 +75,8 @@
 		access_radio_exp, access_radio_sci, access_radio_sup, access_maint_tunnels, access_emergency_storage
 	)
 	min_skill = list(	SKILL_EVA   = SKILL_BASIC,
-						SKILL_PILOT = SKILL_ADEPT)
+						SKILL_PILOT = SKILL_ADEPT,
+						SKILL_MEDICAL = SKILL_BASIC)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX)
@@ -149,6 +151,7 @@
 	                    SKILL_SCIENCE     = SKILL_MAX,
 	                    SKILL_COMBAT      = SKILL_EXPERT,
 	                    SKILL_WEAPONS     = SKILL_EXPERT)
+	skill_points = 22
 
 	access = list(
 		access_explorer, access_maint_tunnels, access_eva, access_emergency_storage,
@@ -163,7 +166,7 @@
 /datum/job/expmed/get_description_blurb()
 	return "You are an Exploration Medic. Your duty is to go on expeditions to away sites. The Pathfinder is your team leader. You are to keep your team members alive. Keep a note that you are not a doctor, don't try to preform surgeries on your shuttle as you're not qualified for that."
 
-datum/job/expeng
+/datum/job/expeng
 	title = "Exploration Engineer"
 	department = "Exploration"
 	department_flag = EXP
@@ -187,12 +190,16 @@ datum/job/expeng
 		/datum/mil_rank/army/e5
 	)
 	min_skill = list(   SKILL_EVA = SKILL_BASIC,
+						SKILL_CONSTRUCTION = SKILL_BASIC,
+						SKILL_ELECTRICAL = SKILL_BASIC,
+						SKILL_MEDICAL = SKILL_BASIC
 					)
 	max_skill = list(   SKILL_ANATOMY	  = SKILL_ADEPT,
 						SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX,
 	                    SKILL_COMBAT      = SKILL_EXPERT,
 	                    SKILL_WEAPONS     = SKILL_EXPERT)
+	skill_points = 22
 
 	access = list(
 		access_explorer, access_maint_tunnels, access_eva, access_emergency_storage,
@@ -205,7 +212,7 @@ datum/job/expeng
 /datum/job/expeng/get_description_blurb()
 	return "You are an Exploration Engineer. Your duty is to go on expeditions to away sites. The Pathfinder is your team leader. You are to keep shuttle operational and make holes wherever your boss says."
 
-datum/job/expmar
+/datum/job/expmar
 	title = "Expedition Marine Guard"
 	department = "Exploration"
 	department_flag = EXP
@@ -227,6 +234,8 @@ datum/job/expmar
 		/datum/mil_rank/army/e5
 	)
 	min_skill = list(   SKILL_EVA = SKILL_BASIC,
+						SKILL_MEDICAL = SKILL_BASIC,
+						SKILL_WEAPONS = SKILL_ADEPT
 					)
 	max_skill = list(   SKILL_ANATOMY	  = SKILL_ADEPT,
 						SKILL_PILOT       = SKILL_MAX,
