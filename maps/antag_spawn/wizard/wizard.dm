@@ -5,6 +5,6 @@
 /area/map_template/wizard_station
 	name = "\improper Wizard's Den"
 	icon_state = "yellow"
-	requires_power = 0
+	requires_power = FALSE
 	dynamic_lighting = 0
 	req_access = list(access_syndicate)

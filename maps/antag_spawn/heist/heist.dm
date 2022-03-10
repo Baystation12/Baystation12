@@ -42,7 +42,7 @@
 /area/map_template/skipjack_station
 	name = "Raider Outpost"
 	icon_state = "yellow"
-	requires_power = 0
+	requires_power = FALSE
 	req_access = list(access_syndicate)
 
 /area/map_template/skipjack_station/start
@@ -53,8 +53,8 @@
 
 /area/map_template/syndicate_mothership/raider_base
 	name = "\improper Raider Base"
-	requires_power = 0
-	dynamic_lighting = 0
+	requires_power = FALSE
+	dynamic_lighting = FALSE
 	req_access = list(access_syndicate)
 
 /turf/simulated/floor/shuttle_ceiling/heist

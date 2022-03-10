@@ -38,7 +38,7 @@
 			return
 		else
 			var/area/a = get_area(loc)
-			if(a.power_equip == 0) // There's no APC in this area, don't try to cheat power!
+			if(!a.power_equip) // There's no APC in this area, don't try to cheat power!
 				to_chat(user, "<span class='warning'>The [name] blinks red as you try to insert the cell!</span>")
 				return
 			if(!user.unEquip(W, src))

@@ -2,7 +2,7 @@
 /area/turbolift
 	name = "Turbolift"
 	base_turf = /turf/simulated/open
-	requires_power = 0
+	requires_power = FALSE
 	sound_env = SMALL_ENCLOSED
 
 	var/lift_floor_label = null

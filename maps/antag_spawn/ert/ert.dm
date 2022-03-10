@@ -5,7 +5,7 @@
 	apc_test_exempt_areas = list(
 		/area/map_template/rescue_base = NO_SCRUBBER|NO_VENT|NO_APC
 	)
-		
+
 
 /datum/shuttle/autodock/multi/antag/rescue
 	name = "Rescue"
@@ -43,8 +43,8 @@
 /area/map_template/rescue_base
 	name = "\improper Response Team Base"
 	icon_state = "yellow"
-	requires_power = 0
-	dynamic_lighting = 1
+	requires_power = FALSE
+	dynamic_lighting = TRUE
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 /area/map_template/rescue_base/base

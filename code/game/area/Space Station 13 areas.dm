@@ -6,7 +6,7 @@
 	name = "NICE NAME" 				(not required but makes things really nice)
 	icon = "ICON FILENAME" 			(defaults to areas.dmi)
 	icon_state = "NAME OF ICON" 	(defaults to "unknown" (blank))
-	requires_power = 0 				(defaults to 1)
+	requires_power = FALSE 				(defaults to 1)
 
 NOTE: there are two lists of areas in the end of this file: centcom and station itself. Please maintain these lists valid. --rastaf0
 
@@ -15,48 +15,78 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 
 /area
-	var/fire = null
-	var/atmos = 1
-	var/atmosalm = 0
-	var/poweralm = 1
-	var/party = null
+	/// Boolean. Whether or not the area is on fire/has an active fire alarm. Used by fire alarm machinery and firedoors.
+	var/fire = FALSE
+	/// Integer (One of `ALARM_LEVEL_*`). The current atmosphere alarm level for the area. See `code\__defines\area.dm`.
+	var/atmosalm = AREA_ALARM_SAFE
+	/// Boolean. Whether or not the area is in 'party mode'. See `./proc/partyalert()`.
+	var/party = FALSE
 	level = null
 	name = "Unknown"
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "unknown"
 	plane = DEFAULT_PLANE
 	layer = BASE_AREA_LAYER
-	luminosity = 0
+	luminosity = FALSE
 	mouse_opacity = 0
-	var/lightswitch = 1
+	/// Boolean. Whether or not the area's light switch is set to 'on' or 'off'. See `./proc/set_lightswitch()`.
+	var/lightswitch = TRUE
 
-	var/eject = null
+	/// Boolean. Whether or not the area has emergency evacuation lighting effects enabled. Only used by the `/area/hallway` subtype. See `./proc/readyalert()`.
+	var/eject = FALSE
 
-	var/debug = 0
-	var/requires_power = 1
-	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
+	/// Boolean. Whether or not the area requires power for things inside it to operate. If `FALSE`, `powered()` always returns `TRUE` and all additional power processing for the area is disabled.
+	var/requires_power = TRUE
 
-	var/power_equip = 1 // Status
-	var/power_light = 1
-	var/power_environ = 1
-	var/used_equip = 0  // Continuous drain; don't mess with these directly.
+	/// Boolean. Whether or not the area is considered to always be unpowered. Overrides all power checks except the `requires_power` var.
+	var/always_unpowered = FALSE
+
+	/// Boolean. Whether or not the `EQUIP` power channel for the area is turned on. Do not access directly.
+	///   Use `./powered()` to check state. Updated automatically by `/obj/machinery/power/apc/proc/update()`.
+	var/power_equip = TRUE
+
+	/// Boolean. Whether or not the `LIGHT` power channel for the area is turned on. Do not access directly.
+	///   Use `./powered()` to check state. Updated automatically by `/obj/machinery/power/apc/proc/update()`.
+	var/power_light = TRUE
+
+	/// Boolean. Whether or not the `ENVIRON` power channel for the area is turned on. Do not access directly.
+	///   Use `./powered()` to check state. Updated automatically by `/obj/machinery/power/apc/proc/update()`.
+	var/power_environ = TRUE
+
+	/// Integer. The amount of continuous power drain for the `EQUIP` channel. Do not access directly. Automatically updated by `/obj/machinery`.
+	var/used_equip = 0
+	/// Integer. The amount of continuous power drain for the `LIGHT` channel. Do not access directly. Automatically updated by `/obj/machinery`.
 	var/used_light = 0
+	/// Integer. The amount of continuous power drain for the `ENVIRON` channel. Do not access directly. Automatically updated by `/obj/machinery`.
 	var/used_environ = 0
-	var/oneoff_equip   = 0 //Used once and cleared each tick.
-	var/oneoff_light   = 0
+
+	/// Integer. The amount of one-off power use for the `EQUIP` channel. Subtracted from the powernet then reset to `0` every power tick. Use `./use_power_oneoff()` to modify.
+	var/oneoff_equip = 0
+	/// Integer. The amount of one-off power use for the `LIGHT` channel. Subtracted from the powernet then reset to `0` every power tick. Use `./use_power_oneoff()` to modify.
+	var/oneoff_light = 0
+	/// Integer. The amount of one-off power use for the `ENVIRON` channel. Subtracted from the powernet then reset to `0` every power tick. Use `./use_power_oneoff()` to modify.
 	var/oneoff_environ = 0
 
-	var/has_gravity = 1
+	/// Boolean. Whether or not the area has gravity. Modify using `./gravitychange()`.
+	var/has_gravity = TRUE
+
+	/// The area's APC machine.
 	var/obj/machinery/power/apc/apc = null
-	var/no_air = null
-//	var/list/lights				// list of all lights on this area
-	var/list/all_doors = null		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
-	var/air_doors_activated = 0
+
+	/// Lazylist (`/obj/machinery/door/firedoor`). A list of all firedoors in or adjacent to the area.
+	var/list/all_doors = null
+	/// Boolean. Whether or not firedoors are currently engaged in the area. Updated automatically by `./air_doors_close()` and `./air_doors_open()`.
+	var/air_doors_activated = FALSE
+	/// List (sound files). List of ambience tracks to be played to mobs in the area.
 	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')
+	/// Lazylist (sound files). List of ambience tracks. Not 100% sure what this is for but seems tied to some global and lobby stuff. Probably best not to touch it.
 	var/list/forced_ambience = null
+	/// Integer. The area's sound environment, affecting reverb. See `code\game\sound.dm`.
 	var/sound_env = STANDARD_STATION
-	var/turf/base_turf //The base turf type of the area, which can be used to override the z-level's base turf
-	var/planetary_surface = FALSE // true if the area belongs to a planet.
+	/// The base turf type of the area, which can be used to override the z-level's base turf
+	var/turf/base_turf
+	/// Boolean. Whether or not the area belongs to a planet.
+	var/planetary_surface = FALSE
 
 /*-----------------------------------------------------------------------------*/
 
@@ -67,18 +97,18 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/space
 	name = "\improper Space"
 	icon_state = "space"
-	requires_power = 1
-	always_unpowered = 1
-	dynamic_lighting = 1
-	power_light = 0
-	power_equip = 0
-	power_environ = 0
-	has_gravity = 0
+	requires_power = TRUE
+	always_unpowered = TRUE
+	dynamic_lighting = TRUE
+	power_light = FALSE
+	power_equip = FALSE
+	power_environ = FALSE
+	has_gravity = FALSE
 	area_flags = AREA_FLAG_EXTERNAL | AREA_FLAG_IS_NOT_PERSISTENT
 	ambience = list('sound/ambience/ambispace1.ogg','sound/ambience/ambispace2.ogg','sound/ambience/ambispace3.ogg','sound/ambience/ambispace4.ogg','sound/ambience/ambispace5.ogg')
 	secure = FALSE
 
-area/space/atmosalert()
+/area/space/atmosalert()
 	return
 
 /area/space/fire_alert()
@@ -99,8 +129,8 @@ area/space/atmosalert()
 /area/centcom
 	name = "\improper Centcom"
 	icon_state = "centcom"
-	requires_power = 0
-	dynamic_lighting = 0
+	requires_power = FALSE
+	dynamic_lighting = FALSE
 	req_access = list(access_cent_general)
 
 /area/centcom/holding
@@ -194,7 +224,7 @@ area/space/atmosalert()
 //All shuttles should now be under shuttle since we have smooth-wall code.
 
 /area/shuttle
-	requires_power = 0
+	requires_power = FALSE
 	sound_env = SMALL_ENCLOSED
 	base_turf = /turf/space
 
@@ -204,9 +234,9 @@ area/space/atmosalert()
 /area/beach
 	name = "Keelin's private beach"
 	icon_state = "null"
-	luminosity = 1
-	dynamic_lighting = 0
-	requires_power = 0
+	luminosity = TRUE
+	dynamic_lighting = FALSE
+	requires_power = FALSE
 	var/sound/mysound = null
 
 /area/beach/New()

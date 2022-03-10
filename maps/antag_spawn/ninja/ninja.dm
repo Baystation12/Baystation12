@@ -32,7 +32,7 @@
 /area/map_template/ninja_dojo
 	name = "\improper Ninja Base"
 	icon_state = "green"
-	requires_power = 0
+	requires_power = FALSE
 	dynamic_lighting = 1
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 	req_access = list(access_syndicate)

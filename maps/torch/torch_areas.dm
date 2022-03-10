@@ -369,7 +369,7 @@
 	name = "\improper SEV Aquila"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/reinforced/airless
-	requires_power = 1
+	requires_power = TRUE
 	dynamic_lighting = 1
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
@@ -411,7 +411,7 @@
 /area/guppy_hangar/start
 	name = "\improper Guppy"
 	icon_state = "shuttlered"
-	requires_power = 1
+	requires_power = TRUE
 	dynamic_lighting = 1
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 	req_access = list(access_guppy)
@@ -421,7 +421,7 @@
 
 /area/shuttle/petrov
 	name = "\improper SRV Petrov"
-	requires_power = 1
+	requires_power = TRUE
 	dynamic_lighting = 1
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 	req_access = list(access_petrov)
@@ -503,7 +503,7 @@
 /area/turbolift
 	name = "\improper Turbolift"
 	icon_state = "shuttle"
-	requires_power = 0
+	requires_power = FALSE
 	dynamic_lighting = 1
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 	req_access = list(access_maint_tunnels)
@@ -1338,8 +1338,8 @@
 
 /area/solar
 	area_flags = AREA_FLAG_EXTERNAL
-	requires_power = 1
-	always_unpowered = 1
+	requires_power = TRUE
+	always_unpowered = TRUE
 	has_gravity = FALSE
 	base_turf = /turf/space
 	req_access = list(access_engine_equip)
@@ -1446,7 +1446,7 @@
 
 /area/holodeck/source_space
 	name = "\improper Holodeck - Space"
-	has_gravity = 0
+	has_gravity = FALSE
 	sound_env = SPACE
 
 /area/holodeck/source_cafe
@@ -1574,7 +1574,7 @@ area/assembly/robotics/office
 /area/supply/dock
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
-	requires_power = 0
+	requires_power = FALSE
 	req_access = list(access_cent_storage)
 
 // Secure
@@ -1654,7 +1654,7 @@ area/assembly/robotics/office
 	name = "\improper Centcom Acting Guild"
 	icon_state = "red"
 	dynamic_lighting = 0
-	requires_power = 0
+	requires_power = FALSE
 
 /area/acting/backstage
 	name = "\improper Backstage"
@@ -1669,7 +1669,7 @@ area/assembly/robotics/office
 /area/tdome
 	name = "\improper Thunderdome"
 	icon_state = "thunder"
-	requires_power = 0
+	requires_power = FALSE
 	dynamic_lighting = 0
 	sound_env = ARENA
 	req_access = list(access_cent_thunder)

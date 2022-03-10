@@ -92,14 +92,14 @@
 	var/list/TLV = list()
 	var/list/trace_gas = list() //list of other gases that this air alarm is able to detect
 
-	var/danger_level = 0
-	var/pressure_dangerlevel = 0
-	var/oxygen_dangerlevel = 0
-	var/co2_dangerlevel = 0
-	var/temperature_dangerlevel = 0
-	var/other_dangerlevel = 0
+	var/danger_level = AREA_ALARM_SAFE
+	var/pressure_dangerlevel = AREA_ALARM_SAFE
+	var/oxygen_dangerlevel = AREA_ALARM_SAFE
+	var/co2_dangerlevel = AREA_ALARM_SAFE
+	var/temperature_dangerlevel = AREA_ALARM_SAFE
+	var/other_dangerlevel = AREA_ALARM_SAFE
 	var/environment_type = /decl/environment_data
-	var/report_danger_level = 1
+	var/report_danger_level = TRUE
 
 /obj/machinery/alarm/cold
 	target_temperature = T0C+4
@@ -194,7 +194,7 @@
 	danger_level = overall_danger_level(environment)
 
 	if (old_level != danger_level)
-		if(danger_level == 2)
+		if(danger_level == AREA_ALARM_MAJOR)
 			playsound(src.loc, 'sound/machines/airalarm.ogg', 25, 0, 4)
 		apply_danger_level(danger_level)
 
@@ -213,7 +213,7 @@
 		if(RCON_NO)
 			remote_control = 0
 		if(RCON_AUTO)
-			if(danger_level == 2)
+			if(danger_level == AREA_ALARM_MAJOR)
 				remote_control = 1
 			else
 				remote_control = 0
@@ -295,7 +295,7 @@
 
 	if(!istype(location))
 		return FALSE
-	
+
 	if(breach_cooldown)
 		return FALSE
 
@@ -610,7 +610,7 @@
 		if(AALARM_SCREEN_SENSORS)
 			var/list/selected
 			var/thresholds[0]
-			
+
 			var/breach_data = list("selected" = breach_pressure)
 			data["breach_data"] = breach_data
 
