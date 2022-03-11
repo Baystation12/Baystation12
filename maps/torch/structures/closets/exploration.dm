@@ -57,6 +57,7 @@
 		/obj/item/storage/firstaid/stab,
 		/obj/item/bodybag/rescue/loaded,
 		/obj/item/bodybag/rescue/loaded,
+		/obj/item/device/scanner/health,
 		/obj/item/roller,
 		/obj/item/clothing/accessory/storage/holster/machete,
 		/obj/item/device/radio,

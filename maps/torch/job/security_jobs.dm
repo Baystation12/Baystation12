@@ -45,8 +45,8 @@
 
 /datum/job/detective
 	title = "Forensic Technician"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "the Chief of Security"
 	economic_power = 5
 	minimal_player_age = 7
