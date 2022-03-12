@@ -231,7 +231,7 @@ FIELD_LONG("Exploitable Information", antagRecord, access_syndicate, access_synd
 //Options builderes
 /datum/report_field/options/crew_record/rank/proc/record_ranks()
 	var/datum/computer_file/report/crew_record/record = owner
-	var/datum/mil_branch/branch = mil_branches.get_branch(record.get_branch())
+	var/datum/mil_branch/branch = GLOB.mil_branches.get_branch(record.get_branch())
 	if(!branch)
 		return
 	. = list()
@@ -250,8 +250,8 @@ FIELD_LONG("Exploitable Information", antagRecord, access_syndicate, access_synd
 /datum/report_field/options/crew_record/branch/proc/record_branches()
 	. = list()
 	. |= "Unset"
-	for(var/B in mil_branches.branches)
-		var/datum/mil_branch/BR = mil_branches.branches[B]
+	for(var/B in GLOB.mil_branches.branches)
+		var/datum/mil_branch/BR = GLOB.mil_branches.branches[B]
 		. |= BR.name
 
 #undef GETTER_SETTER

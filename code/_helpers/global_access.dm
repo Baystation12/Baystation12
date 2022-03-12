@@ -23,14 +23,10 @@
 			return global.Failsafe;
 		if("GLOB")
 			return global.GLOB;
-		if("IClog")
-			return global.IClog;
 		if("LIGHTING_CORNER_DIAGONAL")
 			return global.LIGHTING_CORNER_DIAGONAL;
 		if("Master")
 			return global.Master;
-		if("OOClog")
-			return global.OOClog;
 		if("SSai")
 			return global.SSai;
 		if("SSaifast")
@@ -211,8 +207,6 @@
 			return global.admin_verbs_spawn;
 		if("adminhelp_ignored_words")
 			return global.adminhelp_ignored_words;
-		if("adminlog")
-			return global.adminlog;
 		if("ai_list")
 			return global.ai_list;
 		if("ai_status_emotions")
@@ -223,8 +217,6 @@
 			return global.air_alarm_topic;
 		if("air_blocked")
 			return global.air_blocked;
-		if("airlock_overlays")
-			return global.airlock_overlays;
 		if("alien_whitelist")
 			return global.alien_whitelist;
 		if("allCasters")
@@ -287,8 +279,6 @@
 			return global.blocked;
 		if("bomb_set")
 			return global.bomb_set;
-		if("cable_list")
-			return global.cable_list;
 		if("cached_icons")
 			return global.cached_icons;
 		if("cached_space")
@@ -317,14 +307,10 @@
 			return global.client_preference_stats_;
 		if("client_repository")
 			return global.client_repository;
-		if("combatlog")
-			return global.combatlog;
 		if("comm_message_listeners")
 			return global.comm_message_listeners;
 		if("command_announcement")
 			return global.command_announcement;
-		if("common_tools")
-			return global.common_tools;
 		if("config")
 			return global.config;
 		if("contamination_overlay")
@@ -339,8 +325,6 @@
 			return global.created;
 		if("crew_repository")
 			return global.crew_repository;
-		if("csrfz_check")
-			return global.csrfz_check;
 		if("damage_icon_parts")
 			return global.damage_icon_parts;
 		if("dbcon")
@@ -363,8 +347,6 @@
 			return global.department_accounts;
 		if("department_radio_keys")
 			return global.department_radio_keys;
-		if("diary")
-			return global.diary;
 		if("dna_activity_bounds")
 			return global.dna_activity_bounds;
 		if("dna_genes")
@@ -445,8 +427,6 @@
 			return global.global_message_listener;
 		if("global_vars_")
 			return global.global_vars_;
-		if("gzn_check")
-			return global.gzn_check;
 		if("hadevent")
 			return global.hadevent;
 		if("hivemind_bank")
@@ -467,8 +447,6 @@
 			return global.intercom_range_display_status;
 		if("invalid_zone")
 			return global.invalid_zone;
-		if("jobMax")
-			return global.jobMax;
 		if("jobban_keylist")
 			return global.jobban_keylist;
 		if("jobban_runonce")
@@ -507,10 +485,6 @@
 			return global.magazine_icondata_keys;
 		if("magazine_icondata_states")
 			return global.magazine_icondata_states;
-		if("maint_all_access")
-			return global.maint_all_access;
-		if("mannequins_")
-			return global.mannequins_;
 		if("map_count")
 			return global.map_count;
 		if("map_sectors")
@@ -519,8 +493,6 @@
 			return global.mark;
 		if("maze_cell_count")
 			return global.maze_cell_count;
-		if("mechas_list")
-			return global.mechas_list;
 		if("merged")
 			return global.merged;
 		if("message_delay")
@@ -545,10 +517,6 @@
 			return global.meteors_normal;
 		if("meteors_threatening")
 			return global.meteors_threatening;
-		if("mil_branches")
-			return global.mil_branches;
-		if("mimic_defines")
-			return global.mimic_defines;
 		if("mining_floors")
 			return global.mining_floors;
 		if("mining_walls")
@@ -583,8 +551,6 @@
 			return global.next_duration_update;
 		if("next_station_date_change")
 			return global.next_station_date_change;
-		if("ninjastart")
-			return global.ninjastart;
 		if("ntnet_card_uid")
 			return global.ntnet_card_uid;
 		if("ntnet_global")
@@ -703,8 +669,6 @@
 			return global.severity_to_string;
 		if("ship_engines")
 			return global.ship_engines;
-		if("side_effects")
-			return global.side_effects;
 		if("skin_styles_female_list")
 			return global.skin_styles_female_list;
 		if("skipped_unit_tests")
@@ -761,12 +725,6 @@
 			return global.supply_methods_;
 		if("syndicate_access")
 			return global.syndicate_access;
-		if("syndicate_code_phrase")
-			return global.syndicate_code_phrase;
-		if("syndicate_code_response")
-			return global.syndicate_code_response;
-		if("syndicate_name")
-			return global.syndicate_name;
 		if("tail_icon_cache")
 			return global.tail_icon_cache;
 		if("tank_gauge_cache")
@@ -862,14 +820,10 @@
 			global.Failsafe=newval;
 		if("GLOB")
 			global.GLOB=newval;
-		if("IClog")
-			global.IClog=newval;
 		if("LIGHTING_CORNER_DIAGONAL")
 			global.LIGHTING_CORNER_DIAGONAL=newval;
 		if("Master")
 			global.Master=newval;
-		if("OOClog")
-			global.OOClog=newval;
 		if("SSai")
 			global.SSai=newval;
 		if("SSaifast")
@@ -1050,8 +1004,6 @@
 			global.admin_verbs_spawn=newval;
 		if("adminhelp_ignored_words")
 			global.adminhelp_ignored_words=newval;
-		if("adminlog")
-			global.adminlog=newval;
 		if("ai_list")
 			global.ai_list=newval;
 		if("ai_status_emotions")
@@ -1062,8 +1014,6 @@
 			global.air_alarm_topic=newval;
 		if("air_blocked")
 			global.air_blocked=newval;
-		if("airlock_overlays")
-			global.airlock_overlays=newval;
 		if("alien_whitelist")
 			global.alien_whitelist=newval;
 		if("allCasters")
@@ -1126,8 +1076,6 @@
 			global.blocked=newval;
 		if("bomb_set")
 			global.bomb_set=newval;
-		if("cable_list")
-			global.cable_list=newval;
 		if("cached_icons")
 			global.cached_icons=newval;
 		if("cached_space")
@@ -1156,14 +1104,10 @@
 			global.client_preference_stats_=newval;
 		if("client_repository")
 			global.client_repository=newval;
-		if("combatlog")
-			global.combatlog=newval;
 		if("comm_message_listeners")
 			global.comm_message_listeners=newval;
 		if("command_announcement")
 			global.command_announcement=newval;
-		if("common_tools")
-			global.common_tools=newval;
 		if("config")
 			global.config=newval;
 		if("contamination_overlay")
@@ -1178,8 +1122,6 @@
 			global.created=newval;
 		if("crew_repository")
 			global.crew_repository=newval;
-		if("csrfz_check")
-			global.csrfz_check=newval;
 		if("damage_icon_parts")
 			global.damage_icon_parts=newval;
 		if("dbcon")
@@ -1202,8 +1144,6 @@
 			global.department_accounts=newval;
 		if("department_radio_keys")
 			global.department_radio_keys=newval;
-		if("diary")
-			global.diary=newval;
 		if("dna_activity_bounds")
 			global.dna_activity_bounds=newval;
 		if("dna_genes")
@@ -1284,8 +1224,6 @@
 			global.global_message_listener=newval;
 		if("global_vars_")
 			global.global_vars_=newval;
-		if("gzn_check")
-			global.gzn_check=newval;
 		if("hadevent")
 			global.hadevent=newval;
 		if("hivemind_bank")
@@ -1306,8 +1244,6 @@
 			global.intercom_range_display_status=newval;
 		if("invalid_zone")
 			global.invalid_zone=newval;
-		if("jobMax")
-			global.jobMax=newval;
 		if("jobban_keylist")
 			global.jobban_keylist=newval;
 		if("jobban_runonce")
@@ -1346,10 +1282,6 @@
 			global.magazine_icondata_keys=newval;
 		if("magazine_icondata_states")
 			global.magazine_icondata_states=newval;
-		if("maint_all_access")
-			global.maint_all_access=newval;
-		if("mannequins_")
-			global.mannequins_=newval;
 		if("map_count")
 			global.map_count=newval;
 		if("map_sectors")
@@ -1358,8 +1290,6 @@
 			global.mark=newval;
 		if("maze_cell_count")
 			global.maze_cell_count=newval;
-		if("mechas_list")
-			global.mechas_list=newval;
 		if("merged")
 			global.merged=newval;
 		if("message_delay")
@@ -1384,10 +1314,6 @@
 			global.meteors_normal=newval;
 		if("meteors_threatening")
 			global.meteors_threatening=newval;
-		if("mil_branches")
-			global.mil_branches=newval;
-		if("mimic_defines")
-			global.mimic_defines=newval;
 		if("mining_floors")
 			global.mining_floors=newval;
 		if("mining_walls")
@@ -1422,8 +1348,6 @@
 			global.next_duration_update=newval;
 		if("next_station_date_change")
 			global.next_station_date_change=newval;
-		if("ninjastart")
-			global.ninjastart=newval;
 		if("ntnet_card_uid")
 			global.ntnet_card_uid=newval;
 		if("ntnet_global")
@@ -1542,8 +1466,6 @@
 			global.severity_to_string=newval;
 		if("ship_engines")
 			global.ship_engines=newval;
-		if("side_effects")
-			global.side_effects=newval;
 		if("skin_styles_female_list")
 			global.skin_styles_female_list=newval;
 		if("skipped_unit_tests")
@@ -1600,12 +1522,6 @@
 			global.supply_methods_=newval;
 		if("syndicate_access")
 			global.syndicate_access=newval;
-		if("syndicate_code_phrase")
-			global.syndicate_code_phrase=newval;
-		if("syndicate_code_response")
-			global.syndicate_code_response=newval;
-		if("syndicate_name")
-			global.syndicate_name=newval;
 		if("tail_icon_cache")
 			global.tail_icon_cache=newval;
 		if("tank_gauge_cache")
@@ -1689,10 +1605,8 @@
 	"DEPT_FREQS",
 	"Failsafe",
 	"GLOB",
-	"IClog",
 	"LIGHTING_CORNER_DIAGONAL",
 	"Master",
-	"OOClog",
 	"SSai",
 	"SSaifast",
 	"SSair",
@@ -1783,13 +1697,11 @@
 	"admin_verbs_sounds",
 	"admin_verbs_spawn",
 	"adminhelp_ignored_words",
-	"adminlog",
 	"ai_list",
 	"ai_status_emotions",
 	"ai_verbs_default",
 	"air_alarm_topic",
 	"air_blocked",
-	"airlock_overlays",
 	"alien_whitelist",
 	"allCasters",
 	"allConsoles",
@@ -1821,7 +1733,6 @@
 	"basic_robolimb",
 	"blocked",
 	"bomb_set",
-	"cable_list",
 	"cached_icons",
 	"cached_space",
 	"camera_range_display_status",
@@ -1836,10 +1747,8 @@
 	"chicken_count",
 	"client_preference_stats_",
 	"client_repository",
-	"combatlog",
 	"comm_message_listeners",
 	"command_announcement",
-	"common_tools",
 	"config",
 	"contamination_overlay",
 	"create_mob_html",
@@ -1847,7 +1756,6 @@
 	"create_turf_html",
 	"created",
 	"crew_repository",
-	"csrfz_check",
 	"damage_icon_parts",
 	"dbcon",
 	"dbcon_old",
@@ -1859,7 +1767,6 @@
 	"delta_index",
 	"department_accounts",
 	"department_radio_keys",
-	"diary",
 	"dna_activity_bounds",
 	"dna_genes",
 	"doppler_arrays",
@@ -1900,7 +1807,6 @@
 	"ghost_traps",
 	"global_message_listener",
 	"global_vars_",
-	"gzn_check",
 	"hadevent",
 	"hivemind_bank",
 	"holder_mob_icon_cache",
@@ -1911,7 +1817,6 @@
 	"intents",
 	"intercom_range_display_status",
 	"invalid_zone",
-	"jobMax",
 	"jobban_keylist",
 	"jobban_runonce",
 	"landmarks_list",
@@ -1931,13 +1836,10 @@
 	"lunchables_snacks_",
 	"magazine_icondata_keys",
 	"magazine_icondata_states",
-	"maint_all_access",
-	"mannequins_",
 	"map_count",
 	"map_sectors",
 	"mark",
 	"maze_cell_count",
-	"mechas_list",
 	"merged",
 	"message_delay",
 	"message_servers",
@@ -1950,8 +1852,6 @@
 	"meteors_moderate",
 	"meteors_normal",
 	"meteors_threatening",
-	"mil_branches",
-	"mimic_defines",
 	"mining_floors",
 	"mining_walls",
 	"minor_air_alarms",
@@ -1969,7 +1869,6 @@
 	"next_account_number",
 	"next_duration_update",
 	"next_station_date_change",
-	"ninjastart",
 	"ntnet_card_uid",
 	"ntnet_global",
 	"ntnrc_uid",
@@ -2029,7 +1928,6 @@
 	"server_name",
 	"severity_to_string",
 	"ship_engines",
-	"side_effects",
 	"skin_styles_female_list",
 	"skipped_unit_tests",
 	"slot_flags_enumeration",
@@ -2058,9 +1956,6 @@
 	"supply_drop",
 	"supply_methods_",
 	"syndicate_access",
-	"syndicate_code_phrase",
-	"syndicate_code_response",
-	"syndicate_name",
 	"tail_icon_cache",
 	"tank_gauge_cache",
 	"tape_roll_applications",

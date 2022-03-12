@@ -31,7 +31,7 @@
 	if(!istype(L, /list))
 		return FALSE
 
-	if(maint_all_access)
+	if(GLOB.using_map?.maint_all_access)
 		L = L.Copy()
 		L |= access_maint_tunnels
 

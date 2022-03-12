@@ -14,8 +14,6 @@
 #define AIRLOCK_DETAILABLE 4
 #define AIRLOCK_WINDOW_PAINTABLE 8
 
-var/list/airlock_overlays = list()
-
 /obj/machinery/door/airlock
 	name = "airlock"
 	icon = 'icons/obj/doors/station/door.dmi'

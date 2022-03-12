@@ -391,7 +391,7 @@ SUBSYSTEM_DEF(zcopy)
 		"<h1>Analysis of [T] at [T.x],[T.y],[T.z]</h1>",
 		"<b>Queue occurrences:</b> [T.z_queued]",
 		"<b>Above space:</b> Apparent [T.z_eventually_space ? "Yes" : "No"], Actual [is_above_space ? "Yes" : "No"] - [T.z_eventually_space == is_above_space ? "<font color='green'>OK</font>" : "<font color='red'>MISMATCH</font>"]",
-		"<b>Z Flags</b>: [english_list(bitfield2list(T.z_flags, global.mimic_defines), "(none)")]",
+		"<b>Z Flags</b>: [english_list(bitfield2list(T.z_flags, GLOB.mimic_defines), "(none)")]",
 		"<b>Has Shadower:</b> [T.shadower ? "Yes" : "No"]",
 		"<b>Has turf proxy:</b> [T.mimic_proxy ? "Yes" : "No"]",
 		"<b>Has above copy:</b> [T.mimic_above_copy ? "Yes" : "No"]",

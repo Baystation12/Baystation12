@@ -1,10 +1,16 @@
 //Since it didn't really belong in any other category, I'm putting this here
 //This is for procs to replace all the goddamn 'in world's that are chilling around the code
 
-var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
+/// All /obj/structure/cable, managed by instances
+GLOBAL_LIST_EMPTY(cable_list)
+
+/// All medical side effects
+GLOBAL_LIST_EMPTY(side_effects)
+
+/// All character setup mannequins
+GLOBAL_LIST_EMPTY(mannequins)
+
 var/global/list/landmarks_list = list()				//list of all landmarks created
-var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
-var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mobs target tracking.
 
 #define all_genders_define_list list(MALE,FEMALE,PLURAL,NEUTER)
 #define all_genders_text_list list("Male","Female","Plural","Neuter")
@@ -15,7 +21,7 @@ var/global/list/datum/language/all_languages = list()
 var/global/list/language_keys[0]					// Table of say codes for all languages
 var/global/list/playable_species = list(SPECIES_HUMAN)    // A list of ALL playable species, whitelisted, latejoin or otherwise.
 
-var/list/mannequins_
+
 
 // Grabs
 var/global/list/all_grabstates[0]
@@ -79,13 +85,11 @@ var/global/list/string_slot_flags = list(
 /////Initial Building/////
 //////////////////////////
 
-/proc/get_mannequin(var/ckey)
-	if(!mannequins_)
-		mannequins_ = new()
-	. = mannequins_[ckey]
-	if(!.)
-		. = new/mob/living/carbon/human/dummy/mannequin()
-		mannequins_[ckey] = .
+/proc/get_mannequin(ckey)
+	if (!GLOB.mannequins[ckey])
+		GLOB.mannequins[ckey] = new /mob/living/carbon/human/dummy/mannequin
+	return GLOB.mannequins[ckey]
+
 
 /hook/global_init/proc/makeDatumRefLists()
 	var/list/paths

@@ -30,7 +30,7 @@
 	to_world_log("## TESTING: [msg][log_end]")
 
 /proc/game_log(category, text)
-	to_file(diary, "\[[time_stamp()]] [game_id] [category]: [text][log_end]")
+	to_file(GLOB.diary, "\[[time_stamp()]] [game_id] [category]: [text][log_end]")
 
 /proc/log_admin(text)
 	GLOB.admin_log.Add(text)

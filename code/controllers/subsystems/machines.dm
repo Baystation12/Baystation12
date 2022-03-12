@@ -104,7 +104,7 @@ SUBSYSTEM_DEF(machines)
 	for(var/datum/powernet/powernet as anything in powernets)
 		qdel(powernet)
 	powernets.Cut()
-	setup_powernets_for_cables(cable_list)
+	setup_powernets_for_cables(GLOB.cable_list)
 
 
 /datum/controller/subsystem/machines/proc/setup_powernets_for_cables(list/cables)

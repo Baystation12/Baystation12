@@ -11,6 +11,9 @@ var/const/SPT = FLAG(9)
 var/const/EXP = FLAG(10)
 var/const/ROB = FLAG(11)
 
+GLOBAL_VAR(antag_code_phrase)
+GLOBAL_VAR(antag_code_response)
+
 SUBSYSTEM_DEF(jobs)
 	name = "Jobs"
 	init_order = SS_INIT_JOBS
@@ -93,8 +96,8 @@ SUBSYSTEM_DEF(jobs)
 							LAZYDISTINCTADD(positions_by_department["[GLOB.bitflags[I]]"], job.alt_titles)
 
 	// Set up syndicate phrases.
-	syndicate_code_phrase = generate_code_phrase()
-	syndicate_code_response	= generate_code_phrase()
+	GLOB.antag_code_phrase = generate_code_phrase()
+	GLOB.antag_code_response = generate_code_phrase()
 
 	// Set up AI spawn locations
 	spawn_empty_ai()
@@ -341,7 +344,7 @@ SUBSYSTEM_DEF(jobs)
 		if(player.client.prefs.alternate_option == BE_ASSISTANT)
 			var/datum/job/ass = DEFAULT_JOB_TYPE
 			if((GLOB.using_map.flags & MAP_HAS_BRANCH) && player.client.prefs.branches[initial(ass.title)])
-				var/datum/mil_branch/branch = mil_branches.get_branch(player.client.prefs.branches[initial(ass.title)])
+				var/datum/mil_branch/branch = GLOB.mil_branches.get_branch(player.client.prefs.branches[initial(ass.title)])
 				ass = branch.assistant_job
 			assign_role(player, initial(ass.title), mode = mode)
 	//For ones returning to lobby
@@ -432,9 +435,9 @@ SUBSYSTEM_DEF(jobs)
 	if(job)
 		if(H.client)
 			if(GLOB.using_map.flags & MAP_HAS_BRANCH)
-				H.char_branch = mil_branches.get_branch(H.client.prefs.branches[rank])
+				H.char_branch = GLOB.mil_branches.get_branch(H.client.prefs.branches[rank])
 			if(GLOB.using_map.flags & MAP_HAS_RANK)
-				H.char_rank = mil_branches.get_rank(H.client.prefs.branches[rank], H.client.prefs.ranks[rank])
+				H.char_rank = GLOB.mil_branches.get_rank(H.client.prefs.branches[rank], H.client.prefs.ranks[rank])
 
 		// Transfers the skill settings for the job to the mob
 		H.skillset.obtain_from_client(job, H.client)

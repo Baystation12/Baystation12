@@ -15,7 +15,7 @@
 					V.unlock()
 
 /datum/map/make_maint_all_access(var/radstorm = 0)
-	maint_all_access = 1
+	maint_all_access = TRUE
 	if(radstorm)
 		priority_announcement.Announce("The maintenance access requirement has been revoked on all maintenance airlocks, and saferooms have been unbolted.", "Attention!")
 		GLOB.using_map.unbolt_saferooms()
@@ -23,7 +23,7 @@
 		priority_announcement.Announce("The maintenance access requirement has been revoked on all maintenance airlocks.", "Attention!")
 
 /datum/map/revoke_maint_all_access(var/radstorm = 0)
-	maint_all_access = 0
+	maint_all_access = FALSE
 	if(radstorm)
 		priority_announcement.Announce("The maintenance access requirement has been readded on all maintenance airlocks, and saferooms have been bolted.", "Attention!")
 		GLOB.using_map.bolt_saferooms()

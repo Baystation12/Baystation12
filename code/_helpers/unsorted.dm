@@ -865,20 +865,37 @@ proc/get_mob_with_client_list()
 	return get_turf(location)
 
 
-//Quick type checks for some tools
-var/global/list/common_tools = list(
-/obj/item/stack/cable_coil,
-/obj/item/wrench,
-/obj/item/weldingtool,
-/obj/item/screwdriver,
-/obj/item/wirecutters,
-/obj/item/device/multitool,
-/obj/item/crowbar)
+/obj/item/proc/istool()
+	return FALSE
 
-/proc/istool(O)
-	if(O && is_type_in_list(O, common_tools))
-		return 1
-	return 0
+
+/obj/item/stack/cable_coil/istool()
+	return TRUE
+
+
+/obj/item/wrench/istool()
+	return TRUE
+
+
+/obj/item/weldingtool/istool()
+	return TRUE
+
+
+/obj/item/screwdriver/istool()
+	return TRUE
+
+
+/obj/item/wirecutters/istool()
+	return TRUE
+
+
+/obj/item/device/multitool/istool()
+	return TRUE
+
+
+/obj/item/crowbar/istool()
+	return TRUE
+
 
 /proc/is_hot(obj/item/W as obj)
 	switch(W.type)
