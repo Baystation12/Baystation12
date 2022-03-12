@@ -49,7 +49,7 @@ SUBSYSTEM_DEF(customitems)
 	. = M && citem && citem.spawn_item(get_turf(M))
 	if(. && !M.equip_to_appropriate_slot(.) && !M.equip_to_storage(.))
 		to_chat(M, SPAN_WARNING("Your custom item, \the [.], could not be placed on your character."))
-		QDEL_NULL(.)
+		// QDEL_NULL(.)
 
 //gets the relevant list for the key from the listlist if it exists, check to make sure they are meant to have it and then calls the giving function
 /datum/controller/subsystem/customitems/proc/equip_custom_items(mob/living/carbon/human/M)
@@ -62,7 +62,7 @@ SUBSYSTEM_DEF(customitems)
 			continue
 		// Check for required access.
 		var/obj/item/card/id/current_id = M.wear_id
-		if(length(citem.req_access) && (!istype(current_id) || !has_access(current_id.access, citem.req_access)))
+		if(length(citem.req_access) && (!istype(current_id) || !has_access(citem.req_access, current_id.access)))
 			continue
 		// Check for required job title.
 		if(length(citem.req_titles))

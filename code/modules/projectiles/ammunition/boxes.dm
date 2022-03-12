@@ -20,6 +20,9 @@
 	max_ammo = 6
 	multiple_sprites = 1
 
+/obj/item/ammo_magazine/speedloader/magnum/rubber
+	ammo_type = /obj/item/ammo_casing/pistol/magnum/rubber
+
 /obj/item/ammo_magazine/speedloader/small
 	name = "speed loader"
 	icon_state = "spdloader_small"

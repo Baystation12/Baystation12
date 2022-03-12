@@ -1,0 +1,6 @@
+{
+	"ckey": "ZAKATNEBA",
+	"character_name": "Sora Ootsuki",
+	"item_path": "/obj/item/storage/secure/briefcase/zakatneba",
+	"req_access": ["ACCESS_FORENSICS"]
+}

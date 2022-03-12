@@ -40,6 +40,10 @@
 	icon_state = "magnumcasing"
 	spent_icon = "magnumcasing-spent"
 
+/obj/item/ammo_casing/pistol/magnum/rubber
+	desc = "A high-power pistol rubber bullet casing."
+	projectile_type = /obj/item/projectile/bullet/pistol/strong/rubber
+
 /obj/item/ammo_casing/pistol/throwback
 	desc = "An antique pistol bullet casing. Somewhere between 9 and 11 mm in caliber."
 	caliber = CALIBER_PISTOL_ANTIQUE

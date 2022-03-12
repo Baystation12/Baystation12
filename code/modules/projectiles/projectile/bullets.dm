@@ -144,6 +144,12 @@
 	distance_falloff = 2.5
 	armor_penetration = 15
 
+/obj/item/projectile/bullet/pistol/strong/rubber
+	damage_flags = 0
+	damage = 5
+	agony = 60
+	embed = FALSE
+
 /obj/item/projectile/bullet/pistol/rubber //"rubber" bullets
 	name = "rubber bullet"
 	damage_flags = 0
