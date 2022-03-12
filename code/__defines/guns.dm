@@ -3,6 +3,7 @@
 #define CALIBER_PISTOL_MAGNUM 	"15mm"
 #define CALIBER_PISTOL_FLECHETTE "4mm"
 #define CALIBER_PISTOL_ANTIQUE	"~10mm"
+#define CALIBER_PISTOL_CUSTOM	".38 special"
 
 #define CALIBER_RIFLE			"5mmR"
 #define CALIBER_RIFLE_MILITARY  "7mmR"

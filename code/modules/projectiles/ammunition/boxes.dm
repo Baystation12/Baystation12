@@ -32,6 +32,9 @@
 	max_ammo = 6
 	multiple_sprites = 1
 
+/obj/item/ammo_magazine/speedloader/small/rubber
+	ammo_type = /obj/item/ammo_casing/pistol/small/rubber
+
 /obj/item/ammo_magazine/speedloader/pclip
 	name = "magnum pistol stripper clip"
 	desc = "A stripper clip for pistol magnum caliber weapons."

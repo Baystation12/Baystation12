@@ -40,6 +40,10 @@
 	name = "ammunition (speedloader, holdout)"
 	path = /obj/item/ammo_magazine/speedloader/small
 
+/datum/fabricator_recipe/arms_ammo/hidden/speedloader_small_rubber
+	name = "ammunition (speedloader, holdout, rubber)"
+	path = /obj/item/ammo_magazine/speedloader/small/rubber
+
 /datum/fabricator_recipe/arms_ammo/hidden/speedloader_magnum
 	name = "ammunition (speedloader, magnum)"
 	path = /obj/item/ammo_magazine/speedloader/magnum
