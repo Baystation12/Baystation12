@@ -3,18 +3,16 @@
 #define CARCASS_SKINNED  "skinned"
 #define CARCASS_JOINTED  "jointed"
 
-/mob/living
-	var/meat_type =         /obj/item/reagent_containers/food/snacks/meat
-	var/meat_amount =       3
-	var/skin_material =     MATERIAL_SKIN_GENERIC
-	var/skin_amount =       3
-	var/bone_material =     MATERIAL_BONE_GENERIC
-	var/bone_amount =       3
-	var/skull_type
-	var/butchery_rotation = 90
+/mob/living/var/meat_type =         /obj/item/reagent_containers/food/snacks/meat
+/mob/living/var/meat_amount =       3
+/mob/living/var/skin_material =     MATERIAL_SKIN_GENERIC
+/mob/living/var/skin_amount =       3
+/mob/living/var/bone_material =     MATERIAL_BONE_GENERIC
+/mob/living/var/bone_amount =       3
+/mob/living/var/skull_type
+/mob/living/var/butchery_rotation = 90
 
-/mob/living/carbon/human
-	butchery_rotation = 180
+/mob/living/carbon/human/butchery_rotation = 180
 
 // Harvest an animal's delicious byproducts
 /mob/living/proc/harvest_meat()
