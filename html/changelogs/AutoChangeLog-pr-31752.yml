@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Buttoning/rolling/etc accessories (I.e. flannel shirts) should now properly
+      display the current rolled/buttoned/etc status when using the relevant verbs.
