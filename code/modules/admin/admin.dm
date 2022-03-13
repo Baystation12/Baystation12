@@ -1176,7 +1176,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		else
 			QDEL_NULL(A.secondary_effect)
 
-		log_and_message_admins("spawned an artifact with effects [english_list(A.my_effect, A.secondary_effect)].")
+		log_and_message_admins("spawned an artifact with effects [A.my_effect][A.secondary_effect ? ", [A.secondary_effect]" : ""].")
 
 /datum/admins/proc/show_traitor_panel(var/mob/M in SSmobs.mob_list)
 	set category = "Admin"
