@@ -6,7 +6,7 @@
 	handle_casings = CYCLE_CASINGS
 	caliber = CALIBER_PISTOL_SMALL
 	max_shells = 6
-	ammo_type = /obj/item/ammo_casing/pistol/small
+	ammo_type = /obj/item/ammo_casing/pistol/small/rubber
 
 /obj/item/storage/secure/briefcase/zakatneba
 	l_code = "12345"
