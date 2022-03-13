@@ -41,7 +41,7 @@
 
 	var/obj/item/natural_weapon/weapon = get_natural_weapon()
 
-	if (weapon.resolve_attackby(A, src))
+	if (weapon?.resolve_attackby(A, src))
 		apply_melee_effects(A)
 
 	return TRUE
