@@ -4,9 +4,9 @@
 	icon = 'proxima/icons/obj/guns/ballistic.dmi'
 	icon_state = "mateba"
 	handle_casings = CYCLE_CASINGS
-	caliber = CALIBER_PISTOL_CUSTOM
+	caliber = CALIBER_PISTOL_SMALL
 	max_shells = 6
-	ammo_type = list(/obj/item/ammo_casing/pistol/small, /obj/item/ammo_casing/pistol/small/rubber)
+	ammo_type = /obj/item/ammo_casing/pistol/small
 
 /obj/item/storage/secure/briefcase/zakatneba
 	l_code = "12345"

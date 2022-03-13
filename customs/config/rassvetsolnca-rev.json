@@ -1,6 +1,6 @@
 {
 	"ckey": "RASSVETSOLNCA",
-	"character_name": "Han Yung Soo",
+	"character_name": "Han Young Soo",
 	"item_path": "/obj/item/storage/secure/briefcase/rassvetsolnca",
 	"req_access": ["ACCESS_FORENSICS"]
 }
