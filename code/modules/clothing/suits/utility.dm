@@ -123,7 +123,8 @@
  */
 /obj/item/clothing/head/radiation
 	name = "radiation hood"
-	icon_state = "rad"
+	icon_state = "rad_hood"
+	item_state = "rad_hood"
 	desc = "A hood with radiation protective properties. Label: Made with lead, do not eat insulation."
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
@@ -136,12 +137,9 @@
 /obj/item/clothing/suit/radiation
 	name = "radiation suit"
 	desc = "A suit that protects against radiation. Label: Made with lead, do not eat insulation."
-	icon_state = "rad"
-	item_state_slots = list(
-		slot_l_hand_str = "rad_suit",
-		slot_r_hand_str = "rad_suit",
-	)
-	w_class = ITEM_SIZE_HUGE//bulky item
+	icon_state = "rad_suit"
+	item_state = "rad_suit"
+	w_class = ITEM_SIZE_HUGE //bulky item
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS|FEET

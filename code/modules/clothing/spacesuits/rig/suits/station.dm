@@ -217,6 +217,7 @@
 	)
 
 /obj/item/clothing/head/helmet/space/rig/ce
+	light_overlay = "helmet_light_alt"
 	camera = /obj/machinery/camera/network/engineering
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
 	sprite_sheets = list(
