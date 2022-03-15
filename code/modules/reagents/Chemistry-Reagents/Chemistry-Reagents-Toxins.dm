@@ -746,7 +746,7 @@
 
 /datum/reagent/tilt
 	name = "Tilt"
-	description = "A potent, illegal downer made from mixing cough medicine and Space-Up."
+	description = "A potent downer made from mixing cough medicine and Space-Up."
 	taste_description = "purple sweetness"
 	reagent_state = LIQUID
 	color = "#800080"
