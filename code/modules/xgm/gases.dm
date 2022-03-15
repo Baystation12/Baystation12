@@ -113,12 +113,16 @@
 /decl/xgm_gas/hydrogen/deuterium
 	id = GAS_DEUTERIUM
 	name = "Deuterium"
+	specific_heat = 80
+	molar_mass = 0.004
 	symbol_html = "D"
 	symbol = "D"
 
 /decl/xgm_gas/hydrogen/tritium
 	id = GAS_TRITIUM
 	name = "Tritium"
+	molar_mass = 0.006
+	specific_heat = 60
 	symbol_html = "T"
 	symbol = "T"
 
