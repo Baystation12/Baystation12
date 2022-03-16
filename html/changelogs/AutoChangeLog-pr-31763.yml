@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: The meat grinder no longer ejects gibs at speeds strong enough to destroy
-      walls.

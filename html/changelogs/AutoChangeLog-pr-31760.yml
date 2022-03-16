@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: Fixed the Spawn Artifact verb admin log not logging properly when 2 effects
-      were used.
