@@ -52,6 +52,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define PASS_FLAG_TABLE     FLAG(0)
 #define PASS_FLAG_GLASS     FLAG(1)
 #define PASS_FLAG_GRILLE    FLAG(2)
+#define PASS_FLAG_MOB       FLAG(3)
 
 // Flags for gas tanks
 #define TANK_FLAG_WELDED     FLAG(0)

@@ -32,34 +32,19 @@
 		explosion(target, -1, 0, 2)
 		return 1
 
-/obj/item/projectile/meteor
-	name = "meteor"
-	icon = 'icons/obj/meteor.dmi'
-	icon_state = "smallf"
-	damage = 0
-	damage_type = BRUTE
-	nodamage = TRUE
-
-	Bump(atom/A as mob|obj|turf|area, forced=0)
-		if(A == firer)
-			forceMove(A.loc)
-			return
-
-		sleep(-1) //Might not be important enough for a sleep(-1) but the sleep/spawn itself is necessary thanks to explosions and metoerhits
-
-		if(src)//Do not add to this if() statement, otherwise the meteor won't delete them
-			if(A)
-
-				A.ex_act(2)
-				playsound(src.loc, 'sound/effects/meteorimpact.ogg', 40, 1)
-
-				for(var/mob/M in range(10, src))
-					if(!M.stat && !istype(M, /mob/living/silicon/ai))\
-						shake_camera(M, 3, 1)
-				qdel(src)
-				return 1
-		else
-			return 0
+/obj/item/projectile/meteor/Bump(var/atom/A, forced=0)
+	if(!istype(A))
+		return
+	if(A == firer)
+		forceMove(A.loc)
+		return
+	A.ex_act(2)
+	playsound(src.loc, 'sound/effects/meteorimpact.ogg', 40, 1)
+	for(var/mob/M in range(10, src))
+		if(!M.stat && !istype(M, /mob/living/silicon/ai))
+			shake_camera(M, 3, 1)
+	qdel(src)
+	return TRUE
 
 /obj/item/projectile/energy/floramut
 	name = "alpha somatoray"
@@ -139,7 +124,7 @@
 	nodamage = TRUE
 	damage_type = PAIN
 	damage_flags = 0
-	muzzle_type = /obj/effect/projectile/bullet/muzzle
+	muzzle_type = /obj/effect/projectile/muzzle/bullet
 
 /obj/item/projectile/bola
 	name = "bola"

@@ -50,9 +50,9 @@
 	damage = 0
 	randpixel = 0
 	no_attack_log = TRUE
-	muzzle_type = /obj/effect/projectile/blood
-	tracer_type = /obj/effect/projectile/blood
-	impact_type = /obj/effect/projectile/blood
+	muzzle_type = /obj/effect/projectile/muzzle/blood
+	tracer_type = /obj/effect/projectile/tracer/blood
+	impact_type = /obj/effect/projectile/impact/blood
 
 /obj/item/projectile/beam/blood_effect/Bump(var/atom/a, forced=0)
 	if(a == original)

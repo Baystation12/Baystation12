@@ -117,6 +117,8 @@
 			return global.SSpresence;
 		if("SSprocessing")
 			return global.SSprocessing;
+		if("SSprojectiles")
+			return global.SSprojectiles;
 		if("SSpsi")
 			return global.SSpsi;
 		if("SSradiation")
@@ -914,6 +916,8 @@
 			global.SSpresence=newval;
 		if("SSprocessing")
 			global.SSprocessing=newval;
+		if("SSprojectiles")
+			global.SSprojectiles=newval;
 		if("SSpsi")
 			global.SSpsi=newval;
 		if("SSradiation")
@@ -1652,6 +1656,7 @@
 	"SSplants",
 	"SSpresence",
 	"SSprocessing",
+	"SSprojectiles",
 	"SSpsi",
 	"SSradiation",
 	"SSrobots",

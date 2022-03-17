@@ -162,7 +162,7 @@
 				adj = A.Adjacent(src)
 
 			var/resolved
-
+			current_user = user
 			if(adj) resolved = temp_system.resolve_attackby(A, src, params)
 			if(!resolved && A && temp_system)
 				var/mob/ruser = src
@@ -179,6 +179,7 @@
 			setClickCooldown(arms ? arms.action_delay + extra_delay : 15 + extra_delay)
 			if(system_moved)
 				temp_system.forceMove(selected_system)
+				current_user = null
 			return
 
 	if(A == src)

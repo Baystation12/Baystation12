@@ -77,6 +77,15 @@
 	//POWER
 	var/power = MECH_POWER_OFF
 
+	var/mob/living/current_user = null
+
+//Pixel projectiles need a client, so we need a way to pass who the last user was for view calcs
+/mob/living/proc/get_effective_gunner()
+	return src
+
+/mob/living/exosuit/get_effective_gunner()
+	return current_user
+
 /mob/living/exosuit/MayZoom()
 	if(head?.vision_flags)
 		return FALSE

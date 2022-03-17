@@ -41,6 +41,22 @@
 /proc/dd_range(var/low, var/high, var/num)
 	return max(low,min(high,num))
 
+/proc/get_projectile_angle(atom/source, atom/target)
+	var/sx = source.x * world.icon_size
+	var/sy = source.y * world.icon_size
+	var/tx = target.x * world.icon_size
+	var/ty = target.y * world.icon_size
+	var/atom/movable/AM
+	if(ismovable(source))
+		AM = source
+		sx += AM.step_x
+		sy += AM.step_y
+	if(ismovable(target))
+		AM = target
+		tx += AM.step_x
+		ty += AM.step_y
+	return SIMPLIFY_DEGREES(arctan(ty - sy, tx - sx))
+
 //Returns whether or not A is the middle most value
 /proc/InRange(var/A, var/lower, var/upper)
 	if(A < lower) return 0
