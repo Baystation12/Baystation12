@@ -1,0 +1,9 @@
+author: karljohansson
+delete-after: true
+changes:
+  - tweak: Deuterium gas has a molar mass of 0.004
+  - tweak: Deuterium gas has a heat capacity of 80
+  - tweak: Tritium gas has a molar mass of 0.006
+  - tweak: Tritium gas has a heat capacity of 60
+  - tweak: The R-UST engine is slightly less energy efficient, more so using tritium
+      based setups
