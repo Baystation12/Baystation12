@@ -14,155 +14,107 @@
 	rank_types = subtypesof(/datum/mil_rank/iccgn)
 	..()
 
+	spawn_rank_types = subtypesof(/datum/mil_rank/iccgn)
+	..()
+
 
 /datum/mil_rank/iccgn/e1
-	name = "Sailor Recruit"
-	name_short = "SlrRct"
-	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/e1
-	)
+	name = "Guardian Recruit"
+	name_short = "GRDR"
+	accessory = list(/obj/item/clothing/accessory/iccgn_rank/e1)
 	sort_order = 10
 
-
 /datum/mil_rank/iccgn/e3
-	name = "Sailor"
-	name_short = "Slr"
-	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/e3
-	)
-	sort_order = 30
-
+	name = "Guardian"
+	name_short = "GRD"
+	accessory = list(/obj/item/clothing/accessory/iccgn_rank/e3)
+	sort_order = 20
 
 /datum/mil_rank/iccgn/e4
-	name = "Bosman"
-	name_short = "Bsn"
-	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/e4
-	)
-	sort_order = 40
-
+	name = "Corporal"
+	name_short = "CPL"
+	accessory = list(/obj/item/clothing/accessory/iccgn_rank/e4)
+	sort_order = 30
 
 /datum/mil_rank/iccgn/e5
-	name = "Starszy Bosman"
-	name_short = "SBsn"
-	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/e5
-	)
+	name = "Star Corporal"
+	name_short = "SCPL"
+	accessory = list(/obj/item/clothing/accessory/iccgn_rank/e5)
+	sort_order = 40
+/datum/mil_rank/iccgn/e6
+	name = "Sergeant"
+	name_short = "SGT"
+	accessory = list(/obj/item/clothing/accessory/iccgn_rank/e6)
 	sort_order = 50
 
-
-/datum/mil_rank/iccgn/e6
-	name = "Serzhant"
-	name_short = "Szt"
-	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/e6
-	)
+/datum/mil_rank/iccgn/e7
+	name = "Laserey Sergeant"
+	name_short = "LsSGT"
+	accessory = list(/obj/item/clothing/accessory/iccgn_rank/e7)
 	sort_order = 60
 
-
-/datum/mil_rank/iccgn/e7
-	name = "Glavny Serzhant"
-	name_short = "GSzt"
-	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/e7
-	)
+/datum/mil_rank/iccgn/e8
+	name = "Master Sergeant"
+	name_short = "MSG"
+	accessory = list(/obj/item/clothing/accessory/iccgn_rank/e8)
 	sort_order = 70
 
-
-/datum/mil_rank/iccgn/e8
-	name = "Starshina"
-	name_short = "Str"
-	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/e8
-	)
-	sort_order = 80
-
-
 /datum/mil_rank/iccgn/e9
-	name = "Michman"
-	name_short = "Mch"
-	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/e9
-	)
-	sort_order = 90
-
+	name = "Command Master Sergeant"
+	name_short = "CMS"
+	accessory = list(/obj/item/clothing/accessory/iccgn_rank/e9)
+	sort_order = 80
 
 /datum/mil_rank/iccgn/o1
 	name = "Junker"
-	name_short = "Jkr"
-	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/o1
-	)
+	name_short = "JU"
+	accessory = list(/obj/item/clothing/accessory/iccgn_rank/o1)
 	sort_order = 110
 
-
 /datum/mil_rank/iccgn/o2
-	name = "Leytenant"
-	name_short = "Lyt"
-	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/o2
-	)
+	name = "Leftenant"
+	name_short = "LT"
+	accessory = list(/obj/item/clothing/accessory/iccgn_rank/o2)
 	sort_order = 120
 
-
 /datum/mil_rank/iccgn/o3
-	name = "Starshy Leytenant"
-	name_short = "SLyt"
-	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/o3
-	)
+	name = "Star Leftenant"
+	name_short = "SLT"
+	accessory = list(/obj/item/clothing/accessory/iccgn_rank/o3)
 	sort_order = 130
 
-
 /datum/mil_rank/iccgn/o4
-	name = "Sub-Komandor"
-	name_short = "SKdr"
-	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/o4
-	)
+	name = "Commander"
+	name_short = "CDR"
+	accessory = list(/obj/item/clothing/accessory/iccgn_rank/o4)
 	sort_order = 140
 
-
 /datum/mil_rank/iccgn/o5
-	name = "Komandor"
-	name_short = "Kdr"
-	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/o5
-	)
+	name = "Star Commander"
+	name_short = "SCDR"
+	accessory = list(/obj/item/clothing/accessory/iccgn_rank/o5)
 	sort_order = 150
 
-
 /datum/mil_rank/iccgn/o6
-	name = "Kapitan"
-	name_short = "Kpt"
-	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/o6
-	)
+	name = "Captain"
+	name_short = "CPT"
+	accessory = list(/obj/item/clothing/accessory/iccgn_rank/o6)
 	sort_order = 160
 
-
 /datum/mil_rank/iccgn/o7
-	name = "Starshy Kapitan"
-	name_short = "SKpt"
-	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/o7
-	)
+	name = "Star Captain"
+	name_short = "SCPT"
+	accessory = list(/obj/item/clothing/accessory/iccgn_rank/o7)
 	sort_order = 170
-
 
 /datum/mil_rank/iccgn/o8
 	name = "Vice-Admiral"
-	name_short = "VAdm"
-	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/o8
-	)
+	name_short = "VADM"
+	accessory = list(/obj/item/clothing/accessory/iccgn_rank/o8)
 	sort_order = 180
-
 
 /datum/mil_rank/iccgn/o9
 	name = "Admiral"
-	name_short = "Adm"
-	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/o9
-	)
+	name_short = "ADM"
+	accessory = list(/obj/item/clothing/accessory/iccgn_rank/o9)
 	sort_order = 190
