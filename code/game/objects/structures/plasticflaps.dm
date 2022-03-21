@@ -8,7 +8,7 @@
 	layer = ABOVE_HUMAN_LAYER
 	explosion_resistance = 5
 
-	obj_flags = OBJ_FLAG_ANCHORABLE
+	atmos_canpass = CANPASS_PROC
 
 	var/list/mobs_can_pass = list(
 		/mob/living/bot,
@@ -16,7 +16,7 @@
 		/mob/living/simple_animal/passive/mouse,
 		/mob/living/silicon/robot/drone
 		)
-	var/airtight = 0
+	var/airtight = FALSE
 
 /obj/structure/plasticflaps/CanPass(atom/A, turf/T)
 	if(istype(A) && A.checkpass(PASS_FLAG_GLASS))
@@ -38,16 +38,39 @@
 	return ..()
 
 /obj/structure/plasticflaps/attackby(obj/item/W, mob/user)
-	if(isCrowbar(W) && !anchored)
-		user.visible_message("<span class='notice'>\The [user] begins deconstructing \the [src].</span>", "<span class='notice'>You start deconstructing \the [src].</span>")
+	if (isCrowbar(W))
+		if (anchored)
+			to_chat(user, "You have to unwrench \the [src] before before deconstruction.")
+			return
+		user.visible_message(
+			SPAN_NOTICE("\The [user] begins deconstructing \the [src]."),
+			SPAN_NOTICE("You start deconstructing \the [src].")
+			)
 		if(user.do_skilled(3 SECONDS, SKILL_CONSTRUCTION, src))
-			user.visible_message("<span class='warning'>\The [user] deconstructs \the [src].</span>", "<span class='warning'>You deconstruct \the [src].</span>")
+			user.visible_message(
+				SPAN_WARNING("\The [user] deconstructs \the [src]."),
+				SPAN_WARNING("You deconstruct \the [src].")
+				)
+			new /obj/item/stack/material/plastic(loc, 30)
 			qdel(src)
-	if(isScrewdriver(W) && anchored)
-		airtight = !airtight
-		airtight ? become_airtight() : clear_airtight()
-		user.visible_message("<span class='warning'>\The [user] adjusts \the [src], [airtight ? "preventing" : "allowing"] air flow.</span>")
-	else ..()
+		return
+	if (isScrewdriver(W))
+		if (!anchored)
+			to_chat(user, "You have to secure \the [src] before before adjusting the airflow.")
+			return
+		user.visible_message(
+			SPAN_WARNING("\The [user] adjusts \the [src], [airtight ? "allowing" : "preventing"] air flow.")
+			)
+		if (airtight)
+			clear_airtight()
+			return
+		become_airtight()
+		return
+	if (isWrench(W))
+		if (airtight)
+			to_chat(user,"You have to readjust the airflow before unwrenching \the [src].")
+			return
+		wrench_floor_bolts(user)
 
 /obj/structure/plasticflaps/ex_act(severity)
 	switch(severity)
@@ -60,21 +83,31 @@
 			if (prob(5))
 				qdel(src)
 
-/obj/structure/plasticflaps/Destroy() //lazy hack to set the turf to allow air to pass if it's a simulated floor
-	clear_airtight()
+/obj/structure/plasticflaps/Destroy()
+	if (airtight)
+		clear_airtight()
 	. = ..()
 
+/obj/structure/plasticflaps/c_airblock()
+	if (airtight == TRUE)
+		return AIR_BLOCKED
+	return FALSE
+
 /obj/structure/plasticflaps/proc/become_airtight()
-	var/turf/T = get_turf(loc)
-	if(T)
-		T.blocks_air = 1
+	airtight = TRUE
+	var/turf/simulated/floor/T = get_turf(loc)
+	if (istype(T))
+		update_nearby_tiles()
 
 /obj/structure/plasticflaps/proc/clear_airtight()
-	var/turf/T = get_turf(loc)
-	if(T)
-		if(istype(T, /turf/simulated/floor))
-			T.blocks_air = 0
-
+	airtight = FALSE
+	var/turf/simulated/floor/T = get_turf(loc)
+	if (istype(T))
+		update_nearby_tiles()
 
 /obj/structure/plasticflaps/airtight // airtight defaults to on
-	airtight = 1
+	airtight = TRUE
+
+/obj/structure/plasticflaps/airtight/Initialize()
+	. = ..()
+	update_nearby_tiles()
