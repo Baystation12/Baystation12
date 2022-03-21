@@ -48,12 +48,12 @@
 	var/list/options = list()
 	options["HUD"] = /obj/item/clothing/glasses/hud/security
 	options["HUD, corrective"] = /obj/item/clothing/glasses/hud/security/prescription
-	options["Sunglasses"] = /obj/item/clothing/glasses/sunglasses/sechud
-	options["Sunglasses, corrective"] = /obj/item/clothing/glasses/sunglasses/sechud/prescription
-	options["Aviators"] = /obj/item/clothing/glasses/sunglasses/sechud/toggle
-	options["Aviators, corrective"] = /obj/item/clothing/glasses/sunglasses/sechud/toggle/prescription
-	options["Goggles"] = /obj/item/clothing/glasses/sunglasses/sechud/goggles
-	options["Goggles, corrective"] = /obj/item/clothing/glasses/sunglasses/sechud/goggles/prescription
+	options["Sunglasses"] = /obj/item/clothing/glasses/hud/security/prot/sunglasses
+	options["Sunglasses, corrective"] = /obj/item/clothing/glasses/hud/security/prot/sunglasses/prescription
+	options["Aviators"] = /obj/item/clothing/glasses/hud/security/prot/aviators
+	options["Aviators, corrective"] = /obj/item/clothing/glasses/hud/security/prot/aviators/prescription
+	options["Goggles"] = /obj/item/clothing/glasses/hud/security/prot
+	options["Goggles, corrective"] = /obj/item/clothing/glasses/hud/security/prot/prescription
 	options["Eyepatch"] = /obj/item/clothing/glasses/eyepatch/hud/security
 	gear_tweaks += new /datum/gear_tweak/path (options)
 

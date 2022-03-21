@@ -800,9 +800,9 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/clothing/glasses/hud/health/prescription = 3,
 				/obj/item/clothing/glasses/hud/security = 4,
 				/obj/item/clothing/glasses/hud/security/prescription = 3,
-				/obj/item/clothing/glasses/sunglasses/sechud = 2,
-				/obj/item/clothing/glasses/sunglasses/sechud/toggle = 3,
-				/obj/item/clothing/glasses/sunglasses/sechud/goggles = 1,
+				/obj/item/clothing/glasses/hud/security/prot = 2,
+				/obj/item/clothing/glasses/hud/security/prot/sunglasses = 3,
+				/obj/item/clothing/glasses/hud/security/prot/aviators = 1,
 				/obj/item/clothing/glasses/tacgoggles = 1)
 
 /obj/random/hat
