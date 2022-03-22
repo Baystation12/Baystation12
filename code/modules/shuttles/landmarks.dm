@@ -124,10 +124,10 @@
 
 
 /obj/item/device/spaceflare
-	name = "bluespace flare"
-	desc = "Burst transmitter used to broadcast all needed information for shuttle navigation systems. Has a flare attached for marking the spot where you probably shouldn't be standing."
+	name = "shuttle beacon"
+	desc = "Burst transmitter used to broadcast all needed information for shuttle navigation systems. Has a bright blue light attached for marking the spot where you probably shouldn't be standing."
 	icon = 'icons/obj/space_flare.dmi'
-	icon_state = "bluflare"
+	icon_state = "packaged"
 	light_color = "#3728ff"
 	/// Boolean. Whether or not the spaceflare has been activated.
 	var/active = FALSE
@@ -138,9 +138,9 @@
 /obj/item/device/spaceflare/attack_self(mob/user)
 	if (activate(user))
 		user.visible_message(
-			SPAN_NOTICE("\The [user] pulls the cord, activating \the [src]."),
-			SPAN_NOTICE("You pull the cord, activating \the [src]."),
-			SPAN_ITALIC("You hear the sound of something being struck and ignited.")
+			SPAN_NOTICE("\The [user] plants \the [src] and activates it."),
+			SPAN_NOTICE("You plant \the [src] and activate it."),
+			SPAN_ITALIC("You hear a soft hum.")
 		)
 
 
@@ -172,11 +172,20 @@
 		log_debug(append_admin_tools("\A [src] attempted to activate but was not on a valid turf.", user, get_turf(src)))
 		return FALSE
 
+	if (user)
+		user.visible_message(
+			SPAN_ITALIC("\The [user] starts setting up \a [src]."),
+			SPAN_ITALIC("You start setting up \a [src]."),
+			SPAN_ITALIC("You hear the clicking of metal and plastic.")
+		)
+		playsound(src, 'sound/items/shuttle_beacon_prepare.ogg', 100)
+		if (!do_after(user, 3 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT))
+			return FALSE
+		playsound(src, 'sound/items/shuttle_beacon_complete.ogg', 100)
 	active = TRUE
 	anchored = TRUE
-	log_and_message_admins("activated a bluespace flare in [get_area(src)].", user, get_turf(src))
+	log_and_message_admins("activated a shuttle beacon in [get_area(src)].", user, get_turf(src))
 	landmark = new(T, src)
-	T.hotspot_expose(1500, 5)
 	update_icon()
 	return TRUE
 
@@ -195,16 +204,23 @@
 	QDEL_NULL(landmark)
 	update_icon()
 	if (!silent)
-		visible_message(SPAN_WARNING("\The [src] stops burning and deactivates."))
+		visible_message(SPAN_WARNING("\The [src] deactivates, going dark."))
 	return TRUE
 
 
 /obj/item/device/spaceflare/on_update_icon()
 	if (active)
-		icon_state = "[initial(icon_state)]_on"
-		set_light(0.3, 0.1, 6, 2, "85d1ff")
+		icon_state = "deployed"
+		var/image/image = image(icon, "active")
+		image.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		image.layer = ABOVE_LIGHTING_LAYER
+		overlays += image
+		pixel_x = rand(-6, 6)
+		pixel_y = rand(-6, 6)
+		set_light(0.7, 0.1, 7, 2, "#85d1ff")
 	else
 		icon_state = initial(icon_state)
+		overlays.Cut()
 		set_light(0)
 
 
