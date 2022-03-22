@@ -128,6 +128,29 @@
 		/obj/item/storage/med_pouch/radiation,
 		)
 
+/obj/item/storage/firstaid/sleekstab
+	name = "Slimline stabilisation kit"
+	desc = "A sleek and expensive looking medical kit."
+	icon_state = "stabfirstaid"
+	item_state = "firstaid-advanced"
+	w_class = 2
+
+	startswith = list(
+		/obj/item/stack/medical/advanced/bruise_pack,
+		/obj/item/stack/medical/advanced/ointment,
+		/obj/item/reagent_containers/hypospray/autoinjector/coagulant, 
+		/obj/item/reagent_containers/hypospray/autoinjector/pain,
+		/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/adrenaline,
+		/obj/item/reagent_containers/pill/inaprovaline,
+		/obj/item/reagent_containers/pill/dylovene,
+		/obj/item/reagent_containers/pill/dylovene,
+		/obj/item/reagent_containers/pill/hyronalin,
+		/obj/item/reagent_containers/pill/sugariron,
+		/obj/item/reagent_containers/pill/sugariron,
+		/obj/item/reagent_containers/pill/dexalin
+		)
+	
+
 /obj/item/storage/firstaid/surgery
 	name = "surgery kit"
 	desc = "Contains tools for surgery. Has precise foam fitting for safe transport and automatically sterilizes the content between uses."

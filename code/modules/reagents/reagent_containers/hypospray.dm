@@ -223,6 +223,18 @@
 	band_color = COLOR_DARK_GRAY
 	starts_with = list(/datum/reagent/mindbreaker = 5)
 
+/obj/item/reagent_containers/hypospray/autoinjector/combatstim
+	name ="autoinjector (combat Stimulants)"
+	band_color = COLOR_RED
+	volume = 15
+	amount_per_transfer_from_this = 15
+	starts_with = list(/datum/reagent/inaprovaline = 10, /datum/reagent/hyperzine = 3, /datum/reagent/synaptizine = 1)
+
+/obj/item/reagent_containers/hypospray/autoinjector/coagulant
+	name ="autoinjector (coagulant)"
+	band_color = COLOR_RED
+	starts_with = list(/datum/reagent/coagulant = 1, /datum/reagent/nanoblood = 4)
+
 /obj/item/reagent_containers/hypospray/autoinjector/empty
 	name = "autoinjector"
 	band_color = COLOR_WHITE
