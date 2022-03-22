@@ -1,0 +1,8 @@
+author: Jux
+delete-after: true
+changes:
+  - rscadd: All HUD goggles + tactical goggles have new OBJ sprites.
+  - rscadd: Sechud goggles have a slightly different onmob sprite.
+  - tweak: All sec-huds that provide eye protection are now a simple on/off, where
+      some were formerly protection/hud.
+  - tweak: Material goggles are now orange to differentiate them from medical goggles.
