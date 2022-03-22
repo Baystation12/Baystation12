@@ -23,14 +23,14 @@ exactly() { # exactly N name search [mode] [filter]
 
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
 exactly 0 "escapes" '\\\\(red|blue|green|black|b|i[^mc])'
-exactly 4 "Del()s" '\WDel\('
+exactly 5 "Del()s" '\WDel\('
 exactly 2 "/atom text paths" '"/atom'
 exactly 2 "/area text paths" '"/area'
 exactly 2 "/datum text paths" '"/datum'
 exactly 2 "/mob text paths" '"/mob'
 exactly 10 "/obj text paths" '"/obj'
 exactly 8 "/turf text paths" '"/turf'
-exactly 117 "to_world uses" '\sto_world\('
+exactly 118 "to_world uses" '\sto_world\('
 exactly 53 "to_world_log uses" '\sto_world_log\('
 exactly 0 "world<< uses" 'world<<|world[[:space:]]<<'
 exactly 0 "world.log<< uses" 'world.log<<|world.log[[:space:]]<<'

@@ -1203,6 +1203,8 @@
 #include "code\game\verbs\who.dm"
 #include "code\js\byjax.dm"
 #include "code\js\menus.dm"
+#include "code\modules\TGS\tgs.dm"
+#include "code\modules\TGS\tgs\includes.dm"
 #include "code\modules\acting\acting_items.dm"
 #include "code\modules\admin\admin.dm"
 #include "code\modules\admin\admin_attack_log.dm"
@@ -3200,8 +3202,8 @@
 #include "code\unit_tests\zas_tests.dm"
 #include "code\unit_tests\~helpers.dm"
 #include "customs\code\hacso.dm"
-#include "customs\code\zakatneba.dm"
 #include "customs\code\rassvetsolnca.dm"
+#include "customs\code\zakatneba.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\_maps.dm"
@@ -3219,5 +3221,6 @@
 #include "proxima\code\music_player\_music_tape.dm"
 #include "proxima\code\music_player\subtypes_player.dm"
 #include "proxima\code\music_player\subtypes_tape.dm"
+
 #include "~code\global_init.dm"
 // END_INCLUDE
