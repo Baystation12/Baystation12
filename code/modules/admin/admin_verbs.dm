@@ -123,6 +123,7 @@ var/list/admin_verbs_fun = list(
 	/datum/admins/proc/call_supply_drop,
 	/datum/admins/proc/call_drop_pod,
 	/client/proc/create_dungeon,
+	/client/proc/cmd_admin_simulate_distant_explosion,
 	/datum/admins/proc/ai_hologram_set
 	)
 
@@ -250,6 +251,7 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/cmd_admin_add_random_ai_law,
 	/client/proc/cmd_admin_create_centcom_report,
 	/client/proc/toggle_random_events,
+	/client/proc/cmd_admin_simulate_distant_explosion,
 	/client/proc/cmd_admin_add_random_ai_law,
 	/datum/admins/proc/startnow,
 	/datum/admins/proc/restart,
