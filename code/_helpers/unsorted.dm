@@ -1118,8 +1118,6 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 /proc/crash_at(msg, file, line)
 	CRASH("%% [file],[line] %% [msg]")
 
-/proc/pass()
-	return
 
 //clicking to move pulled objects onto assignee's turf/loc
 /proc/do_pull_click(mob/user, atom/A)
