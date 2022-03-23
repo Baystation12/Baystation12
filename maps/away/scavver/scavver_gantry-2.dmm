@@ -3019,7 +3019,7 @@
 /obj/item/material/kitchen/utensil/spork,
 /obj/item/material/kitchen/utensil/spork,
 /obj/item/reagent_containers/food/condiment/enzyme,
-/obj/item/storage/box/donkpockets,
+/obj/random/donkpocket_box,
 /obj/item/material/kitchen/utensil/spork,
 /obj/random/loot,
 /mob/living/simple_animal/passive/mouse/brown/Tom,

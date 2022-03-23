@@ -16,6 +16,31 @@
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "kitchen supplies crate"
 
+
+/decl/hierarchy/supply_pack/galley/donkpocket
+	name = "General - Donk-Pocket Turnovers"
+	contains = list(
+		/obj/item/storage/box/donkpocket_protein = 2,
+		/obj/item/storage/box/donkpocket_vegetable = 2,
+		/obj/item/storage/box/donkpocket_fruit = 1,
+		/obj/item/storage/box/donkpocket_dessert = 1
+	)
+	cost = 10
+	containertype = /obj/item/storage/backpack/dufflebag
+	containername = "donk-pocket dufflebag"
+
+
+/decl/hierarchy/supply_pack/galley/donkpocket_premium
+	name = "General - Premium Donk-Pocket Turnovers"
+	contains = list(
+		/obj/item/storage/box/donkpocket_premium = 3
+	)
+	cost = 20
+	hidden = TRUE
+	containertype = /obj/item/storage/backpack/dufflebag
+	containername = "donk-pocket dufflebag"
+
+
 /decl/hierarchy/supply_pack/galley/beef
 	name = "Perishables - Beef"
 	contains = list(/obj/item/reagent_containers/food/snacks/meat/beef = 6)

@@ -203,35 +203,7 @@
 	result = /obj/item/reagent_containers/food/snacks/pancakes
 
 
-/datum/recipe/donkpocket
-	items = list(
-		/obj/item/reagent_containers/food/snacks/doughslice,
-		/obj/item/reagent_containers/food/snacks/meatball
-	)
-	result = /obj/item/reagent_containers/food/snacks/donkpocket
-
-
-/datum/recipe/donkpocket/make_food(obj/container)
-	var/obj/item/reagent_containers/food/snacks/donkpocket/donk = ..(container)
-	donk.heat()
-	return donk
-
-
-/datum/recipe/donkpocket2
-	items = list(
-		/obj/item/reagent_containers/food/snacks/doughslice,
-		/obj/item/reagent_containers/food/snacks/rawmeatball
-	)
-	result = /obj/item/reagent_containers/food/snacks/donkpocket
-
-
-/datum/recipe/donkpocket2/make_food(obj/container)
-	var/obj/item/reagent_containers/food/snacks/donkpocket/donk = ..(container)
-	donk.heat()
-	return donk
-
-
-/datum/recipe/donkpocket/warm
+/datum/recipe/hot_donkpocket
 	reagents = list()
 	items = list(
 		/obj/item/reagent_containers/food/snacks/donkpocket
@@ -239,10 +211,9 @@
 	result = /obj/item/reagent_containers/food/snacks/donkpocket
 
 
-/datum/recipe/donkpocket/warm/make_food(obj/container)
+/datum/recipe/hot_donkpocket/warm/make_food(obj/container)
 	var/obj/item/reagent_containers/food/snacks/donkpocket/donk = locate() in container
-	if (donk && !donk.warm)
-		donk.heat()
+	donk?.SetHot()
 	return donk
 
 

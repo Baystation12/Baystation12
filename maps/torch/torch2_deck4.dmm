@@ -15981,7 +15981,7 @@
 /area/crew_quarters/lounge)
 "Za" = (
 /obj/structure/table/rack,
-/obj/item/storage/box/donkpockets,
+/obj/random/donkpocket_box,
 /obj/machinery/light/small{
 	dir = 4
 	},

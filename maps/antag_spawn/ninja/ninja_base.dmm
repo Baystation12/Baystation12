@@ -665,7 +665,7 @@
 /area/map_template/ninja_dojo/dojo)
 "by" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/sinpockets,
+/obj/item/storage/box/donkpocket_premium,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"

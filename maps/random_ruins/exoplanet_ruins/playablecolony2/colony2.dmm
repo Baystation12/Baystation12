@@ -165,7 +165,7 @@
 "cX" = (
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/box/donkpockets,
+/obj/random/donkpocket_box,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/commons)
 "de" = (
