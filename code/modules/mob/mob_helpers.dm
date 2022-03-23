@@ -168,20 +168,18 @@ var/list/global/organ_rel_size = list(
 		for(var/obj/item/grab/G in target.grabbed_by)
 			if(G.stop_move())
 				return zone
-
+				
 	var/miss_chance = 10
-	var/scatter_chance
 	if (zone in base_miss_chance)
 		miss_chance = base_miss_chance[zone]
 	miss_chance = max(miss_chance + miss_chance_mod, 0)
-	scatter_chance = min(95, miss_chance + 60)
 	if(prob(miss_chance))
-		if(ranged_attack && prob(scatter_chance))
-			return null
-		else if(prob(70))
-			return null
-		return (ran_zone())
-	return zone
+		return null
+	else 
+		if (prob(miss_chance))
+			return (ran_zone())
+		else
+			return zone
 
 //Replaces some of the characters with *, used in whispers. pr = probability of no star.
 //Will try to preserve HTML formatting. re_encode controls whether the returned text is HTML encoded outside tags.
