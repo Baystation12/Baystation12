@@ -168,9 +168,6 @@
 	fire_sound = 'sound/weapons/marauder.ogg'
 	damage = 50
 	armor_penetration = 10
-	stun = 3
-	weaken = 3
-	stutter = 3
 
 	muzzle_type = /obj/effect/projectile/laser/xray/muzzle
 	tracer_type = /obj/effect/projectile/laser/xray/tracer
