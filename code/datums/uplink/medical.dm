@@ -4,11 +4,11 @@
 /datum/uplink_item/item/medical
 	category = /datum/uplink_category/medical
 
-/datum/uplink_item/item/medical/sinpockets
-	name = "Box of Sin-Pockets"
-	desc = "A box of filled dough pockets. Great for a quick meal when you're hiding from Security. Instructions included on the box."
+/datum/uplink_item/item/medical/healthyfood
+	name = "Box of Premium Donk-Pockets"
+	desc = "A box of healthy fruit turnovers. Great for a quick meal when you're hiding from Security. Instructions included on the box."
 	item_cost = 8
-	path = /obj/item/storage/box/sinpockets
+	path = /obj/item/reagent_containers/food/snacks/donkpocket/premium
 
 /datum/uplink_item/item/medical/stabilisation
 	name = "Stabilisation First Aid Kit"

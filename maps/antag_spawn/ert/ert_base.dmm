@@ -678,17 +678,14 @@
 "by" = (
 /obj/structure/table/reinforced,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/storage/box/donkpockets{
-	pixel_x = 3;
-	pixel_y = 3
-	},
+/obj/random/donkpocket_box,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
 /area/map_template/rescue_base/base)
 "bz" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/storage/box/sinpockets,
+/obj/item/storage/box/donkpocket_premium,
 /obj/structure/closet/secure_closet/freezer/kitchen,
 /obj/item/reagent_containers/food/condiment/enzyme,
 /turf/unsimulated/floor{
@@ -3027,8 +3024,8 @@
 /area/map_template/rescue_base/start)
 "fK" = (
 /obj/structure/closet,
-/obj/item/storage/box/sinpockets,
-/obj/item/storage/box/sinpockets,
+/obj/item/storage/box/donkpocket_premium,
+/obj/item/storage/box/donkpocket_premium,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fL" = (

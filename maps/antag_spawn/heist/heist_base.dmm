@@ -1601,10 +1601,7 @@
 "dK" = (
 /obj/structure/closet/crate/freezer/rations,
 /obj/item/clothing/mask/gas/cyborg,
-/obj/item/storage/box/donkpockets{
-	pixel_x = 3;
-	pixel_y = 3
-	},
+/obj/random/donkpocket_box,
 /obj/item/reagent_containers/food/snacks/tastybread,
 /obj/item/reagent_containers/food/snacks/tastybread,
 /turf/unsimulated/floor{

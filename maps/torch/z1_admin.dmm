@@ -2189,7 +2189,7 @@
 /area/shuttle/administration/centcom)
 "ate" = (
 /obj/structure/table/reinforced,
-/obj/item/storage/box/sinpockets,
+/obj/item/storage/box/donkpocket_premium,
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "atf" = (
@@ -2506,10 +2506,7 @@
 /area/shuttle/administration/centcom)
 "auj" = (
 /obj/structure/table/reinforced,
-/obj/item/storage/box/donkpockets{
-	pixel_x = 3;
-	pixel_y = 3
-	},
+/obj/random/donkpocket_box,
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "auk" = (
@@ -2896,10 +2893,7 @@
 /area/centcom/living)
 "avz" = (
 /obj/structure/table/standard,
-/obj/item/storage/box/donkpockets{
-	pixel_x = 3;
-	pixel_y = 3
-	},
+/obj/random/donkpocket_box,
 /obj/item/material/kitchen/rollingpin,
 /turf/unsimulated/floor{
 	dir = 2;
@@ -7160,22 +7154,10 @@
 /turf/unsimulated/wall,
 /area/acting/backstage)
 "aKA" = (
-/obj/item/storage/box/donkpockets{
-	pixel_x = 3;
-	pixel_y = 3
-	},
-/obj/item/storage/box/donkpockets{
-	pixel_x = 3;
-	pixel_y = 3
-	},
-/obj/item/storage/box/donkpockets{
-	pixel_x = 3;
-	pixel_y = 3
-	},
-/obj/item/storage/box/donkpockets{
-	pixel_x = 3;
-	pixel_y = 3
-	},
+/obj/random/donkpocket_box,
+/obj/random/donkpocket_box,
+/obj/random/donkpocket_box,
+/obj/random/donkpocket_box,
 /obj/structure/table/standard,
 /turf/unsimulated/floor{
 	icon_state = "white"
@@ -8523,7 +8505,7 @@
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aOy" = (
-/obj/item/storage/box/donkpockets,
+/obj/random/donkpocket_box,
 /obj/structure/table/reinforced,
 /obj/structure/window/reinforced{
 	dir = 1

@@ -1,11 +1,8 @@
-//Food items that are eaten normally and don't leave anything behind.
-
-
 /obj/item/reagent_containers/food/snacks
 	name = "snack"
 	desc = "Yummy!"
 	icon = 'icons/obj/food.dmi'
-	icon_state = null
+	center_of_mass = "x=16;y=16"
 	var/bitesize = 1
 	var/bitecount = 0
 	var/slice_path
@@ -15,31 +12,41 @@
 	var/nutriment_amt = 0
 	var/list/nutriment_desc = list("food" = 1)
 	var/list/eat_sound = 'sound/items/eatfood.ogg'
-	center_of_mass = "x=16;y=16"
-	w_class = ITEM_SIZE_SMALL
+	var/obj/item/trash
+
+
+/obj/item/reagent_containers/food/snacks/Destroy()
+	if (trash && !ispath(trash))
+		QDEL_NULL(trash)
+	return ..()
+
 
 /obj/item/reagent_containers/food/snacks/Initialize()
-	.=..()
-	if(nutriment_amt)
-		reagents.add_reagent(/datum/reagent/nutriment,nutriment_amt,nutriment_desc)
+	. = ..()
+	if (nutriment_amt)
+		reagents.add_reagent(/datum/reagent/nutriment, nutriment_amt, nutriment_desc)
 
-	//Placeholder for effect that trigger on eating that aren't tied to reagents.
-/obj/item/reagent_containers/food/snacks/proc/On_Consume(var/mob/M)
-	if(!reagents.total_volume)
-		M.visible_message("<span class='notice'>[M] finishes eating \the [src].</span>","<span class='notice'>You finish eating \the [src].</span>")
-		M.drop_item()
-		M.update_personal_goal(/datum/goal/achievement/specific_object/food, type)
-		if(trash)
-			if(ispath(trash,/obj/item))
-				var/obj/item/TrashItem = new trash(get_turf(M))
-				M.put_in_hands(TrashItem)
-			else if(istype(trash,/obj/item))
-				M.put_in_hands(trash)
-		qdel(src)
-	return
+
+/obj/item/reagent_containers/food/snacks/proc/OnConsume(mob/living/consumer)
+	if (reagents.total_volume)
+		return
+	consumer.visible_message(
+		SPAN_ITALIC("\The [consumer] finishes eating \the [src]."),
+		SPAN_ITALIC("You finish eating \the [src].")
+	)
+	consumer.update_personal_goal(/datum/goal/achievement/specific_object/food, type)
+	consumer.drop_from_inventory(src)
+	if (istype(trash))
+		if (ispath(trash))
+			trash = new trash
+		trash.dropInto(get_turf(consumer))
+		consumer.put_in_hands(trash)
+	qdel(src)
+
 
 /obj/item/reagent_containers/food/snacks/attack_self(mob/user as mob)
 	return
+
 
 /obj/item/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob, def_zone)
 	if(!reagents || !reagents.total_volume)
@@ -105,7 +112,7 @@
 				else
 					reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 				bitecount++
-				On_Consume(M)
+				OnConsume(M)
 			return 1
 
 	return 0
@@ -216,7 +223,7 @@
 		if(!src && !user.client)
 			user.custom_emote(1,"[pick("burps", "cries for more", "burps twice", "looks at the area where the food was")]")
 			qdel(src)
-	On_Consume(user)
+	OnConsume(user)
 
 //////////////////////////////////////////////////
 ////////////////////////////////////////////Snacks
@@ -525,60 +532,9 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 8)
 
-/obj/item/reagent_containers/food/snacks/donkpocket/sinpocket
-	name = "sin-pocket"
-	desc = "The food of choice for the veteran. Do <b>NOT</b> overconsume."
-	filling_color = "#6d6d00"
-	heated_reagents = list(/datum/reagent/drink/doctor_delight = 5, /datum/reagent/hyperzine = 0.75, /datum/reagent/synaptizine = 0.25)
-	var/has_been_heated = 0 // Unlike the warm var, this checks if the one-time self-heating operation has been used.
 
-/obj/item/reagent_containers/food/snacks/donkpocket/sinpocket/attack_self(mob/user)
-	if(has_been_heated)
-		to_chat(user, "<span class='notice'>The heating chemicals have already been spent.</span>")
-		return
-	has_been_heated = 1
-	user.visible_message("<span class='notice'>[user] crushes \the [src] package.</span>", "You crush \the [src] package and feel a comfortable heat build up.")
-	addtimer(CALLBACK(src, .proc/heat, weakref(user)), 20 SECONDS)
 
-/obj/item/reagent_containers/food/snacks/donkpocket/sinpocket/heat(weakref/message_to)
-	..()
-	if(message_to)
-		var/mob/user = message_to.resolve()
-		if(user)
-			to_chat(user, "You think \the [src] is ready to eat about now.")
 
-/obj/item/reagent_containers/food/snacks/donkpocket
-	name = "donk-pocket"
-	desc = "The food of choice for the seasoned traitor."
-	icon_state = "donkpocket"
-	filling_color = "#dedeab"
-	center_of_mass = "x=16;y=10"
-	nutriment_desc = list("heartiness" = 1, "dough" = 2)
-	nutriment_amt = 2
-	var/warm = 0
-	var/list/heated_reagents = list(/datum/reagent/tricordrazine = 5)
-
-/obj/item/reagent_containers/food/snacks/donkpocket/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
-
-/obj/item/reagent_containers/food/snacks/donkpocket/proc/heat()
-	if(warm)
-		return
-	warm = 1
-	for(var/reagent in heated_reagents)
-		reagents.add_reagent(reagent, heated_reagents[reagent])
-	bitesize = 6
-	SetName("warm " + name)
-	addtimer(CALLBACK(src, .proc/cool), 7 MINUTES)
-
-/obj/item/reagent_containers/food/snacks/donkpocket/proc/cool()
-	if(!warm)
-		return
-	warm = 0
-	for(var/reagent in heated_reagents)
-		reagents.del_reagent(reagent)
-	SetName(initial(name))
 
 /obj/item/reagent_containers/food/snacks/brainburger
 	name = "brainburger"
@@ -1407,12 +1363,25 @@
 	var/trash = new /obj/item/trash/cubewrapper(get_turf(user))
 	user.put_in_hands(trash)
 
-/obj/item/reagent_containers/food/snacks/monkeycube/On_Consume(var/mob/M)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		H.visible_message("<span class='warning'>A screeching creature bursts out of [M]'s chest!</span>")
-		var/obj/item/organ/external/organ = H.get_organ(BP_CHEST)
-		organ.take_external_damage(50, 0, 0, "Animal escaping the ribcage")
+/obj/item/reagent_containers/food/snacks/monkeycube/OnConsume(mob/living/consumer)
+	set waitfor = FALSE
+	if (ishuman(consumer))
+		var/mob/living/carbon/human/human = consumer
+		to_chat(human, FONT_LARGE(SPAN_DANGER("Something is very wrong ...")))
+		var/obj/item/organ/external/organ = human.get_organ(BP_CHEST)
+		sleep(3 SECONDS)
+		organ.fracture()
+		sleep(3 SECONDS)
+		human.visible_message(
+			SPAN_DANGER("A screeching creature bursts out of \the [human]'s chest!"),
+			FONT_HUGE(SPAN_DANGER("Something claws its way out through your [organ]!"))
+		)
+		organ.take_external_damage(50, 0, EMPTY_BITFIELD, "Live animal escaping the body")
+		organ.damage_internal_organs(50, 0, EMPTY_BITFIELD)
+		human.AdjustWeakened(5)
+		human.AdjustStunned(5)
+	else
+		consumer.kill_health()
 	Expand()
 
 /obj/item/reagent_containers/food/snacks/monkeycube/on_reagent_change()

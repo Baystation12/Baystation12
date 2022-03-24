@@ -286,18 +286,6 @@
 	desc = "It has pictures of paper cups on the front."
 	startswith = list(/obj/item/reagent_containers/food/drinks/sillycup = 7)
 
-/obj/item/storage/box/donkpockets
-	name = "box of donk-pockets"
-	desc = "<B>Instructions:</B> <I>Heat in microwave. Product will cool if not eaten within seven minutes.</I>"
-	icon_state = "donk_kit"
-	startswith = list(/obj/item/reagent_containers/food/snacks/donkpocket = 6)
-
-/obj/item/storage/box/sinpockets
-	name = "box of sin-pockets"
-	desc = "<B>Instructions:</B> <I>Crush bottom of package to initiate chemical heating. Wait for 20 seconds before consumption. Product will cool if not eaten within seven minutes.</I>"
-	icon_state = "donk_kit"
-	startswith = list(/obj/item/reagent_containers/food/snacks/donkpocket/sinpocket = 6)
-
 //cubed animals
 
 /obj/item/storage/box/monkeycubes

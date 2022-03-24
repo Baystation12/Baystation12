@@ -54,7 +54,10 @@
 	if(istype(holding_item, /obj/item/reagent_containers/food))
 		var/obj/item/reagent_containers/food/food = holding_item
 		holding_item = null
-		if(food.trash) holding_item = new food.trash(src)
+		if (istype(holding_item, /obj/item/reagent_containers/food/snacks))
+			var/obj/item/reagent_containers/food/snacks/snack = food
+			if (snack.trash)
+				holding_item = new snack.trash(src)
 		qdel(food)
 
 	if(!QDELETED(holding_item))

@@ -29180,12 +29180,9 @@
 /area/maintenance/firstdeck/centralport)
 "tTA" = (
 /obj/structure/table/standard,
-/obj/item/storage/box/donkpockets,
+/obj/random/donkpocket_box,
 /obj/item/storage/box/cups,
-/obj/item/storage/box/donkpockets{
-	pixel_x = -3;
-	pixel_y = -3
-	},
+/obj/random/donkpocket_box,
 /turf/simulated/floor/tiled/monotile,
 /area/security/brig)
 "tTY" = (

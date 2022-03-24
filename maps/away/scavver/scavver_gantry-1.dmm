@@ -1169,7 +1169,7 @@
 /area/scavver/calypso)
 "tL" = (
 /obj/structure/lattice,
-/obj/item/reagent_containers/food/snacks/donkpocket/sinpocket,
+/obj/item/reagent_containers/food/snacks/donkpocket/premium,
 /turf/space,
 /area/scavver/calypso)
 "tO" = (
@@ -2347,7 +2347,7 @@
 /area/scavver/yachtdown)
 "PT" = (
 /obj/structure/lattice,
-/obj/item/reagent_containers/food/snacks/donkpocket,
+/obj/random/donkpocket,
 /turf/space,
 /area/scavver/yachtdown)
 "PY" = (

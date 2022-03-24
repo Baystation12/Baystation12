@@ -14,7 +14,6 @@
 	filling_states = "20;40;60;80;100"
 	volume = 30
 	matter = list(MATERIAL_GLASS = 65)
-	trash = /obj/item/material/shard
 
 	var/list/extras = list() // List of extras. Two extras maximum
 

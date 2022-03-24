@@ -2165,7 +2165,7 @@
 	dir = 8;
 	icon_state = "bulb1"
 	},
-/obj/item/storage/box/donkpockets,
+/obj/random/donkpocket_box,
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/item/material/kitchen/rollingpin,
 /obj/item/reagent_containers/food/condiment/small/saltshaker{
