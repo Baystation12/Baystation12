@@ -1,6 +1,0 @@
-author: ''
-delete-after: true
-changes:
-  - tweak: Allows the specialised arm/legguards to be removed and attached at will.
-  - tweak: Removes slowdown from legguards, add slowdown to specialised plate carriers
-      only.

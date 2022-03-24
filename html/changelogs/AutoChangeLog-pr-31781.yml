@@ -1,5 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - admin: Added Simulate Distant Explosion to the Fun tab. Plays the distant explosion
-      sound for players in the admin's z group and optionally knocks them over.

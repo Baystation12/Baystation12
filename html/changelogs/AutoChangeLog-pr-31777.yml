@@ -1,4 +1,0 @@
-author: Kell-E
-delete-after: true
-changes:
-  - bugfix: Clusterbangs now properly spawn their sub-grenades
