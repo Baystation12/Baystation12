@@ -1,0 +1,5 @@
+author: Kell-E
+delete-after: true
+changes:
+  - balance: Inaccurate shots are more likely to scatter and hit random locations
+      upon their victim rather than their intended target.
