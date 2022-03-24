@@ -1,0 +1,7 @@
+author: Kell-E
+delete-after: true
+changes:
+  - balance: Removes the marksman energy rifles ability to instantly knockdown it's
+      victims
+  - balance: Increases the number of shots the marksman energy rifle has from 4 to
+      8
