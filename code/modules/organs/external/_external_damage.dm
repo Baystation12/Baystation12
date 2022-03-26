@@ -4,7 +4,7 @@
 
 /obj/item/organ/external/proc/is_damageable(var/additional_damage = 0)
 	//Continued damage to vital organs can kill you, and robot organs don't count towards total damage so no need to cap them.
-	return (BP_IS_ROBOTIC(src) || brute_dam + burn_dam + additional_damage < max_damage * 4)
+	return (BP_IS_ROBOTIC(src) || brute_dam + burn_dam + additional_damage < get_max_health() * 4)
 
 obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	take_external_damage(amount)
@@ -34,6 +34,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 
 	var/spillover = 0
 	var/pure_brute = brute
+	var/max_damage = get_max_health()
 	if(!is_damageable(brute + burn))
 		spillover =  brute_dam + burn_dam + brute - max_damage
 		if(spillover > 0)
@@ -144,13 +145,13 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	if(laser)
 		organ_damage_threshold *= 2
 
-	if(!(cur_damage + damage_amt >= max_damage) && !(damage_amt >= organ_damage_threshold))
+	if(!(cur_damage + damage_amt >= get_max_health()) && !(damage_amt >= organ_damage_threshold))
 		return FALSE
 
 	var/list/victims = list()
 	var/organ_hit_chance = 0
 	for(var/obj/item/organ/internal/I in internal_organs)
-		if(I.damage < I.max_damage)
+		if (I.is_alive())
 			victims[I] = I.relative_size
 			organ_hit_chance += I.relative_size
 
@@ -261,7 +262,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 		pain = 0
 		return
 	var/last_pain = pain
-	pain = max(0,min(max_damage,pain-amount))
+	pain = clamp(pain - amount, 0, get_max_health())
 	return -(pain-last_pain)
 
 /obj/item/organ/external/proc/add_pain(var/amount)
@@ -273,7 +274,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 		amount -= (owner.chem_effects[CE_PAINKILLER]/3)
 		if(amount <= 0)
 			return
-	pain = max(0,min(max_damage,pain+amount))
+	pain = clamp(pain + amount, 0, get_max_health())
 	if(owner && ((amount > 15 && prob(20)) || (amount > 30 && prob(60))))
 		owner.emote("scream")
 	return pain-last_pain
@@ -284,6 +285,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 		agony_amount += get_pain()
 		if(agony_amount < 5) return
 
+		var/max_damage = get_max_health()
 		if(limb_flags & ORGAN_FLAG_CAN_GRASP)
 			if(prob((agony_amount/max_damage)*100))
 				owner.grasp_damage_disarm(src)
@@ -333,7 +335,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 		B *= 1.5
 	if(BP_IS_CRYSTAL(src))
 		B *= 0.8
-	return B + (0.2 * burn_dam/max_damage) //burns make you take more brute damage
+	return B + (0.2 * burn_dam / get_max_health()) //burns make you take more brute damage
 
 /obj/item/organ/external/proc/get_burn_mod(var/damage_flags)
 	var/obj/item/organ/internal/augment/armor/A = owner && owner.internal_organs_by_name["[BP_CHEST]_aug_armor"]
@@ -370,6 +372,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 			droplimb(0, edge_eligible ? DROPLIMB_EDGE : DROPLIMB_BLUNT)
 		return TRUE
 
+	var/max_damage = get_max_health()
 	if(edge_eligible && brute >= max_damage / DROPLIMB_THRESHOLD_EDGE)
 		if(prob(brute))
 			droplimb(0, DROPLIMB_EDGE)

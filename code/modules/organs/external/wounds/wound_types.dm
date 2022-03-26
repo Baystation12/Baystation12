@@ -270,7 +270,7 @@ datum/wound/puncture/massive
 /datum/wound/lost_limb
 
 /datum/wound/lost_limb/New(var/obj/item/organ/external/lost_limb, var/losstype, var/clean)
-	var/damage_amt = lost_limb.max_damage
+	var/damage_amt = lost_limb.get_max_health()
 	if(clean) damage_amt /= 2
 
 	switch(losstype)

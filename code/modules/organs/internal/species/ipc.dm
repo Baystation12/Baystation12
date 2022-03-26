@@ -14,7 +14,7 @@
 	throw_range = 5
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 4, TECH_BLUESPACE = 2, TECH_DATA = 4)
 	attack_verb = list("attacked", "slapped", "whacked")
-	max_damage = 90
+	health_max = 90
 	min_bruised_damage = 30
 	min_broken_damage = 60
 	relative_size = 60
@@ -62,7 +62,7 @@
 		if (status & ORGAN_DEAD || !brainmob)
 			to_chat(user, SPAN_WARNING("\The [src] is ruined; it will never turn on again."))
 			return
-		if (damage)
+		if (health_damaged())
 			to_chat(user, SPAN_WARNING("\The [src] is damaged and requires repair first."))
 			return
 		if (searching != TIMER_ID_NULL)
@@ -71,7 +71,7 @@
 			return
 		start_search(user)
 	else
-		if ((status & ORGAN_DEAD) || !brainmob || damage || (searching != TIMER_ID_NULL))
+		if ((status & ORGAN_DEAD) || !brainmob || health_damaged() || (searching != TIMER_ID_NULL))
 			to_chat(user, SPAN_WARNING("\The [src] doesn't respond to your pokes and prods."))
 			return
 		start_search(user)
@@ -112,7 +112,7 @@
 			if (sneaky)
 				brainmob.real_name = sneaky
 				brainmob.SetName(brainmob.real_name)
-				UpdateNames() 
+				UpdateNames()
 		else
 			to_chat(brainmob, SPAN_NOTICE("You're safe! Your brain didn't manage to replace you. This time."))
 	else
@@ -143,13 +143,13 @@
 	if (distance > 3)
 		return
 	var/msg = ""
-	if (isghost(user) || user.skill_check(SKILL_DEVICES, SKILL_ADEPT))
-		if ((status & ORGAN_DEAD) || damage)
+	if (isghost(user) || user.skill_check(SKILL_DEVICES, SKILL_ADEPT)) // TODO Move to examine_damage_state()
+		if ((status & ORGAN_DEAD) || health_damaged())
 			if ((status & ORGAN_DEAD))
 				msg += SPAN_ITALIC("It is ruined and lifeless, damaged beyond hope of recovery.")
-			else if (damage > min_broken_damage)
+			else if (is_broken())
 				msg += SPAN_ITALIC("It is seriously damaged and requires repair to work properly.")
-			else if (damage > min_bruised_damage)
+			else if (is_bruised())
 				msg += SPAN_ITALIC("It has taken some damage and is in need of repair.")
 			else
 				msg += SPAN_ITALIC("It has superficial wear and should work normally.")
@@ -160,14 +160,14 @@
 				msg += SPAN_ITALIC("It blinks with activity.")
 				if (brainmob.stat || !brainmob.client)
 					msg += SPAN_ITALIC(" The responsiveness fault indicator is lit.")
-			else if (damage)
+			else if (health_damaged())
 				msg += SPAN_ITALIC("The red integrity fault indicator pulses slowly.")
 			else
 				msg += SPAN_ITALIC("The golden ready indicator [searching != TIMER_ID_NULL ? "flickers quickly as it tries to generate a personality" : "pulses lazily"].")
 	else
-		if ((status & ORGAN_DEAD) || damage > min_broken_damage)
+		if ((status & ORGAN_DEAD) || is_broken())
 			msg += SPAN_ITALIC("It looks wrecked.")
-		else if (damage > min_bruised_damage)
+		else if (is_bruised())
 			msg += SPAN_ITALIC("It looks damaged.")
 		if (!(status & ORGAN_DEAD))
 			if (msg)
@@ -175,7 +175,7 @@
 			if (brainmob && brainmob.key)
 				msg += SPAN_ITALIC("Little lights flicker on its surface.")
 			else
-				if (damage)
+				if (health_damaged())
 					msg += SPAN_ITALIC("A lone red light pulses malevolently on its surface.")
 				else
 					msg += SPAN_ITALIC("A lone golden light [searching != TIMER_ID_NULL ? "flickers quickly" : "pulses lazily"].")
@@ -183,7 +183,7 @@
 		to_chat(user, msg)
 
 /obj/item/organ/internal/posibrain/emp_act(severity)
-	damage += rand(15 - severity * 5, 20 - severity * 5)
+	take_internal_damage(rand(15 - severity * 5, 20 - severity * 5))
 	..()
 
 /obj/item/organ/internal/posibrain/proc/PickName()
@@ -234,7 +234,7 @@
 /obj/item/organ/internal/posibrain/proc/handle_damage_effects()
 	if (!owner || owner.stat)
 		return
-	if (damage > min_bruised_damage)
+	if (is_bruised())
 		if (prob(1) && owner.confused < 1)
 			to_chat(owner, SPAN_WARNING("Your comprehension of spacial positioning goes temporarily awry."))
 			owner.confused += 3
@@ -247,7 +247,7 @@
 		if (prob(1) && owner.slurring < 1)
 			to_chat(owner, SPAN_WARNING("Your ability to form coherent speech struggles to keep up."))
 			owner.slurring += 6
-		if (damage > min_broken_damage)
+		if (is_broken())
 			if (prob(2))
 				if (prob(15) && owner.sleeping < 1)
 					owner.visible_message(SPAN_ITALIC("\The [owner] suddenly halts all activity."))
@@ -302,7 +302,7 @@
 	return 1
 
 /obj/item/organ/internal/posibrain/die()
-	damage = max_damage
+	kill_health()
 	status |= ORGAN_DEAD
 	STOP_PROCESSING(SSobj, src)
 	death_time = world.time
@@ -330,4 +330,3 @@
 
 
 	brainmob.open_subsystem(/datum/nano_module/law_manager, usr)
-	

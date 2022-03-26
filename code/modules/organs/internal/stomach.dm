@@ -103,7 +103,7 @@
 
 	if(owner)
 		var/functioning = is_usable()
-		if(damage >= min_bruised_damage && prob((damage / max_damage) * 100))
+		if (is_bruised() && prob(get_damage_percentage()))
 			functioning = FALSE
 
 		if(functioning)

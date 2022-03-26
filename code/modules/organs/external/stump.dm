@@ -15,7 +15,7 @@
 		arterial_bleed_severity = limb.arterial_bleed_severity
 	..(holder, internal)
 	if(istype(limb))
-		max_damage = limb.max_damage
+		set_max_health(limb.get_max_health(), TRUE)
 		if(BP_IS_ROBOTIC(limb) && (!parent || BP_IS_ROBOTIC(parent)))
 			robotize() //if both limb and the parent are robotic, the stump is robotic too
 		if(BP_IS_CRYSTAL(limb) && (!parent || BP_IS_CRYSTAL(parent)))

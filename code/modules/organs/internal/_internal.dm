@@ -8,9 +8,12 @@
 	var/min_bruised_damage = 10       // Damage before considered bruised
 	var/damage_reduction = 0.5     //modifier for internal organ injury
 
+	/// Integer. Internal counter for Process() to run regeneration checks every 10 calls. Replicates the old system that applied 0.1 points of healing per call, to accomodate rounding in the health system.
+	var/regen_ticker = 0
+
 /obj/item/organ/internal/New(var/mob/living/carbon/holder)
-	if(max_damage)
-		min_bruised_damage = Floor(max_damage / 4)
+	if(health_max)
+		min_bruised_damage = Floor(health_max / 4)
 	..()
 	if(istype(holder))
 		holder.internal_organs |= src
@@ -106,31 +109,33 @@
 
 /obj/item/organ/internal/proc/getToxLoss()
 	if(BP_IS_ROBOTIC(src))
-		return damage * 0.5
-	return damage
+		return get_damage_value() * 0.5
+	return get_damage_value()
 
 /obj/item/organ/internal/proc/bruise()
-	damage = max(damage, min_bruised_damage)
+	if (get_damage_value() >= min_bruised_damage)
+		return
+	set_health(get_max_health() - min_bruised_damage)
 
-/obj/item/organ/internal/proc/is_damaged()
-	return damage > 0
+/obj/item/organ/internal/proc/is_damaged() // TODO Replace this with health_damaged()
+	return health_damaged()
 
 /obj/item/organ/internal/proc/is_bruised()
-	return damage >= min_bruised_damage
+	return get_damage_value() >= min_bruised_damage
 
 /obj/item/organ/internal/proc/set_max_damage(var/ndamage)
-	max_damage = Floor(ndamage)
-	min_broken_damage = Floor(0.75 * max_damage)
-	min_bruised_damage = Floor(0.25 * max_damage)
+	set_max_health(Floor(ndamage))
+	min_broken_damage = Floor(0.75 * get_max_health())
+	min_bruised_damage = Floor(0.25 * get_max_health())
 
 obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 	take_internal_damage(amount, silent)
 
 /obj/item/organ/internal/proc/take_internal_damage(amount, var/silent=0)
 	if(BP_IS_ROBOTIC(src))
-		damage = clamp(damage + (amount * 0.8), 0, max_damage)
+		damage_health(amount * 0.8)
 	else
-		damage = clamp(damage + amount, 0, max_damage)
+		damage_health(amount)
 
 		//only show this if the organ is not robotic
 		if(owner && can_feel_pain() && parent_organ && (amount > 5 || prob(10)))
@@ -139,20 +144,18 @@ obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 				var/degree = ""
 				if(is_bruised())
 					degree = " a lot"
-				if(damage < 5)
+				if (get_damage_value() < 5)
 					degree = " a bit"
 				owner.custom_pain("Something inside your [parent.name] hurts[degree].", amount, affecting = parent)
 
 /obj/item/organ/internal/proc/get_visible_state()
-	if(damage > max_damage)
-		. = "bits and pieces of a destroyed "
-	else if(is_broken())
+	if (is_broken())
 		. = "broken "
-	else if(is_bruised())
+	else if (is_bruised())
 		. = "badly damaged "
-	else if(damage > 5)
+	else if (get_damage_value() > 5)
 		. = "damaged "
-	if(status & ORGAN_DEAD)
+	if (status & ORGAN_DEAD)
 		if(can_recover())
 			. = "decaying [.]"
 		else
@@ -161,26 +164,29 @@ obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 
 /obj/item/organ/internal/Process()
 	..()
-	handle_regeneration()
+	if (regen_ticker++ >= 10)
+		regen_ticker = 0
+		handle_regeneration()
 
 /obj/item/organ/internal/proc/handle_regeneration()
-	if(!damage || BP_IS_ROBOTIC(src) || !owner || owner.chem_effects[CE_TOXIN] || owner.is_asystole())
+	if (!health_damaged() || BP_IS_ROBOTIC(src) || !owner || owner.chem_effects[CE_TOXIN] || owner.is_asystole())
 		return
-	if(damage < 0.1*max_damage)
-		heal_damage(0.1)
+	if (get_damage_value() < 0.1 * get_max_health())
+		heal_damage(1)
 
 /obj/item/organ/internal/proc/surgical_fix(mob/user)
-	if(damage > min_broken_damage)
-		var/scarring = damage/max_damage
+	if (is_broken())
+		var/max_damage = get_max_health()
+		var/scarring = get_damage_percentage() / 100
 		scarring = 1 - 0.3 * scarring ** 2 // Between ~15 and 30 percent loss
 		var/new_max_dam = Floor(scarring * max_damage)
 		if(new_max_dam < max_damage)
 			to_chat(user, "<span class='warning'>Not every part of [src] could be saved, some dead tissue had to be removed, making it more suspectable to damage in the future.</span>")
 			set_max_damage(new_max_dam)
-	heal_damage(damage)
+	revive_health()
 
 /obj/item/organ/internal/proc/get_scarring_level()
-	. = (initial(max_damage) - max_damage)/initial(max_damage)
+	. = (initial(health_max) - get_max_health())/initial(health_max)
 
 /obj/item/organ/internal/get_scan_results()
 	. = ..()

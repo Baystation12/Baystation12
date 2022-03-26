@@ -95,7 +95,7 @@
 /obj/item/organ/external/New(var/mob/living/carbon/holder)
 	..()
 	if(isnull(pain_disability_threshold))
-		pain_disability_threshold = (max_damage * 0.75)
+		pain_disability_threshold = (get_max_health() * 0.75)
 	if(owner)
 		replaced(owner)
 		sync_colour_to_human(owner)
@@ -311,8 +311,8 @@
 		owner.verbs -= /mob/living/carbon/human/proc/undislocate
 
 /obj/item/organ/external/update_health()
-	damage = min(max_damage, (brute_dam + burn_dam))
-	return
+	var/damage = brute_dam + burn_dam
+	set_health(get_max_health() - damage)
 
 
 /obj/item/organ/external/replaced(var/mob/living/carbon/human/target)
@@ -754,11 +754,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 		clamped |= W.clamped
 		number_wounds += W.amount
 
-	damage = brute_dam + burn_dam
+	var/damage = brute_dam + burn_dam
+	set_health(get_max_health() - damage)
 	update_damage_ratios()
 
 /obj/item/organ/external/proc/update_damage_ratios()
-	var/limb_loss_threshold = max_damage
+	var/limb_loss_threshold = get_max_health()
 	brute_ratio = brute_dam / (limb_loss_threshold * 2)
 	burn_ratio = burn_dam / (limb_loss_threshold * 2)
 
@@ -776,6 +777,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	var/tburn = 0
 	var/tbrute = 0
+	var/max_damage = get_max_health()
 
 	if(burn_dam ==0)
 		tburn =0
@@ -868,7 +870,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		var/obj/item/organ/external/damaged_organ = original_parent
 		if(!clean)
 			var/obj/item/organ/external/stump/stump = new (victim, 0, src)
-			stump.add_pain(max_damage)
+			stump.add_pain(get_max_health())
 			damaged_organ = stump
 			if(disintegrate != DROPLIMB_BURN)
 				stump.sever_artery()
@@ -1374,4 +1376,4 @@ obj/item/organ/external/proc/remove_clamps()
 	else if(status & ORGAN_BROKEN)
 		. += max_delay * 3/8
 	else if(BP_IS_ROBOTIC(src))
-		. += max_delay * CLAMP01(damage/max_damage)
+		. += max_delay * CLAMP01(get_damage_percentage() / 100)

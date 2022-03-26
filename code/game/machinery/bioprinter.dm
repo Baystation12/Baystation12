@@ -289,7 +289,7 @@
 /obj/machinery/organ_printer/flesh/proc/get_organ_cost(var/obj/item/organ/O)
 	. = initial(O.print_cost)
 	if(!.)
-		. = round(0.75 * initial(O.max_damage))
+		. = round(0.75 * initial(O.health_max))
 
 /obj/machinery/organ_printer/flesh/proc/check_printable(var/organtype)
 	var/obj/item/organ/O = organtype

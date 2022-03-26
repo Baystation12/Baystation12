@@ -89,7 +89,7 @@
 		var/mob/living/carbon/human/pop = owner
 		if(pop.should_have_organ(BP_BRAIN))
 			var/obj/item/organ/internal/brain/sponge = pop.internal_organs_by_name[BP_BRAIN]
-			if(sponge && sponge.damage >= sponge.max_damage)
+			if (sponge && !sponge.is_alive())
 				var/obj/item/organ/external/affecting = pop.get_organ(sponge.parent_organ)
 				if(affecting && !affecting.is_stump())
 					affecting.droplimb(0, DROPLIMB_BLUNT)

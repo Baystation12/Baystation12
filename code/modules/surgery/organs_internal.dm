@@ -27,7 +27,7 @@
 	var/obj/item/organ/external/affected = ..()
 	if(affected)
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
-			if(I.damage > 0)
+			if (I.health_damaged())
 				if(I.surface_accessible || (affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 					return affected
 
@@ -41,7 +41,7 @@
 	user.visible_message("[user] starts treating damage within \the [target]'s [affected.name] with [tool_name].", \
 	"You start treating damage within \the [target]'s [affected.name] with [tool_name]." )
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
-		if(I && I.damage > 0 && !BP_IS_ROBOTIC(I) && (!(I.status & ORGAN_DEAD) || I.can_recover()) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
+		if (I?.health_damaged() && !BP_IS_ROBOTIC(I) && (!(I.status & ORGAN_DEAD) || I.can_recover()) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 			user.visible_message("[user] starts treating damage to [target]'s [I.name] with [tool_name].", \
 			"You start treating damage to [target]'s [I.name] with [tool_name]." )
 	target.custom_pain("The pain in your [affected.name] is living hell!",100,affecting = affected)
@@ -55,7 +55,7 @@
 		tool_name = "the bandaid"
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
-		if(I && I.damage > 0 && !BP_IS_ROBOTIC(I) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
+		if (I?.health_damaged() && !BP_IS_ROBOTIC(I) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 			if(I.status & ORGAN_DEAD && I.can_recover())
 				user.visible_message("<span class='notice'>\The [user] treats damage to [target]'s [I.name] with [tool_name], though it needs to be recovered further.</span>", \
 				"<span class='notice'>You treat damage to [target]'s [I.name] with [tool_name], though it needs to be recovered further.</span>" )
@@ -78,7 +78,7 @@
 		target.adjustToxLoss(10)
 		affected.take_external_damage(dam_amt, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
-		if(I && I.damage > 0 && !BP_IS_ROBOTIC(I) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
+		if (I?.health_damaged() && !BP_IS_ROBOTIC(I) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 			I.take_internal_damage(dam_amt)
 
 //////////////////////////////////////////////////////////////////
@@ -254,7 +254,7 @@
 			var/o_a =  (O.gender == PLURAL) ? "" : "a "
 			if(O.organ_tag == BP_POSIBRAIN && !target.species.has_organ[BP_POSIBRAIN])
 				to_chat(user, SPAN_WARNING("There's no place in [target] to fit \the [O.organ_tag]."))
-			else if(O.damage > (O.max_damage * 0.75))
+			else if (O.get_damage_value() > (O.get_max_health() * 0.75))
 				to_chat(user, SPAN_WARNING("\The [O.name] [o_is] in no state to be transplanted."))
 			else if(O.w_class > affected.cavity_max_w_class)
 				to_chat(user, SPAN_WARNING("\The [O.name] [o_is] too big for [affected.cavity_name] cavity!"))
@@ -416,7 +416,7 @@
 	if(!organ_to_fix.can_recover())
 		to_chat(user, SPAN_WARNING("The [organ_to_fix.name] is necrotic and can't be saved, it will need to be replaced."))
 		return FALSE
-	if(organ_to_fix.damage >= organ_to_fix.max_damage)
+	if (!organ_to_fix.is_alive())
 		to_chat(user, SPAN_WARNING("The [organ_to_fix.name] needs to be repaired before it is regenerated."))
 		return FALSE
 	return organ_to_fix

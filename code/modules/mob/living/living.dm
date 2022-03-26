@@ -490,8 +490,9 @@ default behaviour is:
 	if(repair_brain && should_have_organ(BP_BRAIN))
 		repair_brain = FALSE
 		var/obj/item/organ/internal/brain/brain = internal_organs_by_name[BP_BRAIN]
-		if(brain.damage > (brain.max_damage/2))
-			brain.damage = (brain.max_damage/2)
+		var/max_damage = brain.get_max_health() / 2
+		if(brain.get_damage_value() > max_damage)
+			brain.set_health(max_damage)
 		if(brain.status & ORGAN_DEAD)
 			brain.status &= ~ORGAN_DEAD
 			START_PROCESSING(SSobj, brain)

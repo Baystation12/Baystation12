@@ -160,6 +160,7 @@ var/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888","#6666
 		hud_damage_image.overlays += temp
 
 	// Calculate the required color index.
+	var/max_damage = get_max_health()
 	var/dam_state = min(1,((brute_dam+burn_dam)/max(1,max_damage)))
 	var/min_dam_state = min(1,(get_pain()/max(1,max_damage)))
 	if(min_dam_state && dam_state < min_dam_state)
@@ -198,10 +199,11 @@ var/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888","#6666
 	return applying
 
 /obj/item/organ/external/proc/bandage_level()
-	if(damage_state_text() == "00") 
+	if(damage_state_text() == "00")
 		return 0
 	if(!is_bandaged())
 		return 0
+	var/max_damage = get_max_health()
 	if(burn_dam + brute_dam == 0)
 		. = 0
 	else if (burn_dam + brute_dam < (max_damage * 0.25 / 2))

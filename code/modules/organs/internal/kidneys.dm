@@ -6,7 +6,7 @@
 	parent_organ = BP_GROIN
 	min_bruised_damage = 25
 	min_broken_damage = 45
-	max_damage = 70
+	health_max = 70
 	relative_size = 10
 
 /obj/item/organ/internal/kidneys/robotize()
@@ -43,5 +43,3 @@
 				owner.adjustToxLoss(0.5)
 			if(status & ORGAN_DEAD)
 				owner.adjustToxLoss(1)
-
-

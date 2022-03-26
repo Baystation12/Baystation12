@@ -60,7 +60,7 @@
 				break
 
 		for(var/obj/item/organ/internal/I in shuffle(H.internal_organs.Copy()))
-			if(BP_IS_ROBOTIC(I) || !BP_IS_CRYSTAL(I) || I.damage <= 0 || I.organ_tag == BP_BRAIN)
+			if (BP_IS_ROBOTIC(I) || !BP_IS_CRYSTAL(I) || !I.health_damaged() || I.organ_tag == BP_BRAIN)
 				continue
 			if(prob(35))
 				to_chat(M, SPAN_NOTICE("You feel a deep, sharp tugging sensation as your [I.name] is mended."))

@@ -9,7 +9,7 @@
 	var/list/failed_organ_types = list()
 	for(var/organ_type in (subtypesof(/obj/item/organ) - skipped_organ_types))
 		var/obj/item/organ/O = organ_type
-		if(!initial(O.max_damage))
+		if(!initial(O.health_max))
 			failed_organ_types += O
 
 	if(failed_organ_types.len)

@@ -56,7 +56,7 @@
 
 /obj/item/organ/internal/brain/set_max_damage(var/ndamage)
 	..()
-	damage_threshold_value = round(max_damage / damage_threshold_count)
+	damage_threshold_value = round(get_max_health() / damage_threshold_count)
 
 /obj/item/organ/internal/brain/Destroy()
 	QDEL_NULL(brainmob)
@@ -119,7 +119,7 @@
 	return ~status & ORGAN_DEAD
 
 /obj/item/organ/internal/brain/proc/get_current_damage_threshold()
-	return round(damage / damage_threshold_value)
+	return round(get_damage_value() / damage_threshold_value)
 
 /obj/item/organ/internal/brain/proc/past_damage_threshold(var/threshold)
 	return (get_current_damage_threshold() > threshold)
@@ -142,6 +142,8 @@
 
 /obj/item/organ/internal/brain/Process()
 	if(owner)
+		var/max_damage = get_max_health()
+		var/damage = get_damage_value()
 		if(damage > max_damage / 2 && healed_threshold)
 			handle_severe_brain_damage()
 
@@ -170,7 +172,7 @@
 
 				if(BLOOD_VOLUME_SAFE to INFINITY)
 					if(can_heal)
-						damage = max(damage-1, 0)
+						restore_health(1)
 				if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 					if(prob(1))
 						to_chat(owner, "<span class='warning'>You feel [pick("dizzy","woozy","faint")]...</span>")
@@ -205,7 +207,8 @@
 /obj/item/organ/internal/brain/take_internal_damage(var/damageTaken, var/silent)
 	set waitfor = 0
 	..()
-	if(damageTaken >= 20 && damage >= (max_damage * 0.5)) //This probably won't be triggered by oxyloss or mercury. Probably.
+	var/damage = get_damage_value()
+	if(damageTaken >= 20 && damage >= (get_max_health() * 0.5)) //This probably won't be triggered by oxyloss or mercury. Probably.
 		var/damage_secondary = damageTaken * 0.20
 		if (owner)
 			owner.flash_eyes()
@@ -234,6 +237,8 @@
 /obj/item/organ/internal/brain/proc/handle_damage_effects()
 	if(owner.stat)
 		return
+	var/max_damage = get_max_health()
+	var/damage = get_damage_value()
 	if(damage > 0 && prob(1))
 		owner.custom_pain("Your head feels numb and painful.",10)
 	if(is_bruised() && prob(1) && owner.eye_blurry <= 0)
@@ -253,11 +258,11 @@
 	var/blood_volume = owner.get_blood_oxygenation()
 	if(blood_volume < BLOOD_VOLUME_BAD)
 		to_chat(user, SPAN_DANGER("Parts of [src] didn't survive the procedure due to lack of air supply!"))
-		set_max_damage(Floor(max_damage - 0.25*damage))
-	heal_damage(damage)
+		set_max_damage(Floor(get_max_health() - 0.25 * get_damage_value()))
+	revive_health()
 
 /obj/item/organ/internal/brain/get_scarring_level()
-	. = (species.total_health - max_damage)/species.total_health
+	. = (species.total_health - get_max_health())/species.total_health
 
 /obj/item/organ/internal/brain/get_mechanical_assisted_descriptor()
 	return "machine-interface [name]"

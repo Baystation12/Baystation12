@@ -7,7 +7,7 @@
 	parent_organ = BP_GROIN
 	min_bruised_damage = 25
 	min_broken_damage = 45
-	max_damage = 70
+	health_max = 70
 	relative_size = 60
 
 /obj/item/organ/internal/liver/robotize()
@@ -28,7 +28,7 @@
 			spawn owner.vomit()
 
 	//Detox can heal small amounts of damage
-	if (damage < max_damage && !owner.chem_effects[CE_TOXIN])
+	if (is_alive() && !owner.chem_effects[CE_TOXIN])
 		heal_damage(0.2 * owner.chem_effects[CE_ANTITOX])
 
 	// Get the effectiveness of the liver.
@@ -51,10 +51,10 @@
 		take_internal_damage(owner.chem_effects[CE_ALCOHOL_TOXIC], prob(90)) // Chance to warn them
 
 	// Heal a bit if needed and we're not busy. This allows recovery from low amounts of toxloss.
-	if(!owner.chem_effects[CE_ALCOHOL] && !owner.chem_effects[CE_TOXIN] && !owner.radiation && damage > 0)
-		if(damage < min_broken_damage)
+	if (!owner.chem_effects[CE_ALCOHOL] && !owner.chem_effects[CE_TOXIN] && !owner.radiation && health_damaged())
+		if (is_broken())
 			heal_damage(0.2)
-		if(damage < min_bruised_damage)
+		if (is_bruised())
 			heal_damage(0.3)
 
 	//Blood regeneration if there is some space

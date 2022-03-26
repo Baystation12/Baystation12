@@ -61,9 +61,9 @@
 			if(BP_IS_ROBOTIC(regen_organ))
 				continue
 			if(istype(regen_organ))
-				if(regen_organ.damage > 0 && !(regen_organ.status & ORGAN_DEAD))
+				if(regen_organ.health_damaged() && regen_organ.is_alive() && !(regen_organ.status & ORGAN_DEAD))
 					if (H.nutrition >= organ_mult)
-						regen_organ.damage = max(regen_organ.damage - organ_mult, 0)
+						regen_organ.restore_health(organ_mult)
 						H.adjust_nutrition(-organ_mult)
 						if(prob(5))
 							to_chat(H, replacetext(regen_message,"ORGAN", regen_organ.name))

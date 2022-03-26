@@ -91,7 +91,7 @@
 				if(!BP_IS_ROBOTIC(O))
 					continue
 				organ_found = 1
-				to_chat(user, "[O.name]: <font color='red'>[(O.status & ORGAN_DEAD) ? "DESTROYED" : O.damage]</font>")
+				to_chat(user, "[O.name]: <font color='red'>[(O.status & ORGAN_DEAD) ? "DESTROYED" : O.get_damage_value()]</font>")
 			if(!organ_found)
 				to_chat(user, "No prosthetics located.")
 	return

@@ -12,7 +12,7 @@
 		if(!brain || H.stat == DEAD || (H.status_flags & FAKEDEATH))
 			brain_result = 0
 		else if(H.stat != DEAD)
-			brain_result = round(max(0,(1 - brain.damage/brain.max_damage)*100))
+			brain_result = max(0, 100 - brain.get_damage_percentage())
 	else
 		brain_result = -1
 	scan["brain_activity"] = brain_result

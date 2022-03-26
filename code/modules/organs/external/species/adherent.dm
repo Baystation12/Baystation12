@@ -7,7 +7,7 @@
 	body_part =               LOWER_TORSO
 	parent_organ =            BP_CHEST
 	dislocated =              -1
-	max_damage =              50
+	health_max =              50
 	min_broken_damage =       25
 	arterial_bleed_severity = 0
 	encased = "ceramic hull"
@@ -20,7 +20,7 @@
 	joint =                   "base"
 	arterial_bleed_severity = 0
 	dislocated =              -1
-	max_damage =              50
+	health_max =              50
 	min_broken_damage =       25
 	encased = "ceramic hull"
 	force_icon = 'icons/mob/human_races/species/adherent/body.dmi'
@@ -34,7 +34,7 @@
 	glowing_eyes =            TRUE
 	arterial_bleed_severity = 0
 	dislocated =              -1
-	max_damage =              50
+	health_max =              50
 	min_broken_damage =       25
 	cavity_max_w_class =      ITEM_SIZE_NORMAL // Apparently their brains change w_class to this.
 	encased = "ceramic hull"
@@ -48,7 +48,7 @@
 	joint =                   "base"
 	arterial_bleed_severity = 0
 	dislocated =              -1
-	max_damage =              20
+	health_max =              20
 	min_broken_damage =       10
 	force_icon = 'icons/mob/human_races/species/adherent/body.dmi'
 	status = ORGAN_ROBOTIC
@@ -60,7 +60,7 @@
 	joint =                   "base"
 	arterial_bleed_severity = 0
 	dislocated =              -1
-	max_damage =              20
+	health_max =              20
 	min_broken_damage =       10
 	force_icon = 'icons/mob/human_races/species/adherent/body.dmi'
 	status = ORGAN_ROBOTIC
@@ -72,7 +72,7 @@
 	joint =                   "base"
 	arterial_bleed_severity = 0
 	dislocated =              -1
-	max_damage =              20
+	health_max =              20
 	min_broken_damage =       10
 	force_icon = 'icons/mob/human_races/species/adherent/body.dmi'
 	status = ORGAN_ROBOTIC
@@ -84,7 +84,7 @@
 	joint =                   "base"
 	arterial_bleed_severity = 0
 	dislocated =              -1
-	max_damage =              20
+	health_max =              20
 	min_broken_damage =       10
 	force_icon = 'icons/mob/human_races/species/adherent/body.dmi'
 	status = ORGAN_ROBOTIC
@@ -99,7 +99,7 @@
 	parent_organ =            BP_CHEST
 	arterial_bleed_severity = 0
 	dislocated =              -1
-	max_damage =              20
+	health_max =              20
 	min_broken_damage =       10
 	force_icon = 'icons/mob/human_races/species/adherent/body.dmi'
 	status = ORGAN_ROBOTIC

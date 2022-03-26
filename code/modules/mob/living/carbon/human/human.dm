@@ -1822,7 +1822,7 @@
 	..()
 	if(should_have_organ(BP_STOMACH))
 		var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
-		if(!stomach || stomach.is_broken() || (stomach.is_bruised() && prob(stomach.damage)))
+		if(!stomach || stomach.is_broken() || (stomach.is_bruised() && prob(stomach.get_damage_value())))
 			if(should_have_organ(BP_HEART))
 				vessel.trans_to_obj(vomit, 5)
 			else

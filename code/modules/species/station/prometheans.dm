@@ -101,8 +101,8 @@ var/datum/species/shapeshifter/promethean/prometheans
 	// Theoretically the only internal organ a slime will have
 	// is the slime core. but we might as well be thorough.
 	for(var/obj/item/organ/I in H.internal_organs)
-		if(I.damage > 0)
-			I.damage = max(I.damage - heal_rate, 0)
+		if (I.health_damaged())
+			I.restore_health(heal_rate)
 			if (prob(5))
 				to_chat(H, SPAN_NOTICE("You feel a soothing sensation within your [I.name]..."))
 			return 1

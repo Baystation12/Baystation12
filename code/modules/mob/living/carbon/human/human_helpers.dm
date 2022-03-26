@@ -53,7 +53,7 @@
 
 	if(istype(glasses, /obj/item/clothing/glasses))
 		process_prescription(glasses)
-	
+
 	var/binoc_check
 	if(client)
 		binoc_check = client.view == world.view
@@ -238,28 +238,28 @@
 	switch(safety)
 		if(FLASH_PROTECTION_MODERATE)
 			to_chat(src, "<span class='warning'>Your eyes sting a little.</span>")
-			E.damage += rand(1, 2)
-			if(E.damage > 12)
+			E.take_internal_damage(rand(1, 2))
+			if (E.get_damage_value() > 12)
 				eye_blurry += rand(3,6)
 		if(FLASH_PROTECTION_MINOR)
 			to_chat(src, "<span class='warning'>Your eyes stings!</span>")
-			E.damage += rand(1, 4)
-			if(E.damage > 10)
+			E.take_internal_damage(rand(1, 4))
+			if (E.get_damage_value() > 10)
 				eye_blurry += rand(3,6)
-				E.damage += rand(1, 4)
+				E.take_internal_damage(rand(1, 4))
 		if(FLASH_PROTECTION_NONE)
 			to_chat(src, "<span class='warning'>Your eyes burn!</span>")
-			E.damage += rand(2, 4)
-			if(E.damage > 10)
-				E.damage += rand(4,10)
+			E.take_internal_damage(rand(2, 4))
+			if (E.get_damage_value() > 10)
+				E.take_internal_damage(rand(4, 10))
 		if(FLASH_PROTECTION_REDUCED)
 			to_chat(src, "<span class='danger'>Your equipment intensifies the welder's glow. Your eyes itch and burn severely.</span>")
 			eye_blurry += rand(12,20)
-			E.damage += rand(12, 16)
+			E.take_internal_damage(rand(12, 16))
 	if(safety<FLASH_PROTECTION_MAJOR)
-		if(E.damage > 10)
+		if (E.get_damage_value() > 10)
 			to_chat(src, "<span class='warning'>Your eyes are really starting to hurt. This can't be good for you!</span>")
-		if (E.damage >= E.min_bruised_damage)
+		if (E.is_bruised())
 			to_chat(src, "<span class='danger'>You go blind!</span>")
 			eye_blind = 5
 			eye_blurry = 5

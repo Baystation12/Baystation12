@@ -25,7 +25,7 @@
 			var/mob/living/carbon/human/H = M
 			var/obj/item/organ/internal/I = H.internal_organs_by_name[target_organ]
 			if(I)
-				var/can_damage = I.max_damage - I.damage
+				var/can_damage = I.get_current_health()
 				if(can_damage > 0)
 					if(dam > can_damage)
 						I.take_internal_damage(can_damage, silent=TRUE)
@@ -1041,9 +1041,9 @@
 		E.status |= ORGAN_MUTATED
 		E.limb_flags &= ~ORGAN_FLAG_CAN_BREAK
 		E.dislocated = -1
-		E.max_damage = 5
+		E.set_max_health(5, TRUE)
 		E.update_icon(1)
-	O.max_damage = 15
+	O.set_max_health(15, TRUE)
 	if(prob(10))
 		to_chat(H, "<span class='danger'>Your slimy [O.name] plops off!</span>")
 		O.droplimb()

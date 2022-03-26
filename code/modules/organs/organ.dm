@@ -21,9 +21,8 @@ var/list/organ_cache = list()
 	var/datum/species/species         // Original species.
 
 	// Damage vars.
-	var/damage = 0                    // Current damage to the organ
+	health_max = 30
 	var/min_broken_damage = 30        // Damage before becoming broken
-	var/max_damage = 30               // Damage cap
 	var/rejecting                     // Is this organ already being rejected?
 
 	var/death_time
@@ -47,7 +46,7 @@ var/list/organ_cache = list()
 	return
 
 /obj/item/organ/proc/is_broken()
-	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN))
+	return (get_damage_value() >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN))
 
 //Second argument may be a dna datum; if null will be set to holder's dna.
 /obj/item/organ/New(var/mob/living/carbon/holder, var/datum/dna/given_dna)
@@ -55,10 +54,10 @@ var/list/organ_cache = list()
 	if(!istype(given_dna))
 		given_dna = null
 
-	if(max_damage)
-		min_broken_damage = Floor(max_damage / 2)
+	if(health_max)
+		min_broken_damage = Floor(health_max / 2)
 	else
-		max_damage = min_broken_damage * 2
+		set_max_health(min_broken_damage * 2, TRUE)
 
 	if(istype(holder))
 		owner = holder
@@ -89,8 +88,8 @@ var/list/organ_cache = list()
 		if (!species)
 			crash_with("Invalid DNA species. Expected a valid species name as string, was: [log_info_line(dna.species)]")
 
-/obj/item/organ/proc/die()
-	damage = max_damage
+/obj/item/organ/proc/die() // TODO Replace with handle_death_change() and kill_health()
+	kill_health()
 	status |= ORGAN_DEAD
 	STOP_PROCESSING(SSobj, src)
 	death_time = world.time
@@ -107,7 +106,7 @@ var/list/organ_cache = list()
 		return
 
 	//check if we've hit max_damage
-	if(damage >= max_damage)
+	if (!is_alive()) // TODO Remove once everything's moved to handle_death_change()
 		die()
 		return
 
@@ -215,7 +214,7 @@ var/list/organ_cache = list()
 	qdel(src)
 
 /obj/item/organ/proc/rejuvenate(var/ignore_prosthetic_prefs)
-	damage = 0
+	revive_health()
 	status = initial(status)
 	if(!ignore_prosthetic_prefs && owner && owner.client && owner.client.prefs && owner.client.prefs.real_name == owner.real_name)
 		var/status = owner.client.prefs.organ_data[organ_tag]
@@ -245,12 +244,13 @@ var/list/organ_cache = list()
 		germ_level -= 2
 	germ_level = max(0, germ_level)
 
-/obj/item/organ/proc/take_general_damage(var/amount, var/silent = FALSE)
+/obj/item/organ/proc/take_general_damage(var/amount, var/silent = FALSE) // TODO Replace this with damage_health()
 	CRASH("Not Implemented")
 
-/obj/item/organ/proc/heal_damage(amount)
+/obj/item/organ/proc/heal_damage(amount) // TODO Replace this with restore_health()
 	if (can_recover())
-		damage = clamp(damage - round(amount, 0.1), 0, max_damage)
+		var/damage = clamp(get_damage_value() - round(amount, 0.1), 0, get_max_health())
+		set_health(get_max_health() - damage)
 
 
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
@@ -326,7 +326,7 @@ var/list/organ_cache = list()
 	return !(status & (ORGAN_CUT_AWAY|ORGAN_MUTATED|ORGAN_DEAD))
 
 /obj/item/organ/proc/can_recover()
-	return (max_damage > 0) && !(status & ORGAN_DEAD) || death_time >= world.time - ORGAN_RECOVERY_THRESHOLD
+	return (get_max_health() > 0) && !(status & ORGAN_DEAD) || death_time >= world.time - ORGAN_RECOVERY_THRESHOLD
 
 /obj/item/organ/proc/get_scan_results(var/tag = FALSE)
 	. = list()

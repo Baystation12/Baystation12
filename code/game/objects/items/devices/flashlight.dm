@@ -111,7 +111,7 @@
 			return
 		if(MUTATION_XRAY in H.mutations)
 			to_chat(user, "<span class='notice'>\The [H]'s pupils give an eerie glow!</span>")
-		if(vision.damage)
+		if (vision.health_damaged())
 			to_chat(user, "<span class='warning'>There's visible damage to [H]'s [vision.name]!</span>")
 		else if(H.eye_blurry)
 			to_chat(user, "<span class='notice'>\The [H]'s pupils react slower than normally.</span>")

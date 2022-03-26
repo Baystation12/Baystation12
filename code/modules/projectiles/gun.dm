@@ -471,7 +471,7 @@
 	user.visible_message(M, SPAN_WARNING("\The [M] pulls the trigger."))
 	to_chat(M, SPAN_NOTICE("You feel \the [src] go off..."))
 
-	var/obj/item/organ/brain = M.internal_organs_by_name[BP_BRAIN] || M.internal_organs_by_name[BP_POSIBRAIN]
+	var/obj/item/organ/internal/brain = M.internal_organs_by_name[BP_BRAIN] || M.internal_organs_by_name[BP_POSIBRAIN]
 	var/bodypart = brain.parent_organ
 	if (brain.parent_organ == BP_HEAD)
 		bodypart = BP_MOUTH
@@ -498,11 +498,7 @@
 				if (blocked)
 					to_chat(M, SPAN_WARNING("A clear shot to your [bodypart] is blocked by the [blocked], significantly reducing damage to \the [brain.name]!"))
 					dmgmultiplier = dmgmultiplier/5
-				if (istype(brain, /obj/item/organ/internal/brain))
-					var/obj/item/organ/internal/brain/notposi = brain
-					notposi.take_internal_damage(in_chamber.damage*dmgmultiplier, 0)
-				else
-					brain.damage = brain.damage + (in_chamber.damage*dmgmultiplier)
+				brain.take_internal_damage(in_chamber.damage * dmgmultiplier)
 		else
 			M.apply_effect(110,PAIN,0)
 		qdel(in_chamber)
@@ -513,7 +509,7 @@
 	var/delay = max(burst_delay+1, fire_delay)
 	M.setClickCooldown(min(delay, DEFAULT_QUICK_COOLDOWN))
 	next_fire_time = world.time + delay
-	if (brain.damage > brain.max_damage)
+	if (!brain.is_alive())
 		brain.die()
 
 /obj/item/gun/proc/scope()

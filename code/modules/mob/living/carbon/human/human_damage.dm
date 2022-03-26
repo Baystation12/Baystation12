@@ -25,7 +25,8 @@
 	if(should_have_organ(BP_BRAIN))
 		var/obj/item/organ/internal/brain/sponge = internal_organs_by_name[BP_BRAIN]
 		if(sponge)
-			sponge.damage = min(max(amount, 0),sponge.species.total_health)
+			var/damage = min(max(amount, 0), sponge.species.total_health)
+			sponge.set_health(sponge.get_max_health() - damage)
 			updatehealth()
 
 /mob/living/carbon/human/getBrainLoss()
@@ -36,7 +37,7 @@
 			if(sponge.status & ORGAN_DEAD)
 				return sponge.species.total_health
 			else
-				return sponge.damage
+				return sponge.get_damage_value()
 		else
 			return species.total_health
 	return 0
@@ -216,14 +217,15 @@
 		if(amount <= 0)
 			break
 		if(heal)
-			if(I.damage < amount)
-				amount -= I.damage
-				I.damage = 0
+			var/damage = I.get_damage_value()
+			if(damage < amount)
+				amount -= damage
+				I.revive_health()
 			else
-				I.damage -= amount
+				I.restore_health(amount)
 				amount = 0
 		else
-			var/cap_dam = I.max_damage - I.damage
+			var/cap_dam = I.get_current_health()
 			if(amount >= cap_dam)
 				I.take_internal_damage(cap_dam, silent=TRUE)
 				amount -= cap_dam

@@ -592,8 +592,8 @@ var/list/global/slot_flags_enumeration = list(
 				"<span class='danger'>You stab yourself in the eyes with [src]!</span>" \
 			)
 
-		eyes.damage += rand(3,4)
-		if(eyes.damage >= eyes.min_bruised_damage)
+		eyes.damage_health(rand(3, 4))
+		if(eyes.is_bruised())
 			if(M.stat != 2)
 				if(!BP_IS_ROBOTIC(eyes)) //robot eyes bleeding might be a bit silly
 					to_chat(M, "<span class='danger'>Your eyes start to bleed profusely!</span>")
@@ -604,7 +604,7 @@ var/list/global/slot_flags_enumeration = list(
 				M.eye_blurry += 10
 				M.Paralyse(1)
 				M.Weaken(4)
-			if (eyes.damage >= eyes.min_broken_damage)
+			if (eyes.is_broken())
 				if(M.stat != 2)
 					to_chat(M, "<span class='warning'>You go blind!</span>")
 

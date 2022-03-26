@@ -137,8 +137,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 			playsound(H.loc, 'sound/hallucinations/wail.ogg', 15, 1)
 
 	for(var/obj/item/organ/I in H.internal_organs)
-		if (I.damage > 0)
-			I.damage = max(I.damage - heal_rate, 0)
+		I.restore_health(heal_rate)
 
 	H.vessel.add_reagent(/datum/reagent/blood, min(heal_rate * 10, blood_volume - H.vessel.total_volume))
 
@@ -406,8 +405,8 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		organ.vital = 0
 		if (!BP_IS_ROBOTIC(organ))
 			organ.rejuvenate(1)
-			organ.max_damage *= 2
-			organ.min_broken_damage = Floor(organ.max_damage * 0.75)
+			organ.set_max_health(organ.health_max * 2, TRUE)
+			organ.min_broken_damage = Floor(organ.get_max_health() * 0.75)
 
 	resuscitate()
 	set_stat(CONSCIOUS)

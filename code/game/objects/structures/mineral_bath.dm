@@ -134,7 +134,7 @@
 		if(prob(10))
 			for(var/thing in H.internal_organs)
 				var/obj/item/organ/internal/I = thing
-				if(BP_IS_CRYSTAL(I) && I.damage)
+				if (BP_IS_CRYSTAL(I) && I.health_damaged())
 					I.heal_damage(rand(3,5))
 					if(prob(25))
 						to_chat(H, "<span class='notice'>The mineral-rich bath mends your [I.name].</span>")

@@ -551,15 +551,15 @@
 		return statuses
 	var/list/obj/item/organ/damaged = list()
 	for(var/obj/item/organ/I in user.internal_organs)
-		if(I.damage)
+		if(I.health_damaged())
 			damaged += I
 	if(damaged.len)
 		statuses += "you feel pain inside for a moment that passes quickly"
 		while(charges && damaged.len)
 			var/obj/item/organ/fix = pick(damaged)
-			fix.damage = max(0, fix.damage - min(charges, 1))
+			fix.restore_health(min(charges, 1))
 			charges = max(charges - 1, 0)
-			if(fix.damage == 0)
+			if(fix.revive_health())
 				damaged -= fix
 	/* this is going to need rebalancing
 	if(charges)

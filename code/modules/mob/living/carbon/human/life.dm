@@ -432,7 +432,7 @@
 		for(var/obj/item/organ/external/O in parts)
 			if(QDELETED(O) || !(O.owner == src))
 				continue
-			if(O.damage + (LOW_PRESSURE_DAMAGE) < O.min_broken_damage) //vacuum does not break bones
+			if (O.get_damage_value() + LOW_PRESSURE_DAMAGE < O.min_broken_damage) //vacuum does not break bones
 				O.take_external_damage(brute = LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
 		if(getOxyLoss() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
 			adjustOxyLoss(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
@@ -860,7 +860,7 @@
 	for(var/tag in list(BP_LIVER,BP_KIDNEYS))
 		var/obj/item/organ/internal/I = internal_organs_by_name[tag]
 		if(I)
-			vomit_score += I.damage
+			vomit_score += I.get_damage_value()
 		else if (should_have_organ(tag))
 			vomit_score += 45
 	if(chem_effects[CE_TOXIN] || radiation)
