@@ -33,7 +33,7 @@
 		to_chat(M, SPAN_DANGER("Your [name] malfunctions, blinding you!"))
 		M.eye_blind = 4
 		M.eye_blurry = 8
-		take_general_damage(rand(5, 15))
+		take_general_damage(rand(5, 15), damage_type = DAMAGE_EMP)
 		if (active)
 			active = FALSE
 

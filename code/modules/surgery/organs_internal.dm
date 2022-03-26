@@ -79,7 +79,7 @@
 		affected.take_external_damage(dam_amt, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
 		if (I?.health_damaged() && !BP_IS_ROBOTIC(I) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
-			I.take_internal_damage(dam_amt)
+			I.take_general_damage(dam_amt)
 
 //////////////////////////////////////////////////////////////////
 //	 Organ detatchment surgery step
@@ -290,7 +290,7 @@
 	"<span class='warning'>Your hand slips, damaging \the [tool]!</span>")
 	var/obj/item/organ/internal/I = tool
 	if(istype(I))
-		I.take_internal_damage(rand(3,5))
+		I.take_general_damage(rand(3, 5))
 
 //////////////////////////////////////////////////////////////////
 //	 Organ attachment surgery step

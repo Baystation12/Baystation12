@@ -597,11 +597,11 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		return 0//Robotic hearts don't get jittery.
 	if(src.jitteriness >= 400 && prob(5)) //Kills people if they have high jitters.
 		if(prob(1))
-			L.take_internal_damage(L.get_max_health() / 2, 0)
+			L.take_general_damage(L.get_max_health() / 2, FALSE)
 			to_chat(src, "<span class='danger'>Something explodes in your heart.</span>")
 			admin_victim_log(src, "has taken <b>lethal heart damage</b> at jitteriness level [src.jitteriness].")
 		else
-			L.take_internal_damage(1, 0)
+			L.take_general_damage(1, FALSE)
 			to_chat(src, "<span class='danger'>The jitters are killing you! You feel your heart beating out of your chest.</span>")
 			admin_victim_log(src, "has taken <i>minor heart damage</i> at jitteriness level [src.jitteriness].")
 	return 1

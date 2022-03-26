@@ -81,9 +81,9 @@
 		owner.b_eyes ? owner.b_eyes : 0
 		)
 
-/obj/item/organ/internal/eyes/take_internal_damage(amount, var/silent=0)
+/obj/item/organ/internal/eyes/take_general_damage(amount, silent = FALSE, damage_type = DAMAGE_BRUTE)
 	var/oldbroken = is_broken()
-	. = ..()
+	..()
 	if(is_broken() && !oldbroken && owner && !owner.stat)
 		to_chat(owner, "<span class='danger'>You go blind!</span>")
 

@@ -498,7 +498,7 @@
 				if (blocked)
 					to_chat(M, SPAN_WARNING("A clear shot to your [bodypart] is blocked by the [blocked], significantly reducing damage to \the [brain.name]!"))
 					dmgmultiplier = dmgmultiplier/5
-				brain.take_internal_damage(in_chamber.damage * dmgmultiplier)
+				brain.take_general_damage(in_chamber.damage * dmgmultiplier)
 		else
 			M.apply_effect(110,PAIN,0)
 		qdel(in_chamber)
@@ -509,8 +509,6 @@
 	var/delay = max(burst_delay+1, fire_delay)
 	M.setClickCooldown(min(delay, DEFAULT_QUICK_COOLDOWN))
 	next_fire_time = world.time + delay
-	if (!brain.is_alive())
-		brain.die()
 
 /obj/item/gun/proc/scope()
 	set category = "Object"

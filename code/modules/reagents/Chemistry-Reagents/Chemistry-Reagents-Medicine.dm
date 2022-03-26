@@ -919,7 +919,7 @@
 		remove_self(5)
 		if(M.resuscitate())
 			var/obj/item/organ/internal/heart = M.internal_organs_by_name[BP_HEART]
-			heart.take_internal_damage(heart.get_max_health() * 0.075)
+			heart.take_general_damage(heart.get_max_health() * 0.075)
 
 /datum/reagent/lactate
 	name = "Lactate"

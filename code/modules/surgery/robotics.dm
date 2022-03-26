@@ -387,7 +387,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	for(var/internal in affected.internal_organs)
 		var/obj/item/organ/internal/I = internal
 		if(I)
-			I.take_internal_damage(rand(3,5))
+			I.take_general_damage(rand(3, 5))
 
 //////////////////////////////////////////////////////////////////
 //	robotic organ detachment surgery step

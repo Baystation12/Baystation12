@@ -6,10 +6,10 @@
 	//Continued damage to vital organs can kill you, and robot organs don't count towards total damage so no need to cap them.
 	return (BP_IS_ROBOTIC(src) || brute_dam + burn_dam + additional_damage < get_max_health() * 4)
 
-obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
+/obj/item/organ/external/take_general_damage(amount, silent = FALSE, damage_type = DAMAGE_BRUTE)
 	take_external_damage(amount)
 
-/obj/item/organ/external/proc/take_external_damage(brute, burn, damage_flags, used_weapon = null)
+/obj/item/organ/external/proc/take_external_damage(brute, burn, damage_flags, used_weapon = null) // TODO Apply standardized health handling to external limbs
 	brute = round(brute * get_brute_mod(damage_flags), 0.1)
 	burn = round(burn * get_burn_mod(damage_flags), 0.1)
 
@@ -168,7 +168,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	if(prob(organ_hit_chance))
 		var/obj/item/organ/internal/victim = pickweight(victims)
 		damage_amt -= max(damage_amt*victim.damage_reduction, 0)
-		victim.take_internal_damage(damage_amt)
+		victim.take_general_damage(damage_amt)
 		return TRUE
 
 /obj/item/organ/external/heal_damage(brute, burn, internal = 0, robo_repair = 0)

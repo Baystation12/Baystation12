@@ -61,6 +61,25 @@
 	DAMAGE_BRAIN = 0\
 )
 
+/// Damage resistance preset for organic objects - Animals, plants, organs, etc.
+#define DAMAGE_RESIST_ORGANIC list(\
+	DAMAGE_EMP = 0\
+)
+
+/// Damage resistance preset for prosthetic organs and limbs
+#define DAMAGE_RESIST_PROSTHETIC list(\
+	DAMAGE_BRUTE = 0.8,\
+	DAMAGE_BURN = 0.8,\
+	DAMAGE_STUN = 0.5,\
+	DAMAGE_RADIATION = 0,\
+	DAMAGE_BIO = 0,\
+	DAMAGE_PAIN = 0,\
+	DAMAGE_TOXIN = 0,\
+	DAMAGE_GENETIC = 0,\
+	DAMAGE_OXY = 0,\
+	DAMAGE_BRAIN = 0\
+)
+
 
 /// Damage Flags for damage_health()
 /// The damage proc chain should skip calling `handle_death_state_change()` if applicable

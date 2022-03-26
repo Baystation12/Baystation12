@@ -1169,9 +1169,9 @@
 		var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
 		if (L && istype(L))
 			if(M.chem_doses[type] < 120)
-				L.take_internal_damage(10 * removed, 0)
+				L.take_general_damage(10 * removed, FALSE, DAMAGE_TOXIN)
 			else
-				L.take_internal_damage(100, 0)
+				L.take_general_damage(100, FALSE, DAMAGE_TOXIN)
 
 /datum/reagent/ethanol/posset
 	name = "Posset"
@@ -1537,10 +1537,10 @@
 		var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
 		if (istype(L))
 			if(M.chem_doses[type] < 10)
-				L.take_internal_damage(2 * removed, 0)
+				L.take_general_damage(2 * removed, FALSE, DAMAGE_TOXIN)
 				M.adjustToxLoss(5 * removed)
 			else
-				L.take_internal_damage(5 * removed, 0)
+				L.take_general_damage(5 * removed, FALSE, DAMAGE_TOXIN)
 				M.adjustToxLoss(10 * removed)
 
 /datum/reagent/ethanol/alien/qokkhrona

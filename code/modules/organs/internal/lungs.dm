@@ -258,7 +258,7 @@
 			if(prob(20))
 				owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Cold")
 			else
-				take_internal_damage(damage)
+				take_general_damage(damage, damage_type = DAMAGE_BURN)
 			owner.fire_alert = 1
 		else if(breath.temperature >= species.heat_level_1)
 			if(prob(20))
@@ -275,7 +275,7 @@
 			if(prob(20))
 				owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Heat")
 			else
-				take_internal_damage(damage)
+				take_general_damage(damage, damage_type = DAMAGE_BURN)
 			owner.fire_alert = 2
 
 		//breathing in hot/cold air also heats/cools you a bit

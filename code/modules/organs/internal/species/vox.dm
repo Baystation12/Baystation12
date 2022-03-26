@@ -141,7 +141,7 @@
 						mat_stack.set_amount(mat_stack.amount + taking_sheets)
 						sheets -= taking_sheets
 						updated_stacks = TRUE
-						
+
 				// Create new stacks if needed.
 				while(sheets > 0)
 					var/obj/item/stack/material/mat_stack = new M.stack_type(src)
@@ -233,7 +233,7 @@
 	owner.visible_message(SPAN_DANGER("\The [src] rips gaping holes in \the [owner]'s [head.name] as it is torn loose!"))
 	head.take_external_damage(rand(15,20))
 	for(var/obj/item/organ/internal/O in head.contents)
-		O.take_internal_damage(rand(30,70))
+		O.take_general_damage(rand(30, 70))
 	do_backup()
 	..()
 

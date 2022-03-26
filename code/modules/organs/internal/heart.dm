@@ -17,11 +17,6 @@
 /obj/item/organ/internal/heart/open
 	open = 1
 
-/obj/item/organ/internal/heart/die()
-	if(dead_icon)
-		icon_state = dead_icon
-	..()
-
 /obj/item/organ/internal/heart/robotize()
 	. = ..()
 	icon_state = "heart-prosthetic"
@@ -32,9 +27,9 @@
 		if(pulse)
 			handle_heartbeat()
 			if(pulse == PULSE_2FAST && prob(1))
-				take_internal_damage(0.5)
+				take_general_damage(1)
 			if(pulse == PULSE_THREADY && prob(5))
-				take_internal_damage(0.5)
+				take_general_damage(1)
 		handle_blood()
 	..()
 
@@ -51,7 +46,7 @@
 	if(pulse_mod > 2 && !is_stable)
 		var/damage_chance = (pulse_mod - 2) ** 2
 		if(prob(damage_chance))
-			take_internal_damage(0.5)
+			take_general_damage(1)
 
 	// Now pulse mod is impacted by shock stage and other things too
 	if(owner.shock_stage > 30)

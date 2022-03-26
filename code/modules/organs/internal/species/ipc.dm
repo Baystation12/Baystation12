@@ -182,10 +182,6 @@
 	if (msg)
 		to_chat(user, msg)
 
-/obj/item/organ/internal/posibrain/emp_act(severity)
-	take_internal_damage(rand(15 - severity * 5, 20 - severity * 5))
-	..()
-
 /obj/item/organ/internal/posibrain/proc/PickName()
 	src.brainmob.SetName("[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[random_id(type,100,999)]")
 	src.brainmob.real_name = src.brainmob.name

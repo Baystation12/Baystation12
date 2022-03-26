@@ -128,16 +128,12 @@
 	min_broken_damage = Floor(0.75 * get_max_health())
 	min_bruised_damage = Floor(0.25 * get_max_health())
 
-obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
-	take_internal_damage(amount, silent)
+/obj/item/organ/internal/take_general_damage(amount, silent = FALSE, damage_type = DAMAGE_BRUTE)
+	set waitfor = FALSE // This really shouldn't be necessary but a certain wizard spell breaks the Destroy logic without this - See /spell/targeted/heal_target/trance/Destroy()
+	..()
 
-/obj/item/organ/internal/proc/take_internal_damage(amount, var/silent=0)
-	if(BP_IS_ROBOTIC(src))
-		damage_health(amount * 0.8)
-	else
-		damage_health(amount)
-
-		//only show this if the organ is not robotic
+	//only show this if the organ is not robotic
+	if (!BP_IS_ROBOTIC(src))
 		if(owner && can_feel_pain() && parent_organ && (amount > 5 || prob(10)))
 			var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 			if(parent && !silent)
@@ -193,14 +189,3 @@ obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 	var/scar_level = get_scarring_level()
 	if(scar_level > 0.01)
 		. += "[get_wound_severity(get_scarring_level())] scarring"
-
-/obj/item/organ/internal/emp_act(severity)
-	if(!BP_IS_ROBOTIC(src))
-		return
-	switch (severity)
-		if (1)
-			take_internal_damage(16)
-		if (2)
-			take_internal_damage(9)
-		if (3)
-			take_internal_damage(6.5)

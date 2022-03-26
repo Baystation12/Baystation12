@@ -12,7 +12,8 @@ var/list/organ_cache = list()
 	var/parent_organ = BP_CHEST       // Organ holding this object.
 
 	// Status tracking.
-	var/status = 0                    // Various status flags (such as robotic)
+	/// Bitflags (Any of `ORGAN_*`). Various status flags (such as robotic)
+	var/status = 0                    // TODO Integrate status & ORGAN_DEAD checks with is_alive()
 	var/vital                         // Lose a vital limb, die immediately.
 
 	// Reference data.
@@ -22,6 +23,8 @@ var/list/organ_cache = list()
 
 	// Damage vars.
 	health_max = 30
+	health_resistances = DAMAGE_RESIST_ORGANIC
+
 	/// Integer. Damage before the organ is considered 'broken'. If `health_max` is set during Init, this becomes 1/2 that value. If not, `health_max` becomes 2x this value.
 	var/min_broken_damage = 30
 	var/rejecting                     // Is this organ already being rejected?
@@ -127,7 +130,7 @@ var/list/organ_cache = list()
 			reagents.remove_reagent(/datum/reagent/blood,0.1)
 			blood_splatter(src,B,1)
 		if(config.organs_decay)
-			take_general_damage(rand(1,3))
+			take_general_damage(rand(1,3), damage_type = DAMAGE_BIO)
 		germ_level += rand(2,6)
 		if(germ_level >= INFECTION_LEVEL_TWO)
 			germ_level += rand(2,6)
@@ -182,7 +185,7 @@ var/list/organ_cache = list()
 			parent.germ_level++
 
 		if (prob(3))	//about once every 30 seconds
-			take_general_damage(1,silent=prob(30))
+			take_general_damage(1, prob(30), DAMAGE_BIO)
 
 /obj/item/organ/proc/handle_rejection()
 	// Process unsuitable transplants. TODO: consider some kind of
@@ -217,6 +220,7 @@ var/list/organ_cache = list()
 
 /obj/item/organ/proc/rejuvenate(var/ignore_prosthetic_prefs)
 	revive_health()
+	health_resistances = initial(health_resistances)
 	status = initial(status)
 	if(!ignore_prosthetic_prefs && owner && owner.client && owner.client.prefs && owner.client.prefs.real_name == owner.real_name)
 		var/status = owner.client.prefs.organ_data[organ_tag]
@@ -246,8 +250,8 @@ var/list/organ_cache = list()
 		germ_level -= 2
 	germ_level = max(0, germ_level)
 
-/obj/item/organ/proc/take_general_damage(var/amount, var/silent = FALSE) // TODO Replace this with damage_health()
-	CRASH("Not Implemented")
+/obj/item/organ/proc/take_general_damage(amount, silent = FALSE, damage_type = DAMAGE_BRUTE)
+	damage_health(amount, damage_type)
 
 /obj/item/organ/proc/heal_damage(amount) // TODO Replace this with restore_health()
 	if (can_recover())
@@ -255,11 +259,23 @@ var/list/organ_cache = list()
 		set_health(get_max_health() - damage)
 
 
+/obj/item/organ/emp_act(severity)
+	switch (severity)
+		if (1)
+			take_general_damage(16, damage_type = DAMAGE_EMP)
+		if (2)
+			take_general_damage(9, damage_type = DAMAGE_EMP)
+		if (3)
+			take_general_damage(6.5, damage_type = DAMAGE_EMP)
+
+
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
 	status = ORGAN_ROBOTIC
+	health_resistances = DAMAGE_RESIST_ELECTRICAL
 
 /obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
 	status = ORGAN_ASSISTED
+	health_resistances = DAMAGE_RESIST_PROSTHETIC
 
 /**
  *  Remove an organ

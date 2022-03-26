@@ -28,10 +28,10 @@
 				var/can_damage = I.get_current_health()
 				if(can_damage > 0)
 					if(dam > can_damage)
-						I.take_internal_damage(can_damage, silent=TRUE)
+						I.take_general_damage(can_damage, TRUE, DAMAGE_TOXIN)
 						dam -= can_damage
 					else
-						I.take_internal_damage(dam, silent=TRUE)
+						I.take_general_damage(dam, TRUE, DAMAGE_TOXIN)
 						dam = 0
 		if(dam)
 			M.adjustToxLoss(target_organ ? (dam * 0.75) : dam)
@@ -251,7 +251,7 @@
 	if (prob(10)) // 1 in 10. This thing's made with welder fuel and fertilizer, what do you expect?
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/internal/heart/O = H.internal_organs_by_name[BP_HEART]
-		O.take_internal_damage(1)
+		O.take_general_damage(1, damage_type = DAMAGE_TOXIN)
 		to_chat(M, SPAN_WARNING("You feel a stabbing pain in your heart as it beats out of control!"))
 
 /datum/reagent/toxin/chlorine

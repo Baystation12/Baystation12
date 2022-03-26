@@ -119,7 +119,7 @@ obj/var/contaminated = 0
 	var/obj/item/organ/internal/eyes/E = internal_organs_by_name[BP_EYES]
 	if(E && !E.phoron_guard)
 		if(prob(20)) to_chat(src, "<span class='danger'>Your eyes burn!</span>")
-		E.take_internal_damage(3)
+		E.take_general_damage(3, damage_type = DAMAGE_BURN)
 		eye_blurry = min(eye_blurry+1.5,50)
 		if (prob(max(0, E.get_damage_value() - 15) + 1) &&!eye_blind)
 			to_chat(src, "<span class='danger'>You are blinded!</span>")

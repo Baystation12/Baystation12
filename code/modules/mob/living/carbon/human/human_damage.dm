@@ -18,7 +18,7 @@
 	if(should_have_organ(BP_BRAIN))
 		var/obj/item/organ/internal/brain/sponge = internal_organs_by_name[BP_BRAIN]
 		if(sponge)
-			sponge.take_internal_damage(amount)
+			sponge.take_general_damage(amount)
 
 /mob/living/carbon/human/setBrainLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -227,10 +227,10 @@
 		else
 			var/cap_dam = I.get_current_health()
 			if(amount >= cap_dam)
-				I.take_internal_damage(cap_dam, silent=TRUE)
+				I.take_general_damage(cap_dam, TRUE, DAMAGE_TOXIN)
 				amount -= cap_dam
 			else
-				I.take_internal_damage(amount, silent=TRUE)
+				I.take_general_damage(amount, TRUE, DAMAGE_TOXIN)
 				amount = 0
 
 /mob/living/carbon/human/proc/can_autoheal(var/dam_type)
