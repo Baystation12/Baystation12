@@ -134,7 +134,7 @@
 		icon_state = initial(icon_state) + (primed?"_primed":"_active")
 
 
-/obj/item/grenade/chem_grenade/detonate()
+/obj/item/grenade/chem_grenade/detonate(mob/living/user)
 	if(!stage || stage<2) return
 	var/has_reagents = 0
 	for(var/obj/item/reagent_containers/glass/G in beakers)

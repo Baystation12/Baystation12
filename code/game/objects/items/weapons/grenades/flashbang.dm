@@ -6,7 +6,7 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 1)
 	var/banglet = 0
 
-/obj/item/grenade/flashbang/detonate()
+/obj/item/grenade/flashbang/detonate(mob/living/user)
 	..()
 	var/list/victims = list()
 	var/list/objs = list()
@@ -93,7 +93,7 @@
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "clusterbang"
 
-/obj/item/grenade/flashbang/clusterbang/detonate()
+/obj/item/grenade/flashbang/clusterbang/detonate(mob/living/user)
 	var/numspawned = rand(4,8)
 	var/again = 0
 	for(var/more = numspawned,more > 0,more--)
@@ -129,7 +129,7 @@
 		detonate()
 	..()
 
-/obj/item/grenade/flashbang/clusterbang/segment/detonate()
+/obj/item/grenade/flashbang/clusterbang/segment/detonate(mob/living/user)
 	var/numspawned = rand(4,8)
 	for(var/more = numspawned,more > 0,more--)
 		if(prob(35))
