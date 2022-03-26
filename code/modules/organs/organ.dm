@@ -22,7 +22,8 @@ var/list/organ_cache = list()
 
 	// Damage vars.
 	health_max = 30
-	var/min_broken_damage = 30        // Damage before becoming broken
+	/// Integer. Damage before the organ is considered 'broken'. If `health_max` is set during Init, this becomes 1/2 that value. If not, `health_max` becomes 2x this value.
+	var/min_broken_damage = 30
 	var/rejecting                     // Is this organ already being rejected?
 
 	var/death_time
@@ -88,13 +89,19 @@ var/list/organ_cache = list()
 		if (!species)
 			crash_with("Invalid DNA species. Expected a valid species name as string, was: [log_info_line(dna.species)]")
 
-/obj/item/organ/proc/die() // TODO Replace with handle_death_change() and kill_health()
-	kill_health()
-	status |= ORGAN_DEAD
-	STOP_PROCESSING(SSobj, src)
-	death_time = world.time
-	if(owner && vital)
-		owner.death()
+/obj/item/organ/handle_death_change(new_death_state)
+	..()
+	if (new_death_state)
+		status |= ORGAN_DEAD
+		STOP_PROCESSING(SSobj, src)
+		death_time = world.time
+		if(owner && vital)
+			owner.death()
+	else
+		status &= ~ORGAN_DEAD
+		death_time = null
+		START_PROCESSING(SSobj, src)
+	update_icon()
 
 /obj/item/organ/Process()
 
@@ -103,11 +110,6 @@ var/list/organ_cache = list()
 
 	//dead already, no need for more processing
 	if(status & ORGAN_DEAD)
-		return
-
-	//check if we've hit max_damage
-	if (!is_alive()) // TODO Remove once everything's moved to handle_death_change()
-		die()
 		return
 
 	//Process infections
@@ -130,7 +132,7 @@ var/list/organ_cache = list()
 		if(germ_level >= INFECTION_LEVEL_TWO)
 			germ_level += rand(2,6)
 		if(germ_level >= INFECTION_LEVEL_THREE)
-			die()
+			kill_health()
 
 	else if(owner && owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
 		//** Handle antibiotics and curing infections

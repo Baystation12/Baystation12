@@ -83,9 +83,9 @@
 	target.internal_organs_by_name[organ_tag] = src
 	return 1
 
-/obj/item/organ/internal/die()
+/obj/item/organ/internal/on_update_icon()
 	..()
-	if((status & ORGAN_DEAD) && dead_icon)
+	if (dead_icon && (status & ORGAN_DEAD))
 		icon_state = dead_icon
 
 /obj/item/organ/internal/remove_rejuv()
