@@ -220,7 +220,7 @@
 	var/padding_size = length_char(padding)
 	if (!padding_size)
 		return ""
-	var/padding_count = CEILING(size / padding_size, 1)
+	var/padding_count = Ceil(size / padding_size)
 	var/list/result = list()
 	for (var/i = padding_count to 1 step -1)
 		result += padding // pow2 strategies could be used here at the cost of complexity
@@ -253,11 +253,6 @@
 	if (!length_difference)
 		return result
 	return copytext_char(result, 1, -length_difference)
-
-
-/// Adds count number of '0' before text
-/proc/add_zero(text, count)
-	return "[generate_padding(count, "0")][text||""]"
 
 
 //Returns a string with reserved characters and spaces before the first letter removed
