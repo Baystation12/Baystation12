@@ -1,4 +1,4 @@
-//Point defense 
+//Point defense
 /obj/machinery/pointdefense_control
 	name = "fire assist mainframe"
 	desc = "A specialized computer designed to synchronize a variety of weapon systems and a vessel's astronav data."
@@ -150,7 +150,7 @@
 	rot_matrix.Turn(Angle)
 	addtimer(CALLBACK(src, .proc/finish_shot, target), rotation_speed)
 	animate(src, transform = rot_matrix, rotation_speed, easing = SINE_EASING)
-			
+
 	set_dir(transform.get_angle() > 0 ? NORTH : SOUTH)
 
 /obj/machinery/pointdefense/proc/finish_shot(var/weakref/target)
@@ -189,7 +189,7 @@
 		set_dir(desiredir)
 	if(engaging || ((world.time - last_shot) < charge_cooldown))
 		return
-	
+
 	if(GLOB.meteor_list.len == 0)
 		return
 	var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
@@ -219,6 +219,10 @@
 			continue
 		if(get_dist(M, src) > kill_range)
 			continue
+
+		if (!can_see(src, M, kill_range))
+			continue
+
 		if(!emagged && space_los(M))
 			var/weakref/target = weakref(M)
 			PC.targets +=target
