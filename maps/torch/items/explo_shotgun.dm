@@ -47,7 +47,7 @@
 		bulk = bulk + 4
 		update_icon()
 		return 1
-	if(reinforced && I.iswirecutter())
+	if(reinforced && isWirecutter(I))
 		to_chat(user, SPAN_WARNING("You remove \the [reinforced] that was reinforcing \the [src]."))
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 25, 1)
 		reinforced.dropInto(loc)

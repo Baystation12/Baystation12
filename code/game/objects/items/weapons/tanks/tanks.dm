@@ -116,7 +116,7 @@ var/list/global/tank_gauge_cache = list()
 	if (istype(W, /obj/item/device/scanner/gas))
 		return
 
-	if (W.isscrewdriver())
+	if (isScrewdriver(W))
 		add_fingerprint(user)
 		user.visible_message(
 			SPAN_ITALIC("\The [user] starts to use \the [W] on \the [src]."),

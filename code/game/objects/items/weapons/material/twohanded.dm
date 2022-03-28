@@ -98,7 +98,7 @@
 			var/obj/effect/vine/P = A
 			P.die_off()
 
-/obj/item/material/twohanded/fireaxe/ishatchet()
+/obj/item/material/twohanded/fireaxe/IsHatchet()
 	return TRUE
 
 //spears, bay edition
