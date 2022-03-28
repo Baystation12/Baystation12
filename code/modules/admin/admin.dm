@@ -300,12 +300,14 @@ var/global/floorIsLava = 0
 	popup.open()
 
 
-/datum/admins/proc/player_has_info(var/key as text)
-	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
+/datum/admins/proc/player_has_info(key)
+	var/target = ckey(key)
+	var/savefile/info = new("data/player_saves/[copytext_char(target, 1, 2)]/[target]/info.sav")
 	var/list/infos
 	from_save(info, infos)
-	if(!infos || !infos.len) return 0
-	else return 1
+	if (!length(infos))
+		return FALSE
+	return TRUE
 
 
 /// Page matter from #30904, to be replaced by that behavior later
