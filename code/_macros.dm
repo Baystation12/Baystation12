@@ -33,7 +33,7 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define isairlock(A) istype(A, /obj/machinery/door/airlock)
 
-#define isatom(A) isloc(A)
+#define isatom(A) (ismovable(A) || isturf(A))
 
 #define isbrain(A) istype(A, /mob/living/carbon/brain)
 

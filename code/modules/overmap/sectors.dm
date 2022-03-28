@@ -38,18 +38,17 @@
 
 	var/map_low = OVERMAP_EDGE
 	var/map_high = GLOB.using_map.overmap_size - OVERMAP_EDGE
+	var/turf/home
 	if (place_near_main)
+		var/obj/effect/overmap/visitable/main = map_sectors["1"]
 		if (islist(place_near_main))
 			place_near_main = Roundm(Frand(place_near_main[1], place_near_main[2]), 0.1)
-		var/obj/effect/overmap/visitable/main = map_sectors["1"]
-		var/list/offset = BCrand(abs(place_near_main), main.x, main.y, map_low, map_low, map_high, map_high, TRUE)
-		start_x = offset[1]
-		start_y = offset[2]
-		log_debug("place_near_main moving [src] near [main] ([main.x], [main.y]) with radius [place_near_main], got ([start_x], [start_y])")
+		home = CircularRandomTurfAround(main, abs(place_near_main), map_low, map_low, map_high, map_high)
+		log_debug("place_near_main moving [src] near [main] ([main.x],[main.y]) with radius [place_near_main], got ([home.x],[home.y])")
 	else
 		start_x = start_x || rand(map_low, map_high)
 		start_y = start_y || rand(map_low, map_high)
-	var/turf/home = locate(start_x, start_y, GLOB.using_map.overmap_z)
+		home = locate(start_x, start_y, GLOB.using_map.overmap_z)
 	forceMove(home)
 
 	for(var/obj/effect/overmap/event/E in loc)

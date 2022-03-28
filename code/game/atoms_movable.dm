@@ -30,27 +30,22 @@
 /atom/movable/Destroy()
 	if(!(atom_flags & ATOM_FLAG_INITIALIZED))
 		crash_with("Was deleted before initalization")
-
+	walk(src, 0)
 	for(var/A in src)
 		qdel(A)
-
 	forceMove(null)
 	if (pulledby)
 		if (pulledby.pulling == src)
 			pulledby.pulling = null
 		pulledby = null
-
 	if(LAZYLEN(movement_handlers) && !ispath(movement_handlers[1]))
 		QDEL_NULL_LIST(movement_handlers)
-
 	if (bound_overlay)
 		QDEL_NULL(bound_overlay)
-
 	if(virtual_mob && !ispath(virtual_mob))
 		qdel(virtual_mob)
 		virtual_mob = null
-
-	. = ..()
+	return ..()
 
 /atom/movable/Bump(var/atom/A, yes)
 	if(!QDELETED(throwing))
