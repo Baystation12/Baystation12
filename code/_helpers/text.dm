@@ -214,37 +214,46 @@
 		t = replacetext(t, char, repl_chars[char])
 	return t
 
-//Adds 'u' number of zeros ahead of the text 't'
-/proc/add_zero(t, u)
-	return pad_left(t, u, "0")
 
-//Adds 'u' number of spaces ahead of the text 't'
-/proc/add_lspace(t, u)
-	return pad_left(t, u, " ")
-
-//Adds 'u' number of spaces behind the text 't'
-/proc/add_tspace(t, u)
-	return pad_right(t, u, " ")
-
-// Adds the required amount of 'character' in front of 'text' to extend the lengh to 'desired_length', if it is shorter
-// No consideration are made for a multi-character 'character' input
-/proc/pad_left(text, desired_length, character)
-	var/padding = generate_padding(length_char(text), desired_length, character)
-	return length(padding) ? "[padding][text]" : text
-
-// Adds the required amount of 'character' after 'text' to extend the lengh to 'desired_length', if it is shorter
-// No consideration are made for a multi-character 'character' input
-/proc/pad_right(text, desired_length, character)
-	var/padding = generate_padding(length_char(text), desired_length, character)
-	return length(padding) ? "[text][padding]" : text
-
-/proc/generate_padding(current_length, desired_length, character)
-	if(current_length >= desired_length)
+/// Builds a string of padding repeated until its character count meets or exceeds size
+/proc/generate_padding(size, padding)
+	var/padding_size = length_char(padding)
+	if (!padding_size)
 		return ""
-	var/characters = list()
-	for(var/i = 1 to (desired_length - current_length))
-		characters += character
-	return JOINTEXT(characters)
+	var/padding_count = Ceil(size / padding_size)
+	var/list/result = list()
+	for (var/i = padding_count to 1 step -1)
+		result += padding // pow2 strategies could be used here at the cost of complexity
+	return result.Join(null)
+
+
+/// Pads the matter of padding onto the start of text until the result length is size
+/proc/pad_left(text, size, padding)
+	var/text_length = length_char(text)
+	if (text_length >= size)
+		return text
+	if (!text_length)
+		text = ""
+	var/result = "[generate_padding(size - text_length, padding)][text]"
+	var/length_difference = length_char(result) - size
+	if (!length_difference)
+		return result
+	return copytext_char(result, length_difference + 1)
+
+
+/// Pads the matter of padding onto the start of text until the result length is size
+/proc/pad_right(text, size, padding)
+	var/text_length = length_char(text)
+	if (text_length >= size)
+		return text
+	if (!text_length)
+		text = ""
+	var/result = "[text][generate_padding(size - text_length, padding)]"
+	var/length_difference = length_char(result) - size
+	if (!length_difference)
+		return result
+	return copytext_char(result, 1, -length_difference)
+
 
 //Returns a string with reserved characters and spaces before the first letter removed
 /proc/trim_left(text)

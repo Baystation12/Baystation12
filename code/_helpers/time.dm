@@ -140,8 +140,8 @@ var/round_start_time = 0
 	var/mins = round((mills % 36000) / 600)
 	var/hours = round(mills / 36000)
 
-	mins = mins < 10 ? add_zero(mins, 1) : mins
-	hours = hours < 10 ? add_zero(hours, 1) : hours
+	mins = pad_left("[mins]", 2, "0")
+	hours = pad_left("[hours]", 2, "0")
 
 	last_round_duration = "[hours]:[mins]"
 	next_duration_update = world.time + 1 MINUTES

@@ -169,7 +169,7 @@
 
 	else if (href_list["issue"])
 		if (giver && accesses.len)
-			var/number = add_zero(random_id("guestpass_id_number",1000,9999), 4)
+			var/number = pad_left(random_id("guestpass_id_number", 1, 9999), 6, "0")
 			var/entry = "\[[stationtime2text()]\] Pass #[number] issued by [giver.registered_name] ([giver.assignment]) to [giv_name]. Reason: [reason]. Granted access to following areas: "
 			var/list/access_descriptors = list()
 			for (var/A in accesses)
