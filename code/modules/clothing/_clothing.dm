@@ -628,13 +628,15 @@ BLIND     // can't see anything
 	remove_cuffs(user)
 	..()
 
-/obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
-	if (istype(I, /obj/item/handcuffs))
-		add_cuffs(I, user)
-		return
+
+/obj/item/clothing/shoes/attackby(obj/item/item, mob/living/user)
+	if (istype(item, /obj/item/handcuffs))
+		add_cuffs(item, user)
+	else if (istype(item, /obj/item/clothing/shoes/magboots))
+		user.equip_to_slot_if_possible(item, slot_shoes)
 	else
-		add_hidden(I, user)
-		return
+		add_hidden(item, user)
+
 
 /obj/item/clothing/shoes/proc/add_cuffs(var/obj/item/handcuffs/cuffs, var/mob/user)
 	if (!can_add_cuffs)
