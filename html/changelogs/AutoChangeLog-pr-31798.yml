@@ -1,0 +1,4 @@
+author: Spookerton
+delete-after: true
+changes:
+  - bugfix: You can wear magboots over shoes by hand, instead of only with a suit.
