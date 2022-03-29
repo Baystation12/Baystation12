@@ -28,19 +28,23 @@
 
 
 /obj/item/reagent_containers/food/snacks/proc/OnConsume(mob/living/consumer)
-	if (reagents.total_volume)
+	if (reagents && reagents.total_volume)
 		return
-	consumer.visible_message(
-		SPAN_ITALIC("\The [consumer] finishes eating \the [src]."),
-		SPAN_ITALIC("You finish eating \the [src].")
-	)
-	consumer.update_personal_goal(/datum/goal/achievement/specific_object/food, type)
-	consumer.drop_from_inventory(src)
-	if (istype(trash))
+	if (consumer)
+		consumer.visible_message(
+			SPAN_ITALIC("\The [consumer] finishes eating \the [src]."),
+			SPAN_ITALIC("You finish eating \the [src].")
+		)
+		consumer.update_personal_goal(/datum/goal/achievement/specific_object/food, type)
+		consumer.drop_from_inventory(src, consumer.loc)
+	if (loc && trash)
 		if (ispath(trash))
 			trash = new trash
-		trash.dropInto(get_turf(consumer))
-		consumer.put_in_hands(trash)
+		if (consumer)
+			consumer.put_in_hands(trash)
+		else
+			trash.dropInto(loc)
+		trash = null
 	qdel(src)
 
 
