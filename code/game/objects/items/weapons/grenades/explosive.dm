@@ -26,7 +26,7 @@
 	//The radius of the circle used to launch projectiles. Lower values mean less projectiles are used but if set too low gaps may appear in the spread pattern
 	var/spread_range = 7 //leave as is, for some reason setting this higher makes the spread pattern have gaps close to the epicenter
 
-/obj/item/grenade/frag/detonate()
+/obj/item/grenade/frag/detonate(mob/living/user)
 	..()
 
 	var/turf/O = get_turf(src)
