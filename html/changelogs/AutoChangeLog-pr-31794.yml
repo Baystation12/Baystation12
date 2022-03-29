@@ -1,7 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - bugfix: You can no longer hide shrapnel in your boots.
-  - bugfix: Malfunctioning drones no longer kill themselves (and will try to kill
-      you instead).
-  - bugfix: Malfunctioning drones no longer drop invalid circuit boards.

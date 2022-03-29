@@ -1,4 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - bugfix: Slimes can no longer infinitely feed on FBPs (or at all, for that matter).
