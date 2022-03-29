@@ -14,14 +14,13 @@
 
 	var/broken =    FALSE
 	var/neighbor_status = 0
+	/// Color code. If set, the railing will be painted this color on init. Primarily used for mapping variants.
+	var/init_color
 
 /obj/structure/railing/mapped
-	color = COLOR_GUNMETAL
+	material = MATERIAL_ALUMINIUM
 	anchored = TRUE
-
-/obj/structure/railing/mapped/Initialize()
-	. = ..()
-	color = COLOR_GUNMETAL // They're not painted!
+	init_color = COLOR_GUNMETAL
 
 /obj/structure/railing/mapped/no_density
 	density = FALSE
@@ -30,19 +29,19 @@
 	. = ..()
 	update_icon()
 
-/obj/structure/railing/New(var/newloc, var/material_key = DEFAULT_FURNITURE_MATERIAL)
-	material = material_key // Converted to datum in initialize().
-	..(newloc)
-
 /obj/structure/railing/Process()
 	if(!material || !material.radioactivity)
 		return
 	for(var/mob/living/L in range(1,src))
 		L.apply_damage(round(material.radioactivity/20),IRRADIATE, damage_flags = DAM_DISPERSED)
 
-/obj/structure/railing/Initialize()
+/obj/structure/railing/Initialize(mapload, material_key)
 	. = ..()
 
+	if (material_key)
+		material = material_key
+	if (!material)
+		material = DEFAULT_FURNITURE_MATERIAL
 	if(!isnull(material) && !istype(material))
 		material = SSmaterials.get_material_by_name(material)
 	if(!istype(material))
@@ -59,16 +58,14 @@
 		obj_flags |= OBJ_FLAG_CONDUCTIBLE
 	else
 		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
+
+	if (init_color)
+		set_color(init_color)
+
 	update_icon(FALSE)
 
 /obj/structure/railing/Destroy()
-	anchored = FALSE
-	atom_flags = 0
-	broken = TRUE
-	for(var/thing in trange(1, src))
-		var/turf/T = thing
-		for(var/obj/structure/railing/R in T.contents)
-			R.update_icon()
+	NeighborsCheck(TRUE)
 	. = ..()
 
 /obj/structure/railing/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -91,6 +88,8 @@
 	var/Lturn = turn(src.dir, 90)
 
 	for(var/obj/structure/railing/R in src.loc)
+		if (QDELETED(R))
+			continue
 		if ((R.dir == Lturn) && R.anchored)
 			neighbor_status |= 32
 			if (UpdateNeighbors)
@@ -100,21 +99,29 @@
 			if (UpdateNeighbors)
 				R.update_icon(0)
 	for (var/obj/structure/railing/R in get_step(src, Lturn))
+		if (QDELETED(R))
+			continue
 		if ((R.dir == src.dir) && R.anchored)
 			neighbor_status |= 16
 			if (UpdateNeighbors)
 				R.update_icon(0)
 	for (var/obj/structure/railing/R in get_step(src, Rturn))
+		if (QDELETED(R))
+			continue
 		if ((R.dir == src.dir) && R.anchored)
 			neighbor_status |= 1
 			if (UpdateNeighbors)
 				R.update_icon(0)
 	for (var/obj/structure/railing/R in get_step(src, (Lturn + src.dir)))
+		if (QDELETED(R))
+			continue
 		if ((R.dir == Rturn) && R.anchored)
 			neighbor_status |= 64
 			if (UpdateNeighbors)
 				R.update_icon(0)
 	for (var/obj/structure/railing/R in get_step(src, (Rturn + src.dir)))
+		if (QDELETED(R))
+			continue
 		if ((R.dir == Lturn) && R.anchored)
 			neighbor_status |= 4
 			if (UpdateNeighbors)
