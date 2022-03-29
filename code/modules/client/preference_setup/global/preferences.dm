@@ -308,3 +308,11 @@ var/list/_client_preferences_by_type
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 	default_value = GLOB.PREF_HIDE
 	flags = R_ADMIN|R_DEBUG
+
+
+/datum/client_preference/staff/show_runtime_logs
+	description = "Runtime Log Messages"
+	key = "CHAT_RUNTIMELOGS"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	default_value = GLOB.PREF_HIDE
+	flags = R_ADMIN | R_DEBUG
