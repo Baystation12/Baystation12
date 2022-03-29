@@ -1,0 +1,4 @@
+author: Spookerton
+delete-after: true
+changes:
+  - tweak: Viscerators from spawner grenades get the user's faction.
