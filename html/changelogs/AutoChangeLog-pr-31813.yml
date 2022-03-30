@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Mobs without an aim toggle icon can no longer break themselves by using
-      the toggle verb or hotkey.
