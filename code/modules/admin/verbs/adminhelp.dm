@@ -118,7 +118,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 
 	var/admin_number_afk = 0
 
-	for(var/client/X in GLOB.admins)
+	for(var/client/X as anything in GLOB.admins)
 		if((R_ADMIN|R_MOD) & X.holder.rights)
 			if(X.is_afk())
 				admin_number_afk++

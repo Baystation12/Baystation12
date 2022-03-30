@@ -431,7 +431,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		sound_to(C, 'sound/misc/staff_message.ogg')
 		to_chat(C, message)
 
-		for(var/client/A in GLOB.admins)
+		for(var/client/A as anything in GLOB.admins)
 			if(A != C)
 				to_chat(A, amessage)
 		return "Message Successful"
