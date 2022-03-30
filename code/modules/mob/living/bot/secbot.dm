@@ -123,6 +123,8 @@
 		return 1
 
 /mob/living/bot/secbot/bullet_act(var/obj/item/projectile/P)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 	var/curhealth = health
 	var/mob/shooter = P.firer
 	. = ..()

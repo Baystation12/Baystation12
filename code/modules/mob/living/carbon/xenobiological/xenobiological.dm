@@ -175,15 +175,21 @@
 	return
 
 /mob/living/carbon/slime/bullet_act(var/obj/item/projectile/Proj)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 	attacked += 10
 	..(Proj)
 	return 0
 
 /mob/living/carbon/slime/emp_act(severity)
+	if (status_flags & GODMODE)
+		return
 	powerlevel = 0 // oh no, the power!
 	..()
 
 /mob/living/carbon/slime/ex_act(severity)
+	if (status_flags & GODMODE)
+		return
 	..()
 
 	var/b_loss = null

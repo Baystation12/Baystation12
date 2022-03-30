@@ -467,6 +467,8 @@
 	return 0
 
 /mob/living/silicon/robot/bullet_act(var/obj/item/projectile/Proj)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 	..(Proj)
 	if(prob(75) && Proj.damage > 0) spark_system.start()
 	return 2

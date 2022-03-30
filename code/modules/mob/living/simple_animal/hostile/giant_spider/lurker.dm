@@ -92,6 +92,8 @@
 
 // Force uncloaking if attacked.
 /mob/living/simple_animal/hostile/giant_spider/lurker/bullet_act(obj/item/projectile/P)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 	. = ..()
 	break_cloak()
 

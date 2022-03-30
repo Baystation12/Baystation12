@@ -8,6 +8,8 @@ meteor_act
 */
 
 /mob/living/carbon/human/bullet_act(var/obj/item/projectile/P, var/def_zone)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 
 	def_zone = check_zone(def_zone)
 	if(!has_organ(def_zone))
@@ -489,6 +491,8 @@ meteor_act
 	return perm
 
 /mob/living/carbon/human/lava_act(datum/gas_mixture/air, temperature, pressure)
+	if (status_flags & GODMODE)
+		return
 	var/was_burned = FireBurn(0.4 * vsc.fire_firelevel_multiplier, temperature, pressure)
 	if (was_burned)
 		fire_act(air, temperature)

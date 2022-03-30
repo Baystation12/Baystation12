@@ -1,5 +1,6 @@
 /mob/living/carbon/alien/ex_act(severity)
-
+	if (status_flags & GODMODE)
+		return
 	if(!blinded)
 		flash_eyes()
 

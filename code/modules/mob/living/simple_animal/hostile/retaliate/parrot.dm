@@ -268,6 +268,8 @@
 
 //Bullets
 /mob/living/simple_animal/hostile/retaliate/parrot/bullet_act(var/obj/item/projectile/Proj)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 	..()
 	if(!stat && !client)
 		if(parrot_state == PARROT_PERCH)
