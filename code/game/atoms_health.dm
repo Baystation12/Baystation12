@@ -100,6 +100,11 @@
 		return FALSE
 	return TRUE
 
+/mob/can_damage_health(damage, damage_type)
+	if (status_flags & GODMODE)
+		return FALSE
+	. = ..()
+
 /**
  * Checks if the atom is 'alive' or 'dead'.
  * Returns `null` if health is not in use.
