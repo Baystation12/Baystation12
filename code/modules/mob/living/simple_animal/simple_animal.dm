@@ -187,6 +187,8 @@
 	return ..(gibbed,deathmessage,show_dead_message)
 
 /mob/living/simple_animal/ex_act(severity)
+	if (status_flags & GODMODE)
+		return
 	if(!blinded)
 		flash_eyes()
 

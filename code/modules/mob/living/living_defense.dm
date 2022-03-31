@@ -22,6 +22,8 @@
 		. += get_extension(psi, /datum/extension/armor)
 
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 
 	//Being hit while using a deadman switch
 	var/obj/item/device/assembly/signaler/signaler = get_active_hand()
@@ -95,6 +97,8 @@
 	  return FALSE //only carbon liveforms have this proc
 
 /mob/living/emp_act(severity)
+	if (status_flags & GODMODE)
+		return
 	var/list/L = get_contents()
 	for(var/obj/O in L)
 		O.emp_act(severity)
@@ -277,6 +281,8 @@
 	location.hotspot_expose(fire_burn_temperature(), 50, 1)
 
 /mob/living/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	if (status_flags & GODMODE)
+		return
 	//once our fire_burn_temperature has reached the temperature of the fire that's giving fire_stacks, stop adding them.
 	//allow fire_stacks to go up to 4 for fires cooler than 700 K, since are being immersed in flame after all.
 	if(fire_stacks <= 4 || fire_burn_temperature() < exposed_temperature)
@@ -369,6 +375,8 @@
 		client.screen += hud_used.hide_actions_toggle
 
 /mob/living/lava_act(datum/gas_mixture/air, temperature, pressure)
+	if (status_flags & GODMODE)
+		return
 	fire_act(air, temperature)
 	FireBurn(0.4*vsc.fire_firelevel_multiplier, temperature, pressure)
 	. =  (health <= 0) ? ..() : FALSE

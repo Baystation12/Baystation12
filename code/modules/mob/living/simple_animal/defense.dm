@@ -1,6 +1,8 @@
 /mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj || Proj.nodamage)
 		return
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 
 	var/damage = Proj.damage
 	if(Proj.damtype == STUN)

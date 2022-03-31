@@ -115,6 +115,8 @@
 
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/emp_act(severity)
+	if (status_flags & GODMODE)
+		return
 	health -= rand(5, 10) * (severity + 1)
 	disabled = rand(15, 30)
 	malfunctioning = TRUE

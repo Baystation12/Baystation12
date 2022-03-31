@@ -317,5 +317,7 @@
 		overlays += image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
 
 /mob/living/silicon/robot/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	if (status_flags & GODMODE)
+		return
 	if(!on_fire) //Silicons don't gain stacks from hotspots, but hotspots can ignite them
 		IgniteMob()

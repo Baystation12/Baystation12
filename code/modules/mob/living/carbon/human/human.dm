@@ -125,6 +125,8 @@
 				stat("Genetic Damage Time", mind.changeling.geneticdamage)
 
 /mob/living/carbon/human/ex_act(severity)
+	if (status_flags & GODMODE)
+		return
 	if(!blinded)
 		flash_eyes()
 

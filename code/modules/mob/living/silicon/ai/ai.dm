@@ -398,6 +398,8 @@ var/list/ai_verbs_default = list(
 	return FALSE
 
 /mob/living/silicon/ai/emp_act(severity)
+	if (status_flags & GODMODE)
+		return
 	if (prob(30))
 		view_core()
 	..()
