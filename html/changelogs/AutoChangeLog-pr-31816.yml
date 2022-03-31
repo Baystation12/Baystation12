@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: Runtime errors can now be displayed in chat as they occur, if the Show
-      Runtime Logs preference is enabled.
