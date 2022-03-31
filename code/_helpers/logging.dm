@@ -43,7 +43,7 @@
 	to_debug_listeners(text)
 
 /proc/log_runtime(text)
-	for (var/client/C in GLOB.admins)
+	for (var/client/C as anything in GLOB.admins)
 		if (C.get_preference_value(/datum/client_preference/staff/show_runtime_logs) == GLOB.PREF_SHOW)
 			to_chat(C, append_admin_tools(SPAN_DEBUG("<b>RUNTIME</b>: [text]"), usr, usr?.loc))
 
@@ -56,7 +56,7 @@
 	to_debug_listeners(text, "WARNING")
 
 /proc/to_debug_listeners(text, prefix = "DEBUG")
-	for(var/client/C in GLOB.admins)
+	for(var/client/C as anything in GLOB.admins)
 		if(C.get_preference_value(/datum/client_preference/staff/show_debug_logs) == GLOB.PREF_SHOW)
 			to_chat(C, SPAN_DEBUG("<b>[prefix]</b>: [text]"))
 

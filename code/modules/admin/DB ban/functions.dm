@@ -110,7 +110,7 @@ datum/admins/proc/DB_ban_record(var/bantype, var/mob/banned_mob, var/duration = 
 			who += ", [C]"
 
 	var/adminwho
-	for(var/client/C in GLOB.admins)
+	for(var/client/C as anything in GLOB.admins)
 		if(!adminwho)
 			adminwho = "[C]"
 		else

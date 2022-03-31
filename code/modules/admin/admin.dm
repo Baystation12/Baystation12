@@ -7,19 +7,19 @@ var/global/floorIsLava = 0
 /proc/message_admins(var/msg)
 	msg = "<span class=\"log_message\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
 	log_adminwarn(msg)
-	for(var/client/C in GLOB.admins)
+	for(var/client/C as anything in GLOB.admins)
 		if(R_ADMIN & C.holder.rights)
 			to_chat(C, msg)
 /proc/message_staff(var/msg)
 	msg = "<span class=\"log_message\"><span class=\"prefix\">STAFF LOG:</span> <span class=\"message\">[msg]</span></span>"
 	log_adminwarn(msg)
-	for(var/client/C in GLOB.admins)
+	for(var/client/C as anything in GLOB.admins)
 		if(C && C.holder && (R_INVESTIGATE & C.holder.rights))
 			to_chat(C, msg)
 /proc/msg_admin_attack(var/text) //Toggleable Attack Messages
 	log_attack(text)
 	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
-	for(var/client/C in GLOB.admins)
+	for(var/client/C as anything in GLOB.admins)
 		if(check_rights(R_INVESTIGATE, 0, C))
 			if(C.get_preference_value(/datum/client_preference/staff/show_attack_logs) == GLOB.PREF_SHOW)
 				var/msg = rendered
@@ -1569,12 +1569,12 @@ datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
 		to_chat(src.owner, "<span class='notice'>Message reply to transmitted successfully.</span>")
 		if(P.sender) // sent as a reply
 			log_admin("[key_name(src.owner)] replied to a fax message from [key_name(P.sender)]")
-			for(var/client/C in GLOB.admins)
+			for(var/client/C as anything in GLOB.admins)
 				if((R_INVESTIGATE) & C.holder.rights)
 					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(P.sender)] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>")
 		else
 			log_admin("[key_name(src.owner)] has sent a fax message to [destination.department]")
-			for(var/client/C in GLOB.admins)
+			for(var/client/C as anything in GLOB.admins)
 				if((R_INVESTIGATE) & C.holder.rights)
 					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] has sent a fax message to [destination.department] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>")
 
