@@ -37,9 +37,6 @@ SUBSYSTEM_DEF(presence)
 
 /datum/controller/subsystem/presence/flags = SS_NO_INIT
 
-/hook/roundstart/proc/update_presence_subsystem()
-	SSpresence.fire(FALSE, TRUE)
-
 /// 0, or the number of living players on level
 /datum/controller/subsystem/presence/proc/population(level)
 	return levels["[level]"] || 0
@@ -52,7 +49,3 @@ SUBSYSTEM_DEF(presence)
 	return 1
 
 #endif
-
-
-/// Convenience shortcut to use with atoms that want this info, like: if (!LEVEL_HAS_PLAYERS) return
-#define LEVEL_HAS_PLAYERS (SSpresence.levels["[src.z]"])
