@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - admin: Added a painting build mode. This currently only handles base colors and
+      not decals such as floor tile decals or door stripes.
