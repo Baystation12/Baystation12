@@ -12,7 +12,7 @@
 
 // Cassett player
 /obj/item/music_player/csplayer
-	name = "cassett player"
+	name = "cassette player"
 	desc = "An ordinary cassette player model FN-16, he looks old and worn in some places."
 	icon_state = "csplayer_empty"
 	item_state = "device"
@@ -33,8 +33,8 @@
 
 // Boombox
 /obj/item/music_player/boombox
-	name = "black boombox"
-	desc = "A musical audio player station, also known as boombox or ghettobox. Very robust."
+	name = "boombox"
+	desc = "Old-fashioned portable media player, also known as boombox, or ghettobox. Looks very robust, just like most part of old-fashioned things."
 	icon_state = "boombox"
 	item_state = "boombox"
 	tape = /obj/item/music_tape/custom
@@ -45,7 +45,7 @@
 		slot_back_str = 'sprites/onmob_back.dmi',
 		)
 
-//	slot_flags = SLOT_BACK
+	//slot_flags = SLOT_BACK // Ладно, злыдни, но вы мне печеньку должны и десять пат патов. Искренних.
 	w_class = ITEM_SIZE_LARGE
 
 	throwforce = 10

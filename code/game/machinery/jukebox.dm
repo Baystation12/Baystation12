@@ -1,5 +1,5 @@
 /obj/machinery/jukebox
-	name = "mediatronic jukebox"
+	name = "media center"
 	desc = "An immense, standalone touchscreen on a swiveling base, equipped with phased array speakers. Embossed on one corner of the ultrathin bezel is the brand name, 'Leitmotif Enterprise Edition'."
 	icon = 'icons/obj/jukebox_new.dmi'
 	icon_state = "jukebox3"
@@ -16,7 +16,7 @@
 
 /obj/machinery/jukebox/Initialize()
 	. = ..()
-	jukebox = new(src, "jukebox.tmpl", "MediaTronic Library", 400, 600)
+	jukebox = new(src, "jukebox.tmpl", "Torch Special", 400, 600)
 	jukebox.falloff = 3
 	queue_icon_update()
 
@@ -89,7 +89,7 @@
 	return ..()
 
 /obj/machinery/jukebox/old
-	name = "space jukebox"
+	name = "retro jukebox"
 	desc = "A battered and hard-loved jukebox in some forgotten style, carefully restored to some semblance of working condition."
 	icon = 'icons/obj/jukebox.dmi'
 	icon_state = "jukebox2"

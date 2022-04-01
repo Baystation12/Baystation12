@@ -1,7 +1,7 @@
 //from infinity
 /obj/item/music_tape/custom
 	name = "dusty tape"
-	desc = "A dusty tape, which can hold anything. Only what you need is blow the dust away and you will be able to play it again."
+	desc = "A dusty tape, which can hold anything. Only thing you need to do is to blow the dust off and insert it into a compatible player."
 
 /obj/item/music_tape/custom/attack_self(mob/user)
 	if(!ruined && !track)
@@ -11,7 +11,7 @@
 	..()
 
 /obj/item/music_tape/custom/proc/setup_tape(mob/user)
-	var/new_sound = input(user, "Select sound to upload. You should use only those audio formats which byond can accept. Ogg and module files is a good choice.", "Song Reminiscence: File") as null|sound
+	var/new_sound = input(user, "Select a track to upload. You should use only those audio formats which BYOND can accept. Ogg files are a good choice.", "Song Reminiscence: File") as null|sound
 	if(isnull(new_sound))
 		return FALSE
 
