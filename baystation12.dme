@@ -1232,6 +1232,7 @@
 #include "code\modules\admin\buildmode\meteor.dm"
 #include "code\modules\admin\buildmode\mob_spawning.dm"
 #include "code\modules\admin\buildmode\move_into.dm"
+#include "code\modules\admin\buildmode\paint.dm"
 #include "code\modules\admin\buildmode\portals.dm"
 #include "code\modules\admin\buildmode\radiation.dm"
 #include "code\modules\admin\buildmode\relocate_to.dm"
