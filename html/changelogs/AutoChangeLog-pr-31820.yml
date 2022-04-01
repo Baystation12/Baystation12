@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: God mode mobs are no longer affected by explosions, fire, emp, or bullets.
