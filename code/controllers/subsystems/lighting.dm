@@ -32,19 +32,18 @@ SUBSYSTEM_DEF(lighting)
 	var/tmp/processed_corners = 0
 	var/tmp/processed_overlays = 0
 
-/datum/controller/subsystem/lighting/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = {"[text] | \
-			Queues: \
-			Source [light_queue.len] \
-			Corner [corner_queue.len] \
-			Overlay [overlay_queue.len]\n\
-			Source Updates [stats_lists["Source"]]\n\
-			Corner Updates [stats_lists["Corner"]]\n\
-			Overlay Updates [stats_lists["Overlay"]]\
-		"}
-	..(text, force)
+/datum/controller/subsystem/lighting/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..({"\
+		Queues: \
+		Source [light_queue.len] \
+		Corner [corner_queue.len] \
+		Overlay [overlay_queue.len]\n\
+		Source Updates [length(stats_lists["Source"])]\n\
+		Corner Updates [length(stats_lists["Corner"])]\n\
+		Overlay Updates [length(stats_lists["Overlay"])]\
+	"})
 
 
 /datum/controller/subsystem/lighting/Initialize()

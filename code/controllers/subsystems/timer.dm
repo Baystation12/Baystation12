@@ -52,24 +52,24 @@ SUBSYSTEM_DEF(timer)
 	/// How many times bucket was reset
 	var/bucket_reset_count = 0
 
+
 /datum/controller/subsystem/timer/PreInit()
 	bucket_list.len = BUCKET_LEN
 	head_offset = world.time
 	bucket_resolution = world.tick_lag
 
-/datum/controller/subsystem/timer/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = {"\
-			[text] | \
-			Buckets [bucket_count] \
-			Queue2 [length(second_queue)] \
-			Hashes [length(hashes)] \
-			Client Timers [length(clienttime_timers)] \
-			Size [length(timer_id_dict)] \
-			Resets [bucket_reset_count]\
-		"}
-	..(text, force)
+
+/datum/controller/subsystem/timer/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..({"\
+		Buckets [bucket_count] \
+		Queue2 [length(second_queue)] \
+		Hashes [length(hashes)] \
+		Client Timers [length(clienttime_timers)] \
+		Size [length(timer_id_dict)] \
+		Resets [bucket_reset_count]\
+	"})
 
 
 /datum/controller/subsystem/timer/proc/dump_timer_buckets(full = TRUE)

@@ -8,6 +8,10 @@ SUBSYSTEM_DEF(fabrication)
 	var/static/tmp/list/stages_by_type = list()
 
 
+/datum/controller/subsystem/fabrication/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/fabrication/Initialize()
 	for (var/datum/fabricator_recipe/recipe as anything in subtypesof(/datum/fabricator_recipe))
 		recipe = new recipe

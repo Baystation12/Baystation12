@@ -21,6 +21,11 @@ SUBSYSTEM_DEF(robots)
 		"drone, flying"  = /obj/item/device/mmi/digital/robot
 	)
 
+
+/datum/controller/subsystem/robots/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/robots/Initialize()
 	. = ..()
 

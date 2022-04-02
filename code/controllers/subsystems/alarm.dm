@@ -18,11 +18,10 @@ SUBSYSTEM_DEF(alarm)
 	)
 
 
-/datum/controller/subsystem/alarm/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Alarms: [active.len]"
-	..(text, force)
+/datum/controller/subsystem/alarm/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Alarms: [active.len]")
 
 
 /datum/controller/subsystem/alarm/fire(resumed, no_mc_tick)

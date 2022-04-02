@@ -17,6 +17,11 @@ PROCESSING_SUBSYSTEM_DEF(plants)
 	var/list/gene_masked_list = list()		// Stored gene masked list, rather than recreating it when needed.
 	var/list/plant_gene_datums = list()		// Stored datum versions of the gene masked list.
 
+
+/datum/controller/subsystem/character_setup/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/processing/plants/Initialize()
 	// Build the icon lists.
 	for(var/icostate in icon_states('icons/obj/hydroponics_growing.dmi'))

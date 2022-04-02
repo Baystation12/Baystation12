@@ -584,20 +584,18 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	. = 1
 
 
+/datum/controller/master/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..({"\
+		Hub: [config.hub_visible ? "Y" : "N"]  \
+		FPS: [world.fps]  \
+		Ticks: [world.time / world.tick_lag]  \
+		Alive: [Master.processing ? "Y" : "N"]  \
+		Cycle: [Master.iteration]  \
+		Drift: [Round(Master.tickdrift)] | [Percent(Master.tickdrift, world.time / world.tick_lag, 1)]%
+	"})
 
-/datum/controller/master/stat_entry(force)
-	if(!stat_line)
-		stat_line = new (null, src)
-	IF_UPDATE_STAT
-		stat_line.name = {"\
-			Hub: [config.hub_visible ? "Y" : "N"]  \
-			FPS: [world.fps]  \
-			Ticks: [world.time / world.tick_lag]  \
-			Alive: [Master.processing ? "Y" : "N"]  \
-			Cycle: [Master.iteration]  \
-			Drift: [Round(Master.tickdrift)] | [Percent(Master.tickdrift, world.time / world.tick_lag, 1)]%
-		"}
-	stat(name, stat_line)
 
 /datum/controller/master/StartLoadingMap()
 	//disallow more than one map to load at once, multithreading it will just cause race conditions

@@ -23,6 +23,10 @@ SUBSYSTEM_DEF(airflow)
 	current.Cut()
 
 
+/datum/controller/subsystem/airflow/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/airflow/fire(resumed, no_mc_tick)
 	if (!resumed)
 		current = processing.Copy()

@@ -28,11 +28,10 @@ SUBSYSTEM_DEF(fluids)
 		)
 
 
-/datum/controller/subsystem/fluids/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Sources: [water_sources.len] Active Fluids: [active_fluids.len]"
-	..(text, force)
+/datum/controller/subsystem/fluids/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Sources: [water_sources.len] Active Fluids: [active_fluids.len]")
 
 
 /datum/controller/subsystem/fluids/fire(resumed = 0)

@@ -12,6 +12,11 @@ SUBSYSTEM_DEF(graphs_update)
 	pending_graphs = list()
 	. = ..()
 
+
+/datum/controller/subsystem/graphs_update/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/graphs_update/proc/Queue(var/datum/graph/graph)
 	pending_graphs |= graph
 	wake()

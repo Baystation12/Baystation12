@@ -7,6 +7,11 @@ SUBSYSTEM_DEF(customitems)
 	var/list/item_states = list()
 	var/list/mob_states =  list()
 
+
+/datum/controller/subsystem/customitems/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/customitems/Initialize()
 
 	item_states = icon_states(CUSTOM_ITEM_OBJ)

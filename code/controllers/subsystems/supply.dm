@@ -50,11 +50,10 @@ SUBSYSTEM_DEF(supply)
 	add_points_from_source(points_per_process, "time")
 
 
-/datum/controller/subsystem/supply/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Points [points]"
-	..(text, force)
+/datum/controller/subsystem/supply/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Points: [points]")
 
 
 //Supply-related helper procs.

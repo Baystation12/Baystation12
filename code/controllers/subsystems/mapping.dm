@@ -10,6 +10,11 @@ SUBSYSTEM_DEF(mapping)
 	var/list/submaps = list()
 	var/list/submap_archetypes = list()
 
+
+/datum/controller/subsystem/mapping/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/mapping/Initialize(timeofday)
 	// Load templates and build away sites.
 	preloadTemplates()

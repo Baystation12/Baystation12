@@ -11,6 +11,10 @@ SUBSYSTEM_DEF(presence)
 	var/static/tmp/list/build
 
 
+/datum/controller/subsystem/presence/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/presence/Recover()
 	queue.Cut()
 

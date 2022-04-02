@@ -3,7 +3,7 @@
 
 
 SUBSYSTEM_DEF(misc_slow)
-	name = "Misc Runtime (Slow)"
+	name = "Misc Runtime"
 	flags = SS_KEEP_TIMING
 	wait = 30 SECONDS
 	priority = SS_PRIORITY_MISC_SLOW
@@ -14,15 +14,13 @@ SUBSYSTEM_DEF(misc_slow)
 	var/static/tmp/cost_solars = 0
 
 
-/datum/controller/subsystem/misc_slow/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = {"\
-			[text] | \
-			TR: [GLOB.traders.len],[Roundm(cost_traders, 0.1)] \
-			SO: [Roundm(GLOB.sun_angle, 0.1)],[Roundm(GLOB.sun_rate, 0.1)],[Roundm(cost_solars, 0.1)]
-		"}
-	..(text, force)
+/datum/controller/subsystem/misc_slow/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..({"\
+		TR: [GLOB.traders.len],[Roundm(cost_traders, 0.1)] \
+		SO: [Roundm(GLOB.sun_angle, 0.1)],[Roundm(GLOB.sun_rate, 0.1)],[Roundm(cost_solars, 0.1)]
+	"})
 
 
 /datum/controller/subsystem/misc_slow/Recover()

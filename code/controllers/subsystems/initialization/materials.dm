@@ -9,6 +9,11 @@ SUBSYSTEM_DEF(materials)
 	var/list/alloy_products
 	var/list/processable_ores
 
+
+/datum/controller/subsystem/materials/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/materials/Initialize()
 	build_material_lists()
 	. = ..()

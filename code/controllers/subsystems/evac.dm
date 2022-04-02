@@ -11,5 +11,9 @@ SUBSYSTEM_DEF(evac)
 		evacuation_controller = new GLOB.using_map.evac_controller_type ()
 		evacuation_controller.set_up()
 
+
+/datum/controller/subsystem/evac/UpdateStat(time)
+	return
+
 /datum/controller/subsystem/evac/fire()
 	evacuation_controller.process()

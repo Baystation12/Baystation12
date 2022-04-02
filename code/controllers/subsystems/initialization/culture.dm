@@ -7,6 +7,11 @@ SUBSYSTEM_DEF(culture)
 	var/list/cultural_info_by_path =      list()
 	var/list/tagged_info =                list()
 
+
+/datum/controller/subsystem/culture/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/culture/proc/get_all_entries_tagged_with(var/token)
 	return tagged_info[token]
 

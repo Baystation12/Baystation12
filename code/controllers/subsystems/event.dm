@@ -72,11 +72,12 @@ SUBSYSTEM_DEF(event)
 		if (MC_TICK_CHECK)
 			return
 
-/datum/controller/subsystem/event/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Active Events: [active_events.len]"
-	..(text, force)
+
+/datum/controller/subsystem/event/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Active Events: [active_events.len]")
+
 
 //Actual event handling
 /datum/controller/subsystem/event/proc/event_complete(var/datum/event/E)

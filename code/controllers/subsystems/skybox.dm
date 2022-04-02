@@ -17,6 +17,11 @@ SUBSYSTEM_DEF(skybox)
 /datum/controller/subsystem/skybox/PreInit()
 	build_space_appearances()
 
+
+/datum/controller/subsystem/skybox/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/skybox/proc/build_space_appearances()
 	space_appearance_cache = new(26)
 	for (var/i in 0 to 25)

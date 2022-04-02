@@ -52,27 +52,27 @@ SUBSYSTEM_DEF(garbage)
 		fail_counts[i] = 0
 
 
-/datum/controller/subsystem/garbage/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		var/list/counts = list()
-		for (var/list/L in queues)
-			counts += length(L)
-		text += "Q:[counts.Join(",")]|D:[delslasttick]|G:[gcedlasttick]|"
-		text += "GR:"
-		if (!(delslasttick+gcedlasttick))
-			text += "n/a|"
-		else
-			text += "[round((gcedlasttick/(delslasttick+gcedlasttick))*100, 0.01)]%|"
-
-		text += "TD:[totaldels]|TG:[totalgcs]|"
-		if (!(totaldels+totalgcs))
-			text += "n/a|"
-		else
-			text += "TGR:[round((totalgcs/(totaldels+totalgcs))*100, 0.01)]%"
-		text += " P:[pass_counts.Join(",")]"
-		text += "|F:[fail_counts.Join(",")]"
-	..(text, force)
+/datum/controller/subsystem/garbage/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	var/list/build = list()
+	var/list/counts = list()
+	for (var/list/L in queues)
+		counts += length(L)
+	build += "Q:[counts.Join(",")]|D:[delslasttick]|G:[gcedlasttick]|"
+	build += "GR:"
+	if (!(delslasttick+gcedlasttick))
+		build += "n/a|"
+	else
+		build += "[round((gcedlasttick/(delslasttick+gcedlasttick))*100, 0.01)]%|"
+	build += "TD:[totaldels]|TG:[totalgcs]|"
+	if (!(totaldels + totalgcs))
+		build += "n/a|"
+	else
+		build += "TGR:[round((totalgcs/(totaldels+totalgcs))*100, 0.01)]%"
+	build += " P:[pass_counts.Join(",")]"
+	build += "|F:[fail_counts.Join(",")]"
+	..(build.Join(null))
 
 
 /datum/controller/subsystem/garbage/Shutdown()

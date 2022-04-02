@@ -155,8 +155,7 @@ SUBSYSTEM_DEF(shuttle)
 			return ship
 	return null
 
-/datum/controller/subsystem/shuttle/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Shuttles [shuttles.len] Ships [ships.len] Landmarks [registered_shuttle_landmarks.len] Halted [overmap_halted ? "Y" : "N"]"
-	..(text, force)
+/datum/controller/subsystem/shuttle/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Shuttles [shuttles.len] Ships [ships.len] Landmarks [registered_shuttle_landmarks.len] Halted [overmap_halted ? "Y" : "N"]")
