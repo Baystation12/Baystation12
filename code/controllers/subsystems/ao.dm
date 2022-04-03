@@ -8,11 +8,10 @@ SUBSYSTEM_DEF(ao)
 	var/static/tmp/list/cache = list()
 
 
-/datum/controller/subsystem/ao/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Queue: [queue.len]"
-	..(text, force)
+/datum/controller/subsystem/ao/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Queue: [queue.len]")
 
 
 /datum/controller/subsystem/ao/fire(resume, no_mc_tick)

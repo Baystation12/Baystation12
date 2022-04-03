@@ -20,6 +20,10 @@ SUBSYSTEM_DEF(inactivity)
 	current.Cut()
 
 
+/datum/controller/subsystem/inactivity/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/inactivity/fire(resumed, no_mc_tick)
 	if (!resumed)
 		current = GLOB.clients.Copy()

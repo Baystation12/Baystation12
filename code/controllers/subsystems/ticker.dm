@@ -158,33 +158,36 @@ SUBSYSTEM_DEF(ticker)
 			log_error("Ticker arrived at round end in an unexpected endgame state.")
 
 
-/datum/controller/subsystem/ticker/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		switch (GAME_STATE)
-			if (RUNLEVEL_LOBBY)
-				text = "[round_progressing ? "START: [round(pregame_timeleft / 10)]s" : "(PAUSED)"]"
-			if (RUNLEVEL_SETUP)
-				text = "SETUP"
-			if (RUNLEVEL_GAME)
-				text = "GAME"
-			if (RUNLEVEL_POSTGAME)
-				switch (end_game_state)
-					if (END_GAME_NOT_OVER)
-						text = "ENDGAME ERROR"
-					if (END_GAME_AWAITING_MAP)
-						text = "MAP VOTE"
-					if (END_GAME_MODE_FINISH_DONE)
-						text = "MODE OVER, WAITING"
-					if (END_GAME_READY_TO_END)
-						text = "ENDGAME PROCESSING"
-					if (END_GAME_DELAYED)
-						text = "PAUSED"
-					if (END_GAME_AWAITING_TICKETS)
-						text = "AWAITING TICKETS"
-					if (END_GAME_ENDING)
-						text = "END IN [round(restart_timeout / 10)]s"
-	..(text, force)
+/datum/controller/subsystem/ticker/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	switch (GAME_STATE)
+		if (RUNLEVEL_LOBBY)
+			..("[round_progressing ? "START: [round(pregame_timeleft / 10)]s" : "(PAUSED)"]")
+		if (RUNLEVEL_SETUP)
+			..("SETUP")
+		if (RUNLEVEL_GAME)
+			..("GAME")
+		if (RUNLEVEL_POSTGAME)
+			switch (end_game_state)
+				if (END_GAME_NOT_OVER)
+					..("ENDGAME ERROR")
+				if (END_GAME_AWAITING_MAP)
+					..("MAP VOTE")
+				if (END_GAME_MODE_FINISH_DONE)
+					..("MODE OVER, WAITING")
+				if (END_GAME_READY_TO_END)
+					..("ENDGAME PROCESSING")
+				if (END_GAME_DELAYED)
+					..("PAUSED")
+				if (END_GAME_AWAITING_TICKETS)
+					..("AWAITING TICKETS")
+				if (END_GAME_ENDING)
+					..("END IN [round(restart_timeout / 10)]s")
+				else
+					..()
+		else
+			..()
 
 
 /datum/controller/subsystem/ticker/Recover()

@@ -29,6 +29,11 @@ SUBSYSTEM_DEF(goals)
 	if(!length(pending_goals))
 		flags |= SS_NO_FIRE
 
+
+/datum/controller/subsystem/goals/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/goals/Initialize()
 	var/list/all_depts = subtypesof(/datum/department)
 	//See if map is very particular about what depts it has

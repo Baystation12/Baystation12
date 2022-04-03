@@ -1,4 +1,6 @@
 /configuration
+	var/static/atom/movable/clickable_stat/statLine
+
 	var/static/list/gamemode_cache
 
 	/// server name (for world name / status)
@@ -1032,3 +1034,10 @@
 		if (probabilities[tag] > 0 && !mode.check_startable(lobby_players))
 			result[tag] = probabilities[tag]
 	return result
+
+
+/configuration/proc/UpdateStat()
+	if (!statLine)
+		statLine = new (null, src)
+		statLine.name = "Edit"
+	stat("Config", statLine)

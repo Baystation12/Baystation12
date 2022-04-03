@@ -643,8 +643,8 @@
 
 /mob/Stat()
 	..()
-	. = (is_client_active(10 MINUTES))
-	if(!.)
+	. = (is_client_active(5 MINUTES))
+	if (!.)
 		return
 
 	if(statpanel("Status"))
@@ -660,20 +660,24 @@
 			stat("CPU:","[world.cpu]")
 			stat("Instances:","[world.contents.len]")
 			stat(null)
+			var/time = REALTIMEOFDAY
 			if(Master)
-				Master.stat_entry()
+				Master.UpdateStat(time)
 			else
 				stat("Master Controller:", "ERROR")
 			if(Failsafe)
-				Failsafe.stat_entry()
+				Failsafe.UpdateStat(time)
 			else if (Master.initializing)
 				stat("Failsafe Controller:", "Waiting for MC")
 			else
 				stat("Failsafe Controller:", "ERROR")
 			if(Master)
 				stat(null)
-				for(var/datum/controller/subsystem/SS in Master.subsystems)
-					SS.stat_entry()
+				config.UpdateStat()
+				GLOB.UpdateStat()
+				stat(null)
+				for (var/datum/controller/subsystem/subsystem as anything in Master.subsystems)
+					subsystem.UpdateStat(time)
 
 	if(listed_turf && client)
 		if(!TurfAdjacent(listed_turf))

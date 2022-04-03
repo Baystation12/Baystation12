@@ -1,14 +1,14 @@
-SUBSYSTEM_DEF(ai)
-	name = "AI"
-	init_order = SS_INIT_AI
+SUBSYSTEM_DEF(aifast)
+	name = "AI (Fast)"
+	init_order = SS_INIT_AIFAST
 	priority = SS_PRIORITY_AI
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
-	wait = 2 SECONDS
+	wait = 0.25 SECONDS
 	var/static/tmp/list/active = list()
 	var/static/tmp/list/queue = list()
 
 
-/datum/controller/subsystem/ai/UpdateStat(time)
+/datum/controller/subsystem/aifast/UpdateStat(time)
 	if (PreventUpdateStat(time))
 		return ..()
 	..({"\
@@ -17,7 +17,7 @@ SUBSYSTEM_DEF(ai)
 	"})
 
 
-/datum/controller/subsystem/ai/fire(resume, no_mc_tick)
+/datum/controller/subsystem/aifast/fire(resume, no_mc_tick)
 	if (!resume)
 		queue = active.Copy()
 	var/datum/ai_holder/ai
@@ -29,7 +29,7 @@ SUBSYSTEM_DEF(ai)
 			continue
 		if (!config.run_empty_levels && !SSpresence.population(get_z(ai.holder)))
 			continue
-		ai.handle_strategicals()
+		ai.handle_tactics()
 		if (no_mc_tick)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
@@ -38,7 +38,7 @@ SUBSYSTEM_DEF(ai)
 
 
 #ifdef UNIT_TEST
-/datum/controller/subsystem/ai/flags = SS_NO_INIT | SS_NO_FIRE
+/datum/controller/subsystem/aifast/flags = SS_NO_INIT | SS_NO_FIRE
 #else
-/datum/controller/subsystem/ai/flags = SS_NO_INIT
+/datum/controller/subsystem/aifast/flags = SS_NO_INIT
 #endif

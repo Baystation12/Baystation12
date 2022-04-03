@@ -13,11 +13,12 @@ SUBSYSTEM_DEF(processing)
 	var/debug_last_thing
 	var/debug_original_process_proc // initial() does not work with procs
 
-/datum/controller/subsystem/processing/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Queue [processing.len]"
-	..(text, force)
+
+/datum/controller/subsystem/processing/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Queue [processing.len]")
+
 
 /datum/controller/subsystem/processing/fire(resumed = 0)
 	if (!resumed)

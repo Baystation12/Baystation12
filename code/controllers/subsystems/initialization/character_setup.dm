@@ -12,6 +12,11 @@ SUBSYSTEM_DEF(character_setup)
 
 	var/list/save_queue = list()
 
+
+/datum/controller/subsystem/character_setup/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/character_setup/Initialize()
 	while(prefs_awaiting_setup.len)
 		var/datum/preferences/prefs = prefs_awaiting_setup[prefs_awaiting_setup.len]

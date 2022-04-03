@@ -117,18 +117,18 @@ SUBSYSTEM_DEF(air)
 	next_fire = world.time + wait
 	can_fire = TRUE
 
-/datum/controller/subsystem/air/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = {"\
-			[text] | \
-			TtU: [tiles_to_update.len] \
-			ZtU: [zones_to_update.len] \
-			AFZ: [active_fire_zones.len] \
-			AH: [active_hotspots.len] \
-			AE: [active_edges.len]\
-		"}
-	..(text, force)
+
+/datum/controller/subsystem/air/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..({"\
+		TtU: [tiles_to_update.len] \
+		ZtU: [zones_to_update.len] \
+		AFZ: [active_fire_zones.len] \
+		AH: [active_hotspots.len] \
+		AE: [active_edges.len]\
+	"})
+
 
 /datum/controller/subsystem/air/Initialize(timeofday, simulate = TRUE)
 

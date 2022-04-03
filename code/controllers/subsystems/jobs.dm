@@ -28,6 +28,11 @@ SUBSYSTEM_DEF(jobs)
 	var/list/positions_by_department = list()
 	var/list/job_icons =               list()
 
+
+/datum/controller/subsystem/jobs/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/jobs/Initialize(timeofday)
 
 	// Create main map jobs.
