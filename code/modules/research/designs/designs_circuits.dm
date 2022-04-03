@@ -825,3 +825,10 @@
 	)
 	build_path = /obj/item/stock_parts/circuitboard/tele_beacon
 	sort_string = "XAAAF"
+
+/datum/design/circuit/shipmap
+	name = "ship holomap"
+	id = "shipmap"
+	req_tech = list(TECH_ENGINEERING = 1)
+	build_path = /obj/item/stock_parts/circuitboard/shipmap
+	sort_string = "SAAAT"
