@@ -1,0 +1,7 @@
+author: Spookerton
+delete-after: true
+changes:
+  - admin: MC stat lines should update more reliably after midnight. Still don't feed
+      them though.
+  - admin: Added the config and global datums to the MC tab.
+  - admin: Fixed SSlighting showing /list instead of update count.
