@@ -38,7 +38,7 @@
 			continue
 
 		if(floor.density)
-			if(!isnull(seed.chems[/datum/reagent/acid/polyacid]))
+			if(LAZYACCESS(seed.chems, /datum/reagent/acid/polyacid))
 				spawn(rand(5,25)) floor.ex_act(3)
 			continue
 
@@ -59,7 +59,7 @@
 	adjust_health(-seed.handle_environment(T,T.return_air(),null,1))
 	if(health <= 0)
 		return
-	
+
 	//Vine fight!
 	for(var/obj/effect/vine/other in T)
 		if(other.seed != seed)
@@ -87,9 +87,9 @@
 		//Try to spread
 		if(parent && parent.possible_children && prob(spread_chance))
 			var/list/neighbors = get_neighbors()
-			if(neighbors.len)
+			if(neighbors?.len)
 				spread_to(pick(neighbors))
-			
+
 		//Try to settle down
 		if(can_spawn_plant())
 			plant = new(T,seed)
