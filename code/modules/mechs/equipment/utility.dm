@@ -451,6 +451,8 @@
 	var/obj/item/material/drill_head/drill_head
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
 
+	var/particles/sparks = new/particles/fire_sparks
+
 
 
 /obj/item/mech_equipment/drill/Initialize()
@@ -557,8 +559,16 @@
 		SPAN_WARNING("\The [owner] starts to drill \the [target]."),
 		blind_message = SPAN_WARNING("You hear a large motor whirring.")
 	)
+
+	var/atom/movable/particle_emitter/sparks/EM = new(get_turf(target), delay)
+	EM.set_dir(reverse_direction(owner.dir))
+
 	if (!do_after(owner, delay, target, DO_DEFAULT & ~DO_USER_CAN_TURN))
+		if(EM)
+			EM.particles.spawning = FALSE
 		return
+	if(EM)
+		EM.particles.spawning = FALSE
 	if (src != owner.selected_system)
 		to_chat(user, SPAN_WARNING("You must keep \the [src] selected to use it."))
 		return

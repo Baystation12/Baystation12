@@ -321,6 +321,10 @@ var/global/list/mining_floors = list()
 				if(prob(50))
 					M.Stun(5)
 		SSradiation.flat_radiate(src, 25, 200)
+
+	//Let's add some effects
+	new/atom/movable/particle_emitter/dust(src, 1 SECOND)
+
 	//Add some rubble,  you did just clear out a big chunk of rock.
 
 	var/turf/simulated/floor/asteroid/N = ChangeTurf(mined_turf)
