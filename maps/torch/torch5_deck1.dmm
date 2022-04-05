@@ -7739,6 +7739,7 @@
 	dir = 5;
 	icon_state = "corner_white"
 	},
+/obj/machinery/ship_map,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
 "axh" = (

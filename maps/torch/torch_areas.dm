@@ -332,11 +332,6 @@
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
 	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
 
-/area/shuttle/escape_pod14/station
-	name = "Escape Pod Nine"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
-	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
-
 /area/shuttle/escape_pod15/station
 	name = "Escape Pod Ten"
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
@@ -617,7 +612,7 @@
 	name = "Briefing Room"
 	icon_state = "head_quarters"
 	sound_env = MEDIUM_SOFTFLOOR
-	
+
 /area/command/captainmess
 	name = "Officer's Mess"
 	icon_state = "bar"
@@ -629,12 +624,14 @@
 	icon_state = "head_quarters"
 	sound_env = MEDIUM_SOFTFLOOR
 	req_access = list(access_pathfinder)
+	holomap_color = HOLOMAP_AREACOLOR_EXPLORATION
 
 /area/command/pilot
 	name = "\improper Pilot's Lounge"
 	icon_state = "head_quarters"
 	sound_env = MEDIUM_SOFTFLOOR
 	req_access = list(access_pilot)
+	holomap_color = HOLOMAP_AREACOLOR_EXPLORATION
 
 /area/command/armoury
 	name = "\improper Emergency Armory"
@@ -723,9 +720,6 @@
 	req_access = list(access_senadv)
 
 // Engineering
-/area/tcommsat/relay
-	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
-
 /area/engineering/shieldbay
 	name = "Shield Bay"
 	icon_state = "engineering"
@@ -902,6 +896,7 @@
 	name = "\improper Exploration Equipment"
 	icon_state = "exploration"
 	req_access = list(list(access_explorer, access_pathfinder, access_pilot))
+	holomap_color = HOLOMAP_AREACOLOR_EXPLORATION
 
 /area/quartermaster/shuttlefuel
 	name = "\improper Shuttle Fuel Bay"

@@ -34,6 +34,5 @@ GLOBAL_DATUM_INIT(global_hud, /datum/global_hud, new())
 	holomap.name = "holomap"
 	holomap.icon = null
 	holomap.layer = HUD_BASE_LAYER
-	holomap.screen_loc = ui_holomap
+	holomap.screen_loc = UI_HOLOMAP
 	holomap.mouse_opacity = 0
-

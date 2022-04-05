@@ -17307,6 +17307,13 @@
 "QC" = (
 /turf/simulated/floor/tiled/monotile,
 /area/vacant/brig)
+"QD" = (
+/obj/effect/floor_decal/corner/green{
+	dir = 5
+	},
+/obj/machinery/ship_map,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/thirddeck/center)
 "QE" = (
 /obj/structure/table/rack,
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -36291,7 +36298,7 @@ nc
 og
 oY
 kL
-Xn
+QD
 sj
 wV
 uM

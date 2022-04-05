@@ -35,6 +35,11 @@ SUBSYSTEM_DEF(minimap)
 	for (var/z = 1 to world.maxz)
 		generateHolomap(z)
 
+	//Update machinery if it has not been
+	for(var/obj/machinery/ship_map/M in station_holomaps)
+		if(istype(M) && !QDELETED(M))
+			M.update_map_data()
+
 	..()
 
 /datum/controller/subsystem/minimap/proc/generateHolomap(zlevel)

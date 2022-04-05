@@ -39,7 +39,7 @@
 /obj/machinery/constructable_frame/machine_frame/AltClick(mob/user)
 	. = ..()
 	if(!anchored)
-		src.set_dir(turn(src.dir, -90))
+		set_dir(turn(dir, -90))
 		to_chat(user, SPAN_NOTICE("You turn \the [src] around."))
 
 /obj/machinery/constructable_frame/machine_frame/deconstruct

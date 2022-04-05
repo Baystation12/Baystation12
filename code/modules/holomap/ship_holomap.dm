@@ -3,13 +3,13 @@
 	desc = "A virtual map of the surrounding craft."
 	icon = 'icons/obj/machines/stationmap.dmi'
 	icon_state = "station_map"
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	use_power = POWER_USE_IDLE
 	idle_power_usage = 10
 	active_power_usage = 500
 
-	light_color = "#64C864"
+	light_color = "#64c864"
 
 	uncreated_component_parts = null
 
@@ -53,6 +53,15 @@
 		pixel_x = -32
 
 	SSminimap.station_holomaps += src
+
+	if(SSminimap.initialized)
+		update_map_data()
+
+	floor_markings = image('icons/obj/machines/stationmap.dmi', "decal_station_map")
+	floor_markings.dir = src.dir
+	update_icon()
+
+/obj/machinery/ship_map/proc/update_map_data()
 	if(!SSminimap.holomaps[original_zLevel])
 		bogus = TRUE
 		holomap_datum.initialize_holomap_bogus()
@@ -67,8 +76,6 @@
 	small_station_map.pixel_x = 10
 	small_station_map.pixel_y = 10
 
-	floor_markings = image('icons/obj/machines/stationmap.dmi', "decal_station_map")
-	floor_markings.dir = src.dir
 	update_icon()
 
 /obj/machinery/ship_map/attack_hand(var/mob/user)
@@ -131,7 +138,6 @@
 			animate(holomap_datum.station_map, alpha = 0, time = 5, easing = LINEAR_EASING)
 			var/mob/M = watching_mob
 			addtimer(CALLBACK(src, .proc/clear_image, M, holomap_datum.station_map), 5, TIMER_CLIENT_TIME)//we give it time to fade out
-			clear_image(M, holomap_datum.station_map)
 		GLOB.moved_event.unregister(watching_mob, src)
 		GLOB.destroyed_event.unregister(watching_mob, src)
 	watching_mob = null
@@ -148,16 +154,13 @@
 	overlays.Cut()
 	if(stat & BROKEN)
 		icon_state = "station_mapb"
+		set_light(0)
 	else if((stat & NOPOWER) || !anchored)
 		icon_state = "station_map0"
+		set_light(0)
 	else
 		icon_state = "station_map"
-
-		if(bogus)
-			holomap_datum.initialize_holomap_bogus()
-		else
-			holomap_datum.initialize_holomap(get_turf(src))
-
+		set_light(0.8, 0.1, 2, 2, "#1dbe17")
 
 		// Put the little "map" overlay down where it looks nice
 		if(small_station_map)
@@ -310,6 +313,7 @@
 		LAZYADD(legend, new /obj/screen/legend(null ,HOLOMAP_AREACOLOR_SECURITY, "■ Security"))
 		LAZYADD(legend, new /obj/screen/legend(null ,HOLOMAP_AREACOLOR_MEDICAL, "■ Medical"))
 		LAZYADD(legend, new /obj/screen/legend(null ,HOLOMAP_AREACOLOR_SCIENCE, "■ Research"))
+		LAZYADD(legend, new /obj/screen/legend(null ,HOLOMAP_AREACOLOR_EXPLORATION, "■ Exploration"))
 		LAZYADD(legend, new /obj/screen/legend(null ,HOLOMAP_AREACOLOR_ENGINEERING, "■ Engineering"))
 		LAZYADD(legend, new /obj/screen/legend(null ,HOLOMAP_AREACOLOR_CARGO, "■ Supply"))
 		LAZYADD(legend, new /obj/screen/legend(null ,HOLOMAP_AREACOLOR_AIRLOCK, "■ Airlock"))
