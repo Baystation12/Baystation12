@@ -76,15 +76,16 @@ GLOBAL_LIST_INIT(trader_uniques, subtypesof(/datum/trader/ship/unique))
 			candidates = GLOB.trader_uniques.Copy() - GLOB.trader_types
 		else
 			candidates = GLOB.trader_ships.Copy() - GLOB.trader_types
-		for (var/i = (generate_stations || 1) to 1 step -1)
-			trader_type = pick(candidates)
-			candidates -= trader_type
-			GLOB.trader_types += trader_type
-			GLOB.traders[trader_type] = new trader_type
-			if (generate_stations)
-				CHECK_TICK
-			else if (MC_TICK_CHECK)
-				return
+		if (length(candidates))
+			for (var/i = (generate_stations || 1) to 1 step -1)
+				trader_type = pick(candidates)
+				candidates -= trader_type
+				GLOB.trader_types += trader_type
+				GLOB.traders[trader_type] = new trader_type
+				if (generate_stations)
+					CHECK_TICK
+				else if (MC_TICK_CHECK)
+					return
 	for (var/i = count to 1 step -1)
 		trader_type = queue[i]
 		trader = GLOB.traders[trader_type]
