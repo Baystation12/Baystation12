@@ -204,13 +204,7 @@
 	//roll to-hit
 	var/miss_modifier = max(distance_falloff*(distance)*(distance) - hitchance_mod + special_miss_modifier, -30)
 	//makes moving targets harder to hit, and stationary easier to hit
-	var/movment_mod = min(5, (world.time - target_mob.l_move_time) - 20)
-	//running in a straight line isnt as helpful tho
-	if(movment_mod < 0)
-		if(target_mob.last_move == get_dir(firer, target_mob))
-			movment_mod *= 0.25
-		else if(target_mob.last_move == get_dir(target_mob,firer))
-			movment_mod *= 0.5
+	var/movment_mod = min(5, (world.time - target_mob.l_move_time) - 5)
 	miss_modifier -= movment_mod
 	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1 || original != target_mob)) //if the projectile hits a target we weren't originally aiming at then retain the chance to miss
 
