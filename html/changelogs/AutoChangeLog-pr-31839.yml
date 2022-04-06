@@ -1,0 +1,5 @@
+author: Kell-e
+delete-after: true
+changes:
+  - balance: Characters are now 75% less likely to cha-cha slide through projectiles
+      using their extreme speed.
