@@ -75,6 +75,8 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define isspaceturf(A) istype(A, /turf/space)
 
+#define isopenturf(A) istype(A, /turf/simulated/open)
+
 #define ispAI(A) istype(A, /mob/living/silicon/pai)
 
 #define isrobot(A) istype(A, /mob/living/silicon/robot)

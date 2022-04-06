@@ -36,6 +36,12 @@
 		else
 			icon_state = "box_0"
 
+/obj/machinery/constructable_frame/machine_frame/AltClick(mob/user)
+	. = ..()
+	if(!anchored)
+		set_dir(turn(dir, -90))
+		to_chat(user, SPAN_NOTICE("You turn \the [src] around."))
+
 /obj/machinery/constructable_frame/machine_frame/deconstruct
 	anchored = TRUE
 	construct_state = /decl/machine_construction/frame/awaiting_circuit
