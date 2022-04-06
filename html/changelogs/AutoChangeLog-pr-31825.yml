@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: Fixed 'Advanced ProcCall' verb to allow for global proc-calling
-  - admin: Added the 'path' argument to 'Advanced ProcCall' verb
