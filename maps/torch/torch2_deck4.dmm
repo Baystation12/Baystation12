@@ -610,6 +610,15 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/janitor/storage)
+"cj" = (
+/obj/effect/floor_decal/corner/green{
+	dir = 9
+	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/hallway/primary/fourthdeck/aft)
 "ck" = (
 /obj/structure/table/standard,
 /obj/item/clothing/mask/plunger,
@@ -1835,6 +1844,9 @@
 	dir = 10
 	},
 /obj/effect/catwalk_plated,
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 8
+	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/fore)
 "gc" = (
@@ -3383,6 +3395,19 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/aft)
+"lJ" = (
+/obj/effect/floor_decal/corner/white{
+	dir = 1;
+	icon_state = "corner_white"
+	},
+/obj/effect/floor_decal/corner/red{
+	dir = 8
+	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/hallway/primary/fourthdeck/aft)
 "lK" = (
 /obj/random/trash,
 /obj/structure/disposalpipe/segment,
@@ -3403,6 +3428,12 @@
 /obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/aft)
+"lR" = (
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/fourthdeck/center)
 "lU" = (
 /obj/machinery/light{
 	dir = 1
@@ -3681,6 +3712,9 @@
 	dir = 4;
 	icon_state = "intact"
 	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
 "ms" = (
@@ -3801,6 +3835,9 @@
 /obj/effect/floor_decal/corner/green/half{
 	dir = 8;
 	icon_state = "bordercolorhalf"
+	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/hallway/primary/fourthdeck/aft)
@@ -6052,6 +6089,22 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/center)
+"un" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/white{
+	dir = 8;
+	icon_state = "corner_white"
+	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/fourthdeck/fore)
 "uo" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -6333,6 +6386,13 @@
 /obj/item/tank/jetpack/carbondioxide,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/eva)
+"va" = (
+/obj/structure/catwalk,
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 8
+	},
+/turf/simulated/open,
+/area/quartermaster/hangar/top)
 "vb" = (
 /obj/structure/reagent_dispensers/watertank,
 /obj/effect/floor_decal/industrial/outline/blue,
@@ -6643,6 +6703,9 @@
 /obj/structure/cable/green{
 	d2 = 4;
 	icon_state = "0-4"
+	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/eva)
@@ -7940,6 +8003,20 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/office)
+"AB" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 1;
+	icon_state = "corner_white"
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 8;
+	icon_state = "corner_white"
+	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/hallway/primary/fourthdeck/aft)
 "AC" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -9117,6 +9194,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/effect/catwalk_plated,
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 8
+	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/fore)
 "Fp" = (
@@ -10517,6 +10597,9 @@
 	dir = 1;
 	pixel_y = -24
 	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fourthdeck/aft)
 "Kk" = (
@@ -11142,6 +11225,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
+"Mg" = (
+/obj/structure/catwalk,
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 4
+	},
+/turf/simulated/floor/shuttle_ceiling/torch/air,
+/area/quartermaster/hangar/top)
 "Mh" = (
 /obj/structure/catwalk,
 /turf/simulated/open,
@@ -13060,6 +13150,19 @@
 "RA" = (
 /turf/simulated/wall/prepainted,
 /area/quartermaster/expedition/storage)
+"RB" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated,
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/hallway/primary/fourthdeck/fore)
 "RC" = (
 /obj/machinery/firealarm{
 	dir = 1;
@@ -14000,6 +14103,7 @@
 /obj/effect/floor_decal/corner/brown{
 	dir = 5
 	},
+/obj/machinery/rotating_alarm/security_alarm,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
 "TJ" = (
@@ -27447,7 +27551,7 @@ hP
 jc
 ej
 mh
-nm
+RB
 oA
 dg
 pM
@@ -29073,7 +29177,7 @@ ub
 vw
 wF
 nx
-Le
+un
 le
 BU
 CV
@@ -31695,7 +31799,7 @@ fl
 qb
 NP
 sG
-NP
+lR
 Rm
 Oj
 NN
@@ -33109,7 +33213,7 @@ oQ
 WI
 WI
 WI
-WI
+Mg
 oQ
 WI
 WI
@@ -37144,7 +37248,7 @@ wt
 lu
 Sr
 VW
-lr
+va
 lr
 MU
 ru
@@ -37153,7 +37257,7 @@ RW
 wd
 lr
 lr
-lr
+va
 lr
 vQ
 jB
@@ -40565,7 +40669,7 @@ RR
 aJ
 bk
 Mx
-YR
+AB
 YR
 YR
 YR
@@ -40588,7 +40692,7 @@ Wm
 JA
 mD
 Ae
-ag
+cj
 ag
 Dw
 ag
@@ -40599,7 +40703,7 @@ KU
 uj
 uj
 uj
-uj
+lJ
 Jx
 JP
 aJ
