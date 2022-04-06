@@ -87,27 +87,26 @@ var/roundstart_hour
 var/station_date = ""
 var/next_station_date_change = 1 DAY
 
-#define duration2stationtime(time) time2text(station_time_in_ticks + time, "hh:mm")
+#define duration2stationtime(time) time2text(world.timeofday + time, "hh:mm")
 #define worldtime2stationtime(time) time2text(roundstart_hour HOURS + time, "hh:mm")
 #define round_duration_in_ticks (round_start_time ? world.time - round_start_time : 0)
-#define station_time_in_ticks (roundstart_hour HOURS + round_duration_in_ticks)
 
 /proc/stationtime2text()
-	return time2text(station_time_in_ticks, "hh:mm")
+	return time2text(world.timeofday, "hh:mm")
 
 /proc/stationdate2text()
 	var/update_time = FALSE
-	if(station_time_in_ticks > next_station_date_change)
+	if(world.timeofday > next_station_date_change)
 		next_station_date_change += 1 DAY
 		update_time = TRUE
 	if(!station_date || update_time)
-		var/extra_days = round(station_time_in_ticks / (1 DAY)) DAYS
+		var/extra_days = round(world.timeofday / (1 DAY)) DAYS
 		var/timeofday = world.timeofday + extra_days
 		station_date = "[GLOB.using_map.game_year]-[time2text(timeofday, "MM-DD")]"
 	return station_date
 
 /proc/time_stamp()
-	return time2text(station_time_in_ticks, "hh:mm:ss")
+	return time2text(world.timeofday, "hh:mm:ss")
 
 /* Returns 1 if it is the selected month and day */
 proc/isDay(var/month, var/day)
