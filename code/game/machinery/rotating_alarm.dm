@@ -4,6 +4,7 @@
 	var/_factor = 0.5
 	var/_density = 4
 	var/_offset = 30
+	var/_color = COLOR_ORANGE
 	plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	layer = EYE_GLOW_LAYER
 	mouse_opacity = 0
@@ -11,7 +12,7 @@
 
 /obj/effect/spinning_light/Initialize()
 	. = ..()
-	filters = filter(type="rays", size = _size, color = COLOR_ORANGE, factor = _factor, density = _density, flags = FILTER_OVERLAY, offset = _offset)
+	filters = filter(type="rays", size = _size, color = _color, factor = _factor, density = _density, flags = FILTER_OVERLAY, offset = _offset)
 
 	alpha = 200
 
@@ -27,18 +28,23 @@
 	animate(transform =      test * matrix(),   spin_rate / 4, loop = -1, )
 
 
+/obj/effect/spinning_light/set_color(_color)
+	filters = filter(type="rays", size = _size, color = _color, factor = _factor, density = _density, flags = FILTER_OVERLAY, offset = _offset)
+
+
 /obj/machinery/rotating_alarm
 	name = "Industrial alarm"
 	desc = "An industrial rotating alarm light."
-	icon = 'icons/obj/supermatter.dmi'
+	icon = 'icons/obj/rotating_alarm.dmi'
 	icon_state = "alarm"
 	idle_power_usage = 0
 	active_power_usage = 0
 
 	var/on = FALSE
+	var/low_alarm = FALSE
 	var/construct_type = /obj/machinery/light_construct
 
-	var/static/obj/effect/spinning_light/spin_effect = null
+	var/obj/effect/spinning_light/spin_effect = null
 
 	var/alarm_light_color = COLOR_ORANGE
 	/// This is an angle to rotate the colour of alarm and its light. Default is orange, so, a 45 degree angle clockwise will make it green
@@ -56,10 +62,7 @@
 
 	color = color_matrix
 
-	var/HSV = RGBtoHSV(alarm_light_color)
-	var/RGB = HSVtoRGB(RotateHue(HSV, angle))
-
-	alarm_light_color = RGB
+	set_color(alarm_light_color)
 
 	set_dir(dir) //Set dir again so offsets update correctly
 
@@ -76,13 +79,23 @@
 		pixel_x = -20
 
 
+/obj/machinery/rotating_alarm/set_color(color)
+	alarm_light_color = color
+	var/HSV = RGBtoHSV(alarm_light_color)
+	var/RGB = HSVtoRGB(RotateHue(HSV, angle))
+	alarm_light_color = RGB
+	spin_effect.set_color(color)
+
+
 /obj/machinery/rotating_alarm/proc/set_on()
 	vis_contents += spin_effect
 	set_light(1, 0.5, 2, 0.3, alarm_light_color)
 	on = TRUE
+	low_alarm = FALSE
 
 
 /obj/machinery/rotating_alarm/proc/set_off()
 	vis_contents -= spin_effect
 	set_light(0)
 	on = FALSE
+	low_alarm = FALSE

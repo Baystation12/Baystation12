@@ -27,6 +27,7 @@
 /decl/security_level/default/torchdept/code_green
 	name = "code green"
 	icon = 'icons/misc/security_state.dmi'
+	alarm_level = "off"
 
 	light_max_bright = 0.25
 	light_inner_range = 0.1
@@ -46,6 +47,7 @@
 
 /decl/security_level/default/torchdept/code_violet
 	name = "code violet"
+	alarm_level = "on"
 
 	light_max_bright = 0.5
 	light_inner_range = 1
@@ -64,6 +66,7 @@
 
 /decl/security_level/default/torchdept/code_orange
 	name = "code orange"
+	alarm_level = "on"
 
 	light_max_bright = 0.5
 	light_inner_range = 1
@@ -83,6 +86,7 @@
 /decl/security_level/default/torchdept/code_blue
 	name = "code blue"
 	icon = 'icons/misc/security_state.dmi'
+	alarm_level = "on"
 
 	light_max_bright = 0.5
 	light_inner_range = 1
@@ -101,6 +105,7 @@
 /decl/security_level/default/torchdept/code_red
 	name = "code red"
 	icon = 'icons/misc/security_state.dmi'
+	alarm_level = "on"
 
 	light_max_bright = 0.75
 	light_inner_range = 1
@@ -128,7 +133,8 @@
 /decl/security_level/default/torchdept/code_delta
 	name = "code delta"
 	icon = 'icons/misc/security_state.dmi'
-	
+	alarm_level = "on"
+
 	light_max_bright = 0.75
 	light_inner_range = 0.1
 	light_outer_range = 3
