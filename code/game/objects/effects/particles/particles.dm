@@ -10,7 +10,7 @@
 
 /atom/movable/particle_emitter/Initialize(mapload, time)
 	. = ..()
-	QDEL_IN(src, time SECONDS)
+	QDEL_IN(src, time)
 
 particles/fire
 	width = 500
@@ -30,15 +30,14 @@ particles/smoke
 	width = 500
 	height = 1000
 	count = 3000
-	spawning = 3
+	spawning = 5
 	lifespan = 40
 	fade = 40
-	velocity = list(0, 2)
-	position = list(0, 8)
+	velocity = generator("box", list(-1, 2), list(1, 2), NORMAL_RAND)
 	gravity = list(0, 1)
 
 	friction = 0.1
-	drift = generator("vector", list(-0.16, -0.2), list(0.16, 0.2))
+	drift = generator("vector", list(-0.2, -0.3), list(0.2, 0.3))
 	color = "white"
 
 particles/fire_sparks
@@ -71,6 +70,19 @@ particles/drill_sparks
 	color_change = 0.125
 	color = 0
 	transform = list(1,0,0,0, 0,1,0,0, 0,0,1,1/5, 0,0,0,1)
+
+particles/flare_sparks
+	width = 500
+	height = 500
+	count = 2000
+	spawning = 12
+	lifespan = 0.75 SECONDS
+	fade = 0.95 SECONDS
+	position = generator("circle", -2, 2, NORMAL_RAND)
+	velocity = generator("circle", -6, 6, NORMAL_RAND)
+	friction = 0.15
+	gradient = list(0, COLOR_WHITE, 0.4, COLOR_RED)
+	color_change = 0.125
 
 particles/dust
 	width = 124
@@ -110,3 +122,13 @@ particles/dust
 
 /atom/movable/particle_emitter/dust
 	particles = new/particles/dust
+
+/atom/movable/particle_emitter/smoke
+	layer = FIRE_LAYER
+	particles = new/particles/smoke
+	filters = filter(type="blur", size=1.5)
+
+/atom/movable/particle_emitter/sparks_flare
+	plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	particles = new/particles/flare_sparks
+	filters = filter(type="bloom", size=3, offset = 0.5, alpha = 220)

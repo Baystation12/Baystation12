@@ -222,6 +222,20 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	time_to_live=lifetime
 	..()
 
+/obj/effect/effect/smoke/illumination/flare
+	name = "illumination"
+	opacity = 1
+	mouse_opacity = 1
+	anchored = TRUE
+	icon = null
+	icon_state = null
+
+/obj/effect/effect/smoke/illumination/flare/New(var/newloc, var/lifetime=10, var/range=null, var/power=null, var/color=null)
+	..()
+	new/atom/movable/particle_emitter/smoke(newloc, time_to_live)
+	new/atom/movable/particle_emitter/sparks_flare(newloc, time_to_live)
+
+
 /////////////////////////////////////////////
 // Bad smoke
 /////////////////////////////////////////////
