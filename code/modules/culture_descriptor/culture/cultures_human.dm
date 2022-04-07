@@ -139,6 +139,11 @@
 	language = LANGUAGE_HUMAN_RUSSIAN
 	economic_power = 0.9
 
+/decl/cultural_info/culture/human/gaia
+	name = CULTURE_HUMAN_GAIAN
+	description = "Gaia is the sole planet in the Galilei system, serving as the DMZ between the Sol Central Government and the Independent Colonial Confederation of Gilgamesh. It is an agricultural world, though various conflicts across the planet's surface have left it scarred. The planet is divided into Sol-Controlled Southern Gaia and Independent-Controlled Northern Gaia, with New Venice remaining a neutral zone inside the DMZ. The planet's population remain divided even 10 years after the Gaia Conflict. New Venice sits on the edge of Lake Cabot. While Gaia is divided, the current Mayor of New Venice serves as a vital mediator between both sides. The Gaian People are tired of war, and long to see their families once again. They suffered hard twenty years prior, and fear they may suffer again."
+	economic_power = 0.9
+
 /decl/cultural_info/culture/human/other
 	name = CULTURE_HUMAN_OTHER
 	description = "Some people are from places no one has ever heard of or places too wild and fantastical to make it into Encyclopedia Galactica. You are one of these. "
