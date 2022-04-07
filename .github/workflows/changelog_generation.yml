@@ -17,7 +17,7 @@ jobs:
           ref: dev
           token: ${{ secrets.BOT_TOKEN }}
       - name: Python setup
-        uses: actions/setup-python@9c644ca2ab8e57ea0a487b5ec2f8290740378bfd
+        uses: actions/setup-python@21c0493ecfd34b1217f0a90ec19a327f3cc0a048
         with:
           python-version: '3.x'
       - name: Install depends
