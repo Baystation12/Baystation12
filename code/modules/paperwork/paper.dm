@@ -46,9 +46,9 @@
 	var/datum/language/language = LANGUAGE_HUMAN_EURO // Language the paper was written in. Editable by users up until something's actually written
 
 	var/const/deffont = "Verdana"
-	var/const/signfont = "Times New Roman"
+	var/const/signfont = "Brush Script MT"
 	var/const/crayonfont = "Comic Sans MS"
-	var/const/fancyfont = "Segoe Print"
+	var/const/fancyfont = "Garamond"
 
 	var/scan_file_type = /datum/computer_file/data/text
 
@@ -309,7 +309,7 @@
 		t = replacetext(t, "\[sign\]", "")
 
 	if (findtext(t, "\[sign\]"))
-		t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[get_signature(P, user)]</i></font>")
+		t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\" style=\"font-size: 1.5em\"><i>[get_signature(P, user)]</i></font>")
 
 	if(iscrayon) // If it is a crayon, and he still tries to use these, make them empty!
 		t = replacetext(t, "\[*\]", "")
@@ -327,7 +327,7 @@
 	if(iscrayon)
 		t = "<font face=\"[crayonfont]\" color=[P ? P.colour : "black"]><b>[t]</b></font>"
 	else if(isfancy)
-		t = "<font face=\"[fancyfont]\" color=[P ? P.colour : "black"]><i>[t]</i></font>"
+		t = "<font face=\"[fancyfont]\" color=[P ? P.colour : "black"]>[t]</font>"
 	else
 		t = "<font face=\"[deffont]\" color=[P ? P.colour : "black"]>[t]</font>"
 
