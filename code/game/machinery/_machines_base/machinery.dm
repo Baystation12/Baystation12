@@ -135,6 +135,8 @@ Class Procs:
 	var/id_tag
 	/// What is created when the machine is dismantled.
 	var/frame_type = /obj/machinery/constructable_frame/machine_frame/deconstruct
+	/// Whether or not the machine is allowed to be dismantled/modified. Used for snowflake consoles that would break permanently if dismantled. Also prevents damage, since the machine would be irreparable in this state. Has to be defined here because machinery datums.
+	var/can_use_tools = TRUE
 
 	/// Component parts queued for processing by the machine. Expected type: `/obj/item/stock_parts`
 	var/list/processing_parts
