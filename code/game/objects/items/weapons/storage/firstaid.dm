@@ -134,18 +134,16 @@
 	icon_state = "stabfirstaid"
 	item_state = "firstaid-advanced"
 	w_class = 2
+	storage_slots = 7
 
 	startswith = list(
 		/obj/item/reagent_containers/hypospray/autoinjector/coagulant,
-		/obj/item/reagent_containers/hypospray/autoinjector/pain,
 		/obj/item/reagent_containers/hypospray/autoinjector/pain,
 		/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/adrenaline,
 		/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline,
 		/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline,
 		/obj/item/reagent_containers/hypospray/autoinjector/dexalin_plus,
-		/obj/item/reagent_containers/hypospray/autoinjector/dexalin_plus,
 		/obj/item/reagent_containers/hypospray/autoinjector/detox,
-		/obj/item/reagent_containers/hypospray/autoinjector/detox
 		)
 	
 
