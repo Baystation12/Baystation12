@@ -1,0 +1,9 @@
+author: ComradeCheekiBreeki
+delete-after: true
+changes:
+  - tweak: Differentiated existing loadout lists for awards into SolGov military awards,
+      SolGov civilian awards and SolGov military ribbons. Anyone who had medals or
+      ribbons in their loadout before will need to add them again.
+  - tweak: Redid all SolGov medals and ribbons (name, icon and description).
+  - rscadd: Added 14 new ribbons, 11 of which are medal ribbons and 3 of which are
+      new awards.
