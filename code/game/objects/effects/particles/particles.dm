@@ -1,17 +1,6 @@
 /* A series of particle systems. Some are based on F0lak's particle system
 */
 
-//Spawner object
-//Maybe we could pool them in and out
-/atom/movable/particle_emitter
-	name = ""
-	anchored = TRUE
-	mouse_opacity = 0
-
-/atom/movable/particle_emitter/Initialize(mapload, time)
-	. = ..()
-	QDEL_IN(src, time)
-
 particles/fire
 	width = 500
 	height = 500
@@ -87,14 +76,56 @@ particles/flare_sparks
 particles/dust
 	width = 124
 	height = 124
-	count = 12
-	spawning = 12
-	lifespan = 0.6 SECONDS
-	fade = 0.15 SECONDS
-	position = generator("circle", -6, 6, NORMAL_RAND)
-	velocity = generator("circle", -3, 3, NORMAL_RAND)
-	friction = 0.1
+	count = 256
+	spawning = 999999 //spawn all instantly
+	lifespan = 0.75 SECONDS
+	fade = 0.35 SECONDS
+	position = generator("box", list(-16, -16), list(16, 16), NORMAL_RAND)
+	velocity = generator("circle", -8, 8, NORMAL_RAND)
+	friction = 0.125
 	color = COLOR_OFF_WHITE
+
+particles/debris
+	width = 124
+	height = 124
+	count = 16
+	spawning = 999999 //spawn all instantly
+	lifespan = 0.75 SECONDS
+	fade = 0.35 SECONDS
+	position = generator("box", list(-10, -10), list(10, 10), NORMAL_RAND)
+	velocity = generator("circle", -15, 15, NORMAL_RAND)
+	friction = 0.225
+	gravity = list(0, -1)
+	icon = 'icons/effects/particles.dmi'
+	icon_state = list("rock1", "rock2", "rock3", "rock4", "rock5")
+	rotation = generator("num", 0, 360, NORMAL_RAND)
+
+particles/drill_sparks/debris
+	friction = 0.25
+	gradient = null
+	color = COLOR_WHITE
+	transform = list(1/2,0,0,0, 0,1/2,0,0, 0,0,1/2,1/5, 0,0,0,1)
+	icon = 'icons/effects/particles.dmi'
+	icon_state = list("rock1", "rock2", "rock3", "rock4", "rock5")
+
+
+//Spawner object
+//Maybe we could pool them in and out
+/atom/movable/particle_emitter
+	name = ""
+	anchored = TRUE
+	mouse_opacity = 0
+
+/atom/movable/particle_emitter/Initialize(mapload, time, _color)
+	. = ..()
+	QDEL_IN(src, time)
+	color = _color
+
+/atom/movable/particle_emitter/proc/enable(on)
+	if(on)
+		particles.spawning = initial(particles.spawning)
+	else
+		particles.spawning = 0
 
 /atom/movable/particle_emitter/sparks
 	particles = new/particles/drill_sparks
@@ -119,8 +150,18 @@ particles/dust
 
 	particles.velocity = generator("box", min, max, NORMAL_RAND)
 
+/atom/movable/particle_emitter/sparks/debris
+	particles = new/particles/drill_sparks/debris
+	plane = DEFAULT_PLANE
 
-/atom/movable/particle_emitter/dust
+/atom/movable/particle_emitter/burst/Initialize(mapload, time)
+	. = ..()
+	//Burst emitters turn off after 1 tick
+		addtimer(CALLBACK(src, .proc/enable, FALSE), 1, TIMER_CLIENT_TIME)
+/atom/movable/particle_emitter/burst/rocks
+	particles = new/particles/debris
+
+/atom/movable/particle_emitter/burst/dust
 	particles = new/particles/dust
 
 /atom/movable/particle_emitter/smoke

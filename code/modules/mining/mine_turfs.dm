@@ -323,7 +323,7 @@ var/global/list/mining_floors = list()
 		SSradiation.flat_radiate(src, 25, 200)
 
 	//Let's add some effects
-	new/atom/movable/particle_emitter/dust(src, 1 SECOND)
+	new/atom/movable/particle_emitter/burst/rocks(src, 1 SECOND, color)
 
 	//Add some rubble,  you did just clear out a big chunk of rock.
 

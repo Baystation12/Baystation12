@@ -451,10 +451,6 @@
 	var/obj/item/material/drill_head/drill_head
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
 
-	var/particles/sparks = new/particles/fire_sparks
-
-
-
 /obj/item/mech_equipment/drill/Initialize()
 	. = ..()
 	if (ispath(drill_head))
@@ -560,7 +556,12 @@
 		blind_message = SPAN_WARNING("You hear a large motor whirring.")
 	)
 
-	var/atom/movable/particle_emitter/sparks/EM = new(get_turf(target), delay)
+	var/atom/movable/particle_emitter/sparks/EM
+	if (istype(target, /turf/simulated/mineral))
+		EM = new/atom/movable/particle_emitter/sparks/debris(get_turf(target), delay, target.color)
+	else
+		EM = new(get_turf(target), delay)
+
 	EM.set_dir(reverse_direction(owner.dir))
 
 	if (!do_after(owner, delay, target, DO_DEFAULT & ~DO_USER_CAN_TURN))
