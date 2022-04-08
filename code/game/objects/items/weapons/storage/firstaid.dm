@@ -136,18 +136,16 @@
 	w_class = 2
 
 	startswith = list(
-		/obj/item/stack/medical/advanced/bruise_pack,
-		/obj/item/stack/medical/advanced/ointment,
-		/obj/item/reagent_containers/hypospray/autoinjector/coagulant, 
+		/obj/item/reagent_containers/hypospray/autoinjector/coagulant,
+		/obj/item/reagent_containers/hypospray/autoinjector/pain,
 		/obj/item/reagent_containers/hypospray/autoinjector/pain,
 		/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/adrenaline,
-		/obj/item/reagent_containers/pill/inaprovaline,
-		/obj/item/reagent_containers/pill/dylovene,
-		/obj/item/reagent_containers/pill/dylovene,
-		/obj/item/reagent_containers/pill/hyronalin,
-		/obj/item/reagent_containers/pill/sugariron,
-		/obj/item/reagent_containers/pill/sugariron,
-		/obj/item/reagent_containers/pill/dexalin
+		/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline,
+		/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline,
+		/obj/item/reagent_containers/hypospray/autoinjector/dexalin_plus,
+		/obj/item/reagent_containers/hypospray/autoinjector/dexalin_plus,
+		/obj/item/reagent_containers/hypospray/autoinjector/detox,
+		/obj/item/reagent_containers/hypospray/autoinjector/detox
 		)
 	
 
