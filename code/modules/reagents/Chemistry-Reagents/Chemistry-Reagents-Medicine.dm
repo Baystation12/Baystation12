@@ -1030,7 +1030,7 @@
 	color = "#bf0000"
 	metabolism = REM * 0.05
 
-/datum/reagent/coagulant/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/coagulant/affect_blood(var/mob/living/carbon/M, alien, removed)
 	if(alien == IS_DIONA)
 		return
 	if(ishuman(M))

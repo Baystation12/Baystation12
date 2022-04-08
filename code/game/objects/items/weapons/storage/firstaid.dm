@@ -133,7 +133,7 @@
 	desc = "A sleek and expensive looking medical kit."
 	icon_state = "stabfirstaid"
 	item_state = "firstaid-advanced"
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	storage_slots = 7
 
 	startswith = list(
