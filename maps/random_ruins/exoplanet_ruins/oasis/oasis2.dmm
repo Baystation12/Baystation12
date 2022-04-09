@@ -4,58 +4,58 @@
 /area/template_noop)
 "b" = (
 /obj/structure/flora/ausbushes/genericbush,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/template_noop)
 "c" = (
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/template_noop)
 "d" = (
 /obj/structure/flora/ausbushes/brflowers,
 /obj/structure/flora/ausbushes/ywflowers,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/template_noop)
 "e" = (
 /obj/structure/flora/ausbushes/ppflowers,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/template_noop)
 "f" = (
 /obj/structure/flora/ausbushes/fullgrass,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/template_noop)
 "g" = (
 /obj/structure/flora/ausbushes/leafybush,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/template_noop)
 "h" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /obj/structure/flora/ausbushes/fernybush,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/template_noop)
 "i" = (
 /obj/structure/flora/grass/both,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/template_noop)
 "j" = (
-/turf/unsimulated/floor/exoplanet/water/shallow,
+/turf/simulated/floor/exoplanet/water/shallow,
 /area/template_noop)
 "k" = (
 /obj/structure/flora/grass/both,
 /obj/structure/flora/ausbushes/ywflowers,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/template_noop)
 "l" = (
 /obj/structure/flora/ausbushes/reedbush,
-/turf/unsimulated/floor/exoplanet/water/shallow,
+/turf/simulated/floor/exoplanet/water/shallow,
 /area/template_noop)
 "m" = (
 /obj/structure/flora/grass/both,
 /obj/structure/flora/ausbushes/fullgrass,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/template_noop)
 "n" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /obj/structure/flora/ausbushes/ppflowers,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/template_noop)
 
 (1,1,1) = {"

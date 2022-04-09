@@ -76,8 +76,8 @@
 		var/turf/simulated/floor/asteroid/T = get_turf(src)
 		if(!T.dug)
 			T.gets_dug()
-	else if(istype(get_turf(src), /turf/unsimulated/floor/exoplanet))
-		var/turf/unsimulated/floor/exoplanet/T = get_turf(src)
+	else if(istype(get_turf(src), /turf/simulated/floor/exoplanet))
+		var/turf/simulated/floor/exoplanet/T = get_turf(src)
 		if(T.diggable)
 			new /obj/structure/pit(T)
 			T.diggable = 0
@@ -90,6 +90,7 @@
 		var/turf/simulated/harvesting = pick(resource_field)
 
 		while(resource_field.len && !harvesting.resources)
+			harvesting.has_resources = 0
 			harvesting.resources = null
 			resource_field -= harvesting
 			if(resource_field.len)
@@ -133,6 +134,7 @@
 					new oretype(src)
 
 		if(!found_resource)
+			harvesting.has_resources = 0
 			harvesting.resources = null
 			resource_field -= harvesting
 	else
@@ -227,7 +229,7 @@
 	need_update_field = 0
 
 	for (var/turf/simulated/T in range(2, src))
-		if (T.resources)
+		if (T.has_resources)
 			resource_field += T
 
 	if (!length(resource_field))
