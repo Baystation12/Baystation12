@@ -10,7 +10,7 @@
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/cmd)
 
-	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command
+	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/command
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command
@@ -88,7 +88,7 @@
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/eng)
 
-	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/engineering/command
+	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/engineering
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command/engineering
@@ -139,7 +139,7 @@
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/sec)
 
-	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/security/command
+	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/security
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command/security
@@ -190,7 +190,7 @@
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/med)
 
-	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/medical/command
+	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/medical
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command/medical
@@ -241,7 +241,7 @@
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/sup)
 
-	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/service/command
+	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/service
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command/supply
@@ -288,7 +288,7 @@
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/svc)
 
-	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/service/command
+	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/service
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command/service
@@ -335,7 +335,7 @@
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/exp)
 
-	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/exploration/command
+	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/exploration
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command/exploration
@@ -354,7 +354,7 @@
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/cmd)
 
-	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command
+	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command
 	dress_skirt = /obj/item/clothing/under/solgov/dress/expeditionary/command/skirt
@@ -377,7 +377,7 @@
 
 	utility_under= /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
 
-	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command
+	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/command
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command
@@ -421,7 +421,7 @@
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/suit/storage/toggle/labcoat/science/ec)
 
-	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/research/command
+	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/research
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command/research
