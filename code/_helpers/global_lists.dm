@@ -1,22 +1,27 @@
 //Since it didn't really belong in any other category, I'm putting this here
 //This is for procs to replace all the goddamn 'in world's that are chilling around the code
 
-var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
+/// All /obj/structure/cable, managed by instances
+GLOBAL_LIST_EMPTY(cable_list)
+
+/// All medical side effects
+GLOBAL_LIST_EMPTY(side_effects)
+
+/// All character setup mannequins
+GLOBAL_LIST_EMPTY(mannequins)
+
 var/global/list/landmarks_list = list()				//list of all landmarks created
-var/global/list/surgery_steps = list()				//list of all surgery steps  |BS12
-var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
-var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mobs target tracking.
 
 #define all_genders_define_list list(MALE,FEMALE,PLURAL,NEUTER)
 #define all_genders_text_list list("Male","Female","Plural","Neuter")
 
 //Languages/species/whitelist.
 var/global/list/all_species[0]
-var/global/list/all_languages[0]
+var/global/list/datum/language/all_languages = list()
 var/global/list/language_keys[0]					// Table of say codes for all languages
 var/global/list/playable_species = list(SPECIES_HUMAN)    // A list of ALL playable species, whitelisted, latejoin or otherwise.
 
-var/list/mannequins_
+
 
 // Grabs
 var/global/list/all_grabstates[0]
@@ -34,8 +39,6 @@ var/global/list/skin_styles_female_list = list()		//unused
 GLOBAL_LIST_EMPTY(body_marking_styles_list)		//stores /datum/sprite_accessory/marking indexed by name
 
 GLOBAL_DATUM_INIT(underwear, /datum/category_collection/underwear, new())
-
-var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg)
 
 // Visual nets
 var/list/datum/visualnet/visual_nets = list()
@@ -82,13 +85,11 @@ var/global/list/string_slot_flags = list(
 /////Initial Building/////
 //////////////////////////
 
-/proc/get_mannequin(var/ckey)
-	if(!mannequins_)
-		mannequins_ = new()
-	. = mannequins_[ckey]
-	if(!.)
-		. = new/mob/living/carbon/human/dummy/mannequin()
-		mannequins_[ckey] = .
+/proc/get_mannequin(ckey)
+	if (!GLOB.mannequins[ckey])
+		GLOB.mannequins[ckey] = new /mob/living/carbon/human/dummy/mannequin
+	return GLOB.mannequins[ckey]
+
 
 /hook/global_init/proc/makeDatumRefLists()
 	var/list/paths
@@ -96,27 +97,29 @@ var/global/list/string_slot_flags = list(
 	//Hair - Initialise all /datum/sprite_accessory/hair into an list indexed by hair-style name
 	paths = typesof(/datum/sprite_accessory/hair) - /datum/sprite_accessory/hair
 	for(var/path in paths)
-		var/datum/sprite_accessory/hair/H = new path()
+		var/datum/sprite_accessory/hair/H = path
+		if (!initial(H.name))
+			continue
+		H = new path()
 		GLOB.hair_styles_list[H.name] = H
 
 	//Facial Hair - Initialise all /datum/sprite_accessory/facial_hair into an list indexed by facialhair-style name
 	paths = typesof(/datum/sprite_accessory/facial_hair) - /datum/sprite_accessory/facial_hair
 	for(var/path in paths)
-		var/datum/sprite_accessory/facial_hair/H = new path()
+		var/datum/sprite_accessory/facial_hair/H = path
+		if (!initial(H.name))
+			continue
+		H = new path()
 		GLOB.facial_hair_styles_list[H.name] = H
 
 	//Body markings - Initialise all /datum/sprite_accessory/marking into an list indexed by marking name
 	paths = typesof(/datum/sprite_accessory/marking) - /datum/sprite_accessory/marking
 	for(var/path in paths)
-		var/datum/sprite_accessory/marking/M = new path()
+		var/datum/sprite_accessory/marking/M = path
+		if (!initial(M.name))
+			continue
+		M = new path()
 		GLOB.body_marking_styles_list[M.name] = M
-
-	//Surgery Steps - Initialize all /datum/surgery_step into a list
-	paths = typesof(/datum/surgery_step)-/datum/surgery_step
-	for(var/T in paths)
-		var/datum/surgery_step/S = new T
-		surgery_steps += S
-	sort_surgeries()
 
 	//Languages and species.
 	paths = typesof(/datum/language)-/datum/language

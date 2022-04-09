@@ -1,8 +1,8 @@
 /obj/effect/fluid
 	name = ""
 	icon = 'icons/effects/liquids.dmi'
-	anchored = 1
-	simulated = 0
+	anchored = TRUE
+	simulated = FALSE
 	opacity = 0
 	mouse_opacity = 0
 	layer = FLY_LAYER
@@ -25,7 +25,7 @@
 /obj/effect/fluid/Initialize()
 	. = ..()
 	start_loc = get_turf(src)
-	if(!istype(start_loc))
+	if(!istype(start_loc) || start_loc.flooded)
 		qdel(src)
 		return
 	var/turf/simulated/T = start_loc
@@ -51,15 +51,13 @@
 
 	if(fluid_amount > FLUID_OVER_MOB_HEAD)
 		layer = DEEP_FLUID_LAYER
-		plane = EFFECTS_BELOW_LIGHTING_PLANE
 	else
 		layer = SHALLOW_FLUID_LAYER
-		plane = HIDING_MOB_PLANE
 
 	if(fluid_amount > FLUID_DEEP)
 		alpha = FLUID_MAX_ALPHA
 	else
-		alpha = min(FLUID_MAX_ALPHA,max(FLUID_MIN_ALPHA,ceil(255*(fluid_amount/FLUID_DEEP))))
+		alpha = min(FLUID_MAX_ALPHA,max(FLUID_MIN_ALPHA,Ceil(255*(fluid_amount/FLUID_DEEP))))
 
 	if(fluid_amount > FLUID_DELETING && fluid_amount <= FLUID_EVAPORATION_POINT)
 		APPLY_FLUID_OVERLAY("shallow_still")
@@ -92,15 +90,15 @@
 /obj/effect/flood
 	name = ""
 	mouse_opacity = 0
-	layer = FLY_LAYER
+	layer = DEEP_FLUID_LAYER
 	color = COLOR_OCEAN
 	icon = 'icons/effects/liquids.dmi'
 	icon_state = "ocean"
 	alpha = FLUID_MAX_ALPHA
-	simulated = 0
-	density = 0
+	simulated = FALSE
+	density = FALSE
 	opacity = 0
-	anchored = 1
+	anchored = TRUE
 
 /obj/effect/flood/ex_act()
 	return

@@ -34,7 +34,9 @@ var/list/stored_shock_by_ref = list()
 				canvas.Blend(equip, ICON_OVERLAY, facing_list["x"]+1, facing_list["y"]+1)
 				final_I.Insert(canvas, dir = use_dir)
 			equip_overlays[image_key] = overlay_image(final_I, color = color, flags = RESET_COLOR)
-		return equip_overlays[image_key]
+		var/image/I = new() // We return a copy of the cached image, in case downstream procs mutate it.
+		I.appearance = equip_overlays[image_key]
+		return I
 	return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
 /datum/species/proc/water_act(var/mob/living/carbon/human/H, var/depth)
@@ -58,3 +60,21 @@ var/list/stored_shock_by_ref = list()
 
 /datum/species/proc/check_background(var/datum/job/job, var/datum/preferences/prefs)
 	. = TRUE
+
+/datum/species/proc/get_digestion_product()
+	return /datum/reagent/nutriment
+
+/datum/species/proc/get_resized_organ_w_class(var/organ_w_class)
+	. = clamp(organ_w_class + mob_size_difference(mob_size, MOB_MEDIUM), ITEM_SIZE_TINY, ITEM_SIZE_GARGANTUAN)
+
+/datum/species/proc/resize_organ(var/obj/item/organ/organ)
+	if(!istype(organ))
+		return
+	organ.w_class = get_resized_organ_w_class(initial(organ.w_class))
+	if(!istype(organ, /obj/item/organ/external))
+		return
+	var/obj/item/organ/external/limb = organ
+	for(var/bp_tag in has_organ)
+		var/obj/item/organ/internal/I = has_organ[bp_tag]
+		if(initial(I.parent_organ) == organ.organ_tag)
+			limb.cavity_max_w_class = max(limb.cavity_max_w_class, get_resized_organ_w_class(initial(I.w_class)))

@@ -1,11 +1,11 @@
 #include "slavers_base_areas.dm"
 #include "../mining/mining_areas.dm"
 
-/obj/effect/overmap/sector/slavers_base
+/obj/effect/overmap/visitable/sector/slavers_base
 	name = "large asteroid"
 	desc = "Sensor array is reading an artificial structure inside the asteroid."
 	icon_state = "object"
-	known = 0
+	known = FALSE
 
 	initial_generic_waypoints = list(
 		"nav_slavers_base_1",
@@ -22,7 +22,12 @@
 	id = "awaysite_slavers"
 	description = "Asteroid with slavers base inside."
 	suffixes = list("slavers/slavers_base.dmm")
-	cost = 1
+	spawn_cost = 1
+	generate_mining_by_z = 1
+	area_usage_test_exempted_root_areas = list(/area/slavers_base)
+	apc_test_exempt_areas = list(
+		/area/slavers_base/hangar = NO_SCRUBBER
+	)
 
 /obj/effect/shuttle_landmark/nav_slavers_base/nav1
 	name = "Slavers Base Navpoint #1"
@@ -68,7 +73,7 @@
 
 /decl/hierarchy/outfit/corpse/slavers_base/slaver1
 	name = "Dead Slaver 1"
-	uniform = /obj/item/clothing/under/johnny
+	uniform = /obj/item/clothing/under/color/brown
 	shoes = /obj/item/clothing/shoes/black
 	glasses = /obj/item/clothing/glasses/sunglasses
 
@@ -134,26 +139,24 @@
 	icon_state = "extremist"
 	icon_living = "extremist"
 	icon_dead = "extremist_dead"
-	speak_chance = 0
 	turns_per_move = 5
 	response_help = "pushes"
 	response_disarm = "shoves"
 	response_harm = "hits"
 	speed = 4
-	stop_automated_movement_when_pulled = 0
 	maxHealth = 100
 	health = 100
-	harm_intent_damage = 5
-	melee_damage_lower = 10
-	melee_damage_upper = 30
-	can_escape = 1
+	natural_weapon = /obj/item/natural_weapon/punch
+	can_escape = TRUE
 	unsuitable_atmos_damage = 15
 	var/corpse = /obj/effect/landmark/corpse/abolitionist
-	var/weapon = /obj/item/weapon/gun/energy/laser
+	var/weapon = /obj/item/gun/energy/laser
 	projectilesound = 'sound/weapons/laser.ogg'
 	ranged = 1
 	projectiletype = /obj/item/projectile/beam
 	faction = "extremist abolitionists"
+
+	ai_holder = /datum/ai_holder/simple_animal/ranged
 
 /mob/living/simple_animal/hostile/abolition_extremist/death(gibbed, deathmessage, show_dead_message)
 	. = ..(gibbed, deathmessage, show_dead_message)
@@ -180,4 +183,9 @@
 	icon_state = "abol_suit"
 	item_icons = list(slot_w_uniform_str = 'maps/away/slavers/slavers_base_sprites.dmi')
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	armor = list(melee = 30, bullet = 25, laser = 10, energy = 10, bomb = 5, bio = 0, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_MINOR
+		)

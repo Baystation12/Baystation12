@@ -6,7 +6,8 @@
 	light_color = "#315ab4"
 	idle_power_usage = 250
 	active_power_usage = 500
-	circuit = /obj/item/weapon/circuitboard/crew
+	machine_name = "crew monitoring console"
+	machine_desc = "Vital for medical personnel, crew monitors display a list of all crew members, and a vital sign readout based on their suit sensors."
 	var/datum/nano_module/crew_monitor/crew_monitor
 
 /obj/machinery/computer/crew/New()
@@ -18,14 +19,9 @@
 	crew_monitor = null
 	..()
 
-/obj/machinery/computer/crew/attack_ai(mob/user)
+/obj/machinery/computer/crew/interface_interact(user)
 	ui_interact(user)
-
-/obj/machinery/computer/crew/attack_hand(mob/user)
-	..()
-	if(stat & (BROKEN|NOPOWER))
-		return
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/computer/crew/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	crew_monitor.ui_interact(user, ui_key, ui, force_open, state)

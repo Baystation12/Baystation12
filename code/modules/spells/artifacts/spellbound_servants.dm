@@ -8,7 +8,16 @@
 	set waitfor = 0
 	var/mob/living/carbon/human/H = new(a)
 	H.ckey = user.ckey
-	H.change_appearance(APPEARANCE_GENDER|APPEARANCE_EYE_COLOR|APPEARANCE_HAIR|APPEARANCE_FACIAL_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR_COLOR|APPEARANCE_SKIN)
+	H.change_appearance(APPEARANCE_GENDER|APPEARANCE_SKIN|APPEARANCE_ALL_HAIR|APPEARANCE_EYES)
+
+	var/obj/item/implant/translator/natural/I = new()
+	I.implant_in_mob(H, BP_HEAD)
+	if (master.languages.len)
+		var/datum/language/lang = master.languages[1]
+		H.add_language(lang.name)
+		H.set_default_language(lang)
+		I.languages[lang.name] = 1
+
 	modify_servant(equip_servant(H), H)
 	set_antag(H.mind, master)
 	var/name_choice = sanitize(input(H, "Choose a name. If you leave this blank, it will be defaulted to your current characters.", "Name change") as null|text, MAX_NAME_LEN)
@@ -27,7 +36,7 @@
 		var/obj/item/I = new etype(get_turf(H))
 		if(istype(I, /obj/item/clothing))
 			I.canremove = 0
-		H.equip_to_slot_if_possible(I,equipment[etype],0,1,1,1)
+		H.equip_to_slot_if_possible(I,equipment[etype], TRYEQUIP_REDRAW | TRYEQUIP_SILENT | TRYEQUIP_FORCE)
 		. += I
 
 /datum/spellbound_type/proc/set_antag(var/datum/mind/M, var/mob/master)
@@ -42,13 +51,13 @@
 	equipment = list(/obj/item/clothing/head/wizard = slot_head,
 					/obj/item/clothing/under/color/lightpurple = slot_w_uniform,
 					/obj/item/clothing/shoes/sandal = slot_shoes,
-					/obj/item/weapon/staff = slot_r_hand,
-					/obj/item/weapon/spellbook/apprentice = slot_l_hand,
+					/obj/item/staff = slot_r_hand,
+					/obj/item/spellbook/apprentice = slot_l_hand,
 					/obj/item/clothing/suit/wizrobe = slot_wear_suit)
 	spells = list(/spell/noclothes)
 
 /datum/spellbound_type/apprentice/set_antag(var/datum/mind/M, var/mob/master)
-	GLOB.wizards.add_antagonist_mind(M,1,ANTAG_APPRENTICE,"<b>You are an apprentice-type Servant! You�re just an ordinary Wizard-To-Be, with no special abilities, but do not need robes to cast spells. Follow your teacher�s orders!</b>")
+	GLOB.wizards.add_antagonist_mind(M,1,ANTAG_APPRENTICE,"<b>You are an apprentice-type Servant! You're just an ordinary Wizard-To-Be, with no special abilities, but do not need robes to cast spells. Follow your teacher's orders!</b>")
 
 /datum/spellbound_type/servant
 	var/spiel = "You don't do anything in particular."
@@ -82,7 +91,7 @@
 /datum/spellbound_type/servant/familiar
 	name = "Familiar"
 	desc = "A friend! Or are they a pet? They can transform into animals, and take some particular traits from said creatures."
-	spiel = "This form of yours is weak in comparison to your transformed form, but that certainly won�t pose a problem, considering the fact that you have an alternative. Whatever it is you can turn into, use its powers wisely and serve your Master as well as possible!"
+	spiel = "This form of yours is weak in comparison to your transformed form, but that certainly won't pose a problem, considering the fact that you have an alternative. Whatever it is you can turn into, use its powers wisely and serve your Master as well as possible!"
 	equipment = list(/obj/item/clothing/head/bandana/familiarband = slot_head,
 					/obj/item/clothing/under/familiargarb = slot_w_uniform)
 
@@ -95,15 +104,30 @@
 			familiar_type = /mob/living/simple_animal/hostile/carp/pike
 		if("Mouse")
 			H.verbs |= /mob/living/proc/ventcrawl
-			familiar_type = /mob/living/simple_animal/mouse
+			familiar_type = /mob/living/simple_animal/passive/mouse
 		if("Cat")
 			H.mutations |= mRun
-			familiar_type = /mob/living/simple_animal/cat
+			familiar_type = /mob/living/simple_animal/passive/cat
 		if("Bear")
 			var/obj/item/clothing/under/under = locate() in equipment
 			var/obj/item/clothing/head/head = locate() in equipment
-			under.armor = list(melee = 60, bullet = 35, laser = 20,energy = 20, bomb = 0, bio = 0, rad = 0) //More armor
-			head.armor = list(melee = 30, bullet = 15, laser = 10,energy = 10, bomb = 0, bio = 0, rad = 0)
+
+			var/datum/extension/armor/A = get_extension(under, /datum/extension/armor)
+			if(A)
+				A.armor_values = list(
+					melee = ARMOR_MELEE_VERY_HIGH,
+					bullet = ARMOR_BALLISTIC_PISTOL,
+					laser = ARMOR_LASER_SMALL,
+					energy = ARMOR_ENERGY_SMALL
+					) //More armor
+			A = get_extension(head, /datum/extension/armor)
+			if(A)
+				A.armor_values = list(
+					melee = ARMOR_MELEE_RESISTANT,
+					bullet = ARMOR_BALLISTIC_MINOR,
+					laser = ARMOR_LASER_MINOR,
+					energy = ARMOR_ENERGY_MINOR
+					)
 			familiar_type = /mob/living/simple_animal/hostile/bear
 	var/spell/targeted/shapeshift/familiar/F = new()
 	F.possible_transformations = list(familiar_type)
@@ -112,7 +136,7 @@
 /datum/spellbound_type/servant/fiend
 	name = "Fiend"
 	desc = "A practitioner of dark and evil magics, almost certainly a demon, and possibly a lawyer."
-	spiel = "The Summoning Ritual has bound you to this world with limited access to your infernal powers; you�ll have to be strategic in how you use them. Follow your Master�s orders as well as you can!"
+	spiel = "The Summoning Ritual has bound you to this world with limited access to your infernal powers; you'll have to be strategic in how you use them. Follow your Master's orders as well as you can!"
 	spells = list(/spell/targeted/projectile/dumbfire/fireball/firebolt,
 				/spell/targeted/ethereal_jaunt,
 				/spell/targeted/torment,
@@ -153,11 +177,11 @@
 /datum/spellbound_type/servant/overseer
 	name = "Overseer"
 	desc = "A ghost, or an imaginary friend; the Overseer is immune to space and can turn invisible at a whim, but has little offensive capabilities."
-	spiel = "Physicality is not something you are familiar with. Indeed, injuries cannot slow you down, but you can�t fight back, either! In addition to this, you can reach into the void and return the soul of a single departed crewmember via the revoke death verb, if so desired; this can even revive your Master, should they fall in combat before you do. Serve them well."
+	spiel = "Physicality is not something you are familiar with. Indeed, injuries cannot slow you down, but you can't fight back, either! In addition to this, you can reach into the void and return the soul of a single departed crewmember via the revoke death verb, if so desired; this can even revive your Master, should they fall in combat before you do. Serve them well."
 	equipment = list(/obj/item/clothing/under/grimhoodie = slot_w_uniform,
-					/obj/item/clothing/shoes/sandals/grimboots = slot_shoes,
-					/obj/item/weapon/contract/wizard/xray = slot_l_hand,
-					/obj/item/weapon/contract/wizard/telepathy = slot_r_hand)
+					/obj/item/clothing/shoes/sandal/grimboots = slot_shoes,
+					/obj/item/contract/wizard/xray = slot_l_hand,
+					/obj/item/contract/wizard/telepathy = slot_r_hand)
 	spells = list(/spell/toggle_armor/overseer,
 				/spell/targeted/ethereal_jaunt,
 				/spell/invisibility,
@@ -205,22 +229,23 @@
 	stype = null
 	return ..()
 
-/obj/item/weapon/summoning_stone
+/obj/item/summoning_stone
 	name = "summoning stone"
 	desc = "a small non-descript stone of dubious origin."
+	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "stone"
 	throw_speed = 5
 	throw_range = 10
 	w_class = ITEM_SIZE_TINY
 
-/obj/item/weapon/summoning_stone/attack_self(var/mob/user)
+/obj/item/summoning_stone/attack_self(var/mob/user)
 	if(user.z in GLOB.using_map.admin_levels)
 		to_chat(user, "<span class='warning'>You cannot use \the [src] here.</span>")
 		return
 	user.set_machine(src)
 	interact(user)
 
-/obj/item/weapon/summoning_stone/interact(var/mob/user)
+/obj/item/summoning_stone/interact(var/mob/user)
 	var/list/types = subtypesof(/datum/spellbound_type) - /datum/spellbound_type/servant
 	if(user.mind && !GLOB.wizards.is_antagonist(user.mind))
 		use_type(pick(types),user)
@@ -232,7 +257,7 @@
 	show_browser(user,dat,"window=summoning")
 	onclose(user,"summoning")
 
-/obj/item/weapon/summoning_stone/proc/use_type(var/type, var/mob/user)
+/obj/item/summoning_stone/proc/use_type(var/type, var/mob/user)
 	new /obj/effect/cleanable/spellbound(get_turf(src),type)
 	if(prob(20))
 		var/list/base_areas = maintlocs //Have to do it this way as its a macro
@@ -252,7 +277,7 @@
 	show_browser(user, null, "window=summoning")
 	qdel(src)
 
-/obj/item/weapon/summoning_stone/OnTopic(user, href_list, state)
+/obj/item/summoning_stone/OnTopic(user, href_list, state)
 	if(href_list["type"])
 		use_type(href_list["type"],user)
 	return TOPIC_HANDLED

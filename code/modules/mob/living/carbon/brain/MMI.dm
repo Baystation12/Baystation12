@@ -43,7 +43,6 @@
 	var/locked = 0
 	var/mob/living/carbon/brain/brainmob = null//The current occupant.
 	var/obj/item/organ/internal/brain/brainobj = null	//The current brain organ.
-	var/obj/mecha = null//This does not appear to be used outside of reference in mecha.dm.
 
 /obj/item/device/mmi/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O,/obj/item/organ/internal/brain) && !brainmob) //Time to stick a brain in it --NEO
@@ -69,15 +68,13 @@
 		brainobj = O
 
 		SetName("[initial(name)]: ([brainmob.real_name])")
-		icon_state = "mmi_full"
+		update_icon()
 
 		locked = 1
 
-		SSstatistics.add_field("cyborg_mmis_filled",1)
-
 		return
 
-	if((istype(O,/obj/item/weapon/card/id)||istype(O,/obj/item/modular_computer)) && brainmob)
+	if((istype(O,/obj/item/card/id)||istype(O,/obj/item/modular_computer)) && brainmob)
 		if(allowed(user))
 			locked = !locked
 			to_chat(user, "<span class='notice'>You [locked ? "lock" : "unlock"] the brain holder.</span>")
@@ -110,7 +107,7 @@
 		brain.brainmob = brainmob//Set the brain to use the brainmob
 		brainmob = null//Set mmi brainmob var to null
 
-		icon_state = "mmi_empty"
+		update_icon()
 		SetName(initial(name))
 
 /obj/item/device/mmi/proc/transfer_identity(var/mob/living/carbon/human/H)//Same deal as the regular brain proc. Used for human-->robot people.
@@ -121,14 +118,14 @@
 	brainmob.container = src
 
 	SetName("[initial(name)]: [brainmob.real_name]")
-	icon_state = "mmi_full"
+	update_icon()
 	locked = 1
 	return
 
 /obj/item/device/mmi/relaymove(var/mob/user, var/direction)
 	if(user.stat || user.stunned)
 		return
-	var/obj/item/weapon/rig/rig = src.get_rig()
+	var/obj/item/rig/rig = src.get_rig()
 	if(rig)
 		rig.forced_move(direction, user)
 
@@ -146,37 +143,36 @@
 
 	var/obj/item/device/radio/radio = null//Let's give it a radio.
 
-	New()
-		..()
-		radio = new(src)//Spawns a radio inside the MMI.
-		radio.broadcasting = 1//So it's broadcasting from the start.
 
-	verb//Allows the brain to toggle the radio functions.
-		Toggle_Broadcasting()
-			set name = "Toggle Broadcasting"
-			set desc = "Toggle broadcasting channel on or off."
-			set category = "MMI"
-			set src = usr.loc//In user location, or in MMI in this case.
-			set popup_menu = 0//Will not appear when right clicking.
+/obj/item/device/mmi/radio_enabled/New()
+	..()
+	radio = new(src)
+	radio.broadcasting = TRUE
 
-			if(brainmob.stat)//Only the brainmob will trigger these so no further check is necessary.
-				to_chat(brainmob, "Can't do that while incapacitated or dead.")
 
-			radio.broadcasting = radio.broadcasting==1 ? 0 : 1
-			to_chat(brainmob, "<span class='notice'>Radio is [radio.broadcasting==1 ? "now" : "no longer"] broadcasting.</span>")
+/obj/item/device/mmi/radio_enabled/verb/Toggle_Broadcasting()
+	set name = "Toggle Broadcasting"
+	set desc = "Toggle broadcasting channel on or off."
+	set category = "MMI"
+	set popup_menu = FALSE
+	set src = usr.loc
+	if (brainmob.stat)
+		to_chat(brainmob, "Can't do that while incapacitated or dead.")
+	radio.listening = !radio.listening
+	to_chat(brainmob, "<span class='notice'>Radio is [radio.broadcasting==1 ? "now" : "no longer"] broadcasting.</span>")
 
-		Toggle_Listening()
-			set name = "Toggle Listening"
-			set desc = "Toggle listening channel on or off."
-			set category = "MMI"
-			set src = usr.loc
-			set popup_menu = 0
 
-			if(brainmob.stat)
-				to_chat(brainmob, "Can't do that while incapacitated or dead.")
+/obj/item/device/mmi/radio_enabled/verb/Toggle_Listening()
+	set name = "Toggle Listening"
+	set desc = "Toggle listening channel on or off."
+	set category = "MMI"
+	set popup_menu = FALSE
+	set src = usr.loc
+	if (brainmob.stat)
+		to_chat(brainmob, "Can't do that while incapacitated or dead.")
+	radio.listening = !radio.listening
+	to_chat(brainmob, "<span class='notice'>Radio is [radio.listening==1 ? "now" : "no longer"] receiving broadcast.</span>")
 
-			radio.listening = radio.listening==1 ? 0 : 1
-			to_chat(brainmob, "<span class='notice'>Radio is [radio.listening==1 ? "now" : "no longer"] receiving broadcast.</span>")
 
 /obj/item/device/mmi/emp_act(severity)
 	if(!brainmob)
@@ -190,3 +186,6 @@
 			if(3)
 				brainmob.emp_damage += rand(0,10)
 	..()
+
+/obj/item/device/mmi/on_update_icon()
+	icon_state = brainmob ? "mmi_full" : "mmi_empty"

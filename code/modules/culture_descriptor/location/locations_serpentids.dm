@@ -1,6 +1,5 @@
 /decl/cultural_info/location/tauwilo
 	name = HOME_SYSTEM_SERPENTIDS
-	language = LANGUAGE_NABBER
 	description = "Tau-Wilo is a small planet and the origin of all serpentids. It has low gravity and a dense oxygen \
 	nitrogen atmosphere with a tinge of phoron. It is dominated by biodiverse tropical and subtropical forests, with \
 	few areas of planes. The only human settlement is a research facility built by Xynergy and used as a part of their \

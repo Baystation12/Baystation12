@@ -29,7 +29,7 @@
 	else if(istype(place,/mob))
 		var/mob/M = place
 		var/atom/movable/A = new type(M.loc)
-		M.equip_to_appropriate_slot(A) //we dont have to check if its an object or not since hte proc in question already does that
+		M.equip_to_appropriate_slot(A) //we don't have to check if its an object or not since hte proc in question already does that
 	else //its a turf. Put it on it.
 		var/turf/T = place
 		if(T.density) //under no circumstances place an item in a wall.

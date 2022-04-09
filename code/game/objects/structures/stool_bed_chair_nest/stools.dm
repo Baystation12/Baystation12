@@ -1,7 +1,7 @@
 //Todo: add leather and cloth for arbitrary coloured stools.
 var/global/list/stool_cache = list() //haha stool
 
-/obj/item/weapon/stool
+/obj/item/stool
 	name = "stool"
 	desc = "Apply butt."
 	icon = 'icons/obj/furniture.dmi'
@@ -15,13 +15,11 @@ var/global/list/stool_cache = list() //haha stool
 	var/material/material
 	var/material/padding_material
 
-/obj/item/weapon/stool/padded
+/obj/item/stool/padded
 	icon_state = "stool_padded_preview" //set for the map
 
-/obj/item/weapon/stool/New(var/newloc, var/new_material, var/new_padding_material)
+/obj/item/stool/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL, new_padding_material)
 	..(newloc)
-	if(!new_material)
-		new_material = DEFAULT_FURNITURE_MATERIAL
 	material = SSmaterials.get_material_by_name(new_material)
 	if(new_padding_material)
 		padding_material = SSmaterials.get_material_by_name(new_padding_material)
@@ -31,22 +29,22 @@ var/global/list/stool_cache = list() //haha stool
 	force = round(material.get_blunt_damage()*0.4)
 	update_icon()
 
-/obj/item/weapon/stool/padded/New(var/newloc, var/new_material)
-	..(newloc, DEFAULT_FURNITURE_MATERIAL, MATERIAL_CARPET)
+/obj/item/stool/padded/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, new_material, MATERIAL_CARPET)
 
-/obj/item/weapon/stool/bar
+/obj/item/stool/bar
 	name = "bar stool"
 	icon_state = "bar_stool_preview" //set for the map
 	item_state = "bar_stool"
 	base_icon = "bar_stool"
 
-/obj/item/weapon/stool/bar/padded
+/obj/item/stool/bar/padded
 	icon_state = "bar_stool_padded_preview"
 
-/obj/item/weapon/stool/bar/padded/New(var/newloc, var/new_material)
-	..(newloc, DEFAULT_FURNITURE_MATERIAL, MATERIAL_CARPET)
+/obj/item/stool/bar/padded/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, new_material, MATERIAL_CARPET)
 
-/obj/item/weapon/stool/on_update_icon()
+/obj/item/stool/on_update_icon()
 	// Prep icon.
 	icon_state = ""
 	// Base icon.
@@ -74,31 +72,31 @@ var/global/list/stool_cache = list() //haha stool
 		SetName("[material.display_name] [initial(name)]")
 		desc = "A stool. Apply butt with care. It's made of [material.use_name]."
 
-/obj/item/weapon/stool/proc/add_padding(var/padding_type)
+/obj/item/stool/proc/add_padding(var/padding_type)
 	padding_material = SSmaterials.get_material_by_name(padding_type)
 	update_icon()
 
-/obj/item/weapon/stool/proc/remove_padding()
+/obj/item/stool/proc/remove_padding()
 	if(padding_material)
 		padding_material.place_sheet(get_turf(src))
 		padding_material = null
 	update_icon()
 
-/obj/item/weapon/stool/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
+/obj/item/stool/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	if (prob(5))
 		user.visible_message("<span class='danger'>[user] breaks [src] over [target]'s back!</span>")
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(target)
 		dismantle() //This deletes self.
 
-		var/blocked = target.run_armor_check(hit_zone, "melee")
-		target.Weaken(10 * blocked_mult(blocked))
-		target.apply_damage(20, BRUTE, hit_zone, blocked, src)
-		return
+		var/blocked = target.get_blocked_ratio(hit_zone, BRUTE, damage = 20)
+		target.Weaken(10 * (1 - blocked))
+		target.apply_damage(20, BRUTE, hit_zone, src)
+		return 1
 
-	..()
+	return ..()
 
-/obj/item/weapon/stool/ex_act(severity)
+/obj/item/stool/ex_act(severity)
 	switch(severity)
 		if(1.0)
 			qdel(src)
@@ -112,14 +110,14 @@ var/global/list/stool_cache = list() //haha stool
 				qdel(src)
 				return
 
-/obj/item/weapon/stool/proc/dismantle()
+/obj/item/stool/proc/dismantle()
 	if(material)
 		material.place_sheet(get_turf(src))
 	if(padding_material)
 		padding_material.place_sheet(get_turf(src))
 	qdel(src)
 
-/obj/item/weapon/stool/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/stool/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		dismantle()
@@ -158,3 +156,8 @@ var/global/list/stool_cache = list() //haha stool
 		remove_padding()
 	else
 		..()
+
+//Generated subtypes for mapping porpoises
+
+/obj/item/stool/wood/New(var/newloc)
+	..(newloc,MATERIAL_WOOD)

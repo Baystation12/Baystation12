@@ -1,9 +1,14 @@
 SUBSYSTEM_DEF(persistence)
 	name = "Persistence"
 	init_order = SS_INIT_MISC_LATE
-	flags = SS_NO_FIRE
+	flags = SS_NO_FIRE | SS_NEEDS_SHUTDOWN
 	var/list/tracking_values = list()
 	var/list/persistence_datums = list()
+
+
+/datum/controller/subsystem/persistence/UpdateStat(time)
+	return
+
 
 /datum/controller/subsystem/persistence/Initialize()
 	. = ..()
@@ -27,7 +32,7 @@ SUBSYSTEM_DEF(persistence)
 	if(!A || (A.area_flags & AREA_FLAG_IS_NOT_PERSISTENT))
 		return
 
-	if((!T.z in GLOB.using_map.station_levels) || !initialized)
+	if(!(T.z in GLOB.using_map.station_levels) || !initialized)
 		return
 
 	if(!tracking_values[track_type])

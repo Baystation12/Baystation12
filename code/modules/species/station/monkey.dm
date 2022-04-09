@@ -15,6 +15,7 @@
 	greater_form = SPECIES_HUMAN
 	mob_size = MOB_SMALL
 	show_ssd = null
+	show_coma = null
 	health_hud_intensity = 1.75
 
 	gibbed_anim = "gibbed-m"
@@ -25,7 +26,7 @@
 	unarmed_types = list(/datum/unarmed_attack/bite, /datum/unarmed_attack/claws, /datum/unarmed_attack/punch)
 	inherent_verbs = list(/mob/living/proc/ventcrawl)
 	hud_type = /datum/hud_data/monkey
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/monkey
+	meat_type = /obj/item/reagent_containers/food/snacks/meat/monkey
 
 	rarity_value = 0.1
 	total_health = 150
@@ -39,7 +40,7 @@
 	push_flags = MONKEY|SLIME|SIMPLE_ANIMAL|ALIEN
 
 	pass_flags = PASS_FLAG_TABLE
-	holder_type = /obj/item/weapon/holder
+	holder_type = /obj/item/holder
 	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/no_eyes)
 
 	descriptors = list(
@@ -52,6 +53,9 @@
 		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,
 		TAG_FACTION =   FACTION_TEST_SUBJECTS
 	)
+
+	var/list/no_touchie = list(/obj/item/mirror,
+							   /obj/item/storage/mirror)
 
 /datum/species/monkey/New()
 	equip_adjust = list(
@@ -67,23 +71,31 @@
 	if(H.stat != CONSCIOUS)
 		return
 	if(prob(33) && isturf(H.loc) && !H.pulledby) //won't move if being pulled
-		H.SelfMove(pick(GLOB.cardinal))
+		var/dir = pick(GLOB.cardinal)
+		var/turf/T = get_step(get_turf(H), dir)
+		if(T && (T.pathweight < INFINITY))
+			H.SelfMove(dir)
 
 	var/obj/held = H.get_active_hand()
 	if(held && prob(1))
 		var/turf/T = get_random_turf_in_range(H, 7, 2)
 		if(T)
-			H.throw_item(T)
+			if(istype(held, /obj/item/gun) && prob(80))
+				var/obj/item/gun/G = held
+				G.Fire(T, H)
+			else
+				H.throw_item(T)
 		else
 			H.unequip_item()
 	if(!held && !H.restrained() && prob(5))
 		var/list/touchables = list()
-		for(var/obj/O in range(1,H))
-			if(O.simulated && O.Adjacent(H))
+		for(var/obj/O in range(1,get_turf(H)))
+			if(O.simulated && O.Adjacent(H) && !is_type_in_list(O, no_touchie))
 				touchables += O
-		var/obj/touchy = pick(touchables)
-		touchy.attack_hand(H)
-	
+		if(touchables.len)
+			var/obj/touchy = pick(touchables)
+			touchy.attack_hand(H)
+
 	if(prob(1))
 		H.emote(pick("scratch","jump","roll","tail"))
 
@@ -159,3 +171,13 @@
 		TAG_FACTION =   FACTION_TEST_SUBJECTS
 	)
 
+/datum/species/monkey/unathi/proc/handle_sugar(mob/living/carbon/human/M, datum/reagent/sugar, efficiency = 1)
+	var/effective_dose = efficiency * M.chem_doses[sugar.type]
+	if(effective_dose < 5)
+		return
+	M.druggy = max(M.druggy, 10)
+	M.add_chemical_effect(CE_PULSE, -1)
+	if(effective_dose > 15 && prob(7))
+		M.emote(pick("twitch", "drool"))
+	if(effective_dose > 20 && prob(10))
+		M.SelfMove(pick(GLOB.cardinal))

@@ -44,13 +44,16 @@
 	return ((H && H.isSynthetic()) ? "gives one shrill beep before falling lifeless." : death_message)
 
 /datum/species/proc/get_ssd(var/mob/living/carbon/human/H)
-	return ((H && H.isSynthetic()) ? "flashing a 'system offline' glyph on their monitor" : show_ssd)
+	if (H.ai_holder)
+		return
+
+	if (H.key)
+		return ((H && H.isSynthetic()) ? "flashing a 'system offline' glyph on their monitor" : show_ssd)
+	else
+		return ((H && H.isSynthetic()) ? "displaying a blue screen on their monitor indicating total system failure" : show_coma)
 
 /datum/species/proc/get_blood_colour(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? SYNTH_BLOOD_COLOUR : blood_color)
-
-/datum/species/proc/get_virus_immune(var/mob/living/carbon/human/H)
-	return ((H && H.isSynthetic()) ? 1 : virus_immune)
 
 /datum/species/proc/get_flesh_colour(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? SYNTH_FLESH_COLOUR : flesh_color)
@@ -87,3 +90,21 @@
 
 /datum/species/proc/get_surgery_overlay_icon(var/mob/living/carbon/human/H)
 	return 'icons/mob/surgery.dmi'
+
+/datum/species/proc/get_footstep(var/mob/living/carbon/human/H, var/footstep_type)
+	return
+
+/datum/species/proc/get_brute_mod(var/mob/living/carbon/human/H)
+	. = brute_mod
+
+/datum/species/proc/get_burn_mod(var/mob/living/carbon/human/H)
+	. = burn_mod
+
+/datum/species/proc/get_toxins_mod(var/mob/living/carbon/human/H)
+	. = toxins_mod
+
+/datum/species/proc/get_radiation_mod(var/mob/living/carbon/human/H)
+	. = (H && H.isSynthetic() ? 0.5 : radiation_mod)
+
+/datum/species/proc/get_slowdown(var/mob/living/carbon/human/H)
+	. = (H && H.isSynthetic() ? 0 : slowdown)

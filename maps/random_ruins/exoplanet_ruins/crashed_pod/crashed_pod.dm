@@ -5,8 +5,11 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 	id = "crashed_pod"
 	description = "A crashed survival pod from a destroyed ship."
 	suffixes = list("crashed_pod/crashed_pod.dmm")
-	cost = 2
+	spawn_cost = 1.5
+	player_cost = 4
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_NO_RADS
+	ruin_tags = RUIN_HUMAN|RUIN_WRECK
+	spawn_weight = 0.33
 
 /area/map_template/crashed_pod
 	name = "\improper Crashed Survival Pod"
@@ -16,17 +19,18 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 	descriptor = "crashed survival pod"
 	crew_jobs = list(/datum/job/submap/pod)
 
-/datum/submap/crashed_pod/sync_cell(var/obj/effect/overmap/cell)
-	cell.has_distress_beacon = name
+/datum/submap/crashed_pod/sync_cell(var/obj/effect/overmap/visitable/cell)
+	return
 
 /datum/job/submap/pod
 	title = "Stranded Survivor"
 	info = "Your ship has been destroyed by a terrible disaster."
 	outfit_type = /decl/hierarchy/outfit/job/survivor
+	total_positions = 2
 
 /decl/hierarchy/outfit/job/survivor
 	name = OUTFIT_JOB_NAME("Survivor")
-	id_type = null
+	id_types = null
 	pda_type = null
 
 /datum/job/submap/pod/New(var/datum/submap/_owner, var/abstract_job = FALSE)
@@ -34,8 +38,7 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 	if(_owner) // Might be called from admin tools, etc
 		info = "Your ship, the [_owner.name], has been destroyed by a terrible disaster, \
 		leaving you stranded in your survival pod on a hostile exoplanet. Your pod's distress \
-		signal might draw help, but even if you should be so lucky, you must survive long \
-		enough for it to arrive."
+		signal appear to be malfunctioning. All you can do now is survive, and hope for a passing ship..."
 
 /obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor
 	name = "Stranded Survivor"

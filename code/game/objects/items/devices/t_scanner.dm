@@ -3,6 +3,7 @@
 /obj/item/device/t_scanner
 	name = "\improper T-ray scanner"
 	desc = "A terahertz-ray emitter and scanner, capable of penetrating conventional hull materials."
+	icon = 'icons/obj/t_ray_scanner.dmi'
 	icon_state = "t-ray0"
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
@@ -28,12 +29,17 @@
 	icon_state = "t-ray[on]"
 
 /obj/item/device/t_scanner/emp_act()
-	audible_message(src, "<span class = 'notice'> \The [src] buzzes oddly.</span>")
+	audible_message("<span class = 'notice'> \The [src] buzzes oddly.</span>")
 	set_active(FALSE)
 
 /obj/item/device/t_scanner/attack_self(mob/user)
 	set_active(!on)
 	user.update_action_buttons()
+
+/obj/item/device/t_scanner/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	var/obj/structure/disposalpipe/D = target
+	if(D && istype(D))
+		to_chat(user, "<span class='info'>Pipe segment integrity: [100 - D.get_damage_percentage()]%</span>")
 
 /obj/item/device/t_scanner/proc/set_active(var/active)
 	on = active
@@ -84,7 +90,7 @@
 		var/image/I = image(loc = scanned, icon = scanned.icon, icon_state = scanned.icon_state)
 		I.plane = HUD_PLANE
 		I.layer = UNDER_HUD_LAYER
-		I.appearance_flags = RESET_ALPHA
+		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_ALPHA
 
 		//Pipes are special
 		if(istype(scanned, /obj/machinery/atmospherics/pipe))

@@ -6,7 +6,7 @@
 
 /datum/gear/clothing/flannel
 	display_name = "flannel (colorable)"
-	path = /obj/item/clothing/accessory/toggleable/flannel
+	path = /obj/item/clothing/accessory/flannel
 	slot = slot_tie
 	flags = GEAR_HAS_COLOR_SELECTION
 
@@ -28,16 +28,23 @@
 	gear_tweaks += new/datum/gear_tweak/path(shirts)
 
 /datum/gear/clothing/vest
-	display_name = "black vest"
-	path = /obj/item/clothing/accessory/toggleable/vest
+	display_name = "suit vest, colour select"
+	path = /obj/item/clothing/accessory/toggleable/suit_vest
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/clothing/suspenders
 	display_name = "suspenders"
 	path = /obj/item/clothing/accessory/suspenders
 
+/datum/gear/clothing/suspenders/colorable
+	display_name = "suspenders, colour select"
+	path = /obj/item/clothing/accessory/suspenders/colorable
+	flags = GEAR_HAS_COLOR_SELECTION
+
 /datum/gear/clothing/wcoat
-	display_name = "waistcoat"
-	path = /obj/item/clothing/accessory/wcoat
+	display_name = "waistcoat, colour select"
+	path = /obj/item/clothing/accessory/waistcoat
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/clothing/zhongshan
 	display_name = "zhongshan jacket, colour select"

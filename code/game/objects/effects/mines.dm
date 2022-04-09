@@ -1,17 +1,19 @@
 /obj/effect/mine
 	name = "Mine"
 	desc = "I Better stay away from that thing."
-	density = 1
-	anchored = 1
-	plane = OBJ_PLANE
+	density = TRUE
+	anchored = TRUE
 	layer = OBJ_LAYER
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "uglymine"
 	var/triggerproc = "explode" //name of the proc thats called when the mine is triggered
 	var/triggered = 0
 
-/obj/effect/mine/New()
+
+/obj/effect/mine/Initialize()
+	. = ..()
 	icon_state = "uglyminearmed"
+
 
 /obj/effect/mine/Crossed(AM as mob|obj)
 	Bumped(AM)
@@ -22,7 +24,7 @@
 
 	if(istype(M, /mob/living/carbon/human))
 		for(var/mob/O in viewers(world.view, src.loc))
-			to_chat(O, "<span class='warning'>\The [M] triggered the \icon[src] [src]</span>")
+			to_chat(O, "<span class='warning'>\The [M] triggered the [icon2html(src, O)] [src]</span>")
 		triggered = 1
 		call(src,triggerproc)(M)
 
@@ -52,7 +54,7 @@
 
 	for (var/turf/simulated/floor/target in range(1,src))
 		if(!target.blocks_air)
-			target.assume_gas("sleeping_agent", 30)
+			target.assume_gas(GAS_N2O, 30)
 
 	spawn(0)
 		qdel(src)
@@ -60,7 +62,7 @@
 /obj/effect/mine/proc/triggerphoron(obj)
 	for (var/turf/simulated/floor/target in range(1,src))
 		if(!target.blocks_air)
-			target.assume_gas("phoron", 30)
+			target.assume_gas(GAS_PHORON, 30)
 
 			target.hotspot_expose(1000, CELL_VOLUME)
 

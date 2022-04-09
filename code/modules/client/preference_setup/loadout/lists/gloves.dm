@@ -42,6 +42,7 @@
 	ringtype["signet ring"] = /obj/item/clothing/ring/seal/signet
 	ringtype["masonic ring"] = /obj/item/clothing/ring/seal/mason
 	ringtype["ring, steel"] = /obj/item/clothing/ring/material/steel
+	ringtype["ring, plasteel"] = /obj/item/clothing/ring/material/plasteel
 	ringtype["ring, bronze"] = /obj/item/clothing/ring/material/bronze
 	ringtype["ring, silver"] = /obj/item/clothing/ring/material/silver
 	ringtype["ring, gold"] = /obj/item/clothing/ring/material/gold
@@ -55,7 +56,7 @@
 	display_name = "gloves, botany"
 	path = /obj/item/clothing/gloves/thick/botany
 	cost = 3
-	allowed_roles = list(/datum/job/rd, /datum/job/scientist, /datum/job/chef, /datum/job/bartender, /datum/job/assistant)
+	allowed_roles = list(/datum/job/rd, /datum/job/scientist, /datum/job/chef, /datum/job/assistant)
 
 /datum/gear/gloves/work
 	display_name = "gloves, work"

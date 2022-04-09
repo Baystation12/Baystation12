@@ -1,0 +1,37 @@
+name: Generate Documentation
+
+on:
+  push:
+    branches:
+    - dev
+  workflow_dispatch:
+
+env:
+  SPACEMAN_DMM_VERSION: suite-1.7.2
+
+jobs:
+  generate_documentation:
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    runs-on: ubuntu-latest
+    concurrency: gen-docs
+    steps:
+      - uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846
+      - name: Setup Cache
+        uses: actions/cache@136d96b4aee02b1f0de3ba493b1d47135042d9c0
+        with:
+          path: $HOME/spaceman_dmm/$SPACEMAN_DMM_VERSION
+          key: ${{ runner.os }}-spacemandmm-${{ env.SPACEMAN_DMM_VERSION }}
+      - name: Install dmdoc
+        run:  scripts/install-spaceman-dmm.sh dmdoc
+      - name: Generate documentation
+        run: |
+          ~/dmdoc
+          touch dmdoc/.nojekyll
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@360c8e75d0ee81732d0a5675c71e51b569df2ee8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages-dmdoc
+          single-commit: true
+          folder: dmdoc
+          clean: true

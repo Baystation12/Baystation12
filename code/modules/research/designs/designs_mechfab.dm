@@ -6,17 +6,24 @@
 /datum/design/item/mechfab/robot
 	category = "Robot"
 
-//if the fabricator is a mech fab pass the manufacturer info over to the robot part constructor
+//if the fabricator is a exosuit fab pass the manufacturer info over to the robot part constructor
 /datum/design/item/mechfab/robot/Fabricate(var/newloc, var/fabricator)
-	if(istype(fabricator, /obj/machinery/mecha_part_fabricator))
-		var/obj/machinery/mecha_part_fabricator/mechfab = fabricator
+	if(istype(fabricator, /obj/machinery/robotics_fabricator))
+		var/obj/machinery/robotics_fabricator/mechfab = fabricator
 		return new build_path(newloc, mechfab.manufacturer)
 	return ..()
 
-/datum/design/item/mechfab/robot/exoskeleton
-	name = "Robot exoskeleton"
+/datum/design/item/mechfab/robot/exoskeleton_ground
+	name = "Robot frame, standard"
 	id = "robot_exoskeleton"
 	build_path = /obj/item/robot_parts/robot_suit
+	time = 50
+	materials = list(MATERIAL_STEEL = 50000)
+
+/datum/design/item/mechfab/robot/exoskeleton_flying
+	name = "Robot frame, hover"
+	id = "robot_exoskeleton_hover"
+	build_path = /obj/item/robot_parts/robot_suit/flyer
 	time = 50
 	materials = list(MATERIAL_STEEL = 50000)
 
@@ -96,225 +103,195 @@
 	id = "armour"
 	build_path = /obj/item/robot_parts/robot_component/armour
 
-/datum/design/item/mechfab/ripley
-	category = "Ripley"
-
-/datum/design/item/mechfab/ripley/chassis
-	name = "Ripley chassis"
-	id = "ripley_chassis"
-	build_path = /obj/item/mecha_parts/chassis/ripley
+/datum/design/item/mechfab/robot/component/armour/light
+	name = "Light-weight armour plating"
+	id = "light_armour"
+	build_path = /obj/item/robot_parts/robot_component/armour/light
+	// Half the armor, half the cost
 	time = 10
+	materials = list(MATERIAL_STEEL = 2500)
+
+/datum/design/item/mechfab/exosuit
+	name = "exosuit frame"
+	id = "mech_frame"
+	build_path = /obj/structure/heavy_vehicle_frame
+	time = 70
+	materials = list(MATERIAL_STEEL = 20000)
+	category = "Exosuits"
+
+/datum/design/item/mechfab/exosuit/basic_armour
+	name = "basic exosuit armour"
+	id = "mech_armour_basic"
+	build_path = /obj/item/robot_parts/robot_component/armour/exosuit
+	time = 30
+	materials = list(MATERIAL_STEEL = 7500)
+
+/datum/design/item/mechfab/exosuit/radproof_armour
+	name = "radiation-proof exosuit armour"
+	id = "mech_armour_radproof"
+	build_path = /obj/item/robot_parts/robot_component/armour/exosuit/radproof
+	time = 50
+	req_tech = list(TECH_MATERIAL = 2)
+	materials = list(MATERIAL_STEEL = 12500)
+
+/datum/design/item/mechfab/exosuit/em_armour
+	name = "EM-shielded exosuit armour"
+	id = "mech_armour_em"
+	build_path = /obj/item/robot_parts/robot_component/armour/exosuit/em
+	time = 50
+	req_tech = list(TECH_MATERIAL = 2)
+	materials = list(MATERIAL_STEEL = 12500, MATERIAL_SILVER = 1000)
+
+/datum/design/item/mechfab/exosuit/combat_armour
+	name = "Combat exosuit armour"
+	id = "mech_armour_combat"
+	build_path = /obj/item/robot_parts/robot_component/armour/exosuit/combat
+	time = 50
+	req_tech = list(TECH_MATERIAL = 4)
+	materials = list(MATERIAL_STEEL = 20000, MATERIAL_DIAMOND = 5000)
+
+/datum/design/item/mechfab/exosuit/control_module
+	name = "exosuit control module"
+	id = "mech_control_module"
+	build_path = /obj/item/mech_component/control_module
+	time = 15
+	materials = list(MATERIAL_STEEL = 5000)
+
+/datum/design/item/mechfab/exosuit/combat_torso
+	name = "combat exosuit chassis"
+	id = "combat_body"
+	time = 60
+	materials = list(MATERIAL_STEEL = 45000)
+	build_path = /obj/item/mech_component/chassis/combat
+	req_tech = list(TECH_COMBAT = 2)
+
+/datum/design/item/mechfab/exosuit/combat_arms
+	name = "combat exosuit manipulators"
+	id = "combat_arms"
+	time = 30
+	materials = list(MATERIAL_STEEL = 15000)
+	build_path = /obj/item/mech_component/manipulators/combat
+	req_tech = list(TECH_COMBAT = 2)
+
+/datum/design/item/mechfab/exosuit/combat_legs
+	name = "combat exosuit motivators"
+	id = "combat_legs"
+	time = 30
+	materials = list(MATERIAL_STEEL = 15000)
+	build_path = /obj/item/mech_component/propulsion/combat
+	req_tech = list(TECH_COMBAT = 2)
+
+/datum/design/item/mechfab/exosuit/powerloader_head
+	name = "power loader sensors"
+	id = "powerloader_head"
+	build_path = /obj/item/mech_component/sensors/powerloader
+	time = 15
+	materials = list(MATERIAL_STEEL = 5000)
+
+/datum/design/item/mechfab/exosuit/powerloader_torso
+	name = "power loader chassis"
+	id = "powerloader_body"
+	build_path = /obj/item/mech_component/chassis/powerloader
+	time = 50
 	materials = list(MATERIAL_STEEL = 20000)
 
-/datum/design/item/mechfab/ripley/chassis/firefighter
-	name = "Firefighter chassis"
-	id = "firefighter_chassis"
-	build_path = /obj/item/mecha_parts/chassis/firefighter
+/datum/design/item/mechfab/exosuit/powerloader_arms
+	name = "power loader manipulators"
+	id = "powerloader_arms"
+	build_path = /obj/item/mech_component/manipulators/powerloader
+	time = 30
+	materials = list(MATERIAL_STEEL = 6000)
 
-/datum/design/item/mechfab/ripley/torso
-	name = "Ripley torso"
-	id = "ripley_torso"
-	build_path = /obj/item/mecha_parts/part/ripley_torso
+/datum/design/item/mechfab/exosuit/powerloader_legs
+	name = "power loader motivators"
+	id = "powerloader_legs"
+	build_path = /obj/item/mech_component/propulsion/powerloader
+	time = 30
+	materials = list(MATERIAL_STEEL = 6000)
+
+/datum/design/item/mechfab/exosuit/light_head
+	name = "light exosuit sensors"
+	id = "light_head"
 	time = 20
-	materials = list(MATERIAL_STEEL = 40000, MATERIAL_GLASS = 15000)
+	materials = list(MATERIAL_STEEL = 8000)
+	build_path = /obj/item/mech_component/sensors/light
+	req_tech = list(TECH_MATERIAL = 1)
 
-/datum/design/item/mechfab/ripley/left_arm
-	name = "Ripley left arm"
-	id = "ripley_left_arm"
-	build_path = /obj/item/mecha_parts/part/ripley_left_arm
-	time = 15
-	materials = list(MATERIAL_STEEL = 25000)
-
-/datum/design/item/mechfab/ripley/right_arm
-	name = "Ripley right arm"
-	id = "ripley_right_arm"
-	build_path = /obj/item/mecha_parts/part/ripley_right_arm
-	time = 15
-	materials = list(MATERIAL_STEEL = 25000)
-
-/datum/design/item/mechfab/ripley/left_leg
-	name = "Ripley left leg"
-	id = "ripley_left_leg"
-	build_path = /obj/item/mecha_parts/part/ripley_left_leg
-	time = 15
+/datum/design/item/mechfab/exosuit/light_torso
+	name = "light exosuit chassis"
+	id = "light_body"
+	time = 40
 	materials = list(MATERIAL_STEEL = 30000)
+	build_path = /obj/item/mech_component/chassis/light
+	req_tech = list(TECH_MATERIAL = 1)
 
-/datum/design/item/mechfab/ripley/right_leg
-	name = "Ripley right leg"
-	id = "ripley_right_leg"
-	build_path = /obj/item/mecha_parts/part/ripley_right_leg
-	time = 15
-	materials = list(MATERIAL_STEEL = 30000)
+/datum/design/item/mechfab/exosuit/light_arms
+	name = "light exosuit manipulators"
+	id = "light_arms"
+	time = 20
+	materials = list(MATERIAL_STEEL = 10000)
+	build_path = /obj/item/mech_component/manipulators/light
+	req_tech = list(TECH_MATERIAL = 1)
 
-/datum/design/item/mechfab/odysseus
-	category = "Odysseus"
+/datum/design/item/mechfab/exosuit/light_legs
+	name = "light exosuit motivators"
+	id = "light_legs"
+	time = 25
+	materials = list(MATERIAL_STEEL = 10000)
+	build_path = /obj/item/mech_component/propulsion/light
+	req_tech = list(TECH_MATERIAL = 1)
 
-/datum/design/item/mechfab/odysseus/chassis
-	name = "Odysseus chassis"
-	id = "odysseus_chassis"
-	build_path = /obj/item/mecha_parts/chassis/odysseus
-	time = 10
+/datum/design/item/mechfab/exosuit/heavy_head
+	name = "heavy exosuit sensors"
+	id = "heavy_head"
+	time = 35
+	materials = list(MATERIAL_STEEL = 16000)
+	build_path = /obj/item/mech_component/sensors/heavy
+	req_tech = list(TECH_COMBAT = 2)
+
+/datum/design/item/mechfab/exosuit/heavy_torso
+	name = "heavy exosuit chassis"
+	id = "heavy_body"
+	time = 75
+	materials = list(MATERIAL_STEEL = 70000, MATERIAL_URANIUM = 10000)
+	build_path = /obj/item/mech_component/chassis/heavy
+
+/datum/design/item/mechfab/exosuit/heavy_arms
+	name = "heavy exosuit manipulators"
+	id = "heavy_arms"
+	time = 35
 	materials = list(MATERIAL_STEEL = 20000)
+	build_path = /obj/item/mech_component/manipulators/heavy
 
-/datum/design/item/mechfab/odysseus/torso
-	name = "Odysseus torso"
-	id = "odysseus_torso"
-	build_path = /obj/item/mecha_parts/part/odysseus_torso
-	time = 18
+/datum/design/item/mechfab/exosuit/heavy_legs
+	name = "heavy exosuit motivators"
+	id = "heavy_legs"
+	time = 35
+	materials = list(MATERIAL_STEEL = 20000)
+	build_path = /obj/item/mech_component/propulsion/heavy
+
+/datum/design/item/mechfab/exosuit/spider
+	name = "quadruped motivators"
+	id = "quad_legs"
+	time = 20
+	materials = list(MATERIAL_STEEL = 12000)
+	build_path = /obj/item/mech_component/propulsion/spider
+	req_tech = list(TECH_ENGINEERING = 2)
+
+/datum/design/item/mechfab/exosuit/track
+	name = "armored treads"
+	id = "treads"
+	time = 35
 	materials = list(MATERIAL_STEEL = 25000)
+	build_path = /obj/item/mech_component/propulsion/tracks
+	req_tech = list(TECH_MATERIAL = 4)
 
-/datum/design/item/mechfab/odysseus/head
-	name = "Odysseus head"
-	id = "odysseus_head"
-	build_path = /obj/item/mecha_parts/part/odysseus_head
-	time = 10
-	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 10000)
-
-/datum/design/item/mechfab/odysseus/left_arm
-	name = "Odysseus left arm"
-	id = "odysseus_left_arm"
-	build_path = /obj/item/mecha_parts/part/odysseus_left_arm
-	time = 12
-	materials = list(MATERIAL_STEEL = 10000)
-
-/datum/design/item/mechfab/odysseus/right_arm
-	name = "Odysseus right arm"
-	id = "odysseus_right_arm"
-	build_path = /obj/item/mecha_parts/part/odysseus_right_arm
-	time = 12
-	materials = list(MATERIAL_STEEL = 10000)
-
-/datum/design/item/mechfab/odysseus/left_leg
-	name = "Odysseus left leg"
-	id = "odysseus_left_leg"
-	build_path = /obj/item/mecha_parts/part/odysseus_left_leg
-	time = 13
-	materials = list(MATERIAL_STEEL = 15000)
-
-/datum/design/item/mechfab/odysseus/right_leg
-	name = "Odysseus right leg"
-	id = "odysseus_right_leg"
-	build_path = /obj/item/mecha_parts/part/odysseus_right_leg
-	time = 13
-	materials = list(MATERIAL_STEEL = 15000)
-
-/datum/design/item/mechfab/gygax
-	category = "Gygax"
-
-/datum/design/item/mechfab/gygax/chassis
-	name = "Gygax chassis"
-	id = "gygax_chassis"
-	build_path = /obj/item/mecha_parts/chassis/gygax
-	time = 10
-	materials = list(MATERIAL_STEEL = 25000)
-
-/datum/design/item/mechfab/gygax/torso
-	name = "Gygax torso"
-	id = "gygax_torso"
-	build_path = /obj/item/mecha_parts/part/gygax_torso
-	time = 30
-	materials = list(MATERIAL_STEEL = 50000, MATERIAL_GLASS = 20000)
-
-/datum/design/item/mechfab/gygax/head
-	name = "Gygax head"
-	id = "gygax_head"
-	build_path = /obj/item/mecha_parts/part/gygax_head
-	time = 20
-	materials = list(MATERIAL_STEEL = 20000, MATERIAL_GLASS = 10000)
-
-/datum/design/item/mechfab/gygax/left_arm
-	name = "Gygax left arm"
-	id = "gygax_left_arm"
-	build_path = /obj/item/mecha_parts/part/gygax_left_arm
-	time = 20
-	materials = list(MATERIAL_STEEL = 30000)
-
-/datum/design/item/mechfab/gygax/right_arm
-	name = "Gygax right arm"
-	id = "gygax_right_arm"
-	build_path = /obj/item/mecha_parts/part/gygax_right_arm
-	time = 20
-	materials = list(MATERIAL_STEEL = 30000)
-
-/datum/design/item/mechfab/gygax/left_leg
-	name = "Gygax left leg"
-	id = "gygax_left_leg"
-	build_path = /obj/item/mecha_parts/part/gygax_left_leg
-	time = 20
-	materials = list(MATERIAL_STEEL = 35000)
-
-/datum/design/item/mechfab/gygax/right_leg
-	name = "Gygax right leg"
-	id = "gygax_right_leg"
-	build_path = /obj/item/mecha_parts/part/gygax_right_leg
-	time = 20
-	materials = list(MATERIAL_STEEL = 35000)
-
-/datum/design/item/mechfab/gygax/armour
-	name = "Gygax armour plates"
-	id = "gygax_armour"
-	build_path = /obj/item/mecha_parts/part/gygax_armour
-	time = 60
-	materials = list(MATERIAL_STEEL = 50000, MATERIAL_DIAMOND = 10000)
-
-/datum/design/item/mechfab/durand
-	category = "Durand"
-
-/datum/design/item/mechfab/durand/chassis
-	name = "Durand chassis"
-	id = "durand_chassis"
-	build_path = /obj/item/mecha_parts/chassis/durand
-	time = 10
-	materials = list(MATERIAL_STEEL = 25000)
-
-/datum/design/item/mechfab/durand/torso
-	name = "Durand torso"
-	id = "durand_torso"
-	build_path = /obj/item/mecha_parts/part/durand_torso
-	time = 30
-	materials = list(MATERIAL_STEEL = 55000, MATERIAL_GLASS = 20000, MATERIAL_SILVER = 10000)
-
-/datum/design/item/mechfab/durand/head
-	name = "Durand head"
-	id = "durand_head"
-	build_path = /obj/item/mecha_parts/part/durand_head
-	time = 20
-	materials = list(MATERIAL_STEEL = 25000, MATERIAL_GLASS = 10000, MATERIAL_SILVER = 3000)
-
-/datum/design/item/mechfab/durand/left_arm
-	name = "Durand left arm"
-	id = "durand_left_arm"
-	build_path = /obj/item/mecha_parts/part/durand_left_arm
-	time = 20
-	materials = list(MATERIAL_STEEL = 35000, MATERIAL_SILVER = 3000)
-
-/datum/design/item/mechfab/durand/right_arm
-	name = "Durand right arm"
-	id = "durand_right_arm"
-	build_path = /obj/item/mecha_parts/part/durand_right_arm
-	time = 20
-	materials = list(MATERIAL_STEEL = 35000, MATERIAL_SILVER = 3000)
-
-/datum/design/item/mechfab/durand/left_leg
-	name = "Durand left leg"
-	id = "durand_left_leg"
-	build_path = /obj/item/mecha_parts/part/durand_left_leg
-	time = 20
-	materials = list(MATERIAL_STEEL = 40000, MATERIAL_SILVER = 3000)
-
-/datum/design/item/mechfab/durand/right_leg
-	name = "Durand right leg"
-	id = "durand_right_leg"
-	build_path = /obj/item/mecha_parts/part/durand_right_leg
-	time = 20
-	materials = list(MATERIAL_STEEL = 40000, MATERIAL_SILVER = 3000)
-
-/datum/design/item/mechfab/durand/armour
-	name = "Durand armour plates"
-	id = "durand_armour"
-	build_path = /obj/item/mecha_parts/part/durand_armour
-	time = 60
-	materials = list(MATERIAL_STEEL = 50000, MATERIAL_URANIUM = 10000)
+/datum/design/item/mechfab/exosuit/sphere_torso
+	name = "spherical chassis"
+	id = "sphere_body"
+	build_path = /obj/item/mech_component/chassis/pod
+	time = 50
+	materials = list(MATERIAL_STEEL = 18000)
 
 /datum/design/item/robot_upgrade
 	build_type = MECHFAB
@@ -379,226 +356,147 @@
 	name = "Illegal upgrade"
 	desc = "Allows for the construction of lethal upgrades for cyborgs."
 	id = "borg_syndicate_module"
-	req_tech = list(TECH_COMBAT = 4, TECH_ILLEGAL = 3)
+	req_tech = list(TECH_COMBAT = 4, TECH_ESOTERIC = 3)
 	materials = list(MATERIAL_STEEL = 10000, MATERIAL_GLASS = 15000, MATERIAL_DIAMOND = 10000)
 	build_path = /obj/item/borg/upgrade/syndicate
 
-/datum/design/item/mecha_tracking
-	name = "Exosuit tracking beacon"
-	build_type = MECHFAB
-	time = 5
-	materials = list(MATERIAL_STEEL = 500)
-	build_path = /obj/item/mecha_parts/mecha_tracking
-	category = "Misc"
+/datum/design/item/robot_upgrade/flash_protection
+	name = "Optical Matrix Shielding"
+	desc = "Provides shielding for the optical matrix, rendering the robot immune to flashes."
+	id = "borg_flash_protection_module"
+	materials = list(MATERIAL_STEEL = 80000, MATERIAL_GLASS = 6000, MATERIAL_GOLD = 5000)
+	build_path = /obj/item/borg/upgrade/flash_protection
 
-/datum/design/item/mecha
+/datum/design/item/exosuit
 	build_type = MECHFAB
 	category = "Exosuit Equipment"
 	time = 10
 	materials = list(MATERIAL_STEEL = 10000)
 
-/datum/design/item/mecha/AssembleDesignDesc()
+/datum/design/item/exosuit/AssembleDesignDesc()
 	if(!desc)
-		desc = "Allows for the construction of \a '[item_name]' exosuit module."
+		desc = "Allows for the construction of \a [item_name] for installation in an exosuit hardpoint."
 
-/datum/design/item/mecha/hydraulic_clamp
-	name = "Hydraulic clamp"
+/datum/design/item/exosuit/hydraulic_clamp
+	name = "hydraulic clamp"
 	id = "hydraulic_clamp"
-	build_path = /obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp
+	build_path = /obj/item/mech_equipment/clamp
 
-/datum/design/item/mecha/drill
-	name = "Drill"
+/datum/design/item/exosuit/gravity_catapult
+	name = "gravity catapult"
+	id = "gravity_catapult"
+	build_path = /obj/item/mech_equipment/catapult
+
+/datum/design/item/exosuit/drill
+	name = "drill"
 	id = "mech_drill"
-	build_path = /obj/item/mecha_parts/mecha_equipment/tool/drill
+	build_path = /obj/item/mech_equipment/drill
 
-/datum/design/item/mecha/extinguisher
-	name = "Extinguisher"
-	id = "extinguisher"
-	build_path = /obj/item/mecha_parts/mecha_equipment/tool/extinguisher
-
-/datum/design/item/mecha/cable_layer
-	name = "Cable layer"
-	id = "mech_cable_layer"
-	build_path = /obj/item/mecha_parts/mecha_equipment/tool/cable_layer
-
-/datum/design/item/mecha/flaregun
-	name = "Flare launcher"
-	id = "mecha_flare_gun"
-	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flare
-	materials = list(MATERIAL_STEEL = 12500)
-
-/datum/design/item/mecha/sleeper
-	name = "Sleeper"
-	id = "mech_sleeper"
-	build_path = /obj/item/mecha_parts/mecha_equipment/tool/sleeper
-	materials = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 10000)
-
-/datum/design/item/mecha/syringe_gun
-	name = "Syringe gun"
-	id = "mech_syringe_gun"
-	build_path = /obj/item/mecha_parts/mecha_equipment/tool/syringe_gun
-	time = 20
-	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 2000)
-
-/*
-/datum/design/item/mecha/syringe_gun
-	desc = "Exosuit-mounted syringe gun and chemical synthesizer."
-	id = "mech_syringe_gun"
-	req_tech = list(TECH_MATERIAL = 3, TECH_BIO = 4, TECH_MAGNET = 4, TECH_DATA = 3)
-	build_path = /obj/item/mecha_parts/mecha_equipment/tool/syringe_gun
-	*/
-
-/datum/design/item/mecha/passenger
-	name = "Passenger compartment"
-	id = "mech_passenger"
-	build_path = /obj/item/mecha_parts/mecha_equipment/tool/passenger
-	materials = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 5000)
-
-//obj/item/mecha_parts/mecha_equipment/repair_droid,
-//obj/item/mecha_parts/mecha_equipment/jetpack, //TODO MECHA JETPACK SPRITE MISSING
-
-/datum/design/item/mecha/taser
-	name = "PBT \"Pacifier\" mounted taser"
+/datum/design/item/exosuit/taser
+	name = "mounted electrolaser"
 	id = "mech_taser"
-	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/taser
+	req_tech = list(TECH_COMBAT = 1)
+	build_path = /obj/item/mech_equipment/mounted_system/taser
 
-/datum/design/item/mecha/lmg
-	name = "Ultra AC 2"
-	id = "mech_lmg"
-	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg
+/datum/design/item/exosuit/weapon/plasma
+	name = "mounted plasma cutter"
+	id = "mech_plasma"
+	materials = list(MATERIAL_STEEL = 20000)
+	req_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 4, TECH_ENGINEERING = 3)
+	build_path = /obj/item/mech_equipment/mounted_system/taser/plasma
 
-/datum/design/item/mecha/weapon
-	req_tech = list(TECH_COMBAT = 3)
+/datum/design/item/exosuit/weapon/plasma/auto
+	name = "mounted rotatory plasma cutter"
+	id = "mech_plasma_auto"
+	materials = list(MATERIAL_STEEL = 20000, MATERIAL_SILVER = 2000, MATERIAL_GOLD = 2000)
+	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 5, TECH_ENGINEERING = 3)
+	build_path = /obj/item/mech_equipment/mounted_system/taser/autoplasma
 
-// *** Weapon modules
-/datum/design/item/mecha/weapon/scattershot
-	name = "LBX AC 10 \"Scattershot\""
-	id = "mech_scattershot"
-	req_tech = list(TECH_COMBAT = 4)
-	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/scattershot
-
-/datum/design/item/mecha/weapon/laser
-	name = "CH-PS \"Immolator\" laser"
-	id = "mech_laser"
-	req_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 3)
-	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser
-
-/datum/design/item/mecha/weapon/laser_rigged
-	name = "Jury-rigged welder-laser"
-	desc = "Allows for the construction of a welder-laser assembly package for non-combat exosuits."
-	id = "mech_laser_rigged"
-	req_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2)
-	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser
-
-/datum/design/item/mecha/weapon/laser_heavy
-	name = "CH-LC \"Solaris\" laser cannon"
-	id = "mech_laser_heavy"
-	req_tech = list(TECH_COMBAT = 4, TECH_MAGNET = 4)
-	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy
-
-/datum/design/item/mecha/weapon/ion
-	name = "mkIV ion heavy cannon"
+/datum/design/item/exosuit/weapon/ion
+	name = "mounted ion rifle"
 	id = "mech_ion"
 	req_tech = list(TECH_COMBAT = 4, TECH_MAGNET = 4)
-	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/ion
+	build_path = /obj/item/mech_equipment/mounted_system/taser/ion
 
-/datum/design/item/mecha/weapon/grenade_launcher
-	name = "SGL-6 grenade launcher"
-	id = "mech_grenade_launcher"
-	req_tech = list(TECH_COMBAT = 3)
-	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang
+/datum/design/item/exosuit/weapon/laser
+	name = "mounted laser gun"
+	id = "mech_laser"
+	req_tech = list(TECH_COMBAT = 4, TECH_MAGNET = 4)
+	build_path = /obj/item/mech_equipment/mounted_system/taser/laser
 
-/datum/design/item/mecha/weapon/clusterbang_launcher
-	name = "SOP-6 grenade launcher"
-	desc = "A weapon that violates the Geneva Convention at 6 rounds per minute."
-	id = "clusterbang_launcher"
-	req_tech = list(TECH_COMBAT= 5, TECH_MATERIAL = 5, TECH_ILLEGAL = 3)
-	materials = list(MATERIAL_STEEL = 20000, MATERIAL_GOLD = 6000, MATERIAL_URANIUM = 6000)
-	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang/clusterbang/limited
-
-// *** Nonweapon modules
-/datum/design/item/mecha/wormhole_gen
-	name = "Wormhole generator"
-	desc = "An exosuit module that can generate small quasi-stable wormholes."
-	id = "mech_wormhole_gen"
-	req_tech = list(TECH_BLUESPACE = 3, TECH_MAGNET = 2)
-	build_path = /obj/item/mecha_parts/mecha_equipment/wormhole_generator
-
-/datum/design/item/mecha/teleporter
-	name = "Teleporter"
-	desc = "An exosuit module that allows teleportation to any position in view."
-	id = "mech_teleporter"
-	req_tech = list(TECH_BLUESPACE = 10, TECH_MAGNET = 5)
-	build_path = /obj/item/mecha_parts/mecha_equipment/teleporter
-
-/datum/design/item/mecha/rcd
+/datum/design/item/exosuit/weapon/machete
+	name = "Mechete"
+	id = "mech_machete"
+	req_tech = list(TECH_COMBAT = 2)
+	build_path = /obj/item/mech_equipment/mounted_system/melee/mechete
+/datum/design/item/exosuit/rcd
 	name = "RCD"
-	desc = "An exosuit-mounted rapid construction device."
 	id = "mech_rcd"
-	time = 120
-	materials = list(MATERIAL_STEEL = 30000, MATERIAL_PHORON = 25000, MATERIAL_SILVER = 20000, MATERIAL_GOLD = 20000)
+	time = 90
+	materials = list(MATERIAL_STEEL = 30000, MATERIAL_PHORON = 25000, MATERIAL_SILVER = 15000, MATERIAL_GOLD = 15000)
 	req_tech = list(TECH_MATERIAL = 4, TECH_BLUESPACE = 3, TECH_MAGNET = 4, TECH_POWER = 4, TECH_ENGINEERING = 4)
-	build_path = /obj/item/mecha_parts/mecha_equipment/tool/rcd
+	build_path = /obj/item/mech_equipment/mounted_system/rcd
 
-/datum/design/item/mecha/gravcatapult
-	name = "Gravitational catapult"
-	desc = "An exosuit-mounted gravitational catapult."
-	id = "mech_gravcatapult"
-	req_tech = list(TECH_BLUESPACE = 2, TECH_MAGNET = 3, TECH_ENGINEERING = 3)
-	build_path = /obj/item/mecha_parts/mecha_equipment/gravcatapult
+/datum/design/item/exosuit/floodlight
+	name = "floodlight"
+	id = "mech_floodlight"
+	req_tech = list(TECH_ENGINEERING = 1)
+	build_path = /obj/item/mech_equipment/light
 
-/datum/design/item/mecha/repair_droid
-	name = "Repair droid"
-	desc = "Automated repair droid, exosuits' best companion. BEEP BOOP"
-	id = "mech_repair_droid"
-	req_tech = list(TECH_MAGNET = 3, TECH_DATA = 3, TECH_ENGINEERING = 3)
-	materials = list(MATERIAL_STEEL = 10000, MATERIAL_GOLD = 1000, MATERIAL_SILVER = 2000, MATERIAL_GLASS = 5000)
-	build_path = /obj/item/mecha_parts/mecha_equipment/repair_droid
+/datum/design/item/exosuit/camera
+	name = "exosuit camera"
+	id = "mech_camera"
+	req_tech = list(TECH_ENGINEERING = 1)
+	build_path = /obj/item/mech_equipment/camera
 
-/datum/design/item/mecha/phoron_generator
-	desc = "Phoron reactor."
-	id = "mech_phoron_generator"
-	req_tech = list(TECH_PHORON = 2, TECH_POWER= 2, TECH_ENGINEERING = 2)
-	build_path = /obj/item/mecha_parts/mecha_equipment/generator
-	materials = list(MATERIAL_STEEL = 10000, MATERIAL_SILVER = 500, MATERIAL_GLASS = 1000)
+/datum/design/item/exosuit/flash
+	name = "exosuit flash"
+	id = "mech_flash"
+	req_tech = list(TECH_COMBAT = 1)
+	build_path = /obj/item/mech_equipment/flash
 
-/datum/design/item/mecha/energy_relay
-	name = "Energy relay"
-	id = "mech_energy_relay"
-	req_tech = list(TECH_MAGNET = 4, TECH_POWER = 3)
-	materials = list(MATERIAL_STEEL = 10000, MATERIAL_GOLD = 2000, MATERIAL_SILVER = 3000, MATERIAL_GLASS = 2000)
-	build_path = /obj/item/mecha_parts/mecha_equipment/tesla_energy_relay
+/datum/design/item/exosuit/sleeper
+	name = "mounted sleeper"
+	id   = "mech_sleeper"
+	build_path = /obj/item/mech_equipment/sleeper
 
-/datum/design/item/mecha/ccw_armor
-	name = "CCW armor booster"
-	desc = "Exosuit close-combat armor booster."
-	id = "mech_ccw_armor"
-	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 4)
-	materials = list(MATERIAL_STEEL = 20000, MATERIAL_SILVER = 5000)
-	build_path = /obj/item/mecha_parts/mecha_equipment/armor_booster/anticcw_armor_booster
+/datum/design/item/exosuit/extinguisher
+	name = "mounted extinguisher"
+	id   = "mech_extinguisher"
+	build_path = /obj/item/mech_equipment/mounted_system/extinguisher
 
-/datum/design/item/mecha/proj_armor
-	desc = "Exosuit projectile armor booster."
-	id = "mech_proj_armor"
-	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 3)
-	materials = list(MATERIAL_STEEL = 20000, MATERIAL_GOLD = 5000)
-	build_path = /obj/item/mecha_parts/mecha_equipment/armor_booster/antiproj_armor_booster
+/datum/design/item/exosuit/mechshields
+	name = "energy shield drone"
+	id = "mech_shield"
+	time = 90
+	materials = list(MATERIAL_STEEL = 20000, MATERIAL_SILVER = 12000, MATERIAL_GOLD = 12000)
+	req_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_POWER = 4, TECH_COMBAT = 2)
+	build_path = /obj/item/mech_equipment/shields
 
-/datum/design/item/mecha/diamond_drill
-	name = "Diamond drill"
-	desc = "A diamond version of the exosuit drill. It's harder, better, faster, stronger."
-	id = "mech_diamond_drill"
-	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 3)
-	materials = list(MATERIAL_STEEL = 10000, MATERIAL_DIAMOND = 6500)
-	build_path = /obj/item/mecha_parts/mecha_equipment/tool/drill/diamonddrill
+/datum/design/item/exosuit/mechshields/ballistic
+	name = "plasteel mech shield"
+	id = "mech_shield_ballistic"
+	time = 45
+	materials = list(MATERIAL_STEEL = 40000, MATERIAL_ALUMINIUM = 5000)
+	req_tech = list(TECH_MATERIAL = 3)
+	build_path = /obj/item/mech_equipment/ballistic_shield
 
-/datum/design/item/mecha/generator_nuclear
-	name = "Nuclear reactor"
-	desc = "Exosuit-held nuclear reactor. Converts uranium and everyone's health to energy."
-	id = "mech_generator_nuclear"
-	req_tech = list(TECH_POWER= 3, TECH_ENGINEERING = 3, TECH_MATERIAL = 3)
-	materials = list(MATERIAL_STEEL = 10000, MATERIAL_SILVER = 500, MATERIAL_GLASS = 1000)
-	build_path = /obj/item/mecha_parts/mecha_equipment/generator/nuclear
+/datum/design/item/exosuit/ionjets
+	name = "exosuit manouvering unit"
+	id = "mech_ionjets"
+	time = 30
+	materials = list(MATERIAL_STEEL = 20000, MATERIAL_ALUMINIUM = 10000, MATERIAL_PHORON = 2500)
+	req_tech = list(TECH_ENGINEERING = 2, TECH_MAGNET = 2)
+	build_path = /obj/item/mech_equipment/ionjets
+
+/datum/design/item/exosuit/mechshields/air
+	name = "exosuit atmospheric shields"
+	id = "mech_atmoshields"
+	time = 30
+	materials = list(MATERIAL_STEEL = 20000, MATERIAL_ALUMINIUM = 5000, MATERIAL_GLASS = 5000, MATERIAL_PHORON = 2500)
+	req_tech = list(TECH_ENGINEERING = 2, TECH_MAGNET = 2)
+	build_path = /obj/item/mech_equipment/atmos_shields
+// End mechs.
 
 /datum/design/item/synthetic_flash
 	name = "Synthetic flash"
@@ -615,30 +513,92 @@
 
 /datum/design/item/mechfab/augment/armblade
 	name = "Armblade"
-	build_path = /obj/item/organ/internal/augment/active/simple/armblade
+	build_path = /obj/item/organ/internal/augment/active/item/armblade
 	materials = list(DEFAULT_WALL_MATERIAL = 4000, "glass" = 750)
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 2, TECH_MATERIAL = 4, TECH_BIO = 3)
 	id = "augment_blade"
 
 /datum/design/item/mechfab/augment/armblade/wolverine
 	name = "Cyberclaws"
-	build_path = /obj/item/organ/internal/augment/active/simple/wolverine
+	build_path = /obj/item/organ/internal/augment/active/item/wolverine
 	materials = list(DEFAULT_WALL_MATERIAL = 6000, "diamond" = 250)
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4, TECH_MATERIAL = 4, TECH_BIO = 3)
 	id = "augment_wolverine"
+
+/datum/design/item/mechfab/augment/armblade/wrist_blade
+	name = "Wrist blade"
+	build_path = /obj/item/organ/internal/augment/active/item/wrist_blade
+	materials = list(MATERIAL_TITANIUM = 4000, MATERIAL_DIAMOND = 250)
+	req_tech = list(TECH_ESOTERIC = 4, TECH_COMBAT = 5, TECH_BIO = 3)
+	id = "augment_wristblade"
+
+/datum/design/item/mechfab/augment/powerfist
+	name = "Pneumatic Powerfist"
+	build_path = /obj/item/organ/internal/augment/active/item/powerfist
+	materials = list(DEFAULT_WALL_MATERIAL = 6000, MATERIAL_PHORON = 1000, MATERIAL_URANIUM = 500)
+	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4, TECH_MATERIAL = 4, TECH_BIO = 3)
+	id = "augment_powerfist"
+
+/datum/design/item/mechfab/augment/armblade/popout_shotgun
+	name = "Pop-out shotgun"
+	build_path = /obj/item/organ/internal/augment/active/item/popout_shotgun
+	materials = list(DEFAULT_WALL_MATERIAL = 5000, MATERIAL_SILVER = 500)
+	req_tech = list(TECH_ESOTERIC = 5, TECH_COMBAT = 6, TECH_BIO = 4)
+	id = "augment_popout_shotgun"
+
+/datum/design/item/mechfab/augment/corrective_lenses
+	name = "Corrective lenses"
+	build_path = /obj/item/organ/internal/augment/active/item/corrective_lenses
+	materials = list(DEFAULT_WALL_MATERIAL = 500, MATERIAL_GLASS = 1000)
+	req_tech = list(TECH_MATERIAL = 2)
+	id = "augment_corrective_lenses"
+
+/datum/design/item/mechfab/augment/glare_dampeners
+	name = "Glare dampeners"
+	build_path = /obj/item/organ/internal/augment/active/item/glare_dampeners
+	materials = list(DEFAULT_WALL_MATERIAL = 100, MATERIAL_GLASS = 2000)
+	req_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	id = "augment_glare_dampeners"
+
+/datum/design/item/mechfab/augment/adaptive_binoculars
+	name = "Adaptive binoculars"
+	build_path = /obj/item/organ/internal/augment/active/item/adaptive_binoculars
+	materials = list(MATERIAL_DIAMOND = 100, MATERIAL_GOLD = 100, MATERIAL_GLASS = 2000)
+	// We use decent requirements for this, because it allows someone to zoom in and grab ammo from an open container at the same time
+	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 4, TECH_COMBAT = 4)
+	id = "augment_adaptive_binoculars"
+
+/datum/design/item/mechfab/augment/iatric_monitor
+	name = "Iatric monitor"
+	build_path = /obj/item/organ/internal/augment/active/iatric_monitor
+	materials = list(DEFAULT_WALL_MATERIAL = 100, MATERIAL_GLASS = 2000)
+	req_tech = list(TECH_BIO = 3)
+	id = "augment_iatric_monitor"
+
+/datum/design/item/mechfab/augment/internal_air_system
+	name = "Internal air system"
+	build_path = /obj/item/organ/internal/augment/active/internal_air_system
+	materials = list(DEFAULT_WALL_MATERIAL = 500, MATERIAL_GLASS = 2000, MATERIAL_DIAMOND = 100)
+	req_tech = list(TECH_MATERIAL = 5, TECH_BIO = 5)
+	id = "augment_internal_air_system"
+
+/datum/design/item/mechfab/augment/leukocyte_breeder
+	name = "Leukocyte breeder"
+	build_path = /obj/item/organ/internal/augment/active/leukocyte_breeder
+	materials = list(DEFAULT_WALL_MATERIAL = 2000, MATERIAL_GLASS = 1000)
+	req_tech = list(TECH_MAGNET = 4, TECH_DATA = 4, TECH_BIO = 6)
+	id = "augment_leukocyte_breeder"
 
 /datum/design/item/mechfab/augment/engineering
 	name = "Engineering toolset"
 	build_path = /obj/item/organ/internal/augment/active/polytool/engineer
 	materials = list(DEFAULT_WALL_MATERIAL = 3000, "glass" = 1000)
-	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 4, TECH_BIO = 2)
 	id = "augment_toolset_engineering"
 
 /datum/design/item/mechfab/augment/surgery
 	name = "Surgical toolset"
 	build_path = /obj/item/organ/internal/augment/active/polytool/surgical
 	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 2000)
-	req_tech = list(TECH_BIO = 4, TECH_MATERIAL = 4)
 	id = "augment_toolset_surgery"
 
 /datum/design/item/mechfab/augment/reflex
@@ -659,15 +619,41 @@
 	name = "Mechanical muscles"
 	build_path = /obj/item/organ/internal/augment/boost/muscle
 	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 1000)
-	req_tech = list(TECH_MATERIAL = 3, TECH_BIO = 4)
 	id = "augment_booster_muscles"
 
 /datum/design/item/mechfab/augment/armor
 	name = "Subdermal armor"
 	build_path = /obj/item/organ/internal/augment/armor
 	materials = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 750)
-	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 4, TECH_BIO = 4)
 	id = "augment_armor"
+
+/datum/design/item/mechfab/augment/hud/health
+	name = "Implantable health HUD"
+	build_path = /obj/item/organ/internal/augment/active/hud/health
+	materials = list(DEFAULT_WALL_MATERIAL = 250, "glass" = 250)
+	req_tech = list(TECH_BIO = 2, TECH_MAGNET = 3)
+	id = "augment_med_hud"
+
+/datum/design/item/mechfab/augment/hud/security
+	name = "Implantable security HUD"
+	build_path = /obj/item/organ/internal/augment/active/hud/security
+	materials = list(DEFAULT_WALL_MATERIAL = 250, "glass" = 250)
+	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 2)
+	id = "augment_sec_hud"
+
+/datum/design/item/mechfab/augment/hud/janitor
+	name = "Implantable filth HUD"
+	build_path = /obj/item/organ/internal/augment/active/hud/janitor
+	materials = list(DEFAULT_WALL_MATERIAL = 250, "glass" = 250)
+	req_tech = list(TECH_BIO = 1, TECH_MAGNET = 3)
+	id= "augment_jani_hud"
+
+/datum/design/item/mechfab/augment/hud/science
+	name = "Implantable science HUD"
+	build_path = /obj/item/organ/internal/augment/active/hud/science
+	materials = list(DEFAULT_WALL_MATERIAL = 250, "glass" = 250)
+	req_tech = list(TECH_BIO = 1, TECH_MAGNET = 3)
+	id= "augment_sci_hud"
 
 /datum/design/item/mechfab/augment/nanounit
 	name = "Nanite MCU"
@@ -678,14 +664,194 @@
 
 /datum/design/item/mechfab/augment/circuit
 	name = "Integrated circuit frame"
-	build_path = /obj/item/organ/internal/augment/active/simple/circuit
+	build_path = /obj/item/organ/internal/augment/active/item/circuit
 	materials = list(DEFAULT_WALL_MATERIAL = 3000)
 	id = "augment_circuitry"
 
+//BigRigs
 /datum/design/item/mechfab/rig/zero
 	category = "Hardsuits"
 	name = "Null suit control module"
-	build_path = /obj/item/weapon/rig/zero
+	build_path = /obj/item/rig/zero
 	materials = list(DEFAULT_WALL_MATERIAL = 30000, "glass" = 5000, "silver" = 1000)
 	id = "null _suit"
 	time = 120
+
+/datum/design/item/mechfab/rig/meson
+	category = "Hardsuits"
+	name = "Meson Scanner"
+	build_path = /obj/item/rig_module/vision/meson
+	materials = list(MATERIAL_STEEL = 100, MATERIAL_GLASS = 200, MATERIAL_PLASTIC = 300)
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 5)
+	id = "rig_meson"
+	sort_string = "WCAAA"
+
+/datum/design/item/mechfab/rig/medhud
+	category = "Hardsuits"
+	name = "Medical HUD"
+	build_path = /obj/item/rig_module/vision/medhud
+	materials = list(MATERIAL_STEEL = 100, MATERIAL_GLASS = 200,  MATERIAL_PLASTIC = 300)
+	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 2, TECH_ENGINEERING = 5)
+	id = "rig_medhud"
+	sort_string = "WCAAB"
+
+/datum/design/item/mechfab/rig/sechud
+	category = "Hardsuits"
+	name = "Security HUD"
+	build_path = /obj/item/rig_module/vision/sechud
+	materials = list(MATERIAL_STEEL = 100, MATERIAL_GLASS = 200,  MATERIAL_PLASTIC = 300)
+	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 2, TECH_ENGINEERING = 5)
+	id = "rig_sechud"
+	sort_string = "WCAAC"
+
+/datum/design/item/mechfab/rig/nvg
+	category = "Hardsuits"
+	name = "Night Vision"
+	build_path = /obj/item/rig_module/vision/nvg
+	materials = list(MATERIAL_PLASTIC = 500, MATERIAL_STEEL = 300, MATERIAL_GLASS = 200, MATERIAL_URANIUM = 200)
+	req_tech = list(TECH_MAGNET = 6, TECH_ENGINEERING = 6)
+	id = "rig_nvg"
+	sort_string = "WCAAD"
+
+/datum/design/item/mechfab/rig/healthscanner
+	category = "Hardsuits"
+	name = "Medical Scanner"
+	build_path = /obj/item/rig_module/device/healthscanner
+	materials = list(MATERIAL_PLASTIC = 1000, MATERIAL_STEEL = 700, MATERIAL_GLASS = 500)
+	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 3, TECH_ENGINEERING = 5)
+	id = "rig_healthscanner"
+	sort_string = "WCBAA"
+
+/datum/design/item/mechfab/rig/drill
+	category = "Hardsuits"
+	name = "Mining Drill"
+	build_path = /obj/item/rig_module/device/drill
+	materials = list(MATERIAL_STEEL = 3500, MATERIAL_GLASS = 1500, MATERIAL_DIAMOND = 2000, MATERIAL_PLASTIC = 1000)
+	req_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 6)
+	id = "rig_drill"
+	sort_string = "WCCAA"
+
+/datum/design/item/mechfab/rig/plasmacutter
+	category = "Hardsuits"
+	name = "Plasma Cutter"
+	build_path = /obj/item/rig_module/mounted/plasmacutter
+	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 1000, MATERIAL_PLASTIC = 1000, MATERIAL_GOLD = 700, MATERIAL_PHORON = 500)
+	req_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 6, TECH_COMBAT = 4)
+	id = "rig_plasmacutter"
+	sort_string = "VCCAB"
+
+/datum/design/item/mechfab/rig/orescanner
+	category = "Hardsuits"
+	name = "Ore Scanner"
+	build_path = /obj/item/rig_module/device/orescanner
+	materials = list(MATERIAL_PLASTIC = 1000, MATERIAL_STEEL = 800, MATERIAL_GLASS = 500)
+	req_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
+	id = "rig_orescanner"
+	sort_string = "WCDAA"
+
+/datum/design/item/mechfab/rig/anomaly_scanner
+	category = "Hardsuits"
+	name = "Anomaly Scanner"
+	build_path = /obj/item/rig_module/device/anomaly_scanner
+	materials = list(MATERIAL_PLASTIC = 1000, MATERIAL_STEEL = 800, MATERIAL_GLASS = 500)
+	req_tech = list(TECH_BLUESPACE = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
+	id = "rig_anomaly_scanner"
+	sort_string = "WCDAB"
+
+/datum/design/item/mechfab/rig/rcd
+	category = "Hardsuits"
+	name = "RCD Module"
+	build_path = /obj/item/rig_module/device/rcd
+	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 1000, MATERIAL_PLASTIC = 1000, MATERIAL_GOLD = 700, MATERIAL_SILVER = 700)
+	req_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 5, TECH_ENGINEERING = 7)
+	id = "rig_rcd"
+	sort_string = "WCEAA"
+
+/datum/design/item/mechfab/rig/jets
+	category = "Hardsuits"
+	name = "Maneuvering Jets"
+	build_path = /obj/item/rig_module/maneuvering_jets
+	materials = list(MATERIAL_STEEL = 3000, MATERIAL_PLASTIC = 2000, MATERIAL_GLASS = 1000)
+	req_tech = list(TECH_MATERIAL = 6,  TECH_ENGINEERING = 7)
+	id = "rig_jets"
+	sort_string = "WCFAA"
+
+/datum/design/item/mechfab/rig/decompiler
+	category = "Hardsuits"
+	name = "Matter Decompiler"
+	build_path = /obj/item/rig_module/device/decompiler
+	materials = list(MATERIAL_STEEL = 3000, MATERIAL_PLASTIC = 2000, MATERIAL_GLASS = 1000)
+	req_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5)
+	id = "rig_decompiler"
+	sort_string = "WCGAA"
+
+/datum/design/item/mechfab/rig/powersink
+	category = "Hardsuits"
+	name = "Power Sink"
+	build_path = /obj/item/rig_module/power_sink
+	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 2000, MATERIAL_GOLD = 1000, MATERIAL_PLASTIC = 1000)
+	req_tech = list(TECH_POWER = 6, TECH_ENGINEERING = 6)
+	id = "rig_powersink"
+	sort_string = "WCHAA"
+
+/datum/design/item/mechfab/rig/ai_container
+	category = "Hardsuits"
+	name = "AI Core Container"
+	build_path = /obj/item/rig_module/ai_container
+	materials = list(MATERIAL_STEEL = 1000, MATERIAL_GLASS = 1000, MATERIAL_PLASTIC = 1000, MATERIAL_GOLD = 500)
+	req_tech = list(TECH_DATA = 6, TECH_MATERIAL = 5, TECH_ENGINEERING = 6)
+	id = "rig_ai_container"
+	sort_string = "WCIAA"
+
+/datum/design/item/mechfab/rig/flash
+	category = "Hardsuits"
+	name = "Flash"
+	build_path = /obj/item/rig_module/device/flash
+	materials = list(MATERIAL_PLASTIC = 1500, MATERIAL_STEEL = 1000, MATERIAL_GLASS = 500)
+	req_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 3, TECH_ENGINEERING = 5)
+	id = "rig_flash"
+	sort_string = "WCJAA"
+
+/datum/design/item/mechfab/rig/taser
+	category = "Hardsuits"
+	name = "Electrolaser"
+	build_path = /obj/item/rig_module/mounted/taser
+	materials = list(MATERIAL_STEEL = 4000, MATERIAL_PLASTIC = 2500, MATERIAL_GLASS = 2000, MATERIAL_GOLD = 1000)
+	req_tech = list(TECH_POWER = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
+	id = "rig_taser"
+	sort_string = "WCKAA"
+
+/datum/design/item/mechfab/rig/egun
+	category = "Hardsuits"
+	name = "Energy Gun"
+	build_path = /obj/item/rig_module/mounted/egun
+	materials = list(MATERIAL_STEEL = 6000, MATERIAL_GLASS = 3000, MATERIAL_PLASTIC = 2500, MATERIAL_GOLD = 2000, MATERIAL_SILVER = 1000)
+	req_tech = list(TECH_POWER = 6, TECH_COMBAT = 6, TECH_ENGINEERING = 6)
+	id = "rig_egun"
+	sort_string = "WCKAB"
+/datum/design/item/mechfab/rig/enet
+	category = "Hardsuits"
+	name = "Energy Net"
+	build_path = /obj/item/rig_module/fabricator/energy_net
+	materials = list(MATERIAL_STEEL = 6000, MATERIAL_GLASS = 3000, MATERIAL_DIAMOND = 2000, MATERIAL_PLASTIC = 2000)
+	req_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 5, TECH_ESOTERIC = 4, TECH_ENGINEERING = 6)
+	id = "rig_enet"
+	sort_string = "WCKAC"
+
+/datum/design/item/mechfab/rig/stealth
+	category = "Hardsuits"
+	name = "Active Camouflage"
+	build_path = /obj/item/rig_module/stealth_field
+	materials = list(MATERIAL_STEEL = 6000, MATERIAL_GLASS = 3000, MATERIAL_DIAMOND = 2000, MATERIAL_SILVER = 2000, MATERIAL_URANIUM = 2000, MATERIAL_GOLD = 2000, MATERIAL_PLASTIC = 2000)
+	req_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 6, TECH_ESOTERIC = 6, TECH_ENGINEERING = 7)
+	id = "rig_stealth"
+	sort_string = "WCLAA"
+
+/datum/design/item/mechfab/rig/cooling_unit
+	category = "Hardsuits"
+	name = "Cooling Unit"
+	build_path = /obj/item/rig_module/cooling_unit
+	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 3500, MATERIAL_PLASTIC = 2000)
+	req_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 2, TECH_ENGINEERING = 5)
+	id = "rig_cooler"
+	sort_string = "WCLAB"

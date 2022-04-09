@@ -14,11 +14,10 @@
 				return
 			var/parameter = input(src,"station_missed = ? (0 for hit, 1 for near miss, 2 for not close)","Enter Parameter",0) as num
 			var/datum/game_mode/override
-			var/name = input(src,"Override mode = ?","Enter Parameter",null) as null|anything in gamemode_cache
-			override = gamemode_cache[name]
+			var/name = input(src,"Override mode = ?","Enter Parameter",null) as null|anything in config.gamemode_cache
+			override = config.gamemode_cache[name]
 			if(!istype(override))
 				override = null
 			GLOB.cinematic.station_explosion_cinematic(parameter,override)
 
-	log_admin("[key_name(src)] launched cinematic \"[cinematic]\"")
-	message_admins("[key_name_admin(src)] launched cinematic \"[cinematic]\"", 1)
+	log_and_message_admins("launched cinematic \"[cinematic]\"", src)

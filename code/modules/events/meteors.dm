@@ -1,6 +1,7 @@
 /datum/event/meteor_wave
 	startWhen		= 30	// About one minute early warning
 	endWhen 		= 60	// Adjusted automatically in tick()
+	has_skybox_image = TRUE
 	var/alarmWhen   = 30
 	var/next_meteor = 40
 	var/waves = 1
@@ -8,6 +9,8 @@
 	var/next_meteor_lower = 10
 	var/next_meteor_upper = 20
 
+/datum/event/meteor_wave/get_skybox_image()
+	return overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
 
 /datum/event/meteor_wave/setup()
 	waves = 0
@@ -100,28 +103,55 @@
 	next_meteor_lower = 5
 	next_meteor_upper = 10
 	next_meteor = 0
-	var/obj/effect/overmap/ship/victim
+	var/obj/effect/overmap/visitable/ship/victim
 
 /datum/event/meteor_wave/overmap/Destroy()
 	victim = null
 	. = ..()
 
 /datum/event/meteor_wave/overmap/tick()
-	if(victim && !victim.is_still()) //Meteors mostly fly in your face
-		start_side = prob(90) ? victim.fore_dir : pick(GLOB.cardinal)
-	else //Unless you're standing
+	if(!victim)
+		return
+	if (victim.is_still() || victim.get_helm_skill() >= SKILL_ADEPT) //Unless you're standing or good at your job..
 		start_side = pick(GLOB.cardinal)
+	else //..Meteors mostly fly in your face
+		start_side = prob(90) ? victim.fore_dir : pick(GLOB.cardinal)
 	..()
 
 /datum/event/meteor_wave/overmap/get_wave_size()
 	. = ..()
-	if(!victim)
+	if (!victim)
 		return
-	if(victim.get_helm_skill() == SKILL_PROF)
-		. = round(. * 0.5)
-	if(victim.is_still()) //Standing still means less shit flies your way
-		. = round(. * 0.25)
-	if(victim.get_speed() < victim.min_speed * 5) //Slow and steady
-		. = round(. * 0.6)
-	if(victim.get_speed() > victim.max_speed * 0.75) //Sanic stahp
-		. *= 2
+	var/skill = victim.get_helm_skill()
+	var/speed = victim.get_speed()
+	if (skill < SKILL_EXPERT)
+		if(victim.is_still() || speed < SHIP_SPEED_SLOW) //Standing still or being slow means less shit flies your way
+			. = round(. * 0.7)
+		if(speed > SHIP_SPEED_FAST) //Sanic stahp
+			. *= 2
+	if (skill == SKILL_EXPERT)
+		if (victim.is_still())
+			. = round(. * 0.2)
+		if (speed < SHIP_SPEED_SLOW)
+			. = round(. * 0.5)
+		if (speed > SHIP_SPEED_SLOW && speed < SHIP_SPEED_FAST)
+			. = round(. * 0.7)
+		if (speed > SHIP_SPEED_FAST)
+			. = round(. * 1.2)
+	if (skill > SKILL_EXPERT)
+		if (victim.is_still())
+			. = round(. * 0.1)
+		if (speed < SHIP_SPEED_SLOW)
+			. = round(. * 0.2)
+		if (speed > SHIP_SPEED_SLOW && speed < SHIP_SPEED_FAST)
+			. = round(. * 0.5)
+
+	//Smol ship evasion
+	if(victim.vessel_size < SHIP_SIZE_LARGE && speed < SHIP_SPEED_FAST)
+		var/skill_needed = SKILL_PROF
+		if(speed < SHIP_SPEED_SLOW)
+			skill_needed = SKILL_ADEPT
+		if(victim.vessel_size < SHIP_SIZE_SMALL)
+			skill_needed = skill_needed - 1
+		if(skill >= max(skill_needed, victim.skill_needed))
+			return 0

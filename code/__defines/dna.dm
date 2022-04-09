@@ -3,17 +3,17 @@
 #define   UNIDNASIZE 13
 
 // Generic mutations:
-#define MUTATION_TK              1
-#define MUTATION_COLD_RESISTANCE 2
-#define MUTATION_XRAY            3
-#define MUTATION_HULK            4
-#define MUTATION_CLUMSY          5
-#define MUTATION_FAT             6
-#define MUTATION_HUSK            7
-#define MUTATION_LASER           8  // Harm intent - click anywhere to shoot lasers from eyes.
-#define MUTATION_HEAL            9 // Healing people with hands.
-#define MUTATION_SPACERES        10 // Can't be harmed via pressure damage.
-#define MUTATION_SKELETON        11
+#define MUTATION_COLD_RESISTANCE 1
+#define MUTATION_XRAY            2
+#define MUTATION_HULK            3
+#define MUTATION_CLUMSY          4
+#define MUTATION_FAT             5
+#define MUTATION_HUSK            6
+#define MUTATION_LASER           7  // Harm intent - click anywhere to shoot lasers from eyes.
+#define MUTATION_HEAL            8 // Healing people with hands.
+#define MUTATION_SPACERES        9 // Can't be harmed via pressure damage.
+#define MUTATION_SKELETON        10
+#define MUTATION_FERAL           11 // Smash objects instead of using them, and unable to use items
 
 // Other Mutations:
 #define mNobreath      100 // No need to breathe.
@@ -29,16 +29,15 @@
 #define mSmallsize     110 // Table climbing.
 
 // disabilities
-#define NEARSIGHTED 0x1
-#define EPILEPSY    0x2
-#define COUGHING    0x4
-#define TOURETTES   0x8
-#define NERVOUS     0x10
+#define NEARSIGHTED    FLAG(0)
+#define EPILEPSY       FLAG(1)
+#define COUGHING       FLAG(2)
+#define NERVOUS        FLAG(3)
 
 // sdisabilities
-#define BLIND 0x1
-#define MUTE  0x2
-#define DEAF  0x4
+#define BLINDED     FLAG(0)
+#define MUTED       FLAG(1)
+#define DEAFENED    FLAG(2)
 
 // The way blocks are handled badly needs a rewrite, this is horrible.
 // Too much of a project to handle at the moment, TODO for later.

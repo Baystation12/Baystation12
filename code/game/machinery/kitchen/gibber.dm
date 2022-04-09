@@ -4,9 +4,15 @@
 	desc = "The name isn't descriptive enough?"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "grinder"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	req_access = list(access_kitchen,access_morgue)
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
+
+	machine_name = "meat grinder"
+	machine_desc = "Messily turns animals - living or dead - into edible meat. Installed safety mechanisms prevent use on humans."
 
 	var/operating = 0        //Is it on?
 	var/dirty = 0            // Does it need cleaning?
@@ -20,6 +26,12 @@
 /obj/machinery/gibber/Initialize()
 	. = ..()
 	update_icon()
+
+/obj/machinery/gibber/Destroy()
+	if(occupant)
+		occupant.dropInto(loc)
+		occupant = null
+	. = ..()
 
 /obj/machinery/gibber/on_update_icon()
 	overlays.Cut()
@@ -38,33 +50,40 @@
 	src.go_out()
 	return
 
-/obj/machinery/gibber/attack_hand(mob/user as mob)
-	if(stat & (NOPOWER|BROKEN))
-		return
+/obj/machinery/gibber/physical_attack_hand(mob/user)
 	if(operating)
 		to_chat(user, "<span class='danger'>\The [src] is locked and running, wait for it to finish.</span>")
-		return
-	else
-		src.startgibbing(user)
+		return TRUE
+	src.startgibbing(user)
+	return TRUE
 
-/obj/machinery/gibber/examine()
+/obj/machinery/gibber/examine(mob/user)
 	. = ..()
-	to_chat(usr, "The safety guard is [emagged ? "<span class='danger'>disabled</span>" : "enabled"].")
+	to_chat(user, "The safety guard is [emagged ? "<span class='danger'>disabled</span>" : "enabled"].")
 
 /obj/machinery/gibber/emag_act(var/remaining_charges, var/mob/user)
 	emagged = !emagged
 	to_chat(user, "<span class='danger'>You [emagged ? "disable" : "enable"] \the [src]'s safety guard.</span>")
 	return 1
 
+/obj/machinery/gibber/components_are_accessible(path)
+	return !operating && ..()
+
+/obj/machinery/gibber/cannot_transition_to(state_path, mob/user)
+	if(operating)
+		return SPAN_NOTICE("You must wait for \the [src] to finish operating first!")
+	return ..()
+
 /obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
+	if(!operating)
+		return
 	if(istype(W, /obj/item/grab))
 		var/obj/item/grab/G = W
 		if(!G.force_danger())
 			to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
 			return
-		if(!user.unEquip(W))
-			return
 		move_into_gibber(user,G.affecting)
+		qdel(G)
 	else if(istype(W, /obj/item/organ))
 		if(!user.unEquip(W))
 			return
@@ -126,7 +145,7 @@
 /obj/machinery/gibber/proc/go_out()
 	if(operating || !src.occupant)
 		return
-	for(var/obj/O in src)
+	for(var/obj/O in (contents - component_parts))
 		O.dropInto(loc)
 	if (src.occupant.client)
 		src.occupant.client.eye = src.occupant.client.mob
@@ -148,57 +167,56 @@
 	src.operating = 1
 	update_icon()
 
-	var/slab_name = occupant.name
-	var/slab_count = 3
-	var/slab_type = /obj/item/weapon/reagent_containers/food/snacks/meat
+	admin_attack_log(user, occupant, "Gibbed the victim", "Was gibbed", "gibbed")
+	src.occupant.ghostize()
+	addtimer(CALLBACK(src, .proc/finish_gibbing), gib_time)
+
+	var/list/gib_products = shuffle(occupant.harvest_meat() | occupant.harvest_skin() | occupant.harvest_bones())
+	if(length(gib_products) <= 0)
+		return
+
+	var/slab_name =  occupant.name
 	var/slab_nutrition = 20
+
 	if(iscarbon(occupant))
 		var/mob/living/carbon/C = occupant
 		slab_nutrition = C.nutrition / 15
 
-	// Some mobs have specific meat item types.
-	if(istype(src.occupant,/mob/living/simple_animal))
-		var/mob/living/simple_animal/critter = src.occupant
-		if(critter.meat_amount)
-			slab_count = critter.meat_amount
-		if(critter.meat_type)
-			slab_type = critter.meat_type
-	else if(istype(src.occupant,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = occupant
-		slab_name = src.occupant.real_name
-		slab_type = H.isSynthetic() ? /obj/item/stack/material/steel : H.species.meat_type
+	if(istype(occupant, /mob/living/carbon/human))
+		slab_name = occupant.real_name
 
 	// Small mobs don't give as much nutrition.
 	if(issmall(src.occupant))
 		slab_nutrition *= 0.5
-	slab_nutrition /= slab_count
 
-	for(var/i=1 to slab_count)
-		var/obj/item/weapon/reagent_containers/food/snacks/meat/new_meat = new slab_type(src, rand(3,8))
-		if(istype(new_meat))
-			new_meat.SetName("[slab_name] [new_meat.name]")
-			new_meat.reagents.add_reagent(/datum/reagent/nutriment,slab_nutrition)
-			if(src.occupant.reagents)
-				src.occupant.reagents.trans_to_obj(new_meat, round(occupant.reagents.total_volume/slab_count,1))
+	slab_nutrition /= gib_products.len
 
-	admin_attack_log(user, occupant, "Gibbed the victim", "Was gibbed", "gibbed")
-	src.occupant.ghostize()
+	var/drop_products = Floor(gib_products.len * 0.35)
+	for(var/atom/movable/thing in gib_products)
+		if(drop_products)
+			drop_products--
+			qdel(thing)
+		else
+			thing.forceMove(src)
+			if(istype(thing, /obj/item/reagent_containers/food/snacks/meat))
+				var/obj/item/reagent_containers/food/snacks/meat/slab = thing
+				slab.SetName("[slab_name] [slab.name]")
+				slab.reagents.add_reagent(/datum/reagent/nutriment,slab_nutrition)
 
-	spawn(gib_time)
+/obj/machinery/gibber/proc/finish_gibbing()
+	operating = 0
+	if(QDELETED(occupant))
+		occupant = null
+		return
+	occupant.gib()
+	qdel(occupant)
 
-		src.operating = 0
-		src.occupant.gib()
-		qdel(src.occupant)
-
-		playsound(src.loc, 'sound/effects/splat.ogg', 50, 1)
-		operating = 0
-		for (var/obj/thing in contents)
-			// There's a chance that the gibber will fail to destroy some evidence.
-			if(istype(thing,/obj/item/organ) && prob(80))
-				qdel(thing)
-				continue
-			thing.dropInto(loc) // Attempts to drop it onto the turf for throwing.
-			thing.throw_at(get_edge_target_turf(src,gib_throw_dir),rand(0,3),emagged ? 100 : 50) // Being pelted with bits of meat and bone would hurt.
-		update_icon()
-
-
+	playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+	for (var/obj/thing in (contents - component_parts))
+		// There's a chance that the gibber will fail to destroy some evidence.
+		if(istype(thing,/obj/item/organ) && prob(80))
+			qdel(thing)
+			continue
+		thing.dropInto(loc) // Attempts to drop it onto the turf for throwing.
+		thing.throw_at(get_edge_target_turf(src,gib_throw_dir),rand(0,3),emagged ? 30 : 15) // Being pelted with bits of meat and bone would hurt.
+	update_icon()

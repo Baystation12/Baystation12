@@ -3,10 +3,9 @@
 	desc = "An impenetrable field of energy, capable of blocking anything as long as it's active."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "shield_normal"
-	anchored = 1
-	plane = ABOVE_HUMAN_PLANE
+	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER
-	density = 1
+	density = TRUE
 	invisibility = 0
 	var/obj/machinery/power/shield_generator/gen = null
 	var/disabled_for = 0
@@ -20,15 +19,17 @@
 	else
 		set_opacity(0)
 
-	if(gen && gen.check_flag(MODEFLAG_OVERCHARGE))
-		icon_state = "shield_overcharged"
+	if (!gen)
+		color = COLOR_RED_LIGHT
+	else if (gen.check_flag(MODEFLAG_OVERCHARGE))
+		color = COLOR_VIOLET
 	else
-		icon_state = "shield_normal"
+		color = COLOR_DEEP_SKY_BLUE
 
 // Prevents shuttles, singularities and pretty much everything else from moving the field segments away.
 // The only thing that is allowed to move us is the Destroy() proc.
-/obj/effect/shield/forceMove(var/newloc, var/qdeled = 0)
-	if(qdeled)
+/obj/effect/shield/forceMove()
+	if(QDELING(src))
 		return ..()
 	return 0
 
@@ -36,6 +37,15 @@
 /obj/effect/shield/New()
 	..()
 	update_nearby_tiles()
+
+
+/obj/effect/shield/Initialize(mapload, obj/machinery/power/shield_generator/new_gen)
+	. = ..(mapload)
+
+	if (QDELETED(new_gen))
+		log_debug(append_admin_tools("Shield effect ([name]) was created without a valid generator in [get_area(src)].", location = get_turf(src)))
+		return INITIALIZE_HINT_QDEL
+	gen = new_gen
 
 
 /obj/effect/shield/Destroy()
@@ -83,6 +93,9 @@
 
 
 /obj/effect/shield/proc/diffuse(var/duration)
+	if (!gen)
+		return
+
 	// The shield is trying to counter diffusers. Cause lasting stress on the shield.
 	if(gen.check_flag(MODEFLAG_BYPASS) && !disabled_for)
 		take_damage(duration * rand(8, 12), SHIELD_DAMTYPE_EM)
@@ -98,7 +111,7 @@
 
 /obj/effect/shield/attack_generic(var/source, var/damage, var/emote)
 	take_damage(damage, SHIELD_DAMTYPE_PHYSICAL)
-	if(gen.check_flag(MODEFLAG_OVERCHARGE) && istype(source, /mob/living/))
+	if(gen?.check_flag(MODEFLAG_OVERCHARGE) && istype(source, /mob/living/))
 		overcharge_shock(source)
 	..(source, damage, emote)
 
@@ -129,6 +142,7 @@
 	damage = round(damage)
 
 	new /obj/effect/temporary(get_turf(src), 2 SECONDS,'icons/obj/machines/shielding.dmi',"shield_impact")
+	impact_effect(round(abs(damage * 2)))
 
 	var/list/field_segments = gen.field_segments
 	switch(gen.take_damage(damage, damtype))
@@ -170,7 +184,7 @@
 
 
 /obj/effect/shield/c_airblock(turf/other)
-	return gen.check_flag(MODEFLAG_ATMOSPHERIC) ? BLOCKED : 0
+	return gen?.check_flag(MODEFLAG_ATMOSPHERIC) ? BLOCKED : 0
 
 
 // EMP. It may seem weak but keep in mind that multiple shield segments are likely to be affected.
@@ -202,7 +216,7 @@
 
 
 // Attacks with hand tools. Blocked by Hyperkinetic flag.
-/obj/effect/shield/attackby(var/obj/item/weapon/I as obj, var/mob/user as mob)
+/obj/effect/shield/attackby(var/obj/item/I as obj, var/mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
 
@@ -223,6 +237,7 @@
 	if(!gen)
 		qdel(src)
 		return 0
+	impact_effect(2)
 	mover.shield_impact(src)
 	return ..()
 
@@ -299,3 +314,29 @@
 	visible_message("<span class='danger'>\The [src] breaks into dust!</span>")
 	make_debris()
 	qdel(src)
+
+// Small visual effect, makes the shield tiles brighten up by changing color for a moment, and spreads to nearby shields.
+/obj/effect/shield/proc/impact_effect(var/i, var/list/affected_shields = list())
+	i = clamp(i, 1, 10)
+	var/backcolor = color
+	if(gen && gen.check_flag(MODEFLAG_OVERCHARGE))
+		color = COLOR_PINK
+	else
+		color = COLOR_CYAN_BLUE
+	animate(src, color = backcolor, time = 1 SECOND)
+	affected_shields |= src
+	i--
+	if(i)
+		addtimer(CALLBACK(src, .proc/spread_impact_effect, i, affected_shields), 2)
+
+/obj/effect/shield/proc/spread_impact_effect(var/i, var/list/affected_shields = list())
+	for(var/direction in GLOB.cardinal)
+		var/turf/T = get_step(src, direction)
+		if(T) // Incase we somehow stepped off the map.
+			for(var/obj/effect/shield/F in T)
+				if(!(F in affected_shields))
+					F.impact_effect(i, affected_shields) // Spread the effect to them
+
+/obj/effect/shield/attack_hand(var/mob/living/user)
+	impact_effect(3) // Harmless, but still produces the 'impact' effect.
+	..()

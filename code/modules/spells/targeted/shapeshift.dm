@@ -53,7 +53,7 @@
 		new /obj/effect/temporary(get_turf(M), 5, 'icons/effects/effects.dmi', "summoning")
 
 		M.forceMove(trans) //move inside the new dude to hide him.
-		M.status_flags |= GODMODE //dont want him to die or breathe or do ANYTHING
+		M.status_flags |= GODMODE //don't want him to die or breathe or do ANYTHING
 		transformed_dudes[trans] = M
 		GLOB.death_event.register(trans,src,/spell/targeted/shapeshift/proc/stop_transformation)
 		GLOB.destroyed_event.register(trans,src,/spell/targeted/shapeshift/proc/stop_transformation)
@@ -75,7 +75,7 @@
 	if(share_damage)
 		var/ratio = target.health/target.maxHealth
 		var/damage = transformer.maxHealth - round(transformer.maxHealth*(ratio))
-		for(var/i in 1 to ceil(damage/10))
+		for(var/i in 1 to Ceil(damage/10))
 			transformer.adjustBruteLoss(10)
 	if(target.mind)
 		target.mind.transfer_to(transformer)
@@ -99,7 +99,7 @@
 	name = "Baleful Polymorth"
 	desc = "This spell transforms its target into a small, furry animal."
 	feedback = "BP"
-	possible_transformations = list(/mob/living/simple_animal/lizard,/mob/living/simple_animal/mouse,/mob/living/simple_animal/corgi)
+	possible_transformations = list(/mob/living/simple_animal/passive/lizard,/mob/living/simple_animal/passive/mouse,/mob/living/simple_animal/passive/corgi)
 
 	share_damage = 0
 	invocation = "Yo'balada!"
@@ -128,7 +128,7 @@
 	name = "Polymorph"
 	desc = "This spell transforms the wizard into the common parrot."
 	feedback = "AV"
-	possible_transformations = list(/mob/living/simple_animal/parrot)
+	possible_transformations = list(/mob/living/simple_animal/hostile/retaliate/parrot)
 
 	drop_items = 0
 	share_damage = 0

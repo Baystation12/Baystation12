@@ -1,3 +1,38 @@
+// In theory these lists could be generated at runtime from values
+// on the XGM gas datums - would need to have a consistent/constant
+// id for the gasses but otherwise should allow for true omni filters.
+
+GLOBAL_LIST_INIT(filter_gas_to_mode, list(    \
+	"None" =           ATM_NONE,              \
+	"Oxygen" =         ATM_O2,                \
+	"Nitrogen" =       ATM_N2,                \
+	"Carbon Dioxide" = ATM_CO2,               \
+	"Phoron" =         ATM_P,                 \
+	"Nitrous Oxide" =  ATM_N2O,               \
+	"Hydrogen" =       ATM_H2,                \
+	"Methyl Bromide" = ATM_CH3BR              \
+))
+
+GLOBAL_LIST_INIT(filter_mode_to_gas, list(    \
+	"[ATM_O2]" =       "Oxygen",              \
+	"[ATM_N2]" =       "Nitrogen",            \
+	"[ATM_CO2]" =      "Carbon Dioxide",      \
+	"[ATM_P]" =        "Phoron",              \
+	"[ATM_N2O]" =      "Nitrous Oxide",       \
+	"[ATM_H2]" =       "Hydrogen",            \
+	"[ATM_CH3BR]" =    "Methyl Bromide"       \
+))
+
+GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
+	"[ATM_O2]" =       "[GAS_OXYGEN]",        \
+	"[ATM_N2]" =       "[GAS_NITROGEN]",      \
+	"[ATM_CO2]" =      "[GAS_CO2]",           \
+	"[ATM_P]" =        "[GAS_PHORON]",        \
+	"[ATM_N2O]" =      "[GAS_N2O]",           \
+	"[ATM_H2]" =       "[GAS_HYDROGEN]",      \
+	"[ATM_CH3BR]" =    "[GAS_METHYL_BROMIDE]" \
+))
+
 //--------------------------------------------
 // Gas filter - omni variant
 //--------------------------------------------
@@ -11,15 +46,16 @@
 	var/max_output_pressure = MAX_OMNI_PRESSURE
 
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
-	power_rating = 7500			//7500 W ~ 10 HP
+	power_rating = 15000			// 15000 W ~ 20 HP
 
 	var/max_flow_rate = ATMOS_DEFAULT_VOLUME_FILTER
 	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_FILTER
 
 	var/list/filtering_outputs = list()	//maps gasids to gas_mixtures
+	build_icon_state = "omni_filter"
 
-/obj/machinery/atmospherics/omni/filter/New()
-	..()
+/obj/machinery/atmospherics/omni/filter/Initialize()
+	. = ..()
 	rebuild_filtering_list()
 	for(var/datum/omni_port/P in ports)
 		P.air.volume = ATMOS_DEFAULT_VOLUME_FILTER
@@ -46,7 +82,7 @@
 					input = P
 				if(ATM_OUTPUT)
 					output = P
-				if(ATM_O2 to ATM_H2)
+				if(ATM_GAS_MIN to ATM_GAS_MAX)
 					gas_filters += P
 
 /obj/machinery/atmospherics/omni/filter/error_check()
@@ -64,14 +100,14 @@
 	var/datum/gas_mixture/output_air = output.air	//BYOND doesn't like referencing "output.air.return_pressure()" so we need to make a direct reference
 	var/datum/gas_mixture/input_air = input.air		// it's completely happy with them if they're in a loop though i.e. "P.air.return_pressure()"... *shrug*
 
-	var/delta = between(0, (output_air ? (max_output_pressure - output_air.return_pressure()) : 0), max_output_pressure)
+	var/delta = clamp((output_air ? (max_output_pressure - output_air.return_pressure()) : 0), 0, max_output_pressure)
 	var/transfer_moles_max = calculate_transfer_moles(input_air, output_air, delta, (output && output.network && output.network.volume) ? output.network.volume : 0)
 	for(var/datum/omni_port/filter_output in gas_filters)
-		delta = between(0, (filter_output.air ? (max_output_pressure - filter_output.air.return_pressure()) : 0), max_output_pressure)
+		delta = clamp((filter_output.air ? (max_output_pressure - filter_output.air.return_pressure()) : 0), 0, max_output_pressure)
 		transfer_moles_max = min(transfer_moles_max, (calculate_transfer_moles(input_air, filter_output.air, delta, (filter_output && filter_output.network && filter_output.network.volume) ? filter_output.network.volume : 0)))
 
 	//Figure out the amount of moles to transfer
-	var/transfer_moles = between(0, ((set_flow_rate/input_air.volume)*input_air.total_moles), transfer_moles_max)
+	var/transfer_moles = clamp(((set_flow_rate/input_air.volume)*input_air.total_moles), 0, transfer_moles_max)
 
 	var/power_draw = -1
 	if (transfer_moles > MINIMUM_MOLES_TO_FILTER)
@@ -92,7 +128,12 @@
 	return 1
 
 /obj/machinery/atmospherics/omni/filter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	usr.set_machine(src)
+	if(!user)
+		if (ui)
+			ui.close()
+		return
+
+	user.set_machine(src)
 
 	var/list/data = new()
 
@@ -128,7 +169,7 @@
 			if(ATM_OUTPUT)
 				output = 1
 				is_filter = 0
-			if(ATM_O2 to ATM_H2)
+			if(ATM_GAS_MIN to ATM_GAS_MAX)
 				f_type = mode_send_switch(P.mode)
 
 		portData[++portData.len] = list("dir" = dir_name(P.dir, capitalize = 1), \
@@ -146,21 +187,7 @@
 	return data
 
 /obj/machinery/atmospherics/omni/filter/proc/mode_send_switch(var/mode = ATM_NONE)
-	switch(mode)
-		if(ATM_O2)
-			return "Oxygen"
-		if(ATM_N2)
-			return "Nitrogen"
-		if(ATM_CO2)
-			return "Carbon Dioxide"
-		if(ATM_P)
-			return "Phoron" //*cough* Plasma *cough*
-		if(ATM_N2O)
-			return "Nitrous Oxide"
-		if(ATM_H2)
-			return "Hydrogen"
-		else
-			return null
+	return GLOB.filter_mode_to_gas["[mode]"]
 
 /obj/machinery/atmospherics/omni/filter/Topic(href, href_list)
 	if(..()) return 1
@@ -180,11 +207,11 @@
 		switch(href_list["command"])
 			if("set_flow_rate")
 				var/new_flow_rate = input(usr,"Enter new flow rate limit (0-[max_flow_rate]L/s)","Flow Rate Control",set_flow_rate) as num
-				set_flow_rate = between(0, new_flow_rate, max_flow_rate)
+				set_flow_rate = clamp(new_flow_rate, 0, max_flow_rate)
 			if("switch_mode")
 				switch_mode(dir_flag(href_list["dir"]), mode_return_switch(href_list["mode"]))
 			if("switch_filter")
-				var/new_filter = input(usr,"Select filter mode:","Change filter",href_list["mode"]) in list("None", "Oxygen", "Nitrogen", "Carbon Dioxide", "Phoron", "Nitrous Oxide", "Hydrogen")
+				var/new_filter = input(usr,"Select filter mode:","Change filter",href_list["mode"]) in GLOB.filter_gas_to_mode
 				switch_filter(dir_flag(href_list["dir"]), mode_return_switch(new_filter))
 
 	update_icon()
@@ -192,27 +219,13 @@
 	return
 
 /obj/machinery/atmospherics/omni/filter/proc/mode_return_switch(var/mode)
-	switch(mode)
-		if("Oxygen")
-			return ATM_O2
-		if("Nitrogen")
-			return ATM_N2
-		if("Carbon Dioxide")
-			return ATM_CO2
-		if("Phoron")
-			return ATM_P
-		if("Nitrous Oxide")
-			return ATM_N2O
-		if("Hydrogen")
-			return ATM_H2
-		if("in")
-			return ATM_INPUT
-		if("out")
-			return ATM_OUTPUT
-		if("None")
-			return ATM_NONE
-		else
-			return null
+	. = GLOB.filter_gas_to_mode[mode]
+	if(!.)
+		switch(mode)
+			if("in")
+				return ATM_INPUT
+			if("out")
+				return ATM_OUTPUT
 
 /obj/machinery/atmospherics/omni/filter/proc/switch_filter(var/dir, var/mode)
 	//check they aren't trying to disable the input or output ~this can only happen if they hack the cached tmpl file
@@ -259,7 +272,7 @@
 /obj/machinery/atmospherics/omni/filter/proc/rebuild_filtering_list()
 	filtering_outputs.Cut()
 	for(var/datum/omni_port/P in ports)
-		var/gasid = mode_to_gasid(P.mode)
+		var/gasid = GLOB.filter_mode_to_gas_id["[P.mode]"]
 		if(gasid)
 			filtering_outputs[gasid] = P.air
 

@@ -4,8 +4,7 @@
 	var/alarm_delay = 100 // Don't forget, there's another 10 seconds in queueAlarm()
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 
-/obj/machinery/camera/internal_process()
-	..()
+/obj/machinery/camera/proc/internal_process()
 	// motion camera event loop
 	if (stat & (EMPED|NOPOWER))
 		return
@@ -43,7 +42,7 @@
 	if (!status || (stat & NOPOWER))
 		return 0
 	if (detectTime == -1)
-		motion_alarm.clearAlarm(loc, src)
+		GLOB.motion_alarm.clearAlarm(loc, src)
 	detectTime = 0
 	return 1
 
@@ -51,7 +50,7 @@
 	if (!status || (stat & NOPOWER))
 		return 0
 	if (!detectTime) return 0
-	motion_alarm.triggerAlarm(loc, src)
+	GLOB.motion_alarm.triggerAlarm(loc, src)
 	detectTime = -1
 	return 1
 

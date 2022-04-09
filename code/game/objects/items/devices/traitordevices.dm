@@ -17,6 +17,7 @@ effective or pretty fucking useless.
 /obj/item/device/batterer
 	name = "mind batterer"
 	desc = "A strange device with twin antennas."
+	icon = 'icons/obj/batterer.dmi'
 	icon_state = "batterer"
 	throwforce = 5
 	w_class = ITEM_SIZE_TINY
@@ -24,7 +25,7 @@ effective or pretty fucking useless.
 	throw_range = 10
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	item_state = "electronic"
-	origin_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 3, TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 3, TECH_ESOTERIC = 3)
 
 	var/times_used = 0 //Number of times it's been used.
 	var/max_uses = 2

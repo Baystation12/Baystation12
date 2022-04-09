@@ -3,6 +3,13 @@
 	if(!add_antagonist_mind(player, ignore_role))
 		return
 
+	if(base_to_load)
+		var/datum/map_template/base = new base_to_load()
+		report_progress("Loading map template '[base]' for [role_text]...")
+		base_to_load = null
+		base.load_new_z()
+		get_starting_locations()
+
 	//do this again, just in case
 	if(flags & ANTAG_OVERRIDE_JOB)
 		player.assigned_job = null
@@ -14,7 +21,8 @@
 		create_default(player.current)
 	else
 		create_antagonist(player, move_to_spawn, do_not_announce, preserve_appearance)
-		skill_setter.initialize_skills(player.current.skillset)
+		if(istype(skill_setter))
+			skill_setter.initialize_skills(player.current.skillset)
 		if(!do_not_equip)
 			equip(player.current)
 
@@ -73,7 +81,7 @@
 		update_icons_removed(player)
 
 		if(player.current)
-			BITSET(player.current.hud_updateflag, SPECIALROLE_HUD)
+			SET_BIT(player.current.hud_updateflag, SPECIALROLE_HUD)
 			player.current.reset_skillset() //Reset their skills to be job-appropriate.
 
 		if(!is_special_character(player))

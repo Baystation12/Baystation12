@@ -3,10 +3,10 @@
 
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "psiphon:0"
-	density = 1
+	density = TRUE
 	w_class = ITEM_SIZE_NORMAL
+	base_type = /obj/machinery/portable_atmospherics/powered/pump
 
-	var/on = 0
 	var/direction_out = 0 //0 = siphoning, 1 = releasing
 	var/target_pressure = ONE_ATMOSPHERE
 
@@ -17,21 +17,23 @@
 
 	power_rating = 7500 //7500 W ~ 10 HP
 	power_losses = 150
+	
+	machine_name = "portable pump"
+	machine_desc = "Used to equalize the pressure of the atmosphere in a surrounding area with its own contents, or to draw in air from the area around it. Runs on a battery backup; can be connected to atmospherics networks."
 
 /obj/machinery/portable_atmospherics/powered/pump/filled
 	start_pressure = 90 * ONE_ATMOSPHERE
 
 /obj/machinery/portable_atmospherics/powered/pump/New()
 	..()
-	cell = new/obj/item/weapon/cell/apc(src)
 
 	var/list/air_mix = StandardAirMix()
-	src.air_contents.adjust_multi("oxygen", air_mix["oxygen"], "nitrogen", air_mix["nitrogen"])
+	src.air_contents.adjust_multi(GAS_OXYGEN, air_mix[GAS_OXYGEN], GAS_NITROGEN, air_mix[GAS_NITROGEN])
 
 /obj/machinery/portable_atmospherics/powered/pump/on_update_icon()
 	overlays.Cut()
 
-	if(on && cell && cell.charge)
+	if((use_power == POWER_USE_ACTIVE) && !(stat & NOPOWER))
 		icon_state = "psiphon:1"
 	else
 		icon_state = "psiphon:0"
@@ -42,15 +44,13 @@
 	if(connected_port)
 		overlays += "siphon-connector"
 
-	return
-
 /obj/machinery/portable_atmospherics/powered/pump/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
 		..(severity)
 		return
 
 	if(prob(50/severity))
-		on = !on
+		update_use_power(use_power == POWER_USE_ACTIVE ? POWER_USE_IDLE : POWER_USE_ACTIVE)
 
 	if(prob(100/severity))
 		direction_out = !direction_out
@@ -64,7 +64,7 @@
 	..()
 	var/power_draw = -1
 
-	if(on && ( powered() || (cell && cell.charge) ) )
+	if((use_power == POWER_USE_ACTIVE) && !(stat & NOPOWER))
 		var/datum/gas_mixture/environment
 		if(holding)
 			environment = holding.air_contents
@@ -98,33 +98,21 @@
 		last_power_draw = 0
 	else
 		power_draw = max(power_draw, power_losses)
-		if(!powered())
-			cell.use(power_draw * CELLRATE)
-		else
-			use_power_oneoff(power_draw)
-		last_power_draw = power_draw
+		if(abs(power_draw - last_power_draw) > 0.1 * last_power_draw)
+			change_power_consumption(power_draw, POWER_USE_ACTIVE)
+			last_power_draw = power_draw
 
 		update_connected_network()
 
-		//ran out of charge
-		if (!cell.charge && !powered())
-			power_change()
-			update_icon()
-
 	src.updateDialog()
 
-/obj/machinery/portable_atmospherics/powered/pump/attack_ai(var/mob/user)
-	src.add_hiddenprint(user)
-	return src.attack_hand(user)
-
-/obj/machinery/portable_atmospherics/powered/pump/attack_ghost(var/mob/user)
-	return src.attack_hand(user)
-
-/obj/machinery/portable_atmospherics/powered/pump/attack_hand(var/mob/user)
+/obj/machinery/portable_atmospherics/powered/pump/interface_interact(var/mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/portable_atmospherics/powered/pump/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1)
 	var/list/data[0]
+	var/obj/item/cell/cell = get_cell()
 	data["portConnected"] = connected_port ? 1 : 0
 	data["tankPressure"] = round(air_contents.return_pressure() > 0 ? air_contents.return_pressure() : 0)
 	data["targetpressure"] = round(target_pressure)
@@ -134,7 +122,7 @@
 	data["powerDraw"] = round(last_power_draw)
 	data["cellCharge"] = cell ? cell.charge : 0
 	data["cellMaxCharge"] = cell ? cell.maxcharge : 1
-	data["on"] = on ? 1 : 0
+	data["on"] = (use_power == POWER_USE_ACTIVE) ? 1 : 0
 
 	data["hasHoldingTank"] = holding ? 1 : 0
 	if (holding)
@@ -149,7 +137,7 @@
 
 /obj/machinery/portable_atmospherics/powered/pump/OnTopic(user, href_list)
 	if(href_list["power"])
-		on = !on
+		update_use_power(use_power == POWER_USE_ACTIVE ? POWER_USE_IDLE : POWER_USE_ACTIVE)
 		. = TOPIC_REFRESH
 	if(href_list["direction"])
 		direction_out = !direction_out

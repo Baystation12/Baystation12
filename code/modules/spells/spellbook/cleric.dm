@@ -1,5 +1,5 @@
 //Cleric is all about healing. Mobility and offense comes at a higher price but not impossible.
-/obj/item/weapon/spellbook/cleric
+/obj/item/spellbook/cleric
 	spellbook_type = /datum/spellbook/cleric
 
 /datum/spellbook/cleric
@@ -28,13 +28,19 @@
 				/spell/portal_teleport = 							2,
 				/spell/aoe_turf/conjure/forcewall = 				1,
 				/spell/noclothes = 									1,
-				/obj/item/weapon/magic_rock = 						1,
+				/obj/item/magic_rock = 						1,
 				/obj/structure/closet/wizard/scrying = 				2,
-				/obj/item/weapon/summoning_stone = 					2,
-				/obj/item/weapon/contract/wizard/telepathy = 		1,
-				/obj/item/weapon/contract/apprentice = 				1
+				/obj/item/summoning_stone = 					2,
+				/obj/item/contract/wizard/telepathy = 		1,
+				/obj/item/contract/apprentice = 				1
 				)
 
 	sacrifice_reagents = list(/datum/reagent/peridaxon,
 							/datum/reagent/adminordrazine)
-	sacrifice_objects = list(/obj/item/seeds/mtearseed)
+	sacrifice_objects = list(/obj/item/stack/nanopaste,
+							/obj/item/device/scanner/health,
+							/obj/item/stack/medical/advanced/bruise_pack,
+							/obj/item/stack/medical/advanced/ointment,
+							/obj/item/bodybag/rescue,
+							/obj/item/defibrillator
+							)

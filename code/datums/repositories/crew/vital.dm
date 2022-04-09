@@ -21,6 +21,19 @@
 					crew_data["pulse_span"] = "average"
 				if(PULSE_THREADY)
 					crew_data["pulse_span"] = "bad"
+	crew_data["charge"] = "N/A"
+	crew_data["charge_span"] = "N/A"
+	if(H.isSynthetic())
+		var/obj/item/organ/internal/cell/cell = H.internal_organs_by_name[BP_CELL]
+		if(cell)
+			crew_data["charge"] = cell.percent()
+			if(cell.percent() <= 10)
+				crew_data["charge_span"] = "bad"
+			else
+				crew_data["charge_span"] = "good"
+		else
+			crew_data["charge"] = "No cell"
+			crew_data["charge_span"] = "bad"
 
 	crew_data["pressure"] = "N/A"
 	crew_data["true_oxygenation"] = -1
@@ -56,6 +69,10 @@
 		crew_data["pulse"] = rand(60, 90)
 		crew_data["pulse_span"] = "good"
 
+	if(isnum(crew_data["charge"]))
+		crew_data["charge"] = rand(10,66)
+		crew_data["charge_span"] = "good"
+
 	if(crew_data["true_oxygenation"] != -1)
 		crew_data["pressure"] = "[Floor(120+rand(-5,5))]/[Floor(80+rand(-5,5))]"
 		crew_data["true_oxygenation"] = 100
@@ -68,6 +85,10 @@
 		crew_data["true_pulse"] = PULSE_NONE
 		crew_data["pulse"] = 0
 		crew_data["pulse_span"] = "bad"
+
+	if(isnum(crew_data["charge"]))
+		crew_data["charge"] = 0
+		crew_data["charge_span"] = "bad"
 
 	if(crew_data["true_oxygenation"] != -1)
 		crew_data["pressure"] = "[Floor((120+rand(-5,5))*0.25)]/[Floor((80+rand(-5,5))*0.25)]"

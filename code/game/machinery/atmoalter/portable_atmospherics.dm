@@ -1,10 +1,12 @@
 /obj/machinery/portable_atmospherics
 	name = "atmoalter"
 	use_power = POWER_USE_OFF
+	construct_state = /decl/machine_construction/default/panel_closed
+
 	var/datum/gas_mixture/air_contents = new
 
 	var/obj/machinery/atmospherics/portables_connector/connected_port
-	var/obj/item/weapon/tank/holding
+	var/obj/item/tank/holding
 
 	var/volume = 0
 	var/destroyed = 0
@@ -45,8 +47,8 @@
 
 /obj/machinery/portable_atmospherics/proc/StandardAirMix()
 	return list(
-		"oxygen" = O2STANDARD * MolesForPressure(),
-		"nitrogen" = N2STANDARD *  MolesForPressure())
+		GAS_OXYGEN = O2STANDARD * MolesForPressure(),
+		GAS_NITROGEN = N2STANDARD *  MolesForPressure())
 
 /obj/machinery/portable_atmospherics/proc/MolesForPressure(var/target_pressure = start_pressure)
 	return (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature)
@@ -68,11 +70,11 @@
 	connected_port.connected_device = src
 	connected_port.on = 1 //Activate port updates
 
-	anchored = 1 //Prevent movement
+	anchored = TRUE //Prevent movement
 
 	//Actually enforce the air sharing
 	var/datum/pipe_network/network = connected_port.return_network(src)
-	if(network && !network.gases.Find(air_contents))
+	if(network && !list_find(network.gases, air_contents))
 		network.gases += air_contents
 		network.update = 1
 
@@ -86,7 +88,7 @@
 	if(network)
 		network.gases -= air_contents
 
-	anchored = 0
+	anchored = FALSE
 
 	connected_port.connected_device = null
 	connected_port = null
@@ -101,8 +103,8 @@
 	if (network)
 		network.update = 1
 
-/obj/machinery/portable_atmospherics/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if ((istype(W, /obj/item/weapon/tank) && !( src.destroyed )))
+/obj/machinery/portable_atmospherics/attackby(var/obj/item/W as obj, var/mob/user as mob)
+	if ((istype(W, /obj/item/tank) && !( src.destroyed )))
 		if (src.holding)
 			return
 		if(!user.unEquip(W, src))
@@ -129,53 +131,31 @@
 					return
 			else
 				to_chat(user, "<span class='notice'>Nothing happens.</span>")
-				return
+				return ..()
 
-	else if (istype(W, /obj/item/device/analyzer))
+	else if (istype(W, /obj/item/device/scanner/gas))
 		return
 
-	return
+	return ..()
 
 /obj/machinery/portable_atmospherics/return_air()
 	return air_contents
 
 /obj/machinery/portable_atmospherics/powered
+	uncreated_component_parts = null
+	stat_immune = 0
+	use_power = POWER_USE_IDLE
 	var/power_rating
 	var/power_losses
 	var/last_power_draw = 0
-	var/obj/item/weapon/cell/cell
 
-/obj/machinery/portable_atmospherics/powered/powered()
-	if(use_power) //using area power
-		return ..()
-	if(cell && cell.charge)
-		return 1
-	return 0
+/obj/machinery/portable_atmospherics/powered/power_change()
+	. = ..()
+	if(. && (stat & NOPOWER))
+		update_use_power(POWER_USE_IDLE)
 
-/obj/machinery/portable_atmospherics/powered/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/cell))
-		if(cell)
-			to_chat(user, "There is already a power cell installed.")
-			return
-		if(!user.unEquip(I, src))
-			return
-		cell = I
-		user.visible_message("<span class='notice'>[user] opens the panel on \the [src] and inserts \the [I].</span>", "<span class='notice'>You open the panel on \the [src] and insert \the [I].</span>")
-		power_change()
-		return
-
-	if(isScrewdriver(I))
-		if(!cell)
-			to_chat(user, "<span class='warning'>There is no power cell installed.</span>")
-			return
-
-		user.visible_message("<span class='notice'>[user] opens the panel on \the [src] and removes \the [cell].</span>", "<span class='notice'>You open the panel on \the [src] and remove \the [cell].</span>")
-		cell.add_fingerprint(user)
-		cell.dropInto(loc)
-		cell = null
-		power_change()
-		return
-	..()
+/obj/machinery/portable_atmospherics/powered/components_are_accessible(path)
+	return panel_open
 
 /obj/machinery/portable_atmospherics/proc/log_open()
 	if(air_contents.gas.len == 0)
@@ -188,3 +168,12 @@
 		else
 			gases = gas
 	log_and_message_admins("opened [src.name], containing [gases].")
+
+/obj/machinery/portable_atmospherics/powered/dismantle()
+	if(isturf(loc))
+		playsound(loc, 'sound/effects/spray.ogg', 10, 1, -3)
+		loc.assume_air(air_contents)
+	. = ..()
+
+/obj/machinery/portable_atmospherics/MouseDrop_T(mob/living/M, mob/living/user)
+	do_climb(user, FALSE)

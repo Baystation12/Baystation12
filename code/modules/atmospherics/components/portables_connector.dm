@@ -16,12 +16,13 @@
 
 	var/on = 0
 	use_power = POWER_USE_OFF
+	uncreated_component_parts = null
 	level = 1
 
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
+	build_icon_state = "connector"
 
-/obj/machinery/atmospherics/portables_connector/Initialize()
-	initialize_directions = dir
-	. = ..()
+	pipe_class = PIPE_CLASS_UNARY
 
 /obj/machinery/atmospherics/portables_connector/on_update_icon()
 	icon_state = "connector"
@@ -53,7 +54,7 @@
 	if(reference == node)
 		network = new_network
 
-	if(new_network.normal_members.Find(src))
+	if(list_find(new_network.normal_members, src))
 		return 0
 
 	new_network.normal_members += src
@@ -129,7 +130,7 @@
 	return null
 
 
-/obj/machinery/atmospherics/portables_connector/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/portables_connector/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if(!isWrench(W))
 		return ..()
 	if (connected_device)
@@ -150,5 +151,5 @@
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear a ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
+		new /obj/item/pipe(loc, src)
 		qdel(src)

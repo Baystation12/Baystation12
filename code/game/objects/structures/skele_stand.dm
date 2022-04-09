@@ -1,6 +1,7 @@
 /obj/structure/skele_stand
 	name = "hanging skeleton model"
-	density = 1
+	density = TRUE
+	anchored = FALSE
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "hangskele"
 	desc = "It's an anatomical model of a human skeletal system made of plaster."
@@ -36,16 +37,17 @@
 	rattle_bones(null, thing)
 
 /obj/structure/skele_stand/examine(mob/user)
-	..()
+	. = ..()
 	if(swag.len)
 		var/list/swagnames = list()
 		for(var/slot in swag)
 			var/obj/item/clothing/C = swag[slot]
-			swagnames += C.get_examine_line()
+			if (C)
+				swagnames += C.get_examine_line()
 		to_chat(user,"[gender == MALE ? "He" : "She"] is wearing [english_list(swagnames)].")
 
-/obj/structure/skele_stand/attackby(obj/item/weapon/W, mob/user)
-	if(istype(W,/obj/item/weapon/pen))
+/obj/structure/skele_stand/attackby(obj/item/W, mob/user)
+	if(istype(W,/obj/item/pen))
 		var/nuname = sanitize(input(user,"What do you want to name this skeleton as?","Skeleton Christening",name) as text|null)
 		if(nuname && CanPhysicallyInteract(user))
 			SetName(nuname)
@@ -83,3 +85,8 @@
 	for(var/slot in swag)
 		var/obj/item/I = swag[slot]
 		overlays += I.get_mob_overlay(null, slot)
+
+/obj/structure/skele_stand/maint
+	name = "decayed skeleton model"
+	icon_state = "hangskelemaint"
+	desc = "It's an anatomical model of a human skeletal system made of plaster. The plaster on this one is a bit decayed, due to repeated clothing swapping."

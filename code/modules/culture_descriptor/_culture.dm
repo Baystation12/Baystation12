@@ -3,13 +3,12 @@
 	var/desc_type
 	var/description
 	var/economic_power = 1
-	var/language = LANGUAGE_GALCOM
+	var/language
 	var/name_language
 	var/default_language
 	var/list/additional_langs
 	var/list/secondary_langs
 	var/category
-	var/subversive_potential = 0
 	var/hidden
 	var/hidden_from_codex
 	var/list/qualifications
@@ -72,7 +71,7 @@
 	dat += "</td>"
 	if(append)
 		dat += "<td width = '100px'>[append]</td>"
-	dat += "</tr></table><hr>"
+	dat += "</tr></table>"
 	return jointext(dat, null)
 #undef COLLAPSED_CULTURE_BLURB_LEN
 
@@ -93,7 +92,6 @@
 	. = list()
 	if(language)                  . |= language
 	if(default_language)          . |= default_language
-	if(name_language)             . |= name_language
 	if(LAZYLEN(additional_langs)) . |= additional_langs
 
 /decl/cultural_info/proc/get_formal_name_suffix()

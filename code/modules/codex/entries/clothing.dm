@@ -11,10 +11,13 @@
 		"rad" = "radiation"
 		)
 
+/obj/item/clothing/get_lore_info()
+	return desc
+
 /obj/item/clothing/get_mechanics_info()
 	var/list/armor_strings = list()
 	for(var/armor_type in armour_to_descriptive_term)
-		if(armor[armor_type])
+		if(LAZYACCESS(armor, armor_type))
 			switch(armor[armor_type])
 				if(1 to 20)
 					armor_strings += "It barely protects against [armour_to_descriptive_term[armor_type]]."
@@ -30,16 +33,19 @@
 					armor_strings += "It is very strong against [armour_to_descriptive_term[armor_type]]."
 				if(71 to 80)
 					armor_strings += "This gives a very robust defense against [armour_to_descriptive_term[armor_type]]."
-				if(81 to 99)
+				if(81 to 100)
 					armor_strings += "Wearing this would make you nigh-invulerable against [armour_to_descriptive_term[armor_type]]."
-				if(100)
-					armor_strings += "You would be immune to [armour_to_descriptive_term[armor_type]] if you wore this."
 
 	if(item_flags & ITEM_FLAG_AIRTIGHT)
 		armor_strings += "It is airtight."
 
-	if(item_flags & ITEM_FLAG_STOPPRESSUREDAMAGE)
+	if(min_pressure_protection == 0)
 		armor_strings += "Wearing this will protect you from the vacuum of space."
+	else if(min_pressure_protection != null)
+		armor_strings += "Wearing this will protect you from low pressures, but not the vacuum of space."
+
+	if(max_pressure_protection != null)
+		armor_strings += "This suit is rated for pressures up to [max_pressure_protection] kPa."
 
 	if(item_flags & ITEM_FLAG_THICKMATERIAL)
 		armor_strings += "The material is exceptionally thick."
@@ -68,7 +74,7 @@
 		armor_strings += "It can be worn on your [english_list(slots)]."
 
 	return jointext(armor_strings, "<br>")
-	
+
 /obj/item/clothing/suit/armor/pcarrier/get_mechanics_info()
 	. = ..()
 	. += "<br>Its protection is provided by the plate inside, examine it for details on armor.<br>"

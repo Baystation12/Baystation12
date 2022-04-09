@@ -10,11 +10,9 @@
 			possible_spawns.Add(C)
 
 	//25% chance for this to be a false alarm
-	var/num
-	if(prob(25))
-		num = 0
-	else
-		num = rand(2,6)
+	var/num = 0
+	if (length(possible_spawns) && prob(75))
+		num = rand(2, 6)
 	for(var/i=0, i<num, i++)
 		var/mob/living/simple_animal/hostile/retaliate/malf_drone/D = new(get_turf(pick(possible_spawns)))
 		drones_list.Add(D)
@@ -22,14 +20,7 @@
 			D.disabled = rand(15, 60)
 
 /datum/event/rogue_drone/announce()
-	var/msg
-	if(prob(33))
-		msg = "Attention: unidentified patrol drones detected within proximity to the [location_name()]"
-	else if(prob(50))
-		msg = "Unidentified Unmanned Drones approaching the [location_name()]. All hands take notice."
-	else
-		msg = "Class II Laser Fire detected nearby the [location_name()]."
-	command_announcement.Announce(msg, "[location_name()] Sensor Array", zlevels = affecting_z)
+	command_announcement.Announce("Attention: unidentified patrol drones detected within proximity to the [location_name()]", "[location_name()] Sensor Array", zlevels = affecting_z)
 
 /datum/event/rogue_drone/end()
 	var/num_recovered = 0

@@ -9,10 +9,12 @@
 	var/flipped = 0
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
+	species_restricted = list("exclude")
+
 
 /obj/item/clothing/head/soft/New()
 	..()
-	set_extension(src, /datum/extension/base_icon_state, /datum/extension/base_icon_state, icon_state)
+	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	update_icon()
 
 /obj/item/clothing/head/soft/on_update_icon()

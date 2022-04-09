@@ -15,12 +15,12 @@
 #define RADIATOR_EXPOSED_SURFACE_AREA_RATIO 0.04 // (3 cm + 100 cm * sin(3deg))/(2*(3+100 cm)). Unitless ratio.
 #define HUMAN_EXPOSED_SURFACE_AREA          5.2 //m^2, surface area of 1.7m (H) x 0.46m (D) cylinder
 
-#define T0C   273.15 //    0.0 degrees celcius
-#define T20C  293.15 //   20.0 degrees celcius
+#define T0C   273.15 //    0.0 degrees celsius
+#define T20C  293.15 //   20.0 degrees celsius
 #define T100C 373.15 //  100.0 degrees celsius
-#define TCMB  2.7    // -270.3 degrees celcius
+#define TCMB  2.7    // -270.3 degrees celsius
 
-#define CELCIUS + T0C
+#define CELSIUS + T0C
 
 #define ATMOS_PRECISION 0.0001
 #define QUANTIZE(variable) (round(variable, ATMOS_PRECISION))
@@ -35,3 +35,7 @@
 
 // Determines the exchange ratio of reagents being converted to gas and vice versa.
 #define REAGENT_GAS_EXCHANGE_FACTOR 10
+
+//where a unit turf is 1 on a side, its diagonal is sqrt(2)
+#define UNIT_DIAGONAL      1.41421356237
+#define HALF_UNIT_DIAGONAL 0.70710678118

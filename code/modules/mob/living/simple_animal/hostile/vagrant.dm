@@ -7,51 +7,72 @@
 	icon_living = "vagrant"
 	icon_dead = "vagrant"
 	icon_gib = "vagrant"
-	maxHealth = 65
-	health = 40
+	maxHealth = 60
+	health = 20
 	speed = 5
-	speak_chance = 0
-	turns_per_move = 3
-	move_to_delay = 3
+	turns_per_move = 4
+	move_to_delay = 4
 	response_help = "pets the"
 	response_disarm = "gently pushes aside the"
 	response_harm = "hits the"
 	break_stuff_probability = 0
 	faction = "vagrant"
 	harm_intent_damage = 3
-	melee_damage_lower = 3
-	melee_damage_upper = 4
+	natural_weapon = /obj/item/natural_weapon/bite/weak
 	light_color = "#8a0707"
-	attacktext = "mauled"
-	attack_sound = 'sound/weapons/bite.ogg'
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
-	var/datum/disease2/disease/carried
 	var/cloaked = 0
 	var/mob/living/carbon/human/gripping = null
-	var/blood_per_tick = 4.25
+	var/blood_per_tick = 3
 	var/health_per_tick = 0.8
 	pass_flags = PASS_FLAG_TABLE
 
 	bleed_colour = "#aad9de"
 
-/mob/living/simple_animal/hostile/vagrant/Initialize()
+	ai_holder = /datum/ai_holder/hostile/melee/vagrant
+
+/datum/ai_holder/hostile/melee/vagrant
+
+/datum/ai_holder/hostile/melee/vagrant/engage_target()
 	. = ..()
-	if(prob(40))
-		carried = new/datum/disease2/disease()
-		carried.makerandom(rand(2, 4))
+
+	if(ishuman(.))
+		var/mob/living/carbon/human/H = .
+		var/mob/living/simple_animal/hostile/vagrant/V = holder
+		if(V.gripping == H)
+			H.Weaken(1)
+			H.Stun(1)
+			return
+		//This line ensures there's always a reasonable chance of grabbing, while still
+		//Factoring in health
+		if(!V.gripping && (V.cloaked || prob(V.health + ((V.maxHealth - V.health) * 2))))
+			V.gripping = H
+			V.cloaked = 0
+			V.update_icon()
+			H.Weaken(1)
+			H.Stun(1)
+			H.visible_message("<span class='danger'>\the [src] latches onto \the [H], pulsating!</span>")
+			V.forceMove(V.gripping.loc)
 
 /mob/living/simple_animal/hostile/vagrant/Allow_Spacemove(var/check_drift = 0)
 	return 1
 
 /mob/living/simple_animal/hostile/vagrant/bullet_act(var/obj/item/projectile/Proj)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 	var/oldhealth = health
 	. = ..()
 	if((target_mob != Proj.firer) && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
 		target_mob = Proj.firer
-		turns_per_move = 2
-		MoveToTarget()
+		turns_per_move = 3
+		ai_holder.walk_to_target()
+
+/mob/living/simple_animal/hostile/vagrant/death(gibbed)
+	. = ..()
+	if(. && !gibbed)
+		gib()
 
 /mob/living/simple_animal/hostile/vagrant/Life()
 	. = ..()
@@ -74,7 +95,7 @@
 		if(turns_per_move != initial(turns_per_move))
 			turns_per_move = initial(turns_per_move)
 
-	if(stance == HOSTILE_STANCE_IDLE && !cloaked)
+	if(stance == STANCE_IDLE && !cloaked)
 		cloaked = 1
 		update_icon()
 	if(health == maxHealth)
@@ -82,13 +103,10 @@
 		new/mob/living/simple_animal/hostile/vagrant(src.loc)
 		gib()
 		return
-	if(health < 1)
-		gib() //Leave no identifiable evidence.
-		return
 
 /mob/living/simple_animal/hostile/vagrant/on_update_icon()
 	if(cloaked) //It's fun time
-		alpha = 45
+		alpha = 75
 		set_light(0)
 		icon_state = initial(icon_state)
 		move_to_delay = initial(move_to_delay)
@@ -97,27 +115,6 @@
 		icon_state = "vagrant_glowing"
 		set_light(0.2, 0.1, 3)
 		move_to_delay = 2
-
-/mob/living/simple_animal/hostile/vagrant/AttackingTarget()
-	. = ..()
-	if(ishuman(.))
-		var/mob/living/carbon/human/H = .
-		if(gripping == H)
-			H.Weaken(3)
-			H.Stun(3)
-			return
-		//This line ensures there's always a reasonable chance of grabbing, while still
-		//Factoring in health
-		if(!gripping && (cloaked || prob(health + ((maxHealth - health) * 2))))
-			gripping = H
-			cloaked = 0
-			update_icon()
-			H.Weaken(3)
-			H.Stun(3)
-			H.visible_message("<span class='danger'>\the [src] latches onto \the [H], pulsating!</span>")
-			if(carried && length(gripping.virus2) == 0)
-				infect_virus2(gripping, carried, 1)
-			src.forceMove(gripping.loc)
 
 /mob/living/simple_animal/hostile/vagrant/swarm/Initialize()
 	. = ..()

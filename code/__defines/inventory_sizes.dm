@@ -9,17 +9,33 @@
 #define ITEM_SIZE_GARGANTUAN     6
 #define ITEM_SIZE_NO_CONTAINER INFINITY // Use this to forbid item from being placed in a container.
 
-
-/*
-	The values below are not yet in use.
-*/
-
-#define base_storage_cost(w_class) (2**(w_class-1)) //1,2,4,8,16,...
+#define BASE_STORAGE_COST(w_class) (2**(w_class-1)) //1,2,4,8,16,...
 
 //linear increase. Using many small storage containers is more space-efficient than using large ones,
 //in exchange for being limited in the w_class of items that will fit
-#define base_storage_capacity(w_class) (7*(w_class-1))
+#define BASE_STORAGE_CAPACITY(w_class) (7*(w_class-1))
 
-#define DEFAULT_BACKPACK_STORAGE base_storage_capacity(5)
-#define DEFAULT_LARGEBOX_STORAGE base_storage_capacity(4)
-#define DEFAULT_BOX_STORAGE      base_storage_capacity(3)
+#define DEFAULT_BACKPACK_STORAGE BASE_STORAGE_CAPACITY(5)
+#define DEFAULT_LARGEBOX_STORAGE BASE_STORAGE_CAPACITY(4)
+#define DEFAULT_BOX_STORAGE      BASE_STORAGE_CAPACITY(3)
+
+#define STORAGE_SLOTS *1
+#define STORAGE_FREEFORM *-1
+
+
+/**
+* Tank sizes for /obj/item/tank
+* Used for gating different gas tank roles without being too specific about volume or w_class
+*/
+
+/// Emergency tanks, except doubles
+#define TANK_SIZE_SMALL 10
+
+/// Double tanks & fuel tanks
+#define TANK_SIZE_MEDIUM 20
+
+/// Full size tanks
+#define TANK_SIZE_LARGE 30
+
+/// Scrubber tanks & jetpacks
+#define TANK_SIZE_HUGE 40

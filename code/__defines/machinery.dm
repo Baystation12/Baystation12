@@ -1,5 +1,3 @@
-var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called manually after an event.
-
 #define KILOWATTS *1000
 #define MEGAWATTS *1000000
 #define GIGAWATTS *1000000000
@@ -10,7 +8,6 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 
 // Doors!
 #define DOOR_CRUSH_DAMAGE 40
-#define ALIEN_SELECT_AFK_BUFFER  1    // How many minutes that a person can be AFK before not being allowed to be an alien.
 
 #define POWER_USE_OFF    0
 #define POWER_USE_IDLE   1
@@ -21,14 +18,19 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define EQUIP   1
 #define LIGHT   2
 #define ENVIRON 3
-#define TOTAL   4 // For total power used only.
+#define LOCAL   4 // Machines running on local power. Not tracked by area.
+#define TOTAL   5 // For total power used only.
 
 // Bitflags for machine stat variable.
-#define BROKEN   0x1
-#define NOPOWER  0x2
-#define POWEROFF 0x4  // TBD.
-#define MAINT    0x8  // Under maintenance.
-#define EMPED    0x10 // Temporary broken by EMP pulse.
+#define BROKEN      FLAG(0)
+#define NOPOWER     FLAG(1)
+#define MAINT       FLAG(2)  // Under maintenance.
+#define EMPED       FLAG(3)  // Temporary broken by EMP pulse.
+#define NOSCREEN    FLAG(4)  // No UI shown via direct interaction
+#define NOINPUT     FLAG(5)  // No input taken from direct interaction
+
+#define MACHINE_BROKEN_GENERIC  FLAG(0)  // Standard legacy brokenness, used on a case-by-case basis
+#define MACHINE_BROKEN_NO_PARTS FLAG(1)  // Missing required parts
 
 // Used by firelocks
 #define FIREDOOR_OPEN 1
@@ -55,10 +57,6 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define NETWORK_ALARM_MOTION "Motion Alarms"
 #define NETWORK_ALARM_POWER "Power Alarms"
 
-// Those networks can only be accessed by pre-existing terminals. AIs and new terminals can't use them.
-var/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWORK_CRESCENT, "Secret")
-
-
 //singularity defines
 #define STAGE_ONE 	1
 #define STAGE_TWO 	3
@@ -68,10 +66,10 @@ var/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWO
 #define STAGE_SUPER	11
 
 // NanoUI flags
-#define STATUS_INTERACTIVE 2 // GREEN Visability
-#define STATUS_UPDATE 1 // ORANGE Visability
-#define STATUS_DISABLED 0 // RED Visability
 #define STATUS_CLOSE -1 // Close the interface
+#define STATUS_DISABLED 0 // RED Visability
+#define STATUS_UPDATE 1 // ORANGE Visability
+#define STATUS_INTERACTIVE 2 // GREEN Visability
 
 /*
  *	Atmospherics Machinery.
@@ -105,11 +103,20 @@ var/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWO
 #define SUPERMATTER_ERROR -1		// Unknown status, shouldn't happen but just in case.
 #define SUPERMATTER_INACTIVE 0		// No or minimal energy
 #define SUPERMATTER_NORMAL 1		// Normal operation
-#define SUPERMATTER_NOTIFY 2		// Ambient temp > 80% of CRITICAL_TEMPERATURE
-#define SUPERMATTER_WARNING 3		// Ambient temp > CRITICAL_TEMPERATURE OR integrity damaged
-#define SUPERMATTER_DANGER 4		// Integrity < 50%
-#define SUPERMATTER_EMERGENCY 5		// Integrity < 25%
-#define SUPERMATTER_DELAMINATING 6	// Pretty obvious.
+#define SUPERMATTER_WARNING 2		// Ambient temp > CRITICAL_TEMPERATURE OR integrity damaged
+#define SUPERMATTER_DANGER 3		// Integrity < 50%
+#define SUPERMATTER_EMERGENCY 4		// Integrity < 25%
+#define SUPERMATTER_DELAMINATING 5	// Pretty obvious.
+
+#define SUPERMATTER_DATA_EER         "Relative EER"
+#define SUPERMATTER_DATA_TEMPERATURE "Temperature"
+#define SUPERMATTER_DATA_PRESSURE    "Pressure"
+#define SUPERMATTER_DATA_EPR         "Chamber EPR"
+
+// Emitter states
+#define EMITTER_LOOSE 0 // the goose is loose
+#define EMITTER_WRENCHED 1
+#define EMITTER_WELDED 2
 
 // Scrubber modes
 #define SCRUBBER_SIPHON   "siphon"
@@ -127,3 +134,45 @@ var/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWO
 #define MODE_CLIENT			2	//The one who initiated the docking, and who can initiate the undocking. The server cannot initiate undocking, and is the one responsible for deciding to accept a docking request and signals when docking and undocking is complete. (Think server == station, client == shuttle)
 
 #define MESSAGE_RESEND_TIME 5	//how long (in seconds) do we wait before resending a message
+
+// obj/item/stock_parts status flags
+#define PART_STAT_INSTALLED     FLAG(0)
+#define PART_STAT_PROCESSING    FLAG(1)
+#define PART_STAT_ACTIVE        FLAG(2)
+#define PART_STAT_CONNECTED     FLAG(3)
+
+// part_flags
+#define PART_FLAG_LAZY_INIT      FLAG(0)  // Will defer init on stock parts until machine is destroyed or parts are otherwise queried.
+#define PART_FLAG_QDEL           FLAG(1)  // Will delete on uninstall
+#define PART_FLAG_HAND_REMOVE    FLAG(2)  // Can be removed by hand
+
+// Machinery process flags, for use with START_PROCESSING_MACHINE
+#define MACHINERY_PROCESS_SELF          FLAG(0)
+#define MACHINERY_PROCESS_COMPONENTS    FLAG(1)
+#define MACHINERY_PROCESS_ALL           (MACHINERY_PROCESS_SELF | MACHINERY_PROCESS_COMPONENTS)
+
+// Machine construction state return values, for use with cannot_transition_to
+#define MCS_CHANGE   0 // Success
+#define MCS_CONTINUE 1 // Failed to change, silently
+#define MCS_BLOCK    2 // Failed to change, but action was performed
+
+#define FABRICATOR_EXTRA_COST_FACTOR 1.25
+#define FAB_HACKED      FLAG(0)
+#define FAB_DISABLED    FLAG(1)
+#define FAB_SHOCKED     FLAG(2)
+#define FAB_BUSY        FLAG(3)
+
+#define  PART_CPU  		/obj/item/stock_parts/computer/processor_unit				// CPU. Without it the computer won't run. Better CPUs can run more programs at once.
+#define  PART_NETWORK  	/obj/item/stock_parts/computer/network_card					// Network Card component of this computer. Allows connection to NTNet
+#define  PART_HDD 		/obj/item/stock_parts/computer/hard_drive					// Hard Drive component of this computer. Stores programs and files.
+
+// Optional hardware (improves functionality, but is not critical for computer to work in most cases)
+#define  PART_BATTERY  	/obj/item/stock_parts/computer/battery_module			// An internal power source for this computer. Can be recharged.
+#define  PART_CARD  	/obj/item/stock_parts/computer/card_slot					// ID Card slot component of this computer. Mostly for HoP modification console that needs ID slot for modification.
+#define  PART_PRINTER  	/obj/item/stock_parts/computer/nano_printer			// Nano Printer component of this computer, for your everyday paperwork needs.
+#define  PART_DRIVE  	/obj/item/stock_parts/computer/hard_drive/portable		// Portable data storage
+#define  PART_AI  		/obj/item/stock_parts/computer/ai_slot							// AI slot, an intellicard housing that allows modifications of AIs.
+#define  PART_TESLA  	/obj/item/stock_parts/computer/tesla_link					// Tesla Link, Allows remote charging from nearest APC.
+#define  PART_SCANNER  	/obj/item/stock_parts/computer/scanner							// One of several optional scanner attachments.
+
+#define CLICKSOUND_INTERVAL (5 SECONDS)

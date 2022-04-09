@@ -1,8 +1,9 @@
-/obj/item/weapon/wirecutters
+/obj/item/wirecutters
 	name = "wirecutters"
 	desc = "A special pair of pliers with cutting edges. Various brackets and manipulators built into the handle allow it to repair severed wiring."
 	icon = 'icons/obj/tools.dmi'
-	icon_state = "cutters"
+	icon_state = "cutters_preview"
+	item_state = "cutters"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	force = 3.0
@@ -13,30 +14,23 @@
 	matter = list(MATERIAL_STEEL = 80)
 	center_of_mass = "x=18;y=10"
 	attack_verb = list("pinched", "nipped")
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 
-/obj/item/weapon/wirecutters/Initialize()
-	switch(pick("red","yellow","green","blue","black"))
-		if ("red")
-			icon_state = "cutters"
-			item_state = "cutters"
-		if ("yellow")
-			icon_state = "cutters_yellow"
-			item_state = "cutters_yellow"
-		if ("green")
-			icon_state = "cutters_green"
-			item_state = "cutters_green"
-		if ("blue")
-			icon_state = "cutters_blue"
-			item_state = "cutters_blue"
-		if ("black")
-			icon_state = "cutters_black"
-			item_state = "cutters_black"
+	var/build_from_parts = TRUE
+	var/handle_icon = "cutters_handle"
+	var/hardware_icon = "cutters_hardware"
+	var/valid_colours = list(COLOR_RED, PIPE_COLOR_YELLOW, COLOR_BLUE_GRAY, COLOR_MAROON, COLOR_SEDONA, COLOR_BABY_BLUE, COLOR_VIOLET, COLOR_GRAY80, COLOR_GRAY20)
+
+/obj/item/wirecutters/Initialize()
+	if(build_from_parts)
+		icon_state = "cutters_handle"
+		color = pick(valid_colours)
+		overlays += overlay_image(icon, "[hardware_icon]", flags=RESET_COLOR)
 	. = ..()
 
-/obj/item/weapon/wirecutters/attack(mob/living/carbon/C as mob, mob/user as mob)
-	if(istype(C) && user.a_intent == I_HELP && (C.handcuffed) && (istype(C.handcuffed, /obj/item/weapon/handcuffs/cable)))
+/obj/item/wirecutters/attack(mob/living/carbon/C as mob, mob/user as mob)
+	if(istype(C) && user.a_intent == I_HELP && (C.handcuffed) && (istype(C.handcuffed, /obj/item/handcuffs/cable)))
 		usr.visible_message("\The [usr] cuts \the [C]'s restraints with \the [src]!",\
 		"You cut \the [C]'s restraints with \the [src]!",\
 		"You hear cable being cut.")

@@ -1,21 +1,38 @@
-/turf
-	var/dynamic_lighting = TRUE    // Does the turf use dynamic lighting?
-	luminosity           = 1
+/// Does the turf use dynamic lighting?
+/turf/var/dynamic_lighting = TRUE
+/turf/luminosity           = 1
 
-	var/tmp/lighting_corners_initialised = FALSE
+/turf/var/tmp/lighting_corners_initialised = FALSE
 
-	var/tmp/list/datum/light_source/affecting_lights       // List of light sources affecting this turf.
-	var/tmp/atom/movable/lighting_overlay/lighting_overlay // Our lighting overlay.
-	var/tmp/list/datum/lighting_corner/corners
-	var/opaque_counter
+/// List of light sources affecting this turf.
+/turf/var/tmp/list/datum/light_source/affecting_lights
+/// Our lighting overlay.
+/turf/var/tmp/atom/movable/lighting_overlay/lighting_overlay
+/turf/var/tmp/list/datum/lighting_corner/corners
+/turf/var/opaque_counter
 
-/turf/New()
-	opaque_counter = opacity
-	..()
-	
-/turf/set_opacity()
+/turf/set_opacity(new_opacity)
 	. = ..()
-	handle_opacity_change(src)
+	if(opacity == new_opacity)
+		return FALSE
+
+	opacity = new_opacity
+	return RecalculateOpacity()
+
+/turf/proc/RecalculateOpacity()
+	var/old_opaque_counter = opaque_counter
+
+	opaque_counter = opacity
+	for(var/a in src)
+		var/atom/A = a
+		opaque_counter += A.opacity
+
+	// If the counter changed and was or became 0 then lift event/reconsider lights
+	if(opaque_counter != old_opaque_counter && (!opaque_counter || !old_opaque_counter))
+		GLOB.opacity_set_event.raise_event(src, !opaque_counter, !!opaque_counter)
+		reconsider_lights()
+		return TRUE
+	return FALSE
 
 // Causes any affecting light sources to be queued for a visibility update, for example a door got opened.
 /turf/proc/reconsider_lights()
@@ -35,7 +52,7 @@
 		return
 
 	var/area/A = loc
-	if(A.dynamic_lighting)
+	if(A.dynamic_lighting && dynamic_lighting)
 		if(!lighting_corners_initialised)
 			generate_missing_corners()
 
@@ -53,7 +70,7 @@
 /turf/proc/get_lumcount(var/minlum = 0, var/maxlum = 1)
 	if(!lighting_overlay)
 		var/area/A = loc
-		if(A.dynamic_lighting)
+		if(A.dynamic_lighting && dynamic_lighting)
 			var/atom/movable/lighting_overlay/O = new /atom/movable/lighting_overlay(src)
 			lighting_overlay = O
 
@@ -68,18 +85,15 @@
 	return CLAMP01(totallums)
 
 // If an opaque movable atom moves around we need to potentially update visibility.
-/turf/Entered(var/atom/movable/Obj, var/atom/OldLoc)
+/turf/Entered(var/atom/movable/AM, var/atom/OldLoc)
 	. = ..()
-	if(Obj && Obj.opacity)
-		if(!opaque_counter++)
-			reconsider_lights()
-		
+	if(AM?.opacity)
+		RecalculateOpacity()
 
-/turf/Exited(var/atom/movable/Obj, var/atom/newloc)
+/turf/Exited(var/atom/movable/AM, var/atom/newloc)
 	. = ..()
-	if(Obj && Obj.opacity)
-		if(!(--opaque_counter))
-			reconsider_lights()
+	if(AM?.opacity)
+		RecalculateOpacity()
 
 /turf/proc/get_corners()
 	if(opaque_counter)
@@ -97,17 +111,3 @@
 			continue
 
 		corners[i] = new /datum/lighting_corner(src, LIGHTING_CORNER_DIAGONAL[i])
-
-/turf/proc/handle_opacity_change(var/atom/opacity_changer)
-	if(opacity_changer)
-		if(opacity_changer.opacity)
-			if(!opaque_counter)
-				reconsider_lights()
-			opaque_counter++
-		else
-			var/old_counter = opaque_counter
-			opaque_counter--
-			if(old_counter && !opaque_counter)
-				reconsider_lights()
-	
-	

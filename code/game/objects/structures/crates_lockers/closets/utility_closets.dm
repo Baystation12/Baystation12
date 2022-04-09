@@ -7,7 +7,7 @@
  *		Bombsuit Closet
  *		Hydrant
  *		First Aid
- *		Excavation Closet
+ *		Excavation Closet Away Site
  *		Shipping Supplies Closet
  */
 
@@ -19,49 +19,16 @@
 	desc = "It's a storage unit for emergency breathmasks and o2 tanks."
 	closet_appearance = /decl/closet_appearance/oxygen
 
-/obj/structure/closet/emcloset/New()
-	..()
-
-	switch (pickweight(list("small" = 50, "aid" = 25, "tank" = 10, "large" = 5, "both" = 10)))
-		if ("small")
-			new /obj/item/weapon/tank/emergency/oxygen(src)
-			new /obj/item/weapon/tank/emergency/oxygen(src)
-			new /obj/item/clothing/mask/breath(src)
-			new /obj/item/clothing/mask/breath(src)
-			new /obj/item/clothing/suit/space/emergency(src)
-			new /obj/item/clothing/head/helmet/space/emergency(src)
-		if ("aid")
-			new /obj/item/weapon/tank/emergency/oxygen(src)
-			new /obj/item/weapon/storage/toolbox/emergency(src)
-			new /obj/item/clothing/mask/breath(src)
-			new /obj/item/weapon/storage/firstaid/o2(src)
-			new /obj/item/clothing/suit/space/emergency(src)
-			new /obj/item/clothing/head/helmet/space/emergency(src)
-		if ("tank")
-			new /obj/item/weapon/tank/emergency/oxygen/engi(src)
-			new /obj/item/weapon/tank/emergency/oxygen/engi(src)
-			new /obj/item/clothing/mask/gas/half(src)
-			new /obj/item/clothing/mask/gas/half(src)
-
-		if ("large")
-			new /obj/item/weapon/tank/emergency/oxygen/double(src)
-			new /obj/item/weapon/tank/emergency/oxygen/double(src)
-			new /obj/item/clothing/mask/gas(src)
-			new /obj/item/clothing/mask/gas(src)
-			new /obj/item/device/oxycandle(src)
-
-		if ("both")
-			new /obj/item/weapon/storage/toolbox/emergency(src)
-			new /obj/item/weapon/tank/emergency/oxygen/engi(src)
-			new /obj/item/weapon/tank/emergency/oxygen/engi(src)
-			new /obj/item/clothing/mask/gas/half(src)
-			new /obj/item/clothing/mask/gas/half(src)
-			new /obj/item/weapon/storage/firstaid/o2(src)
-			new /obj/item/clothing/suit/space/emergency(src)
-			new /obj/item/clothing/suit/space/emergency(src)
-			new /obj/item/clothing/head/helmet/space/emergency(src)
-			new /obj/item/clothing/head/helmet/space/emergency(src)
-			new /obj/item/device/oxycandle(src)
+/obj/structure/closet/emcloset/WillContain()
+	return list(/obj/item/tank/oxygen_emergency = 2,
+				/obj/item/clothing/mask/breath = 2,
+				/obj/item/storage/toolbox/emergency,
+				/obj/item/inflatable/wall = 2,
+				/obj/item/device/oxycandle,
+				/obj/item/storage/med_pouch/oxyloss = 2,
+				/obj/item/clothing/suit/space/emergency,
+				/obj/item/clothing/head/helmet/space/emergency
+	)
 
 /*
  * Fire Closet
@@ -74,13 +41,23 @@
 
 /obj/structure/closet/firecloset/WillContain()
 	return list(
-		/obj/item/weapon/storage/med_pouch/burn,
+		/obj/item/storage/med_pouch/burn,
+		/obj/item/storage/backpack/dufflebag/firefighter,
+		/obj/item/clothing/mask/gas,
+		/obj/item/device/flashlight
+		)
+
+/obj/structure/closet/firecloset/chief
+
+/obj/structure/closet/firecloset/chief/WillContain()
+	return list(
+		/obj/item/storage/med_pouch/burn,
 		/obj/item/clothing/suit/fire/firefighter,
 		/obj/item/clothing/mask/gas,
 		/obj/item/device/flashlight,
-		/obj/item/weapon/tank/oxygen/red,
-		/obj/item/weapon/extinguisher,
-		/obj/item/clothing/head/hardhat/red)
+		/obj/item/tank/oxygen_scba,
+		/obj/item/extinguisher,
+		/obj/item/clothing/head/hardhat/firefighter/Chief)
 
 /*
  * Tool Closet
@@ -97,19 +74,19 @@
 	if(prob(70))
 		new /obj/item/device/flashlight(src)
 	if(prob(70))
-		new /obj/item/weapon/screwdriver(src)
+		new /obj/item/screwdriver(src)
 	if(prob(70))
-		new /obj/item/weapon/wrench(src)
+		new /obj/item/wrench(src)
 	if(prob(70))
-		new /obj/item/weapon/weldingtool(src)
+		new /obj/item/weldingtool(src)
 	if(prob(70))
-		new /obj/item/weapon/crowbar(src)
+		new /obj/item/crowbar(src)
 	if(prob(70))
-		new /obj/item/weapon/wirecutters(src)
+		new /obj/item/wirecutters(src)
 	if(prob(70))
 		new /obj/item/device/t_scanner(src)
 	if(prob(20))
-		new /obj/item/weapon/storage/belt/utility(src)
+		new /obj/item/storage/belt/utility(src)
 	if(prob(30))
 		new /obj/item/stack/cable_coil/random(src)
 	if(prob(30))
@@ -134,7 +111,7 @@
 
 /obj/structure/closet/radiation/WillContain()
 	return list(
-		/obj/item/weapon/storage/med_pouch/toxin = 2,
+		/obj/item/storage/med_pouch/radiation = 2,
 		/obj/item/clothing/suit/radiation,
 		/obj/item/clothing/head/radiation,
 		/obj/item/clothing/suit/radiation,
@@ -176,22 +153,19 @@
 	name = "fire-safety closet"
 	desc = "It's a storage unit for fire-fighting supplies."
 	closet_appearance = /decl/closet_appearance/wall/hydrant
-	anchored = 1
-	density = 0
-	wall_mounted = 1
+	anchored = TRUE
+	density = FALSE
+	wall_mounted = TRUE
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0
 
 /obj/structure/closet/hydrant/WillContain()
 	return list(
 		/obj/item/inflatable/door = 2,
-		/obj/item/weapon/storage/med_pouch/burn = 2,
-		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/storage/med_pouch/burn = 2,
 		/obj/item/clothing/mask/gas/half,
-		/obj/item/device/flashlight,
-		/obj/item/weapon/tank/oxygen/red,
-		/obj/item/weapon/extinguisher,
-		/obj/item/clothing/head/hardhat/red)
+		/obj/item/storage/backpack/dufflebag/firefighter
+		)
 
 /*
  * First Aid
@@ -200,9 +174,9 @@
 	name = "first-aid closet"
 	desc = "It's a wall-mounted storage unit for first aid supplies."
 	closet_appearance = /decl/closet_appearance/wall/medical
-	anchored = 1
-	density = 0
-	wall_mounted = 1
+	anchored = TRUE
+	density = FALSE
+	wall_mounted = TRUE
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0
 
@@ -211,13 +185,38 @@
 		/obj/random/firstaid,
 		/obj/random/medical/lite = 12)
 
+/obj/structure/closet/toolcloset/excavation/awaysite //no teleport beacons
+	name = "excavation equipment closet"
+	desc = "It's a storage unit for excavation equipment."
+	closet_appearance = /decl/closet_appearance/secure_closet/engineering/tools
+
+/obj/structure/closet/toolcloset/excavation/awaysite/WillContain()
+	return list(
+		/obj/item/storage/belt/archaeology,
+		/obj/item/storage/excavation,
+		/obj/item/device/flashlight/lantern,
+		/obj/item/device/ano_scanner,
+		/obj/item/device/depth_scanner,
+		/obj/item/device/core_sampler,
+		/obj/item/device/gps,
+		/obj/item/pinpointer/radio,
+		/obj/item/clothing/glasses/meson,
+		/obj/item/clothing/glasses/science,
+		/obj/item/pickaxe,
+		/obj/item/device/measuring_tape,
+		/obj/item/pickaxe/xeno/hand,
+		/obj/item/storage/bag/fossils,
+		/obj/item/hand_labeler,
+		/obj/item/device/spaceflare
+	)
+
 /obj/structure/closet/shipping_wall
 	name = "shipping supplies closet"
 	desc = "It's a wall-mounted storage unit containing supplies for preparing shipments."
 	closet_appearance = /decl/closet_appearance/wall/shipping
-	anchored = 1
-	density = 0
-	wall_mounted = 1
+	anchored = TRUE
+	density = FALSE
+	wall_mounted = TRUE
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0
 

@@ -6,7 +6,11 @@
 	w_class = ITEM_SIZE_SMALL
 	matter = list(MATERIAL_GLASS = 200)
 	item_flags = ITEM_FLAG_NO_BLUDGEON
-	var/list/accept_mobs = list(/mob/living/simple_animal/lizard, /mob/living/simple_animal/mouse)
+	var/list/accept_mobs = list(
+		/mob/living/simple_animal/passive/lizard,
+		/mob/living/simple_animal/passive/mouse,
+		/mob/living/simple_animal/borer
+	)
 	var/contains = 0 // 0 = nothing, 1 = money, 2 = animal, 3 = spiderling
 
 /obj/item/glass_jar/New()
@@ -65,15 +69,15 @@
 			return
 
 /obj/item/glass_jar/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/weapon/spacecash))
+	if(istype(W, /obj/item/spacecash))
 		if(contains == 0)
 			contains = 1
 		if(contains != 1)
 			return
 		if(!user.unEquip(W, src))
 			return
-		var/obj/item/weapon/spacecash/S = W
-		user.visible_message("<span class='notice'>[user] puts [S.worth] [S.worth > 1 ? "thalers" : "thaler"] into \the [src].</span>")
+		var/obj/item/spacecash/S = W
+		user.visible_message("<span class='notice'>[user] puts [S.worth] [S.worth > 1 ? GLOB.using_map.local_currency_name : GLOB.using_map.local_currency_name_singular] into \the [src].</span>")
 		update_icon()
 
 /obj/item/glass_jar/on_update_icon() // Also updates name and desc
@@ -86,7 +90,7 @@
 		if(1)
 			SetName("tip jar")
 			desc = "A small jar with money inside."
-			for(var/obj/item/weapon/spacecash/S in src)
+			for(var/obj/item/spacecash/S in src)
 				var/list/moneyImages = S.getMoneyImages()
 				for(var/A in moneyImages)
 					var/image/money = image('icons/obj/items.dmi', A)

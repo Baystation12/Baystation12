@@ -36,14 +36,11 @@
 
 /obj/effect/decal/writing/examine(mob/user)
 	. = ..(user)
-	if(.)
-		to_chat(user,  "It reads \"[message]\".")
-	else
-		to_chat(user, "<span class='notice'>You have to go closer if you want to read it.</span>")
+	to_chat(user,  "It reads \"[message]\".")
 
 /obj/effect/decal/writing/attackby(var/obj/item/thing, var/mob/user)
 	if(isWelder(thing))
-		var/obj/item/weapon/weldingtool/welder = thing
+		var/obj/item/weldingtool/welder = thing
 		if(welder.isOn() && welder.remove_fuel(0,user) && do_after(user, 5, src) && !QDELETED(src))
 			playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 			user.visible_message("<span class='notice'>\The [user] clears away some graffiti.</span>")

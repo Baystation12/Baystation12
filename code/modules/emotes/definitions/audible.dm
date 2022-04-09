@@ -39,6 +39,11 @@
 	emote_message_3p = "USER chirps!"
 	emote_sound = 'sound/misc/nymphchirp.ogg'
 
+/decl/emote/audible/multichirp
+	key ="mchirp"
+	emote_message_3p = "USER chirps a chorus of notes!"
+	emote_sound = 'sound/misc/multichirp.ogg'
+
 /decl/emote/audible/alarm
 	key = "alarm"
 	emote_message_1p = "You sound an alarm."
@@ -143,11 +148,13 @@
 
 /decl/emote/audible/slap
 	key = "slap"
-	emote_message_1p_target = "<span class='warning'>You slap TARGET across the face!</span>"
+	emote_message_1p_target = "You slap TARGET across the face!"
 	emote_message_1p = "You slap yourself across the face!"
-	emote_message_3p_target = "<span class='warning'>USER slaps TARGET across the face!</span>"
+	emote_message_3p_target = "USER slaps TARGET across the face!"
 	emote_message_3p = "USER slaps USER_SELF across the face!"
 	emote_sound = 'sound/effects/snap.ogg'
+	check_restraints = TRUE
+	check_range = 1
 
 /decl/emote/audible/bug_hiss
 	key ="hiss"
@@ -164,3 +171,35 @@
 	key ="chitter"
 	emote_message_3p = "USER chitters."
 	emote_sound = 'sound/voice/Bug.ogg'
+
+/decl/emote/audible/roar
+	key = "roar"
+	emote_message_3p = "USER roars!"
+
+/decl/emote/audible/bellow
+	key = "bellow"
+	emote_message_3p = "USER bellows!"
+
+/decl/emote/audible/howl
+	key = "howl"
+	emote_message_3p = "USER howls!"
+
+/decl/emote/audible/wheeze
+	key = "wheeze"
+	emote_message_3p = "USER wheezes."
+
+/decl/emote/audible/hiss
+	key ="hiss_"
+	emote_message_3p_target = "USER hisses softly at TARGET."
+	emote_message_3p = "USER hisses softly."
+	
+/decl/emote/audible/lizard_bellow
+	key = "bellow"
+	emote_message_3p_target = "USER bellows deeply at TARGET!"
+	emote_message_3p = "USER bellows!"
+	emote_sound = 'sound/voice/LizardBellow.ogg'
+
+/decl/emote/audible/lizard_squeal
+	key = "squeal"
+	emote_message_3p = "USER squeals."
+	emote_sound = 'sound/voice/LizardSqueal.ogg'

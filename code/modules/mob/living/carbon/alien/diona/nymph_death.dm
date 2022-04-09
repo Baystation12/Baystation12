@@ -41,7 +41,7 @@
 
 	var/obj/structure/diona_gestalt/gestalt = loc
 	if(istype(gestalt))
-		gestalt.shed_nymph(src, TRUE, FALSE)
+		gestalt.shed_atom(src, TRUE, FALSE)
 
 	if(holding_item)
 		unEquip(holding_item)
@@ -57,4 +57,4 @@
 /mob/living/carbon/alien/diona/Destroy()
 	if (previous_nymph || next_nymph)
 		remove_from_list()
-	..()
+	return ..()

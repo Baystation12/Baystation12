@@ -4,8 +4,12 @@ var/jobban_runonce			// Updates legacy bans with new info
 var/jobban_keylist[0]		//to store the keys & ranks
 
 /proc/jobban_fullban(mob/M, rank, reason)
-	if (!M || !M.key) return
-	jobban_keylist.Add(text("[M.ckey] - [rank] ## [reason]"))
+	if(!M)
+		return
+	var/last_ckey = LAST_CKEY(M)
+	if(!last_ckey)
+		return
+	jobban_keylist.Add(text("[last_ckey] - [rank] ## [reason]"))
 	jobban_savebanfile()
 
 /proc/jobban_client_fullban(ckey, rank)
@@ -19,7 +23,7 @@ var/jobban_keylist[0]		//to store the keys & ranks
 		if (SSjobs.guest_jobbans(rank))
 			if(config.guest_jobban && IsGuestKey(M.key))
 				return "Guest Job-ban"
-			if(config.usewhitelist && !check_whitelist(M))
+			if(!GLOB.skip_allow_lists && config.usewhitelist && !check_whitelist(M))
 				return "Whitelisted Job"
 		return ckey_is_jobbanned(M.ckey, rank)
 	return 0
@@ -42,9 +46,9 @@ var/jobban_keylist[0]		//to store the keys & ranks
 /proc/jobban_loadbanfile()
 	if(config.ban_legacy_system)
 		var/savefile/S=new("data/job_full.ban")
-		S["keys[0]"] >> jobban_keylist
+		from_save(S["keys[0]"],  jobban_keylist)
 		log_admin("Loading jobban_rank")
-		S["runonce"] >> jobban_runonce
+		from_save(S["runonce"], jobban_runonce)
 
 		if (!length(jobban_keylist))
 			jobban_keylist=list()
@@ -79,7 +83,7 @@ var/jobban_keylist[0]		//to store the keys & ranks
 
 /proc/jobban_savebanfile()
 	var/savefile/S=new("data/job_full.ban")
-	S["keys[0]"] << jobban_keylist
+	to_save(S["keys[0]"], jobban_keylist)
 
 /proc/jobban_unban(mob/M, rank)
 	jobban_remove("[M.ckey] - [rank]")

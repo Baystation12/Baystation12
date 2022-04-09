@@ -49,12 +49,12 @@
 	icon_state = "blood"
 	damage = 0
 	randpixel = 0
-	no_attack_log = 1
+	no_attack_log = TRUE
 	muzzle_type = /obj/effect/projectile/blood
 	tracer_type = /obj/effect/projectile/blood
 	impact_type = /obj/effect/projectile/blood
 
-/obj/item/projectile/beam/blood_effect/Bump(var/atom/a)
+/obj/item/projectile/beam/blood_effect/Bump(var/atom/a, forced=0)
 	if(a == original)
 		on_impact(a)
 		qdel(src)

@@ -45,8 +45,10 @@ SUBSYSTEM_DEF(vote)
 			for(var/client/C in voting)
 				show_panel(C.mob)
 
-/datum/controller/subsystem/vote/stat_entry()
-	..("Vote:[active_vote ? "[active_vote.name], [active_vote.time_remaining]" : "none"]")
+/datum/controller/subsystem/vote/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Vote: [active_vote ? "[active_vote.name], [active_vote.time_remaining]" : "None"]")
 
 /datum/controller/subsystem/vote/Recover()
 	last_started_time = SSvote.last_started_time
@@ -67,11 +69,11 @@ SUBSYSTEM_DEF(vote)
 	if(!automatic && (!istype(creator) || !creator.client))
 		return FALSE
 
-	if(last_started_time != null && !(is_admin(creator) || automatic))
+	if(last_started_time != null && !(isadmin(creator) || automatic))
 		var/next_allowed_time = (last_started_time + config.vote_delay)
 		if(next_allowed_time > world.time)
 			return FALSE
-	
+
 	var/datum/vote/new_vote = new vote_type
 	if(!new_vote.setup(creator, automatic))
 		return FALSE
@@ -83,7 +85,7 @@ SUBSYSTEM_DEF(vote)
 /datum/controller/subsystem/vote/proc/interface(client/C)
 	if(!C)
 		return
-	var/admin = is_admin(C)
+	var/admin = isadmin(C)
 	voting |= C
 
 	. = list()
@@ -126,7 +128,7 @@ SUBSYSTEM_DEF(vote)
 		voting -= user.client
 
 /datum/controller/subsystem/vote/proc/cancel_vote(mob/user)
-	if(!is_admin(user))
+	if(!isadmin(user))
 		return
 	active_vote.report_result() // Will not make announcement, but do any override failure reporting tasks.
 	QDEL_NULL(active_vote)
@@ -166,7 +168,6 @@ SUBSYSTEM_DEF(vote)
 	set waitfor = FALSE
 
 	to_world("World restarting due to vote...")
-	SSstatistics.set_field_details("end_error","restart vote")
 	sleep(50)
 	log_game("Rebooting due to restart vote")
 	world.Reboot()
@@ -180,7 +181,7 @@ SUBSYSTEM_DEF(vote)
 		return 0
 	if(automatic)
 		return (SSticker.mode.addantag_allowed & ADDANTAG_AUTO) && !antag_added
-	if(is_admin(creator))
+	if(isadmin(creator))
 		return SSticker.mode.addantag_allowed & (ADDANTAG_ADMIN|ADDANTAG_PLAYER)
 	else
 		return (SSticker.mode.addantag_allowed & ADDANTAG_PLAYER) && !antag_added

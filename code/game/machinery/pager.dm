@@ -3,7 +3,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "doorbell"
 	desc = "A button used to request the presence of anyone in the department."
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 2
 	var/acknowledged = 0
 	var/last_paged
@@ -16,18 +16,16 @@
 		var/area/A = get_area(src)
 		location = A.name
 
-/obj/machinery/pager/attack_ai(mob/user as mob)
+/obj/machinery/pager/attackby(obj/item/W, mob/user as mob)
 	return attack_hand(user)
 
-/obj/machinery/pager/attackby(obj/item/weapon/W, mob/user as mob)
-	return attack_hand(user)
-
-/obj/machinery/pager/attack_hand(mob/living/user)
-	if(..()) return 1
-	if(istype(user, /mob/living/carbon))
-		playsound(src, "button", 60)
+/obj/machinery/pager/interface_interact(mob/living/user)
+	if(!CanInteract(user, GLOB.default_state))
+		return FALSE
+	playsound(src, "button", 60)
 	flick("doorbellpressed",src)
 	activate(user)
+	return TRUE
 
 /obj/machinery/pager/proc/activate(mob/living/user)
 	if(!powered())
@@ -74,3 +72,6 @@
 
 /obj/machinery/pager/engineering
 	department = ENG
+
+/obj/machinery/pager/robotics
+	department = ROB

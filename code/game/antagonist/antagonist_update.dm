@@ -14,11 +14,12 @@
 	if(!preserve_appearance && (flags & ANTAG_SET_APPEARANCE))
 		spawn(3)
 			var/mob/living/carbon/human/H = player.current
-			if(istype(H)) H.change_appearance(APPEARANCE_ALL, H.loc, H, valid_species, state = GLOB.z_state)
+			if(istype(H))
+				H.change_appearance(APPEARANCE_COMMON, TRUE, state = GLOB.z_state)
 	return player.current
 
 /datum/antagonist/proc/update_access(var/mob/living/player)
-	for(var/obj/item/weapon/card/id/id in player.contents)
+	for(var/obj/item/card/id/id in player.contents)
 		player.set_id_info(id)
 
 /datum/antagonist/proc/clear_indicators(var/datum/mind/recipient)
@@ -32,7 +33,7 @@
 	if(!antag_indicator || !other.current || !recipient.current)
 		return
 	var/indicator = (faction_indicator && (other in faction_members)) ? faction_indicator : antag_indicator
-	var/image/I = image('icons/mob/hud.dmi', loc = other.current, icon_state = indicator, layer = LIGHTING_LAYER+0.1)
+	var/image/I = image('icons/mob/hud.dmi', loc = other.current, icon_state = indicator, layer = ABOVE_HUMAN_LAYER)
 	if(ishuman(other.current))
 		var/mob/living/carbon/human/H = other.current
 		I.pixel_x = H.species.antaghud_offset_x

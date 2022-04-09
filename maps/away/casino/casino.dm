@@ -1,7 +1,7 @@
 #include "casino_areas.dm"
 #include "../mining/mining_areas.dm"
 
-/obj/effect/overmap/ship/casino
+/obj/effect/overmap/visitable/ship/casino
 	name = "passenger liner"
 	desc = "Sensors detect an undamaged vessel without any signs of activity."
 	color = "#bd6100"
@@ -20,7 +20,7 @@
 		"Casino Cutter" = list("nav_casino_hangar"),
 	)
 
-/obj/effect/overmap/ship/casino/New(nloc, max_x, max_y)
+/obj/effect/overmap/visitable/ship/casino/New(nloc, max_x, max_y)
 	name = "IPV [pick("Fortuna","Gold Rush","Ebisu","Lucky Paw","Four Leaves")], \a [name]"
 	..()
 
@@ -29,8 +29,15 @@
 	id = "awaysite_casino"
 	description = "A casino ship!"
 	suffixes = list("casino/casino.dmm")
-	cost = 1
+	spawn_cost = 1
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/casino_cutter)
+	area_usage_test_exempted_root_areas = list(/area/casino)
+	apc_test_exempt_areas = list(
+		/area/casino/casino_hangar = NO_SCRUBBER,
+		/area/casino/casino_cutter = NO_SCRUBBER|NO_VENT,
+		/area/casino/casino_solar_control = NO_SCRUBBER,
+		/area/casino/casino_maintenance = NO_SCRUBBER|NO_VENT
+	)
 
 /obj/effect/shuttle_landmark/nav_casino/nav1
 	name = "Casino Ship Navpoint #1"
@@ -82,8 +89,8 @@
 	desc = "Spin the roulette to try your luck."
 	icon = 'maps/away/casino/casino_sprites.dmi'
 	icon_state = "roulette_r"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	var/busy=0
 
 /obj/structure/casino/roulette/attack_hand(mob/user as mob)
@@ -114,16 +121,16 @@
 	desc = "Roulette chart. Place your bets! "
 	icon = 'maps/away/casino/casino_sprites.dmi'
 	icon_state = "roulette_l"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 
 /obj/structure/casino/bj_table
 	name = "blackjack table"
 	desc = "This is a blackjack table. "
 	icon = 'maps/away/casino/casino_sprites.dmi'
 	icon_state = "bj_left"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 
 /obj/structure/casino/bj_table/bj_right
 	icon_state = "bj_right"
@@ -133,16 +140,16 @@
 	desc = "Turned off slot machine. "
 	icon = 'maps/away/casino/casino_sprites.dmi'
 	icon_state = "slot_machine"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 
 /obj/structure/casino/craps
 	name = "craps table"
 	desc = "Craps table: roll dice!"
 	icon = 'maps/away/casino/casino_sprites.dmi'
 	icon_state = "craps_top"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 
 /obj/structure/casino/craps/craps_down
 	icon_state = "craps_down"

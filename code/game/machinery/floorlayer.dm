@@ -3,7 +3,7 @@
 	name = "automatic floor layer"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
-	density = 1
+	density = TRUE
 	var/turf/old_turf
 	var/on = 0
 	var/obj/item/stack/tile/T
@@ -29,10 +29,10 @@
 
 	old_turf = new_turf
 
-/obj/machinery/floorlayer/attack_hand(mob/user as mob)
+/obj/machinery/floorlayer/physical_attack_hand(mob/user)
 	on=!on
 	user.visible_message("<span class='notice'>[user] has [!on?"de":""]activated \the [src].</span>", "<span class='notice'>You [!on?"de":""]activate \the [src].</span>")
-	return
+	return TRUE
 
 /obj/machinery/floorlayer/attackby(var/obj/item/W as obj, var/mob/user as mob)
 
@@ -73,9 +73,9 @@
 	var/collect = mode["collect"]
 	var/message = "<span class='notice'>\The [src] [!T?"don't ":""]has [!T?"":"[T.get_amount()] [T] "]tile\s, dismantle is [dismantle?"on":"off"], laying is [laying?"on":"off"], collect is [collect?"on":"off"].</span>"
 	to_chat(user, message)
+
 /obj/machinery/floorlayer/proc/reset()
-	on=0
-	return
+	on = 0
 
 /obj/machinery/floorlayer/proc/dismantleFloor(var/turf/new_turf)
 	if(istype(new_turf, /turf/simulated/floor))

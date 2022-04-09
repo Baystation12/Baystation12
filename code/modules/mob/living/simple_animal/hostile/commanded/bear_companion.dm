@@ -10,14 +10,12 @@
 	health = 75
 	maxHealth = 75
 
-	density = 1
+	density = TRUE
 
-	attacktext = "swatted"
-	melee_damage_lower = 10
-	melee_damage_upper = 10
-	can_escape = 1
+	natural_weapon = /obj/item/natural_weapon/claws
+	can_escape = TRUE
 
-	max_gas = list("phoron" = 2, "carbon_dioxide" = 5)
+	max_gas = list(GAS_PHORON = 2, GAS_CO2 = 5)
 
 	response_help = "pets"
 	response_harm = "hits"
@@ -27,7 +25,7 @@
 
 /mob/living/simple_animal/hostile/commanded/bear/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 	. = ..()
-	if(!.)
+	if(.)
 		src.emote("roars in rage!")
 
 /mob/living/simple_animal/hostile/commanded/bear/attack_hand(mob/living/carbon/human/M as mob)

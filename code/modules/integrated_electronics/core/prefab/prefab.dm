@@ -1,7 +1,6 @@
 /decl/prefab/proc/create(var/atom/location)
 	if(!location)
 		CRASH("Invalid location supplied: [log_info_line(location)]")
-		return FALSE
 	return TRUE
 
 /decl/prefab/ic_assembly
@@ -19,7 +18,7 @@
 			assembly.opened = FALSE
 			assembly.update_icon()
 			if(power_cell_type)
-				var/obj/item/weapon/cell/cell = new power_cell_type(assembly)
+				var/obj/item/cell/cell = new power_cell_type(assembly)
 				assembly.battery = cell
 
 			return assembly

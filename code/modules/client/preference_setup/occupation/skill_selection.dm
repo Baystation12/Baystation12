@@ -13,11 +13,18 @@
 		. = SKILL_MAX
 	. = max(min, .)
 
+/datum/preferences/proc/get_total_skill_value(datum/job/job, decl/hierarchy/skill/req_skill)
+	if(!(job in skills_allocated))
+		return get_min_skill(job, req_skill)
+	var/allocated = skills_allocated[job]
+	if(req_skill in allocated)
+		return allocated[req_skill] + get_min_skill(job, req_skill)
+
 /datum/preferences/proc/get_min_skill(datum/job/job, decl/hierarchy/skill/S)
 	if(job && job.min_skill)
 		. = job.min_skill[S.type]
 	if(!.)
-		var/datum/mil_branch/branch = mil_branches.get_branch(branches[job.title])
+		var/datum/mil_branch/branch = GLOB.mil_branches.get_branch(branches[job.title])
 		if(branch && branch.min_skill)
 			. = branch.min_skill[S.type]
 	if(!.)
@@ -204,7 +211,7 @@
 	return JOINTEXT(dat)
 
 /datum/category_item/player_setup_item/occupation/proc/open_skill_setup(mob/user, datum/job/job)
-	panel = new(user, "Skill Selection: [job.title]", "Skill Selection: [job.title]", 770, 850, src)
+	panel = new(user, "skill-selection", "Skill Selection: [job.title]", 770, 850, src)
 	panel.set_content(generate_skill_content(job))
 	panel.open()
 

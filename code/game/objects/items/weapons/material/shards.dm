@@ -1,23 +1,25 @@
 // Glass shards
 
-/obj/item/weapon/material/shard
+/obj/item/material/shard
 	name = "shard"
 	icon = 'icons/obj/shards.dmi'
 	desc = "Made of nothing. How does this even exist?" // set based on material, if this desc is visible it's a bug (shards default to being made of glass)
 	icon_state = "large"
 	randpixel = 8
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	w_class = ITEM_SIZE_SMALL
-	force_divisor = 0.12 // 6 with hardness 30 (glass)
-	thrown_force_divisor = 0.4 // 4 with weight 15 (glass)
+	max_force = 8
+	force_multiplier = 0.12 // 6 with hardness 30 (glass)
+	thrown_force_multiplier = 0.4 // 4 with weight 15 (glass)
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
 	default_material = MATERIAL_GLASS
 	unbreakable = 1 //It's already broken.
 	drops_debris = 0
+	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 
-/obj/item/weapon/material/shard/set_material(var/new_material)
+/obj/item/material/shard/set_material(var/new_material)
 	..(new_material)
 	if(!istype(material))
 		return
@@ -36,7 +38,7 @@
 	else
 		qdel(src)
 
-/obj/item/weapon/material/shard/on_update_icon()
+/obj/item/material/shard/on_update_icon()
 	if(material)
 		color = material.icon_colour
 		// 1-(1-x)^2, so that glass shards with 0.3 opacity end up somewhat visible at 0.51 opacity
@@ -45,16 +47,16 @@
 		color = "#ffffff"
 		alpha = 255
 
-/obj/item/weapon/material/shard/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/material/shard/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWelder(W) && material.shard_can_repair)
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		if(WT.remove_fuel(0, user))
 			material.place_sheet(loc)
 			qdel(src)
 			return
 	return ..()
 
-/obj/item/weapon/material/shard/Crossed(AM as mob|obj)
+/obj/item/material/shard/Crossed(AM as mob|obj)
 	..()
 	if(isliving(AM))
 		var/mob/M = AM
@@ -89,11 +91,22 @@
 				check -= picked
 			return
 
-// Preset types - left here for the code that uses them
-/obj/item/weapon/material/shard/phoron/New(loc)
-	..(loc, MATERIAL_PHORON_GLASS)
 
-/obj/item/weapon/material/shard/shrapnel
-	name = "shrapnel"
-	default_material = MATERIAL_STEEL
-	w_class = ITEM_SIZE_TINY	//it's real small
+/obj/item/material/shard/phoron/default_material = MATERIAL_PHORON_GLASS
+
+
+/obj/item/material/shard/shrapnel/name = "shrapnel"
+/obj/item/material/shard/shrapnel/w_class = ITEM_SIZE_TINY
+/obj/item/material/shard/shrapnel/item_flags = EMPTY_BITFIELD
+
+
+/obj/item/material/shard/shrapnel/steel/default_material = MATERIAL_STEEL
+
+
+/obj/item/material/shard/shrapnel/titanium/default_material = MATERIAL_TITANIUM
+
+
+/obj/item/material/shard/shrapnel/aluminium/default_material = MATERIAL_ALUMINIUM
+
+
+/obj/item/material/shard/shrapnel/copper/default_material = MATERIAL_COPPER

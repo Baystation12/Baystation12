@@ -10,6 +10,8 @@
 /obj/machinery/computer/telecomms/monitor
 	name = "Telecommunications Monitor"
 	icon_screen = "comm_monitor"
+	machine_name = "telecomms monitor console"
+	machine_desc = "Tracks the traffic of a telecommunications network, and maintains information about connected machines."
 
 	var/screen = 0				// the screen number:
 	var/list/machinelist = list()	// the machines located by the computer
@@ -58,7 +60,7 @@
 				dat += "</ol>"
 
 
-		var/datum/browser/popup = new(user, "comm_monitor", "Autholathe", 575, 400)
+		var/datum/browser/popup = new(user, "comm_monitor", "Telecommunications Monitor", 575, 400)
 		popup.set_content(JOINTEXT(dat))
 		popup.open()
 
@@ -122,40 +124,11 @@
 		updateUsrDialog()
 		return
 
-	attackby(var/obj/item/weapon/D as obj, var/mob/user as mob)
-		if(isScrewdriver(D))
-			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-			if(do_after(user, 20, src))
-				if (src.stat & BROKEN)
-					to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
-					var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-					new /obj/item/weapon/material/shard( src.loc )
-					var/obj/item/weapon/circuitboard/comm_monitor/M = new /obj/item/weapon/circuitboard/comm_monitor( A )
-					for (var/obj/C in src)
-						C.dropInto(loc)
-					A.circuit = M
-					A.state = 3
-					A.icon_state = "3"
-					A.anchored = 1
-					qdel(src)
-				else
-					to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
-					var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-					var/obj/item/weapon/circuitboard/comm_monitor/M = new /obj/item/weapon/circuitboard/comm_monitor( A )
-					for (var/obj/C in src)
-						C.dropInto(loc)
-					A.circuit = M
-					A.state = 4
-					A.icon_state = "4"
-					A.anchored = 1
-					qdel(src)
-		src.updateUsrDialog()
-		return
-
 /obj/machinery/computer/telecomms/monitor/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
-		emagged = 1
+		emagged = TRUE
+		req_access.Cut()
 		to_chat(user, "<span class='notice'>You you disable the security protocols</span>")
 		src.updateUsrDialog()
 		return 1

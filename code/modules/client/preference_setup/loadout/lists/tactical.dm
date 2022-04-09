@@ -5,12 +5,12 @@
 
 /datum/gear/tactical/armor_deco
 	display_name = "armor customization"
-	path = /obj/item/clothing/accessory/armor/tag
+	path = /obj/item/clothing/accessory/armor_tag
 	flags = GEAR_HAS_SUBTYPE_SELECTION
 
 /datum/gear/tactical/helm_covers
 	display_name = "helmet covers"
-	path = /obj/item/clothing/accessory/armor/helmcover
+	path = /obj/item/clothing/accessory/helmet_cover
 	flags = GEAR_HAS_SUBTYPE_SELECTION
 
 /datum/gear/tactical/kneepads
@@ -21,6 +21,15 @@
 	display_name = "holster selection"
 	path = /obj/item/clothing/accessory/storage/holster
 	cost = 3
+
+/datum/gear/tactical/sheath
+	display_name = "machete sheath"
+	path = /obj/item/clothing/accessory/storage/holster/machete
+
+/datum/gear/tactical/knife_sheath
+	display_name = "knife sheath selection"
+	description = "A leg strapped knife sheath."
+	path = /obj/item/clothing/accessory/storage/holster/knife
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/tactical/tacticool

@@ -2,7 +2,13 @@
 	name = "fiend's hood"
 	desc = "A dark hood with blood-red trim. Something about the fabric blocks more light than it should."
 	icon_state = "fiendhood"
-	armor = list(melee = 15, bullet = 10, laser = 20,energy = 25, bomb = 0, bio = 0, rad = 100)
+	armor = list(
+		melee = ARMOR_MELEE_KNIVES, 
+		bullet = ARMOR_BALLISTIC_MINOR, 
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_SMALL, 
+		rad = ARMOR_RAD_SHIELDED
+	)
 	species_restricted = list(SPECIES_HUMAN)
 	flags_inv = HIDEEARS | BLOCKHAIR
 
@@ -11,11 +17,17 @@
 	desc = "A charred black duster with red trim. In its fabric, you can see the faint outline of millions of eyes."
 	icon_state = "fiendcowl"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	armor = list(melee = 30, bullet = 25, laser = 50,energy = 55, bomb = 0, bio = 0, rad = 100)
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT, 
+		bullet = ARMOR_BALLISTIC_PISTOL, 
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_RESISTANT, 
+		rad = ARMOR_RAD_SHIELDED
+	)
 
 /obj/item/clothing/under/lawyer/fiendsuit
 	name = "black suit"
-	desc = "A snappy black suit with red trim. The undershirt’s stained with something, though..."
+	desc = "A snappy black suit with red trim. The undershirt's stained with something, though..."
 	icon_state = "fiendsuit"
 	species_restricted = list(SPECIES_HUMAN)
 
@@ -38,5 +50,5 @@
 
 /obj/item/clothing/under/devildress
 	name = "old dress"
-	desc = "An elegant - if tattered - black and red dress. There’s nothing visible through the holes in the fabric; nothing but darkness."
+	desc = "An elegant - if tattered - black and red dress. There's nothing visible through the holes in the fabric; nothing but darkness."
 	icon_state = "fienddress"

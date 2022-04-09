@@ -11,15 +11,12 @@
 
 	preview_icon = 'icons/mob/human_races/species/ipc/preview.dmi'
 
-	unarmed_types = list(/datum/unarmed_attack/punch)
+	unarmed_types = list(/datum/unarmed_attack/punch, /datum/unarmed_attack/kick, /datum/unarmed_attack/stomp)
 	rarity_value = 2
 	strength = STR_HIGH
 
 	min_age = 1
 	max_age = 90
-
-	brute_mod = 1 // Because of the introduction of FBPs, IPCs are rebalanced back to 1.
-	burn_mod = 1  //
 
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
@@ -36,19 +33,16 @@
 	passive_temp_gain = 5  // This should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_LACE
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 	appearance_flags = HAS_UNDERWEAR | HAS_EYE_COLOR //IPCs can wear undies too :(
 
 	blood_color = "#1f181f"
 	flesh_color = "#575757"
-	virus_immune = 1
 
 	has_organ = list(
 		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
-		BP_OPTICS = /obj/item/organ/internal/eyes/optics
+		BP_EYES = /obj/item/organ/internal/eyes/robot
 		)
-
-	vision_organ = BP_OPTICS
 
 	heat_discomfort_level = 373.15
 	heat_discomfort_strings = list(
@@ -89,6 +83,13 @@
 		TAG_FACTION = FACTION_POSITRONICS
 	)
 
+	exertion_effect_chance = 10
+	exertion_charge_scale = 1
+	exertion_emotes_synthetic = list(
+		/decl/emote/exertion/synthetic,
+		/decl/emote/exertion/synthetic/creak
+	)
+
 /datum/species/machine/handle_death(var/mob/living/carbon/human/H)
 	..()
 	if(istype(H.wear_mask,/obj/item/clothing/mask/monitor))
@@ -107,3 +108,6 @@
 /datum/species/machine/disfigure_msg(var/mob/living/carbon/human/H)
 	var/datum/gender/T = gender_datums[H.get_gender()]
 	return "<span class='danger'>[T.His] monitor is completely busted!</span>\n"
+
+/datum/species/machine/can_float(mob/living/carbon/human/H)
+	return FALSE

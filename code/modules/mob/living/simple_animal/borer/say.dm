@@ -17,8 +17,8 @@
 			to_chat(src, "<span class='warning'>You cannot speak in IC (muted).</span>")
 			return
 
-	if (copytext(message, 1, 2) == "*")
-		return emote(copytext(message, 2))
+	if (copytext_char(message, 1, 2) == get_prefix_key(/decl/prefix/custom_emote))
+		return emote(copytext_char(message, 2))
 
 	var/datum/language/L = parse_language(message)
 	if(L && L.flags & HIVEMIND)

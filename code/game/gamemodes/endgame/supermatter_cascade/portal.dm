@@ -43,9 +43,6 @@
 		else
 			do_teleport(L, pick(endgame_safespawns)) //dead-on precision
 
-	else if (istype(A, /obj/mecha/))
-		do_teleport(A, pick(endgame_safespawns)) //dead-on precision
-
 	else if (isturf(A))
 		var/turf/T = A
 		var/dist = get_dist(T, src)
@@ -67,8 +64,7 @@
 				if (101 == AM.invisibility)
 					continue
 
-				spawn (0)
-					AM.singularity_pull(src, src.current_size)
+				addtimer(CALLBACK(AM, /atom/proc/singularity_pull, src, current_size), 0)
 
 
 /mob
@@ -77,7 +73,7 @@
 
 /mob/proc/see_rift(var/obj/singularity/narsie/large/exit/R)
 	var/turf/T_mob = get_turf(src)
-	if((R.z == T_mob.z) && (get_dist(R,T_mob) <= (R.consume_range+10)) && !(R in view(T_mob)))
+	if((R.z == get_z(T_mob)) && (get_dist(R,T_mob) <= (R.consume_range+10)) && !(R in view(T_mob)))
 		if(!riftimage)
 			riftimage = image('icons/obj/rift.dmi',T_mob,"rift",LIGHTING_LAYER+2,1)
 			riftimage.mouse_opacity = 0
@@ -87,8 +83,7 @@
 		riftimage.pixel_x = new_x
 		riftimage.pixel_y = new_y
 		riftimage.loc = T_mob
-
-		src << riftimage
+		image_to(src, riftimage)
 
 	else
 		QDEL_NULL(riftimage)

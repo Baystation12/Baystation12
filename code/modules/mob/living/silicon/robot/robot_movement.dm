@@ -10,19 +10,22 @@
 
 /mob/living/silicon/robot/Allow_Spacemove()
 	if(module)
-		for(var/obj/item/weapon/tank/jetpack/J in module.modules)
+		for(var/obj/item/tank/jetpack/J in module.equipment)
 			if(J && J.allow_thrust(0.01))
 				return 1
 	. = ..()
 
 
- //No longer needed, but I'll leave it here incase we plan to re-use it.
 /mob/living/silicon/robot/movement_delay()
-	var/tally = ..() //Incase I need to add stuff other than "speed" later
+	var/tally = ..()
 
-	tally += speed
+	// Subtract 1 to match Human base movement_delay of -1
+	tally -= 1
+
+	if (vtec)
+		tally -= 1
 
 	if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
-		tally-=3
+		tally -= 3
 
-	return tally+config.robot_delay
+	return tally

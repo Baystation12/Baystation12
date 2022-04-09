@@ -2,10 +2,12 @@
 var/list/z_levels = list()// Each bit re... haha just kidding this is a list of bools now
 
 // If the height is more than 1, we mark all contained levels as connected.
-/obj/effect/landmark/map_data/New(turf/loc)
+/obj/effect/landmark/map_data/New(turf/loc, _height)
 	..()
 	if(!istype(loc)) // Using loc.z is safer when using the maploader and New.
 		return
+	if(_height)
+		height = _height
 	for(var/i = (loc.z - height + 1) to (loc.z-1))
 		if (z_levels.len <i)
 			z_levels.len = i

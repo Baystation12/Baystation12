@@ -18,4 +18,15 @@
 
 /datum/gear/head/skrell_helmet
 	allowed_roles = ARMORED_ROLES
-	
+
+/datum/gear/uniform/harness
+	allowed_branches = null
+
+// Patches
+/datum/gear/accessory/cultex_patch
+	display_name = "Cultural Exchange patch"
+	path = /obj/item/clothing/accessory/solgov/cultex_patch
+	description = "A shoulder patch representing the Expeditionary Corps."
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+	whitelisted = list(SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_YEOSA, SPECIES_IPC)
+	sort_category = "Xenowear"

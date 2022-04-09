@@ -23,6 +23,7 @@
 /area/template_noop)
 "af" = (
 /obj/structure/anomaly_container,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "ag" = (
@@ -39,6 +40,7 @@
 /area/template_noop)
 "ai" = (
 /obj/machinery/floodlight,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aj" = (
@@ -68,6 +70,7 @@
 /area/template_noop)
 "ap" = (
 /obj/structure/closet/crate,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aq" = (
@@ -76,20 +79,20 @@
 /area/template_noop)
 "ar" = (
 /obj/structure/closet/crate/trashcart,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "as" = (
 /obj/structure/closet/crate/freezer/rations,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "at" = (
-/obj/structure/bed/nest,
 /obj/random/loot,
 /mob/living/simple_animal/hostile/voxslug,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/template_noop)
 "au" = (
-/obj/structure/alien/node,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/template_noop)
 "av" = (
@@ -114,7 +117,6 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/virusdish/random,
 /turf/simulated/floor/tiled/white,
 /area/template_noop)
 "az" = (
@@ -136,9 +138,6 @@
 /obj/random/closet,
 /turf/simulated/floor/carpet/blue2,
 /area/template_noop)
-"aD" = (
-/turf/simulated/floor/tiled/steel_ridged,
-/area/template_noop)
 "aE" = (
 /obj/structure/bookcase/manuals/xenoarchaeology,
 /turf/simulated/floor/carpet/blue2,
@@ -159,7 +158,7 @@
 /obj/machinery/door/airlock/vault{
 	name = "Door"
 	},
-/obj/item/weapon/beartrap{
+/obj/item/beartrap{
 	deployed = 1;
 	icon_state = "beartrap1"
 	},
@@ -175,6 +174,7 @@
 	name = "plastic table frame"
 	},
 /obj/machinery/reagentgrinder,
+/obj/item/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/carpet/blue2,
 /area/template_noop)
 "aL" = (
@@ -186,7 +186,7 @@
 /area/template_noop)
 "aM" = (
 /obj/effect/decal/cleanable/vomit,
-/obj/item/weapon/reagent_containers/glass/paint/random,
+/obj/item/reagent_containers/glass/paint/random,
 /obj/structure/closet/medical_wall/filled{
 	pixel_y = 32
 	},
@@ -204,7 +204,7 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/template_noop)
 "aP" = (
-/obj/machinery/door/airlock/external/bolted,
+/obj/machinery/door/airlock/external,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/template_noop)
 "aQ" = (
@@ -235,13 +235,13 @@
 /turf/simulated/floor/carpet/blue2,
 /area/template_noop)
 "aV" = (
-/obj/item/weapon/material/harpoon,
+/obj/item/material/harpoon,
 /obj/effect/landmark/corpse/scientist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/template_noop)
 "aW" = (
-/obj/item/weapon/beartrap,
+/obj/item/beartrap,
 /obj/structure/sign/warning/science/anomalous_materials{
 	pixel_x = 32
 	},
@@ -253,7 +253,7 @@
 /area/template_noop)
 "aY" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/purple,
+/obj/item/bedsheet/purple,
 /turf/simulated/floor/carpet/blue2,
 /area/template_noop)
 "aZ" = (
@@ -275,7 +275,7 @@
 /area/template_noop)
 "bc" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/mime,
+/obj/item/bedsheet/mime,
 /turf/simulated/floor/carpet/blue2,
 /area/template_noop)
 "bd" = (
@@ -301,6 +301,10 @@
 /obj/effect/decal/cleanable/blood/drip,
 /turf/simulated/floor/tiled/white,
 /area/template_noop)
+"za" = (
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
 
 (1,1,1) = {"
 aa
@@ -313,7 +317,7 @@ aa
 aa
 aa
 aa
-aa
+za
 aa
 aa
 "}
@@ -343,7 +347,7 @@ aV
 aL
 ab
 aB
-aD
+au
 ab
 ao
 "}
@@ -357,7 +361,7 @@ aq
 aJ
 ac
 aP
-aD
+au
 aW
 ab
 aa
@@ -426,7 +430,7 @@ aa
 aa
 ab
 at
-aD
+au
 aT
 bd
 av
@@ -470,7 +474,7 @@ aa
 (12,1,1) = {"
 aa
 ab
-aa
+za
 af
 ab
 ai
@@ -485,15 +489,15 @@ aa
 (13,1,1) = {"
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+za
+za
+za
+za
+za
+za
+za
+za
+za
 aa
 aa
 "}

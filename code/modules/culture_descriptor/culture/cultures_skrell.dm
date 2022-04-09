@@ -1,17 +1,21 @@
 /decl/cultural_info/culture/skrell
 	name = CULTURE_SKRELL_QERR
-	language = LANGUAGE_SKRELLIAN
-	name_language = LANGUAGE_SKRELLIAN
 	description = "Considered as the leaders of Skrellkind, the Qerr-Katish are the face and soul of skrellian society. \
 		Managers, diplomats, lawyers, they are notably the only caste allowed to fulfil the role of Qerr-Skria,\
 		and the only one forbidden from being appointed to the Xaq Moglar. As the representatives of the Skrell, \
-		the Qerr-Katish are highly social beings, sophisticated, cultured and very organised. As defenders of their society’s \
+		the Qerr-Katish are highly social beings, sophisticated, cultured and very organised. As defenders of their society's \
 		values, they tend to be rather conservative, although progressive ideas regularly grow within the caste, as a stagnant \
 		society is a dying society. Considering their role, they are generally the richest people of a City-State, although their \
 		money is generally invested in various endeavours both in and out of skrellian society. Qerr-Katish families tend to be rather \
 		small, being generally limited to one, sometimes two bondings. They often dress in clothing made from softer, shinier materials \
 		that are long and flowing and have often been compared to the clothing of ancient Chinese nobles by human scholars. Their skin is generally bright green."
 	economic_power = 1.4
+	language = LANGUAGE_SKRELLIAN
+	secondary_langs = list(
+		LANGUAGE_SIGN,
+		LANGUAGE_HUMAN_EURO,
+		LANGUAGE_SPACER
+	)
 
 /decl/cultural_info/culture/skrell/caste_malish
 	name = CULTURE_SKRELL_MALISH
@@ -43,9 +47,9 @@
 	name = CULTURE_SKRELL_TALUM
 	description = " Considering the Skrells' emphasis on functionality and practicality, one would be mistaken to think they do not consider arts much. \
 		This very important sector of skrellian society is handled by the Talum-Katish, artists, aesthetes, entertainers, chefs, actors, writers, singers. \
-		They somewhat compete with the Qerr-Katish’s role as representatives of skrellkind, although in a different way. As such, they are often mistaken for \
+		They somewhat compete with the Qerr-Katish's role as representatives of skrellkind, although in a different way. As such, they are often mistaken for \
 		Qerr-Katish themselves, which might explain why this caste is generally seen as rarer and less celebrated than the others, while they are in fact \
-		frequently on the public scene. The Talum-Katish are the most individualistic members of skrellkind, although once again, they share the Qerr-Katish’s \
+		frequently on the public scene. The Talum-Katish are the most individualistic members of skrellkind, although once again, they share the Qerr-Katish's \
 		taste for a busy social life. Highly cultured, they are the free-thinkers of skrellian society, often at odds with more traditionalist and conservative castes. \
 		A heterogeneous lot, it is hard to estimate their global financial capacities, they however tend to reproduce a lot, multiplying their encounters \
 		with various partners, which might put a strain on their savings. Their clothing is often an odd mix of Qerr-Katish and Kanin-Katish, as they often wear \

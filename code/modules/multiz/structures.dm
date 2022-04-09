@@ -7,9 +7,10 @@
 	desc = "A ladder. You can climb it up and down."
 	icon_state = "ladder01"
 	icon = 'icons/obj/structures.dmi'
-	density = 0
+	density = FALSE
 	opacity = 0
-	anchored = 1
+	anchored = TRUE
+	obj_flags = OBJ_FLAG_NOFALL
 
 	var/allowed_directions = DOWN
 	var/obj/structure/ladder/target_up
@@ -31,6 +32,10 @@
 				return
 	update_icon()
 
+
+	set_extension(src, /datum/extension/turf_hand)
+
+
 /obj/structure/ladder/Destroy()
 	if(target_down)
 		target_down.target_up = null
@@ -42,6 +47,33 @@
 
 /obj/structure/ladder/attackby(obj/item/I, mob/user)
 	climb(user, I)
+
+/turf/hitby(atom/movable/AM)
+	if(isobj(AM))
+		var/obj/structure/ladder/L = locate() in contents
+		if(L)
+			L.hitby(AM)
+			return
+	..()
+
+/obj/structure/ladder/hitby(obj/item/I)
+	if (istype(src, /obj/structure/ladder/up))
+		return
+	var/area/room = get_area(src)
+	if(!room.has_gravity())
+		return
+	var/atom/blocker
+	var/turf/landing = get_turf(target_down)
+	for(var/atom/A in landing)
+		if(!A.CanPass(I, I.loc, 1.5, 0))
+			blocker = A
+			break
+	if(blocker)
+		visible_message(SPAN_WARNING("\The [I] fails to go down \the [src], blocked by the [blocker]!"))
+	else
+		visible_message(SPAN_WARNING("\The [I] goes down \the [src]!"))
+		I.forceMove(landing)
+		landing.visible_message(SPAN_WARNING("\The [I] falls from the top of \the [target_down]!"))
 
 /obj/structure/ladder/attack_hand(var/mob/M)
 	climb(M)
@@ -176,10 +208,9 @@
 	name = "stairs"
 	desc = "Stairs leading to another deck.  Not too useful if the gravity goes out."
 	icon = 'icons/obj/stairs.dmi'
-	density = 0
+	density = FALSE
 	opacity = 0
-	anchored = 1
-	plane = ABOVE_TURF_PLANE
+	anchored = TRUE
 	layer = RUNE_LAYER
 
 /obj/structure/stairs/Initialize()
@@ -198,17 +229,25 @@
 	return ..()
 
 /obj/structure/stairs/Bumped(atom/movable/A)
-	var/turf/target = get_step(GetAbove(A), dir)
-	var/turf/source = A.loc
 	var/turf/above = GetAbove(A)
-	if(above.CanZPass(source, UP) && target.Enter(A, src))
-		A.forceMove(target)
-		if(isliving(A))
-			var/mob/living/L = A
-			if(L.pulling)
-				L.pulling.forceMove(target)
+	if (above)
+		var/turf/target = get_step(above, dir)
+		var/turf/source = A.loc
+		if(above.CanZPass(source, UP) && target.Enter(A, src))
+			A.forceMove(target)
+			if(isliving(A))
+				var/mob/living/L = A
+				if(L.pulling)
+					L.pulling.forceMove(target)
+			if(ishuman(A))
+				var/mob/living/carbon/human/H = A
+				if(H.has_footsteps())
+					playsound(source, 'sound/effects/stairs_step.ogg', 50)
+					playsound(target, 'sound/effects/stairs_step.ogg', 50)
+		else
+			to_chat(A, "<span class='warning'>Something blocks the path.</span>")
 	else
-		to_chat(A, "<span class='warning'>Something blocks the path.</span>")
+		to_chat(A, SPAN_NOTICE("There is nothing of interest in this direction."))
 
 /obj/structure/stairs/proc/upperStep(var/turf/T)
 	return (T == loc)
@@ -236,3 +275,10 @@
 /obj/structure/stairs/west
 	dir = WEST
 	bound_width = 64
+
+/obj/structure/stairs/short
+	bound_height = 32
+	bound_width = 32
+
+/obj/structure/stairs/short/west
+	dir = WEST

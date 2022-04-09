@@ -12,6 +12,7 @@
 	limb_blend = ICON_MULTIPLY
 	tail_blend = ICON_MULTIPLY
 	hidden_from_codex = FALSE
+	skin_material =   MATERIAL_SKIN_LIZARD
 
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/tail, /datum/unarmed_attack/claws, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite/sharp)
 	primitive_form = "Stok"
@@ -19,6 +20,7 @@
 	darksight_tint = DARKTINT_MODERATE
 	gluttonous = GLUT_TINY
 	strength = STR_HIGH
+	breath_pressure = 18
 	slowdown = 0.5
 	brute_mod = 0.8
 	flash_mod = 1.2
@@ -46,7 +48,7 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_ROBOTIC_INTERNAL_ORGANS
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#34af10"
@@ -58,7 +60,7 @@
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/claw
 
-	heat_discomfort_level = 295
+	heat_discomfort_level = 320
 	heat_discomfort_strings = list(
 		"You feel soothingly warm.",
 		"You feel the heat sink into your bones.",
@@ -81,9 +83,15 @@
 		/mob/living/carbon/human/proc/diona_heal_toggle
 		)
 
-	prone_overlay_offset = list(-4, -4)
-
-	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/unathi)
+	has_organ = list(
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
+		BP_LUNGS =    /obj/item/organ/internal/lungs,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_EYES =   /obj/item/organ/internal/eyes/unathi,
+		BP_BRAIN =  /obj/item/organ/internal/brain/unathi
+		)
 
 	descriptors = list(
 		/datum/mob_descriptor/height = 2,
@@ -92,25 +100,56 @@
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(
-			CULTURE_UNATHI
+			CULTURE_UNATHI_POLAR,
+			CULTURE_UNATHI_DIAMOND_PEAKS,
+			CULTURE_UNATHI_DESERT,
+			CULTURE_UNATHI_SAVANNAH,
+			CULTURE_UNATHI_SALT_SWAMP,
+			CULTURE_UNATHI_SPACE,
 		),
 		TAG_HOMEWORLD = list(
-			HOME_SYSTEM_MOGHES
+			HOME_SYSTEM_MOGHES,
+			HOME_SYSTEM_OUERE,
+			HOME_SYSTEM_OFFWORLD
 		),
 		TAG_FACTION = list(
-			FACTION_UNATHI_POLAR,
-			FACTION_UNATHI_DESERT,
-			FACTION_UNATHI_SAVANNAH,
-			FACTION_UNATHI_DIAMOND_PEAK,
-			FACTION_UNATHI_SALT_SWAMP
+			FACTION_UNATHI_HEGEMONY,
+			FACTION_UNATHI_SSEN_UUMA,
+			FACTION_UNATHI_BAASK,
+			FACTION_UNATHI_GRESIS,
+			FACTION_UNATHI_INDEPENDENT
 		),
 		TAG_RELIGION =  list(
 			RELIGION_UNATHI_STRATAGEM,
 			RELIGION_UNATHI_PRECURSOR,
 			RELIGION_UNATHI_VINE,
 			RELIGION_UNATHI_LIGHTS,
-			RELIGION_OTHER
+			RELIGION_UNATHI_MARKESHELI,
+			RELIGION_UNATHI_ANCESTOR,
+			RELIGION_OTHER,
+			RELIGION_UNSTATED
 		)
+	)
+	default_cultural_info = list(
+		TAG_CULTURE   = CULTURE_UNATHI_POLAR,
+		TAG_HOMEWORLD = HOME_SYSTEM_MOGHES,
+		TAG_FACTION   = FACTION_UNATHI_INDEPENDENT,
+		TAG_RELIGION  = RELIGION_OTHER
+	)
+	pain_emotes_with_pain_level = list(
+			list(/decl/emote/audible/wheeze, /decl/emote/audible/roar, /decl/emote/audible/bellow, /decl/emote/audible/howl) = 80,
+			list(/decl/emote/audible/grunt, /decl/emote/audible/groan, /decl/emote/audible/wheeze, /decl/emote/audible/hiss) = 50,
+			list(/decl/emote/audible/grunt, /decl/emote/audible/groan, /decl/emote/audible/hiss) = 20,
+		)
+
+	exertion_effect_chance = 10
+	exertion_hydration_scale = 1
+	exertion_reagent_scale = 5
+	exertion_reagent_path = /datum/reagent/lactate
+	exertion_emotes_biological = list(
+		/decl/emote/exertion/biological,
+		/decl/emote/exertion/biological/breath,
+		/decl/emote/exertion/biological/pant
 	)
 
 /datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)

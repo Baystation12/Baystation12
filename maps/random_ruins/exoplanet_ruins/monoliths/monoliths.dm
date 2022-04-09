@@ -3,49 +3,56 @@
 	id = "planetsite_monoliths"
 	description = "Bunch of monoliths surrounding an artifact."
 	suffixes = list("monoliths/monoliths.dmm")
-	cost = 1
+	spawn_cost = 1
 	template_flags = TEMPLATE_FLAG_NO_RUINS
+	ruin_tags = RUIN_ALIEN
 
 /obj/structure/monolith
 	name = "monolith"
-	desc = "An obviously artifical structure of unknown origin. The symbols '<font face='Shage'>DWNbTX</font>' are engraved on the base."
+	desc = "An obviously artifical structure of unknown origin. The symbols '𒁀𒀝 𒋢𒌦 𒉡 𒋺𒂊' are engraved on the base." //for the sake of the reader, "BAKU SUUN NU TAKE"
 	icon = 'icons/obj/monolith.dmi'
 	icon_state = "jaggy1"
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	var/active = 0
 
 /obj/structure/monolith/Initialize()
 	. = ..()
 	icon_state = "jaggy[rand(1,4)]"
-	var/material/A = SSmaterials.get_material_by_name(MATERIAL_ALIUMIUM)
+	var/material/A = SSmaterials.get_material_by_name(MATERIAL_ALIENALLOY)
 	if(A)
 		color = A.icon_colour
 	if(GLOB.using_map.use_overmap)
-		var/obj/effect/overmap/sector/exoplanet/E = map_sectors["[z]"]
+		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 		if(istype(E))
 			desc += "\nThere are images on it: [E.get_engravings()]"
+	update_icon()
 
 /obj/structure/monolith/on_update_icon()
 	overlays.Cut()
 	if(active)
 		var/image/I = image(icon,"[icon_state]decor")
-		I.appearance_flags = RESET_COLOR
+		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 		I.color = get_random_colour(0, 150, 255)
 		I.layer = ABOVE_LIGHTING_LAYER
 		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		overlays += I
 		set_light(0.3, 0.1, 2, l_color = I.color)
 
+	var/turf/unsimulated/floor/exoplanet/T = get_turf(src)
+	if(istype(T))
+		var/image/I = overlay_image(icon, "dugin", T.dirt_color, RESET_COLOR)
+		overlays += I
+
 /obj/structure/monolith/attack_hand(mob/user)
 	visible_message("[user] touches \the [src].")
 	if(GLOB.using_map.use_overmap && istype(user,/mob/living/carbon/human))
-		var/obj/effect/overmap/sector/exoplanet/E = map_sectors["[z]"]
+		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 		if(istype(E))
 			var/mob/living/carbon/human/H = user
 			if(!H.isSynthetic())
+				playsound(src, 'sound/effects/zapbeep.ogg', 100, 1)
 				active = 1
 				update_icon()
 				if(prob(70))

@@ -25,7 +25,6 @@ SUBSYSTEM_DEF(supply)
 		"time" = "Base station supply",
 		"manifest" = "From exported manifests",
 		"crate" = "From exported crates",
-		"virology" = "From uploaded antibody data",
 		"gep" = "From uploaded good explorer points",
 		"total" = "Total" // If you're adding additional point sources, add it here in a new line. Don't forget to put a comma after the old last line.
 	)
@@ -50,8 +49,12 @@ SUBSYSTEM_DEF(supply)
 /datum/controller/subsystem/supply/fire()
 	add_points_from_source(points_per_process, "time")
 
-/datum/controller/subsystem/supply/stat_entry()
+
+/datum/controller/subsystem/supply/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
 	..("Points: [points]")
+
 
 //Supply-related helper procs.
 
@@ -64,11 +67,11 @@ SUBSYSTEM_DEF(supply)
 /datum/controller/subsystem/supply/proc/forbidden_atoms_check(atom/A)
 	if(istype(A,/mob/living))
 		return 1
-	if(istype(A,/obj/item/weapon/disk/nuclear))
+	if(istype(A,/obj/item/disk/nuclear))
 		return 1
 	if(istype(A,/obj/machinery/nuclearbomb))
 		return 1
-	if(istype(A,/obj/item/device/radio/beacon))
+	if(istype(A,/obj/machinery/tele_beacon))
 		return 1
 
 	for(var/i=1, i<=A.contents.len, i++)
@@ -92,8 +95,8 @@ SUBSYSTEM_DEF(supply)
 				for(var/atom in CR)
 					// Sell manifests
 					var/atom/A = atom
-					if(find_slip && istype(A,/obj/item/weapon/paper/manifest))
-						var/obj/item/weapon/paper/manifest/slip = A
+					if(find_slip && istype(A,/obj/item/paper/manifest))
+						var/obj/item/paper/manifest/slip = A
 						if(!slip.is_copy && slip.stamped && slip.stamped.len) //Any stamp works.
 							add_points_from_source(points_per_slip, "manifest")
 							find_slip = 0
@@ -109,19 +112,17 @@ SUBSYSTEM_DEF(supply)
 						continue
 
 					// Must sell ore detector disks in crates
-					if(istype(A, /obj/item/weapon/disk/survey))
-						var/obj/item/weapon/disk/survey/D = A
+					if(istype(A, /obj/item/disk/survey))
+						var/obj/item/disk/survey/D = A
 						add_points_from_source(round(D.Value() * 0.005), "gep")
+
 			qdel(AM)
 
 	if(material_count.len)
 		for(var/material_type in material_count)
 			add_points_from_source(material_count[material_type], material_type)
 
-//Buyin
-/datum/controller/subsystem/supply/proc/buy()
-	if(!shoppinglist.len)
-		return
+/datum/controller/subsystem/supply/proc/get_clear_turfs()
 	var/list/clear_turfs = list()
 
 	for(var/area/subarea in shuttle.shuttle_area)
@@ -136,6 +137,16 @@ SUBSYSTEM_DEF(supply)
 				break
 			if(!occupied)
 				clear_turfs += T
+
+	return clear_turfs
+
+//Buyin
+/datum/controller/subsystem/supply/proc/buy()
+	if(!shoppinglist.len)
+		return
+
+	var/list/clear_turfs = get_clear_turfs()
+
 	for(var/S in shoppinglist)
 		if(!clear_turfs.len)
 			break
@@ -150,16 +161,16 @@ SUBSYSTEM_DEF(supply)
 		A.SetName("[SP.containername][SO.comment ? " ([SO.comment])":"" ]")
 		//supply manifest generation begin
 
-		var/obj/item/weapon/paper/manifest/slip
+		var/obj/item/paper/manifest/slip
 		if(!SP.contraband)
 			var/info = list()
-			info +="<h3>[command_name()] Shipping Manifest</h3><hr><br>"
+			info +="<h3>[GLOB.using_map.boss_name] Shipping Manifest</h3><hr><br>"
 			info +="Order #[SO.ordernum]<br>"
 			info +="Destination: [GLOB.using_map.station_name]<br>"
 			info +="[shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"
 			info +="CONTENTS:<br><ul>"
 
-			slip = new /obj/item/weapon/paper/manifest(A, JOINTEXT(info))
+			slip = new /obj/item/paper/manifest(A, JOINTEXT(info))
 			slip.is_copy = 0
 
 		//spawn the stuff, finish generating the manifest while you're at it
@@ -175,6 +186,18 @@ SUBSYSTEM_DEF(supply)
 			for(var/atom/content in spawned)
 				slip.info += "<li>[content.name]</li>" //add the item to the manifest
 			slip.info += "</ul><br>CHECK CONTENTS AND STAMP BELOW THE LINE TO CONFIRM RECEIPT OF GOODS<hr>"
+
+// Adds any given item to the supply shuttle
+/datum/controller/subsystem/supply/proc/addAtom(var/atom/movable/A)
+	var/list/clear_turfs = get_clear_turfs()
+	if(!clear_turfs.len)
+		return FALSE
+
+	var/turf/pickedloc = pick(clear_turfs)
+
+	A.forceMove(pickedloc)
+
+	return TRUE
 
 /datum/supply_order
 	var/ordernum

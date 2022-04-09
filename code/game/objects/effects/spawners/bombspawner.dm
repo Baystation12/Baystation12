@@ -30,7 +30,7 @@
 		// radio
 		if (0)
 			var/obj/item/assembly/r_i_ptank/R = new /obj/item/assembly/r_i_ptank(src.loc)
-			var/obj/item/weapon/tank/phoron/p3 = new /obj/item/weapon/tank/phoron(R)
+			var/obj/item/tank/phoron/p3 = new /obj/item/tank/phoron(R)
 			var/obj/item/device/radio/signaler/p1 = new /obj/item/device/radio/signaler(R)
 			var/obj/item/device/igniter/p2 = new /obj/item/device/igniter(R)
 			R.part1 = p1
@@ -47,7 +47,7 @@
 		// proximity
 		if (1)
 			var/obj/item/assembly/m_i_ptank/R = new /obj/item/assembly/m_i_ptank(src.loc)
-			var/obj/item/weapon/tank/phoron/p3 = new /obj/item/weapon/tank/phoron(R)
+			var/obj/item/tank/phoron/p3 = new /obj/item/tank/phoron(R)
 			var/obj/item/device/prox_sensor/p1 = new /obj/item/device/prox_sensor(R)
 			var/obj/item/device/igniter/p2 = new /obj/item/device/igniter(R)
 			R.part1 = p1
@@ -69,7 +69,7 @@
 		// timer
 		if (2)
 			var/obj/item/assembly/t_i_ptank/R = new /obj/item/assembly/t_i_ptank(src.loc)
-			var/obj/item/weapon/tank/phoron/p3 = new /obj/item/weapon/tank/phoron(R)
+			var/obj/item/tank/phoron/p3 = new /obj/item/tank/phoron(R)
 			var/obj/item/device/timer/p1 = new /obj/item/device/timer(R)
 			var/obj/item/device/igniter/p2 = new /obj/item/device/igniter(R)
 			R.part1 = p1
@@ -85,8 +85,8 @@
 		//bombvest
 		if(3)
 			var/obj/item/clothing/suit/armor/a_i_a_ptank/R = new /obj/item/clothing/suit/armor/a_i_a_ptank(src.loc)
-			var/obj/item/weapon/tank/phoron/p4 = new /obj/item/weapon/tank/phoron(R)
-			var/obj/item/device/healthanalyzer/p1 = new /obj/item/device/healthanalyzer(R)
+			var/obj/item/tank/phoron/p4 = new /obj/item/tank/phoron(R)
+			var/obj/item/device/scanner/health/p1 = new /obj/item/device/scanner/health(R)
 			var/obj/item/device/igniter/p2 = new /obj/item/device/igniter(R)
 			var/obj/item/clothing/suit/armor/vest/p3 = new /obj/item/clothing/suit/armor/vest(R)
 			R.part1 = p1
@@ -137,6 +137,12 @@
 	var/oxygen_amt = 18
 	var/carbon_amt = 0
 
+/obj/effect/spawner/newbomb/traitor
+	name = "TTV bomb - traitor"
+	assembly_type = /obj/item/device/assembly/signaler
+	phoron_amt = 14
+	oxygen_amt = 21
+
 /obj/effect/spawner/newbomb/timer
 	name = "TTV bomb - timer"
 	assembly_type = /obj/item/device/assembly/timer
@@ -144,8 +150,8 @@
 /obj/effect/spawner/newbomb/timer/syndicate
 	name = "TTV bomb - merc"
 	//High yield bombs. Yes, it is possible to make these with toxins
-	phoron_amt = 18.5
-	oxygen_amt = 28.5
+	phoron_amt = 16.5
+	oxygen_amt = 23.5
 
 /obj/effect/spawner/newbomb/proximity
 	name = "TTV bomb - proximity"
@@ -160,8 +166,8 @@
 /obj/effect/spawner/newbomb/Initialize()
 	..()
 	var/obj/item/device/transfer_valve/V = new(src.loc)
-	var/obj/item/weapon/tank/phoron/PT = new(V)
-	var/obj/item/weapon/tank/oxygen/OT = new(V)
+	var/obj/item/tank/phoron/PT = new(V)
+	var/obj/item/tank/oxygen/OT = new(V)
 
 	V.tank_one = PT
 	V.tank_two = OT
@@ -169,15 +175,15 @@
 	PT.master = V
 	OT.master = V
 
-	PT.valve_welded = 1
-	PT.air_contents.gas["phoron"] = phoron_amt
-	PT.air_contents.gas["carbon_dioxide"] = carbon_amt
+	SET_FLAGS(PT.tank_flags, TANK_FLAG_WELDED)
+	PT.air_contents.gas[GAS_PHORON] = phoron_amt
+	PT.air_contents.gas[GAS_CO2] = carbon_amt
 	PT.air_contents.total_moles = phoron_amt + carbon_amt
 	PT.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE+1
 	PT.air_contents.update_values()
 
-	OT.valve_welded = 1
-	OT.air_contents.gas["oxygen"] = oxygen_amt
+	SET_FLAGS(OT.tank_flags, TANK_FLAG_WELDED)
+	OT.air_contents.gas[GAS_OXYGEN] = oxygen_amt
 	OT.air_contents.total_moles = oxygen_amt
 	OT.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE+1
 	OT.air_contents.update_values()
@@ -212,7 +218,7 @@
 /obj/effect/spawner/onetankbomb/New(newloc) //just needs an assembly.
 	..(newloc)
 
-	var/type = pick(/obj/item/weapon/tank/phoron/onetankbomb, /obj/item/weapon/tank/oxygen/onetankbomb)
+	var/type = pick(/obj/item/tank/phoron/onetankbomb, /obj/item/tank/oxygen/onetankbomb)
 	new type(src.loc)
 
 	qdel(src)

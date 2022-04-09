@@ -3,7 +3,7 @@
 	name = "Redaction"
 	associated_intent = I_HELP
 	armour_types = list("bio", "rad")
-	
+
 /decl/psionic_power/redaction
 	faculty = PSI_REDACTION
 	admin_log = FALSE
@@ -42,8 +42,8 @@
 	cost =            7
 	cooldown =        50
 	use_melee =       TRUE
-	min_rank =        PSI_RANK_MASTER
-	use_description = "Target a patient while on help intent at melee range to mend internal bleeding and broken bones."
+	min_rank =        PSI_RANK_OPERANT
+	use_description = "Target a patient while on help intent at melee range to mend a variety of maladies, such as bleeding or broken bones. Higher ranks in this faculty allow you to mend a wider range of problems."
 
 /decl/psionic_power/redaction/mend/invoke(var/mob/living/user, var/mob/living/carbon/human/target)
 	if(!istype(user) || !istype(target))
@@ -63,49 +63,58 @@
 		user.visible_message(SPAN_NOTICE("<i>\The [user] rests a hand on \the [target]'s [E.name]...</i>"))
 		to_chat(target, SPAN_NOTICE("A healing warmth suffuses you."))
 
+		var/redaction_rank = user.psi.get_rank(PSI_REDACTION)
 		var/pk_rank = user.psi.get_rank(PSI_PSYCHOKINESIS)
-		if(pk_rank >= 1)
-			var/removal_size = Clamp(5-pk_rank, 0, 5)
+		if(pk_rank >= PSI_RANK_LATENT && redaction_rank >= PSI_RANK_MASTER)
+			var/removal_size = clamp(5-pk_rank, 0, 5)
 			var/valid_objects = list()
 			for(var/thing in E.implants)
 				var/obj/imp = thing
-				if(imp.w_class >= removal_size && !istype(imp, /obj/item/weapon/implant))
+
+				if(!imp)
+					continue
+
+				if(imp.w_class >= removal_size && !istype(imp, /obj/item/implant))
 					valid_objects += imp
 			if(LAZYLEN(valid_objects))
 				var/removing = pick(valid_objects)
 				target.remove_implant(removing, TRUE)
-				to_chat(user, SPAN_NOTICE("You extend a tendril of psychokinetic force and carefully tease \the [removing] free of \the [E]."))
+				to_chat(user, SPAN_NOTICE("You extend a tendril of psychokinetic-redactive power and carefully tease \the [removing] free of \the [E]."))
 				return TRUE
 
-		if(E.status & ORGAN_ARTERY_CUT)
-			to_chat(user, SPAN_NOTICE("You painstakingly mend the torn veins in \the [E], stemming the internal bleeding."))
-			E.status &= ~ORGAN_ARTERY_CUT
-			return TRUE
+		if(redaction_rank >= PSI_RANK_MASTER)
+			if(E.status & ORGAN_ARTERY_CUT)
+				to_chat(user, SPAN_NOTICE("You painstakingly mend the torn veins in \the [E], stemming the internal bleeding."))
+				E.status &= ~ORGAN_ARTERY_CUT
+				return TRUE
+			if(E.status & ORGAN_TENDON_CUT)
+				to_chat(user, SPAN_NOTICE("You interleave and repair the severed tendon in \the [E]."))
+				E.status &= ~ORGAN_TENDON_CUT
+				return TRUE
+			if(E.status & ORGAN_BROKEN)
+				to_chat(user, SPAN_NOTICE("You coax shattered bones to come together and fuse, mending the break."))
+				E.status &= ~ORGAN_BROKEN
+				E.stage = 0
+				return TRUE
 
 		for(var/datum/wound/W in E.wounds)
-			if(W.bleeding() && W.wound_damage() <= W.bleed_threshold)
-				to_chat(user, SPAN_NOTICE("You knit together severed veins and broken flesh, stemming the bleeding."))
-				W.bleed_timer = 0
-				E.status &= ~ORGAN_BLEEDING
-				return TRUE
+			if(W.bleeding())
+				if(redaction_rank >= PSI_RANK_MASTER || W.wound_damage() < 30)
+					to_chat(user, SPAN_NOTICE("You knit together severed veins and broken flesh, stemming the bleeding."))
+					W.bleed_timer = 0
+					W.clamped = TRUE
+					E.status &= ~ORGAN_BLEEDING
+					return TRUE
+				else
+					to_chat(user, SPAN_NOTICE("This [W.desc] is beyond your power to heal."))
 
-		if(E.status & ORGAN_TENDON_CUT)
-			to_chat(user, SPAN_NOTICE("You interleave and repair the severed tendon in \the [E]."))
-			E.status &= ~ORGAN_TENDON_CUT
-			return TRUE
-
-		if(E.status & ORGAN_BROKEN)
-			to_chat(user, SPAN_NOTICE("You coax shattered bones to come together and fuse, mending the break."))
-			E.status &= ~ORGAN_BROKEN
-			E.stage = 0
-			return TRUE
-
-		for(var/obj/item/organ/internal/I in E.internal_organs)
-			if(!BP_IS_ROBOTIC(I) && !BP_IS_CRYSTAL(I) && I.damage > 0)
-				to_chat(user, SPAN_NOTICE("You encourage the damaged tissue of \the [I] to repair itself."))
-				var/heal_rate = user.psi.get_rank(PSI_REDACTION)
-				I.damage = max(0, I.damage - rand(heal_rate,heal_rate*2))
-				return TRUE
+		if(redaction_rank >= PSI_RANK_GRANDMASTER)
+			for(var/obj/item/organ/internal/I in E.internal_organs)
+				if(!BP_IS_ROBOTIC(I) && !BP_IS_CRYSTAL(I) && I.damage > 0)
+					to_chat(user, SPAN_NOTICE("You encourage the damaged tissue of \the [I] to repair itself."))
+					var/heal_rate = redaction_rank
+					I.damage = max(0, I.damage - rand(heal_rate,heal_rate*2))
+					return TRUE
 
 		to_chat(user, SPAN_NOTICE("You can find nothing within \the [target]'s [E.name] to mend."))
 		return FALSE
@@ -166,7 +175,7 @@
 			return TRUE
 
 		user.visible_message(SPAN_NOTICE("<i>\The [user] splays out their hands over \the [target]'s body...</i>"))
-		if(!do_after(user, 100, target, 0, 1))
+		if(!do_after(user, 100, target))
 			user.psi.backblast(rand(10,25))
 			return TRUE
 

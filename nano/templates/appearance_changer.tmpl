@@ -74,3 +74,15 @@
         </div>
     </div>
 {{/if}}
+{{if data.change_languages}}
+    <div class="item">
+        <div class="itemLabelNarrow">
+            Languages:
+        </div>
+        <div class="itemContentWide">
+            {{for data.languages}}
+                {{:helper.link(value.language, null, {'language': value.language, 'language_mode': value.selected ? 'rem': 'add'}, null, value.selected ? 'selected' : null )}}
+            {{/for}}
+        </div>
+    </div>
+{{/if}}

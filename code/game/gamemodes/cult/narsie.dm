@@ -143,7 +143,7 @@ var/global/list/narsie_list = list()
 /obj/singularity/narsie/proc/narsiefloor(var/turf/T)//leaving "footprints"
 	if(!(istype(T, /turf/simulated/wall/cult)||istype(T, /turf/space)))
 		if(T.icon_state != "cult-narsie")
-			T.desc = "something that goes beyond your understanding went this way"
+			T.desc = "Something that goes beyond your understanding went this way."
 			T.icon = 'icons/turf/flooring/cult.dmi'
 			T.icon_state = "cult-narsie"
 			T.set_light(1)
@@ -257,8 +257,7 @@ var/global/list/narsie_list = list()
 				if (101 == AM2.invisibility)
 					continue
 
-				spawn (0)
-					AM2.singularity_pull(src, src.current_size)
+				addtimer(CALLBACK(AM2, /atom/proc/singularity_pull, src, current_size), 0)
 
 		if (dist <= consume_range && !istype(A, get_base_turf_by_area(A)))
 			var/turf/T2 = A
@@ -274,8 +273,7 @@ var/global/list/narsie_list = list()
 			continue
 		if(cult_nh_mind.current.stat)
 			continue
-		var/turf/pos = get_turf(cult_nh_mind.current)
-		if(pos.z != src.z)
+		if(get_z(cult_nh_mind.current) != z)
 			continue
 		cultists += cult_nh_mind.current
 	if(cultists.len)

@@ -1,6 +1,5 @@
 /decl/cultural_info/faction/vox
 	name = FACTION_VOX_CREW
-	language = LANGUAGE_VOX
 	description = "Most vox are content to live and work on the arkships, serving their alloted span under the watchful \
 	eye of their betters, who in turn serve the apex. Although there is always some degree of social turmoil amongst the \
 	ark families, with contests and challenges resulting in shifting heirarchies, it usually does not go any further than \

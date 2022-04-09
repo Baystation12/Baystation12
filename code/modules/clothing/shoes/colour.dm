@@ -56,44 +56,15 @@
 /obj/item/clothing/shoes/orange
 	name = "orange shoes"
 	icon_state = "orange"
-	force = 0 //nerf brig shoe throwing
-	throwforce = 0
-	desc = "A pair of flimsy, cheap shoes. The soles have been made of a soft rubber."
-	var/obj/item/weapon/handcuffs/chained = null
-
-/obj/item/clothing/shoes/orange/proc/attach_cuffs(var/obj/item/weapon/handcuffs/cuffs, mob/user as mob)
-	if (src.chained) return
-
-	if(!user.unequip_item())
-		return
-	cuffs.forceMove(src)
-	src.chained = cuffs
-	src.slowdown_per_slot[slot_shoes] += 15
-	src.icon_state = "orange1"
-
-/obj/item/clothing/shoes/orange/proc/remove_cuffs(mob/user as mob)
-	if (!src.chained) return
-
-	user.put_in_hands(src.chained)
-	src.chained.add_fingerprint(user)
-
-	src.slowdown_per_slot[slot_shoes] -= 15
-	src.icon_state = "orange"
-	src.chained = null
-
-/obj/item/clothing/shoes/orange/attack_self(mob/user as mob)
-	..()
-	remove_cuffs(user)
-
-/obj/item/clothing/shoes/orange/attackby(H as obj, mob/user as mob)
-	..()
-	if (istype(H, /obj/item/weapon/handcuffs))
-		attach_cuffs(H, user)
 
 /obj/item/clothing/shoes/flats
 	name = "flats"
 	desc = "Sleek flats."
 	icon_state = "flatswhite"
+
+/obj/item/clothing/shoes/flats/black
+	name = "black flats"
+	color = COLOR_GRAY15
 
 /obj/item/clothing/shoes/hightops
 	name = "white high tops"

@@ -3,7 +3,7 @@
 	name = "automatic pipe layer"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
-	density = 1
+	density = TRUE
 	var/turf/old_turf
 	var/old_dir
 	var/on = 0
@@ -12,7 +12,7 @@
 	var/P_type_t = ""
 	var/max_metal = 50
 	var/metal = 10
-	var/obj/item/weapon/wrench/W
+	var/obj/item/wrench/W
 	var/list/Pipes = list("regular pipes"=0,"scrubbers pipes"=31,"supply pipes"=29,"heat exchange pipes"=2, "fuel pipes"=45)
 
 /obj/machinery/pipelayer/New()
@@ -29,13 +29,13 @@
 	old_turf = new_turf
 	old_dir = turn(M_Dir,180)
 
-/obj/machinery/pipelayer/attack_hand(mob/user as mob)
+/obj/machinery/pipelayer/interface_interact(mob/user)
 	if(!metal&&!on)
 		to_chat(user, "<span class='warning'>\The [src] doesn't work without metal.</span>")
-		return
+		return TRUE
 	on=!on
 	user.visible_message("<span class='notice'>[user] has [!on?"de":""]activated \the [src].</span>", "<span class='notice'>You [!on?"de":""]activate \the [src].</span>")
-	return
+	return TRUE
 
 /obj/machinery/pipelayer/attackby(var/obj/item/W as obj, var/mob/user as mob)
 
@@ -119,17 +119,15 @@
 	if(!use_metal(0.25))
 		return reset()
 	var/fdirn = turn(M_Dir,180)
-	var/p_type
 	var/p_dir
 
 	if (fdirn!=old_dir)
-		p_type=1+P_type
 		p_dir=old_dir+M_Dir
 	else
-		p_type=0+P_type
 		p_dir=M_Dir
 
-	var/obj/item/pipe/P = new (w_turf, pipe_type=p_type, dir=p_dir)
+	var/obj/item/pipe/P = new(w_turf)
+	P.set_dir(p_dir)
 	P.attackby(W , src)
 
 	return 1

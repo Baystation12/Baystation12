@@ -1,4 +1,4 @@
-/obj/item/weapon/handcuffs
+/obj/item/handcuffs
 	name = "handcuffs"
 	desc = "Use this to keep prisoners in line."
 	gender = PLURAL
@@ -18,16 +18,14 @@
 	var/cuff_sound = 'sound/weapons/handcuffs.ogg'
 	var/cuff_type = "handcuffs"
 
-
-
-/obj/item/weapon/handcuffs/get_icon_state(mob/user_mob, slot)
+/obj/item/handcuffs/get_icon_state(mob/user_mob, slot)
 	if(slot == slot_handcuffed_str)
 		return "handcuff1"
 	if(slot == slot_legcuffed_str)
 		return "legcuff1"
 	return ..()
 
-/obj/item/weapon/handcuffs/attack(var/mob/living/carbon/C, var/mob/living/user)
+/obj/item/handcuffs/attack(var/mob/living/carbon/C, var/mob/living/user)
 
 	if(!user.IsAdvancedToolUser())
 		return
@@ -45,7 +43,7 @@
 				return
 
 			//check for an aggressive grab (or robutts)
-			if(can_place(C, user))
+			if(C.has_danger_grab(user))
 				place_handcuffs(C, user)
 			else
 				to_chat(user, "<span class='danger'>You need to have a firm grip on [C] before you can put \the [src] on!</span>")
@@ -54,7 +52,7 @@
 	else
 		..()
 
-/obj/item/weapon/handcuffs/proc/can_place(var/mob/target, var/mob/user)
+/obj/item/handcuffs/proc/can_place(var/mob/target, var/mob/user)
 	if(user == target || istype(user, /mob/living/silicon/robot) || istype(user, /mob/living/bot))
 		return 1
 	else
@@ -63,7 +61,7 @@
 				return 1
 	return 0
 
-/obj/item/weapon/handcuffs/proc/place_handcuffs(var/mob/living/carbon/target, var/mob/user)
+/obj/item/handcuffs/proc/place_handcuffs(var/mob/living/carbon/target, var/mob/user)
 	playsound(src.loc, cuff_sound, 30, 1, -2)
 
 	var/mob/living/carbon/human/H = target
@@ -83,17 +81,16 @@
 	if(!do_after(user,30, target))
 		return 0
 
-	if(!can_place(target, user)) // victim may have resisted out of the grab in the meantime
+	if(!target.has_danger_grab(user)) // victim may have resisted out of the grab in the meantime
 		return 0
 
-	var/obj/item/weapon/handcuffs/cuffs = src
+	var/obj/item/handcuffs/cuffs = src
 	if(dispenser)
 		cuffs = new(get_turf(user))
 	else if(!user.unEquip(cuffs))
 		return 0
 
 	admin_attack_log(user, H, "Attempted to handcuff the victim", "Was target of an attempted handcuff", "attempted to handcuff")
-	SSstatistics.add_field_details("handcuffs","H")
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(H)
@@ -126,7 +123,7 @@ var/last_chew = 0
 
 	last_chew = world.time
 
-/obj/item/weapon/handcuffs/cable
+/obj/item/handcuffs/cable
 	name = "cable restraints"
 	desc = "Looks like some cables tied together. Could be used to tie something up."
 	icon_state = "cuff_white"
@@ -134,46 +131,36 @@ var/last_chew = 0
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
 	cuff_type = "cable restraints"
 	elastic = 1
+	health_max = 75
 
-/obj/item/weapon/handcuffs/cable/red
+/obj/item/handcuffs/cable/red
 	color = COLOR_MAROON
 
-/obj/item/weapon/handcuffs/cable/yellow
+/obj/item/handcuffs/cable/yellow
 	color = COLOR_AMBER
 
-/obj/item/weapon/handcuffs/cable/blue
+/obj/item/handcuffs/cable/blue
 	color = COLOR_CYAN_BLUE
 
-/obj/item/weapon/handcuffs/cable/green
+/obj/item/handcuffs/cable/green
 	color = COLOR_GREEN
 
-/obj/item/weapon/handcuffs/cable/pink
+/obj/item/handcuffs/cable/pink
 	color = COLOR_PURPLE
 
-/obj/item/weapon/handcuffs/cable/orange
+/obj/item/handcuffs/cable/orange
 	color = COLOR_ORANGE
 
-/obj/item/weapon/handcuffs/cable/cyan
+/obj/item/handcuffs/cable/cyan
 	color = COLOR_SKY_BLUE
 
-/obj/item/weapon/handcuffs/cable/white
+/obj/item/handcuffs/cable/white
 	color = COLOR_SILVER
 
-/obj/item/weapon/handcuffs/cable/attackby(var/obj/item/I, mob/user as mob)
-	..()
-	if(istype(I, /obj/item/stack/material/rods))
-		var/obj/item/stack/material/rods/R = I
-		if (R.use(1))
-			var/obj/item/weapon/material/wirerod/W = new(get_turf(user))
-			user.put_in_hands(W)
-			to_chat(user, "<span class='notice'>You wrap the cable restraint around the top of the rod.</span>")
-			qdel(src)
-			update_icon(user)
-
-/obj/item/weapon/handcuffs/cyborg
+/obj/item/handcuffs/cyborg
 	dispenser = 1
 
-/obj/item/weapon/handcuffs/cable/tape
+/obj/item/handcuffs/cable/tape
 	name = "tape restraints"
 	desc = "DIY!"
 	icon_state = "tape_cross"
@@ -181,3 +168,4 @@ var/last_chew = 0
 	icon = 'icons/obj/bureaucracy.dmi'
 	breakouttime = 200
 	cuff_type = "duct tape"
+	health_max = 50

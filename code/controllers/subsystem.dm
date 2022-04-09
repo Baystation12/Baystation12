@@ -33,6 +33,12 @@
 	var/datum/controller/subsystem/queue_next
 	var/datum/controller/subsystem/queue_prev
 
+	// Subsystem startup accounting - these variables cannot be trusted if the subsystem has crashed and been Recover()'d.
+	var/init_state = SS_INITSTATE_NONE // The current initialization state of this SS - this might be invalid if the subsystem has been Recover()'d.
+	var/init_time = 0                  // How long the subsystem took to initialize, in seconds.
+	var/init_start = 0                 // What timeofday did we start initializing?
+	var/init_finish                    // What timeofday did we finish initializing?
+
 	var/runlevels = RUNLEVELS_DEFAULT	//points of the game at which the SS can fire
 
 	var/static/list/failure_strikes //How many times we suspect a subsystem type has crashed the MC, 3 strikes and you're out!
@@ -88,7 +94,7 @@
 		queue_node_priority = queue_node.queued_priority
 		queue_node_flags = queue_node.flags
 
-		if (queue_node_flags & SS_TICKER)
+		if (queue_node_flags & (SS_TICKER|SS_BACKGROUND) == SS_TICKER)
 			if (!(SS_flags & SS_TICKER))
 				continue
 			if (queue_node_priority < SS_priority)
@@ -158,49 +164,73 @@
 			state = SS_PAUSING
 
 
-//used to initialize the subsystem AFTER the map has loaded
-/datum/controller/subsystem/Initialize(start_timeofday)
-	initialized = TRUE
-	var/time = (REALTIMEOFDAY - start_timeofday) / 10
-	var/msg = "Initialized [name] subsystem within [time] second[time == 1 ? "" : "s"]!"
+// Wrapper so things continue to work even in the case of a SS that doesn't call parent.
+/datum/controller/subsystem/proc/DoInitialize(timeofday)
+	init_state = SS_INITSTATE_STARTED
+	init_start = timeofday
+	Initialize(timeofday)
+	init_finish = REALTIMEOFDAY
+	. = (REALTIMEOFDAY - timeofday)/10
+	var/msg = "Initialized [name] subsystem within [.] second[. == 1 ? "" : "s"]!"
 	to_chat(world, "<span class='boldannounce'>[msg]</span>")
 	log_world(msg)
-	return time
 
-//hook for printing stats to the "MC" statuspanel for admins to see performance and related stats etc.
-/datum/controller/subsystem/stat_entry(msg)
-	if(!statclick)
-		statclick = new/obj/effect/statclick/debug(null, "Initializing...", src)
+	init_state = SS_INITSTATE_DONE
+	initialized = TRUE	// Legacy.
 
-	var/pre_msg
-	if (flags & SS_NO_FIRE)
-		pre_msg = "NO FIRE"
-	else if (can_fire && !suspended)
-		pre_msg = "[round(cost,1)]ms|[round(tick_usage,1)]%([round(tick_overrun,1)]%)|[round(ticks,0.1)]"
-	else if (!can_fire)
-		pre_msg = "OFFLINE"
-	else
-		pre_msg = "SUSPEND"
-	msg = "[pre_msg]\t[msg]"
 
-	var/title = name
-	if (can_fire)
-		title = "\[[state_letter()]][title]"
+/// Used to initialize the subsystem AFTER the map has loaded. No default behaviors please.
+/datum/controller/subsystem/Initialize(start_timeofday)
+	return
 
-	stat(title, statclick.update(msg))
 
-/datum/controller/subsystem/proc/state_letter()
-	switch (state)
-		if (SS_RUNNING)
-			. = "R"
-		if (SS_QUEUED)
-			. = "Q"
-		if (SS_PAUSED, SS_PAUSING)
-			. = "P"
-		if (SS_SLEEPING)
-			. = "S"
-		if (SS_IDLE)
-			. = "  "
+/// Builds subsystem stats & VV clickable for the MC status panel
+/datum/controller/subsystem/UpdateStat(text)
+	if (istext(text))
+		var/list/build = list()
+		if (Master.initializing)
+			if (init_state == SS_INITSTATE_DONE)
+				build += "DONE ([init_time]s)"
+			else if (flags & SS_NO_INIT)
+				build += "NO INIT"
+			else if (init_state == SS_INITSTATE_STARTED)
+				if (init_start)
+					build += "LOAD ([(REALTIMEOFDAY - init_start)/10]s)"
+				else
+					build += "LOAD"
+			else
+				build += "WAIT"
+			if (!(flags & SS_NO_INIT))
+				switch (init_state)
+					if (SS_INITSTATE_NONE)
+						build += " W"
+					if (SS_INITSTATE_STARTED)
+						build += " L"
+					if (SS_INITSTATE_DONE)
+						build += " D"
+		else
+			if (flags & SS_NO_FIRE)
+				build += "NO FIRE"
+			else if (!can_fire)
+				build += "OFFLINE"
+			else if (suspended)
+				build += "SUSPEND"
+			else
+				build += "[round(cost,1)]ms | [round(tick_usage,1)]% ([round(tick_overrun,1)]%) | [round(ticks,0.1)]"
+				switch (state)
+					if (SS_RUNNING)
+						build += "R"
+					if (SS_QUEUED)
+						build += "Q"
+					if (SS_PAUSED, SS_PAUSING)
+						build += "P"
+					if (SS_SLEEPING)
+						build += "S"
+					if (SS_IDLE)
+						build += "  "
+		text = "[build.Join(null)] | [text]"
+	..(text)
+
 
 //could be used to postpone a costly subsystem for (default one) var/cycles, cycles
 //for instance, during cpu intensive operations like explosions

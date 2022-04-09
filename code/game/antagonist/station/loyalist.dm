@@ -5,12 +5,12 @@ GLOBAL_DATUM_INIT(loyalists, /datum/antagonist/loyalists, new)
 	role_text = "Head Loyalist"
 	role_text_plural = "Loyalists"
 	feedback_tag = "loyalist_objective"
-	antag_indicator = "hudheadloyalist"
+	antag_indicator = "hud_loyal_head"
 	victory_text = "The heads of staff remained at their posts! The loyalists win!"
 	loss_text = "The heads of staff did not stop the revolution!"
 	victory_feedback_tag = "win - rev heads killed"
 	loss_feedback_tag = "loss - heads killed"
-	antaghud_indicator = "hudloyalist"
+	antaghud_indicator = "hud_loyal"
 	flags = 0
 
 	hard_cap = 2
@@ -22,7 +22,7 @@ GLOBAL_DATUM_INIT(loyalists, /datum/antagonist/loyalists, new)
 	faction_role_text = "Loyalist"
 	faction_descriptor = "COMPANY"
 	faction_verb = /mob/living/proc/convert_to_loyalist
-	faction_indicator = "hudloyalist"
+	faction_indicator = "hud_loyal"
 	faction_invisible = 1
 	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/submap)
 	skill_setter = /datum/antag_skill_setter/station

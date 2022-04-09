@@ -1,19 +1,55 @@
-/datum/controller
-	var/name
-	// The object used for the clickable stat() button.
-	var/obj/effect/statclick/statclick
+/// The name of the controller
+/datum/controller/var/name
+
+/// The atom used to hold information about the controller for client UI output
+/datum/controller/var/tmp/atom/movable/clickable_stat/statLine
+
+
+/// The next time we should do work updating stat_line
+/datum/controller/var/tmp/statNext = 0
+
+
+/datum/controller/Destroy(force)
+	log_debug({"Controller "[name]" destroyed with force="[force]"!"})
+	if (!force)
+		return QDEL_HINT_LETMELIVE
+	QDEL_NULL(statLine)
+	return ..()
+
 
 /datum/controller/proc/Initialize()
+	return
 
-//cleanup actions
+
 /datum/controller/proc/Shutdown()
+	return
 
-//when we enter dmm_suite.load_map
-/datum/controller/proc/StartLoadingMap()
-
-//when we exit dmm_suite.load_map
-/datum/controller/proc/StopLoadingMap()
 
 /datum/controller/proc/Recover()
+	return
 
-/datum/controller/proc/stat_entry()
+
+/// when we enter dmm_suite.load_map
+/datum/controller/proc/StartLoadingMap()
+	return
+
+/// when we exit dmm_suite.load_map
+/datum/controller/proc/StopLoadingMap()
+	return
+
+
+/datum/controller/proc/UpdateStat(text)
+	if (!statLine)
+		statLine = new (null, src)
+	if (istext(text))
+		statLine.name = text
+	stat(name, statLine)
+
+
+/datum/controller/proc/PreventUpdateStat(time)
+	if (!isnum(time))
+		time = REALTIMEOFDAY
+	if (time < statNext)
+		return TRUE
+	statNext = time + 1 SECONDS
+	return FALSE

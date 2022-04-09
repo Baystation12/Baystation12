@@ -1,7 +1,7 @@
 SUBSYSTEM_DEF(goals)
 	name = "Goals"
-	init_order = SS_INIT_MISC_LATE
-	flags = SS_NO_FIRE
+	init_order = SS_INIT_GOALS
+	wait = 1 SECOND
 	var/list/global_personal_goals = list(
 		/datum/goal/achievement/specific_object/food,
 		/datum/goal/achievement/specific_object/drink,
@@ -15,13 +15,31 @@ SUBSYSTEM_DEF(goals)
 		/datum/goal/movement/walk/eva,
 		/datum/goal/clean,
 		/datum/goal/money,
-		/datum/goal/sickness
+		/datum/goal/weights,
+		/datum/goal/punchingbag
 	)
 	var/list/departments = list()
 	var/list/ambitions =   list()
+	var/list/pending_goals = list()
+
+/datum/controller/subsystem/goals/fire(resumed)
+	for(var/datum/goal/goal in pending_goals)
+		if(goal.try_initialize())
+			pending_goals -= goal
+	if(!length(pending_goals))
+		flags |= SS_NO_FIRE
+
+
+/datum/controller/subsystem/goals/UpdateStat(time)
+	return
+
 
 /datum/controller/subsystem/goals/Initialize()
-	for(var/dtype in GLOB.using_map.departments)
+	var/list/all_depts = subtypesof(/datum/department)
+	//See if map is very particular about what depts it has
+	if(LAZYLEN(GLOB.using_map.departments))
+		all_depts = GLOB.using_map.departments
+	for(var/dtype in all_depts)
 		var/datum/department/dept = dtype
 		var/dept_flag = initial(dept.flag)
 		if(dept_flag)

@@ -14,14 +14,14 @@
 
 /obj/structure/adherent_bath/return_air()
 	var/datum/gas_mixture/venus = new(CELL_VOLUME, SYNTH_HEAT_LEVEL_1 - 10)
-	venus.adjust_multi("chlorine", MOLES_N2STANDARD, "phoron", MOLES_O2STANDARD)
+	venus.adjust_multi(GAS_CHLORINE, MOLES_N2STANDARD, GAS_PHORON, MOLES_O2STANDARD)
 	return venus
 
 /obj/structure/adherent_bath/attackby(var/obj/item/thing, var/mob/user)
 	if(istype(thing, /obj/item/grab))
 		var/obj/item/grab/G = thing
 		if(enter_bath(G.affecting))
-			user.unEquip(G)
+			qdel(G)
 		return
 	. = ..()
 
@@ -65,6 +65,14 @@
 	START_PROCESSING(SSobj, src)
 	return TRUE
 
+/obj/structure/adherent_bath/slam_into(mob/living/L)
+	L.forceMove(src)
+	occupant = L
+	L.Weaken(2)
+	L.visible_message(SPAN_WARNING("\The [L] falls into \the [src]!"))
+	playsound(L, "punch", 25, 1, FALSE)
+	START_PROCESSING(SSobj, src)
+
 /obj/structure/adherent_bath/attack_hand(var/mob/user)
 	eject_occupant()
 
@@ -76,6 +84,7 @@
 			if(occupant.client)
 				occupant.client.eye = occupant.client.mob
 				occupant.client.perspective = MOB_PERSPECTIVE
+			occupant.regenerate_icons()
 			occupant = null
 			STOP_PROCESSING(SSobj, src)
 
@@ -83,7 +92,7 @@
 	enter_bath(O, user)
 
 /obj/structure/adherent_bath/relaymove(var/mob/user)
-	if(user == occupant)
+	if (!user.incapacitated() && (user == occupant))
 		eject_occupant()
 
 /obj/structure/adherent_bath/Process()
@@ -106,7 +115,7 @@
 		if((H.species.name == SPECIES_ADHERENT || H.species.name == SPECIES_GOLEM) && prob(10))
 			for(var/limb_type in H.species.has_limbs)
 				var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-				if(E && !E.is_usable())
+				if(E && !E.is_usable() && !(E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))
 					E.removed()
 					qdel(E)
 					E = null
@@ -125,22 +134,26 @@
 		if(prob(10))
 			for(var/thing in H.internal_organs)
 				var/obj/item/organ/internal/I = thing
-				if(BP_IS_CRYSTAL(I))
-					if(I.damage > 0)
-						I.damage = max(I.damage - rand(3,5), 0)
+				if(BP_IS_CRYSTAL(I) && I.damage)
+					I.heal_damage(rand(3,5))
+					if(prob(25))
 						to_chat(H, "<span class='notice'>The mineral-rich bath mends your [I.name].</span>")
-						repaired_organ = TRUE
-						break
 
 		// Repair robotic external organs.
 		if(!repaired_organ && prob(25))
 			for(var/thing in H.organs)
 				var/obj/item/organ/external/E = thing
 				if(BP_IS_ROBOTIC(E))
+					for(var/obj/implanted_object in E.implants)
+						if(!istype(implanted_object,/obj/item/implant) && !istype(implanted_object,/obj/item/organ/internal/augment) && prob(25))	// We don't want to remove REAL implants. Just shrapnel etc.
+							E.implants -= implanted_object
+							to_chat(H, "<span class='notice'>The mineral-rich bath dissolves the [implanted_object.name].</span>")
+							qdel(implanted_object)
 					if(E.brute_dam || E.burn_dam)
-						E.heal_damage(rand(3,5), rand(3,5), TRUE, TRUE)
-						to_chat(H, "<span class='notice'>The mineral-rich bath mends your [E.name].</span>")
-						if(!BP_IS_CRYSTAL(E) && !BP_IS_BRITTLE(E) && prob(25))
+						E.heal_damage(rand(3,5), rand(3,5), robo_repair = 1)
+						if(prob(25))
+							to_chat(H, "<span class='notice'>The mineral-rich bath mends your [E.name].</span>")
+						if(!BP_IS_CRYSTAL(E) && !BP_IS_BRITTLE(E))
 							E.status |= ORGAN_BRITTLE
 							to_chat(H, "<span class='warning'>It feels a bit brittle, though...</span>")
 						break

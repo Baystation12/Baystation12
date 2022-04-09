@@ -14,7 +14,7 @@ var/const/NUCLEARBOMB_WIRE_SAFETY		= 4
 
 /datum/wires/nuclearbomb/CanUse(var/mob/living/L)
 	var/obj/machinery/nuclearbomb/N = holder
-	return N.panel_open
+	return N.panel_open && N.extended
 
 /datum/wires/nuclearbomb/GetInteractWindow(mob/user)
 	var/obj/machinery/nuclearbomb/N = holder

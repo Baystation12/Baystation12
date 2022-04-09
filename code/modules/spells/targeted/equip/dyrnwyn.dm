@@ -13,7 +13,7 @@
 	level_max = list(Sp_TOTAL = 1, Sp_SPEED = 0, Sp_POWER = 1)
 	duration = 300 //30 seconds
 	max_targets = 1
-	equipped_summons = list("active hand" = /obj/item/weapon/material/sword)
+	equipped_summons = list("active hand" = /obj/item/material/sword)
 	delete_old = 0
 	var/material = MATERIAL_GOLD
 
@@ -21,7 +21,7 @@
 
 
 /spell/targeted/equip_item/dyrnwyn/summon_item(var/new_type)
-	var/obj/item/weapon/W = new new_type(null,material)
+	var/obj/item/W = new new_type (null, material)
 	W.SetName("\improper Dyrnwyn")
 	W.damtype = BURN
 	W.hitsound = 'sound/items/welder2.ogg'

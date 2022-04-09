@@ -6,24 +6,24 @@
 	var/datum/seed/S = diverge()	//Let's not modify all of the seeds.
 	T.visible_message("<span class='notice'>\The [S.display_name] quivers!</span>")	//Mimicks the normal mutation.
 	G.mutate(S, T)
-	
+
 	return S
-	
+
 /decl/plantgene
 	var/gene_tag
-	
+
 /decl/plantgene/biochem
 	gene_tag = GENE_BIOCHEMISTRY
-	
+
 /decl/plantgene/hardiness
 	gene_tag = GENE_HARDINESS
-	
+
 /decl/plantgene/environment
 	gene_tag = GENE_ENVIRONMENT
 
 /decl/plantgene/metabolism
 	gene_tag = GENE_METABOLISM
-	
+
 /decl/plantgene/structure
 	gene_tag = GENE_STRUCTURE
 
@@ -38,7 +38,7 @@
 
 /decl/plantgene/atmosphere
 	gene_tag = GENE_ATMOSPHERE
-	
+
 /decl/plantgene/vigour
 	gene_tag = GENE_VIGOUR
 
@@ -53,7 +53,7 @@
 
 /decl/plantgene/biochem/mutate(var/datum/seed/S)
 	S.set_trait(TRAIT_POTENCY, S.get_trait(TRAIT_POTENCY)+rand(-20,20),200, 0)
-	
+
 /decl/plantgene/hardiness/mutate(var/datum/seed/S)
 	if(prob(60))
 		S.set_trait(TRAIT_TOXINS_TOLERANCE, S.get_trait(TRAIT_TOXINS_TOLERANCE)+rand(-2,2),10,0)
@@ -63,7 +63,7 @@
 		S.set_trait(TRAIT_WEED_TOLERANCE, S.get_trait(TRAIT_WEED_TOLERANCE)+rand(-2,2),10,0)
 	if(prob(60))
 		S.set_trait(TRAIT_ENDURANCE, S.get_trait(TRAIT_ENDURANCE)+rand(-5,5),100,0)
-	
+
 /decl/plantgene/environment/mutate(var/datum/seed/S)
 	if(prob(60))
 		S.set_trait(TRAIT_IDEAL_HEAT, S.get_trait(TRAIT_IDEAL_HEAT)+rand(-2,2),10,0)
@@ -71,7 +71,7 @@
 		S.set_trait(TRAIT_IDEAL_LIGHT, S.get_trait(TRAIT_IDEAL_LIGHT)+rand(-2,2),10,0)
 	if(prob(60))
 		S.set_trait(TRAIT_LIGHT_TOLERANCE, S.get_trait(TRAIT_LIGHT_TOLERANCE)+rand(-5,5),100,0)
-	
+
 /decl/plantgene/metabolism/mutate(var/datum/seed/S)
 	if(prob(65))
 		S.set_trait(TRAIT_REQUIRES_NUTRIENTS, S.get_trait(TRAIT_REQUIRES_NUTRIENTS)+rand(-2,2),10,0)
@@ -79,7 +79,7 @@
 		S.set_trait(TRAIT_REQUIRES_WATER, S.get_trait(TRAIT_REQUIRES_WATER)+rand(-2,2),10,0)
 	if(prob(40))
 		S.set_trait(TRAIT_ALTER_TEMP, S.get_trait(TRAIT_ALTER_TEMP)+rand(-5,5),100,0)
-	
+
 /decl/plantgene/diet/mutate(var/datum/seed/S)
 	if(prob(60))
 		S.set_trait(TRAIT_CARNIVOROUS, S.get_trait(TRAIT_CARNIVOROUS)+rand(-1,1),2,0)
@@ -102,17 +102,15 @@
 				T.visible_message("<span class='notice'>\The [S.display_name]'s glow dims...</span>")
 	if(prob(60))
 		S.set_trait(TRAIT_PRODUCES_POWER, !S.get_trait(TRAIT_PRODUCES_POWER))
-	
+
 /decl/plantgene/atmosphere/mutate(var/datum/seed/S)
 	if(prob(60))
-		S.set_trait(TRAIT_TOXINS_TOLERANCE, S.get_trait(TRAIT_TOXINS_TOLERANCE)+rand(-2,2),10,0)
+		S.set_trait(TRAIT_HEAT_TOLERANCE, S.get_trait(TRAIT_HEAT_TOLERANCE)+rand(-5,5),800,70)
 	if(prob(60))
-		S.set_trait(TRAIT_PEST_TOLERANCE, S.get_trait(TRAIT_PEST_TOLERANCE)+rand(-2,2),10,0)
+		S.set_trait(TRAIT_LOWKPA_TOLERANCE, S.get_trait(TRAIT_LOWKPA_TOLERANCE)+rand(-5,5),80,0)
 	if(prob(60))
-		S.set_trait(TRAIT_WEED_TOLERANCE, S.get_trait(TRAIT_WEED_TOLERANCE)+rand(-2,2),10,0)
-	if(prob(60))
-		S.set_trait(TRAIT_ENDURANCE, S.get_trait(TRAIT_ENDURANCE)+rand(-5,5),100,0)
-	
+		S.set_trait(TRAIT_HIGHKPA_TOLERANCE, S.get_trait(TRAIT_HIGHKPA_TOLERANCE)+rand(-5,5),500,110)
+
 /decl/plantgene/vigour/mutate(var/datum/seed/S, var/turf/T)
 	if(prob(65))
 		S.set_trait(TRAIT_PRODUCTION, S.get_trait(TRAIT_PRODUCTION)+rand(-1,1),10,0)
@@ -121,7 +119,7 @@
 	if(prob(55))
 		S.set_trait(TRAIT_SPREAD, S.get_trait(TRAIT_SPREAD)+rand(-1,1),2,0)
 		T.visible_message("<span class='notice'>\The [S.display_name] spasms visibly, shifting in the tray.</span>")
-	
+
 /decl/plantgene/fruit/mutate(var/datum/seed/S)
 	if(prob(65))
 		S.set_trait(TRAIT_STINGS, !S.get_trait(TRAIT_STINGS))
@@ -129,7 +127,7 @@
 		S.set_trait(TRAIT_EXPLOSIVE, !S.get_trait(TRAIT_EXPLOSIVE))
 	if(prob(65))
 		S.set_trait(TRAIT_JUICY, !S.get_trait(TRAIT_JUICY))
-	
+
 /decl/plantgene/special/mutate(var/datum/seed/S)
 	if(prob(65))
 		S.set_trait(TRAIT_TELEPORTING, !S.get_trait(TRAIT_TELEPORTING))

@@ -4,10 +4,18 @@
 	icon = 'icons/atmos/oxyregenerator.dmi'
 	icon_state = "off"
 	level = 1
-	density = 1
+	density = TRUE
 	use_power = POWER_USE_OFF
 	idle_power_usage = 200		//internal circuitry, friction losses and stuff
 	power_rating = 10000
+	base_type = /obj/machinery/atmospherics/binary/oxyregenerator
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
+	
+	machine_name = "oxygen regenerator"
+	machine_desc = "Catalyzes gaseous CO2 to convert it into gaseous oxygen. The excess carbon is condensed and ejected as graphite sheets."
+
 	var/target_pressure = 10*ONE_ATMOSPHERE
 	var/id = null
 	var/power_setting = 1 //power consumption setting, 1 through five
@@ -19,36 +27,31 @@
 	var/datum/gas_mixture/inner_tank = new
 	var/tank_volume = 400//Litres
 
-/obj/machinery/atmospherics/binary/oxyregenerator/New()
-	..()
-	inner_tank.volume = tank_volume
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/oxyregenerator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)//Takes CO2
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)//Breaks bond
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)//Stores carbon
-	RefreshParts()
-
 /obj/machinery/atmospherics/binary/oxyregenerator/RefreshParts()
-	for(var/obj/item/weapon/stock_parts/P in component_parts)
-		if(istype(P, /obj/item/weapon/stock_parts/matter_bin))
-			carbon_efficiency += 0.25 * (P.rating-1) //plus 25% per stock item rank
-		if(istype(P, /obj/item/weapon/stock_parts/manipulator))
-			intake_power_efficiency -= 0.1 * (P.rating-1) //10% better intake power efficiency per stock item rank
-		if(istype(P, /obj/item/weapon/stock_parts/micro_laser))
-			power_rating -= power_rating * 0.05 * (P.rating-1) //5% better power efficiency per stock item rank
+	carbon_efficiency = initial(carbon_efficiency)
+	carbon_efficiency += 0.25 * total_component_rating_of_type(/obj/item/stock_parts/matter_bin)
+	carbon_efficiency -= 0.25 * number_of_components(/obj/item/stock_parts/matter_bin)
+	carbon_efficiency = clamp(carbon_efficiency, initial(carbon_efficiency), 5)
+
+	intake_power_efficiency = initial(intake_power_efficiency)
+	intake_power_efficiency -= 0.1 * total_component_rating_of_type(/obj/item/stock_parts/manipulator)
+	intake_power_efficiency += 0.1 * number_of_components(/obj/item/stock_parts/manipulator)
+	intake_power_efficiency = clamp(intake_power_efficiency, 0.1, initial(intake_power_efficiency))
+
+	power_rating = 1
+	power_rating -= 0.05 * total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
+	power_rating += 0.05 * number_of_components(/obj/item/stock_parts/micro_laser)
+	power_rating = clamp(power_rating, 0.1, 1)
+	power_rating *= initial(power_rating)
+	..()
 
 /obj/machinery/atmospherics/binary/oxyregenerator/examine(user)
-	..()
+	. = ..()
 	to_chat(user,"Its outlet port is to the [dir2text(dir)]")
 
 /obj/machinery/atmospherics/binary/oxyregenerator/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(default_deconstruction_screwdriver(user, O))
-		return
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
+	if(component_attackby(O, user))
+		return TRUE
 	if(isWrench(O))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		anchored = !anchored
@@ -102,6 +105,7 @@
 	src.set_dir(turn(src.dir, 90))
 
 /obj/machinery/atmospherics/binary/oxyregenerator/Process(var/delay)
+	..()
 	if((stat & (NOPOWER|BROKEN)) || !use_power)
 		return
 
@@ -122,18 +126,18 @@
 			phase = "processing"
 
 	if (phase == "processing")//processing CO2 in tank
-		if (inner_tank.gas["carbon_dioxide"])
-			var/co2_intake = between(0, inner_tank.gas["carbon_dioxide"], power_setting*delay/10)
+		if (inner_tank.gas[GAS_CO2])
+			var/co2_intake = clamp(inner_tank.gas[GAS_CO2], 0, power_setting * delay * 0.1)
 			last_flow_rate = co2_intake
-			inner_tank.adjust_gas("carbon_dioxide", -co2_intake, 1)
+			inner_tank.adjust_gas(GAS_CO2, -co2_intake, 1)
 			var/datum/gas_mixture/new_oxygen = new
-			new_oxygen.adjust_gas("oxygen",  co2_intake)
+			new_oxygen.adjust_gas(GAS_OXYGEN,  co2_intake)
 			new_oxygen.temperature = T20C+30 //it's sort of hot after molecular bond breaking
 			inner_tank.merge(new_oxygen)
 			carbon_stored += co2_intake * carbon_efficiency
 			while (carbon_stored >= carbon_moles_per_piece)
 				carbon_stored -= carbon_moles_per_piece
-				var/material/M = SSmaterials.get_material_by_name(MATERIAL_GRAPHENE)
+				var/material/M = SSmaterials.get_material_by_name(MATERIAL_GRAPHITE)
 				M.place_sheet(get_turf(src), 1, M.name)
 			power_draw = power_rating * co2_intake
 			last_power_draw = power_draw
@@ -158,16 +162,14 @@
 			phase = "filling"
 
 /obj/machinery/atmospherics/binary/oxyregenerator/on_update_icon()
-	if(!powered())
+	if(stat & NOPOWER)
 		icon_state = "off"
 	else
 		icon_state = "[use_power ? "on" : "off"]"
 
-/obj/machinery/atmospherics/binary/oxyregenerator/attack_ai(mob/user as mob)
+/obj/machinery/atmospherics/binary/oxyregenerator/interface_interact(user)
 	ui_interact(user)
-
-/obj/machinery/atmospherics/binary/oxyregenerator/attack_hand(mob/user as mob)
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/atmospherics/binary/oxyregenerator/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -180,8 +182,8 @@
 	data["targetPressure"] = round(target_pressure)
 	data["phase"] = phase
 	if (inner_tank.total_moles > 0)
-		data["co2"] = round(100 * inner_tank.gas["carbon_dioxide"]/inner_tank.total_moles)
-		data["o2"] = round(100 * inner_tank.gas["oxygen"]/inner_tank.total_moles)
+		data["co2"] = round(100 * inner_tank.gas[GAS_CO2]/inner_tank.total_moles)
+		data["o2"] = round(100 * inner_tank.gas[GAS_OXYGEN]/inner_tank.total_moles)
 	else
 		data["co2"] = 0
 		data["o2"] = 0
@@ -201,5 +203,5 @@
 		update_icon()
 		return 1
 	if(href_list["setPower"]) //setting power to 0 is redundant anyways
-		power_setting = between(1, text2num(href_list["setPower"]), 5)
+		power_setting = clamp(text2num(href_list["setPower"]), 1, 5)
 		return 1

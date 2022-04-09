@@ -1,35 +1,35 @@
-/obj/item/weapon/card/id/syndicate
+/obj/item/card/id/syndicate
 	assignment = "Agent"
-	origin_tech = list(TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_ESOTERIC = 3)
 	var/electronic_warfare = 1
 	var/mob/registered_user = null
 	color = COLOR_GRAY40
 	detail_color = COLOR_NT_RED
 
-/obj/item/weapon/card/id/syndicate/New(mob/user as mob)
+/obj/item/card/id/syndicate/New(mob/user as mob)
 	..()
 	access = syndicate_access.Copy()
 
-/obj/item/weapon/card/id/syndicate/station_access/New()
+/obj/item/card/id/syndicate/station_access/New()
 	..() // Same as the normal Syndicate id, only already has all station access
 	access |= get_all_station_access()
 
-/obj/item/weapon/card/id/syndicate/Destroy()
+/obj/item/card/id/syndicate/Destroy()
 	unset_registered_user(registered_user)
 	return ..()
 
-/obj/item/weapon/card/id/syndicate/prevent_tracking()
+/obj/item/card/id/syndicate/prevent_tracking()
 	return electronic_warfare
 
-/obj/item/weapon/card/id/syndicate/afterattack(var/obj/item/weapon/O as obj, mob/user as mob, proximity)
+/obj/item/card/id/syndicate/afterattack(var/obj/item/O as obj, mob/user as mob, proximity)
 	if(!proximity) return
-	if(istype(O, /obj/item/weapon/card/id))
-		var/obj/item/weapon/card/id/I = O
+	if(istype(O, /obj/item/card/id))
+		var/obj/item/card/id/I = O
 		src.access |= I.access
 		if(player_is_antag(user.mind))
 			to_chat(user, "<span class='notice'>The microscanner activates as you pass it over the ID, copying its access.</span>")
 
-/obj/item/weapon/card/id/syndicate/attack_self(mob/user as mob)
+/obj/item/card/id/syndicate/attack_self(mob/user as mob)
 	// We use the fact that registered_name is not unset should the owner be vaporized, to ensure the id doesn't magically become unlocked.
 	if(!registered_user && register_user(user))
 		to_chat(user, "<span class='notice'>The microscanner marks you as its owner, preventing others from accessing its internals.</span>")
@@ -42,7 +42,7 @@
 	else
 		..()
 
-/obj/item/weapon/card/id/syndicate/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/item/card/id/syndicate/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
 	var/entries[0]
 	entries[++entries.len] = list("name" = "Age", 				"value" = age)
@@ -70,27 +70,27 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/item/weapon/card/id/syndicate/proc/register_user(var/mob/user)
+/obj/item/card/id/syndicate/proc/register_user(var/mob/user)
 	if(!istype(user) || user == registered_user)
 		return FALSE
 	unset_registered_user()
 	registered_user = user
 	user.set_id_info(src)
-	GLOB.destroyed_event.register(user, src, /obj/item/weapon/card/id/syndicate/proc/unset_registered_user)
+	GLOB.destroyed_event.register(user, src, /obj/item/card/id/syndicate/proc/unset_registered_user)
 	return TRUE
 
-/obj/item/weapon/card/id/syndicate/proc/unset_registered_user(var/mob/user)
+/obj/item/card/id/syndicate/proc/unset_registered_user(var/mob/user)
 	if(!registered_user || (user && user != registered_user))
 		return
 	GLOB.destroyed_event.unregister(registered_user, src)
 	registered_user = null
 
-/obj/item/weapon/card/id/syndicate/CanUseTopic(mob/user)
-	if(user != registered_user)
+/obj/item/card/id/syndicate/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
+	if(!(href_list && href_list["look_at_id"]) && (user != registered_user))
 		return STATUS_CLOSE
 	return ..()
 
-/obj/item/weapon/card/id/syndicate/Topic(href, href_list, var/datum/topic_state/state)
+/obj/item/card/id/syndicate/Topic(href, href_list, var/datum/topic_state/state)
 	if(..())
 		return 1
 
@@ -211,15 +211,15 @@
 					to_chat(user, "<span class='notice'>All information has been deleted from \the [src].</span>")
 					. = 1
 			if("Branch")
-				var/new_branch = sanitize(input(user,"What branch of service would you like to put on this card?","Agent Card Branch") as null|anything in mil_branches.spawn_branches())
+				var/new_branch = sanitize(input(user,"What branch of service would you like to put on this card?","Agent Card Branch") as null|anything in GLOB.mil_branches.spawn_branches())
 				if(!isnull(new_branch) && CanUseTopic(user, state))
-					src.military_branch =  mil_branches.spawn_branches()[new_branch]
+					src.military_branch =  GLOB.mil_branches.spawn_branches()[new_branch]
 					to_chat(user, "<span class='notice'>Branch changed to '[military_branch.name]'.</span>")
 					. = 1
 			if("Rank")
-				var/new_rank = sanitize(input(user,"What rank would you like to put on this card?","Agent Card Rank") as null|anything in mil_branches.spawn_ranks(military_branch.name))
+				var/new_rank = sanitize(input(user,"What rank would you like to put on this card?","Agent Card Rank") as null|anything in GLOB.mil_branches.spawn_ranks(military_branch.name))
 				if(!isnull(new_rank) && CanUseTopic(user, state))
-					src.military_rank = mil_branches.spawn_ranks(military_branch.name)[new_rank]
+					src.military_rank = GLOB.mil_branches.spawn_ranks(military_branch.name)[new_rank]
 					to_chat(user, "<span class='notice'>Rank changed to '[military_rank.name]'.</span>")
 					. = 1
 
@@ -230,15 +230,19 @@
 /proc/id_card_states()
 	if(!id_card_states)
 		id_card_states = list()
-		for(var/path in typesof(/obj/item/weapon/card/id))
-			var/obj/item/weapon/card/id/ID = path
+		for(var/path in typesof(/obj/item/card/id))
+			var/obj/item/card/id/ID = path
 			var/datum/card_state/CS = new()
 			CS.icon_state = initial(ID.icon_state)
 			CS.item_state = initial(ID.item_state)
 			CS.color = initial(ID.color)
 			CS.detail_color = initial(ID.detail_color)
 			CS.extra_details = initial(ID.extra_details)
-			CS.name = initial(ID.name) + " - " + initial(ID.icon_state)
+			CS.name = initial(ID.name)
+			if (initial(ID.job_access_type))
+				var/datum/job/J = initial(ID.job_access_type)
+				CS.name += " ([initial(J.title)]) "
+			CS.name += " - [initial(ID.icon_state)]"
 			var/color_pair = ""
 			if(CS.color)
 				color_pair += CS.color

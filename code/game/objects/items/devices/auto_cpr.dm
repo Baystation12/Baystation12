@@ -25,11 +25,11 @@
 			return 1
 		user.visible_message(SPAN_NOTICE("[user] starts fitting [src] onto the [M]'s chest."))
 
-		if(!do_mob(user, M, 2 SECONDS))
+		if(!do_after(user, 2 SECONDS, M))
 			return
 			
 		if(user.unEquip(src))
-			if(!M.equip_to_slot_if_possible(src, slot_wear_suit, del_on_fail=0, disable_warning=1, redraw_mob=1))
+			if(!M.equip_to_slot_if_possible(src, slot_wear_suit, TRYEQUIP_REDRAW | TRYEQUIP_SILENT))
 				user.put_in_active_hand(src)
 			return 1
 	else
@@ -57,6 +57,7 @@
 
 	if(world.time > last_pump + 15 SECONDS)
 		last_pump = world.time
+		playsound(src, 'sound/machines/pump.ogg', 25)
 		if(!skilled_setup && prob(20))
 			var/obj/item/organ/external/E = H.get_organ(BP_CHEST)
 			E.add_pain(15)

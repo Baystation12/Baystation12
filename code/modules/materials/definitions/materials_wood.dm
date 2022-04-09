@@ -4,13 +4,13 @@
 	adjective_name = "wooden"
 	stack_type = /obj/item/stack/material/wood
 	icon_colour = WOOD_COLOR_GENERIC
-	integrity = 50
-	icon_base = "solid"
+	integrity = 75
+	icon_base = "wood"
 	table_icon_base = "wood"
 	explosion_resistance = 2
 	shard_type = SHARD_SPLINTER
 	shard_can_repair = 0 // you can't weld splinters back into planks
-	hardness = 15
+	hardness = MATERIAL_FLEXIBLE + 10
 	brute_armor = 1
 	weight = 18
 	melting_point = T0C+300 //okay, not melting in this case, but hot enough to destroy wood
@@ -23,12 +23,13 @@
 	sheet_plural_name = "planks"
 	hitsound = 'sound/effects/woodhit.ogg'
 	conductive = 0
-	construction_difficulty = 1
+	construction_difficulty = MATERIAL_NORMAL_DIY
 	chem_products = list(
 				/datum/reagent/carbon = 10,
 				/datum/reagent/water = 5
 				)
 	sale_price = 1
+	value = 3
 
 /material/wood/holographic
 	name = "holo" + MATERIAL_WOOD
@@ -36,7 +37,8 @@
 	display_name = "wood"
 	stack_type = null
 	shard_type = SHARD_NONE
-	sale_price = null
+	sale_price = 0
+	value = 0
 	hidden_from_codex = TRUE
 
 /material/wood/mahogany
@@ -44,8 +46,9 @@
 	lore_text = "Mahogany is prized for its beautiful grain and rich colour, and as such is typically used for fine furniture and cabinetry."
 	adjective_name = MATERIAL_MAHOGANY
 	icon_colour = WOOD_COLOR_RICH
-	construction_difficulty = 2
+	construction_difficulty = MATERIAL_HARD_DIY
 	sale_price = 3
+	value = 45
 
 /material/wood/maple
 	name = MATERIAL_MAPLE
@@ -62,8 +65,10 @@
 	adjective_name = MATERIAL_EBONY
 	icon_colour = WOOD_COLOR_BLACK
 	weight = 22
-	construction_difficulty = 4
-	sale_price = 4
+	integrity = 100
+	construction_difficulty = MATERIAL_VERY_HARD_DIY
+	sale_price = 6
+	value = 85
 
 /material/wood/walnut
 	name = MATERIAL_WALNUT
@@ -73,5 +78,46 @@
 	adjective_name = MATERIAL_WALNUT
 	icon_colour = WOOD_COLOR_CHOCOLATE
 	weight = 20
-	construction_difficulty = 2
+	construction_difficulty = MATERIAL_HARD_DIY
 	sale_price = 2
+	value = 21
+
+/material/wood/bamboo
+	name = MATERIAL_BAMBOO
+	lore_text = "Bamboo is a fast-growing grass which can be used similar to wood after processing. Due to its swift growth \
+				and high strength, various species of bamboo area common building materials in developing societies."
+	adjective_name = MATERIAL_BAMBOO
+	icon_colour = WOOD_COLOR_PALE2
+	weight = 16
+	hardness = MATERIAL_RIGID
+
+/material/wood/yew
+	name = MATERIAL_YEW
+	lore_text = "Although favoured in days past for the construction of bows, yew has a multitude of uses, including medicine. The yew \
+				tree can live for nearly a thousand years thanks to its natural disease resistance."
+	adjective_name = MATERIAL_YEW
+	icon_colour = WOOD_COLOR_YELLOW
+	chem_products = list(
+				/datum/reagent/carbon = 10,
+				/datum/reagent/water = 5,
+				/datum/reagent/toxin/taxine = 0.05
+				)
+
+/material/wood/vox
+	name = MATERIAL_VOXRES
+	ignition_point = T0C+300
+	melting_point = T0C+300
+	conductive = 0
+	stack_type = /obj/item/stack/material/wood/vox
+	icon_colour = "#3a4e1b"
+	chem_products = list(
+				/datum/reagent/resinpulp = 20
+				)
+	hidden_from_codex = TRUE
+	sheet_singular_name = "slab"
+	sheet_plural_name = "slabs"
+	construction_difficulty = MATERIAL_NORMAL_DIY
+	integrity = 60
+	hardness = MATERIAL_FLEXIBLE
+	weight = 12
+	brute_armor = 1 

@@ -12,6 +12,7 @@
 	max_damage = 200
 	min_broken_damage = 50
 	w_class = ITEM_SIZE_HUGE
+	cavity_max_w_class = ITEM_SIZE_NORMAL
 	body_part = UPPER_TORSO
 	vital = 1
 	parent_organ = null
@@ -24,6 +25,7 @@
 	max_damage = 100
 	min_broken_damage = 50
 	w_class = ITEM_SIZE_LARGE
+	cavity_max_w_class = ITEM_SIZE_SMALL
 	body_part = LOWER_TORSO
 	parent_organ = BP_CHEST
 
@@ -109,9 +111,10 @@
 		return ..()
 	var/mob/living/carbon/human/H = owner
 	..()
-	if(!istype(H) || !H.organs || !H.organs.len)
+	if(!istype(H) || !length(H.organs))
 		H.death()
-	if(prob(50) && spawn_diona_nymph(get_turf(src)))
+	if(prob(25))
+		spawn_diona_nymph(get_turf(src))
 		qdel(src)
 
 /obj/item/organ/external/head/diona
@@ -119,16 +122,28 @@
 	max_damage = 50
 	min_broken_damage = 25
 	glowing_eyes = TRUE
-	eye_icon_location = 'icons/mob/human_races/species/diona/eyes.dmi'
-	apply_eye_colour = FALSE
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE
+	cavity_max_w_class = ITEM_SIZE_SMALL
+	var/eye_icon_location = 'icons/mob/human_races/species/diona/eyes.dmi'
+
+/obj/item/organ/external/head/diona/get_eye_overlay()
+	var/icon/I = get_eyes()
+	if(glowing_eyes)
+		var/image/eye_glow = image(I)
+		eye_glow.layer = EYE_GLOW_LAYER
+		eye_glow.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		return eye_glow
+
+/obj/item/organ/external/head/diona/get_eyes()
+	return icon(icon = eye_icon_location, icon_state = "")
 
 /obj/item/organ/external/head/diona/removed()
 	if(BP_IS_ROBOTIC(src))
 		return ..()
 	var/mob/living/carbon/human/H = owner
 	..()
-	if(!istype(H) || !H.organs || !H.organs.len)
+	if(!istype(H) || !length(H.organs))
 		H.death()
-	if(prob(50) && spawn_diona_nymph(get_turf(src)))
+	if(prob(25))
+		spawn_diona_nymph(get_turf(src))
 		qdel(src)

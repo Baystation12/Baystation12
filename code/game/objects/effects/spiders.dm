@@ -3,8 +3,8 @@
 	name = "web"
 	desc = "It's stringy and sticky."
 	icon = 'icons/effects/effects.dmi'
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	var/health = 15
 
 //similar to weeds, but only barfed out by nurses manually
@@ -20,7 +20,7 @@
 				qdel(src)
 	return
 
-/obj/effect/spider/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/spider/attackby(var/obj/item/W, var/mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
 	if(W.attack_verb.len)
@@ -34,7 +34,7 @@
 		damage += 5
 
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 
 		if(WT.remove_fuel(0, user))
 			damage = 15
@@ -82,6 +82,9 @@
 	desc = "They seem to pulse slightly with an inner life."
 	icon_state = "eggs"
 	var/amount_grown = 0
+	var/spiders_min = 6
+	var/spiders_max = 12
+	var/spider_type = /obj/effect/spider/spiderling
 
 /obj/effect/spider/eggcluster/Initialize(mapload, atom/parent)
 	. = ..()
@@ -98,26 +101,32 @@
 	. = ..()
 
 /obj/effect/spider/eggcluster/Process()
-	if(prob(80))
+	if(prob(70))
 		amount_grown += rand(0,2)
 	if(amount_grown >= 100)
-		var/num = rand(3,9)
+		var/num = rand(spiders_min, spiders_max)
 		var/obj/item/organ/external/O = null
 		if(istype(loc, /obj/item/organ/external))
 			O = loc
 
 		for(var/i=0, i<num, i++)
-			var/spiderling = new /obj/effect/spider/spiderling(loc, src)
+			var/spiderling = new spider_type(src.loc, src)
 			if(O)
 				O.implants += spiderling
 		qdel(src)
 
+/obj/effect/spider/eggcluster/small
+	spiders_min = 1
+	spiders_max = 3
+
+/obj/effect/spider/eggcluster/small/frost
+	spider_type = /obj/effect/spider/spiderling/frost
+
 /obj/effect/spider/spiderling
 	name = "spiderling"
 	desc = "It never stays still for long."
-	icon_state = "guard"
-	anchored = 0
-	plane = OBJ_PLANE
+	icon_state = "green"
+	anchored = FALSE
 	layer = BELOW_OBJ_LAYER
 	health = 3
 	var/mob/living/simple_animal/hostile/giant_spider/greater_form
@@ -129,15 +138,27 @@
 	var/growth_chance = 50 // % chance of beginning growth, and eventually become a beautiful death machine
 
 	var/shift_range = 6
-	var/castes = list(/mob/living/simple_animal/hostile/giant_spider = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/guard = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/nurse = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/spitter = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/hunter = 1)
+	var/castes = list(/mob/living/simple_animal/hostile/giant_spider/lurker = 0.1,
+						/mob/living/simple_animal/hostile/giant_spider/tunneler = 0.08,
+						/mob/living/simple_animal/hostile/giant_spider/pepper = 0.5,
+						/mob/living/simple_animal/hostile/giant_spider/webslinger = 1,
+						/mob/living/simple_animal/hostile/giant_spider/electric = 0.5,
+						/mob/living/simple_animal/hostile/giant_spider/thermic = 0.5,
+						/mob/living/simple_animal/hostile/giant_spider/frost = 0.5,
+						/mob/living/simple_animal/hostile/giant_spider/carrier = 2,
+						/mob/living/simple_animal/hostile/giant_spider/phorogenic = 0.01,
+						/mob/living/simple_animal/hostile/giant_spider = 2,
+						/mob/living/simple_animal/hostile/giant_spider/guard = 2,
+						/mob/living/simple_animal/hostile/giant_spider/nurse = 2,
+						/mob/living/simple_animal/hostile/giant_spider/spitter = 2,
+						/mob/living/simple_animal/hostile/giant_spider/hunter = 1)
+
+
+/obj/effect/spider/spiderling/frost
+	castes = list(/mob/living/simple_animal/hostile/giant_spider/frost = 1)
 
 /obj/effect/spider/spiderling/Initialize(var/mapload, var/atom/parent)
 	greater_form = pickweight(castes)
-	icon_state = initial(greater_form.icon_state)
 	pixel_x = rand(-shift_range, shift_range)
 	pixel_y = rand(-shift_range, shift_range)
 
@@ -159,14 +180,16 @@
 /obj/effect/spider/spiderling/mundane/dormant
 	dormant = TRUE    // It lies in wait, hoping you will walk face first into its web
 
+/obj/effect/spider/spiderling/growing
+	growth_chance = 100
+
 /obj/effect/spider/spiderling/Destroy()
 	if(dormant)
 		GLOB.moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
 	STOP_PROCESSING(SSobj, src)
-	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	. = ..()
 
-/obj/effect/spider/spiderling/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/spider/spiderling/attackby(var/obj/item/W, var/mob/user)
 	..()
 	if(health > 0)
 		disturbed()
@@ -198,11 +221,32 @@
 	if(health <= 0)
 		die()
 
+/obj/effect/spider/spiderling/proc/check_vent(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
+	if(QDELETED(exit_vent) || exit_vent.welded) // If it's qdeleted we probably were too, but in that case we won't be making this call due to timer cleanup.
+		forceMove(get_turf(entry_vent))
+		entry_vent = null
+		return TRUE
+
+/obj/effect/spider/spiderling/proc/start_vent_moving(obj/machinery/atmospherics/unary/vent_pump/exit_vent, var/travel_time)
+	if(check_vent(exit_vent))
+		return
+	if(prob(50))
+		audible_message(SPAN_NOTICE("You hear something squeezing through the ventilation ducts."))
+	forceMove(exit_vent)
+	addtimer(CALLBACK(src, .proc/end_vent_moving, exit_vent), travel_time)
+
+/obj/effect/spider/spiderling/proc/end_vent_moving(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
+	if(check_vent(exit_vent))
+		return
+	forceMove(get_turf(exit_vent))
+	travelling_in_vent = FALSE
+	entry_vent = null
+
 /obj/effect/spider/spiderling/Process()
 
 	if(loc)
 		var/datum/gas_mixture/environment = loc.return_air()
-		if(environment && environment.gas["methyl_bromide"] > 0)
+		if(environment && environment.gas[GAS_METHYL_BROMIDE] > 0)
 			die()
 			return
 
@@ -220,29 +264,12 @@
 					entry_vent = null
 					return
 				var/obj/machinery/atmospherics/unary/vent_pump/exit_vent = pick(vents)
-				/*if(prob(50))
-					src.visible_message("<B>[src] scrambles into the ventillation ducts!</B>")*/
 
-				spawn(rand(20,60))
-					forceMove(exit_vent)
-					var/travel_time = round(get_dist(loc, exit_vent.loc) / 2)
-					spawn(travel_time)
-
-						if(!exit_vent || exit_vent.welded)
-							forceMove(entry_vent)
-							entry_vent = null
-							return
-
-						if(prob(50))
-							src.visible_message("<span class='notice'>You hear something squeezing through the ventilation ducts.</span>",2)
-						sleep(travel_time)
-
-						if(!exit_vent || exit_vent.welded)
-							forceMove(entry_vent)
-							entry_vent = null
-							return
-						forceMove(exit_vent.loc)
-						entry_vent = null
+				forceMove(entry_vent)
+				var/travel_time = round(get_dist(loc, exit_vent.loc) / 2)
+				addtimer(CALLBACK(src, .proc/start_vent_moving, exit_vent, travel_time), travel_time + rand(20,60))
+				travelling_in_vent = TRUE
+				return
 			else
 				entry_vent = null
 	//=================
@@ -261,8 +288,8 @@
 					var/min_y = pixel_y <= -shift_range ? 0 : -2
 					var/max_y = pixel_y >=  shift_range ? 0 :  2
 
-					pixel_x = Clamp(pixel_x + rand(min_x, max_x), -shift_range, shift_range)
-					pixel_y = Clamp(pixel_y + rand(min_y, max_y), -shift_range, shift_range)
+					pixel_x = clamp(pixel_x + rand(min_x, max_x), -shift_range, shift_range)
+					pixel_y = clamp(pixel_y + rand(min_y, max_y), -shift_range, shift_range)
 		else if(prob(5))
 			//vent crawl!
 			for(var/obj/machinery/atmospherics/unary/vent_pump/v in view(7,src))
@@ -301,8 +328,7 @@
 	desc = "Green squishy mess."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "greenshatter"
-	anchored = 1
-	plane = ABOVE_TURF_PLANE
+	anchored = TRUE
 	layer = BLOOD_LAYER
 
 /obj/effect/spider/cocoon
@@ -315,8 +341,22 @@
 	. = ..()
 	icon_state = pick("cocoon1","cocoon2","cocoon3")
 
+
+	for(var/atom/movable/O in loc)
+		if(!O.anchored)
+			O.forceMove(src)
+
+			if (istype(O, /mob/living))
+				var/mob/living/L = O
+				if (!(L.status_flags & NOTARGET))
+					L.status_flags ^= NOTARGET
+
 /obj/effect/spider/cocoon/Destroy()
 	src.visible_message("<span class='warning'>\The [src] splits open.</span>")
 	for(var/atom/movable/A in contents)
 		A.dropInto(loc)
+		if (istype(A, /mob/living))
+			var/mob/living/L = A
+			if (L.status_flags & NOTARGET)
+				L.status_flags ^= NOTARGET
 	return ..()

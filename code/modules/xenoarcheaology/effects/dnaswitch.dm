@@ -27,7 +27,7 @@
 /datum/artifact_effect/dnaswitch/DoEffectAura()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for(var/mob/living/carbon/human/H in range(src.effectrange,T))
+		for(var/mob/living/carbon/human/H in range(effectrange,T))
 			var/weakness = GetAnomalySusceptibility(H)
 			if(prob(weakness * 100))
 				if(prob(30))
@@ -40,7 +40,7 @@
 /datum/artifact_effect/dnaswitch/DoEffectPulse()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for(var/mob/living/carbon/human/H in range(200, T))
+		for(var/mob/living/carbon/human/H in range(effectrange, T))
 			var/weakness = GetAnomalySusceptibility(H)
 			if(prob(weakness * 100))
 				if(prob(75))
@@ -50,3 +50,16 @@
 						scramble(1, H, weakness * severity)
 					else
 						scramble(0, H, weakness * severity)
+
+/datum/artifact_effect/dnaswitch/destroyed_effect()
+	. = ..()
+
+	if(holder)
+		var/turf/T = get_turf(holder)
+		for(var/mob/living/carbon/human/H in range(effectrange, T))
+			var/weakness = GetAnomalySusceptibility(H)
+			if(prob(weakness * 100))
+				if(prob(50))
+					scramble(1, H, weakness * severity)
+				else
+					scramble(0, H, weakness * severity)

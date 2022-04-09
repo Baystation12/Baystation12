@@ -8,21 +8,23 @@ Thumbs.db
 *.backup
 *.before
 data/
+dmdoc/
 cfg/
 build_log.txt
 use_map
 stopserver
 reboot_called
 atupdate
-__pycache__
 
 # ignore config, but not subdirs
 !config/*/
 config/*
 sql/test_db
 
-# vscode
+# VisualStudioCode
 .vscode/*
+!.vscode/settings.json
+*.code-workspace
 .history
 
 # swap
@@ -40,4 +42,14 @@ Session.vim
 
 # auto-generated tag files
 tags
-baystation12.code-workspace
+
+# ignore built libs
+lib/*.dll
+lib/*.so
+
+# python
+*.pyc
+__pycache__
+
+# flyway config
+flyway.conf

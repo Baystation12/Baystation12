@@ -27,7 +27,7 @@
 	// If a neighbor is dirty, then we get dirtier.
 	var/how_dirty = dirty_neighbors(cardinal_turfs)
 	for(var/i = 0; i < how_dirty; i++)
-		T.dirt += rand(0,10)
+		T.dirt += rand(0,5)
 	T.update_dirt()
 
 	if(prob(oil_probability))
@@ -39,9 +39,9 @@
 
 	if(prob(vermin_probability))
 		if(prob(80))
-			new /mob/living/simple_animal/mouse(T)
+			new /mob/living/simple_animal/passive/mouse(T)
 		else
-			new /mob/living/simple_animal/lizard(T)
+			new /mob/living/simple_animal/passive/lizard(T)
 
 	if(prob(web_probability))	// Keep in mind that only "corners" get any sort of web
 		attempt_web(T, cardinal_turfs)

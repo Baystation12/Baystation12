@@ -31,11 +31,16 @@
  * */
 
 /datum/recipe
+	var/display_name
 	var/list/reagents // example: = list(/datum/reagent/drink/juice/berry = 5) // do not list same reagent twice
-	var/list/items    // example: = list(/obj/item/weapon/crowbar, /obj/item/weapon/welder) // place /foo/bar before /foo
+	var/list/items    // example: = list(/obj/item/crowbar, /obj/item/welder) // place /foo/bar before /foo
 	var/list/fruit    // example: = list("fruit" = 3)
-	var/result        // example: = /obj/item/weapon/reagent_containers/food/snacks/donut/normal
+	var/result        // example: = /obj/item/reagent_containers/food/snacks/donut/normal
 	var/time = 100    // 1/10 part of second
+	var/hidden_from_codex = FALSE
+	var/lore_text
+	var/mechanics_text
+	var/antag_text
 
 /datum/recipe/proc/check_reagents(var/datum/reagents/avail_reagents)
 	. = 1
@@ -56,7 +61,7 @@
 		var/list/checklist = list()
 		 // You should trust Copy().
 		checklist = fruit.Copy()
-		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in container)
+		for(var/obj/item/reagent_containers/food/snacks/grown/G in container)
 			if(!G.seed || !G.seed.kitchen_tag || isnull(checklist[G.seed.kitchen_tag]))
 				continue
 			checklist[G.seed.kitchen_tag]--
@@ -75,7 +80,7 @@
 		var/list/checklist = list()
 		checklist = items.Copy() // You should really trust Copy
 		for(var/obj/O in container.InsertedContents())
-			if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/grown))
+			if(istype(O,/obj/item/reagent_containers/food/snacks/grown))
 				continue // Fruit is handled in check_fruit().
 			var/found = 0
 			for(var/i = 1; i < checklist.len+1; i++)
@@ -103,19 +108,22 @@
 /datum/recipe/proc/make_food(var/obj/container as obj)
 	if(!result)
 		log_error("<span class='danger'>Recipe [type] is defined without a result, please bug this.</span>")
-
 		return
 	var/obj/result_obj = new result(container)
-	for (var/obj/O in (container.InsertedContents()-result_obj))
+	container.reagents.clear_reagents()
+	//Checked here in case LAZYCLEARLIST nulls and no more physical ingredients are added
+	var/list/container_contents = container.InsertedContents()
+	if(!container_contents)
+		return result_obj
+	for (var/obj/O in (container_contents-result_obj))
 		if (O.reagents)
 			O.reagents.del_reagent(/datum/reagent/nutriment)
 			O.reagents.update_total()
 			O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
-		if(istype(O,/obj/item/weapon/holder/))
-			var/obj/item/weapon/holder/H = O
+		if(istype(O,/obj/item/holder/))
+			var/obj/item/holder/H = O
 			H.destroy_all()
 		qdel(O)
-	container.reagents.clear_reagents()
 	return result_obj
 
 /proc/select_recipe(var/list/datum/recipe/avaiable_recipes, var/obj/obj as obj, var/exact)

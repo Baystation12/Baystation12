@@ -46,4 +46,4 @@
 /mob/living/Initialize()
 	. = ..()
 	if(possession_candidate)
-		set_extension(src, /datum/extension/on_click/alt, /datum/extension/on_click/alt/ghost_admin_killer)
+		set_extension(src, /datum/extension/on_click/alt/ghost_admin_killer)

@@ -12,7 +12,6 @@
 	cell = null
 	power_usage = 0
 	var/translate_binary = 0
-	var/translate_hive = 0
 	var/list/encryption_keys = list()
 	var/max_keys = 2
 
@@ -39,8 +38,9 @@
 /obj/item/device/radio/headset/list_channels(var/mob/user)
 	return list_secure_channels()
 
-/obj/item/device/radio/headset/examine(mob/user)
-	if(!(..(user, 1) && radio_desc))
+/obj/item/device/radio/headset/examine(mob/user, distance)
+	. = ..()
+	if(distance > 1 || !radio_desc)
 		return
 
 	to_chat(user, "The following channels are available:")
@@ -49,11 +49,8 @@
 /obj/item/device/radio/headset/handle_message_mode(mob/living/M as mob, message, channel)
 	if (channel == "special")
 		if (translate_binary)
-			var/datum/language/binary = all_languages["Robot Talk"]
+			var/datum/language/binary = all_languages[LANGUAGE_ROBOT_GLOBAL]
 			binary.broadcast(M, message)
-		if (translate_hive)
-			var/datum/language/hivemind = all_languages["Hivemind"]
-			hivemind.broadcast(M, message)
 		return null
 
 	return ..()
@@ -67,8 +64,25 @@
 			return ..(freq, level)
 	return -1
 
+/obj/item/device/radio/headset/map_preset
+	var/preset_name
+	var/encryption_key = /obj/item/device/encryptionkey
+	var/use_common = FALSE
+
+/obj/item/device/radio/headset/map_preset/Initialize()
+	if (preset_name)
+		var/name_lower = lowertext(preset_name)
+		name = "[name_lower] radio headset"
+		ks1type = encryption_key
+		default_frequency = assign_away_freq(preset_name)
+		if (use_common)
+			frequency = PUB_FREQ
+		else
+			frequency = default_frequency
+	. = ..()
+
 /obj/item/device/radio/headset/syndicate
-	origin_tech = list(TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_ESOTERIC = 3)
 	syndie = 1
 	ks1type = /obj/item/device/encryptionkey/syndicate
 
@@ -81,7 +95,7 @@
 	set_frequency(SYND_FREQ)
 
 /obj/item/device/radio/headset/raider
-	origin_tech = list(TECH_ILLEGAL = 2)
+	origin_tech = list(TECH_ESOTERIC = 2)
 	syndie = 1
 	ks1type = /obj/item/device/encryptionkey/raider
 
@@ -89,8 +103,15 @@
 	. = ..()
 	set_frequency(RAID_FREQ)
 
+/obj/item/device/radio/headset/vox_raider
+	ks1type = /obj/item/device/encryptionkey/vox_raider
+
+/obj/item/device/radio/headset/vox_raider/Initialize()
+	. = ..()
+	set_frequency(V_RAID_FREQ)
+
 /obj/item/device/radio/headset/binary
-	origin_tech = list(TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_ESOTERIC = 3)
 	ks1type = /obj/item/device/encryptionkey/binary
 
 /obj/item/device/radio/headset/headset_sec
@@ -164,6 +185,12 @@
 	item_state = "com_headset_alt"
 	ks1type = /obj/item/device/encryptionkey/headset_com
 	max_keys = 3
+
+/obj/item/device/radio/headset/merchant
+	name = "merchant headset"
+	desc = "A headset utilizing the universal hailing frequency."
+	frequency = HAIL_FREQ
+	ks1type = /obj/item/device/encryptionkey/merchant
 
 /obj/item/device/radio/headset/heads/captain
 	name = "captain's headset"
@@ -249,13 +276,6 @@
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_service
 
-/obj/item/device/radio/headset/ert
-	name = "emergency response team radio headset"
-	desc = "The headset of the boss's boss."
-	icon_state = "com_headset"
-	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/ert
-
 /obj/item/device/radio/headset/foundation
 	name = "\improper Foundation radio headset"
 	desc = "The headeset of the occult cavalry."
@@ -310,7 +330,7 @@
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/specops
 
-/obj/item/device/radio/headset/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/device/radio/headset/attackby(obj/item/W as obj, mob/user as mob)
 //	..()
 	user.set_machine(src)
 	if (!( isScrewdriver(W) || (istype(W, /obj/item/device/encryptionkey/ ))))
@@ -349,13 +369,10 @@
 /obj/item/device/radio/headset/recalculateChannels(var/setDescription = 0)
 	src.channels = list()
 	src.translate_binary = 0
-	src.translate_hive = 0
 	src.syndie = 0
 	for(var/obj/ekey in encryption_keys)
 		import_key_data(ekey)
 	for (var/ch_name in channels)
-		if(!radio_controller)
-			sleep(30) // Waiting for the radio_controller to be created.
 		if(!radio_controller)
 			src.SetName("broken radio headset")
 			return
@@ -373,8 +390,6 @@
 		src.channels[ch_name] = key.channels[ch_name]
 	if(key.translate_binary)
 		src.translate_binary = 1
-	if(key.translate_hive)
-		src.translate_hive = 1
 	if(key.syndie)
 		src.syndie = 1
 

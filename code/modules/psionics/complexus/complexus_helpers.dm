@@ -15,11 +15,9 @@
 	cancel()
 
 /datum/psi_complexus/proc/get_armour(var/armourtype)
-	if(can_use_passive())
-		last_armor_check = world.time
-		return round(Clamp(Clamp(4 * rating, 0, 20) * get_rank(SSpsi.armour_faculty_by_type[armourtype]), 0, 100) * (stamina/max_stamina))
+	if(use_psi_armour && can_use_passive())
+		return round(clamp(clamp(4 * rating, 0, 20) * get_rank(SSpsi.armour_faculty_by_type[armourtype]), 0, 100) * (stamina/max_stamina))
 	else
-		last_armor_check = 0
 		return 0
 
 /datum/psi_complexus/proc/get_rank(var/faculty)
@@ -48,7 +46,7 @@
 	if(isnull(check_incapacitated))
 		check_incapacitated = (INCAPACITATION_STUNNED|INCAPACITATION_KNOCKOUT)
 	if(can_use(check_incapacitated))
-		value = max(1, ceil(value * cost_modifier))
+		value = max(1, Ceil(value * cost_modifier))
 		if(value <= stamina)
 			stamina -= value
 			ui.update_icon()
@@ -59,6 +57,9 @@
 			. = FALSE
 		ui.update_icon()
 
+/datum/psi_complexus/proc/spend_power_armor(var/value = 0)
+	armor_cost += value
+
 /datum/psi_complexus/proc/hide_auras()
 	if(owner.client)
 		for(var/thing in SSpsi.all_aura_images)
@@ -66,8 +67,8 @@
 
 /datum/psi_complexus/proc/show_auras()
 	if(owner.client)
-		for(var/thing in SSpsi.all_aura_images)
-			owner.client.images |= thing
+		for(var/image/I in SSpsi.all_aura_images)
+			owner.client.images |= I
 
 /datum/psi_complexus/proc/backblast(var/value)
 
@@ -96,7 +97,7 @@
 
 /datum/psi_complexus/proc/reset()
 	aura_color = initial(aura_color)
-	ranks = base_ranks.Copy()
+	ranks = base_ranks ? base_ranks.Copy() : null
 	max_stamina = initial(max_stamina)
 	stamina = min(stamina, max_stamina)
 	cancel()

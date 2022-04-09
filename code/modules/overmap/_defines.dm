@@ -12,10 +12,11 @@ var/global/list/map_sectors = list()
 /turf/unsimulated/map
 	icon = 'icons/turf/space.dmi'
 	icon_state = "map"
+	permit_ao = FALSE
 
 /turf/unsimulated/map/edge
 	opacity = 1
-	density = 1
+	density = TRUE
 
 /turf/unsimulated/map/New()
 	..()
@@ -76,3 +77,8 @@ proc/toggle_move_stars(zlevel, direction)
 						AM.throw_at(get_step(T,reverse_direction(direction)), 5, 1)
 						CHECK_TICK
 			CHECK_TICK
+
+/proc/is_edge_turf(turf/T) //borrowed from random_map.dm:45
+	var/area/A = get_area(T)
+	var/list/dimensions = A.get_dimensions()
+	return T.x <= TRANSITIONEDGE || T.x >= (dimensions["x"] - TRANSITIONEDGE + 1) || T.y <= TRANSITIONEDGE || T.y >= (dimensions["y"] - TRANSITIONEDGE + 1)

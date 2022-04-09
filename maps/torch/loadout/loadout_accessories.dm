@@ -1,42 +1,78 @@
-/datum/gear/accessory/solawardmajor
-	display_name = "SolGov major award selection"
-	description = "A medal or ribbon awarded to SolGov personnel for significant accomplishments."
-	path = /obj/item/clothing/accessory
+/datum/gear/accessory/solgov_award_military
+	display_name = "SolGov military award selection"
+	description = "A selection of military awards awarded by the Sol Central Government."
+	path = /obj/item/clothing/accessory/medal/solgov/mil
 	cost = 8
 	allowed_branches = SOLGOV_BRANCHES
 
-/datum/gear/accessory/solawardmajor/New()
+/datum/gear/accessory/solgov_award_military/New()
 	..()
-	var/solmajors = list()
-	solmajors["iron star"] = /obj/item/clothing/accessory/medal/solgov/iron/star
-	solmajors["bronze heart"] = /obj/item/clothing/accessory/medal/solgov/bronze/heart
-	solmajors["silver sword"] = /obj/item/clothing/accessory/medal/solgov/silver/sword
-	solmajors["medical heart"] = /obj/item/clothing/accessory/medal/solgov/heart
-	solmajors["valor medal"] = /obj/item/clothing/accessory/medal/solgov/silver/sol
-	solmajors["sapienterian medal"] = /obj/item/clothing/accessory/medal/solgov/gold/sol
-	solmajors["peacekeeper ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/peace
-	solmajors["marksman ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/marksman
-	gear_tweaks += new/datum/gear_tweak/path(solmajors)
+	var/solmilitary = list()
+	solmilitary["Bronze Heart"] = /obj/item/clothing/accessory/medal/solgov/mil/bronze_heart
+	solmilitary["Home Guard medal"] = /obj/item/clothing/accessory/medal/solgov/mil/home_guard
+	solmilitary["Iron Star"] = /obj/item/clothing/accessory/medal/solgov/mil/iron_star
+	solmilitary["Armed Forces medal"] = /obj/item/clothing/accessory/medal/solgov/mil/armed_forces
+	solmilitary["Silver Sword"] = /obj/item/clothing/accessory/medal/solgov/mil/silver_sword
+	solmilitary["Superior Service Cross"] = /obj/item/clothing/accessory/medal/solgov/mil/service_cross
+	solmilitary["Medal of Honor"] = /obj/item/clothing/accessory/medal/solgov/mil/medal_of_honor
+	gear_tweaks += new/datum/gear_tweak/path(solmilitary)
 
-/datum/gear/accessory/solawardminor
-	display_name = "SolGov minor award selection"
-	description = "A medal or ribbon awarded to SolGov personnel for minor accomplishments."
-	path = /obj/item/clothing/accessory
+/datum/gear/accessory/solgov_award_civilian
+	display_name = "SolGov civilian award selection"
+	description = "A selection of civilian awards awarded by the Sol Central Government."
+	path = /obj/item/clothing/accessory/medal/solgov/civ
 	cost = 5
+
+/datum/gear/accessory/solgov_award_civilian/New()
+	..()
+	var/solcivilian = list()
+	solcivilian["Expeditionary Medal"] = /obj/item/clothing/accessory/medal/solgov/civ/expeditionary
+	solcivilian["Sapientarian Peace Award"] = /obj/item/clothing/accessory/medal/solgov/civ/sapientarian
+	solcivilian["Distinguished Service Medal"] = /obj/item/clothing/accessory/medal/solgov/civ/service
+	gear_tweaks += new/datum/gear_tweak/path(solcivilian)
+
+/datum/gear/accessory/solgov_award_ribbons
+	display_name = "SolGov ribbon selection"
+	description = "A selection of decorations and medal ribbons awarded by the Sol Central Government."
+	path = /obj/item/clothing/accessory/ribbon/solgov
+	cost = 3
 	allowed_branches = SOLGOV_BRANCHES
 
-/datum/gear/accessory/solawardminor/New()
+/datum/gear/accessory/solgov_award_ribbons/New()
 	..()
-	var/solminors = list()
-	solminors["expeditionary medal"] = /obj/item/clothing/accessory/medal/solgov/iron/sol
-	solminors["operations medal"] = /obj/item/clothing/accessory/medal/solgov/bronze/sol
-	solminors["frontier ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/frontier
-	solminors["instructor ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/instructor
-	gear_tweaks += new/datum/gear_tweak/path(solminors)
+	var/solribbons = list()
+	solribbons["Marksmanship ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/marksman
+	solribbons["Peacekeeping ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/peace
+	solribbons["Frontier ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/frontier
+	solribbons["Instructor ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/instructor
+	solribbons["Combat Action ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/combat
+	solribbons["Gaia Conflict ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/gaiaconflict
+	solribbons["Distinguished unit ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/distinguished_unit
+	//medal ribbons
+	solribbons["Bronze Heart ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/bronze_heart
+	solribbons["Home Guard ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/home_guard
+	solribbons["Iron Star ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/iron_star
+	solribbons["Armed Forces ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/armed_forces
+	solribbons["Silver Sword ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/silver_sword
+	solribbons["Superior Service ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/service_cross
+	solribbons["Medal of Honor ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/medal_of_honor
+	solribbons["Expeditionary Ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/expeditionary_medal
+	solribbons["Sapientarian ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/sapientarian
+	solribbons["Distinguished Service ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/service
+	solribbons["Combat Medical ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/medical
+	gear_tweaks += new/datum/gear_tweak/path(solribbons)
 
 /datum/gear/accessory/tags
 	display_name = "dog tags"
 	path = /obj/item/clothing/accessory/badge/solgov/tags
+	custom_setup_proc = /obj/item/clothing/accessory/badge/solgov/tags/proc/loadout_setup
+
+/datum/gear/accessory/ec_scarf
+	display_name = "Expeditionary Corps scarf"
+	path = /obj/item/clothing/accessory/solgov/ec_scarf
+	description = "A section-specific scarf for Expeditionary Corps uniforms."
+	flags = GEAR_HAS_TYPE_SELECTION
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
 
 /datum/gear/accessory/ec_patch
 	display_name = "Expeditionary Corps patch"
@@ -53,7 +89,11 @@
 /datum/gear/accessory/pilot_pin
 	display_name = "pilot's qualification pin"
 	path = /obj/item/clothing/accessory/solgov/specialty/pilot
-	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/nt_pilot)
+	allowed_skills = list(SKILL_PILOT = SKILL_ADEPT)
+	allowed_branches = list(
+		/datum/mil_branch/fleet,
+		/datum/mil_branch/expeditionary_corps
+	)
 
 /datum/gear/accessory/fleetpatch
 	display_name = "fleet patch"
@@ -76,12 +116,12 @@
 	allowed_roles = MEDICAL_ROLES
 
 /datum/gear/accessory/armband_emt
-	allowed_roles = list(/datum/job/doctor, /datum/job/doctor_contractor)
+	allowed_roles = list(/datum/job/doctor, /datum/job/medical_trainee)
 
 /datum/gear/accessory/armband_corpsman
-	display_name = "medical corps armband"
+	display_name = "medical armband"
 	path = /obj/item/clothing/accessory/armband/medblue
-	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor)
+	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/doctor, /datum/job/medical_trainee)
 
 /datum/gear/accessory/armband_engineering
 	allowed_roles = ENGINEERING_ROLES
@@ -101,38 +141,33 @@
 /datum/gear/accessory/tie_color
 	allowed_branches = CIVILIAN_BRANCHES
 
+/datum/gear/accessory/neckerchief
+
 /datum/gear/accessory/stethoscope
 	allowed_roles = STERILE_ROLES
 
-/datum/gear/storage/brown_vest
-	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech,
-						/datum/job/cargo_contractor, /datum/job/mining, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/merchant, /datum/job/nt_pilot)
-
-/datum/gear/storage/black_vest
-	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/merchant)
-
-/datum/gear/storage/white_vest
-	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor, /datum/job/roboticist, /datum/job/merchant)
-
-/datum/gear/storage/brown_drop_pouches
-	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech,
-						/datum/job/cargo_contractor, /datum/job/mining, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/merchant)
-
-/datum/gear/storage/black_drop_pouches
-	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/merchant)
-
-/datum/gear/storage/white_drop_pouches
-	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor, /datum/job/roboticist, /datum/job/merchant)
-
 /datum/gear/tactical/holster
 	allowed_roles = ARMED_ROLES
+
+/datum/gear/tactical/holster/New()
+	..()
+	var/holsters = list()
+	holsters["shoulder holster"] = /obj/item/clothing/accessory/storage/holster
+	holsters["armpit holster"] = /obj/item/clothing/accessory/storage/holster/armpit
+	holsters["waist holster"] = /obj/item/clothing/accessory/storage/holster/waist
+	holsters["hip holster"] = /obj/item/clothing/accessory/storage/holster/hip
+	holsters["thigh holster"] = /obj/item/clothing/accessory/storage/holster/thigh
+	gear_tweaks += new/datum/gear_tweak/path(holsters)
+
+/datum/gear/tactical/sheath
+	allowed_roles = list(/datum/job/pathfinder, /datum/job/explorer)
 
 /datum/gear/tactical/armor_deco
 	allowed_roles = ARMORED_ROLES
 
 /datum/gear/tactical/press_tag
 	display_name = "Press tag"
-	path = /obj/item/clothing/accessory/armor/tag/press
+	path = /obj/item/clothing/accessory/armor_tag/press
 	allowed_roles = list(/datum/job/assistant)
 
 /datum/gear/tactical/helm_covers
@@ -143,8 +178,6 @@
 	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/scarf
-	allowed_roles = SEMIANDFORMAL_ROLES
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/flannel
 	allowed_roles = SEMIFORMAL_ROLES
@@ -155,6 +188,9 @@
 	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/suspenders
+	allowed_branches = CIVILIAN_BRANCHES
+
+/datum/gear/clothing/suspenders/colorable
 	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/wcoat
@@ -187,7 +223,7 @@
 /datum/gear/accessory/bowtie
 	allowed_branches = CIVILIAN_BRANCHES
 
-/datum/gear/accessory/ftupin
+/datum/gear/accessory/ftu_pin
 	allowed_branches = CIVILIAN_BRANCHES
 
 /*********************

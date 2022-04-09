@@ -1,6 +1,6 @@
 /spell/targeted/exhude_pleasantness
 	name = "Exhude Pleasantness"
-	desc = "A simple spell used to make friends with people. Be warned, this spell only has a subtle effect"
+	desc = "A simple spell used to make friends with people. Be warned, this spell only has a subtle effect."
 	feedback = "AP"
 	school = "Illusion"
 	spell_flags = INCLUDEUSER

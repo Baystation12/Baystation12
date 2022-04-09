@@ -1,16 +1,19 @@
 /obj/machinery/wish_granter
 	name = "Wish Granter"
 	desc = "You're not so sure about this, anymore..."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/syndicate_beacon.dmi'
 	icon_state = "syndbeacon"
 
 	use_power = POWER_USE_OFF
-	anchored = 1
-	density = 1
+	uncreated_component_parts = null
+	interact_offline = TRUE
+	anchored = TRUE
+	density = TRUE
 
 	var/charges = 1
 	var/insisting = 0
 
+// Just override; we're special.
 /obj/machinery/wish_granter/attack_hand(var/mob/user as mob)
 	usr.set_machine(src)
 
@@ -50,19 +53,10 @@
 		if (!(MUTATION_COLD_RESISTANCE in user.mutations))
 			user.mutations.Add(MUTATION_COLD_RESISTANCE)
 
-		if (!(MUTATION_TK in user.mutations))
-			user.mutations.Add(MUTATION_TK)
-
 		if(!(MUTATION_HEAL in user.mutations))
 			user.mutations.Add(MUTATION_HEAL)
 
 		user.update_mutations()
 		user.mind.special_role = "Avatar of the Wish Granter"
-
-		var/datum/objective/silence/silence = new
-		silence.owner = user.mind
-		user.mind.objectives += silence
-
-		show_objectives(user.mind)
 		to_chat(user, "You have a very bad feeling about this.")
 	return

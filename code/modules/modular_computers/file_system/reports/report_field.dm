@@ -50,22 +50,65 @@
 /datum/report_field/proc/set_value(given_value)
 	value = given_value
 
-//Exports the contents of the field into html for viewing. 
-/datum/report_field/proc/get_value()
+//Exports the contents of the field into html for viewing.
+/datum/report_field/proc/get_value(in_line = 0)
 	return value
 
 //In case the name needs to be displayed dynamically.
 /datum/report_field/proc/display_name()
 	return name
 
+/datum/report_field/proc/generate_row_pencode(access, with_fields)
+	if(!ignore_value)
+		. += "\[row\]\[cell\]\[b\][display_name()]:\[/b\]"
+		var/field = ((with_fields && can_edit) ? "\[field\]" : "" )
+		if(!access || verify_access(access))
+			. += (needs_big_box ? "\[/grid\][get_value()][field]\[grid\]" : "\[cell\][get_value()][field]")
+		else
+			. += "\[cell\]\[REDACTED\][field]"
+	else
+		. += "\[/grid\][display_name()]\[grid\]"
+	. = JOINTEXT(.)
+
+/datum/report_field/proc/generate_nano_data(list/given_access)
+	var/dat = list()
+	if(given_access)
+		dat["access"] = verify_access(given_access)
+		dat["access_edit"] = verify_access_edit(given_access)
+	dat["name"] = display_name()
+	dat["value"] = get_value()
+	dat["can_edit"] = can_edit
+	dat["needs_big_box"] = needs_big_box
+	dat["ignore_value"] = ignore_value
+	dat["ID"] = ID
+	return dat
+
 /*
 Basic field subtypes.
 */
 
-//For information between fields.
-/datum/report_field/instruction
+//For plain text without forms.
+/datum/report_field/text_label
 	can_edit = 0
 	ignore_value = 1
+
+//For information between fields.
+/datum/report_field/text_label/instruction/generate_row_pencode(access, with_fields)
+	return "\[small\]\[i\][display_name()]\[/i\]\[/small\]"
+
+/datum/report_field/text_label/instruction/generate_nano_data(list/given_access)
+	var/dat = ..()
+	dat["name"] = "<div class='notice'><small><i>[display_name()]</i></small></div>"
+	return dat
+
+//For headers between fields.
+/datum/report_field/text_label/header/generate_row_pencode(access, with_fields)
+	return "\[h3][display_name()]\[/h3]"
+
+/datum/report_field/text_label/header/generate_nano_data(list/given_access)
+	var/dat = ..()
+	dat["name"] = "<h3>[display_name()]</h3>"
+	return dat
 
 //Basic text field, for short strings.
 /datum/report_field/simple_text
@@ -85,7 +128,7 @@ Basic field subtypes.
 	needs_big_box = 1
 
 /datum/report_field/pencode_text/get_value()
-	return pencode2html(value)
+	return digitalPencode2html(value)
 
 /datum/report_field/pencode_text/set_value(given_value)
 	if(istext(given_value))

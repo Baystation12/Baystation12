@@ -125,14 +125,14 @@ GLOBAL_DATUM_INIT(musical_config, /datum/musical_config, new)
 			"Value that controls the modal density in the late reverberation decay",
 			{"
 Bit flags that modify the behavior of above properties
-•1 - 'EnvSize' affects reverberation decay time
-•2 - 'EnvSize' affects reflection level
-•4 - 'EnvSize' affects initial reflection delay time
-•8 - 'EnvSize' affects reflections level
-•16 - 'EnvSize' affects late reverberation delay time
-•32 - AirAbsorptionHF affects DecayHFRatio
-•64 - 'EnvSize' affects echo time
-•128 - 'EnvSize' affects modulation time"})
+- 1 - 'EnvSize' affects reverberation decay time
+- 2 - 'EnvSize' affects reflection level
+- 4 - 'EnvSize' affects initial reflection delay time
+- 8 - 'EnvSize' affects reflections level
+- 16 - 'EnvSize' affects late reverberation delay time
+- 32 - AirAbsorptionHF affects DecayHFRatio
+- 64 - 'EnvSize' affects echo time
+- 128 - 'EnvSize' affects modulation time"})
 
 	var/list/echo_default = list(0, 0, 0, 0, 0, 0.0, 0, 0.25, 1.5, 1.0, 0, 1.0, 0, 0.0, 0.0, 0.0, 1.0, 7)
 	var/list/list/echo_params_bounds = list(
@@ -192,9 +192,10 @@ Bit flags that modify the behavior of above properties
 			"like DS3D flRolloffFactor but for room effect",
 			"multiplies AirAbsorptionHF member of environment reverb properties.",
 			{"
-			Bit flags that modify the behavior of properties•1 - Automatic setting of 'Direct' due to distance from listener
-			•2 - Automatic setting of 'Room' due to distance from listener
-			•4 - Automatic setting of 'RoomHF' due to distance from listener"})
+			Bit flags that modify the behavior of properties
+			- 1 - Automatic setting of 'Direct' due to distance from listener
+			- 2 - Automatic setting of 'Room' due to distance from listener
+			- 4 - Automatic setting of 'RoomHF' due to distance from listener"})
 
 	var/list/n2t_int = list() // Instead of num2text it is used for faster access in n2t
 	var/list/nn2no = list(0,2,4,5,7,9,11) // Maps note num onto note offset
@@ -215,7 +216,7 @@ Bit flags that modify the behavior of above properties
 
 /datum/musical_config/proc/environment_to_id(environment)
 	if (environment in src.all_environments)
-		return src.all_environments.Find(environment) - 2
+		return list_find(src.all_environments, environment) - 2
 	return -1
 
 

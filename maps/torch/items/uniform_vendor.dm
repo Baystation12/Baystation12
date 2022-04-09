@@ -2,28 +2,34 @@
 	name = "uniform vendor"
 	desc= "A uniform vendor for utility, service, and dress uniforms."
 	icon = 'icons/obj/vending.dmi'
-	icon_state = "robotics"
+	icon_state = "uniform"
 	layer = BELOW_OBJ_LAYER
-	anchored = 1
-	density = 1
-
-	var/icon_deny = "robotics-deny"
-	var/icon_off = "robotics-off"
+	anchored = TRUE
+	density = TRUE
 
 	// Power
 	use_power = 1
 	idle_power_usage = 10
 	var/vend_power_usage = 150 //actuators and stuff
 
-	var/obj/item/weapon/card/id/ID
+	var/obj/item/card/id/ID
 	var/list/uniforms = list()
 	var/list/selected_outfit = list()
 	var/global/list/issued_items = list()
 
-/obj/machinery/uniform_vendor/attack_hand(mob/user)
-	if(..())
-		return
+/obj/machinery/uniform_vendor/on_update_icon()
+	if(stat & BROKEN)
+		icon_state = "[initial(icon_state)]-broken"
+	else if(!(stat & NOPOWER))
+		icon_state = initial(icon_state)
+	else
+		icon_state = "[initial(icon_state)]-off"
 
+/obj/machinery/uniform_vendor/interface_interact(mob/user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/uniform_vendor/interact(mob/user)
 	var/dat = list()
 	dat += "User ID: <a href='byond://?src=\ref[src];ID=1'>[ID ? "[ID.registered_name], [ID.military_rank], [ID.military_branch]" : "--------"]</a>"
 	dat += "<hr>"
@@ -62,7 +68,7 @@
 			ID = null
 			selected_outfit.Cut()
 		else
-			var/obj/item/weapon/card/id/I = user.get_active_hand()
+			var/obj/item/card/id/I = user.get_active_hand()
 			if(istype(I) && user.unEquip(I, src))
 				ID = I
 		. = TOPIC_REFRESH
@@ -85,20 +91,21 @@
 		selected_outfit -= locate(href_list["rem"])
 		. = TOPIC_REFRESH
 	if(href_list["vend"])
+		flick("uniform-vend", src)
 		spawn_uniform(selected_outfit)
 		selected_outfit.Cut()
 		. = TOPIC_REFRESH
 	if(.)
 		attack_hand(user)
 
-/obj/machinery/uniform_vendor/attackby(var/obj/item/weapon/W, var/mob/user)
-	if(istype(W, /obj/item/weapon/clothingbag))
+/obj/machinery/uniform_vendor/attackby(var/obj/item/W, var/mob/user)
+	if(istype(W, /obj/item/clothingbag))
 		if(W.contents.len)
 			to_chat(user, "<span class='notice'>You must empty \the [W] before you can put it in \the [src].</span>")
 			return
 		to_chat(user, "<span class='notice'>You put \the [W] into \the [src]'s recycling slot.</span>")
 		qdel(W)
-	else if(istype(W, /obj/item/weapon/card/id) && !ID && user.unEquip(W, src))
+	else if(istype(W, /obj/item/card/id) && !ID && user.unEquip(W, src))
 		to_chat(user, "<span class='notice'>You slide \the [W] into \the [src]!</span>")
 		ID = W
 		attack_hand(user)
@@ -118,9 +125,8 @@
 	var/decl/hierarchy/mil_uniform/user_outfit = decls_repository.get_decl(/decl/hierarchy/mil_uniform)
 	var/mil_uniforms = user_outfit
 	for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
-		if(istype(user_branch,child.branch))
+		if(is_type_in_list(user_branch, child.branches))
 			user_outfit = child
-
 	if(user_outfit == mil_uniforms) //We haven't found a branch
 		return null //Return no uniforms, which will cause the machine to spit out an error.
 
@@ -197,7 +203,7 @@
 		issued_items[user_id()] = list()
 	var/list/checkedout = issued_items[user_id()]
 	if(selected_outfit.len > 1)
-		var/obj/item/weapon/clothingbag/bag = new /obj/item/weapon/clothingbag
+		var/obj/item/clothingbag/bag = new /obj/item/clothingbag
 		for(var/item in selected_outfit)
 			new item(bag)
 			checkedout += item

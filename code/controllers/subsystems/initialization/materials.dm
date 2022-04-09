@@ -9,6 +9,11 @@ SUBSYSTEM_DEF(materials)
 	var/list/alloy_products
 	var/list/processable_ores
 
+
+/datum/controller/subsystem/materials/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/materials/Initialize()
 	build_material_lists()
 	. = ..()
@@ -37,7 +42,6 @@ SUBSYSTEM_DEF(materials)
 					processable_ores[component] = TRUE
 					alloy_components[component] = TRUE
 
-	. = ..()
 
 /datum/controller/subsystem/materials/proc/get_material_by_name(name)
 	if(!materials_by_name)

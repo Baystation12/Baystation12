@@ -5,9 +5,10 @@
 	dead_icon = "cell_bork"
 	organ_tag = BP_CELL
 	parent_organ = BP_CHEST
+	status = ORGAN_ROBOTIC
 	vital = 1
 	var/open
-	var/obj/item/weapon/cell/cell = /obj/item/weapon/cell/hyper
+	var/obj/item/cell/cell = /obj/item/cell/hyper
 	//at 0.8 completely depleted after 60ish minutes of constant walking or 130 minutes of standing still
 	var/servo_cost = 0.8
 
@@ -29,15 +30,17 @@
 		return 0
 	return round(cell.charge*(1 - damage/max_damage))
 
-/obj/item/organ/internal/cell/proc/check_charge(var/amount)
-	return get_charge() >= amount
+/obj/item/organ/internal/cell/proc/checked_use(var/amount)
+	if(!is_usable())
+		return FALSE
+	return cell && cell.checked_use(amount)
 
 /obj/item/organ/internal/cell/proc/use(var/amount)
-	if(check_charge(amount))
-		cell.use(amount)
-		return 1
+	if(!is_usable())
+		return 0
+	return cell && cell.use(amount)
 
-/obj/item/organ/internal/cell/proc/get_servo_cost()
+/obj/item/organ/internal/cell/proc/get_power_drain()
 	var/damage_factor = 1 + 10 * damage/max_damage
 	return servo_cost * damage_factor
 
@@ -47,13 +50,10 @@
 		return
 	if(owner.stat == DEAD)	//not a drain anymore
 		return
-	if(!is_usable())
-		owner.Paralyse(3)
-		return
-	var/cost = get_servo_cost()
+	var/cost = get_power_drain()
 	if(world.time - owner.l_move_time < 15)
 		cost *= 2
-	if(!use(cost))
+	if(!checked_use(cost) && owner.isSynthetic())
 		if(!owner.lying && !owner.buckled)
 			to_chat(owner, "<span class='warning'>You don't have enough energy to function!</span>")
 		owner.Paralyse(3)
@@ -63,7 +63,7 @@
 	if(cell)
 		cell.emp_act(severity)
 
-/obj/item/organ/internal/cell/attackby(obj/item/weapon/W, mob/user)
+/obj/item/organ/internal/cell/attackby(obj/item/W, mob/user)
 	if(isScrewdriver(W))
 		if(open)
 			open = 0
@@ -79,7 +79,7 @@
 				to_chat(user, "<span class='notice'>You remove \the [cell] from \the [src].</span>")
 				cell = null
 
-	if (istype(W, /obj/item/weapon/cell))
+	if (istype(W, /obj/item/cell))
 		if(open)
 			if(cell)
 				to_chat(user, "<span class ='warning'>There is a power cell already installed.</span>")
@@ -101,7 +101,7 @@
 // Used for an MMI or posibrain being installed into a human.
 /obj/item/organ/internal/mmi_holder
 	name = "brain interface"
-	icon_state = "brain-prosthetic"
+	icon_state = "mmi-empty"
 	organ_tag = BP_BRAIN
 	parent_organ = BP_HEAD
 	vital = 1
@@ -138,7 +138,7 @@
 	desc = stored_mmi.desc
 	icon = stored_mmi.icon
 
-	stored_mmi.icon_state = "mmi_full"
+	stored_mmi.update_icon()
 	icon_state = stored_mmi.icon_state
 
 	if(owner && owner.stat == DEAD)

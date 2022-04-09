@@ -59,7 +59,7 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 			var/atom/movable/AM = atom_movable
 			if(AM && AM.simulated && !T.protects_atom(AM))
 				AM.ex_act(severity)
-				if(!AM.anchored)
+				if(AM && !AM.anchored)
 					addtimer(CALLBACK(AM, /atom/movable/.proc/throw_at, throw_target, 9/severity, 9/severity), 0)
 
 	explosion_turfs.Cut()
@@ -111,25 +111,20 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 	for(var/obj/O in src)
 		. += O.get_explosion_resistance()
 
-/turf/space
-	explosion_resistance = 3
+/turf/space/explosion_resistance = 3
 
 /turf/simulated/floor/get_explosion_resistance()
 	. = ..()
 	if(is_below_sound_pressure(src))
 		. *= 3
 
-/turf/simulated/floor
-	explosion_resistance = 1
+/turf/simulated/floor/explosion_resistance = 1
 
-/turf/simulated/mineral
-	explosion_resistance = 2
+/turf/simulated/mineral/explosion_resistance = 2
 
-/turf/simulated/shuttle/wall
-	explosion_resistance = 10
+/turf/simulated/shuttle/wall/explosion_resistance = 10
 
-/turf/simulated/wall
-	explosion_resistance = 10
+/turf/simulated/wall/explosion_resistance = 10
 
 /obj/machinery/door/get_explosion_resistance()
 	if(!density)

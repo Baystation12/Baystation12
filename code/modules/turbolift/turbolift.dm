@@ -45,6 +45,7 @@
 	switch(busy_state)
 		if(LIFT_MOVING)
 			if(!do_move())
+				queued_floors.Cut()
 				return PROCESS_KILL
 			else if(!next_process)
 				next_process = world.time + move_delay
@@ -54,20 +55,23 @@
 			next_process = world.time + floor_wait_delay
 			busy_state = LIFT_WAITING_B
 		if(LIFT_WAITING_B)
-			busy_state = null
-			return PROCESS_KILL
+			if(queued_floors.len)
+				busy_state = LIFT_MOVING
+			else
+				busy_state = null
+				return PROCESS_KILL
 
 /datum/turbolift/proc/do_move()
 	next_process = null
 
-	var/current_floor_index = floors.Find(current_floor)
+	var/current_floor_index = list_find(floors, current_floor)
 
 	if(!target_floor)
 		if(!queued_floors || !queued_floors.len)
 			return 0
 		target_floor = queued_floors[1]
 		queued_floors -= target_floor
-		if(current_floor_index < floors.Find(target_floor))
+		if(current_floor_index < list_find(floors, target_floor))
 			moving_upwards = 1
 		else
 			moving_upwards = 0

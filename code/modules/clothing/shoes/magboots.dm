@@ -3,7 +3,7 @@
 	desc = "Magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle. They're large enough to be worn over other footwear."
 	name = "magboots"
 	icon_state = "magboots0"
-	can_hold_knife = 1
+	item_flags = null
 	species_restricted = null
 	force = 3
 	overshoes = 1
@@ -12,13 +12,13 @@
 	action_button_name = "Toggle Magboots"
 	var/obj/item/clothing/shoes/shoes = null	//Undershoes
 	var/mob/living/carbon/human/wearer = null	//For shoe procs
-	center_of_mass = null
 	randpixel = 0
+	var/online_slowdown = 3
 
 /obj/item/clothing/shoes/magboots/proc/set_slowdown()
 	slowdown_per_slot[slot_shoes] = shoes? max(0, shoes.slowdown_per_slot[slot_shoes]): 0	//So you can't put on magboots to make you walk faster.
 	if (magpulse)
-		slowdown_per_slot[slot_shoes] += 3
+		slowdown_per_slot[slot_shoes] += online_slowdown
 
 /obj/item/clothing/shoes/magboots/attack_self(mob/user)
 	if(magpulse)
@@ -85,7 +85,7 @@
 	wearer = null
 
 /obj/item/clothing/shoes/magboots/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	var/state = "disabled"
 	if(item_flags & ITEM_FLAG_NOSLIP)
 		state = "enabled"

@@ -40,6 +40,11 @@
 	open_icon.Blend(icon(base_icon, "open"), ICON_OVERLAY)
 	open_icon.Blend(color, BLEND_ADD)
 	open_icon.Blend(icon(base_icon, "interior"), ICON_OVERLAY)
+	if(decal_icon)
+		for(var/thing in decals)
+			var/icon/this_decal_icon = icon(decal_icon, "[thing]_open")
+			this_decal_icon.Blend(decals[thing], BLEND_ADD)
+			open_icon.Blend(this_decal_icon, ICON_OVERLAY)
 
 	// Generate basic closed icons.
 	closed_emagged_icon = icon(base_icon, "base")
@@ -263,9 +268,9 @@
 /decl/closet_appearance/secure_closet/engineering/ce
 	color = COLOR_OFF_WHITE
 	extra_decals = list(
-		"stripe_vertical_right_partial" = COLOR_GOLD,
-		"stripe_vertical_mid_partial" = COLOR_GOLD,
-		"eng_narrow" = COLOR_GOLD
+		"stripe_vertical_right_partial" = COLOR_CLOSET_GOLD,
+		"stripe_vertical_mid_partial" = COLOR_CLOSET_GOLD,
+		"eng_narrow" = COLOR_CLOSET_GOLD
 	)
 
 /decl/closet_appearance/secure_closet/mining
@@ -294,16 +299,16 @@
 		"upper_holes"
 	)
 	extra_decals = list(
-		"stripe_vertical_left_partial" = COLOR_GOLD,
-		"stripe_vertical_right_partial" = COLOR_GOLD,
-		"captain" = COLOR_GOLD
+		"stripe_vertical_left_partial" = COLOR_CLOSET_GOLD,
+		"stripe_vertical_right_partial" = COLOR_CLOSET_GOLD,
+		"captain" = COLOR_CLOSET_GOLD
 	)
 
 /decl/closet_appearance/secure_closet/command/hop
 	color = COLOR_PALE_BLUE_GRAY
 	extra_decals = list(
-		"stripe_vertical_mid_partial" = COLOR_GOLD,
-		"hop" = COLOR_GOLD
+		"stripe_vertical_mid_partial" = COLOR_CLOSET_GOLD,
+		"hop" = COLOR_CLOSET_GOLD
 	)
 
 /decl/closet_appearance/secure_closet/cmo
@@ -313,9 +318,9 @@
 		"lower_side_vent"
 	)
 	extra_decals = list(
-		"medcircle" = COLOR_GOLD,
-		"stripe_vertical_right_partial" = COLOR_GOLD,
-		"stripe_vertical_mid_partial" = COLOR_GOLD
+		"medcircle" = COLOR_CLOSET_GOLD,
+		"stripe_vertical_right_partial" = COLOR_CLOSET_GOLD,
+		"stripe_vertical_mid_partial" = COLOR_CLOSET_GOLD
 	)
 
 /decl/closet_appearance/secure_closet/medical
@@ -384,8 +389,8 @@
 	extra_decals = list(
 		"stripe_vertical_left_full" =  COLOR_WARM_YELLOW,
 		"stripe_vertical_right_full" = COLOR_WARM_YELLOW,
-		"stripe_vertical_mid_full" =  COLOR_GOLD,
-		"security" = COLOR_GOLD
+		"stripe_vertical_mid_full" =  COLOR_CLOSET_GOLD,
+		"security" = COLOR_CLOSET_GOLD
 	)
 
 /decl/closet_appearance/bomb
@@ -434,9 +439,9 @@
 /decl/closet_appearance/secure_closet/expedition/pathfinder
 	extra_decals = list(
 		"stripe_vertical_left_full" = COLOR_PURPLE,
-		"stripe_vertical_mid_full" = COLOR_GOLD,
+		"stripe_vertical_mid_full" = COLOR_CLOSET_GOLD,
 		"stripe_vertical_right_full" = COLOR_PURPLE,
-		"security" = COLOR_GOLD
+		"security" = COLOR_CLOSET_GOLD
 	)
 
 /decl/closet_appearance/secure_closet/expedition/science
@@ -446,6 +451,10 @@
 	)
 
 /decl/closet_appearance/secure_closet/rd
+	color = COLOR_BOTTLE_GREEN
+	decals = list(
+		"lower_holes"
+	)
 	extra_decals = list(
 		"stripe_vertical_mid_full" = COLOR_GOLD,
 		"stripe_vertical_left_full" = COLOR_PURPLE,
@@ -596,6 +605,12 @@
 		"crate_stripe_right" = COLOR_GREEN_GRAY
 	)
 
+/decl/closet_appearance/crate/secure/shuttle
+	extra_decals = list(
+		"crate_stripe_left" = COLOR_YELLOW_GRAY,
+		"crate_stripe_right" = COLOR_YELLOW_GRAY
+	)
+
 // Large crates.
 /decl/closet_appearance/large_crate
 	base_icon =  'icons/obj/closets/bases/large_crate.dmi'
@@ -696,4 +711,10 @@
 	can_lock = TRUE
 	decals = list(
 		"biohazard" = COLOR_GRAY80
+	)
+
+/decl/closet_appearance/cart/biohazard/alt
+	color = COLOR_SURGERY_BLUE
+	decals = list(
+		"biohazard" = COLOR_RED_GRAY
 	)

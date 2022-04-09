@@ -1,6 +1,7 @@
 #include "bearcat_areas.dm"
 #include "bearcat_jobs.dm"
 #include "bearcat_access.dm"
+#include "bearcat_radio.dm"
 
 /obj/effect/submap_landmark/joinable_submap/bearcat
 	name = "FTV Bearcat"
@@ -14,14 +15,14 @@
 		/datum/job/submap/bearcat_crewman
 	)
 
-/obj/effect/overmap/ship/bearcat
+/obj/effect/overmap/visitable/ship/bearcat
 	name = "light freighter"
 	color = "#00ffff"
-	vessel_mass = 60
+	vessel_mass = 20000
 	max_speed = 1/(10 SECONDS)
 	burn_delay = 10 SECONDS
 
-/obj/effect/overmap/ship/bearcat/New()
+/obj/effect/overmap/visitable/ship/bearcat/New()
 	name = "[pick("FTV","ITV","IEV")] [pick("Bearcat", "Firebug", "Defiant", "Unsinkable","Horizon","Vagrant")]"
 	for(var/area/ship/scrap/A)
 		A.name = "\improper [name] - [A.name]"
@@ -34,8 +35,24 @@
 	id = "awaysite_bearcat_wreck"
 	description = "A wrecked light freighter."
 	suffixes = list("bearcat/bearcat-1.dmm", "bearcat/bearcat-2.dmm")
-	cost = 1
+	spawn_cost = 1
+	player_cost = 4
 	shuttles_to_initialise = list(/datum/shuttle/autodock/ferry/lift)
+	area_usage_test_exempted_root_areas = list(/area/ship)
+	apc_test_exempt_areas = list(
+		/area/ship/scrap/maintenance/engine/port = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/engine/starboard = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/crew/hallway/port= NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/crew/hallway/starboard= NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/hallway = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/lower = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/atmos = NO_SCRUBBER,
+		/area/ship/scrap/escape_port = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/escape_star = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/shuttle/lift = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/ship/scrap/command/hallway = NO_SCRUBBER|NO_VENT
+	)
+	spawn_weight = 0.67
 
 /datum/shuttle/autodock/ferry/lift
 	name = "Cargo Lift"
@@ -56,7 +73,7 @@
 	icon_state = "tiny"
 	icon_keyboard = "tiny_keyboard"
 	icon_screen = "lift"
-	density = 0
+	density = FALSE
 
 /obj/effect/shuttle_landmark/lift/top
 	name = "Top Deck"
@@ -70,10 +87,7 @@
 	base_turf = /turf/simulated/floor
 
 /obj/machinery/power/apc/derelict
-	cell_type = /obj/item/weapon/cell/crap/empty
-	lighting = 0
-	equipment = 0
-	environ = 0
+	cell_type = /obj/item/cell/crap/empty
 	locked = 0
 	coverlocked = 0
 
@@ -83,26 +97,17 @@
 /obj/machinery/door/airlock/autoname/engineering
 	door_color = COLOR_AMBER
 
-/turf/simulated/floor/usedup
-	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
-
-/turf/simulated/floor/tiled/usedup
-	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
-
-/turf/simulated/floor/tiled/dark/usedup
-	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
-
-/turf/simulated/floor/tiled/white/usedup
-	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
-
 /obj/effect/landmark/deadcap
 	name = "Dead Captain"
-	delete_me = 1
 
 /obj/effect/landmark/deadcap/Initialize()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/effect/landmark/deadcap/LateInitialize()
 	var/turf/T = get_turf(src)
 	var/mob/living/carbon/human/corpse = new(T)
-	scramble(1,corpse,100)
+	scramble(1, corpse, 100)
 	corpse.real_name = "Captain"
 	corpse.name = "Captain"
 	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/deadcap)
@@ -110,16 +115,16 @@
 	corpse.adjustOxyLoss(corpse.maxHealth)
 	corpse.setBrainLoss(corpse.maxHealth)
 	var/obj/structure/bed/chair/C = locate() in T
-	if(C)
+	if (C)
 		C.buckle_mob(corpse)
-	. = ..()
+	qdel(src)
 
 /decl/hierarchy/outfit/deadcap
 	name = "Derelict Captain"
 	uniform = /obj/item/clothing/under/casual_pants/classicjeans
 	suit = /obj/item/clothing/suit/storage/hooded/wintercoat
 	shoes = /obj/item/clothing/shoes/black
-	r_pocket = /obj/item/device/radio
+	r_pocket = /obj/item/device/radio/map_preset/bearcat
 
 /decl/hierarchy/outfit/deadcap/post_equip(mob/living/carbon/human/H)
 	..()
@@ -130,5 +135,5 @@
 			uniform.attach_accessory(null, eyegore)
 		else
 			qdel(eyegore)
-	var/obj/item/weapon/cell/super/C = new()
+	var/obj/item/cell/super/C = new()
 	H.put_in_any_hand_if_possible(C)

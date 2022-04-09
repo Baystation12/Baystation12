@@ -17,6 +17,11 @@ PROCESSING_SUBSYSTEM_DEF(plants)
 	var/list/gene_masked_list = list()		// Stored gene masked list, rather than recreating it when needed.
 	var/list/plant_gene_datums = list()		// Stored datum versions of the gene masked list.
 
+
+/datum/controller/subsystem/character_setup/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/processing/plants/Initialize()
 	// Build the icon lists.
 	for(var/icostate in icon_states('icons/obj/hydroponics_growing.dmi'))
@@ -81,13 +86,14 @@ PROCESSING_SUBSYSTEM_DEF(plants)
 /datum/controller/subsystem/processing/plants/proc/create_random_seed(var/survive_on_station)
 	var/datum/seed/seed = new()
 	seed.randomize()
+	seed.uid = seeds.len + 1
 	seed.name = "[seed.uid]"
 	seeds[seed.name] = seed
 
 	if(survive_on_station)
 		if(seed.consume_gasses)
-			seed.consume_gasses["phoron"] = null
-			seed.consume_gasses["carbon_dioxide"] = null
+			seed.consume_gasses[GAS_PHORON] = null
+			seed.consume_gasses[GAS_CO2] = null
 		if(seed.chems && !isnull(seed.chems[/datum/reagent/acid/polyacid]))
 			seed.chems[/datum/reagent/acid/polyacid] = null // Eating through the hull will make these plants completely inviable, albeit very dangerous.
 			seed.chems -= null // Setting to null does not actually remove the entry, which is weird.

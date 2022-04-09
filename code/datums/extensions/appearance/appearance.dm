@@ -1,4 +1,5 @@
 /datum/extension/appearance
+	base_type = /datum/extension/appearance
 	expected_type = /atom
 	flags = EXTENSION_FLAG_IMMEDIATE // | EXTENSION_FLAG_MULTIPLE_INSTANCES
 	var/appearance_handler_type

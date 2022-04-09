@@ -51,10 +51,13 @@
 
 	// It also means they can do the old school cartoon schtick of eating an entire sandwich
 	// and spitting up an empty plate. Ptooie.
-	if(istype(holding_item, /obj/item/weapon/reagent_containers/food))
-		var/obj/item/weapon/reagent_containers/food/food = holding_item
+	if(istype(holding_item, /obj/item/reagent_containers/food))
+		var/obj/item/reagent_containers/food/food = holding_item
 		holding_item = null
-		if(food.trash) holding_item = new food.trash(src)
+		if (istype(holding_item, /obj/item/reagent_containers/food/snacks))
+			var/obj/item/reagent_containers/food/snacks/snack = food
+			if (snack.trash)
+				holding_item = new snack.trash(src)
 		qdel(food)
 
 	if(!QDELETED(holding_item))

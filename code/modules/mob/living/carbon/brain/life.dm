@@ -193,11 +193,3 @@
 				reset_view(null)
 
 	return 1
-
-	if (stat != 2)
-		if (machine)
-			if (machine.check_eye(src) < 0)
-				reset_view(null)
-		else
-			if(client && !client.adminobs)
-				reset_view(null)

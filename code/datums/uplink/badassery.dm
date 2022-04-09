@@ -23,12 +23,30 @@
 	var/obj/item/I = new balloon_type(loc)
 	return I
 
+/datum/uplink_item/item/badassery/crayonmre
+	name = "Crayon MRE"
+	desc = "An exceptionally robust MRE."
+	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
+	path = /obj/item/storage/mre/menu11/special
+
+/datum/uplink_item/item/badassery/modded_foam_gun
+	name = "Modded foam gun"
+	desc = "It's a Jorf revolver blaster and 14 weighted darts. Even after aftermarket modification to increase its range and launch velocity, it's not a very effective weapon."
+	item_cost = 32
+	path = /obj/item/storage/box/large/foam_gun/revolver/tampered
+
+/datum/uplink_item/item/badassery/fortune
+	name = "A Fortune Cookie"
+	desc = "Why would you buy this?"
+	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
+	path = /obj/item/reagent_containers/food/snacks/fortunecookie
+
 /**************
 * Random Item *
 **************/
 /datum/uplink_item/item/badassery/random_one
 	name = "Random Item"
-	desc = "Buys you a random item for at least 1TC. Careful: No upper price cap!"
+	desc = "Buys you a random item for at least 1 TC. Be careful, this can spend any amount of telecrystals!"
 	item_cost = 1
 
 /datum/uplink_item/item/badassery/random_one/buy(var/obj/item/device/uplink/U, var/mob/user)
@@ -57,7 +75,6 @@
 	return bought_items
 
 /datum/uplink_item/item/badassery/random_many/purchase_log(obj/item/device/uplink/U)
-	SSstatistics.add_field_details("traitor_uplink_items_bought", "[src]")
 	log_and_message_admins("used \the [U.loc] to buy \a [src]")
 
 /****************
@@ -72,7 +89,7 @@
 /datum/uplink_item/item/badassery/surplus/New()
 	..()
 	antag_roles = list(MODE_MERCENARY)
-	desc = "A crate containing [item_worth] telecrystal\s worth of surplus leftovers."
+	desc = "A crate containing [item_worth] telecrystal\s worth of surplus leftovers. If you can find some help to pay for it, you might strike gold."
 
 /datum/uplink_item/item/badassery/surplus/get_goods(var/obj/item/device/uplink/U, var/loc)
 	var/obj/structure/largecrate/C = new(loc)

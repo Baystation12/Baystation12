@@ -4,8 +4,8 @@
 	desc = "A shield generator."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "Shield_Gen"
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	req_access = list(list(access_engine_equip,access_research))
 	var/active = 0
 	var/power = 0
@@ -24,7 +24,7 @@
 	data["draw"] = round(power_draw)
 	data["power"] = round(storedpower)
 	data["maxpower"] = round(max_stored_power)
-	data["current_draw"] = ((between(500, max_stored_power - storedpower, power_draw)) + power ? active_power_usage : 0)
+	data["current_draw"] = clamp(max_stored_power - storedpower, 500, power_draw) + power ? active_power_usage : 0
 	data["online"] = active == 2 ? 1 : 0
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -79,19 +79,21 @@
 			storedpower -= rand(storedpower/4, storedpower/2)
 	..()
 
-/obj/machinery/shieldwallgen/attack_hand(mob/user as mob)
-	if(anchored != 1)
+/obj/machinery/shieldwallgen/CanUseTopic(mob/user)
+	if(!anchored)
 		to_chat(user, "<span class='warning'>The shield generator needs to be firmly secured to the floor first.</span>")
-		return 1
+		return STATUS_CLOSE
 	if(src.locked && !istype(user, /mob/living/silicon))
 		to_chat(user, "<span class='warning'>The controls are locked!</span>")
-		return 1
+		return STATUS_CLOSE
 	if(power != 1)
 		to_chat(user, "<span class='warning'>The shield generator needs to be powered by wire underneath.</span>")
-		return 1
+		return STATUS_CLOSE
+	return ..()
 
-	src.ui_interact(user)
-	src.add_fingerprint(user)
+/obj/machinery/shieldwallgen/interface_interact(mob/user)
+	ui_interact(user)
+	return TRUE
 
 /obj/machinery/shieldwallgen/proc/power()
 	if(!anchored)
@@ -104,7 +106,7 @@
 	if(C)	PN = C.powernet		// find the powernet of the connected cable
 
 	if(PN)
-		var/shieldload = between(500, max_stored_power - storedpower, power_draw)	//what we try to draw
+		var/shieldload = clamp(max_stored_power - storedpower, 500, power_draw)	//what we try to draw
 		shieldload = PN.draw_power(shieldload) //what we actually get
 		storedpower += shieldload
 
@@ -117,6 +119,7 @@
 	return 1
 
 /obj/machinery/shieldwallgen/Process()
+	..()
 	power = 0
 	if(!(stat & BROKEN))
 		power()
@@ -129,7 +132,7 @@
 		storedpower = 0
 
 	if(src.active == 1)
-		if(!src.anchored == 1)
+		if(!src.anchored)
 			src.active = 0
 			return
 		spawn(1)
@@ -190,7 +193,7 @@
 		var/field_dir = get_dir(T2,get_step(T2, NSEW))
 		T = get_step(T2, NSEW)
 		T2 = T
-		var/obj/machinery/shieldwall/CF = new(T, G) //(ref to this gen, ref to connected gen)
+		var/obj/machinery/shieldwall/CF = new(T, src, G) //(ref to this gen, ref to connected gen)
 		CF.set_dir(field_dir)
 
 
@@ -200,19 +203,19 @@
 			to_chat(user, "Turn off the field generator first.")
 			return
 
-		else if(anchored == 0)
+		else if(!anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			to_chat(user, "You secure the external reinforcing bolts to the floor.")
-			src.anchored = 1
+			src.anchored = TRUE
 			return
 
-		else if(anchored == 1)
+		else if(anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			to_chat(user, "You undo the external reinforcing bolts.")
-			src.anchored = 0
+			src.anchored = FALSE
 			return
 
-	if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/modular_computer))
+	if(istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
 		if (src.allowed(user))
 			src.locked = !src.locked
 			to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
@@ -257,9 +260,9 @@
 	desc = "An energy shield."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shieldwall"
-	anchored = 1
-	density = 1
-	unacidable = 1
+	anchored = TRUE
+	density = TRUE
+	unacidable = TRUE
 	light_outer_range = 3
 	var/needs_power = 0
 	var/active = 1
@@ -271,11 +274,11 @@
 	var/power_usage = 800	//how much power it takes to sustain the shield
 	var/generate_power_usage = 5000	//how much power it takes to start up the shield
 
-/obj/machinery/shieldwall/New(var/obj/machinery/shieldwallgen/A, var/obj/machinery/shieldwallgen/B)
-	..()
+/obj/machinery/shieldwall/Initialize(mapload, obj/machinery/shieldwallgen/A, obj/machinery/shieldwallgen/B)
+	. = ..()
 	update_nearby_tiles()
-	src.gen_primary = A
-	src.gen_secondary = B
+	gen_primary = A
+	gen_secondary = B
 	if(A && B && A.active && B.active)
 		needs_power = 1
 		if(prob(50))
@@ -283,14 +286,11 @@
 		else
 			B.storedpower -= generate_power_usage
 	else
-		qdel(src) //need at least two generator posts
+		return INITIALIZE_HINT_QDEL
 
 /obj/machinery/shieldwall/Destroy()
 	update_nearby_tiles()
 	..()
-
-/obj/machinery/shieldwall/attack_hand(mob/user as mob)
-	return
 
 /obj/machinery/shieldwall/attackby(var/obj/item/I, var/mob/user)
 	var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary
@@ -349,7 +349,7 @@
 			return !src.density
 
 /obj/machinery/shieldwallgen/online
-	anchored = 1
+	anchored = TRUE
 	active = 1
 
 /obj/machinery/shieldwallgen/online/Initialize()

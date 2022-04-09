@@ -4,8 +4,8 @@
 	desc = "A highly advanced microscope capable of zooming up to 3000x."
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "microscope"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 
 	var/obj/item/sample = null
 	var/report_num = 0
@@ -22,8 +22,8 @@
 		return
 
 	if(istype(W))
-		if(istype(W, /obj/item/weapon/evidencebag))
-			var/obj/item/weapon/evidencebag/B = W
+		if(istype(W, /obj/item/evidencebag))
+			var/obj/item/evidencebag/B = W
 			if(B.stored_item)
 				to_chat(user, "<span class='notice'>You insert \the [B.stored_item] from \the [B] into the microscope.</span>")
 				B.stored_item.forceMove(src)
@@ -36,8 +36,8 @@
 		sample = W
 		update_icon()
 
-/obj/machinery/microscope/attack_hand(mob/user)
-
+/obj/machinery/microscope/physical_attack_hand(mob/user)
+	. = TRUE
 	if(!sample)
 		to_chat(user, "<span class='warning'>The microscope has no sample to examine.</span>")
 		return
@@ -53,22 +53,22 @@
 		return
 
 	to_chat(user, "<span class='notice'>Printing findings now...</span>")
-	var/obj/item/weapon/paper/report = new(get_turf(src))
-	report.stamped = list(/obj/item/weapon/stamp)
+	var/obj/item/paper/report = new(get_turf(src))
+	report.stamped = list(/obj/item/stamp)
 	report.overlays = list("paper_stamped")
 	report_num++
 
 	var/list/evidence = list()
 	var/scaned_object = sample.name
-	if(istype(sample, /obj/item/weapon/forensics/swab))
-		var/obj/item/weapon/forensics/swab/swab = sample
+	if(istype(sample, /obj/item/forensics/swab))
+		var/obj/item/forensics/swab/swab = sample
 		evidence["gunshot_residue"] = swab.gunshot_residue_sample.Copy()
-	else if(istype(sample, /obj/item/weapon/sample/fibers))
-		var/obj/item/weapon/sample/fibers/fibers = sample
+	else if(istype(sample, /obj/item/sample/fibers))
+		var/obj/item/sample/fibers/fibers = sample
 		scaned_object = fibers.object
 		evidence["fibers"] = fibers.evidence.Copy()
-	else if(istype(sample, /obj/item/weapon/sample/print))
-		var/obj/item/weapon/sample/print/card = sample
+	else if(istype(sample, /obj/item/sample/print))
+		var/obj/item/sample/print/card = sample
 		scaned_object = card.object ? card.object : card.name
 		evidence["prints"] = card.evidence.Copy()
 	else
@@ -83,8 +83,10 @@
 	report.info = "<b>Scanned item:</b><br>[scaned_object]<br><br>"
 	if("gunshot_residue" in evidence)
 		report.info += "<b>Gunpowder residue analysis report #[report_num]</b>: [scaned_object]<br>"
-		if(evidence["gunshot_residue"])
-			report.info += "Residue from a [evidence["gunshot_residue"]] bullet detected."
+		if(LAZYLEN(evidence["gunshot_residue"]))
+			report.info += "Residue from the following bullets detected:"
+			for(var/residue in evidence["gunshot_residue"])
+				report.info += "<span class='notice'>[residue]</span><br><br>"
 		else
 			report.info += "No gunpowder residue found."
 	if("fibers" in evidence)
@@ -116,7 +118,7 @@
 
 /obj/machinery/microscope/proc/remove_sample(var/mob/living/remover)
 	if(!istype(remover) || remover.incapacitated() || !Adjacent(remover))
-		return ..()
+		return
 	if(!sample)
 		to_chat(remover, "<span class='warning'>\The [src] does not have a sample in it.</span>")
 		return
@@ -136,5 +138,7 @@
 
 /obj/machinery/microscope/on_update_icon()
 	icon_state = "microscope"
+	if(stat & NOPOWER)
+		icon_state += "_unpowered"
 	if(sample)
-		icon_state += "slide"
+		icon_state += "_slide"

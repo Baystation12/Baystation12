@@ -38,9 +38,8 @@
 					<span class='white'>Engine #{{:(index + 1)}}:</span>
 				</div>
 				<div class="itemContent">
-						{{:helper.link(value.eng_on ? 'Shutdown' : 'Power up', 'power', { 'toggle' : 1, 'engine' : value.eng_reference }, null, value.eng_on ? 'selected' : null)}}
+						{{:helper.link(value.eng_on ? 'Shutdown' : 'Power up', 'power', { 'toggle' : 1, 'engine' : value.eng_reference }, null, value.eng_on ? value.eng_on == 1 ? 'linkOn' : 'yellowButton' : null)}}
 				</div>
-			</div>
 			<div class='statusDisplay'>
 			  <div class='item'>
 				<div class="itemLabel">
@@ -55,7 +54,7 @@
 					<span class='average'>Status:</span>
 				</div>
 				<div class="itemContent">
-					<span class='{{:value.eng_on ? 'good' : 'bad'}}'>{{:value.eng_on ? 'Online' : 'Offline'}}</span><br>
+					<span class='{{:value.eng_on ? value.eng_on == 1 ? 'good' : 'average' : 'bad'}}'>{{:value.eng_on ?  value.eng_on == 1 ? 'Online' : 'Booting' : 'Offline'}}</span><br>
 					<span class='white'>{{:value.eng_status}}</span>
 				</div>
 			  </div>
@@ -90,7 +89,7 @@
 						<span class='white'>Engine #{{:(index + 1)}}:</span>
 					</div>
 					<div class="itemContent">
-						{{:helper.link(value.eng_on ? 'Shutdown' : 'Power up', 'power', { 'toggle' : 1, 'engine' : value.eng_reference }, null, value.eng_on ? 'selected' : null)}}
+						{{:helper.link(value.eng_on ? 'Shutdown' : 'Power up', 'power', { 'toggle' : 1, 'engine' : value.eng_reference }, null, value.eng_on ? value.eng_on == 1 ? 'linkOn' : 'yellowButton' : null)}}
 					</div>
 				</div>
 				<div class='item'>

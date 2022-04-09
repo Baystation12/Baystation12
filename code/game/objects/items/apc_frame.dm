@@ -7,7 +7,7 @@
 	icon_state = "apc_frame"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
-/obj/item/frame/apc/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/frame/apc/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if(isWrench(W))
 		new /obj/item/stack/material/steel( get_turf(src.loc), 2 )
@@ -39,5 +39,5 @@
 			C.amount = 10
 			to_chat(usr, "You cut the cables and disassemble the unused power terminal.")
 			qdel(T)
-	new /obj/machinery/power/apc(loc, ndir, 1)
+	new /obj/machinery/power/apc(loc, ndir, TRUE, 1)
 	qdel(src)

@@ -27,9 +27,15 @@
 	path = /obj/item/clothing/head/soft/solgov
 	allowed_branches = SOLGOV_BRANCHES
 
-/datum/gear/head/fleethat
-	display_name = "fleet cap"
+/datum/gear/head/fleetcover
+	display_name = "fleet utilty cover"
 	path = /obj/item/clothing/head/solgov/utility/fleet
+	cost = 0
+	allowed_branches = list(/datum/mil_branch/fleet)
+
+/datum/gear/head/fleetcap
+	display_name = "fleet cap"
+	path = /obj/item/clothing/head/soft/solgov/fleet
 	cost = 0
 	allowed_branches = list(/datum/mil_branch/fleet)
 
@@ -51,6 +57,9 @@
 /datum/gear/head/bandana
 	allowed_branches = CIVILIAN_BRANCHES
 
+/datum/gear/head/beanie
+	allowed_branches = CIVILIAN_BRANCHES
+
 /datum/gear/head/bow
 	allowed_branches = CIVILIAN_BRANCHES
 
@@ -68,13 +77,13 @@
 	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/head/informalhat
-	allowed_roles = SEMIFORMAL_ROLES
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/head/welding
 	allowed_roles = TECHNICAL_ROLES
 
 /datum/gear/tactical/balaclava
-	allowed_roles = ARMORED_ROLES
+	allowed_roles = SECURITY_ROLES
 
 /datum/gear/head/fleetberet
 	display_name = "Fleet branch beret selection"
@@ -91,3 +100,19 @@
 	berets["fourth fleet beret"] = /obj/item/clothing/head/beret/solgov/fleet/branch/fourth
 	berets["fifth fleet beret"] = /obj/item/clothing/head/beret/solgov/fleet/branch/fifth
 	gear_tweaks += new/datum/gear_tweak/path(berets)
+
+/datum/gear/head/ECberet
+	display_name = "EC sections beret selection"
+	description = "A beret denoting service in one of the branches within the SCG EC."
+	path = /obj/item/clothing/head/beret/solgov/expedition/branch
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+
+/datum/gear/head/ECberet/New()
+	..()
+	var/berets = list()
+	berets["field operation beret"] = /obj/item/clothing/head/beret/solgov/expedition/branch
+	berets["observatory beret"] = /obj/item/clothing/head/beret/solgov/expedition/branch/observatory
+	gear_tweaks += new/datum/gear_tweak/path(berets)
+
+/datum/gear/head/corporateberet
+	allowed_branches = CIVILIAN_BRANCHES

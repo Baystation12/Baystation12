@@ -16,7 +16,7 @@
 // Run all strings to be used in an SQL query through this proc first to properly escape out injection attempts.
 /proc/sanitizeSQL(var/t as text)
 	var/sqltext = dbcon.Quote(t);
-	return copytext(sqltext, 2, lentext(sqltext));//Quote() adds quotes around input, we already do that
+	return copytext(sqltext, 2, length(sqltext));//Quote() adds quotes around input, we already do that
 
 /*
  * Text sanitization
@@ -28,19 +28,18 @@
 	if(!input)
 		return
 
-	if(max_length)
-		//testing shows that just looking for > max_length alone will actually cut off the final character if message is precisely max_length, so >= instead
-		if(length(input) >= max_length)
-			var/overflow = ((length(input)+1) - max_length)
-			to_chat(usr, "<span class='warning'>Your message is too long by [overflow] character\s.</span>")
+	if (max_length)
+		var/len = length_char(input)
+		if (len > max_length)
+			to_chat(usr, SPAN_WARNING("Your message is too long by [len - max_length] char\s."))
 			return
-		input = copytext(input,1,max_length)
+		input = copytext_char(input, 1, max_length + 1)
 
 	if(extra)
 		input = replace_characters(input, list("\n"=" ","\t"=" "))
 
 	if(encode)
-		// The below \ escapes have a space inserted to attempt to enable Travis auto-checking of span class usage. Please do not remove the space.
+		// The below \ escapes have a space inserted to attempt to enable unit testing of span class usage. Please do not remove the space.
 		//In addition to processing html, html_encode removes byond formatting codes like "\ red", "\ i" and other.
 		//It is important to avoid double-encode text, it can "break" quotes and some other characters.
 		//Also, keep in mind that escaped characters don't work in the interface (window titles, lower left corner of the main window, etc.)
@@ -146,7 +145,7 @@
 			if(48 to 57)	//0-9
 				dat += ascii2text(ascii_char)
 				last_was_space = 0
-			if(32)			//space
+			if(32, 46)	//space or .
 				if(last_was_space)
 					continue
 				dat += "."		//We turn these into ., but avoid repeats or . at start.
@@ -162,7 +161,7 @@
 	for(var/i=1, i<=length(text), i++)
 		switch(text2ascii(text,i))
 			if(62,60,92,47)	return			//rejects the text if it contains these bad characters: <, >, \ or /
-			if(127 to 255)	return			//rejects weird letters like �
+			if(127 to 255)	return			//rejects non-ASCII letters
 			if(0 to 31)		return			//more weird stuff
 			if(32)			continue		//whitespace
 			else			non_whitespace = 1
@@ -215,23 +214,46 @@
 		t = replacetext(t, char, repl_chars[char])
 	return t
 
-//Adds 'u' number of zeros ahead of the text 't'
-/proc/add_zero(t, u)
-	while (length(t) < u)
-		t = "0[t]"
-	return t
 
-//Adds 'u' number of spaces ahead of the text 't'
-/proc/add_lspace(t, u)
-	while(length(t) < u)
-		t = " [t]"
-	return t
+/// Builds a string of padding repeated until its character count meets or exceeds size
+/proc/generate_padding(size, padding)
+	var/padding_size = length_char(padding)
+	if (!padding_size)
+		return ""
+	var/padding_count = Ceil(size / padding_size)
+	var/list/result = list()
+	for (var/i = padding_count to 1 step -1)
+		result += padding // pow2 strategies could be used here at the cost of complexity
+	return result.Join(null)
 
-//Adds 'u' number of spaces behind the text 't'
-/proc/add_tspace(t, u)
-	while(length(t) < u)
-		t = "[t] "
-	return t
+
+/// Pads the matter of padding onto the start of text until the result length is size
+/proc/pad_left(text, size, padding)
+	var/text_length = length_char(text)
+	if (text_length >= size)
+		return text
+	if (!text_length)
+		text = ""
+	var/result = "[generate_padding(size - text_length, padding)][text]"
+	var/length_difference = length_char(result) - size
+	if (!length_difference)
+		return result
+	return copytext_char(result, length_difference + 1)
+
+
+/// Pads the matter of padding onto the start of text until the result length is size
+/proc/pad_right(text, size, padding)
+	var/text_length = length_char(text)
+	if (text_length >= size)
+		return text
+	if (!text_length)
+		text = ""
+	var/result = "[text][generate_padding(size - text_length, padding)]"
+	var/length_difference = length_char(result) - size
+	if (!length_difference)
+		return result
+	return copytext_char(result, 1, -length_difference)
+
 
 //Returns a string with reserved characters and spaces before the first letter removed
 /proc/trim_left(text)
@@ -242,7 +264,7 @@
 
 //Returns a string with reserved characters and spaces after the last letter removed
 /proc/trim_right(text)
-	for (var/i = length(text), i > 0, i--)
+	for (var/i = length(text) to 1 step -1)
 		if (text2ascii(text, i) > 32)
 			return copytext(text, 1, i + 1)
 	return ""
@@ -252,8 +274,8 @@
 	return trim_left(trim_right(text))
 
 //Returns a string with the first element of the string capitalized.
-/proc/capitalize(var/t as text)
-	return uppertext(copytext(t, 1, 2)) + copytext(t, 2)
+/proc/capitalize(text)
+	return uppertext(copytext_char(text, 1, 2)) + copytext_char(text, 2)
 
 //This proc strips html properly, remove < > and all text between
 //for complete text sanitizing should be used sanitize()
@@ -285,9 +307,9 @@
 //This is used for fingerprints
 /proc/stringmerge(var/text,var/compare,replace = "*")
 	var/newtext = text
-	if(lentext(text) != lentext(compare))
+	if(length(text) != length(compare))
 		return 0
-	for(var/i = 1, i < lentext(text), i++)
+	for(var/i = 1, i < length(text), i++)
 		var/a = copytext(text,i,i+1)
 		var/b = copytext(compare,i,i+1)
 		//if it isn't both the same letter, or if they are both the replacement character
@@ -307,23 +329,22 @@
 	if(!text || !character)
 		return 0
 	var/count = 0
-	for(var/i = 1, i <= lentext(text), i++)
+	for(var/i = 1, i <= length(text), i++)
 		var/a = copytext(text,i,i+1)
 		if(a == character)
 			count++
 	return count
 
-/proc/reverse_text(var/text = "")
-	var/new_text = ""
-	for(var/i = length(text); i > 0; i--)
-		new_text += copytext(text, i, i+1)
-	return new_text
+/proc/reverse_text(text)
+	. = ""
+	for (var/i = length_char(text) to 1 step -1)
+		. += copytext_char(text, i, i + 1)
 
 //Used in preferences' SetFlavorText and human's set_flavor verb
 //Previews a string of len or less length
 proc/TextPreview(var/string,var/len=40)
-	if(lentext(string) <= len)
-		if(!lentext(string))
+	if(length(string) <= len)
+		if(!length(string))
 			return "\[...\]"
 		else
 			return string
@@ -334,14 +355,10 @@ proc/TextPreview(var/string,var/len=40)
 /proc/copytext_preserve_html(var/text, var/first, var/last)
 	return html_encode(copytext(html_decode(text), first, last))
 
-//For generating neat chat tag-images
-//The icon var could be local in the proc, but it's a waste of resources
-//	to always create it and then throw it out.
-/var/icon/text_tag_icons = new('./icons/chattags.dmi')
 /proc/create_text_tag(var/tagname, var/tagdesc = tagname, var/client/C = null)
 	if(!(C && C.get_preference_value(/datum/client_preference/chat_tags) == GLOB.PREF_SHOW))
 		return tagdesc
-	return "<IMG src='\ref[text_tag_icons.icon]' class='text_tag' iconstate='[tagname]'" + (tagdesc ? " alt='[tagdesc]'" : "") + ">"
+	return icon2html(icon('./icons/chattags.dmi', tagname), world, realsize=TRUE, class="text_tag")
 
 /proc/contains_az09(var/input)
 	for(var/i=1, i<=length(input), i++)
@@ -366,7 +383,8 @@ proc/TextPreview(var/string,var/len=40)
 		. += ascii2text(letter)
 	. = jointext(.,null)
 
-#define starts_with(string, substring) (copytext(string,1,1+length(substring)) == substring)
+#define text_starts_with(string, substring) !!findtext_char((string), (substring), 1, 1 + length_char(substring))
+#define text_ends_with(string, substring) !!findtext_char((string), (substring), -length_char(substring))
 
 #define gender2text(gender) capitalize(gender)
 
@@ -410,21 +428,40 @@ proc/TextPreview(var/string,var/len=40)
 	t = replacetext(t, "\[/grid\]", "</td></tr></table>")
 	t = replacetext(t, "\[row\]", "</td><tr>")
 	t = replacetext(t, "\[cell\]", "<td>")
-	t = replacetext(t, "\[logo\]", "<img src = torchltd.png>")
+	t = replacetext(t, "\[logo\]", "<img src = exologo.png>")
 	t = replacetext(t, "\[bluelogo\]", "<img src = bluentlogo.png>")
 	t = replacetext(t, "\[solcrest\]", "<img src = sollogo.png>")
-	t = replacetext(t, "\[torchltd\]", "<img src = torchltd.png>")
+	t = replacetext(t, "\[torchltd\]", "<img src = exologo.png>")
 	t = replacetext(t, "\[iccgseal\]", "<img src = terralogo.png>")
 	t = replacetext(t, "\[ntlogo\]", "<img src = ntlogo.png>")
 	t = replacetext(t, "\[daislogo\]", "<img src = daislogo.png>")
 	t = replacetext(t, "\[eclogo\]", "<img src = eclogo.png>")
 	t = replacetext(t, "\[xynlogo\]", "<img src = xynlogo.png>")
 	t = replacetext(t, "\[fleetlogo\]", "<img src = fleetlogo.png>")
+	t = replacetext(t, "\[sfplogo\]", "<img src = sfplogo.png>")
 	t = replacetext(t, "\[editorbr\]", "")
 	return t
 
+//pencode translation to html for tags exclusive to digital files (currently email, nanoword, report editor fields,
+//modular scanner data and txt file printing) and prints from them
+/proc/digitalPencode2html(var/text)
+	text = replacetext(text, "\[pre\]", "<pre>")
+	text = replacetext(text, "\[/pre\]", "</pre>")
+	text = replacetext(text, "\[fontred\]", "<font color=\"red\">") //</font> to pass html tag integrity unit test
+	text = replacetext(text, "\[fontblue\]", "<font color=\"blue\">")//</font> to pass html tag integrity unit test
+	text = replacetext(text, "\[fontgreen\]", "<font color=\"green\">")
+	text = replacetext(text, "\[/font\]", "</font>")
+	text = replacetext(text, "\[redacted\]", "<span class=\"redacted\">R E D A C T E D</span>")
+	return pencode2html(text)
+
 //Will kill most formatting; not recommended.
 /proc/html2pencode(t)
+	t = replacetext(t, "<pre>", "\[pre\]")
+	t = replacetext(t, "</pre>", "\[/pre\]")
+	t = replacetext(t, "<font color=\"red\">", "\[fontred\]")//</font> to pass html tag integrity unit test
+	t = replacetext(t, "<font color=\"blue\">", "\[fontblue\]")//</font> to pass html tag integrity unit test
+	t = replacetext(t, "<font color=\"green\">", "\[fontgreen\]")
+	t = replacetext(t, "</font>", "\[/font\]")
 	t = replacetext(t, "<BR>", "\[br\]")
 	t = replacetext(t, "<br>", "\[br\]")
 	t = replacetext(t, "<B>", "\[b\]")
@@ -453,11 +490,13 @@ proc/TextPreview(var/string,var/len=40)
 	t = replacetext(t, "<img src = bluentlogo.png>", "\[bluelogo\]")
 	t = replacetext(t, "<img src = sollogo.png>", "\[solcrest\]")
 	t = replacetext(t, "<img src = terralogo.png>", "\[iccgseal\]")
-	t = replacetext(t, "<img src = torchltd.png>", "\[logo\]")
+	t = replacetext(t, "<img src = exologo.png>", "\[logo\]")
 	t = replacetext(t, "<img src = eclogo.png>", "\[eclogo\]")
 	t = replacetext(t, "<img src = daislogo.png>", "\[daislogo\]")
 	t = replacetext(t, "<img src = xynlogo.png>", "\[xynlogo\]")
+	t = replacetext(t, "<img src = sfplogo.png>", "\[sfplogo\]")
 	t = replacetext(t, "<span class=\"paper_field\"></span>", "\[field\]")
+	t = replacetext(t, "<span class=\"redacted\">R E D A C T E D</span>", "\[redacted\]")
 	t = strip_html_properly(t)
 	return t
 
@@ -527,9 +566,9 @@ proc/TextPreview(var/string,var/len=40)
 		. += .(rest)
 
 /proc/deep_string_equals(var/A, var/B)
-	if (lentext(A) != lentext(B))
+	if (length(A) != length(B))
 		return FALSE
-	for (var/i = 1 to lentext(A))
+	for (var/i = 1 to length(A))
 		if (text2ascii(A, i) != text2ascii(B, i))
 			return FALSE
 	return TRUE
@@ -537,7 +576,7 @@ proc/TextPreview(var/string,var/len=40)
 // If char isn't part of the text the entire text is returned
 /proc/copytext_after_last(var/text, var/char)
 	var/regex/R = regex("(\[^[char]\]*)$")
-	R.Find(text)
+	regex_find(R, text)
 	return R.group[1]
 
 /proc/sql_sanitize_text(var/text)
@@ -545,3 +584,49 @@ proc/TextPreview(var/string,var/len=40)
 	text = replacetext(text, ";", "")
 	text = replacetext(text, "&", "")
 	return text
+
+/proc/text2num_or_default(text, default)
+	var/result = text2num(text)
+	return "[result]" == text ? result : default
+
+/proc/text2regex(text)
+	var/end = findlasttext_char(text, "/")
+	if (end > 2 && length_char(text) > 2 && copytext_char(text, 1, 2) == "/")
+		var/flags = end == length_char(text) ? FALSE : copytext_char(text, end + 1)
+		var/matcher = copytext_char(text, 2, end)
+		try
+			return flags ? regex(matcher, flags) : regex(matcher)
+		catch()
+	log_error("failed to parse text to regex: [text]")
+
+/proc/process_chat_markup(message)
+	if (message && length(config.chat_markup))
+		for (var/list/entry in config.chat_markup)
+			var/regex/matcher = entry[1]
+			message = replacetext_char(message, matcher, entry[2])
+	return message
+
+
+/**
+* Connects either a list or variadic arguments with "/" and cleans up multiple joins.
+* eg:
+*   join_url("a", "b", "c") => "a/b/c"
+*   join_url(list("a", "b", "c")) => "a/b/c"
+*   join_url("https://some.tld/", "/cats", "~", "//dogs") => "https://some.tld/cats/~/dogs"
+*/
+/proc/join_url()
+	var/len = length(args)
+	if (!len)
+		return ""
+	var/list/parts
+	if (len == 1)
+		if (!islist(args[1]))
+			parts = list(args[1])
+		else
+			parts = args[1]
+	else
+		parts = args
+	var/static/regex/clean1 = regex(@"\/\/+", "g") //Squash //+ to /
+	var/static/regex/clean2 = regex(@"^([^:]+:)\/([^\/])") //Fix "blah://" if we killed it in clean1
+	parts = replacetext_char(parts.Join("/"), clean1, "/")
+	return replacetext_char(parts, clean2, "$1//$2")

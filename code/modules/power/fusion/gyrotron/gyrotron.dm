@@ -3,9 +3,9 @@
 /obj/machinery/power/emitter/gyrotron
 	name = "gyrotron"
 	icon = 'icons/obj/machines/power/fusion.dmi'
-	desc = "It is a heavy duty industrial gyrotron suited for powering fusion reactors."
+	desc = "A heavy-duty, highly configurable industrial gyrotron suited for powering fusion reactors."
 	icon_state = "emitter-off"
-	req_access = list(access_engine)
+	req_lock_access = list(access_engine)
 	use_power = POWER_USE_IDLE
 	active_power_usage = GYRO_POWER
 
@@ -13,15 +13,21 @@
 	var/rate = 3
 	var/mega_energy = 1
 
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/radio/receiver,
+	)
+	stat_immune = 0
+	base_type = /obj/machinery/power/emitter/gyrotron
 
 /obj/machinery/power/emitter/gyrotron/anchored
-	anchored = 1
-	state = 2
+	anchored = TRUE
+	state = EMITTER_WELDED
 
 /obj/machinery/power/emitter/gyrotron/Initialize()
-	set_extension(src, /datum/extension/fusion_plant_member, /datum/extension/fusion_plant_member)
+	set_extension(src, /datum/extension/local_network_member)
 	if(initial_id_tag)
-		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.set_tag(null, initial_id_tag)
 	change_power_consumption(mega_energy * GYRO_POWER, POWER_USE_ACTIVE)
 	. = ..()
@@ -31,10 +37,10 @@
 	. = ..()
 
 /obj/machinery/power/emitter/gyrotron/get_rand_burst_delay()
-	return rate*10
+	return rate * 10
 
 /obj/machinery/power/emitter/gyrotron/get_burst_delay()
-	return rate*10
+	return rate * 10
 
 /obj/machinery/power/emitter/gyrotron/get_emitter_beam()
 	var/obj/item/projectile/beam/emitter/E = ..()
@@ -49,7 +55,7 @@
 
 /obj/machinery/power/emitter/gyrotron/attackby(var/obj/item/W, var/mob/user)
 	if(isMultitool(W))
-		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.get_new_tag(user)
 		return
 	return ..()

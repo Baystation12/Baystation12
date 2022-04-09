@@ -1,4 +1,5 @@
 // Returns which access is relevant to passed network. Used by the program.
+// A return value of 0 indicates no access reqirement
 /proc/get_camera_access(var/network)
 	if(!network)
 		return 0
@@ -9,6 +10,8 @@
 	switch(network)
 		if(NETWORK_ENGINEERING, NETWORK_ALARM_ATMOS, NETWORK_ALARM_CAMERA, NETWORK_ALARM_FIRE, NETWORK_ALARM_POWER)
 			return access_engine
+		if(NETWORK_ROBOTS)
+			return access_ai_upload
 		if(NETWORK_CRESCENT, NETWORK_ERT)
 			return access_cent_specops
 		if(NETWORK_MEDICAL)
@@ -31,8 +34,9 @@
 	program_menu_icon = "search"
 	extended_desc = "This program allows remote access to the camera system. Some camera networks may have additional access requirements."
 	size = 12
-	available_on_ntnet = 1
-	requires_ntnet = 1
+	available_on_ntnet = TRUE
+	requires_ntnet = FALSE
+	category = PROG_MONITOR
 
 /datum/nano_module/camera_monitor
 	name = "Camera Monitoring program"
@@ -89,11 +93,15 @@
 
 	if(href_list["switch_camera"])
 		var/obj/machinery/camera/C = locate(href_list["switch_camera"]) in cameranet.cameras
+		var/datum/extension/interactive/ntos/os = get_extension(nano_host(), /datum/extension/interactive/ntos)
 		if(!C)
 			return
 		if(!(current_network in C.network))
 			return
 		if(!AreConnectedZLevels(get_z(C), get_z(host)) && !(get_z(C) in GLOB.using_map.admin_levels))
+			to_chat(usr, "Unable to establish a connection.")
+			return
+		if (!os?.get_ntnet_status() && !C.is_helmet_cam)
 			to_chat(usr, "Unable to establish a connection.")
 			return
 
@@ -164,7 +172,7 @@
 	extended_desc = "This program allows remote access to the camera system. Some camera networks may have additional access requirements. This version has an integrated database with additional encrypted keys."
 	size = 14
 	nanomodule_path = /datum/nano_module/camera_monitor/ert
-	available_on_ntnet = 0
+	available_on_ntnet = FALSE
 
 /datum/nano_module/camera_monitor/ert
 	name = "Advanced Camera Monitoring Program"

@@ -11,6 +11,7 @@
 		if(child.parent_type == type)
 			dd_insertObjectList(children, child)
 			child.parent = src
+	return ..()
 
 /decl/hierarchy/proc/is_category()
 	return hierarchy_type == type || children.len

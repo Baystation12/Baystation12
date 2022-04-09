@@ -43,7 +43,7 @@
 	return ..()
 
 /mob/living/carbon/brain/UpdateLyingBuckledAndVerbStatus()
-	if(in_contents_of(/obj/mecha) || istype(loc, /obj/item/device/mmi))
+	if(istype(loc, /obj/item/device/mmi))
 		use_me = 1
 
 /mob/living/carbon/brain/isSynthetic()

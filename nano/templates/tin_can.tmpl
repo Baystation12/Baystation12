@@ -14,9 +14,9 @@
 <div class="item" style="padding-top: 10px">
 	<div class="item">
 		<div class="itemContent" style="width: 100%">
-			{{:helper.link('Evacuate Air', null, {'command' : 'evacuate_atmos'}, data.state == 2 ? 'selected' : null)}}
+			{{:helper.link('Purge Air', null, {'command' : 'evacuate_atmos'}, data.state == 2 ? 'selected' : null)}}
 			{{:helper.link('Equalize With Exterior', null, {'command' : 'fill_atmos'}, data.state == 1 ? 'selected' : null)}}
-			{{:helper.link('Seal', null, {'command' : 'seal'}, data.state == 3 ? 'selected' : null)}}
+			{{:helper.link('Hold', null, {'command' : 'seal'}, data.state == 3 ? 'selected' : null)}}
 		</div>
 		<div class="itemContent" style="padding-top: 2px; width: 100%">
 		{{if data.door_safety}}

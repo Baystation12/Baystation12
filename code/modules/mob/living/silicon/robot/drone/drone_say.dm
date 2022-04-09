@@ -10,11 +10,11 @@
 		if (stat == DEAD)
 			return say_dead(message)
 
-		if(copytext(message,1,2) == "*")
+		if(copytext_char(message,1,2) == get_prefix_key(/decl/prefix/custom_emote))
 			return emote(copytext(message,2))
 
-		if(copytext(message,1,2) == ";")
-			var/datum/language/L = all_languages["Drone Talk"]
+		if(copytext_char(message,1,2) == get_prefix_key(/decl/prefix/radio_main_channel))
+			var/datum/language/L = all_languages[LANGUAGE_DRONE_GLOBAL]
 			if(istype(L))
 				return L.broadcast(src,trim(copytext(message,2)))
 

@@ -27,7 +27,21 @@
 		/decl/emote/human/qwag,
 		/decl/emote/human/fastsway,
 		/decl/emote/human/swag,
-		/decl/emote/human/stopsway
+		/decl/emote/human/stopsway,
+		/decl/emote/audible/lizard_bellow
+		)
+
+/datum/species/unathi/yeosa
+	default_emotes = list(
+		/decl/emote/human/swish,
+		/decl/emote/human/wag,
+		/decl/emote/human/sway,
+		/decl/emote/human/qwag,
+		/decl/emote/human/fastsway,
+		/decl/emote/human/swag,
+		/decl/emote/human/stopsway,
+		/decl/emote/audible/lizard_bellow,
+		/decl/emote/audible/lizard_squeal
 		)
 
 /datum/species/nabber
@@ -43,6 +57,22 @@
 		/decl/emote/audible/adherent_ding
 	)
 
+/datum/species/vox
+	default_emotes = list(
+		/decl/emote/audible/vox_shriek
+	)
+
+/datum/species/vox/armalis/default_emotes = list(
+	/decl/emote/audible/vox_shriek,
+	/decl/emote/audible/armalis_shriek
+)
+
+/datum/species/diona
+	default_emotes = list(
+		/decl/emote/audible/chirp,
+		/decl/emote/audible/multichirp
+	)
+
 /mob/living/carbon/human/set_species(var/new_species, var/default_colour = 1)
-	. = ..()
+	UNLINT(. = ..())
 	update_emotes()

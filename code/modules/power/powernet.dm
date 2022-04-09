@@ -40,7 +40,7 @@
 	return max(avail - load, 0)
 
 /datum/powernet/proc/draw_power(var/amount)
-	var/draw = between(0, amount, avail - load)
+	var/draw = clamp(amount, 0, avail - load)
 	load += draw
 	return draw
 
@@ -103,7 +103,7 @@
 
 	if(nodes && nodes.len) // Added to fix a bad list bug -- TLE
 		for(var/obj/machinery/power/terminal/term in nodes)
-			if( istype( term.master, /obj/machinery/power/apc ) )
+			if( istype( term.master_machine(), /obj/machinery/power/apc ) )
 				numapc++
 
 	netexcess = avail - load
@@ -121,7 +121,7 @@
 
 	// At this point, all other machines have finished using power. Anything left over may be used up to charge SMESs.
 	if(inputting.len && smes_demand)
-		var/smes_input_percentage = between(0, (netexcess / smes_demand) * 100, 100)
+		var/smes_input_percentage = clamp((netexcess / smes_demand) * 100, 0, 100)
 		for(var/obj/machinery/power/smes/S in inputting)
 			S.input_power(smes_input_percentage)
 
@@ -149,11 +149,11 @@
 		var/smes_used = load - (avail - smes_avail) 			// SMESs are always last to provide power
 		if(!smes_used || smes_used < 0 || !smes_avail)			// SMES power isn't available or being used at all, SMES load is therefore 0%
 			return 0
-		return between(0, (smes_used / smes_avail) * 100, 100)	// Otherwise return percentage load of SMESs.
+		return clamp((smes_used / smes_avail) * 100, 0, 100)	// Otherwise return percentage load of SMESs.
 	else
 		if(!load)
 			return 0
-		return between(0, (avail / load) * 100, 100)
+		return clamp((avail / load) * 100, 0, 100)
 
 /datum/powernet/proc/get_electrocute_damage()
 	switch(avail)
@@ -169,6 +169,20 @@
 			return min(rand(10,20),rand(10,20))
 		else
 			return 0
+
+// Proc: apcs_overload()
+// Parameters: 3 (failure_chance - chance to actually break the APC, overload_chance - Chance of breaking lights, reboot_chance - Chance of temporarily disabling the APC)
+// Description: Damages output powernet by power surge. Destroys few APCs and lights, depending on parameters.
+/datum/powernet/proc/apcs_overload(var/failure_chance, var/overload_chance, var/reboot_chance)
+	for(var/obj/machinery/power/terminal/T in nodes)
+		var/obj/machinery/power/apc/A = T.master_machine()
+		if(istype(A))
+			if (prob(failure_chance))
+				A.set_broken(TRUE)
+			if (prob(overload_chance))
+				A.overload_lighting()
+			if(prob(reboot_chance))
+				A.energy_fail(rand(30,60))
 
 ////////////////////////////////////////////////
 // Misc.

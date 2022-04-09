@@ -2,22 +2,7 @@
 /mob/living/simple_animal/hostile/retaliate/beast
 	var/hunger = 0
 	var/list/prey = list()
-
-/mob/living/simple_animal/hostile/retaliate/beast/ListTargets(var/dist = 7)
-	var/list/see = ..()
-	if(see.len)
-		return see
-	if(prey.len)
-		. = list()
-		for(var/weakref/W in prey)
-			var/mob/M = W.resolve()
-			if(M)
-				. += M
-		return
-	if(hunger > 500) //time to look for some food
-		for(var/mob/living/L in view(src, dist))
-			if(!attack_same && L.faction != faction)
-				prey |= weakref(L)
+	ai_holder = /datum/ai_holder/simple_animal/beast
 
 /mob/living/simple_animal/hostile/retaliate/beast/Life()
 	. = ..()
@@ -25,7 +10,7 @@
 		return FALSE
 	hunger++
 	if(hunger < 100) //stop hunting when satiated
-		prey.Cut()
+		ai_holder.hostile = FALSE
 	else
 		for(var/mob/living/simple_animal/S in range(src,1))
 			if(S.stat == DEAD)
@@ -39,19 +24,23 @@
 				else
 					qdel(S)
 
-/mob/living/simple_animal/proc/name_species()
+	if (hunger > 500)
+		ai_holder.hostile = TRUE
+
+/mob/living/simple_animal/proc/name_species(newname as text)
 	set name = "Name Alien Species"
-	set category = "Exploration"
+	set category = "IC"
 	set src in view()
 
 	if(!GLOB.using_map.use_overmap)
 		return
 	if(!CanInteract(usr, GLOB.conscious_state))
 		return
+	if (isghost(usr))
+		return
 
-	for(var/obj/effect/overmap/sector/exoplanet/E)
+	for(var/obj/effect/overmap/visitable/sector/exoplanet/E)
 		if(src in E.animals)
-			var/newname = input("What do you want to name this species?", "Species naming", E.get_random_species_name()) as text|null
 			newname = sanitizeName(newname, allow_numbers = TRUE, force_first_letter_uppercase = FALSE)
 			if(newname && CanInteract(usr, GLOB.conscious_state))
 				if(E.rename_species(type, newname))
@@ -71,15 +60,14 @@
 	maxHealth = 125
 	health = 125
 	speed = 2
-	melee_damage_lower = 5
-	melee_damage_upper = 15
-	attacktext = "mauled"
+	natural_weapon = /obj/item/natural_weapon/claws
 	cold_damage_per_tick = 0
-	speak_chance = 5
-	speak = list("Hruuugh!","Hrunnph")
-	emote_see = list("paws the ground","shakes its mane","stomps")
-	emote_hear = list("snuffles")
-	natural_armor = list(melee = 20)
+	natural_armor = list(
+		melee = ARMOR_MELEE_KNIVES
+		)
+
+	ai_holder = /datum/ai_holder/simple_animal/samak
+	say_list_type = /datum/say_list/samak
 
 /mob/living/simple_animal/hostile/retaliate/beast/samak/alt
 	desc = "A fast, armoured predator accustomed to hiding and ambushing."
@@ -98,15 +86,12 @@
 	maxHealth = 25
 	health = 25
 	speed = 1
-	melee_damage_lower = 1
-	melee_damage_upper = 8
-	attacktext = "gouged"
+	natural_weapon = /obj/item/natural_weapon/claws/weak
 	cold_damage_per_tick = 0
-	speak_chance = 5
-	speak = list("Awrr?","Aowrl!","Worrl")
-	emote_see = list("sniffs the air cautiously","looks around")
-	emote_hear = list("snuffles")
 	mob_size = MOB_SMALL
+
+	ai_holder = /datum/ai_holder/simple_animal/diyaab
+	say_list_type = /datum/say_list/diyaab
 
 /mob/living/simple_animal/hostile/retaliate/beast/shantak
 	name = "shantak"
@@ -119,20 +104,17 @@
 	maxHealth = 75
 	health = 75
 	speed = 1
-	melee_damage_lower = 3
-	melee_damage_upper = 12
-	attacktext = "gouged"
+	natural_weapon = /obj/item/natural_weapon/claws
 	cold_damage_per_tick = 0
-	speak_chance = 2
-	speak = list("Shuhn","Shrunnph?","Shunpf")
-	emote_see = list("scratches the ground","shakes out its mane","tinkles gently")
+
+	ai_holder = /datum/ai_holder/simple_animal/shantak
+	say_list_type = /datum/say_list/shantak
 
 /mob/living/simple_animal/hostile/retaliate/beast/shantak/alt
 	desc = "A piglike creature with a long and graceful mane. Don't be fooled by its beauty."
 	icon_state = "shantak-alt"
 	icon_living = "shantak-alt"
 	icon_dead = "shantak-alt_dead"
-	emote_see = list("scratches the ground","shakes out it's mane","rustles softly")
 
 /mob/living/simple_animal/yithian
 	name = "yithian"
@@ -141,6 +123,9 @@
 	icon_living = "yithian"
 	icon_dead = "yithian_dead"
 	mob_size = MOB_TINY
+	density = FALSE
+
+	ai_holder = /datum/ai_holder/simple_animal/passive
 
 /mob/living/simple_animal/tindalos
 	name = "tindalos"
@@ -149,6 +134,9 @@
 	icon_living = "tindalos"
 	icon_dead = "tindalos_dead"
 	mob_size = MOB_TINY
+	density = FALSE
+
+	ai_holder = /datum/ai_holder/simple_animal/passive
 
 /mob/living/simple_animal/thinbug
 	name = "taki"
@@ -156,34 +144,13 @@
 	icon_state = "thinbug"
 	icon_living = "thinbug"
 	icon_dead = "thinbug_dead"
-	speak_chance = 1
-	emote_hear = list("scratches the ground","chitters")
 	mob_size = MOB_MINISCULE
+	density = FALSE
 
-/mob/living/simple_animal/hostile/retaliate/jelly
-	name = "zeq"
-	desc = "It looks like a floating jellyfish. How does it do that?"
-	faction = "zeq"
-	icon_state = "jelly"
-	icon_living = "jelly"
-	icon_dead = "jelly_dead"
-	move_to_delay = 1
-	maxHealth = 75
-	health = 75
-	speed = 1
-	melee_damage_lower = 3
-	melee_damage_upper = 12
-	attacktext = "stung"
-	damtype = BURN
-	speak_chance = 1
-	emote_see = list("wobbles slightly","oozes something out of tentacles' ends")
+	ai_holder = /datum/ai_holder/simple_animal/passive/thinbug
+	say_list_type = /datum/say_list/thinbug
 
-/mob/living/simple_animal/hostile/retaliate/jelly/alt
-	icon_state = "jelly-alt"
-	icon_living = "jelly-alt"
-	icon_dead = "jelly-alt_dead"
-
-mob/living/simple_animal/hostile/retaliate/royalcrab
+/mob/living/simple_animal/hostile/retaliate/royalcrab
 	name = "cragenoy"
 	desc = "It looks like a crustacean with an exceedingly hard carapace. Watch the pinchers!"
 	faction = "crab"
@@ -194,13 +161,113 @@ mob/living/simple_animal/hostile/retaliate/royalcrab
 	maxHealth = 150
 	health = 150
 	speed = 1
-	melee_damage_lower = 2
-	melee_damage_upper = 5
-	attacktext = "pinched"
-	speak_chance = 1
-	emote_see = list("skitters","oozes liquid from its mouth", "scratches at the ground", "clicks its claws")
-	natural_armor = list(melee = 20)
+	natural_weapon = /obj/item/natural_weapon/pincers
+	natural_armor = list(
+		melee = ARMOR_MELEE_RESISTANT
+		)
 
-/mob/living/simple_animal/hostile/retaliate/jelly/New()
-	..()
-	color = color_rotation(round(rand(0,360),20))
+	ai_holder = /datum/ai_holder/simple_animal/retaliate/royalcrab
+	say_list = /datum/say_list/royalcrab
+
+/mob/living/simple_animal/hostile/retaliate/beast/charbaby
+	name = "charbaby"
+	desc = "A huge grubby creature."
+	icon_state = "char"
+	icon_living = "char"
+	icon_dead = "char_dead"
+	mob_size = MOB_LARGE
+	health = 45
+	maxHealth = 45
+	natural_weapon = /obj/item/natural_weapon/charbaby
+	speed = 2
+	response_help =  "pats briefly"
+	response_disarm = "gently pushes"
+	response_harm = "strikes"
+	return_damage_min = 2
+	return_damage_max = 3
+	harm_intent_damage = 1
+	blood_color = COLOR_NT_RED
+	natural_armor = list(
+		laser = ARMOR_LASER_HANDGUNS
+		)
+	ai_holder = /datum/ai_holder/simple_animal/melee/charbaby
+
+/datum/ai_holder/simple_animal/melee/charbaby
+
+/datum/ai_holder/simple_animal/melee/charbaby/engage_target()
+	. = ..()
+	var/mob/living/simple_animal/hostile/retaliate/beast/charbaby/C = holder
+	if(isliving(C.target_mob) && prob(25))
+		var/mob/living/L = C.target_mob
+		if(prob(10))
+			L.adjust_fire_stacks(1)
+			L.IgniteMob()
+/obj/item/natural_weapon/charbaby
+	name = "scalding hide"
+	damtype = BURN
+	force = 5
+	attack_verb = list("singed")
+
+/mob/living/simple_animal/hostile/retaliate/beast/charbaby/attack_hand(mob/living/carbon/human/H)
+	. = ..()
+	reflect_unarmed_damage(H, BURN, "amorphous mass")
+
+/mob/living/simple_animal/hostile/retaliate/beast/shantak/lava
+	desc = "A vaguely canine looking beast. It looks as though its fur is made of stone wool."
+	icon_state = "lavadog"
+	icon_living = "lavadog"
+	icon_dead = "lavadog_dead"
+
+	say_list_type = /datum/say_list/shantak/lava
+
+
+/* AI */
+
+/datum/ai_holder/simple_animal/beast
+	speak_chance = 5
+
+/datum/ai_holder/simple_animal/diyaab/post_melee_attack(atom/A)
+	. = ..()
+	if(holder.Adjacent(A))
+		holder.IMove(get_step(holder, pick(GLOB.alldirs)))
+		holder.face_atom(A)
+
+/datum/ai_holder/simple_animal/samak
+	speak_chance = 5
+
+/datum/ai_holder/simple_animal/diyaab
+	speak_chance = 5
+
+/datum/ai_holder/simple_animal/shantak
+	speak_chance = 2
+
+/datum/ai_holder/simple_animal/passive/thinbug
+	speak_chance = 1
+
+/datum/ai_holder/simple_animal/retaliate/royalcrab
+	speak_chance = 1
+
+/* Say Lists */
+
+/datum/say_list/samak
+	speak = list("Hruuugh!","Hrunnph")
+	emote_see = list("paws the ground","shakes its mane","stomps")
+	emote_hear = list("snuffles")
+
+/datum/say_list/diyaab
+	speak = list("Awrr?","Aowrl!","Worrl")
+	emote_see = list("sniffs the air cautiously","looks around")
+	emote_hear = list("snuffles")
+
+/datum/say_list/shantak
+	speak = list("Shuhn","Shrunnph?","Shunpf")
+	emote_see = list("scratches the ground","shakes out its mane","tinkles gently")
+
+/datum/say_list/thinbug
+	emote_hear = list("scratches the ground","chitters")
+
+/datum/say_list/royalcrab
+	emote_see = list("skitters","oozes liquid from its mouth", "scratches at the ground", "clicks its claws")
+
+/datum/say_list/shantak/lava
+	speak = list("Karuph","Karump")

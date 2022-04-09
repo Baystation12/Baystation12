@@ -127,7 +127,7 @@
 /decl/poster/bay_26
 	icon_state="bsposter26"
 	name = "The Men We Knew"
-	desc = "This movie poster depicts a group of soldiers fighting a large mech, the movie seems to be a patriotic war movie."
+	desc = "This movie poster depicts a group of soldiers fighting a large exosuit, the movie seems to be a patriotic war movie."
 
 /decl/poster/bay_27
 	icon_state="bsposter27"
@@ -213,11 +213,6 @@
 	icon_state="bsposter43"
 	name = "Responsible medbay habits, No #3"
 	desc = "A safety poster with a purple-haired surgeon. She looks a bit cross. \"Let the surgeons do their work. NEVER replace or remove a surgery tool from where the surgeon put it.\""
-
-/decl/poster/bay_44
-	icon_state="bsposter44"
-	name = "Time for a drink?"
-	desc = "This poster depicts a friendly-looking alien holding a tray of drinks."
 
 /decl/poster/bay_45
 	icon_state="bsposter45"

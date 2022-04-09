@@ -5,10 +5,17 @@
 	icon_state = "operating"
 	var/icon_state_unpowered = "telescreen"
 	anchored = TRUE
-	density = 0
+	density = FALSE
 	idle_power_usage = 75
 	active_power_usage = 300
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 	w_class = ITEM_SIZE_HUGE
+	
+	machine_name = "body scanner display"
+	machine_desc = "Receives body scans from a linked body scanner and allows them to be viewed remotely."
+	
 	var/list/bodyscans = list()
 	var/selected = 0
 
@@ -34,15 +41,9 @@
 		bodyscans -= list(bodyscans[selection])
 		return TOPIC_REFRESH
 
-/obj/machinery/body_scan_display/attack_ai(user as mob)
-	return attack_hand(user)
-
-/obj/machinery/body_scan_display/attack_hand(mob/user)
-	if(..())
-		return
-	if(stat & (NOPOWER|BROKEN))
-		return
+/obj/machinery/body_scan_display/interface_interact(user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/body_scan_display/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open=1)
 	var/list/data = list()

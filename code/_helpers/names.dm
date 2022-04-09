@@ -1,51 +1,3 @@
-var/church_name = null
-/proc/church_name()
-	if (church_name)
-		return church_name
-
-	var/name = ""
-
-	name += pick("Holy", "United", "First", "Second", "Last")
-
-	if (prob(20))
-		name += " Space"
-
-	name += " " + pick("Church", "Cathedral", "Body", "Worshippers", "Movement", "Witnesses")
-	name += " of [religion_name()]"
-
-	return name
-
-var/command_name = null
-/proc/command_name()
-	if (command_name)
-		return command_name
-
-	var/name = "[GLOB.using_map.boss_name]"
-
-	command_name = name
-	return name
-
-/proc/change_command_name(var/name)
-
-	command_name = name
-
-	return name
-
-var/religion_name = null
-/proc/religion_name()
-	if (religion_name)
-		return religion_name
-
-	var/name = ""
-
-	name += pick("bee", "science", "edu", "captain", "assistant", "monkey", "alien", "space", "unit", "sprocket", "gadget", "bomb", "revolution", "beyond", "station", "goon", "robot", "ivor", "hobnob")
-	name += pick("ism", "ia", "ology", "istism", "ites", "ick", "ian", "ity")
-
-	return capitalize(name)
-
-/proc/system_name()
-	return GLOB.using_map.system_name ? GLOB.using_map.system_name : generate_system_name()
-
 /proc/generate_system_name()
 	return "[pick("Gilese","GSC", "Luyten", "GJ", "HD", "SCGECO")][prob(10) ? " Eridani" : ""] [rand(100,999)]"
 
@@ -70,23 +22,9 @@ var/religion_name = null
 		GLOB.using_map.station_name = name + " "
 
 	// Prefix
-	switch(Holiday)
-		//get normal name
-		if(null,"",0)
-			name = pick(GLOB.station_names)
-			if(name)
-				GLOB.using_map.station_name += name + " "
-
-		//For special days like christmas, easter, new-years etc ~Carn
-		if("Friday the 13th")
-			name = pick("Mike","Friday","Evil","Myers","Murder","Deathly","Stabby")
-			GLOB.using_map.station_name += name + " "
-			random = 13
-		else
-			//get the first word of the Holiday and use that
-			var/i = findtext(Holiday," ",1,0)
-			name = copytext(Holiday,1,i)
-			GLOB.using_map.station_name += name + " "
+	name = pick(GLOB.station_names)
+	if(name)
+		GLOB.using_map.station_name += name + " "
 
 	// Suffix
 	name = pick(GLOB.station_suffixes)
@@ -125,54 +63,6 @@ var/religion_name = null
 
 	return name
 
-var/syndicate_name = null
-/proc/syndicate_name()
-	if (syndicate_name)
-		return syndicate_name
-
-	var/name = ""
-
-	// Prefix
-	name += pick("Clandestine", "Prima", "Blue", "Zero-G", "Max", "Blasto", "Waffle", "North", "Omni", "Newton", "Cyber", "Bonk", "Gene", "Gib")
-
-	// Suffix
-	if (prob(80))
-		name += " "
-
-		// Full
-		if (prob(60))
-			name += pick("Syndicate", "Consortium", "Collective", "Corporation", "Group", "Holdings", "Biotech", "Industries", "Systems", "Products", "Chemicals", "Enterprises", "Family", "Creations", "International", "Intergalactic", "Interplanetary", "Foundation", "Positronics", "Hive")
-		// Broken
-		else
-			name += pick("Syndi", "Corp", "Bio", "System", "Prod", "Chem", "Inter", "Hive")
-			name += pick("", "-")
-			name += pick("Tech", "Sun", "Co", "Tek", "X", "Inc", "Code")
-	// Small
-	else
-		name += pick("-", "*", "")
-		name += pick("Tech", "Sun", "Co", "Tek", "X", "Inc", "Gen", "Star", "Dyne", "Code", "Hive")
-
-	syndicate_name = name
-	return name
-
-
-//Traitors and traitor silicons will get these. Revs will not.
-var/syndicate_code_phrase//Code phrase for traitors.
-var/syndicate_code_response//Code response for traitors.
-
-	/*
-	Should be expanded.
-	How this works:
-	Instead of "I'm looking for James Smith," the traitor would say "James Smith" as part of a conversation.
-	Another traitor may then respond with: "They enjoy running through the void-filled vacuum of the derelict."
-	The phrase should then have the words: James Smith.
-	The response should then have the words: run, void, and derelict.
-	This way assures that the code is suited to the conversation and is unpredicatable.
-	Obviously, some people will be better at this than others but in theory, everyone should be able to do it and it only enhances roleplay.
-	Can probably be done through "{ }" but I don't really see the practical benefit.
-	One example of an earlier system is commented below.
-	-N
-	*/
 
 /proc/generate_code_phrase()//Proc is used for phrase and response in subsystem init.
 

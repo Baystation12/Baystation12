@@ -14,13 +14,15 @@
 	if(!D)
 		return
 
+	var/static/cookieoffset = rand(1, 9999) //to force cookies to reset after the round.
+
 	var/icon/sprite
 	var/atom/A
 	if(istype(D, /atom))
 		A = D
 		if(A.icon && A.icon_state)
 			sprite = icon(A.icon, A.icon_state)
-			usr << browse_rsc(sprite, "view_vars_sprite.png")
+			send_rsc(usr, sprite, "view_vars_sprite.png")
 
 	send_rsc(usr,'code/js/view_variables.js', "view_variables.js")
 
@@ -34,7 +36,7 @@
 				.value { font-family: "Courier New", monospace; font-size: 8pt; }
 			</style>
 		</head>
-		<body onload='selectTextField(); updateSearch()'; onkeyup='updateSearch()'>
+		<body onload='selectTextField(\ref[D]); updateSearch(\ref[D])'; onkeyup='updateSearch(\ref[D])'>
 			<div align='center'>
 				<table width='100%'><tr>
 					<td width='50%'>
@@ -94,11 +96,16 @@
 			<ol id='vars'>
 				[make_view_variables_var_list(D)]
 			</ol>
+			<script type='text/javascript'>
+				var complete_list = \[\];
+				var lis = document.getElementById("vars").children;
+				for(var i = lis.length; i--;) complete_list\[i\] = lis\[i\];
+			</script>
 		</body>
 		</html>
 		"}
 
-	usr << browse(html, "window=variables\ref[D];size=475x650")
+	show_browser(usr, html, "window=variables\ref[D];size=475x650")
 
 /client
 	var/list/watched_variables = list()

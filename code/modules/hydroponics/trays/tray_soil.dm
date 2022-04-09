@@ -1,13 +1,15 @@
 /obj/machinery/portable_atmospherics/hydroponics/soil
 	name = "soil"
+	desc = "A mound of earth. You could plant some seeds here."
 	icon_state = "soil"
-	density = 0
+	density = FALSE
 	use_power = POWER_USE_OFF
+	stat_immune = NOINPUT | NOSCREEN | NOPOWER
 	mechanical = 0
 	tray_light = 0
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(istype(O,/obj/item/weapon/tank))
+	if(istype(O,/obj/item/tank))
 		return
 	else
 		..()
@@ -26,8 +28,10 @@
 // Hence using a blank icon.
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible
 	name = "plant"
+	desc = null
 	icon = 'icons/obj/seeds.dmi'
 	icon_state = "blank"
+	machine_desc = null
 	var/list/connected_zlevels //cached for checking if we someone is obseving us so we should process
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/is_burnable()
@@ -56,7 +60,7 @@
 	if(living_observers_present(connected_zlevels))
 		return ..()
 
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/remove_dead()
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/remove_dead(mob/user, silent)
 	..()
 	qdel(src)
 

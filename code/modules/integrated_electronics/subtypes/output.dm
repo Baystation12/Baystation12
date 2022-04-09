@@ -48,7 +48,7 @@
 	var/list/nearby_things = range(0, get_turf(src))
 	for(var/mob/M in nearby_things)
 		var/obj/O = assembly ? assembly : src
-		to_chat(M, "<span class='notice'>\icon[O] [stuff_to_display]</span>")
+		to_chat(M, "<span class='notice'>[icon2html(O, M)] [stuff_to_display]</span>")
 
 /obj/item/integrated_circuit/output/screen/large
 	name = "large screen"
@@ -60,7 +60,7 @@
 /obj/item/integrated_circuit/output/screen/large/do_work()
 	..()
 	var/obj/O = assembly ? get_turf(assembly) : loc
-	O.visible_message("<span class='notice'>\icon[O]  [stuff_to_display]</span>")
+	O.visible_message("<span class='notice'>[icon2html(O, viewers(get_turf(O)))]  [stuff_to_display]</span>")
 
 /obj/item/integrated_circuit/output/light
 	name = "light"
@@ -113,7 +113,7 @@
 	var/brightness = get_pin_data(IC_INPUT, 2)
 
 	if(new_color && isnum(brightness))
-		brightness = Clamp(brightness, 0, 1)
+		brightness = clamp(brightness, 0, 1)
 		light_rgb = new_color
 		light_brightness = brightness
 
@@ -124,7 +124,7 @@
 	desc = "A miniature speaker is attached to this component."
 	icon_state = "speaker"
 	complexity = 8
-	cooldown_per_use = 4 SECONDS
+	cooldown_per_use = 2 SECONDS
 	inputs = list(
 		"sound ID" = IC_PINTYPE_STRING,
 		"volume" = IC_PINTYPE_NUMBER,
@@ -152,7 +152,7 @@
 		var/selected_sound = sounds[ID]
 		if(!selected_sound)
 			return
-		vol = Clamp(vol ,0 , 100)
+		vol = clamp(vol ,0 , 100)
 		playsound(get_turf(src), selected_sound, vol, freq, -1)
 
 /obj/item/integrated_circuit/output/sound/on_data_written()
@@ -182,9 +182,38 @@
 		"freeze"		= 'sound/voice/bfreeze.ogg',
 		"god"			= 'sound/voice/bgod.ogg',
 		"i am the law"	= 'sound/voice/biamthelaw.ogg',
-		"insult"		= 'sound/voice/binsult.ogg',
 		"radio"			= 'sound/voice/bradio.ogg',
-		"secure day"	= 'sound/voice/bsecureday.ogg',
+		"secure day"	= 'sound/voice/bsecureday.ogg'
+		)
+	spawn_flags = IC_SPAWN_RESEARCH
+
+/obj/item/integrated_circuit/output/sound/mechanical
+	name = "mechanical sound circuit"
+	desc = "Takes a sound name as an input, and will play said sound when pulsed. This circuit has a variety of clicks and clacks for key press feedback."
+	sounds = list(
+		"keypress1"		= 'sound/machines/keyboard/keypress1.ogg',
+		"keypress2"		= 'sound/machines/keyboard/keypress2.ogg',
+		"keypress3"		= 'sound/machines/keyboard/keypress3.ogg',
+		"keypress4"		= 'sound/machines/keyboard/keypress4.ogg',
+		"keystroke1"	= 'sound/machines/keyboard/keystroke1.ogg',
+		"keystroke2"	= 'sound/machines/keyboard/keystroke2.ogg',
+		"keystroke3"	= 'sound/machines/keyboard/keystroke3.ogg',
+		"keystroke4"	= 'sound/machines/keyboard/keystroke4.ogg'
+		)
+	spawn_flags = IC_SPAWN_RESEARCH
+
+/obj/item/integrated_circuit/output/sound/electronic
+	name = "electronic sound circuit"
+	desc = "Takes a sound name as an input, and will play said sound when pulsed. This circuit has a variety of noises similar to radios and other electronic devices."
+	sounds = list(
+		"transmit"		= 'sound/effects/walkietalkie.ogg',
+		"turn on"		= 'sound/effects/walkieon.ogg',
+		"radio"			= 'sound/effects/radio_chatter.ogg',
+		"scan"			= 'sound/effects/scanbeep.ogg',
+		"sparks1"		= 'sound/effects/sparks1.ogg',
+		"sparks2"		= 'sound/effects/sparks2.ogg',
+		"sparks3"		= 'sound/effects/sparks3.ogg',
+		"sparks4"		= 'sound/effects/sparks4.ogg'
 		)
 	spawn_flags = IC_SPAWN_RESEARCH
 
@@ -214,14 +243,15 @@
 
 /obj/item/integrated_circuit/output/video_camera
 	name = "video camera circuit"
-	desc = "Takes a string as a name and a boolean to determine whether it is on, and uses this to be a camera linked to the research network."
-	extended_desc = "The camera is linked to the Research camera network."
+	desc = "Takes a string as a name, a boolean to determine whether it is on, and a string to link the video camera to a network."
+	extended_desc = "Set the camera network string to any of the networks listed on the camera monitoring software, for example: First Deck, Engineering, Research, Thunderdome."
 	icon_state = "video_camera"
 	w_class = ITEM_SIZE_SMALL
 	complexity = 10
 	inputs = list(
 		"camera name" = IC_PINTYPE_STRING,
-		"camera active" = IC_PINTYPE_BOOLEAN
+		"camera active" = IC_PINTYPE_BOOLEAN,
+		"camera network" = IC_PINTYPE_STRING
 		)
 	inputs_default = list("1" = "video camera circuit")
 	outputs = list()
@@ -235,7 +265,7 @@
 /obj/item/integrated_circuit/output/video_camera/Initialize()
 	. = ..()
 	camera = new(src)
-	camera.replace_networks(list(NETWORK_THUNDER))
+	camera.replace_networks(list())
 	on_data_written()
 
 /obj/item/integrated_circuit/output/video_camera/Destroy()
@@ -254,8 +284,13 @@
 	if(camera)
 		var/cam_name = get_pin_data(IC_INPUT, 1)
 		var/cam_active = get_pin_data(IC_INPUT, 2)
+		var/cam_network = get_pin_data(IC_INPUT, 3)
 		if(!isnull(cam_name))
 			camera.c_tag = cam_name
+			invalidateCameraCache()
+		if(!isnull(cam_network))
+			camera.replace_networks(list(cam_network))
+			invalidateCameraCache()
 		set_camera_status(cam_active)
 
 /obj/item/integrated_circuit/output/video_camera/power_fail()

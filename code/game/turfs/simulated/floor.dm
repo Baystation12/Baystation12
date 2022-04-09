@@ -2,6 +2,7 @@
 	name = "plating"
 	icon = 'icons/turf/flooring/plating.dmi'
 	icon_state = "plating"
+	permit_ao = TRUE
 
 	// Damage to flooring.
 	var/broken
@@ -24,6 +25,8 @@
 	heat_capacity = 10000
 	var/lava = 0
 
+	height = -FLUID_SHALLOW / 2
+
 /turf/simulated/floor/is_plating()
 	return !flooring
 
@@ -35,7 +38,7 @@
 	if(!floortype && initial_flooring)
 		floortype = initial_flooring
 	if(floortype)
-		set_flooring(get_flooring_data(floortype))
+		set_flooring(decls_repository.get_decl(floortype))
 
 /turf/simulated/floor/proc/set_flooring(var/decl/flooring/newflooring)
 	make_plating(defer_icon_update = 1)
@@ -57,7 +60,7 @@
 	icon = base_icon
 	icon_state = base_icon_state
 	color = base_color
-	plane = PLATING_PLANE
+	layer = PLATING_LAYER
 
 	if(flooring)
 		flooring.on_remove()
@@ -79,9 +82,11 @@
 		O.hide(O.hides_under_flooring() && src.flooring)
 
 	if(flooring)
-		plane = TURF_PLANE
+		layer = TURF_LAYER
+		height = flooring.height
 	else
-		plane = PLATING_PLANE
+		layer = PLATING_LAYER
+		height = -FLUID_SHALLOW / 2
 
 /turf/simulated/floor/can_engrave()
 	return (!flooring || flooring.can_engrave)
@@ -93,4 +98,7 @@
 	initial_gas = null
 
 /turf/simulated/floor/shuttle_ceiling/air
-	initial_gas = list("oxygen" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
+	initial_gas = list(GAS_OXYGEN = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
+
+/turf/simulated/floor/is_floor()
+	return TRUE

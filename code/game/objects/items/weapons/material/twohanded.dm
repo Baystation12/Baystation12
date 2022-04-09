@@ -16,7 +16,7 @@
 /*
  * Twohanded
  */
-/obj/item/weapon/material/twohanded
+/obj/item/material/twohanded
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 	var/wielded = 0
@@ -27,9 +27,9 @@
 	var/base_icon
 	var/base_name
 	var/unwielded_force_divisor = 0.25
-	var/wielded_parry_bonus = 15
+	var/wielded_parry_bonus = 20
 
-/obj/item/weapon/material/twohanded/update_twohanding()
+/obj/item/material/twohanded/update_twohanding()
 	var/mob/living/M = loc
 	if(istype(M) && M.can_wield_item(src) && is_held_twohanded(M))
 		wielded = 1
@@ -40,7 +40,7 @@
 	update_icon()
 	..()
 
-/obj/item/weapon/material/twohanded/update_force()
+/obj/item/material/twohanded/update_force()
 	..()
 	base_name = name
 	force_unwielded = round(force*unwielded_force_divisor)
@@ -48,16 +48,17 @@
 	force = force_unwielded
 
 
-/obj/item/weapon/material/twohanded/New()
+/obj/item/material/twohanded/New()
 	..()
 	update_icon()
 
-/obj/item/weapon/material/twohanded/get_parry_chance(mob/user)
+/obj/item/material/twohanded/get_parry_chance(mob/user)
 	. = ..()
 	if(wielded)
 		. += wielded_parry_bonus
 
-/obj/item/weapon/material/twohanded/on_update_icon()
+/obj/item/material/twohanded/on_update_icon()
+	..()
 	icon_state = "[base_icon][wielded]"
 	item_state_slots[slot_l_hand_str] = icon_state
 	item_state_slots[slot_r_hand_str] = icon_state
@@ -66,21 +67,25 @@
 /*
  * Fireaxe
  */
-/obj/item/weapon/material/twohanded/fireaxe  // DEM AXES MAN, marker -Agouri
+/obj/item/material/twohanded/fireaxe  // DEM AXES MAN, marker -Agouri
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "fireaxe0"
 	base_icon = "fireaxe"
 	name = "fire axe"
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
 
-	force_divisor = 0.6
+	max_force = 60	//for wielded
+	force_multiplier = 0.6
 	unwielded_force_divisor = 0.3
-	sharp = 1
-	edge = 1
-	force_wielded = 30
+	attack_cooldown_modifier = 6
+	sharp = TRUE
+	edge = TRUE
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	applies_material_colour = 0
+	worth_multiplier = 31
+	base_parry_chance = 15
 
-/obj/item/weapon/material/twohanded/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
+/obj/item/material/twohanded/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
 	if(!proximity) return
 	..()
 	if(A && wielded)
@@ -93,35 +98,40 @@
 			var/obj/effect/vine/P = A
 			P.die_off()
 
+/obj/item/material/twohanded/fireaxe/IsHatchet()
+	return TRUE
+
 //spears, bay edition
-/obj/item/weapon/material/twohanded/spear
+/obj/item/material/twohanded/spear
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "spearglass0"
 	base_icon = "spearglass"
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
-	force = 10
+	max_force = 20	//for wielded
 	applies_material_colour = 0
-
-	// 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
-	force_divisor = 0.33
+	force_multiplier = 0.33 // 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
 	unwielded_force_divisor = 0.20
-	thrown_force_divisor = 1.5 // 20 when thrown with weight 15 (glass)
-	throw_speed = 3
-	edge = 0
-	sharp = 1
+	thrown_force_multiplier = 1.5 // 20 when thrown with weight 15 (glass)
+	throw_speed = 6
+	sharp = TRUE
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	default_material = MATERIAL_GLASS
 	does_spin = FALSE
+	worth_multiplier = 7
+	base_parry_chance = 30
 
-/obj/item/weapon/material/twohanded/spear/shatter(var/consumed)
+/obj/item/material/twohanded/spear/shatter(var/consumed)
 	if(!consumed)
-		new /obj/item/weapon/material/wirerod(get_turf(src)) //give back the wired rod
+		new /obj/item/stack/material/rods(get_turf(src), 1)
+		new /obj/item/stack/cable_coil(get_turf(src), 3)
 	..()
 
-/obj/item/weapon/material/twohanded/baseballbat
+/obj/item/material/twohanded/baseballbat
 	name = "bat"
 	desc = "HOME RUN!"
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "metalbat0"
 	base_icon = "metalbat"
 	item_state = "metalbat"
@@ -130,23 +140,25 @@
 	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
 	default_material = MATERIAL_MAPLE
-	force_divisor = 1.1           // 22 when wielded with weight 20 (steel)
+	max_force = 40	//for wielded
+	force_multiplier = 1.1           // 22 when wielded with weight 20 (steel)
 	unwielded_force_divisor = 0.7 // 15 when unwielded based on above.
 	attack_cooldown_modifier = 1
 	melee_accuracy_bonus = -10
+	base_parry_chance = 30
 
 //Predefined materials go here.
-/obj/item/weapon/material/twohanded/baseballbat/metal/New(var/newloc)
+/obj/item/material/twohanded/baseballbat/metal/New(var/newloc)
 	..(newloc,MATERIAL_ALUMINIUM)
 
-/obj/item/weapon/material/twohanded/baseballbat/uranium/New(var/newloc)
+/obj/item/material/twohanded/baseballbat/uranium/New(var/newloc)
 	..(newloc,MATERIAL_URANIUM)
 
-/obj/item/weapon/material/twohanded/baseballbat/gold/New(var/newloc)
+/obj/item/material/twohanded/baseballbat/gold/New(var/newloc)
 	..(newloc,MATERIAL_GOLD)
 
-/obj/item/weapon/material/twohanded/baseballbat/platinum/New(var/newloc)
+/obj/item/material/twohanded/baseballbat/platinum/New(var/newloc)
 	..(newloc,MATERIAL_PLATINUM)
 
-/obj/item/weapon/material/twohanded/baseballbat/diamond/New(var/newloc)
+/obj/item/material/twohanded/baseballbat/diamond/New(var/newloc)
 	..(newloc,MATERIAL_DIAMOND)

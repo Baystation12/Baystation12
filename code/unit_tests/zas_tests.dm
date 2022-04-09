@@ -18,12 +18,13 @@
 // Generic check for an area.
 //
 
-datum/unit_test/zas_area_test
+/datum/unit_test/zas_area_test
 	name = "ZAS: Area Test Template"
+	template = /datum/unit_test/zas_area_test
 	var/area_path = null                    // Put the area you are testing here.
 	var/expectation = UT_NORMAL             // See defines above.
 
-datum/unit_test/zas_area_test/start_test()
+/datum/unit_test/zas_area_test/start_test()
 	var/list/test = test_air_in_area(area_path, expectation)
 
 	if(isnull(test))
@@ -40,7 +41,7 @@ datum/unit_test/zas_area_test/start_test()
 //
 //	The primary helper proc.
 //
-proc/test_air_in_area(var/test_area, var/expectation = UT_NORMAL)
+/proc/test_air_in_area(var/test_area, var/expectation = UT_NORMAL)
 	var/test_result = list("result" = FAILURE, "msg"    = "")
 
 	var/area/A = locate(test_area)
@@ -74,7 +75,7 @@ proc/test_air_in_area(var/test_area, var/expectation = UT_NORMAL)
 					return test_result
 
 
-			if(UT_NORMAL || UT_NORMAL_COLD)
+			if(UT_NORMAL, UT_NORMAL_COLD)
 				if(abs(pressure - ONE_ATMOSPHERE) > 10)
 					test_result["msg"] = "Pressure out of bounds: [pressure] | [t_msg]"
 					return test_result
@@ -107,7 +108,7 @@ proc/test_air_in_area(var/test_area, var/expectation = UT_NORMAL)
 
 // Here we move a shuttle then test it's area once the shuttle has arrived.
 
-datum/unit_test/zas_supply_shuttle_moved
+/datum/unit_test/zas_supply_shuttle_moved
 	name = "ZAS: Supply Shuttle (When Moved)"
 	async=1				// We're moving the shuttle using built in procs.
 
@@ -115,7 +116,7 @@ datum/unit_test/zas_supply_shuttle_moved
 
 	var/testtime = 0	//Used as a timer.
 
-datum/unit_test/zas_supply_shuttle_moved/start_test()
+/datum/unit_test/zas_supply_shuttle_moved/start_test()
 
 	if(!SSshuttle)
 		fail("Shuttle Controller not setup at time of test.")
@@ -134,7 +135,7 @@ datum/unit_test/zas_supply_shuttle_moved/start_test()
 
 	return 1
 
-datum/unit_test/zas_supply_shuttle_moved/check_result()
+/datum/unit_test/zas_supply_shuttle_moved/check_result()
 	if(!shuttle)
 		skip("This map has no supply shuttle.")
 		return 1

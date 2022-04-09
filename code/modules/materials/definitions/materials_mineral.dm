@@ -22,12 +22,12 @@
 	sheet_plural_name = "bricks"
 	sale_price = 2
 
-/material/graphene
-	name = MATERIAL_GRAPHENE
-	ore_compresses_to = MATERIAL_GRAPHENE
+/material/graphite
+	name = MATERIAL_GRAPHITE
+	ore_compresses_to = MATERIAL_GRAPHITE
 	icon_colour = "#444444"
 	ore_smelts_to = MATERIAL_PLASTIC
-	ore_name = "graphene"
+	ore_name = "graphite"
 	ore_smelts_to = MATERIAL_PLASTIC
 	ore_result_amount = 5
 	ore_spread_chance = 25
@@ -190,7 +190,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#d8ad97"
 	chem_products = list(
-		/datum/reagent/aluminum = 15
+		/datum/reagent/aluminium = 15
 		)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -222,7 +222,7 @@
 	table_icon_base = "stone"
 	icon_colour = "#e37108"
 	shard_type = SHARD_SHARD
-	hardness = 30
+	hardness = MATERIAL_RIGID
 	stack_origin_tech = list(TECH_MATERIAL = 2, TECH_PHORON = 2)
 	door_icon_base = "stone"
 	sheet_singular_name = "crystal"
@@ -231,7 +231,7 @@
 	chem_products = list(
 		/datum/reagent/toxin/phoron = 20
 		)
-	construction_difficulty = 2
+	construction_difficulty = MATERIAL_HARD_DIY
 	ore_name = "phoron"
 	ore_compresses_to = MATERIAL_PHORON
 	ore_result_amount = 5
@@ -246,6 +246,7 @@
 	xarch_source_mineral = MATERIAL_PHORON
 	ore_icon_overlay = "gems"
 	sale_price = 5
+	value = 200
 
 /material/phoron/supermatter
 	name = MATERIAL_SUPERMATTER
@@ -268,7 +269,6 @@
 	for(var/turf/simulated/floor/target_tile in range(2,T))
 		var/phoronToDeduce = (temperature/30) * effect_multiplier
 		totalPhoron += phoronToDeduce
-		target_tile.assume_gas("phoron", phoronToDeduce, 200+T0C)
-		spawn (0)
-			target_tile.hotspot_expose(temperature, 400)
+		target_tile.assume_gas(GAS_PHORON, phoronToDeduce, 200+T0C)
+		addtimer(CALLBACK(target_tile, /turf/proc/hotspot_expose, temperature, 400), 0)
 	return round(totalPhoron/100)

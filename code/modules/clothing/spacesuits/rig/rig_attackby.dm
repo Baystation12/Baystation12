@@ -1,13 +1,10 @@
-/obj/item/weapon/rig/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/rig/attackby(obj/item/W as obj, mob/user as mob)
 
 	if(!istype(user,/mob/living)) return 0
 
 	if(electrified != 0)
 		if(shock(user)) //Handles removing charge from the cell, as well. No need to do that here.
 			return
-	if(is_type_in_list(W,banned_modules))
-		to_chat(user, "<span class='danger'>\The [src] cannot mount this type of module.</span>")
-		return
 
 	// Pass repair items on to the chestpiece.
 	if(chest && (istype(W,/obj/item/stack/material) || isWelder(W)))
@@ -59,10 +56,13 @@
 
 
 		// Air tank.
-		if(istype(W,/obj/item/weapon/tank)) //Todo, some kind of check for suits without integrated air supplies.
+		if(istype(W,/obj/item/tank)) //Todo, some kind of check for suits without integrated air supplies.
 
 			if(air_supply)
 				to_chat(user, "\The [src] already has a tank installed.")
+				return
+			if (istype(W, /obj/item/tank/scrubber))
+				to_chat(user, SPAN_WARNING("\The [W] is far too large to attach to \the [src]."))
 				return
 
 			if(!user.unEquip(W)) return
@@ -80,14 +80,26 @@
 					to_chat(user, "<span class='danger'>You can't install a hardsuit module while the suit is being worn.</span>")
 					return 1
 
+			if(is_type_in_list(W,banned_modules))
+				to_chat(user, SPAN_DANGER("\The [src] cannot mount this type of module."))
+				return 1
+
+			var/obj/item/rig_module/mod = W
+
 			if(!installed_modules) installed_modules = list()
 			if(installed_modules.len)
 				for(var/obj/item/rig_module/installed_mod in installed_modules)
-					if(!installed_mod.redundant && istype(installed_mod,W))
+					if(is_type_in_list(installed_mod,mod.banned_modules))
+						to_chat(user, SPAN_DANGER("\The [installed_mod] is incompatible with this module."))
+						return 1
+					if(installed_mod.banned_modules.len)
+						if(is_type_in_list(W,installed_mod.banned_modules))
+							to_chat(user, SPAN_DANGER("\The [installed_mod] is incompatible with this module."))
+							return 1
+					if(!installed_mod.redundant && installed_mod.type == W.type)
 						to_chat(user, "The hardsuit already has a module of that class installed.")
 						return 1
 
-			var/obj/item/rig_module/mod = W
 			to_chat(user, "You begin installing \the [mod] into \the [src].")
 			if(!do_after(user,40,src))
 				return
@@ -101,7 +113,7 @@
 			update_icon()
 			return 1
 
-		else if(!cell && istype(W,/obj/item/weapon/cell))
+		else if(!cell && istype(W,/obj/item/cell))
 
 			if(!user.unEquip(W)) return
 			to_chat(user, "You jack \the [W] into \the [src]'s battery mount.")
@@ -193,14 +205,14 @@
 	..()
 
 
-/obj/item/weapon/rig/attack_hand(var/mob/user)
+/obj/item/rig/attack_hand(var/mob/user)
 
 	if(electrified != 0)
 		if(shock(user)) //Handles removing charge from the cell, as well. No need to do that here.
 			return
 	..()
 
-/obj/item/weapon/rig/emag_act(var/remaining_charges, var/mob/user)
+/obj/item/rig/emag_act(var/remaining_charges, var/mob/user)
 	if(!subverted)
 		req_access.Cut()
 		locked = 0

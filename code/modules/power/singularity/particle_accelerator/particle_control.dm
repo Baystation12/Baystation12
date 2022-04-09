@@ -6,8 +6,8 @@
 	icon = 'icons/obj/machines/particle_accelerator2.dmi'
 	icon_state = "control_box"
 	reference = "control_box"
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	idle_power_usage = 500
 	active_power_usage = 70000 //70 kW per unit of strength
 	construction_state = 0
@@ -18,26 +18,22 @@
 	var/list/obj/structure/particle_accelerator/connected_parts
 	var/assembled = 0
 	var/parts = null
-	var/datum/wires/particle_acc/control_box/wires = null
+	wires = /datum/wires/particle_acc/control_box
 
 /obj/machinery/particle_accelerator/control_box/Initialize()
 	. = ..()
-	wires = new(src)
 	connected_parts = list()
 	change_power_consumption(initial(active_power_usage) * (strength + 1), POWER_USE_ACTIVE)
 
 /obj/machinery/particle_accelerator/control_box/Destroy()
 	if(active)
 		toggle_power()
-	qdel(wires)
-	wires = null
 	return ..()
 
-/obj/machinery/particle_accelerator/control_box/attack_hand(mob/user as mob)
+/obj/machinery/particle_accelerator/control_box/interface_interact(mob/user)
 	if(construction_state >= 3)
 		interact(user)
-	else if(construction_state == 2) // Wires exposed
-		wires.Interact(user)
+		return TRUE
 
 /obj/machinery/particle_accelerator/control_box/update_state()
 	if(construction_state < 3)
@@ -80,14 +76,14 @@
 
 /obj/machinery/particle_accelerator/control_box/Topic(href, href_list)
 	..()
-	//Ignore input if we are broken, !silicon guy cant touch us, or nonai controlling from super far away
+	//Ignore input if we are broken, !silicon guy can't touch us, or nonai controlling from super far away
 	if(stat & (BROKEN|NOPOWER) || (get_dist(src, usr) > 1 && !istype(usr, /mob/living/silicon)) || (get_dist(src, usr) > 8 && !istype(usr, /mob/living/silicon/ai)))
 		usr.unset_machine()
-		usr << browse(null, "window=pacontrol")
+		close_browser(usr, "window=pacontrol")
 		return
 
 	if( href_list["close"] )
-		usr << browse(null, "window=pacontrol")
+		close_browser(usr, "window=pacontrol")
 		usr.unset_machine()
 		return
 
@@ -207,7 +203,7 @@
 	return 0
 
 
-/obj/machinery/particle_accelerator/control_box/proc/toggle_power()
+/obj/machinery/particle_accelerator/control_box/toggle_power()
 	src.active = !src.active
 	investigate_log("turned [active?"<font color='red'>ON</font>":"<font color='green'>OFF</font>"] by [usr ? usr.key : "outside forces"]","singulo")
 	message_admins("PA Control Computer turned [active ?"ON":"OFF"] by [key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
@@ -231,7 +227,7 @@
 	if((get_dist(src, user) > 1) || (stat & (BROKEN|NOPOWER)))
 		if(!istype(user, /mob/living/silicon))
 			user.unset_machine()
-			user << browse(null, "window=pacontrol")
+			close_browser(user, "window=pacontrol")
 			return
 	user.set_machine(src)
 
@@ -253,6 +249,6 @@
 		dat += "Particle Strength: [src.strength] "
 		dat += "<A href='?src=\ref[src];strengthdown=1'>--</A>|<A href='?src=\ref[src];strengthup=1'>++</A><BR><BR>"
 
-	user << browse(dat, "window=pacontrol;size=420x500")
+	show_browser(user, dat, "window=pacontrol;size=420x500")
 	onclose(user, "pacontrol")
 	return

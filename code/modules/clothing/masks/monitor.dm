@@ -11,6 +11,7 @@
 	icon_override = 'icons/mob/monitor_icons.dmi'
 	icon_state = "ipc_blank"
 	item_state = null
+	item_flags = null
 
 	var/monitor_state_index = "blank"
 	var/global/list/monitor_states = list(
@@ -92,3 +93,6 @@
 	icon_state = monitor_states[monitor_state_index]
 	var/mob/living/carbon/human/H = loc
 	if(istype(H)) H.update_inv_wear_mask()
+
+/obj/item/clothing/mask/monitor/AltClick(var/mob/user)
+	set_monitor_state(user)

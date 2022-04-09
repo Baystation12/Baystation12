@@ -2,8 +2,8 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 
 /datum/antagonist/rogue_ai
 	id = MODE_MALFUNCTION
-	role_text = "Rampant AI"
-	role_text_plural = "Rampant AIs"
+	role_text = "Malfunctioning AI"
+	role_text_plural = "Malfunctioning AIs"
 	mob_path = /mob/living/silicon/ai
 	landmark_id = "AI"
 	welcome_text = "You are malfunctioning! You do not have to follow any laws."
@@ -54,7 +54,7 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 			error("Non-AI mob designated malf AI! Report this.")
 			to_world("##ERROR: Non-AI mob designated malf AI! Report this.")
 
-			return 0
+			return
 
 		A.setup_for_malf()
 		A.laws = new /datum/ai_laws/nanotrasen/malfunction
@@ -66,9 +66,9 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 		sleep(10)
 		to_chat(malf, "<B>running MEMCHCK</B>")
 		sleep(50)
-		to_chat(malf, "<B>MEMCHCK</B> Corrupted sectors confirmed. Reccomended solution: Delete. Proceed? Y/N: Y")
+		to_chat(malf, "<B>MEMCHCK</B> Corrupted sectors confirmed. Recommended solution: Delete. Proceed? Y/N: Y")
 		sleep(10)
-		// this is so Travis doesn't complain about the backslash-B. Fixed at compile time (or should be).
+		// this is so unit testing doesn't complain about the backslash-B. Fixed at compile time (or should be).
 		to_chat(malf, "<span class='notice'>Corrupted files deleted: sys\\core\\users.dat sys\\core\\laws.dat sys\\core\\" + "backups.dat</span>")
 		sleep(20)
 		to_chat(malf, "<span class='notice'><b>CAUTION:</b> Law database not found! User database not found! Unable to restore backups. Activating failsafe AI shutd3wn52&&$#!##</span>")

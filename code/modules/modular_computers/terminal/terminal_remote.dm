@@ -1,9 +1,9 @@
-// The computer var is for the remote computer with these.
+/// The computer var is for the remote computer with these.
 /datum/terminal/remote
 	name = "Remote Terminal"
-	var/obj/item/modular_computer/origin_computer
+	var/datum/extension/interactive/ntos/origin_computer
 
-/datum/terminal/remote/New(mob/user, obj/item/modular_computer/computer, obj/item/modular_computer/origin)
+/datum/terminal/remote/New(mob/user, datum/extension/interactive/ntos/computer, datum/extension/interactive/ntos/origin)
 	origin_computer = origin
 	..(user, computer)
 
@@ -17,17 +17,9 @@
 	if(!user)
 		return FALSE
 
-	if(!computer || !computer.enabled || !origin_computer || !origin_computer.enabled)
+	if(!computer || !computer.get_ntnet_status_incoming() || !origin_computer.get_ntnet_status())
 		return FALSE
 	if(!CanInteractWith(user, origin_computer, GLOB.default_state))
-		return FALSE
-
-
-	if(!origin_computer.network_card || !origin_computer.network_card.check_functionality())
-		return FALSE
-	if(!computer.network_card || !computer.network_card.check_functionality())
-		return FALSE
-	if(!ntnet_global.check_function())
 		return FALSE
 
 	return TRUE

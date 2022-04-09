@@ -3,6 +3,8 @@
 	var/list/scan = list()
 
 	scan["name"] = H.name
+	if(H.fake_name)
+		scan["name"] = H.real_name
 	scan["time"] = stationtime2text()
 	var/brain_result
 	if(H.should_have_organ(BP_BRAIN))
@@ -46,8 +48,6 @@
 	scan["genetic"] = H.getCloneLoss()
 	scan["paralysis"] = H.paralysis
 	scan["immune_system"] = H.virus_immunity()
-	if (H.virus2.len)
-		scan["virus"] = TRUE
 	scan["worms"] = H.has_brain_worms()
 
 	scan["reagents"] = list()
@@ -78,12 +78,19 @@
 	scan["internal_organs"] = list()
 
 	for(var/obj/item/organ/internal/I in H.internal_organs)
+		if (istype(I, /obj/item/organ/internal/augment))
+			var/obj/item/organ/internal/augment/A = I
+			if (~A.augment_flags & AUGMENT_SCANNABLE)
+				continue
 		var/list/O = list()
 		O["name"] = I.name
 		O["is_broken"] = I.is_broken()
 		O["is_bruised"] = I.is_bruised()
 		O["is_damaged"] = I.is_damaged()
 		O["scan_results"] = I.get_scan_results(tag)
+		if (istype(I, /obj/item/organ/internal/appendix))
+			var/obj/item/organ/internal/appendix/A = I
+			O["inflamed"] = A.inflamed
 
 		scan["internal_organs"] += list(O)
 
@@ -92,7 +99,7 @@
 	for(var/organ_name in H.species.has_organ)
 		if(!locate(H.species.has_organ[organ_name]) in H.internal_organs)
 			scan["missing_organs"] += organ_name
-	if(H.sdisabilities & BLIND)
+	if(H.sdisabilities & BLINDED)
 		scan["blind"] = TRUE
 	if(H.sdisabilities & NEARSIGHTED)
 		scan["nearsight"] = TRUE
@@ -146,7 +153,10 @@
 				else
 					dat += "<td>[scan["brain_activity"]]%</td></tr>"
 			else
-				dat += "<td>there's a squiggly line here</td></tr>"
+				if(scan["brain_activity"] > 0)
+					dat += "<td>there's a squiggly line here</td></tr>"
+				else
+					dat += "<td>there's a straight line here</td></tr>"
 
 	//Circulatory System
 	/*
@@ -183,7 +193,7 @@
 
 
 	var/ratio = scan["blood_volume"]/scan["blood_volume_max"]
-	dat += "<tr><td><strong>Blood pressure:</strong></td><td>[scan["blood_pressure"]]"
+	dat += "<tr><td><strong>Blood pressure:</strong></td><td>[scan["blood_pressure"]] "
 	if(scan["blood_o2"] <= 70)
 		dat += "(<span class='bad'>[scan["blood_o2"]]% blood oxygenation</span>)</td></tr>"
 	else if(scan["blood_o2"] <= 85)
@@ -197,7 +207,7 @@
 
 	if(skill_level >= SKILL_ADEPT)
 		if(ratio <= 0.70)
-			dat += "<tr><td colspan='2'><span class='bad'>Patient is in Hypovolemic Shock. Transfusion highly recommended.</span></td></tr>"
+			dat += "<tr><td colspan='2'><span class='bad'>Patient is in hypovolemic shock. Transfusion highly recommended.</span></td></tr>"
 
 	// Body temperature.
 	/*
@@ -236,11 +246,6 @@
 			<tr><td colspan='2'><span class='bad'><center>Large growth detected in frontal lobe, possibly cancerous.</center></span></td></tr>
 		*/
 		dat += "<tr><td colspan = '2'>Antibody levels and immune system perfomance are at [scan["immune_system"]*100]% of baseline.</td></tr>"
-		if (scan["virus"])
-			if(skill_level >= SKILL_ADEPT)
-				dat += "<tr><td colspan='2'><span class='bad'><center>Viral pathogen detected in blood stream.</center></span></td></tr>"
-			else
-				dat += "<tr><td colspan='2'><center>Viral pathogen detected in blood stream.</center></td></tr>"
 
 		if(scan["worms"])
 			dat += "<tr><td colspan='2'><span class='bad'><center>Large growth detected in frontal lobe, possibly cancerous.</center></span></td></tr>"
@@ -268,7 +273,7 @@
 			<tr><td colspan='2'>You see a lot of numbers and abbreviations here, but you have no clue what any of this means.</td></tr>
 	*/
 	else
-		dat += "<tr><td colspan='2'>You see a lot of numbers and abbreviations here, but you have no clue what any of this means.</td></tr>"
+		dat += "<tr><td colspan='2'>You see a lot of numbers and abbreviations here, but you have no clue what any of it means.</td></tr>"
 
 	dat = JOINTEXT(dat)
 
@@ -349,13 +354,14 @@
 		dat += "<tr><th colspan='3'><center>Internal Organs</center></th></tr>"
 		for(var/list/I in scan["internal_organs"])
 			var/row = list()
-			row += "<tr><td>[I["name"]]</td>"
+			var/inflamed = I["inflamed"] || FALSE
+			row += "<tr><td><span[inflamed ? " class='bad'" : ""]>[I["name"]]</span></td>"
 			if(I["is_broken"])
 				row += "<td><span class='bad'>Severe</span></td>"
 			else if(I["is_bruised"])
 				row += "<td><span class='average'>Moderate</span></td>"
 			else if(I["is_damaged"])
-				row += "<td>Minor</td>"
+				row += "<td><span class='mild'>Minor</span></td>"
 			else
 				row += "<td>None</td>"
 			row += "<td>"
@@ -371,7 +377,7 @@
 		if(organ_name != "appendix")
 			dat += "<tr><td colspan='3'><span class='bad'>No [organ_name] detected.</span></td></tr>"
 		else
-			dat += "<tr><td colspan='3'>No [organ_name] detected</td></tr>"
+			dat += "<tr><td colspan='3'>No [organ_name] detected.</td></tr>"
 
 	if(scan["blind"])
 		dat += "<tr><td colspan='3'><span class='bad'>Cataracts detected.</span></td></tr>"
@@ -410,7 +416,7 @@
 /proc/get_severity(amount, var/tag = FALSE)
 	if(!amount)
 		return "none"
-	. = "minor"
+
 	if(amount > 50)
 		if(tag)
 			. = "<span class='bad'>severe</span>"
@@ -426,3 +432,8 @@
 			. = "<span class='average'>moderate</span>"
 		else
 			. = "moderate"
+	else
+		if (tag)
+			. = "<span class='mild'>minor</span>"
+		else
+			. = "minor"

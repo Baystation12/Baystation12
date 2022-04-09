@@ -11,7 +11,7 @@
 			to_chat(usr, "<span class='warning'>[key_to_ignore] is already being ignored.</span>")
 			return
 		prefs.ignored_players |= key_to_ignore
-		prefs.save_preferences()
+		SScharacter_setup.queue_preferences_save(prefs)
 		to_chat(usr, "<span class='notice'>Now ignoring <b>[key_to_ignore]</b>.</span>")
 
 /client/verb/unignore(key_to_unignore as text)
@@ -27,7 +27,7 @@
 			to_chat(usr, "<span class='warning'>[key_to_unignore] isn't being ignored.</span>")
 			return
 		prefs.ignored_players -= key_to_unignore
-		prefs.save_preferences()
+		SScharacter_setup.queue_preferences_save(prefs)
 		to_chat(usr, "<span class='notice'>Reverted ignore on <b>[key_to_unignore]</b>.</span>")
 
 /mob/proc/is_key_ignored(var/key_to_check)
@@ -38,7 +38,7 @@
 /client/proc/is_key_ignored(var/key_to_check)
 	key_to_check = ckey(key_to_check)
 	if(key_to_check in prefs.ignored_players)
-		if(check_rights(R_MENTOR|R_MOD|R_ADMIN, 0)) // Admins, mentors and moderators are not ignorable
+		if(check_rights(R_MOD|R_ADMIN, 0)) // Admins and moderators are not ignorable
 			return 0
 		return 1
 	return 0

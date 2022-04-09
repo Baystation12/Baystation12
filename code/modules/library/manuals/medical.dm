@@ -1,4 +1,4 @@
-/obj/item/weapon/book/manual/medical_cloning
+/obj/item/book/manual/medical_cloning
 	name = "Cloning Techniques of the 26th Century"
 	icon_state ="bookCloning"
 	author = "Medical Journal, volume 3"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
@@ -90,14 +90,15 @@
 				</html>
 				"}
 
-/obj/item/weapon/book/manual/medical_diagnostics_manual
+/obj/item/book/manual/medical_diagnostics_manual
 	name = "Medical Diagnostics Manual"
 	desc = "First, do no harm. A detailed medical practitioner's guide."
 	icon_state = "bookMedical"
 	author = "Medical Department"
 	title = "Medical Diagnostics Manual"
+	url = "Guide_to_Medicine"
 
-/obj/item/weapon/book/manual/medical_diagnostics_manual/New()
+/obj/item/book/manual/medical_diagnostics_manual/New()
 	..()
 	dat = {"<html>
 				<head>
@@ -131,8 +132,16 @@
 
 				<HR COLOR="steelblue" WIDTH="60%" ALIGN="LEFT">
 
-				<iframe width='100%' height='100%' src="[config.wikiurl]Guide_to_Medicine&printable=yes&removelinks=1" frameborder="0" id="main_frame"></iframe>
+				<iframe width='100%' height='100%' src="[url]&printable=yes&removelinks=1" frameborder="0" id="main_frame"></iframe>
 				</body>
 			</html>
 
 		"}
+
+/obj/item/book/manual/chemistry_recipes
+	name = "Guide to Medicines & Drugs"
+	desc = "A thick manual of chemistry, formulae and recipes useful for a Chemist."
+	icon_state = "bookChemistry"
+	author = "Zeng-Hu Pharmaceuticals"
+	title = "Guide to Medicines & Drugs"
+	url = "List_of_Medical_Chemicals"

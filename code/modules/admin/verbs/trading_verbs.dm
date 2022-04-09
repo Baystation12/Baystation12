@@ -1,31 +1,29 @@
 /client/proc/list_traders()
 	set category = "Debug"
-	set name = "List Traders"
-	set desc = "Lists all the current traders"
+	set name = "Traders - List"
+	for (var/trader_type in GLOB.trader_types)
+		var/datum/trader/trader = GLOB.traders[trader_type]
+		to_chat(src, "[trader.name] <a href='?_src_=vars;Vars=\ref[trader]'>\ref[trader]</a>")
 
-	for(var/a in SStrade.traders)
-		var/datum/trader/T = a
-		to_chat(src, "[T.name] <a href='?_src_=vars;Vars=\ref[T]'>\ref[T]</a>")
 
 /client/proc/add_trader()
 	set category = "Debug"
-	set name = "Add Trader"
-	set desc = "Adds a trader to the list."
-
-	var/list/possible = subtypesof(/datum/trader) - /datum/trader/ship - /datum/trader/ship/unique
-	var/type = input(src,"Choose a type to add.") as null|anything in possible
-	if(!type)
+	set name = "Traders - Add"
+	var/list/possible = subtypesof(/datum/trader) - /datum/trader/ship - /datum/trader/ship/unique - GLOB.trader_types
+	var/trader_type = input(src, "Choose a trader to add:") as null | anything in possible
+	if (!trader_type)
 		return
+	GLOB.traders[trader_type] = new trader_type
+	GLOB.trader_types += trader_type
 
-	SStrade.traders += new type
 
 /client/proc/remove_trader()
 	set category = "Debug"
-	set name = "Remove Trader"
-	set desc = "Removes a trader from the trader list."
-
-	var/choice = input(src, "Choose something to remove.") as null|anything in SStrade.traders
-	if(!choice)
+	set name = "Traders - Remove"
+	var/trader_type = input(src, "Choose something to remove.") as null | anything in GLOB.trader_types
+	if (!trader_type)
 		return
-
-	SStrade.traders -= choice
+	var/trader = GLOB.traders[trader_type]
+	GLOB.trader_types -= trader_type
+	GLOB.traders[trader_type] = null
+	qdel(trader)

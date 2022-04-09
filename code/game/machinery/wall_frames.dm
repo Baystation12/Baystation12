@@ -2,14 +2,14 @@
 	name = "frame"
 	desc = "Used for building machines."
 	icon = 'icons/obj/monitors.dmi'
-	icon_state = "fire_bitem"
+	icon_state = "alarm_bitem"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	var/build_machine_type
 	var/refund_amt = 2
 	var/refund_type = /obj/item/stack/material/steel
 	var/reverse = 0 //if resulting object faces opposite its dir (like light fixtures)
 
-/obj/item/frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/frame/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWrench(W))
 		new refund_type( get_turf(src.loc), refund_amt)
 		qdel(src)
@@ -54,14 +54,31 @@
 /obj/item/frame/fire_alarm
 	name = "fire alarm frame"
 	desc = "Used for building fire alarms."
+	icon = 'icons/obj/firealarm.dmi'
+	icon_state = "casing"
 	build_machine_type = /obj/machinery/firealarm
 
 /obj/item/frame/air_alarm
 	name = "air alarm frame"
-	icon_state = "alarm_bitem"
 	desc = "Used for building air alarms."
 	build_machine_type = /obj/machinery/alarm
 
+/obj/item/frame/intercom
+	name = "intercom frame"
+	desc = "Used for building intercoms."
+	icon = 'icons/obj/radio.dmi'
+	icon_state = "intercom-f"
+	build_machine_type = /obj/item/device/radio/intercom
+
+/obj/item/frame/intercom/get_mechanics_info()
+	. = ..()
+	. += "<p>To construct:</p>\
+			<ol>\
+				<li>Attach the frame to the wall</li>\
+				<li>Install the circuitboard into the frame</li>\
+				<li>Use cables to wire the intercom</li>\
+				<li>Screwdriver to close the panel</li>\
+			</ol>"
 /obj/item/frame/light
 	name = "light fixture frame"
 	desc = "Used for building lights."
@@ -78,3 +95,15 @@
 	icon_state = "bulb-construct-item"
 	refund_amt = 1
 	build_machine_type = /obj/machinery/light_construct/small
+
+/obj/item/frame/light/spot
+	name = "large light fixture frame"
+	build_machine_type = /obj/machinery/light_construct/spot
+	refund_amt = 3
+
+/obj/item/frame/supermatter_alarm
+	name = "supermatter alarm frame"
+	icon = 'icons/obj/lighting.dmi'
+	icon_state = "bulb-construct-item"
+	refund_amt = 1
+	build_machine_type = /obj/machinery/rotating_alarm/supermatter

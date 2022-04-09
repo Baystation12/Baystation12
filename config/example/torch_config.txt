@@ -1,0 +1,54 @@
+##
+# Configuration options for maps/torch. Allows adjusting the compiled defaults.
+
+## Whether the server should create an overmap. Generally, you do not want to turn this off. Default 1
+#USE_OVERMAP 1
+
+## Whether to place the overmap in a specific z-level. If 0, one will be generated. Default 0
+#OVERMAP_Z 0
+
+## The number of turfs on a side the overmap should be. Default 35
+#OVERMAP_SIZE 35
+
+## The number of event clouds - meteors, fish, etc - that will be generated on the overmap. Default 34
+#OVERMAP_EVENT_AREAS 34
+
+## The number of exoplanets to generate on the map. Warning: These have a significant runtime cost. Default 1
+#NUM_EXOPLANETS 1
+
+## The number of away sites to pick for the overmap. Default 3
+#AWAY_SITE_BUDGET 3
+
+## The number of players subtracted from the player budget for away sites by the main map. Default 12
+#MIN_OFFMAP_PLAYERS 12
+
+## The names of various entities to use for reports, listing, etc.
+#STATION_NAME Sev Torch
+#STATION_SHORT Torch
+#DOCK_NAME TBD
+#BOSS_NAME Expeditionary Command
+#BOSS_SHORT Command
+#COMPANY_NAME Sol Central Government
+#COMPANY_SHORT SolGov
+
+## Other fluff options
+#GAME_YEAR_OFFSET 288
+
+## Messages to use for different round-end conditions. %ETA% is replaced with a time.
+#SHUTTLE_DOCKED_MESSAGE Attention all hands: Jump preparation complete. The bluespace drive is now spooling up, secure all stations for departure. Time to jump: approximately %ETD%.
+#SHUTTLE_LEAVING_DOCK Attention all hands: Jump initiated, exiting bluespace in %ETA%.
+#SHUTTLE_CALLED_MESSAGE Attention all hands: Jump sequence initiated. Transit procedures are now in effect. Jump in %ETA%.
+#SHUTTLE_RECALL_MESSAGE Attention all hands: Jump sequence aborted, return to normal operating conditions.
+#EMERGENCY_SHUTTLE_DOCKED_MESSAGE
+#EMERGENCY_SHUTTLE_LEAVING_DOCK
+#EMERGENCY_SHUTTLE_RECALL_MESSAGE
+
+## Money related config options.
+#STARTING_MONEY 75000
+#DEPARTMENT_MONEY 5000
+#SALARY_MODIFIER 1
+#SUPPLY_CURRENCY_NAME Credits
+#SUPPLY_CURRENCY_NAME_SHORT Cr.
+#LOCAL_CURRENCY_NAME Thalers
+#LOCAL_CURRENCY_NAME_SINGULAR Thaler
+#LOCAL_CURRENCY_NAME_SHORT T

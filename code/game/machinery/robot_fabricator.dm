@@ -2,8 +2,8 @@
 	name = "Robotic Fabricator"
 	icon = 'icons/obj/robotics.dmi'
 	icon_state = "fab-idle"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	var/metal_amount = 0
 	var/operating = 0
 	var/obj/item/robot_parts/being_built = null
@@ -20,9 +20,8 @@
 				if(M)
 					if(!M.get_amount())
 						return
-					while(metal_amount < 150000 && M.amount)
+					while(metal_amount < 150000 && M.use(1))
 						src.metal_amount += O.matter[MATERIAL_STEEL] /*O:height * O:width * O:length * 100000.0*/
-						M.use(1)
 						count++
 
 					to_chat(user, "You insert [count] metal sheet\s into the fabricator.")
@@ -31,10 +30,12 @@
 		else
 			to_chat(user, "The robot part maker is full. Please remove metal from the robot part maker in order to insert more.")
 
-/obj/machinery/robotic_fabricator/attack_hand(user as mob)
+/obj/machinery/robotic_fabricator/interface_interact(mob/user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/robotic_fabricator/interact(mob/user)
 	var/dat
-	if (..())
-		return
 
 	if (src.operating)
 		dat = {"
@@ -55,7 +56,7 @@ Please wait until completion...</TT><BR>
 <A href='?src=\ref[src];make=7'>Robot Frame (75,000 cc metal).<BR>
 "}
 
-	user << browse("<HEAD><TITLE>Robotic Fabricator Control Panel</TITLE></HEAD><TT>[dat]</TT>", "window=robot_fabricator")
+	show_browser(user, "<HEAD><TITLE>Robotic Fabricator Control Panel</TITLE></HEAD><TT>[dat]</TT>", "window=robot_fabricator")
 	onclose(user, "robot_fabricator")
 	return
 
@@ -121,16 +122,17 @@ Please wait until completion...</TT><BR>
 
 					src.overlays += "fab-active"
 					src.updateUsrDialog()
-
-					spawn (build_time)
-						if (!isnull(src.being_built))
-							src.being_built.dropInto(loc)
-							src.being_built = null
-						src.update_use_power(POWER_USE_IDLE)
-						src.operating = 0
-						src.overlays -= "fab-active"
+					addtimer(CALLBACK(src, .proc/done_building), build_time)
 		return
 
 	for (var/mob/M in viewers(1, src))
 		if (M.client && M.machine == src)
 			src.attack_hand(M)
+
+/obj/machinery/robotic_fabricator/proc/done_building()
+	if (!isnull(being_built))
+		being_built.dropInto(get_turf(src))
+		being_built = null
+	update_use_power(POWER_USE_IDLE)
+	overlays -= "fab-active"
+	operating = FALSE

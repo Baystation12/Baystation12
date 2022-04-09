@@ -4,16 +4,16 @@
 #define DEAD        2
 
 // Bitflags defining which status effects could be or are inflicted on a mob.
-#define CANSTUN     0x1
-#define CANWEAKEN   0x2
-#define CANPARALYSE 0x4
-#define CANPUSH     0x8
-#define LEAPING     0x10
-#define PASSEMOTES  0x32    // Mob has a cortical borer or holders inside of it that need to see emotes.
-#define GODMODE     0x1000
-#define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
-#define NO_ANTAG    0x4000  // Players are restricted from gaining antag roles when occupying this mob
-#define XENO_HOST   0x8000  // Tracks whether we're gonna be a baby alien's mummy.
+#define CANSTUN     FLAG(0)
+#define CANWEAKEN   FLAG(1)
+#define CANPARALYSE FLAG(2)
+#define CANPUSH     FLAG(3)
+#define PASSEMOTES  FLAG(4)  // Mob has a cortical borer or holders inside of it that need to see emotes.
+#define LEAPING     FLAG(5)
+#define GODMODE     FLAG(6)
+#define FAKEDEATH   FLAG(7)  // Replaces stuff like changeling.changeling_fakedeath.
+#define NO_ANTAG    FLAG(8)  // Players are restricted from gaining antag roles when occupying this mob
+#define NOTARGET    FLAG(9)  // Player is invisible to all simple mobs
 
 // Grab Types
 #define GRAB_NORMAL			"normal"
@@ -31,21 +31,32 @@
 #define NAB_AGGRESSIVE	"nab aggressive"
 #define NAB_KILL		"nab kill"
 
-#define BORGMESON 0x1
-#define BORGTHERM 0x2
-#define BORGXRAY  0x4
-#define BORGMATERIAL  8
+#define BORGMESON FLAG(0)
+#define BORGTHERM FLAG(1)
+#define BORGXRAY  FLAG(2)
+#define BORGMATERIAL FLAG(3)
 
-#define HOSTILE_STANCE_IDLE      1
-#define HOSTILE_STANCE_ALERT     2
-#define HOSTILE_STANCE_ATTACK    3
-#define HOSTILE_STANCE_ATTACKING 4
-#define HOSTILE_STANCE_TIRED     5
-#define HOSTILE_STANCE_INSIDE    6
 
-#define LEFT  0x1
-#define RIGHT 0x2
-#define UNDER 0x4
+#define STANCE_SLEEP        0	// Doing (almost) nothing, to save on CPU because nobody is around to notice or the mob died.
+#define STANCE_IDLE         1	// The more or less default state. Wanders around, looks for baddies, and spouts one-liners.
+#define STANCE_ALERT        2	// A baddie is visible but not too close, and essentially we tell them to go away or die.
+#define STANCE_APPROACH     3	// Attempting to get into range to attack them.
+#define STANCE_FIGHT	    4	// Actually fighting, with melee or ranged.
+#define STANCE_BLINDFIGHT   5	// Fighting something that cannot be seen by the mob, from invisibility or out of sight.
+#define STANCE_REPOSITION   6	// Relocating to a better position while in combat. Also used when moving away from a danger like grenades.
+#define STANCE_MOVE         7	// Similar to above but for out of combat. If a baddie is seen, they'll cancel and fight them.
+#define STANCE_FOLLOW       8	// Following somone, without trying to murder them.
+#define STANCE_FLEE         9	// Run away from the target because they're too spooky/we're dying/some other reason.
+#define STANCE_DISABLED     10	// Used when the holder is afflicted with certain status effects, such as stuns or confusion.
+
+#define STANCE_ATTACK       11 // Backwards compatability
+#define STANCE_ATTACKING    12 // Ditto
+
+#define STANCES_COMBAT      list(STANCE_ALERT, STANCE_APPROACH, STANCE_FIGHT, STANCE_BLINDFIGHT, STANCE_REPOSITION)
+
+#define LEFT  FLAG(0)
+#define RIGHT FLAG(1)
+#define UNDER FLAG(2)
 
 // Pulse levels, very simplified.
 #define PULSE_NONE    0   // So !M.pulse checks would be possible.
@@ -65,13 +76,13 @@
 #define I_HURT		"harm"
 
 //These are used Bump() code for living mobs, in the mob_bump_flag, mob_swap_flags, and mob_push_flags vars to determine whom can bump/swap with whom.
-#define HUMAN 1
-#define MONKEY 2
-#define ALIEN 4
-#define ROBOT 8
-#define SLIME 16
-#define SIMPLE_ANIMAL 32
-#define HEAVY 64
+#define HUMAN FLAG(0)
+#define MONKEY FLAG(1)
+#define ALIEN FLAG(2)
+#define ROBOT FLAG(3)
+#define SLIME FLAG(4)
+#define SIMPLE_ANIMAL FLAG(5)
+#define HEAVY FLAG(6)
 #define ALLMOBS (HUMAN|MONKEY|ALIEN|ROBOT|SLIME|SIMPLE_ANIMAL|HEAVY)
 
 // Robot AI notifications
@@ -81,17 +92,30 @@
 #define ROBOT_NOTIFICATION_MODULE_RESET 4
 
 // Appearance change flags
-#define APPEARANCE_UPDATE_DNA  0x1
-#define APPEARANCE_RACE       (0x2|APPEARANCE_UPDATE_DNA)
-#define APPEARANCE_GENDER     (0x4|APPEARANCE_UPDATE_DNA)
-#define APPEARANCE_SKIN        0x8
-#define APPEARANCE_HAIR        0x10
-#define APPEARANCE_HAIR_COLOR  0x20
-#define APPEARANCE_FACIAL_HAIR 0x40
-#define APPEARANCE_FACIAL_HAIR_COLOR 0x80
-#define APPEARANCE_EYE_COLOR 0x100
-#define APPEARANCE_ALL_HAIR (APPEARANCE_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR|APPEARANCE_FACIAL_HAIR_COLOR)
-#define APPEARANCE_ALL       0xFFFF
+#define APPEARANCE_ALL (~EMPTY_BITFIELD)
+#define APPEARANCE_DNA2 FLAG(0)
+#define APPEARANCE_RACE FLAG(1)
+#define APPEARANCE_GENDER FLAG(2)
+#define APPEARANCE_SKIN FLAG(3)
+#define APPEARANCE_HEAD FLAG(4)
+#define APPEARANCE_HEAD_COLOR FLAG(5)
+#define APPEARANCE_FACE FLAG(6)
+#define APPEARANCE_FACE_COLOR FLAG(7)
+#define APPEARANCE_ALL_HAIR (APPEARANCE_HEAD | APPEARANCE_HEAD_COLOR | APPEARANCE_FACE | APPEARANCE_FACE_COLOR)
+#define APPEARANCE_EYES FLAG(8)
+#define APPEARANCE_LANG FLAG(9)
+#define APPEARANCE_LANG_ANY_NUMBER FLAG(10)
+#define APPEARANCE_LANG_ANY_ORIGIN FLAG(11)
+
+#define APPEARANCE_COMMON (APPEARANCE_DNA2|APPEARANCE_RACE|APPEARANCE_GENDER|APPEARANCE_SKIN|APPEARANCE_ALL_HAIR|APPEARANCE_EYES|APPEARANCE_LANG)
+
+
+// /sprite_accessory flags
+#define DO_COLORATION_USER 1 //! Allow a user to set their own sprite_accessory color; tattoos, etc
+#define DO_COLORATION_SKIN 2 //! Take a coloration cue from skin tone
+#define DO_COLORATION_HAIR 4 //! Take a coloration cue from hair color
+#define DO_COLORATION_AUTO 6 //! Use hair if available, otherwise skin
+
 
 // Click cooldown
 #define DEFAULT_ATTACK_COOLDOWN 8 //Default timeout for aggressive actions
@@ -128,14 +152,13 @@
 #define STR_VLOW       -2
 
 // Gluttony levels.
-#define GLUT_TINY 1       // Eat anything tiny and smaller
-#define GLUT_SMALLER 2    // Eat anything smaller than we are
-#define GLUT_ANYTHING 4   // Eat anything, ever
-
-#define GLUT_ITEM_TINY 8         // Eat items with a w_class of small or smaller
-#define GLUT_ITEM_NORMAL 16      // Eat items with a w_class of normal or smaller
-#define GLUT_ITEM_ANYTHING 32    // Eat any item
-#define GLUT_PROJECTILE_VOMIT 64 // When vomitting, does it fly out?
+#define GLUT_TINY                FLAG(0)  // Eat mobs tiny and smaller
+#define GLUT_SMALLER             FLAG(1)  // Eat mobs smaller than we are
+#define GLUT_ANYTHING            FLAG(2)  // Eat any mob
+#define GLUT_ITEM_TINY           FLAG(3)  // Eat items with a w_class of small or smaller
+#define GLUT_ITEM_NORMAL         FLAG(4)  // Eat items with a w_class of normal or smaller
+#define GLUT_ITEM_ANYTHING       FLAG(5)  // Eat any item
+#define GLUT_PROJECTILE_VOMIT    FLAG(6)  // When vomitting, does it fly out?
 
 // Devour speeds, returned by can_devour()
 #define DEVOUR_SLOW 1
@@ -149,21 +172,25 @@
 #define FLASH_PROTECTION_VULNERABLE -2
 #define FLASH_PROTECTION_REDUCED -1
 #define FLASH_PROTECTION_NONE 0
-#define FLASH_PROTECTION_MODERATE 1
-#define FLASH_PROTECTION_MAJOR 2
+#define FLASH_PROTECTION_MINOR 1
+#define FLASH_PROTECTION_MODERATE 2
+#define FLASH_PROTECTION_MAJOR 3
 
 #define ANIMAL_SPAWN_DELAY round(config.respawn_delay / 6)
 #define DRONE_SPAWN_DELAY  round(config.respawn_delay / 3)
 
 // Incapacitation flags, used by the mob/proc/incapacitated() proc
-#define INCAPACITATION_NONE 0
-#define INCAPACITATION_RESTRAINED 1
-#define INCAPACITATION_BUCKLED_PARTIALLY 2
-#define INCAPACITATION_BUCKLED_FULLY 4
-#define INCAPACITATION_STUNNED 8
-#define INCAPACITATION_FORCELYING 16 //needs a better name - represents being knocked down BUT still conscious.
-#define INCAPACITATION_KNOCKOUT 32
+#define INCAPACITATION_NONE EMPTY_BITFIELD
+#define INCAPACITATION_RESTRAINED FLAG(0)
+#define INCAPACITATION_BUCKLED_PARTIALLY FLAG(1)
+#define INCAPACITATION_BUCKLED_FULLY FLAG(2)
+#define INCAPACITATION_STUNNED FLAG(3)
+#define INCAPACITATION_FORCELYING FLAG(4)
+#define INCAPACITATION_KNOCKOUT FLAG(5)
+#define INCAPACITATION_WEAKENED FLAG(6)
 
+#define INCAPACITATION_UNRESISTING (INCAPACITATION_KNOCKOUT|INCAPACITATION_STUNNED)
+#define INCAPACITATION_DISRUPTED (INCAPACITATION_UNRESISTING|INCAPACITATION_WEAKENED)
 #define INCAPACITATION_KNOCKDOWN (INCAPACITATION_KNOCKOUT|INCAPACITATION_FORCELYING)
 #define INCAPACITATION_DISABLED (INCAPACITATION_KNOCKDOWN|INCAPACITATION_STUNNED)
 #define INCAPACITATION_DEFAULT (INCAPACITATION_RESTRAINED|INCAPACITATION_BUCKLED_FULLY|INCAPACITATION_DISABLED)
@@ -195,29 +222,74 @@
 #define BP_PHORON   "phoron filter"
 #define BP_ACETONE  "acetone reactor"
 
+// Vox bits.
+#define BP_HINDTONGUE "hindtongue"
+
 // Robo Organs.
-#define BP_POSIBRAIN	"posibrain"
-#define BP_VOICE		"vocal synthesiser"
-#define BP_STACK		"stack"
-#define BP_OPTICS		"optics"
-#define BP_FLOAT		"floatation disc"
-#define BP_JETS			"maneuvering jets"
-#define BP_COOLING_FINS "cooling fins"
+#define BP_POSIBRAIN         "posibrain"
+#define BP_VOICE             "vocal synthesiser"
+#define BP_STACK             "stack"
+#define BP_OPTICS            "optics"
+#define BP_FLOAT             "floatation disc"
+#define BP_JETS              "maneuvering jets"
+#define BP_COOLING_FINS      "cooling fins"
+#define BP_SYSTEM_CONTROLLER "system controller"
 
-//Augmetations
-#define BP_AUGMENT_R_ARM         "right arm augment"
-#define BP_AUGMENT_L_ARM         "left arm augment"
-#define BP_AUGMENT_R_HAND        "right hand augment"
-#define BP_AUGMENT_L_HAND        "left hand augment"
-#define BP_AUGMENT_R_LEG         "right leg augment"
-#define BP_AUGMENT_L_LEG         "left leg augment"
-#define BP_AUGMENT_CHEST_ARMOUR   "chest armor augment"
-#define BP_AUGMENT_CHEST_ACTIVE  "active chest augment"
-#define BP_AUGMENT_HEAD           "head augment"
 
-//Augment flags
-#define AUGMENTATION_MECHANIC 1
-#define AUGMENTATION_ORGANIC  2
+/**
+* Augment Slots
+* Flags used by /obj/item/organ/internal/augment/var/augment_slots
+* Augment slots is used to control which body parts an augment may be installed into
+*/
+
+/// The augment can be installed in arms
+#define AUGMENT_ARM FLAG(0)
+
+/// The augment can be installed in hands
+#define AUGMENT_HAND FLAG(1)
+
+/// The augment can be installed in legs
+#define AUGMENT_LEG FLAG(2)
+
+/// The augment can be installed in feet
+#define AUGMENT_FOOT FLAG(3)
+
+/// The augment can be installed in the chest
+#define AUGMENT_CHEST FLAG(4)
+
+/// The augment can be installed in the lower body
+#define AUGMENT_GROIN FLAG(5)
+
+/// The augment can be installed in the head
+#define AUGMENT_HEAD FLAG(6)
+
+/// The augment can be installed on the chest separately to AUGMENT_CHEST
+#define AUGMENT_ARMOR FLAG(7)
+
+/// The augment can be installed in the head separately to AUGMENT_HEAD
+#define AUGMENT_FLUFF FLAG(8)
+
+
+/**
+* Augment Flags
+* Flags used by /obj/item/organ/internal/augment/var/augment_flags
+* Augment flags provide mixed configuration information about their augment
+*/
+
+/// The augment can be installed in mechanical organs
+#define AUGMENT_MECHANICAL FLAG(0)
+
+/// The augment can be installed in biological organs
+#define AUGMENT_BIOLOGICAL FLAG(1)
+
+/// The augment can be installed in crystaline organs
+#define AUGMENT_CRYSTALINE FLAG(2)
+
+/// The augment is visible on body scanner results
+#define AUGMENT_SCANNABLE FLAG(3)
+
+/// The augment is visible via grab inspection
+#define AUGMENT_INSPECTABLE FLAG(4)
 
 
 // Limbs.
@@ -236,10 +308,13 @@
 #define BP_BY_DEPTH list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_CHEST)
 
 // Prosthetic helpers.
-#define BP_IS_ROBOTIC(org)  (org.status & ORGAN_ROBOTIC)
-#define BP_IS_ASSISTED(org) (org.status & ORGAN_ASSISTED)
-#define BP_IS_BRITTLE(org)  (org.status & ORGAN_BRITTLE)
-#define BP_IS_CRYSTAL(org)  (org.status & ORGAN_CRYSTAL)
+#define BP_IS_ROBOTIC(org)  ((org) && ((org).status & ORGAN_ROBOTIC))
+#define BP_IS_ASSISTED(org) ((org) && ((org).status & ORGAN_ASSISTED))
+#define BP_IS_BRITTLE(org)  ((org) && ((org).status & ORGAN_BRITTLE))
+#define BP_IS_CRYSTAL(org)  ((org) && ((org).status & ORGAN_CRYSTAL))
+
+// Limb flag helpers
+#define BP_IS_DEFORMED(org) ((org) && ((org).limb_flags & ORGAN_FLAG_DEFORMED))
 
 #define SYNTH_BLOOD_COLOUR "#030303"
 #define SYNTH_FLESH_COLOUR "#575757"
@@ -282,12 +357,11 @@
 #define SPECIES_HUMAN       "Human"
 #define SPECIES_DIONA       "Diona"
 #define SPECIES_VOX         "Vox"
+#define SPECIES_VOX_ARMALIS "Vox Armalis"
 #define SPECIES_IPC         "Machine"
 #define SPECIES_UNATHI      "Unathi"
 #define SPECIES_SKRELL      "Skrell"
-#define SPECIES_NABBER      "giant armoured serpentid"
 #define SPECIES_PROMETHEAN  "Promethean"
-#define SPECIES_XENO        "Xenophage"
 #define SPECIES_ALIEN       "Humanoid"
 #define SPECIES_ADHERENT    "Adherent"
 #define SPECIES_GOLEM       "Golem"
@@ -296,9 +370,13 @@
 #define SPECIES_SPACER      "Space-Adapted Human"
 #define SPECIES_TRITONIAN   "Tritonian"
 #define SPECIES_GRAVWORLDER "Grav-Adapted Human"
+#define SPECIES_MULE        "Mule"
+#define SPECIES_MONKEY      "Monkey"
+#define SPECIES_NABBER         "giant armoured serpentid"
 
-#define STATION_SPECIES list(SPECIES_HUMAN, SPECIES_DIONA, SPECIES_IPC, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_TRITONIAN, SPECIES_SPACER, SPECIES_VATGROWN, SPECIES_GRAVWORLDER)
-#define RESTRICTED_SPECIES list(SPECIES_VOX, SPECIES_XENO, SPECIES_ALIEN, SPECIES_GOLEM)
+#define UNRESTRICTED_SPECIES list(SPECIES_HUMAN, SPECIES_DIONA, SPECIES_IPC, SPECIES_UNATHI, SPECIES_YEOSA, SPECIES_SKRELL, SPECIES_TRITONIAN, SPECIES_SPACER, SPECIES_VATGROWN, SPECIES_GRAVWORLDER, SPECIES_MULE)
+#define RESTRICTED_SPECIES   list(SPECIES_VOX, SPECIES_ALIEN, SPECIES_GOLEM)
+#define HUMAN_SPECIES        list(SPECIES_HUMAN, SPECIES_VATGROWN, SPECIES_SPACER, SPECIES_GRAVWORLDER, SPECIES_MULE)
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1
@@ -329,3 +407,67 @@
 #define MOB_CLIMB_TIME_MEDIUM 50
 
 #define MOB_FACTION_NEUTRAL "neutral"
+
+#define ROBOT_MODULE_TYPE_GROUNDED "grounded"
+#define ROBOT_MODULE_TYPE_FLYING   "flying"
+
+#define RADIO_INTERRUPT_DEFAULT 30
+
+/// This mob is allergic to holiness
+#define MOB_FLAG_HOLY_BAD FLAG(0)
+
+// More refined version of SA_* ""intelligence"" seperators.
+// Now includes bitflags, so to target two classes you just do 'MOB_CLASS_ANIMAL|MOB_CLASS_HUMANOID'
+#define MOB_CLASS_NONE          EMPTY_BITFIELD
+#define MOB_CLASS_PLANT         FLAG(0)  // Unused at the moment.
+#define MOB_CLASS_ANIMAL        FLAG(1)  // Animals and beasts like spiders, saviks, and bears.
+#define MOB_CLASS_HUMANOID      FLAG(2)  // Non-robotic humanoids, including /simple_mob and /carbon/humans and their alien variants.
+#define MOB_CLASS_SYNTHETIC     FLAG(3)  // Silicons, mechanical simple mobs, FBPs, and anything else that would pass is_synthetic()
+#define MOB_CLASS_SLIME         FLAG(4)  // Everyone's favorite xenobiology specimen (and maybe prometheans?).
+#define MOB_CLASS_ABERRATION    FLAG(5)  // Weird shit.
+#define MOB_CLASS_DEMONIC		FLAG(6)  // Cult stuff.
+#define MOB_CLASS_BOSS			FLAG(7)  // Future megafauna hopefully someday.
+#define MOB_CLASS_ILLUSION		FLAG(8)  // Fake mobs, e.g. Technomancer illusions.
+#define MOB_CLASS_PHOTONIC		FLAG(9)  // Holographic mobs like holocarp, similar to _ILLUSION, but that make no attempt to hide their true nature.
+
+#define MOB_CLASS_ALL (~EMPTY_BITFIELD)
+
+// For slime commanding.  Higher numbers allow for more actions.
+#define SLIME_COMMAND_OBEY		1 // When disciplined.
+#define SLIME_COMMAND_FACTION	2 // When in the same 'faction'.
+#define SLIME_COMMAND_FRIEND	3 // When befriended with a slime friendship agent.
+
+#define MARKING_TARGET_SKIN 0 // Draw a datum/sprite_accessory/marking to the mob's body, eg. tattoos
+#define MARKING_TARGET_HAIR 1 // Draw a datum/sprite_accessory/marking to the mob's hair, eg. color fades
+#define MARKING_TARGET_HEAD 2 // Draw a datum/sprite_accessory/marking to the mob's head after their hair, eg. ears, horns
+
+// used in /mob/living/carbon/human/can_inject, and by various callers of that proc
+#define CAN_INJECT 1
+#define INJECTION_PORT 2
+#define INJECTION_PORT_DELAY 3 SECONDS // used by injectors to apply delay due to searching for a port on the injectee's suit
+
+
+//used by /proc/do_after
+#define DO_USER_CAN_MOVE     FLAG(0)
+#define DO_USER_CAN_TURN     FLAG(1)
+#define DO_USER_UNIQUE_ACT   FLAG(2)
+#define DO_USER_SAME_HAND    FLAG(3)
+#define DO_USER_SAME_ZONE    FLAG(4)
+#define DO_TARGET_CAN_MOVE   FLAG(5)
+#define DO_TARGET_CAN_TURN   FLAG(6)
+#define DO_TARGET_UNIQUE_ACT FLAG(7)
+#define DO_SHOW_PROGRESS     FLAG(8)
+#define DO_PUBLIC_PROGRESS   FLAG(9)
+#define DO_MOVE_CHECKS_TURFS FLAG(10)
+#define DO_FAIL_FEEDBACK     FLAG(11)
+
+#define DO_BOTH_CAN_MOVE     (DO_USER_CAN_MOVE | DO_TARGET_CAN_MOVE)
+#define DO_BOTH_CAN_TURN     (DO_USER_CAN_TURN | DO_TARGET_CAN_TURN)
+#define DO_BOTH_UNIQUE_ACT   (DO_USER_UNIQUE_ACT | DO_TARGET_UNIQUE_ACT)
+#define DO_DEFAULT           (DO_SHOW_PROGRESS | DO_USER_SAME_HAND | DO_BOTH_CAN_TURN | DO_FAIL_FEEDBACK)
+
+#define DO_MISSING_USER      (-1)
+#define DO_MISSING_TARGET    (-2)
+#define DO_INCAPACITATED     (-3)
+
+#define FAKE_INVIS_ALPHA_THRESHOLD 127 // If something's alpha var is at or below this number, certain things will pretend it is invisible.

@@ -9,11 +9,11 @@
 
 	anchored = TRUE
 
-	var/obj/item/weapon/tank/tank
+	var/obj/item/tank/tank
 	var/mob/living/carbon/breather
 	var/obj/item/clothing/mask/breath/contained
 
-	var/spawn_type = /obj/item/weapon/tank/emergency/oxygen/engi
+	var/spawn_type = /obj/item/tank/oxygen_emergency_extended
 	var/mask_type = /obj/item/clothing/mask/breath/emergency
 	var/icon_state_open = "emerg_open"
 	var/icon_state_closed = "emerg"
@@ -29,9 +29,7 @@
 
 /obj/machinery/oxygen_pump/Destroy()
 	if(breather)
-		breather.internal = null
-		if(breather.internals)
-			breather.internals.icon_state = "internal0"
+		breather.set_internals(null)
 	if(tank)
 		qdel(tank)
 	if(breather)
@@ -48,7 +46,7 @@
 		if(!can_apply_to_target(target, usr)) // There is no point in attempting to apply a mask if it's impossible.
 			return
 		usr.visible_message("\The [usr] begins placing the mask onto [target]..")
-		if(do_mob(usr, target, 25))
+		if(do_after(usr, 2.5 SECONDS, target))
 			if(!can_apply_to_target(target, usr))
 				return
 			// place mask and add fingerprints
@@ -57,25 +55,21 @@
 			src.add_fingerprint(usr)
 
 
-/obj/machinery/oxygen_pump/attack_hand(mob/user as mob)
+/obj/machinery/oxygen_pump/physical_attack_hand(mob/user)
 	if((stat & MAINT) && tank)
 		user.visible_message("<span class='notice'>\The [user] removes \the [tank] from \the [src].</span>", "<span class='notice'>You remove \the [tank] from \the [src].</span>")
 		user.put_in_hands(tank)
 		src.add_fingerprint(user)
 		tank.add_fingerprint(user)
 		tank = null
-		return
-	if (!tank)
-		to_chat(user, "<span class='warning'>There is no tank in \the [src]!</span>")
-		return
+		return TRUE
 	if(breather)
 		detach_mask(user)
-	else
-		ui_interact(usr)
+		return TRUE
 
-
-/obj/machinery/oxygen_pump/attack_ai(mob/user as mob)
+/obj/machinery/oxygen_pump/interface_interact(mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/oxygen_pump/proc/attach_mask(var/mob/living/carbon/C)
 	if(C && istype(C))
@@ -88,9 +82,7 @@
 /obj/machinery/oxygen_pump/proc/set_internals(var/mob/living/carbon/C)
 	if(C && istype(C))
 		if(!C.internal && tank)
-			C.internal = tank
-			if(C.internals)
-				C.internals.icon_state = "internal1"
+			breather.set_internals(tank)
 		update_use_power(POWER_USE_ACTIVE)
 
 /obj/machinery/oxygen_pump/proc/detach_mask(mob/user)
@@ -141,7 +133,7 @@
 		return
 	return 1
 
-/obj/machinery/oxygen_pump/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/oxygen_pump/attackby(obj/item/W as obj, mob/user as mob)
 	if(isScrewdriver(W))
 		stat ^= MAINT
 		user.visible_message("<span class='notice'>\The [user] [stat & MAINT ? "opens" : "closes"] \the [src].</span>", "<span class='notice'>You [stat & MAINT ? "open" : "close"] \the [src].</span>")
@@ -150,7 +142,7 @@
 		if(!stat)
 			icon_state = icon_state_closed
 		//TO-DO: Open icon
-	if(istype(W, /obj/item/weapon/tank) && (stat & MAINT))
+	if(istype(W, /obj/item/tank) && (stat & MAINT))
 		if(tank)
 			to_chat(user, "<span class='warning'>\The [src] already has a tank installed!</span>")
 		else
@@ -159,10 +151,10 @@
 			tank = W
 			user.visible_message("<span class='notice'>\The [user] installs \the [tank] into \the [src].</span>", "<span class='notice'>You install \the [tank] into \the [src].</span>")
 			src.add_fingerprint(user)
-	if(istype(W, /obj/item/weapon/tank) && !stat)
+	if(istype(W, /obj/item/tank) && !stat)
 		to_chat(user, "<span class='warning'>Please open the maintenance hatch first.</span>")
 
-/obj/machinery/oxygen_pump/examine(var/mob/user)
+/obj/machinery/oxygen_pump/examine(mob/user)
 	. = ..()
 	if(tank)
 		to_chat(user, "The meter shows [round(tank.air_contents.return_pressure())]")

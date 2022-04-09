@@ -7,6 +7,7 @@
 	attack_verb = list("plunged")
 	force = 1
 	w_class = 3
+	item_flags = null
 	slot_flags = SLOT_HEAD | SLOT_MASK
 	hitsound = 'sound/effects/plunger.ogg'
 	matter = list("steel" = 5000)

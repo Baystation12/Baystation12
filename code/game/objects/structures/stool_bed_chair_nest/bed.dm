@@ -13,19 +13,18 @@
 	desc = "This is used to lie in, sleep in or strap on."
 	icon = 'icons/obj/furniture.dmi'
 	icon_state = "bed"
-	anchored = 1
+	anchored = TRUE
 	can_buckle = 1
 	buckle_dir = SOUTH
 	buckle_lying = 1
 	var/material/padding_material
 	var/base_icon = "bed"
 	var/material_alteration = MATERIAL_ALTERATION_ALL
+	var/buckling_sound = 'sound/effects/buckle.ogg'
 
-/obj/structure/bed/New(var/newloc, var/new_material, var/new_padding_material)
+/obj/structure/bed/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL, new_padding_material)
 	..(newloc)
 	color = null
-	if(!new_material)
-		new_material = MATERIAL_ALUMINIUM
 	material = SSmaterials.get_material_by_name(new_material)
 	if(!istype(material))
 		qdel(src)
@@ -88,7 +87,7 @@
 				qdel(src)
 				return
 
-/obj/structure/bed/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/bed/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		dismantle()
@@ -136,6 +135,11 @@
 	else
 		..()
 
+/obj/structure/bed/buckle_mob(mob/living/M)
+	. = ..()
+	if(. && buckling_sound)
+		playsound(src, buckling_sound, 20)
+
 /obj/structure/bed/Move()
 	. = ..()
 	if(buckled_mob)
@@ -171,17 +175,10 @@
 	base_icon = "psychbed"
 
 /obj/structure/bed/psych/New(var/newloc)
-	..(newloc,MATERIAL_WOOD, MATERIAL_LEATHER)
+	..(newloc,MATERIAL_WALNUT, MATERIAL_LEATHER_GENERIC)
 
 /obj/structure/bed/padded/New(var/newloc)
-	..(newloc,MATERIAL_ALUMINIUM,MATERIAL_COTTON)
-
-/obj/structure/bed/alien
-	name = "resting contraption"
-	desc = "This looks similar to contraptions from earth. Could aliens be stealing our technology?"
-
-/obj/structure/bed/alien/New(var/newloc)
-	..(newloc,MATERIAL_RESIN)
+	..(newloc,MATERIAL_ALUMINIUM,MATERIAL_CLOTH)
 
 /*
  * Roller beds
@@ -190,10 +187,10 @@
 	name = "roller bed"
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "down"
-	anchored = 0
-	buckle_pixel_shift = "x=0;y=6"
+	anchored = FALSE
+	buckle_pixel_shift = "x=0;y=0;z=6"
 	var/item_form_type = /obj/item/roller	//The folded-up object path.
-	var/obj/item/weapon/reagent_containers/beaker
+	var/obj/item/reagent_containers/beaker
 	var/iv_attached = 0
 	var/iv_stand = TRUE
 
@@ -218,7 +215,7 @@
 /obj/structure/bed/roller/attackby(obj/item/I, mob/user)
 	if(isWrench(I) || istype(I, /obj/item/stack) || isWirecutter(I))
 		return 1
-	if(iv_stand && !beaker && istype(I, /obj/item/weapon/reagent_containers))
+	if(iv_stand && !beaker && istype(I, /obj/item/reagent_containers/ivbag))
 		if(!user.unEquip(I, src))
 			return
 		to_chat(user, "You attach \the [I] to \the [src].")
@@ -248,11 +245,11 @@
 		if(iv_attached)
 			detach_iv(M, usr)
 		queue_icon_update()
-		
+
 /obj/structure/bed/roller/Process()
 	if(!iv_attached || !buckled_mob || !beaker)
 		return PROCESS_KILL
-	
+
 	//SSObj fires twice as fast as SSMobs, so gotta slow down to not OD our victims.
 	if(SSobj.times_fired % 2)
 		return
@@ -260,7 +257,7 @@
 	if(beaker.volume > 0)
 		beaker.reagents.trans_to_mob(buckled_mob, beaker.amount_per_transfer_from_this, CHEM_BLOOD)
 		queue_icon_update()
-		
+
 /obj/structure/bed/roller/proc/remove_beaker(mob/user)
 	to_chat(user, "You detach \the [beaker] to \the [src].")
 	iv_attached = FALSE
@@ -292,11 +289,11 @@
 		else
 			attach_iv(buckled_mob, usr)
 		return
-	if(ishuman(over_object))
+	if(over_object != usr && ishuman(over_object))
 		if(user_buckle_mob(over_object, usr))
 			attach_iv(buckled_mob, usr)
 			return
-	if(beaker) 
+	if(beaker)
 		remove_beaker(usr)
 		return
 	if(buckled_mob)	return
@@ -332,7 +329,7 @@
 	icon = 'icons/obj/furniture.dmi'
 	icon_state = "mattress"
 	desc = "A bare mattress. It doesn't look very comfortable."
-	anchored = 0
+	anchored = FALSE
 
 /obj/structure/mattress/dirty
 	name = "dirty mattress"

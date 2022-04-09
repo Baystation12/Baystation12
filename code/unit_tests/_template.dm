@@ -6,9 +6,9 @@
  */
 
 /datum/unit_test/template
-	name = "Test Template - Change My name"		// If it's a template leave the word "template" in it's name so it's not ran.
-
-	async = 1 // Set if we should continue testing elsewhere and come back and check on the results.
+	name = "Test Template - Change My name"
+	template = /datum/unit_test/template    // Set this var equal to the test path to treat it as a template, i.e. it should not be run
+	async = 1                               // Set if we should continue testing elsewhere and come back and check on the results.
 
 
 /datum/unit_test/template/start_test()

@@ -2,7 +2,6 @@
 	name = "radiant aura"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "fire_goon"
-	plane = OBJ_PLANE
 	layer = ABOVE_WINDOW_LAYER
 
 /obj/aura/radiant_aura/added_to(var/mob/living/L)
@@ -15,7 +14,7 @@
 	..()
 
 /obj/aura/radiant_aura/bullet_act(var/obj/item/projectile/P, var/def_zone)
-	if(P.check_armour == "laser")
+	if(P.damage_flags() & DAM_LASER)
 		user.visible_message("<span class='warning'>\The [P] refracts, bending into \the [user]'s aura.</span>")
 		return AURA_FALSE
 	return 0

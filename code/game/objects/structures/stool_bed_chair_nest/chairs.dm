@@ -6,9 +6,16 @@
 	base_icon = "chair"
 	buckle_dir = 0
 	buckle_lying = 0 //force people to sit up in chairs when buckled
+	obj_flags = OBJ_FLAG_ROTATABLE
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
+	buckle_movable = TRUE
 
-/obj/structure/bed/chair/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/bed/chair/do_simple_ranged_interaction(var/mob/user)
+	if(!buckled_mob && user)
+		rotate(user)
+	return TRUE
+
+/obj/structure/bed/chair/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if(!padding_material && istype(W, /obj/item/assembly/shock_kit))
 		var/obj/item/assembly/shock_kit/SK = W
@@ -25,13 +32,6 @@
 		SK.master = E
 		qdel(src)
 
-/obj/structure/bed/chair/attack_tk(mob/user as mob)
-	if(buckled_mob)
-		..()
-	else
-		rotate()
-	return
-
 /obj/structure/bed/chair/post_buckle_mob()
 	update_icon()
 	return ..()
@@ -44,7 +44,6 @@
 		var/image/I = image('icons/obj/furniture.dmi', "[base_icon]_over")
 		if(material_alteration & MATERIAL_ALTERATION_COLOR)
 			I.color = material.icon_colour
-		I.plane = ABOVE_HUMAN_PLANE
 		I.layer = ABOVE_HUMAN_LAYER
 		stool_cache[cache_key] = I
 	overlays |= stool_cache[cache_key]
@@ -55,7 +54,6 @@
 			var/image/I =  image(icon, "[base_icon]_padding_over")
 			if(material_alteration & MATERIAL_ALTERATION_COLOR)
 				I.color = padding_material.icon_colour
-			I.plane = ABOVE_HUMAN_PLANE
 			I.layer = ABOVE_HUMAN_LAYER
 			stool_cache[padding_cache_key] = I
 		overlays |= stool_cache[padding_cache_key]
@@ -65,7 +63,6 @@
 			cache_key = "[base_icon]-armrest-[padding_material.name]"
 		if(isnull(stool_cache[cache_key]))
 			var/image/I = image(icon, "[base_icon]_armrest")
-			I.plane = ABOVE_HUMAN_PLANE
 			I.layer = ABOVE_HUMAN_LAYER
 			if(material_alteration & MATERIAL_ALTERATION_COLOR)
 				I.color = material.icon_colour
@@ -75,68 +72,54 @@
 			cache_key = "[base_icon]-padding-armrest-[padding_material.name]"
 			if(isnull(stool_cache[cache_key]))
 				var/image/I = image(icon, "[base_icon]_padding_armrest")
-				I.plane = ABOVE_HUMAN_PLANE
 				I.layer = ABOVE_HUMAN_LAYER
 				if(material_alteration & MATERIAL_ALTERATION_COLOR)
 					I.color = padding_material.icon_colour
 				stool_cache[cache_key] = I
 			overlays |= stool_cache[cache_key]
 
+/obj/structure/bed/chair/rotate(mob/user)
+	if(!CanPhysicallyInteract(user))
+		to_chat(user, SPAN_NOTICE("You can't interact with \the [src] right now!"))
+		return
+
+	set_dir(turn(dir, 90))
+	update_icon()
+
 /obj/structure/bed/chair/set_dir()
 	..()
 	if(buckled_mob)
 		buckled_mob.set_dir(dir)
 
-/obj/structure/bed/chair/AltClick()
-	rotate()
+/obj/structure/bed/chair/padded/red/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, MATERIAL_CARPET)
 
-/obj/structure/bed/chair/verb/rotate()
-	set name = "Rotate Chair"
-	set category = "Object"
-	set src in oview(1)
+/obj/structure/bed/chair/padded/brown/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, MATERIAL_LEATHER_GENERIC)
 
-	if(!usr || !Adjacent(usr))
-		return
+/obj/structure/bed/chair/padded/teal/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "teal")
 
-	if(usr.stat == DEAD)
-		if(!round_is_spooky())
-			to_chat(src, "<span class='warning'>The veil is not thin enough for you to do that.</span>")
-			return
-	else if(usr.incapacitated())
-		return
+/obj/structure/bed/chair/padded/black/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "black")
 
-	src.set_dir(turn(src.dir, 90))
-	return
+/obj/structure/bed/chair/padded/green/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "green")
 
-/obj/structure/bed/chair/padded/red/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,MATERIAL_CARPET)
+/obj/structure/bed/chair/padded/purple/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "purple")
 
-/obj/structure/bed/chair/padded/brown/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,MATERIAL_LEATHER)
+/obj/structure/bed/chair/padded/blue/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "blue")
 
-/obj/structure/bed/chair/padded/teal/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"teal")
+/obj/structure/bed/chair/padded/beige/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "beige")
 
-/obj/structure/bed/chair/padded/black/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"black")
+/obj/structure/bed/chair/padded/lime/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "lime")
 
-/obj/structure/bed/chair/padded/green/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"green")
-
-/obj/structure/bed/chair/padded/purple/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"purple")
-
-/obj/structure/bed/chair/padded/blue/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"blue")
-
-/obj/structure/bed/chair/padded/beige/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"beige")
-
-/obj/structure/bed/chair/padded/lime/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"lime")
-
-/obj/structure/bed/chair/padded/yellow/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"yellow")
+/obj/structure/bed/chair/padded/yellow/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "yellow")
 
 // Leaving this in for the sake of compilation.
 /obj/structure/bed/chair/comfy
@@ -145,51 +128,49 @@
 	icon_state = "comfychair_preview"
 	base_icon = "comfychair"
 
-/obj/structure/bed/chair/comfy/brown/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,MATERIAL_LEATHER)
+/obj/structure/bed/chair/comfy/brown/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, MATERIAL_LEATHER_GENERIC)
 
-/obj/structure/bed/chair/comfy/red/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,MATERIAL_CARPET)
+/obj/structure/bed/chair/comfy/red/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, MATERIAL_CARPET)
 
-/obj/structure/bed/chair/comfy/teal/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"teal")
+/obj/structure/bed/chair/comfy/teal/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "teal")
 
-/obj/structure/bed/chair/comfy/black/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"black")
+/obj/structure/bed/chair/comfy/black/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "black")
 
-/obj/structure/bed/chair/comfy/green/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"green")
+/obj/structure/bed/chair/comfy/green/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "green")
 
-/obj/structure/bed/chair/comfy/purple/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"purple")
+/obj/structure/bed/chair/comfy/purple/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "purple")
 
-/obj/structure/bed/chair/comfy/blue/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"blue")
+/obj/structure/bed/chair/comfy/blue/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "blue")
 
-/obj/structure/bed/chair/comfy/beige/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"beige")
+/obj/structure/bed/chair/comfy/beige/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "beige")
 
-/obj/structure/bed/chair/comfy/lime/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"lime")
+/obj/structure/bed/chair/comfy/lime/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "lime")
 
-/obj/structure/bed/chair/comfy/yellow/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"yellow")
+/obj/structure/bed/chair/comfy/yellow/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "yellow")
 
 /obj/structure/bed/chair/comfy/captain
 	name = "captain chair"
 	desc = "It's a chair. Only for the highest ranked asses."
 	icon_state = "capchair_preview"
 	base_icon = "capchair"
-	buckle_movable = 1
 
 /obj/structure/bed/chair/comfy/captain/on_update_icon()
 	..()
 	var/image/I = image(icon, "[base_icon]_special")
-	I.plane = ABOVE_HUMAN_PLANE
 	I.layer = ABOVE_HUMAN_LAYER
 	overlays |= I
 
-/obj/structure/bed/chair/comfy/captain/New(var/newloc,var/newmaterial)
+/obj/structure/bed/chair/comfy/captain/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
 	..(newloc,MATERIAL_STEEL,"blue")
 
 /obj/structure/bed/chair/armchair
@@ -197,43 +178,43 @@
 	desc = "It's an armchair. It looks comfy."
 	icon_state = "armchair_preview"
 	base_icon = "armchair"
+	buckle_movable = FALSE
 
-/obj/structure/bed/chair/armchair/brown/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,MATERIAL_LEATHER)
+/obj/structure/bed/chair/armchair/brown/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, MATERIAL_LEATHER_GENERIC)
 
-/obj/structure/bed/chair/armchair/red/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,MATERIAL_CARPET)
+/obj/structure/bed/chair/armchair/red/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, MATERIAL_CARPET)
 
-/obj/structure/bed/chair/armchair/teal/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"teal")
+/obj/structure/bed/chair/armchair/teal/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "teal")
 
-/obj/structure/bed/chair/armchair/black/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"black")
+/obj/structure/bed/chair/armchair/black/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "black")
 
-/obj/structure/bed/chair/armchair/green/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"green")
+/obj/structure/bed/chair/armchair/green/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "green")
 
-/obj/structure/bed/chair/armchair/purple/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"purple")
+/obj/structure/bed/chair/armchair/purple/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "purple")
 
-/obj/structure/bed/chair/armchair/blue/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"blue")
+/obj/structure/bed/chair/armchair/blue/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "blue")
 
-/obj/structure/bed/chair/armchair/beige/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"beige")
+/obj/structure/bed/chair/armchair/beige/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "beige")
 
-/obj/structure/bed/chair/armchair/lime/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"lime")
+/obj/structure/bed/chair/armchair/lime/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "lime")
 
-/obj/structure/bed/chair/armchair/yellow/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"yellow")
+/obj/structure/bed/chair/armchair/yellow/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "yellow")
 
 /obj/structure/bed/chair/office
 	name = "office chair"
 	icon_state = "officechair_preview"
 	base_icon = "officechair"
-	anchored = 0
-	buckle_movable = 1
+	anchored = FALSE
 
 /obj/structure/bed/chair/office/Move()
 	. = ..()
@@ -255,28 +236,28 @@
 		var/mob/living/occupant = unbuckle_mob()
 
 		var/def_zone = ran_zone()
-		var/blocked = occupant.run_armor_check(def_zone, "melee")
+		var/blocked = 100 * occupant.get_blocked_ratio(def_zone, BRUTE, damage = 10)
 		occupant.throw_at(A, 3, propelled)
 		occupant.apply_effect(6, STUN, blocked)
 		occupant.apply_effect(6, WEAKEN, blocked)
 		occupant.apply_effect(6, STUTTER, blocked)
-		occupant.apply_damage(10, BRUTE, def_zone, blocked)
+		occupant.apply_damage(10, BRUTE, def_zone)
 		playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
 		if(istype(A, /mob/living))
 			var/mob/living/victim = A
 			def_zone = ran_zone()
-			blocked = victim.run_armor_check(def_zone, "melee")
+			blocked = 100 * victim.get_blocked_ratio(def_zone, BRUTE, damage = 10)
 			victim.apply_effect(6, STUN, blocked)
 			victim.apply_effect(6, WEAKEN, blocked)
 			victim.apply_effect(6, STUTTER, blocked)
-			victim.apply_damage(10, BRUTE, def_zone, blocked)
+			victim.apply_damage(10, BRUTE, def_zone)
 		occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
 
-/obj/structure/bed/chair/office/light/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,MATERIAL_COTTON)
+/obj/structure/bed/chair/office/light/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, MATERIAL_CLOTH)
 
-/obj/structure/bed/chair/office/dark/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"black")
+/obj/structure/bed/chair/office/dark/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "black")
 
 /obj/structure/bed/chair/office/comfy
 	name = "comfy office chair"
@@ -284,41 +265,43 @@
 	icon_state = "comfyofficechair_preview"
 	base_icon = "comfyofficechair"
 
-/obj/structure/bed/chair/office/comfy/brown/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,MATERIAL_LEATHER)
+/obj/structure/bed/chair/office/comfy/brown/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, MATERIAL_LEATHER_GENERIC)
 
-/obj/structure/bed/chair/office/comfy/red/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,MATERIAL_CARPET)
+/obj/structure/bed/chair/office/comfy/red/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, MATERIAL_CARPET)
 
-/obj/structure/bed/chair/office/comfy/teal/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"teal")
+/obj/structure/bed/chair/office/comfy/teal/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "teal")
 
-/obj/structure/bed/chair/office/comfy/black/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"black")
+/obj/structure/bed/chair/office/comfy/black/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "black")
 
-/obj/structure/bed/chair/office/comfy/green/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"green")
+/obj/structure/bed/chair/office/comfy/green/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "green")
 
-/obj/structure/bed/chair/office/comfy/purple/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"purple")
+/obj/structure/bed/chair/office/comfy/purple/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "purple")
 
-/obj/structure/bed/chair/office/comfy/blue/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"blue")
+/obj/structure/bed/chair/office/comfy/blue/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "blue")
 
-/obj/structure/bed/chair/office/comfy/beige/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"beige")
+/obj/structure/bed/chair/office/comfy/beige/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "beige")
 
-/obj/structure/bed/chair/office/comfy/lime/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"lime")
+/obj/structure/bed/chair/office/comfy/lime/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "lime")
 
-/obj/structure/bed/chair/office/comfy/yellow/New(var/newloc,var/newmaterial)
-	..(newloc,DEFAULT_FURNITURE_MATERIAL,"yellow")
+/obj/structure/bed/chair/office/comfy/yellow/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "yellow")
 
 /obj/structure/bed/chair/shuttle
 	name = "shuttle seat"
 	desc = "A comfortable, secure seat. It has a sturdy-looking buckling system for smoother flights."
 	base_icon = "shuttle_chair"
 	icon_state = "shuttle_chair_preview"
+	buckling_sound = 'sound/effects/metal_close.ogg'
+	buckle_movable = FALSE
 
 /obj/structure/bed/chair/shuttle/post_buckle_mob()
 	if(buckled_mob)
@@ -331,20 +314,19 @@
 	..()
 	if(!buckled_mob)
 		var/image/I = image(icon, "[base_icon]_special")
-		I.plane = ABOVE_HUMAN_PLANE
 		I.layer = ABOVE_HUMAN_LAYER
 		if(material_alteration & MATERIAL_ALTERATION_COLOR)
 			I.color = material.icon_colour
 		overlays |= I
 
-/obj/structure/bed/chair/shuttle/blue/New(var/newloc,var/newmaterial)
+/obj/structure/bed/chair/shuttle/blue/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
 	..(newloc,MATERIAL_STEEL,"blue")
 
-/obj/structure/bed/chair/shuttle/black/New(var/newloc,var/newmaterial)
+/obj/structure/bed/chair/shuttle/black/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
 	..(newloc,MATERIAL_STEEL,"black")
 
-/obj/structure/bed/chair/shuttle/white/New(var/newloc,var/newmaterial)
-	..(newloc,MATERIAL_STEEL,MATERIAL_COTTON)
+/obj/structure/bed/chair/shuttle/white/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc,MATERIAL_STEEL,MATERIAL_CLOTH)
 
 /obj/structure/bed/chair/wood
 	name = "classic chair"
@@ -353,9 +335,10 @@
 	icon_state = "wooden_chair_preview"
 	color = WOOD_COLOR_GENERIC
 	var/chair_material = MATERIAL_WOOD
+	buckle_movable = FALSE
 
-/obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
+/obj/structure/bed/chair/wood/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/stack) || istype(W, /obj/item/wirecutters))
 		return
 	..()
 
@@ -398,3 +381,28 @@
 /obj/structure/bed/chair/wood/wings/walnut
 	color = WOOD_COLOR_CHOCOLATE
 	chair_material = MATERIAL_WALNUT
+
+/obj/structure/bed/chair/pew
+	name = "pew"
+	desc = "A long, simple bench with a backboard, commonly found in places of worship, courtrooms and so on. Not known for being particularly comfortable."
+	icon_state = "pew"
+	base_icon = "pew"
+	color = WOOD_COLOR_GENERIC
+	var/material/pew_material = MATERIAL_WOOD
+	obj_flags = 0
+	buckle_movable = FALSE
+
+/obj/structure/bed/chair/pew/left
+	icon_state = "pew_left"
+	base_icon = "pew_left"
+
+/obj/structure/bed/chair/pew/New(var/newloc)
+	..(newloc, pew_material)
+
+/obj/structure/bed/chair/pew/mahogany
+	color = WOOD_COLOR_RICH
+	pew_material = MATERIAL_MAHOGANY
+
+/obj/structure/bed/chair/pew/left/mahogany
+	color = WOOD_COLOR_RICH
+	pew_material = MATERIAL_MAHOGANY

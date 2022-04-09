@@ -27,8 +27,13 @@ SUBSYSTEM_DEF(ticker)
 	var/list/antag_pool = list()
 	var/looking_for_antags = 0
 
+	var/secret_force_mode = "secret"
+
+	///Set to TRUE when an admin forcefully ends the round.
+	var/forced_end = FALSE
+
 /datum/controller/subsystem/ticker/Initialize()
-	to_world("<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>")
+	to_world("<span class='info'><B>Welcome to the pre-game lobby!</B></span>")
 	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
 	return ..()
 
@@ -60,6 +65,7 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/setup_tick()
 	switch(choose_gamemode())
 		if(CHOOSE_GAMEMODE_SILENT_REDO)
+			log_debug("Silently re-rolling game mode...")
 			return
 		if(CHOOSE_GAMEMODE_RETRY)
 			pregame_timeleft = 60 SECONDS
@@ -94,13 +100,13 @@ SUBSYSTEM_DEF(ticker)
 
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup() // Drafts antags who don't override jobs.
-		to_world("<FONT color='blue'><B>Enjoy the game!</B></FONT>")
+		to_world("<span class='info'><B>Enjoy the game!</B></span>")
 		sound_to(world, sound(GLOB.using_map.welcome_sound))
 
-		//Holiday Round-start stuff	~Carn
-		Holiday_Game_Start()
+		for (var/mob/new_player/player in GLOB.player_list)
+			player.new_player_panel()
 
-	if(!length(GLOB.admins))
+	if(!GLOB.admins.len)
 		send2adminirc("Round has started with no admins online.")
 
 /datum/controller/subsystem/ticker/proc/playing_tick()
@@ -128,15 +134,10 @@ SUBSYSTEM_DEF(ticker)
 			end_game_state = END_GAME_ENDING
 			callHook("roundend")
 			if (universe_has_ended)
-				if(mode.station_was_nuked)
-					SSstatistics.set_field_details("end_proper","nuke")
-				else
-					SSstatistics.set_field_details("end_proper","universe destroyed")
 				if(!delay_end)
 					to_world("<span class='notice'><b>Rebooting due to destruction of [station_name()] in [restart_timeout/10] seconds</b></span>")
 
 			else
-				SSstatistics.set_field_details("end_proper","proper completion")
 				if(!delay_end)
 					to_world("<span class='notice'><b>Restarting in [restart_timeout/10] seconds</b></span>")
 			handle_tickets()
@@ -157,30 +158,37 @@ SUBSYSTEM_DEF(ticker)
 			log_error("Ticker arrived at round end in an unexpected endgame state.")
 
 
-/datum/controller/subsystem/ticker/stat_entry()
-	switch(GAME_STATE)
-		if(RUNLEVEL_LOBBY)
-			..("[round_progressing ? "START:[round(pregame_timeleft/10)]s" : "(PAUSED)"]")
-		if(RUNLEVEL_SETUP)
+/datum/controller/subsystem/ticker/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	switch (GAME_STATE)
+		if (RUNLEVEL_LOBBY)
+			..("[round_progressing ? "START: [round(pregame_timeleft / 10)]s" : "(PAUSED)"]")
+		if (RUNLEVEL_SETUP)
 			..("SETUP")
-		if(RUNLEVEL_GAME)
+		if (RUNLEVEL_GAME)
 			..("GAME")
-		if(RUNLEVEL_POSTGAME)
-			switch(end_game_state)
-				if(END_GAME_NOT_OVER)
+		if (RUNLEVEL_POSTGAME)
+			switch (end_game_state)
+				if (END_GAME_NOT_OVER)
 					..("ENDGAME ERROR")
-				if(END_GAME_AWAITING_MAP)
+				if (END_GAME_AWAITING_MAP)
 					..("MAP VOTE")
-				if(END_GAME_MODE_FINISH_DONE)
+				if (END_GAME_MODE_FINISH_DONE)
 					..("MODE OVER, WAITING")
-				if(END_GAME_READY_TO_END)
+				if (END_GAME_READY_TO_END)
 					..("ENDGAME PROCESSING")
-				if(END_GAME_DELAYED)
+				if (END_GAME_DELAYED)
 					..("PAUSED")
-				if(END_GAME_AWAITING_TICKETS)
+				if (END_GAME_AWAITING_TICKETS)
 					..("AWAITING TICKETS")
-				if(END_GAME_ENDING)
-					..("END IN [round(restart_timeout/10)]s")
+				if (END_GAME_ENDING)
+					..("END IN [round(restart_timeout / 10)]s")
+				else
+					..()
+		else
+			..()
+
 
 /datum/controller/subsystem/ticker/Recover()
 	pregame_timeleft = SSticker.pregame_timeleft
@@ -217,18 +225,21 @@ Helpers
 			mode_to_try = "extended"
 
 	if(!mode_to_try)
+		log_debug("Could not find a valid game mode from config or vote results.")
 		return
 	if(mode_to_try in bad_modes)
+		log_debug("Could not start game mode [mode_to_try] - Mode is listed in bad_modes.")
 		return
 
 	//Find the relevant datum, resolving secret in the process.
 	var/list/base_runnable_modes = config.get_runnable_modes() //format: list(config_tag = weight)
-	if((mode_to_try=="random") || (mode_to_try=="secret"))
+	if (mode_to_try=="secret")
 		var/list/runnable_modes = base_runnable_modes - bad_modes
 		if(secret_force_mode != "secret") // Config option to force secret to be a specific mode.
 			mode_datum = config.pick_mode(secret_force_mode)
 		else if(!length(runnable_modes))  // Indicates major issues; will be handled on return.
 			bad_modes += mode_to_try
+			log_debug("Could not start game mode [mode_to_try] - No runnable modes available to start, or all options listed under bad modes.")
 			return
 		else
 			mode_datum = config.pick_mode(pickweight(runnable_modes))
@@ -238,6 +249,7 @@ Helpers
 		mode_datum = config.pick_mode(mode_to_try)
 	if(!istype(mode_datum))
 		bad_modes += mode_to_try
+		log_debug("Could not find a valid game mode for [mode_to_try].")
 		return
 
 	//Deal with jobs and antags, check that we can actually run the mode.
@@ -245,11 +257,13 @@ Helpers
 	mode_datum.create_antagonists() // Init operation on the mode; sets up antag datums and such.
 	mode_datum.pre_setup() // Makes lists of viable candidates; performs candidate draft for job-override roles; stores the draft result both internally and on the draftee.
 	SSjobs.divide_occupations(mode_datum) // Gives out jobs to everyone who was not selected to antag.
-
-	if(mode_datum.startRequirements())
+	var/list/lobby_players = SSticker.lobby_players()
+	var/result = mode_datum.check_startable(lobby_players)
+	if(result)
 		mode_datum.fail_setup()
 		SSjobs.reset_occupations()
 		bad_modes += mode_datum.config_tag
+		log_debug("Could not start game mode [mode_to_try] ([mode_datum.name]) - Failed to meet requirements - [result]")
 		return
 
 	//Declare victory, make an announcement.
@@ -257,13 +271,16 @@ Helpers
 	mode = mode_datum
 	master_mode = mode_to_try
 	if(mode_to_try == "secret")
-		to_world("<B>The current game mode is - Secret!</B>")
+		to_world("<B>The current game mode is Secret!</B>")
 		var/list/mode_names = list()
 		for (var/mode_tag in base_runnable_modes)
-			var/datum/game_mode/M = gamemode_cache[mode_tag]
+			var/datum/game_mode/M = config.gamemode_cache[mode_tag]
 			if(M)
 				mode_names += M.name
-		to_world("<B>Possibilities:</B> [english_list(mode_names)]")
+		if (config.secret_hide_possibilities)
+			message_admins("<B>Possibilities:</B> [english_list(mode_names)]")
+		else
+			to_world("<B>Possibilities:</B> [english_list(mode_names)]")
 	else
 		mode.announce()
 
@@ -279,6 +296,28 @@ Helpers
 				if(player.create_character())
 					qdel(player)
 
+/datum/controller/subsystem/ticker/proc/lobby_players(list/players)
+	if (!players)
+		players = GLOB.player_list
+	var/list/lobby_players = list()
+	for (var/mob/new_player/player in players)
+		if (!player.client)
+			continue
+		lobby_players += player
+	return lobby_players
+
+
+/datum/controller/subsystem/ticker/proc/ready_players(list/players)
+	if (!players)
+		players = lobby_players()
+	var/list/ready_players = list()
+	for (var/mob/new_player/player as anything in players)
+		if (!player.ready)
+			continue
+		ready_players += player
+	return ready_players
+
+
 /datum/controller/subsystem/ticker/proc/collect_minds()
 	for(var/mob/living/player in GLOB.player_list)
 		if(player.mind)
@@ -292,7 +331,7 @@ Helpers
 				captainless=0
 			if(!player_is_antag(player.mind, only_offstation_roles = 1))
 				SSjobs.equip_rank(player, player.mind.assigned_role, 0)
-				equip_custom_items(player)
+				SScustomitems.equip_custom_items(player)
 	if(captainless)
 		for(var/mob/M in GLOB.player_list)
 			if(!istype(M,/mob/new_player))
@@ -342,6 +381,9 @@ Helpers
 	return 0
 
 /datum/controller/subsystem/ticker/proc/game_finished()
+	if (forced_end)
+		return TRUE
+
 	if(mode.explosion_in_progress)
 		return 0
 	if(config.continous_rounds)
@@ -350,6 +392,9 @@ Helpers
 		return mode.check_finished() || (evacuation_controller.round_over() && evacuation_controller.emergency_evacuation) || universe_has_ended
 
 /datum/controller/subsystem/ticker/proc/mode_finished()
+	if (forced_end)
+		return TRUE
+
 	if(config.continous_rounds)
 		return mode.check_finished()
 	else
@@ -376,44 +421,22 @@ Helpers
 	for(var/client/C)
 		if(!C.credits)
 			C.RollCredits()
-	for(var/mob/Player in GLOB.player_list)
-		if(Player.mind && !isnewplayer(Player))
-			if(Player.stat != DEAD)
-				var/turf/playerTurf = get_turf(Player)
-				if(evacuation_controller.round_over() && evacuation_controller.emergency_evacuation)
-					if(isNotAdminLevel(playerTurf.z))
-						to_chat(Player, "<font color='blue'><b>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</b></font>")
-					else
-						to_chat(Player, "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></font>")
-				else if(isAdminLevel(playerTurf.z))
-					to_chat(Player, "<font color='green'><b>You successfully underwent crew transfer after events on [station_name()] as [Player.real_name].</b></font>")
-				else if(issilicon(Player))
-					to_chat(Player, "<font color='green'><b>You remain operational after the events on [station_name()] as [Player.real_name].</b></font>")
-				else
-					to_chat(Player, "<font color='blue'><b>You got through just another workday on [station_name()] as [Player.real_name].</b></font>")
-			else
-				if(isghost(Player))
-					var/mob/observer/ghost/O = Player
-					if(!O.started_as_observer)
-						to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
-				else
-					to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
+
+	GLOB.using_map.roundend_player_status()
+
 	to_world("<br>")
 
-	for (var/mob/living/silicon/ai/aiPlayer in SSmobs.mob_list)
-		if (aiPlayer.stat != 2)
-			to_world("<b>[aiPlayer.name] (Played by: [aiPlayer.key])'s laws at the end of the round were:</b>")
-
-		else
-			to_world("<b>[aiPlayer.name] (Played by: [aiPlayer.key])'s laws when it was deactivated were:</b>")
-
+	for(var/mob/living/silicon/ai/aiPlayer in SSmobs.mob_list)
+		var/show_ai_key = aiPlayer.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW
+		to_world("<b>[aiPlayer.name][show_ai_key ? " (played by [aiPlayer.key])" : ""]'s laws at the [aiPlayer.stat == 2 ? "time of their deactivation" : "end of round"] were:</b>")
 		aiPlayer.show_laws(1)
 
 		if (aiPlayer.connected_robots.len)
-			var/robolist = "<b>The AI's loyal minions were:</b> "
+			var/minions = "<b>[aiPlayer.name]'s loyal minions were:</b>"
 			for(var/mob/living/silicon/robot/robo in aiPlayer.connected_robots)
-				robolist += "[robo.name][robo.stat?" (Deactivated) (Played by: [robo.key]), ":" (Played by: [robo.key]), "]"
-			to_world("[robolist]")
+				var/show_robot_key = robo.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW
+				minions += " [robo.name][show_robot_key ? "(played by: [robo.key])" : ""][robo.stat ? " (deactivated)" : ""],"
+			to_world(minions)
 
 	var/dronecount = 0
 
@@ -424,12 +447,8 @@ Helpers
 			continue
 
 		if (!robo.connected_ai)
-			if (robo.stat != 2)
-				to_world("<b>[robo.name] (Played by: [robo.key]) survived as an AI-less synthetic! Its laws were:</b>")
-
-			else
-				to_world("<b>[robo.name] (Played by: [robo.key]) was unable to survive the rigors of being a synthetic without an AI. Its laws were:</b>")
-
+			var/show_robot_key = robo.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW
+			to_world("<b>[robo.name][show_robot_key ? " (played by [robo.key])" : ""]'s individual laws at the [robo.stat == 2 ? "time of their deactivation" : "end of round"] were:</b>")
 
 			if(robo) //How the hell do we lose robo between here and the world messages directly above this?
 				robo.laws.show_laws(world)
@@ -448,8 +467,8 @@ Helpers
 				max_profit = D
 			if(saldo <= max_loss.get_balance())
 				max_loss = D
-		to_world("<b>[max_profit.owner_name]</b> received most <font color='green'><B>PROFIT</B></font> today, with net profit of <b>T[max_profit.get_balance()]</b>.")
-		to_world("On the other hand, <b>[max_loss.owner_name]</b> had most <font color='red'><B>LOSS</B></font>, with total loss of <b>T[max_loss.get_balance()]</b>.")
+		to_world("<b>[max_profit.owner_name]</b> received most <font color='green'><B>PROFIT</B></font> today, with net profit of <b>[GLOB.using_map.local_currency_name_short][max_profit.get_balance()]</b>.")
+		to_world("On the other hand, <b>[max_loss.owner_name]</b> had most <font color='red'><B>LOSS</B></font>, with total loss of <b>[GLOB.using_map.local_currency_name_short][max_loss.get_balance()]</b>.")
 
 	mode.declare_completion()//To declare normal completion.
 

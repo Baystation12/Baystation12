@@ -97,21 +97,24 @@
 			new_coeff = round(min(max(new_coeff, GLOB.musical_config.gentlest_drop), GLOB.musical_config.steepest_drop), 0.001)
 			src.player.song.soft_coeff = new_coeff
 		if ("instrument")
+			if (!islist(instruments))
+				return
+			var/list/as_list = instruments
 			var/list/categories = list()
-			for (var/key in instruments)
+			for (var/key in as_list)
 				var/datum/instrument/instrument = instruments[key]
 				categories |= instrument.category
 
-			var/category = input(usr, "Choose a category") in categories as text|null
+			var/category = input(usr, "Choose a category") as null|anything in categories
 			if(!CanInteractWith(usr, owner, GLOB.physical_state))
 				return
 			var/list/instruments_available = list()
-			for (var/key in instruments)
+			for (var/key in as_list)
 				var/datum/instrument/instrument = instruments[key]
 				if (instrument.category == category)
 					instruments_available += key
 
-			var/new_instrument = input(usr, "Choose an instrument") in instruments_available as text|null
+			var/new_instrument = input(usr, "Choose an instrument") as null|anything in instruments_available
 			if(!CanInteractWith(usr, owner, GLOB.physical_state))
 				return
 			if (new_instrument)
@@ -195,6 +198,7 @@
 /datum/real_instrument/Destroy()
 	QDEL_NULL(player)
 	owner = null
+	return ..()
 
 /obj/structure/synthesized_instrument
 	var/datum/real_instrument/real_instrument
@@ -215,8 +219,10 @@
 
 /obj/structure/synthesized_instrument/Destroy()
 	QDEL_NULL(src.real_instrument)
-	for(var/key in instruments)
-		qdel(instruments[key])
+	if (islist(instruments))
+		var/list/as_list = instruments
+		for (var/key in as_list)
+			qdel(as_list[key])
 	instruments = null
 	. = ..()
 
@@ -267,8 +273,10 @@
 
 /obj/item/device/synthesized_instrument/Destroy()
 	QDEL_NULL(src.real_instrument)
-	for(var/key in instruments)
-		qdel(instruments[key])
+	if (islist(instruments))
+		var/list/as_list = instruments
+		for (var/key in as_list)
+			qdel(as_list[key])
 	instruments = null
 	. = ..()
 
@@ -282,7 +290,8 @@
 
 
 /obj/item/device/synthesized_instrument/ui_interact(mob/user, ui_key = "instrument", var/datum/nanoui/ui = null, var/force_open = 0)
-	real_instrument.ui_call(user,ui_key,ui,force_open)
+	if (real_instrument)
+		real_instrument.ui_call(user,ui_key,ui,force_open)
 
 
 /obj/item/device/synthesized_instrument/proc/shouldStopPlaying(mob/user)

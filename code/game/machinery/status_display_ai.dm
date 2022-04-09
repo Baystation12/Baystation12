@@ -58,8 +58,8 @@ var/list/ai_status_emotions = list(
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "frame"
 	name = "AI display"
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 
 	var/mode = 0	// 0 = Blank
 					// 1 = AI emoticon
@@ -73,9 +73,6 @@ var/list/ai_status_emotions = list(
 	var/list/ai_emotions = get_ai_emotions(user.ckey)
 	var/emote = input("Please, select a status!", "AI Status", null, null) in ai_emotions
 	src.emotion = emote
-
-/obj/machinery/ai_status_display/Process()
-	return
 
 /obj/machinery/ai_status_display/on_update_icon()
 	if(stat & (NOPOWER|BROKEN))

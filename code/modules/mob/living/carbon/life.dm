@@ -12,17 +12,11 @@
 		//Breathing, if applicable
 		handle_breathing()
 
-		//Mutations and radiation
-		handle_mutations_and_radiation()
-
 		//Chemicals in the body
 		handle_chemicals_in_body()
 
 		//Random events (vomiting etc)
 		handle_random_events()
-
-		//stuff in the stomach
-		handle_stomach()
 
 		// eye, ear, brain damages
 		handle_disabilities()
@@ -34,5 +28,5 @@
 
 		. = 1
 
-		if(!client && !mind && species)
+		if(!client && (!mind || ghosted) && species)
 			species.handle_npc(src)

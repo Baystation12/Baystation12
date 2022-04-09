@@ -4,12 +4,12 @@
 	icon = 'icons/obj/pit.dmi'
 	icon_state = "pit1"
 	blend_mode = BLEND_MULTIPLY
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	var/open = 1
 
 /obj/structure/pit/attackby(obj/item/W, mob/user)
-	if( istype(W,/obj/item/weapon/shovel) )
+	if( istype(W,/obj/item/shovel) )
 		visible_message("<span class='notice'>\The [user] starts [open ? "filling" : "digging open"] \the [src]</span>")
 		if( do_after(user, 50) )
 			visible_message("<span class='notice'>\The [user] [open ? "fills" : "digs open"] \the [src]!</span>")
@@ -37,11 +37,10 @@
 
 /obj/structure/pit/on_update_icon()
 	icon_state = "pit[open]"
-	if(istype(loc,/turf/simulated/floor/exoplanet))
-		var/turf/simulated/floor/exoplanet/E = loc
-		if(E.mudpit)
-			icon_state="pit[open]mud"
-			blend_mode = BLEND_OVERLAY
+	if(istype(loc,/turf/unsimulated/floor/exoplanet))
+		var/turf/unsimulated/floor/exoplanet/E = loc
+		if(E.dirt_color)
+			color = E.dirt_color
 
 /obj/structure/pit/proc/open()
 	name = "pit"
@@ -61,7 +60,10 @@
 	update_icon()
 
 /obj/structure/pit/return_air()
-	return open
+	if(open && loc)
+		return loc.return_air()
+	else
+		return null
 
 /obj/structure/pit/proc/digout(mob/escapee)
 	var/breakout_time = 1 //2 minutes by default
@@ -118,7 +120,6 @@
 /obj/structure/pit/closed/grave/Initialize()
 	var/obj/structure/closet/coffin/C = new(src.loc)
 	var/obj/item/remains/human/bones = new(C)
-	bones.plane = LYING_MOB_PLANE
 	bones.layer = LYING_MOB_LAYER
 	var/obj/structure/gravemarker/random/R = new(src.loc)
 	R.generate()
@@ -131,15 +132,15 @@
 	icon_state = "wood"
 	pixel_x = 15
 	pixel_y = 8
-	anchored = 1
+	anchored = TRUE
 	var/message = "Unknown."
 
 /obj/structure/gravemarker/cross
 	icon_state = "cross"
 
-/obj/structure/gravemarker/examine()
-	..()
-	to_chat(usr,"It says: '[message]'")
+/obj/structure/gravemarker/examine(mob/user)
+	. = ..()
+	to_chat(user, "It says: '[message]'")
 
 /obj/structure/gravemarker/random/Initialize()
 	generate()
@@ -150,20 +151,20 @@
 
 	var/decl/cultural_info/S = SSculture.get_culture(CULTURE_HUMAN)
 	var/nam = S.get_random_name(pick(MALE,FEMALE))
-	var/cur_year = game_year
+	var/cur_year = GLOB.using_map.game_year
 	var/born = cur_year - rand(5,150)
 	var/died = max(cur_year - rand(0,70),born)
 
 	message = "Here lies [nam], [born] - [died]."
 
 /obj/structure/gravemarker/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/weapon/material/hatchet))
+	if(istype(W,/obj/item/material/hatchet))
 		visible_message("<span class = 'warning'>\The [user] starts hacking away at \the [src] with \the [W].</span>")
 		if(!do_after(user, 30))
 			visible_message("<span class = 'warning'>\The [user] hacks \the [src] apart.</span>")
 			new /obj/item/stack/material/wood(src)
 			qdel(src)
-	if(istype(W,/obj/item/weapon/pen))
+	if(istype(W,/obj/item/pen))
 		var/msg = sanitize(input(user, "What should it say?", "Grave marker", message) as text|null)
 		if(msg)
 			message = msg

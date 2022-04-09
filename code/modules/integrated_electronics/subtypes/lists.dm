@@ -90,7 +90,7 @@
 
 /obj/item/integrated_circuit/lists/search/do_work()
 	var/list/input_list = get_pin_data(IC_INPUT, 1)
-	var/output = input_list.Find(get_pin_data(IC_INPUT, 2))
+	var/output = list_find(input_list, get_pin_data(IC_INPUT, 2))
 
 	set_pin_data(IC_OUTPUT, 1, output)
 	push_data()
@@ -180,9 +180,13 @@
 
 /obj/item/integrated_circuit/lists/listset/do_work()
 	var/list/input_list = get_pin_data(IC_INPUT, 1)
-	input_list = input_list
-
-	set_pin_data(IC_OUTPUT, 1, input_list)
+	var/list/output_list = list()
+	for(var/e in input_list)
+		if(e in output_list)
+			continue
+		output_list.Add(e)
+		
+	set_pin_data(IC_OUTPUT, 1, output_list)
 	push_data()
 	activate_pin(2)
 

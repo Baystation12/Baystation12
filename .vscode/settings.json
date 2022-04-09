@@ -1,0 +1,14 @@
+{
+	"editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"editor.tabSize": 4,
+	"files.eol": "\r\n",
+	"files.insertFinalNewline": true,
+	"files.trimFinalNewlines": true,
+	"files.trimTrailingWhitespace": true,
+	"gitblame.commitUrl": "https://github.com/baystation12/baystation12/commit/${hash}",
+	"gitlens.advanced.blame.customArguments": [
+		"--ignore-revs-file",
+		".git-blame-ignore-revs"
+	]
+}

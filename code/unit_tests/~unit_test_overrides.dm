@@ -75,3 +75,7 @@ GLOBAL_LIST_EMPTY(unit_test_obj_random_weights_by_type)
 
 /proc/return_true()
 	return TRUE
+
+// Make is_date datums always return 6th of June during testing for ease of testing
+/datum/is_date/CurrentMonthAndDay()
+	return list(6, 6)

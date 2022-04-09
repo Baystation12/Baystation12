@@ -1,134 +1,164 @@
-
-<div style="float:left;width:50%">
-	<h3>Sector information</h3> 
-	<div class='block'>
-		{{:data.sector}}
-		<br>
-		<span class='average'>Coordinates:</span> {{:data.s_x}} : {{:data.s_y}}
-		<br>
-		<span class='average'>Additional information:</span> {{:data.sector_info}}
-		<br>
-		<span class='average'>Status:</span> {{:data.landed}}
+{{if data.viewing_silicon}}
+	<div class="block">
+		<div class="item">
+			<div class="itemContent bad">
+				Remote AI systems detected. Firewall protections forbid remote AI control.
+			</div>
+		</div>
 	</div>
-</div>
+{{/if}}
 
-<div style="float:right;width:50%">
-	<h3>Flight data</h3> 
-	<div class='block'>
+<div style="float:left;width:45%;">
+	<fieldset style="min-height:180px;background-color: #202020;">
+		<legend style="text-align:center">Flight data</legend>
 		<div class='item'>
-			<div class="itemLabel">
-				<span class='average'>ETA to next grid:</span>
+			<div class="itemLabelWider">
+				ETA to next grid:
 			</div>
 			<div style="float:right">
 				{{:data.ETAnext}}
 			</div>
 		</div>
 		<div class='item'>
-			<div class="itemLabel">
-				<span class='average'>Speed:</span>
+			<div class="itemLabelWider">
+				Speed:
 			</div>
 			<div style="float:right">
-				{{:data.speed}}
+				{{:data.speed}} Gm/h
 			</div>
 		</div>
 		<div class='item'>
-			<div class="itemLabel">
-				<span class='average'>Acceleration:</span>
+			<div class="itemLabelWider">
+				Acceleration:
 			</div>
 			<div style="float:right">
-				{{:data.accel}}
+				{{:data.accel}} Gm/h
 			</div>
 		</div>
 		<div class='item'>
-			<div class="itemLabel">
-				<span class='average'>Heading:</span>
+			<div class="itemLabelWider">
+				Heading:
 			</div>
 			<div style="float:right">
-				{{:data.heading}}
+				{{:data.heading}}&deg;
 			</div>
-		</div> 
-	</div>
+		</div>
+		<div class='item'>
+			<div class="itemLabelWider">
+				Acceleration limiter:
+			</div>
+			<div style="float:right">
+				{{:helper.link(data.accellimit, null, { 'accellimit' : 1}, null, null)}} Gm/h
+			</div>
+		</div>
+	</fieldset>
 </div>
 
-
-<h3>Manual control</h3>
-<div class='block'>
+<div style="float:left;width:25%">
+<fieldset style="min-height:180px;background-color: #202020;">
+	<legend style="text-align:center">Manual control</legend>
 	<div class='item'>
-		<div class="itemLabel">
-			<div class='item'>
-				{{:helper.link('', 'triangle-1-nw', { 'move' : 9 }, data.canburn ? null : 'disabled', null)}}
-				{{:helper.link('', 'triangle-1-n', { 'move' : 1 }, data.canburn ? null : 'disabled', null)}}
-				{{:helper.link('', 'triangle-1-ne', { 'move' : 5 }, data.canburn ? null : 'disabled', null)}}
-			</div>
-			<div class='item'>
-				{{:helper.link('', 'triangle-1-w', { 'move' : 8 }, data.canburn ? null : 'disabled', null)}}
-				{{:helper.link('', 'circle-close', { 'brake' : 1 }, data.canburn ? null : 'disabled', null)}}
-				{{:helper.link('', 'triangle-1-e', { 'move' : 4 }, data.canburn ? null : 'disabled', null)}}
-			</div>
-			<div class='item'>
-				{{:helper.link('', 'triangle-1-sw', { 'move' : 10 }, data.canburn ? null : 'disabled', null)}}
-				{{:helper.link('', 'triangle-1-s', { 'move' : 2 }, data.canburn ? null : 'disabled', null)}}
-				{{:helper.link('', 'triangle-1-se', { 'move' : 6 }, data.canburn ? null : 'disabled', null)}}
-			</div>
+		<div class='item'>
+			{{:helper.link('', 'triangle-1-nw', { 'move' : 9 }, data.canburn ? null : 'disabled', null)}}
+			{{:helper.link('', 'triangle-1-n', { 'move' : 1 }, data.canburn ? null : 'disabled', null)}}
+			{{:helper.link('', 'triangle-1-ne', { 'move' : 5 }, data.canburn ? null : 'disabled', null)}}
+		</div>
+		<div class='item'>
+			{{:helper.link('', 'triangle-1-w', { 'move' : 8 }, data.canburn ? null : 'disabled', null)}}
+			{{:helper.link('', 'circle-close', { 'brake' : 1 }, data.canburn ? null : 'disabled', null)}}
+			{{:helper.link('', 'triangle-1-e', { 'move' : 4 }, data.canburn ? null : 'disabled', null)}}
+		</div>
+		<div class='item'>
+			{{:helper.link('', 'triangle-1-sw', { 'move' : 10 }, data.canburn ? null : 'disabled', null)}}
+			{{:helper.link('', 'triangle-1-s', { 'move' : 2 }, data.canburn ? null : 'disabled', null)}}
+			{{:helper.link('', 'triangle-1-se', { 'move' : 6 }, data.canburn ? null : 'disabled', null)}}
 		</div>
 
+		<div class='item'>
+			<span class='white'>Direct control</span>
+			<br>
+			{{:helper.link(data.manual_control ? 'Engaged' : 'Disengaged', 'shuffle', { 'manual' : 1 }, null, data.manual_control ? 'selected' : null)}}
+		</div>
+	</div>
+</fieldset>
+</div>
+
+<div style="float:left;width:30%">
+<fieldset style="min-height:180px;background-color: #202020;">
+	<legend style="text-align:center">Autopilot</legend>
+	<div class='item'>
+		<div class="itemLabelWide">
+			Target:
+		</div>
 		<div class="itemContent">
-			<div class='item'>
-				<span class='white'>Direct control</span>
-				{{:helper.link(data.manual_control ? 'Engaged' : 'Disengaged', 'shuffle', { 'manual' : 1 }, null, data.manual_control ? 'selected' : null)}}
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class='item'>
-	<div class="itemLabel">
-		<h3>Autopilot</h3>
-	</div>
-	<div class="itemContent" style="padding-top: 10px;">
-		{{:helper.link(data.autopilot ? 'Engaged' : 'Disengaged', 'gear', { 'apilot' : 1 }, data.dest ? null : 'disabled', data.autopilot ? 'selected' : null)}}
-	</div>
-</div> 
-<div class='block'>
-	<div class='item'>
-		<div style="float:left;width:45%">
-			<span class='white'>Target coordinates:</span>
-		</div>
-		<div style="float:left;width:20%">
 			{{if data.dest}}
 				{{:helper.link(data.d_x, null, { 'setx' : 1 }, null, null)}} {{:helper.link(data.d_y, null, { 'sety' : 1 }, null, null)}}
 			{{else}}
 				{{:helper.link('None', null, { 'sety' : 1, 'setx' : 1 }, null, null)}}
 			{{/if}}
 		</div>
-	</div> 
+	</div>
 	<div class='item'>
-		<div style="float:left;width:45%">
-			<span class='white'>Maximum speed:</span>
+		<div class="itemLabelWide">
+			Speed limit:
 		</div>
-		<div style="float:left;width:20%">
-			{{:helper.link(data.speedlimit, null, { 'speedlimit' : 1 }, null, null)}}
+		<div class="itemContent">
+			{{:helper.link(data.speedlimit, null, { 'speedlimit' : 1 }, null, null)}} Gm/h
 		</div>
-	</div> 
+	</div>
+	<div class="item">
+		{{:helper.link(data.autopilot ? 'Engaged' : 'Disengaged', 'gear', { 'apilot' : 1 }, data.dest ? null : 'disabled', data.autopilot ? 'selected' : null)}}
+	</div>
+</fieldset>
 </div>
 
-<h3>Navigation data</h3>
-<div class='item'>
-	{{:helper.link('Save current position', 'disk', { 'add' : 'current' }, null)}}
-	{{:helper.link('Add new entry', 'document', { 'add' : 'new' }, null)}}
-</div>
-
-<div class='statusDisplay'>
-	{{if data.locations}}
+	<div class='block' style='clear: both;'>
+		<h3>Navigation data</h3>
+		<div class='item'>
+			<div class="itemLabel">
+				Location:
+			</div>
+			<div class="itemContent">
+					{{:data.sector}}
+			</div>
+		</div>
+		<div class='item'>
+			<div class="itemLabel">
+				Coordinates:
+			</div>
+			<div class="itemContent">
+				{{:data.s_x}} : {{:data.s_y}}
+			</div>
+		</div>
+		<div class='item'>
+			<div class="itemLabel">
+				Scan data:
+			</div>
+			<div class="itemContent">
+				{{:data.sector_info}}
+			</div>
+		</div>
+		<div class='item'>
+			<div class="itemLabel">
+				Status:
+			</div>
+			<div class="itemContent">
+				{{:data.landed}}
+			</div>
+		</div>
+		<div class='item'>
+			{{:helper.link('Save current position', 'disk', { 'add' : 'current' }, null)}}
+			{{:helper.link('Add new entry', 'document', { 'add' : 'new' }, null)}}
+		</div>
+		<div class='statusDisplay'>
+		<table style="width:100%">
+		<tr><th style="width:40%">Name<th>Coordinates<th>Actions
 		{{for data.locations}}
-		  <div class='item'>
-				<span class='average'>{{:value.name}}:</span>
-				<span class='white'>{{:value.x}} : {{:value.y}}</span>
-		  </div>
-		  <div class='item'>
-			{{:helper.link('Plot course', 'arrowreturnthick-1-e', { 'x' : value.x, 'y' : value.y }, null, null)}}
-			{{:helper.link('Remove entry', 'close', { 'remove' : value.reference }, null, null)}}
-		  </div>
+			<tr class="candystripe"><td>{{:value.name}}
+			<td>{{:value.x}} : {{:value.y}}
+			<td>{{:helper.link('Plot course', 'arrowreturnthick-1-e', { 'x' : value.x, 'y' : value.y }, null, null)}}
+			{{:helper.link('Remove', 'close', { 'remove' : value.reference }, null, null)}}
 		{{/for}}
-	{{/if}}
-</div>	
+		</table>
+	</div>
+	</div>

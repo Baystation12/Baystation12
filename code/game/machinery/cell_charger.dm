@@ -3,11 +3,11 @@
 	desc = "A much more powerful version of the standard recharger that is specially designed for charging power cells."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "ccharger0"
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 5
 	active_power_usage = 60 KILOWATTS	//This is the power drawn when charging
 	power_channel = EQUIP
-	var/obj/item/weapon/cell/charging = null
+	var/obj/item/cell/charging = null
 	var/chargelevel = -1
 
 /obj/machinery/cell_charger/on_update_icon()
@@ -21,19 +21,18 @@
 	else
 		overlays.Cut()
 
-/obj/machinery/cell_charger/examine(mob/user)
-	if(!..(user, 5))
-		return
+/obj/machinery/cell_charger/examine(var/mob/user, var/distance)
+	. = ..()
+	if(distance <= 5)
+		to_chat(user, "There's [charging ? "a" : "no"] cell in the charger.")
+		if(charging)
+			to_chat(user, "Current charge: [charging.charge]")
 
-	to_chat(user, "There's [charging ? "a" : "no"] cell in the charger.")
-	if(charging)
-		to_chat(user, "Current charge: [charging.charge]")
-
-/obj/machinery/cell_charger/attackby(obj/item/weapon/W, mob/user)
+/obj/machinery/cell_charger/attackby(obj/item/W, mob/user)
 	if(stat & BROKEN)
 		return
 
-	if(istype(W, /obj/item/weapon/cell) && anchored)
+	if(istype(W, /obj/item/cell) && anchored)
 		if(charging)
 			to_chat(user, "<span class='warning'>There is already a cell in the charger.</span>")
 			return
@@ -46,7 +45,7 @@
 				return
 			charging = W
 			set_power()
-			START_PROCESSING(SSmachines, src)
+			START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 			user.visible_message("[user] inserts a cell into the charger.", "You insert a cell into the charger.")
 			chargelevel = -1
 		queue_icon_update()
@@ -60,7 +59,7 @@
 		to_chat(user, "You [anchored ? "attach" : "detach"] the cell charger [anchored ? "to" : "from"] the ground")
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 
-/obj/machinery/cell_charger/attack_hand(mob/user)
+/obj/machinery/cell_charger/physical_attack_hand(mob/user)
 	if(charging)
 		user.put_in_hands(charging)
 		charging.add_fingerprint(user)
@@ -70,11 +69,8 @@
 		user.visible_message("[user] removes the cell from the charger.", "You remove the cell from the charger.")
 		chargelevel = -1
 		set_power()
-		STOP_PROCESSING(SSmachines, src)
-
-/obj/machinery/cell_charger/attack_robot(mob/user)
-	if(Adjacent(user)) // Borgs can remove the cell if they are near enough
-		attack_hand(user)
+		STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
+		return TRUE
 
 /obj/machinery/cell_charger/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
@@ -83,11 +79,8 @@
 		charging.emp_act(severity)
 	..(severity)
 
-/obj/machinery/cell_charger/power_change()
-	if(..())
-		set_power()
-
 /obj/machinery/cell_charger/proc/set_power()
+	queue_icon_update()
 	if((stat & (BROKEN|NOPOWER)) || !anchored)
 		update_use_power(POWER_USE_OFF)
 		return
@@ -95,10 +88,11 @@
 		update_use_power(POWER_USE_ACTIVE)
 	else
 		update_use_power(POWER_USE_IDLE)
-	queue_icon_update()
 
 /obj/machinery/cell_charger/Process()
+	. = ..()
 	if(!charging)
-		return PROCESS_KILL
+		return
+	. = 0
 	charging.give(active_power_usage*CELLRATE)
-	update_icon()
+	set_power()

@@ -1,8 +1,8 @@
 /obj/structure/sign
 	icon = 'icons/obj/decals.dmi'
-	anchored = 1
+	anchored = TRUE
 	opacity = 0
-	density = 0
+	density = FALSE
 	layer = ABOVE_WINDOW_LAYER
 	w_class = ITEM_SIZE_NORMAL
 
@@ -39,7 +39,7 @@
 	var/sign_state = ""
 
 /obj/item/sign/attackby(obj/item/tool as obj, mob/user as mob)	//construction
-	if(istype(tool, /obj/item/weapon/screwdriver) && isturf(user.loc))
+	if(istype(tool, /obj/item/screwdriver) && isturf(user.loc))
 		var/direction = input("In which direction?", "Select direction.") in list("North", "East", "South", "West", "Cancel")
 		if(direction == "Cancel") return
 		var/obj/structure/sign/S = new(user.loc)
@@ -89,6 +89,11 @@
 /obj/structure/sign/warning/New()
 	..()
 	desc = "A warning sign which reads '[sanitize(name)]'."
+
+/obj/structure/sign/thera
+	icon_state = "thera"
+	name = "\improper THERA SAFE ROOM"
+	desc = "A detailed sign that reads 'Temporary Housing for Emergency, Radioactive, Atmospheric. This location is unsuitable for extended Habitation. Do not shelter here beyond immediate need.'"
 
 /obj/structure/sign/warning/airlock
 	name = "\improper EXTERNAL AIRLOCK"
@@ -262,10 +267,15 @@
 	desc = "This plaque memorializes those engineers and technicians who made the ultimate sacrifice to save their vessel and its crew."
 	icon_state = "atmosplaque"
 
-/obj/structure/sign/floorplaque
-	name = "\improper commemorative plaque"
-	desc = "A list of dead explorers who gave their lives in search of the next great discovery. Hope you don't join them."
-	icon_state = "floorplaque"
+/obj/structure/sign/emergonly
+	name = "\improper EMERGENCY ONLY"
+	desc = "A warning sign which reads 'EMERGENCY ONLY!'."
+	icon_state = "emerg"
+
+/obj/structure/sign/noidle
+	name = "\improper NO IDLING"
+	desc = "A warning sign which reads 'NO IDLING!'."
+	icon_state = "noidle"
 
 /obj/structure/sign/double/maltesefalcon	//The sign is 64x32, so it needs two tiles. ;3
 	name = "The Maltese Falcon"
@@ -360,6 +370,10 @@
 	name = "\improper Research Division"
 	icon_state = "direction_sci"
 
+/obj/structure/sign/directions/janitor
+	name = "\improper Custodial Closet"
+	icon_state = "direction_jan"
+
 /obj/structure/sign/directions/engineering
 	name = "\improper Engineering Bay"
 	icon_state = "direction_eng"
@@ -392,6 +406,14 @@
 	name = "\improper Exam Room"
 	icon_state = "examroom"
 
+/obj/structure/sign/directions/infm
+	name = "\improper Infirmary"
+	icon_state = "infm"
+
+/obj/structure/sign/directions/med
+	name = "\improper Medbay"
+	icon_state = "med"
+
 /obj/structure/sign/deck/bridge
 	name = "\improper Bridge Deck"
 	icon_state = "deck-b"
@@ -412,6 +434,10 @@
 	name = "\improper Fourth Deck"
 	icon_state = "deck-4"
 
+/obj/structure/sign/deck/fifth
+	name = "\improper Fifth Deck"
+	icon_state = "deck-5"
+
 /obj/item/sign/medipolma
 	name = "medical diploma"
 	desc = "A fancy print laminated paper that certifies that its bearer is indeed a Doctor of Medicine, graduated from a medical school in one of fringe systems. You don't recognize the name though, and half of latin words they used do not actually exist."
@@ -427,7 +453,7 @@
 	..()
 
 /obj/item/sign/medipolma/examine(mob/user)
-	..()
+	. = ..()
 	if(claimant)
 		to_chat(user,"This one belongs to Dr.[claimant], MD.")
 	else

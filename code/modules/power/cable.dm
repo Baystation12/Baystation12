@@ -24,7 +24,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 /obj/structure/cable
 	level = 1
-	anchored =1
+	anchored = TRUE
 	var/datum/powernet/powernet
 	name = "power cable"
 	desc = "A flexible superconducting cable for heavy-duty power transfer."
@@ -33,7 +33,6 @@ By design, d1 is the smallest direction and d2 is the highest
 	var/d1 = 0
 	var/d2 = 1
 
-	plane = ABOVE_TURF_PLANE
 	layer = EXPOSED_WIRE_LAYER
 
 	color = COLOR_MAROON
@@ -84,13 +83,13 @@ By design, d1 is the smallest direction and d2 is the highest
 
 	var/turf/T = src.loc			// hide if turf is not intact
 	if(level==1) hide(!T.is_plating())
-	cable_list += src //add it to the global cable list
+	GLOB.cable_list += src //add it to the global cable list
 
 
 /obj/structure/cable/Destroy()     // called when a cable is deleted
 	if(powernet)
 		cut_cable_from_powernet()  // update the powernets
-	cable_list -= src              // remove it from global cable list
+	GLOB.cable_list -= src              // remove it from global cable list
 	. = ..()                       // then go ahead and delete the cable
 
 
@@ -132,10 +131,6 @@ By design, d1 is the smallest direction and d2 is the highest
 // returns the powernet this cable belongs to
 /obj/structure/cable/proc/get_powernet()			//TODO: remove this as it is obsolete
 	return powernet
-
-//Telekinesis has no effect on a cable
-/obj/structure/cable/attack_tk(mob/user)
-	return
 
 // Items usable on a cable :
 //   - Wirecutters : cut it duh !
@@ -347,12 +342,13 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 		else if(istype(AM,/obj/machinery/power/apc))
 			var/obj/machinery/power/apc/N = AM
-			if(!N.terminal)	continue // APC are connected through their terminal
+			var/obj/machinery/power/terminal/terminal = N.terminal()
+			if(!terminal)	continue // APC are connected through their terminal
 
-			if(N.terminal.powernet == powernet)
+			if(terminal.powernet == powernet)
 				continue
 
-			to_connect += N.terminal //we'll connect the machines after all cables are merged
+			to_connect += terminal //we'll connect the machines after all cables are merged
 
 		else if(istype(AM,/obj/machinery/power)) //other power machines
 			var/obj/machinery/power/M = AM
@@ -479,7 +475,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	amount = MAXCOIL
 	max_amount = MAXCOIL
 	color = COLOR_MAROON
-	desc = "A coil of wiring, for delicate electronics use aswell as the more basic cable laying."
+	desc = "A coil of wiring, used for delicate electronics and basic power transfer."
 	throwforce = 0
 	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 2
@@ -490,6 +486,8 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 	stacktype = /obj/item/stack/cable_coil
+	singular_name = "length"
+	plural_name = "lengths"
 
 /obj/item/stack/cable_coil/single
 	amount = 1
@@ -531,7 +529,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 			to_chat(user, "<span class='warning'>\The [H]'s [S.name] is hard and brittle - \the [src] cannot repair it.</span>")
 			return 1
 
-		var/use_amt = min(src.amount, ceil(S.burn_dam/3), 5)
+		var/use_amt = min(src.amount, Ceil(S.burn_dam/3), 5)
 		if(can_use(use_amt))
 			if(S.robo_repair(3*use_amt, BURN, "some damaged wiring", src, user))
 				src.use(use_amt)
@@ -548,8 +546,11 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	else if(amount == 2)
 		icon_state = "coil2"
 		SetName("cable piece")
+	else if(amount > 2 && amount != max_amount)
+		icon_state = "coil"
+		SetName(initial(name))
 	else
-		icon_state = initial(icon_state)
+		icon_state = "coil-max"
 		SetName(initial(name))
 
 /obj/item/stack/cable_coil/proc/set_cable_color(var/selected_color, var/user)
@@ -569,19 +570,6 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	else
 		w_class = ITEM_SIZE_SMALL
 
-/obj/item/stack/cable_coil/examine(mob/user)
-	. = ..()
-	if(get_dist(src, user) > 1)
-		return
-
-	if(get_amount() == 1)
-		to_chat(user, "A short piece of power cable.")
-	else if(get_amount() == 2)
-		to_chat(user, "A piece of power cable.")
-	else
-		to_chat(user, "A coil of power cable. There are [get_amount()] lengths of cable in the coil.")
-
-
 /obj/item/stack/cable_coil/verb/make_restraint()
 	set name = "Make Cable Restraints"
 	set category = "Object"
@@ -589,16 +577,14 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 	if(ishuman(M) && !M.incapacitated())
 		if(!istype(usr.loc,/turf)) return
-		if(src.amount <= 14)
+		if(!src.use(15))
 			to_chat(usr, "<span class='warning'>You need at least 15 lengths to make restraints!</span>")
 			return
-		var/obj/item/weapon/handcuffs/cable/B = new /obj/item/weapon/handcuffs/cable(usr.loc)
+		var/obj/item/handcuffs/cable/B = new /obj/item/handcuffs/cable(usr.loc)
 		B.color = color
 		to_chat(usr, "<span class='notice'>You wind some cable together to make some restraints.</span>")
-		src.use(15)
 	else
 		to_chat(usr, "<span class='notice'>You cannot do that.</span>")
-	..()
 
 /obj/item/stack/cable_coil/cyborg/verb/set_colour()
 	set name = "Change Colour"
@@ -618,21 +604,11 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 /obj/item/stack/cable_coil/transfer_to(obj/item/stack/cable_coil/S)
 	if(!istype(S))
-		return
+		return 0
 	if(!(can_merge(S) || S.can_merge(src)))
-		return
+		return 0
 
-	..()
-
-/obj/item/stack/cable_coil/use()
-	. = ..()
-	update_icon()
-	return
-
-/obj/item/stack/cable_coil/add()
-	. = ..()
-	update_icon()
-	return
+	return ..()
 
 ///////////////////////////////////////////////
 // Cable laying procedures
@@ -835,3 +811,31 @@ obj/structure/cable/proc/cableColor(var/colorC)
 /obj/item/stack/cable_coil/random/New()
 	color = GLOB.possible_cable_colours[pick(GLOB.possible_cable_colours)]
 	..()
+
+// Produces cable coil from a rig power cell.
+/obj/item/stack/cable_coil/fabricator
+	name = "cable fabricator"
+	var/cost_per_cable = 10
+
+/obj/item/stack/cable_coil/fabricator/split(var/tamount, var/force=FALSE)
+	return
+
+/obj/item/stack/cable_coil/fabricator/get_cell()
+	if(istype(loc, /obj/item/rig_module))
+		var/obj/item/rig_module/module = loc
+		return module.get_cell()
+	if(istype(loc, /mob/living/silicon/robot))
+		var/mob/living/silicon/robot/R = loc
+		return R.get_cell()
+
+/obj/item/stack/cable_coil/fabricator/use(var/used)
+	var/obj/item/cell/cell = get_cell()
+	if(cell) cell.use(used * cost_per_cable)
+
+/obj/item/stack/cable_coil/fabricator/get_amount()
+	var/obj/item/cell/cell = get_cell()
+	. = (cell ? Floor(cell.charge / cost_per_cable) : 0)
+
+/obj/item/stack/cable_coil/fabricator/get_max_amount()
+	var/obj/item/cell/cell = get_cell()
+	. = (cell ? Floor(cell.maxcharge / cost_per_cable) : 0)

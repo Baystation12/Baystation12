@@ -7,9 +7,9 @@
 	icon_state = "base"
 	initialize_directions = 0
 	level = 1
+	layer = ABOVE_CATWALK_LAYER
 
 	var/configuring = 0
-	//var/target_pressure = ONE_ATMOSPHERE	//a base type as abstract as this should NOT be making these kinds of assumptions
 
 	var/tag_north = ATM_NONE
 	var/tag_south = ATM_NONE
@@ -23,8 +23,13 @@
 
 	var/list/ports = new()
 
-/obj/machinery/atmospherics/omni/New()
-	..()
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
+
+	pipe_class = PIPE_CLASS_OMNI
+	connect_dir_type = SOUTH | NORTH | EAST | WEST
+
+/obj/machinery/atmospherics/omni/Initialize()
+	. = ..()
 	icon_state = "base"
 
 	ports = new()
@@ -71,7 +76,7 @@
 		return 0
 	return 1
 
-/obj/machinery/atmospherics/omni/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/omni/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if(!isWrench(W))
 		return ..()
 
@@ -90,16 +95,12 @@
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear a ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
+		new /obj/item/pipe(loc, src)
 		qdel(src)
 
-/obj/machinery/atmospherics/omni/attack_hand(user as mob)
-	if(..())
-		return
-
-	src.add_fingerprint(usr)
+/obj/machinery/atmospherics/omni/interface_interact(mob/user)
 	ui_interact(user)
-	return
+	return TRUE
 
 /obj/machinery/atmospherics/omni/proc/build_icons()
 	if(!check_icon_cache())
@@ -171,7 +172,7 @@
 			if(ATM_OUTPUT)
 				ic_on += "_out_glow"
 				ic_off += "_out"
-			if(ATM_O2 to ATM_H2)
+			if(ATM_GAS_MIN to ATM_GAS_MAX)
 				ic_on += "_filter"
 				ic_off += "_out"
 
@@ -217,7 +218,7 @@
 			P.network = new_network
 			break
 
-	if(new_network.normal_members.Find(src))
+	if(list_find(new_network.normal_members, src))
 		return 0
 
 	new_network.normal_members += src

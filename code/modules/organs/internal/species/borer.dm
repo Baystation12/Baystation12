@@ -7,12 +7,13 @@
 	desc = "A disgusting space slug."
 	parent_organ = BP_HEAD
 	vital = 1
+	var/list/chemical_types
 
 /obj/item/organ/internal/borer/Process()
 
 	// Borer husks regenerate health, feel no pain, and are resistant to stuns and brainloss.
-	for(var/chem_name in GLOB.borer_reagent_types_by_name)
-		var/chem = GLOB.borer_reagent_types_by_name[chem_name]
+	for(var/chem_name in chemical_types)
+		var/chem = chemical_types[chem_name]
 		if(owner.reagents.get_reagent_amount(chem) < 3)
 			owner.reagents.add_reagent(chem, 5)
 
@@ -27,7 +28,7 @@
 		var/obj/effect/decal/cleanable/blood/splatter/goo = locate() in get_turf(owner)
 		if(goo)
 			goo.SetName("husk ichor")
-			goo.desc = "It's thick and stinks of decay."
+			goo.desc = "A thick goo that reeks of decay."
 			goo.basecolor = "#412464"
 			goo.update_icon()
 

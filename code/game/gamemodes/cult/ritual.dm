@@ -1,6 +1,6 @@
-/obj/item/weapon/book/tome
+/obj/item/book/tome
 	name = "arcane tome"
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "tome"
 	throw_speed = 1
 	throw_range = 5
@@ -8,20 +8,35 @@
 	unique = 1
 	carved = 2 // Don't carve it
 
-/obj/item/weapon/book/tome/attack_self(var/mob/user)
+/obj/item/book/tome/attack_self(mob/living/user)
 	if(!iscultist(user))
-		to_chat(user, "\The [src] seems full of illegible scribbles. Is this a joke?")
+		to_chat(user, SPAN_NOTICE("\The [src] seems full of illegible scribbles. Is this a joke?"))
 	else
 		to_chat(user, "Hold \the [src] in your hand while drawing a rune to use it.")
 
-/obj/item/weapon/book/tome/examine(var/mob/user)
+/obj/item/book/tome/examine(mob/user)
 	. = ..()
 	if(!iscultist(user))
 		to_chat(user, "An old, dusty tome with frayed edges and a sinister looking cover.")
 	else
 		to_chat(user, "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though.")
 
-/obj/item/weapon/book/tome/afterattack(var/atom/A, var/mob/user, var/proximity)
+/obj/item/book/tome/attack(mob/living/M, mob/living/user)
+	if (user.a_intent != I_HELP || user.zone_sel.selecting != BP_EYES)
+		return ..()
+	user.visible_message(
+		SPAN_NOTICE("\The [user] shows \the [src] to \the [M]."),
+		SPAN_NOTICE("You open up \the [src] and show it to \the [M].")
+	)
+	if (iscultist(M))
+		if (user != M)
+			to_chat(user, SPAN_NOTICE("But they already know all there is to know."))
+		to_chat(M, SPAN_NOTICE("But you already know all there is to know."))
+	else
+		to_chat(M, SPAN_NOTICE("\The [src] seems full of illegible scribbles. Is this a joke?"))
+	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+
+/obj/item/book/tome/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity || !iscultist(user))
 		return
 	if(A.reagents && A.reagents.has_reagent(/datum/reagent/water/holywater))
@@ -34,7 +49,7 @@
 	var/has_tome = 0
 	var/has_robes = 0
 	var/cult_ground = 0
-	if(istype(get_active_hand(), /obj/item/weapon/book/tome) || istype(get_inactive_hand(), /obj/item/weapon/book/tome))
+	if(istype(get_active_hand(), /obj/item/book/tome) || istype(get_inactive_hand(), /obj/item/book/tome))
 		has_tome = 1
 	else if(tome_required && mob_needs_tome())
 		to_chat(src, "<span class='warning'>This rune is too complex to draw by memory, you need to have a tome in your hand to draw it.</span>")
@@ -89,7 +104,7 @@
 			damage = 2
 	visible_message("<span class='warning'>\The [src] slices open a finger and begins to chant and paint symbols on the floor.</span>", "<span class='notice'>[self]</span>", "You hear chanting.")
 	if(do_after(src, timer))
-		pay_for_rune(cost * damage)
+		remove_blood_simple(cost * damage)
 		if(locate(/obj/effect/rune) in T)
 			return
 		var/obj/effect/rune/R = new rune(T, get_rune_color(), get_blood_name())
@@ -105,10 +120,10 @@
 		return
 	..()
 
-/mob/proc/pay_for_rune(var/blood)
+/mob/proc/remove_blood_simple(var/blood)
 	return
 
-/mob/living/carbon/human/pay_for_rune(var/blood)
+/mob/living/carbon/human/remove_blood_simple(var/blood)
 	if(should_have_organ(BP_HEART))
 		vessel.remove_reagent(/datum/reagent/blood, blood)
 
@@ -145,8 +160,11 @@ var/list/Tier1Runes = list(
 	/mob/proc/wall_rune,
 	/mob/proc/ajorney_rune,
 	/mob/proc/defile_rune,
+	/mob/proc/stun_imbue,
 	/mob/proc/emp_imbue,
-	/mob/proc/cult_communicate
+	/mob/proc/cult_communicate,
+	/mob/proc/obscure,
+	/mob/proc/reveal
 	)
 
 var/list/Tier2Runes = list(
@@ -273,6 +291,12 @@ var/list/Tier4Runes = list(
 
 	make_rune(/obj/effect/rune/tearreality, cost = 50, tome_required = 1)
 
+/mob/proc/stun_imbue()
+	set category = "Cult Magic"
+	set name = "Imbue: Stun"
+
+	make_rune(/obj/effect/rune/imbue/stun, cost = 20, tome_required = 1)
+
 /mob/proc/emp_imbue()
 	set category = "Cult Magic"
 	set name = "Imbue: EMP"
@@ -288,7 +312,7 @@ var/list/Tier4Runes = list(
 		return
 
 	message_cult_communicate()
-	pay_for_rune(3)
+	remove_blood_simple(3)
 
 	var/input = input(src, "Please choose a message to tell to the other acolytes.", "Voice of Blood", "")
 	if(!input)
@@ -313,3 +337,15 @@ var/list/Tier4Runes = list(
 
 /mob/living/carbon/human/message_cult_communicate()
 	visible_message("<span class='warning'>\The [src] cuts \his finger and starts drawing on the back of \his hand.</span>")
+
+/mob/proc/obscure()
+	set category = "Cult Magic"
+	set name = "Rune: Obscure"
+
+	make_rune(/obj/effect/rune/obscure)
+
+/mob/proc/reveal()
+	set category = "Cult Magic"
+	set name = "Rune: Reveal"
+
+	make_rune(/obj/effect/rune/reveal)

@@ -111,12 +111,18 @@ research holder datum.
 		if(DesignHasReqs(PD))
 			AddDesign2Known(PD)
 	for(var/datum/tech/T in known_tech)
-		T = between(0, T.level, 20)
+		T = clamp(T.level, 0, 20)
 	return
 
 //Refreshes the levels of a given tech.
 //Input: Tech's ID and Level; Output: null
 /datum/research/proc/UpdateTech(var/ID, var/level)
+	// If a "brain expansion" event is active, we gain 1 extra level
+	for(var/datum/event/E in SSevent.active_events)
+		if(istype(E, /datum/event/brain_expansion))
+			level += 1
+			break
+
 	for(var/datum/tech/KT in known_tech)
 		if(KT.id == ID && KT.level <= level)
 			KT.level = max(KT.level + 1, level - 1)
@@ -185,19 +191,13 @@ research holder datum.
 	desc = "Computer and artificial intelligence and data storage systems."
 	id = TECH_DATA
 
-/datum/tech/syndicate
-	name = "ILLEGAL"
-	desc = "WARNING: Controlled technology detected. Fabrication of items using this technology is a direct violation of Federal Law 352-C part II and is a serious crime."
-	id = TECH_ILLEGAL
+/datum/tech/esoteric
+	name = "Esoteric Technology"
+	desc = "A miscellaneous tech category filled with information on non-standard designs, personal projects and half-baked ideas."
+	id = TECH_ESOTERIC
 	level = 0
 
-/datum/tech/arcane
-	name = "Arcane"
-	desc = "Techniques not explained by the mainstream science, commonly regarded as 'occult'."
-	id = TECH_ARCANE
-	level = 0
-
-/obj/item/weapon/disk/tech_disk
+/obj/item/disk/tech_disk
 	name = "fabricator data disk"
 	desc = "A disk for storing fabricator learning data for backup."
 	icon = 'icons/obj/cloning.dmi'
@@ -208,7 +208,7 @@ research holder datum.
 	var/datum/tech/stored
 
 
-/obj/item/weapon/disk/design_disk
+/obj/item/disk/design_disk
 	name = "component design disk"
 	desc = "A disk for storing device design data for construction in lathes."
 	icon = 'icons/obj/cloning.dmi'

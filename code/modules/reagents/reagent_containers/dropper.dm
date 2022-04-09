@@ -1,8 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// Droppers.
 ////////////////////////////////////////////////////////////////////////////////
-/obj/item/weapon/reagent_containers/dropper
-	name = "Dropper"
+/obj/item/reagent_containers/dropper
+	name = "dropper"
 	desc = "A dropper. Transfers 5 units."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "dropper0"
@@ -21,7 +21,7 @@
 				to_chat(user, "<span class='notice'>[target] is full.</span>")
 				return
 
-			if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/weapon/reagent_containers/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette)) //You can inject humans and food but you cant remove the shit.
+			if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/reagent_containers/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette)) //You can inject humans and food but you can't remove the shit.
 				to_chat(user, "<span class='notice'>You cannot directly fill this object.</span>")
 				return
 
@@ -34,7 +34,7 @@
 				var/time = 20 //2/3rds the time of a syringe
 				user.visible_message("<span class='warning'>[user] is trying to squirt something into [target]'s eyes!</span>")
 
-				if(!do_mob(user, target, time))
+				if(!do_after(user, time, target))
 					return
 
 				if(istype(target, /mob/living/carbon/human))
@@ -57,8 +57,9 @@
 						return
 
 				var/mob/living/M = target
-				var/contained = reagentlist()
-				admin_attack_log(user, M, "Squirted their victim with \a [src] (Reagents: [contained])", "Were squirted with \a [src] (Reagents: [contained])", "used \a [src] (Reagents: [contained]) to squirt at")
+				if (reagents.should_admin_log())
+					var/contained = reagentlist()
+					admin_attack_log(user, M, "Squirted their victim with \a [src] (Reagents: [contained])", "Were squirted with \a [src] (Reagents: [contained])", "used \a [src] (Reagents: [contained]) to squirt at")
 
 				var/spill_amt = M.incapacitated()? 0 : 30
 				trans += reagents.splash(target, reagents.total_volume/2, max_spill = spill_amt)
@@ -97,7 +98,7 @@
 		else
 			icon_state = "dropper0"
 
-/obj/item/weapon/reagent_containers/dropper/industrial
+/obj/item/reagent_containers/dropper/industrial
 	name = "Industrial Dropper"
 	desc = "A larger dropper. Transfers 10 units."
 	amount_per_transfer_from_this = 10

@@ -14,6 +14,16 @@
 	var/scannable = 0 // Shows up on health analyzers.
 	var/color = "#000000"
 	var/color_weight = 1
+	var/color_foods = FALSE // If TRUE, this reagent affects the color of food items it's added to
+	var/protein_amount = 0 //What *percentage* of this is made of *animal* protein (1 is 100%). Used to calculate how it affects skrell
+
+	// If TRUE, this reagent transfers changes to its 'color' var when moving to other containers
+	// Of note: Mixing two reagents of the same type with this var that have different colors
+	// will cause them both to take on the color of the form being added into the holder.
+	// i.e. if you add red to blue, all of the reagent turns red and vice-versa.
+	var/color_transfer = FALSE
+
+	var/alpha = 255
 	var/flags = 0
 	var/hidden_from_codex
 
@@ -43,6 +53,14 @@
 	var/heating_sound = 'sound/effects/bubbles.ogg'
 
 	var/temperature_multiplier = 1
+	var/value = 1
+
+	var/scent //refer to _scent.dm
+	var/scent_intensity = /decl/scent_intensity/normal
+	var/scent_descriptor = SCENT_DESC_SMELL
+	var/scent_range = 1
+
+	var/should_admin_log = FALSE
 
 /datum/reagent/New(var/datum/reagents/holder)
 	if(!istype(holder))
@@ -110,6 +128,9 @@
 	return
 
 /datum/reagent/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	if (alien == IS_SKRELL && protein_amount > 0)
+		var/datum/species/skrell/S = M.species
+		S.handle_protein(M, src)
 	affect_blood(M, alien, removed * 0.5)
 	return
 
@@ -140,7 +161,7 @@
 	holder = null
 	. = ..()
 
-/datum/reagent/proc/ex_act(obj/item/weapon/reagent_containers/holder, severity)
+/datum/reagent/proc/ex_act(obj/item/reagent_containers/holder, severity)
 	return
 
 /* DEPRECATED - TODO: REMOVE EVERYWHERE */

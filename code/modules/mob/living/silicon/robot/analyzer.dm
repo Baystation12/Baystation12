@@ -3,6 +3,7 @@
 //
 /obj/item/device/robotanalyzer
 	name = "robot analyzer"
+	icon = 'icons/obj/robot_analyzer.dmi'
 	icon_state = "robotanalyzer"
 	item_state = "analyzer"
 	desc = "A hand-held scanner able to diagnose robotic injuries."
@@ -16,7 +17,7 @@
 	matter = list(MATERIAL_STEEL = 250, MATERIAL_GLASS = 100, MATERIAL_PLASTIC = 75)
 	var/mode = 1;
 
-/obj/item/device/robotanalyzer/attack(mob/living/M as mob, mob/living/user as mob)
+/proc/roboscan(mob/living/M, mob/living/user)
 	if((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, text("<span class='warning'>You try to analyze the floor's vitals!</span>"))
 		for(var/mob/O in viewers(M, null))
@@ -69,6 +70,11 @@
 			var/mob/living/carbon/human/H = M
 			to_chat(user, "<span class='notice'>Analyzing Results for \the [H]:</span>")
 			to_chat(user, "Key: <font color='#ffa500'>Electronics</font>/<font color='red'>Brute</font>")
+			var/obj/item/organ/internal/cell/C = H.internal_organs_by_name[BP_CELL]
+			if(C)
+				to_chat(user, SPAN_NOTICE("Cell charge: [C.percent()] %"))
+			else
+				to_chat(user, SPAN_NOTICE("Cell charge: ERROR - Cell not present"))
 			to_chat(user, "<span class='notice'>External prosthetics:</span>")
 			var/organ_found
 			for(var/obj/item/organ/external/E in H.organs)
@@ -85,9 +91,12 @@
 				if(!BP_IS_ROBOTIC(O))
 					continue
 				organ_found = 1
-				to_chat(user, "[O.name]: <font color='red'>[O.damage]</font>")
+				to_chat(user, "[O.name]: <font color='red'>[(O.status & ORGAN_DEAD) ? "DESTROYED" : O.damage]</font>")
 			if(!organ_found)
 				to_chat(user, "No prosthetics located.")
+	return
 
+/obj/item/device/robotanalyzer/attack(mob/living/M, mob/living/user)
+	roboscan(M, user)
 	src.add_fingerprint(user)
 	return

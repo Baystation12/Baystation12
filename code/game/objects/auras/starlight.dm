@@ -3,7 +3,6 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "white_electricity_constant"
 	color = "#33cc33"
-	plane = ABOVE_HUMAN_PLANE
 	layer = MOB_LAYER
 
 /obj/aura/starborn/bullet_act(var/obj/item/projectile/P, var/def_zone)

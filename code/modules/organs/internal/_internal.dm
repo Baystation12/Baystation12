@@ -6,6 +6,7 @@
 	var/surface_accessible = FALSE
 	var/relative_size = 25   // Relative size of the organ. Roughly % of space they take in the target projection :D
 	var/min_bruised_damage = 10       // Damage before considered bruised
+	var/damage_reduction = 0.5     //modifier for internal organ injury
 
 /obj/item/organ/internal/New(var/mob/living/carbon/holder)
 	if(max_damage)
@@ -20,7 +21,6 @@
 			if(!E)
 				CRASH("[src] spawned in [holder] without a parent organ: [parent_organ].")
 			E.internal_organs |= src
-			E.cavity_max_w_class = max(E.cavity_max_w_class, w_class)
 
 /obj/item/organ/internal/Destroy()
 	if(owner)
@@ -128,9 +128,9 @@ obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 
 /obj/item/organ/internal/proc/take_internal_damage(amount, var/silent=0)
 	if(BP_IS_ROBOTIC(src))
-		damage = between(0, src.damage + (amount * 0.8), max_damage)
+		damage = clamp(damage + (amount * 0.8), 0, max_damage)
 	else
-		damage = between(0, src.damage + amount, max_damage)
+		damage = clamp(damage + amount, 0, max_damage)
 
 		//only show this if the organ is not robotic
 		if(owner && can_feel_pain() && parent_organ && (amount > 5 || prob(10)))
@@ -193,8 +193,8 @@ obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 		return
 	switch (severity)
 		if (1)
-			take_internal_damage(9)
+			take_internal_damage(16)
 		if (2)
-			take_internal_damage(3)
+			take_internal_damage(9)
 		if (3)
-			take_internal_damage(1)
+			take_internal_damage(6.5)

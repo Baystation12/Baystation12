@@ -18,8 +18,8 @@
 	var/datum/integrated_io/I = inputs[1]
 	set_pin_data(IC_OUTPUT, 1, null)
 	if(!isweakref(I.data))
-		return
 		activate_pin(3)
+		return
 	var/atom/A = I.data.resolve()
 	if(!A)
 		activate_pin(3)
@@ -57,8 +57,8 @@
 		activate_pin(3)
 		return
 	var/turf/T = get_turf(assembly)
-	var/target_x = Clamp(get_pin_data(IC_INPUT, 1), 0, world.maxx)
-	var/target_y = Clamp(get_pin_data(IC_INPUT, 2), 0, world.maxy)
+	var/target_x = clamp(get_pin_data(IC_INPUT, 1), 0, world.maxx)
+	var/target_y = clamp(get_pin_data(IC_INPUT, 2), 0, world.maxy)
 	var/turf/A = locate(target_x, target_y, T.z)
 	set_pin_data(IC_OUTPUT, 1, null)
 	if(!A||A==T)
@@ -85,7 +85,7 @@
 	activators = list("calculate path" = IC_PINTYPE_PULSE_IN, "on calculated" = IC_PINTYPE_PULSE_OUT,"not calculated" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_RESEARCH
 	power_draw_per_use = 80
-	var/obj/item/weapon/card/id/idc
+	var/obj/item/card/id/idc
 
 /obj/item/integrated_circuit/smart/advanced_pathfinder/Initialize()
 	.=..()
@@ -104,6 +104,10 @@
 		return
 
 	var/list/signature_and_data = splittext(Ps, ":")
+
+	if(signature_and_data.len < 2)
+		return
+
 	var/signature = signature_and_data[1]
 	var/result = signature_and_data[2]
 

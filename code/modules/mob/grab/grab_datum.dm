@@ -47,6 +47,8 @@
 	var/list/break_chance_table = list(100)
 	var/breakability = 2
 
+	var/can_grab_self = 1
+
 	// The names of different intents for use in attack logs
 	var/help_action = "help intent"
 	var/disarm_action = "disarm intent"
@@ -97,8 +99,9 @@
 		return
 
 /datum/grab/proc/let_go(var/obj/item/grab/G)
-	let_go_effect(G)
-	G.force_drop()
+	if (G)
+		let_go_effect(G)
+		G.force_drop()
 
 /datum/grab/proc/on_target_change(var/obj/item/grab/G, old_zone, new_zone)
 	G.special_target_functional = check_special_target(G)
@@ -111,6 +114,9 @@
 	process_effect(G)
 
 /datum/grab/proc/throw_held(var/obj/item/grab/G)
+	if(G.assailant == G.affecting)
+		return
+
 	var/mob/living/carbon/human/affecting = G.affecting
 
 	if(can_throw)
@@ -125,7 +131,6 @@
 		if(!istype(G))	return
 		qdel(G)
 		return
-	return null
 
 /datum/grab/proc/hit_with_grab(var/obj/item/grab/G)
 	if(downgrade_on_action)
@@ -273,20 +278,31 @@
 	var/mob/living/carbon/human/assailant = G.assailant
 
 	if(affecting.incapacitated(INCAPACITATION_KNOCKOUT | INCAPACITATION_STUNNED))
-		to_chat(G.assailant, "<span class='warning'>You can't resist in your current state!</span>")
-	var/skill_mod = Clamp(affecting.get_skill_difference(SKILL_COMBAT, assailant), -1, 1)
+		to_chat(G.affecting, "<span class='warning'>You can't resist in your current state!</span>")
+	var/skill_mod = clamp(affecting.get_skill_difference(SKILL_COMBAT, assailant), -1, 1)
 	var/break_strength = breakability + size_difference(affecting, assailant) + skill_mod
+	var/shock = affecting.get_shock()
 
 	if(affecting.incapacitated(INCAPACITATION_ALL))
 		break_strength--
 	if(affecting.confused)
 		break_strength--
+	if(affecting.eye_blind)
+		break_strength--
+	if(affecting.eye_blurry)
+		break_strength--
+	if(shock >= 10)
+		break_strength--
+	if(shock >= 30)
+		break_strength--
+	if(shock >= 50)
+		break_strength--
 
 	if(break_strength < 1)
-		to_chat(G.assailant, "<span class='warning'>You try to break free but feel that unless something changes, you'll never escape!</span>")
+		to_chat(G.affecting, "<span class='warning'>You try to break free but feel that unless something changes, you'll never escape!</span>")
 		return
 
-	var/break_chance = break_chance_table[Clamp(break_strength, 1, break_chance_table.len)]
+	var/break_chance = break_chance_table[clamp(break_strength, 1, break_chance_table.len)]
 	if(prob(break_chance))
 		if(can_downgrade_on_resist && !prob((break_chance+100)/2))
 			affecting.visible_message("<span class='warning'>[affecting] has loosened [assailant]'s grip!</span>")

@@ -1,10 +1,8 @@
 /*
  MODULAR ANTAGONIST SYSTEM
 
- Attempts to move all the bullshit snowflake antag tracking code into its own system, which
- has the added bonus of making the display procs consistent. Still needs work/adjustment/cleanup
- but should be fairly self-explanatory with a review of the procs. Will supply a few examples
- of common tasks that the system will be expected to perform below. ~Z
+ Attempts to centralize antag tracking code into its own system, which has the added bonus of making 
+ the display procs consistent. Should be fairly self-explanatory with a review of the procs.
 
  To use:
 	- Get the appropriate datum via get_antag_data("antagonist id")

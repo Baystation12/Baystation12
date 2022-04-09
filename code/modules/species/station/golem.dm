@@ -11,6 +11,10 @@
 	spawn_flags = SPECIES_IS_RESTRICTED
 	siemens_coefficient = 0
 
+	meat_type = null
+	bone_material = null
+	skin_material = null
+
 	breath_type = null
 	poison_types = null
 
@@ -32,6 +36,12 @@
 	death_message = "becomes completely motionless..."
 	genders = list(NEUTER)
 
+	force_cultural_info = list(
+		TAG_CULTURE =   CULTURE_CULTIST,
+		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,
+		TAG_FACTION =   FACTION_OTHER
+	)
+
 /datum/species/golem/handle_post_spawn(var/mob/living/carbon/human/H)
 	if(H.mind)
 		H.mind.reset()
@@ -39,7 +49,11 @@
 		H.mind.special_role = "Golem"
 	H.real_name = "golem ([rand(1, 1000)])"
 	H.SetName(H.real_name)
+	H.status_flags |= NO_ANTAG
 	..()
 
 /datum/species/golem/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL)
+
+/datum/species/golem/can_float(mob/living/carbon/human/H)
+	return FALSE

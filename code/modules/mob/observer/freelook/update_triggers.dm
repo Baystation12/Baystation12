@@ -15,16 +15,6 @@
 		updateVisibility(src)
 	. = ..()
 
-/atom/movable/Move()
-	. = ..()
-	if(opacity && .)
-		updateVisibility(src)
-
-/atom/movable/forceMove()
-	. = ..()
-	if(opacity && .)
-		updateVisibility(src)
-
 // DOORS
 
 // Simply updates the visibility of the area when it opens/closes/destroyed.

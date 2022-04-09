@@ -18,6 +18,8 @@ var/const/SMES_WIRE_FAILSAFES = 16	// Cut to disable failsafes, mend to reenable
 
 /datum/wires/smes/CanUse(var/mob/living/L)
 	var/obj/machinery/power/smes/buildable/S = holder
+	if(!S.grounding && S.powernet && S.powernet.avail)
+		electrocute_mob(L, S.powernet, S, S.safeties_enabled? 0.1 : 1)
 	if(S.panel_open)
 		return 1
 	return 0

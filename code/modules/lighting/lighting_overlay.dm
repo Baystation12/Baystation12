@@ -2,8 +2,8 @@
 /atom/movable/lighting_overlay
 	name = ""
 	mouse_opacity = 0
-	simulated = 0
-	anchored = 1
+	simulated = FALSE
+	anchored = TRUE
 	icon = LIGHTING_ICON
 	plane = LIGHTING_PLANE
 	layer = LIGHTING_LAYER
@@ -11,8 +11,9 @@
 	color = LIGHTING_BASE_MATRIX
 	icon_state = "light1"
 	blend_mode = BLEND_OVERLAY
+	vis_flags = VIS_HIDE
 
-	appearance_flags = 0
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS
 
 	var/lum_r = 0
 	var/lum_g = 0
@@ -22,6 +23,7 @@
 
 /atom/movable/lighting_overlay/Initialize()
 	// doesn't need special init
+	SHOULD_CALL_PARENT(FALSE)
 	atom_flags |= ATOM_FLAG_INITIALIZED
 	return INITIALIZE_HINT_NORMAL
 
@@ -114,6 +116,8 @@
 		)
 
 	luminosity = set_luminosity
+	// if (T.above && T.above.shadower)
+	// 	T.above.shadower.copy_lighting(src)
 
 // Variety of overrides so the overlays don't get affected by weird things.
 /atom/movable/lighting_overlay/ex_act()
@@ -133,7 +137,11 @@
 	. = ..()
 
 /atom/movable/lighting_overlay/forceMove()
-	return 0 //should never move
+	//should never move
+	//In theory... except when getting deleted :C
+	if(QDELING(src))
+		return ..()
+	return 0
 
 /atom/movable/lighting_overlay/Move()
 	return 0

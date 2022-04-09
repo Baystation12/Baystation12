@@ -24,7 +24,7 @@
 /repository/decls/proc/get_decls(var/list/decl_types)
 	. = list()
 	for(var/decl_type in decl_types)
-		.[decl_type] =  get_decl(decl_type)
+		.[decl_type] = get_decl(decl_type)
 
 /repository/decls/proc/get_decls_unassociated(var/list/decl_types)
 	. = list()
@@ -44,8 +44,10 @@
 		fetched_decl_subtypes[decl_prototype] = .
 
 /decl/proc/Initialize()
-	return
+	SHOULD_CALL_PARENT(TRUE)
+	SHOULD_NOT_SLEEP(TRUE)
 
 /decl/Destroy()
+	SHOULD_CALL_PARENT(FALSE)
 	crash_with("Prevented attempt to delete a decl instance: [log_info_line(src)]")
 	return QDEL_HINT_LETMELIVE // Prevents Decl destruction

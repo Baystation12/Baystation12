@@ -1,4 +1,4 @@
-/obj/item/weapon/book/union_charter
+/obj/item/book/union_charter
 	name = "\improper Union Charter"
 	title = "Union Charter of Workplace Rights"
 	author = "Expeditionary Corps Organisation Corporate Union"
@@ -66,7 +66,7 @@
 	<p>Persons who control, manage or own workplaces have an absolute duty of care without limitation to provide and maintain safe and healthy work environments. Employers will not shift jurisdictions to attempt to avoid their OHS and workers compensation responsibilities and obligations. Employers are subject to all the obligations and responsibilities contained within this Charter.</p>
 	<h2>5. Compensation</h2>
 	<hr>
-	<p>Following a physical or psychological injury, all workers have the right to a fair, just and equitable compensation system, which promotes the best medical and like support, the most effective rehabilitation for injured workers and facilitates a safe return to work that offers genuine job security. Workers’ compensation standards are to:</p>
+	<p>Following a physical or psychological injury, all workers have the right to a fair, just and equitable compensation system, which promotes the best medical and like support, the most effective rehabilitation for injured workers and facilitates a safe return to work that offers genuine job security. Workers' compensation standards are to:</p>
 	<li>Be available to all members of the workforce;</li>
 	<li>Provide compensation for all injuries that arise from travel to, from or during work including and during recess breaks;</li>
 	<li>Be available upon the death of a worker and for dependants of that worker;</li>

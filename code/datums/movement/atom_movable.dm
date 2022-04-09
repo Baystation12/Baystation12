@@ -12,9 +12,9 @@
 	if(!istype(AM))
 		return
 	. = AM.DoMove(direction, mover, FALSE)
-	if(!(. & MOVEMENT_HANDLED))
-		. = MOVEMENT_HANDLED
+	if(!(. & MOVEMENT_HANDLED) && !(direction & (UP|DOWN)))
 		AM.relaymove(mover, direction)
+	return MOVEMENT_HANDLED
 
 // Movement delay
 /datum/movement_handler/delay

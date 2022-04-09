@@ -17,8 +17,6 @@
 		update_items()
 	if (src.stat != DEAD) //still using power
 		use_power()
-		process_killswitch()
-		process_locks()
 		process_queued_alarms()
 	UpdateLyingBuckledAndVerbStatus()
 
@@ -53,17 +51,17 @@
 			else
 				cell_use_power(30) 	// 30W light. Normal lights would use ~15W, but increased for balance reasons.
 
-		src.has_power = 1
+		src.has_power = TRUE
 	else
 		power_down()
 
 /mob/living/silicon/robot/proc/power_down()
 	if (has_power)
-		to_chat(src, "<span class='warning'>You are now running on emergency backup power.</span>")
-		has_power = 0
+		visible_message("[src] beeps stridently as it begins to run on emergency backup power!", SPAN_WARNING("You beep stridently as you begin to run on emergency backup power!"))
+		has_power = FALSE
 		set_stat(UNCONSCIOUS)
 	if(lights_on) // Light is on but there is no power!
-		lights_on = 0
+		lights_on = FALSE
 		set_light(0)
 
 /mob/living/silicon/robot/handle_regular_status_updates()
@@ -121,9 +119,9 @@
 
 	src.set_density(!src.lying)
 
-	if ((src.sdisabilities & BLIND))
+	if ((src.sdisabilities & BLINDED))
 		src.blinded = 1
-	if ((src.sdisabilities & DEAF))
+	if ((src.sdisabilities & DEAFENED))
 		src.ear_deaf = 1
 
 	if (src.eye_blurry > 0)
@@ -135,7 +133,7 @@
 		src.druggy = max(0, src.druggy)
 
 	//update the state of modules and components here
-	if (src.stat != 0)
+	if (src.stat != CONSCIOUS)
 		uneq_all()
 
 	if(silicon_radio)
@@ -144,7 +142,7 @@
 		else
 			silicon_radio.on = 1
 
-	if(is_component_functioning("camera"))
+	if(isnull(components["camera"]) || is_component_functioning("camera"))
 		src.blinded = 0
 	else
 		src.blinded = 1
@@ -216,7 +214,7 @@
 
 	if (src.cells)
 		if (src.cell)
-			var/chargeNum = Clamp(ceil(cell.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
+			var/chargeNum = clamp(Ceil(cell.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
 			src.cells.icon_state = "charge[chargeNum]"
 		else
 			src.cells.icon_state = "charge-empty"
@@ -234,9 +232,23 @@
 			else
 				src.bodytemp.icon_state = "temp-2"
 
-//Oxygen and fire does nothing yet!!
-//	if (src.oxygen) src.oxygen.icon_state = "oxy[src.oxygen_alert ? 1 : 0]"
-//	if (src.fire) src.fire.icon_state = "fire[src.fire_alert ? 1 : 0]"
+	var/datum/gas_mixture/environment = loc?.return_air()
+	if(fire && environment)
+		switch(environment.temperature)
+			if(-INFINITY to T100C)
+				src.fire.icon_state = "fire0"
+			else
+				src.fire.icon_state = "fire1"
+	if(oxygen && environment)
+		var/datum/species/species = all_species[SPECIES_HUMAN]
+		if(environment.gas[species.breath_type] >= species.breath_pressure)
+			src.oxygen.icon_state = "oxy0"
+			for(var/gas in species.poison_types)
+				if(environment.gas[gas])
+					src.oxygen.icon_state = "oxy1"
+					break
+		else
+			src.oxygen.icon_state = "oxy1"
 
 	if(stat != DEAD)
 		if(blinded)
@@ -289,7 +301,7 @@
 	if (src.client)
 		src.client.screen -= src.contents
 		for(var/obj/I in src.contents)
-			if(I && !(istype(I,/obj/item/weapon/cell) || istype(I,/obj/item/device/radio)  || istype(I,/obj/machinery/camera) || istype(I,/obj/item/device/mmi)))
+			if(I && !(istype(I,/obj/item/cell) || istype(I,/obj/item/device/radio)  || istype(I,/obj/machinery/camera) || istype(I,/obj/item/device/mmi)))
 				src.client.screen += I
 	if(src.module_state_1)
 		src.module_state_1:screen_loc = ui_inv1
@@ -299,31 +311,13 @@
 		src.module_state_3:screen_loc = ui_inv3
 	update_icon()
 
-/mob/living/silicon/robot/proc/process_killswitch()
-	if(killswitch)
-		killswitch_time --
-		if(killswitch_time <= 0)
-			if(src.client)
-				to_chat(src, "<span class='danger'>Killswitch Activated</span>")
-			killswitch = 0
-			spawn(5)
-				gib()
-
-/mob/living/silicon/robot/proc/process_locks()
-	if(weapon_lock)
-		uneq_all()
-		weaponlock_time --
-		if(weaponlock_time <= 0)
-			if(src.client)
-				to_chat(src, "<span class='danger'>Weapon Lock Timed Out!</span>")
-			weapon_lock = 0
-			weaponlock_time = 120
-
 /mob/living/silicon/robot/update_fire()
 	overlays -= image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
 	if(on_fire)
 		overlays += image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
 
 /mob/living/silicon/robot/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	if (status_flags & GODMODE)
+		return
 	if(!on_fire) //Silicons don't gain stacks from hotspots, but hotspots can ignite them
 		IgniteMob()

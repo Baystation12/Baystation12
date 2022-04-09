@@ -12,8 +12,7 @@
 	distance = "1.5AU"
 	capital = "Olympus"
 	economic_power = 1.1
-	language = LANGUAGE_SOL_COMMON
-	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_GALCOM)
+
 
 /decl/cultural_info/location/human/earth
 	name = HOME_SYSTEM_EARTH
@@ -24,7 +23,6 @@
 	Earth are among the wealthier humans on average, though they are still comparable with those of Mars. Remarkably average, the people of Earth are \
 	much as they have been for hundreds of years, and are generally content with their lot in life. From a variety of ancient cultures, the people of \
 	Earth are as diverse as they have always been."
-	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_LUNAR)
 	distance = "1AU"
 	capital = "Geneva"
 	economic_power = 1.2
@@ -46,8 +44,7 @@
 	the poverty line, often holding feelings of resentment against the other people of Luna."
 	capital = "Selene"
 	economic_power = 1.3
-	language = LANGUAGE_LUNAR
-	secondary_langs = list(LANGUAGE_SIGN,LANGUAGE_SOL_COMMON)
+	secondary_langs = list(LANGUAGE_HUMAN_SELENIAN)
 
 /decl/cultural_info/location/human/venus
 	name = HOME_SYSTEM_VENUS
@@ -77,8 +74,6 @@
 	employed in shipbuilding, manufacturing, vessel services and hospitality. Belters generally regard themselves as adaptive, proud members of the SCG \
 	and some of the best engineers Humanity has to offer."
 	capital = "Government Zone, Ceres Station"
-	language = LANGUAGE_SPACER
-	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_SOL_COMMON, LANGUAGE_GUTTER)
 
 /decl/cultural_info/location/human/pluto
 	name = HOME_SYSTEM_PLUTO
@@ -93,8 +88,7 @@
 	manage to escape rarely wish to return, though often possess a looser set of morales as a result of their time on the planet."
 	capital = "New Santa Domingo"
 	economic_power = 0.8
-	language = LANGUAGE_GUTTER
-	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_SOL_COMMON, LANGUAGE_SPACER)
+	secondary_langs = list(LANGUAGE_GUTTER)
 
 /decl/cultural_info/location/human/cetiepsilon
 	name = HOME_SYSTEM_TAU_CETI
@@ -111,8 +105,6 @@
 	of Ceti Episilon have developed a reputation for being some of the best and brightest that Sol has to offer."
 	capital = "Verlize"
 	economic_power = 1.4
-	language = LANGUAGE_GALCOM
-	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SIGN)
 
 /decl/cultural_info/location/human/eos
 	name = HOME_SYSTEM_HELIOS
@@ -124,8 +116,6 @@
 	SCG. This process was hindered during the Gaia conflict, when the Helios Gateway was destroyed in a suicide action of the Fourth Fleet to stop the GCC advance. It has recovered rapidly \
 	since the occupation, though the memories of that event carry in the collective consciousness of those who remained through it."
 	capital = "Surya"
-	language = LANGUAGE_SOL_COMMON
-	secondary_langs = list(LANGUAGE_SIGN, LANGUAGE_SPACER)
 	economic_power = 1.3
 	distance = "10 light years"
 
@@ -138,125 +128,73 @@
 	increasingly high taxes. This state of affairs has seen the immigration of many Terran citizens to the SCG in recent years, hoping to escape the poor conditions they found themselves in. Despite this,\
 	the people of Terra are a proud and unbroken people who are heavily patriotic and tend to bring this with them wherever they go."
 	capital = "Ameranth"
-	language = LANGUAGE_INDEPENDENT
-	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_GALCOM)
 	distance = "22.5 light years."
 	economic_power = 0.9
 	ruling_body = "Gilgamesh Colonial Confederation"
+	language = LANGUAGE_HUMAN_RUSSIAN
 
-/decl/cultural_info/location/human/tersten
-	name = HOME_SYSTEM_TERSTEN
-	distance = "52 light years"
-	description = "Tersten is a large plains world in the Gavil system.  With vast mountain ranges, prairie, mesas, forests and deserts, it is a diverse planet. \
-	The capital city is known as Tersten City, or locally as Freetown. Originally founded as a penal colony, the planet abolished this system in 2480. \
-	It is the 4th largest producer of food in the Sol Central Government. Additional exports include building materials and electronics. \
-	The planet's population is primarily divided into northern, urban Tersteners who often are seen in the military; and southern, rural Tersteners, who make up the farmers and ranchers of the planet. \
-	While much of the North has been developed, large parts of the South remain undeveloped. \
-	Tersten is an isolated border world, with little influence in the larger community. Still, it is a proud member of the SCG, and Tersten City has become a haunt for Third Fleet forces on shore leave. \
-	The OCIE maintain an office in the city of Moore, and various Trans-Stellar Corporations have a foothold in the city of South Harelstone. \
-	<br><br>The Tersten people are separated into various cultures. For example, urban Tersteners, known as 'Pinascs', live around Tersten City, and are often seen in the defence forces.  \
-	Rural Tersteners, known as 'Nevokies', live in the south central region around the city of Nevada.  Many Martian and Earthling enclaves exist on the planet, significantly in South Harelstone. \
-	The divide between north and south could also be considered a divide between rich and poor. Even the poorest city dweller will likely be richer than most farmers. \
-	Typically untrusting, once a Terstener has made a friend, they will often be that way for life.  Known for their community and attitudes to strangers, they are considered the cowboys of Sol Central. \
-	Many Tersteners serve in the Defence Forces, and many gave their lives in the Gaian Conflict."
-	capital = "Tersten City"
-	economic_power = 1.0
-	language = LANGUAGE_GALCOM
-	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SIGN)
-
-/decl/cultural_info/location/human/lorriman
-	name = HOME_SYSTEM_LORRIMAN
+/decl/cultural_info/location/human/saffar
+	name = HOME_SYSTEM_SAFFAR
 	distance = "44 light years"
-	description = "Lorriman is an arctic planet in the Gessshire system.  It is a frozen wasteland with winds reaching 200mph, with an average temperature is -50°C. \
-	Because of this, the planet's cities are either domed or built into mountains. Its economy is built around a technological backbone, providing the technology \
-	and the people skilled to use them.  Its infrastructure is developed enough to support mass transit across the planet. Its capital city is called The Hub, a massive domed structure \
-	that serves both as a spaceport, administrative hub, and habitation zone. It remains the only place on the planet accessible to non-Lorrimanians. \
-	Despite its isolation, the Scientific Institute of Gessshire remains amicable with Sol Central.  The Institute is a technocratic republic led by Dr. Johan Montgomery. \
-	It is known by most Defence Forces personnel to act begrudgingly towards any requests given, and only a select few have visited the planet itself.<br><br>\
-	Lorrimanians are a quiet, unassuming, academically-driven bunch. They are often sought as researchers or other scientifically-driven career.  It is rare for anyone to immigrate \
-	to the planet, but exceptions have been made. A scientifically driven people, they have served many organisations loyally."
-	capital = "The Hub"
-	economic_power = 1.0
-	secondary_langs = list(LANGUAGE_SIGN)
-
-/decl/cultural_info/location/human/cinu
-	name = HOME_SYSTEM_CINU
-	distance = "48 light years"
-	description = "Cinu is an occupied desert planet, located in the Lucinaer system. It is today part of a greater community within the Sol Central Government. \
-	Twice the size of Earth, much of its surface is unoccupied desert, with the vast majority of population living around either the various oases, or in the less \
-	harsh northern regions.  Home to around 20 Million people, it welcomes nearly 50,000 immigrants yearly. Cinu's capital, 'Al-Mular', is home to several major \
-	Peacekeeping Forces offices, with nearly 30,000 Cinuans serving every year.  The Republic of Cinu is comprised of seven political regions, and maintained by \
-	the Congress of the Cinuan People. A direct democracy, its people vote directly on matters related to their state. Because of this, Cinu exerts little influence \
-	on the rest of space. Cinu's population are overall well off, with a stable economy and decent education.  This varies by region however, with some of the population \
-	falling well below the standard poverty line. Cinu is considered one of the most developed democratic systems in space, with relatively little internal conflict. \
-	<br><br>The Cinuan people ethnically range from Martian Tharseese to Old Earth Arabic, West Asian and Central Asian cultures. From a harsh, duned desert planet, they \
-	are known for characteristic firmness disguising fierce friendliness. Its people have suffered in the past, but today look towards a bright future. They are known to be pacifist,\
-	with many refusing to participate in the Defence Forces. Instead, they serve as peacekeepers and diplomats. The Cinuan People were controversially non-aligned during the Gaian Conflict."
-	capital = "Al-Mular"
-	economic_power = 1.0
-	language = LANGUAGE_GALCOM
-	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SIGN)
-
-/decl/cultural_info/location/human/yuklid
-	name = HOME_SYSTEM_YUKLID
-	distance = "42 light years"
-	description = "Yuklid V is an occupied jungle world in the Yuklid system.  It is home to large medical facilities and corporate holdings, serving as home to this region of space's medical academia. \
-	Large parts of Yuklid have been retained as nature and botanical reserves.  Most medicines produced in the outer regions of Sol Central can trace their origins to this planet. \
-	Much of Yuklid is uncolonised, with infrastructure focused around the planet's poles.  One such facility is the Vey-Med Operational Headquarters. \
-	The Republic of Yuklid is a minor political player within the SCG, and the Expeditionary Corps use the planet for exoplanet training. It is protected by the Third Fleet. \
-	<br><br>The Yuklid people mostly keep to themselves, with little emigration.  The population that do leave the planet typically pursue careers in medicine. \
-	Being from a small colonial system, those that do join the Defence Forces have usually never seen the level of development the Sol System has. \
-	More recently, a spiritualist movement has developed on the planet, taking aspects of religious theory and the hippocratic oath."
-	capital = "Iyeegi"
-	economic_power = 0.9
-	language = LANGUAGE_GALCOM
-	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_SIGN)
-
-/decl/cultural_info/location/human/lordania
-	name = HOME_SYSTEM_LORDANIA
-	distance = "40 light years"
-	description = "Lordania is a heavily developed plains world in the Lordania system.  The planet has developed five large mega-cities, connected by various suburban developments. \
-	Heavy use of dams and nature reserves have allowed the people to terraform parts of the planet.  Historically, the planet has had a large wealth gap, \
-	which recent years have only made worse.  The planet's economy has been rebuilt from the ground up around entertainment and the arts. The New Ares Metroplex is the entertainment, \
-	and fashion capital of the outer rim of the SCG.  Numerous TSCs bought up parts of the planet during the economic depression, and now fully exploit the success.  It is not a city planet, but \
-	it could become one in the next 300 years. The planet enjoys warm relations with its neighbor Kingston. Lordania can be described as an aristocratic republic, and have historical \
-	ties with the political families of Luna. <br><br>  The people of Lordania are divided into two parts, Upper and Lower Lordanians.  Upper Lordanians are wealthy, and are \
-	typically only seen on the planet, or in entertainment medias. Lower Lordanians are more common, and many opt leave their home planet. Historically, Lordanians have a superiority complex, \
-	and often see themselves as better. Most Lordanians are seen as untrustworthy, or selfish. As such, they are rarely seen within Sol's Defence Forces."
-	capital = "New Ares"
+	description = "Saffar is a gas giant in the Upsilon Andromedae system.  Comparable in size to Jupiter, the surface is uninhabitable to most higher life. \
+	However, because of the system's proximity to several other colonies and Saffar's atmospheric composition, a gas mining and refueling station was constructed in high orbit c. 2198. \
+	Over time, the station expanded to accommodate higher traffic and an ever-growing number of permanent residents, culminating in the construction of a gateway in-system  \
+	shortly after the war between the Terran Commonwealth and the Ares Confederation ended c. 2230. Since the construction of the gateway, Saffar is nominally under the  \
+	jurisdiction of the SCG's Gateway Administration, although Saffarite efforts to be considered a member state have been underway since the SCG was first formed."
+	capital = "Saffar Station"
 	economic_power = 1.2
-	language = LANGUAGE_GALCOM
-	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_LUNAR)
 
-/decl/cultural_info/location/human/kingston
-	name = HOME_SYSTEM_KINGSTON
-	distance = "40 light years"
-	description = "Kingston is an occupied ocean world made of various archipelagos, within the Lordania system. The planet's surface is 90% water, and much of the population live around the equator. \
-	The planet is a humid subtropical world, and a huge tourist destination for Sol citizens.  Kingston is extremely multicultural, and many old human cultures still hold an enclave. It also contains a large \
-	number of Tritonians, both as tourists and residents. An estimated 15 million tourists visit annually.  While a highway and magnetic train system link many of the islands, boats are incredibly popular amongst \
-	tourists and workers alike. Many of the islands on the planet have been created via tectonic plates or volcanic eruption, making the planet more geologically active than Earth. \
-	Despite this, technology of the 26th century has developed enough to mitigate most structural damage done in the event of earthquakes or tsunamis. \
-	Formally the United Nations of Kingston, the planet is made up of multiple island nations and several planetary representatives.<br><br>The people of Kingston are relatively unassuming. They have much in common with \
-	their Sol brothers, and are usually seen onboard most SCG Vessels.  Growing up on a waterworld, most Kingstonians can sail a boat, something rare in the 26th Century.  \
-	Typically dark in skin due to the planet's proximity to it's sun, Kingstonians come in various forms."
-	capital = "New Havana"
+/decl/cultural_info/location/human/tadmor
+	name = HOME_SYSTEM_TADMOR
+	distance = "45 light years"
+	description = "Tadmor is a desert planet about twice the size of Earth, located in the Gamma Cephei system. Tadmor has been a member state of the Sol Central Government since the \
+	latter's formation. First settled in 2176 by a group of Martian colonists, Tadmor's economy is based on both industrial-scale agriculture and the fabrication of various electronic goods. \
+	Tadmorans have prided themselves on their pacifism, with few found in Sol's defense forces. However, this lead to some conflict during the Gaia Conflict between Tadmoran senators and those \
+	of the core worlds."
+	capital = "Palmyra"
+	economic_power = 1.0
+
+/decl/cultural_info/location/human/pirx
+	name = HOME_SYSTEM_PIRX
+	distance = "41 light years"
+	description = "Pirx Prime is a colonized super-earth located in the Pirx system. Covered in a jungle of towering, exotic plantlife, Pirx is closer to unexplored \
+	space than it is to most other colonies. Pirx has suffered from this disconnect, with few corporate investors and fewer immigrants. As such, most of the planet remains \
+	unexplored. With the recent resurgence of the Expeditionary Corps, Pirx has found itself rapidly thrust into a position as both a sort of supply and fuel stop for EC vessels \
+	and a training ground for prospective explorers. The long-term neglect and then sudden exploitation has fostered a bitter attitude towards the SCG and the EC in many Pirxans."
+	capital = "Yuodu"
+	economic_power = 0.7
+
+/decl/cultural_info/location/human/brahe
+	name = HOME_SYSTEM_BRAHE
+	distance = "41 light years"
+	description = "Brahe is an ocean planet in the Copernicus system. First colonized alongside Iolaus by sleeper ships c. 2132, contact was temporarily lost during the war between the Terran Commonwealth \
+	and the Ares Confederation. Since contact was reestablished during the formation of the Sol Central Government, Brahe has been a strong supporter of the SCG and an advocate for further expansion into \
+	unexplored space. With only 12% of the planet's surface being usable landmass, Brahe's economy is mostly founded on the tourism that the extensive coasts attract, and research done \
+	in surface and underwater labs. The Zeng-Hu corporation in particular has strong ties to Brahe's genetic research labs, and many Brahese government officials hold positions within the company."
+	capital = "New Aarhus"
 	economic_power = 1.1
-	language = LANGUAGE_SOL_COMMON
-	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_GALCOM)
+
+/decl/cultural_info/location/human/iolaus
+	name = HOME_SYSTEM_IOLAUS
+	distance = "41 light years"
+	description = "Iolaus is a super-earth in the Copernicus system. First colonized alongside Brahe by sleeper ships c. 2132, contact was temporarily lost during the war between the Terran Commonwealth \
+	and the Ares Confederation. During this period of time, Iolaus kept the two fledgling colonies alive, producing enough food and supplies for the two planets to scrape by. Since contact was reestablished \
+	during the formation of the Sol Central Government, Iolaus has taken efforts to retain some independence while taking advantage of the reintroduction of trade to the system. As a result, Iolaus imports \
+	tend to be restricted to only what they cannot produce themselves, while Iolan exports are shipped across the entirety of SCG space."
+	capital = "Nemea"
+	economic_power = 1.0
 
 /decl/cultural_info/location/human/gaia
 	name = HOME_SYSTEM_GAIA
 	distance = "14 light years"
 	description = "Gaia is the sole planet in the Galilei system, serving as the DMZ between the SCG and the GCC. \
 	It is an agricultural world, though various conflicts across the planet's surface have left it scarred. The planet is divided into \
-	Sol-Controlled <b>Northern Gaia</b> and Independent-Controlled <b>Southern Gaia</b>, with New Venice remaining a neutral zone inside the DMZ. \
-	The planet's population remain divided even 20 years after the Gaian Conflict. New Venice sits on the edge of Lake Cabot. While Gaia is divided \
+	Sol-Controlled <b>Southern Gaia</b> and Independent-Controlled <b>Northern Gaia</b>, with New Venice remaining a neutral zone inside the DMZ. \
+	The planet's population remain divided even 10 years after the Gaian Conflict. New Venice sits on the edge of Lake Cabot. While Gaia is divided \
 	the current Mayor of New Venice serves as a vital mediator between both sides. <br><br> The Gaian People are tired of war, and long to see their families \
 	once again.  They suffered hard twenty years prior, and fear they may suffer again."
 	capital = "New Venice"
 	economic_power = 1.0
-	language = LANGUAGE_SOL_COMMON
-	secondary_langs = list(LANGUAGE_INDEPENDENT, LANGUAGE_GALCOM)
 
 /decl/cultural_info/location/human/magnitka
 	name = HOME_SYSTEM_MAGNITKA
@@ -268,6 +206,28 @@
 	Though historically relatively isolationist, today Magnitka finds itself more and more closely associated with the Gilgamesh Colonial Confederation, in an effort to offset its economic decline."
 	capital = "Labortown"
 	economic_power = 0.8
-	language = LANGUAGE_SOL_COMMON
-	secondary_langs = list(LANGUAGE_GALCOM)
 	ruling_body = "Magnitka"
+
+/decl/cultural_info/location/human/castilla
+	name = HOME_SYSTEM_CASTILLA
+	distance = "10 light years"
+	description = "Nueva Castilla is an exoplanet in the Culebre system, currently \
+	in the late stages of terraforming. Formerly a barren rock, it was chosen for future \
+	colonization because of its size, core composition and location in the Culebre system's \
+	'goldilocks zone'. Since the project began, Nueva Castilla has developed a functional, if \
+	decidedly unique biosphere where much of the planet is covered in a fast growing moss. \
+	There are two major human settlements, and a number of smaller ones both planetside and in-system."
+	capital = "Placida"
+	economic_power = 1.0
+
+/decl/cultural_info/location/human/fosters
+	name = HOME_SYSTEM_FOSTER
+	distance = "11 light years"
+	description = "Foster's World, located in the Sanura system, is a small, icy exoplanet with \
+	a planetary mass slightly lower than Earth. A highly active core caused the formation of \
+	several small oceans with wide and temperate coastlines, the only reason the planet sports a \
+	breathable atmosphere at all. The planet and system are owned by a privately-funded \
+	cooperative. The colonists who brave the planet have flourished in spite of the planet's \
+	hostile weather, exporting seafood and hosting tourists eager to experience the alien planet."
+	capital = "Foster's Landing"
+	economic_power = 1.2

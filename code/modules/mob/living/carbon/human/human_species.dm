@@ -5,22 +5,9 @@
 
 /mob/living/carbon/human/dummy/mannequin/Initialize()
 	. = ..()
-	STOP_PROCESSING(SSmobs, src)
+	STOP_PROCESSING_MOB(src)
 	GLOB.human_mob_list -= src
 	delete_inventory()
-
-/mob/living/carbon/human/corpse/Initialize(mapload, new_species, obj/effect/landmark/corpse/corpse)
-	. = ..(mapload, new_species)
-
-	adjustOxyLoss(maxHealth)//cease life functions
-	setBrainLoss(maxHealth)
-	var/obj/item/organ/internal/heart/corpse_heart = internal_organs_by_name[BP_HEART]
-	if(corpse_heart)
-		corpse_heart.pulse = PULSE_NONE//actually stops heart to make worried explorers not care too much
-	if(corpse)
-		corpse.randomize_appearance(src, new_species)
-		corpse.equip_outfit(src)
-	update_icon()
 
 /mob/living/carbon/human/dummy/mannequin/add_to_living_mob_list()
 	return FALSE
@@ -57,7 +44,8 @@
 	..(new_loc, SPECIES_NABBER)
 
 /mob/living/carbon/human/monkey/New(var/new_loc)
-	..(new_loc, "Monkey")
+	gender = pick(MALE, FEMALE)
+	..(new_loc, SPECIES_MONKEY)
 
 /mob/living/carbon/human/farwa/New(var/new_loc)
 	..(new_loc, "Farwa")

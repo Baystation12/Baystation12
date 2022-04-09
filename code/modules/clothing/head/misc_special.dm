@@ -21,8 +21,11 @@
 		)
 	matter = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 1000)
 	var/up = 0
-	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_SMALL
+		)
 	flags_inv = (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
+	item_flags = null
 	body_parts_covered = HEAD|FACE|EYES
 	action_button_name = "Flip Welding Mask"
 	siemens_coefficient = 0.9
@@ -116,6 +119,7 @@
 	item_state = "cake0"
 	var/onfire = 0
 	body_parts_covered = HEAD
+	item_flags = null
 
 /obj/item/clothing/head/cakehat/Process()
 	if(!onfire)
@@ -181,8 +185,9 @@
 	desc = "A jack o' lantern! Believed to ward off evil spirits."
 	icon_state = "hardhat0_pumpkin"//Could stand to be renamed
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	item_flags = null
 	body_parts_covered = HEAD|FACE|EYES
-	brightness_on = 2
+	brightness_on = 0.2
 	light_overlay = "helmet_light"
 	w_class = ITEM_SIZE_NORMAL
 

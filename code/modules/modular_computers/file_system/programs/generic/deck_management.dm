@@ -7,10 +7,14 @@
 	filename = "deckmngr"
 	filedesc = "Deck Management"
 	nanomodule_path = /datum/nano_module/deck_management
+	program_icon_state = "request"
+	program_key_state = "rd_key"
+	program_menu_icon = "clock"
 	extended_desc = "A tool for managing shuttles, filling out flight plans, and submitting flight-related paperwork."
 	size = 18
-	available_on_ntnet = 1
-	requires_ntnet = 1
+	available_on_ntnet = TRUE
+	requires_ntnet = TRUE
+	category = PROG_SUPPLY
 
 /datum/nano_module/deck_management
 	name = "Deck Management Program"
@@ -147,7 +151,7 @@
 	var/mission_data = list()
 	mission_data["name"] = mission.name
 	mission_data["departure"] = mission.depart_time || "N/A"
-	mission_data["return"] = mission.return_time || "N/A"
+	mission_data["return_time"] = mission.return_time || "N/A"
 	switch(mission.stage)
 		if(SHUTTLE_MISSION_QUEUED)
 			mission_data["status"] = "Mission Scheduled."
@@ -267,8 +271,11 @@
 				if(selected_mission.stage in list(SHUTTLE_MISSION_PLANNED, SHUTTLE_MISSION_QUEUED))
 					return 1 //Hold your horses until the mission is started on these reports.
 				var/index = text2num(href_list["index"])
-				var/datum/computer_file/report/prototype = listgetindex(report_prototypes, index)
-				if(!index) return 1
+				if(!index)
+					return 1
+				var/datum/computer_file/report/prototype = LAZYACCESS(report_prototypes, index)
+				if (!prototype)
+					return 1
 				prog_state = DECK_REPORT_EDIT
 				var/datum/computer_file/report/old_report = locate(prototype.type) in selected_mission.other_reports
 				if(old_report)
@@ -322,8 +329,8 @@
 		var/crew = selected_mission.flight_plan.manifest.get_value(in_line = 1)
 		var/time = selected_mission.flight_plan.planned_depart.get_value()
 		if(!crew || !time)
-			return 1
 			to_chat(user, "<span class='warning'>Please fill in the crew manifest and departure time first.</span>")
+			return 1
 		var/place = selected_shuttle.name
 		if(alert(user, "Would you like to choose a custom gathering point, or just use [place]?", "Announcement Creation", "Default", "Custom") == "Custom")
 			var/list/areas = area_repository.get_areas_by_name()

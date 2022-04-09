@@ -26,7 +26,7 @@
 		update = 0
 		reconcile_air() //equalize_gases(gases)
 
-	//Give pipelines their process call for pressure checking and what not. Have to remove pressure checks for the time being as pipes dont radiate heat - Mport
+	//Give pipelines their process call for pressure checking and what not. Have to remove pressure checks for the time being as pipes don't radiate heat - Mport
 	//for(var/datum/pipeline/line_member in line_members)
 	//	line_member.process()
 

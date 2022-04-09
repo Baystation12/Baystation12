@@ -1,3 +1,7 @@
+/datum/codex_category/reagents/
+	name = "Reagents"
+	desc = "Chemicals and reagents, both natural and artificial."
+
 /datum/codex_category/reagents/Initialize()
 
 	for(var/thing in subtypesof(/datum/reagent))
@@ -11,7 +15,7 @@
 		 _lore_text = "[initial(reagent.description)] It apparently tastes of [initial(reagent.taste_description)].")
 
 		var/list/production_strings = list()
-		for(var/react in SSchemistry.chemical_reactions_by_result[thing])
+		for(var/react in SSchemistry.reactions_by_result[thing])
 
 			var/datum/chemical_reaction/reaction = react
 
@@ -44,4 +48,7 @@
 				entry.mechanics_text += "<br><br>It can be produced as follows:<br>"
 			entry.mechanics_text += jointext(production_strings, "<br>")
 
-		SScodex.entries_by_string[entry.display_name] = entry
+		entry.update_links()
+		SScodex.add_entry_by_string(entry.display_name, entry)
+		items += entry.display_name
+	..()

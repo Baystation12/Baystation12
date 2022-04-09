@@ -7,9 +7,10 @@
 	program_menu_icon = "radio-on"
 	extended_desc = "This program connects to shield generators and monitors their statuses."
 	ui_header = "shield.gif"
-	requires_ntnet = 1
+	requires_ntnet = TRUE
 	network_destination = "shields monitoring system"
 	size = 10
+	category = PROG_ENG
 
 /datum/nano_module/shields_monitor
 	name = "Shields monitor"
@@ -20,12 +21,8 @@
 	deselect_shield()
 
 /datum/nano_module/shields_monitor/proc/get_shields()
-	var/turf/T = get_turf(nano_host())
-	if(!T)
-		return list()
-
 	var/list/shields = list()
-	var/connected_z_levels = GetConnectedZlevels(T.z)
+	var/connected_z_levels = GetConnectedZlevels(get_host_z())
 	for(var/obj/machinery/power/shield_generator/S in SSmachines.machinery)
 		if(!(S.z in connected_z_levels))
 			continue
@@ -50,6 +47,10 @@
 		data["field_integrity"] = active.field_integrity()
 		data["max_energy"] = round(active.max_energy / 1000000, 0.1)
 		data["current_energy"] = round(active.current_energy / 1000000, 0.1)
+		if(data["max_energy"] > 0)
+			data["percentage_energy"] = round(data["current_energy"] / data["max_energy"] * 100)
+		else
+			data["percentage_energy"] = "ERR"
 		data["total_segments"] = active.field_segments ? active.field_segments.len : 0
 		data["functional_segments"] = active.damaged_segments ? data["total_segments"] - active.damaged_segments.len : data["total_segments"]
 		data["field_radius"] = active.field_radius

@@ -27,7 +27,7 @@
 * Is the gene active in this mob's DNA?
 */
 /datum/dna/gene/proc/is_active(var/mob/M)
-	return M.active_genes && type in M.active_genes
+	return M.active_genes && (type in M.active_genes)
 
 // Return 1 if we can activate.
 // HANDLE MUTCHK_FORCED HERE!
@@ -104,10 +104,9 @@
 	var/list/deactivation_messages=list()
 
 /datum/dna/gene/basic/can_activate(var/mob/M,var/flags)
-	if(flags & MUTCHK_FORCED)
-		return 1
-	// Probability check
-	return probinj(activation_prob,(flags&MUTCHK_FORCED))
+	if (flags & MUTCHK_FORCED)
+		return TRUE
+	return prob(activation_prob)
 
 /datum/dna/gene/basic/activate(var/mob/M)
 	M.mutations.Add(mutation)

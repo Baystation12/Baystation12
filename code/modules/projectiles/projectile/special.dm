@@ -4,8 +4,8 @@
 	fire_sound = 'sound/weapons/Laser.ogg'
 	damage = 0
 	damage_type = BURN
-	nodamage = 1
-	check_armour = "energy"
+	damage_flags = 0
+	nodamage = TRUE
 	var/heavy_effect_range = 1
 	var/light_effect_range = 2
 
@@ -26,28 +26,10 @@
 	name ="explosive bolt"
 	icon_state= "bolter"
 	damage = 50
-	check_armour = "bullet"
-	sharp = 1
-	edge = 1
+	damage_flags = DAM_BULLET | DAM_SHARP | DAM_EDGE
 
 	on_hit(var/atom/target, var/blocked = 0)
 		explosion(target, -1, 0, 2)
-		return 1
-
-/obj/item/projectile/temp
-	name = "freeze beam"
-	icon_state = "ice_2"
-	fire_sound = 'sound/weapons/pulse3.ogg'
-	damage = 0
-	damage_type = BURN
-	nodamage = 1
-	check_armour = "energy"
-	var/firing_temperature = 300
-
-	on_hit(var/atom/target, var/blocked = 0)//These two could likely check temp protection on the mob
-		if(istype(target, /mob/living))
-			var/mob/M = target
-			M.bodytemperature = firing_temperature
 		return 1
 
 /obj/item/projectile/meteor
@@ -56,10 +38,9 @@
 	icon_state = "smallf"
 	damage = 0
 	damage_type = BRUTE
-	nodamage = 1
-	check_armour = "bullet"
+	nodamage = TRUE
 
-	Bump(atom/A as mob|obj|turf|area)
+	Bump(atom/A as mob|obj|turf|area, forced=0)
 		if(A == firer)
 			forceMove(A.loc)
 			return
@@ -86,8 +67,7 @@
 	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 0
 	damage_type = TOX
-	nodamage = 1
-	check_armour = "energy"
+	nodamage = TRUE
 
 	on_hit(var/atom/target, var/blocked = 0)
 		var/mob/living/M = target
@@ -95,7 +75,7 @@
 			var/mob/living/carbon/human/H = M
 			if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 				if(prob(15))
-					H.apply_effect((rand(30,80)),IRRADIATE,blocked = H.getarmor(null, "rad"))
+					H.apply_damage((rand(30,80)),IRRADIATE, damage_flags = DAM_DISPERSED)
 					H.Weaken(5)
 					for (var/mob/V in viewers(src))
 						V.show_message("<span class='warning'>[M] writhes in pain as \his vacuoles boil.</span>", 3, "<span class='warning'>You hear the crunching of leaves.</span>", 2)
@@ -120,8 +100,7 @@
 	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 0
 	damage_type = TOX
-	nodamage = 1
-	check_armour = "energy"
+	nodamage = TRUE
 	var/decl/plantgene/gene = null
 
 /obj/item/projectile/energy/florayield
@@ -130,15 +109,14 @@
 	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 0
 	damage_type = TOX
-	nodamage = 1
-	check_armour = "energy"
+	nodamage = TRUE
 
 	on_hit(var/atom/target, var/blocked = 0)
 		var/mob/M = target
 		if(ishuman(target)) //These rays make plantmen fat.
 			var/mob/living/carbon/human/H = M
 			if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
-				H.nutrition += 30
+				H.adjust_nutrition(30)
 		else if (istype(target, /mob/living/carbon/))
 			M.show_message("<span class='notice'>The radiation beam dissipates harmlessly through your body.</span>")
 		else
@@ -157,20 +135,96 @@
 	name = "bullet"
 	icon_state = "bullet"
 	damage = 1 // stop trying to murderbone with a fake gun dumbass!!!
-	embed = 0 // nope
-	nodamage = 1
+	embed = FALSE // nope
+	nodamage = TRUE
 	damage_type = PAIN
+	damage_flags = 0
 	muzzle_type = /obj/effect/projectile/bullet/muzzle
+
+/obj/item/projectile/bola
+	name = "bola"
+	icon_state = "bola"
+	damage = 5
+	embed = FALSE
+	damage_type = STUN
+	muzzle_type = null
+
+/obj/item/projectile/bola/on_hit(atom/target, blocked = 0)
+	if (isliving(target))
+		var/mob/living/M = target
+		M.Weaken(3)
+		M.visible_message(
+			SPAN_WARNING("\The [M] is hit with a glob of webbing!"),
+			SPAN_DANGER("You are hit with a glob of webbing, causing you to trip!"),
+			SPAN_DANGER("Some sort of sticky substance hits you and causes you to fall over!")
+		)
+	..()
+
+/obj/item/projectile/webball
+	name = "ball of web"
+	icon_state = "bola"
+	damage = 1
+	embed = FALSE
+	damage_type = BRUTE
+	muzzle_type = null
+
+/obj/item/projectile/webball/on_hit(atom/target, blocked = 0)
+	if (isturf(target.loc))
+		var/obj/effect/spider/stickyweb/W = locate() in get_turf(target)
+		if (!W && prob(75))
+			visible_message(SPAN_DANGER("\The [src] splatters a layer of web on \the [target]!"))
+			new /obj/effect/spider/stickyweb(target.loc)
+
+			if (isliving(target))
+				var/mob/living/M = target
+				var/has_webs = FALSE
+				for (var/obj/aura/A in M.auras)
+					if (istype(A, /obj/aura/web))
+						has_webs = TRUE
+						break
+				if (!has_webs)
+					M.add_aura(new /obj/aura/web(M))
+	..()
 
 /obj/item/projectile/venom
 	name = "venom bolt"
 	icon_state = "venom"
 	damage = 5 //most damage is in the reagent
 	damage_type = TOX
-	check_armour = "bio"
+	damage_flags = 0
 
 /obj/item/projectile/venom/on_hit(atom/target, blocked, def_zone)
 	. = ..()
 	var/mob/living/L = target
 	if(L.reagents)
 		L.reagents.add_reagent(/datum/reagent/toxin/venom, 5)
+
+/obj/item/missile
+	icon = 'icons/obj/grenade.dmi'
+	icon_state = "missile"
+	var/primed = null
+	throwforce = 15
+
+/obj/item/missile/throw_impact(atom/hit_atom)
+	if(primed)
+		explosion(hit_atom, 0, 1, 2, 4)
+		qdel(src)
+	else
+		..()
+	return
+
+/obj/item/projectile/hotgas
+	name = "gas vent"
+	icon_state = null
+	damage_type = BURN
+	damage_flags = 0
+	life_span = 3
+	silenced = TRUE
+
+/obj/item/projectile/hotgas/on_hit(atom/target, blocked, def_zone)
+	. = ..()
+	if(isliving(target))
+		var/mob/living/L = target
+		to_chat(target, SPAN_WARNING("You feel a wave of heat wash over you!"))
+		L.adjust_fire_stacks(rand(5,8))
+		L.IgniteMob()

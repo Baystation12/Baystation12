@@ -1,48 +1,49 @@
-/datum/gear/storage/
+/datum/gear/storage
 	sort_category = "Storage Accessories"
-	category = /datum/gear/storage/
+	category = /datum/gear/storage
 	slot = slot_tie
 
-/datum/gear/storage/brown_vest
-	display_name = "webbing, engineering"
-	path = /obj/item/clothing/accessory/storage/brown_vest
+/datum/gear/storage/vest
+	display_name = "webbing vest selection"
+	path = /obj/item/clothing/accessory/storage
 	cost = 3
-	allowed_roles = list(/datum/job/chief_engineer, /datum/job/engineer, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech,
-						/datum/job/mining, /datum/job/janitor)
 
-/datum/gear/storage/black_vest
-	display_name = "webbing, security"
-	path = /obj/item/clothing/accessory/storage/black_vest
-	cost = 3
-	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer)
+/datum/gear/storage/vest/New()
+	..()
+	var/vests = list()
+	vests += /obj/item/clothing/accessory/storage/black_vest
+	vests += /obj/item/clothing/accessory/storage/brown_vest
+	vests += /obj/item/clothing/accessory/storage/white_vest
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(vests)
 
-/datum/gear/storage/white_vest
-	display_name = "webbing, medical"
-	path = /obj/item/clothing/accessory/storage/white_vest
-	cost = 3
-	allowed_roles = list(/datum/job/cmo, /datum/job/doctor)
+/datum/gear/storage/pouches
+	display_name = "drop pouches selection"
+	path = /obj/item/clothing/accessory/storage
 
-/datum/gear/storage/brown_drop_pouches
-	display_name = "drop pouches, engineering"
-	path = /obj/item/clothing/accessory/storage/drop_pouches/brown
-	cost = 3
-	allowed_roles = list(/datum/job/chief_engineer, /datum/job/engineer, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech,
-						/datum/job/mining, /datum/job/janitor)
+/datum/gear/storage/pouches/New()
+	..()
+	var/pouches = list()
+	pouches += /obj/item/clothing/accessory/storage/black_drop
+	pouches += /obj/item/clothing/accessory/storage/brown_drop
+	pouches += /obj/item/clothing/accessory/storage/white_drop
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(pouches)
 
-/datum/gear/storage/black_drop_pouches
-	display_name = "drop pouches, security"
-	path = /obj/item/clothing/accessory/storage/drop_pouches/black
-	cost = 3
-	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer)
+/datum/gear/storage/belt
+	display_name = "storage belt selection"
+	path = /obj/item/storage/belt
+	slot = slot_belt
+	cost = 2
 
-/datum/gear/storage/white_drop_pouches
-	display_name = "drop pouches, medical"
-	path = /obj/item/clothing/accessory/storage/drop_pouches/white
-	cost = 3
-	allowed_roles = list(/datum/job/cmo, , /datum/job/doctor)
+/datum/gear/storage/belt/New()
+	..()
+	var/belts = list(
+		/obj/item/storage/belt/general,
+		/obj/item/storage/belt/utility
+	)
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(belts)
 
 /datum/gear/storage/webbing
-	display_name = "webbing, simple"
+	display_name = "webbing, small"
 	path = /obj/item/clothing/accessory/storage/webbing
 	cost = 2
 
@@ -58,22 +59,22 @@
 
 /datum/gear/storage/waistpack
 	display_name = "waist pack"
-	path = /obj/item/weapon/storage/belt/waistpack
+	path = /obj/item/storage/belt/waistpack
 	slot = slot_belt
 	cost = 2
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/storage/waistpack/big
 	display_name = "large waist pack"
-	path = /obj/item/weapon/storage/belt/waistpack/big
+	path = /obj/item/storage/belt/waistpack/big
 	cost = 4
 
 /datum/gear/accessory/wallet
 	display_name = "wallet, colour select"
-	path = /obj/item/weapon/storage/wallet
+	path = /obj/item/storage/wallet
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/wallet_poly
 	display_name = "wallet, polychromic"
-	path = /obj/item/weapon/storage/wallet/poly
+	path = /obj/item/storage/wallet/poly
 	cost = 2

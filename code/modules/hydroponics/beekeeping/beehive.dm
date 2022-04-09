@@ -3,8 +3,9 @@
 	icon = 'icons/obj/beekeeping.dmi'
 	icon_state = "beehive-0"
 	desc = "A wooden box designed specifically to house our buzzling buddies. Far more efficient than traditional hives. Just insert a frame and a queen, close it up, and you're good to go!"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
+	layer = BELOW_OBJ_LAYER
 
 	var/closed = 0
 	var/bee_count = 0 // Percent
@@ -39,7 +40,7 @@
 			if(81 to 100)
 				overlays += "bees5"
 
-/obj/machinery/beehive/examine(var/mob/user)
+/obj/machinery/beehive/examine(mob/user)
 	. = ..()
 	if(!closed)
 		to_chat(user, "The lid is open.")
@@ -102,7 +103,7 @@
 			B.fill()
 		update_icon()
 		return
-	else if(istype(I, /obj/item/device/analyzer/plant_analyzer))
+	else if(istype(I, /obj/item/device/scanner/plant))
 		to_chat(user, "<span class='notice'>Scan result of \the [src]...</span>")
 		to_chat(user, "Beehive is [bee_count ? "[round(bee_count)]% full" : "empty"].[bee_count > 90 ? " Colony is ready to split." : ""]")
 		if(frames)
@@ -126,8 +127,9 @@
 			qdel(src)
 		return
 
-/obj/machinery/beehive/attack_hand(var/mob/user)
+/obj/machinery/beehive/physical_attack_hand(var/mob/user)
 	if(!closed)
+		. = TRUE
 		if(honeycombs < 100)
 			to_chat(user, "<span class='notice'>There are no filled honeycombs.</span>")
 			return
@@ -139,10 +141,9 @@
 			new /obj/item/honey_frame/filled(loc)
 			honeycombs -= 100
 			--frames
-			update_icon()
+		update_icon()
 		if(honeycombs < 100)
 			to_chat(user, "<span class='notice'>You take all filled honeycombs out.</span>")
-		return
 
 /obj/machinery/beehive/Process()
 	if(closed && !smoked && bee_count)
@@ -167,17 +168,33 @@
 	desc = "A machine used to extract honey and wax from a beehive frame."
 	icon = 'icons/obj/virology.dmi'
 	icon_state = "centrifuge"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
+
+	machine_name = "honey extractor"
+	machine_desc = "Extracts liquid honey and solid blocks of wax from filled beehive frames. Requires an attached reagent container to operate."
 
 	var/processing = 0
 	var/honey = 0
+
+/obj/machinery/honey_extractor/components_are_accessible(path)
+	return !processing && ..()
+
+/obj/machinery/honey_extractor/cannot_transition_to(state_path, mob/user)
+	if(processing)
+		return SPAN_NOTICE("You must wait for \the [src] to finish first!")
+	return ..()
 
 /obj/machinery/honey_extractor/attackby(var/obj/item/I, var/mob/user)
 	if(processing)
 		to_chat(user, "<span class='notice'>\The [src] is currently spinning, wait until it's finished.</span>")
 		return
-	else if(istype(I, /obj/item/honey_frame))
+	if((. = component_attackby(I, user)))
+		return
+	if(istype(I, /obj/item/honey_frame))
 		var/obj/item/honey_frame/H = I
 		if(!H.honey)
 			to_chat(user, "<span class='notice'>\The [H] is empty, put it into a beehive.</span>")
@@ -192,11 +209,11 @@
 			honey += processing
 			processing = 0
 			icon_state = "centrifuge"
-	else if(istype(I, /obj/item/weapon/reagent_containers/glass))
+	else if(istype(I, /obj/item/reagent_containers/glass))
 		if(!honey)
 			to_chat(user, "<span class='notice'>There is no honey in \the [src].</span>")
 			return
-		var/obj/item/weapon/reagent_containers/glass/G = I
+		var/obj/item/reagent_containers/glass/G = I
 		var/transferred = min(G.reagents.maximum_volume - G.reagents.total_volume, honey)
 		G.reagents.add_reagent(/datum/reagent/nutriment/honey, transferred)
 		honey -= transferred
@@ -206,8 +223,8 @@
 /obj/item/bee_smoker
 	name = "bee smoker"
 	desc = "A device used to calm down bees before harvesting honey."
-	icon = 'icons/obj/device.dmi'
-	icon_state = "battererburnt"
+	icon = 'icons/obj/batterer.dmi'
+	icon_state = "batterer"
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/honey_frame
@@ -295,4 +312,4 @@ var/global/list/datum/stack_recipe/wax_recipes = list(
 	new /obj/item/honey_frame(src)
 	new /obj/item/honey_frame(src)
 	new /obj/item/bee_pack(src)
-	new /obj/item/weapon/crowbar(src)
+	new /obj/item/crowbar(src)

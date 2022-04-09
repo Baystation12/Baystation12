@@ -3,7 +3,6 @@
 	desc = "You shouldn't be seeing this."
 	icon = 'maps/torch/icons/obj/obj_under_solgov.dmi'
 	item_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/onmob_under_solgov.dmi')
-	armor = list(melee = 5, bullet = 0, laser = 5, energy = 5, bomb = 0, bio = 5, rad = 5)
 	siemens_coefficient = 0.8
 	gender_icons = 1
 
@@ -26,7 +25,7 @@
 
 /obj/item/clothing/under/solgov/pt/fleet
 	name = "fleet pt uniform"
-	desc = "A pair of black shorts and two tank tops, seems impractical. Looks good though."
+	desc = "A tight-fitting navy blue shirt paired with black shorts. For when you need to 'get physical'."
 	icon_state = "fleetpt"
 	worn_state = "fleetpt"
 
@@ -47,6 +46,10 @@
 	worn_state = "blackutility"
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
+		)
+	armor = list(
+		melee = ARMOR_MELEE_MINOR,
+		energy = ARMOR_ENERGY_MINOR
 		)
 
 /obj/item/clothing/under/solgov/utility/expeditionary
@@ -74,28 +77,28 @@
 	worn_state = "blackservicefem_com"
 
 /obj/item/clothing/under/solgov/utility/expeditionary/command
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/command)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/engineering
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/engineering)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/security
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/security)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/security)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/medical
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/medical)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/supply
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/supply)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/supply)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/service
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/service)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/service)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/exploration
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/research
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/research)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/research)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer
 	name = "expeditionary officer's uniform"
@@ -104,28 +107,28 @@
 	worn_state = "blackutility_com"
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/command)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/engineering
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/engineering)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/security
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/security)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/security)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/medical
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/medical)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/supply
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/supply)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/supply)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/service
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/service)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/service)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/exploration
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/research
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/research)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/research)
 
 /obj/item/clothing/under/solgov/utility/fleet
 	name = "fleet coveralls"
@@ -135,28 +138,59 @@
 	worn_state = "navyutility"
 
 /obj/item/clothing/under/solgov/utility/fleet/command
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/fleet)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/command/fleet)
 
 /obj/item/clothing/under/solgov/utility/fleet/command/pilot
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/specialty/pilot)
+	accessories = list(/obj/item/clothing/accessory/solgov/specialty/pilot)
 
 /obj/item/clothing/under/solgov/utility/fleet/engineering
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/fleet)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/fleet)
 
 /obj/item/clothing/under/solgov/utility/fleet/security
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/security/fleet)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/security/fleet)
 
 /obj/item/clothing/under/solgov/utility/fleet/medical
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/fleet)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/fleet)
 
 /obj/item/clothing/under/solgov/utility/fleet/supply
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/supply/fleet)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/supply/fleet)
 
 /obj/item/clothing/under/solgov/utility/fleet/service
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/service/fleet)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/service/fleet)
 
 /obj/item/clothing/under/solgov/utility/fleet/exploration
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/fleet)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/fleet)
+
+/obj/item/clothing/under/solgov/utility/fleet/polopants
+	name = "fleet polo and pants"
+	desc = "An alternative utility uniform of the SCG Fleet, specially designed for engineering staff. The pants sports some yellow reflective stripes, and have knee pads."
+	icon_state = "navypolopants"
+	worn_state = "navypolopants"
+
+/obj/item/clothing/under/solgov/utility/fleet/polopants/command
+	desc = "An alternative utility uniform of the SCG Fleet. The pants have knee pads."
+	icon_state = "navypolopantsnostripe"
+	worn_state = "navypolopantscom"
+
+/obj/item/clothing/under/solgov/utility/fleet/polopants/security
+	desc = "An alternative utility uniform of the SCG Fleet. The pants have knee pads."
+	icon_state = "navypolopantsnostripe"
+	worn_state = "navypolopantssec"
+
+/obj/item/clothing/under/solgov/utility/fleet/polopants/medical
+	desc = "An alternative utility uniform of the SCG Fleet, specially designed for medics and doctors. The pants have knee pads."
+	icon_state = "navypolopantsnostripe"
+	worn_state = "navypolopantsmed"
+
+/obj/item/clothing/under/solgov/utility/fleet/polopants/supply
+	desc = "An alternative utility uniform of the SCG Fleet. The pants have knee pads."
+	icon_state = "navypolopantsnostripe"
+	worn_state = "navypolopantssup"
+
+/obj/item/clothing/under/solgov/utility/fleet/polopants/service
+	desc = "An alternative utility uniform of the SCG Fleet. The pants have knee pads."
+	icon_state = "navypolopantsnostripe"
+	worn_state = "navypolopantssrv"
 
 /obj/item/clothing/under/solgov/utility/fleet/combat
 	name = "fleet fatigues"
@@ -165,31 +199,25 @@
 	worn_state = "navycombat"
 
 /obj/item/clothing/under/solgov/utility/fleet/combat/security
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/security/fleet)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/security/fleet)
 
 /obj/item/clothing/under/solgov/utility/fleet/combat/medical
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/fleet, /obj/item/clothing/accessory/armband/medblue)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/fleet, /obj/item/clothing/accessory/armband/medblue)
 
 /obj/item/clothing/under/solgov/utility/fleet/combat/command
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/fleet)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/command/fleet)
 
-/obj/item/clothing/under/solgov/utility/fleet/officer
-	name = "fleet officer's coveralls"
-	desc = "Alternative utility uniform of the SCG Fleet, for officers."
-	icon_state = "navyutilityoff"
-	worn_state = "navyutilityoff"
+/obj/item/clothing/under/solgov/utility/fleet/combat/exploration
+	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/fleet)
 
-/obj/item/clothing/under/solgov/utility/fleet/officer/command
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/fleet)
+/obj/item/clothing/under/solgov/utility/fleet/combat/engineering
+	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/fleet)
 
-/obj/item/clothing/under/solgov/utility/fleet/officer/engineering
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/fleet)
+/obj/item/clothing/under/solgov/utility/fleet/combat/service
+	accessories = list(/obj/item/clothing/accessory/solgov/department/service/fleet)
 
-/obj/item/clothing/under/solgov/utility/fleet/officer/security
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/security/fleet)
-
-/obj/item/clothing/under/solgov/utility/fleet/officer/medical
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/fleet)
+/obj/item/clothing/under/solgov/utility/fleet/combat/supply
+	accessories = list(/obj/item/clothing/accessory/solgov/department/supply/fleet)
 
 /obj/item/clothing/under/solgov/utility/army
 	name = "army fatigues"
@@ -198,29 +226,29 @@
 	item_state = "jensensuit"
 	worn_state = "greenutility"
 
-//obj/item/clothing/under/solgov/utility/army/command
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/army)
+/obj/item/clothing/under/solgov/utility/army/command
+	accessories = list(/obj/item/clothing/accessory/solgov/department/command/army)
 
 /obj/item/clothing/under/solgov/utility/army/engineering
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/army)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/army)
 
 /obj/item/clothing/under/solgov/utility/army/security
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/security/army)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/security/army)
 
 /obj/item/clothing/under/solgov/utility/army/medical
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/army)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/army)
 
 /obj/item/clothing/under/solgov/utility/army/medical/banded
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/army, /obj/item/clothing/accessory/armband/medblue)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/army, /obj/item/clothing/accessory/armband/medblue)
 
 /obj/item/clothing/under/solgov/utility/army/supply
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/supply/army)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/supply/army)
 
 /obj/item/clothing/under/solgov/utility/army/service
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/service/army)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/service/army)
 
 /obj/item/clothing/under/solgov/utility/army/exploration
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/army)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/army)
 
 /obj/item/clothing/under/solgov/utility/army/urban
 	name = "urban fatigues"
@@ -243,35 +271,7 @@
 	desc = "A service uniform of some kind."
 	icon_state = "whiteservice"
 	worn_state = "whiteservice"
-	armor = list(melee = 5, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 5, rad = 0)
 	siemens_coefficient = 0.9
-
-/obj/item/clothing/under/solgov/service/expeditionary
-	name = "expeditionary service uniform"
-	desc = "The service uniform of the SCG Expeditionary Corps in silver trim."
-	icon_state = "greydress"
-	worn_state = "greydress"
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
-		)
-
-/obj/item/clothing/under/solgov/service/expeditionary/skirt
-	name = "expeditionary service skirt"
-	desc = "A feminine version of the SCG Expeditionary Corps service uniform in silver trim."
-	icon_state = "greydressfem"
-	worn_state = "greydressfem"
-
-/obj/item/clothing/under/solgov/service/expeditionary/command
-	name = "expeditionary officer's service uniform"
-	desc = "The service uniform of the SCG Expeditionary Corps in gold trim."
-	icon_state = "greydress_com"
-	worn_state = "greydress_com"
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/skirt
-	name = "expeditionary officer's service skirt"
-	desc = "A feminine version of the SCG Expeditionary Corps service uniform in gold trim."
-	icon_state = "greydressfem_com"
-	worn_state = "greydressfem_com"
 
 /obj/item/clothing/under/solgov/service/fleet
 	name = "fleet service uniform"
@@ -279,7 +279,7 @@
 	icon_state = "whiteservice"
 	item_state = "nursesuit"
 	worn_state = "whiteservice"
-	starting_accessories = list(/obj/item/clothing/accessory/navy)
+	accessories = list(/obj/item/clothing/accessory/navy)
 
 /obj/item/clothing/under/solgov/service/fleet/skirt
 	name = "fleet service skirt"
@@ -293,7 +293,7 @@
 	icon_state = "greenservice"
 	item_state = "johnny"
 	worn_state = "greenservice"
-	starting_accessories = list(/obj/item/clothing/accessory/brown)
+	accessories = list(/obj/item/clothing/accessory/brown)
 
 /obj/item/clothing/under/solgov/service/army/skirt
 	name = "army service skirt"
@@ -307,7 +307,7 @@
 	icon_state = "greenservice_com"
 	item_state = "johnny"
 	worn_state = "greenservice_com"
-	starting_accessories = list(/obj/item/clothing/accessory/brown)
+	accessories = list(/obj/item/clothing/accessory/brown)
 
 /obj/item/clothing/under/solgov/service/army/command/skirt
 	name = "marine officer's service skirt"
@@ -321,7 +321,6 @@
 	desc = "A dress uniform of some kind."
 	icon_state = "greydress"
 	worn_state = "greydress"
-	armor = list(melee = 5, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 5, rad = 0)
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/solgov/mildress/army
@@ -348,15 +347,100 @@
 	icon_state = "blackdressfem"
 	worn_state = "blackdressfem_com"
 
+//dress
+
+/obj/item/clothing/under/solgov/dress/expeditionary
+	name = "expeditionary dress uniform"
+	desc = "The dress uniform of the SCG Expeditionary Corps in silver trim."
+	icon_state = "greydress"
+	worn_state = "greydress"
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
+		)
+
+/obj/item/clothing/under/solgov/dress/expeditionary/engineering
+
+/obj/item/clothing/under/solgov/dress/expeditionary/security
+
+/obj/item/clothing/under/solgov/dress/expeditionary/medical
+
+/obj/item/clothing/under/solgov/dress/expeditionary/supply
+
+/obj/item/clothing/under/solgov/dress/expeditionary/service
+
+/obj/item/clothing/under/solgov/dress/expeditionary/exploration
+
+/obj/item/clothing/under/solgov/dress/expeditionary/research
+
+/obj/item/clothing/under/solgov/dress/expeditionary/skirt
+	name = "expeditionary dress skirt"
+	desc = "A feminine version of the SCG Expeditionary Corps dress uniform in silver trim."
+	icon_state = "greydressfem"
+	worn_state = "greydressfem"
+
+/obj/item/clothing/under/solgov/dress/expeditionary/skirt/engineering
+
+/obj/item/clothing/under/solgov/dress/expeditionary/skirt/security
+
+/obj/item/clothing/under/solgov/dress/expeditionary/skirt/medical
+
+/obj/item/clothing/under/solgov/dress/expeditionary/skirt/supply
+
+/obj/item/clothing/under/solgov/dress/expeditionary/skirt/service
+
+/obj/item/clothing/under/solgov/dress/expeditionary/skirt/exploration
+
+/obj/item/clothing/under/solgov/dress/expeditionary/skirt/research
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command
+	name = "expeditionary officer's dress uniform"
+	desc = "The dress uniform of the SCG Expeditionary Corps in gold trim."
+	icon_state = "greydress_com"
+	worn_state = "greydress_com"
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/engineering
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/security
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/medical
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/supply
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/service
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/exploration
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/research
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/skirt
+	name = "expeditionary officer's dress skirt"
+	desc = "A feminine version of the SCG Expeditionary Corps dress uniform in gold trim."
+	icon_state = "greydressfem_com"
+	worn_state = "greydressfem_com"
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/engineering
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/security
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/medical
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/supply
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/service
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/exploration
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/research
+
 //misc garbage
 /obj/item/clothing/under/rank/internalaffairs/plain/solgov
 	desc = "A plain shirt and pair of pressed black pants."
 	name = "formal outfit"
-	starting_accessories = list(/obj/item/clothing/accessory/blue_clip)
+	accessories = list(/obj/item/clothing/accessory/blue_clip)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/monkey
 	name = "adjusted expeditionary uniform"
 	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has silver trim. It was also mangled to fit a monkey. This better be worth the NJP you'll get for making it."
-	species_restricted = list("Monkey")
+	species_restricted = list(SPECIES_MONKEY)
 	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/rank/fleet/officer/wo1_monkey)
+	accessories = list(/obj/item/clothing/accessory/solgov/rank/fleet/officer/wo1_monkey)

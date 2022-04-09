@@ -2,21 +2,26 @@
 	name = "fuel injector"
 	icon = 'icons/obj/machines/power/fusion.dmi'
 	icon_state = "injector0"
-	density = 1
-	anchored = 0
+	density = TRUE
+	anchored = FALSE
 	req_access = list(access_engine)
 	idle_power_usage = 10
 	active_power_usage = 500
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
+	base_type = /obj/machinery/fusion_fuel_injector
 
 	var/fuel_usage = 0.001
 	var/initial_id_tag
 	var/injecting = 0
-	var/obj/item/weapon/fuel_assembly/cur_assembly
+	var/obj/item/fuel_assembly/cur_assembly
+	var/injection_rate = 1
 
 /obj/machinery/fusion_fuel_injector/Initialize()
-	set_extension(src, /datum/extension/fusion_plant_member, /datum/extension/fusion_plant_member)
+	set_extension(src, /datum/extension/local_network_member)
 	if(initial_id_tag)
-		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.set_tag(null, initial_id_tag)
 	. = ..()
 
@@ -27,7 +32,7 @@
 	. = ..()
 
 /obj/machinery/fusion_fuel_injector/mapped
-	anchored = 1
+	anchored = TRUE
 
 /obj/machinery/fusion_fuel_injector/Process()
 	if(injecting)
@@ -39,11 +44,11 @@
 /obj/machinery/fusion_fuel_injector/attackby(obj/item/W, mob/user)
 
 	if(isMultitool(W))
-		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
-		fusion.get_new_tag(user)
+		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
+		lanm.set_tag(null, initial_id_tag)
 		return
 
-	if(istype(W, /obj/item/weapon/fuel_assembly))
+	if(istype(W, /obj/item/fuel_assembly))
 
 		if(injecting)
 			to_chat(user, "<span class='warning'>Shut \the [src] off before playing with the fuel rod!</span>")
@@ -74,21 +79,20 @@
 
 	return ..()
 
-/obj/machinery/fusion_fuel_injector/attack_hand(mob/user)
-
+/obj/machinery/fusion_fuel_injector/physical_attack_hand(mob/user)
 	if(injecting)
 		to_chat(user, "<span class='warning'>Shut \the [src] off before playing with the fuel rod!</span>")
-		return
+		return TRUE
 
 	if(cur_assembly)
 		cur_assembly.dropInto(loc)
 		user.put_in_hands(cur_assembly)
 		visible_message("<span class='notice'>\The [user] removes \the [cur_assembly] from \the [src].</span>")
 		cur_assembly = null
-		return
+		return TRUE
 	else
 		to_chat(user, "<span class='warning'>There is no fuel rod in \the [src].</span>")
-		return
+		return TRUE
 
 /obj/machinery/fusion_fuel_injector/proc/BeginInjecting()
 	if(!injecting && cur_assembly)
@@ -109,7 +113,7 @@
 		var/amount_left = 0
 		for(var/reagent in cur_assembly.rod_quantities)
 			if(cur_assembly.rod_quantities[reagent] > 0)
-				var/amount = cur_assembly.rod_quantities[reagent] * fuel_usage
+				var/amount = cur_assembly.rod_quantities[reagent] * fuel_usage * injection_rate
 				if(amount < 1)
 					amount = 1
 				var/obj/effect/accelerated_particle/A = new/obj/effect/accelerated_particle(get_turf(src), dir)

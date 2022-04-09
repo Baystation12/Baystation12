@@ -1,13 +1,13 @@
 /obj/structure/fitness
 	icon = 'icons/obj/stationobjs.dmi'
-	anchored = 1
+	anchored = TRUE
 	var/being_used = 0
 
 /obj/structure/fitness/punchingbag
 	name = "punching bag"
 	desc = "A punching bag."
 	icon_state = "punchingbag"
-	density = 1
+	density = TRUE
 	var/list/hit_message = list("hit", "punch", "kick", "robust")
 
 /obj/structure/fitness/punchingbag/attack_hand(var/mob/living/carbon/human/user)
@@ -23,8 +23,10 @@
 			flick("[icon_state]_hit", src)
 			playsound(src.loc, 'sound/effects/woodhit.ogg', 25, 1, -1)
 			user.do_attack_animation(src)
+			user.update_personal_goal(/datum/goal/punchingbag, 1)
 			if(!synth)
-				user.nutrition = user.nutrition - 5
+				user.adjust_nutrition(-(5 * DEFAULT_HUNGER_FACTOR))
+				user.adjust_hydration(-(5 * DEFAULT_THIRST_FACTOR))
 			to_chat(user, "<span class='warning'>You [pick(hit_message)] \the [src].</span>")
 
 /obj/structure/fitness/weightlifter
@@ -36,7 +38,7 @@
 	var/list/success_message = list("with great effort", "straining hard", "without any trouble", "with ease")
 	var/list/fail_message = list(", lifting them part of the way and then letting them drop", ", unable to even budge them")
 
-/obj/structure/fitness/weightlifter/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/fitness/weightlifter/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 75, 1)
 		weight = (weight % max_weight) + 1
@@ -76,10 +78,10 @@
 				user.visible_message("<span class='notice'>\The [user] fails to lift the weights[message].</span>", "<span class='notice'>You fail to lift the weights[message].</span>")
 			else
 				if(!synth)
-					user.nutrition -= weight * 5
+					var/adj_weight = weight * 5
+					user.adjust_nutrition(-(adj_weight * DEFAULT_HUNGER_FACTOR))
+					user.adjust_hydration(-(adj_weight * DEFAULT_THIRST_FACTOR))
 				message = success_message[min(1 + round(skill - weight), fail_message.len)]
 				user.visible_message("<span class='notice'>\The [user] lift\s the weights [message].</span>", "<span class='notice'>You lift the weights [message].</span>")
-			being_used = 0
-		else
-			to_chat(user, "<span class='notice'>Against your previous judgement, perhaps working out is not for you.</span>")
-			being_used = 0
+				user.update_personal_goal(/datum/goal/weights, 1)
+		being_used = FALSE

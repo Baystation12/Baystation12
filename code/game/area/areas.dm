@@ -32,6 +32,30 @@
 		power_environ = 0
 	power_change()		// all machines set to current power level, also updates lighting icon
 
+/area/Destroy()
+	..()
+	return QDEL_HINT_HARDDEL
+
+// Changes the area of T to A. Do not do this manually.
+// Area is expected to be a non-null instance.
+/proc/ChangeArea(var/turf/T, var/area/A)
+	if(!istype(A))
+		CRASH("Area change attempt failed: invalid area supplied.")
+	var/area/old_area = get_area(T)
+	if(old_area == A)
+		return
+	A.contents.Add(T)
+	if(old_area)
+		old_area.Exited(T, A)
+		for(var/atom/movable/AM in T)
+			old_area.Exited(AM, A)  // Note: this _will_ raise exited events.
+	A.Entered(T, old_area)
+	for(var/atom/movable/AM in T)
+		A.Entered(AM, old_area) // Note: this will _not_ raise moved or entered events. If you change this, you must also change everything which uses them.
+
+	for(var/obj/machinery/M in T)
+		M.area_changed(old_area, A) // They usually get moved events, but this is the one way an area can change without triggering one.
+
 /area/proc/get_contents()
 	return contents
 
@@ -46,9 +70,9 @@
 
 /area/proc/atmosalert(danger_level, var/alarm_source)
 	if (danger_level == 0)
-		atmosphere_alarm.clearAlarm(src, alarm_source)
+		GLOB.atmosphere_alarm.clearAlarm(src, alarm_source)
 	else
-		atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level)
+		GLOB.atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level)
 
 	//Check all the alarms before lowering atmosalm. Raising is perfectly fine.
 	for (var/obj/machinery/alarm/AA in src)
@@ -88,6 +112,7 @@
 		if(!all_doors)
 			return
 		for(var/obj/machinery/door/firedoor/E in all_doors)
+			E.locked = FALSE
 			if(!E.blocked)
 				if(E.operating)
 					E.nextstate = FIREDOOR_OPEN
@@ -120,6 +145,7 @@
 		if(!all_doors)
 			return
 		for(var/obj/machinery/door/firedoor/D in all_doors)
+			D.locked = FALSE
 			if(!D.blocked)
 				if(D.operating)
 					D.nextstate = FIREDOOR_OPEN
@@ -192,6 +218,7 @@
 var/list/mob/living/forced_ambiance_list = new
 
 /area/Entered(A)
+	..()
 	if(!istype(A,/mob/living))	return
 
 	var/mob/living/L = A
@@ -215,7 +242,7 @@ var/list/mob/living/forced_ambiance_list = new
 
 	var/turf/T = get_turf(L)
 	var/hum = 0
-	if(!L.ear_deaf && !always_unpowered && power_environ)
+	if(L.get_sound_volume_multiplier() >= 0.2 && !always_unpowered && power_environ)
 		for(var/obj/machinery/atmospherics/unary/vent_pump/vent in src)
 			if(vent.can_pump())
 				hum = 1
@@ -223,22 +250,22 @@ var/list/mob/living/forced_ambiance_list = new
 	if(hum)
 		if(!L.client.ambience_playing)
 			L.client.ambience_playing = 1
-			L.playsound_local(T,sound('sound/ambience/vents.ogg', repeat = 1, wait = 0, volume = 20, channel = GLOB.ambience_sound_channel))
+			L.playsound_local(T,sound('sound/ambience/shipambience.ogg', repeat = 1, wait = 0, volume = 20, channel = GLOB.ambience_sound_channel))
 	else
 		if(L.client.ambience_playing)
 			L.client.ambience_playing = 0
-			sound_to(L, sound(null, channel = 2))
+			sound_to(L, sound(null, channel = GLOB.ambience_sound_channel))
 
 	if(L.lastarea != src)
 		if(LAZYLEN(forced_ambience))
 			forced_ambiance_list |= L
 			L.playsound_local(T,sound(pick(forced_ambience), repeat = 1, wait = 0, volume = 25, channel = GLOB.lobby_sound_channel))
 		else	//stop any old area's forced ambience, and try to play our non-forced ones
-			sound_to(L, sound(null, channel = 1))
+			sound_to(L, sound(null, channel = GLOB.lobby_sound_channel))
 			forced_ambiance_list -= L
-			if(ambience.len && prob(35) && (world.time >= L.client.played + 3 MINUTES))
-				L.playsound_local(T, sound(pick(ambience), repeat = 0, wait = 0, volume = 15, channel = GLOB.lobby_sound_channel))
-				L.client.played = world.time
+	if(ambience.len && prob(5) && (world.time >= L.client.played + 3 MINUTES))
+		L.playsound_local(T, sound(pick(ambience), repeat = 0, wait = 0, volume = 15, channel = GLOB.lobby_sound_channel))
+		L.client.played = world.time
 
 /area/proc/gravitychange(var/gravitystate = 0)
 	has_gravity = gravitystate
@@ -257,7 +284,7 @@ var/list/mob/living/forced_ambiance_list = new
 
 	if(istype(mob,/mob/living/carbon/human/))
 		var/mob/living/carbon/human/H = mob
-		if(prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_PROF)))
+		if(!H.buckled && prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_PROF)))
 			if(!MOVING_DELIBERATELY(H))
 				H.AdjustStunned(6)
 				H.AdjustWeakened(6)
@@ -305,3 +332,7 @@ var/list/mob/living/forced_ambiance_list = new
 /area/proc/has_turfs()
 	return !!(locate(/turf) in src)
 
+/area/proc/can_modify_area()
+	if (src && src.area_flags & AREA_FLAG_NO_MODIFY)
+		return FALSE
+	return TRUE

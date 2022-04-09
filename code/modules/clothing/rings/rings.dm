@@ -18,6 +18,16 @@
 	desc = "A ring commemorating graduation from Mariner University."
 	icon_state = "mariner-grad"
 
+/obj/item/clothing/ring/fleet
+	name = "Fleet ring"
+	desc = "A ring commemorating honorable service with the Sol Government's Fleet."
+	icon_state = "fleet"
+
+/obj/item/clothing/ring/ec
+	name = "Expeditionary Corps ring"
+	desc = "A ring commemorating honorable service with the Sol Government's Expeditionary Corps."
+	icon_state = "ec"
+
 /////////////////////////////////////////
 //Magic Rings
 
@@ -43,7 +53,7 @@
 
 /obj/item/clothing/ring/reagent
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	origin_tech = list(TECH_MATERIAL = 2, TECH_ILLEGAL = 4)
+	origin_tech = list(TECH_MATERIAL = 2, TECH_ESOTERIC = 4)
 
 /obj/item/clothing/ring/reagent/New()
 	..()
@@ -52,13 +62,15 @@
 /obj/item/clothing/ring/reagent/equipped(var/mob/living/carbon/human/H)
 	..()
 	if(istype(H) && H.gloves==src)
-		to_chat(H, "<font color='blue'><b>You feel a prick as you slip on the ring.</b></font>")
+		to_chat(H, "<span class='info'><b>You feel a prick as you slip on the ring.</b></span>")
 
 		if(reagents.total_volume)
 			if(H.reagents)
+				var/should_admin_log = reagents.should_admin_log()
 				var/contained_reagents = reagents.get_reagents()
 				var/trans = reagents.trans_to_mob(H, 15, CHEM_BLOOD)
-				admin_inject_log(usr, H, src, contained_reagents, trans)
+				if (should_admin_log)
+					admin_inject_log(usr, H, src, contained_reagents, trans)
 	return
 
 //Sleepy Ring
@@ -66,7 +78,7 @@
 	name = "silver ring"
 	desc = "A ring made from what appears to be silver."
 	icon_state = "material"
-	origin_tech = list(TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
+	origin_tech = list(TECH_MATERIAL = 2, TECH_ESOTERIC = 5)
 
 /obj/item/clothing/ring/reagent/sleepy/New()
 	..()

@@ -5,7 +5,7 @@
 	proj_type = /obj/item/projectile/spell_projectile/fireball
 
 	school = "conjuration"
-	charge_max = 100
+	charge_max = 10 SECONDS
 	spell_flags = 0
 	invocation = "Oni-Soma!"
 	invocation_type = SpI_SHOUT

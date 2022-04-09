@@ -1,13 +1,11 @@
 /decl/cultural_info/location/vox
 	name = HOME_SYSTEM_VOX_ARK
-	language = LANGUAGE_VOX
 	description = "The moon-sized arkships are home to the vast, vast majority of vox, and represent the closest thing to \
 	a stable planetary culture the far-flung nomadic species has. Arkborn vox can expect to enjoy long lives, infrequent \
 	re-embodiment, and a rich and varied social life amongst the rambunctious ark clans and families. Raiders and salvagers \
 	may look upon the arkborn as lazy and passive, but they tend to return to them for rest and recuperation after each \
 	mission without too many complaints."
 	ruling_body = "the Apex"
-	secondary_langs = list(LANGUAGE_GALCOM)
 	distance = "multiple systems"
 	hidden_from_codex = TRUE
 

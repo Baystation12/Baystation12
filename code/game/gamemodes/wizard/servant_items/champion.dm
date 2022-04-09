@@ -2,7 +2,14 @@
 	name = "champion's crown"
 	desc = "A spiky, golden crown. It's probably worth more than your bank account."
 	icon_state = "champhelm"
-	armor = list(melee = 80, bullet = 70, laser = 40, energy = 20, bomb = 60, bio = 25, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_VERY_HIGH, 
+		bullet = ARMOR_BALLISTIC_AP, 
+		laser = ARMOR_LASER_HANDGUNS, 
+		energy = ARMOR_ENERGY_SMALL, 
+		bomb = ARMOR_BOMB_RESISTANT, 
+		bio = ARMOR_BIO_MINOR
+		)
 	species_restricted = list(SPECIES_HUMAN)
 
 /obj/item/clothing/suit/champarmor
@@ -11,7 +18,14 @@
 	icon_state = "champarmor"
 	siemens_coefficient = 0.5
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	armor = list(melee = 80, bullet = 70, laser = 60, energy = 50, bomb = 70, bio = 25, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_VERY_HIGH, 
+		bullet = ARMOR_BALLISTIC_AP, 
+		laser = ARMOR_LASER_HANDGUNS, 
+		energy = ARMOR_ENERGY_SMALL, 
+		bomb = ARMOR_BOMB_RESISTANT, 
+		bio = ARMOR_BIO_MINOR
+		)
 
 /obj/item/clothing/under/bluetunic
 	name = "blue tunic"
@@ -19,7 +33,9 @@
 	icon_state = "bluetunic"
 	siemens_coefficient = 0.8
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 5, bullet = 5, laser = 5,energy = 5, bomb = 5, bio = 5, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_MINOR
+	)
 	species_restricted = list(SPECIES_HUMAN)
 
 /obj/item/clothing/shoes/jackboots/medievalboots
@@ -27,13 +43,18 @@
 	desc = "Old-fashioned leather boots. Probably not something you want to get kicked with."
 	icon_state = "medievalboots"
 	force = 5
-	armor = list(melee = 45, bullet = 10, laser = 5, energy = 15, bomb = 30, bio = 0, rad = 0)
-	can_hold_knife = 0
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT, 
+		bullet = ARMOR_BALLISTIC_MINOR, 
+		laser = ARMOR_LASER_MINOR, 
+		energy = ARMOR_ENERGY_MINOR, 
+		bomb = ARMOR_BOMB_PADDED
+	)
 
-/obj/item/weapon/excalibur
+/obj/item/excalibur
 	name = "champion's blade"
 	desc = "<i>For at his belt hung Excalibur, the finest sword that there was, which sliced through iron as through wood.</i>"
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "excalibur"
 	item_icons = list(
 					slot_l_hand_str = 'icons/mob/onmob/items/lefthand.dmi',
@@ -41,8 +62,8 @@
 					slot_belt_str = 'icons/mob/onmob/onmob_belt.dmi'
 					)
 	item_state = "excalibur"
-	edge = 1
-	sharp = 1
+	edge = TRUE
+	sharp = TRUE
 	w_class = ITEM_SIZE_HUGE
 	force = 35
 	throw_range = 2
@@ -51,13 +72,13 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "cleaved", "sundered")
 
-/obj/item/weapon/excalibur/pickup(var/mob/living/user as mob)
+/obj/item/excalibur/pickup(var/mob/living/user as mob)
 	if(user.mind)
 		if(!GLOB.wizards.is_antagonist(user.mind) || user.mind.special_role != ANTAG_SERVANT)
 			START_PROCESSING(SSobj, src)
 			to_chat(user,"<span class='danger'>\The [src] heats up in your hands, burning you!</span>")
 
-/obj/item/weapon/excalibur/Process()
+/obj/item/excalibur/Process()
 	if(istype(loc, /mob/living))
 		if(istype(loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = loc
@@ -73,5 +94,5 @@
 			to_chat(loc,"<span class='danger'>\The [src] is burning you!</span>")
 	return 1
 
-/obj/item/weapon/excalibur/dropped()
+/obj/item/excalibur/dropped()
 	STOP_PROCESSING(SSobj, src)

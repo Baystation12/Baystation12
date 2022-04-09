@@ -6,6 +6,7 @@
 	icon_state = "ba_suit"
 	item_state = "ba_suit"
 	worn_state = "ba_suit"
+	gender_icons = 1
 
 
 /obj/item/clothing/under/rank/captain //Alright, technically not a 'civilian' but its better then giving a .dm file for a single define.
@@ -30,6 +31,7 @@
 	icon_state = "cargotech"
 	item_state = "lb_suit"
 	worn_state = "cargo"
+	gender_icons = 1
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
 
@@ -39,6 +41,7 @@
 	icon_state = "chaplain"
 	item_state = "bl_suit"
 	worn_state = "chapblack"
+	gender_icons = 1
 
 
 /obj/item/clothing/under/rank/chef
@@ -47,6 +50,7 @@
 	icon_state = "chef"
 	item_state = "w_suit"
 	worn_state = "chef"
+	gender_icons = 1
 
 
 /obj/item/clothing/under/rank/clown
@@ -78,6 +82,7 @@
 	icon_state = "hydroponics"
 	item_state = "g_suit"
 	worn_state = "hydroponics"
+	gender_icons = 1
 	permeability_coefficient = 0.50
 
 
@@ -87,17 +92,18 @@
 	icon_state = "internalaffairs"
 	item_state = "ba_suit"
 	worn_state = "internalaffairs"
-	starting_accessories = list(/obj/item/clothing/accessory/black)
+	gender_icons = 1
+	accessories = list(/obj/item/clothing/accessory/black)
 
 /obj/item/clothing/under/rank/internalaffairs/plain
 	desc = "A plain shirt and pair of pressed black pants."
 	name = "formal outfit"
-	starting_accessories = null
+	accessories = null
 
 /obj/item/clothing/under/rank/internalaffairs/plain/nt
 	desc = "A plain shirt and pair of pressed black pants."
 	name = "formal outfit"
-	starting_accessories = list(/obj/item/clothing/accessory/red_long)
+	accessories = list(/obj/item/clothing/accessory/red_long)
 
 
 /obj/item/clothing/under/rank/janitor
@@ -106,7 +112,10 @@
 	icon_state = "janitor"
 	worn_state = "janitor"
 	item_state = "janitor"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+	gender_icons = 1
+	armor = list(
+		bio = ARMOR_BIO_MINOR
+		)
 
 
 /obj/item/clothing/under/lawyer
@@ -126,6 +135,7 @@
 	icon_state = "black_suit_fem"
 	item_state = "lawyer_black"
 	worn_state = "black_suit_fem"
+	gender_icons = 1
 
 
 /obj/item/clothing/under/lawyer/red
@@ -148,7 +158,8 @@
 	icon_state = "bluesuit"
 	item_state = "ba_suit"
 	worn_state = "bluesuit"
-	starting_accessories = list(/obj/item/clothing/accessory/red)
+	gender_icons = 1
+	accessories = list(/obj/item/clothing/accessory/red)
 
 
 /obj/item/clothing/under/lawyer/purpsuit

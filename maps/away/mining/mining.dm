@@ -1,7 +1,7 @@
 #include "mining_areas.dm"
 
 //MINING-1 // CLUSTER
-/obj/effect/overmap/sector/cluster
+/obj/effect/overmap/visitable/sector/cluster
 	name = "asteroid cluster"
 	desc = "Large group of asteroids. Mineral content detected."
 	icon_state = "sector"
@@ -14,18 +14,32 @@
 		"nav_cluster_6",
 		"nav_cluster_7"
 	)
-	known = 0
-	start_x = 4
-	start_y = 5
+	known = FALSE
+
+/obj/effect/overmap/visitable/sector/cluster/generate_skybox()
+	return overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
+
+/obj/effect/overmap/visitable/sector/cluster/get_skybox_representation()
+	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
+	res.transform *= 0.5
+	return res
 
 /datum/map_template/ruin/away_site/mining_asteroid
 	name = "Mining - Asteroid"
 	id = "awaysite_mining_asteroid"
 	description = "A medium-sized asteroid full of minerals."
 	suffixes = list("mining/mining-asteroid.dmm")
-	cost = 1
+	spawn_cost = 1
 	accessibility_weight = 10
-	template_flags = TEMPLATE_FLAG_SPAWN_GUARANTEED
+	generate_mining_by_z = 1
+	apc_test_exempt_areas = list(
+		/area/outpost/abandoned = NO_SCRUBBER,
+		/area/mine/explored = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC
+	)
+	area_usage_test_exempted_root_areas = list(/area/mine)
+	area_usage_test_exempted_areas = list(/area/djstation)
+	area_coherency_test_exempt_areas =  list(/area/mine/explored, /area/mine/unexplored)
 
 /obj/effect/shuttle_landmark/cluster/nav1
 	name = "Asteroid Navpoint #1"
@@ -58,7 +72,7 @@
 	base_area = /area/mine/explored
 
 //MINING-2 // SIGNAL
-/obj/effect/overmap/sector/away
+/obj/effect/overmap/visitable/sector/away
 	name = "faint signal from an asteroid"
 	desc = "Faint signal detected, originating from the human-made structures on the site's surface."
 	icon_state = "sector"
@@ -71,15 +85,30 @@
 		"nav_away_6",
 		"nav_away_7"
 	)
-	known = 0
+	known = FALSE
+
+/obj/effect/overmap/visitable/sector/away/generate_skybox()
+	return overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
+
+/obj/effect/overmap/visitable/sector/away/get_skybox_representation()
+	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
+	res.transform *= 0.3
+	return res
 
 /datum/map_template/ruin/away_site/mining_signal
 	name = "Mining - Planetoid"
 	id = "awaysite_mining_signal"
 	description = "A mineral-rich, formerly-volcanic site on a planetoid."
 	suffixes = list("mining/mining-signal.dmm")
-	cost = 1
+	spawn_cost = 1
+	generate_mining_by_z = 1
 	base_turf_for_zs = /turf/simulated/floor/asteroid
+	area_usage_test_exempted_root_areas = list(/area/mine, /area/outpost)
+	apc_test_exempt_areas = list(
+		/area/mine/explored = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC
+	)
+	area_coherency_test_exempt_areas =  list(/area/mine/explored, /area/mine/unexplored)
 
 /obj/effect/shuttle_landmark/away
 	base_area = /area/mine/explored
@@ -113,7 +142,7 @@
 	landmark_tag = "nav_away_7"
 
 //MINING-3 // THE ORB
-/obj/effect/overmap/sector/orb
+/obj/effect/overmap/visitable/sector/orb
 	name = "monolithic asteroid"
 	desc = "Substantial mineral resources detected."
 	icon_state = "sector"
@@ -126,16 +155,30 @@
 		"nav_orb_6",
 		"nav_orb_7"
 	)
-	known = 0
+	known = FALSE
+
+/obj/effect/overmap/visitable/sector/orb/get_skybox_representation()
+	var/image/res = overlay_image('icons/skybox/skybox_rock_128.dmi', "bigrock", COLOR_ASTEROID_ROCK, RESET_COLOR)
+	res.pixel_x = rand(256,512)
+	res.pixel_y = rand(256,512)
+	return res
 
 /datum/map_template/ruin/away_site/orb
 	name = "Mining - Orb"
 	id = "awaysite_mining_orb"
 	description = "A sort of circular asteroid with a bird."
 	suffixes = list("mining/mining-orb.dmm")
-	cost = 1
+	spawn_cost = 1
 	accessibility_weight = 10
+	generate_mining_by_z = 1
 	base_turf_for_zs = /turf/simulated/floor/asteroid
+	area_usage_test_exempted_root_areas = list(/area/mine)
+	area_usage_test_exempted_areas = list(/area/djstation)
+	apc_test_exempt_areas = list(
+		/area/mine/explored = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC
+	)
+	area_coherency_test_exempt_areas =  list(/area/mine/explored, /area/mine/unexplored)
 
 /obj/effect/shuttle_landmark/orb/nav1
 	name = "Anchor point A"
@@ -166,56 +209,25 @@
 	landmark_tag = "nav_orb_7"
 	base_area = /area/mine/explored
 
-/mob/living/simple_animal/parrot/space
-	name = "space parrot"
-	desc = "It could be some all-knowing being that, for reasons we could never hope to understand, is assuming the shape and general mannerisms of a parrot - or just a rather large bird."
-	icon = 'icons/mob/parrot_grey.dmi'
-	gender = FEMALE
-	health = 750 //how sweet it is to be a god!
-	maxHealth = 750
-	mob_size = MOB_LARGE
-	speak_emote = list("professes","speaks unto you","elaborates","proclaims")
-	emote_hear = list("sings a song to herself", "preens herself")
-	melee_damage_lower = 20
-	melee_damage_upper = 40
-	attacktext = "pecked"
-	min_gas = null
-	max_gas = null
-	minbodytemp = 0
-	universal_understand = 1
-	see_invisible = SEE_INVISIBLE_NOLIGHTING
-	see_in_dark = 7
-	can_escape = 1
-
-/mob/living/simple_animal/parrot/space/Initialize()
-	. = ..()
-	name = pick("Simurgh", "Ziz", "Phoenix", "Fenghuang", "Roc of Ages")
-	var/matrix/M = new
-	M.Scale(2)
-	transform = M
-	color = get_random_colour(lower = 190)
-
-
 /obj/structure/totem
 	name = "totem"
 	desc = "Some kind of post, pillar, plinth, column, or totem."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "totem"
-	density = 1
-	anchored = 1
-	unacidable = 1
+	density = TRUE
+	anchored = TRUE
+	unacidable = TRUE
 	var/number
 
 /obj/structure/totem/Initialize()
 	. = ..()
 	number = rand(10,99)
 
-/obj/structure/totem/examine()
-	..()
-	to_chat(usr, "It's been engraved with the symbols '<font face='Shage'>RWH QaG [number]</font>'.") //i am not a linguist
+/obj/structure/totem/examine(mob/user)
+	. = ..()
+	to_chat(user, "It's been engraved with the symbols '𒊏𒁲𒌋 𒊑𒉿𒌉 [number]'.") //for the sake of the reader, "RADIU RIPITUR"
 
-
-/obj/item/weapon/stool/stone/New(var/newloc)
+/obj/item/stool/stone/New(var/newloc)
 	..(newloc,"sandstone")
 
 /turf/simulated/floor/airless/stone

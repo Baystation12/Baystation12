@@ -6,45 +6,39 @@
 
 /datum/uplink_item/item/services/fake_ion_storm
 	name = "Ion Storm Announcement"
-	desc = "Interferes with ion sensors."
+	desc = "A single-use device, that when activated, fakes an announcement, so people think all their electronic readings are wrong."
 	item_cost = 8
 	path = /obj/item/device/uplink_service/fake_ion_storm
 
 /datum/uplink_item/item/services/suit_sensor_garble
 	name = "Complete Suit Sensor Jamming"
-	desc = "Garbles all suit sensor data for 10 minutes."
+	desc = "A single-use device, that when activated, garbles all suit sensor data for 10 minutes."
 	item_cost = 16
 	path = /obj/item/device/uplink_service/jamming/garble
 
 /datum/uplink_item/item/services/fake_rad_storm
 	name = "Radiation Storm Announcement"
-	desc = "Interferes with radiation sensors."
+	desc = "A single-use device, that when activated, fakes an announcement, so people run to the tunnels in fear of being irradiated! "
 	item_cost = 24
 	path = /obj/item/device/uplink_service/fake_rad_storm
 
 /datum/uplink_item/item/services/fake_crew_annoncement
 	name = "Crew Arrival Announcement and Records"
-	desc = "Creates a fake crew arrival announcement as well as fake crew records, using your current appearance (including held items!) and worn id card. Prepare well!"
+	desc = "A single-use device, that when activated, creates a fake crew arrival announcement as well as fake crew records, using your current appearance (including held items!) and worn id card. Prepare well!"
 	item_cost = 16
 	path = /obj/item/device/uplink_service/fake_crew_announcement
 
+/datum/uplink_item/item/services/fake_command_report
+	name = "Fake Command Report"
+	desc = "A single-use device, that when activated, fakes an custom configured command report! "
+	item_cost = 24
+	path = /obj/item/device/uplink_service/fake_command_report
+
 /datum/uplink_item/item/services/suit_sensor_shutdown
 	name = "Complete Suit Sensor Shutdown"
-	desc = "Completely disables all suit sensors for 10 minutes."
+	desc = "A single-use device, that when activated, completely disables all suit sensors for 10 minutes."
 	item_cost = 40
 	path = /obj/item/device/uplink_service/jamming
-
-/datum/uplink_item/item/services/fake_update_annoncement
-	item_cost = 40
-	path = /obj/item/device/uplink_service/fake_update_announcement
-
-/datum/uplink_item/item/services/fake_update_annoncement/New()
-	..()
-	item_cost = round(DEFAULT_TELECRYSTAL_AMOUNT / 2)
-
-	spawn(2)
-		name = "[command_name()] Update Announcement"
-		desc = "Causes a falsified [command_name()] Update."
 
 /***************
 * Service Item *
@@ -58,6 +52,7 @@
 	name = "tiny device"
 	desc = "Press button to activate. Can be done once and only once."
 	w_class = ITEM_SIZE_TINY
+	icon = 'icons/obj/flash_synthetic.dmi'
 	icon_state = "sflash"
 	var/state = AWAITING_ACTIVATION
 	var/service_label = "Unnamed Service"
@@ -68,9 +63,9 @@
 		deactivate()
 	. = ..()
 
-/obj/item/device/uplink_service/examine(var/user)
-	. = ..(user, 1)
-	if(.)
+/obj/item/device/uplink_service/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		switch(state)
 			if(AWAITING_ACTIVATION)
 				to_chat(user, "It is labeled '[service_label]' and appears to be awaiting activation.")
@@ -83,8 +78,9 @@
 	if(state != AWAITING_ACTIVATION)
 		to_chat(user, "<span class='warning'>\The [src] won't activate again.</span>")
 		return
-	if(!(user.z in GLOB.using_map.station_levels))
-		to_chat(user, SPAN_WARNING("You are too far away from \the [GLOB.using_map.name] to make use of this service."))
+	var/obj/effect/overmap/visitable/O = map_sectors["[get_z(src)]"]
+	var/choice = alert(user, "This will only affect your current location[istype(O) ? " ([O])" : ""]. Proceed?","Confirmation", "Yes", "No")
+	if(choice != "Yes")
 		return
 	if(!enable())
 		return
@@ -112,9 +108,9 @@
 		if(AWAITING_ACTIVATION)
 			icon_state = initial(icon_state)
 		if(CURRENTLY_ACTIVE)
-			icon_state = "flash_on"
+			icon_state = "sflash_on"
 		if(HAS_BEEN_ACTIVATED)
-			icon_state = "flash_burnt"
+			icon_state = "sflash_burnt"
 
 /obj/item/device/uplink_service/proc/enable(var/mob/user = usr)
 	return TRUE
@@ -150,6 +146,96 @@
 	service_label = "Suit Sensor Garble"
 	ssjm = /suit_sensor_jammer_method/random/moderate
 
+/**********************
+* Fake Command Report *
+**********************/
+/obj/item/device/uplink_service/fake_command_report
+	service_label = "Fake Command Report"
+	/// The message title displayed in the command report
+	var/title
+	/// The message contents of the command report
+	var/message
+	/// Whether the command report should be broadcast to the public or only to command control programs
+	var/public_announce = FALSE
+
+
+/obj/item/device/uplink_service/fake_command_report/Initialize()
+	. = ..()
+	title = "[GLOB.using_map.boss_name] Update"
+
+
+/obj/item/device/uplink_service/fake_command_report/get_antag_info()
+	. = ..()
+	. += {"
+		<p>The fake command report service allows you to send a fake command report to whatever z level you're currently on. You can set the command report's title, message, and whether the full message is broadcast to everyone on the ship, or only to command communications software. The message will appear formatted the same was as legitimate command reports.</p>
+		<p>The fake command report service is one-use and becomes useless once used.</p>
+		<p>Use the device in-hand for a selection of options to configure the fake report and to send the report once configured.</p>
+		<p>You can examine the device in-hand to view the configured title, message, and publicity. Be warned: These are visible even after the device is used. Be sure to properly dispose of it after use!</p>
+	"}
+
+
+/obj/item/device/uplink_service/fake_command_report/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
+		to_chat(user, "The message title is set to '<b>[title]</b>'. The message will be [public_announce ? "broadcast to the public" : "sent only to command consoles"].")
+		to_chat(user, "The message contents are set to:<br />[SPAN_NOTICE(message)]")
+
+
+/obj/item/device/uplink_service/fake_command_report/attack_self(mob/user)
+	if (state != AWAITING_ACTIVATION)
+		to_chat(user, SPAN_WARNING("\The [src] won't activate again."))
+		return
+
+	var/selection = input(user, "What would you like to do?", "Fake Command Report") as anything in list("Set Title", "Set Message", "Set Publicity", "Send Command Report")
+	switch (selection)
+		if ("Set Title")
+			var/new_title = sanitize(input(user, "What would you like the title to be?", "Fake Command Report", title) as text|null)
+			if (!new_title || new_title == title)
+				return
+			title = new_title
+			to_chat(user, SPAN_NOTICE("You set the [service_label]'s title to '[title]'."))
+
+		if ("Set Message")
+			var/old_message = replacetext(message, "<br />", "\n")
+			var/new_message = sanitizeSafe(input(user, "What would you like the message to be?", "Fake Command Report", old_message) as message|null, extra = FALSE)
+			if (!new_message || new_message == message)
+				return
+			message = replacetext(new_message, "\n", "<br />")
+			to_chat(user, SPAN_NOTICE("You set the [service_label]'s message to '[message]'."))
+
+		if ("Set Publicity")
+			var/new_public = alert(user, "Should the command report be public?", "Fake Command Report", "Yes", "No")
+			if (new_public == "Yes") new_public = TRUE
+			else if (new_public == "No") new_public = FALSE
+			if (isnull(new_public) || new_public == public_announce)
+				return
+			public_announce = new_public
+			to_chat(user, SPAN_NOTICE("You set the [service_label]'s publicitiy to '[public_announce ? "public" : "private"]'."))
+
+		if ("Send Command Report")
+			if (!message)
+				to_chat(user, SPAN_WARNING("\The [src] has no message to send. Set a message first!"))
+				return
+			state = HAS_BEEN_ACTIVATED
+			update_icon()
+			user.visible_message(
+				SPAN_NOTICE("\The [user] activates \the [src]."),
+				SPAN_NOTICE("You activate the [service_label] device.")
+			)
+			log_and_message_admins("has activated the fake command report service: [title]", user)
+			enable(user)
+
+
+/obj/item/device/uplink_service/fake_command_report/enable(mob/user)
+	var/z_levels = GetConnectedZlevels(get_z(user))
+	post_comm_message(title, message)
+	if (public_announce)
+		command_announcement.Announce(message, title, GLOB.using_map.command_report_sound, msg_sanitized = TRUE, zlevels = z_levels)
+	else
+		minor_announcement.Announce("New [GLOB.using_map.company_name] Update available at all communication consoles.", zlevels = z_levels)
+	. = ..()
+
+
 /*****************
 * Fake Ion storm *
 *****************/
@@ -157,7 +243,7 @@
 	service_label = "Ion Storm Announcement"
 
 /obj/item/device/uplink_service/fake_ion_storm/enable(var/mob/user = usr)
-	ion_storm_announcement()
+	ion_storm_announcement(GetConnectedZlevels(get_z(src)))
 	. = ..()
 
 /*****************
@@ -187,7 +273,7 @@
 
 	if(CanUseTopic(user, GLOB.hands_state) != STATUS_INTERACTIVE)
 		return FALSE
-	command_announcement.Announce(message, title, msg_sanitized = 1)
+	command_announcement.Announce(message, title, msg_sanitized = 1, zlevels = GetConnectedZlevels(get_z(src)))
 	return TRUE
 
 /*********************************
@@ -201,7 +287,7 @@
 /obj/item/device/uplink_service/fake_crew_announcement/enable(var/mob/user = usr)
 
 	var/datum/computer_file/report/crew_record/random_record
-	var/obj/item/weapon/card/id/I = user.GetIdCard()
+	var/obj/item/card/id/I = user.GetIdCard()
 	if(GLOB.all_crew_records.len)
 		random_record = pick(GLOB.all_crew_records)
 	var/datum/computer_file/report/crew_record/new_record = CreateModularRecord(user)

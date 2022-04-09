@@ -2,7 +2,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 
 /spell
 	var/name = "Spell"
-	var/desc = "A spell"
+	var/desc = "A spell."
 	var/feedback = "" //what gets sent if this spell gets chosen by the spellbook.
 	parent_type = /datum
 	var/panel = "Spells"//What panel the proc holder needs to go on.
@@ -33,7 +33,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	var/message = ""				//whatever it says to the guy affected by it
 	var/selection_type = "view"		//can be "range" or "view"
 	var/atom/movable/holder			//where the spell is. Normally the user, can be an item
-	var/duration = 0 //how long the spell lasts
+	var/duration = 0 				//how long the spell lasts
 
 	var/list/spell_levels = list(Sp_SPEED = 0, Sp_POWER = 0) //the current spell levels - total spell levels can be obtained by just adding the two values
 	var/list/level_max = list(Sp_TOTAL = 4, Sp_SPEED = 4, Sp_POWER = 0) //maximum possible levels in each category. Total does cover both.
@@ -64,6 +64,8 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 
 	var/mob/living/deity/connected_god //Do we have this spell based off a boon from a god?
 	var/obj/screen/connected_button
+
+	var/hidden_from_codex = FALSE
 
 ///////////////////////
 ///SETUP AND PROCESS///
@@ -104,10 +106,13 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 		holder = user //just in case
 	if(!cast_check(skipcharge, user))
 		return
+	if (cast_delay > 1)
+		to_chat(user, SPAN_NOTICE("You start casting [name]..."))
 	if(cast_delay && !spell_do_after(user, cast_delay))
 		return
 	var/list/targets = choose_targets(user)
 	if(!check_valid_targets(targets))
+		to_chat(user, SPAN_WARNING("[name] fizzles. There are no valid targets nearby."))
 		return
 	var/time = 0
 	admin_attacker_log(user, "attempted to cast the spell [name]")
@@ -117,8 +122,6 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 			break
 		if(cast_check(1,user, targets)) //we check again, otherwise you can choose a target and then wait for when you are no longer able to cast (I.E. Incapacitated) to use it.
 			invocation(user, targets)
-			if(connected_god && !connected_god.take_charge(user, max(1, charge_max/10)))
-				break
 			take_charge(user, skipcharge)
 			before_cast(targets) //applies any overlays and effects
 			if(prob(critfailchance))
@@ -128,7 +131,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 			after_cast(targets) //generates the sparks, smoke, target messages etc.
 		else
 			break
-	while(time != number_of_channels && do_after(user, time_between_channels, incapacitation_flags = INCAPACITATION_KNOCKOUT|INCAPACITATION_FORCELYING|INCAPACITATION_STUNNED, same_direction=1))
+	while(time != number_of_channels && do_after(user, time_between_channels, do_flags = DO_DEFAULT & ~DO_USER_CAN_TURN, incapacitation_flags = INCAPACITATION_KNOCKOUT | INCAPACITATION_FORCELYING | INCAPACITATION_STUNNED))
 	after_spell(targets, user, time) //When we are done with the spell completely.
 
 
@@ -179,7 +182,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 			var/obj/effect/overlay/spell = new /obj/effect/overlay(location)
 			spell.icon = overlay_icon
 			spell.icon_state = overlay_icon_state
-			spell.anchored = 1
+			spell.anchored = TRUE
 			spell.set_density(0)
 			spawn(overlay_lifespan)
 				qdel(spell)
@@ -211,7 +214,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 /*Checkers, cost takers, message makers, etc*/
 
 /spell/proc/cast_check(skipcharge = 0,mob/user = usr, var/list/targets) //checks if the spell can be cast based on its settings; skipcharge is used when an additional cast_check is called inside the spell
-	
+
 	if(silenced > 0)
 		return 0
 
@@ -305,7 +308,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 
 	var/list/valid_targets = view_or_range(range, holder, selection_type)
 	for(var/target in targets)
-		if(!target in valid_targets)
+		if(!(target in valid_targets))
 			return 0
 	return 1
 
@@ -392,8 +395,4 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	if(!(spell_flags & (GHOSTCAST)))
 		incap_flags |= INCAPACITATION_KNOCKOUT
 
-	return do_after(user,delay, incapacitation_flags = incap_flags)
-
-/spell/proc/set_connected_god(var/mob/living/deity/god)
-	connected_god = god
-	return
+	return do_after(user, delay, incapacitation_flags = incap_flags)

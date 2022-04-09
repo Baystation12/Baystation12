@@ -50,10 +50,19 @@
 	path = /obj/item/clothing/suit/storage/toggle/suit
 	flags = GEAR_HAS_COLOR_SELECTION
 
+/datum/gear/suit/custom_suit_jacket_double
+	display_name = "suit jacket (double-breasted), colour select"
+	path = /obj/item/clothing/suit/storage/toggle/suit_double
+	flags = GEAR_HAS_COLOR_SELECTION
+
 /datum/gear/suit/hazard
 	display_name = "hazard vests"
 	path = /obj/item/clothing/suit/storage/hazardvest
 	flags = GEAR_HAS_TYPE_SELECTION
+
+/datum/gear/suit/highvis
+	display_name = "high-visibility jacket"
+	path = /obj/item/clothing/suit/storage/toggle/highvis
 
 /datum/gear/suit/hoodie
 	display_name = "hoodie, colour select"
@@ -78,6 +87,10 @@
 	path = /obj/item/clothing/suit/storage/toggle/labcoat
 	flags = GEAR_HAS_COLOR_SELECTION
 
+/datum/gear/suit/labcoat_blue
+	display_name = "blue trimmed labcoat"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/blue
+
 /datum/gear/suit/labcoat_corp
 	display_name = "labcoat, corporate colors"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/science
@@ -101,6 +114,7 @@
 	jackets += /obj/item/clothing/suit/storage/leather_jacket
 	jackets += /obj/item/clothing/suit/storage/toggle/brown_jacket
 	jackets += /obj/item/clothing/suit/storage/mbill
+	jackets += /obj/item/clothing/suit/storage/toggle/leather_hoodie
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(jackets)
 
 /datum/gear/suit/wintercoat
@@ -132,7 +146,7 @@
 
 /datum/gear/suit/medcoat/New()
 	..()
-	gear_tweaks += new/datum/gear_tweak/path/specified_types_args(/obj/item/clothing/suit/storage/toggle/fr_jacket, /obj/item/clothing/suit/storage/toggle/fr_jacket/ems, /obj/item/clothing/suit/storage/toggle/labcoat/blue, /obj/item/clothing/suit/surgicalapron)
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_args(/obj/item/clothing/suit/storage/toggle/fr_jacket, /obj/item/clothing/suit/storage/toggle/fr_jacket/ems, /obj/item/clothing/suit/surgicalapron, /obj/item/clothing/suit/storage/toggle/fr_jacket/emrs)
 
 /datum/gear/suit/trenchcoat
 	display_name = "trenchcoat selection"
@@ -146,3 +160,13 @@
 	trenchcoats += /obj/item/clothing/suit/storage/det_trench/grey
 	trenchcoats += /obj/item/clothing/suit/leathercoat
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(trenchcoats)
+
+
+/datum/gear/suit/pullover
+	display_name = "sweater, pullover"
+	path = /obj/item/clothing/suit/storage/pullover
+
+
+/datum/gear/suit/zipper
+	display_name = "sweater, zip up"
+	path = /obj/item/clothing/suit/storage/toggle/zipper

@@ -5,6 +5,10 @@
 	icobase = 'icons/mob/human_races/species/shadow/body.dmi'
 	deform = 'icons/mob/human_races/species/shadow/body.dmi'
 
+	meat_type = null
+	bone_material = null
+	skin_material = null
+
 	unarmed_types = list(/datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/sharp)
 	darksight_range = 8
 	darksight_tint = DARKTINT_GOOD

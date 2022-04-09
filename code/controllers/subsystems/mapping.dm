@@ -10,12 +10,16 @@ SUBSYSTEM_DEF(mapping)
 	var/list/submaps = list()
 	var/list/submap_archetypes = list()
 
+
+/datum/controller/subsystem/mapping/UpdateStat(time)
+	return
+
+
 /datum/controller/subsystem/mapping/Initialize(timeofday)
 	// Load templates and build away sites.
 	preloadTemplates()
 	for(var/atype in subtypesof(/decl/submap_archetype))
 		submap_archetypes[atype] = new atype
-	GLOB.using_map.build_away_sites()
 	. = ..()
 
 /datum/controller/subsystem/mapping/Recover()
@@ -28,7 +32,7 @@ SUBSYSTEM_DEF(mapping)
 /datum/controller/subsystem/mapping/proc/preloadTemplates(path = "maps/templates/") //see master controller setup
 	var/list/filelist = flist(path)
 	for(var/map in filelist)
-		var/datum/map_template/T = new(path = "[path][map]", rename = "[map]")
+		var/datum/map_template/T = new(paths = "[path][map]", rename = "[map]")
 		map_templates[T.name] = T
 	preloadBlacklistableTemplates()
 
@@ -43,26 +47,52 @@ SUBSYSTEM_DEF(mapping)
 
 	var/list/banned_maps = list() + banned_exoplanet_dmms + banned_space_dmms + banned_away_site_dmms
 
-	for(var/item in sortList(subtypesof(/datum/map_template/ruin), /proc/cmp_ruincost_priority))
-		var/datum/map_template/ruin/ruin_type = item
+	for(var/item in sortList(subtypesof(/datum/map_template), /proc/cmp_ruincost_priority))
+		var/datum/map_template/map_template_type = item
 		// screen out the abstract subtypes
-		if(!initial(ruin_type.id))
+		if(!initial(map_template_type.id))
 			continue
-		var/datum/map_template/ruin/R = new ruin_type()
+		var/datum/map_template/MT = new map_template_type()
 
 		if (banned_maps)
 			var/is_banned = FALSE
-			for (var/mappath in R.mappaths)
-				if(banned_maps.Find(mappath))
+			for (var/mappath in MT.mappaths)
+				if(list_find(banned_maps, mappath))
 					is_banned = TRUE
+					break
 			if (is_banned)
 				continue
 
-		map_templates[R.name] = R
+		map_templates[MT.name] = MT
 
-		if(istype(R, /datum/map_template/ruin/exoplanet))
-			exoplanet_ruins_templates[R.name] = R
-		else if(istype(R, /datum/map_template/ruin/space))
-			space_ruins_templates[R.name] = R
-		else if(istype(R, /datum/map_template/ruin/away_site))
-			away_sites_templates[R.name] = R
+		// This is nasty..
+		if(istype(MT, /datum/map_template/ruin/exoplanet))
+			exoplanet_ruins_templates[MT.name] = MT
+		else if(istype(MT, /datum/map_template/ruin/space))
+			space_ruins_templates[MT.name] = MT
+		else if(istype(MT, /datum/map_template/ruin/away_site))
+			away_sites_templates[MT.name] = MT
+
+/proc/generateMapList(filename)
+	var/list/potentialMaps = list()
+	var/list/Lines = world.file2list(filename)
+	if(!Lines.len)
+		return
+	for (var/t in Lines)
+		if (!t)
+			continue
+		t = trim(t)
+		if (length(t) == 0)
+			continue
+		else if (copytext(t, 1, 2) == "#")
+			continue
+		var/pos = findtext(t, " ")
+		var/name = null
+		if (pos)
+			name = lowertext(copytext(t, 1, pos))
+		else
+			name = lowertext(t)
+		if (!name)
+			continue
+		potentialMaps.Add(t)
+	return potentialMaps

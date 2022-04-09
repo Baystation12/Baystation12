@@ -20,7 +20,7 @@
 
 	icon_state = "kill1"
 
-	break_chance_table = list(5, 20, 40, 80, 100)
+	break_chance_table = list(3, 4, 5, 6, 7)
 
 /datum/grab/normal/kill/process_effect(var/obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting

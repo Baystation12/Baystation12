@@ -3,7 +3,7 @@
 
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
-	density = 1
+	density = TRUE
 	var/obj/structure/cable/last_piece
 	var/obj/item/stack/cable_coil/cable
 	var/max_cable = 100
@@ -18,13 +18,13 @@
 	..()
 	layCable(new_turf,M_Dir)
 
-/obj/machinery/cablelayer/attack_hand(mob/user as mob)
-	if(!cable&&!on)
+/obj/machinery/cablelayer/physical_attack_hand(mob/user)
+	if(!cable && !on)
 		to_chat(user, "<span class='warning'>\The [src] doesn't have any cable loaded.</span>")
-		return
-	on=!on
+		return TRUE
+	on = !on
 	user.visible_message("\The [user] [!on?"dea":"a"]ctivates \the [src].", "You switch [src] [on? "on" : "off"]")
-	return
+	return TRUE
 
 /obj/machinery/cablelayer/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O, /obj/item/stack/cable_coil))

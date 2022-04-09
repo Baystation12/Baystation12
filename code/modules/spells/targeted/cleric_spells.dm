@@ -17,18 +17,19 @@
 
 	amt_dam_brute = -15
 	amt_dam_fire = -5
-
+	amt_dam_robo = -4
 	effect_state = "green_sparkles"
 	effect_duration = 5
 
-	message = "You feel a pleasant rush of heat move through your body."
+	// Vars expect a constant at compile time, so we can't use macros for spans here
+	message = "<span class='notice'><b>You feel a pleasant rush of heat move through your body.</b></span>"
 
 /spell/targeted/heal_target/empower_spell()
 	if(!..())
 		return 0
 	amt_dam_brute -= 15
 	amt_dam_fire -= 15
-
+	amt_dam_robo -= 7
 	return "[src] will now heal more."
 
 /spell/targeted/heal_target/tower
@@ -40,6 +41,7 @@
 	range = 1
 	amt_dam_fire = -7
 	amt_dam_brute = -7
+	amt_dam_robo = -5
 	charge_max = 10 SECONDS
 	spell_flags = SELECTABLE
 	invocation = "Di'Na!"
@@ -60,9 +62,10 @@
 
 	amt_dam_brute = -75
 	amt_dam_fire  = -50
+	amt_dam_robo = -10
 	amt_blood  = 28
 
-	message = "Your body feels like a furnace."
+	message = "<span class='notice'><b>Your body feels like a warm, cozy fire.</b></span>"
 
 /spell/targeted/heal_target/major/empower_spell()
 	if(!..())
@@ -75,11 +78,13 @@
 	amt_dam_oxy = -14
 	amt_dam_brute = -35
 	amt_dam_fire  = -35
+	amt_dam_robo = -15
 
 	return "[src] heals more, and heals organ damage and radiation."
 
 /spell/targeted/heal_target/major/tower
 	charge_max = 1
+	spell_flags = INCLUDEUSER | SELECTABLE
 
 /spell/targeted/heal_target/area
 	name = "Cure Area"
@@ -93,7 +98,7 @@
 	level_max = list(Sp_TOTAL = 1, Sp_SPEED = 1, Sp_POWER = 1)
 	cooldown_reduc = 300
 	hud_state = "heal_area"
-
+	amt_dam_robo = -6
 	amt_dam_brute = -25
 	amt_dam_fire = -25
 
@@ -102,6 +107,7 @@
 		return 0
 	amt_dam_brute -= 15
 	amt_dam_fire -= 15
+	amt_dam_robo -= 4
 	range += 2
 
 	return "[src] now heals more in a wider area."
@@ -127,8 +133,8 @@
 	amt_dam_fire = -1000
 	amt_dam_oxy = -100
 	amt_dam_tox = -100
+	amt_dam_robo = -1000
 	amt_blood  = 280
-
 	effect_color = "#ff0000"
 
 	hud_state = "gen_dissolve"
@@ -143,12 +149,11 @@
 	amt_radiation  = -100
 
 
-
 	return "You will now heal organ and brain damage, as well as virtually purge all radiation."
 
 
 /spell/targeted/heal_target/trance
-	name = "trance"
+	name = "Trance"
 	desc = "A mighty spell of restoration that briefly forces its target into a deep, dreamless sleep, rapidly repairing their body and soul as their senses are dulled. The users of this mighty art are known for being short lived, slowly devolving into raving madness as the power they once relied on fails them with excessive use."
 	feedback = "TC"
 	spell_flags = SELECTABLE
@@ -159,6 +164,7 @@
 	amt_dam_fire = -1000
 	amt_dam_oxy = -100
 	amt_dam_tox = -100
+	amt_dam_robo = -1000
 	hud_state = "trance"
 	var/obj/effect/effect
 
@@ -171,7 +177,7 @@
 		L.forceMove(effect)
 		var/time = (L.getBruteLoss() + L.getFireLoss()) * 20
 		L.status_flags &= GODMODE
-		to_chat(L,"<span class='notice'>You will be in stasis for [time/10] second\s</span>")
+		to_chat(L,"<span class='notice'>You will be in stasis for [time/10] second\s.</span>")
 		addtimer(CALLBACK(src,.proc/cancel_rift),time)
 
 /spell/targeted/heal_target/trance/Destroy()
@@ -186,6 +192,21 @@
 		apply_spell_damage(L)
 		charge_max += 300
 		QDEL_NULL(effect)
+
+/obj/effect/rift
+	name = "rift"
+	desc = "a tear in space and time."
+	icon = 'icons/obj/wizard.dmi'
+	icon_state = "rift"
+	unacidable = TRUE
+	anchored = TRUE
+	density = FALSE
+
+/obj/effect/rift/Destroy()
+	for(var/o in contents)
+		var/atom/movable/M = o
+		M.dropInto(loc)
+	. = ..()
 
 /spell/targeted/revoke
 	name = "Revoke Death"

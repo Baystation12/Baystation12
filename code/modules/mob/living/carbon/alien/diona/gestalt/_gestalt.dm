@@ -6,14 +6,19 @@
 	density = TRUE
 	opacity = FALSE
 	anchored = FALSE
-	movement_handlers = list(/datum/movement_handler/delay = list(5))
-	appearance_flags = PIXEL_SCALE
+	movement_handlers = list(/datum/movement_handler/deny_multiz, /datum/movement_handler/delay = list(5))
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
 
 	var/list/nymphs                  = list()
 	var/list/valid_things_to_roll_up = list(/mob/living/carbon/alien/diona = TRUE, /mob/living/carbon/alien/diona/sterile = TRUE)
 	var/list/democracy_bucket        = list("Change to a humanoid form." = /datum/gestalt_vote/form_change_humanoid)
 	var/tmp/image/eyes_overlay
 	var/tmp/datum/gestalt_vote/current_vote
+
+/obj/structure/diona_gestalt/mob_breakout(var/mob/living/escapee)
+	. = ..()
+	shed_atom(escapee)
+	return TRUE
 
 /obj/structure/diona_gestalt/Initialize(var/mapload)
 	eyes_overlay = image(icon = icon, icon_state = "eyes_gestalt")
@@ -26,7 +31,7 @@
 	overlays = list(eyes_overlay)
 	if(nymphs && nymphs.len)
 		var/matrix/M = matrix()
-		M.Scale(Clamp(nymphs.len * 0.1, 1, 2))
+		M.Scale(clamp(nymphs.len * 0.1, 1, 2))
 		transform = M
 	else
 		transform = null

@@ -44,9 +44,9 @@
 		to_chat(user, "<span class='warning'>You are already hacking!</span>")
 		return 1
 	if(!is_type_in_list(target, supported_types))
-		to_chat(user, "\icon[src] <span class='warning'>Unable to hack this target.</span>")
+		to_chat(user, "[icon2html(src, user)] <span class='warning'>Unable to hack this target.</span>")
 		return 0
-	var/found = known_targets.Find(target)
+	var/found = list_find(known_targets, target)
 	if(found)
 		known_targets.Swap(1, found)	// Move the last hacked item first
 		return 1
@@ -54,7 +54,7 @@
 	to_chat(user, "<span class='notice'>You begin hacking \the [target]...</span>")
 	is_hacking = 1
 	// Hackin takes roughly 15-25 seconds. Fairly small random span to avoid people simply aborting and trying again.
-	var/hack_result = do_after(user, (15 SECONDS + rand(0, 5 SECONDS) + rand(0, 5 SECONDS)), progress = 0)
+	var/hack_result = do_after(user, (15 SECONDS + rand(0, 5 SECONDS) + rand(0, 5 SECONDS)), do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS)
 	is_hacking = 0
 
 	if(hack_result && in_hack_mode)
@@ -80,6 +80,7 @@
 
 /datum/topic_state/default/must_hack
 	var/obj/item/device/multitool/hacktool/hacktool
+	check_access = FALSE
 
 /datum/topic_state/default/must_hack/New(var/hacktool)
 	src.hacktool = hacktool

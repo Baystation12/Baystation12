@@ -3,9 +3,9 @@
 	icon = 'maps/torch/icons/obj/solbanner.dmi'
 	icon_state = "wood"
 	desc = "A wooden pole bearing a banner of Sol Central Government. Ave."
-	anchored = 1
+	anchored = TRUE
 	obj_flags = OBJ_FLAG_ANCHORABLE
-	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
 
 /obj/structure/solbanner/exo
 	name = "exoplanet SCG banner"
@@ -13,7 +13,7 @@
 	icon_state = "steel"
 	obj_flags = 0
 	var/plantedby
-	
+
 /obj/structure/solbanner/exo/Initialize()
 	. = ..()
 	flick("deploy",src)
@@ -44,9 +44,13 @@
 		return
 	if(user.unEquip(src))
 		forceMove(T)
+		if(GLOB.using_map.use_overmap)
+			var/obj/effect/overmap/visitable/sector/exoplanet/P = map_sectors["[z]"]
+			if(istype(P))
+				GLOB.stat_flags_planted += 1
 		qdel(src)
 		var/obj/structure/solbanner/exo/E = new(T)
-		var/obj/item/weapon/card/id/ID = user.GetIdCard()
+		var/obj/item/card/id/ID = user.GetIdCard()
 		var/dudename = ID.registered_name
 		if(istype(ID.military_rank))
 			dudename = "[ID.military_rank.name] [dudename]"

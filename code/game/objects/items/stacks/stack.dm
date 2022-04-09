@@ -14,7 +14,10 @@
 	origin_tech = list(TECH_MATERIAL = 1)
 	var/list/datum/stack_recipe/recipes
 	var/singular_name
+	var/plural_name
+	var/base_state
 	var/plural_icon_state
+	var/max_icon_state
 	var/amount = 1
 	var/max_amount //also see stack recipes initialisation, param "max_res_amount" must be equal to this max_amount
 	var/stacktype //determines whether different stack types can merge
@@ -30,15 +33,22 @@
 		src.amount = amount
 	..()
 
+/obj/item/stack/Initialize()
+	. = ..()
+	if(!plural_name)
+		plural_name = "[singular_name]s"
+
+
 /obj/item/stack/Destroy()
 	if(uses_charge)
 		return 1
 	if (src && usr && usr.machine == src)
-		usr << browse(null, "window=stack")
+		close_browser(usr, "window=stack")
 	return ..()
 
-/obj/item/stack/examine(mob/user)
-	if(..(user, 1))
+/obj/item/stack/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		if(!uses_charge)
 			to_chat(user, "There [src.amount == 1 ? "is" : "are"] [src.amount] [src.singular_name]\s in the stack.")
 		else
@@ -51,7 +61,7 @@
 	if (!recipes)
 		return
 	if (!src || get_amount() <= 0)
-		user << browse(null, "window=stack")
+		close_browser(user, "window=stack")
 	user.set_machine(src) //for correct work of onclose
 	var/list/recipe_list = recipes
 	if (recipes_sublist && recipe_list[recipes_sublist] && istype(recipe_list[recipes_sublist], /datum/stack_recipe_list))
@@ -67,15 +77,13 @@
 		if (istype(E, /datum/stack_recipe_list))
 			t1+="<br>"
 			var/datum/stack_recipe_list/srl = E
-			t1 += "<a href='?src=\ref[src];sublist=[i]'>[srl.title]</a>"
+			t1 += "\[Sub-menu] <a href='?src=\ref[src];sublist=[i]'>[srl.title]</a>"
 
 		if (istype(E, /datum/stack_recipe))
 			var/datum/stack_recipe/R = E
-			if(!user.skill_check(SKILL_CONSTRUCTION, R.difficulty))
-				continue
 			t1+="<br>"
 			var/max_multiplier = round(src.get_amount() / R.req_amount)
-			var/title as text
+			var/title
 			var/can_build = 1
 			can_build = can_build && (max_multiplier>0)
 			if (R.res_amount>1)
@@ -83,11 +91,14 @@
 			else
 				title+= "[R.display_name()]"
 			title+= " ([R.req_amount] [src.singular_name]\s)"
+			var/skill_label = ""
+			if(!user.skill_check(SKILL_CONSTRUCTION, R.difficulty))
+				var/decl/hierarchy/skill/S = decls_repository.get_decl(SKILL_CONSTRUCTION)
+				skill_label = "<font color='red'>\[[S.levels[R.difficulty]]]</font>"
 			if (can_build)
-				t1 += text("<A href='?src=\ref[src];sublist=[recipes_sublist];make=[i];multiplier=1'>[title]</A>  ")
+				t1 +="[skill_label]<A href='?src=\ref[src];sublist=[recipes_sublist];make=[i];multiplier=1'>[title]</A>"
 			else
-				t1 += text("[]", title)
-				continue
+				t1 += "[skill_label][title]"
 			if (R.max_res_amount>1 && max_multiplier>1)
 				max_multiplier = min(max_multiplier, round(R.max_res_amount/R.res_amount))
 				t1 += " |"
@@ -99,13 +110,16 @@
 					t1 += " <A href='?src=\ref[src];make=[i];multiplier=[max_multiplier]'>[max_multiplier*R.res_amount]x</A>"
 
 	t1 += "</TT></body></HTML>"
-	user << browse(JOINTEXT(t1), "window=stack")
+	show_browser(user, JOINTEXT(t1), "window=stack")
 	onclose(user, "stack")
 
 /obj/item/stack/proc/produce_recipe(datum/stack_recipe/recipe, var/quantity, mob/user)
 	var/required = quantity*recipe.req_amount
 	var/produced = min(quantity*recipe.res_amount, recipe.max_res_amount)
-	if(!user.skill_check(SKILL_CONSTRUCTION, recipe.difficulty))
+
+	var/area/A = get_area(user)
+	if (!A.can_modify_area())
+		visible_message("You can't seem to make anything with \the [src] here.")
 		return
 
 	if (!can_use(required))
@@ -124,6 +138,9 @@
 			return
 
 	if (use(required))
+		if(user.skill_fail_prob(SKILL_CONSTRUCTION, 90, recipe.difficulty))
+			to_chat(user, "<span class='warning'>You waste some [name] and fail to build \the [recipe.display_name()]!</span>")
+			return
 		var/atom/O = recipe.spawn_result(user, user.loc, produced)
 		O.add_fingerprint(user)
 
@@ -172,6 +189,8 @@
 		amount -= used
 		if (amount <= 0)
 			qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer
+		else
+			update_icon()
 		return 1
 	else
 		if(get_amount() < used)
@@ -180,7 +199,6 @@
 			var/datum/matter_synth/S = synths[i]
 			S.use_charge(charge_costs[i] * used) // Doesn't need to be deleted
 		return 1
-	return 0
 
 /obj/item/stack/proc/add(var/extra)
 	if(!uses_charge)
@@ -188,6 +206,7 @@
 			return 0
 		else
 			amount += extra
+			update_icon()
 		return 1
 	else if(!synths || synths.len < uses_charge)
 		return 0
@@ -222,17 +241,19 @@
 	return 0
 
 //creates a new stack with the specified amount
-/obj/item/stack/proc/split(var/tamount, var/force=FALSE)
+/obj/item/stack/proc/split(var/tamount)
 	if (!amount)
-		return null
-	if(uses_charge && !force)
 		return null
 
 	var/transfer = max(min(tamount, src.amount, initial(max_amount)), 0)
 
 	var/orig_amount = src.amount
 	if (transfer && src.use(transfer))
-		var/obj/item/stack/newstack = new src.type(loc, transfer)
+		var/obj/item/stack/newstack
+		if(uses_charge)
+			newstack = new src.stacktype(loc, transfer)
+		else
+			newstack = new src.type(loc, transfer)
 		newstack.copy_from(src)
 		if (prob(transfer/orig_amount * 100))
 			transfer_fingerprints_to(newstack)
@@ -289,7 +310,7 @@
 /obj/item/stack/get_storage_cost()	//Scales storage cost to stack size
 	. = ..()
 	if (amount < max_amount)
-		. = ceil(. * amount / max_amount)
+		. = Ceil(. * amount / max_amount)
 
 /obj/item/stack/attack_hand(mob/user as mob)
 	if (user.get_inactive_hand() == src)
@@ -366,10 +387,11 @@
 		to_chat(user, "<span class='warning'>There is another [display_name()] here!</span>")
 		return FALSE
 
-	if (on_floor && !isfloor(user.loc))
+	var/turf/T = get_turf(user.loc)
+	if (on_floor && !T.is_floor())
 		to_chat(user, "<span class='warning'>\The [display_name()] must be constructed on the floor!</span>")
 		return FALSE
-	
+
 	return TRUE
 
 /*

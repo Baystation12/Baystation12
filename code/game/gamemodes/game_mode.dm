@@ -126,12 +126,8 @@ var/global/list/additional_antag_types = list()
 			SSticker.mode.antag_templates |= antag
 			message_admins("Admin [key_name_admin(usr)] added [antag.role_text] template to game mode.")
 
-	// I am very sure there's a better way to do this, but I'm not sure what it might be. ~Z
-	spawn(1)
-		for(var/datum/admins/admin in world)
-			if(usr.client == admin.owner)
-				admin.show_game_mode(usr)
-				return
+	if (usr.client && usr.client.holder)
+		usr.client.holder.show_game_mode(usr)
 
 /datum/game_mode/proc/announce() //to be called when round starts
 	to_world("<B>The current game mode is [capitalize(name)]!</B>")
@@ -154,17 +150,18 @@ var/global/list/additional_antag_types = list()
 		else
 			message_admins("[antag_summary]")
 
-// startRequirements()
-// Checks to see if the game can be setup and ran with the current number of players or whatnot.
-// Returns 0 if the mode can start and a message explaining the reason why it can't otherwise.
-/datum/game_mode/proc/startRequirements()
-	var/playerC = 0
-	for(var/mob/new_player/player in GLOB.player_list)
-		if((player.client)&&(player.ready))
-			playerC++
 
-	if(playerC < required_players)
-		return "Not enough players, [src.required_players] players needed."
+/// Run prior to a mode vote to determine if the mode should be included. Falsy if yes, otherwise a status message.
+/datum/game_mode/proc/check_votable(list/lobby_players)
+	if (lobby_players.len < required_players)
+		return "Not enough players are in the lobby. [lobby_players.len] of the required [required_players]."
+
+
+/// Check to see if the currently selected mode can be started. Falsy if yes, otherwise a status message.
+/datum/game_mode/proc/check_startable(list/lobby_players)
+	var/list/ready_players = SSticker.ready_players(lobby_players)
+	if (ready_players.len < required_players)
+		return "Not enough players. [ready_players.len] ready of the required [required_players]."
 
 	var/enemy_count = 0
 	var/list/all_antag_types = GLOB.all_antag_types_
@@ -217,13 +214,11 @@ var/global/list/additional_antag_types = list()
 
 	refresh_event_modifiers()
 
-	spawn (ROUNDSTART_LOGOUT_REPORT_TIME)
-		display_roundstart_logout_report()
+	addtimer(CALLBACK(null, /proc/display_roundstart_logout_report), ROUNDSTART_LOGOUT_REPORT_TIME)
 
-	spawn (rand(waittime_l, waittime_h))
-		GLOB.using_map.send_welcome()
-		sleep(rand(100,150))
-		announce_ert_disabled()
+	var/welcome_delay = rand(waittime_l, waittime_h)
+	addtimer(CALLBACK(GLOB.using_map, /datum/map/proc/send_welcome), welcome_delay)
+	addtimer(CALLBACK(src, .proc/announce_ert_disabled), welcome_delay + 10 SECONDS)
 
 	//Assign all antag types for this game mode. Any players spawned as antags earlier should have been removed from the pending list, so no need to worry about those.
 	for(var/datum/antagonist/antag in antag_templates)
@@ -238,16 +233,11 @@ var/global/list/additional_antag_types = list()
 	// Update goals, now that antag status and jobs are both resolved.
 	for(var/thing in SSticker.minds)
 		var/datum/mind/mind = thing
-		mind.generate_goals(mind.assigned_job)
+		mind.generate_goals(mind.assigned_job, is_spawning=TRUE)
 		mind.current.show_goals()
 
 	if(evacuation_controller && auto_recall_shuttle)
 		evacuation_controller.recall = 1
-
-	SSstatistics.set_field_details("round_start","[time2text(world.realtime)]")
-	if(SSticker.mode)
-		SSstatistics.set_field_details("game_mode","[SSticker.mode]")
-	SSstatistics.set_field_details("server_ip","[world.internet_address]:[world.port]")
 	return 1
 
 /datum/game_mode/proc/fail_setup()
@@ -284,7 +274,7 @@ var/global/list/additional_antag_types = list()
 		"artifacts of eldritch horror",
 		"a brain slug infestation",
 		"killer bugs that lay eggs in the husks of the living",
-		"a deserted transport carrying xenomorph specimens",
+		"a deserted transport carrying xenofauna specimens",
 		"an emissary for the gestalt requesting a security detail",
 		"radical Skrellian transevolutionaries",
 		"classified security operations",
@@ -312,12 +302,10 @@ var/global/list/additional_antag_types = list()
 /datum/game_mode/proc/declare_completion()
 	set waitfor = FALSE
 
-	check_victory()
 	sleep(2)
 
 	var/list/all_antag_types = GLOB.all_antag_types_
 	for(var/datum/antagonist/antag in antag_templates)
-		antag.check_victory()
 		antag.print_player_summary()
 		sleep(2)
 	for(var/antag_type in all_antag_types)
@@ -332,27 +320,10 @@ var/global/list/additional_antag_types = list()
 
 	sleep(2)
 
-	var/clients = 0
-	var/surviving_humans = 0
-	var/surviving_total = 0
-	var/ghosts = 0
-	var/escaped_humans = 0
-	var/escaped_total = 0
+	var/list/data = GLOB.using_map.roundend_statistics()
 
-	for(var/mob/M in GLOB.player_list)
-		if(M.client)
-			clients++
-			if(M.stat != DEAD)
-				surviving_total++
-				if(ishuman(M))
-					surviving_humans++
-				var/area/A = get_area(M)
-				if(A && is_type_in_list(A, GLOB.using_map.post_round_safe_areas))
-					escaped_total++
-					if(ishuman(M))
-						escaped_humans++
-			else if(isghost(M))
-				ghosts++
+	var/text = "<br><br>"
+	text += GLOB.using_map.roundend_summary(data)
 
 	var/departmental_goal_summary = SSgoals.get_roundend_summary()
 	for(var/thing in GLOB.clients)
@@ -360,29 +331,10 @@ var/global/list/additional_antag_types = list()
 		if(client.mob && client.mob.mind)
 			client.mob.mind.show_roundend_summary(departmental_goal_summary)
 
-	var/text = "<br><br>"
-	if(surviving_total > 0)
-		text += "There [surviving_total>1 ? "were <b>[surviving_total] survivors</b>" : "was <b>one survivor</b>"]"
-		text += " (<b>[escaped_total>0 ? escaped_total : "none"] [evacuation_controller.emergency_evacuation ? "escaped" : "transferred"]</b>) and <b>[ghosts] ghosts</b>.<br>"
-	else
-		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>)."
-
 	to_world(text)
-	
-	if(clients > 0)
-		SSstatistics.set_field("round_end_clients",clients)
-	if(ghosts > 0)
-		SSstatistics.set_field("round_end_ghosts",ghosts)
-	if(surviving_humans > 0)
-		SSstatistics.set_field("survived_human",surviving_humans)
-	if(surviving_total > 0)
-		SSstatistics.set_field("survived_total",surviving_total)
-	if(escaped_humans > 0)
-		SSstatistics.set_field("escaped_human",escaped_humans)
-	if(escaped_total > 0)
-		SSstatistics.set_field("escaped_total",escaped_total)
 
-	send2mainirc("A round of [src.name] has ended - [surviving_total] survivor\s, [ghosts] ghost\s.")
+	send2mainirc("A round of [src.name] has ended - [data["surviving_total"]] survivor\s, [data["ghosts"]] ghost\s.")
+	SSwebhooks.send(WEBHOOK_ROUNDEND, data)
 
 	return 0
 
@@ -424,7 +376,7 @@ var/global/list/additional_antag_types = list()
 		// If we don't have enough antags, draft people who voted for the round.
 		if(candidates.len < required_enemies)
 			for(var/mob/new_player/player in players)
-				if(!antag_id || !(antag_id in player.client.prefs.never_be_special_role))
+				if(!antag_id || ((antag_id in player.client.prefs.be_special_role) || (antag_id in player.client.prefs.may_be_special_role)))
 					log_debug("[player.key] has not selected never for this role, so we are drafting them.")
 					candidates += player.mind
 					players -= player
@@ -467,9 +419,6 @@ var/global/list/additional_antag_types = list()
 
 	shuffle(antag_templates) //In the case of multiple antag types
 	newscaster_announcements = pick(newscaster_standard_feeds)
-
-/datum/game_mode/proc/check_victory()
-	return
 
 // Manipulates the end-game cinematic in conjunction with GLOB.cinematic
 /datum/game_mode/proc/nuke_act(obj/screen/cinematic_screen, station_missed = 0)
@@ -516,6 +465,9 @@ proc/display_roundstart_logout_report()
 			if(L.client.inactivity >= (ROUNDSTART_LOGOUT_REPORT_TIME / 2))	//Connected, but inactive (alt+tabbed or something)
 				msg += "<b>[L.name]</b> ([L.ckey]), the [L.job] (<font color='#ffcc00'><b>Connected, Inactive</b></font>)\n"
 				continue //AFK client
+			if(L.admin_paralyzed)
+				msg += "<b>[L.name]</b> ([L.ckey]), the [L.job] (Admin paralyzed)\n"
+				continue //Admin paralyzed
 			if(L.stat)
 				if(L.stat == UNCONSCIOUS)
 					msg += "<b>[L.name]</b> ([L.ckey]), the [L.job] (Dying)\n"

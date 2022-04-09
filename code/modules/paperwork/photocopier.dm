@@ -3,8 +3,8 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "photocopier"
 	var/insert_anim = "photocopier_animation"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	idle_power_usage = 30
 	active_power_usage = 200
 	power_channel = EQUIP
@@ -15,10 +15,11 @@
 	var/toner = 30 //how much toner is left! woooooo~
 	var/maxcopies = 10	//how many copies can be copied at once- idea shamelessly stolen from bs12's copier!
 
-/obj/machinery/photocopier/attack_ai(mob/user as mob)
-	return attack_hand(user)
+/obj/machinery/photocopier/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
-/obj/machinery/photocopier/attack_hand(mob/user as mob)
+/obj/machinery/photocopier/interact(mob/user)
 	user.set_machine(src)
 
 	var/dat = "Photocopier<BR><BR>"
@@ -36,72 +37,75 @@
 	dat += "Current toner level: [toner]"
 	if(!toner)
 		dat +="<BR>Please insert a new toner cartridge!"
-	user << browse(dat, "window=copier")
+	show_browser(user, dat, "window=copier")
 	onclose(user, "copier")
 	return
 
-/obj/machinery/photocopier/Topic(href, href_list)
+/obj/machinery/photocopier/OnTopic(user, href_list, state)
 	if(href_list["copy"])
-		if(stat & (BROKEN|NOPOWER))
-			return
-
 		for(var/i = 0, i < copies, i++)
 			if(toner <= 0)
 				break
-			if (istype(copyitem, /obj/item/weapon/paper))
+			if (istype(copyitem, /obj/item/paper))
 				copy(copyitem, 1)
 				sleep(15)
-			else if (istype(copyitem, /obj/item/weapon/photo))
+			else if (istype(copyitem, /obj/item/photo))
 				photocopy(copyitem)
 				sleep(15)
-			else if (istype(copyitem, /obj/item/weapon/paper_bundle))
-				var/obj/item/weapon/paper_bundle/B = bundlecopy(copyitem)
+			else if (istype(copyitem, /obj/item/paper_bundle))
+				var/obj/item/paper_bundle/B = bundlecopy(copyitem)
 				sleep(15*B.pages.len)
 			else
-				to_chat(usr, "<span class='warning'>\The [copyitem] can't be copied by \the [src].</span>")
+				to_chat(user, "<span class='warning'>\The [copyitem] can't be copied by \the [src].</span>")
 				break
 
 			use_power_oneoff(active_power_usage)
-		updateUsrDialog()
-	else if(href_list["remove"])
-		if(copyitem)
-			usr.put_in_hands(copyitem)
-			to_chat(usr, "<span class='notice'>You take \the [copyitem] out of \the [src].</span>")
-			copyitem = null
-			updateUsrDialog()
-	else if(href_list["min"])
+		return TOPIC_REFRESH
+
+	if(href_list["remove"])
+		OnRemove(user)
+		return TOPIC_REFRESH
+
+	if(href_list["min"])
 		if(copies > 1)
 			copies--
-			updateUsrDialog()
+		return TOPIC_REFRESH
+
 	else if(href_list["add"])
 		if(copies < maxcopies)
 			copies++
-			updateUsrDialog()
-	else if(href_list["aipic"])
-		if(!istype(usr,/mob/living/silicon)) return
-		if(stat & (BROKEN|NOPOWER)) return
+		return TOPIC_REFRESH
+
+	if(href_list["aipic"])
+		if(!istype(user,/mob/living/silicon)) return
 
 		if(toner >= 5)
-			var/mob/living/silicon/tempAI = usr
+			var/mob/living/silicon/tempAI = user
 			var/obj/item/device/camera/siliconcam/camera = tempAI.silicon_camera
 
 			if(!camera)
 				return
-			var/obj/item/weapon/photo/selection = camera.selectpicture()
+			var/obj/item/photo/selection = camera.selectpicture()
 			if (!selection)
 				return
 
-			var/obj/item/weapon/photo/p = photocopy(selection)
+			var/obj/item/photo/p = photocopy(selection)
 			if (p.desc == "")
 				p.desc += "Copied by [tempAI.name]"
 			else
 				p.desc += " - Copied by [tempAI.name]"
 			toner -= 5
 			sleep(15)
-		updateUsrDialog()
+		return TOPIC_REFRESH
+
+/obj/machinery/photocopier/proc/OnRemove(mob/user)
+	if(copyitem)
+		user.put_in_hands(copyitem)
+		to_chat(user, "<span class='notice'>You take \the [copyitem] out of \the [src].</span>")
+		copyitem = null
 
 /obj/machinery/photocopier/attackby(obj/item/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/weapon/paper) || istype(O, /obj/item/weapon/photo) || istype(O, /obj/item/weapon/paper_bundle))
+	if(istype(O, /obj/item/paper) || istype(O, /obj/item/photo) || istype(O, /obj/item/paper_bundle))
 		if(!copyitem)
 			if(!user.unEquip(O, src))
 				return
@@ -142,8 +146,12 @@
 					toner = 0
 	return
 
-/obj/machinery/photocopier/proc/copy(var/obj/item/weapon/paper/copy, var/need_toner=1)
-	var/obj/item/weapon/paper/c = new copy.type(loc, copy.text, copy.name, copy.metadata )
+/obj/machinery/photocopier/proc/copy(obj/item/paper/copy, need_toner = TRUE, copy_admin = FALSE)
+	var/copy_type = copy.type
+	if (istype(copy, /obj/item/paper/admin) && !copy_admin) // Edge case for admin faxes so that they don't show the editing form
+		copy_type = /obj/item/paper
+
+	var/obj/item/paper/c = new copy_type(loc, copy.text, copy.name, copy.metadata )
 
 	c.color = COLOR_WHITE
 
@@ -151,7 +159,7 @@
 		c.info = "<font color = #101010>"
 	else			//no toner? shitty copies for you!
 		c.info = "<font color = #808080>"
-	var/copied = html_decode(copy.info)
+	var/copied = copy.info
 	copied = replacetext(copied, "<font face=\"[c.deffont]\" color=", "<font face=\"[c.deffont]\" nocolor=")	//state of the art techniques in action
 	copied = replacetext(copied, "<font face=\"[c.crayonfont]\" color=", "<font face=\"[c.crayonfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
 	c.info += copied
@@ -183,8 +191,8 @@
 	c.update_icon()
 	return c
 
-/obj/machinery/photocopier/proc/photocopy(var/obj/item/weapon/photo/photocopy, var/need_toner=1)
-	var/obj/item/weapon/photo/p = photocopy.copy()
+/obj/machinery/photocopier/proc/photocopy(var/obj/item/photo/photocopy, var/need_toner=1)
+	var/obj/item/photo/p = photocopy.copy()
 	p.dropInto(loc)
 
 	if(toner > 10)	//plenty of toner, go straight greyscale
@@ -202,17 +210,17 @@
 	return p
 
 //If need_toner is 0, the copies will still be lightened when low on toner, however it will not be prevented from printing. TODO: Implement print queues for fax machines and get rid of need_toner
-/obj/machinery/photocopier/proc/bundlecopy(var/obj/item/weapon/paper_bundle/bundle, var/need_toner=1)
-	var/obj/item/weapon/paper_bundle/p = new /obj/item/weapon/paper_bundle (src)
-	for(var/obj/item/weapon/W in bundle.pages)
+/obj/machinery/photocopier/proc/bundlecopy(var/obj/item/paper_bundle/bundle, var/need_toner=1)
+	var/obj/item/paper_bundle/p = new /obj/item/paper_bundle (src)
+	for(var/obj/item/W in bundle.pages)
 		if(toner <= 0 && need_toner)
 			toner = 0
 			visible_message("<span class='notice'>A red light on \the [src] flashes, indicating that it is out of toner.</span>")
 			break
 
-		if(istype(W, /obj/item/weapon/paper))
+		if(istype(W, /obj/item/paper))
 			W = copy(W)
-		else if(istype(W, /obj/item/weapon/photo))
+		else if(istype(W, /obj/item/photo))
 			W = photocopy(W)
 		W.forceMove(p)
 		p.pages += W
@@ -225,5 +233,6 @@
 
 /obj/item/device/toner
 	name = "toner cartridge"
+	icon = 'icons/obj/toner_cartridge.dmi'
 	icon_state = "tonercartridge"
 	var/toner_amount = 30

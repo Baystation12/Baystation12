@@ -33,6 +33,6 @@ GLOBAL_DATUM_INIT(item_unequipped_event, /decl/observ/item_unequipped, new)
 **********************/
 
 /obj/item/dropped(var/mob/user)
-	..()
+	UNLINT(..())
 	GLOB.mob_unequipped_event.raise_event(user, src)
 	GLOB.item_unequipped_event.raise_event(src, user)

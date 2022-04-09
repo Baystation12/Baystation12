@@ -6,7 +6,7 @@
 	iv_stand = FALSE
 
 	var/obj/item/clothing/cloth // the clothing on the ironing board
-	var/obj/item/weapon/ironingiron/holding // ironing iron on the board
+	var/obj/item/ironingiron/holding // ironing iron on the board
 	var/list/move_sounds = list( // some nasty sounds to make when moving the board
 		'sound/effects/metalscrape1.ogg',
 		'sound/effects/metalscrape2.ogg',
@@ -42,10 +42,10 @@
 
 	. = ..()
 
-/obj/structure/bed/roller/ironingboard/examine(var/mob/user)
+/obj/structure/bed/roller/ironingboard/examine(mob/user)
 	. = ..()
 	if(cloth)
-		to_chat(user, "<span class='notice'>\The \icon[cloth] [cloth] lies on it.</span>")
+		to_chat(user, "<span class='notice'>\The [icon2html(cloth, user)] [cloth] lies on it.</span>")
 
 /obj/structure/bed/roller/ironingboard/on_update_icon()
 	if(density)
@@ -61,7 +61,7 @@
 
 /obj/structure/bed/roller/ironingboard/attackby(var/obj/item/I, var/mob/user)
 	if(!density)
-		if(istype(I,/obj/item/clothing) || istype(I,/obj/item/weapon/ironingiron))
+		if(istype(I,/obj/item/clothing) || istype(I,/obj/item/ironingiron))
 			to_chat(user, "<span class='notice'>[src] isn't deployed!</span>")
 			return
 		return ..()
@@ -79,14 +79,8 @@
 			GLOB.destroyed_event.register(I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
 			update_icon()
 		return
-	else if(istype(I,/obj/item/weapon/ironingiron))
-		var/obj/item/weapon/ironingiron/R = I
-
-		if(!holding && !R.enabled && user.unEquip(I, src))
-			holding = R
-			GLOB.destroyed_event.register(I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
-			update_icon()
-			return
+	else if(istype(I,/obj/item/ironingiron))
+		var/obj/item/ironingiron/R = I
 
 		// anti-wrinkle "massage"
 		if(buckled_mob && ishuman(buckled_mob))
@@ -105,6 +99,11 @@
 			return
 
 		if(!cloth)
+			if(!holding && !R.enabled && user.unEquip(I, src))
+				holding = R
+				GLOB.destroyed_event.register(I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
+				update_icon()
+				return	
 			to_chat(user, "<span class='notice'>There isn't anything on the ironing board.</span>")
 			return
 
@@ -114,7 +113,6 @@
 
 		visible_message("[user] finishes ironing [cloth].")
 		cloth.ironed_state = WRINKLES_NONE
-
 		return
 
 	..()

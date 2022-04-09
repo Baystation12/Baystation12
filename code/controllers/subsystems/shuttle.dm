@@ -13,6 +13,7 @@ SUBSYSTEM_DEF(shuttle)
 	var/last_landmark_registration_time
 	var/list/shuttle_logs = list()               //Keeps records of shuttle movement, format is list(datum/shuttle = datum/shuttle_log)
 	var/list/shuttle_areas = list()              //All the areas of all shuttles.
+	var/list/docking_registry = list()           //Docking controller tag -> docking controller program, mostly for init purposes.
 
 	var/list/landmarks_awaiting_sector = list()  //Stores automatic landmarks that are waiting for a sector to finish loading.
 	var/list/landmarks_still_needed = list()     //Stores landmark_tags that need to be assigned to the sector (landmark_tag = sector) when registered.
@@ -52,9 +53,12 @@ SUBSYSTEM_DEF(shuttle)
 	initialize_sectors()
 
 /datum/controller/subsystem/shuttle/proc/initialize_shuttles()
+	var/list/shuttles_made = list()
 	for(var/shuttle_type in shuttles_to_initialize)
-		initialize_shuttle(shuttle_type)
-	hook_up_motherships(shuttles_to_initialize)
+		var/shuttle = initialize_shuttle(shuttle_type)
+		if(shuttle)
+			shuttles_made += shuttle
+	hook_up_motherships(shuttles_made)
 	shuttles_to_initialize = null
 
 /datum/controller/subsystem/shuttle/proc/initialize_sectors()
@@ -69,27 +73,26 @@ SUBSYSTEM_DEF(shuttle)
 		registered_shuttle_landmarks[shuttle_landmark_tag] = shuttle_landmark
 		last_landmark_registration_time = world.time
 
-		var/obj/effect/overmap/O = landmarks_still_needed[shuttle_landmark_tag]
+		var/obj/effect/overmap/visitable/O = landmarks_still_needed[shuttle_landmark_tag]
 		if(O) //These need to be added to sectors, which we handle.
 			try_add_landmark_tag(shuttle_landmark_tag, O)
 			landmarks_still_needed -= shuttle_landmark_tag
 		else if(istype(shuttle_landmark, /obj/effect/shuttle_landmark/automatic)) //These find their sector automatically
-			var/obj/effect/shuttle_landmark/automatic/automatic = shuttle_landmark
-			O = map_sectors["[automatic.z]"]
-			O ? try_add_landmark_tag(shuttle_landmark_tag, O) : (landmarks_awaiting_sector += shuttle_landmark)
+			O = map_sectors["[shuttle_landmark.z]"]
+			O ? O.add_landmark(shuttle_landmark, shuttle_landmark.shuttle_restricted) : (landmarks_awaiting_sector += shuttle_landmark)
 
 /datum/controller/subsystem/shuttle/proc/get_landmark(var/shuttle_landmark_tag)
 	return registered_shuttle_landmarks[shuttle_landmark_tag]
 
 //Checks if the given sector's landmarks have initialized; if so, registers them with the sector, if not, marks them for assignment after they come in.
 //Also adds automatic landmarks that were waiting on their sector to spawn.
-/datum/controller/subsystem/shuttle/proc/initialize_sector(obj/effect/overmap/given_sector)
+/datum/controller/subsystem/shuttle/proc/initialize_sector(obj/effect/overmap/visitable/given_sector)
 	given_sector.populate_sector_objects() // This is a late init operation that sets up the sector's map_z and does non-overmap-related init tasks.
 
 	for(var/landmark_tag in given_sector.initial_generic_waypoints)
 		if(!try_add_landmark_tag(landmark_tag, given_sector))
 			landmarks_still_needed[landmark_tag] = given_sector
-	
+
 	for(var/shuttle_name in given_sector.initial_restricted_waypoints)
 		for(var/landmark_tag in given_sector.initial_restricted_waypoints[shuttle_name])
 			if(!try_add_landmark_tag(landmark_tag, given_sector))
@@ -99,10 +102,10 @@ SUBSYSTEM_DEF(shuttle)
 	for(var/thing in landmarks_to_check)
 		var/obj/effect/shuttle_landmark/automatic/landmark = thing
 		if(landmark.z in given_sector.map_z)
-			try_add_landmark_tag(landmark.landmark_tag, given_sector)
+			given_sector.add_landmark(landmark, landmark.shuttle_restricted)
 			landmarks_awaiting_sector -= landmark
 
-/datum/controller/subsystem/shuttle/proc/try_add_landmark_tag(landmark_tag, obj/effect/overmap/given_sector)
+/datum/controller/subsystem/shuttle/proc/try_add_landmark_tag(landmark_tag, obj/effect/overmap/visitable/given_sector)
 	var/obj/effect/shuttle_landmark/landmark = get_landmark(landmark_tag)
 	if(!landmark)
 		return
@@ -120,6 +123,7 @@ SUBSYSTEM_DEF(shuttle)
 	if(initial(shuttle.category) != shuttle_type)
 		shuttle = new shuttle()
 		shuttle_areas |= shuttle.shuttle_area
+		return shuttle
 
 /datum/controller/subsystem/shuttle/proc/hook_up_motherships(shuttles_list)
 	for(var/datum/shuttle/S in shuttles_list)
@@ -136,8 +140,22 @@ SUBSYSTEM_DEF(shuttle)
 		return
 	overmap_halted = !overmap_halted
 	for(var/ship in ships)
-		var/obj/effect/overmap/ship/ship_effect = ship
+		var/obj/effect/overmap/visitable/ship/ship_effect = ship
 		overmap_halted ? ship_effect.halt() : ship_effect.unhalt()
 
-/datum/controller/subsystem/shuttle/stat_entry()
-	..("Shuttles:[shuttles.len], Ships:[ships.len], L:[registered_shuttle_landmarks.len][overmap_halted ? ", HALT" : ""]")
+/datum/controller/subsystem/shuttle/proc/ship_by_name(name)
+	for (var/obj/effect/overmap/visitable/ship/ship in ships)
+		if (ship.name == name)
+			return ship
+	return null
+
+/datum/controller/subsystem/shuttle/proc/ship_by_type(type)
+	for (var/obj/effect/overmap/visitable/ship/ship in ships)
+		if (ship.type == type)
+			return ship
+	return null
+
+/datum/controller/subsystem/shuttle/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Shuttles [shuttles.len] Ships [ships.len] Landmarks [registered_shuttle_landmarks.len] Halted [overmap_halted ? "Y" : "N"]")

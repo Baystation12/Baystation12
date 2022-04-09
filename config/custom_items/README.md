@@ -1,0 +1,1 @@
+For details on how to use the custom item system, please refer to [the custom item repository](https://github.com/Baystation12/custom-items).

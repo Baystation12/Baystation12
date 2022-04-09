@@ -39,19 +39,19 @@
 	name = "alien chitin"
 	desc = "A piece of the hide of a terrible creature."
 	singular_name = "alien hide piece"
-	icon = 'icons/mob/alien.dmi'
+	icon = 'icons/obj/alien.dmi'
 	icon_state = "chitin"
 
 /obj/item/xenos_claw
 	name = "alien claw"
 	desc = "The claw of a terrible creature."
-	icon = 'icons/mob/alien.dmi'
+	icon = 'icons/obj/alien.dmi'
 	icon_state = "claw"
 
 /obj/item/weed_extract
 	name = "weed extract"
 	desc = "A piece of slimy, purplish weed."
-	icon = 'icons/mob/alien.dmi'
+	icon = 'icons/obj/alien.dmi'
 	icon_state = "weed_extract"
 
 /obj/item/stack/hairlesshide
@@ -69,11 +69,8 @@
 	var/drying_threshold_temperature = 500 //Kelvin to start drying
 
 //Step one - dehairing.
-/obj/item/stack/animalhide/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(	istype(W, /obj/item/weapon/material/knife) || \
-		istype(W, /obj/item/weapon/material/kitchen/utensil/knife) || \
-		istype(W, /obj/item/weapon/material/twohanded/fireaxe) || \
-		istype(W, /obj/item/weapon/material/hatchet) )
+/obj/item/stack/animalhide/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/material/knife) || isHatchet(W))
 
 		//visible message on mobs is defined as visible_message(var/message, var/self_message, var/blind_message)
 		usr.visible_message("<span class='notice'>\The [usr] starts cutting hair off \the [src]</span>", "<span class='notice'>You start cutting the hair off \the [src]</span>", "You hear the sound of a knife rubbing against flesh")

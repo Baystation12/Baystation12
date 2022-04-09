@@ -46,7 +46,7 @@
 			target.electrocute_act(rand(15,45), user, 1, user.zone_sel.selecting)
 			return TRUE
 		else if(isatom(target))
-			var/obj/item/weapon/cell/charging_cell = target.get_cell()
+			var/obj/item/cell/charging_cell = target.get_cell()
 			if(istype(charging_cell))
 				charging_cell.give(rand(15,45))
 			return TRUE
@@ -103,7 +103,12 @@
 	if(isnull(target) || istype(target)) return FALSE
 	. = ..()
 	if(.)
-		var/datum/effect/effect/system/spark_spread/sparks = new ()
-		sparks.set_up(3, 0, get_turf(target))
-		sparks.start()
+		if(istype(target,/obj/item/clothing/mask/smokable/cigarette))
+			var/obj/item/clothing/mask/smokable/cigarette/S = target
+			S.light("[user] snaps \his fingers and \the [S.name] lights up.")
+			playsound(S.loc, "sparks", 50, 1)
+		else
+			var/datum/effect/effect/system/spark_spread/sparks = new ()
+			sparks.set_up(3, 0, get_turf(target))
+			sparks.start()
 		return TRUE

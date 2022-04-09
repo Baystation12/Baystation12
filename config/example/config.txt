@@ -1,8 +1,11 @@
 ## Server name: This appears at the top of the screen in-game. In this case it will read "tgstation: station_name" where station_name is the randomly generated name of the station for the round. Remove the # infront of SERVERNAME and replace 'tgstation' with the name of your choice
 # SERVERNAME spacestation13
 
+## Game Version: The archetype of the server for topic status requests. Unless significantly deviated, avoid changing this. Default Baystation12
+# GAME_VERSION Baystation12
+
 ## Hub visibility: If you want to be visible on the hub, uncomment the below line and be sure that Dream Daemon is set to "Visible." This can be changed in-round as well with toggle-hub-visibility if Dream Daemon is set correctly.
-# HUB
+# HUB_VISIBLE
 
 ## Add a # infront of this if you want to use the SQL based admin system, the legacy system uses admins.txt. You need to set up your database to use the SQL based system.
 ADMIN_LEGACY_SYSTEM
@@ -19,6 +22,10 @@ JOBS_HAVE_MINIMAL_ACCESS
 ## NOTE: If you have just set-up the database keep this DISABLED, as player age is determined from the first time they connect to the server with the database up. If you just set it up, it means
 ## you have noone older than 0 days, since noone has been logged yet. Only turn this on once you have had the database up for 30 days.
 #USE_AGE_RESTRICTION_FOR_JOBS
+
+## Unhash this entry to set a number of days since first connection below which a new or returning player will not be allowed to successfully connect to the server.
+#MINIMUM_PLAYER_AGE 7
+
 
 ## Unhash this entry to have certain antag roles require your account to be at least a certain number of days old for round start and auto-spawn selection.
 ## Non-automatic antagonist recruitment, such as being converted to cultism is not affected. Has the same database requirements and notes as USE_AGE_RESTRICTION_FOR_JOBS.
@@ -57,9 +64,6 @@ LOG_EMOTE
 ## log attack messages
 LOG_ATTACK
 
-## log pda messages
-LOG_PDA
-
 ## log world.log messages
 # LOG_WORLD_OUTPUT
 
@@ -72,36 +76,28 @@ LOG_PDA
 ## log admin warning messages
 ##LOG_ADMINWARN  ## Also duplicates a bunch of other messages.
 
-## sql switching
-# SQL_ENABLED
+## Log all timers on timer auto reset
+# LOG_TIMERS_ON_BUCKET_RESET
 
 ## disconnect players who did nothing during the set amount of minutes
 # KICK_INACTIVE 10
 
-## Chooses whether mods have the ability to tempban or not
-MODS_CAN_TEMPBAN
+## Prevent Secret from being added to mode votes
+# SECRET_DISABLED
 
-## Chooses whether mods have the ability to issue tempbans for jobs or not
-MODS_CAN_JOB_TEMPBAN
-
-## Maximum mod tempban duration (in minutes)
-MOD_TEMPBAN_MAX 1440
-
-## Maximum mod job tempban duration (in minutes)
-MOD_JOB_TEMPBAN_MAX 1440
-
-
-## probablities for game modes chosen in "secret" and "random" modes
-##
+## probablities for game modes chosen in Secret
 ## default probablity is 1, increase to make that mode more likely to be picked
 ## set to 0 to disable that mode
 PROBABILITY EXTENDED 1
-PROBABILITY MALFUNCTION 1
+PROBABILITY TRAITOR 1
+PROBABILITY SPYVSPY 1
 PROBABILITY MERCENARY 1
-PROBABILITY WIZARD 1
-PROBABILITY CHANGELING 1
+PROBABILITY HEIST 1
 PROBABILITY CULT 1
-PROBABILITY EXTEND-A-TRAITORMONGOUS 6
+PROBABILITY CHANGELING 1
+
+## if possible round types will be hidden from players for secret rounds
+#SECRET_HIDE_POSSIBILITIES
 
 ## Hash out to disable random events during the round.
 ALLOW_RANDOM_EVENTS
@@ -121,17 +117,14 @@ TRAITOR_SCALING
 ## If security is prohibited from being most antagonists
 #PROTECT_ROLES_FROM_ANTAGONIST
 
-## If cortical stacks are to be used instead of standard cloning.
-USE_CORTICAL_STACKS
-
 ## Comment this out to stop admins being able to choose their personal ooccolor
 ALLOW_ADMIN_OOCCOLOR
 
-## If metadata is supported
-# ALLOW_METADATA
-
 ## allow players to initiate a restart vote
 ALLOW_VOTE_RESTART
+
+## Allow chat markup ingame.
+ALLOW_CHAT_MARKUP
 
 ## allow players to initate a mode-change start
 ALLOW_VOTE_MODE
@@ -142,11 +135,13 @@ VOTE_DELAY 6000
 ## time period (deciseconds) which voting session will last (default 1 minute)
 VOTE_PERIOD 600
 
-## autovote initial delay (deciseconds) before first automatic transfer vote call (default 180 minutes)
-VOTE_AUTOTRANSFER_INITIAL 108000
+## autovote initial delay in minutes before first automatic transfer vote call (default 120)
+# using seven semicolon (;) separated values allows for different weekday-based values
+VOTE_AUTOTRANSFER_INITIAL 120
 
-##autovote delay (deciseconds) before sequential automatic transfer votes are called (default 30 minutes)
-VOTE_AUTOTRANSFER_INTERVAL 18000
+##autovote delay in minutes before sequential automatic transfer votes are called (default 30)
+# using seven semicolon (;) separated values allows for different weekday-based values
+VOTE_AUTOTRANSFER_INTERVAL 30
 
 ## Time left (seconds) before round start when automatic gamemote vote is called (default 160).
 VOTE_AUTOGAMEMODE_TIMELEFT 160
@@ -166,15 +161,8 @@ ALLOW_ANTAG_HUD
 ## If ghosts use antagHUD they are no longer allowed to join the round.
 ANTAG_HUD_RESTRICTED
 
-## allow AI job
-ALLOW_AI
-
-
 ## disable abandon mob
 # NORESPAWN
-
-## disables calling del(src) on newmobs if they logout before spawnin in
-# DONT_DEL_NEWMOB
 
 ## set a hosted by name for unix platforms
 HOSTEDBY yournamehere
@@ -196,55 +184,49 @@ GUEST_BAN
 ## Unlike SERVER, this one shouldn't break auto-reconnect
 #SERVERURL server.net:port
 
-## forum address
-# FORUMURL http://example.com
-
 ## Wiki address
-# WIKIURL http://example.com
+## Where your server's documentation lives
+# WIKI_URL https://example.com
 
-## GitHub address
-# GITHUBURL https://github.com/example-user/example-repository
+## Rules address
+## Where your server's rules can be found
+# RULES_URL https://example.com
+
+## Lore address
+## Where your server's scintillating background material can be read
+# LORE_URL https://example.com
+
+## Forum address
+## Where your users can go to chat in the old fashion
+# FORUM_URL https://example.com
+
+## Source address
+## Where your users can go to stick their fingers in the code
+# SOURCE_URL https://example.com
 
 ## GitHub new issue address
-# ISSUEREPORTURL https://github.com/example-user/example-repository/issues/new
+## Where your users can go to complain about problems with the code
+# ISSUE_URL https://example.com
 
-## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
-# BANAPPEALS http://example.com
+## Discord address
+## Where your users can go to complain at each other in real time
+# DISCORD_URL https://example.com
 
-## In-game features
-## spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
-# FEATURE_OBJECT_SPELL_SYSTEM
+## Ban appeals URL
+## Where your users can go to tell you they've changed
+# BANAPPEALS https://example.com
 
-##Toggle for having jobs load up from the .txt
-# LOAD_JOBS_FROM_TXT
+## Defines world tick rate relative to 10/sec at 1 and 20/sec at 0.5. Use this OR fps, not both. Defaults to 0.333333
+# TICKLAG 0.333333
 
-##Remove the # mark infront of this to forbid admins from posssessing the singularity.
-#FORBID_SINGULO_POSSESSION
-
-## Remove the # to show a popup 'reply to' window to every non-admin that recieves an adminPM.
-## The intention is to make adminPMs more visible. (although I fnd popups annoying so this defaults to off)
-#POPUP_ADMIN_PM
-
-## Remove the # to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR
-ALLOW_HOLIDAYS
-
-##Defines the ticklag for the world.  0.9 is the normal one, 0.5 is smoother.
-TICKLAG 0.7
-
-##Defines world FPS. Defaults to 20.
-# FPS 20
+## Defines world tick rate. Use this OR ticklag, not both. Defaults to 30.
+FPS 30
 
 ## Whether the server will talk to other processes through socket_talk
 SOCKET_TALK 0
 
 ## Comment this out to disable automuting
 #AUTOMUTE_ON
-
-## How long the delay is before the Away Mission gate opens. Default is half an hour.
-GATEWAY_DELAY 18000
-
-## Remove the # to give assistants maint access.
-#ASSISTANT_MAINT
 
 ## Remove the # to make rounds which end instantly (Rev, Wizard, Malf) to continue until the shuttle is called or the station is nuked.
 ## Malf and Rev will let the shuttle be called when the antags/protags are dead.
@@ -254,11 +236,6 @@ GATEWAY_DELAY 18000
 USEALIENWHITELIST
 ## Uncomment to use the alien whitelist system with SQL instead. (requires the above uncommented aswell)
 #USEALIENWHITELIST_SQL
-
-## Comment this to unrestrict the number of alien players allowed in the round. The number represents the number of alien players for every human player.
-#ALIEN_PLAYER_RATIO 0.2
-##Remove the # to let ghosts spin chairs
-#GHOST_INTERACTION
 
 ## Password used for authorizing ircbot and other external tools.
 #COMMS_PASSWORD
@@ -318,15 +295,6 @@ EVENT_CUSTOM_START_MAJOR 80;100
 ## able to use the more powerful debug options.
 #DEBUG_PARANOID
 
-## Uncomment to allow aliens to spawn.
-#ALIENS_ALLOWED
-
-## Uncomment to allow alien xenomorph queens to lay eggs.
-#ALIEN_EGGS_ALLOWED
-
-## Uncomment to allow xenos to spawn.
-#NINJAS_ALLOWED
-
 ## Uncomment to disable the restrictive weldervision overlay.
 #DISABLE_WELDER_VISION
 
@@ -351,8 +319,11 @@ EVENT_CUSTOM_START_MAJOR 80;100
 ## Uncomment to disable respawning by default.
 #DISABLE_RESPAWN
 
-## Respawn delay in minutes before one may respawn as a crew member.
+## The delay in minutes before an observer may return to the main menu.
 #RESPAWN_DELAY 30
+
+## The delay in minutes before an observer that has returned to the main menu may rejoin the game.
+#RESPAWN_MENU_DELAY 0
 
 ## Strength of ambient star light. Set to 0 or less to turn off. A value of 1 is unlikely to have a noticeable effect in most lighting systems.
 STARLIGHT 0
@@ -368,7 +339,8 @@ STARLIGHT 0
 ## Enable asteroid tunnel/cave generation. Will behave strangely if turned off with a map that expects it on.
 # GENERATE_ASTEROID
 
-
+## Set a value for the maximum range in tiles of an explosion from its center. Default 14
+# MAX_EXPLOSION_RANGE 14
 
 ## Uncomment to enable organ decay outside of a body or storage item.
 #ORGANS_CAN_DECAY
@@ -380,7 +352,7 @@ STARLIGHT 0
 #DEFAULT_BRAIN_HEALTH 400
 
 ## Uncomment this line to announce shuttle dock announcements to the main IRC channel, if MAIN_IRC has also been setup.
-# ANNOUNCE_SHUTTLE_DOCK_TO_IRC
+# ANNOUNCE_EVAC_TO_IRC
 
 ## Uncomment to enable map voting; you'll need to use the script at tools/server.sh or an equivalent for it to take effect
 ## You'll also likely need to enable WAIT_FOR_SIGUSR1 below
@@ -413,8 +385,74 @@ RADIATION_LOWER_LIMIT 0.15
 ## Uncomment this to prevent players from printing copy/pasted circuits
 #DISABLE_CIRCUIT_PRINTING
 
+## Uncomment this to allow admins to narrate using HTML tags
+#ALLOW_UNSAFE_NARRATES
+
+## Uncomment this to DISABLE action spam kicking. Not recommended; this helps protect from spam attacks.
+#DO_NOT_PREVENT_SPAM
+
+## Uncomment this to modify the length of the spam kicking interval in seconds.
+#ACT_INTERVAL 0.1
+
+## Uncomment this to modify the number of actions permitted per interval before being kicked for spam.
+#MAX_ACTS_PER_INTERVAL 140
+
 ##Clients will be unable to connect unless their version is equal to or higher than this (a number, e.g. 511)
-#MINIMUM_BYOND_VERSION
+#MINIMUM_BYOND_VERSION 512
 
 ## Clients will be unable to connect unless their build is equal to or higher than this (a number, e.g. 1000)
-#MINIMUM_BYOND_BUILD
+#MINIMUM_BYOND_BUILD 1488
+
+## Uncomment or create lines to add user-accessible chat markup
+## A chat markup line is in the form regex;replacer. The regular expression should be in the common
+# /matcher/flags format. The replacer is a common regex replacer string, using $n ($1, $2, etc) to
+# reference capture groups. The provided examples allow for /italics/, *bold*, and _underline_
+# respectively. Using multiple or complex markup options can get strange - do it at your own risk.
+#CHAT_MARKUP /(^|\s)\/([^\/]+)\//g;$1<i>$2</i>
+#CHAT_MARKUP /(^|\s)\*([^\*]+)\*/g;$1<b>$2</b>
+#CHAT_MARKUP /(^|\s)_([^_]+)_/g;$1<u>$2</u>
+
+## Prevents matching messages from being sent on any communication channel
+## The provided example forbids byond:// and http/https:// unless followed by a permitted domain.
+#FORBIDDEN_MESSAGE_REGEX /((https?)|(byond)):\/\/(?!(.*\.)?baystation12\.net)/i
+
+## The text to send to a user when their message matches FORBIDDEN_MESSAGE_REGEX
+## Defaults to <B>Your message matched a filter and has not been sent.</B>
+## Can be disabled by setting an empty message here
+#FORBIDDEN_MESSAGE_WARNING <B>Your message matched a filter and has not been sent.</B>
+
+## Uncomment this to prevent admins from being notified of of FORBIDDEN_MESSAGE_REGEX matches
+#FORBIDDEN_MESSAGE_NO_NOTIFICATIONS
+
+## Uncomment this to not show the content of forbidden messages in admin notifications
+## Only used when FORBIDDEN_MESSAGE_NO_NOTIFICATIONS is not active
+#FORBIDDEN_MESSAGE_HIDE_DETAILS
+
+## Direct clients to preload the server resource file from a URL pointing to a .rsc file. NOTE: At this time (byond 512),
+## the client/resource_rsc var does not function as one would expect. See client_defines.dm, the "preload_rsc" var's
+## comments on how to use it properly. If you use a resource URL, you must set preload_rsc to 0 at compile time or
+## clients will still download from the server *too*. This will randomly select one URL if more than one is provided.
+## Spaces are prohibited in each URL by spec, you must use encoded spaces.
+#RESOURCE_URLS URL URL2 URL3
+
+## Add lines of 'DISALLOW_VOTABLE_MODE config_tag' to prevent a normally votable mode from being votable, eg:
+## DISALLOW_VOTABLE_MODE changeling
+## DISALLOW_VOTABLE_MODE malfunction
+
+## Maximum time a round can last for (in minutes). If this time is exceeded,
+## the round will autotransfer without a vote at the next continue vote. Leave disabled for no limit.
+#MAXIMUM_ROUND_LENGTH 120
+
+## The delay in deciseconds between stat() updates.
+## Lower can be more responsive to scene changes and updates but has a higher client/server overhead.
+# STAT_DELAY 5
+
+## The maximum number of times someone can be warned in a round before they are automatically banned.
+# WARN_AUTOBAN_THRESHOLD 3
+
+## The length in minutes of an automatic ban created by passing the warning threshold.
+# WARN_AUTOBAN_DURATION 30
+
+## Uncomment this to bypass empty z-level checks in certain subsystems. For testing and development purposes only.
+## Not recommended for live use.
+#RUN_EMPTY_LEVELS

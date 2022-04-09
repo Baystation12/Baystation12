@@ -1,29 +1,31 @@
-/obj/item/weapon/material/kitchen
+/obj/item/material/kitchen
 	icon = 'icons/obj/kitchen.dmi'
+	worth_multiplier = 1.1
 
 /*
  * Utensils
  */
-/obj/item/weapon/material/kitchen/utensil
+/obj/item/material/kitchen/utensil
 	w_class = ITEM_SIZE_TINY
-	thrown_force_divisor = 1
+	thrown_force_multiplier = 1
 	origin_tech = list(TECH_MATERIAL = 1)
 	attack_verb = list("attacked", "stabbed", "poked")
-	sharp = 0
-	edge = 0
-	force_divisor = 0.1 // 6 when wielded with hardness 60 (steel)
-	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
+	max_force = 5
+	force_multiplier = 0.1 // 6 when wielded with hardness 60 (steel)
+	thrown_force_multiplier = 0.25 // 5 when thrown with weight 20 (steel)
+	default_material = MATERIAL_ALUMINIUM
+
 	var/loaded      //Descriptive string for currently loaded food object.
 	var/scoop_food = 1
 
-/obj/item/weapon/material/kitchen/utensil/New()
+/obj/item/material/kitchen/utensil/New()
 	..()
 	if (prob(60))
 		src.pixel_y = rand(0, 4)
 	create_reagents(5)
 	return
 
-/obj/item/weapon/material/kitchen/utensil/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/material/kitchen/utensil/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M))
 		return ..()
 
@@ -36,16 +38,31 @@
 			return ..()
 
 	if (reagents.total_volume > 0)
-		reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		if(M == user)
 			if(!M.can_eat(loaded))
 				return
-			M.visible_message("<span class='notice'>\The [user] eats some [loaded] from \the [src].</span>")
+			switch(M.get_fullness())
+				if (0 to 50)
+					to_chat(M, SPAN_DANGER("You ravenously stick \the [src] into your mouth and gobble the food!"))
+				if (50 to 150)
+					to_chat(M, SPAN_NOTICE("You hungrily chew the food on \the [src]."))
+				if (150 to 350)
+					to_chat(M, SPAN_NOTICE("You chew the food on \the [src]."))
+				if (350 to 550)
+					to_chat(M, SPAN_NOTICE("You unwillingly chew the food on \the [src]."))
+				if (550 to INFINITY)
+					to_chat(M, SPAN_WARNING("You cannot take one more bite from \the [src]!"))
+					return
+
 		else
 			user.visible_message("<span class='warning'>\The [user] begins to feed \the [M]!</span>")
-			if(!(M.can_force_feed(user, loaded) && do_mob(user, M, 5 SECONDS)))
+			if(!M.can_force_feed(user, loaded) || !do_after(user, 5 SECONDS, M))
+				return
+
+			if (user.get_active_hand() != src)
 				return
 			M.visible_message("<span class='notice'>\The [user] feeds some [loaded] to \the [M] with \the [src].</span>")
+		reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		playsound(M.loc,'sound/items/eatfood.ogg', rand(10,40), 1)
 		overlays.Cut()
 		return
@@ -53,85 +70,83 @@
 		to_chat(user, "<span class='warning'>You don't have anything on \the [src].</span>")//if we have help intent and no food scooped up DON'T STAB OURSELVES WITH THE FORK
 		return
 
-/obj/item/weapon/material/kitchen/utensil/fork
+
+/obj/item/material/kitchen/utensil/fork
 	name = "fork"
 	desc = "It's a fork. Sure is pointy."
 	icon_state = "fork"
 
-/obj/item/weapon/material/kitchen/utensil/fork/plastic
-	default_material = MATERIAL_PLASTIC
+/obj/item/material/kitchen/utensil/fork/plastic/default_material = MATERIAL_PLASTIC
+/obj/item/material/kitchen/utensil/fork/silver/default_material = MATERIAL_SILVER
+/obj/item/material/kitchen/utensil/fork/titanium/default_material = MATERIAL_TITANIUM
 
-/obj/item/weapon/material/kitchen/utensil/spoon
+
+/obj/item/material/kitchen/utensil/spoon
 	name = "spoon"
 	desc = "It's a spoon. You can see your own upside-down face in it."
 	icon_state = "spoon"
 	attack_verb = list("attacked", "poked")
-	force_divisor = 0.1 //2 when wielded with weight 20 (steel)
+	force_multiplier = 0.1 //2 when wielded with weight 20 (steel)
 
-/obj/item/weapon/material/kitchen/utensil/spoon/plastic
-	default_material = MATERIAL_PLASTIC
+/obj/item/material/kitchen/utensil/spoon/plastic/default_material = MATERIAL_PLASTIC
+/obj/item/material/kitchen/utensil/spoon/silver/default_material = MATERIAL_SILVER
+/obj/item/material/kitchen/utensil/spoon/titanium/default_material = MATERIAL_TITANIUM
 
-/*
- * Knives
- */
-/obj/item/weapon/material/kitchen/utensil/knife
-	name = "knife"
-	desc = "A knife for eating with. Can cut through any food."
-	icon_state = "knife"
-	force_divisor = 0.1 // 6 when wielded with hardness 60 (steel)
-	scoop_food = 0
-	sharp = 1
-	edge = 1
 
-// Identical to the tactical knife but nowhere near as stabby.
-// Kind of like the toy esword compared to the real thing.
-//Making the sprite clear that this is a small knife
-/obj/item/weapon/material/kitchen/utensil/knife/boot
-	name = "small knife"
-	desc = "A small, easily concealed knife."
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "pocketknife_open"
-	item_state = "knife"
-	applies_material_colour = 0
-	unbreakable = 1
+/obj/item/material/kitchen/utensil/spork
+	name = "spork"
+	desc = "It's a spork. It's much like a fork, but much blunter."
+	icon_state = "spork"
 
-/obj/item/weapon/material/kitchen/utensil/knife/attack(target as mob, mob/living/user as mob)
-	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, "<span class='warning'>You accidentally cut yourself with \the [src].</span>")
-		user.take_organ_damage(20)
-		return
-	return ..()
+/obj/item/material/kitchen/utensil/spork/plastic/default_material = MATERIAL_PLASTIC
+/obj/item/material/kitchen/utensil/spork/silver/default_material = MATERIAL_SILVER
+/obj/item/material/kitchen/utensil/spork/titanium/default_material = MATERIAL_TITANIUM
 
-/obj/item/weapon/material/kitchen/utensil/knife/unathiknife
-	name = "dueling knife"
-	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "unathiknife"
-	item_state = "knife"
-	attack_verb = list("ripped", "torn", "cut")
-	applies_material_colour = 0
-	unbreakable = 1
 
-/obj/item/weapon/material/kitchen/utensil/knife/plastic
-	default_material = MATERIAL_PLASTIC
+/obj/item/material/kitchen/utensil/foon
+	name = "foon"
+	desc = "It's a foon. It's much like a spoon, but much sharper."
+	icon_state = "foon"
 
-/*
+/obj/item/material/kitchen/utensil/foon/plastic/default_material = MATERIAL_PLASTIC
+/obj/item/material/kitchen/utensil/foon/silver/default_material = MATERIAL_SILVER
+/obj/item/material/kitchen/utensil/foon/titanium/default_material = MATERIAL_TITANIUM
+
+
+/obj/item/storage/box/silverware
+	name = "silverware box"
+	startswith = list(
+		/obj/item/material/knife/table/silver = 4,
+		/obj/item/material/kitchen/utensil/fork/silver = 4,
+		/obj/item/material/kitchen/utensil/spoon/silver = 4
+	)
+
+ /*
  * Rolling Pins
  */
 
-/obj/item/weapon/material/kitchen/rollingpin
+/obj/item/material/kitchen/rollingpin
 	name = "rolling pin"
 	desc = "Used to knock out the Bartender."
 	icon_state = "rolling_pin"
 	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "whacked")
 	default_material = MATERIAL_WOOD
-	force_divisor = 0.7 // 10 when wielded with weight 15 (wood)
-	thrown_force_divisor = 1 // as above
+	max_force = 15
+	force_multiplier = 0.7 // 10 when wielded with weight 15 (wood)
+	thrown_force_multiplier = 1 // as above
 
-/obj/item/weapon/material/kitchen/rollingpin/attack(mob/living/M as mob, mob/living/user as mob)
+/obj/item/material/kitchen/rollingpin/plastic/default_material = MATERIAL_PLASTIC
+/obj/item/material/kitchen/rollingpin/aluminium/default_material = MATERIAL_ALUMINIUM
+
+
+/obj/item/material/kitchen/rollingpin/attack(mob/living/target, mob/living/user)
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50) && user.unEquip(src))
-		to_chat(user, "<span class='warning'>\The [src] slips out of your hand and hits your head.</span>")
-		user.take_organ_damage(10)
+		user.visible_message(
+			SPAN_WARNING("\The [user] manages to hit \himself on the head with \the [src]!"),
+			SPAN_WARNING("\The [src] slips out of your hand and hits your head!"),
+			SPAN_WARNING("Bonk!")
+		)
+		user.take_organ_damage(10, 0)
 		user.Paralyse(2)
 		return
 	return ..()

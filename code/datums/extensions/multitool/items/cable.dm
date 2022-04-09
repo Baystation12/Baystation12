@@ -1,5 +1,5 @@
 /obj/item/stack/cable_coil/New()
-	set_extension(src, /datum/extension/interactive/multitool, /datum/extension/interactive/multitool/items/cable)
+	set_extension(src, /datum/extension/interactive/multitool/items/cable)
 	..()
 
 /datum/extension/interactive/multitool/items/cable/get_interact_window(var/obj/item/device/multitool/M, var/mob/user)
@@ -18,7 +18,7 @@
 
 /datum/extension/interactive/multitool/items/cable/on_topic(href, href_list, user)
 	var/obj/item/stack/cable_coil/cable_coil = holder
-	if(href_list["select_color"] && href_list["select_color"] in GLOB.possible_cable_colours)
+	if(href_list["select_color"] && (href_list["select_color"] in GLOB.possible_cable_colours))
 		cable_coil.set_cable_color(href_list["select_color"], user)
 		return MT_REFRESH
 

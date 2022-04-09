@@ -1,6 +1,7 @@
 
 /obj/item/grab
 	name = "grab"
+	canremove = 0
 
 	var/mob/living/carbon/human/affecting = null
 	var/mob/living/carbon/human/assailant = null
@@ -42,19 +43,22 @@
 		return INITIALIZE_HINT_QDEL
 
 	var/obj/item/organ/O = get_targeted_organ()
-	SetName("[name] ([O.name])")
+	SetName("[initial(name)] ([O.name])")
 	GLOB.dismembered_event.register(affecting, src, .proc/on_organ_loss)
 	GLOB.zone_selected_event.register(assailant.zone_sel, src, .proc/on_target_change)
 
-/obj/item/grab/examine(var/user)
-	..()
+/obj/item/grab/examine(mob/user)
+	. = ..()
 	var/obj/item/O = get_targeted_organ()
-	to_chat(user,"A grab on \the [affecting]'s [O.name].")
+	to_chat(user, "A grab on \the [affecting]'s [O.name].")
 
 /obj/item/grab/Process()
 	current_grab.process(src)
 
 /obj/item/grab/attack_self(mob/user)
+	if (!assailant)
+		return
+
 	switch(assailant.a_intent)
 		if(I_HELP)
 			downgrade()
@@ -73,6 +77,8 @@
 	current_grab.hit_with_grab(src)
 
 /obj/item/grab/resolve_attackby(atom/A, mob/user, var/click_params)
+	if (QDELETED(src) || !assailant)
+		return TRUE
 	assailant.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(!A.grab_attack(src))
 		return ..()
@@ -85,6 +91,10 @@
 	..()
 	if(!QDELETED(src))
 		qdel(src)
+
+/obj/item/grab/can_be_dropped_by_client(mob/M)
+	if(M == assailant)
+		return TRUE
 
 /obj/item/grab/Destroy()
 	if(affecting)
@@ -102,6 +112,9 @@
 	This section is for newly defined useful procs.
 */
 
+/obj/item/grab/on_active_hand()
+	on_target_change(new_sel = assailant.zone_sel.selecting)
+
 /obj/item/grab/proc/on_target_change(obj/screen/zone_sel/zone, old_sel, new_sel)
 	if(src != assailant.get_active_hand())
 		return // Note that because of this condition, there's no guarantee that target_zone = old_sel
@@ -109,6 +122,14 @@
 		return
 	var/old_zone = target_zone
 	target_zone = new_sel
+	var/obj/item/organ/O = get_targeted_organ()
+
+	if (!O)
+		to_chat(assailant, SPAN_WARNING("You fail to grab \the [affecting] there as they do not have that bodypart!"))
+		return
+
+	SetName("[initial(name)] ([O.name])")
+	to_chat(assailant, SPAN_NOTICE("You are now holding \the [affecting] by \the [O]."))
 	if(!istype(get_targeted_organ(), /obj/item/organ))
 		current_grab.let_go(src)
 		return
@@ -134,9 +155,6 @@
 		return 0
 	if(assailant.anchored || affecting.anchored)
 		return 0
-	if(assailant == affecting)
-		to_chat(assailant, "<span class='notice'>You can't grab yourself.</span>")
-		return 0
 	if(assailant.get_active_hand())
 		to_chat(assailant, "<span class='notice'>You can't grab someone if your hand is full.</span>")
 		return 0
@@ -147,6 +165,14 @@
 	if(!istype(organ))
 		to_chat(assailant, "<span class='notice'>\The [affecting] is missing that body part!</span>")
 		return 0
+	if(assailant == affecting)
+		if(!current_grab.can_grab_self)	//let's not nab ourselves
+			to_chat(assailant, "<span class='notice'>You can't grab yourself!</span>")
+			return 0
+		var/list/bad_parts = assailant.hand ? list(BP_L_ARM, BP_L_HAND) :  list(BP_R_ARM, BP_R_HAND)
+		if(organ.organ_tag in bad_parts)
+			to_chat(assailant, "<span class='notice'>You can't grab your own [organ.name] with itself!</span>")
+			return 0
 	for(var/obj/item/grab/G in affecting.grabbed_by)
 		if(G.assailant == assailant && G.target_zone == target_zone)
 			var/obj/O = G.get_targeted_organ()
@@ -171,7 +197,7 @@
 
 // Returns the organ of the grabbed person that the grabber is targeting
 /obj/item/grab/proc/get_targeted_organ()
-	return (affecting.get_organ(target_zone))
+	return (affecting?.get_organ(target_zone))
 
 /obj/item/grab/proc/resolve_item_attack(var/mob/living/M, var/obj/item/I, var/target_zone)
 	if((M && ishuman(M)) && I)
@@ -180,7 +206,8 @@
 		return 0
 
 /obj/item/grab/proc/action_used()
-	assailant.remove_cloaking_source(assailant.species)
+	if (assailant)
+		assailant.remove_cloaking_source(assailant.species)
 	last_action = world.time
 	leave_forensic_traces()
 
@@ -250,6 +277,15 @@
 /obj/item/grab/proc/reset_position()
 	current_grab.reset_position(src)
 
+/obj/item/grab/proc/has_hold_on_organ(obj/item/organ/external/O)
+	if (!O)
+		return FALSE
+
+	if (get_targeted_organ() == O)
+		return TRUE
+
+	return FALSE
+
 /*
 	This section is for the simple procs used to return things from current_grab.
 */
@@ -295,4 +331,3 @@
 
 /obj/item/grab/proc/resolve_openhand_attack()
 		return current_grab.resolve_openhand_attack(src)
-

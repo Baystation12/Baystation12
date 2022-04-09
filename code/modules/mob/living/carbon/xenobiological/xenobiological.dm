@@ -1,6 +1,6 @@
 /mob/living/carbon/slime
 	name = "baby slime"
-	icon = 'icons/mob/slimes.dmi'
+	icon = 'icons/mob/simple_animal/slimes.dmi'
 	icon_state = "grey baby slime"
 	pass_flags = PASS_FLAG_TABLE
 	speak_emote = list("chirps")
@@ -18,6 +18,15 @@
 	// canstun and canweaken don't affect slimes because they ignore stun and weakened variables
 	// for the sake of cleanliness, though, here they are.
 	status_flags = CANPARALYSE|CANPUSH
+
+	meat_type = null
+	meat_amount = 0
+	skin_material = null
+	skin_amount = 0
+	bone_material = null
+	bone_amount = 0
+
+	can_be_buckled = FALSE
 
 	var/toxloss = 0
 	var/is_adult = 0
@@ -59,8 +68,11 @@
 /mob/living/carbon/slime/getToxLoss()
 	return toxloss
 
+/mob/living/carbon/slime/get_digestion_product()
+	return /datum/reagent/slimejelly
+
 /mob/living/carbon/slime/adjustToxLoss(var/amount)
-	toxloss = Clamp(toxloss + amount, 0, maxHealth)
+	toxloss = clamp(toxloss + amount, 0, maxHealth)
 
 /mob/living/carbon/slime/setToxLoss(var/amount)
 	adjustToxLoss(amount-getToxLoss())
@@ -99,7 +111,7 @@
 	if(health <= 0) // if damaged, the slime moves twice as slow
 		tally *= 2
 
-	return tally + config.slime_delay
+	return tally
 
 /mob/living/carbon/slime/Bump(atom/movable/AM as mob|obj, yes)
 	if ((!(yes) || now_pushing))
@@ -163,15 +175,21 @@
 	return
 
 /mob/living/carbon/slime/bullet_act(var/obj/item/projectile/Proj)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 	attacked += 10
 	..(Proj)
 	return 0
 
 /mob/living/carbon/slime/emp_act(severity)
+	if (status_flags & GODMODE)
+		return
 	powerlevel = 0 // oh no, the power!
 	..()
 
 /mob/living/carbon/slime/ex_act(severity)
+	if (status_flags & GODMODE)
+		return
 	..()
 
 	var/b_loss = null
@@ -308,10 +326,12 @@
 	return 0
 
 /mob/living/carbon/slime/proc/gain_nutrition(var/amount)
-	nutrition += amount
+	adjust_nutrition(amount)
 	if(prob(amount * 2)) // Gain around one level per 50 nutrition
 		powerlevel++
 		if(powerlevel > 10)
 			powerlevel = 10
 			adjustToxLoss(-10)
-	nutrition = min(nutrition, get_max_nutrition())
+
+/mob/living/carbon/slime/adjust_nutrition(var/amt)
+	nutrition = clamp(nutrition + amt, 0, get_max_nutrition())

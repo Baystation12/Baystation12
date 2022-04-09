@@ -20,7 +20,7 @@
 	if(.)
 
 		var/regex/name_regex = regex("\[A-Z\]{2}-\[A-Z\]{1} \[0-9\]{4}")
-		name_regex.Find(owner.real_name)
+		regex_find(name_regex, owner.real_name)
 
 		if(world.time < next_rename)
 			to_chat(owner, "<span class='warning'>[PROTOCOL_ARTICLE] forbids changing your ident again so soon.</span>")
@@ -100,12 +100,18 @@
 
 /obj/item/organ/internal/powered/float/Process()
 	. = ..()
-	if(active && owner && owner.floatiness <= 5)
-		owner.make_floating(5)
+	if(owner)
+		if(active)
+			owner.pass_flags |= PASS_FLAG_TABLE
+			if(owner.floatiness <= 5)
+				owner.make_floating(5)
+		else
+			owner.pass_flags &= ~PASS_FLAG_TABLE
 
 /obj/item/organ/internal/eyes/adherent
 	name = "receptor prism"
 	icon = 'icons/mob/human_races/species/adherent/organs.dmi'
+	eye_icon = 'icons/mob/human_races/species/adherent/eyes.dmi'
 	icon_state = "eyes"
 	status = ORGAN_ROBOTIC
 	phoron_guard = TRUE

@@ -7,7 +7,7 @@
 
 /datum/gear/headphones
 	display_name = "headphones"
-	path = /obj/item/clothing/ears/earmuffs/headphones
+	path = /obj/item/clothing/ears/headphones
 	sort_category = "Earwear"
 
 /datum/gear/earrings
