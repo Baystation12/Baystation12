@@ -45,7 +45,7 @@
 /datum/random_map/noise/exoplanet/desert
 	descriptor = "desert exoplanet"
 	smoothing_iterations = 4
-	land_type = /turf/unsimulated/floor/exoplanet/desert
+	land_type = /turf/simulated/floor/exoplanet/desert
 
 	flora_prob = 5
 	large_flora_prob = 0
@@ -58,7 +58,7 @@
 
 /area/exoplanet/desert
 	ambience = list('sound/effects/wind/desert0.ogg','sound/effects/wind/desert1.ogg','sound/effects/wind/desert2.ogg','sound/effects/wind/desert3.ogg','sound/effects/wind/desert4.ogg','sound/effects/wind/desert5.ogg')
-	base_turf = /turf/unsimulated/floor/exoplanet/desert
+	base_turf = /turf/simulated/floor/exoplanet/desert
 
 /obj/effect/quicksand
 	name = "quicksand"

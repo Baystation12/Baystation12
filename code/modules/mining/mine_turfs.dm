@@ -36,7 +36,8 @@ var/list/mining_floors = list()
 	var/obj/item/last_find
 	var/datum/artifact_find/artifact_find
 	var/image/ore_overlay
-	resources = TRUE
+
+	has_resources = 1
 
 /turf/simulated/mineral/Initialize()
 	. = ..()
@@ -423,7 +424,7 @@ var/list/mining_floors = list()
 	temperature = TCMB
 	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
 	var/overlay_detail
-	resources = TRUE
+	has_resources = 1
 
 /turf/simulated/floor/asteroid/Initialize()
 	. = ..()

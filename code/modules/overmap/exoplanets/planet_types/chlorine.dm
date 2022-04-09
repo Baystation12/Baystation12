@@ -35,8 +35,8 @@
 /datum/random_map/noise/exoplanet/chlorine
 	descriptor = "chlorine exoplanet"
 	smoothing_iterations = 3
-	land_type = /turf/unsimulated/floor/exoplanet/chlorine_sand
-	water_type = /turf/unsimulated/floor/exoplanet/water/shallow/chlorine_liquid
+	land_type = /turf/simulated/floor/exoplanet/chlorine_sand
+	water_type = /turf/simulated/floor/exoplanet/water/shallow/chlorine_liquid
 	water_level_min = 2
 	water_level_max = 3
 	fauna_prob = 2
@@ -45,9 +45,9 @@
 
 /area/exoplanet/chlorine
 	ambience = list('sound/effects/wind/desert0.ogg','sound/effects/wind/desert1.ogg','sound/effects/wind/desert2.ogg','sound/effects/wind/desert3.ogg','sound/effects/wind/desert4.ogg','sound/effects/wind/desert5.ogg')
-	base_turf = /turf/unsimulated/floor/exoplanet/chlorine_sand
+	base_turf = /turf/simulated/floor/exoplanet/chlorine_sand
 
-/turf/unsimulated/floor/exoplanet/water/shallow/chlorine_liquid
+/turf/simulated/floor/exoplanet/water/shallow/chlorine_liquid
 	name = "chlorine marsh"
 	icon = 'icons/turf/chlorine.dmi'
 	icon_state = "chlorine_liquid"
@@ -55,7 +55,7 @@
 	dirt_color = "#d2e0b7"
 	reagent_type = /datum/reagent/toxin/chlorine
 
-/turf/unsimulated/floor/exoplanet/chlorine_sand
+/turf/simulated/floor/exoplanet/chlorine_sand
 	name = "chlorinated sand"
 	icon = 'icons/turf/chlorine.dmi'
 	icon_state = "chlorine_sand1"
@@ -63,6 +63,6 @@
 	dirt_color = "#d2e0b7"
 	footstep_type = /decl/footsteps/sand
 
-/turf/unsimulated/floor/exoplanet/chlorine_sand/New()
+/turf/simulated/floor/exoplanet/chlorine_sand/New()
 	icon_state = "chlorine_sand[rand(0,11)]"
 	..()

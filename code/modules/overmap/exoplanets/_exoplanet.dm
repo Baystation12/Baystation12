@@ -176,7 +176,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	var/light = 0.1
 	if (!night)
 		light = lightlevel
-	for (var/turf/unsimulated/floor/exoplanet/T in block(locate(daycolumn,1,min(map_z)),locate(daycolumn,maxy,max(map_z))))
+	for (var/turf/simulated/floor/exoplanet/T in block(locate(daycolumn,1,min(map_z)),locate(daycolumn,maxy,max(map_z))))
 		T.set_light(light, 0.1, 2)
 	daycolumn++
 	if (daycolumn > maxx)

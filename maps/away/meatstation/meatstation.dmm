@@ -2709,7 +2709,7 @@
 /turf/simulated/floor/airless,
 /area/space)
 "fP" = (
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "fQ" = (
 /obj/structure/window/basic{
@@ -2717,7 +2717,7 @@
 	},
 /obj/machinery/portable_atmospherics/hydroponics/soil,
 /obj/item/seeds/weeds,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "fR" = (
 /obj/structure/window/basic{
@@ -2728,16 +2728,16 @@
 	},
 /obj/machinery/portable_atmospherics/hydroponics/soil,
 /obj/item/seeds/weeds,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "fS" = (
 /obj/machinery/door/window/eastleft,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "fT" = (
 /obj/machinery/portable_atmospherics/hydroponics/soil,
 /obj/item/seeds/weeds,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "fU" = (
 /obj/structure/window/basic{
@@ -2745,7 +2745,7 @@
 	},
 /obj/machinery/portable_atmospherics/hydroponics/soil,
 /obj/item/seeds/weeds,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "fV" = (
 /obj/structure/table/marble,
@@ -2862,7 +2862,7 @@
 /area/meatstation/hydroponics)
 "gj" = (
 /obj/structure/flora/ausbushes/sparsegrass,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "gk" = (
 /obj/random/single/meatstation/wormscientist,
@@ -3747,7 +3747,7 @@
 /area/meatstation/bathroom)
 "im" = (
 /obj/machinery/beehive,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "in" = (
 /obj/effect/floor_decal/corner/lime/border{
@@ -8049,12 +8049,12 @@
 /area/meatstation/hydroponics)
 "tl" = (
 /obj/random/single/meatstation/low/wormguard,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "tm" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /obj/random/single/meatstation/low/wormguard,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "tn" = (
 /obj/random/single/meatstation/meatworm,
@@ -9354,7 +9354,7 @@
 /obj/machinery/portable_atmospherics/hydroponics/soil,
 /obj/item/seeds/weeds,
 /obj/machinery/light,
-/turf/unsimulated/floor/exoplanet/grass,
+/turf/simulated/floor/exoplanet/grass,
 /area/meatstation/hydroponics)
 "wa" = (
 /obj/machinery/biogenerator,
