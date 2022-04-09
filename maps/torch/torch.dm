@@ -110,6 +110,8 @@
 	#include "machinery/keycard authentication.dm"
 	#include "machinery/suit_storage.dm"
 
+	#include "outfits/scgec.dm"
+
 	#include "robot/module_flying_surveyor.dm"
 
 	#include "structures/signs.dm"
