@@ -42,7 +42,7 @@
 /obj/effect/overmap/visitable/sector/exoplanet/proc/handle_repopulation()
 	for (var/i = 1 to round(max_animal_count - animals.len))
 		if (prob(10))
-			var/turf/T = pick_area_turf(planetary_area, list(/proc/not_turf_contains_dense_objects))
+			var/turf/simulated/T = pick_area_turf(planetary_area, list(/proc/not_turf_contains_dense_objects))
 			var/mob_type = pick(repopulate_types)
 			var/mob/S = new mob_type(T)
 			track_animal(S)
