@@ -677,13 +677,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	return "<span class='danger'>[T.His] face is horribly mangled!</span>\n"
 
 /datum/species/proc/max_skin_tone()
-	if(appearance_flags & HAS_SKIN_TONE_GRAV)
-		return 100
-	if(appearance_flags & HAS_SKIN_TONE_SPCR)
-		return 165
-	if(appearance_flags & HAS_SKIN_TONE_TRITON)
-		return 80
-	return 220
+	return 255
 
 /datum/species/proc/get_hair_styles()
 	var/list/L = LAZYACCESS(hair_styles, type)
@@ -772,7 +766,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				dat += "</br><b>Has excellent traction.</b>"
 			if(species_flags & SPECIES_FLAG_NO_POISON)
 				dat += "</br><b>Immune to most poisons.</b>"
-			if(appearance_flags & HAS_A_SKIN_TONE)
+			if(appearance_flags & HAS_SKIN_TONE)
 				dat += "</br><b>Has a variety of skin tones.</b>"
 			if(appearance_flags & HAS_SKIN_COLOR)
 				dat += "</br><b>Has a variety of skin colours.</b>"

@@ -51,7 +51,6 @@
 
 #define CULTURE_OTHER          "Other Culture"
 #define CULTURE_HUMAN          "Humankind"
-#define CULTURE_HUMAN_VATGROWN "Nonborn"
 #define CULTURE_HUMAN_MARTIAN  "Martian, Surfacer"
 #define CULTURE_HUMAN_MARSTUN  "Martian, Tunneller"
 #define CULTURE_HUMAN_LUNAPOOR "Luna, Lower Class"

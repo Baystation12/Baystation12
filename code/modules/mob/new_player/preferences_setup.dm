@@ -8,7 +8,7 @@
 	h_style = random_hair_style(gender, species)
 	f_style = random_facial_hair_style(gender, species)
 	if(current_species)
-		if(current_species.appearance_flags & HAS_A_SKIN_TONE)
+		if(current_species.appearance_flags & HAS_SKIN_TONE)
 			s_tone = current_species.get_random_skin_tone() || s_tone
 		if(current_species.appearance_flags & HAS_EYE_COLOR)
 			ASSIGN_LIST_TO_COLORS(current_species.get_random_eye_color(), r_eyes, g_eyes, b_eyes)

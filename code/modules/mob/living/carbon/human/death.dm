@@ -74,7 +74,7 @@
 /mob/living/carbon/human/proc/ChangeToHusk()
 	if(MUTATION_HUSK in mutations)	return
 
-	if(species.name in HUMAN_SPECIES) //Only change hair, and not say, tentacles
+	if (species.name == SPECIES_HUMAN) //Only change hair, and not say, tentacles
 		if(f_style)
 			f_style = "Shaved"		//we only change the icon_state of the hair datum, so it doesn't mess up their UI/UE
 		if(h_style)

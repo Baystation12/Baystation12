@@ -192,7 +192,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	if (has_flag(mob_species, HAS_SKIN_COLOR))
 		var/color = rgb(pref.r_skin, pref.g_skin, pref.b_skin)
 		. += "[TBTN("skin_color", "Color", "<br />Skin Color")] [COLOR_PREVIEW(color)]"
-	else if (has_flag(mob_species, HAS_A_SKIN_TONE))
+	else if (has_flag(mob_species, HAS_SKIN_TONE))
 		. += "[TBTN("skin_tone", "[-pref.s_tone + 35]/[mob_species.max_skin_tone()]", "<br />Skin Tone")]"
 
 	. += "<br />[BTN("marking_style", "+ Body Marking")]"
@@ -407,11 +407,11 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["skin_tone"])
-		if(!has_flag(mob_species, HAS_A_SKIN_TONE))
+		if(!has_flag(mob_species, HAS_SKIN_TONE))
 			return TOPIC_NOACTION
 		var/new_s_tone = input(user, "Choose your character's skin-tone. Lower numbers are lighter, higher are darker. Range: 1 to [mob_species.max_skin_tone()]", CHARACTER_PREFERENCE_INPUT_TITLE, (-pref.s_tone) + 35) as num|null
 		mob_species = all_species[pref.species]
-		if(new_s_tone && has_flag(mob_species, HAS_A_SKIN_TONE) && CanUseTopic(user))
+		if(new_s_tone && has_flag(mob_species, HAS_SKIN_TONE) && CanUseTopic(user))
 			pref.s_tone = 35 - max(min(round(new_s_tone), mob_species.max_skin_tone()), 1)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
