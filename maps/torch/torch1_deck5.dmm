@@ -11205,7 +11205,6 @@
 "AS" = (
 /obj/structure/table/glass,
 /obj/item/modular_computer/tablet/lease/preset/command,
-/obj/item/book/manual/nt_regs,
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
 "AT" = (
@@ -17358,7 +17357,6 @@
 /area/shuttle/petrov/isolation)
 "Yg" = (
 /obj/structure/table/steel,
-/obj/item/book/manual/nt_regs,
 /obj/item/folder/nt,
 /obj/structure/cable/cyan{
 	d1 = 2;

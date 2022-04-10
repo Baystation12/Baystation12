@@ -1,11 +1,3 @@
-/obj/item/book/manual/nt_regs
-	name = "Corporate Regulations"
-	desc = "A set of corporate guidelines for employees of a megacorporation."
-	icon_state = "booknanoregs"
-	author = "Employee Materials"
-	title = "Corporate Regulations"
-	url = "Corporate_Regulations"
-
 /obj/item/book/manual/hydroponics_pod_people
 	name = "The Diona Harvest - From Seed to Market"
 	icon_state ="bookHydroponicsPodPeople"

@@ -16638,7 +16638,6 @@
 /obj/item/book/manual/sol_sop,
 /obj/item/book/manual/solgov_law,
 /obj/item/book/manual/military_law,
-/obj/item/book/manual/nt_regs,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "OC" = (

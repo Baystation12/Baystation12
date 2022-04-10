@@ -3,7 +3,7 @@
 	icon_state ="bookEngineering2"
 	author = "Engineering Encyclopedia"
 	title = "Engineering Textbook"
-	url = "Engineering"
+	url = "https://bay.ss13.me/Roles/Engineer"
 
 /obj/item/book/manual/robotics_cyborgs
 	name = "Cyborgs for Dummies"
@@ -292,7 +292,7 @@
 	icon_state ="bookEngineering"
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Repairs and Construction"
-	url = "Guide_to_Construction"
+	url = "https://bay.ss13.me/Guides/Construction"
 
 /obj/item/book/manual/engineering_particle_accelerator
 	name = "Particle Accelerator User's Guide"
@@ -346,21 +346,21 @@
 	icon_state = "bookSupermatter"
 	author = "Central Engineering Division"
 	title = "Supermatter Engine Operating Manual"
-	url = "Supermatter_Engine"
+	url = "https://bay.ss13.me/Guides/Supermatter"
 
 /obj/item/book/manual/rust_engine
 	name = "R-UST Operating Manual"
 	icon_state = "bookMagazine"
 	author = "Cindy Crawfish"
 	title = "R-UST Operating Manual"
-	url = "R-UST"
+	url = "https://bay.ss13.me/Guides/RUST"
 
 /obj/item/book/manual/engineering_hacking
 	name = "Hacking"
 	icon_state ="bookHacking"
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Hacking"
-	url = "Hacking"
+	url = "https://bay.ss13.me/Guides/Hacking"
 
 /obj/item/book/manual/engineering_singularity_safety
 	name = "Singularity Safety in Special Circumstances"

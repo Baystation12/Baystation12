@@ -77,6 +77,12 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/fuelbay/aux)
+"aal" = (
+/obj/structure/table/steel,
+/obj/item/book/manual/solgov_law,
+/obj/item/book/manual/ci_guidebook,
+/turf/simulated/floor/tiled,
+/area/security/detectives_office)
 "aam" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -22449,11 +22455,6 @@
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/security/storage)
-"mgb" = (
-/obj/structure/table/steel,
-/obj/item/book/manual/solgov_law,
-/turf/simulated/floor/tiled,
-/area/security/detectives_office)
 "mhb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -39265,7 +39266,7 @@ pVv
 nOO
 nOO
 yeI
-mgb
+aal
 iVM
 uZY
 oDg

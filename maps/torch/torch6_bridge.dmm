@@ -10061,7 +10061,6 @@
 "yU" = (
 /obj/structure/table/woodentable_reinforced/walnut,
 /obj/item/sticky_pad/random,
-/obj/item/book/manual/nt_regs,
 /turf/simulated/floor/carpet/green,
 /area/crew_quarters/heads/office/cl)
 "yV" = (
@@ -13037,7 +13036,6 @@
 /area/maintenance/bridge/foreport)
 "Lv" = (
 /obj/structure/table/glass,
-/obj/item/book/manual/nt_regs,
 /obj/item/stamp/rd,
 /obj/effect/floor_decal/corner/research{
 	dir = 5;

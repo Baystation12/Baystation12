@@ -99,7 +99,6 @@
 
 /obj/structure/bookcase/manuals/medical/New()
 	..()
-	new /obj/item/book/manual/medical_cloning(src)
 	new /obj/item/book/manual/medical_diagnostics_manual(src)
 	new /obj/item/book/manual/medical_diagnostics_manual(src)
 	new /obj/item/book/manual/medical_diagnostics_manual(src)
@@ -234,21 +233,11 @@
 /obj/item/book/manual
 	icon = 'icons/obj/library.dmi'
 	unique = 1   // 0 - Normal book, 1 - Should not be treated as normal book, unable to be copied, unable to be modified
-	var/url // Using full url or just tittle, example - Standard_Operating_Procedure (https://wiki.baystation12.net/index.php?title=Standard_Operating_Procedure)
+	var/url // Using full url or just title, example - Standard_Operating_Procedure (https://wiki.baystation12.net/index.php?title=Standard_Operating_Procedure)
 
 /obj/item/book/manual/New()
 	..()
 	if(url)		// URL provided for this manual
-		// If we haven't wikiurl or it included in url - just use url
-		if(config.wiki_url && !findtextEx(url, config.wiki_url, 1, length(config.wiki_url)+1))
-			// If we have wikiurl, but it hasn't "index.php" then add it and making full link in url
-			if(config.wiki_url && !findtextEx(config.wiki_url, "/index.php", -10))
-				if(findtextEx(config.wiki_url, "/", -1))
-					url = config.wiki_url + "index.php?title=" + url
-				else
-					url = config.wiki_url + "/index.php?title=" + url
-			else	//Or just making full link in url
-				url = config.wiki_url + "?title=" + url
 		dat = {"
 			<html>
 				<head>

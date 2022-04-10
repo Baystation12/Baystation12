@@ -1516,7 +1516,6 @@
 /obj/item/book/manual/solgov_law,
 /obj/item/book/manual/sol_sop,
 /obj/item/book/manual/military_law,
-/obj/item/book/manual/nt_regs,
 /turf/simulated/floor/wood,
 /area/crew_quarters/lounge)
 "fd" = (
@@ -4418,7 +4417,6 @@
 /obj/item/book/manual/solgov_law,
 /obj/item/book/manual/sol_sop,
 /obj/item/book/manual/military_law,
-/obj/item/book/manual/nt_regs,
 /turf/simulated/floor/wood,
 /area/command/captainmess)
 "pD" = (
@@ -10831,7 +10829,6 @@
 /area/command/pathfinder)
 "Li" = (
 /obj/structure/bookcase,
-/obj/item/book/manual/medical_cloning,
 /obj/item/book/manual/medical_diagnostics_manual,
 /obj/item/book/manual/nuclear,
 /obj/item/book/manual/detective,
