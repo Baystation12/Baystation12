@@ -120,15 +120,3 @@
 	name = "guppy control console"
 	shuttle_tag = "Guppy"
 	req_access = list(access_guppy_helm)
-
-/obj/effect/overmap/visitable/ship/torch/Initialize()
-	. = ..()
-	var/obj/effect/overmap/visitable/sector/residue/R = new
-	var/turf/home = locate(x, y, z)
-	R.forceMove(home)
-
-
-/obj/effect/overmap/visitable/sector/residue
-	name = "Bluespace Residue"
-	desc = "Trace radiation emanating from this sector is consistent with the aftermath of a bluespace jump."
-	icon_state = "event"
