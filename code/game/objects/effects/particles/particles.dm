@@ -1,7 +1,7 @@
-/* A series of particle systems. Some are based on F0lak's particle system
+/* A series of particle systems. Some are based on F0lak's particle systems
 */
 
-particles/fire
+/particles/fire
 	width = 500
 	height = 500
 	count = 3000
@@ -15,7 +15,7 @@ particles/fire
 
 	color = "white"
 
-particles/smoke
+/particles/smoke
 	width = 500
 	height = 1000
 	count = 3000
@@ -29,7 +29,7 @@ particles/smoke
 	drift = generator("vector", list(-0.2, -0.3), list(0.2, 0.3))
 	color = "white"
 
-particles/fire_sparks
+/particles/fire_sparks
 	width = 500
 	height = 500
 	count = 3000
@@ -44,7 +44,7 @@ particles/fire_sparks
 	gradient = list(0, "yellow", 1, "red")
 	color = "yellow"
 
-particles/drill_sparks
+/particles/drill_sparks
 	width = 124
 	height = 124
 	count = 1600
@@ -60,7 +60,7 @@ particles/drill_sparks
 	color = 0
 	transform = list(1,0,0,0, 0,1,0,0, 0,0,1,1/5, 0,0,0,1)
 
-particles/flare_sparks
+/particles/flare_sparks
 	width = 500
 	height = 500
 	count = 2000
@@ -73,7 +73,7 @@ particles/flare_sparks
 	gradient = list(0, COLOR_WHITE, 0.4, COLOR_RED)
 	color_change = 0.125
 
-particles/dust
+/particles/dust
 	width = 124
 	height = 124
 	count = 256
@@ -85,7 +85,7 @@ particles/dust
 	friction = 0.125
 	color = COLOR_OFF_WHITE
 
-particles/debris
+/particles/debris
 	width = 124
 	height = 124
 	count = 16
@@ -100,7 +100,7 @@ particles/debris
 	icon_state = list("rock1", "rock2", "rock3", "rock4", "rock5")
 	rotation = generator("num", 0, 360, NORMAL_RAND)
 
-particles/drill_sparks/debris
+/particles/drill_sparks/debris
 	friction = 0.25
 	gradient = null
 	color = COLOR_WHITE
@@ -108,30 +108,46 @@ particles/drill_sparks/debris
 	icon = 'icons/effects/particles.dmi'
 	icon_state = list("rock1", "rock2", "rock3", "rock4", "rock5")
 
+/particles/fusion
+	width = 500
+	height = 500
+	count = 4000
+	spawning = 260
+	lifespan = 0.85 SECONDS
+	fade = 0.95 SECONDS
+	position = generator("circle", 2.5 * 32 - 5, 2.5 * 32 + 5, NORMAL_RAND)
+	velocity = generator("circle", 0, 3, NORMAL_RAND)
+	friction = 0.15
+	gradient = list(0, COLOR_WHITE, 0.75, COLOR_BLUE_LIGHT)
+	color_change = 0.1
+	color = 0
+	drift = generator("circle", 0.2, NORMAL_RAND)
 
 //Spawner object
 //Maybe we could pool them in and out
-/atom/movable/particle_emitter
+/obj/particle_emitter
 	name = ""
 	anchored = TRUE
 	mouse_opacity = 0
+	appearance_flags = PIXEL_SCALE
 
-/atom/movable/particle_emitter/Initialize(mapload, time, _color)
+/obj/particle_emitter/Initialize(mapload, time, _color)
 	. = ..()
-	QDEL_IN(src, time)
+	if(time > 0)
+		QDEL_IN(src, time)
 	color = _color
 
-/atom/movable/particle_emitter/proc/enable(on)
+/obj/particle_emitter/proc/enable(on)
 	if(on)
 		particles.spawning = initial(particles.spawning)
 	else
 		particles.spawning = 0
 
-/atom/movable/particle_emitter/sparks
+/obj/particle_emitter/sparks
 	particles = new/particles/drill_sparks
 	plane = EFFECTS_ABOVE_LIGHTING_PLANE
 
-/atom/movable/particle_emitter/sparks/set_dir(dir)
+/obj/particle_emitter/sparks/set_dir(dir)
 	..()
 	var/list/min
 	var/list/max
@@ -150,26 +166,33 @@ particles/drill_sparks/debris
 
 	particles.velocity = generator("box", min, max, NORMAL_RAND)
 
-/atom/movable/particle_emitter/sparks/debris
+/obj/particle_emitter/sparks/debris
 	particles = new/particles/drill_sparks/debris
 	plane = DEFAULT_PLANE
 
-/atom/movable/particle_emitter/burst/Initialize(mapload, time)
+/obj/particle_emitter/burst/Initialize(mapload, time)
 	. = ..()
 	//Burst emitters turn off after 1 tick
-		addtimer(CALLBACK(src, .proc/enable, FALSE), 1, TIMER_CLIENT_TIME)
-/atom/movable/particle_emitter/burst/rocks
+	addtimer(CALLBACK(src, .proc/enable, FALSE), 1, TIMER_CLIENT_TIME)
+/obj/particle_emitter/burst/rocks
 	particles = new/particles/debris
 
-/atom/movable/particle_emitter/burst/dust
+/obj/particle_emitter/burst/dust
 	particles = new/particles/dust
 
-/atom/movable/particle_emitter/smoke
+/obj/particle_emitter/smoke
 	layer = FIRE_LAYER
 	particles = new/particles/smoke
+
+/obj/particle_emitter/smoke/Initialize(mapload, time, _color)
+	. = ..()
 	filters = filter(type="blur", size=1.5)
 
-/atom/movable/particle_emitter/sparks_flare
+/obj/particle_emitter/sparks_flare
 	plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	particles = new/particles/flare_sparks
+	mouse_opacity = 1
+
+/obj/particle_emitter/sparks_flare/Initialize(mapload, time, _color)
+	. = ..()
 	filters = filter(type="bloom", size=3, offset = 0.5, alpha = 220)

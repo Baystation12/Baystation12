@@ -556,9 +556,9 @@
 		blind_message = SPAN_WARNING("You hear a large motor whirring.")
 	)
 
-	var/atom/movable/particle_emitter/sparks/EM
+	var/obj/particle_emitter/sparks/EM
 	if (istype(target, /turf/simulated/mineral))
-		EM = new/atom/movable/particle_emitter/sparks/debris(get_turf(target), delay, target.color)
+		EM = new/obj/particle_emitter/sparks/debris(get_turf(target), delay, target.color)
 	else
 		EM = new(get_turf(target), delay)
 

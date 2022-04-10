@@ -232,8 +232,8 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /obj/effect/effect/smoke/illumination/flare/New(var/newloc, var/lifetime=10, var/range=null, var/power=null, var/color=null)
 	..()
-	new/atom/movable/particle_emitter/smoke(newloc, time_to_live)
-	new/atom/movable/particle_emitter/sparks_flare(newloc, time_to_live)
+	new/obj/particle_emitter/smoke(newloc, time_to_live)
+	new/obj/particle_emitter/sparks_flare(newloc, time_to_live)
 
 
 /////////////////////////////////////////////
