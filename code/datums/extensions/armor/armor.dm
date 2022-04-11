@@ -10,7 +10,7 @@
 	var/armor_range_mult = 2
 	// [under_armor_mult] multiplies how strongly damage that is <= armor value is blocked.
 	//  E.g. setting it to 0 will flat out block all damage below armor
-	var/under_armor_mult = 0.7
+	var/under_armor_mult = 1
 	// [over_armor_mult] multiplies how strongly damage that is > armor value is blocked.
 	//  E.g. setting it to more than 1 will make mitigation drop off faster, effectively reducing the range of damage mitigation
 	var/over_armor_mult = 1
