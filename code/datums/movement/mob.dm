@@ -237,6 +237,9 @@
 			mob.zPull(direction)
 
 	step(mob, direction)
+	// In case mobs ceased existing during the step. Silly edge case but it does happen.
+	if (!mob)
+		return
 
 	// Something with pulling things
 	var/extra_delay = HandleGrabs(direction, old_turf)
