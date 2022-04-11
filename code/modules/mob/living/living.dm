@@ -820,11 +820,11 @@ default behaviour is:
 	if(incapacitated(INCAPACITATION_UNRESISTING))
 		. += 100
 	if(confused)
-		. += 15
+		. += 10
 	if(weakened)
 		. += 15
 	if(eye_blurry)
-		. += 15
+		. += 5
 	if(eye_blind)
 		. += 60
 	if(MUTATION_CLUMSY in mutations)
