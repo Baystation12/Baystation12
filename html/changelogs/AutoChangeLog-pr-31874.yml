@@ -1,5 +1,0 @@
-author: Kell-E
-delete-after: true
-changes:
-  - balance: Slightly reduced melee accuracy penalties (By about 33%) and slightly
-      upped the threshold of sustained damage before the penalties begin to kick in.
