@@ -21612,7 +21612,7 @@
 /area/security/evidence)
 "kVb" = (
 /obj/structure/table/standard,
-/obj/item/weldpack,
+/obj/item/storage/backpack/weldpack,
 /obj/item/reagent_containers/spray/sterilizine,
 /obj/item/storage/toolbox/mechanical,
 /obj/effect/floor_decal/corner/yellow/mono,
