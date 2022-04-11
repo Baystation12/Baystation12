@@ -1742,12 +1742,12 @@
 
 /mob/living/carbon/human/melee_accuracy_mods()
 	. = ..()
-	if(get_shock() > 50)
-		. += 15
+	if(get_shock() > 100)
+		. += 10
 	if(shock_stage > 10)
-		. += 15
+		. += 10
 	if(shock_stage > 30)
-		. += 15
+		. += 20
 
 /mob/living/carbon/human/ranged_accuracy_mods()
 	. = ..()
