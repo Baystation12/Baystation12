@@ -4,23 +4,17 @@
 /datum/uplink_item/item/visible_weapons
 	category = /datum/uplink_category/visible_weapons
 
-/datum/uplink_item/item/visible_weapons/zipgun
-	name = "Zip Gun"
-	desc = "A pipe attached to crude wooden stock with firing mechanism, holds one round."
-	item_cost = 8
-	path = /obj/item/gun/projectile/pirate
-
 /datum/uplink_item/item/visible_weapons/smallenergy_gun
 	name = "Small Energy Gun"
 	desc = "A pocket-sized energy based sidearm with three different lethality settings."
 	item_cost = 16
 	path = /obj/item/gun/energy/gun/small
 
-/datum/uplink_item/item/visible_weapons/ancient
-	name = "Replica Pistol"
-	desc = "A cheap replica of an earth handgun. To reload, buy another."
-	item_cost = 16
-	path = /obj/item/gun/projectile/pistol/throwback
+/datum/uplink_item/item/visible_weapons/shuriken
+	name = "Box of shurikens"
+	desc = "A small box with six shuriken, notably dangerous."
+	item_cost = 18
+	path = /obj/item/storage/box/syndie_kit/shuriken
 
 /datum/uplink_item/item/visible_weapons/dartgun
 	name = "Dart Gun"
@@ -38,8 +32,14 @@
 /datum/uplink_item/item/visible_weapons/pikecube
 	name = "Pike Cube"
 	desc = "While it looks like a normal monkey cube, the animal produced is, instead, a space pike. \ Note: The space pike does not like you."
-	item_cost = 70
+	item_cost = 44
 	path = /obj/item/reagent_containers/food/snacks/monkeycube/wrapped/pikecube
+
+/datum/uplink_item/item/visible_weapons/katana
+	name = "Katana"
+	desc = "A large sharpened steel blade capable of cutting through anything but the thickest armor."
+	item_cost = 24
+	path = /obj/item/material/sword/katana
 
 /datum/uplink_item/item/visible_weapons/energy_sword
 	name = "Energy Sword"
@@ -198,7 +198,7 @@
 	name = "Railgun"
 	desc = "An anti-armour magnetic launching system fed by a high-capacity matter cartridge, \
 			capable of firing slugs at intense speeds."
-	item_cost = DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT % 6)) / 6
+	item_cost = 65
 	antag_roles = list(MODE_MERCENARY)
 	path = /obj/item/gun/magnetic/railgun
 
@@ -207,7 +207,7 @@
 	desc = "A modified prototype of the original railgun implement, this time boring slugs out of steel rods loaded into the chamber, \
 			now with even MORE stopping power."
 	antag_roles = list(MODE_MERCENARY)
-	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
+	item_cost = 75
 	path = /obj/item/gun/magnetic/railgun/tcc
 
 /datum/uplink_item/item/visible_weapons/harpoonbomb
