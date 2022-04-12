@@ -1,7 +1,0 @@
-author: Ryan180602
-delete-after: true
-changes:
-  - tweak: Backpacks and Satchel have new on-mob/obj sprites
-  - tweak: Holowarrant has new obj sprite
-  - tweak: Added specific left/right hand on-mob sprite for backpacks and satchels.
-  - tweak: toxpack is now ntpack (same for satchels).
