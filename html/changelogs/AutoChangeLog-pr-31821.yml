@@ -1,0 +1,11 @@
+author: Kell-E
+delete-after: true
+changes:
+  - rscadd: All guns may now optionally have damage falloff
+  - balance: All laser weapons suffer from damage falloff relative to their size
+  - balance: 'Compact smartgun: Shots (5 ->6), Lethal damage (25 -> 35), Armor penetration
+      (10 -> 0)'
+  - balance: 'Pulse pistol: Armor penetration (0 -> 25), Accuracy (-1 -> 0)'
+  - balance: 'Pulse carbine: Armor penetration (0 ->30), Accuracy (-1 -> 0)'
+  - balance: 'Pulse rifle: Armor penetration (0 -> 35), Accuracy (-1 -> 1)'
+  - balance: 'Plasma cutter: Damage (15 -> 30), Armor penetration (0 -> 30)'
