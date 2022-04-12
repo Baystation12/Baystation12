@@ -209,6 +209,19 @@
 	icon_state = "duffle_syndiemed"
 	item_state_slots = list(slot_l_hand_str = "duffle_syndiemed", slot_r_hand_str = "duffle_syndiemed")
 
+/obj/item/storage/backpack/dufflebag/syndie/med/full
+	startswith = list(
+		/obj/item/roller,
+		/obj/item/storage/box/syringes,
+		/obj/item/clothing/gloves/latex/nitrile,
+		/obj/item/clothing/glasses/hud/health,
+		/obj/item/device/scanner/health,
+		/obj/item/auto_cpr,
+		/obj/item/defibrillator/loaded,
+		/obj/item/reagent_containers/ivbag/nanoblood,
+		/obj/item/storage/firstaid/adv
+	)
+
 /obj/item/storage/backpack/dufflebag/syndie/ammo
 	name = "ammunition dufflebag"
 	desc = "A large dufflebag for holding extra weapons ammunition and supplies."
