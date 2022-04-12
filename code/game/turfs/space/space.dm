@@ -69,7 +69,7 @@
 			return L.attackby(C, user)
 		var/obj/item/stack/material/rods/R = C
 		if (R.use(1))
-			to_chat(user, "<span class='notice'>Constructing support lattice ...</span>")
+			to_chat(user, SPAN_NOTICE("You lay down the support lattice."))
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			ReplaceWithLattice(R.material.name)
 		return
@@ -85,7 +85,19 @@
 			ChangeTurf(/turf/simulated/floor/airless, keep_air = TRUE)
 			return
 		else
-			to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")
+			to_chat(user, SPAN_WARNING("The plating is going to need some support."))
+
+	//Checking if the user attacked with a cable coil
+	if(isCoil(C))
+		var/obj/item/stack/cable_coil/coil = C
+		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
+		if(L)
+			coil.turf_place(src, user)
+			return
+		else
+			to_chat(user, SPAN_WARNING("The cable needs something to be secured to."))
+			return
+
 	return
 
 
