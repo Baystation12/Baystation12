@@ -85,6 +85,11 @@
 	damage_type = BURN
 	eyeblur = 1//Some feedback that you've been hit
 	step_delay = 0.7
+	damage_falloff_list = list(
+		list(5, 0.97),
+		list(7, 0.94),
+		list(9, 0.88),
+	)
 
 /obj/item/projectile/energy/electrode/green
 	icon_state = "spark_green"

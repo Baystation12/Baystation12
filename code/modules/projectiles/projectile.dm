@@ -29,6 +29,13 @@
 	var/hitchance_mod = 0
 	var/dispersion = 0.0
 	var/distance_falloff = 2  //multiplier, higher value means accuracy drops faster with distance
+	var/damage_falloff = FALSE 
+	/// List(Distance, Multiplier), intended to represent short / medium / long ranges. Uses default of 1 for anything lower than the first value.
+	var/damage_falloff_list = list(
+		list(4, 0.9),
+		list(6, 0.8),
+		list(8, 0.7)
+	) 
 
 	var/damage = 10
 	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, ELECTROCUTE are the only things that should be in here, Try not to use PAIN as it doesn't go through stun_effect_act
@@ -200,11 +207,27 @@
 /obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/special_miss_modifier=0)
 	if(!istype(target_mob))
 		return
-
+		
 	//roll to-hit
 	var/miss_modifier = max(distance_falloff*(distance)*(distance) - hitchance_mod + special_miss_modifier, -30)
 	//makes moving targets harder to hit, and stationary easier to hit
 	var/movment_mod = min(5, (world.time - target_mob.l_move_time) - 5)
+
+	if (damage_falloff)
+		var/damage_mod = 1
+		for (var/list/entry as anything in damage_falloff_list)
+			if (entry[1] > distance)
+				break
+			damage_mod = entry[2]
+		damage = damage * damage_mod
+		armor_penetration = armor_penetration * damage_mod
+		agony = agony * damage_mod
+	//running in a straight line isnt as helpful tho
+	if(movment_mod < 0)
+		if(target_mob.last_move == get_dir(firer, target_mob))
+			movment_mod *= 0.25
+		else if(target_mob.last_move == get_dir(target_mob,firer))
+			movment_mod *= 0.5
 	miss_modifier -= movment_mod
 	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1 || original != target_mob)) //if the projectile hits a target we weren't originally aiming at then retain the chance to miss
 
