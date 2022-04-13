@@ -168,9 +168,9 @@ proc/get_radio_key_from_channel(var/channel)
 		return
 
 	var/prefix = copytext_char(message, 1, 2)
-	if(prefix == get_prefix_key(/decl/prefix/custom_emote))
+	if(prefix == get_prefix_key(/decl/prefix/custom_emote) && !whispering)
 		return emote(copytext_char(message, 2))
-	if(prefix == get_prefix_key(/decl/prefix/visible_emote))
+	if(prefix == get_prefix_key(/decl/prefix/visible_emote) && !whispering)
 		return custom_emote(1, copytext_char(message, 2))
 
 	//parse the language code and consume it
