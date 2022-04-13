@@ -97,7 +97,7 @@
 
 /obj/item/material/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
-	if(material.is_brittle() || target.get_blocked_ratio(hit_zone, BRUTE, damage_flags(), armor_penetration, force) * 100 >= material.hardness/5)
+	if(material.is_brittle() || target.get_blocked_ratio(hit_zone, DAMAGE_BRUTE, damage_flags(), armor_penetration, force) * 100 >= material.hardness/5)
 		check_shatter()
 
 /obj/item/material/on_parry(damage_source)

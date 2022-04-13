@@ -1156,7 +1156,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 			if (!ispath(secondary_trigger))
 				return
 
-		var/damage_types = list("Sharp" = DAM_SHARP, "Bullet" = DAM_BULLET, "Edge" = DAM_EDGE, "Laser" = DAM_LASER)
+		var/damage_types = list("Sharp" = DAMAGE_FLAG_SHARP, "Bullet" = DAMAGE_FLAG_BULLET, "Edge" = DAMAGE_FLAG_EDGE, "Laser" = DAMAGE_FLAG_LASER)
 		choice = input(usr, "Choose a damage effect", "Choose Damage Effect") as null | anything in damage_types | "Invincible"
 
 		if (!choice)

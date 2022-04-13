@@ -137,7 +137,7 @@
 
 				for(var/datum/wound/W in temp.wounds)
 
-					if(!open_wound && (W.damage_type == CUT || W.damage_type == PIERCE) && W.damage && !W.is_treated())
+					if (!open_wound && (W.damage_type == INJURY_TYPE_CUT || W.damage_type == INJURY_TYPE_PIERCE) && W.damage && !W.is_treated())
 						open_wound = TRUE
 
 					if(W.bleeding())

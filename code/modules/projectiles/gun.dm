@@ -484,7 +484,7 @@
 			break
 		play_fire_sound(M, in_chamber)
 
-		if (in_chamber.damage_type != PAIN)
+		if (in_chamber.damage_type != DAMAGE_PAIN)
 			in_chamber.on_hit(M, 0, brain.parent_organ)
 			if (istype(in_chamber, /obj/item/projectile/ion))
 				in_chamber.on_impact(M)
@@ -504,7 +504,7 @@
 				else
 					brain.damage = brain.damage + (in_chamber.damage*dmgmultiplier)
 		else
-			M.apply_effect(110,PAIN,0)
+			M.apply_effect(110, EFFECT_PAIN, 0)
 		qdel(in_chamber)
 		update_icon()
 		if (i < burst)

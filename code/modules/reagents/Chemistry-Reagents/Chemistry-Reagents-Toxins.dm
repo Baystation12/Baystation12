@@ -580,7 +580,7 @@
 				randmutg(M)
 			domutcheck(M, null)
 			M.UpdateAppearance()
-	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100)
+	M.apply_damage(10 * removed, DAMAGE_RADIATION, armor_pen = 100)
 
 /datum/reagent/slimejelly
 	name = "Slime Jelly"
@@ -851,7 +851,7 @@
 		M.drowsyness = max(M.drowsyness, 3)
 	if(prob(10))
 		M.emote("drool")
-		M.apply_effect(STUTTER, 3)
+		M.apply_effect(EFFECT_STUTTER, 3)
 
 	if (M.getBrainLoss() < 60)
 		M.adjustBrainLoss(14 * removed)
@@ -898,12 +898,12 @@
 	M.druggy = max(M.druggy, 30)
 
 	if(M.chem_doses[type] < 1 * threshold)
-		M.apply_effect(3, STUTTER)
+		M.apply_effect(3, EFFECT_STUTTER)
 		M.make_dizzy(5)
 		if(prob(5))
 			M.emote(pick("twitch", "giggle"))
 	else if(M.chem_doses[type] < 2 * threshold)
-		M.apply_effect(3, STUTTER)
+		M.apply_effect(3, EFFECT_STUTTER)
 		M.make_jittery(5)
 		M.make_dizzy(5)
 		M.druggy = max(M.druggy, 35)
@@ -911,7 +911,7 @@
 			M.emote(pick("twitch", "giggle"))
 	else
 		M.add_chemical_effect(CE_MIND, -1)
-		M.apply_effect(3, STUTTER)
+		M.apply_effect(3, EFFECT_STUTTER)
 		M.make_jittery(10)
 		M.make_dizzy(10)
 		M.druggy = max(M.druggy, 40)

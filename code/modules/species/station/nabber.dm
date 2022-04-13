@@ -250,7 +250,7 @@
 /obj/item/grab/nab/special/init()
 	if(!(. = ..()))
 		return
-	affecting.apply_damage(15, BRUTE, BP_CHEST, DAM_SHARP, "organic punctures")
+	affecting.apply_damage(15, DAMAGE_BRUTE, BP_CHEST, DAMAGE_FLAG_SHARP, "organic punctures")
 	affecting.visible_message("<span class='danger'>[assailant]'s spikes dig in painfully!</span>")
 	affecting.Stun(10)
 

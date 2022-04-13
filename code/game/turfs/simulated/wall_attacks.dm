@@ -58,7 +58,7 @@
 
 /turf/simulated/wall/proc/fail_smash(var/mob/user)
 	to_chat(user, "<span class='danger'>You smash against \the [src]!</span>")
-	damage_health(rand(25, 75), BRUTE)
+	damage_health(rand(25, 75), DAMAGE_BRUTE)
 
 /turf/simulated/wall/proc/success_smash(var/mob/user)
 	to_chat(user, "<span class='danger'>You smash through \the [src]!</span>")
@@ -115,12 +115,12 @@
 				if (MUTATION_FERAL in user.mutations)
 					M.visible_message(SPAN_DANGER("[M.name] slams into \the [src]!"), SPAN_DANGER("You slam into \the [src]!"))
 					playsound(src, pick(GLOB.punch_sound), 45)
-					damage_health(5, BRUTE)
+					damage_health(5, DAMAGE_BRUTE)
 					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2) //Additional cooldown
 					attack_animation(user)
 				else
 					M.visible_message(SPAN_DANGER("[M.name] punches \the [src]!"), SPAN_DANGER("You punch \the [src]!"))
-					M.apply_damage(3, BRUTE, M.hand ? BP_L_HAND : BP_R_HAND)
+					M.apply_damage(3, DAMAGE_BRUTE, M.hand ? BP_L_HAND : BP_R_HAND)
 					playsound(src, pick(GLOB.punch_sound), 40)
 
 	else

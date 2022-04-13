@@ -328,7 +328,7 @@
 
 /obj/machinery/suit_storage_unit/proc/uv_burn()
 	if(occupant)
-		occupant.apply_damage(50, IRRADIATE, damage_flags = DAM_DISPERSED)
+		occupant.apply_damage(50, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 		var/obj/item/organ/internal/diona/nutrients/rad_organ = locate() in occupant.internal_organs
 		if(!rad_organ)
 			if(occupant.can_feel_pain())

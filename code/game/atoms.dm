@@ -319,7 +319,7 @@ its easier to just keep the beam vertical.
 /atom/proc/hitby(atom/movable/AM, var/datum/thrownthing/TT)//already handled by throw impact
 	if(isliving(AM))
 		var/mob/living/M = AM
-		M.apply_damage(TT.speed*5, BRUTE)
+		M.apply_damage(TT.speed * 5, DAMAGE_BRUTE)
 
 //returns 1 if made bloody, returns 0 otherwise
 /atom/proc/add_blood(mob/living/carbon/human/M as mob)

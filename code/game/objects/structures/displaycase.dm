@@ -67,4 +67,4 @@
 	if(is_alive())
 		to_chat(usr, text("<span class='warning'>You kick the display case.</span>"))
 		visible_message("<span class='warning'>[usr] kicks the display case.</span>")
-		damage_health(2, BRUTE)
+		damage_health(2, DAMAGE_BRUTE)

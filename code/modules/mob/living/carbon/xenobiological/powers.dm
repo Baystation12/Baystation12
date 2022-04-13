@@ -32,7 +32,7 @@
 			return "This subject does not have an edible life energy..."
 		if (istype(carbon, /mob/living/carbon/slime))
 			return "I cannot feed on other slimes..."
-	if (living.get_blocked_ratio(null, TOX, damage_flags = DAM_DISPERSED | DAM_BIO) >= 1)
+	if (living.get_blocked_ratio(null, DAMAGE_TOXIN, damage_flags = DAMAGE_FLAG_DISPERSED | DAMAGE_FLAG_BIO) >= 1)
 		return "This subject is protected..."
 	for (var/mob/living/carbon/slime/other in oview())
 		if (other.Victim == living)
@@ -54,7 +54,7 @@
 		if(Adjacent(M))
 			UpdateFeed()
 
-			var/hazmat = 1 - M.get_blocked_ratio(null, TOX, damage_flags = DAM_DISPERSED | DAM_BIO) //scale feeding rate by overall bio protection
+			var/hazmat = 1 - M.get_blocked_ratio(null, DAMAGE_TOXIN, damage_flags = DAMAGE_FLAG_DISPERSED | DAMAGE_FLAG_BIO) //scale feeding rate by overall bio protection
 			if(istype(M, /mob/living/carbon))
 				Victim.adjustCloneLoss(5 * hazmat)
 				Victim.adjustToxLoss(1 * hazmat)

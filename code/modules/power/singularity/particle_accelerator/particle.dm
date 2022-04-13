@@ -61,7 +61,7 @@
 	if (!active)
 		return
 	var/radiation = (energy*2)
-	M.apply_damage((radiation*3),IRRADIATE, damage_flags = DAM_DISPERSED)
+	M.apply_damage((radiation*3), DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 	M.updatehealth()
 
 /obj/effect/accelerated_particle/proc/move(var/lag)

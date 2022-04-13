@@ -84,7 +84,7 @@
 		return
 
 	var/damage = rand(damage_min, damage_max)
-	var/damage_type = pick(BRUTE, BURN)
+	var/damage_type = pick(DAMAGE_BRUTE, DAMAGE_BURN)
 
 	if (T.density && T.is_alive())
 		playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
@@ -150,7 +150,7 @@
 /obj/effect/blob/proc/attack_living(var/mob/living/L)
 	if(!L)
 		return
-	var/blob_damage = pick(BRUTE, BURN)
+	var/blob_damage = pick(DAMAGE_BRUTE, DAMAGE_BURN)
 	L.visible_message(SPAN_DANGER("A tendril flies out from \the [src] and smashes into \the [L]!"), SPAN_DANGER("A tendril flies out from \the [src] and smashes into you!"))
 	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 	L.apply_damage(rand(damage_min, damage_max), blob_damage, used_weapon = "blob tendril")
@@ -167,7 +167,7 @@
 	if(!Proj)
 		return
 	var/damage = Proj.damage
-	if (Proj.damage_type == BURN)
+	if (Proj.damage_type == DAMAGE_BURN)
 		damage = round(damage / laser_resist)
 	playsound(damage_hitsound, src, 75)
 	damage_health(damage, Proj.damage_type)
@@ -394,7 +394,7 @@ regen() will cover update_icon() for this proc
 				origin_tech = list(TECH_MATERIAL = 2)
 			if("fire")
 				desc = "A tendril removed from an asteroclast. It's hot to the touch."
-				damtype = BURN
+				damtype = DAMAGE_BURN
 				force = 15
 				color = COLOR_AMBER
 				origin_tech = list(TECH_POWER = 2)

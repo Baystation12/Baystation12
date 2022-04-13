@@ -29,7 +29,7 @@
 	if(wallbreaker)
 		kill_health()
 	else
-		damage_health(damage, BRUTE)
+		damage_health(damage, DAMAGE_BRUTE)
 	return 1
 
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)

@@ -287,7 +287,7 @@
 	should_admin_log = TRUE
 
 /datum/reagent/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100) // Radium may increase your chances to cure a disease
+	M.apply_damage(10 * removed, DAMAGE_RADIATION, armor_pen = 100) // Radium may increase your chances to cure a disease
 
 /datum/reagent/radium/touch_turf(var/turf/T)
 	if(volume >= 3)

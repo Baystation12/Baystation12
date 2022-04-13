@@ -27,7 +27,7 @@
 	break_stuff_probability = 35
 	flash_vulnerability = 0
 	natural_weapon = /obj/item/natural_weapon/goatking
-	var/current_damtype = BRUTE
+	var/current_damtype = DAMAGE_BRUTE
 	var/list/elemental_weapons = list(
 		BURN = /obj/item/natural_weapon/goatking/fire,
 		ELECTROCUTE = /obj/item/natural_weapon/goatking/lightning
@@ -59,7 +59,7 @@
 	. = ..()
 
 	var/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/G = holder
-	if(G.current_damtype != BRUTE)
+	if (G.current_damtype != DAMAGE_BRUTE)
 		G.special_attacks++
 
 /datum/ai_holder/simple_animal/goat/king/phase2/react_to_attack(atom/movable/attacker)
@@ -88,14 +88,14 @@
 			G.visible_message(SPAN_MFAUNA("\The [G] disrupts nearby electrical equipment!"))
 			empulse(get_turf(G), 5, 2, 0)
 
-		else if(prob(5) && G.current_damtype == BRUTE && !G.special_attacks) //elemental attacks
+		else if (prob(5) && G.current_damtype == DAMAGE_BRUTE && !G.special_attacks) //elemental attacks
 			G.spellscast++
 			if(prob(50))
 				G.visible_message(SPAN_MFAUNA("\The [G]' horns flicker with holy white flame!"))
-				G.current_damtype = BURN
+				G.current_damtype = DAMAGE_BURN
 			else
 				G.visible_message(SPAN_MFAUNA("\The [G]' horns glimmer, electricity arcing between them!"))
-				G.current_damtype = ELECTROCUTE
+				G.current_damtype = DAMAGE_SHOCK
 
 		else if(prob(5)) //earthquake spell
 			G.visible_message("<span class='cultannounce'>\The [G]' eyes begin to glow ominously as dust and debris in the area is kicked up in a light breeze.</span>")
@@ -133,11 +133,11 @@
 
 /obj/item/natural_weapon/goatking/fire
 	name = "burning horns"
-	damtype = BURN
+	damtype = DAMAGE_BURN
 
 /obj/item/natural_weapon/goatking/lightning
 	name = "lightning horns"
-	damtype = ELECTROCUTE
+	damtype = DAMAGE_SHOCK
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2
 	name = "emperor of goats"
@@ -232,9 +232,9 @@
 	. = ..()
 	if(!.)
 		return FALSE
-	if(special_attacks >= 6 && current_damtype != BRUTE)
+	if(special_attacks >= 6 && current_damtype != DAMAGE_BRUTE)
 		visible_message(SPAN_MFAUNA("The energy surrounding \the [src]'s horns dissipates."))
-		current_damtype = BRUTE
+		current_damtype = DAMAGE_BRUTE
 
 	if(health <= 150 && !phase3 && spellscast == 5) //begin phase 3, reset spell limit and heal
 		phase3_transition()

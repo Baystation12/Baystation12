@@ -300,18 +300,18 @@ proc/age2agedescription(age)
 
 /proc/damflags_to_strings(damflags)
 	var/list/res = list()
-	if(damflags & DAM_SHARP)
+	if(damflags & DAMAGE_FLAG_SHARP)
 		res += "sharp"
-	if(damflags & DAM_EDGE)
+	if(damflags & DAMAGE_FLAG_EDGE)
 		res += "edge"
-	if(damflags & DAM_LASER)
+	if(damflags & DAMAGE_FLAG_LASER)
 		res += "laser"
-	if(damflags & DAM_BULLET)
+	if(damflags & DAMAGE_FLAG_BULLET)
 		res += "bullet"
-	if(damflags & DAM_EXPLODE)
+	if(damflags & DAMAGE_FLAG_EXPLODE)
 		res += "explode"
-	if(damflags & DAM_DISPERSED)
+	if(damflags & DAMAGE_FLAG_DISPERSED)
 		res += "dispersed"
-	if(damflags & DAM_BIO)
+	if(damflags & DAMAGE_FLAG_BIO)
 		res += "bio"
 	return english_list(res)

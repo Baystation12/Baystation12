@@ -15,7 +15,7 @@
 	if (holder && istype(toucher, /mob/living))
 		var/mob/living/M = toucher
 		var/weakness = GetAnomalySusceptibility(M)
-		M.apply_damage(damage * weakness, BRUTE, damage_flags = DAM_DISPERSED)
+		M.apply_damage(damage * weakness, DAMAGE_BRUTE, damage_flags = DAMAGE_FLAG_DISPERSED)
 		M.throw_at(get_target_turf(M), throw_range, speed)
 
 		to_chat(M, SPAN_DANGER("A violent force slams into you as you touch \the [holder]!"))
@@ -27,7 +27,7 @@
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/M in range(effectrange, T))
 			var/weakness = GetAnomalySusceptibility(M)
-			M.apply_damage(damage * weakness, BRUTE, damage_flags = DAM_DISPERSED)
+			M.apply_damage(damage * weakness, DAMAGE_BRUTE, damage_flags = DAMAGE_FLAG_DISPERSED)
 			M.throw_at(get_target_turf(M), throw_range, speed)
 			to_chat(M, SPAN_DANGER("A violent force explodes outward from \the [holder] and sends you flying!"))
 
@@ -70,7 +70,7 @@
 		damage = damage * 2
 		for (var/mob/living/M in range(effectrange, T))
 			var/weakness = GetAnomalySusceptibility(M)
-			M.apply_damage(damage * weakness, BRUTE, damage_flags = DAM_DISPERSED)
+			M.apply_damage(damage * weakness, DAMAGE_BRUTE, damage_flags = DAMAGE_FLAG_DISPERSED)
 			M.throw_at(get_target_turf(M), throw_range, speed)
 			to_chat(M, SPAN_DANGER("A violent force explodes outward from \the [holder] and sends you flying!"))
 

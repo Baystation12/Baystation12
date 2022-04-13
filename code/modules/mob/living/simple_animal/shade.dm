@@ -39,7 +39,7 @@
 /obj/item/natural_weapon/shade
 	name = "foul touch"
 	attack_verb = list("drained")
-	damtype = BURN
+	damtype = DAMAGE_BURN
 	force = 10
 
 /mob/living/simple_animal/shade/cultify()

@@ -102,7 +102,7 @@
 		part.take_external_damage(burn = 15, used_weapon = "Electronics meltdown")
 	else
 		var/mob/living/M = imp_in
-		M.apply_damage(15,BURN)
+		M.apply_damage(15, DAMAGE_BURN)
 	name = "melted implant"
 	desc = "Charred circuit in melted plastic case. Wonder what that used to be..."
 	icon_state = "implant_melted"

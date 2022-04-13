@@ -134,10 +134,10 @@
 	if (istype(H) && H.headcheck(hit_zone))
 		var/obj/item/organ/affecting = H.get_organ(hit_zone)
 		user.visible_message(SPAN_DANGER("\The [user] smashes \the [src] into \the [H]'s [affecting.name]!"))
-		var/blocked = target.get_blocked_ratio(hit_zone, BRUTE, damage = 10) * 100
+		var/blocked = target.get_blocked_ratio(hit_zone, DAMAGE_BRUTE, damage = 10) * 100
 		var/weaken_duration = smash_duration + min(0, force - blocked + 10)
 		if (weaken_duration)
-			target.apply_effect(min(weaken_duration, 5), WEAKEN, blocked)
+			target.apply_effect(min(weaken_duration, 5), EFFECT_WEAKEN, blocked)
 	else
 		user.visible_message(SPAN_DANGER("\The [user] smashes [src] into [target]!"))
 	if (reagents)

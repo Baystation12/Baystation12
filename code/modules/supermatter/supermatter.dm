@@ -526,7 +526,7 @@
 	user.drop_from_inventory(W)
 	Consume(W)
 
-	user.apply_damage(150, IRRADIATE, damage_flags = DAM_DISPERSED)
+	user.apply_damage(150, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 
 
 /obj/machinery/power/supermatter/Bumped(atom/AM as mob|obj)

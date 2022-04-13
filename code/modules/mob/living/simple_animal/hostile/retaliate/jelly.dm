@@ -19,7 +19,7 @@
 	name = "tentacles"
 	attack_verb = list("stung","slapped")
 	force = 10
-	damtype = BURN
+	damtype = DAMAGE_BURN
 
 /mob/living/simple_animal/hostile/retaliate/jelly/Initialize()
 	. = ..()

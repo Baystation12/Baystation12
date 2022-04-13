@@ -310,10 +310,10 @@
 			forceMove(O.owner ? O.owner.loc : O.loc)
 			src.visible_message("<span class='warning'>\A [src] emerges from inside [O.owner ? "[O.owner]'s [O.name]" : "\the [O]"]!</span>")
 			if(O.owner)
-				O.owner.apply_damage(5, BRUTE, O.organ_tag)
-				O.owner.apply_damage(3, TOX, O.organ_tag)
+				O.owner.apply_damage(5, DAMAGE_BRUTE, O.organ_tag)
+				O.owner.apply_damage(3, DAMAGE_TOXIN, O.organ_tag)
 		else if(prob(1))
-			O.owner.apply_damage(1, TOX, O.organ_tag)
+			O.owner.apply_damage(1, DAMAGE_TOXIN, O.organ_tag)
 			if(world.time > last_itch + 30 SECONDS)
 				last_itch = world.time
 				to_chat(O.owner, "<span class='notice'>Your [O.name] itches...</span>")

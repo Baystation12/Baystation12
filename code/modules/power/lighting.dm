@@ -544,7 +544,7 @@
 		else if(user.a_intent != I_HELP)
 			var/obj/item/organ/external/hand = H.organs_by_name[user.hand ? BP_L_HAND : BP_R_HAND]
 			if(hand && hand.is_usable() && !hand.can_feel_pain())
-				user.apply_damage(3, BURN, user.hand ? BP_L_HAND : BP_R_HAND, used_weapon = src)
+				user.apply_damage(3, DAMAGE_BURN, user.hand ? BP_L_HAND : BP_R_HAND, used_weapon = src)
 				user.visible_message(
 					SPAN_WARNING("\The [user]'s [hand] burns and sizzles as \he touches the hot [get_fitting_name()]."),
 					SPAN_WARNING("Your [hand.name] burns and sizzles as you remove the hot [get_fitting_name()].")

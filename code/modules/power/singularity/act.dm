@@ -13,7 +13,7 @@
 
 /mob/living/singularity_pull(S, current_size)
 	step_towards(src, S)
-	apply_damage(current_size * 3, IRRADIATE, damage_flags = DAM_DISPERSED)
+	apply_damage(current_size * 3, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 
 /mob/living/carbon/human/singularity_pull(S, current_size)
 	if(current_size >= STAGE_THREE)
