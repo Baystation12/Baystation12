@@ -250,7 +250,7 @@ var/list/worths = list(
 					/obj/item/crowbar = 10,
 					/obj/item/beartrap = 35,
 					/obj/item/nullrod = 60,
-					/obj/item/weldpack = 300,
+					/obj/item/storage/backpack/weldpack = 300,
 					/obj/item/stock_parts/circuitboard/aicore = 6000,
 					/obj/item/stock_parts/circuitboard = 1000,
 //GRENADES,

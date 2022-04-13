@@ -48,6 +48,10 @@
 	desc = "A backpack that opens into a localized pocket of Blue Space."
 	origin_tech = list(TECH_BLUESPACE = 4)
 	icon_state = "holdingpack"
+	item_state_slots = list(
+		slot_l_hand_str = "holdingpack",
+		slot_r_hand_str = "holdingpack"
+	)
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 56
 
@@ -98,13 +102,19 @@
 	name = "medical backpack"
 	desc = "It's a backpack, designed for use in the sterile confines of the infirmary."
 	icon_state = "medicalpack"
-	item_state_slots = null
+	item_state_slots = list(
+		slot_l_hand_str = "medicalpack",
+		slot_r_hand_str = "medicalpack"
+	)
 
 /obj/item/storage/backpack/security
 	name = "security backpack"
 	desc = "It's a very robust backpack, for security-related needs."
 	icon_state = "securitypack"
-	item_state_slots = null
+	item_state_slots = list(
+		slot_l_hand_str = "securitypack",
+		slot_r_hand_str = "securitypack"
+	)
 
 /obj/item/storage/backpack/security/exo
 	name = "corporate security backpack"
@@ -115,64 +125,105 @@
 	name = "command backpack"
 	desc = "It's a special backpack, made exclusively for senior officers."
 	icon_state = "captainpack"
-	item_state_slots = null
+	item_state_slots = list(
+		slot_l_hand_str = "captainpack",
+		slot_r_hand_str = "captainpack"
+	)
 
 /obj/item/storage/backpack/industrial
 	name = "industrial backpack"
 	desc = "It's a tough backpack, made for the daily grind of industrial life."
 	icon_state = "engiepack"
-	item_state_slots = null
+	item_state_slots = list(
+		slot_l_hand_str = "engiepack",
+		slot_r_hand_str = "engiepack"
+	)
 
 /obj/item/storage/backpack/toxins
 	name = "science backpack"
 	desc = "It's a stain-resistant light backpack, modeled for use in laboratories and other scientific settings."
 	icon_state = "ntpack"
+	item_state_slots = list(
+		slot_l_hand_str = "ntpack",
+		slot_r_hand_str = "ntpack"
+	)
 
 /obj/item/storage/backpack/hydroponics
 	name = "hydroponics backpack"
 	desc = "It's a green backpack, with many pockets to store plants and tools in."
 	icon_state = "hydpack"
+	item_state_slots = list(
+		slot_l_hand_str = "hydpack",
+		slot_r_hand_str = "hydpack"
+	)
 
 /obj/item/storage/backpack/genetics
 	name = "genetics backpack"
 	desc = "It's a backpack, fitted with slots for diskettes and other workplace tools."
 	icon_state = "genpack"
+	item_state_slots = list(
+		slot_l_hand_str = "genpack",
+		slot_r_hand_str = "genpack"
+	)
 
 /obj/item/storage/backpack/virology
 	name = "sterile backpack"
 	desc = "It's a sterile backpack, specially designed for work in areas with a biosafety classification level."
 	icon_state = "viropack"
+	item_state_slots = list(
+		slot_l_hand_str = "viropack",
+		slot_r_hand_str = "viropack"
+	)
 
 /obj/item/storage/backpack/chemistry
 	name = "pharmacy backpack"
 	desc = "It's a sterile orange backpack, which was designed to hold beakers, pill bottles, and other reagent containers."
 	icon_state = "chempack"
+	item_state_slots = list(
+		slot_l_hand_str = "chempack",
+		slot_r_hand_str = "chempack"
+	)
 
 /obj/item/storage/backpack/rucksack
 	name = "black rucksack"
 	desc = "A sturdy, military-grade backpack with low-profile straps. Designed to work well with armor."
 	icon_state = "rucksack"
-	item_state_slots = list(slot_l_hand_str = "rucksack", slot_r_hand_str = "rucksack")
+	item_state_slots = list(
+		slot_l_hand_str = "rucksack",
+		slot_r_hand_str = "rucksack"
+	)
 
 /obj/item/storage/backpack/rucksack/blue
 	name = "blue rucksack"
 	icon_state = "rucksack_blue"
-	item_state_slots = list(slot_l_hand_str = "rucksack_blue", slot_r_hand_str = "rucksack_blue")
+	item_state_slots = list(
+		slot_l_hand_str = "rucksack_blue",
+		slot_r_hand_str = "rucksack_blue"
+	)
 
 /obj/item/storage/backpack/rucksack/green
 	name = "green rucksack"
 	icon_state = "rucksack_green"
-	item_state_slots = list(slot_l_hand_str = "rucksack_green", slot_r_hand_str = "rucksack_green")
+	item_state_slots = list(
+		slot_l_hand_str = "rucksack_green",
+		slot_r_hand_str = "rucksack_green"
+	)
 
 /obj/item/storage/backpack/rucksack/navy
 	name = "navy rucksack"
 	icon_state = "rucksack_navy"
-	item_state_slots = list(slot_l_hand_str = "rucksack_navy", slot_r_hand_str = "rucksack_navy")
+	item_state_slots = list(
+		slot_l_hand_str = "rucksack_navy",
+		slot_r_hand_str = "rucksack_navy"
+	)
 
 /obj/item/storage/backpack/rucksack/tan
 	name = "tan rucksack"
 	icon_state = "rucksack_tan"
-	item_state_slots = list(slot_l_hand_str = "rucksack_tan", slot_r_hand_str = "rucksack_tan")
+	item_state_slots = list(
+		slot_l_hand_str = "rucksack_tan",
+		slot_r_hand_str = "rucksack_tan"
+	)
 
 /*
  * Duffle Types
@@ -208,6 +259,19 @@
 	desc = "A large dufflebag for holding extra tactical medical supplies."
 	icon_state = "duffle_syndiemed"
 	item_state_slots = list(slot_l_hand_str = "duffle_syndiemed", slot_r_hand_str = "duffle_syndiemed")
+
+/obj/item/storage/backpack/dufflebag/syndie/med/full
+	startswith = list(
+		/obj/item/roller,
+		/obj/item/storage/box/syringes,
+		/obj/item/clothing/gloves/latex/nitrile,
+		/obj/item/clothing/glasses/hud/health,
+		/obj/item/device/scanner/health,
+		/obj/item/auto_cpr,
+		/obj/item/defibrillator/loaded,
+		/obj/item/reagent_containers/ivbag/nanoblood,
+		/obj/item/storage/firstaid/adv
+	)
 
 /obj/item/storage/backpack/dufflebag/syndie/ammo
 	name = "ammunition dufflebag"
