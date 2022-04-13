@@ -2079,6 +2079,9 @@
 				if (!sanity_check)
 					return
 
+			if (M.buckled)
+				M.buckled.unbuckle_mob()
+
 			var/last_ckey = LAST_CKEY(M)
 
 			if (isAI(M))
