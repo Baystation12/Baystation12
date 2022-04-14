@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Unique shuttle control consoles can no longer be broken or dismantled because
-      this places them in an unfixable state.

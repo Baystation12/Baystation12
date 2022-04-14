@@ -1,4 +1,0 @@
-author: Mucker, AzlanonPC
-delete-after: true
-changes:
-  - admin: Added a new shuttle for event usage, does not spawn on its own.

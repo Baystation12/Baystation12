@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Rotating alarm lights are now anchored and can no longer be dragged around
-      by people or the supermatter.
