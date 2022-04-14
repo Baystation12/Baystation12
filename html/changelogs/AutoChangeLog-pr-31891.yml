@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Shuttles can no longer delete shuttle landmarks and break themselves by
-      landing on beacons.

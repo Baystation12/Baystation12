@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - rscadd: Supply can now order empty dispenser cartridges. For those bartenders
-      that want to add their juiced fruits to the dispenser machines.
