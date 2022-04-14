@@ -3619,6 +3619,13 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/fore)
+"il" = (
+/obj/effect/catwalk_plated,
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "im" = (
 /obj/effect/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -4391,6 +4398,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/machinery/rotating_alarm/security_alarm,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
 "jQ" = (
@@ -4541,6 +4549,7 @@
 /area/quartermaster/hangar)
 "kb" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/rotating_alarm/security_alarm,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/hangar)
 "kd" = (
@@ -5163,6 +5172,9 @@
 /obj/machinery/vending/snack{
 	dir = 8;
 	icon_state = "snack"
+	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
@@ -7673,6 +7685,7 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/firecloset,
+/obj/machinery/rotating_alarm/security_alarm,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/fore)
 "qK" = (
@@ -8544,6 +8557,9 @@
 	icon_state = "deck-5";
 	pixel_x = 40
 	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fifthdeck/fore)
 "sn" = (
@@ -9079,6 +9095,17 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/hallwaya)
+"tO" = (
+/obj/effect/catwalk_plated,
+/obj/machinery/camera/network/hangar{
+	dir = 4;
+	icon_state = "camera"
+	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "tQ" = (
 /obj/effect/floor_decal/corner/brown{
 	dir = 10
@@ -10256,6 +10283,12 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fifthdeck/aft)
+"xp" = (
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "xr" = (
 /obj/structure/table/standard,
 /obj/item/anodevice{
@@ -33388,7 +33421,7 @@ kU
 aX
 Jn
 aX
-oM
+tO
 zf
 aX
 aX
@@ -36233,7 +36266,7 @@ go
 bi
 fS
 Bm
-UH
+xp
 aJ
 mK
 nD
@@ -38634,7 +38667,7 @@ aJ
 aX
 aX
 aX
-aX
+il
 aX
 kT
 aX
@@ -38648,7 +38681,7 @@ Gw
 ih
 pb
 IO
-aX
+il
 aX
 aX
 aX
