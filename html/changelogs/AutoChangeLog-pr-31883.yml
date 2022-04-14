@@ -1,0 +1,5 @@
+author: BurpleBineapple
+delete-after: true
+changes:
+  - bugfix: Fixes the Fifth Fleet beret's description to be grammatically correct.
+  - bugfix: Fixes minor grammatical issues with all division berets.
