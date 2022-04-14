@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - balance: Zombies no longer have xray vision, do not infect people nearby on death,
+      and transfer fewer reagents on bite.
