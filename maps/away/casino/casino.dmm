@@ -4073,13 +4073,6 @@
 	},
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
-"lb" = (
-/turf/simulated/floor/reinforced,
-/area/casino/casino_bow)
-"lc" = (
-/obj/machinery/portable_atmospherics/canister/nitrogen,
-/turf/simulated/floor/reinforced,
-/area/casino/casino_bow)
 "ld" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/portable_atmospherics/canister/phoron,
@@ -4307,67 +4300,7 @@
 	},
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
-"lw" = (
-/obj/structure/showcase{
-	desc = "A bewilderingly complex prototype designed to split the fabric of spacetime and allow access to Bluespace.";
-	icon = 'icons/obj/power.dmi';
-	icon_state = "tracker";
-	name = "Bluespace Drive"
-	},
-/obj/machinery/shield{
-	desc = "An energy shield used to contain the exotic particles emitted by the Bluespace Drive.";
-	name = "Containment Shield"
-	},
-/obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/turf/simulated/floor/reinforced,
-/area/casino/casino_bow)
-"lx" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/reinforced,
-/area/casino/casino_bow)
-"ly" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/reinforced,
-/area/casino/casino_bow)
-"lz" = (
-/obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/engineering{
-	name = "Bluespace Drive";
-	secured_wires = 0
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/plating,
-/area/casino/casino_crew_atmos)
-"lA" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/plating,
-/area/casino/casino_crew_atmos)
 "lB" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /obj/machinery/light/small,
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
@@ -4472,10 +4405,6 @@
 /obj/structure/bed/chair/comfy/black,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
-"lW" = (
-/obj/machinery/portable_atmospherics/canister/phoron,
-/turf/simulated/floor/reinforced,
-/area/casino/casino_bow)
 "lX" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock{
@@ -5669,11 +5598,6 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
@@ -9088,13 +9012,13 @@ aa
 aa
 aa
 aa
-kC
-kC
-kC
-kC
-kC
-kC
-kC
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -9190,13 +9114,13 @@ aa
 aa
 aa
 aa
-kC
-kC
-kC
-kC
-kC
-kC
-kC
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -9292,13 +9216,13 @@ aa
 aa
 aa
 aa
-kC
-kC
-lb
-lw
-lb
-kC
-kC
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -9394,13 +9318,13 @@ aa
 aa
 aa
 aa
-kC
-kC
-lb
-lx
-lb
-kC
-kC
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -9496,13 +9420,13 @@ bb
 aa
 aa
 aa
-kC
-kC
-kC
-ly
-kC
-kC
-kC
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -9598,13 +9522,13 @@ bb
 aa
 aa
 aa
-kC
-kC
-lc
-lx
-lW
-kC
-kC
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -9703,7 +9627,7 @@ ij
 ij
 ij
 ij
-lz
+ij
 kC
 kC
 kC
@@ -9805,7 +9729,7 @@ ku
 kD
 kP
 ld
-lA
+jN
 kC
 mk
 mG
@@ -9907,7 +9831,7 @@ kv
 kv
 jN
 le
-lA
+jN
 kC
 ml
 mH
@@ -10111,7 +10035,7 @@ jN
 jN
 jN
 le
-lA
+jN
 kC
 mm
 mI
@@ -10213,7 +10137,7 @@ km
 kE
 kb
 lf
-lA
+jN
 kC
 mn
 mJ
