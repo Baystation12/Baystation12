@@ -199,7 +199,7 @@
 
 /turf/simulated/floor/can_build_cable(var/mob/user)
 	if(!is_plating() || flooring)
-		to_chat(user, "<span class='warning'>Removing the tiling first.</span>")
+		to_chat(user, "<span class='warning'>Remove the tiling first.</span>")
 		return 0
 	if(broken || burnt)
 		to_chat(user, "<span class='warning'>This section is too damaged to support anything. Use a welder to fix the damage.</span>")
