@@ -936,7 +936,7 @@
 	should_admin_log = TRUE
 
 	// M A X I M U M C H E E S E
-	var/global/list/dose_messages = list(
+	var/static/list/dose_messages = list(
 		"Your name is called. It is your time.",
 		"You are dissolving. Your hands are wax...",
 		"It all runs together. It all mixes.",
@@ -957,7 +957,7 @@
 		"Come back from there. Please."
 	)
 
-	var/global/list/overdose_messages = list(
+	var/static/list/overdose_messages = list(
 		"THE SIGNAL THE SIGNAL THE SIGNAL THE SIGNAL",
 		"IT CRIES IT CRIES IT WAITS IT CRIES",
 		"NOT YOURS NOT YOURS NOT YOURS NOT YOURS",

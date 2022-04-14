@@ -18,7 +18,7 @@
 	var/list/active_scanned = list() //assoc list of objects being scanned, mapped to their overlay
 	var/client/user_client //since making sure overlays are properly added and removed is pretty important, so we track the current user explicitly
 
-	var/global/list/overlay_cache = list() //cache recent overlays
+	var/static/list/overlay_cache = list() //cache recent overlays
 
 /obj/item/device/t_scanner/Destroy()
 	. = ..()

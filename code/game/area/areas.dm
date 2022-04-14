@@ -4,7 +4,7 @@
 
 // ===
 /area
-	var/global/global_uid = 0
+	var/static/global_uid = 0
 	var/uid
 	var/area_flags
 

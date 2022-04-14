@@ -36,7 +36,7 @@
 	var/turf/home
 	var/homeName
 
-	var/global/amount = 0
+	var/static/amount = 0
 
 /mob/living/bot/mulebot/New()
 	..()

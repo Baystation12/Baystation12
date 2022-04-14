@@ -19,7 +19,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 
 	var/rim_pos // Position of the rim for fruit slices. list(y, x_left, x_right)
 	var/filling_overlayed //if filling should go on top of the icon (e.g. opaque cups)
-	var/global/list/filling_icons_cache = list()
+	var/static/list/filling_icons_cache = list()
 
 	center_of_mass ="x=16;y=9"
 

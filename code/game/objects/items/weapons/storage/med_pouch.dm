@@ -13,7 +13,7 @@ Single Use Emergency Pouches
 	opened = FALSE
 	open_sound = 'sound/effects/rip1.ogg'
 	var/injury_type = "generic"
-	var/global/image/cross_overlay
+	var/static/image/cross_overlay
 
 	var/instructions = {"
 	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
