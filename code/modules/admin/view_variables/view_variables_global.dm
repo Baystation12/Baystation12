@@ -1,4 +1,4 @@
-/var/decl/global_vars/global_vars_
+var/global/decl/global_vars/global_vars_
 
 /decl/global_vars/get_view_variables_header()
 	return "<b>Global Variables</b>"

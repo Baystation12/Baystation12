@@ -1,4 +1,4 @@
-var/list/lunchables_lunches_ = list(
+var/global/list/lunchables_lunches_ = list(
 									/obj/item/reagent_containers/food/snacks/sandwich,
 									/obj/item/reagent_containers/food/snacks/slice/meatbread/filled,
 									/obj/item/reagent_containers/food/snacks/slice/tofubread/filled,
@@ -15,7 +15,7 @@ var/list/lunchables_lunches_ = list(
 									/obj/item/reagent_containers/food/snacks/plainsteak
 								  )
 
-var/list/lunchables_snacks_ = list(
+var/global/list/lunchables_snacks_ = list(
 									/obj/item/reagent_containers/food/snacks/donut/jelly,
 									/obj/item/reagent_containers/food/snacks/donut/cherryjelly,
 									/obj/item/reagent_containers/food/snacks/muffin,
@@ -48,7 +48,7 @@ var/list/lunchables_snacks_ = list(
 									/obj/item/reagent_containers/food/snacks/mars
 								   )
 
-var/list/lunchables_drinks_ = list(
+var/global/list/lunchables_drinks_ = list(
 									/obj/item/reagent_containers/food/drinks/cans/cola,
 									/obj/item/reagent_containers/food/drinks/cans/cola_apple,
 									/obj/item/reagent_containers/food/drinks/cans/cola_orange,
@@ -74,7 +74,7 @@ var/list/lunchables_drinks_ = list(
 								   )
 
 // This default list is a bit different, it contains items we don't want
-var/list/lunchables_drink_reagents_ = list(
+var/global/list/lunchables_drink_reagents_ = list(
 											/datum/reagent/drink,
 											/datum/reagent/drink/nothing,
 											/datum/reagent/drink/doctor_delight,
@@ -85,7 +85,7 @@ var/list/lunchables_drink_reagents_ = list(
 										)
 
 // This default list is a bit different, it contains items we don't want
-var/list/lunchables_ethanol_reagents_ = list(
+var/global/list/lunchables_ethanol_reagents_ = list(
 												/datum/reagent/ethanol,
 												/datum/reagent/ethanol/bilk,
 												/datum/reagent/ethanol/acid_spit,

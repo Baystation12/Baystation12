@@ -1,4 +1,4 @@
-var/decl/appearance_manager/appearance_manager = new()
+var/global/decl/appearance_manager/appearance_manager = new()
 
 /decl/appearance_manager
 	var/list/appearances_

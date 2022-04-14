@@ -215,7 +215,7 @@
 		M.set_emergency_lighting(enable)
 
 
-var/list/mob/living/forced_ambiance_list = new
+var/global/list/mob/living/forced_ambiance_list = new
 
 /area/Entered(A)
 	..()

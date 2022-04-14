@@ -1593,7 +1593,7 @@
 		if("zone_blocked")
 			global.zone_blocked=newval;
 		
-/var/list/_all_globals=list(
+var/global/list/_all_globals=list(
 	"ANTAG_FREQS",
 	"AWAY_FREQS_ASSIGNED",
 	"AWAY_FREQS_UNASSIGNED",

@@ -332,7 +332,7 @@
 		M.r_hand.update_twohanding()
 
 //Defines which slots correspond to which slot flags
-var/list/global/slot_flags_enumeration = list(
+var/global/list/global/slot_flags_enumeration = list(
 	"[slot_wear_mask]" = SLOT_MASK,
 	"[slot_back]" = SLOT_BACK,
 	"[slot_wear_suit]" = SLOT_OCLOTHING,

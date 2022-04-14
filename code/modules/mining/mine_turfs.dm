@@ -1,5 +1,5 @@
-var/list/mining_walls = list()
-var/list/mining_floors = list()
+var/global/list/mining_walls = list()
+var/global/list/mining_floors = list()
 
 /**********************Mineral deposits**************************/
 /turf/unsimulated/mineral

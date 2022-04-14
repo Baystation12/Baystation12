@@ -47,7 +47,7 @@ var/global/list/map_sectors = list()
 		overlays += I
 
 //list used to track which zlevels are being 'moved' by the proc below
-var/list/moving_levels = list()
+var/global/list/moving_levels = list()
 //Proc to 'move' stars in spess
 //yes it looks ugly, but it should only fire when state actually change.
 //null direction stops movement

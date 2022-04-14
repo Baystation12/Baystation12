@@ -2,7 +2,7 @@
 #define TOPIC_HARD_REFRESH   8 // use to force a browse() call, unblocking some rsc operations
 #define TOPIC_REFRESH_UPDATE_PREVIEW (TOPIC_HARD_REFRESH|TOPIC_UPDATE_PREVIEW)
 
-var/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
+var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 
 /datum/category_group/player_setup_category/physical_preferences
 	name = "Physical"

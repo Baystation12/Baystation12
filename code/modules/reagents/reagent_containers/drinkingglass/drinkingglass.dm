@@ -1,8 +1,8 @@
-/var/const/DRINK_FIZZ = "fizz"
-/var/const/DRINK_ICE = "ice"
-/var/const/DRINK_VAPOR = "vapor"
-/var/const/DRINK_ICON_DEFAULT = ""
-/var/const/DRINK_ICON_NOISY = "noise"
+var/global/const/DRINK_FIZZ = "fizz"
+var/global/const/DRINK_ICE = "ice"
+var/global/const/DRINK_VAPOR = "vapor"
+var/global/const/DRINK_ICON_DEFAULT = ""
+var/global/const/DRINK_ICON_NOISY = "noise"
 
 /obj/item/reagent_containers/food/drinks/glass2
 	name = "glass" // Name when empty

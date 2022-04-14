@@ -1,4 +1,4 @@
-var/list/obj/effect/bump_teleporter/BUMP_TELEPORTERS = list()
+var/global/list/obj/effect/bump_teleporter/BUMP_TELEPORTERS = list()
 
 /obj/effect/bump_teleporter
 	name = "bump-teleporter"

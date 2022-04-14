@@ -62,7 +62,7 @@
 
 // ============================================================================
 
-/var/default_mobloc = null
+var/global/default_mobloc = null
 
 proc/create_test_mob_with_mind(var/turf/mobloc = null, var/mobtype = /mob/living/carbon/human)
 	var/list/test_result = list("result" = FAILURE, "msg"    = "", "mobref" = null)

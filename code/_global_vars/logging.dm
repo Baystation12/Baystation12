@@ -1,4 +1,4 @@
-var/configuration/config
+var/global/configuration/config
 
 GLOBAL_VAR(log_directory)
 GLOBAL_PROTECT(log_directory)

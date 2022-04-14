@@ -1,5 +1,5 @@
-var/list/tickets = list()
-var/list/ticket_panels = list()
+var/global/list/tickets = list()
+var/global/list/ticket_panels = list()
 
 /datum/ticket
 	var/datum/client_lite/owner

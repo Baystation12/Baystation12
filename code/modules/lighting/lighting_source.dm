@@ -1,4 +1,4 @@
-/var/total_lighting_sources = 0
+var/global/total_lighting_sources = 0
 // This is where the fun begins.
 // These are the main datums that emit light.
 

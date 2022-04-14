@@ -1,6 +1,6 @@
-var/const/TELEBEACON_WIRE_POWER     = 1
-var/const/TELEBEACON_WIRE_RELAY     = 2
-var/const/TELEBEACON_WIRE_SIGNALLER = 4
+var/global/const/TELEBEACON_WIRE_POWER     = 1
+var/global/const/TELEBEACON_WIRE_RELAY     = 2
+var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 
 
 // Targetable beacon used by teleporters
