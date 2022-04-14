@@ -73,7 +73,7 @@
 	..()
 
 /obj/machinery/computer/proc/take_damage(var/damage)
-	if (health <= 0)
+	if (health <= 0 || !can_use_tools)
 		return
 
 	health -= damage
