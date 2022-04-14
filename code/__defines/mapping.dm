@@ -9,21 +9,21 @@
 // This utilizes an explicitly given type X instead of using src's type
 //  in order for subtypes of src's type to detect each other
 #define DELETE_IF_DUPLICATE_OF(X) \
-var/other_init = FALSE; \
-for(var/existing in get_turf(src)) { \
-	if(existing == src) { \
-		continue; \
+	var/other_init = FALSE; \
+	for(var/existing in get_turf(src)) { \
+		if(existing == src) { \
+			continue; \
+		} \
+		if(!istype(existing, X)) { \
+			continue; \
+		} \
+		var/atom/A = existing; \
+		if(A.atom_flags & ATOM_FLAG_INITIALIZED) {\
+			other_init = TRUE; \
+			break; \
+		} \
 	} \
-	if(!istype(existing, X)) { \
-		continue; \
-	} \
-	var/atom/A = existing; \
-	if(A.atom_flags & ATOM_FLAG_INITIALIZED) {\
-		other_init = TRUE; \
-		break; \
-	} \
-} \
-if(other_init) { \
-	crash_with("Deleting duplicate of [log_info_line(src)]"); \
-	return INITIALIZE_HINT_QDEL; \
-}
+	if(other_init) { \
+		crash_with("Deleting duplicate of [log_info_line(src)]"); \
+		return INITIALIZE_HINT_QDEL; \
+	}
