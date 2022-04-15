@@ -6523,9 +6523,7 @@
 	dir = 1
 	},
 /obj/structure/table/steel_reinforced,
-/obj/machinery/photocopier/faxmachine{
-	department = "Brig Chief's Office"
-	},
+/obj/machinery/photocopier/faxmachine,
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab2/cso)
 "Ia" = (
