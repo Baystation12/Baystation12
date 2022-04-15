@@ -16,7 +16,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	var/obj/item/card/id/scan = null // identification
 	var/authenticated = 0
 	var/sendcooldown = 0 // to avoid spamming fax messages
-	var/department = "Unknown" // our department
+	var/department = null // our department
 	var/destination = null // the department we're sending to
 
 	var/static/list/admin_departments
@@ -24,22 +24,22 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 /obj/machinery/photocopier/faxmachine/Initialize()
 	. = ..()
 
-	GLOB.allfaxes += src
-
 	if (!admin_departments)
 		if (length(GLOB.using_map?.map_admin_faxes))
 			admin_departments = GLOB.using_map.map_admin_faxes.Copy()
 		else
 			admin_departments = list("[station_name()] Head Office", "[station_name()] Supply")
 
-	if ( !(("[department]" in GLOB.alldepartments) || ("[department]" in admin_departments)))
-		GLOB.alldepartments |= department
-
 	if (!destination)
 		if (length(admin_departments))
 			destination = admin_departments[1]
 		else if (length(GLOB.alldepartments))
 			destination = pick(GLOB.alldepartments)
+
+	GLOB.allfaxes += src
+
+	if (department && !(("[department]" in GLOB.alldepartments) || ("[department]" in admin_departments)))
+		GLOB.alldepartments |= department
 
 /obj/machinery/photocopier/faxmachine/attackby(obj/item/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/paper))
