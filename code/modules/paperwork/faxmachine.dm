@@ -2,6 +2,7 @@ GLOBAL_LIST_EMPTY(allfaxes)
 GLOBAL_LIST_EMPTY(alldepartments)
 
 GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
+GLOBAL_LIST_EMPTY(admin_departments)
 
 /obj/machinery/photocopier/faxmachine
 	name = "fax machine"
@@ -19,26 +20,24 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	var/department = null // our department
 	var/destination = null // the department we're sending to
 
-	var/static/list/admin_departments
-
 /obj/machinery/photocopier/faxmachine/Initialize()
 	. = ..()
 
-	if (!admin_departments)
+	if (!length(GLOB.admin_departments))
 		if (length(GLOB.using_map?.map_admin_faxes))
-			admin_departments = GLOB.using_map.map_admin_faxes.Copy()
+			GLOB.admin_departments = GLOB.using_map.map_admin_faxes.Copy()
 		else
-			admin_departments = list("[station_name()] Head Office", "[station_name()] Supply")
+			GLOB.admin_departments = list("[station_name()] Head Office", "[station_name()] Supply")
 
 	if (!destination)
-		if (length(admin_departments))
-			destination = admin_departments[1]
+		if (length(GLOB.admin_departments))
+			destination = GLOB.admin_departments[1]
 		else if (length(GLOB.alldepartments))
 			destination = pick(GLOB.alldepartments)
 
 	GLOB.allfaxes += src
 
-	if (department && !(("[department]" in GLOB.alldepartments) || ("[department]" in admin_departments)))
+	if (department && !(("[department]" in GLOB.alldepartments) || ("[department]" in GLOB.admin_departments)))
 		GLOB.alldepartments |= department
 
 /obj/machinery/photocopier/faxmachine/attackby(obj/item/O as obj, mob/user as mob)
@@ -57,7 +56,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 		if (!emagged)
 			to_chat(user, SPAN_WARNING("\The [src]'s department configuration is vendor locked."))
 			return
-		var/list/option_list = GLOB.alldepartments.Copy() + admin_departments + "(Custom)" + "(Cancel)"
+		var/list/option_list = GLOB.alldepartments.Copy() + GLOB.admin_departments.Copy() + "(Custom)" + "(Cancel)"
 		var/new_department = input(user, "Which department do you want to tag this fax machine as? Choose '(Custom)' to enter a custom department or '(Cancel) to cancel.", "Fax Machine Department Tag") as null|anything in option_list
 		if (!new_department || new_department == department || new_department == "(Cancel)" || !CanUseTopic(user) || !Adjacent(user))
 			return
@@ -151,7 +150,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 /obj/machinery/photocopier/faxmachine/OnTopic(mob/user, href_list, state)
 	if(href_list["send"])
 		if(copyitem)
-			if (destination in admin_departments)
+			if (destination in GLOB.admin_departments)
 				send_admin_fax(user, destination)
 			else
 				sendfax(destination)
@@ -180,7 +179,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 		return TOPIC_REFRESH
 
 	if(href_list["dept"])
-		var/desired_destination = input(user, "Which department?", "Choose a department", "") as null|anything in (GLOB.alldepartments + admin_departments)
+		var/desired_destination = input(user, "Which department?", "Choose a department", "") as null|anything in (GLOB.alldepartments + GLOB.admin_departments)
 		if(desired_destination && CanInteract(user, state))
 			destination = desired_destination
 		return TOPIC_REFRESH

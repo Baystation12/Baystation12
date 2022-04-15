@@ -1493,9 +1493,23 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		to_chat(usr, "Error: you are not an admin!")
 		return
 
-	var/replyorigin = input(src.owner, "Please specify who the fax is coming from", "Origin") as text|null
-	var/department = input("Choose a fax", "Fax") as null|anything in GLOB.alldepartments
+	// Origin
+	var/list/option_list = GLOB.admin_departments.Copy() + GLOB.alldepartments.Copy() + "(Custom)" + "(Cancel)"
+	var/replyorigin = input(owner, "Please specify who the fax is coming from. Choose '(Custom)' to enter a custom department or '(Cancel) to cancel.", "Fax Origin") as null|anything in option_list
+	if (!replyorigin || replyorigin == "(Cancel)")
+		return
+	if (replyorigin == "(Custom)")
+		replyorigin = input(owner, "Please specify who the fax is coming from.", "Fax Machine Department Tag") as text|null
+		if (!replyorigin)
+			return
+	if (replyorigin == "Unknown" || replyorigin == "(Custom)" || replyorigin == "(Cancel)")
+		to_chat(owner, SPAN_WARNING("Invalid origin selected."))
+		return
 
+	// Destination
+	var/department = input("Choose a destination fax", "Fax Target") as null|anything in GLOB.alldepartments
+
+	// Generate the fax
 	var/obj/item/paper/admin/P = new /obj/item/paper/admin( null ) //hopefully the null loc won't cause trouble for us
 	faxreply = P
 	P.admindatum = src
