@@ -1524,8 +1524,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 /datum/admins/proc/faxCallback(obj/item/paper/admin/P)
 	var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
 
-	P.SetName("[P.origin] - [customname]")
-	P.desc = "This is a paper titled '" + P.name + "'."
+	P.SetName("[customname]")
 
 	var/shouldStamp = 1
 	if(!P.sender) // admin initiated

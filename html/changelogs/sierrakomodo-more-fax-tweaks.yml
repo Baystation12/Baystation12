@@ -38,3 +38,5 @@ changes:
   - rscadd: "Fax machines can now be emagged, which in turn allows you to use multitools to change the fax machine's department tag, so that you can pretend your faxes came from somewhere else. Paperwork antags rejoice."
   - bugfix: "Sending faxes to destination tags that have multiple matching fax machines no longer does weird loopy things and then break."
   - tweak: "Fax machines now display a visible message indicating a fax has been received and which department the fax came from."
+  - tweak: "All papers printed by a fax machine now display the origin department in the paper's title, regardless of if they were an admin fax or a player fax. No more using fax titles to metagame antag faxes."
+  - bugfix: "The redundant 'The paper is titled XYZ' line from fax descriptions has been removed."

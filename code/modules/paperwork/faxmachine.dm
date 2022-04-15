@@ -227,11 +227,14 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	sleep(20)
 
 	if (istype(incoming, /obj/item/paper))
-		copy(incoming)
-	else if (istype(incoming, /obj/item/photo))
-		photocopy(incoming)
+		var/obj/item/paper/newcopy = copy(incoming)
+		newcopy.SetName("[origin_department] - [newcopy.name]")
+	else if (istype(incoming, /obj/item/paper))
+		var/obj/item/paper/newcopy = photocopy(incoming)
+		newcopy.SetName("[origin_department] - [newcopy.name]")
 	else if (istype(incoming, /obj/item/paper_bundle))
-		bundlecopy(incoming)
+		var/obj/item/paper_bundle/newcopy = bundlecopy(incoming)
+		newcopy.SetName("[origin_department] - [newcopy.name]")
 	else
 		return 0
 
