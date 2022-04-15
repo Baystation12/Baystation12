@@ -205,14 +205,14 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	if (destination)
 		for (var/obj/machinery/photocopier/faxmachine/F in GLOB.allfaxes)
 			if (F.department == destination)
-				success = F.recievefax(copyitem)
+				success = F.recievefax(copyitem, department)
 
 	if (success)
 		visible_message("[src] beeps, \"Message transmitted successfully.\"")
 	else
 		visible_message("[src] beeps, \"Error transmitting message.\"")
 
-/obj/machinery/photocopier/faxmachine/proc/recievefax(var/obj/item/incoming)
+/obj/machinery/photocopier/faxmachine/proc/recievefax(obj/item/incoming, origin_department = "Unknown")
 	if(stat & (BROKEN|NOPOWER))
 		return 0
 
@@ -221,6 +221,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 
 	flick("faxreceive", src)
 	playsound(loc, "sound/machines/dotprinter.ogg", 50, 1)
+	visible_message(SPAN_NOTICE("\The [src] pings, \"New fax received from [origin_department].\""))
 
 	// give the sprite some time to flick
 	sleep(20)

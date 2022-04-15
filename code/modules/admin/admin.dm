@@ -1563,7 +1563,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 			rcvdcopy = destination.copy(P)
 			rcvdcopy.forceMove(null) //hopefully this shouldn't cause trouble
 			GLOB.adminfaxes += rcvdcopy
-		if (destination.recievefax(P))
+		if (destination.recievefax(P, P.origin))
 			success = TRUE
 
 	if (success)
