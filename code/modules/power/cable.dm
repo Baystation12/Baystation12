@@ -83,8 +83,9 @@ By design, d1 is the smallest direction and d2 is the highest
 
 	// hide the cable
 	var/turf/T = src.loc
-	if(istype(T, /turf/simulated/floor) && !T.is_plating() && src.level == 1)
-		hide(TRUE)
+	if (level == 1)
+		var/hideme = !T.is_plating() && !T.is_open()
+		hide(hideme)
 
 	GLOB.cable_list += src //add it to the global cable list
 
