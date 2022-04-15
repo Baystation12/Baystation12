@@ -77,7 +77,7 @@ if (!(datum.process_flags & AI_FASTPROCESSING)) { \
 	var/process_flags = 0
 	/// A list used in mass-editing of AI datums, holding a snapshot of the 'before' state
 	var/list/snapshot = null
-	var/list/static/fastprocess_stances = list(
+	var/static/list/fastprocess_stances = list(
 		STANCE_ALERT,
 		STANCE_APPROACH,
 		STANCE_FIGHT,
@@ -88,7 +88,7 @@ if (!(datum.process_flags & AI_FASTPROCESSING)) { \
 		STANCE_FLEE,
 		STANCE_DISABLED
 	)
-	var/list/static/noprocess_stances = list(
+	var/static/list/noprocess_stances = list(
 		STANCE_SLEEP
 	)
 

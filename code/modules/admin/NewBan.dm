@@ -1,5 +1,5 @@
-var/CMinutes = null
-var/savefile/Banlist
+var/global/CMinutes = null
+var/global/savefile/Banlist
 
 
 /proc/CheckBan(var/ckey, var/id, var/address)

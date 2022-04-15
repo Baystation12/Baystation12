@@ -1,4 +1,4 @@
-var/list/fusion_reactions
+var/global/list/fusion_reactions
 
 /decl/fusion_reaction
 	var/p_react = "" // Primary reactant.

@@ -30,7 +30,7 @@ GLOBAL_LIST(hazard_overlays)
 			afterattack(airlock, null, TRUE)
 		return INITIALIZE_HINT_QDEL
 
-var/list/tape_roll_applications = list()
+var/global/list/tape_roll_applications = list()
 
 /obj/item/tape
 	name = "tape"

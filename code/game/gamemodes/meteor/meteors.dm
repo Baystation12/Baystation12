@@ -1,10 +1,10 @@
 //Meteor groups, used for various random events and the Meteor gamemode.
 
 // Dust, used by space dust event and during earliest stages of meteor mode.
-/var/list/meteors_dust = list(/obj/effect/meteor/dust)
+var/global/list/meteors_dust = list(/obj/effect/meteor/dust)
 
 // Standard meteors, used during early stages of the meteor gamemode.
-/var/list/meteors_normal = list(\
+var/global/list/meteors_normal = list(\
 		/obj/effect/meteor/medium=8,\
 		/obj/effect/meteor/dust=3,\
 		/obj/effect/meteor/irradiated=3,\
@@ -15,7 +15,7 @@
 		)
 
 // Threatening meteors, used during the meteor gamemode.
-/var/list/meteors_threatening = list(\
+var/global/list/meteors_threatening = list(\
 		/obj/effect/meteor/big=10,\
 		/obj/effect/meteor/medium=5,\
 		/obj/effect/meteor/golden=3,\
@@ -26,7 +26,7 @@
 		)
 
 // Catastrophic meteors, pretty dangerous without shields and used during the meteor gamemode.
-/var/list/meteors_catastrophic = list(\
+var/global/list/meteors_catastrophic = list(\
 		/obj/effect/meteor/big=75,\
 		/obj/effect/meteor/flaming=10,\
 		/obj/effect/meteor/irradiated=10,\
@@ -38,7 +38,7 @@
 		)
 
 // Armageddon meteors, very dangerous, and currently used only during the meteor gamemode.
-/var/list/meteors_armageddon = list(\
+var/global/list/meteors_armageddon = list(\
 		/obj/effect/meteor/big=25,\
 		/obj/effect/meteor/flaming=10,\
 		/obj/effect/meteor/irradiated=10,\
@@ -50,7 +50,7 @@
 		)
 
 // Cataclysm meteor selection. Very very dangerous and effective even against shields. Used in late game meteor gamemode only.
-/var/list/meteors_cataclysm = list(\
+var/global/list/meteors_cataclysm = list(\
 		/obj/effect/meteor/big=40,\
 		/obj/effect/meteor/emp=20,\
 		/obj/effect/meteor/tunguska=20,\

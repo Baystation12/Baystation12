@@ -1,4 +1,4 @@
-var/list/event_last_fired = list()
+var/global/list/event_last_fired = list()
 
 //Always triggers an event when called, dynamically chooses events based on job population
 /proc/spawn_dynamic_event()

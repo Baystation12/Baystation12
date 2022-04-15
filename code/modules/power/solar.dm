@@ -1,6 +1,6 @@
 #define SOLAR_MAX_DIST 40
 
-var/solar_gen_rate = 1500
+var/global/solar_gen_rate = 1500
 
 /obj/machinery/power/solar
 	name = "solar panel"

@@ -1,4 +1,4 @@
-var/list/department_radio_keys = list(
+var/global/list/department_radio_keys = list(
 	  ":r" = "right ear",	".r" = "right ear",
 	  ":l" = "left ear",	".l" = "left ear",
 	  ":i" = "intercom",	".i" = "intercom",
@@ -57,7 +57,7 @@ var/list/department_radio_keys = list(
 )
 
 
-var/list/channel_to_radio_key = new
+var/global/list/channel_to_radio_key = new
 proc/get_radio_key_from_channel(var/channel)
 	var/key = channel_to_radio_key[channel]
 	if(!key)

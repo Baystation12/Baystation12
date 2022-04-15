@@ -116,7 +116,7 @@ Class Procs:
 	/// Boolean. Whether or not the maintenance panel is open.
 	var/panel_open = FALSE
 	/// Numeric unique ID number tracker. Used for ensuring `uid` is unique.
-	var/global/gl_uid = 1
+	var/static/gl_uid = 1
 	/// Boolean. Can the machine be interacted with while de-powered.
 	var/interact_offline = FALSE
 	/// Sound played on succesful interface use by a carbon lifeform.

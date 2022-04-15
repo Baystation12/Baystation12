@@ -17,7 +17,7 @@
 	//  the specific order matters to get a usable icon_state, it is
 	//  copied here so that, in the unlikely case that alldirs is changed,
 	//  this continues to work.
-	var/global/list/tube_dir_list = list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
+	var/static/list/tube_dir_list = list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
 
 
 // A place where tube pods stop, and people can get in or out.
@@ -531,7 +531,7 @@
 //  but it is probably safer to assume the existence of, and
 //  rely on, a sufficiently smart compiler/optimizer.
 /obj/structure/transit_tube/proc/parse_dirs(text)
-	var/global/list/direction_table = list()
+	var/static/list/direction_table = list()
 
 	if(text in direction_table)
 		return direction_table[text]

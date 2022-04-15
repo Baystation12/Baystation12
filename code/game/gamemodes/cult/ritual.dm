@@ -153,7 +153,7 @@
 /mob/living/carbon/human/get_rune_color()
 	return species.blood_color
 
-var/list/Tier1Runes = list(
+var/global/list/Tier1Runes = list(
 	/mob/proc/convert_rune,
 	/mob/proc/teleport_rune,
 	/mob/proc/tome_rune,
@@ -167,7 +167,7 @@ var/list/Tier1Runes = list(
 	/mob/proc/reveal
 	)
 
-var/list/Tier2Runes = list(
+var/global/list/Tier2Runes = list(
 	/mob/proc/armor_rune,
 	/mob/proc/offering_rune,
 	/mob/proc/drain_rune,
@@ -175,7 +175,7 @@ var/list/Tier2Runes = list(
 	/mob/proc/massdefile_rune
 	)
 
-var/list/Tier3Runes = list(
+var/global/list/Tier3Runes = list(
 	/mob/proc/weapon_rune,
 	/mob/proc/shell_rune,
 	/mob/proc/bloodboil_rune,
@@ -183,7 +183,7 @@ var/list/Tier3Runes = list(
 	/mob/proc/revive_rune
 )
 
-var/list/Tier4Runes = list(
+var/global/list/Tier4Runes = list(
 	/mob/proc/tearreality_rune
 	)
 

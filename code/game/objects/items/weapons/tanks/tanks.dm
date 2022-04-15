@@ -1,4 +1,4 @@
-var/list/global/tank_gauge_cache = list()
+var/global/list/tank_gauge_cache = list()
 
 /obj/item/tank
 	name = "tank"

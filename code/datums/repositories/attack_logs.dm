@@ -1,4 +1,4 @@
-var/repository/attack_logs/attack_log_repository = new()
+var/global/repository/attack_logs/attack_log_repository = new()
 
 /repository/attack_logs
 	var/list/attack_logs_

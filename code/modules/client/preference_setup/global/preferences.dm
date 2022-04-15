@@ -26,9 +26,9 @@ GLOBAL_VAR_CONST(PREF_NEVER, "Never")
 GLOBAL_VAR_CONST(PREF_NON_ANTAG, "Non-Antag Only")
 GLOBAL_VAR_CONST(PREF_ALWAYS, "Always")
 
-var/list/_client_preferences
-var/list/_client_preferences_by_key
-var/list/_client_preferences_by_type
+var/global/list/_client_preferences
+var/global/list/_client_preferences_by_key
+var/global/list/_client_preferences_by_type
 
 /proc/get_client_preferences()
 	if(!_client_preferences)

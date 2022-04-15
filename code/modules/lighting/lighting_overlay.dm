@@ -1,4 +1,4 @@
-/var/total_lighting_overlays = 0
+var/global/total_lighting_overlays = 0
 /atom/movable/lighting_overlay
 	name = ""
 	mouse_opacity = 0

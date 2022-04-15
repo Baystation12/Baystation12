@@ -1,4 +1,4 @@
-var/list/mob_hat_cache = list()
+var/global/list/mob_hat_cache = list()
 /proc/get_hat_icon(var/obj/item/hat, var/offset_x = 0, var/offset_y = 0)
 	var/t_state = hat.icon_state
 	if(hat.item_state_slots && hat.item_state_slots[slot_head_str])

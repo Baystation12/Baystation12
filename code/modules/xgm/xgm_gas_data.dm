@@ -1,4 +1,4 @@
-/var/datum/xgm_gas_data/gas_data
+var/global/datum/xgm_gas_data/gas_data
 
 /datum/xgm_gas_data
 	//Simple list of all the gas IDs.

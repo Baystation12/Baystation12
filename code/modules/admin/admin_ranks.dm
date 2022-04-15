@@ -1,4 +1,4 @@
-var/list/admin_ranks = list()								//list of all ranks with associated rights
+var/global/list/admin_ranks = list()								//list of all ranks with associated rights
 
 //load our rank - > rights associations
 /proc/load_admin_ranks()

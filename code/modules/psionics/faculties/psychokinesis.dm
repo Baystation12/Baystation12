@@ -57,7 +57,7 @@
 	use_description = "Click on a distant target while on grab intent to manifest a psychokinetic grip. Use it manipulate objects at a distance."
 	admin_log = FALSE
 	use_sound = 'sound/effects/psi/power_used.ogg'
-	var/global/list/valid_machine_types = list(
+	var/static/list/valid_machine_types = list(
 		/obj/machinery/door
 	)
 

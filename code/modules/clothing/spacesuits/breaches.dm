@@ -8,7 +8,7 @@
 	var/damtype = BURN                      // Punctured or melted
 	var/patched = FALSE
 	var/obj/item/clothing/suit/space/holder // Suit containing the list of breaches holding this instance.
-	var/global/list/breach_brute_descriptors = list(
+	var/static/list/breach_brute_descriptors = list(
 		"tiny puncture",
 		"ragged tear",
 		"large split",
@@ -16,7 +16,7 @@
 		"gaping wound"
 		)
 
-	var/global/list/breach_burn_descriptors = list(
+	var/static/list/breach_burn_descriptors = list(
 		"small burn",
 		"melted patch",
 		"sizable burn",
