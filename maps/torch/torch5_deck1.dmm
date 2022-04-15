@@ -7411,13 +7411,14 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
-/obj/machinery/computer/modular/preset/medical{
-	dir = 1
-	},
 /obj/structure/sign/warning/nosmoking_1{
 	dir = 4;
 	icon_state = "nosmoking";
 	pixel_x = -37
+	},
+/obj/structure/table/glass,
+/obj/machinery/photocopier/faxmachine{
+	department = "Torch - Medical Paperwork Office"
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/medpaperworkoffice)
@@ -17545,7 +17546,6 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/structure/bed/chair/comfy/blue,
 /turf/simulated/floor/tiled/white,
 /area/medical/medpaperworkoffice)
 "frA" = (
