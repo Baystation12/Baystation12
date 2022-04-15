@@ -52,8 +52,45 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 			return
 		scan = O
 		to_chat(user, "<span class='notice'>You insert \the [O] into \the [src].</span>")
+	if (isMultitool(O))
+		to_chat(user, SPAN_NOTICE("\The [src]'s department tag is set to [department]."))
+		if (!emagged)
+			to_chat(user, SPAN_WARNING("\The [src]'s department configuration is vendor locked."))
+			return
+		var/list/option_list = GLOB.alldepartments.Copy() + admin_departments + "(Custom)" + "(Cancel)"
+		var/new_department = input(user, "Which department do you want to tag this fax machine as? Choose '(Custom)' to enter a custom department or '(Cancel) to cancel.", "Fax Machine Department Tag") as null|anything in option_list
+		if (!new_department || new_department == department || new_department == "(Cancel)" || !CanUseTopic(user) || !Adjacent(user))
+			return
+		if (new_department == "(Custom)")
+			new_department = input(user, "Which department do you want to tag this fax machine as?", "Fax Machine Department Tag", department) as text|null
+			if (!new_department || new_department == department || !CanUseTopic(user) || !Adjacent(user))
+				return
+		if (new_department == "Unknown" || new_department == "(Custom)" || new_department == "(Cancel)")
+			to_chat(user, SPAN_WARNING("Invalid department tag selected."))
+			return
+		department = new_department
+		to_chat(user, SPAN_NOTICE("You reconfigure \the [src]'s department tag to [department]."))
 	else
 		..()
+
+/obj/machinery/photocopier/faxmachine/get_mechanics_info()
+	. = "<p>The fax machine can be used to transmit paper faxes to other fax machines on the map, or to off-ship organizations handled by server administration. To use the fax machine, you'll need to insert both a paper and your ID card, authenticate, select a destination, the transmit the fax.</p>"
+	. += "<p>You can also fax paper bundles, including photos, using this machine.</p>"
+	. += "<p>You can check the machine's department origin tag using a multitool.</p>"
+	. += ..()
+
+/obj/machinery/photocopier/faxmachine/get_antag_info()
+	. = "<p>If emagged with a cryptographic sequencer, the fax machine can then have it's origin department tag changed using a multitool. This allows you to send faxes pretending to be from somewhere else on the ship, or even an off-ship origin like EXCOMM.</p>"
+	. += "<p><strong>NOTE</strong>: Any new department tags created in this way that do not already exist in the list of targets cannot receive faxes, as this does not add new departments to the list of valid fax targets.</p>"
+	. += ..()
+
+/obj/machinery/photocopier/faxmachine/emag_act(remaining_charges, mob/user, emag_source)
+	if (emagged)
+		to_chat(user, SPAN_WARNING("\The [src]'s systems have already been hacked."))
+		return
+	to_chat(user, SPAN_NOTICE("You unlock \the [src]'s department tagger. You can now modify it's department tag to disguise faxes as being from another department or even off-ship using a multitool."))
+	emagged = TRUE
+	return TRUE
 
 /obj/machinery/photocopier/faxmachine/interface_interact(mob/user)
 	interact(user)
