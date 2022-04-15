@@ -2937,7 +2937,7 @@
 	pixel_y = -6
 	},
 /obj/structure/table/standard,
-/obj/machinery/photocopier/faxmachine/torch{
+/obj/machinery/photocopier/faxmachine{
 	department = "Torch - Pathfinder"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -13406,7 +13406,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/machinery/photocopier/faxmachine/torch{
+/obj/machinery/photocopier/faxmachine{
 	department = "Torch - Deck Chief's Office"
 	},
 /turf/simulated/floor/tiled/monotile,
