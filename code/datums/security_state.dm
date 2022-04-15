@@ -138,6 +138,7 @@
 /decl/security_level
 	var/icon
 	var/name
+	var/alarm_level = "off"
 
 	// These values are primarily for station alarms and status displays, and which light colors and overlays to use
 	var/light_max_bright = 0.5
@@ -196,6 +197,9 @@
 	for(var/obj/machinery/firealarm/FA in SSmachines.machinery)
 		if(FA.z in GLOB.using_map.contact_levels)
 			FA.update_icon()
+	for (var/obj/machinery/rotating_alarm/security_alarm/SA in SSmachines.machinery)
+		if (SA.z in GLOB.using_map.contact_levels)
+			SA.set_alert(name, alarm_level, light_color_alarm)
 	post_status("alert")
 
 /decl/security_level/default/code_green
@@ -216,6 +220,7 @@
 
 /decl/security_level/default/code_blue
 	name = "code blue"
+	alarm_level = "on"
 
 	light_max_bright = 0.5
 	light_inner_range = 0.1
@@ -234,6 +239,7 @@
 
 /decl/security_level/default/code_red
 	name = "code red"
+	alarm_level = "on"
 
 	light_max_bright = 0.5
 	light_inner_range = 0.1
@@ -252,6 +258,7 @@
 
 /decl/security_level/default/code_delta
 	name = "code delta"
+	alarm_level = "on"
 
 	light_max_bright = 0.75
 	light_inner_range = 0.1

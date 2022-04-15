@@ -5033,6 +5033,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 25;
+	pixel_y = 0
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/thirddeck)
 "jT" = (
@@ -6652,6 +6657,9 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 10
 	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/habcheck)
 "nJ" = (
@@ -7097,6 +7105,9 @@
 	dir = 9;
 	icon_state = "corner_white"
 	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "oM" = (
@@ -7125,6 +7136,9 @@
 /obj/structure/railing/mapped{
 	dir = 1;
 	icon_state = "railing0-1"
+	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 4
 	},
 /turf/simulated/open,
 /area/hallway/primary/thirddeck/fore)
@@ -7343,10 +7357,8 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_x = 0;
-	pixel_y = -24
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
@@ -9115,6 +9127,9 @@
 /area/crew_quarters/safe_room/thirddeck)
 "tH" = (
 /obj/effect/floor_decal/corner/green/half,
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/center)
 "tI" = (
@@ -9302,6 +9317,9 @@
 "uk" = (
 /obj/effect/floor_decal/corner/lime{
 	dir = 10
+	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
@@ -9728,6 +9746,16 @@
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/fore)
+"vH" = (
+/obj/effect/floor_decal/corner/yellow{
+	dir = 9
+	},
+/obj/structure/ladder/up,
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/hallway/primary/thirddeck/aft)
 "vM" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -10374,6 +10402,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/dark,
 /area/engineering/hardstorage)
+"xC" = (
+/obj/effect/floor_decal/corner/green/half{
+	dir = 1;
+	icon_state = "bordercolorhalf"
+	},
+/obj/machinery/rotating_alarm/security_alarm,
+/turf/simulated/floor/tiled/monotile,
+/area/hallway/primary/thirddeck/center)
 "xE" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 4
@@ -11651,11 +11687,17 @@
 	dir = 4;
 	icon_state = "console"
 	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
 "Bw" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/uniform_vendor{
+	dir = 8
+	},
+/obj/machinery/rotating_alarm/security_alarm{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -15656,6 +15698,9 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_y = -32
 	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "LE" = (
@@ -16639,6 +16684,11 @@
 /obj/item/book/manual/solgov_law,
 /obj/item/book/manual/military_law,
 /obj/item/book/manual/nt_regs,
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_x = 0;
+	pixel_y = -24
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "OC" = (
@@ -16957,12 +17007,10 @@
 	dir = 9;
 	icon_state = "techfloor_edges"
 	},
-/obj/machinery/alarm{
-	dir = 4;
-	pixel_x = -23;
-	pixel_y = 0
-	},
 /obj/structure/bed/chair,
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/thirddeck)
 "PF" = (
@@ -34884,7 +34932,7 @@ lu
 lu
 lu
 pS
-qP
+xC
 VM
 tP
 LV
@@ -41758,7 +41806,7 @@ QF
 OW
 IV
 Pr
-bf
+vH
 bf
 bg
 AI

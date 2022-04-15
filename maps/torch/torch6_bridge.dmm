@@ -650,6 +650,9 @@
 /obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/effect/floor_decal/industrial/shutoff,
 /obj/machinery/atmospherics/valve/shutoff/scrubbers,
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "bt" = (
@@ -1189,6 +1192,9 @@
 	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers{
 	dir = 4
+	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/hallway/starboard)
@@ -3309,6 +3315,9 @@
 	dir = 10;
 	icon_state = "corner_white"
 	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/hallway/port)
 "fU" = (
@@ -4612,6 +4621,9 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "jU" = (
@@ -5019,6 +5031,9 @@
 /obj/machinery/disposal,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/disposalpipe/trunk{
+	dir = 4
+	},
+/obj/machinery/rotating_alarm/security_alarm{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -5655,6 +5670,9 @@
 	pixel_y = -32
 	},
 /obj/effect/floor_decal/corner/blue/half,
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/bridge/aft)
 "na" = (
@@ -10417,11 +10435,11 @@
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/rd)
 "Ap" = (
-/obj/machinery/light,
 /obj/effect/floor_decal/corner/blue,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
+/obj/machinery/light,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "Aq" = (
@@ -10668,6 +10686,9 @@
 	},
 /obj/machinery/light/spot{
 	dir = 8
+	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
@@ -11152,6 +11173,9 @@
 "Dt" = (
 /obj/structure/dispenser/oxygen,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aux_eva)
 "Du" = (
@@ -12468,6 +12492,9 @@
 	start_pressure = 450
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/bridge)
 "IG" = (
@@ -14692,6 +14719,9 @@
 /obj/machinery/newscaster/security_unit{
 	pixel_x = 32;
 	pixel_y = 0
+	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/meeting_room)

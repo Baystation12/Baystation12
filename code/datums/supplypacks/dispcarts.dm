@@ -2,6 +2,14 @@
 /decl/hierarchy/supply_pack/dispenser_cartridges
 	name = "Dispenser Cartridges"
 
+/decl/hierarchy/supply_pack/dispenser_cartridges/empty
+	name = "Empty dispenser cartridges"
+	contains = list(
+		/obj/item/reagent_containers/chem_disp_cartridge = 2
+	)
+	cost = 10
+	containername = "empty reagent cartridge crate"
+
 #define SEC_PACK(_tname, _type, _name, _cname, _cost, _access)\
 	decl/hierarchy/supply_pack/dispenser_cartridges{\
 		_tname {\

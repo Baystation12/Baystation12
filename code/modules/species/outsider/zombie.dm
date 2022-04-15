@@ -92,7 +92,6 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 /datum/species/zombie/handle_post_spawn(mob/living/carbon/human/H)
 	H.mutations |= MUTATION_CLUMSY
 	H.mutations |= MUTATION_FERAL
-	H.mutations |= MUTATION_XRAY
 	H.mutations |= mNobreath //Byond doesn't like adding them all in one OR statement :(
 	H.verbs += /mob/living/carbon/proc/consume
 	H.move_intents = list(/decl/move_intent/creep) //Zooming days are over
@@ -152,27 +151,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 /datum/species/zombie/handle_death(mob/living/carbon/human/H)
 	H.stat = DEAD //Gotta confirm death for some odd reason
 	playsound(H, 'sound/hallucinations/wail.ogg', 30, 1)
-	handle_death_infection(H)
 	return TRUE
-
-/datum/species/zombie/proc/handle_death_infection(mob/living/carbon/human/H)
-	var/list/victims = hearers(rand(1, 2), H)
-	for(var/mob/living/carbon/human/M in victims)
-		if (H == M || M.is_species(SPECIES_ZOMBIE))
-			continue
-		if (M.isSynthetic() || M.is_species(SPECIES_DIONA) || !(M.species.name in GLOB.zombie_species))
-			continue
-		if (M.wear_mask && (M.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)) // If they're protected by a mask
-			continue
-		else if (M.head && (M.head.item_flags & ITEM_FLAG_AIRTIGHT)) // If they're protected by a helmet
-			continue
-
-		var/vuln = 1 - M.get_blocked_ratio(null, TOX, damage_flags = DAM_BIO) //Are they protected by hazmat clothing?
-		if (vuln > 0.10 && prob(10))
-			M.reagents.add_reagent(/datum/reagent/zombie, 0.5) //Infect 'em
-
-	if (H && H.stat != CONSCIOUS)
-		addtimer(CALLBACK(src, .proc/handle_death_infection, H), 1 SECOND)
 
 /datum/species/zombie/handle_npc(mob/living/carbon/human/H)
 	H.resting = FALSE
@@ -355,7 +334,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		if (prob(3))
 			H.zombify()
 
-	M.reagents.add_reagent(/datum/reagent/zombie, Frand(0.5, 1.5))
+	M.reagents.add_reagent(/datum/reagent/zombie, Frand(0.1, 1))
 
 /datum/reagent/zombie/affect_touch(mob/living/carbon/M, alien, removed)
 	affect_blood(M, alien, removed * 0.5)

@@ -195,13 +195,16 @@
  *
  * Returns boolean - FALSE if the flare was not deactivated, TRUE if it was.
  */
-/obj/item/device/spaceflare/proc/deactivate(silent = FALSE)
+/obj/item/device/spaceflare/proc/deactivate(silent = FALSE, keep_landmark = FALSE)
 	if (!active)
 		return FALSE
 
 	active = FALSE
 	anchored = FALSE
-	QDEL_NULL(landmark)
+	if (keep_landmark)
+		landmark = null
+	else
+		QDEL_NULL(landmark)
 	update_icon()
 	if (!silent)
 		visible_message(SPAN_WARNING("\The [src] deactivates, going dark."))
@@ -227,6 +230,13 @@
 /obj/item/device/spaceflare/Destroy()
 	deactivate(TRUE)
 	. = ..()
+
+
+/obj/item/device/spaceflare/shuttle_land_on()
+	if (active)
+		// If a shuttle landed here we don't want to destroy the landmark, that breaks things. It becomes a permanent beacon smushed into the ground instead.
+		landmark.desync_flare()
+	..()
 
 
 /obj/effect/shuttle_landmark/automatic/spaceflare
@@ -268,3 +278,11 @@
 	forceMove(new_loc)
 	SetName("[initial(name)] ([x],[y])")
 	log_debug(append_admin_tools("\A [src]'s beacon was moved to [get_area(new_loc)].", location = get_turf(src)))
+
+
+/// Desynchronizes the effect from the beacon, rendering it a permanent landmark.
+/obj/effect/shuttle_landmark/automatic/spaceflare/proc/desync_flare()
+	GLOB.moved_event.unregister(beacon, src, /obj/effect/shuttle_landmark/automatic/spaceflare/proc/update_beacon_moved)
+	if (beacon?.active)
+		beacon.deactivate(TRUE, TRUE)
+	beacon = null
