@@ -62,7 +62,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 			brute /= 2
 			burn /= 2
 
-	if(status & ORGAN_BROKEN && brute)
+	if(is_broken() && brute)
 		jostle_bone(brute)
 		if(can_feel_pain() && prob(40))
 			owner.emote("scream")	//getting hit on broken hand hurts
