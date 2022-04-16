@@ -1,5 +1,5 @@
 
-/var/list/chemical_reaction_logs = list()
+var/global/list/chemical_reaction_logs = list()
 
 /proc/log_chemical_reaction(atom/A, datum/chemical_reaction/R, multiplier)
 	if(!A || !R)

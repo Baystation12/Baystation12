@@ -1,4 +1,4 @@
-var/list/organ_cache = list()
+var/global/list/organ_cache = list()
 
 /obj/item/organ
 	name = "organ"

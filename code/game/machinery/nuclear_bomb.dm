@@ -1,4 +1,4 @@
-var/bomb_set
+var/global/bomb_set
 
 /obj/machinery/nuclearbomb
 	name = "\improper Nuclear Fission Explosive"

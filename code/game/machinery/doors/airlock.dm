@@ -65,7 +65,7 @@
 	//Airlock 2.0 Aesthetics Properties
 	//The variables below determine what color the airlock and decorative stripes will be -Cakey
 	var/airlock_type = "Standard"
-	var/global/list/airlock_icon_cache = list()
+	var/static/list/airlock_icon_cache = list()
 	var/paintable = AIRLOCK_PAINTABLE|AIRLOCK_STRIPABLE //0 = Not paintable, 1 = Paintable, 3 = Paintable and Stripable, 7 for Paintable, Stripable and Detailable.
 	var/door_color = null
 	var/stripe_color = null

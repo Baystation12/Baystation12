@@ -1,4 +1,4 @@
-var/datum/species/shapeshifter/promethean/prometheans
+var/global/datum/species/shapeshifter/promethean/prometheans
 
 // Species definition follows.
 /datum/species/shapeshifter/promethean

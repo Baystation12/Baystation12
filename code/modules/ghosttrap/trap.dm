@@ -1,7 +1,7 @@
 // This system is used to grab a ghost from observers with the required preferences
 // and lack of bans set. See posibrain.dm for an example of how they are called/used.
 
-var/list/ghost_traps
+var/global/list/ghost_traps
 
 /proc/get_ghost_trap(var/trap_key)
 	if(!ghost_traps)

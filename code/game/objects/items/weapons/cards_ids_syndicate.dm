@@ -226,7 +226,7 @@
 	// Always update the UI, or buttons will spin indefinitely
 	SSnano.update_uis(src)
 
-/var/global/list/id_card_states
+var/global/list/id_card_states
 /proc/id_card_states()
 	if(!id_card_states)
 		id_card_states = list()

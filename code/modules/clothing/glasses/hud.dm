@@ -63,7 +63,7 @@
 	off_state = "securityhud_off"
 	hud_type = HUD_SECURITY
 	body_parts_covered = 0
-	var/global/list/jobs[0]
+	var/static/list/jobs[0]
 	req_access = list(access_security)
 
 /obj/item/clothing/glasses/hud/security/prescription

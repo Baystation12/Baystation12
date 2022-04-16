@@ -1018,7 +1018,7 @@ proc/get_mob_with_client_list()
 /*
 Checks if that loc and dir has a item on the wall
 */
-var/list/WALLITEMS = list(
+var/global/list/WALLITEMS = list(
 	/obj/machinery/power/apc, /obj/machinery/alarm, /obj/item/device/radio/intercom,
 	/obj/structure/extinguisher_cabinet, /obj/structure/reagent_dispensers/peppertank,
 	/obj/machinery/status_display, /obj/machinery/requests_console, /obj/machinery/light_switch, /obj/structure/sign,

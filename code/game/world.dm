@@ -4,8 +4,8 @@
 #define SET_THROTTLE(TIME, REASON) throttle[1] = base_throttle + (TIME); throttle[2] = (REASON);
 
 
-/var/server_name = "Baystation 12"
-/var/game_id = null
+var/global/server_name = "Baystation 12"
+var/global/game_id = null
 
 GLOBAL_VAR(href_logfile)
 
@@ -552,8 +552,8 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 	to_file(GLOB.world_qdel_log, "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------")
 
 
-var/failed_db_connections = 0
-var/failed_old_db_connections = 0
+var/global/failed_db_connections = 0
+var/global/failed_old_db_connections = 0
 
 /hook/startup/proc/connectDB()
 	if(!setup_database_connection())

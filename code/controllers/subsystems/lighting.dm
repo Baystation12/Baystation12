@@ -1,4 +1,4 @@
-/var/lighting_overlays_initialised = FALSE
+var/global/lighting_overlays_initialised = FALSE
 
 SUBSYSTEM_DEF(lighting)
 	name = "Lighting"

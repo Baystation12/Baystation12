@@ -107,9 +107,9 @@
 	for(var/datum/nano_module/program/newscast/program in news_programs)
 		program.news_alert(annoncement)
 
-var/list/datum/feed_network/news_network = list()     //The global news-network, which is coincidentally a global list.
+var/global/list/datum/feed_network/news_network = list()     //The global news-network, which is coincidentally a global list.
 
-var/list/obj/machinery/newscaster/allCasters = list() //Global list that will contain reference to all newscasters in existence.
+var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that will contain reference to all newscasters in existence.
 
 
 /obj/machinery/newscaster

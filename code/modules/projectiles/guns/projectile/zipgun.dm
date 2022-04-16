@@ -11,7 +11,7 @@
 	has_safety = FALSE
 	w_class = ITEM_SIZE_NORMAL
 
-	var/global/list/ammo_types = list(
+	var/static/list/ammo_types = list(
 		/obj/item/ammo_casing/pistol,
 		/obj/item/ammo_casing/shotgun,
 		/obj/item/ammo_casing/shotgun,

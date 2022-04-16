@@ -1,6 +1,6 @@
-var/list/outfits_decls_
-var/list/outfits_decls_root_
-var/list/outfits_decls_by_type_
+var/global/list/outfits_decls_
+var/global/list/outfits_decls_root_
+var/global/list/outfits_decls_by_type_
 
 /proc/outfit_by_type(var/outfit_type)
 	if(!outfits_decls_root_)

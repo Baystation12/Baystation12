@@ -1,5 +1,5 @@
 //list used to cache empty zlevels to avoid needless map bloat
-var/list/cached_space = list()
+var/global/list/cached_space = list()
 
 //Space stragglers go here
 

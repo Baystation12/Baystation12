@@ -912,7 +912,7 @@ FIRE ALARM
 	var/wiresexposed = FALSE
 	var/buildstage = 2 // 2 = complete, 1 = no wires,  0 = circuit gone
 	var/seclevel
-	var/global/list/overlays_cache
+	var/static/list/overlays_cache
 
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..()

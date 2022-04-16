@@ -125,15 +125,15 @@
 	var/update_overlay = -1
 	var/list/update_overlay_chan		// Used to determine if there is a change in channels
 	var/is_critical = 0
-	var/global/status_overlays = 0
+	var/static/status_overlays = 0
 	var/failure_timer = 0               // Cooldown thing for apc outage event
 	var/force_update = 0
 	var/emp_hardened = 0
-	var/global/list/status_overlays_lock
-	var/global/list/status_overlays_charging
-	var/global/list/status_overlays_equipment
-	var/global/list/status_overlays_lighting
-	var/global/list/status_overlays_environ
+	var/static/list/status_overlays_lock
+	var/static/list/status_overlays_charging
+	var/static/list/status_overlays_equipment
+	var/static/list/status_overlays_lighting
+	var/static/list/status_overlays_environ
 	var/autoname = 1
 
 /obj/machinery/power/apc/updateDialog()

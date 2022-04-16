@@ -562,7 +562,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 // HIVE MIND UPLOAD/DOWNLOAD DNA
 
-var/list/datum/absorbed_dna/hivemind_bank = list()
+var/global/list/datum/absorbed_dna/hivemind_bank = list()
 
 /mob/proc/changeling_hiveupload()
 	set category = "Changeling"

@@ -1,4 +1,4 @@
-var/image/contamination_overlay = image('icons/effects/contamination.dmi')
+var/global/image/contamination_overlay = image('icons/effects/contamination.dmi')
 
 /pl_control
 	var/PHORON_DMG = 3
