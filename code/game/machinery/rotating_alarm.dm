@@ -51,12 +51,11 @@
 	/// This is an angle to rotate the colour of alarm and its light. Default is orange, so, a 45 degree angle clockwise will make it green
 	var/angle = 0
 
+	var/static/list/spinning_lights_cache = list()
+
 
 /obj/machinery/rotating_alarm/Initialize()
 	. = ..()
-
-	if(!spin_effect)
-		spin_effect = new(null)
 
 	//Setup colour
 	var/list/color_matrix = color_rotation(angle)
@@ -81,11 +80,18 @@
 
 
 /obj/machinery/rotating_alarm/set_color(color)
+	if (on)
+		vis_contents -= spin_effect
+	if (isnull(spinning_lights_cache["[color]"]))
+		spinning_lights_cache["[color]"] = new /obj/effect/spinning_light()
+	spin_effect = spinning_lights_cache["[color]"]
 	alarm_light_color = color
 	var/HSV = RGBtoHSV(alarm_light_color)
 	var/RGB = HSVtoRGB(RotateHue(HSV, angle))
 	alarm_light_color = RGB
 	spin_effect.set_color(color)
+	if (on)
+		vis_contents += spin_effect
 
 
 /obj/machinery/rotating_alarm/proc/set_on()
