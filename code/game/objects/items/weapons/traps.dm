@@ -77,7 +77,7 @@
 	else
 		target_zone = pick(BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG)
 
-	if(!L.apply_damage(30, BRUTE, target_zone, used_weapon=src))
+	if(!L.apply_damage(30, DAMAGE_BRUTE, target_zone, used_weapon=src))
 		return 0
 
 	//trap the victim in place

@@ -80,7 +80,7 @@ var/global/list/narsie_list = list()
 				continue
 			if(!iscultist(M))
 				to_chat(M, "<span class='danger'> You feel your sanity crumble away in an instant as you gaze upon [src.name]...</span>")
-				M.apply_effect(3, STUN)
+				M.apply_effect(3, EFFECT_STUN)
 
 
 /obj/singularity/narsie/large/Bump(atom/A)

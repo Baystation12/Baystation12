@@ -2,7 +2,7 @@
 	id = PSI_COERCION
 	name = "Coercion"
 	associated_intent = I_DISARM
-	armour_types = list(PSIONIC)
+	armour_types = list(DAMAGE_PSIONIC)
 
 /decl/psionic_power/coercion
 	faculty = PSI_COERCION
@@ -35,7 +35,7 @@
 		for(var/mob/living/M in orange(user, user.psi.get_rank(PSI_COERCION)))
 			if(M == user)
 				continue
-			var/blocked = 100 * M.get_blocked_ratio(null, PSIONIC)
+			var/blocked = 100 * M.get_blocked_ratio(null, DAMAGE_PSIONIC)
 			if(prob(blocked))
 				to_chat(M, SPAN_DANGER("A psionic onslaught strikes your mind, but you withstand it!"))
 				continue

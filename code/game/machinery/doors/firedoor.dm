@@ -430,7 +430,7 @@
 					SPAN_DANGER("\The [src] forcefully shoves you out of the way!"),
 					SPAN_WARNING("You hear metal smacking into something.")
 				)
-				M.apply_damage(10, BRUTE, used_weapon = src)
+				M.apply_damage(10, DAMAGE_BRUTE, used_weapon = src)
 				if(direction)
 					M.Move(get_step(src, direction))
 	playsound(loc, close_sound, 25, TRUE)

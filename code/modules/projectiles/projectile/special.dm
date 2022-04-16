@@ -3,7 +3,7 @@
 	icon_state = "ion"
 	fire_sound = 'sound/weapons/Laser.ogg'
 	damage = 0
-	damage_type = BURN
+	damage_type = DAMAGE_BURN
 	damage_flags = 0
 	nodamage = TRUE
 	var/heavy_effect_range = 1
@@ -26,7 +26,7 @@
 	name ="explosive bolt"
 	icon_state= "bolter"
 	damage = 50
-	damage_flags = DAM_BULLET | DAM_SHARP | DAM_EDGE
+	damage_flags = DAMAGE_FLAG_BULLET | DAMAGE_FLAG_SHARP | DAMAGE_FLAG_EDGE
 
 	on_hit(var/atom/target, var/blocked = 0)
 		explosion(target, -1, 0, 2)
@@ -37,7 +37,7 @@
 	icon = 'icons/obj/meteor.dmi'
 	icon_state = "smallf"
 	damage = 0
-	damage_type = BRUTE
+	damage_type = DAMAGE_BRUTE
 	nodamage = TRUE
 
 	Bump(atom/A as mob|obj|turf|area, forced=0)
@@ -66,7 +66,7 @@
 	icon_state = "energy"
 	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 0
-	damage_type = TOX
+	damage_type = DAMAGE_TOXIN
 	nodamage = TRUE
 
 	on_hit(var/atom/target, var/blocked = 0)
@@ -75,7 +75,7 @@
 			var/mob/living/carbon/human/H = M
 			if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 				if(prob(15))
-					H.apply_damage((rand(30,80)),IRRADIATE, damage_flags = DAM_DISPERSED)
+					H.apply_damage((rand(30,80)), DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 					H.Weaken(5)
 					for (var/mob/V in viewers(src))
 						V.show_message("<span class='warning'>[M] writhes in pain as \his vacuoles boil.</span>", 3, "<span class='warning'>You hear the crunching of leaves.</span>", 2)
@@ -99,7 +99,7 @@
 	icon_state = "energy2"
 	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 0
-	damage_type = TOX
+	damage_type = DAMAGE_TOXIN
 	nodamage = TRUE
 	var/decl/plantgene/gene = null
 
@@ -108,7 +108,7 @@
 	icon_state = "energy2"
 	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 0
-	damage_type = TOX
+	damage_type = DAMAGE_TOXIN
 	nodamage = TRUE
 
 	on_hit(var/atom/target, var/blocked = 0)
@@ -137,7 +137,7 @@
 	damage = 1 // stop trying to murderbone with a fake gun dumbass!!!
 	embed = FALSE // nope
 	nodamage = TRUE
-	damage_type = PAIN
+	damage_type = DAMAGE_PAIN
 	damage_flags = 0
 	muzzle_type = /obj/effect/projectile/bullet/muzzle
 
@@ -146,7 +146,7 @@
 	icon_state = "bola"
 	damage = 5
 	embed = FALSE
-	damage_type = STUN
+	damage_type = DAMAGE_STUN
 	muzzle_type = null
 
 /obj/item/projectile/bola/on_hit(atom/target, blocked = 0)
@@ -165,7 +165,7 @@
 	icon_state = "bola"
 	damage = 1
 	embed = FALSE
-	damage_type = BRUTE
+	damage_type = DAMAGE_BRUTE
 	muzzle_type = null
 
 /obj/item/projectile/webball/on_hit(atom/target, blocked = 0)
@@ -190,7 +190,7 @@
 	name = "venom bolt"
 	icon_state = "venom"
 	damage = 5 //most damage is in the reagent
-	damage_type = TOX
+	damage_type = DAMAGE_TOXIN
 	damage_flags = 0
 
 /obj/item/projectile/venom/on_hit(atom/target, blocked, def_zone)
@@ -216,7 +216,7 @@
 /obj/item/projectile/hotgas
 	name = "gas vent"
 	icon_state = null
-	damage_type = BURN
+	damage_type = DAMAGE_BURN
 	damage_flags = 0
 	life_span = 3
 	silenced = TRUE

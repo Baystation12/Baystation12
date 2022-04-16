@@ -47,7 +47,7 @@
 
 	//Calculate damage
 	var/aforce = W.force
-	if(W.damtype == BRUTE || W.damtype == BURN)
+	if (W.damtype == DAMAGE_BRUTE || W.damtype == DAMAGE_BURN)
 		src.health -= aforce
 
 	//Play a fitting sound

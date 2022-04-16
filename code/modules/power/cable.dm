@@ -555,7 +555,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 		var/use_amt = min(src.amount, Ceil(S.burn_dam/3), 5)
 		if(can_use(use_amt))
-			if(S.robo_repair(3*use_amt, BURN, "some damaged wiring", src, user))
+			if(S.robo_repair(3 * use_amt, DAMAGE_BURN, "some damaged wiring", src, user))
 				src.use(use_amt)
 		return
 	return ..()

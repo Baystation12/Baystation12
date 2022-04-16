@@ -235,10 +235,10 @@
 				T.visible_message(SPAN_WARNING("\The [src] turns on."))
 			if (istype(src, /obj/item/weldingtool/electric))
 				src.force = 11
-				src.damtype = ELECTROCUTE
+				src.damtype = DAMAGE_SHOCK
 			else
 				src.force = tank.lit_force
-				src.damtype = BURN
+				src.damtype = DAMAGE_BURN
 			welding = 1
 			update_icon()
 			START_PROCESSING(SSobj, src)
@@ -257,7 +257,7 @@
 			src.force = initial(force)
 		else
 			src.force = tank.unlit_force
-		src.damtype = BRUTE
+		src.damtype = DAMAGE_BRUTE
 		src.welding = 0
 		update_icon()
 
@@ -277,7 +277,7 @@
 			to_chat(user, SPAN_WARNING("You'll need to turn [src] on to patch the damage on [M]'s [S.name]!"))
 			return 1
 
-		if(S.robo_repair(15, BRUTE, "some dents", src, user))
+		if(S.robo_repair(15, DAMAGE_BRUTE, "some dents", src, user))
 			remove_fuel(1, user)
 
 	else

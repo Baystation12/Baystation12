@@ -144,8 +144,8 @@
 		damage = max(1, round(5*get_trait(TRAIT_POTENCY)/100, 1))
 		has_edge = prob(get_trait(TRAIT_POTENCY)/5)
 
-	var/damage_flags = DAM_SHARP|(has_edge? DAM_EDGE : 0)
-	target.apply_damage(damage, BRUTE, target_limb, damage_flags, used_weapon = "Thorns")
+	var/damage_flags = DAMAGE_FLAG_SHARP|(has_edge? DAMAGE_FLAG_EDGE : 0)
+	target.apply_damage(damage, DAMAGE_BRUTE, target_limb, damage_flags, used_weapon = "Thorns")
 
 // Adds reagents to a target.
 /datum/seed/proc/do_sting(var/mob/living/carbon/human/target, var/obj/item/fruit)

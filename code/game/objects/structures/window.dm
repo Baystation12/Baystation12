@@ -228,7 +228,7 @@
 		tforce = I.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 	if(reinf_material) tforce *= 0.25
 	playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
-	damage_health(tforce, BRUTE)
+	damage_health(tforce, DAMAGE_BRUTE)
 	deanchor(AM)
 
 /obj/structure/window/attack_hand(mob/user as mob)
@@ -271,10 +271,10 @@
 		user.do_attack_animation(src)
 	if(!damage)
 		return
-	if(can_damage_health(damage, BRUTE))
+	if(can_damage_health(damage, DAMAGE_BRUTE))
 		visible_message("<span class='danger'>[user] [attack_verb] into [src]!</span>")
 		playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
-		damage_health(damage, BRUTE)
+		damage_health(damage, DAMAGE_BRUTE)
 	else
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	return 1
@@ -459,16 +459,16 @@
 		G.affecting.visible_message("<span class='danger'>[G.assailant] bashes [G.affecting] against \the [src]!</span>")
 		if (prob(50))
 			G.affecting.Weaken(1)
-		G.affecting.apply_damage(10, BRUTE, def_zone, used_weapon = src)
+		G.affecting.apply_damage(10, DAMAGE_BRUTE, def_zone, used_weapon = src)
 		hit(25, G.assailant, G.affecting)
 	else
 		G.affecting.visible_message("<span class='danger'>[G.assailant] crushes [G.affecting] against \the [src]!</span>")
 		G.affecting.Weaken(5)
-		G.affecting.apply_damage(20, BRUTE, def_zone, used_weapon = src)
+		G.affecting.apply_damage(20, DAMAGE_BRUTE, def_zone, used_weapon = src)
 		hit(50, G.assailant, G.affecting)
 	return TRUE
 
-/obj/structure/window/proc/hit(damage, mob/user, atom/weapon = null, damage_type = BRUTE)
+/obj/structure/window/proc/hit(damage, mob/user, atom/weapon = null, damage_type = DAMAGE_BRUTE)
 	if (can_damage_health(damage, damage_type))
 		var/weapon_text = weapon ? " with \the [weapon]" : null
 		user.visible_message(
