@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Spinning lights should now be less lag-inducing.
