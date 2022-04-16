@@ -222,13 +222,13 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	sleep(20)
 
 	if (istype(incoming, /obj/item/paper))
-		var/obj/item/paper/newcopy = copy(incoming)
+		var/obj/item/paper/newcopy = copy(incoming, FALSE)
 		newcopy.SetName("[origin_department] - [newcopy.name]")
 	else if (istype(incoming, /obj/item/paper))
-		var/obj/item/paper/newcopy = photocopy(incoming)
+		var/obj/item/paper/newcopy = photocopy(incoming, FALSE)
 		newcopy.SetName("[origin_department] - [newcopy.name]")
 	else if (istype(incoming, /obj/item/paper_bundle))
-		var/obj/item/paper_bundle/newcopy = bundlecopy(incoming)
+		var/obj/item/paper_bundle/newcopy = bundlecopy(incoming, FALSE)
 		newcopy.SetName("[origin_department] - [newcopy.name]")
 	else
 		return 0
@@ -245,11 +245,11 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	//recieved copies should not use toner since it's being used by admins only.
 	var/obj/item/rcvdcopy
 	if (istype(copyitem, /obj/item/paper))
-		rcvdcopy = copy(copyitem, 0)
+		rcvdcopy = copy(copyitem, FALSE)
 	else if (istype(copyitem, /obj/item/photo))
-		rcvdcopy = photocopy(copyitem, 0)
+		rcvdcopy = photocopy(copyitem, FALSE)
 	else if (istype(copyitem, /obj/item/paper_bundle))
-		rcvdcopy = bundlecopy(copyitem, 0)
+		rcvdcopy = bundlecopy(copyitem, FALSE)
 	else
 		visible_message("[src] beeps, \"Error transmitting message.\"")
 		return
