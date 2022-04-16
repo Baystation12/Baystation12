@@ -1570,14 +1570,11 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		P.overlays += stampoverlay
 
 	var/obj/item/rcvdcopy
-	var/success = FALSE
-	for (var/obj/machinery/photocopier/faxmachine/destination in P.destinations)
-		if (!rcvdcopy)
-			rcvdcopy = destination.copy(P)
-			rcvdcopy.forceMove(null) //hopefully this shouldn't cause trouble
-			GLOB.adminfaxes += rcvdcopy
-		if (destination.recievefax(P, P.origin))
-			success = TRUE
+	var/obj/machinery/photocopier/faxmachine/destination = P.destinations[1]
+	rcvdcopy = destination.copy(P, FALSE)
+	rcvdcopy.forceMove(null) //hopefully this shouldn't cause trouble
+	GLOB.adminfaxes += rcvdcopy
+	var/success = send_fax_loop(P, P.department, P.origin)
 
 	if (success)
 		to_chat(src.owner, "<span class='notice'>Message reply to transmitted successfully.</span>")

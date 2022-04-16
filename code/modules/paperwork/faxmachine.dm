@@ -200,11 +200,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 	use_power_oneoff(200)
 
-	var/success = 0
-	if (destination)
-		for (var/obj/machinery/photocopier/faxmachine/F in GLOB.allfaxes)
-			if (F.department == destination)
-				success = F.recievefax(copyitem, department)
+	var/success = send_fax_loop(copyitem, destination, department)
 
 	if (success)
 		visible_message("[src] beeps, \"Message transmitted successfully.\"")
@@ -264,6 +260,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	var/mob/intercepted = check_for_interception()
 
 	message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, destination ? destination : "UNKNOWN")
+	send_fax_loop(copyitem, destination, department) // Forward to any listening fax machines
 
 	sendcooldown = 1800
 	sleep(50)
@@ -290,3 +287,14 @@ GLOBAL_LIST_EMPTY(admin_departments)
 		if (fax.department == department)
 			faxes += fax
 	return faxes
+
+
+/// Handles the loop of sending a fax to all machines matching the department tag. Returns `TRUE` if at least one fax machine successfully received the fax. Does not include sending faxes to admins.
+/proc/send_fax_loop(copyitem, department, origin = "Unknown")
+	var/success = FALSE
+	for (var/obj/machinery/photocopier/faxmachine/fax in get_fax_machines_by_department(department))
+		if (fax.department == department)
+			var/single_success = fax.recievefax(copyitem, origin)
+			if (single_success)
+				success = TRUE
+	return success
