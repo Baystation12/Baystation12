@@ -1,0 +1,5 @@
+author: Kell-E
+delete-after: true
+changes:
+  - rscadd: Adds a new variable for controlling weapon penetration values
+  - balance: The pocket knife is no longer sharp enough to penetrate armor
