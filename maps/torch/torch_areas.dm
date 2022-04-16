@@ -610,7 +610,7 @@
 
 /area/command/conference
 	name = "Briefing Room"
-	icon_state = "head_quarters"
+	icon_state = "briefing_room"
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/command/captainmess
@@ -621,14 +621,14 @@
 
 /area/command/pathfinder
 	name = "\improper Pathfinder's Office"
-	icon_state = "head_quarters"
+	icon_state = "pathfinder_office"
 	sound_env = MEDIUM_SOFTFLOOR
 	req_access = list(access_pathfinder)
 	holomap_color = HOLOMAP_AREACOLOR_EXPLORATION
 
 /area/command/pilot
 	name = "\improper Pilot's Lounge"
-	icon_state = "head_quarters"
+	icon_state = "pilot_lounge"
 	sound_env = MEDIUM_SOFTFLOOR
 	req_access = list(access_pilot)
 	holomap_color = HOLOMAP_AREACOLOR_EXPLORATION
@@ -909,14 +909,15 @@
 	sound_env = LARGE_ENCLOSED
 	req_access = list(access_hangar)
 
-/area/quartermaster/hangar/top
-	name = "\improper Hangar Upper Walkway"
+/area/quartermaster/hangar/catwalks_port
+	name = "\improper Hangar Port Upper Walkway"
 	req_access = list()
+	icon_state = "hangar_catwalk_p"
 
-/area/quartermaster/flightcontrol
-	name = "\improper Flight Control Tower"
-	icon_state = "hangar"
-	req_access = list(access_hangar)
+/area/quartermaster/hangar/catwalks_starboard
+	name = "\improper Hangar Starboard Upper Walkway"
+	req_access = list()
+	icon_state = "hangar_catwalk_s"
 
 // Research
 /area/rnd/canister
