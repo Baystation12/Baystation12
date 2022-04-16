@@ -276,3 +276,14 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 		if(check_rights((R_ADMIN|R_MOD),0,C))
 			to_chat(C, msg)
 			sound_to(C, 'sound/machines/dotprinter.ogg')
+
+
+/// Retrieves a list of all fax machines matching the given department tag.
+/proc/get_fax_machines_by_department(department)
+	if (!department)
+		department = "Unknown"
+	var/list/faxes = list()
+	for (var/obj/machinery/photocopier/faxmachine/fax in GLOB.allfaxes)
+		if (fax.department == department)
+			faxes += fax
+	return faxes

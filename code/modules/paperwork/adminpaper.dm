@@ -8,7 +8,10 @@
 	var/isCrayon = 0
 	var/origin = null
 	var/mob/sender = null
-	var/obj/machinery/photocopier/faxmachine/destination
+	/// List (`/obj/machinery/photocopier/faxmachine`). List of fax machines matching the paper's target department.
+	var/list/destinations = list()
+	/// String. The paper's target department.
+	var/department = null
 
 	var/header = null
 	var/headerOn = TRUE
@@ -124,7 +127,7 @@
 					info += footer
 				updateinfolinks()
 				close_browser(usr, "window=[name]")
-				admindatum.faxCallback(src, destination)
+				admindatum.faxCallback(src)
 		return
 
 	if(href_list["penmode"])
