@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - maptweak: Cyborg Upload is no longer protected by an impenetrable blast door and
+      is easier to hack into.
