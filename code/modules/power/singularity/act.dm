@@ -7,7 +7,6 @@
 	return
 
 /mob/living/singularity_act()
-	investigate_log("has been consumed by a singularity", I_SINGULO)
 	gib()
 	return 20
 

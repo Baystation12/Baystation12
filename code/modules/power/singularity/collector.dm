@@ -64,7 +64,6 @@ var/global/list/rad_collectors = list()
 
 	if(P)
 		if(P.air_contents.gas[GAS_PHORON] == 0)
-			investigate_log("<font color='red'>out of fuel</font>.","singulo")
 			eject()
 		else
 			P.air_adjust_gas(GAS_PHORON, -0.01*drainratio*min(last_rads,max_rads)/max_rads) //fuel cost increases linearly with incoming radiation
@@ -84,7 +83,6 @@ var/global/list/rad_collectors = list()
 		toggle_power()
 		user.visible_message("[user.name] turns the [src.name] [active? "on":"off"].", \
 		"You turn the [src.name] [active? "on":"off"].")
-		investigate_log("turned [active?"<font color='green'>on</font>":"<font color='red'>off</font>"] by [user.key]. [P?"Fuel: [round(P.air_contents.gas[GAS_PHORON]/0.29)]%":"<font color='red'>It is empty</font>"].","singulo")
 	else
 		to_chat(user, "<span class='warning'>The controls are locked!</span>")
 

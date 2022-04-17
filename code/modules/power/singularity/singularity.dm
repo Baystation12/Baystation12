@@ -58,7 +58,6 @@
 	switch(severity)
 		if(1.0)
 			if(prob(25))
-				investigate_log("has been destroyed by an explosion.", I_SINGULO)
 				qdel(src)
 				return
 			else
@@ -98,7 +97,6 @@
 	if (!count)
 		message_admins("A singulo has been created without containment fields active ([x], [y], [z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>).")
 
-	investigate_log("was created. [count ? "" : "<font color='red'>No containment fields were active.</font>"]", I_SINGULO)
 
 /obj/singularity/proc/dissipate()
 	if (!dissipate)
@@ -234,7 +232,6 @@
 			visible_message("<span class='sinister'><font size='3'>You witness the creation of a destructive force that cannot possibly be stopped by human hands.</font></span>")
 
 	if (current_size == allowed_size)
-		investigate_log("<font color='red'>grew to size [current_size].</font>", I_SINGULO)
 		return 1
 	else if (current_size < (--temp_allowed_size) && current_size != STAGE_SUPER)
 		expand(temp_allowed_size)
@@ -243,7 +240,6 @@
 
 /obj/singularity/proc/check_energy()
 	if (energy <= 0)
-		investigate_log("collapsed.", I_SINGULO)
 		qdel(src)
 		return 0
 

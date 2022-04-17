@@ -54,7 +54,6 @@ var/global/list/admin_verbs_admin = list(
 	/client/proc/admin_memo,			//admin memo system. show/delete/write. +SERVER needed to delete admin memos of others,
 	/client/proc/dsay,					//talk in deadchat using our ckey
 //	/client/proc/toggle_hear_deadcast,	//toggles whether we hear deadchat,
-	/client/proc/investigate_show,		//various admintools for investigation. Such as a singulo grief-log,
 	/datum/admins/proc/toggle_allowlists,
 	/datum/admins/proc/toggleooc,		//toggles ooc on/off for everyone,
 	/datum/admins/proc/toggleaooc,		//toggles aooc on/off for everyone,

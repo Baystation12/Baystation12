@@ -1206,7 +1206,6 @@
 #include "code\modules\acting\acting_items.dm"
 #include "code\modules\admin\admin.dm"
 #include "code\modules\admin\admin_attack_log.dm"
-#include "code\modules\admin\admin_investigate.dm"
 #include "code\modules\admin\admin_memo.dm"
 #include "code\modules\admin\admin_ranks.dm"
 #include "code\modules\admin\admin_secrets.dm"

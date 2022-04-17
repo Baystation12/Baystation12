@@ -53,7 +53,6 @@
 
 /obj/machinery/power/emitter/Destroy()
 	log_and_message_admins("deleted \the [src]")
-	investigate_log("<font color='red'>deleted</font> at ([x],[y],[z])","singulo")
 	return ..()
 
 /obj/machinery/power/emitter/examine(mob/user)
@@ -104,7 +103,6 @@
 					visible_message(SPAN_NOTICE("\The [src] turns off."))
 				playsound(src, "switch", 50)
 				log_and_message_admins("turned off \the [src] in [A.name]", user, src)
-				investigate_log("turned <font color='red'>off</font> by [key_name_admin(user || usr)] in [A.name]","singulo")
 			else
 				active = TRUE
 				if (user)
@@ -122,7 +120,6 @@
 				shot_number = 0
 				fire_delay = get_initial_fire_delay()
 				log_and_message_admins("turned on \the [src] in [A.name]", user, src)
-				investigate_log("turned <font color='green'>on</font> by [key_name_admin(user || usr)] in [A.name]","singulo")
 			update_icon()
 		else
 			to_chat(user, SPAN_WARNING("The controls are locked!"))
@@ -155,13 +152,11 @@
 				powered = TRUE
 				update_icon()
 				visible_message(SPAN_WARNING("\The [src] powers up!"))
-				investigate_log("regained power and turned <font color='green'>on</font>","singulo")
 		else
 			if (powered)
 				powered = FALSE
 				update_icon()
 				visible_message(SPAN_WARNING("\The [src] powers down!"))
-				investigate_log("lost power and turned <font color='red'>off</font>","singulo")
 			return
 
 		last_shot = world.time
