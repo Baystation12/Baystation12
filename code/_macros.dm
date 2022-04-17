@@ -1,7 +1,7 @@
 #define any2ref(x) "\ref[x]"
 
-//Do (almost) nothing - indev placeholder for switch case implementations etc
-#define NOOP (.=.);
+/proc/NOOP()
+	return
 
 #define list_find(L, needle, LIMITS...) L.Find(needle, LIMITS)
 

@@ -91,7 +91,7 @@
 	if (debug_server)
 		call(debug_server, "auxtools_shutdown")()
 	LOG_CRITICAL("Halted Game [game_id].")
-	__log_round("Halted Game [game_id].")
+	__log_game("Halted Game [game_id].")
 	callHook("shutdown")
 	return ..()
 

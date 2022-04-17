@@ -157,6 +157,10 @@ var/global/list/channel_to_radio_key = new
 	return html_encode(message)
 
 /mob/living/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", whispering)
+	if (whispering)
+		log_whisper(message, src, speaking) //TODO: Refactor say to not mangle message or return early
+	else
+		log_say(message, src, speaking)
 	if(client)
 		if(client.prefs.muted & MUTE_IC)
 			to_chat(src, "<span class='warning'>You cannot speak in IC (Muted).</span>")
@@ -261,7 +265,6 @@ var/global/list/channel_to_radio_key = new
 				src.custom_emote(1, "[pick(speaking.signlang_verb)].")
 
 		if (speaking.flags & SIGNLANG)
-			log_say("[name]/[key] : SIGN: [message]")
 			return say_signlang(message, pick(speaking.signlang_verb), speaking)
 
 	if(T)
@@ -323,18 +326,12 @@ var/global/list/channel_to_radio_key = new
 			spawn(0)
 				if(O) //It's possible that it could be deleted in the meantime.
 					O.hear_talk(src, stars(message), verb, speaking)
-
-	if(whispering)
-		log_whisper("[name]/[key] : [message]")
-	else
-		log_say("[name]/[key] : [message]")
-
 	flick_overlay(speech_bubble, speech_bubble_recipients, 50)
 	animate(speech_bubble, alpha = 255, time = 10, easing = CIRCULAR_EASING)
 	animate(time = 20)
 	animate(alpha = 0, pixel_y = 12, time = 20, easing = CIRCULAR_EASING)
-
 	return 1
+
 
 /mob/living/proc/say_signlang(var/message, var/verb="gestures", var/datum/language/language)
 	for (var/mob/O in viewers(src, null))

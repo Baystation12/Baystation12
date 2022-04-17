@@ -28,21 +28,6 @@
 	/// log voting
 	var/static/log_vote = FALSE
 
-	/// log client whisper
-	var/static/log_whisper = FALSE
-
-	/// log emotes
-	var/static/log_emote = FALSE
-
-	/// log attack messages
-	var/static/log_attack = FALSE
-
-	/// log admin chat messages
-	var/static/log_adminchat = FALSE
-
-	/// logs all links clicked in-game. Could be used for debugging and tracking down exploits
-	var/static/log_hrefs = FALSE
-
 	/// logs world.log to a file
 	var/static/log_uncaught_runtimes = FALSE
 
@@ -498,18 +483,8 @@
 				log_game = TRUE
 			if ("log_vote")
 				log_vote = TRUE
-			if ("log_whisper")
-				log_whisper = TRUE
-			if ("log_attack")
-				log_attack = TRUE
-			if ("log_emote")
-				log_emote = TRUE
-			if ("log_adminchat")
-				log_adminchat = TRUE
 			if ("log_admin")
 				log_admin = TRUE
-			if ("log_hrefs")
-				log_hrefs = TRUE
 			if ("log_uncaught_runtimes")
 				log_uncaught_runtimes = TRUE
 			if ("generate_asteroid")

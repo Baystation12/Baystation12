@@ -118,7 +118,7 @@
 
 /mob/living/silicon/ai/proc/holopad_emote(var/message) //This is called when the AI uses the 'me' verb while using a holopad.
 
-	log_emote("[key_name(src)] : [message]")
+	log_emote_visible(message, src)
 
 	message = trim(message)
 

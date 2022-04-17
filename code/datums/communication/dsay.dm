@@ -104,7 +104,7 @@
 	..()
 
 /decl/dsay_communication/emote/adjust_channel(var/decl/communication_channel/dsay)
-	dsay.log_proc = /proc/log_emote
+	dsay.log_proc = /proc/log_emote_visible
 	..()
 
 /decl/dsay_communication/admin/can_communicate(var/client/communicator, var/message, var/decl/communication_channel/dsay)

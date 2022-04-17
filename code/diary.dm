@@ -49,6 +49,9 @@
 // == Configuration Above, Dragons Below ==
 
 
+var/global/game_id = copytext(rgb(rand(0, 255), rand(0, 255), rand(0, 255), rand(0, 255)), 2)
+
+
 #if defined(__LOG_LEVEL_GAME)
 
 var/global/const/__LOG_LEVEL = "game"
@@ -88,12 +91,12 @@ var/global/const/__LOG_LEVEL = "silent"
 
 #if defined(__LOG_LEVEL_CRITICAL)
 
-/proc/__log_day(level, text, source, user)
+/proc/__log_system(level, text, source, user)
 	if (!text)
 		return
 	var/static/file
 	if (!file)
-		file = file("data/log2/[time2text(boot_time, "YYYY/MM/DD", -world.timezone)].txt")
+		file = file("data/log2/[time2text(boot_time, "YYYY/MM/DD/hh-mm", -world.timezone)] [game_id] system.txt")
 		if (config.log_uncaught_runtimes)
 			world.log = file
 		if (fexists(file))
@@ -108,101 +111,101 @@ var/global/const/__LOG_LEVEL = "silent"
 		ident = "(usr:[user]) "
 	to_target(file, "[time2text(world.timeofday, "hh-mm-ss", -world.timezone)]z [level] [ident]# [text]")
 
-/proc/__trace_day(level, file, line, text, source, user)
-	__log_day(level, "[file]L[line] [text]", source, user)
+/proc/__trace_system(level, file, line, text, source, user)
+	__log_system(level, "[file]L[line] [text]", source, user)
 
-#define LOG_CRITICAL(TEXT_SOURCE_USER...) __log_day("Critical", TEXT_SOURCE_USER)
+#define LOG_CRITICAL(TEXT_SOURCE_USER...) __log_system("Critical", TEXT_SOURCE_USER)
 
-#define TRACE_CRITICAL(TEXT_SOURCE_USER...) __trace_day("Critical", __FILE__, __LINE__, TEXT_SOURCE_USER)
+#define TRACE_CRITICAL(TEXT_SOURCE_USER...) __trace_system("Critical", __FILE__, __LINE__, TEXT_SOURCE_USER)
 
 #else
 
-#define LOG_CRITICAL(UNUSED...)
+#define LOG_CRITICAL(UNUSED...) NOOP(UNUSED)
 
-#define TRACE_CRITICAL(UNUSED...)
+#define TRACE_CRITICAL(UNUSED...) NOOP(UNUSED)
 
 #endif
 
 
 #if defined(__LOG_LEVEL_ERROR)
 
-#define LOG_ERROR(TEXT_SOURCE_USER...) __log_day("Error", TEXT_SOURCE_USER)
+#define LOG_ERROR(TEXT_SOURCE_USER...) __log_system("Error", TEXT_SOURCE_USER)
 
-#define TRACE_ERROR(TEXT_SOURCE_USER...) __trace_day("Error", __FILE__, __LINE__, TEXT_SOURCE_USER)
+#define TRACE_ERROR(TEXT_SOURCE_USER...) __trace_system("Error", __FILE__, __LINE__, TEXT_SOURCE_USER)
 
 #else
 
-#define LOG_ERROR(UNUSED...)
+#define LOG_ERROR(UNUSED...) NOOP(UNUSED)
 
-#define TRACE_ERROR(UNUSED...)
+#define TRACE_ERROR(UNUSED...) NOOP(UNUSED)
 
 #endif
 
 
 #if defined(__LOG_LEVEL_WARNING)
 
-#define LOG_WARNING(TEXT_SOURCE_USER...) __log_day("Warning", TEXT_SOURCE_USER)
+#define LOG_WARNING(TEXT_SOURCE_USER...) __log_system("Warning", TEXT_SOURCE_USER)
 
-#define TRACE_WARNING(TEXT_SOURCE_USER...) __trace_day("Warning", __FILE__, __LINE__, TEXT_SOURCE_USER)
+#define TRACE_WARNING(TEXT_SOURCE_USER...) __trace_system("Warning", __FILE__, __LINE__, TEXT_SOURCE_USER)
 
 #else
 
-#define LOG_WARNING(UNUSED...)
+#define LOG_WARNING(UNUSED...) NOOP(UNUSED)
 
-#define TRACE_WARNING(UNUSED...)
+#define TRACE_WARNING(UNUSED...) NOOP(UNUSED)
 
 #endif
 
 
 #if defined(__LOG_LEVEL_DEBUG)
 
-#define LOG_DEBUG(TEXT_SOURCE_USER...) __log_day("Debug", TEXT_SOURCE_USER)
+#define LOG_DEBUG(TEXT_SOURCE_USER...) __log_system("Debug", TEXT_SOURCE_USER)
 
-#define TRACE_DEBUG(TEXT_SOURCE_USER...) __trace_day("Debug", __FILE__, __LINE__, TEXT_SOURCE_USER)
+#define TRACE_DEBUG(TEXT_SOURCE_USER...) __trace_system("Debug", __FILE__, __LINE__, TEXT_SOURCE_USER)
 
 #else
 
-#define LOG_DEBUG(UNUSED...)
+#define LOG_DEBUG(UNUSED...) NOOP(UNUSED)
 
-#define TRACE_DEBUG(UNUSED...)
+#define TRACE_DEBUG(UNUSED...) NOOP(UNUSED)
 
 #endif
 
 
 #if defined(__LOG_LEVEL_GAME)
 
-#define LOG_GAME(TEXT_SOURCE_USER...) __log_day("Game", TEXT_SOURCE_USER)
+#define LOG_GAME(TEXT_SOURCE_USER...) __log_system("Game", TEXT_SOURCE_USER)
 
-#define TRACE_GAME(TEXT_SOURCE_USER...) __trace_day("Game", __FILE__, __LINE__, TEXT_SOURCE_USER)
+#define TRACE_GAME(TEXT_SOURCE_USER...) __trace_system("Game", __FILE__, __LINE__, TEXT_SOURCE_USER)
 
 #else
 
-#define LOG_GAME(UNUSED...)
+#define LOG_GAME(UNUSED...) NOOP(UNUSED)
 
-#define TRACE_GAME(UNUSED...)
+#define TRACE_GAME(UNUSED...) NOOP(UNUSED)
 
 #endif
 
 
 #if defined(UNIT_TEST)
 
-#define LOG_UNIT_TEST(TEXT_SOURCE_USER...) __log_day("Unit Test", TEXT_SOURCE_USER)
+#define LOG_UNIT_TEST(TEXT_SOURCE_USER...) __log_system("Unit Test", TEXT_SOURCE_USER)
 
-#define TRACE_UNIT_TEST(TEXT_SOURCE_USER...) __trace_day("Unit Test", __FILE__, __LINE__, TEXT_SOURCE_USER)
+#define TRACE_UNIT_TEST(TEXT_SOURCE_USER...) __trace_system("Unit Test", __FILE__, __LINE__, TEXT_SOURCE_USER)
 
 #else
 
-#define LOG_UNIT_TEST(UNUSED...)
+#define LOG_UNIT_TEST(UNUSED...) NOOP(UNUSED)
 
-#define TRACE_UNIT_TEST(UNUSED...)
+#define TRACE_UNIT_TEST(UNUSED...) NOOP(UNUSED)
 
 #endif
 
 
-/proc/__log_round(text)
+/proc/__log_game(text)
 	var/static/file
 	if (!file)
-		file = file("data/log2/[time2text(boot_time, "YYYY/MM/DD/hh-mm [game_id]", -world.timezone)].txt")
+		file = file("data/log2/[time2text(boot_time, "YYYY/MM/DD/hh-mm", -world.timezone)] [game_id] game.txt")
 	if (!text)
 		return
 	to_target(file, "[CURRENT_STATION_TIME] # [text]")
@@ -293,35 +296,47 @@ var/global/const/__LOG_LEVEL = "silent"
 #define trace_debug(TEXT_SOURCE_USER...) __trace_debug(__FILE__, __LINE__, TEXT_SOURCE_USER)
 
 
-/proc/log_game(text, preference, atom, mob)
-	LOG_GAME(text, atom, mob)
-	__log_round(text)
-	if (!preference)
-		return
-	__log_notify(preference, text, atom, mob)
-
 #define log_admin(TEXT, TURF_MOB...) log_game("Admin: [(TEXT)]", /datum/client_preference/staff/show_log_admin, TURF_MOB)
 
 #define log_attack(TEXT, TURF_MOB...) log_game("Attack: [(TEXT)]", /datum/client_preference/staff/show_log_attack, TURF_MOB)
 
-/proc/log_say(text)
-	log_game("Say: [(text)]")
+#define __MOB_PREFIX(MOB) "[(MOB)?.real_name || (MOB)?.name || "No Name"] ([(MOB)?.ckey || "No Client"])"
 
-/proc/log_whisper(text)
-	log_game("Whisper: [(text)]")
+#define __LANGUAGE_SUFFIX(LANGUAGE) "[(LANGUAGE) ? " in [(LANGUAGE).shorthand]" : ""]"
 
-/proc/log_emote(text)
-	log_game("Emote: [(text)]")
+/proc/log_say(text, mob/mob, datum/language/language)
+	log_game("[__MOB_PREFIX(mob)] says, \"[text]\"[__LANGUAGE_SUFFIX(language)]")
 
-/proc/log_ooc(text)
-	log_game("OOC: [(text)]")
+/proc/log_whisper(text, mob/mob, datum/language/language)
+	log_game("[__MOB_PREFIX(mob)] whispers, \"[text]\"[__LANGUAGE_SUFFIX(language)]")
 
-/proc/log_aooc(text)
-	log_game("AOOC: [(text)]")
+/proc/log_emote_visible(text, mob/mob)
+	log_game("[__MOB_PREFIX(mob)] visibly emotes, \"[text]\"")
+
+/proc/log_emote_audible(text, mob/mob)
+	log_game("[__MOB_PREFIX(mob)] audibly emotes, \"[text]\"")
+
+/proc/log_ooc(text, mob/mob)
+	log_game("[__MOB_PREFIX(mob)] OOC chats, \"[text]\"")
+
+/proc/log_looc(text, mob/mob)
+	log_game("[__MOB_PREFIX(mob)] LOOC chats, \"[text]\"")
+
+/proc/log_aooc(text, mob/mob)
+	log_game("[__MOB_PREFIX(mob)] AOOC chats, \"[text]\"")
+
+// This proc is at the end to guard against <https://secure.byond.com/forum/post/2072419>
+/proc/log_game(text, preference, atom, mob)
+	LOG_GAME(text, atom, mob)
+	__log_game(text)
+	if (!preference)
+		return
+	__log_notify(preference, text, atom, mob)
 
 
-var/global/game_id = copytext(rgb(rand(0, 255), rand(0, 255), rand(0, 255), rand(0, 255)), 2)
+#undef __LANGUAGE_SUFFIX
 
+#undef __MOB_PREFIX
 
 #if defined(__LOG_LEVEL_GAME)
 #undef __LOG_LEVEL_GAME
