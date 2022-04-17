@@ -9,17 +9,6 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 /proc/error(msg)
 	to_world_log("## ERROR: [msg][log_end]")
 
-/proc/log_ss(subsystem, text, log_world = TRUE)
-	if (!subsystem)
-		subsystem = "UNKNOWN"
-	var/msg = "[subsystem]: [text]"
-	game_log("SS", msg)
-	if (log_world)
-		to_world_log("SS[subsystem]: [text]")
-
-/proc/log_ss_init(text)
-	game_log("SS", "[text]")
-
 /proc/game_log(category, text)
 	LOG_GAME("[category] [text]")
 

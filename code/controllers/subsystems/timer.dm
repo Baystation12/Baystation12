@@ -92,9 +92,8 @@ SUBSYSTEM_DEF(timer)
 		to_log += "Active timers in the second_queue queue:"
 		for(var/I in second_queue)
 			to_log += get_timer_debug_string(I)
+	LOG_WARNING(to_log.Join("\n"))
 
-	// Dump all the logged data to the world log
-	log_ss(name, to_log.Join("\n"))
 
 /datum/controller/subsystem/timer/fire(resumed = FALSE)
 	// Store local references to datum vars as it is faster to access them
