@@ -73,7 +73,7 @@
 /obj/machinery/power/smes/New()
 	..()
 	if(!should_be_mapped)
-		warning("Non-buildable or Non-magical SMES at [src.x]X [src.y]Y [src.z]Z")
+		LOG_WARNING("Non-buildable or Non-magical SMES at [src.x]X [src.y]Y [src.z]Z")
 
 /obj/machinery/power/smes/Initialize()
 	. = ..()

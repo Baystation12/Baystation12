@@ -387,7 +387,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		var/organ_type = has_organ[organ_tag]
 		var/obj/item/organ/O = new organ_type(H)
 		if(organ_tag != O.organ_tag)
-			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
+			LOG_WARNING("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
 			O.organ_tag = organ_tag
 		H.internal_organs_by_name[organ_tag] = O
 

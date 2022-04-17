@@ -157,7 +157,7 @@
 	if(activated) return
 
 	if(locate(/obj/structure/catwalk) in loc)
-		warning("Frame Spawner: A catwalk already exists at [loc.x]-[loc.y]-[loc.z]")
+		LOG_WARNING("Frame Spawner: A catwalk already exists at [loc.x]-[loc.y]-[loc.z]")
 	else
 		var/obj/structure/catwalk/C = new /obj/structure/catwalk(loc)
 		C.plated_tile += new plating_type

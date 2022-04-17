@@ -456,7 +456,7 @@
 
 	if(!spawnpos)
 		// Pick at random from all the (wrong) spawnpoints, just so we have one
-		warning("Could not find an appropriate spawnpoint for job [title].")
+		LOG_WARNING("Could not find an appropriate spawnpoint for job [title].")
 		spawnpos = spawntypes()[pick(GLOB.using_map.allowed_spawns)]
 
 	return spawnpos

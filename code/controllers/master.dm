@@ -274,7 +274,7 @@ var/global/datum/controller/master/Master = new
 				runlevel_sorted_subsystems[I] += SS
 				added_to_any = TRUE
 		if(!added_to_any)
-			WARNING("[SS.name] subsystem is not SS_NO_FIRE but also does not have any runlevels set!")
+			LOG_WARNING("[SS.name] subsystem is not SS_NO_FIRE but also does not have any runlevels set!")
 
 	queue_head = null
 	queue_tail = null

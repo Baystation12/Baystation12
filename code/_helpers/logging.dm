@@ -20,11 +20,6 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 /proc/log_ss_init(text)
 	game_log("SS", "[text]")
 
-#define WARNING(MSG) warning("[MSG] in [__FILE__] at line [__LINE__] src: [src] usr: [usr].")
-//print a warning message to world.log
-/proc/warning(msg)
-	to_world_log("## WARNING: [msg][log_end]")
-
 //print a testing-mode debug message to world.log
 /proc/testing(msg)
 	to_world_log("## TESTING: [msg][log_end]")
@@ -52,7 +47,7 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 	to_debug_listeners(text, "ERROR")
 
 /proc/log_warning(text)
-	warning(text)
+	LOG_WARNING(text)
 	to_debug_listeners(text, "WARNING")
 
 /proc/to_debug_listeners(text, prefix = "DEBUG")

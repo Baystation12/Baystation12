@@ -112,7 +112,7 @@ SUBSYSTEM_DEF(timer)
 		last_invoke_warning = world.time
 		var/msg = "No regular timers processed in the last [BUCKET_LEN * 1.5] ticks[bucket_auto_reset ? ", resetting buckets" : ""]!"
 		message_admins(msg)
-		WARNING(msg)
+		LOG_WARNING(msg)
 		if(bucket_auto_reset)
 			bucket_resolution = 0
 		dump_timer_buckets(config.log_timers_on_bucket_reset)
@@ -304,7 +304,7 @@ SUBSYSTEM_DEF(timer)
 
 		// Check that timer has a valid callback and hasn't been invoked
 		if (!timer.callBack || timer.spent)
-			WARNING("Invalid timer: [get_timer_debug_string(timer)] world.time: [world.time], \
+			LOG_WARNING("Invalid timer: [get_timer_debug_string(timer)] world.time: [world.time], \
 				head_offset: [head_offset], practical_offset: [practical_offset]")
 			if (timer.callBack)
 				qdel(timer)
@@ -515,7 +515,7 @@ SUBSYSTEM_DEF(timer)
 	bucket_pos = BUCKET_POS(src)
 
 	if (bucket_pos < SStimer.practical_offset && timeToRun < (SStimer.head_offset + BUCKET_LEN * world.tick_lag))
-		WARNING("Bucket pos in past: bucket_pos = [bucket_pos] < practical_offset = [SStimer.practical_offset] \
+		LOG_WARNING("Bucket pos in past: bucket_pos = [bucket_pos] < practical_offset = [SStimer.practical_offset] \
 			&& timeToRun = [timeToRun] < [SStimer.head_offset + BUCKET_LEN * world.tick_lag], Timer: [name]")
 		bucket_pos = SStimer.practical_offset // Recover bucket_pos to avoid timer blocking queue
 

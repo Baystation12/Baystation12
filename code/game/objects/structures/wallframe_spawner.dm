@@ -35,13 +35,13 @@
 	if(activated) return
 
 	if(locate(frame_path) in loc)
-		warning("Frame Spawner: A frame structure already exists at [loc.x]-[loc.y]-[loc.z]")
+		LOG_WARNING("Frame Spawner: A frame structure already exists at [loc.x]-[loc.y]-[loc.z]")
 	else
 		var/obj/structure/wall_frame/F = new frame_path(loc)
 		handle_frame_spawn(F)
 
 	if(locate(win_path) in loc)
-		warning("Frame Spawner: A window structure already exists at [loc.x]-[loc.y]-[loc.z]")
+		LOG_WARNING("Frame Spawner: A window structure already exists at [loc.x]-[loc.y]-[loc.z]")
 
 	var/list/neighbours = list()
 	if(fulltile)
@@ -67,7 +67,7 @@
 
 	if(grille_path)
 		if(locate(grille_path) in loc)
-			warning("Frame Spawner: A grille already exists at [loc.x]-[loc.y]-[loc.z]")
+			LOG_WARNING("Frame Spawner: A grille already exists at [loc.x]-[loc.y]-[loc.z]")
 		else
 			var/obj/structure/grille/G = new grille_path (loc)
 			handle_grille_spawn(G)

@@ -90,7 +90,7 @@
 	for(var/obj/machinery/power/sensor/S in SSmachines.machinery)
 		if((S.long_range) || (S.loc.z in connected_z_levels)) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
 			if(S.name_tag == "#UNKN#") // Default name. Shouldn't happen!
-				warning("Powernet sensor with unset ID Tag! [S.x]X [S.y]Y [S.z]Z")
+				LOG_WARNING("Powernet sensor with unset ID Tag! [S.x]X [S.y]Y [S.z]Z")
 			else
 				grid_sensors += S
 				GLOB.destroyed_event.register(S, src, /datum/nano_module/power_monitor/proc/remove_sensor)

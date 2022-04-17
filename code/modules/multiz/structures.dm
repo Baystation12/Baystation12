@@ -217,7 +217,7 @@
 	for(var/turf/turf in locs)
 		var/turf/simulated/open/above = GetAbove(turf)
 		if(!above)
-			warning("Stair created without level above: ([loc.x], [loc.y], [loc.z])")
+			LOG_WARNING("Stair created without level above: ([loc.x], [loc.y], [loc.z])")
 			return INITIALIZE_HINT_QDEL
 		if(!istype(above))
 			above.ChangeTurf(/turf/simulated/open)

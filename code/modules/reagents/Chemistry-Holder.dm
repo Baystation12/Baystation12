@@ -191,7 +191,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 			my_atom.on_reagent_change()
 		return 1
 	else
-		warning("[log_info_line(my_atom)] attempted to add a reagent of type '[reagent_type]' which doesn't exist. ([usr])")
+		LOG_WARNING("[log_info_line(my_atom)] attempted to add a reagent of type '[reagent_type]' which doesn't exist. ([usr])")
 	return 0
 
 /datum/reagents/proc/remove_reagent(var/reagent_type, var/amount, var/safety = 0)

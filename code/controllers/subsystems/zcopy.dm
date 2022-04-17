@@ -183,7 +183,7 @@ SUBSYSTEM_DEF(zcopy)
 			continue
 
 		if (!T.shadower)	// If we don't have a shadower yet, something has gone horribly wrong.
-			WARNING("Turf [T] at [T.x],[T.y],[T.z] was queued, but had no shadower.")
+			LOG_ERROR("Turf [T] at [T.x],[T.y],[T.z] was queued, but had no shadower.")
 			continue
 
 		T.z_generation += 1

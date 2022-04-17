@@ -142,7 +142,7 @@
 						to_chat(user, "<span class='notice'>You take \a [Sign] from [src].</span>")
 						signs--
 					else
-						warning("[src] signs ([signs]) didn't match contents")
+						LOG_WARNING("[src] signs ([signs]) didn't match contents")
 						signs = 0
 
 	update_icon()

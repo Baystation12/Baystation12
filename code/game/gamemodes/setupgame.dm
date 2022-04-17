@@ -7,7 +7,7 @@
 //  and for the DNA panel in the player panel.
 /proc/getAssignedBlock(var/name,var/list/blocksLeft, var/activity_bounds=DNA_DEFAULT_BOUNDS)
 	if(blocksLeft.len==0)
-		warning("[name]: No more blocks left to assign!")
+		LOG_WARNING("[name]: No more blocks left to assign!")
 		return 0
 	var/assigned = pick(blocksLeft)
 	blocksLeft.Remove(assigned)
@@ -74,7 +74,7 @@
 		var/datum/dna/gene/G = new gene_type
 		if(G.block)
 			if(G.block in blocks_assigned)
-				warning("DNA2: Gene [G.name] trying to use already-assigned block [G.block] (used by [english_list(blocks_assigned[G.block])])")
+				LOG_WARNING("DNA2: Gene [G.name] trying to use already-assigned block [G.block] (used by [english_list(blocks_assigned[G.block])])")
 			dna_genes.Add(G)
 			var/list/assignedToBlock[0]
 			if(blocks_assigned[G.block])

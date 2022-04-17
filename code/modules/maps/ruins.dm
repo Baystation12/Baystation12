@@ -2,13 +2,13 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 
 /proc/seedRuins(list/zlevels, budget, list/potentialRuins, allowed_area = /area/space, var/maxx = world.maxx, var/maxy = world.maxy)
 	if (!length(z_levels))
-		UNLINT(WARNING("No Z levels provided - Not generating ruins"))
+		LOG_WARNING("No Z levels provided - Not generating ruins")
 		return
 
 	for (var/z in zlevels)
 		var/turf/check = locate(1, 1, z)
 		if (!check)
-			UNLINT(WARNING("Z level [z] does not exist - Not generating ruins"))
+			LOG_WARNING("Z level [z] does not exist - Not generating ruins")
 			return
 
 	var/list/available = list()
@@ -21,7 +21,7 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 		available[ruin] = ruin.spawn_weight
 
 	if (!length(available))
-		UNLINT(WARNING("No ruins available - Not generating ruins"))
+		LOG_WARNING("No ruins available - Not generating ruins")
 
 	while (remaining > 0 && length(available))
 		var/datum/map_template/ruin/ruin = pickweight(available)

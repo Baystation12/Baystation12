@@ -45,7 +45,7 @@
 	if(activated) return
 
 	if(locate(/obj/structure/window) in loc)
-		warning("Window Spawner: A window structure already exists at [loc.x]-[loc.y]-[loc.z]")
+		LOG_WARNING("Window Spawner: A window structure already exists at [loc.x]-[loc.y]-[loc.z]")
 
 	var/list/neighbours = list()
 	if(fulltile)
@@ -70,7 +70,7 @@
 				neighbours |= other
 
 	if(locate(/obj/structure/grille) in loc)
-		warning("Window Spawner: A grille already exists at [loc.x]-[loc.y]-[loc.z]")
+		LOG_WARNING("Window Spawner: A grille already exists at [loc.x]-[loc.y]-[loc.z]")
 	else
 		var/obj/structure/grille/G = new /obj/structure/grille(loc)
 		handle_grille_spawn(G)
