@@ -56,7 +56,7 @@
 
 	docking_codes = "[ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))]"
 
-	testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
+	log_debug("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
 
 	LAZYADD(SSshuttle.sectors_to_initialize, src) //Queued for further init. Will populate the waypoint lists; waypoints not spawned yet will be added in as they spawn.
 	SSshuttle.clear_init_queue()
@@ -144,11 +144,11 @@
 	if(!GLOB.using_map.use_overmap)
 		return 1
 
-	testing("Building overmap...")
+	log_debug("Building overmap...")
 	INCREMENT_WORLD_Z_SIZE
 	GLOB.using_map.overmap_z = world.maxz
 
-	testing("Putting overmap on [GLOB.using_map.overmap_z]")
+	log_debug("Putting overmap on [GLOB.using_map.overmap_z]")
 	var/area/overmap/A = new
 	for (var/square in block(locate(1,1,GLOB.using_map.overmap_z), locate(GLOB.using_map.overmap_size,GLOB.using_map.overmap_size,GLOB.using_map.overmap_z)))
 		var/turf/T = square
@@ -160,5 +160,5 @@
 
 	GLOB.using_map.sealed_levels |= GLOB.using_map.overmap_z
 
-	testing("Overmap build complete.")
+	log_debug("Overmap build complete.")
 	return 1

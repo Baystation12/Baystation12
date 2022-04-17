@@ -10,32 +10,32 @@ var/global/list/cached_space = list()
 
 /obj/effect/overmap/visitable/sector/temporary/New(var/nx, var/ny, var/nz)
 	map_z += nz
-	testing("Temporary sector at zlevel [nz] was created.")
+	LOG_DEBUG("Temporary sector at zlevel [nz] was created.")
 	register(nx, ny)
 
 /obj/effect/overmap/visitable/sector/temporary/Destroy()
 	unregister()
-	testing("Temporary sector at [x],[y] was deleted. zlevel [map_z[1]] is no longer accessible.")
+	LOG_DEBUG("Temporary sector at [x],[y] was deleted. zlevel [map_z[1]] is no longer accessible.")
 	return ..()
 
 /obj/effect/overmap/visitable/sector/temporary/proc/register(var/nx, var/ny)
 	forceMove(locate(nx, ny, GLOB.using_map.overmap_z))
 	map_sectors["[map_z[1]]"] = src
-	testing("Temporary sector at zlevel [map_z[1]] moved to coordinates [x],[y]")
+	LOG_DEBUG("Temporary sector at zlevel [map_z[1]] moved to coordinates [x],[y]")
 
 /obj/effect/overmap/visitable/sector/temporary/proc/unregister()
 	// Note that any structures left in the zlevel will remain there, and may later turn up at completely different
 	// coordinates if this temporary sector is recycled. Perhaps everything remaining in the zlevel should be destroyed?
-	testing("Caching temporary sector for future use, corresponding zlevel is [map_z[1]], previous coordinates were [x],[y]")
+	LOG_DEBUG("Caching temporary sector for future use, corresponding zlevel is [map_z[1]], previous coordinates were [x],[y]")
 	map_sectors.Remove(src)
 	src.forceMove(null)
 	cached_space += src
 
 /obj/effect/overmap/visitable/sector/temporary/proc/can_die(var/mob/observer)
-	testing("Checking if sector at [map_z[1]] can die.")
+	LOG_DEBUG("Checking if sector at [map_z[1]] can die.")
 	for(var/mob/M in GLOB.player_list)
 		if(M != observer && (M.z in map_z))
-			testing("There are people on it.")
+			LOG_DEBUG("There are people on it.")
 			return 0
 	return 1
 
@@ -100,7 +100,7 @@ var/global/list/cached_space = list()
 		ny = TRANSITIONEDGE + 2
 		nx = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 
-	testing("[A] spacemoving from [M] ([M.x], [M.y]).")
+	LOG_DEBUG("[A] spacemoving from [M] ([M.x], [M.y]).")
 
 	var/turf/map = locate(M.x,M.y,GLOB.using_map.overmap_z)
 	var/obj/effect/overmap/visitable/TM

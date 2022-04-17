@@ -306,7 +306,6 @@ var/global/list/datum/dna/gene/dna_genes[0]
 /datum/dna/proc/SetSEBlock(var/block,var/value,var/defer=0)
 	if (block<=0) return
 	var/nval=hex2num(value)
-	//testing("SetSEBlock([block],[value],[defer]): [value] -> [nval]")
 	return SetSEValue(block,nval,defer)
 
 /datum/dna/proc/GetSESubBlock(var/block,var/subBlock)
@@ -324,7 +323,6 @@ var/global/list/datum/dna/gene/dna_genes[0]
 			newBlock+=newSubBlock
 		else
 			newBlock+=copytext(oldBlock,i,i+1)
-	//testing("SetSESubBlock([block],[subBlock],[newSubBlock],[defer]): [oldBlock] -> [newBlock]")
 	SetSEBlock(block,newBlock,defer)
 
 
@@ -336,7 +334,6 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	src.uni_identity=""
 	for(var/block in UI)
 		uni_identity += EncodeDNABlock(block)
-	//testing("New UI: [uni_identity]")
 	dirtyUI=0
 
 /datum/dna/proc/UpdateSE()
@@ -344,8 +341,6 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	struc_enzymes=""
 	for(var/block in SE)
 		struc_enzymes += EncodeDNABlock(block)
-	//testing("Old SE: [oldse]")
-	//testing("New SE: [struc_enzymes]")
 	dirtySE=0
 
 // BACK-COMPAT!

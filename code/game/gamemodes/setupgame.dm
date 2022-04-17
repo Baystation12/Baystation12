@@ -13,7 +13,6 @@
 	blocksLeft.Remove(assigned)
 	assigned_blocks[assigned]=name
 	dna_activity_bounds[assigned]=activity_bounds
-	//testing("[name] assigned to block #[assigned].")
 	return assigned
 
 /proc/setupgenetics()
@@ -28,7 +27,6 @@
 	for(var/i=1;i<DNA_SE_LENGTH;i++)
 		numsToAssign += i
 
-	//testing("Assigning DNA blocks:")
 
 	// Standard muts, imported from older code above.
 	GLOB.BLINDBLOCK         = getAssignedBlock("BLINDED",         numsToAssign)

@@ -156,10 +156,10 @@
 		return FALSE
 	if(current_location.cannot_depart(src))
 		return FALSE
-	testing("[src] moving to [destination]. Areas are [english_list(shuttle_area)]")
+	LOG_DEBUG("[src] moving to [destination]. Areas are [english_list(shuttle_area)]")
 	var/list/translation = list()
 	for(var/area/A in shuttle_area)
-		testing("Moving [A]")
+		LOG_DEBUG("Moving [A]")
 		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents)
 	var/old_location = current_location
 	GLOB.shuttle_pre_move_event.raise_event(src, old_location, destination)

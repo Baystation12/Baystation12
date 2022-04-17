@@ -94,7 +94,7 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 
 /datum/antagonist/rogue_ai/set_antag_name(var/mob/living/silicon/player)
 	if(!istype(player))
-		testing("rogue_ai set_antag_name called on non-silicon mob [player]!")
+		LOG_ERROR("rogue_ai set_antag_name called on non-silicon mob [player]!")
 		return
 	// Choose a name, if any.
 	var/newname = sanitize(input(player, "You are a [role_text]. Would you like to change your name to something else?", "Name change") as null|text, MAX_NAME_LEN)

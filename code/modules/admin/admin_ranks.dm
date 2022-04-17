@@ -49,7 +49,7 @@ var/global/list/admin_ranks = list()								//list of all ranks with associated 
 	var/msg = "Permission Sets Built:\n"
 	for(var/rank in admin_ranks)
 		msg += "\t[rank] - [admin_ranks[rank]]\n"
-	testing(msg)
+	log_debug(msg)
 	#endif
 
 /hook/startup/proc/loadAdmins()
@@ -139,7 +139,7 @@ var/global/list/admin_ranks = list()								//list of all ranks with associated 
 		var/datum/admins/D = admin_datums[ckey]
 		if(D)	rank = D.rank
 		msg += "\t[ckey] - [rank]\n"
-	testing(msg)
+	log_debug(msg)
 	#endif
 
 

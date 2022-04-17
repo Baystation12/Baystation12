@@ -105,7 +105,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 	. = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y, initialized_areas_by_type)
 	#ifdef TESTING
 	if(turfsSkipped)
-		testing("Skipped loading [turfsSkipped] default turfs")
+		log_debug("Skipped loading [turfsSkipped] default turfs")
 	#endif
 	Master.StopLoadingMap()
 

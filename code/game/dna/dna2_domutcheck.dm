@@ -17,7 +17,6 @@
 
 		// Sanity checks, don't skip.
 		if(!gene.can_activate(M,flags))
-			//testing("[M] - Failed to activate [gene.name] (can_activate fail).")
 			continue
 
 		// Current state
@@ -33,14 +32,12 @@
 		if(changed)
 			// Gene active (or ALWAYS ACTIVATE)
 			if(gene_active || (gene.flags & GENE_ALWAYS_ACTIVATE))
-				testing("[gene.name] activated!")
 				gene.activate(M,connected,flags)
 				if(M)
 					M.active_genes |= gene.type
 					M.update_icon = 1
 			// If Gene is NOT active:
 			else
-				testing("[gene.name] deactivated!")
 				gene.deactivate(M,connected,flags)
 				if(M)
 					M.active_genes -= gene.type

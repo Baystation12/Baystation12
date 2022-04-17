@@ -388,7 +388,7 @@ SUBSYSTEM_DEF(garbage)
 	running_find_references = type
 	if(usr && usr.client)
 		if(usr.client.running_find_references)
-			testing("CANCELLED search for references to a [usr.client.running_find_references].")
+			log_debug("CANCELLED search for references to a [usr.client.running_find_references].")
 			usr.client.running_find_references = null
 			running_find_references = null
 			//restart the garbage collector
@@ -407,7 +407,7 @@ SUBSYSTEM_DEF(garbage)
 	if(usr && usr.client)
 		usr.client.running_find_references = type
 
-	testing("Beginning search for references to a [type].")
+	log_debug("Beginning search for references to a [type].")
 	last_find_references = world.time
 
 	DoSearchVar(GLOB) //globals
@@ -420,7 +420,7 @@ SUBSYSTEM_DEF(garbage)
 	for (var/client/thing) //clients
 		DoSearchVar(thing, "World -> [thing]")
 
-	testing("Completed search for references to a [type].")
+	log_debug("Completed search for references to a [type].")
 	if(usr && usr.client)
 		usr.client.running_find_references = null
 	running_find_references = null
@@ -472,7 +472,7 @@ SUBSYSTEM_DEF(garbage)
 			var/variable = L[varname]
 
 			if(variable == src)
-				testing("Found [src.type] \ref[src] in [D.type]'s [varname] var. [Xname]")
+				log_debug("Found [src.type] \ref[src] in [D.type]'s [varname] var. [Xname]")
 
 			else if(islist(variable))
 				DoSearchVar(variable, "[Xname] -> list", recursive_limit-1)
@@ -481,10 +481,10 @@ SUBSYSTEM_DEF(garbage)
 		var/normal = IS_NORMAL_LIST(X)
 		for(var/I in X)
 			if (I == src)
-				testing("Found [src.type] \ref[src] in list [Xname].")
+				log_debug("Found [src.type] \ref[src] in list [Xname].")
 
 			else if (I && !isnum(I) && normal && X[I] == src)
-				testing("Found [src.type] \ref[src] in list [Xname]\[[I]\]")
+				log_debug("Found [src.type] \ref[src] in list [Xname]\[[I]\]")
 
 			else if (islist(I))
 				DoSearchVar(I, "[Xname] -> list", recursive_limit-1)

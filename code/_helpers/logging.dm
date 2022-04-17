@@ -20,10 +20,6 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 /proc/log_ss_init(text)
 	game_log("SS", "[text]")
 
-//print a testing-mode debug message to world.log
-/proc/testing(msg)
-	to_world_log("## TESTING: [msg][log_end]")
-
 /proc/game_log(category, text)
 	LOG_GAME("[category] [text]")
 
