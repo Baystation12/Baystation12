@@ -1,0 +1,7 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: The Deck Chief's fax machine is now labelled as 'Torch - Deck Chief's Office'
+      instead of 'Quartermaster's Office'.
+  - maptweak: The computer lab and medical paperwork offices now have fax machines.
+  - tweak: Fax machines no longer have access requirements.
