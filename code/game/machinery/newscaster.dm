@@ -27,6 +27,8 @@
 	var/is_admin_channel=0
 	var/updated = 0
 	var/announcement = ""
+	///Whether or not a channel and its contents should persist across rounds.
+	var/persistent = FALSE
 
 
 /datum/feed_message/proc/clear()
@@ -63,17 +65,22 @@
 
 /datum/feed_network/New()
 	CreateFeedChannel("Announcements", "SS13", 1, 1, "New Announcement Available")
+	LoadData()
 
-/datum/feed_network/proc/CreateFeedChannel(channel_name, author, locked, adminChannel = 0, announcement_message)
+/datum/feed_network/proc/CreateFeedChannel(channel_name, author, locked, adminChannel = 0, announcement_message, persistent)
 	var/datum/feed_channel/newChannel = new /datum/feed_channel
 	newChannel.channel_name = channel_name
 	newChannel.author = author
 	newChannel.locked = locked
 	newChannel.is_admin_channel = adminChannel
+	newChannel.persistent = persistent
 	if(announcement_message)
 		newChannel.announcement = announcement_message
 	else
 		newChannel.announcement = "Breaking news from [channel_name]!"
+
+	if (persistent)
+		SaveData()
 	network_channels += newChannel
 
 /datum/feed_network/proc/SubmitArticle(msg, author, channel_name, obj/item/photo/photo, adminMessage = 0, message_type = "")
@@ -90,6 +97,7 @@
 	for(var/datum/feed_channel/FC in network_channels)
 		if(FC.channel_name == channel_name)
 			insert_message_in_channel(FC, newMsg) //Adding message to the network's appropriate feed_channel
+			SaveData()
 			break
 
 /datum/feed_network/proc/insert_message_in_channel(datum/feed_channel/FC, datum/feed_message/newMsg)
@@ -106,6 +114,88 @@
 		NEWSCASTER.update_icon()
 	for(var/datum/nano_module/program/newscast/program in news_programs)
 		program.news_alert(annoncement)
+
+/datum/feed_network/proc/SaveData()
+	var/base_dir = "data/persistent/news/"
+	for (var/dir in flist(base_dir))
+		fdel("[base_dir][dir]")
+
+	var/group_id = 0
+	for(var/datum/feed_channel/FC in network_channels)
+		if(FC.persistent)
+			var/msg_id = 1
+			for (var/datum/feed_message/FM in FC.messages)
+				var/list/message = list(
+					author = FM.author,
+					body = FM.body,
+					caption = FM.caption,
+					img = FM.img,
+					time_stamp = FM.time_stamp,
+					backup_body = FM.backup_body,
+					backup_author = FM.backup_author,
+					backup_caption = FM.backup_caption,
+					backup_img = FM.backup_img,
+					message_type = FM.message_type
+				)
+				var/json = json_encode(message)
+				var/filename = "data/persistent/news/[group_id]/[msg_id].json"
+				if(fexists(filename))
+					fdel(filename)
+				to_file(file(filename), json)
+				msg_id += 1
+
+			var/list/data = list(
+				channel_name = FC.channel_name,
+				author = FC.author,
+				locked = FC.locked,
+				is_admin_channel = FC.is_admin_channel,
+				announcement = FC.announcement,
+			)
+
+			var/json = json_encode(data)
+			var/filename = "data/persistent/news/[group_id]/0.json"
+			if(fexists(filename))
+				fdel(filename)
+			to_file(file(filename), json)
+			group_id += 1
+
+/datum/feed_network/proc/LoadData()
+	var/datum/feed_channel/current_channel
+	var/base_dir = "data/persistent/news/"
+
+	for (var/dir in flist(base_dir))
+		for (var/file in flist("[base_dir][dir]"))
+			var/current_dir = "[base_dir][dir]"
+			var/full_path = "[current_dir][file]"
+			var/json = file2text(full_path)
+			var/list/data = json_decode(json)
+			if (findtext("[file]", "0"))
+				var/datum/feed_channel/newChannel = new /datum/feed_channel
+				newChannel.channel_name = data["channel_name"]
+				newChannel.author = data["author"]
+				newChannel.locked = data["locked"]
+				newChannel.is_admin_channel = data["is_admin_channel"]
+				newChannel.announcement = data["announcement"]
+				newChannel.persistent = TRUE
+
+				network_channels += newChannel
+				current_channel = newChannel
+				continue
+
+
+			var/datum/feed_message/newMsg = new /datum/feed_message
+			newMsg.author = data["author"]
+			newMsg.body = data["body"]
+			newMsg.caption = data["caption"]
+			newMsg.img = data["img"]
+			newMsg.time_stamp = data["time_stamp"]
+			newMsg.backup_body = data["backup_body"]
+			newMsg.backup_author = data["backup_author"]
+			newMsg.backup_caption = data["backup_caption"]
+			newMsg.backup_img = data["backup_img"]
+			newMsg.message_type = data["message_type"]
+			newMsg.parent_channel = current_channel
+			current_channel.messages += newMsg
 
 var/global/list/datum/feed_network/news_network = list()     //The global news-network, which is coincidentally a global list.
 

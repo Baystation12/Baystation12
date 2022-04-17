@@ -418,6 +418,8 @@ var/global/floorIsLava = 0
 			dat+= {"<HR><BR><A href='?src=\ref[src];ac_create_channel=1'>Create Feed Channel</A>
 				<BR><A href='?src=\ref[src];ac_view=1'>View Feed Channels</A>
 				<BR><A href='?src=\ref[src];ac_create_feed_story=1'>Submit new Feed story</A>
+				<BR><A href='?src=\ref[src];ac_delete_channel=1'>Delete a channel</A>
+				<BR><A href='?src=\ref[src];ac_delete_story=1'>Delete a story</A>
 				<BR><BR><A href='?src=\ref[usr];mach_close=newscaster_main'>Exit</A>
 			"}
 
@@ -451,6 +453,7 @@ var/global/floorIsLava = 0
 				<HR><B><A href='?src=\ref[src];ac_set_channel_name=1'>Channel Name</A>:</B> [src.admincaster_feed_channel.channel_name]<BR>
 				<B><A href='?src=\ref[src];ac_set_signature=1'>Channel Author</A>:</B> <FONT COLOR='green'>[src.admincaster_signature]</FONT><BR>
 				<B><A href='?src=\ref[src];ac_set_channel_lock=1'>Will Accept Public Feeds</A>:</B> [(src.admincaster_feed_channel.locked) ? ("NO") : ("YES")]<BR><BR>
+				<B><A href='?src=\ref[src];ac_set_channel_persistent=0'>Persist Between Rounds</A>:</B> [(src.admincaster_feed_channel.persistent) ? ("YES") : ("NO")]<BR>
 				<BR><A href='?src=\ref[src];ac_submit_new_channel=1'>Submit</A><BR><BR><A href='?src=\ref[src];ac_setScreen=[0]'>Cancel</A><BR>
 			"}
 		if(3)
@@ -629,6 +632,40 @@ var/global/floorIsLava = 0
 				<FONT COLOR='green'>Wanted issue for [src.admincaster_feed_message.author] successfully edited.</FONT><BR><BR>
 				<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>
 			"}
+
+		if (20)
+			dat+= "Select a channel to delete<HR>"
+			if( !length(torch_network.network_channels) )
+				dat+="<I>No active channels found...</I>"
+			else
+				for(var/datum/feed_channel/CHANNEL in torch_network.network_channels)
+					if(CHANNEL.is_admin_channel)
+						dat+="<B><FONT style='BACKGROUND-COLOR: LightGreen'><A href='?src=\ref[src];ac_delete_channel_confirm=\ref[CHANNEL]'>[CHANNEL.channel_name]</A></FONT></B><BR>"
+					else
+						dat+="<B><A href='?src=\ref[src];ac_delete_channel_confirm=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? ("<FONT COLOR='red'>***</FONT>") : null ]<BR></B>"
+			dat+={"<BR><HR><A href='?src=\ref[src];ac_refresh=1'>Refresh</A>
+				<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Back</A>
+			"}
+
+		if (21)
+			dat+= "Select an article to delete<HR>"
+			if( !length(torch_network.network_channels) )
+				dat+="<I>No active channels found...</I>"
+			else
+				for(var/datum/feed_channel/CHANNEL in torch_network.network_channels)
+					var/i = 0
+					for(var/datum/feed_message/MESSAGE in CHANNEL.messages)
+						i++
+						dat+="-[MESSAGE.body] <BR>"
+						if(MESSAGE.img)
+							send_rsc(usr, MESSAGE.img, "tmp_photo[i].png")
+							dat+="<img src='tmp_photo[i].png' width = '180'><BR><BR>"
+						dat+="<FONT SIZE=1>\[Story by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR>"
+						dat+="<B><FONT style='BACKGROUND-COLOR: LightGreen'><A href='?src=\ref[src];ac_delete_story_confirm=\ref[MESSAGE]'>DELETE</A></FONT></B><BR>"
+			dat+={"<BR><HR><A href='?src=\ref[src];ac_refresh=1'>Refresh</A>
+				<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Back</A>
+			"}
+
 		else
 			dat+="I'm sorry to break your immersion. This shit's bugged. Report this bug to Agouri, polyxenitopalidou@gmail.com"
 

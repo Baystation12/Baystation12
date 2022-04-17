@@ -1778,6 +1778,10 @@
 		src.admincaster_feed_channel.locked = !src.admincaster_feed_channel.locked
 		src.access_news_network()
 
+	else if (href_list["ac_set_channel_persistent"])
+		admincaster_feed_channel.persistent = !admincaster_feed_channel.persistent
+		access_news_network()
+
 	else if(href_list["ac_submit_new_channel"])
 		var/datum/feed_network/torch_network = news_network[1]
 		var/check = 0
@@ -1790,8 +1794,8 @@
 		else
 			var/choice = alert("Please confirm Feed channel creation","Network Channel Handler","Confirm","Cancel")
 			if(choice=="Confirm")
-				torch_network.CreateFeedChannel(admincaster_feed_channel.channel_name, admincaster_signature, admincaster_feed_channel.locked, 1)
-				log_admin("[key_name_admin(usr)] created command feed channel: [src.admincaster_feed_channel.channel_name]!")
+				torch_network.CreateFeedChannel(admincaster_feed_channel.channel_name, admincaster_signature, admincaster_feed_channel.locked, 1, null, admincaster_feed_channel.persistent)
+				log_admin("[key_name_admin(usr)] created command feed channel: [src.admincaster_feed_channel.channel_name][admincaster_feed_channel.persistent ? ", it will persist between rounds" : ""]!")
 				src.admincaster_screen=5
 		src.access_news_network()
 
@@ -1825,6 +1829,14 @@
 	else if(href_list["ac_create_feed_story"])
 		src.admincaster_screen=3
 		src.access_news_network()
+
+	else if (href_list["ac_delete_channel"])
+		admincaster_screen = 20
+		access_news_network()
+
+	else if (href_list["ac_delete_story"])
+		admincaster_screen = 21
+		access_news_network()
 
 	else if(href_list["ac_menu_censor_story"])
 		src.admincaster_screen=10
@@ -1961,6 +1973,34 @@
 	else if(href_list["ac_set_signature"])
 		src.admincaster_signature = sanitize(input(usr, "Provide your desired signature", "Network Identity Handler", ""))
 		src.access_news_network()
+
+	else if (href_list["ac_delete_channel_confirm"])
+		var/datum/feed_network/torch_network = news_network[1]
+		var/datum/feed_channel/FC = locate(href_list["ac_delete_channel_confirm"])
+		var/choice = alert("Please confirm deletion of the [FC.channel_name] channel.","Network Security Handler","Confirm","Cancel")
+
+		if (choice == "Cancel")
+			return
+
+		torch_network.network_channels -= FC
+		torch_network.SaveData()
+		access_news_network()
+
+		qdel(FC)
+
+	else if (href_list["ac_delete_story_confirm"])
+		var/datum/feed_network/torch_network = news_network[1]
+		var/datum/feed_message/FM = locate(href_list["ac_delete_story_confirm"])
+		var/choice = alert("Please confirm deletion of the article by [FM.author]?","Network Security Handler","Confirm","Cancel")
+
+		if (choice == "Cancel")
+			return
+
+		FM.parent_channel.messages -= FM
+		torch_network.SaveData()
+		access_news_network()
+
+		qdel(FM)
 
 	else if(href_list["vsc"])
 		if(check_rights(R_ADMIN|R_SERVER))
