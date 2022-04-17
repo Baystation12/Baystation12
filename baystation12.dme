@@ -12,6 +12,7 @@
 // BEGIN_INCLUDE
 #include "code\_macros.dm"
 #include "code\_version.dm"
+#include "code\diary.dm"
 #include "code\hub.dm"
 #include "code\stylesheet.dm"
 #include "code\world.dm"

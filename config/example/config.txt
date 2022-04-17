@@ -71,7 +71,7 @@ LOG_ATTACK
 # LOG_HREFS
 
 ## log world.log and runtime errors to a file
-# LOG_RUNTIME
+# LOG_UNCAUGHT_RUNTIMES
 
 ## log admin warning messages
 ##LOG_ADMINWARN  ## Also duplicates a bunch of other messages.

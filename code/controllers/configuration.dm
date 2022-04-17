@@ -50,7 +50,7 @@
 	var/static/log_hrefs = FALSE
 
 	/// logs world.log to a file
-	var/static/log_runtime = FALSE
+	var/static/log_uncaught_runtimes = FALSE
 
 	/// log world.log to game log
 	var/static/log_world_output = FALSE
@@ -521,8 +521,8 @@
 				log_world_output = TRUE
 			if ("log_hrefs")
 				log_hrefs = TRUE
-			if ("log_runtime")
-				log_runtime = TRUE
+			if ("log_uncaught_runtimes")
+				log_uncaught_runtimes = TRUE
 			if ("generate_asteroid")
 				generate_map = TRUE
 			if ("no_click_cooldown")
