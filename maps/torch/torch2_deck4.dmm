@@ -4443,6 +4443,9 @@
 	c_tag = "Fourth Deck - Hangar Bridge";
 	dir = 1
 	},
+/obj/machinery/rotating_alarm/hangar_warning_beacon/torch_hangar{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/center)
 "pD" = (

@@ -201,6 +201,7 @@
 				to_chat(usr, "<span class='warning'>For safety reasons the automated supply shuttle cannot transport live organisms, classified nuclear weaponry or homing beacons.</span>")
 			else
 				shuttle.launch(user)
+
 		else
 			shuttle.launch(user)
 			var/datum/radio_frequency/frequency = radio_controller.return_frequency(1435)

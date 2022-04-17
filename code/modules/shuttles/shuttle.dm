@@ -29,6 +29,8 @@
 	var/mothershuttle //tag of mothershuttle
 	var/motherdock    //tag of mothershuttle landmark, defaults to starting location
 
+	var/shuttle_tag = "none" //shuttle tag used for warning beacons
+
 /datum/shuttle/New(_name, var/obj/effect/shuttle_landmark/initial_location)
 	..()
 	if(_name)
@@ -78,6 +80,11 @@
 	if(moving_status != SHUTTLE_IDLE) return
 
 	moving_status = SHUTTLE_WARMUP
+
+	for (var/obj/machinery/rotating_alarm/hangar_warning_beacon/HB in SSmachines.machinery)
+		if (HB.z in GLOB.using_map.contact_levels)
+			HB.set_alert("on", shuttle_tag)
+
 	if(sound_takeoff)
 		playsound(current_location, sound_takeoff, 100, 20, 0.2)
 	spawn(warmup_time*10)
@@ -93,6 +100,9 @@
 		moving_status = SHUTTLE_INTRANSIT //shouldn't matter but just to be safe
 		attempt_move(destination)
 		moving_status = SHUTTLE_IDLE
+		for (var/obj/machinery/rotating_alarm/hangar_warning_beacon/HB in SSmachines.machinery)
+			if (HB.z in GLOB.using_map.contact_levels)
+				HB.set_alert("off", shuttle_tag)
 
 /datum/shuttle/proc/long_jump(var/obj/effect/shuttle_landmark/destination, var/obj/effect/shuttle_landmark/interim, var/travel_time)
 	if(moving_status != SHUTTLE_IDLE) return
@@ -100,6 +110,11 @@
 	var/obj/effect/shuttle_landmark/start_location = current_location
 
 	moving_status = SHUTTLE_WARMUP
+
+	for (var/obj/machinery/rotating_alarm/hangar_warning_beacon/HB in SSmachines.machinery)
+		if (HB.z in GLOB.using_map.contact_levels)
+			HB.set_alert("on", shuttle_tag)
+
 	if(sound_takeoff)
 		playsound(current_location, sound_takeoff, 100, 20, 0.2)
 		if (!istype(start_location.base_area, /area/space))
@@ -121,6 +136,7 @@
 
 		arrive_time = world.time + travel_time*10
 		moving_status = SHUTTLE_INTRANSIT
+
 		if(attempt_move(interim))
 			var/fwooshed = 0
 			while (world.time < arrive_time)
@@ -139,6 +155,9 @@
 				attempt_move(start_location) //try to go back to where we started. If that fails, I guess we're stuck in the interim location
 
 		moving_status = SHUTTLE_IDLE
+		for (var/obj/machinery/rotating_alarm/hangar_warning_beacon/HB in SSmachines.machinery)
+			if (HB.z in GLOB.using_map.contact_levels)
+				HB.set_alert("off", shuttle_tag)
 
 /datum/shuttle/proc/fuel_check()
 	return 1 //fuel check should always pass in non-overmap shuttles (they have magic engines)

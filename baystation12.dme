@@ -776,6 +776,7 @@
 #include "code\game\machinery\pipe\pipe_datums\disposal_pipe_datums.dm"
 #include "code\game\machinery\pipe\pipe_datums\pipe_datum_base.dm"
 #include "code\game\machinery\pipe\pipe_datums\pipe_datums.dm"
+#include "code\game\machinery\rotating_alarm\hangar_warning_beacon.dm"
 #include "code\game\machinery\rotating_alarm\station_alerts.dm"
 #include "code\game\machinery\telecomms\broadcaster.dm"
 #include "code\game\machinery\telecomms\logbrowser.dm"

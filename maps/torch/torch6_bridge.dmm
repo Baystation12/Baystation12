@@ -5575,6 +5575,9 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
+/obj/machinery/rotating_alarm/hangar_warning_beacon/torch_aquilla{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/aft)
 "nf" = (
@@ -11239,6 +11242,12 @@
 "Fp" = (
 /turf/simulated/wall/r_wall/hull,
 /area/bridge/storage)
+"Fr" = (
+/obj/machinery/rotating_alarm/hangar_warning_beacon/torch_aquilla{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
 "Fy" = (
 /obj/structure/window/reinforced{
 	dir = 8
@@ -11947,6 +11956,12 @@
 /obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/aquila/cockpit)
+"Ic" = (
+/obj/machinery/rotating_alarm/hangar_warning_beacon/torch_aquilla{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
 "Id" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -13484,6 +13499,9 @@
 	},
 /obj/machinery/camera/network/engineering{
 	c_tag = "Solar Control - Bridge";
+	dir = 4
+	},
+/obj/machinery/rotating_alarm/hangar_warning_beacon/torch_aquilla{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -32385,7 +32403,7 @@ bD
 ad
 ad
 Oc
-ad
+Fr
 gX
 hK
 is
@@ -32808,7 +32826,7 @@ CO
 CO
 CO
 dV
-ad
+Ic
 wt
 aH
 Rg
@@ -33193,7 +33211,7 @@ ad
 ad
 ad
 ad
-ad
+Ic
 fj
 eb
 eb

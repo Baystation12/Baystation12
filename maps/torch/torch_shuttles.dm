@@ -60,6 +60,7 @@ TORCH_ESCAPE_POD(17)
 	logging_home_tag = "nav_petrov_start"
 	logging_access = access_petrov_helm
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling
+	shuttle_tag = "petrov"
 
 /datum/shuttle/autodock/ferry/petrov/New(_name, var/obj/effect/shuttle_landmark/initial_location)
 	shuttle_area = subtypesof(/area/shuttle/petrov)
@@ -335,6 +336,7 @@ TORCH_ESCAPE_POD(17)
 	shuttle_area = /area/supply/dock
 	waypoint_offsite = "nav_cargo_start"
 	waypoint_station = "nav_cargo_station"
+	shuttle_tag = "supplydrone"
 
 /obj/effect/shuttle_landmark/supply/centcom
 	name = "Offsite"
@@ -358,6 +360,7 @@ TORCH_ESCAPE_POD(17)
 	logging_home_tag = "nav_hangar_charon"
 	logging_access = access_expedition_shuttle_helm
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/torch
+	shuttle_tag = "charon"
 
 /obj/effect/shuttle_landmark/torch/hangar/exploration_shuttle
 	name = "Charon Hangar"
@@ -404,6 +407,7 @@ TORCH_ESCAPE_POD(17)
 	logging_access = access_guppy_helm
 	skill_needed = SKILL_NONE
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/torch
+	shuttle_tag = "guppy"
 
 /obj/effect/shuttle_landmark/torch/hangar/guppy
 	name = "Guppy Hangar"
@@ -446,6 +450,7 @@ TORCH_ESCAPE_POD(17)
 	logging_home_tag = "nav_hangar_aquila"
 	logging_access = access_aquila_helm
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/torch
+	shuttle_tag = "aquilla"
 
 /obj/effect/shuttle_landmark/torch/hangar/aquila
 	name = "Aquila Hangar"

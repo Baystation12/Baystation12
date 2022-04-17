@@ -13,6 +13,11 @@
 	if(isnull(location))
 		return
 
+	if(at_station())
+		for (var/obj/machinery/rotating_alarm/hangar_warning_beacon/HB in SSmachines.machinery)
+			if (HB.z in GLOB.using_map.contact_levels)
+				HB.set_alert("on", SSsupply.shuttle.shuttle_tag)
+
 	//it would be cool to play a sound here
 	moving_status = SHUTTLE_WARMUP
 	spawn(warmup_time*10)
@@ -33,6 +38,9 @@
 
 		//If we are at the away_landmark then we are just pretending to move, otherwise actually do the move
 		if (next_location == away_waypoint)
+			for (var/obj/machinery/rotating_alarm/hangar_warning_beacon/HB in SSmachines.machinery) //shuts off any beacons that were turned on when leaving station
+				if (HB.z in GLOB.using_map.contact_levels)
+					HB.set_alert("off", SSsupply.shuttle.shuttle_tag)
 			attempt_move(away_waypoint)
 
 		//wait ETA here.
@@ -41,6 +49,10 @@
 			sleep(5)
 
 		if (next_location != away_waypoint)
+			if(!at_station())
+				for (var/obj/machinery/rotating_alarm/hangar_warning_beacon/HB in SSmachines.machinery)
+					if (HB.z in GLOB.using_map.contact_levels)
+						HB.set_alert("on", SSsupply.shuttle.shuttle_tag)
 			//late
 			if (prob(late_chance))
 				sleep(rand(0,max_late_time))
@@ -51,6 +63,10 @@
 
 		if (!at_station())	//at centcom
 			SSsupply.sell()
+
+		for (var/obj/machinery/rotating_alarm/hangar_warning_beacon/HB in SSmachines.machinery)
+			if (HB.z in GLOB.using_map.contact_levels)
+				HB.set_alert("off", SSsupply.shuttle.shuttle_tag)
 
 // returns 1 if the supply shuttle should be prevented from moving because it contains forbidden atoms
 /datum/shuttle/autodock/ferry/supply/proc/forbidden_atoms_check()
