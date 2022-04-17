@@ -12604,7 +12604,7 @@
 /area/shuttle/petrov/cell3)
 "Gc" = (
 /obj/structure/table/glass,
-/obj/machinery/photocopier/faxmachine/torch{
+/obj/machinery/photocopier/faxmachine{
 	department = "Petrov - Chief Science Officer"
 	},
 /obj/machinery/requests_console{

@@ -2937,7 +2937,7 @@
 	pixel_y = -6
 	},
 /obj/structure/table/standard,
-/obj/machinery/photocopier/faxmachine/torch{
+/obj/machinery/photocopier/faxmachine{
 	department = "Torch - Pathfinder"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -13399,15 +13399,15 @@
 	icon_state = "bordercolorhalf"
 	},
 /obj/structure/table/standard,
-/obj/machinery/photocopier/faxmachine{
-	department = "Quartermaster's Office"
-	},
 /obj/machinery/camera/network/supply{
 	c_tag = "Supply Office - Deck Officer";
 	dir = 8
 	},
 /obj/machinery/light{
 	dir = 4
+	},
+/obj/machinery/photocopier/faxmachine{
+	department = "Torch - Deck Chief's Office"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/deckchief)
