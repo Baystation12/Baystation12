@@ -25,7 +25,7 @@ SUBSYSTEM_DEF(atoms)
 /datum/controller/subsystem/atoms/Shutdown()
 	var/initlog = InitLog()
 	if (initlog)
-		text2file(initlog, "[GLOB.log_directory]/initialize.log")
+		text2file(initlog, "data/log2/initialize.log")
 
 
 /datum/controller/subsystem/atoms/Initialize(start_uptime)

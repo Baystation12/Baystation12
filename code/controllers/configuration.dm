@@ -4,9 +4,6 @@
 	/// server name (for world name / status)
 	var/static/server_name
 
-	/// generate numeric suffix based on server port
-	var/static/server_suffix = FALSE
-
 	/// for topic status requests
 	var/static/game_version = "Baystation12"
 
@@ -579,8 +576,6 @@
 				respawn_menu_delay = respawn_menu_delay > 0 ? respawn_menu_delay : 0
 			if ("servername")
 				server_name = value
-			if ("serversuffix")
-				server_suffix = TRUE
 			if ("hostedby")
 				hostedby = value
 			if ("serverurl")

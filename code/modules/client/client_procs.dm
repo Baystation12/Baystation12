@@ -78,8 +78,7 @@
 
 		ticket.close(client_repository.get_lite_client(usr.client))
 
-	if (GLOB.href_logfile)
-		to_chat(GLOB.href_logfile, "<small>[time2text(world.timeofday,"hh:mm")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>")
+	LOG_DEBUG("Topic [hsrc ? hsrc : ""] [href]", src, usr)
 
 	switch(href_list["_src_"])
 		if("holder")	hsrc = holder

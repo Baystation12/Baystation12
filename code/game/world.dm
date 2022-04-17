@@ -4,10 +4,6 @@
 #define SET_THROTTLE(TIME, REASON) throttle[1] = base_throttle + (TIME); throttle[2] = (REASON);
 
 
-var/global/server_name = "Baystation 12"
-
-GLOBAL_VAR(href_logfile)
-
 // Find mobs matching a given string
 //
 // search_string: the string to search for, in params format; for example, "some_key;mob_name"
@@ -75,28 +71,9 @@ GLOBAL_VAR(href_logfile)
 	if (debug_server)
 		call(debug_server, "auxtools_init")()
 		enable_debugging()
-
-	name = "[server_name] - [GLOB.using_map.full_name]"
-
-	//logs
-	SetupLogs()
-	var/date_string = time2text(world.realtime, "YYYY/MM/DD")
-	to_file(global.diary, "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]")
-
-	if(config && config.server_name != null && config.server_suffix && world.port > 0)
-		config.server_name += " #[(world.port % 1000) / 100]"
-
-	if(config && config.log_uncaught_runtimes)
-		var/runtime_log = file("data/logs/runtime/[date_string]_[time2text(world.timeofday, "hh:mm")]_[game_id].log")
-		to_file(runtime_log, "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]")
-		log = runtime_log // Note that, as you can see, this is misnamed: this simply moves world.log into the runtime log file.
-
-	if (config && config.log_hrefs)
-		GLOB.href_logfile = file("data/logs/[date_string] hrefs.htm")
-
+	name = "[config.server_name] - [GLOB.using_map.station_name]"
 	if(byond_version < RECOMMENDED_VERSION)
 		to_world_log("Your server's byond version does not meet the recommended requirements for this server. Please update BYOND")
-
 	callHook("startup")
 	..()
 
@@ -119,8 +96,8 @@ GLOBAL_LIST_EMPTY(world_topic_throttle)
 GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 
 
-/world/Topic(T, addr, master, key)
-	to_file(global.diary, "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]")
+/world/Topic(T, addr, parent, list/keys)
+	LOG_DEBUG("Topic [addr] [parent ? "(parent, [length(keys)] keys) " : ""]-- [T]")
 
 	if (GLOB.world_topic_last > world.timeofday)
 		GLOB.world_topic_throttle = list() //probably passed midnight
@@ -488,17 +465,6 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 	if (!config?.hub_visible || !config.hub_entry)
 		return
 	status = config.generate_hub_entry()
-
-
-/world/proc/SetupLogs()
-	GLOB.log_directory = "data/logs/[time2text(world.realtime, "YYYY/MM/DD")]/round-"
-	if(game_id)
-		GLOB.log_directory += "[game_id]"
-	else
-		GLOB.log_directory += "[replacetext(time_stamp(), ":", ".")]"
-
-	GLOB.world_qdel_log = file("[GLOB.log_directory]/qdel.log")
-	to_file(GLOB.world_qdel_log, "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------")
 
 
 var/global/failed_db_connections = 0

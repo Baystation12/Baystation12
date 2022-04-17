@@ -97,7 +97,7 @@ SUBSYSTEM_DEF(garbage)
 			dellog += "\tIgnored force: [I.no_respect_force] times"
 		if (I.no_hint)
 			dellog += "\tNo hint: [I.no_hint] times"
-	log_qdel(dellog.Join("\n"))
+	LOG_CRITICAL("Hard Delete Log:\n[dellog.Join("\n")]")
 
 /datum/controller/subsystem/garbage/fire()
 	//the fact that this resets its processing each fire (rather then resume where it left off) is intentional.

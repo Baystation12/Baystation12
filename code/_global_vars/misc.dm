@@ -1,3 +1,6 @@
+/// The configuration datum. It gets to be bare.
+var/global/configuration/config
+
 GLOBAL_LIST_EMPTY(all_observable_events)
 
 // True if net rebuild will be called manually after an event.
