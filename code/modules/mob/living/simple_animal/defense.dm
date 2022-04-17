@@ -5,11 +5,11 @@
 		return PROJECTILE_FORCE_MISS
 
 	var/damage = Proj.damage
-	if(Proj.damtype == STUN)
+	if (Proj.damtype == DAMAGE_STUN)
 		damage = Proj.damage / 6
-	if(Proj.damtype == BRUTE)
+	if (Proj.damtype == DAMAGE_BRUTE)
 		damage = Proj.damage / 2
-	if(Proj.damtype == BURN)
+	if (Proj.damtype == DAMAGE_BURN)
 		damage = Proj.damage / 1.5
 	if(Proj.agony)
 		damage += Proj.agony / 6
@@ -119,9 +119,9 @@
 		return FALSE
 
 	var/damage = O.force
-	if (O.damtype == PAIN)
+	if (O.damtype == DAMAGE_PAIN)
 		damage = 0
-	if (O.damtype == STUN)
+	if (O.damtype == DAMAGE_STUN)
 		damage = (O.force / 8)
 	if(supernatural && istype(O,/obj/item/nullrod))
 		damage *= 2

@@ -30,7 +30,7 @@
 			var/obj/item/mech_equipment/M = hardpoints[hardpoint]
 			if(istype(M) && M.active && M.passive_power_use)
 				M.deactivate()
-		
+
 
 	updatehealth()
 	if(health <= 0 && stat != DEAD)
@@ -81,7 +81,7 @@
 			damage = 10
 		if(bodytemperature > material.melting_point * 2.15 )
 			damage = 15
-		apply_damage(damage, BURN)
+		apply_damage(damage, DAMAGE_BURN)
 	//A possibility is to hook up interface icons here. But this works pretty well in my experience
 		if(prob(damage))
 			visible_message(SPAN_DANGER("\The [src]'s hull bends and buckles under the intense heat!"))

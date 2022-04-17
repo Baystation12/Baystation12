@@ -29,7 +29,7 @@
 	var/list/wound_descriptors = list()
 	for(var/datum/wound/W in wounds)
 		var/this_wound_desc = W.desc
-		if(W.damage_type == BURN && W.salved)
+		if (W.damage_type == INJURY_TYPE_BURN && W.salved)
 			this_wound_desc = "salved [this_wound_desc]"
 
 		if(W.bleeding())

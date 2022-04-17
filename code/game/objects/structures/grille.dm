@@ -130,7 +130,7 @@
 	//20% chance that the grille provides a bit more cover than usual. Support structure for example might take up 20% of the grille's area.
 	//If they click on the grille itself then we assume they are aiming at the grille itself and the extra cover behaviour is always used.
 	switch(Proj.damage_type)
-		if(BRUTE)
+		if (DAMAGE_BRUTE)
 			//bullets
 			if(Proj.original == src || prob(20))
 				Proj.damage *= clamp(Proj.damage / 60, 0, 0.5)
@@ -139,7 +139,7 @@
 			else
 				Proj.damage *= clamp(Proj.damage / 60, 0, 1)
 				passthrough = 1
-		if(BURN)
+		if (DAMAGE_BURN)
 			//beams and other projectiles are either blocked completely by grilles or stop half the damage.
 			if(!(Proj.original == src || prob(20)))
 				Proj.damage *= 0.5
@@ -147,7 +147,7 @@
 
 	if(passthrough)
 		. = PROJECTILE_CONTINUE
-		damage = clamp((damage - Proj.damage) * (Proj.damage_type == BRUTE ? 0.4 : 1), 0, 10) //if the bullet passes through then the grille avoids most of the damage
+		damage = clamp((damage - Proj.damage) * (Proj.damage_type == DAMAGE_BRUTE ? 0.4 : 1), 0, 10) //if the bullet passes through then the grille avoids most of the damage
 
 	damage_health(damage, Proj.damage_type)
 
@@ -237,7 +237,7 @@
 
 /obj/structure/grille/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if (!is_broken() && exposed_temperature > material.melting_point)
-		damage_health(1, BURN)
+		damage_health(1, DAMAGE_BURN)
 	..()
 
 /obj/structure/grille/cult

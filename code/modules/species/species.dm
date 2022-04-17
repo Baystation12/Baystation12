@@ -647,8 +647,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 	var/randn = rand(1, 100) + state_mod
 	if(!(check_no_slip(target)) && randn <= push_threshold)
-		var/armor_check = 100 * target.get_blocked_ratio(affecting, BRUTE, damage = 20)
-		target.apply_effect(2, WEAKEN, armor_check)
+		var/armor_check = 100 * target.get_blocked_ratio(affecting, DAMAGE_BRUTE, damage = 20)
+		target.apply_effect(2, EFFECT_WEAKEN, armor_check)
 		playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 		if(armor_check < 100)
 			target.visible_message("<span class='danger'>[attacker] has pushed [target]!</span>")

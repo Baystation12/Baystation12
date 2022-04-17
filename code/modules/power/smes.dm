@@ -382,7 +382,7 @@
 	..()
 
 /obj/machinery/power/smes/bullet_act(var/obj/item/projectile/Proj)
-	if(Proj.damage_type == BRUTE || Proj.damage_type == BURN)
+	if (Proj.damage_type == DAMAGE_BRUTE || Proj.damage_type == DAMAGE_BURN)
 		take_damage(Proj.damage)
 
 /obj/machinery/power/smes/ex_act(var/severity)

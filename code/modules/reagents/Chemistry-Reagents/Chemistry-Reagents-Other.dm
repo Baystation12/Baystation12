@@ -141,7 +141,7 @@
 	affect_ingest(M, alien, removed)
 
 /datum/reagent/uranium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.apply_damage(5 * removed, IRRADIATE, armor_pen = 100)
+	M.apply_damage(5 * removed, DAMAGE_RADIATION, armor_pen = 100)
 
 /datum/reagent/uranium/touch_turf(var/turf/T)
 	if(volume >= 3)
@@ -530,27 +530,27 @@
 /datum/reagent/colored_hair_dye/red
 	name = "Red Hair Dye"
 	color = "#b33636"
-	
+
 /datum/reagent/colored_hair_dye/orange
 	name = "Orange Hair Dye"
 	color = "#b5772f"
-	
+
 /datum/reagent/colored_hair_dye/yellow
 	name = "Yellow Hair Dye"
 	color = "#a6a035"
-		
+
 /datum/reagent/colored_hair_dye/green
 	name = "Green Hair Dye"
 	color = "#61a834"
-	
+
 /datum/reagent/colored_hair_dye/blue
 	name = "Blue Hair Dye"
 	color = "#3470a8"
-	
+
 /datum/reagent/colored_hair_dye/purple
 	name = "Purple Hair Dye"
 	color = "#6d2d91"
-		
+
 /datum/reagent/colored_hair_dye/grey
 	name = "Grey Hair Dye"
 	color = "#696969"

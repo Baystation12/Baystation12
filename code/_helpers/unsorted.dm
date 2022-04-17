@@ -925,7 +925,7 @@ proc/get_mob_with_client_list()
 		if(/obj/item/melee/energy)
 			return 3500
 		if(/obj/item/blob_tendril)
-			if(W.damtype == BURN)
+			if (W.damtype == DAMAGE_BURN)
 				return 1000
 			else
 				return 0

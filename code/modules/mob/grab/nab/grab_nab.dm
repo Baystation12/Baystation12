@@ -72,12 +72,12 @@
 
 	if(prob(30))
 		var/hit_damage = max(attack_damage + 10, 15)
-		G.affecting.apply_damage(hit_damage, BRUTE, hit_zone, DAM_SHARP, used_weapon = "organic punctures")
-		var/armor = 100 * G.affecting.get_blocked_ratio(hit_zone, BRUTE, damage = hit_damage)
-		G.affecting.apply_effect(attack_damage, PAIN, armor)
+		G.affecting.apply_damage(hit_damage, DAMAGE_BRUTE, hit_zone, DAMAGE_FLAG_SHARP, used_weapon = "organic punctures")
+		var/armor = 100 * G.affecting.get_blocked_ratio(hit_zone, DAMAGE_BRUTE, damage = hit_damage)
+		G.affecting.apply_effect(attack_damage, EFFECT_PAIN, armor)
 		G.affecting.visible_message("<span class='danger'>[G.assailant]'s spikes dig in painfully!</span>")
 	else
-		G.affecting.apply_damage(attack_damage, BRUTE, hit_zone, used_weapon = "crushing")
+		G.affecting.apply_damage(attack_damage, DAMAGE_BRUTE, hit_zone, used_weapon = "crushing")
 	playsound(get_turf(G.assailant), 'sound/weapons/bite.ogg', 25, 1, -1)
 
 	admin_attack_log(G.assailant, G.affecting, "Crushed their victim.", "Was crushed.", "crushed")
@@ -87,7 +87,7 @@
 	var/hit_zone = G.assailant.zone_sel.selecting
 	var/obj/item/organ/external/damaging = G.affecting.get_organ(hit_zone)
 
-	G.affecting.apply_damage(attack_damage, BRUTE, hit_zone, DAM_SHARP|DAM_EDGE, used_weapon = "mandibles")
+	G.affecting.apply_damage(attack_damage, DAMAGE_BRUTE, hit_zone, DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE, used_weapon = "mandibles")
 	G.affecting.visible_message("<span class='danger'>[G.assailant] chews on [G.affecting]'s [damaging.name]!</span>")
 	playsound(get_turf(G.assailant), 'sound/weapons/bite.ogg', 25, 1, -1)
 

@@ -269,10 +269,10 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	if (!(target.species.name in GLOB.zombie_species) || target.is_species(SPECIES_DIONA) || target.isSynthetic()) //No need to check infection for FBPs
 		return
 	target.adjustHalLoss(9) //To help bring down targets in voidsuits
-	var/vuln = 1 - target.get_blocked_ratio(zone, TOX, damage_flags = DAM_BIO) //Are they protected from bites?
+	var/vuln = 1 - target.get_blocked_ratio(zone, DAMAGE_TOXIN, damage_flags = DAMAGE_FLAG_BIO) //Are they protected from bites?
 	if (vuln > 0.05)
 		if (prob(vuln * 100)) //Protective infection chance
-			if (prob(min(100 - target.get_blocked_ratio(zone, BRUTE) * 100, 70))) //General infection chance
+			if (prob(min(100 - target.get_blocked_ratio(zone, DAMAGE_BRUTE) * 100, 70))) //General infection chance
 				target.reagents.add_reagent(/datum/reagent/zombie, 1) //Infect 'em
 
 
@@ -476,7 +476,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		if (target.is_species(SPECIES_ZOMBIE)) //Just in case they turn whilst being eaten
 			return
 
-		target.apply_damage(rand(50, 60), BRUTE, BP_CHEST)
+		target.apply_damage(rand(50, 60), DAMAGE_BRUTE, BP_CHEST)
 		target.adjustBruteLoss(20)
 		target.update_surgery() //Update broken ribcage sprites etc.
 

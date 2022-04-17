@@ -108,7 +108,7 @@
 		else
 			to_chat(user, SPAN_ITALIC("The access panel on your [parent.name] is torn open."))
 			playsound(user, 'sound/items/electronic_assembly_emptying.ogg', 50, TRUE)
-		parent.createwound(CUT, parent.min_broken_damage / 2, 1)
+		parent.createwound(INJURY_TYPE_CUT, parent.min_broken_damage / 2, 1)
 		parent.clamp_organ()
 		parent.open_incision()
 		parent.fracture()

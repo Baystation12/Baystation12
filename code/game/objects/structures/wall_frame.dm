@@ -161,7 +161,7 @@
 		tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 	if (tforce < 15)
 		return
-	damage_health(tforce, BRUTE)
+	damage_health(tforce, DAMAGE_BRUTE)
 
 /obj/structure/wall_frame/handle_death_change(new_death_state)
 	if (new_death_state)

@@ -161,7 +161,7 @@
 			if(prob(user.skill_fail_chance(SKILL_MEDICAL, 60, SKILL_BASIC)))
 				to_chat(user, "<span class='warning'>You miss the vein!</span>")
 				var/target_zone = check_zone(user.zone_sel.selecting)
-				T.apply_damage(3, BRUTE, target_zone, damage_flags=DAM_SHARP)
+				T.apply_damage(3, DAMAGE_BRUTE, target_zone, damage_flags=DAMAGE_FLAG_SHARP)
 				return
 
 			user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
@@ -299,7 +299,7 @@
 		if((user != target) && H.check_shields(7, src, user, "\the [src]"))
 			return
 
-		if (target != user && H.get_blocked_ratio(target_zone, BRUTE, damage_flags=DAM_SHARP) > 0.1 && prob(50))
+		if (target != user && H.get_blocked_ratio(target_zone, DAMAGE_BRUTE, damage_flags=DAMAGE_FLAG_SHARP) > 0.1 && prob(50))
 			for(var/mob/O in viewers(world.view, user))
 				O.show_message(text("<span class='danger'>[user] tries to stab [target] in \the [hit_area] with [src.name], but the attack is deflected by armor!</span>"), 1)
 			qdel(src)
@@ -308,11 +308,11 @@
 			return
 
 		user.visible_message("<span class='danger'>[user] stabs [target] in \the [hit_area] with [src.name]!</span>")
-		target.apply_damage(3, BRUTE, target_zone, damage_flags=DAM_SHARP)
+		target.apply_damage(3, DAMAGE_BRUTE, target_zone, damage_flags=DAMAGE_FLAG_SHARP)
 
 	else
 		user.visible_message("<span class='danger'>[user] stabs [target] with [src.name]!</span>")
-		target.apply_damage(3, BRUTE)
+		target.apply_damage(3, DAMAGE_BRUTE)
 
 	var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
 	var/trans = reagents.trans_to_mob(target, syringestab_amount_transferred, CHEM_BLOOD)

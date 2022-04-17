@@ -100,7 +100,7 @@
 			to_chat(usr, "<span class='warning'>You cannot light \the [src] underwater.</span>")
 			return
 		lit = 1
-		damtype = "fire"
+		damtype = DAMAGE_BURN
 		if(reagents.get_reagent_amount(/datum/reagent/toxin/phoron)) // the phoron explodes when exposed to fire
 			var/datum/effect/effect/system/reagents_explosion/e = new()
 			e.set_up(round(reagents.get_reagent_amount(/datum/reagent/toxin/phoron) / 2.5, 1), get_turf(src), 0, 0)
@@ -123,7 +123,7 @@
 
 /obj/item/clothing/mask/smokable/proc/extinguish(var/mob/user, var/no_message)
 	lit = 0
-	damtype = "brute"
+	damtype = DAMAGE_BRUTE
 	STOP_PROCESSING(SSobj, src)
 	set_light(0)
 	update_icon()
@@ -472,7 +472,7 @@
 			to_chat(usr, "<span class='warning'>You cannot light \the [src] underwater.</span>")
 			return
 		lit = 1
-		damtype = "fire"
+		damtype = DAMAGE_BURN
 		icon_state = icon_on
 		item_state = icon_on
 		var/turf/T = get_turf(src)

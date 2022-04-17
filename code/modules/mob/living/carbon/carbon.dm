@@ -149,7 +149,7 @@
 		return 0
 	if(shock_damage < 1)
 		shock_damage = 1
-	apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
+	apply_damage(shock_damage, DAMAGE_BURN, def_zone, used_weapon="Electrocution")
 	return(shock_damage)
 
 /mob/proc/swap_hand()

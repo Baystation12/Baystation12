@@ -29,18 +29,19 @@
 	var/hitchance_mod = 0
 	var/dispersion = 0.0
 	var/distance_falloff = 2  //multiplier, higher value means accuracy drops faster with distance
-	var/damage_falloff = FALSE 
+	var/damage_falloff = FALSE
 	/// List(Distance, Multiplier), intended to represent short / medium / long ranges. Uses default of 1 for anything lower than the first value.
 	var/damage_falloff_list = list(
 		list(4, 0.9),
 		list(6, 0.8),
 		list(8, 0.7)
-	) 
+	)
 
 	var/damage = 10
-	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, ELECTROCUTE are the only things that should be in here, Try not to use PAIN as it doesn't go through stun_effect_act
+	/// String (One of `DAMAGE_*`).
+	var/damage_type = DAMAGE_BRUTE
 	var/nodamage = FALSE //Determines if the projectile will skip any damage inflictions
-	var/damage_flags = DAM_BULLET
+	var/damage_flags = DAMAGE_FLAG_BULLET
 	var/projectile_type = /obj/item/projectile
 	var/penetrating = 0 //If greater than zero, the projectile will pass through dense objects as specified by on_penetrate()
 	var/life_span = 50 //This will de-increment every process(). When 0, it will delete the projectile.
@@ -98,14 +99,14 @@
 	L.apply_effects(0, weaken, paralyze, stutter, eyeblur, drowsy, 0, blocked)
 	L.stun_effect_act(stun, agony, def_zone, src)
 	//radiation protection is handled separately from other armour types.
-	L.apply_damage(irradiate, IRRADIATE, damage_flags = DAM_DISPERSED)
+	L.apply_damage(irradiate, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 
 	return 1
 
 //called when the projectile stops flying because it collided with something
 /obj/item/projectile/proc/on_impact(var/atom/A)
 	impact_effect(effect_transform)		// generate impact effect
-	if(damage && damage_type == BURN)
+	if (damage && damage_type == DAMAGE_BURN)
 		var/turf/T = get_turf(A)
 		if(T)
 			T.hotspot_expose(700, 5)
@@ -113,12 +114,12 @@
 //Checks if the projectile is eligible for embedding. Not that it necessarily will.
 /obj/item/projectile/can_embed()
 	//embed must be enabled and damage type must be brute
-	if(!embed || damage_type != BRUTE)
+	if(!embed || damage_type != DAMAGE_BRUTE)
 		return 0
 	return 1
 
 /obj/item/projectile/proc/get_structure_damage()
-	if(damage_type == BRUTE || damage_type == BURN)
+	if (damage_type == DAMAGE_BRUTE || damage_type == DAMAGE_BURN)
 		return damage
 	return 0
 
@@ -207,7 +208,7 @@
 /obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/special_miss_modifier=0)
 	if(!istype(target_mob))
 		return
-		
+
 	//roll to-hit
 	var/miss_modifier = max(distance_falloff*(distance)*(distance) - hitchance_mod + special_miss_modifier, -30)
 	//makes moving targets harder to hit, and stationary easier to hit
@@ -521,7 +522,7 @@
 
 /obj/item/projectile/after_wounding(obj/item/organ/external/organ, datum/wound/wound)
 	//Check if we even broke skin in first place
-	if(!wound || !(wound.damage_type == CUT || wound.damage_type == PIERCE))
+	if (!wound || !(wound.damage_type == INJURY_TYPE_CUT || wound.damage_type == INJURY_TYPE_PIERCE))
 		return
 	//Check if we can do nasty stuff inside
 	if(!can_embed() || (organ.species.species_flags & SPECIES_FLAG_NO_EMBED))

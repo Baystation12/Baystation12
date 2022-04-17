@@ -141,23 +141,23 @@ Checks if a list has the same entries and values as an element of big.
 		return L[len]
 	return null
 
-/* pickweightindex
+/* pickweight_index
 	given an indexed list of (index = weight, index + 1 = weight, ...), returns a random index biased by weights. Higher weight = more chance
 	if the argument is not an indexed list of weights, returns pick(list)
 	if the argument is empty or not a list, returns null
 */
-/proc/pickweightindex(list/L)
+/proc/pickweight_index(list/L)
 	var/len = length(L)
 	if (len && islist(L))
-		for(var/index = 1, index <= len, index++)
+		for(var/index = 1 to len)
 			if (isnull(L[index]))
 				return pick(L)
 			break
 		var/sum = 0
-		for(var/index = 1, index <= len, index++)
+		for(var/index = 1 to len)
 			sum += L[index]
 		sum *= rand()
-		for(var/index = 1, index <= len, index++)
+		for(var/index = 1 to len)
 			sum -= L[index]
 			if (sum <= 0)
 				return index

@@ -130,11 +130,11 @@ mob/living/carbon/human/airflow_hit(atom/A)
 		bloody_body(src)
 	var/b_loss = min(airflow_speed, (airborne_acceleration*2)) * vsc.airflow_damage
 
-	apply_damage(b_loss/3, BRUTE, BP_HEAD, used_weapon = "Airflow")
+	apply_damage(b_loss/3, DAMAGE_BRUTE, BP_HEAD, used_weapon = "Airflow")
 
-	apply_damage(b_loss/3, BRUTE, BP_CHEST, used_weapon =  "Airflow")
+	apply_damage(b_loss/3, DAMAGE_BRUTE, BP_CHEST, used_weapon =  "Airflow")
 
-	apply_damage(b_loss/3, BRUTE, BP_GROIN, used_weapon =  "Airflow")
+	apply_damage(b_loss/3, DAMAGE_BRUTE, BP_GROIN, used_weapon =  "Airflow")
 
 	if(airflow_speed > 10)
 		Paralyse(round(airflow_speed * vsc.airflow_stun))
