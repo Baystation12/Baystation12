@@ -5,7 +5,7 @@
 
 	//Guest Checking
 	if(!config.guests_allowed && IsGuestKey(key))
-		log_access("Failed Login: [key] - Guests not allowed")
+		log_admin("Failed Login: [key] - Guests not allowed")
 		message_admins("<span class='notice'>Failed Login: [key] - Guests not allowed</span>")
 		return list("reason"="guest", "desc"="\nReason: Guests not allowed. Please sign in with a byond account.")
 
@@ -14,7 +14,7 @@
 		//Ban Checking
 		. = CheckBan( ckey(key), computer_id, address )
 		if(.)
-			log_access("Failed Login: [key] [computer_id] [address] - Banned [.["reason"]]")
+			log_admin("Failed Login: [key] [computer_id] [address] - Banned [.["reason"]]")
 			message_admins("<span class='notice'>Failed Login: [key] id:[computer_id] ip:[address] - Banned [.["reason"]]</span>")
 			return .
 

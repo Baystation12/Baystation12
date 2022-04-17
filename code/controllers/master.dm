@@ -138,7 +138,7 @@ var/global/datum/controller/master/Master = new
 					msg += "\t [varname] = [D]([D.type])\n"
 				else
 					msg += "\t [varname] = [varval]\n"
-	log_world(msg)
+	log_critical(msg)
 
 	var/datum/controller/subsystem/BadBoy = Master.last_type_processed
 	var/FireHim = FALSE
@@ -154,7 +154,7 @@ var/global/datum/controller/master/Master = new
 				BadBoy.flags |= SS_NO_FIRE
 		if(msg)
 			to_chat(GLOB.admins, "<span class='boldannounce'>[msg]</span>")
-			log_world(msg)
+			log_critical(msg)
 
 	if (istype(Master.subsystems))
 		if(FireHim)
@@ -196,7 +196,7 @@ var/global/datum/controller/master/Master = new
 	current_ticklimit = tick_limit_default
 	var/msg = "Initializations complete within [(Uptime() - start_uptime) / 10] second\s!"
 	report_progress(msg)
-	log_world(msg)
+	log_debug(msg)
 
 	initializing = FALSE
 
@@ -351,7 +351,7 @@ var/global/datum/controller/master/Master = new
 
 		if (CheckQueue(subsystems_to_check) <= 0)
 			if (!SoftReset(tickersubsystems, runlevel_sorted_subsystems))
-				log_world("MC: SoftReset() failed, crashing")
+				log_critical("MC: SoftReset() failed, crashing")
 				return
 			if (!error_level)
 				iteration++
@@ -363,7 +363,7 @@ var/global/datum/controller/master/Master = new
 		if (queue_head)
 			if (RunQueue() <= 0)
 				if (!SoftReset(tickersubsystems, runlevel_sorted_subsystems))
-					log_world("MC: SoftReset() failed, crashing")
+					log_critical("MC: SoftReset() failed, crashing")
 					return
 				if (!error_level)
 					iteration++
@@ -545,9 +545,9 @@ var/global/datum/controller/master/Master = new
 //	called if any mc's queue procs runtime or exit improperly.
 /datum/controller/master/proc/SoftReset(list/ticker_SS, list/runlevel_SS)
 	. = 0
-	log_world("MC: SoftReset called, resetting MC queue state.")
+	log_warning("MC: SoftReset called, resetting MC queue state.")
 	if (!istype(subsystems) || !istype(ticker_SS) || !istype(runlevel_SS))
-		log_world("MC: SoftReset: Bad list contents: '[subsystems]' '[ticker_SS]' '[runlevel_SS]'")
+		log_critical("MC: SoftReset: Bad list contents: '[subsystems]' '[ticker_SS]' '[runlevel_SS]'")
 		return
 	var/subsystemstocheck = subsystems + ticker_SS
 	for(var/I in runlevel_SS)
@@ -561,26 +561,26 @@ var/global/datum/controller/master/Master = new
 			ticker_SS -= list(SS)
 			for(var/I in runlevel_SS)
 				I -= list(SS)
-			log_world("MC: SoftReset: Found bad entry in subsystem list, '[SS]'")
+			log_warning("MC: SoftReset: Found bad entry in subsystem list, '[SS]'")
 			continue
 		if (SS.queue_next && !istype(SS.queue_next))
-			log_world("MC: SoftReset: Found bad data in subsystem queue, queue_next = '[SS.queue_next]'")
+			log_warning("MC: SoftReset: Found bad data in subsystem queue, queue_next = '[SS.queue_next]'")
 		SS.queue_next = null
 		if (SS.queue_prev && !istype(SS.queue_prev))
-			log_world("MC: SoftReset: Found bad data in subsystem queue, queue_prev = '[SS.queue_prev]'")
+			log_warning("MC: SoftReset: Found bad data in subsystem queue, queue_prev = '[SS.queue_prev]'")
 		SS.queue_prev = null
 		SS.queued_priority = 0
 		SS.queued_time = 0
 		SS.state = SS_IDLE
 	if (queue_head && !istype(queue_head))
-		log_world("MC: SoftReset: Found bad data in subsystem queue, queue_head = '[queue_head]'")
+		log_warning("MC: SoftReset: Found bad data in subsystem queue, queue_head = '[queue_head]'")
 	queue_head = null
 	if (queue_tail && !istype(queue_tail))
-		log_world("MC: SoftReset: Found bad data in subsystem queue, queue_tail = '[queue_tail]'")
+		log_warning("MC: SoftReset: Found bad data in subsystem queue, queue_tail = '[queue_tail]'")
 	queue_tail = null
 	queue_priority_count = 0
 	queue_priority_count_bg = 0
-	log_world("MC: SoftReset: Finished.")
+	log_debug("MC: SoftReset: Finished.")
 	. = 1
 
 

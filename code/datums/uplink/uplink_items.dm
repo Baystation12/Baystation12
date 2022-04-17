@@ -76,7 +76,7 @@ var/global/datum/uplink/uplink = new()
 			continue
 		var/datum/antagonist/antag = GLOB.all_antag_types_[antag_role]
 		if (!antag)
-			log_debug({"Invalid antag_role "[antag_role]" in [src.type]"})
+			log_debug("Invalid antag_role \"[antag_role]\" in [type]")
 			continue
 		if (antag.is_antagonist(U.uplink_owner))
 			return !("Exclude" in antag_roles)

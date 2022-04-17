@@ -52,7 +52,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 					<td width='50%'>
 						<div align='center'>
 							<a href='?_src_=vars;datumrefresh=\ref[D]'>Refresh</a>
-							[A ? "<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[A.x];Y=[A.y];Z=[A.z]'>Jump To</a>":""]
+							[A ? "<A HREF='?_src_=holder;admin_goto=1;X=[A.x];Y=[A.y];Z=[A.z]'>Jump To</a>":""]
 							<form>
 								<select name='file'
 								        size='1'

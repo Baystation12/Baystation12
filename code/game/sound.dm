@@ -60,7 +60,7 @@ GLOBAL_LIST_INIT(tray_hit_sound,list('sound/items/trayhit1.ogg', 'sound/items/tr
 	soundin = get_sfx(soundin) // same sound for everyone
 
 	if(isarea(source))
-		error("[source] is an area and is trying to make the sound: [soundin]")
+		log_error("[source] is an area and is trying to make the sound: [soundin]")
 		return
 	frequency = vary && isnull(frequency) ? get_rand_frequency() : frequency // Same frequency for everybody
 	var/turf/turf_source = get_turf(source)
@@ -94,7 +94,7 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 
 	//sound volume falloff with pressure
 	var/pressure_factor = 1.0
-	
+
 	S.volume *= get_sound_volume_multiplier()
 
 	var/turf/T = get_turf(src)
@@ -192,7 +192,7 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 			if ("glasscrack") soundin = pick(GLOB.glasscrack_sound)
 			if ("tray_hit") soundin = pick(GLOB.tray_hit_sound)
 	return soundin
-	
+
 /client/verb/stop_sounds()
 	set name = "Stop All Sounds"
 	set desc = "Stop all sounds that are currently playing on your client."

@@ -40,17 +40,11 @@
 	/// log admin chat messages
 	var/static/log_adminchat = FALSE
 
-	/// log warnings admins get about bomb construction and such
-	var/static/log_adminwarn = FALSE
-
 	/// logs all links clicked in-game. Could be used for debugging and tracking down exploits
 	var/static/log_hrefs = FALSE
 
 	/// logs world.log to a file
 	var/static/log_uncaught_runtimes = FALSE
-
-	/// log world.log to game log
-	var/static/log_world_output = FALSE
 
 	/// Allows admins with relevant permissions to have their own ooc colour
 	var/static/allow_admin_ooccolor = FALSE
@@ -512,10 +506,8 @@
 				log_emote = TRUE
 			if ("log_adminchat")
 				log_adminchat = TRUE
-			if ("log_adminwarn")
-				log_adminwarn = TRUE
-			if ("log_world_output")
-				log_world_output = TRUE
+			if ("log_admin")
+				log_admin = TRUE
 			if ("log_hrefs")
 				log_hrefs = TRUE
 			if ("log_uncaught_runtimes")

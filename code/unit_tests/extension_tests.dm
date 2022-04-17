@@ -14,21 +14,21 @@
 	var/number_of_failures = 0
 	for(var/extension in O.extensions)
 		if(!islist(O.extensions[extension]))
-			log_unit_test("[extension] was initalized.")
+			LOG_UNIT_TEST("[extension] was initalized.")
 			number_of_failures++
 
 	var/datum/extension/one = get_extension(O, /datum/extension/test_one)
 	for(var/extension in O.extensions)
 		if(islist(O.extensions[extension]))
-			log_unit_test("[extension] was not initalized.")
+			LOG_UNIT_TEST("[extension] was not initalized.")
 			number_of_failures++
 
 	if(one.type != /datum/extension/test_one)
-		log_unit_test("[log_info_line(one)] was not strictly of the type [/datum/extension/test_one]")
+		LOG_UNIT_TEST("[log_info_line(one)] was not strictly of the type [/datum/extension/test_one]")
 		number_of_failures++
 
 	if(one.holder != O)
-		log_unit_test("[log_info_line(one)] had an unexpected holder: [log_info_line(one.holder)]")
+		LOG_UNIT_TEST("[log_info_line(one)] had an unexpected holder: [log_info_line(one.holder)]")
 		number_of_failures++
 
 	if(number_of_failures)
@@ -50,16 +50,16 @@
 	var/number_of_failures = 0
 	for(var/extension in O.extensions)
 		if(islist(O.extensions[extension]))
-			log_unit_test("[extension] was not initalized.")
+			LOG_UNIT_TEST("[extension] was not initalized.")
 			number_of_failures++
 
 	var/datum/extension/two = get_extension(O, /datum/extension/test_two)
 	if(two.type != /datum/extension/test_two)
-		log_unit_test("[log_info_line(two)] was not strictly of the type [/datum/extension/test_two]")
+		LOG_UNIT_TEST("[log_info_line(two)] was not strictly of the type [/datum/extension/test_two]")
 		number_of_failures++
 
 	if(two.holder != O)
-		log_unit_test("[log_info_line(two)] had an unexpected holder: [log_info_line(two.holder)]")
+		LOG_UNIT_TEST("[log_info_line(two)] had an unexpected holder: [log_info_line(two.holder)]")
 		number_of_failures++
 
 	if(number_of_failures)
@@ -129,11 +129,11 @@
 
 	var/number_of_failures = 0
 	if(one.type != /datum/extension/test_one)
-		log_unit_test("[log_info_line(one)] was not strictly of the type [/datum/extension/test_one]")
+		LOG_UNIT_TEST("[log_info_line(one)] was not strictly of the type [/datum/extension/test_one]")
 		number_of_failures++
 
 	if(one.holder != O)
-		log_unit_test("[log_info_line(one)] had an unexpected holder: [log_info_line(one.holder)]")
+		LOG_UNIT_TEST("[log_info_line(one)] had an unexpected holder: [log_info_line(one.holder)]")
 		number_of_failures++
 
 	if(number_of_failures)

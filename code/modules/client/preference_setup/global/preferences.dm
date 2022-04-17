@@ -258,61 +258,83 @@ var/global/list/_client_preferences_by_type
 * General Staff Preferences *
 ********************/
 
-/datum/client_preference/staff
-	var/flags
+/// The rights required to use this preference, if any.
+/datum/client_preference/staff/var/rights = EMPTY_BITFIELD
 
-/datum/client_preference/staff/may_set(client/given_client)
-	if(ismob(given_client))
-		var/mob/M = given_client
-		given_client = M.client
-	if(!given_client)
+
+/datum/client_preference/staff/may_set(client/client)
+	client = resolve_client(client)
+	if (!client)
 		return FALSE
-	if(flags)
-		return check_rights(flags, 0, given_client)
-	else
-		return given_client && given_client.holder
+	if (rights)
+		return check_rights(rights, FALSE, client)
+	return client && client.holder
 
-/datum/client_preference/staff/show_chat_prayers
-	description = "Chat Prayers"
-	key = "CHAT_PRAYER"
-	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/staff/play_adminhelp_ping
-	description = "Adminhelps"
+	description = "Help Message Sound"
 	key = "SOUND_ADMINHELP"
+	default_value = GLOB.PREF_HEAR
 	options = list(GLOB.PREF_HEAR, GLOB.PREF_SILENT)
 
-/datum/client_preference/staff/show_rlooc
-	description = "Remote LOOC chat"
-	key = "CHAT_RLOOC"
+
+/datum/client_preference/staff/show_log_prayers
+	description = "Logs (Prayers)"
+	key = "SHOW_LOG_PRAYER"
+	default_value = GLOB.PREF_SHOW
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
-/********************
-* Admin Preferences *
-********************/
 
-/datum/client_preference/staff/show_attack_logs
-	description = "Attack Log Messages"
-	key = "CHAT_ATTACKLOGS"
+/datum/client_preference/staff/show_log_looc_remote
+	description = "Logs (Remote LOOC)"
+	key = "SHOW_LOG_REMOTE_LOOC"
+	default_value = GLOB.PREF_SHOW
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
-	flags = R_ADMIN
+
+
+/datum/client_preference/staff/show_log_attack
+	description = "Logs (Attack)"
+	key = "SHOW_LOG_ATTACK"
+	rights = R_ADMIN
 	default_value = GLOB.PREF_HIDE
-
-/********************
-* Debug Preferences *
-********************/
-
-/datum/client_preference/staff/show_debug_logs
-	description = "Debug Log Messages"
-	key = "CHAT_DEBUGLOGS"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+
+
+/datum/client_preference/staff/show_log_critical
+	description = "Logs (Critical)"
+	key = "SHOW_LOG_CRITICAL"
+	rights = R_ADMIN | R_DEBUG
 	default_value = GLOB.PREF_HIDE
-	flags = R_ADMIN|R_DEBUG
-
-
-/datum/client_preference/staff/show_runtime_logs
-	description = "Runtime Log Messages"
-	key = "CHAT_RUNTIMELOGS"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+
+
+/datum/client_preference/staff/show_log_error
+	description = "Logs (Error)"
+	key = "SHOW_LOG_ERROR"
+	rights = R_ADMIN | R_DEBUG
 	default_value = GLOB.PREF_HIDE
-	flags = R_ADMIN | R_DEBUG
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+
+
+/datum/client_preference/staff/show_log_warning
+	description = "Logs (Warning)"
+	key = "SHOW_LOG_WARNING"
+	rights = R_ADMIN | R_DEBUG
+	default_value = GLOB.PREF_HIDE
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+
+
+/datum/client_preference/staff/show_log_debug
+	description = "Logs (Debug)"
+	key = "SHOW_LOG_DEBUG"
+	rights = R_ADMIN | R_DEBUG
+	default_value = GLOB.PREF_HIDE
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+
+
+/datum/client_preference/staff/show_log_admin
+	description = "Logs (Admin)"
+	key = "SHOW_LOG_ADMIN"
+	rights = R_ADMIN
+	default_value = GLOB.PREF_HIDE
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)

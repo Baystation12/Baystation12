@@ -22,7 +22,7 @@ SUBSYSTEM_DEF(unit_tests)
 		ascii_yellow = ""
 		ascii_reset = ""
 	#endif
-	log_unit_test("Initializing Unit Testing")
+	LOG_UNIT_TEST("Initializing Unit Testing")
 
 	// Load Map Templates
 	load_map_templates()
@@ -33,8 +33,7 @@ SUBSYSTEM_DEF(unit_tests)
 	SSticker.master_mode = "extended"
 	for(var/test_datum_type in get_test_datums())
 		queue += new test_datum_type
-	log_unit_test("[queue.len] unit tests loaded.")
-
+	LOG_UNIT_TEST("[queue.len] unit tests loaded.")
 
 /datum/controller/subsystem/unit_tests/proc/load_map_templates()
 	for(var/map_template_name in (SSmapping.map_templates))
@@ -49,30 +48,30 @@ SUBSYSTEM_DEF(unit_tests)
 			INCREMENT_WORLD_Z_SIZE
 			GLOB.using_map.sealed_levels += world.maxz
 			var/corner = locate(world.maxx/2, world.maxy/2, world.maxz)
-			log_unit_test("Loading template '[map_template]' ([map_template.type]) at [log_info_line(corner)]")
+			LOG_UNIT_TEST("Loading template '[map_template]' ([map_template.type]) at [log_info_line(corner)]")
 			map_template.load(corner)
 		else // Multi-Z templates are loaded using different means
-			log_unit_test("Loading template '[map_template]' ([map_template.type]) at Z-level [world.maxz+1] with a tallness of [map_template.tallness]")
+			LOG_UNIT_TEST("Loading template '[map_template]' ([map_template.type]) at Z-level [world.maxz+1] with a tallness of [map_template.tallness]")
 			map_template.load_new_z()
-	log_unit_test("Map Templates Loaded")
+	LOG_UNIT_TEST("Map Templates Loaded")
 
 /datum/controller/subsystem/unit_tests/proc/start_game()
 	if (GAME_STATE >= RUNLEVEL_POSTGAME)
-		log_unit_test("Unable to start testing - game is finished!")
+		LOG_UNIT_TEST("Unable to start testing - game is finished!")
 		del world
 		return
 
 	if ((GAME_STATE == RUNLEVEL_LOBBY) && !SSticker.start_now())
-		log_unit_test("Unable to start testing - SSticker failed to start the game!")
+		LOG_UNIT_TEST("Unable to start testing - SSticker failed to start the game!")
 		del world
 		return
 
 	stage++
-	log_unit_test("Game start has been requested.")
+	LOG_UNIT_TEST("Game start has been requested.")
 
 /datum/controller/subsystem/unit_tests/proc/await_game_running()
 	if(GAME_STATE == RUNLEVEL_GAME)
-		log_unit_test("The game is now in progress.")
+		LOG_UNIT_TEST("The game is now in progress.")
 		stage++
 
 /datum/controller/subsystem/unit_tests/proc/handle_tests()
@@ -117,7 +116,7 @@ SUBSYSTEM_DEF(unit_tests)
 
 		if (3)
 			stage++
-			log_unit_test("Testing Started.")
+			LOG_UNIT_TEST("Testing Started.")
 			end_unit_tests = world.time + MAX_UNIT_TEST_RUN_TIME
 
 		if (4)	// do normal tests
@@ -128,6 +127,5 @@ SUBSYSTEM_DEF(unit_tests)
 
 		if (6)	// Finalization.
 			unit_test_final_message()
-			log_unit_test("Caught [GLOB.total_runtimes] Runtime\s.")
+			LOG_UNIT_TEST("Caught [GLOB.total_runtimes] Runtime\s.")
 			del world
-

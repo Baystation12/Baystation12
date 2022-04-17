@@ -29,7 +29,7 @@
 		var/datum/supply_drop_loot/SDL = drop_type
 		SDL.drop(T)
 	else
-		error("Unhandled drop type: [drop_type]")
+		log_error("Unhandled drop type: [drop_type]")
 
 
 /datum/admins/proc/call_supply_drop()

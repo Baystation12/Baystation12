@@ -10,7 +10,7 @@
 
 
 /datum/controller/Destroy(force)
-	log_debug({"Controller "[name]" destroyed with force="[force]"!"})
+	log_debug("Controller \"[name]\" destroyed with force=\"[force]\"!")
 	if (!force)
 		return QDEL_HINT_LETMELIVE
 	QDEL_NULL(statLine)

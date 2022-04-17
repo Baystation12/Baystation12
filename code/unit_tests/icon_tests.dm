@@ -23,16 +23,16 @@
 			continue
 		var/eye_icon_state = "eyes-[icon_state]"
 		if(!(eye_icon_state in valid_states))
-			log_unit_test("Eye icon state [eye_icon_state] is missing.")
+			LOG_UNIT_TEST("Eye icon state [eye_icon_state] is missing.")
 			missing_states++
 
 	if(missing_states)
 		fail("[missing_states] eye icon state\s [missing_states == 1 ? "is" : "are"] missing.")
 		var/list/difference = uniquemergelist(original_valid_states, valid_states)
-		if(difference.len)
-			log_unit_test("[ascii_yellow]---  DEBUG  --- ICON STATES AT START: " + jointext(original_valid_states, ",") + "[ascii_reset]")
-			log_unit_test("[ascii_yellow]---  DEBUG  --- ICON STATES AT END: "   + jointext(valid_states, ",") + "[ascii_reset]")
-			log_unit_test("[ascii_yellow]---  DEBUG  --- UNIQUE TO EACH LIST: " + jointext(difference, ",") + "[ascii_reset]")
+		if (length(difference))
+			LOG_UNIT_TEST("[ascii_yellow]---  DEBUG  --- ICON STATES AT START: " + jointext(original_valid_states, ",") + "[ascii_reset]")
+			LOG_UNIT_TEST("[ascii_yellow]---  DEBUG  --- ICON STATES AT END: "   + jointext(valid_states, ",") + "[ascii_reset]")
+			LOG_UNIT_TEST("[ascii_yellow]---  DEBUG  --- UNIQUE TO EACH LIST: " + jointext(difference, ",") + "[ascii_reset]")
 	else
 		pass("All related eye icon states exists.")
 	return 1

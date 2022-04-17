@@ -133,7 +133,7 @@ SUBSYSTEM_DEF(shuttle)
 				S.motherdock = S.current_location.landmark_tag
 				mothership.shuttle_area |= S.shuttle_area
 			else
-				error("Shuttle [S] was unable to find mothership [mothership]!")
+				log_error("Shuttle [S] was unable to find mothership [mothership]!")
 
 /datum/controller/subsystem/shuttle/proc/toggle_overmap(new_setting)
 	if(overmap_halted == new_setting)

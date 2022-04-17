@@ -51,7 +51,7 @@ var/global/repository/unique/uniqueness_repository = new()
 		ids_by_key[key] = ids
 
 	if(ids.len >= (max - min) + 1)
-		error("Random ID limit reached for key [key].")
+		log_warning("Random ID limit reached for key [key].")
 		ids.Cut()
 
 	if(ids.len >= 0.6 * ((max-min) + 1)) // if more than 60% of possible ids used

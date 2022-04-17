@@ -58,7 +58,7 @@ var/global/datum/xgm_gas_data/gas_data
 		var/decl/xgm_gas/gas = new p //avoid initial() because of potential New() actions
 
 		if(gas.id in gas_data.gases)
-			error("Duplicate gas id `[gas.id]` in `[p]`")
+			log_warning("Duplicate gas id `[gas.id]` in `[p]`")
 
 		gas_data.gases += gas.id
 		gas_data.name[gas.id] = gas.name

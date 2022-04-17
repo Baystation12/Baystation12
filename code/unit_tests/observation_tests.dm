@@ -68,7 +68,7 @@
 /datum/unit_test/observation/proc/dump_received_moves()
 	for(var/entry in received_moves)
 		var/list/l = entry
-		log_unit_test("[l[1]] - [l[2]] - [l[3]]")
+		LOG_UNIT_TEST("[l[1]] - [l[2]] - [l[3]]")
 
 /datum/unit_test/observation/global_listeners_shall_receive_events
 	name = "OBSERVATION: Global listeners shall receive events"

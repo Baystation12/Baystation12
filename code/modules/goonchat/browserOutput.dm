@@ -204,7 +204,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 
 //Called by js client on js error
 /chatOutput/proc/debug(error)
-	log_world("\[[time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")]\] Client: [(src.owner.key ? src.owner.key : src.owner)] triggered JS error: [error]")
+	log_debug("\[[time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")]\] Client: [(owner.key ? owner.key : owner)] triggered JS error: [error]")
 
 
 //Global chat procs

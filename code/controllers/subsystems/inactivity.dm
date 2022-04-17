@@ -34,7 +34,7 @@ SUBSYSTEM_DEF(inactivity)
 		if (QDELETED(client))
 			continue
 		if (client.inactivity > kick_time && !client.holder)
-			log_access("AFK: [key_name(client)]")
+			log_admin("AFK: [key_name(client)]")
 			to_chat_immediate(SPAN_WARNING("You were inactive for [config.kick_inactive] minutes and have been disconnected."))
 			qdel(client)
 		if (MC_TICK_CHECK)

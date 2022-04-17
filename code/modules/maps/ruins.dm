@@ -50,7 +50,7 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 			if (!valid)
 				continue
 
-			log_world("Ruin \"[ruin.name]\" placed at ([choice.x], [choice.y], [choice.z])")
+			log_debug("Ruin \"[ruin.name]\" placed at ([choice.x], [choice.y], [choice.z])")
 
 			load_ruin(choice, ruin)
 			selected += ruin
@@ -62,7 +62,7 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 			break
 
 	if (remaining)
-		log_world("Ruin loader had no ruins to pick from with [budget] left to spend.")
+		log_debug("Ruin loader had no ruins to pick from with [budget] left to spend.")
 
 	if (length(selected))
 		report_progress("Finished selecting planet ruins ([english_list(selected)]) for [budget - remaining] cost of [budget] budget.")

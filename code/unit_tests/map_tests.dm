@@ -129,7 +129,7 @@
 			var/combined_dir = "[C.d1]-[C.d2]"
 			if(combined_dir in dirs_checked)
 				bad_tests++
-				log_unit_test("[bad_msg] Contains multiple wires with same direction on top of each other.")
+				LOG_UNIT_TEST("[bad_msg] Contains multiple wires with same direction on top of each other.")
 			dirs_checked.Add(combined_dir)
 
 	if(bad_tests)
@@ -247,7 +247,7 @@
 		var/file_path = MAP_IMAGE_PATH + file_name
 		if(!fexists(file_path))
 			failed = TRUE
-			log_unit_test("[GLOB.using_map.path]-[z] is missing its map image [file_name].")
+			LOG_UNIT_TEST("[GLOB.using_map.path]-[z] is missing its map image [file_name].")
 
 	if(failed)
 		fail("One or more map levels were missing a corresponding map image.")
@@ -267,19 +267,19 @@
 	for(var/spawn_name in GLOB.using_map.allowed_spawns)
 		var/datum/spawnpoint/spawnpoint = spawntypes()[spawn_name]
 		if(!spawnpoint)
-			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] is null!")
+			LOG_UNIT_TEST("Map allows spawning in [spawn_name], but [spawn_name] is null!")
 			failed = TRUE
 		else if(!spawnpoint.turfs.len)
-			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] has no associated spawn turfs.")
+			LOG_UNIT_TEST("Map allows spawning in [spawn_name], but [spawn_name] has no associated spawn turfs.")
 			failed = TRUE
 
 	if(failed)
-		log_unit_test("Following spawn points exist:")
+		LOG_UNIT_TEST("Following spawn points exist:")
 		for(var/spawnpoint in spawntypes())
-			log_unit_test("\t[spawnpoint] ([any2ref(spawnpoint)])")
-		log_unit_test("Following spawn points are allowed:")
+			LOG_UNIT_TEST("\t[spawnpoint] ([any2ref(spawnpoint)])")
+		LOG_UNIT_TEST("Following spawn points are allowed:")
 		for(var/spawnpoint in GLOB.using_map.allowed_spawns)
-			log_unit_test("\t[spawnpoint] ([any2ref(spawnpoint)])")
+			LOG_UNIT_TEST("\t[spawnpoint] ([any2ref(spawnpoint)])")
 		fail("Some of the entries in allowed_spawns have no spawnpoint turfs.")
 	else
 		pass("All entries in allowed_spawns have spawnpoints.")

@@ -51,9 +51,7 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 
 		var/mob/living/silicon/ai/A = player.current
 		if(!istype(A))
-			error("Non-AI mob designated malf AI! Report this.")
-			to_world("##ERROR: Non-AI mob designated malf AI! Report this.")
-
+			log_error("Non-AI mob designated malf AI!", user = A)
 			return
 
 		A.setup_for_malf()
@@ -101,4 +99,3 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 	if (newname)
 		player.fully_replace_character_name(newname)
 	if(player.mind) player.mind.name = player.name
-

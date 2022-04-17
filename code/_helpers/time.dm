@@ -77,33 +77,6 @@
 	return jointext(result, ", ")
 
 
-/proc/get_game_time()
-	var/static/time_offset = 0
-	var/static/last_time = 0
-	var/static/last_usage = 0
-
-	var/wtime = world.time
-	var/wusage = world.tick_usage * 0.01
-
-	if(last_time < wtime && last_usage > 1)
-		time_offset += last_usage - 1
-
-	last_time = wtime
-	last_usage = wusage
-
-	return wtime + (time_offset + wusage) * world.tick_lag
-
-var/global/roundstart_hour
-var/global/station_date = ""
-var/global/next_station_date_change = 1 DAY
-
-#define duration2stationtime(time) time2text(station_time_in_ticks + time, "hh:mm")
-#define worldtime2stationtime(time) time2text(roundstart_hour HOURS + time, "hh:mm")
-#define round_duration_in_ticks (round_start_time ? world.time - round_start_time : 0)
-#define station_time_in_ticks (roundstart_hour HOURS + round_duration_in_ticks)
-
-#define CURRENT_STATION_TIME time2text(station_time_in_ticks, "hh:mm")
-
 /proc/stationdate2text()
 	var/update_time = FALSE
 	if(station_time_in_ticks > next_station_date_change)
@@ -114,9 +87,6 @@ var/global/next_station_date_change = 1 DAY
 		var/timeofday = world.timeofday + extra_days
 		station_date = "[GLOB.using_map.game_year]-[time2text(timeofday, "MM-DD")]"
 	return station_date
-
-/proc/time_stamp()
-	return time2text(station_time_in_ticks, "hh:mm:ss")
 
 /* Returns 1 if it is the selected month and day */
 /proc/isDay(var/month, var/day)

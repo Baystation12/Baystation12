@@ -184,7 +184,6 @@
 		if(isliving(AM))
 			var/mob/living/L = AM
 			var/injection_status = L.can_inject(null, BP_CHEST)
-			log_world("Injection status? [injection_status]")
 			var/injection_delay = 3 SECONDS
 			if(injection_status == INJECTION_PORT)
 				injection_delay += INJECTION_PORT_DELAY

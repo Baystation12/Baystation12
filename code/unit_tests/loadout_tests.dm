@@ -7,13 +7,13 @@
 		var/datum/gear/G = gear_datums[gear_name]
 
 		if(!G.display_name)
-			log_unit_test("[G]: Missing display name.")
+			LOG_UNIT_TEST("[G]: Missing display name.")
 			failed = 1
 		else if(isnull(G.cost) || G.cost < 0)
-			log_unit_test("[G]: Invalid cost.")
+			LOG_UNIT_TEST("[G]: Invalid cost.")
 			failed = 1
 		else if(!G.path)
-			log_unit_test("[G]: Missing path definition.")
+			LOG_UNIT_TEST("[G]: Missing path definition.")
 			failed = 1
 
 	if(failed)
@@ -39,7 +39,7 @@
 					var/path_type = p.valid_paths[path_name]
 					if(!type_has_valid_icon_state(path_type))
 						var/atom/A = path_type
-						log_unit_test("[G] - [path_type] ('[path_name]'): Did not find a gear_tweak's icon_state '[initial(A.icon_state)]' in the icon '[initial(A.icon)]'.")
+						LOG_UNIT_TEST("[G] - [path_type] ('[path_name]'): Did not find a gear_tweak's icon_state '[initial(A.icon_state)]' in the icon '[initial(A.icon)]'.")
 						failed = TRUE
 		else
 			if(!type_has_valid_icon_state(G.path))
@@ -47,11 +47,11 @@
 				if(ispath(G.path, /obj))
 					O = new G.path()
 					if(!(O.icon_state in icon_states(O.icon)))
-						log_unit_test("[G] - [G.path]: Did not find the icon state '[O.icon_state]' in the icon '[O.icon]'.")
+						LOG_UNIT_TEST("[G] - [G.path]: Did not find the icon state '[O.icon_state]' in the icon '[O.icon]'.")
 						failed = TRUE
 					qdel(O)
 				else
-					log_unit_test("[G] - [G.path]: Did not find the icon state '[initial(O.icon_state)]' in the icon '[initial(O.icon)]'.")
+					LOG_UNIT_TEST("[G] - [G.path]: Did not find the icon state '[initial(O.icon_state)]' in the icon '[initial(O.icon)]'.")
 					failed = TRUE
 
 	if(failed)
@@ -71,7 +71,7 @@
 			for(var/path_name in p.valid_paths)
 				var/path_type = p.valid_paths[path_name]
 				if(!ispath(path_type, G.path))
-					log_unit_test("[G] - [path_type] ('[path_name]'): Was not a path of [G.path].")
+					LOG_UNIT_TEST("[G] - [path_type] ('[path_name]'): Was not a path of [G.path].")
 					failed++
 
 	if(failed)

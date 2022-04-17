@@ -54,8 +54,7 @@
 	if(!research)
 		if(!errored)
 			errored = 1
-			error("malf_process() called on AI without research datum. Report this.")
-			message_admins("ERROR: malf_process() called on AI without research datum. If admin modified one of the AI's vars revert the change and don't modify variables directly, instead use ProcCall or admin panels.")
+			log_warning("[src] called malf_process without a research datum.", user = src)
 			spawn(1200)
 				errored = 0
 		return

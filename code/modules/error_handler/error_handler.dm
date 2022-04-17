@@ -5,7 +5,7 @@ GLOBAL_VAR_INIT(actual_error_file_line, new/regex("^%% (.*?),(.*?) %% "))
 #ifdef DEBUG
 /world/Error(exception/E)
 	if(!istype(E)) //Something threw an unusual exception
-		log_world("\[[time_stamp()]] Uncaught exception: [E]")
+		log_error("Uncaught exception: [E]")
 		return ..()
 
 	var/static/list/error_last_seen = list()

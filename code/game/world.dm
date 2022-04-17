@@ -66,6 +66,7 @@
 	world.update_hub_visibility(config.hub_visible)
 #endif
 
+
 /world/New()
 	var/debug_server = world.GetConfig("env", "AUXTOOLS_DEBUG_DLL")
 	if (debug_server)
@@ -73,21 +74,24 @@
 		enable_debugging()
 	name = "[config.server_name] - [GLOB.using_map.station_name]"
 	if(byond_version < RECOMMENDED_VERSION)
-		to_world_log("Your server's byond version does not meet the recommended requirements for this server. Please update BYOND")
+		LOG_WARNING("Your server's byond version does not meet the recommended requirements for this server. Please update BYOND")
 	callHook("startup")
 	..()
 
 #ifdef UNIT_TEST
-	log_unit_test("Unit Tests Enabled. This will destroy the world when testing is complete.")
+	LOG_UNIT_TEST("Unit Tests Enabled. This will destroy the world when testing is complete.")
 	load_unit_test_changes()
 #endif
 	Master.Initialize(10, FALSE)
+	return ..()
 
 
 /world/Del()
 	var/debug_server = world.GetConfig("env", "AUXTOOLS_DEBUG_DLL")
 	if (debug_server)
 		call(debug_server, "auxtools_shutdown")()
+	LOG_CRITICAL("Halted Game [game_id].")
+	__log_round("Halted Game [game_id].")
 	callHook("shutdown")
 	return ..()
 

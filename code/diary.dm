@@ -43,7 +43,7 @@
 //#define __LOG_LEVEL_ERROR
 //#define __LOG_LEVEL_WARNING
 //#define __LOG_LEVEL_DEBUG
-#define __LOG_LEVEL_GAME
+#define __LOG_LEVEL_WARNING
 
 
 // == Configuration Above, Dragons Below ==
@@ -113,7 +113,7 @@ var/global/const/__LOG_LEVEL = "silent"
 
 #define LOG_CRITICAL(TEXT_SOURCE_USER...) __log_day("Critical", TEXT_SOURCE_USER)
 
-#define TRACE_CRITICAL(TEXT_SOURCE_USER...) __trace_day("Critical", __FILE__, __SPAN__, TEXT_SOURCE_USER)
+#define TRACE_CRITICAL(TEXT_SOURCE_USER...) __trace_day("Critical", __FILE__, __LINE__, TEXT_SOURCE_USER)
 
 #else
 
@@ -128,7 +128,7 @@ var/global/const/__LOG_LEVEL = "silent"
 
 #define LOG_ERROR(TEXT_SOURCE_USER...) __log_day("Error", TEXT_SOURCE_USER)
 
-#define TRACE_ERROR(TEXT_SOURCE_USER...) __trace_day("Error", __FILE__, __SPAN__, TEXT_SOURCE_USER)
+#define TRACE_ERROR(TEXT_SOURCE_USER...) __trace_day("Error", __FILE__, __LINE__, TEXT_SOURCE_USER)
 
 #else
 
@@ -143,7 +143,7 @@ var/global/const/__LOG_LEVEL = "silent"
 
 #define LOG_WARNING(TEXT_SOURCE_USER...) __log_day("Warning", TEXT_SOURCE_USER)
 
-#define TRACE_WARNING(TEXT_SOURCE_USER...) __trace_day("Warning", __FILE__, __SPAN__, TEXT_SOURCE_USER)
+#define TRACE_WARNING(TEXT_SOURCE_USER...) __trace_day("Warning", __FILE__, __LINE__, TEXT_SOURCE_USER)
 
 #else
 
@@ -158,7 +158,7 @@ var/global/const/__LOG_LEVEL = "silent"
 
 #define LOG_DEBUG(TEXT_SOURCE_USER...) __log_day("Debug", TEXT_SOURCE_USER)
 
-#define TRACE_DEBUG(TEXT_SOURCE_USER...) __trace_day("Debug", __FILE__, __SPAN__, TEXT_SOURCE_USER)
+#define TRACE_DEBUG(TEXT_SOURCE_USER...) __trace_day("Debug", __FILE__, __LINE__, TEXT_SOURCE_USER)
 
 #else
 
@@ -173,7 +173,7 @@ var/global/const/__LOG_LEVEL = "silent"
 
 #define LOG_GAME(TEXT_SOURCE_USER...) __log_day("Game", TEXT_SOURCE_USER)
 
-#define TRACE_GAME(TEXT_SOURCE_USER...) __trace_day("Game", __FILE__, __SPAN__, TEXT_SOURCE_USER)
+#define TRACE_GAME(TEXT_SOURCE_USER...) __trace_day("Game", __FILE__, __LINE__, TEXT_SOURCE_USER)
 
 #else
 
@@ -186,15 +186,15 @@ var/global/const/__LOG_LEVEL = "silent"
 
 #if defined(UNIT_TEST)
 
-#define LOG_TEST(TEXT_SOURCE_USER...) __log_day("Unit Test", TEXT_SOURCE_USER)
+#define LOG_UNIT_TEST(TEXT_SOURCE_USER...) __log_day("Unit Test", TEXT_SOURCE_USER)
 
-#define TRACE_TEST(TEXT_SOURCE_USER...) __trace_day("Unit Test", __FILE__, __SPAN__, TEXT_SOURCE_USER)
+#define TRACE_UNIT_TEST(TEXT_SOURCE_USER...) __trace_day("Unit Test", __FILE__, __LINE__, TEXT_SOURCE_USER)
 
 #else
 
-#define LOG_TEST(UNUSED...)
+#define LOG_UNIT_TEST(UNUSED...)
 
-#define TRACE_TEST(UNUSED...)
+#define TRACE_UNIT_TEST(UNUSED...)
 
 #endif
 
@@ -208,7 +208,17 @@ var/global/const/__LOG_LEVEL = "silent"
 	to_target(file, "[CURRENT_STATION_TIME] # [text]")
 
 
-/proc/__log_notify(preference, text)
+/proc/__log_notify(preference, text, atom/atom, mob/mob)
+	if (atom || mob)
+		var/list/build = list("(")
+		if (atom)
+			build += "<a href=\"?_src_=holder;admin_goto=1;X=[atom.x];Y=[atom.y];Z=[atom.z]\">LOC</a>"
+		if (mob)
+			if (atom)
+				build += "|"
+			build += "<a href=\"?_src_=holder;admin_follow=\ref[mob]\">MOB</a>"
+		build += ")"
+		text = "[jointext(build, null)] [text]"
 	for (var/client/client as anything in GLOB.admins)
 		if (client.get_preference_value(preference) != GLOB.PREF_SHOW)
 			continue
@@ -219,82 +229,98 @@ var/global/const/__LOG_LEVEL = "silent"
 	LOG_CRITICAL(text, source, user)
 	__log_notify(
 		/datum/client_preference/staff/show_log_critical,
-		SPAN_LOG_CRITICAL("Critical: [text]")
+		SPAN_LOG_CRITICAL("Critical: [text]"),
+		source,
+		user
 	)
 
 /proc/__trace_critical(file, line, text, source, user)
 	__log_critical("[file]L[line] [text]", source, user)
 
-#define log_critical(TEXT_SOURCE_USER...) __log_critical(TEXT_SOURCE_USER...)
+#define log_critical(TEXT_SOURCE_USER...) __log_critical(TEXT_SOURCE_USER)
 
-#define trace_critical(TEXT_SOURCE_USER...) __trace_critical(__FILE__, __SPAN__, TEXT_SOURCE_USER...)
+#define trace_critical(TEXT_SOURCE_USER...) __trace_critical(__FILE__, __LINE__, TEXT_SOURCE_USER)
 
 
 /proc/__log_error(text, source, user)
 	LOG_ERROR(text, source, user)
 	__log_notify(
 		/datum/client_preference/staff/show_log_error,
-		SPAN_LOG_ERROR("Error: [text]")
+		SPAN_LOG_ERROR("Error: [text]"),
+		source,
+		user
 	)
 
 /proc/__trace_error(file, line, text, source, user)
 	__log_error("[file]L[line] [text]", source, user)
 
-#define log_error(TEXT_SOURCE_USER...) __log_error(TEXT_SOURCE_USER...)
+#define log_error(TEXT_SOURCE_USER...) __log_error(TEXT_SOURCE_USER)
 
-#define trace_error(TEXT_SOURCE_USER...) __trace_error(__FILE__, __SPAN__, TEXT_SOURCE_USER...)
+#define trace_error(TEXT_SOURCE_USER...) __trace_error(__FILE__, __LINE__, TEXT_SOURCE_USER)
 
 
 /proc/__log_warning(text, source, user)
 	LOG_WARNING(text, source, user)
 	__log_notify(
 		/datum/client_preference/staff/show_log_warning,
-		SPAN_LOG_WARNING("Warning: [text]")
+		SPAN_LOG_WARNING("Warning: [text]"),
+		source,
+		user
 	)
 
 /proc/__trace_warning(file, line, text, source, user)
 	__log_warning("[file]L[line] [text]", source, user)
 
-#define log_warning(TEXT_SOURCE_USER...) __log_warning(TEXT_SOURCE_USER...)
+#define log_warning(TEXT_SOURCE_USER...) __log_warning(TEXT_SOURCE_USER)
 
-#define trace_warning(TEXT_SOURCE_USER...) __trace_warning(__FILE__, __SPAN__, TEXT_SOURCE_USER...)
+#define trace_warning(TEXT_SOURCE_USER...) __trace_warning(__FILE__, __LINE__, TEXT_SOURCE_USER)
 
 
 /proc/__log_debug(text, source, user)
 	LOG_DEBUG(text, source, user)
 	__log_notify(
 		/datum/client_preference/staff/show_log_debug,
-		SPAN_LOG_DEBUG("Debug: [text]")
+		SPAN_LOG_DEBUG("Debug: [text]"),
+		source,
+		user
 	)
 
 /proc/__trace_debug(file, line, text, source, user)
 	__log_debug("[file]L[line] [text]", source, user)
 
-#define log_debug(TEXT_SOURCE_USER...) __log_debug(TEXT_SOURCE_USER...)
+#define log_debug(TEXT_SOURCE_USER...) __log_debug(TEXT_SOURCE_USER)
 
-#define trace_debug(TEXT_SOURCE_USER...) __trace_debug(__FILE__, __SPAN__, TEXT_SOURCE_USER...)
+#define trace_debug(TEXT_SOURCE_USER...) __trace_debug(__FILE__, __LINE__, TEXT_SOURCE_USER)
 
 
-/proc/log_game(text)
+/proc/log_game(text, preference, atom, mob)
+	LOG_GAME(text, atom, mob)
 	__log_round(text)
-	LOG_GAME(text)
+	if (!preference)
+		return
+	__log_notify(preference, text, atom, mob)
 
-#define log_admin(TEXT) log_game("Admin: [(TEXT)]")
+#define log_admin(TEXT, TURF_MOB...) log_game("Admin: [(TEXT)]", /datum/client_preference/staff/show_log_admin, TURF_MOB)
 
-#define log_attack(TEXT) log_game("Attack: [(TEXT)]")
+#define log_attack(TEXT, TURF_MOB...) log_game("Attack: [(TEXT)]", /datum/client_preference/staff/show_log_attack, TURF_MOB)
+
+/proc/log_say(text)
+	log_game("Say: [(text)]")
+
+/proc/log_whisper(text)
+	log_game("Whisper: [(text)]")
+
+/proc/log_emote(text)
+	log_game("Emote: [(text)]")
+
+/proc/log_ooc(text)
+	log_game("OOC: [(text)]")
+
+/proc/log_aooc(text)
+	log_game("AOOC: [(text)]")
 
 
 var/global/game_id = copytext(rgb(rand(0, 255), rand(0, 255), rand(0, 255), rand(0, 255)), 2)
-
-/world/New()
-	LOG_CRITICAL("Booted Game [game_id].")
-	__log_round("Booted Game [game_id].")
-	..()
-
-/world/Del()
-	LOG_CRITICAL("Halted Game [game_id].")
-	__log_round("Halted Game [game_id].")
-	..()
 
 
 #if defined(__LOG_LEVEL_GAME)

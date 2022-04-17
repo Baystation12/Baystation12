@@ -23,7 +23,7 @@
 		var/decl/cardborg_appearance/ca = ca_type
 		var/icon_state = initial(ca.icon_state)
 		if(!(icon_state in existing_icon_states))
-			log_unit_test("Icon state [icon_state] is missing.")
+			LOG_UNIT_TEST("Icon state [icon_state] is missing.")
 			failed = TRUE
 
 	if(failed)

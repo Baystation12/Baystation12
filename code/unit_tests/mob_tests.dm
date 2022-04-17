@@ -499,7 +499,7 @@ var/global/default_mobloc = null
 		var/modname = lowertext(SSrobots.all_module_names[i])
 		var/bad_msg = "[ascii_red]--------------- [modname]"
 		if(!(modname in valid_states))
-			log_unit_test("[bad_msg] does not contain a valid icon state in [icon_file][ascii_reset]")
+			LOG_UNIT_TEST("[bad_msg] does not contain a valid icon state in [icon_file][ascii_reset]")
 			failed=1
 
 	if(failed)
@@ -523,11 +523,11 @@ var/global/default_mobloc = null
 		var/datum/species/S = all_species[species_name]
 		if(S.base_skin_colours)
 			if(!(S.appearance_flags & HAS_BASE_SKIN_COLOURS))
-				log_unit_test("[S.name] has a skin colour list but no HAS_BASE_SKIN_COLOURS flag.")
+				LOG_UNIT_TEST("[S.name] has a skin colour list but no HAS_BASE_SKIN_COLOURS flag.")
 				failcount++
 				continue
 			if(!(S.base_skin_colours.len >= 2))
-				log_unit_test("[S.name] needs at least two items in the base_skin_colour list.")
+				LOG_UNIT_TEST("[S.name] needs at least two items in the base_skin_colour list.")
 				failcount++
 				continue
 			var/to_fail = FALSE
@@ -545,12 +545,12 @@ var/global/default_mobloc = null
 							to_fail = TRUE
 							log_debug("[S.name] has missing icon: [icon_name][gen][S.base_skin_colours[base]] for base [base] and limb tag [tag].")
 			if(to_fail)
-				log_unit_test("[S.name] is missing one or more base icons.")
+				LOG_UNIT_TEST("[S.name] is missing one or more base icons.")
 				failcount++
 				continue
 
 		else if(S.appearance_flags & HAS_BASE_SKIN_COLOURS)
-			log_unit_test("[S.name] has a HAS_BASE_SKIN_COLOURS flag but no skin colour list.")
+			LOG_UNIT_TEST("[S.name] has a HAS_BASE_SKIN_COLOURS flag but no skin colour list.")
 			failcount++
 			continue
 

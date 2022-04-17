@@ -13,6 +13,8 @@ var/global/datum/global_init/init = new
 	Pre-map initialization stuff should go here.
 */
 /datum/global_init/New()
+	LOG_CRITICAL("Booted Game [game_id].")
+	__log_round("Booted Game [game_id].")
 	config = new
 	callHook("global_init")
 	qdel(src) //we're done

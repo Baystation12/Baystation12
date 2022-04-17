@@ -11,6 +11,7 @@
 // END_PREFERENCES
 // BEGIN_INCLUDE
 #include "code\_macros.dm"
+#include "code\_time.dm"
 #include "code\_version.dm"
 #include "code\diary.dm"
 #include "code\hub.dm"

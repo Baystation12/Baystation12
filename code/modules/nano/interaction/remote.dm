@@ -27,7 +27,7 @@
 		return STATUS_CLOSE
 
 	if(src_object != remote_target)
-		error("remote - Unexpected src_object: Expected '[remote_target]'/[remote_target.type], was '[src_object]'/[src_object.type]")
+		log_warning("remote - Unexpected src_object: Expected '[remote_target]'/[remote_target.type], was '[src_object]'/[src_object.type]")
 
 	// This checks if src_object is powered, etc.
 	// The interactive state is otherwise simplistic and only returns STATUS_INTERACTIVE and never checks distances, etc.

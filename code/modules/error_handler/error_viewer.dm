@@ -128,7 +128,7 @@ GLOBAL_DATUM(error_cache, /datum/error_viewer/error_cache)
 	//  from the same source hasn't been shown too recently
 	if (error_source.next_message_at <= world.time)
 		var/const/viewtext = "\[view]" // Nesting these in other brackets went poorly
-		log_runtime("Runtime in <b>[e.file]</b>, line <b>[e.line]</b>: <b>[html_encode(e.name)]</b> [error_entry.make_link(viewtext)]")
+		trace_error("<b>[html_encode(e.name)]</b> [error_entry.make_link(viewtext)]")
 		var/err_msg_delay
 		if(config)
 			err_msg_delay = config.error_msg_delay
@@ -202,10 +202,10 @@ GLOBAL_DATUM(error_cache, /datum/error_viewer/error_cache)
 	if (usr_ref)
 		html += "<br><b>usr</b>: <a href='?_src_=vars;Vars=[usr_ref]'>VV</a>"
 		html += " <a href='?_src_=holder;adminplayeropts=[usr_ref]'>PP</a>"
-		html += " <a href='?_src_=holder;adminplayerobservefollow=[usr_ref]'>Follow</a>"
+		html += " <a href='?_src_=holder;admin_follow=[usr_ref]'>Follow</a>"
 		if (istype(usr_loc))
 			html += "<br><b>usr.loc</b>: <a href='?_src_=vars;Vars=\ref[usr_loc]'>VV</a>"
-			html += " <a href='?_src_=holder;adminplayerobservecoodjump=1;X=[usr_loc.x];Y=[usr_loc.y];Z=[usr_loc.z]'>JMP</a>"
+			html += " <a href='?_src_=holder;admin_goto=1;X=[usr_loc.x];Y=[usr_loc.y];Z=[usr_loc.z]'>JMP</a>"
 
 	browse_to(user, html)
 

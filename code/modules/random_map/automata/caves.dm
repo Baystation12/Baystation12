@@ -83,7 +83,7 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 			if (CELL_ALIVE(map[tmp_cell]))
 				ore_turfs += tmp_cell
 
-	game_log("ASGEN", "Found [ore_turfs.len] ore turfs.")
+	log_debug("ASGEN", "Found [ore_turfs.len] ore turfs.")
 	var/ore_count = round(map.len/20)
 	var/door_count = 0
 	var/empty_count = 0
@@ -102,8 +102,8 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 			empty_count += 1
 		ore_count--
 
-	game_log("ASGEN", "Set [door_count] turfs to random minerals.")
-	game_log("ASGEN", "Set [empty_count] turfs to high-chance random minerals.")
+	log_debug("ASGEN", "Set [door_count] turfs to random minerals.")
+	log_debug("ASGEN", "Set [empty_count] turfs to high-chance random minerals.")
 	return 1
 
 /datum/random_map/automata/cave_system/apply_to_map()
@@ -144,4 +144,4 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 		get_additional_spawns(map[tmp_cell], T)
 		CHECK_TICK
 
-	game_log("ASGEN", "Applied [num_applied] turfs.")
+	log_debug("ASGEN", "Applied [num_applied] turfs.")

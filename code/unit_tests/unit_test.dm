@@ -62,25 +62,25 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	var/space_landmark
 
 /datum/unit_test/proc/log_debug(var/message)
-	log_unit_test("[ascii_yellow]---  DEBUG  --- \[[name]\]: [message][ascii_reset]")
+	LOG_UNIT_TEST("[ascii_yellow]---  DEBUG  --- \[[name]\]: [message][ascii_reset]")
 
 /datum/unit_test/proc/log_bad(var/message)
-	log_unit_test("[ascii_red]\[[name]\]: [message][ascii_reset]")
+	LOG_UNIT_TEST("[ascii_red]\[[name]\]: [message][ascii_reset]")
 
 /datum/unit_test/proc/fail(var/message)
 	all_unit_tests_passed = 0
 	failed_unit_tests++
 	reported = 1
-	log_unit_test("[ascii_red]!!! FAILURE !!! \[[name]\]: [message][ascii_reset]")
+	LOG_UNIT_TEST("[ascii_red]!!! FAILURE !!! \[[name]\]: [message][ascii_reset]")
 
 /datum/unit_test/proc/pass(var/message)
 	reported = 1
-	log_unit_test("[ascii_green]*** SUCCESS *** \[[name]\]: [message][ascii_reset]")
+	LOG_UNIT_TEST("[ascii_green]*** SUCCESS *** \[[name]\]: [message][ascii_reset]")
 
 /datum/unit_test/proc/skip(var/message)
 	skipped_unit_tests++
 	reported = 1
-	log_unit_test("[ascii_yellow]--- SKIPPED --- \[[name]\]: [message][ascii_reset]")
+	LOG_UNIT_TEST("[ascii_yellow]--- SKIPPED --- \[[name]\]: [message][ascii_reset]")
 
 /datum/unit_test/proc/start_test()
 	fail("No test proc - [type]")
@@ -113,7 +113,7 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 /*
 	//This takes about 60 seconds to run when unit testing and is only used for the ZAS vacume check on The Asteroid.
 	if(config.generate_map != 1)
-		log_unit_test("Overiding Configuration option for Asteroid Generation to ENABLED")
+		LOG_UNIT_TEST("Overiding Configuration option for Asteroid Generation to ENABLED")
 		config.generate_map = 1	// The default map requires it, the example config doesn't have this enabled.
  */
 
@@ -153,9 +153,9 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	if(skipped_unit_tests)
 		skipped_message = "| \[[skipped_unit_tests]\\[total_unit_tests]\] Unit Tests Skipped "
 	if(all_unit_tests_passed)
-		log_unit_test("[ascii_green]**** All Unit Tests Passed \[[total_unit_tests]\] [skipped_message]****[ascii_reset]")
+		LOG_UNIT_TEST("[ascii_green]**** All Unit Tests Passed \[[total_unit_tests]\] [skipped_message]****[ascii_reset]")
 	else
-		log_unit_test("[ascii_red]**** \[[failed_unit_tests]\\[total_unit_tests]\] Unit Tests Failed [skipped_message]****[ascii_reset]")
+		LOG_UNIT_TEST("[ascii_red]**** \[[failed_unit_tests]\\[total_unit_tests]\] Unit Tests Failed [skipped_message]****[ascii_reset]")
 
 /datum/admins/proc/run_unit_test(var/datum/unit_test/unit_test_type in get_test_datums())
 	set name = "Run Unit Test"
