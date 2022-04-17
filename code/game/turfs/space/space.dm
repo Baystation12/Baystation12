@@ -74,7 +74,7 @@
 			ReplaceWithLattice(R.material.name)
 		return
 
-	if (istype(C, /obj/item/stack/tile/floor))
+	if (istype(C, /obj/item/stack/tile))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
 			var/obj/item/stack/tile/floor/S = C
@@ -82,7 +82,7 @@
 				return
 			qdel(L)
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			ChangeTurf(/turf/simulated/floor/airless, keep_air = TRUE)
+			ChangeTurf(/turf/simulated/floor/plating, keep_air = TRUE)
 			return
 		else
 			to_chat(user, SPAN_WARNING("The plating is going to need some support."))
@@ -108,9 +108,6 @@
 	if(A && A.loc == src)
 		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE + 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE + 1))
 			A.touch_map_edge()
-
-/turf/space/ChangeTurf(turf/N, tell_universe = TRUE, force_lighting_update = FALSE, keep_air = FALSE)
-	return ..(N, tell_universe, TRUE, keep_air)
 
 /turf/space/is_open()
 	return TRUE
