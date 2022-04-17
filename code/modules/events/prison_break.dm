@@ -29,7 +29,7 @@
 
 	if(areas && areas.len > 0)
 		var/my_department = "[location_name()] Firewall Subroutines"
-		var/rc_message = "An unknown malicious program has been detected in the [english_list(areaName)] lighting and airlock control systems at [stationtime2text()]. Systems will be fully compromised within approximately three minutes. Direct intervention is required immediately.<br>"
+		var/rc_message = "An unknown malicious program has been detected in the [english_list(areaName)] lighting and airlock control systems at [CURRENT_STATION_TIME]. Systems will be fully compromised within approximately three minutes. Direct intervention is required immediately.<br>"
 		var/obj/machinery/message_server/MS = get_message_server()
 		if(MS)
 			MS.send_rc_message("Engineering", my_department, rc_message, "", "", 2)

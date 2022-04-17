@@ -159,7 +159,7 @@
 									<br>
 									[html_crew_manifest()]
 									"}
-					if(!computer.print_paper(contents, "crew manifest ([stationtime2text()])"))
+					if(!computer.print_paper(contents, "crew manifest ([CURRENT_STATION_TIME])"))
 						to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
 						return
 		if("eject")

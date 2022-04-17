@@ -72,7 +72,7 @@
 		R.info += "<i>Account number:</i> [M.account_number]<br>"
 		R.info += "<i>Account pin:</i> [M.remote_access_pin]<br>"
 		R.info += "<i>Starting balance:</i> [GLOB.using_map.local_currency_name_short][M.money]<br>"
-		R.info += "<i>Date and time:</i> [stationtime2text()], [stationdate2text()]<br><br>"
+		R.info += "<i>Date and time:</i> [CURRENT_STATION_TIME], [stationdate2text()]<br><br>"
 		R.info += "<i>Creation terminal ID:</i> [source_db.machine_id]<br>"
 		R.info += "<i>Authorised officer overseeing creation:</i> [source_db.held_card.registered_name]<br>"
 

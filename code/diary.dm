@@ -1,40 +1,52 @@
-/**
-* __log_file_day is written to according to logging level to data/logs/yyyy/mm/dd.txt in UTC at boot time
-* __log_file_round writes only game logs to data/logs/yyyy/mm/dd/hh-mm - roundID.txt in UTC at boot time
-* It is written to by using the LOG_* and TRACE_* macros:
-* LOG/TRACE_CRITICAL
-* LOG/TRACE_ERROR
-* LOG/TRACE_WARNING
-* LOG/TRACE_INFO
-* LOG/TRACE_DEBUG
-* A LOG_* writes the message passed to it.
-* A TRACE_* also includes the file and line it was called on.
+/* == Logging ==
+* Two general varieties of logging macro exist - log and trace.
+* Trace automatically includes the file path and line in the message.
+*
+* logging macros are all used like THE_MACRO("text", source?, user?).
+* For example:
+*   LOG_CRITICAL("Starting the server!") => "15-48-54z Critical # Starting the server!"
+*   TRACE_DEBUG("User found!", user=someguy) => "15-48-54z Debug (usr:Some Guy) # code/myfile.dmL13 User found!"
+*
+* UPPER_CASE logs directly to the DAY log.
+*   LOG_CRITICAL, TRACE_CRITICAL -- For Startup, Shutdown, and intentional Crash events.
+*   LOG_ERROR, TRACE_ERROR -- For when something is wrong and has broken.
+*   LOG_WARNING, TRACE_WARNING -- For when something was wrong but fixable.
+*   LOG_DEBUG, TRACE_DEBUG -- For development and soft bug hunting.
+*   LOG_GAME, TRACE_GAME -- The game log, as seen in the client log panel.
+*   LOG_TEST, TRACE_TEST -- Only enabled during unit testing.
+*
+* Some lower_case logs to the DAY log and also to connected, opted-in users.
+*   log_critical, trace_critical
+*   log_error, trace_error
+*   log_warning, trace_warning
+*   log_debug, trace_debug
+*
+* Other lower_case logs ONLY to the ROUND log.
+*   log_game -- catch-all for writing to the round log.
+*
+* And yet other lower_case logs to the ROUND log and also to connected, opted-in users.
+*   log_admin -- log_game with "Admin: " prefix.
+*   log_attack -- log_game with "Attack: " prefix.
+*   log_ooc -- log_game with "OOC: " prefix.
+*   log_looc -- log_game with "LOOC: " prefix.
+*   loc_aooc -- log_game with "AOOC: " prefix.
 */
 
 
-/// Write only critical logs. Critical logs are for Startup, Shutdown, and Fatal (intentional crash) events.
+/* == Setting A Log Level ==
+* Pick ONE (or no) __LOG_LEVEL_* below to compile with.
+* This sets the limit for what will be written to the day log.
+* Each level INCLUDES the levels above it.
+* __LOG_LEVEL_WARNING is recommended for live use.
+*/
 //#define __LOG_LEVEL_CRITICAL
-
-/// Write __LOG_LEVEL_CRITICAL plus error logs. Error logs are for when something is wrong and has broken.
 //#define __LOG_LEVEL_ERROR
-
-/// Write __LOG_LEVEL_ERROR plus warning logs. Warning logs are for when something was wrong but fixable. Recommended level.
 //#define __LOG_LEVEL_WARNING
-
-/// Write __LOG_LEVEL_WARNING plus debug logs. Debug logs are for development and soft bug hunting.
 //#define __LOG_LEVEL_DEBUG
-
-/// Write LOG_LEVEL_WARNING plus game logs. Game logs will clutter the diary.
 #define __LOG_LEVEL_GAME
 
 
-// -- Configuration Above, Dragons Below --
-
-var/global/__log_file_day
-
-var/global/__log_file_round
-
-var/global/game_id = copytext(rgb(rand(0, 255), rand(0, 255), rand(0, 255), rand(0, 255)), 2)
+// == Configuration Above, Dragons Below ==
 
 
 #if defined(__LOG_LEVEL_GAME)
@@ -76,9 +88,16 @@ var/global/const/__LOG_LEVEL = "silent"
 
 #if defined(__LOG_LEVEL_CRITICAL)
 
-/proc/__LOG(level, message, source, user)
-	if (!message)
+/proc/__log_day(level, text, source, user)
+	if (!text)
 		return
+	var/static/file
+	if (!file)
+		file = file("data/log2/[time2text(boot_time, "YYYY/MM/DD", -world.timezone)].txt")
+		if (config.log_uncaught_runtimes)
+			world.log = file
+		if (fexists(file))
+			to_target(file, "\n\n")
 	var/ident
 	if (source)
 		if (user)
@@ -87,14 +106,14 @@ var/global/const/__LOG_LEVEL = "silent"
 			ident = "(src:[source]) "
 	else if (user)
 		ident = "(usr:[user]) "
-	to_target(__log_file_day, "[time2text(world.timeofday, "hh-mm-ss", -world.timezone)]z [level] [ident]# [message]")
+	to_target(file, "[time2text(world.timeofday, "hh-mm-ss", -world.timezone)]z [level] [ident]# [text]")
 
-/proc/__TRACE(level, file, line, message, source, user)
-	__LOG(level, "[file]L[line] [message]", source, user)
+/proc/__trace_day(level, file, line, text, source, user)
+	__log_day(level, "[file]L[line] [text]", source, user)
 
-#define LOG_CRITICAL(MSG_SRC_USR...) __LOG("Critical", MSG_SRC_USR)
+#define LOG_CRITICAL(TEXT_SOURCE_USER...) __log_day("Critical", TEXT_SOURCE_USER)
 
-#define TRACE_CRITICAL(MSG_SRC_USR...) __TRACE("Critical", __FILE__, __LINE__, MSG_SRC_USR)
+#define TRACE_CRITICAL(TEXT_SOURCE_USER...) __trace_day("Critical", __FILE__, __SPAN__, TEXT_SOURCE_USER)
 
 #else
 
@@ -107,9 +126,9 @@ var/global/const/__LOG_LEVEL = "silent"
 
 #if defined(__LOG_LEVEL_ERROR)
 
-#define LOG_ERROR(MSG_SRC_USR...) __LOG("Error", MSG_SRC_USR)
+#define LOG_ERROR(TEXT_SOURCE_USER...) __log_day("Error", TEXT_SOURCE_USER)
 
-#define TRACE_ERROR(MSG_SRC_USR...) __TRACE("Error", __FILE__, __LINE__, MSG_SRC_USR)
+#define TRACE_ERROR(TEXT_SOURCE_USER...) __trace_day("Error", __FILE__, __SPAN__, TEXT_SOURCE_USER)
 
 #else
 
@@ -122,9 +141,9 @@ var/global/const/__LOG_LEVEL = "silent"
 
 #if defined(__LOG_LEVEL_WARNING)
 
-#define LOG_WARNING(MSG_SRC_USR...) __LOG("Warning", MSG_SRC_USR)
+#define LOG_WARNING(TEXT_SOURCE_USER...) __log_day("Warning", TEXT_SOURCE_USER)
 
-#define TRACE_WARNING(MSG_SRC_USR...) __TRACE("Warning", __FILE__, __LINE__, MSG_SRC_USR)
+#define TRACE_WARNING(TEXT_SOURCE_USER...) __trace_day("Warning", __FILE__, __SPAN__, TEXT_SOURCE_USER)
 
 #else
 
@@ -137,9 +156,9 @@ var/global/const/__LOG_LEVEL = "silent"
 
 #if defined(__LOG_LEVEL_DEBUG)
 
-#define LOG_DEBUG(MSG_SRC_USR...) __LOG("Debug", MSG_SRC_USR)
+#define LOG_DEBUG(TEXT_SOURCE_USER...) __log_day("Debug", TEXT_SOURCE_USER)
 
-#define TRACE_DEBUG(MSG_SRC_USR...) __TRACE("Debug", __FILE__, __LINE__, MSG_SRC_USR)
+#define TRACE_DEBUG(TEXT_SOURCE_USER...) __trace_day("Debug", __FILE__, __SPAN__, TEXT_SOURCE_USER)
 
 #else
 
@@ -152,9 +171,9 @@ var/global/const/__LOG_LEVEL = "silent"
 
 #if defined(__LOG_LEVEL_GAME)
 
-#define LOG_GAME(MSG_SRC_USR...) __LOG("Game", MSG_SRC_USR)
+#define LOG_GAME(TEXT_SOURCE_USER...) __log_day("Game", TEXT_SOURCE_USER)
 
-#define TRACE_GAME(MSG_SRC_USR...) __TRACE("Game", __FILE__, __LINE__, MSG_SRC_USR)
+#define TRACE_GAME(TEXT_SOURCE_USER...) __trace_day("Game", __FILE__, __SPAN__, TEXT_SOURCE_USER)
 
 #else
 
@@ -165,25 +184,116 @@ var/global/const/__LOG_LEVEL = "silent"
 #endif
 
 
+#if defined(UNIT_TEST)
+
+#define LOG_TEST(TEXT_SOURCE_USER...) __log_day("Unit Test", TEXT_SOURCE_USER)
+
+#define TRACE_TEST(TEXT_SOURCE_USER...) __trace_day("Unit Test", __FILE__, __SPAN__, TEXT_SOURCE_USER)
+
+#else
+
+#define LOG_TEST(UNUSED...)
+
+#define TRACE_TEST(UNUSED...)
+
+#endif
+
+
+/proc/__log_round(text)
+	var/static/file
+	if (!file)
+		file = file("data/log2/[time2text(boot_time, "YYYY/MM/DD/hh-mm [game_id]", -world.timezone)].txt")
+	if (!text)
+		return
+	to_target(file, "[CURRENT_STATION_TIME] # [text]")
+
+
+/proc/__log_notify(preference, text)
+	for (var/client/client as anything in GLOB.admins)
+		if (client.get_preference_value(preference) != GLOB.PREF_SHOW)
+			continue
+		to_chat(client, text)
+
+
+/proc/__log_critical(text, source, user)
+	LOG_CRITICAL(text, source, user)
+	__log_notify(
+		/datum/client_preference/staff/show_log_critical,
+		SPAN_LOG_CRITICAL("Critical: [text]")
+	)
+
+/proc/__trace_critical(file, line, text, source, user)
+	__log_critical("[file]L[line] [text]", source, user)
+
+#define log_critical(TEXT_SOURCE_USER...) __log_critical(TEXT_SOURCE_USER...)
+
+#define trace_critical(TEXT_SOURCE_USER...) __trace_critical(__FILE__, __SPAN__, TEXT_SOURCE_USER...)
+
+
+/proc/__log_error(text, source, user)
+	LOG_ERROR(text, source, user)
+	__log_notify(
+		/datum/client_preference/staff/show_log_error,
+		SPAN_LOG_ERROR("Error: [text]")
+	)
+
+/proc/__trace_error(file, line, text, source, user)
+	__log_error("[file]L[line] [text]", source, user)
+
+#define log_error(TEXT_SOURCE_USER...) __log_error(TEXT_SOURCE_USER...)
+
+#define trace_error(TEXT_SOURCE_USER...) __trace_error(__FILE__, __SPAN__, TEXT_SOURCE_USER...)
+
+
+/proc/__log_warning(text, source, user)
+	LOG_WARNING(text, source, user)
+	__log_notify(
+		/datum/client_preference/staff/show_log_warning,
+		SPAN_LOG_WARNING("Warning: [text]")
+	)
+
+/proc/__trace_warning(file, line, text, source, user)
+	__log_warning("[file]L[line] [text]", source, user)
+
+#define log_warning(TEXT_SOURCE_USER...) __log_warning(TEXT_SOURCE_USER...)
+
+#define trace_warning(TEXT_SOURCE_USER...) __trace_warning(__FILE__, __SPAN__, TEXT_SOURCE_USER...)
+
+
+/proc/__log_debug(text, source, user)
+	LOG_DEBUG(text, source, user)
+	__log_notify(
+		/datum/client_preference/staff/show_log_debug,
+		SPAN_LOG_DEBUG("Debug: [text]")
+	)
+
+/proc/__trace_debug(file, line, text, source, user)
+	__log_debug("[file]L[line] [text]", source, user)
+
+#define log_debug(TEXT_SOURCE_USER...) __log_debug(TEXT_SOURCE_USER...)
+
+#define trace_debug(TEXT_SOURCE_USER...) __trace_debug(__FILE__, __SPAN__, TEXT_SOURCE_USER...)
+
+
+/proc/log_game(text)
+	__log_round(text)
+	LOG_GAME(text)
+
+#define log_admin(TEXT) log_game("Admin: [(TEXT)]")
+
+#define log_attack(TEXT) log_game("Attack: [(TEXT)]")
+
+
+var/global/game_id = copytext(rgb(rand(0, 255), rand(0, 255), rand(0, 255), rand(0, 255)), 2)
+
 /world/New()
-	var/boot_time = world.timeofday
-	var/year = time2text(boot_time, "YYYY", -world.timezone)
-	var/month = time2text(boot_time, "MM", -world.timezone)
-	var/day = time2text(boot_time, "DD", -world.timezone)
-	var/time = time2text(boot_time, "hh-mm", -world.timezone)
-	__log_file_round = file("data/log2/[year]/[month]/[day]/[time] [game_id].txt")
-	if (__LOG_LEVEL != "silent")
-		__log_file_day = file("data/log2/[year]/[month]/[day].txt")
-		if (config.log_uncaught_runtimes)
-			world.log = __log_file_day
-		if (fexists(__log_file_day))
-			to_target(__log_file_day, "\n\n")
-	LOG_CRITICAL("BOOTED [game_id]")
+	LOG_CRITICAL("Booted Game [game_id].")
+	__log_round("Booted Game [game_id].")
 	..()
 
-
 /world/Del()
-	LOG_CRITICAL("HALTED [game_id]")
+	LOG_CRITICAL("Halted Game [game_id].")
+	__log_round("Halted Game [game_id].")
 	..()
 
 

@@ -101,6 +101,11 @@ h1.alert, h2.alert		{color: #000080;}
 .mfauna					{color: #884422; font-weight: bold; font-size: 125%;}
 .antagdesc				{color: #ff0033; font-size: 125%}
 
+.log-critical { color: #d00000; font-weight: bold; font-size: 125%; }
+.log-error { color: #d00000; font-weight: bold; }
+.log-warning { color: #d03000; }
+.log-debug { color: #9000d0; }
+
 .reflex_shoot			{color: #000099; font-style: italic;}
 
 /* Languages */

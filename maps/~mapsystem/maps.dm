@@ -285,7 +285,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		if ("local_currency_name_short") local_currency_name_short = value
 		if ("game_year_offset") game_year = text2num(time2text(world.timeofday, "YYYY")) + text2num_or_default(value, DEFAULT_GAME_YEAR_OFFSET)
 		if ("min_offmap_players") min_offmap_players = text2num_or_default(value, min_offmap_players)
-		else log_misc("Unknown setting [name] in [filename].")
+		else log_warning("Unknown setting [name] in [filename].")
 
 /datum/map/proc/setup_map()
 	lobby_track = get_lobby_track()

@@ -150,7 +150,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 // Simple record to HTML (for paper purposes) conversion.
 // Not visually that nice, but it gets the work done, feel free to tweak it visually
 /proc/record_to_html(var/datum/computer_file/report/crew_record/CR, var/access)
-	var/dat = "<tt><H2>RECORD DATABASE DATA DUMP</H2><i>Generated on: [stationdate2text()] [stationtime2text()]</i><br>******************************<br>"
+	var/dat = "<tt><H2>RECORD DATABASE DATA DUMP</H2><i>Generated on: [stationdate2text()] [CURRENT_STATION_TIME]</i><br>******************************<br>"
 	dat += "<table>"
 	for(var/datum/report_field/F in CR.fields)
 		if(F.verify_access(access))

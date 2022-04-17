@@ -405,7 +405,7 @@
 	t = replacetext(t, "\[/i\]", "</I>")
 	t = replacetext(t, "\[u\]", "<U>")
 	t = replacetext(t, "\[/u\]", "</U>")
-	t = replacetext(t, "\[time\]", "[stationtime2text()]")
+	t = replacetext(t, "\[time\]", "[CURRENT_STATION_TIME]")
 	t = replacetext(t, "\[date\]", "[stationdate2text()]")
 	t = replacetext(t, "\[large\]", "<font size=\"4\">")
 	t = replacetext(t, "\[/large\]", "</font>")

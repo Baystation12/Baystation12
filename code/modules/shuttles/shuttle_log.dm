@@ -28,7 +28,7 @@
 	registered += module
 
 /datum/shuttle_log/proc/unregister(datum/nano_module/module)
-	registered -= module	
+	registered -= module
 
 /datum/shuttle_log/proc/update_registred()
 	for(var/datum/nano_module/module in registered)
@@ -127,7 +127,7 @@
 	if(!current_mission || (current_mission.stage != SHUTTLE_MISSION_PLANNED))
 		create_mission()
 	current_mission.stage = SHUTTLE_MISSION_STARTED
-	current_mission.depart_time = stationtime2text()
+	current_mission.depart_time = CURRENT_STATION_TIME
 	process_queue()
 
 /datum/shuttle_log/proc/shuttle_returned()
@@ -135,7 +135,7 @@
 		current_mission = null
 		CRASH("Shuttle returned, but mission stage was incorrect or no mission was logged.")
 	current_mission.stage = SHUTTLE_MISSION_FINISHED
-	current_mission.return_time = stationtime2text()
+	current_mission.return_time = CURRENT_STATION_TIME
 	process_queue()
 
 /datum/shuttle_mission

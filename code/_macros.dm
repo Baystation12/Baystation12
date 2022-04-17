@@ -158,47 +158,61 @@ var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 // Spawns multiple objects of the same type
 #define cast_new(type, num, args...) if((num) == 1) { new type(args) } else { for(var/i=0;i<(num),i++) { new type(args) } }
 
-#define JOINTEXT(X) jointext(X, null)
+#define JOINTEXT(LIST) jointext(LIST, null)
 
-#define SPAN_ITALIC(X) "<span class='italic'>[X]</span>"
+#define crash_with(TEXT) crash_at(TEXT, __FILE__, __LINE__)
 
-#define SPAN_BOLD(X) "<span class='bold'>[X]</span>"
+#define FONT_COLORED(COLOR, TEXT) "<font color=\"[COLOR]\">[TEXT]</font>"
 
-#define SPAN_NOTICE(X) "<span class='notice'>[X]</span>"
+#define FONT_WITH_SIZE(SIZE, TEXT) "<font size=\"[(SIZE)]\">[(TEXT)]</font>"
 
-#define SPAN_WARNING(X) "<span class='warning'>[X]</span>"
+#define FONT_SMALL(TEXT) FONT_WITH_SIZE(1, (TEXT))
 
-#define SPAN_GOOD(X) "<span class='good'>[X]</span>"
+#define FONT_NORMAL(TEXT) FONT_WITH_SIZE(2, (TEXT))
 
-#define SPAN_BAD(X) "<span class='bad'>[X]</span>"
+#define FONT_LARGE(TEXT) FONT_WITH_SIZE(3, (TEXT))
 
-#define SPAN_DANGER(X) "<span class='danger'>[X]</span>"
+#define FONT_HUGE(TEXT) FONT_WITH_SIZE(4, (TEXT))
 
-#define SPAN_OCCULT(X) "<span class='cult'>[X]</span>"
+#define FONT_GIANT(TEXT) FONT_WITH_SIZE(5, (TEXT))
 
-#define SPAN_MFAUNA(X) "<span class='mfauna'>[X]</span>"
+#define SPAN_WITH_STYLE(STYLE, TEXT) "span style=\"[(STYLE)]\">[(TEXT)]</span>"
 
-#define SPAN_SUBTLE(X) "<span class='subtle'>[X]</span>"
+#define SPAN_WITH_CLASS(CLASS, TEXT) "<span class=\"[(CLASS)]\">[(TEXT)]</span>"
 
-#define SPAN_INFO(X) "<span class='info'>[X]</span>"
+#define SPAN_ITALIC(TEXT) SPAN_WITH_CLASS("italic", (TEXT))
 
-#define SPAN_DEBUG(X) "<span class='debug'>[X]</span>"
+#define SPAN_BOLD(TEXT) SPAN_WITH_CLASS("bold", (TEXT))
 
-#define SPAN_STYLE(style, X) "<span style=\"[style]\">[X]</span>"
+#define SPAN_NOTICE(TEXT) SPAN_WITH_CLASS("notice", (TEXT))
 
-#define FONT_COLORED(color, text) "<font color='[color]'>[text]</font>"
+#define SPAN_WARNING(TEXT) SPAN_WITH_CLASS("warning", (TEXT))
 
-#define FONT_SMALL(X) "<font size='1'>[X]</font>"
+#define SPAN_GOOD(TEXT) SPAN_WITH_CLASS("good", (TEXT))
 
-#define FONT_NORMAL(X) "<font size='2'>[X]</font>"
+#define SPAN_BAD(TEXT) SPAN_WITH_CLASS("bad", (TEXT))
 
-#define FONT_LARGE(X) "<font size='3'>[X]</font>"
+#define SPAN_DANGER(TEXT) SPAN_WITH_CLASS("danger", (TEXT))
 
-#define FONT_HUGE(X) "<font size='4'>[X]</font>"
+#define SPAN_OCCULT(TEXT) SPAN_WITH_CLASS("cult", (TEXT))
 
-#define FONT_GIANT(X) "<font size='5'>[X]</font>"
+#define SPAN_MFAUNA(TEXT) SPAN_WITH_CLASS("mfauna", (TEXT))
 
-#define crash_with(X) crash_at(X, __FILE__, __LINE__)
+#define SPAN_SUBTLE(TEXT) SPAN_WITH_CLASS("subtle", (TEXT))
+
+#define SPAN_INFO(TEXT) SPAN_WITH_CLASS("info", (TEXT))
+
+#define SPAN_DEBUG(TEXT) SPAN_WITH_CLASS("debug", (TEXT))
+
+#define SPAN_LOG_CRITICAL(TEXT) SPAN_WITH_CLASS("log-critical", (TEXT))
+
+#define SPAN_LOG_ERROR(TEXT) SPAN_WITH_CLASS("log-error", (TEXT))
+
+#define SPAN_LOG_WARNING(TEXT) SPAN_WITH_CLASS("log-warning", (TEXT))
+
+#define SPAN_LOG_DEBUG(TEXT) SPAN_WITH_CLASS("log-debug", (TEXT))
+
+#define SPAN_LOG_GAME(TEXT) (TEXT) // Intended; semantic.
 
 
 /// Semantic define for a 0 int intended for use as a bitfield

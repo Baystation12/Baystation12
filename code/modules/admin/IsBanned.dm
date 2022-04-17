@@ -25,8 +25,7 @@
 		var/ckeytext = ckey(key)
 
 		if(!establish_db_connection())
-			error("Ban database connection failure. Key [ckeytext] not checked")
-			log_misc("Ban database connection failure. Key [ckeytext] not checked")
+			log_error("Ban database connection failure. Key [ckeytext] not checked")
 			return
 
 		var/failedcid = 1

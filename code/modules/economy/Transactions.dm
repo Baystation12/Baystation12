@@ -16,7 +16,7 @@
 	..()
 
 	date = stationdate2text()
-	time = stationtime2text()
+	time = CURRENT_STATION_TIME
 
 	purpose = _purpose
 	amount = _amount

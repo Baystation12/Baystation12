@@ -80,9 +80,6 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 	if (config.log_adminwarn)
 		game_log("ADMINWARN", text)
 
-/proc/log_misc(text)
-	game_log("MISC", text)
-
 /proc/log_unit_test(text)
 	to_world_log("## UNIT_TEST ##: [text]")
 	log_debug(text)

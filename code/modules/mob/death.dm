@@ -86,7 +86,7 @@
 
 	timeofdeath = world.time
 	if(mind)
-		mind.StoreMemory("Time of death: [stationtime2text()]", /decl/memory_options/system)
+		mind.StoreMemory("Time of death: [CURRENT_STATION_TIME]", /decl/memory_options/system)
 	switch_from_living_to_dead_mob_list()
 
 	update_icon()

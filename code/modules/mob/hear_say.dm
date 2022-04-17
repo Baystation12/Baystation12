@@ -229,7 +229,7 @@
 		on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
 
 /proc/say_timestamp()
-	return "<span class='say_quote'>\[[stationtime2text()]\]</span>"
+	return "<span class='say_quote'>\[[CURRENT_STATION_TIME]\]</span>"
 
 /mob/proc/on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
 	to_chat(src, "[part_a][speaker_name][part_b][formatted][part_c]")

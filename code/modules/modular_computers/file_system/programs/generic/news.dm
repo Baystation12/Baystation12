@@ -42,7 +42,7 @@
 			active_channel = new_feed // and then if it's valid, it becomes our new active channel
 			prog_state = NEWSCAST_VIEW_CHANNEL
 		return TRUE
-	
+
 	else if (href_list["view_photo"])
 		var/datum/feed_message/story = locate(href_list["view_photo"]) in active_channel.messages
 		if (istype(story) && story.img)
@@ -53,7 +53,7 @@
 			output += "</body></html>"
 			show_browser(usr, output, "window=book; size=192x192]")
 		return TRUE
-	
+
 	else if (href_list["toggle_notifs"])
 		notifs_enabled = !notifs_enabled
 		return TRUE
@@ -61,8 +61,8 @@
 	else if (href_list["return_to_home"])
 		active_channel = null
 		prog_state = NEWSCAST_HOME
-		return TRUE 
-		
+		return TRUE
+
 	return FALSE
 
 /datum/nano_module/program/newscast/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
@@ -87,7 +87,7 @@
 		data["has_network"] = TRUE
 		data["notifs_enabled"] = notifs_enabled
 		data["prog_state"] = prog_state
-		data["time_blurb"] = "The date is <b>[stationdate2text()]</b> at <b>[stationtime2text()]</b>."
+		data["time_blurb"] = "The date is <b>[stationdate2text()]</b> at <b>[CURRENT_STATION_TIME]</b>."
 		data["notifs_blurb"] = "New story notifications are <b>[notifs_enabled ? "enabled" : "disabled"]</b>."
 		data["dnotice_blurb"] = "<h2><font color='red'>CHANNEL LOCKED</h2><br>\
 		This channel has been deemed as threatening to the welfare of the [station_name()], and marked with a [GLOB.using_map.company_name] D-Notice.<br><br> \
@@ -102,11 +102,11 @@
 			channel_data["censored"] = channel.censored
 			channel_data["author"] = channel.author
 			channel_data["ref"] = "\ref[channel]"
-			
+
 			data["channels"] += list(channel_data)
 			if (channel == active_channel)
 				data["active_channels"] += list(channel_data)
-			
+
 		if (active_channel)
 			var/datum/feed_channel/feed = active_channel
 			data["active_channel"] = feed

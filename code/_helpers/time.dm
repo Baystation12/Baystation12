@@ -102,8 +102,7 @@ var/global/next_station_date_change = 1 DAY
 #define round_duration_in_ticks (round_start_time ? world.time - round_start_time : 0)
 #define station_time_in_ticks (roundstart_hour HOURS + round_duration_in_ticks)
 
-/proc/stationtime2text()
-	return time2text(station_time_in_ticks, "hh:mm")
+#define CURRENT_STATION_TIME time2text(station_time_in_ticks, "hh:mm")
 
 /proc/stationdate2text()
 	var/update_time = FALSE

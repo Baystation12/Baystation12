@@ -429,7 +429,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			PR.name = "fabricator report"
 			PR.info = "<center><b>[station_name()] Fabricator Laboratory</b>"
 			PR.info += "<h2>[ (text2num(href_list["print"]) == 2) ? "Detailed" : null ] Fabricator Status Report</h2>"
-			PR.info += "<i>report prepared at [stationtime2text()] local time</i></center><br>"
+			PR.info += "<i>report prepared at [CURRENT_STATION_TIME] local time</i></center><br>"
 			if(text2num(href_list["print"]) == 2)
 				PR.info += GetResearchListInfo()
 			else

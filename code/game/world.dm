@@ -143,7 +143,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 
 		// This is dumb, but spacestation13.com's banners break if player count isn't the 8th field of the reply, so... this has to go here.
 		s["players"] = 0
-		s["stationtime"] = stationtime2text()
+		s["stationtime"] = CURRENT_STATION_TIME
 		s["roundduration"] = roundduration2text()
 		s["map"] = replacetext(GLOB.using_map.full_name, "\improper", "") //Done to remove the non-UTF-8 text macros
 
@@ -453,7 +453,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 	if(Lines.len)
 		if(Lines[1])
 			SSticker.master_mode = Lines[1]
-			log_misc("Saved mode is '[SSticker.master_mode]'")
+			log_debug("Saved mode is '[SSticker.master_mode]'")
 
 /world/proc/save_mode(var/the_mode)
 	var/F = file("data/mode.txt")

@@ -554,7 +554,7 @@
 				else if (len == 1)
 					vote_autotransfer_initial = text2num(value) MINUTES
 				else
-					log_misc("Invalid vote_autotransfer_initial: [value]")
+					log_warning("Invalid vote_autotransfer_initial: [value]")
 			if ("vote_autotransfer_interval")
 				var/list/values = splittext(value, ";")
 				var/len = length(values)
@@ -563,7 +563,7 @@
 				else if (len == 1)
 					vote_autotransfer_interval = text2num(value) MINUTES
 				else
-					log_misc("Invalid vote_autotransfer_interval: [value]")
+					log_warning("Invalid vote_autotransfer_interval: [value]")
 			if ("vote_autogamemode_timeleft")
 				vote_autogamemode_timeleft = text2num(value)
 			if ("ert_admin_only")
@@ -624,7 +624,7 @@
 				traitor_scaling = TRUE
 			if ("objectives_disabled")
 				if (!value)
-					log_misc("Could not find value for objectives_disabled in configuration")
+					log_warning("Could not find value for objectives_disabled in configuration")
 					objectives_disabled = CONFIG_OBJECTIVE_NONE
 				else
 					switch (value)
@@ -635,7 +635,7 @@
 						if ("all")
 							objectives_disabled = CONFIG_OBJECTIVE_ALL
 						else
-							log_misc("Incorrect objective disabled definition: [value]")
+							log_warning("Incorrect objective disabled definition: [value]")
 							objectives_disabled = CONFIG_OBJECTIVE_NONE
 			if ("protect_roles_from_antagonist")
 				protect_roles_from_antagonist = TRUE
@@ -651,7 +651,7 @@
 					else if (isnull(chance) || chance < 0)
 						reason = "Not a valid probability."
 					if (reason)
-						log_misc("Invalid probability config: '[value]' - [reason]")
+						log_warning("Invalid probability config: '[value]' - [reason]")
 					else
 						probabilities[mode_tag] = chance
 			if ("allow_random_events")
@@ -840,7 +840,7 @@
 			if ("run_empty_levels")
 				run_empty_levels = TRUE
 			else
-				log_misc("Unknown setting in config/config.txt: '[name]'")
+				log_warning("Unknown setting in config/config.txt: '[name]'")
 
 
 /configuration/proc/load_options()
@@ -849,7 +849,7 @@
 		var/value = file[name]
 		value = text2num(value)
 		if (!value)
-			log_misc("Unknown value for '[name]' in config/game_options.txt")
+			log_warning("Unknown value for '[name]' in config/game_options.txt")
 		switch(name)
 			if ("health_threshold_dead")
 				health_threshold_dead = value
@@ -888,7 +888,7 @@
 			if ("use_loyalty_implants")
 				use_loyalty_implants = TRUE
 			else
-				log_misc("Unknown setting in config/game_options.txt: '[name]'")
+				log_warning("Unknown setting in config/game_options.txt: '[name]'")
 
 
 /configuration/proc/load_map()
@@ -924,7 +924,7 @@
 			if ("feedback_password")
 				sqlfdbkpass = value
 			else
-				log_misc("Unknown setting in config/dbconfig.txt: '[name]'")
+				log_warning("Unknown setting in config/dbconfig.txt: '[name]'")
 
 
 /configuration/proc/load_hub_entry()

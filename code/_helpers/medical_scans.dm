@@ -5,7 +5,7 @@
 	scan["name"] = H.name
 	if(H.fake_name)
 		scan["name"] = H.real_name
-	scan["time"] = stationtime2text()
+	scan["time"] = CURRENT_STATION_TIME
 	var/brain_result
 	if(H.should_have_organ(BP_BRAIN))
 		var/obj/item/organ/internal/brain/brain = H.internal_organs_by_name[BP_BRAIN]

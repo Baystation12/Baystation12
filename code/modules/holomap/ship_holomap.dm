@@ -188,7 +188,7 @@
 			if (prob(25))
 				set_broken()
 
-#define HOLOMAP_LEGEND_STYLING(X) SPAN_STYLE("font-family: 'Small Fonts'; font-size: 7px;", X)
+#define HOLOMAP_LEGEND_STYLING(X) SPAN_WITH_STYLE("font-family: 'Small Fonts'; font-size: 7px;", X)
 
 /obj/screen/levelselect
 	icon = 'icons/misc/mark.dmi'

@@ -14,7 +14,7 @@
 	var/obj/effect/overmap/visitable/ship/torch = SSshuttle.ship_by_type(/obj/effect/overmap/visitable/ship/torch)
 
 	var/welcome_text = "<center><img src = sollogo.png /><br /><font size = 3><b>SEV Torch</b> Sensor Readings:</font><br>"
-	welcome_text += "Report generated on [stationdate2text()] at [stationtime2text()]</center><br /><br />"
+	welcome_text += "Report generated on [stationdate2text()] at [CURRENT_STATION_TIME]</center><br /><br />"
 	welcome_text += "<hr>Current system:<br /><b>[torch ? system_name : "Unknown"]</b><br /><br>"
 
 	if (torch) //If the overmap is disabled, it's possible for there to be no torch.

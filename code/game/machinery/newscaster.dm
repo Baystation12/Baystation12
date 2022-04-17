@@ -80,7 +80,7 @@
 	var/datum/feed_message/newMsg = new /datum/feed_message
 	newMsg.author = author
 	newMsg.body = msg
-	newMsg.time_stamp = "[stationtime2text()]"
+	newMsg.time_stamp = "[CURRENT_STATION_TIME]"
 	newMsg.is_admin_message = adminMessage
 	if(message_type)
 		newMsg.message_type = message_type

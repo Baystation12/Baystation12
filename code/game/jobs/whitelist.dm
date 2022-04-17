@@ -29,7 +29,7 @@ var/global/list/alien_whitelist = list()
 /proc/load_alienwhitelist()
 	var/text = file2text("config/alienwhitelist.txt")
 	if (!text)
-		log_misc("Failed to load config/alienwhitelist.txt")
+		log_warning("Failed to load config/alienwhitelist.txt")
 		return 0
 	else
 		alien_whitelist = splittext(text, "\n")

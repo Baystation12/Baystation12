@@ -103,7 +103,7 @@
 				"selected" = (A in accesses))))
 
 		data["giver_access"] = giver_access
-		
+
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "guestpass.tmpl", "Guest Pass Terminal", 600, 800)
@@ -170,7 +170,7 @@
 	else if (href_list["issue"])
 		if (giver && accesses.len)
 			var/number = pad_left(random_id("guestpass_id_number", 1, 9999), 6, "0")
-			var/entry = "\[[stationtime2text()]\] Pass #[number] issued by [giver.registered_name] ([giver.assignment]) to [giv_name]. Reason: [reason]. Granted access to following areas: "
+			var/entry = "\[[CURRENT_STATION_TIME]\] Pass #[number] issued by [giver.registered_name] ([giver.assignment]) to [giv_name]. Reason: [reason]. Granted access to following areas: "
 			var/list/access_descriptors = list()
 			for (var/A in accesses)
 				if (A in giver.access)
