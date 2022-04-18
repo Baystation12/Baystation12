@@ -1,0 +1,4 @@
+author: Spookerton
+delete-after: true
+changes:
+  - bugfix: Uplinks spawn a box of premium donk pockets instead of a single one. Whoops.

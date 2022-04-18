@@ -4267,8 +4267,7 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/airlock/engineering{
-	name = "Drone Bay";
-	secured_wires = 1
+	name = "Drone Bay"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -13845,7 +13844,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/door/blast/regular{
+/obj/machinery/door/blast/regular/open{
 	dir = 8;
 	id_tag = "borg";
 	name = "Cyborg Upload"
@@ -13854,6 +13853,10 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/door/airlock/engineering{
+	name = "Cyborg Upload Chamber";
+	secured_wires = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/synth/borg_upload)
