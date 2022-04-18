@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - bugfix: Fixed the excavation suit cycler not properly setting the item_state of
+      helmets.
