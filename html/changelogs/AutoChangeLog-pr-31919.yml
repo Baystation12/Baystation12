@@ -1,0 +1,9 @@
+author: Ryan
+delete-after: true
+changes:
+  - tweak: ERT commander pack onmob and obj sprites are now similar
+  - tweak: Sec satchel now has red straps onmob (left/right too)
+  - tweak: Sec backpack onmob has red accents on straps
+  - tweak: Left/right onmob sprite for toxsatchel is now ntsatchel
+  - tweak: Norm backpack highlights are duller
+  - tweak: Attempt at fixing weird bulge on satchels
