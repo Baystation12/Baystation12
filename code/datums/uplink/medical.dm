@@ -8,7 +8,7 @@
 	name = "Box of Premium Donk-Pockets"
 	desc = "A box of healthy fruit turnovers. Great for a quick meal when you're hiding from Security. Instructions included on the box."
 	item_cost = 8
-	path = /obj/item/reagent_containers/food/snacks/donkpocket/premium
+	path = /obj/item/storage/box/donkpocket_premium
 
 /datum/uplink_item/item/medical/combatstim
 	name = "Combat Stimulants"
