@@ -306,6 +306,8 @@
 #define BP_GROIN  "groin"
 #define BP_ALL_LIMBS list(BP_CHEST, BP_GROIN, BP_HEAD, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
 #define BP_BY_DEPTH list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_CHEST)
+#define BP_LEGS_FEET list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
+#define BP_ARMS_HANDS list(BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND)
 
 // Prosthetic helpers.
 #define BP_IS_ROBOTIC(org)  ((org) && ((org).status & ORGAN_ROBOTIC))
