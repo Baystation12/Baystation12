@@ -205,7 +205,7 @@ area/space/atmosalert()
 */
 /area/beach
 	name = "Keelin's private beach"
-	icon_state = "null"
+	icon_state = "beach"
 	luminosity = 1
 	dynamic_lighting = 0
 	requires_power = 0
