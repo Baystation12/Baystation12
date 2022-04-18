@@ -39,7 +39,7 @@ var/global/list/cached_space = list()
 			return 0
 	return 1
 
-proc/get_deepspace(x,y)
+/proc/get_deepspace(x,y)
 	var/turf/map = locate(x,y,GLOB.using_map.overmap_z)
 	var/obj/effect/overmap/visitable/sector/temporary/res
 	for(var/obj/effect/overmap/visitable/sector/temporary/O in map)
@@ -67,7 +67,7 @@ proc/get_deepspace(x,y)
 /mob/living/carbon/human/lost_in_space()
 	return isnull(client) && !last_ckey && stat == DEAD
 
-proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
+/proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	if (!T || !A)
 		return
 

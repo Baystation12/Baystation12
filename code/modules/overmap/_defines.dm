@@ -51,7 +51,7 @@ var/global/list/moving_levels = list()
 //Proc to 'move' stars in spess
 //yes it looks ugly, but it should only fire when state actually change.
 //null direction stops movement
-proc/toggle_move_stars(zlevel, direction)
+/proc/toggle_move_stars(zlevel, direction)
 	if(!zlevel)
 		return
 

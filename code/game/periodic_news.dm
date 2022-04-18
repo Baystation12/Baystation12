@@ -117,18 +117,18 @@
 
 var/global/list/newscaster_standard_feeds = list(/datum/news_announcement/bluespace_research, /datum/news_announcement/lotus_tree, /datum/news_announcement/random_junk,  /datum/news_announcement/food_riots)
 
-proc/process_newscaster()
+/proc/process_newscaster()
 	check_for_newscaster_updates(SSticker.mode.newscaster_announcements)
 
 var/global/tmp/announced_news_types = list()
-proc/check_for_newscaster_updates(type)
+/proc/check_for_newscaster_updates(type)
 	for(var/subtype in typesof(type)-type)
 		var/datum/news_announcement/news = new subtype()
 		if(news.round_time * 10 <= world.time && !(subtype in announced_news_types))
 			announced_news_types += subtype
 			announce_newscaster_news(news)
 
-proc/announce_newscaster_news(datum/news_announcement/news, list/zlevels)
+/proc/announce_newscaster_news(datum/news_announcement/news, list/zlevels)
 	var/datum/feed_network/network
 	for(var/datum/feed_network/G in news_network)
 		if (zlevels[1] in G.z_levels)

@@ -316,7 +316,7 @@
 	M.status_flags ^= NOTARGET
 	log_and_message_admins("has toggled [key_name(M)]'s notarget to [(M.status_flags & NOTARGET) ? "On" : "Off"]")
 
-proc/cmd_admin_mute(mob/M as mob, mute_type)
+/proc/cmd_admin_mute(mob/M as mob, mute_type)
 	if(!usr || !usr.client)
 		return
 	if(!usr.client.holder)

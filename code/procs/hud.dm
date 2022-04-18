@@ -9,7 +9,7 @@ the HUD updates properly! */
 	plane = DEFAULT_PLANE
 
 //Medical HUD outputs. Called by the Life() proc of the mob using it, usually.
-proc/process_med_hud(var/mob/M, var/local_scanner, var/mob/Alt)
+/proc/process_med_hud(var/mob/M, var/local_scanner, var/mob/Alt)
 	if(!can_process_hud(M))
 		return
 
@@ -29,7 +29,7 @@ proc/process_med_hud(var/mob/M, var/local_scanner, var/mob/Alt)
 				P.Client.images += patient.hud_list[LIFE_HUD]
 
 //Security HUDs. Pass a value for the second argument to enable implant viewing or other special features.
-proc/process_sec_hud(var/mob/M, var/advanced_mode, var/mob/Alt)
+/proc/process_sec_hud(var/mob/M, var/advanced_mode, var/mob/Alt)
 	if(!can_process_hud(M))
 		return
 	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, GLOB.sec_hud_users)
@@ -45,7 +45,7 @@ proc/process_sec_hud(var/mob/M, var/advanced_mode, var/mob/Alt)
 			P.Client.images += perp.hud_list[IMPLOYAL_HUD]
 			P.Client.images += perp.hud_list[IMPCHEM_HUD]
 
-proc/process_jani_hud(var/mob/M, var/mob/Alt)
+/proc/process_jani_hud(var/mob/M, var/mob/Alt)
 	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, GLOB.jani_hud_users)
 	for (var/obj/effect/decal/cleanable/dirtyfloor in view(P.Mob))
 		if(P.Client)
@@ -56,7 +56,7 @@ datum/arranged_hud_process
 	var/mob/Mob
 	var/turf/Turf
 
-proc/arrange_hud_process(var/mob/M, var/mob/Alt, var/list/hud_list)
+/proc/arrange_hud_process(var/mob/M, var/mob/Alt, var/list/hud_list)
 	hud_list |= M
 	var/datum/arranged_hud_process/P = new
 	P.Client = M.client
@@ -64,7 +64,7 @@ proc/arrange_hud_process(var/mob/M, var/mob/Alt, var/list/hud_list)
 	P.Turf = get_turf(P.Mob)
 	return P
 
-proc/can_process_hud(var/mob/M)
+/proc/can_process_hud(var/mob/M)
 	if(!M)
 		return 0
 	if(!M.client)
