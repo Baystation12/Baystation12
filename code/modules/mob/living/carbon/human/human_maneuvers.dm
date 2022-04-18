@@ -28,3 +28,29 @@
 			if(!silent)
 				to_chat(src, SPAN_WARNING("You are too thirsty to jump around."))
 			return FALSE
+
+
+/mob/living/carbon/human/post_maneuver()
+	..()
+
+	var/broken_limb_fail_chance = 0
+	var/list/broken_limbs = list()
+	for (var/_limb in BP_LEGS_FEET)
+		var/obj/item/organ/external/limb = get_organ(_limb)
+		if (limb.status & ORGAN_BROKEN)
+			broken_limbs += limb
+			broken_limb_fail_chance += limb.splinted ? 25 : 50
+	if (broken_limb_fail_chance)
+		var/obj/item/organ/external/limb = pick(broken_limbs)
+		if (prob(broken_limb_fail_chance))
+			visible_message(
+				SPAN_WARNING("\The [src]'s [limb.name] buckles beneath them as they land!"),
+				SPAN_DANGER("Your [limb.name] buckles beneath you as you land!")
+			)
+			apply_effect(1, EFFECT_WEAKEN)
+			limb.add_pain(30)
+			limb.take_external_damage(5)
+		else
+			to_chat(src, SPAN_DANGER("You feel a sharp pain through your [limb.name] as you land!"))
+			apply_effect(1, EFFECT_STUN)
+			limb.add_pain(15)

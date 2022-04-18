@@ -20,6 +20,7 @@
 
 /decl/maneuver/leap/proc/end_leap(var/mob/living/user, var/atom/target, var/pass_flag)
 	user.pass_flags = pass_flag
+	user.post_maneuver()
 
 /decl/maneuver/leap/show_initial_message(var/mob/living/user, var/atom/target)
 	user.visible_message(SPAN_WARNING("\The [user] crouches, preparing for a leap!"))
