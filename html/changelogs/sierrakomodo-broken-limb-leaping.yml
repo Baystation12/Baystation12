@@ -34,4 +34,5 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes:
-  - tweak: "Leaping distance is now 100% based on skill level instead of basic athletics having a weird flat skill check result, and being the only skill level with a modified result based on that check."
+  - tweak: "Leaping distance is now 100% based on skill level and mob-type specific overrides instead of relying on a flat basic athletics skill check that resulted in a flat line instead of a curve between the middle tiers of skill."
+  - tweak: "Fractured legs and feet now affect your ability to leap by reducing how far you can jump. Splinted limbs reduce this effect by half."

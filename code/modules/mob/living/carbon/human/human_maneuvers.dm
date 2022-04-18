@@ -7,6 +7,12 @@
 	if(istype(aug))
 		. += aug.get_acrobatics_modifier()
 
+	// Broken limb checks
+	for (var/_limb in BP_LEGS_FEET)
+		var/obj/item/organ/external/limb = get_organ(_limb)
+		if (limb.status & ORGAN_BROKEN)
+			. -= limb.splinted ? 0.25 : 0.5
+
 
 /mob/living/carbon/human/get_jump_distance()
 	return species.standing_jump_range
