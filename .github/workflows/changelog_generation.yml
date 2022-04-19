@@ -1,12 +1,17 @@
 name: Compile changelogs
 
+permissions:
+  contents: read
+
 on:
   schedule:
     - cron: "0 0 * * *"
-  workflow_dispatch:
+  workflow_dispatch: # allows this workflow to be manually triggered
 
 jobs:
   CompileCL:
+    permissions:
+      contents: write # required to push the updated changelog commit
     runs-on: ubuntu-latest
     if: github.repository == 'Baystation12/Baystation12' # to prevent this running on forks
     steps:

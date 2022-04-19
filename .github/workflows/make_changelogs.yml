@@ -1,5 +1,8 @@
 name: Make changelogs
 
+permissions:
+  contents: read
+
 on:
   push:
     branches:
@@ -7,6 +10,8 @@ on:
 
 jobs:
   MakeCL:
+    permissions:
+      contents: write # required to push the changelog chunk yml commit
     runs-on: ubuntu-latest
     if: github.repository == 'Baystation12/Baystation12' # to prevent this running on forks
     steps:
