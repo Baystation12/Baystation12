@@ -107,10 +107,3 @@
 #undef PROCESS_AO_CORNER
 #undef AO_TURF_CHECK
 #undef AO_SELF_CHECK
-
-/turf/ChangeTurf()
-	var/old_density = density
-	var/old_permit_ao = permit_ao
-	. = ..()
-	if(density != old_density || permit_ao != old_permit_ao)
-		regenerate_ao()
