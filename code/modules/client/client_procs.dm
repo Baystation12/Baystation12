@@ -381,14 +381,14 @@
 /mob/proc/MayRespawn()
 	return 0
 
-client/proc/MayRespawn()
+/client/proc/MayRespawn()
 	if(mob)
 		return mob.MayRespawn()
 
 	// Something went wrong, client is usually kicked or transfered to a new mob at this point
 	return 0
 
-client/verb/character_setup()
+/client/verb/character_setup()
 	set name = "Character Setup"
 	set category = "OOC"
 	if(prefs)

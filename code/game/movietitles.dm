@@ -5,8 +5,7 @@
 
 GLOBAL_LIST(end_titles)
 
-client
-	var/list/credits
+/client/var/list/credits
 
 /client/proc/RollCredits()
 	set waitfor = FALSE

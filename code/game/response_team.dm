@@ -46,7 +46,7 @@ var/global/can_call_ert
 	log_admin("[key_name(usr)] used Dispatch Response Team.")
 	trigger_armed_response_team(1, reason)
 
-client/verb/JoinResponseTeam()
+/client/verb/JoinResponseTeam()
 
 	set name = "Join Response Team"
 	set category = "IC"
