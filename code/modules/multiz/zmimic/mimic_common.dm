@@ -8,11 +8,11 @@
 		T = GetBelow(T)
 	return isspaceturf(T)
 
-/turf/update_icon()
+/turf/on_update_icon()
 	..()
 	if (above)
 		update_above()
 
-/atom/movable/update_icon()
+/atom/movable/on_update_icon()
 	..()
 	UPDATE_OO_IF_PRESENT

@@ -14,7 +14,7 @@
 	build_icon_state = "heunary"
 
 
-/obj/machinery/atmospherics/unary/heat_exchanger/update_icon()
+/obj/machinery/atmospherics/unary/heat_exchanger/on_update_icon()
 	if(node)
 		icon_state = "intact"
 	else

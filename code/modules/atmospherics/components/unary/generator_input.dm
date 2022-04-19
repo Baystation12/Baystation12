@@ -8,7 +8,7 @@
 
 	var/update_cycle
 
-/obj/machinery/atmospherics/unary/generator_input/update_icon()
+/obj/machinery/atmospherics/unary/generator_input/on_update_icon()
 	if(node)
 		icon_state = "intact"
 	else

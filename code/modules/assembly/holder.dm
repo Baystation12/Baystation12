@@ -53,7 +53,7 @@
 	return 1
 
 
-/obj/item/device/assembly_holder/update_icon()
+/obj/item/device/assembly_holder/on_update_icon()
 	overlays.Cut()
 	if(a_left)
 		overlays += "[a_left.icon_state]_left"

@@ -92,7 +92,7 @@
 /obj/item/reagent_containers/dropper/on_reagent_change()
 	update_icon()
 
-/obj/item/reagent_containers/dropper/update_icon()
+/obj/item/reagent_containers/dropper/on_update_icon()
 	if(reagents.total_volume)
 		icon_state = "dropper1"
 	else
