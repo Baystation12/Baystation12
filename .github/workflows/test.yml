@@ -12,6 +12,9 @@ env:
   BYOND_MINOR: "1583"
   SPACEMAN_DMM_VERSION: suite-1.7.2
 
+permissions:
+  contents: read
+
 jobs:
   DreamChecker:
     runs-on: ubuntu-latest

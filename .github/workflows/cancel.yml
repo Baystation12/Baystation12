@@ -5,8 +5,13 @@ on:
       - dev
 
 # NB: We can discover workflow IDs for this job at https://api.github.com/repos/ORG/REPO/actions/workflows
+permissions:
+  contents: read
+
 jobs:
   cancel:
+    permissions:
+      actions: write  # for styfle/cancel-workflow-action to cancel/stop running workflows
     name: 'Cancel Redundant Builds'
     runs-on: ubuntu-latest
     timeout-minutes: 3
