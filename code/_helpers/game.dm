@@ -382,7 +382,7 @@
 		for(var/client/C in show_to)
 			C.images -= I
 
-datum/projectile_data
+/datum/projectile_data
 	var/src_x
 	var/src_y
 	var/time

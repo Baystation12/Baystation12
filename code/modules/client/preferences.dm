@@ -8,7 +8,7 @@
 
 #define MAX_LOAD_TRIES 5
 
-datum/preferences
+/datum/preferences
 	//doohickeys for savefiles
 	var/is_guest = FALSE
 	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used

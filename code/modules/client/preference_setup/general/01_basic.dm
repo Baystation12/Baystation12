@@ -1,4 +1,4 @@
-datum/preferences
+/datum/preferences
 	var/gender = MALE					//gender of character (well duh)
 	var/age = 30						//age of character
 	var/spawnpoint = "Default" 			//where this character will spawn (0-2).

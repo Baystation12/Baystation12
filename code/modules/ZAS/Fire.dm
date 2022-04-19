@@ -325,7 +325,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 		return firelevel
 
-datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
+/datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 	. = 0
 	for(var/g in gas)
 		if(gas_data.flags[g] & XGM_GAS_OXIDIZER && gas[g] >= 0.1)

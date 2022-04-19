@@ -51,7 +51,7 @@ the HUD updates properly! */
 		if(P.Client)
 			P.Client.images += dirtyfloor.hud_overlay
 
-datum/arranged_hud_process
+/datum/arranged_hud_process
 	var/client/Client
 	var/mob/Mob
 	var/turf/Turf

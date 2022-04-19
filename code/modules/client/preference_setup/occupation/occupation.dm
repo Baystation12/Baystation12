@@ -542,7 +542,7 @@
 		if(!(job_title in allowed_titles))
 			pref.job_low -= job_title
 
-datum/category_item/player_setup_item/proc/prune_occupation_prefs()
+/datum/category_item/player_setup_item/proc/prune_occupation_prefs()
 	prune_job_prefs()
 	validate_branch_and_rank()
 

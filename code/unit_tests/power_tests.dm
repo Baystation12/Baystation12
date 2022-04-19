@@ -1,14 +1,14 @@
-datum/unit_test/roundstart_cable_connectivity
+/datum/unit_test/roundstart_cable_connectivity
 	name = "POWER: Roundstart Cables that are Connected Share Powernets"
 
-datum/unit_test/roundstart_cable_connectivity/proc/find_connected_neighbours(var/obj/structure/cable/C)
+/datum/unit_test/roundstart_cable_connectivity/proc/find_connected_neighbours(var/obj/structure/cable/C)
 	. = list()
 	if(C.d1 != 0)
 		. += get_connected_neighbours(C, C.d1)
 	if(C.d2 != 0)
 		. += get_connected_neighbours(C, C.d2)
 
-datum/unit_test/roundstart_cable_connectivity/proc/get_connected_neighbours(var/obj/structure/cable/self, var/dir)
+/datum/unit_test/roundstart_cable_connectivity/proc/get_connected_neighbours(var/obj/structure/cable/self, var/dir)
 	var/turf/T = get_step(get_turf(self), dir)
 	var/reverse = GLOB.reverse_dir[dir]
 
@@ -17,7 +17,7 @@ datum/unit_test/roundstart_cable_connectivity/proc/get_connected_neighbours(var/
 		if(other.d1 == reverse || other.d2 == reverse)
 			. += other
 
-datum/unit_test/roundstart_cable_connectivity/start_test()
+/datum/unit_test/roundstart_cable_connectivity/start_test()
 	var/failed = 0
 	var/list/found_cables = list()
 

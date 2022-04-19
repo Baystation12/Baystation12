@@ -238,27 +238,27 @@ var/global/default_mobloc = null
 // Human damage check.
 // =================================================================
 
-datum/unit_test/mob_damage/brute
+/datum/unit_test/mob_damage/brute
 	name = "MOB: Human Brute damage check"
 	damagetype = DAMAGE_BRUTE
 
-datum/unit_test/mob_damage/burn
+/datum/unit_test/mob_damage/burn
 	name = "MOB: Human Burn damage check"
 	damagetype = DAMAGE_BURN
 
-datum/unit_test/mob_damage/tox
+/datum/unit_test/mob_damage/tox
 	name = "MOB: Human Toxin damage check"
 	damagetype = DAMAGE_TOXIN
 
-datum/unit_test/mob_damage/oxy
+/datum/unit_test/mob_damage/oxy
 	name = "MOB: Human Oxygen damage check"
 	damagetype = DAMAGE_OXY
 
-datum/unit_test/mob_damage/genetic
+/datum/unit_test/mob_damage/genetic
 	name = "MOB: Human Genetic damage check"
 	damagetype = DAMAGE_GENETIC
 
-datum/unit_test/mob_damage/pain
+/datum/unit_test/mob_damage/pain
 	name = "MOB: Human Pain damage check"
 	damagetype = DAMAGE_PAIN
 

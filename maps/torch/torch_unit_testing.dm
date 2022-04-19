@@ -89,10 +89,10 @@
 	name = "ZAS: Cargo Bay"
 	area_path = /area/quartermaster/storage
 
-datum/unit_test/zas_area_test/supply_centcomm
+/datum/unit_test/zas_area_test/supply_centcomm
 	name = "ZAS: Supply Shuttle (CentComm)"
 	area_path = /area/supply/dock
 
-datum/unit_test/zas_area_test/xenobio
+/datum/unit_test/zas_area_test/xenobio
 	name = "ZAS: Xenobiology"
 	area_path = /area/rnd/xenobiology

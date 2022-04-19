@@ -109,7 +109,7 @@ var/global/datum/uplink/uplink = new()
 	if(user)
 		uplink_purchase_repository.add_entry(user.mind, src, cost)
 
-datum/uplink_item/dd_SortValue()
+/datum/uplink_item/dd_SortValue()
 	return cost(INFINITY, null)
 
 /********************************
