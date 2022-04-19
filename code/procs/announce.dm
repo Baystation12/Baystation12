@@ -47,7 +47,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 				sound_to(M, message_sound)
 
 	if(do_newscast)
-		NewsCast(message, message_title, zlevels)
+		NewsCast(message, zlevels)
 
 	if(log)
 		log_say("[key_name(usr)] has made \a [announcement_type]: [message_title] - [message] - [announcer]")
@@ -81,17 +81,31 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	. = "<font size=4 color='red'>[message_title]</font>"
 	. += "<br><font color='red'>[message]</font>"
 
-/datum/announcement/proc/NewsCast(message as text, message_title as text, zlevels)
-	if(!newscast)
-		return
 
-	var/datum/news_announcement/news = new
-	news.channel_name = channel_name
-	news.author = announcer
-	news.message = message
-	news.message_type = announcement_type
-	news.can_be_redacted = 0
-	announce_newscaster_news(news, zlevels)
+/datum/announcement/proc/NewsCast(message, list/zlevels)
+	if (!message || !islist(zlevels))
+		return
+	var/datum/feed_network/network
+	for (var/datum/feed_network/candidate as anything in news_network)
+		if (zlevels[1] in candidate.z_levels)
+			network = candidate
+			break
+	if (!network)
+		return
+	var/datum/feed_channel/channel
+	for (var/datum/feed_channel/candidate as anything in network.network_channels)
+		if (candidate.channel_name == channel_name)
+			channel = candidate
+			break
+	if (!channel)
+		channel = new
+		channel.channel_name = channel_name
+		channel.author = announcer
+		channel.locked = TRUE
+		channel.is_admin_channel = TRUE
+		network.network_channels += channel
+	network.SubmitArticle(message, announcer || channel.author, channel_name, null, FALSE, announcement_type)
+
 
 /proc/GetNameAndAssignmentFromId(var/obj/item/card/id/I)
 	// Format currently matches that of newscaster feeds: Registered Name (Assigned Rank)

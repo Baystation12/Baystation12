@@ -493,7 +493,6 @@
 #include "code\game\client_macros.dm"
 #include "code\game\images.dm"
 #include "code\game\movietitles.dm"
-#include "code\game\periodic_news.dm"
 #include "code\game\response_team.dm"
 #include "code\game\sound.dm"
 #include "code\game\world.dm"
