@@ -31,7 +31,7 @@ Contains helper procs for airflow, handled in /connection_group.
 		return 0
 	..()
 
-atom/movable/proc/check_airflow_movable(n)
+/atom/movable/proc/check_airflow_movable(n)
 
 	if(anchored && !ismob(src)) return 0
 
@@ -98,7 +98,7 @@ atom/movable/proc/check_airflow_movable(n)
 		airborne_acceleration = 0
 		. = ..()
 
-atom/movable/proc/airflow_hit(atom/A)
+/atom/movable/proc/airflow_hit(atom/A)
 	airflow_speed = 0
 	airflow_dest = null
 	airborne_acceleration = 0
