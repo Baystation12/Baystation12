@@ -154,6 +154,7 @@
 #include "code\_onclick\hud\robot.dm"
 #include "code\_onclick\hud\screen_objects.dm"
 #include "code\_onclick\hud\skybox.dm"
+#include "code\_onclick\hud\rendering\render_plate.dm"
 #include "code\controllers\admin.dm"
 #include "code\controllers\autotransfer.dm"
 #include "code\controllers\communications.dm"

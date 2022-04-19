@@ -60,6 +60,8 @@ What is the naming convention for planes or layers?
 	FLOAT_PLANE = -32767
 */
 
+#define LOWEST_PLANE -200
+
 #define CLICKCATCHER_PLANE -100
 
 #define SPACE_PLANE               -99
@@ -73,9 +75,14 @@ What is the naming convention for planes or layers?
 
 // Openspace uses planes -80 through -70.
 
-#define OVER_OPENSPACE_PLANE        -3
+#define OVER_OPENSPACE_PLANE        -4
 
-#define DEFAULT_PLANE                   0
+#define BLACKNESS_PLANE                 0 //Blackness plane as per DM documentation.
+
+#define GRAVITY_PULSE_PLANE -3
+#define GRAVITY_PULSE_RENDER_TARGET "*GRAVPULSE_RENDER_TARGET"
+
+#define DEFAULT_PLANE                   1
 	#define PLATING_LAYER               1
 	//ABOVE PLATING
 	#define HOLOMAP_LAYER               1.01
@@ -163,19 +170,19 @@ What is the naming convention for planes or layers?
 	#define OBFUSCATION_LAYER           5.2
 	#define BASE_AREA_LAYER             999
 
-#define OBSERVER_PLANE             1
+#define OBSERVER_PLANE             2
 
-#define LIGHTING_PLANE             2 // For Lighting. - The highest plane (ignoring all other even higher planes)
+#define LIGHTING_PLANE             3 // For Lighting. - The highest plane (ignoring all other even higher planes)
 	#define LIGHTBULB_LAYER        0
 	#define LIGHTING_LAYER         1
 	#define ABOVE_LIGHTING_LAYER   2
 
-#define EFFECTS_ABOVE_LIGHTING_PLANE   3 // For glowy eyes, laser beams, etc. that shouldn't be affected by darkness
+#define EFFECTS_ABOVE_LIGHTING_PLANE   4 // For glowy eyes, laser beams, etc. that shouldn't be affected by darkness
 	#define EYE_GLOW_LAYER         1
 	#define BEAM_PROJECTILE_LAYER  2
 	#define SUPERMATTER_WALL_LAYER 3
 
-#define FULLSCREEN_PLANE                4 // for fullscreen overlays that do not cover the hud.
+#define FULLSCREEN_PLANE                5 // for fullscreen overlays that do not cover the hud.
 
 	#define FULLSCREEN_LAYER    0
 	#define DAMAGE_LAYER        1
@@ -183,7 +190,7 @@ What is the naming convention for planes or layers?
 	#define BLIND_LAYER         3
 	#define CRIT_LAYER          4
 
-#define HUD_PLANE                    5
+#define HUD_PLANE                    6
 	#define UNDER_HUD_LAYER              0
 	#define HUD_BASE_LAYER               2
 	#define HUD_ITEM_LAYER               3
@@ -192,6 +199,12 @@ What is the naming convention for planes or layers?
 
 //This is difference between planes used for atoms and effects
 #define PLANE_DIFFERENCE              3
+
+
+//-------------------- Rendering ---------------------
+#define RENDER_PLANE_GAME 990
+#define RENDER_PLANE_NON_GAME 995
+#define RENDER_PLANE_MASTER 999
 
 
 /atom/plane = DEFAULT_PLANE
@@ -223,21 +236,91 @@ What is the naming convention for planes or layers?
   PLANE MASTERS
 */
 
-/obj/screen/plane_master
+/atom/movable/screen/plane_master
 	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PLANE_MASTER
 	screen_loc = "CENTER,CENTER"
-	globalscreen = 1
 
-/obj/screen/plane_master/ghost_master
+	plane = LOWEST_PLANE
+	//--rendering relay vars--
+	///integer: what plane we will relay this planes render to
+	var/render_relay_plane = RENDER_PLANE_MASTER
+	///bool: Whether this plane should get a render target automatically generated
+	var/generate_render_target = TRUE
+	///integer: blend mode to apply to the render relay in case you dont want to use the plane_masters blend_mode
+	var/blend_mode_override
+	//Relay we're rendering to if any
+	var/atom/movable/render_plane_relay/relay
+
+//Why do plane masters need a backdrop sometimes? Read https://secure.byond.com/forum/?post=2141928
+//Trust me, you need one. Period. If you don't think you do, you're doing something extremely wrong.
+/atom/movable/screen/plane_master/proc/backdrop(mob/mymob)
+	if(!isnull(render_relay_plane))
+		relay_render_to_plane(mymob, render_relay_plane)
+
+/atom/movable/screen/plane_master/ghost_master
 	plane = OBSERVER_PLANE
+	render_relay_plane = RENDER_PLANE_GAME
 
-/obj/screen/plane_master/ghost_dummy
+/atom/movable/screen/plane_master/ghost_dummy
 	// this avoids a bug which means plane masters which have nothing to control get angry and mess with the other plane masters out of spite
 	alpha = 0
 	appearance_flags = DEFAULT_APPEARANCE_FLAGS
 	plane = OBSERVER_PLANE
+	render_relay_plane = RENDER_PLANE_GAME
+	mouse_opacity = 0
 
 GLOBAL_LIST_INIT(ghost_master, list(
-	new /obj/screen/plane_master/ghost_master(),
-	new /obj/screen/plane_master/ghost_dummy()
+	new /atom/movable/screen/plane_master/ghost_master(),
+	new /atom/movable/screen/plane_master/ghost_dummy()
 ))
+
+//Plane master for game world (atoms, turfs, etc...feel free to subdivide further if zmimic doesn't care)
+/atom/movable/screen/plane_master/game_world
+	name = "game world plane master"
+	plane = DEFAULT_PLANE
+	appearance_flags = PLANE_MASTER //should use client color
+	blend_mode = BLEND_OVERLAY
+	render_relay_plane = RENDER_PLANE_GAME
+
+/atom/movable/screen/plane_master/hud
+	name = "hud plane master"
+	plane = HUD_PLANE
+	appearance_flags = PLANE_MASTER //should use client color
+	blend_mode = BLEND_OVERLAY
+	render_relay_plane = RENDER_PLANE_NON_GAME
+
+/atom/movable/screen/plane_master/fullscreen
+	name = "fullscreen plane master"
+	plane = FULLSCREEN_PLANE
+	appearance_flags = PLANE_MASTER //should use client color
+	blend_mode = BLEND_OVERLAY
+	render_relay_plane = RENDER_PLANE_NON_GAME
+
+/atom/movable/screen/plane_master/above_lighting
+	name = "above lighting plane master"
+	plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	appearance_flags = PLANE_MASTER //should use client color
+	blend_mode = BLEND_OVERLAY
+	render_relay_plane = RENDER_PLANE_GAME
+
+/atom/movable/screen/plane_master/gravpulse
+	name = "gravpulse plane"
+	mouse_opacity = 0
+	plane = GRAVITY_PULSE_PLANE
+	render_target = GRAVITY_PULSE_RENDER_TARGET
+	render_relay_plane = null
+
+/**
+ * Plane master handling byond internal blackness
+ * vars are set as to replicate behavior when rendering to other planes
+ * do not touch this unless you know what you are doing
+ */
+/atom/movable/screen/plane_master/blackness
+	name = "darkness plane master"
+	plane = BLACKNESS_PLANE
+	mouse_opacity = 0
+	color = list(null, null, null, "#0000", "#000f")
+	blend_mode = BLEND_MULTIPLY
+	appearance_flags = PLANE_MASTER | NO_CLIENT_COLOR | PIXEL_SCALE
+	//byond internal end
+	render_relay_plane = RENDER_PLANE_GAME

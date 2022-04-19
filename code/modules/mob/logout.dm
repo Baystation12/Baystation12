@@ -5,9 +5,14 @@
 	handle_admin_logout()
 	if(my_client)
 		my_client.screen -= l_general
-		my_client.screen -= l_plane
+
+	if(LAZYLEN(plane_masters))
+		for(var/atom/movable/screen/plane_master/P in plane_masters)
+			my_client.screen -= P
+
+	LAZYCLEARLIST(plane_masters)
+
 	QDEL_NULL(l_general)
-	QDEL_NULL(l_plane)
 	hide_client_images()
 	..()
 

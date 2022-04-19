@@ -55,6 +55,7 @@
 
 /mob
 	var/client/my_client // Need to keep track of this ourselves, since by the time Logout() is called the client has already been nulled
+	var/list/atom/movable/screen/plane_master/plane_masters = list()
 
 /mob/Login()
 
@@ -87,10 +88,15 @@
 	if(eyeobj)
 		eyeobj.possess(src)
 
-	l_plane = new()
 	l_general = new()
-	client.screen += l_plane
 	client.screen += l_general
+
+	//Add all the planemasters we will need for the composite view of the game
+	for(var/mytype in subtypesof(/atom/movable/screen/plane_master)- /atom/movable/screen/plane_master/rendering_plate)
+		var/atom/movable/screen/plane_master/instance = new mytype()
+		LAZYSET(plane_masters, "[instance.plane]", instance)
+		client.screen |= plane_masters["[instance.plane]"]
+		instance.backdrop(src)
 
 	refresh_client_images()
 	reload_fullscreen() // Reload any fullscreen overlays this mob has.
