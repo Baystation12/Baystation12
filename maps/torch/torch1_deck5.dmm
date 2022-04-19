@@ -11042,7 +11042,6 @@
 	},
 /obj/structure/cable/cyan{
 	d2 = 2;
-	dir = 1;
 	icon_state = "0-2"
 	},
 /obj/machinery/power/apc{
@@ -12191,7 +12190,6 @@
 	},
 /obj/structure/cable/cyan{
 	d2 = 2;
-	dir = 1;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/white/monotile,
