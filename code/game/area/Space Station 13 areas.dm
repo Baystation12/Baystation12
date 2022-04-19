@@ -78,7 +78,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	ambience = list('sound/ambience/ambispace1.ogg','sound/ambience/ambispace2.ogg','sound/ambience/ambispace3.ogg','sound/ambience/ambispace4.ogg','sound/ambience/ambispace5.ogg')
 	secure = FALSE
 
-area/space/atmosalert()
+/area/space/atmosalert()
 	return
 
 /area/space/fire_alert()
