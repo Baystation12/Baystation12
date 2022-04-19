@@ -11,6 +11,6 @@
 /mob/observer/eye/keep_following(var/atom/movable/moving_instance, var/atom/old_loc, var/atom/new_loc)
 	setLoc(get_turf(new_loc))
 
-mob/observer/eye/EyeMove()
+/mob/observer/eye/EyeMove()
 	stop_following()
 	. = ..()

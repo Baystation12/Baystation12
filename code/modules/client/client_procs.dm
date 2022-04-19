@@ -378,7 +378,7 @@
 	getFilesSlow(src, asset_cache.cache, register_asset = FALSE)
 
 
-mob/proc/MayRespawn()
+/mob/proc/MayRespawn()
 	return 0
 
 client/proc/MayRespawn()
