@@ -57,10 +57,10 @@
 /obj/effect/paint/blue
 	color = COLOR_NAVY_BLUE
 
-obj/effect/paint/ocean
+/obj/effect/paint/ocean
 	color =	COLOR_OCEAN
 
-obj/effect/paint/palegreengray
+/obj/effect/paint/palegreengray
 	color =	COLOR_PALE_GREEN_GRAY
 
 /obj/effect/paint/brown

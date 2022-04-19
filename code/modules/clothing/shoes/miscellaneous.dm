@@ -244,7 +244,7 @@
 	desc = "A pair of black high heels."
 	color = COLOR_GRAY15
 
-obj/item/clothing/shoes/heels/red
+/obj/item/clothing/shoes/heels/red
 	name = "red high heels"
 	desc = "A pair of red high heels."
 	color = COLOR_RED

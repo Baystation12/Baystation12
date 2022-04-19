@@ -3615,7 +3615,7 @@
 
 //Sol Vendor
 
-obj/item/reagent_containers/food/snacks/lunacake
+/obj/item/reagent_containers/food/snacks/lunacake
 	name = "luna cake"
 	icon_state = "lunacake_wrapped"
 	desc = "Now with 20% less lawsuit enabling rhegolith!"
@@ -3626,14 +3626,14 @@ obj/item/reagent_containers/food/snacks/lunacake
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/reagent_containers/food/snacks/lunacake/mochicake
+/obj/item/reagent_containers/food/snacks/lunacake/mochicake
 	name = "mochi cake"
 	icon_state = "mochicake_wrapped"
 	desc = "Konnichiwa! Many go lucky rice cakes in future!"
 	trash = /obj/item/trash/mochicakewrap
 	nutriment_desc = list("sweet" = 4, "rice" = 1)
 
-obj/item/reagent_containers/food/snacks/lunacake/mooncake
+/obj/item/reagent_containers/food/snacks/lunacake/mooncake
 	name = "dark side luna cake"
 	icon_state = "mooncake_wrapped"
 	desc = "Explore the dark side! May contain trace amounts of reconstituted cocoa."
@@ -3642,7 +3642,7 @@ obj/item/reagent_containers/food/snacks/lunacake/mooncake
 	nutriment_desc = list("sweet" = 4, "chocolate" = 1)
 
 
-obj/item/reagent_containers/food/snacks/triton
+/obj/item/reagent_containers/food/snacks/triton
 	name = "tide gobs"
 	icon_state = "tidegobs"
 	desc = "Contains over 9000% of your daily recommended intake of salt."
@@ -3653,7 +3653,7 @@ obj/item/reagent_containers/food/snacks/triton
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/reagent_containers/food/snacks/saturn
+/obj/item/reagent_containers/food/snacks/saturn
 	name = "saturn-os"
 	icon_state = "saturno"
 	desc = "A day ration of salt, styrofoam and possibly sawdust."
@@ -3664,7 +3664,7 @@ obj/item/reagent_containers/food/snacks/saturn
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/reagent_containers/food/snacks/jupiter
+/obj/item/reagent_containers/food/snacks/jupiter
 	name = "jove gello"
 	icon_state = "jupiter"
 	desc = "By Joove! It's some kind of gel."
@@ -3675,7 +3675,7 @@ obj/item/reagent_containers/food/snacks/jupiter
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/reagent_containers/food/snacks/pluto
+/obj/item/reagent_containers/food/snacks/pluto
 	name = "plutonian rods"
 	icon_state = "pluto"
 	desc = "Baseless tasteless nutrithick rods to get you through the day. Now even less rash inducing!"
@@ -3686,7 +3686,7 @@ obj/item/reagent_containers/food/snacks/pluto
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/reagent_containers/food/snacks/mars
+/obj/item/reagent_containers/food/snacks/mars
 	name = "frouka"
 	icon_state = "mars"
 	desc = "Celebrate founding day with a steaming self-heated bowl of sweet eggs and taters!"
@@ -3697,7 +3697,7 @@ obj/item/reagent_containers/food/snacks/mars
 	nutriment_amt = 8
 	bitesize = 2
 
-obj/item/reagent_containers/food/snacks/venus
+/obj/item/reagent_containers/food/snacks/venus
 	name = "venusian hot cakes"
 	icon_state = "venus"
 	desc = "Hot takes on hot cakes, a timeless classic now finally fit for human consumption!"
@@ -3711,7 +3711,7 @@ obj/item/reagent_containers/food/snacks/venus
 	.=..()
 	reagents.add_reagent(/datum/reagent/capsaicin = 5)
 
-obj/item/reagent_containers/food/snacks/oort
+/obj/item/reagent_containers/food/snacks/oort
 	name = "oort cloud rocks"
 	icon_state = "oort"
 	desc = "Pop rocks themed on the most important industrial sector in Sol, new formula guarantees fewer shrapnel induced oral injury."
@@ -3727,7 +3727,7 @@ obj/item/reagent_containers/food/snacks/oort
 
 //weebo vend! So japanese it hurts
 
-obj/item/reagent_containers/food/snacks/ricecake
+/obj/item/reagent_containers/food/snacks/ricecake
 	name = "rice cake"
 	icon_state = "ricecake"
 	desc = "Ancient earth snack food made from balled up rice."
@@ -3735,7 +3735,7 @@ obj/item/reagent_containers/food/snacks/ricecake
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/reagent_containers/food/snacks/pokey
+/obj/item/reagent_containers/food/snacks/pokey
 	name = "pokeys"
 	icon_state = "pokeys"
 	desc = "A bundle of chocolate coated bisquit sticks."
@@ -3743,7 +3743,7 @@ obj/item/reagent_containers/food/snacks/pokey
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/reagent_containers/food/snacks/weebonuts
+/obj/item/reagent_containers/food/snacks/weebonuts
 	name = "red alert nuts"
 	icon_state = "weebonuts"
 	trash = /obj/item/trash/weebonuts
@@ -3755,7 +3755,7 @@ obj/item/reagent_containers/food/snacks/weebonuts
 	.=..()
 	reagents.add_reagent(/datum/reagent/capsaicin = 1)
 
-obj/item/reagent_containers/food/snacks/chocobanana
+/obj/item/reagent_containers/food/snacks/chocobanana
 	name = "choco banang"
 	icon_state = "chocobanana"
 	trash = /obj/item/trash/stick
@@ -3767,7 +3767,7 @@ obj/item/reagent_containers/food/snacks/chocobanana
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 10)
 
-obj/item/reagent_containers/food/snacks/dango
+/obj/item/reagent_containers/food/snacks/dango
 	name = "dango"
 	icon_state = "dango"
 	trash = /obj/item/trash/stick

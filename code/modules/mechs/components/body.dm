@@ -180,7 +180,7 @@
 		update_components()
 	else . = ..()
 
-obj/item/mech_component/chassis/MouseDrop(atom/over)
+/obj/item/mech_component/chassis/MouseDrop(atom/over)
 	if(!usr || !over) return
 	if(!Adjacent(usr) || !over.Adjacent(usr)) return
 

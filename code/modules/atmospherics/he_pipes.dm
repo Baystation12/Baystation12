@@ -1,5 +1,5 @@
 
-obj/machinery/atmospherics/pipe/simple/heat_exchanging
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging
 	icon = 'icons/atmos/heat.dmi'
 	icon_state = "intact"
 	pipe_icon = "hepipe"
@@ -21,15 +21,15 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 	can_buckle = 1
 	buckle_lying = 1
 
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/Initialize()
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/Initialize()
 	. = ..()
 	color = "#404040" //we don't make use of the fancy overlay system for colours, use this to set the default.
 
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/set_dir(new_dir)
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/set_dir(new_dir)
 	..()
 	initialize_directions_he = initialize_directions	// The auto-detection from /pipe is good enough for a simple HE pipe
 
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/atmos_init()
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/atmos_init()
 	..()
 	var/node1_dir
 	var/node2_dir
@@ -55,7 +55,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/atmos_init()
 
 	update_icon()
 
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/Process()
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/Process()
 	if(!parent)
 		..()
 	else
@@ -107,7 +107,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/Process()
 
 
 
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 	icon = 'icons/atmos/junction.dmi'
 	icon_state = "intact"
 	pipe_icon = "hejunction"
@@ -116,11 +116,11 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 	build_icon_state = "junction"
 
 // Doubling up on initialize_directions is necessary to allow HE pipes to connect
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/set_dir(new_dir)
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/set_dir(new_dir)
 	..()
 	initialize_directions_he = dir
 
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/atmos_init()
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/atmos_init()
 	..()
 	// Only check back side for normal pipes
 	for(var/obj/machinery/atmospherics/target in get_step(src,GLOB.flip_dir[src.dir]))

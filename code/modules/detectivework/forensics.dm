@@ -14,7 +14,7 @@ atom/var/fingerprintslast
 atom/var/list/suit_fibers
 atom/var/list/fingerprints
 atom/var/list/gunshot_residue
-obj/item/var/list/trace_DNA
+/obj/item/var/list/trace_DNA
 
 /atom/proc/add_hiddenprint(mob/M)
 	if(!M || !M.key)

@@ -48,7 +48,7 @@ mob/living/silicon/check_airflow_movable()
 	return 0
 
 
-obj/check_airflow_movable(n)
+/obj/check_airflow_movable(n)
 	if(isnull(w_class))
 		if(n < vsc.airflow_dense_pressure) return 0 //most non-item objs don't have a w_class yet
 	else
@@ -111,13 +111,13 @@ mob/airflow_hit(atom/A)
 	Weaken(weak_amt)
 	. = ..()
 
-obj/airflow_hit(atom/A)
+/obj/airflow_hit(atom/A)
 	for(var/mob/M in hearers(src))
 		M.show_message("<span class='danger'>\The [src] slams into \a [A]!</span>",1,"<span class='danger'>You hear a loud slam!</span>",2)
 	playsound(src.loc, "smash.ogg", 25, 1, -1)
 	. = ..()
 
-obj/item/airflow_hit(atom/A)
+/obj/item/airflow_hit(atom/A)
 	airflow_speed = 0
 	airflow_dest = null
 
