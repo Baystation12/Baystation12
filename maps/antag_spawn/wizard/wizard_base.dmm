@@ -7,8 +7,7 @@
 /area/map_template/wizard_station)
 "ac" = (
 /turf/unsimulated/wall/fakeglass{
-	dir = 8;
-	icon_state = "fakewindows"
+	dir = 8
 	},
 /area/map_template/wizard_station)
 "ad" = (
@@ -150,13 +149,11 @@
 /area/map_template/wizard_station)
 "ay" = (
 /turf/unsimulated/wall/fakeglass{
-	dir = 1;
-	icon_state = "fakewindows"
+	dir = 1
 	},
 /area/map_template/wizard_station)
 "az" = (
 /turf/unsimulated/floor{
-	dir = 2;
 	icon = 'icons/misc/beach.dmi';
 	icon_state = "seashallow";
 	name = "water"
@@ -165,7 +162,6 @@
 "aA" = (
 /obj/item/bikehorn/rubberducky,
 /turf/unsimulated/floor{
-	dir = 2;
 	icon = 'icons/misc/beach.dmi';
 	icon_state = "seashallow";
 	name = "water"
@@ -179,7 +175,6 @@
 	pixel_y = 32
 	},
 /turf/unsimulated/floor{
-	dir = 2;
 	icon_state = "freezerfloor"
 	},
 /area/map_template/wizard_station)
@@ -188,7 +183,6 @@
 	pixel_y = 8
 	},
 /turf/unsimulated/floor{
-	dir = 2;
 	icon_state = "freezerfloor"
 	},
 /area/map_template/wizard_station)
@@ -290,20 +284,17 @@
 	dir = 8
 	},
 /turf/unsimulated/floor{
-	dir = 2;
 	icon_state = "freezerfloor"
 	},
 /area/map_template/wizard_station)
 "aO" = (
 /turf/unsimulated/floor{
-	dir = 2;
 	icon_state = "freezerfloor"
 	},
 /area/map_template/wizard_station)
 "aP" = (
 /obj/machinery/door/unpowered/simple/iron,
 /turf/unsimulated/floor{
-	dir = 2;
 	icon_state = "freezerfloor"
 	},
 /area/map_template/wizard_station)
@@ -348,7 +339,6 @@
 "aW" = (
 /obj/item/soap,
 /turf/unsimulated/floor{
-	dir = 2;
 	icon = 'icons/misc/beach.dmi';
 	icon_state = "seashallow";
 	name = "water"
@@ -363,22 +353,18 @@
 	pixel_y = -22
 	},
 /turf/unsimulated/floor{
-	dir = 2;
 	icon_state = "freezerfloor"
 	},
 /area/map_template/wizard_station)
 "aY" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
-	icon_state = "sink";
-	pixel_x = 11;
-	pixel_y = 0
+	pixel_x = 11
 	},
 /obj/item/storage/mirror{
 	pixel_x = 32
 	},
 /turf/unsimulated/floor{
-	dir = 2;
 	icon_state = "freezerfloor"
 	},
 /area/map_template/wizard_station)
