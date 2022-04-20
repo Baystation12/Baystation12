@@ -5,7 +5,6 @@
 #include "using.dm"
 
 #include "antag_spawn\antag_spawn_bases.dm"
-#include "antag_spawn\deity\deity.dm"
 #include "antag_spawn\ert\ert.dm"
 #include "antag_spawn\heist\heist.dm"
 #include "antag_spawn\mercenary\mercenary.dm"
