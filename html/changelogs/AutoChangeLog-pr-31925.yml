@@ -1,5 +1,0 @@
-author: Textor
-delete-after: true
-changes:
-  - bugfix: Engineers no longer try to pry out intellicards from empty intellicard
-      slots instead of opening the maintenance hatch on multifunctional computers.

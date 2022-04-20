@@ -1,4 +1,0 @@
-author: Textor
-delete-after: true
-changes:
-  - bugfix: Newly built plating no longer will be called "airless" plating.

@@ -1,6 +1,0 @@
-author: Textor
-delete-after: true
-changes:
-  - rscadd: Deck 4 now has a hallway stretching through the hangar, allowing people
-      to pass more easily or observe hangar operations.
-  - rscdel: Air Traffic Control has been removed to make room for this hallway.

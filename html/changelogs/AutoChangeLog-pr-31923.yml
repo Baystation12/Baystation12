@@ -1,5 +1,0 @@
-author: Textor
-delete-after: true
-changes:
-  - bugfix: Closets and crates made out of materials other than steel will now deconstruct
-      to their constituent material.
