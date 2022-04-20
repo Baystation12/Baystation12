@@ -13880,9 +13880,8 @@
 	dir = 2;
 	pixel_y = 24
 	},
-/obj/machinery/computer/atmoscontrol/laptop{
-	monitored_alarm_ids = list("xenobio1_alarm","xenobio2_alarm","xenobio3_alarm","xenobio4_alarm");
-	req_access = list("ACCESS_RESEARCH")
+/obj/machinery/computer/atmoscontrol/laptop/research{
+	monitored_alarm_ids = list("xenobio1_alarm","xenobio2_alarm","xenobio3_alarm","xenobio4_alarm")
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/xenobiology)
@@ -14046,7 +14045,7 @@
 "aVf" = (
 /obj/machinery/alarm/monitor{
 	alarm_id = "xenobio1_alarm";
-	pixel_y = 24
+	req_access = list(list("ACCESS_RESEARCH","ACCESS_ATMOS","ACCESS_ENGINE_EQUIP"))
 	},
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
@@ -14109,13 +14108,6 @@
 	opacity = 0
 	},
 /turf/simulated/floor/plating,
-/area/rnd/xenobiology)
-"aVq" = (
-/obj/machinery/alarm/monitor{
-	alarm_id = "xenobio4_alarm";
-	pixel_y = 24
-	},
-/turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "aVs" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
@@ -17998,6 +17990,13 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/center)
+"ghU" = (
+/obj/machinery/alarm/monitor{
+	alarm_id = "xenobio4_alarm";
+	req_access = list(list("ACCESS_RESEARCH","ACCESS_ATMOS","ACCESS_ENGINE_EQUIP"))
+	},
+/turf/simulated/floor/reinforced,
+/area/rnd/xenobiology)
 "gib" = (
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/surgery)
@@ -29053,9 +29052,9 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/alarm/monitor{
-	alarm_id = "xenobio2_alarm";
-	dir = 4;
-	pixel_x = -24
+	alarm_id = "xenobio3_alarm";
+	req_access = list(list("ACCESS_RESEARCH","ACCESS_ATMOS","ACCESS_ENGINE_EQUIP"));
+	dir = 8
 	},
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
@@ -29101,18 +29100,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
-/turf/simulated/floor/reinforced,
-/area/rnd/xenobiology)
-"tyb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/obj/machinery/alarm/monitor{
-	alarm_id = "xenobio3_alarm";
-	dir = 8;
-	pixel_x = 24
-	},
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "tzb" = (
@@ -29679,6 +29666,18 @@
 	},
 /turf/simulated/floor/tiled,
 /area/security/processing)
+"uJL" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/alarm/monitor{
+	alarm_id = "xenobio2_alarm";
+	dir = 4;
+	req_access = list(list("ACCESS_RESEARCH","ACCESS_ATMOS","ACCESS_ENGINE_EQUIP"))
+	},
+/turf/simulated/floor/reinforced,
+/area/rnd/xenobiology)
 "uKa" = (
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
@@ -51193,7 +51192,7 @@ aVh
 aVv
 aVJ
 aVV
-ttb
+uJL
 bEb
 aaa
 aaa
@@ -53011,7 +53010,7 @@ aVo
 aVC
 aVP
 aVV
-tyb
+ttb
 bFb
 aaa
 aaa
@@ -53411,7 +53410,7 @@ aaa
 aaa
 aUS
 aUS
-aVq
+ghU
 tjb
 tnb
 tob
