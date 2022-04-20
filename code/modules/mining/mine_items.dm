@@ -58,6 +58,7 @@
 	name = "sledgehammer"
 	desc = "A mining hammer made of reinforced metal. You feel like smashing your boss in the face with this."
 	icon = 'icons/obj/weapons/melee_physical.dmi'
+	icon_state = "sledgehammer"
 
 /obj/item/pickaxe/drill
 	name = "advanced mining drill" // Can dig sand as well!
@@ -239,7 +240,7 @@
 		addon.layer = ABOVE_LIGHTING_LAYER
 		addon.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		overlays += addon
-		set_light(0.5, 0.5, 3) 
+		set_light(0.5, 0.5, 3)
 	else
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, randpixel)
