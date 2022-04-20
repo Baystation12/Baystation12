@@ -220,7 +220,7 @@ var/global/list/organ_rel_size = list(
 	if(re_encode)
 		. = html_encode(.)
 
-proc/slur(phrase)
+/proc/slur(phrase)
 	phrase = html_decode(phrase)
 	var/leng = length_char(phrase)
 	var/counter = length_char(phrase)
@@ -269,7 +269,7 @@ proc/slur(phrase)
 	return sanitize(t)
 
 
-proc/Gibberish(t, p)//t is the inputted message, and any value higher than 70 for p will cause letters to be replaced instead of added
+/proc/Gibberish(t, p)//t is the inputted message, and any value higher than 70 for p will cause letters to be replaced instead of added
 	/* Turn text into complete gibberish! */
 	var/returntext = ""
 	for(var/i = 1, i <= length_char(t), i++)

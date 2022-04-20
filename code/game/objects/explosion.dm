@@ -1,6 +1,6 @@
 //TODO: Flash range does nothing currently
 
-proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN, shaped, turf_breaker)
+/proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN, shaped, turf_breaker)
 	var/multi_z_scalar = 0.35
 	UNLINT(src = null)	//so we don't abort once src is deleted
 	spawn(0)
@@ -84,6 +84,6 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 
 
 
-proc/secondaryexplosion(turf/epicenter, range)
+/proc/secondaryexplosion(turf/epicenter, range)
 	for(var/turf/tile in range(range, epicenter))
 		tile.ex_act(2)

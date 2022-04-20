@@ -162,7 +162,7 @@
 	update_icon()
 
 
-/obj/item/reagent_containers/glass/beaker/update_icon()
+/obj/item/reagent_containers/glass/beaker/on_update_icon()
 	overlays.Cut()
 	if (reagents.total_volume)
 		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "[icon_state]10")

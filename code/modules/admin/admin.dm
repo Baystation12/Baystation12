@@ -1521,7 +1521,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		data += "<center>No faxes yet.</center>"
 	show_browser(usr, "<HTML><HEAD><TITLE>Fax History</TITLE></HEAD><BODY>[data]</BODY></HTML>", "window=FaxHistory;size=450x400")
 
-datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
+/datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
 
 /datum/admins/proc/faxCallback(var/obj/item/paper/admin/P, var/obj/machinery/photocopier/faxmachine/destination)
 	var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null

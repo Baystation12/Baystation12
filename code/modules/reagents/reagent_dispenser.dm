@@ -12,8 +12,8 @@
 	var/amount_per_transfer_from_this = 10
 	var/possible_transfer_amounts = "10;25;50;100;500"
 
-	attackby(obj/item/W as obj, mob/user as mob)
-		return
+/obj/structure/reagent_dispensers/attackby(obj/item/W as obj, mob/user as mob)
+	return
 
 /obj/structure/reagent_dispensers/New()
 	create_reagents(initial_capacity)

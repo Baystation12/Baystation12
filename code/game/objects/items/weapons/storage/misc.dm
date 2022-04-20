@@ -85,6 +85,9 @@
 	throwforce = 2
 	slot_flags = SLOT_BELT
 	startswith = list(/obj/item/clothing/mask/chewable/tobacco = 6)
+
+/obj/item/storage/chewables/Initialize()
+	. = ..()
 	make_exact_fit()
 
 //loose leaf
@@ -138,7 +141,6 @@
 	icon_state = "cookiebag"
 	max_storage_space = 6
 	startswith = list(/obj/item/reagent_containers/food/snacks/cookie = 6)
-	make_exact_fit()
 
 /obj/item/storage/chewables/candy/gum
 	name = "pack of Rainbo-Gums"
@@ -146,7 +148,6 @@
 	icon_state = "gumpack"
 	max_storage_space = 8
 	startswith = list(/obj/item/clothing/mask/chewable/candy/gum = 8)
-	make_exact_fit()
 
 /obj/item/storage/chewables/candy/medicallollis
 	name = "pack of medicinal lollipops"
@@ -154,7 +155,6 @@
 	icon_state = "lollipack"
 	max_storage_space = 20
 	startswith = list(/obj/item/clothing/mask/chewable/candy/lolli/meds = 20)
-	make_exact_fit()
 
 /obj/item/storage/medical_lolli_jar
 	name = "lollipops jar"

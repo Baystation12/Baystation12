@@ -152,86 +152,86 @@
 	attack_verb = list("attacked", "struck", "hit")
 	var/bullets = 5
 
-	attackby(obj/item/I as obj, mob/user as mob)
-		if(istype(I, /obj/item/toy/ammo/crossbow))
-			if(bullets <= 4)
-				if(!user.unEquip(I))
-					return
-				qdel(I)
-				bullets++
-				to_chat(user, "<span class='notice'>You load the foam dart into the crossbow.</span>")
-			else
-				to_chat(usr, "<span class='warning'>It's already fully loaded.</span>")
+/obj/item/toy/crossbow/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype(I, /obj/item/toy/ammo/crossbow))
+		if(bullets <= 4)
+			if(!user.unEquip(I))
+				return
+			qdel(I)
+			bullets++
+			to_chat(user, "<span class='notice'>You load the foam dart into the crossbow.</span>")
+		else
+			to_chat(usr, "<span class='warning'>It's already fully loaded.</span>")
 
 
-	afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
-		if(!isturf(target.loc) || target == user) return
-		if(flag) return
+/obj/item/toy/crossbow/afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
+	if(!isturf(target.loc) || target == user) return
+	if(flag) return
 
-		if (locate (/obj/structure/table, src.loc))
-			return
-		else if (bullets)
-			var/turf/trg = get_turf(target)
-			var/obj/effect/foam_dart_dummy/D = new/obj/effect/foam_dart_dummy(get_turf(src))
-			bullets--
-			D.icon_state = "foamdart"
-			D.SetName("foam dart")
-			playsound(user.loc, 'sound/items/syringeproj.ogg', 50, 1)
+	if (locate (/obj/structure/table, src.loc))
+		return
+	else if (bullets)
+		var/turf/trg = get_turf(target)
+		var/obj/effect/foam_dart_dummy/D = new/obj/effect/foam_dart_dummy(get_turf(src))
+		bullets--
+		D.icon_state = "foamdart"
+		D.SetName("foam dart")
+		playsound(user.loc, 'sound/items/syringeproj.ogg', 50, 1)
 
-			for(var/i=0, i<6, i++)
-				if (D)
-					if(D.loc == trg) break
-					step_towards(D,trg)
+		for(var/i=0, i<6, i++)
+			if (D)
+				if(D.loc == trg) break
+				step_towards(D,trg)
 
-					for(var/mob/living/M in D.loc)
-						if(!istype(M,/mob/living)) continue
-						if(M == user) continue
-						for(var/mob/O in viewers(world.view, D))
-							O.show_message(text("<span class='warning'>\The [] was hit by the foam dart!</span>", M), 1)
-						new /obj/item/toy/ammo/crossbow(M.loc)
-						qdel(D)
-						return
-
-					for(var/atom/A in D.loc)
-						if(A == user) continue
-						if(A.density)
-							new /obj/item/toy/ammo/crossbow(A.loc)
-							qdel(D)
-
-				sleep(1)
-
-			spawn(10)
-				if(D)
-					new /obj/item/toy/ammo/crossbow(D.loc)
+				for(var/mob/living/M in D.loc)
+					if(!istype(M,/mob/living)) continue
+					if(M == user) continue
+					for(var/mob/O in viewers(world.view, D))
+						O.show_message(text("<span class='warning'>\The [] was hit by the foam dart!</span>", M), 1)
+					new /obj/item/toy/ammo/crossbow(M.loc)
 					qdel(D)
+					return
 
-			return
-		else if (bullets == 0)
-			user.Weaken(5)
-			for(var/mob/O in viewers(world.view, user))
-				O.show_message(text("<span class='warning'>\The [] realized they were out of ammo and starting scrounging for some!</span>", user), 1)
+				for(var/atom/A in D.loc)
+					if(A == user) continue
+					if(A.density)
+						new /obj/item/toy/ammo/crossbow(A.loc)
+						qdel(D)
+
+			sleep(1)
+
+		spawn(10)
+			if(D)
+				new /obj/item/toy/ammo/crossbow(D.loc)
+				qdel(D)
+
+		return
+	else if (bullets == 0)
+		user.Weaken(5)
+		for(var/mob/O in viewers(world.view, user))
+			O.show_message(text("<span class='warning'>\The [] realized they were out of ammo and starting scrounging for some!</span>", user), 1)
 
 
-	attack(mob/M as mob, mob/user as mob)
-		src.add_fingerprint(user)
+/obj/item/toy/crossbow/attack(mob/M as mob, mob/user as mob)
+	src.add_fingerprint(user)
 
 // ******* Check
 
-		if (src.bullets > 0 && M.lying)
+	if (src.bullets > 0 && M.lying)
 
-			for(var/mob/O in viewers(M, null))
-				if(O.client)
-					O.show_message(text("<span class='danger'>\The [] casually lines up a shot with []'s head and pulls the trigger!</span>", user, M), 1, "<span class='warning'>You hear the sound of foam against skull</span>", 2)
-					O.show_message(text("<span class='warning'>\The [] was hit in the head by the foam dart!</span>", M), 1)
+		for(var/mob/O in viewers(M, null))
+			if(O.client)
+				O.show_message(text("<span class='danger'>\The [] casually lines up a shot with []'s head and pulls the trigger!</span>", user, M), 1, "<span class='warning'>You hear the sound of foam against skull</span>", 2)
+				O.show_message(text("<span class='warning'>\The [] was hit in the head by the foam dart!</span>", M), 1)
 
-			playsound(user.loc, 'sound/items/syringeproj.ogg', 50, 1)
-			new /obj/item/toy/ammo/crossbow(M.loc)
-			src.bullets--
-		else if (M.lying && src.bullets == 0)
-			for(var/mob/O in viewers(M, null))
-				if (O.client)	O.show_message(text("<span class='danger'>\The [] casually lines up a shot with []'s head, pulls the trigger, then realizes they are out of ammo and drops to the floor in search of some!</span>", user, M), 1, "<span class='warning'>You hear someone fall</span>", 2)
-			user.Weaken(5)
-		return
+		playsound(user.loc, 'sound/items/syringeproj.ogg', 50, 1)
+		new /obj/item/toy/ammo/crossbow(M.loc)
+		src.bullets--
+	else if (M.lying && src.bullets == 0)
+		for(var/mob/O in viewers(M, null))
+			if (O.client)	O.show_message(text("<span class='danger'>\The [] casually lines up a shot with []'s head, pulls the trigger, then realizes they are out of ammo and drops to the floor in search of some!</span>", user, M), 1, "<span class='warning'>You hear someone fall</span>", 2)
+		user.Weaken(5)
+	return
 
 /obj/item/toy/crossbow/examine(mob/user, distance)
 	. = ..()
@@ -268,25 +268,25 @@
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "struck", "hit")
 
-	attack_self(mob/user as mob)
-		src.active = !( src.active )
-		if (src.active)
-			to_chat(user, "<span class='notice'>You extend the plastic blade with a quick flick of your wrist.</span>")
-			playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
-			src.icon_state = "swordblue"
-			src.item_state = "swordblue"
-			src.w_class = ITEM_SIZE_HUGE
-		else
-			to_chat(user, "<span class='notice'>You push the plastic blade back down into the handle.</span>")
-			playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
-			src.icon_state = "sword0"
-			src.item_state = "sword0"
-			src.w_class = initial(w_class)
+/obj/item/toy/sword/attack_self(mob/user as mob)
+	src.active = !( src.active )
+	if (src.active)
+		to_chat(user, "<span class='notice'>You extend the plastic blade with a quick flick of your wrist.</span>")
+		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
+		src.icon_state = "swordblue"
+		src.item_state = "swordblue"
+		src.w_class = ITEM_SIZE_HUGE
+	else
+		to_chat(user, "<span class='notice'>You push the plastic blade back down into the handle.</span>")
+		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
+		src.icon_state = "sword0"
+		src.item_state = "sword0"
+		src.w_class = initial(w_class)
 
-		update_held_icon()
+	update_held_icon()
 
-		src.add_fingerprint(user)
-		return
+	src.add_fingerprint(user)
+	return
 
 /obj/item/toy/katana
 	name = "katana"
@@ -311,15 +311,15 @@
 	icon_state = "snappop"
 	w_class = ITEM_SIZE_TINY
 
-	throw_impact(atom/hit_atom)
-		..()
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-		s.set_up(3, 1, src)
-		s.start()
-		new /obj/effect/decal/cleanable/ash(src.loc)
-		src.visible_message("<span class='warning'>The [src.name] explodes!</span>","<span class='warning'>You hear a snap!</span>")
-		playsound(src, 'sound/effects/snap.ogg', 50, 1)
-		qdel(src)
+/obj/item/toy/snappop/throw_impact(atom/hit_atom)
+	..()
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	s.set_up(3, 1, src)
+	s.start()
+	new /obj/effect/decal/cleanable/ash(src.loc)
+	src.visible_message("<span class='warning'>The [src.name] explodes!</span>","<span class='warning'>You hear a snap!</span>")
+	playsound(src, 'sound/effects/snap.ogg', 50, 1)
+	qdel(src)
 
 /obj/item/toy/snappop/Crossed(H as mob|obj)
 	if((ishuman(H))) //i guess carp and shit shouldn't set them off

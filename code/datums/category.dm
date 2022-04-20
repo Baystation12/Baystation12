@@ -58,7 +58,7 @@
 	collection = null
 	return ..()
 
-datum/category_group/dd_SortValue()
+/datum/category_group/dd_SortValue()
 	return name
 
 
@@ -77,5 +77,5 @@ datum/category_group/dd_SortValue()
 	category = null
 	return ..()
 
-datum/category_item/dd_SortValue()
+/datum/category_item/dd_SortValue()
 	return name

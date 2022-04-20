@@ -21,7 +21,7 @@
 
 	return mobs
 
-proc/random_hair_style(gender, species = SPECIES_HUMAN)
+/proc/random_hair_style(gender, species = SPECIES_HUMAN)
 	var/h_style = "Bald"
 
 	var/datum/species/mob_species = all_species[species]
@@ -31,7 +31,7 @@ proc/random_hair_style(gender, species = SPECIES_HUMAN)
 
 	return h_style
 
-proc/random_facial_hair_style(gender, var/species = SPECIES_HUMAN)
+/proc/random_facial_hair_style(gender, var/species = SPECIES_HUMAN)
 	var/f_style = "Shaved"
 	var/datum/species/mob_species = all_species[species]
 	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(gender)
@@ -39,7 +39,7 @@ proc/random_facial_hair_style(gender, var/species = SPECIES_HUMAN)
 		f_style = pick(valid_facialhairstyles)
 		return f_style
 
-proc/random_name(gender, species = SPECIES_HUMAN)
+/proc/random_name(gender, species = SPECIES_HUMAN)
 	if(species)
 		var/datum/species/current_species = all_species[species]
 		if(current_species)
@@ -48,7 +48,7 @@ proc/random_name(gender, species = SPECIES_HUMAN)
 				return current_culture.get_random_name(gender)
 	return capitalize(pick(gender == FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 
-proc/random_skin_tone(var/datum/species/current_species)
+/proc/random_skin_tone(var/datum/species/current_species)
 	var/species_tone = current_species ? 35 - current_species.max_skin_tone() : -185
 	switch(pick(60;"caucasian", 15;"afroamerican", 10;"african", 10;"latino", 5;"albino"))
 		if("caucasian")		. = -10
@@ -60,7 +60,7 @@ proc/random_skin_tone(var/datum/species/current_species)
 
 	return min(max(. + rand(-25, 25), species_tone), 34)
 
-proc/skintone2racedescription(tone)
+/proc/skintone2racedescription(tone)
 	switch (tone)
 		if(30 to INFINITY)		return "albino"
 		if(20 to 30)			return "pale"
@@ -72,7 +72,7 @@ proc/skintone2racedescription(tone)
 		if(-INFINITY to -65)	return "black"
 		else					return "unknown"
 
-proc/age2agedescription(age)
+/proc/age2agedescription(age)
 	switch(age)
 		if(0 to 1)			return "infant"
 		if(1 to 3)			return "toddler"

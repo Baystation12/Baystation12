@@ -202,13 +202,13 @@
 	siemens_coefficient = 1.5
 	item_icons = list()
 
-	update_icon(var/mob/living/carbon/human/user)
-		if(!istype(user)) return
-		var/icon/ears = new/icon("icon" = 'icons/mob/onmob/onmob_head.dmi', "icon_state" = "kitty")
-		ears.Blend(rgb(user.r_hair, user.g_hair, user.b_hair), ICON_ADD)
+/obj/item/clothing/head/kitty/on_update_icon(var/mob/living/carbon/human/user)
+	if(!istype(user)) return
+	var/icon/ears = new/icon("icon" = 'icons/mob/onmob/onmob_head.dmi', "icon_state" = "kitty")
+	ears.Blend(rgb(user.r_hair, user.g_hair, user.b_hair), ICON_ADD)
 
-		var/icon/earbit = new/icon("icon" = 'icons/mob/onmob/onmob_head.dmi', "icon_state" = "kittyinner")
-		ears.Blend(earbit, ICON_OVERLAY)
+	var/icon/earbit = new/icon("icon" = 'icons/mob/onmob/onmob_head.dmi', "icon_state" = "kittyinner")
+	ears.Blend(earbit, ICON_OVERLAY)
 
 /obj/item/clothing/head/richard
 	name = "chicken mask"

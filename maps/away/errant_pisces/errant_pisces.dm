@@ -26,7 +26,7 @@
 	layer = CATWALK_LAYER//probably? Should cover cables, pipes and the rest of objects that are secured on the floor
 	var/health = 100
 
-obj/structure/net/Initialize(var/mapload)
+/obj/structure/net/Initialize(var/mapload)
 	. = ..()
 	update_connections()
 	if (!mapload)//if it's not mapped object but rather created during round, we should update visuals of adjacent net objects

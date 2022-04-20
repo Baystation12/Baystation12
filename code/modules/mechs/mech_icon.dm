@@ -1,4 +1,4 @@
-proc/get_mech_image(var/decal, var/cache_key, var/cache_icon, var/image_colour, var/overlay_layer = FLOAT_LAYER)
+/proc/get_mech_image(var/decal, var/cache_key, var/cache_icon, var/image_colour, var/overlay_layer = FLOAT_LAYER)
 	var/use_key = "[cache_key]-[cache_icon]-[overlay_layer]-[decal ? decal : "none"]-[image_colour ? image_colour : "none"]"
 	if(!GLOB.mech_image_cache[use_key])
 		var/image/I = image(icon = cache_icon, icon_state = cache_key)
@@ -25,7 +25,7 @@ proc/get_mech_image(var/decal, var/cache_key, var/cache_icon, var/image_colour, 
 		GLOB.mech_image_cache[use_key] = I
 	return GLOB.mech_image_cache[use_key]
 
-proc/get_mech_images(var/list/components = list(), var/overlay_layer = FLOAT_LAYER)
+/proc/get_mech_images(var/list/components = list(), var/overlay_layer = FLOAT_LAYER)
 	var/list/all_images = list()
 	for(var/obj/item/mech_component/comp in components)
 		all_images += get_mech_image(comp.decal, comp.icon_state, comp.on_mech_icon, comp.color, overlay_layer)

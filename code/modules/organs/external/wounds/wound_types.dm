@@ -138,7 +138,7 @@
 		"large straight scar" = 0
 		)
 
-datum/wound/cut/massive
+/datum/wound/cut/massive
 	max_bleeding_stage = 3
 	stages = list(
 		"massive wound" = 70,
@@ -193,7 +193,7 @@ datum/wound/cut/massive
 		"large round scar" = 0
 		)
 
-datum/wound/puncture/massive
+/datum/wound/puncture/massive
 	max_bleeding_stage = 3
 	stages = list(
 		"massive wound" = 60,

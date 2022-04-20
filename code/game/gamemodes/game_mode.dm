@@ -11,7 +11,6 @@ var/global/list/additional_antag_types = list()
 
 	var/required_players = 0                 // Minimum players for round to start if voted in.
 	var/required_enemies = 0                 // Minimum antagonists for round to start.
-	var/newscaster_announcements = null
 	var/end_on_antag_death = FALSE           // Round will end when all antagonists are dead.
 	var/ert_disabled = FALSE                 // ERT cannot be called.
 	var/deny_respawn = FALSE	             // Disable respawn during this round.
@@ -418,7 +417,6 @@ var/global/list/additional_antag_types = list()
 				antag_templates |= antag
 
 	shuffle(antag_templates) //In the case of multiple antag types
-	newscaster_announcements = pick(newscaster_standard_feeds)
 
 // Manipulates the end-game cinematic in conjunction with GLOB.cinematic
 /datum/game_mode/proc/nuke_act(obj/screen/cinematic_screen, station_missed = 0)
@@ -448,7 +446,7 @@ var/global/list/additional_antag_types = list()
 //////////////////////////
 //Reports player logouts//
 //////////////////////////
-proc/display_roundstart_logout_report()
+/proc/display_roundstart_logout_report()
 	var/msg = "<span class='notice'><b>Roundstart logout report</b>\n\n"
 	for(var/mob/living/L in SSmobs.mob_list)
 
