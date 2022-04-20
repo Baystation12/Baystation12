@@ -708,8 +708,8 @@
 /obj/item/stack/material/rods/fifty,
 /obj/item/device/spaceflare,
 /obj/item/device/spaceflare,
-/obj/item/weldpack,
-/obj/item/weldpack,
+/obj/item/storage/backpack/weldpack,
+/obj/item/storage/backpack/weldpack,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "DR" = (
