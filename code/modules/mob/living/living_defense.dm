@@ -148,7 +148,7 @@
 	if (!aura_check(AURA_TYPE_THROWN, AM, TT))
 		return
 
-	if(istype(AM,/obj/))
+	if(isobj(AM))
 		var/obj/O = AM
 		var/dtype = O.damtype
 		var/throw_damage = O.throwforce*(TT.speed/THROWFORCE_SPEED_DIVISOR)
