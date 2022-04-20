@@ -35,8 +35,7 @@
 "h" = (
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /obj/machinery/power/apc{
 	dir = 8;
@@ -49,8 +48,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
@@ -71,45 +69,39 @@
 /area/constructionsite)
 "m" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "n" = (
 /obj/machinery/atmospherics/portables_connector{
-	dir = 8;
-	icon_state = "map_connector"
+	dir = 8
 	},
 /obj/machinery/portable_atmospherics/canister/air,
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "o" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "p" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 6;
-	icon_state = "intact"
+	dir = 6
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "q" = (
 /obj/machinery/atmospherics/portables_connector{
-	dir = 8;
-	icon_state = "map_connector"
+	dir = 8
 	},
 /obj/machinery/portable_atmospherics/canister/empty,
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "r" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1;
-	icon_state = "map_scrubber_on"
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
