@@ -8717,8 +8717,7 @@
 /area/maintenance/seconddeck/foreport)
 "uO" = (
 /obj/machinery/air_sensor{
-	id_tag = "rust_sensor";
-	tag = "rust_sensor"
+	id_tag = "rust_sensor"
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/vacant/prototype/engine)
