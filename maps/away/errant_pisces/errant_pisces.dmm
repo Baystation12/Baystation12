@@ -18,7 +18,6 @@
 /area/errant_pisces/bow_port)
 "af" = (
 /obj/machinery/alarm{
-	alarm_id = "petrov1";
 	dir = 4;
 	pixel_x = -25;
 	rcon_setting = 3
@@ -70,7 +69,6 @@
 /obj/structure/window/reinforced,
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/alarm{
-	alarm_id = "petrov1";
 	dir = 4;
 	pixel_x = -25;
 	rcon_setting = 3
@@ -1113,7 +1111,6 @@
 /area/errant_pisces/atmos)
 "de" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio3_alarm";
 	dir = 8;
 	pixel_x = 24
 	},
@@ -1122,7 +1119,6 @@
 /area/errant_pisces/atmos)
 "df" = (
 /obj/machinery/alarm{
-	alarm_id = "petrov1";
 	dir = 4;
 	pixel_x = -25;
 	rcon_setting = 3
@@ -1309,7 +1305,6 @@
 /area/errant_pisces/bow_maint)
 "dw" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /obj/structure/cable/green{
@@ -1731,7 +1726,6 @@
 /area/errant_pisces/head_f)
 "en" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /obj/effect/landmark/corpse/carp_fisher,
@@ -1783,7 +1777,6 @@
 /area/errant_pisces/smes_room)
 "et" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /obj/structure/cable/green{
@@ -1819,7 +1812,6 @@
 /area/errant_pisces/head_m)
 "ex" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/white,
@@ -2502,7 +2494,6 @@
 /area/errant_pisces/solar_starboard)
 "fH" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio3_alarm";
 	dir = 8;
 	pixel_x = 24
 	},
@@ -3451,7 +3442,6 @@
 /area/errant_pisces/dorms)
 "ik" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -4031,7 +4021,6 @@
 	dir = 8
 	},
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /obj/structure/closet,
@@ -4152,7 +4141,6 @@
 /area/errant_pisces/cryo)
 "km" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /obj/structure/window/basic{
@@ -4283,7 +4271,6 @@
 	dir = 10
 	},
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -5293,7 +5280,6 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /turf/simulated/floor/plating,
@@ -5372,7 +5358,6 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -5450,7 +5435,6 @@
 /area/errant_pisces/aft_hallway)
 "nx" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -5558,7 +5542,6 @@
 	dir = 4
 	},
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -6015,7 +5998,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/alarm{
-	alarm_id = "petrov1";
 	dir = 4;
 	pixel_x = -25;
 	rcon_setting = 3
@@ -6027,7 +6009,6 @@
 	dir = 1
 	},
 /obj/machinery/alarm{
-	alarm_id = "petrov1";
 	dir = 4;
 	pixel_x = -25;
 	rcon_setting = 3
@@ -6102,7 +6083,6 @@
 /area/errant_pisces/bridge)
 "oW" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /turf/simulated/floor/wood,
@@ -6286,7 +6266,6 @@
 /area/space)
 "px" = (
 /obj/machinery/alarm{
-	alarm_id = "petrov1";
 	dir = 4;
 	pixel_x = -25;
 	rcon_setting = 3
@@ -6424,7 +6403,6 @@
 /area/errant_pisces/fishing_wing)
 "pU" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -6457,7 +6435,6 @@
 /area/errant_pisces/fishing_wing)
 "pX" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{

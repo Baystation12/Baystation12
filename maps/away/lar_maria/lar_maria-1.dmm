@@ -74,7 +74,6 @@
 	pixel_x = 32
 	},
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /turf/simulated/floor/plating,
@@ -223,7 +222,6 @@
 /obj/item/storage/box/beakers,
 /obj/item/reagent_containers/spray/cleaner,
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/white,
@@ -325,7 +323,6 @@
 /obj/structure/bed/padded,
 /obj/effect/landmark/corpse/lar_maria/test_subject,
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -375,7 +372,6 @@
 /area/lar_maria/cells)
 "be" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /turf/simulated/floor/plating,
@@ -714,7 +710,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/machinery/alarm{
-	alarm_id = "misc_research";
 	dir = 8;
 	pixel_x = 24
 	},
@@ -733,7 +728,6 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/alarm{
-	alarm_id = "misc_research";
 	dir = 8;
 	pixel_x = 24
 	},
@@ -1016,7 +1010,6 @@
 "cR" = (
 /obj/structure/closet/crate/freezer/rations,
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -1569,7 +1562,6 @@
 /obj/structure/bed/padded,
 /obj/item/book/manual/chef_recipes,
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -1751,7 +1743,6 @@
 /obj/item/reagent_containers/spray/pepper,
 /obj/item/reagent_containers/spray/pepper,
 /obj/machinery/alarm{
-	alarm_id = "misc_research";
 	dir = 8;
 	pixel_x = 24
 	},
@@ -1826,7 +1817,6 @@
 /area/lar_maria/vir_hallway)
 "eV" = (
 /obj/machinery/alarm{
-	alarm_id = "misc_research";
 	dir = 8;
 	pixel_x = 24
 	},
@@ -2804,7 +2794,6 @@
 /area/lar_maria/vir_access)
 "gX" = (
 /obj/machinery/alarm{
-	alarm_id = "misc_research";
 	dir = 8;
 	pixel_x = 24
 	},
@@ -3342,7 +3331,6 @@
 	dir = 6
 	},
 /obj/machinery/alarm{
-	alarm_id = "xenobio4_alarm";
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -3409,7 +3397,6 @@
 	dir = 4
 	},
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,

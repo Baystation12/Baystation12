@@ -8356,7 +8356,6 @@
 /area/hallway/primary/firstdeck/center)
 "aAI" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/dark,
@@ -16715,7 +16714,6 @@
 /area/medical/sleeper)
 "eCb" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio4_alarm";
 	pixel_y = 24
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -18632,7 +18630,6 @@
 /obj/item/folder/nt,
 /obj/item/stack/nanopaste,
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /obj/machinery/light{
@@ -23226,7 +23223,6 @@
 	dir = 9
 	},
 /obj/machinery/alarm{
-	alarm_id = "xenobio2_alarm";
 	dir = 4;
 	pixel_x = -24
 	},
@@ -26750,7 +26746,6 @@
 /area/thruster/d1port)
 "rUO" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
 	},
 /obj/structure/table/steel,

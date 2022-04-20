@@ -4851,7 +4851,6 @@
 	dir = 8
 	},
 /obj/machinery/alarm{
-	alarm_id = "misc_research";
 	dir = 8;
 	pixel_x = 24
 	},
@@ -10622,7 +10621,6 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/alarm{
-	alarm_id = "xenobio4_alarm";
 	pixel_y = 24
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{

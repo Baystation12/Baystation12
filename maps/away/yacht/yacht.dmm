@@ -1394,7 +1394,6 @@
 /area/yacht/engine)
 "pb" = (
 /obj/machinery/alarm{
-	alarm_id = "misc_research";
 	dir = 8;
 	pixel_x = 24
 	},

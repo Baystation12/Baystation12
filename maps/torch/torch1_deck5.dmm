@@ -3035,7 +3035,6 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -5065,7 +5064,6 @@
 /area/quartermaster/hangar)
 "lj" = (
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
 	dir = 4;
 	pixel_x = -21;
 	pixel_y = 0;
@@ -5438,7 +5436,6 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -5733,7 +5730,6 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
@@ -5782,7 +5778,6 @@
 	dir = 6
 	},
 /obj/machinery/alarm{
-	alarm_id = "petrov3";
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
@@ -7649,7 +7644,6 @@
 /area/quartermaster/expedition)
 "qv" = (
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -7678,7 +7672,6 @@
 	icon_state = "corner_white"
 	},
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -10068,7 +10061,6 @@
 "vJ" = (
 /obj/item/seeds/potatoseed,
 /obj/machinery/alarm{
-	alarm_id = "petrov1";
 	dir = 4;
 	icon_state = "alarm0";
 	pixel_x = -24
@@ -10314,7 +10306,6 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
@@ -10454,7 +10445,6 @@
 "wZ" = (
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
@@ -10710,7 +10700,6 @@
 /obj/structure/closet/crate/secure/biohazard,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -12034,7 +12023,6 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -12347,7 +12335,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
@@ -12630,7 +12617,6 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov3";
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
@@ -13258,7 +13244,6 @@
 /area/maintenance/fifthdeck/aftstarboard)
 "HJ" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio2_alarm";
 	dir = 4;
 	icon_state = "alarm0";
 	pixel_x = -24
@@ -13337,7 +13322,6 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
@@ -15370,7 +15354,6 @@
 /obj/machinery/atmospherics/portables_connector,
 /obj/effect/floor_decal/industrial/outline/red,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -16035,7 +16018,6 @@
 /obj/structure/table/standard,
 /obj/machinery/reagent_temperature,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -16738,7 +16720,6 @@
 	dir = 9
 	},
 /obj/machinery/alarm{
-	alarm_id = "xenobio2_alarm";
 	dir = 4;
 	icon_state = "alarm0";
 	pixel_x = -24
@@ -17178,7 +17159,6 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov1";
 	dir = 4;
 	icon_state = "alarm0";
 	pixel_x = -24
@@ -17833,7 +17813,6 @@
 	},
 /obj/machinery/portable_atmospherics/canister,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
