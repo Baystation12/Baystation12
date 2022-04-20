@@ -11,7 +11,7 @@
 	requires_ntnet = TRUE
 	requires_ntnet_feature = NTNET_SOFTWAREDOWNLOAD
 	available_on_ntnet = FALSE
-	nanomodule_path = /datum/nano_module/program/computer_ntnetdownload/
+	nanomodule_path = /datum/nano_module/program/computer_ntnetdownload
 	ui_header = "downloader_finished.gif"
 	var/datum/computer_file/program/downloaded_file = null
 	var/hacked_download = FALSE

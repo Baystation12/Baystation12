@@ -505,7 +505,7 @@
 		icon_state = "potatodanger"
 
 /obj/machinery/power/port_gen/pacman/super/potato/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/reagent_containers/))
+	if(istype(O, /obj/item/reagent_containers))
 		var/obj/item/reagent_containers/R = O
 		if(R.standard_pour_into(src,user))
 			if(reagents.has_reagent("vodka"))

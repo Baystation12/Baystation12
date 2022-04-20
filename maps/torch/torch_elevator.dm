@@ -97,7 +97,7 @@
 	name = "Lower Deck"
 	landmark_tag = "nav_robotics_lift_bottom"
 	flags = SLANDMARK_FLAG_AUTOSET
-	base_area = /area/assembly/robotics/
+	base_area = /area/assembly/robotics
 	base_turf = /turf/simulated/floor/plating
 
 /obj/effect/shuttle_landmark/lift/medical_top

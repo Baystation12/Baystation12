@@ -295,7 +295,7 @@
 				var/end_T_descriptor = "<font color='#6b4400'>[start_T] \[[end_T.x],[end_T.y],[end_T.z]\] ([end_T.loc])</font>"
 				admin_attack_log(usr, M, "Threw the victim from [start_T_descriptor] to [end_T_descriptor].", "Was from [start_T_descriptor] to [end_T_descriptor].", "threw, from [start_T_descriptor] to [end_T_descriptor], ")
 
-	else if (istype(item, /obj/item/))
+	else if (istype(item, /obj/item))
 		var/obj/item/I = item
 		itemsize = I.w_class
 

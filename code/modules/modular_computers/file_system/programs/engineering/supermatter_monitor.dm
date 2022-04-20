@@ -5,7 +5,7 @@
 /datum/computer_file/program/supermatter_monitor
 	filename = "supmon"
 	filedesc = "Supermatter Monitoring"
-	nanomodule_path = /datum/nano_module/supermatter_monitor/
+	nanomodule_path = /datum/nano_module/supermatter_monitor
 	program_icon_state = "smmon_0"
 	program_key_state = "tech_key"
 	program_menu_icon = "notice"

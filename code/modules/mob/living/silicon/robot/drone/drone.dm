@@ -194,7 +194,7 @@ var/global/list/mob_hat_cache = list()
 			wear_hat(W)
 			user.visible_message("<span class='notice'>\The [user] puts \the [W] on \the [src].</span>")
 		return
-	else if(istype(W, /obj/item/borg/upgrade/))
+	else if(istype(W, /obj/item/borg/upgrade))
 		to_chat(user, "<span class='danger'>\The [src] is not compatible with \the [W].</span>")
 		return
 

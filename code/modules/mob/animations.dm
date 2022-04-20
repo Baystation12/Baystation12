@@ -47,7 +47,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/var/jitteriness = 0//Carbon
 
 /mob/proc/make_jittery(var/amount)
-	return //Only for living/carbon/human/
+	return //Only for living/carbon/human
 
 /mob/living/carbon/human/make_jittery(var/amount)
 	if(!istype(src, /mob/living/carbon/human)) // for the moment, only humans get jittery

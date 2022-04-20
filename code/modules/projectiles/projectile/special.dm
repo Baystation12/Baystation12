@@ -89,7 +89,7 @@
 			else
 				M.adjustFireLoss(rand(5,15))
 				M.show_message("<span class='danger'>The radiation beam singes you!</span>")
-	else if(istype(target, /mob/living/carbon/))
+	else if(istype(target, /mob/living/carbon))
 		M.show_message("<span class='notice'>The radiation beam dissipates harmlessly through your body.</span>")
 	else
 		return 1
@@ -117,7 +117,7 @@
 		var/mob/living/carbon/human/H = M
 		if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 			H.adjust_nutrition(30)
-	else if (istype(target, /mob/living/carbon/))
+	else if (istype(target, /mob/living/carbon))
 		M.show_message("<span class='notice'>The radiation beam dissipates harmlessly through your body.</span>")
 	else
 		return 1

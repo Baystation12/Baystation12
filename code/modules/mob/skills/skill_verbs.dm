@@ -122,7 +122,7 @@ Robots and antags can instruct.
 	visible_message("<span class='notice'>\The [src] trained \the [target] in the basics of \the [skill.name].</span>")
 	SV.set_cooldown()
 
-/datum/skill_buff/instruct/
+/datum/skill_buff/instruct
 	limit = 3
 
 /datum/skill_buff/motivate/can_buff(mob/target)

@@ -34,9 +34,9 @@
 	if(!(A.singuloCanEat()))
 		return 0
 
-	if (istype(A, /mob/living/))
+	if (istype(A, /mob/living))
 		var/mob/living/L = A
-		if(L.buckled && istype(L.buckled,/obj/structure/bed/))
+		if(L.buckled && istype(L.buckled,/obj/structure/bed))
 			var/turf/O = L.buckled
 			do_teleport(O, pick(endgame_safespawns))
 			L.forceMove(O.loc)

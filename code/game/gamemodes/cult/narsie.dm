@@ -194,7 +194,7 @@ var/global/list/narsie_list = list()
 	if(!(A.singuloCanEat()))
 		return 0
 
-	if (istype(A, /mob/living/))
+	if (istype(A, /mob/living))
 		var/mob/living/C2 = A
 
 		if(C2.status_flags & GODMODE)
@@ -226,7 +226,7 @@ var/global/list/narsie_list = list()
 	if(!(A.singuloCanEat()))
 		return 0
 
-	if (istype(A, /mob/living/))
+	if (istype(A, /mob/living))
 		var/mob/living/C2 = A
 
 		if(C2.status_flags & GODMODE)

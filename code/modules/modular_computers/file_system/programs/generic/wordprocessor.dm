@@ -7,7 +7,7 @@
 	size = 4
 	requires_ntnet = FALSE
 	available_on_ntnet = TRUE
-	nanomodule_path = /datum/nano_module/program/computer_wordprocessor/
+	nanomodule_path = /datum/nano_module/program/computer_wordprocessor
 	var/browsing = FALSE
 	var/open_file
 	var/loaded_data

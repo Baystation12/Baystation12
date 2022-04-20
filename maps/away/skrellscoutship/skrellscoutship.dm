@@ -227,7 +227,7 @@ var/global/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
 		/obj/item/clothing/glasses,
 		/obj/item/ammo_casing/shotgun,
 		/obj/item/ammo_magazine,
-		/obj/item/reagent_containers/food/snacks/donut/,
+		/obj/item/reagent_containers/food/snacks/donut,
 		/obj/item/melee/baton,
 		/obj/item/melee/telebaton,
 		/obj/item/flame/lighter,

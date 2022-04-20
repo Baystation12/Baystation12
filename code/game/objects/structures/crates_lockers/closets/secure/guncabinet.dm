@@ -30,7 +30,7 @@
 		for (var/obj/item/gun/G in contents)
 			if (istype(G, /obj/item/gun/energy))
 				lazors++
-			if (istype(G, /obj/item/gun/projectile/))
+			if (istype(G, /obj/item/gun/projectile))
 				shottas++
 		for (var/i = 0 to 2)
 			if(lazors || shottas) // only make icons if we have one of the two types.

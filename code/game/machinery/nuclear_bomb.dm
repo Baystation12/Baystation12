@@ -400,7 +400,7 @@ var/global/bomb_set
 		/obj/item/disk/nuclear,
 		/obj/item/pinpointer,
 		/obj/item/folder/envelope/nuke_instructions,
-		/obj/item/modular_computer/laptop/preset/custom_loadout/cheap/
+		/obj/item/modular_computer/laptop/preset/custom_loadout/cheap
 	)
 
 /obj/item/storage/secure/briefcase/nukedisk/examine(mob/user)

@@ -46,7 +46,7 @@
 	return ..()
 
 /obj/machinery/smartfridge/proc/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/reagent_containers/food/snacks/grown/) || istype(O,/obj/item/seeds/))
+	if(istype(O,/obj/item/reagent_containers/food/snacks/grown) || istype(O,/obj/item/seeds))
 		return 1
 	return 0
 
@@ -55,7 +55,7 @@
 	desc = "When you need seeds fast!"
 
 /obj/machinery/smartfridge/seeds/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/seeds/))
+	if(istype(O,/obj/item/seeds))
 		return 1
 	return 0
 
@@ -77,11 +77,11 @@
 	req_access = list(list(access_medical,access_chemistry))
 
 /obj/machinery/smartfridge/secure/medbay/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/reagent_containers/glass/))
+	if(istype(O,/obj/item/reagent_containers/glass))
 		return 1
-	if(istype(O,/obj/item/storage/pill_bottle/))
+	if(istype(O,/obj/item/storage/pill_bottle))
 		return 1
-	if(istype(O,/obj/item/reagent_containers/pill/))
+	if(istype(O,/obj/item/reagent_containers/pill))
 		return 1
 	return 0
 
@@ -92,7 +92,7 @@
 	icon_contents = "chem"
 
 /obj/machinery/smartfridge/secure/virology/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/reagent_containers/glass/beaker/vial/))
+	if(istype(O,/obj/item/reagent_containers/glass/beaker/vial))
 		return 1
 	return 0
 
@@ -139,7 +139,7 @@
 	icon_state = "drying_rack"
 
 /obj/machinery/smartfridge/drying_rack/accept_check(var/obj/item/O as obj)
-	if(istype(O, /obj/item/reagent_containers/food/snacks/))
+	if(istype(O, /obj/item/reagent_containers/food/snacks))
 		var/obj/item/reagent_containers/food/snacks/S = O
 		return S.dried_type
 	else if(istype(O, /obj/item/stack/material))

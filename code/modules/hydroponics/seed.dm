@@ -68,7 +68,7 @@
 
 	update_growth_stages()
 
-	uid = sequential_id(/datum/seed/)
+	uid = sequential_id(/datum/seed)
 
 /datum/seed/proc/get_trait(var/trait)
 	return traits["[trait]"]

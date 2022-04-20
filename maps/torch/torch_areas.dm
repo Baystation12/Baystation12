@@ -349,7 +349,7 @@
 
 //Charon
 
-/area/exploration_shuttle/
+/area/exploration_shuttle
 	name = "\improper Charon"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/plating
@@ -1647,7 +1647,7 @@
 	name = "\improper Custodial Storage Closet"
 
 // Tcomm
-/area/tcommsat/
+/area/tcommsat
 	ambience = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')
 	req_access = list(access_tcomsat)
 

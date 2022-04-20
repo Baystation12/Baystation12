@@ -46,7 +46,7 @@
 //  on or off.
 var/global/list/dna_activity_bounds[DNA_SE_LENGTH]
 
-// Used to determine what each block means (admin hax and species stuff on /vg/, mostly)
+// Used to determine what each block means
 var/global/list/assigned_blocks[DNA_SE_LENGTH]
 
 var/global/list/datum/dna/gene/dna_genes[0]
