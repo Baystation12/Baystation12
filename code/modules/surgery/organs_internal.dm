@@ -372,6 +372,14 @@
 		affected.implants -= I
 		I.replaced(target, affected)
 
+	if(istype(I, /obj/item/organ/internal/eyes))
+		var/obj/item/organ/internal/eyes/E = I
+		if(!E.is_broken())
+			I.owner.eye_blind = 0
+			target.disabilities &= ~BLINDED
+		if(!E.is_bruised())
+			I.owner.eye_blurry = 0
+
 /decl/surgery_step/internal/attach_organ/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, damaging the flesh in [target]'s [affected.name] with \the [tool]!</span>", \
