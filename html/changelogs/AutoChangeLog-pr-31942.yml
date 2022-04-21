@@ -1,0 +1,5 @@
+author: Textor
+delete-after: true
+changes:
+  - bugfix: Researchers have the ability to control the environment inside the xenobiology
+      lab again.
