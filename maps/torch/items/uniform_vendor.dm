@@ -131,13 +131,6 @@
 		return null //Return no uniforms, which will cause the machine to spit out an error.
 
 	// we have found a branch.
-	if(department == COM) //Command only has one variant and they have to be an officer
-		for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
-			if(child.departments & COM)
-				user_outfit = child
-				for(var/decl/hierarchy/mil_uniform/seniorchild in user_outfit.children) //Check for variants of command outfits
-					if(user_rank.sort_order >= seniorchild.min_rank && user_outfit.min_rank < seniorchild.min_rank)
-						user_outfit = seniorchild
 	else
 		var/tmp_department = department
 		tmp_department &= ~COM //Parse departments, with complete disconsideration to the command flag (so we don't flag 2 outfit trees)
