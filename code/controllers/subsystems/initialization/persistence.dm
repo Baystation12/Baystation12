@@ -10,8 +10,7 @@ SUBSYSTEM_DEF(persistence)
 	return
 
 
-/datum/controller/subsystem/persistence/Initialize()
-	. = ..()
+/datum/controller/subsystem/persistence/Initialize(start_uptime)
 	for(var/thing in subtypesof(/datum/persistent))
 		var/datum/persistent/P = new thing
 		persistence_datums[thing] = P

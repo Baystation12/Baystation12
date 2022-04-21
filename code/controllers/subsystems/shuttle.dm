@@ -23,7 +23,7 @@ SUBSYSTEM_DEF(shuttle)
 
 	var/tmp/list/working_shuttles
 
-/datum/controller/subsystem/shuttle/Initialize()
+/datum/controller/subsystem/shuttle/Initialize(start_uptime)
 	last_landmark_registration_time = world.time
 	for(var/shuttle_type in subtypesof(/datum/shuttle)) // This accounts for most shuttles, though away maps can queue up more.
 		var/datum/shuttle/shuttle = shuttle_type
@@ -31,7 +31,7 @@ SUBSYSTEM_DEF(shuttle)
 			LAZYDISTINCTADD(shuttles_to_initialize, shuttle_type)
 	block_queue = FALSE
 	clear_init_queue()
-	. = ..()
+
 
 /datum/controller/subsystem/shuttle/fire(resumed = FALSE)
 	if (!resumed)

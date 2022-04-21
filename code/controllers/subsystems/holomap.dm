@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(minimap)
 	var/list/datum/holomapdata/holomaps = list()
 	var/list/station_holomaps = list()
 
-/datum/controller/subsystem/minimap/Initialize()
+/datum/controller/subsystem/minimap/Initialize(start_uptime)
 	holomaps.len = world.maxz
 	for (var/z = 1 to world.maxz)
 		generateHolomap(z)
@@ -40,7 +40,6 @@ SUBSYSTEM_DEF(minimap)
 		if(istype(M) && !QDELETED(M))
 			M.update_map_data()
 
-	..()
 
 /datum/controller/subsystem/minimap/proc/generateHolomap(zlevel)
 	var/datum/holomapdata/data = new()

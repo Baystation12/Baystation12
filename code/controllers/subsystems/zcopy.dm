@@ -97,7 +97,7 @@ SUBSYSTEM_DEF(zcopy)
 		Objects [multiqueue_skips_object]\
 	"})
 
-/datum/controller/subsystem/zcopy/Initialize(timeofday)
+/datum/controller/subsystem/zcopy/Initialize(start_uptime)
 	calculate_zstack_limits()
 	// Flush the queue.
 	fire(FALSE, TRUE)

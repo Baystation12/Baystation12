@@ -34,7 +34,7 @@ SUBSYSTEM_DEF(goals)
 	return
 
 
-/datum/controller/subsystem/goals/Initialize()
+/datum/controller/subsystem/goals/Initialize(start_uptime)
 	var/list/all_depts = subtypesof(/datum/department)
 	//See if map is very particular about what depts it has
 	if(LAZYLEN(GLOB.using_map.departments))

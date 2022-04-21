@@ -8,7 +8,7 @@ SUBSYSTEM_DEF(alarm)
 	var/static/tmp/list/active = list()
 
 
-/datum/controller/subsystem/alarm/Initialize(timeofday)
+/datum/controller/subsystem/alarm/Initialize(start_uptime)
 	handlers = list(
 		GLOB.atmosphere_alarm,
 		GLOB.camera_alarm,

@@ -11,7 +11,7 @@ SUBSYSTEM_DEF(inactivity)
 	..()
 
 
-/datum/controller/subsystem/inactivity/Initialize(start_timeofday)
+/datum/controller/subsystem/inactivity/Initialize(start_uptime)
 	if (!config.kick_inactive)
 		suspend()
 

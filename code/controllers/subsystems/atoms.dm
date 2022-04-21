@@ -28,7 +28,7 @@ SUBSYSTEM_DEF(atoms)
 		text2file(initlog, "[GLOB.log_directory]/initialize.log")
 
 
-/datum/controller/subsystem/atoms/Initialize(timeofday)
+/datum/controller/subsystem/atoms/Initialize(start_uptime)
 	atom_init_stage = INITIALIZATION_INNEW_MAPLOAD
 	InitializeAtoms()
 

@@ -25,7 +25,7 @@ SUBSYSTEM_DEF(event)
 	var/datum/event_meta/new_event = new
 
 //Subsystem procs
-/datum/controller/subsystem/event/Initialize()
+/datum/controller/subsystem/event/Initialize(start_uptime)
 	if(!all_events)
 		all_events = subtypesof(/datum/event)
 	if(!event_containers)
@@ -43,7 +43,6 @@ SUBSYSTEM_DEF(event)
 		var/datum/event_container/receiver = event_containers[text2num(event_level)]
 		var/datum/event_container/donor = GLOB.using_map.map_event_container[event_level]
 		receiver.available_events += donor.available_events
-	. = ..()
 
 /datum/controller/subsystem/event/Recover()
 	active_events = SSevent.active_events

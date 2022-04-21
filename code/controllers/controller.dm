@@ -48,7 +48,7 @@
 
 /datum/controller/proc/PreventUpdateStat(time)
 	if (!isnum(time))
-		time = REALTIMEOFDAY
+		time = Uptime()
 	if (time < statNext)
 		return TRUE
 	statNext = time + 1 SECONDS

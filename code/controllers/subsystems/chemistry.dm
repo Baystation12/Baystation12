@@ -18,7 +18,7 @@ SUBSYSTEM_DEF(chemistry)
 	..("Reaction Queue: [processing.len]")
 
 
-/datum/controller/subsystem/chemistry/Initialize()
+/datum/controller/subsystem/chemistry/Initialize(start_uptime)
 	for (var/datum/chemical_reaction/reaction as anything in subtypesof(/datum/chemical_reaction))
 		reaction = new reaction
 		var/result = reaction.result
