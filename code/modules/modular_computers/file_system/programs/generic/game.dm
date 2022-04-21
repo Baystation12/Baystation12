@@ -44,7 +44,7 @@
 // Nano module the program uses.
 // This can be either /datum/nano_module/ or /datum/nano_module/program. The latter is intended for nano modules that are suposed to be exclusively used with modular computers,
 // and should generally not be used, as such nano modules are hard to use on other places.
-/datum/nano_module/arcade_classic/
+/datum/nano_module/arcade_classic
 	name = "Classic Arcade"
 	var/player_mana			// Various variables specific to the nano module. In this case, the nano module is a simple arcade game, so the variables store health and other stats.
 	var/player_health

@@ -111,7 +111,7 @@
 
 /obj/effect/shield/attack_generic(var/source, var/damage, var/emote)
 	take_damage(damage, SHIELD_DAMTYPE_PHYSICAL)
-	if(gen?.check_flag(MODEFLAG_OVERCHARGE) && istype(source, /mob/living/))
+	if(gen?.check_flag(MODEFLAG_OVERCHARGE) && istype(source, /mob/living))
 		overcharge_shock(source)
 	..(source, damage, emote)
 

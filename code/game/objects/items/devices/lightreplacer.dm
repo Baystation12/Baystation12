@@ -68,7 +68,7 @@
 /obj/item/device/lightreplacer/resolve_attackby(var/atom/A, mob/user)
 
 	//Check for lights in a container, refilling our charges.
-	if(istype(A, /obj/item/storage/))
+	if(istype(A, /obj/item/storage))
 		var/obj/item/storage/S = A
 		var/amt_inserted = 0
 		var/turf/T = get_turf(user)
@@ -85,7 +85,7 @@
 			return
 
 	//Actually replace the light.
-	if(istype(A, /obj/machinery/light/))
+	if(istype(A, /obj/machinery/light))
 		var/obj/machinery/light/L = A
 		if(isliving(user))
 			var/mob/living/U = user

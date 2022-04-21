@@ -10,7 +10,7 @@
 	var/transfer_blood = 0
 	var/mob/living/carbon/human/bloody_hands_mob
 
-/obj/item/clothing/shoes/
+/obj/item/clothing/shoes
 	var/track_blood = 0
 
 /obj/item/reagent_containers/glass/rag

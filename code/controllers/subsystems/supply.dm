@@ -86,7 +86,7 @@ SUBSYSTEM_DEF(supply)
 		for(var/atom/movable/AM in subarea)
 			if(AM.anchored)
 				continue
-			if(istype(AM, /obj/structure/closet/crate/))
+			if(istype(AM, /obj/structure/closet/crate))
 				var/obj/structure/closet/crate/CR = AM
 				callHook("sell_crate", list(CR, subarea))
 				add_points_from_source(CR.points_per_crate, "crate")

@@ -587,7 +587,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	return !client && !teleop
 
 /mob/proc/jittery_damage()
-	return //Only for living/carbon/human/
+	return //Only for living/carbon/human
 
 /mob/living/carbon/human/jittery_damage()
 	var/obj/item/organ/internal/heart/L = internal_organs_by_name[BP_HEART]

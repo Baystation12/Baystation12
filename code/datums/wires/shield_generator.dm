@@ -1,5 +1,5 @@
 /datum/wires/shield_generator
-	holder_type = /obj/machinery/power/shield_generator/
+	holder_type = /obj/machinery/power/shield_generator
 	wire_count = 5
 	descriptions = list(
 		new /datum/wire_description(SHIELDGEN_WIRE_POWER, "This wire seems to be carrying a heavy current.", SKILL_EXPERT),

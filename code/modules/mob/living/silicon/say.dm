@@ -91,13 +91,13 @@
 			var/list/hearturfs = list()
 
 			for(var/I in hear)
-				if(istype(I, /mob/))
+				if(ismob(I))
 					var/mob/M = I
 					listening += M
 					hearturfs += M.locs[1]
 					for(var/obj/O in M.contents)
 						listening_obj |= O
-				else if(istype(I, /obj/))
+				else if(isobj(I))
 					var/obj/O = I
 					hearturfs += O.locs[1]
 					listening_obj |= O

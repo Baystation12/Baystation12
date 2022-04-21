@@ -433,7 +433,7 @@
 	. = ..()
 	if (shield)
 		var/throw_damage = 0
-		if (istype(M,/obj/))
+		if (isobj(M))
 			var/obj/O = M
 			throw_damage = O.throwforce*(TT.speed/THROWFORCE_SPEED_DIVISOR)
 

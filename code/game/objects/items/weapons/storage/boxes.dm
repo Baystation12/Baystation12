@@ -78,7 +78,7 @@
 	..()
 	foldable = null //special form fitted boxes should not be foldable.
 
-/obj/item/storage/box/survival/
+/obj/item/storage/box/survival
 	name = "crew survival kit"
 	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and white stripe indicate this one contains oxygen."
 	icon_state = "survival"
@@ -90,7 +90,7 @@
 					/obj/item/reagent_containers/food/snacks/proteinbar = 1,
 					/obj/item/device/oxycandle = 1)
 
-/obj/item/storage/box/vox/
+/obj/item/storage/box/vox
 	name = "vox survival kit"
 	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and black stripe indicate this one contains nitrogen."
 	icon_state = "survivalvox"
@@ -101,7 +101,7 @@
 					/obj/item/device/flashlight/flare/glowstick = 1,
 					/obj/item/reagent_containers/food/snacks/proteinbar = 1)
 
-/obj/item/storage/box/engineer/
+/obj/item/storage/box/engineer
 	name = "engineer survival kit"
 	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and orange stripe indicate this one as the engineering variant."
 	icon_state = "survivaleng"

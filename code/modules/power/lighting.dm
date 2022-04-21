@@ -285,7 +285,7 @@
 			_state = "[base_state]_broken"
 			on = FALSE
 
-	if(istype(lightbulb, /obj/item/light/))
+	if(istype(lightbulb, /obj/item/light))
 		var/image/I = image(icon, src, _state)
 		I.color = get_mode_color()
 		if (on)

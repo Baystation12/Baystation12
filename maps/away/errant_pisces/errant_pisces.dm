@@ -161,7 +161,7 @@
 	if (amount < 1)
 		qdel(src)
 
-/obj/item/clothing/under/carp//as far as I know sprites are taken from /tg/
+/obj/item/clothing/under/carp
 	name = "space carp suit"
 	desc = "A suit in a shape of a space carp. Usually worn by corporate interns who are sent to entertain children during HQ excursions."
 	icon_state = "carp_suit"

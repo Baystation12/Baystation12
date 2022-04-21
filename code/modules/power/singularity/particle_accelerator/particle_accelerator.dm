@@ -25,7 +25,7 @@ get_available_mix()
 1 Control computer
 interface for the pa, acts like a computer with an html menu for diff parts and a status report
 all other parts contain only a ref to this
-a /machine/, tells the others to do work
+a /machine, tells the others to do work
 contains ref for all parts
 process()
 check_build()

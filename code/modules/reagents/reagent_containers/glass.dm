@@ -18,7 +18,7 @@
 
 
 	var/list/can_be_placed_into = list(
-		/obj/machinery/chem_master/,
+		/obj/machinery/chem_master,
 		/obj/machinery/chem_master/condimaster,
 		/obj/machinery/chemical_dispenser,
 		/obj/machinery/reagentgrinder,
@@ -35,7 +35,7 @@
 		/mob/living/simple_animal/passive/cow,
 		/mob/living/simple_animal/hostile/retaliate/goat,
 		/obj/machinery/sleeper,
-		/obj/machinery/smartfridge/,
+		/obj/machinery/smartfridge,
 		/obj/machinery/biogenerator,
 		/obj/machinery/constructable_frame,
 		/obj/machinery/radiocarbon_spectrometer

@@ -12,7 +12,7 @@ var/global/nttransfer_uid = 0
 	requires_ntnet_feature = NTNET_PEERTOPEER
 	network_destination = "other device via P2P tunnel"
 	available_on_ntnet = TRUE
-	nanomodule_path = /datum/nano_module/program/computer_nttransfer/
+	nanomodule_path = /datum/nano_module/program/computer_nttransfer
 	category = PROG_UTIL
 
 	/// Error message

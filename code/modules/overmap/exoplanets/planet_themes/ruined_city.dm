@@ -28,7 +28,7 @@
 	if (prob(50))
 		var/datum/exoplanet_theme/robotic_guardians/T = new /datum/exoplanet_theme/robotic_guardians
 		E.themes += T
-		E.possible_themes -= /datum/exoplanet_theme/robotic_guardians/
+		E.possible_themes -= /datum/exoplanet_theme/robotic_guardians
 
 		T.before_map_generation(E)
 

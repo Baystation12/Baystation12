@@ -2,7 +2,7 @@ var/global/datum/ntnet/ntnet_global = new()
 
 
 // This is the NTNet datum. There can be only one NTNet datum in game at once. Modular computers read data from this.
-/datum/ntnet/
+/datum/ntnet
 	var/list/relays = list()
 	var/list/logs = list()
 	var/list/available_station_software = list()
@@ -258,7 +258,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	// It is VERY unlikely that we'll have two players, in the same round, with the same name and branch, but still, this is here.
 	// If such conflict is encountered, a random number will be appended to the email address. If this fails too, no email account will be created.
 	if(find_email_by_name(login))
-		login = "[desired_name][random_id(/datum/computer_file/data/email_account/, 100, 999)]@[domain]"
+		login = "[desired_name][random_id(/datum/computer_file/data/email_account, 100, 999)]@[domain]"
 	// If even fallback login generation failed, just don't give them an email. The chance of this happening is astronomically low.
 	if(find_email_by_name(login))
 		to_chat(user, "You were not assigned an email address.")

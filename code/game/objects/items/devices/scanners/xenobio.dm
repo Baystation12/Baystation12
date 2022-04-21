@@ -65,7 +65,7 @@
 				GLOB.stat_fauna_scanned |= "[P.name]-[A.type]"
 				. += "New xenofauna species discovered!"
 				break
-	else if(istype(target, /mob/living/carbon/slime/))
+	else if(istype(target, /mob/living/carbon/slime))
 		var/mob/living/carbon/slime/T = target
 		. += "Slime scan result for \the [T]:"
 		. += "[T.colour] [T.is_adult ? "adult" : "baby"] slime"

@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/meat/
+/mob/living/simple_animal/hostile/meat
 	name = "horror"
 	desc = "A monstrously huge wall of flesh, it looks like you took who knows how many humans and put them together..."
 	icon = 'icons/mob/simple_animal/nightmaremonsters.dmi'

@@ -1,5 +1,5 @@
 /// These are basically USB data sticks and may be used to transfer files between devices
-/obj/item/stock_parts/computer/hard_drive/portable/
+/obj/item/stock_parts/computer/hard_drive/portable
 	name = "basic data crystal"
 	desc = "Small crystal with imprinted photonic circuits that can be used to store data. Its capacity is 16 GQ."
 	power_usage = 10

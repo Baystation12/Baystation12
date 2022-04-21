@@ -1,4 +1,4 @@
-/obj/machinery/power/smes/buildable/preset/
+/obj/machinery/power/smes/buildable/preset
 	var/_fully_charged = FALSE
 	var/_input_maxed = FALSE
 	var/_input_on = FALSE

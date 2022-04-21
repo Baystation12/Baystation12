@@ -167,7 +167,7 @@
 	icon_state = "bottle19"
 
 /obj/item/slimepotion2/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
-	if(!istype(M, /mob/living/carbon/slime/))//If target is not a slime.
+	if(!istype(M, /mob/living/carbon/slime))
 		to_chat(user, "<span class='warning'> The potion only works on slimes!</span>")
 		return ..()
 	if(M.stat)

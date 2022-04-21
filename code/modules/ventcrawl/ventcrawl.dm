@@ -13,7 +13,7 @@ var/global/list/ventcrawl_machinery = list(
 	/obj/item/clothing/head/culthood,
 	/obj/item/clothing/suit/cultrobes,
 	/obj/item/book/tome,
-	/obj/item/paper/,
+	/obj/item/paper,
 	/obj/item/melee/cultblade
 	)
 

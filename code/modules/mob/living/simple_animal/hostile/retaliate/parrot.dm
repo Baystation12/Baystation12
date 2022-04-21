@@ -39,7 +39,7 @@
 
 	natural_weapon = /obj/item/natural_weapon/beak
 	turns_per_move = 5
-	meat_type = /obj/item/reagent_containers/food/snacks/cracker/
+	meat_type = /obj/item/reagent_containers/food/snacks/cracker
 
 	response_help  = "pets"
 	response_disarm = "gently moves aside"

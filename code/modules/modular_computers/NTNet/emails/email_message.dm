@@ -1,5 +1,5 @@
 // Currently not actually represented in file systems, though the support for it is in place already.
-/datum/computer_file/data/email_message/
+/datum/computer_file/data/email_message
 	stored_data = ""
 	var/title = ""
 	var/source = ""

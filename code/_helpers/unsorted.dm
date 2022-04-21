@@ -981,7 +981,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		. = TRUE
 	if(locate(/obj/structure/table, T))
 		. = TRUE
-	if(locate(/obj/effect/rune/, T))
+	if(locate(/obj/effect/rune, T))
 		. = TRUE
 
 	if(M == user)

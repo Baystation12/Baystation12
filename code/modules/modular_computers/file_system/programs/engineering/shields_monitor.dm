@@ -1,7 +1,7 @@
 /datum/computer_file/program/shields_monitor
 	filename = "shieldsmonitor"
 	filedesc = "Shield Generators Monitoring"
-	nanomodule_path = /datum/nano_module/shields_monitor/
+	nanomodule_path = /datum/nano_module/shields_monitor
 	program_icon_state = "shield"
 	program_key_state = "generic_key"
 	program_menu_icon = "radio-on"

@@ -182,7 +182,7 @@
 	tracer_type = /obj/effect/projectile/meatstation/tracer
 	impact_type = /obj/effect/projectile/meatstation/impact
 
-/obj/effect/projectile/meatstation/
+/obj/effect/projectile/meatstation
 	light_color = COLOR_RED_LIGHT
 	icon = 'maps/away/meatstation/meatstation_sprites.dmi'
 

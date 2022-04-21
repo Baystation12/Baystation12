@@ -181,7 +181,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 		return
 	last_special = world.time + 100
 	//I'm not sure how much of this is necessary, but I would rather avoid issues.
-	if(istype(card.loc,/obj/item/rig_module) || istype(card.loc,/obj/item/integrated_circuit/manipulation/ai/))
+	if(istype(card.loc,/obj/item/rig_module) || istype(card.loc,/obj/item/integrated_circuit/manipulation/ai))
 		to_chat(src, "There is no room to unfold inside \the [card.loc]. You're good and stuck.")
 		return 0
 	else if(istype(card.loc,/mob))

@@ -181,7 +181,7 @@
 					else
 						L |= I
 
-		else if(istype(I,/obj/))
+		else if(isobj(I))
 			if(!sight_check || isInSight(I, O))
 				L |= recursive_content_check(I, L, recursion_limit - 1, client_check, sight_check, include_mobs, include_objects)
 				if(include_objects)
@@ -208,7 +208,7 @@
 				var/mob/M = I
 				if(M.client)
 					hear += M
-		else if(istype(I,/obj/))
+		else if(isobj(I))
 			hear |= recursive_content_check(I, hear, 3, 1, 0, include_mobs, include_objects)
 			if(include_objects)
 				hear += I

@@ -131,7 +131,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 		n = 10
 	number = n
 	cardinals = c
-	if(istype(loca, /turf/))
+	if(isturf(loca))
 		location = loca
 	else
 		location = get_turf(loca)
@@ -313,7 +313,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 		n = 10
 	number = n
 	cardinals = c
-	if(istype(loca, /turf/))
+	if(isturf(loca))
 		location = loca
 	else
 		location = get_turf(loca)
@@ -454,7 +454,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /datum/effect/effect/system/reagents_explosion/set_up (amt, loc, flash = 0, flash_fact = 0)
 	amount = amt
-	if(istype(loc, /turf/))
+	if(isturf(loc))
 		location = loc
 	else
 		location = get_turf(loc)

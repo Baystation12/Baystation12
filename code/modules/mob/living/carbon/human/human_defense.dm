@@ -314,7 +314,7 @@ meteor_act
 //this proc handles being hit by a thrown atom
 /mob/living/carbon/human/hitby(atom/movable/AM as mob|obj, var/datum/thrownthing/TT)
 
-	if(istype(AM,/obj/))
+	if(isobj(AM))
 		var/obj/O = AM
 
 		if(in_throw_mode && !get_active_hand() && TT.speed <= THROWFORCE_SPEED_DIVISOR)	//empty active hand and we're in throw mode

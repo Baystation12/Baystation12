@@ -94,7 +94,7 @@
 		to_chat(user, "<span class='danger'>ERROR:</span> Remote transfer interface disabled.")
 		return 0
 
-	if(istype(ai.loc, /turf/))
+	if(isturf(ai.loc))
 		new /obj/structure/AIcore/deactivated(get_turf(ai))
 
 	ai.carded = 1

@@ -1,4 +1,4 @@
-/datum/codex_category/cultures/
+/datum/codex_category/cultures
 	name = "Factions and Culture"
 	desc = "Prominent planets, cultures, factions and religions of known space."
 

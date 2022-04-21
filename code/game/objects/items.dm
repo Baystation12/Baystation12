@@ -550,7 +550,7 @@ var/global/list/slot_flags_enumeration = list(
 
 /obj/item/proc/get_loc_turf()
 	var/atom/L = loc
-	while(L && !istype(L, /turf/))
+	while(L && !isturf(L))
 		L = L.loc
 	return loc
 
