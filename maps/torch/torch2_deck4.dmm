@@ -3349,13 +3349,6 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod9/station)
-"lr" = (
-/obj/structure/catwalk,
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/simulated/open,
-/area/quartermaster/hangar/catwalks_starboard)
 "lt" = (
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -34856,10 +34849,10 @@ hp
 Ol
 MX
 Mp
-lr
-oW
-Ga
-Ga
+Pt
+vH
+aY
+aY
 ro
 nG
 UX

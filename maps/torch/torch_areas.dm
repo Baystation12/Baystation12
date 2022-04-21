@@ -374,6 +374,12 @@
 /area/exploration_shuttle/airlock
 	name = "\improper Charon - Airlock Compartment"
 
+/area/exploration_shuttle/fuel
+	name = "\improper Charon - Fuel Compartment"
+
+/area/exploration_shuttle/medical
+	name = "\improper Charon - Medical Compartment"
+
 //Aquila
 
 /area/aquila
