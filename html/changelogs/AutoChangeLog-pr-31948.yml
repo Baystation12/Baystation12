@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - maptweak: The vent and scrubber in the port hangar catwalk are now properly connected
+      to pipes.
