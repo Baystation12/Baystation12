@@ -1,0 +1,6 @@
+author: Textor
+delete-after: true
+changes:
+  - tweak: Air alarms in xenobiology will now have distinct names.
+  - maptweak: The power in xenobiology has been recabled to allow for better access
+      to cabling and easier repairs. Each cell also now has an APC.
