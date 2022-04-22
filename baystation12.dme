@@ -628,6 +628,7 @@
 #include "code\game\machinery\barrier.dm"
 #include "code\game\machinery\biogenerator.dm"
 #include "code\game\machinery\bioprinter.dm"
+#include "code\game\machinery\bluespace_drive.dm"
 #include "code\game\machinery\bluespacerelay.dm"
 #include "code\game\machinery\bodyscanner.dm"
 #include "code\game\machinery\bodyscanner_console.dm"
