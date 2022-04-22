@@ -7,8 +7,10 @@
 	return GLOB.using_map.base_turf_by_z[z]
 
 /// Fetches the area's `base_turf`, if defined, or the z level's `base_turf` as a default.
-/proc/get_base_turf_by_area(turf/T)
+/proc/get_base_turf_by_area(turf/T, check_handling = FALSE)
 	var/area/A = get_area(T)
+	if(check_handling && A?.base_turf_special_handling)
+		return get_base_turf(get_z(T))
 	if (A?.base_turf)
 		return A.base_turf
 	return get_base_turf(get_z(T))
