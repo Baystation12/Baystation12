@@ -28,7 +28,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	var/list/subsystems
 
 	// Vars for keeping track of tick drift.
-	var/init_timeofday
+	var/init_uptime
 	var/init_time
 	var/tickdrift = 0
 
@@ -99,11 +99,11 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	reverseRange(subsystems)
 	for(var/datum/controller/subsystem/ss in subsystems)
 		if (ss.flags & SS_NEEDS_SHUTDOWN)
-			var/time = Uptime()
+			var/start_uptime = Uptime()
 			report_progress("Shutting down [ss] subsystem...")
 			ss.Shutdown()
-			report_progress("[ss] shutdown in [(Uptime() - time)/10]s.")
-	report_progress("Shutdown complete.")
+			report_progress("[ss] shutdown in [Uptime(start_uptime) / 10]s.")
+	report_progress("Shutdown complete.", TRUE)
 
 // Returns 1 if we created a new mc, 0 if we couldn't due to a recent restart,
 //	-1 if we encountered a runtime trying to recreate it
@@ -173,45 +173,32 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 /datum/controller/master/Initialize(delay, init_sss)
 	set waitfor = FALSE
 	var/start_uptime = Uptime()
-
 	if(delay)
 		sleep(delay)
-
 	if(init_sss)
 		init_subtypes(/datum/controller/subsystem, subsystems)
-
-	report_progress("Initializing subsystems...")
-
+	report_progress("Initializing subsystems.")
 	initializing = TRUE
-
-	// Sort subsystems by init_order, so they initialize in the correct order.
-	sortTim(subsystems, /proc/cmp_subsystem_init)
-
 	current_ticklimit = tick_limit_init
+	sortTim(subsystems, /proc/cmp_subsystem_init)
 	for (var/datum/controller/subsystem/SS in subsystems)
 		if (SS.flags & SS_NO_INIT)
 			continue
-		SS.DoInitialize(Uptime())
+		SS.DoInitialize()
 		CHECK_TICK
+	sortTim(subsystems, /proc/cmp_subsystem_display)
 	current_ticklimit = tick_limit_default
-	var/msg = "Initializations complete within [(Uptime() - start_uptime) / 10] second\s!"
-	report_progress(msg)
-	log_world(msg)
-
 	initializing = FALSE
-
+	report_progress("Reached lobby in [Uptime(start_uptime) / 10] second\s.")
 	if (!current_runlevel)
 		SetRunLevel(RUNLEVEL_LOBBY)
-
-	// Sort subsystems by display setting for easy access.
-	sortTim(subsystems, /proc/cmp_subsystem_display)
-	// Set world options.
 #ifdef UNIT_TEST
 	world.sleep_offline = FALSE
 #else
 	world.sleep_offline = TRUE
 #endif
 	Master.StartProcessing(0)
+
 
 /datum/controller/master/proc/SetRunLevel(new_runlevel)
 	var/old_runlevel = current_runlevel
@@ -288,7 +275,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	var/cached_runlevel = current_runlevel
 	var/list/current_runlevel_subsystems = runlevel_sorted_subsystems[cached_runlevel]
 
-	init_timeofday = Uptime()
+	init_uptime = Uptime()
 	init_time = world.time
 
 	iteration = 1
@@ -298,7 +285,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	//the actual loop.
 
 	while (1)
-		tickdrift = max(0, MC_AVERAGE_FAST(tickdrift, (((Uptime() - init_timeofday) - (world.time - init_time)) / world.tick_lag)))
+		tickdrift = max(0, MC_AVERAGE_FAST(tickdrift, ((Uptime(init_uptime) - (world.time - init_time)) / world.tick_lag)))
 		var/starting_tick_usage = world.tick_usage
 		if (processing <= 0)
 			current_ticklimit = tick_limit_default

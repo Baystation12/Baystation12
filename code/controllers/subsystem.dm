@@ -165,18 +165,14 @@
 
 
 // Wrapper so things continue to work even in the case of a SS that doesn't call parent.
-/datum/controller/subsystem/proc/DoInitialize(start_uptime)
+/datum/controller/subsystem/proc/DoInitialize()
 	init_state = SS_INITSTATE_STARTED
-	init_start = start_uptime
-	Initialize(start_uptime)
+	init_start = Uptime()
+	Initialize(init_start)
 	init_finish = Uptime()
-	. = (Uptime() - start_uptime) / 10
-	var/msg = "Initialized [name] subsystem within [.] second[. == 1 ? "" : "s"]!"
-	to_chat(world, "<span class='boldannounce'>[msg]</span>")
-	log_world(msg)
-
 	init_state = SS_INITSTATE_DONE
-	initialized = TRUE	// Legacy.
+	initialized = TRUE
+	report_progress("Initialized [name] subsystem in [(init_finish - init_start) / 10] second\s.")
 
 
 /// Used to initialize the subsystem AFTER the map has loaded. No default behaviors please.
@@ -195,7 +191,7 @@
 				build += "NO INIT"
 			else if (init_state == SS_INITSTATE_STARTED)
 				if (init_start)
-					build += "LOAD ([(Uptime() - init_start)/10]s)"
+					build += "LOAD ([Uptime(init_start) / 10]s)"
 				else
 					build += "LOAD"
 			else

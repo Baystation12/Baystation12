@@ -11,21 +11,23 @@
 #define DAYS *864000
 
 
-/// Real time since the server started. Same concept as REALTIMEOFDAY.
-/proc/Uptime(from_zero)
+/// Real time since the server started in deciseconds. Passing since_uptime with a prior sample returns the difference.
+/proc/Uptime(since_uptime)
 	var/static/days = 0
 	var/static/result = 0
 	var/static/started = world.timeofday
 	var/static/last_time = started
 	var/time = world.timeofday
 	if (time == last_time)
+		if (since_uptime)
+			return result - since_uptime
 		return result
 	if (time < last_time)
 		++days
 	last_time = time
-	result = time + days DAYS
-	if (from_zero)
-		result -= started
+	result = time - started + days DAYS
+	if (since_uptime)
+		return result - since_uptime
 	return result
 
 

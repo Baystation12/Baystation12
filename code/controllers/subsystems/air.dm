@@ -142,13 +142,13 @@ Total Zones: [zones.len]
 Total Edges: [edges.len]
 Total Active Edges: [active_edges.len ? "<span class='danger'>[active_edges.len]</span>" : "None"]
 Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_count]
-Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
+Geometry processing completed in [Uptime(start_uptime) / 10] seconds!
 "})
 	if (simulate)
 		report_progress("Settling air...")
 		start_uptime = Uptime()
 		fire(FALSE, TRUE)
-		report_progress("Air settling completed in [(Uptime() - start_uptime)/10] seconds!")
+		report_progress("Air settling completed in [Uptime(start_uptime) / 10] seconds!")
 
 
 /datum/controller/subsystem/air/fire(resumed = FALSE, no_mc_tick = FALSE)
