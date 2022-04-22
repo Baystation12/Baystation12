@@ -15,12 +15,12 @@ SUBSYSTEM_DEF(mapping)
 	return
 
 
-/datum/controller/subsystem/mapping/Initialize(timeofday)
+/datum/controller/subsystem/mapping/Initialize(start_uptime)
 	// Load templates and build away sites.
 	preloadTemplates()
 	for(var/atype in subtypesof(/decl/submap_archetype))
 		submap_archetypes[atype] = new atype
-	. = ..()
+
 
 /datum/controller/subsystem/mapping/Recover()
 	flags |= SS_NO_INIT

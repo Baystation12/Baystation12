@@ -7,9 +7,9 @@ PROCESSING_SUBSYSTEM_DEF(icon_update)
 	var/list/queue = list()
 
 
-/datum/controller/subsystem/processing/icon_update/Initialize()
+/datum/controller/subsystem/processing/icon_update/Initialize(start_uptime)
 	fire(FALSE, TRUE)
-	..()
+
 
 /datum/controller/subsystem/processing/icon_update/fire(resumed = FALSE, no_mc_tick = FALSE)
 	var/list/curr = queue

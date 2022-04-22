@@ -111,7 +111,7 @@ SUBSYSTEM_DEF(air)
 	active_edges.Cut()
 
 	// Re-run setup without air settling.
-	Initialize(REALTIMEOFDAY, simulate = FALSE)
+	Initialize(Uptime(), FALSE)
 
 	// Update next_fire so the MC doesn't try to make up for missed ticks.
 	next_fire = world.time + wait
@@ -130,36 +130,26 @@ SUBSYSTEM_DEF(air)
 	"})
 
 
-/datum/controller/subsystem/air/Initialize(timeofday, simulate = TRUE)
-
-	var/starttime = REALTIMEOFDAY
+/datum/controller/subsystem/air/Initialize(start_uptime, simulate = TRUE)
 	report_progress("Processing Geometry...")
-
 	var/simulated_turf_count = 0
 	for(var/turf/simulated/S)
 		simulated_turf_count++
 		S.update_air_properties()
-
 		CHECK_TICK
-
 	report_progress({"Total Simulated Turfs: [simulated_turf_count]
 Total Zones: [zones.len]
 Total Edges: [edges.len]
 Total Active Edges: [active_edges.len ? "<span class='danger'>[active_edges.len]</span>" : "None"]
 Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_count]
+Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 "})
-
-	report_progress("Geometry processing completed in [(REALTIMEOFDAY - starttime)/10] seconds!")
-
 	if (simulate)
 		report_progress("Settling air...")
-
-		starttime = REALTIMEOFDAY
+		start_uptime = Uptime()
 		fire(FALSE, TRUE)
+		report_progress("Air settling completed in [(Uptime() - start_uptime)/10] seconds!")
 
-		report_progress("Air settling completed in [(REALTIMEOFDAY - starttime)/10] seconds!")
-
-	..(timeofday)
 
 /datum/controller/subsystem/air/fire(resumed = FALSE, no_mc_tick = FALSE)
 	if (!resumed)

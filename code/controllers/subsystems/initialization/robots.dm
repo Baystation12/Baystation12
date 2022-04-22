@@ -26,8 +26,7 @@ SUBSYSTEM_DEF(robots)
 	return
 
 
-/datum/controller/subsystem/robots/Initialize()
-	. = ..()
+/datum/controller/subsystem/robots/Initialize(start_uptime)
 
 	// This is done via loop instead of just assignment in order to trim associations.
 	for(var/title in (mob_types_by_title|mmi_types_by_title))

@@ -12,7 +12,7 @@ SUBSYSTEM_DEF(fabrication)
 	return
 
 
-/datum/controller/subsystem/fabrication/Initialize()
+/datum/controller/subsystem/fabrication/Initialize(start_uptime)
 	for (var/datum/fabricator_recipe/recipe as anything in subtypesof(/datum/fabricator_recipe))
 		recipe = new recipe
 		if (!recipe.name)

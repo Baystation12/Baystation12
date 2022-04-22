@@ -14,9 +14,9 @@ SUBSYSTEM_DEF(materials)
 	return
 
 
-/datum/controller/subsystem/materials/Initialize()
+/datum/controller/subsystem/materials/Initialize(start_uptime)
 	build_material_lists()
-	. = ..()
+
 
 /datum/controller/subsystem/materials/proc/build_material_lists()
 

@@ -30,7 +30,7 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 	to_world_log("## TESTING: [msg][log_end]")
 
 /proc/game_log(category, text)
-	to_file(GLOB.diary, "\[[time_stamp()]] [game_id] [category]: [text][log_end]")
+	to_file(global.diary, "\[[time_stamp()]] [game_id] [category]: [text][log_end]")
 
 /proc/log_admin(text)
 	GLOB.admin_log.Add(text)

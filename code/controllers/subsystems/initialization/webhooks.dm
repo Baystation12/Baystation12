@@ -9,9 +9,9 @@ SUBSYSTEM_DEF(webhooks)
 	return
 
 
-/datum/controller/subsystem/webhooks/Initialize()
+/datum/controller/subsystem/webhooks/Initialize(start_uptime)
 	load_webhooks()
-	. = ..()
+
 
 /datum/controller/subsystem/webhooks/proc/load_webhooks()
 

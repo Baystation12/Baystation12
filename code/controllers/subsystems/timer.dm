@@ -1,9 +1,9 @@
 /// Controls how many buckets should be kept, each representing a tick. (1 minutes worth)
-#define BUCKET_LEN (world.fps*1*60)
+#define BUCKET_LEN (world.fps * 60)
 /// Helper for getting the correct bucket for a given timer
-#define BUCKET_POS(timer) (((round((timer.timeToRun - SStimer.head_offset) / world.tick_lag)+1) % BUCKET_LEN)||BUCKET_LEN)
+#define BUCKET_POS(timer) (((round((timer.timeToRun - SStimer.head_offset) / world.tick_lag) + 1) % BUCKET_LEN) || BUCKET_LEN)
 /// Gets the maximum time at which timers will be invoked from buckets, used for deferring to secondary queue
-#define TIMER_MAX (world.time + TICKS2DS(min(BUCKET_LEN-(SStimer.practical_offset-DS2TICKS(world.time - SStimer.head_offset))-1, BUCKET_LEN-1)))
+#define TIMER_MAX (world.time + (min(BUCKET_LEN - (SStimer.practical_offset - (world.time - SStimer.head_offset) / world.tick_lag)-1, BUCKET_LEN - 1)) * world.tick_lag)
 /// Max float with integer precision
 #define TIMER_ID_MAX (2**24)
 
@@ -100,7 +100,7 @@ SUBSYSTEM_DEF(timer)
 	// Store local references to datum vars as it is faster to access them
 	var/lit = last_invoke_tick
 	var/list/bucket_list = src.bucket_list
-	var/last_check = world.time - TICKS2DS(BUCKET_LEN * 1.5)
+	var/last_check = world.time - BUCKET_LEN * 1.5 * world.tick_lag
 
 	// If there are no timers being tracked, then consider now to be the last invoked time
 	if(!bucket_count)
@@ -126,21 +126,21 @@ SUBSYSTEM_DEF(timer)
 			next_clienttime_timer_index--
 			break
 		var/datum/timedevent/ctime_timer = clienttime_timers[next_clienttime_timer_index]
-		if (ctime_timer.timeToRun > REALTIMEOFDAY)
+		if (ctime_timer.timeToRun > Uptime())
 			next_clienttime_timer_index--
 			break
 
 		var/datum/callback/callBack = ctime_timer.callBack
 		if (!callBack)
 			CRASH("Invalid timer: [get_timer_debug_string(ctime_timer)] world.time: [world.time], \
-				head_offset: [head_offset], practical_offset: [practical_offset], REALTIMEOFDAY: [REALTIMEOFDAY]")
+				head_offset: [head_offset], practical_offset: [practical_offset], Uptime(): [Uptime()]")
 
-		ctime_timer.spent = REALTIMEOFDAY
+		ctime_timer.spent = Uptime()
 		callBack.InvokeAsync()
 
 		if(ctime_timer.flags & TIMER_LOOP)
 			ctime_timer.spent = 0
-			ctime_timer.timeToRun = REALTIMEOFDAY + ctime_timer.wait
+			ctime_timer.timeToRun = Uptime() + ctime_timer.wait
 			BINARY_INSERT(ctime_timer, clienttime_timers, /datum/timedevent, ctime_timer, timeToRun, COMPARE_KEY)
 		else
 			qdel(ctime_timer)
@@ -153,7 +153,7 @@ SUBSYSTEM_DEF(timer)
 	// Check for when we need to loop the buckets, this occurs when
 	// the head_offset is approaching BUCKET_LEN ticks in the past
 	if (practical_offset > BUCKET_LEN)
-		head_offset += TICKS2DS(BUCKET_LEN)
+		head_offset += BUCKET_LEN * world.tick_lag
 		practical_offset = 1
 		resumed = FALSE
 
@@ -213,7 +213,7 @@ SUBSYSTEM_DEF(timer)
 					break
 
 				// Check for timers that are not capable of being scheduled to run without rebuilding buckets
-				if (timer.timeToRun < head_offset + TICKS2DS(practical_offset - 1))
+				if (timer.timeToRun < head_offset + (practical_offset - 1) * world.tick_lag)
 					bucket_resolution = null // force bucket recreation
 					stack_trace("[i] Invalid timer state: Timer in long run queue that would require a backtrack to transfer to \
 						short run queue. [get_timer_debug_string(timer)] world.time: [world.time], head_offset: [head_offset], practical_offset: [practical_offset]")
@@ -387,7 +387,7 @@ SUBSYSTEM_DEF(timer)
 	src.source = source
 
 	// Determine time at which the timer's callback should be invoked
-	timeToRun = (flags & TIMER_CLIENT_TIME ? REALTIMEOFDAY : world.time) + wait
+	timeToRun = (flags & TIMER_CLIENT_TIME ? Uptime() : world.time) + wait
 
 	// Include the timer in the hash table if the timer is unique
 	if (flags & TIMER_UNIQUE)
@@ -514,9 +514,9 @@ SUBSYSTEM_DEF(timer)
 	// Find the correct bucket for this timed event
 	bucket_pos = BUCKET_POS(src)
 
-	if (bucket_pos < SStimer.practical_offset && timeToRun < (SStimer.head_offset + TICKS2DS(BUCKET_LEN)))
+	if (bucket_pos < SStimer.practical_offset && timeToRun < (SStimer.head_offset + BUCKET_LEN * world.tick_lag))
 		WARNING("Bucket pos in past: bucket_pos = [bucket_pos] < practical_offset = [SStimer.practical_offset] \
-			&& timeToRun = [timeToRun] < [SStimer.head_offset + TICKS2DS(BUCKET_LEN)], Timer: [name]")
+			&& timeToRun = [timeToRun] < [SStimer.head_offset + BUCKET_LEN * world.tick_lag], Timer: [name]")
 		bucket_pos = SStimer.practical_offset // Recover bucket_pos to avoid timer blocking queue
 
 	var/datum/timedevent/bucket_head = bucket_list[bucket_pos]

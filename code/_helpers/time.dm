@@ -10,13 +10,23 @@
 #define DAY *864000
 #define DAYS *864000
 
-#define TimeOfGame (get_game_time())
-#define TimeOfTick (world.tick_usage*0.01*world.tick_lag)
 
-#define TICKS *world.tick_lag
-
-#define DS2TICKS(DS) ((DS)/world.tick_lag)
-#define TICKS2DS(T) ((T) TICKS)
+/// Real time since the server started. Same concept as REALTIMEOFDAY.
+/proc/Uptime(from_zero)
+	var/static/days = 0
+	var/static/result = 0
+	var/static/started = world.timeofday
+	var/static/last_time = started
+	var/time = world.timeofday
+	if (time == last_time)
+		return result
+	if (time < last_time)
+		++days
+	last_time = time
+	result = time + days DAYS
+	if (from_zero)
+		result -= started
+	return result
 
 
 /proc/minutes_to_readable(minutes)
@@ -151,13 +161,6 @@ var/global/round_start_time = 0
 	roundstart_hour = rand(0, 23)
 	return 1
 
-GLOBAL_VAR_INIT(midnight_rollovers, 0)
-GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
-/proc/update_midnight_rollover()
-	if (world.timeofday < GLOB.rollovercheck_last_timeofday) //TIME IS GOING BACKWARDS!
-		return GLOB.midnight_rollovers++
-	return GLOB.midnight_rollovers
-
 
 /proc/stoplag(initial_delay = world.tick_lag)
 	if (!Master || !(GAME_STATE & RUNLEVELS_DEFAULT))
@@ -165,13 +168,13 @@ GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 		return 1
 	var/delta
 	var/total = 0
-	var/delay = DS2TICKS(initial_delay)
+	var/delay = initial_delay / world.tick_lag
 	do
 		delta = delay * max(0.01 * max(world.tick_usage, world.cpu) * max(Master.sleep_delta, 1), 1) // Scale up delay under load; sleeps have entry overhead from proc duplication
 		sleep(world.tick_lag * delta)
 		total += Ceil(delta)
 		delay *= 2
-	while (world.tick_usage > min(TICK_LIMIT_TO_RUN, Master.current_ticklimit))
+	while (world.tick_usage > min(Master.tick_limit_to_run, Master.current_ticklimit))
 	return total
 
 

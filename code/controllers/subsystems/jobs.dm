@@ -33,7 +33,7 @@ SUBSYSTEM_DEF(jobs)
 	return
 
 
-/datum/controller/subsystem/jobs/Initialize(timeofday)
+/datum/controller/subsystem/jobs/Initialize(start_uptime)
 
 	// Create main map jobs.
 	primary_job_datums.Cut()
@@ -107,7 +107,6 @@ SUBSYSTEM_DEF(jobs)
 	// Set up AI spawn locations
 	spawn_empty_ai()
 
-	. = ..()
 
 /datum/controller/subsystem/jobs/proc/guest_jobbans(var/job)
 	for(var/dept in list(COM, MSC, SEC))

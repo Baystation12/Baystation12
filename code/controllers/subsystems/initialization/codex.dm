@@ -14,7 +14,7 @@ SUBSYSTEM_DEF(codex)
 	return
 
 
-/datum/controller/subsystem/codex/Initialize()
+/datum/controller/subsystem/codex/Initialize(start_uptime)
 	// Codex link syntax is such:
 	// <l>keyword</l> when keyword is mentioned verbatim,
 	// <span codexlink='keyword'>whatever</span> when shit gets tricky
@@ -47,7 +47,7 @@ SUBSYSTEM_DEF(codex)
 		var/datum/codex_entry/entry = SScodex.entries_by_string[thing]
 		index_file[entry.display_name] = entry
 	index_file = sortAssoc(index_file)
-	. = ..()
+
 
 /datum/controller/subsystem/codex/proc/parse_links(string, viewer)
 	while(regex_find(linkRegex, string))

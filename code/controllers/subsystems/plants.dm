@@ -22,7 +22,7 @@ PROCESSING_SUBSYSTEM_DEF(plants)
 	return
 
 
-/datum/controller/subsystem/processing/plants/Initialize()
+/datum/controller/subsystem/processing/plants/Initialize(start_uptime)
 	// Build the icon lists.
 	for(var/icostate in icon_states('icons/obj/hydroponics_growing.dmi'))
 		var/split = findtext(icostate,"-")
@@ -80,7 +80,7 @@ PROCESSING_SUBSYSTEM_DEF(plants)
 		gene_tag_masks[gene_tag] = gene_mask
 		plant_gene_datums[gene_mask] = G
 		gene_masked_list.Add(list(list("tag" = gene_tag, "mask" = gene_mask)))
-	. = ..()
+
 
 // Proc for creating a random seed type.
 /datum/controller/subsystem/processing/plants/proc/create_random_seed(var/survive_on_station)

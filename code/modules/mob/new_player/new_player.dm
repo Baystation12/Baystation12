@@ -90,7 +90,7 @@
 						highjob = " as [player.client.prefs.job_high]"
 					if (!player.is_stealthed())
 						var/can_see_hidden = check_rights(R_INVESTIGATE, 0)
-						var/datum/game_mode/mode = config.pick_mode(SSticker.master_mode)
+						var/datum/game_mode/mode = SSticker.pick_mode(SSticker.master_mode)
 						var/list/readied_antag_roles = list()
 						if (mode && can_see_hidden)
 							for (var/role in player.client.prefs.be_special_role)

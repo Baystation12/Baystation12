@@ -240,7 +240,7 @@ SUBSYSTEM_DEF(garbage)
 //this is mainly to separate things profile wise.
 /datum/controller/subsystem/garbage/proc/HardDelete(datum/D)
 	var/time = world.timeofday
-	var/tick = TICK_USAGE
+	var/tick = world.tick_usage
 	var/ticktime = world.time
 	++delslasttick
 	++totaldels
@@ -249,19 +249,19 @@ SUBSYSTEM_DEF(garbage)
 
 	del(D)
 
-	tick = (TICK_USAGE-tick+((world.time-ticktime)/world.tick_lag*100))
+	tick = world.tick_usage - tick + ((world.time - ticktime) / world.tick_lag * 100)
 
 	var/datum/qdel_item/I = items[type]
 
 	I.hard_deletes++
-	I.hard_delete_time += TICK_DELTA_TO_MS(tick)
+	I.hard_delete_time += tick * world.tick_lag
 
 
 	if (tick > highest_del_tickusage)
 		highest_del_tickusage = tick
 	time = world.timeofday - time
-	if (!time && TICK_DELTA_TO_MS(tick) > 1)
-		time = TICK_DELTA_TO_MS(tick)/100
+	if (!time && tick * world.tick_lag > 1)
+		time = tick * world.tick_lag * 0.01
 	if (time > highest_del_time)
 		highest_del_time = time
 	if (time > 10)
@@ -323,7 +323,7 @@ SUBSYSTEM_DEF(garbage)
 		if(world.time != start_time)
 			I.slept_destroy++
 		else
-			I.destroy_time += TICK_USAGE_TO_MS(start_tick)
+			I.destroy_time += (world.tick_usage - start_tick) * world.tick_lag
 		if(!D)
 			return
 		switch(hint)

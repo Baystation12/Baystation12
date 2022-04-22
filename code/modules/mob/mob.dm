@@ -660,7 +660,7 @@
 			stat("CPU:","[world.cpu]")
 			stat("Instances:","[world.contents.len]")
 			stat(null)
-			var/time = REALTIMEOFDAY
+			var/time = Uptime()
 			if(Master)
 				Master.UpdateStat(time)
 			else

@@ -29,8 +29,7 @@ SUBSYSTEM_DEF(supply)
 		"total" = "Total" // If you're adding additional point sources, add it here in a new line. Don't forget to put a comma after the old last line.
 	)
 
-/datum/controller/subsystem/supply/Initialize()
-	. = ..()
+/datum/controller/subsystem/supply/Initialize(start_uptime)
 	ordernum = rand(1,9000)
 
 	//Build master supply list

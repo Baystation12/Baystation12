@@ -28,24 +28,24 @@ SUBSYSTEM_DEF(misc_slow)
 	queue.Cut()
 
 
-/datum/controller/subsystem/misc_slow/Initialize()
+/datum/controller/subsystem/misc_slow/Initialize(start_uptime)
 	update_traders(FALSE, TRUE, GLOB.trader_station_count)
 
 
 /datum/controller/subsystem/misc_slow/fire(resumed, no_mc_tick)
 	var/timer
 	if (!resumed || stage == SSMISC_SLOW_TRADERS)
-		timer = TICK_USAGE_REAL
+		timer = world.tick_usage
 		update_traders(resumed, no_mc_tick)
-		cost_traders = MC_AVERAGE(cost_traders, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
+		cost_traders = MC_AVERAGE(cost_traders, (world.tick_usage - timer) * world.tick_lag)
 		if (state != SS_RUNNING)
 			return
 		stage = SSMISC_SLOW_SOLARS
 		resumed = FALSE
 	if (stage == SSMISC_SLOW_SOLARS)
-		timer = TICK_USAGE_REAL
+		timer = world.tick_usage
 		update_solars(resumed, no_mc_tick)
-		cost_solars = MC_AVERAGE(cost_solars, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
+		cost_solars = MC_AVERAGE(cost_solars, (world.tick_usage - timer) * world.tick_lag)
 		if (state != SS_RUNNING)
 			return
 		stage = SSMISC_SLOW_TRADERS

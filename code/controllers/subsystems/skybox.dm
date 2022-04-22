@@ -35,8 +35,7 @@ SUBSYSTEM_DEF(skybox)
 		space.overlays += dust
 		space_appearance_cache[i + 1] = space.appearance
 
-/datum/controller/subsystem/skybox/Initialize()
-	. = ..()
+/datum/controller/subsystem/skybox/Initialize(start_uptime)
 	background_color = RANDOM_RGB
 
 /datum/controller/subsystem/skybox/Recover()
