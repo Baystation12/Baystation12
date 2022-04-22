@@ -1,0 +1,4 @@
+author: Textor
+delete-after: true
+changes:
+  - bugfix: Placed tiles should now always be the correct type.
