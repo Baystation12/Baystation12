@@ -29,7 +29,8 @@
 		/obj/item/projectile,
 		/obj/effect,
 		/obj/structure/cable,
-		/obj/machinery/atmospherics
+		/obj/machinery/atmospherics,
+		/obj/machinery/air_sensor
 		)
 
 	var/light_min_range = 2

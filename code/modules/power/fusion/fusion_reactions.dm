@@ -158,10 +158,11 @@ var/global/list/fusion_reactions
 
 // High end reactions.
 /decl/fusion_reaction/boron_hydrogen
-	p_react = "boron"
+	p_react = GAS_BORON
 	s_react = GAS_HYDROGEN
 	minimum_energy_level = 15000
 	energy_consumption = 3
 	energy_production = 12
 	radiation = 3
 	instability = 2.5
+	products = list(GAS_HELIUM = 1)
