@@ -151,6 +151,26 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "xeno_lab"
 	req_access = list(access_xenobiology, access_research)
 
+/area/rnd/xenobiology/cell_1
+	name = "\improper Xenobiology Containment Cell 1"
+	icon_state = "xeno_lab_cell_1"
+	req_access = list(access_xenobiology, access_research)
+
+/area/rnd/xenobiology/cell_2
+	name = "\improper Xenobiology Containment Cell 2"
+	icon_state = "xeno_lab_cell_2"
+	req_access = list(access_xenobiology, access_research)
+
+/area/rnd/xenobiology/cell_3
+	name = "\improper Xenobiology Containment Cell 3"
+	icon_state = "xeno_lab_cell_3"
+	req_access = list(access_xenobiology, access_research)
+
+/area/rnd/xenobiology/cell_4
+	name = "\improper Xenobiology Containment Cell 4"
+	icon_state = "xeno_lab_cell_4"
+	req_access = list(access_xenobiology, access_research)
+
 /area/rnd/xenobiology/xenoflora
 	name = "\improper Xenoflora Lab"
 	icon_state = "xeno_f_lab"
