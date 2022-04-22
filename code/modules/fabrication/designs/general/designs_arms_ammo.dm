@@ -10,7 +10,7 @@
 	path = /obj/item/ammo_casing/shotgun/blank
 
 /datum/fabricator_recipe/arms_ammo/flaregun
-	name = "flare gun"
+	name = "flare launcher"
 	path = /obj/item/gun/projectile/flare
 
 /datum/fabricator_recipe/arms_ammo/hidden

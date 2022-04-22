@@ -60,11 +60,11 @@
 
 /obj/item/projectile/energy/flash/flare/on_impact(var/atom/A)
 	light_colour = pick("#e58775", "#ffffff", "#faa159", "#e34e0e")
-	set_light(1, 1, 4, 2, light_colour)
+	set_light(1, 2, 6, 1, light_colour)
 	..() //initial flash
 
 	//residual illumination
-	new /obj/effect/effect/smoke/illumination(src.loc, rand(190,240), range=8, power=1, color=light_colour) //same lighting power as flare
+	new /obj/effect/effect/smoke/illumination/flare(src.loc, rand(30 SECONDS,60 SECONDS), range=8, power=1, color=light_colour) //same lighting power as flare
 
 	var/turf/TO = get_turf(src)
 	var/area/AO = TO.loc
