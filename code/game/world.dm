@@ -562,19 +562,17 @@ var/global/failed_old_db_connections = 0
 	return 1
 
 /proc/setup_database_connection()
-
+	if (!sqlenabled)
+		return 0
 	if(failed_db_connections > FAILED_DB_CONNECTION_CUTOFF)	//If it failed to establish a connection more than 5 times in a row, don't bother attempting to conenct anymore.
 		return 0
-
 	if(!dbcon)
 		dbcon = new()
-
 	var/user = sqlfdbklogin
 	var/pass = sqlfdbkpass
 	var/db = sqlfdbkdb
 	var/address = sqladdress
 	var/port = sqlport
-
 	dbcon.Connect("dbi:mysql:[db]:[address]:[port]","[user]","[pass]")
 	. = dbcon.IsConnected()
 	if ( . )
@@ -586,9 +584,10 @@ var/global/failed_old_db_connections = 0
 
 //This proc ensures that the connection to the feedback database (global variable dbcon) is established
 /proc/establish_db_connection()
+	if (!sqlenabled)
+		return 0
 	if(failed_db_connections > FAILED_DB_CONNECTION_CUTOFF)
 		return 0
-
 	if(!dbcon || !dbcon.IsConnected())
 		return setup_database_connection()
 	else
@@ -604,13 +603,12 @@ var/global/failed_old_db_connections = 0
 
 //These two procs are for the old database, while it's being phased out. See the tgstation.sql file in the SQL folder for more information.
 /proc/setup_old_database_connection()
-
+	if (!sqlenabled)
+		return 0
 	if(failed_old_db_connections > FAILED_DB_CONNECTION_CUTOFF)	//If it failed to establish a connection more than 5 times in a row, don't bother attempting to conenct anymore.
 		return 0
-
 	if(!dbcon_old)
 		dbcon_old = new()
-
 	var/user = sqllogin
 	var/pass = sqlpass
 	var/db = sqldb
@@ -624,11 +622,12 @@ var/global/failed_old_db_connections = 0
 	else
 		failed_old_db_connections++		//If it failed, increase the failed connections counter.
 		to_world_log(dbcon.ErrorMsg())
-
 	return .
 
 //This proc ensures that the connection to the feedback database (global variable dbcon) is established
 /proc/establish_old_db_connection()
+	if (!sqlenabled)
+		return 0
 	if(failed_old_db_connections > FAILED_DB_CONNECTION_CUTOFF)
 		return 0
 
