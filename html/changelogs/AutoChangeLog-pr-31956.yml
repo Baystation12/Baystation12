@@ -1,4 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - bugfix: Timer buckets shouldn't reset hitting the lobby.

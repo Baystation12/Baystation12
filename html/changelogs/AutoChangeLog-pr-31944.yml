@@ -1,8 +1,0 @@
-author: Textor
-delete-after: true
-changes:
-  - rscadd: Adds boron gas. The boron canister can be ordered from supply. Boron is
-      theorized to be good for fusion reactions.
-  - maptweak: Adds gas sensor to RUST chamber.
-  - bugfix: Fixes atmosphere control console in RUST chamber. It now can actually
-      control the injector.
