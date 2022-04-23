@@ -153,14 +153,14 @@ var/global/list/additional_antag_types = list()
 /// Run prior to a mode vote to determine if the mode should be included. Falsy if yes, otherwise a status message.
 /datum/game_mode/proc/check_votable(list/lobby_players)
 	if (lobby_players.len < required_players)
-		return "Not enough players are in the lobby. [lobby_players.len] of the required [required_players]."
+		return "[lobby_players.len]/[required_players] lobby players"
 
 
 /// Check to see if the currently selected mode can be started. Falsy if yes, otherwise a status message.
 /datum/game_mode/proc/check_startable(list/lobby_players)
 	var/list/ready_players = SSticker.ready_players(lobby_players)
 	if (ready_players.len < required_players)
-		return "Not enough players. [ready_players.len] ready of the required [required_players]."
+		return "[ready_players.len]/[required_players] ready players"
 
 	var/enemy_count = 0
 	var/list/all_antag_types = GLOB.all_antag_types_
@@ -179,11 +179,11 @@ var/global/list/additional_antag_types = list()
 				potential = antag.get_potential_candidates(src)
 			if(islist(potential))
 				if(require_all_templates && potential.len < antag.initial_spawn_req)
-					return "Not enough antagonists ([antag.role_text]), [antag.initial_spawn_req] required and [potential.len] available."
+					return "[potential.len]/[antag.initial_spawn_req] [antag.role_text] players"
 				enemy_count += potential.len
 				if(enemy_count >= required_enemies)
 					return 0
-		return "Not enough antagonists, [required_enemies] required and [enemy_count] available."
+		return "[enemy_count]/[required_enemies] total antag players"
 	else
 		return 0
 
