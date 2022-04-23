@@ -382,6 +382,7 @@ var/global/list/admin_verbs_mod = list(
 	if(!holder)	return
 	if(isghost(mob))
 		var/mob/observer/ghost/ghost = mob
+		sound_to(usr, sound(null))
 		ghost.reenter_corpse()
 
 	else if(istype(mob,/mob/new_player))
@@ -390,6 +391,8 @@ var/global/list/admin_verbs_mod = list(
 		//ghostize
 		var/mob/body = mob
 		var/mob/observer/ghost/ghost = body.ghostize(1)
+		sound_to(usr, sound(null))
+
 		if (!ghost)
 			to_chat(src, FONT_COLORED("red", "You are already admin-ghosted."))
 			return
