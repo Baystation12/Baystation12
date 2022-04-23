@@ -913,7 +913,7 @@
 
 /obj/item/toy/desk/newtoncradle
 	name = "\improper Newton's cradle"
-	desc = "A ancient 21th century super-weapon model demonstrating that Sir Isaac Newton is the deadliest sonuvabitch in space."
+	desc = "An ancient 21th century super-weapon model demonstrating that Sir Isaac Newton is the deadliest sonuvabitch in space."
 	icon_state = "newtoncradle"
 
 /obj/item/toy/desk/fan
@@ -928,7 +928,7 @@
 
 /obj/item/toy/desk/dippingbird
 	name = "dipping bird toy"
-	desc = "A ancient human bird idol, worshipped by clerks and desk jockeys."
+	desc = "An ancient human bird idol, worshipped by clerks and desk jockeys."
 	icon_state= "dippybird"
 
 // tg station ports
