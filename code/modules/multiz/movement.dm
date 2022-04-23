@@ -151,7 +151,9 @@
 	var/mob/M = src
 	var/is_client_moving = (ismob(M) && M.moving)
 	if(is_client_moving) M.moving = 1
+
 	handle_fall(below)
+
 	if(is_client_moving) M.moving = 0
 
 //For children to override

@@ -330,4 +330,4 @@
 	return current_grab.restrains
 
 /obj/item/grab/proc/resolve_openhand_attack()
-		return current_grab.resolve_openhand_attack(src)
+	return current_grab.resolve_openhand_attack(src)

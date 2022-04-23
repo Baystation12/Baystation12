@@ -139,7 +139,7 @@
 		if(G.assailant.zone_sel.selecting == BP_HEAD)
 			if(headbutt(G))
 				if(drop_headbutt)
-					let_go()
+					G.current_grab.let_go(G)
 				return TRUE
 		else if(G.assailant.zone_sel.selecting == BP_EYES)
 			if(attack_eye(G))
