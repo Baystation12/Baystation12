@@ -154,7 +154,7 @@
 	else if(href_list["lock"])
 		toggle()
 		SSnano.close_user_uis(user, src, "main")
-		program.authenticated = 0
+		program.authenticated = FALSE
 		program.computer.kill_program(program)
 		. = TOPIC_HANDLED
 	else if(href_list["return"])

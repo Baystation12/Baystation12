@@ -30,6 +30,7 @@
 				return
 			else
 				holder.hidden_uplink.toggle()
+				SSnano.close_user_uis(user, holder.hidden_uplink, "main")
 				//No return here. We want the proc to run the last two lines.
 		else if(holder.hidden_uplink.check_trigger(user, input(user, "Please enter your unique tax ID:", "Authentication"), prog.password))
 			prog.authenticated = 1
