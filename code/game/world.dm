@@ -118,11 +118,7 @@ GLOBAL_VAR(href_logfile)
 		to_world_log("Your server's byond version does not meet the recommended requirements for this server. Please update BYOND")
 
 	callHook("startup")
-	//Emergency Fix
-	load_mods()
-	//end-emergency fix
-
-	. = ..()
+	..()
 
 #ifdef UNIT_TEST
 	log_unit_test("Unit Tests Enabled. This will destroy the world when testing is complete.")
@@ -508,32 +504,6 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 	to_file(F, the_mode)
 
 
-/hook/startup/proc/loadMods()
-	world.load_mods()
-	return 1
-
-/world/proc/load_mods()
-	if(config.admin_legacy_system)
-		var/text = file2text("config/moderators.txt")
-		if (!text)
-			error("Failed to load config/mods.txt")
-		else
-			var/list/lines = splittext(text, "\n")
-			for(var/line in lines)
-				if (!line)
-					continue
-
-				if (copytext(line, 1, 2) == ";")
-					continue
-
-				var/title = "Moderator"
-				var/rights = admin_ranks[title]
-
-				var/ckey = copytext(line, 1, length(line)+1)
-				var/datum/admins/D = new /datum/admins(title, rights, ckey)
-				D.associate(GLOB.ckey_directory[ckey])
-
-
 /world/proc/update_status()
 	if (!config?.hub_visible || !config.hub_entry)
 		return
@@ -562,19 +532,17 @@ var/global/failed_old_db_connections = 0
 	return 1
 
 /proc/setup_database_connection()
-
+	if (!sqlenabled)
+		return 0
 	if(failed_db_connections > FAILED_DB_CONNECTION_CUTOFF)	//If it failed to establish a connection more than 5 times in a row, don't bother attempting to conenct anymore.
 		return 0
-
 	if(!dbcon)
 		dbcon = new()
-
 	var/user = sqlfdbklogin
 	var/pass = sqlfdbkpass
 	var/db = sqlfdbkdb
 	var/address = sqladdress
 	var/port = sqlport
-
 	dbcon.Connect("dbi:mysql:[db]:[address]:[port]","[user]","[pass]")
 	. = dbcon.IsConnected()
 	if ( . )
@@ -586,9 +554,10 @@ var/global/failed_old_db_connections = 0
 
 //This proc ensures that the connection to the feedback database (global variable dbcon) is established
 /proc/establish_db_connection()
+	if (!sqlenabled)
+		return 0
 	if(failed_db_connections > FAILED_DB_CONNECTION_CUTOFF)
 		return 0
-
 	if(!dbcon || !dbcon.IsConnected())
 		return setup_database_connection()
 	else
@@ -604,13 +573,12 @@ var/global/failed_old_db_connections = 0
 
 //These two procs are for the old database, while it's being phased out. See the tgstation.sql file in the SQL folder for more information.
 /proc/setup_old_database_connection()
-
+	if (!sqlenabled)
+		return 0
 	if(failed_old_db_connections > FAILED_DB_CONNECTION_CUTOFF)	//If it failed to establish a connection more than 5 times in a row, don't bother attempting to conenct anymore.
 		return 0
-
 	if(!dbcon_old)
 		dbcon_old = new()
-
 	var/user = sqllogin
 	var/pass = sqlpass
 	var/db = sqldb
@@ -624,11 +592,12 @@ var/global/failed_old_db_connections = 0
 	else
 		failed_old_db_connections++		//If it failed, increase the failed connections counter.
 		to_world_log(dbcon.ErrorMsg())
-
 	return .
 
 //This proc ensures that the connection to the feedback database (global variable dbcon) is established
 /proc/establish_old_db_connection()
+	if (!sqlenabled)
+		return 0
 	if(failed_old_db_connections > FAILED_DB_CONNECTION_CUTOFF)
 		return 0
 
