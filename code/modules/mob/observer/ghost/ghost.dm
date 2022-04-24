@@ -557,6 +557,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	to_chat(usr, SPAN_NOTICE("<b>Make sure to play a different character, and please roleplay correctly!</b>"))
 	announce_ghost_joinleave(client, 0)
 
+	sound_to(src, sound(null))
+
 	var/mob/new_player/M = new /mob/new_player()
 	if (can_reenter_corpse != CORPSE_CAN_REENTER_AND_RESPAWN)
 		M.respawned_time = world.time
