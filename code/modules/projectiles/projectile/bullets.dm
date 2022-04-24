@@ -191,12 +191,11 @@
 	icon_state = "flechette"
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 	damage = 30
-	armor_penetration = 25
-	pellets = 3
+	armor_penetration = 30
+	pellets = 4
 	range_step = 3
 	base_spread = 99
 	spread_step = 2
-	penetration_modifier = 0.5
 	hitchance_mod = 5
 
 /* "Rifle" rounds */
