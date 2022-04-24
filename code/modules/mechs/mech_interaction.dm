@@ -313,20 +313,6 @@
 			return
 		to_chat(user, SPAN_WARNING("\The [thing] could not be installed in that hardpoint."))
 		return
-
-	else if(istype(thing, /obj/item/device/kit/paint))
-		user.visible_message(SPAN_NOTICE("\The [user] opens \the [thing] and spends some quality time customising \the [src]."))
-		var/obj/item/device/kit/paint/P = thing
-		SetName(P.new_name)
-		desc = P.new_desc
-		for(var/obj/item/mech_component/comp in list(arms, legs, head, body))
-			comp.decal = P.new_icon
-		if(P.new_icon_file)
-			icon = P.new_icon_file
-		queue_icon_update()
-		P.use(1, user)
-		return 1
-
 	else
 		if(user.a_intent != I_HURT)
 			if(isMultitool(thing))
