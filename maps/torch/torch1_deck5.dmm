@@ -807,6 +807,9 @@
 	name = "Atmospheric Sensors";
 	sensor_tag = "charon_out"
 	},
+/obj/machinery/camera/network/exploration_shuttle{
+	c_tag = "Charon - Crew Compartment"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/crew)
 "bF" = (
@@ -997,6 +1000,10 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/power/apc/shuttle/charon,
 /obj/structure/cable/cyan,
+/obj/machinery/camera/network/exploration_shuttle{
+	c_tag = "Charon - Cockpit";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
 "bW" = (
@@ -1214,7 +1221,9 @@
 /obj/random/medical,
 /obj/structure/table/steel_reinforced,
 /obj/item/bodybag/cryobag,
-/obj/machinery/camera/network/exploration_shuttle,
+/obj/machinery/camera/network/exploration_shuttle{
+	c_tag = "Charon - Medical Compartment"
+	},
 /obj/machinery/firealarm{
 	dir = 2;
 	pixel_y = 24
@@ -1990,6 +1999,10 @@
 /obj/effect/floor_decal/techfloor,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/firecloset,
+/obj/machinery/camera/network/exploration_shuttle{
+	c_tag = "Charon - Cargo Compartment";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
 "ee" = (
@@ -2623,6 +2636,10 @@
 	dir = 1;
 	pixel_y = -26
 	},
+/obj/machinery/camera/network/exploration_shuttle{
+	c_tag = "Charon - Airlock Compartment";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
 "fK" = (
@@ -2705,6 +2722,7 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/cable/yellow,
 /obj/machinery/camera/network/exploration_shuttle{
+	c_tag = "Charon - Power Compartment";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -5654,8 +5672,8 @@
 "mG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /obj/machinery/camera/network/exploration_shuttle{
-	dir = 8;
-	icon_state = "camera"
+	c_tag = "Charon - Atmospherics Compartment";
+	dir = 8
 	},
 /obj/structure/handrail{
 	dir = 8;
@@ -7529,6 +7547,7 @@
 	icon_state = "map"
 	},
 /obj/machinery/camera/network/exploration_shuttle{
+	c_tag = "Charon - Fuel Compartment";
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
