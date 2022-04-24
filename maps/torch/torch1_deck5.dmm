@@ -2675,6 +2675,12 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
+/obj/machinery/access_button/airlock_interior{
+	frequency = 1331;
+	master_tag = "charon_shuttle";
+	pixel_x = -24;
+	pixel_y = -24
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/airlock)
 "fN" = (
@@ -4528,6 +4534,12 @@
 /obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
+	},
+/obj/machinery/access_button/airlock_interior{
+	frequency = 1331;
+	master_tag = "charon_cargo";
+	pixel_x = 24;
+	pixel_y = -10
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/airlock)
@@ -10818,6 +10830,12 @@
 	id_tag = "charon_cargo_exterior";
 	pixel_x = 24;
 	pixel_y = 8
+	},
+/obj/machinery/access_button/airlock_exterior{
+	frequency = 1331;
+	master_tag = "charon_cargo";
+	pixel_x = 22;
+	pixel_y = -10
 	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/airlock)
