@@ -11,6 +11,7 @@
 SpacemanDMM.toml @Baystation12/Core
 
 /docs/ @Baystation12/Core
+/tools/ @Baystation12/Core
 
 /LICENSE @Baystation12/Core
 /README.md @Baystation12/Core
