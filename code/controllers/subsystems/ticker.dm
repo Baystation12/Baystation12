@@ -287,10 +287,10 @@ Helpers
 	var/list/base_runnable_modes = get_runnable_modes() //format: list(config_tag = weight)
 	if (mode_to_try=="secret")
 		log_debug("Trying to start secret mode.")
-		log_debug("BASE RUNNABLE MODES: [base_runnable_modes]")
-		log_debug("BAD_MODES: [bad_modes]")
+		log_debug("BASE RUNNABLE MODES: [json_encode(base_runnable_modes)]")
+		log_debug("BAD_MODES: [json_encode(bad_modes)]")
 		var/list/runnable_modes = base_runnable_modes - bad_modes
-		log_debug("MODES LEFT: [runnable_modes]")
+		log_debug("MODES LEFT: [json_encode(runnable_modes)]")
 		if(secret_force_mode != "secret") // Config option to force secret to be a specific mode.
 			mode_datum = pick_mode(secret_force_mode)
 			log_debug("CURRENT MODE_DATUM: [mode_datum.name]")
