@@ -65,7 +65,7 @@ SUBSYSTEM_DEF(ticker)
 	mode_tags = list()
 	mode_names = list()
 	mode_cache = list()
-	mode_probabilities = config.probabilities.Copy()
+	mode_probabilities = list()
 	for (var/datum/game_mode/mode as anything in subtypesof(/datum/game_mode))
 		var/tag = initial(mode.config_tag)
 		if (!tag)
@@ -75,10 +75,12 @@ SUBSYSTEM_DEF(ticker)
 			continue
 		mode_tags += tag
 		mode_names[tag] = mode.name
-		mode_probabilities[tag] = mode.probability
+		mode_probabilities[tag] = 0
 		if (mode.votable)
 			votable_modes += tag
 	votable_modes -= config.disallowed_modes
+	for (var/key in config.probabilities)
+		mode_probabilities[key] = config.probabilities[key]
 
 
 /datum/controller/subsystem/ticker/proc/get_runnable_modes()
