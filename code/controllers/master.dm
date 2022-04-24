@@ -85,8 +85,8 @@ var/global/datum/controller/master/Master = new
 			for(var/I in subsytem_types)
 				_subsystems += new I
 		Master = src
-	if(!GLOB)
-		new /datum/controller/global_vars
+	if (!GLOB)
+		GLOB = new
 
 /datum/controller/master/Destroy()
 	..()
