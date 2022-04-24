@@ -6,6 +6,8 @@ GLOBAL_DATUM(debug_real_globals, /debug_real_globals)
 	if (!cache)
 		cache = list()
 		var/list/hidden = VV_hidden()
+		if (!hidden)
+			return list()
 		for (var/name in global.vars)
 			if (name in hidden)
 				continue
