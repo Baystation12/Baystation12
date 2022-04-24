@@ -4,7 +4,7 @@
   * Pretty much pokes the MC to make sure it's still alive.
  **/
 
-GLOBAL_REAL(Failsafe, /datum/controller/failsafe)
+var/global/datum/controller/failsafe/Failsafe
 
 /datum/controller/failsafe // This thing pretty much just keeps poking the master controller
 	name = "Failsafe"

@@ -40,7 +40,7 @@
 #define NEW_SS_GLOBAL(varname) if(varname != src){if(istype(varname)){Recover(varname);qdel(varname);}varname = src;}
 
 /// Boilerplate for a new global subsystem object and its associated type.
-#define SUBSYSTEM_DEF(X) GLOBAL_REAL(SS##X, /datum/controller/subsystem/##X);\
+#define SUBSYSTEM_DEF(X) var/global/datum/controller/subsystem/##X/SS##X;\
 /datum/controller/subsystem/##X/New(){\
 	NEW_SS_GLOBAL(SS##X);\
 	PreInit();\
@@ -48,7 +48,7 @@
 /datum/controller/subsystem/##X
 
 /// Boilerplate for a new global processing subsystem object and its associated type.
-#define PROCESSING_SUBSYSTEM_DEF(X) GLOBAL_REAL(SS##X, /datum/controller/subsystem/processing/##X);\
+#define PROCESSING_SUBSYSTEM_DEF(X) var/global/datum/controller/subsystem/processing/##X/SS##X;\
 /datum/controller/subsystem/processing/##X/New(){\
 	NEW_SS_GLOBAL(SS##X);\
 	PreInit();\

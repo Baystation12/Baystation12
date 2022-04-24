@@ -1,4 +1,4 @@
-GLOBAL_REAL(GLOB, /datum/controller/global_vars)
+var/global/datum/controller/global_vars/GLOB
 
 /datum/controller/global_vars
 	name = "Global Variables"
