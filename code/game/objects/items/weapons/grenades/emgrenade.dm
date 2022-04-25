@@ -6,7 +6,7 @@
 
 /obj/item/grenade/empgrenade/detonate()
 	..()
-	if(empulse(src, 4, 10))
+	if(empulse(src, 2, 5))
 		qdel(src)
 	return
 
@@ -19,6 +19,6 @@
 
 /obj/item/grenade/empgrenade/low_yield/detonate()
 	..()
-	if(empulse(src, 4, 1))
+	if(empulse(src, 1, 3))
 		qdel(src)
 	return
