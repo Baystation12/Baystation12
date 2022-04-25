@@ -294,3 +294,8 @@
 #define SOULSTONE_OWNER_CULT   "cult"   /// The soulstone is owned by the cult faction.
 #define SOULSTONE_OWNER_WIZARD "wizard" /// The soulstone is owned by a wizard.
 #define SOULSTONE_OWNER_PURE   "pure"   /// The soulstone has been purified.
+
+
+// Severities for emp_act()
+#define EMP_ACT_HEAVY 1
+#define EMP_ACT_LIGHT 2
