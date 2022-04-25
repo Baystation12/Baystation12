@@ -1,5 +1,0 @@
-author: Textor
-delete-after: true
-changes:
-  - bugfix: Sounds end when you respawn, meaning you no longer have that one tune
-      stuck in your head for the rest of the round.
