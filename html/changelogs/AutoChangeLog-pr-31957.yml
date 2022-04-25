@@ -1,0 +1,5 @@
+author: Textor
+delete-after: true
+changes:
+  - rscadd: The disposal bin can now be ejected by right clicking and selecting the
+      verb, even without power.
