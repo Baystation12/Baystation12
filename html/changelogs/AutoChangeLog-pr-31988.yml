@@ -1,0 +1,5 @@
+author: Spookerton
+delete-after: true
+changes:
+  - tweak: When not on help intent, buckling/unbuckling other mobs takes a few uninterrupted
+      seconds.
