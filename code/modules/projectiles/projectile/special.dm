@@ -7,7 +7,7 @@
 	damage_flags = 0
 	nodamage = TRUE
 	var/heavy_effect_range = 1
-	var/light_effect_range = 2
+	var/light_effect_range = 1
 
 /obj/item/projectile/ion/on_impact(var/atom/A)
 	empulse(A, heavy_effect_range, light_effect_range)
