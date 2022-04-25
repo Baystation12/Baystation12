@@ -83,11 +83,11 @@
 	if (status_flags & GODMODE)
 		return
 	switch(severity)
-		if(1)
+		if(EMP_ACT_HEAVY)
 			take_organ_damage(0, 16, ORGAN_DAMAGE_SILICON_EMP)
 			if(prob(50)) Stun(rand(5,10))
 			else confused = (min(confused + 2, 40))
-		if(2)
+		if(EMP_ACT_LIGHT)
 			take_organ_damage(0, 7, ORGAN_DAMAGE_SILICON_EMP)
 			confused = (min(confused + 2, 30))
 	flash_eyes(affect_silicon = 1)

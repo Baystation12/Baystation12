@@ -186,7 +186,7 @@
 /mob/living/exosuit/emp_act(var/severity)
 	if (status_flags & GODMODE)
 		return
-	var/ratio = get_blocked_ratio(null, DAMAGE_BURN, null, (4-severity) * 20)
+	var/ratio = get_blocked_ratio(null, DAMAGE_BURN, null, (3-severity) * 20) // HEAVY = 40; LIGHT = 20
 
 	if(ratio >= 0.5)
 		for(var/mob/living/m in pilots)
@@ -197,13 +197,13 @@
 			to_chat(m, SPAN_NOTICE("Your Faraday shielding mitigated the pulse!"))
 
 	emp_damage += round((12 - (severity*3))*( 1 - ratio))
-	if(severity <= 3)
-		for(var/obj/item/thing in list(arms,legs,head,body))
-			thing.emp_act(severity)
-		if(!hatch_closed || !prob(body.pilot_coverage))
-			for(var/thing in pilots)
-				var/mob/pilot = thing
-				pilot.emp_act(severity)
+	for(var/obj/item/thing in list(arms,legs,head,body))
+		thing.emp_act(severity)
+	if(!hatch_closed || !prob(body.pilot_coverage))
+		for(var/thing in pilots)
+			var/mob/pilot = thing
+			pilot.emp_act(severity)
+	..()
 
 /mob/living/exosuit/get_bullet_impact_effect_type(def_zone)
 	return BULLET_IMPACT_METAL

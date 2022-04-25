@@ -192,9 +192,8 @@
 	if(!BP_IS_ROBOTIC(src))
 		return
 	switch (severity)
-		if (1)
+		if (EMP_ACT_HEAVY)
 			take_internal_damage(16)
-		if (2)
+		if (EMP_ACT_LIGHT)
 			take_internal_damage(9)
-		if (3)
-			take_internal_damage(6.5)
+	..()

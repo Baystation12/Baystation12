@@ -90,20 +90,13 @@
 		to_chat(imp_in,"<span class='warning'>A wave of nausea comes over you.</span><br><span class='good'>You are no longer so sure of those beliefs you've had...</span>")
 	..()
 
-/obj/item/implant/imprinting/emp_act(severity)
-	var/power = 4 - severity
-	if(prob(power * 15))
-		meltdown()
-	else if(prob(power * 40))
-		disable(rand(power*100,power*1000))//a few precious seconds of freedom
-
 /obj/item/implant/imprinting/meltdown()
 	if(brainwashing && !malfunction)//if it's already broken don't send the message again
 		to_chat(imp_in,"<span class='warning'>A wave of nausea comes over you.</span><br><span class='good'> You are no longer so sure of those beliefs you've had...</span>")
 	. = ..()
 
 /obj/item/implant/imprinting/can_implant(mob/M, mob/user, target_zone)
-	var/mob/living/carbon/human/H = M	
+	var/mob/living/carbon/human/H = M
 	if(istype(H))
 		var/obj/item/organ/internal/B = H.internal_organs_by_name[BP_BRAIN]
 		if(!B || H.isSynthetic())

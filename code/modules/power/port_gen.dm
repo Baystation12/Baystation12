@@ -85,22 +85,23 @@
 /obj/machinery/power/port_gen/emp_act(severity)
 	if(!active)
 		return
-	var/duration = 6000 //ten minutes
+	var/duration
 	switch(severity)
-		if(1)
+		if(EMP_ACT_HEAVY)
 			stat &= BROKEN
 			if(prob(75)) explode()
-		if(2)
+			else duration = 10 MINUTES
+		if(EMP_ACT_LIGHT)
 			if(prob(25)) stat &= BROKEN
 			if(prob(10)) explode()
-		if(3)
-			if(prob(10)) stat &= BROKEN
-			duration = 300
+			else duration = 30 SECONDS
 
-	stat |= EMPED
 	if(duration)
-		spawn(duration)
-			stat &= ~EMPED
+		stat |= EMPED
+		addtimer(CALLBACK(src, .proc/resolve_emp_timer), duration)
+
+/obj/machinery/power/port_gen/proc/resolve_emp_timer()
+	stat &= ~EMPED
 
 /obj/machinery/power/port_gen/proc/explode()
 	explosion(src.loc, -1, 3, 5, -1)
@@ -113,7 +114,7 @@
 /obj/machinery/power/port_gen/pacman
 	name = "\improper P.A.C.M.A.N.-type Portable Generator"
 	desc = "A power generator that runs on solid phoron sheets. Rated for 80 kW max safe output."
-	
+
 	machine_name = "\improper PACMAN-type generator"
 	machine_desc = "A portable generator often used for backup power or running small spacecraft. Runs on solid phoron sheets; rated for 80 kW max safe output."
 

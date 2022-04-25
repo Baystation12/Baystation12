@@ -82,11 +82,12 @@
 
 /obj/machinery/shield/emp_act(severity)
 	switch(severity)
-		if(1)
+		if(EMP_ACT_HEAVY)
 			qdel(src)
-		if(2)
+		if(EMP_ACT_LIGHT)
 			if(prob(50))
 				qdel(src)
+	..()
 
 
 /obj/machinery/shield/hitby(AM as mob|obj, var/datum/thrownthing/TT)
@@ -240,15 +241,16 @@
 
 /obj/machinery/shieldgen/emp_act(severity)
 	switch(severity)
-		if(1)
+		if(EMP_ACT_HEAVY)
 			src.health /= 2 //cut health in half
 			malfunction = 1
 			locked = pick(0,1)
-		if(2)
+		if(EMP_ACT_LIGHT)
 			if(prob(50))
 				src.health *= 0.3 //chop off a third of the health
 				malfunction = 1
 	checkhp()
+	..()
 
 /obj/machinery/shieldgen/interface_interact(mob/user as mob)
 	if(!CanInteract(user, DefaultTopicState()))

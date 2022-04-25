@@ -112,10 +112,11 @@
 	var/power = 4 - severity
 	if(prob(power * 15))
 		meltdown()
-	else if(prob(power * 25))
-		activate()
 	else if(prob(power * 33))
 		disable(rand(power*100,power*1000))
+	else if(prob(power * 25))
+		activate()
+	..()
 
 /obj/item/implant/Destroy()
 	if(part)

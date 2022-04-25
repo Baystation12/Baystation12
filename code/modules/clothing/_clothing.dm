@@ -989,12 +989,10 @@ BLIND     // can't see anything
 	..()
 	var/new_mode
 	switch(severity)
-		if(1)
+		if (EMP_ACT_HEAVY)
 			new_mode = pick(75;SUIT_SENSOR_OFF, 15;SUIT_SENSOR_BINARY, 10;SUIT_SENSOR_VITAL)
-		if(2)
+		if (EMP_ACT_LIGHT)
 			new_mode = pick(50;SUIT_SENSOR_OFF, 25;SUIT_SENSOR_BINARY, 20;SUIT_SENSOR_VITAL, 5;SUIT_SENSOR_TRACKING)
-		else
-			new_mode = pick(25;SUIT_SENSOR_OFF, 35;SUIT_SENSOR_BINARY, 30;SUIT_SENSOR_VITAL, 10;SUIT_SENSOR_TRACKING)
 
 	sensor_mode = new_mode
 

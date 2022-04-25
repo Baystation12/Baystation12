@@ -607,10 +607,10 @@
 	..()
 	var/new_fail = 0
 	switch(severity)
-		if(1)
+		if(EMP_ACT_HEAVY)
 			new_fail = max(fail_counter, 20)
 			visible_message("\The [src]'s reactor overloads!")
-		if(2)
+		if(EMP_ACT_LIGHT)
 			new_fail = max(fail_counter, 8)
 			if(ismob(loc))
 				to_chat(loc, "<span class='warning'>\The [src] feel pleasantly warm.</span>")

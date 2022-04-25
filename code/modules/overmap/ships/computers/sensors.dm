@@ -221,10 +221,10 @@
 	change_power_consumption(1500 * (range**2), POWER_USE_IDLE) //Exponential increase, also affects speed of overheating
 
 /obj/machinery/shipsensors/emp_act(severity)
-	if(!use_power)
-		return
-	take_damage(20/severity)
-	toggle()
+	if(use_power)
+		take_damage(20/severity)
+		toggle()
+	..()
 
 /obj/machinery/shipsensors/proc/take_damage(value)
 	health = min(max(health - value, 0),max_health)

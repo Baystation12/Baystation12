@@ -187,8 +187,7 @@ The megabot
 	if (status_flags & GODMODE)
 		return
 	. = ..()
-	if(severity >= 1)
-		deactivate()
+	deactivate()
 
 /mob/living/simple_animal/hostile/hivebot/mega/on_update_icon()
 	if(stat != DEAD)

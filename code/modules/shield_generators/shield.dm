@@ -191,6 +191,7 @@
 /obj/effect/shield/emp_act(var/severity)
 	if(!disabled_for)
 		take_damage(rand(30,60) / severity, SHIELD_DAMTYPE_EM)
+	..()
 
 
 // Explosions

@@ -27,6 +27,7 @@
 	take_burn_damage(rand((10 - (severity*3)),15-(severity*4)))
 	for(var/obj/item/thing in contents)
 		thing.emp_act(severity)
+	..()
 
 /obj/item/mech_component/examine(mob/user)
 	. = ..()

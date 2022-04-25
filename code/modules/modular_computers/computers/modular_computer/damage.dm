@@ -44,6 +44,7 @@
 // EMPs are similar to explosions, but don't cause physical damage to the casing. Instead they screw up the components
 /obj/item/modular_computer/emp_act(var/severity)
 	take_damage(rand(100,200) / severity, 50 / severity, 0)
+	..()
 
 // "Stun" weapons can cause minor damage to components (short-circuits?)
 // "Burn" damage is equally strong against internal components and exterior casing

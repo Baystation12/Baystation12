@@ -105,8 +105,7 @@
 			visible_message(SPAN_DANGER("\The [src] explodes!"))
 			explosion(src, -1, -1, 1, 2)
 			qdel(src)
-	else
-		..()
+	..()
 
 
 /obj/item/device/personal_shield/proc/turn_on(var/mob/user)
