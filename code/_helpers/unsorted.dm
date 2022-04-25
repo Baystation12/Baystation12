@@ -173,6 +173,43 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	if(DirBlocked(B,rdir)) return 1
 	return 0
 
+// Returns direction-string, rounded to multiples of 22.5, from the first parameter to the second
+// N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW
+/proc/get_adir(var/turf/A, var/turf/B)
+	var/degree = Get_Angle(A, B)
+	switch(round(degree%360, 22.5))
+		if(0)
+			return "North"
+		if(22.5)
+			return "North-Northeast"
+		if(45)
+			return "Northeast"
+		if(67.5)
+			return "East-Northeast"
+		if(90)
+			return "East"
+		if(112.5)
+			return "East-Southeast"
+		if(135)
+			return "Southeast"
+		if(157.5)
+			return "South-Southeast"
+		if(180)
+			return "South"
+		if(202.5)
+			return "South-Southwest"
+		if(225)
+			return "Southwest"
+		if(247.5)
+			return "West-Southwest"
+		if(270)
+			return "West"
+		if(292.5)
+			return "West-Northwest"
+		if(315)
+			return "Northwest"
+		if(337.5)
+			return "North-Northwest"
 
 /proc/DirBlocked(turf/loc,var/dir)
 	for(var/obj/structure/window/D in loc)
@@ -1077,6 +1114,10 @@ var/global/list/WALLITEMS = list(
 				temp_col = "0[temp_col]"
 			colour += temp_col
 	return "#[colour]"
+
+/proc/color_square(red, green, blue, hex)
+	var/color = hex ? hex : "#[num2hex(red, 2)][num2hex(green, 2)][num2hex(blue, 2)]"
+	return "<span style='font-face: fixedsys; font-size: 14px; background-color: [color]; color: [color]'>___</span>"
 
 GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 
