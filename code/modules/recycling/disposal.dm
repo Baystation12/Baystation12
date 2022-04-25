@@ -312,6 +312,20 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if(. == TOPIC_REFRESH)
 		interact(user)
 
+/obj/machinery/disposal/verb/manual_eject()
+	set src in oview(1)
+	set category = "Object"
+	set name = "Eject Items From Bin"
+
+	if (!isliving(usr) || usr.incapacitated())
+		return
+	usr.visible_message(
+		SPAN_NOTICE("\The [usr] ejects \the [src]'s contents'."),
+		SPAN_NOTICE("You eject \the [initial(name)]'s contents."),
+	)
+	eject()
+	add_fingerprint(usr)
+
 // eject the contents of the disposal unit
 /obj/machinery/disposal/proc/eject()
 	for(var/atom/movable/AM in (contents - component_parts))
