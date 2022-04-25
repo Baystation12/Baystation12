@@ -105,7 +105,6 @@
 	move_delay = 2 //It´s fast
 	turn_delay = 7
 	power_use = 150
-	color = COLOR_WHITE
 
 /obj/item/mech_component/propulsion/heavy
 	name = "heavy legs"

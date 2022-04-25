@@ -78,7 +78,7 @@
 			if(!found)
 				return FALSE
 	else
-		return FALSE	
+		return FALSE
 
 	if(user)
 		var/delay = 30 * user.skill_delay_mult(SKILL_DEVICES)
@@ -88,6 +88,9 @@
 				SPAN_NOTICE("You begin trying to install \the [system] into \the [src].")
 			)
 			if(!do_after(user, delay, src) || user.get_active_hand() != system)
+				return FALSE
+
+			if(hardpoints_locked || hardpoints[system_hardpoint])
 				return FALSE
 
 			if(user.unEquip(system))
