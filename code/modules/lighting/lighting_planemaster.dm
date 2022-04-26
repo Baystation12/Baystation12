@@ -1,9 +1,13 @@
-/obj/lighting_plane
-	screen_loc = "1,1"
+/atom/movable/screen/plane_master/lighting
+	name = "lighting plane master"
 	plane = LIGHTING_PLANE
-
 	blend_mode = BLEND_MULTIPLY
+	blend_mode_override = BLEND_MULTIPLY
+	render_relay_plane = RENDER_PLANE_GAME
+
+	//screen_loc = "1,1"
 	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PLANE_MASTER | NO_CLIENT_COLOR
+
 	// use 20% ambient lighting; be sure to add full alpha
 
 	color = list(
@@ -13,6 +17,7 @@
 			00, 00, 00, 00,
 			01, 01, 01, 01
 		)
+
 
 	mouse_opacity = 0    // nothing on this plane is mouse-visible
 
@@ -38,7 +43,6 @@
 	color = new_colour
 
 /mob
-	var/obj/lighting_plane/l_plane
 	var/obj/lighting_general/l_general
 
 

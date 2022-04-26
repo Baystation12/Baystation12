@@ -520,3 +520,15 @@ would spawn and follow the beaker, even if it is carried or thrown.
 			round(min(light, BOMBCAP_LIGHT_RADIUS)),
 			round(min(flash, BOMBCAP_FLASH_RADIUS))
 			)
+
+
+//Example of a warp filter use with renderer setup
+/obj/effect/effect/warp
+	plane = GRAVITY_PULSE_PLANE
+	appearance_flags = PIXEL_SCALE // no tile bound so you can see it around corners and so
+	icon = 'icons/effects/352x352.dmi'
+	icon_state = "singularity_s11"
+	pixel_x = -176
+	pixel_y = -176
+	no_z_overlay = TRUE //If you figure out how to make zmimic work with this, that's grand. Else just accept it won't
+	mouse_opacity = 0
