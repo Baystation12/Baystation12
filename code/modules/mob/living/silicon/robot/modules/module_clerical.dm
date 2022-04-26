@@ -64,8 +64,6 @@
 
 /obj/item/robot_module/clerical/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
-	var/obj/item/reagent_containers/food/condiment/enzyme/E = locate() in equipment
-	E.reagents.add_reagent(/datum/reagent/enzyme, 2 * amount)
 	if(emag)
 		var/obj/item/reagent_containers/food/drinks/bottle/small/beer/B = emag
 		B.reagents.add_reagent(/datum/reagent/chloralhydrate/beer2, 2 * amount)
