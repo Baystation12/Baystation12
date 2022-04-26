@@ -159,7 +159,6 @@
 #include "code\controllers\configuration.dm"
 #include "code\controllers\controller.dm"
 #include "code\controllers\failsafe.dm"
-#include "code\controllers\globals.dm"
 #include "code\controllers\hooks-defs.dm"
 #include "code\controllers\hooks.dm"
 #include "code\controllers\master.dm"

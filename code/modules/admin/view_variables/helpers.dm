@@ -102,7 +102,10 @@
 		"}
 
 /datum/proc/get_variables()
-	. = vars - VV_hidden()
+	var/list/hidden = VV_hidden()
+	if (!hidden)
+		return list()
+	. = vars - hidden
 	if(!usr || !check_rights(R_ADMIN|R_DEBUG, FALSE))
 		. -= VV_secluded()
 
@@ -133,7 +136,7 @@
 
 // These methods are all procs and don't use stored lists to avoid VV exploits
 
-// The following vars cannot be viewed by anyone
+// The following vars cannot be viewed by anyone or, if null, no variables can be viewed.
 /datum/proc/VV_hidden()
 	return list()
 

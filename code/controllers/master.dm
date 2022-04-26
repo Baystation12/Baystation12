@@ -8,7 +8,7 @@
  **/
 
 //This is the ABSOLUTE ONLY THING that should init globally like this
-GLOBAL_REAL(Master, /datum/controller/master) = new
+var/global/datum/controller/master/Master = new
 
 // THIS IS THE INIT ORDER
 // config/New -> Master -> SSPreInit -> config/Initialize -> GLOB -> world -> SSInit -> Failsafe
@@ -85,8 +85,8 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 			for(var/I in subsytem_types)
 				_subsystems += new I
 		Master = src
-	if(!GLOB)
-		new /datum/controller/global_vars
+	if (!GLOB)
+		GLOB = new
 
 /datum/controller/master/Destroy()
 	..()
