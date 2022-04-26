@@ -2932,6 +2932,13 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/exploration_shuttle/fuel)
+"gA" = (
+/obj/effect/catwalk_plated,
+/obj/machinery/rotating_alarm/hangar_warning_beacon/torch_hangar{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "gB" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -6119,6 +6126,9 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
+/obj/machinery/rotating_alarm/hangar_warning_beacon/torch_hangar{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/hangar)
 "nL" = (
@@ -7548,6 +7558,9 @@
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = -24
+	},
+/obj/machinery/rotating_alarm/hangar_warning_beacon/torch_petrov{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
@@ -13489,6 +13502,11 @@
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/isolation)
+"JQ" = (
+/obj/effect/catwalk_plated,
+/obj/machinery/rotating_alarm/hangar_warning_beacon/torch_hangar,
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "JS" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -14704,6 +14722,13 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/hallwaya)
+"OI" = (
+/obj/effect/catwalk_plated,
+/obj/machinery/rotating_alarm/hangar_warning_beacon/torch_hangar{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "OM" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/empty,
@@ -14751,6 +14776,13 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/shuttle/petrov/maint)
+"OT" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/obj/machinery/rotating_alarm/hangar_warning_beacon/torch_hangar,
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "OU" = (
 /obj/machinery/light{
 	dir = 4
@@ -32902,12 +32934,12 @@ jt
 jB
 aX
 kU
-aX
+OI
 Jn
 aX
 tO
 zf
-aX
+OI
 aX
 aX
 aX
@@ -32921,7 +32953,7 @@ kU
 aX
 aX
 aX
-aX
+OI
 lQ
 lM
 jZ
@@ -33906,7 +33938,7 @@ wr
 tV
 Hm
 lY
-hY
+OT
 ih
 ee
 aA
@@ -36532,7 +36564,7 @@ aW
 hi
 hb
 aJ
-aX
+JQ
 cy
 Ho
 Ho
@@ -38156,7 +38188,7 @@ aX
 kT
 aX
 aX
-aX
+gA
 fj
 kV
 oL
@@ -38166,7 +38198,7 @@ ih
 pb
 IO
 il
-aX
+gA
 aX
 aX
 kT
