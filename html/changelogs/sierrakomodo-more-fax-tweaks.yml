@@ -44,3 +44,4 @@ changes:
   - bugfix: "The redundant 'The paper is titled XYZ' line from fax descriptions has been removed."
   - admin: "send-fax now includes the same list of pre-made origin departments as the emag+multitool options for consistency and further reduction of potential metagame."
   - bugfix: "Fax machines and send-fax no longer have a perceived delay in processing when sending faxes."
+  - tweak: "Fax machines no longer lock themselves whenever sending a fax to off-ship places, i.e. Expeditionary Command."

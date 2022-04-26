@@ -16,7 +16,6 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 	var/obj/item/card/id/scan = null // identification
 	var/authenticated = 0
-	var/sendcooldown = 0 // to avoid spamming fax messages
 	var/department = null // our department
 	var/destination = null // the department we're sending to
 
@@ -120,22 +119,12 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 		if(copyitem)
 			dat += "<a href='byond://?src=\ref[src];remove=1'>Remove Item</a><br><br>"
-
-			if(sendcooldown)
-				dat += "<b>Transmitter arrays realigning. Please stand by.</b><br>"
-
-			else
-
-				dat += "<a href='byond://?src=\ref[src];send=1'>Send</a><br>"
-				dat += "<b>Currently sending:</b> [copyitem.name]<br>"
-				dat += "<b>Sending to:</b> <a href='byond://?src=\ref[src];dept=1'>[destination ? destination : "Nobody"]</a><br>"
+			dat += "<a href='byond://?src=\ref[src];send=1'>Send</a><br>"
+			dat += "<b>Currently sending:</b> [copyitem.name]<br>"
+			dat += "<b>Sending to:</b> <a href='byond://?src=\ref[src];dept=1'>[destination ? destination : "Nobody"]</a><br>"
 
 		else
-			if(sendcooldown)
-				dat += "Please insert paper to send via secure connection.<br><br>"
-				dat += "<b>Transmitter arrays realigning. Please stand by.</b><br>"
-			else
-				dat += "Please insert paper to send via secure connection.<br><br>"
+			dat += "Please insert paper to send via secure connection.<br><br>"
 
 	else
 		dat += "Proper authentication is required to use this device.<br><br>"
@@ -154,10 +143,6 @@ GLOBAL_LIST_EMPTY(admin_departments)
 				send_admin_fax(user, destination)
 			else
 				sendfax(destination)
-
-			if (sendcooldown)
-				spawn(sendcooldown) // cooldown time
-					sendcooldown = 0
 		return TOPIC_REFRESH
 
 	if(href_list["remove"])
@@ -267,8 +252,6 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 	message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, destination ? destination : "UNKNOWN")
 	send_fax_loop(copyitem, destination, department) // Forward to any listening fax machines
-
-	sendcooldown = 1800
 	visible_message("[src] beeps, \"Message transmitted successfully.\"")
 
 
