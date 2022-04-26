@@ -1,5 +1,0 @@
-author: Textor
-delete-after: true
-changes:
-  - bugfix: Traitor uplinks now quit the program when you use the close button on
-      the popup or in the UI. Closing the window leaves the program running, still.

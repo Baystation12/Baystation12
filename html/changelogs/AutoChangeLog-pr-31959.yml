@@ -1,5 +1,0 @@
-author: Textor
-delete-after: true
-changes:
-  - bugfix: Crowbarring up the bottom tile of a shuttle will no longer yield an infinite
-      supply of tiles.
