@@ -57,6 +57,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/sound_env = STANDARD_STATION
 	var/turf/base_turf //The base turf type of the area, which can be used to override the z-level's base turf
 	var/planetary_surface = FALSE // true if the area belongs to a planet.
+	///Some base_turfs might cause issues with changing turfs, this flags it as a special case.
+	var/base_turf_special_handling = FALSE
 
 /*-----------------------------------------------------------------------------*/
 
@@ -219,6 +221,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	sound_env = SMALL_ENCLOSED
 	base_turf = /turf/space
 	area_flags = AREA_FLAG_HIDE_FROM_HOLOMAP
+	base_turf_special_handling = TRUE
 
 /*
 * Special Areas
