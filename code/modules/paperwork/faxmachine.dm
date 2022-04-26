@@ -98,7 +98,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 /obj/machinery/photocopier/faxmachine/interact(mob/user)
 	user.set_machine(src)
 
-	var/dat = "Fax Machine<BR>"
+	var/dat = "Fax Machine ([department])<BR>"
 
 	var/scan_name
 	if(scan)
