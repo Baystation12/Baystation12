@@ -33,7 +33,7 @@ jobs:
           ~/dmdoc
           touch dmdoc/.nojekyll
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@55974d46d95c57ce803a56e3645ddb7517f7c62f
+        uses: JamesIves/github-pages-deploy-action@8817a56e5bfec6e2b08345c81f4d422db53a2cdc
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages-dmdoc
