@@ -42,3 +42,4 @@ changes:
   - tweak: "All papers printed by a fax machine now display the origin department in the paper's title, regardless of if they were an admin fax or a player fax. No more using fax titles to metagame antag faxes."
   - bugfix: "The redundant 'The paper is titled XYZ' line from fax descriptions has been removed."
   - admin: "send-fax now includes the same list of pre-made origin departments as the emag+multitool options for consistency and further reduction of potential metagame."
+  - bugfix: "Fax machines and send-fax no longer have a perceived delay in processing when sending faxes."

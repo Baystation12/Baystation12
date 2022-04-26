@@ -207,12 +207,18 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	else
 		visible_message("[src] beeps, \"Error transmitting message.\"")
 
-/obj/machinery/photocopier/faxmachine/proc/recievefax(obj/item/incoming, origin_department = "Unknown")
-	if(stat & (BROKEN|NOPOWER))
-		return 0
 
-	if(department == "Unknown")
-		return 0	//You can't send faxes to "Unknown"
+/// Whether or not the fax machine is in a state capable of receiving faxes. Returns boolean.
+/obj/machinery/photocopier/faxmachine/proc/can_receive_fax()
+	if (inoperable())
+		return FALSE
+	if (!department)
+		return FALSE
+	return TRUE
+
+
+/obj/machinery/photocopier/faxmachine/proc/recievefax(obj/item/incoming, origin_department = "Unknown")
+	set waitfor = FALSE
 
 	flick("faxreceive", src)
 	playsound(loc, "sound/machines/dotprinter.ogg", 50, 1)
@@ -231,10 +237,10 @@ GLOBAL_LIST_EMPTY(admin_departments)
 		var/obj/item/paper_bundle/newcopy = bundlecopy(incoming, FALSE)
 		newcopy.SetName("[origin_department] - [newcopy.name]")
 	else
-		return 0
+		return
 
 	use_power_oneoff(active_power_usage)
-	return 1
+	return
 
 /obj/machinery/photocopier/faxmachine/proc/send_admin_fax(var/mob/sender, var/destination)
 	if(stat & (BROKEN|NOPOWER))
@@ -263,7 +269,6 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	send_fax_loop(copyitem, destination, department) // Forward to any listening fax machines
 
 	sendcooldown = 1800
-	sleep(50)
 	visible_message("[src] beeps, \"Message transmitted successfully.\"")
 
 
@@ -293,8 +298,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 /proc/send_fax_loop(copyitem, department, origin = "Unknown")
 	var/success = FALSE
 	for (var/obj/machinery/photocopier/faxmachine/fax in get_fax_machines_by_department(department))
-		if (fax.department == department)
-			var/single_success = fax.recievefax(copyitem, origin)
-			if (single_success)
-				success = TRUE
+		if (fax.department == department && fax.can_receive_fax())
+			success = TRUE
+			fax.recievefax(copyitem, origin)
 	return success
