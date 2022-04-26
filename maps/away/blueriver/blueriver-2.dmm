@@ -188,7 +188,6 @@
 "aI" = (
 /obj/machinery/vending/wallmed1{
 	name = "Emergency NanoMed";
-	pixel_x = 0;
 	pixel_y = 29
 	},
 /obj/structure/table/woodentable,
@@ -266,10 +265,8 @@
 "aW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/alarm{
-	alarm_id = "petrov3";
 	dir = 4;
 	pixel_x = -25;
-	pixel_y = 0;
 	rcon_setting = 3
 	},
 /turf/simulated/floor/tiled,
@@ -604,7 +601,6 @@
 /obj/machinery/vending/wallmed1{
 	name = "Emergency NanoMed";
 	pixel_x = 28;
-	pixel_y = 0;
 	req_access = newlist()
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -621,8 +617,7 @@
 	},
 /obj/structure/cable,
 /obj/machinery/power/smes/buildable{
-	RCon_tag = "Solar - Port";
-	charge = 0
+	RCon_tag = "Solar - Port"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bluespaceriver/ship)
@@ -634,8 +629,7 @@
 /area/bluespaceriver/ship)
 "bV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	dir = 4;
-	icon_state = "map_universal"
+	dir = 4
 	},
 /turf/simulated/wall/titanium,
 /area/bluespaceriver/ship)

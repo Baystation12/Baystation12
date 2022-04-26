@@ -34,7 +34,6 @@
 #include "code\__defines\colors.dm"
 #include "code\__defines\culture.dm"
 #include "code\__defines\damage_organs.dm"
-#include "code\__defines\deity.dm"
 #include "code\__defines\directions.dm"
 #include "code\__defines\dna.dm"
 #include "code\__defines\feedback.dm"

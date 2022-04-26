@@ -36,19 +36,16 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/atmospherics/pipe/zpipe/up/scrubbers{
-	color = "#ff0000";
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/zpipe/up/supply{
-	color = "#0000ff";
 	dir = 4
 	},
 /obj/structure/cable{
 	d1 = 16;
 	d2 = 0;
 	dir = 4;
-	icon_state = "16-0";
-	pixel_y = 0
+	icon_state = "16-0"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/morgue)
@@ -77,10 +74,6 @@
 	pixel_x = 32
 	},
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
-	dir = 2;
-	icon_state = "alarm0";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor/plating,
@@ -131,8 +124,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/morgue)
@@ -150,8 +142,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/morgue)
@@ -165,8 +156,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/morgue)
@@ -180,8 +170,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/morgue)
@@ -197,8 +186,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/morgue)
@@ -234,10 +222,6 @@
 /obj/item/storage/box/beakers,
 /obj/item/reagent_containers/spray/cleaner,
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
-	dir = 2;
-	icon_state = "alarm0";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/white,
@@ -290,8 +274,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -303,8 +286,7 @@
 "aP" = (
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
@@ -341,10 +323,6 @@
 /obj/structure/bed/padded,
 /obj/effect/landmark/corpse/lar_maria/test_subject,
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
-	dir = 2;
-	icon_state = "alarm0";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -369,8 +347,7 @@
 	},
 /obj/machinery/disposal,
 /obj/machinery/light/small{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
@@ -395,10 +372,6 @@
 /area/lar_maria/cells)
 "be" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
-	dir = 2;
-	icon_state = "alarm0";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor/plating,
@@ -417,8 +390,7 @@
 /area/lar_maria/cells)
 "bh" = (
 /obj/machinery/light/small{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
@@ -431,8 +403,7 @@
 /area/lar_maria/morgue)
 "bk" = (
 /obj/structure/morgue{
-	dir = 8;
-	icon_state = "morgue1"
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/morgue)
@@ -452,8 +423,7 @@
 	dir = 1
 	},
 /obj/structure/hygiene/shower{
-	dir = 4;
-	icon_state = "shower"
+	dir = 4
 	},
 /obj/effect/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
@@ -579,8 +549,7 @@
 	dir = 1
 	},
 /obj/structure/hygiene/shower{
-	dir = 4;
-	icon_state = "shower"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
@@ -737,14 +706,11 @@
 /area/lar_maria/morgue)
 "cg" = (
 /obj/structure/morgue{
-	dir = 8;
-	icon_state = "morgue1"
+	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/machinery/alarm{
-	alarm_id = "misc_research";
 	dir = 8;
-	icon_state = "alarm0";
 	pixel_x = 24
 	},
 /turf/simulated/floor/plating,
@@ -754,8 +720,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -763,9 +728,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/alarm{
-	alarm_id = "misc_research";
 	dir = 8;
-	icon_state = "alarm0";
 	pixel_x = 24
 	},
 /turf/simulated/floor/tiled,
@@ -840,7 +803,6 @@
 "cs" = (
 /obj/structure/hygiene/sink{
 	dir = 8;
-	icon_state = "sink";
 	pixel_x = -12;
 	pixel_y = 2
 	},
@@ -866,13 +828,10 @@
 "cv" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
-	icon_state = "sink";
-	pixel_x = 11;
-	pixel_y = 0
+	pixel_x = 11
 	},
 /obj/machinery/light/small{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /obj/effect/decal/cleanable/blood,
 /mob/living/simple_animal/hostile/lar_maria/test_subject,
@@ -909,7 +868,6 @@
 /area/lar_maria/morgue)
 "cA" = (
 /obj/machinery/power/apc{
-	dir = 2;
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -932,8 +890,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -1053,10 +1010,6 @@
 "cR" = (
 /obj/structure/closet/crate/freezer/rations,
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
-	dir = 2;
-	icon_state = "alarm0";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -1134,15 +1087,13 @@
 	},
 /obj/machinery/alarm{
 	dir = 1;
-	icon_state = "alarm0";
 	pixel_y = -22
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "da" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9;
-	pixel_y = 0
+	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
@@ -1166,7 +1117,6 @@
 /area/lar_maria/cells)
 "dd" = (
 /obj/structure/sign/warning/biohazard{
-	pixel_x = 0;
 	pixel_y = 32
 	},
 /obj/effect/landmark/corpse/lar_maria/test_subject,
@@ -1230,7 +1180,6 @@
 /area/lar_maria/vir_hallway)
 "dk" = (
 /obj/structure/sign/warning/biohazard{
-	pixel_x = 0;
 	pixel_y = 32
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -1240,8 +1189,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_hallway)
@@ -1249,8 +1197,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -1265,22 +1212,19 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_hallway)
 "dn" = (
 /obj/structure/sign/warning/biohazard{
-	pixel_x = 0;
 	pixel_y = 32
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_hallway)
@@ -1288,8 +1232,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_hallway)
@@ -1563,7 +1506,6 @@
 "ej" = (
 /obj/structure/bed/roller,
 /obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 2;
 	level = 2
 	},
 /turf/simulated/floor/tiled/white,
@@ -1620,10 +1562,6 @@
 /obj/structure/bed/padded,
 /obj/item/book/manual/chef_recipes,
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
-	dir = 2;
-	icon_state = "alarm0";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -1640,12 +1578,7 @@
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	frequency = 1041;
 	id_tag = "ZHPcells_access_airlock";
-	pixel_x = 0;
-	pixel_y = 0;
-	tag_airpump = null;
-	tag_chamber_sensor = null;
 	tag_exterior_door = "ZHPcells_access_airlock_outer";
-	tag_exterior_sensor = null;
 	tag_interior_door = "ZHPcells_access_airlock_inner"
 	},
 /turf/simulated/floor/tiled,
@@ -1698,9 +1631,7 @@
 "ey" = (
 /obj/machinery/alarm{
 	dir = 4;
-	icon_state = "alarm0";
-	pixel_x = -32;
-	pixel_y = 0
+	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_ward)
@@ -1735,9 +1666,7 @@
 "eE" = (
 /obj/machinery/alarm{
 	dir = 4;
-	icon_state = "alarm0";
-	pixel_x = -32;
-	pixel_y = 0
+	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
@@ -1814,9 +1743,7 @@
 /obj/item/reagent_containers/spray/pepper,
 /obj/item/reagent_containers/spray/pepper,
 /obj/machinery/alarm{
-	alarm_id = "misc_research";
 	dir = 8;
-	icon_state = "alarm0";
 	pixel_x = 24
 	},
 /turf/simulated/floor/tiled,
@@ -1827,7 +1754,6 @@
 /area/lar_maria/vir_ward)
 "eR" = (
 /obj/machinery/power/apc{
-	dir = 2;
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -1844,8 +1770,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -1860,8 +1785,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/virology{
 	frequency = 1039;
@@ -1893,9 +1817,7 @@
 /area/lar_maria/vir_hallway)
 "eV" = (
 /obj/machinery/alarm{
-	alarm_id = "misc_research";
 	dir = 8;
-	icon_state = "alarm0";
 	pixel_x = 24
 	},
 /turf/simulated/floor/tiled,
@@ -1994,12 +1916,7 @@
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	frequency = 1043;
 	id_tag = "ZHPsec_access_airlock";
-	pixel_x = 0;
-	pixel_y = 0;
-	tag_airpump = null;
-	tag_chamber_sensor = null;
 	tag_exterior_door = "ZHPsec__access_airlock_outer";
-	tag_exterior_sensor = null;
 	tag_interior_door = "ZHPsec__access_airlock_inner"
 	},
 /turf/simulated/floor/tiled,
@@ -2008,9 +1925,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/machinery/button/blast_door{
 	id_tag = "Tech_access_BD";
-	name = "Communications Access";
-	pixel_x = 0;
-	pixel_y = 0
+	name = "Communications Access"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -2041,8 +1956,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
@@ -2128,8 +2042,7 @@
 	},
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -2153,8 +2066,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_hallway)
@@ -2168,8 +2080,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/virology,
@@ -2177,8 +2088,7 @@
 /area/lar_maria/vir_aux)
 "fD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9;
-	pixel_y = 0
+	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -2216,13 +2126,10 @@
 "fI" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
-	icon_state = "sink";
-	pixel_x = 11;
-	pixel_y = 0
+	pixel_x = 11
 	},
 /obj/machinery/light/small{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/cells)
@@ -2272,8 +2179,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -2288,8 +2194,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/structure/cable{
 	d1 = 2;
@@ -2308,8 +2213,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -2324,12 +2228,10 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/alarm{
 	dir = 1;
-	icon_state = "alarm0";
 	pixel_y = -22
 	},
 /turf/simulated/floor/tiled,
@@ -2345,8 +2247,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -2361,8 +2262,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -2378,8 +2278,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -2389,8 +2288,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -2417,12 +2315,10 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/alarm{
 	dir = 1;
-	icon_state = "alarm0";
 	pixel_y = -22
 	},
 /turf/simulated/floor/tiled,
@@ -2438,8 +2334,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -2456,14 +2351,12 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "fW" = (
 /obj/structure/sign/warning/biohazard{
-	pixel_x = 0;
 	pixel_y = 32
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2475,8 +2368,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -2500,8 +2392,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -2518,8 +2409,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -2543,8 +2433,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -2612,8 +2501,7 @@
 /obj/machinery/button/blast_door{
 	id_tag = "Cells_acc_BD";
 	name = "Cells Direct Access";
-	pixel_x = -25;
-	pixel_y = 0
+	pixel_x = -25
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -2722,10 +2610,7 @@
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	frequency = 1039;
 	id_tag = "ZHPvirology_access_airlock";
-	pixel_x = 0;
 	pixel_y = 25;
-	tag_airpump = null;
-	tag_chamber_sensor = null;
 	tag_exterior_door = "ZHPvirology_access_airlock_outer";
 	tag_exterior_sensor = "ZHPvirology_access_airlock_sensor";
 	tag_interior_door = "ZHPvirology_access_airlock_inner"
@@ -2840,7 +2725,6 @@
 /obj/machinery/access_button/airlock_interior{
 	frequency = 1039;
 	master_tag = "ZHPvirology_access_airlock";
-	pixel_x = 0;
 	pixel_y = -25
 	},
 /turf/simulated/floor/tiled,
@@ -2878,8 +2762,7 @@
 	frequency = 1039;
 	id_tag = "ZHPvirology_access_airlock_sensor";
 	master_tag = "ZHPvirology_access_airlock";
-	pixel_x = 25;
-	pixel_y = 0
+	pixel_x = 25
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
@@ -2911,9 +2794,7 @@
 /area/lar_maria/vir_access)
 "gX" = (
 /obj/machinery/alarm{
-	alarm_id = "misc_research";
 	dir = 8;
-	icon_state = "alarm0";
 	pixel_x = 24
 	},
 /turf/simulated/floor/tiled,
@@ -2947,7 +2828,6 @@
 	},
 /obj/machinery/alarm{
 	dir = 1;
-	icon_state = "alarm0";
 	pixel_y = -22
 	},
 /mob/living/simple_animal/hostile/lar_maria/test_subject,
@@ -3170,7 +3050,6 @@
 	},
 /obj/machinery/alarm{
 	dir = 1;
-	icon_state = "alarm0";
 	pixel_y = -22
 	},
 /turf/simulated/floor/tiled,
@@ -3259,7 +3138,6 @@
 	},
 /obj/machinery/alarm{
 	dir = 1;
-	icon_state = "alarm0";
 	pixel_y = -22
 	},
 /turf/simulated/floor/tiled,
@@ -3290,10 +3168,7 @@
 /area/lar_maria/vir_access)
 "hV" = (
 /obj/structure/hygiene/shower{
-	dir = 4;
-	icon_state = "shower";
-	pixel_x = 0;
-	pixel_y = 0
+	dir = 4
 	},
 /obj/machinery/light/small{
 	dir = 8
@@ -3354,10 +3229,7 @@
 /area/lar_maria/vir_access)
 "ic" = (
 /obj/structure/hygiene/shower{
-	dir = 4;
-	icon_state = "shower";
-	pixel_x = 0;
-	pixel_y = 0
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
@@ -3397,8 +3269,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -3412,15 +3283,13 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
 "ih" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9;
-	pixel_y = 0
+	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
@@ -3428,8 +3297,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
@@ -3437,8 +3305,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
@@ -3464,10 +3331,6 @@
 	dir = 6
 	},
 /obj/machinery/alarm{
-	alarm_id = "xenobio4_alarm";
-	dir = 2;
-	icon_state = "alarm0";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -3534,10 +3397,6 @@
 	dir = 4
 	},
 /obj/machinery/alarm{
-	alarm_id = "xenobio1_alarm";
-	dir = 2;
-	icon_state = "alarm0";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -3554,8 +3413,7 @@
 /area/lar_maria/vir_access)
 "it" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9;
-	pixel_y = 0
+	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
@@ -3587,10 +3445,7 @@
 /area/lar_maria/vir_access)
 "iy" = (
 /obj/structure/hygiene/shower{
-	dir = 4;
-	icon_state = "shower";
-	pixel_x = 0;
-	pixel_y = 0
+	dir = 4
 	},
 /obj/machinery/light/small{
 	dir = 8
@@ -3612,18 +3467,13 @@
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	frequency = 1439;
 	id_tag = "ZHPCells_airlock";
-	pixel_x = 0;
-	pixel_y = 0;
 	tag_airpump = "ZHPCells_pump";
-	tag_chamber_sensor = null;
 	tag_exterior_door = "ZHPCells_outer";
-	tag_exterior_sensor = null;
 	tag_interior_door = "ZHPCells_inner"
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "Cells_dock_BD";
 	name = "Cells Dock Lockdown";
-	pixel_x = 0;
 	pixel_y = 7
 	},
 /turf/simulated/floor/tiled,
@@ -3632,9 +3482,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/machinery/button/blast_door{
 	id_tag = "VirAccessBD";
-	name = "Virology Access Lockdown";
-	pixel_x = 0;
-	pixel_y = 0
+	name = "Virology Access Lockdown"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -3752,8 +3600,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
@@ -3763,9 +3610,7 @@
 "lb" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
-	icon_state = "sink";
-	pixel_x = 11;
-	pixel_y = 0
+	pixel_x = 11
 	},
 /obj/item/storage/mirror{
 	pixel_x = 25
