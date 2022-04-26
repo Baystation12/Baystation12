@@ -802,7 +802,7 @@
 
 /area/vacant/prototype/engine
 	name = "\improper Prototype Fusion Reactor Chamber"
-	icon_state = "firingrange"
+	icon_state = "rust_reactor"
 
 /area/vacant/cargo
 	name = "\improper Requisitions Office"

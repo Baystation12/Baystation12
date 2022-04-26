@@ -17061,9 +17061,9 @@
 /obj/machinery/computer/air_control{
 	dir = 8;
 	name = "R-UST Gas Injection Controls";
-	output_tag = "rust_injector";
-	sensor_name = "rust_sensor";
-	sensor_tag = "rust_sensor"
+	sensor_name = "Fusion Chamber";
+	sensor_tag = "rust_sensor";
+	input_tag = "rust_injector"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/vacant/prototype/control)
