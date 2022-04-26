@@ -1,0 +1,4 @@
+author: Jeff
+delete-after: true
+changes:
+  - rscadd: Crisis borgs can now synthesize adrenaline
