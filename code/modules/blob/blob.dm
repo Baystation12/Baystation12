@@ -1,3 +1,10 @@
+// Types that blobs should not be allowed to attack. Primarily for gameplay reasons - No explosions or hellgas leaks for example.
+#define BLOB_BANNED_TARGET_TYPES list(\
+	/obj/machinery/portable_atmospherics,\
+	/obj/structure/reagent_dispensers/fueltank\
+)
+
+
 /obj/effect/blob
 	name = "pulsating mass"
 	desc = "A pulsating mass of interwoven tendrils."
@@ -87,6 +94,7 @@
 	var/damage_type = pick(DAMAGE_BRUTE, DAMAGE_BURN)
 
 	if (T.density && T.is_alive())
+		visible_message(SPAN_DANGER("A tendril flies out from \the [src] and smashes into \the [T]!"))
 		playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 		T.damage_health(damage)
 		return
@@ -121,13 +129,19 @@
 			sound_played = TRUE
 		attack_living(L)
 
+	// If any atoms on the turf are dense, we should stop after the loop. This allows the blob to hit everything while stopping it from expanding onto the tile.
+	var/density_check = FALSE
 	for (var/atom/A in T)
-		if (A.density && A.can_damage_health(damage, damage_type))
+		if (A.can_damage_health(damage, damage_type) && !(A.type in BLOB_BANNED_TARGET_TYPES))
 			visible_message(SPAN_DANGER("A tendril flies out from \the [src] and smashes into \the [A]!"))
 			if (!sound_played)
 				playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 			A.damage_health(damage, damage_type)
-			return
+		if (A.density)
+			density_check = TRUE
+
+	if (density_check)
+		return
 
 	if (!(locate(/obj/effect/blob/core) in range(T, 2)) && prob(secondary_core_growth_chance))
 		new /obj/effect/blob/core/secondary (T)
@@ -424,3 +438,6 @@ regen() will cover update_icon() for this proc
 	desc = "A sample taken from an asteroclast's auxiliary nucleus."
 	icon_state = "core_sample_2"
 	origin_tech = list(TECH_MATERIAL = 2, TECH_BLUESPACE = 3, TECH_BIO = 4)
+
+
+#undef BLOB_BANNED_TARGET_TYPES
