@@ -110,6 +110,8 @@
 		special_target_effect(G)
 
 /datum/grab/proc/process(var/obj/item/grab/G)
+	if(G?.assailant.lying)
+		let_go(G)
 	special_target_effect(G)
 	process_effect(G)
 
