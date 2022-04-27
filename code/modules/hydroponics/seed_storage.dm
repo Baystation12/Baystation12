@@ -183,7 +183,7 @@
 		/obj/item/seeds/iridast = 15,
 		/obj/item/seeds/gummen = 15,
 		/obj/item/seeds/affelerin = 15,
-		/obj/item/seeds/random = 2
+		/obj/item/seeds/random = 5
 	)
 
 /obj/machinery/seed_storage/interface_interact(mob/user)
