@@ -460,6 +460,12 @@
 	id   = "mech_sleeper"
 	build_path = /obj/item/mech_equipment/sleeper
 
+/datum/design/item/exosuit/mender
+	name = "mounted medigel spray"
+	id   = "mech_mender"
+	build_path = /obj/item/mech_equipment/mender
+	materials = list(MATERIAL_STEEL = 10000, MATERIAL_PLASTIC = 15000, MATERIAL_ALUMINIUM = 15000)
+
 /datum/design/item/exosuit/extinguisher
 	name = "mounted extinguisher"
 	id   = "mech_extinguisher"
