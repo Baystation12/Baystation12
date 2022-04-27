@@ -35,11 +35,13 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 4.9
+	var/heal_value = 6
+	var/pain_power = 10
 
 /datum/reagent/bicaridine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(6 * removed, 0)
-		M.add_chemical_effect(CE_PAINKILLER, 10)
+		M.heal_organ_damage(heal_value * removed, 0)
+		M.add_chemical_effect(CE_PAINKILLER, pain_power)
 
 /datum/reagent/bicaridine/overdose(var/mob/living/carbon/M, var/alien)
 	..()
@@ -1043,3 +1045,87 @@
 					W.bleed_timer = 0
 					W.clamped = TRUE
 					E.status &= ~ORGAN_BLEEDING
+
+/datum/reagent/saline
+	name = "Saline"
+	description = "Saline is 1% sodium chloride and 99% water."
+	taste_description = "tears"
+	reagent_state = LIQUID
+	color = "#AAAAFF"
+	metabolism = REM * 0.25
+	scannable = 1
+	flags = IGNORE_MOB_SIZE
+
+/datum/reagent/tramadol/morphenolog
+	name = "Morphenolog"
+	description = "Basically, a more powerful version of morphine. Small doses go a very long way."
+	taste_description = "bitterness"
+	reagent_state = LIQUID
+	color = "#431397"
+	overdose = 1
+	scannable = 1
+	metabolism = 0.1
+	ingest_met = 0.02
+	flags = IGNORE_MOB_SIZE
+	value = 10
+	pain_power = 350
+	effective_dose = 0.1
+
+/datum/reagent/tramadol/morphenolog/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	var/effectiveness = 1
+	if(M.chem_doses[type] < effective_dose) //some ease-in ease-out for the effect
+		effectiveness = M.chem_doses[type]/effective_dose
+	else if(volume < effective_dose)
+		effectiveness = volume/effective_dose
+	M.add_chemical_effect(CE_PAINKILLER, pain_power * effectiveness)
+	if(M.chem_doses[type] > 0.5 * overdose)
+		M.add_chemical_effect(CE_SLOWDOWN, 1)
+		if(prob(1))
+			M.slurring = max(M.slurring, 10)
+	if(M.chem_doses[type] > 0.75 * overdose)
+		M.add_chemical_effect(CE_SLOWDOWN, 1)
+		if(prob(5))
+			M.slurring = max(M.slurring, 20)
+	if(M.chem_doses[type] > overdose)
+		M.add_chemical_effect(CE_BREATHLOSS, 0.3)//ODing on this stuff takes your breath away
+		M.slurring = max(M.slurring, 30)
+		if(prob(1))
+			M.Weaken(2)
+			M.drowsyness = max(M.drowsyness, 5)
+	var/boozed = isboozed(M)
+	if(boozed)
+		M.add_chemical_effect(CE_ALCOHOL_TOXIC, 1)
+		M.add_chemical_effect(CE_BREATHLOSS, 0.8 * boozed) //don't mix with alcohol.
+
+/datum/reagent/bicaridine/metorpan
+	name = "Metorpan"
+	description = "A related drug to Bicardine, this heals the body at a much faster rate, but the body can tolerate only small doses."
+	taste_description = "bitterness"
+	reagent_state = LIQUID
+	color = "#FF0000"
+	overdose = 1
+	scannable = 1
+	metabolism = 0.05
+	ingest_met = 0.02
+	flags = IGNORE_MOB_SIZE
+	value = 3.1
+	heal_value = 20
+	pain_power = 10
+
+/datum/reagent/chloralhydrate/anesthizine
+	name = "Anesthizine"
+	description = "A very powerful sedative. Great for surgery if the neural suppressor is on the fritz."
+	taste_description = "bitterness"
+	reagent_state = SOLID
+	color = "#AAAABB"
+	metabolism = REM * 0.25
+	overdose = 1
+	value = 5
+	should_admin_log = TRUE
+	threshold = 0.1
+	skrell_mult = 1.2
+	confusion_value = 3
+	drowsy_value = 5
+	weaken_value = 50
+	eye_blur_value = 10
+	sleeping_value = 50

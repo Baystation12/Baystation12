@@ -647,14 +647,27 @@
 	overdose = REAGENTS_OVERDOSE * 0.5
 	value = 2.6
 	should_admin_log = TRUE
+	///How much is required before it's effective.
+	var/threshold = 1
+	///How much a skrell requires before it's effective.
+	var/skrell_mult = 1.2
+	///How confused they should become when under the effects.
+	var/confusion_value = 2
+	///How drowsy they should become when under the effects.
+	var/drowsy_value = 2
+	///How weak the drug will make them.
+	var/weaken_value = 30
+	///How much eye blur will be applied.
+	var/eye_blur_value = 10
+	///The sleep value applied.
+	var/sleeping_value = 30
 
 /datum/reagent/chloralhydrate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
 
-	var/threshold = 1
 	if(alien == IS_SKRELL)
-		threshold = 1.2
+		threshold *= skrell_mult
 	M.add_chemical_effect(CE_SEDATE, 1)
 
 	if(M.chem_doses[type] <= metabolism * threshold)
@@ -662,10 +675,10 @@
 		M.drowsyness += 2
 
 	if(M.chem_doses[type] < 2 * threshold)
-		M.Weaken(30)
-		M.eye_blurry = max(M.eye_blurry, 10)
+		M.Weaken(weaken_value)
+		M.eye_blurry = max(M.eye_blurry, eye_blur_value)
 	else
-		M.sleeping = max(M.sleeping, 30)
+		M.sleeping = max(M.sleeping, sleeping_value)
 
 	if(M.chem_doses[type] > 1 * threshold)
 		M.adjustToxLoss(removed)

@@ -108,3 +108,9 @@
 
 /obj/item/reagent_containers/ivbag/blood/OMinus
 	blood_type = "O-"
+
+/obj/item/reagent_containers/ivbag/blood/ABPlus
+	blood_type = "AB+"
+
+/obj/item/reagent_containers/ivbag/blood/ABMinus
+	blood_type = "AB-"
