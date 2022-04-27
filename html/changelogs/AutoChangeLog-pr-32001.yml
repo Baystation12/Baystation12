@@ -1,0 +1,5 @@
+author: Spookerton
+delete-after: true
+changes:
+  - tweak: The flashdark, maint drone pen light, glow sticks, slime lights, and lava
+      lamps do not eye-flash people when used on their eyes.
