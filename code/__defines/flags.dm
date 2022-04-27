@@ -11,12 +11,12 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 
 // Flags bitmasks.
 
-#define ATOM_FLAG_CHECKS_BORDER          FLAG(0)  // If a dense atom (potentially) only blocks movements from a given direction, i.e. window panes
-#define ATOM_FLAG_CLIMBABLE              FLAG(1)  // This object can be climbed on
+// NOTE: We declare ATOM_FLAG_INITIALIZED earlier, in __initialization.dm, as FLAG(0)
+#define ATOM_FLAG_CHECKS_BORDER          FLAG(1)  // If a dense atom (potentially) only blocks movements from a given direction, i.e. window panes
 #define ATOM_FLAG_NO_BLOOD               FLAG(2)  // Used for items if they don't want to get a blood overlay.
 #define ATOM_FLAG_NO_REACT               FLAG(3)  // Reagents don't react inside this container.
 #define ATOM_FLAG_OPEN_CONTAINER         FLAG(4)  // Is an open container for chemistry purposes.
-#define ATOM_FLAG_INITIALIZED            FLAG(5)  // Has this atom been initialized
+#define ATOM_FLAG_CLIMBABLE              FLAG(5)  // This object can be climbed on
 #define ATOM_FLAG_NO_TEMP_CHANGE         FLAG(6)  // Reagents do not cool or heat to ambient temperature in this container.
 #define ATOM_FLAG_CAN_BE_PAINTED         FLAG(7)  // Can be painted using a paint sprayer or similar.
 #define ATOM_FLAG_ADJACENT_EXCEPTION     FLAG(8)  // Skips adjacent checks for atoms that should always be reachable in window tiles

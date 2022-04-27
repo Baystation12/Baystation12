@@ -43,8 +43,6 @@ We can also choose to render these by decreasing the scaling all applied effects
 
 Through these this allows us to treat planes as single objects, and lets us distort them as a single unit, most notably works wonders with the displacement filter. Specifically, here you can displacement_filter a plane onto a plate, which then will treat all the other planes rendered on that plate as a single unit.
 
-The bay implementation differs in some points but you can treat this documentation as generally correct
-
 ## Render plates
 
 The rendering system uses two objects to unify planes: render_relay and render_plates. Render relays use render_target/source and the relay_render_to_plane proc to replicate the plane master on the render relay. This render relay is then rendered onto a render_plate, which is a plane master that renders the render_relays onto itself. This plate can then be hierachically rendered with the same process until it reaches the master render_plate, which is the plate that will actually render to the player. These plates naturally in the byond style have quirks. For example, rendering to two plates will double any effects such as color or filters, and as such you need to carefully manage how you render them. Keep in mind as well that when sorting the layers for rendering on a plane that they should not be negative, this is handled automatically in relay_render_to_plane. When debugging note that mouse_opacity can act bizzarly with this method, such as only allowing you to click things that are layered over objects on a certain plane but auomatically setting the mouse_opacity should be handling this. Note that if you decide to manipulate a plane with internal byond objects that you will have to manually extrapolate the vars that are set if you want to render them to another plane (See blackness plane for example), and that this is not documented anywhere.
@@ -52,3 +50,13 @@ The rendering system uses two objects to unify planes: render_relay and render_p
 
 Goodluck and godspeed with coding
 	- Just another contributor
+
+## Baystation Differences
+
+The bay implementation differs in some points but you can treat the prior sections as broadly accurate.
+
+- Locally we have refactored and simplified the above concepts down to `/atom/movable/renderer` and undifferentiated relay movables.
+- There is no type destinction between renderers intended to draw normal entities and renderers intended to draw other renderers.
+- We instead refer to these as "Plane Renderers" and "Group Renderers", and note that Group Renderers may render *other* Group Renderers in turn.
+- We additionally add the extra "Effect Renderer" as a distinct concept. Effect renderers are more virtual, and drawn to other renderers by filters instead.
+- See the comments in _renderer.dm for detail next to code.
