@@ -1051,7 +1051,7 @@
 	description = "Saline is 1% sodium chloride and 99% water."
 	taste_description = "tears"
 	reagent_state = LIQUID
-	color = "#AAAAFF"
+	color = "#aaaaff"
 	metabolism = REM * 0.25
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -1102,7 +1102,7 @@
 	description = "A related drug to Bicardine, this heals the body at a much faster rate, but the body can tolerate only small doses."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
-	color = "#FF0000"
+	color = "#ff0000"
 	overdose = 1
 	scannable = 1
 	metabolism = 0.05
@@ -1117,7 +1117,7 @@
 	description = "A very powerful sedative. Great for surgery if the neural suppressor is on the fritz."
 	taste_description = "bitterness"
 	reagent_state = SOLID
-	color = "#AAAABB"
+	color = "#aaaabb"
 	metabolism = REM * 0.25
 	overdose = 1
 	value = 5
