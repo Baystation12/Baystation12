@@ -275,7 +275,7 @@
 		return 1
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-	if (do_after(user, 40, src))
+	if (do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 		user.visible_message( \
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
@@ -317,10 +317,10 @@
 		"valve_toggle" = /decl/public_access/public_method/tvalve_toggle
 	)
 
-//Mirrored editions		
+//Mirrored editions
 /obj/machinery/atmospherics/tvalve/mirrored
 	icon_state = "map_tvalvem0"
-	
+
 	connect_dir_type = SOUTH | EAST | NORTH
 	build_icon_state = "map_tvalvem0"
 
@@ -349,7 +349,7 @@
 	desc = "A digitally controlled valve."
 	icon = 'icons/atmos/digital_tvalve.dmi'
 	icon_state = "map_tvalve0"
-	
+
 	build_icon = 'icons/atmos/digital_tvalve.dmi'
 	build_icon_state = "map_tvalve0"
 

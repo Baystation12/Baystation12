@@ -274,7 +274,7 @@
 			E.setClickCooldown(1.35 SECONDS)
 			E.visible_message(SPAN_DANGER("\The [E] swings \the [src] back, preparing for an attack!"), blind_message = SPAN_DANGER("You hear the loud hissing of hydraulics!"))
 			playsound(E, 'sound/mecha/mechmove03.ogg', 35, 1)
-			if (do_after(E, 1.2 SECONDS, get_turf(user), do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) && E && MC)
+			if (do_after(E, 1.2 SECONDS, get_turf(user), DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && E && MC)
 				for (var/mob/living/M in orange(1, E))
 					attack(M, E, E.zone_sel.selecting, FALSE)
 				E.spin(0.65 SECONDS, 0.125 SECONDS)
@@ -315,7 +315,7 @@
 				owner.visible_message(SPAN_WARNING("\The [owner] retracts \the [src], preparing to push with it!"), blind_message = SPAN_WARNING("You hear the whine of hydraulics and feel a rush of air!"))
 				owner.setClickCooldown(0.7 SECONDS)
 				last_push = world.time
-				if (do_after(owner, 0.5 SECONDS, get_turf(owner), do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) && owner)
+				if (do_after(owner, 0.5 SECONDS, get_turf(owner), DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && owner)
 					owner.visible_message(SPAN_WARNING("\The [owner] slams the area in front \the [src]!"), blind_message = SPAN_WARNING("You hear a loud hiss and feel a strong gust of wind!"))
 					playsound(src ,'sound/effects/bang.ogg',35,1)
 					var/list/turfs = list()
@@ -340,7 +340,7 @@
 			owner.setClickCooldown(0.8 SECONDS)
 			blocking = TRUE
 			last_max_block = world.time
-			do_after(owner, 0.75 SECONDS, get_turf(user), do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT)
+			do_after(owner, 0.75 SECONDS, get_turf(user), DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)
 			blocking = FALSE
 		else
 			to_chat(user, SPAN_WARNING("You are not ready to block again!"))

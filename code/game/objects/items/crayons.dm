@@ -102,7 +102,7 @@
 			if("arrow")
 				drawtype = input("Choose the arrow.", "Crayon scribbles") in list("left", "right", "up", "down")
 				to_chat(user, "You start drawing an arrow on the [target.name].")
-		if(instant || do_after(user, 50))
+		if(instant || do_after(user, 5 SECONDS, target, DO_PUBLIC_UNIQUE))
 			new /obj/effect/decal/cleanable/crayon(target,colour,shadeColour,drawtype)
 			to_chat(user, "You finish drawing.")
 			target.add_fingerprint(user)		// Adds their fingerprints to the floor the crayon is drawn on.

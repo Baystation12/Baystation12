@@ -11,7 +11,7 @@
 	. = ..()
 	if(can_buckle && buckled_mob)
 		if (buckled_mob != user)
-			if (user.a_intent != I_HELP && !do_after(user, 3 SECONDS, buckled_mob, DO_DEFAULT | DO_BOTH_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+			if (user.a_intent != I_HELP && !do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 				return
 			if (!buckled_mob || !Adjacent(user))
 				return
@@ -26,7 +26,7 @@
 	. = ..()
 	if (can_buckle && istype(target))
 		if (target != user)
-			if (user.a_intent != I_HELP && !do_after(user, 3 SECONDS, target, DO_DEFAULT | DO_BOTH_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+			if (user.a_intent != I_HELP && !do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 				return
 			if (!Adjacent(target) || !Adjacent(user))
 				return

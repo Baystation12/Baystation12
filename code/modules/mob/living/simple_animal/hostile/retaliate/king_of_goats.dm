@@ -100,7 +100,7 @@
 		else if(prob(5)) //earthquake spell
 			G.visible_message("<span class='cultannounce'>\The [G]' eyes begin to glow ominously as dust and debris in the area is kicked up in a light breeze.</span>")
 			set_busy(TRUE)
-			if(do_after(G, 6 SECONDS))
+			if(do_after(G, 6 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT))
 				var/health_holder = G.health
 				G.visible_message(SPAN_MFAUNA("\The [G] raises its fore-hooves and stomps them into the ground with incredible force!"))
 				explosion(get_step(G,pick(GLOB.cardinal)), -1, 2, 2, 3, 6)

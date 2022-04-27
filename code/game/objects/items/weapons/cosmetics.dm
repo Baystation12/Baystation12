@@ -61,7 +61,7 @@
 			else
 				user.visible_message("<span class='warning'>[user] begins to do [H]'s lips with \the [src].</span>", \
 									 "<span class='notice'>You begin to apply \the [src].</span>")
-				if(do_after(user, 4 SECONDS, H, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
+				if(do_after(user, 4 SECONDS, H, DO_EQUIP))
 					user.visible_message("<span class='notice'>[user] does [H]'s lips with \the [src].</span>", \
 										 "<span class='notice'>You apply \the [src].</span>")
 					H.lip_style = colour

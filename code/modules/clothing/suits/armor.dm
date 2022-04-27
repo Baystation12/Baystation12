@@ -10,7 +10,6 @@
 	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.6
 	equip_delay = 2 SECONDS
-	equip_delay_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT
 
 /obj/item/clothing/suit/armor/equip_delay_before(mob/user, slot, equip_flags)
 	user.setClickCooldown(1 SECOND)

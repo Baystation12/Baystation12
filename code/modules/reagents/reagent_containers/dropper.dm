@@ -34,7 +34,7 @@
 			var/time = 20 //2/3rds the time of a syringe
 			user.visible_message("<span class='warning'>[user] is trying to squirt something into [target]'s eyes!</span>")
 
-			if(!do_after(user, time, target))
+			if(!do_after(user, time, target, DO_MEDICAL))
 				return
 
 			if(istype(target, /mob/living/carbon/human))

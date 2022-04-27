@@ -39,10 +39,12 @@
 
 /decl/maneuver/proc/perform(var/mob/living/user, var/atom/target, var/strength, var/reflexively = FALSE)
 	if(can_be_used_by(user, target))
+		var/do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT
 		if(!reflexively)
+			do_flags |= DO_PUBLIC_PROGRESS
 			show_initial_message(user, target)
 		user.face_atom(target)
-		. = (!delay || reflexively || (do_after(user, delay) && can_be_used_by(user, target)))
+		. = (!delay || reflexively || (do_after(user, delay, target, do_flags) && can_be_used_by(user, target)))
 		if(cooldown)
 			user.last_special = world.time + cooldown
 		if(stamina_cost)

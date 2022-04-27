@@ -35,7 +35,7 @@
 				if(A != src && A.density && !(A.atom_flags & ATOM_FLAG_CHECKS_BORDER))
 					to_chat(user, SPAN_WARNING("\The [A] blocks you from pulling out \the [chosen_obj]."))
 					return
-		if(!do_after(user, 5, src)) return
+		if(!do_after(user, 0.5 SECONDS, src, DO_PUBLIC_UNIQUE)) return
 		if(!chosen_obj) return
 		if(chosen_obj.density)
 			for(var/atom/A in get_turf(src))
@@ -72,7 +72,7 @@
 			var/obj/chosen_obj = input(user, "Choose an object to grab.", "Clamp Claw") as null|anything in carrying
 			if(!chosen_obj)
 				return
-			if(!do_after(user, 20, owner)) return
+			if(!do_after(user, 2 SECONDS, owner, DO_PUBLIC_UNIQUE)) return
 			if(owner.hatch_closed || !chosen_obj) return
 			if(user.put_in_active_hand(chosen_obj))
 				owner.visible_message(SPAN_NOTICE("\The [user] carefully grabs \the [chosen_obj] from \the [src]."))
@@ -98,7 +98,7 @@
 					var/obj/machinery/door/firedoor/FD = O
 					if(FD.blocked)
 						FD.visible_message(SPAN_DANGER("\The [owner] begins prying on \the [FD]!"))
-						if(do_after(owner,10 SECONDS,FD) && FD.blocked)
+						if(do_after(owner, 10 SECONDS, FD, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && FD.blocked)
 							playsound(FD, 'sound/effects/meteorimpact.ogg', 100, 1)
 							playsound(FD, 'sound/machines/airlock_creaking.ogg', 100, 1)
 							FD.blocked = FALSE
@@ -107,7 +107,7 @@
 							FD.visible_message(SPAN_WARNING("\The [owner] tears \the [FD] open!"))
 					else
 						FD.visible_message(SPAN_DANGER("\The [owner] begins forcing \the [FD]!"))
-						if(do_after(owner, 4 SECONDS,FD) && !FD.blocked)
+						if(do_after(owner, 4 SECONDS, FD, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && !FD.blocked)
 							playsound(FD, 'sound/machines/airlock_creaking.ogg', 100, 1)
 							if(FD.density)
 								FD.visible_message(SPAN_DANGER("\The [owner] forces \the [FD] open!"))
@@ -121,7 +121,7 @@
 					if(!AD.operating && !AD.locked)
 						if(AD.welded)
 							AD.visible_message(SPAN_DANGER("\The [owner] begins prying on \the [AD]!"))
-							if(do_after(owner, 15 SECONDS,AD) && !AD.locked)
+							if(do_after(owner, 15 SECONDS, AD, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && !AD.locked)
 								AD.welded = FALSE
 								AD.update_icon()
 								playsound(AD, 'sound/effects/meteorimpact.ogg', 100, 1)
@@ -132,7 +132,7 @@
 								return
 						else
 							AD.visible_message(SPAN_DANGER("\The [owner] begins forcing \the [AD]!"))
-							if((AD.is_broken(NOPOWER) || do_after(owner, 5 SECONDS,AD)) && !(AD.operating || AD.welded || AD.locked))
+							if((AD.is_broken(NOPOWER) || do_after(owner, 5 SECONDS, AD, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)) && !(AD.operating || AD.welded || AD.locked))
 								playsound(AD, 'sound/machines/airlock_creaking.ogg', 100, 1)
 								if(AD.density)
 									addtimer(CALLBACK(AD, /obj/machinery/door/airlock/.proc/open, TRUE), 0)
@@ -156,7 +156,7 @@
 				return
 
 			owner.visible_message(SPAN_NOTICE("\The [owner] begins loading \the [O]."))
-			if(do_after(owner, 20, O, do_flags = DO_DEFAULT & ~DO_USER_SAME_HAND))
+			if(do_after(owner, 2 SECONDS, O, DO_PUBLIC_UNIQUE & ~DO_USER_SAME_HAND))
 				if(O in carrying || O.buckled_mob || O.anchored || (locate(/mob/living) in O)) //Repeat checks
 					return
 				if(length(carrying) >= carrying_capacity)
@@ -564,7 +564,7 @@
 
 	EM.set_dir(reverse_direction(owner.dir))
 
-	if (!do_after(owner, delay, target, DO_DEFAULT & ~DO_USER_CAN_TURN))
+	if (!do_after(owner, delay, target, (DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) & ~DO_USER_CAN_TURN))
 		if(EM)
 			EM.particles.spawning = FALSE
 		return
@@ -764,7 +764,7 @@
 			)
 			new /obj/effect/temporary(get_step(owner.loc, reverse_direction(owner.dir)), 2 SECONDS, 'icons/effects/effects.dmi',"cyan_sparkles")
 			owner.setClickCooldown(2 SECONDS)
-			if (do_after(owner, 2 SECONDS, do_flags = (DO_DEFAULT | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) & ~DO_USER_CAN_TURN) && slideCheck(TT))
+			if (do_after(owner, 2 SECONDS, target, (DO_DEFAULT | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) & ~DO_USER_CAN_TURN) && slideCheck(TT))
 				owner.visible_message(SPAN_DANGER("Burning hard, \the [owner] thrusts forward!"))
 				owner.throw_at(get_ranged_target_turf(owner, owner.dir, slide_distance), slide_distance, 1, owner, FALSE)
 			else
@@ -837,8 +837,8 @@
 		var/network = input("Which network would you like to configure it for?") as null|anything in (all_networks)
 		if(!network)
 			to_chat(user, SPAN_WARNING("You cannot connect to any camera network!."))
-		var/delay = 20 * user.skill_delay_mult(SKILL_DEVICES)
-		if(do_after(user, delay, src) && network)
+		var/delay = 2 SECONDS * user.skill_delay_mult(SKILL_DEVICES)
+		if(do_after(user, delay, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT) && network)
 			camera.network = list(network)
 			camera.update_coverage(TRUE)
 			to_chat(user, SPAN_NOTICE("You configure the camera for \the [network] network."))

@@ -34,7 +34,7 @@
 
 	affecting.visible_message("<span class='danger'>[assailant] begins crushing [affecting]!</span>")
 	G.attacking = 1
-	if(do_after(assailant, action_cooldown - 1, affecting))
+	if(do_after(assailant, action_cooldown - 1, affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		G.attacking = 0
 		G.action_used()
 		crush(G, crush_damage)
@@ -53,7 +53,7 @@
 	affecting.visible_message("<span class='danger'>[assailant] begins chewing on [affecting]!</span>")
 	G.attacking = 1
 
-	if(do_after(assailant, action_cooldown - 1, affecting))
+	if(do_after(assailant, action_cooldown - 1, affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		G.attacking = 0
 		G.action_used()
 		masticate(G, masticate_damage)

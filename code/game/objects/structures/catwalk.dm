@@ -103,7 +103,7 @@
 		if(!ST.in_use)
 			to_chat(user, "<span class='notice'>Placing tile...</span>")
 			ST.in_use = 1
-			if (!do_after(user, 10))
+			if (!do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE))
 				ST.in_use = 0
 				return
 			to_chat(user, "<span class='notice'>You plate \the [src]</span>")

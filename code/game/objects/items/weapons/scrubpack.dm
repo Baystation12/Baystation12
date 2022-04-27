@@ -127,7 +127,7 @@
 		if (!selection)
 			return TRUE
 		var/time_cost = 5 - round(user.get_skill_value(SKILL_ATMOS) * 0.5) //0,1,1,2,2
-		if (!do_after(user, time_cost SECONDS, src, do_flags = DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
+		if (!do_after(user, time_cost SECONDS, src, do_flags = DO_PUBLIC_UNIQUE))
 			return TRUE
 		var/removed
 		if (selection == "cell")

@@ -129,20 +129,23 @@
 
 	var/body_type = "[M.isSynthetic() ? "chassis" : "body"]"
 	if (istype(M) && M.a_intent == I_HELP)
+		var/do_flags = EMPTY_BITFIELD
 		if (M == user)
 			user.visible_message(
 			SPAN_WARNING("\The [M] starts tearing at the webbing on their [body_type]!"),
 			SPAN_WARNING("You start tearing at the webbing on your [body_type]!"),
 			SPAN_WARNING("You hear the sound of something being torn up.")
 			)
+			do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS
 		else
 			user.visible_message(
 			SPAN_WARNING("\The [M] starts tearing at the webbing on \the [user]'s [body_type]!"),
 			SPAN_WARNING("\The [M] starts tearing off the webbing on you!"),
 			SPAN_WARNING("You hear the sound of something being torn up.")
 			)
+			do_flags = DO_PUBLIC_UNIQUE
 
-		if (do_after(M, 2 SECONDS, user))
+		if (do_after(M, 2 SECONDS, user, do_flags))
 			if (stacks <= 1)
 				user.visible_message(
 					SPAN_WARNING("\The [user] is freed from the webs!"),

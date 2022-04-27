@@ -82,7 +82,7 @@
 		if(busy)
 			to_chat(user, SPAN_NOTICE("\The [buckled_mob] is already getting out, be patient."))
 			return
-		var/delay = 60
+		var/delay = 6 SECONDS
 		if(user == buckled_mob)
 			delay *=2
 			user.visible_message(
@@ -97,7 +97,7 @@
 				SPAN_NOTICE("You hear water sloshing.")
 				)
 		busy = TRUE
-		if(do_after(user, delay, src))
+		if(do_after(user, delay, src, DO_PUBLIC_UNIQUE))
 			busy = FALSE
 			if(user == buckled_mob)
 				if(prob(80))

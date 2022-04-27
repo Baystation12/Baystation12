@@ -192,7 +192,7 @@
 			else
 				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames!</span>",
 				"<span class='warning'>You try to pat out [src]'s flames! Hot!</span>")
-				if(do_after(M, 1.5 SECONDS, src))
+				if(do_after(M, 1.5 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 					src.fire_stacks -= 0.5
 					if (prob(10) && (M.fire_stacks <= 0))
 						M.fire_stacks += 1

@@ -453,7 +453,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 	target.adjustHalLoss(50)
 
-	if (do_after(src, 5 SECONDS, target, DO_DEFAULT, INCAPACITATION_KNOCKOUT))
+	if (do_after(src, 5 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT, INCAPACITATION_KNOCKOUT))
 		admin_attack_log(src, target, "Consumed their victim.", "Was consumed.", "consumed")
 
 		if (!target.lying && target.stat != DEAD) //Check victims are still prone

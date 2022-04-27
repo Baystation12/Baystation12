@@ -1089,7 +1089,7 @@
 		to_chat(usr, "<span class='notice'>[self ? "You have a" : "[src] has a"] pulse! Counting...</span>")
 
 	to_chat(usr, "You must[self ? "" : " both"] remain still until counting is finished.")
-	if(do_after(usr, 6 SECONDS, src))
+	if(do_after(usr, 6 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		var/message = "<span class='notice'>[self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)].</span>"
 		to_chat(usr, message)
 	else
@@ -1492,7 +1492,7 @@
 		to_chat(src, "<span class='warning'>You brace yourself to relocate your [current_limb.joint]...</span>")
 	else
 		to_chat(U, "<span class='warning'>You begin to relocate [S]'s [current_limb.joint]...</span>")
-	if(!do_after(U, 30, src))
+	if(!do_after(U, 3 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return
 	if(!current_limb || !S || !U)
 		return

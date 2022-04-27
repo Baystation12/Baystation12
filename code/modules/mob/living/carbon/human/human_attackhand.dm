@@ -84,7 +84,7 @@
 
 				H.visible_message("<span class='notice'>\The [H] is trying to perform CPR on \the [src].</span>")
 
-				if(!do_after(H, cpr_delay, src))
+				if(!do_after(H, cpr_delay, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 					cpr_time = 1
 					return
 				cpr_time = 1
@@ -326,7 +326,7 @@
 		organ.applied_pressure = user
 
 		//apply pressure as long as they stay still and keep grabbing
-		do_after(user, INFINITY, src, do_flags = (DO_DEFAULT & ~DO_SHOW_PROGRESS) | DO_USER_SAME_ZONE)
+		do_after(user, INFINITY, src, (DO_DEFAULT & ~DO_SHOW_PROGRESS) | DO_USER_SAME_ZONE)
 
 		organ.applied_pressure = null
 

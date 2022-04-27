@@ -41,7 +41,7 @@
 		affecting.visible_message("<span class='notice'>[assailant] is trying to pin [affecting] to the ground!</span>")
 		G.attacking = 1
 
-		if(do_after(assailant, action_cooldown - 1, affecting))
+		if(do_after(assailant, action_cooldown - 1, affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 			G.attacking = 0
 			G.action_used()
 			affecting.Weaken(2)
@@ -71,7 +71,7 @@
 	assailant.visible_message("<span class='danger'>[assailant] begins to [pick("bend", "twist")] [affecting]'s [O.name] into a jointlock!</span>")
 	G.attacking = 1
 
-	if(do_after(assailant, action_cooldown - 1, affecting))
+	if(do_after(assailant, action_cooldown - 1, affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		if (!G.has_hold_on_organ(O))
 			to_chat(assailant, SPAN_WARNING("You must keep a hold on your target to jointlock!"))
 			return
@@ -108,7 +108,7 @@
 		assailant.visible_message("<span class='warning'>[assailant] begins to dislocate [affecting]'s [O.joint]!</span>")
 		G.attacking = 1
 
-		if(do_after(assailant, action_cooldown - 1, affecting))
+		if(do_after(assailant, action_cooldown - 1, affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 
 			if (!G.has_hold_on_organ(O))
 				to_chat(assailant, SPAN_WARNING("You must keep a hold on your target to dislocate!"))
@@ -254,7 +254,7 @@
 	user.visible_message("<span class='danger'>\The [user] begins to slit [affecting]'s throat with \the [W]!</span>")
 
 	user.next_move = world.time + 20 //also should prevent user from triggering this repeatedly
-	if(!do_after(user, 20 * user.skill_delay_mult(SKILL_COMBAT), do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
+	if(!do_after(user, 2 SECONDS * user.skill_delay_mult(SKILL_COMBAT), affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return 0
 	if(!(G && G.affecting == affecting)) //check that we still have a grab
 		return 0
@@ -305,7 +305,7 @@
 	user.visible_message(SPAN_DANGER("\The [user] begins to cut \the [affecting]'s [O.tendon_name] with \the [W]!"))
 	user.next_move = world.time + 20
 
-	if(!do_after(user, 20, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
+	if(!do_after(user, 2 SECONDS, affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return 0
 	if(!(G && G.affecting == affecting)) //check that we still have a grab
 		return 0

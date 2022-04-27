@@ -340,7 +340,7 @@
 
 			to_chat(D, "<span class='danger'>You begin decompiling [M].</span>")
 
-			if(!do_after(D,50,M))
+			if(!do_after(D, 5 SECONDS, M, DO_PUBLIC_UNIQUE))
 				return
 
 			if(!M || !D) return

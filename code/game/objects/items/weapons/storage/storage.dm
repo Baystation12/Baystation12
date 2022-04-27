@@ -369,7 +369,7 @@
 		var/turf/T = get_turf(src)
 		hide_from(usr)
 		usr.visible_message(SPAN_NOTICE("\The [usr] starts dumping out the contents of \the [src]."), SPAN_NOTICE("You begin dumping out the contents of \the [src]."))
-		if (do_after(usr, max(3 SECONDS, 1 SECONDS * contents.len)))
+		if (do_after(usr, max(3 SECONDS, 1 SECONDS * contents.len), src, DO_PUBLIC_UNIQUE))
 			for(var/obj/item/I in contents)
 				remove_from_storage(I, T, 1)
 			finish_bulk_removal()

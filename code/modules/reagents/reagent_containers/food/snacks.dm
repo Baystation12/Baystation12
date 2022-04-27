@@ -98,7 +98,7 @@
 				return 0
 
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			if(!do_after(user, 3 SECONDS, M)) return
+			if(!do_after(user, 3 SECONDS, M, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)) return
 
 			if (user.get_active_hand() != src)
 				return

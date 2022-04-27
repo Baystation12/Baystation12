@@ -49,7 +49,7 @@
 		)
 		if(scan_sound)
 			playsound(src, scan_sound, 30)
-		if(use_delay && !do_after(user, use_delay, A))
+		if(use_delay && !do_after(user, use_delay, A, DO_PUBLIC_UNIQUE))
 			to_chat(user, "You stop scanning \the [A] with \the [src].")
 			return
 		scan(A, user)

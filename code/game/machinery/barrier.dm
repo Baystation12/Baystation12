@@ -78,7 +78,7 @@
 			"You start to repair \the [src]'s plating with \the [I].",
 			"You hear creaking metal."
 		)
-		if (do_after(user, 15 SECONDS, src, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+		if (do_after(user, 15 SECONDS, src, do_flags = DO_PUBLIC_UNIQUE))
 			to_chat(user, SPAN_NOTICE("There - Good as new."))
 			modify_health(initial(health) - health)
 		return TRUE
@@ -95,7 +95,7 @@
 			"You start to repair \the [src]'s locking clamps with \the [I].",
 			"You hear a hissing flame."
 		)
-		if (do_after(user, 15 SECONDS, src, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+		if (do_after(user, 15 SECONDS, src, do_flags = DO_PUBLIC_UNIQUE))
 			to_chat(user, SPAN_NOTICE("There - Good as new."))
 			emagged = FALSE
 			if (locked)

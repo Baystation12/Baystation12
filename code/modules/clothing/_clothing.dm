@@ -645,7 +645,7 @@ BLIND     // can't see anything
 	if (attached_cuffs)
 		to_chat(user, SPAN_WARNING("\The [src] already has [attached_cuffs] attached."))
 		return
-	if (do_after(user, 5 SECONDS))
+	if (do_after(user, 5 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if(!user.unEquip(cuffs, src))
 			return
 		user.visible_message(SPAN_ITALIC("\The [user] attaches \the [cuffs] to \the [src]."), range = 2)
@@ -666,7 +666,7 @@ BLIND     // can't see anything
 		return
 	if (user.incapacitated())
 		return
-	if (do_after(user, 5 SECONDS))
+	if (do_after(user, 5 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if (!user.put_in_hands(attached_cuffs))
 			to_chat(usr, SPAN_WARNING("You need an empty, unbroken hand to remove the [attached_cuffs] from the [src]."))
 			return
@@ -689,7 +689,7 @@ BLIND     // can't see anything
 	if (I.w_class > hidden_item_max_w_class)
 		to_chat(user, SPAN_WARNING("\The [I] is too large to fit in the [src]."))
 		return
-	if (do_after(user, 1 SECONDS))
+	if (do_after(user, 1 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if(!user.unEquip(I, src))
 			return
 		user.visible_message(SPAN_ITALIC("\The [user] shoves \the [I] into \the [src]."), range = 1)
@@ -711,7 +711,7 @@ BLIND     // can't see anything
 		return FALSE
 	if (loc != user)
 		return FALSE
-	if (do_after(user, 2 SECONDS))
+	if (do_after(user, 2 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if (!user.put_in_hands(hidden_item))
 			to_chat(usr, SPAN_WARNING("You need an empty, unbroken hand to pull the [hidden_item] from the [src]."))
 			return TRUE

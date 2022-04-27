@@ -40,7 +40,7 @@
 	else if(isScrewdriver(O))
 		playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 		to_chat(user, "<span class='notice'>You begin dismantling \the [src].</span>")
-		if(do_after(user,25,src))
+		if(do_after(user, 2.5 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>You dismantle \the [src].</span>")
 			new/obj/item/stack/material/wood(get_turf(src), 5)
 			for(var/obj/item/book/b in contents)
@@ -214,7 +214,7 @@
 	else if(istype(W, /obj/item/material/knife) || isWirecutter(W))
 		if(carved)	return
 		to_chat(user, "<span class='notice'>You begin to carve out [title].</span>")
-		if(do_after(user, 30, src))
+		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>You carve out the pages from [title]! You didn't want to read it anyway.</span>")
 			carved = 1
 			return

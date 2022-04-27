@@ -244,7 +244,8 @@
 			playsound(src, 'sound/effects/tape.ogg',25)
 			var/mob/living/carbon/human/H = user
 			if(!istype(H)) return
-			if(do_after(user, H.wear_suit == src? 60 : 30, istype(loc,/mob/living)? loc : null)) //Sealing a breach on your own suit is awkward and time consuming
+			var/is_worn = istype(loc, /mob/living)
+			if(do_after(user, (H.wear_suit == src ? 6 : 3) SECONDS, is_worn ? loc : src, is_worn ? DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS : DO_PUBLIC_UNIQUE)) //Sealing a breach on your own suit is awkward and time consuming
 				user.visible_message(
 					SPAN_NOTICE("\The [user] uses \the [W] to seal \the [target_breach.descriptor] on \the [src]."),
 					SPAN_NOTICE("You use \the [W] to seal \the [target_breach.descriptor] on \the [src].")

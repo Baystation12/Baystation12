@@ -11,7 +11,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+
 	machine_name = "operating table"
 	machine_desc = "A sterile and well-lit surface to conduct surgery. Operating tables are the only completely safe surfaces to perform operations. Comes with built-in neural suppressors to anesthetize a patient laying on top of it."
 
@@ -35,7 +35,7 @@
 		connected_monitor.update_victim()
 		connected_monitor.update_optable()
 	. = ..()
-	
+
 /obj/machinery/optable/examine(mob/user)
 	. = ..()
 	to_chat(user, "<span class='notice'>The neural suppressors are switched [suppressing ? "on" : "off"].</span>")
@@ -83,7 +83,7 @@
 
 	if(user != victim && !suppressing) // Skip checks if you're doing it to yourself or turning it off, this is an anti-griefing mechanic more than anything.
 		user.visible_message("<span class='warning'>\The [user] begins switching on \the [src]'s neural suppressor.</span>")
-		if(!do_after(user, 30, src) || !user || !src || user.incapacitated() || !user.Adjacent(src))
+		if(!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) || !user || !src || user.incapacitated() || !user.Adjacent(src))
 			return TRUE
 		if(!victim)
 			to_chat(user, "<span class='warning'>There is nobody on \the [src]. It would be pointless to turn the suppressor on.</span>")

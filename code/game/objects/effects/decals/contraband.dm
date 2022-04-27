@@ -59,7 +59,7 @@
 	qdel(src)
 	flick("poster_being_set", P)
 	// Time to place is equal to the time needed to play the flick animation
-	if(do_after(user, 28, W) && W.is_wall() && !ArePostersOnWall(W, P))
+	if(do_after(user, 2.8 SECONDS, W, DO_PUBLIC_UNIQUE) && W.is_wall() && !ArePostersOnWall(W, P))
 		user.visible_message("<span class='notice'>\The [user] has placed a poster on \the [W].</span>","<span class='notice'>You have placed the poster on \the [W].</span>")
 	else
 		// We cannot rely on user being on the appropriate turf when placement fails

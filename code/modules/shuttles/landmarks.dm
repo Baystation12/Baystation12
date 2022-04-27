@@ -179,7 +179,7 @@
 			SPAN_ITALIC("You hear the clicking of metal and plastic.")
 		)
 		playsound(src, 'sound/items/shuttle_beacon_prepare.ogg', 100)
-		if (!do_after(user, 3 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT))
+		if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			return FALSE
 		playsound(src, 'sound/items/shuttle_beacon_complete.ogg', 100)
 	active = TRUE

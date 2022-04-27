@@ -23,7 +23,7 @@
 				return
 			user.visible_message("<span class='danger'>\The [user] begins taping over \the [H]'s eyes!</span>")
 
-			if(!do_after(user, 3 SECONDS, H))
+			if(!do_after(user, 3 SECONDS, H, DO_PUBLIC_UNIQUE))
 				return
 
 			// Repeat failure checks.
@@ -50,7 +50,7 @@
 			playsound(src, 'sound/effects/tape.ogg',25)
 			user.visible_message("<span class='danger'>\The [user] begins taping up \the [H]'s mouth!</span>")
 
-			if(!do_after(user, 3 SECONDS, H))
+			if(!do_after(user, 3 SECONDS, H, DO_PUBLIC_UNIQUE))
 				return
 
 			// Repeat failure checks.
@@ -141,7 +141,7 @@
 	playsound(src, 'sound/effects/tape.ogg',25)
 
 	layer = ABOVE_WINDOW_LAYER
-	
+
 	if(params)
 		var/list/mouse_control = params2list(params)
 		if(mouse_control["icon-x"])

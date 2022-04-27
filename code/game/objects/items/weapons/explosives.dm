@@ -48,7 +48,7 @@
 	to_chat(user, "Planting explosives...")
 	user.do_attack_animation(target)
 
-	if(do_after(user, 50, target) && in_range(user, target))
+	if(do_after(user, 5 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT) && in_range(user, target))
 		if(!user.unequip_item())
 			return
 		src.target = target
