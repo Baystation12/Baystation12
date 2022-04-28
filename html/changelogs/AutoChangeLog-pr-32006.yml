@@ -1,0 +1,6 @@
+author: Kell-E
+delete-after: true
+changes:
+  - balance: 'Flechette shells cost: 8 -> 12.'
+  - balance: 'Flechette shells availability: Everyone -> Mercenaries only.'
+  - tweak: You can no longer print flechette shells at a lathe.
