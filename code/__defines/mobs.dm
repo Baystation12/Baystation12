@@ -415,6 +415,8 @@
 
 /// This mob is allergic to holiness
 #define MOB_FLAG_HOLY_BAD FLAG(0)
+/// This mob cannot be pinned to walls by sharp objects
+#define MOB_FLAG_UNPINNABLE FLAG(1)
 
 // More refined version of SA_* ""intelligence"" seperators.
 // Now includes bitflags, so to target two classes you just do 'MOB_CLASS_ANIMAL|MOB_CLASS_HUMANOID'
