@@ -6,11 +6,7 @@
 	if(my_client)
 		my_client.screen -= l_general
 
-	if(LAZYLEN(plane_masters))
-		for(var/atom/movable/screen/plane_master/P in plane_masters)
-			my_client.screen -= P
-
-	LAZYCLEARLIST(plane_masters)
+	RemoveRenderers()
 
 	QDEL_NULL(l_general)
 	hide_client_images()
