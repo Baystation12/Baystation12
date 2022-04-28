@@ -108,3 +108,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// Droppers. END
 ////////////////////////////////////////////////////////////////////////////////
+
+/obj/item/reagent_containers/dropper/peridaxon
+	name = "Dropper (Peridaxon)"
+	desc = "Contains peridaxon - used to rescue failing organs."
+	amount_per_transfer_from_this = 1
+
+/obj/item/reagent_containers/dropper/peridaxon/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/peridaxon, 5)
+	update_icon()
+
