@@ -312,7 +312,7 @@
 	name = "plasma arc"
 	icon_state = "omnilaser"
 	fire_sound = 'sound/weapons/plasma_cutter.ogg'
-	damage = 30
+	damage = 20
 	armor_penetration = 30
 	edge = TRUE
 	damage_type = DAMAGE_BURN
@@ -320,9 +320,9 @@
 	pass_flags = PASS_FLAG_TABLE
 	distance_falloff = 2
 	damage_falloff_list = list(
-		list(3, 0.90),
-		list(5, 0.80),
-		list(7, 0.60),
+		list(2, 0.80),
+		list(3, 0.60),
+		list(4, 0.40),
 	)
 
 	muzzle_type = /obj/effect/projectile/trilaser/muzzle
