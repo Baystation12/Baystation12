@@ -9,3 +9,10 @@
 /mob/observer/eye/cult/Destroy()
 	visualnet = null
 	return ..()
+
+/mob/observer/eye/cult/EyeMove()
+	if(owner && istype(owner, /mob/living/deity))
+		var/mob/living/deity/D = owner
+		if(D.following)
+			D.stop_follow()
+	return ..()

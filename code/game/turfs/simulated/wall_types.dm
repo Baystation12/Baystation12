@@ -145,9 +145,6 @@
 /turf/simulated/wall/voxshuttle/attackby()
 	return
 
-/turf/simulated/wall/growth/New(var/newloc)
-	..(newloc, MATERIAL_GROWTH)
-
 /turf/simulated/wall/concrete/New(var/newloc)
 	..(newloc,MATERIAL_CONCRETE)
 

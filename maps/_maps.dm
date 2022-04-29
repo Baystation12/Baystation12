@@ -11,6 +11,7 @@
 #include "antag_spawn\ninja\ninja.dm"
 #include "antag_spawn\vox\voxraider.dm"
 #include "antag_spawn\wizard\wizard.dm"
+#include "antag_spawn\deity\deity.dm"
 
 #include "away\away_sites.dm"
 #include "away_sites_testing\away_sites_testing_define.dm"

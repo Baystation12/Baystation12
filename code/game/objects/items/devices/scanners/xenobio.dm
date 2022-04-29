@@ -42,7 +42,7 @@
 		var/mob/living/carbon/human/H = target
 		. += "Data for [H]:"
 		. += "Species:\t[H.species]"
-		if(H.species.breath_type)
+		if(H.species.breath_type) 
 			. += "Breathes:\t[gas_data.name[H.species.breath_type]]"
 		if(H.species.exhale_type)
 			. += "Exhales:\t[gas_data.name[H.species.exhale_type]]"
