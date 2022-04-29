@@ -45,6 +45,34 @@
 
 	..()
 
+/obj/item/weapon/nullrod/afterattack(atom/A, mob/user, proximity)
+	if(!proximity)
+		return
+
+	if(istype(A, /obj/structure/deity/altar))
+		var/obj/structure/deity/altar/altar = A
+		if(!altar.linked_god.silenced) //Don't want them to infinity spam it.
+			altar.linked_god.silence(10)
+			new /obj/effect/temporary(get_turf(altar),'icons/effects/effects.dmi',"purple_electricity_constant", 10)
+			altar.visible_message(SPAN_NOTICE("\The [altar] groans in protest as reality settles around \the [src]."))
+
+	if(istype(A, /turf/simulated/wall/cult))
+		var/turf/simulated/wall/cult/W = A
+		user.visible_message(
+			SPAN_NOTICE("\The [user] touches \the [A] with \the [src], and the enchantment affecting it fizzles away."),
+			SPAN_NOTICE("You touch \the [A] with \the [src], and the enchantment affecting it fizzles away.")
+		)
+		W.ChangeTurf(/turf/simulated/wall)
+
+	if(istype(A, /turf/simulated/floor/cult))
+		var/turf/simulated/floor/cult/F = A
+		user.visible_message(
+			SPAN_NOTICE("\The [user] touches \the [A] with \the [src], and the enchantment affecting it fizzles away."),
+			SPAN_NOTICE("You touch \the [A] with \the [src], and the enchantment affecting it fizzles away.")
+		)
+		F.ChangeTurf(/turf/simulated/floor)
+
+
 /obj/item/energy_net
 	name = "energy net"
 	desc = "It's a net made of green energy."
