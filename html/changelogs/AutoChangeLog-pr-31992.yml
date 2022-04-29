@@ -1,0 +1,5 @@
+author: Jux
+delete-after: true
+changes:
+  - maptweak: Moved the Charon main airlock interior button so it's more easily used.
+  - maptweak: Makes the Charon's medical compartment and cockpit airlocks windowed.
