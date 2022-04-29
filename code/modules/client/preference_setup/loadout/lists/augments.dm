@@ -2,6 +2,7 @@
 	sort_category = "Augments"
 	category = /datum/gear/augment
 	cost = 2
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/augment/armor_minor
