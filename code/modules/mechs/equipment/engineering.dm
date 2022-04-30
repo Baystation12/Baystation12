@@ -100,7 +100,7 @@
 /obj/item/mech_equipment/atmos_shields/proc/activate()
 	owner.visible_message(SPAN_WARNING("\The [src] starts glowing as it becomes energized!"), blind_message = SPAN_WARNING("You hear the crackle of electricity"))
 	owner.setClickCooldown(2.5 SECONDS)
-	if (do_after(owner, 0.5 SECONDS, get_turf(owner), do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) && owner)
+	if (do_after(owner, 0.5 SECONDS, get_turf(owner), DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && owner)
 		owner.visible_message(SPAN_WARNING("The air shimmers as energy shields form in front of \the [owner]!"))
 		playsound(src ,'sound/effects/phasein.ogg',35,1)
 		active = TRUE

@@ -262,7 +262,7 @@
 		return
 	to_chat(user, "<span class='notice'>Assembling grille...</span>")
 	ST.in_use = 1
-	if (!do_after(user, 10))
+	if (!do_after(user, 1 SECOND, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		ST.in_use = 0
 		return
 	if(!ST.use(2))

@@ -44,7 +44,7 @@
 		return
 
 	to_chat(worm, SPAN_NOTICE("You begin delicately adjusting your connection to the host brain..."))
-	if(!do_after(worm, 100+(worm.host.getBrainLoss()*5) || !worm.host || !worm.can_use_borer_ability()))
+	if(!do_after(worm, 100+(worm.host.getBrainLoss()*5), do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT) || !worm.host || !worm.can_use_borer_ability())
 		return
 
 	to_chat(worm, SPAN_DANGER("You plunge your probosci deep into the cortex of the host brain, interfacing directly with their nervous system."))
@@ -81,7 +81,7 @@
 	worm.host.verbs += /mob/living/carbon/proc/spawn_larvae
 
 	return TRUE
-	
+
 /obj/screen/borer/inject_chemicals
 	name = "Inject Chemicals"
 	icon_state = "inject_chemicals"
@@ -127,7 +127,7 @@
 	if(worm.host.stat == CONSCIOUS)
 		to_chat(worm.host, SPAN_WARNING("An odd, uncomfortable pressure begins to build inside your skull, behind your ear..."))
 
-	if(!do_after(worm, 10 SECONDS) || !worm.can_use_borer_ability())
+	if(!do_after(worm, 10 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT) || !worm.can_use_borer_ability())
 		return
 
 	if(worm.host)

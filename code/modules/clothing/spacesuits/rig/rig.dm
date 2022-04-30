@@ -675,7 +675,7 @@
 		"<span class='info'>[M] starts putting on \the [src]...</span>", \
 		"<span class='info'>You start putting on \the [src]...</span>")
 
-		if(!do_after(M,seal_delay,src))
+		if(!do_after(M, seal_delay, src, DO_PUBLIC_UNIQUE))
 			if(M && M.back == src)
 				if(!M.unEquip(src))
 					return

@@ -71,7 +71,7 @@
 			if (LIGHT_STAGE_EMPTY)
 				playsound(loc, 'sound/items/Ratchet.ogg', 50, TRUE)
 				to_chat(user, SPAN_NOTICE("You begin deconstructing \the [src]."))
-				if (!user.do_skilled(30, SKILL_CONSTRUCTION, src))
+				if (!user.do_skilled(3 SECONDS, SKILL_CONSTRUCTION, src))
 					return
 				new /obj/item/stack/material/steel( get_turf(loc), sheets_refunded )
 				user.visible_message(

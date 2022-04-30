@@ -13,7 +13,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+
 	machine_name = "body scanner"
 	machine_desc = "A full-body scanning suite that provides a complete health assessment of a patient placed inside. Requires an adjacent console to operate."
 
@@ -26,7 +26,7 @@
 	..()
 	go_out()
 	user.visible_message(
-		SPAN_NOTICE("\The [user] climbs out of \the [initial(name)]."), 
+		SPAN_NOTICE("\The [user] climbs out of \the [initial(name)]."),
 		SPAN_NOTICE("You climb out of \the [initial(name)].")
 	)
 
@@ -60,7 +60,7 @@
 		return
 	usr.visible_message(
 		SPAN_NOTICE("\The [usr] climbs into \the [src]."),
-		SPAN_NOTICE("You climb into \the [src]."), 
+		SPAN_NOTICE("You climb into \the [src]."),
 		SPAN_ITALIC("You hear footsteps on metal, cloth rustling, and then a pressurized hiss.")
 	)
 	move_target_inside(usr,usr)
@@ -155,7 +155,7 @@
 		SPAN_NOTICE("\The [user] begins placing \the [target] into \the [src]."),
 		SPAN_NOTICE("You start placing \the [target] into \the [src].")
 	)
-	if(!do_after(user, 30, src) || !user_can_move_target_inside(target, user))
+	if(!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) || !user_can_move_target_inside(target, user))
 		return
 	move_target_inside(target,user)
 

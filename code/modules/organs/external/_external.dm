@@ -387,8 +387,7 @@
 			return 0
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(!do_after(user, 1 SECOND, owner))
-		to_chat(user, "<span class='warning'>You must stand still to do that.</span>")
+	if(!do_after(user, 1 SECOND, owner, DO_SURGERY))
 		return 0
 
 	switch(damage_type)

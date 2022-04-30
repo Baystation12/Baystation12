@@ -13,7 +13,7 @@
 	if(isWelder(W))
 		if(damaged)
 			user.visible_message("[user] begins to repair [src].", "You begin repairing [src].")
-			if(do_after(usr, 100, src))
+			if(do_after(usr, 10 SECONDS, src, DO_PUBLIC_UNIQUE))
 				var/obj/item/weldingtool/w
 				if(w.burn_fuel(10))
 					damaged = 0
@@ -29,7 +29,7 @@
 			to_chat(user, "There is already a cylinder here.")
 			return
 		user.visible_message("[user] begins to carefully place [W] onto the Inserter.", "You begin to carefully place [W] onto the Inserter.")
-		if(do_after(user, 80, src) && user.unEquip(W, src))
+		if(do_after(user, 8 SECONDS, src, DO_PUBLIC_UNIQUE) && user.unEquip(W, src))
 			cylinder = W
 			set_density(TRUE)
 			user.visible_message("[user] places [W] onto the Inserter.", "You place [W] onto the Inserter.")
@@ -52,14 +52,14 @@
 				to_chat(user, "<span class='warning'>The self destruct sequence is in progress, unable to disarm.</span>")
 				return
 			user.visible_message("[user] begins extracting [cylinder].", "You begin extracting [cylinder].")
-			if(do_after(user, 40, src))
+			if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 				user.visible_message("[user] extracts [cylinder].", "You extract [cylinder].")
 				armed = 0
 				set_density(TRUE)
 				flick("unloading", src)
 		else if(!damaged)
 			user.visible_message("[user] begins to arm [cylinder].", "You begin to arm [cylinder].")
-			if(do_after(user, 40, src))
+			if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 				armed = 1
 				set_density(FALSE)
 				user.visible_message("[user] arms [cylinder].", "You arm [cylinder].")
@@ -76,7 +76,7 @@
 			to_chat(usr, "Disarm the cylinder first.")
 		else
 			usr.visible_message("[usr] beings to carefully pick up [cylinder].", "You begin to carefully pick up [cylinder].")
-			if(do_after(usr, 70, src))
+			if(do_after(usr, 7 SECONDS, src, DO_PUBLIC_UNIQUE))
 				usr.put_in_hands(cylinder)
 				usr.visible_message("[usr] picks up [cylinder].", "You pick up [cylinder].")
 				set_density(FALSE)

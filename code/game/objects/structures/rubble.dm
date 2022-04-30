@@ -54,7 +54,7 @@
 			return
 		visible_message("[user] starts rummaging through \the [src].")
 		is_rummaging = 1
-		if(do_after(user, 30))
+		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			var/obj/item/booty = pickweight(loot)
 			booty = new booty(loc)
 			lootleft--
@@ -72,7 +72,7 @@
 	if (istype(I, /obj/item/pickaxe))
 		var/obj/item/pickaxe/P = I
 		visible_message("[user] starts clearing away \the [src].")
-		if(do_after(user,P.digspeed, src))
+		if(do_after(user, P.digspeed, src, DO_PUBLIC_UNIQUE))
 			visible_message("[user] clears away \the [src].")
 			if(lootleft && prob(1))
 				var/obj/item/booty = pickweight(loot)

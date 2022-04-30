@@ -903,7 +903,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 
 /// Flags to use for do_after when equip_delay is set
-/obj/item/var/equip_delay_flags
+/obj/item/var/equip_delay_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS
 
 
 /// Virtual for behavior to do before do_after if equip_delay is set

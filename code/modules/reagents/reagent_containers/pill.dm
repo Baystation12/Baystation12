@@ -37,7 +37,7 @@
 
 		user.visible_message(SPAN_WARNING("[user] attempts to force [M] to swallow \the [src]."))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(!do_after(user, 3 SECONDS, M))
+		if(!do_after(user, 3 SECONDS, M, DO_MEDICAL))
 			return
 
 		if (user.get_active_hand() != src)
