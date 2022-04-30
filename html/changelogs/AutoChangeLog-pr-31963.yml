@@ -1,0 +1,5 @@
+author: Textor
+delete-after: true
+changes:
+  - bugfix: Binoculars now cancel zoom correctly when you move, drop them, put them
+      in a bag, or have them stolen by a parrot.
