@@ -223,9 +223,22 @@
 /obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled,
 /area/constructionsite)
+"O" = (
+/obj/machinery/photocopier/faxmachine{
+	department = "Test Fax 1"
+	},
+/turf/simulated/floor/tiled,
+/area/constructionsite)
 "P" = (
 /obj/machinery/light,
 /obj/machinery/telecomms/processor/map_preset/example,
+/turf/simulated/floor/tiled,
+/area/constructionsite)
+"Q" = (
+/obj/machinery/photocopier/faxmachine{
+	department = "Test Fax 2";
+	send_access = list()
+	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "R" = (
@@ -1020,7 +1033,7 @@ c
 t
 t
 t
-c
+O
 b
 a
 a
@@ -1088,7 +1101,7 @@ c
 c
 c
 c
-c
+Q
 b
 a
 a

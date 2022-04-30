@@ -1573,7 +1573,8 @@
 
 		P.admindatum = src
 		P.origin = replyorigin
-		P.destination = fax
+
+		P.destinations = get_fax_machines_by_department(fax.department)
 		P.sender = sender
 
 		P.adminbrowse()
