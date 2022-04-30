@@ -1,0 +1,9 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Various existing do_after() timers are now configured to allow the user
+      to only perform one action and the target to have one action performed on them
+      at a time. This ONLY affects interactions that already had a timer associated
+      with them and does not add any new timers. Notable exceptions are provided in
+      the PR. See https://github.com/Baystation12/Baystation12/pull/32010
+  - tweak: Various existing do_after() timers now display public progress bars.
