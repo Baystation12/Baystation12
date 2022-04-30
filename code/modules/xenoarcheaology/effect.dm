@@ -22,7 +22,8 @@
 		triggertype = pick(typesof(/datum/artifact_trigger/touch))
 	trigger = new triggertype
 
-	on_time = rand(5, 20) SECONDS
+	if(!on_time) //For cult artifact mostly
+		on_time = rand(5, 20) SECONDS
 
 	//this will be replaced by the excavation code later, but it's here just in case
 	artifact_id = "[pick("kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"
