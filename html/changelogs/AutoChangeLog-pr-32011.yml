@@ -1,0 +1,11 @@
+author: SomeAngryMiner
+delete-after: true
+changes:
+  - rscadd: Adds snakes, both venomous and non venomous ones. Venomous ones are currently
+      admin only. They are able to be picked up, and worn as a scarf. Not like you
+      should, though.
+  - rscadd: The Brig chief has a new pet, Cobby. Its located on its office.
+  - rscadd: Leeches have received a resprite, and their dens are considerably more
+      subtle.
+  - rscadd: Leeches have received a tiny damage buff, from 5 to 8, making them something
+      to mind for voidsuited people.
