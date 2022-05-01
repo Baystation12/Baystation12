@@ -1,0 +1,12 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Portable air pumps can no longer be set to a target pressure higher than
+      the normal limit by EMPs.
+  - bugfix: Non-powered doors (I.e. wood or material doors) no longer randomly open
+      when EMP'd.
+  - tweak: Radios now randomize their on/off states instead of disabling everything
+      when EMP'd.
+  - tweak: Imprinting implants now may send a 'reminder' when EMP'd.
+  - tweak: Integrated HUD implants now take the same amount of EMP damage as all other
+      implants.
