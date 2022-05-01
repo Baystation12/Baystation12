@@ -180,7 +180,7 @@
 		addtimer(CALLBACK(src, .proc/open), 6, TIMER_UNIQUE | TIMER_OVERRIDE)
 	return TRUE
 
-/obj/machinery/door/emp_act(severity)
+/obj/machinery/door/window/emp_act(severity)
 	if(prob(20/severity))
 		spawn(0)
 			open()

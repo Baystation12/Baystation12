@@ -71,12 +71,10 @@
 
 /obj/machinery/shieldwallgen/emp_act(var/severity)
 	switch(severity)
-		if(1)
+		if(EMP_ACT_HEAVY)
 			storedpower = 0
-		if(2)
+		if(EMP_ACT_LIGHT)
 			storedpower -= rand(storedpower/2, storedpower)
-		if(3)
-			storedpower -= rand(storedpower/4, storedpower/2)
 	..()
 
 /obj/machinery/shieldwallgen/CanUseTopic(mob/user)

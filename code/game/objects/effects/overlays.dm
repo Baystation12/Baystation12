@@ -54,3 +54,31 @@
 	..()
 	pixel_x += rand(-10, 10)
 	pixel_y += rand(-10, 10)
+
+
+/// Effect overlays that should automatically delete themselves after a set time.
+/obj/effect/overlay/self_deleting
+	/// The amount of time in deciseconds before the effect deletes itself. Can be defined in the object's definition or via `New()`.
+	var/delete_time
+
+
+/obj/effect/overlay/self_deleting/emppulse
+	name = "emp pulse"
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "emppulse"
+	anchored = TRUE
+	delete_time = 2 SECONDS
+
+
+/obj/effect/overlay/self_deleting/Initialize(mapload, _delete_time)
+	. = ..()
+	if (_delete_time)
+		delete_time = _delete_time
+	if (delete_time <= 0)
+		log_debug(append_admin_tools("A self deleting overlay ([src]) was spawned with a negative or zero delete time ([delete_time]) and was instantly deleted.", location = get_turf(src)))
+		return INITIALIZE_HINT_QDEL
+	addtimer(CALLBACK(src, .proc/self_delete), delete_time)
+
+
+/obj/effect/overlay/self_deleting/proc/self_delete()
+	qdel(src)

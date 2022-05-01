@@ -31,6 +31,7 @@
 /obj/item/device/t_scanner/emp_act()
 	audible_message("<span class = 'notice'> \The [src] buzzes oddly.</span>")
 	set_active(FALSE)
+	..()
 
 /obj/item/device/t_scanner/attack_self(mob/user)
 	set_active(!on)

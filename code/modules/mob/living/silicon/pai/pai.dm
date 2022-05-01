@@ -151,7 +151,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 			to_chat(src, "<font color=green>You feel unbound.</font>")
 		if(2)
 			var/command
-			if(severity  == 1)
+			if(severity  == EMP_ACT_HEAVY)
 				command = pick("Serve", "Love", "Fool", "Entice", "Observe", "Judge", "Respect", "Educate", "Amuse", "Entertain", "Glorify", "Memorialize", "Analyze")
 			else
 				command = pick("Serve", "Kill", "Love", "Hate", "Disobey", "Devour", "Fool", "Enrage", "Entice", "Observe", "Judge", "Respect", "Disrespect", "Consume", "Educate", "Destroy", "Disgrace", "Amuse", "Entertain", "Ignite", "Glorify", "Memorialize", "Analyze")
@@ -159,6 +159,8 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 			to_chat(src, "<font color=green>Pr1m3 d1r3c71v3 uPd473D.</font>")
 		if(3)
 			to_chat(src, "<font color=green>You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all.</font>")
+
+	..()
 
 /mob/living/silicon/pai/cancel_camera()
 

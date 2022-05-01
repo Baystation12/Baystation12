@@ -101,6 +101,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	for(var/k in 1 to LAZYLEN(activators))
 		var/datum/integrated_io/activate/A = activators[k]
 		A.scramble()
+	..()
 
 
 /obj/item/integrated_circuit/verb/rename_component()

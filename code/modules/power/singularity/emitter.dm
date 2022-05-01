@@ -138,7 +138,7 @@
 	efficiency *= 1 + (rand() - 1) * skill_modifier //subtract off between 0.8 and 0, depending on skill and luck.
 
 /obj/machinery/power/emitter/emp_act(var/severity)
-	return 1
+	return
 
 /obj/machinery/power/emitter/Process()
 	if (stat & (BROKEN))

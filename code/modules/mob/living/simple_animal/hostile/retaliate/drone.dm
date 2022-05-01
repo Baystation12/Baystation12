@@ -138,6 +138,7 @@
 	disabled = rand(150, 600)
 	hostile_drone = FALSE
 	walk(src, 0)
+	..()
 
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/death()
