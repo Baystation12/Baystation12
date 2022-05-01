@@ -76,6 +76,14 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/fuelbay/aux)
+"aal" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/security/bo)
 "aam" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -514,6 +522,30 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
+"abg" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/mob/living/carbon/slime,
+/turf/simulated/floor/reinforced,
+/area/rnd/xenobiology/cell_1)
+"abh" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/mob/living/carbon/slime,
+/turf/simulated/floor/reinforced,
+/area/rnd/xenobiology/cell_4)
 "abi" = (
 /obj/effect/floor_decal/floordetail/edgedrain{
 	dir = 1
@@ -6631,6 +6663,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/firstdeck/fore)
 "asA" = (
+/mob/living/simple_animal/hostile/retaliate/snake/cob,
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "asB" = (
@@ -9022,14 +9055,6 @@
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/plating,
-/area/security/bo)
-"aDI" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "aDK" = (
 /obj/structure/cable/green{
@@ -27919,18 +27944,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/firstdeck)
-"tdb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
-	},
-/mob/living/carbon/slime,
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_1)
 "teb" = (
 /obj/structure/table/standard,
 /obj/machinery/button/blast_door{
@@ -28089,18 +28102,6 @@
 "tiQ" = (
 /turf/simulated/wall/prepainted,
 /area/security/armoury)
-"tjb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
-/mob/living/carbon/slime,
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_4)
 "tkb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -40682,7 +40683,7 @@ aBf
 pUr
 cHj
 aEL
-aDI
+aal
 asA
 aIa
 lcS
@@ -49996,7 +49997,7 @@ aaa
 sRV
 xgi
 aVf
-tdb
+abg
 tkb
 fXN
 trb
@@ -52622,7 +52623,7 @@ aaa
 aUS
 xxl
 ghU
-tjb
+abh
 tnb
 tob
 tzb
