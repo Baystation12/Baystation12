@@ -210,7 +210,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 */
 
 
-/// Renders the /obj/effect/effect/warp example effect
+/// Renders the /obj/effect/effect/warp example effect as well as gravity catapult effects
 /atom/movable/renderer/warp
 	name = "Warp Effect"
 	group = RENDER_GROUP_NONE
@@ -219,10 +219,9 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 
-/// Adds the warp effect to the game rendering group
-/atom/movable/renderer/group_game/Initialize()
+/atom/movable/renderer/scene_group/Initialize()
 	. = ..()
-	filters += filter(type = "displace", render_source = "*warp", size = 10)
+	filters += filter(type = "displace", render_source = "*warp", size = 5)
 
 
 /// Example of a warp filter for /renderer use

@@ -47,29 +47,33 @@
 	visuals.icon_state = icon_state
 	Draw()
 	//Register for movement events
-	RegisterSignal(origin, COMSIG_MOVABLE_MOVED, .proc/redrawing)
-	RegisterSignal(target, COMSIG_MOVABLE_MOVED, .proc/redrawing)
+	GLOB.moved_event.register(origin, src, .proc/redrawing)
+	GLOB.moved_event.register(target, src, .proc/redrawing)
+	GLOB.destroyed_event.register(origin, src, .proc/redrawing)
+	GLOB.destroyed_event.register(target, src, .proc/redrawing)
 
 /**
  * Triggered by events set up when the beam is set up. If it's still sane to create a beam, it removes the old beam, creates a new one. Otherwise it kills the beam.
  *
  * Arguments:
- * mover: either the origin of the beam or the target of the beam that moved.
- * oldloc: from where mover moved.
- * direction: in what direction mover moved from.
+ * - mover: either the origin of the beam or the target of the beam that moved.
+ * - oldloc: from where mover moved.
+ * - direction: in what direction mover moved from.
  */
-/datum/beam/proc/redrawing(atom/movable/mover, atom/oldloc, direction)
-	if(origin && target && get_dist(origin,target)<max_distance && origin.z == target.z)
-		QDEL_LIST(elements)
+/datum/beam/proc/redrawing(atom/movable/mover, atom/oldloc, new_loc)
+	if(!QDELETED(origin) && !QDELETED(target) && get_dist(origin,target)<max_distance && origin.z == target.z)
+		QDEL_NULL_LIST(elements)
 		INVOKE_ASYNC(src, .proc/Draw)
 	else
 		qdel(src)
 
 /datum/beam/Destroy()
-	QDEL_LIST(elements)
+	QDEL_NULL_LIST(elements)
 	QDEL_NULL(visuals)
-	UnregisterSignal(origin, COMSIG_MOVABLE_MOVED)
-	UnregisterSignal(target, COMSIG_MOVABLE_MOVED)
+	GLOB.moved_event.unregister(origin, src, .proc/redrawing)
+	GLOB.moved_event.unregister(target, src, .proc/redrawing)
+	GLOB.destroyed_event.unregister(origin, src, .proc/redrawing)
+	GLOB.destroyed_event.unregister(target, src, .proc/redrawing)
 	target = null
 	origin = null
 	return ..()
@@ -78,7 +82,8 @@
  * Creates the beam effects and places them in a line from the origin to the target. Sets their rotation to make the beams face the target, too.
  */
 /datum/beam/proc/Draw()
-	var/Angle = round(get_angle(origin,target))
+	LAZYINITLIST(elements)
+	var/Angle = round(Get_Angle(origin,target))
 	var/matrix/rot_matrix = matrix()
 	var/turf/origin_turf = get_turf(origin)
 	rot_matrix.Turn(Angle)
@@ -121,11 +126,11 @@
 		//Position the effect so the beam is one continous line
 		var/a
 		if(abs(Pixel_x)>32)
-			a = Pixel_x > 0 ? round(Pixel_x/32) : CEILING(Pixel_x/32, 1)
+			a = Pixel_x > 0 ? round(Pixel_x/32) : Ceilm(Pixel_x/32, 1)
 			X.x += a
 			Pixel_x %= 32
 		if(abs(Pixel_y)>32)
-			a = Pixel_y > 0 ? round(Pixel_y/32) : CEILING(Pixel_y/32, 1)
+			a = Pixel_y > 0 ? round(Pixel_y/32) : Ceilm(Pixel_y/32, 1)
 			X.y += a
 			Pixel_y %= 32
 
@@ -134,7 +139,7 @@
 		CHECK_TICK
 
 /obj/effect/ebeam
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	anchored = TRUE
 	var/datum/beam/owner
 
@@ -153,11 +158,11 @@
  * Unless you're making a custom beam effect (see the beam_type argument), you won't actually have to mess with any other procs. Make sure you store the return of this Proc, you'll need it
  * to kill the beam.
  * **Arguments:**
- * BeamTarget: Where you're beaming from. Where do you get origin? You didn't read the docs, fuck you.
- * icon_state: What the beam's icon_state is. The datum effect isn't the ebeam object, it doesn't hold any icon and isn't type dependent.
- * icon: What the beam's icon file is. Don't change this, man. All beam icons should be in beam.dmi anyways.
- * maxdistance: how far the beam will go before stopping itself. Used mainly for two things: preventing lag if the beam may go in that direction and setting a range to abilities that use beams.
- * beam_type: The type of your custom beam. This is for adding other wacky stuff for your beam only. Most likely, you won't (and shouldn't) change it.
+ * - BeamTarget: Where you're beaming from. Where do you get origin? You didn't read the docs, fuck you.
+ * - icon_state: What the beam's icon_state is. The datum effect isn't the ebeam object, it doesn't hold any icon and isn't type dependent.
+ * - icon: What the beam's icon file is. Don't change this, man. All beam icons should be in beam.dmi anyways.
+ * - maxdistance: how far the beam will go before stopping itself. Used mainly for two things: preventing lag if the beam may go in that direction and setting a range to abilities that use beams.
+ * - beam_type: The type of your custom beam. This is for adding other wacky stuff for your beam only. Most likely, you won't (and shouldn't) change it.
  */
 /atom/proc/Beam(atom/BeamTarget,icon_state="b_beam",icon='icons/effects/beam.dmi',time=INFINITY,maxdistance=INFINITY,beam_type=/obj/effect/ebeam)
 	var/datum/beam/newbeam = new(src,BeamTarget,icon,icon_state,time,maxdistance,beam_type)
