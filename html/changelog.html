@@ -57,6 +57,28 @@
 		-->
 		<div class="commit sansserif">
 
+			<h2 class="date">01 May 2022</h2>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Various existing do_after() timers are now configured to allow the user to only perform one action and the target to have one action performed on them at a time. This ONLY affects interactions that already had a timer associated with them and does not add any new timers. Notable exceptions are provided in the PR. See https://github.com/Baystation12/Baystation12/pull/32010</li>
+				<li class="tweak">Various existing do_after() timers now display public progress bars.</li>
+				<li class="tweak">Faxes tagged 'Unknown' no longer appear on the list of targetable fax machines.</li>
+				<li class="rscadd">Fax machines can now be emagged, which in turn allows you to use multitools to change the fax machine's department tag, so that you can pretend your faxes came from somewhere else. Paperwork antags rejoice.</li>
+				<li class="rscadd">Fax machines with department tags set to off-ship places, i.e. Expeditionary Command, can now intercept faxes sent off-ship. Now you can reply to people replying to your fake faxes!</li>
+				<li class="bugfix">Sending faxes to destination tags that have multiple matching fax machines no longer does weird loopy things and then break.</li>
+				<li class="tweak">Fax machines now display a visible message indicating a fax has been received and which department the fax came from.</li>
+				<li class="tweak">All papers printed by a fax machine now display the origin department in the paper's title, regardless of if they were an admin fax or a player fax. No more using fax titles to metagame antag faxes.</li>
+				<li class="tweak">A fax machine's configured department now appears in the UI when using the fax machine as `Fax Machine (Department Name)`.</li>
+				<li class="bugfix">The redundant 'The paper is titled XYZ' line from fax descriptions has been removed.</li>
+				<li class="admin">send-fax now includes the same list of pre-made origin departments as the emag+multitool options for consistency and further reduction of potential metagame.</li>
+				<li class="bugfix">Fax machines and send-fax no longer have a perceived delay in processing when sending faxes.</li>
+				<li class="tweak">Fax machines no longer lock themselves whenever sending a fax to off-ship places, i.e. Expeditionary Command.</li>
+			</ul>
+			<h3 class="author">Textor updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Binoculars now cancel zoom correctly when you move, drop them, put them in a bag, or have them stolen by a parrot.</li>
+			</ul>
+
 			<h2 class="date">29 April 2022</h2>
 			<h3 class="author">Jux updated:</h3>
 			<ul class="changes bgimages16">
