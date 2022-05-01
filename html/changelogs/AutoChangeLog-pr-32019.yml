@@ -1,0 +1,4 @@
+author: SomeAngryMiner, Pawn
+delete-after: true
+changes:
+  - rscadd: Resprites the Obstruction Field Disperser and its beam.
