@@ -17,10 +17,13 @@
 	known = FALSE
 
 /obj/effect/overmap/visitable/sector/cluster/generate_skybox()
-	return overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
+	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
+	res.blend_mode = BLEND_OVERLAY
+	return res
 
 /obj/effect/overmap/visitable/sector/cluster/get_skybox_representation()
 	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
+	res.blend_mode = BLEND_OVERLAY
 	res.transform *= 0.5
 	return res
 
@@ -92,6 +95,7 @@
 
 /obj/effect/overmap/visitable/sector/away/get_skybox_representation()
 	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
+	res.blend_mode = BLEND_OVERLAY
 	res.transform *= 0.3
 	return res
 
@@ -159,6 +163,7 @@
 
 /obj/effect/overmap/visitable/sector/orb/get_skybox_representation()
 	var/image/res = overlay_image('icons/skybox/skybox_rock_128.dmi', "bigrock", COLOR_ASTEROID_ROCK, RESET_COLOR)
+	res.blend_mode = BLEND_OVERLAY
 	res.pixel_x = rand(256,512)
 	res.pixel_y = rand(256,512)
 	return res
