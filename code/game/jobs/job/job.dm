@@ -403,6 +403,9 @@
 /datum/job/proc/make_position_available()
 	total_positions++
 
+/datum/job/proc/make_position_unavailable()
+	total_positions = 0
+
 /datum/job/proc/get_roundstart_spawnpoint()
 	var/list/loc_list = list()
 	for(var/obj/effect/landmark/start/sloc in landmarks_list)
