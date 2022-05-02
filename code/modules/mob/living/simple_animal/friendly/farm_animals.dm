@@ -169,6 +169,7 @@
 	response_harm   = "kicks"
 	health = 1
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
+	holder_type = /obj/item/holder/small
 	mob_size = MOB_MINISCULE
 	density = FALSE
 
@@ -213,6 +214,7 @@ var/global/chicken_count = 0
 	response_harm   = "kicks"
 	health = 10
 	pass_flags = PASS_FLAG_TABLE
+	holder_type = /obj/item/holder
 	mob_size = MOB_SMALL
 	density = FALSE
 
