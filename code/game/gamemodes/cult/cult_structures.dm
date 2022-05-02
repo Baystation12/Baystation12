@@ -63,7 +63,7 @@
 	icon_state = "portal"
 	pixel_x = -16
 	pixel_y = -16
-	layer = ABOVE_LIGHTING_LAYER
+	plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	density = TRUE
 	unacidable = TRUE
 	anchored = TRUE
