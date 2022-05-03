@@ -10,9 +10,9 @@
 		verbs -= /obj/item/modular_computer/proc/remove_pen_verb
 
 	if(card_slot)
-		verbs |= /obj/item/weapon/stock_parts/computer/card_slot/proc/verb_eject_id
+		verbs |= /obj/item/stock_parts/computer/card_slot/proc/verb_eject_id
 	else
-		verbs -= /obj/item/weapon/stock_parts/computer/card_slot/proc/verb_eject_id
+		verbs -= /obj/item/stock_parts/computer/card_slot/proc/verb_eject_id
 
 // Forcibly shut down the device. To be used when something bugs out and the UI is nonfunctional.
 /obj/item/modular_computer/verb/emergency_shutdown()
@@ -105,14 +105,17 @@
 
 // On-click handling. Turns on the computer if it's off and opens the GUI.
 /obj/item/modular_computer/attack_self(var/mob/user)
+	if(MUTATION_CLUMSY in user.mutations)
+		to_chat(user, SPAN_WARNING("You can't quite work out how to use [src]."))
+		return
 	if(enabled && screen_on)
 		ui_interact(user)
 	else if(!enabled && screen_on)
 		turn_on(user)
 
-/obj/item/modular_computer/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(istype(W, /obj/item/weapon/card/id)) // ID Card, try to insert it.
-		var/obj/item/weapon/card/id/I = W
+/obj/item/modular_computer/attackby(var/obj/item/W as obj, var/mob/user as mob)
+	if(istype(W, /obj/item/card/id)) // ID Card, try to insert it.
+		var/obj/item/card/id/I = W
 		if(!card_slot)
 			to_chat(user, "You try to insert [I] into [src], but it does not have an ID card slot installed.")
 			return
@@ -120,8 +123,8 @@
 		if(card_slot.insert_id(I, user))
 			update_verbs()
 		return
-		
-	if(istype(W, /obj/item/weapon/pen) && stores_pen)
+
+	if(istype(W, /obj/item/pen) && stores_pen)
 		if(istype(stored_pen))
 			to_chat(user, "<span class='notice'>There is already a pen in [src].</span>")
 			return
@@ -131,15 +134,15 @@
 		update_verbs()
 		to_chat(user, "<span class='notice'>You insert [W] into [src].</span>")
 		return
-	if(istype(W, /obj/item/weapon/paper))
-		var/obj/item/weapon/paper/paper = W
+	if(istype(W, /obj/item/paper))
+		var/obj/item/paper/paper = W
 		if(scanner && paper.info)
 			scanner.do_on_attackby(user, W)
 			return
-	if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/paper_bundle))
+	if(istype(W, /obj/item/paper) || istype(W, /obj/item/paper_bundle))
 		if(nano_printer)
 			nano_printer.attackby(W, user)
-	if(istype(W, /obj/item/weapon/aicard))
+	if(istype(W, /obj/item/aicard))
 		if(!ai_slot)
 			return
 		ai_slot.attackby(W, user)
@@ -147,8 +150,8 @@
 	if(!modifiable)
 		return ..()
 
-	if(istype(W, /obj/item/weapon/stock_parts/computer))
-		var/obj/item/weapon/stock_parts/computer/C = W
+	if(istype(W, /obj/item/stock_parts/computer))
+		var/obj/item/stock_parts/computer/C = W
 		if(C.hardware_size <= max_hardware_size)
 			try_install_component(user, C)
 		else
@@ -163,7 +166,7 @@
 		qdel(src)
 		return
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		if(!WT.isOn())
 			to_chat(user, "\The [W] is off.")
 			return
@@ -173,7 +176,7 @@
 			return
 
 		to_chat(user, "You begin repairing damage to \the [src]...")
-		if(WT.remove_fuel(round(damage/75)) && do_after(usr, damage/10))
+		if(WT.remove_fuel(round(damage/75)) && do_after(usr, damage/10, src, DO_PUBLIC_UNIQUE))
 			damage = 0
 			to_chat(user, "You repair \the [src].")
 		return
@@ -184,7 +187,7 @@
 			to_chat(user, "This device doesn't have any components installed.")
 			return
 		var/list/component_names = list()
-		for(var/obj/item/weapon/stock_parts/computer/H in all_components)
+		for(var/obj/item/stock_parts/computer/H in all_components)
 			component_names.Add(H.name)
 
 		var/choice = input(usr, "Which component do you want to uninstall?", "Computer maintenance", null) as null|anything in component_names
@@ -195,7 +198,7 @@
 		if(!Adjacent(usr))
 			return
 
-		var/obj/item/weapon/stock_parts/computer/H = find_hardware_by_name(choice)
+		var/obj/item/stock_parts/computer/H = find_hardware_by_name(choice)
 
 		if(!H)
 			return
@@ -213,7 +216,7 @@
 		to_chat(user, "The time [stationtime2text()] is displayed in the corner of the screen.")
 
 	if(card_slot && card_slot.stored_card)
-		to_chat(user, "The [card_slot.stored_card] is inserted into it.")
+		to_chat(user, "[card_slot.stored_card] is inserted into it.")
 
 /obj/item/modular_computer/MouseDrop(var/atom/over_object)
 	var/mob/M = usr
@@ -227,10 +230,11 @@
 
 /obj/item/modular_computer/CtrlAltClick(mob/user)
 	if(!CanPhysicallyInteract(user))
-		return
+		return 0
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
 		os.open_terminal(user)
+		return 1
 
 /obj/item/modular_computer/CouldUseTopic(var/mob/user)
 	..()

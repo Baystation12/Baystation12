@@ -95,21 +95,22 @@
 					continue
 				if(used == amount)
 					break
-				if(!do_mob(user, M, W.damage/5))
-					to_chat(user, SPAN_NOTICE("You must stand still to bandage wounds."))
+				if(!do_after(user, W.damage / 5, M, DO_MEDICAL))
 					break
 
 				if (W.current_stage <= W.max_bleeding_stage)
 					user.visible_message(SPAN_NOTICE("\The [user] bandages \a [W.desc] on [M]'s [affecting.name]."), \
 					                              SPAN_NOTICE("You bandage \a [W.desc] on [M]'s [affecting.name]."))
 					//H.add_side_effect("Itch")
-				else if (W.damage_type == BRUISE)
+				else if (W.damage_type == INJURY_TYPE_BRUISE)
 					user.visible_message(SPAN_NOTICE("\The [user] places a bruise patch over \a [W.desc] on [M]'s [affecting.name]."), \
 					                              SPAN_NOTICE("You place a bruise patch over \a [W.desc] on [M]'s [affecting.name].") )
 				else
 					user.visible_message(SPAN_NOTICE("\The [user] places a bandaid over \a [W.desc] on [M]'s [affecting.name]."), \
 					                              SPAN_NOTICE("You place a bandaid over \a [W.desc] on [M]'s [affecting.name].") )
 				W.bandage()
+				if (M.stat == UNCONSCIOUS && prob(25))
+					to_chat(M, SPAN_NOTICE(SPAN_BOLD("... [pick("feels a little better", "hurts a little less")] ...")))
 				playsound(src, pick(apply_sounds), 25)
 				used++
 			affecting.update_damages()
@@ -147,8 +148,7 @@
 			user.visible_message(SPAN_NOTICE("\The [user] starts salving wounds on [M]'s [affecting.name]."), \
 					             SPAN_NOTICE("You start salving the wounds on [M]'s [affecting.name].") )
 			playsound(src, pick(apply_sounds), 25)
-			if(!do_mob(user, M, 10))
-				to_chat(user, SPAN_NOTICE("You must stand still to salve wounds."))
+			if(!do_after(user, 1 SECOND, M, DO_MEDICAL))
 				return 1
 			user.visible_message(SPAN_NOTICE("[user] salved wounds on [M]'s [affecting.name]."), \
 			                         SPAN_NOTICE("You salved wounds on [M]'s [affecting.name].") )
@@ -159,7 +159,7 @@
 /obj/item/stack/medical/advanced/bruise_pack
 	name = "advanced trauma kit"
 	singular_name = "advanced trauma kit"
-	desc = "An advanced trauma kit for severe injuries."
+	desc = "A packet filled antibacterial bio-adhesive, used to quickly seal and disinfect cuts, bruises, and other physical trauma. Can be used to treat both limbs and internal organs."
 	icon_state = "traumakit"
 	heal_brute = 0
 	origin_tech = list(TECH_BIO = 1)
@@ -186,13 +186,12 @@
 					continue
 				if(used == amount)
 					break
-				if(!do_mob(user, M, W.damage/5))
-					to_chat(user, SPAN_NOTICE("You must stand still to bandage wounds."))
+				if(!do_after(user, W.damage / 5, M, DO_MEDICAL))
 					break
 				if (W.current_stage <= W.max_bleeding_stage)
 					user.visible_message(SPAN_NOTICE("\The [user] cleans \a [W.desc] on [M]'s [affecting.name] and seals the edges with bioglue."), \
 					                     SPAN_NOTICE("You clean and seal \a [W.desc] on [M]'s [affecting.name].") )
-				else if (W.damage_type == BRUISE)
+				else if (W.damage_type == INJURY_TYPE_BRUISE)
 					user.visible_message(SPAN_NOTICE("\The [user] places a medical patch over \a [W.desc] on [M]'s [affecting.name]."), \
 					                              SPAN_NOTICE("You place a medical patch over \a [W.desc] on [M]'s [affecting.name].") )
 				else
@@ -203,6 +202,8 @@
 				W.disinfect()
 				W.heal_damage(heal_brute)
 				used++
+				if (M.stat == UNCONSCIOUS && prob(25))
+					to_chat(M, SPAN_NOTICE(SPAN_BOLD("... [pick("feels better", "hurts less")] ...")))
 			affecting.update_damages()
 			if(used == amount)
 				if(affecting.is_bandaged())
@@ -215,7 +216,7 @@
 /obj/item/stack/medical/advanced/ointment
 	name = "advanced burn kit"
 	singular_name = "advanced burn kit"
-	desc = "An advanced treatment kit for severe burns."
+	desc = "A packet containing a delicate membrane used to salve and disinfect burn wounds. Can be used to treat both limbs and internal organs."
 	icon_state = "burnkit"
 	heal_burn = 5
 	origin_tech = list(TECH_BIO = 1)
@@ -238,8 +239,7 @@
 			user.visible_message(SPAN_NOTICE("\The [user] starts salving wounds on [M]'s [affecting.name]."), \
 					             SPAN_NOTICE("You start salving the wounds on [M]'s [affecting.name].") )
 			playsound(src, pick(apply_sounds), 25)
-			if(!do_mob(user, M, 10))
-				to_chat(user, SPAN_NOTICE("You must stand still to salve wounds."))
+			if(!do_after(user, 1 SECOND, M, DO_MEDICAL))
 				return 1
 			user.visible_message( 	SPAN_NOTICE("[user] covers wounds on [M]'s [affecting.name] with regenerative membrane."), \
 									SPAN_NOTICE("You cover wounds on [M]'s [affecting.name] with regenerative membrane.") )
@@ -247,6 +247,8 @@
 			use(1)
 			affecting.salve()
 			affecting.disinfect()
+			if (M.stat == UNCONSCIOUS && prob(25))
+				to_chat(M, SPAN_NOTICE(SPAN_BOLD("... [pick("feels better", "hurts less")] ...")))
 
 /obj/item/stack/medical/splint
 	name = "medical splints"
@@ -286,7 +288,7 @@
 				to_chat(user, SPAN_DANGER("You can't apply a splint to the arm you're using!"))
 				return
 			user.visible_message(SPAN_DANGER("[user] starts to apply \the [src] to their [limb]."), SPAN_DANGER("You start to apply \the [src] to your [limb]."), SPAN_DANGER("You hear something being wrapped."))
-		if(user.do_skilled(5 SECONDS, SKILL_MEDICAL, M))
+		if(user.do_skilled(5 SECONDS, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
 			if((M == user && prob(75)) || prob(user.skill_fail_chance(SKILL_MEDICAL,50, SKILL_ADEPT)))
 				user.visible_message(SPAN_DANGER("\The [user] fumbles [src]."), SPAN_DANGER("You fumble [src]."), SPAN_DANGER("You hear something being wrapped."))
 				return
@@ -312,7 +314,7 @@
 	amount = 1
 	splintable_organs = list(BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG)
 
-// For Kharmaani/adherent.
+// For adherent.
 /obj/item/stack/medical/resin
 	name = "resin patches"
 	singular_name = "resin patch"
@@ -351,7 +353,7 @@
 			SPAN_NOTICE("\The [user] starts patching fractures on \the [M]'s [affecting.name]."), \
 			SPAN_NOTICE("You start patching fractures on \the [M]'s [affecting.name].") )
 		playsound(src, pick(apply_sounds), 25)
-		if(!do_mob(user, M, 10))
+		if(!do_after(user, 1 SECOND, M, DO_MEDICAL))
 			to_chat(user, SPAN_NOTICE("You must stand still to patch fractures."))
 			return 1
 		user.visible_message( \

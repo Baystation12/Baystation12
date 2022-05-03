@@ -9,7 +9,7 @@ var/global/datum/repository/crew/crew_repository = new()
 /datum/repository/crew/New()
 	cache_data = list()
 	cache_data_alert = list()
-	
+
 	var/PriorityQueue/general_modifiers = new/PriorityQueue(/proc/cmp_crew_sensor_modifier)
 	var/PriorityQueue/binary_modifiers = new/PriorityQueue(/proc/cmp_crew_sensor_modifier)
 	var/PriorityQueue/vital_modifiers = new/PriorityQueue(/proc/cmp_crew_sensor_modifier)
@@ -51,7 +51,7 @@ var/global/datum/repository/crew/crew_repository = new()
 	var/tracked = scan()
 	for(var/obj/item/clothing/under/C in tracked)
 		var/turf/pos = get_turf(C)
-		if(C.has_sensor && pos && pos.z == z_level && C.sensor_mode != SUIT_SENSOR_OFF)
+		if(C.has_sensor && C.sensor_mode != SUIT_SENSOR_OFF && pos && AreConnectedZLevels(pos.z, z_level))
 			if(istype(C.loc, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = C.loc
 				if(H.w_uniform != C)

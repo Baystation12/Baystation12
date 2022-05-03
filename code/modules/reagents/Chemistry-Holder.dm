@@ -5,6 +5,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	var/total_volume = 0
 	var/maximum_volume = 120
 	var/atom/my_atom = null
+	var/del_info
 
 /datum/reagents/New(var/maximum_volume = 120, var/atom/my_atom)
 	if(!istype(my_atom))
@@ -15,6 +16,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 /datum/reagents/Destroy()
 	. = ..()
+	del_info = "[my_atom]([reagent_list?.len||"_"]):[my_atom?.x||"_"],[my_atom?.y||"_"],[my_atom?.z||"_"]"
 	UNQUEUE_REACTIONS(src) // While marking for reactions should be avoided just before deleting if possible, the async nature means it might be impossible.
 	QDEL_NULL_LIST(reagent_list)
 	my_atom = null
@@ -109,12 +111,12 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 			if(my_atom)
 				if(replace_message)
-					my_atom.visible_message("<span class='notice'>\icon[my_atom] [replace_message]</span>")
+					my_atom.visible_message("<span class='notice'>[icon2html(my_atom, viewers(get_turf(my_atom)))] [replace_message]</span>")
 				if(replace_sound)
 					playsound(my_atom, replace_sound, 80, 1)
 
 		else // Otherwise, collect all possible reactions.
-			eligible_reactions |= SSchemistry.chemical_reactions_by_id[R.type]
+			eligible_reactions |= SSchemistry.reactions_by_id[R.type]
 
 	var/list/active_reactions = list()
 
@@ -254,11 +256,20 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 			return current
 	return
 
-/datum/reagents/proc/get_reagent_amount(var/reagent_type)
-	for(var/datum/reagent/current in reagent_list)
+/datum/reagents/proc/get_reagent_amount(reagent_type, allow_subtypes)
+	for (var/datum/reagent/current in reagent_list)
 		if(current.type == reagent_type)
 			return current.volume
 	return 0
+
+
+/datum/reagents/proc/get_reagent_amount_list(reagent_type)
+	var/list/result = list()
+	for (var/datum/reagent/reagent as anything in reagent_list)
+		if (istype(reagent, reagent_type))
+			result[reagent.type] = reagent.volume
+	return result
+
 
 /datum/reagents/proc/get_data(var/reagent_type)
 	for(var/datum/reagent/current in reagent_list)
@@ -472,6 +483,12 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		return
 
 	return trans_to_holder(target.reagents, amount, multiplier, copy)
+
+/datum/reagents/proc/should_admin_log()
+	for (var/datum/reagent/R in reagent_list)
+		if (R.should_admin_log)
+			return TRUE
+	return FALSE
 
 /* Atom reagent creation - use it all the time */
 

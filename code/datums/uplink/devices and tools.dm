@@ -4,23 +4,29 @@
 /datum/uplink_item/item/tools
 	category = /datum/uplink_category/tools
 
+/datum/uplink_item/item/tools/personal_shield
+	name = "Personal Shield"
+	desc = "A very expensive device that uses energy to block bullets and lasers from tearing you a new hole."
+	item_cost = 60
+	path = /obj/item/device/personal_shield
+
 /datum/uplink_item/item/tools/toolbox
 	name = "Fully Loaded Toolbox"
 	desc = "A hefty toolbox filled with all the equipment you need to get past any construction or electrical issues. \
 	Instructions and materials not included."
 	item_cost = 8
-	path = /obj/item/weapon/storage/toolbox/syndicate
+	path = /obj/item/storage/toolbox/syndicate
 
 /datum/uplink_item/item/tools/ductape
 	name = "Duct Tape"
-	desc = "A roll of duct tape. changes \"HELP\" into sexy \"mmm\"."
+	desc = "A roll of duct tape."
 	item_cost = 2
-	path = /obj/item/weapon/tape_roll
+	path = /obj/item/tape_roll
 
 /datum/uplink_item/item/tools/money
 	name = "Operations Funding"
 	item_cost = 8
-	path = /obj/item/weapon/storage/secure/briefcase/money
+	path = /obj/item/storage/secure/briefcase/money
 /datum/uplink_item/item/tools/money/New()
 	. = ..()
 	desc = "A briefcase with 10,000 untraceable [GLOB.using_map.local_currency_name]. Makes a great bribe if they're willing to take you up on your offer."
@@ -29,20 +35,20 @@
 	name = "Morphic Clerical Kit"
 	desc = "Comes with everything you need to fake paperwork, assuming you know how to forge the required documents."
 	item_cost = 16
-	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/clerical
+	path = /obj/item/storage/backpack/satchel/syndie_kit/clerical
 
 /datum/uplink_item/item/tools/plastique
 	name = "C-4"
 	desc = "Set this on a wall to put a hole exactly where you need it."
 	item_cost = 16
-	path = /obj/item/weapon/plastique
+	path = /obj/item/plastique
 
 /datum/uplink_item/item/tools/heavy_armor
 	name = "Heavy Armor Vest and Helmet"
 	desc = "This satchel holds a combat helmet and fully equipped plate carrier. \
 	Suit up, and strap in, things are about to get hectic."
 	item_cost = 16
-	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/armor
+	path = /obj/item/storage/backpack/satchel/syndie_kit/armor
 
 /datum/uplink_item/item/tools/encryptionkey_radio
 	name = "Encrypted Radio Channel Key"
@@ -54,7 +60,7 @@
 	name = "Handheld Shield Diffuser"
 	desc = "A small device used to disrupt energy barriers, and allow passage through them."
 	item_cost = 16
-	path = /obj/item/weapon/shield_diffuser
+	path = /obj/item/shield_diffuser
 
 /datum/uplink_item/item/tools/suit_sensor_mobile
 	name = "Suit Sensor Jamming Device"
@@ -79,7 +85,7 @@
 			even if you aren't normally able to, but will destroy them in the proccess. This card can have its appearance changed \
 			to look less conspicuous."
 	item_cost = 24
-	path = /obj/item/weapon/card/emag
+	path = /obj/item/card/emag
 
 /datum/uplink_item/item/tools/hacking_tool
 	name = "Door Hacking Tool"
@@ -94,13 +100,20 @@
 	desc = "A satchel containing a non-regulation voidsuit, voidsuit helmet, tactical mask, and oxygen tank. \
 	Conceal your identity, while also not dying in space."
 	item_cost = 28
-	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/space
+	path = /obj/item/storage/backpack/satchel/syndie_kit/space
+
+/datum/uplink_item/item/tools/divinghelmet
+	name = "Diving Helmet"
+	desc = "An antique diver's helmet that was designed to withstand immense pressures. Works as a space helmet. Only fits humans."
+	item_cost = 12
+	path = /obj/item/clothing/head/helmet/divinghelmet
 
 /datum/uplink_item/item/tools/thermal
 	name = "Thermal Imaging Glasses"
 	desc = "A pair of meson goggles that have been modified to instead show synthetics or living creatures, through thermal imaging."
 	item_cost = 24
 	path = /obj/item/clothing/glasses/thermal/syndi
+	antag_roles = list(MODE_TRAITOR)
 
 /datum/uplink_item/item/tools/flashdark
 	name = "Flashdark"
@@ -116,23 +129,12 @@
 	item_cost = 40
 	path = /obj/item/device/powersink
 
-/datum/uplink_item/item/tools/teleporter
-	name = "Teleporter Circuit Board"
-	desc = "A circuit board that can be used to create a teleporter console, able to lock onto detected \
-	teleportation beacons. Requires a projector and teleporter hub nearby to work."
-	item_cost = 40
-	path = /obj/item/weapon/stock_parts/circuitboard/teleporter
-
-/datum/uplink_item/item/tools/teleporter/New()
-	..()
-	antag_roles = list(MODE_MERCENARY)
-
 /datum/uplink_item/item/tools/ai_module
 	name = "Hacked AI Upload Module"
 	desc = "A module that can be used anonymously add a singular, top level law to an active AI. \
 	All you need to do is write in the law and insert it into any available AI Upload Console."
 	item_cost = 52
-	path = /obj/item/weapon/aiModule/syndicate
+	path = /obj/item/aiModule/syndicate
 
 /datum/uplink_item/item/tools/supply_beacon
 	name = "Hacked Supply Beacon (DANGER!)"
@@ -165,7 +167,7 @@
 /datum/uplink_item/item/tools/polychromic_dye_bottle
 	name = "Extra-Strength Polychromic Dye"
 	item_cost = 10
-	path = /obj/item/weapon/reagent_containers/glass/bottle/dye/polychromic/strong
+	path = /obj/item/reagent_containers/glass/bottle/dye/polychromic/strong
 	desc = "15 units of a tasteless dye that causes chemical mixtures to take on the color of the dye itself. \
 			Very useful for disguising poisons to the untrained eye; even large amounts of reagents can be fully recolored with only a few drops of dye. \
 			Like the mundane variety of polychromic dye, you can use the bottle in your hand to change the dye's color to suit your needs."

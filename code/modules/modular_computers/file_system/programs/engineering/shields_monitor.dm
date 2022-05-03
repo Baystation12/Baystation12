@@ -1,13 +1,13 @@
 /datum/computer_file/program/shields_monitor
 	filename = "shieldsmonitor"
 	filedesc = "Shield Generators Monitoring"
-	nanomodule_path = /datum/nano_module/shields_monitor/
+	nanomodule_path = /datum/nano_module/shields_monitor
 	program_icon_state = "shield"
 	program_key_state = "generic_key"
 	program_menu_icon = "radio-on"
 	extended_desc = "This program connects to shield generators and monitors their statuses."
 	ui_header = "shield.gif"
-	requires_ntnet = 1
+	requires_ntnet = TRUE
 	network_destination = "shields monitoring system"
 	size = 10
 	category = PROG_ENG

@@ -28,8 +28,8 @@
 
 /obj/structure/closet/wizard/scrying/New()
 	..()
-	new /obj/item/weapon/scrying(src)
-	new /obj/item/weapon/contract/wizard/xray(src)
+	new /obj/item/scrying(src)
+	new /obj/item/contract/wizard/xray(src)
 
 /obj/structure/closet/wizard/souls
 	name = "Soul Shard Belt"
@@ -37,5 +37,5 @@
 
 /obj/structure/closet/wizard/souls/New()
 	..()
-	new /obj/item/weapon/contract/boon/wizard/artificer(src)
-	new /obj/item/weapon/storage/belt/soulstone/full(src)
+	new /obj/item/contract/boon/wizard/artificer(src)
+	new /obj/item/storage/belt/soulstone/full(src)

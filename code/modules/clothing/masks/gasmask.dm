@@ -39,7 +39,7 @@
 /obj/item/clothing/mask/gas/attack_self(var/mob/user)
 	if(clogged)
 		user.visible_message("<span class='notice'>\The [user] begins unclogging the intakes of \the [src].</span>")
-		if(do_after(user, 100, progress = 1) && clogged)
+		if(do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE) && clogged)
 			user.visible_message("<span class='notice'>\The [user] has unclogged \the [src].</span>")
 			clogged = FALSE
 		return
@@ -66,6 +66,11 @@
 	siemens_coefficient = 0.7
 	body_parts_covered = FACE
 	w_class = ITEM_SIZE_SMALL
+	down_gas_transfer_coefficient = 1
+	down_body_parts_covered = null
+	down_item_flags = null
+	down_icon_state = "halfgasdown"
+	pull_mask = TRUE
 	armor = list(
 		melee = ARMOR_MELEE_SMALL,
 		bullet = ARMOR_BALLISTIC_MINOR,
@@ -191,7 +196,7 @@
 
 /obj/item/clothing/mask/gas/vox
 	name = "vox breathing mask"
-	desc = "A small oxygen filter for use by Vox"
+	desc = "A small oxygen filter for use by Vox."
 	icon_state = "respirator"
 	item_state = "respirator"
 	flags_inv = 0

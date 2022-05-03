@@ -1,6 +1,7 @@
 /obj/item/device/scanner/spectrometer
 	name = "mass spectrometer"
 	desc = "A hand-held mass spectrometer which identifies trace chemicals in a blood sample or analyzes unusual chemicals."
+	icon = 'icons/obj/spectrometer.dmi'
 	icon_state = "spectrometer"
 	item_state = "analyzer"
 
@@ -26,7 +27,7 @@
 /obj/item/device/scanner/spectrometer/is_valid_scan_target(atom/O)
 	if(!O.reagents || !O.reagents.total_volume)
 		return FALSE
-	return (O.atom_flags & ATOM_FLAG_OPEN_CONTAINER) || istype(O, /obj/item/weapon/reagent_containers/syringe)
+	return (O.atom_flags & ATOM_FLAG_OPEN_CONTAINER) || istype(O, /obj/item/reagent_containers/syringe)
 
 /obj/item/device/scanner/spectrometer/scan(atom/A, mob/user)
 	if(A != src)
@@ -56,7 +57,7 @@
 			var/datum/reagent/random/random = R
 			if(istype(random))
 				return random.get_scan_data(user)
-				
+
 		if(R.type != /datum/reagent/blood)
 			return "<span class='warning'>The sample was contaminated! Please insert another sample</span>"
 		else
@@ -81,6 +82,7 @@
 
 /obj/item/device/scanner/spectrometer/adv
 	name = "advanced mass spectrometer"
+	icon = 'icons/obj/spectrometer_advanced.dmi'
 	icon_state = "adv_spectrometer"
 	details = 1
 	origin_tech = list(TECH_MAGNET = 4, TECH_BIO = 2)

@@ -1,4 +1,4 @@
-datum/preferences
+/datum/preferences
 	var/gender = MALE					//gender of character (well duh)
 	var/age = 30						//age of character
 	var/spawnpoint = "Default" 			//where this character will spawn (0-2).
@@ -10,21 +10,21 @@ datum/preferences
 	name = "Basic"
 	sort_order = 1
 
-/datum/category_item/player_setup_item/physical/basic/load_character(var/savefile/S)
-	from_file(S["gender"],                pref.gender)
-	from_file(S["age"],                   pref.age)
-	from_file(S["spawnpoint"],            pref.spawnpoint)
-	from_file(S["OOC_Notes"],             pref.metadata)
-	from_file(S["real_name"],             pref.real_name)
-	from_file(S["name_is_always_random"], pref.be_random_name)
+/datum/category_item/player_setup_item/physical/basic/load_character(datum/pref_record_reader/R)
+	pref.gender = R.read("gender")
+	pref.age = R.read("age")
+	pref.spawnpoint = R.read("spawnpoint")
+	pref.metadata = R.read("OOC_Notes")
+	pref.real_name = R.read("real_name")
+	pref.be_random_name = R.read("name_is_always_random")
 
-/datum/category_item/player_setup_item/physical/basic/save_character(var/savefile/S)
-	to_file(S["gender"],                  pref.gender)
-	to_file(S["age"],                     pref.age)
-	to_file(S["spawnpoint"],              pref.spawnpoint)
-	to_file(S["OOC_Notes"],               pref.metadata)
-	to_file(S["real_name"],               pref.real_name)
-	to_file(S["name_is_always_random"],   pref.be_random_name)
+/datum/category_item/player_setup_item/physical/basic/save_character(datum/pref_record_writer/W)
+	W.write("gender", pref.gender)
+	W.write("age", pref.age)
+	W.write("spawnpoint", pref.spawnpoint)
+	W.write("OOC_Notes", pref.metadata)
+	W.write("real_name", pref.real_name)
+	W.write("name_is_always_random", pref.be_random_name)
 
 /datum/category_item/player_setup_item/physical/basic/sanitize_character()
 	var/datum/species/S = all_species[pref.species ? pref.species : SPECIES_HUMAN]
@@ -52,8 +52,6 @@ datum/preferences
 	. += "<b>Gender:</b> <a href='?src=\ref[src];gender=1'><b>[gender2text(pref.gender)]</b></a><br>"
 	. += "<b>Age:</b> <a href='?src=\ref[src];age=1'>[pref.age]</a><br>"
 	. += "<b>Spawn Point</b>: <a href='?src=\ref[src];spawnpoint=1'>[pref.spawnpoint]</a>"
-	if(config.allow_Metadata)
-		. += "<br><b>OOC Notes:</b> <a href='?src=\ref[src];metadata=1'> Edit </a>"
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/physical/basic/OnTopic(var/href,var/list/href_list, var/mob/user)
@@ -104,11 +102,5 @@ datum/preferences
 		if(!choice || !spawntypes()[choice] || !CanUseTopic(user))	return TOPIC_NOACTION
 		pref.spawnpoint = choice
 		return TOPIC_REFRESH
-
-	else if(href_list["metadata"])
-		var/new_metadata = sanitize(input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , pref.metadata) as message|null)
-		if(new_metadata && CanUseTopic(user))
-			pref.metadata = new_metadata
-			return TOPIC_REFRESH
 
 	return ..()

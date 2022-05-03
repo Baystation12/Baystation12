@@ -38,7 +38,7 @@
 			playsound(loc, 'sound/effects/plunger.ogg', 75, 1)
 			sleep(5)
 			playsound(loc, 'sound/effects/plunger.ogg', 75, 1)
-		if(do_after(user, 45, src) && clogged > 0)
+		if(do_after(user, 4.5 SECONDS, src, DO_PUBLIC_UNIQUE) && clogged > 0)
 			visible_message("<span class='notice'>With a loud gurgle, \the [src] begins flowing more freely.</span>")
 			playsound(loc, pick(SSfluids.gurgles), 100, 1)
 			clogged--
@@ -83,7 +83,7 @@
 	if(fluid_here <= 0)
 		return
 
-	T.remove_fluid(ceil(fluid_here*drainage))
+	T.remove_fluid(Ceil(fluid_here*drainage))
 	T.show_bubbles()
 	if(world.time > last_gurgle + 80)
 		last_gurgle = world.time
@@ -94,8 +94,8 @@
 	desc = "The HT-451, a torque rotation-based, waste disposal unit for small matter. This one seems remarkably clean."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "toilet00"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	var/open = 0			//if the lid is up
 	var/cistern = 0			//if the cistern bit is open
 	var/w_items = 0			//the combined w_class of all the items in the cistern
@@ -136,7 +136,7 @@
 	if(isCrowbar(I))
 		to_chat(user, "<span class='notice'>You start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"].</span>")
 		playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
-		if(do_after(user, 30, src))
+		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			user.visible_message("<span class='notice'>[user] [cistern ? "replaces the lid on the cistern" : "lifts the lid off the cistern"]!</span>", "<span class='notice'>You [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"]!</span>", "You hear grinding porcelain.")
 			cistern = !cistern
 			update_icon()
@@ -153,7 +153,7 @@
 			if(open && !swirlie)
 				user.visible_message("<span class='danger'>\The [user] starts jamming \the [GM]'s face into \the [src]!</span>")
 				swirlie = GM
-				if(do_after(user, 30, src))
+				if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 					user.visible_message("<span class='danger'>\The [user] gives [GM.name] a swirlie!</span>")
 					GM.adjustOxyLoss(5)
 				swirlie = null
@@ -181,8 +181,8 @@
 	desc = "The HU-452, an experimental urinal."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "urinal"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 
 /obj/structure/hygiene/urinal/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/grab))
@@ -201,8 +201,8 @@
 	desc = "The HS-451. Installed in the 2200s by the Hygiene Division."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "shower"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	clogged = -1
 	can_drain = 1
 	drainage = 0.2 			//showers are tiny, drain a little slower
@@ -225,7 +225,7 @@
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "mist"
 	layer = MOB_LAYER + 1
-	anchored = 1
+	anchored = TRUE
 	mouse_opacity = 0
 
 /obj/structure/hygiene/shower/attack_hand(var/mob/M)
@@ -247,7 +247,7 @@
 		var/newtemp = input(user, "What setting would you like to set the temperature valve to?", "Water Temperature Valve") in temperature_settings
 		to_chat(user,"<span class='notice'>You begin to adjust the temperature valve with \the [I].</span>")
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		if(do_after(user, 50, src))
+		if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
 			watertemp = newtemp
 			user.visible_message("<span class='notice'>\The [user] adjusts \the [src] with \the [I].</span>", "<span class='notice'>You adjust the shower with \the [I].</span>")
 			add_fingerprint(user)
@@ -320,7 +320,7 @@
 	if(!on || !istype(M)) return
 
 	var/water_temperature = temperature_settings[watertemp]
-	var/temp_adj = between(BODYTEMP_COOLING_MAX, water_temperature - M.bodytemperature, BODYTEMP_HEATING_MAX)
+	var/temp_adj = clamp(water_temperature - M.bodytemperature, BODYTEMP_COOLING_MAX, BODYTEMP_HEATING_MAX)
 	M.bodytemperature += temp_adj
 
 	if(ishuman(M))
@@ -330,7 +330,7 @@
 		else if(water_temperature <= H.species.cold_level_1)
 			to_chat(H, "<span class='warning'>The water is freezing cold!</span>")
 
-/obj/item/weapon/bikehorn/rubberducky
+/obj/item/bikehorn/rubberducky
 	name = "rubber ducky"
 	desc = "Rubber ducky you're so fine, you make bathtime lots of fuuun. Rubber ducky I'm awfully fooooond of yooooouuuu~"	//thanks doohl
 	icon = 'icons/obj/watercloset.dmi'
@@ -342,7 +342,7 @@
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "sink"
 	desc = "A sink used for washing one's hands and face."
-	anchored = 1
+	anchored = TRUE
 	var/busy = 0 	//Something's being washed at the moment
 
 /obj/structure/hygiene/sink/MouseDrop_T(var/obj/item/thing, var/mob/user)
@@ -383,7 +383,7 @@
 	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
 
 	busy = 1
-	if(!do_after(user, 40, src))
+	if(!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 		busy = 0
 		return TRUE
 	busy = 0
@@ -403,15 +403,15 @@
 		to_chat(user, "<span class='warning'>Someone's already washing here.</span>")
 		return
 
-	var/obj/item/weapon/reagent_containers/RG = O
+	var/obj/item/reagent_containers/RG = O
 	if (istype(RG) && RG.is_open_container() && RG.reagents)
 		RG.reagents.add_reagent(/datum/reagent/water, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
 		user.visible_message("<span class='notice'>[user] fills \the [RG] using \the [src].</span>","<span class='notice'>You fill \the [RG] using \the [src].</span>")
 		playsound(loc, 'sound/effects/sink.ogg', 75, 1)
 		return 1
 
-	else if (istype(O, /obj/item/weapon/melee/baton))
-		var/obj/item/weapon/melee/baton/B = O
+	else if (istype(O, /obj/item/melee/baton))
+		var/obj/item/melee/baton/B = O
 		if(B.bcell)
 			if(B.bcell.charge > 0 && B.status == 1)
 				flick("baton_active", src)
@@ -427,7 +427,7 @@
 					"<span class='danger'>[user] was stunned by \his wet [O]!</span>", \
 					"<span class='userdanger'>[user] was stunned by \his wet [O]!</span>")
 				return 1
-	else if(istype(O, /obj/item/weapon/mop))
+	else if(istype(O, /obj/item/mop))
 		O.reagents.add_reagent(/datum/reagent/water, 5)
 		to_chat(user, "<span class='notice'>You wet \the [O] in \the [src].</span>")
 		playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
@@ -443,12 +443,12 @@
 	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
 
 	busy = 1
-	if(!do_after(user, 40, src))
+	if(!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 		busy = 0
 		return TRUE
 	busy = 0
 
-	if(istype(O, /obj/item/weapon/extinguisher/)) return TRUE // We're washing, not filling.
+	if(istype(O, /obj/item/extinguisher)) return TRUE // We're washing, not filling.
 
 	O.clean_blood()
 	user.visible_message( \
@@ -487,8 +487,7 @@
 	if (clogged)
 		to_chat(user, SPAN_WARNING("\The [src] is already clogged."))
 		return
-	if (!do_after(user, 3 SECONDS, src))
-		to_chat(user, SPAN_WARNING("You must stay still to clog \the [src]."))
+	if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 		return
 	if (clogged || QDELETED(I) || !user.unEquip(I))
 		return
@@ -522,15 +521,103 @@
 		return
 	if(sheets > 0)
 		visible_message("\The [usr] tears a sheet from \the [src].", "You tear a sheet from \the [src].")
-		var/obj/item/weapon/paper/crumpled/bog/C =  new(loc)
+		var/obj/item/paper/crumpled/bog/C =  new(loc)
 		usr.put_in_hands(C)
 		sheets--
 	if (sheets < 1)
 		to_chat(usr, "\The [src] is depleted.")
 		qdel(src)
 
-/obj/item/weapon/paper/crumpled/bog
+/obj/item/paper/crumpled/bog
 	name = "sheet of toilet paper"
 	desc = "A single sheet of toilet paper. Two ply."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "bogroll_sheet"
+
+/obj/structure/hygiene/faucet
+	name = "faucet"
+	icon = 'icons/obj/watercloset.dmi'
+	icon_state = "faucet"
+	desc = "An outlet for liquids. Water you waiting for?"
+	anchored = TRUE
+	drainage = 0
+	clogged = -1
+	var/fill_level = 500
+	var/open = FALSE
+
+/obj/structure/hygiene/faucet/attackby(obj/item/thing, mob/user)
+	if (isWrench(thing))
+		new /obj/item/faucet (loc)
+		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+		user.visible_message(
+			SPAN_WARNING("\The [user] unwrenches the \the [src]."),
+			SPAN_WARNING("You unwrench \the [src].")
+		)
+		qdel(src)
+		return TRUE
+	return ..()
+
+/obj/structure/hygiene/faucet/attack_hand(mob/user)
+	. = ..()
+	open = !open
+	if(open)
+		playsound(src.loc, 'sound/effects/closet_open.ogg', 20, 1)
+	else
+		playsound(src.loc, 'sound/effects/closet_close.ogg', 20, 1)
+
+	user.visible_message(SPAN_NOTICE("\The [user] has [open ? "opened" : "closed"] the faucet."))
+	update_icon()
+
+/obj/structure/hygiene/faucet/on_update_icon()
+	. = ..()
+	icon_state = icon_state = "[initial(icon_state)][open ? "-on" : ""]"
+
+/obj/item/faucet
+	name = "faucet"
+	desc = "An outlet for liquids. Water you waiting for?"
+	icon = 'icons/obj/watercloset.dmi'
+	icon_state = "faucet-item"
+	obj_flags = OBJ_FLAG_ROTATABLE
+	var/constructed_type = /obj/structure/hygiene/faucet
+
+/obj/item/faucet/attackby(obj/item/thing, mob/user)
+	if(isWrench(thing))
+		var/turf/simulated/floor/F = loc
+		if (istype(F) && istype(F.flooring, /decl/flooring/pool))
+			var/obj/O = new constructed_type (loc)
+			O.dir = dir
+			playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+			user.visible_message(
+				SPAN_WARNING("\The [user] wrenches the \the [src] down."),
+				SPAN_WARNING("You wrench \the [src] down.")
+			)
+			qdel(src)
+			return
+		else
+			to_chat(user, SPAN_WARNING("\The [src] can only be secured to pool tiles!"))
+	return ..()
+
+/obj/structure/hygiene/faucet/proc/water_flow()
+	if(!isturf(src.loc))
+		return
+
+	// Check for depth first, and pass if the water's too high. I know players will find a way to just submerge entire ship if I do not.
+	var/turf/T = get_turf(src)
+
+	if(!T || T.get_fluid_depth() > fill_level)
+		return
+
+	if(world.time > next_gurgle)
+		next_gurgle = world.time + 80
+		playsound(T, pick(SSfluids.gurgles), 50, 1)
+
+	T.add_fluid(min(75, fill_level - T.get_fluid_depth()), /datum/reagent/water)
+
+/obj/structure/hygiene/faucet/Process()
+	..()
+	if(open)
+		water_flow()
+
+/obj/structure/hygiene/faucet/examine(mob/user)
+	. = ..()
+	to_chat(user, "It is turned [open ? "on" : "off"]")

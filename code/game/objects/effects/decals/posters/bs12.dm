@@ -29,11 +29,6 @@
 	name = "Technological Singularity"
 	desc = "This particular one is of the blood-curdling symbol of a long-since defeated enemy of humanity."
 
-/decl/poster/bay_7
-	icon_state="bsposter7"
-	name = "Wasteland"
-	desc = "This particular one is of a couple of ragged gunmen, one male and one female, on top of a mound of rubble. The number \"12\" is visible on their blue jumpsuits."
-
 /decl/poster/bay_8
 	icon_state="bsposter8"
 	name = "Pinup Girl Cindy"
@@ -288,3 +283,13 @@
 	icon_state="bsposter59"
 	name = "poster - Miss Science 2299"
 	desc = "A large piece of space-resistant printed paper. This pin-up poster depicts a woman wearing a corporate labcoat, a bikini, and a sheepish grin. She's shyly posing atop some highly specialized research equipment."
+
+/decl/poster/nabber
+	icon_state="poster_nabber"
+	name = "serpentid information poster"
+	desc = "This worn poster produced by Xynergy tells the dangers of close encounters with serpentids, and warns to not go near them."
+
+/decl/poster/fleet
+	icon_state="poster_fleet"
+	name = "SCGF recruitment poster"
+	desc = "A poster produced by the SCGF. It depicts a tactical-looking Fourth Fleet petty officer, standing in front of the SCG flag proudly."

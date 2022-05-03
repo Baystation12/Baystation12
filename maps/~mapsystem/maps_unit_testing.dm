@@ -27,8 +27,6 @@
 		/area/hallway,
 		/area/maintenance,
 		/area/medical,
-		/area/medical/virology,
-		/area/medical/virologyaccess,
 		/area/overmap,
 		/area/rnd,
 		/area/rnd/xenobiology,
@@ -53,7 +51,10 @@
 
 	var/list/area_usage_test_exempted_root_areas = list(
 		/area/map_template,
-		/area/exoplanet
+		/area/exoplanet,
+		/area/ship
 	)
 
 	var/list/area_purity_test_exempt_areas = list()
+
+/area/ship

@@ -1,6 +1,6 @@
 //all about moving around and mobility and being an annoying shit.
 
-/obj/item/weapon/spellbook/spatial
+/obj/item/spellbook/spatial
 	spellbook_type = /datum/spellbook/spatial
 
 /datum/spellbook/spatial
@@ -27,13 +27,13 @@
 				/spell/aoe_turf/smoke = 						1,
 				/spell/aoe_turf/conjure/summon/bats = 			3,
 				/spell/noclothes = 								1,
-				/obj/item/weapon/dice/d20/cursed = 				1,
+				/obj/item/dice/d20/cursed = 				1,
 				/obj/structure/closet/wizard/scrying = 			2,
-				/obj/item/weapon/teleportation_scroll = 		1,
-				/obj/item/weapon/magic_rock = 					1,
-				/obj/item/weapon/summoning_stone = 				3,
-				/obj/item/weapon/contract/wizard/telepathy = 	1,
-				/obj/item/weapon/contract/apprentice = 			1
+				/obj/item/teleportation_scroll = 		1,
+				/obj/item/magic_rock = 					1,
+				/obj/item/summoning_stone = 				3,
+				/obj/item/contract/wizard/telepathy = 	1,
+				/obj/item/contract/apprentice = 			1
 				)
 
 	sacrifice_reagents = list(/datum/reagent/hyperzine)

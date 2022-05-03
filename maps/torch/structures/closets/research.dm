@@ -27,31 +27,28 @@
 
 /obj/structure/closet/secure_closet/RD_torch/WillContain()
 	return list(
-		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/clothing/suit/storage/toggle/labcoat/science/ec,
 		/obj/item/clothing/suit/storage/toggle/labcoat/rd/ec,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/clothing/glasses/science,
 		/obj/item/device/radio/headset/heads/torchntdirector,
 		/obj/item/device/radio/headset/heads/torchntdirector/alt,
-		/obj/item/weapon/tank/emergency/oxygen/engi,
+		/obj/item/tank/oxygen_emergency_extended,
 		/obj/item/clothing/mask/gas,
 		/obj/item/device/flash,
-		/obj/item/weapon/gun/energy/confuseray,
+		/obj/item/gun/energy/confuseray,
 		/obj/item/device/megaphone,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape/random = 3,
 		/obj/item/device/camera,
-		/obj/item/weapon/material/clipboard/steel,
+		/obj/item/material/clipboard/steel,
 		/obj/item/taperoll/research,
 		/obj/item/clothing/glasses/welding/superior,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
-		/obj/item/weapon/storage/box/secret_project_disks/science,
-		/obj/item/weapon/storage/belt/general,
+		/obj/item/storage/box/secret_project_disks/science,
+		/obj/item/storage/belt/general,
 		/obj/item/device/holowarrant,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/toxins, /obj/item/weapon/storage/backpack/satchel/tox)),
-		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger/tox, 50)
+		/obj/item/storage/backpack/dufflebag
 	)
 
 /obj/structure/closet/secure_closet/secure_closet/xenoarchaeologist_torch
@@ -63,13 +60,10 @@
 	return list(
 		/obj/item/clothing/under/rank/scientist,
 		/obj/item/clothing/suit/storage/toggle/labcoat/science/ec,
-		/obj/item/clothing/suit/storage/toggle/labcoat/science,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/clothing/shoes/white,
 		/obj/item/device/radio/headset/torchnanotrasen,
 		/obj/item/clothing/mask/gas,
-		/obj/item/weapon/material/clipboard,
-		/obj/item/weapon/folder,
+		/obj/item/material/clipboard,
+		/obj/item/folder,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape/random = 3,
 		/obj/item/device/camera,
@@ -80,8 +74,7 @@
 		/obj/item/clothing/glasses/meson,
 		/obj/item/device/radio,
 		/obj/item/device/flashlight/lantern,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/toxins, /obj/item/weapon/storage/backpack/satchel/tox)),
-		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/dufflebag, 50)
+		/obj/item/storage/backpack/dufflebag
 	)
 
 /obj/structure/closet/secure_closet/scientist_torch
@@ -93,13 +86,12 @@
 	return list(
 		/obj/item/clothing/under/rank/scientist,
 		/obj/item/clothing/suit/storage/toggle/labcoat/science,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/clothing/shoes/white,
+		/obj/item/clothing/suit/storage/toggle/labcoat/science/ec,
 		/obj/item/device/radio/headset/torchnanotrasen,
 		/obj/item/clothing/mask/gas/half,
-		/obj/item/weapon/tank/emergency/oxygen/engi,
-		/obj/item/weapon/material/clipboard,
-		/obj/item/weapon/folder,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/material/clipboard,
+		/obj/item/folder,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape/random = 3,
 		/obj/item/device/camera,
@@ -107,9 +99,8 @@
 		/obj/item/taperoll/research,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/clothing/glasses/science,
-		/obj/item/weapon/storage/belt/general,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/toxins, /obj/item/weapon/storage/backpack/satchel/tox)),
-		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger/tox, 50)
+		/obj/item/storage/belt/general,
+		/obj/item/storage/backpack/dufflebag
 	)
 
 /obj/structure/closet/secure_closet/guard
@@ -127,15 +118,15 @@
 		/obj/item/clothing/accessory/armband/whitered,
 		/obj/item/device/radio/headset/torchnanotrasen,
 		/obj/item/clothing/mask/gas/half,
-		/obj/item/weapon/material/clipboard,
-		/obj/item/weapon/folder,
+		/obj/item/material/clipboard,
+		/obj/item/folder,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape/random = 3,
-		/obj/item/weapon/storage/belt/holster/security,
+		/obj/item/storage/belt/holster/security,
 		/obj/item/device/flash,
-		/obj/item/weapon/reagent_containers/spray/pepper,
-		/obj/item/weapon/melee/baton/loaded,
-		/obj/item/weapon/handcuffs = 2,
+		/obj/item/reagent_containers/spray/pepper,
+		/obj/item/melee/baton/loaded,
+		/obj/item/handcuffs = 2,
 		/obj/item/device/flashlight/maglight,
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/clothing/glasses/tacgoggles,
@@ -145,10 +136,10 @@
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/clothing/accessory/badge/holo/NT,
 		/obj/item/device/megaphone,
-		/obj/item/weapon/gun/energy/stunrevolver/secure/nanotrasen,
+		/obj/item/gun/energy/stunrevolver/secure/nanotrasen,
 		/obj/item/clothing/shoes/jackboots,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security/exo, /obj/item/weapon/storage/backpack/satchel/sec/exo)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec/exo))
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/security/exo, /obj/item/storage/backpack/satchel/sec/exo)),
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag/sec, /obj/item/storage/backpack/messenger/sec/exo))
 	)
 
 /obj/structure/closet/secure_closet/ec_scientist
@@ -158,12 +149,12 @@
 
 /obj/structure/closet/secure_closet/ec_scientist/WillContain()
 	return list(
-		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/storage/toggle/labcoat/science/ec,
 		/obj/item/device/radio/headset/torchnanotrasen,
 		/obj/item/clothing/mask/gas/half,
-		/obj/item/weapon/tank/emergency/oxygen/engi,
-		/obj/item/weapon/material/clipboard,
-		/obj/item/weapon/folder,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/material/clipboard,
+		/obj/item/folder,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape/random = 3,
 		/obj/item/device/camera,
@@ -171,9 +162,8 @@
 		/obj/item/taperoll/research,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/clothing/glasses/science,
-		/obj/item/weapon/storage/belt/general,
+		/obj/item/storage/belt/general,
 		/obj/item/device/scanner/xenobio,
 		/obj/item/device/scanner/plant,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/, /obj/item/weapon/storage/backpack/satchel/grey)),
-		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger/, 50)
+		/obj/item/storage/backpack/dufflebag
 	)

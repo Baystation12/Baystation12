@@ -14,7 +14,7 @@
 * Call unregister_turfs() to stop listening. No argument is required.
 */
 
-var/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to monitor, excludes the turf the holder itself is currently in.
+var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to monitor, excludes the turf the holder itself is currently in.
 
 /datum/proximity_trigger
 	var/atom/holder

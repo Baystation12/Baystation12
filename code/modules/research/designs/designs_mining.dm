@@ -6,35 +6,35 @@
 	id = "jackhammer"
 	req_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2, TECH_ENGINEERING = 2)
 	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 500, MATERIAL_SILVER = 500)
-	build_path = /obj/item/weapon/pickaxe/jackhammer
+	build_path = /obj/item/pickaxe/jackhammer
 	sort_string = "KAAAA"
 
 /datum/design/item/mining/drill
 	id = "drill"
 	req_tech = list(TECH_MATERIAL = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
 	materials = list(MATERIAL_STEEL = 6000, MATERIAL_GLASS = 1000) //expensive, but no need for miners.
-	build_path = /obj/item/weapon/pickaxe/drill
+	build_path = /obj/item/pickaxe/drill
 	sort_string = "KAAAB"
 
 /datum/design/item/mining/plasmacutter
 	id = "plasmacutter"
 	req_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 3)
 	materials = list(MATERIAL_STEEL = 1500, MATERIAL_GLASS = 500, MATERIAL_GOLD = 500, MATERIAL_PHORON = 500)
-	build_path = /obj/item/weapon/gun/energy/plasmacutter
+	build_path = /obj/item/gun/energy/plasmacutter
 	sort_string = "KAAAC"
 
 /datum/design/item/mining/pick_diamond
 	id = "pick_diamond"
 	req_tech = list(TECH_MATERIAL = 6)
 	materials = list(MATERIAL_DIAMOND = 3000)
-	build_path = /obj/item/weapon/pickaxe/diamond
+	build_path = /obj/item/pickaxe/diamond
 	sort_string = "KAAAD"
 
 /datum/design/item/mining/drill_diamond
 	id = "drill_diamond"
 	req_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 4)
 	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 1000, MATERIAL_DIAMOND = 2000)
-	build_path = /obj/item/weapon/pickaxe/diamonddrill
+	build_path = /obj/item/pickaxe/diamonddrill
 	sort_string = "KAAAE"
 
 /datum/design/item/mining/depth_scanner

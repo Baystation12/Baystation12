@@ -6,7 +6,7 @@
 
 /obj/item/integrated_circuit/reagent
 	category_text = "Reagent"
-	unacidable = 1
+	unacidable = TRUE
 	cooldown_per_use = 10
 	var/volume = 0
 
@@ -117,7 +117,7 @@
 	else
 		direction_mode = IC_REAGENTS_INJECT
 	if(isnum(new_amount))
-		new_amount = Clamp(new_amount, 0, volume)
+		new_amount = clamp(new_amount, 0, volume)
 		transfer_amount = new_amount
 
 
@@ -270,7 +270,7 @@
 	else
 		direction_mode = IC_REAGENTS_INJECT
 	if(isnum(new_amount))
-		new_amount = Clamp(new_amount, 0, 50)
+		new_amount = clamp(new_amount, 0, 50)
 		transfer_amount = new_amount
 
 /obj/item/integrated_circuit/reagent/pump/do_work()
@@ -465,7 +465,7 @@
 	else
 		direction_mode = IC_REAGENTS_INJECT
 	if(isnum(new_amount))
-		new_amount = Clamp(new_amount, 0, 50)
+		new_amount = clamp(new_amount, 0, 50)
 		transfer_amount = new_amount
 
 /obj/item/integrated_circuit/reagent/filter/do_work()
@@ -510,14 +510,14 @@
 		"on transfer" = IC_PINTYPE_PULSE_OUT
 	)
 
-	unacidable = 1
+	unacidable = TRUE
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	complexity = 4
 	power_draw_per_use = 5
 
 /obj/item/integrated_circuit/input/funnel/attackby_react(obj/item/I, mob/living/user, intent)
 	var/atom/movable/target = get_pin_data_as_type(IC_INPUT, 1, /atom/movable)
-	var/obj/item/weapon/reagent_containers/container = I
+	var/obj/item/reagent_containers/container = I
 
 	if(!check_target(target))
 		return FALSE
@@ -577,7 +577,7 @@
 				return
 
 			// +/- T0C to convert to/from kelvin
-			target_temp = Clamp(target_temp + T0C, min_temp, max_temp)
+			target_temp = clamp(target_temp + T0C, min_temp, max_temp)
 			set_pin_data(IC_INPUT, 1, target_temp - T0C)
 
 			active = !active

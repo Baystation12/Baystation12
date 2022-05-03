@@ -56,11 +56,11 @@
 
 			visible_message("<span class='danger'>[H] has punched \the [src]!</span>")
 
-			apply_damage(damage, PAIN, affecting)
+			apply_damage(damage, DAMAGE_PAIN, affecting)
 			if(damage >= 9)
 				visible_message("<span class='danger'>[H] has weakened \the [src]!</span>")
-				var/armor_block = 100 * get_blocked_ratio(affecting, BRUTE, damage = damage)
-				apply_effect(4, WEAKEN, armor_block)
+				var/armor_block = 100 * get_blocked_ratio(affecting, DAMAGE_BRUTE, damage = damage)
+				apply_effect(4, EFFECT_WEAKEN, armor_block)
 
 			return
 
@@ -70,10 +70,11 @@
 				if(G.resolve_openhand_attack())
 					return 1
 
-
 	switch(M.a_intent)
 		if(I_HELP)
-			if(H != src && istype(H) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath))
+			if(MUTATION_FERAL in M.mutations)
+				return 0
+			if(H != src && istype(H) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath) && !(H.zone_sel.selecting == BP_R_ARM || H.zone_sel.selecting == BP_L_ARM))
 				if (!cpr_time)
 					return 0
 
@@ -83,7 +84,7 @@
 
 				H.visible_message("<span class='notice'>\The [H] is trying to perform CPR on \the [src].</span>")
 
-				if(!do_after(H, cpr_delay, src))
+				if(!do_after(H, cpr_delay, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 					cpr_time = 1
 					return
 				cpr_time = 1
@@ -100,7 +101,7 @@
 					if(heart)
 						heart.external_pump = list(world.time, 0.4 + 0.1*pumping_skill + rand(-0.1,0.1))
 
-					if(stat != DEAD && prob(10 + 5 * pumping_skill))
+					if(stat != DEAD && prob(2 * pumping_skill))
 						resuscitate()
 
 				if(!H.check_has_mouth())
@@ -125,6 +126,8 @@
 					var/datum/gas_mixture/breath = H.get_breath_from_environment()
 					var/fail = L.handle_breath(breath, 1)
 					if(!fail)
+						if (!L.is_bruised())
+							losebreath = 0
 						to_chat(src, "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>")
 
 			else if(!(M == src && apply_pressure(M, M.zone_sel.selecting)))
@@ -230,7 +233,8 @@
 				H.visible_message("<span class='danger'>[attack_message]</span>")
 
 			playsound(loc, ((miss_type) ? (miss_type == 1 ? attack.miss_sound : 'sound/weapons/thudswoosh.ogg') : attack.attack_sound), 25, 1, -1)
-			admin_attack_log(H, src, "[miss_type ? (miss_type == 1 ? "Has missed" : "Was blocked by") : "Has [pick(attack.attack_verb)]"] their victim.", "[miss_type ? (miss_type == 1 ? "Missed" : "Blocked") : "[pick(attack.attack_verb)]"] their attacker", "[miss_type ? (miss_type == 1 ? "has missed" : "was blocked by") : "has [pick(attack.attack_verb)]"]")
+			if (attack.should_attack_log)
+				admin_attack_log(H, src, "[miss_type ? (miss_type == 1 ? "Has missed" : "Was blocked by") : "Has [pick(attack.attack_verb)]"] their victim.", "[miss_type ? (miss_type == 1 ? "Missed" : "Blocked") : "[pick(attack.attack_verb)]"] their attacker", "[miss_type ? (miss_type == 1 ? "has missed" : "was blocked by") : "has [pick(attack.attack_verb)]"]")
 
 			if(miss_type)
 				return 0
@@ -259,7 +263,7 @@
 /mob/living/carbon/human/proc/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, inrange, params)
 	return
 
-/mob/living/carbon/human/attack_generic(var/mob/user, var/damage, var/attack_message, var/environment_smash, var/damtype = BRUTE, var/armorcheck = "melee", dam_flags)
+/mob/living/carbon/human/attack_generic(mob/user, damage, attack_message, environment_smash, damtype = DAMAGE_BRUTE, armorcheck = "melee", dam_flags = EMPTY_BITFIELD)
 
 	if(!damage || !istype(user))
 		return
@@ -300,9 +304,9 @@
 	We want to ensure that a mob may only apply pressure to one organ of one mob at any given time. Currently this is done mostly implicitly through
 	the behaviour of do_after() and the fact that applying pressure to someone else requires a grab:
 
-	If you are applying pressure to yourself and attempt to grab someone else, you'll change what you are holding in your active hand which will stop do_mob()
-	If you are applying pressure to another and attempt to apply pressure to yourself, you'll have to switch to an empty hand which will also stop do_mob()
-	Changing targeted zones should also stop do_mob(), preventing you from applying pressure to more than one body part at once.
+	If you are applying pressure to yourself and attempt to grab someone else, you'll change what you are holding in your active hand which will stop do_after()
+	If you are applying pressure to another and attempt to apply pressure to yourself, you'll have to switch to an empty hand which will also stop do_after()
+	Changing targeted zones should also stop do_after(), preventing you from applying pressure to more than one body part at once.
 */
 /mob/living/carbon/human/proc/apply_pressure(mob/living/user, var/target_zone)
 	var/obj/item/organ/external/organ = get_organ(target_zone)
@@ -322,7 +326,7 @@
 		organ.applied_pressure = user
 
 		//apply pressure as long as they stay still and keep grabbing
-		do_mob(user, src, INFINITY, target_zone, progress = 0)
+		do_after(user, INFINITY, src, (DO_DEFAULT & ~DO_SHOW_PROGRESS) | DO_USER_SAME_ZONE)
 
 		organ.applied_pressure = null
 

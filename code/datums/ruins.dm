@@ -5,7 +5,9 @@
 	How is there a wooden container filled with 18th century coinage in the middle of a lavawracked hellscape? \
 	It is clearly a mystery."
 
-	var/cost = null //negative numbers will always be placed, with lower (negative) numbers being placed first; positive and 0 numbers will be placed randomly
+	var/spawn_weight = 1
+	var/spawn_cost = 0
+	var/player_cost = 0
 
 	var/prefix = null
 	var/suffixes = null

@@ -53,7 +53,7 @@
 	for(var/mem in memories)
 		var/datum/memory/M = mem
 		var/owner_name = M.OwnerName()
-		if(owner_name != last_owner_name)
+		if(owner_name != last_owner_name && current)
 			output += "<B>[current.real_name]'s Memories</B><HR>"
 			last_owner_name = owner_name
 		output += "[M.memory] <a href='?src=\ref[src];remove_memory=\ref[M]'>\[Remove\]</a>"

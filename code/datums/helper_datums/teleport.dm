@@ -1,5 +1,5 @@
 /decl/teleport
-	var/static/list/teleport_blacklist = list(/obj/item/weapon/disk/nuclear, /obj/item/weapon/storage/backpack/holding, /obj/effect/sparks) //Items that cannot be teleported, or be in the contents of someone who is teleporting.
+	var/static/list/teleport_blacklist = list(/obj/item/disk/nuclear, /obj/item/storage/backpack/holding, /obj/effect/sparks) //Items that cannot be teleported, or be in the contents of someone who is teleporting.
 
 /decl/teleport/proc/teleport(var/atom/target, var/atom/destination, var/precision = 0)
 	if(!can_teleport(target,destination))
@@ -10,7 +10,9 @@
 
 /decl/teleport/proc/teleport_target(var/atom/movable/target, var/atom/destination, var/precision)
 	var/list/possible_turfs = circlerangeturfs(destination, precision)
-	destination = safepick(possible_turfs)
+	destination = DEFAULTPICK(possible_turfs, null)
+	if (!destination)
+		return
 
 	target.forceMove(destination)
 	if(isliving(target))
@@ -28,7 +30,7 @@
 		return 0
 
 	for(var/type in teleport_blacklist)
-		if(!isemptylist(target.search_contents_for(type)))
+		if(length(target.search_contents_for(type)))
 			return 0
 	return 1
 

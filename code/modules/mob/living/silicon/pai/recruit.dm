@@ -2,7 +2,7 @@
 
 // Recruiting observers to play as pAIs
 
-var/datum/paiController/paiController			// Global handler for pAI candidates
+var/global/datum/paiController/paiController			// Global handler for pAI candidates
 
 /datum/paiCandidate
 	var/name
@@ -383,7 +383,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 			continue
 		if(jobban_isbanned(O, "pAI"))
 			continue
-		if(asked.Find(O.key))
+		if(list_find(asked, O.key))
 			if(world.time < asked[O.key] + askDelay)
 				continue
 			else

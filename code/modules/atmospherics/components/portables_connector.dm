@@ -54,7 +54,7 @@
 	if(reference == node)
 		network = new_network
 
-	if(new_network.normal_members.Find(src))
+	if(list_find(new_network.normal_members, src))
 		return 0
 
 	new_network.normal_members += src
@@ -130,7 +130,7 @@
 	return null
 
 
-/obj/machinery/atmospherics/portables_connector/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/portables_connector/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if(!isWrench(W))
 		return ..()
 	if (connected_device)
@@ -146,7 +146,7 @@
 		return 1
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-	if (do_after(user, 40, src))
+	if (do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 		user.visible_message( \
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \

@@ -4,7 +4,7 @@
 /datum/computer_file/report/recipient/exp/fauna
 	form_name = "SCG-EXP-19f"
 	title = "Alien Fauna Report"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/exp/fauna/generate_fields()
 	..()
@@ -28,7 +28,7 @@
 /datum/computer_file/report/recipient/exp/planet
 	form_name = "SCG-EXP-17"
 	title = "Exoplanet Report"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/exp/planet/generate_fields()
 	..()

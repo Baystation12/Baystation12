@@ -21,7 +21,7 @@
 		LANGUAGE_HUMAN_INDIAN = 5,
 		LANGUAGE_HUMAN_IBERIAN = 30,
 		LANGUAGE_HUMAN_RUSSIAN = 5,
-		LANGUAGE_HUMAN_SELENIAN = 75,
+		LANGUAGE_HUMAN_SELENIAN = 85,
 		LANGUAGE_SPACER = 20
 	)
 	syllables = list(
@@ -32,3 +32,4 @@
 		"ait", "les", "lle", "men", "ais", "ans", "ait", "ave", "con", "com", "des", "tre", "eta", "eur", "est",
 		"ing", "the", "ver", "was", "ith", "hin"
 	)
+	has_written_form = TRUE

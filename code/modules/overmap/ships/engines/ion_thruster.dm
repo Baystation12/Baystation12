@@ -74,7 +74,7 @@
 /obj/machinery/ion_engine/proc/get_thrust()
 	return thrust_limit * generated_thrust * on
 	
-/obj/item/weapon/stock_parts/circuitboard/engine/ion
+/obj/item/stock_parts/circuitboard/engine/ion
 	name = T_BOARD("ion propulsion device")
 	board_type = "machine"
 	icon_state = "mcontroller"
@@ -82,5 +82,5 @@
 	origin_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 2)
 	req_components = list(
 							/obj/item/stack/cable_coil = 2,
-							/obj/item/weapon/stock_parts/matter_bin = 1,
-							/obj/item/weapon/stock_parts/capacitor = 2)
+							/obj/item/stock_parts/matter_bin = 1,
+							/obj/item/stock_parts/capacitor = 2)

@@ -1,4 +1,4 @@
-var/list/limb_icon_cache = list()
+var/global/list/limb_icon_cache = list()
 
 /obj/item/organ/external/set_dir()
 	return
@@ -55,15 +55,19 @@ var/list/limb_icon_cache = list()
 		SetName("[owner.real_name]'s head")
 		addtimer(CALLBACK(owner, /mob/living/carbon/human/proc/update_hair), 1, TIMER_UNIQUE)
 	..()
-	//Head markings, duplicated (sadly) below.
-	for(var/M in markings)
-		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
-		if (mark_style.draw_target == MARKING_TARGET_SKIN)
-			var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
-			mark_s.Blend(markings[M]["color"], mark_style.blend)
-			overlays |= mark_s //So when it's not on your body, it has icons
-			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
-			icon_cache_key += "[M][markings[M]["color"]]"
+
+	var/list/sorted = list()
+	for(var/E in markings)
+		var/datum/sprite_accessory/marking/M = E
+		if (M.draw_target == MARKING_TARGET_SKIN)
+			var/color = markings[E]
+			var/icon/I = icon(M.icon, "[M.icon_state]-[organ_tag]")
+			I.Blend(color, M.blend)
+			icon_cache_key += "[M.name][color]"
+			ADD_SORTED(sorted, list(list(M.draw_order, I, M)), /proc/cmp_marking_order)
+	for (var/entry in sorted)
+		overlays |= entry[2]
+		mob_icon.Blend(entry[2], entry[3]["layer_blend"])
 
 /obj/item/organ/external/var/icon_cache_key
 /obj/item/organ/external/on_update_icon(var/regenerate = 0)
@@ -96,15 +100,18 @@ var/list/limb_icon_cache = list()
 
 	mob_icon = apply_colouration(new/icon(icon, icon_state))
 
-	//Body markings, does not include head, duplicated (sadly) above.
-	for(var/M in markings)
-		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
-		if (mark_style.draw_target == MARKING_TARGET_SKIN)
-			var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
-			mark_s.Blend(markings[M]["color"], mark_style.blend)
-			overlays |= mark_s //So when it's not on your body, it has icons
-			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
-			icon_cache_key += "[M][markings[M]["color"]]"
+	var/list/sorted = list()
+	for(var/E in markings)
+		var/datum/sprite_accessory/marking/M = E
+		if (M.draw_target == MARKING_TARGET_SKIN)
+			var/color = markings[E]
+			var/icon/I = icon(M.icon, "[M.icon_state]-[organ_tag]")
+			I.Blend(color, M.blend)
+			icon_cache_key += "[M.name][color]"
+			ADD_SORTED(sorted, list(list(M.draw_order, I, M)), /proc/cmp_marking_order)
+	for (var/entry in sorted)
+		overlays |= entry[2]
+		mob_icon.Blend(entry[2], entry[3]["layer_blend"])
 
 	if(body_hair && islist(h_col) && h_col.len >= 3)
 		var/cache_key = "[body_hair]-[icon_name]-[h_col[1]][h_col[2]][h_col[3]]"
@@ -128,8 +135,8 @@ var/list/limb_icon_cache = list()
 // amount to represent the obfuscation of being in agonizing pain.
 
 // Global scope, used in code below.
-var/list/flesh_hud_colours = list("#00ff00","#aaff00","#ffff00","#ffaa00","#ff0000","#aa0000","#660000")
-var/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888","#666666","#444444","#222222","#000000")
+var/global/list/flesh_hud_colours = list("#00ff00","#aaff00","#ffff00","#ffaa00","#ff0000","#aa0000","#660000")
+var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888","#666666","#444444","#222222","#000000")
 
 /obj/item/organ/external/proc/get_damage_hud_image()
 
@@ -159,7 +166,7 @@ var/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888","#6666
 		dam_state = min_dam_state
 	// Apply colour and return product.
 	var/list/hud_colours = !BP_IS_ROBOTIC(src) ? flesh_hud_colours : robot_hud_colours
-	hud_damage_image.color = hud_colours[max(1,min(ceil(dam_state*hud_colours.len),hud_colours.len))]
+	hud_damage_image.color = hud_colours[max(1,min(Ceil(dam_state*hud_colours.len),hud_colours.len))]
 	return hud_damage_image
 
 /obj/item/organ/external/proc/apply_colouration(var/icon/applying)

@@ -38,6 +38,7 @@
 	if(!plural_name)
 		plural_name = "[singular_name]s"
 
+
 /obj/item/stack/Destroy()
 	if(uses_charge)
 		return 1
@@ -116,6 +117,11 @@
 	var/required = quantity*recipe.req_amount
 	var/produced = min(quantity*recipe.res_amount, recipe.max_res_amount)
 
+	var/area/A = get_area(user)
+	if (!A.can_modify_area())
+		visible_message("You can't seem to make anything with \the [src] here.")
+		return
+
 	if (!can_use(required))
 		if (produced>1)
 			to_chat(user, "<span class='warning'>You haven't got enough [src] to build \the [produced] [recipe.display_name()]\s!</span>")
@@ -128,7 +134,7 @@
 
 	if (recipe.time)
 		to_chat(user, "<span class='notice'>Building [recipe.display_name()] ...</span>")
-		if (!user.do_skilled(recipe.time, SKILL_CONSTRUCTION))
+		if (!user.do_skilled(recipe.time, SKILL_CONSTRUCTION, src))
 			return
 
 	if (use(required))
@@ -235,17 +241,19 @@
 	return 0
 
 //creates a new stack with the specified amount
-/obj/item/stack/proc/split(var/tamount, var/force=FALSE)
+/obj/item/stack/proc/split(var/tamount)
 	if (!amount)
-		return null
-	if(uses_charge && !force)
 		return null
 
 	var/transfer = max(min(tamount, src.amount, initial(max_amount)), 0)
 
 	var/orig_amount = src.amount
 	if (transfer && src.use(transfer))
-		var/obj/item/stack/newstack = new src.type(loc, transfer)
+		var/obj/item/stack/newstack
+		if(uses_charge)
+			newstack = new src.stacktype(loc, transfer)
+		else
+			newstack = new src.type(loc, transfer)
 		newstack.copy_from(src)
 		if (prob(transfer/orig_amount * 100))
 			transfer_fingerprints_to(newstack)
@@ -302,7 +310,7 @@
 /obj/item/stack/get_storage_cost()	//Scales storage cost to stack size
 	. = ..()
 	if (amount < max_amount)
-		. = ceil(. * amount / max_amount)
+		. = Ceil(. * amount / max_amount)
 
 /obj/item/stack/attack_hand(mob/user as mob)
 	if (user.get_inactive_hand() == src)

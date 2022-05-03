@@ -14,7 +14,7 @@
 	var/mob/event_confirmed_by
 	//1 = select event
 	//2 = authenticate
-	anchored = 1.0
+	anchored = TRUE
 	idle_power_usage = 2
 	active_power_usage = 6
 	power_channel = ENVIRON
@@ -23,12 +23,12 @@
 	to_chat(user, "<span class='warning'>A firewall prevents you from interfacing with this device!</span>")
 	return
 
-/obj/machinery/keycard_auth/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/keycard_auth/attackby(obj/item/W as obj, mob/user as mob)
 	if(stat & (NOPOWER|BROKEN))
 		to_chat(user, "This device is not powered.")
 		return
-	if(istype(W,/obj/item/weapon/card/id))
-		var/obj/item/weapon/card/id/ID = W
+	if(istype(W,/obj/item/card/id))
+		var/obj/item/card/id/ID = W
 		if(access_keycard_auth in ID.access)
 			if(active == 1)
 				//This is not the device that made the initial request. It is the device confirming the request.
@@ -154,34 +154,26 @@
 			var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 			security_state.stored_security_level = security_state.current_security_level
 			security_state.set_security_level(security_state.high_security_level)
-			SSstatistics.add_field("alert_keycard_auth_red",1)
 		if("Revert alert")
 			var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 			security_state.set_security_level(security_state.stored_security_level)
-			SSstatistics.add_field("alert_keycard_revert_red",1)
 		if("Grant Emergency Maintenance Access")
 			GLOB.using_map.make_maint_all_access()
-			SSstatistics.add_field("alert_keycard_auth_maintGrant",1)
 		if("Revoke Emergency Maintenance Access")
 			GLOB.using_map.revoke_maint_all_access()
-			SSstatistics.add_field("alert_keycard_auth_maintRevoke",1)
 		if("Emergency Response Team")
 			if(is_ert_blocked())
 				to_chat(usr, "<span class='warning'>All emergency response teams are dispatched and can not be called at this time.</span>")
 				return
 
 			trigger_armed_response_team(1)
-			SSstatistics.add_field("alert_keycard_auth_ert",1)
 		if("Grant Nuclear Authorization Code")
 			var/obj/machinery/nuclearbomb/nuke = locate(/obj/machinery/nuclearbomb/station) in world
 			if(nuke)
 				to_chat(usr, "The nuclear authorization code is [nuke.r_code]")
 			else
 				to_chat(usr, "No self destruct terminal found.")
-			SSstatistics.add_field("alert_keycard_auth_nukecode",1)
 
 /obj/machinery/keycard_auth/proc/is_ert_blocked()
 	if(config.ert_admin_call_only) return 1
 	return SSticker.mode && SSticker.mode.ert_disabled
-
-var/global/maint_all_access = 0

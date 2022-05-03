@@ -34,7 +34,7 @@
 	flipped = 1
 	},
 /obj/effect/spider/cocoon,
-/obj/item/weapon/net_shell,
+/obj/item/net_shell,
 /obj/random/energy,
 /obj/random/trash,
 /turf/simulated/floor/lino,
@@ -43,7 +43,7 @@
 /obj/structure/table/standard{
 	flipped = 1
 	},
-/obj/item/weapon/pen,
+/obj/item/pen,
 /obj/random/junk,
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/plating,
@@ -55,7 +55,7 @@
 /area/template_noop)
 "l" = (
 /obj/structure/bed/chair/office/comfy/blue,
-/obj/item/weapon/pen,
+/obj/item/pen,
 /obj/effect/spider/stickyweb,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/simulated/floor/plating,
@@ -76,19 +76,19 @@
 	},
 /obj/random/junk,
 /obj/random/loot,
-/obj/item/weapon/paper,
+/obj/item/paper,
 /turf/simulated/floor/lino,
 /area/template_noop)
 "p" = (
 /obj/effect/landmark/corpse/doctor,
 /obj/effect/decal/cleanable/blood,
-/obj/item/weapon/material/shard,
+/obj/item/material/shard,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/vomit,
 /turf/simulated/floor/tiled/techfloor,
 /area/template_noop)
 "q" = (
-/obj/item/weapon/melee/telebaton,
+/obj/item/melee/telebaton,
 /obj/item/seeds/random,
 /obj/effect/decal/cleanable/spiderling_remains,
 /obj/structure/fireaxecabinet{
@@ -97,7 +97,7 @@
 /turf/simulated/floor/lino,
 /area/template_noop)
 "r" = (
-/obj/item/weapon/paper_bin,
+/obj/item/paper_bin,
 /obj/random/trash,
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/lino,
@@ -107,12 +107,12 @@
 /turf/simulated/floor/lino,
 /area/template_noop)
 "t" = (
-/obj/item/weapon/paper,
+/obj/item/paper,
 /turf/simulated/floor/lino,
 /area/template_noop)
 "u" = (
 /obj/effect/spider/stickyweb,
-/obj/item/weapon/paper,
+/obj/item/paper,
 /turf/simulated/floor/lino,
 /area/template_noop)
 "v" = (
@@ -142,7 +142,7 @@
 /area/template_noop)
 "z" = (
 /obj/effect/decal/cleanable/blood,
-/obj/item/weapon/paper,
+/obj/item/paper,
 /obj/random/loot,
 /turf/simulated/floor/lino,
 /area/template_noop)
@@ -194,7 +194,7 @@
 /turf/simulated/floor/plating,
 /area/template_noop)
 "I" = (
-/obj/item/weapon/paper,
+/obj/item/paper,
 /obj/effect/decal/cleanable/blood/drip,
 /mob/living/simple_animal/hostile/giant_spider,
 /turf/simulated/floor/lino,

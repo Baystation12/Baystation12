@@ -104,6 +104,8 @@
 /datum/chunk/proc/add_eye(mob/observer/eye/eye)
 	seenby += eye
 	eye.visibleChunks += src
+	if(dirty)
+		update()
 	if(eye.owner && eye.owner.client)
 		eye.owner.client.images += obscured
 

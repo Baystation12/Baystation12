@@ -2,7 +2,7 @@
 	title = "Commanding Officer"
 	supervisors = "the Sol Central Government and the Sol Code of Uniform Justice"
 	minimal_player_age = 14
-	economic_power = 15
+	economic_power = 16
 	minimum_character_age = list(SPECIES_HUMAN = 40)
 	ideal_character_age = 50
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/CO
@@ -39,7 +39,7 @@
 	department = "Command"
 	department_flag = COM
 	minimal_player_age = 14
-	economic_power = 10
+	economic_power = 14
 	minimum_character_age = list(SPECIES_HUMAN = 35)
 	ideal_character_age = 45
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/XO
@@ -60,30 +60,21 @@
 	                    SKILL_SCIENCE     = SKILL_MAX)
 	skill_points = 30
 
-	access = list(access_security, access_brig, access_armory, access_forensics_lockers, access_heads, access_medical, access_morgue, access_tox, access_tox_storage,
-					access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage, access_change_ids,
-					access_ai_upload, access_teleporter, access_eva, access_bridge, access_all_personal_lockers, access_chapel_office, access_tech_storage,
-					access_atmospherics, access_bar, access_janitor, access_crematorium, access_kitchen, access_robotics, access_cargo, access_construction,
-					access_chemistry, access_cargo_bot, access_hydroponics, access_manufacturing, access_library, access_lawyer, access_virology, access_cmo,
-					access_qm, access_network, access_surgery, access_research, access_mining, access_mining_office, access_mailsorting, access_heads_vault,
-					access_mining_station, access_xenobiology, access_ce, access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat,
-					access_gateway, access_sec_doors, access_psychiatrist, access_xenoarch, access_medical_equip, access_heads, access_hangar, access_guppy_helm,
-					access_expedition_shuttle_helm, access_aquila, access_aquila_helm, access_solgov_crew, access_nanotrasen, access_robotics_engineering,
-					access_emergency_armory, access_sec_guard, access_gun, access_expedition_shuttle, access_guppy, access_seneng, access_senmed, access_senadv,
-					access_explorer, access_pathfinder, access_pilot, access_commissary, access_petrov, access_petrov_helm, access_petrov_analysis, access_petrov_phoron,
-					access_petrov_toxins, access_petrov_chemistry, access_petrov_security, access_petrov_maint, access_rd, access_petrov_rd)
-	minimal_access = list(access_security, access_brig, access_armory, access_forensics_lockers, access_heads, access_medical, access_morgue, access_tox, access_tox_storage,
-						access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage, access_change_ids,
-						access_ai_upload, access_teleporter, access_eva, access_bridge, access_all_personal_lockers, access_chapel_office, access_tech_storage,
-						access_atmospherics, access_bar, access_janitor, access_crematorium, access_kitchen, access_robotics, access_cargo, access_construction,
-						access_chemistry, access_cargo_bot, access_hydroponics, access_manufacturing, access_library, access_lawyer, access_virology, access_cmo,
-						access_qm, access_network, access_surgery, access_research, access_mining, access_mining_office, access_mailsorting, access_heads_vault,
-						access_mining_station, access_xenobiology, access_ce, access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat,
-						access_gateway, access_sec_doors, access_psychiatrist, access_xenoarch, access_medical_equip, access_heads, access_hangar, access_guppy_helm,
-						access_expedition_shuttle_helm, access_aquila, access_aquila_helm, access_solgov_crew, access_nanotrasen, access_robotics_engineering,
-						access_emergency_armory, access_sec_guard, access_gun, access_expedition_shuttle, access_guppy, access_seneng, access_senmed, access_senadv,
-						access_explorer, access_pathfinder, access_pilot, access_commissary, access_petrov, access_petrov_helm, access_petrov_analysis, access_petrov_phoron,
-						access_petrov_toxins, access_petrov_chemistry, access_petrov_security, access_petrov_maint, access_rd, access_petrov_rd)
+	access = list(
+		access_security, access_brig, access_armory, access_forensics_lockers, access_heads, access_medical, access_morgue, access_tox, access_tox_storage,
+		access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage, access_change_ids,
+		access_ai_upload, access_teleporter, access_eva, access_bridge, access_all_personal_lockers, access_chapel_office, access_tech_storage,
+		access_atmospherics, access_janitor, access_crematorium, access_kitchen, access_robotics, access_cargo, access_construction,
+		access_chemistry, access_cargo_bot, access_hydroponics, access_manufacturing, access_library, access_lawyer, access_virology, access_cmo,
+		access_qm, access_network, access_network_admin, access_surgery, access_research, access_mining, access_mining_office, access_mailsorting, access_heads_vault,
+		access_mining_station, access_xenobiology, access_ce, access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat,
+		access_gateway, access_sec_doors, access_psychiatrist, access_xenoarch, access_medical_equip, access_heads, access_hangar, access_guppy_helm,
+		access_expedition_shuttle_helm, access_aquila, access_aquila_helm, access_solgov_crew, access_nanotrasen,
+		access_emergency_armory, access_sec_guard, access_gun, access_expedition_shuttle, access_guppy, access_seneng, access_senmed, access_senadv,
+		access_explorer, access_pathfinder, access_pilot, access_commissary, access_petrov, access_petrov_helm, access_petrov_analysis, access_petrov_phoron,
+		access_petrov_toxins, access_petrov_chemistry, access_petrov_control, access_petrov_maint, access_rd, access_petrov_rd, access_torch_fax, access_torch_helm,
+		access_radio_comm, access_radio_eng, access_radio_med, access_radio_sec, access_radio_sup, access_radio_serv, access_radio_exp, access_radio_sci
+	)
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/card_mod,
@@ -91,12 +82,12 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/hop/get_description_blurb()
-	return "You are the Executive Officer. You are an experienced senior officer, second in command of the ship, and are responsible for the smooth operation of the ship under your Commanding Officer. In his absence, you are expected to take his place. Your primary duty is directly managing department heads and all those outside a department heading. You are also responsible for the contractors and passengers aboard the ship. Consider the Senior Enlisted Advisor and Bridge Officers tools at your disposal."
+	return "You are the Executive Officer. You are an experienced senior officer, second in command of the ship, and are responsible for the smooth operation of the ship under your Commanding Officer. In their absence, you are expected to take their place. Your primary duty is directly managing department heads and all those outside a department heading. You are also responsible for the contractors and passengers aboard the ship. Consider the Senior Enlisted Advisor and Bridge Officers tools at your disposal."
 
 /datum/job/rd
 	title = "Chief Science Officer"
 	supervisors = "the Commanding Officer"
-	economic_power = 20
+	economic_power = 12
 	minimal_player_age = 14
 	minimum_character_age = list(SPECIES_HUMAN = 35)
 	ideal_character_age = 60
@@ -123,14 +114,14 @@
 
 	access = list(
 		access_tox, access_tox_storage, access_emergency_storage, access_teleporter, access_bridge, access_rd,
-		access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
+		access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology, access_aquila,
 		access_RC_announce, access_keycard_auth, access_xenoarch, access_nanotrasen, access_sec_guard, access_heads,
 		access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm,
 		access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_rd,
-		access_petrov_security, access_petrov_maint, access_pathfinder, access_explorer, access_eva, access_solgov_crew,
-		access_expedition_shuttle, access_expedition_shuttle_helm, access_maint_tunnels
+		access_petrov_control, access_petrov_maint, access_pathfinder, access_explorer, access_eva, access_solgov_crew,
+		access_expedition_shuttle, access_expedition_shuttle_helm, access_maint_tunnels, access_torch_fax, access_radio_comm,
+		access_radio_sci, access_radio_exp
 	)
-	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/aidiag,
@@ -143,7 +134,7 @@
 /datum/job/cmo
 	title = "Chief Medical Officer"
 	supervisors = "the Commanding Officer and the Executive Officer"
-	economic_power = 10
+	economic_power = 14
 	minimal_player_age = 14
 	minimum_character_age = list(SPECIES_HUMAN = 35)
 	ideal_character_age = 48
@@ -160,19 +151,22 @@
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_MEDICAL     = SKILL_EXPERT,
 	                    SKILL_ANATOMY     = SKILL_EXPERT,
-	                    SKILL_CHEMISTRY   = SKILL_BASIC)
+	                    SKILL_CHEMISTRY   = SKILL_BASIC,
+						SKILL_DEVICES     = SKILL_ADEPT)
 
 	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
 	                    SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_CHEMISTRY   = SKILL_MAX)
 	skill_points = 26
 
-	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_teleporter, access_eva, access_bridge, access_heads,
-			            access_chapel_office, access_crematorium, access_chemistry, access_virology,
-			            access_cmo, access_surgery, access_RC_announce, access_keycard_auth, access_psychiatrist,
-			            access_medical_equip, access_solgov_crew, access_senmed, access_hangar)
-	minimal_access = list()
+	access = list(
+		access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+		access_teleporter, access_eva, access_bridge, access_heads,
+		access_chapel_office, access_crematorium, access_chemistry, access_virology, access_aquila,
+		access_cmo, access_surgery, access_RC_announce, access_keycard_auth, access_psychiatrist,
+		access_medical_equip, access_solgov_crew, access_senmed, access_hangar, access_torch_fax, access_radio_comm,
+		access_radio_med
+	)
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/suit_sensors,
@@ -185,7 +179,7 @@
 /datum/job/chief_engineer
 	title = "Chief Engineer"
 	supervisors = "the Commanding Officer and the Executive Officer"
-	economic_power = 9
+	economic_power = 12
 	minimum_character_age = list(SPECIES_HUMAN = 27)
 	ideal_character_age = 40
 	minimal_player_age = 14
@@ -213,16 +207,14 @@
 	                    SKILL_ENGINES      = SKILL_MAX)
 	skill_points = 30
 
-	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_ai_upload, access_teleporter, access_eva, access_bridge, access_heads,
-			            access_tech_storage, access_robotics, access_atmospherics, access_janitor, access_construction,
-			            access_network, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
-			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar, access_robotics)
-	minimal_access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_ai_upload, access_teleporter, access_eva, access_bridge, access_heads,
-			            access_tech_storage, access_atmospherics, access_janitor, access_construction,
-			            access_network, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
-			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar, access_robotics)
+	access = list(
+		access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+		access_ai_upload, access_teleporter, access_eva, access_bridge, access_heads,
+		access_tech_storage, access_robotics, access_atmospherics, access_janitor, access_construction,
+		access_network, access_network_admin, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
+		access_solgov_crew, access_aquila, access_seneng, access_hangar, access_torch_fax, access_torch_helm, access_radio_comm,
+		access_radio_eng
+		)
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/ntnetmonitor,
@@ -241,7 +233,7 @@
 /datum/job/hos
 	title = "Chief of Security"
 	supervisors = "the Commanding Officer and the Executive Officer"
-	economic_power = 8
+	economic_power = 10
 	minimal_player_age = 14
 	minimum_character_age = list(SPECIES_HUMAN = 25)
 	ideal_character_age = 35
@@ -266,12 +258,14 @@
 	                    SKILL_FORENSICS   = SKILL_MAX)
 	skill_points = 28
 
-	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
-			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_teleporter, access_eva, access_bridge, access_heads,
-			            access_hos, access_RC_announce, access_keycard_auth, access_sec_doors,
-			            access_solgov_crew, access_gun, access_emergency_armory, access_hangar)
-	minimal_access = list()
+	access = list(
+		access_security, access_brig, access_armory, access_forensics_lockers,
+		access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+		access_teleporter, access_eva, access_bridge, access_heads, access_aquila,
+		access_hos, access_RC_announce, access_keycard_auth, access_sec_doors,
+		access_solgov_crew, access_gun, access_emergency_armory, access_hangar, access_torch_fax,
+		access_radio_comm, access_radio_sec
+	)
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/digitalwarrant,
@@ -289,7 +283,7 @@
 	spawn_positions = 1
 	supervisors = "the Sol Central Government and the SCG Charter"
 	selection_color = "#2f2f7f"
-	economic_power = 15
+	economic_power = 16
 	minimal_player_age = 0
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/representative
 	allowed_branches = list(/datum/mil_branch/solgov)
@@ -299,8 +293,11 @@
 	skill_points = 20
 	minimum_character_age = list(SPECIES_HUMAN = 27)
 
-	access = list(access_representative, access_security, access_medical,
-			            access_bridge, access_cargo, access_solgov_crew, access_hangar)
+	access = list(
+		access_representative, access_security, access_medical,
+		access_bridge, access_cargo, access_solgov_crew,
+		access_hangar, access_torch_fax, access_radio_comm
+	)
 
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
@@ -316,7 +313,7 @@
 	supervisors = "the Commanding Officer and the Executive Officer"
 	selection_color = "#2f2f7f"
 	minimal_player_age = 14
-	economic_power = 8
+	economic_power = 11
 	minimum_character_age = list(SPECIES_HUMAN = 35)
 	ideal_character_age = 45
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
@@ -330,22 +327,25 @@
 	)
 	min_skill = list(   SKILL_EVA        = SKILL_BASIC,
 	                    SKILL_COMBAT     = SKILL_BASIC,
-	                    SKILL_WEAPONS    = SKILL_ADEPT)
+	                    SKILL_WEAPONS    = SKILL_BASIC)
 
-	max_skill = list(   SKILL_COMBAT       = SKILL_MAX,
-	                    SKILL_WEAPONS      = SKILL_MAX,
-	                    SKILL_PILOT        = SKILL_MAX,
+	max_skill = list(	SKILL_PILOT        = SKILL_ADEPT,
+	                    SKILL_COMBAT       = SKILL_EXPERT,
+	                    SKILL_WEAPONS      = SKILL_EXPERT,
 	                    SKILL_CONSTRUCTION = SKILL_MAX,
 	                    SKILL_ELECTRICAL   = SKILL_MAX,
 	                    SKILL_ENGINES      = SKILL_MAX,
 	                    SKILL_ATMOS        = SKILL_MAX)
-	skill_points = 24
+	skill_points = 28
 
 
-	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_teleporter, access_eva, access_bridge, access_all_personal_lockers, access_janitor,
-			            access_kitchen, access_cargo, access_RC_announce, access_keycard_auth, access_guppy_helm,
-			            access_solgov_crew, access_gun, access_expedition_shuttle, access_guppy, access_senadv, access_hangar, access_emergency_armory)
+	access = list(
+		access_security, access_medical, access_engine, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+		access_teleporter, access_eva, access_bridge, access_all_personal_lockers, access_janitor,
+		access_kitchen, access_cargo, access_RC_announce, access_keycard_auth, access_aquila, access_guppy_helm,
+		access_solgov_crew, access_gun, access_expedition_shuttle, access_guppy, access_senadv, access_hangar, access_torch_fax,
+		access_radio_comm, access_radio_eng, access_radio_med, access_radio_sec, access_radio_serv, access_radio_sup, access_radio_exp
+		)
 
 	software_on_spawn = list(/datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/reports)
@@ -362,7 +362,7 @@
 	supervisors = "the Commanding Officer and heads of staff"
 	selection_color = "#2f2f7f"
 	minimal_player_age = 0
-	economic_power = 7
+	economic_power = 8
 	minimum_character_age = list(SPECIES_HUMAN = 22)
 	ideal_character_age = 24
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
@@ -381,10 +381,13 @@
 	skill_points = 20
 
 
-	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage,
-			            access_bridge, access_janitor, access_kitchen, access_cargo, access_mailsorting, access_RC_announce, access_keycard_auth,
-			            access_solgov_crew, access_aquila, access_aquila_helm, access_guppy, access_guppy_helm, access_external_airlocks,
-			            access_eva, access_hangar, access_cent_creed, access_explorer, access_expedition_shuttle, access_expedition_shuttle_helm, access_teleporter)
+	access = list(
+		access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage,
+		access_bridge, access_janitor, access_kitchen, access_cargo, access_mailsorting, access_RC_announce, access_keycard_auth,
+		access_solgov_crew, access_aquila, access_aquila_helm, access_guppy, access_guppy_helm, access_external_airlocks,
+		access_eva, access_hangar, access_cent_creed, access_explorer, access_expedition_shuttle, access_expedition_shuttle_helm, access_teleporter,
+		access_torch_fax, access_torch_helm, access_radio_comm, access_radio_eng, access_radio_exp, access_radio_serv, access_radio_sci, access_radio_sup
+	)
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/suit_sensors,

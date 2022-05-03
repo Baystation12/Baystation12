@@ -33,7 +33,9 @@
 	var/list/datum/alarm/queued_alarms = new()
 
 	var/list/access_rights
-	var/obj/item/weapon/card/id/idcard = /obj/item/weapon/card/id/synthetic
+	var/obj/item/card/id/idcard = /obj/item/card/id/synthetic
+
+	var/machine_restriction = TRUE // Whether or not the silicon mob is affected by the `silicon_restriction` var on machines
 
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
@@ -56,7 +58,7 @@
 	GLOB.silicon_mob_list -= src
 	QDEL_NULL(silicon_radio)
 	QDEL_NULL(silicon_camera)
-	for(var/datum/alarm_handler/AH in SSalarm.all_handlers)
+	for(var/datum/alarm_handler/AH as anything in SSalarm.handlers)
 		AH.unregister_alarm(src)
 	return ..()
 
@@ -78,13 +80,15 @@
 	return
 
 /mob/living/silicon/emp_act(severity)
+	if (status_flags & GODMODE)
+		return
 	switch(severity)
-		if(1)
-			src.take_organ_damage(0,16,emp=1)
+		if(EMP_ACT_HEAVY)
+			take_organ_damage(0, 16, ORGAN_DAMAGE_SILICON_EMP)
 			if(prob(50)) Stun(rand(5,10))
 			else confused = (min(confused + 2, 40))
-		if(2)
-			src.take_organ_damage(0,7,emp=1)
+		if(EMP_ACT_LIGHT)
+			take_organ_damage(0, 7, ORGAN_DAMAGE_SILICON_EMP)
 			confused = (min(confused + 2, 30))
 	flash_eyes(affect_silicon = 1)
 	to_chat(src, "<span class='danger'><B>*BZZZT*</B></span>")
@@ -117,19 +121,21 @@
 	return 1
 
 /mob/living/silicon/bullet_act(var/obj/item/projectile/Proj)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 
 	if(!Proj.nodamage)
 		switch(Proj.damage_type)
-			if(BRUTE)
+			if (DAMAGE_BRUTE)
 				adjustBruteLoss(Proj.damage)
-			if(BURN)
+			if (DAMAGE_BURN)
 				adjustFireLoss(Proj.damage)
 
 	Proj.on_hit(src,100) //wow this is a terrible hack
 	updatehealth()
 	return 100
 
-/mob/living/silicon/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
+/mob/living/silicon/apply_effect(effect = 0, effecttype = EFFECT_STUN, blocked = 0)
 	return 0//The only effect that can hit them atm is flashes and they still directly edit so this works for now
 
 /proc/islinked(var/mob/living/silicon/robot/bot, var/mob/living/silicon/ai/ai)
@@ -252,6 +258,8 @@
 	return 1
 
 /mob/living/silicon/ex_act(severity)
+	if (status_flags & GODMODE)
+		return
 	if(!blinded)
 		flash_eyes()
 
@@ -267,8 +275,8 @@
 		if(3.0)
 			brute = 30
 
-	apply_damage(brute, BRUTE, damage_flags = DAM_EXPLODE)
-	apply_damage(burn, BURN, damage_flags = DAM_EXPLODE)
+	apply_damage(brute, DAMAGE_BRUTE, damage_flags = DAMAGE_FLAG_EXPLODE)
+	apply_damage(burn, DAMAGE_BURN, damage_flags = DAMAGE_FLAG_EXPLODE)
 
 /mob/living/silicon/proc/receive_alarm(var/datum/alarm_handler/alarm_handler, var/datum/alarm/alarm, was_raised)
 	if(!(alarm.alarm_z() in GetConnectedZlevels(get_z(src))))

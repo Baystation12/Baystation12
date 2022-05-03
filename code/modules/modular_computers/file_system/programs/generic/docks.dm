@@ -9,8 +9,8 @@
 	extended_desc = "A management tool that lets you see the status of the docking ports."
 	size = 10
 	usage_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP
-	available_on_ntnet = 1
-	requires_ntnet = 1
+	available_on_ntnet = TRUE
+	requires_ntnet = TRUE
 	category = PROG_SUPPLY
 
 /datum/computer_file/program/docking/on_startup()

@@ -1,5 +1,5 @@
 
-/datum/admins/proc/player_panel_new()//The new one
+/datum/admins/proc/player_panel()//The new one
 	if (!usr.client.holder)
 		return
 	var/dat = "<html><head><title>Admin Player Panel</title></head>"
@@ -81,7 +81,7 @@
 					body += "<a href='?src=\ref[src];traitor="+ref+"'>TP</a> - "
 					body += "<a href='?src=\ref[usr];priv_msg=\ref"+ref+"'>PM</a> - "
 					body += "<a href='?src=\ref[src];narrateto="+ref+"'>DN</a> - "
-					body += "<a href='?src=\ref[src];adminplayerobservejump="+ref+"'>JMP</a><br>"
+					body += "<a href='?src=\ref[src];adminplayerobservefollow="+ref+"'>JMP</a><br>"
 					if(antagonist > 0)
 						body += "<font size='2'><a href='?src=\ref[src];check_antagonist=1'><font color='red'><b>Antagonist</b></font></a></font>";
 
@@ -321,74 +321,6 @@
 
 	show_browser(usr, dat, "window=players;size=600x480")
 
-//The old one
-/datum/admins/proc/player_panel_old()
-	if (!usr.client.holder)
-		return
-
-	var/dat = "<html><head><title>Player Menu</title></head>"
-	dat += "<body><table border=1 cellspacing=5><B><tr><th>Name</th><th>Real Name</th><th>Assigned Job</th><th>Key</th><th>Options</th><th>PM</th><th>Traitor?</th></tr></B>"
-	//add <th>IP:</th> to this if wanting to add back in IP checking
-	//add <td>(IP: [M.lastKnownIP])</td> if you want to know their ip to the lists below
-	var/list/mobs = sortmobs()
-
-	for(var/mob/M in mobs)
-		if(!M.ckey) continue
-
-		dat += "<tr><td>[M.name]</td>"
-		if(isAI(M))
-			dat += "<td>AI</td>"
-		else if(isrobot(M))
-			dat += "<td>Cyborg</td>"
-		else if(ishuman(M))
-			dat += "<td>[M.real_name]</td>"
-		else if(istype(M, /mob/living/silicon/pai))
-			dat += "<td>pAI</td>"
-		else if(istype(M, /mob/new_player))
-			dat += "<td>New Player</td>"
-		else if(isghost(M))
-			dat += "<td>Ghost</td>"
-		else if(issmall(M))
-			dat += "<td>Monkey</td>"
-		else if(isalien(M))
-			dat += "<td>Alien</td>"
-		else
-			dat += "<td>Unknown</td>"
-
-
-		if(istype(M,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(H.mind && H.mind.assigned_role)
-				dat += "<td>[H.mind.assigned_role]</td>"
-		else
-			dat += "<td>NA</td>"
-
-
-		dat += {"<td>[M.key ? (M.client ? M.key : "[M.key] (DC)") : "No key"]</td>
-		<td align=center><A HREF='?src=\ref[src];adminplayeropts=\ref[M]'>X</A></td>
-		<td align=center><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>
-		"}
-
-
-
-		if(usr.client)
-			switch(is_special_character(M))
-				if(0)
-					dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'>Traitor?</A></td>"}
-				if(1)
-					dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red>Traitor?</font></A></td>"}
-				if(2)
-					dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red><b>Traitor?</b></font></A></td>"}
-		else
-			dat += {"<td align=center> N/A </td>"}
-
-
-
-	dat += "</table></body></html>"
-
-	show_browser(usr, dat, "window=players;size=640x480")
-
-
 
 /datum/admins/proc/check_antagonists()
 	if (GAME_STATE >= RUNLEVEL_GAME)
@@ -402,7 +334,7 @@
 		else
 			var/timeleft = evacuation_controller.get_eta()
 			if (evacuation_controller.waiting_to_leave())
-				dat += "ETA: [(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]<BR>"
+				dat += "ETA: [(timeleft / 60) % 60]:[pad_left(num2text(timeleft % 60), 2, "0")]<BR>"
 				dat += "<a href='?src=\ref[src];call_shuttle=2'>Send Back</a><br>"
 
 		dat += "<a href='?src=\ref[src];delay_round_end=1'>[SSticker.delay_end ? "End Round Normally" : "Delay Round End"]</a><br>"

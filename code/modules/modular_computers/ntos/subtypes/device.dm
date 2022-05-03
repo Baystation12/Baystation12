@@ -15,21 +15,21 @@
 
 /datum/extension/interactive/ntos/device/recalc_power_usage()
 	var/obj/item/modular_computer/C = holder
-	C.calculate_power_usage()
+	C.handle_power()
 	
 /datum/extension/interactive/ntos/device/emagged()
 	var/obj/item/modular_computer/C = holder
 	return C.computer_emagged
 
 /datum/extension/interactive/ntos/device/system_shutdown()
-	..()
 	var/obj/item/modular_computer/C = holder
 	C.enabled = FALSE
+	..()
 
 /datum/extension/interactive/ntos/device/system_boot()
-	..()
 	var/obj/item/modular_computer/C = holder
 	C.enabled = TRUE
+	..()
 
 /datum/extension/interactive/ntos/device/extension_act(href, href_list, user)
 	. = ..()

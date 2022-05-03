@@ -2,12 +2,12 @@
 
 //All devices that link into the R&D console fall into thise type for easy identification and some shared procs.
 
-var/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL_ALUMINIUM = 0, MATERIAL_PLASTIC = 0, MATERIAL_GLASS = 0, MATERIAL_GOLD = 0, MATERIAL_SILVER = 0, MATERIAL_PHORON = 0, MATERIAL_URANIUM = 0, MATERIAL_DIAMOND = 0)
+var/global/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL_ALUMINIUM = 0, MATERIAL_PLASTIC = 0, MATERIAL_GLASS = 0, MATERIAL_GOLD = 0, MATERIAL_SILVER = 0, MATERIAL_PHORON = 0, MATERIAL_URANIUM = 0, MATERIAL_DIAMOND = 0)
 /obj/machinery/r_n_d
 	name = "R&D Device"
 	icon = 'icons/obj/machines/research.dmi'
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	uncreated_component_parts = null
 	stat_immune = 0
 	var/busy = 0
@@ -17,7 +17,7 @@ var/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL_ALUMIN
 
 /obj/machinery/r_n_d/dismantle()
 	for(var/obj/I in src)
-		if(istype(I, /obj/item/weapon/reagent_containers/glass/beaker))
+		if(istype(I, /obj/item/reagent_containers/glass/beaker))
 			reagents.trans_to_obj(I, reagents.total_volume)
 	for(var/f in materials)
 		if(materials[f] >= SHEET_MATERIAL_AMOUNT)
@@ -29,7 +29,7 @@ var/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL_ALUMIN
 	if(!(material in materials))
 		return
 	var/material/mat = SSmaterials.get_material_by_name(material)
-	var/eject = Clamp(round(materials[material] / mat.units_per_sheet), 0, amount)
+	var/eject = clamp(round(materials[material] / mat.units_per_sheet), 0, amount)
 	if(eject > 0)
 		mat.place_sheet(loc, eject)
 		materials[material] -= eject * mat.units_per_sheet

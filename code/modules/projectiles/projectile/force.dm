@@ -3,7 +3,7 @@
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "ice_1"
 	damage = 20
-	damage_type = BURN
+	damage_type = DAMAGE_BURN
 	damage_flags = 0
 
 /obj/item/projectile/forcebolt/strong

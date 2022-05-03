@@ -7,20 +7,16 @@
 	var/desc = "A round of **[SSticker.mode ? SSticker.mode.name : "Unknown"]** has ended.\n"
 	if(data)
 
-		if(data["survivors"] > 0)
+		if(data["surviving_total"] > 0)
 
 			var/s_was =      "was"
 			var/s_survivor = "survivor"
-			var/s_escaped =  "escaped"
 
-			if(data["survivors"] != 1)
+			if(data["surviving_total"] != 1)
 				s_was = "were"
 				s_survivor = "survivors"
 
-			if(!evacuation_controller.emergency_evacuation)
-				s_escaped = "transferred"
-
-			desc += "There [s_was] **[data["survivors"]] [s_survivor] ([data["escaped"]] [s_escaped])** and **[data["ghosts"]] ghosts.**"
+			desc += "There [s_was] **[data["surviving_total"]] [s_survivor] ([data["escaped_total"]] escaped)** and **[data["ghosts"]] ghosts.**"
 		else
 			desc += "There were **no survivors** ([data["ghosts"]] ghosts)."
 

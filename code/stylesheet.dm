@@ -1,4 +1,4 @@
-client/script = {"<style>
+/client/script = {"<style>
 body					{font-family: Verdana, sans-serif;}
 
 h1, h2, h3, h4, h5, h6	{color: #0000ff;font-family: Georgia, Verdana, sans-serif;}
@@ -19,7 +19,7 @@ em						{font-style: normal;font-weight: bold;}
 .ooc img.text_tag		{width: 32px; height: 10px;}
 
 .ooc .everyone			{color: #002eb8;}
-.ooc .looc				{color: #3a9696;}
+.ooc .looc				{color: #3a7496;}
 .ooc .elevated			{color: #2e78d9;}
 .ooc .moderator			{color: #184880;}
 .ooc .developer			{color: #1b521f;}
@@ -61,11 +61,18 @@ em						{font-style: normal;font-weight: bold;}
 .seciradio				{color: #935050;}
 .mediradio				{color: #509190;}
 
+.hailradio				{color: #cc00aa;}
+.exampleradio			{color: #ff00ff;}
+.voxradio				{color: #f32b06;}
+.bearcatradio			{color: #590e2d;}
+.colonyradio			{color: #ceaf3e;}
+.verneradio				{color: #738465;}
+
 /* Miscellaneous */
 .name					{font-weight: bold;}
 .say					{}
 .alert					{color: #ff0000;}
-h1.alert, h2.alert		{color: #000000;}
+h1.alert, h2.alert		{color: #000080;}
 
 .emote					{font-style: italic;}
 
@@ -85,6 +92,7 @@ h1.alert, h2.alert		{color: #000000;}
 .boldannounce			{color: #ff0000; font-weight: bold;}
 .rose					{color: #ff5050;}
 .info					{color: #0000cc;}
+.debug					{color: #ff00ff;}
 .notice					{color: #000099;}
 .subtle					{color: #000099; font-size: 75%; font-style: italic;}
 .alium					{color: #00ff00;}
@@ -122,5 +130,17 @@ h1.alert, h2.alert		{color: #000000;}
 .bad                    {color: #ee0000; font-weight: bold;}
 
 BIG IMG.icon 			{width: 32px; height: 32px;}
+
+/* Admin: Misc */
+.who_dead				{color: #000000;}
+.who_observing			{color: #808080;}
+.who_new_account		{color: #ff0000;}
+.who_newish_account		{color: #ff8c00;}
+.who_new_account		{color: #000000;}
+.who_antag				{color: #ff0000;}
+
+/* Admin: PM */
+.pm						{color: #ff0000;}
+.staff_pm				{color: #0000FF;}
 
 </style>"}

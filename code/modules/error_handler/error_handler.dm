@@ -21,10 +21,10 @@ GLOBAL_VAR_INIT(actual_error_file_line, new/regex("^%% (.*?),(.*?) %% "))
 	var/eline = E.line
 
 	var/regex/actual_error_file_line = GLOB.actual_error_file_line
-	if(actual_error_file_line.Find(E.name))
+	if(regex_find(actual_error_file_line, E.name))
 		efile = actual_error_file_line.group[1]
 		eline = actual_error_file_line.group[2]
-		E.name = actual_error_file_line.Replace(E.name, "")
+		E.name = replacetext_char(E.name, actual_error_file_line, "")
 
 	var/erroruid = "[efile],[eline]"
 	var/last_seen = error_last_seen[erroruid]

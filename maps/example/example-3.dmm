@@ -42,8 +42,8 @@
 /area/space)
 "j" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 8
+	dir = 8;
+	icon_state = "tube1"
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled,
@@ -78,14 +78,13 @@
 "p" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/maintenance/fsmaint2)
 "q" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	 icon_state = "intact";
 	dir = 5
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
@@ -93,7 +92,6 @@
 /area/maintenance/fsmaint2)
 "r" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	 icon_state = "intact";
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
@@ -101,7 +99,6 @@
 /area/maintenance/fsmaint2)
 "s" = (
 /obj/machinery/atmospherics/portables_connector{
-	 icon_state = "map_connector";
 	dir = 8
 	},
 /obj/machinery/portable_atmospherics/canister/air,
@@ -110,7 +107,6 @@
 /area/maintenance/fsmaint2)
 "t" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	 icon_state = "intact";
 	dir = 6
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
@@ -118,7 +114,6 @@
 /area/maintenance/fsmaint2)
 "u" = (
 /obj/machinery/atmospherics/portables_connector{
-	 icon_state = "map_connector";
 	dir = 8
 	},
 /obj/machinery/portable_atmospherics/canister/empty,
@@ -134,7 +129,6 @@
 /area/maintenance/fsmaint2)
 "w" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	 icon_state = "map_scrubber_on";
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
@@ -142,8 +136,8 @@
 /area/maintenance/fsmaint2)
 "x" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled,
@@ -151,8 +145,7 @@
 "y" = (
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /obj/machinery/power/apc{
 	dir = 8;
@@ -166,8 +159,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled,

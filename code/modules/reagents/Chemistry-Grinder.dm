@@ -9,277 +9,250 @@
 	idle_power_usage = 5
 	active_power_usage = 100
 	obj_flags = OBJ_FLAG_ANCHORABLE
+	construct_state = /decl/machine_construction/default/panel_closed
+	machine_name = "reagent grinder"
+	machine_desc = "An industrial grinder with durable blades that shreds objects into their component reagents."
 
-	var/inuse = 0
-	var/obj/item/weapon/reagent_containers/beaker = null
-	var/limit = 10
-	var/list/holdingitems = list()
-
-	var/list/bag_whitelist = list(
-		/obj/item/weapon/storage/pill_bottle,
-		/obj/item/weapon/storage/plants)
-	var/blacklisted_types = list()
-	var/item_size_limit = ITEM_SIZE_HUGE
-	var/skill_to_check = SKILL_CHEMISTRY
+	var/skill = SKILL_CHEMISTRY
 	var/grind_sound = 'sound/machines/grinder.ogg'
+	var/list/items = list()
+	var/max_items = 10
+	var/max_item_size = ITEM_SIZE_HUGE
+	var/list/banned_items = list()
+	var/list/storage_types = list(
+		/obj/item/storage/pill_bottle,
+		/obj/item/storage/sheetsnatcher,
+		/obj/item/storage/plants
+	)
+	var/list/allowed_containers = list(
+		/obj/item/reagent_containers/glass/beaker
+	)
+	var/list/banned_containers = list(
+		/obj/item/reagent_containers/glass/beaker/bowl,
+		/obj/item/reagent_containers/glass/beaker/vial
+	)
+	var/grind_time = 6 SECONDS
+	var/obj/item/reagent_containers/container
+	var/grinding
 
-/obj/machinery/reagentgrinder/New()
-	..()
-	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
+
+/obj/machinery/reagentgrinder/proc/detach(mob/user)
+	if (!container)
+		return
+	if (user)
+		user.put_in_hands(container)
+	else
+		container.dropInto(get_turf(src))
+	container = null
 	update_icon()
 
-/obj/machinery/reagentgrinder/on_update_icon()
-	if(inuse)
-		icon_state = "[initial(icon_state)]_grinding"
+
+/obj/machinery/reagentgrinder/proc/eject()
+	for (var/obj/item/I in items)
+		I.dropInto(get_turf(src))
+	items.Cut()
+
+
+/obj/machinery/reagentgrinder/proc/reset_machine(mob/user)
+	grinding = FALSE
+	update_icon()
+	if (user)
+		interact(user)
+
+
+/obj/machinery/reagentgrinder/proc/grind(mob/user)
+	if (grinding)
 		return
-	if(beaker)
+	power_change()
+	if (stat & (NOPOWER|BROKEN))
+		return
+	if (!container?.reagents || container.reagents.total_volume >= container.reagents.maximum_volume)
+		return
+	playsound(src, grind_sound, 75, 1)
+	grinding = TRUE
+	update_icon()
+
+	addtimer(CALLBACK(src, .proc/reset_machine, user), grind_time)
+	var/skill_multiplier = CLAMP01(0.5 + (user.get_skill_value(skill) - 1) * 0.167)
+	for (var/obj/item/I in items)
+		if (container.reagents.total_volume >= container.reagents.maximum_volume)
+			break
+		if (I.reagents?.total_volume)
+			I.reagents.trans_to(container, I.reagents.total_volume, skill_multiplier)
+			I.reagents.clear_reagents()
+		var/material/M = I.get_material()
+		if (M?.chem_products?.len)
+			if (isstack(I))
+				var/sheet_volume = 0
+				for (var/chem in M.chem_products)
+					sheet_volume += M.chem_products[chem] * skill_multiplier
+				var/obj/item/stack/material/S = I
+				var/used_sheets = min(Ceil((container.reagents.maximum_volume - container.reagents.total_volume) / sheet_volume), S.get_amount())
+				var/used_all = used_sheets == S.get_amount()
+				S.use(used_sheets)
+				for (var/chem in M.chem_products)
+					container.reagents.add_reagent(chem, used_sheets * M.chem_products[chem] * skill_multiplier)
+				if (!used_all)
+					break
+			else
+				for (var/chem in M.chem_products)
+					container.reagents.add_reagent(chem, M.chem_products[chem] * skill_multiplier)
+		items -= I
+		qdel(I)
+
+
+/obj/machinery/reagentgrinder/proc/grindable(obj/item/I)
+	if (I.reagents?.total_volume)
+		return TRUE
+	var/material/M = I.get_material()
+	if (M?.chem_products?.len)
+		return TRUE
+	return FALSE
+
+
+/obj/machinery/reagentgrinder/on_update_icon()
+	if (grinding)
+		icon_state = "[initial(icon_state)]_grinding"
+	else if (container)
 		icon_state = "[initial(icon_state)]_beaker"
 	else
 		icon_state = "[initial(icon_state)]"
 
-/obj/machinery/reagentgrinder/attackby(var/obj/item/O as obj, var/mob/user as mob)
 
-	if (istype(O,/obj/item/weapon/reagent_containers/glass) || \
-		istype(O,/obj/item/weapon/reagent_containers/food/drinks/glass2) || \
-		istype(O,/obj/item/weapon/reagent_containers/food/drinks/shaker))
+/obj/machinery/reagentgrinder/attackby(obj/item/I, mob/user)
+	if((. = component_attackby(I, user)))
+		detach()
+		eject()
 
-		if (beaker)
-			return 1
-		else
-			if(!user.unEquip(O, src))
-				return
-			src.beaker =  O
+	else if (is_type_in_list(I, allowed_containers) && !is_type_in_list(I, banned_containers))
+		if (container)
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [container]."))
+		else if (user.unEquip(I, src))
+			container = I
 			update_icon()
-			src.updateUsrDialog()
-			return 0
+			updateDialog()
 
-	if(is_type_in_list(O, blacklisted_types))
-		to_chat(user, SPAN_NOTICE("\The [src] cannot grind \the [O]."))
-		return
-
-	if(is_type_in_list(O, bag_whitelist))
-		var/obj/item/weapon/storage/bag = O
-		var/failed = 1
-		for(var/obj/item/G in O)
-			if(!G.reagents || !G.reagents.total_volume)
-				continue
-			failed = 0
-			bag.remove_from_storage(G, src, 1)
-			holdingitems += G
-			if(holdingitems && holdingitems.len >= limit)
-				break
-
-		if(failed)
-			to_chat(user, SPAN_NOTICE("Nothing in \the [O] is usable."))
-			return 1
-		bag.finish_bulk_removal()
-
-		if(!O.contents.len)
-			to_chat(user, "You empty \the [O] into \the [src].")
+	else if (is_type_in_list(I, storage_types))
+		var/obj/item/storage/S = I
+		if (!S.contents.len)
+			to_chat(user, SPAN_WARNING("\The [S] is empty."))
+		else if (items.len >= max_items)
+			to_chat(user, SPAN_WARNING("\The item hopper on \the [src] is full."))
 		else
-			to_chat(user, "You fill \the [src] from \the [O].")
+			var/list/removed = list()
+			for (var/obj/item/G in S)
+				if (G.w_class > max_item_size || is_type_in_list(G, banned_items))
+					continue
+				if (!grindable(G))
+					continue
+				S.remove_from_storage(G, src, 1)
+				removed += G
+				items += G
+				if (items.len >= max_items)
+					break
+			if (removed.len)
+				S.finish_bulk_removal()
+				var/full = items.len >= max_items
+				user.visible_message(
+					"\The [user] empties things from \the [S] into \the [src].",
+					"You empty [english_list(removed)] from \the [S] into \the [src][full ? ", filling it to capacity" : ""]."
+				)
+				updateDialog()
+			else
+				to_chat(user, SPAN_WARNING("Nothing more in \the [S] will go into \the [src]."))
 
-		src.updateUsrDialog()
-		return 0
-	
-	if(O.w_class > item_size_limit)
-		to_chat(user, SPAN_NOTICE("\The [src] cannot fit \the [O]."))
-		return
+	else if (I.w_class > max_item_size)
+		to_chat(user, SPAN_WARNING("\The [I] is too large for \the [src]."))
 
-	if(holdingitems && holdingitems.len >= limit)
-		to_chat(user, SPAN_NOTICE("\The [src] cannot hold any additional items."))
-		return 1
+	else if (items.len >= max_items)
+		to_chat(user, SPAN_WARNING("\The [src] is full."))
 
-	if(!istype(O))
-		return
+	else if (is_type_in_list(I, banned_items) || !grindable(I))
+		to_chat(user, SPAN_WARNING("\The [src] cannot grind \the [I]."))
 
-	if(istype(O,/obj/item/stack/material))
-		var/obj/item/stack/material/stack = O
-		var/material/material = stack.material
-		if(!length(material.chem_products))
-			to_chat(user, SPAN_NOTICE("\The [material.name] is unable to produce any usable reagents."))
-			return 1
+	else if (user.unEquip(I, src))
+		items += I
+		updateUsrDialog()
 
-	else if(!O.reagents || !O.reagents.total_volume)
-		to_chat(user, SPAN_NOTICE("\The [O] is not suitable for grinding."))
-		return 1
+	return TRUE
 
-	if(!user.unEquip(O, src))
-		return
-	holdingitems += O
-	src.updateUsrDialog()
-	return 0
 
 /obj/machinery/reagentgrinder/interface_interact(mob/user)
 	interact(user)
 	return TRUE
 
-/obj/machinery/reagentgrinder/DefaultTopicState()
-	return GLOB.physical_state
 
-/obj/machinery/reagentgrinder/interact(mob/user as mob) // The microwave Menu
-	if(inoperable())
+/obj/machinery/reagentgrinder/interact(mob/user)
+	if (inoperable())
 		return
 	user.set_machine(src)
-	var/is_chamber_empty = 0
-	var/is_beaker_ready = 0
-	var/processing_chamber = ""
-	var/beaker_contents = ""
-	var/dat = list()
-
-	if(!inuse)
-		for (var/obj/item/O in holdingitems)
-			processing_chamber += "\A [O.name]<BR>"
-
-		if (!processing_chamber)
-			is_chamber_empty = 1
-			processing_chamber = "Nothing."
-		if (!beaker)
-			beaker_contents = "<B>No beaker attached.</B><br>"
-		else
-			is_beaker_ready = 1
-			beaker_contents = "<B>The beaker contains:</B><br>"
-			var/anything = 0
-			for(var/datum/reagent/R in beaker.reagents.reagent_list)
-				anything = 1
-				beaker_contents += "[R.volume] - [R.name]<br>"
-			if(!anything)
-				beaker_contents += "Nothing<br>"
-
-
-		dat += {"
-	<b>Processing chamber contains:</b><br>
-	[processing_chamber]<br>
-	[beaker_contents]<hr>
-	"}
-		if (is_beaker_ready && !is_chamber_empty && !(stat & (NOPOWER|BROKEN)))
-			dat += "<A href='?src=\ref[src];action=grind'>Process the reagents</a><BR>"
-		if(holdingitems && holdingitems.len > 0)
-			dat += "<A href='?src=\ref[src];action=eject'>Eject the reagents</a><BR>"
-		if (beaker)
-			dat += "<A href='?src=\ref[src];action=detach'>Detach the beaker</a><BR>"
+	var/window = list()
+	if (grinding)
+		window += "Working, please wait..."
 	else
-		dat += "Please wait..."
-	dat = "<HEAD><TITLE>[name]</TITLE></HEAD><TT>[JOINTEXT(dat)]</TT>"
-	show_browser(user, strip_improper(dat), "window=reagentgrinder")
+		window += "<b>Processing Hopper</b>"
+		if (!items.len)
+			window += " (empty)"
+		else
+			window += "<br><a href='?src=\ref[src];action=grind'>(grind)</a> <a href='?src=\ref[src];action=eject'>(eject)</a><br>"
+			for (var/obj/item/I in items)
+				window += "<br>\An [I]"
+				if (isstack(I))
+					var/obj/item/stack/material/S = I
+					window += " ([S.get_amount()])"
+		window += "<br><br><b>Chemical Container</b>"
+		if (!container)
+			window += " (not attached)"
+		else
+			window += " (\an [container], [Percent(container.reagents.total_volume, container.reagents.maximum_volume, 1)]% full)"
+			window += "<br><a href='?src=\ref[src];action=detach'>(detach)</a><br>"
+			for (var/datum/reagent/R in container.reagents.reagent_list)
+				window += "<br>[R.volume] - [R.name]"
+
+	window = strip_improper("<head><title>[name]</title></head><tt>[JOINTEXT(window)]</tt>")
+	var/datum/browser/popup = new(user, "reagentgrinder", "Reagent Grinder")
+	popup.set_content(window)
+	popup.open()
 	onclose(user, "reagentgrinder")
 
+
 /obj/machinery/reagentgrinder/OnTopic(user, href_list)
-	if(href_list["action"])
-		switch(href_list["action"])
+	if (user && href_list && href_list["action"])
+		switch (href_list["action"])
 			if ("grind")
 				grind(user)
-			if("eject")
+			if ("eject")
 				eject()
 			if ("detach")
-				detach()
+				detach(user)
 		interact(user)
 		return TOPIC_REFRESH
 
-/obj/machinery/reagentgrinder/proc/detach()
-	if (!beaker)
-		return
-	beaker.dropInto(loc)
-	beaker = null
-	update_icon()
 
-/obj/machinery/reagentgrinder/proc/eject()
-	if (!holdingitems || holdingitems.len == 0)
-		return
-
-	for(var/obj/item/O in holdingitems)
-		O.dropInto(loc)
-		holdingitems -= O
-	holdingitems.Cut()
-
-/obj/machinery/reagentgrinder/proc/grind(mob/user)
-
-	power_change()
-	if(stat & (NOPOWER|BROKEN))
-		return
-
-	// Sanity check.
-	if (!beaker || (beaker && beaker.reagents.total_volume >= beaker.reagents.maximum_volume))
-		return
-
-	attempt_skill_effect(user)
-	playsound(src.loc, grind_sound, 75, 1)
-	inuse = 1
-	update_icon()
-
-	// Reset the machine.
-	addtimer(CALLBACK(src, .proc/reset_machine, user), 60)
-
-	var/skill_factor = CLAMP01(1 + 0.3*(user.get_skill_value(skill_to_check) - SKILL_EXPERT)/(SKILL_EXPERT - SKILL_MIN))
-	// Process.
-	for (var/obj/item/O in holdingitems)
-
-		var/remaining_volume = beaker.reagents.maximum_volume - beaker.reagents.total_volume
-		if(remaining_volume <= 0)
-			break
-
-		var/obj/item/stack/material/stack = O
-		if(istype(stack))
-			var/material/material = stack.material
-			if(!material.chem_products.len)
-				break
-
-			var/list/chem_products = material.chem_products
-			var/sheet_volume = 0
-			for(var/chem in chem_products)
-				sheet_volume += chem_products[chem]
-
-			var/amount_to_take = max(0,min(stack.amount,round(remaining_volume/sheet_volume)))
-			if(amount_to_take)
-				stack.use(amount_to_take)
-				if(QDELETED(stack))
-					holdingitems -= stack
-				for(var/chem in chem_products)
-					beaker.reagents.add_reagent(chem, (amount_to_take*chem_products[chem]*skill_factor))
-				continue
-
-		if(O.reagents)
-			O.reagents.trans_to(beaker, O.reagents.total_volume, skill_factor)
-			if(O.reagents.total_volume == 0)
-				holdingitems -= O
-				qdel(O)
-			if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
-				break
-
-/obj/machinery/reagentgrinder/proc/reset_machine(mob/user)
-	inuse = 0
-	interact(user)
-
-
-/obj/machinery/reagentgrinder/proc/attempt_skill_effect(mob/living/carbon/human/user)
-	if(!istype(user) || !prob(user.skill_fail_chance(skill_to_check, 50, SKILL_BASIC)))
-		return
-	var/hand = pick(BP_L_HAND, BP_R_HAND)
-	var/obj/item/organ/external/hand_organ = user.get_organ(hand)
-	if(!hand_organ)
-		return
-
-	var/dam = rand(10, 15)
-	user.visible_message("<span class='danger'>\The [user]'s hand gets caught in \the [src]!</span>", "<span class='danger'>Your hand gets caught in \the [src]!</span>")
-	user.apply_damage(dam, BRUTE, hand, damage_flags = DAM_SHARP, used_weapon = "grinder")
-	if(BP_IS_ROBOTIC(hand_organ))
-		beaker.reagents.add_reagent(/datum/reagent/iron, dam)
+/obj/machinery/reagentgrinder/AltClick(mob/user)
+	if(CanDefaultInteract(user))
+		detach(user)
 	else
-		user.take_blood(beaker, dam)
-	user.Stun(2)
-	addtimer(CALLBACK(src, .proc/shake, user, 40), 0)
+		..()
 
-/obj/machinery/reagentgrinder/proc/shake(mob/user, duration)
-	for(var/i = 1, i<=duration, i++)
-		sleep(1)
-		if(!user || !Adjacent(user))
-			break
-		if(user.is_jittery)
-			continue
-		user.do_jitter(4)
 
-	if(user && !user.is_jittery)
-		user.do_jitter(0) //resets the icon.
+/obj/machinery/reagentgrinder/CtrlClick(mob/user)
+	if(anchored && CanDefaultInteract(user))
+		grind(user)
+	else
+		..()
+
+
+/obj/machinery/reagentgrinder/CtrlAltClick(mob/user)
+	if(CanDefaultInteract(user))
+		eject(user)
+	else
+		..()
+
+
+/obj/machinery/reagentgrinder/RefreshParts()
+	..()
+
 
 /obj/machinery/reagentgrinder/juicer
 	name = "blender"
@@ -287,16 +260,19 @@
 	icon_state = "juicer"
 	density = FALSE
 	anchored = FALSE
-	obj_flags = null
 	grind_sound = 'sound/machines/juicer.ogg'
-	blacklisted_types = list(/obj/item/stack/material)
-	bag_whitelist = list(/obj/item/weapon/storage/plants)
-	item_size_limit = ITEM_SIZE_SMALL
-	skill_to_check = SKILL_COOKING
-
-/obj/machinery/reagentgrinder/juicer/attempt_skill_effect(mob/living/carbon/human/user)
-	if(!istype(user) || !prob(user.skill_fail_chance(skill_to_check, 50, SKILL_BASIC)))
-		return
-	visible_message(SPAN_NOTICE("\The [src] whirrs violently and spills its contents all over \the [user]!"))
-	if(beaker && beaker.reagents)
-		beaker.reagents.splash(user, beaker.reagents.total_volume)
+	max_item_size = ITEM_SIZE_NORMAL
+	skill = SKILL_COOKING
+	banned_items = list(
+		/obj/item/stack/material
+	)
+	storage_types = list(
+		/obj/item/storage/pill_bottle,
+		/obj/item/storage/plants
+	)
+	allowed_containers = list(
+		/obj/item/reagent_containers/glass/beaker,
+		/obj/item/reagent_containers/food/drinks/shaker
+	)
+	machine_name = "blender"
+	machine_desc = "Blends or juices food placed inside it - useful for things like flour. Can't process raw material sheets."

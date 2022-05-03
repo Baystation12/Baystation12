@@ -14,6 +14,7 @@
 	var/alert_pressure = 170 * ONE_ATMOSPHERE
 	var/in_stasis = 0
 		//minimum pressure before check_pressure(...) should be called
+	var/obj/machinery/clamp/clamp // Linked stasis clamp
 
 	can_buckle = 1
 	buckle_require_restraints = 1
@@ -22,6 +23,7 @@
 	build_icon_state = "simple"
 	build_icon = 'icons/obj/pipe-item.dmi'
 	pipe_class = PIPE_CLASS_BINARY
+	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
 
 /obj/machinery/atmospherics/pipe/drain_power()
 	return -1
@@ -97,25 +99,28 @@
 /obj/machinery/atmospherics/pipe/Destroy()
 	QDEL_NULL(parent)
 	QDEL_NULL(sound_token)
+	if (clamp)
+		clamp.detach()
 	if(air_temporary)
 		loc.assume_air(air_temporary)
 
 	. = ..()
 
-/obj/machinery/atmospherics/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/pipe/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if (istype(src, /obj/machinery/atmospherics/unary/tank))
 		return ..()
 	if (istype(src, /obj/machinery/atmospherics/pipe/vent))
 		return ..()
-
-	if(istype(W,/obj/item/device/pipe_painter))
-		return 0
 
 	if(isWrench(W))
 		var/turf/T = src.loc
 		if (level==1 && isturf(T) && !T.is_plating())
 			to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
 			return 1
+
+		if (clamp)
+			to_chat(user, SPAN_WARNING("You must remove \the [clamp] first."))
+			return TRUE
 
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()
@@ -128,7 +133,11 @@
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
 
-		if (do_after(user, 40, src))
+		if (do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
+			if (clamp)
+				to_chat(user, SPAN_WARNING("You must remove \the [clamp] first."))
+				return TRUE
+
 			user.visible_message("<span class='notice'>\The [user] unfastens \the [src].</span>", "<span class='notice'>You have unfastened \the [src].</span>", "You hear a ratchet.")
 
 			new /obj/item/pipe(loc, src)
@@ -138,11 +147,10 @@
 					meter.dismantle()
 			qdel(src)
 
-/obj/machinery/atmospherics/proc/change_color(var/new_color)
-	//only pass valid pipe colors please ~otherwise your pipe will turn invisible
-	if(!pipe_color_check(new_color))
-		return
+/obj/machinery/atmospherics/get_color()
+	return pipe_color
 
+/obj/machinery/atmospherics/set_color(var/new_color)
 	pipe_color = new_color
 	update_icon()
 
@@ -246,7 +254,7 @@
 /obj/machinery/atmospherics/pipe/simple/pipeline_expansion()
 	return list(node1, node2)
 
-/obj/machinery/atmospherics/pipe/simple/change_color(var/new_color)
+/obj/machinery/atmospherics/pipe/simple/set_color(var/new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
 	if(node1)
@@ -489,7 +497,7 @@
 
 	..()
 
-/obj/machinery/atmospherics/pipe/manifold/change_color(var/new_color)
+/obj/machinery/atmospherics/pipe/manifold/set_color(var/new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
 	if(node1)
@@ -749,7 +757,7 @@
 
 	..()
 
-/obj/machinery/atmospherics/pipe/manifold4w/change_color(var/new_color)
+/obj/machinery/atmospherics/pipe/manifold4w/set_color(var/new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
 	if(node1)
@@ -988,7 +996,7 @@
 
 	..()
 
-/obj/machinery/atmospherics/pipe/cap/change_color(var/new_color)
+/obj/machinery/atmospherics/pipe/cap/set_color(var/new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
 	if(node)

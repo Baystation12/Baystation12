@@ -1,10 +1,10 @@
-/obj/item/weapon/implant/chem
+/obj/item/implant/chem
 	name = "chemical implant"
 	desc = "Injects things."
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2)
 	known = 1
 
-/obj/item/weapon/implant/chem/get_data()
+/obj/item/implant/chem/get_data()
 	return {"
 	<b>Implant Specifications:</b><BR>
 	<b>Name:</b> Robust Corp MJ-420 Prisoner Management Implant<BR>
@@ -21,11 +21,11 @@
 	<b>Integrity:</b> Implant will last so long as the subject is alive. However, if the subject suffers from prolonged malnutrition,<BR>
 	nine or more days without nutrients, the implant may become unstable and either pre-maturely inject the subject or simply break."}
 
-/obj/item/weapon/implant/chem/New()
+/obj/item/implant/chem/New()
 	..()
 	create_reagents(50)
 
-/obj/item/weapon/implant/chem/activate(var/amount)
+/obj/item/implant/chem/activate(var/amount)
 	if(malfunction || (!iscarbon(imp_in)))	return 0
 	if(!amount)
 		amount = rand(1,25)
@@ -33,17 +33,17 @@
 	reagents.trans_to_mob(R, amount, CHEM_BLOOD)
 	to_chat(R, "<span class='notice'>You hear a faint *beep*.</span>")
 
-/obj/item/weapon/implant/chem/attackby(obj/item/weapon/I, mob/user)
-	if(istype(I, /obj/item/weapon/reagent_containers/syringe))
+/obj/item/implant/chem/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/reagent_containers/syringe))
 		if(reagents.total_volume >= reagents.maximum_volume)
 			to_chat(user, "<span class='warning'>\The [src] is full.</span>")
 		else
-			if(do_after(user,5,src))
+			if(do_after(user, 0.5 SECONDS, src, DO_MEDICAL))
 				I.reagents.trans_to_obj(src, 5)
 				to_chat(user, "<span class='notice'>You inject 5 units of the solution. The syringe now contains [I.reagents.total_volume] units.</span>")
 	else
 		..()
 
-/obj/item/weapon/implantcase/chem
+/obj/item/implantcase/chem
 	name = "glass case - 'chem'"
-	imp = /obj/item/weapon/implant/chem
+	imp = /obj/item/implant/chem

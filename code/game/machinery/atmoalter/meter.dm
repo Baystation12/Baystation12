@@ -4,17 +4,17 @@
 	icon = 'icons/obj/meter.dmi'
 	icon_state = "meterX"
 	var/atom/target = null //A pipe for the base type
-	anchored = 1.0
+	anchored = TRUE
 	power_channel = ENVIRON
 	idle_power_usage = 15
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/power/apc
+		/obj/item/stock_parts/power/apc
 	)
 	public_variables = list(
 		/decl/public_access/public_variable/gas,
 		/decl/public_access/public_variable/pressure,
-		/decl/public_access/public_variable/temperature		
+		/decl/public_access/public_variable/temperature
 	)
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/meter = 1)
 
@@ -37,7 +37,7 @@
 /obj/machinery/meter/proc/clear_target()
 	if(target)
 		GLOB.destroyed_event.unregister(target, src)
-		target = null	
+		target = null
 
 /obj/machinery/meter/return_air()
 	if(target)
@@ -78,6 +78,7 @@
 	else
 		icon_state = "meter4"
 
+
 /obj/machinery/meter/examine(mob/user, distance)
 	. = ..()
 
@@ -96,6 +97,16 @@
 	else
 		to_chat(user, "The connect error light is blinking.")
 
+
+/obj/machinery/meter/interface_interact(mob/user)
+	if (!target)
+		log_debug(append_admin_tools("\A [src] interacted with by \the [user] had no target.", user, get_turf(src)))
+		to_chat(user, SPAN_WARNING("\The [src] has no target! This might be a bug. Please report it."))
+		return TRUE
+	var/datum/gas_mixture/environment = target.return_air()
+	to_chat(user, "The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]K ([round(environment.temperature-T0C,0.01)]&deg;C)")
+	return TRUE
+
 // turf meter -- prioritizes turfs over pipes for target acquisition
 
 /obj/machinery/meter/turf/Initialize()
@@ -105,8 +116,8 @@
 
 /obj/machinery/meter/starts_with_radio
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/radio/transmitter/basic/buildable,
-		/obj/item/weapon/stock_parts/power/apc/buildable
+		/obj/item/stock_parts/radio/transmitter/basic/buildable,
+		/obj/item/stock_parts/power/apc/buildable
 	)
 
 /decl/stock_part_preset/radio/basic_transmitter/meter

@@ -29,8 +29,7 @@ SUBSYSTEM_DEF(supply)
 		"total" = "Total" // If you're adding additional point sources, add it here in a new line. Don't forget to put a comma after the old last line.
 	)
 
-/datum/controller/subsystem/supply/Initialize()
-	. = ..()
+/datum/controller/subsystem/supply/Initialize(start_uptime)
 	ordernum = rand(1,9000)
 
 	//Build master supply list
@@ -49,8 +48,12 @@ SUBSYSTEM_DEF(supply)
 /datum/controller/subsystem/supply/fire()
 	add_points_from_source(points_per_process, "time")
 
-/datum/controller/subsystem/supply/stat_entry()
+
+/datum/controller/subsystem/supply/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
 	..("Points: [points]")
+
 
 //Supply-related helper procs.
 
@@ -63,11 +66,11 @@ SUBSYSTEM_DEF(supply)
 /datum/controller/subsystem/supply/proc/forbidden_atoms_check(atom/A)
 	if(istype(A,/mob/living))
 		return 1
-	if(istype(A,/obj/item/weapon/disk/nuclear))
+	if(istype(A,/obj/item/disk/nuclear))
 		return 1
 	if(istype(A,/obj/machinery/nuclearbomb))
 		return 1
-	if(istype(A,/obj/item/device/radio/beacon))
+	if(istype(A,/obj/machinery/tele_beacon))
 		return 1
 
 	for(var/i=1, i<=A.contents.len, i++)
@@ -82,7 +85,7 @@ SUBSYSTEM_DEF(supply)
 		for(var/atom/movable/AM in subarea)
 			if(AM.anchored)
 				continue
-			if(istype(AM, /obj/structure/closet/crate/))
+			if(istype(AM, /obj/structure/closet/crate))
 				var/obj/structure/closet/crate/CR = AM
 				callHook("sell_crate", list(CR, subarea))
 				add_points_from_source(CR.points_per_crate, "crate")
@@ -91,8 +94,8 @@ SUBSYSTEM_DEF(supply)
 				for(var/atom in CR)
 					// Sell manifests
 					var/atom/A = atom
-					if(find_slip && istype(A,/obj/item/weapon/paper/manifest))
-						var/obj/item/weapon/paper/manifest/slip = A
+					if(find_slip && istype(A,/obj/item/paper/manifest))
+						var/obj/item/paper/manifest/slip = A
 						if(!slip.is_copy && slip.stamped && slip.stamped.len) //Any stamp works.
 							add_points_from_source(points_per_slip, "manifest")
 							find_slip = 0
@@ -108,8 +111,8 @@ SUBSYSTEM_DEF(supply)
 						continue
 
 					// Must sell ore detector disks in crates
-					if(istype(A, /obj/item/weapon/disk/survey))
-						var/obj/item/weapon/disk/survey/D = A
+					if(istype(A, /obj/item/disk/survey))
+						var/obj/item/disk/survey/D = A
 						add_points_from_source(round(D.Value() * 0.005), "gep")
 
 			qdel(AM)
@@ -157,16 +160,16 @@ SUBSYSTEM_DEF(supply)
 		A.SetName("[SP.containername][SO.comment ? " ([SO.comment])":"" ]")
 		//supply manifest generation begin
 
-		var/obj/item/weapon/paper/manifest/slip
+		var/obj/item/paper/manifest/slip
 		if(!SP.contraband)
 			var/info = list()
-			info +="<h3>[command_name()] Shipping Manifest</h3><hr><br>"
+			info +="<h3>[GLOB.using_map.boss_name] Shipping Manifest</h3><hr><br>"
 			info +="Order #[SO.ordernum]<br>"
 			info +="Destination: [GLOB.using_map.station_name]<br>"
 			info +="[shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"
 			info +="CONTENTS:<br><ul>"
 
-			slip = new /obj/item/weapon/paper/manifest(A, JOINTEXT(info))
+			slip = new /obj/item/paper/manifest(A, JOINTEXT(info))
 			slip.is_copy = 0
 
 		//spawn the stuff, finish generating the manifest while you're at it

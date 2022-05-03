@@ -1,6 +1,6 @@
 /datum/codex_category
 	var/name = "Generic Category"
-	var/desc = "Some description for category's codex entry"
+	var/desc = "Some description for a category's codex entry."
 	var/list/items = list()
 
 //Children should call ..() at the end after filling the items list

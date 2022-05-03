@@ -1,4 +1,4 @@
-/obj/item/weapon/cannonframe
+/obj/item/cannonframe
 	name = "pneumatic cannon frame"
 	desc = "A half-finished pneumatic cannon."
 	icon = 'icons/obj/crafting_icons.dmi'
@@ -10,7 +10,7 @@
 	progress_message = "You secure the piping inside the frame."
 	next_stages = list(/decl/crafting_stage/welding/cannon_pipe)
 	item_icon_state = "pneumatic1"
-	begins_with_object_type = /obj/item/weapon/cannonframe
+	begins_with_object_type = /obj/item/cannonframe
 
 /decl/crafting_stage/welding/cannon_pipe
 	progress_message = "You weld the pipe into place."
@@ -39,4 +39,4 @@
 
 /decl/crafting_stage/welding/cannon_valve
 	progress_message = "You weld the valve into place."
-	product = /obj/item/weapon/gun/launcher/pneumatic
+	product = /obj/item/gun/launcher/pneumatic

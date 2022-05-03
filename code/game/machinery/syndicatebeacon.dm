@@ -9,11 +9,11 @@
 /obj/machinery/syndicate_beacon
 	name = "ominous beacon"
 	desc = "This looks suspicious..."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/syndicate_beacon.dmi'
 	icon_state = "syndbeacon"
 
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 
 	var/temptext = ""
 	var/selfdestructing = 0
@@ -55,12 +55,11 @@
 			src.updateUsrDialog()
 			return
 		charges -= 1
-		switch(rand(1,2))
-			if(1)
-				temptext = "<font color=red><i><b>Double-crosser. You planned to betray us from the start. Allow us to repay the favor in kind.</b></i></font>"
-				src.updateUsrDialog()
-				spawn(rand(50,200)) selfdestruct()
-				return
+		if (rand(0, 1))
+			temptext = "<font color=red><i><b>Double-crosser. You planned to betray us from the start. Allow us to repay the favor in kind.</b></i></font>"
+			src.updateUsrDialog()
+			spawn(rand(50,200)) selfdestruct()
+			return
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/N = M
 			to_chat(M, "<B>You have joined the ranks of the Syndicate and become a traitor to the station!</B>")
@@ -86,8 +85,8 @@
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "beacon"
 
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	layer = BASE_ABOVE_OBJ_LAYER //so people can't hide it and it's REALLY OBVIOUS
 	stat = 0
 
@@ -129,14 +128,14 @@
 	else
 		to_chat(user, "<span class='danger'>You need to screw the beacon to the floor first!</span>")
 
-/obj/machinery/power/singularity_beacon/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/power/singularity_beacon/attackby(obj/item/W as obj, mob/user as mob)
 	if(isScrewdriver(W))
 		if(active)
 			to_chat(user, "<span class='danger'>You need to deactivate the beacon first!</span>")
 			return
 
 		if(anchored)
-			anchored = 0
+			anchored = FALSE
 			to_chat(user, "<span class='notice'>You unscrew the beacon from the floor.</span>")
 			disconnect_from_network()
 			return
@@ -144,7 +143,7 @@
 			if(!connect_to_network())
 				to_chat(user, "This device must be placed over an exposed cable.")
 				return
-			anchored = 1
+			anchored = TRUE
 			to_chat(user, "<span class='notice'>You screw the beacon to the floor and attach the cable.</span>")
 			return
 	..()

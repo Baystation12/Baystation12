@@ -38,58 +38,60 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	sort_order = 2
 	var/hide_species = TRUE
 
-/datum/category_item/player_setup_item/physical/body/load_character(var/savefile/S)
-	from_file(S["species"], pref.species)
-	from_file(S["hair_red"], pref.r_hair)
-	from_file(S["hair_green"], pref.g_hair)
-	from_file(S["hair_blue"], pref.b_hair)
-	from_file(S["facial_red"], pref.r_facial)
-	from_file(S["facial_green"], pref.g_facial)
-	from_file(S["facial_blue"], pref.b_facial)
-	from_file(S["skin_tone"], pref.s_tone)
-	from_file(S["skin_red"], pref.r_skin)
-	from_file(S["skin_green"], pref.g_skin)
-	from_file(S["skin_blue"], pref.b_skin)
-	from_file(S["skin_base"], pref.s_base)
-	from_file(S["hair_style_name"], pref.h_style)
-	from_file(S["facial_style_name"], pref.f_style)
-	from_file(S["eyes_red"], pref.r_eyes)
-	from_file(S["eyes_green"], pref.g_eyes)
-	from_file(S["eyes_blue"], pref.b_eyes)
-	from_file(S["b_type"], pref.b_type)
-	from_file(S["disabilities"], pref.disabilities)
-	from_file(S["organ_data"], pref.organ_data)
-	from_file(S["rlimb_data"], pref.rlimb_data)
-	from_file(S["body_markings"], pref.body_markings)
-	from_file(S["body_descriptors"], pref.body_descriptors)
+/datum/category_item/player_setup_item/physical/body/load_character(datum/pref_record_reader/R)
+	pref.species = R.read("species")
+	if(R.get_version() < 2 && pref.species == "booster")
+		pref.species = "human"
+	pref.r_hair = R.read("hair_red")
+	pref.g_hair = R.read("hair_green")
+	pref.b_hair = R.read("hair_blue")
+	pref.r_facial = R.read("facial_red")
+	pref.g_facial = R.read("facial_green")
+	pref.b_facial = R.read("facial_blue")
+	pref.s_tone = R.read("skin_tone")
+	pref.r_skin = R.read("skin_red")
+	pref.g_skin = R.read("skin_green")
+	pref.b_skin = R.read("skin_blue")
+	pref.s_base = R.read("skin_base")
+	pref.h_style = R.read("hair_style_name")
+	pref.f_style = R.read("facial_style_name")
+	pref.r_eyes = R.read("eyes_red")
+	pref.g_eyes = R.read("eyes_green")
+	pref.b_eyes = R.read("eyes_blue")
+	pref.b_type = R.read("b_type")
+	pref.disabilities = R.read("disabilities")
+	pref.organ_data = R.read("organ_data")
+	pref.rlimb_data = R.read("rlimb_data")
+	pref.body_markings = R.read("body_markings")
+	pref.body_descriptors = R.read("body_descriptors")
 	pref.preview_icon = null
-	from_file(S["bgstate"], pref.bgstate)
+	pref.bgstate = R.read("bgstate")
 
-/datum/category_item/player_setup_item/physical/body/save_character(var/savefile/S)
-	to_file(S["species"], pref.species)
-	to_file(S["hair_red"], pref.r_hair)
-	to_file(S["hair_green"], pref.g_hair)
-	to_file(S["hair_blue"], pref.b_hair)
-	to_file(S["facial_red"], pref.r_facial)
-	to_file(S["facial_green"], pref.g_facial)
-	to_file(S["facial_blue"], pref.b_facial)
-	to_file(S["skin_tone"], pref.s_tone)
-	to_file(S["skin_red"], pref.r_skin)
-	to_file(S["skin_green"], pref.g_skin)
-	to_file(S["skin_base"], pref.s_base)
-	to_file(S["skin_blue"], pref.b_skin)
-	to_file(S["hair_style_name"],pref.h_style)
-	to_file(S["facial_style_name"],pref.f_style)
-	to_file(S["eyes_red"], pref.r_eyes)
-	to_file(S["eyes_green"], pref.g_eyes)
-	to_file(S["eyes_blue"], pref.b_eyes)
-	to_file(S["b_type"], pref.b_type)
-	to_file(S["disabilities"], pref.disabilities)
-	to_file(S["organ_data"], pref.organ_data)
-	to_file(S["rlimb_data"], pref.rlimb_data)
-	to_file(S["body_markings"], pref.body_markings)
-	to_file(S["body_descriptors"], pref.body_descriptors)
-	to_file(S["bgstate"], pref.bgstate)
+/datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/W)
+	W.write("species", pref.species)
+	W.write("hair_red", pref.r_hair)
+	W.write("hair_green", pref.g_hair)
+	W.write("hair_blue", pref.b_hair)
+	W.write("facial_red", pref.r_facial)
+	W.write("facial_green", pref.g_facial)
+	W.write("facial_blue", pref.b_facial)
+	W.write("skin_tone", pref.s_tone)
+	W.write("skin_red", pref.r_skin)
+	W.write("skin_green", pref.g_skin)
+	W.write("skin_base", pref.s_base)
+	W.write("skin_blue", pref.b_skin)
+	W.write("hair_style_name", pref.h_style)
+	W.write("facial_style_name", pref.f_style)
+	W.write("eyes_red", pref.r_eyes)
+	W.write("eyes_green", pref.g_eyes)
+	W.write("eyes_blue", pref.b_eyes)
+	W.write("b_type", pref.b_type)
+	W.write("disabilities", pref.disabilities)
+	W.write("organ_data", pref.organ_data)
+	W.write("rlimb_data", pref.rlimb_data)
+	W.write("body_markings", pref.body_markings)
+	W.write("body_descriptors", pref.body_descriptors)
+	W.write("bgstate", pref.bgstate)
 
 /datum/category_item/player_setup_item/physical/body/sanitize_character(var/savefile/S)
 	pref.r_hair			= sanitize_integer(pref.r_hair, 0, 255, initial(pref.r_hair))
@@ -141,7 +143,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				if(isnull(last_descriptors[entry]))
 					pref.body_descriptors[entry] = descriptor.default_value // Species datums have initial default value.
 				else
-					pref.body_descriptors[entry] = Clamp(last_descriptors[entry], 1, LAZYLEN(descriptor.standalone_value_descriptors))
+					pref.body_descriptors[entry] = clamp(last_descriptors[entry], 1, LAZYLEN(descriptor.standalone_value_descriptors))
 
 	if(!pref.bgstate || !(pref.bgstate in pref.bgstate_options))
 		pref.bgstate = "000"
@@ -275,21 +277,21 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	. += "<b>Hair</b><br>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
-		. += "<a href='?src=\ref[src];hair_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_hair, 2)][num2hex(pref.g_hair, 2)][num2hex(pref.b_hair, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_hair, 2)][num2hex(pref.g_hair, 2)][num2hex(pref.b_hair)]'><tr><td>__</td></tr></table></font> "
-	. += " Style: <a href='?src=\ref[src];hair_style=1'>[pref.h_style]</a><br>"
+		. += "<a href='?src=\ref[src];hair_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_hair & 0xFF)][num2hex(pref.g_hair & 0xFF)][num2hex(pref.b_hair & 0xFF)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_hair & 0xFF)][num2hex(pref.g_hair & 0xFF)][num2hex(pref.b_hair & 0xFF)]'><tr><td>__</td></tr></table></font> "
+	. += " Style: [UIBUTTON("hair_style=1;decrement", "<", null)][UIBUTTON("hair_style=1;increment", ">", null)]<a href='?src=\ref[src];hair_style=1'>[pref.h_style]</a><br>"
 
 	. += "<br><b>Facial</b><br>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
-		. += "<a href='?src=\ref[src];facial_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_facial, 2)][num2hex(pref.g_facial, 2)][num2hex(pref.b_facial, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_facial, 2)][num2hex(pref.g_facial, 2)][num2hex(pref.b_facial)]'><tr><td>__</td></tr></table></font> "
-	. += " Style: <a href='?src=\ref[src];facial_style=1'>[pref.f_style]</a><br>"
+		. += "<a href='?src=\ref[src];facial_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_facial & 0xFF)][num2hex(pref.g_facial & 0xFF)][num2hex(pref.b_facial & 0xFF)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_facial & 0xFF)][num2hex(pref.g_facial & 0xFF)][num2hex(pref.b_facial & 0xFF)]'><tr><td>__</td></tr></table></font> "
+	. += " Style: [UIBUTTON("facial_style=1;decrement", "<", null)][UIBUTTON("facial_style=1;increment", ">", null)]<a href='?src=\ref[src];facial_style=1'>[pref.f_style]</a><br>"
 
 	if(has_flag(mob_species, HAS_EYE_COLOR))
 		. += "<br><b>Eyes</b><br>"
-		. += "<a href='?src=\ref[src];eye_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_eyes, 2)][num2hex(pref.g_eyes, 2)][num2hex(pref.b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_eyes, 2)][num2hex(pref.g_eyes, 2)][num2hex(pref.b_eyes)]'><tr><td>__</td></tr></table></font><br>"
+		. += "<a href='?src=\ref[src];eye_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_eyes & 0xFF)][num2hex(pref.g_eyes & 0xFF)][num2hex(pref.b_eyes & 0xFF)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_eyes & 0xFF)][num2hex(pref.g_eyes & 0xFF)][num2hex(pref.b_eyes & 0xFF)]'><tr><td>__</td></tr></table></font><br>"
 
 	if(has_flag(mob_species, HAS_SKIN_COLOR))
 		. += "<br><b>Body Color</b><br>"
-		. += "<a href='?src=\ref[src];skin_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_skin, 2)][num2hex(pref.g_skin, 2)][num2hex(pref.b_skin, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_skin, 2)][num2hex(pref.g_skin, 2)][num2hex(pref.b_skin)]'><tr><td>__</td></tr></table></font><br>"
+		. += "<a href='?src=\ref[src];skin_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_skin & 0xFF)][num2hex(pref.g_skin & 0xFF)][num2hex(pref.b_skin & 0xFF)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_skin & 0xFF)][num2hex(pref.g_skin & 0xFF)][num2hex(pref.b_skin & 0xFF)]'><tr><td>__</td></tr></table></font><br>"
 
 	. += "<br><a href='?src=\ref[src];marking_style=1'>Body Markings +</a><br>"
 	for(var/M in pref.body_markings)
@@ -321,7 +323,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				var/choice = input("Please select a descriptor.", "Descriptor") as null|anything in descriptor.chargen_value_descriptors
 				if(choice && mob_species.descriptors[desc_id]) // Check in case they sneakily changed species.
 					pref.body_descriptors[desc_id] = descriptor.chargen_value_descriptors[choice]
-					return TOPIC_REFRESH
+					return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["blood_type"])
 		var/new_b_type = input(user, "Choose your character's blood-type:", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in valid_bloodtypes
@@ -340,7 +342,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 		var/list/species_to_pick = list()
 		for(var/species in playable_species)
-			if(!check_rights(R_ADMIN, 0) && config.usealienwhitelist)
+			if(!GLOB.skip_allow_lists && !check_rights(R_ADMIN, 0) && config.usealienwhitelist)
 				var/datum/species/current_species = all_species[species]
 				if(!(current_species.spawn_flags & SPECIES_CAN_JOIN))
 					continue
@@ -395,7 +397,17 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	else if(href_list["hair_style"])
 		var/list/valid_hairstyles = mob_species.get_hair_styles()
-		var/new_h_style = input(user, "Choose your character's hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.h_style)  as null|anything in valid_hairstyles
+		var/new_h_style
+		var/hair_index = list_find(valid_hairstyles, pref.h_style)
+
+		if (href_list["increment"])
+			if (hair_index < valid_hairstyles.len && valid_hairstyles[hair_index + 1])
+				new_h_style = valid_hairstyles[hair_index + 1]
+		else if (href_list["decrement"])
+			if (hair_index > 1 && valid_hairstyles[hair_index - 1])
+				new_h_style = valid_hairstyles[hair_index - 1]
+		else
+			new_h_style = input(user, "Choose your character's hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.h_style)  as null|anything in valid_hairstyles
 
 		mob_species = all_species[pref.species]
 		if(new_h_style && CanUseTopic(user) && (new_h_style in mob_species.get_hair_styles()))
@@ -451,11 +463,20 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	else if(href_list["facial_style"])
 		var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(pref.gender)
+		var/new_f_style
+		var/hair_index = list_find(valid_facialhairstyles, pref.f_style)
 
-		var/new_f_style = input(user, "Choose your character's facial-hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.f_style)  as null|anything in valid_facialhairstyles
+		if (href_list["increment"])
+			if (hair_index < valid_facialhairstyles.len && valid_facialhairstyles[hair_index + 1])
+				new_f_style = valid_facialhairstyles[hair_index + 1]
+		else if (href_list["decrement"])
+			if (hair_index > 1 && valid_facialhairstyles[hair_index - 1])
+				new_f_style = valid_facialhairstyles[hair_index - 1]
+		else
+			new_f_style = input(user, "Choose your character's facial-hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.f_style)  as null|anything in valid_facialhairstyles
 
 		mob_species = all_species[pref.species]
-		if(new_f_style && CanUseTopic(user) && mob_species.get_facial_hair_styles(pref.gender))
+		if(new_f_style && CanUseTopic(user) && (new_f_style in mob_species.get_facial_hair_styles(pref.gender)))
 			pref.f_style = new_f_style
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 

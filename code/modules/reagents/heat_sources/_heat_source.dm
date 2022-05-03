@@ -10,20 +10,21 @@
 	icon = 'icons/obj/machines/heat_sources.dmi'
 	icon_state = "hotplate"
 	atom_flags = ATOM_FLAG_CLIMBABLE
-	density =    TRUE
-	anchored =   TRUE
+	anchored = TRUE
 	idle_power_usage = 0
 	active_power_usage = 1.2 KILOWATTS
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	machine_name = "chemical heater"
+	machine_desc = "A small, configurable burner used to heat beakers and other chemical containers."
 
 	var/image/glow_icon
 	var/image/beaker_icon
 	var/image/on_icon
 
 	var/heater_mode =          HEATER_MODE_HEAT
-	var/list/permitted_types = list(/obj/item/weapon/reagent_containers/glass)
+	var/list/permitted_types = list(/obj/item/reagent_containers/glass)
 	var/max_temperature =      200 CELSIUS
 	var/min_temperature =      40  CELSIUS
 	var/heating_power =        10 // K
@@ -38,6 +39,8 @@
 	heater_mode =      HEATER_MODE_COOL
 	max_temperature =  30 CELSIUS
 	min_temperature = -80 CELSIUS
+	machine_name = "chemical cooler"
+	machine_desc = "Like a chemical heater, but chills things instead of heating them up."
 
 /obj/machinery/reagent_temperature/Initialize()
 	target_temperature = min_temperature
@@ -50,9 +53,9 @@
 	. = ..()
 
 /obj/machinery/reagent_temperature/RefreshParts()
-	heating_power = initial(heating_power) * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor), 0, 10)
+	heating_power = initial(heating_power) * clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 10)
 
-	var/comp = 0.25 KILOWATTS * total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
+	var/comp = 0.25 KILOWATTS * total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
 	if(comp)
 		change_power_consumption(max(0.5 KILOWATTS, initial(active_power_usage) - comp), POWER_USE_ACTIVE)
 	..()
@@ -64,6 +67,20 @@
 	if(((stat & (BROKEN|NOPOWER)) || !anchored) && use_power >= POWER_USE_ACTIVE)
 		update_use_power(POWER_USE_IDLE)
 		queue_icon_update()
+
+/obj/machinery/reagent_temperature/proc/eject_beaker(mob/user)
+	if(!container)
+		return
+	var/obj/item/reagent_containers/B = container
+	user.put_in_hands(B)
+	container = null
+	update_icon()
+
+/obj/machinery/reagent_temperature/AltClick(mob/user)
+	if(CanDefaultInteract(user))
+		eject_beaker(user)
+	else
+		..()
 
 /obj/machinery/reagent_temperature/interface_interact(var/mob/user)
 	interact(user)
@@ -117,7 +134,7 @@
 		if(temperature > MINIMUM_GLOW_TEMPERATURE) // 50C
 			if(!glow_icon)
 				glow_icon = image(icon, "[icon_state]-glow")
-			glow_icon.alpha = Clamp(temperature - MINIMUM_GLOW_TEMPERATURE, MINIMUM_GLOW_VALUE, MAXIMUM_GLOW_VALUE)
+			glow_icon.alpha = clamp(temperature - MINIMUM_GLOW_TEMPERATURE, MINIMUM_GLOW_VALUE, MAXIMUM_GLOW_VALUE)
 			LAZYADD(adding_overlays, glow_icon)
 			set_light(0.2, 0.1, 1, l_color = COLOR_RED)
 		else
@@ -182,7 +199,7 @@
 /obj/machinery/reagent_temperature/OnTopic(var/mob/user, var/href_list)
 
 	if(href_list["adjust_temperature"])
-		target_temperature = Clamp(target_temperature + text2num(href_list["adjust_temperature"]), min_temperature, max_temperature)
+		target_temperature = clamp(target_temperature + text2num(href_list["adjust_temperature"]), min_temperature, max_temperature)
 		. = TOPIC_REFRESH
 
 	if(href_list["toggle_power"])
@@ -191,11 +208,7 @@
 			to_chat(user, SPAN_WARNING("The button clicks, but nothing happens."))
 
 	if(href_list["remove_container"])
-		if(container)
-			container.dropInto(loc)
-			user.put_in_hands(container)
-			container = null
-			update_icon()
+		eject_beaker(user)
 		. = TOPIC_REFRESH
 
 	if(. == TOPIC_REFRESH)

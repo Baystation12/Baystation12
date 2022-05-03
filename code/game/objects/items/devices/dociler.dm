@@ -3,6 +3,7 @@
 	desc = "A complex single use recharging injector that spreads a complex neurological serum that makes animals docile and friendly. Somewhat."
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_BIO = 5, TECH_MATERIAL = 2)
+	icon = 'icons/obj/dociler.dmi'
 	icon_state = "animal_tagger1"
 	item_icons = list(
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns.dmi',
@@ -42,7 +43,7 @@
 		L.faction = null
 	if(istype(L,/mob/living/simple_animal/hostile))
 		var/mob/living/simple_animal/hostile/H = L
-		H.LoseTarget()
+		H.ai_holder.lose_target()
 		H.attack_same = 0
 		H.friends += weakref(user)
 	L.desc += "<br><span class='notice'>It looks especially docile.</span>"

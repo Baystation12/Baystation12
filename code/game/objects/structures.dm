@@ -21,15 +21,12 @@
 		return 1
 	visible_message("<span class='danger'>\The [user] [attack_verb] \the [src]!</span>")
 	attack_animation(user)
-	take_damage(damage)
+	damage_health(damage, DAMAGE_BRUTE)
 	return 1
 
 /obj/structure/proc/mob_breakout(var/mob/living/escapee)
 	set waitfor = FALSE
 	return FALSE
-
-/obj/structure/proc/take_damage(var/damage)
-	return
 
 /obj/structure/Destroy()
 	reset_mobs_offset()
@@ -59,9 +56,22 @@
 	if(. && !CanFluidPass())
 		fluid_update()
 
+/obj/structure/attackby(obj/item/O, mob/user)
+	if(user.a_intent != I_HELP && istype(O, /obj/item/natural_weapon))
+		//Bit dirty, but the entire attackby chain seems kinda wrong to begin with
+		//Things should probably be parent first and return true if something handled it already, not child first
+		src.add_fingerprint(user)
+		attack_generic(user, O.force, pick(O.attack_verb))
+		return
+	. = ..()
 
 /obj/structure/attack_hand(mob/user)
 	..()
+	if(MUTATION_FERAL in user.mutations)
+		attack_generic(user,10,"smashes")
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2)
+		attack_animation(user)
+		playsound(loc, 'sound/weapons/tablehit1.ogg', 40, 1)
 	if(breakable)
 		if(MUTATION_HULK in user.mutations)
 			user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
@@ -78,23 +88,25 @@
 		return TRUE
 	if (G.assailant.a_intent == I_HURT)
 		// Slam their face against the table.
-		var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, BRUTE, damage = 8)
+		var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, DAMAGE_BRUTE, damage = 8)
 		if (prob(30 * (1 - blocked)))
 			G.affecting.Weaken(5)
-		G.affecting.apply_damage(8, BRUTE, BP_HEAD)
+		G.affecting.apply_damage(8, DAMAGE_BRUTE, BP_HEAD)
 		visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
 		if (material)
 			playsound(loc, material.tableslam_noise, 50, 1)
 		else
 			playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
-		var/list/L = take_damage(rand(1,5))
-		for(var/obj/item/weapon/material/shard/S in L)
-			if(S.sharp && prob(50))
-				G.affecting.visible_message("<span class='danger'>\The [S] slices into [G.affecting]'s face!</span>", "<span class='danger'>\The [S] slices into your face!</span>")
-				G.affecting.standard_weapon_hit_effects(S, G.assailant, S.force*2, BP_HEAD)
+		damage_health(rand(1, 5), DAMAGE_BRUTE)
 		qdel(G)
 	else if(atom_flags & ATOM_FLAG_CLIMBABLE)
 		var/obj/occupied = turf_is_crowded()
+		if (occupied)
+			to_chat(G.assailant, "<span class='danger'>There's \a [occupied] in the way.</span>")
+			return TRUE
+		if (!do_after(G.assailant, 3 SECONDS, G.affecting, DO_PUBLIC_UNIQUE))
+			return TRUE
+		occupied = turf_is_crowded()
 		if (occupied)
 			to_chat(G.assailant, "<span class='danger'>There's \a [occupied] in the way.</span>")
 			return TRUE
@@ -103,18 +115,6 @@
 		visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
 		qdel(G)
 		return TRUE
-
-/obj/structure/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			if(prob(50))
-				qdel(src)
-				return
-		if(3.0)
-			return
 
 /obj/structure/proc/can_visually_connect()
 	return anchored
@@ -164,7 +164,7 @@
 					if(istype(O, b_type))
 						success = 1
 						for(var/obj/structure/S in T)
-							if(istype(S, src))
+							if(can_visually_connect_to(S))
 								success = 0
 						for(var/nb_type in noblend_objects)
 							if(istype(O, nb_type))

@@ -6,6 +6,9 @@ macro "borghotkeymode"
 		name = "Center+REP"
 		command = ".center"
 	elem 
+		name = "ALT+Return"
+		command = "Toggle-Fullscreen"
+	elem 
 		name = "Northeast"
 		command = ".northeast"
 	elem 
@@ -208,7 +211,7 @@ macro "borghotkeymode"
 		command = "msay"
 	elem 
 		name = "F6"
-		command = "Player-Panel-New"
+		command = "Player-Panel"
 	elem 
 		name = "F7"
 		command = "Admin-PM"
@@ -232,6 +235,9 @@ macro "macro"
 	elem 
 		name = "Center+REP"
 		command = ".center"
+	elem 
+		name = "ALT+Return"
+		command = "Toggle-Fullscreen"
 	elem 
 		name = "Northeast"
 		command = ".northeast"
@@ -359,6 +365,12 @@ macro "macro"
 		name = "CTRL+Numpad8"
 		command = "body-toggle-head"
 	elem 
+		name = "CTRL+Add"
+		command = "move-upwards"
+	elem 
+		name = "CTRL+Subtract"
+		command = "move-down"
+	elem 
 		name = "F1"
 		command = "adminhelp"
 	elem 
@@ -384,7 +396,7 @@ macro "macro"
 		command = "msay"
 	elem 
 		name = "F6"
-		command = "Player-Panel-New"
+		command = "Player-Panel"
 	elem 
 		name = "F7"
 		command = "Admin-PM"
@@ -394,12 +406,6 @@ macro "macro"
 	elem 
 		name = "F12"
 		command = "F12"
-	elem 
-		name = "CTRL+Add"
-		command = "move-upwards"
-	elem 
-		name = "CTRL+Subtract"
-		command = "move-down"
 
 macro "hotkeymode"
 	elem 
@@ -408,6 +414,9 @@ macro "hotkeymode"
 	elem 
 		name = "Center+REP"
 		command = ".center"
+	elem 
+		name = "ALT+Return"
+		command = "Toggle-Fullscreen"
 	elem 
 		name = "Northeast"
 		command = ".northeast"
@@ -623,7 +632,7 @@ macro "hotkeymode"
 		command = "msay"
 	elem 
 		name = "F6"
-		command = "Player-Panel-New"
+		command = "Player-Panel"
 	elem 
 		name = "F7"
 		command = "Admin-PM"
@@ -653,6 +662,9 @@ macro "borgmacro"
 	elem 
 		name = "Center+REP"
 		command = ".center"
+	elem 
+		name = "ALT+Return"
+		command = "Toggle-Fullscreen"
 	elem 
 		name = "Northeast"
 		command = ".northeast"
@@ -774,6 +786,12 @@ macro "borgmacro"
 		name = "CTRL+Numpad8"
 		command = "body-toggle-head"
 	elem 
+		name = "CTRL+Add"
+		command = "move-upwards"
+	elem 
+		name = "CTRL+Subtract"
+		command = "move-down"
+	elem 
 		name = "F1"
 		command = "adminhelp"
 	elem 
@@ -799,7 +817,7 @@ macro "borgmacro"
 		command = "msay"
 	elem 
 		name = "F6"
-		command = "Player-Panel-New"
+		command = "Player-Panel"
 	elem 
 		name = "F7"
 		command = "Admin-PM"
@@ -809,12 +827,6 @@ macro "borgmacro"
 	elem 
 		name = "F12"
 		command = "F12"
-	elem 
-		name = "CTRL+Add"
-		command = "move-upwards"
-	elem 
-		name = "CTRL+Subtract"
-		command = "move-down"
 
 
 menu "menu"
@@ -969,7 +981,7 @@ window "mainwindow"
 		anchor2 = none
 		saved-params = ""
 		text = "Hotkey Toggle"
-		command = ".winset \"mainwindow.macro!=macro ? mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5 : mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#f0f0f0\""
+		command = ".winset \"mainwindow.macro!=macro ? mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true : mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true\""
 		button-type = pushbox
 	elem "mainvsplit"
 		type = CHILD
@@ -1033,11 +1045,9 @@ window "mapwindow"
 		size = 640x480
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = none
 		is-visible = false
 		is-disabled = true
 		saved-params = ""
-		auto-format = false
 
 window "outputwindow"
 	elem "outputwindow"
@@ -1053,6 +1063,15 @@ window "outputwindow"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+	elem "browseroutput"
+		type = BROWSER
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #ffffff
+		is-visible = false
+		saved-params = ""
 	elem "output"
 		type = OUTPUT
 		pos = 0,0
@@ -1060,14 +1079,12 @@ window "outputwindow"
 		anchor1 = 0,0
 		anchor2 = 100,100
 		is-default = true
-		saved-params = "max-lines"
-		style = ".system {color:#ff0000;}"
-		max-lines = 0
+		saved-params = ""
 
 window "rpane"
 	elem "rpane"
 		type = MAIN
-		pos = 281,0
+		pos = 418,0
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
@@ -1082,25 +1099,25 @@ window "rpane"
 		saved-params = "splitter"
 		right = "outputwindow"
 		is-vert = false
-	elem "github"
+	elem "linksource"
 		type = BUTTON
 		pos = 476,0
 		size = 60x15
 		anchor1 = none
 		anchor2 = none
 		saved-params = "is-checked"
-		text = "GitHub"
-		command = "GitHub"
-	elem "BugReport"
+		text = "Source"
+		command = "link-source"
+	elem "linkissue"
 		type = BUTTON
 		pos = 536,0
 		size = 60x15
 		anchor1 = none
 		anchor2 = none
 		saved-params = "is-checked"
-		text = "Bug Report"
-		command = "Bug-Report"
-	elem "rulesb"
+		text = "Report Issue"
+		command = "link-issue"
+	elem "linkrules"
 		type = BUTTON
 		pos = 120,0
 		size = 60x15
@@ -1108,7 +1125,7 @@ window "rpane"
 		anchor2 = none
 		saved-params = "is-checked"
 		text = "Rules"
-		command = "rules"
+		command = "link-rules"
 		group = "rpanemode"
 	elem "changelog"
 		type = BUTTON
@@ -1120,7 +1137,7 @@ window "rpane"
 		text = "Changelog"
 		command = "Changelog"
 		group = "rpanemode"
-	elem "Lore"
+	elem "linklore"
 		type = BUTTON
 		pos = 208,0
 		size = 60x15
@@ -1128,9 +1145,9 @@ window "rpane"
 		anchor2 = none
 		saved-params = "is-checked"
 		text = "Lore"
-		command = "Lore"
+		command = "link-lore"
 		group = "rpanemode"
-	elem "forumb"
+	elem "linkforum"
 		type = BUTTON
 		pos = 328,0
 		size = 60x15
@@ -1138,9 +1155,9 @@ window "rpane"
 		anchor2 = none
 		saved-params = "is-checked"
 		text = "Forum"
-		command = "forum"
+		command = "link-forum"
 		group = "rpanemode"
-	elem "wikib"
+	elem "linkwiki"
 		type = BUTTON
 		pos = 268,0
 		size = 60x15
@@ -1148,7 +1165,7 @@ window "rpane"
 		anchor2 = none
 		saved-params = "is-checked"
 		text = "Wiki"
-		command = "wiki"
+		command = "link-wiki"
 		group = "rpanemode"
 	elem "textb"
 		type = BUTTON

@@ -4,7 +4,7 @@
 /datum/game_mode/malfunction/verb/ai_select_hardware()
 	set category = "Hardware"
 	set name = "Select Hardware"
-	set desc = "Allows you to select hardware piece to install"
+	set desc = "Allows you to select a hardware piece to install."
 	var/mob/living/silicon/ai/user = usr
 
 	if(!ability_prechecks(user, 0, 1))
@@ -56,22 +56,6 @@
 		log_ability_use(src, "Picked hardware [C.name]")
 		C.owner = user
 		C.install()
-
-// Verb: ai_help()
-// Parameters: None
-// Descriptions: Opens help file and displays it to the AI.
-/datum/game_mode/malfunction/verb/ai_help()
-	set category = "Hardware"
-	set name = "Display Help"
-	set desc = "Opens help window with overview of available hardware, software and other important information."
-	var/mob/living/silicon/ai/user = usr
-
-	var/help = file2text('ingame_manuals/malf_ai.html')
-	if(!help)
-		help = "Error loading help (file /ingame_manuals/malf_ai.html is probably missing). Please report this to server administration staff."
-
-	show_browser(user, help, "window=malf_ai_help;size=600x500")
-
 
 // Verb: ai_select_research()
 // Parameters: None
@@ -223,7 +207,7 @@
 		message = text("used malf ability/function: [ability_name].")
 	admin_attack_log(A, null, message, null, message)
 
-proc/check_for_interception()
+/proc/check_for_interception()
 	for(var/mob/living/silicon/ai/A in SSmobs.mob_list)
 		if(A.intercepts_communication)
 			return A

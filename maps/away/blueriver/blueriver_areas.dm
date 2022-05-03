@@ -11,6 +11,7 @@
 	icon = 'blueriver.dmi'
 	ambience = list('sound/ambience/ambimine.ogg', 'sound/ambience/song_game.ogg')
 	sound_env = ASTEROID
+	planetary_surface = TRUE
 
 /area/bluespaceriver/ship
 	name = "\improper NSV Horizon"

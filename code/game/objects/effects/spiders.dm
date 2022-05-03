@@ -3,8 +3,8 @@
 	name = "web"
 	desc = "It's stringy and sticky."
 	icon = 'icons/effects/effects.dmi'
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	var/health = 15
 
 //similar to weeds, but only barfed out by nurses manually
@@ -20,7 +20,7 @@
 				qdel(src)
 	return
 
-/obj/effect/spider/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/spider/attackby(var/obj/item/W, var/mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
 	if(W.attack_verb.len)
@@ -34,7 +34,7 @@
 		damage += 5
 
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 
 		if(WT.remove_fuel(0, user))
 			damage = 15
@@ -82,6 +82,9 @@
 	desc = "They seem to pulse slightly with an inner life."
 	icon_state = "eggs"
 	var/amount_grown = 0
+	var/spiders_min = 6
+	var/spiders_max = 12
+	var/spider_type = /obj/effect/spider/spiderling
 
 /obj/effect/spider/eggcluster/Initialize(mapload, atom/parent)
 	. = ..()
@@ -98,25 +101,32 @@
 	. = ..()
 
 /obj/effect/spider/eggcluster/Process()
-	if(prob(80))
+	if(prob(70))
 		amount_grown += rand(0,2)
 	if(amount_grown >= 100)
-		var/num = rand(3,9)
+		var/num = rand(spiders_min, spiders_max)
 		var/obj/item/organ/external/O = null
 		if(istype(loc, /obj/item/organ/external))
 			O = loc
 
 		for(var/i=0, i<num, i++)
-			var/spiderling = new /obj/effect/spider/spiderling(loc, src)
+			var/spiderling = new spider_type(src.loc, src)
 			if(O)
 				O.implants += spiderling
 		qdel(src)
 
+/obj/effect/spider/eggcluster/small
+	spiders_min = 1
+	spiders_max = 3
+
+/obj/effect/spider/eggcluster/small/frost
+	spider_type = /obj/effect/spider/spiderling/frost
+
 /obj/effect/spider/spiderling
 	name = "spiderling"
 	desc = "It never stays still for long."
-	icon_state = "guard"
-	anchored = 0
+	icon_state = "green"
+	anchored = FALSE
 	layer = BELOW_OBJ_LAYER
 	health = 3
 	var/mob/living/simple_animal/hostile/giant_spider/greater_form
@@ -128,15 +138,27 @@
 	var/growth_chance = 50 // % chance of beginning growth, and eventually become a beautiful death machine
 
 	var/shift_range = 6
-	var/castes = list(/mob/living/simple_animal/hostile/giant_spider = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/guard = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/nurse = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/spitter = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/hunter = 1)
+	var/castes = list(/mob/living/simple_animal/hostile/giant_spider/lurker = 0.1,
+						/mob/living/simple_animal/hostile/giant_spider/tunneler = 0.08,
+						/mob/living/simple_animal/hostile/giant_spider/pepper = 0.5,
+						/mob/living/simple_animal/hostile/giant_spider/webslinger = 1,
+						/mob/living/simple_animal/hostile/giant_spider/electric = 0.5,
+						/mob/living/simple_animal/hostile/giant_spider/thermic = 0.5,
+						/mob/living/simple_animal/hostile/giant_spider/frost = 0.5,
+						/mob/living/simple_animal/hostile/giant_spider/carrier = 2,
+						/mob/living/simple_animal/hostile/giant_spider/phorogenic = 0.01,
+						/mob/living/simple_animal/hostile/giant_spider = 2,
+						/mob/living/simple_animal/hostile/giant_spider/guard = 2,
+						/mob/living/simple_animal/hostile/giant_spider/nurse = 2,
+						/mob/living/simple_animal/hostile/giant_spider/spitter = 2,
+						/mob/living/simple_animal/hostile/giant_spider/hunter = 1)
+
+
+/obj/effect/spider/spiderling/frost
+	castes = list(/mob/living/simple_animal/hostile/giant_spider/frost = 1)
 
 /obj/effect/spider/spiderling/Initialize(var/mapload, var/atom/parent)
 	greater_form = pickweight(castes)
-	icon_state = initial(greater_form.icon_state)
 	pixel_x = rand(-shift_range, shift_range)
 	pixel_y = rand(-shift_range, shift_range)
 
@@ -158,14 +180,16 @@
 /obj/effect/spider/spiderling/mundane/dormant
 	dormant = TRUE    // It lies in wait, hoping you will walk face first into its web
 
+/obj/effect/spider/spiderling/growing
+	growth_chance = 100
+
 /obj/effect/spider/spiderling/Destroy()
 	if(dormant)
 		GLOB.moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
 	STOP_PROCESSING(SSobj, src)
-	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	. = ..()
 
-/obj/effect/spider/spiderling/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/spider/spiderling/attackby(var/obj/item/W, var/mob/user)
 	..()
 	if(health > 0)
 		disturbed()
@@ -207,7 +231,7 @@
 	if(check_vent(exit_vent))
 		return
 	if(prob(50))
-		src.visible_message("<span class='notice'>You hear something squeezing through the ventilation ducts.</span>",2)
+		audible_message(SPAN_NOTICE("You hear something squeezing through the ventilation ducts."))
 	forceMove(exit_vent)
 	addtimer(CALLBACK(src, .proc/end_vent_moving, exit_vent), travel_time)
 
@@ -264,8 +288,8 @@
 					var/min_y = pixel_y <= -shift_range ? 0 : -2
 					var/max_y = pixel_y >=  shift_range ? 0 :  2
 
-					pixel_x = Clamp(pixel_x + rand(min_x, max_x), -shift_range, shift_range)
-					pixel_y = Clamp(pixel_y + rand(min_y, max_y), -shift_range, shift_range)
+					pixel_x = clamp(pixel_x + rand(min_x, max_x), -shift_range, shift_range)
+					pixel_y = clamp(pixel_y + rand(min_y, max_y), -shift_range, shift_range)
 		else if(prob(5))
 			//vent crawl!
 			for(var/obj/machinery/atmospherics/unary/vent_pump/v in view(7,src))
@@ -286,10 +310,10 @@
 			forceMove(O.owner ? O.owner.loc : O.loc)
 			src.visible_message("<span class='warning'>\A [src] emerges from inside [O.owner ? "[O.owner]'s [O.name]" : "\the [O]"]!</span>")
 			if(O.owner)
-				O.owner.apply_damage(5, BRUTE, O.organ_tag)
-				O.owner.apply_damage(3, TOX, O.organ_tag)
+				O.owner.apply_damage(5, DAMAGE_BRUTE, O.organ_tag)
+				O.owner.apply_damage(3, DAMAGE_TOXIN, O.organ_tag)
 		else if(prob(1))
-			O.owner.apply_damage(1, TOX, O.organ_tag)
+			O.owner.apply_damage(1, DAMAGE_TOXIN, O.organ_tag)
 			if(world.time > last_itch + 30 SECONDS)
 				last_itch = world.time
 				to_chat(O.owner, "<span class='notice'>Your [O.name] itches...</span>")
@@ -304,7 +328,7 @@
 	desc = "Green squishy mess."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "greenshatter"
-	anchored = 1
+	anchored = TRUE
 	layer = BLOOD_LAYER
 
 /obj/effect/spider/cocoon
@@ -317,8 +341,22 @@
 	. = ..()
 	icon_state = pick("cocoon1","cocoon2","cocoon3")
 
+
+	for(var/atom/movable/O in loc)
+		if(!O.anchored)
+			O.forceMove(src)
+
+			if (istype(O, /mob/living))
+				var/mob/living/L = O
+				if (!(L.status_flags & NOTARGET))
+					L.status_flags ^= NOTARGET
+
 /obj/effect/spider/cocoon/Destroy()
 	src.visible_message("<span class='warning'>\The [src] splits open.</span>")
 	for(var/atom/movable/A in contents)
 		A.dropInto(loc)
+		if (istype(A, /mob/living))
+			var/mob/living/L = A
+			if (L.status_flags & NOTARGET)
+				L.status_flags ^= NOTARGET
 	return ..()

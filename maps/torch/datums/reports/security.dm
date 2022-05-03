@@ -10,7 +10,7 @@
 /datum/computer_file/report/recipient/sec/incident
 	form_name = "SCG-SEC-01"
 	title = "Security Incident Report"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/sec/incident/generate_fields()
 	..()
@@ -33,7 +33,7 @@
 /datum/computer_file/report/recipient/sec/investigation
 	form_name = "SCG-SEC-02"
 	title = "Investigation Report"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/sec/investigation/generate_fields()
 	..()
@@ -51,7 +51,7 @@
 /datum/computer_file/report/recipient/sec/evidence
 	form_name = "SCG-SEC-02b"
 	title = "Evidence and Property Form"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/sec/evidence/generate_fields()
 	..()
@@ -70,7 +70,7 @@
 /datum/computer_file/report/recipient/sec/statement
 	form_name = "SCG-SEC-02c"
 	title = "Written Statement"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/sec/statement/generate_fields()
 	..()
@@ -93,7 +93,7 @@
 /datum/computer_file/report/recipient/sec/arrest
 	form_name = "SCG-SEC-03"
 	title = "Arrest Report"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/sec/arrest/generate_fields()
 	..()
@@ -125,7 +125,7 @@
 /datum/computer_file/report/recipient/sec/restraining
 	form_name = "SCG-SEC-04"
 	title = "Restraining Order"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/sec/restraining/generate_fields()
 	..()
@@ -142,7 +142,7 @@
 /datum/computer_file/report/recipient/sec/ltc
 	form_name = "SCG-SEC-05"
 	title = "License to Carry"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/sec/ltc/generate_fields()
 	..()

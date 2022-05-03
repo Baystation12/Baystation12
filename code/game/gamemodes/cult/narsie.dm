@@ -80,7 +80,7 @@ var/global/list/narsie_list = list()
 				continue
 			if(!iscultist(M))
 				to_chat(M, "<span class='danger'> You feel your sanity crumble away in an instant as you gaze upon [src.name]...</span>")
-				M.apply_effect(3, STUN)
+				M.apply_effect(3, EFFECT_STUN)
 
 
 /obj/singularity/narsie/large/Bump(atom/A)
@@ -143,7 +143,7 @@ var/global/list/narsie_list = list()
 /obj/singularity/narsie/proc/narsiefloor(var/turf/T)//leaving "footprints"
 	if(!(istype(T, /turf/simulated/wall/cult)||istype(T, /turf/space)))
 		if(T.icon_state != "cult-narsie")
-			T.desc = "something that goes beyond your understanding went this way"
+			T.desc = "Something that goes beyond your understanding went this way."
 			T.icon = 'icons/turf/flooring/cult.dmi'
 			T.icon_state = "cult-narsie"
 			T.set_light(1)
@@ -167,7 +167,7 @@ var/global/list/narsie_list = list()
 		old_narsie(A)
 
 /obj/singularity/narsie/proc/new_narsie(const/atom/A)
-	if (istype(A, /mob/) && (get_dist(A, src) <= 7))
+	if (ismob(A) && (get_dist(A, src) <= 7))
 		var/mob/M = A
 
 		if(M.status_flags & GODMODE)
@@ -194,7 +194,7 @@ var/global/list/narsie_list = list()
 	if(!(A.singuloCanEat()))
 		return 0
 
-	if (istype(A, /mob/living/))
+	if (istype(A, /mob/living))
 		var/mob/living/C2 = A
 
 		if(C2.status_flags & GODMODE)
@@ -202,7 +202,7 @@ var/global/list/narsie_list = list()
 
 		C2.dust() // Changed from gib(), just for less lag.
 
-	else if (istype(A, /obj/))
+	else if (isobj(A))
 		qdel(A)
 
 		if (A)
@@ -226,7 +226,7 @@ var/global/list/narsie_list = list()
 	if(!(A.singuloCanEat()))
 		return 0
 
-	if (istype(A, /mob/living/))
+	if (istype(A, /mob/living))
 		var/mob/living/C2 = A
 
 		if(C2.status_flags & GODMODE)
@@ -234,7 +234,7 @@ var/global/list/narsie_list = list()
 
 		C2.dust() // Changed from gib(), just for less lag.
 
-	else if (istype(A, /obj/))
+	else if (isobj(A))
 		qdel(A)
 
 		if (A)
@@ -257,8 +257,7 @@ var/global/list/narsie_list = list()
 				if (101 == AM2.invisibility)
 					continue
 
-				spawn (0)
-					AM2.singularity_pull(src, src.current_size)
+				addtimer(CALLBACK(AM2, /atom/proc/singularity_pull, src, current_size), 0)
 
 		if (dist <= consume_range && !istype(A, get_base_turf_by_area(A)))
 			var/turf/T2 = A

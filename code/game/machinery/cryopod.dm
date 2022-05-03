@@ -13,7 +13,7 @@
 	desc = "An interface between crew and the cryogenic storage oversight systems."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "cellconsole"
-	density = 0
+	density = FALSE
 	interact_offline = 1
 	var/mode = null
 
@@ -111,12 +111,12 @@
 			frozen_items -= I
 		. = TOPIC_REFRESH
 
-/obj/item/weapon/stock_parts/circuitboard/cryopodcontrol
+/obj/item/stock_parts/circuitboard/cryopodcontrol
 	name = "Circuit board (Cryogenic Oversight Console)"
 	build_path = /obj/machinery/computer/cryopod
 	origin_tech = list(TECH_DATA = 3)
 
-/obj/item/weapon/stock_parts/circuitboard/robotstoragecontrol
+/obj/item/stock_parts/circuitboard/robotstoragecontrol
 	name = "Circuit board (Robotic Storage Console)"
 	build_path = /obj/machinery/computer/cryopod/robot
 	origin_tech = list(TECH_DATA = 3)
@@ -128,7 +128,7 @@
 	desc = "A bewildering tangle of machinery and pipes."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "cryo_rear"
-	anchored = 1
+	anchored = TRUE
 	dir = WEST
 
 //Cryopods themselves.
@@ -137,13 +137,14 @@
 	desc = "A man-sized pod for entering suspended animation."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "body_scanner_0"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	dir = WEST
 
 	var/base_icon_state = "body_scanner_0"
 	var/occupied_icon_state = "body_scanner_1"
 	var/on_store_message = "has entered long-term storage."
+	var/on_store_visible_message = "hums and hisses as it moves $occupant$ into storage." // $occupant$ is automatically converted to the occupant's name
 	var/on_store_name = "Cryogenic Oversight"
 	var/on_enter_occupant_message = "You feel cool air surround you. You go numb as your senses turn inward."
 	var/allow_occupant_types = list(/mob/living/carbon/human)
@@ -153,6 +154,7 @@
 	var/time_till_despawn = 9000  // Down to 15 minutes //30 minutes-ish is too long
 	var/time_entered = 0          // Used to keep track of the safe period.
 	var/obj/item/device/radio/intercom/announce //
+	var/announce_despawn = TRUE
 
 	var/obj/machinery/computer/cryopod/control_computer
 	var/last_no_computer_message = 0
@@ -162,17 +164,17 @@
 	var/list/preserve_items = list(
 		/obj/item/integrated_circuit/manipulation/bluespace_rift,
 		/obj/item/integrated_circuit/input/teleporter_locator,
-		/obj/item/weapon/card/id/captains_spare,
-		/obj/item/weapon/aicard,
+		/obj/item/card/id/captains_spare,
+		/obj/item/aicard,
 		/obj/item/device/mmi,
 		/obj/item/device/paicard,
-		/obj/item/weapon/gun,
-		/obj/item/weapon/pinpointer,
+		/obj/item/gun,
+		/obj/item/pinpointer,
 		/obj/item/clothing/suit,
 		/obj/item/clothing/shoes/magboots,
 		/obj/item/blueprints,
 		/obj/item/clothing/head/helmet/space,
-		/obj/item/weapon/storage/internal
+		/obj/item/storage/internal
 	)
 
 /obj/machinery/cryopod/robot
@@ -249,7 +251,6 @@
 /obj/machinery/cryopod/Destroy()
 	if(occupant)
 		occupant.forceMove(loc)
-		occupant.resting = 1
 	. = ..()
 
 /obj/machinery/cryopod/Initialize()
@@ -327,6 +328,10 @@
 // This function can not be undone; do not call this unless you are sure
 // Also make sure there is a valid control computer
 /obj/machinery/cryopod/proc/despawn_occupant()
+	if (QDELETED(occupant))
+		log_and_message_admins("A mob was deleted while in a cryopod, or the cryopod double-processed. This may cause errors!")
+		return
+
 	//Drop all items into the pod.
 	for(var/obj/item/W in occupant)
 		occupant.drop_from_inventory(W)
@@ -334,7 +339,7 @@
 
 		if(W.contents.len) //Make sure we catch anything not handled by qdel() on the items.
 			for(var/obj/item/O in W.contents)
-				if(istype(O,/obj/item/weapon/storage/internal)) //Stop eating pockets, you fuck!
+				if(istype(O,/obj/item/storage/internal)) //Stop eating pockets, you fuck!
 					continue
 				O.forceMove(src)
 
@@ -410,8 +415,11 @@
 		control_computer._admin_logs += "[key_name(occupant)] ([role_alt_title]) at [stationtime2text()]"
 	log_and_message_admins("[key_name(occupant)] ([role_alt_title]) entered cryostorage.")
 
-	announce.autosay("[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
-	visible_message("<span class='notice'>\The [initial(name)] hums and hisses as it moves [occupant.real_name] into storage.</span>", range = 3)
+	if(announce_despawn)
+		announce.autosay("[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
+
+	var/despawnmessage = replacetext(on_store_visible_message, "$occupant$", occupant.real_name)
+	visible_message(SPAN_NOTICE("\The [initial(name)] " + despawnmessage), range = 3)
 
 	//This should guarantee that ghosts don't spawn.
 	occupant.ckey = null
@@ -420,22 +428,39 @@
 	qdel(occupant)
 	set_occupant(null)
 
-/obj/machinery/cryopod/proc/attempt_enter(var/mob/target, var/mob/user)
-	if(target.client)
-		if(target != user)
-			if(alert(target,"Would you like to enter long-term storage?",,"Yes","No") != "Yes")
-				return
-	if(!user.incapacitated() && !user.anchored && user.Adjacent(src) && user.Adjacent(target))
-		visible_message("[user] starts putting [target] into \the [src].", range = 3)
-		if(!do_after(user, 20, src)|| QDELETED(target))
+/obj/machinery/cryopod/proc/attempt_enter(mob/target, mob/user)
+	if (!user.IsAdvancedToolUser())
+		to_chat(user, SPAN_WARNING("You're too simple to understand how to do that."))
+		return
+	if (user.incapacitated() || !user.Adjacent(src))
+		to_chat(user, SPAN_WARNING("You're in no position to do that."))
+		return
+	if (!user.Adjacent(target))
+		to_chat(user, SPAN_WARNING("\The [target] isn't close enough."))
+		return
+	if (user != target  && target.client)
+		var/response = alert(target, "Enter the [src]?", null, "Yes", "No")
+		if (response != "Yes")
+			to_chat(user, SPAN_WARNING("\The [target] refuses."))
 			return
-		set_occupant(target)
-
-		// Book keeping!
-		log_and_message_admins("has entered a stasis pod")
-
-		//Despawning occurs when process() is called with an occupant without a client.
-		src.add_fingerprint(target)
+	if (user.incapacitated() || !user.Adjacent(src))
+		to_chat(user, SPAN_WARNING("You're in no position to do that."))
+		return
+	if (!user.Adjacent(target))
+		to_chat(user, SPAN_WARNING("\The [target] isn't close enough."))
+		return
+	add_fingerprint(user)
+	if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
+		return
+	if (QDELETED(target))
+		return
+	if (!user.Adjacent(target))
+		to_chat(user, SPAN_WARNING("\The [target] isn't close enough."))
+		return
+	set_occupant(target)
+	if (user != target)
+		add_fingerprint(target)
+	log_and_message_admins("placed [target == user ? "themself" : key_name_admin(target)] into \a [src]")
 
 //Like grap-put, but for mouse-drop.
 /obj/machinery/cryopod/MouseDrop_T(var/mob/target, var/mob/user)
@@ -448,7 +473,7 @@
 	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
 	attempt_enter(target, user)
 
-/obj/machinery/cryopod/attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
+/obj/machinery/cryopod/attackby(var/obj/item/G as obj, var/mob/user as mob)
 
 	if(istype(G, /obj/item/grab))
 		var/obj/item/grab/grab = G
@@ -506,7 +531,7 @@
 
 	visible_message("\The [usr] starts climbing into \the [src].", range = 3)
 
-	if(do_after(usr, 20, src))
+	if(do_after(usr, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 
 		if(!usr || !usr.client)
 			return
@@ -566,8 +591,8 @@
 	desc = "Whoever was inside isn't going to wake up now. It looks like you could pry it open with a crowbar."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "broken_cryo"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	var/closed = 1
 	var/busy = 0
 	var/remains_type = /obj/item/remains/human
@@ -587,7 +612,7 @@
 		if (isCrowbar(W))
 			busy = 1
 			visible_message("[user] starts to pry the glass cover off of \the [src].")
-			if (!do_after(user, 50, src))
+			if (!do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
 				visible_message("[user] stops trying to pry the glass off of \the [src].")
 				busy = 0
 				return

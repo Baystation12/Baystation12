@@ -75,6 +75,7 @@
 	desc = "A rectangular plastic crate."
 	points_per_crate = 1
 	closet_appearance = /decl/closet_appearance/crate/plastic
+	material = MATERIAL_PLASTIC
 
 /obj/structure/closet/crate/internals
 	name = "internals crate"
@@ -85,7 +86,7 @@
 	desc = "A fuel tank crate."
 
 /obj/structure/closet/crate/internals/fuel/WillContain()
-	return list(/obj/item/weapon/tank/hydrogen = 4)
+	return list(/obj/item/tank/hydrogen = 4)
 
 /obj/structure/closet/crate/trashcart
 	name = "trash cart"
@@ -103,8 +104,8 @@
 
 /obj/structure/closet/crate/rcd/WillContain()
 	return list(
-		/obj/item/weapon/rcd_ammo = 3,
-		/obj/item/weapon/rcd
+		/obj/item/rcd_ammo = 3,
+		/obj/item/rcd
 	)
 
 /obj/structure/closet/crate/solar
@@ -113,9 +114,9 @@
 /obj/structure/closet/crate/solar/WillContain()
 	return list(
 		/obj/item/solar_assembly = 14,
-		/obj/item/weapon/stock_parts/circuitboard/solar_control,
-		/obj/item/weapon/tracker_electronics,
-		/obj/item/weapon/paper/solar
+		/obj/item/stock_parts/circuitboard/solar_control,
+		/obj/item/tracker_electronics,
+		/obj/item/paper/solar
 	)
 
 /obj/structure/closet/crate/solar_assembly
@@ -154,7 +155,7 @@
 	desc = "A crate of emergency rations."
 
 /obj/structure/closet/crate/freezer/rations/WillContain()
-	return list(/obj/random/mre = 6, /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 12)
+	return list(/obj/random/mre = 6, /obj/item/reagent_containers/food/drinks/cans/waterbottle = 12)
 
 /obj/structure/closet/crate/freezer/meat
 	name = "meat crate"
@@ -162,9 +163,9 @@
 
 /obj/structure/closet/crate/freezer/meat/WillContain()
 	return list(
-		/obj/item/weapon/reagent_containers/food/snacks/meat/beef = 4,
-		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh = 4,
-		/obj/item/weapon/reagent_containers/food/snacks/fish = 4
+		/obj/item/reagent_containers/food/snacks/meat/beef = 4,
+		/obj/item/reagent_containers/food/snacks/meat/syntiflesh = 4,
+		/obj/random/fish = 8
 	)
 
 /obj/structure/closet/crate/bin
@@ -197,7 +198,7 @@
 /obj/structure/closet/crate/secure/shuttle
 	name = "storage compartment"
 	desc = "A secure storage compartment bolted to the floor, to secure loose objects on Zero-G flights."
-	anchored = 1
+	anchored = TRUE
 	closet_appearance = /decl/closet_appearance/crate/secure/shuttle
 
 /obj/structure/closet/crate/secure/gear
@@ -242,11 +243,11 @@
 
 /obj/structure/closet/crate/hydroponics/prespawned/WillContain()
 	return list(
-		/obj/item/weapon/reagent_containers/spray/plantbgone = 2,
-		/obj/item/weapon/material/minihoe = 2,
-		/obj/item/weapon/storage/plants = 2,
-		/obj/item/weapon/material/hatchet = 2,
-		/obj/item/weapon/wirecutters/clippers = 2,
+		/obj/item/reagent_containers/spray/plantbgone = 2,
+		/obj/item/material/minihoe = 2,
+		/obj/item/storage/plants = 2,
+		/obj/item/material/hatchet = 2,
+		/obj/item/wirecutters/clippers = 2,
 		/obj/item/device/scanner/plant = 2
 	)
 
@@ -278,9 +279,10 @@
 /obj/structure/closet/crate/paper_refill
 	name = "paper refill crate"
 	desc = "A rectangular plastic crate, filled up with blank papers for refilling bins and printers. A bureaucrat's favorite."
+	material = MATERIAL_PLASTIC
 
 /obj/structure/closet/crate/paper_refill/WillContain()
-	return list(/obj/item/weapon/paper = 30)
+	return list(/obj/item/paper = 30)
 
 /obj/structure/closet/crate/uranium
 	name = "fissibles crate"

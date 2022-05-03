@@ -148,11 +148,13 @@
 
 /decl/emote/audible/slap
 	key = "slap"
-	emote_message_1p_target = "<span class='warning'>You slap TARGET across the face!</span>"
+	emote_message_1p_target = "You slap TARGET across the face!"
 	emote_message_1p = "You slap yourself across the face!"
-	emote_message_3p_target = "<span class='warning'>USER slaps TARGET across the face!</span>"
+	emote_message_3p_target = "USER slaps TARGET across the face!"
 	emote_message_3p = "USER slaps USER_SELF across the face!"
 	emote_sound = 'sound/effects/snap.ogg'
+	check_restraints = TRUE
+	check_range = 1
 
 /decl/emote/audible/bug_hiss
 	key ="hiss"
@@ -169,11 +171,6 @@
 	key ="chitter"
 	emote_message_3p = "USER chitters."
 	emote_sound = 'sound/voice/Bug.ogg'
-
-/decl/emote/audible/vox_shriek
-	key ="shriek"
-	emote_message_3p = "USER SHRIEKS!"
-	emote_sound = 'sound/voice/shriek1.ogg'
 
 /decl/emote/audible/roar
 	key = "roar"

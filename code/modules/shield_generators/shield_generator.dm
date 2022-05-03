@@ -3,12 +3,14 @@
 	desc = "A heavy-duty shield generator and capacitor, capable of generating energy shields at large distances."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "generator0"
-	density = 1
+	density = TRUE
 	base_type = /obj/machinery/power/shield_generator
 	construct_state = /decl/machine_construction/default/panel_closed
 	wires = /datum/wires/shield_generator
 	uncreated_component_parts = null
 	stat_immune = 0
+	machine_name = "advanced shield generator"
+	machine_desc = "A powerful energy projector that uses huge amounts of power to form a large sheath of shielding force around an area."
 	var/list/field_segments = list()    // List of all shield segments owned by this generator.
 	var/list/damaged_segments = list()  // List of shield segments that have failed and are currently regenerating.
 	var/shield_modes = 0                // Enabled shield mode flags
@@ -33,6 +35,7 @@
 	var/ai_control_disabled = 0         // Whether the AI control is disabled.
 	var/list/mode_list = null           // A list of shield_mode datums.
 	var/full_shield_strength = 0        // The amount of power shields need to be at full operating strength.
+	var/vessel_reverse_dir	= EAST		// Reverse dir of our vessel
 
 	var/idle_multiplier   = 1           // Trades off cost vs. spin-up time from idle to running
 	var/idle_valid_values = list(1, 2, 5, 10)
@@ -51,7 +54,7 @@
 	connect_to_network()
 
 	mode_list = list()
-	for(var/st in subtypesof(/datum/shield_mode/))
+	for(var/st in subtypesof(/datum/shield_mode))
 		var/datum/shield_mode/SM = new st()
 		mode_list.Add(SM)
 
@@ -67,15 +70,15 @@
 /obj/machinery/power/shield_generator/RefreshParts()
 	max_energy = 0
 	full_shield_strength = 0
-	for(var/obj/item/weapon/stock_parts/smes_coil/S in component_parts)
+	for(var/obj/item/stock_parts/smes_coil/S in component_parts)
 		full_shield_strength += (S.ChargeCapacity / CELLRATE) * 5
 	max_energy = full_shield_strength * 20
-	current_energy = between(0, current_energy, max_energy)
+	current_energy = clamp(current_energy, 0, max_energy)
 
-	mitigation_max = MAX_MITIGATION_BASE + MAX_MITIGATION_RESEARCH * total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
-	mitigation_em = between(0, mitigation_em, mitigation_max)
-	mitigation_physical = between(0, mitigation_physical, mitigation_max)
-	mitigation_heat = between(0, mitigation_heat, mitigation_max)
+	mitigation_max = MAX_MITIGATION_BASE + MAX_MITIGATION_RESEARCH * total_component_rating_of_type(/obj/item/stock_parts/capacitor)
+	mitigation_em = clamp(mitigation_em, 0, mitigation_max)
+	mitigation_physical = clamp(mitigation_physical, 0, mitigation_max)
+	mitigation_heat = clamp(mitigation_heat, 0, mitigation_max)
 	..()
 
 
@@ -109,11 +112,21 @@
 	else
 		shielded_turfs = fieldtype_square()
 
+	// Rotate shield's animation relative to located ship
+	if(GLOB.using_map.use_overmap)
+		var/obj/effect/overmap/visitable/ship/sector = map_sectors["[src.z]"]
+		if(sector && istype(sector))
+			if(!sector.check_ownership(src))
+				for(var/obj/effect/overmap/visitable/ship/candidate in sector)
+					if(candidate.check_ownership(src))
+						sector = candidate
+			vessel_reverse_dir = GLOB.reverse_dir[sector.fore_dir]
+
 	for(var/turf/T in shielded_turfs)
-		var/obj/effect/shield/S = new(T)
-		S.gen = src
+		var/obj/effect/shield/S = new(T, src)
 		S.flags_updated()
 		field_segments |= S
+		S.set_dir(vessel_reverse_dir)
 	update_icon()
 
 
@@ -149,9 +162,9 @@
 			running = SHIELD_RUNNING
 			regenerate_field()
 
-	mitigation_em = between(0, mitigation_em - MITIGATION_LOSS_PASSIVE, mitigation_max)
-	mitigation_heat = between(0, mitigation_heat - MITIGATION_LOSS_PASSIVE, mitigation_max)
-	mitigation_physical = between(0, mitigation_physical - MITIGATION_LOSS_PASSIVE, mitigation_max)
+	mitigation_em = clamp(mitigation_em - MITIGATION_LOSS_PASSIVE, 0, mitigation_max)
+	mitigation_heat = clamp(mitigation_heat - MITIGATION_LOSS_PASSIVE, 0, mitigation_max)
+	mitigation_physical = clamp(mitigation_physical - MITIGATION_LOSS_PASSIVE, 0, mitigation_max)
 
 	if(running == SHIELD_RUNNING)
 		upkeep_power_usage = round((field_segments.len - damaged_segments.len) * ENERGY_UPKEEP_PER_TILE * upkeep_multiplier)
@@ -169,7 +182,7 @@
 		// Now try to recharge our internal energy.
 		var/energy_to_demand
 		if(input_cap)
-			energy_to_demand = between(0, max_energy - current_energy, input_cap - energy_buffer)
+			energy_to_demand = clamp(max_energy - current_energy, 0, input_cap - energy_buffer)
 		else
 			energy_to_demand = max(0, max_energy - current_energy)
 		energy_buffer = draw_power(energy_to_demand)
@@ -238,7 +251,7 @@
 	data["field_integrity"] = field_integrity()
 	data["max_energy"] = round(max_energy / 1000000, 0.1)
 	data["current_energy"] = round(current_energy / 1000000, 0.1)
-	data["percentage_energy"] = round(data["current_energy"] / data["max_energy"] * 100)
+	data["percentage_energy"] = max_energy ? round(data["current_energy"] / data["max_energy"] * 100) : 0
 	data["total_segments"] = field_segments ? field_segments.len : 0
 	data["functional_segments"] = damaged_segments ? data["total_segments"] - damaged_segments.len : data["total_segments"]
 	data["field_radius"] = field_radius
@@ -321,7 +334,7 @@
 		var/new_range = input(user, "Enter new field range (1-[world.maxx]). Leave blank to cancel.", "Field Radius Control", field_radius) as num
 		if(!new_range)
 			return TOPIC_HANDLED
-		target_radius = between(1, new_range, world.maxx)
+		target_radius = clamp(new_range, 1, world.maxx)
 		return TOPIC_REFRESH
 
 	if(href_list["set_input_cap"])
@@ -373,9 +386,9 @@
 				mitigation_heat += MITIGATION_HIT_LOSS + MITIGATION_HIT_GAIN
 				energy_to_use *= 1 - (mitigation_heat / 100)
 
-		mitigation_em = between(0, mitigation_em, mitigation_max)
-		mitigation_heat = between(0, mitigation_heat, mitigation_max)
-		mitigation_physical = between(0, mitigation_physical, mitigation_max)
+		mitigation_em = clamp(mitigation_em, 0, mitigation_max)
+		mitigation_heat = clamp(mitigation_heat, 0, mitigation_max)
+		mitigation_physical = clamp(mitigation_physical, 0, mitigation_max)
 
 	current_energy -= energy_to_use
 

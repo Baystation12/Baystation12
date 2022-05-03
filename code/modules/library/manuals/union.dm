@@ -1,4 +1,4 @@
-/obj/item/weapon/book/union_charter
+/obj/item/book/union_charter
 	name = "\improper Union Charter"
 	title = "Union Charter of Workplace Rights"
 	author = "Expeditionary Corps Organisation Corporate Union"

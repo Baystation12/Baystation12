@@ -125,12 +125,12 @@
 	permeability_coefficient = 0.01
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	armor = list(
-		melee = ARMOR_MELEE_SHIELDED, 
-		bullet = ARMOR_BALLISTIC_HEAVY, 
+		melee = ARMOR_MELEE_SHIELDED,
+		bullet = ARMOR_BALLISTIC_HEAVY,
 		laser = ARMOR_LASER_HEAVY,
-		energy = ARMOR_ENERGY_SHIELDED, 
-		bomb = ARMOR_BOMB_SHIELDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		energy = ARMOR_ENERGY_SHIELDED,
+		bomb = ARMOR_BOMB_SHIELDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 		)
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
@@ -143,13 +143,6 @@
 	icon_state = "owl"
 	worn_state = "owl"
 	item_state = "owl"
-
-/obj/item/clothing/under/johnny
-	name = "johnny~~ jumpsuit"
-	desc = "Johnny~~"
-	icon_state = "johnny"
-	worn_state = "johnny"
-	item_state = "johnny"
 
 /obj/item/clothing/under/color/rainbow
 	name = "rainbow"
@@ -398,7 +391,7 @@
 	worn_state = "plaid_purple"
 
 //wedding stuff
-/obj/item/clothing/under/wedding/
+/obj/item/clothing/under/wedding
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
 /obj/item/clothing/under/wedding/bride_orange
@@ -507,7 +500,7 @@
 	item_state = "bl_suit"
 	worn_state = "charcoal_suit"
 	gender_icons = 1
-	starting_accessories = list(/obj/item/clothing/accessory/navy, /obj/item/clothing/accessory/toggleable/charcoal_jacket)
+	accessories = list(/obj/item/clothing/accessory/navy, /obj/item/clothing/accessory/toggleable/charcoal_jacket)
 
 /obj/item/clothing/under/suit_jacket/navy
 	name = "navy suit"
@@ -516,7 +509,7 @@
 	item_state = "bl_suit"
 	worn_state = "navy_suit"
 	gender_icons = 1
-	starting_accessories = list(/obj/item/clothing/accessory/red, /obj/item/clothing/accessory/toggleable/navy_jacket)
+	accessories = list(/obj/item/clothing/accessory/red, /obj/item/clothing/accessory/toggleable/navy_jacket)
 
 /obj/item/clothing/under/suit_jacket/burgundy
 	name = "burgundy suit"
@@ -525,7 +518,7 @@
 	item_state = "r_suit"
 	worn_state = "burgundy_suit"
 	gender_icons = 1
-	starting_accessories = list(/obj/item/clothing/accessory/black, /obj/item/clothing/accessory/toggleable/burgundy_jacket)
+	accessories = list(/obj/item/clothing/accessory/black, /obj/item/clothing/accessory/toggleable/burgundy_jacket)
 
 /obj/item/clothing/under/suit_jacket/checkered
 	name = "checkered suit"
@@ -534,7 +527,7 @@
 	item_state = "gy_suit"
 	worn_state = "checkered_suit"
 	gender_icons = 1
-	starting_accessories = list(/obj/item/clothing/accessory/black, /obj/item/clothing/accessory/toggleable/checkered_jacket)
+	accessories = list(/obj/item/clothing/accessory/black, /obj/item/clothing/accessory/toggleable/checkered_jacket)
 
 /obj/item/clothing/under/suit_jacket/tan
 	name = "tan suit"
@@ -543,7 +536,7 @@
 	item_state = "lb_suit"
 	worn_state = "tan_suit"
 	gender_icons = 1
-	starting_accessories = list(/obj/item/clothing/accessory/yellow, /obj/item/clothing/accessory/toggleable/tan_jacket)
+	accessories = list(/obj/item/clothing/accessory/yellow, /obj/item/clothing/accessory/toggleable/tan_jacket)
 
 /obj/item/clothing/under/serviceoveralls
 	name = "workman outfit"
@@ -682,7 +675,7 @@
 	desc = "It looks like it was tailored for a monkey."
 	icon_state = "punpun"
 	worn_state = "punpun"
-	species_restricted = list("Monkey")
+	species_restricted = list(SPECIES_MONKEY)
 	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
 
 /obj/item/clothing/under/punpants
@@ -690,7 +683,7 @@
 	desc = "It looks like it was tailored for a monkey."
 	icon_state = "jeansmustang"
 	worn_state = "jeansmustang"
-	species_restricted = list("Monkey")
+	species_restricted = list(SPECIES_MONKEY)
 	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
 
 /obj/item/clothing/under/rank/psych/turtleneck/sweater
@@ -730,7 +723,7 @@
 	gender_icons = 1
 	siemens_coefficient = 0.8
 	armor = list(
-		energy = ARMOR_ENERGY_SMALL, 
+		energy = ARMOR_ENERGY_SMALL,
 		rad = ARMOR_RAD_MINOR
 		)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE

@@ -9,8 +9,8 @@
 	effect_type = pick(EFFECT_PARTICLE, EFFECT_ORGANIC)
 
 /datum/artifact_effect/radiate/DoEffectTouch(var/mob/living/user)
-	if(user)
-		user.apply_damage(radiation_strength * 2,IRRADIATE, damage_flags = DAM_DISPERSED)
+	if(istype(user))
+		user.apply_damage(radiation_strength * 2, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 		user.updatehealth()
 		return 1
 
@@ -23,3 +23,9 @@
 	if(holder)
 		SSradiation.radiate(holder, radiation_strength * rand(5, 10)) //Need to get feedback on this
 		return 1
+
+/datum/artifact_effect/radiate/destroyed_effect()
+	. = ..()
+
+	if(holder)
+		SSradiation.radiate(holder, radiation_strength * rand(10, 15))

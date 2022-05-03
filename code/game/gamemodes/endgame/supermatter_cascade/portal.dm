@@ -34,9 +34,9 @@
 	if(!(A.singuloCanEat()))
 		return 0
 
-	if (istype(A, /mob/living/))
+	if (istype(A, /mob/living))
 		var/mob/living/L = A
-		if(L.buckled && istype(L.buckled,/obj/structure/bed/))
+		if(L.buckled && istype(L.buckled,/obj/structure/bed))
 			var/turf/O = L.buckled
 			do_teleport(O, pick(endgame_safespawns))
 			L.forceMove(O.loc)
@@ -64,8 +64,7 @@
 				if (101 == AM.invisibility)
 					continue
 
-				spawn (0)
-					AM.singularity_pull(src, src.current_size)
+				addtimer(CALLBACK(AM, /atom/proc/singularity_pull, src, current_size), 0)
 
 
 /mob
@@ -84,8 +83,7 @@
 		riftimage.pixel_x = new_x
 		riftimage.pixel_y = new_y
 		riftimage.loc = T_mob
-
-		src << riftimage
+		image_to(src, riftimage)
 
 	else
 		QDEL_NULL(riftimage)

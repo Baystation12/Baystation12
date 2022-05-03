@@ -72,7 +72,7 @@
 	if(mRun in mutations)
 		tally = 0
 
-	return (tally+config.human_delay)
+	return tally
 
 /mob/living/carbon/human/size_strength_mod()
 	. = ..()
@@ -92,12 +92,12 @@
 	// End 'eugh'
 
 	//Do we have a working jetpack?
-	var/obj/item/weapon/tank/jetpack/thrust
+	var/obj/item/tank/jetpack/thrust
 	if(back)
-		if(istype(back,/obj/item/weapon/tank/jetpack))
+		if(istype(back,/obj/item/tank/jetpack))
 			thrust = back
-		else if(istype(back,/obj/item/weapon/rig))
-			var/obj/item/weapon/rig/rig = back
+		else if(istype(back,/obj/item/rig))
+			var/obj/item/rig/rig = back
 			for(var/obj/item/rig_module/maneuvering_jets/module in rig.installed_modules)
 				thrust = module.jets
 				break
@@ -134,28 +134,14 @@
 /mob/living/carbon/human/Move()
 	. = ..()
 	if(.) //We moved
-		handle_exertion()
+		species.handle_exertion(src)
 		handle_leg_damage()
-
-/mob/living/carbon/human/proc/handle_exertion()
-	if(isSynthetic() || (species.species_flags & (SPECIES_FLAG_IS_PLANT|SPECIES_FLAG_NO_PAIN)))
-		return
-	
-	var/lac_chance =  10 * encumbrance()
-	if(lac_chance && prob(skill_fail_chance(SKILL_HAULING, lac_chance)))
-		make_reagent(1, /datum/reagent/lactate)
-		adjust_hydration(-DEFAULT_THIRST_FACTOR)
-		switch(rand(1,20))
-			if(1)
-				visible_message("<span class='notice'>\The [src] is sweating heavily!</span>", "<span class='notice'>You are sweating heavily!</span>")
-			if(2)
-				visible_message("<span class='notice'>\The [src] looks out of breath!</span>", "<span class='notice'>You are out of breath!</span>")
 
 /mob/living/carbon/human/proc/handle_leg_damage()
 	if(!can_feel_pain())
 		return
 	var/crutches = 0
-	for(var/obj/item/weapon/cane/C in list(l_hand, r_hand))
+	for(var/obj/item/cane/C in list(l_hand, r_hand))
 		if(istype(C))
 			crutches++
 	for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))

@@ -7,15 +7,17 @@ Left Click        - Set Turf Area
 Left Click + Ctrl - Copy Turf Area
 Middle Click      - Copy Turf Area
 Right Click       - List/Create Area
+
+Create an area in a rectangle defined by two points:
+Shift + Left Click - Select point A
+Shift + Right Click - Select point B
 ************************************\
 "}
-	var/list/distinct_colors = list(
-		"#e6194b", "#3cb44b", "#ffe119", "#4363d8", "#f58231", "#42d4f4",
-		"#f032e6", "#fabebe", "#469990", "#e6beff", "#9a6324", "#fffac8",
-		"#800000", "#aaffc3", "#000075", "#a9a9a9", "#ffffff", "#000000"
-	)
+
 	var/area/selected_area
-	var/list/vision_images = list()
+	var/color_pool/colors
+	var/turf/coordinate_A
+	var/turf/coordinate_B
 
 /datum/build_mode/areas/Destroy()
 	UnselectArea()
@@ -25,8 +27,24 @@ Right Click       - List/Create Area
 /datum/build_mode/areas/Help()
 	to_chat(user, SPAN_NOTICE(help_text))
 
+/datum/build_mode/areas/Selected()
+	if (!overlay)
+		CreateOverlay("whiteOverlay")
+	colors = new
+	overlay.Show()
+
+/datum/build_mode/areas/Unselected()
+	if (overlay)
+		overlay.Hide()
+	QDEL_NULL(colors)
+
+/datum/build_mode/areas/UpdateOverlay(atom/movable/M, turf/T)
+	if (!overlay?.shown)
+		return
+	M.color = colors.get(T.loc)
+
 /datum/build_mode/areas/OnClick(var/atom/A, var/list/parameters)
-	if (parameters["right"])
+	if (parameters["right"] && !parameters["shift"])
 		Configurate()
 		return
 	var/turf/T = get_turf(A)
@@ -37,6 +55,25 @@ Right Click       - List/Create Area
 		selected_area = R
 		to_chat(user, "Picked area [selected_area.name]")
 	else if (selected_area)
+
+		if (parameters["left"] && parameters["shift"])
+			coordinate_A = get_turf(A)
+			to_chat(user, SPAN_NOTICE("Defined [coordinate_A] ([coordinate_A.type]) as point A."))
+
+		if (parameters["right"] && parameters["shift"])
+			coordinate_B = get_turf(A)
+			to_chat(user, SPAN_NOTICE("Defined [coordinate_B] ([coordinate_B.type]) as point B."))
+
+		if (coordinate_A && coordinate_B)
+			to_chat(user, SPAN_NOTICE("Area coordinates set. Defining area."))
+			Log("Created an area with name [selected_area] from [log_info_line(coordinate_A)] to [log_info_line(coordinate_B)]")
+			var/list/coords = make_rectangle(coordinate_A, coordinate_B)
+			make_area(coords[1], coords[2], coords[3], coords[4], coords[5], selected_area)
+			coordinate_A = null
+			coordinate_B = null
+
+
+
 		ChangeArea(T, selected_area)
 		to_chat(user, "Set area of turf [T.name] to [selected_area.name]")
 	else
@@ -66,31 +103,6 @@ Right Click       - List/Create Area
 		user.client.debug_variables(selected_area)
 		to_chat(user, "Created area [new_area.name]")
 
-/datum/build_mode/areas/TimerEvent()
-	user.client.images -= vision_images
-	vision_images = list()
-
-	var/used_colors = 0
-	var/list/max_colors = length(distinct_colors)
-	var/list/vision_colors = list()
-	for (var/turf/T in range(user.client.view, user))
-		var/image/I = new('icons/turf/overlays.dmi', T, "whiteOverlay")
-		var/ref = "\ref[T.loc]"
-		if (!vision_colors[ref])
-			if (++used_colors > max_colors)
-				vision_colors[ref] = "#" + copytext(md5(ref), 1, 7)
-			else
-				vision_colors[ref] = distinct_colors[used_colors]
-		I.color = vision_colors[ref]
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		I.appearance_flags = RESET_COLOR|RESET_ALPHA|RESET_TRANSFORM|NO_CLIENT_COLOR|KEEP_APART
-		vision_images.Add(I)
-	user.client.images += vision_images
-
-/datum/build_mode/areas/Unselected()
-	user.client.images -= vision_images
-	vision_images = list()
-
 /datum/build_mode/areas/proc/SelectArea(var/area/A)
 	if(!A || A == selected_area)
 		return
@@ -110,3 +122,9 @@ Right Click       - List/Create Area
 	if(!has_turf)
 		qdel(selected_area)
 	selected_area = null
+
+/datum/build_mode/areas/proc/make_area(low_bound_x, low_bound_y, high_bound_x, high_bound_y, z_level)
+	for(var/i = low_bound_x, i <= high_bound_x, i++)
+		for(var/j = low_bound_y, j <= high_bound_y, j++)
+			var/turf/T = locate(i, j, z_level)
+			ChangeArea(T, selected_area)

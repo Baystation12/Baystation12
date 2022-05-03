@@ -15,7 +15,7 @@
 	construct_state = /decl/machine_construction/tcomms/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	maximum_component_parts = list(/obj/item/weapon/stock_parts = 15)
+	maximum_component_parts = list(/obj/item/stock_parts = 15)
 
 /obj/machinery/telecomms/attackby(obj/item/P as obj, mob/user as mob)
 
@@ -29,7 +29,7 @@
 		var/obj/item/stack/nanopaste/T = P
 		if (integrity < 100)               								//Damaged, let's repair!
 			if (T.use(1))
-				integrity = between(0, integrity + rand(10,20), 100)
+				integrity = clamp(integrity + rand(10, 20), 0, 100)
 				to_chat(usr, "You apply the Nanopaste to [src], repairing some of the damage.")
 		else
 			to_chat(usr, "This machine is already in perfect condition.")
@@ -45,7 +45,7 @@
 	if(state_path == /decl/machine_construction/default/deconstructed)
 		to_chat(user, "You begin prying out the circuit board other components...")
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-		if(do_after(user,60, src))
+		if(do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "You finish prying out the components.")
 			return
 		return MCS_BLOCK
@@ -53,7 +53,7 @@
 /obj/machinery/telecomms/dismantle()
 	for(var/obj/x in (contents - component_parts))
 		x.dropInto(loc)
-	. = ..()	
+	. = ..()
 
 // This should all be a multitool extension, but outside the scope of current rework.
 /obj/machinery/telecomms/CanUseTopic(mob/user)
@@ -135,7 +135,7 @@
 
 	dat += "</font>"
 	temp = ""
-	
+
 	var/datum/browser/popup = new(user, "tcommmachine", "Telecommunications Machine Configuration Panel", 520, 600)
 	popup.set_content(JOINTEXT(dat))
 	popup.open()

@@ -4,9 +4,14 @@ SUBSYSTEM_DEF(webhooks)
 	flags = SS_NO_FIRE
 	var/list/webhook_decls = list()
 
-/datum/controller/subsystem/webhooks/Initialize()
+
+/datum/controller/subsystem/webhooks/UpdateStat(time)
+	return
+
+
+/datum/controller/subsystem/webhooks/Initialize(start_uptime)
 	load_webhooks()
-	. = ..()
+
 
 /datum/controller/subsystem/webhooks/proc/load_webhooks()
 
@@ -22,7 +27,7 @@ SUBSYSTEM_DEF(webhooks)
 			all_webhooks_by_id[webhook.id] = webhook
 
 	webhook_decls.Cut()
-	var/webhook_config = return_file_text("config/webhooks.json")
+	var/webhook_config = file2text("config/webhooks.json") || "{}"
 	if(webhook_config)
 		for(var/webhook_data in json_decode(webhook_config))
 			var/wid = webhook_data["id"]

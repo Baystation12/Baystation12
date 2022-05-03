@@ -2,7 +2,7 @@
 
 /decl/machine_construction/frame/unwrenched/state_is_valid(obj/machinery/machine)
 	return !machine.anchored
-	
+
 /decl/machine_construction/frame/unwrenched/validate_state(obj/machinery/constructable_frame/machine)
 	. = ..()
 	if(!.)
@@ -14,17 +14,17 @@
 /decl/machine_construction/frame/unwrenched/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if(isWrench(I))
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		if(do_after(user, 20, machine))
+		if(do_after(user, 2 SECONDS, machine, DO_PUBLIC_UNIQUE))
 			TRANSFER_STATE(/decl/machine_construction/frame/wrenched)
 			to_chat(user, "<span class='notice'>You wrench \the [machine] into place.</span>")
 			machine.anchored = TRUE
 	if(isWelder(I))
-		var/obj/item/weapon/weldingtool/WT = I
+		var/obj/item/weldingtool/WT = I
 		if(!WT.remove_fuel(0, user))
 			to_chat(user, "The welding tool must be on to complete this task.")
 			return TRUE
 		playsound(machine.loc, 'sound/items/Welder.ogg', 50, 1)
-		if(do_after(user, 20, machine))
+		if(do_after(user, 2 SECONDS, machine, DO_PUBLIC_UNIQUE))
 			if(!WT.isOn())
 				return TRUE
 			TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
@@ -51,7 +51,7 @@
 /decl/machine_construction/frame/wrenched/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if(isWrench(I))
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		if(do_after(user, 20, machine))
+		if(do_after(user, 2 SECONDS, machine, DO_PUBLIC_UNIQUE))
 			TRANSFER_STATE(/decl/machine_construction/frame/unwrenched)
 			to_chat(user, "<span class='notice'>You unfasten \the [machine].</span>")
 			machine.anchored = FALSE
@@ -63,7 +63,7 @@
 			return TRUE
 		playsound(machine.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>You start to add cables to the frame.</span>")
-		if(do_after(user, 20, machine) && C.use(5))
+		if(do_after(user, 2 SECONDS, machine, DO_PUBLIC_UNIQUE) && C.use(5))
 			TRANSFER_STATE(/decl/machine_construction/frame/awaiting_circuit)
 			to_chat(user, "<span class='notice'>You add cables to the frame.</span>")
 		return TRUE
@@ -86,8 +86,8 @@
 			try_change_state(machine, /decl/machine_construction/frame/unwrenched)
 
 /decl/machine_construction/frame/awaiting_circuit/attackby(obj/item/I, mob/user, obj/machinery/constructable_frame/machine)
-	if(istype(I, /obj/item/weapon/stock_parts/circuitboard))
-		var/obj/item/weapon/stock_parts/circuitboard/circuit = I
+	if(istype(I, /obj/item/stock_parts/circuitboard))
+		var/obj/item/stock_parts/circuitboard/circuit = I
 		if(circuit.board_type == machine.expected_machine_type)
 			if(!user.canUnEquip(I))
 				return FALSE

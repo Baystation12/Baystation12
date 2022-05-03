@@ -21,11 +21,14 @@
 		/datum/mil_rank/ec/o1
 	)
 
-	access = list(access_tox, access_tox_storage, access_maint_tunnels, access_research, access_mining_office,
-						access_mining_station, access_xenobiology, access_xenoarch, access_nanotrasen, access_solgov_crew,
-						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm,
-						access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_security,
-						access_petrov_maint)
+	access = list(
+		access_tox, access_tox_storage, access_maint_tunnels, access_research, access_mining_office,
+		access_mining_station, access_xenobiology, access_xenoarch, access_nanotrasen, access_solgov_crew,
+		access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm,
+		access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_control,
+		access_petrov_maint, access_torch_fax, access_radio_sci, access_radio_exp
+	)
+
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_BASIC,
@@ -38,6 +41,7 @@
 	                    SKILL_DEVICES     = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX)
 	skill_points = 20
+	possible_goals = list(/datum/goal/achievement/notslimefodder)
 
 /datum/job/scientist
 	title = "Scientist"
@@ -66,9 +70,9 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/research/scientist
 	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/civilian,
-		/datum/mil_branch/solgov
+		/datum/mil_branch/solgov,
+		/datum/mil_branch/expeditionary_corps
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o1,
@@ -76,12 +80,15 @@
 		/datum/mil_rank/sol/scientist = /decl/hierarchy/outfit/job/torch/passenger/research/scientist/solgov
 	)
 
-	access = list(access_tox, access_tox_storage, access_research, access_petrov, access_petrov_helm,
-						access_mining_office, access_mining_station, access_xenobiology, access_guppy_helm,
-						access_xenoarch, access_nanotrasen, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar,
-						access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry)
-	minimal_access = list()
+	access = list(
+		access_tox, access_tox_storage, access_research, access_petrov, access_petrov_helm,
+		access_mining_office, access_mining_station, access_xenobiology, access_guppy_helm,
+		access_xenoarch, access_nanotrasen, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar,
+		access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_control, access_torch_fax,
+		access_petrov_maint, access_radio_sci, access_radio_exp
+	)
 	skill_points = 20
+	possible_goals = list(/datum/goal/achievement/notslimefodder)
 
 /datum/job/scientist_assistant
 	title = "Research Assistant"
@@ -103,9 +110,9 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/research
 	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/civilian,
-		/datum/mil_branch/solgov
+		/datum/mil_branch/solgov,
+		/datum/mil_branch/expeditionary_corps
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/e3,
@@ -117,7 +124,11 @@
 	                    SKILL_DEVICES     = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX)
 
-	access = list(access_tox, access_tox_storage, access_research, access_petrov,
-						access_mining_office, access_mining_station, access_xenobiology,
-						access_xenoarch, access_nanotrasen, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar,
-						access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry)
+	access = list(
+		access_tox, access_tox_storage, access_research, access_petrov,
+		access_mining_office, access_mining_station, access_xenobiology, access_guppy_helm,
+		access_xenoarch, access_nanotrasen, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar,
+		access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_control,
+		access_radio_sci, access_radio_exp
+	)
+	possible_goals = list(/datum/goal/achievement/notslimefodder)

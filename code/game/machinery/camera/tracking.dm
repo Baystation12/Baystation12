@@ -41,7 +41,7 @@
 /mob/living/silicon/ai/proc/ai_store_location(loc as text)
 	set category = "Silicon Commands"
 	set name = "Store Camera Location"
-	set desc = "Stores your current camera location by the given name"
+	set desc = "Stores your current camera location by the given name."
 
 	loc = sanitize(loc)
 	if(!loc)
@@ -70,7 +70,7 @@
 /mob/living/silicon/ai/proc/ai_goto_location(loc in sorted_stored_locations())
 	set category = "Silicon Commands"
 	set name = "Goto Camera Location"
-	set desc = "Returns to the selected camera location"
+	set desc = "Returns to the selected camera location."
 
 	if (!(loc in stored_locations))
 		to_chat(src, "<span class='warning'>Location [loc] not found</span>")
@@ -82,7 +82,7 @@
 /mob/living/silicon/ai/proc/ai_remove_location(loc in sorted_stored_locations())
 	set category = "Silicon Commands"
 	set name = "Delete Camera Location"
-	set desc = "Deletes the selected camera location"
+	set desc = "Deletes the selected camera location."
 
 	if (!(loc in stored_locations))
 		to_chat(src, "<span class='warning'>Location [loc] not found</span>")
@@ -149,39 +149,36 @@
 	cameraFollow.tracking_cancelled()
 	cameraFollow = null
 
-/mob/living/silicon/ai/proc/ai_actual_track(mob/living/target as mob)
-	if(!istype(target))	return
-	var/mob/living/silicon/ai/U = usr
-
-	if(target == U.cameraFollow)
+/mob/living/silicon/ai/proc/ai_actual_track(mob/living/target)
+	if (!istype(target))
 		return
+	if (target == cameraFollow)
+		return
+	if (cameraFollow)
+		ai_cancel_tracking()
+	cameraFollow = target
+	to_chat(src, SPAN_NOTICE("Tracking target ..."))
+	cameraFollow.tracking_initiated()
+	addtimer(CALLBACK(src, .proc/ai_actual_track_action), 0, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
 
-	if(U.cameraFollow)
-		U.ai_cancel_tracking()
-	U.cameraFollow = target
-	to_chat(U, "Tracking target...")
-	target.tracking_initiated()
 
-	spawn (0)
-		while (U.cameraFollow == target)
-			if (U.cameraFollow == null)
-				return
+/mob/living/silicon/ai/proc/ai_actual_track_action()
+	if (!cameraFollow)
+		return
+	var/status = cameraFollow.tracking_status()
+	if (status == TRACKING_NO_COVERAGE)
+		to_chat(src, SPAN_WARNING("Target is not near any active cameras."))
+		addtimer(CALLBACK(src, .proc/ai_actual_track_action), 10 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
+		return
+	else if (status == TRACKING_TERMINATE)
+		ai_cancel_tracking(TRUE)
+		return
+	if (eyeobj)
+		eyeobj.setLoc(get_turf(cameraFollow), FALSE)
+		addtimer(CALLBACK(src, .proc/ai_actual_track_action), 1 SECOND, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
+		return
+	view_core()
 
-			switch(target.tracking_status())
-				if(TRACKING_NO_COVERAGE)
-					to_chat(U, "Target is not near any active cameras.")
-					sleep(100)
-					continue
-				if(TRACKING_TERMINATE)
-					U.ai_cancel_tracking(1)
-					return
-
-			if(U.eyeobj)
-				U.eyeobj.setLoc(get_turf(target), 0)
-			else
-				view_core()
-				return
-			sleep(10)
 
 /obj/machinery/camera/attack_ai(var/mob/living/silicon/ai/user as mob)
 	if (!istype(user))
@@ -211,7 +208,7 @@
 	return L
 
 
-mob/living/proc/near_camera()
+/mob/living/proc/near_camera()
 	if (!isturf(loc))
 		return 0
 	else if(!cameranet.is_visible(src))
@@ -220,7 +217,7 @@ mob/living/proc/near_camera()
 
 /mob/living/proc/tracking_status()
 	// Easy checks first.
-	var/obj/item/weapon/card/id/id = GetIdCard()
+	var/obj/item/card/id/id = GetIdCard()
 	if(id && id.prevent_tracking())
 		return TRACKING_TERMINATE
 	if(InvalidPlayerTurf(get_turf(src)))
@@ -254,16 +251,16 @@ mob/living/proc/near_camera()
 		if(T && (T.z in GLOB.using_map.station_levels) && hassensorlevel(src, SUIT_SENSOR_TRACKING))
 			return TRACKING_POSSIBLE
 
-mob/living/proc/tracking_initiated()
+/mob/living/proc/tracking_initiated()
 
-mob/living/silicon/robot/tracking_initiated()
+/mob/living/silicon/robot/tracking_initiated()
 	tracking_entities++
 	if(tracking_entities == 1 && has_zeroth_law())
 		to_chat(src, "<span class='warning'>Internal camera is currently being accessed.</span>")
 
-mob/living/proc/tracking_cancelled()
+/mob/living/proc/tracking_cancelled()
 
-mob/living/silicon/robot/tracking_cancelled()
+/mob/living/silicon/robot/tracking_cancelled()
 	tracking_entities--
 	if(!tracking_entities && has_zeroth_law())
 		to_chat(src, "<span class='notice'>Internal camera is no longer being accessed.</span>")

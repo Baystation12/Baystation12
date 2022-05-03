@@ -16,6 +16,7 @@
 	var/datum/wires/connected = null
 	var/datum/radio_frequency/radio_connection
 	var/deadman = 0
+	var/obj/machinery/atmospherics/pipe/cap/sparker/mholder
 
 /obj/item/device/assembly/signaler/New()
 	..()
@@ -117,6 +118,8 @@
 		connected.Pulse(src)
 	else if(holder)
 		holder.process_activation(src, 1, 0)
+	else if(mholder)
+		mholder.process_activation()
 	else
 		..(radio)
 	return 1
@@ -130,7 +133,7 @@
 
 	if(!holder)
 		for(var/mob/O in hearers(1, src.loc))
-			O.show_message(text("\icon[] *beep* *beep*", src), 3, "*beep* *beep*", 2)
+			O.show_message(text("[icon2html(src, O)] *beep* *beep*"), 3, "*beep* *beep*", 2)
 	return
 
 

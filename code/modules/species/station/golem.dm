@@ -54,3 +54,6 @@
 
 /datum/species/golem/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL)
+
+/datum/species/golem/can_float(mob/living/carbon/human/H)
+	return FALSE

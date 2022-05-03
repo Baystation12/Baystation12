@@ -28,8 +28,8 @@
 	var/is_ranged = 0
 	var/awaiting_surrender = 0
 
-	var/obj/item/weapon/melee/baton/stun_baton
-	var/obj/item/weapon/handcuffs/cyborg/handcuffs
+	var/obj/item/melee/baton/stun_baton
+	var/obj/item/handcuffs/cyborg/handcuffs
 
 	var/list/threat_found_sounds = list('sound/voice/bcriminal.ogg', 'sound/voice/bjustice.ogg', 'sound/voice/bfreeze.ogg')
 	var/list/preparing_arrest_sounds = list('sound/voice/bfreeze.ogg')
@@ -41,7 +41,7 @@
 
 /mob/living/bot/secbot/Initialize()
 	stun_baton = new(src)
-	stun_baton.bcell = new /obj/item/weapon/cell/infinite(stun_baton)
+	stun_baton.bcell = new /obj/item/cell/infinite(stun_baton)
 	stun_baton.set_status(1, null)
 	. = ..()
 
@@ -119,10 +119,12 @@
 		if(user)
 			to_chat(user, "<span class='notice'>You short out [src]'s threat identificator.</span>")
 			ignore_list |= user
-		emagged = 2
+		emagged = TRUE
 		return 1
 
 /mob/living/bot/secbot/bullet_act(var/obj/item/projectile/P)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 	var/curhealth = health
 	var/mob/shooter = P.firer
 	. = ..()
@@ -135,7 +137,8 @@
 	if(declare_arrests)
 		broadcast_security_hud_message("[src] is arresting a level [threat] suspect <b>[suspect_name]</b> in <b>[get_area(src)]</b>.", src)
 	say("Down on the floor, [suspect_name]! You have [SECBOT_WAIT_TIME] seconds to comply.")
-	playsound(src.loc, pick(preparing_arrest_sounds), 50)
+	if (preparing_arrest_sounds.len)
+		playsound(src.loc, pick(preparing_arrest_sounds), 50)
 	GLOB.moved_event.register(target, src, /mob/living/bot/secbot/proc/target_moved)
 
 /mob/living/bot/secbot/proc/target_moved(atom/movable/moving_instance, atom/old_loc, atom/new_loc)
@@ -217,7 +220,7 @@
 	visible_message("<span class='warning'>[src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
 	new /obj/item/device/assembly/prox_sensor(Tsec)
-	new /obj/item/weapon/melee/baton(Tsec)
+	new /obj/item/melee/baton(Tsec)
 	if(prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
 

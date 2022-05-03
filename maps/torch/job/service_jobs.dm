@@ -6,7 +6,7 @@
 	spawn_positions = 1
 	minimum_character_age = list(SPECIES_HUMAN = 24)
 	ideal_character_age = 40
-	economic_power = 5
+	economic_power = 6
 	minimal_player_age = 0
 	supervisors = "the Executive Officer"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/chaplain
@@ -20,8 +20,12 @@
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/ec/o1)
 	min_skill = list(SKILL_BUREAUCRACY = SKILL_BASIC)
-	access = list(access_morgue, access_chapel_office, access_crematorium, access_solgov_crew)
-	minimal_access = list()
+
+	access = list(
+		access_morgue, access_chapel_office,
+		access_crematorium, access_solgov_crew,
+		access_radio_serv
+	)
 
 /datum/job/janitor
 	title = "Sanitation Technician"
@@ -49,21 +53,26 @@
 	)
 	min_skill = list(   SKILL_HAULING = SKILL_BASIC)
 
-	access = list(access_maint_tunnels, access_emergency_storage, access_janitor, access_solgov_crew)
-	minimal_access = list()
-	
+	access = list(
+		access_maint_tunnels, access_emergency_storage,
+		access_janitor, access_solgov_crew,
+		access_radio_serv
+	)
+
+
 /datum/job/chef
-	title = "Cook"
+	title = "Steward"
 	department = "Service"
 	department_flag = SRV
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	minimum_character_age = list(SPECIES_HUMAN = 18)
 	supervisors = "the Executive Officer"
 	alt_titles = list(
-		"Chef",
+		"Bartender",
+		"Cook",
 		"Culinary Specialist"
-		)
+	)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/cook
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
@@ -77,27 +86,19 @@
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/fleet/e4
 	)
-	min_skill = list(   SKILL_COOKING   = SKILL_ADEPT,
-	                    SKILL_BOTANY    = SKILL_BASIC,
-	                    SKILL_CHEMISTRY = SKILL_BASIC)
-	access = list(access_maint_tunnels, access_hydroponics, access_kitchen, access_solgov_crew, access_bar, access_commissary)
-	minimal_access = list()
+	min_skill = list(
+		SKILL_BOTANY = SKILL_BASIC,
+		SKILL_CHEMISTRY = SKILL_BASIC,
+		SKILL_COOKING = SKILL_ADEPT
+	)
+	access = list(
+		access_commissary,
+		access_hydroponics,
+		access_kitchen,
+		access_radio_serv,
+		access_solgov_crew
+	)
 
-/datum/job/bartender
-	department = "Service"
-	department_flag = SRV
-	supervisors = "the Executive Officer and the Corporate Liaison"
-	minimum_character_age = list(SPECIES_HUMAN = 18)
-	ideal_character_age = 30
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/bartender
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
-
-	access = list(access_hydroponics, access_bar, access_solgov_crew, access_kitchen, access_commissary)
-	minimal_access = list()
-	min_skill = list(   SKILL_COOKING   = SKILL_BASIC,
-	                    SKILL_BOTANY    = SKILL_BASIC,
-	                    SKILL_CHEMISTRY = SKILL_BASIC)
 
 /datum/job/crew
 	title = "Crewman"
@@ -120,4 +121,7 @@
 		/datum/mil_rank/fleet/e4
 	)
 
-	access = list(access_maint_tunnels, access_emergency_storage, access_solgov_crew)
+	access = list(
+		access_maint_tunnels, access_emergency_storage,
+		access_solgov_crew, access_radio_serv
+	)

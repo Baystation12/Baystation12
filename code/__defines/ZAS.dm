@@ -25,8 +25,29 @@
 
 #ifdef MULTIZAS
 
-var/list/csrfz_check = list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST, NORTHUP, EASTUP, WESTUP, SOUTHUP, NORTHDOWN, EASTDOWN, WESTDOWN, SOUTHDOWN)
-var/list/gzn_check = list(NORTH, SOUTH, EAST, WEST, UP, DOWN)
+GLOBAL_LIST_INIT(gzn_check, list(
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
+	UP,
+	DOWN
+))
+
+GLOBAL_LIST_INIT(csrfz_check, list(
+	NORTHEAST,
+	NORTHWEST,
+	SOUTHEAST,
+	SOUTHWEST,
+	NORTHUP,
+	EASTUP,
+	WESTUP,
+	SOUTHUP,
+	NORTHDOWN,
+	EASTDOWN,
+	WESTDOWN,
+	SOUTHDOWN
+))
 
 #define ATMOS_CANPASS_TURF(ret,A,B) \
 	if (A.blocks_air & AIR_BLOCKED || B.blocks_air & AIR_BLOCKED) { \
@@ -70,8 +91,19 @@ var/list/gzn_check = list(NORTH, SOUTH, EAST, WEST, UP, DOWN)
 	}
 #else
 
-var/list/csrfz_check = list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
-var/list/gzn_check = list(NORTH, SOUTH, EAST, WEST)
+GLOBAL_LIST_INIT(csrfz_check, list(
+	NORTHEAST,
+	NORTHWEST,
+	SOUTHEAST,
+	SOUTHWEST
+))
+
+GLOBAL_LIST_INIT(gzn_check, list(
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+))
 
 #define ATMOS_CANPASS_TURF(ret,A,B) \
 	if (A.blocks_air & AIR_BLOCKED || B.blocks_air & AIR_BLOCKED) { \

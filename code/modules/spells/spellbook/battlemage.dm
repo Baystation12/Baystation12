@@ -22,20 +22,20 @@
 				/spell/radiant_aura =								1,
 				/spell/noclothes = 									1,
 				/obj/structure/closet/wizard/armor = 				1,
-				/obj/item/weapon/gun/energy/staff/focus = 			1,
-				/obj/item/weapon/dice/d20/cursed = 					1,
-				/obj/item/weapon/summoning_stone = 					2,
-				/obj/item/weapon/magic_rock = 						1,
-				/obj/item/weapon/contract/wizard/xray = 			1,
-				/obj/item/weapon/contract/wizard/telepathy = 		1,
-				/obj/item/weapon/contract/apprentice = 				1
+				/obj/item/gun/energy/staff/focus = 			1,
+				/obj/item/dice/d20/cursed = 					1,
+				/obj/item/summoning_stone = 					2,
+				/obj/item/magic_rock = 						1,
+				/obj/item/contract/wizard/xray = 			1,
+				/obj/item/contract/wizard/telepathy = 		1,
+				/obj/item/contract/apprentice = 				1
 					)
 
-	sacrifice_objects = list(/obj/item/weapon/material/sword,
-							/obj/item/weapon/material/twohanded/fireaxe,
-							/obj/item/weapon/melee,
-							/obj/item/weapon/material/knife/ritual,
-							/obj/item/weapon/material/knife/kitchen/cleaver,
-							/obj/item/weapon/material/knife/folding/combat/balisong,
-							/obj/item/weapon/material/knife/folding/tacticool,
-							/obj/item/weapon/material/star)
+	sacrifice_objects = list(/obj/item/material/sword,
+							/obj/item/material/twohanded/fireaxe,
+							/obj/item/melee,
+							/obj/item/material/knife/ritual,
+							/obj/item/material/knife/kitchen/cleaver,
+							/obj/item/material/knife/folding/combat/balisong,
+							/obj/item/material/knife/folding/tacticool,
+							/obj/item/material/star)

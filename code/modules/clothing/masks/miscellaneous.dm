@@ -34,7 +34,7 @@
 	item_state = "sterile"
 	w_class = ITEM_SIZE_TINY
 	body_parts_covered = FACE
-	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
+	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL | ITEM_FLAG_WASHER_ALLOWED
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.01
 	armor = list(
@@ -59,6 +59,7 @@
 	desc = "For the Swimming Savant."
 	icon_state = "snorkel"
 	item_state = "snorkel"
+	item_flags = null
 	flags_inv = HIDEFACE
 	body_parts_covered = 0
 
@@ -70,7 +71,7 @@
 	icon_state = "blueneckscarf"
 	item_state = "blueneckscarf"
 	body_parts_covered = FACE
-	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
+	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL | ITEM_FLAG_WASHER_ALLOWED
 	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 
@@ -80,7 +81,7 @@
 	icon_state = "redwhite_scarf"
 	item_state = "redwhite_scarf"
 	body_parts_covered = FACE
-	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
+	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL | ITEM_FLAG_WASHER_ALLOWED
 	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 
@@ -90,7 +91,7 @@
 	icon_state = "green_scarf"
 	item_state = "green_scarf"
 	body_parts_covered = FACE
-	item_flags = ITEM_FLAG_THICKMATERIAL
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_WASHER_ALLOWED
 	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 
@@ -100,7 +101,7 @@
 	icon_state = "ninja_scarf"
 	item_state = "ninja_scarf"
 	body_parts_covered = FACE
-	item_flags = ITEM_FLAG_THICKMATERIAL
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_WASHER_ALLOWED
 	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 	siemens_coefficient = 0
@@ -138,6 +139,7 @@
 	icon_state = "s-ninja"
 	item_state = "s-ninja"
 	flags_inv = HIDEFACE
+	item_flags = null
 	body_parts_covered = FACE|EYES
 	action_button_name = "Toggle MUI"
 	origin_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 5)
@@ -271,7 +273,7 @@
 	body_parts_covered = FACE
 	icon_state = "bandblack"
 	item_state = "bandblack"
-	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
+	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL | ITEM_FLAG_WASHER_ALLOWED
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/clothing/mask/bandana/equipped(var/mob/user, var/slot)
@@ -333,4 +335,3 @@
 	desc = "A fine black bandana with nanotech lining and a skull emblem. Can be worn on the head or face."
 	icon_state = "bandskull"
 	item_state = "bandskull"
-

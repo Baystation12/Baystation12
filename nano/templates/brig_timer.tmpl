@@ -3,7 +3,7 @@
 			<h3>Cell Timer</h3>
 		</td>
 		<td colspan=2>
-			{{:helper.link(data.timing ? 'Stop' : 'Start' , 'clock', {'toggle' : 1}, data.timing ? 'selected' : null, null)}}
+			{{:helper.link(data.timing ? 'Stop' : 'Start' , 'clock', {'toggle' : 1}, null, null)}}
 			{{for data.flashes}}
 				{{:helper.link(value.status ? 'Flash' : 'Recharging' , 'lightbulb', {'flash' : 1}, value.status ? null : 'disabled', null)}}
 			{{/for}}
@@ -20,4 +20,3 @@
 			{{:helper.link('<div class="uiIcon16 icon-plus"></div>' , 'plus', {'adjust' : 600}, data.timing ? 'disabled' : null, null)}}
 			</td></tr>
 	</table>
-		  

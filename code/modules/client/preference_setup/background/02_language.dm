@@ -1,5 +1,3 @@
-#define MAX_LANGUAGES 3
-
 /datum/preferences
 	var/list/alternate_languages
 
@@ -9,11 +7,11 @@
 	var/list/allowed_languages
 	var/list/free_languages
 
-/datum/category_item/player_setup_item/background/languages/load_character(var/savefile/S)
-	from_file(S["language"], pref.alternate_languages)
+/datum/category_item/player_setup_item/background/languages/load_character(datum/pref_record_reader/R)
+	pref.alternate_languages = R.read("language")
 
-/datum/category_item/player_setup_item/background/languages/save_character(var/savefile/S)
-	to_file(S["language"],   pref.alternate_languages)
+/datum/category_item/player_setup_item/background/languages/save_character(datum/pref_record_writer/W)
+	W.write("language", pref.alternate_languages)
 
 /datum/category_item/player_setup_item/background/languages/sanitize_character()
 	if(!islist(pref.alternate_languages))
@@ -117,5 +115,3 @@
 	if(pref.alternate_languages.len < MAX_LANGUAGES)
 		var/remaining_langs = MAX_LANGUAGES - pref.alternate_languages.len
 		LAZYADD(., "- <a href='?src=\ref[src];add_language=1'>add</a> ([remaining_langs] remaining)<br>")
-
-#undef MAX_LANGUAGES

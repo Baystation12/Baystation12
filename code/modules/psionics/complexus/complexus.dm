@@ -11,13 +11,13 @@
 	var/next_power_use = 0            // world.time minimum before next power use.
 	var/stamina = 50                  // Current psi pool.
 	var/max_stamina = 50              // Max psi pool.
+	var/armor_cost = 0                // Amount of power to substract this tick from psi armor blocking damage
 
 	var/list/latencies                // List of all currently latent faculties.
 	var/list/ranks                    // Assoc list of psi faculties to current rank.
 	var/list/base_ranks               // Assoc list of psi faculties to base rank, in case reset is needed
 	var/list/manifested_items         // List of atoms manifested/maintained by psychic power.
 	var/next_latency_trigger = 0      // world.time minimum before a trigger can be attempted again.
-	var/last_armor_check              // world.time of last armour check.
 	var/last_aura_size
 	var/last_aura_alpha
 	var/last_aura_color
@@ -47,13 +47,13 @@
 /proc/create_aura_image(var/newloc)
 	var/image/aura_image = image(loc = newloc, icon = 'icons/effects/psi_aura_small.dmi', icon_state = "aura")
 	aura_image.blend_mode = BLEND_MULTIPLY
-	aura_image.appearance_flags = NO_CLIENT_COLOR | RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
+	aura_image.appearance_flags = DEFAULT_APPEARANCE_FLAGS | NO_CLIENT_COLOR | RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
 	aura_image.layer = TURF_LAYER + 0.5
 	aura_image.alpha = 0
 	aura_image.pixel_x = -64
 	aura_image.pixel_y = -64
 	aura_image.mouse_opacity = 0
-	aura_image.appearance_flags = 0
+	aura_image.appearance_flags = DEFAULT_APPEARANCE_FLAGS
 	for(var/thing in SSpsi.processing)
 		var/datum/psi_complexus/psychic = thing
 		if(psychic.owner.client && !psychic.suppressed)
@@ -79,7 +79,7 @@
 	if(owner)
 		cancel()
 		if(owner.client)
-			owner.client.screen -= list(ui, ui.components)
+			owner.client.screen -= list(ui, ui?.components)
 			for(var/thing in SSpsi.all_aura_images)
 				owner.client.images -= thing
 		QDEL_NULL(ui)

@@ -3,6 +3,7 @@
 	desc = "Magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle. They're large enough to be worn over other footwear."
 	name = "magboots"
 	icon_state = "magboots0"
+	item_flags = null
 	species_restricted = null
 	force = 3
 	overshoes = 1
@@ -11,7 +12,6 @@
 	action_button_name = "Toggle Magboots"
 	var/obj/item/clothing/shoes/shoes = null	//Undershoes
 	var/mob/living/carbon/human/wearer = null	//For shoe procs
-	center_of_mass = null
 	randpixel = 0
 	var/online_slowdown = 3
 

@@ -4,8 +4,8 @@
 	desc = "A shield generator."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "Shield_Gen"
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	req_access = list(list(access_engine_equip,access_research))
 	var/active = 0
 	var/power = 0
@@ -24,7 +24,7 @@
 	data["draw"] = round(power_draw)
 	data["power"] = round(storedpower)
 	data["maxpower"] = round(max_stored_power)
-	data["current_draw"] = ((between(500, max_stored_power - storedpower, power_draw)) + power ? active_power_usage : 0)
+	data["current_draw"] = clamp(max_stored_power - storedpower, 500, power_draw) + power ? active_power_usage : 0
 	data["online"] = active == 2 ? 1 : 0
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -71,12 +71,10 @@
 
 /obj/machinery/shieldwallgen/emp_act(var/severity)
 	switch(severity)
-		if(1)
+		if(EMP_ACT_HEAVY)
 			storedpower = 0
-		if(2)
+		if(EMP_ACT_LIGHT)
 			storedpower -= rand(storedpower/2, storedpower)
-		if(3)
-			storedpower -= rand(storedpower/4, storedpower/2)
 	..()
 
 /obj/machinery/shieldwallgen/CanUseTopic(mob/user)
@@ -106,7 +104,7 @@
 	if(C)	PN = C.powernet		// find the powernet of the connected cable
 
 	if(PN)
-		var/shieldload = between(500, max_stored_power - storedpower, power_draw)	//what we try to draw
+		var/shieldload = clamp(max_stored_power - storedpower, 500, power_draw)	//what we try to draw
 		shieldload = PN.draw_power(shieldload) //what we actually get
 		storedpower += shieldload
 
@@ -132,7 +130,7 @@
 		storedpower = 0
 
 	if(src.active == 1)
-		if(!src.anchored == 1)
+		if(!src.anchored)
 			src.active = 0
 			return
 		spawn(1)
@@ -203,19 +201,19 @@
 			to_chat(user, "Turn off the field generator first.")
 			return
 
-		else if(anchored == 0)
+		else if(!anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			to_chat(user, "You secure the external reinforcing bolts to the floor.")
-			src.anchored = 1
+			src.anchored = TRUE
 			return
 
-		else if(anchored == 1)
+		else if(anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			to_chat(user, "You undo the external reinforcing bolts.")
-			src.anchored = 0
+			src.anchored = FALSE
 			return
 
-	if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/modular_computer))
+	if(istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
 		if (src.allowed(user))
 			src.locked = !src.locked
 			to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
@@ -260,9 +258,9 @@
 	desc = "An energy shield."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shieldwall"
-	anchored = 1
-	density = 1
-	unacidable = 1
+	anchored = TRUE
+	density = TRUE
+	unacidable = TRUE
 	light_outer_range = 3
 	var/needs_power = 0
 	var/active = 1
@@ -349,7 +347,7 @@
 			return !src.density
 
 /obj/machinery/shieldwallgen/online
-	anchored = 1
+	anchored = TRUE
 	active = 1
 
 /obj/machinery/shieldwallgen/online/Initialize()

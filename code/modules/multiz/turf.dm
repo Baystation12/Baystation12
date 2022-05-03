@@ -29,8 +29,8 @@
 	name = "open space"
 	icon = 'icons/turf/space.dmi'
 	icon_state = ""
-	density = 0
-	pathweight = 100000 //Seriously, don't try and path over this one numbnuts
+	density = FALSE
+	pathweight = INFINITY //Seriously, don't try and path over this one numbnuts
 
 	z_flags = ZM_MIMIC_DEFAULTS | ZM_MIMIC_OVERWRITE | ZM_MIMIC_NO_AO | ZM_ALLOW_ATMOS
 
@@ -83,7 +83,7 @@
 				return
 			qdel(L)
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			ChangeTurf(/turf/simulated/floor/airless)
+			ChangeTurf(/turf/simulated/floor/plating, keep_air = TRUE)
 			return
 		else
 			to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")

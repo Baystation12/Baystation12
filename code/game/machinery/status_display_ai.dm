@@ -6,7 +6,7 @@
 	overlay = over
 	ckey = key
 
-var/list/ai_status_emotions = list(
+var/global/list/ai_status_emotions = list(
 	"Very Happy" 				= new /datum/ai_emotion("ai_veryhappy"),
 	"Happy" 					= new /datum/ai_emotion("ai_happy"),
 	"Neutral" 					= new /datum/ai_emotion("ai_neutral"),
@@ -58,8 +58,8 @@ var/list/ai_status_emotions = list(
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "frame"
 	name = "AI display"
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 
 	var/mode = 0	// 0 = Blank
 					// 1 = AI emoticon

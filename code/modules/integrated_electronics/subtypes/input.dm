@@ -423,8 +423,8 @@
 		activate_pin(3)
 		return
 	var/turf/T = get_turf(assembly)
-	var/target_x = Clamp(get_pin_data(IC_INPUT, 1), 0, world.maxx)
-	var/target_y = Clamp(get_pin_data(IC_INPUT, 2), 0, world.maxy)
+	var/target_x = clamp(get_pin_data(IC_INPUT, 1), 0, world.maxx)
+	var/target_y = clamp(get_pin_data(IC_INPUT, 2), 0, world.maxy)
 	var/turf/A = locate(target_x, target_y, T.z)
 	set_pin_data(IC_OUTPUT, 1, null)
 	if(!A || !(A in view(T)))
@@ -566,7 +566,7 @@
 	var/rad = get_pin_data(IC_INPUT, 2)
 
 	if(isnum(rad))
-		rad = Clamp(rad, 0, 8)
+		rad = clamp(rad, 0, 8)
 		radius = rad
 
 /obj/item/integrated_circuit/input/advanced_locator_list/do_work()
@@ -628,7 +628,7 @@
 /obj/item/integrated_circuit/input/advanced_locator/on_data_written()
 	var/rad = get_pin_data(IC_INPUT, 2)
 	if(isnum(rad))
-		rad = Clamp(rad, 0, 8)
+		rad = clamp(rad, 0, 8)
 		radius = rad
 
 /obj/item/integrated_circuit/input/advanced_locator/do_work()
@@ -691,7 +691,6 @@
 	. = ..()
 	set_pin_data(IC_INPUT, 1, frequency)
 	set_pin_data(IC_INPUT, 2, code)
-	addtimer(CALLBACK(src, .proc/set_frequency,frequency), 40)
 
 /obj/item/integrated_circuit/input/signaler/Destroy()
 	radio_controller.remove_object(src,frequency)
@@ -807,10 +806,9 @@
 	. = list()
 	. += "Current selection: [(current_console && current_console.id) || "None"]"
 	. += "Please select a teleporter to lock in on:"
-	for(var/obj/machinery/teleport/hub/R in SSmachines.machinery)
-		var/obj/machinery/computer/teleporter/com = R.com
-		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use && com.operable() && AreConnectedZLevels(get_z(src), get_z(com)))
-			.["[com.id] ([R.icon_state == "tele1" ? "Active" : "Inactive"])"] = "tport=[any2ref(com)]"
+	for (var/obj/machinery/computer/teleporter/computer in SSmachines.machinery)
+		if (computer.target && computer.operable() && AreConnectedZLevels(get_z(src), get_z(computer)))
+			.["[computer.id] ([computer.active ? "Active" : "Inactive"])"] = "tport=[any2ref(computer)]"
 	.["None (Dangerous)"] = "tport=random"
 
 /obj/item/integrated_circuit/input/teleporter_locator/OnICTopic(href_list, user)
@@ -853,9 +851,9 @@
 /obj/item/integrated_circuit/input/microphone
 	name = "microphone"
 	desc = "Useful for spying on people, or for voice-activated machines."
-	extended_desc = "This will automatically translate most languages it hears to Zurich Accord Common. \
+	extended_desc = "This will automatically translate most human languages to Zurich Accord Common. \
 	The first activation pin is always pulsed when the circuit hears someone talk, while the second one \
-	is only triggered if it hears someone speaking a language other than Zurich Accord Common."
+	is only triggered if it successfully translated another language."
 	icon_state = "recorder"
 	complexity = 8
 	inputs = list()
@@ -868,6 +866,10 @@
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	power_draw_per_use = 5
 
+	var/language_preferred = LANGUAGE_HUMAN_EURO
+	var/languages_understood = list(LANGUAGE_HUMAN_EURO, LANGUAGE_HUMAN_CHINESE, LANGUAGE_HUMAN_ARABIC, LANGUAGE_HUMAN_INDIAN, LANGUAGE_HUMAN_IBERIAN, LANGUAGE_HUMAN_RUSSIAN, LANGUAGE_HUMAN_SELENIAN, LANGUAGE_SPACER)
+	var/invalid_flags = NONVERBAL | SIGNLANG | HIVEMIND | ALT_TRANSMIT
+
 /obj/item/integrated_circuit/input/microphone/Initialize()
 	. = ..()
 	GLOB.listening_objects += src
@@ -877,18 +879,43 @@
 	. = ..()
 
 /obj/item/integrated_circuit/input/microphone/hear_talk(var/mob/living/M as mob, text, verb, datum/language/speaking)
-	var/translated = TRUE
-	if(M && text)
-		if(speaking && !speaking.machine_understands)
-			text = speaking.scramble(text)
-			translated = FALSE
-		set_pin_data(IC_OUTPUT, 1, M.GetVoice())
-		set_pin_data(IC_OUTPUT, 2, text)
+	var/translated = FALSE
+	if(M && text && speaking)
+		if(!(speaking.flags & invalid_flags))
+			if(speaking.name in languages_understood)
+				translated = TRUE
+			else
+				text = speaking.scramble(text)
 
-	push_data()
-	activate_pin(1)
-	if(translated && !(speaking.name == LANGUAGE_HUMAN_EURO))
-		activate_pin(2)
+			set_pin_data(IC_OUTPUT, 1, M.GetVoice())
+			set_pin_data(IC_OUTPUT, 2, text)
+
+			push_data()
+			activate_pin(1)
+			if(translated && !(speaking.name == language_preferred))
+				activate_pin(2)
+
+
+/obj/item/integrated_circuit/input/microphone/modem
+	name = "machine modulating microphone"
+	languages_understood = list(LANGUAGE_HUMAN_EURO, LANGUAGE_EAL)
+	spawn_flags = IC_SPAWN_RESEARCH
+	extended_desc = "A microphone combined with repurposed fax machine circuitry, this will translate Encoded Audio Language used by some synthetics into ZAC."
+
+/obj/item/integrated_circuit/input/microphone/exo
+	name = "interspecies exchange microphone"
+	languages_understood = list(LANGUAGE_HUMAN_EURO, LANGUAGE_HUMAN_SELENIAN, LANGUAGE_UNATHI_SINTA, LANGUAGE_SKRELLIAN)
+	spawn_flags = IC_SPAWN_RESEARCH
+	extended_desc = "A microphone with a xenolinguistic database to facilitate EXO missions with mixed species. It translates the most common Skrellian and Unathi dialects to ZAC."
+	//Selenian is an in-character undocumented feature demanded by a corp exec
+
+/obj/item/integrated_circuit/input/microphone/fringe
+	name = "gray market microphone"
+	languages_understood = list(LANGUAGE_SPACER, LANGUAGE_GUTTER, LANGUAGE_HUMAN_CHINESE, LANGUAGE_HUMAN_ARABIC, LANGUAGE_HUMAN_INDIAN, LANGUAGE_HUMAN_IBERIAN, LANGUAGE_HUMAN_RUSSIAN)
+	language_preferred = LANGUAGE_HUMAN_RUSSIAN
+	spawn_flags = 0
+	extended_desc = "This microphone did not come with any documentation."
+
 
 /obj/item/integrated_circuit/input/sensor
 	name = "sensor"
@@ -908,7 +935,7 @@
 	if(!check_then_do_work())
 		return FALSE
 	var/ignore_bags = get_pin_data(IC_INPUT, 1)
-	if(ignore_bags && istype(A, /obj/item/weapon/storage/))
+	if(ignore_bags && istype(A, /obj/item/storage))
 		return FALSE
 	set_pin_data(IC_OUTPUT, 1, weakref(A))
 	push_data()
@@ -940,7 +967,7 @@
 	if(!check_then_do_work())
 		return FALSE
 	var/ignore_bags = get_pin_data(IC_INPUT, 1)
-	if(ignore_bags && istype(A, /obj/item/weapon/storage))
+	if(ignore_bags && istype(A, /obj/item/storage))
 		return FALSE
 	set_pin_data(IC_OUTPUT, 1, weakref(A))
 	push_data()
@@ -1034,7 +1061,7 @@
 	set_pin_data(IC_OUTPUT, 2, null)
 	set_pin_data(IC_OUTPUT, 3, null)
 	if(O)
-		var/obj/item/weapon/cell/C = O.get_cell()
+		var/obj/item/cell/C = O.get_cell()
 		if(C)
 			var/turf/A = get_turf(src)
 			if(get_turf(O) in view(A))
@@ -1178,7 +1205,7 @@
 	)
 
 /obj/item/integrated_circuit/input/data_card_reader/attackby_react(obj/item/I, mob/living/user, intent)
-	var/obj/item/weapon/card/data/card = I
+	var/obj/item/card/data/card = I
 	var/write_mode = get_pin_data(IC_INPUT, 3)
 	if(istype(card))
 		if(write_mode == TRUE)

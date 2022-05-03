@@ -6,7 +6,7 @@
 	desc = "It turns lights on and off. What are you, simple?"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light0"
-	anchored = 1.0
+	anchored = TRUE
 	idle_power_usage = 20
 	power_channel = LIGHT
 	var/on = 0
@@ -67,7 +67,7 @@
 		return TRUE
 
 /obj/machinery/light_switch/attackby(obj/item/tool as obj, mob/user as mob)
-	if(istype(tool, /obj/item/weapon/screwdriver))
+	if(istype(tool, /obj/item/screwdriver))
 		new /obj/item/frame/light_switch(user.loc, 1)
 		qdel(src)
 

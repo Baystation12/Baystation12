@@ -7,6 +7,7 @@
 /obj/item/device/geiger
 	name = "geiger counter"
 	desc = "A handheld device used for detecting and measuring radiation in an area."
+	icon = 'icons/obj/geiger_counter.dmi'
 	icon_state = "geiger_off"
 	item_state = "multitool"
 	w_class = ITEM_SIZE_SMALL
@@ -40,7 +41,7 @@
 
 /obj/item/device/geiger/examine(mob/user)
 	. = ..()
-	var/msg = "[scanning ? "ambient" : "stored"] Radiation level: [radiation_count ? radiation_count : "0"] Roentgen."
+	var/msg = "[scanning ? "ambient" : "stored"] Radiation level: [radiation_count ? radiation_count : "0"] IU/s."
 	if(radiation_count > RAD_LEVEL_LOW)
 		to_chat(user, "<span class='warning'>[msg]</span>")
 	else
@@ -53,7 +54,7 @@
 	else
 		STOP_PROCESSING(SSobj, src)
 	update_icon()
-	to_chat(user, "<span class='notice'>\icon[src] You switch [scanning ? "on" : "off"] [src].</span>")
+	to_chat(user, "<span class='notice'>[icon2html(src, user)] You switch [scanning ? "on" : "off"] [src].</span>")
 
 /obj/item/device/geiger/on_update_icon()
 	if(!scanning)
@@ -85,5 +86,3 @@
 			icon_state = "geiger_on_5"
 			geiger_volume = 60
 			sound_token.SetVolume(geiger_volume)
-
-

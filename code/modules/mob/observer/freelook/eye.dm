@@ -121,6 +121,11 @@
 	for(var/i = 0; i < max(sprint, initial); i += 20)
 		var/turf/step = get_turf(get_step(src, direct))
 		if(step)
+			//We do this specifically as they have special conditions
+			if(direct == UP && !HasAbove(z))
+				return FALSE
+			if(direct == DOWN && !HasBelow(z))
+				return FALSE
 			setLoc(step)
 
 	cooldown = world.time + 5
@@ -128,4 +133,4 @@
 		sprint = min(sprint + 0.5, max_sprint)
 	else
 		sprint = initial
-	return 1
+	return TRUE

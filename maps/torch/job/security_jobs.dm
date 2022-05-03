@@ -29,10 +29,12 @@
 	                    SKILL_FORENSICS   = SKILL_MAX)
 	skill_points = 20
 
-	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
-			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_eva, access_sec_doors, access_solgov_crew, access_gun)
-	minimal_access = list()
+	access = list(
+		access_security, access_brig, access_armory, access_forensics_lockers,
+		access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+		access_eva, access_sec_doors, access_solgov_crew, access_gun, access_torch_fax,
+		access_radio_sec
+	)
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
@@ -73,15 +75,17 @@
 	                    SKILL_WEAPONS     = SKILL_BASIC,
 	                    SKILL_FORENSICS   = SKILL_ADEPT)
 
-	max_skill = list(   SKILL_COMBAT      = SKILL_MAX,
-	                    SKILL_WEAPONS     = SKILL_MAX,
+	max_skill = list(   SKILL_COMBAT      = SKILL_EXPERT,
+	                    SKILL_WEAPONS     = SKILL_EXPERT,
 	                    SKILL_FORENSICS   = SKILL_MAX)
 	skill_points = 20
 
-	access = list(access_security, access_brig, access_forensics_lockers,
-			            access_maint_tunnels, access_emergency_storage,
-			            access_sec_doors, access_solgov_crew, access_morgue)
-	minimal_access = list()
+	access = list(
+		access_security, access_brig, access_forensics_lockers,
+		access_maint_tunnels, access_emergency_storage,
+		access_sec_doors, access_solgov_crew, access_morgue,
+		access_torch_fax, access_network, access_radio_sec
+	)
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
@@ -114,12 +118,14 @@
 
 	max_skill = list(   SKILL_COMBAT      = SKILL_MAX,
 	                    SKILL_WEAPONS     = SKILL_MAX,
-	                    SKILL_FORENSICS   = SKILL_MAX)
+	                    SKILL_FORENSICS   = SKILL_EXPERT)
 
-	access = list(access_security, access_brig, access_maint_tunnels,
-						access_external_airlocks, access_emergency_storage,
-			            access_eva, access_sec_doors, access_solgov_crew)
-	minimal_access = list()
+	access = list(
+		access_security, access_brig, access_maint_tunnels,
+		access_external_airlocks, access_emergency_storage,
+		access_eva, access_sec_doors, access_solgov_crew,
+		access_radio_sec
+	)
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)

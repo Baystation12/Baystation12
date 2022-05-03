@@ -1,20 +1,20 @@
-/obj/item/weapon/forensics
+/obj/item/forensics
 	icon = 'icons/obj/forensics.dmi'
 	w_class = ITEM_SIZE_TINY
 
 //This is the output of the stringpercent(print) proc, and means about 80% of
 //the print must be there for it to be complete.  (Prints are 32 digits)
-var/const/FINGERPRINT_COMPLETE = 6
-proc/is_complete_print(var/print)
+var/global/const/FINGERPRINT_COMPLETE = 6
+/proc/is_complete_print(var/print)
 	return stringpercent(print) <= FINGERPRINT_COMPLETE
 
-atom/var/list/fingerprintshidden
-atom/var/fingerprintslast
+/atom/var/list/fingerprintshidden
+/atom/var/fingerprintslast
 
-atom/var/list/suit_fibers
-atom/var/list/fingerprints
-atom/var/list/gunshot_residue
-obj/item/var/list/trace_DNA
+/atom/var/list/suit_fibers
+/atom/var/list/fingerprints
+/atom/var/list/gunshot_residue
+/obj/item/var/list/trace_DNA
 
 /atom/proc/add_hiddenprint(mob/M)
 	if(!M || !M.key)
@@ -131,7 +131,7 @@ obj/item/var/list/trace_DNA
 		var/obj/item/I = A
 		LAZYDISTINCTADD(I.trace_DNA, trace_DNA)
 
-atom/proc/add_fibers(mob/living/carbon/human/M)
+/atom/proc/add_fibers(mob/living/carbon/human/M)
 	if(!istype(M))
 		return
 	if(M.gloves && istype(M.gloves,/obj/item/clothing/gloves))
@@ -201,17 +201,26 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 	if(get_skill_value(SKILL_FORENSICS) >= SKILL_EXPERT && get_dist(src, A) <= (get_skill_value(SKILL_FORENSICS) - SKILL_ADEPT))
 		var/clue
 		if(LAZYLEN(A.suit_fibers))
-			to_chat(src, "<span class='notice'>You notice some fibers embedded in \the [A].</span>")
+			to_chat(src, SPAN_NOTICE("You notice some fibers embedded in \the [A]."))
 			clue = 1
 		if(LAZYLEN(A.fingerprints))
-			to_chat(src, "<span class='notice'>You notice a partial print on \the [A].</span>")
+			to_chat(src, SPAN_NOTICE("You notice a partial print on \the [A]."))
 			clue = 1
 		if(LAZYLEN(A.gunshot_residue))
-			to_chat(src, "<span class='notice'>You notice a faint acrid smell coming from \the [A].</span>")
+			if(isliving(src))
+				var/mob/living/M = src
+				if(M.isSynthetic())
+					to_chat(src, SPAN_NOTICE("You notice faint black residue on \the [A]."))
+				else
+					to_chat(src, SPAN_NOTICE("You notice a faint acrid smell coming from \the [A]."))
+			else if(isrobot(src))
+				to_chat(src, SPAN_NOTICE("You notice faint black residue on \the [A]."))
+			else
+				to_chat(src, SPAN_NOTICE("You notice a faint acrid smell coming from \the [A]."))
 			clue = 1
 		//Noticing wiped blood is a bit harder
 		if((get_skill_value(SKILL_FORENSICS) >= SKILL_PROF) && LAZYLEN(A.blood_DNA))
-			to_chat(src, "<span class='warning'>You notice faint blood traces on \The [A].</span>")
+			to_chat(src, SPAN_WARNING("You notice faint blood traces on \The [A]."))
 			clue = 1
 		if(clue && has_client_color(/datum/client_color/noir))
 			playsound_local(null, pick('sound/effects/clue1.ogg','sound/effects/clue2.ogg'), 60, is_global = TRUE)

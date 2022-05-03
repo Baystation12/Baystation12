@@ -6,7 +6,7 @@
 
 /datum/wires/rig
 	random = 1
-	holder_type = /obj/item/weapon/rig
+	holder_type = /obj/item/rig
 	wire_count = 5
 	descriptions = list(
 		new /datum/wire_description(RIG_SECURITY, "This wire is connected to the ID scanning panel."),
@@ -25,7 +25,7 @@
 
 /datum/wires/rig/UpdateCut(var/index, var/mended)
 
-	var/obj/item/weapon/rig/rig = holder
+	var/obj/item/rig/rig = holder
 	switch(index)
 		if(RIG_SECURITY)
 			if(mended)
@@ -36,7 +36,7 @@
 
 /datum/wires/rig/UpdatePulsed(var/index)
 
-	var/obj/item/weapon/rig/rig = holder
+	var/obj/item/rig/rig = holder
 	switch(index)
 		if(RIG_SECURITY)
 			rig.security_check_enabled = !rig.security_check_enabled
@@ -60,7 +60,7 @@
 			rig.shock(usr,100)
 
 /datum/wires/rig/CanUse(var/mob/living/L)
-	var/obj/item/weapon/rig/rig = holder
+	var/obj/item/rig/rig = holder
 	if(rig.p_open)
 		return 1
 	return 0

@@ -199,7 +199,7 @@
 
 /turf/simulated/floor/tiled/white/monotile
 	name = "floor"
-	icon_state = "monotile"
+	icon_state = "monotile_light"
 	initial_flooring = /decl/flooring/tiling/mono/white
 
 /turf/simulated/floor/tiled/monofloor
@@ -273,7 +273,7 @@
 	name = "floor"
 	icon_state = "techfloor_grid"
 	initial_flooring = /decl/flooring/tiling/tech/grid
-	
+
 /turf/simulated/floor/tiled/skrell
 	icon = 'icons/turf/skrellturf.dmi'
 	icon_state = "skrellblack"
@@ -402,3 +402,16 @@
 	icon = 'icons/turf/flooring/crystal.dmi'
 	icon_state = ""
 	initial_flooring = /decl/flooring/crystal
+
+/turf/simulated/floor/scales
+	name = "scale floor"
+	icon = 'icons/turf/flooring/flesh.dmi'
+	icon_state = "scales0"
+	initial_flooring = /decl/flooring/flesh
+
+//Water go splish
+/turf/simulated/floor/pool
+	name = "pool floor"
+	icon = 'icons/turf/flooring/pool.dmi'
+	icon_state = "pool"
+	initial_flooring = /decl/flooring/pool

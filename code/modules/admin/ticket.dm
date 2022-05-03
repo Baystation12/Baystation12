@@ -1,5 +1,5 @@
-var/list/tickets = list()
-var/list/ticket_panels = list()
+var/global/list/tickets = list()
+var/global/list/ticket_panels = list()
 
 /datum/ticket
 	var/datum/client_lite/owner
@@ -82,7 +82,7 @@ var/list/ticket_panels = list()
 	for(var/datum/client_lite/assigned_admin in assigned_admins)
 		. |= assigned_admin.key
 
-proc/get_open_ticket_by_client(var/datum/client_lite/owner)
+/proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 	for(var/datum/ticket/ticket in tickets)
 		if(ticket.owner.ckey == owner.ckey && (ticket.status == TICKET_OPEN || ticket.status == TICKET_ASSIGNED))
 			return ticket // there should only be one open ticket by a client at a time, so no need to keep looking
@@ -184,7 +184,7 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 	return jointext(dat, null)
 
 /datum/ticket_panel/Topic(href, href_list)
-	if(usr && usr != ticket_panel_window.user)
+	if(usr && usr.client && usr != ticket_panel_window.user)
 		if(href_list["close"]) // catch the case where a user switches mobs, then closes the window that was linked to the old mob
 			ticket_panels -= usr.client
 		else

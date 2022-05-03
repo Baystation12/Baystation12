@@ -9,7 +9,6 @@
 	var/list/additional_langs
 	var/list/secondary_langs
 	var/category
-	var/subversive_potential = 0
 	var/hidden
 	var/hidden_from_codex
 	var/list/qualifications
@@ -72,7 +71,7 @@
 	dat += "</td>"
 	if(append)
 		dat += "<td width = '100px'>[append]</td>"
-	dat += "</tr></table><hr>"
+	dat += "</tr></table>"
 	return jointext(dat, null)
 #undef COLLAPSED_CULTURE_BLURB_LEN
 

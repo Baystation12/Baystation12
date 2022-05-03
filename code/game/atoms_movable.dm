@@ -1,14 +1,13 @@
 /atom/movable
 	layer = OBJ_LAYER
 
-	appearance_flags = TILE_BOUND
-	glide_size = 8
+	glide_size = 6
 
 	var/waterproof = TRUE
 	var/movable_flags
 
 	var/last_move = null
-	var/anchored = 0
+	var/anchored = FALSE
 	// var/elevation = 2    - not used anywhere
 	var/move_speed = 10
 	var/l_move_time = 1
@@ -21,29 +20,31 @@
 	var/item_state = null // Used to specify the item state for the on-mob overlays.
 	var/does_spin = TRUE // Does the atom spin when thrown (of course it does :P)
 
-/atom/movable/Destroy()
+
+/atom/movable/Initialize()
+	if (!isnull(config.glide_size))
+		glide_size = config.glide_size
 	. = ..()
+
+/atom/movable/Destroy()
 	if(!(atom_flags & ATOM_FLAG_INITIALIZED))
 		crash_with("Was deleted before initalization")
-
+	walk(src, 0)
 	for(var/A in src)
 		qdel(A)
-
 	forceMove(null)
 	if (pulledby)
 		if (pulledby.pulling == src)
 			pulledby.pulling = null
 		pulledby = null
-
 	if(LAZYLEN(movement_handlers) && !ispath(movement_handlers[1]))
 		QDEL_NULL_LIST(movement_handlers)
-
 	if (bound_overlay)
 		QDEL_NULL(bound_overlay)
-
 	if(virtual_mob && !ispath(virtual_mob))
 		qdel(virtual_mob)
 		virtual_mob = null
+	return ..()
 
 /atom/movable/Bump(var/atom/A, yes)
 	if(!QDELETED(throwing))

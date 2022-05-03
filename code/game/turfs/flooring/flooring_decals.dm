@@ -1,13 +1,13 @@
 // These are objects that destroy themselves and add themselves to the
 // decal list of the floor under them. Use them rather than distinct icon_states
 // when mapping in interesting floor designs.
-var/list/floor_decals = list()
+var/global/list/floor_decals = list()
 
 /obj/effect/floor_decal
 	name = "floor decal"
 	icon = 'icons/turf/flooring/decals.dmi'
 	layer = DECAL_LAYER
-	appearance_flags = RESET_COLOR
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 	var/supplied_dir
 	var/detail_overlay
 	var/detail_color
@@ -19,6 +19,7 @@ var/list/floor_decals = list()
 	..(newloc)
 
 /obj/effect/floor_decal/Initialize()
+	SHOULD_CALL_PARENT(FALSE)
 	if(supplied_dir) set_dir(supplied_dir)
 	var/turf/T = get_turf(src)
 	if(istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
@@ -27,7 +28,7 @@ var/list/floor_decals = list()
 		if(!floor_decals[cache_key])
 			var/image/I = image(icon = src.icon, icon_state = src.icon_state, dir = src.dir)
 			I.layer = layer
-			I.appearance_flags = appearance_flags
+			I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | appearance_flags
 			I.color = src.color
 			I.alpha = src.alpha
 			if(detail_overlay)
@@ -45,6 +46,7 @@ var/list/floor_decals = list()
 	name = "reset marker"
 
 /obj/effect/floor_decal/reset/Initialize()
+	SHOULD_CALL_PARENT(FALSE)
 	var/turf/T = get_turf(src)
 	T.remove_decals()
 	T.update_icon()
@@ -1124,6 +1126,18 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/sign/p
 	icon_state = "white_p"
 
+/obj/effect/floor_decal/sign/or1
+	icon_state = "white_or1"
+
+/obj/effect/floor_decal/sign/or2
+	icon_state = "white_or2"
+
+/obj/effect/floor_decal/sign/tr
+	icon_state = "white_tr"
+
+/obj/effect/floor_decal/sign/pop
+	icon_state = "white_pop"
+
 /obj/effect/floor_decal/solarpanel
 	icon_state = "solarpanel"
 
@@ -1135,7 +1149,7 @@ var/list/floor_decals = list()
 	layer = TURF_DETAIL_LAYER
 	color = COLOR_GUNMETAL
 	icon_state = "manydot"
-	appearance_flags = 0
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS
 
 /obj/effect/floor_decal/floordetail/New(var/newloc, var/newdir, var/newcolour)
 	color = null //color is here just for map preview, if left it applies both our and tile colors.

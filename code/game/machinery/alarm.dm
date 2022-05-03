@@ -52,7 +52,7 @@
 	name = "alarm"
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm0"
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 80
 	active_power_usage = 1000 //For heating/cooling rooms. 1000 joules equates to about 1 degree every 2 seconds for a single tile of air.
 	power_channel = ENVIRON
@@ -63,7 +63,8 @@
 	layer = ABOVE_WINDOW_LAYER
 
 	var/alarm_id = null
-	var/breach_detection = 1 // Whether to use automatic breach detection or not
+	var/breach_pressure = ONE_ATMOSPHERE * 0.5 //Pressure below wich vents are shut off, set negative to dissable
+	var/breach_cooldown = FALSE
 	var/frequency = 1439
 	//var/skipprocess = 0 //Experimenting
 	var/alarm_frequency = 1437
@@ -71,7 +72,7 @@
 	var/rcon_setting = 2
 	var/rcon_time = 0
 	var/locked = 1
-	var/wiresexposed = 0 // If it's been screwdrivered open.
+	var/wiresexposed = FALSE // If it's been screwdrivered open.
 	var/aidisabled = 0
 	var/shorted = 0
 
@@ -112,12 +113,17 @@
 	target_temperature = T0C+75
 	environment_type = /decl/environment_data/finnish
 
+/obj/machinery/alarm/warm/Initialize()
+	. = ..()
+	TLV["temperature"] = list(T0C-26, T0C, T0C+75, T0C+85) // K
+	TLV["pressure"] = list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.30,ONE_ATMOSPHERE*1.50) /* kpa */
+
 /obj/machinery/alarm/nobreach
-	breach_detection = 0
+	breach_pressure = -1
 
 /obj/machinery/alarm/monitor
 	report_danger_level = 0
-	breach_detection = 0
+	breach_pressure = -1
 
 /obj/machinery/alarm/server/New()
 	..()
@@ -137,7 +143,7 @@
 
 	if(istype(frame))
 		buildstage = 0
-		wiresexposed = 1
+		wiresexposed = TRUE
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -21 : 21)
 		pixel_y = (dir & 3)? (dir ==1 ? -21 : 21) : 0
 		update_icon()
@@ -185,18 +191,20 @@
 		handle_heating_cooling(environment)
 
 	var/old_level = danger_level
-	var/old_pressurelevel = pressure_dangerlevel
 	danger_level = overall_danger_level(environment)
 
 	if (old_level != danger_level)
+		if(danger_level == 2)
+			playsound(src.loc, 'sound/machines/airalarm.ogg', 25, 0, 4)
 		apply_danger_level(danger_level)
 
-	if (old_pressurelevel != pressure_dangerlevel)
+	if (pressure_dangerlevel != 0)
 		if (breach_detected())
 			mode = AALARM_MODE_OFF
 			apply_mode()
 
 	if (mode==AALARM_MODE_CYCLE && environment.return_pressure()<ONE_ATMOSPHERE*0.05)
+		breach_start_cooldown()
 		mode=AALARM_MODE_FILL
 		apply_mode()
 
@@ -286,21 +294,32 @@
 	var/turf/simulated/location = loc
 
 	if(!istype(location))
-		return 0
+		return FALSE
 
-	if(breach_detection	== 0)
-		return 0
+	if(breach_cooldown)
+		return FALSE
+
+	if(breach_pressure < 0)
+		return FALSE
 
 	var/datum/gas_mixture/environment = location.return_air()
 	var/environment_pressure = environment.return_pressure()
-	var/pressure_levels = TLV["pressure"]
 
-	if (environment_pressure <= pressure_levels[1])		//low pressures
+	if (environment_pressure <= breach_pressure)
 		if (!(mode == AALARM_MODE_PANIC || mode == AALARM_MODE_CYCLE))
-			playsound(src.loc, 'sound/machines/airalarm.ogg', 25, 0, 4)
-			return 1
+			return TRUE
 
-	return 0
+	return FALSE
+
+/obj/machinery/alarm/proc/breach_end_cooldown()
+	breach_cooldown = FALSE
+	return
+
+//disables breach detection temporarily
+/obj/machinery/alarm/proc/breach_start_cooldown()
+	breach_cooldown = TRUE
+	addtimer(CALLBACK(src,/obj/machinery/alarm/proc/breach_end_cooldown), 10 MINUTES, TIMER_UNIQUE | TIMER_OVERRIDE)
+	return
 
 /obj/machinery/alarm/proc/get_danger_level(var/current_value, var/list/danger_levels)
 	if((current_value >= danger_levels[4] && danger_levels[4] > 0) || current_value <= danger_levels[1])
@@ -411,6 +430,8 @@
 	//TODO: make it so that players can choose between applying the new mode to the room they are in (related area) vs the entire alarm area
 	for (var/obj/machinery/alarm/AA in alarm_area)
 		AA.mode = mode
+
+	breach_start_cooldown()
 
 	switch(mode)
 		if(AALARM_MODE_SCRUBBING)
@@ -590,6 +611,9 @@
 			var/list/selected
 			var/thresholds[0]
 
+			var/breach_data = list("selected" = breach_pressure)
+			data["breach_data"] = breach_data
+
 			var/list/gas_names = list(
 				GAS_OXYGEN         = "O<sub>2</sub>",
 				GAS_CO2 = "CO<sub>2</sub>",
@@ -690,6 +714,17 @@
 						send_signal(device_id, list(href_list["command"] = list(href_list["gas_id"] = text2num(href_list["val"]))) )
 					return TOPIC_REFRESH
 
+				if("set_breach")
+					var/newval = input(user, "Enter minimum pressure for breach detection, preasures lower then this will cause vents to stop.", breach_pressure) as null|num
+					if (isnull(newval) || !CanUseTopic(user, state))
+						return TOPIC_HANDLED
+					if (newval<0)
+						breach_pressure = -1.0
+					else if (newval > 50*ONE_ATMOSPHERE)
+						breach_pressure = 50*ONE_ATMOSPHERE
+					else
+						breach_pressure = round(newval,0.01)
+
 				if("set_threshold")
 					var/env = href_list["env"]
 					var/threshold = text2num(href_list["var"])
@@ -788,7 +823,7 @@
 				update_icon()
 				return
 
-			if (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/modular_computer))// trying to unlock the interface with an ID card
+			if (istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer))// trying to unlock the interface with an ID card
 				if(stat & (NOPOWER|BROKEN))
 					to_chat(user, "It does nothing")
 					return
@@ -815,15 +850,15 @@
 			else if(isCrowbar(W))
 				to_chat(user, "You start prying out the circuit.")
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-				if(do_after(user,20) && buildstage == 1)
+				if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) && buildstage == 1)
 					to_chat(user, "You pry out the circuit!")
-					var/obj/item/weapon/airalarm_electronics/circuit = new /obj/item/weapon/airalarm_electronics()
+					var/obj/item/airalarm_electronics/circuit = new /obj/item/airalarm_electronics()
 					circuit.dropInto(user.loc)
 					buildstage = 0
 					update_icon()
 				return
 		if(0)
-			if(istype(W, /obj/item/weapon/airalarm_electronics))
+			if(istype(W, /obj/item/airalarm_electronics))
 				to_chat(user, "You insert the circuit!")
 				qdel(W)
 				buildstage = 1
@@ -848,7 +883,7 @@
 AIR ALARM CIRCUIT
 Just a object used in constructing air alarms
 */
-/obj/item/weapon/airalarm_electronics
+/obj/item/airalarm_electronics
 	name = "air alarm electronics"
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_electronics"
@@ -869,24 +904,25 @@ FIRE ALARM
 	var/time = 10.0
 	var/timing = 0.0
 	var/lockdownbyai = 0
-	anchored = 1.0
+	anchored = TRUE
 	idle_power_usage = 2
 	active_power_usage = 6
 	power_channel = ENVIRON
 	var/last_process = 0
-	var/wiresexposed = 0
+	var/wiresexposed = FALSE
 	var/buildstage = 2 // 2 = complete, 1 = no wires,  0 = circuit gone
 	var/seclevel
-	var/global/list/overlays_cache
+	var/static/list/overlays_cache
 
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..()
-	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-	to_chat(user, "The current alert level is [security_state.current_security_level.name].")
+	if(loc.z in GLOB.using_map.contact_levels)
+		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
 /obj/machinery/firealarm/Initialize()
 	. = ..()
-	update_icon()
+	queue_icon_update()
 
 /obj/machinery/firealarm/proc/get_cached_overlay(state)
 	if(!LAZYACCESS(overlays_cache, state))
@@ -927,12 +963,13 @@ FIRE ALARM
 			overlays += get_cached_overlay("fire1")
 			set_light(0.25, 0.1, 1, 2, COLOR_RED)
 		else if(z in GLOB.using_map.contact_levels)
-			overlays += get_cached_overlay("fire0")
 			var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 			var/decl/security_level/sl = security_state.current_security_level
 
 			set_light(sl.light_max_bright, sl.light_inner_range, sl.light_outer_range, 2, sl.light_color_alarm)
 			overlays += image(sl.icon, sl.overlay_alarm)
+		else
+			overlays += get_cached_overlay("fire0")
 
 /obj/machinery/firealarm/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(src.detecting)
@@ -983,14 +1020,14 @@ FIRE ALARM
 				else if(isCrowbar(W))
 					to_chat(user, "You start prying out the circuit.")
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-					if (do_after(user,20))
+					if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 						to_chat(user, "You pry out the circuit!")
-						var/obj/item/weapon/firealarm_electronics/circuit = new /obj/item/weapon/firealarm_electronics()
+						var/obj/item/firealarm_electronics/circuit = new /obj/item/firealarm_electronics()
 						circuit.dropInto(user.loc)
 						buildstage = 0
 						update_icon()
 			if(0)
-				if(istype(W, /obj/item/weapon/firealarm_electronics))
+				if(istype(W, /obj/item/firealarm_electronics))
 					to_chat(user, "You insert the circuit!")
 					qdel(W)
 					buildstage = 1
@@ -1099,7 +1136,7 @@ FIRE ALARM
 		return
 	var/area/area = get_area(src)
 	for(var/obj/machinery/firealarm/FA in area)
-		fire_alarm.clearAlarm(loc, FA)
+		GLOB.fire_alarm.clearAlarm(loc, FA)
 	update_icon()
 	return
 
@@ -1108,7 +1145,7 @@ FIRE ALARM
 		return
 	var/area/area = get_area(src)
 	for(var/obj/machinery/firealarm/FA in area)
-		fire_alarm.triggerAlarm(loc, FA, duration)
+		GLOB.fire_alarm.triggerAlarm(loc, FA, duration)
 	update_icon()
 	playsound(src, 'sound/machines/fire_alarm.ogg', 75, 0)
 	return
@@ -1123,7 +1160,7 @@ FIRE ALARM
 
 	if(istype(frame))
 		buildstage = 0
-		wiresexposed = 1
+		wiresexposed = TRUE
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -21 : 21)
 		pixel_y = (dir & 3)? (dir ==1 ? -21 : 21) : 0
 		update_icon()
@@ -1138,7 +1175,7 @@ FIRE ALARM
 FIRE ALARM CIRCUIT
 Just a object used in constructing fire alarms
 */
-/obj/item/weapon/firealarm_electronics
+/obj/item/firealarm_electronics
 	name = "fire alarm electronics"
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_electronics"
@@ -1156,7 +1193,7 @@ Just a object used in constructing fire alarms
 	var/time = 10.0
 	var/timing = 0.0
 	var/lockdownbyai = 0
-	anchored = 1.0
+	anchored = TRUE
 	idle_power_usage = 2
 	active_power_usage = 6
 

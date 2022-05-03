@@ -131,7 +131,7 @@
 	activeFor++
 
 //Called when start(), announce() and end() has all been called.
-/datum/event/proc/kill()
+/datum/event/proc/kill(reroll = FALSE)
 	// If this event was forcefully killed run end() for individual cleanup
 	if(isRunning)
 		isRunning = 0

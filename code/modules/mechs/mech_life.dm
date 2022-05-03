@@ -13,35 +13,44 @@
 		update_pilots()
 
 	if(radio)
-		radio.on = (head && head.radio && head.radio.is_functional())
+		radio.on = (head && head.radio && head.radio.is_functional() && get_cell())
 
 	body.update_air(hatch_closed && use_air)
 
-	if((client || LAZYLEN(pilots)) && get_cell())
-		get_cell().drain_power(0, 0, calc_power_draw())
+	var/powered = FALSE
+	if(get_cell())
+		powered = get_cell().drain_power(0, 0, calc_power_draw()) > 0
+
+	if(!powered)
+		//Shut down all systems
+		if(head)
+			head.active_sensors = FALSE
+			hud_camera.queue_icon_update()
+		for(var/hardpoint in hardpoints)
+			var/obj/item/mech_equipment/M = hardpoints[hardpoint]
+			if(istype(M) && M.active && M.passive_power_use)
+				M.deactivate()
+
 
 	updatehealth()
 	if(health <= 0 && stat != DEAD)
 		death()
 
-	..() //Handles stuff like environment
+	if(emp_damage > 0)
+		emp_damage -= min(1, emp_damage) //Reduce emp accumulation over time
 
-	handle_mutations_and_radiation()
+	..() //Handles stuff like environment
 
 	handle_hud_icons()
 
 	lying = FALSE // Fuck off, carp.
-	handle_vision()
+	handle_vision(powered)
 
-/mob/living/exosuit/handle_mutations_and_radiation()
-	radiation = Clamp(radiation,0,500) //Dont let exosuits accumulate radiation
-
-	if(radiation)
-		radiation--
-	
-/mob/living/exosuit/get_cell()
-	RETURN_TYPE(/obj/item/weapon/cell)
-	return body ? body.cell : null
+/mob/living/exosuit/get_cell(force)
+	RETURN_TYPE(/obj/item/cell)
+	if(power == MECH_POWER_ON || force) //For most intents we can assume that a powered off exosuit acts as if it lacked a cell
+		return body ? body.cell : null
+	return null
 
 /mob/living/exosuit/proc/calc_power_draw()
 	//Passive power stuff here. You can also recharge cells or hardpoints if those make sense
@@ -63,17 +72,28 @@
 /mob/living/exosuit/handle_environment(var/datum/gas_mixture/environment)
 	if(!environment) return
 	//Mechs and vehicles in general can be assumed to just tend to whatever ambient temperature
-	if(abs(environment.temperature - bodytemperature) > 10 )
-		bodytemperature += ((environment.temperature - bodytemperature) / 3)
+	if(abs(environment.temperature - bodytemperature) > 0 )
+		bodytemperature += ((environment.temperature - bodytemperature) / 6)
 
-	if(environment.temperature > material.melting_point * 1.25 ) //A bit higher because I like to assume there's a difference between a mech and a wall
-		apply_damage(damage = (environment.temperature - (material.melting_point))/5 , damagetype = BURN)
+	if(bodytemperature > material.melting_point * 1.45 ) //A bit higher because I like to assume there's a difference between a mech and a wall
+		var/damage = 5
+		if(bodytemperature > material.melting_point * 1.75 )
+			damage = 10
+		if(bodytemperature > material.melting_point * 2.15 )
+			damage = 15
+		apply_damage(damage, DAMAGE_BURN)
 	//A possibility is to hook up interface icons here. But this works pretty well in my experience
-		if(prob(5))
+		if(prob(damage))
 			visible_message(SPAN_DANGER("\The [src]'s hull bends and buckles under the intense heat!"))
-			
+
+	hud_heat.Update()
 
 /mob/living/exosuit/death(var/gibbed)
+	// Eject the pilot.
+	if(LAZYLEN(pilots))
+		hatch_locked = 0 // So they can get out.
+		for(var/pilot in pilots)
+			eject(pilot, silent=1)
 
 	// Salvage moves into the wreck unless we're exploding violently.
 	var/obj/wreck = new wreckage_path(get_turf(src), src, gibbed)
@@ -87,12 +107,6 @@
 			head = null
 		if(body.loc != src)
 			body = null
-
-	// Eject the pilot.
-	if(LAZYLEN(pilots))
-		hatch_locked = 0 // So they can get out.
-		for(var/pilot in pilots)
-			eject(pilot, silent=1)
 
 	// Handle the rest of things.
 	..(gibbed, (gibbed ? "explodes!" : "grinds to a halt before collapsing!"))
@@ -123,16 +137,20 @@
 	qdel(src)
 	return
 
-/mob/living/exosuit/handle_vision()
+/mob/living/exosuit/handle_vision(powered)
+	var/was_blind = sight & BLIND
 	if(head)
-		sight = head.get_sight()
-		see_invisible = head.get_invisible()
-	if(body && (body.pilot_coverage < 100 || body.transparent_cabin))
+		sight = head.get_sight(powered)
+		see_invisible = head.get_invisible(powered)
+	if(body && (body.pilot_coverage < 100 || body.transparent_cabin) || !hatch_closed)
 		sight &= ~BLIND
+
+	if(sight & BLIND && !was_blind)
+		for(var/mob/pilot in pilots)
+			to_chat(pilot, SPAN_WARNING("The sensors are not operational and you cannot see a thing!"))
 
 /mob/living/exosuit/additional_sight_flags()
 	return sight
 
 /mob/living/exosuit/additional_see_invisible()
 	return see_invisible
-

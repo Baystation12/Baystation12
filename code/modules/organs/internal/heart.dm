@@ -46,13 +46,13 @@
 	// pulse mod starts out as just the chemical effect amount
 	var/pulse_mod = owner.chem_effects[CE_PULSE]
 	var/is_stable = owner.chem_effects[CE_STABLE]
-		
+
 	// If you have enough heart chemicals to be over 2, you're likely to take extra damage.
 	if(pulse_mod > 2 && !is_stable)
 		var/damage_chance = (pulse_mod - 2) ** 2
 		if(prob(damage_chance))
 			take_internal_damage(0.5)
-	
+
 	// Now pulse mod is impacted by shock stage and other things too
 	if(owner.shock_stage > 30)
 		pulse_mod++
@@ -66,7 +66,7 @@
 		pulse_mod++
 
 	if(owner.status_flags & FAKEDEATH || owner.chem_effects[CE_NOPULSE])
-		pulse = Clamp(PULSE_NONE + pulse_mod, PULSE_NONE, PULSE_2FAST) //pretend that we're dead. unlike actual death, can be inflienced by meds
+		pulse = PULSE_NONE
 		return
 
 	//If heart is stopped, it isn't going to restart itself randomly.
@@ -81,8 +81,11 @@
 			pulse = PULSE_NONE
 			return
 
-	// Pulse normally shouldn't go above PULSE_2FAST
-	pulse = Clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_2FAST)
+	// Pulse normally shouldn't go above PULSE_2FAST, unless extreme amounts of bad stuff in blood
+	if (pulse_mod < 6)
+		pulse = clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_2FAST)
+	else
+		pulse = clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_THREADY)
 
 	// If fibrillation, then it can be PULSE_THREADY
 	var/fibrillation = oxy <= BLOOD_VOLUME_SURVIVE || (prob(30) && owner.shock_stage > 120)
@@ -134,7 +137,7 @@
 
 				for(var/datum/wound/W in temp.wounds)
 
-					if(!open_wound && (W.damage_type == CUT || W.damage_type == PIERCE) && W.damage && !W.is_treated())
+					if (!open_wound && (W.damage_type == INJURY_TYPE_CUT || W.damage_type == INJURY_TYPE_PIERCE) && W.damage && !W.is_treated())
 						open_wound = TRUE
 
 					if(W.bleeding())
@@ -181,7 +184,7 @@
 			//AB occurs every heartbeat, this only throttles the visible effect
 			next_blood_squirt = world.time + 80
 			var/turf/sprayloc = get_turf(owner)
-			blood_max -= owner.drip(ceil(blood_max/3), sprayloc)
+			blood_max -= owner.drip(Ceil(blood_max/3), sprayloc)
 			if(blood_max > 0)
 				blood_max -= owner.blood_squirt(blood_max, sprayloc)
 				if(blood_max > 0)

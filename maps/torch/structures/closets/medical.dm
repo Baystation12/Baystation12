@@ -34,16 +34,15 @@
 	return list(
 		/obj/item/clothing/suit/bio_suit/cmo,
 		/obj/item/clothing/head/bio_hood/cmo,
-		/obj/item/clothing/shoes/white,
 		/obj/item/clothing/suit/storage/toggle/labcoat/cmo,
 		/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
 		/obj/item/device/radio/headset/heads/cmo,
 		/obj/item/device/radio/headset/heads/cmo/alt,
 		/obj/item/device/flash,
-		/obj/item/weapon/gun/energy/confuseray,
+		/obj/item/gun/energy/confuseray,
 		/obj/item/device/megaphone,
-		/obj/item/weapon/reagent_containers/hypospray/vial,
-		/obj/item/weapon/storage/fancy/vials,
+		/obj/item/reagent_containers/hypospray/vial,
+		/obj/item/storage/fancy/vials,
 		/obj/item/device/scanner/health,
 		/obj/item/clothing/accessory/stethoscope,
 		/obj/item/device/flashlight/pen,
@@ -51,12 +50,10 @@
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/device/holowarrant,
-		/obj/item/weapon/storage/firstaid/adv,
-		/obj/item/weapon/storage/box/armband/med,
-		/obj/item/weapon/storage/belt/general,
-		/obj/item/weapon/material/knife/folding/swiss/officer,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel/med)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med)),
+		/obj/item/storage/firstaid/adv,
+		/obj/item/storage/box/armband/med,
+		/obj/item/material/knife/folding/swiss/officer,
+		/obj/item/storage/backpack/dufflebag/med,
 		RANDOM_SCRUBS
 	)
 
@@ -67,25 +64,21 @@
 
 /obj/structure/closet/secure_closet/medical_torchsenior/WillContain()
 	return list(
-		/obj/item/clothing/under/sterile,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/surgicalapron,
-		/obj/item/clothing/shoes/white,
 		/obj/item/device/radio/headset/headset_med,
 		/obj/item/device/radio/headset/headset_med/alt,
 		/obj/item/taperoll/medical,
-		/obj/item/weapon/storage/belt/medical,
+		/obj/item/storage/belt/medical,
 		/obj/item/clothing/mask/surgical,
 		/obj/item/device/scanner/health,
 		/obj/item/clothing/accessory/stethoscope,
 		/obj/item/device/flashlight/pen,
 		/obj/item/clothing/glasses/hud/health,
-		/obj/item/device/flash,
 		/obj/item/device/megaphone,
-		/obj/item/weapon/storage/firstaid/adv,
-		/obj/item/weapon/material/knife/folding/swiss/medic,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel/med)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med)),
+		/obj/item/storage/firstaid/adv,
+		/obj/item/material/knife/folding/swiss/medic,
+		/obj/item/storage/backpack/dufflebag/med,
 		RANDOM_SCRUBS = 2
 	)
 
@@ -96,25 +89,22 @@
 
 /obj/structure/closet/secure_closet/medical_torch/WillContain()
 	return list(
-		/obj/item/clothing/under/sterile,
 		/obj/item/clothing/accessory/storage/white_vest,
 		/obj/item/clothing/suit/storage/toggle/fr_jacket,
-		/obj/item/clothing/shoes/white,
 		/obj/item/device/radio/headset/headset_med,
 		/obj/item/device/radio/headset/headset_corpsman/alt,
 		/obj/item/taperoll/medical,
-		/obj/item/weapon/storage/belt/medical/emt,
+		/obj/item/storage/belt/medical/emt,
 		/obj/item/clothing/mask/gas/half,
-		/obj/item/weapon/tank/emergency/oxygen/engi,
-		/obj/item/weapon/storage/box/autoinjectors,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/storage/box/autoinjectors,
 		/obj/item/device/scanner/health,
 		/obj/item/clothing/glasses/hud/health,
-		/obj/item/weapon/storage/firstaid/adv,
+		/obj/item/storage/firstaid/adv,
 		/obj/item/clothing/suit/storage/medical_chest_rig,
 		/obj/item/clothing/head/hardhat/EMS,
-		/obj/item/weapon/material/knife/folding/swiss/medic,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel/med)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med))
+		/obj/item/material/knife/folding/swiss/medic,
+		/obj/item/storage/backpack/dufflebag/med
 	)
 
 /obj/structure/closet/wardrobe/medic_torch

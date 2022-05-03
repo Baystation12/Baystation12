@@ -4,7 +4,7 @@
 	name = "debris field"
 	desc = "A large field of miscellanious debris."
 	icon_state = "object"
-	known = 0
+	known = FALSE
 
 	initial_generic_waypoints = list(
 		"nav_derelict_1",
@@ -21,7 +21,7 @@
 	id = "awaysite_derelict"
 	description = "An abandoned construction project."
 	suffixes = list("derelict/derelict-station.dmm")
-	cost = 1
+	spawn_cost = 1
 	accessibility_weight = 10
 	area_usage_test_exempted_areas = list(/area/AIsattele)
 	area_usage_test_exempted_root_areas = list(/area/constructionsite, /area/derelict)

@@ -62,13 +62,15 @@
 /obj/item/clothing/ring/reagent/equipped(var/mob/living/carbon/human/H)
 	..()
 	if(istype(H) && H.gloves==src)
-		to_chat(H, "<font color='blue'><b>You feel a prick as you slip on the ring.</b></font>")
+		to_chat(H, "<span class='info'><b>You feel a prick as you slip on the ring.</b></span>")
 
 		if(reagents.total_volume)
 			if(H.reagents)
+				var/should_admin_log = reagents.should_admin_log()
 				var/contained_reagents = reagents.get_reagents()
 				var/trans = reagents.trans_to_mob(H, 15, CHEM_BLOOD)
-				admin_inject_log(usr, H, src, contained_reagents, trans)
+				if (should_admin_log)
+					admin_inject_log(usr, H, src, contained_reagents, trans)
 	return
 
 //Sleepy Ring
@@ -85,7 +87,7 @@
 /////////////////////////////////////////
 //Seals and Signet Rings
 
-/obj/item/clothing/ring/seal/
+/obj/item/clothing/ring/seal
 	icon = 'icons/obj/clothing/obj_hands_ring.dmi'
 
 /obj/item/clothing/ring/seal/secgen

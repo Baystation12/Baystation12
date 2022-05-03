@@ -5,8 +5,10 @@
 
 /datum/extension/armor/psionic/get_value(key)
 	var/datum/psi_complexus/psi = holder
-	psi.get_armour(key)
+	return psi.get_armour(key)
 
 /datum/extension/armor/psionic/on_blocking(damage, damage_type, damage_flags, armor_pen, blocked)
 	var/datum/psi_complexus/psi = holder
-	psi.spend_power(round(damage * blocked))
+	var/blocked_damage = damage * blocked
+	if(blocked_damage)
+		psi.spend_power_armor(blocked_damage)

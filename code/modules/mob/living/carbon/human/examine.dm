@@ -38,13 +38,16 @@
 		T = gender_datums[PLURAL]
 	else
 		if(icon)
-			msg += "\icon[icon] " //fucking BYOND: this should stop dreamseeker crashing if we -somehow- examine somebody before their icon is generated
+			msg += "[icon2html(icon, user)] " //fucking BYOND: this should stop dreamseeker crashing if we -somehow- examine somebody before their icon is generated
 
 	if(!T)
 		// Just in case someone VVs the gender to something strange. It'll runtime anyway when it hits usages, better to CRASH() now with a helpful message.
 		CRASH("Gender datum was null; key was '[(skipjumpsuit && skipface) ? PLURAL : gender]'")
 
-	msg += "<EM>[src.name]</EM>"
+	if(src.fake_name)
+		msg += "<EM>[src.fake_name]</EM>"
+	else
+		msg += "<EM>[src.name]</EM>"
 
 	var/is_synth = isSynthetic()
 	if(!(skipjumpsuit && skipface))
@@ -126,14 +129,14 @@
 
 	//handcuffed?
 	if(handcuffed)
-		if(istype(handcuffed, /obj/item/weapon/handcuffs/cable))
-			msg += "<span class='warning'>[T.He] [T.is] \icon[handcuffed] restrained with cable!</span>\n"
+		if(istype(handcuffed, /obj/item/handcuffs/cable))
+			msg += "<span class='warning'>[T.He] [T.is] [icon2html(handcuffed, user)] restrained with cable!</span>\n"
 		else
-			msg += "<span class='warning'>[T.He] [T.is] \icon[handcuffed] handcuffed!</span>\n"
+			msg += "<span class='warning'>[T.He] [T.is] [icon2html(handcuffed, user)] handcuffed!</span>\n"
 
 	//buckled
 	if(buckled)
-		msg += "<span class='warning'>[T.He] [T.is] \icon[buckled] buckled to [buckled]!</span>\n"
+		msg += "<span class='warning'>[T.He] [T.is] [icon2html(buckled, user)] buckled to [buckled]!</span>\n"
 
 	//Jitters
 	if(is_jittery)
@@ -164,28 +167,25 @@
 
 	if (src.stat)
 		msg += "<span class='warning'>[T.He] [T.is]n't responding to anything around [T.him] and seems to be unconscious.</span>\n"
-		if((stat == DEAD || is_asystole() || src.losebreath) && distance <= 3)
+		if((stat == DEAD || is_asystole() || losebreath || status_flags & FAKEDEATH) && distance <= 3)
 			msg += "<span class='warning'>[T.He] [T.does] not appear to be breathing.</span>\n"
-		if(ishuman(user) && !user.incapacitated() && Adjacent(user))
-			spawn(0)
-				user.visible_message("<b>\The [user]</b> checks \the [src]'s pulse.", "You check \the [src]'s pulse.")
-				if(do_after(user, 15, src))
-					if(pulse() == PULSE_NONE)
-						to_chat(user, "<span class='deadsay'>[T.He] [T.has] no pulse.</span>")
-					else
-						to_chat(user, "<span class='deadsay'>[T.He] [T.has] a pulse!</span>")
 
-	if(fire_stacks)
+	if (fire_stacks > 0)
 		msg += "[T.He] looks flammable.\n"
+	else if (fire_stacks < 0)
+		msg += "[T.He] looks wet.\n"
 	if(on_fire)
 		msg += "<span class='warning'>[T.He] [T.is] on fire!.</span>\n"
 
 	var/ssd_msg = species.get_ssd(src)
 	if(ssd_msg && (!should_have_organ(BP_BRAIN) || has_brain()) && stat != DEAD)
 		if(!key)
-			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg]. It doesn't look like [T.he] [T.is] waking up anytime soon.</span>\n"
+			msg += SPAN_DEBUG("[T.He] [T.is] [ssd_msg]. [T.He] won't be recovering any time soon. (Ghosted)") + "\n"
 		else if(!client)
-			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg].</span>\n"
+			msg += SPAN_DEBUG("[T.He] [T.is] [ssd_msg]. (Disconnected)") + "\n"
+
+	if (admin_paralyzed)
+		msg += SPAN_DEBUG("OOC: [T.He] [T.has] been paralyzed by staff. Please avoid interacting with [T.him] unless cleared to do so by staff.") + "\n"
 
 	var/obj/item/organ/external/head/H = organs_by_name[BP_HEAD]
 	if(istype(H) && H.forehead_graffiti && H.graffiti_style)
@@ -195,6 +195,10 @@
 		msg += "[T.He] looks a lot younger than you remember.\n"
 	if(became_older)
 		msg += "[T.He] looks a lot older than you remember.\n"
+
+	for (var/obj/aura/web/W in auras)
+		msg += SPAN_WARNING("[T.He] is covered in webs!\n")
+		break
 
 	var/list/wound_flavor_text = list()
 	var/applying_pressure = ""
@@ -251,9 +255,9 @@
 				shown_objects += embedlist
 				var/parsedembed[0]
 				for(var/obj/embedded in embedlist)
-					if(!parsedembed.len || (!parsedembed.Find(embedded.name) && !parsedembed.Find("multiple [embedded.name]")))
+					if(!parsedembed.len || (!list_find(parsedembed, embedded.name) && !list_find(parsedembed, "multiple [embedded.name]")))
 						parsedembed.Add(embedded.name)
-					else if(!parsedembed.Find("multiple [embedded.name]"))
+					else if(!list_find(parsedembed, "multiple [embedded.name]"))
 						parsedembed.Remove(embedded.name)
 						parsedembed.Add("multiple "+embedded.name)
 				wound_flavor_text["[E.name]"] += "The [wound.desc] on [T.his] [E.name] has \a [english_list(parsedembed, and_text = " and \a ", comma_text = ", \a ")] sticking out of it!<br>"
@@ -268,7 +272,10 @@
 	for(var/obj/implant in get_visible_implants(0))
 		if(implant in shown_objects)
 			continue
-		msg += "<span class='danger'>[src] [T.has] \a [implant.name] sticking out of [T.his] flesh!</span>\n"
+		if(src.fake_name)
+			msg += "<span class='danger'>[src.fake_name] [T.has] \a [implant.name] sticking out of [T.his] flesh!</span>\n"
+		else
+			msg += "<span class='danger'>[src] [T.has] \a [implant.name] sticking out of [T.his] flesh!</span>\n"
 	if(digitalcamo)
 		msg += "[T.He] [T.is] repulsively uncanny!\n"
 
@@ -276,11 +283,14 @@
 		var/perpname = "wot"
 		var/criminal = "None"
 
-		var/obj/item/weapon/card/id/id = GetIdCard()
+		var/obj/item/card/id/id = GetIdCard()
 		if(istype(id))
 			perpname = id.registered_name
 		else
-			perpname = src.name
+			if(src.fake_name)
+				perpname=src.fake_name
+			else
+				perpname=src.name
 
 		if(perpname)
 			var/datum/computer_file/report/crew_record/R = get_crewmember_record(perpname)
@@ -294,11 +304,14 @@
 		var/perpname = "wot"
 		var/medical = "None"
 
-		var/obj/item/weapon/card/id/id = GetIdCard()
+		var/obj/item/card/id/id = GetIdCard()
 		if(istype(id))
 			perpname = id.registered_name
 		else
-			perpname = src.name
+			if(src.fake_name)
+				perpname=src.fake_name
+			else
+				perpname=src.name
 
 		var/datum/computer_file/report/crew_record/R = get_crewmember_record(perpname)
 		if(R)
@@ -309,11 +322,6 @@
 
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
-
-	if(mind && user.mind && name == real_name)
-		var/list/relations = matchmaker.get_relationships_between(user.mind, mind, TRUE)
-		if(length(relations))
-			msg += "<br><span class='notice'>You know them. <a href='byond://?src=\ref[src];show_relations=1'>More...</a></span><br>"
 
 	msg += "*---------*</span><br>"
 	msg += applying_pressure
@@ -333,7 +341,14 @@
 	if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/clothing/glasses/G = H.glasses
-		return istype(G) && ((G.hud_type & hudtype) || (G.hud && (G.hud.hud_type & hudtype)))
+		var/obj/item/card/id/ID = M.GetIdCard()
+		var/obj/item/organ/internal/augment/active/hud/AUG
+		for (var/obj/item/organ/internal/augment/active/hud/A in H.internal_organs) // Check for installed and active HUD implants
+			if (A.hud_type & hudtype)
+				AUG = A
+				break
+
+		return ((istype(G) && ((G.hud_type & hudtype) || (G.hud && (G.hud.hud_type & hudtype)))) && G.check_access(ID)) || AUG?.active && AUG.check_access(ID)
 	else if(istype(M, /mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = M
 		for(var/obj/item/borg/sight/sight in list(R.module_state_1, R.module_state_2, R.module_state_3))
@@ -346,7 +361,10 @@
 	set desc = "Sets a description which will be shown when someone examines you."
 	set category = "IC"
 
-	pose =  sanitize(input(usr, "This is [src]. [get_visible_gender() == MALE ? "He" : get_visible_gender() == FEMALE ? "She" : "They"]...", "Pose", null)  as text)
+	if(src.fake_name)
+		pose =  sanitize(input(usr, "This is [src.fake_name]. [get_visible_gender() == MALE ? "He" : get_visible_gender() == FEMALE ? "She" : "They"]...", "Pose", null)  as text)
+	else
+		pose =  sanitize(input(usr, "This is [src]. [get_visible_gender() == MALE ? "He" : get_visible_gender() == FEMALE ? "She" : "They"]...", "Pose", null)  as text)
 
 /mob/living/carbon/human/verb/set_flavor()
 	set name = "Set Flavour Text"

@@ -20,6 +20,9 @@
 	set name = "Generate NanoUI Map"
 	set category = "Server"
 
+	if (alert("Do you wish to generate a Z Level?", "Generate NanoUI Map", "Yes", "No") != "Yes")
+		return
+
 	if(holder)
 		nanomapgen_DumpTile(1, 1, text2num(input(usr,"Enter the Z level to generate")))
 

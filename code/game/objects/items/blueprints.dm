@@ -21,7 +21,7 @@
 
 /obj/item/blueprints/Initialize()
 	. = ..()
-	desc = "Blueprints of the [station_name()]. There is a \"Classified\" stamp and several coffee stains on it."
+	desc = "Blueprints of \the [station_name()]. There is a \"Classified\" stamp and several coffee stains on it."
 
 /obj/item/blueprints/attack_self(mob/M as mob)
 	if (!istype(M,/mob/living/carbon/human))
@@ -229,7 +229,7 @@
 	return "<h2>Exoplanetary outpost blueprints</h2><small>Property of [GLOB.using_map.company_name].</small><hr>"
 
 /obj/item/blueprints/outpost/check_tile_is_border(var/turf/T2,var/dir)
-	if (istype(T2, /turf/simulated/floor/exoplanet/))
+	if (istype(T2, /turf/simulated/floor/exoplanet))
 		return BORDER_SPACE
 	. = ..()
 

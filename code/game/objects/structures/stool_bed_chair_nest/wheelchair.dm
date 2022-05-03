@@ -2,8 +2,7 @@
 	name = "wheelchair"
 	desc = "Now we're getting somewhere."
 	icon_state = "wheelchair"
-	anchored = 0
-	buckle_movable = 1
+	anchored = FALSE
 	movement_handlers = list(/datum/movement_handler/deny_multiz, /datum/movement_handler/delay = list(2), /datum/movement_handler/move_relay_self)
 	var/driving = 0
 	var/mob/living/pulling = null
@@ -21,7 +20,7 @@
 	if(buckled_mob)
 		buckled_mob.set_dir(dir)
 
-/obj/structure/bed/chair/wheelchair/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/bed/chair/wheelchair/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWrench(W) || istype(W,/obj/item/stack) || isWirecutter(W))
 		return
 	..()
@@ -147,21 +146,21 @@
 			occupant.throw_at(A, 3, 3)
 
 		var/def_zone = ran_zone()
-		var/blocked = 100 * occupant.get_blocked_ratio(def_zone, BRUTE, damage = 10)
+		var/blocked = 100 * occupant.get_blocked_ratio(def_zone, DAMAGE_BRUTE, damage = 10)
 		occupant.throw_at(A, 3, 3)
-		occupant.apply_effect(6, STUN, blocked)
-		occupant.apply_effect(6, WEAKEN, blocked)
-		occupant.apply_effect(6, STUTTER, blocked)
-		occupant.apply_damage(10, BRUTE, def_zone)
+		occupant.apply_effect(6, EFFECT_STUN, blocked)
+		occupant.apply_effect(6, EFFECT_WEAKEN, blocked)
+		occupant.apply_effect(6, EFFECT_STUTTER, blocked)
+		occupant.apply_damage(10, DAMAGE_BRUTE, def_zone)
 		playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
 		if(istype(A, /mob/living))
 			var/mob/living/victim = A
 			def_zone = ran_zone()
-			blocked = 100 * victim.get_blocked_ratio(def_zone, BRUTE, damage = 10)
-			victim.apply_effect(6, STUN, blocked)
-			victim.apply_effect(6, WEAKEN, blocked)
-			victim.apply_effect(6, STUTTER, blocked)
-			victim.apply_damage(10, BRUTE, def_zone)
+			blocked = 100 * victim.get_blocked_ratio(def_zone, DAMAGE_BRUTE, damage = 10)
+			victim.apply_effect(6, EFFECT_STUN, blocked)
+			victim.apply_effect(6, EFFECT_WEAKEN, blocked)
+			victim.apply_effect(6, EFFECT_STUTTER, blocked)
+			victim.apply_damage(10, DAMAGE_BRUTE, def_zone)
 		if(pulling)
 			occupant.visible_message("<span class='danger'>[pulling] has thrusted \the [name] into \the [A], throwing \the [occupant] out of it!</span>")
 			admin_attack_log(pulling, occupant, "Crashed their victim into \an [A].", "Was crashed into \an [A].", "smashed into \the [A] using")

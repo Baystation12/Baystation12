@@ -1,6 +1,6 @@
 //Analyzer, pestkillers, weedkillers, nutrients, hatchets, cutters.
 
-/obj/item/weapon/wirecutters/clippers
+/obj/item/wirecutters/clippers
 	name = "plant clippers"
 	desc = "A tool used to take samples from plants."
 	handle_icon = "clippers_handle"

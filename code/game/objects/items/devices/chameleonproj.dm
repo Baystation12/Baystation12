@@ -1,5 +1,6 @@
 /obj/item/device/chameleon
 	name = "chameleon projector"
+	icon = 'icons/obj/chameleon_projector.dmi'
 	icon_state = "shield0"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
@@ -30,7 +31,7 @@
 /obj/item/device/chameleon/afterattack(atom/target, mob/user , proximity)
 	if(!proximity) return
 	if(!active_dummy)
-		if(istype(target,/obj/item) && !istype(target, /obj/item/weapon/disk/nuclear))
+		if(istype(target,/obj/item) && !istype(target, /obj/item/disk/nuclear))
 			playsound(get_turf(src), 'sound/weapons/flash.ogg', 100, 1, -6)
 			to_chat(user, "<span class='notice'>Scanned [target].</span>")
 			saved_item = target.type
@@ -86,8 +87,8 @@
 /obj/effect/dummy/chameleon
 	name = ""
 	desc = ""
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	var/can_move = 1
 	var/obj/item/device/chameleon/master = null
 

@@ -26,7 +26,7 @@
 
 /datum/reagent/bicaridine
 	name = "Bicaridine"
-	description = "Bicaridine is an analgesic medication and can be used to treat blunt trauma."
+	description = "Bicaridine is a fast-acting medication to treat physical trauma."
 	taste_description = "bitterness"
 	taste_mult = 3
 	reagent_state = LIQUID
@@ -61,7 +61,7 @@
 	flags = IGNORE_MOB_SIZE
 	value = 2.9
 
-/datum/reagent/kelotane/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/kelotane/affect_blood(mob/living/carbon/M, alien, removed)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(0, 6 * removed)
 
@@ -77,7 +77,7 @@
 	flags = IGNORE_MOB_SIZE
 	value = 3.9
 
-/datum/reagent/dermaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/dermaline/affect_blood(mob/living/carbon/M, alien, removed)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(0, 12 * removed)
 
@@ -129,7 +129,7 @@
 /datum/reagent/dexalin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 6)
-	else if(alien != IS_DIONA && alien != IS_MANTID)
+	else if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_OXYGENATED, 1)
 	holder.remove_reagent(/datum/reagent/lexorin, 2 * removed)
 
@@ -381,6 +381,7 @@
 	M.add_chemical_effect(CE_MIND, 2)
 	M.adjustToxLoss(5 * removed) // It used to be incredibly deadly due to an oversight. Not anymore!
 	M.add_chemical_effect(CE_PAINKILLER, 20)
+	M.add_chemical_effect(CE_STIMULANT, 10)
 
 /datum/reagent/dylovene/venaxilin
 	name = "Venaxilin"
@@ -501,6 +502,7 @@
 		M.emote(pick("twitch", "blink_r", "shiver"))
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
 	M.add_chemical_effect(CE_PULSE, 3)
+	M.add_chemical_effect(CE_STIMULANT, 4)
 
 /datum/reagent/ethylredoxrazine
 	name = "Ethylredoxrazine"
@@ -554,7 +556,7 @@
 	M.radiation = max(M.radiation - 70 * removed, 0)
 	M.adjustToxLoss(-10 * removed)
 	if(prob(60))
-		M.take_organ_damage(4 * removed, 0)
+		M.take_organ_damage(4 * removed, 0, ORGAN_DAMAGE_FLESH_ONLY)
 
 /datum/reagent/spaceacillin
 	name = "Spaceacillin"
@@ -911,13 +913,14 @@
 	else if(M.chem_doses[type] < 1)
 		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
 	M.add_chemical_effect(CE_PULSE, 2)
+	M.add_chemical_effect(CE_STIMULANT, 2)
 	if(M.chem_doses[type] > 10)
 		M.make_jittery(5)
 	if(volume >= 5 && M.is_asystole())
 		remove_self(5)
 		if(M.resuscitate())
 			var/obj/item/organ/internal/heart = M.internal_organs_by_name[BP_HEART]
-			heart.take_internal_damage(heart.max_damage * 0.15)
+			heart.take_internal_damage(heart.max_damage * 0.075)
 
 /datum/reagent/lactate
 	name = "Lactate"
@@ -955,9 +958,9 @@
 	if(!M.should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
 		return
 	if(M.regenerate_blood(4 * removed))
-		M.immunity = max(M.immunity - 0.1, 0)
+		M.immunity = max(M.immunity - 0.75, 0)
 		if(M.chem_doses[type] > M.species.blood_volume/8) //half of blood was replaced with us, rip white bodies
-			M.immunity = max(M.immunity - 0.5, 0)
+			M.immunity = max(M.immunity - 3, 0)
 
 // Sleeping agent, produced by breathing N2O.
 /datum/reagent/nitrous_oxide
@@ -1018,3 +1021,25 @@
 	..()
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.immunity -= 0.5 //inverse effects when abused
+
+/datum/reagent/coagulant
+	name = "Coagulant"
+	description = "An experimental coagulant capable of staunching both internal and external bleeding."
+	taste_description = "iron"
+	reagent_state = LIQUID
+	color = "#bf0000"
+	metabolism = REM * 0.05
+	scannable = TRUE
+
+/datum/reagent/coagulant/affect_blood(mob/living/carbon/M, alien, removed)
+	if(alien == IS_DIONA)
+		return
+	if(ishuman(M))
+		for(var/obj/item/organ/external/E in M.organs)
+			if(E.status & ORGAN_ARTERY_CUT && prob(10))
+				E.status &= ~ORGAN_ARTERY_CUT
+			for(var/datum/wound/W in E.wounds)
+				if(W.bleeding() && prob(20))
+					W.bleed_timer = 0
+					W.clamped = TRUE
+					E.status &= ~ORGAN_BLEEDING

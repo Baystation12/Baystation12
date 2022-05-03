@@ -33,6 +33,7 @@
 	if( istext(new_name) )
 		M.SetName(new_name)
 		M.real_name = new_name
+		M.fake_name=null
 	else
 		M.SetName(src.name)
 		M.real_name = src.real_name

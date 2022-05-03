@@ -86,7 +86,7 @@
 
 /decl/hierarchy/supply_pack/science/shotgun
 	name = "Weapons - Ballistic Launcher"
-	contains = list(/obj/item/weapon/gun/projectile/shotgun/pump/exploration = 1)
+	contains = list(/obj/item/gun/projectile/shotgun/pump/exploration = 1)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "ballistic launcher crate"
@@ -94,7 +94,7 @@
 
 /decl/hierarchy/supply_pack/science/nets
 	name = "Ammunition - Utility Shells"
-	contains = list(/obj/item/weapon/storage/box/ammo/explo_shells = 2)
+	contains = list(/obj/item/storage/box/ammo/explo_shells = 2)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "utlity shells crate"
@@ -102,13 +102,13 @@
 
 /decl/hierarchy/supply_pack/science/exploration_extragear
 	name = "Gear - Exploration equipment"
-	contains = list(/obj/item/weapon/material/hatchet/machete = 2,
+	contains = list(/obj/item/material/hatchet/machete = 2,
 					/obj/item/device/gps = 2,
 					/obj/item/device/geiger = 2,
 					/obj/item/device/scanner/xenobio = 2,
 					/obj/item/device/radio/headset/exploration = 2,
-					/obj/item/weapon/storage/belt/holster/machete = 2,
-					/obj/item/weapon/storage/plants = 2,
+					/obj/item/storage/belt/holster/machete = 2,
+					/obj/item/storage/plants = 2,
 					/obj/item/device/scanner/plant = 2,
 					/obj/item/device/scanner/mining = 2,
 					/obj/item/device/binoculars = 2)

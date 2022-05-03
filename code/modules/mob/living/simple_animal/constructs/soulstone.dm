@@ -13,7 +13,8 @@
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 4)
 
 	var/full = SOULSTONE_EMPTY
-	var/is_evil = 1
+	/// String. One of `SOULSTONE_OWNER_*`. Defines who or what 'owns' the soulstone, which affects the soul within and any created constructs.
+	var/owner_flag = SOULSTONE_OWNER_CULT
 	var/mob/living/simple_animal/shade = null
 	var/smashing = 0
 	var/soulstatus = null
@@ -23,12 +24,12 @@
 	. = ..(mapload)
 
 /obj/item/device/soulstone/disrupts_psionics()
-	return (full == SOULSTONE_EMPTY) ? src : FALSE
+	return (full == SOULSTONE_ESSENCE) ? src : FALSE
 
 /obj/item/device/soulstone/proc/shatter()
 	playsound(loc, "shatter", 70, 1)
 	for(var/i=1 to rand(2,5))
-		new /obj/item/weapon/material/shard(get_turf(src), MATERIAL_NULLGLASS)
+		new /obj/item/material/shard(get_turf(src), MATERIAL_NULLGLASS)
 	qdel(src)
 
 /obj/item/device/soulstone/withstand_psi_stress(var/stress, var/atom/source)
@@ -65,9 +66,9 @@
 
 /obj/item/device/soulstone/attackby(var/obj/item/I, var/mob/user)
 	..()
-	if(is_evil && istype(I, /obj/item/weapon/nullrod))
+	if (owner_flag != SOULSTONE_OWNER_PURE && istype(I, /obj/item/nullrod))
 		to_chat(user, "<span class='notice'>You cleanse \the [src] of taint, purging its shackles to its creator..</span>")
-		is_evil = 0
+		owner_flag = SOULSTONE_OWNER_PURE
 		return
 	if(I.force >= 5)
 		if(full != SOULSTONE_CRACKED)
@@ -150,8 +151,13 @@
 		var/mob/living/simple_animal/construct/C = new ctype(get_turf(src))
 		C.key = S.shade.key
 		//C.cancel_camera()
-		if(S.is_evil)
+		transfer_languages(user, C, RESTRICTED | HIVEMIND)
+		if (S.owner_flag == SOULSTONE_OWNER_CULT)
 			GLOB.cult.add_antagonist(C.mind)
+		else
+			// Only cult constructs get cult languages
+			C.remove_language(LANGUAGE_CULT)
+			C.remove_language(LANGUAGE_CULT_GLOBAL)
 		qdel(S)
 		qdel(src)
 

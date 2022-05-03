@@ -21,7 +21,7 @@
 /area/template_noop)
 "f" = (
 /obj/structure/bed,
-/obj/item/weapon/bedsheet,
+/obj/item/bedsheet,
 /turf/simulated/floor/carpet/green,
 /area/template_noop)
 "g" = (
@@ -30,7 +30,7 @@
 /area/template_noop)
 "h" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/board,
+/obj/item/board,
 /turf/simulated/floor/wood,
 /area/template_noop)
 "i" = (
@@ -41,16 +41,16 @@
 "j" = (
 /obj/structure/table/woodentable,
 /obj/item/clothing/mask/smokable/pipe/cobpipe,
-/obj/item/weapon/storage/chewables/rollable/generic,
-/obj/item/weapon/material/ashtray/bronze,
+/obj/item/storage/chewables/rollable/generic,
+/obj/item/material/ashtray/bronze,
 /turf/simulated/floor/carpet/green,
 /area/template_noop)
 "k" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/material/kitchen/utensil/fork/plastic,
-/obj/item/weapon/material/kitchen/utensil/fork/plastic,
-/obj/item/weapon/material/kitchen/utensil/fork/plastic,
-/obj/item/weapon/material/knife/table,
+/obj/item/material/kitchen/utensil/fork/plastic,
+/obj/item/material/kitchen/utensil/fork/plastic,
+/obj/item/material/kitchen/utensil/fork/plastic,
+/obj/item/material/knife/table,
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 1
 	},
@@ -58,10 +58,9 @@
 /area/template_noop)
 "l" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/material/knife/table,
-/obj/item/weapon/material/knife/table,
+/obj/item/material/knife/table,
+/obj/item/material/knife/table,
 /obj/effect/floor_decal/spline/fancy/wood{
-	icon_state = "spline_fancy";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -69,7 +68,6 @@
 "m" = (
 /obj/structure/closet/crate/freezer,
 /obj/effect/floor_decal/spline/fancy/wood{
-	icon_state = "spline_fancy";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -89,8 +87,6 @@
 /area/template_noop)
 "p" = (
 /obj/structure/bed/chair/wood{
-	tag = "icon-wooden_chair_preview (WEST)";
-	icon_state = "wooden_chair_preview";
 	dir = 8
 	},
 /obj/effect/floor_decal/spline/fancy/wood/corner,
@@ -98,14 +94,13 @@
 /area/template_noop)
 "q" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/book/manual/detective,
-/obj/item/weapon/material/ashtray/bronze,
-/obj/item/weapon/deck/cards,
+/obj/item/book/manual/detective,
+/obj/item/material/ashtray/bronze,
+/obj/item/deck/cards,
 /turf/simulated/floor/wood,
 /area/template_noop)
 "r" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	icon_state = "spline_fancy";
 	dir = 1
 	},
 /turf/simulated/floor/wood,
@@ -115,7 +110,7 @@
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/drip,
-/obj/item/weapon/material/knife/kitchen/cleaver,
+/obj/item/material/knife/kitchen/cleaver,
 /turf/simulated/floor/tiled/monotile,
 /area/template_noop)
 "t" = (
@@ -133,9 +128,6 @@
 	name = "low-tech server"
 	},
 /turf/simulated/floor/tiled/monotile,
-/area/template_noop)
-"w" = (
-/turf/simulated/floor/wood/usedup,
 /area/template_noop)
 "x" = (
 /obj/structure/table/woodentable,
@@ -175,8 +167,6 @@
 /area/template_noop)
 "D" = (
 /obj/structure/bed/chair/wood{
-	tag = "icon-wooden_chair_preview (WEST)";
-	icon_state = "wooden_chair_preview";
 	dir = 8
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -204,8 +194,8 @@
 /area/template_noop)
 "I" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/projectile/pirate,
-/obj/item/weapon/storage/box/ammo/shotgunshells,
+/obj/item/gun/projectile/pirate,
+/obj/item/storage/box/ammo/shotgunshells,
 /turf/simulated/floor/wood,
 /area/template_noop)
 "J" = (
@@ -293,7 +283,7 @@ b
 d
 i
 r
-w
+o
 E
 b
 a
@@ -398,7 +388,7 @@ b
 n
 u
 z
-w
+o
 b
 b
 b
@@ -413,7 +403,7 @@ o
 o
 o
 o
-w
+o
 Q
 S
 b

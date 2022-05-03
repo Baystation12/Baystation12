@@ -2,8 +2,8 @@
 #include "blueriver_areas.dm"
 /obj/effect/overmap/visitable/sector/arcticplanet
 	name = "arctic planetoid"
-	desc = "Sensor array detects an arctic planet with a small vessle on the planet's surface. Scans further indicate strange energy levels below the planet's surface."
-	in_space = 0
+	desc = "Sensor array detects an arctic planet with a small vessel on the planet's surface. Scans further indicate strange energy emissions from below the planet's surface."
+	in_space = FALSE
 	icon_state = "globe"
 	initial_generic_waypoints = list(
 		"nav_blueriv_1",
@@ -19,7 +19,8 @@
 /datum/map_template/ruin/away_site/blueriver
 	name = "Bluespace River"
 	id = "awaysite_blue"
-	description = "Two z-level map with an arctic planet and an alien underground surface"
+	spawn_cost = 2
+	description = "An arctic planet and an alien underground surface"
 	suffixes = list("blueriver/blueriver-1.dmm", "blueriver/blueriver-2.dmm")
 	generate_mining_by_z = 2
 	area_usage_test_exempted_root_areas = list(/area/bluespaceriver)
@@ -44,14 +45,44 @@
 	can_escape = TRUE
 
 	harm_intent_damage = 8
-	melee_damage_lower = 30
-	melee_damage_upper = 35
-	attacktext = "eviscerated"
-	attack_sound = 'sound/weapons/slash.ogg'
+	natural_weapon = /obj/item/natural_weapon/defender_blades
+	ai_holder = /datum/ai_holder/simple_animal/melee/defender
 	var/attack_mode = FALSE
 
 	var/transformation_delay_min = 4
 	var/transformation_delay_max = 8
+
+/datum/ai_holder/simple_animal/melee/defender/lose_target()
+	. = ..()
+	var/mob/living/simple_animal/hostile/hive_alien/defender/D = holder
+	if(D.attack_mode && !find_target()) //If we don't immediately find another target, switch to movement mode
+		D.mode_movement()
+
+	return ..()
+
+/datum/ai_holder/simple_animal/melee/defender/lose_target()
+	. = ..()
+	var/mob/living/simple_animal/hostile/hive_alien/defender/D = holder
+	if(D.attack_mode && !find_target()) //If we don't immediately find another target, switch to movement mode
+		D.mode_movement()
+
+	return ..()
+
+/datum/ai_holder/simple_animal/melee/defender/engage_target()
+	. = ..()
+	var/mob/living/simple_animal/hostile/hive_alien/defender/D = holder
+	if(!D.attack_mode)
+		return D.mode_attack()
+
+	flick("hive_executioner_attacking", src)
+
+	return ..()
+/obj/item/natural_weapon/defender_blades
+	name = "blades"
+	attack_verb = list("eviscerated")
+	force = 30
+	edge = TRUE
+	hitsound = 'sound/weapons/slash.ogg'
 
 /mob/living/simple_animal/hostile/hive_alien/defender/proc/mode_movement() //Slightly broken, but it's alien and unpredictable so w/e
 	set waitfor = 0
@@ -61,10 +92,10 @@
 	anchored = FALSE
 	speed = -1
 	move_to_delay = 8
-	attack_mode = FALSE
+	. = FALSE
 
 	//Immediately find a target so that we're not useless for 1 Life() tick!
-	FindTarget()
+	ai_holder.find_target()
 
 /mob/living/simple_animal/hostile/hive_alien/defender/proc/mode_attack()
 	set waitfor = 0
@@ -75,26 +106,6 @@
 	speed = 0
 	attack_mode = TRUE
 	walk(src, 0)
-
-/mob/living/simple_animal/hostile/hive_alien/defender/LostTarget()
-	if(attack_mode && !FindTarget()) //If we don't immediately find another target, switch to movement mode
-		mode_movement()
-
-	return ..()
-
-/mob/living/simple_animal/hostile/hive_alien/defender/LoseTarget()
-	if(attack_mode && !FindTarget()) //If we don't immediately find another target, switch to movement mode
-		mode_movement()
-
-	return ..()
-
-/mob/living/simple_animal/hostile/hive_alien/defender/AttackingTarget()
-	if(!attack_mode)
-		return mode_attack()
-
-	flick("hive_executioner_attacking", src)
-
-	return ..()
 
 /mob/living/simple_animal/hostile/hive_alien/defender/wounded
 	name = "wounded hive defender"
@@ -123,7 +134,7 @@
 
 /turf/simulated/floor/away/blueriver/alienfloor
 	name = "glowing floor"
-	desc = "The floor glows without any apparent reason"
+	desc = "The floor glows without any apparent reason."
 	icon = 'riverturfs.dmi'
 	icon_state = "floor"
 	temperature = 233
@@ -139,7 +150,7 @@
 	icon = 'riverturfs.dmi'
 	icon_state = "evilwall_1"
 	opacity = 1
-	density = 1
+	density = TRUE
 	temperature = 233
 
 /turf/unsimulated/wall/away/blueriver/livingwall/Initialize()
@@ -166,3 +177,29 @@
 
 /turf/unsimulated/wall/supermatter/no_spread/Process()
 	return PROCESS_KILL
+
+/obj/structure/deity
+	icon = 'icons/obj/cult.dmi'
+	icon_state = "tomealtar"
+	health_max = 10
+	density = TRUE
+	anchored = TRUE
+
+/obj/structure/deity/attackby(obj/item/W as obj, mob/user as mob)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.do_attack_animation(src)
+	playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 50, 1)
+	user.visible_message(
+		"<span class='danger'>[user] hits \the [src] with \the [W]!</span>",
+		"<span class='danger'>You hit \the [src] with \the [W]!</span>",
+		"<span class='danger'>You hear something breaking!</span>"
+		)
+	damage_health(W.force, W.damtype)
+
+/obj/structure/deity/handle_death_change(new_death_state)
+	if (new_death_state)
+		visible_message(SPAN_DANGER("\The [src] crumbles!"))
+		qdel(src)
+
+/obj/structure/deity/bullet_act(var/obj/item/projectile/P)
+	damage_health(P.get_structure_damage(), P.damage_type)

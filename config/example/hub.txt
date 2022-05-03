@@ -1,0 +1,24 @@
+# hub.txt allows configuration of the hub listing.
+# You may use html to style the matter of the listing.
+# Multiple newlines are stripped. Newlines are replaced with <br>.
+# Leading and trailing whitespace is stripped.
+# Comment lines begin with # and are stripped.
+# Use $VARIABLE to embed a variable. The following exist:
+#   $SERVER - the value of config.server_name
+#   $HOST - the value of config.hostedby
+#   $WIKI - the value of config.wiki_url
+#   $RULES - the value of config.rules_url
+#   $SOURCE - the value of config.source_url
+#   $DISCORD - the value of config.discord_url
+#   $FORUM - the value of config.forum_url
+#   $MODE - the active mode, otherwise "LOBBY"
+#   $STATION - the value of station_name()
+#   $PLAYERS - current count of connected clients
+#   $ACTIVES - connected clients alive and not AFK
+# If this file is empty or not present the default is:
+#   <b>$SERVER</b> by <b>$HOST</b> &#8212; $ACTIVES of $PLAYERS alive
+# A more fully populated example is provided below.
+# Note that the final entry will be truncated to 255 bytes long by BYOND.
+
+<b>$SERVER</b> by <b>$HOST</b> &#8212; playing <b>$MODE</b> on <b>$STATION</b> with $ACTIVES of $PLAYERS alive
+[<a href="$WIKI">Wiki</a>] [<a href="$DISCORD">Discord</a>] [<a href="$SOURCE">Source</a>]

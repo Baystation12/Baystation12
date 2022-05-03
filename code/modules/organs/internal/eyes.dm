@@ -56,7 +56,7 @@
 		var/r_eyes = hex2num(copytext(new_eyes, 2, 4))
 		var/g_eyes = hex2num(copytext(new_eyes, 4, 6))
 		var/b_eyes = hex2num(copytext(new_eyes, 6, 8))
-		if(do_after(owner, 10) && owner.change_eye_color(r_eyes, g_eyes, b_eyes))
+		if(do_after(owner, 1 SECOND, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT) && owner.change_eye_color(r_eyes, g_eyes, b_eyes))
 			update_colour()
 			// Finally, update the eye icon on the mob.
 			owner.regenerate_icons()
@@ -110,6 +110,7 @@
 
 /obj/item/organ/internal/eyes/robot
 	name = "optical sensor"
+	status = ORGAN_ROBOTIC
 
 /obj/item/organ/internal/eyes/robot/New()
 	..()
@@ -126,6 +127,7 @@
 	flash_mod = 1
 	darksight_range = 2
 	darksight_tint = DARKTINT_NONE
+	status = ORGAN_ROBOTIC
 
 /obj/item/organ/internal/eyes/get_mechanical_assisted_descriptor()
 	return "retinal overlayed [name]"

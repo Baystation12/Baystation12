@@ -27,7 +27,7 @@
 	next_stages = list(/decl/crafting_stage/ed209_armour)
 
 /decl/crafting_stage/ed209_armour
-	completion_trigger_type = /obj/item/clothing/accessory/armorplate
+	completion_trigger_type = /obj/item/clothing/accessory/armor_plate
 	progress_message = "You layer the armour plating over the frame."
 	item_icon_state = "ed209_4"
 	next_stages = list(/decl/crafting_stage/welding/ed209)
@@ -57,7 +57,7 @@
 /decl/crafting_stage/ed209_taser
 	progress_message = "You add the taser to the frame."
 	next_stages = list(/decl/crafting_stage/screwdriver/ed209)
-	completion_trigger_type = /obj/item/weapon/gun/energy/taser
+	completion_trigger_type = /obj/item/gun/energy/taser
 	item_icon_state = "ed209_7"
 
 /decl/crafting_stage/screwdriver/ed209
@@ -68,4 +68,4 @@
 /decl/crafting_stage/ed209_cell
 	progress_message = "You complete the ED209."
 	product = /mob/living/bot/secbot/ed209
-	completion_trigger_type = /obj/item/weapon/cell
+	completion_trigger_type = /obj/item/cell

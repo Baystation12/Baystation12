@@ -40,8 +40,8 @@
 	body_parts_covered = 0
 
 /obj/item/clothing/glasses/thermal/plain/jensen
-	name = "optical thermal implants"
+	name = "adhesive thermal lenses"
 	gender = PLURAL
-	desc = "A set of implantable lenses designed to augment your vision."
+	desc = "A set of deployable thermal lenses that adhere to the eyebrows. Cool looking, probably."
 	icon_state = "thermalimplants"
 	item_state = "syringe_kit"

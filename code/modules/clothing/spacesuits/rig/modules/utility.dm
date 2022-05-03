@@ -46,7 +46,7 @@
 	interface_desc = "A prototype defibrillator, palm-mounted for ease of use."
 
 	use_power_cost = 0//Already handled by defib, but it's 150 Wh, normal defib takes 100
-	device = /obj/item/weapon/shockpaddles/rig
+	device = /obj/item/shockpaddles/rig
 
 /obj/item/rig_module/device/drill
 	name = "hardsuit mounted drill"
@@ -59,7 +59,7 @@
 	use_power_cost = 3600 //2 Wh per use
 	module_cooldown = 0
 	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 6)
-	device = /obj/item/weapon/pickaxe/diamonddrill
+	device = /obj/item/pickaxe/diamonddrill
 
 /obj/item/rig_module/device/anomaly_scanner
 	name = "anomaly scanner module"
@@ -105,7 +105,7 @@
 	engage_string = "Configure RCD"
 	use_power_cost = 300
 	origin_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 5, TECH_ENGINEERING = 7)
-	device = /obj/item/weapon/rcd/mounted
+	device = /obj/item/rcd/mounted
 
 /obj/item/rig_module/device/Initialize()
 	. = ..()
@@ -199,7 +199,7 @@
 				break
 
 	if(total_transferred)
-		to_chat(user, "<font color='blue'>You transfer [total_transferred] units into the suit reservoir.</font>")
+		to_chat(user, "<span class='info'>You transfer [total_transferred] units into the suit reservoir.</span>")
 	else
 		to_chat(user, "<span class='danger'>None of the reagents seem suitable.</span>")
 	return 1
@@ -301,12 +301,12 @@
 /obj/item/rig_module/voice/installed()
 	..()
 	holder.speech = src
-	holder.verbs |= /obj/item/weapon/rig/proc/alter_voice
+	holder.verbs |= /obj/item/rig/proc/alter_voice
 
 /obj/item/rig_module/voice/removed()
 	..()
 	holder.speech = null
-	holder.verbs -= /obj/item/weapon/rig/proc/alter_voice
+	holder.verbs -= /obj/item/rig/proc/alter_voice
 
 /obj/item/rig_module/voice/engage()
 
@@ -322,17 +322,17 @@
 		if("Enable")
 			active = 1
 			voice_holder.active = 1
-			to_chat(usr, "<font color='blue'>You enable the speech synthesiser.</font>")
+			to_chat(usr, "<span class='info'>You enable the speech synthesiser.</span>")
 		if("Disable")
 			active = 0
 			voice_holder.active = 0
-			to_chat(usr, "<font color='blue'>You disable the speech synthesiser.</font>")
+			to_chat(usr, "<span class='info'>You disable the speech synthesiser.</span>")
 		if("Set Name")
 			var/raw_choice = sanitize(input(usr, "Please enter a new name.")  as text|null, MAX_NAME_LEN)
 			if(!raw_choice)
 				return 0
 			voice_holder.voice = raw_choice
-			to_chat(usr, "<font color='blue'>You are now mimicking <B>[voice_holder.voice]</B>.</font>")
+			to_chat(usr, "<span class='info'>You are now mimicking <B>[voice_holder.voice]</B>.</span>")
 	return 1
 
 /obj/item/rig_module/maneuvering_jets
@@ -356,7 +356,7 @@
 	interface_name = "maneuvering jets"
 	interface_desc = "An inbuilt EVA maneuvering system that runs off the rig air supply."
 	origin_tech = list(TECH_MATERIAL = 6,  TECH_ENGINEERING = 7)
-	var/obj/item/weapon/tank/jetpack/rig/jets
+	var/obj/item/tank/jetpack/rig/jets
 
 /obj/item/rig_module/maneuvering_jets/engage()
 	if(!..())
@@ -413,7 +413,7 @@
 	use_power_cost = 200
 	usable = 1
 	selectable = 0
-	device = /obj/item/weapon/paper_bin
+	device = /obj/item/paper_bin
 
 /obj/item/rig_module/device/paperdispenser/engage(atom/target)
 
@@ -432,7 +432,7 @@
 	interface_desc = "Signatures with style(tm)."
 	engage_string = "Change color"
 	usable = 1
-	device = /obj/item/weapon/pen/multi
+	device = /obj/item/pen/multi
 
 /obj/item/rig_module/device/stamp
 	name = "mounted stamp"
@@ -447,8 +447,8 @@
 
 /obj/item/rig_module/device/stamp/Initialize()
 	. = ..()
-	stamp = new /obj/item/weapon/stamp(src)
-	deniedstamp = new /obj/item/weapon/stamp/denied(src)
+	stamp = new /obj/item/stamp(src)
+	deniedstamp = new /obj/item/stamp/denied(src)
 	device = stamp
 
 /obj/item/rig_module/device/stamp/engage(atom/target)
@@ -471,7 +471,7 @@
 	interface_name = "mounted matter decompiler"
 	interface_desc = "Eats trash like no one's business."
 	origin_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5)
-	device = /obj/item/weapon/matter_decompiler
+	device = /obj/item/matter_decompiler
 
 /obj/item/rig_module/cooling_unit
 	name = "mounted cooling unit"

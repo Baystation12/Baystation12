@@ -3,10 +3,10 @@
 	desc = "An energy shield used to contain hull breaches."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shield-old"
-	density = 1
+	density = TRUE
 	opacity = 0
-	anchored = 1
-	unacidable = 1
+	anchored = TRUE
+	unacidable = TRUE
 	var/const/max_health = 200
 	var/health = max_health //The shield can only take so much beating (prevents perma-prisons)
 	var/shield_generate_power = 7500	//how much power we use when regenerating
@@ -42,12 +42,12 @@
 	if(!height || air_group) return 0
 	else return ..()
 
-/obj/machinery/shield/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/shield/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W)) return
 
 	//Calculate damage
 	var/aforce = W.force
-	if(W.damtype == BRUTE || W.damtype == BURN)
+	if (W.damtype == DAMAGE_BRUTE || W.damtype == DAMAGE_BURN)
 		src.health -= aforce
 
 	//Play a fitting sound
@@ -82,11 +82,12 @@
 
 /obj/machinery/shield/emp_act(severity)
 	switch(severity)
-		if(1)
+		if(EMP_ACT_HEAVY)
 			qdel(src)
-		if(2)
+		if(EMP_ACT_LIGHT)
 			if(prob(50))
 				qdel(src)
+	..()
 
 
 /obj/machinery/shield/hitby(AM as mob|obj, var/datum/thrownthing/TT)
@@ -120,9 +121,9 @@
 	desc = "Used to seal minor hull breaches."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "shieldoff"
-	density = 1
+	density = TRUE
 	opacity = 0
-	anchored = 0
+	anchored = FALSE
 	req_access = list(access_engine)
 	var/const/max_health = 100
 	var/health = max_health
@@ -240,15 +241,16 @@
 
 /obj/machinery/shieldgen/emp_act(severity)
 	switch(severity)
-		if(1)
+		if(EMP_ACT_HEAVY)
 			src.health /= 2 //cut health in half
 			malfunction = 1
 			locked = pick(0,1)
-		if(2)
+		if(EMP_ACT_LIGHT)
 			if(prob(50))
 				src.health *= 0.3 //chop off a third of the health
 				malfunction = 1
 	checkhp()
+	..()
 
 /obj/machinery/shieldgen/interface_interact(mob/user as mob)
 	if(!CanInteract(user, DefaultTopicState()))
@@ -261,14 +263,14 @@
 		return TRUE
 
 	if (src.active)
-		user.visible_message("<span class='notice'>\icon[src] [user] deactivated the shield generator.</span>", \
-			"<span class='notice'>\icon[src] You deactivate the shield generator.</span>", \
+		user.visible_message("<span class='notice'>[icon2html(src, viewers(get_turf(src)))] [user] deactivated the shield generator.</span>", \
+			"<span class='notice'>[icon2html(src,user)] You deactivate the shield generator.</span>", \
 			"You hear heavy droning fade out.")
 		src.shields_down()
 	else
 		if(anchored)
-			user.visible_message("<span class='notice'>\icon[src] [user] activated the shield generator.</span>", \
-				"<span class='notice'>\icon[src] You activate the shield generator.</span>", \
+			user.visible_message("<span class='notice'>[icon2html(src, viewers(get_turf(src)))] [user] activated the shield generator.</span>", \
+				"<span class='notice'>[icon2html(src, user)] You activate the shield generator.</span>", \
 				"You hear heavy droning.")
 			src.shields_up()
 		else
@@ -281,7 +283,7 @@
 		update_icon()
 		return 1
 
-/obj/machinery/shieldgen/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/shieldgen/attackby(obj/item/W as obj, mob/user as mob)
 	if(isScrewdriver(W))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		if(is_open)
@@ -295,14 +297,14 @@
 		var/obj/item/stack/cable_coil/coil = W
 		to_chat(user, "<span class='notice'>You begin to replace the wires.</span>")
 		//if(do_after(user, min(60, round( ((maxhealth/health)*10)+(malfunction*10) ))) //Take longer to repair heavier damage
-		if(do_after(user, 30,src))
+		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if (coil.use(1))
 				health = max_health
 				malfunction = 0
 				to_chat(user, "<span class='notice'>You repair the [src]!</span>")
 				update_icon()
 
-	else if(istype(W, /obj/item/weapon/wrench))
+	else if(istype(W, /obj/item/wrench))
 		if(locked)
 			to_chat(user, "The bolts are covered, unlocking this would retract the covers.")
 			return
@@ -312,15 +314,15 @@
 			if(active)
 				to_chat(user, "<span class='notice'>The [src] shuts off!</span>")
 				src.shields_down()
-			anchored = 0
+			anchored = FALSE
 		else
 			if(istype(get_turf(src), /turf/space)) return //No wrenching these in space!
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 			to_chat(user, "<span class='notice'>You secure the [src] to the floor!</span>")
-			anchored = 1
+			anchored = TRUE
 
 
-	else if(istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/modular_computer/pda))
+	else if(istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer/pda))
 		if(src.allowed(user))
 			src.locked = !src.locked
 			to_chat(user, "The controls are now [src.locked ? "locked." : "unlocked."]")

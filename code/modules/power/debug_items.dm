@@ -1,8 +1,8 @@
-/obj/machinery/power/debug_items/
+/obj/machinery/power/debug_items
 	icon = 'icons/obj/power.dmi'
 	icon_state = "tracker"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	var/show_extended_information = 1	// Set to 0 to disable extra information on examining (for example, when used on admin events)
 
 /obj/machinery/power/debug_items/examine(mob/user)
@@ -26,7 +26,7 @@
 // An infinite power generator. Adds energy to connected cable.
 /obj/machinery/power/debug_items/infinite_generator
 	name = "Fractal Energy Reactor"
-	desc = "An experimental power generator"
+	desc = "An experimental power generator."
 	var/power_generation_rate = 1000000
 
 /obj/machinery/power/debug_items/infinite_generator/Process()

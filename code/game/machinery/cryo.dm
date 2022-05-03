@@ -4,8 +4,8 @@
 	name = "cryo cell"
 	icon = 'icons/obj/cryogenics.dmi' // map only
 	icon_state = "pod_preview"
-	density = 1
-	anchored = 1.0
+	density = TRUE
+	anchored = TRUE
 	interact_offline = 1
 	layer = ABOVE_HUMAN_LAYER
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
@@ -19,9 +19,12 @@
 	clicksound = 'sound/machines/buttonbeep.ogg'
 	clickvol = 30
 
+	machine_name = "cryo cell"
+	machine_desc = "Uses a supercooled chemical bath to hold living beings in something close to suspended animation. Often paired with specialized medicines to rapidly heal wounds of a patient inside."
+
 	var/temperature_archived
 	var/mob/living/carbon/human/occupant = null
-	var/obj/item/weapon/reagent_containers/glass/beaker = null
+	var/obj/item/reagent_containers/glass/beaker = null
 
 	var/current_heat_capacity = 50
 
@@ -197,7 +200,7 @@
 /obj/machinery/atmospherics/unary/cryo_cell/attackby(var/obj/G, var/mob/user as mob)
 	if(component_attackby(G, user))
 		return TRUE
-	if(istype(G, /obj/item/weapon/reagent_containers/glass))
+	if(istype(G, /obj/item/reagent_containers/glass))
 		if(beaker)
 			to_chat(user, "<span class='warning'>A beaker is already loaded into the machine.</span>")
 			return
@@ -249,6 +252,8 @@
 		var/has_cryo_medicine = occupant.reagents.has_any_reagent(list(/datum/reagent/cryoxadone, /datum/reagent/clonexadone, /datum/reagent/nanitefluid)) >= REM
 		if(beaker && !has_cryo_medicine)
 			beaker.reagents.trans_to_mob(occupant, REM, CHEM_BLOOD)
+		if (prob(2))
+			to_chat(occupant, SPAN_NOTICE(SPAN_BOLD("... [pick("floating", "cold")] ...")))
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/heat_gas_contents()
 	if(air_contents.total_moles < 1)
@@ -272,14 +277,25 @@
 		occupant.client.eye = occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.forceMove(get_step(loc, SOUTH))
-	if (occupant.bodytemperature < 261 && occupant.bodytemperature >= 70) 
-		occupant.bodytemperature = 261									  
+	if (occupant.bodytemperature < 261 && occupant.bodytemperature >= 70)
+		occupant.bodytemperature = 261
 	occupant = null
 	current_heat_capacity = initial(current_heat_capacity)
 	update_use_power(POWER_USE_IDLE)
 	update_icon()
 	SetName(initial(name))
 	return
+
+/obj/machinery/atmospherics/unary/cryo_cell/AltClick(mob/user)
+	if(CanDefaultInteract(user))
+		go_out()
+	else
+		..()
+
+/obj/machinery/atmospherics/unary/cryo_cell/CtrlClick(mob/user)
+	if(CanDefaultInteract(user))
+		on = !on
+		update_icon()
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/M as mob)
 	if (stat & (NOPOWER|BROKEN))
@@ -323,7 +339,7 @@
 		to_chat(user, "<span class='warning'>Unbuckle the subject before attempting to move them.</span>")
 		return
 	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
-	if(!do_after(user, 30, src))
+	if(!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 		return
 	put_mob(target)
 

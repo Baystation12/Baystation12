@@ -8,7 +8,7 @@
 	program_menu_icon = "heart"
 	extended_desc = "This program connects to life signs monitoring system to provide basic information on crew health."
 	required_access = access_medical
-	requires_ntnet = 1
+	requires_ntnet = TRUE
 	network_destination = "crew lifesigns monitoring system"
 	size = 11
 	category = PROG_MONITOR
@@ -54,9 +54,8 @@
 	var/list/data = host.initial_data()
 
 	data["isAI"] = isAI(user)
-	data["crewmembers"] = list()
-	for(var/z_level in GLOB.using_map.map_levels)
-		data["crewmembers"] += crew_repository.health_data(z_level)
+	var/Z = get_host_z()
+	data["crewmembers"] = crew_repository.health_data(Z)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)

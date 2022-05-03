@@ -123,7 +123,7 @@
 		qdel(hotspot)
 
 	if (environment && environment.temperature > min_temperature) // Abstracted as steam or something
-		var/removed_heat = between(0, volume * WATER_LATENT_HEAT, -environment.get_thermal_energy_change(min_temperature))
+		var/removed_heat = clamp(volume * WATER_LATENT_HEAT, 0, -environment.get_thermal_energy_change(min_temperature))
 		environment.add_thermal_energy(-removed_heat)
 		if (prob(5) && environment && environment.temperature > T100C)
 			T.visible_message("<span class='warning'>The water sizzles as it lands on \the [T]!</span>")
@@ -133,8 +133,8 @@
 		S.wet_floor(8, TRUE)
 
 /datum/reagent/water/touch_obj(var/obj/O)
-	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/monkeycube))
-		var/obj/item/weapon/reagent_containers/food/snacks/monkeycube/cube = O
+	if(istype(O, /obj/item/reagent_containers/food/snacks/monkeycube))
+		var/obj/item/reagent_containers/food/snacks/monkeycube/cube = O
 		if(!cube.wrapped)
 			cube.Expand()
 
@@ -223,7 +223,7 @@
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 10) // Splashing people with welding fuel to make them easy to ignite!
 
-/datum/reagent/fuel/ex_act(obj/item/weapon/reagent_containers/holder, severity)
+/datum/reagent/fuel/ex_act(obj/item/reagent_containers/holder, severity)
 	if(volume <= 50)
 		return
 	var/turf/T = get_turf(holder)

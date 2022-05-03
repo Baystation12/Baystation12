@@ -54,7 +54,6 @@
 	if(!check_general_join_blockers(joining, job))
 		return
 
-	log_debug("Player: [joining] is now offsite rank: [job.title] ([name]), JCP:[job.current_positions], JPL:[job.total_positions]")
 	if(joining.mind)
 		joining.mind.assigned_job = job
 		joining.mind.assigned_role = job.title
@@ -71,9 +70,9 @@
 		var/mob/living/carbon/human/user_human
 		if(ishuman(character))
 			user_human = character
-			if(job.branch && mil_branches)
-				user_human.char_branch = mil_branches.get_branch(job.branch)
-				user_human.char_rank =   mil_branches.get_rank(job.branch, job.rank)
+			if(job.branch && GLOB.mil_branches)
+				user_human.char_branch = GLOB.mil_branches.get_branch(job.branch)
+				user_human.char_rank =   GLOB.mil_branches.get_rank(job.branch, job.rank)
 
 			// We need to make sure to use the abstract instance here; it's not the same as the one we were passed.
 			character.skillset.obtain_from_client(SSjobs.get_by_path(job.type), character.client)
@@ -98,15 +97,12 @@
 		if(istype(ojob) && ojob.info)
 			to_chat(character, ojob.info)
 
-		if(user_human && user_human.disabilities & NEARSIGHTED)
-			var/equipped = user_human.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(user_human), slot_glasses)
-			if(equipped)
-				var/obj/item/clothing/glasses/G = user_human.glasses
-				G.prescription = 7
+		if (user_human?.disabilities & NEARSIGHTED) //Try to give glasses to the vision impaired
+			user_human.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(user_human), slot_glasses)
 
-		BITSET(character.hud_updateflag, ID_HUD)
-		BITSET(character.hud_updateflag, IMPLOYAL_HUD)
-		BITSET(character.hud_updateflag, SPECIALROLE_HUD)
+		SET_BIT(character.hud_updateflag, ID_HUD)
+		SET_BIT(character.hud_updateflag, IMPLOYAL_HUD)
+		SET_BIT(character.hud_updateflag, SPECIALROLE_HUD)
 
 		SSticker.mode.handle_offsite_latejoin(character)
 		GLOB.universe.OnPlayerLatejoin(character)

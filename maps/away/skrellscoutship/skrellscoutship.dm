@@ -2,23 +2,27 @@
 
 #include "skrellscoutship_areas.dm"
 #include "skrellscoutship_shuttles.dm"
+#include "skrellscoutship_radio.dm"
+#include "skrellscoutship_machines.dm"
 
 /datum/map_template/ruin/away_site/skrellscoutship
 	name = "Skrellian Scout Ship"
 	id = "awaysite_skrell_scout"
 	description = "A Skrellian SDTF scouting vessel."
 	suffixes = list("skrellscoutship/skrellscoutship_revamp.dmm")
-	cost = 0.5
+	spawn_cost = 0.5
+	player_cost = 4
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/skrellscoutship, /datum/shuttle/autodock/overmap/skrellscoutshuttle)
 	apc_test_exempt_areas = list(
 		/area/ship/skrellscoutship/externalwing/port = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/ship/skrellscoutship/externalwing/starboard = NO_SCRUBBER|NO_VENT|NO_APC
 	)
+	spawn_weight = 0.67
 
 /obj/effect/overmap/visitable/sector/skrellscoutspace
 	name = "Empty Sector"
 	desc = "Slight traces of a cloaking device are present. Unable to determine exact location."
-	in_space = 1
+	in_space = TRUE
 	icon_state = "event"
 	hide_from_reports = TRUE
 
@@ -47,14 +51,14 @@
 
 //Access + Loadout
 
-/var/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
+var/global/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
 
 /datum/access/skrellscoutship
 	id = access_skrellscoutship
 	desc = "SSV Crewman"
 	region = ACCESS_REGION_NONE
 
-/obj/item/weapon/card/id/skrellscoutship
+/obj/item/card/id/skrellscoutship
 	color = COLOR_GRAY40
 	detail_color = "#7331c4"
 	access = list(access_skrellscoutship)
@@ -115,7 +119,7 @@
 	var/skrellcaste = input(H, "What is your Skrell's Caste?", "SDTF Rank") as null|anything in skrellscoutcastes
 	if(skrellcaste)
 		var/skrellsubcaste = input(H, "What is your Skrell's Subcaste?", "SDTF Rank") as null|anything in skrellscoutcastes[skrellcaste]
-		var/obj/item/weapon/card/id/C = H.wear_id
+		var/obj/item/card/id/C = H.wear_id
 		if(istype(C))
 			C.assignment = skrellsubcaste
 
@@ -137,44 +141,22 @@
 	gloves = /obj/item/clothing/gloves/thick/swat/skrell
 	pda_type = /obj/item/modular_computer/pda
 	pda_slot = slot_l_store
-	l_ear = /obj/item/device/radio/headset/skrellian
-	id_type = /obj/item/weapon/card/id/skrellscoutship
+	l_ear = /obj/item/device/radio/headset/map_preset/skrellscoutship
+	id_types = list(/obj/item/card/id/skrellscoutship)
 	l_pocket = /obj/item/clothing/accessory/badge/tags/skrell
 
-/obj/item/weapon/stock_parts/circuitboard/telecomms/allinone/skrellscoutship
-	build_path = /obj/machinery/telecomms/allinone/skrellscoutship
 
-/obj/machinery/telecomms/allinone/skrellscoutship
-	listening_freqs = list(SKRELL_FREQ)
-	channel_color = COMMS_COLOR_SKRELL
-	channel_name = "Recon"
-	circuitboard = /obj/item/weapon/stock_parts/circuitboard/telecomms/allinone/skrellscoutship
-
-/obj/item/device/radio/headset/skrellian
-	name = "recon headset"
-	icon_state = "srv_headset"
-	ks1type = /obj/item/device/encryptionkey/skrellian
-
-/obj/item/device/radio/headset/skrellian/Initialize()
-	. = ..()
-	set_frequency(SKRELL_FREQ)	//Not going to be random or just set to the common frequency, but can be set later.
-
-/obj/item/device/encryptionkey/skrellian
-	name = "recon radio encryption key"
-	icon_state = "medsci_cypherkey"
-	channels = list("Recon" = 1)
-
-/obj/item/weapon/reagent_containers/food/condiment/psilocybin
+/obj/item/reagent_containers/food/condiment/psilocybin
 	label_text = "Psilocybin"
 	starting_reagents = list(/datum/reagent/psilocybin = 50)
 
 
-/obj/item/weapon/reagent_containers/food/condiment/mindbreaker
+/obj/item/reagent_containers/food/condiment/mindbreaker
 	label_text = "Mindbreaker"
 	starting_reagents = list(/datum/reagent/mindbreaker = 50)
 
 
-/obj/item/weapon/reagent_containers/food/condiment/space_drugs
+/obj/item/reagent_containers/food/condiment/space_drugs
 	label_text = "Ambrosia"
 	starting_reagents = list(/datum/reagent/space_drugs = 50)
 
@@ -202,10 +184,17 @@
 	TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.30,ONE_ATMOSPHERE*1.40) /* kpa */
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+80, T0C+90) // K
 
+/obj/machinery/alarm/skrell/server
+	target_temperature = T0C+10
+
+/obj/machinery/alarm/skrell/server/Initialize()
+	. = ..()
+	TLV["temperature"] =	list(T0C-26, T0C, T0C+30, T0C+40) // K
+
 /obj/machinery/power/smes/buildable/preset/skrell
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/smes_coil/super_io = 2,
-		/obj/item/weapon/stock_parts/smes_coil/super_capacity = 2)
+		/obj/item/stock_parts/smes_coil/advanced = 2
+	)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
@@ -216,13 +205,13 @@
 	req_access = list(access_skrellscoutship)
 
 /obj/machinery/power/apc/debug/skrell
-	cell_type = /obj/item/weapon/cell/infinite
+	cell_type = /obj/item/cell/infinite
 	req_access = list(access_skrellscoutship)
 
 #undef WEBHOOK_SUBMAP_LOADED_SKRELL
 
 //Skrell Security Belt
-/obj/item/weapon/storage/belt/holster/skrell
+/obj/item/storage/belt/holster/skrell
 	name = "skrellian holster belt"
 	desc = "Can hold security gear like handcuffs and flashes. This one has a convenient holster."
 	icon_state = "securitybelt"
@@ -230,58 +219,59 @@
 	storage_slots = 8
 	overlay_flags = BELT_OVERLAY_ITEMS|BELT_OVERLAY_HOLSTER
 	can_hold = list(
-		/obj/item/weapon/crowbar,
-		/obj/item/weapon/grenade,
-		/obj/item/weapon/reagent_containers/spray/pepper,
-		/obj/item/weapon/handcuffs,
+		/obj/item/crowbar,
+		/obj/item/grenade,
+		/obj/item/reagent_containers/spray/pepper,
+		/obj/item/handcuffs,
 		/obj/item/device/flash,
 		/obj/item/clothing/glasses,
 		/obj/item/ammo_casing/shotgun,
 		/obj/item/ammo_magazine,
-		/obj/item/weapon/reagent_containers/food/snacks/donut/,
-		/obj/item/weapon/melee/baton,
-		/obj/item/weapon/melee/telebaton,
-		/obj/item/weapon/flame/lighter,
+		/obj/item/reagent_containers/food/snacks/donut,
+		/obj/item/melee/baton,
+		/obj/item/melee/telebaton,
+		/obj/item/flame/lighter,
 		/obj/item/device/flashlight,
 		/obj/item/modular_computer/pda,
 		/obj/item/device/radio/headset,
 		/obj/item/device/hailer,
 		/obj/item/device/megaphone,
-		/obj/item/weapon/melee,
+		/obj/item/melee,
 		/obj/item/taperoll,
 		/obj/item/device/holowarrant,
-		/obj/item/weapon/magnetic_ammo,
+		/obj/item/magnetic_ammo,
 		/obj/item/device/binoculars,
 		/obj/item/clothing/gloves,
-		/obj/item/weapon/gun/energy/gun/skrell
+		/obj/item/gun/energy/gun/skrell
 		)
 
 //Skell Lights
 
 /obj/machinery/light/skrell
 	name = "skrellian light"
-	light_type = /obj/item/weapon/light/tube/skrell
-	desc = "Some kind of strange alien lighting technology"
+	light_type = /obj/item/light/tube/skrell
+	desc = "Some kind of strange alien lighting technology."
 
 
-/obj/item/weapon/light/tube/skrell
+/obj/item/light/tube/skrell
 	name = "skrellian light filament"
-	color = COLOR_LIGHT_CYAN
-	b_colour = COLOR_LIGHT_CYAN
+	color = LIGHT_COLOUR_SKRELL
+	b_colour = LIGHT_COLOUR_SKRELL
+	desc = "Some kind of strange alien lightbulb technology."
+	random_tone = FALSE
+
+/obj/item/light/tube/large/skrell
+	name = "skrellian light filament"
+	color = LIGHT_COLOUR_SKRELL
+	b_colour = LIGHT_COLOUR_SKRELL
 	desc = "Some kind of strange alien lightbulb technology."
 
-/obj/item/weapon/light/tube/large/skrell
-	name = "skrellian light filament"
-	color = COLOR_LIGHT_CYAN
-	b_colour = COLOR_LIGHT_CYAN
-	desc = "Some kind of strange alien lightbulb technology."
 
-
-/obj/item/weapon/storage/box/lights/tubes/skrell
+/obj/item/storage/box/lights/tubes/skrell
 	name = "box of replacement tubes"
 	icon_state = "lighttube"
-	startswith = list(/obj/item/weapon/light/tube/skrell = 17,
-					/obj/item/weapon/light/tube/large/skrell = 4)
+	startswith = list(/obj/item/light/tube/skrell = 17,
+					/obj/item/light/tube/large/skrell = 4)
 
 //Skrell Suit Dispensers
 /obj/machinery/suit_storage_unit/skrell
@@ -304,7 +294,7 @@
 
 //Skrell Devices
 
-/obj/item/weapon/tape_roll/skrell
+/obj/item/tape_roll/skrell
 	name = "modular adhesive dispenser"
 	desc = "A roll of sticky tape. Possibly for taping ducks... or was that ducts?"
 	icon = 'icons/obj/bureaucracy.dmi'
@@ -316,3 +306,4 @@
 	color = "#40e0d0"
 	name = "thermal induction generator"
 	desc = "Made by Krri'gli Corp using thermal induction technology, this heater is guaranteed not to set anything, or anyone, on fire."
+	set_temperature = T0C+40

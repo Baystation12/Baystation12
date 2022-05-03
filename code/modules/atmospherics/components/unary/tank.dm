@@ -12,17 +12,21 @@
 	level = 1
 	dir = 2
 	initialize_directions = 2
-	density = 1
+	density = TRUE
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 	pipe_class = PIPE_CLASS_UNARY
 
 	build_icon = 'icons/atmos/tank.dmi'
 	build_icon_state = "air"
+	colorable = TRUE
+	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
 
 /obj/machinery/atmospherics/unary/tank/Initialize()
 	. = ..()
+
+	air_contents.volume = volume
+
 	if(filling)
-		air_contents.volume = volume
 		air_contents.temperature = T20C
 
 		var/list/gases = list()
@@ -34,6 +38,11 @@
 
 /obj/machinery/atmospherics/unary/tank/set_initial_level()
 	level = 1 // Always on top, apparently.
+
+// required for paint sprayers to work due to an override in pipes.dm
+/obj/machinery/atmospherics/unary/tank/set_color(new_color)
+	color = new_color
+	icon_state = "air"
 
 /obj/machinery/atmospherics/unary/tank/update_underlays()
 	if(..())
@@ -50,10 +59,7 @@
 	return air_contents
 
 /obj/machinery/atmospherics/unary/tank/attackby(var/obj/item/W as obj, var/mob/user as mob)
-	if(istype(W, /obj/item/device/pipe_painter))
-		return
-
-	if(isWrench(W))		
+	if(isWrench(W))
 		if (air_contents.return_pressure() > 2*ONE_ATMOSPHERE)
 			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
 			add_fingerprint(user)
@@ -62,8 +68,8 @@
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
 
-		if (do_after(user, 40, src))
-			user.visible_message("<span class='notice'>\The [user] unfastens \the [src].</span>", "<span class='notice'>You have unfastened \the [src].</span>", "You hear a ratchet.")		
+		if (do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
+			user.visible_message("<span class='notice'>\The [user] unfastens \the [src].</span>", "<span class='notice'>You have unfastened \the [src].</span>", "You hear a ratchet.")
 			new /obj/item/pipe/tank(loc, src)
 			qdel(src)
 
@@ -108,7 +114,7 @@
 	name =  "Pressure Tank"
 	desc = "A large vessel containing pressurized gas."
 	color =  PIPE_COLOR_WHITE
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL	
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 	w_class = ITEM_SIZE_HUGE
 	level = 1
 	dir = SOUTH

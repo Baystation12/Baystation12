@@ -23,9 +23,9 @@
 		log_and_message_admins("<span class='notice'>Event: Spacevines failed to find a viable turf.</span>")
 
 /obj/effect/dead_plant
-	anchored = 1
+	anchored = TRUE
 	opacity = 0
-	density = 0
+	density = FALSE
 	color = DEAD_PLANT_COLOUR
 
 /obj/effect/dead_plant/attack_hand()
@@ -37,7 +37,7 @@
 
 /obj/effect/vine
 	name = "vine"
-	anchored = 1
+	anchored = TRUE
 	icon = 'icons/obj/hydroponics_growing.dmi'
 	icon_state = ""
 	pass_flags = PASS_FLAG_TABLE
@@ -131,7 +131,7 @@
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
 		if(growth_type in list(GROWTH_VINES,GROWTH_BIOMASS))
 			set_opacity(1)
-		if(islist(seed.chems) && !isnull(seed.chems[/datum/reagent/woodpulp]))
+		if(LAZYACCESS(seed.chems, /datum/reagent/woodpulp))
 			set_density(1)
 			set_opacity(1)
 
@@ -184,7 +184,7 @@
 
 	var/list/dirList = list()
 
-	for(var/i=1,i<=16,i <<= 1)
+	for(var/i=1,i<=16, i = SHIFTL(i, 1))
 		if(direction & i)
 			dirList += i
 
@@ -198,7 +198,7 @@
 	floor = 1
 	return 1
 
-/obj/effect/vine/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/vine/attackby(var/obj/item/W, var/mob/user)
 	START_PROCESSING(SSvines, src)
 
 	if(W.edge && W.w_class < ITEM_SIZE_NORMAL && user.a_intent != I_HURT)
@@ -221,7 +221,7 @@
 			damage *= 2
 		adjust_health(-damage)
 		playsound(get_turf(src), W.hitsound, 100, 1)
-		
+
 /obj/effect/vine/AltClick(var/mob/user)
 	if(!CanPhysicallyInteract(user) || user.incapacitated())
 		return ..()
@@ -232,7 +232,7 @@
 		var/chop_time = (health/W.force) * 0.5 SECONDS
 		if(user.skill_check(SKILL_BOTANY, SKILL_ADEPT))
 			chop_time *= 0.5
-		if(do_after(user, chop_time, src, TRUE))
+		if (do_after(user, chop_time, src, DO_PUBLIC_UNIQUE))
 			visible_message(SPAN_NOTICE("[user] chops down \the [src]."))
 			playsound(get_turf(src), W.hitsound, 100, 1)
 			die_off()
@@ -279,7 +279,7 @@
 	return
 
 /obj/effect/vine/proc/adjust_health(value)
-	health = Clamp(health + value, 0, max_health)
+	health = clamp(health + value, 0, max_health)
 	if(health <= 0)
 		die_off()
 

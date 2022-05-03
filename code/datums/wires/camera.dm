@@ -25,12 +25,12 @@
 	var/obj/machinery/camera/C = holder
 	return C.panel_open
 
-var/const/CAMERA_WIRE_FOCUS = 1
-var/const/CAMERA_WIRE_POWER = 2
-var/const/CAMERA_WIRE_LIGHT = 4
-var/const/CAMERA_WIRE_ALARM = 8
-var/const/CAMERA_WIRE_NOTHING1 = 16
-var/const/CAMERA_WIRE_NOTHING2 = 32
+var/global/const/CAMERA_WIRE_FOCUS = 1
+var/global/const/CAMERA_WIRE_POWER = 2
+var/global/const/CAMERA_WIRE_LIGHT = 4
+var/global/const/CAMERA_WIRE_ALARM = 8
+var/global/const/CAMERA_WIRE_NOTHING1 = 16
+var/global/const/CAMERA_WIRE_NOTHING2 = 32
 
 /datum/wires/camera/UpdateCut(var/index, var/mended)
 	var/obj/machinery/camera/C = holder
@@ -67,7 +67,7 @@ var/const/CAMERA_WIRE_NOTHING2 = 32
 			C.light_disabled = !C.light_disabled
 
 		if(CAMERA_WIRE_ALARM)
-			C.visible_message("\icon[C] *beep*", "\icon[C] *beep*")
+			C.visible_message("[icon2html(C,viewers(get_turf(C)))] *beep*", "[icon2html(C, viewers(get_turf(C)))] *beep*")
 	return
 
 /datum/wires/camera/proc/CanDeconstruct()

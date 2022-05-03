@@ -29,6 +29,7 @@
 
 	var/descriptor = "tiles"
 	var/flags
+	var/remove_timer
 	var/can_paint
 	var/can_engrave = TRUE
 
@@ -45,6 +46,8 @@
 	//How we smooth with space and openspace tiles
 	var/space_smooth = SMOOTH_ALL
 	//There are no lists for spaces
+
+	var/height = 0
 
 /decl/flooring/proc/on_remove()
 	return
@@ -375,3 +378,28 @@
 	build_type = null
 	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_REMOVE_CROWBAR
 	color = "#00ffe1"
+
+/decl/flooring/flesh
+	name = "flesh"
+	icon = 'icons/turf/flooring/flesh.dmi'
+	icon_base = "flesh"
+	descriptor = "flesh"
+	has_base_range = 3
+	damage_temperature = T0C + 100
+	build_type = null
+	flags = TURF_ACID_IMMUNE | TURF_REMOVE_CROWBAR
+	remove_timer = 60
+	can_engrave = FALSE
+
+/decl/flooring/pool
+	name = "pool floor"
+	desc = "Sunken flooring designed to hold liquids."
+	icon = 'icons/turf/flooring/pool.dmi'
+	icon_base = "pool"
+	build_type = /obj/item/stack/tile/pool
+	flags = TURF_HAS_CORNERS | TURF_HAS_INNER_CORNERS | TURF_REMOVE_CROWBAR
+	footstep_type = /decl/footsteps/tiles
+	floor_smooth = SMOOTH_NONE
+	wall_smooth = SMOOTH_NONE
+	space_smooth = SMOOTH_NONE
+	height = -FLUID_OVER_MOB_HEAD * 2

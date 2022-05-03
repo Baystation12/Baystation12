@@ -22,8 +22,8 @@
 	desc = "It stores, sorts, and dispenses seeds."
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "seeds"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 100
 
 	var/list/datum/seed_pile/piles = list()
@@ -52,6 +52,7 @@
 	starting_seeds = list(
 		/obj/item/seeds/algaeseed = 15,
 		/obj/item/seeds/affelerin = 15,
+		/obj/item/seeds/amanitamycelium = 15,
 		/obj/item/seeds/ambrosiavulgarisseed = 15,
 		/obj/item/seeds/appleseed = 15,
 		/obj/item/seeds/bamboo = 15,
@@ -68,11 +69,7 @@
 		/obj/item/seeds/coconutseed = 15,
 		/obj/item/seeds/coffeeseed = 15,
 		/obj/item/seeds/cornseed = 15,
-		/obj/item/seeds/peanutseed = 15,
-		/obj/item/seeds/pearseed = 15,
-		/obj/item/seeds/replicapod = 15,
 		/obj/item/seeds/eggplantseed = 15,
-		/obj/item/seeds/amanitamycelium = 15,
 		/obj/item/seeds/garlicseed = 15,
 		/obj/item/seeds/glowshroom = 15,
 		/obj/item/seeds/grapeseed = 15,
@@ -84,6 +81,7 @@
 		/obj/item/seeds/iridast = 15,
 		/obj/item/seeds/lavenderseed = 15,
 		/obj/item/seeds/lemonseed = 15,
+		/obj/item/seeds/lettuceseed = 15,
 		/obj/item/seeds/libertymycelium = 15,
 		/obj/item/seeds/limeseed = 15,
 		/obj/item/seeds/melonseed = 15,
@@ -93,6 +91,8 @@
 		/obj/item/seeds/onionseed = 15,
 		/obj/item/seeds/orangeseed = 15,
 		/obj/item/seeds/pearseed = 15,
+		/obj/item/seeds/peanutseed = 15,
+		/obj/item/seeds/pearseed = 15,
 		/obj/item/seeds/peppercornseed = 15,
 		/obj/item/seeds/pineappleseed = 15,
 		/obj/item/seeds/plumpmycelium = 15,
@@ -100,6 +100,7 @@
 		/obj/item/seeds/potatoseed = 15,
 		/obj/item/seeds/pumpkinseed = 15,
 		/obj/item/seeds/reishimycelium = 15,
+		/obj/item/seeds/replicapod = 15,
 		/obj/item/seeds/riceseed = 15,
 		/obj/item/seeds/soyaseed = 15,
 		/obj/item/seeds/sugarcaneseed = 15,
@@ -146,6 +147,7 @@
 		/obj/item/seeds/kudzuseed = 15,
 		/obj/item/seeds/lavenderseed = 15,
 		/obj/item/seeds/lemonseed = 15,
+		/obj/item/seeds/lettuceseed = 15,
 		/obj/item/seeds/libertymycelium = 15,
 		/obj/item/seeds/limeseed = 15,
 		/obj/item/seeds/mtearseed = 15,
@@ -181,7 +183,7 @@
 		/obj/item/seeds/iridast = 15,
 		/obj/item/seeds/gummen = 15,
 		/obj/item/seeds/affelerin = 15,
-		/obj/item/seeds/random = 2
+		/obj/item/seeds/random = 5
 	)
 
 /obj/machinery/seed_storage/interface_interact(mob/user)
@@ -333,8 +335,8 @@
 		add(O)
 		user.visible_message("[user] puts \the [O.name] into \the [src].", "You put \the [O] into \the [src].")
 		return
-	else if (istype(O, /obj/item/weapon/storage/plants))
-		var/obj/item/weapon/storage/P = O
+	else if (istype(O, /obj/item/storage/plants))
+		var/obj/item/storage/P = O
 		var/loaded = 0
 		for(var/obj/item/seeds/G in P.contents)
 			++loaded
@@ -357,8 +359,8 @@
 			var/mob/user = O.loc
 			if(!user.unEquip(O, src))
 				return
-		else if(istype(O.loc,/obj/item/weapon/storage))
-			var/obj/item/weapon/storage/S = O.loc
+		else if(istype(O.loc,/obj/item/storage))
+			var/obj/item/storage/S = O.loc
 			S.remove_from_storage(O, src)
 
 	O.forceMove(src)

@@ -83,10 +83,23 @@
                 <b>Alert:</b>
             </div>
             <div class="itemContent">
-                {{:helper.link('None',                   'alert',     {'action' : 'setstatus', 'target' : 'image', 'image' : 'default'})}}
-                {{:helper.link('Current Security Level', 'alert',     {'action' : 'setstatus', 'target' : 'alert'})}}
-                {{:helper.link('Lockdown',               'caution',   {'action' : 'setstatus', 'target' : 'image', 'image' : 'lockdown'})}}
-                {{:helper.link('Biohazard',              'radiation', {'action' : 'setstatus', 'target' : 'image', 'image' : 'biohazard'})}}
+                {{:helper.link('EC Logo',                   'gear',          {'action' : 'setstatus', 'target' : 'image', 'image' : 'default'})}}
+                {{:helper.link('Current Security Level', 'alert',          {'action' : 'setstatus', 'target' : 'alert'})}}
+                {{:helper.link('EVA Ban',                'gear',           {'action' : 'setstatus', 'target' : 'image', 'image' : 'eva_ban'})}}
+                {{:helper.link('Lockdown',               'caution',        {'action' : 'setstatus', 'target' : 'image', 'image' : 'lockdown'})}}
+                {{:helper.link('Medical',                'first-aid',      {'action' : 'setstatus', 'target' : 'image', 'image' : 'medical'})}}
+				{{:helper.link('Biohazard',              'biohazard',      {'action' : 'setstatus', 'target' : 'image', 'image' : 'biohazard'})}}
+				{{:helper.link('Radiation',              'radiation',      {'action' : 'setstatus', 'target' : 'image', 'image' : 'radiation'})}}
+				{{:helper.link('Internals',              'head-side-mask', {'action' : 'setstatus', 'target' : 'image', 'image' : 'internals'})}}
+				{{:helper.link('Evacuation',             'alert',          {'action' : 'setstatus', 'target' : 'image', 'image' : 'evacuation'})}}
+            </div>
+        </div>
+		<div class="item">
+            <div class="itemLabel">
+                <b>Status Border:</b>
+            </div>
+            <div class="itemContent">
+                {{:helper.link('Toggle', 'alert', {'action' : 'toggle_alert_border'})}}
             </div>
             {{:helper.link('Back',                   null, {'action' : 'sw_menu', 'target' : 1})}}
         </div>

@@ -7,23 +7,25 @@
 	They receive their message from a server after the message has been logged.
 */
 
-var/list/recentmessages = list() // global list of recent messages broadcasted : used to circumvent massive radio spam
-var/message_delay = 0 // To make sure restarting the recentmessages list is kept in sync
+var/global/list/recentmessages = list() // global list of recent messages broadcasted : used to circumvent massive radio spam
+var/global/message_delay = 0 // To make sure restarting the recentmessages list is kept in sync
 
 /obj/machinery/telecomms/broadcaster
 	name = "Subspace Broadcaster"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "broadcaster"
 	desc = "A dish-shaped machine used to broadcast processed subspace signals."
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 25
 	machinetype = 5
 	produces_heat = 0
 	delay = 7
-	circuitboard = /obj/item/weapon/stock_parts/circuitboard/telecomms/broadcaster
+	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/broadcaster
 	base_type = /obj/machinery/telecomms/broadcaster
 	outage_probability = 10
+	machine_name = "subspace broadcaster"
+	machine_desc = "A high-powered broadcaster that sends subspace signals to all connected radio devices in the area. Part of a telecommunications network."
 
 /obj/machinery/telecomms/broadcaster/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 	// Don't broadcast rejected signals
@@ -116,14 +118,16 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "comm_server"
 	desc = "A compact machine used for portable subspace telecommuniations processing."
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	use_power = POWER_USE_OFF
 	idle_power_usage = 0
 	machinetype = 6
 	produces_heat = 0
-	circuitboard = /obj/item/weapon/stock_parts/circuitboard/telecomms/allinone
+	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/allinone
 	construct_state = /decl/machine_construction/tcomms/panel_closed/cannot_print
+	machine_name = "telecommunications mainframe"
+	machine_desc = "An awkward, clunky machine that serves as an all-in-one telecommunications hub. Provides peer-to-peer communication, and not much else."
 	var/listening_freqs
 	var/channel_color
 	var/channel_name
@@ -141,37 +145,69 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	if(is_freq_listening(signal)) // detect subspace signals
 
-		signal.data["done"] = 1 // mark the signal as being broadcasted
-		signal.data["compression"] = 0
+		if(freq_listening.len) //If we are actively listening to this frequency, go ahead and use the real signal
+			signal.data["done"] = 1 // mark the signal as being broadcasted
+			signal.data["compression"] = 0
 
-		// Search for the original signal and mark it as done as well
-		var/datum/signal/original = signal.data["original"]
-		if(original)
-			original.data["done"] = 1
+			// Search for the original signal and mark it as done as well
+			var/datum/signal/original = signal.data["original"]
+			if(original)
+				original.data["done"] = 1
 
-		if(signal.data["slow"] > 0)
-			sleep(signal.data["slow"]) // simulate the network lag if necessary
+			if(signal.data["slow"] > 0)
+				sleep(signal.data["slow"]) // simulate the network lag if necessary
 
-		/* ###### Broadcast a message using signal.data ###### */
+			/* ###### Broadcast a message using signal.data ###### */
 
-		var/datum/radio_frequency/connection = signal.data["connection"]
+			var/datum/radio_frequency/connection = signal.data["connection"]
 
-		if(connection.frequency in listening_freqs) // if antag broadcast, just
-			Broadcast_Message(signal.data["connection"], signal.data["mob"],
-							  signal.data["vmask"], signal.data["vmessage"],
-							  signal.data["radio"], signal.data["message"],
-							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"],, signal.data["compression"], list(0), connection.frequency,
-							  signal.data["verb"], signal.data["language"], channel_name ? channel_name : signal.data["channel_tag"], channel_color ? channel_color : signal.data["channel_color"])
-		else
-			if(intercept)
+			if(connection.frequency in listening_freqs) // if antag broadcast, just
 				Broadcast_Message(signal.data["connection"], signal.data["mob"],
-							  signal.data["vmask"], signal.data["vmessage"],
-							  signal.data["radio"], signal.data["message"],
-							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"], 3, signal.data["compression"], list(0), connection.frequency,
-							  signal.data["verb"], signal.data["language"], signal.data["channel_tag"], signal.data["channel_color"])
+								signal.data["vmask"], signal.data["vmessage"],
+								signal.data["radio"], signal.data["message"],
+								signal.data["name"], signal.data["job"],
+								signal.data["realname"], signal.data["vname"],, signal.data["compression"], list(0), connection.frequency,
+								signal.data["verb"], signal.data["language"], channel_name ? channel_name : signal.data["channel_tag"], channel_color ? channel_color : signal.data["channel_color"])
+			else
+				if(intercept)
+					Broadcast_Message(signal.data["connection"], signal.data["mob"],
+								signal.data["vmask"], signal.data["vmessage"],
+								signal.data["radio"], signal.data["message"],
+								signal.data["name"], signal.data["job"],
+								signal.data["realname"], signal.data["vname"], 3, signal.data["compression"], list(0), connection.frequency,
+								signal.data["verb"], signal.data["language"], signal.data["channel_tag"], signal.data["channel_color"])
 
+		else //If we are not actively listening and just pulling from every frequency, use a copy so that other telecomms networks aren't affected
+			var/datum/signal/copy = new
+			copy.transmission_method = 2
+			copy.frequency = signal.frequency
+			copy.data = signal.data.Copy()
+
+			copy.data["done"] = 1 // mark the signal as being broadcasted
+			copy.data["compression"] = 0
+
+			if(copy.data["slow"] > 0)
+				sleep(copy.data["slow"]) // simulate the network lag if necessary
+
+			/* ###### Broadcast a message using signal.data ###### */
+
+			var/datum/radio_frequency/connection = copy.data["connection"]
+
+			if(connection.frequency in listening_freqs) // if antag broadcast, just
+				Broadcast_Message(copy.data["connection"], copy.data["mob"],
+								copy.data["vmask"], copy.data["vmessage"],
+								copy.data["radio"], copy.data["message"],
+								copy.data["name"], copy.data["job"],
+								copy.data["realname"], copy.data["vname"],, copy.data["compression"], list(0), connection.frequency,
+								copy.data["verb"], copy.data["language"], channel_name ? channel_name : copy.data["channel_tag"], channel_color ? channel_color : copy.data["channel_color"])
+			else
+				if(intercept)
+					Broadcast_Message(copy.data["connection"], copy.data["mob"],
+								copy.data["vmask"], copy.data["vmessage"],
+								copy.data["radio"], copy.data["message"],
+								copy.data["name"], copy.data["job"],
+								copy.data["realname"], copy.data["vname"], 3, copy.data["compression"], list(0), connection.frequency,
+								copy.data["verb"], copy.data["language"], copy.data["channel_tag"], copy.data["channel_color"])
 
 
 /**

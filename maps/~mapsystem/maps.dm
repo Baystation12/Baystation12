@@ -1,8 +1,10 @@
+#define DEFAULT_GAME_YEAR_OFFSET 288
+
 GLOBAL_DATUM_INIT(using_map, /datum/map, new using_map_DATUM)
 GLOBAL_LIST_EMPTY(all_maps)
 
-var/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
-var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
+var/global/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
+var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /hook/startup/proc/initialise_map_list()
 	for(var/type in subtypesof(/datum/map))
@@ -31,6 +33,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/player_levels = list()  // Z-levels a character can typically reach
 	var/list/sealed_levels = list()  // Z-levels that don't allow random transit at edge
 	var/list/empty_levels = null     // Empty Z-levels that may be used for various things (currently used by bluespace jump)
+	var/list/escape_levels = list()  // Z-levels that when a player is in, are considered to have 'escaped' after evacuations.
 
 	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 
@@ -58,7 +61,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/company_short = "BM"
 	var/system_name = "Uncharted System"
 
-	var/map_admin_faxes = list()
+	var/list/map_admin_faxes = list()
 
 	var/shuttle_docked_message
 	var/shuttle_leaving_dock
@@ -88,8 +91,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/list/lobby_screens = list('icons/default_lobby.png')    // The list of lobby screen images to pick() from.
 	var/current_lobby_screen
-	var/music_track/lobby_track                     // The track that will play in the lobby screen.
-	var/list/lobby_tracks = list()                  // The list of lobby tracks to pick() from. If left unset will randomly select among all available /music_track subtypes.
+	var/decl/audio/track/lobby_track                     // The track that will play in the lobby screen.
+	var/list/lobby_tracks = list()                  // The list of lobby tracks to pick() from. If left unset will randomly select among all available decl/audio/track subtypes.
 	var/welcome_sound = 'sound/AI/welcome.ogg'		// Sound played on roundstart
 
 	var/default_law_type = /datum/ai_laws/nanotrasen  // The default lawset use by synth units, if not overriden by their laws var.
@@ -100,6 +103,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/num_exoplanets = 0
 	var/list/planet_size  //dimensions of planet zlevel, defaults to world size. Due to how maps are generated, must be (2^n+1) e.g. 17,33,65,129 etc. Map will just round up to those if set to anything other.
 	var/away_site_budget = 0
+	var/min_offmap_players = 0
 
 	var/list/loadout_blacklist	//list of types of loadout items that will not be pickable
 
@@ -115,6 +119,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/local_currency_name_singular = "thaler"
 	var/local_currency_name_short = "T"
 
+	var/game_year
+
 	var/list/available_cultural_info = list(
 		TAG_HOMEWORLD = list(
 			HOME_SYSTEM_MARS,
@@ -126,12 +132,13 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			HOME_SYSTEM_TAU_CETI,
 			HOME_SYSTEM_HELIOS,
 			HOME_SYSTEM_TERRA,
-			HOME_SYSTEM_TERSTEN,
-			HOME_SYSTEM_LORRIMAN,
-			HOME_SYSTEM_CINU,
-			HOME_SYSTEM_YUKLID,
-			HOME_SYSTEM_LORDANIA,
-			HOME_SYSTEM_KINGSTON,
+			HOME_SYSTEM_SAFFAR,
+			HOME_SYSTEM_PIRX,
+			HOME_SYSTEM_TADMOR,
+			HOME_SYSTEM_BRAHE,
+			HOME_SYSTEM_IOLAUS,
+			HOME_SYSTEM_FOSTER,
+			HOME_SYSTEM_CASTILLA,
 			HOME_SYSTEM_GAIA,
 			HOME_SYSTEM_MAGNITKA,
 			HOME_SYSTEM_OTHER
@@ -148,6 +155,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			FACTION_EXPEDITIONARY,
 			FACTION_FLEET,
 			FACTION_PCRC,
+			FACTION_SAARE,
 			FACTION_OTHER
 		),
 		TAG_CULTURE = list(
@@ -164,10 +172,12 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			CULTURE_HUMAN_SPACER,
 			CULTURE_HUMAN_SPAFRO,
 			CULTURE_HUMAN_CONFED,
+			CULTURE_HUMAN_GAIAN,
 			CULTURE_HUMAN_OTHER,
 			CULTURE_OTHER
 		),
 		TAG_RELIGION = list(
+			RELIGION_UNSTATED,
 			RELIGION_OTHER,
 			RELIGION_JUDAISM,
 			RELIGION_HINDUISM,
@@ -210,6 +220,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	// List of events specific to a map
 	var/list/map_event_container = list()
 
+	var/maint_all_access = FALSE
+
 /datum/map/New()
 	if(!map_levels)
 		map_levels = station_levels.Copy()
@@ -222,14 +234,24 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
 	current_lobby_screen = pick(lobby_screens)
+	game_year = text2num(time2text(world.timeofday, "YYYY")) + DEFAULT_GAME_YEAR_OFFSET
 
-/datum/map/proc/get_lobby_track(var/exclude)
-	var/lobby_track_type
-	if(lobby_tracks.len)
-		lobby_track_type = pickweight(lobby_tracks - exclude)
+
+/datum/map/proc/get_lobby_track(banned)
+	var/path = /decl/audio/track/absconditus
+	var/count = length(lobby_tracks)
+	if (count != 1)
+		var/allowed
+		if (count > 1)
+			allowed = lobby_tracks - banned
+		if (!length(allowed))
+			allowed = subtypesof(/decl/audio/track) - banned
+		if (length(allowed))
+			path = pickweight(allowed)
 	else
-		lobby_track_type = pick(subtypesof(/music_track) - exclude)
-	return decls_repository.get_decl(lobby_track_type)
+		path = lobby_tracks[1]
+	return decls_repository.get_decl(path)
+
 
 /datum/map/proc/setup_config(name, value, filename)
 	switch (name)
@@ -261,6 +283,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		if ("local_currency_name") local_currency_name = value
 		if ("local_currency_name_singular") local_currency_name_singular = value
 		if ("local_currency_name_short") local_currency_name_short = value
+		if ("game_year_offset") game_year = text2num(time2text(world.timeofday, "YYYY")) + text2num_or_default(value, DEFAULT_GAME_YEAR_OFFSET)
+		if ("min_offmap_players") min_offmap_players = text2num_or_default(value, min_offmap_players)
 		else log_misc("Unknown setting [name] in [filename].")
 
 /datum/map/proc/setup_map()
@@ -283,17 +307,21 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /* It is perfectly possible to create loops with TEMPLATE_FLAG_ALLOW_DUPLICATES and force/allow. Don't. */
 /proc/resolve_site_selection(datum/map_template/ruin/away_site/site, list/selected, list/available, list/unavailable, list/by_type)
-	var/cost = 0
+	var/spawn_cost = 0
+	var/player_cost = 0
 	if (site in selected)
 		if (!(site.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
-			return cost
+			return list(spawn_cost, player_cost)
 	if (!(site.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
 		available -= site
-	cost += site.cost
+	spawn_cost += site.spawn_cost
+	player_cost += site.player_cost
 	selected += site
 
 	for (var/forced_type in site.force_ruins)
-		cost += resolve_site_selection(by_type[forced_type], selected, available, unavailable, by_type)
+		var/list/costs = resolve_site_selection(by_type[forced_type], selected, available, unavailable, by_type)
+		spawn_cost += costs[1]
+		player_cost += costs[2]
 
 	for (var/banned_type in site.ban_ruins)
 		var/datum/map_template/ruin/away_site/banned = by_type[banned_type]
@@ -313,7 +341,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 				continue
 		available[allowed] = allowed.spawn_weight
 
-	return cost
+	return list(spawn_cost, player_cost)
 
 
 /datum/map/proc/build_away_sites()
@@ -339,19 +367,27 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			available[site] = site.spawn_weight
 		by_type[site.type] = site
 
-	var/budget = away_site_budget
-	for (var/datum/map_template/ruin/away_site/site in guaranteed)
-		budget -= resolve_site_selection(site, selected, available, unavailable, by_type)
+	var/points = away_site_budget
+	var/players = -min_offmap_players
+	for (var/client/C)
+		++players
 
-	while (budget > 0 && length(available))
+	for (var/datum/map_template/ruin/away_site/site in guaranteed)
+		var/list/costs = resolve_site_selection(site, selected, available, unavailable, by_type)
+		points -= costs[1]
+		players -= costs[2]
+
+	while (points > 0 && length(available))
 		var/datum/map_template/ruin/away_site/site = pickweight(available)
-		if (site.cost > budget)
+		if (site.spawn_cost && site.spawn_cost > points || site.player_cost && site.player_cost > players)
 			unavailable += site
 			available -= site
 			continue
-		budget -= resolve_site_selection(site, selected, available, unavailable, by_type)
+		var/list/costs = resolve_site_selection(site, selected, available, unavailable, by_type)
+		points -= costs[1]
+		players -= costs[2]
 
-	report_progress("Finished selecting away sites ([english_list(selected)]) for [away_site_budget - budget] cost of [away_site_budget] budget.")
+	report_progress("Finished selecting away sites ([english_list(selected)]) for [away_site_budget - points] cost of [away_site_budget] budget.")
 
 	for (var/datum/map_template/template in selected)
 		if (template.load_new_z())
@@ -397,14 +433,15 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/get_empty_zlevel()
 	if(empty_levels == null)
-		world.maxz++
+		INCREMENT_WORLD_Z_SIZE
 		empty_levels = list(world.maxz)
 	return pick(empty_levels)
 
 
 /datum/map/proc/setup_economy()
-	news_network.CreateFeedChannel("Nyx Daily", "SolGov Minister of Information", 1, 1)
-	news_network.CreateFeedChannel("The Gibson Gazette", "Editor Mike Hammers", 1, 1)
+	for (var/datum/feed_network/N in news_network)
+		N.CreateFeedChannel("Nyx Daily", "SolGov Minister of Information", 1, 1)
+		N.CreateFeedChannel("The Gibson Gazette", "Editor Mike Hammers", 1, 1)
 
 	for(var/loc_type in typesof(/datum/trade_destination) - /datum/trade_destination)
 		var/datum/trade_destination/D = new loc_type
@@ -440,11 +477,11 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	return // overriden by torch
 
 /datum/map/proc/make_maint_all_access(var/radstorm = 0) // parameter used by torch
-	maint_all_access = 1
+	maint_all_access = TRUE
 	priority_announcement.Announce("The maintenance access requirement has been revoked on all maintenance airlocks.", "Attention!")
 
 /datum/map/proc/revoke_maint_all_access(var/radstorm = 0) // parameter used by torch
-	maint_all_access = 0
+	maint_all_access = FALSE
 	priority_announcement.Announce("The maintenance access requirement has been readded on all maintenance airlocks.", "Attention!")
 
 // Access check is of the type requires one. These have been carefully selected to avoid allowing the janitor to see channels he shouldn't
@@ -464,11 +501,12 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		num2text(SCI_FREQ)   = list(access_tox,access_robotics,access_xenobiology),
 		num2text(SUP_FREQ)   = list(access_cargo),
 		num2text(SRV_FREQ)   = list(access_janitor, access_hydroponics),
+		num2text(HAIL_FREQ)  = list(),
 	)
 
 /datum/map/proc/show_titlescreen(client/C)
 	winset(C, "lobbybrowser", "is-disabled=false;is-visible=true")
-	
+
 	show_browser(C, current_lobby_screen, "file=titlescreen.png;display=0")
 	show_browser(C, file('html/lobby_titlescreen.html'), "window=lobbybrowser")
 
@@ -476,3 +514,83 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(C.mob) // Check if the client is still connected to something
 		// Hide title screen, allowing player to see the map
 		winset(C, "lobbybrowser", "is-disabled=true;is-visible=false")
+
+/datum/map/proc/roundend_player_status()
+	for(var/mob/Player in GLOB.player_list)
+		if(Player.mind && !isnewplayer(Player))
+			if(Player.stat != DEAD)
+				var/turf/playerTurf = get_turf(Player)
+				if(evacuation_controller.round_over() && evacuation_controller.emergency_evacuation)
+					if(isStationLevel(playerTurf.z))
+						to_chat(Player, "<span class='info'><b>You managed to survive, but were left behind on [station_name()] as [Player.real_name]...</b></span>")
+					else if (isEscapeLevel(playerTurf.z))
+						to_chat(Player, "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></font>")
+					else
+						to_chat(Player, "<span class='info'><b>You managed to survive, but were lost far from [station_name()] as [Player.real_name]...</b></span>")
+				else if(isAdminLevel(playerTurf.z))
+					to_chat(Player, "<font color='green'><b>You successfully underwent crew transfer after events on [station_name()] as [Player.real_name].</b></font>")
+				else if(issilicon(Player))
+					to_chat(Player, "<font color='green'><b>You remain operational after the events on [station_name()] as [Player.real_name].</b></font>")
+				else if (isNotStationLevel(playerTurf.z))
+					to_chat(Player, "<span class='info'><b>You managed to survive, but were lost far from [station_name()] as [Player.real_name]...</b></span>")
+				else
+					to_chat(Player, "<span class='info'><b>You got through just another workday on [station_name()] as [Player.real_name].</b></span>")
+			else
+				if(isghost(Player))
+					var/mob/observer/ghost/O = Player
+					if(!O.started_as_observer)
+						to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
+				else
+					to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
+
+/datum/map/proc/roundend_statistics()
+	var/data = list()
+	data["clients"] = 0
+	data["surviving_humans"] = 0
+	data["surviving_total"] = 0 //required field for roundend webhook!
+	data["ghosts"] = 0 //required field for roundend webhook!
+	data["escaped_humans"] = 0
+	data["escaped_total"] = 0
+	data["left_behind_total"] = 0 //players who didnt escape and aren't on the station.
+	data["offship_players"] = 0
+
+	for(var/mob/M in GLOB.player_list)
+		if(M.client)
+			data["clients"]++
+			if(M.stat != DEAD)
+				if (get_crewmember_record(M.real_name || M.name))
+					data["surviving_total"]++
+					if(ishuman(M))
+						data["surviving_humans"]++
+					var/area/A = get_area(M)
+					if(A && (istype(A, /area/shuttle) && isEscapeLevel(A.z)))
+						data["escaped_total"]++
+						if(ishuman(M))
+							data["escaped_humans"]++
+					if (evacuation_controller.emergency_evacuation && !isEscapeLevel(A.z)) //left behind after evac
+						data["left_behind_total"]++
+					if (!evacuation_controller.emergency_evacuation && isNotStationLevel(A.z))
+						data["left_behind_total"]++
+				else
+					data["offship_players"]++
+			else if(isghost(M))
+				data["ghosts"]++
+	return data
+
+/datum/map/proc/roundend_summary(list/data)
+	var/desc
+	if(data["surviving_total"] > 0)
+		var/survivors = data["surviving_total"]
+		var/escaped_total = data["escaped_total"]
+		var/ghosts = data["ghosts"]
+		var/offship_players = data["offship_players"]
+
+		desc += "There [survivors>1 ? "were <b>[survivors] survivors</b>" : "was <b>one survivor</b>"]"
+		desc += " (<b>[escaped_total>0 ? escaped_total : "none"] escaped</b>), <b>[offship_players] off-ship player(s)."
+		data += " and <b>[ghosts] ghosts</b>.</b><br>"
+	else
+		desc += "There were <b>no survivors</b>, <b>[data["offship_players"]] off-ship player(s)</b>, (<b>[data["ghosts"]] ghosts</b>)."
+
+	return desc
+
+#undef DEFAULT_GAME_YEAR_OFFSET

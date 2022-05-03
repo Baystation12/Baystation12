@@ -3,7 +3,7 @@
 	desc = "A hefty wooden crate."
 	icon = 'icons/obj/shipping_crates.dmi'
 	icon_state = "densecrate"
-	density = 1
+	density = TRUE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 
 /obj/structure/largecrate/Initialize()
@@ -17,7 +17,7 @@
 	to_chat(user, "<span class='notice'>You need a crowbar to pry this open!</span>")
 	return
 
-/obj/structure/largecrate/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/largecrate/attackby(obj/item/W as obj, mob/user as mob)
 	if(isCrowbar(W))
 		new /obj/item/stack/material/wood(src)
 		var/turf/T = get_turf(src)
@@ -50,11 +50,11 @@
 
 /obj/structure/largecrate/animal/corgi
 	name = "corgi carrier"
-	held_type = /mob/living/simple_animal/corgi
+	held_type = /mob/living/simple_animal/passive/corgi
 
 /obj/structure/largecrate/animal/cow
 	name = "cow crate"
-	held_type = /mob/living/simple_animal/cow
+	held_type = /mob/living/simple_animal/passive/cow
 
 /obj/structure/largecrate/animal/goat
 	name = "goat crate"
@@ -66,12 +66,12 @@
 
 /obj/structure/largecrate/animal/cat
 	name = "cat carrier"
-	held_type = /mob/living/simple_animal/cat
+	held_type = /mob/living/simple_animal/passive/cat
 
 /obj/structure/largecrate/animal/cat/bones
-	held_type = /mob/living/simple_animal/cat/fluff/bones
+	held_type = /mob/living/simple_animal/passive/cat/fluff/bones
 
 /obj/structure/largecrate/animal/chick
 	name = "chicken crate"
 	held_count = 5
-	held_type = /mob/living/simple_animal/chick
+	held_type = /mob/living/simple_animal/passive/chick

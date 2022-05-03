@@ -28,6 +28,7 @@
 	closed_layer = ABOVE_WINDOW_LAYER
 	dir = 1
 	explosion_resistance = 25
+	atom_flags = ATOM_FLAG_ADJACENT_EXCEPTION
 
 	//Most blast doors are infrequently toggled and sometimes used with regular doors anyways,
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
@@ -39,8 +40,8 @@
 	pry_mod = 1.35
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/radio/receiver,
-		/obj/item/weapon/stock_parts/power/apc
+		/obj/item/stock_parts/radio/receiver,
+		/obj/item/stock_parts/power/apc
 	)
 	// To be fleshed out and moved to parent door, but staying minimal for now.
 	public_methods = list(
@@ -138,20 +139,18 @@
 // Parameters: 2 (C - Item this object was clicked with, user - Mob which clicked this object)
 // Description: If we are clicked with crowbar or wielded fire axe, try to manually open the door.
 // This only works on broken doors or doors without power. Also allows repair with Plasteel.
-/obj/machinery/door/blast/attackby(obj/item/weapon/C as obj, mob/user as mob)
+/obj/machinery/door/blast/attackby(obj/item/C as obj, mob/user as mob)
 	add_fingerprint(user, 0, C)
-	if(isCrowbar(C) || (istype(C, /obj/item/weapon/material/twohanded/fireaxe) && C:wielded == 1))
+	if(isCrowbar(C) || (istype(C, /obj/item/material/twohanded/fireaxe) && C:wielded == 1))
 		if(((stat & NOPOWER) || (stat & BROKEN)) && !( operating ))
 			to_chat(user, "<span class='notice'>You begin prying at \the [src]...</span>")
-			if(do_after(user, 2 SECONDS, src))
+			if(do_after(user, 2 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				force_toggle()
-			else
-				to_chat(user, "<span class='warning'>You must remain still while working on \the [src].</span>")
 		else
 			to_chat(user, "<span class='notice'>[src]'s motors resist your effort.</span>")
 		return
 	if(istype(C, /obj/item/stack/material) && C.get_material_name() == MATERIAL_PLASTEEL)
-		var/amt = Ceiling((maxhealth - health)/150)
+		var/amt = Ceil((maxhealth - health)/150)
 		if(!amt)
 			to_chat(user, "<span class='notice'>\The [src] is already fully functional.</span>")
 			return
@@ -160,7 +159,7 @@
 			to_chat(user, "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>")
 			return
 		to_chat(user, "<span class='notice'>You begin repairing \the [src]...</span>")
-		if(do_after(user, 5 SECONDS, src))
+		if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if(P.use(amt))
 				to_chat(user, "<span class='notice'>You have repaired \the [src].</span>")
 				repair()
@@ -208,6 +207,9 @@
 /obj/machinery/door/blast/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group) return 1
 	return ..()
+
+/obj/machinery/door/blast/do_simple_ranged_interaction(var/mob/user)
+	return TRUE
 
 // Used with mass drivers to time the close.
 /obj/machinery/door/blast/proc/delayed_close()
@@ -267,8 +269,8 @@
 /obj/machinery/door/blast/regular/escape_pod
 	name = "Escape Pod release Door"
 
-/obj/machinery/door/blast/regular/escape_pod/Process()	
-	if(evacuation_controller.emergency_evacuation && evacuation_controller.state >= EVAC_LAUNCHING && src.icon_state == icon_state_closed)		
+/obj/machinery/door/blast/regular/escape_pod/Process()
+	if(evacuation_controller.emergency_evacuation && evacuation_controller.state >= EVAC_LAUNCHING && src.icon_state == icon_state_closed)
 		src.force_open()
 	. = ..()
 
@@ -299,3 +301,8 @@
 
 /obj/machinery/door/blast/shutters/open
 	begins_closed = FALSE
+
+/obj/machinery/door/blast/shutters/attack_generic(var/mob/user, var/damage)
+	if(stat & BROKEN)
+		qdel(src)
+	..()

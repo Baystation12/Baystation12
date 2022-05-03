@@ -14,11 +14,11 @@
 	weight = 14
 	brute_armor = 1
 	burn_armor = 2
-	door_icon_base = "stone"
 	table_icon_base = "solid"
 	destruction_desc = "shatters"
 	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 5)
 	hitsound = 'sound/effects/Glasshit.ogg'
+	dooropen_noise = 'sound/machines/windowdoor.ogg'
 	conductive = 0
 	sale_price = 1
 	value = 4

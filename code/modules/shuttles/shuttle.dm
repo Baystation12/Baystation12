@@ -82,7 +82,7 @@
 		playsound(current_location, sound_takeoff, 100, 20, 0.2)
 	spawn(warmup_time*10)
 		if (moving_status == SHUTTLE_IDLE)
-			return FALSE	//someone cancelled the launch
+			return //someone cancelled the launch
 
 		if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
 			var/datum/shuttle/autodock/S = src
@@ -102,6 +102,13 @@
 	moving_status = SHUTTLE_WARMUP
 	if(sound_takeoff)
 		playsound(current_location, sound_takeoff, 100, 20, 0.2)
+		if (!istype(start_location.base_area, /area/space))
+			var/area/A = get_area(start_location)
+
+			for (var/mob/M in GLOB.player_list)
+				if (M.client && M.z == A.z && !istype(get_turf(M), /turf/space) && !(get_area(M) in src.shuttle_area))
+					to_chat(M, SPAN_NOTICE("The rumble of engines are heard as a shuttle lifts off."))
+
 	spawn(warmup_time*10)
 		if(moving_status == SHUTTLE_IDLE)
 			return	//someone cancelled the launch
@@ -120,6 +127,13 @@
 				if(!fwooshed && (arrive_time - world.time) < 100)
 					fwooshed = 1
 					playsound(destination, sound_landing, 100, 0, 7)
+					if (!istype(destination.base_area, /area/space))
+						var/area/A = get_area(destination)
+
+						for (var/mob/M in GLOB.player_list)
+							if (M.client && M.z == A.z && !istype(get_turf(M), /turf/space) && !(get_area(M) in src.shuttle_area))
+								to_chat(M, SPAN_NOTICE("The rumble of a shuttle's engines fill the area as a ship manuevers in for a landing."))
+
 				sleep(5)
 			if(!attempt_move(destination))
 				attempt_move(start_location) //try to go back to where we started. If that fails, I guess we're stuck in the interim location
@@ -175,16 +189,9 @@
 		var/turf/dst_turf = turf_translation[src_turf]
 		if(src_turf.is_solid_structure()) //in case someone put a hole in the shuttle and you were lucky enough to be under it
 			for(var/atom/movable/AM in dst_turf)
-				if(AM.movable_flags & MOVABLE_FLAG_DEL_SHUTTLE)
-					qdel(AM)
-					continue
 				if(!AM.simulated)
 					continue
-				if(isliving(AM))
-					var/mob/living/bug = AM
-					bug.gib()
-				else
-					qdel(AM) //it just gets atomized I guess? TODO throw it into space somewhere, prevents people from using shuttles as an atom-smasher
+				AM.shuttle_land_on()
 	var/list/powernets = list()
 	for(var/area/A in shuttle_area)
 		// if there was a zlevel above our origin, erase our ceiling now we're leaving
@@ -243,6 +250,13 @@
 				mothership.shuttle_area |= shuttle_area
 			else
 				mothership.shuttle_area -= shuttle_area
+
+/// Handler for shuttles landing on atoms. Called by `shuttle_moved()`.
+/atom/movable/proc/shuttle_land_on()
+	qdel(src)
+
+/mob/living/shuttle_land_on()
+	gib()
 
 //returns 1 if the shuttle has a valid arrive time
 /datum/shuttle/proc/has_arrive_time()

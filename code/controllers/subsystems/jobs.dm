@@ -1,14 +1,18 @@
-var/const/ENG               =(1<<0)
-var/const/SEC               =(1<<1)
-var/const/MED               =(1<<2)
-var/const/SCI               =(1<<3)
-var/const/CIV               =(1<<4)
-var/const/COM               =(1<<5)
-var/const/MSC               =(1<<6)
-var/const/SRV               =(1<<7)
-var/const/SUP               =(1<<8)
-var/const/SPT               =(1<<9)
-var/const/EXP               =(1<<10)
+var/global/const/ENG = FLAG(0)
+var/global/const/SEC = FLAG(1)
+var/global/const/MED = FLAG(2)
+var/global/const/SCI = FLAG(3)
+var/global/const/CIV = FLAG(4)
+var/global/const/COM = FLAG(5)
+var/global/const/MSC = FLAG(6)
+var/global/const/SRV = FLAG(7)
+var/global/const/SUP = FLAG(8)
+var/global/const/SPT = FLAG(9)
+var/global/const/EXP = FLAG(10)
+var/global/const/ROB = FLAG(11)
+
+GLOBAL_VAR(antag_code_phrase)
+GLOBAL_VAR(antag_code_response)
 
 SUBSYSTEM_DEF(jobs)
 	name = "Jobs"
@@ -23,9 +27,13 @@ SUBSYSTEM_DEF(jobs)
 	var/list/unassigned_roundstart =   list()
 	var/list/positions_by_department = list()
 	var/list/job_icons =               list()
-	var/job_config_file = "config/jobs.txt"
 
-/datum/controller/subsystem/jobs/Initialize(timeofday)
+
+/datum/controller/subsystem/jobs/UpdateStat(time)
+	return
+
+
+/datum/controller/subsystem/jobs/Initialize(start_uptime)
 
 	// Create main map jobs.
 	primary_job_datums.Cut()
@@ -48,28 +56,6 @@ SUBSYSTEM_DEF(jobs)
 				job = get_by_path(jobtype)
 			if(job)
 				archetype_job_datums |= job
-
-	// Load job configuration (is this even used anymore?)
-	if(job_config_file && config.load_jobs_from_txt)
-		var/list/jobEntries = file2list(job_config_file)
-		for(var/job in jobEntries)
-			if(!job)
-				continue
-			job = trim(job)
-			if(!length(job))
-				continue
-			var/pos = findtext(job, "=")
-			if(pos)
-				continue
-			var/name = copytext(job, 1, pos)
-			var/value = copytext(job, pos + 1)
-			if(name && value)
-				var/datum/job/J = get_by_title(name)
-				if(J)
-					J.total_positions = text2num(value)
-					J.spawn_positions = text2num(value)
-					if(name == "AI" || name == "Robot")//I dont like this here but it will do for now
-						J.total_positions = 0
 
 	// Init skills.
 	if(!GLOB.skills.len)
@@ -111,15 +97,16 @@ SUBSYSTEM_DEF(jobs)
 				for (var/I in 1 to GLOB.bitflags.len)
 					if(job.department_flag & GLOB.bitflags[I])
 						LAZYDISTINCTADD(positions_by_department["[GLOB.bitflags[I]]"], job.title)
+						if (length(job.alt_titles))
+							LAZYDISTINCTADD(positions_by_department["[GLOB.bitflags[I]]"], job.alt_titles)
 
 	// Set up syndicate phrases.
-	syndicate_code_phrase = generate_code_phrase()
-	syndicate_code_response	= generate_code_phrase()
+	GLOB.antag_code_phrase = generate_code_phrase()
+	GLOB.antag_code_response = generate_code_phrase()
 
 	// Set up AI spawn locations
 	spawn_empty_ai()
 
-	. = ..()
 
 /datum/controller/subsystem/jobs/proc/guest_jobbans(var/job)
 	for(var/dept in list(COM, MSC, SEC))
@@ -181,7 +168,7 @@ SUBSYSTEM_DEF(jobs)
 	if(airstatus || radlevel > 0)
 		var/reply = alert(spawner, "Warning. Your selected spawn location seems to have unfavorable conditions. \
 		You may die shortly after spawning. \
-		Spawn anyway? More information: [airstatus] Radiation: [radlevel] Roentgen", "Atmosphere warning", "Abort", "Spawn anyway")
+		Spawn anyway? More information: [airstatus] Radiation: [radlevel] IU/s", "Atmosphere warning", "Abort", "Spawn anyway")
 		if(reply == "Abort")
 			return FALSE
 		else
@@ -303,11 +290,6 @@ SUBSYSTEM_DEF(jobs)
  *  This proc must not have any side effect besides of modifying "assigned_role".
  **/
 /datum/controller/subsystem/jobs/proc/divide_occupations(datum/game_mode/mode)
-	if(GLOB.triai)
-		for(var/datum/job/A in primary_job_datums)
-			if(A.title == "AI")
-				A.spawn_positions = 3
-				break
 	//Get the players who are ready
 	for(var/mob/new_player/player in GLOB.player_list)
 		if(player.ready && player.mind && !player.mind.assigned_role)
@@ -341,7 +323,7 @@ SUBSYSTEM_DEF(jobs)
 		for(var/mob/new_player/player in unassigned_roundstart)
 			// Loop through all jobs
 			for(var/datum/job/job in shuffledoccupations) // SHUFFLE ME BABY
-				if(job && !mode.disabled_jobs.Find(job.title) )
+				if(job && !list_find(mode.disabled_jobs, job.title))
 					if(job.defer_roundstart_spawn)
 						deferred_jobs[job] = TRUE
 					else if(attempt_role_assignment(player, job, level, mode))
@@ -366,7 +348,7 @@ SUBSYSTEM_DEF(jobs)
 		if(player.client.prefs.alternate_option == BE_ASSISTANT)
 			var/datum/job/ass = DEFAULT_JOB_TYPE
 			if((GLOB.using_map.flags & MAP_HAS_BRANCH) && player.client.prefs.branches[initial(ass.title)])
-				var/datum/mil_branch/branch = mil_branches.get_branch(player.client.prefs.branches[initial(ass.title)])
+				var/datum/mil_branch/branch = GLOB.mil_branches.get_branch(player.client.prefs.branches[initial(ass.title)])
 				ass = branch.assistant_job
 			assign_role(player, initial(ass.title), mode = mode)
 	//For ones returning to lobby
@@ -457,9 +439,9 @@ SUBSYSTEM_DEF(jobs)
 	if(job)
 		if(H.client)
 			if(GLOB.using_map.flags & MAP_HAS_BRANCH)
-				H.char_branch = mil_branches.get_branch(H.client.prefs.branches[rank])
+				H.char_branch = GLOB.mil_branches.get_branch(H.client.prefs.branches[rank])
 			if(GLOB.using_map.flags & MAP_HAS_RANK)
-				H.char_rank = mil_branches.get_rank(H.client.prefs.branches[rank], H.client.prefs.ranks[rank])
+				H.char_rank = GLOB.mil_branches.get_rank(H.client.prefs.branches[rank], H.client.prefs.ranks[rank])
 
 		// Transfers the skill settings for the job to the mob
 		H.skillset.obtain_from_client(job, H.client)
@@ -470,13 +452,19 @@ SUBSYSTEM_DEF(jobs)
 		// EMAIL GENERATION
 		if(rank != "Robot" && rank != "AI")		//These guys get their emails later.
 			var/domain
+			var/addr = H.real_name
+			var/pass
 			if(H.char_branch)
 				if(H.char_branch.email_domain)
 					domain = H.char_branch.email_domain
+				if (H.char_branch.allow_custom_email && H.client.prefs.email_addr)
+					addr = H.client.prefs.email_addr
 			else
 				domain = "freemail.net"
+			if (H.client.prefs.email_pass)
+				pass = H.client.prefs.email_pass
 			if(domain)
-				ntnet_global.create_email(H, H.real_name, domain, rank)
+				ntnet_global.create_email(H, addr, domain, rank, pass)
 		// END EMAIL GENERATION
 
 		job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)
@@ -556,16 +544,12 @@ SUBSYSTEM_DEF(jobs)
 	if(job.req_admin_notify)
 		to_chat(H, "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>")
 
-	//Gives glasses to the vision impaired
-	if(H.disabilities & NEARSIGHTED)
-		var/equipped = H.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(H), slot_glasses)
-		if(equipped)
-			var/obj/item/clothing/glasses/G = H.glasses
-			G.prescription = 7
+	if (H.disabilities & NEARSIGHTED) //Try to give glasses to the vision impaired
+		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(H), slot_glasses)
 
-	BITSET(H.hud_updateflag, ID_HUD)
-	BITSET(H.hud_updateflag, IMPLOYAL_HUD)
-	BITSET(H.hud_updateflag, SPECIALROLE_HUD)
+	SET_BIT(H.hud_updateflag, ID_HUD)
+	SET_BIT(H.hud_updateflag, IMPLOYAL_HUD)
+	SET_BIT(H.hud_updateflag, SPECIALROLE_HUD)
 
 	job.post_equip_rank(H, alt_title || rank)
 

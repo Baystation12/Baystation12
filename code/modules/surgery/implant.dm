@@ -16,7 +16,7 @@
 	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, scraping around inside [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, scraping around inside [target]'s [affected.name] with \the [tool]!</span>")
-	affected.take_external_damage(20, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+	affected.take_external_damage(20, 0, (DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE), used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
 //	 create implant space surgery step
@@ -24,8 +24,8 @@
 /decl/surgery_step/cavity/make_space
 	name = "Hollow out cavity"
 	allowed_tools = list(
-		/obj/item/weapon/surgicaldrill = 100,
-		/obj/item/weapon/pen = 75,
+		/obj/item/surgicaldrill = 100,
+		/obj/item/pen = 75,
 		/obj/item/stack/material/rods = 50
 	)
 	min_duration = 60
@@ -55,10 +55,10 @@
 /decl/surgery_step/cavity/close_space
 	name = "Close cavity"
 	allowed_tools = list(
-		/obj/item/weapon/cautery = 100,
+		/obj/item/cautery = 100,
 		/obj/item/clothing/mask/smokable/cigarette = 75,
-		/obj/item/weapon/flame/lighter = 50,
-		/obj/item/weapon/weldingtool = 25
+		/obj/item/flame/lighter = 50,
+		/obj/item/weldingtool = 25
 	)
 	min_duration = 60
 	max_duration = 80
@@ -109,7 +109,7 @@
 			return FALSE
 		var/total_volume = tool.get_storage_cost()
 		for(var/obj/item/I in affected.implants)
-			if(istype(I,/obj/item/weapon/implant))
+			if(istype(I,/obj/item/implant))
 				continue
 			total_volume += I.get_storage_cost()
 		if(total_volume > max_volume)
@@ -143,9 +143,9 @@
 /decl/surgery_step/cavity/implant_removal
 	name = "Remove foreign body"
 	allowed_tools = list(
-		/obj/item/weapon/hemostat = 100,
-		/obj/item/weapon/wirecutters = 75,
-		/obj/item/weapon/material/kitchen/utensil/fork = 20
+		/obj/item/hemostat = 100,
+		/obj/item/wirecutters = 75,
+		/obj/item/material/kitchen/utensil/fork = 20
 	)
 	min_duration = 80
 	max_duration = 100
@@ -187,8 +187,8 @@
 
 		var/obj/item/obj = pick(loot)
 
-		if(istype(obj,/obj/item/weapon/implant))
-			var/obj/item/weapon/implant/imp = obj
+		if(istype(obj,/obj/item/implant))
+			var/obj/item/implant/imp = obj
 			if (imp.islegal())
 				find_prob +=60
 			else
@@ -201,7 +201,7 @@
 			"<span class='notice'>You take \the [obj] out of incision on \the [target]'s [affected.name] with \the [tool].</span>" )
 			target.remove_implant(obj, TRUE, affected)
 
-			BITSET(target.hud_updateflag, IMPLOYAL_HUD)
+			SET_BIT(target.hud_updateflag, IMPLOYAL_HUD)
 
 			//Handle possessive brain borers.
 			if(istype(obj,/mob/living/simple_animal/borer))
@@ -223,7 +223,7 @@
 /decl/surgery_step/cavity/implant_removal/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	..()
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	for(var/obj/item/weapon/implant/imp in affected.implants)
+	for(var/obj/item/implant/imp in affected.implants)
 		var/fail_prob = 10
 		fail_prob += 100 - tool_quality(tool)
 		if (prob(fail_prob))
@@ -231,4 +231,3 @@
 			playsound(imp.loc, 'sound/items/countdown.ogg', 75, 1, -3)
 			spawn(25)
 				imp.activate()
-

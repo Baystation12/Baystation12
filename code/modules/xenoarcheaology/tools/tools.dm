@@ -1,7 +1,7 @@
 /obj/item/device/gps
 	name = "relay positioning device"
 	desc = "Triangulates the approximate co-ordinates using a nearby satellite network."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/locator.dmi'
 	icon_state = "locator"
 	item_state = "locator"
 	origin_tech = list(TECH_MATERIAL = 2, TECH_DATA = 2, TECH_BLUESPACE = 2)
@@ -9,7 +9,7 @@
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/device/gps/attack_self(var/mob/user as mob)
-	to_chat(user, "<span class='notice'>\icon[src] \The [src] flashes <i>[get_coordinates()]</i>.</span>")
+	to_chat(user, "<span class='notice'>[icon2html(src, user)] \The [src] flashes <i>[get_coordinates()]</i>.</span>")
 
 /obj/item/device/gps/examine(mob/user)
 	. = ..()
@@ -26,6 +26,13 @@
 		if(L)
 			stat("Coordinates:", "[L.get_coordinates()]")
 
+/mob/living/silicon/robot/Stat()
+	. = ..()
+	if(statpanel("Status") && (istype(module_state_1, /obj/item/device/gps) || istype(module_state_2, /obj/item/device/gps) || istype(module_state_3, /obj/item/device/gps)))
+		var/obj/item/device/gps/L = locate() in src
+		if(L)
+			stat("Coordinates:", "[L.get_coordinates()]")
+
 /obj/item/device/measuring_tape
 	name = "measuring tape"
 	desc = "A coiled metallic tape used to check dimensions and lengths."
@@ -35,7 +42,7 @@
 	matter = list(MATERIAL_STEEL = 100)
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/weapon/storage/bag/fossils
+/obj/item/storage/bag/fossils
 	name = "fossil satchel"
 	desc = "Transports delicate fossils in suspension so they don't break during transit."
 	icon = 'icons/obj/mining.dmi'
@@ -45,16 +52,16 @@
 	storage_slots = 50
 	max_storage_space = 200
 	max_w_class = ITEM_SIZE_NORMAL
-	can_hold = list(/obj/item/weapon/fossil)
+	can_hold = list(/obj/item/fossil)
 
-/obj/item/weapon/storage/box/samplebags
+/obj/item/storage/box/samplebags
 	name = "sample bag box"
 	desc = "A box claiming to contain sample bags."
 
-/obj/item/weapon/storage/box/samplebags/New()
+/obj/item/storage/box/samplebags/New()
 	..()
 	for(var/i = 1 to 7)
-		var/obj/item/weapon/evidencebag/S = new(src)
+		var/obj/item/evidencebag/S = new(src)
 		S.SetName("sample bag")
 		S.desc = "a bag for holding research samples."
 
@@ -85,8 +92,7 @@
 		var/nearestSimpleTargetDist = -1
 		var/turf/cur_turf = get_turf(src)
 
-		for(var/A in SSxenoarch.artifact_spawning_turfs)
-			var/turf/simulated/mineral/T = A
+		for (var/turf/simulated/mineral/T as anything in GLOB.xeno_artifact_turfs)
 			if(T.density && T.artifact_find)
 				if(T.z == cur_turf.z)
 					var/cur_dist = get_dist(cur_turf, T) * 2
@@ -94,17 +100,16 @@
 						nearestTargetDist = cur_dist + rand() * 2 - 1
 						nearestTargetId = T.artifact_find.artifact_id
 			else
-				SSxenoarch.artifact_spawning_turfs.Remove(T)
+				GLOB.xeno_artifact_turfs -= T
 
-		for(var/A in SSxenoarch.digsite_spawning_turfs)
-			var/turf/simulated/mineral/T = A
+		for(var/turf/simulated/mineral/T as anything in GLOB.xeno_digsite_turfs)
 			if(T.density && T.finds && T.finds.len)
 				if(T.z == cur_turf.z)
 					var/cur_dist = get_dist(cur_turf, T) * 2
 					if(nearestSimpleTargetDist < 0 || cur_dist < nearestSimpleTargetDist)
 						nearestSimpleTargetDist = cur_dist + rand() * 2 - 1
 			else
-				SSxenoarch.digsite_spawning_turfs.Remove(T)
+				GLOB.xeno_digsite_turfs -= T
 
 		if(nearestTargetDist >= 0)
 			to_chat(user, "Exotic energy detected on wavelength '[nearestTargetId]' in a radius of [nearestTargetDist]m[nearestSimpleTargetDist > 0 ? "; small anomaly detected in a radius of [nearestSimpleTargetDist]m" : ""]")
@@ -160,7 +165,7 @@
 
 			positive_locations.Add(D)
 
-			to_chat(user, "<span class='notice'>\icon[src] [src] pings.</span>")
+			to_chat(user, "<span class='notice'>[icon2html(src, user)] [src] pings.</span>")
 
 	else if(istype(A, /obj/structure/boulder))
 		var/obj/structure/boulder/B = A
@@ -178,12 +183,15 @@
 
 			positive_locations.Add(D)
 
-			to_chat(user, "<span class='notice'>\icon[src] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>")
+			to_chat(user, "<span class='notice'>[icon2html(src, user)] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>")
+
+	updateSelfDialog()
 
 /obj/item/device/depth_scanner/attack_self(var/mob/living/user)
 	interact(user)
 
 /obj/item/device/depth_scanner/interact(var/mob/user as mob)
+	user.set_machine(src)
 	var/dat = "<b>Coordinates with positive matches</b><br>"
 
 	dat += "<A href='?src=\ref[src];clear=0'>== Clear all ==</a><br>"
@@ -194,7 +202,7 @@
 		dat += "Anomaly depth: [current.depth] cm<br>"
 		dat += "Anomaly size: [current.clearance] cm<br>"
 		dat += "Dissonance spread: [current.dissonance_spread]<br>"
-		var/index = responsive_carriers.Find(current.material)
+		var/index = list_find(responsive_carriers, current.material)
 		if(index > 0 && index <= finds_as_strings.len)
 			dat += "Anomaly material: [finds_as_strings[index]]<br>"
 		else
@@ -212,9 +220,11 @@
 		dat += "No entries recorded."
 
 	dat += "<hr>"
-	dat += "<A href='?src=\ref[src];refresh=1'>Refresh</a><br>"
-	dat += "<A href='?src=\ref[src];close=1'>Close</a><br>"
-	show_browser(user, dat,"window=depth_scanner;size=300x500")
+	dat += "<a href='?src=\ref[src];close=1'>Close</a>"
+
+	var/datum/browser/popup = new(user, "depth_scanner", "Results", 300, 500)
+	popup.set_content(dat)
+	popup.open()
 	onclose(user, "depth_scanner")
 
 /obj/item/device/depth_scanner/OnTopic(user, href_list)
@@ -237,32 +247,35 @@
 		. = TOPIC_REFRESH
 	else if(href_list["close"])
 		close_browser(user, "window=depth_scanner")
-	updateSelfDialog()
+		return TOPIC_HANDLED
+
+	if (. == TOPIC_REFRESH)
+		interact(user)
 
 //Radio beacon locator
-/obj/item/weapon/pinpointer/radio
+/obj/item/pinpointer/radio
 	name = "locator device"
 	desc = "Used to scan and locate signals on a particular frequency."
 	var/tracking_freq = PUB_FREQ
 	matter = list(MATERIAL_ALUMINIUM = 1000, MATERIAL_GLASS = 500)
 
-/obj/item/weapon/pinpointer/radio/acquire_target()
+/obj/item/pinpointer/radio/acquire_target()
 	var/turf/T = get_turf(src)
 	var/zlevels = GetConnectedZlevels(T.z)
 	var/cur_dist = world.maxx+world.maxy
-	for(var/obj/item/device/radio/beacon/R in world)
-		if(!R.functioning)
+	for(var/obj/machinery/tele_beacon/R in world)
+		if(!R.functioning())
 			continue
-		if((R.z in zlevels) && R.frequency == tracking_freq)
+		if(R.z in zlevels)
 			var/check_dist = get_dist(src,R)
 			if(check_dist < cur_dist)
 				cur_dist = check_dist
 				. = weakref(R)
 
-/obj/item/weapon/pinpointer/radio/attack_self(var/mob/user as mob)
+/obj/item/pinpointer/radio/attack_self(var/mob/user as mob)
 	interact(user)
 
-/obj/item/weapon/pinpointer/radio/interact(var/mob/user)
+/obj/item/pinpointer/radio/interact(var/mob/user)
 	var/dat = "<b>Radio frequency tracker</b><br>"
 	dat += {"
 				Tracking: <A href='byond://?src=\ref[src];toggle=1'>[active ? "Enabled" : "Disabled"]</A><BR>
@@ -277,7 +290,7 @@
 	show_browser(user, dat,"window=locater;size=300x150")
 	onclose(user, "locater")
 
-/obj/item/weapon/pinpointer/radio/OnTopic(user, href_list)
+/obj/item/pinpointer/radio/OnTopic(user, href_list)
 	if(href_list["toggle"])
 		toggle(user)
 		. = TOPIC_REFRESH

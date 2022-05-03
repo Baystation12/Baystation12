@@ -4,9 +4,10 @@
 	stack_type = /obj/item/stack/material/plastic
 	flags = MATERIAL_BRITTLE
 	icon_base = "solid"
+	door_icon_base = "plastic"
 	icon_reinf = "reinf_over"
 	icon_colour = COLOR_WHITE
-	hardness = MATERIAL_SOFT
+	hardness = MATERIAL_FLEXIBLE
 	weight = 5
 	melting_point = T0C+371 //assuming heat resistant plastic
 	stack_origin_tech = list(TECH_MATERIAL = 3)
@@ -16,6 +17,7 @@
 				/datum/reagent/toxin/plasticide = 20
 				)
 	sale_price = 1
+	dooropen_noise = 'sound/effects/doorcreaky.ogg'
 
 /material/plastic/holographic
 	name = "holo" + MATERIAL_PLASTIC
@@ -293,3 +295,24 @@
 	hardness = MATERIAL_HARD
 	weight = 18
 	brute_armor = 2
+
+/material/growth
+	name = MATERIAL_GROWTH
+	display_name = "organic material"
+	icon_base = "cult"
+	door_icon_base = "cult"
+	table_icon_base = "cult"
+	icon_reinf = "reinf_cult"
+	icon_colour = "#281744"
+	hardness = 80
+	brute_armor = 4
+	burn_armor = 3
+	stack_type = null
+	conductive = 0
+	construction_difficulty = 10
+	hidden_from_codex = TRUE
+
+/material/growth/place_dismantled_girder(var/turf/target)
+	for(var/i = 0; i < 4; i++)
+		var/obj/item/reagent_containers/food/snacks/meat/M = new(target)
+		M.reagents.add_reagent(/datum/reagent/toxin/fertilizer, 5)

@@ -1,5 +1,5 @@
 /mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
-	STOP_PROCESSING(SSmobs, src)
+	STOP_PROCESSING_MOB(src)
 	GLOB.dead_mob_list_ -= src
 	GLOB.living_mob_list_ -= src
 	GLOB.player_list -= src
@@ -52,7 +52,9 @@
 		move_intent = move_intents[1]
 	if(ispath(move_intent))
 		move_intent = decls_repository.get_decl(move_intent)
-	START_PROCESSING(SSmobs, src)
+	if (!isliving(src))
+		status_flags |= NOTARGET
+	START_PROCESSING_MOB(src)
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 	if(!client)	return
@@ -83,6 +85,7 @@
 // self_message (optional) is what the src mob sees  e.g. "You do something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
 /mob/visible_message(message, self_message, blind_message, range = world.view, checkghosts = null, narrate = FALSE, list/exclude_objs = null, list/exclude_mobs = null)
+	set waitfor = FALSE
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()
@@ -100,6 +103,7 @@
 		if (exclude_mobs?.len && (M in exclude_mobs))
 			exclude_mobs -= M
 			continue
+
 		var/mob_message = message
 
 		if(isghost(M))
@@ -111,7 +115,7 @@
 			M.show_message(self_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
 
-		if(!M.is_blind() || narrate)
+		if((!M.is_blind() && M.see_invisible >= src.invisibility) || narrate)
 			M.show_message(mob_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
 
@@ -120,7 +124,7 @@
 			continue
 	//Multiz, have shadow do same
 	if(bound_overlay)
-		bound_overlay.visible_message(message, self_message, blind_message)
+		bound_overlay.visible_message(message, blind_message, range)
 
 // Show a message to all mobs and objects in earshot of this one
 // This would be for audible actions by the src mob
@@ -186,11 +190,6 @@
 /atom/proc/drain_power(var/drain_check,var/surge, var/amount = 0)
 	return -1
 
-/mob/proc/findname(msg)
-	for(var/mob/M in SSmobs.mob_list)
-		if (M.real_name == msg)
-			return M
-	return 0
 
 /mob/proc/movement_delay()
 	. = 0
@@ -211,7 +210,7 @@
 	if(pulling)
 		if(istype(pulling, /obj))
 			var/obj/O = pulling
-			. += between(0, O.w_class, ITEM_SIZE_GARGANTUAN) / 5
+			. += clamp(O.w_class, 0, ITEM_SIZE_GARGANTUAN) / 5
 		else if(istype(pulling, /mob))
 			var/mob/M = pulling
 			. += max(0, M.mob_size) / MOB_MEDIUM
@@ -282,6 +281,11 @@
 /mob/proc/restrained()
 	return
 
+/mob/proc/can_be_floored()
+	if (buckled || lying || can_overcome_gravity())
+		return FALSE
+	return TRUE
+
 /mob/proc/reset_view(atom/A)
 	if (client)
 		A = A ? A : eyeobj
@@ -306,7 +310,7 @@
 	set name = "Examine"
 	set category = "IC"
 
-	if((is_blind(src) || usr.stat) && !isobserver(src))
+	if((is_blind(src) || usr && usr.stat) && !isobserver(src))
 		to_chat(src, "<span class='notice'>Something is there but you can't see it.</span>")
 		return 1
 
@@ -349,10 +353,6 @@
 
 	var/obj/P = new /obj/effect/decal/point(tile)
 	P.set_invisibility(invisibility)
-	spawn (20)
-		if(P)
-			qdel(P)	// qdel
-
 	face_atom(A)
 	return 1
 
@@ -416,6 +416,7 @@
 	set category = "OOC"
 	getFiles(
 		'html/88x31.png',
+		'html/auction-hammer-gavel.png',
 		'html/bug-minus.png',
 		'html/burn-exclamation.png',
 		'html/chevron.png',
@@ -435,8 +436,8 @@
 		'html/changelog.html'
 		)
 	show_browser(src, 'html/changelog.html', "window=changes;size=675x650")
-	if(prefs.lastchangelog != changelog_hash)
-		prefs.lastchangelog = changelog_hash
+	if (GLOB.changelog_hash && prefs.lastchangelog != GLOB.changelog_hash)
+		prefs.lastchangelog = GLOB.changelog_hash
 		SScharacter_setup.queue_preferences_save(prefs)
 		winset(src, "rpane.changelog", "background-color=none;font-style=;")
 
@@ -450,30 +451,31 @@
 	return GLOB.view_state
 
 // Use to field Topic calls for which usr == src is required, which will first be funneled into here.
-/mob/proc/OnSelfTopic(href_list)
-	if(href_list["mach_close"])
-		var/t1 = text("window=[href_list["mach_close"]]")
-		unset_machine()
-		show_browser(src, null, t1)
-		return TOPIC_HANDLED
-	if(href_list["flavor_change"])
-		update_flavor_text(href_list["flavor_change"])
-		return TOPIC_HANDLED
+/mob/proc/OnSelfTopic(href_list, topic_status)
+	if (topic_status == STATUS_INTERACTIVE)
+		if(href_list["mach_close"])
+			var/t1 = text("window=[href_list["mach_close"]]")
+			unset_machine()
+			show_browser(src, null, t1)
+			return TOPIC_HANDLED
+		if(href_list["flavor_change"])
+			update_flavor_text(href_list["flavor_change"])
+			return TOPIC_HANDLED
 
 // If usr != src, or if usr == src but the Topic call was not resolved, this is called next.
 /mob/OnTopic(mob/user, href_list, datum/topic_state/state)
 	if(href_list["flavor_more"])
-		show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY><TT>[replacetext(flavor_text, "\n", "<BR>")]</TT></BODY></HTML>", "window=[name];size=500x200")
+		var/text = "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY><TT>[replacetext(flavor_text, "\n", "<BR>")]</TT></BODY></HTML>"
+		show_browser(user, text, "window=[name];size=500x200")
 		onclose(user, "[name]")
 		return TOPIC_HANDLED
 
 // You probably do not need to override this proc. Use one of the two above.
 /mob/Topic(href, href_list, datum/topic_state/state)
-	if(CanUseTopic(usr, GLOB.self_state, href_list) == STATUS_INTERACTIVE)
-		. = OnSelfTopic(href_list)
-		if(.)
-			return
-	else if(href_list["flavor_change"] && !is_admin(usr) && (usr != src))
+	. = OnSelfTopic(href_list, CanUseTopic(usr, GLOB.self_state, href_list))
+	if (.)
+		return
+	if (href_list["flavor_change"] && !isadmin(usr) && (usr != src))
 		log_and_message_admins(usr, "is suspected of trying to change flavor text on [key_name_admin(src)] via Topic exploits.")
 	return ..()
 
@@ -508,6 +510,11 @@
 	set category = "IC"
 
 	if(pulling)
+		if(ishuman(pulling))
+			var/mob/living/carbon/human/H = pulling
+			visible_message(SPAN_WARNING("\The [src] lets go of \the [H]."), SPAN_NOTICE("You let go of \the [H]."), exclude_mobs = list(H))
+			if(!H.stat)
+				to_chat(H, SPAN_WARNING("\The [src] lets go of you."))
 		pulling.pulledby = null
 		pulling = null
 		if(pullin)
@@ -567,6 +574,31 @@
 
 	if(ishuman(AM))
 		var/mob/living/carbon/human/H = AM
+		if(H.lying) // If they're on the ground we're probably dragging their arms to move them
+			var/grabtype
+			if(H.has_organ(BP_L_ARM) && H.has_organ(BP_R_ARM)) //If they have both arms
+				grabtype = "arms"
+			else if(H.has_organ(BP_L_ARM) || H.has_organ(BP_R_ARM)) //If they only have one arm
+				grabtype = "arm"
+			else //If they have no arms
+				grabtype = "torso"
+
+			visible_message(SPAN_WARNING("\The [src] leans down and grips \the [H]'s [grabtype]."), SPAN_NOTICE("You lean down and grip \the [H]'s [grabtype]."), exclude_mobs = list(H))
+			if(!H.stat)
+				to_chat(H, SPAN_WARNING("\The [src] leans down and grips your [grabtype]."))
+
+		else //Otherwise we're probably just holding their arm to lead them somewhere
+			var/grabtype
+			if(H.has_organ(BP_L_ARM) || H.has_organ(BP_R_ARM)) //If they have at least one arm
+				grabtype = "arm"
+			else //If they have no arms
+				grabtype = "shoulder"
+
+			visible_message(SPAN_WARNING("\The [src] grips \the [H]'s [grabtype]."), SPAN_NOTICE("You grip \the [H]'s [grabtype]."), exclude_mobs = list(H))
+			if(!H.stat)
+				to_chat(H, SPAN_WARNING("\The [src] grips your [grabtype]."))
+		playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 15) //Quieter than hugging/grabbing but we still want some audio feedback
+
 		if(H.pull_damage())
 			to_chat(src, "<span class='danger'>Pulling \the [H] in their current condition would probably be a bad idea.</span>")
 
@@ -611,8 +643,8 @@
 
 /mob/Stat()
 	..()
-	. = (is_client_active(10 MINUTES))
-	if(!.)
+	. = (is_client_active(5 MINUTES))
+	if (!.)
 		return
 
 	if(statpanel("Status"))
@@ -628,20 +660,24 @@
 			stat("CPU:","[world.cpu]")
 			stat("Instances:","[world.contents.len]")
 			stat(null)
+			var/time = Uptime()
 			if(Master)
-				Master.stat_entry()
+				Master.UpdateStat(time)
 			else
 				stat("Master Controller:", "ERROR")
 			if(Failsafe)
-				Failsafe.stat_entry()
+				Failsafe.UpdateStat(time)
 			else if (Master.initializing)
 				stat("Failsafe Controller:", "Waiting for MC")
 			else
 				stat("Failsafe Controller:", "ERROR")
 			if(Master)
 				stat(null)
-				for(var/datum/controller/subsystem/SS in Master.subsystems)
-					SS.stat_entry()
+				config.UpdateStat()
+				GLOB.UpdateStat()
+				stat(null)
+				for (var/datum/controller/subsystem/subsystem as anything in Master.subsystems)
+					subsystem.UpdateStat(time)
 
 	if(listed_turf && client)
 		if(!TurfAdjacent(listed_turf))
@@ -672,14 +708,14 @@
 	if(!resting && cannot_stand() && can_stand_overridden())
 		lying = 0
 	else if(buckled)
-		anchored = 1
+		anchored = TRUE
 		if(istype(buckled))
 			if(buckled.buckle_lying == -1)
 				lying = incapacitated(INCAPACITATION_KNOCKDOWN)
 			else
 				lying = buckled.buckle_lying
 			if(buckled.buckle_movable)
-				anchored = 0
+				anchored = FALSE
 	else
 		lying = incapacitated(INCAPACITATION_KNOCKDOWN)
 
@@ -812,19 +848,6 @@
 	sleeping = max(sleeping + amount,0)
 	return
 
-/mob/proc/Resting(amount)
-	facing_dir = null
-	resting = max(max(resting,amount),0)
-	return
-
-/mob/proc/SetResting(amount)
-	resting = max(amount,0)
-	return
-
-/mob/proc/AdjustResting(amount)
-	resting = max(resting + amount,0)
-	return
-
 /mob/proc/get_species()
 	return ""
 
@@ -841,17 +864,26 @@
 /mob/proc/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
 	if(!LAZYLEN(get_visible_implants(0))) //Yanking out last object - removing verb.
 		verbs -= /mob/proc/yank_out_object
-	for(var/obj/item/weapon/O in pinned)
+	for(var/obj/item/O in pinned)
 		if(O == implant)
 			pinned -= O
 		if(!pinned.len)
-			anchored = 0
+			anchored = FALSE
 	implant.dropInto(loc)
 	implant.add_blood(src)
 	implant.update_icon()
-	if(istype(implant,/obj/item/weapon/implant))
-		var/obj/item/weapon/implant/imp = implant
+	if(istype(implant,/obj/item/implant))
+		var/obj/item/implant/imp = implant
 		imp.removed()
+	if (istype(implant, /obj/item/holder/voxslug))
+		var/obj/item/holder/voxslug/holder = implant
+		var/mob/living/simple_animal/hostile/voxslug/V = holder.contents[1]
+
+		V.visible_message(SPAN_WARNING("\The [src] is momentarily stunned as it is ripped from its victim!"))
+		if (V.ai_holder)
+			var/datum/ai_holder/AI = V.ai_holder
+			AI.set_busy_delay(8 SECONDS)
+
 	. = TRUE
 
 /mob/living/silicon/robot/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
@@ -873,7 +905,7 @@
 			LAZYREMOVE(wound.embedded_objects, implant)
 		if(!surgical_removal)
 			shock_stage+=20
-			affected.take_external_damage((implant.w_class * 3), 0, DAM_EDGE, "Embedded object extraction")
+			affected.take_external_damage((implant.w_class * 3), 0, DAMAGE_FLAG_EDGE, "Embedded object extraction")
 			if(!BP_IS_ROBOTIC(affected) && prob(implant.w_class * 5) && affected.sever_artery()) //I'M SO ANEMIC I COULD JUST -DIE-.
 				custom_pain("Something tears wetly in your [affected.name] as [implant] is pulled free!", 50, affecting = affected)
 	. = ..()
@@ -911,12 +943,12 @@
 		else
 			to_chat(U, "[src] has nothing stuck in their wounds that is large enough to remove.")
 		return
-	var/obj/item/weapon/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
+	var/obj/item/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
 	if(self)
 		to_chat(src, "<span class='warning'>You attempt to get a good grip on [selection] in your body.</span>")
 	else
 		to_chat(U, "<span class='warning'>You attempt to get a good grip on [selection] in [S]'s body.</span>")
-	if(!do_mob(U, S, 30, incapacitation_flags = INCAPACITATION_DEFAULT & (~INCAPACITATION_FORCELYING))) //let people pinned to stuff yank it out, otherwise they're stuck... forever!!!
+	if(!do_after(U, 3 SECONDS, S, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS, INCAPACITATION_DEFAULT & ~INCAPACITATION_FORCELYING)) //let people pinned to stuff yank it out, otherwise they're stuck... forever!!!
 		return
 	if(!selection || !S || !U)
 		return

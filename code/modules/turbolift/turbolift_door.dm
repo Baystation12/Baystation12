@@ -4,6 +4,7 @@
 	opacity = 0
 	autoclose = 0
 	glass = 1
+	airlock_type = "Lift"
 	icon = 'icons/obj/doors/elevator/door.dmi'
 	fill_file = 'icons/obj/doors/elevator/fill_steel.dmi'
 	glass_file = 'icons/obj/doors/elevator/fill_glass.dmi'
@@ -11,7 +12,7 @@
 	deny_file = 'icons/obj/doors/elevator/lights_deny.dmi'
 	lights_file = 'icons/obj/doors/elevator/lights_green.dmi'
 
-	paintable = 0
+	paintable = AIRLOCK_WINDOW_PAINTABLE
 
 	var/datum/turbolift/lift
 	var/datum/turbolift_floor/floor

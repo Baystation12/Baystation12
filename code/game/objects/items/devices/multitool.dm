@@ -6,6 +6,7 @@
 /obj/item/device/multitool
 	name = "multitool"
 	desc = "This small, handheld device is made of durable, insulated plastic, and tipped with electrodes, perfect for interfacing with numerous machines."
+	icon = 'icons/obj/multitool.dmi'
 	icon_state = "multitool"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 5.0
@@ -55,21 +56,15 @@
 		GLOB.destroyed_event.unregister(buffer_object, src)
 		buffer_object = null
 
-/obj/item/device/multitool/resolve_attackby(atom/A, mob/user)
+/obj/item/device/multitool/resolve_attackby(atom/A, mob/user, params)
 	if(!isobj(A))
-		return ..(A, user)
+		return ..()
 
 	var/obj/O = A
 	var/datum/extension/interactive/multitool/MT = get_extension(O, /datum/extension/interactive/multitool)
 	if(!MT)
-		return ..(A, user)
+		return ..()
 
 	user.AddTopicPrint(src)
 	MT.interact(src, user)
 	return 1
-
-/obj/item/device/multitool/mantid
-	name = "mantid multitool"
-	desc = "An alien microcomputer of some kind."
-	icon = 'icons/obj/ascent.dmi'
-	icon_state = "multitool"

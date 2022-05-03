@@ -68,7 +68,7 @@
 						organ.take_external_damage(d, 0)
 					H.updatehealth()
 				else
-					src.take_organ_damage(d)
+					src.take_organ_damage(d, 0)
 				user.visible_message("<span class='danger'>[user] attacks [src]'s stomach wall with the [I.name]!</span>")
 				playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
 
@@ -77,9 +77,14 @@
 
 /mob/living/carbon/gib()
 	for(var/mob/M in contents)
+		if(is_species(SPECIES_DIONA) && istype(M, /mob/living/carbon/alien/diona) && (M.stat != DEAD))
+			continue
 		M.dropInto(loc)
 		visible_message(SPAN_DANGER("\The [M] bursts out of \the [src]!"))
 	..()
+
+/mob/living/carbon/proc/clear_coughedtime()
+	coughedtime = 0
 
 /mob/living/carbon/attack_hand(mob/M as mob)
 	if(!istype(M, /mob/living/carbon)) return
@@ -144,13 +149,14 @@
 		return 0
 	if(shock_damage < 1)
 		shock_damage = 1
-	apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
+	apply_damage(shock_damage, DAMAGE_BURN, def_zone, used_weapon="Electrocution")
 	return(shock_damage)
 
 /mob/proc/swap_hand()
 	return
 
 /mob/living/carbon/swap_hand()
+	. = ..()
 	hand = !hand
 	if(hud_used.l_hand_hud_object && hud_used.r_hand_hud_object)
 		if(hand)	//This being 1 means the left hand is in use
@@ -161,7 +167,7 @@
 			hud_used.r_hand_hud_object.icon_state = "r_hand_active"
 	var/obj/item/I = get_active_hand()
 	if(istype(I))
-		I.on_active_hand()
+		I.on_active_hand(src)
 
 /mob/living/carbon/proc/activate_hand(var/selhand) //0 or "r" or "right" for right hand; 1 or "l" or "left" for left hand.
 
@@ -186,7 +192,7 @@
 			else
 				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames!</span>",
 				"<span class='warning'>You try to pat out [src]'s flames! Hot!</span>")
-				if(do_mob(M, src, 15))
+				if(do_after(M, 1.5 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 					src.fire_stacks -= 0.5
 					if (prob(10) && (M.fire_stacks <= 0))
 						M.fire_stacks += 1
@@ -220,8 +226,6 @@
 			else if(lying || src.sleeping || player_triggered_sleeping)
 				src.player_triggered_sleeping = 0
 				src.sleeping = max(0,src.sleeping - 5)
-				if(src.sleeping == 0)
-					src.resting = 0
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 									"<span class='notice'>You shake [src] trying to wake [t_him] up!</span>")
 			else
@@ -291,7 +295,7 @@
 				var/end_T_descriptor = "<font color='#6b4400'>[start_T] \[[end_T.x],[end_T.y],[end_T.z]\] ([end_T.loc])</font>"
 				admin_attack_log(usr, M, "Threw the victim from [start_T_descriptor] to [end_T_descriptor].", "Was from [start_T_descriptor] to [end_T_descriptor].", "threw, from [start_T_descriptor] to [end_T_descriptor], ")
 
-	else if (istype(item, /obj/item/))
+	else if (istype(item, /obj/item))
 		var/obj/item/I = item
 		itemsize = I.w_class
 
@@ -325,6 +329,8 @@
 	item.throw_at(target, throw_range, item.throw_speed * skill_mod, src)
 
 /mob/living/carbon/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	if (status_flags & GODMODE)
+		return
 	..()
 	var/temp_inc = max(min(BODYTEMP_HEATING_MAX*(1-get_heat_protection()), exposed_temperature - bodytemperature), 0)
 	bodytemperature += temp_inc
@@ -413,7 +419,7 @@
 	<BR><B>Head(Mask):</B> <A href='?src=\ref[src];item=mask'>[(wear_mask ? wear_mask : "Nothing")]</A>
 	<BR><B>Left Hand:</B> <A href='?src=\ref[src];item=l_hand'>[(l_hand ? l_hand  : "Nothing")]</A>
 	<BR><B>Right Hand:</B> <A href='?src=\ref[src];item=r_hand'>[(r_hand ? r_hand : "Nothing")]</A>
-	<BR><B>Back:</B> <A href='?src=\ref[src];item=back'>[(back ? back : "Nothing")]</A> [((istype(wear_mask, /obj/item/clothing/mask) && istype(back, /obj/item/weapon/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
+	<BR><B>Back:</B> <A href='?src=\ref[src];item=back'>[(back ? back : "Nothing")]</A> [((istype(wear_mask, /obj/item/clothing/mask) && istype(back, /obj/item/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
 	<BR>[(internal ? text("<A href='?src=\ref[src];item=internal'>Remove Internal</A>") : "")]
 	<BR><A href='?src=\ref[src];item=pockets'>Empty Pockets</A>
 	<BR><A href='?src=\ref[user];refresh=1'>Refresh</A>
@@ -458,7 +464,7 @@
 		return
 	stasis_sources[source] = factor
 
-/mob/living/carbon/proc/InStasis()
+/mob/living/carbon/InStasis()
 	if(!stasis_value)
 		return FALSE
 	return life_tick % stasis_value
@@ -482,18 +488,18 @@
 	return reagents
 
 /mob/living/carbon/proc/set_nutrition(var/amt)
-	nutrition = Clamp(amt, 0, initial(nutrition))
+	nutrition = clamp(amt, 0, initial(nutrition))
 
 /mob/living/carbon/proc/adjust_nutrition(var/amt)
 	set_nutrition(nutrition + amt)
 
 /mob/living/carbon/proc/set_hydration(var/amt)
-	hydration = Clamp(amt, 0, initial(hydration))
+	hydration = clamp(amt, 0, initial(hydration))
 
 /mob/living/carbon/proc/adjust_hydration(var/amt)
 	set_hydration(hydration + amt)
 
-/mob/living/carbon/proc/set_internals(obj/item/weapon/tank/source, source_string)
+/mob/living/carbon/proc/set_internals(obj/item/tank/source, source_string)
 	var/old_internal = internal
 
 	internal = source

@@ -3,7 +3,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "launcherbtt"
 	desc = "A remote control switch for something."
-	anchored = 1
+	anchored = TRUE
 	power_channel = ENVIRON
 	idle_power_usage = 10
 	public_variables = list(
@@ -13,8 +13,8 @@
 	public_methods = list(/decl/public_access/public_method/toggle_input_toggle)
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/button = 1)
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/power/apc,
-		/obj/item/weapon/stock_parts/radio/transmitter/basic
+		/obj/item/stock_parts/power/apc,
+		/obj/item/stock_parts/radio/transmitter/basic
 	)
 
 	var/active = FALSE
@@ -25,7 +25,7 @@
 	. = ..()
 	update_icon()
 
-/obj/machinery/button/attackby(obj/item/weapon/W, mob/user as mob)
+/obj/machinery/button/attackby(obj/item/W, mob/user as mob)
 	return attack_hand(user)
 
 /obj/machinery/button/interface_interact(user)

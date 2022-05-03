@@ -219,7 +219,7 @@
 
 	var/method = pick("bit", "scratched")
 	to_chat(choice, "<span class='danger'>Something invisible [method] you!</span>")
-	choice.apply_effect(5, PAIN, 0)
+	choice.apply_effect(5, EFFECT_PAIN, 0)
 	to_chat(src, "<span class='notice'>You [method] \the [choice].</span>")
 
 	log_and_message_admins("used ghost magic to bite \the [choice] - [x]-[y]-[z]")

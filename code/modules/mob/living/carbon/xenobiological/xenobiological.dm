@@ -26,6 +26,8 @@
 	bone_material = null
 	bone_amount = 0
 
+	can_be_buckled = FALSE
+
 	var/toxloss = 0
 	var/is_adult = 0
 	var/number = 0 // Used to understand when someone is talking to it
@@ -70,7 +72,7 @@
 	return /datum/reagent/slimejelly
 
 /mob/living/carbon/slime/adjustToxLoss(var/amount)
-	toxloss = Clamp(toxloss + amount, 0, maxHealth)
+	toxloss = clamp(toxloss + amount, 0, maxHealth)
 
 /mob/living/carbon/slime/setToxLoss(var/amount)
 	adjustToxLoss(amount-getToxLoss())
@@ -109,7 +111,7 @@
 	if(health <= 0) // if damaged, the slime moves twice as slow
 		tally *= 2
 
-	return tally + config.slime_delay
+	return tally
 
 /mob/living/carbon/slime/Bump(atom/movable/AM as mob|obj, yes)
 	if ((!(yes) || now_pushing))
@@ -173,15 +175,21 @@
 	return
 
 /mob/living/carbon/slime/bullet_act(var/obj/item/projectile/Proj)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 	attacked += 10
 	..(Proj)
 	return 0
 
 /mob/living/carbon/slime/emp_act(severity)
+	if (status_flags & GODMODE)
+		return
 	powerlevel = 0 // oh no, the power!
 	..()
 
 /mob/living/carbon/slime/ex_act(severity)
+	if (status_flags & GODMODE)
+		return
 	..()
 
 	var/b_loss = null
@@ -326,4 +334,4 @@
 			adjustToxLoss(-10)
 
 /mob/living/carbon/slime/adjust_nutrition(var/amt)
-	nutrition = Clamp(nutrition + amt, 0, get_max_nutrition())
+	nutrition = clamp(nutrition + amt, 0, get_max_nutrition())

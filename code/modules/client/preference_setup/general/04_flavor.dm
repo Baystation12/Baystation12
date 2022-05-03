@@ -6,36 +6,36 @@
 	name = "Flavor"
 	sort_order = 4
 
-/datum/category_item/player_setup_item/physical/flavor/load_character(var/savefile/S)
-	S["flavor_texts_general"]	>> pref.flavor_texts["general"]
-	S["flavor_texts_head"]		>> pref.flavor_texts["head"]
-	S["flavor_texts_face"]		>> pref.flavor_texts["face"]
-	S["flavor_texts_eyes"]		>> pref.flavor_texts["eyes"]
-	S["flavor_texts_torso"]		>> pref.flavor_texts["torso"]
-	S["flavor_texts_arms"]		>> pref.flavor_texts["arms"]
-	S["flavor_texts_hands"]		>> pref.flavor_texts["hands"]
-	S["flavor_texts_legs"]		>> pref.flavor_texts["legs"]
-	S["flavor_texts_feet"]		>> pref.flavor_texts["feet"]
+/datum/category_item/player_setup_item/physical/flavor/load_character(datum/pref_record_reader/R)
+	pref.flavor_texts["general"] = R.read("flavor_texts_general")
+	pref.flavor_texts["head"] = R.read("flavor_texts_head")
+	pref.flavor_texts["face"] = R.read("flavor_texts_face")
+	pref.flavor_texts["eyes"] = R.read("flavor_texts_eyes")
+	pref.flavor_texts["torso"] = R.read("flavor_texts_torso")
+	pref.flavor_texts["arms"] = R.read("flavor_texts_arms")
+	pref.flavor_texts["hands"] = R.read("flavor_texts_hands")
+	pref.flavor_texts["legs"] = R.read("flavor_texts_legs")
+	pref.flavor_texts["feet"] = R.read("flavor_texts_feet")
 
 	//Flavour text for robots.
-	S["flavour_texts_robot_Default"] >> pref.flavour_texts_robot["Default"]
+	pref.flavour_texts_robot["Default"] = R.read("flavour_texts_robot_Default")
 	for(var/module in SSrobots.all_module_names)
-		S["flavour_texts_robot_[module]"] >> pref.flavour_texts_robot[module]
+		pref.flavour_texts_robot[module] = R.read("flavour_texts_robot_[module]")
 
-/datum/category_item/player_setup_item/physical/flavor/save_character(var/savefile/S)
-	S["flavor_texts_general"]	<< pref.flavor_texts["general"]
-	S["flavor_texts_head"]		<< pref.flavor_texts["head"]
-	S["flavor_texts_face"]		<< pref.flavor_texts["face"]
-	S["flavor_texts_eyes"]		<< pref.flavor_texts["eyes"]
-	S["flavor_texts_torso"]		<< pref.flavor_texts["torso"]
-	S["flavor_texts_arms"]		<< pref.flavor_texts["arms"]
-	S["flavor_texts_hands"]		<< pref.flavor_texts["hands"]
-	S["flavor_texts_legs"]		<< pref.flavor_texts["legs"]
-	S["flavor_texts_feet"]		<< pref.flavor_texts["feet"]
+/datum/category_item/player_setup_item/physical/flavor/save_character(datum/pref_record_writer/W)
+	W.write("flavor_texts_general", pref.flavor_texts["general"])
+	W.write("flavor_texts_head", pref.flavor_texts["head"])
+	W.write("flavor_texts_face", pref.flavor_texts["face"])
+	W.write("flavor_texts_eyes", pref.flavor_texts["eyes"])
+	W.write("flavor_texts_torso", pref.flavor_texts["torso"])
+	W.write("flavor_texts_arms", pref.flavor_texts["arms"])
+	W.write("flavor_texts_hands", pref.flavor_texts["hands"])
+	W.write("flavor_texts_legs", pref.flavor_texts["legs"])
+	W.write("flavor_texts_feet", pref.flavor_texts["feet"])
 
-	S["flavour_texts_robot_Default"] << pref.flavour_texts_robot["Default"]
+	W.write("flavour_texts_robot_Default", pref.flavour_texts_robot["Default"])
 	for(var/module in SSrobots.all_module_names)
-		S["flavour_texts_robot_[module]"] << pref.flavour_texts_robot[module]
+		W.write("flavour_texts_robot_[module]", pref.flavour_texts_robot[module])
 
 /datum/category_item/player_setup_item/physical/flavor/sanitize_character()
 	if(!istype(pref.flavor_texts))        pref.flavor_texts = list()

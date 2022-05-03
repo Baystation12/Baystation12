@@ -43,9 +43,9 @@
 	build_icon_state = "uvent"
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/power/apc,
-		/obj/item/weapon/stock_parts/radio/receiver,
-		/obj/item/weapon/stock_parts/radio/transmitter/on_event,
+		/obj/item/stock_parts/power/apc,
+		/obj/item/stock_parts/radio/receiver,
+		/obj/item/stock_parts/radio/transmitter/on_event,
 	)
 	public_variables = list(
 		/decl/public_access/public_variable/input_toggle,
@@ -187,7 +187,6 @@
 
 	//Figure out the target pressure difference
 	var/pressure_delta = get_pressure_delta(environment)
-	//src.visible_message("DEBUG >>> [src]: pressure_delta = [pressure_delta]")
 
 	if((environment.temperature || air_contents.temperature) && pressure_delta > 0.5)
 		if(pump_direction) //internal -> external
@@ -262,7 +261,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W, mob/user)
 	if(isWelder(W))
 
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 
 		if(!WT.isOn())
 			to_chat(user, "<span class='notice'>The welding tool needs to be on to start this task.</span>")
@@ -275,7 +274,7 @@
 		to_chat(user, "<span class='notice'>Now welding \the [src].</span>")
 		playsound(src, 'sound/items/Welder.ogg', 50, 1)
 
-		if(!do_after(user, 20, src))
+		if(!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>You must remain close to finish this task.</span>")
 			return 1
 
@@ -306,7 +305,7 @@
 	if(welded)
 		to_chat(user, "It seems welded shut.")
 
-/obj/machinery/atmospherics/unary/vent_pump/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/unary/vent_pump/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if(isWrench(W))
 		if (!(stat & NOPOWER) && use_power)
 			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>")
@@ -323,7 +322,7 @@
 			return 1
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-		if (do_after(user, 40, src))
+		if (do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 			user.visible_message( \
 				"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 				"<span class='notice'>You have unfastened \the [src].</span>", \
@@ -407,7 +406,7 @@
 /decl/public_access/public_variable/pressure_bound/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
 	if(new_value == "default")
 		new_value = machine.internal_pressure_bound_default
-	new_value = Clamp(text2num(new_value), 0, MAX_PUMP_PRESSURE)
+	new_value = clamp(text2num(new_value), 0, MAX_PUMP_PRESSURE)
 	. = ..()
 	if(.)
 		machine.internal_pressure_bound = new_value
@@ -423,7 +422,7 @@
 /decl/public_access/public_variable/pressure_bound/external/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
 	if(new_value == "default")
 		new_value = machine.external_pressure_bound_default
-	new_value = Clamp(new_value, 0, MAX_PUMP_PRESSURE)
+	new_value = clamp(text2num(new_value), 0, MAX_PUMP_PRESSURE)
 	. = ..()
 	if(.)
 		machine.external_pressure_bound = new_value

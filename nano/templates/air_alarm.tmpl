@@ -197,6 +197,9 @@ Used In File(s): \code\game\machinery\alarm.dm
 			</div>
 		{{/for}}
     {{else data.screen == 5}}
+		<H3>Breach Threshold</H3>
+		Under this pressure, vents will be turned off.<br>
+		{{:helper.link(data.breach_data.selected >= 0 ? helper.fixed(data.breach_data.selected, 2) : "Off", null, { 'command' : 'set_breach'})}} Kpa
 		<H3>Alarm Threshold</H3>
 		Partial pressure for gases.
 		<table class='fixed'>

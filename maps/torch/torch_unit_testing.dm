@@ -1,6 +1,3 @@
-/datum/unit_test/station_wires_shall_be_connected
-	exceptions = list(list(80, 107, 1, WEST))
-
 /datum/map/torch
 	// Unit test exemptions
 	apc_test_exempt_areas = list(
@@ -18,10 +15,11 @@
 		/area/maintenance/auxsolarbridge = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/auxsolarport = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/auxsolarstarboard = NO_SCRUBBER|NO_VENT,
-		/area/maintenance/exterior = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/torchexterior = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/maintenance/firstdeck/foreport = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/firstdeck/forestarboard = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/incinerator = NO_SCRUBBER,
+		/area/maintenance/disposal = NO_SCRUBBER,
 		/area/maintenance/seconddeck/aftport = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/seconddeck/forestarboard = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/thirddeck/aftstarboard = NO_SCRUBBER|NO_VENT,
@@ -38,7 +36,6 @@
 		/area/shuttle/escape_pod9/station = NO_SCRUBBER|NO_APC|NO_VENT,
 		/area/shuttle/escape_pod10/station = NO_SCRUBBER|NO_APC|NO_VENT,
 		/area/shuttle/escape_pod11/station = NO_SCRUBBER|NO_APC|NO_VENT,
-		/area/security/oldopscheck = NO_APC,
 		/area/solar = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/storage = NO_SCRUBBER|NO_VENT,
 		/area/storage/auxillary/port = 0,
@@ -49,8 +46,6 @@
 		/area/supply = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/thruster = NO_SCRUBBER,
 		/area/turbolift = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/turret_protected/ai = NO_SCRUBBER|NO_VENT,
-		/area/turret_protected/ai_outer_chamber = NO_SCRUBBER|NO_VENT,
 		/area/vacant/bar = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/vacant = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/vacant/brig = NO_SCRUBBER|NO_VENT,
@@ -65,7 +60,7 @@
 	area_coherency_test_exempt_areas = list(
 		/area/aquila/airlock,
 		/area/centcom/control,
-		/area/maintenance/exterior,
+		/area/torchexterior,
 		/area/space
 	)
 
@@ -87,22 +82,14 @@
 		/area/template_noop
 	)
 
-/datum/unit_test/zas_area_test/ai_chamber
-	name = "ZAS: AI Chamber"
-	area_path = /area/turret_protected/ai
-
 /datum/unit_test/zas_area_test/cargo_bay
 	name = "ZAS: Cargo Bay"
 	area_path = /area/quartermaster/storage
 
-datum/unit_test/zas_area_test/supply_centcomm
+/datum/unit_test/zas_area_test/supply_centcomm
 	name = "ZAS: Supply Shuttle (CentComm)"
 	area_path = /area/supply/dock
 
-datum/unit_test/zas_area_test/virology
-	name = "ZAS: Virology"
-	area_path = /area/medical/virology
-
-datum/unit_test/zas_area_test/xenobio
+/datum/unit_test/zas_area_test/xenobio
 	name = "ZAS: Xenobiology"
 	area_path = /area/rnd/xenobiology

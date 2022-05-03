@@ -101,6 +101,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	for(var/k in 1 to LAZYLEN(activators))
 		var/datum/integrated_io/activate/A = activators[k]
 		A.scramble()
+	..()
 
 
 /obj/item/integrated_circuit/verb/rename_component()
@@ -284,7 +285,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		. = IC_TOPIC_REFRESH
 
 	else if(href_list["remove"] && assembly)
-		if(istype(held_item, /obj/item/weapon/screwdriver))
+		if(istype(held_item, /obj/item/screwdriver))
 			disconnect_all()
 			dropInto(loc)
 			playsound(src, 'sound/items/Crowbar.ogg', 50, 1)

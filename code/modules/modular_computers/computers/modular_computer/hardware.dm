@@ -1,65 +1,65 @@
 // Attempts to install the hardware into apropriate slot.
-/obj/item/modular_computer/proc/try_install_component(var/mob/living/user, var/obj/item/weapon/stock_parts/computer/H, var/found = 0)
+/obj/item/modular_computer/proc/try_install_component(var/mob/living/user, var/obj/item/stock_parts/computer/H, var/found = 0)
 	if(!(H.usage_flags & hardware_flag))
 		to_chat(user, "This computer isn't compatible with [H].")
 		return
 
 	// "USB" flash drive.
-	if(istype(H, /obj/item/weapon/stock_parts/computer/hard_drive/portable))
+	if(istype(H, /obj/item/stock_parts/computer/hard_drive/portable))
 		if(portable_drive)
 			to_chat(user, "This computer's portable drive slot is already occupied by \the [portable_drive].")
 			return
 		found = 1
 		portable_drive = H
-	else if(istype(H, /obj/item/weapon/stock_parts/computer/hard_drive))
+	else if(istype(H, /obj/item/stock_parts/computer/hard_drive))
 		if(hard_drive)
 			to_chat(user, "This computer's hard drive slot is already occupied by \the [hard_drive].")
 			return
 		found = 1
 		hard_drive = H
-	else if(istype(H, /obj/item/weapon/stock_parts/computer/network_card))
+	else if(istype(H, /obj/item/stock_parts/computer/network_card))
 		if(network_card)
 			to_chat(user, "This computer's network card slot is already occupied by \the [network_card].")
 			return
 		found = 1
 		network_card = H
-	else if(istype(H, /obj/item/weapon/stock_parts/computer/nano_printer))
+	else if(istype(H, /obj/item/stock_parts/computer/nano_printer))
 		if(nano_printer)
 			to_chat(user, "This computer's nano printer slot is already occupied by \the [nano_printer].")
 			return
 		found = 1
 		nano_printer = H
-	else if(istype(H, /obj/item/weapon/stock_parts/computer/card_slot))
+	else if(istype(H, /obj/item/stock_parts/computer/card_slot))
 		if(card_slot)
 			to_chat(user, "This computer's card slot is already occupied by \the [card_slot].")
 			return
 		found = 1
 		card_slot = H
-	else if(istype(H, /obj/item/weapon/stock_parts/computer/battery_module))
+	else if(istype(H, /obj/item/stock_parts/computer/battery_module))
 		if(battery_module)
 			to_chat(user, "This computer's battery slot is already occupied by \the [battery_module].")
 			return
 		found = 1
 		battery_module = H
-	else if(istype(H, /obj/item/weapon/stock_parts/computer/processor_unit))
+	else if(istype(H, /obj/item/stock_parts/computer/processor_unit))
 		if(processor_unit)
 			to_chat(user, "This computer's processor slot is already occupied by \the [processor_unit].")
 			return
 		found = 1
 		processor_unit = H
-	else if(istype(H, /obj/item/weapon/stock_parts/computer/ai_slot))
+	else if(istype(H, /obj/item/stock_parts/computer/ai_slot))
 		if(ai_slot)
 			to_chat(user, "This computer's intellicard slot is already occupied by \the [ai_slot].")
 			return
 		found = 1
 		ai_slot = H
-	else if(istype(H, /obj/item/weapon/stock_parts/computer/tesla_link))
+	else if(istype(H, /obj/item/stock_parts/computer/tesla_link))
 		if(tesla_link)
 			to_chat(user, "This computer's tesla link slot is already occupied by \the [tesla_link].")
 			return
 		found = 1
 		tesla_link = H
-	else if(istype(H, /obj/item/weapon/stock_parts/computer/scanner))
+	else if(istype(H, /obj/item/stock_parts/computer/scanner))
 		if(scanner)
 			to_chat(user, "This computer's scanner slot is already occupied by \the [scanner].")
 			return
@@ -71,7 +71,7 @@
 		update_verbs()
 
 // Uninstalls component. Found and Critical vars may be passed by parent types, if they have additional hardware.
-/obj/item/modular_computer/proc/uninstall_component(var/mob/living/user, var/obj/item/weapon/stock_parts/computer/H, var/found = 0, var/critical = 0)
+/obj/item/modular_computer/proc/uninstall_component(var/mob/living/user, var/obj/item/stock_parts/computer/H, var/found = 0, var/critical = 0)
 	if(portable_drive == H)
 		portable_drive = null
 		found = 1

@@ -40,7 +40,8 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 	// Prevents the AI from using Topic on admin levels (by for example viewing through the court/thunderdome cameras)
 	// unless it's on the same level as the object it's interacting with.
 	var/turf/T = get_turf(src_object)
-	if(!T || !(z == T.z || (T.z in GLOB.using_map.player_levels)))
+	var/turf/A = get_turf(src)
+	if(!A || !T || !AreConnectedZLevels(A.z, T.z))
 		return STATUS_CLOSE
 
 	// If an object is in view then we can interact with it
@@ -59,10 +60,10 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 	return STATUS_CLOSE
 
 //Some atoms such as vehicles might have special rules for how mobs inside them interact with NanoUI.
-/atom/proc/contents_nano_distance(var/src_object, var/mob/living/user)
+/atom/proc/contents_nano_distance(src_object, mob/living/user)
 	return user.shared_living_nano_distance(src_object)
 
-/mob/living/proc/shared_living_nano_distance(var/atom/movable/src_object)
+/mob/living/proc/shared_living_nano_distance(atom/movable/src_object)
 	if (!(src_object in view(4, src))) 	// If the src object is not visable, disable updates
 		return STATUS_CLOSE
 

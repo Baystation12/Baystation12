@@ -4,35 +4,35 @@
 
 /decl/hierarchy/supply_pack/livecargo/monkey
 	name = "Inert - Monkey cubes"
-	contains = list (/obj/item/weapon/storage/box/monkeycubes)
+	contains = list (/obj/item/storage/box/monkeycubes)
 	cost = 20
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "monkey crate"
 
 /decl/hierarchy/supply_pack/livecargo/farwa
 	name = "Inert - Farwa cubes"
-	contains = list (/obj/item/weapon/storage/box/monkeycubes/farwacubes)
+	contains = list (/obj/item/storage/box/monkeycubes/farwacubes)
 	cost = 30
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "farwa crate"
 
 /decl/hierarchy/supply_pack/livecargo/skrell
 	name = "Inert - Neaera cubes"
-	contains = list (/obj/item/weapon/storage/box/monkeycubes/neaeracubes)
+	contains = list (/obj/item/storage/box/monkeycubes/neaeracubes)
 	cost = 30
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "neaera crate"
 
 /decl/hierarchy/supply_pack/livecargo/stok
 	name = "Inert - Stok cubes"
-	contains = list (/obj/item/weapon/storage/box/monkeycubes/stokcubes)
+	contains = list (/obj/item/storage/box/monkeycubes/stokcubes)
 	cost = 30
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "stok crate"
 
 /decl/hierarchy/supply_pack/livecargo/spidercubes
 	name = "Inert - Spiders"
-	contains = list(/obj/item/weapon/storage/box/monkeycubes/spidercubes)
+	contains = list(/obj/item/storage/box/monkeycubes/spidercubes)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Spiderling crate"
@@ -48,6 +48,13 @@
 	cost = 50
 	containertype = /obj/structure/largecrate/animal/corgi
 	containername = "corgi crate"
+	
+/decl/hierarchy/supply_pack/livecargo/cat
+	name = "Live - Cat"
+	contains = list()
+	cost = 50
+	containertype = /obj/structure/largecrate/animal/cat
+	containername = "cat crate"
 
 //farm animals - useless and annoying, but potentially a good source of food. expensive because they're live animals and their produce is available cheaper
 /decl/hierarchy/supply_pack/livecargo/cow

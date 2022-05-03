@@ -1,7 +1,7 @@
 /datum/extension/holster
 	base_type = /datum/extension/holster
 	var/atom/atom_holder
-	var/obj/item/weapon/storage/storage
+	var/obj/item/storage/storage
 	var/sound_in = 'sound/effects/holster/holsterin.ogg'
 	var/sound_out = 'sound/effects/holster/holsterout.ogg'
 	var/list/can_holster = null
@@ -68,14 +68,14 @@
 		return 0
 	if(user.get_active_hand() && user.get_inactive_hand())
 		to_chat(user, "<span class='warning'>You need an empty hand to draw \the [holstered]!</span>")
-		return 1
+		return 0
 	var/using_intent_preference = user.client ? user.client.get_preference_value(/datum/client_preference/holster_on_intent) == GLOB.PREF_YES : FALSE
 	if(avoid_intent || (using_intent_preference && user.a_intent != I_HELP))
 		var/sound_vol = 25
 		if(user.a_intent == I_HURT)
 			sound_vol = 50
-			if(istype(holstered, /obj/item/weapon/gun))
-				var/obj/item/weapon/gun/G = holstered
+			if(istype(holstered, /obj/item/gun))
+				var/obj/item/gun/G = holstered
 				G.check_accidents(user)
 				if(G.safety() && !user.skill_fail_prob(SKILL_WEAPONS, 100, SKILL_EXPERT, 0.5)) //Experienced shooter will disable safety before shooting.
 					G.toggle_safety(user)

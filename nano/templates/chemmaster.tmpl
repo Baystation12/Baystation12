@@ -1,0 +1,145 @@
+<style>
+	.linkbig {
+		height:32px;
+	}
+</style>
+{{if data.analyzedReagent}}
+	<div class="item">
+		{{:data.analyzedData}}
+	</div>
+	<div class="item">
+		{{:helper.link('Return', null, {"main": 1})}}
+	</div>
+{{else data.switchingSprite}}
+	{{if data.switchingSprite === "PILL"}}
+		<div class="item">
+			<i>Select an appearance for the pills created using this machine.</i>
+		</div>
+		<table>
+			{{for data.pillSprites}}
+				<tr>
+				<td>{{:helper.link(value.image, null, {"pill_sprite" : value.index}, value.image == data.spritePill ? 'selected' : null, "linkbig link")}}
+			{{/for}}
+		</table>
+	{{else data.switchingSprite === "BOTTLE"}}
+		<div class="item">
+			<i>Select an appearance for the bottles created using this machine.</i>
+		</div>
+		<table>
+			{{for data.bottleSprites}}
+				<tr>
+				<td>{{:helper.link(value.image, null, {"bottle_sprite" : value.index}, value.image == data.spriteBottle ? 'selected' : null, "linkbig link")}}
+			{{/for}}
+		</table>
+	{{/if}}
+	<div class="item">
+		{{:helper.link('Return', null, {"main": 1})}}
+	</div>
+{{else}}
+	{{if data.loadedContainer}}
+		<div class="item"> <!-- Button for ejecting the container -->
+			<div class="itemContent">
+				{{:helper.link('Eject Container and Clear Buffer', null, {"eject": 1})}}
+			</div>
+		</div> 
+		<div class="item"> <!-- Button for showing/ejecting pill bottle -->
+			<div class="itemContent">
+				{{if data.loadedPillBottle}}
+					{{:helper.link(data.pillBottleBlurb, null, {"ejectp": 1})}}
+				{{else}}
+					<span class="average"><i>No pill bottle inserted.</i></span>
+				{{/if}}
+			</div>
+		</div>
+		<div class="item"> <!-- Display of purification mode and button for changing it -->
+			<div class="itemLabel">
+				Purification Mode:
+			</div>
+			<div class="itemContent">
+				{{:helper.link(data.isSloppy ? "Quick" : "Thorough", null, {"toggle_sloppy" : 1})}}
+			</div>
+		</div>
+		<div class="item"> <!-- Show toggle for transfer mode -->
+			<div class="itemLabel">
+				Transfer from buffer into:
+			</div>
+			<div class="itemContent">
+				{{:helper.link(data.isTransferringToBeaker ? "Container" : "Disposal", null, {"toggle" : 1})}}
+			</div>
+		</div>
+		<br>
+		<div class="item"> <!-- Display of all reagents in the CONTAINER -->
+			<div class="itemLabel">
+				Container reagents
+			</div>
+			<div class="itemContent" style="width: 100%;">
+				<table>
+				{{for data.containerChemicals}}
+					<tr>
+					<td><span class="highlight">{{:value.name}} - {{:value.volume}} units&nbsp&nbsp&nbsp</span>
+					<td>{{:helper.link('1', null, {"add" : value.ref, "amount" : 1})}}
+					<td>{{:helper.link('5', null, {"add" : value.ref, "amount" : 5})}}
+					<td>{{:helper.link('10', null, {"add" : value.ref, "amount" : 10})}}
+					<td>{{:helper.link('All', null, {"add" : value.ref, "amount" : value.volume})}}
+					<td>{{:helper.link('(...)', null, {"addcustom" : value.ref})}}
+					<td>{{:helper.link('Analyze', 'search', {"analyze" : value.ref})}}
+				{{empty}}
+					Container is empty.
+				{{/for}}
+				</table>
+			</div>
+		</div>
+		<hr>
+		<div class="item"> <!-- Display of all reagents in the BUFFER -->
+			<div class="itemLabel">
+				Buffer reagents
+			</div>
+			<div class="itemContent" style="width: 100%;">
+				<table>
+				{{for data.bufferChemicals}}
+					<tr>
+					<td><span class="highlight">{{:value.name}} - {{:value.volume}} units&nbsp&nbsp&nbsp</span>
+					<td>{{:helper.link('1', null, {"remove" : value.ref, "amount" : 1})}}
+					<td>{{:helper.link('5', null, {"remove" : value.ref, "amount" : 5})}}
+					<td>{{:helper.link('10', null, {"remove" : value.ref, "amount" : 10})}}
+					<td>{{:helper.link('All', null, {"remove" : value.ref, "amount" : value.volume})}}
+					<td>{{:helper.link('(...)', null, {"removecustom" : value.ref})}}
+					<td>{{:helper.link('Analyze', 'search', {"analyze" : value.ref})}}
+				{{empty}}
+					Buffer is empty.
+				{{/for}}
+				</table>
+			</div>
+		</div>
+		<hr>
+		<!-- Pill/bottle creation menu -->
+		{{if data.productionOptions === "BASE"}} <!-- 1 - normal chemmaster -->
+			<div class="item">
+				<table>
+					<tr>
+					<td>{{:helper.link("Create pill (max. 30u)", null, {"createpill" : 1})}} {{:helper.link(data.pillDosage, null, {"pill_dosage" : 1})}}
+					<tr>
+					<td>{{:helper.link("Create multiple pills", null, {"createpill_multiple" : 1})}}
+					<tr>
+					<td>{{:helper.link("Create bottle (max. 60u)", null, {"createbottle" : 1})}} {{:helper.link(data.bottleDosage, null, {"bottle_dosage" : 1})}}
+				</table>
+			</div>
+			<div class="item">
+				<div class="itemContent">
+					{{:helper.link(data.spritePill, null, {"change_pill" : 1}, null, "linkbig link")}}
+					{{:helper.link(data.spriteBottle, null, {"change_bottle" : 1}, null, "linkbig link")}}
+				</div>
+			</div>
+		{{else data.productionOptions === "CONDIMENTS"}} <!-- 2 - condimaster -->
+			<div class="item">
+				<table>
+					<tr>
+					<td>{{:helper.link("Create condiment bottle (max. 50u)", null, {"createbottle" : 1})}}
+				</table>
+			</div>
+			
+		{{/if}}
+	{{else}}
+		<span class='average'><i>No container inserted.</i></span>
+	{{/if}}
+{{/if}}

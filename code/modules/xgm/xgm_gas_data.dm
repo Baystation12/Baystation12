@@ -1,4 +1,4 @@
-/var/datum/xgm_gas_data/gas_data
+var/global/datum/xgm_gas_data/gas_data
 
 /datum/xgm_gas_data
 	//Simple list of all the gas IDs.
@@ -89,7 +89,7 @@
 	icon = 'icons/effects/tile_effects.dmi'
 	icon_state = "generic"
 	layer = FIRE_LAYER
-	appearance_flags = RESET_COLOR
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 	mouse_opacity = 0
 	var/gas_id
 

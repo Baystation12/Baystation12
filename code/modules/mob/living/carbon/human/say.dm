@@ -7,7 +7,7 @@
 	if(!speaking)
 		speaking = parse_language(message)
 		if (speaking)
-			message = copytext(message,2+length(speaking.key))
+			message = copytext_char(message,2+length_char(speaking.key))
 		else
 			speaking = get_any_good_language(set_default=TRUE)
 			if (!speaking)
@@ -104,8 +104,8 @@
 /mob/living/carbon/human/GetVoice()
 
 	var/voice_sub
-	if(istype(back,/obj/item/weapon/rig))
-		var/obj/item/weapon/rig/rig = back
+	if(istype(back,/obj/item/rig))
+		var/obj/item/rig/rig = back
 		// todo: fix this shit
 		if(rig.speech && rig.speech.voice_holder && rig.speech.voice_holder.active && rig.speech.voice_holder.voice)
 			voice_sub = rig.speech.voice_holder.voice
@@ -124,7 +124,8 @@
 			var/obj/item/voice_changer/changer = locate() in gear
 			if(changer && changer.active && changer.voice)
 				voice_sub = changer.voice
-
+	if(fake_name)
+		return fake_name
 	if(voice_sub)
 		return voice_sub
 	if(mind && mind.changeling && mind.changeling.mimicing)
@@ -133,7 +134,7 @@
 
 /mob/living/carbon/human/say_quote(var/message, var/datum/language/speaking = null)
 	var/verb = "says"
-	var/ending = copytext(message, length(message))
+	var/ending = copytext(message, -1)
 
 	if(speaking)
 		verb = speaking.get_spoken_verb(ending)
@@ -164,10 +165,11 @@
 	switch(message_mode)
 		if("intercom")
 			if(!src.restrained())
-				for(var/obj/item/device/radio/intercom/I in view(1))
-					I.talk_into(src, message, null, verb, speaking)
-					I.add_fingerprint(src)
-					used_radios += I
+				for(var/obj/item/device/radio/I in view(1))
+					if(I.intercom_handling)
+						I.talk_into(src, message, null, verb, speaking)
+						I.add_fingerprint(src)
+						used_radios += I
 		if("headset")
 			if(l_ear && istype(l_ear,/obj/item/device/radio))
 				var/obj/item/device/radio/R = l_ear
@@ -230,12 +232,12 @@
 	. = ..()
 
 /mob/living/carbon/human/parse_language(var/message)
-	var/prefix = copytext(message,1,2)
+	var/prefix = copytext_char(message,1,2)
 	if(length(message) >= 1 && prefix == get_prefix_key(/decl/prefix/audible_emote))
 		return all_languages["Noise"]
 
 	if(length(message) >= 2 && is_language_prefix(prefix))
-		var/language_prefix = lowertext(copytext(message, 2 ,3))
+		var/language_prefix = lowertext(copytext_char(message, 2 ,3))
 		var/datum/language/L = language_keys[language_prefix]
 		if (can_speak(L))
 			return L

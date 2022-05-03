@@ -4,15 +4,15 @@
 	icon = 'icons/obj/pipes/disposal.dmi'
 	name = "disposal pipe"
 	desc = "An underfloor disposal pipe."
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 
 	level = 1			// underfloor only
 	var/dpdir = 0		// bitmask of pipe directions
 	dir = 0				// dir will contain dominant direction for junction pipes
-	var/health = 10 	// health points 0-10
+	health_max = 10
 	alpha = 192 // Plane and alpha modified for mapping, reset to normal on spawn.
-	layer = DISPOSALS_PIPE_LAYER
+	layer = ABOVE_TILE_LAYER
 	var/base_icon_state	// initial icon state on map
 	var/sort_type = ""
 	var/turn = DISPOSAL_FLIP_NONE
@@ -22,11 +22,13 @@
 /obj/structure/disposalpipe/Initialize()
 	. = ..()
 	alpha = 255
+	layer = DISPOSALS_PIPE_LAYER
 	base_icon_state = icon_state
+	update_icon()
 
 // pipe is deleted
 // ensure if holder is present, it is expelled
-obj/structure/disposalpipe/Destroy()
+/obj/structure/disposalpipe/Destroy()
 	var/obj/structure/disposalholder/H = locate() in src
 	if(H)
 		// holder was present
@@ -96,6 +98,10 @@ obj/structure/disposalpipe/Destroy()
 	if(!istype(H))
 		return
 
+	if (!T) //panic!
+		qdel(H)
+		return
+
 	// Empty the holder if it is expelled into a dense turf.
 	// Leaving it intact and sitting in a wall is stupid.
 	if(T.density)
@@ -127,6 +133,16 @@ obj/structure/disposalpipe/Destroy()
 					if(AM)
 						AM.throw_at(target, 100, 1)
 			H.vent_gas(T)
+
+			// throw out vomit
+			if(H.reagents?.total_volume)
+				visible_message(SPAN_DANGER("Vomit spews out of the disposal pipe!"))
+				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+				if(istype(src.loc, /turf/simulated))
+					var/obj/effect/decal/cleanable/vomit/splat = new /obj/effect/decal/cleanable/vomit(src.loc)
+					H.reagents.trans_to_obj(splat, min(15, H.reagents.total_volume))
+					splat.update_icon()
+
 			qdel(H)
 
 	else	// no specified direction, so throw in random direction
@@ -178,43 +194,25 @@ obj/structure/disposalpipe/Destroy()
 	spawn(2)	// delete pipe after 2 ticks to ensure expel proc finished
 		qdel(src)
 
-
-// pipe affected by explosion
-/obj/structure/disposalpipe/ex_act(severity)
-
-	switch(severity)
-		if(1.0)
-			broken(0)
-			return
-		if(2.0)
-			health -= rand(5,15)
-			healthcheck()
-			return
-		if(3.0)
-			health -= rand(0,15)
-			healthcheck()
-			return
-
-
-	// test health for brokenness
-/obj/structure/disposalpipe/proc/healthcheck()
-	if(health < -2)
-		broken(0)
-	else if(health<1)
-		broken(1)
-	return
+/obj/structure/disposalpipe/handle_death_change(new_death_state)
+	if (new_death_state)
+		broken(prob(0.5))
 
 //attack by item
 //weldingtool: unfasten and convert to obj/disposalconstruct
 
-/obj/structure/disposalpipe/attackby(var/obj/item/I, var/mob/user)
-
+/obj/structure/disposalpipe/attackby(obj/item/I, mob/user)
 	var/turf/T = src.loc
 	if(!T.is_plating())
 		return		// prevent interaction with T-scanner revealed pipes
 	src.add_fingerprint(user, 0, I)
-	if(istype(I, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/W = I
+
+	if (user.a_intent == I_HURT)
+		..()
+		return
+
+	if(istype(I, /obj/item/weldingtool))
+		var/obj/item/weldingtool/W = I
 		if(W.remove_fuel(0,user))
 			playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 			// check if anything changed over 2 seconds
@@ -229,14 +227,16 @@ obj/structure/disposalpipe/Destroy()
 				to_chat(user, "You must stay still while welding the pipe.")
 		else
 			to_chat(user, "You need more welding fuel to cut the pipe.")
-			return
+		return
+
+	..()
 
 	// called when pipe is cut with welder
 /obj/structure/disposalpipe/proc/welded()
 	var/obj/structure/disposalconstruct/C = new (src.loc, src)
 	src.transfer_fingerprints_to(C)
 	C.set_density(0)
-	C.anchored = 1
+	C.anchored = TRUE
 	C.update()
 
 	qdel(src)
@@ -768,8 +768,8 @@ obj/structure/disposalpipe/Destroy()
 	if(!T.is_plating())
 		return		// prevent interaction with T-scanner revealed pipes
 	src.add_fingerprint(user, 0, I)
-	if(istype(I, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/W = I
+	if(istype(I, /obj/item/weldingtool))
+		var/obj/item/weldingtool/W = I
 
 		if(W.remove_fuel(0,user))
 			playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
@@ -780,6 +780,9 @@ obj/structure/disposalpipe/Destroy()
 			sleep(30)
 			if(!W.isOn()) return
 			if(user.loc == uloc && wloc == W.loc)
+				if(linked && istype(linked,/obj/machinery/disposal))
+					var/obj/machinery/disposal/D = linked
+					D.trunk = null
 				welded()
 			else
 				to_chat(user, "You must stay still while welding the pipe.")

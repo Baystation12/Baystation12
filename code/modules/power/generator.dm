@@ -2,8 +2,8 @@
 	name = "thermoelectric generator"
 	desc = "It's a high efficiency thermoelectric generator."
 	icon_state = "teg-unassembled"
-	density = 1
-	anchored = 0
+	density = TRUE
+	anchored = FALSE
 
 	use_power = POWER_USE_IDLE
 	idle_power_usage = 100 //Watts, I hope.  Just enough to do the computer and display things.
@@ -134,6 +134,8 @@
 		s.set_up(3, 1, src)
 		s.start()
 		stored_energy *= 0.5
+		if (powernet)
+			powernet.apcs_overload(0, 2, 5)
 
 	//Power
 	last_circ1_gen = circ1.return_stored_energy()
@@ -152,7 +154,7 @@
 		update_icon()
 	add_avail(effective_gen)
 
-/obj/machinery/power/generator/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/power/generator/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		anchored = !anchored

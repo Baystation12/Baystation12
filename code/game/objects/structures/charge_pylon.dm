@@ -19,7 +19,7 @@
 	if(next_use > world.time) return
 	next_use = world.time + 10
 	var/mob/living/carbon/human/H = user
-	var/obj/item/weapon/cell/power_cell
+	var/obj/item/cell/power_cell
 	if(ishuman(user))
 		var/obj/item/organ/internal/cell/cell = locate() in H.internal_organs
 		if(cell && cell.cell)
@@ -37,7 +37,7 @@
 	if(istype(H) && H.species.name == SPECIES_ADHERENT)
 		return
 	if(isrobot(user))
-		user.apply_damage(150, BURN, def_zone = BP_CHEST)
+		user.apply_damage(150, DAMAGE_BURN, def_zone = BP_CHEST)
 		visible_message("<span class='danger'>Electricity arcs off [user] as it touches \the [src]!</span>")
 		to_chat(user, "<span class='danger'><b>You detect damage to your components!</b></span>")
 	else

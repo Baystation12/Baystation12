@@ -4,14 +4,14 @@
 	icon = 'icons/obj/pit.dmi'
 	icon_state = "pit1"
 	blend_mode = BLEND_MULTIPLY
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	var/open = 1
 
 /obj/structure/pit/attackby(obj/item/W, mob/user)
-	if( istype(W,/obj/item/weapon/shovel) )
+	if( istype(W,/obj/item/shovel) )
 		visible_message("<span class='notice'>\The [user] starts [open ? "filling" : "digging open"] \the [src]</span>")
-		if( do_after(user, 50) )
+		if( do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) )
 			visible_message("<span class='notice'>\The [user] [open ? "fills" : "digs open"] \the [src]!</span>")
 			if(open)
 				close(user)
@@ -25,7 +25,7 @@
 			to_chat(user, "<span class='notice'>There's already a grave marker here.</span>")
 		else
 			visible_message("<span class='notice'>\The [user] starts making a grave marker on top of \the [src]</span>")
-			if( do_after(user, 50) )
+			if( do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) )
 				visible_message("<span class='notice'>\The [user] finishes the grave marker</span>")
 				var/obj/item/stack/material/wood/plank = W
 				plank.use(1)
@@ -81,7 +81,7 @@
 	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
 		playsound(src.loc, 'sound/weapons/bite.ogg', 100, 1)
 
-		if(!do_after(escapee, 50))
+		if(!do_after(escapee, 5 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 			to_chat(escapee, "<span class='warning'>You have stopped digging.</span>")
 			return
 		if(open)
@@ -132,7 +132,7 @@
 	icon_state = "wood"
 	pixel_x = 15
 	pixel_y = 8
-	anchored = 1
+	anchored = TRUE
 	var/message = "Unknown."
 
 /obj/structure/gravemarker/cross
@@ -151,20 +151,20 @@
 
 	var/decl/cultural_info/S = SSculture.get_culture(CULTURE_HUMAN)
 	var/nam = S.get_random_name(pick(MALE,FEMALE))
-	var/cur_year = game_year
+	var/cur_year = GLOB.using_map.game_year
 	var/born = cur_year - rand(5,150)
 	var/died = max(cur_year - rand(0,70),born)
 
 	message = "Here lies [nam], [born] - [died]."
 
 /obj/structure/gravemarker/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/weapon/material/hatchet))
+	if(istype(W,/obj/item/material/hatchet))
 		visible_message("<span class = 'warning'>\The [user] starts hacking away at \the [src] with \the [W].</span>")
-		if(!do_after(user, 30))
+		if(!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			visible_message("<span class = 'warning'>\The [user] hacks \the [src] apart.</span>")
 			new /obj/item/stack/material/wood(src)
 			qdel(src)
-	if(istype(W,/obj/item/weapon/pen))
+	if(istype(W,/obj/item/pen))
 		var/msg = sanitize(input(user, "What should it say?", "Grave marker", message) as text|null)
 		if(msg)
 			message = msg

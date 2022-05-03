@@ -12,7 +12,7 @@
 	var/vocal = 1
 
 	//Healing vars
-	var/obj/item/weapon/reagent_containers/glass/reagent_glass = null //Can be set to draw from this for reagents.
+	var/obj/item/reagent_containers/glass/reagent_glass = null //Can be set to draw from this for reagents.
 	var/injection_amount = 15 //How much reagent do we inject at a time?
 	var/heal_threshold = 10 //Start healing when they have this much damage in a category
 	var/use_beaker = 0 //Use reagents in beaker instead of default treatment agents.
@@ -75,7 +75,7 @@
 		broadcast_medical_hud_message("[src] is treating <b>[H]</b> in <b>[location]</b>", src)
 	busy = 1
 	update_icons()
-	if(do_mob(src, H, 30))
+	if(do_after(src, 3 SECONDS, H, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		if(t == 1)
 			reagent_glass.reagents.trans_to_mob(H, injection_amount, CHEM_BLOOD)
 		else
@@ -94,7 +94,7 @@
 		icon_state = "medibot[on]"
 
 /mob/living/bot/medbot/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/weapon/reagent_containers/glass))
+	if(istype(O, /obj/item/reagent_containers/glass))
 		if(locked)
 			to_chat(user, "<span class='notice'>You cannot insert a beaker because the panel is locked.</span>")
 			return
@@ -156,11 +156,11 @@
 			if("adj_threshold")
 				if(!locked || issilicon(user))
 					var/adjust_num = text2num(href_list["amount"])
-					heal_threshold = Clamp(heal_threshold + adjust_num, 5, 75)
+					heal_threshold = clamp(heal_threshold + adjust_num, 5, 75)
 			if("adj_inject")
 				if(!locked || issilicon(user))
 					var/adjust_num = text2num(href_list["amount"])
-					injection_amount = Clamp(injection_amount + adjust_num, 5, 15)
+					injection_amount = clamp(injection_amount + adjust_num, 5, 15)
 			if("use_beaker")
 				if(!locked || issilicon(user))
 					use_beaker = !use_beaker
@@ -194,7 +194,7 @@
 		flick("medibot_spark", src)
 		target = null
 		busy = 0
-		emagged = 1
+		emagged = TRUE
 		on = 1
 		update_icons()
 		. = 1
@@ -204,7 +204,7 @@
 	visible_message("<span class='danger'>[src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
 
-	new /obj/item/weapon/storage/firstaid(Tsec)
+	new /obj/item/storage/firstaid(Tsec)
 	new /obj/item/device/assembly/prox_sensor(Tsec)
 	new /obj/item/device/scanner/health(Tsec)
 	if (prob(50))

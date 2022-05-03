@@ -7,6 +7,7 @@
 /obj/item/device/scanner/mining
 	name = "ore detector"
 	desc = "A complex device used to locate ore deep underground."
+	icon = 'icons/obj/ore_analyzer.dmi'
 	icon_state = "ore"
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 	use_delay = 50
@@ -29,7 +30,7 @@
 		scan_data = scan_results[1]
 	else
 		scan_data += "<hr>[scan_results[1]]"
-	to_chat(user, "\icon[src] <span class='notice'>\The [src] displays a readout.</span>")
+	to_chat(user, "[icon2html(src, user)] <span class='notice'>\The [src] displays a readout.</span>")
 	to_chat(user, scan_results[1])
 
 	if(scan_results[2])
@@ -42,7 +43,7 @@
 		to_chat(M,"<span class='warning'>There is no survey data stored on the [src].</span>")
 		return 0
 	visible_message("<span class='notice'>The [src] spits out a disk containing [survey_data] GEP.</span>")
-	var/obj/item/weapon/disk/survey/D = new(get_turf(src))
+	var/obj/item/disk/survey/D = new(get_turf(src))
 	D.data = survey_data
 	survey_data = 0
 	M.put_in_hands(D)
@@ -60,17 +61,17 @@
 		return
 	put_disk_in_hand(M)
 
-/obj/item/weapon/disk/survey
+/obj/item/disk/survey
 	name = "survey data disk"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "nucleardisk"
 	var/data
 
-/obj/item/weapon/disk/survey/examine(mob/user)
+/obj/item/disk/survey/examine(mob/user)
 	. = ..()
 	to_chat(user,"A tiny indicator on the [src] shows it holds [data] good explorer points.")
 
-/obj/item/weapon/disk/survey/Value()
+/obj/item/disk/survey/Value()
 	if(data < 10000)
 		return 0.07*data
 	if(data < 30000)
@@ -126,7 +127,7 @@
 			if(76 to INFINITY) result = "huge quantities"
 
 		scandata += "- [result] of [ore_type]."
-	
+
 	return list(jointext(scandata, "<br>"), new_data)
 
 #undef  ORE_SURFACE

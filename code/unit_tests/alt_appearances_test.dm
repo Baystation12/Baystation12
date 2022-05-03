@@ -4,12 +4,12 @@
 /datum/unit_test/alt_appearance_cardborg_shall_have_base_backpack_variant/start_test()
 	for(var/ca_type in subtypesof(/decl/cardborg_appearance))
 		var/decl/cardborg_appearance/ca = ca_type
-		var/obj/item/weapon/storage/backpack/backpack_type = initial(ca.backpack_type)
-		if(backpack_type == /obj/item/weapon/storage/backpack)
-			pass("Found a cardborg appearance using the base /obj/item/weapon/storage/backpack backpack.")
+		var/obj/item/storage/backpack/backpack_type = initial(ca.backpack_type)
+		if(backpack_type == /obj/item/storage/backpack)
+			pass("Found a cardborg appearance using the base /obj/item/storage/backpack backpack.")
 			return 1
 
-	fail("Did not find a cardborg appearance using the base /obj/item/weapon/storage/backpack backpack.")
+	fail("Did not find a cardborg appearance using the base /obj/item/storage/backpack backpack.")
 	return 1
 
 /datum/unit_test/alt_appearance_cardborg_all_icon_states_shall_exist

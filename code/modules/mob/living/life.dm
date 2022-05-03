@@ -4,7 +4,7 @@
 
 	..()
 
-	if (HasMovementHandler(/datum/movement_handler/mob/transformation/))
+	if (HasMovementHandler(/datum/movement_handler/mob/transformation))
 		return
 	if (!loc)
 		return
@@ -23,6 +23,10 @@
 
 	if(stat != DEAD)
 		aura_check(AURA_TYPE_LIFE)
+
+		if(!InStasis())
+			//Mutations and radiation
+			handle_mutations_and_radiation()
 
 	//Check if we're on fire
 	handle_fire()
@@ -185,7 +189,7 @@
 	else if(eyeobj)
 		if(eyeobj.owner != src)
 			reset_view(null)
-	else if(!client.adminobs)
+	else if(!client?.adminobs)
 		reset_view(null)
 
 /mob/living/proc/update_sight()

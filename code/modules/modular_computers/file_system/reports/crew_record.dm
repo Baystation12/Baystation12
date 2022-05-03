@@ -67,7 +67,11 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 	if(H)
 		if(H.isSynthetic())
-			set_implants("Fully synthetic body")
+			var/organ_data = list("Fully synthetic body")
+			for(var/obj/item/organ/internal/augment/A in H.internal_organs)
+				organ_data += "installed augment - [A.name]"
+			if (LAZYLEN(organ_data))
+				set_implants(jointext(organ_data, "\[*\]"))
 		else
 			var/organ_data = list("\[*\]")
 			for(var/obj/item/organ/external/E in H.organs)
@@ -77,7 +81,10 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 				if(BP_IS_ASSISTED(I))
 					organ_data += I.get_mechanical_assisted_descriptor()
 				else if (BP_IS_ROBOTIC(I))
-					organ_data += "robotic [I.name] prosthetic"
+					if (!istype(I, /obj/item/organ/internal/augment)) // Differentiate between augments and prosthetics
+						organ_data += "robotic [I.name] prosthetic"
+					else
+						organ_data += "installed augment - [I.name]"
 			set_implants(jointext(organ_data, "\[*\]"))
 
 	// Security record
@@ -104,7 +111,6 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 	// Misc cultural info.
 	set_homeSystem(H ? html_decode(H.get_cultural_value(TAG_HOMEWORLD)) : "Unset")
-	set_faction(H ? html_decode(H.get_cultural_value(TAG_FACTION)) : "Unset")
 	set_religion(H ? html_decode(H.get_cultural_value(TAG_RELIGION)) : "Unset")
 
 	if(H)
@@ -117,6 +123,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		set_skillset(jointext(skills,"\n"))
 
 	// Antag record
+	set_faction(H ? html_decode(H.get_cultural_value(TAG_FACTION)) : "Unset")
 	set_antagRecord(H && H.exploit_record && !jobban_isbanned(H, "Records") ? html_decode(H.exploit_record) : "")
 
 // Global methods
@@ -155,6 +162,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	return dat
 
 /proc/get_crewmember_record(var/name)
+	name = sanitize(name)
 	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
 		if(CR.get_name() == name)
 			return CR
@@ -214,16 +222,16 @@ FIELD_SHORT("Fingerprint", fingerprint, access_security, access_security)
 // EMPLOYMENT RECORDS
 FIELD_LONG("Employment Record", emplRecord, access_bridge, access_bridge)
 FIELD_SHORT("Home System", homeSystem, access_bridge, access_change_ids)
-FIELD_SHORT("Faction", faction, access_bridge, access_bridge)
 FIELD_LONG("Qualifications", skillset, access_bridge, access_bridge)
 
 // ANTAG RECORDS
+FIELD_SHORT("Faction", faction, access_syndicate, access_syndicate)
 FIELD_LONG("Exploitable Information", antagRecord, access_syndicate, access_syndicate)
 
 //Options builderes
 /datum/report_field/options/crew_record/rank/proc/record_ranks()
 	var/datum/computer_file/report/crew_record/record = owner
-	var/datum/mil_branch/branch = mil_branches.get_branch(record.get_branch())
+	var/datum/mil_branch/branch = GLOB.mil_branches.get_branch(record.get_branch())
 	if(!branch)
 		return
 	. = list()
@@ -242,8 +250,8 @@ FIELD_LONG("Exploitable Information", antagRecord, access_syndicate, access_synd
 /datum/report_field/options/crew_record/branch/proc/record_branches()
 	. = list()
 	. |= "Unset"
-	for(var/B in mil_branches.branches)
-		var/datum/mil_branch/BR = mil_branches.branches[B]
+	for(var/B in GLOB.mil_branches.branches)
+		var/datum/mil_branch/BR = GLOB.mil_branches.branches[B]
 		. |= BR.name
 
 #undef GETTER_SETTER

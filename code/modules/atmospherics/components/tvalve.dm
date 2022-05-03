@@ -66,7 +66,7 @@
 		if(!state)
 			network_node1 = new_network
 
-	if(new_network.normal_members.Find(src))
+	if(list_find(new_network.normal_members, src))
 		return 0
 
 	new_network.normal_members += src
@@ -264,7 +264,7 @@
 
 	return null
 
-/obj/machinery/atmospherics/tvalve/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/tvalve/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if(!isWrench(W))
 		return ..()
 	var/datum/gas_mixture/int_air = return_air()
@@ -275,7 +275,7 @@
 		return 1
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-	if (do_after(user, 40, src))
+	if (do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 		user.visible_message( \
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
@@ -317,10 +317,10 @@
 		"valve_toggle" = /decl/public_access/public_method/tvalve_toggle
 	)
 
-//Mirrored editions		
+//Mirrored editions
 /obj/machinery/atmospherics/tvalve/mirrored
 	icon_state = "map_tvalvem0"
-	
+
 	connect_dir_type = SOUTH | EAST | NORTH
 	build_icon_state = "map_tvalvem0"
 
@@ -349,13 +349,13 @@
 	desc = "A digitally controlled valve."
 	icon = 'icons/atmos/digital_tvalve.dmi'
 	icon_state = "map_tvalve0"
-	
+
 	build_icon = 'icons/atmos/digital_tvalve.dmi'
 	build_icon_state = "map_tvalve0"
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/radio/receiver,
-		/obj/item/weapon/stock_parts/power/apc
+		/obj/item/stock_parts/radio/receiver,
+		/obj/item/stock_parts/power/apc
 	)
 	public_variables = list(/decl/public_access/public_variable/tvalve_state)
 	public_methods = list(
@@ -389,8 +389,8 @@
 	build_icon_state = "map_tvalvem0"
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/radio/receiver,
-		/obj/item/weapon/stock_parts/power/apc
+		/obj/item/stock_parts/radio/receiver,
+		/obj/item/stock_parts/power/apc
 	)
 	public_variables = list(/decl/public_access/public_variable/tvalve_state)
 	public_methods = list(

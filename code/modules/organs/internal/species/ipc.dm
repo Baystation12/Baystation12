@@ -5,6 +5,7 @@
 	icon_state = "posibrain"
 	organ_tag = BP_POSIBRAIN
 	parent_organ = BP_CHEST
+	status = ORGAN_ROBOTIC
 	vital = 0
 	force = 1.0
 	w_class = ITEM_SIZE_NORMAL
@@ -13,13 +14,16 @@
 	throw_range = 5
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 4, TECH_BLUESPACE = 2, TECH_DATA = 4)
 	attack_verb = list("attacked", "slapped", "whacked")
-
+	max_damage = 90
+	min_bruised_damage = 30
+	min_broken_damage = 60
 	relative_size = 60
 
 	var/mob/living/silicon/sil_brainmob/brainmob = null
 
-	var/searching = 0
-	var/askDelay = 10 * 60 * 1
+	var/searching = TIMER_ID_NULL
+	var/last_search = 0
+
 	req_access = list(access_robotics)
 
 	var/list/shackled_verbs = list(
@@ -35,6 +39,8 @@
 	robotize()
 	unshackle()
 	update_icon()
+	if (!is_processing)
+		START_PROCESSING(SSobj, src)
 
 /obj/item/organ/internal/posibrain/proc/init(var/mob/living/carbon/H)
 	brainmob = new(src)
@@ -49,71 +55,135 @@
 	QDEL_NULL(brainmob)
 	return ..()
 
-/obj/item/organ/internal/posibrain/attack_self(mob/user as mob)
-	if(brainmob && !brainmob.key && searching == 0)
-		//Start the process of searching for a new user.
-		to_chat(user, "<span class='notice'>You carefully locate the manual activation switch and start the positronic brain's boot process.</span>")
-		icon_state = "posibrain-searching"
-		src.searching = 1
-		var/datum/ghosttrap/G = get_ghost_trap("positronic brain")
-		G.request_player(brainmob, "Someone is requesting a personality for a positronic brain.", 60 SECONDS)
-		spawn(600) reset_search()
-
-/obj/item/organ/internal/posibrain/proc/reset_search() //We give the players sixty seconds to decide, then reset the timer.
-	if(src.brainmob && src.brainmob.key) return
-
-	src.searching = 0
-	icon_state = "posibrain"
-
-	var/turf/T = get_turf_or_move(src.loc)
-	for (var/mob/M in viewers(T))
-		M.show_message("<span class='notice'>The positronic brain buzzes quietly, and the golden lights fade away. Perhaps you could try again?</span>")
-
-/obj/item/organ/internal/posibrain/attack_ghost(var/mob/observer/ghost/user)
-	if(!searching || (src.brainmob && src.brainmob.key))
+/obj/item/organ/internal/posibrain/attack_self(mob/user)
+	if (!user.IsAdvancedToolUser())
 		return
-
-	var/datum/ghosttrap/G = get_ghost_trap("positronic brain")
-	if(!G.assess_candidate(user))
-		return
-	var/response = alert(user, "Are you sure you wish to possess this [src]?", "Possess [src]", "Yes", "No")
-	if(response == "Yes")
-		G.transfer_personality(user, brainmob)
-	return
-
-/obj/item/organ/internal/posibrain/examine(mob/user)
-	. = ..()
-
-	var/msg = "<span class='info'>*---------*</span>\nThis is \icon[src] \a <EM>[src]</EM>!\n[desc]\n"
-
-	if(shackle)	msg += "<span class='warning'>It is clamped in a set of metal straps with a complex digital lock.</span>\n"
-
-	msg += "<span class='warning'>"
-
-	if(src.brainmob && src.brainmob.key)
-		switch(src.brainmob.stat)
-			if(CONSCIOUS)
-				if(!src.brainmob.client)	msg += "It appears to be in stand-by mode.\n" //afk
-			if(UNCONSCIOUS)		msg += "<span class='warning'>It doesn't seem to be responsive.</span>\n"
-			if(DEAD)			msg += "<span class='deadsay'>It appears to be completely inactive.</span>\n"
+	if (user.skill_check(SKILL_DEVICES, SKILL_ADEPT))
+		if (status & ORGAN_DEAD || !brainmob)
+			to_chat(user, SPAN_WARNING("\The [src] is ruined; it will never turn on again."))
+			return
+		if (damage)
+			to_chat(user, SPAN_WARNING("\The [src] is damaged and requires repair first."))
+			return
+		if (searching != TIMER_ID_NULL)
+			visible_message("\The [user] flicks the activation switch on \the [src]. The lights go dark.", range = 3)
+			cancel_search()
+			return
+		start_search(user)
 	else
-		msg += "<span class='deadsay'>It appears to be completely inactive.</span>\n"
+		if ((status & ORGAN_DEAD) || !brainmob || damage || (searching != TIMER_ID_NULL))
+			to_chat(user, SPAN_WARNING("\The [src] doesn't respond to your pokes and prods."))
+			return
+		start_search(user)
 
-	msg += "</span><span class='info'>*---------*</span>"
-	to_chat(user, msg)
-	return
+/obj/item/organ/internal/posibrain/proc/start_search(mob/user)
+	if (!brainmob)
+		return
+	if (user)
+		if ((world.time - last_search) < (30 SECONDS))
+			to_chat(user, SPAN_WARNING("\The [src] doesn't react; wait a few seconds before trying again."))
+			return
+		last_search = world.time
+		if (brainmob && brainmob.key)
+			var/murder = alert(user, "\The [src] already has a mind! Are you sure? This is probably murder.", "Commit Robocide?", "Yes", "No")
+			if (murder == "No")
+				return
+		visible_message("\The [user] flicks the activation switch on \the [src].", range = 3)
+	var/has_mind = brainmob && brainmob.key && brainmob.mind
+	var/protected = has_mind && brainmob.mind.special_role
+	if (has_mind)
+		var/actor = user ? "\The [user]" : "Your brain"
+		var/sneaky = protected ? "However, you are beyond such things." : "This might be the end!"
+		to_chat(brainmob, SPAN_WARNING("[actor] is trying to overwrite you! [sneaky]"))
+	if (!protected)
+		var/datum/ghosttrap/T = get_ghost_trap("positronic brain")
+		T.request_player(brainmob, "Someone is requesting a personality for a positronic brain.", 60 SECONDS)
+	searching = addtimer(CALLBACK(src, .proc/cancel_search), 60 SECONDS, TIMER_UNIQUE | TIMER_STOPPABLE)
+	icon_state = "posibrain-searching"
+
+/obj/item/organ/internal/posibrain/proc/cancel_search()
+	visible_message(SPAN_ITALIC("\The [src] buzzes quietly and returns to an idle state."), range = 3)
+	if (searching != TIMER_ID_NULL)
+		deltimer(searching)
+	searching = TIMER_ID_NULL
+	if (brainmob && brainmob.key)
+		if (brainmob.mind && brainmob.mind.special_role)
+			var/sneaky = sanitizeSafe(input(brainmob, "You're safe. Pick a new name as cover? Leave blank to skip.", "Get Sneaky?", brainmob.real_name) as text, MAX_NAME_LEN)
+			if (sneaky)
+				brainmob.real_name = sneaky
+				brainmob.SetName(brainmob.real_name)
+				UpdateNames() 
+		else
+			to_chat(brainmob, SPAN_NOTICE("You're safe! Your brain didn't manage to replace you. This time."))
+	else
+		icon_state = "posibrain"
+	update_icon()
+
+/obj/item/organ/internal/posibrain/attack_ghost(mob/observer/ghost/user)
+	if (searching == TIMER_ID_NULL)
+		return
+	if (!brainmob)
+		return
+	if (brainmob.mind && brainmob.mind.special_role)
+		return
+	var/datum/ghosttrap/T = get_ghost_trap("positronic brain")
+	if (!T.assess_candidate(user))
+		return
+	var/possess = alert(user, "Do you wish to become \the [src]?", "Become [src]?", "Yes", "No")
+	if (possess != "Yes")
+		return
+	if (brainmob.key)
+		to_chat(brainmob, SPAN_DANGER("Your thoughts shatter into nothingness, quickly subsumed by a new identity. \"You\" have died."))
+		var/mob/observer/ghost/G = brainmob.ghostize(FALSE)
+		G.timeofdeath = world.time
+	T.transfer_personality(user, brainmob)
+
+/obj/item/organ/internal/posibrain/examine(mob/user, distance)
+	. = ..()
+	if (distance > 3)
+		return
+	var/msg = ""
+	if (isghost(user) || user.skill_check(SKILL_DEVICES, SKILL_ADEPT))
+		if ((status & ORGAN_DEAD) || damage)
+			if ((status & ORGAN_DEAD))
+				msg += SPAN_ITALIC("It is ruined and lifeless, damaged beyond hope of recovery.")
+			else if (damage > min_broken_damage)
+				msg += SPAN_ITALIC("It is seriously damaged and requires repair to work properly.")
+			else if (damage > min_bruised_damage)
+				msg += SPAN_ITALIC("It has taken some damage and is in need of repair.")
+			else
+				msg += SPAN_ITALIC("It has superficial wear and should work normally.")
+		if (!(status & ORGAN_DEAD))
+			if (msg)
+				msg += "\n"
+			if (brainmob && brainmob.key)
+				msg += SPAN_ITALIC("It blinks with activity.")
+				if (brainmob.stat || !brainmob.client)
+					msg += SPAN_ITALIC(" The responsiveness fault indicator is lit.")
+			else if (damage)
+				msg += SPAN_ITALIC("The red integrity fault indicator pulses slowly.")
+			else
+				msg += SPAN_ITALIC("The golden ready indicator [searching != TIMER_ID_NULL ? "flickers quickly as it tries to generate a personality" : "pulses lazily"].")
+	else
+		if ((status & ORGAN_DEAD) || damage > min_broken_damage)
+			msg += SPAN_ITALIC("It looks wrecked.")
+		else if (damage > min_bruised_damage)
+			msg += SPAN_ITALIC("It looks damaged.")
+		if (!(status & ORGAN_DEAD))
+			if (msg)
+				msg += "\n"
+			if (brainmob && brainmob.key)
+				msg += SPAN_ITALIC("Little lights flicker on its surface.")
+			else
+				if (damage)
+					msg += SPAN_ITALIC("A lone red light pulses malevolently on its surface.")
+				else
+					msg += SPAN_ITALIC("A lone golden light [searching != TIMER_ID_NULL ? "flickers quickly" : "pulses lazily"].")
+	if (msg)
+		to_chat(user, msg)
 
 /obj/item/organ/internal/posibrain/emp_act(severity)
-	if(!src.brainmob)
-		return
-	else
-		switch(severity)
-			if(1)
-				src.brainmob.emp_damage += rand(20,30)
-			if(2)
-				src.brainmob.emp_damage += rand(10,20)
-			if(3)
-				src.brainmob.emp_damage += rand(0,10)
+	damage += rand(15 - severity * 5, 20 - severity * 5)
 	..()
 
 /obj/item/organ/internal/posibrain/proc/PickName()
@@ -157,16 +227,64 @@
 	to_chat(brainmob, "<span class='notice'>You feel slightly disoriented. That's normal when you're just \a [initial(src.name)].</span>")
 	callHook("debrain", list(brainmob))
 
+/obj/item/organ/internal/posibrain/Process()
+	handle_damage_effects()
+	..()
+
+/obj/item/organ/internal/posibrain/proc/handle_damage_effects()
+	if (!owner || owner.stat)
+		return
+	if (damage > min_bruised_damage)
+		if (prob(1) && owner.confused < 1)
+			to_chat(owner, SPAN_WARNING("Your comprehension of spacial positioning goes temporarily awry."))
+			owner.confused += 3
+		if (prob(1) && owner.eye_blurry < 1)
+			to_chat(owner, SPAN_WARNING("Your optical interpretations become transiently erratic."))
+			owner.eye_blurry += 6
+		if (prob(1) && owner.ear_deaf < 1)
+			to_chat(owner, SPAN_WARNING("Your capacity to differentiate audio signals briefly fails you."))
+			owner.ear_deaf += 6
+		if (prob(1) && owner.slurring < 1)
+			to_chat(owner, SPAN_WARNING("Your ability to form coherent speech struggles to keep up."))
+			owner.slurring += 6
+		if (damage > min_broken_damage)
+			if (prob(2))
+				if (prob(15) && owner.sleeping < 1)
+					owner.visible_message(SPAN_ITALIC("\The [owner] suddenly halts all activity."))
+					owner.sleeping += 10
+				else if (owner.anchored || isspace(get_turf(owner)))
+					owner.visible_message(SPAN_ITALIC("\The [owner] seizes and twitches!"))
+					owner.Stun(2)
+				else
+					owner.visible_message(SPAN_ITALIC("\The [owner] seizes and clatters down in a heap!"), null, pick("Clang!", "Crash!", "Clunk!"))
+					owner.Weaken(2)
+			if (prob(2))
+				var/obj/item/organ/internal/cell/C = owner.internal_organs_by_name[BP_CELL]
+				if (C && C.get_charge() > 25)
+					C.use(25)
+					to_chat(owner, SPAN_WARNING("Your chassis power routine fluctuates wildly."))
+					var/datum/effect/effect/system/spark_spread/S = new
+					S.set_up(2, 0, loc)
+					S.start()
+
+
 /obj/item/organ/internal/posibrain/removed(var/mob/living/user)
 	if(!istype(owner))
 		return ..()
-
-	if(name == initial(name))
-		SetName("\the [owner.real_name]'s [initial(name)]")
-
+	UpdateNames()
 	transfer_identity(owner)
-
 	..()
+	if (!is_processing && !(status & ORGAN_DEAD))
+		START_PROCESSING(SSobj, src)
+
+/obj/item/organ/internal/posibrain/proc/UpdateNames()
+	var/new_name = owner ? owner.real_name : (brainmob ? brainmob.real_name : "")
+	if (new_name)
+		if (brainmob)
+			brainmob.SetName(new_name)
+		SetName("\the [new_name]'s [initial(name)]")
+		return
+	SetName("\the [initial(name)]")
 
 /obj/item/organ/internal/posibrain/replaced(var/mob/living/target)
 
@@ -182,6 +300,17 @@
 			target.key = brainmob.key
 
 	return 1
+
+/obj/item/organ/internal/posibrain/die()
+	damage = max_damage
+	status |= ORGAN_DEAD
+	STOP_PROCESSING(SSobj, src)
+	death_time = world.time
+	var/mob/self = owner || brainmob
+	if (self && self.mind)
+		self.visible_message("\The [self] unceremoniously falls lifeless.")
+		var/mob/observer/ghost/G = self.ghostize(FALSE)
+		G.timeofdeath = world.time
 
 /*
 	This is for law stuff directly. This is how a human mob will be able to communicate with the posi_brainmob in the
@@ -201,3 +330,4 @@
 
 
 	brainmob.open_subsystem(/datum/nano_module/law_manager, usr)
+	

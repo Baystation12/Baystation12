@@ -18,11 +18,12 @@
 	var/start_y			//will use random values if unset
 
 	var/base = 0		//starting sector, counts as station_levels
-	var/in_space = 1	//can be accessed via lucky EVA
+	var/in_space = TRUE	//can be accessed via lucky EVA
 
 	var/hide_from_reports = FALSE
 
-	var/has_distress_beacon
+	/// null | num | list. If a num or a (num, num) list, the radius or random bounds for placing this sector near the main map's overmap icon.
+	var/list/place_near_main
 
 /obj/effect/overmap/visitable/Initialize()
 	. = ..()
@@ -34,11 +35,24 @@
 
 	if(!GLOB.using_map.overmap_z)
 		build_overmap()
-		
-	start_x = start_x || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
-	start_y = start_y || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
 
-	forceMove(locate(start_x, start_y, GLOB.using_map.overmap_z))
+	var/map_low = OVERMAP_EDGE
+	var/map_high = GLOB.using_map.overmap_size - OVERMAP_EDGE
+	var/turf/home
+	if (place_near_main)
+		var/obj/effect/overmap/visitable/main = map_sectors["1"]
+		if (islist(place_near_main))
+			place_near_main = Roundm(Frand(place_near_main[1], place_near_main[2]), 0.1)
+		home = CircularRandomTurfAround(main, abs(place_near_main), map_low, map_low, map_high, map_high)
+		log_debug("place_near_main moving [src] near [main] ([main.x],[main.y]) with radius [place_near_main], got ([home.x],[home.y])")
+	else
+		start_x = start_x || rand(map_low, map_high)
+		start_y = start_y || rand(map_low, map_high)
+		home = locate(start_x, start_y, GLOB.using_map.overmap_z)
+	forceMove(home)
+
+	for(var/obj/effect/overmap/event/E in loc)
+		qdel(E)
 
 	docking_codes = "[ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))]"
 
@@ -105,7 +119,22 @@
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
 	icon_state = "sector"
-	anchored = 1
+	anchored = TRUE
+
+
+/obj/effect/overmap/visitable/sector/Initialize()
+	. = ..()
+
+	if(known)
+		update_known_connections(TRUE)
+
+
+/obj/effect/overmap/visitable/sector/update_known_connections(notify = FALSE)
+	. = ..()
+
+	for(var/obj/machinery/computer/ship/helm/H in SSmachines.machinery)
+		H.add_known_sector(src, notify)
+
 
 // Because of the way these are spawned, they will potentially have their invisibility adjusted by the turfs they are mapped on
 // prior to being moved to the overmap. This blocks that. Use set_invisibility to adjust invisibility as needed instead.
@@ -116,9 +145,9 @@
 		return 1
 
 	testing("Building overmap...")
-	world.maxz++
+	INCREMENT_WORLD_Z_SIZE
 	GLOB.using_map.overmap_z = world.maxz
-	
+
 	testing("Putting overmap on [GLOB.using_map.overmap_z]")
 	var/area/overmap/A = new
 	for (var/square in block(locate(1,1,GLOB.using_map.overmap_z), locate(GLOB.using_map.overmap_size,GLOB.using_map.overmap_size,GLOB.using_map.overmap_z)))

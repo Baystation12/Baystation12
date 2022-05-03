@@ -65,7 +65,7 @@
 #define COLOR_CYAN_BLUE        "#3366cc"
 #define COLOR_LIGHT_CYAN       "#66ccff"
 #define COLOR_PAKISTAN_GREEN   "#006600"
-#define COLOR_HULL             "#436b8e"
+#define COLOR_SOL              "#436b8e"
 #define COLOR_AMBER            "#ffbf00"
 #define COLOR_COMMAND_BLUE     "#46698c"
 #define COLOR_SKY_BLUE         "#5ca1cc"
@@ -81,6 +81,7 @@
 #define COLOR_ASTEROID_ROCK    "#735555"
 #define COLOR_NULLGLASS        "#ff6088"
 #define COLOR_DIAMOND          "#d8d4ea"
+#define COLOR_VOX			   "#244238"
 
 
 #define	PIPE_COLOR_GREY        "#808080"
@@ -97,6 +98,7 @@
 #define	COMMS_COLOR_ENTERTAIN  "#666666"
 #define	COMMS_COLOR_AI         "#ff00ff"
 #define	COMMS_COLOR_COMMON     "#408010"
+#define COMMS_COLOR_HAILING    "#cc00aa"
 #define	COMMS_COLOR_SERVICE    "#709b00"
 #define	COMMS_COLOR_SUPPLY     "#7f6539"
 #define	COMMS_COLOR_SCIENCE    "#993399"
@@ -110,6 +112,10 @@
 #define	COMMS_COLOR_CENTCOMM   "#5c5c7c"
 #define	COMMS_COLOR_SYNDICATE  "#6d3f40"
 #define	COMMS_COLOR_SKRELL     "#7331c4"
+#define COMMS_COLOR_VOX        "#f32b06"
+#define COMMS_COLOR_BEARCAT    "#590e2d"
+#define COMMS_COLOR_COLONY     "#ceaf3e"
+#define COMMS_COLOR_VERNE      "#738465"
 
 #define WOOD_COLOR_GENERIC     "#d5a66e"
 #define WOOD_COLOR_RICH        "#792f27"
@@ -119,10 +125,10 @@
 #define WOOD_COLOR_CHOCOLATE   "#543c30"
 #define WOOD_COLOR_YELLOW      "#e3994e"
 
-#define GLASS_COLOR            "#74c1ee"
+#define GLASS_COLOR            "#aaccff"
 #define GLASS_COLOR_PHORON     "#7c3a9a"
 #define GLASS_COLOR_TINTED     "#222222"
-#define GLASS_COLOR_FROSTED    "#ffffff"
+#define GLASS_COLOR_FROSTED    "#eeeeee"
 
 #define COLOR_BLOOD_HUMAN      "#a10808"
 
@@ -172,3 +178,7 @@
 #define CODEX_COLOR_ANTAG     "#e5a2a2"
 
 #define COLOR_WEBHOOK_DEFAULT 0x8bbbd5
+
+#define COLOR_DARKMODE_BACKGROUND "#202020"
+#define COLOR_DARKMODE_DARKBACKGROUND "#171717"
+#define COLOR_DARKMODE_TEXT "#a4bad6"

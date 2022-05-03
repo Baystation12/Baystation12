@@ -64,6 +64,23 @@
 			return ..(freq, level)
 	return -1
 
+/obj/item/device/radio/headset/map_preset
+	var/preset_name
+	var/encryption_key = /obj/item/device/encryptionkey
+	var/use_common = FALSE
+
+/obj/item/device/radio/headset/map_preset/Initialize()
+	if (preset_name)
+		var/name_lower = lowertext(preset_name)
+		name = "[name_lower] radio headset"
+		ks1type = encryption_key
+		default_frequency = assign_away_freq(preset_name)
+		if (use_common)
+			frequency = PUB_FREQ
+		else
+			frequency = default_frequency
+	. = ..()
+
 /obj/item/device/radio/headset/syndicate
 	origin_tech = list(TECH_ESOTERIC = 3)
 	syndie = 1
@@ -85,6 +102,13 @@
 /obj/item/device/radio/headset/raider/Initialize()
 	. = ..()
 	set_frequency(RAID_FREQ)
+
+/obj/item/device/radio/headset/vox_raider
+	ks1type = /obj/item/device/encryptionkey/vox_raider
+
+/obj/item/device/radio/headset/vox_raider/Initialize()
+	. = ..()
+	set_frequency(V_RAID_FREQ)
 
 /obj/item/device/radio/headset/binary
 	origin_tech = list(TECH_ESOTERIC = 3)
@@ -161,6 +185,12 @@
 	item_state = "com_headset_alt"
 	ks1type = /obj/item/device/encryptionkey/headset_com
 	max_keys = 3
+
+/obj/item/device/radio/headset/merchant
+	name = "merchant headset"
+	desc = "A headset utilizing the universal hailing frequency."
+	frequency = HAIL_FREQ
+	ks1type = /obj/item/device/encryptionkey/merchant
 
 /obj/item/device/radio/headset/heads/captain
 	name = "captain's headset"
@@ -246,13 +276,6 @@
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_service
 
-/obj/item/device/radio/headset/ert
-	name = "emergency response team radio headset"
-	desc = "The headset of the boss's boss."
-	icon_state = "com_headset"
-	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/ert
-
 /obj/item/device/radio/headset/foundation
 	name = "\improper Foundation radio headset"
 	desc = "The headeset of the occult cavalry."
@@ -307,7 +330,7 @@
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/specops
 
-/obj/item/device/radio/headset/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/device/radio/headset/attackby(obj/item/W as obj, mob/user as mob)
 //	..()
 	user.set_machine(src)
 	if (!( isScrewdriver(W) || (istype(W, /obj/item/device/encryptionkey/ ))))
@@ -328,7 +351,7 @@
 		else
 			to_chat(user, "This headset doesn't have any encryption keys!  How useless...")
 
-	if(istype(W, /obj/item/device/encryptionkey/))
+	if(istype(W, /obj/item/device/encryptionkey))
 		if(encryption_keys.len >= max_keys)
 			to_chat(user, "The headset can't hold another key!")
 			return
@@ -350,8 +373,6 @@
 	for(var/obj/ekey in encryption_keys)
 		import_key_data(ekey)
 	for (var/ch_name in channels)
-		if(!radio_controller)
-			sleep(30) // Waiting for the radio_controller to be created.
 		if(!radio_controller)
 			src.SetName("broken radio headset")
 			return

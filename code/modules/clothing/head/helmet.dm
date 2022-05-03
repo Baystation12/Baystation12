@@ -37,7 +37,7 @@
 	icon_state = "helmet_pcrc"
 
 /obj/item/clothing/head/helmet/nt/guard
-	starting_accessories = list(/obj/item/clothing/accessory/armor/helmcover/nt)
+	accessories = list(/obj/item/clothing/accessory/helmet_cover/nt)
 
 /obj/item/clothing/head/helmet/tactical
 	name = "tactical helmet"
@@ -219,3 +219,43 @@
 	desc = "A helmet built for use by a Skrell. This one appears to be fairly standard and reliable."
 	icon_state = "helmet_skrell"
 	valid_accessory_slots = null
+
+
+/obj/item/clothing/head/helmet/pirate
+	name = "pirate hat"
+	desc = "Yarr."
+	icon_state = "pirate"
+	item_state = "pirate"
+	armor = list(
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SMALL,
+		rad = ARMOR_RAD_MINOR
+	)
+	flags_inv = BLOCKHAIR
+	body_parts_covered = 0
+	siemens_coefficient = 0.9
+
+/obj/item/clothing/head/helmet/divinghelmet
+	name = "diving helmet"
+	desc = "An old-timey diving helmet, built to withstand immense pressures and provide breathable air."
+	icon_state = "divinghelmet"
+	flash_protection = FLASH_PROTECTION_MINOR
+	item_flags = ITEM_FLAG_AIRTIGHT
+	min_pressure_protection = 0
+	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
+	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_pressure_protection = VOIDSUIT_MAX_PRESSURE
+	armor = list(
+		melee = ARMOR_MELEE_VERY_HIGH,
+		bullet = ARMOR_BALLISTIC_RIFLE,
+		laser = ARMOR_LASER_MAJOR,
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_RESISTANT,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_SMALL
+		)
+	species_restricted = list(SPECIES_HUMAN)

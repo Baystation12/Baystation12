@@ -8,13 +8,14 @@
 	buckle_lying = 0 //force people to sit up in chairs when buckled
 	obj_flags = OBJ_FLAG_ROTATABLE
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
+	buckle_movable = TRUE
 
 /obj/structure/bed/chair/do_simple_ranged_interaction(var/mob/user)
 	if(!buckled_mob && user)
 		rotate(user)
 	return TRUE
 
-/obj/structure/bed/chair/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/bed/chair/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if(!padding_material && istype(W, /obj/item/assembly/shock_kit))
 		var/obj/item/assembly/shock_kit/SK = W
@@ -162,7 +163,6 @@
 	desc = "It's a chair. Only for the highest ranked asses."
 	icon_state = "capchair_preview"
 	base_icon = "capchair"
-	buckle_movable = 1
 
 /obj/structure/bed/chair/comfy/captain/on_update_icon()
 	..()
@@ -178,6 +178,7 @@
 	desc = "It's an armchair. It looks comfy."
 	icon_state = "armchair_preview"
 	base_icon = "armchair"
+	buckle_movable = FALSE
 
 /obj/structure/bed/chair/armchair/brown/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
 	..(newloc, newmaterial, MATERIAL_LEATHER_GENERIC)
@@ -213,8 +214,7 @@
 	name = "office chair"
 	icon_state = "officechair_preview"
 	base_icon = "officechair"
-	anchored = 0
-	buckle_movable = 1
+	anchored = FALSE
 
 /obj/structure/bed/chair/office/Move()
 	. = ..()
@@ -236,21 +236,21 @@
 		var/mob/living/occupant = unbuckle_mob()
 
 		var/def_zone = ran_zone()
-		var/blocked = 100 * occupant.get_blocked_ratio(def_zone, BRUTE, damage = 10)
+		var/blocked = 100 * occupant.get_blocked_ratio(def_zone, DAMAGE_BRUTE, damage = 10)
 		occupant.throw_at(A, 3, propelled)
-		occupant.apply_effect(6, STUN, blocked)
-		occupant.apply_effect(6, WEAKEN, blocked)
-		occupant.apply_effect(6, STUTTER, blocked)
-		occupant.apply_damage(10, BRUTE, def_zone)
+		occupant.apply_effect(6, EFFECT_STUN, blocked)
+		occupant.apply_effect(6, EFFECT_WEAKEN, blocked)
+		occupant.apply_effect(6, EFFECT_STUTTER, blocked)
+		occupant.apply_damage(10, DAMAGE_BRUTE, def_zone)
 		playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
 		if(istype(A, /mob/living))
 			var/mob/living/victim = A
 			def_zone = ran_zone()
-			blocked = 100 * victim.get_blocked_ratio(def_zone, BRUTE, damage = 10)
-			victim.apply_effect(6, STUN, blocked)
-			victim.apply_effect(6, WEAKEN, blocked)
-			victim.apply_effect(6, STUTTER, blocked)
-			victim.apply_damage(10, BRUTE, def_zone)
+			blocked = 100 * victim.get_blocked_ratio(def_zone, DAMAGE_BRUTE, damage = 10)
+			victim.apply_effect(6, EFFECT_STUN, blocked)
+			victim.apply_effect(6, EFFECT_WEAKEN, blocked)
+			victim.apply_effect(6, EFFECT_STUTTER, blocked)
+			victim.apply_damage(10, DAMAGE_BRUTE, def_zone)
 		occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
 
 /obj/structure/bed/chair/office/light/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
@@ -301,6 +301,7 @@
 	base_icon = "shuttle_chair"
 	icon_state = "shuttle_chair_preview"
 	buckling_sound = 'sound/effects/metal_close.ogg'
+	buckle_movable = FALSE
 
 /obj/structure/bed/chair/shuttle/post_buckle_mob()
 	if(buckled_mob)
@@ -334,9 +335,10 @@
 	icon_state = "wooden_chair_preview"
 	color = WOOD_COLOR_GENERIC
 	var/chair_material = MATERIAL_WOOD
+	buckle_movable = FALSE
 
-/obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
+/obj/structure/bed/chair/wood/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/stack) || istype(W, /obj/item/wirecutters))
 		return
 	..()
 
@@ -388,6 +390,7 @@
 	color = WOOD_COLOR_GENERIC
 	var/material/pew_material = MATERIAL_WOOD
 	obj_flags = 0
+	buckle_movable = FALSE
 
 /obj/structure/bed/chair/pew/left
 	icon_state = "pew_left"

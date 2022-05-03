@@ -75,7 +75,7 @@
 	if(share_damage)
 		var/ratio = target.health/target.maxHealth
 		var/damage = transformer.maxHealth - round(transformer.maxHealth*(ratio))
-		for(var/i in 1 to ceil(damage/10))
+		for(var/i in 1 to Ceil(damage/10))
 			transformer.adjustBruteLoss(10)
 	if(target.mind)
 		target.mind.transfer_to(transformer)
@@ -99,7 +99,7 @@
 	name = "Baleful Polymorth"
 	desc = "This spell transforms its target into a small, furry animal."
 	feedback = "BP"
-	possible_transformations = list(/mob/living/simple_animal/lizard,/mob/living/simple_animal/mouse,/mob/living/simple_animal/corgi)
+	possible_transformations = list(/mob/living/simple_animal/passive/lizard,/mob/living/simple_animal/passive/mouse,/mob/living/simple_animal/passive/corgi)
 
 	share_damage = 0
 	invocation = "Yo'balada!"

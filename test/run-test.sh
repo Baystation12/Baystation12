@@ -52,7 +52,7 @@
 # groups that already exists. Add it to the relevant run_xxx_tests function, and
 # if it introduces any new dependencies, add them to the check_xxx_deps
 # function. Some dependencies are guaranteed to be on CI platforms by outside
-# means (like .travis.yml), others will need to be installed by this script.
+# means (like .github/workflows/test.yml), others will need to be installed by this script.
 # You'll see plenty of examples of checking for CI and gating tests on that,
 # installing instead of checking when running on CI.
 #
@@ -199,7 +199,7 @@ function run_code_tests {
     pip install --user PyYaml -q
     pip install --user beautifulsoup4 -q
     shopt -s globstar
-    run_test "check travis contains all maps" "scripts/validateTravisContainsAllMaps.sh"
+    run_test "check unit tests contains all maps" "scripts/validateTestingContainsAllMaps.sh"
     run_test_fail "maps contain no step_[xy]" "grep 'step_[xy]' maps/**/*.dmm"
     run_test_fail "maps contain no layer adjustments" "grep 'layer = ' maps/**/*.dmm"
     run_test_fail "maps contain no plane adjustments" "grep 'plane = ' maps/**/*.dmm"
@@ -212,7 +212,7 @@ function run_code_tests {
     run_test "check color hex" "python3 tools/ColorHexChecker/color-hex-checker.py ."
     run_test "check punctuation" "python3 tools/PunctuationChecker/punctuation-checker.py ."
     run_test "check icon state limit" "python3 tools/dmitool/check_icon_state_limit.py ."
-    run_test_ci "check changelog builds" "python3 tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs"
+    run_test_ci "check changelog builds" "python3 tools/changelog/ss13_genchangelog.py html/changelog.html html/changelogs"
 }
 
 function run_byond_tests {
@@ -228,8 +228,6 @@ function run_byond_tests {
         ./install-byond.sh || exit 1
         source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
     fi
-    run_test_ci "check globals build" "python3 tools/GenerateGlobalVarAccess/gen_globals.py baystation12.dme code/_helpers/global_access.dm"
-    run_test "check globals unchanged" "md5sum -c - <<< '510f3a8215fd2c25c2ddbe95e31bb4c9 *code/_helpers/global_access.dm'"
     run_test "build map unit tests" "scripts/dm.sh -DUNIT_TEST -M$MAP_PATH baystation12.dme"
     run_test "check no warnings in build" "grep ', 0 warnings' build_log.txt"
     run_test "run unit tests" "DreamDaemon baystation12.dmb -invisible -trusted -core 2>&1 | tee log.txt"

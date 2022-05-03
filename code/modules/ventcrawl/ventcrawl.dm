@@ -1,20 +1,20 @@
-var/list/ventcrawl_machinery = list(
+var/global/list/ventcrawl_machinery = list(
 	/obj/machinery/atmospherics/unary/vent_scrubber,
 	/obj/machinery/atmospherics/unary/vent_pump
 	)
 
 // Vent crawling whitelisted items, whoo
 /mob/living/var/list/can_enter_vent_with = list(
-	/obj/item/weapon/implant,
+	/obj/item/implant,
 	/obj/item/device/radio/borg,
-	/obj/item/weapon/holder,
+	/obj/item/holder,
 	/obj/machinery/camera,
 	/mob/living/simple_animal/borer,
 	/obj/item/clothing/head/culthood,
 	/obj/item/clothing/suit/cultrobes,
-	/obj/item/weapon/book/tome,
-	/obj/item/weapon/paper/,
-	/obj/item/weapon/melee/cultblade
+	/obj/item/book/tome,
+	/obj/item/paper,
+	/obj/item/melee/cultblade
 	)
 
 /mob/living/var/list/icon/pipes_shown = list()
@@ -142,7 +142,7 @@ var/list/ventcrawl_machinery = list(
 						to_chat(src, "<span class='warning'>You feel a strong current pushing you away from the vent.</span>")
 					if(HAZARD_HIGH_PRESSURE to INFINITY)
 						to_chat(src, "<span class='danger'>You feel a roaring wind pushing you away from the vent!</span>")
-			if(!do_after(src, 45, vent_found, 1, 1))
+			if(!do_after(src, 4.5 SECONDS, vent_found, DO_PUBLIC_UNIQUE))
 				return
 			if(!can_ventcrawl())
 				return

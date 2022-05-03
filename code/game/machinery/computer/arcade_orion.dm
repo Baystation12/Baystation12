@@ -32,6 +32,7 @@
 	desc = "Imported straight from Outpost-T71!"
 	icon_state = "arcade"
 	random = FALSE
+	machine_name = "orion trail arcade machine"
 	var/list/supplies = list("1" = 0, "2" = 0, "3" = 0, "4" = 0, "5" = 0, "6" = 0) //engine,hull,electronics,food,fuel
 	var/list/supply_cost = list("1" = 1000, "2" = 950, "3" = 1100, "4" = 75, "5" = 100)
 	var/list/supply_name = list("1" = "engine parts", "2" = "hull parts", "3" = "electronic parts", "4" = "food", "5" = "fuel", "6" = "thalers")
@@ -406,7 +407,7 @@
 					M.hallucination(50, 50)
 				else
 					to_chat(usr, "<span class='danger'>Something strikes you from behind! It hurts like hell and feel like a blunt weapon, but nothing is there...</span>")
-					M.take_organ_damage(10)
+					M.take_organ_damage(10, 0)
 			else
 				to_chat(usr, "<span class='warning'>The sounds of battle fill your ears...</span>")
 		if(ORION_TRAIL_ILLNESS)
@@ -425,7 +426,7 @@
 				var/mob/living/carbon/M = usr
 				M.Weaken(3)
 				src.visible_message("A sudden gust of powerful wind slams \the [M] into the floor!", "You hear a large fwooshing sound, followed by a bang.")
-				M.take_organ_damage(10)
+				M.take_organ_damage(10, 0)
 			else
 				to_chat(usr, "<span class='warning'>A violent gale blows past you, and you barely manage to stay standing!</span>")
 		if(ORION_TRAIL_MALFUNCTION)
@@ -445,7 +446,7 @@
 			to_chat(usr, "<span class='danger'><font size=3>You're never going to make it to Orion...</font></span>")
 			var/mob/living/M = usr
 			M.visible_message("\The [M] starts rapidly deteriorating.")
-			M << browse (null,"window=arcade")
+			close_browser(M, "window=arcade")
 			for(var/i=0;i<10;i++)
 				sleep(10)
 				M.Stun(5)
@@ -463,21 +464,21 @@
 /obj/machinery/computer/arcade/orion_trail/proc/win()
 	src.visible_message("\The [src] plays a triumpant tune, stating 'CONGRATULATIONS, YOU HAVE MADE IT TO ORION.'")
 	if(emagged)
-		new /obj/item/weapon/orion_ship(src.loc)
+		new /obj/item/orion_ship(src.loc)
 		log_and_message_admins("made it to Orion on an emagged machine and got an explosive toy ship.")
 	else
 		prizevend()
 	event = null
 	src.updateUsrDialog()
 
-/obj/item/weapon/orion_ship
+/obj/item/orion_ship
 	name = "model settler ship"
 	desc = "A model spaceship, it looks like those used back in the day when travelling to Orion! It even has a miniature FX-293 reactor, which was renowned for its instability and tendency to explode..."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "ship"
 	w_class = ITEM_SIZE_SMALL
 	var/active = 0 //if the ship is on
-/obj/item/weapon/orion_ship/examine(mob/user)
+/obj/item/orion_ship/examine(mob/user)
 	. = ..()
 	if(!(in_range(user, src)))
 		return
@@ -485,7 +486,7 @@
 		to_chat(user, "<span class='notice'>There's a little switch on the bottom. It's flipped down.</span>")
 	else
 		to_chat(user, "<span class='notice'>There's a little switch on the bottom. It's flipped up.</span>")
-/obj/item/weapon/orion_ship/attack_self(mob/user)
+/obj/item/orion_ship/attack_self(mob/user)
 	if(active)
 		return
 	log_and_message_admins("primed an explosive Orion ship for detonation.", user)

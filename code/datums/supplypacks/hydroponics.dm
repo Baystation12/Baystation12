@@ -4,15 +4,15 @@
 
 /decl/hierarchy/supply_pack/hydroponics/hydroponics // -- Skie
 	name = "Gear - Hydroponics Supplies"
-	contains = list(/obj/item/weapon/reagent_containers/spray/plantbgone = 4,
-					/obj/item/weapon/reagent_containers/glass/bottle/ammonia = 2,
-					/obj/item/weapon/material/hatchet,
-					/obj/item/weapon/material/minihoe,
+	contains = list(/obj/item/reagent_containers/spray/plantbgone = 4,
+					/obj/item/reagent_containers/glass/bottle/ammonia = 2,
+					/obj/item/material/hatchet,
+					/obj/item/material/minihoe,
 					/obj/item/device/scanner/plant,
 					/obj/item/clothing/gloves/thick/botany,
 					/obj/item/clothing/suit/apron,
-					/obj/item/weapon/material/minihoe,
-					/obj/item/weapon/storage/box/botanydisk
+					/obj/item/material/minihoe,
+					/obj/item/storage/box/botanydisk
 					)
 	cost = 15
 	containername = "hydroponics supply crate"
@@ -43,10 +43,10 @@
 
 /decl/hierarchy/supply_pack/hydroponics/weedcontrol
 	name = "Gear - Weed control"
-	contains = list(/obj/item/weapon/material/hatchet = 2,
-					/obj/item/weapon/reagent_containers/spray/plantbgone = 4,
+	contains = list(/obj/item/material/hatchet = 2,
+					/obj/item/reagent_containers/spray/plantbgone = 4,
 					/obj/item/clothing/mask/gas = 2,
-					/obj/item/weapon/grenade/chem_grenade/antiweed = 2)
+					/obj/item/grenade/chem_grenade/antiweed = 2)
 	cost = 25
 	containername = "weed control crate"
 	access = access_hydroponics
@@ -82,7 +82,7 @@
 
 /decl/hierarchy/supply_pack/hydroponics/hydrotray
 	name = "Equipment - Hydroponics tray"
-	contains = list(/obj/machinery/portable_atmospherics/hydroponics{anchored = 0})
+	contains = list(/obj/machinery/portable_atmospherics/hydroponics{anchored = FALSE})
 	cost = 30
 	containertype = /obj/structure/closet/crate/large/hydroponics
 	containername = "hydroponics tray crate"

@@ -9,7 +9,7 @@
 	-- Will change all the tube lights to green, and flicker them. The semicolon is important to separate the consecutive querys, but is not required for standard one-query use.
 	UPDATE /obj/machinery/light SET color = "#0F0" WHERE icon_state == "tube1"; CALL flicker(1) ON /obj/machinery/light
 	-- Will delete all pickaxes. "IN world" is not required.
-	DELETE /obj/item/weapon/pickaxe
+	DELETE /obj/item/pickaxe
 
 	--You can use operators other than ==, such as >, <=, != and etc..
 
@@ -139,7 +139,7 @@
 										temp.SDQL_update(v, SDQL_expression(d, set_list[sets]))
 										break
 
-									if(temp.vars.Find(v) && (istype(temp.vars[v], /datum) || istype(temp.vars[v], /client)))
+									if(list_find(temp.vars, v) && (istype(temp.vars[v], /datum) || istype(temp.vars[v], /client)))
 										temp = temp.vars[v]
 
 									else
@@ -381,7 +381,8 @@
 	var/long = start < expression.len
 
 	if (object == world && (!long || expression[start + 1] == ".") && !(expression[start] in exclude))
-		v = readglobal(expression[start])
+		var/name = expression[start]
+		v = global.vars[name]
 
 	else if (expression [start] == "{" && long)
 		if (lowertext(copytext(expression[start + 1], 1, 3)) != "0x")

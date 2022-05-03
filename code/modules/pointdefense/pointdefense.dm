@@ -1,4 +1,4 @@
-//Point defense 
+//Point defense
 /obj/machinery/pointdefense_control
 	name = "fire assist mainframe"
 	desc = "A specialized computer designed to synchronize a variety of weapon systems and a vessel's astronav data."
@@ -12,6 +12,8 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	var/list/targets = list()
 	atom_flags =  ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	machine_name = "fire assist mainframe"
+	machine_desc = "A control computer used to synchronize point defense batteries."
 
 /obj/machinery/pointdefense_control/Initialize()
 	. = ..()
@@ -104,11 +106,13 @@
 	atom_flags =  ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	idle_power_usage = 0.1 KILOWATTS
 	construct_state = /decl/machine_construction/default/panel_closed
-	maximum_component_parts = list(/obj/item/weapon/stock_parts = 10)         //null - no max. list(type part = number max).
+	maximum_component_parts = list(/obj/item/stock_parts = 10)         //null - no max. list(type part = number max).
 	base_type = /obj/machinery/pointdefense
 	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)
 	uncreated_component_parts = null
-	appearance_flags = PIXEL_SCALE
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
+	machine_name = "point defense battery"
+	machine_desc = "A mounted turret that locks onto and destroys incoming meteors. Aim away from vessel."
 	var/active = TRUE
 	var/charge_cooldown = 1 SECOND  //time between it can fire at different targets
 	var/last_shot = 0
@@ -146,7 +150,7 @@
 	rot_matrix.Turn(Angle)
 	addtimer(CALLBACK(src, .proc/finish_shot, target), rotation_speed)
 	animate(src, transform = rot_matrix, rotation_speed, easing = SINE_EASING)
-			
+
 	set_dir(transform.get_angle() > 0 ? NORTH : SOUTH)
 
 /obj/machinery/pointdefense/proc/finish_shot(var/weakref/target)
@@ -185,7 +189,7 @@
 		set_dir(desiredir)
 	if(engaging || ((world.time - last_shot) < charge_cooldown))
 		return
-	
+
 	if(GLOB.meteor_list.len == 0)
 		return
 	var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
@@ -215,6 +219,10 @@
 			continue
 		if(get_dist(M, src) > kill_range)
 			continue
+
+		if (!can_see(src, M, kill_range))
+			continue
+
 		if(!emagged && space_los(M))
 			var/weakref/target = weakref(M)
 			PC.targets +=target
@@ -224,17 +232,17 @@
 /obj/machinery/pointdefense/RefreshParts()
 	. = ..()
 	// Calculates an average rating of components that affect shooting rate
-	var/shootrate_divisor = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
+	var/shootrate_divisor = total_component_rating_of_type(/obj/item/stock_parts/capacitor)
 
 	charge_cooldown = 2 SECONDS / (shootrate_divisor ? shootrate_divisor : 1)
 
 	//Calculate max shooting range
-	var/killrange_multiplier = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
-	killrange_multiplier += 1.5 * total_component_rating_of_type(/obj/item/weapon/stock_parts/scanning_module)
+	var/killrange_multiplier = total_component_rating_of_type(/obj/item/stock_parts/capacitor)
+	killrange_multiplier += 1.5 * total_component_rating_of_type(/obj/item/stock_parts/scanning_module)
 
 	kill_range = 10 + 4 * killrange_multiplier
 
-	var/rotation_divisor = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
+	var/rotation_divisor = total_component_rating_of_type(/obj/item/stock_parts/manipulator)
 	rotation_speed = 0.5 SECONDS / (rotation_divisor ? rotation_divisor : 1)
 
 /obj/machinery/pointdefense/proc/Activate()

@@ -11,8 +11,11 @@ SUBSYSTEM_DEF(throwing)
 	var/list/currentrun
 	var/list/processing = list()
 
-/datum/controller/subsystem/throwing/stat_entry()
-	..("P:[processing.len]")
+
+/datum/controller/subsystem/throwing/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Queue [processing.len]")
 
 
 /datum/controller/subsystem/throwing/fire(resumed = 0)
@@ -123,7 +126,7 @@ SUBSYSTEM_DEF(throwing)
 	last_move = world.time
 
 	//calculate how many tiles to move, making up for any missed ticks.
-	var/tilestomove = CEILING(min(((((world.time+world.tick_lag) - start_time + delayed_time) * speed) - (dist_travelled ? dist_travelled : -1)), speed*MAX_TICKS_TO_MAKE_UP) * (world.tick_lag * SSthrowing.wait), 1)
+	var/tilestomove = Ceilm(min(((((world.time+world.tick_lag) - start_time + delayed_time) * speed) - (dist_travelled ? dist_travelled : -1)), speed*MAX_TICKS_TO_MAKE_UP) * (world.tick_lag * SSthrowing.wait), 1)
 	while (tilestomove-- > 0)
 		if ((dist_travelled >= maxrange || AM.loc == target_turf) && (A && A.has_gravity()))
 			finalize()
@@ -181,13 +184,14 @@ SUBSYSTEM_DEF(throwing)
 		var/mob/M = thrownthing
 		M.inertia_dir = init_dir
 
-	if(t_target)
+	if(t_target && !QDELETED(thrownthing))
 		thrownthing.throw_impact(t_target, src)
 
 	if (callback)
 		callback.Invoke()
 
-	thrownthing.fall()
+	if (!QDELETED(thrownthing))
+		thrownthing.fall()
 
 	qdel(src)
 

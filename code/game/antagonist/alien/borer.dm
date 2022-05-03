@@ -62,6 +62,3 @@ GLOBAL_DATUM_INIT(borers, /datum/antagonist/borer, new)
 	spawn_announcement = replacetext(GLOB.using_map.unidentified_lifesigns_message, "%STATION_NAME%", station_name())
 	spawn_announcement_sound = GLOB.using_map.lifesign_spawn_sound
 	..()
-
-/datum/antagonist/borer/attempt_random_spawn()
-	if(config.aliens_allowed) ..()

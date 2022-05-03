@@ -1,4 +1,4 @@
-var/list/floor_light_cache = list()
+var/global/list/floor_light_cache = list()
 
 /obj/machinery/floor_light
 	name = "floor light"
@@ -6,7 +6,7 @@ var/list/floor_light_cache = list()
 	icon_state = "base"
 	desc = "A backlit floor panel."
 	layer = ABOVE_TILE_LAYER
-	anchored = 0
+	anchored = FALSE
 	use_power = POWER_USE_ACTIVE
 	idle_power_usage = 2
 	active_power_usage = 20
@@ -19,8 +19,22 @@ var/list/floor_light_cache = list()
 	var/default_light_outer_range = 3
 	var/default_light_colour = "#ffffff"
 
-/obj/machinery/floor_light/prebuilt
-	anchored = 1
+
+/obj/machinery/floor_light/Initialize()
+	. = ..()
+	update_use_power(use_power)
+	queue_icon_update()
+
+
+/obj/machinery/floor_light/mapped_off
+	anchored = TRUE
+	use_power = POWER_USE_OFF
+
+
+/obj/machinery/floor_light/mapped_on
+	anchored = TRUE
+	use_power = POWER_USE_ACTIVE
+
 
 /obj/machinery/floor_light/attackby(var/obj/item/W, var/mob/user)
 	if(isScrewdriver(W))
@@ -30,12 +44,12 @@ var/list/floor_light_cache = list()
 			queue_icon_update()
 		visible_message("<span class='notice'>\The [user] has [anchored ? "attached" : "detached"] \the [src].</span>")
 	else if(isWelder(W) && (damaged || (stat & BROKEN)))
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		if(!WT.remove_fuel(0, user))
 			to_chat(user, "<span class='warning'>\The [src] must be on to complete this task.</span>")
 			return
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-		if(!do_after(user, 20, src))
+		if(!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			return
 		if(!src || !WT.isOn())
 			return
@@ -77,15 +91,17 @@ var/list/floor_light_cache = list()
 	queue_icon_update()
 	return TRUE
 
+
 /obj/machinery/floor_light/set_broken(new_state)
 	. = ..()
 	if(. && (stat & BROKEN))
 		update_use_power(POWER_USE_OFF)
 
+
 /obj/machinery/floor_light/power_change(new_state)
 	. = ..()
-	if(. && (stat & NOPOWER))
-		update_use_power(POWER_USE_OFF)
+	queue_icon_update()
+
 
 /obj/machinery/floor_light/proc/update_brightness()
 	if((use_power == POWER_USE_ACTIVE) && !(stat & (NOPOWER | BROKEN)))

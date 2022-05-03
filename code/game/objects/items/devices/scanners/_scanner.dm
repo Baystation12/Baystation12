@@ -41,11 +41,15 @@
 		return
 	if(!can_use(user))
 		return
-	if(is_valid_scan_target(A) && A.simulated)
-		user.visible_message("<span class='notice'>[user] runs \the [src] over \the [A].</span>", range = 2)
+	if(is_valid_scan_target(A))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] runs \the [src] over \the [A]."),
+			SPAN_NOTICE("You run \the [src] over \the [A]."),
+			range = 2
+		)
 		if(scan_sound)
 			playsound(src, scan_sound, 30)
-		if(use_delay && !do_after(user, use_delay, A))
+		if(use_delay && !do_after(user, use_delay, A, DO_PUBLIC_UNIQUE))
 			to_chat(user, "You stop scanning \the [A] with \the [src].")
 			return
 		scan(A, user)
@@ -85,7 +89,7 @@
 	if(!scan_data)
 		to_chat(user, "There is no scan data to print.")
 		return
-	var/obj/item/weapon/paper/P = new(get_turf(src), scan_data, "paper - [scan_title]")
+	var/obj/item/paper/P = new(get_turf(src), scan_data, "paper - [scan_title]")
 	if(printout_color)
 		P.color = printout_color
 	user.put_in_hands(P)

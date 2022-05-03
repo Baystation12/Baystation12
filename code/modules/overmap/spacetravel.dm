@@ -1,24 +1,35 @@
-//list used to cache empty zlevels to avoid nedless map bloat
-var/list/cached_space = list()
+//list used to cache empty zlevels to avoid needless map bloat
+var/global/list/cached_space = list()
 
 //Space stragglers go here
 
 /obj/effect/overmap/visitable/sector/temporary
 	name = "Deep Space"
 	invisibility = 101
-	known = 0
+	known = FALSE
 
 /obj/effect/overmap/visitable/sector/temporary/New(var/nx, var/ny, var/nz)
-	loc = locate(nx, ny, GLOB.using_map.overmap_z)
-	x = nx
-	y = ny
 	map_z += nz
-	map_sectors["[nz]"] = src
-	testing("Temporary sector at [x],[y] was created, corresponding zlevel is [nz].")
+	testing("Temporary sector at zlevel [nz] was created.")
+	register(nx, ny)
 
 /obj/effect/overmap/visitable/sector/temporary/Destroy()
-	map_sectors["[map_z]"] = null
-	testing("Temporary sector at [x],[y] was deleted.")
+	unregister()
+	testing("Temporary sector at [x],[y] was deleted. zlevel [map_z[1]] is no longer accessible.")
+	return ..()
+
+/obj/effect/overmap/visitable/sector/temporary/proc/register(var/nx, var/ny)
+	forceMove(locate(nx, ny, GLOB.using_map.overmap_z))
+	map_sectors["[map_z[1]]"] = src
+	testing("Temporary sector at zlevel [map_z[1]] moved to coordinates [x],[y]")
+
+/obj/effect/overmap/visitable/sector/temporary/proc/unregister()
+	// Note that any structures left in the zlevel will remain there, and may later turn up at completely different
+	// coordinates if this temporary sector is recycled. Perhaps everything remaining in the zlevel should be destroyed?
+	testing("Caching temporary sector for future use, corresponding zlevel is [map_z[1]], previous coordinates were [x],[y]")
+	map_sectors.Remove(src)
+	src.forceMove(null)
+	cached_space += src
 
 /obj/effect/overmap/visitable/sector/temporary/proc/can_die(var/mob/observer)
 	testing("Checking if sector at [map_z[1]] can die.")
@@ -28,18 +39,21 @@ var/list/cached_space = list()
 			return 0
 	return 1
 
-proc/get_deepspace(x,y)
-	var/obj/effect/overmap/visitable/sector/temporary/res = locate(x,y,GLOB.using_map.overmap_z)
+/proc/get_deepspace(x,y)
+	var/turf/map = locate(x,y,GLOB.using_map.overmap_z)
+	var/obj/effect/overmap/visitable/sector/temporary/res
+	for(var/obj/effect/overmap/visitable/sector/temporary/O in map)
+		res = O
+		break
 	if(istype(res))
 		return res
 	else if(cached_space.len)
 		res = cached_space[cached_space.len]
 		cached_space -= res
-		res.x = x
-		res.y = y
+		res.register(x, y)
 		return res
 	else
-		return new /obj/effect/overmap/visitable/sector/temporary(x, y, GLOB.using_map.get_empty_zlevel())
+		return new /obj/effect/overmap/visitable/sector/temporary(x, y, ++world.maxz)
 
 /atom/movable/proc/lost_in_space()
 	for(var/atom/movable/AM in contents)
@@ -53,7 +67,7 @@ proc/get_deepspace(x,y)
 /mob/living/carbon/human/lost_in_space()
 	return isnull(client) && !last_ckey && stat == DEAD
 
-proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
+/proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	if (!T || !A)
 		return
 
@@ -108,7 +122,5 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 
 	if(istype(M, /obj/effect/overmap/visitable/sector/temporary))
 		var/obj/effect/overmap/visitable/sector/temporary/source = M
-		if (source.can_die())
-			testing("Caching [M] for future use")
-			source.forceMove(null)
-			cached_space += source
+		if (source != TM && source.can_die())
+			source.unregister()

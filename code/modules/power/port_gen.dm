@@ -4,9 +4,12 @@
 	desc = "A portable generator for emergency backup power."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "portgen0"
-	density = 1
-	anchored = 0
+	density = TRUE
+	anchored = FALSE
 	interact_offline = TRUE
+
+	machine_name = "portable generator"
+	machine_desc = "A portable generator often used for backup power."
 
 	var/active = 0
 	var/power_gen = 5000
@@ -82,22 +85,23 @@
 /obj/machinery/power/port_gen/emp_act(severity)
 	if(!active)
 		return
-	var/duration = 6000 //ten minutes
+	var/duration
 	switch(severity)
-		if(1)
+		if(EMP_ACT_HEAVY)
 			stat &= BROKEN
 			if(prob(75)) explode()
-		if(2)
+			else duration = 10 MINUTES
+		if(EMP_ACT_LIGHT)
 			if(prob(25)) stat &= BROKEN
 			if(prob(10)) explode()
-		if(3)
-			if(prob(10)) stat &= BROKEN
-			duration = 300
+			else duration = 30 SECONDS
 
-	stat |= EMPED
 	if(duration)
-		spawn(duration)
-			stat &= ~EMPED
+		stat |= EMPED
+		addtimer(CALLBACK(src, .proc/resolve_emp_timer), duration)
+
+/obj/machinery/power/port_gen/proc/resolve_emp_timer()
+	stat &= ~EMPED
 
 /obj/machinery/power/port_gen/proc/explode()
 	explosion(src.loc, -1, 3, 5, -1)
@@ -110,6 +114,9 @@
 /obj/machinery/power/port_gen/pacman
 	name = "\improper P.A.C.M.A.N.-type Portable Generator"
 	desc = "A power generator that runs on solid phoron sheets. Rated for 80 kW max safe output."
+
+	machine_name = "\improper PACMAN-type generator"
+	machine_desc = "A portable generator often used for backup power or running small spacecraft. Runs on solid phoron sheets; rated for 80 kW max safe output."
 
 	var/sheet_name = "Phoron Sheets"
 	var/sheet_path = /obj/item/stack/material/phoron
@@ -148,12 +155,12 @@
 	return ..()
 
 /obj/machinery/power/port_gen/pacman/RefreshParts()
-	var/temp_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
-	temp_rating += total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
+	var/temp_rating = total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
+	temp_rating += total_component_rating_of_type(/obj/item/stock_parts/capacitor)
 
-	max_sheets = 50 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 5) ** 2
+	max_sheets = 50 * clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 5) ** 2
 
-	power_gen = round(initial(power_gen) * Clamp(temp_rating, 0, 20) / 2)
+	power_gen = round(initial(power_gen) * clamp(temp_rating, 0, 20) / 2)
 	..()
 
 /obj/machinery/power/port_gen/pacman/examine(mob/user)
@@ -164,7 +171,7 @@
 	if(overheating) to_chat(user, "<span class='danger'>\The [src] is overheating!</span>")
 
 /obj/machinery/power/port_gen/pacman/proc/process_exhaust()
-	var/datum/gas_mixture/environment = loc.return_air()
+	var/datum/gas_mixture/environment = loc?.return_air()
 	if(environment)
 		environment.adjust_gas(GAS_CO, 0.05*power_output)
 
@@ -223,7 +230,7 @@
 	var/average = (upper_limit + lower_limit)/2
 
 	//calculate the temperature increase
-	var/bias = Clamp(round((average - operating_temperature)/TEMPERATURE_DIVISOR, 1),  -TEMPERATURE_CHANGE_MAX, TEMPERATURE_CHANGE_MAX)
+	var/bias = clamp(round((average - operating_temperature)/TEMPERATURE_DIVISOR, 1),  -TEMPERATURE_CHANGE_MAX, TEMPERATURE_CHANGE_MAX)
 	operating_temperature += bias + rand(-7, 7)
 
 	if (operating_temperature > max_temperature)
@@ -242,7 +249,7 @@
 
 	if (operating_temperature > cooling_temperature)
 		var/temp_loss = (operating_temperature - cooling_temperature)/TEMPERATURE_DIVISOR
-		temp_loss = between(2, round(temp_loss, 1), TEMPERATURE_CHANGE_MAX)
+		temp_loss = clamp(round(temp_loss, 1), 2, TEMPERATURE_CHANGE_MAX)
 		operating_temperature = max(operating_temperature - temp_loss, cooling_temperature)
 		src.updateDialog()
 
@@ -272,7 +279,7 @@
 		explode() //if they're foolish enough to emag while it's running
 
 	if (!emagged)
-		emagged = 1
+		emagged = TRUE
 		return 1
 
 /obj/machinery/power/port_gen/pacman/components_are_accessible(path)
@@ -343,6 +350,9 @@
 	data["fuel_capacity"] = round(max_sheets * 1000, 0.1)
 	data["fuel_usage"] = active ? round((power_output / time_per_sheet) * 1000) : 0
 	data["fuel_type"] = sheet_name
+	data["uses_coolant"] = !!reagents
+	data["coolant_stored"] = reagents?.total_volume
+	data["coolant_capacity"] = reagents?.maximum_volume
 
 
 
@@ -413,6 +423,8 @@
 	sheet_path = /obj/item/stack/material/uranium
 	sheet_name = "Uranium Sheets"
 	time_per_sheet = 576 //same power output, but a 50 sheet stack will last 2 hours at max safe power
+	machine_name = "\improper SUPERPACMAN-type generator"
+	machine_desc = "A portable generator used for providing backup power for extended periods. Efficiently runs on uranium sheets; rated for 80 kW max safe output."
 	var/rad_power = 4
 
 //nuclear energy is green energy!
@@ -451,7 +463,7 @@
 /obj/machinery/power/port_gen/pacman/super/potato
 	name = "nuclear reactor"
 	desc = "PTTO-3, an industrial all-in-one nuclear power plant by Neo-Chernobyl GmbH. It uses uranium and vodka as a fuel source. Rated for 150 kW max safe output."
-	power_gen = 30000			//Watts output per power_output level
+	power_gen = 30000		//Watts output per power_output level
 	icon_state = "potato"
 	max_safe_output = 4
 	max_power_output = 8	//The maximum power setting without emagging.
@@ -460,10 +472,15 @@
 	time_per_sheet = 400
 	rad_power = 12
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	anchored = 1
+	anchored = TRUE
+	machine_name = "\improper PTTO-3 nuclear generator"
+	machine_desc = "This nuclear generator uses a combination of uranium and, strangely, vodka. Rated for 150 kW max safe output."
+	var/coolant_volume = 120
+	var/coolant_use = 1
+	var/coolant_reagent = /datum/reagent/ethanol/vodka
 
 /obj/machinery/power/port_gen/pacman/super/potato/New()
-	create_reagents(120)
+	create_reagents(coolant_volume)
 	..()
 
 /obj/machinery/power/port_gen/pacman/super/potato/examine(mob/user)
@@ -471,10 +488,10 @@
 	to_chat(user, "Auxilary tank shows [reagents.total_volume]u of liquid in it.")
 
 /obj/machinery/power/port_gen/pacman/super/potato/UseFuel()
-	if(reagents.has_reagent("vodka"))
+	if(reagents.has_reagent(coolant_reagent))
 		rad_power = 4
 		temperature_gain = 60
-		reagents.remove_any(1)
+		reagents.remove_any(coolant_use)
 		if(prob(2))
 			audible_message("<span class='notice'>[src] churns happily</span>")
 	else
@@ -489,8 +506,8 @@
 		icon_state = "potatodanger"
 
 /obj/machinery/power/port_gen/pacman/super/potato/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/weapon/reagent_containers/))
-		var/obj/item/weapon/reagent_containers/R = O
+	if(istype(O, /obj/item/reagent_containers))
+		var/obj/item/reagent_containers/R = O
 		if(R.standard_pour_into(src,user))
 			if(reagents.has_reagent("vodka"))
 				audible_message("<span class='notice'>[src] blips happily</span>")
@@ -500,6 +517,21 @@
 				playsound(get_turf(src), 'sound/machines/synth_no.ogg', 50, 0)
 		return
 	..()
+
+/obj/machinery/power/port_gen/pacman/super/potato/reactor
+	name = "nuclear reactor"
+	desc = "ICRER-2, an industrial-yet-compact nuclear fusion reactor powered by sheets of uranium and liquid coolant. Rated for 180 KW maximum safe output on a full coolant tank for one hour. Exceeding this is likely to result in nuclear detonation and is not recommended."
+	icon_state = "potato"
+	max_safe_output = 5
+	max_power_output = 8
+	temperature_gain = 70
+	max_temperature = 500
+	rad_power = 8
+	coolant_use = 0.2
+	coolant_volume = 360
+	coolant_reagent = /datum/reagent/coolant
+	machine_name = "\improper ICRER-2 nuclear generator"
+	machine_desc = "A standard nuclear generator that produces a respectable amount of power by processing uranium and industrial coolant. Rated for 180 kW max safe output."
 
 /obj/machinery/power/port_gen/pacman/mrs
 	name = "M.R.S.P.A.C.M.A.N.-type Portable Generator"
@@ -516,6 +548,8 @@
 	time_per_sheet = 576
 	max_temperature = 800
 	temperature_gain = 90
+	machine_name = "\improper MRSPACMAN-type generator"
+	machine_desc = "A powerful and reliable backup generator that provides a hefty amount of electricity from tritium sheets. Rated for 200 kW max safe output."
 
 /obj/machinery/power/port_gen/pacman/mrs/explode()
 	//no special effects, but the explosion is pretty big (same as a supermatter shard).

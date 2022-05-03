@@ -31,6 +31,7 @@
 /datum/action/Destroy()
 	if(owner)
 		Remove(owner)
+	return ..()
 
 /datum/action/proc/SetTarget(var/atom/Target)
 	target = Target
@@ -185,7 +186,7 @@
 	overlays += img
 	return
 
-//This is the proc used to update all the action buttons. Properly defined in /mob/living/
+//This is the proc used to update all the action buttons. Properly defined in /mob/living
 /mob/proc/update_action_buttons()
 	return
 

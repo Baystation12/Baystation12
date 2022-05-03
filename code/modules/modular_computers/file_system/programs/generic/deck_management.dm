@@ -12,8 +12,8 @@
 	program_menu_icon = "clock"
 	extended_desc = "A tool for managing shuttles, filling out flight plans, and submitting flight-related paperwork."
 	size = 18
-	available_on_ntnet = 1
-	requires_ntnet = 1
+	available_on_ntnet = TRUE
+	requires_ntnet = TRUE
 	category = PROG_SUPPLY
 
 /datum/nano_module/deck_management
@@ -271,8 +271,11 @@
 				if(selected_mission.stage in list(SHUTTLE_MISSION_PLANNED, SHUTTLE_MISSION_QUEUED))
 					return 1 //Hold your horses until the mission is started on these reports.
 				var/index = text2num(href_list["index"])
-				var/datum/computer_file/report/prototype = listgetindex(report_prototypes, index)
-				if(!index) return 1
+				if(!index)
+					return 1
+				var/datum/computer_file/report/prototype = LAZYACCESS(report_prototypes, index)
+				if (!prototype)
+					return 1
 				prog_state = DECK_REPORT_EDIT
 				var/datum/computer_file/report/old_report = locate(prototype.type) in selected_mission.other_reports
 				if(old_report)

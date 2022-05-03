@@ -4,7 +4,7 @@
 /datum/vote/map/can_run(mob/creator, automatic)
 	if(!config.allow_map_switching)
 		return FALSE
-	if(!automatic && !is_admin(creator))
+	if(!automatic && !isadmin(creator))
 		return FALSE // Must be an admin.
 	return ..()
 

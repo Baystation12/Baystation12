@@ -47,7 +47,7 @@
 	if(amt <= 0 || !istype(sprayloc))
 		return
 	var/spraydir = pick(GLOB.alldirs)
-	amt = ceil(amt/BLOOD_SPRAY_DISTANCE)
+	amt = Ceil(amt/BLOOD_SPRAY_DISTANCE)
 	var/bled = 0
 	spawn(0)
 		for(var/i = 1 to BLOOD_SPRAY_DISTANCE)
@@ -105,7 +105,7 @@
 ****************************************************/
 
 //Gets blood from mob to the container, preserving all data in it.
-/mob/living/carbon/proc/take_blood(obj/item/weapon/reagent_containers/container, var/amount)
+/mob/living/carbon/proc/take_blood(obj/item/reagent_containers/container, var/amount)
 	var/datum/reagent/blood/B = get_blood(container.reagents)
 	if(!B)
 		container.reagents.add_reagent(/datum/reagent/blood, amount, get_blood_data())
@@ -115,7 +115,7 @@
 	return 1
 
 //For humans, blood does not appear from blue, it comes from vessels.
-/mob/living/carbon/human/take_blood(obj/item/weapon/reagent_containers/container, var/amount)
+/mob/living/carbon/human/take_blood(obj/item/reagent_containers/container, var/amount)
 
 	if(!should_have_organ(BP_HEART))
 		reagents.trans_to_obj(container, amount)
@@ -210,7 +210,7 @@
 	data["blood_colour"] = species.get_blood_colour(src)
 	return data
 
-proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spray_dir)
+/proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spray_dir)
 
 	var/obj/effect/decal/cleanable/blood/B
 	var/decal_type = /obj/effect/decal/cleanable/blood/splatter

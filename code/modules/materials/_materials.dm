@@ -6,7 +6,7 @@
 
 	PATHS THAT USE DATUMS
 		turf/simulated/wall
-		obj/item/weapon/material
+		obj/item/material
 		obj/structure/barricade
 		obj/item/stack/material
 		obj/structure/table
@@ -34,6 +34,11 @@
 	var/material/material = get_material()
 	if(material)
 		return material.name
+
+/obj/proc/get_material_display_name()
+	var/material/material = get_material()
+	if (material)
+		return material.display_name
 
 // Material definition and procs follow.
 /material
@@ -139,11 +144,12 @@
 
 	to_chat(user, "<span class='notice'>You reinforce the [target_stack] with the [reinf_mat.display_name].</span>")
 	used_stack.use(1)
+	var/target_loc = target_stack.loc
 	var/obj/item/stack/material/S = target_stack.split(needed_sheets)
 	S.reinf_material = reinf_mat
 	S.update_strings()
 	S.update_icon()
-	S.dropInto(target_stack.loc)
+	S.dropInto(target_loc)
 
 /material/proc/build_wired_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
 	if(!wire_product)
@@ -217,7 +223,12 @@
 // General wall debris product placement.
 // Not particularly necessary aside from snowflakey cult girders.
 /material/proc/place_dismantled_product(var/turf/target,var/is_devastated)
-	place_sheet(target, is_devastated ? 1 : 2)
+	if (is_devastated)
+		var/return_count = rand(1, 2)
+		if (place_shard(target, return_count) == null)
+			place_sheet(target, return_count)
+	else
+		place_sheet(target, 2)
 
 // Debris product. Used ALL THE TIME.
 /material/proc/place_sheet(var/turf/target, var/amount = 1)
@@ -226,7 +237,7 @@
 // As above.
 /material/proc/place_shard(var/turf/target)
 	if(shard_type)
-		return new /obj/item/weapon/material/shard(target, src.name)
+		return new /obj/item/material/shard(target, src.name)
 
 // Used by walls and weapons to determine if they break or not.
 /material/proc/is_brittle()

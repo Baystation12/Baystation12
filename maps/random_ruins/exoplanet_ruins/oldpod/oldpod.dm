@@ -3,7 +3,7 @@
 	id = "oldpod"
 	description = "A now unused, crashed escape pod."
 	suffixes = list("oldpod/oldpod.dmm")
-	cost = 0.5
+	spawn_cost = 0.5
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
 	ruin_tags = RUIN_HUMAN|RUIN_WRECK
 	apc_test_exempt_areas = list(

@@ -99,7 +99,7 @@
 	if(stat == DEAD)
 		stamina = 0
 	else
-		stamina = Clamp(stamina + amt, 0, 100)
+		stamina = clamp(stamina + amt, 0, 100)
 		if(stamina <= 0)
 			to_chat(src, SPAN_WARNING("You are exhausted!"))
 			if(MOVING_QUICKLY(src))
@@ -151,7 +151,7 @@
 		if(zone_exposure >= 1)
 			return 1
 		pressure_adjustment_coefficient = max(pressure_adjustment_coefficient, zone_exposure)
-	pressure_adjustment_coefficient = Clamp(pressure_adjustment_coefficient, 0, 1) // So it isn't less than 0 or larger than 1.
+	pressure_adjustment_coefficient = clamp(pressure_adjustment_coefficient, 0, 1) // So it isn't less than 0 or larger than 1.
 
 	return pressure_adjustment_coefficient
 
@@ -224,7 +224,7 @@
 		if(gene.is_active(src))
 			gene.OnMobLife(src)
 
-	radiation = Clamp(radiation,0,500)
+	radiation = clamp(radiation,0,500)
 
 	if(!radiation)
 		if(species.appearance_flags & RADIATION_GLOWS)
@@ -239,7 +239,7 @@
 			var/rads = radiation/25
 
 			radiation -= rads
-			set_nutrition(Clamp(nutrition+rads, 0, 550))
+			set_nutrition(clamp(nutrition+rads, 0, 550))
 
 			if (radiation < 2)
 				radiation = 0
@@ -285,7 +285,7 @@
 		damage = Floor(damage * species.get_radiation_mod(src))
 		if(damage)
 			adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
-			immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT) 
+			immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
 			updatehealth()
 			if(!isSynthetic() && organs.len)
 				var/obj/item/organ/external/O = pick(organs)
@@ -305,13 +305,13 @@
 /mob/living/carbon/human/get_breath_from_internal(volume_needed=STD_BREATH_VOLUME)
 	if(internal)
 
-		var/obj/item/weapon/tank/rig_supply
-		if(istype(back,/obj/item/weapon/rig))
-			var/obj/item/weapon/rig/rig = back
+		var/obj/item/tank/rig_supply
+		if(istype(back,/obj/item/rig))
+			var/obj/item/rig/rig = back
 			if(!rig.offline && (rig.air_supply && internal == rig.air_supply))
 				rig_supply = rig.air_supply
 
-		if (!rig_supply && (!contents.Find(internal) || !((wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)) || (head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))))
+		if (!rig_supply && (!list_find(contents, internal) || !((wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)) || (head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))))
 			set_internals(null)
 
 		if(internal)
@@ -379,7 +379,7 @@
 				temp_adj = (1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR)
 
 		//Use heat transfer as proportional to the gas density. However, we only care about the relative density vs standard 101 kPa/20 C air. Therefore we can use mole ratios
-		bodytemperature += between(BODYTEMP_COOLING_MAX, temp_adj*relative_density, BODYTEMP_HEATING_MAX)
+		bodytemperature += clamp(temp_adj * relative_density, BODYTEMP_COOLING_MAX, BODYTEMP_HEATING_MAX)
 
 	// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
 	if(bodytemperature >= getSpeciesOrSynthTemp(HEAT_LEVEL_1))
@@ -558,7 +558,7 @@
 
 	// Trace chemicals
 	for(var/T in chem_doses)
-		if(bloodstr.has_reagent(T) || ingested.has_reagent(T) || touching.has_reagent(T))
+		if(bloodstr?.has_reagent(T) || ingested?.has_reagent(T) || touching?.has_reagent(T))
 			continue
 		var/datum/reagent/R = T
 		chem_doses[T] -= initial(R.metabolism)*2
@@ -601,7 +601,9 @@
 			handle_hallucinations()
 
 		if(get_shock() >= species.total_health)
-			if(!stat)
+			if(stat || status_flags & FAKEDEATH)
+				return
+			else
 				to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
 				src.visible_message("<B>[src]</B> [species.halloss_message]")
 			Paralyse(10)
@@ -612,10 +614,11 @@
 			animate_tail_reset()
 			adjustHalLoss(-3)
 			if(sleeping)
-				handle_dreams()
-				if (mind)
+				if (!dream_timer && client)
+					dream_timer = addtimer(CALLBACK(src, .proc/dream), 10 SECONDS, TIMER_STOPPABLE)
+				if (mind || ai_holder)
 					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
-					if(client || sleeping > 3)
+					if (client || ai_holder || sleeping > 3)
 						AdjustSleeping(-1)
 				species.handle_sleeping(src)
 			if(prob(2) && is_asystole() && isSynthetic())
@@ -786,10 +789,10 @@
 				if(150 to 250)					hydration_icon.icon_state = "hydration3"
 				else							hydration_icon.icon_state = "hydration4"
 
-		if(isSynthetic())
+		if(cells && isSynthetic())
 			var/obj/item/organ/internal/cell/C = internal_organs_by_name[BP_CELL]
 			if (istype(C))
-				var/chargeNum = Clamp(ceil(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
+				var/chargeNum = clamp(Ceil(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
 				cells.icon_state = "charge[chargeNum]"
 			else
 				cells.icon_state = "charge-empty"
@@ -890,6 +893,9 @@
 	if(!can_feel_pain())
 		shock_stage = 0
 		return
+	if(status_flags & FAKEDEATH)
+		return
+
 
 	if(is_asystole())
 		shock_stage = max(shock_stage + 1, 61)
@@ -952,9 +958,9 @@
 
 
 /mob/living/carbon/human/proc/handle_hud_list()
-	if (BITTEST(hud_updateflag, HEALTH_HUD) && hud_list[HEALTH_HUD])
+	if (GET_BIT(hud_updateflag, HEALTH_HUD) && hud_list[HEALTH_HUD])
 		var/image/holder = hud_list[HEALTH_HUD]
-		if(stat == DEAD)
+		if(stat == DEAD || status_flags & FAKEDEATH)
 			holder.icon_state = "0" 	// X_X
 		else if(is_asystole())
 			holder.icon_state = "flatline"
@@ -962,17 +968,17 @@
 			holder.icon_state = "[pulse()]"
 		hud_list[HEALTH_HUD] = holder
 
-	if (BITTEST(hud_updateflag, LIFE_HUD) && hud_list[LIFE_HUD])
+	if (GET_BIT(hud_updateflag, LIFE_HUD) && hud_list[LIFE_HUD])
 		var/image/holder = hud_list[LIFE_HUD]
-		if(stat == DEAD)
+		if(stat == DEAD || status_flags & FAKEDEATH)
 			holder.icon_state = "huddead"
 		else
 			holder.icon_state = "hudhealthy"
 		hud_list[LIFE_HUD] = holder
 
-	if (BITTEST(hud_updateflag, STATUS_HUD) && hud_list[STATUS_HUD] && hud_list[STATUS_HUD_OOC])
+	if (GET_BIT(hud_updateflag, STATUS_HUD) && hud_list[STATUS_HUD] && hud_list[STATUS_HUD_OOC])
 		var/image/holder = hud_list[STATUS_HUD]
-		if(stat == DEAD)
+		if(stat == DEAD || status_flags & FAKEDEATH)
 			holder.icon_state = "huddead"
 
 		else if(has_brain_worms())
@@ -995,11 +1001,11 @@
 		hud_list[STATUS_HUD] = holder
 		hud_list[STATUS_HUD_OOC] = holder2
 
-	if (BITTEST(hud_updateflag, ID_HUD) && hud_list[ID_HUD])
+	if (GET_BIT(hud_updateflag, ID_HUD) && hud_list[ID_HUD])
 		var/image/holder = hud_list[ID_HUD]
 		holder.icon_state = "hudunknown"
 		if(wear_id)
-			var/obj/item/weapon/card/id/I = wear_id.GetIdCard()
+			var/obj/item/card/id/I = wear_id.GetIdCard()
 			if(I)
 				var/datum/job/J = SSjobs.get_by_title(I.GetJobName())
 				if(J)
@@ -1007,12 +1013,12 @@
 
 		hud_list[ID_HUD] = holder
 
-	if (BITTEST(hud_updateflag, WANTED_HUD) && hud_list[WANTED_HUD])
+	if (GET_BIT(hud_updateflag, WANTED_HUD) && hud_list[WANTED_HUD])
 		var/image/holder = hud_list[WANTED_HUD]
 		holder.icon_state = "hudblank"
 		var/perpname = name
 		if(wear_id)
-			var/obj/item/weapon/card/id/I = wear_id.GetIdCard()
+			var/obj/item/card/id/I = wear_id.GetIdCard()
 			if(I)
 				perpname = I.registered_name
 
@@ -1029,9 +1035,9 @@
 					holder.icon_state = "hudreleased"
 		hud_list[WANTED_HUD] = holder
 
-	if (  BITTEST(hud_updateflag, IMPLOYAL_HUD) \
-	   || BITTEST(hud_updateflag,  IMPCHEM_HUD) \
-	   || BITTEST(hud_updateflag, IMPTRACK_HUD))
+	if (  GET_BIT(hud_updateflag, IMPLOYAL_HUD) \
+	   || GET_BIT(hud_updateflag,  IMPCHEM_HUD) \
+	   || GET_BIT(hud_updateflag, IMPTRACK_HUD))
 
 		var/image/holder1 = hud_list[IMPTRACK_HUD]
 		var/image/holder2 = hud_list[IMPLOYAL_HUD]
@@ -1041,20 +1047,20 @@
 		holder2.icon_state = "hudblank"
 		holder3.icon_state = "hudblank"
 
-		for(var/obj/item/weapon/implant/I in src)
+		for(var/obj/item/implant/I in src)
 			if(I.implanted)
-				if(istype(I,/obj/item/weapon/implant/tracking))
+				if(istype(I,/obj/item/implant/tracking))
 					holder1.icon_state = "hud_imp_tracking"
-				if(istype(I,/obj/item/weapon/implant/loyalty))
+				if(istype(I,/obj/item/implant/loyalty))
 					holder2.icon_state = "hud_imp_loyal"
-				if(istype(I,/obj/item/weapon/implant/chem))
+				if(istype(I,/obj/item/implant/chem))
 					holder3.icon_state = "hud_imp_chem"
 
 		hud_list[IMPTRACK_HUD] = holder1
 		hud_list[IMPLOYAL_HUD] = holder2
 		hud_list[IMPCHEM_HUD]  = holder3
 
-	if (BITTEST(hud_updateflag, SPECIALROLE_HUD))
+	if (GET_BIT(hud_updateflag, SPECIALROLE_HUD))
 		var/image/holder = hud_list[SPECIALROLE_HUD]
 		holder.icon_state = "hudblank"
 		if(mind && mind.special_role)
@@ -1107,6 +1113,7 @@
 	shock_stage = 0
 	..()
 	adjust_stamina(100)
+	UpdateAppearance()
 
 /mob/living/carbon/human/reset_view(atom/A)
 	..()
@@ -1128,7 +1135,7 @@
 			reset_view(null)
 	else
 		var/isRemoteObserve = 0
-		if(bound_overlay && client.eye == bound_overlay && !is_physically_disabled())
+		if(z_eye && client?.eye == z_eye && !is_physically_disabled())
 			isRemoteObserve = 1
 		else if((mRemote in mutations) && remoteview_target)
 			if(remoteview_target.stat == CONSCIOUS)
@@ -1144,3 +1151,11 @@
 	..()
 	if((CE_THIRDEYE in chem_effects) || (MUTATION_XRAY in mutations))
 		set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)
+
+/mob/living/ssd_check()
+	. = ..()
+
+	if (!.)
+		return
+
+	return !ai_holder

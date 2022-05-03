@@ -10,12 +10,14 @@
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 	surface_color = "#261e19"
 	water_color = "#c74d00"
+	habitability_distribution = HABITABILITY_BAD
+	has_trees = FALSE
+	flora_diversity = 3
+	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/hostile/retaliate/beast/shantak/lava, /mob/living/simple_animal/hostile/retaliate/beast/charbaby)
+	megafauna_types = list(/mob/living/simple_animal/hostile/drake)
 
 /obj/effect/overmap/visitable/sector/exoplanet/volcanic/get_atmosphere_color()
 	return COLOR_GRAY20
-
-/obj/effect/overmap/visitable/sector/exoplanet/volcanic/generate_habitability()
-	return HABITABILITY_BAD
 
 /obj/effect/overmap/visitable/sector/exoplanet/volcanic/generate_atmosphere()
 	..()
@@ -43,9 +45,6 @@
 	fauna_prob = 1
 	flora_prob = 3
 	large_flora_prob = 0
-	flora_diversity = 3
-	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/hostile/retaliate/beast/shantak/lava, /mob/living/simple_animal/hostile/retaliate/beast/charbaby)
-	megafauna_types = list(/mob/living/simple_animal/hostile/drake)
 
 //Squashing most of 1 tile lava puddles
 /datum/random_map/noise/exoplanet/volcanic/cleanup()
@@ -92,6 +91,7 @@
 	icon_state = "lava"
 	movement_delay = 4
 	dirt_color = COLOR_GRAY20
+	turf_flags = TURF_DISALLOW_BLOB
 	var/list/victims
 
 /turf/simulated/floor/exoplanet/lava/on_update_icon()
@@ -107,7 +107,7 @@
 
 /turf/simulated/floor/exoplanet/lava/Entered(atom/movable/AM)
 	..()
-	if(locate(/obj/structure/catwalk/) in src)
+	if(locate(/obj/structure/catwalk) in src)
 		return
 	var/mob/living/L = AM
 	if (istype(L) && L.can_overcome_gravity())
@@ -121,7 +121,7 @@
 	LAZYREMOVE(victims, weakref(AM))
 
 /turf/simulated/floor/exoplanet/lava/Process()
-	if(locate(/obj/structure/catwalk/) in src)
+	if(locate(/obj/structure/catwalk) in src)
 		victims = null
 		return PROCESS_KILL
 	for(var/weakref/W in victims)

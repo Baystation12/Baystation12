@@ -123,14 +123,14 @@
 	min_broken_damage = Floor(0.75 * max_damage)
 	min_bruised_damage = Floor(0.25 * max_damage)
 
-obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
+/obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 	take_internal_damage(amount, silent)
 
 /obj/item/organ/internal/proc/take_internal_damage(amount, var/silent=0)
 	if(BP_IS_ROBOTIC(src))
-		damage = between(0, src.damage + (amount * 0.8), max_damage)
+		damage = clamp(damage + (amount * 0.8), 0, max_damage)
 	else
-		damage = between(0, src.damage + amount, max_damage)
+		damage = clamp(damage + amount, 0, max_damage)
 
 		//only show this if the organ is not robotic
 		if(owner && can_feel_pain() && parent_organ && (amount > 5 || prob(10)))
@@ -192,9 +192,8 @@ obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 	if(!BP_IS_ROBOTIC(src))
 		return
 	switch (severity)
-		if (1)
+		if (EMP_ACT_HEAVY)
 			take_internal_damage(16)
-		if (2)
+		if (EMP_ACT_LIGHT)
 			take_internal_damage(9)
-		if (3)
-			take_internal_damage(6.5)
+	..()

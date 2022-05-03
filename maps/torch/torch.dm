@@ -61,6 +61,9 @@
 	#include "items/solbanner.dm"
 	#include "items/explo_shotgun.dm"
 	#include "items/mecha.dm"
+	#include "items/memos.dm"
+
+	#include "../../packs/faction_iccgn/_pack.dm"
 
 	#include "items/clothing/ec_skillbadges.dm"
 	#include "items/clothing/solgov-accessory.dm"
@@ -70,12 +73,6 @@
 	#include "items/clothing/solgov-head.dm"
 	#include "items/clothing/solgov-suit.dm"
 	#include "items/clothing/solgov-under.dm"
-	#include "items/clothing/terran-accessory.dm"
-	#include "items/clothing/terran-feet.dm"
-	#include "items/clothing/terran-hands.dm"
-	#include "items/clothing/terran-head.dm"
-	#include "items/clothing/terran-suit.dm"
-	#include "items/clothing/terran-under.dm"
 
 	#include "items/weapon/storage/wallets.dm"
 
@@ -112,6 +109,8 @@
 	#include "machinery/keycard authentication.dm"
 	#include "machinery/suit_storage.dm"
 
+	#include "outfits/scgec.dm"
+
 	#include "robot/module_flying_surveyor.dm"
 
 	#include "structures/signs.dm"
@@ -134,7 +133,6 @@
 	#include "loadout/loadout_gloves.dm"
 	#include "loadout/loadout_head.dm"
 	#include "loadout/loadout_shoes.dm"
-	#include "loadout/loadout_storage.dm"
 	#include "loadout/loadout_suit.dm"
 	#include "loadout/loadout_uniform.dm"
 	#include "loadout/loadout_xeno.dm"
@@ -150,7 +148,6 @@
 	#include "z2_transit.dmm"
 
 	#include "../away/empty.dmm"
-	#include "../away/ascent/ascent.dm"
 	#include "../away/mining/mining.dm"
 	#include "../away/derelict/derelict.dm"
 	#include "../away/bearcat/bearcat.dm"
@@ -162,15 +159,17 @@
 	#include "../away/blueriver/blueriver.dm"
 	#include "../away/slavers/slavers_base.dm"
 	#include "../away/mobius_rift/mobius_rift.dm"
-	#include "../away/icarus/icarus.dm"
 	#include "../away/errant_pisces/errant_pisces.dm"
 	#include "../away/lar_maria/lar_maria.dm"
-	#include "../away/unishi/unishi.dm"
 	#include "../away/voxship/voxship.dm"
 	#include "../away/skrellscoutship/skrellscoutship.dm"
 	#include "../away/meatstation/meatstation.dm"
+	#include "../away/miningstation/miningstation.dm"
+	#include "../away/mininghome/mininghome.dm"
+	#include "../away/scavver/scavver_gantry.dm"
 
-	#include "../../code/datums/music_tracks/chasing_time.dm"
+	#include "../event/iccgn_ship/icgnv_hound.dm"
+
 
 	#define using_map_DATUM /datum/map/torch
 
@@ -179,4 +178,3 @@
 	#warn A map has already been included, ignoring Torch
 
 #endif
-

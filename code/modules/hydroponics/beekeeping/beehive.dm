@@ -3,8 +3,8 @@
 	icon = 'icons/obj/beekeeping.dmi'
 	icon_state = "beehive-0"
 	desc = "A wooden box designed specifically to house our buzzling buddies. Far more efficient than traditional hives. Just insert a frame and a queen, close it up, and you're good to go!"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	layer = BELOW_OBJ_LAYER
 
 	var/closed = 0
@@ -121,7 +121,7 @@
 			return
 		to_chat(user, "<span class='notice'>You start dismantling \the [src]...</span>")
 		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 30, src))
+		if (do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>", "<span class='notice'>You dismantle \the [src].</span>")
 			new /obj/item/beehive_assembly(loc)
 			qdel(src)
@@ -137,7 +137,7 @@
 			to_chat(user, "<span class='notice'>The bees won't let you take the honeycombs out like this, smoke them first.</span>")
 			return
 		user.visible_message("<span class='notice'>\The [user] starts taking the honeycombs out of \the [src].</span>", "<span class='notice'>You start taking the honeycombs out of \the [src]...</span>")
-		while(honeycombs >= 100 && do_after(user, 30, src))
+		while (honeycombs >= 100 && do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			new /obj/item/honey_frame/filled(loc)
 			honeycombs -= 100
 			--frames
@@ -168,11 +168,14 @@
 	desc = "A machine used to extract honey and wax from a beehive frame."
 	icon = 'icons/obj/virology.dmi'
 	icon_state = "centrifuge"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+
+	machine_name = "honey extractor"
+	machine_desc = "Extracts liquid honey and solid blocks of wax from filled beehive frames. Requires an attached reagent container to operate."
 
 	var/processing = 0
 	var/honey = 0
@@ -183,7 +186,7 @@
 /obj/machinery/honey_extractor/cannot_transition_to(state_path, mob/user)
 	if(processing)
 		return SPAN_NOTICE("You must wait for \the [src] to finish first!")
-	return ..()	
+	return ..()
 
 /obj/machinery/honey_extractor/attackby(var/obj/item/I, var/mob/user)
 	if(processing)
@@ -206,11 +209,11 @@
 			honey += processing
 			processing = 0
 			icon_state = "centrifuge"
-	else if(istype(I, /obj/item/weapon/reagent_containers/glass))
+	else if(istype(I, /obj/item/reagent_containers/glass))
 		if(!honey)
 			to_chat(user, "<span class='notice'>There is no honey in \the [src].</span>")
 			return
-		var/obj/item/weapon/reagent_containers/glass/G = I
+		var/obj/item/reagent_containers/glass/G = I
 		var/transferred = min(G.reagents.maximum_volume - G.reagents.total_volume, honey)
 		G.reagents.add_reagent(/datum/reagent/nutriment/honey, transferred)
 		honey -= transferred
@@ -220,8 +223,8 @@
 /obj/item/bee_smoker
 	name = "bee smoker"
 	desc = "A device used to calm down bees before harvesting honey."
-	icon = 'icons/obj/device.dmi'
-	icon_state = "battererburnt"
+	icon = 'icons/obj/batterer.dmi'
+	icon_state = "batterer"
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/honey_frame
@@ -250,7 +253,7 @@
 
 /obj/item/beehive_assembly/attack_self(var/mob/user)
 	to_chat(user, "<span class='notice'>You start assembling \the [src]...</span>")
-	if(do_after(user, 30, src))
+	if (do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 		user.visible_message("<span class='notice'>\The [user] constructs a beehive.</span>", "<span class='notice'>You construct a beehive.</span>")
 		new /obj/machinery/beehive(get_turf(user))
 		qdel(src)
@@ -309,4 +312,4 @@ var/global/list/datum/stack_recipe/wax_recipes = list(
 	new /obj/item/honey_frame(src)
 	new /obj/item/honey_frame(src)
 	new /obj/item/bee_pack(src)
-	new /obj/item/weapon/crowbar(src)
+	new /obj/item/crowbar(src)

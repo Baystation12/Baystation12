@@ -92,7 +92,7 @@
 		if(user)
 			to_chat(user, "<span class='notice'>You short out [src]'s plant identifier circuits.</span>")
 			ignore_list |= user
-		emagged = 2
+		emagged = TRUE
 		return 1
 
 /mob/living/bot/farmbot/update_icons()
@@ -158,7 +158,7 @@
 				update_icons()
 				visible_message("<span class='notice'>[src] starts [T.dead? "removing the plant from" : "harvesting"] \the [A].</span>")
 				busy = 1
-				if(do_after(src, 30, A))
+				if(do_after(src, 3 SECONDS, A, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 					visible_message("<span class='notice'>[src] [T.dead? "removes the plant from" : "harvests"] \the [A].</span>")
 					T.physical_attack_hand(src)
 			if(FARMBOT_WATER)
@@ -166,7 +166,7 @@
 				update_icons()
 				visible_message("<span class='notice'>[src] starts watering \the [A].</span>")
 				busy = 1
-				if(do_after(src, 30, A))
+				if(do_after(src, 3 SECONDS, A, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 					playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 					visible_message("<span class='notice'>[src] waters \the [A].</span>")
 					tank.reagents.trans_to(T, 100 - T.waterlevel)
@@ -175,7 +175,7 @@
 				update_icons()
 				visible_message("<span class='notice'>[src] starts uprooting the weeds in \the [A].</span>")
 				busy = 1
-				if(do_after(src, 30, A))
+				if(do_after(src, 3 SECONDS, A, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 					visible_message("<span class='notice'>[src] uproots the weeds in \the [A].</span>")
 					T.weedlevel = 0
 			if(FARMBOT_NUTRIMENT)
@@ -183,7 +183,7 @@
 				update_icons()
 				visible_message("<span class='notice'>[src] starts fertilizing \the [A].</span>")
 				busy = 1
-				if(do_after(src, 30, A))
+				if(do_after(src, 3 SECONDS, A, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 					visible_message("<span class='notice'>[src] fertilizes \the [A].</span>")
 					T.reagents.add_reagent(/datum/reagent/ammonia, 10)
 		busy = 0
@@ -197,7 +197,7 @@
 		update_icons()
 		visible_message("<span class='notice'>[src] starts refilling its tank from \the [A].</span>")
 		busy = 1
-		while(do_after(src, 10) && tank.reagents.total_volume < tank.reagents.maximum_volume)
+		while(do_after(src, 1 SECOND, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && tank.reagents.total_volume < tank.reagents.maximum_volume)
 			tank.reagents.add_reagent(/datum/reagent/water, 100)
 			if(prob(5))
 				playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
@@ -228,8 +228,8 @@
 	visible_message("<span class='danger'>[src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
 
-	new /obj/item/weapon/material/minihoe(Tsec)
-	new /obj/item/weapon/reagent_containers/glass/bucket(Tsec)
+	new /obj/item/material/minihoe(Tsec)
+	new /obj/item/reagent_containers/glass/bucket(Tsec)
 	new /obj/item/device/assembly/prox_sensor(Tsec)
 	new /obj/item/device/scanner/plant(Tsec)
 

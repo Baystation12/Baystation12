@@ -1,4 +1,4 @@
-/obj/item/weapon/clothingbag
+/obj/item/clothingbag
 	name = "clothing bag"
 	desc = "A cheap plastic bag that contains a fresh set of clothes."
 	icon = 'icons/obj/trash.dmi'
@@ -7,7 +7,7 @@
 	var/icon_used = "trashbag0"
 	var/opened = 0
 
-/obj/item/weapon/clothingbag/attack_self(mob/user as mob)
+/obj/item/clothingbag/attack_self(mob/user as mob)
 	if(!opened)
 		user.visible_message("<span class='notice'>\The [user] tears open \the [src.name]!</span>", "<span class='notice'>You tear open \the [src.name]!</span>")
 		opened = 1
@@ -17,11 +17,11 @@
 	else
 		to_chat(user, "<span class='warning'>\The [src.name] is already ripped open and is now completely useless!</span>")
 
-/obj/item/weapon/clothingbag/rubbersuit
+/obj/item/clothingbag/rubbersuit
 	name = "rubber suit bag"
 	desc = "A cheap plastic bag that contains an emergency party set."
 
-/obj/item/weapon/clothingbag/rubbersuit/New()
+/obj/item/clothingbag/rubbersuit/New()
 	..()
 	switch(rand(1,3))
 		if(1)
@@ -34,11 +34,11 @@
 			new/obj/item/clothing/suit/rubber/unathi(src)
 			new/obj/item/clothing/mask/rubber/species/unathi(src)
 
-/obj/item/weapon/clothingbag/rubbermask
+/obj/item/clothingbag/rubbermask
 	name = "rubber masks bag"
 	desc = "A cheap plastic bag that contains emergency Halloween supplies."
 
-/obj/item/weapon/clothingbag/rubbermask/New()
+/obj/item/clothingbag/rubbermask/New()
 	..()
 	for(var/T in subtypesof(/obj/item/clothing/mask/rubber))
 		new T(src)

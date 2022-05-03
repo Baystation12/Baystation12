@@ -11,7 +11,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 /turf/var/obj/fire/fire = null
 
 //Some legacy definitions so fires can be started.
-atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	return null
 
 /atom/movable/proc/is_burnable()
@@ -20,7 +20,7 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 /mob/is_burnable()
 	return simulated
 
-turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
+/turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 
 /turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
@@ -116,7 +116,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 /obj/fire
 	//Icon for fire on turfs.
 
-	anchored = 1
+	anchored = TRUE
 	mouse_opacity = 0
 
 	blend_mode = BLEND_ADD
@@ -325,7 +325,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 		return firelevel
 
-datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
+/datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 	. = 0
 	for(var/g in gas)
 		if(gas_data.flags[g] & XGM_GAS_OXIDIZER && gas[g] >= 0.1)
@@ -371,7 +371,7 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 	var/total_combustables = (total_fuel + total_oxidizers)
 	var/active_combustables = (FIRE_REACTION_OXIDIZER_AMOUNT/FIRE_REACTION_FUEL_AMOUNT + 1)*reaction_limit
 
-	if(total_combustables > 0)
+	if(total_moles && total_combustables > 0)
 		//slows down the burning when the concentration of the reactants is low
 		var/damping_multiplier = min(1, active_combustables / (total_moles/group_multiplier))
 
@@ -395,7 +395,7 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 
 /mob/living/proc/FireBurn(var/firelevel, var/last_temperature, var/pressure)
 	var/mx = 5 * firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
-	apply_damage(2.5*mx, BURN)
+	apply_damage(2.5 * mx, DAMAGE_BURN)
 	return mx
 
 
@@ -431,13 +431,13 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 
 	//Always check these damage procs first if fire damage isn't working. They're probably what's wrong.
 
-	apply_damage(0.9*mx*head_exposure,  BURN, BP_HEAD,  used_weapon =  "Fire")
-	apply_damage(2.5*mx*chest_exposure, BURN, BP_CHEST, used_weapon =  "Fire")
-	apply_damage(2.0*mx*groin_exposure, BURN, BP_GROIN, used_weapon =  "Fire")
-	apply_damage(0.6*mx*legs_exposure,  BURN, BP_L_LEG, used_weapon =  "Fire")
-	apply_damage(0.6*mx*legs_exposure,  BURN, BP_R_LEG, used_weapon =  "Fire")
-	apply_damage(0.4*mx*arms_exposure,  BURN, BP_L_ARM, used_weapon =  "Fire")
-	apply_damage(0.4*mx*arms_exposure,  BURN, BP_R_ARM, used_weapon =  "Fire")
+	apply_damage(0.9*mx*head_exposure,  DAMAGE_BURN, BP_HEAD,  used_weapon =  "Fire")
+	apply_damage(2.5*mx*chest_exposure, DAMAGE_BURN, BP_CHEST, used_weapon =  "Fire")
+	apply_damage(2.0*mx*groin_exposure, DAMAGE_BURN, BP_GROIN, used_weapon =  "Fire")
+	apply_damage(0.6*mx*legs_exposure,  DAMAGE_BURN, BP_L_LEG, used_weapon =  "Fire")
+	apply_damage(0.6*mx*legs_exposure,  DAMAGE_BURN, BP_R_LEG, used_weapon =  "Fire")
+	apply_damage(0.4*mx*arms_exposure,  DAMAGE_BURN, BP_L_ARM, used_weapon =  "Fire")
+	apply_damage(0.4*mx*arms_exposure,  DAMAGE_BURN, BP_R_ARM, used_weapon =  "Fire")
 
 	//return a truthy value of whether burning actually happened
 	return mx * (head_exposure + chest_exposure + groin_exposure + legs_exposure + arms_exposure)

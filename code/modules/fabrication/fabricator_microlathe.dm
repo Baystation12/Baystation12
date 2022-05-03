@@ -13,6 +13,8 @@
 		/material/plastic =   5000,
 		/material/glass   = 5000
 	)
+	machine_name = "microlathe"
+	machine_desc = "A smaller-sized autolathe, typically used for cutlery, dinnerware, and drinking glasses."
 
 //Subtype for mapping, starts preloaded with glass and set to print glasses
 /obj/machinery/fabricator/micro/bartender

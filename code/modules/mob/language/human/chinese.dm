@@ -13,7 +13,7 @@
 	partial_understanding = list(
 		LANGUAGE_HUMAN_EURO = 5,
 		LANGUAGE_HUMAN_ARABIC = 5,
-		LANGUAGE_HUMAN_INDIAN = 5, 
+		LANGUAGE_HUMAN_INDIAN = 5,
 		LANGUAGE_HUMAN_SELENIAN = 10,
 		LANGUAGE_SPACER = 20
 	)
@@ -45,3 +45,4 @@
 		"zhe", "zhei", "zhen", "zheng", "zhi", "zhong", "zhou", "zhu", "zhua", "zhuai", "zhuan", "zhuang", "zhui", "zhun", "zhuo", "zi",
 		"zong", "zou", "zuan", "zui", "zun", "zuo", "zu"
 	)
+	has_written_form = TRUE

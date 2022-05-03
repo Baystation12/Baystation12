@@ -96,7 +96,7 @@
 	if ((!istype(S, /obj/item/device/assembly/infra)))
 		..()
 		return
-	var/obj/item/weapon/TVAssembly/A = new(user)
+	var/obj/item/TVAssembly/A = new(user)
 	qdel(S)
 	user.put_in_hands(A)
 	to_chat(user, "<span class='notice'>You add the infrared sensor to the robot head.</span>")
@@ -104,16 +104,16 @@
 
 /* Using camcorder icon as I can't sprite.
 Using robohead because of restricting to roboticist */
-/obj/item/weapon/TVAssembly
+/obj/item/TVAssembly
 	name = "TV Camera assembly"
-	desc = "A robotic head with an infrared sensor inside"
+	desc = "A robotic head with an infrared sensor inside."
 	icon = 'icons/obj/robot_parts.dmi'
 	icon_state = "head"
 	item_state = "head"
 	var/buildstep = 0
 	w_class = ITEM_SIZE_LARGE
 
-/obj/item/weapon/TVAssembly/attackby(var/obj/item/W, var/mob/user)
+/obj/item/TVAssembly/attackby(var/obj/item/W, var/mob/user)
 	switch(buildstep)
 		if(0)
 			if(istype(W, /obj/item/robot_parts/robot_component/camera))
@@ -137,7 +137,7 @@ Using robohead because of restricting to roboticist */
 					return
 				buildstep++
 				to_chat(user, "<span class='notice'>You wire the assembly</span>")
-				desc = "This TV camera assembly has wires sticking out"
+				desc = "This TV camera assembly has wires sticking out."
 				return
 		if(3)
 			if(isWirecutter(W))

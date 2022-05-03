@@ -6,12 +6,12 @@
 
 	var/list/matter //Used to store information about the contents of the object.
 	var/w_class // Size of the object.
-	var/unacidable = 0 //universal "unacidabliness" var, here so you can use it in any obj.
+	var/unacidable = FALSE //universal "unacidabliness" var, here so you can use it in any obj.
 	var/throwforce = 1
-	var/sharp = 0		// whether this object cuts
-	var/edge = 0		// whether this object is more likely to dismember
+	var/sharp = FALSE		// whether this object cuts
+	var/edge = FALSE		// whether this object is more likely to dismember
 	var/in_use = 0 // If we have a user using us, this will be set on. We will check if the user has stopped using us, and thus stop updating and LAGGING EVERYTHING!
-	var/damtype = "brute"
+	var/damtype = DAMAGE_BRUTE
 	var/armor_penetration = 0
 	var/anchor_fall = FALSE
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
@@ -118,11 +118,11 @@
 /obj/proc/damage_flags()
 	. = 0
 	if(has_edge(src))
-		. |= DAM_EDGE
+		. |= DAMAGE_FLAG_EDGE
 	if(is_sharp(src))
-		. |= DAM_SHARP
-		if(damtype == BURN)
-			. |= DAM_LASER
+		. |= DAMAGE_FLAG_SHARP
+		if (damtype == DAMAGE_BURN)
+			. |= DAMAGE_FLAG_LASER
 
 /obj/attackby(obj/item/O, mob/user)
 	if(obj_flags & OBJ_FLAG_ANCHORABLE)
@@ -138,7 +138,7 @@
 		user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
 	else
 		user.visible_message("\The [user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
-	if(do_after(user, delay, src))
+	if(do_after(user, delay, src, DO_PUBLIC_UNIQUE))
 		if(!src) return
 		to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
 		anchored = !anchored
@@ -175,7 +175,13 @@
 		return
 
 	set_dir(turn(dir, 90))
-	update_icon() 
+	update_icon()
 
 //For things to apply special effects after damaging an organ, called by organ's take_damage
 /obj/proc/after_wounding(obj/item/organ/external/organ, datum/wound)
+
+/**
+ * Test for if stepping on a tile containing this obj is safe to do, used for things like landmines and cliffs.
+ */
+/obj/proc/is_safe_to_step(mob/living/L)
+	return TRUE

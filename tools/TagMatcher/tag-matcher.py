@@ -111,7 +111,7 @@ for file, mismatches_by_tag in mismatches_by_file.items():
 				for mismatch_line in sorted(set(mismatch_list)):
 					print('\t\tLine {0}'.format(abs(mismatch_line)))
 
-# Simply prints the total number of mismatches found and if so returns 1 to, for example, fail Travis builds.
+# Simply prints the total number of mismatches found and if so returns 1 to, for example, fail testing builds.
 if(total_mismatches == 0):
 	print('No mismatches found.')
 else:

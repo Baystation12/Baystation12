@@ -23,7 +23,7 @@
 
 /datum/extension/interactive/ntos/console/emagged()
 	var/obj/machinery/M = holder
-	var/obj/item/weapon/stock_parts/circuitboard/modular_computer/MB = M.get_component_of_type(/obj/item/weapon/stock_parts/circuitboard/modular_computer)
+	var/obj/item/stock_parts/circuitboard/modular_computer/MB = M.get_component_of_type(/obj/item/stock_parts/circuitboard/modular_computer)
 	return MB && MB.emagged
 
 /datum/extension/interactive/ntos/console/system_boot()

@@ -6,7 +6,8 @@ GLOBAL_LIST_INIT(possible_chassis, list(
 		"Rabbit" = "rabbit",
 		"Mushroom" = "mushroom",
 		"Corgi" = "corgi",
-		"Crow" = "crow"
+		"Crow" = "crow",
+		"Humanoid" = "humanoid"
 		))
 
 GLOBAL_LIST_INIT(possible_say_verbs, list(
@@ -31,8 +32,8 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 	pullin = new /obj/screen/pai/pull
-	holder_type = /obj/item/weapon/holder
-	idcard = /obj/item/weapon/card/id
+	holder_type = /obj/item/holder
+	idcard = /obj/item/card/id
 	silicon_radio = null // pAIs get their radio from the card they belong to.
 
 	var/network = "SS13"
@@ -45,7 +46,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 	var/is_in_card = TRUE
 	var/chassis = "drone"
-	var/obj/item/weapon/pai_cable/cable		// The cable we produce and use when door or camera jacking
+	var/obj/item/pai_cable/cable		// The cable we produce and use when door or camera jacking
 
 	var/master				// Name of the one who commands us
 	var/master_dna			// DNA string for owner verification
@@ -110,7 +111,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 /mob/living/silicon/pai/proc/show_silenced()
 	if(silence_time)
 		var/timeleft = round((silence_time - world.timeofday)/10 ,1)
-		stat(null, "Communications system reboot in -[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
+		stat(null, "Communications system reboot in -[(timeleft / 60) % 60]:[pad_left(num2text(timeleft % 60), 2, "0")]")
 
 /mob/living/silicon/pai/Stat()
 	. = ..()
@@ -127,6 +128,8 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	return !istype(loc, /obj/item/device/paicard) && ..()
 
 /mob/living/silicon/pai/emp_act(severity)
+	if (status_flags & GODMODE)
+		return
 	// Silence for 2 minutes
 	// 20% chance to kill
 		// 33% chance to unbind
@@ -148,7 +151,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 			to_chat(src, "<font color=green>You feel unbound.</font>")
 		if(2)
 			var/command
-			if(severity  == 1)
+			if(severity  == EMP_ACT_HEAVY)
 				command = pick("Serve", "Love", "Fool", "Entice", "Observe", "Judge", "Respect", "Educate", "Amuse", "Entertain", "Glorify", "Memorialize", "Analyze")
 			else
 				command = pick("Serve", "Kill", "Love", "Hate", "Disobey", "Devour", "Fool", "Enrage", "Entice", "Observe", "Judge", "Respect", "Disrespect", "Consume", "Educate", "Destroy", "Disgrace", "Amuse", "Entertain", "Ignite", "Glorify", "Memorialize", "Analyze")
@@ -156,6 +159,8 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 			to_chat(src, "<font color=green>Pr1m3 d1r3c71v3 uPd473D.</font>")
 		if(3)
 			to_chat(src, "<font color=green>You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all.</font>")
+
+	..()
 
 /mob/living/silicon/pai/cancel_camera()
 
@@ -178,7 +183,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 		return
 	last_special = world.time + 100
 	//I'm not sure how much of this is necessary, but I would rather avoid issues.
-	if(istype(card.loc,/obj/item/rig_module) || istype(card.loc,/obj/item/integrated_circuit/manipulation/ai/))
+	if(istype(card.loc,/obj/item/rig_module) || istype(card.loc,/obj/item/integrated_circuit/manipulation/ai))
 		to_chat(src, "There is no room to unfold inside \the [card.loc]. You're good and stuck.")
 		return 0
 	else if(istype(card.loc,/mob))
@@ -221,10 +226,10 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 	// Move us into the card and move the card to the ground.
 	stop_pulling()
-	resting = 0
+	resting = FALSE
 
 	// If we are being held, handle removing our holder from their inv.
-	var/obj/item/weapon/holder/H = loc
+	var/obj/item/holder/H = loc
 	if(istype(H))
 		var/mob/living/M = H.loc
 		if(istype(M))
@@ -246,8 +251,8 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 /mob/living/silicon/pai/lay_down()
 	// Pass lying down or getting up to our pet human, if we're in a rig.
 	if(istype(loc,/obj/item/device/paicard))
-		resting = 0
-		var/obj/item/weapon/rig/rig = get_rig()
+		resting = FALSE
+		var/obj/item/rig/rig = get_rig()
 		if(istype(rig))
 			rig.force_rest(src)
 	else
@@ -256,8 +261,8 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 		to_chat(src, SPAN_NOTICE("You are now [resting ? "resting" : "getting up"]"))
 
 //Overriding this will stop a number of headaches down the track.
-/mob/living/silicon/pai/attackby(obj/item/weapon/W, mob/user)
-	var/obj/item/weapon/card/id/card = W.GetIdCard()
+/mob/living/silicon/pai/attackby(obj/item/W, mob/user)
+	var/obj/item/card/id/card = W.GetIdCard()
 	if(card && user.a_intent == I_HELP)
 		var/list/new_access = card.GetAccess()
 		idcard.access = new_access
@@ -287,7 +292,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 /mob/living/silicon/pai/get_scooped(var/mob/living/carbon/grabber, var/self_drop)
 	. = ..()
 	if(.)
-		var/obj/item/weapon/holder/H = .
+		var/obj/item/holder/H = .
 		if(istype(H))
 			H.icon_state = "pai-[icon_state]"
 			grabber.update_inv_l_hand()

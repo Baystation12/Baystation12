@@ -2,9 +2,7 @@
 
 	//The name of the job
 	var/title = "NOPE"
-	//Job access. The use of minimal_access or access is determined by a config setting: config.jobs_have_minimal_access
-	var/list/minimal_access = list()      // Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
-	var/list/access = list()              // Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
+	var/list/access = list()              // The job's default access tokens
 	var/list/software_on_spawn = list()   // Defines the software files that spawn on tablets and labtops
 	var/department_flag = 0
 	var/total_positions = 0               // How many players can be this job
@@ -44,14 +42,16 @@
 	var/available_by_default = TRUE
 
 	var/list/possible_goals
-	var/min_goals = 1
-	var/max_goals = 3
+	var/min_goals = 0
+	var/max_goals = 5
 
 	var/defer_roundstart_spawn = FALSE // If true, the job will be put off until all other jobs have been populated.
 	var/list/species_branch_rank_cache_ = list()
 	var/list/psi_faculties                // Starting psi faculties, if any.
 	var/psi_latency_chance = 0            // Chance of an additional psi latency, if any.
 	var/give_psionic_implant_on_join = TRUE // If psionic, will be implanted for control.
+
+	var/use_species_whitelist // If set, restricts the job to players with the given species whitelist. This does NOT restrict characters joining as the job to the species itself.
 
 	var/required_language
 
@@ -87,7 +87,7 @@
 	if(H.psi)
 		H.psi.update()
 		if(give_psionic_implant_on_join)
-			var/obj/item/weapon/implant/psi_control/imp = new
+			var/obj/item/implant/psi_control/imp = new
 			imp.implanted(H)
 			imp.forceMove(H)
 			imp.imp_in = H
@@ -160,10 +160,7 @@
 	. = outfit.equip(H, title, alt_title, OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP|OUTFIT_ADJUSTMENT_SKIP_ID_PDA|additional_skips)
 
 /datum/job/proc/get_access()
-	if(minimal_access.len && (!config || config.jobs_have_minimal_access))
-		return src.minimal_access.Copy()
-	else
-		return src.access.Copy()
+	return access.Copy()
 
 //If the configuration option is set to require players to be logged as old enough to play certain jobs, then this proc checks that they are, otherwise it just returns 1
 /datum/job/proc/player_old_enough(client/C)
@@ -194,7 +191,12 @@
 	return (supplied_title == desired_title) || (H.mind && H.mind.role_alt_title == desired_title)
 
 /datum/job/proc/is_restricted(var/datum/preferences/prefs, var/feedback)
+	var/datum/species/S
 
+	if (!is_species_whitelist_allowed(prefs.client, use_species_whitelist))
+		S = all_species[use_species_whitelist]
+		to_chat(feedback, "<span class='boldannounce'>\An [S] species whitelist is required for [title].</span>")
+		return TRUE
 
 	if(!isnull(allowed_branches) && (!prefs.branches[title] || !is_branch_allowed(prefs.branches[title])))
 		to_chat(feedback, "<span class='boldannounce'>Wrong branch of service for [title]. Valid branches are: [get_branches()].</span>")
@@ -204,7 +206,7 @@
 		to_chat(feedback, "<span class='boldannounce'>Wrong rank for [title]. Valid ranks in [prefs.branches[title]] are: [get_ranks(prefs.branches[title])].</span>")
 		return TRUE
 
-	var/datum/species/S = all_species[prefs.species]
+	S = all_species[prefs.species]
 	if(!is_species_allowed(S))
 		to_chat(feedback, "<span class='boldannounce'>Restricted species, [S], for [title].</span>")
 		return TRUE
@@ -212,7 +214,7 @@
 	if(LAZYACCESS(minimum_character_age, S.get_bodytype()) && (prefs.age < minimum_character_age[S.get_bodytype()]))
 		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age[S.get_bodytype()]].</span>")
 		return TRUE
-	
+
 	if(!S.check_background(src, prefs))
 		to_chat(feedback, "<span class='boldannounce'>Incompatible background for [title].</span>")
 		return TRUE
@@ -247,6 +249,14 @@
 		return TRUE
 	return LAZYLEN(get_branch_rank(S))
 
+/datum/job/proc/is_species_whitelist_allowed(client/C)
+	if (isnull(use_species_whitelist))
+		return TRUE
+	if (!C?.mob)
+		log_debug("Failed to find a valid client/mob for whitelist checking - Job `[src]` - Client `[C]` - Mob `[C?.mob]`")
+		return FALSE
+	return is_species_whitelisted(C.mob, use_species_whitelist)
+
 // Don't use if the map doesn't use branches but jobs do.
 /datum/job/proc/get_branch_rank(var/datum/species/S)
 	. = species_branch_rank_cache_[S]
@@ -256,9 +266,9 @@
 	species_branch_rank_cache_[S] = list()
 	. = species_branch_rank_cache_[S]
 
-	var/spawn_branches = mil_branches.spawn_branches(S)
+	var/spawn_branches = GLOB.mil_branches.spawn_branches(S)
 	for(var/branch_type in allowed_branches)
-		var/datum/mil_branch/branch = mil_branches.get_branch_by_type(branch_type)
+		var/datum/mil_branch/branch = GLOB.mil_branches.get_branch_by_type(branch_type)
 		if(branch.name in spawn_branches)
 			if(!allowed_ranks || !(GLOB.using_map.flags & MAP_HAS_RANK))
 				LAZYADD(., branch.name)
@@ -282,7 +292,7 @@
 	if(branch_name == "None")
 		return 0
 
-	var/datum/mil_branch/branch = mil_branches.get_branch(branch_name)
+	var/datum/mil_branch/branch = GLOB.mil_branches.get_branch(branch_name)
 
 	if(!branch)
 		crash_with("unknown branch \"[branch_name]\" passed to is_branch_allowed()")
@@ -307,7 +317,7 @@
 	if(branch_name == "None" || rank_name == "None")
 		return 0
 
-	var/datum/mil_rank/rank = mil_branches.get_rank(branch_name, rank_name)
+	var/datum/mil_rank/rank = GLOB.mil_branches.get_rank(branch_name, rank_name)
 
 	if(!rank)
 		crash_with("unknown rank \"[rank_name]\" in branch \"[branch_name]\" passed to is_rank_allowed()")
@@ -322,14 +332,14 @@
 /datum/job/proc/get_branches()
 	var/list/res = list()
 	for(var/T in allowed_branches)
-		var/datum/mil_branch/B = mil_branches.get_branch_by_type(T)
+		var/datum/mil_branch/B = GLOB.mil_branches.get_branch_by_type(T)
 		res += B.name
 	return english_list(res)
 
 //Same as above but ranks
 /datum/job/proc/get_ranks(branch)
 	var/list/res = list()
-	var/datum/mil_branch/B = mil_branches.get_branch(branch)
+	var/datum/mil_branch/B = GLOB.mil_branches.get_branch(branch)
 	for(var/T in allowed_ranks)
 		var/datum/mil_rank/R = T
 		if(B && !(initial(R.name) in B.ranks))
@@ -364,6 +374,8 @@
 		reasons["Your branch of service does not allow it."] = TRUE
 	else if(!isnull(allowed_ranks) && (!caller.prefs.ranks[title] || !is_rank_allowed(caller.prefs.branches[title], caller.prefs.ranks[title])))
 		reasons["Your rank choice does not allow it."] = TRUE
+	if (!is_species_whitelist_allowed(caller))
+		reasons["You do not have the required [use_species_whitelist] species whitelist."] = TRUE
 	var/datum/species/S = all_species[caller.prefs.species]
 	if(S)
 		if(!is_species_allowed(S))
@@ -390,6 +402,9 @@
 
 /datum/job/proc/make_position_available()
 	total_positions++
+
+/datum/job/proc/make_position_unavailable()
+	total_positions = 0
 
 /datum/job/proc/get_roundstart_spawnpoint()
 	var/list/loc_list = list()
@@ -464,3 +479,9 @@
 
 /datum/job/proc/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
 	return
+
+/datum/job/proc/get_min_skill(decl/hierarchy/skill/S)
+	if(min_skill)
+		. = min_skill[S.type]
+	if(!.)
+		. = SKILL_MIN

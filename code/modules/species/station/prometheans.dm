@@ -1,4 +1,4 @@
-var/datum/species/shapeshifter/promethean/prometheans
+var/global/datum/species/shapeshifter/promethean/prometheans
 
 // Species definition follows.
 /datum/species/shapeshifter/promethean
@@ -67,7 +67,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 		/mob/living/carbon/human/proc/shapeshifter_select_gender
 		)
 
-	valid_transform_species = list(SPECIES_HUMAN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_DIONA, SPECIES_MANTID_ALATE, "Monkey")
+	valid_transform_species = list(SPECIES_HUMAN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_DIONA, SPECIES_MONKEY)
 	monochromatic = 1
 
 	var/heal_rate = 5 // Temp. Regen per tick.
@@ -104,7 +104,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 		if(I.damage > 0)
 			I.damage = max(I.damage - heal_rate, 0)
 			if (prob(5))
-				H << "<span class='notice'>You feel a soothing sensation within your [I.name]...</span>"
+				to_chat(H, SPAN_NOTICE("You feel a soothing sensation within your [I.name]..."))
 			return 1
 
 	// Replace completely missing limbs.
@@ -119,7 +119,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 			var/limb_path = organ_data["path"]
 			var/obj/item/organ/O = new limb_path(H)
 			organ_data["descriptor"] = O.name
-			H << "<span class='notice'>You feel a slithering sensation as your [O.name] reforms.</span>"
+			to_chat(H, SPAN_NOTICE("You feel a slithering sensation as your [O.name] reforms."))
 			H.update_body()
 			return 1
 

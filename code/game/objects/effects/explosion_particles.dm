@@ -3,7 +3,7 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "explosion_particle"
 	opacity = 1
-	anchored = 1
+	anchored = TRUE
 	mouse_opacity = 0
 
 /obj/effect/expl_particles/New()
@@ -17,7 +17,7 @@
 
 /datum/effect/system/expl_particles/proc/set_up(n = 10, loca)
 	number = n
-	if(istype(loca, /turf/)) location = loca
+	if(isturf(loca)) location = loca
 	else location = get_turf(loca)
 
 /datum/effect/system/expl_particles/proc/start()
@@ -35,7 +35,7 @@
 	icon = 'icons/effects/96x96.dmi'
 	icon_state = "explosion"
 	opacity = 1
-	anchored = 1
+	anchored = TRUE
 	mouse_opacity = 0
 	pixel_x = -32
 	pixel_y = -32
@@ -48,7 +48,7 @@
 	var/turf/location
 
 /datum/effect/system/explosion/proc/set_up(loca)
-	if(istype(loca, /turf/)) location = loca
+	if(isturf(loca)) location = loca
 	else location = get_turf(loca)
 
 /datum/effect/system/explosion/proc/start()

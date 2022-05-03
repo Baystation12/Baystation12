@@ -13,6 +13,8 @@ Synthetic
 
 /datum/job/ai
 	minimal_player_age = 7
+	total_positions = 0
+	spawn_positions = 0
 	allowed_ranks = list(
 		/datum/mil_rank/civ/synthetic
 	)
@@ -46,6 +48,8 @@ Civilian
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/contractor
 	)
+	min_goals = 2
+	max_goals = 7
 
 /datum/job/merchant
 	title = "Merchant"

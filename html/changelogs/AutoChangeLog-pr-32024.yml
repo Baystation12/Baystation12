@@ -1,0 +1,4 @@
+author: Jux
+delete-after: true
+changes:
+  - bugfix: Security HUD goggles protect from teargas to the eyes again.

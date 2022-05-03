@@ -15,11 +15,9 @@
 	cancel()
 
 /datum/psi_complexus/proc/get_armour(var/armourtype)
-	if(can_use_passive())
-		last_armor_check = world.time
-		return round(Clamp(Clamp(4 * rating, 0, 20) * get_rank(SSpsi.armour_faculty_by_type[armourtype]), 0, 100) * (stamina/max_stamina))
+	if(use_psi_armour && can_use_passive())
+		return round(clamp(clamp(4 * rating, 0, 20) * get_rank(SSpsi.armour_faculty_by_type[armourtype]), 0, 100) * (stamina/max_stamina))
 	else
-		last_armor_check = 0
 		return 0
 
 /datum/psi_complexus/proc/get_rank(var/faculty)
@@ -48,7 +46,7 @@
 	if(isnull(check_incapacitated))
 		check_incapacitated = (INCAPACITATION_STUNNED|INCAPACITATION_KNOCKOUT)
 	if(can_use(check_incapacitated))
-		value = max(1, ceil(value * cost_modifier))
+		value = max(1, Ceil(value * cost_modifier))
 		if(value <= stamina)
 			stamina -= value
 			ui.update_icon()
@@ -58,6 +56,9 @@
 			stamina = 0
 			. = FALSE
 		ui.update_icon()
+
+/datum/psi_complexus/proc/spend_power_armor(var/value = 0)
+	armor_cost += value
 
 /datum/psi_complexus/proc/hide_auras()
 	if(owner.client)

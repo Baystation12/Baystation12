@@ -21,7 +21,7 @@
 /datum/computer_file/report/recipient/corp/memo/internal
 	form_name = "C-0003"
 	title = "Internal Memorandum"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/corp/memo/internal/New()
 	..()
@@ -30,7 +30,7 @@
 /datum/computer_file/report/recipient/corp/memo/external
 	form_name = "C-0005"
 	title = "External Memorandum"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/corp/memo/external/New()
 	..()
@@ -40,7 +40,7 @@
 /datum/computer_file/report/recipient/corp/sales
 	form_name = "C-2192"
 	title = "Corporate Sales Contract and Receipt"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/corp/sales/generate_fields()
 	..()
@@ -59,7 +59,7 @@
 /datum/computer_file/report/recipient/corp/payout
 	form_name = "C-3310"
 	title = "Next of Kin Payout Authorization"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/corp/payout/generate_fields()
 	..()
@@ -74,7 +74,7 @@
 /datum/computer_file/report/recipient/corp/fire
 	form_name = "C-0102"
 	title = "Corporate Employment Termination Form"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/corp/fire/New()
 	..()
@@ -108,7 +108,7 @@
 /datum/computer_file/report/recipient/corp/incident/ship
 	form_name = "C-3203"
 	title = "Corporate Ship Incident Report"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/corp/incident/ship/generate_fields()
 	..()
@@ -118,7 +118,7 @@
 /datum/computer_file/report/recipient/corp/volunteer
 	form_name = "C-1443"
 	title = "Corporate Test Subject Volunteer Form"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/corp/volunteer/generate_fields()
 	..()
@@ -137,7 +137,7 @@
 /datum/computer_file/report/recipient/corp/deny
 	form_name = "C-1443D"
 	title = "Rejection of Test Subject Volunteer Notice"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/corp/deny/generate_fields()
 	..()

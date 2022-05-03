@@ -9,9 +9,9 @@
 /decl/surgery_step/open_encased
 	name = "Saw through bone"
 	allowed_tools = list(
-		/obj/item/weapon/circular_saw = 100,
-		/obj/item/weapon/material/knife = 50,
-		/obj/item/weapon/material/hatchet = 75
+		/obj/item/circular_saw = 100,
+		/obj/item/material/knife = 50,
+		/obj/item/material/hatchet = 75
 	)
 	can_infect = 1
 	blood_level = 1
@@ -44,5 +44,5 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, cracking [target]'s [affected.encased] with \the [tool]!</span>" , \
 	"<span class='warning'>Your hand slips, cracking [target]'s [affected.encased] with \the [tool]!</span>" )
-	affected.take_external_damage(15, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+	affected.take_external_damage(15, 0, (DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE), used_weapon = tool)
 	affected.fracture()

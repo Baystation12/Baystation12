@@ -1,8 +1,6 @@
 
 //Structured Datum Query Language. Basically SQL meets BYOND objects.
 
-//Note: For use in BS12, need text_starts_with proc, and to modify the action on select to use BS12's object edit command(s).
-
 /client/proc/SDQL_query(query_text as message)
 	set category = "Admin"
 	if(!check_rights(R_DEBUG))  //Shouldn't happen... but just to be safe.
@@ -370,16 +368,6 @@
 				return object.vars[text]
 			else
 				return null
-
-
-/proc/text_starts_with(text, start)
-	if(copytext(text, 1, length(start) + 1) == start)
-		return 1
-	else
-		return 0
-
-
-
 
 
 /proc/SDQL_tokenize(query_text)

@@ -1,12 +1,16 @@
 // Simple toggles. Get an input from somewhere in the code, marked 
-// as successful for the rest of the round. Nothing very special.
+// as successful/unsuccessful for the rest of the round. Nothing very special.
 /datum/goal/achievement
+	var/failable = FALSE
 	var/success = FALSE
 
 /datum/goal/achievement/update_progress(var/progress)
-	if(!success)
+	if(!success && !failable)
 		success = progress
 		on_completion()
+	else if (success && failable)
+		success = progress
+		on_failure()
 
 /datum/goal/achievement/check_success()
 	return success

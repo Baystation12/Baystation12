@@ -6,11 +6,11 @@
 /obj/effect/fusion_em_field
 	name = "electromagnetic field"
 	desc = "A coruscating, barely visible field of energy. It is shaped like a slightly flattened torus."
-	icon = 'icons/obj/machines/power/fusion.dmi'
-	icon_state = "emfield_s1"
-	alpha = 50
+	alpha = 30
 	layer = 4
-	light_color = COLOR_BLUE
+	light_color = COLOR_RED
+
+	plane = EFFECTS_ABOVE_LIGHTING_PLANE
 
 	var/size = 1
 	var/energy = 0
@@ -28,19 +28,45 @@
 		/obj/item/projectile,
 		/obj/effect,
 		/obj/structure/cable,
-		/obj/machinery/atmospherics
+		/obj/machinery/atmospherics,
+		/obj/machinery/air_sensor
 		)
 
 	var/light_min_range = 2
 	var/light_min_power = 0.2
-	var/light_max_range = 12
+	var/light_max_range = 18
 	var/light_max_power = 1
 
 	var/last_range
 	var/last_power
 
+	var/last_reactants = 0
+
+	particles = new/particles/fusion
+
+	var/animating_ripple = FALSE
+
+/obj/effect/fusion_em_field/proc/UpdateVisuals()
+	//Take the particle system and edit it
+
+	//size
+	var/radius = ((size-1) / 2) * WORLD_ICON_SIZE
+
+	particles.position = generator("circle", radius - size, radius + size, NORMAL_RAND)
+
+	//Radiation affects drift
+	var/radiationfactor = clamp((radiation * 0.001), 0, 0.5)
+	particles.drift = generator("circle", (0.2 + radiationfactor), NORMAL_RAND)
+
+	particles.spawning = last_reactants * 0.9 + Interpolate(0, 200, clamp(plasma_temperature / 70000, 0, 1))
+
+
 /obj/effect/fusion_em_field/New(loc, var/obj/machinery/power/fusion_core/new_owned_core)
 	..()
+
+	filters = list(filter(type = "ripple", size = 4, "radius" = 1, "falloff" = 1)
+	, filter(type="outline", size = 2, color =  COLOR_RED)
+	, filter(type="bloom", size=3, offset = 0.5, alpha = 235))
 
 	set_light(light_min_power, light_min_range / 10, light_min_range)
 	last_range = light_min_range
@@ -49,6 +75,8 @@
 	owned_core = new_owned_core
 	if(!owned_core)
 		qdel(src)
+
+	particles.spawning = 0 //Turn off particles until something calls for it
 
 	//create the gimmicky things to handle field collisions
 	var/obj/effect/fusion_particle_catcher/catcher
@@ -81,9 +109,59 @@
 
 	START_PROCESSING(SSobj, src)
 
+/obj/effect/fusion_em_field/Initialize()
+	. = ..()
+	addtimer(CALLBACK(src, .proc/update_light_colors), 10 SECONDS, TIMER_LOOP)
+
+/obj/effect/fusion_em_field/proc/update_light_colors()
+	var/use_range
+	var/use_power
+	switch (plasma_temperature)
+		if (-INFINITY to 1000)
+			light_color = COLOR_RED
+			use_range = light_min_range
+			use_power = light_min_power
+			alpha = 30
+		if (100000 to INFINITY)
+			light_color = COLOR_VIOLET
+			use_range = light_max_range
+			use_power = light_max_power
+			alpha = 230
+		else
+			var/temp_mod = ((plasma_temperature-5000)/20000)
+			use_range = light_min_range + Ceil((light_max_range-light_min_range)*temp_mod)
+			use_power = light_min_power + Ceil((light_max_power-light_min_power)*temp_mod)
+			switch (plasma_temperature)
+				if (1000 to 6000)
+					light_color = COLOR_ORANGE
+					alpha = 50
+				if (6000 to 20000)
+					light_color = COLOR_YELLOW
+					alpha = 80
+				if (20000 to 50000)
+					light_color = COLOR_GREEN
+					alpha = 120
+				if (50000 to 70000)
+					light_color = COLOR_CYAN
+					alpha = 160
+				if (70000 to 100000)
+					light_color = COLOR_BLUE
+					alpha = 200
+
+	if (last_range != use_range || last_power != use_power || color != light_color)
+		set_light(min(use_power, 1), use_range / 6, use_range) //cap first arg at 1 to avoid breaking lighting stuff.
+		last_range = use_range
+		last_power = use_power
+		//Temperature based color
+		particles.gradient = list(0, COLOR_WHITE, 0.85, light_color)
+		UNLINT(var/dm_filter/outline = filters[2])
+		UNLINT(outline.color = light_color)
+		UNLINT(var/dm_filter/bloom = filters[3])
+		UNLINT(bloom.alpha = alpha)
+
 /obj/effect/fusion_em_field/Process()
 	//make sure the field generator is still intact
-	if(!owned_core || QDELETED(owned_core))
+	if(QDELETED(owned_core))
 		qdel(src)
 		return
 
@@ -123,24 +201,6 @@
 			reactants[reactant] -= radiate
 			radiation += radiate
 
-	var/use_range
-	var/use_power
-	if(plasma_temperature <= 6000)
-		use_range = light_min_range
-		use_power = light_min_power
-	else if(plasma_temperature >= 25000)
-		use_range = light_max_range
-		use_power = light_max_power
-	else
-		var/temp_mod = ((plasma_temperature-5000)/20000)
-		use_range = light_min_range + ceil((light_max_range-light_min_range)*temp_mod)
-		use_power = light_min_power + ceil((light_max_power-light_min_power)*temp_mod)
-
-	if(last_range != use_range || last_power != use_power)
-		set_light(min(use_power, 1), use_range / 6, use_range) //cap first arg at 1 to avoid breaking lighting stuff.
-		last_range = use_range
-		last_power = use_power
-
 	check_instability()
 	Radiate()
 	if(radiation)
@@ -151,6 +211,7 @@
 	if(tick_instability > 0)
 		percent_unstable += (tick_instability*size)/FUSION_INSTABILITY_DIVISOR
 		tick_instability = 0
+		UpdateVisuals()
 	else
 		if(percent_unstable < 0)
 			percent_unstable = 0
@@ -159,11 +220,14 @@
 				percent_unstable = 1
 			if(percent_unstable > 0)
 				percent_unstable = max(0, percent_unstable-rand(0.01,0.03))
+				UpdateVisuals()
 
 	if(percent_unstable >= 1)
 		owned_core.Shutdown(force_rupture=1)
 	else
 		if(percent_unstable > 0.5 && prob(percent_unstable*100))
+			var/ripple_radius = (((size-1) / 2) * WORLD_ICON_SIZE) + WORLD_ICON_SIZE
+			var/wave_size = 4
 			if(plasma_temperature < FUSION_RUPTURE_THRESHOLD)
 				visible_message("<span class='danger'>\The [src] ripples uneasily, like a disturbed pond.</span>")
 			else
@@ -178,11 +242,13 @@
 					flare = prob(50)
 					fuel_loss = prob(20)
 					rupture = prob(5)
+					wave_size += 2
 				else
 					visible_message("<span class='danger'>\The [src] is wracked by a series of horrendous distortions, buckling and twisting like a living thing!</span>")
 					flare = 1
 					fuel_loss = prob(50)
 					rupture = prob(25)
+					wave_size += 4
 
 				if(rupture)
 					owned_core.Shutdown(force_rupture=1)
@@ -191,6 +257,7 @@
 					radiation += lost_plasma
 					if(flare)
 						radiation += plasma_temperature/2
+						wave_size += 6
 					plasma_temperature -= lost_plasma
 
 					if(fuel_loss)
@@ -201,7 +268,20 @@
 							if(reactants[particle] <= 0)
 								reactants.Remove(particle)
 					Radiate()
+			Ripple(wave_size, ripple_radius)
 	return
+
+/obj/effect/fusion_em_field/proc/Ripple(_size, _radius)
+	if(!animating_ripple)
+		UNLINT(var/dm_filter/ripple = filters[1])
+		UNLINT(ripple.size = _size)
+		animate(filters[1], time = 0, loop = 1, radius = 0, flags=ANIMATION_PARALLEL)
+		animate(time = 2 SECONDS, radius = _radius)
+		animating_ripple = TRUE
+		addtimer(CALLBACK(src, .proc/ResetRipple), 2 SECONDS, TIMER_CLIENT_TIME)
+
+/obj/effect/fusion_em_field/proc/ResetRipple()
+	animating_ripple = FALSE
 
 /obj/effect/fusion_em_field/proc/is_shutdown_safe()
 	return plasma_temperature < 1000
@@ -209,7 +289,7 @@
 /obj/effect/fusion_em_field/proc/Rupture()
 	visible_message("<span class='danger'>\The [src] shudders like a dying animal before flaring to eye-searing brightness and rupturing!</span>")
 	set_light(1, 0.1, 15, 2, "#ccccff")
-	empulse(get_turf(src), ceil(plasma_temperature/1000), ceil(plasma_temperature/300))
+	empulse(get_turf(src), Ceil(plasma_temperature/1000), Ceil(plasma_temperature/300))
 	sleep(5)
 	RadiateAll()
 	explosion(get_turf(owned_core),-1,-1,8,10) // Blow out all the windows.
@@ -244,6 +324,7 @@
 	while(energy >= 100)
 		energy -= 100
 		plasma_temperature += 1
+	UpdateVisuals()
 
 /obj/effect/fusion_em_field/proc/AddParticles(var/name, var/quantity = 1)
 	if(name in reactants)
@@ -251,6 +332,7 @@
 	else if(name != "proton" && name != "electron" && name != "neutron")
 		reactants.Add(name)
 		reactants[name] = quantity
+	UpdateVisuals()
 
 /obj/effect/fusion_em_field/proc/RadiateAll(var/ratio_lost = 1)
 
@@ -284,7 +366,7 @@
 
 /obj/effect/fusion_em_field/proc/Radiate()
 	if(istype(loc, /turf))
-		var/empsev = max(1, min(3, ceil(size/2)))
+		var/empsev = max(1, min(3, Ceil(size/2)))
 		for(var/atom/movable/AM in range(max(1,Floor(size/2)), loc))
 
 			if(AM == src || AM == owned_core || !AM.simulated)
@@ -310,24 +392,10 @@
 
 /obj/effect/fusion_em_field/proc/change_size(var/newsize = 1)
 	var/changed = 0
-	var/static/list/size_to_icon = list(
-			"3" = 'icons/effects/96x96.dmi', 
-			"5" = 'icons/effects/160x160.dmi', 
-			"7" = 'icons/effects/224x224.dmi', 
-			"9" = 'icons/effects/288x288.dmi', 
-			"11" = 'icons/effects/352x352.dmi', 
-			"13" = 'icons/effects/416x416.dmi'
-			)
-
 	if( ((newsize-1)%2==0) && (newsize<=13) )
-		icon = 'icons/obj/machines/power/fusion.dmi'
-		if(newsize>1)
-			icon = size_to_icon["[newsize]"]
-		icon_state = "emfield_s[newsize]"
-		pixel_x = ((newsize-1) * -16) * PIXEL_MULTIPLIER
-		pixel_y = ((newsize-1) * -16) * PIXEL_MULTIPLIER
 		size = newsize
 		changed = newsize
+		UpdateVisuals()
 
 	for(var/obj/effect/fusion_particle_catcher/catcher in particle_catchers)
 		catcher.UpdateSize()
@@ -337,6 +405,7 @@
 /obj/effect/fusion_em_field/proc/React()
 	//loop through the reactants in random order
 	var/list/react_pool = reactants.Copy()
+	last_reactants = 0
 
 	//cant have any reactions if there aren't any reactants present
 	if(react_pool.len)
@@ -421,6 +490,7 @@
 				plasma_temperature += max_num_reactants * cur_reaction.energy_production   // Add any produced energy.
 				radiation +=   max_num_reactants * cur_reaction.radiation           // Add any produced radiation.
 				tick_instability += max_num_reactants * cur_reaction.instability
+				last_reactants += amount_reacting
 
 				// Create the reaction products.
 				for(var/reactant in cur_reaction.products)
@@ -448,11 +518,12 @@
 		for(var/reactant in react_pool)
 			AddParticles(reactant, react_pool[reactant])
 
+	UpdateVisuals()
+
 /obj/effect/fusion_em_field/Destroy()
 	set_light(0)
 	RadiateAll()
-	for(var/obj/effect/fusion_particle_catcher/catcher in particle_catchers)
-		qdel(catcher)
+	QDEL_NULL_LIST(particle_catchers)
 	if(owned_core)
 		owned_core.owned_field = null
 		owned_core = null
@@ -464,7 +535,6 @@
 	update_icon()
 	return 0
 
-#undef FUSION_HEAT_CAP
 #undef FUSION_INSTABILITY_DIVISOR
 #undef FUSION_RUPTURE_THRESHOLD
 #undef FUSION_REACTANT_CAP

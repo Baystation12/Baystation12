@@ -144,6 +144,16 @@
 			list(/decl/emote/audible/bug_hiss) = 40
 	)
 
+	exertion_effect_chance = 10
+	exertion_hydration_scale = 1
+	exertion_reagent_scale = 5
+	exertion_reagent_path = /datum/reagent/lactate
+	exertion_emotes_biological = list(
+		/decl/emote/exertion/biological,
+		/decl/emote/exertion/biological/breath,
+		/decl/emote/exertion/biological/pant
+	)
+
 /datum/species/nabber/New()
 	equip_adjust = list(
 		slot_head_str =    list("[NORTH]" = list("x" = 0, "y" = 7),  "[EAST]" = list("x" = 0, "y" = 8),  "[SOUTH]" = list("x" = 0, "y" = 8),  "[WEST]" = list("x" = 0, "y" = 8)),
@@ -169,7 +179,7 @@
 
 	return FALSE
 
-/datum/species/nabber/handle_environment_special(var/mob/living/carbon/human/H)
+/datum/species/nabber/handle_environment_special(mob/living/carbon/human/H)
 	if(!H.on_fire && H.fire_stacks < 2)
 		H.fire_stacks += 0.2
 	return
@@ -240,7 +250,7 @@
 /obj/item/grab/nab/special/init()
 	if(!(. = ..()))
 		return
-	affecting.apply_damage(15, BRUTE, BP_CHEST, DAM_SHARP, "organic punctures")
+	affecting.apply_damage(15, DAMAGE_BRUTE, BP_CHEST, DAMAGE_FLAG_SHARP, "organic punctures")
 	affecting.visible_message("<span class='danger'>[assailant]'s spikes dig in painfully!</span>")
 	affecting.Stun(10)
 
@@ -309,13 +319,12 @@
 
 /datum/species/nabber/handle_post_spawn(var/mob/living/carbon/human/H)
 	..()
-	H.pulling_punches = TRUE
+	return H.pulling_punches = TRUE
 
 /datum/species/nabber/has_fine_manipulation(var/mob/living/carbon/human/H)
 	return (..() && (H && H.pulling_punches))
 
 /datum/species/nabber/attempt_grab(var/mob/living/carbon/human/grabber, var/mob/living/target)
-
 	if(grabber.pulling_punches)
 		return ..()
 	if(grabber == target)
@@ -355,7 +364,7 @@
 	if(!hidden) H.visible_message("<span class='warning'>\The [H] shifts [T.his] arms.</span>")
 	H.unEquip(H.l_hand)
 	H.unEquip(H.r_hand)
-	if(do_after(H, 30))
+	if(do_after(H, 3 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT))
 		arm_swap(H)
 	else
 		to_chat(H, "<span class='notice'>You stop adjusting your arms and don't switch between them.</span>")

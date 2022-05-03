@@ -22,6 +22,9 @@
 /decl/machine_construction/default/panel_closed/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
+	if (!machine.can_use_tools)
+		to_chat(user, SPAN_WARNING("\The [src] cannot be modified!"))
+		return TRUE
 	if(isScrewdriver(I))
 		TRANSFER_STATE(down_state)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
@@ -29,7 +32,7 @@
 		to_chat(user, SPAN_NOTICE("You open the maintenance hatch of \the [machine]."))
 		machine.update_icon()
 		return
-	if(istype(I, /obj/item/weapon/storage/part_replacer))
+	if(istype(I, /obj/item/storage/part_replacer))
 		machine.display_parts(user)
 		return TRUE
 
@@ -70,7 +73,7 @@
 		machine.update_icon()
 		return
 
-	if(istype(I, /obj/item/weapon/storage/part_replacer))
+	if(istype(I, /obj/item/storage/part_replacer))
 		return machine.part_replacement(user, I)
 
 	if(isWrench(I))

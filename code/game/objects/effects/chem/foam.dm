@@ -6,8 +6,8 @@
 	name = "foam"
 	icon_state = "foam"
 	opacity = 0
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	layer = ABOVE_OBJ_LAYER
 	mouse_opacity = 0
 	animate_movement = 0
@@ -86,7 +86,7 @@
 
 /datum/effect/effect/system/foam_spread/set_up(amt=5, loca, var/datum/reagents/carry = null, var/metalfoam = 0)
 	amount = round(sqrt(amt / 3), 1)
-	if(istype(loca, /turf/))
+	if(isturf(loca))
 		location = loca
 	else
 		location = get_turf(loca)
@@ -124,9 +124,9 @@
 /obj/structure/foamedmetal
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "metalfoam"
-	density = 1
+	density = TRUE
 	opacity = 1 // changed in New()
-	anchored = 1
+	anchored = TRUE
 	name = "foamed metal"
 	desc = "A lightweight foamed metal wall."
 	var/metal = 1 // 1 = aluminium, 2 = iron

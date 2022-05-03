@@ -1,7 +1,7 @@
 // Noise "language", for audible emotes.
 /datum/language/noise
 	name = "Noise"
-	desc = "Noises"
+	desc = "Noises."
 	key = ""
 	flags = RESTRICTED|NONGLOBAL|INNATE|NO_TALK_MSG|NO_STUTTER
 	hidden_from_codex = 1
@@ -17,7 +17,7 @@
 
 /datum/language/noise/get_talkinto_msg_range(message)
 	// if you make a loud noise (screams etc), you'll be heard from 4 tiles over instead of two
-	return (copytext(message, length(message)) == "!") ? 4 : 2
+	return (copytext(message, -1) == "!") ? 4 : 2
 
 /datum/language/sign
 	name = LANGUAGE_SIGN

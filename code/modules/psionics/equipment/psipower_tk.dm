@@ -1,6 +1,6 @@
 /obj/item/psychic_power/telekinesis
 	name = "telekinetic grip"
-	maintain_cost = 3
+	maintain_cost = 6
 	icon_state = "telekinesis"
 	var/atom/movable/focus
 
@@ -52,11 +52,11 @@
 
 /obj/item/psychic_power/telekinesis/afterattack(var/atom/target, var/mob/living/user, var/proximity)
 
-	if(!target || !user || (isobj(target) && !isturf(target.loc)) || !user.psi || !user.psi.can_use() || !user.psi.spend_power(5))
+	if(!target || !user || (isobj(target) && !isturf(target.loc)) || !user.psi || !user.psi.can_use() || !user.psi.spend_power(8))
 		return
 
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	user.psi.set_cooldown(5)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN * 2)
+	user.psi.set_cooldown(8)
 
 	var/user_psi_leech = user.do_psionics_check(5, user)
 	if(user_psi_leech)
@@ -85,17 +85,18 @@
 		else
 			if(!focus.anchored)
 				var/user_rank = owner.psi.get_rank(PSI_PSYCHOKINESIS)
-				focus.throw_at(target, user_rank*2, user_rank*10, owner)
+				focus.throw_at(target, user_rank*2, user_rank*3, owner)
 			sleep(1)
 			sparkle()
+		owner.drop_from_inventory(src)
 
 /obj/item/psychic_power/telekinesis/proc/sparkle()
 	set waitfor = 0
 	if(focus)
 		var/obj/effect/overlay/O = new /obj/effect/overlay(get_turf(focus))
 		O.name = "sparkles"
-		O.anchored = 1
-		O.density = 0
+		O.anchored = TRUE
+		O.density = FALSE
 		O.layer = FLY_LAYER
 		O.set_dir(pick(GLOB.cardinal))
 		O.icon = 'icons/effects/effects.dmi'

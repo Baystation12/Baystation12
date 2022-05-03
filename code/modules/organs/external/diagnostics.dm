@@ -29,7 +29,7 @@
 	var/list/wound_descriptors = list()
 	for(var/datum/wound/W in wounds)
 		var/this_wound_desc = W.desc
-		if(W.damage_type == BURN && W.salved)
+		if (W.damage_type == INJURY_TYPE_BURN && W.salved)
 			this_wound_desc = "salved [this_wound_desc]"
 
 		if(W.bleeding())
@@ -60,7 +60,7 @@
 			var/list/bits = list()
 			for(var/obj/item/organ/internal/organ in internal_organs)
 				bits += organ.get_visible_state()
-			for(var/obj/item/weapon/implant in implants)
+			for(var/obj/item/implant in implants)
 				bits += implant.name
 			if(bits.len)
 				wound_descriptors["[english_list(bits)] visible in the wounds"] = 1
@@ -84,7 +84,7 @@
 		. += "[capitalize(artery_name)] ruptured"
 	if(status & ORGAN_TENDON_CUT)
 		. += "Severed [tendon_name]"
-	if(dislocated == 2) // non-magical constants when
+	if(dislocated >= 1) // non-magical constants when
 		. += "Dislocated"
 	if(splinted)
 		. += "Splinted"
@@ -92,11 +92,11 @@
 		. += "Bleeding"
 	if(status & ORGAN_BROKEN)
 		. += capitalize(broken_description)
-	if (implants.len)
+	if (implants && implants.len)
 		var/unknown_body = 0
 		for(var/I in implants)
-			var/obj/item/weapon/implant/imp = I
-			if(istype(I,/obj/item/weapon/implant))
+			var/obj/item/implant/imp = I
+			if(istype(I,/obj/item/implant))
 				if(imp.hidden)
 					continue
 				if (imp.known)
@@ -105,8 +105,8 @@
 			unknown_body++
 		if(unknown_body)
 			. += "Unknown body present"
-	for(var/obj/item/organ/internal/augment/aug in internal_organs)
-		if(istype(aug) && aug.known)
+	for (var/obj/item/organ/internal/augment/aug in internal_organs)
+		if (aug.augment_flags & AUGMENT_SCANNABLE)
 			. += "[capitalize(aug.name)] implanted"
 
 /obj/item/organ/external/proc/inspect(mob/user)
@@ -127,8 +127,7 @@
 		to_chat(user, "<span class='notice'>You find no visible wounds.</span>")
 
 	to_chat(user, "<span class='notice'>Checking skin now...</span>")
-	if(!do_mob(user, owner, 10))
-		to_chat(user, "<span class='notice'>You must stand still to check [owner]'s skin for abnormalities.</span>")
+	if(!do_after(user, 1 SECOND, owner, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return
 
 	var/list/badness = list()
@@ -143,8 +142,7 @@
 		to_chat(user, "<span class='warning'>[owner]'s skin is [english_list(badness)].</span>")
 
 	to_chat(user, "<span class='notice'>Checking bones now...</span>")
-	if(!do_mob(user, owner, 10))
-		to_chat(user, "<span class='notice'>You must stand still to feel [src] for fractures.</span>")
+	if(!do_after(user, 1 SECOND, owner, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return
 
 	if(status & ORGAN_BROKEN)
@@ -153,9 +151,14 @@
 	else
 		to_chat(user, "<span class='notice'>The [encased ? encased : "bones in the [name]"] seem to be fine.</span>")
 
+	for (var/obj/item/organ/internal/augment/A in internal_organs) // Locate any non-concealed augments
+		if (A.augment_flags & AUGMENT_INSPECTABLE)
+			to_chat(user, SPAN_WARNING("You feel a foreign object inside of \the [owner]'s [name]!"))
+			owner.custom_pain("Your [name] hurts as your [A.name] is jostled inside it.", 20, affecting = src)
+			break
 	if(status & ORGAN_TENDON_CUT)
 		to_chat(user, "<span class='warning'>The tendons in [name] are severed!</span>")
-	if(dislocated == 2)
+	if(dislocated >= 1)
 		to_chat(user, "<span class='warning'>The [joint] is dislocated!</span>")
 	return 1
 

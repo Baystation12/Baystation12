@@ -1,5 +1,5 @@
-var/CMinutes = null
-var/savefile/Banlist
+var/global/CMinutes = null
+var/global/savefile/Banlist
 
 
 /proc/CheckBan(var/ckey, var/id, var/address)
@@ -68,11 +68,11 @@ var/savefile/Banlist
 
 	if (!length(Banlist.dir)) log_admin("Banlist is empty.")
 
-	if (!Banlist.dir.Find("base"))
+	if (!list_find(Banlist.dir, "base"))
 		log_admin("Banlist missing base dir.")
 		Banlist.dir.Add("base")
 		Banlist.cd = "/base"
-	else if (Banlist.dir.Find("base"))
+	else if (list_find(Banlist.dir, "base"))
 		Banlist.cd = "/base"
 
 	ClearTempbans()
@@ -105,7 +105,7 @@ var/savefile/Banlist
 		bantimestamp = CMinutes + minutes
 
 	Banlist.cd = "/base"
-	if ( Banlist.dir.Find("[ckey][computerid]") )
+	if (list_find(Banlist.dir, "[ckey][computerid]"))
 		to_chat(usr, "<span class='warning'>Ban already exists.</span>")
 		return 0
 	else if (!ckey)
@@ -114,14 +114,14 @@ var/savefile/Banlist
 	else
 		Banlist.dir.Add("[ckey][computerid]")
 		Banlist.cd = "/base/[ckey][computerid]"
-		Banlist["key"] << ckey
-		Banlist["id"] << computerid
-		Banlist["ip"] << address
-		Banlist["reason"] << reason
-		Banlist["bannedby"] << bannedby
-		Banlist["temp"] << temp
+		to_save(Banlist["key"], ckey)
+		to_save(Banlist["id"], computerid)
+		to_save(Banlist["ip"], address)
+		to_save(Banlist["reason"], reason)
+		to_save(Banlist["bannedby"], bannedby)
+		to_save(Banlist["temp"], temp)
 		if (temp)
-			Banlist["minutes"] << bantimestamp
+			to_save(Banlist["minutes"], bantimestamp)
 	return 1
 
 /proc/RemoveBan(foldername)
@@ -129,8 +129,8 @@ var/savefile/Banlist
 	var/id
 
 	Banlist.cd = "/base/[foldername]"
-	Banlist["key"] >> key
-	Banlist["id"] >> id
+	from_save(Banlist["key"], key)
+	from_save(Banlist["id"], id)
 	Banlist.cd = "/base"
 
 	if (!Banlist.dir.Remove(foldername)) return 0
@@ -142,7 +142,6 @@ var/savefile/Banlist
 		ban_unban_log_save("[key_name_admin(usr)] unbanned [key]")
 		log_admin("[key_name_admin(usr)] unbanned [key]")
 		message_admins("[key_name_admin(usr)] unbanned: [key]")
-		SSstatistics.add_field("ban_unban",1)
 		usr.client.holder.DB_ban_unban( ckey(key), BANTYPE_ANY_FULLBAN)
 	for (var/A in Banlist.dir)
 		Banlist.cd = "/base/[A]"
@@ -210,17 +209,17 @@ var/savefile/Banlist
 			Banlist.cd = "/base"
 			Banlist.dir.Add("trash[i]trashid[i]")
 			Banlist.cd = "/base/trash[i]trashid[i]"
-			Banlist["key"] << "trash[i]"
+			to_save(Banlist["key"], "trash[i]")
 		else
 			Banlist.cd = "/base"
 			Banlist.dir.Add("[last]trashid[i]")
 			Banlist.cd = "/base/[last]trashid[i]"
-			Banlist["key"] << last
-		Banlist["id"] << "trashid[i]"
-		Banlist["reason"] << "Trashban[i]."
-		Banlist["temp"] << a
-		Banlist["minutes"] << CMinutes + rand(1,2000)
-		Banlist["bannedby"] << "trashmin"
+			to_save(Banlist["key"], last)
+		to_save(Banlist["id"], "trashid[i]")
+		to_save(Banlist["reason"], "Trashban[i].")
+		to_save(Banlist["temp"], a)
+		to_save(Banlist["minutes"], CMinutes + rand(1,2000))
+		to_save(Banlist["bannedby"], "trashmin")
 		last = "trash[i]"
 
 	Banlist.cd = "/base"
@@ -229,4 +228,3 @@ var/savefile/Banlist
 	Banlist.cd = "/base"
 	for (var/A in Banlist.dir)
 		RemoveBan(A)
-

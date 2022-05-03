@@ -2,11 +2,11 @@
 GLOBAL_LIST_INIT(surgery_tool_exceptions, list(
 	/obj/item/auto_cpr,
 	/obj/item/device/scanner/health,
-	/obj/item/weapon/shockpaddles,
-	/obj/item/weapon/reagent_containers/hypospray,
+	/obj/item/shockpaddles,
+	/obj/item/reagent_containers/hypospray,
 	/obj/item/modular_computer,
-	/obj/item/weapon/reagent_containers/syringe,
-	/obj/item/weapon/reagent_containers/borghypo
+	/obj/item/reagent_containers/syringe,
+	/obj/item/reagent_containers/borghypo
 ))
 GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 
@@ -37,7 +37,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 
 // Checks if this step applies to the user mob at all
 /decl/surgery_step/proc/is_valid_target(mob/living/carbon/human/target)
-	if(!hasorgans(target))
+	if(!ishuman(target))
 		return 0
 
 	if(allowed_species)
@@ -66,11 +66,6 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	if(istype(target) && target_zone)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if(affected)
-			// Check if clothing is blocking access
-			var/obj/item/I = target.get_covering_equipped_item_by_zone(target_zone)
-			if(I && (I.item_flags & ITEM_FLAG_THICKMATERIAL))
-				to_chat(user,SPAN_NOTICE("The material covering this area is too thick for you to do surgery through!"))
-				return FALSE
 			// Check various conditional flags.
 			if(((surgery_candidate_flags & SURGERY_NO_ROBOTIC) && BP_IS_ROBOTIC(affected)) || \
 			 ((surgery_candidate_flags & SURGERY_NO_CRYSTAL) && BP_IS_CRYSTAL(affected))   || \
@@ -95,6 +90,11 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 				if(open_threshold && ((strict_access_requirement && affected.how_open() != open_threshold) || \
 				 affected.how_open() < open_threshold))
 					return FALSE
+			// Check if clothing is blocking access
+			var/obj/item/I = target.get_covering_equipped_item_by_zone(target_zone)
+			if(I && (I.item_flags & ITEM_FLAG_THICKMATERIAL))
+				to_chat(user,SPAN_NOTICE("The material covering this area is too thick for you to do surgery through!"))
+				return FALSE
 			return affected
 	return FALSE
 
@@ -114,6 +114,8 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 			H.bloody_body(target,0)
 	if(shock_level)
 		target.shock_stage = max(target.shock_stage, shock_level)
+	if (target.stat == UNCONSCIOUS && prob(20))
+		to_chat(target, SPAN_NOTICE(SPAN_BOLD("... [pick("bright light", "faraway pain", "something moving in you", "soft beeping")] ...")))
 	return
 
 // does stuff to end the step, which is normally print a message + do whatever this step changes
@@ -156,7 +158,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 			. -= 5
 		else if(locate(/obj/structure/table, T))
 			. -= 10
-		else if(locate(/obj/effect/rune/, T))
+		else if(locate(/obj/effect/rune, T))
 			. -= 10
 	. = max(., 0)
 
@@ -225,9 +227,13 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 				S.begin_step(user, M, zone, src)
 				var/skill_reqs = S.get_skill_reqs(user, M, src, zone)
 				var/duration = user.skill_delay_mult(skill_reqs[1]) * rand(S.min_duration, S.max_duration)
-				if(prob(S.success_chance(user, M, src, zone)) && do_mob(user, M, duration))
-					S.end_step(user, M, zone, src)
-					handle_post_surgery()
+				if(prob(S.success_chance(user, M, src, zone)) && do_after(user, duration, M, DO_SURGERY))
+					if (S.can_use(user, M, zone, src))
+						S.end_step(user, M, zone, src)
+						handle_post_surgery()
+					else
+						to_chat(user, SPAN_WARNING("The patient lost the target organ before you could finish operating!"))
+
 				else if ((src in user.contents) && user.Adjacent(M))
 					S.fail_step(user, M, zone, src)
 				else

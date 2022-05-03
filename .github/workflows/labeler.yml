@@ -1,0 +1,21 @@
+name: "Pull Request Labeler"
+
+permissions:
+  contents: read
+
+on:
+  pull_request_target:
+    branches:
+      - dev
+
+jobs:
+  triage:
+    permissions:
+      contents: read # may be required due to overwrite/add ambiguity
+      pull-requests: write # required to apply labels to PRs
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/labeler@v4
+      with:
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+        sync-labels: true

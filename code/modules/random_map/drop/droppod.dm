@@ -41,8 +41,8 @@
 /datum/random_map/droppod/generate_map()
 
 	// No point calculating these 200 times.
-	var/x_midpoint = Ceiling(limit_x / 2)
-	var/y_midpoint = Ceiling(limit_y / 2)
+	var/x_midpoint = Ceil(limit_x / 2)
+	var/y_midpoint = Ceil(limit_y / 2)
 
 	// Draw walls/floors/doors.
 	for(var/x = 1, x <= limit_x, x++)
@@ -80,7 +80,7 @@
 
 /datum/random_map/droppod/apply_to_map()
 	if(placement_explosion_dev || placement_explosion_heavy || placement_explosion_light || placement_explosion_flash)
-		var/turf/T = locate((origin_x + Ceiling(limit_x / 2)-1), (origin_y + Ceiling(limit_y / 2)-1), origin_z)
+		var/turf/T = locate((origin_x + Ceil(limit_x / 2)-1), (origin_y + Ceil(limit_y / 2)-1), origin_z)
 		if(istype(T))
 			explosion(T, placement_explosion_dev, placement_explosion_heavy, placement_explosion_light, placement_explosion_flash)
 			sleep(15) // Let the explosion finish proccing before we ChangeTurf(), otherwise it might destroy our spawned objects.
@@ -97,8 +97,8 @@
 
 // Pods are circular. Get the direction this object is facing from the center of the pod.
 /datum/random_map/droppod/get_spawn_dir(var/x, var/y)
-	var/x_midpoint = Ceiling(limit_x / 2)
-	var/y_midpoint = Ceiling(limit_y / 2)
+	var/x_midpoint = Ceil(limit_x / 2)
+	var/y_midpoint = Ceil(limit_y / 2)
 	if(x == x_midpoint && y == y_midpoint)
 		return null
 	var/turf/target = locate(origin_x+x-1, origin_y+y-1, origin_z)

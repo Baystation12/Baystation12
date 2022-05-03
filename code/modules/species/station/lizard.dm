@@ -83,10 +83,15 @@
 		/mob/living/carbon/human/proc/diona_heal_toggle
 		)
 
-	override_organ_types = list(
-		BP_EYES = /obj/item/organ/internal/eyes/unathi,
-		BP_BRAIN = /obj/item/organ/internal/brain/unathi
-	)
+	has_organ = list(
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
+		BP_LUNGS =    /obj/item/organ/internal/lungs,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_EYES =   /obj/item/organ/internal/eyes/unathi,
+		BP_BRAIN =  /obj/item/organ/internal/brain/unathi
+		)
 
 	descriptors = list(
 		/datum/mob_descriptor/height = 2,
@@ -95,32 +100,58 @@
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(
-			CULTURE_UNATHI
+			CULTURE_UNATHI_POLAR,
+			CULTURE_UNATHI_DIAMOND_PEAKS,
+			CULTURE_UNATHI_DESERT,
+			CULTURE_UNATHI_SAVANNAH,
+			CULTURE_UNATHI_SALT_SWAMP,
+			CULTURE_UNATHI_SPACE,
 		),
 		TAG_HOMEWORLD = list(
-			HOME_SYSTEM_MOGHES
+			HOME_SYSTEM_MOGHES,
+			HOME_SYSTEM_OUERE,
+			HOME_SYSTEM_OFFWORLD
 		),
 		TAG_FACTION = list(
-			FACTION_UNATHI_POLAR,
-			FACTION_UNATHI_DESERT,
-			FACTION_UNATHI_SAVANNAH,
-			FACTION_UNATHI_DIAMOND_PEAK,
-			FACTION_UNATHI_SALT_SWAMP
+			FACTION_UNATHI_HEGEMONY,
+			FACTION_UNATHI_SSEN_UUMA,
+			FACTION_UNATHI_BAASK,
+			FACTION_UNATHI_GRESIS,
+			FACTION_UNATHI_INDEPENDENT
 		),
 		TAG_RELIGION =  list(
 			RELIGION_UNATHI_STRATAGEM,
 			RELIGION_UNATHI_PRECURSOR,
 			RELIGION_UNATHI_VINE,
 			RELIGION_UNATHI_LIGHTS,
-			RELIGION_OTHER
+			RELIGION_UNATHI_MARKESHELI,
+			RELIGION_UNATHI_ANCESTOR,
+			RELIGION_OTHER,
+			RELIGION_UNSTATED
 		)
+	)
+	default_cultural_info = list(
+		TAG_CULTURE   = CULTURE_UNATHI_POLAR,
+		TAG_HOMEWORLD = HOME_SYSTEM_MOGHES,
+		TAG_FACTION   = FACTION_UNATHI_INDEPENDENT,
+		TAG_RELIGION  = RELIGION_OTHER
 	)
 	pain_emotes_with_pain_level = list(
 			list(/decl/emote/audible/wheeze, /decl/emote/audible/roar, /decl/emote/audible/bellow, /decl/emote/audible/howl) = 80,
 			list(/decl/emote/audible/grunt, /decl/emote/audible/groan, /decl/emote/audible/wheeze, /decl/emote/audible/hiss) = 50,
 			list(/decl/emote/audible/grunt, /decl/emote/audible/groan, /decl/emote/audible/hiss) = 20,
 		)
-		
+
+	exertion_effect_chance = 10
+	exertion_hydration_scale = 1
+	exertion_reagent_scale = 5
+	exertion_reagent_path = /datum/reagent/lactate
+	exertion_emotes_biological = list(
+		/decl/emote/exertion/biological,
+		/decl/emote/exertion/biological/breath,
+		/decl/emote/exertion/biological/pant
+	)
+
 /datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)

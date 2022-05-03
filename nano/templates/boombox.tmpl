@@ -1,0 +1,5 @@
+{{:helper.link('-VOL', null, {act: 'volume', dat: -1}, data.volume == 0 ? 'disabled' : null, null)}}
+{{:helper.link('LAST', null, {act: 'last'}, null, null)}}
+{{:helper.link(data.playing ? 'STOP' : 'PLAY', null, {act: data.playing ? 'stop' : 'play'}, null, null)}}
+{{:helper.link('NEXT', null, {act: 'next'}, null, null)}}
+{{:helper.link('VOL+', null, {act: 'volume', dat: -2}, data.volume == 50 ? 'disabled' : null, null)}}

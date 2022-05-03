@@ -8,6 +8,7 @@
 	level = 1
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH
+	layer = ABOVE_CATWALK_LAYER
 
 	var/open = 0
 	var/openDuringInit = 0
@@ -18,6 +19,7 @@
 
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 	connect_dir_type = SOUTH | NORTH
+	pipe_class = PIPE_CLASS_BINARY
 	rotate_class = PIPE_ROTATE_TWODIR
 	build_icon_state = "mvalve"
 
@@ -53,7 +55,7 @@
 		if(open)
 			network_node1 = new_network
 
-	if(new_network.normal_members.Find(src))
+	if(list_find(new_network.normal_members, src))
 		return 0
 
 	new_network.normal_members += src
@@ -96,6 +98,9 @@
 	else if(network_node2)
 		network_node2.update = 1
 
+	if (usr)
+		visible_message(SPAN_WARNING("\The [usr] opens \the [src]."), range = 5)
+
 	return 1
 
 /obj/machinery/atmospherics/valve/proc/close()
@@ -111,6 +116,9 @@
 		qdel(network_node2)
 
 	build_network()
+
+	if (usr)
+		visible_message(SPAN_WARNING("\The [usr] closes \the [src]."), range = 5)
 
 	return 1
 
@@ -207,8 +215,8 @@
 
 	return null
 
-/obj/machinery/atmospherics/valve/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (!istype(W, /obj/item/weapon/wrench))
+/obj/machinery/atmospherics/valve/attackby(var/obj/item/W as obj, var/mob/user as mob)
+	if (!istype(W, /obj/item/wrench))
 		return ..()
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
@@ -218,7 +226,7 @@
 		return 1
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-	if (do_after(user, 40, src))
+	if (do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 		user.visible_message( \
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
@@ -260,8 +268,8 @@
 	desc = "A digitally controlled valve."
 	icon = 'icons/atmos/digital_valve.dmi'
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/radio/receiver,
-		/obj/item/weapon/stock_parts/power/apc
+		/obj/item/stock_parts/radio/receiver,
+		/obj/item/stock_parts/power/apc
 	)
 	public_variables = list(/decl/public_access/public_variable/valve_open)
 	public_methods = list(

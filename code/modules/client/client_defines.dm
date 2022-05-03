@@ -50,3 +50,5 @@
 	http://www.byond.com/forum/post/1906517?page=2#comment23727144
 	*/
 	preload_rsc = 0
+
+	var/fullscreen = FALSE

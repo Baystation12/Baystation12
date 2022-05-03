@@ -4,7 +4,7 @@
 	icon_state = "closed"
 	layer = ABOVE_WINDOW_LAYER
 	opacity = 1
-	density = 0
+	density = FALSE
 
 /obj/structure/curtain/Initialize()
 	.=..()

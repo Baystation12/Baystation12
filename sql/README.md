@@ -38,10 +38,10 @@ From there, you can run migrations as normal.
 
 ### Configuration file
 
-Instead of putting -user, -password and -url in the command line every time you execute flyway, you can use a config file. Create it somewhere in the root of your project (we're calling it 'db.conf'):
+Instead of putting -user, -password and -url in the command line every time you execute flyway, you can use a config file. Copy the `flyway-example.conf` file in the root directory and update these lines with your relevant information:
 
     flyway.url=jdbc:mysql://HOST/DATABASE
     flyway.user=USER
     flyway.password=PASSWORD
 
-Now you can just run `flyway migrate -configFile=db.conf`, and the settings will be loaded from config.
+Now you can just run `flyway migrate` from the project's root directory, and the settings will be loaded from config.

@@ -28,6 +28,12 @@
 	<b>Welcome to your account, {{:data.current_account}}</b><br>
 	{{:helper.link('New Message', 'mail-closed', {'new_message' : 1})}}
 	{{:helper.link('Change Password', 'locked', {'changepassword' : 1})}}
+	{{:helper.link('Set notification', 'alert', {'set_notification' : 1})}}
+	{{if data.notification_mute}}
+		{{:helper.link('Unmute', 'volume-on', {'mute' : 1})}}
+	{{else}}
+		{{:helper.link('Mute', 'volume-off', {'mute' : 1})}}
+	{{/if}}
 	{{:helper.link('Log Out', 'key', {'logout' : 1})}}<br><br>
 	{{if data.addressbook}}
 		{{:helper.link('Back', null, {'close_addressbook' : 1})}}

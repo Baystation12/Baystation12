@@ -29,7 +29,7 @@
 				var/mob/living/carbon/alien/diona/chirp = thing
 				if(chirp.client)
 					target_value++
-			target_value = ceil(target_value/2)
+			target_value = Ceil(target_value/2)
 			passed = (voted.len >= target_value)
 			for(var/thing in owner.nymphs)
 				to_chat(thing, "<span class='notice'>\The [voter] voted yes to <i>[descriptor]</i> ([voted.len]/[target_value]).</span>")

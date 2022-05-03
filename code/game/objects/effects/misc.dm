@@ -4,8 +4,8 @@
 	desc = "It's a ... present?"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "strangepresent"
-	density = 1
-	anchored = 0
+	density = TRUE
+	anchored = FALSE
 
 /obj/effect/stop
 	var/victim = null
@@ -57,6 +57,15 @@
 /obj/effect/paint/blue
 	color = COLOR_NAVY_BLUE
 
+/obj/effect/paint/ocean
+	color =	COLOR_OCEAN
+
+/obj/effect/paint/palegreengray
+	color =	COLOR_PALE_GREEN_GRAY
+
+/obj/effect/paint/brown
+	color = COLOR_DARK_BROWN
+
 //Stripes the wall it spawns on, then dies
 /obj/effect/paint_stripe
 	name = "stripe of paint"
@@ -104,8 +113,8 @@
 /obj/effect/paint_stripe/white
 	color = COLOR_SILVER
 
-/obj/effect/paint/brown
-	color = COLOR_DARK_BROWN
+/obj/effect/paint_stripe/gunmetal
+	color = COLOR_GUNMETAL
 
 /obj/effect/gas_setup	//cryogenic
 	icon = 'icons/mob/screen1.dmi'
@@ -114,6 +123,8 @@
 	var/pressure = 20* ONE_ATMOSPHERE
 
 /obj/effect/gas_setup/Initialize()
+	SHOULD_CALL_PARENT(FALSE)
+	atom_flags |= ATOM_FLAG_INITIALIZED
 	var/obj/machinery/atmospherics/pipe/P = locate() in loc
 	if(P && !P.air_temporary)
 		P.air_temporary = new(P.volume, tempurature)

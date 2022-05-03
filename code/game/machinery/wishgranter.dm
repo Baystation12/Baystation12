@@ -1,14 +1,14 @@
 /obj/machinery/wish_granter
 	name = "Wish Granter"
 	desc = "You're not so sure about this, anymore..."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/syndicate_beacon.dmi'
 	icon_state = "syndbeacon"
 
 	use_power = POWER_USE_OFF
 	uncreated_component_parts = null
 	interact_offline = TRUE
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 
 	var/charges = 1
 	var/insisting = 0

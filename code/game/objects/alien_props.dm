@@ -1,16 +1,16 @@
 // Alien props for away missions and such.
 
 // Power cells
-/obj/item/weapon/cell/alien
+/obj/item/cell/alien
 	name = "alien device"
 	desc = "It hums with power."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "unknown1"
 	maxcharge = 5000
 	origin_tech = list(TECH_POWER = 7)
-	var/global/base_icon
+	var/static/base_icon
 
-/obj/item/weapon/cell/alien/on_update_icon()
+/obj/item/cell/alien/on_update_icon()
 	if(!base_icon)
 		base_icon = pick("instrument", "unknown1", "unknown3", "unknown4")
 	icon_state = base_icon
@@ -24,7 +24,7 @@
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "ano10"
 	update_state = 0 //Don't pixelshift us on wall
-	cell_type = /obj/item/weapon/cell/alien
+	cell_type = /obj/item/cell/alien
 	autoname = 0
 	
 /obj/machinery/power/apc/alien/on_update_icon()
@@ -43,21 +43,21 @@
 	icon_state = "bulb_map"
 	base_state = "bulb"
 	color = COLOR_PURPLE
-	light_type = /obj/item/weapon/light/alien
+	light_type = /obj/item/light/alien
 
 /obj/machinery/light/alien/Initialize()
 	color = null  //It's just for mapping
 	. = ..()
 
-/obj/item/weapon/light/alien
+/obj/item/light/alien
 	name = "glowbulb"
 	icon_state = "lbulb"
 	base_state = "lbulb"
 	desc = "A simple alien device, perhaps some sort of light source."
 	color = COLOR_PURPLE
-	var/global/random_light_color
+	var/static/random_light_color
 
-/obj/item/weapon/light/alien/Initialize()
+/obj/item/light/alien/Initialize()
 	. = ..()
 	if(!random_light_color)
 		random_light_color = get_random_colour(FALSE, 100, 255)

@@ -11,8 +11,9 @@
 	desc = "The frame for an exosuit, apparently."
 	icon = 'icons/mecha/mech_parts.dmi'
 	icon_state = "backbone"
-	density = 1
+	density = TRUE
 	pixel_x = -8
+	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
 
 	// Holders for the final product.
 	var/obj/item/mech_component/manipulators/arms
@@ -24,10 +25,10 @@
 	var/set_name
 	dir = SOUTH
 
-/obj/structure/heavy_vehicle_frame/proc/set_colour(var/new_colour)
+/obj/structure/heavy_vehicle_frame/set_color(var/new_colour)
 	var/painted_component = FALSE
 	for(var/obj/item/mech_component/comp in list(body, arms, legs, head))
-		if(comp.set_colour(new_colour))
+		if(comp.set_color(new_colour))
 			painted_component = TRUE
 	if(painted_component)
 		queue_icon_update()
@@ -63,12 +64,12 @@
 /obj/structure/heavy_vehicle_frame/on_update_icon()
 	var/list/new_overlays = get_mech_images(list(legs, head, body, arms), layer)
 	if(body)
-		density = TRUE
+		set_density(TRUE)
 		overlays += get_mech_image(null, "[body.icon_state]_cockpit", body.icon, body.color)
 		if(body.pilot_coverage < 100 || body.transparent_cabin)
 			new_overlays += get_mech_image(null, "[body.icon_state]_open_overlay", body.icon, body.color)
 	else
-		density = FALSE
+		set_density(FALSE)
 	overlays = new_overlays
 	if(density != opacity)
 		set_opacity(density)
@@ -81,7 +82,7 @@
 	// Removing components.
 	if(isCrowbar(thing))
 		if(is_reinforced == FRAME_REINFORCED)
-			if(!do_after(user, 5 * user.skill_delay_mult(SKILL_DEVICES)) || !material)
+			if(!do_after(user, 0.5 SECONDS * user.skill_delay_mult(SKILL_DEVICES), src, DO_PUBLIC_UNIQUE) || !material)
 				return
 			user.visible_message(SPAN_NOTICE("\The [user] crowbars the reinforcement off \the [src]."))
 			material.place_sheet(src.loc, 10)
@@ -135,7 +136,7 @@
 			return
 
 		visible_message(SPAN_NOTICE("\The [user] begins tightening screws, flipping connectors and finishing off \the [src]."))
-		if(!user.do_skilled(50, SKILL_DEVICES, src))
+		if(!user.do_skilled(5 SECONDS, SKILL_DEVICES, src))
 			return
 
 		if(is_reinforced < FRAME_REINFORCED_WELDED || is_wired < FRAME_WIRED_ADJUSTED || !(arms && legs && head && body) || QDELETED(src) || QDELETED(user))
@@ -168,7 +169,7 @@
 
 		user.visible_message("\The [user] begins wiring \the [src]...")
 
-		if(!do_after(user, 30 * user.skill_delay_mult(SKILL_ELECTRICAL)))
+		if(!do_after(user, 3 SECONDS * user.skill_delay_mult(SKILL_ELECTRICAL), src, DO_PUBLIC_UNIQUE))
 			return
 
 		if(!CC || !user || !src || CC.get_amount() < 10 || is_wired)
@@ -186,7 +187,7 @@
 
 		user.visible_message("\The [user] begins adjusting the wiring inside \the [src]...")
 		var/last_wiring_state = is_wired
-		if(!do_after(user, 30 * user.skill_delay_mult(SKILL_ELECTRICAL)) || last_wiring_state != is_wired)
+		if(!do_after(user, 3 SECONDS * user.skill_delay_mult(SKILL_ELECTRICAL), src, DO_PUBLIC_UNIQUE) || last_wiring_state != is_wired)
 			return
 
 		visible_message("\The [user] [(is_wired == FRAME_WIRED_ADJUSTED) ? "snips some of" : "neatens"] the wiring in \the [src].")
@@ -205,7 +206,7 @@
 
 			visible_message("\The [user] begins layering the interior of the \the [src] with \the [M].")
 
-			if(!do_after(user, 30 * user.skill_delay_mult(SKILL_DEVICES)) || is_reinforced)
+			if(!do_after(user, 3 SECONDS * user.skill_delay_mult(SKILL_DEVICES), src, DO_PUBLIC_UNIQUE) || is_reinforced)
 				return
 
 			visible_message("\The [user] reinforces \the [src] with \the [M].")
@@ -235,7 +236,7 @@
 		is_reinforced = (is_reinforced == FRAME_REINFORCED_SECURE) ? FRAME_REINFORCED : FRAME_REINFORCED_SECURE
 	// Welding metal.
 	else if(isWelder(thing))
-		var/obj/item/weapon/weldingtool/WT = thing
+		var/obj/item/weldingtool/WT = thing
 		if(!is_reinforced)
 			to_chat(user, SPAN_WARNING("There is no metal to secure inside \the [src]."))
 			return
@@ -249,7 +250,7 @@
 
 			var/last_reinforced_state = is_reinforced
 			visible_message("\The [user] begins welding the metal reinforcement inside \the [src].")
-			if(!do_after(user, 20 * user.skill_delay_mult(SKILL_DEVICES)) || last_reinforced_state != is_reinforced)
+			if(!do_after(user, 2 SECONDS * user.skill_delay_mult(SKILL_DEVICES), src, DO_PUBLIC_UNIQUE) || last_reinforced_state != is_reinforced)
 				return
 
 			visible_message("\The [user] [(is_reinforced == FRAME_REINFORCED_WELDED) ? "unwelds the reinforcement from" : "welds the reinforcement into"] \the [src].")
@@ -263,7 +264,7 @@
 		if(arms)
 			to_chat(user, SPAN_WARNING("\The [src] already has manipulators installed."))
 			return
-		if(install_component(thing, user)) 
+		if(install_component(thing, user))
 			if(arms)
 				thing.dropInto(loc)
 				return
@@ -272,7 +273,7 @@
 		if(legs)
 			to_chat(user, SPAN_WARNING("\The [src] already has a propulsion system installed."))
 			return
-		if(install_component(thing, user)) 
+		if(install_component(thing, user))
 			if(legs)
 				thing.dropInto(loc)
 				return
@@ -281,7 +282,7 @@
 		if(head)
 			to_chat(user, SPAN_WARNING("\The [src] already has a sensor array installed."))
 			return
-		if(install_component(thing, user)) 
+		if(install_component(thing, user))
 			if(head)
 				thing.dropInto(loc)
 				return
@@ -306,7 +307,7 @@
 		return 0
 	if(user)
 		visible_message(SPAN_NOTICE("\The [user] begins installing \the [thing] into \the [src]."))
-		if(!user.canUnEquip(thing) || !do_after(user, 30 * user.skill_delay_mult(SKILL_DEVICES)) || user.get_active_hand() != thing)
+		if(!user.canUnEquip(thing) || !do_after(user, 3 SECONDS * user.skill_delay_mult(SKILL_DEVICES), src, DO_PUBLIC_UNIQUE) || user.get_active_hand() != thing)
 			return
 		if(!user.unEquip(thing))
 			return
@@ -318,7 +319,7 @@
 /obj/structure/heavy_vehicle_frame/proc/uninstall_component(var/obj/item/component, var/mob/user)
 	if(!istype(component) || (component.loc != src) || !istype(user))
 		return FALSE
-	if(!do_after(user, 40 * user.skill_delay_mult(SKILL_DEVICES)) || component.loc != src)
+	if(!do_after(user, 4 SECONDS * user.skill_delay_mult(SKILL_DEVICES), src, DO_PUBLIC_UNIQUE) || component.loc != src)
 		return FALSE
 	user.visible_message(SPAN_NOTICE("\The [user] crowbars \the [component] off \the [src]."))
 	component.forceMove(get_turf(src))

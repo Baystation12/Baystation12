@@ -15,8 +15,9 @@
 	var/passive_power_use = 0          // For gear that for some reason takes up power even if it's supposedly doing nothing (mech will idly consume power)
 	var/mech_layer = MECH_GEAR_LAYER //For the part where it's rendered as mech gear
 	var/require_adjacent = TRUE
+	var/active = FALSE //For gear that has an active state (ie, floodlights)
 
-/obj/item/mech_equipment/attack() //Generally it's not desired to be able to attack with items
+/obj/item/mech_equipment/attack(mob/living/M, mob/living/user, target_zone) //Generally it's not desired to be able to attack with items
 	return 0
 
 /obj/item/mech_equipment/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
@@ -46,10 +47,14 @@
 /obj/item/mech_equipment/examine(mob/user, distance)
 	. = ..()
 	if(user.skill_check(SKILL_DEVICES, SKILL_BASIC))
-		if(restricted_software.len)
+		if(length(restricted_software))
 			to_chat(user, SPAN_SUBTLE("It seems it would require [english_list(restricted_software)] to be used."))
-		if(restricted_hardpoints.len)
+		if(length(restricted_hardpoints))
 			to_chat(user, SPAN_SUBTLE("You figure it could be mounted in the [english_list(restricted_hardpoints)]."))
+
+/obj/item/mech_equipment/proc/deactivate()
+	active = FALSE
+	return
 
 /obj/item/mech_equipment/proc/installed(var/mob/living/exosuit/_owner)
 	owner = _owner
@@ -57,8 +62,13 @@
 	canremove = FALSE
 
 /obj/item/mech_equipment/proc/uninstalled()
+	if(active)
+		deactivate()
 	owner = null
 	canremove = TRUE
+
+/obj/item/mech_equipment/proc/wreck() //Module has been destroyed
+	return
 
 /obj/item/mech_equipment/Destroy()
 	owner = null
@@ -67,8 +77,14 @@
 /obj/item/mech_equipment/proc/get_effective_obj()
 	return src
 
-/obj/item/mech_equipment/proc/MouseDragInteraction()
-	return 0
+/obj/item/mech_equipment/proc/MouseDragInteraction(src_object, over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
+	//Get intent updated
+	if(user != owner)
+		owner.a_intent = user.a_intent
+	if(user.zone_sel)
+		owner.zone_sel.set_selected_zone(user.zone_sel.selecting)
+	else
+		owner.zone_sel.set_selected_zone(BP_CHEST)
 
 /obj/item/mech_equipment/mob_can_unequip(mob/M, slot, disable_warning)
 	. = ..()
@@ -105,6 +121,7 @@
 		
 
 /obj/item/mech_equipment/mounted_system/Destroy()
+	GLOB.destroyed_event.unregister(holding, src, .proc/forget_holding)
 	if(holding)
 		QDEL_NULL(holding)
 	. = ..()

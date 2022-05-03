@@ -2,7 +2,7 @@
 //list(ckey = real_name,)
 //Since the ckey is used as the icon_state, the current system will only permit a single custom robot sprite per ckey.
 //While it might be possible for a ckey to use that custom sprite for several real_names, it seems rather pointless to support it.
-var/list/robot_custom_icons
+var/global/list/robot_custom_icons
 
 /hook/startup/proc/load_robot_custom_sprites()
 	var/config_file = file2text(CUSTOM_ITEM_SYNTH_CONFIG)
@@ -24,7 +24,7 @@ var/list/robot_custom_icons
 /mob/living/silicon/robot/proc/set_custom_sprite()
 	var/rname = robot_custom_icons[ckey]
 	if(rname && rname == real_name)
-		custom_sprite = 1
+		custom_sprite = TRUE
 		icon = CUSTOM_ITEM_SYNTH
 		var/list/valid_states = icon_states(icon)
 		if(icon_state == "robot")

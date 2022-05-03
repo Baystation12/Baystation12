@@ -1,9 +1,9 @@
 /obj/structure/mech_wreckage
 	name = "wreckage"
 	desc = "It might have some salvagable parts."
-	density = 1
+	density = TRUE
 	opacity = 1
-	anchored = 1
+	anchored = TRUE
 	icon_state = "wreck"
 	icon = 'icons/mecha/mech_part_items.dmi'
 	var/prepared
@@ -16,10 +16,16 @@
 				if(thing && prob(40))
 					thing.forceMove(src)
 			for(var/hardpoint in exosuit.hardpoints)
-				if(exosuit.hardpoints[hardpoint] && prob(40))
-					var/obj/item/thing = exosuit.hardpoints[hardpoint]
-					if(exosuit.remove_system(hardpoint))
-						thing.forceMove(src)
+				if(exosuit.hardpoints[hardpoint])
+					if(prob(40))
+						var/obj/item/thing = exosuit.hardpoints[hardpoint]
+						if(exosuit.remove_system(hardpoint))
+							thing.forceMove(src)
+					else
+						//This has been destroyed, some modules may need to perform bespoke logic
+						var/obj/item/mech_equipment/E = exosuit.hardpoints[hardpoint]
+						if(istype(E))
+							E.wreck()
 
 	..()
 
@@ -40,12 +46,12 @@
 
 	var/cutting
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		if(WT.isOn())
 			cutting = TRUE
 		else
 			to_chat(user, SPAN_WARNING("Turn the torch on, first."))
-	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
+	else if(istype(W, /obj/item/gun/energy/plasmacutter))
 		cutting = TRUE
 
 	if(cutting)

@@ -12,7 +12,7 @@
 	var/roundstart                 // If set, seed will not display variety number.
 	var/mysterious                 // Only used for the random seed packets.
 	var/scanned                    // If it was scanned with a plant analyzer.
-	var/can_self_harvest = 0       // Mostly used for living mobs.
+	var/can_self_harvest = FALSE   // Mostly used for living mobs.
 	var/growth_stages = 0          // Number of stages the plant passes through before it is mature.
 	var/list/traits = list()       // Initialized in New()
 	var/list/mutants               // Possible predefined mutant varieties, if any.
@@ -25,6 +25,7 @@
 	var/has_mob_product
 	var/force_layer
 	var/req_CO2_moles    = 1.0// Moles of CO2 required for photosynthesis.
+	var/fruit_size = ITEM_SIZE_SMALL
 
 /datum/seed/New()
 
@@ -67,7 +68,7 @@
 
 	update_growth_stages()
 
-	uid = sequential_id(/datum/seed/)
+	uid = sequential_id(/datum/seed)
 
 /datum/seed/proc/get_trait(var/trait)
 	return traits["[trait]"]
@@ -93,10 +94,9 @@
 		return
 
 	var/datum/reagents/R = new/datum/reagents(100, GLOB.temp_reagents_holder)
-	if(chems.len)
-		for(var/rid in chems)
-			var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/3))
-			R.add_reagent(rid,injecting)
+	for(var/rid in chems)
+		var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/3))
+		R.add_reagent(rid,injecting)
 
 	var/datum/effect/effect/system/smoke_spread/chem/spores/S = new(name)
 	S.attach(T)
@@ -111,10 +111,10 @@
 		return
 
 	if(!istype(target))
-		if(istype(target, /mob/living/simple_animal/mouse))
+		if(istype(target, /mob/living/simple_animal/passive/mouse))
 			new /obj/item/remains/mouse(get_turf(target))
 			qdel(target)
-		else if(istype(target, /mob/living/simple_animal/lizard))
+		else if(istype(target, /mob/living/simple_animal/passive/lizard))
 			new /obj/item/remains/lizard(get_turf(target))
 			qdel(target)
 		return
@@ -144,23 +144,26 @@
 		damage = max(1, round(5*get_trait(TRAIT_POTENCY)/100, 1))
 		has_edge = prob(get_trait(TRAIT_POTENCY)/5)
 
-	var/damage_flags = DAM_SHARP|(has_edge? DAM_EDGE : 0)
-	target.apply_damage(damage, BRUTE, target_limb, damage_flags, used_weapon = "Thorns")
+	var/damage_flags = DAMAGE_FLAG_SHARP|(has_edge? DAMAGE_FLAG_EDGE : 0)
+	target.apply_damage(damage, DAMAGE_BRUTE, target_limb, damage_flags, used_weapon = "Thorns")
 
 // Adds reagents to a target.
 /datum/seed/proc/do_sting(var/mob/living/carbon/human/target, var/obj/item/fruit)
 	if(!get_trait(TRAIT_STINGS))
 		return
 
-	if(chems && chems.len && target.reagents && length(target.organs))
+	if(length(chems) && target.reagents && length(target.organs))
 
 		var/obj/item/organ/external/affecting = pick(target.organs)
+		if (!affecting)
+			return
 
 		for(var/obj/item/clothing/C in list(target.head, target.wear_mask, target.wear_suit, target.w_uniform, target.gloves, target.shoes))
 			if(C && (C.body_parts_covered & affecting.body_part) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
 				affecting = null
 
-		if(!(target.species && target.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT)))	affecting = null
+		if(!(target.species && target.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT)))
+			affecting = null
 
 		if(affecting)
 			to_chat(target, "<span class='danger'>You are stung by \the [fruit] in your [affecting.name]!</span>")
@@ -468,9 +471,11 @@
 			/datum/reagent/nanites,
 			/datum/reagent/water/holywater,
 			/datum/reagent/toxin/plantbgone,
-			/datum/reagent/chloralhydrate/beer2
+			/datum/reagent/chloralhydrate/beer2,
+			/datum/reagent/zombie
 			)
 		banned_chems += subtypesof(/datum/reagent/ethanol)
+		banned_chems += subtypesof(/datum/reagent/zombie)
 		banned_chems += subtypesof(/datum/reagent/tobacco)
 		banned_chems += typesof(/datum/reagent/drink)
 		banned_chems += typesof(/datum/reagent/nutriment)
@@ -627,7 +632,7 @@
 			for(var/trait in list(TRAIT_YIELD, TRAIT_ENDURANCE))
 				if(get_trait(trait) > 0) set_trait(trait,get_trait(trait),null,1,0.85)
 
-			if(!chems) chems = list()
+			LAZYINITLIST(chems)
 
 			var/list/gene_value = gene.values["[TRAIT_CHEMS]"]
 			for(var/rid in gene_value)
@@ -754,14 +759,15 @@
 			if(has_mob_product)
 				product = new has_mob_product(get_turf(user),name)
 			else
-				product = new /obj/item/weapon/reagent_containers/food/snacks/grown(get_turf(user),name)
+				product = new /obj/item/reagent_containers/food/snacks/grown(get_turf(user),name)
+				product.w_class = fruit_size
 			. += product
 
 			if(get_trait(TRAIT_PRODUCT_COLOUR))
 				if(!istype(product, /mob))
 					product.color = get_trait(TRAIT_PRODUCT_COLOUR)
-					if(istype(product,/obj/item/weapon/reagent_containers/food))
-						var/obj/item/weapon/reagent_containers/food/food = product
+					if(istype(product,/obj/item/reagent_containers/food))
+						var/obj/item/reagent_containers/food/food = product
 						food.filling_color = get_trait(TRAIT_PRODUCT_COLOUR)
 
 			if(mysterious)
@@ -778,8 +784,8 @@
 			if(istype(product,/mob/living))
 				product.visible_message("<span class='notice'>The pod disgorges [product]!</span>")
 				handle_living_product(product)
-				if(istype(product,/mob/living/simple_animal/mushroom)) // Gross.
-					var/mob/living/simple_animal/mushroom/mush = product
+				if(istype(product,/mob/living/simple_animal/passive/mushroom)) // Gross.
+					var/mob/living/simple_animal/passive/mushroom/mush = product
 					mush.seed = src
 
 // When the seed in this machine mutates/is modified, the tray seed value
@@ -852,7 +858,7 @@
 	if(leaves)
 		var/image/I = image(res.icon, "[plant_icon]-[growth_stage]-leaves")
 		I.color = leaves
-		I.appearance_flags = RESET_COLOR
+		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 		res.overlays += I
 
 	return res

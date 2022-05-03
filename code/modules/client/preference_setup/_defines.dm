@@ -14,3 +14,8 @@ if(!decls_by_name) \
 		decls_by_name[decl_instance.name] = decl_instance;\
 	}\
 }
+
+#define UIBUTTON(key, label, title) "[title ? title + ": " : ""]<a href='?src=\ref[src];[key]=1'>[label]</a>"
+
+#define UI_FONT_GOOD(X) "<font color='55cc55'>[X]</font>"
+#define UI_FONT_BAD(X) "<font color='cc5555'>[X]</font>"

@@ -56,6 +56,9 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/list/forced_ambience = null
 	var/sound_env = STANDARD_STATION
 	var/turf/base_turf //The base turf type of the area, which can be used to override the z-level's base turf
+	var/planetary_surface = FALSE // true if the area belongs to a planet.
+	///Some base_turfs might cause issues with changing turfs, this flags it as a special case.
+	var/base_turf_special_handling = FALSE
 
 /*-----------------------------------------------------------------------------*/
 
@@ -77,7 +80,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	ambience = list('sound/ambience/ambispace1.ogg','sound/ambience/ambispace2.ogg','sound/ambience/ambispace3.ogg','sound/ambience/ambispace4.ogg','sound/ambience/ambispace5.ogg')
 	secure = FALSE
 
-area/space/atmosalert()
+/area/space/atmosalert()
 	return
 
 /area/space/fire_alert()
@@ -108,6 +111,7 @@ area/space/atmosalert()
 /area/chapel
 	name = "\improper Chapel"
 	icon_state = "chapel"
+	lighting_tone = AREA_LIGHTING_WARM
 
 /area/centcom/specops
 	name = "\improper Centcom Special Ops"
@@ -118,16 +122,7 @@ area/space/atmosalert()
 
 /area/medical
 	req_access = list(access_medical)
-
-/area/medical/virology
-	name = "\improper Virology"
-	icon_state = "virology"
-	req_access = list(access_virology)
-
-/area/medical/virologyaccess
-	name = "\improper Virology Access"
-	icon_state = "virology"
-	req_access = list() // This is like the lobby, needs low access to allow passing through in a different direction.
+	lighting_tone = AREA_LIGHTING_COOL
 
 /area/security
 	req_access = list(access_sec_doors)
@@ -151,10 +146,31 @@ area/space/atmosalert()
 
 /area/rnd
 	req_access = list(access_research)
+	lighting_tone = AREA_LIGHTING_COOL
 
 /area/rnd/xenobiology
 	name = "\improper Xenobiology Lab"
 	icon_state = "xeno_lab"
+	req_access = list(access_xenobiology, access_research)
+
+/area/rnd/xenobiology/cell_1
+	name = "\improper Xenobiology Containment Cell 1"
+	icon_state = "xeno_lab_cell_1"
+	req_access = list(access_xenobiology, access_research)
+
+/area/rnd/xenobiology/cell_2
+	name = "\improper Xenobiology Containment Cell 2"
+	icon_state = "xeno_lab_cell_2"
+	req_access = list(access_xenobiology, access_research)
+
+/area/rnd/xenobiology/cell_3
+	name = "\improper Xenobiology Containment Cell 3"
+	icon_state = "xeno_lab_cell_3"
+	req_access = list(access_xenobiology, access_research)
+
+/area/rnd/xenobiology/cell_4
+	name = "\improper Xenobiology Containment Cell 4"
+	icon_state = "xeno_lab_cell_4"
 	req_access = list(access_xenobiology, access_research)
 
 /area/rnd/xenobiology/xenoflora
@@ -187,6 +203,7 @@ area/space/atmosalert()
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
 	req_access = list(access_cargo)
+	area_flags = AREA_FLAG_HIDE_FROM_HOLOMAP
 
 /area/syndicate_elite_squad
 	name = "\improper Elite Mercenary Squad"
@@ -203,13 +220,15 @@ area/space/atmosalert()
 	requires_power = 0
 	sound_env = SMALL_ENCLOSED
 	base_turf = /turf/space
+	area_flags = AREA_FLAG_HIDE_FROM_HOLOMAP
+	base_turf_special_handling = TRUE
 
 /*
 * Special Areas
 */
 /area/beach
 	name = "Keelin's private beach"
-	icon_state = "null"
+	icon_state = "beach"
 	luminosity = 1
 	dynamic_lighting = 0
 	requires_power = 0
@@ -256,7 +275,6 @@ area/space/atmosalert()
 	for(var/mob/living/carbon/human/H in src)
 		if(H.client)
 			mysound.status = SOUND_UPDATE
-			to_chat(H, mysound)
 			if(S)
 				spawn(sound_delay)
 					sound_to(H, S)

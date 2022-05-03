@@ -130,7 +130,7 @@
 	var/auth_name
 	var/dna_hash
 
-	var/obj/item/weapon/card/id/ID = ident.GetIdCard()
+	var/obj/item/card/id/ID = ident.GetIdCard()
 
 	if(!ID)
 		return
@@ -163,10 +163,10 @@
 /obj/machinery/computer/shuttle_control/emergency/emag_act(var/remaining_charges, var/mob/user)
 	if (!emagged)
 		to_chat(user, "<span class='notice'>You short out \the [src]'s authorization protocols.</span>")
-		emagged = 1
+		emagged = TRUE
 		return 1
 
-/obj/machinery/computer/shuttle_control/emergency/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/computer/shuttle_control/emergency/attackby(obj/item/W as obj, mob/user as mob)
 	read_authorization(W)
 	..()
 

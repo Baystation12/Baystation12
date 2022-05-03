@@ -33,7 +33,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
 /obj/item/clothing/under/rank/chemist
-	desc = "It's made of a special fiber that gives special protection against biohazards. It has a chemist rank stripe on it."
+	desc = "It's made of a special fiber that gives special protection against biohazards. The striping on the suit denotes the wearer as a trained pharmacist."
 	name = "pharmacist's jumpsuit"
 	icon_state = "chemistry"
 	item_state = "w_suit"

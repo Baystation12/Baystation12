@@ -1,4 +1,4 @@
-var/list/client_preference_stats_
+var/global/list/client_preference_stats_
 
 /proc/client_preference_stats_for_usr(var/mob/user = usr)
 	. = list()
@@ -38,7 +38,7 @@ var/list/client_preference_stats_
 
 /stat_client_preference
 	parent_type = /atom/movable
-	simulated = 0
+	simulated = FALSE
 	var/datum/client_preference/client_preference
 
 /stat_client_preference/New(var/loc, var/preference)

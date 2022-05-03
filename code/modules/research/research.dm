@@ -111,7 +111,7 @@ research holder datum.
 		if(DesignHasReqs(PD))
 			AddDesign2Known(PD)
 	for(var/datum/tech/T in known_tech)
-		T = between(0, T.level, 20)
+		T = clamp(T.level, 0, 20)
 	return
 
 //Refreshes the levels of a given tech.
@@ -197,7 +197,7 @@ research holder datum.
 	id = TECH_ESOTERIC
 	level = 0
 
-/obj/item/weapon/disk/tech_disk
+/obj/item/disk/tech_disk
 	name = "fabricator data disk"
 	desc = "A disk for storing fabricator learning data for backup."
 	icon = 'icons/obj/cloning.dmi'
@@ -208,7 +208,7 @@ research holder datum.
 	var/datum/tech/stored
 
 
-/obj/item/weapon/disk/design_disk
+/obj/item/disk/design_disk
 	name = "component design disk"
 	desc = "A disk for storing device design data for construction in lathes."
 	icon = 'icons/obj/cloning.dmi'

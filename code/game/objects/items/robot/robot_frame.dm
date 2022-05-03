@@ -29,7 +29,6 @@
 	for(var/part in required_parts)
 		if(!parts[part])
 			return FALSE
-	SSstatistics.add_field("cyborg_frames_built",1)
 	return TRUE
 
 /obj/item/robot_parts/robot_suit/attackby(obj/item/W as obj, mob/user as mob)
@@ -106,8 +105,6 @@
 
 		if(!user.unEquip(W))
 			return
-
-		SSstatistics.add_field("cyborg_frames_built",1)
 		var/mob/living/silicon/robot/O = new product(get_turf(loc))
 		if(!O)
 			return
@@ -123,7 +120,8 @@
 			O.job = "Robot"
 
 		var/obj/item/robot_parts/chest/chest = parts[BP_CHEST]
-		chest.cell.forceMove(O)
+		if (chest && chest.cell)
+			chest.cell.forceMove(O)
 		W.forceMove(O) //Should fix cybros run time erroring when blown up. It got deleted before, along with the frame.
 
 		// Since we "magically" installed a cell, we also have to update the correct component.
@@ -131,13 +129,11 @@
 			var/datum/robot_component/cell_component = O.components["power cell"]
 			cell_component.wrapped = O.cell
 			cell_component.installed = 1
-
-		SSstatistics.add_field("cyborg_birth",1)
 		callHook("borgify", list(O))
 		O.Namepick()
 		qdel(src)
 
-	else if(istype(W, /obj/item/weapon/pen))
+	else if(istype(W, /obj/item/pen))
 		var/t = sanitizeSafe(input(user, "Enter new robot name", src.name, src.created_name), MAX_NAME_LEN)
 		if(t && (in_range(src, user) || loc == user))
 			created_name = t

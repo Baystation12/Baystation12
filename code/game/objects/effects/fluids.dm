@@ -1,8 +1,8 @@
 /obj/effect/fluid
 	name = ""
 	icon = 'icons/effects/liquids.dmi'
-	anchored = 1
-	simulated = 0
+	anchored = TRUE
+	simulated = FALSE
 	opacity = 0
 	mouse_opacity = 0
 	layer = FLY_LAYER
@@ -57,7 +57,7 @@
 	if(fluid_amount > FLUID_DEEP)
 		alpha = FLUID_MAX_ALPHA
 	else
-		alpha = min(FLUID_MAX_ALPHA,max(FLUID_MIN_ALPHA,ceil(255*(fluid_amount/FLUID_DEEP))))
+		alpha = min(FLUID_MAX_ALPHA,max(FLUID_MIN_ALPHA,Ceil(255*(fluid_amount/FLUID_DEEP))))
 
 	if(fluid_amount > FLUID_DELETING && fluid_amount <= FLUID_EVAPORATION_POINT)
 		APPLY_FLUID_OVERLAY("shallow_still")
@@ -95,10 +95,10 @@
 	icon = 'icons/effects/liquids.dmi'
 	icon_state = "ocean"
 	alpha = FLUID_MAX_ALPHA
-	simulated = 0
-	density = 0
+	simulated = FALSE
+	density = FALSE
 	opacity = 0
-	anchored = 1
+	anchored = TRUE
 
 /obj/effect/flood/ex_act()
 	return

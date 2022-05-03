@@ -17,6 +17,16 @@
 		TAG_CULTURE = CULTURE_ALIUM
 	)
 
+	exertion_effect_chance = 10
+	exertion_hydration_scale = 1
+	exertion_reagent_scale = 5
+	exertion_reagent_path = /datum/reagent/lactate
+	exertion_emotes_biological = list(
+		/decl/emote/exertion/biological,
+		/decl/emote/exertion/biological/breath,
+		/decl/emote/exertion/biological/pant
+	)
+
 /datum/species/alium/New()
 	//Coloring
 	blood_color = RANDOM_RGB
@@ -24,13 +34,13 @@
 	base_color  = RANDOM_RGB
 
 	//Combat stats
-	MULT_BY_RANDOM_COEF(total_health, 0.8, 1.2)
-	MULT_BY_RANDOM_COEF(brute_mod, 0.5, 1.5)
-	MULT_BY_RANDOM_COEF(burn_mod, 0.8, 1.2)
-	MULT_BY_RANDOM_COEF(oxy_mod, 0.5, 1.5)
-	MULT_BY_RANDOM_COEF(toxins_mod, 0, 2)
-	MULT_BY_RANDOM_COEF(radiation_mod, 0, 2)
-	MULT_BY_RANDOM_COEF(flash_mod, 0.5, 1.5)
+	total_health = round(total_health * Frand(0.8, 1.2), 0.1)
+	brute_mod = round(brute_mod * Frand(0.5, 1.5), 0.1)
+	burn_mod = round(burn_mod * Frand(0.8, 1.2), 0.1)
+	oxy_mod = round(oxy_mod * Frand(0.5, 1.5), 0.1)
+	toxins_mod = round(toxins_mod * Frand(0, 2), 0.1)
+	radiation_mod = round(radiation_mod * Frand(0, 2), 0.1)
+	flash_mod = round(flash_mod * Frand(0.5, 1.5), 0.1)
 
 	if(brute_mod < 1 && prob(40))
 		species_flags |= SPECIES_FLAG_NO_MINOR_CUT
@@ -129,7 +139,7 @@
 	desc = "Your true form is calling. Use this to become an alien humanoid."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "ano51"
-	anchored = 1
+	anchored = TRUE
 
 /obj/structure/aliumizer/attack_hand(mob/living/carbon/human/user)
 	if(!istype(user))
@@ -145,7 +155,7 @@
 		return
 	to_chat(user, "You're now an alien humanoid of some undiscovered species. Make up what lore you want, no one knows a thing about your species! You can check info about your traits with Check Species Info verb in IC tab.")
 	to_chat(user, "You can't speak GalCom or any other languages by default. You can use translator implant that spawns on top of this monolith - it will give you knowledge of any language if you hear it enough times.")
-	new/obj/item/weapon/implanter/translator(get_turf(src))
+	new/obj/item/implanter/translator(get_turf(src))
 	user.set_species(SPECIES_ALIEN)
 	var/decl/cultural_info/culture = user.get_cultural_value(TAG_CULTURE)
 	user.fully_replace_character_name(culture.get_random_name(user.gender))

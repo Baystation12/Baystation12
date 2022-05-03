@@ -1,7 +1,7 @@
 // This is something of an intermediary species used for species that
 // need to emulate the appearance of another race. Currently it is only
 // used for slimes but it may be useful for changelings later.
-var/list/wrapped_species_by_ref = list()
+var/global/list/wrapped_species_by_ref = list()
 
 /datum/species/shapeshifter
 

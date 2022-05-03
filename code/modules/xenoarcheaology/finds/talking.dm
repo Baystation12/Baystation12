@@ -54,13 +54,13 @@
 		var/list/options = list("[holder_atom] seems to be listening intently to [source]...",\
 			"[holder_atom] seems to be focusing on [source]...",\
 			"[holder_atom] seems to turn it's attention to [source]...")
-		holder_atom.loc.visible_message("<span class='notice'>\icon[holder_atom] [pick(options)]</span>")
+		holder_atom.loc.visible_message("<span class='notice'>[icon2html(holder_atom, viewers(get_turf(holder_atom)))] [pick(options)]</span>")
 
 	if(prob(20))
 		spawn(2)
 			SaySomething(pick(seperate))
 
-/*/obj/item/weapon/talkingcrystal/proc/debug()
+/*/obj/item/talkingcrystal/proc/debug()
 	//set src in view()
 	for(var/v in heard_words)
 		log_debug("[uppertext(v)]")
@@ -94,7 +94,7 @@
 	text=lowertext(text)
 	for(var/ya,ya <= limit,ya++)
 
-		if(heard_words.Find("[text]"))
+		if(list_find(heard_words, "[text]"))
 			var/list/w = heard_words["[text]"]
 			text=pick(w)
 		else
@@ -108,15 +108,5 @@
 		else
 			msg+="!"
 
-	var/list/listening = viewers(holder_atom)
-	for(var/mob/M in SSmobs.mob_list)
-		if (!M.client)
-			continue //skip monkeys and leavers
-		if (istype(M, /mob/new_player))
-			continue
-		if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == GLOB.PREF_ALL_SPEECH)
-			listening|=M
-
-	for(var/mob/M in listening)
-		to_chat(M, "\icon[holder_atom] <b>[holder_atom]</b> reverberates, <span class='notice'>\"[msg]\"</span>")
+	holder_atom.audible_message(SPAN_BOLD(holder_atom.name) + " reverberates, \"[msg]\"", SPAN_ITALIC("\The [holder_atom] vibrates and lights up for a moment, but you hear no sound..."))
 	last_talk_time = world.time

@@ -13,73 +13,8 @@
 	id = "awaysite_errant_pisces"
 	description = "Xynergy carp trawler"
 	suffixes = list("errant_pisces/errant_pisces.dmm")
-	cost = 1
+	spawn_cost = 1
 	area_usage_test_exempted_root_areas = list(/area/errant_pisces)
-
-/mob/living/simple_animal/hostile/carp/shark // generally stronger version of a carp that doesn't die from a mean look. Fance new sprites included, credits to F-Tang Steve
-	name = "cosmoshark"
-	desc = "Enormous creature that resembles a shark with magenta glowing lines along its body and set of long deep-purple teeth."
-	icon = 'maps/away/errant_pisces/errant_pisces_sprites.dmi'
-	icon_state = "shark"
-	icon_living = "shark"
-	icon_dead = "shark_dead"
-	icon_gib = "shark_dead"
-	turns_per_move = 5
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/sharkmeat
-	speed = 2
-	maxHealth = 100
-	health = 100
-	harm_intent_damage = 5
-	melee_damage_lower = 15
-	melee_damage_upper = 25
-	break_stuff_probability = 35
-	faction = "shark"
-
-/mob/living/simple_animal/hostile/carp/shark/carp_randomify()
-	return
-
-/mob/living/simple_animal/hostile/carp/shark/on_update_icon()
-	return
-
-/mob/living/simple_animal/hostile/carp/shark/death()
-	..()
-	var/datum/gas_mixture/environment = loc.return_air()
-	if (environment)
-		var/datum/gas_mixture/sharkmaw_phoron = new
-		sharkmaw_phoron.adjust_gas(GAS_PHORON,  10)
-		environment.merge(sharkmaw_phoron)
-		visible_message("<span class='warning'>\The [src]'s body releases some gas from the gills with a quiet fizz!</span>")
-
-/mob/living/simple_animal/hostile/carp/shark/AttackingTarget()
-	set waitfor = 0//to deal with sleep() possibly stalling other procs
-	. =..()
-	var/mob/living/L = .
-	if(istype(L))
-		if(prob(25))//if one is unlucky enough, they get tackled few tiles away
-			L.visible_message("<span class='danger'>\The [src] tackles [L]!</span>")
-			var/tackle_length = rand(3,5)
-			for (var/i = 1 to tackle_length)
-				var/turf/T = get_step(L.loc, dir)//on a first step of tackling standing mob would block movement so let's check if there's something behind it. Works for consequent moves too
-				if (T.density || LinkBlocked(L.loc, T) || TurfBlockedNonWindow(T) || DirBlocked(T, GLOB.flip_dir[dir]))
-					break
-				sleep(2)
-				forceMove(T)//maybe there's better manner then just forceMove() them
-				L.forceMove(T)
-			visible_message("<span class='danger'>\The [src] releases [L].</span>")
-
-/obj/item/weapon/reagent_containers/food/snacks/sharkmeat
-	name = "cosmoshark fillet"
-	desc = "A fillet of cosmoshark meat."
-	icon_state = "fishfillet"
-	filling_color = "#cecece"
-	center_of_mass = "x=17;y=13"
-
-/obj/item/weapon/reagent_containers/food/snacks/sharkmeat/New()
-	..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
-	reagents.add_reagent(/datum/reagent/space_drugs, 1)
-	reagents.add_reagent(/datum/reagent/toxin/phoron, 1)
-	src.bitesize = 8
 
 
 /obj/structure/net//if you want to have fun, make them to be draggable as a whole unless at least one piece is attached to a non-space turf or anchored object
@@ -87,11 +22,11 @@
 	desc = "A sturdy industrial net of synthetic belts reinforced with plasteel threads."
 	icon = 'maps/away/errant_pisces/errant_pisces_sprites.dmi'
 	icon_state = "net_f"
-	anchored = 1
+	anchored = TRUE
 	layer = CATWALK_LAYER//probably? Should cover cables, pipes and the rest of objects that are secured on the floor
 	var/health = 100
 
-obj/structure/net/Initialize(var/mapload)
+/obj/structure/net/Initialize(var/mapload)
 	. = ..()
 	update_connections()
 	if (!mapload)//if it's not mapped object but rather created during round, we should update visuals of adjacent net objects
@@ -111,15 +46,15 @@ obj/structure/net/Initialize(var/mapload)
 	else if (health < 90)
 		to_chat(user, "Few ribbons of \the [src] are cut away.")
 
-/obj/structure/net/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/material)) //sharp objects can cut thorugh
-		var/obj/item/weapon/material/SH = W
+/obj/structure/net/attackby(obj/item/W as obj, mob/user as mob)
+	if (istype(W, /obj/item/material)) //sharp objects can cut thorugh
+		var/obj/item/material/SH = W
 		if (!(SH.sharp) || (SH.sharp && SH.force < 10))//is not sharp enough or at all
 			to_chat(user,"<span class='warning'>You can't cut throught \the [src] with \the [W], it's too dull.</span>")
 			return
 		visible_message("<span class='warning'>[user] starts to cut through \the [src] with \the [W]!</span>")
 		while (health > 0)
-			if (!do_after(user, 20, src))
+			if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 				visible_message("<span class='warning'>[user] stops cutting through \the [src] with \the [W]!</span>")
 				return
 			health -= 20 * (1 + (SH.force-10)/10)//the sharper the faster, every point of force above 10 adds 10 % to damage
@@ -129,7 +64,7 @@ obj/structure/net/Initialize(var/mapload)
 
 /obj/structure/net/bullet_act(obj/item/projectile/P)
 	. = PROJECTILE_CONTINUE //few cloth ribbons won't stop bullet or energy ray
-	if(P.damage_type != BURN)//beams, lasers, fire. Bullets won't make a lot of damage to the few hanging belts.
+	if (P.damage_type != DAMAGE_BURN)//beams, lasers, fire. Bullets won't make a lot of damage to the few hanging belts.
 		return
 	visible_message("<span class='warning'>\The [P] hits \the [src] and tears it!</span>")
 	health -= P.damage
@@ -147,7 +82,7 @@ obj/structure/net/Initialize(var/mapload)
 
 /obj/structure/net/net_wall
 	icon_state = "net_w"
-	density = 1
+	density = TRUE
 	layer = ABOVE_HUMAN_LAYER
 
 /obj/structure/net/net_wall/Initialize(var/mapload)
@@ -181,7 +116,6 @@ obj/structure/net/Initialize(var/mapload)
 	throw_range = 10
 	matter = list("cloth" = 1875, "plasteel" = 350)
 	max_amount = 30
-	center_of_mass = null
 	attack_verb = list("hit", "bludgeoned", "whacked")
 	lock_picking_level = 3
 
@@ -227,7 +161,7 @@ obj/structure/net/Initialize(var/mapload)
 	if (amount < 1)
 		qdel(src)
 
-/obj/item/clothing/under/carp//as far as I know sprites are taken from /tg/
+/obj/item/clothing/under/carp
 	name = "space carp suit"
 	desc = "A suit in a shape of a space carp. Usually worn by corporate interns who are sent to entertain children during HQ excursions."
 	icon_state = "carp_suit"
@@ -243,6 +177,61 @@ obj/structure/net/Initialize(var/mapload)
 	name = "Dead carp fisher"
 	uniform = /obj/item/clothing/under/color/green
 	suit = /obj/item/clothing/suit/apron/overalls
-	belt = /obj/item/weapon/material/knife/combat
+	belt = /obj/item/material/knife/combat
 	shoes = /obj/item/clothing/shoes/jackboots
 	head = /obj/item/clothing/head/hardhat/dblue
+
+/obj/effect/computer_file_creator/ahabs_harpoon01
+	name = "ahab's harpoon file spawner - sensor dump"
+
+/obj/effect/computer_file_creator/ahabs_harpoon01/Initialize()
+	var/i_month = max(text2num(time2text(world.timeofday, "MM")) - 1, 1) // Prevent month from going below 1
+	var/i_day = max(text2num(time2text(world.timeofday, "DD")) - 5, 1)
+	file_name = "NETMON_SENSORDUMP-BLACKBOX"
+	file_info = " \
+		<h2>XCV Ahab's Harpoon Sensor Log - <i>[GLOB.using_map.game_year]-[i_month]-[i_day]</i></h2> \
+		<hr> \
+		\<08:33:07\> Space carp migration detected within 1 Gm.<br>\
+		\<08:51:29\> Main net extended.<br>\
+		\<09:00:00\> Hourly report. Security level: GREEN. Crew status: NOMINAL. SMES charge: NOMINAL.<br>\
+		\<09:02:53\> Outflow cells opened.<br>\
+		\<09:04:12\> Exterior airlock cycling: Port Solar Control.<br>\
+		\<09:04:25\> <b>VITAL SIGNS ALERT:</b> C. BANCROFT, Retrieval Specialist, Port Solar Control<br>\
+		\<09:04:33\> <b>BRAIN ACTIVITY FLATLINE:</b> C. BANCROFT, Retrieval Specialist, Port Solar Control<br>\
+		\<09:04:39\> Unidentified lifesigns aboard.<br>\
+		\<09:04:45\> Multiple unidentified lifesigns aboard.<br>\
+		\<09:05:21\> <b>SECURITY LEVEL ALERT:</b> Elevated to RED.<br>\
+		\<09:33:07\> <b>SECURITY LEVEL ALERT:</b> Logging flight and sensor data to ship black box.<br>\
+		\<09:41:13\> <b>MULTIPLE VITAL SIGNS ALERTS</b><br>\
+		\<09:47:03\> All vital signs alerts cleared.<br>\
+		\<10:00:00\> Hourly report. Security level: RED. Crew status: CRITICAL. SMES charge: NOMINAL.<br>\
+		\<11:00:00\> Hourly report. Security level: RED. Crew status: CRITICAL. SMES charge: NOMINAL.<br>\
+		\<12:00:00\> Hourly report. Security level: RED. Crew status: CRITICAL. SMES charge: NOMINAL.<br>\
+		\<13:00:00\> Hourly report. Security level: RED. Crew status: CRITICAL. SMES charge: NOMINAL.<br>\
+		\<14:00:00\> Hourly report. Security level: RED. Crew status: CRITICAL. SMES charge: LOW.<br>\
+		\<15:00:00\> Hourly report. Security level: RED. Crew status: CRITICAL. SMES charge: LOW.<br>\
+		\<16:00:00\> Hourly report. Security level: RED. Crew status: CRITICAL. SMES charge: CRITICAL.<br>\
+		\<17:00:00\> Hourly report. Security level: RED. Crew status: CRITICAL. SMES charge: CRITICAL.<br>\
+		\<17:03:41\> Low power. Entering hibernation. Data dumped to local drive and stored in ship black box.<br>\
+		\<17:03:41\> Black box data pushed to access terminal.<br>\
+		\<17:03:42\> Shutting down.<br>\
+	"
+	. = ..()
+
+/obj/effect/computer_file_creator/ahabs_harpoon02
+	name = "ahab's harpoon file spawner - black box"
+	file_name = "NETMON_BLACKBOX"
+	file_info = "<p><i>This is the flight recorder data for the XCV Ahab's Harpoon. Its callsign and flight registration indicate that this is a medium size, long-haul commerical space carp fishing vessel, owned by Xynergy. The data recording here only includes hourly status reports, but they indicate that the ship went from nominal function at 09:00 to red alert and critical crew status by 10:00, before continuing at these levels for most of the day until SMES power failed.</i></p>\
+	\
+	<p><i>This data contains a wealth of information about the ship's records, manifest, and specifications, but nothing immediately useful about the events that happened on board. You may be able to glean further information if you could find more complete records.</i></p>"
+
+/obj/effect/computer_file_creator/ahabs_harpoon03
+	name = "ahab's harpoon file spawner - captain's log"
+	file_name = "captainslog"
+
+/obj/effect/computer_file_creator/ahabs_harpoon03/Initialize()
+	var/captain_name = "[capitalize(pick(GLOB.first_names_male + GLOB.first_names_female))] [capitalize(pick(GLOB.last_names))]"
+	file_info = "<p><i>This is the captain's log of the XCV Ahab's Harpoon, authored by Xynergy general manager [captain_name]. According to the log's contents, the ship embarked on its final voyage six months ago. All entries except the last one seem mundane - routine checks, inventory reports, flight path, and so on. The final entry seems to have been written in a hurry, with several typos that didn't get caught by the autocorrect:</i></p>\
+	\
+	<p>Had a major incident, have lost control f the ship. Hit a big shoal off Nine and scooped up a bunch but itr got the net tangled. Charlie went out to untangle it and a bunch got in. Big motherfuckers, got everywhere. Lkarger than pike. Got trhough doors. Gettim vital alerts for half the crew. Turning on distress but the emergency mode eats up a lot of powedr and it won't last forever. Solars might keep the lights on but it'll be brownouts/blackouts eventually. Going to make for engi where the blackbox comp is. Wish me luck. Please report to xyn/gov if you find this.</p>"
+	. = ..()

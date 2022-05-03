@@ -3,13 +3,16 @@
 	desc = "A mechanical basin designed to nurture plants. It has various useful sensors."
 	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "hydrotray3"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	volume = 100
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "hydroponics tray"
+	machine_desc = "These are waist-high trays that can grow a vast variety of plants in a nutrient bath. Also comes with a sealable lid for plants that don't grow in a surrounding atmosphere. A cornerstone of self-sufficient spaceships across the galaxy."
 
 	var/mechanical = 1         // Set to 0 to stop it from drawing the alert lights.
 	var/base_name = "tray"
@@ -47,7 +50,7 @@
 
 	// Reagent information for process(), consider moving this to a controller along
 	// with cycle information under 'mechanical concerns' at some point.
-	var/global/list/toxic_reagents = list(
+	var/static/list/toxic_reagents = list(
 		/datum/reagent/dylovene =         -2,
 		/datum/reagent/toxin =             2,
 		/datum/reagent/hydrazine =         2.5,
@@ -60,7 +63,7 @@
 		/datum/reagent/radium =            2,
 		/datum/reagent/three_eye =         2
 		)
-	var/global/list/nutrient_reagents = list(
+	var/static/list/nutrient_reagents = list(
 		/datum/reagent/drink/milk =                     0.1,
 		/datum/reagent/ethanol/beer =                   0.25,
 		/datum/reagent/phosphorus =                     0.1,
@@ -74,7 +77,7 @@
 		/datum/reagent/toxin/fertilizer/robustharvest = 1,
 		/datum/reagent/toxin/fertilizer/left4zed =      1
 		)
-	var/global/list/weedkiller_reagents = list(
+	var/static/list/weedkiller_reagents = list(
 		/datum/reagent/hydrazine =          -4,
 		/datum/reagent/phosphorus =         -2,
 		/datum/reagent/sugar =               2,
@@ -84,14 +87,14 @@
 		/datum/reagent/toxin/plantbgone =   -8,
 		/datum/reagent/adminordrazine =     -5
 		)
-	var/global/list/pestkiller_reagents = list(
+	var/static/list/pestkiller_reagents = list(
 		/datum/reagent/sugar =                 2,
 		/datum/reagent/diethylamine =         -2,
 		/datum/reagent/toxin/bromide =        -2,
 		/datum/reagent/toxin/methyl_bromide = -4,
 		/datum/reagent/adminordrazine =       -5
 		)
-	var/global/list/water_reagents = list(
+	var/static/list/water_reagents = list(
 		/datum/reagent/water =           1,
 		/datum/reagent/adminordrazine =  1,
 		/datum/reagent/drink/milk =      0.9,
@@ -103,7 +106,7 @@
 		)
 
 	// Beneficial reagents also have values for modifying yield_mod and mut_mod (in that order).
-	var/global/list/beneficial_reagents = list(
+	var/static/list/beneficial_reagents = list(
 		/datum/reagent/ethanol/beer =                    list( -0.05, 0,   0  ),
 		/datum/reagent/hydrazine =                       list( -2,    0,   0  ),
 		/datum/reagent/phosphorus =                      list( -0.75, 0,   0  ),
@@ -125,7 +128,7 @@
 
 	// Mutagen list specifies minimum value for the mutation to take place, rather
 	// than a bound as the lists above specify.
-	var/global/list/mutagenic_reagents = list(
+	var/static/list/mutagenic_reagents = list(
 		/datum/reagent/radium =  8,
 		/datum/reagent/mutagen = 15,
 		/datum/reagent/toxin/fertilizer/left4zed = 30)
@@ -184,7 +187,7 @@
 			if(seed)
 				seed = seed.diverge_mutate_gene(G.gene, get_turf(loc))	//get_turf just in case it's not in a turf.
 		else
-			mutate(1)
+			mutate(prob(75) ? 1 : 2)
 			return
 	else if(istype(Proj ,/obj/item/projectile/energy/florayield) && prob(20))
 		yield_mod = min(10,yield_mod+rand(1,2))
@@ -446,9 +449,9 @@
 
 		return
 
-	else if(istype(O, /obj/item/weapon/reagent_containers/syringe))
+	else if(istype(O, /obj/item/reagent_containers/syringe))
 
-		var/obj/item/weapon/reagent_containers/syringe/S = O
+		var/obj/item/reagent_containers/syringe/S = O
 
 		if (S.mode == 1)
 			if(seed)
@@ -468,7 +471,7 @@
 
 		plant_seed(user, O)
 
-	else if (istype(O, /obj/item/weapon/material/minihoe))  // The minihoe
+	else if (istype(O, /obj/item/material/minihoe))  // The minihoe
 
 		if(weedlevel > 0)
 			user.visible_message("<span class='notice'>[user] starts uprooting the weeds.</span>", "<span class='notice'>You remove the weeds from the [src].</span>")
@@ -481,19 +484,19 @@
 		else
 			to_chat(user, "<span class='notice'>This plot is completely devoid of weeds. It doesn't need uprooting.</span>")
 
-	else if (istype(O, /obj/item/weapon/storage/plants))
+	else if (istype(O, /obj/item/storage/plants))
 
 		attack_hand(user)
 
-		var/obj/item/weapon/storage/plants/S = O
-		for (var/obj/item/weapon/reagent_containers/food/snacks/grown/G in locate(user.x,user.y,user.z))
+		var/obj/item/storage/plants/S = O
+		for (var/obj/item/reagent_containers/food/snacks/grown/G in locate(user.x,user.y,user.z))
 			if(!S.can_be_inserted(G, user))
 				return
 			S.handle_item_insertion(G, 1)
 
-	else if ( istype(O, /obj/item/weapon/plantspray) )
+	else if ( istype(O, /obj/item/plantspray) )
 
-		var/obj/item/weapon/plantspray/spray = O
+		var/obj/item/plantspray/spray = O
 		toxins += spray.toxicity
 		pestlevel -= spray.pest_kill_str
 		weedlevel -= spray.weed_kill_str
@@ -505,7 +508,7 @@
 	else if(mechanical && isWrench(O))
 
 		//If there's a connector here, the portable_atmospherics setup can handle it.
-		if(locate(/obj/machinery/atmospherics/portables_connector/) in loc)
+		if(locate(/obj/machinery/atmospherics/portables_connector) in loc)
 			return ..()
 
 		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)

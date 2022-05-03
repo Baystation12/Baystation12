@@ -1,9 +1,9 @@
 /datum/unarmed_attack/bite/sharp //eye teeth
 	attack_verb = list("bit", "chomped on")
 	attack_sound = 'sound/weapons/bite.ogg'
-	shredding = 0
-	sharp = 1
-	edge = 1
+	shredding = FALSE
+	sharp = TRUE
+	edge = TRUE
 	attack_name = "sharp bite"
 
 /datum/unarmed_attack/diona
@@ -20,8 +20,8 @@
 	eye_attack_text_victim = "sharp claws"
 	attack_sound = 'sound/weapons/slice.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	attack_name = "claws"
 	var/blocked_by_gloves = TRUE
 
@@ -38,7 +38,11 @@
 /datum/unarmed_attack/claws/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
 
-	attack_damage = Clamp(attack_damage, 1, 5)
+	if (!affecting)
+		to_chat(user, SPAN_WARNING("\The [target] does not have that bodypart!"))
+		return
+
+	attack_damage = clamp(attack_damage, 1, 5)
 
 	if(target == user)
 		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in the [affecting.name]!</span>")
@@ -73,7 +77,7 @@
 /datum/unarmed_attack/claws/strong
 	attack_verb = list("slashed")
 	damage = 5
-	shredding = 1
+	shredding = TRUE
 	attack_name = "strong claws"
 
 /datum/unarmed_attack/claws/strong/gloves
@@ -82,7 +86,7 @@
 /datum/unarmed_attack/bite/strong
 	attack_verb = list("mauled")
 	damage = 8
-	shredding = 1
+	shredding = TRUE
 	attack_name = "strong bite"
 
 /datum/unarmed_attack/slime_glomp
@@ -138,7 +142,7 @@
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
 
 	var/organ = affecting.name
-	attack_damage = Clamp(attack_damage, 1, 6)
+	attack_damage = clamp(attack_damage, 1, 6)
 	attack_damage = 3 + attack_damage - rand(1, 5)
 	switch(attack_damage)
 
@@ -152,9 +156,9 @@
 	attack_verb = list("mauled", "slashed", "struck", "pierced")
 	attack_noun = list("forelimb")
 	damage = 8
-	shredding = 1
-	sharp = 1
-	edge = 1
+	shredding = TRUE
+	sharp = TRUE
+	edge = TRUE
 	delay = 20
 	eye_attack_text = "a forelimb"
 	eye_attack_text_victim = "a forelimb"
@@ -162,11 +166,11 @@
 
 /datum/unarmed_attack/punch/starborn
 	attack_verb = list("scorched", "burned", "fried")
-	shredding = 1
+	shredding = TRUE
 	attack_name = "starborn strike"
 
 /datum/unarmed_attack/punch/starborn/get_damage_type()
-	return BURN
+	return DAMAGE_BURN
 
 /datum/unarmed_attack/bite/venom
 	attack_verb = list("bit", "sank their fangs into")
@@ -176,4 +180,4 @@
 	attack_name = "venomous bite"
 
 /datum/unarmed_attack/bite/venom/get_damage_type()
-	return TOX
+	return DAMAGE_TOXIN

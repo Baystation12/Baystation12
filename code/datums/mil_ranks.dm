@@ -10,7 +10,7 @@
  *  and each branch datum definition, respectively.
  */
 
-var/datum/mil_branches/mil_branches = new()
+GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
 
 /**
  *  Global object for handling branches
@@ -24,7 +24,7 @@ var/datum/mil_branches/mil_branches = new()
  *  Retrieve branch object by branch name
  */
 /datum/mil_branches/proc/get_branch(var/branch_name)
-	if(ispath(branch_name))
+	if(ispath(branch_name, /datum/mil_branch))
 		var/datum/mil_branch/branch = branch_name
 		branch_name = initial(branch.name)
 	if(branch_name && branch_name != "None")
@@ -111,6 +111,8 @@ var/datum/mil_branches/mil_branches = new()
 	// Email addresses will be created under this domain name. Mostly for the looks.
 	var/email_domain = "freemail.net"
 
+	var/allow_custom_email = FALSE
+
 	var/list/min_skill
 
 /datum/mil_branch/New()
@@ -145,24 +147,24 @@ var/datum/mil_branches/mil_branches = new()
  */
 /hook/startup/proc/populate_branches()
 	if(!(GLOB.using_map.flags & MAP_HAS_BRANCH) && !(GLOB.using_map.flags & MAP_HAS_RANK))
-		mil_branches.branches  = null
-		mil_branches.spawn_branches_ = null
-		mil_branches.spawn_branches_by_species_ = null
+		GLOB.mil_branches.branches  = null
+		GLOB.mil_branches.spawn_branches_ = null
+		GLOB.mil_branches.spawn_branches_by_species_ = null
 		return 1
 
-	mil_branches.branches  = list()
-	mil_branches.spawn_branches_ = list()
-	mil_branches.spawn_branches_by_species_ = list()
+	GLOB.mil_branches.branches  = list()
+	GLOB.mil_branches.spawn_branches_ = list()
+	GLOB.mil_branches.spawn_branches_by_species_ = list()
 	for(var/branch_path in GLOB.using_map.branch_types)
 		if(!ispath(branch_path, /datum/mil_branch))
 			crash_with("populate_branches() attempted to instantiate object with path [branch_path], which is not a subtype of /datum/mil_branch.")
 			continue
 
 		var/datum/mil_branch/branch = new branch_path ()
-		mil_branches.branches[branch.name] = branch
+		GLOB.mil_branches.branches[branch.name] = branch
 
 		if(branch_path in GLOB.using_map.spawn_branch_types)
-			mil_branches.spawn_branches_[branch.name] = branch
+			GLOB.mil_branches.spawn_branches_[branch.name] = branch
 
 	return 1
 

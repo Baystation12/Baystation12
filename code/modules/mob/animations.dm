@@ -47,7 +47,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/var/jitteriness = 0//Carbon
 
 /mob/proc/make_jittery(var/amount)
-	return //Only for living/carbon/human/
+	return //Only for living/carbon/human
 
 /mob/living/carbon/human/make_jittery(var/amount)
 	if(!istype(src, /mob/living/carbon/human)) // for the moment, only humans get jittery
@@ -105,7 +105,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 	is_floating = 1
 
 	var/amplitude = 2 //maximum displacement from original position
-	var/period = 36 //time taken for the mob to go up >> down >> original position, in deciseconds. Should be multiple of 4
+	var/period = 36 //time taken for the mob to go up -> down -> original position, in deciseconds. Should be multiple of 4
 
 	var/top = default_pixel_z + amplitude
 	var/bottom = default_pixel_z - amplitude
@@ -120,6 +120,30 @@ note dizziness decrements automatically in the mob's Life() proc.
 	animate(src, pixel_z = default_pixel_z, time = 5, easing = SINE_EASING | EASE_IN) //halt animation
 	//reset the pixel offsets to zero
 	is_floating = 0
+
+/atom/movable/proc/do_windup_animation(atom/A, windup_time)
+	var/pixel_x_diff = 0
+	var/pixel_y_diff = 0
+	var/direction = get_dir(src, A)
+	if(direction & NORTH)
+		pixel_y_diff = -8
+	else if(direction & SOUTH)
+		pixel_y_diff = 8
+
+	if(direction & EAST)
+		pixel_x_diff = -8
+	else if(direction & WEST)
+		pixel_x_diff = 8
+
+	var/default_pixel_x = initial(pixel_x)
+	var/default_pixel_y = initial(pixel_y)
+	var/mob/mob = src
+	if(istype(mob))
+		default_pixel_x = mob.default_pixel_x
+		default_pixel_y = mob.default_pixel_y
+
+	animate(src, pixel_x = pixel_x + pixel_x_diff, pixel_y = pixel_y + pixel_y_diff, time = windup_time - 2)
+	animate(pixel_x = default_pixel_x, pixel_y = default_pixel_y, time = 2)
 
 /atom/movable/proc/do_attack_animation(atom/A)
 
@@ -157,6 +181,20 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 	animate(src, pixel_x = pixel_x + pixel_x_diff, pixel_y = pixel_y + pixel_y_diff, time = 2)
 	animate(pixel_x = default_pixel_x, pixel_y = default_pixel_y, time = 2)
+
+/atom/movable/proc/do_attack_effect(atom/A, effect) //Simple effects for telegraphing or marking attack locations
+	if (effect)
+		var/image/I = image('icons/effects/effects.dmi', A, effect, ABOVE_PROJECTILE_LAYER)
+
+		if (!I)
+			return
+
+		flick_overlay(I, GLOB.clients, 10)
+
+		// And animate the attack!
+		animate(I, alpha = 175, transform = matrix() * 0.75, pixel_x = 0, pixel_y = 0, pixel_z = 0, time = 3)
+		animate(time = 1)
+		animate(alpha = 0, time = 3, easing = CIRCULAR_EASING|EASE_OUT)
 
 /mob/do_attack_animation(atom/A)
 	..()

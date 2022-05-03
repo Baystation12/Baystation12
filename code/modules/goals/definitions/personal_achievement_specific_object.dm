@@ -28,11 +28,11 @@
 	completion_message = "Ahh, that was just what you needed."
 
 /datum/goal/achievement/specific_object/food/New()
-	possible_objects = subtypesof(/obj/item/weapon/reagent_containers/food/snacks)
+	possible_objects = subtypesof(/obj/item/reagent_containers/food/snacks)
 	blacklisted_objects = list(
-		/obj/item/weapon/reagent_containers/food/snacks/meat/corgi,
-		/obj/item/weapon/reagent_containers/food/snacks/meat/human,
-		/obj/item/weapon/reagent_containers/food/snacks/meat/monkey
+		/obj/item/reagent_containers/food/snacks/meat/corgi,
+		/obj/item/reagent_containers/food/snacks/meat/human,
+		/obj/item/reagent_containers/food/snacks/meat/monkey
 	)
 	..()
 
@@ -58,8 +58,8 @@
 
 /datum/goal/achievement/specific_object/pet
 	possible_objects = list(
-		/mob/living/simple_animal/corgi,
-		/mob/living/simple_animal/cat
+		/mob/living/simple_animal/passive/corgi,
+		/mob/living/simple_animal/passive/cat
 	)
 
 /datum/goal/achievement/specific_object/pet/update_strings()

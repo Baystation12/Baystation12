@@ -4,7 +4,16 @@
 	icon_screen = "teleport"
 	light_color = "#77fff8"
 	extra_view = 4
+	silicon_restriction = STATUS_UPDATE
+	machine_name = "sensors console"
+	machine_desc = "Used to activate, monitor, and configure a spaceship's sensors. Higher range means higher temperature; dangerously high temperatures may fry the delicate equipment."
 	var/obj/machinery/shipsensors/sensors
+	var/print_language = LANGUAGE_HUMAN_EURO
+
+/obj/machinery/computer/ship/sensors/spacer
+	construct_state = /decl/machine_construction/default/panel_closed/computer/no_deconstruct
+	base_type = /obj/machinery/computer/ship/sensors
+	print_language = LANGUAGE_SPACER
 
 /obj/machinery/computer/ship/sensors/attempt_hook_up(obj/effect/overmap/visitable/ship/sector)
 	if(!(. = ..()))
@@ -27,6 +36,8 @@
 	var/data[0]
 
 	data["viewing"] = viewing_overmap(user)
+	var/mob/living/silicon/silicon = user
+	data["viewing_silicon"] = ismachinerestricted(silicon)
 	if(sensors)
 		data["on"] = sensors.use_power
 		data["range"] = sensors.range
@@ -74,7 +85,7 @@
 		return TOPIC_NOACTION
 
 	if (href_list["viewing"])
-		if(user && !isAI(user))
+		if(user)
 			viewing_overmap(user) ? unlook(user) : look(user)
 		return TOPIC_REFRESH
 
@@ -88,7 +99,7 @@
 			if(!CanInteract(user,state))
 				return TOPIC_NOACTION
 			if (nrange)
-				sensors.set_range(Clamp(nrange, 1, world.view))
+				sensors.set_range(clamp(nrange, 1, world.view))
 			return TOPIC_REFRESH
 		if (href_list["toggle"])
 			sensors.toggle()
@@ -98,7 +109,7 @@
 		var/obj/effect/overmap/O = locate(href_list["scan"])
 		if(istype(O) && !QDELETED(O) && (O in view(7,linked)))
 			playsound(loc, "sound/machines/dotprinter.ogg", 30, 1)
-			new/obj/item/weapon/paper/(get_turf(src), O.get_scan_data(user), "paper (Sensor Scan - [O])")
+			new/obj/item/paper/(get_turf(src), O.get_scan_data(user), "paper (Sensor Scan - [O])", L = print_language)
 		return TOPIC_HANDLED
 
 /obj/machinery/computer/ship/sensors/Process()
@@ -116,7 +127,7 @@
 	desc = "Long range gravity scanner with various other sensors, used to detect irregularities in surrounding space. Can only run in vacuum to protect delicate quantum BS elements."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "sensors"
-	anchored = 1
+	anchored = TRUE
 	var/max_health = 200
 	var/health = 200
 	var/critical_heat = 50 // sparks and takes damage when active & above this heat
@@ -125,11 +136,11 @@
 	var/range = 1
 	idle_power_usage = 5000
 
-/obj/machinery/shipsensors/attackby(obj/item/weapon/W, mob/user)
+/obj/machinery/shipsensors/attackby(obj/item/W, mob/user)
 	var/damage = max_health - health
 	if(damage && isWelder(W))
 
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 
 		if(!WT.isOn())
 			return
@@ -137,7 +148,7 @@
 		if(WT.remove_fuel(0,user))
 			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, max(5, damage / 5), src) && WT && WT.isOn())
+			if(do_after(user, max(5, damage / 5), src, DO_PUBLIC_UNIQUE) && WT && WT.isOn())
 				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
 				take_damage(-damage)
 		else
@@ -210,10 +221,10 @@
 	change_power_consumption(1500 * (range**2), POWER_USE_IDLE) //Exponential increase, also affects speed of overheating
 
 /obj/machinery/shipsensors/emp_act(severity)
-	if(!use_power)
-		return
-	take_damage(20/severity)
-	toggle()
+	if(use_power)
+		take_damage(20/severity)
+		toggle()
+	..()
 
 /obj/machinery/shipsensors/proc/take_damage(value)
 	health = min(max(health - value, 0),max_health)

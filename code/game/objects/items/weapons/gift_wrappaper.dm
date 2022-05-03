@@ -7,7 +7,7 @@
 /*
  * Gifts
  */
-/obj/item/weapon/a_gift
+/obj/item/a_gift
 	name = "gift"
 	desc = "PRESENTS!!!! eek!"
 	icon = 'icons/obj/items.dmi'
@@ -15,7 +15,7 @@
 	item_state = "gift1"
 	randpixel = 10
 
-/obj/item/weapon/a_gift/New()
+/obj/item/a_gift/New()
 	..()
 	if(w_class > 0 && w_class < ITEM_SIZE_HUGE)
 		icon_state = "gift[w_class]"
@@ -23,7 +23,7 @@
 		icon_state = "gift[pick(1, 2, 3)]"
 	return
 
-/obj/item/weapon/a_gift/ex_act()
+/obj/item/a_gift/ex_act()
 	qdel(src)
 	return
 
@@ -32,7 +32,7 @@
 		return
 	to_chat(user, "<span class='warning'>You can't move.</span>")
 
-/obj/effect/spresent/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/effect/spresent/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 
 	if(!isWirecutter(W))
@@ -49,29 +49,29 @@
 
 	qdel(src)
 
-/obj/item/weapon/a_gift/attack_self(mob/M as mob)
+/obj/item/a_gift/attack_self(mob/M as mob)
 	var/gift_type = pick(
-		/obj/item/weapon/storage/wallet,
-		/obj/item/weapon/storage/photo_album,
-		/obj/item/weapon/storage/box/snappops,
-		/obj/item/weapon/storage/fancy/crayons,
-		/obj/item/weapon/storage/backpack/holding,
-		/obj/item/weapon/storage/belt/champion,
-		/obj/item/weapon/pickaxe/silver,
-		/obj/item/weapon/pen/invisible,
-		/obj/item/weapon/lipstick/random,
-		/obj/item/weapon/grenade/smokebomb,
-		/obj/item/weapon/carvable/corncob,
-		/obj/item/weapon/contraband/poster,
-		/obj/item/weapon/book/manual/barman_recipes,
-		/obj/item/weapon/book/manual/chef_recipes,
-		/obj/item/weapon/bikehorn,
-		/obj/item/weapon/beach_ball,
-		/obj/item/weapon/beach_ball/holoball,
+		/obj/item/storage/wallet,
+		/obj/item/storage/photo_album,
+		/obj/item/storage/box/snappops,
+		/obj/item/storage/fancy/crayons,
+		/obj/item/storage/backpack/holding,
+		/obj/item/storage/belt/champion,
+		/obj/item/pickaxe/silver,
+		/obj/item/pen/invisible,
+		/obj/item/lipstick/random,
+		/obj/item/grenade/smokebomb,
+		/obj/item/carvable/corncob,
+		/obj/item/contraband/poster,
+		/obj/item/book/manual/barman_recipes,
+		/obj/item/book/manual/chef_recipes,
+		/obj/item/bikehorn,
+		/obj/item/beach_ball,
+		/obj/item/beach_ball/holoball,
 		/obj/item/toy/water_balloon,
 		/obj/item/toy/blink,
 		/obj/item/toy/crossbow,
-		/obj/item/weapon/gun/projectile/revolver/capgun,
+		/obj/item/gun/projectile/revolver/capgun,
 		/obj/item/toy/katana,
 		/obj/item/toy/prize/deathripley,
 		/obj/item/toy/prize/durand,
@@ -86,15 +86,15 @@
 		/obj/item/toy/prize/seraph,
 		/obj/item/toy/spinningtoy,
 		/obj/item/toy/sword,
-		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus,
-		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris,
+		/obj/item/reagent_containers/food/snacks/grown/ambrosiadeus,
+		/obj/item/reagent_containers/food/snacks/grown/ambrosiavulgaris,
 		/obj/item/device/paicard,
 		/obj/item/device/synthesized_instrument/violin,
-		/obj/item/weapon/storage/belt/utility/full,
+		/obj/item/storage/belt/utility/full,
 		/obj/item/clothing/accessory/horrible,
-		/obj/item/weapon/storage/box/large/foam_gun,
-		/obj/item/weapon/storage/box/large/foam_gun/burst,
-		/obj/item/weapon/storage/box/large/foam_gun/revolver)
+		/obj/item/storage/box/large/foam_gun,
+		/obj/item/storage/box/large/foam_gun/burst,
+		/obj/item/storage/box/large/foam_gun/revolver)
 
 	if(!ispath(gift_type,/obj/item))	return
 
@@ -107,7 +107,7 @@
  * Wrapping Paper and Gifts
  */
 
-/obj/item/weapon/gift
+/obj/item/gift
 	name = "gift"
 	desc = "A wrapped item."
 	icon = 'icons/obj/items.dmi'
@@ -117,7 +117,7 @@
 	item_state = "gift"
 	w_class = ITEM_SIZE_HUGE
 
-/obj/item/weapon/gift/New(newloc, obj/item/wrapped = null)
+/obj/item/gift/New(newloc, obj/item/wrapped = null)
 	..(newloc)
 
 	if(istype(wrapped))
@@ -133,7 +133,7 @@
 			if(4) icon_state = "gift2"
 			if(5) icon_state = "gift3"
 
-/obj/item/weapon/gift/attack_self(mob/user as mob)
+/obj/item/gift/attack_self(mob/user as mob)
 	user.drop_item()
 	if(src.gift)
 		user.put_in_active_hand(gift)
@@ -143,14 +143,14 @@
 	qdel(src)
 	return
 
-/obj/item/weapon/wrapping_paper
+/obj/item/wrapping_paper
 	name = "wrapping paper"
 	desc = "You can use this to wrap items in."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "wrap_paper"
 	var/amount = 2.5*BASE_STORAGE_COST(ITEM_SIZE_HUGE)
 
-/obj/item/weapon/wrapping_paper/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/wrapping_paper/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if (!( locate(/obj/structure/table, src.loc) ))
 		to_chat(user, "<span class='warning'>You MUST put the paper on a table!</span>")
@@ -165,17 +165,17 @@
 				to_chat(user, "<span class='warning'>You need more paper!</span>")
 				return
 			else
-				if(istype(W, /obj/item/smallDelivery) || istype(W, /obj/item/weapon/gift)) //No gift wrapping gifts!
+				if(istype(W, /obj/item/smallDelivery) || istype(W, /obj/item/gift)) //No gift wrapping gifts!
 					return
 
 				if(user.unEquip(W))
-					var/obj/item/weapon/gift/G = new /obj/item/weapon/gift( src.loc, W )
+					var/obj/item/gift/G = new /obj/item/gift( src.loc, W )
 					G.add_fingerprint(user)
 					W.add_fingerprint(user)
 					src.amount -= a_used
 
 			if (src.amount <= 0)
-				new /obj/item/weapon/c_tube( src.loc )
+				new /obj/item/c_tube( src.loc )
 				qdel(src)
 				return
 		else
@@ -185,12 +185,12 @@
 	return
 
 
-/obj/item/weapon/wrapping_paper/examine(mob/user, distance)
+/obj/item/wrapping_paper/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
 		to_chat(user, text("There is about [] square units of paper left!", src.amount))
 
-/obj/item/weapon/wrapping_paper/attack(mob/target as mob, mob/user as mob)
+/obj/item/wrapping_paper/attack(mob/target as mob, mob/user as mob)
 	if (!istype(target, /mob/living/carbon/human)) return
 	var/mob/living/carbon/human/H = target
 

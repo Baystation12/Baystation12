@@ -13,7 +13,7 @@
 
 /atom/movable/proc/GetAccess()
 	. = list()
-	var/obj/item/weapon/card/id/id = GetIdCard()
+	var/obj/item/card/id/id = GetIdCard()
 	if(id)
 		. += id.GetAccess()
 
@@ -31,7 +31,7 @@
 	if(!istype(L, /list))
 		return FALSE
 
-	if(maint_all_access)
+	if(GLOB.using_map?.maint_all_access)
 		L = L.Copy()
 		L |= access_maint_tunnels
 
@@ -87,7 +87,7 @@
 		if("Supreme Commander")
 			return get_all_centcom_access()
 
-/var/list/datum/access/priv_all_access_datums
+var/global/list/datum/access/priv_all_access_datums
 /proc/get_all_access_datums()
 	if(!priv_all_access_datums)
 		priv_all_access_datums = init_subtypes(/datum/access)
@@ -95,7 +95,7 @@
 
 	return priv_all_access_datums.Copy()
 
-/var/list/datum/access/priv_all_access_datums_id
+var/global/list/datum/access/priv_all_access_datums_id
 /proc/get_all_access_datums_by_id()
 	if(!priv_all_access_datums_id)
 		priv_all_access_datums_id = list()
@@ -104,7 +104,7 @@
 
 	return priv_all_access_datums_id.Copy()
 
-/var/list/datum/access/priv_all_access_datums_region
+var/global/list/datum/access/priv_all_access_datums_region
 /proc/get_all_access_datums_by_region()
 	if(!priv_all_access_datums_region)
 		priv_all_access_datums_region = list()
@@ -122,35 +122,35 @@
 			L += A.id
 	return L
 
-/var/list/priv_all_access
+var/global/list/priv_all_access
 /proc/get_all_accesses()
 	if(!priv_all_access)
 		priv_all_access = get_access_ids()
 
 	return priv_all_access.Copy()
 
-/var/list/priv_station_access
+var/global/list/priv_station_access
 /proc/get_all_station_access()
 	if(!priv_station_access)
 		priv_station_access = get_access_ids(ACCESS_TYPE_STATION)
 
 	return priv_station_access.Copy()
 
-/var/list/priv_centcom_access
+var/global/list/priv_centcom_access
 /proc/get_all_centcom_access()
 	if(!priv_centcom_access)
 		priv_centcom_access = get_access_ids(ACCESS_TYPE_CENTCOM)
 
 	return priv_centcom_access.Copy()
 
-/var/list/priv_syndicate_access
+var/global/list/priv_syndicate_access
 /proc/get_all_syndicate_access()
 	if(!priv_syndicate_access)
 		priv_syndicate_access = get_access_ids(ACCESS_TYPE_SYNDICATE)
 
 	return priv_syndicate_access.Copy()
 
-/var/list/priv_region_access
+var/global/list/priv_region_access
 /proc/get_region_accesses(var/code)
 	if(code == ACCESS_REGION_ALL)
 		return get_all_station_access()
@@ -172,7 +172,7 @@
 		if(ACCESS_REGION_SECURITY) //security
 			return "Security"
 		if(ACCESS_REGION_MEDBAY) //medbay
-			return "Medbay"
+			return "Medical"
 		if(ACCESS_REGION_RESEARCH) //research
 			return "Research"
 		if(ACCESS_REGION_ENGINEERING) //engineering and maintenance
@@ -183,8 +183,8 @@
 			return "General"
 		if(ACCESS_REGION_SUPPLY) //supply
 			return "Supply"
-		if(ACCESS_REGION_NT) //nt
-			return "Corporate"
+		if(ACCESS_REGION_SERVICE) //nt
+			return "Service"
 
 /proc/get_access_desc(id)
 	var/list/AS = priv_all_access_datums_id || get_all_access_datums_by_id()
@@ -213,10 +213,10 @@
 		"Emergency Response Team Leader")
 
 /mob/observer/ghost
-	var/static/obj/item/weapon/card/id/all_access/ghost_all_access
+	var/static/obj/item/card/id/all_access/ghost_all_access
 
 /mob/observer/ghost/GetIdCard()
-	if(!is_admin(src))
+	if(!isadmin(src))
 		return
 
 	if(!ghost_all_access)
@@ -230,12 +230,9 @@
 /mob/living/carbon/human/GetIdCard()
 	for(var/item_slot in HUMAN_ID_CARDS)
 		var/obj/item/I = item_slot
-		var/obj/item/weapon/card/id = I ? I.GetIdCard() : null
+		var/obj/item/card/id = I ? I.GetIdCard() : null
 		if(id)
 			return id
-	var/obj/item/organ/internal/controller/controller = locate() in internal_organs
-	if(istype(controller))
-		return controller.GetIdCard()
 
 /mob/living/carbon/human/GetAccess()
 	. = list()
@@ -243,9 +240,6 @@
 		var/obj/item/I = item_slot
 		if(I)
 			. |= I.GetAccess()
-	var/obj/item/organ/internal/controller/controller = locate() in internal_organs
-	if(istype(controller))
-		. |= controller.GetAccess()
 #undef HUMAN_ID_CARDS
 
 /mob/living/silicon/GetIdCard()
@@ -254,7 +248,7 @@
 	return idcard
 
 /proc/FindNameFromID(var/mob/M, var/missing_id_name = "Unknown")
-	var/obj/item/weapon/card/id/C = M.GetIdCard()
+	var/obj/item/card/id/C = M.GetIdCard()
 	if(C)
 		return C.registered_name
 	return missing_id_name
@@ -263,7 +257,7 @@
 	return SSjobs.titles_to_datums + list("Prisoner")
 
 /obj/proc/GetJobName() //Used in secHUD icon generation
-	var/obj/item/weapon/card/id/I = GetIdCard()
+	var/obj/item/card/id/I = GetIdCard()
 
 	if(I)
 		var/job_icons = get_all_job_icons()

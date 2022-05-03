@@ -4,7 +4,7 @@
 
 // ===
 /area
-	var/global/global_uid = 0
+	var/static/global_uid = 0
 	var/uid
 	var/area_flags
 
@@ -70,9 +70,9 @@
 
 /area/proc/atmosalert(danger_level, var/alarm_source)
 	if (danger_level == 0)
-		atmosphere_alarm.clearAlarm(src, alarm_source)
+		GLOB.atmosphere_alarm.clearAlarm(src, alarm_source)
 	else
-		atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level)
+		GLOB.atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level)
 
 	//Check all the alarms before lowering atmosalm. Raising is perfectly fine.
 	for (var/obj/machinery/alarm/AA in src)
@@ -112,6 +112,7 @@
 		if(!all_doors)
 			return
 		for(var/obj/machinery/door/firedoor/E in all_doors)
+			E.locked = FALSE
 			if(!E.blocked)
 				if(E.operating)
 					E.nextstate = FIREDOOR_OPEN
@@ -144,6 +145,7 @@
 		if(!all_doors)
 			return
 		for(var/obj/machinery/door/firedoor/D in all_doors)
+			D.locked = FALSE
 			if(!D.blocked)
 				if(D.operating)
 					D.nextstate = FIREDOOR_OPEN
@@ -213,9 +215,10 @@
 		M.set_emergency_lighting(enable)
 
 
-var/list/mob/living/forced_ambiance_list = new
+var/global/list/mob/living/forced_ambiance_list = new
 
 /area/Entered(A)
+	..()
 	if(!istype(A,/mob/living))	return
 
 	var/mob/living/L = A
@@ -279,9 +282,9 @@ var/list/mob/living/forced_ambiance_list = new
 	if(mob.Check_Shoegrip())
 		return
 
-	if(istype(mob,/mob/living/carbon/human/))
+	if(istype(mob,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = mob
-		if(prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_PROF)))
+		if(!H.buckled && prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_PROF)))
 			if(!MOVING_DELIBERATELY(H))
 				H.AdjustStunned(6)
 				H.AdjustWeakened(6)
@@ -328,3 +331,8 @@ var/list/mob/living/forced_ambiance_list = new
 
 /area/proc/has_turfs()
 	return !!(locate(/turf) in src)
+
+/area/proc/can_modify_area()
+	if (src && src.area_flags & AREA_FLAG_NO_MODIFY)
+		return FALSE
+	return TRUE

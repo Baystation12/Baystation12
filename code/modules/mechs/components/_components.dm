@@ -3,6 +3,7 @@
 	w_class = ITEM_SIZE_HUGE
 	gender = PLURAL
 	color = COLOR_GUNMETAL
+	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
 
 	var/on_mech_icon = 'icons/mecha/mech_parts.dmi'
 	var/exosuit_desc_string
@@ -17,7 +18,7 @@
 	matter = list(MATERIAL_STEEL = 15000, MATERIAL_PLASTIC = 1000, MATERIAL_OSMIUM = 500)
 	dir = SOUTH
 
-/obj/item/mech_component/proc/set_colour(new_colour)
+/obj/item/mech_component/set_color(new_colour)
 	var/last_colour = color
 	color = new_colour
 	return color != last_colour
@@ -26,6 +27,7 @@
 	take_burn_damage(rand((10 - (severity*3)),15-(severity*4)))
 	for(var/obj/item/thing in contents)
 		thing.emp_act(severity)
+	..()
 
 /obj/item/mech_component/examine(mob/user)
 	. = ..()
@@ -52,7 +54,13 @@
 /obj/item/mech_component/proc/update_health()
 	total_damage = brute_damage + burn_damage
 	if(total_damage > max_damage) total_damage = max_damage
-	damage_state = Clamp(round((total_damage/max_damage) * 4), MECH_COMPONENT_DAMAGE_UNDAMAGED, MECH_COMPONENT_DAMAGE_DAMAGED_TOTAL)
+	var/prev_state = damage_state
+	damage_state = clamp(round((total_damage/max_damage) * 4), MECH_COMPONENT_DAMAGE_UNDAMAGED, MECH_COMPONENT_DAMAGE_DAMAGED_TOTAL)
+	if(damage_state > prev_state)
+		if(damage_state == MECH_COMPONENT_DAMAGE_DAMAGED_BAD)
+			playsound(src.loc, 'sound/mecha/internaldmgalarm.ogg', 40, 1)
+		if(damage_state == MECH_COMPONENT_DAMAGE_DAMAGED_TOTAL)
+			playsound(src.loc, 'sound/mecha/critdestr.ogg', 50)
 
 /obj/item/mech_component/proc/ready_to_install()
 	return 1
@@ -88,7 +96,16 @@
 /obj/item/mech_component/attackby(var/obj/item/thing, var/mob/user)
 	if(isScrewdriver(thing))
 		if(contents.len)
-			var/obj/item/removed = pick(contents)
+			//Filter non movables
+			var/list/valid_contents = list()
+			for(var/atom/movable/A in contents)
+				if(!A.anchored)
+					valid_contents += A
+			if(!valid_contents.len)
+				return
+			var/obj/item/removed = pick(valid_contents)
+			if(!(removed in contents))
+				return
 			user.visible_message(SPAN_NOTICE("\The [user] removes \the [removed] from \the [src]."))
 			removed.forceMove(user.loc)
 			playsound(user.loc, 'sound/effects/pop.ogg', 50, 0)
@@ -102,13 +119,17 @@
 	if(isCoil(thing))
 		repair_burn_generic(thing, user)
 		return
+	if(istype(thing, /obj/item/device/robotanalyzer))
+		to_chat(user, SPAN_NOTICE("Diagnostic Report for \the [src]:"))
+		return_diagnostics(user)
+		return
 
 	return ..()
 
 /obj/item/mech_component/proc/update_components()
 	return
 
-/obj/item/mech_component/proc/repair_brute_generic(var/obj/item/weapon/weldingtool/WT, var/mob/user)
+/obj/item/mech_component/proc/repair_brute_generic(var/obj/item/weldingtool/WT, var/mob/user)
 	if(!istype(WT))
 		return
 	if(!brute_damage)
@@ -118,8 +139,12 @@
 		to_chat(user, SPAN_WARNING("Turn \the [WT] on, first."))
 		return
 	if(WT.remove_fuel((SKILL_MAX + 1) - user.get_skill_value(SKILL_CONSTRUCTION), user))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] begins welding the damage on \the [src]..."),
+			SPAN_NOTICE("You begin welding the damage on \the [src]...")
+		)
 		var/repair_value = 10 * max(user.get_skill_value(SKILL_CONSTRUCTION), user.get_skill_value(SKILL_DEVICES))
-		if(user.do_skilled(10, SKILL_DEVICES , src, 0.6) && brute_damage)
+		if(user.do_skilled(1 SECOND, SKILL_DEVICES , src, 0.6) && brute_damage)
 			repair_brute_damage(repair_value)
 			to_chat(user, SPAN_NOTICE("You mend the damage to \the [src]."))
 			playsound(user.loc, 'sound/items/Welder.ogg', 25, 1)
@@ -138,10 +163,10 @@
 
 	user.visible_message("\The [user] begins replacing the wiring of \the [src]...")
 
-	if(user.do_skilled(10, SKILL_DEVICES , src, 0.6) && burn_damage)
+	if(user.do_skilled(1 SECOND, SKILL_DEVICES , src, 0.6) && burn_damage)
 		if(QDELETED(CC) || QDELETED(src) || !CC.use(needed_amount))
 			return
-			
+
 		repair_burn_damage(25)
 		to_chat(user, SPAN_NOTICE("You mend the damage to \the [src]'s wiring."))
 		playsound(user.loc, 'sound/items/Deconstruct.ogg', 25, 1)
@@ -158,3 +183,7 @@
 		if(MECH_COMPONENT_DAMAGE_DAMAGED_TOTAL)
 			return FONT_COLORED(COLOR_RED, "almost destroyed")
 	return FONT_COLORED(COLOR_RED, "destroyed")
+
+/obj/item/mech_component/proc/return_diagnostics(var/mob/user)
+	to_chat(user, SPAN_NOTICE("[capitalize(src.name)]:"))
+	to_chat(user, SPAN_NOTICE(" - Integrity: <b>[round((((max_damage - total_damage) / max_damage)) * 100)]%</b>" ))

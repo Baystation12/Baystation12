@@ -4,13 +4,13 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "igniter1"
 	var/on = 0
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 20
 	active_power_usage = 1000
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/radio/receiver,
-		/obj/item/weapon/stock_parts/power/apc
+		/obj/item/stock_parts/radio/receiver,
+		/obj/item/stock_parts/power/apc
 	)
 	public_variables = list(
 		/decl/public_access/public_variable/igniter_on
@@ -80,13 +80,13 @@
 	var/disable = 0
 	var/last_spark = 0
 	var/base_state = "migniter"
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 20
 	active_power_usage = 1000
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/radio/receiver,
-		/obj/item/weapon/stock_parts/power/apc
+		/obj/item/stock_parts/radio/receiver,
+		/obj/item/stock_parts/power/apc
 	)
 	public_methods = list(
 		/decl/public_access/public_method/sparker_spark
@@ -104,7 +104,7 @@
 		icon_state = "migniter-p"
 //		src.sd_SetLuminosity(0)
 
-/obj/machinery/sparker/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/sparker/attackby(obj/item/W as obj, mob/user as mob)
 	if(isScrewdriver(W))
 		add_fingerprint(user)
 		disable = !disable

@@ -1,7 +1,7 @@
-datum/unit_test/loadout_test_shall_have_name_cost_path
+/datum/unit_test/loadout_test_shall_have_name_cost_path
 	name = "LOADOUT: Entries shall have name, cost, and path definitions"
 
-datum/unit_test/loadout_test_shall_have_name_cost_path/start_test()
+/datum/unit_test/loadout_test_shall_have_name_cost_path/start_test()
 	var/failed = 0
 	for(var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
@@ -22,10 +22,10 @@ datum/unit_test/loadout_test_shall_have_name_cost_path/start_test()
 		pass("All /datum/gear definitions had correct settings.")
 	return  1
 
-datum/unit_test/loadout_test_shall_have_valid_icon_states
+/datum/unit_test/loadout_test_shall_have_valid_icon_states
 	name = "LOADOUT: Entries shall have valid icon states"
 
-datum/unit_test/loadout_test_shall_have_valid_icon_states/start_test()
+/datum/unit_test/loadout_test_shall_have_valid_icon_states/start_test()
 	var/failed = FALSE
 	for(var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
@@ -60,10 +60,10 @@ datum/unit_test/loadout_test_shall_have_valid_icon_states/start_test()
 		pass("All /datum/gear definitions had correct icon states.")
 	return  1
 
-datum/unit_test/loadout_test_gear_path_tweaks_shall_be_of_gear_path
+/datum/unit_test/loadout_test_gear_path_tweaks_shall_be_of_gear_path
 	name = "LOADOUT: Gear path tweaks shall be of gear path."
 
-datum/unit_test/loadout_test_gear_path_tweaks_shall_be_of_gear_path/start_test()
+/datum/unit_test/loadout_test_gear_path_tweaks_shall_be_of_gear_path/start_test()
 	var/failed = 0
 	for(var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
@@ -80,10 +80,10 @@ datum/unit_test/loadout_test_gear_path_tweaks_shall_be_of_gear_path/start_test()
 		pass("All /datum/gear_tweak/paths had valid paths.")
 	return  1
 
-datum/unit_test/loadout_test_gear_path_tweaks_shall_have_unique_keys
+/datum/unit_test/loadout_test_gear_path_tweaks_shall_have_unique_keys
 	name = "LOADOUT: Gear path tweaks shall have unique keys"
 
-datum/unit_test/loadout_test_gear_path_tweaks_shall_have_unique_keys/start_test()
+/datum/unit_test/loadout_test_gear_path_tweaks_shall_have_unique_keys/start_test()
 	var/path_entries_by_gear_path_and_name = list()
 
 	for(var/gear_name in gear_datums)
@@ -102,3 +102,23 @@ datum/unit_test/loadout_test_gear_path_tweaks_shall_have_unique_keys/start_test(
 /proc/type_has_valid_icon_state(var/atom/type)
 	var/atom/A = type
 	return (initial(A.icon_state) in icon_states(initial(A.icon)))
+
+
+/datum/unit_test/loadout_custom_setup_tweaks_shall_have_valid_procs
+	name = "LOADOUT: Custom setup tweaks shall have valid procs"
+
+/datum/unit_test/loadout_custom_setup_tweaks_shall_have_valid_procs/start_test()
+	for(var/gear_name in gear_datums)
+		var/datum/gear/G = gear_datums[gear_name]
+		var/datum/instance
+		var/mob/user
+		for(var/datum/gear_tweak/custom_setup/cs in G.gear_tweaks)
+			instance = instance || new G.path()
+			user = user || new()
+			cs.tweak_item(user, instance)
+
+		QDEL_NULL(instance)
+		QDEL_NULL(user)
+
+	pass("Succesfully called all custom setup procs without runtimes")
+	return  1

@@ -1,6 +1,7 @@
 /obj/item/device/flash
 	name = "flash"
 	desc = "A device that produces a bright flash of light, designed to stun and disorient an attacker."
+	icon = 'icons/obj/flash.dmi'
 	icon_state = "flash"
 	item_state = "flashtool"
 	throwforce = 5
@@ -80,8 +81,8 @@
 				if(flash_strength > 0)
 					M.flash_eyes(FLASH_PROTECTION_MODERATE - safety)
 					M.Stun(flash_strength / 2)
-					M.eye_blurry += flash_strength
-					M.confused += (flash_strength + 2)
+					M.eye_blurry = max(M.eye_blurry, flash_strength)
+					M.confused = max(M.confused, (flash_strength + 2))
 					if(flash_strength > 3)
 						M.drop_l_hand()
 						M.drop_r_hand()
@@ -94,17 +95,19 @@
 		var/mob/living/simple_animal/SA = M
 		var/safety = SA.eyecheck()
 		if(safety < FLASH_PROTECTION_MAJOR)
-			SA.Weaken(2)
+			SA.confused = max(SA.confused, (flash_strength * 0.5))
 			if(safety < FLASH_PROTECTION_MODERATE)
-				SA.Stun(flash_strength - 2)
 				SA.flash_eyes(2)
-				SA.eye_blurry += flash_strength
-				SA.confused += flash_strength
-		else 
+				SA.eye_blurry = max(SA.eye_blurry, flash_strength)
+				SA.confused = max(SA.confused, (flash_strength))
+		else
 			flashfail = 1
 
 	else if(issilicon(M))
-		M.Weaken(rand(str_min,6))
+		if (M.status_flags & CANWEAKEN)
+			M.Weaken(rand(str_min,6))
+		else
+			flashfail = TRUE
 
 	else
 		flashfail = 1
@@ -202,6 +205,7 @@
 /obj/item/device/flash/synthetic //not for regular use, weaker effects
 	name = "modified flash"
 	desc = "A device that produces a bright flash of light. This is a specialized version designed specifically for use in camera systems."
+	icon = 'icons/obj/flash_synthetic.dmi'
 	icon_state = "sflash"
 	str_min = 1
 	str_max = 4
@@ -209,6 +213,7 @@
 /obj/item/device/flash/advanced
 	name = "advanced flash"
 	desc = "A device that produces a very bright flash of light. This is an advanced and expensive version often issued to VIPs."
+	icon = 'icons/obj/flash_advanced.dmi'
 	icon_state = "advflash"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2)
 	str_min = 3

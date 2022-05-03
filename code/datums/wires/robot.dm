@@ -10,11 +10,11 @@
 		new /datum/wire_description(BORG_WIRE_CAMERA,  "This wire runs to the unit's vision modules.")
 	)
 
-var/const/BORG_WIRE_LAWCHECK = 1
-var/const/BORG_WIRE_MAIN_POWER = 2 // The power wires do nothing whyyyyyyyyyyyyy
-var/const/BORG_WIRE_LOCKED_DOWN = 4
-var/const/BORG_WIRE_AI_CONTROL = 8
-var/const/BORG_WIRE_CAMERA = 16
+var/global/const/BORG_WIRE_LAWCHECK = 1
+var/global/const/BORG_WIRE_MAIN_POWER = 2 // The power wires do nothing whyyyyyyyyyyyyy
+var/global/const/BORG_WIRE_LOCKED_DOWN = 4
+var/global/const/BORG_WIRE_AI_CONTROL = 8
+var/global/const/BORG_WIRE_CAMERA = 16
 
 /datum/wires/robot/GetInteractWindow(mob/user)
 
@@ -32,12 +32,12 @@ var/const/BORG_WIRE_CAMERA = 16
 	switch(index)
 		if(BORG_WIRE_LAWCHECK) //Cut the law wire, and the borg will no longer receive law updates from its AI
 			if(!mended)
-				if (R.lawupdate == 1)
+				if (R.lawupdate)
 					to_chat(R, "LawSync protocol engaged.")
 					R.show_laws()
 			else
-				if (R.lawupdate == 0 && !R.emagged)
-					R.lawupdate = 1
+				if (!R.lawupdate && !R.emagged)
+					R.lawupdate = TRUE
 
 		if (BORG_WIRE_AI_CONTROL) //Cut the AI wire to reset AI control
 			if(!mended)

@@ -60,7 +60,7 @@
 			return TRUE
 	return FALSE
 
-obj/machinery/computer/ship/disperser/proc/is_valid_setup()
+/obj/machinery/computer/ship/disperser/proc/is_valid_setup()
 	if(front && middle && back)
 		var/everything_in_range = (get_dist(src, front) < link_range) && (get_dist(src, middle) < link_range) && (get_dist(src, back) < link_range)
 		var/everything_in_order = (middle.Adjacent(front) && middle.Adjacent(back)) && (front.dir == middle.dir && middle.dir == back.dir)
@@ -110,12 +110,18 @@ obj/machinery/computer/ship/disperser/proc/is_valid_setup()
 	var/obj/structure/ship_munition/disperser_charge/B = locate() in get_turf(back)
 	if(B)
 		return B.chargetype
+	var/obj/structure/closet/C = locate() in get_turf(back)
+	if(C)
+		return OVERMAP_WEAKNESS_DROPPOD
 	return OVERMAP_WEAKNESS_NONE
 
 /obj/machinery/computer/ship/disperser/proc/get_charge()
 	var/obj/structure/ship_munition/disperser_charge/B = locate() in get_turf(back)
 	if(B)
 		return B
+
+	var/obj/structure/closet/C = locate() in get_turf(back)
+	return C
 
 /obj/machinery/computer/ship/disperser/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = TRUE)
 	if(!linked)
@@ -140,6 +146,8 @@ obj/machinery/computer/ship/disperser/proc/is_valid_setup()
 		switch(get_charge_type())
 			if(OVERMAP_WEAKNESS_NONE)
 				charge = "[SPAN_BOLD("ERROR")]: No valid charge detected."
+			if(OVERMAP_WEAKNESS_DROPPOD)
+				charge = "HERMES"
 			else
 				var/obj/structure/ship_munition/disperser_charge/B = get_charge()
 				charge = B.chargedesc

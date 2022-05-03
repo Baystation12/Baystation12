@@ -4,11 +4,12 @@
 /obj/item/device/suit_sensor_jammer
 	name = "small device"
 	desc = "This object menaces with tiny, dull spikes of plastic."
+	icon = 'icons/obj/suit_jammer.dmi'
 	icon_state = "jammer"
 	w_class = ITEM_SIZE_SMALL
 	var/active = FALSE
 	var/range = 2 // This is a radius, thus a range of 7 covers the entire visible screen
-	var/obj/item/weapon/cell/bcell = /obj/item/weapon/cell/high
+	var/obj/item/cell/bcell = /obj/item/cell/high
 	var/suit_sensor_jammer_method/jammer_method
 	var/list/suit_sensor_jammer_methods_by_type
 	var/list/suit_sensor_jammer_methods
@@ -52,7 +53,7 @@
 			bcell = null
 		else
 			to_chat(user, "<span class='warning'>There is no cell to remove.</span>")
-	else if(istype(I, /obj/item/weapon/cell))
+	else if(istype(I, /obj/item/cell))
 		if(bcell)
 			to_chat(user, "<span class='warning'>There's already a cell in \the [src].</span>")
 		else if(user.unEquip(I))
@@ -102,7 +103,7 @@
 	var/new_range = range + (rand(0,6) / severity) - (rand(0,3) / severity)
 	set_range(new_range)
 
-obj/item/device/suit_sensor_jammer/examine(mob/user, distance)
+/obj/item/device/suit_sensor_jammer/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 3)
 		var/list/message = list()
@@ -113,12 +114,12 @@ obj/item/device/suit_sensor_jammer/examine(mob/user, distance)
 			message += "is lacking a cell."
 		to_chat(user, jointext(message,.))
 
-obj/item/device/suit_sensor_jammer/CanUseTopic(user, state)
+/obj/item/device/suit_sensor_jammer/CanUseTopic(user, state)
 	if(!bcell || bcell.charge <= 0)
 		return STATUS_CLOSE
 	return ..()
 
-obj/item/device/suit_sensor_jammer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/item/device/suit_sensor_jammer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/list/methods = new
 	for(var/suit_sensor_jammer_method/ssjm in suit_sensor_jammer_methods)
 		methods[++methods.len] = list("name" = ssjm.name, "cost" = ssjm.energy_cost, "ref" = "\ref[ssjm]")
@@ -132,7 +133,7 @@ obj/item/device/suit_sensor_jammer/ui_interact(mob/user, ui_key = "main", var/da
 		"methods" = methods,
 		"current_method" = "\ref[jammer_method]",
 		"current_cost" = jammer_method.energy_cost,
-		"total_cost" = "[ceil(JAMMER_POWER_CONSUMPTION(10))]"
+		"total_cost" = "[Ceil(JAMMER_POWER_CONSUMPTION(10))]"
 	)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -142,7 +143,7 @@ obj/item/device/suit_sensor_jammer/ui_interact(mob/user, ui_key = "main", var/da
 		ui.open()
 		ui.set_auto_update(1)
 
-obj/item/device/suit_sensor_jammer/OnTopic(var/mob/user, var/list/href_list, state)
+/obj/item/device/suit_sensor_jammer/OnTopic(var/mob/user, var/list/href_list, state)
 	if (href_list["enable_jammer"])
 		enable()
 		return TOPIC_REFRESH
@@ -193,7 +194,7 @@ obj/item/device/suit_sensor_jammer/OnTopic(var/mob/user, var/list/href_list, sta
 	return TRUE
 
 /obj/item/device/suit_sensor_jammer/proc/set_range(var/new_range)
-	range = Clamp(new_range, 0, JAMMER_MAX_RANGE) // 0 range still covers the current turf
+	range = clamp(new_range, 0, JAMMER_MAX_RANGE) // 0 range still covers the current turf
 	return range != new_range
 
 /obj/item/device/suit_sensor_jammer/proc/set_method(var/suit_sensor_jammer_method/sjm)

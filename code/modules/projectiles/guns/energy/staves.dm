@@ -1,4 +1,4 @@
-/obj/item/weapon/gun/energy/staff
+/obj/item/gun/energy/staff
 	name = "staff of change"
 	desc = "An artefact that spits bolts of coruscating energy which cause the target's very form to reshape itself."
 	icon = 'icons/obj/guns/staff.dmi'
@@ -16,7 +16,7 @@
 	charge_meter = 0
 	var/required_antag_type = MODE_WIZARD
 
-/obj/item/weapon/gun/energy/staff/special_check(var/mob/user)
+/obj/item/gun/energy/staff/special_check(var/mob/user)
 	if(required_antag_type)
 		var/datum/antagonist/antag = get_antag_data(required_antag_type)
 		if(user.mind && !antag.is_antagonist(user.mind))
@@ -25,21 +25,21 @@
 
 	return ..()
 
-/obj/item/weapon/gun/energy/staff/handle_click_empty(mob/user = null)
+/obj/item/gun/energy/staff/handle_click_empty(mob/user = null)
 	if (user)
 		user.visible_message("*fizzle*", "<span class='danger'>*fizzle*</span>")
 	else
 		src.visible_message("*fizzle*")
 	playsound(src.loc, 'sound/effects/sparks1.ogg', 100, 1)
 
-/obj/item/weapon/gun/energy/staff/animate
+/obj/item/gun/energy/staff/animate
 	name = "staff of animation"
 	desc = "An artefact that spits bolts of life-force which causes objects which are hit by it to animate and come to life! This magic doesn't affect machines."
 	max_shots = 5
 	recharge_time = 5 SECONDS
 	projectile_type = /obj/item/projectile/animate
 
-/obj/item/weapon/gun/energy/staff/focus
+/obj/item/gun/energy/staff/focus
 	name = "mental focus"
 	desc = "An artefact that channels the will of the user into destructive bolts of force. If you aren't careful with it, you might poke someone's brain out."
 	icon = 'icons/obj/wizard.dmi'

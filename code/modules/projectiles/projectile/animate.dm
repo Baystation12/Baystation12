@@ -2,8 +2,8 @@
 	name = "bolt of animation"
 	icon_state = "ice_1"
 	damage = 0
-	damage_type = BURN
-	nodamage = 1
+	damage_type = DAMAGE_BURN
+	nodamage = TRUE
 	damage_flags = 0
 
 /obj/item/projectile/animate/Bump(var/atom/change, forced=0)

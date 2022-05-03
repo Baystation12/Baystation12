@@ -13,10 +13,10 @@
 	var/c_tag_order = 999
 	var/number = 0 //camera number in area
 	var/status = 1
-	anchored = 1.0
+	anchored = TRUE
 	var/invuln = null
 	var/bugged = 0
-	var/obj/item/weapon/camera_assembly/assembly = null
+	var/obj/item/camera_assembly/assembly = null
 
 	var/toughness = 5 //sorta fragile
 
@@ -35,6 +35,8 @@
 	var/on_open_network = 0
 
 	var/affected_by_emp_until = 0
+
+	var/is_helmet_cam = FALSE
 
 /obj/machinery/camera/examine(mob/user)
 	. = ..()
@@ -120,16 +122,18 @@
 	return internal_process()
 
 /obj/machinery/camera/emp_act(severity)
-	if(!isEmpProof() && prob(100/severity))
-		if(!affected_by_emp_until || (world.time < affected_by_emp_until))
-			affected_by_emp_until = max(affected_by_emp_until, world.time + (90 SECONDS / severity))
-		else
-			stat |= EMPED
-			set_light(0)
-			triggerCameraAlarm()
-			update_icon()
-			update_coverage()
-			START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
+	if (!isEmpProof())
+		if (prob(100/severity))
+			if (!affected_by_emp_until || (world.time < affected_by_emp_until))
+				affected_by_emp_until = max(affected_by_emp_until, world.time + (90 SECONDS / severity))
+			else
+				stat |= EMPED
+				set_light(0)
+				triggerCameraAlarm()
+				update_icon()
+				update_coverage()
+				START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
+		..()
 
 /obj/machinery/camera/bullet_act(var/obj/item/projectile/P)
 	take_damage(P.get_structure_damage())
@@ -187,7 +191,7 @@
 		if(weld(W, user))
 			if(assembly)
 				assembly.dropInto(loc)
-				assembly.anchored = 1
+				assembly.anchored = TRUE
 				assembly.camera_name = c_tag
 				assembly.camera_network = english_list(network, "Exodus", ",", ",")
 				assembly.update_icon()
@@ -205,9 +209,9 @@
 			return
 
 	// OTHER
-	else if (can_use() && istype(W, /obj/item/weapon/paper) && isliving(user))
+	else if (can_use() && istype(W, /obj/item/paper) && isliving(user))
 		var/mob/living/U = user
-		var/obj/item/weapon/paper/X = W
+		var/obj/item/paper/X = W
 		var/itemname = X.name
 		var/info = X.info
 		to_chat(U, "You hold \a [itemname] up to the camera ...")
@@ -217,7 +221,7 @@
 			else to_chat(O, "<b><a href='byond://?src=\ref[O];track2=\ref[O];track=\ref[U];trackname=[U.name]'>[U]</a></b> holds \a [itemname] up to one of your cameras ...")
 			show_browser(O, text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", itemname, info), text("window=[]", itemname))
 
-	else if(W.damtype == BRUTE || W.damtype == BURN) //bashing cameras
+	else if (W.damtype == DAMAGE_BRUTE || W.damtype == DAMAGE_BURN) //bashing cameras
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if (W.force >= src.toughness)
 			user.do_attack_animation(src)
@@ -309,14 +313,14 @@
 
 /obj/machinery/camera/proc/triggerCameraAlarm(var/duration = 0)
 	alarm_on = 1
-	camera_alarm.triggerAlarm(loc, src, duration)
+	GLOB.camera_alarm.triggerAlarm(loc, src, duration)
 
 /obj/machinery/camera/proc/cancelCameraAlarm()
 	if(wires.IsIndexCut(CAMERA_WIRE_ALARM))
 		return
 
 	alarm_on = 0
-	camera_alarm.clearAlarm(loc, src)
+	GLOB.camera_alarm.clearAlarm(loc, src)
 
 //if false, then the camera is listed as DEACTIVATED and cannot be used
 /obj/machinery/camera/proc/can_use()
@@ -372,7 +376,7 @@
 
 	return null
 
-/obj/machinery/camera/proc/weld(var/obj/item/weapon/weldingtool/WT, var/mob/user)
+/obj/machinery/camera/proc/weld(var/obj/item/weldingtool/WT, var/mob/user)
 
 	if(busy)
 		return 0
@@ -381,7 +385,7 @@
 		to_chat(user, "<span class='notice'>You start to weld \the [src]..</span>")
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 		busy = 1
-		if(do_after(user, 100, src) && WT.isOn())
+		if(do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE) && WT.isOn())
 			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 			busy = 0
 			return 1

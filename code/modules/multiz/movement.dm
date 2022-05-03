@@ -77,13 +77,17 @@
 	if(species && species.can_overcome_gravity(src))
 		return 1
 	else
+		var/turf/T = loc
+		if(((T.height + T.get_fluid_depth()) >= FLUID_DEEP) || T.get_fluid_depth() >= FLUID_MAX_DEPTH)
+			return can_float()
+
 		for(var/atom/a in src.loc)
 			if(a.atom_flags & ATOM_FLAG_CLIMBABLE)
 				return 1
 
 		//Last check, list of items that could plausibly be used to climb but aren't climbable themselves
 		var/list/objects_to_stand_on = list(
-				/obj/item/weapon/stool,
+				/obj/item/stool,
 				/obj/structure/bed,
 			)
 		for(var/type in objects_to_stand_on)
@@ -169,6 +173,11 @@
 			if(!A.CanPass(src, location_override))
 				return FALSE
 
+		if(location_override.get_fluid_depth() >= FLUID_DEEP)
+			if(below == loc) //We are checking above,
+				if(!(below.get_fluid_depth() >= 0.95 * FLUID_MAX_DEPTH)) //No salmon skipping up a stream of falling water
+					return TRUE
+			return !can_float()
 
 	return TRUE
 
@@ -201,6 +210,10 @@
 	forceMove(landing)
 	if(locate(/obj/structure/stairs) in landing)
 		return 1
+	else if(landing.get_fluid_depth() >= FLUID_DEEP)
+		visible_message(SPAN_NOTICE("\The [src] falls into the water!"), SPAN_NOTICE("What a splash!"))
+		playsound(src,  'sound/effects/watersplash.ogg', 30, TRUE)
+		return 1
 	else
 		handle_fall_effect(landing)
 
@@ -223,7 +236,7 @@
 	if(w_class == ITEM_SIZE_TINY)
 		return 0
 	if(w_class == ITEM_SIZE_NO_CONTAINER)
-		return 100
+		return 150
 	return BASE_STORAGE_COST(w_class)
 
 /mob/living/carbon/human/handle_fall_effect(var/turf/landing)
@@ -233,15 +246,15 @@
 	..()
 	var/min_damage = 7
 	var/max_damage = 14
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_HEAD, armor_pen = 50)
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_CHEST, armor_pen = 50)
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_GROIN, armor_pen = 75)
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_L_LEG, armor_pen = 100)
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_R_LEG, armor_pen = 100)
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_L_FOOT, armor_pen = 100)
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_R_FOOT, armor_pen = 100)
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_L_ARM, armor_pen = 75)
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_R_ARM, armor_pen = 75)
+	apply_damage(rand(min_damage, max_damage), DAMAGE_BRUTE, BP_HEAD, armor_pen = 50)
+	apply_damage(rand(min_damage, max_damage), DAMAGE_BRUTE, BP_CHEST, armor_pen = 50)
+	apply_damage(rand(min_damage, max_damage), DAMAGE_BRUTE, BP_GROIN, armor_pen = 75)
+	apply_damage(rand(min_damage, max_damage), DAMAGE_BRUTE, BP_L_LEG, armor_pen = 100)
+	apply_damage(rand(min_damage, max_damage), DAMAGE_BRUTE, BP_R_LEG, armor_pen = 100)
+	apply_damage(rand(min_damage, max_damage), DAMAGE_BRUTE, BP_L_FOOT, armor_pen = 100)
+	apply_damage(rand(min_damage, max_damage), DAMAGE_BRUTE, BP_R_FOOT, armor_pen = 100)
+	apply_damage(rand(min_damage, max_damage), DAMAGE_BRUTE, BP_L_ARM, armor_pen = 75)
+	apply_damage(rand(min_damage, max_damage), DAMAGE_BRUTE, BP_R_ARM, armor_pen = 75)
 	weakened = max(weakened, 3)
 	if(prob(skill_fail_chance(SKILL_HAULING, 40, SKILL_EXPERT, 2)))
 		var/list/victims = list()
@@ -268,9 +281,82 @@
 			return FALSE
 
 		visible_message("<span class='notice'>[src] starts climbing onto \the [A]!</span>", "<span class='notice'>You start climbing onto \the [A]!</span>")
-		if(do_after(src, 50, A))
+		if(do_after(src, 5 SECONDS, A, DO_PUBLIC_UNIQUE))
 			visible_message("<span class='notice'>[src] climbs onto \the [A]!</span>", "<span class='notice'>You climb onto \the [A]!</span>")
 			src.Move(T)
 		else
 			visible_message("<span class='warning'>[src] gives up on trying to climb onto \the [A]!</span>", "<span class='warning'>You give up on trying to climb onto \the [A]!</span>")
 		return TRUE
+
+/atom/movable/proc/can_float()
+	return FALSE
+
+/mob/living/can_float()
+	return !is_physically_disabled()
+
+/mob/living/aquatic/can_float()
+	return TRUE
+
+/mob/living/carbon/human/can_float()
+	return species.can_float(src)
+
+/mob/living/silicon/can_float()
+	return FALSE //If they can fly otherwise it will be checked first
+
+/mob/living
+	var/atom/movable/z_observer/z_eye
+
+/atom/movable/z_observer
+	name = ""
+	simulated = FALSE
+	anchored = TRUE
+	mouse_opacity = FALSE
+	var/mob/living/owner
+
+/atom/movable/z_observer/Initialize(mapload, var/mob/living/user)
+	. = ..()
+	owner = user
+	follow()
+	GLOB.moved_event.register(owner, src, /atom/movable/z_observer/proc/follow)
+
+/atom/movable/z_observer/proc/follow()
+
+/atom/movable/z_observer/z_up/follow()
+	forceMove(get_step(owner, UP))
+	if(isturf(src.loc))
+		var/turf/T = src.loc
+		if(T.z_flags & ZM_MIMIC_BELOW)
+			return
+	owner.reset_view(null)
+	owner.z_eye = null
+	qdel(src)
+
+/atom/movable/z_observer/z_down/follow()
+	forceMove(get_step(owner, DOWN))
+	var/turf/T = get_turf(owner)
+	if(T && (T.z_flags & ZM_MIMIC_BELOW))
+		return
+	owner.reset_view(null)
+	owner.z_eye = null
+	qdel(src)
+
+/atom/movable/z_observer/Destroy()
+	GLOB.moved_event.unregister(owner, src, /atom/movable/z_observer/proc/follow)
+	owner = null
+	. = ..()
+
+/atom/movable/z_observer/can_fall()
+	return FALSE
+
+/atom/movable/z_observer/ex_act()
+	SHOULD_CALL_PARENT(FALSE)
+	return
+
+/atom/movable/z_observer/singularity_act()
+	return
+
+/atom/movable/z_observer/singularity_pull()
+	return
+
+/atom/movable/z_observer/singuloCanEat()
+	return

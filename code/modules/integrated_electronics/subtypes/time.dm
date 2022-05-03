@@ -64,7 +64,7 @@
 /obj/item/integrated_circuit/time/delay/custom/do_work()
 	var/delay_input = get_pin_data(IC_INPUT, 1)
 	if(delay_input && isnum(delay_input) )
-		var/new_delay = Clamp(delay_input ,1 ,36000) //An hour.
+		var/new_delay = clamp(delay_input ,1 ,36000) //An hour.
 		delay = new_delay
 
 	..()
@@ -119,7 +119,7 @@
 /obj/item/integrated_circuit/time/ticker/custom/on_data_written()
 	var/delay_input = get_pin_data(IC_INPUT, 2)
 	if(delay_input && isnum(delay_input) )
-		var/new_delay = Clamp(delay_input ,1 ,1 HOURS)
+		var/new_delay = clamp(delay_input ,1 ,1 HOURS)
 		delay = new_delay
 	..()
 
@@ -143,7 +143,7 @@
 
 /obj/item/integrated_circuit/time/clock
 	name = "integrated clock (Sol Common Time)"
-	desc = "Tells you what the time is, in Sol Common Time."				//round time
+	desc = "Tells you what the time is, in Sol Common Time."				// Round Time
 	icon_state = "clock"
 	inputs = list()
 	outputs = list(
@@ -158,7 +158,7 @@
 	power_draw_per_use = 2
 
 /obj/item/integrated_circuit/time/clock/proc/get_time()
-	return world.time
+	return (round_duration_in_ticks + 4 HOURS)
 
 /obj/item/integrated_circuit/time/clock/do_work()
 	var/current_time = get_time()
@@ -172,14 +172,14 @@
 
 /obj/item/integrated_circuit/time/clock/station
 	name = "integrated clock (Station Time)"
-	desc = "Tells you what the time is, in terms and adjusted for your local station or planet"
+	desc = "Tells you what the time is, in terms and adjusted for your local station or planet."		// Station Time
 
 /obj/item/integrated_circuit/time/clock/station/get_time()
-	return stationtime2text()
+	return station_time_in_ticks
 
 /obj/item/integrated_circuit/time/clock/bluespace
 	name = "integrated clock (Bluespace Absolute Time)"
-	desc = "Tells you what the time is, in Bluespace Absolute Time, unaffected by local time dilation or other phenomenon."
+	desc = "Tells you what the time is, in Bluespace Absolute Time, unaffected by local time dilation or other phenomenon."		// Server Local Time
 
 /obj/item/integrated_circuit/time/clock/bluespace/get_time()
-	return REALTIMEOFDAY
+	return world.timeofday

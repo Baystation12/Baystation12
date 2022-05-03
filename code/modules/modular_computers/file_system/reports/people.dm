@@ -10,7 +10,7 @@
 	var/datum/computer_file/data/text/report_file
 	if(attach_report)
 		var/list/user_access = list()
-		var/obj/item/weapon/card/id/I = user.GetIdCard()
+		var/obj/item/card/id/I = user.GetIdCard()
 		if(I)
 			user_access |= I.access
 		report_file = new
@@ -83,7 +83,7 @@
 		if(in_line && (GLOB.using_map.flags & MAP_HAS_RANK))
 			var/datum/computer_file/report/crew_record/CR = get_crewmember_record(entry["name"])
 			if(CR)
-				var/datum/mil_rank/rank_obj = mil_branches.get_rank(CR.get_branch(), CR.get_rank())
+				var/datum/mil_rank/rank_obj = GLOB.mil_branches.get_rank(CR.get_branch(), CR.get_rank())
 				milrank = (rank_obj ? rank_obj.name_short : "")
 		dat += format_output(entry["name"], in_line ? null : entry["rank"], milrank)
 	return jointext(dat, in_line ? ", " : "<br>")

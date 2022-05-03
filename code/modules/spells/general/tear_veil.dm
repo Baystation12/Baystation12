@@ -21,7 +21,7 @@
 	var/turf/T = get_turf(holder)
 	holder.visible_message("<span class='notice'>A strange portal rips open underneath \the [holder]!</span>")
 	var/obj/effect/gateway/hole = new(get_turf(T))
-	hole.density = 0
+	hole.density = FALSE
 	return list(hole)
 
 /spell/tear_veil/cast(var/list/targets, var/mob/holder, var/channel_count)
