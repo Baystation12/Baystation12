@@ -94,6 +94,7 @@
 	icon_state = "secgoggles"
 	off_state = "degoggles"
 	flash_protection = FLASH_PROTECTION_MODERATE
+	body_parts_covered = EYES
 
 /obj/item/clothing/glasses/hud/security/prot/prescription
 	prescription = 5
@@ -104,7 +105,7 @@
 	desc = "Glasses with a SECHUD and polarization toggle."
 	icon_state = "sunhud"
 	off_state = "sunhud_off"
-
+	body_parts_covered = null
 
 /obj/item/clothing/glasses/hud/security/prot/sunglasses/prescription
 	prescription = 5
@@ -115,6 +116,7 @@
 	desc = "Aviators with a SECHUD and polarization toggle."
 	icon_state = "sec_avi_on"
 	off_state = "sec_avi_off"
+	body_parts_covered = null
 
 /obj/item/clothing/glasses/hud/security/prot/aviators/prescription
 	prescription = 5
