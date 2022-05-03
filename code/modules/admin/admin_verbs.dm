@@ -68,7 +68,9 @@ var/global/list/admin_verbs_admin = list(
 	/client/proc/cmd_mod_say,
 	/datum/admins/proc/show_player_info,
 	/client/proc/free_slot_submap,
-	/client/proc/free_slot_crew,			//frees slot for chosen job,
+	/client/proc/close_slot_submap,
+	/client/proc/free_slot_crew,
+	/client/proc/close_slot_crew,			//frees slot for chosen job,
 	/client/proc/cmd_admin_change_custom_event,
 	/client/proc/cmd_admin_rejuvenate,
 	/client/proc/toggleghostwriters,
@@ -791,6 +793,26 @@ var/global/list/admin_verbs_mod = list(
 			job.make_position_available()
 			message_admins("An offsite job slot for [job_name] has been opened by [key_name_admin(usr)]")
 
+/client/proc/close_slot_submap()
+	set name = "Close Job Slot (Submap)"
+	set category = "Admin"
+	if(!holder) return
+
+	var/list/jobs = list()
+	for(var/thing in SSmapping.submaps)
+		var/datum/submap/submap = thing
+		for(var/otherthing in submap.jobs)
+			var/datum/job/submap/job = submap.jobs[otherthing]
+			if(job.is_position_available())
+				jobs["[job.title] - [submap.name]"] = job
+
+	var/job_name = input("Please select job slot to close", "Close job slot")  as null|anything in jobs
+	if(job_name)
+		var/datum/job/submap/job = jobs[job_name]
+		if(istype(job) && job.is_position_available())
+			job.make_position_unavailable()
+			log_and_message_admins("has closed an offsite job slot for [job_name]")
+
 /client/proc/free_slot_crew()
 	set name = "Free Job Slot (Crew)"
 	set category = "Admin"
@@ -807,6 +829,21 @@ var/global/list/admin_verbs_mod = list(
 		if(job && !job.is_position_available())
 			job.make_position_available()
 			message_admins("A job slot for [job_title] has been opened by [key_name_admin(usr)]")
+			return
+
+/client/proc/close_slot_crew()
+	set name = "Close Job Slot (Crew)"
+	set category = "Admin"
+	if(holder)
+		var/list/jobs = list()
+		for (var/datum/job/J in SSjobs.primary_job_datums)
+			if(J.is_position_available())
+				jobs[J.title] = J
+		var/job_title = input("Please select job slot to close", "Close job slot")  as null|anything in jobs
+		var/datum/job/job = jobs[job_title]
+		if(job && job.is_position_available())
+			job.make_position_unavailable()
+			log_and_message_admins("has closed a job slot for [job_title]")
 			return
 
 /client/proc/toggleghostwriters()
