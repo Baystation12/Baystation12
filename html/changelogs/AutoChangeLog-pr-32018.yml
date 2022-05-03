@@ -1,0 +1,4 @@
+author: Ryan
+delete-after: true
+changes:
+  - admin: Adds Close Job Slot button for Crew/Submap
