@@ -24,10 +24,10 @@
 	user.say("Dream Sign: Evil Sealing Talisman!") //TODO: never change this shit
 	var/obj/item/nullrod/nrod = locate() in M
 	if(nrod)
-		user.visible_message("<span class='danger'>\The [user] invokes \the [src] at [M], but they are unaffected.</span>", "<span class='danger'>You invoke \the [src] at [M], but they are unaffected.</span>")
+		user.visible_message(SPAN_DANGER("\The [user] invokes \the [src] at [M], but they are unaffected."), SPAN_DANGER("You invoke \the [src] at [M], but they are unaffected."))
 		return
 	else
-		user.visible_message("<span class='danger'>\The [user] invokes \the [src] at [M].</span>", "<span class='danger'>You invoke \the [src] at [M].</span>")
+		user.visible_message(SPAN_DANGER("\The [user] invokes \the [src] at [M]."), SPAN_DANGER("You invoke \the [src] at [M]."))
 
 	if(issilicon(M))
 		M.Weaken(15)
@@ -52,7 +52,7 @@
 	if(!proximity)
 		return
 	user.say("Ta'gh fara[pick("'","`")]qha fel d'amar det!")
-	user.visible_message("<span class='danger'>\The [user] invokes \the [src] at [target].</span>", "<span class='danger'>You invoke \the [src] at [target].</span>")
+	user.visible_message(SPAN_DANGER("\The [user] invokes \the [src] at [target]."), SPAN_DANGER("You invoke \the [src] at [target]."))
 	target.emp_act(1)
 	user.unEquip(src)
 	qdel(src)

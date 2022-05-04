@@ -1,19 +1,3 @@
-/obj/structure/cult
-	density = TRUE
-	anchored = TRUE
-	icon = 'icons/obj/cult.dmi'
-
-/obj/structure/cult/talisman
-	name = "Altar"
-	desc = "A bloodstained altar dedicated to Nar-Sie."
-	icon_state = "talismanaltar"
-
-
-/obj/structure/cult/forge
-	name = "Daemon forge"
-	desc = "A forge used in crafting the unholy weapons used by the armies of Nar-Sie."
-	icon_state = "forge"
-
 /obj/structure/cult/pylon
 	name = "pylon"
 	desc = "A floating crystal that hums with an unearthly energy."
@@ -26,35 +10,6 @@
 	health_max = 20
 	health_min_damage = 4
 	damage_hitsound = 'sound/effects/Glasshit.ogg'
-
-/obj/structure/cult/pylon/attackby(obj/item/W, mob/user)
-	if (istype(W, /obj/item/natural_weapon/cult_builder))
-		if (!health_damaged())
-			to_chat(user, SPAN_WARNING("\The [src] is fully repaired."))
-		else
-			user.visible_message(
-				SPAN_NOTICE("\The [user] mends some of the cracks on \the [src]."),
-				SPAN_NOTICE("You repair some of \the [src]'s damage.")
-			)
-			restore_health(5)
-		return
-
-	..()
-
-/obj/structure/cult/tome
-	name = "Desk"
-	desc = "A desk covered in arcane manuscripts and tomes in unknown languages. Looking at the text makes your skin crawl."
-	icon_state = "tomealtar"
-
-//sprites for this no longer exist	-Pete
-//(they were stolen from another game anyway)
-/*
-/obj/structure/cult/pillar
-	name = "Pillar"
-	desc = "This should not exist."
-	icon_state = "pillar"
-	icon = 'magic_pillar.dmi'
-*/
 
 /obj/effect/gateway
 	name = "gateway"
