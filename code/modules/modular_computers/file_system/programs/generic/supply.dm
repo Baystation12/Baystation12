@@ -47,7 +47,7 @@
 
 /datum/nano_module/supply/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()
-	var/is_admin = check_access(user, admin_access)
+	var/is_admin = emagged || check_access(user, admin_access)
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 	if(!LAZYLEN(category_names) || !LAZYLEN(category_contents) || current_security_level != security_state.current_security_level || emagged_memory != emagged )
 		generate_categories()
