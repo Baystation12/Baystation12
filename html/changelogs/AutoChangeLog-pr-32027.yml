@@ -1,0 +1,5 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - tweak: Lets descriptions be longer (128 char limit).
+  - tweak: Lets fluff augments (minus eye-ones) be customised.
