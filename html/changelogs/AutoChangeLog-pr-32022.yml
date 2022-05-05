@@ -1,0 +1,11 @@
+author: Rootoo807
+delete-after: true
+changes:
+  - tweak: Garden and Xenobotany seed vendors have been alphabetized. Garden and Xenobotany
+      seed vendors now have the same contents, besides random Xenobotany seeds.
+  - tweak: Missing low-grade tobacco seeds now exists. Low-grade tobacco stats (color,
+      nutrient consumption rate) have been tweaked slightly to be distinct from regular
+      tobacco.
+  - tweak: All grape variants can evolve into all other grape variants.
+  - bugfix: Green grapes are now green. White grapes now display as "white grape"
+      rather than "white grape seeds".
