@@ -1,0 +1,5 @@
+author: Rootoo807
+delete-after: true
+changes:
+  - rscadd: Lizards, chickens, and chicks can be picked up.
+  - tweak: Lisa and puppies are no longer invisible when held.
