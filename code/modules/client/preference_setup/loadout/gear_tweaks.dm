@@ -239,7 +239,7 @@ Custom Description
 /datum/gear_tweak/custom_desc/get_metadata(user, metadata, title)
 	if(valid_custom_desc)
 		return input(user, "Choose an item description.", "Character Preference", metadata) as null|anything in valid_custom_desc
-	return sanitize(input(user, "Choose the item's description. Leave it blank to use the default description.", "Item Description", metadata) as message|null, MAX_LNAME_LEN, extra = FALSE)
+	return sanitize(input(user, "Choose the item's description. Leave it blank to use the default description.", "Item Description", metadata) as message|null, MAX_DESC_LEN, extra = FALSE)
 
 /datum/gear_tweak/custom_desc/tweak_item(user, obj/item/I, metadata)
 	if(!metadata)
