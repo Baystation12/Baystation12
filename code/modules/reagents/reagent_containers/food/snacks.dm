@@ -3009,6 +3009,8 @@
 	desc = "A thin piece of raw meat."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "rawcutlet"
+	slice_path = /obj/item/reagent_containers/food/snacks/rawbacon
+	slices_num = 2
 	bitesize = 1
 	center_of_mass = "x=17;y=20"
 
@@ -3027,6 +3029,28 @@
 /obj/item/reagent_containers/food/snacks/cutlet/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
+
+/obj/item/reagent_containers/food/snacks/rawbacon
+	name = "raw bacon"
+	desc = "A raw, fatty strip of meat."
+	icon_state = "rawbacon"
+	bitesize = 1
+	center_of_mass = "x=16;y=15"
+
+/obj/item/reagent_containers/food/snacks/rawbacon/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 1)
+
+/obj/item/reagent_containers/food/snacks/bacon
+	name = "bacon"
+	desc = "A delicious, crispy strip of meat."
+	icon_state = "bacon"
+	bitesize = 2
+	center_of_mass = "x=16;y=15"
+
+/obj/item/reagent_containers/food/snacks/bacon/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 1)
 
 /obj/item/reagent_containers/food/snacks/rawmeatball
 	name = "raw meatball"
