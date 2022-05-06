@@ -1,6 +1,0 @@
-author: Ninetailed
-delete-after: true
-changes:
-  - rscdel: Most ghost roles (except pAI) no longer require a preference to be set
-  - rscadd: Yes/no confirmation prompt when accepting a ghost role
-  - tweak: pAI preference now Yes/No instead of High/Low/Never
