@@ -650,7 +650,7 @@ BLIND     // can't see anything
 			return
 		user.visible_message(SPAN_ITALIC("\The [user] attaches \the [cuffs] to \the [src]."), range = 2)
 		verbs |= /obj/item/clothing/shoes/proc/remove_cuffs
-		slowdown_per_slot[slot_shoes] += cuffs.elastic ? 10 : 15
+		slowdown_per_slot[slot_shoes] += cuffs.elastic ? 5 : 10
 		attached_cuffs = cuffs
 
 /obj/item/clothing/shoes/proc/remove_cuffs(var/mob/user)
@@ -672,7 +672,7 @@ BLIND     // can't see anything
 			return
 		user.visible_message(SPAN_ITALIC("\The [user] removes \the [attached_cuffs] from \the [src]."), range = 2)
 		attached_cuffs.add_fingerprint(user)
-		slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 10 : 15
+		slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 5 : 10
 		verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
 		attached_cuffs = null
 
@@ -725,7 +725,7 @@ BLIND     // can't see anything
 	if (running && attached_cuffs?.damage_health(1))
 		visible_message(SPAN_WARNING("\The [attached_cuffs] attached to \the [src] snap and fall away!"), range = 1)
 		verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
-		slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 10 : 15
+		slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 5 : 10
 		QDEL_NULL(attached_cuffs)
 	return
 
