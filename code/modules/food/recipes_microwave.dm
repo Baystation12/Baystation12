@@ -1363,6 +1363,11 @@
 	)
 	result = /obj/item/reagent_containers/food/snacks/cutlet
 
+/datum/recipe/bacon
+	items = list(
+		/obj/item/reagent_containers/food/snacks/rawbacon
+	)
+	result = /obj/item/reagent_containers/food/snacks/bacon
 
 /datum/recipe/fries
 	items = list(
