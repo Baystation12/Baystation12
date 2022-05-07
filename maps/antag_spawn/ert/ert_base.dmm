@@ -522,12 +522,9 @@
 /area/map_template/rescue_base/base)
 "bn" = (
 /obj/structure/table/rack,
-/obj/item/rig/ert/assetprotection,
-/obj/item/rig/ert/assetprotection,
-/obj/item/rig/ert/assetprotection,
-/obj/item/rig/ert/assetprotection,
-/obj/item/rig/ert/assetprotection,
-/obj/item/rig/ert/assetprotection,
+/obj/item/rig/combat,
+/obj/item/rig/combat,
+/obj/item/rig/combat,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
