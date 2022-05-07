@@ -2801,6 +2801,7 @@
 #include "code\modules\reagents\reagent_containers\food\fish.dm"
 #include "code\modules\reagents\reagent_containers\food\lunch.dm"
 #include "code\modules\reagents\reagent_containers\food\sandwich.dm"
+#include "code\modules\reagents\reagent_containers\food\servingbowl.dm"
 #include "code\modules\reagents\reagent_containers\food\shaker.dm"
 #include "code\modules\reagents\reagent_containers\food\snacks.dm"
 #include "code\modules\reagents\reagent_containers\food\sushi.dm"

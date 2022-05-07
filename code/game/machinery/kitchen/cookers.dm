@@ -240,7 +240,10 @@
 	if (tint && !istext(tint))
 		tint = get_random_colour(1)
 	result.color = tint
-	result.filling_color = BlendRGB(source.color || "#ffffff", result.color || "#ffffff", 0.5)
+	if (tint != null)
+		result.filling_color = BlendRGB(source.color || "#ffffff", tint, 0.5)
+	else
+		result.filling_color = (source.color || source.filling_color || "#ffffff")
 	if (result.type != /obj/item/reagent_containers/food/snacks/variable && istype(result, /obj/item/reagent_containers/food/snacks/variable))
 		var/image/I = image(result.icon, result, "[result.icon_state]_filling")
 		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
@@ -333,20 +336,21 @@
 			"type" = /obj/item/reagent_containers/food/snacks/variable,
 			"prefix" = "steamed",
 			"desc" = "steamed",
-			"color" = null,
+			"color" = "#ffffff",
 			"flags" = COOKER_STRIP_RAW
 		),
 		"Boiling" = list(
 			"type" = /obj/item/reagent_containers/food/snacks/variable,
 			"prefix" = "boiled",
 			"desc" = "boiled",
-			"color" = null,
+			"color" = "#ffffff",
 			"flags" = COOKER_STRIP_RAW
 		),
 		"Stewing" = list(
-			"type" = /obj/item/reagent_containers/food/snacks/variable,
+			"type" = /obj/item/reagent_containers/food/snacks/variable/stew,
 			"suffix" = "stew",
 			"desc" = "stewed",
+			"color" = null,
 			"flags" = COOKER_STRIP_RAW
 		),
 		"Searing" = list(
@@ -382,60 +386,70 @@
 			"type" = /obj/item/reagent_containers/food/snacks/variable/pizza,
 			"suffix" = "pizza",
 			"desc" = "made into a pizza",
+			"color" = null,
 			"flags" = COOKER_STRIP_RAW
 		),
 		"Bread" = list(
 			"type" = /obj/item/reagent_containers/food/snacks/variable/bread,
 			"suffix" = "bread",
 			"desc" = "made into bread",
+			"color" = null,
 			"flags" = COOKER_STRIP_RAW
 		),
 		"Pie" = list(
 			"type" = /obj/item/reagent_containers/food/snacks/variable/pie,
 			"suffix" = "pie",
 			"desc" = "made into a pie",
+			"color" = null,
 			"flags" = COOKER_STRIP_RAW
 		),
 		"Small Cake" = list(
 			"type" = /obj/item/reagent_containers/food/snacks/variable/cake,
 			"suffix" = "cake",
 			"desc" = "made into a cake",
+			"color" = null,
 			"flags" = COOKER_STRIP_RAW
 		),
 		"Turnover" = list(
 			"type" = /obj/item/reagent_containers/food/snacks/variable/pocket,
 			"suffix" = "turnover",
 			"desc" = "made into a turnover",
+			"color" = null,
 			"flags" = COOKER_STRIP_RAW
 		),
 		"Kebab" = list(
 			"type" = /obj/item/reagent_containers/food/snacks/variable/kebab,
 			"suffix" = "kebab",
 			"desc" = "made into a kebab",
+			"color" = null,
 			"flags" = COOKER_STRIP_RAW
 		),
 		"Waffles" = list(
 			"type" = /obj/item/reagent_containers/food/snacks/variable/waffles,
 			"suffix" = "waffles",
 			"desc" = "made into waffles",
+			"color" = null,
 			"flags" = COOKER_STRIP_RAW
 		),
 		"Pancakes" = list(
 			"type" = /obj/item/reagent_containers/food/snacks/variable/pancakes,
 			"suffix" = "pancakes",
 			"desc" = "made into pancakes",
+			"color" = null,
 			"flags" = COOKER_STRIP_RAW
 		),
 		"Cookie" = list(
 			"type" = /obj/item/reagent_containers/food/snacks/variable/cookie,
 			"suffix" = "cookie",
 			"desc" = "made into a cookie",
+			"color" = null,
 			"flags" = COOKER_STRIP_RAW
 		),
 		"Donut" = list(
 			"type" = /obj/item/reagent_containers/food/snacks/variable/donut,
 			"suffix" = "donut",
 			"desc" = "made into a donut",
+			"color" = null,
 			"flags" = COOKER_STRIP_RAW
 		)
 	)
@@ -477,6 +491,7 @@
 		result.icon_state = "cereal_box"
 		result.color = null
 		result.overlays += I
+		result.filling_color = BlendRGB(source.color || source.filling_color , "#fcaf32") //for cereal contents
 
 
 /obj/item/reagent_containers/food/snacks/variable
@@ -581,6 +596,11 @@
 	name = "shreds"
 	desc = "Gnarly."
 	icon_state = "shreds" //NB: there is no base icon state and that is intentional
+
+/obj/item/reagent_containers/food/snacks/variable/stew
+	name = "stew"
+	desc = "A hearty classic."
+	icon_state = "stew"
 
 
 /obj/item/material/chopping_board

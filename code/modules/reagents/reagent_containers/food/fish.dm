@@ -3,6 +3,7 @@
 	desc = "A fillet of fish."
 	icon_state = "fishfillet"
 	color = "#ff4040"
+	filling_color = "#ff4040"
 	center_of_mass = "x=17;y=13"
 	bitesize = 6
 	var/fish_type = "fish"
@@ -53,6 +54,7 @@
 /obj/item/reagent_containers/food/snacks/fish/space_carp
 	fish_type = "space carp"
 	color = "#e657aa"
+	filling_color = "#e657aa"
 
 
 /obj/item/reagent_containers/food/snacks/fish/space_carp/Initialize()
@@ -64,6 +66,7 @@
 /obj/item/reagent_containers/food/snacks/fish/space_pike
 	fish_type = "space pike"
 	color = "#f73fd6"
+	filling_color = "#f73fd6"
 
 
 /obj/item/reagent_containers/food/snacks/fish/space_pike/Initialize()
@@ -75,6 +78,7 @@
 /obj/item/reagent_containers/food/snacks/fish/space_shark
 	fish_type = "cosmoshark"
 	color = "#8925d4"
+	filling_color = "#8925d4"
 
 
 /obj/item/reagent_containers/food/snacks/fish/space_shark/Initialize()
@@ -88,21 +92,25 @@
 /obj/item/reagent_containers/food/snacks/fish/cod
 	fish_type = "cod"
 	color = "#ecc69e"
+	filling_color = "#ecc69e"
 
 
 /obj/item/reagent_containers/food/snacks/fish/hake
 	fish_type = "hake"
 	color = "#ecc69e"
+	filling_color = "#ecc69e"
 
 
 /obj/item/reagent_containers/food/snacks/fish/bream
 	fish_type = "bream"
 	color = "#ecc69e"
+	filling_color = "#ecc69e"
 
 
 /obj/item/reagent_containers/food/snacks/fish/salmon
 	fish_type = "salmon"
 	color = "#e69457"
+	filling_color = "#e69457"
 
 
 /obj/item/reagent_containers/food/snacks/fish/tuna
@@ -112,21 +120,25 @@
 /obj/item/reagent_containers/food/snacks/fish/mackerel
 	fish_type = "mackerel"
 	color = "#ecc69e"
+	filling_color = "#ecc69e"
 
 
 /obj/item/reagent_containers/food/snacks/fish/trout
 	fish_type = "trout"
 	color = "#e69457"
+	filling_color = "#e69457"
 
 
 /obj/item/reagent_containers/food/snacks/fish/tilapia
 	fish_type = "tilapia"
 	color = "#ecc69e"
+	filling_color = "#ecc69e"
 
 
 /obj/item/reagent_containers/food/snacks/fish/bass
 	fish_type = "bass"
 	color = "#ecc69e"
+	filling_color = "#ecc69e"
 
 
 /obj/item/reagent_containers/food/snacks/fish/shark
@@ -136,31 +148,37 @@
 /obj/item/reagent_containers/food/snacks/fish/squid
 	fish_type = "squid"
 	color = "#dbd6d0"
+	filling_color = "#dbd6d0"
 
 
 /obj/item/reagent_containers/food/snacks/fish/octopus
 	fish_type = "octopus"
 	color = "#dbd6d0"
+	filling_color = "#dbd6d0"
 
 
 /obj/item/reagent_containers/food/snacks/fish/eel
 	fish_type = "eel"
 	color = "#ecc69e"
+	filling_color = "#ecc69e"
 
 
 /obj/item/reagent_containers/food/snacks/fish/carp
 	fish_type = "carp"
 	color = "#e66457"
+	filling_color = "#e66457"
 
 
 /obj/item/reagent_containers/food/snacks/fish/catfish
 	fish_type = "catfish"
 	color = "#dbd6d0"
+	filling_color = "#dbd6d0"
 
 
 /obj/item/reagent_containers/food/snacks/fish/unknown
 	fish_type = "suspicious"
 	color = "#ecc69e"
+	filling_color = "#ecc69e"
 
 
 /obj/random/fish
