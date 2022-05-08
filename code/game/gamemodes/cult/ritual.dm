@@ -107,7 +107,7 @@
 		remove_blood_simple(cost * damage)
 		if(locate(/obj/effect/rune) in T)
 			return
-		var/obj/effect/rune/R = new rune(T, get_rune_color(), get_blood_name())
+		var/obj/effect/rune/R = new rune(T)
 		var/area/A = get_area(R)
 		log_and_message_admins("created \an [R.cultname] rune at \the [A.name].")
 		R.add_fingerprint(src)

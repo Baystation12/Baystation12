@@ -1,22 +1,54 @@
+//Cultic runes
 /obj/effect/rune
-	name = "rune"
-	desc = "A strange collection of symbols drawn in blood."
-	anchored = TRUE
+	name = "cultic rune"
+	desc = "A strange collage of symbols."
+
 	icon = 'icons/effects/uristrunes.dmi'
 	icon_state = "blank"
-	unacidable = TRUE
 	layer = RUNE_LAYER
-
-	var/blood
-	var/bcolor
 	var/strokes = 2 // IF YOU EVER SET THIS TO MORE THAN TEN, EVERYTHING WILL BREAK
-	var/cultname = ""
 
-/obj/effect/rune/New(var/loc, var/blcolor = "#c80000", var/nblood = "blood")
+	unacidable = TRUE
+	anchored = TRUE
+
+	var/blood_name
+	var/cultname = "mundane"
+
+	var/cast_time = 0 SECONDS
+	var/mob/living/caster //Who is leading the casting
+
+	var/required_acolytes = 0 //How many assistants need to be surrounding the rune
+	var/acolyte_range = 8 //How far can the acolytes be
+	var/list/mob/living/acolytes
+	var/acolytes_free = FALSE //Can acolytes freely move during the spell
+
+
+	var/list/mob/living/cultists //both acolytes and the caster
+
+	var/active = FALSE //Determines whether people are reciting things right now
+	var/list/active_chants = list(
+		"By the will of the Dark One!",
+		"Through the Dark One's power!",
+		"Under the Geometer's truth!",
+		"Yes, yes, yes!"
+	)
+	var/last_active_chant
+
+	var/incantation_chant = "I cast such!" //The final chant
+
+/obj/effect/rune/New(loc, mob/writer) //Override only for identifying species blood information
+	if(writer && istype(writer, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = writer
+		color = H.blood_color
+		blood_name = H.get_blood_name()
+	else
+		color = COLOR_BLOOD_HUMAN
+		blood_name = "blood"
 	..()
-	bcolor = blcolor
-	blood = nblood
-	update_icon()
+
+/obj/effect/rune/Initialize()
+	..()
+	update_icon() //Updates color & pattern
 	set_extension(src, /datum/extension/turf_hand, 10)
 
 /obj/effect/rune/on_update_icon()
@@ -36,62 +68,163 @@
 			var/image/t = image('icons/effects/uristrunes.dmi', "rune-[j]")
 			overlays += t
 		GLOB.cult.rune_strokes[type] = f.Copy()
-	color = bcolor
-	desc = "A strange collection of symbols drawn in [blood]."
 
 /obj/effect/rune/examine(mob/user)
 	. = ..()
+	to_chat(user, SPAN_WARNING("It's drawn in [blood_name]."))
+
 	if(iscultist(user))
-		to_chat(user, "This is \a [cultname] rune.")
+		to_chat(user, SPAN_INFO("This is <b>\a [cultname] rune</b> of the Dark One's scripture. Using harm intent will erase the rune."))
 
-/obj/effect/rune/attackby(var/obj/item/I, var/mob/living/user)
-	if(istype(I, /obj/item/book/tome) && iscultist(user))
-		user.visible_message(SPAN_NOTICE("[user] rubs \the [src] with \the [I], and \the [src] is absorbed by it."), "You retrace your steps, carefully undoing the lines of \the [src].")
+/obj/effect/rune/Process()
+	..()
+	if(active && prob(25) && last_active_chant > world.time - 5)
+		for(var/mob/living/M in acolytes)
+			var/chant = pick(active_chants)
+			speak_incantation(M, chant)
+		last_active_chant = world.time
+
+//Null rod effect
+/obj/effect/rune/attackby(obj/item/I, mob/living/user)
+	if(istype(I, /obj/item/nullrod))
+		user.visible_message(
+			SPAN_NOTICE("[user] hits \the [src] with \the [I], and it disappears, fizzling."),
+			SPAN_NOTICE("You disrupt the vile magic with the deadening field of \the [I]."),
+			"You hear a fizzle."
+		)
 		qdel(src)
 		return
-	else if(istype(I, /obj/item/nullrod))
-		user.visible_message(SPAN_NOTICE("[user] hits \the [src] with \the [I], and it disappears, fizzling."), SPAN_NOTICE("You disrupt the vile magic with the deadening field of \the [I]."), "You hear a fizzle.")
-		qdel(src)
-		return
+	..()
 
-/obj/effect/rune/attack_hand(var/mob/living/user)
-	if(!iscultist(user))
-		to_chat(user, "You can't mouth the arcane scratchings without fumbling over them.")
-		return
-	if(istype(user.wear_mask, /obj/item/clothing/mask/muzzle) || user.silent)
-		to_chat(user, "You are unable to speak the words of the rune.")
-		return
-	if(GLOB.cult.powerless)
-		to_chat(user, "You read the words, but nothing happens.")
-		return fizzle(user)
-	cast(user)
+//Casting or erasing
+/obj/effect/rune/attack_hand(mob/living/user)
+	if(iscultist(user))
+		to_chat(user, SPAN_NOTICE("You begin to manipulate \the [src]."))
 
-/obj/effect/rune/attack_ai(var/mob/living/user) // Cult borgs!
-	if(Adjacent(user))
-		attack_hand(user)
+		if(user.a_intent == I_HURT) //Erase it by hand with a progress bar
+			user.visible_message(
+				SPAN_WARNING("<b>[user]</b> begins doing <b>something</b> with \the [src]."),
+				SPAN_NOTICE("You begin slowly erasing \the [src] with your bare hands.")
+			)
 
-/obj/effect/rune/proc/cast(var/mob/living/user)
-	fizzle(user)
+			if(do_after(user, 4 SECONDS, src, DO_DEFAULT))
+				user.visible_message(
+					SPAN_WARNING("[user] retraces \the [src] with \his fingertips, and it disappears quietly."),
+					SPAN_NOTICE("You finish erasing \the [src] with your bare hands.")
+				)
 
-/obj/effect/rune/proc/get_cultists()
+				qdel(src)
+			return
+
+		var/success = attempt_cast(user)
+		if(!success)
+			fizzle(user)
+
+	else
+		to_chat(user, SPAN_WARNING("You can't even begin to understand these symbols."))
+
+/obj/effect/rune/proc/attempt_cast(mob/living/user) //THAT'S A LOT OF IF()
+	if(user.silent) //No voice?
+		to_chat(user, SPAN_WARNING("You try to recite the incantations, however you can't."))
+		return FALSE
+
+	if(istype(user, /mob/living/carbon/human)) //Prevent runtime with the theoretical impossiblity that a non-human mob attempted casting
+		var/mob/living/carbon/human/H = user
+
+		if(istype(H.wear_mask, /obj/item/clothing/mask/muzzle))
+			to_chat(user, SPAN_WARNING("You try to recite the incantations, however your mouth is muzzled."))
+			return FALSE
+
+	caster = user
+	acolytes = get_acolytes()
+
+	if(length(acolytes) < required_acolytes)
+		to_chat(user, SPAN_WARNING("It takes <b>[required_acolytes - length(acolytes)] more acolytes</b> to recite the incantations."))
+		return FALSE
+
+	active = TRUE
+
+	if(cast_time) //If there is cast time, force them to wait
+		visible_message(
+			SPAN_WARNING("<b>[caster]</b> begins doing <b>something</b> with \the [src]."),
+			SPAN_NOTICE("You begin slowly erasing \the [src] with your bare hands."),
+			"You hear chanting."
+		)
+
+		for(var/mob/living/cultist in cultists)
+			if(!acolytes_free)
+				if(do_after(cultist, cast_time, src, DO_DEFAULT))
+					cast()
+					return TRUE
+				else
+					to_chat(cultist, SPAN_WARNING("You and the other cultists must stand still to activate \the [src]!"))
+					return FALSE
+			else
+				break
+
+		if(do_after(user, cast_time, src, DO_DEFAULT))
+			cast()
+			return TRUE
+		else
+			visible_message(
+				SPAN_WARNING("<b>[caster]</b> chants and \the [src] activates!"),
+				SPAN_NOTICE("You begin slowly erasing \the [src] with your bare hands."),
+				"You hear chanting stop."
+			)
+			return FALSE
+
+	cast()
+	return TRUE
+
+
+/obj/effect/rune/proc/cast()
+	speak_incantation(caster, incantation_chant)
+	caster = null
+	acolytes = null
+	cultists = null
+
+/obj/effect/rune/proc/get_acolytes()
 	. = list()
-	for(var/mob/living/M in range(1))
+	for(var/mob/living/M in range(acolyte_range))
 		if(iscultist(M))
-			. += M
+			cultists += M
+			if(!M == caster) //Caster not included
+				. += M
 
 /obj/effect/rune/proc/fizzle(var/mob/living/user)
-	visible_message(SPAN_WARNING("The markings pulse with a small burst of light, then fall dark."), "You hear a fizzle.")
+	visible_message(
+		SPAN_WARNING("The markings pulse with a small burst of light, then fall dark."),
+		SPAN_WARNING("You hear a fizzle.")
+	)
 
 //Makes the speech a proc so all verbal components can be easily manipulated as a whole, or individually easily
-/obj/effect/rune/proc/speak_incantation(var/mob/living/user, var/incantation)
+/obj/effect/rune/proc/speak_incantation(mob/living/user, incantation)
 	var/datum/language/L = all_languages[LANGUAGE_CULT]
 	if(incantation && (L in user.languages))
 		user.say(incantation, L)
 
+//Any rune that requires a target ON the rune
+/obj/effect/rune/targeted
+	var/targeted = FALSE
+	var/mob/target
+
+/obj/effect/rune/targeted/attempt_cast(mob/living/user)
+	target = get_target()
+
+	if(targeted && !target)
+		to_chat(user, SPAN_WARNING("There is no victim on \the [src]."))
+		return FALSE
+	..()
+
+/obj/effect/rune/targeted/proc/get_target()
+	for(var/mob/living/carbon/human/H in loc) //Just get the first one
+		target = H
+		break
+
 /* Tier 1 runes below */
 
 /obj/effect/rune/convert
-	cultname = "convert"
+	cultname = "enlightenment"
 	var/spamcheck = 0
 
 /obj/effect/rune/convert/cast(var/mob/living/user)
@@ -223,8 +356,8 @@
 	cultname = "summon tome"
 
 /obj/effect/rune/tome/cast(var/mob/living/user)
+	..()
 	new /obj/item/book/tome(get_turf(src))
-	speak_incantation(user, "N[pick("'","`")]ath reth sh'yro eth d'raggathnor!")
 	visible_message(SPAN_NOTICE("\The [src] disappears with a flash of red light, and in its place now a book lies."), "You hear a pop.")
 	qdel(src)
 
@@ -237,7 +370,7 @@
 	QDEL_NULL(wall)
 	return ..()
 
-/obj/effect/rune/wall/cast(var/mob/living/user)
+/obj/effect/rune/wall/cast(mob/living/user)
 	var/t
 	if(wall)
 		if(!wall.health_damaged())
@@ -246,7 +379,7 @@
 		t = wall.get_damage_value()
 		wall.restore_health()
 	else
-		wall = new /obj/effect/cultwall(get_turf(src), bcolor)
+		wall = new /obj/effect/cultwall(get_turf(src), color)
 		wall.rune = src
 		t = wall.get_current_health()
 	user.remove_blood_simple(t / 50)
@@ -412,7 +545,7 @@
 	var/mob/living/victim
 
 /obj/effect/rune/offering/cast(var/mob/living/user)
-	var/list/mob/living/cultists = get_cultists()
+	get_acolytes()
 	if(victim)
 		to_chat(user, SPAN_WARNING("You are already sarcificing \the [victim] on this rune."))
 		return
@@ -431,22 +564,22 @@
 		M.say("Barhah hra zar[pick("'","`")]garis!")
 
 	while(victim && victim.loc == T && victim.stat != DEAD)
-		var/list/mob/living/casters = get_cultists()
-		if(casters.len < 3)
+		get_acolytes()
+		if(cultists.len < 3)
 			break
 		//T.turf_animation('icons/effects/effects.dmi', "rune_sac")
 		victim.fire_stacks = max(2, victim.fire_stacks)
 		victim.IgniteMob()
-		victim.take_organ_damage(2 + casters.len, 2 + casters.len) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
+		victim.take_organ_damage(2 + cultists.len, 2 + cultists.len) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
 		if(ishuman(victim))
 			var/mob/living/carbon/human/H = victim
 			if(H.is_asystole())
-				H.adjustBrainLoss(2 + casters.len)
+				H.adjustBrainLoss(2 + cultists.len)
 		sleep(40)
 	if(victim && victim.loc == T && victim.stat == DEAD)
 		GLOB.cult.add_cultiness(CULTINESS_PER_SACRIFICE)
 		var/obj/item/device/soulstone/full/F = new(get_turf(src))
-		for(var/mob/M in cultists | get_cultists())
+		for(var/mob/M in cultists)
 			to_chat(M, SPAN_WARNING("The Geometer of Blood accepts this offering."))
 		visible_message(SPAN_NOTICE("\The [F] appears over \the [src]."))
 		GLOB.cult.sacrificed += victim.mind
@@ -601,7 +734,6 @@
 	cultname = "mass defile"
 
 /obj/effect/rune/massdefile/cast(var/mob/living/user)
-	var/list/mob/living/cultists = get_cultists()
 	if(cultists.len < 3)
 		to_chat(user, SPAN_WARNING("You need three cultists around this rune to make it work."))
 		return fizzle(user)
@@ -717,7 +849,6 @@
 	strokes = 4
 
 /obj/effect/rune/blood_boil/cast(var/mob/living/user)
-	var/list/mob/living/cultists = get_cultists()
 	if(cultists.len < 3)
 		return fizzle()
 
@@ -727,7 +858,7 @@
 	var/list/mob/living/previous = list()
 	var/list/mob/living/current = list()
 	while(cultists.len >= 3)
-		cultists = get_cultists()
+		cultists = get_acolytes()
 		for(var/mob/living/carbon/M in viewers(src))
 			if(iscultist(M))
 				continue
@@ -760,7 +891,6 @@
 	if(the_end_comes)
 		to_chat(user, SPAN_OCCULT("You are already summoning! Be patient!"))
 		return
-	var/list/mob/living/cultists = get_cultists()
 	if(cultists.len < 5)
 		return fizzle()
 	for(var/mob/living/M in cultists)
@@ -771,7 +901,7 @@
 	var/area/A = get_area(src)
 	command_announcement.Announce("High levels of bluespace interference detected at \the [A]. Suspected wormhole forming. Investigate it immediately.")
 	while(cultists.len > 4 || the_end_comes)
-		cultists = get_cultists()
+		cultists = get_acolytes()
 		if(cultists.len > 8)
 			++the_end_comes
 		if(cultists.len > 4)
