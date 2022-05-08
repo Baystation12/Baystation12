@@ -205,7 +205,7 @@ var/global/list/mining_floors = list()
 				if(prob(50))
 					artifact_debris()
 
-		if(do_after(user, P.digspeed, src, DO_PUBLIC_UNIQUE))
+		if(do_after(user, P.digspeed, src,  DO_DEFAULT | DO_PUBLIC_PROGRESS))
 			if(finds && finds.len)
 				var/datum/find/F = finds[1]
 				if(newDepth == F.excavation_required) // When the pick hits that edge just right, you extract your find perfectly, it's never confined in a rock
@@ -486,7 +486,7 @@ var/global/list/mining_floors = list()
 		to_chat(user, "<span class='warning'>You start digging.</span>")
 		playsound(user.loc, 'sound/effects/rustle1.ogg', 50, 1)
 
-		if(!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE)) return
+		if(!do_after(user, 4 SECONDS, src,  DO_DEFAULT | DO_PUBLIC_PROGRESS)) return
 
 		to_chat(user, "<span class='notice'>You dug a hole.</span>")
 		gets_dug()
