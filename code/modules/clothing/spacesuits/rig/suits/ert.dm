@@ -145,15 +145,11 @@
 		rad = ARMOR_RAD_SHIELDED
 		)
 
-	chest_type = /obj/item/clothing/suit/space/rig/ert
-	helm_type = /obj/item/clothing/head/helmet/space/rig/ert
-	boot_type = /obj/item/clothing/shoes/magboots/rig/ert
-	glove_type = /obj/item/clothing/gloves/rig/ert
-
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/grenade_launcher,
 		/obj/item/rig_module/mounted/egun,
-		/obj/item/rig_module/cooling_unit
+		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/datajack
 		)

@@ -520,16 +520,6 @@
 	icon_state = "dark"
 	},
 /area/map_template/rescue_base/base)
-"bn" = (
-/obj/structure/table/rack,
-/obj/item/rig/combat,
-/obj/item/rig/combat,
-/obj/item/rig/combat,
-/turf/unsimulated/floor{
-	dir = 1;
-	icon_state = "vault"
-	},
-/area/map_template/rescue_base/base)
 "bo" = (
 /obj/structure/table/rack,
 /obj/item/clothing/head/helmet/ballistic,
@@ -4740,7 +4730,7 @@ ac
 ad
 aT
 bd
-bn
+ad
 bD
 bL
 ad
