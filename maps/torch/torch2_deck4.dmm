@@ -476,6 +476,10 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/hallway/primary/fourthdeck/aft)
+"bK" = (
+/obj/effect/shuttle_landmark/icgnv_hound/dock,
+/turf/space,
+/area/space)
 "bM" = (
 /obj/effect/shuttle_landmark/merchant/out,
 /turf/space,
@@ -40682,7 +40686,7 @@ aa
 aa
 aa
 aa
-aa
+bK
 WB
 TX
 UT
