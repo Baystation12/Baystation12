@@ -1,4 +1,9 @@
+
+// El primero es double buns por que es obligatorio que hispania tenga contenido
+
 /datum/sprite_accessory/hair/hispania
+	name = "Double Buns"
+	icon_state = "hair_buns"
 	icon = 'icons/hispania/mob/human_races/species/human/hair.dmi'
 
 /datum/sprite_accessory/hair/hispania/amanitashort
@@ -8,10 +13,6 @@
 /datum/sprite_accessory/hair/hispania/bigbow
 	name = "Big Bow"
 	icon_state = "hair_big_bow"
-
-/datum/sprite_accessory/hair/hispania/shortbuns
-	name = "Double Buns"
-	icon_state = "hair_buns"
 
 /datum/sprite_accessory/hair/hispania/longbuns
 	name = "Double Buns Long"
@@ -41,14 +42,6 @@
 	name = "Bangs Undercut"
 	icon_state = "hair_bangs_undercut"
 
-/datum/sprite_accessory/hair/hispania/himeponytail
-	name = "Himecut Ponytail"
-	icon_state = "hair_himecut_ponytail"
-
-/datum/sprite_accessory/hair/hispania/himelong
-	name = "Himecut Long"
-	icon_state = "hair_himecut_long"
-
 /datum/sprite_accessory/hair/hispania/himelongponytail
 	name = "Himecut Long Ponytail"
 	icon_state = "hair_himecut_long_ponytail"
@@ -74,11 +67,11 @@
 	icon_state = "hair_80_ponytail_alt"
 
 /datum/sprite_accessory/hair/hispania/himecut_alt
-	name = "Himecut Alt"
-	icon_state = "himecut_alt"
+	name = "Himecut Alt 2"
+	icon_state = "himecut_alt_2"
 
 /datum/sprite_accessory/hair/hispania/messy
-	name = "Messy"
+	name = "Messy Hair 3"
 	icon_state = "messy"
 
 /datum/sprite_accessory/hair/hispania/ahoge
