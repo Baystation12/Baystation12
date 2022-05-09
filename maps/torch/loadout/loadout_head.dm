@@ -63,8 +63,9 @@
 /datum/gear/head/beret
 	allowed_branches = CIVILIAN_BRANCHES
 
-/datum/gear/mask/bandana
-	allowed_branches = CIVILIAN_BRANCHES
+/datum/gear/sterile_mask
+	display_name = "sterile mask"
+	path = /obj/item/clothing/mask/surgical
 
 /datum/gear/head/bandana
 	allowed_branches = CIVILIAN_BRANCHES
