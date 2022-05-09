@@ -1,0 +1,8 @@
+
+/ / / IMPORTANTE / / /
+
+Todo codigo hecho por y para hispania tiene que ser escrito en esta carpeta,
+el no hacerlo hara la busqueda de codigo unico de hispania mucho mas complicada
+y podra generar conflictos con baystation12 oficial.
+
+Esta carpeta debe ser clasifica exactamente como la carpeta Baystation12/code para la facil organizacion de esta.
