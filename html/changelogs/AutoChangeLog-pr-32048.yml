@@ -1,4 +1,0 @@
-author: Ryan180602
-delete-after: true
-changes:
-  - tweak: Increases max_desc_len to 256 chars. Custom descriptions are longer.
