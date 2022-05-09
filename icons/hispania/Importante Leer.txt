@@ -1,0 +1,8 @@
+
+/ / / IMPORTANTE / / /
+
+Todo sprite hecho por y para hispania tiene que ser movido a esta carpeta,
+el no hacerlo hara la busqueda de sprites e imagenes unicas de hispania mucho mas complicada
+y podra generar conflictos con baystation12 oficial.
+
+Esta carpeta debe ser clasifica exactamente como la carpeta Baystation12/icons para la facil organizacion de esta.
