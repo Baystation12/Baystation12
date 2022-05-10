@@ -1,0 +1,5 @@
+author: CrimsonShrike
+delete-after: true
+changes:
+  - rscadd: Exosuit gravity catapult is now a bit faster and has new effects to make
+      it clearer.
