@@ -25,6 +25,9 @@ GLOBAL_VAR_CONST(PREF_SHORTHAND, "Shorthand")
 GLOBAL_VAR_CONST(PREF_NEVER, "Never")
 GLOBAL_VAR_CONST(PREF_NON_ANTAG, "Non-Antag Only")
 GLOBAL_VAR_CONST(PREF_ALWAYS, "Always")
+GLOBAL_VAR_CONST(PREF_SMALL, "Small")
+GLOBAL_VAR_CONST(PREF_MEDIUM, "Medium")
+GLOBAL_VAR_CONST(PREF_LARGE, "Large")
 
 var/global/list/_client_preferences
 var/global/list/_client_preferences_by_key
@@ -127,6 +130,20 @@ var/global/list/_client_preferences_by_type
 	description = "Ghost radio"
 	key = "CHAT_GHOSTRADIO"
 	options = list(GLOB.PREF_ALL_CHATTER, GLOB.PREF_NEARBY)
+
+/datum/client_preference/preview_scale
+	description = "Options Preview Scale"
+	key = "PREVIEW_SCALE"
+	options = list(GLOB.PREF_MEDIUM, GLOB.PREF_LARGE, GLOB.PREF_SMALL)
+
+/datum/client_preference/preview_scale/changed(mob/mob, val)
+	var/datum/preferences/prefs = mob.client?.prefs
+	if (!prefs)
+		return
+	prefs.update_preview_icon(TRUE)
+	if (!prefs.popup)
+		return
+	prefs.update_setup_window(usr)
 
 /datum/client_preference/language_display
 	description = "Display Language Names"
