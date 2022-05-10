@@ -177,7 +177,7 @@
 	selection_color = "#5b4d20"
 	economic_power = 6
 	alt_titles = list(
-		"Mechsuit Technician")
+		"Mechsuit Technician","Biomechanical Engineer","Mechatronic Engineer")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/roboticist
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/engineering/roboticistec,
@@ -207,7 +207,9 @@
 	skill_points = 20
 
 	access = list(
-		access_robotics, access_engine, access_solgov_crew, access_network, access_radio_eng
+		access_robotics, access_engine, access_solgov_crew, access_network, access_radio_eng, access_engine_equip,
+		access_maint_tunnels, access_external_airlocks, access_emergency_storage, access_eva, access_janitor,
+		access_construction, access_hangar, access_tech_storage
 	)
 
 /datum/job/roboticist/get_description_blurb()
