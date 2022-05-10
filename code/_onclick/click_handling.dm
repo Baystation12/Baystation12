@@ -7,12 +7,11 @@ if(!click_handlers) { \
 	click_handlers += new/datum/click_handler/default(src) \
 }
 
-/mob
-	var/list/click_handlers
+/mob/var/list/click_handlers
 
 /mob/Destroy()
 	QDEL_NULL_LIST(click_handlers)
-	. = ..()
+	return ..()
 
 var/global/const/CLICK_HANDLER_NONE                 = EMPTY_BITFIELD
 var/global/const/CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT = FLAG(0)
