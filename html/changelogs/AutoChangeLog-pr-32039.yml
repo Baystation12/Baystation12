@@ -1,0 +1,8 @@
+author: Ryan180602, Azlanonpc
+delete-after: true
+changes:
+  - rscadd: Adds admin-spawn Fleet rig.
+  - rscdel: Removes Asset Protection rig.
+  - tweak: Deathsquads now use the generic combat rig.
+  - maptweak: Asset Protection rig from ERT base have been removed entirely. (Rack
+      has a wall in it's place, now.)
