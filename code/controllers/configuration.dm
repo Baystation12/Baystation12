@@ -90,6 +90,9 @@
 	/// Length of time before round start when autogamemode vote is called (in seconds, default 100).
 	var/static/vote_autogamemode_timeleft = 100
 
+	/// Length of time before round start (in seconds)
+	var/static/pre_game_time = 180
+
 	/// vote does not default to nochange/norestart (tbi)
 	var/static/vote_no_default = FALSE
 
@@ -569,6 +572,8 @@
 					log_misc("Invalid vote_autotransfer_interval: [value]")
 			if ("vote_autogamemode_timeleft")
 				vote_autogamemode_timeleft = text2num(value)
+			if ("pre_game_time")
+				pre_game_time = text2num(value)
 			if ("ert_admin_only")
 				ert_admin_call_only = TRUE
 			if ("respawn_delay")

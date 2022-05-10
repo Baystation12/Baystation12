@@ -6,7 +6,7 @@ SUBSYSTEM_DEF(ticker)
 	flags = SS_NO_TICK_CHECK | SS_KEEP_TIMING
 	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
 
-	var/pregame_timeleft = 3 MINUTES
+	var/pregame_timeleft
 	var/start_ASAP = FALSE          //the game will start as soon as possible, bypassing all pre-game nonsense
 	var/list/gamemode_vote_results  //Will be a list, in order of preference, of form list(config_tag = number of votes).
 	var/bypass_gamemode_vote = 0    //Intended for use with admin tools. Will avoid voting and ignore any results.
@@ -44,6 +44,7 @@ SUBSYSTEM_DEF(ticker)
 
 
 /datum/controller/subsystem/ticker/Initialize(start_uptime)
+	pregame_timeleft = config.pre_game_time SECONDS
 	build_mode_cache()
 	to_world("<span class='info'><B>Welcome to the pre-game lobby!</B></span>")
 	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
@@ -113,22 +114,38 @@ SUBSYSTEM_DEF(ticker)
 		return
 
 	if(!bypass_gamemode_vote && (pregame_timeleft <= config.vote_autogamemode_timeleft SECONDS) && !gamemode_vote_results)
+#ifndef UNIT_TEST
+		var/list/lobby = lobby_players()
+		if (!length(lobby))
+			pregame_timeleft = config.vote_period + 60 SECONDS
+			return
+#endif
 		if(!SSvote.active_vote)
 			SSvote.initiate_vote(/datum/vote/gamemode, automatic = 1)
 
 /datum/controller/subsystem/ticker/proc/setup_tick()
+#ifndef UNIT_TEST
+	var/list/ready = ready_players()
+	if (!length(ready))
+		pregame_timeleft = config.vote_period + 30 SECONDS
+		gamemode_vote_results = null
+		Master.SetRunLevel(RUNLEVEL_LOBBY)
+		to_world("<b>No ready players.</b> Returning to pre-game lobby.")
+		return
+#endif
+
 	switch(choose_gamemode())
 		if(CHOOSE_GAMEMODE_SILENT_REDO)
 			log_debug("Silently re-rolling game mode...")
 			return
 		if(CHOOSE_GAMEMODE_RETRY)
-			pregame_timeleft = 60 SECONDS
+			pregame_timeleft = 30 SECONDS
 			Master.SetRunLevel(RUNLEVEL_LOBBY)
 			to_world("<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby to try again.")
 			return
 		if(CHOOSE_GAMEMODE_REVOTE)
 			revotes_allowed--
-			pregame_timeleft = initial(pregame_timeleft)
+			pregame_timeleft = config.vote_period + 30 SECONDS
 			gamemode_vote_results = null
 			Master.SetRunLevel(RUNLEVEL_LOBBY)
 			to_world("<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby for a revote.")
