@@ -1,6 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: Adjusted aft-end of the event shuttle so it can dock with the Torch.
-  - admin: Added toggleable blastdoors to event shuttle windows.
-  - admin: Removed the need for hydrogen on the event shuttle.
