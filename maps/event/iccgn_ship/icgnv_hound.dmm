@@ -49,10 +49,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icgnv_hound)
-"ai" = (
-/obj/effect/shuttle_landmark/icgnv_hound/start,
-/turf/template_noop,
-/area/space)
 "aj" = (
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
@@ -288,6 +284,14 @@
 /obj/effect/wallframe_spawn/reinforced/polarized/full{
 	color = "#4c535b"
 	},
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "charon_shutters";
+	name = "Protective Shutters";
+	opacity = 0
+	},
 /turf/simulated/floor/plating,
 /area/map_template/icgnv_hound)
 "aN" = (
@@ -329,7 +333,7 @@
 /obj/effect/paint/iccgn,
 /obj/structure/sign/warning/caution,
 /turf/simulated/wall/r_titanium,
-/area/template_noop)
+/area/map_template/icgnv_hound)
 "aT" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 1;
@@ -502,8 +506,10 @@
 	dir = 8;
 	icon_state = "techfloor_edges"
 	},
-/obj/effect/floor_decal/corner_techfloor_grid,
-/obj/effect/floor_decal/techfloor/corner,
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "icgnv_hound_shuttle_pump"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
 "bk" = (
@@ -720,15 +726,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
 "bE" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	dir = 1;
-	id_tag = "icgnv_hound_shuttle_pump_out_external"
-	},
-/obj/machinery/airlock_sensor{
-	frequency = 1380;
-	id_tag = "icgnv_hound_shuttle_exterior";
-	pixel_x = 0;
-	pixel_y = 24
+/obj/machinery/ion_engine{
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/map_template/icgnv_hound)
@@ -935,7 +934,6 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/machinery/portable_atmospherics/canister/empty/hydrogen,
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
@@ -1042,16 +1040,12 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
 "cl" = (
-/obj/machinery/door/airlock/external{
-	frequency = 1380;
-	id_tag = "icgnv_hound_shuttle_outer"
+/obj/effect/floor_decal/techfloor,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	icon_state = "map";
+	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	dir = 4
-	},
+/obj/effect/shuttle_landmark/icgnv_hound/start,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
 "cm" = (
@@ -1109,12 +1103,6 @@
 /obj/item/clothing/glasses/hud/health/goggle,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/icgnv_hound)
-"cs" = (
-/obj/machinery/ion_engine{
-	dir = 1
-	},
-/turf/simulated/floor/plating,
-/area/map_template/icgnv_hound)
 "cF" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	icon_state = "map_scrubber_on";
@@ -1124,17 +1112,13 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/icgnv_hound)
 "mz" = (
-/obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/effect/floor_decal/techfloor{
 	dir = 4;
 	icon_state = "techfloor_edges"
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	id_tag = "icgnv_hound_shuttle_pump_out_internal";
 	dir = 8
-	},
-/obj/effect/floor_decal/techfloor/corner{
-	dir = 8;
-	icon_state = "techfloor_corners"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
@@ -1145,13 +1129,20 @@
 	},
 /turf/simulated/wall/r_titanium,
 /area/map_template/icgnv_hound)
-"sR" = (
-/obj/effect/paint/iccgn,
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 5;
-	icon_state = "intact"
+"qz" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1380;
+	id_tag = "icgnv_hound_shuttle_outer"
 	},
-/turf/simulated/wall/r_titanium,
+/obj/machinery/atmospherics/pipe/manifold/hidden,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"sR" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 4;
+	id_tag = "icgnv_hound_shuttle_pump_out_external"
+	},
+/turf/simulated/floor/plating,
 /area/map_template/icgnv_hound)
 "ug" = (
 /obj/effect/floor_decal/corner_techfloor_grid{
@@ -1163,11 +1154,17 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icgnv_hound)
 "uB" = (
-/obj/effect/paint/iccgn,
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 6
+/obj/effect/floor_decal/corner_techfloor_grid,
+/obj/effect/floor_decal/techfloor{
+	dir = 8;
+	icon_state = "techfloor_edges"
 	},
-/turf/simulated/wall/r_titanium,
+/obj/effect/floor_decal/techfloor/corner,
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "icgnv_hound_shuttle_pump"
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
 "we" = (
 /obj/effect/floor_decal/industrial/warning,
@@ -1183,9 +1180,17 @@
 /turf/simulated/floor/plating,
 /area/map_template/icgnv_hound)
 "wV" = (
-/obj/effect/paint/sun,
-/obj/structure/fuel_port,
-/turf/simulated/wall/r_titanium,
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	color = "#4c535b"
+	},
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "charon_shutters";
+	name = "Protective Shutters";
+	opacity = 0
+	},
+/turf/simulated/floor/plating,
 /area/map_template/icgnv_hound)
 "ze" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1203,13 +1208,32 @@
 	},
 /turf/simulated/wall/r_titanium,
 /area/map_template/icgnv_hound)
-"CK" = (
+"Bl" = (
 /obj/effect/paint/iccgn,
-/obj/machinery/atmospherics/pipe/manifold/hidden{
-	dir = 4;
-	icon_state = "map"
+/obj/structure/sign/warning/docking_area,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5;
+	icon_state = "intact"
 	},
 /turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"CK" = (
+/obj/effect/floor_decal/corner_techfloor_grid{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor{
+	dir = 4;
+	icon_state = "techfloor_edges"
+	},
+/obj/effect/floor_decal/techfloor/corner{
+	dir = 8;
+	icon_state = "techfloor_corners"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	id_tag = "icgnv_hound_shuttle_pump_out_internal";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
 "Eo" = (
 /obj/machinery/light/small{
@@ -1262,7 +1286,7 @@
 	tag_interior_sensor = "icgnv_hound_shuttle_sensor"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	dir = 1;
+	dir = 8;
 	id_tag = "icgnv_hound_shuttle_pump"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -1278,19 +1302,19 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
 "NJ" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	dir = 1;
-	id_tag = "icgnv_hound_shuttle_pump_out_external"
+/obj/effect/paint/iccgn,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
 	},
-/obj/machinery/access_button/airlock_exterior{
-	pixel_y = 24;
-	master_tag = "icgnv_hound_shuttle";
-	frequency = 1380
-	},
-/turf/simulated/floor/plating,
+/turf/simulated/wall/r_titanium,
 /area/map_template/icgnv_hound)
 "OD" = (
 /obj/structure/table/steel_reinforced,
+/obj/machinery/button/blast_door{
+	id_tag = "charon_shutters";
+	name = "Protective Shutters Control";
+	pixel_y = 25
+	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icgnv_hound)
 "PD" = (
@@ -1299,7 +1323,8 @@
 	pixel_y = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	id_tag = "icgnv_hound_shuttle_pump_out_internal"
+	id_tag = "icgnv_hound_shuttle_pump_out_internal";
+	dir = 8
 	},
 /obj/effect/floor_decal/techfloor{
 	dir = 4;
@@ -1340,6 +1365,9 @@
 	dir = 1;
 	icon_state = "techfloor_edges"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 6
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
 "QY" = (
@@ -1348,6 +1376,11 @@
 	icon_state = "doors";
 	dir = 8
 	},
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"Ti" = (
+/obj/effect/paint/iccgn,
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/wall/r_titanium,
 /area/map_template/icgnv_hound)
 "TB" = (
@@ -1371,6 +1404,13 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"UU" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "icgnv_hound_shuttle_pump_out_external"
+	},
+/turf/simulated/floor/plating,
 /area/map_template/icgnv_hound)
 "Vp" = (
 /obj/machinery/light/small{
@@ -1398,7 +1438,10 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icgnv_hound)
 "Vw" = (
-/obj/effect/floor_decal/techfloor,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	icon_state = "map";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
 "VJ" = (
@@ -1407,9 +1450,9 @@
 /area/map_template/icgnv_hound)
 "VN" = (
 /obj/effect/paint/iccgn,
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 10;
-	icon_state = "intact"
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	icon_state = "map";
+	dir = 8
 	},
 /turf/simulated/wall/r_titanium,
 /area/map_template/icgnv_hound)
@@ -1470,7 +1513,7 @@ cc
 we
 cd
 bx
-cs
+bE
 "}
 (3,1,1) = {"
 aa
@@ -1494,7 +1537,7 @@ cp
 bX
 bD
 bx
-cs
+bE
 "}
 (4,1,1) = {"
 ac
@@ -1516,7 +1559,7 @@ bg
 cg
 ch
 bu
-wV
+bx
 cm
 aa
 "}
@@ -1561,11 +1604,11 @@ bt
 bK
 bO
 bT
+Ti
+VN
+VN
+Bl
 sR
-ad
-ad
-aN
-aa
 aa
 "}
 (7,1,1) = {"
@@ -1574,7 +1617,7 @@ aa
 aa
 aa
 aa
-aM
+wV
 aJ
 ze
 Uy
@@ -1585,20 +1628,20 @@ ug
 am
 am
 am
-VN
+ad
 Lo
 bj
 uB
-bE
+NJ
 aa
 "}
 (8,1,1) = {"
 Qc
 aa
 aa
-ai
 aa
-aM
+aa
+wV
 aD
 am
 aQ
@@ -1613,7 +1656,7 @@ bo
 QU
 Vw
 cl
-aj
+qz
 aa
 "}
 (9,1,1) = {"
@@ -1622,7 +1665,7 @@ aa
 aa
 aa
 aa
-aM
+wV
 aK
 aW
 aG
@@ -1661,7 +1704,7 @@ ad
 ad
 ad
 aN
-aa
+UU
 aa
 "}
 (11,1,1) = {"
@@ -1734,7 +1777,7 @@ ae
 bk
 cq
 bx
-cs
+bE
 "}
 (14,1,1) = {"
 aa
@@ -1758,7 +1801,7 @@ Eo
 aR
 cr
 bx
-cs
+bE
 "}
 (15,1,1) = {"
 aa

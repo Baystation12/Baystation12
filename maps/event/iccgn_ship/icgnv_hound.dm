@@ -33,6 +33,10 @@
 		"nav_icgnv_hound_antag"
 	)
 
+/obj/effect/shuttle_landmark/icgnv_hound/dock
+	name = "4th Deck, Port Airlock (ICGNV Hound)"
+	landmark_tag = "nav_hound_dock"
+
 //Areas
 
 /area/map_template/icgnv_hound
