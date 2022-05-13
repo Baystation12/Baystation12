@@ -1,0 +1,5 @@
+author: Spookerton
+delete-after: true
+changes:
+  - tweak: Rebalanced all item/clothing based slowdowns to be less punishing and make
+      a bit more relative sense for suits.
