@@ -60,8 +60,8 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
-	online_slowdown = 0
-	offline_slowdown = 1
+	online_slowdown = 0.75
+	offline_slowdown = 2
 	equipment_overlay_icon = null
 	air_type = /obj/item/tank/skrell
 	cell_type = /obj/item/cell/skrell
