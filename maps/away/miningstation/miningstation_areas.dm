@@ -105,9 +105,9 @@
 /area/miningstation/fix
 	name = "crashed shuttle"
 	icon_state = "surgery"
-	always_unpowered = 1
+	always_unpowered = TRUE
 	area_flags = AREA_FLAG_EXTERNAL
-	has_gravity = 0
+	has_gravity = FALSE
 
 /area/miningstation/cryo
 	name = "Cryogenic Storage"

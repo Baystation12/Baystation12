@@ -95,10 +95,9 @@ Shift + Right Click - Select point B
 			return
 		var/area/new_area = new
 		new_area.SetName(new_name)
-		new_area.power_equip = 0
-		new_area.power_light = 0
-		new_area.power_environ = 0
-		new_area.always_unpowered = 0
+		new_area.power_equip = FALSE
+		new_area.power_light = FALSE
+		new_area.power_environ = FALSE
 		SelectArea(new_area)
 		user.client.debug_variables(selected_area)
 		to_chat(user, "Created area [new_area.name]")

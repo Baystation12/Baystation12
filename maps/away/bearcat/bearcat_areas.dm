@@ -1,6 +1,17 @@
 /area/ship/scrap
 	name = "Generic Ship"
-	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg')
+	ambience = list(
+		'sound/ambience/ambigen3.ogg',
+		'sound/ambience/ambigen4.ogg',
+		'sound/ambience/ambigen5.ogg',
+		'sound/ambience/ambigen6.ogg',
+		'sound/ambience/ambigen7.ogg',
+		'sound/ambience/ambigen8.ogg',
+		'sound/ambience/ambigen9.ogg',
+		'sound/ambience/ambigen10.ogg',
+		'sound/ambience/ambigen11.ogg',
+		'sound/ambience/ambigen12.ogg'
+	)
 
 /area/ship/scrap/crew
 	name = "Crew Compartements"
@@ -123,16 +134,49 @@
 /area/ship/scrap/maintenance/atmos
 	name = "Atmospherics Comparment"
 	icon_state = "atmos"
-	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambiatm1.ogg')
+	ambience = list(
+		'sound/ambience/ambigen3.ogg',
+		'sound/ambience/ambigen4.ogg',
+		'sound/ambience/ambigen5.ogg',
+		'sound/ambience/ambigen6.ogg',
+		'sound/ambience/ambigen7.ogg',
+		'sound/ambience/ambigen8.ogg',
+		'sound/ambience/ambigen9.ogg',
+		'sound/ambience/ambigen10.ogg',
+		'sound/ambience/ambigen11.ogg',
+		'sound/ambience/ambiatm1.ogg'
+	)
 
 /area/ship/scrap/maintenance/power
 	name = "Power Compartment"
 	icon_state = "engine_smes"
-	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambieng1.ogg')
+	ambience = list(
+		'sound/ambience/ambigen3.ogg',
+		'sound/ambience/ambigen4.ogg',
+		'sound/ambience/ambigen5.ogg',
+		'sound/ambience/ambigen6.ogg',
+		'sound/ambience/ambigen7.ogg',
+		'sound/ambience/ambigen8.ogg',
+		'sound/ambience/ambigen9.ogg',
+		'sound/ambience/ambigen10.ogg',
+		'sound/ambience/ambigen11.ogg',
+		'sound/ambience/ambieng1.ogg'
+	)
 
 /area/ship/scrap/maintenance/engine
 	icon_state = "engine"
-	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambieng1.ogg')
+	ambience = list(
+		'sound/ambience/ambigen3.ogg',
+		'sound/ambience/ambigen4.ogg',
+		'sound/ambience/ambigen5.ogg',
+		'sound/ambience/ambigen6.ogg',
+		'sound/ambience/ambigen7.ogg',
+		'sound/ambience/ambigen8.ogg',
+		'sound/ambience/ambigen9.ogg',
+		'sound/ambience/ambigen10.ogg',
+		'sound/ambience/ambigen11.ogg',
+		'sound/ambience/ambieng1.ogg'
+	)
 
 /area/ship/scrap/maintenance/engine/aft
 	name = "Main Engine Bay"
@@ -161,7 +205,12 @@
 /area/ship/scrap/comms
 	name = "Communications Relay"
 	icon_state = "tcomsatcham"
-	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/signal.ogg','sound/ambience/sonar.ogg')
+	ambience = list(
+		'sound/ambience/ambigen3.ogg',
+		'sound/ambience/ambigen4.ogg',
+		'sound/ambience/signal.ogg',
+		'sound/ambience/sonar.ogg'
+	)
 
 /area/ship/scrap/shuttle/lift
   name = "Cargo Lift"

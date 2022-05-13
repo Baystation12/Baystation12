@@ -34,7 +34,7 @@
 
 /datum/exoplanet_theme/ruined_city/after_map_generation(obj/effect/overmap/visitable/sector/exoplanet/E)
 	var/area/A = E.planetary_area
-	LAZYDISTINCTADD(A.ambience, spooky_ambience)
+	A.ambience |= spooky_ambience
 
 /datum/exoplanet_theme/ruined_city/get_sensor_data()
 	return "Extensive artificial structures detected on the surface."

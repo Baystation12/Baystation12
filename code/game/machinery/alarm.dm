@@ -551,7 +551,7 @@
 	data["total_danger"] = danger_level
 	data["environment"] = environment_data
 	data["atmos_alarm"] = alarm_area.atmosalm
-	data["fire_alarm"] = alarm_area.fire != null
+	data["fire_alarm"] = alarm_area.fire
 	data["target_temperature"] = "[target_temperature - T0C]C"
 
 /obj/machinery/alarm/proc/populate_controls(var/list/data)

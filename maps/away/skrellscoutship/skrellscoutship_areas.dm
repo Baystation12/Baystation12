@@ -6,7 +6,7 @@
 
 /area/ship/skrellscoutship/solars
 	name = "\improper Solar Area"
-	
+
 /area/ship/skrellscoutship/crew/hallway/d1
 	name = "\improper Hallway - Deck 1"
 
@@ -16,7 +16,7 @@
 /area/ship/skrellscoutship/crew/rec
 	name = "\improper Recreational Area"
 	icon_state = "green"
-	
+
 /area/ship/skrellscoutship/crew/fit
 	name = "\improper Exercise Area"
 	icon_state = "green"
@@ -32,7 +32,7 @@
 /area/ship/skrellscoutship/robotics
 	name = "\improper Maintenance"
 	icon_state = "green"
-	
+
 /area/ship/skrellscoutship/maintenance/power
 	name = "\improper Engineering"
 	icon_state = "engine_smes"
@@ -41,11 +41,11 @@
 /area/ship/skrellscoutship/command/bridge
 	name = "\improper SSV Helm"
 	icon_state = "bridge"
-	
+
 /area/ship/skrellscoutship/command/armory
 	name = "\improper Armory"
 	icon_state = "shuttlered"
-	
+
 /area/ship/skrellscoutshuttle
 	name = "\improper SSV Shuttle"
 	icon_state = "bridge"
@@ -102,7 +102,18 @@
 /area/ship/skrellscoutship/maintenance/power
 	name = "\improper Engineering"
 	icon_state = "engine_smes"
-	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambieng1.ogg')
+	ambience = list(
+		'sound/ambience/ambigen3.ogg',
+		'sound/ambience/ambigen4.ogg',
+		'sound/ambience/ambigen5.ogg',
+		'sound/ambience/ambigen6.ogg',
+		'sound/ambience/ambigen7.ogg',
+		'sound/ambience/ambigen8.ogg',
+		'sound/ambience/ambigen9.ogg',
+		'sound/ambience/ambigen10.ogg',
+		'sound/ambience/ambigen11.ogg',
+		'sound/ambience/ambieng1.ogg'
+	)
 
 /area/ship/skrellscoutship/hangar
 	name = "\improper Shuttle Dock"
@@ -119,4 +130,15 @@
 /area/ship/skrellscoutship/maintenance/atmos
 	name = "\improper Atmospherics"
 	icon_state = "atmos"
-	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambiatm1.ogg')
+	ambience = list(
+		'sound/ambience/ambigen3.ogg',
+		'sound/ambience/ambigen4.ogg',
+		'sound/ambience/ambigen5.ogg',
+		'sound/ambience/ambigen6.ogg',
+		'sound/ambience/ambigen7.ogg',
+		'sound/ambience/ambigen8.ogg',
+		'sound/ambience/ambigen9.ogg',
+		'sound/ambience/ambigen10.ogg',
+		'sound/ambience/ambigen11.ogg',
+		'sound/ambience/ambiatm1.ogg'
+	)

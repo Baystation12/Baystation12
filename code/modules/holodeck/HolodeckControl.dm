@@ -289,7 +289,7 @@
 	if(HP.ambience)
 		linkedholodeck.forced_ambience = HP.ambience
 	else
-		linkedholodeck.forced_ambience = list()
+		LAZYCLEARLIST(linkedholodeck.forced_ambience)
 
 	for(var/mob/living/M in mobs_in_area(linkedholodeck))
 		if(M.mind)

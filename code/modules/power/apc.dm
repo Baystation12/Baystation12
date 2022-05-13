@@ -195,9 +195,9 @@
 /obj/machinery/power/apc/Destroy()
 	src.update()
 	area.apc = null
-	area.power_light = 0
-	area.power_equip = 0
-	area.power_environ = 0
+	area.power_light = FALSE
+	area.power_equip = FALSE
+	area.power_environ = FALSE
 	area.power_change()
 
 	// Malf AI, removes the APC from AI's hacked APCs list.
@@ -795,9 +795,9 @@
 		area.power_equip = (equipment >= POWERCHAN_ON)
 		area.power_environ = (environ >= POWERCHAN_ON)
 	else
-		area.power_light = 0
-		area.power_equip = 0
-		area.power_environ = 0
+		area.power_light = FALSE
+		area.power_equip = FALSE
+		area.power_environ = FALSE
 
 	area.power_change()
 

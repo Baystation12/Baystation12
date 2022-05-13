@@ -15,9 +15,9 @@
 	uid = ++global_uid
 
 	if(!requires_power)
-		power_light = 0
-		power_equip = 0
-		power_environ = 0
+		power_light = FALSE
+		power_equip = FALSE
+		power_environ = FALSE
 
 	if(dynamic_lighting)
 		luminosity = 0
@@ -29,9 +29,9 @@
 /area/Initialize()
 	. = ..()
 	if(!requires_power || !apc)
-		power_light = 0
-		power_equip = 0
-		power_environ = 0
+		power_light = FALSE
+		power_equip = FALSE
+		power_environ = FALSE
 	power_change()		// all machines set to current power level, also updates lighting icon
 
 /area/Destroy()
@@ -102,10 +102,10 @@
 /// Sets `air_doors_activated` and sets all firedoors in `all_doors` to the closed state. Does nothing if `air_doors_activated` is already set.
 /area/proc/air_doors_close()
 	if(!air_doors_activated)
-		air_doors_activated = 1
-		if(!all_doors)
+		air_doors_activated = TRUE
+		if (!LAZYLEN(all_doors))
 			return
-		for(var/obj/machinery/door/firedoor/E in all_doors)
+		for (var/obj/machinery/door/firedoor/E as anything in all_doors)
 			if(!E.blocked)
 				if(E.operating)
 					E.nextstate = FIREDOOR_CLOSED
@@ -116,10 +116,10 @@
 /// Clears `air_doors_activated` and sets all firedoors in `all_doors` to the open state. Does nothing if `air_doors_activated` is already cleared.
 /area/proc/air_doors_open()
 	if(air_doors_activated)
-		air_doors_activated = 0
-		if(!all_doors)
+		air_doors_activated = FALSE
+		if (!LAZYLEN(all_doors))
 			return
-		for(var/obj/machinery/door/firedoor/E in all_doors)
+		for (var/obj/machinery/door/firedoor/E as anything in all_doors)
 			E.locked = FALSE
 			if(!E.blocked)
 				if(E.operating)
@@ -133,12 +133,12 @@
 /// Sets a fire alarm in the area, if one is not already active.
 /area/proc/fire_alert()
 	if(!fire)
-		fire = 1	//used for firedoor checks
+		fire = TRUE
 		update_icon()
 		mouse_opacity = 0
-		if(!all_doors)
+		if (!LAZYLEN(all_doors))
 			return
-		for(var/obj/machinery/door/firedoor/D in all_doors)
+		for (var/obj/machinery/door/firedoor/D as anything in all_doors)
 			if(!D.blocked)
 				if(D.operating)
 					D.nextstate = FIREDOOR_CLOSED
@@ -149,12 +149,12 @@
 /// Clears an active fire alarm from the area.
 /area/proc/fire_reset()
 	if (fire)
-		fire = 0	//used for firedoor checks
+		fire = FALSE
 		update_icon()
 		mouse_opacity = 0
-		if(!all_doors)
+		if (!LAZYLEN(all_doors))
 			return
-		for(var/obj/machinery/door/firedoor/D in all_doors)
+		for (var/obj/machinery/door/firedoor/D as anything in all_doors)
 			D.locked = FALSE
 			if(!D.blocked)
 				if(D.operating)
@@ -166,21 +166,21 @@
 /// Sets an active evacuation alarm in the area, if one is not already active.
 /area/proc/readyalert()
 	if(!eject)
-		eject = 1
+		eject = TRUE
 		update_icon()
 	return
 
 /// Clears an active evacuation alarm from the area.
 /area/proc/readyreset()
 	if(eject)
-		eject = 0
+		eject = FALSE
 		update_icon()
 	return
 
 /// Sets a party alarm in the area, if one is not already active.
 /area/proc/partyalert()
 	if (!( party ))
-		party = 1
+		party = TRUE
 		update_icon()
 		mouse_opacity = 0
 	return
@@ -188,7 +188,7 @@
 /// Clears an active party alarm from the area.
 /area/proc/partyreset()
 	if (party)
-		party = 0
+		party = FALSE
 		mouse_opacity = 0
 		update_icon()
 		for(var/obj/machinery/door/firedoor/D in src)
@@ -245,7 +245,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 	var/area/newarea = get_area(L.loc)
 	var/area/oldarea = L.lastarea
 	if(oldarea.has_gravity != newarea.has_gravity)
-		if(newarea.has_gravity == 1 && !MOVING_DELIBERATELY(L)) // Being ready when you change areas allows you to avoid falling.
+		if(newarea.has_gravity && !MOVING_DELIBERATELY(L)) // Being ready when you change areas allows you to avoid falling.
 			thunk(L)
 		L.update_floating()
 

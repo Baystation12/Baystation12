@@ -51,8 +51,7 @@
 	name = "\improper Construction Site Solars"
 	icon_state = "solar"
 	area_flags = AREA_FLAG_EXTERNAL
-	requires_power = 1
-	always_unpowered = 1
+	always_unpowered = TRUE
 	has_gravity = FALSE
 	base_turf = /turf/space
 
