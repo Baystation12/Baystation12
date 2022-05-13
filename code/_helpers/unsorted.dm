@@ -631,12 +631,13 @@ Turf and target are seperate in case you want to teleport some distance from a t
 				atoms += A
 	return atoms
 
+/**
+ * Attempts to move the contents of one area to another area.
+ *
+ * **Parameters**:
+ * - `A` `/area` - The area to move the contents to.
+ */
 /area/proc/move_contents_to(var/area/A)
-	//Takes: Area.
-	//Returns: Nothing.
-	//Notes: Attempts to move the contents of one area to another area.
-	//       Movement based on lower left corner.
-
 	if(!A || !src) return
 
 	var/list/turfs_src = get_area_turfs("\ref[src]")
