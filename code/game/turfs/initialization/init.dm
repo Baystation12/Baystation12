@@ -1,8 +1,7 @@
 /decl/turf_initializer/proc/InitializeTurf(var/turf/T)
 	return
 
-/area
-	var/turf_initializer = null
+/area/var/turf_initializer = null
 
 /area/Initialize()
 	. = ..()

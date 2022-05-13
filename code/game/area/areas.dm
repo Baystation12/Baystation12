@@ -3,10 +3,9 @@
 
 
 // ===
-/area
-	var/static/global_uid = 0
-	var/uid
-	var/area_flags
+/area/var/static/global_uid = 0
+/area/var/uid
+/area/var/area_flags
 
 /area/New()
 	icon_state = ""

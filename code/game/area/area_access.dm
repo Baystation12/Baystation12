@@ -1,6 +1,5 @@
-/area
-	var/list/req_access = list()
-	var/secure = TRUE    // unsecure areas will have doors between them use access diff; secure ones use union.
+/area/var/list/req_access = list()
+/area/var/secure = TRUE    // unsecure areas will have doors between them use access diff; secure ones use union.
 
 // Given two areas, find the minimal req_access needed such that (return value) + (area access) >= (other area access) and vice versa
 /proc/req_access_diff(area/first, area/second)
