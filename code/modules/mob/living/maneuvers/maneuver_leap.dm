@@ -20,6 +20,7 @@
 
 /decl/maneuver/leap/proc/end_leap(var/mob/living/user, var/atom/target, var/pass_flag)
 	user.pass_flags = pass_flag
+	user.post_maneuver()
 
 /decl/maneuver/leap/show_initial_message(var/mob/living/user, var/atom/target)
 	user.visible_message(SPAN_WARNING("\The [user] crouches, preparing for a leap!"))
@@ -28,7 +29,19 @@
 	. = ..()
 	if(.)
 		var/can_leap_distance = user.get_jump_distance() * user.get_acrobatics_multiplier()
-		. = (can_leap_distance > 0 && (!target || get_dist(user, target) <= can_leap_distance))
+		if (can_leap_distance <= 0)
+			if (!silent)
+				to_chat(user, SPAN_WARNING("You can't leap in your current state."))
+			return FALSE
+		if (!istype(target))
+			if (!silent)
+				to_chat(user, SPAN_WARNING("That is not a valid leap target."))
+			return FALSE
+		if (get_dist(user, target) > can_leap_distance)
+			if (!silent)
+				to_chat(user, SPAN_WARNING("You can't leap that far."))
+			return FALSE
+		return TRUE
 
 /decl/maneuver/leap/spider
 	stamina_cost = 0
