@@ -16,9 +16,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 /area
 	var/fire = null
-	var/atmos = 1
 	var/atmosalm = 0
-	var/poweralm = 1
 	var/party = null
 	level = null
 	name = "Unknown"
@@ -32,7 +30,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 	var/eject = null
 
-	var/debug = 0
 	var/requires_power = 1
 	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
 
@@ -48,8 +45,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 	var/has_gravity = 1
 	var/obj/machinery/power/apc/apc = null
-	var/no_air = null
-//	var/list/lights				// list of all lights on this area
 	var/list/all_doors = null		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
 	var/air_doors_activated = 0
 	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')
