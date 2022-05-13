@@ -40,7 +40,8 @@
 		/obj/item/clothing/ring,
 		/obj/item/passport,
 		/obj/item/clothing/accessory/pride_pin,
-		/obj/item/clothing/accessory/pronouns
+		/obj/item/clothing/accessory/pronouns,
+		/obj/item/storage/chewables/rollable
 	)
 
 	slot_flags = SLOT_ID
