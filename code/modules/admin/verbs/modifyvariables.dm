@@ -25,7 +25,7 @@
 			var_value = input("Enter new number:","Num") as null|num
 
 		if("type")
-			var_value = input("Enter type:","Type") as null|anything in typesof(/obj,/mob,/area,/turf)
+			var_value = select_subpath(/obj/item/latexballon, /datum)
 
 		if("reference")
 			var_value = input("Select reference:","Reference") as null|mob|obj|turf|area in world
@@ -78,7 +78,7 @@
 			var_value = input("Enter new number:","Num") as num
 
 		if("type")
-			var_value = input("Enter type:","Type") in typesof(/obj,/mob,/area,/turf)
+			var_value = select_subpath(/obj/item/latexballon, /datum)
 
 		if("reference")
 			var_value = input("Select reference:","Reference") as mob|obj|turf|area in world
@@ -275,7 +275,8 @@
 				L[list_find(L, variable)] = new_var
 
 		if("type")
-			new_var = input("Enter type:","Type") in typesof(/obj,/mob,/area,/turf)
+			new_var = select_subpath(/obj/item/latexballon, /datum)
+
 			if(assoc)
 				L[assoc_key] = new_var
 			else
@@ -518,8 +519,9 @@
 				var_value = var_new
 
 		if("type")
-			var/var_new = input("Enter type:","Type",O.get_variable_value(variable)) as null|anything in typesof(/obj,/mob,/area,/turf)
-			if(var_new==null) return
+			var/var_new = select_subpath(/obj/item/latexballon, /datum)
+			if (!var_new)
+				return
 			var_value = var_new
 
 		if("reference")
