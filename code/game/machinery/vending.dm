@@ -1118,6 +1118,7 @@
 	/obj/item/tray = 8,
 	/obj/item/material/knife/kitchen = 3,
 	/obj/item/material/kitchen/rollingpin = 2,
+	/obj/item/serving_bowl = 20,
 	/obj/item/reagent_containers/food/drinks/pitcher = 2,
 	/obj/item/reagent_containers/food/drinks/flask/vacuumflask = 4,
 	/obj/item/reagent_containers/food/drinks/glass2/coffeecup = 8,
