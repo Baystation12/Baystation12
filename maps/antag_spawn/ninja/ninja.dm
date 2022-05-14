@@ -33,7 +33,7 @@
 	name = "\improper Ninja Base"
 	icon_state = "green"
 	requires_power = FALSE
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED
 	req_access = list(access_syndicate)
 
 /area/map_template/ninja_dojo/dojo

@@ -48,7 +48,7 @@
 /area/map_template/skipjack_station/start
 	name = "\improper Skipjack"
 	icon_state = "yellow"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED
 
 /area/map_template/syndicate_mothership/raider_base
 	name = "\improper Raider Base"

@@ -106,7 +106,7 @@
 	name = "crashed shuttle"
 	icon_state = "surgery"
 	always_unpowered = TRUE
-	area_flags = AREA_FLAG_EXTERNAL
+	area_flags = GLOB.AREA_FLAG_EXTERNAL
 	has_gravity = FALSE
 
 /area/miningstation/cryo

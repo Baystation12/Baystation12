@@ -1,13 +1,25 @@
 // Areas.dm
 
+//Area flags, possibly more to come
+/// Area is shielded from radiation.
+GLOBAL_VAR_CONST(AREA_FLAG_RAD_SHIELDED, FLAG(0))
+/// Area is considered external, i.e. exposed to space.
+GLOBAL_VAR_CONST(AREA_FLAG_EXTERNAL, FLAG(1))
+/// Area is shielded from ionospheric anomalies as an FBP / IPC.
+GLOBAL_VAR_CONST(AREA_FLAG_ION_SHIELDED, FLAG(2))
+/// SSpersistence will not track values from this area.
+GLOBAL_VAR_CONST(AREA_FLAG_IS_NOT_PERSISTENT, FLAG(3))
+/// Turfs in this area cannot be dismantled.
+GLOBAL_VAR_CONST(AREA_FLAG_NO_MODIFY, FLAG(4))
+/// Area is not drawn on station holomaps.
+GLOBAL_VAR_CONST(AREA_FLAG_HIDE_FROM_HOLOMAP, FLAG(5))
 
 
-// ===
 /// Integer. Global counter for `uid` values assigned to areas. Increments by one for each new area.
 /area/var/static/global_uid = 0
 /// Integer. The area's unique ID number. set to the value of `global_uid` + 1 when the area is created.
 /area/var/uid
-/// Bitflag (Any of `AREA_FLAG_*`). See `code\__defines\misc.dm`.
+/// Bitflag (Any of `GLOB.AREA_FLAG_*`). See `code\game\area\areas.dm`.
 /area/var/area_flags
 
 /area/Initialize()
@@ -366,6 +378,6 @@ var/global/list/mob/living/forced_ambiance_list = new
 
 /// Returns boolean. Whether or not the area can be modified by player actions.
 /area/proc/can_modify_area()
-	if (area_flags & AREA_FLAG_NO_MODIFY)
+	if (area_flags & GLOB.AREA_FLAG_NO_MODIFY)
 		return FALSE
 	return TRUE

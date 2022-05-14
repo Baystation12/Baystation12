@@ -68,7 +68,7 @@
 
 	var/turf/TO = get_turf(src)
 	var/area/AO = TO.loc
-	if(AO && (AO.area_flags & AREA_FLAG_EXTERNAL))
+	if(AO && (AO.area_flags & GLOB.AREA_FLAG_EXTERNAL))
 		//Everyone saw that!
 		for(var/mob/living/mob in GLOB.living_mob_list_)
 			var/turf/T = get_turf(mob)

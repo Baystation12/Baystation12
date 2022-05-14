@@ -136,27 +136,27 @@
 /area/scavver/hab
 	name = "\improper Habitation Module"
 	icon_state = "gantry_hab"
-	area_flags = AREA_FLAG_RAD_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED
 
 /area/scavver/calypso
 	name = "\improper ITV Calypso"
 	icon_state = "gantry_calypso"
-	area_flags = AREA_FLAG_RAD_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED
 
 /area/scavver/lifepod
 	name = "\improper ITV The Reclaimer"
 	icon_state = "gantry_lifepod"
-	area_flags = AREA_FLAG_RAD_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED
 
 /area/scavver/escapepod
 	name = "\improper ITV Vulcan"
 	icon_state = "gantry_pod"
-	area_flags = AREA_FLAG_RAD_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED
 
 /area/scavver/harvestpod
 	name = "\improper ITV Spiritus"
 	icon_state = "gantry_yacht_down"
-	area_flags = AREA_FLAG_RAD_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED
 
 
 //smes

@@ -84,7 +84,7 @@ GLOBAL_LIST_INIT(submerged_levels, new)
 		for(var/thing in block(locate(1, 1, submerge_z), locate(world.maxx, world.maxy, submerge_z)))
 			var/turf/T = thing
 			var/area/A = get_area(T)
-			if(A && (A.area_flags & AREA_FLAG_EXTERNAL))
+			if(A && (A.area_flags & GLOB.AREA_FLAG_EXTERNAL))
 				if(A.base_turf)
 					A.base_turf = /turf/simulated/ocean/non_flooded
 				if(!istype(T, /turf/space))
@@ -107,7 +107,7 @@ GLOBAL_LIST_INIT(submerged_levels, new)
 		for(var/thing in block(locate(1, 1, submerge_z), locate(world.maxx, world.maxy, submerge_z)))
 			var/turf/T = thing
 			var/area/A = get_area(T)
-			if(A && (A.area_flags & AREA_FLAG_EXTERNAL))
+			if(A && (A.area_flags & GLOB.AREA_FLAG_EXTERNAL))
 				if(A.base_turf)
 					A.base_turf = /turf/simulated/open
 				if(istype(T, /turf/space))

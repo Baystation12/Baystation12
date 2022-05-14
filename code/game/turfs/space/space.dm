@@ -26,7 +26,7 @@
 		return
 	var/area/A = below.loc
 
-	if(!below.density && (A.area_flags & AREA_FLAG_EXTERNAL))
+	if(!below.density && (A.area_flags & GLOB.AREA_FLAG_EXTERNAL))
 		return
 
 	return INITIALIZE_HINT_LATELOAD // oh no! we need to switch to being a different kind of turf!

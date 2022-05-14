@@ -136,7 +136,7 @@
 	name = "Third Deck Substation"
 
 /area/crew_quarters/safe_room
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED
 
 /area/crew_quarters/safe_room/thirddeck
 	name = "\improper Third Deck Safe Room"
@@ -293,57 +293,57 @@
 /area/shuttle/escape_pod6/station
 	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
 	name = "Escape Pod One"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED | GLOB.AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/shuttle/escape_pod7/station
 	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
 	name = "Escape Pod Two"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED | GLOB.AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/shuttle/escape_pod8/station
 	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
 	name = "Escape Pod Three"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED | GLOB.AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/shuttle/escape_pod9/station
 	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
 	name = "Escape Pod Four"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED | GLOB.AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/shuttle/escape_pod10/station
 	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
 	name = "Escape Pod Five"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED | GLOB.AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/shuttle/escape_pod11/station
 	name = "Escape Pod Six"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED | GLOB.AREA_FLAG_IS_NOT_PERSISTENT
 	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
 
 //torch small pods
 /area/shuttle/escape_pod12/station
 	name = "Escape Pod Seven"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED | GLOB.AREA_FLAG_IS_NOT_PERSISTENT
 	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
 
 /area/shuttle/escape_pod13/station
 	name = "Escape Pod Eight"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED | GLOB.AREA_FLAG_IS_NOT_PERSISTENT
 	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
 
 /area/shuttle/escape_pod15/station
 	name = "Escape Pod Ten"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED | GLOB.AREA_FLAG_IS_NOT_PERSISTENT
 	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
 
 /area/shuttle/escape_pod16/station
 	name = "Escape Pod Eleven"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED | GLOB.AREA_FLAG_IS_NOT_PERSISTENT
 	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
 
 /area/shuttle/escape_pod17/station
 	name = "Escape Pod Twelve"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED | GLOB.AREA_FLAG_IS_NOT_PERSISTENT
 	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
 
 //Charon
@@ -352,7 +352,7 @@
 	name = "\improper Charon"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/plating
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_HIDE_FROM_HOLOMAP
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED | GLOB.AREA_FLAG_HIDE_FROM_HOLOMAP
 	base_turf_special_handling = TRUE
 
 /area/exploration_shuttle/cockpit
@@ -386,7 +386,7 @@
 	name = "\improper SEV Aquila"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/reinforced/airless
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_HIDE_FROM_HOLOMAP
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED | GLOB.AREA_FLAG_HIDE_FROM_HOLOMAP
 	base_turf_special_handling = TRUE
 
 /area/aquila/cockpit
@@ -424,7 +424,7 @@
 /area/guppy_hangar/start
 	name = "\improper Guppy"
 	icon_state = "shuttlered"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_HIDE_FROM_HOLOMAP
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED | GLOB.AREA_FLAG_HIDE_FROM_HOLOMAP
 	req_access = list(access_guppy)
 	base_turf_special_handling = TRUE
 
@@ -434,7 +434,7 @@
 /area/shuttle/petrov
 	name = "\improper SRV Petrov"
 	requires_power = TRUE
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED
 	req_access = list(access_petrov)
 	lighting_tone = AREA_LIGHTING_COOL
 
@@ -515,7 +515,7 @@
 	name = "\improper Turbolift"
 	icon_state = "shuttle"
 	requires_power = FALSE
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED
 	req_access = list(access_maint_tunnels)
 
 /area/turbolift/start
@@ -563,7 +563,7 @@
 	name = "\improper Merchant Vessel"
 	icon_state = "shuttlegrn"
 	req_access = list(access_merchant)
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED
 
 // Elevator areas.
 /area/turbolift/torch_top
@@ -1061,19 +1061,19 @@
 	name = "\improper Safe Room"
 	icon_state = "crew_quarters"
 	sound_env = SMALL_ENCLOSED
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED
 
 /area/crew_quarters/sleep/bunk
 	name = "\improper Bunk Room"
 	icon_state = "Sleep"
 	sound_env = SMALL_SOFTFLOOR
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED
 	lighting_tone = AREA_LIGHTING_WARM
 
 /area/crew_quarters/sleep/cryo/aux
 	name = "\improper First Deck Cryogenic Storage"
 	icon_state = "Sleep"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED
 
 /area/crew_quarters/adherent
 	name = "\improper Adherent Maintenence"
@@ -1384,7 +1384,7 @@
 /area/torchexterior
 	name = "\improper Exterior Reinforcements"
 	icon_state = "maint_exterior"
-	area_flags = AREA_FLAG_EXTERNAL
+	area_flags = GLOB.AREA_FLAG_EXTERNAL
 	has_gravity = FALSE
 	turf_initializer = /decl/turf_initializer/maintenance/space
 	req_access = list(
@@ -1437,7 +1437,7 @@
 	holomap_color = HOLOMAP_AREACOLOR_AIRLOCK
 
 /area/solar
-	area_flags = AREA_FLAG_EXTERNAL
+	area_flags = GLOB.AREA_FLAG_EXTERNAL
 	always_unpowered = TRUE
 	has_gravity = FALSE
 	base_turf = /turf/space
@@ -1494,7 +1494,7 @@
 	icon_state = "Holodeck"
 	dynamic_lighting = FALSE
 	sound_env = LARGE_ENCLOSED
-	area_flags = AREA_FLAG_NO_MODIFY
+	area_flags = GLOB.AREA_FLAG_NO_MODIFY
 
 /area/holodeck/alphadeck
 	name = "\improper Holodeck Alpha"
@@ -1665,7 +1665,7 @@
 	name = "\improper Administration Shuttle"
 	icon_state = "shuttlered"
 	req_access = list(access_cent_general)
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED
 
 /area/shuttle/escape_pod1/centcom
 	icon_state = "shuttle"
@@ -1699,7 +1699,7 @@
 /area/security/nuke_storage
 	name = "\improper Vault"
 	icon_state = "nuke_storage"
-	area_flags = AREA_FLAG_IS_NOT_PERSISTENT
+	area_flags = GLOB.AREA_FLAG_IS_NOT_PERSISTENT
 	req_access = list(access_heads_vault)
 
 // Crew
@@ -1707,7 +1707,7 @@
 /area/crew_quarters/sleep/cryo
 	name = "\improper Third Deck Cryogenic Storage"
 	icon_state = "Sleep"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED
 
 /area/hydroponics
 	name = "\improper Hydroponics"

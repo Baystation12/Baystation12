@@ -84,7 +84,7 @@
 /area/map_template/merc_shuttle
 	name = "\improper Cyclopes"
 	icon_state = "yellow"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED
 	req_access = list(access_syndicate)
 
 

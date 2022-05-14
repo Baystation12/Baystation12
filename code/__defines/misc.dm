@@ -76,14 +76,6 @@
 
 #define DEFAULT_JOB_TYPE /datum/job/assistant
 
-//Area flags, possibly more to come
-#define AREA_FLAG_RAD_SHIELDED         FLAG(0)  // shielded from radiation, clearly
-#define AREA_FLAG_EXTERNAL             FLAG(1)  // External as in exposed to space, not outside in a nice, green, forest
-#define AREA_FLAG_ION_SHIELDED         FLAG(2)  // shielded from ionospheric anomalies as an FBP / IPC
-#define AREA_FLAG_IS_NOT_PERSISTENT    FLAG(3)  // SSpersistence will not track values from this area.
-#define AREA_FLAG_NO_MODIFY            FLAG(4)  // turf in this area cannot be dismantled.
-#define AREA_FLAG_HIDE_FROM_HOLOMAP    FLAG(5) // if we shouldn't be drawn on station holomaps
-
 //Map template flags
 #define TEMPLATE_FLAG_ALLOW_DUPLICATES    FLAG(0)  // Lets multiple copies of the template to be spawned
 #define TEMPLATE_FLAG_SPAWN_GUARANTEED    FLAG(1)  // Makes it ignore away site budget and just spawn (only for away sites)

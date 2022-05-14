@@ -107,7 +107,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	power_equip = FALSE
 	power_environ = FALSE
 	has_gravity = FALSE
-	area_flags = AREA_FLAG_EXTERNAL | AREA_FLAG_IS_NOT_PERSISTENT
+	area_flags = GLOB.AREA_FLAG_EXTERNAL | GLOB.AREA_FLAG_IS_NOT_PERSISTENT
 	ambience = list(
 		'sound/ambience/ambispace1.ogg',
 		'sound/ambience/ambispace2.ogg',
@@ -175,7 +175,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	req_access = list(access_brig)
 
 /area/maintenance
-	area_flags = AREA_FLAG_RAD_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED
 	sound_env = TUNNEL_ENCLOSED
 	turf_initializer = /decl/turf_initializer/maintenance
 	forced_ambience = list('sound/ambience/maintambience.ogg')
@@ -225,7 +225,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/shuttle/specops/centcom
 	icon_state = "shuttlered"
 	req_access = list(access_cent_specops)
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED
 
 /area/shuttle/syndicate_elite
 	req_access = list(access_syndicate)
@@ -240,7 +240,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
 	req_access = list(access_cargo)
-	area_flags = AREA_FLAG_HIDE_FROM_HOLOMAP
+	area_flags = GLOB.AREA_FLAG_HIDE_FROM_HOLOMAP
 
 /area/syndicate_elite_squad
 	name = "\improper Elite Mercenary Squad"
@@ -257,7 +257,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	requires_power = FALSE
 	sound_env = SMALL_ENCLOSED
 	base_turf = /turf/space
-	area_flags = AREA_FLAG_HIDE_FROM_HOLOMAP
+	area_flags = GLOB.AREA_FLAG_HIDE_FROM_HOLOMAP
 	base_turf_special_handling = TRUE
 
 /*

@@ -78,7 +78,7 @@ SUBSYSTEM_DEF(radiation)
 			continue // Radiation is not multi-z
 		if(source.respect_maint)
 			var/area/A = T.loc
-			if(A.area_flags & AREA_FLAG_RAD_SHIELDED)
+			if(A.area_flags & GLOB.AREA_FLAG_RAD_SHIELDED)
 				continue // In shielded area
 
 		var/dist = get_dist(source.source_turf, T)

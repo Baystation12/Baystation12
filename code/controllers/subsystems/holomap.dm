@@ -101,7 +101,7 @@ SUBSYSTEM_DEF(minimap)
 			var/area/A
 			if(tile)
 				A = tile.loc
-				if (A.area_flags & AREA_FLAG_HIDE_FROM_HOLOMAP)
+				if (A.area_flags & GLOB.AREA_FLAG_HIDE_FROM_HOLOMAP)
 					continue
 				if(IS_ROCK(tile))
 					continue

@@ -44,7 +44,7 @@
 	name = "\improper Response Team Base"
 	icon_state = "yellow"
 	requires_power = FALSE
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED
 
 /area/map_template/rescue_base/base
 	name = "\improper Barracks"

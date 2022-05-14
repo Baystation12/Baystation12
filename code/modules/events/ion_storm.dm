@@ -25,7 +25,7 @@
 		var/area/A = get_area(S)
 		if(!A)
 			continue
-		if(A.area_flags & AREA_FLAG_ION_SHIELDED)
+		if(A.area_flags & GLOB.AREA_FLAG_ION_SHIELDED)
 			continue
 		to_chat(S, SPAN_WARNING("Your integrated sensors detect an ionospheric anomaly. Your systems will be impacted as you begin a partial restart."))
 		var/ionbug = rand(5, 15)

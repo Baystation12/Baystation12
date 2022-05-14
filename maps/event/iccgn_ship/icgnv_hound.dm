@@ -42,5 +42,5 @@
 /area/map_template/icgnv_hound
 	name = "\improper ICGNV Hound"
 	icon_state = "yellow"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	area_flags = GLOB.AREA_FLAG_RAD_SHIELDED | GLOB.AREA_FLAG_ION_SHIELDED
 	req_access = list(access_syndicate)

@@ -75,7 +75,7 @@
 	if(!T || !(T.z in GLOB.using_map.station_levels) )
 		return FALSE
 	var/area/A = get_area(T)
-	if(!A || (A.area_flags & AREA_FLAG_IS_NOT_PERSISTENT))
+	if(!A || (A.area_flags & GLOB.AREA_FLAG_IS_NOT_PERSISTENT))
 		return FALSE
 	return TRUE
 

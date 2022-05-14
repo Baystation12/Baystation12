@@ -30,7 +30,7 @@
 /area/map_template/ecship/engine
 	name = "\improper Engine Exterior"
 	icon_state = "engine"
-	area_flags = AREA_FLAG_EXTERNAL
+	area_flags = GLOB.AREA_FLAG_EXTERNAL
 
 /area/map_template/ecship/cockpit
 	name = "\improper Cockpit"
