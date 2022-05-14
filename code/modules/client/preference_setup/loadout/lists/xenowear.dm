@@ -86,7 +86,7 @@
 	sort_category = "Xenowear"
 
 // IPC clothing
-/datum/gear/mask/ipc_monitor
+/datum/gear/ipc_monitor
 	display_name = "display monitor (IPC)"
 	path = /obj/item/clothing/mask/monitor
 	sort_category = "Xenowear"
@@ -162,7 +162,7 @@
 	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
 
 // Vox clothing
-/datum/gear/mask/gas/vox
+/datum/gear/vox_mask
 	display_name = "vox breathing mask"
 	path = /obj/item/clothing/mask/gas/vox
 	sort_category = "Xenowear"

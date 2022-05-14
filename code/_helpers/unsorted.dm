@@ -677,15 +677,22 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/y_pos = null
 	var/z_pos = null
 
+/**
+ * Attempts to move the contents, including turfs, of one area to another area.
+ * Positioning is based on the lower left corner of both areas.
+ * Tiles that do not fit into the new area will not be copied.
+ * Source atoms are not modified or deleted.
+ * Turfs are created using `ChangeTurf()`.
+ * `dir`, `icon`, and `icon_state` are copied. All other vars use the default value for the copied atom.
+ * Primarily used for holodecks.
+ *
+ * **Parameters**:
+ * - `A` `/area`. The area to copy src's contents to.
+ * - `platingRequired` Boolean, default `FALSE`. If set, contents will only be copied to destination tiles that are not the same type as `get_base_area_by_turf()` before calling `ChangeTurf()`.
+ *
+ * Returns List (`/atom`). A list containing all atoms that were created at the target area during the process.
+ */
 /area/proc/copy_contents_to(var/area/A , var/platingRequired = 0 )
-	//Takes: Area. Optional: If it should copy to areas that don't have plating
-	//Returns: Nothing.
-	//Notes: Attempts to move the contents of one area to another area.
-	//       Movement based on lower left corner. Tiles that do not fit
-	//		 into the new area will not be moved.
-
-	// Does *not* affect gases etc; copied turfs will be changed via ChangeTurf, and the dir, icon, and icon_state copied. All other vars will remain default.
-
 	if(!A || !src) return 0
 
 	var/list/turfs_src = get_area_turfs(src.type)
@@ -1129,3 +1136,24 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		M.start_pulling(t)
 	else
 		step(user.pulling, get_dir(user.pulling.loc, A))
+
+/proc/select_subpath(given_path, within_scope = /atom)
+	var/desired_path = input("Enter full or partial typepath.","Typepath","[given_path]") as text|null
+	if(!desired_path)
+		return
+
+	var/list/types = typesof(within_scope)
+	var/list/matches = list()
+
+	for(var/path in types)
+		if(findtext("[path]", desired_path))
+			matches += path
+
+	if(!matches.len)
+		alert("No results found. Sorry.")
+		return
+
+	if(matches.len==1)
+		return matches[1]
+	else
+		return (input("Select a type", "Select Type", matches[1]) as null|anything in matches)

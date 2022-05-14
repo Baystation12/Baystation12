@@ -790,7 +790,7 @@
 	taste_description = "fine tobacco"
 	value = 5
 	scent = "fine tobacco smoke"
-	scent_descriptor = SCENT_DESC_FRAGRANCE
+	scent_descriptor = SCENT_DESC_PLUME
 
 /datum/reagent/tobacco/bad
 	name = "Terrible Tobacco"
@@ -798,7 +798,7 @@
 	value = 0
 	scent = "acrid tobacco smoke"
 	scent_intensity = /decl/scent_intensity/strong
-	scent_descriptor = SCENT_DESC_ODOR
+	scent_descriptor = SCENT_DESC_HAZE
 
 /datum/reagent/tobacco/liquid
 	name = "Nicotine Solution"

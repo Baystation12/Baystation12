@@ -52,12 +52,17 @@
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cigpaperbook"
 	item_state = "cigpacket"
-	w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_TINY
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 10
 	throwforce = 2
 	slot_flags = SLOT_BELT
 	startswith = list(/obj/item/paper/cig = 10)
+	can_hold = list(
+  /obj/item/paper/cig,
+  /obj/item/clothing/mask/smokable/cigarette,
+  /obj/item/storage/cigpaper/filters
+)
 
 /obj/item/storage/cigpaper/fancy
 	name = "\improper Trident cigarette paper"
@@ -86,14 +91,10 @@
 	slot_flags = SLOT_BELT
 	startswith = list(/obj/item/clothing/mask/chewable/tobacco = 6)
 
-/obj/item/storage/chewables/Initialize()
-	. = ..()
-	make_exact_fit()
-
 //loose leaf
 /obj/item/storage/chewables/rollable
 	name = "bag of tobacco"
-	max_storage_space = 8
+	max_storage_space = 10
 
 /obj/item/storage/chewables/rollable/bad
 	name = "bag of Men at Arms tobacco"
@@ -112,6 +113,16 @@
 	desc = "A exclusive brand of overpriced tobacco, allegedly grown at a lagrange point station in Sol system."
 	startswith = list(/obj/item/reagent_containers/food/snacks/grown/dried_tobacco/fine = 8)
 	icon_state = "rollfine"
+
+/obj/item/storage/chewables/rollable/rollingkit
+	name = "bag of Crewman's First tobacco"
+	desc = "Generic middling quality tobacco for the recently enlisted and cost-conscious smokers. This bag comes with rolling papers and filters!"
+	startswith = list(
+	/obj/item/reagent_containers/food/snacks/grown/dried_tobacco = 8,
+	/obj/item/storage/cigpaper = 1,
+	/obj/item/storage/cigpaper/filters = 1
+	)
+	icon_state = "rollgeneric"
 
 //chewing tobacco
 /obj/item/storage/chewables/tobacco

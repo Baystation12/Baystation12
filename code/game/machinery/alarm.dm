@@ -42,11 +42,14 @@
 #define MIN_TEMPERATURE -40
 
 //all air alarms in area are connected via magic
-/area
-	var/list/air_vent_names = list()
-	var/list/air_scrub_names = list()
-	var/list/air_vent_info = list()
-	var/list/air_scrub_info = list()
+/// List (`string (id_tag)` => `string`). List of 'long names' for vents within the area. Also serves as a list of all vents registered with the area. Set by `./register_env_machine()`.
+/area/var/list/air_vent_names = list()
+/// List (`string (id_tag)` => `string`). List of 'long names' for scrubbers within the area. Also serves as a list of all scrubbers registered with the area. Set by `./register_env_machine()`.
+/area/var/list/air_scrub_names = list()
+/// List (`string (id_tag)` => `/datum/signal/data`). List of radio signal data received from vents in the area, indexed by the vent's `id_tag`. Do not modify directly; See `./receive_signal()` and `./send_signal()`.
+/area/var/list/air_vent_info = list()
+/// List (`string (id_tag)` => `/datum/signal/data`). List of radio signal data received from scrubbers in the area, indexed by the scrubber's `id_tag`. Do not modify directly; See `./receive_signal()` and `./send_signal()`.
+/area/var/list/air_scrub_info = list()
 
 /obj/machinery/alarm
 	name = "alarm"

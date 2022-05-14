@@ -17,7 +17,8 @@
 		"ITV Vulcan" = list("nav_hangar_gantry_torch_two"),
 		"ITV Spiritus" = list("nav_hangar_gantry_torch_three"),
 		"SRV Venerable Catfish" = list("nav_verne_5"), //docking location for verne shuttle
-		"Cyclopes" = list("nav_merc_dock")
+		"Cyclopes" = list("nav_merc_dock"),
+		"ICGNV Hound" = list("nav_hound_dock"),
 	)
 
 	initial_generic_waypoints = list(

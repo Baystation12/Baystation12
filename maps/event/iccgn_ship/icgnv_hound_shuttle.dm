@@ -4,7 +4,7 @@
 	shuttle_area = list(/area/map_template/icgnv_hound)
 	current_location = "nav_icgnv_hound_start"
 	range = 1
-	fuel_consumption = 5
+	fuel_consumption = 0
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling
 	flags = SHUTTLE_FLAGS_PROCESS
 	defer_initialisation = TRUE

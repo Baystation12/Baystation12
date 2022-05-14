@@ -20,8 +20,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
 		)
-	online_slowdown = 0.50
-	offline_slowdown = 2
+	online_slowdown = 0.75
 	offline_vision_restriction = TINT_HEAVY
 
 	chest_type = /obj/item/clothing/suit/space/rig/command
@@ -331,8 +330,6 @@
 	glove_type = /obj/item/clothing/gloves/rig/command/exploration
 
 
-	online_slowdown = 0.50
-	offline_slowdown = 4
 	offline_vision_restriction = TINT_BLIND
 
 	req_access = list(access_pathfinder)
