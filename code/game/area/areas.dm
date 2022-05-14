@@ -10,7 +10,9 @@
 /// Bitflag (Any of `AREA_FLAG_*`). See `code\__defines\misc.dm`.
 /area/var/area_flags
 
-/area/New()
+/area/Initialize()
+	. = ..()
+
 	icon_state = ""
 	uid = ++global_uid
 
@@ -24,15 +26,16 @@
 	else
 		luminosity = 1
 
-	..()
-
-/area/Initialize()
-	. = ..()
 	if(!requires_power || !apc)
 		power_light = FALSE
 		power_equip = FALSE
 		power_environ = FALSE
 	power_change()		// all machines set to current power level, also updates lighting icon
+
+	if (turf_initializer)
+		for (var/turf/T in src)
+			var/decl/turf_initializer/ti = decls_repository.get_decl(turf_initializer)
+			ti.InitializeTurf(T)
 
 /area/Destroy()
 	..()
