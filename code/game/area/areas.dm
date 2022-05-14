@@ -102,26 +102,26 @@
 		return TRUE
 	return FALSE
 
-/// Sets `air_doors_activated` and sets all firedoors in `all_doors` to the closed state. Does nothing if `air_doors_activated` is already set.
+/// Sets `air_doors_activated` and sets all firedoors in `all_firedoors` to the closed state. Does nothing if `air_doors_activated` is already set.
 /area/proc/air_doors_close()
 	if (!air_doors_activated)
 		air_doors_activated = TRUE
-		if (!LAZYLEN(all_doors))
+		if (!LAZYLEN(all_firedoors))
 			return
-		for (var/obj/machinery/door/firedoor/E as anything in all_doors)
+		for (var/obj/machinery/door/firedoor/E as anything in all_firedoors)
 			if (!E.blocked)
 				if (E.operating)
 					E.nextstate = FIREDOOR_CLOSED
 				else if (!E.density)
 					INVOKE_ASYNC(E, /obj/machinery/door/firedoor/.proc/close)
 
-/// Clears `air_doors_activated` and sets all firedoors in `all_doors` to the open state. Does nothing if `air_doors_activated` is already cleared.
+/// Clears `air_doors_activated` and sets all firedoors in `all_firedoors` to the open state. Does nothing if `air_doors_activated` is already cleared.
 /area/proc/air_doors_open()
 	if(air_doors_activated)
 		air_doors_activated = FALSE
-		if (!LAZYLEN(all_doors))
+		if (!LAZYLEN(all_firedoors))
 			return
-		for (var/obj/machinery/door/firedoor/E as anything in all_doors)
+		for (var/obj/machinery/door/firedoor/E as anything in all_firedoors)
 			E.locked = FALSE
 			if(!E.blocked)
 				if(E.operating)
@@ -135,9 +135,9 @@
 	if(!fire)
 		fire = TRUE
 		update_icon()
-		if (!LAZYLEN(all_doors))
+		if (!LAZYLEN(all_firedoors))
 			return
-		for (var/obj/machinery/door/firedoor/D as anything in all_doors)
+		for (var/obj/machinery/door/firedoor/D as anything in all_firedoors)
 			if(!D.blocked)
 				if(D.operating)
 					D.nextstate = FIREDOOR_CLOSED
@@ -149,9 +149,9 @@
 	if (fire)
 		fire = FALSE
 		update_icon()
-		if (!LAZYLEN(all_doors))
+		if (!LAZYLEN(all_firedoors))
 			return
-		for (var/obj/machinery/door/firedoor/D as anything in all_doors)
+		for (var/obj/machinery/door/firedoor/D as anything in all_firedoors)
 			D.locked = FALSE
 			if(!D.blocked)
 				if(D.operating)

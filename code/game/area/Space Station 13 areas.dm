@@ -64,7 +64,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	/// Direct reference to the APC installed in the area, if it exists. Automatically updated during the APC's `Initialize()` and `Destroy()` calls.
 	var/obj/machinery/power/apc/apc = null
 	/// LAZYLIST (`/obj/machinery/door/firedoor`). Contains a list of all firedoors within and adjacent to this area. Updated during a firedoor's `Initialize()` and `Destroy()` calls. Do not modify directly.
-	var/list/all_doors = null
+	var/list/all_firedoors = null
 	/// Boolean. Whether or not the area's firedoors are activated (closed). Tied to area alarm processing. Do not modify directly; Use `air_doors_close()` or `air_doors_open()` instead.
 	var/air_doors_activated = FALSE
 	/// List (`file (sounds)`). List of sounds that can be played to mobs in the area as ambience. See `./play_ambience()`.
