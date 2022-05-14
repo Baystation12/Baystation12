@@ -15,10 +15,11 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 
 /area
+	/// Boolean. Whether or not the area has an active fire alarm. Do not modify directly; Use `./fire_alert()` and `./fire_reset()` instead.
 	var/fire = null
-	var/atmos = 1
+	/// Integer (`0`, `1`, or `2`). Whether or not the area has an active atmosphere alarm and the level of the atmosphere alarm. Do not modify directly; Use `./atmosalert()` instead.
 	var/atmosalm = 0
-	var/poweralm = 1
+	/// Boolean. Whether or not the area is in 'party light' mode. Do not modify directly; Use `./partyalert()` or `./partyreset()` instead.
 	var/party = null
 	level = null
 	name = "Unknown"
@@ -28,36 +29,55 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	layer = BASE_AREA_LAYER
 	luminosity = 0
 	mouse_opacity = 0
+	/// Boolean. Whether or not the area's lightswitch is switched to 'On' or 'Off'. Used to synchronize lightswitch buttons. Do not modify directly; Use `./set_lightswitch()` instead.
 	var/lightswitch = 1
 
+	/// Boolean. Whether or not the area is in the 'Evacuation' alert state. Do not modify directly; Use `./readyalert()` or `./readyreset()` instead.
 	var/eject = null
 
-	var/debug = 0
+	/// Boolean. Whether or not the area requires power to be considered powered, bypassing all other checks if `TRUE`. This takes priority over `always_unpowered`.
 	var/requires_power = 1
-	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
+	/// Boolean. Whether or not the area is always considered to be unpowered, bypassing all other area checks if `TRUE`.
+	var/always_unpowered = 0
 
-	var/power_equip = 1 // Status
+	/// Boolean. Whether or not the `EQUIP` power channel is enabled for the area. Updated and used by APCs.
+	var/power_equip = 1
+	/// Boolean. Whether or not the `LIGHT` power channel is enabled for the area. Updated and used by APCs.
 	var/power_light = 1
+	/// Boolean. Whether or not the `ENVIRON` power channel is enabled for the area. Updated and used by APCs.
 	var/power_environ = 1
-	var/used_equip = 0  // Continuous drain; don't mess with these directly.
+	/// Integer. Amount of constant use power drain from the `EQUIP` power channel. Do not modify; Use `./power_use_change()` instead.
+	var/used_equip = 0
+	/// Integer. Amount of constant use power drain from the `LIGHT` power channel. Do not modify; Use `./power_use_change()` instead.
 	var/used_light = 0
+	/// Integer. Amount of constant use power drain from the `ENVIRON` power channel. Do not modify; Use `./power_use_change()` instead.
 	var/used_environ = 0
-	var/oneoff_equip   = 0 //Used once and cleared each tick.
+	/// Integer. Amount of power to drain from the `EQUIP` channel on the next power tick. Do not modify directly; Use `./use_power_oneoff()` instead. This is reset to `0` every power tick after processing power use.
+	var/oneoff_equip   = 0
+	/// Integer. Amount of power to drain from the `LIGHT` channel on the next power tick. Do not modify directly; Use `./use_power_oneoff()` instead. This is reset to `0` every power tick after processing power use.
 	var/oneoff_light   = 0
+	/// Integer. Amount of power to drain from the `ENVIRON` channel on the next power tick. Do not modify directly; Use `./use_power_oneoff()` instead. This is reset to `0` every power tick after processing power use.
 	var/oneoff_environ = 0
 
+	/// Boolean. Whether or not the area has gravity. Do not set directly; Use `./gravitychange()` instead.
 	var/has_gravity = 1
+	/// Direct reference to the APC installed in the area, if it exists. Automatically updated during the APC's `Initialize()` and `Destroy()` calls.
 	var/obj/machinery/power/apc/apc = null
-	var/no_air = null
-//	var/list/lights				// list of all lights on this area
-	var/list/all_doors = null		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
+	/// LAZYLIST (`/obj/machinery/door/firedoor`). Contains a list of all firedoors within and adjacent to this area. Updated during a firedoor's `Initialize()` and `Destroy()` calls. Do not modify directly.
+	var/list/all_doors = null
+	/// Boolean. Whether or not the area's firedoors are activated (closed). Tied to area alarm processing. Do not modify directly; Use `air_doors_close()` or `air_doors_open()` instead.
 	var/air_doors_activated = 0
+	/// List (`file (sounds)`). List of sounds that can be played to mobs in the area as ambience. See `./play_ambience()`.
 	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')
+	/// LAZYLIST (`file (sounds)`). Additional ambience files. These are always played instead of only on probability, are set to loop, and are slightly louder than `ambience` sound files. See `./play_ambience()`.
 	var/list/forced_ambience = null
+	/// Integer (One of the environments defined in `code\game\sound.dm`). Sound environment used for modification of sounds played to mobs in the area.
 	var/sound_env = STANDARD_STATION
-	var/turf/base_turf //The base turf type of the area, which can be used to override the z-level's base turf
-	var/planetary_surface = FALSE // true if the area belongs to a planet.
-	///Some base_turfs might cause issues with changing turfs, this flags it as a special case.
+	/// The base turf type of the area, which can be used to override the z-level's `base_turf` for floor deconstruction.
+	var/turf/base_turf
+	/// Boolean. Whether or not the area belongs to a planet.
+	var/planetary_surface = FALSE
+	/// Boolean. Some base_turfs might cause issues with changing turfs, this flags it as a special case. See `/proc/get_base_turf_by_area()`.
 	var/base_turf_special_handling = FALSE
 
 /*-----------------------------------------------------------------------------*/
