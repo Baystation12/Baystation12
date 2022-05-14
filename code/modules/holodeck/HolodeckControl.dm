@@ -241,7 +241,7 @@
 		loadProgram(GLOB.using_map.holodeck_programs["turnoff"], 0)
 
 		if(!linkedholodeck.has_gravity)
-			linkedholodeck.gravitychange(1)
+			linkedholodeck.gravitychange(TRUE)
 
 		active = 0
 		update_use_power(POWER_USE_IDLE)
@@ -277,7 +277,7 @@
 	for(var/obj/effect/decal/cleanable/blood/B in linkedholodeck)
 		qdel(B)
 
-	holographic_objs = A.copy_contents_to(linkedholodeck , 1)
+	holographic_objs = A.copy_contents_to(linkedholodeck, TRUE)
 	for(var/obj/holo_obj in holographic_objs)
 		holo_obj.alpha *= 0.8 //give holodeck objs a slight transparency
 		holo_obj.holographic = TRUE
@@ -332,16 +332,16 @@
 	update_use_power(POWER_USE_IDLE)
 
 	if(A.has_gravity)
-		A.gravitychange(0,A)
+		A.gravitychange(FALSE)
 	else
-		A.gravitychange(1,A)
+		A.gravitychange(TRUE)
 
 /obj/machinery/computer/HolodeckControl/proc/emergencyShutdown()
 	//Turn it back to the regular non-holographic room
 	loadProgram(GLOB.using_map.holodeck_programs["turnoff"], 0)
 
 	if(!linkedholodeck.has_gravity)
-		linkedholodeck.gravitychange(1,linkedholodeck)
+		linkedholodeck.gravitychange(TRUE)
 
 	active = 0
 	update_use_power(POWER_USE_IDLE)

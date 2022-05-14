@@ -314,7 +314,7 @@
 	var/drained_energy = drained_hp*20
 
 	if (source_area)
-		source_area.use_power_oneoff(drained_energy/CELLRATE)
+		source_area.use_power_oneoff(drained_energy/CELLRATE, EQUIP)
 	else if (istype(power_source,/datum/powernet))
 		var/drained_power = drained_energy/CELLRATE
 		drained_power = PN.draw_power(drained_power)

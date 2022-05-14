@@ -637,16 +637,18 @@ Turf and target are seperate in case you want to teleport some distance from a t
  * **Parameters**:
  * - `A` `/area` - The area to move the contents to.
  */
-/area/proc/move_contents_to(var/area/A)
-	if(!A || !src) return
+/area/proc/move_contents_to(area/A)
+	if (!A)
+		return
 
-	var/list/turfs_src = get_area_turfs("\ref[src]")
+	var/list/turfs_src = get_area_turfs(src)
 
-	if(!turfs_src.len) return
+	if (!turfs_src.len)
+		return
 
 	//figure out a suitable origin - this assumes the shuttle areas are the exact same size and shape
 	//might be worth doing this with a shuttle core object instead of areas, in the future
-	var/src_origin = locate(src.x, src.y, src.z)
+	var/src_origin = locate(x, y, z)
 	var/trg_origin = locate(A.x, A.y, A.z)
 
 	if(src_origin && trg_origin)
@@ -693,26 +695,31 @@ Turf and target are seperate in case you want to teleport some distance from a t
  *
  * Returns List (`/atom`). A list containing all atoms that were created at the target area during the process.
  */
-/area/proc/copy_contents_to(var/area/A , var/platingRequired = 0 )
-	if(!A || !src) return 0
+/area/proc/copy_contents_to(area/A, platingRequired = FALSE)
+	if (!A || !src)
+		return FALSE
 
-	var/list/turfs_src = get_area_turfs(src.type)
+	var/list/turfs_src = get_area_turfs(type)
 	var/list/turfs_trg = get_area_turfs(A.type)
 
 	var/src_min_x = 0
 	var/src_min_y = 0
-	for (var/turf/T in turfs_src)
-		if(T.x < src_min_x || !src_min_x) src_min_x	= T.x
-		if(T.y < src_min_y || !src_min_y) src_min_y	= T.y
+	for (var/turf/T as anything in turfs_src)
+		if(T.x < src_min_x || !src_min_x)
+			src_min_x	= T.x
+		if(T.y < src_min_y || !src_min_y)
+			src_min_y	= T.y
 
 	var/trg_min_x = 0
 	var/trg_min_y = 0
-	for (var/turf/T in turfs_trg)
-		if(T.x < trg_min_x || !trg_min_x) trg_min_x	= T.x
-		if(T.y < trg_min_y || !trg_min_y) trg_min_y	= T.y
+	for (var/turf/T as anything in turfs_trg)
+		if(T.x < trg_min_x || !trg_min_x)
+			trg_min_x	= T.x
+		if(T.y < trg_min_y || !trg_min_y)
+			trg_min_y	= T.y
 
 	var/list/refined_src = new/list()
-	for(var/turf/T in turfs_src)
+	for (var/turf/T as anything in turfs_src)
 		refined_src += T
 		refined_src[T] = new/datum/coords
 		var/datum/coords/C = refined_src[T]
@@ -720,7 +727,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		C.y_pos = (T.y - src_min_y)
 
 	var/list/refined_trg = new/list()
-	for(var/turf/T in turfs_trg)
+	for (var/turf/T as anything in turfs_trg)
 		refined_trg += T
 		refined_trg[T] = new/datum/coords
 		var/datum/coords/C = refined_trg[T]
@@ -733,9 +740,9 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 
 	moving:
-		for (var/turf/T in refined_src)
+		for (var/turf/T as anything in refined_src)
 			var/datum/coords/C_src = refined_src[T]
-			for (var/turf/B in refined_trg)
+			for (var/turf/B as anything in refined_trg)
 				var/datum/coords/C_trg = refined_trg[B]
 				if(C_src.x_pos == C_trg.x_pos && C_src.y_pos == C_trg.y_pos)
 
@@ -770,11 +777,11 @@ Turf and target are seperate in case you want to teleport some distance from a t
 						objs += O
 
 
-					for(var/obj/O in objs)
+					for (var/obj/O as anything in objs)
 						newobjs += DuplicateObject(O , 1)
 
 
-					for(var/obj/O in newobjs)
+					for (var/obj/O as anything in newobjs)
 						O.forceMove(X)
 
 					for(var/mob/M in T)
@@ -782,10 +789,10 @@ Turf and target are seperate in case you want to teleport some distance from a t
 						if(!istype(M,/mob) || !M.simulated) continue // If we need to check for more mobs, I'll add a variable
 						mobs += M
 
-					for(var/mob/M in mobs)
+					for (var/mob/M as anything in mobs)
 						newmobs += DuplicateObject(M , 1)
 
-					for(var/mob/M in newmobs)
+					for (var/mob/M as anything in newmobs)
 						M.forceMove(X)
 
 					copiedobjs += newobjs

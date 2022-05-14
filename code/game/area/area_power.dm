@@ -5,11 +5,11 @@
 */
 
 /// Returns boolean. Whether or not the area is considered to have power for the given power channel. See `requires_power` and `always_unpowered` for some area-level overrides.
-/area/proc/powered(var/chan)
+/area/proc/powered(chan)
 	if(!requires_power)
-		return 1
+		return TRUE
 	if(always_unpowered)
-		return 0
+		return FALSE
 	switch(chan)
 		if(EQUIP)
 			return power_equip
@@ -17,10 +17,8 @@
 			return power_light
 		if(ENVIRON)
 			return power_environ
-		if(LOCAL)
-			return FALSE // if you're running on local power, don't come begging for help here.
 
-	return 0
+	return FALSE
 
 /// Called whenever the area's power or power usage state should change.
 /area/proc/power_change()
@@ -30,7 +28,7 @@
 		update_icon()
 
 /// Returns Integer. The total amount of power usage queued for the area from both `used_*` and `oneoff_*` for the given power channel, or all channels if `TOTAL` is passed instead.
-/area/proc/usage(var/chan)
+/area/proc/usage(chan)
 	switch(chan)
 		if(LIGHT)
 			return used_light + oneoff_light
@@ -56,7 +54,7 @@
  * - `amount` Integer. The amount of power to add to the given channel. Use negative numbers to subtract instead.
  * - `chan` Integer (`EQUIP`, `LIGHT`, or `ENVIRON`). The power channel to add the power to.
  */
-/area/proc/use_power(var/amount, var/chan)
+/area/proc/use_power(amount, chan)
 	switch(chan)
 		if(EQUIP)
 			used_equip += amount
@@ -87,7 +85,7 @@
  * - `amount` Integer. The amount of power to add to the given channel. Use negative numbers to subtract instead.
  * - `chan` Integer (`EQUIP`, `LIGHT`, or `ENVIRON`). The power channel to add the power to.
  */
-/area/proc/use_power_oneoff(var/amount, var/chan)
+/area/proc/use_power_oneoff(amount, chan)
 	switch(chan)
 		if(EQUIP)
 			oneoff_equip += amount

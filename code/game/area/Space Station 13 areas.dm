@@ -28,7 +28,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	plane = DEFAULT_PLANE
 	layer = BASE_AREA_LAYER
 	luminosity = 0
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	/// Boolean. Whether or not the area's lightswitch is switched to 'On' or 'Off'. Used to synchronize lightswitch buttons. Do not modify directly; Use `./set_lightswitch()` instead.
 	var/lightswitch = TRUE
 
@@ -118,7 +118,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	secure = FALSE
 
 /area/space/atmosalert()
-	return
+	return FALSE
 
 /area/space/fire_alert()
 	return

@@ -61,11 +61,11 @@
 		'sound/ambience/eeriejungle1.ogg'
 	)
 
-/area/exoplanet/grass/play_ambience(var/mob/living/L)
+/area/exoplanet/grass/play_ambience(mob/living/L)
 	..()
 	if(!L.ear_deaf && L.client && !L.client.ambience_playing)
 		L.client.ambience_playing = TRUE
-		L.playsound_local(get_turf(L),sound('sound/ambience/jungle.ogg', repeat = 1, wait = 0, volume = 25, channel = GLOB.ambience_sound_channel))
+		L.playsound_local(get_turf(L), sound('sound/ambience/jungle.ogg', TRUE, FALSE, GLOB.ambience_sound_channel, 25))
 
 /datum/random_map/noise/exoplanet/grass
 	descriptor = "grass exoplanet"

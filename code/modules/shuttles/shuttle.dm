@@ -177,7 +177,7 @@
 //	log_degug("area_coming_from: [origin]")
 //	log_debug("destination: [destination]")
 	if((flags & SHUTTLE_FLAGS_ZERO_G))
-		var/new_grav = 1
+		var/new_grav = TRUE
 		if(destination.flags & SLANDMARK_FLAG_ZERO_G)
 			var/area/new_area = get_area(destination)
 			new_grav = new_area.has_gravity

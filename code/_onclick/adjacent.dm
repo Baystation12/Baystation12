@@ -14,7 +14,7 @@
 	return 0
 
 // Not a sane use of the function and (for now) indicative of an error elsewhere
-/area/Adjacent(var/atom/neighbor)
+/area/Adjacent(atom/neighbor)
 	CRASH("Call to /area/Adjacent(), unimplemented proc")
 
 
