@@ -220,7 +220,7 @@ var/global/list/image/splatter_cache=list()
 	var/fleshcolor = "#ffffff"
 	blood_size = BLOOD_SIZE_NO_MERGE
 	cleanable_scent = "viscera"
-	scent_intensity = /decl/scent_intensity/strong
+	scent_intensity = /decl/scent_intensity/overpowering
 	scent_range = 4
 
 /obj/effect/decal/cleanable/blood/gibs/on_update_icon()
