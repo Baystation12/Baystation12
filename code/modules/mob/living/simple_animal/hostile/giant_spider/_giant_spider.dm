@@ -106,10 +106,3 @@
 	if(prob(poison_chance))
 		to_chat(L, SPAN_WARNING("You feel a tiny prick."))
 		L.reagents.add_reagent(poison_type, poison_per_bite)
-
-/// Scale the spiders icon up or down.
-/mob/living/simple_animal/hostile/giant_spider/proc/scale(factor)
-	if (factor)
-		var/matrix/M = matrix()
-		M.Scale(factor)
-		src.transform = M

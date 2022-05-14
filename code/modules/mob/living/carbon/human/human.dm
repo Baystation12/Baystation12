@@ -1859,10 +1859,7 @@
 				var/hit_dir = get_dir(P.starting, src)
 				var/obj/effect/decal/cleanable/blood/B = blood_splatter(get_step(src, hit_dir), src, 1, hit_dir)
 				B.icon_state = pick("dir_splatter_1","dir_splatter_2")
-				var/scale = min(1, round(P.damage / 50, 0.2))
-				var/matrix/M = new()
-				B.transform = M.Scale(scale)
-
+				B.SetTransform(scale = min(1, round(P.damage / 50, 0.2)))
 				new /obj/effect/temp_visual/bloodsplatter(loc, hit_dir, species.blood_color)
 
 /mob/living/carbon/human/proc/dream()

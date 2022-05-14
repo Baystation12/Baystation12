@@ -94,7 +94,7 @@
 		if(can_spawn_plant())
 			plant = new(T,seed)
 			plant.dir = src.dir
-			plant.transform = src.transform
+			plant.SetTransform(others = transform)
 			plant.age = seed.get_trait(TRAIT_MATURATION)-1
 			plant.update_icon()
 			if(growth_type==0) //Vines do not become invisible.
