@@ -338,7 +338,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 
 /// Trigger for the prison break event. Causes lighting to overload and dooes to open. Has no effect if the area lacks an APC or the APC is turned off.
 /area/proc/prison_break()
-	var/obj/machinery/power/apc/theAPC = get_apc()
+	var/obj/machinery/power/apc/theAPC = apc
 	if(theAPC?.operating)
 		for(var/obj/machinery/power/apc/temp_apc in src)
 			temp_apc.overload_lighting(70)

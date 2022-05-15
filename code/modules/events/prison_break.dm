@@ -46,7 +46,7 @@
 		if(areas && areas.len > 0)
 			var/obj/machinery/power/apc/theAPC = null
 			for(var/area/A in areas)
-				theAPC = A.get_apc()
+				theAPC = A.apc
 				if(theAPC && theAPC.operating)	//If the apc's off, it's a little hard to overload the lights.
 					for(var/obj/machinery/light/L in A)
 						L.flicker(10)

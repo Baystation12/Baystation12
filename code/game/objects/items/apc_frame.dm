@@ -27,7 +27,7 @@
 	if (!A.requires_power || istype(A, /area/space))
 		to_chat(usr, "<span class='warning'>APC cannot be placed in this area.</span>")
 		return
-	if (A.get_apc())
+	if (A.apc)
 		to_chat(usr, "<span class='warning'>This area already has an APC.</span>")
 		return //only one APC per area
 	for(var/obj/machinery/power/terminal/T in loc)
