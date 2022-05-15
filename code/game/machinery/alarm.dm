@@ -95,12 +95,12 @@
 	var/list/TLV = list()
 	var/list/trace_gas = list() //list of other gases that this air alarm is able to detect
 
-	var/danger_level = 0
-	var/pressure_dangerlevel = 0
-	var/oxygen_dangerlevel = 0
-	var/co2_dangerlevel = 0
-	var/temperature_dangerlevel = 0
-	var/other_dangerlevel = 0
+	var/danger_level = GLOB.AIR_ALARM_LEVEL_SAFE
+	var/pressure_dangerlevel = GLOB.AIR_ALARM_LEVEL_SAFE
+	var/oxygen_dangerlevel = GLOB.AIR_ALARM_LEVEL_SAFE
+	var/co2_dangerlevel = GLOB.AIR_ALARM_LEVEL_SAFE
+	var/temperature_dangerlevel = GLOB.AIR_ALARM_LEVEL_SAFE
+	var/other_dangerlevel = GLOB.AIR_ALARM_LEVEL_SAFE
 	var/environment_type = /decl/environment_data
 	var/report_danger_level = 1
 
@@ -197,11 +197,11 @@
 	danger_level = overall_danger_level(environment)
 
 	if (old_level != danger_level)
-		if(danger_level == 2)
+		if(danger_level == GLOB.AIR_ALARM_LEVEL_DANGER)
 			playsound(src.loc, 'sound/machines/airalarm.ogg', 25, 0, 4)
 		apply_danger_level(danger_level)
 
-	if (pressure_dangerlevel != 0)
+	if (pressure_dangerlevel != GLOB.AIR_ALARM_LEVEL_SAFE)
 		if (breach_detected())
 			mode = AALARM_MODE_OFF
 			apply_mode()
@@ -216,7 +216,7 @@
 		if(RCON_NO)
 			remote_control = 0
 		if(RCON_AUTO)
-			if(danger_level == 2)
+			if(danger_level == GLOB.AIR_ALARM_LEVEL_DANGER)
 				remote_control = 1
 			else
 				remote_control = 0
@@ -343,17 +343,17 @@
 
 	var/icon_level = danger_level
 	if (alarm_area.atmosalm)
-		icon_level = max(icon_level, 1)	//if there's an atmos alarm but everything is okay locally, no need to go past yellow
+		icon_level = max(icon_level, GLOB.AIR_ALARM_LEVEL_WARNING)	//if there's an atmos alarm but everything is okay locally, no need to go past yellow
 
 	var/new_color = null
 	switch(icon_level)
-		if (0)
+		if (GLOB.AIR_ALARM_LEVEL_SAFE)
 			icon_state = "alarm0"
 			new_color = COLOR_LIME
-		if (1)
+		if (GLOB.AIR_ALARM_LEVEL_WARNING)
 			icon_state = "alarm2" //yes, alarm2 is yellow alarm
 			new_color = COLOR_SUN
-		if (2)
+		if (GLOB.AIR_ALARM_LEVEL_DANGER)
 			icon_state = "alarm1"
 			new_color = COLOR_RED_LIGHT
 
@@ -484,11 +484,11 @@
 	alert_signal.data["zone"] = alarm_area.name
 	alert_signal.data["type"] = "Atmospheric"
 
-	if(alert_level==2)
+	if(alert_level==GLOB.AIR_ALARM_LEVEL_DANGER)
 		alert_signal.data["alert"] = "severe"
-	else if (alert_level==1)
+	else if (alert_level==GLOB.AIR_ALARM_LEVEL_WARNING)
 		alert_signal.data["alert"] = "minor"
-	else if (alert_level==0)
+	else if (alert_level==GLOB.AIR_ALARM_LEVEL_SAFE)
 		alert_signal.data["alert"] = "clear"
 
 	frequency.post_signal(src, alert_signal)
@@ -792,14 +792,14 @@
 			return TOPIC_REFRESH
 
 		if(href_list["atmos_alarm"])
-			if (alarm_area.atmosalert(2, src))
-				apply_danger_level(2)
+			if (alarm_area.atmosalert(GLOB.AIR_ALARM_LEVEL_DANGER, src))
+				apply_danger_level(GLOB.AIR_ALARM_LEVEL_DANGER)
 			update_icon()
 			return TOPIC_REFRESH
 
 		if(href_list["atmos_reset"])
-			if (alarm_area.atmosalert(0, src))
-				apply_danger_level(0)
+			if (alarm_area.atmosalert(GLOB.AIR_ALARM_LEVEL_SAFE, src))
+				apply_danger_level(GLOB.AIR_ALARM_LEVEL_SAFE)
 			update_icon()
 			return TOPIC_REFRESH
 

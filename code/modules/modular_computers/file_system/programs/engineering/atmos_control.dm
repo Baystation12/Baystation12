@@ -60,9 +60,9 @@
 		if ((!monitored_alarms.len) && (!Z || !AreConnectedZLevels(Z, alarm.z)))
 			continue
 		var/danger_level = max(alarm.danger_level, alarm.alarm_area.atmosalm)
-		if(danger_level == 2)
+		if(danger_level == GLOB.AIR_ALARM_LEVEL_DANGER)
 			alarmsAlert[++alarmsAlert.len] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = danger_level)
-		else if(danger_level == 1)
+		else if(danger_level == GLOB.AIR_ALARM_LEVEL_WARNING)
 			alarmsDanger[++alarmsDanger.len] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = danger_level)
 		else
 			alarms[++alarms.len] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = danger_level)

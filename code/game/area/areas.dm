@@ -15,6 +15,15 @@ GLOBAL_VAR_CONST(AREA_FLAG_NO_MODIFY, FLAG(4))
 GLOBAL_VAR_CONST(AREA_FLAG_HIDE_FROM_HOLOMAP, FLAG(5))
 
 
+// Alert levels for atmosphere alarms
+/// Safe air zone - Green.
+GLOBAL_VAR_CONST(AIR_ALARM_LEVEL_SAFE, 0)
+/// Warning level atmosphere alarm- Yellow.
+GLOBAL_VAR_CONST(AIR_ALARM_LEVEL_WARNING, 1)
+/// Danger level atmosphere alarm - Red
+GLOBAL_VAR_CONST(AIR_ALARM_LEVEL_DANGER, 2)
+
+
 /// Integer. Global counter for `uid` values assigned to areas. Increments by one for each new area.
 /area/var/static/global_uid = 0
 /// Integer. The area's unique ID number. set to the value of `global_uid` + 1 when the area is created.
@@ -84,13 +93,13 @@ GLOBAL_VAR_CONST(AREA_FLAG_HIDE_FROM_HOLOMAP, FLAG(5))
  * Defines the area's atmosphere alert level.
  *
  * **Parameters**:
- * - `danger_level` Integer. The new alert danger level to set.
+ * - `danger_level` Integer (One of `GLOB.AIR_ALARM_LEVEL_*`). The new alert danger level to set.
  * - `alarm_source` Atom. The source that's triggering the alert change.
  *
  * Returns boolean. `TRUE` if the atmosphere alarm level was changed, `FALSE` otherwise.
  */
 /area/proc/atmosalert(danger_level, alarm_source)
-	if (danger_level == 0)
+	if (danger_level == GLOB.AIR_ALARM_LEVEL_SAFE)
 		GLOB.atmosphere_alarm.clearAlarm(src, alarm_source)
 	else
 		GLOB.atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level)
@@ -101,10 +110,10 @@ GLOBAL_VAR_CONST(AREA_FLAG_HIDE_FROM_HOLOMAP, FLAG(5))
 			danger_level = max(danger_level, AA.danger_level)
 
 	if (danger_level != atmosalm)
-		if (danger_level < 1 && atmosalm >= 1)
+		if (danger_level < GLOB.AIR_ALARM_LEVEL_WARNING && atmosalm >= GLOB.AIR_ALARM_LEVEL_WARNING)
 			//closing the doors on red and opening on green provides a bit of hysteresis that will hopefully prevent fire doors from opening and closing repeatedly due to noise
 			air_doors_open()
-		else if (danger_level >= 2 && atmosalm < 2)
+		else if (danger_level >= GLOB.AIR_ALARM_LEVEL_DANGER && atmosalm < GLOB.AIR_ALARM_LEVEL_DANGER)
 			air_doors_close()
 
 		atmosalm = danger_level

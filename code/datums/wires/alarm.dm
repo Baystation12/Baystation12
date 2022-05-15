@@ -57,8 +57,8 @@ var/global/const/AALARM_WIRE_AALARM = 16
 
 
 		if(AALARM_WIRE_AALARM)
-			if (A.alarm_area.atmosalert(2, A))
-				A.post_alert(2)
+			if (A.alarm_area.atmosalert(GLOB.AIR_ALARM_LEVEL_DANGER, A))
+				A.post_alert(GLOB.AIR_ALARM_LEVEL_DANGER)
 			A.update_icon()
 
 /datum/wires/alarm/UpdatePulsed(var/index)
@@ -104,6 +104,6 @@ var/global/const/AALARM_WIRE_AALARM = 16
 		if(AALARM_WIRE_AALARM)
 //			log_debug("Aalarm wire pulsed")
 
-			if (A.alarm_area.atmosalert(0, A))
-				A.post_alert(0)
+			if (A.alarm_area.atmosalert(GLOB.AIR_ALARM_LEVEL_SAFE, A))
+				A.post_alert(GLOB.AIR_ALARM_LEVEL_SAFE)
 			A.update_icon()
