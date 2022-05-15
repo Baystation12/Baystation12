@@ -1,230 +1,7 @@
-//Cultic runes
-/obj/effect/rune
-	name = "cultic rune"
-	desc = "A strange collage of symbols."
-
-	icon = 'icons/effects/uristrunes.dmi'
-	icon_state = "blank"
-	layer = RUNE_LAYER
-	var/strokes = 2 // IF YOU EVER SET THIS TO MORE THAN TEN, EVERYTHING WILL BREAK
-
-	unacidable = TRUE
-	anchored = TRUE
-
-	var/blood_name
-	var/cultname = "mundane"
-
-	var/cast_time = 0 SECONDS
-	var/mob/living/caster //Who is leading the casting
-
-	var/required_acolytes = 0 //How many assistants need to be surrounding the rune
-	var/acolyte_range = 8 //How far can the acolytes be
-	var/list/mob/living/acolytes
-	var/acolytes_free = FALSE //Can acolytes freely move during the spell
-
-
-	var/list/mob/living/cultists //both acolytes and the caster
-
-	var/active = FALSE //Determines whether people are reciting things right now
-	var/list/active_chants = list(
-		"By the will of the Dark One!",
-		"Through the Dark One's power!",
-		"Under the Geometer's truth!",
-		"Yes, yes, yes!"
-	)
-	var/last_active_chant
-
-	var/incantation_chant = "I cast such!" //The final chant
-
-/obj/effect/rune/New(loc, mob/writer) //Override only for identifying species blood information
-	if(writer && istype(writer, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = writer
-		color = H.blood_color
-		blood_name = H.get_blood_name()
-	else
-		color = COLOR_BLOOD_HUMAN
-		blood_name = "blood"
-	..()
-
-/obj/effect/rune/Initialize()
-	..()
-	update_icon() //Updates color & pattern
-	set_extension(src, /datum/extension/turf_hand, 10)
-
-/obj/effect/rune/on_update_icon()
-	overlays.Cut()
-	if(GLOB.cult.rune_strokes[type])
-		var/list/f = GLOB.cult.rune_strokes[type]
-		for(var/i in f)
-			var/image/t = image('icons/effects/uristrunes.dmi', "rune-[i]")
-			overlays += t
-	else
-		var/list/q = list(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-		var/list/f = list()
-		for(var/i = 1 to strokes)
-			var/j = pick(q)
-			f += j
-			q -= f
-			var/image/t = image('icons/effects/uristrunes.dmi', "rune-[j]")
-			overlays += t
-		GLOB.cult.rune_strokes[type] = f.Copy()
-
-/obj/effect/rune/examine(mob/user)
-	. = ..()
-	to_chat(user, SPAN_WARNING("It's drawn in [blood_name]."))
-
-	if(iscultist(user))
-		to_chat(user, SPAN_INFO("This is <b>\a [cultname] rune</b> of the Dark One's scripture. Using harm intent will erase the rune."))
-
-/obj/effect/rune/Process()
-	..()
-	if(active && prob(25) && last_active_chant > world.time - 5)
-		for(var/mob/living/M in acolytes)
-			var/chant = pick(active_chants)
-			speak_incantation(M, chant)
-		last_active_chant = world.time
-
-//Null rod effect
-/obj/effect/rune/attackby(obj/item/I, mob/living/user)
-	if(istype(I, /obj/item/nullrod))
-		user.visible_message(
-			SPAN_NOTICE("[user] hits \the [src] with \the [I], and it disappears, fizzling."),
-			SPAN_NOTICE("You disrupt the vile magic with the deadening field of \the [I]."),
-			"You hear a fizzle."
-		)
-		qdel(src)
-		return
-	..()
-
-//Casting or erasing
-/obj/effect/rune/attack_hand(mob/living/user)
-	if(iscultist(user))
-		to_chat(user, SPAN_NOTICE("You begin to manipulate \the [src]."))
-
-		if(user.a_intent == I_HURT) //Erase it by hand with a progress bar
-			user.visible_message(
-				SPAN_WARNING("<b>[user]</b> begins doing <b>something</b> with \the [src]."),
-				SPAN_NOTICE("You begin slowly erasing \the [src] with your bare hands.")
-			)
-
-			if(do_after(user, 4 SECONDS, src, DO_DEFAULT))
-				user.visible_message(
-					SPAN_WARNING("[user] retraces \the [src] with \his fingertips, and it disappears quietly."),
-					SPAN_NOTICE("You finish erasing \the [src] with your bare hands.")
-				)
-
-				qdel(src)
-			return
-
-		var/success = attempt_cast(user)
-		if(!success)
-			fizzle(user)
-
-	else
-		to_chat(user, SPAN_WARNING("You can't even begin to understand these symbols."))
-
-/obj/effect/rune/proc/attempt_cast(mob/living/user) //THAT'S A LOT OF IF()
-	if(user.silent) //No voice?
-		to_chat(user, SPAN_WARNING("You try to recite the incantations, however you can't."))
-		return FALSE
-
-	if(istype(user, /mob/living/carbon/human)) //Prevent runtime with the theoretical impossiblity that a non-human mob attempted casting
-		var/mob/living/carbon/human/H = user
-
-		if(istype(H.wear_mask, /obj/item/clothing/mask/muzzle))
-			to_chat(user, SPAN_WARNING("You try to recite the incantations, however your mouth is muzzled."))
-			return FALSE
-
-	caster = user
-	acolytes = get_acolytes()
-
-	if(length(acolytes) < required_acolytes)
-		to_chat(user, SPAN_WARNING("It takes <b>[required_acolytes - length(acolytes)] more acolytes</b> to recite the incantations."))
-		return FALSE
-
-	active = TRUE
-
-	if(cast_time) //If there is cast time, force them to wait
-		visible_message(
-			SPAN_WARNING("<b>[caster]</b> begins doing <b>something</b> with \the [src]."),
-			SPAN_NOTICE("You begin slowly erasing \the [src] with your bare hands."),
-			"You hear chanting."
-		)
-
-		for(var/mob/living/cultist in cultists)
-			if(!acolytes_free)
-				if(do_after(cultist, cast_time, src, DO_DEFAULT))
-					cast()
-					return TRUE
-				else
-					to_chat(cultist, SPAN_WARNING("You and the other cultists must stand still to activate \the [src]!"))
-					return FALSE
-			else
-				break
-
-		if(do_after(user, cast_time, src, DO_DEFAULT))
-			cast()
-			return TRUE
-		else
-			visible_message(
-				SPAN_WARNING("<b>[caster]</b> chants and \the [src] activates!"),
-				SPAN_NOTICE("You begin slowly erasing \the [src] with your bare hands."),
-				"You hear chanting stop."
-			)
-			return FALSE
-
-	cast()
-	return TRUE
-
-
-/obj/effect/rune/proc/cast()
-	speak_incantation(caster, incantation_chant)
-	caster = null
-	acolytes = null
-	cultists = null
-
-/obj/effect/rune/proc/get_acolytes()
-	. = list()
-	for(var/mob/living/M in range(acolyte_range))
-		if(iscultist(M))
-			cultists += M
-			if(!M == caster) //Caster not included
-				. += M
-
-/obj/effect/rune/proc/fizzle(var/mob/living/user)
-	visible_message(
-		SPAN_WARNING("The markings pulse with a small burst of light, then fall dark."),
-		SPAN_WARNING("You hear a fizzle.")
-	)
-
-//Makes the speech a proc so all verbal components can be easily manipulated as a whole, or individually easily
-/obj/effect/rune/proc/speak_incantation(mob/living/user, incantation)
-	var/datum/language/L = all_languages[LANGUAGE_CULT]
-	if(incantation && (L in user.languages))
-		user.say(incantation, L)
-
-//Any rune that requires a target ON the rune
-/obj/effect/rune/targeted
-	var/targeted = FALSE
-	var/mob/target
-
-/obj/effect/rune/targeted/attempt_cast(mob/living/user)
-	target = get_target()
-
-	if(targeted && !target)
-		to_chat(user, SPAN_WARNING("There is no victim on \the [src]."))
-		return FALSE
-	..()
-
-/obj/effect/rune/targeted/proc/get_target()
-	for(var/mob/living/carbon/human/H in loc) //Just get the first one
-		target = H
-		break
-
 /* Tier 1 runes below */
 
 /obj/effect/rune/convert
-	cultname = "enlightenment"
+	rune_type = "enlightenment"
 	var/spamcheck = 0
 
 /obj/effect/rune/convert/cast(var/mob/living/user)
@@ -274,7 +51,7 @@
 			GLOB.cult.add_antagonist(usr.mind, ignore_role = 1, do_not_equip = 1)
 
 /obj/effect/rune/teleport
-	cultname = "teleport"
+	rune_type = "teleport"
 	var/destination
 
 /obj/effect/rune/teleport/New()
@@ -353,7 +130,7 @@
 	user.visible_message(SPAN_WARNING("\The [user] appears in a flash of red light!"), SPAN_WARNING("You feel as your body gets thrown out of the dimension of Nar-Sie!"), "You hear a pop.")
 
 /obj/effect/rune/tome
-	cultname = "summon tome"
+	rune_type = "summon tome"
 
 /obj/effect/rune/tome/cast(var/mob/living/user)
 	..()
@@ -362,7 +139,7 @@
 	qdel(src)
 
 /obj/effect/rune/wall
-	cultname = "wall"
+	rune_type = "wall"
 
 	var/obj/effect/cultwall/wall = null
 
@@ -436,7 +213,7 @@
 		qdel (src)
 
 /obj/effect/rune/ajorney
-	cultname = "astral journey"
+	rune_type = "astral journey"
 
 /obj/effect/rune/ajorney/cast(var/mob/living/user)
 	var/tmpkey = user.key
@@ -463,7 +240,7 @@
 	fizzle(user)
 
 /obj/effect/rune/defile
-	cultname = "defile"
+	rune_type = "defile"
 
 /obj/effect/rune/defile/cast(var/mob/living/user)
 	speak_incantation(user, "Ia! Ia! Zasan therium viortia!")
@@ -476,7 +253,7 @@
 	qdel(src)
 
 /obj/effect/rune/obscure
-	cultname = "obscure"
+	rune_type = "obscure"
 
 /obj/effect/rune/obscure/cast(var/mob/living/user)
 	var/runecheck = 0
@@ -490,7 +267,7 @@
 		qdel(src)
 
 /obj/effect/rune/reveal
-	cultname = "reveal"
+	rune_type = "reveal"
 
 /obj/effect/rune/reveal/cast(var/mob/living/user)
 	var/irunecheck = 0
@@ -507,7 +284,7 @@
 
 
 /obj/effect/rune/armor
-	cultname = "summon robes"
+	rune_type = "summon robes"
 	strokes = 3
 
 /obj/effect/rune/armor/cast(var/mob/living/user)
@@ -540,7 +317,7 @@
 	qdel(src)
 
 /obj/effect/rune/offering
-	cultname = "offering"
+	rune_type = "offering"
 	strokes = 3
 	var/mob/living/victim
 
@@ -615,7 +392,7 @@
 
 
 /obj/effect/rune/drain
-	cultname = "blood drain"
+	rune_type = "blood drain"
 	strokes = 3
 
 /obj/effect/rune/drain/cast(var/mob/living/user)
@@ -722,7 +499,7 @@
 		M.IgniteMob()
 
 /obj/effect/rune/emp
-	cultname = "emp"
+	rune_type = "emp"
 	strokes = 4
 
 /obj/effect/rune/emp/cast(var/mob/living/user)
@@ -731,7 +508,7 @@
 	qdel(src)
 
 /obj/effect/rune/massdefile //Defile but with a huge range. Bring a buddy for this, you're hitting the floor.
-	cultname = "mass defile"
+	rune_type = "mass defile"
 
 /obj/effect/rune/massdefile/cast(var/mob/living/user)
 	if(cultists.len < 3)
@@ -751,7 +528,7 @@
 /* Tier 3 runes */
 
 /obj/effect/rune/weapon
-	cultname = "summon weapon"
+	rune_type = "summon weapon"
 	strokes = 4
 
 /obj/effect/rune/weapon/cast(var/mob/living/user)
@@ -767,7 +544,7 @@
 	qdel(src)
 
 /obj/effect/rune/shell
-	cultname = "summon shell"
+	rune_type = "summon shell"
 	strokes = 4
 
 /obj/effect/rune/shell/cast(var/mob/living/user)
@@ -793,7 +570,7 @@
 	qdel(src)
 
 /obj/effect/rune/confuse
-	cultname = "confuse"
+	rune_type = "confuse"
 	strokes = 4
 
 /obj/effect/rune/confuse/cast(var/mob/living/user)
@@ -819,7 +596,7 @@
 	qdel(src)
 
 /obj/effect/rune/revive
-	cultname = "revive"
+	rune_type = "revive"
 	strokes = 4
 
 /obj/effect/rune/revive/cast(var/mob/living/user)
@@ -845,7 +622,7 @@
 	target.visible_message(SPAN_WARNING("\The [target]'s eyes glow with a faint red as \he stands up, slowly starting to breathe again."), SPAN_WARNING("Life... I'm alive again..."), "You hear liquid flow.")
 
 /obj/effect/rune/blood_boil
-	cultname = "blood boil"
+	rune_type = "blood boil"
 	strokes = 4
 
 /obj/effect/rune/blood_boil/cast(var/mob/living/user)
@@ -879,7 +656,7 @@
 /* Tier NarNar runes */
 
 /obj/effect/rune/tearreality
-	cultname = "tear reality"
+	rune_type = "tear reality"
 	var/the_end_comes = 0
 	var/the_time_has_come = 300
 	var/obj/singularity/narsie/large/HECOMES = null
@@ -955,7 +732,7 @@
 /* Imbue runes */
 
 /obj/effect/rune/imbue
-	cultname = "otherwordly abomination that shouldn't exist and that you should report to your local god as soon as you see it, along with the instructions for making this"
+	rune_type = "otherwordly abomination that shouldn't exist and that you should report to your local god as soon as you see it, along with the instructions for making this"
 	var/papertype
 
 /obj/effect/rune/imbue/cast(var/mob/living/user)
@@ -978,9 +755,9 @@
 	qdel(src)
 
 /obj/effect/rune/imbue/stun
-	cultname = "stun imbue"
+	rune_type = "stun imbue"
 	papertype = /obj/item/paper/talisman/stun
 
 /obj/effect/rune/imbue/emp
-	cultname = "destroy technology imbue"
+	rune_type = "destroy technology imbue"
 	papertype = /obj/item/paper/talisman/emp

@@ -22,6 +22,7 @@
 	..()
 	infused_blood = new(120, src) //Create the blood storage area
 
+//Attempting to heal the structure
 /obj/structure/cult/proc/attempt_restore(mob/user, restore_amount)
 	user.visible_message(
 		SPAN_DANGER("\The [user] begins to do <b>something</b> with \the [src]."), //Confuse bystanders
@@ -39,8 +40,13 @@
 
 	return FALSE
 
+//For tome interactions
 /obj/structure/cult/proc/tome_act(mob/user, obj/item/book/tome/book)
-	to_chat(user, SPAN_OCCULT("You accomplish nothing trying to interface with \the [src] using \the [book]."))
+	if(user.a_intent == I_GRAB) //Grab intent to display information
+		to_chat(user, SPAN_NOTICE("This is a <b>[cult_name]</b>. [cult_desc]"))
+
+		if(infused_blood.total_volume > 0)
+			to_chat(user, SPAN_INFO("It has <b>[infused_blood.total_volume] units of blood</b> infused into it."))
 
 /obj/structure/cult/attack_hand(mob/user) //Mostly human-related stuff for attempt_restore
 	if(istype(user, /mob/living/carbon/human) && iscultist(user))
@@ -59,8 +65,9 @@
 				)
 
 				var/obj/effect/decal/cleanable/blood/drip/wasted_blood
-				wasted_blood.basecolor = H.species.blood_color
 				new wasted_blood(get_turf(src))
+				wasted_blood.basecolor = H.species.blood_color
+				wasted_blood.update_icon()
 
 		if(H.a_intent == I_GRAB && infused_blood.get_free_space() > 0) //Grabbing will donate blood but not repair it
 			to_chat(user, SPAN_WARNING("You feel blood seep through the pores of your skin into \the [src]."))
@@ -74,15 +81,11 @@
 	if(istype(W, /obj/item/natural_weapon/cult_builder) && health_damaged())
 		attempt_restore(user, GLOB.cult.cult_rating + 2) //Constructs get a boost based on cult rating
 		return
-	if(istype(W, /obj/item/book/tome))
+	if(istype(W, /obj/item/book/tome) && iscultist(user))
 		tome_act(user, W)
 		return
 	..()
 
 /obj/structure/cult/examine(mob/user)
-	. = ..()
-	if(iscultist(user)) //check to display cult information
-		to_chat(user, SPAN_INFO("This is a <b>[cult_name]</b>. [cult_desc]"))
-
-		if(infused_blood.total_volume > 0)
-			to_chat(user, SPAN_INFO("It has <b>[infused_blood.total_volume] units of blood</b> infused into it."))
+	if(iscultist(user))
+		to_chat(user, SPAN_INFO("Use your tome on \the [src] while on grab intent to learn more about it."))
