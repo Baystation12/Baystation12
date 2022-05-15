@@ -1,8 +1,0 @@
-author: Rootoo807
-delete-after: true
-changes:
-  - rscadd: Adds serving bowls, which can be used to serve custom dishes of up to
-      4 ingredients. Use "Rename Bowl" verb to give rename.
-  - rscadd: Adds 20 serving bowls to the Dinnerware vendor.
-  - tweak: Custom sandwiches can be renamed.
-  - tweak: Tweaks icons for some cooker results, adds filling color to some foods.

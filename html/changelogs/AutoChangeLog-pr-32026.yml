@@ -1,6 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - maptweak: The GUP has been remapped to make better use of the space.
-  - maptweak: The Aquila has been remapped so as to not have redundant rooms.
-  - bugfix: The GUP no longer appears to be a convertible from D4 at spawn.
