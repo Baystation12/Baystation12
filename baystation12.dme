@@ -197,6 +197,7 @@
 #include "code\controllers\subsystems\lighting.dm"
 #include "code\controllers\subsystems\machines.dm"
 #include "code\controllers\subsystems\mapping.dm"
+#include "code\controllers\subsystems\misc.dm"
 #include "code\controllers\subsystems\misc_slow.dm"
 #include "code\controllers\subsystems\mobs.dm"
 #include "code\controllers\subsystems\ping.dm"
