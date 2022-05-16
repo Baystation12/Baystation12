@@ -154,9 +154,9 @@
 	var/datum/progressbar/bar
 	if (do_flags & DO_SHOW_PROGRESS)
 		if (do_flags & DO_PUBLIC_PROGRESS)
-			bar = new /datum/progressbar/public(user, delay, target)
+			bar = new /datum/progressbar/public(user, delay, target, !!(do_flags & DO_BAR_OVER_USER))
 		else
-			bar = new /datum/progressbar/private(user, delay, target)
+			bar = new /datum/progressbar/private(user, delay, target, !!(do_flags & DO_BAR_OVER_USER))
 
 	var/start_time = world.time
 	var/end_time = start_time + delay
