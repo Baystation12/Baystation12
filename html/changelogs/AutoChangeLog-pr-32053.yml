@@ -1,0 +1,6 @@
+author: Spookerton
+delete-after: true
+changes:
+  - tweak: The physical part of character setup has changed to be less tabley.
+  - tweak: You can set your character preview to be small (2x), medium (3x), or large
+      (4x).
