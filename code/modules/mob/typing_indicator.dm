@@ -10,6 +10,8 @@ I IS TYPIN'!'
 	follow_proc = /atom/movable/proc/move_to_turf_or_null
 	icon = 'icons/mob/talk.dmi'
 	icon_state = "typing"
+	plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	layer = SPEECH_INDICATOR_LAYER
 
 /atom/movable/overlay/typing_indicator/Initialize()
 	. = ..()

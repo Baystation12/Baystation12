@@ -140,6 +140,7 @@
 	#define EYE_GLOW_LAYER         1
 	#define BEAM_PROJECTILE_LAYER  2
 	#define SUPERMATTER_WALL_LAYER 3
+	#define SPEECH_INDICATOR_LAYER 4
 
 #define FULLSCREEN_PLANE                5 // for fullscreen overlays that do not cover the hud.
 

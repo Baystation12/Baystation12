@@ -146,14 +146,18 @@ var/global/list/_client_preferences_by_type
 	prefs.update_setup_window(usr)
 
 /datum/client_preference/language_display
-	description = "Display Language Names"
+	description = "Show Language Names"
 	key = "LANGUAGE_DISPLAY"
 	options = list(GLOB.PREF_SHORTHAND, GLOB.PREF_FULL, GLOB.PREF_OFF)
+
+/datum/client_preference/ghost_language_hide
+	description = "Hide Language Names As Ghost"
+	key = "LANGUAGE_DISPLAY_GHOST"
 
 /datum/client_preference/ghost_follow_link_length
 	description = "Ghost Follow Links"
 	key = "CHAT_GHOSTFOLLOWLINKLENGTH"
-	options = list(GLOB.PREF_SHORT, GLOB.PREF_LONG)
+	options = list(GLOB.PREF_SHORT, GLOB.PREF_LONG, GLOB.PREF_OFF)
 
 /datum/client_preference/chat_tags
 	description = "Chat tags"
