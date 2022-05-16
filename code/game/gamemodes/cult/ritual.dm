@@ -103,7 +103,7 @@
 			timer = 8 SECONDS
 			damage = 2
 	visible_message("<span class='warning'>\The [src] slices open a finger and begins to chant and paint symbols on the floor.</span>", "<span class='notice'>[self]</span>", "You hear chanting.")
-	if(do_after(src, timer, rune, DO_PUBLIC_UNIQUE))
+	if(do_after(src, timer, T, DO_PUBLIC_UNIQUE))
 		remove_blood_simple(cost * damage)
 		if(locate(/obj/effect/rune) in T)
 			return
