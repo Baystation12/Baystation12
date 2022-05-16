@@ -7,6 +7,7 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 /datum/category_group/player_setup_category/physical_preferences
 	name = "Physical"
 	sort_order = 1
+	item_wrap_index = 2
 	category_item_type = /datum/category_item/player_setup_item/physical
 
 /datum/category_group/player_setup_category/background_preferences
@@ -117,6 +118,7 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 **************************/
 /datum/category_group/player_setup_category
 	var/sort_order = 0
+	var/item_wrap_index
 
 /datum/category_group/player_setup_category/dd_SortValue()
 	return sort_order
@@ -151,10 +153,10 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 /datum/category_group/player_setup_category/proc/content(var/mob/user)
 	. = "<table style='width:100%'><tr style='vertical-align:top'><td style='width:50%'>"
 	var/current = 0
-	var/halfway = items.len / 2
+	var/wrap_index = item_wrap_index || items.len / 2
 	for(var/datum/category_item/player_setup_item/player_setup_item in items)
-		if(halfway && current++ >= halfway)
-			halfway = 0
+		if(wrap_index && current++ >= wrap_index)
+			wrap_index = 0
 			. += "</td><td></td><td style='width:50%'>"
 		. += "[player_setup_item.content(user)]<br>"
 	. += "</td></tr></table>"
