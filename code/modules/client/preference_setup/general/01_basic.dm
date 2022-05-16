@@ -38,7 +38,6 @@
 
 
 /datum/category_item/player_setup_item/physical/basic/OnTopic(var/href,var/list/href_list, var/mob/user)
-	var/datum/species/S = all_species[pref.species]
 	if(href_list["rename"])
 		var/raw_name = input(user, "Choose your character's name:", "Character Name")  as text|null
 		if (!isnull(raw_name) && CanUseTopic(user))
@@ -55,22 +54,6 @@
 	else if(href_list["random_name"])
 		pref.real_name = random_name(pref.gender, pref.species)
 		return TOPIC_REFRESH
-
-	else if(href_list["gender"])
-		var/new_gender = input(user, "Choose your character's gender:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.gender) as null|anything in S.genders
-		S = all_species[pref.species]
-		if(new_gender && CanUseTopic(user) && (new_gender in S.genders))
-			pref.gender = new_gender
-			if(!(pref.f_style in S.get_facial_hair_styles(pref.gender)))
-				ResetFacialHair()
-		return TOPIC_REFRESH_UPDATE_PREVIEW
-
-	else if(href_list["age"])
-		var/new_age = input(user, "Choose your character's age:\n([S.min_age]-[S.max_age])", CHARACTER_PREFERENCE_INPUT_TITLE, pref.age) as num|null
-		if(new_age && CanUseTopic(user))
-			pref.age = max(min(round(text2num(new_age)), S.max_age), S.min_age)
-			pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)		// The age may invalidate skill loadouts
-			return TOPIC_REFRESH
 
 	else if(href_list["spawnpoint"])
 		var/list/spawnkeys = list()
