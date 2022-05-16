@@ -550,7 +550,7 @@
 		new /obj/item/faucet (loc)
 		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 		user.visible_message(
-			SPAN_WARNING("\The [user] unwrenches the \the [src]."),
+			SPAN_WARNING("\The [user] unwrenches \the [src]."),
 			SPAN_WARNING("You unwrench \the [src].")
 		)
 		qdel(src)
@@ -561,11 +561,14 @@
 	. = ..()
 	open = !open
 	if(open)
-		playsound(src.loc, 'sound/effects/closet_open.ogg', 20, 1)
+		playsound(loc, 'sound/effects/closet_open.ogg', 20, 1)
 	else
-		playsound(src.loc, 'sound/effects/closet_close.ogg', 20, 1)
+		playsound(loc, 'sound/effects/closet_close.ogg', 20, 1)
 
-	user.visible_message(SPAN_NOTICE("\The [user] has [open ? "opened" : "closed"] the faucet."))
+	user.visible_message(
+		SPAN_NOTICE("\The [user] has [open ? "opened" : "closed"] \the [src]."),
+		SPAN_NOTICE("You [open ? "open" : "close"] \the [src].")
+	)
 	update_icon()
 
 /obj/structure/hygiene/faucet/on_update_icon()
@@ -588,13 +591,13 @@
 			O.dir = dir
 			playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 			user.visible_message(
-				SPAN_WARNING("\The [user] wrenches the \the [src] down."),
+				SPAN_WARNING("\The [user] wrenches \the [src] down."),
 				SPAN_WARNING("You wrench \the [src] down.")
 			)
 			qdel(src)
-			return
 		else
 			to_chat(user, SPAN_WARNING("\The [src] can only be secured to pool tiles!"))
+		return TRUE
 	return ..()
 
 /obj/structure/hygiene/faucet/proc/water_flow()
