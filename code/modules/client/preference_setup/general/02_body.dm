@@ -253,11 +253,27 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	return mob_species && (mob_species.appearance_flags & flag)
 
 /datum/category_item/player_setup_item/physical/body/OnTopic(var/href,var/list/href_list, var/mob/user)
-
 	var/datum/species/mob_species = all_species[pref.species]
+
 	if(href_list["toggle_species_verbose"])
 		hide_species = !hide_species
 		return TOPIC_REFRESH
+
+	else if(href_list["gender"])
+		var/new_gender = input(user, "Choose your character's gender:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.gender) as null|anything in mob_species.genders
+		mob_species = all_species[pref.species]
+		if(new_gender && CanUseTopic(user) && (new_gender in mob_species.genders))
+			pref.gender = new_gender
+			if(!(pref.f_style in mob_species.get_facial_hair_styles(pref.gender)))
+				ResetFacialHair()
+		return TOPIC_REFRESH_UPDATE_PREVIEW
+
+	else if(href_list["age"])
+		var/new_age = input(user, "Choose your character's age:\n([mob_species.min_age]-[mob_species.max_age])", CHARACTER_PREFERENCE_INPUT_TITLE, pref.age) as num|null
+		if(new_age && CanUseTopic(user))
+			pref.age = max(min(round(text2num(new_age)), mob_species.max_age), mob_species.min_age)
+			pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)		// The age may invalidate skill loadouts
+			return TOPIC_REFRESH
 
 	else if(href_list["random"])
 		pref.randomize_appearance_and_body_for()
