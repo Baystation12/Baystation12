@@ -125,3 +125,4 @@
 #define GAS_STEAM				"water"
 #define GAS_PHORON				"phoron"
 #define GAS_BORON				"boron"
+#define GAS_HEAT                "heat" //Not a real gas, used for visual effects

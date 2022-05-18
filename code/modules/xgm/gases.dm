@@ -253,3 +253,8 @@
 	breathed_product = /datum/reagent/toxin/boron
 	symbol_html = "B"
 	symbol = "B"
+
+/decl/xgm_gas/heat
+	id = GAS_HEAT
+	name = "heat"
+	tile_color = COLOR_WHITE

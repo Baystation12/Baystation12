@@ -123,6 +123,22 @@
 	color = 0
 	drift = generator("circle", 0.2, NORMAL_RAND)
 
+/particles/heat
+	width = 500
+	height = 500
+	count = 600
+	spawning = 35
+	lifespan = 1.85 SECONDS
+	fade = 1.25 SECONDS
+	position = generator("box", list(-16, -16), list(16, 0), NORMAL_RAND)
+	friction = 0.15
+	gradient = list(0, COLOR_WHITE, 0.75, COLOR_ORANGE)
+	color_change = 0.1
+	color = 0
+	gravity = list(0, 1)
+	drift = generator("circle", 0.4, NORMAL_RAND)
+	velocity = generator("circle", 0, 3, NORMAL_RAND)
+
 //Spawner object
 //Maybe we could pool them in and out
 /obj/particle_emitter
@@ -196,3 +212,11 @@
 /obj/particle_emitter/sparks_flare/Initialize(mapload, time, _color)
 	. = ..()
 	filters = filter(type="bloom", size=3, offset = 0.5, alpha = 220)
+
+/obj/particle_emitter/heat
+	particles = new/particles/heat
+	render_target = HEAT_EFFECT_TARGET
+
+/obj/particle_emitter/heat/Initialize()
+	. = ..()
+	filters += filter(type = "blur", size = 1)
