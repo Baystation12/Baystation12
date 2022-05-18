@@ -1,5 +1,0 @@
-author: Rootoo807
-delete-after: true
-changes:
-  - tweak: Eating food that normally produces trash with a utensil now properly spawns
-      trash.
