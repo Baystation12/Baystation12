@@ -159,14 +159,18 @@
 			var/list/rgba
 			if (marking.do_coloration & DO_COLORATION_USER)
 				rgba = rgb2num(marking_color)
-			if (marking.do_coloration & DO_COLORATION_HAIR)
+			else if (marking.do_coloration & DO_COLORATION_EYES)
+				rgba = list(owner.r_eyes, owner.g_eyes, owner.b_eyes)
+			else if (marking.do_coloration & DO_COLORATION_HAIR)
 				if (head_icon && !(head_accessory.flags & HAIR_BALD) && length(h_col) > 2)
 					rgba = h_col
-			if ((marking.do_coloration & DO_COLORATION_SKIN) && !rgba) //intentional
+			if ((marking.do_coloration & DO_COLORATION_SKIN_TONE) && !rgba)
 				rgba = species.get_skin_tone_base()
-				if (rgba)
-					for (var/i = rgba.len to 1 step -1)
-						rgba[i] += s_tone
+				var/offset_len = length(marking.skin_tone_offset)
+				for (var/i = min(length(rgba), offset_len) to 1 step -1)
+					if (offset_len)
+						rgba[i] += marking.skin_tone_offset[i]
+					rgba[i] += s_tone
 			if (rgba)
 				var/alpha = 0
 				if (rgba.len > 3)

@@ -116,13 +116,18 @@
 #define DO_COLORATION_USER FLAG(0)
 
 /// Take a coloration cue from skin tone
-#define DO_COLORATION_SKIN FLAG(1)
+#define DO_COLORATION_SKIN_TONE FLAG(1)
 
 /// Take a coloration cue from hair color
 #define DO_COLORATION_HAIR FLAG(2)
 
 /// Take a coloration cue from hair color if available - otherwise skin tone
-#define DO_COLORATION_AUTO (DO_COLORATION_SKIN | DO_COLORATION_HAIR)
+#define DO_COLORATION_HAIR_OR_SKIN (DO_COLORATION_SKIN_TONE | DO_COLORATION_HAIR)
+
+/// Take a coloration cue from eye color
+#define DO_COLORATION_EYES FLAG(3)
+
+#define ICON_NO_BLEND (-1)
 
 
 // Click cooldown

@@ -13,3 +13,6 @@
 
 	/// A list of marking types to disallow while this marking is added
 	var/list/disallows = list()
+
+	/// If this marking targets skin tone, applies this as a color offset
+	var/list/skin_tone_offset

@@ -60,7 +60,7 @@
 	return SPECIES_HUMAN
 
 /datum/species/human/get_skin_tone_base()
-	return list(200, 150, 123, 0)
+	return list(255, 205, 178)
 
 /datum/species/human/max_skin_tone()
 	return 220
