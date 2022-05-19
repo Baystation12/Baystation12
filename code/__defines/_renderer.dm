@@ -26,8 +26,11 @@
 	/// If text, uses the text or, if TRUE, uses "*AUTO-[name]"
 	var/render_target_name = TRUE
 
+	var/mob/owner = null
+
 
 /atom/movable/renderer/Destroy()
+	owner = null
 	QDEL_NULL(relay)
 	return ..()
 
@@ -35,8 +38,9 @@
 INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 
 
-/atom/movable/renderer/Initialize()
+/atom/movable/renderer/Initialize(mapload, mob/owner)
 	. = ..()
+	src.owner = owner
 	INIT_DISALLOW_TYPE(/atom/movable/renderer)
 	if (isnull(group))
 		if (istext(render_target_name))
@@ -58,6 +62,14 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 		relay.blend_mode = blend_mode
 	else
 		relay.blend_mode = relay_blend_mode
+
+/**
+* Graphic preferences
+*
+* Some renderers may be able to use a graphic preference to determine how to display effects. For example reduce particle counts or filter variables.
+*/
+/atom/movable/renderer/proc/GraphicsUpdate()
+	return
 
 
 /**
@@ -210,7 +222,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 */
 
 
-/// Renders the /obj/effect/effect/warp example effect
+/// Renders the /obj/effect/effect/warp example effect as well as gravity catapult effects
 /atom/movable/renderer/warp
 	name = "Warp Effect"
 	group = RENDER_GROUP_NONE
@@ -218,12 +230,54 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 	render_target_name = "*warp"
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
+//Similar to warp but not as strong
+/atom/movable/renderer/heat
+	name = "Heat Effect"
+	group = RENDER_GROUP_NONE
+	plane = HEAT_EFFECT_PLANE
+	render_target_name = HEAT_COMPOSITE_TARGET
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
-/// Adds the warp effect to the game rendering group
-/atom/movable/renderer/group_game/Initialize()
+	var/obj/gas_heat_object = null
+
+/atom/movable/renderer/heat/proc/Setup()
+	var/mob/M = owner
+
+	if(istype(M))
+		var/quality = M.get_preference_value(/datum/client_preference/graphics_quality)
+
+		if(gas_heat_object)
+			vis_contents -= gas_heat_object
+
+		if (quality == GLOB.PREF_LOW)
+			if(!istype(gas_heat_object, /obj/effect/heat))
+				QDEL_NULL(gas_heat_object)
+				gas_heat_object = new /obj/effect/heat(null)
+		else
+			if(!istype(gas_heat_object, /obj/particle_emitter/heat))
+				QDEL_NULL(gas_heat_object)
+				gas_heat_object = new /obj/particle_emitter/heat(null, -1)
+			if (quality == GLOB.PREF_MED)
+				gas_heat_object.particles?.count = 250
+				gas_heat_object.particles?.spawning = 15
+			else if (quality == GLOB.PREF_HIGH)
+				gas_heat_object.particles?.count = 600
+				gas_heat_object.particles?.spawning = 35
+
+		vis_contents += gas_heat_object
+
+/atom/movable/renderer/heat/Initialize()
 	. = ..()
-	filters += filter(type = "displace", render_source = "*warp", size = 10)
+	Setup()
 
+/atom/movable/renderer/heat/GraphicsUpdate()
+	. = ..()
+	Setup()
+
+/atom/movable/renderer/scene_group/Initialize()
+	. = ..()
+	filters += filter(type = "displace", render_source = "*warp", size = 5)
+	filters += filter(type = "displace", render_source = HEAT_COMPOSITE_TARGET, size = 2.5)
 
 /// Example of a warp filter for /renderer use
 /obj/effect/effect/warp

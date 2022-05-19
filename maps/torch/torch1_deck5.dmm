@@ -95,13 +95,6 @@
 "an" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/fifthdeck/fore)
-"ao" = (
-/obj/effect/paint/red,
-/obj/structure/sign/warning/hot_exhaust{
-	dir = 1
-	},
-/turf/simulated/wall/titanium,
-/area/guppy_hangar/start)
 "ap" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -458,11 +451,14 @@
 /area/guppy_hangar/start)
 "aZ" = (
 /obj/machinery/atmospherics/unary/engine,
+/obj/structure/window/reinforced,
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
 "ba" = (
-/obj/structure/fuel_port,
 /obj/effect/paint/red,
+/obj/structure/sign/warning/hot_exhaust{
+	dir = 1
+	},
 /turf/simulated/wall/titanium,
 /area/guppy_hangar/start)
 "bb" = (
@@ -620,14 +616,13 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/expedition/storage)
 "br" = (
-/obj/structure/shuttle/engine/heater{
-	dir = 1
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel,
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
 	},
-/obj/structure/window/reinforced,
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
-	dir = 8
-	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "bs" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
@@ -809,87 +804,82 @@
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/crew)
 "bG" = (
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 5
 	},
-/obj/machinery/airlock_sensor{
-	frequency = 1431;
-	id_tag = "guppy_shuttle_exterior_sensor";
-	pixel_y = 24
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup{
+	start_pressure = 7498.00
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy{
-	dir = 4;
-	id_tag = "guppy_shuttle_pump_out_external"
-	},
-/turf/simulated/floor/plating,
+/obj/machinery/atmospherics/portables_connector,
+/obj/effect/floor_decal/industrial/outline/orange,
+/turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "bH" = (
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 5
 	},
-/obj/machinery/door/airlock/external{
-	autoset_access = 0;
-	frequency = 1431;
-	id_tag = "guppy_shuttle_outer";
-	name = "Guppy External Access"
-	},
-/obj/machinery/shield_diffuser,
-/obj/machinery/atmospherics/pipe/manifold/visible{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "bI" = (
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
+/obj/machinery/atmospherics/valve/open{
+	dir = 4;
+	name = "fuel valve";
+	open = 0
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/techfloor{
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 4
+	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "bJ" = (
 /obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
+	d2 = 2;
+	icon_state = "0-2"
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 9
+	},
+/obj/machinery/power/terminal{
 	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 4
+/obj/effect/floor_decal/techfloor{
+	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "bK" = (
-/obj/effect/floor_decal/techfloor{
-	dir = 1
+/obj/machinery/atmospherics/valve/open{
+	name = "air supply valve";
+	open = 0
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy{
-	dir = 8;
-	id_tag = "guppy_shuttle_pump_out_internal"
+/obj/machinery/airlock_sensor{
+	frequency = 1431;
+	id_tag = "guppy_shuttle_interior_sensor";
+	pixel_x = 24
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "bL" = (
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id_tag = "guppy_hatch";
-	name = "Rear Hatch"
+/obj/effect/catwalk_plated,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/guppy_hangar/start)
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "bM" = (
 /obj/structure/disposalpipe/segment{
 	dir = 1;
@@ -1055,53 +1045,59 @@
 /turf/simulated/wall/prepainted,
 /area/quartermaster/expedition/storage)
 "cf" = (
-/obj/machinery/door/airlock/external{
-	autoset_access = 0;
-	frequency = 1431;
-	id_tag = "guppy_shuttle_outer";
-	name = "Guppy External Access"
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
 	},
-/obj/machinery/shield_diffuser,
-/obj/machinery/atmospherics/pipe/manifold/visible,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/guppy_hangar/start)
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "cg" = (
-/obj/effect/floor_decal/techfloor,
-/obj/machinery/atmospherics/pipe/simple/visible{
+/obj/machinery/atmospherics/unary/vent_scrubber/guppy{
+	id_tag = "guppy_shuttle_pump_out_scrubber";
+	power_rating = 15000;
+	scrubbing = "siphon"
+	},
+/obj/structure/handrail{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning,
-/obj/machinery/atmospherics/valve/open{
-	open = 0
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/floor_decal/techfloor{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "ch" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/techfloor,
-/obj/machinery/atmospherics/pipe/manifold/visible{
-	dir = 1
-	},
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 8;
-	icon_state = "warningcorner"
+/obj/effect/floor_decal/techfloor{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "ci" = (
-/obj/machinery/light/small{
+/obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy{
-	dir = 8;
-	id_tag = "guppy_shuttle_pump_out_internal"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/obj/effect/floor_decal/industrial/warning/corner,
+/turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "cj" = (
 /obj/effect/paint/hull,
@@ -1204,20 +1200,18 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/hangar)
 "cA" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy{
+	dir = 8;
+	id_tag = "guppy_shuttle_pump_out_internal"
+	},
 /obj/effect/overmap/visitable/ship/landable/guppy,
-/obj/machinery/atmospherics/pipe/manifold/visible{
-	dir = 8
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
 	},
-/obj/structure/cable/cyan,
-/obj/structure/cable/yellow{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/machinery/power/terminal{
-	dir = 8
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 8
+/obj/effect/floor_decal/techfloor{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
@@ -1262,52 +1256,36 @@
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cargo)
 "cF" = (
-/obj/structure/bed/chair/shuttle/blue{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 9
-	},
-/obj/structure/cable/cyan{
+/obj/machinery/atmospherics/pipe/manifold4w/hidden,
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 1;
-	icon_state = "warning"
+/obj/effect/floor_decal/techfloor{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "cG" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy{
+	dir = 8;
+	id_tag = "guppy_shuttle_pump_out_internal"
+	},
 /obj/effect/shuttle_landmark/torch/hangar/guppy,
-/obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 5
-	},
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 1;
-	icon_state = "warningcorner"
+/obj/effect/floor_decal/techfloor{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "cH" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/guppy{
-	dir = 8;
-	id_tag = "guppy_shuttle_pump_out_scrubber";
-	power_rating = 15000;
-	scrubbing = "siphon"
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
 	},
-/obj/machinery/airlock_sensor{
-	frequency = 1431;
-	id_tag = "guppy_shuttle_interior_sensor";
-	pixel_x = 24
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "cI" = (
 /obj/machinery/mech_recharger,
@@ -1395,29 +1373,29 @@
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cargo)
 "cT" = (
-/obj/structure/bed/chair/shuttle/blue{
+/obj/machinery/hologram/holopad/longrange,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/structure/handrail{
 	dir = 4
 	},
-/obj/machinery/atmospherics/valve/open{
-	dir = 4;
-	open = 0
+/obj/machinery/light{
+	dir = 8
 	},
-/obj/structure/cable/cyan{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "cU" = (
 /obj/machinery/tele_beacon,
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/effect/floor_decal/techfloor{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
@@ -1425,20 +1403,25 @@
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/crate/secure/shuttle{
+	dir = 8;
+	req_access = list("ACCESS_TORCH_GUP")
+	},
+/obj/random_multi/single_item/boombox,
+/obj/item/device/radio,
+/obj/item/device/radio,
 /obj/machinery/embedded_controller/radio/airlock/tin_can{
 	dir = 8;
 	frequency = 1431;
 	id_tag = "guppy_shuttle";
 	pixel_x = 24
 	},
-/obj/structure/closet/crate/secure/shuttle{
-	dir = 8;
-	req_access = list("ACCESS_TORCH_GUP")
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4;
+	icon_state = "warningcorner"
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "cW" = (
 /obj/machinery/suit_storage_unit/science,
@@ -1618,28 +1601,25 @@
 /turf/simulated/floor/tiled/white,
 /area/vacant/infirmary)
 "do" = (
-/obj/structure/bed/chair/shuttle/blue{
-	dir = 4
+/obj/machinery/atmospherics/unary/vent_scrubber/guppy{
+	dir = 1;
+	id_tag = "guppy_shuttle_pump_out_scrubber";
+	power_rating = 15000;
+	scrubbing = "siphon"
 	},
-/obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/cable/cyan{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "dp" = (
-/obj/machinery/hologram/holopad/longrange,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
+/obj/effect/floor_decal/techfloor{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
@@ -1710,50 +1690,46 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
 "dE" = (
-/obj/structure/table/steel_reinforced,
-/obj/machinery/cell_charger,
-/obj/item/device/radio,
-/obj/random_multi/single_item/boombox,
-/obj/item/device/radio,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/cable/cyan{
+/obj/structure/cable/green{
 	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
+	d2 = 8;
+	icon_state = "1-8"
 	},
-/obj/item/device/radio/intercom{
-	dir = 4;
-	pixel_x = -21
+/obj/effect/floor_decal/techfloor{
+	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "dF" = (
 /obj/structure/bed/chair/shuttle/blue,
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
+/obj/effect/floor_decal/techfloor{
+	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "dG" = (
-/obj/structure/table/steel_reinforced,
-/obj/machinery/power/apc/hyper{
-	dir = 4;
-	name = "east bump";
-	pixel_x = 24;
-	req_access = list()
+/obj/machinery/computer/ship/engines{
+	dir = 8
 	},
-/obj/structure/cable/cyan{
-	d2 = 8;
-	icon_state = "0-8"
+/obj/machinery/button/blast_door{
+	id_tag = "guppy_window";
+	name = "Window Shutter Control";
+	pixel_x = 24;
+	pixel_y = -8;
+	req_access = list("ACCESS_TORCH_GUP")
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "guppy_hatch";
 	name = "Rear Hatch Control";
+	pixel_x = 24;
+	pixel_y = 8;
 	req_access = list("ACCESS_TORCH_GUP")
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/obj/item/device/radio/intercom/hailing{
+	dir = 1;
+	pixel_y = -28
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "dJ" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -1783,26 +1759,13 @@
 	dir = 1;
 	req_access = list(list("ACCESS_TORCH_GUP_HELM"))
 	},
-/obj/machinery/light{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "dN" = (
 /obj/machinery/computer/shuttle_control/explore/guppy{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/guppy_hangar/start)
-"dO" = (
-/obj/machinery/computer/ship/engines{
-	dir = 1
-	},
-/obj/item/device/radio/intercom/hailing{
-	dir = 8;
-	pixel_x = 24
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "dP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1948,6 +1911,10 @@
 "ef" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/hull,
+/obj/machinery/door/blast/regular{
+	id_tag = "guppy_window";
+	name = "blast shield"
+	},
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
 "eg" = (
@@ -2827,12 +2794,18 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/storage)
 "gr" = (
-/obj/structure/window/reinforced,
-/obj/structure/shuttle/engine/heater{
-	dir = 1
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
+	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel,
-/turf/simulated/floor/plating,
+/obj/machinery/power/smes/buildable/preset/torch/shuttle{
+	RCon_tag = "Shuttle - Guppy"
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "gs" = (
 /obj/structure/cable{
@@ -3484,17 +3457,23 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fifthdeck/fore)
 "iq" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy{
 	dir = 4;
-	icon_state = "warning"
+	id_tag = "guppy_shuttle_pump_out_external"
+	},
+/obj/structure/handrail,
+/obj/machinery/airlock_sensor{
+	frequency = 1431;
+	id_tag = "guppy_shuttle_exterior_sensor";
+	pixel_y = 24
 	},
 /obj/structure/cable/cyan{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/hangar)
+/turf/simulated/floor/plating,
+/area/guppy_hangar/start)
 "ir" = (
 /obj/machinery/camera/network/hangar,
 /turf/simulated/floor/tiled/monotile,
@@ -3711,8 +3690,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/obj/machinery/power/apc/shuttle/charon{
-	dir = 4
+/obj/machinery/power/apc/hyper/shuttle/charon{
+	dir = 4;
+	pixel_x = 26
 	},
 /obj/structure/cable/cyan,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -4484,8 +4464,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/machinery/power/apc/shuttle/charon{
-	dir = 8
+/obj/machinery/power/apc/hyper/shuttle/charon{
+	dir = 8;
+	pixel_x = -27
 	},
 /obj/structure/cable/cyan,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -4685,17 +4666,11 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "kF" = (
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 26
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
 	},
-/obj/machinery/atmospherics/unary/vent_scrubber/guppy{
-	dir = 8;
-	id_tag = "guppy_shuttle_pump_out_scrubber";
-	power_rating = 15000;
-	scrubbing = "siphon"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "kG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -5200,6 +5175,29 @@
 /obj/machinery/status_display,
 /turf/simulated/wall/r_wall/prepainted,
 /area/quartermaster/hangar)
+"lU" = (
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 4
+	},
+/obj/machinery/power/apc/hyper{
+	name = "east bump";
+	pixel_y = -24;
+	req_access = list()
+	},
+/obj/machinery/camera/network/pod{
+	c_tag = "General Utility Pod - Crew Compartment";
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/recharger/wallcharger{
+	dir = 4;
+	pixel_x = -23
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/guppy_hangar/start)
 "lV" = (
 /obj/machinery/light/spot,
 /turf/simulated/floor/tiled/monotile,
@@ -5470,11 +5468,6 @@
 /area/exploration_shuttle/atmos)
 "mB" = (
 /obj/effect/catwalk_plated,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -7270,14 +7263,15 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
 "qb" = (
-/obj/structure/shuttle/engine/heater{
-	dir = 1
+/obj/structure/fuel_port{
+	pixel_x = 32
 	},
-/obj/structure/window/reinforced,
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 9
+/obj/machinery/portable_atmospherics/canister/air/airlock{
+	start_pressure = 6000
 	},
-/turf/simulated/floor/plating,
+/obj/machinery/atmospherics/portables_connector,
+/obj/effect/floor_decal/industrial/outline/blue,
+/turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "qc" = (
 /obj/structure/catwalk,
@@ -8579,20 +8573,22 @@
 /turf/simulated/floor/plating,
 /area/vacant/infirmary)
 "sJ" = (
-/obj/machinery/camera/network/pod{
-	c_tag = "General Utility Pod - Crew Compartment";
-	dir = 4
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 1
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/atmospherics/portables_connector{
-	dir = 4
+/obj/machinery/door/airlock/external{
+	autoset_access = 0;
+	frequency = 1431;
+	id_tag = "guppy_shuttle_outer";
+	name = "Guppy External Access"
 	},
-/obj/machinery/portable_atmospherics/canister/air/airlock,
-/turf/simulated/floor/plating,
-/area/guppy_hangar/start)
-"sK" = (
-/obj/machinery/shipsensors/weak,
-/turf/simulated/floor/plating,
+/obj/machinery/shield_diffuser,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "sL" = (
 /obj/machinery/atmospherics/unary/tank/air{
@@ -11511,6 +11507,9 @@
 	dir = 4;
 	id_tag = "guppy_shuttle_pump_out_external"
 	},
+/obj/structure/handrail{
+	dir = 1
+	},
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
 "Cn" = (
@@ -12512,6 +12511,14 @@
 /obj/random_multi/single_item/poppy,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/aftstarboard)
+"Gg" = (
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "guppy_hatch";
+	name = "Rear Hatch"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/guppy_hangar/start)
 "Gh" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 8
@@ -12543,6 +12550,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/hallwaya)
+"Gq" = (
+/obj/machinery/shipsensors/weak,
+/turf/simulated/floor/plating,
+/area/guppy_hangar/start)
 "Gr" = (
 /obj/structure/table/standard,
 /obj/random/tool,
@@ -13595,15 +13606,17 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/custodial)
 "Ko" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/power/port_gen/pacman{
-	anchored = 1
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 4
 	},
-/obj/structure/cable/yellow{
-	d2 = 4;
-	icon_state = "0-4"
+/obj/machinery/firealarm{
+	pixel_y = 24
 	},
-/turf/simulated/floor/plating,
+/obj/item/device/radio/intercom{
+	dir = 4;
+	pixel_x = -21
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "Kr" = (
 /obj/structure/closet/secure_closet/scientist_torch,
@@ -15267,17 +15280,15 @@
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/phoron)
 "Rd" = (
-/obj/machinery/light{
-	dir = 8
+/obj/machinery/atmospherics/pipe/manifold/hidden,
+/obj/machinery/door/airlock/external{
+	autoset_access = 0;
+	frequency = 1431;
+	id_tag = "guppy_shuttle_outer";
+	name = "Guppy External Access"
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/atmospherics/portables_connector{
-	dir = 4
-	},
-/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup{
-	start_pressure = 7498.00
-	},
-/turf/simulated/floor/plating,
+/obj/machinery/shield_diffuser,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "Re" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -16894,10 +16905,7 @@
 /obj/machinery/computer/ship/sensors{
 	dir = 8
 	},
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "Yf" = (
 /obj/machinery/atmospherics/pipe/manifold/visible{
@@ -17256,15 +17264,20 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "Zn" = (
-/obj/machinery/power/smes/buildable/preset/torch/shuttle{
-	RCon_tag = "Shuttle - Guppy"
-	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden,
 /obj/structure/cable/cyan{
-	d2 = 2;
-	icon_state = "0-2"
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "Zo" = (
@@ -36336,7 +36349,7 @@ mw
 mw
 mB
 Et
-mC
+bL
 mC
 mC
 mC
@@ -36536,9 +36549,9 @@ aX
 cy
 Ho
 Ho
-iq
 Ho
 Ho
+cf
 Ho
 Ho
 Ho
@@ -36736,17 +36749,17 @@ ie
 aJ
 kd
 ee
+ba
 aY
-aY
-bG
+cj
+cj
+iq
 Cm
 cj
 cj
 cj
 cj
-cj
-sK
-bi
+Gq
 fS
 ih
 ee
@@ -36938,15 +36951,15 @@ Ge
 aJ
 aX
 ee
-ao
-aY
+aZ
+bG
 bH
-cf
 cj
-Rd
 sJ
-Ko
+Rd
 cj
+Ko
+lU
 cj
 cj
 fS
@@ -37150,7 +37163,7 @@ cT
 do
 dE
 dM
-cj
+ef
 fS
 ih
 ee
@@ -37544,7 +37557,7 @@ Ea
 aJ
 aX
 ee
-aZ
+aY
 qb
 bK
 ci
@@ -37553,7 +37566,7 @@ cH
 cV
 Yc
 dG
-dO
+cj
 cj
 fS
 ih
@@ -37746,17 +37759,17 @@ aW
 aJ
 kd
 ee
-ba
 aY
-bL
+aY
+cj
 Dc
+Gg
+Gg
 cj
 cj
 cj
 cj
-cj
-cj
-cj
+bi
 fS
 ih
 ee

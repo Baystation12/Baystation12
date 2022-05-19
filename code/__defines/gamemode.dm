@@ -14,8 +14,6 @@
 #define END_GAME_AWAITING_TICKETS 6
 #define END_GAME_DELAYED          7
 
-#define BE_PLANT "BE_PLANT"
-#define BE_SYNTH "BE_SYNTH"
 #define BE_PAI   "BE_PAI"
 
 // Antagonist datum flags.

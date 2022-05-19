@@ -51,8 +51,8 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 	)
-	online_slowdown = 3
-	offline_slowdown = 9
+	online_slowdown = 2
+	offline_slowdown = 4
 	vision_restriction = TINT_MODERATE
 	offline_vision_restriction = TINT_BLIND
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
@@ -114,7 +114,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
-	online_slowdown = 0
+	online_slowdown = 0.75
 	offline_vision_restriction = TINT_HEAVY
 
 	chest_type = /obj/item/clothing/suit/space/rig/eva
@@ -191,7 +191,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
-	online_slowdown = 0
+	online_slowdown = 0.75
 	offline_vision_restriction = TINT_HEAVY
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE // this is passed to the rig suit components when deployed, including the helmet.
 
@@ -265,7 +265,6 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
-	online_slowdown = 1
 	offline_vision_restriction = TINT_HEAVY
 
 	chest_type = /obj/item/clothing/suit/space/rig/hazmat
@@ -329,7 +328,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
-	online_slowdown = 0
+	online_slowdown = 0.5
 	offline_vision_restriction = TINT_HEAVY
 
 	chest_type = /obj/item/clothing/suit/space/rig/medical
@@ -399,8 +398,6 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 	)
-	online_slowdown = 1
-	offline_slowdown = 3
 	offline_vision_restriction = TINT_BLIND
 
 	chest_type = /obj/item/clothing/suit/space/rig/hazard

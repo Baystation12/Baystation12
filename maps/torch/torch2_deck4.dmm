@@ -476,6 +476,10 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/hallway/primary/fourthdeck/aft)
+"bK" = (
+/obj/effect/shuttle_landmark/icgnv_hound/dock,
+/turf/space,
+/area/space)
 "bM" = (
 /obj/effect/shuttle_landmark/merchant/out,
 /turf/space,
@@ -36058,7 +36062,7 @@ NM
 NM
 VW
 WI
-oW
+vH
 ro
 za
 SA
@@ -36260,7 +36264,7 @@ Zy
 Zy
 VW
 WI
-oW
+vH
 ro
 za
 Yn
@@ -36462,7 +36466,7 @@ Lf
 YC
 VW
 WI
-oW
+vH
 ro
 za
 Yn
@@ -36664,7 +36668,7 @@ PZ
 oG
 mJ
 WI
-oW
+vH
 ro
 za
 Yn
@@ -40682,7 +40686,7 @@ aa
 aa
 aa
 aa
-aa
+bK
 WB
 TX
 UT

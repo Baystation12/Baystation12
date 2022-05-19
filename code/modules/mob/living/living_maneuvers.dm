@@ -59,3 +59,7 @@
 
 /mob/living/proc/get_jump_distance()
 	return 0
+
+
+/mob/living/proc/post_maneuver()
+	return

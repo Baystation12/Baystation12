@@ -438,7 +438,7 @@ TORCH_ESCAPE_POD(17)
 /datum/shuttle/autodock/overmap/aquila
 	name = "Aquila"
 	move_time = 60
-	shuttle_area = list(/area/aquila/cockpit, /area/aquila/maintenance, /area/aquila/storage, /area/aquila/secure_storage, /area/aquila/mess, /area/aquila/passenger, /area/aquila/medical, /area/aquila/head, /area/aquila/airlock)
+	shuttle_area = list(/area/aquila/cockpit, /area/aquila/power, /area/aquila/storage, /area/aquila/suits, /area/aquila/air, /area/aquila/crew, /area/aquila/medical, /area/aquila/airlock)
 	current_location = "nav_hangar_aquila"
 	landmark_transition = "nav_transit_aquila"
 	dock_target = "aquila_shuttle"

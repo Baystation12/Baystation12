@@ -214,7 +214,7 @@
 
 /obj/item/stack/tile/stone
 	name = "stone slabs"
-	singular name = "stone slab"
+	singular_name = "stone slab"
 	desc = "A smooth, flat slab of some kind of stone."
 	icon_state = "tile_stone"
 

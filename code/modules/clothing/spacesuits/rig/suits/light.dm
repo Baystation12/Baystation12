@@ -13,9 +13,9 @@
 		)
 	siemens_coefficient = 0.4
 	emp_protection = 10
-	online_slowdown = 0
+	online_slowdown = 0.5
+	offline_slowdown = 1
 	item_flags = ITEM_FLAG_THICKMATERIAL
-	offline_slowdown = TINT_NONE
 	offline_vision_restriction = TINT_NONE
 	max_pressure_protection = LIGHT_RIG_MAX_PRESSURE
 	min_pressure_protection = 0

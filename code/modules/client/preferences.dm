@@ -29,11 +29,10 @@
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 
-	// Mob preview
-	var/icon/preview_icon = null
-
 	var/client/client = null
 	var/client_ckey = null
+
+	var/datum/browser/popup
 
 	var/datum/category_collection/player_setup_collection/player_setup
 	var/datum/browser/panel
@@ -151,8 +150,7 @@
 /datum/preferences/proc/open_setup_window(mob/user)
 	if (!SScharacter_setup.initialized)
 		return
-
-	var/datum/browser/popup = new(user, "preferences_browser", "Character Setup", 1200, 800, src)
+	popup = new (user, "preferences_browser", "Character Setup", 1200, 800, src)
 	var/content = {"
 	<script type='text/javascript'>
 		function update_content(data){
@@ -184,6 +182,9 @@
 /datum/preferences/Topic(href, list/href_list)
 	if(..())
 		return 1
+
+	if (href_list["close"])
+		popup = null
 
 	if(href_list["save"])
 		save_preferences()
@@ -225,10 +226,6 @@
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
 	character.set_species(species)
-
-	if(be_random_name)
-		var/decl/cultural_info/culture = SSculture.get_culture(cultural_info[TAG_CULTURE])
-		if(culture) real_name = culture.get_random_name(gender)
 
 	character.fully_replace_character_name(real_name)
 

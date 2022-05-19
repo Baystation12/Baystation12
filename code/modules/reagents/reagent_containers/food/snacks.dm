@@ -166,6 +166,11 @@
 			else
 				reagents.trans_to_obj(U, min(reagents.total_volume,5))
 				if (reagents.total_volume <= 0)
+					if (loc && trash)
+						if (ispath(trash))
+							trash = new trash
+						trash.dropInto(loc)
+						trash = null
 					qdel(src)
 			return
 
@@ -2840,6 +2845,7 @@
 	desc = "A piece of dough."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "dough"
+	filling_color = "#d6bca4"
 	bitesize = 2
 	center_of_mass = "x=16;y=13"
 	nutriment_desc = list("dough" = 3)
@@ -2862,6 +2868,7 @@
 	desc = "A flattened dough."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "flat dough"
+	filling_color = "#d6bca4"
 	slice_path = /obj/item/reagent_containers/food/snacks/doughslice
 	slices_num = 3
 	center_of_mass = "x=16;y=16"
@@ -2876,6 +2883,7 @@
 	desc = "A building block of an impressive dish."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "doughslice"
+	filling_color = "#d6bca4"
 	slice_path = /obj/item/reagent_containers/food/snacks/spagetti
 	slices_num = 1
 	bitesize = 2
@@ -2888,6 +2896,7 @@
 	desc = "A base for any self-respecting burger."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "bun"
+	filling_color = "#b8824c"
 	bitesize = 2
 	center_of_mass = "x=16;y=12"
 	nutriment_desc = list("bun" = 4)
@@ -2987,6 +2996,7 @@
 	name = "bun bun"
 	desc = "A small bread monkey fashioned from two burger buns."
 	icon_state = "bunbun"
+	filling_color = "#b8824c"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=8)
 	nutriment_desc = list("bun" = 8)
@@ -2996,6 +3006,7 @@
 	name = "taco"
 	desc = "Take a bite!"
 	icon_state = "taco"
+	filling_color = "#d63c3c"
 	bitesize = 3
 	center_of_mass = "x=21;y=12"
 	nutriment_desc = list("cheese" = 2,"taco shell" = 2)
@@ -3009,6 +3020,9 @@
 	desc = "A thin piece of raw meat."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "rawcutlet"
+	filling_color = "#fb8258"
+	slice_path = /obj/item/reagent_containers/food/snacks/rawbacon
+	slices_num = 2
 	bitesize = 1
 	center_of_mass = "x=17;y=20"
 
@@ -3021,6 +3035,7 @@
 	desc = "A tasty meat slice."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "cutlet"
+	filling_color = "#d75608"
 	bitesize = 2
 	center_of_mass = "x=17;y=20"
 
@@ -3028,11 +3043,36 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
 
+/obj/item/reagent_containers/food/snacks/rawbacon
+	name = "raw bacon"
+	desc = "A raw, fatty strip of meat."
+	icon_state = "rawbacon"
+	filling_color = "#ffa7a3"
+	bitesize = 1
+	center_of_mass = "x=16;y=15"
+
+/obj/item/reagent_containers/food/snacks/rawbacon/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 1)
+
+/obj/item/reagent_containers/food/snacks/bacon
+	name = "bacon"
+	desc = "A delicious, crispy strip of meat."
+	icon_state = "bacon"
+	filling_color = "#cb5d27"
+	bitesize = 2
+	center_of_mass = "x=16;y=15"
+
+/obj/item/reagent_containers/food/snacks/bacon/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 1)
+
 /obj/item/reagent_containers/food/snacks/rawmeatball
 	name = "raw meatball"
 	desc = "A raw meatball."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "rawmeatball"
+	filling_color = "#ce3711"
 	bitesize = 2
 	center_of_mass = "x=16;y=15"
 
@@ -3044,6 +3084,7 @@
 	name = "hotdog"
 	desc = "Unrelated to dogs, maybe."
 	icon_state = "hotdog"
+	filling_color = "#ca5d16"
 	bitesize = 2
 	center_of_mass = "x=16;y=17"
 
@@ -3055,6 +3096,7 @@
 	name = "classic hotdog"
 	desc = "Going literal."
 	icon_state = "hotcorgi"
+	filling_color = "#ca5d16"
 	bitesize = 6
 	center_of_mass = "x=16;y=17"
 
@@ -3067,6 +3109,7 @@
 	desc = "Bland but filling."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "flatbread"
+	filling_color = "#c17f3e"
 	bitesize = 2
 	center_of_mass = "x=16;y=16"
 	nutriment_desc = list("bread" = 3)
@@ -3086,6 +3129,7 @@
 	desc = "Raw fries, not very tasty."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "rawsticks"
+	filling_color = "#e4bf7e"
 	bitesize = 2
 	center_of_mass = "x=16;y=12"
 	nutriment_desc = list("raw potato" = 3)

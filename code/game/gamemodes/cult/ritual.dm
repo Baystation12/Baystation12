@@ -55,8 +55,10 @@
 			self += ", having to cut your finger two more times before you make it resemble the pattern in your memory. It still looks a little off."
 			timer = 8 SECONDS
 			damage = 2
+
 	visible_message(SPAN_WARNING("\The [src] slices open a finger and begins to chant and paint symbols on the floor."), SPAN_NOTICE("[self]"), "You hear chanting.")
-	if(do_after(src, timer, rune, DO_PUBLIC_UNIQUE))
+	
+  if(do_after(src, timer, T, DO_PUBLIC_UNIQUE))
 		remove_blood_simple(cost * damage)
 		if(locate(/obj/effect/rune) in T)
 			return

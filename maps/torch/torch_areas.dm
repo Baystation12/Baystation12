@@ -396,30 +396,27 @@
 	name = "\improper SEV Aquila - Cockpit"
 	req_access = list(access_aquila)
 
-/area/aquila/maintenance
-	name = "\improper SEV Aquila - Maintenance"
+/area/aquila/power
+	name = "\improper SEV Aquila - Engineering Compartment"
 	req_access = list(access_solgov_crew)
 
 /area/aquila/storage
-	name = "\improper SEV Aquila - Storage"
+	name = "\improper SEV Aquila - Storage Bay"
 	req_access = list(access_solgov_crew)
 
-/area/aquila/secure_storage
-	name = "\improper SEV Aquila - Secure Storage"
+/area/aquila/suits
+	name = "\improper SEV Aquila - Suit Storage Compartment"
 	req_access = list(access_aquila)
 
-/area/aquila/mess
-	name = "\improper SEV Aquila - Mess Hall"
+/area/aquila/air
+	name = "\improper SEV Aquila - Life Support Compartment"
 
-/area/aquila/passenger
-	name = "\improper SEV Aquila - Passenger Compartment"
+/area/aquila/crew
+	name = "\improper SEV Aquila - Crew Compartment"
 
 /area/aquila/medical
-	name = "\improper SEV Aquila - Medical"
+	name = "\improper SEV Aquila - Medical Compartment"
 	lighting_tone = AREA_LIGHTING_COOL
-
-/area/aquila/head
-	name = "\improper SEV Aquila - Head"
 
 /area/aquila/airlock
 	name = "\improper SEV Aquila - Airlock Compartment"

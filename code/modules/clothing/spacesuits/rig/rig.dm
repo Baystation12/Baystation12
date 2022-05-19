@@ -85,7 +85,7 @@
 	var/seal_delay = SEAL_DELAY
 	var/sealing                                               // Keeps track of seal status independantly of canremove.
 	var/offline = 1                                           // Should we be applying suit maluses?
-	var/online_slowdown = 0                                   // If the suit is deployed and powered, it sets slowdown to this.
+	var/online_slowdown = 1                                   // If the suit is deployed and powered, it sets slowdown to this.
 	var/offline_slowdown = 3                                  // If the suit is deployed and unpowered, it sets slowdown to this.
 	var/vision_restriction = TINT_NONE
 	var/offline_vision_restriction = TINT_HEAVY               // tint value given to helmet

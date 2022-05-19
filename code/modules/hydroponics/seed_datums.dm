@@ -613,7 +613,7 @@
 	name = "grapes"
 	seed_name = "grape"
 	display_name = "grapevines"
-	mutants = list("greengrapes")
+	mutants = list("greengrapes","whitegrapes")
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/sugar = list(1,5), /datum/reagent/drink/juice/grape = list(10,10))
 
 /datum/seed/grapes/New()
@@ -639,7 +639,7 @@
 
 /datum/seed/grapes/green/New()
 	..()
-	set_trait(TRAIT_PRODUCT_COLOUR,"42ed2f")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#42ed2f")
 
 //Everything else
 /datum/seed/peanuts
@@ -1251,6 +1251,12 @@
 	mutants = list("tobacco")
 	chems = list(/datum/reagent/tobacco/bad = list(1,10))
 
+/datum/seed/tobacco/bad/New()
+	..()
+	set_trait(TRAIT_PRODUCT_COLOUR,"#8c8626")
+	set_trait(TRAIT_PLANT_COLOUR,"#8c8626")
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.1)
+
 /datum/seed/algae
 	name = "algae"
 	seed_name = "algae"
@@ -1388,7 +1394,7 @@
 
 /datum/seed/grapes/white
 	name = "whitegrapes"
-	seed_name = "white grape seeds"
+	seed_name = "white grape"
 	display_name = "white grapevines"
 	mutants = list("grapes","greengrapes")
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/sugar = list(1,5), /datum/reagent/drink/juice/grape/white = list(10,10))

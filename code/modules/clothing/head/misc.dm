@@ -373,6 +373,7 @@
 	name = "face cover"
 	desc = "A helmet made of plastic. It's completely opaque. This will stop the stare."
 	icon_state = "facecover"
+	valid_accessory_slots = null
 	tint = TINT_BLIND
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES

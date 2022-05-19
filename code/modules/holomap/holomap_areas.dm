@@ -1,6 +1,7 @@
 //Some generic area stuff for holomaps, if you add new areas you probably want to double check colours and flags
 
-/area/var/holomap_color	// Color of this area on the holomap. Must be a hex color (as string) or null.
+/// String (Color HEX code). Color of this area on the holomap. Can be one of `HOLOMAP_AREACOLOR_*`.
+/area/var/holomap_color
 
 /area/chapel/holomap_color = HOLOMAP_AREACOLOR_CREW
 

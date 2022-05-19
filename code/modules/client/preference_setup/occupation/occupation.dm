@@ -314,7 +314,7 @@
 			var/choice = input("Choose an title for [job.title].", "Choose Title", pref.GetPlayerAltTitle(job)) as anything in choices|null
 			if(choice && CanUseTopic(user))
 				SetPlayerAltTitle(job, choice)
-				return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
+				return ((pref.preview_job || pref.preview_gear) ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
 
 	else if(href_list["set_job"])
 		var/set_job = href_list["set_job"]
@@ -328,7 +328,7 @@
 			else if(set_to > JOB_LEVEL_NEVER)
 				set_to = JOB_LEVEL_HIGH
 		if(SetJob(user, set_job, set_to))
-			return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
+			return ((pref.preview_job || pref.preview_gear) ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
 
 	else if(href_list["char_branch"])
 		var/datum/job/job = locate(href_list["checking_job"])
@@ -341,7 +341,7 @@
 				pref.ranks -= job.title
 				pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)		// Check our skillset is still valid
 				validate_branch_and_rank()
-				return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
+				return ((pref.preview_job || pref.preview_gear) ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
 			return TOPIC_REFRESH
 
 	else if(href_list["char_rank"])
@@ -356,7 +356,7 @@
 				pref.ranks[job.title] = choice
 				pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)		// Check our skillset is still valid
 				validate_branch_and_rank()
-				return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
+				return ((pref.preview_job || pref.preview_gear) ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
 			return TOPIC_REFRESH
 	else if(href_list["set_skills"])
 		var/rank = href_list["set_skills"]

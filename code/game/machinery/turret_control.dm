@@ -2,9 +2,8 @@
 //Turret Control Panel//
 ////////////////////////
 
-/area
-	// Turrets use this list to see if individual power/lethal settings are allowed
-	var/list/turret_controls = list()
+/// List (`/obj/machinery/turretid`). A list of all turret control panels in the area. Turrets use this list to see if individual power/lethal settings are allowed. Updated during `Initialize()` and `Destroy()` calls on the controllers.
+/area/var/list/turret_controls = list()
 
 /obj/machinery/turretid
 	name = "turret control panel"
