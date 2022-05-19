@@ -1,5 +1,6 @@
 /datum/sprite_accessory/facial_hair
 	icon = 'icons/mob/human_races/species/human/facial.dmi'
+	draw_order = 80
 	gender = MALE
 
 

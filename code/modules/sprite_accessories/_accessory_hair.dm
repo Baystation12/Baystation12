@@ -8,6 +8,9 @@
 
 /datum/sprite_accessory/hair
 	icon = 'icons/mob/human_races/species/human/hair.dmi'
+	draw_order = 100
+
+	/// Hair flags, using HAIR_* defines
 	var/flags
 
 /datum/sprite_accessory/hair/bald
@@ -17,8 +20,8 @@
 	flags = VERY_SHORT | HAIR_BALD
 
 /datum/sprite_accessory/hair/short
-	name = "Short Hair"	  // try to capatilize the names please~
-	icon_state = "hair_a" // you do not need to define _s or _l sub-states, game automatically does this for you
+	name = "Short Hair"
+	icon_state = "hair_a"
 	flags = VERY_SHORT
 
 /datum/sprite_accessory/hair/twintail

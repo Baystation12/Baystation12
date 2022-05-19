@@ -59,8 +59,15 @@
 /datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
 	return SPECIES_HUMAN
 
+/datum/species/human/get_skin_tone_base()
+	return list(200, 150, 123, 0)
+
 /datum/species/human/max_skin_tone()
 	return 220
+
+
+/datum/species/human/get_default_hair()
+	return GLOB.hair_styles_list["Short Hair"]
 
 /datum/species/human/handle_npc(var/mob/living/carbon/human/H)
 	if(H.stat != CONSCIOUS)

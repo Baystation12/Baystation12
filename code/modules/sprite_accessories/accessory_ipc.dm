@@ -1,8 +1,10 @@
 /datum/sprite_accessory/marking/ipc
+	icon = 'icons/mob/human_races/species/ipc/markings.dmi'
 	name = "Bishop Alt. Optics (IPC)"
 	icon_state = "bishop_alt_optics"
 	body_parts = list(BP_HEAD)
 	species_allowed = list(SPECIES_IPC)
+	draw_order = 120
 
 /datum/sprite_accessory/marking/ipc/takahashi
 	name = "Ward Takahashi Alt. Optics (IPC)"

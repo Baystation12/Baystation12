@@ -3,7 +3,7 @@
 	species_allowed = list(SPECIES_HUMAN)
 	body_parts = list(BP_HEAD)
 	draw_target = MARKING_TARGET_HAIR
-	draw_order = 50 //before ears & horns
+	draw_order = 120
 	disallows = list(/datum/sprite_accessory/marking/hair_fade)
 
 /datum/sprite_accessory/marking/hair_fade/fade_up_short

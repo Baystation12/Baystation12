@@ -61,7 +61,10 @@ var/global/list/limb_icon_cache = list()
 		var/datum/sprite_accessory/marking/M = E
 		if (M.draw_target == MARKING_TARGET_SKIN)
 			var/color = markings[E]
-			var/icon/I = icon(M.icon, "[M.icon_state]-[organ_tag]")
+			var/state = M.icon_state
+			if (M.use_organ_tag)
+				state += "-[organ_tag]"
+			var/icon/I = icon(M.icon, state)
 			I.Blend(color, M.blend)
 			icon_cache_key += "[M.name][color]"
 			ADD_SORTED(sorted, list(list(M.draw_order, I, M)), /proc/cmp_marking_order)
@@ -105,7 +108,10 @@ var/global/list/limb_icon_cache = list()
 		var/datum/sprite_accessory/marking/M = E
 		if (M.draw_target == MARKING_TARGET_SKIN)
 			var/color = markings[E]
-			var/icon/I = icon(M.icon, "[M.icon_state]-[organ_tag]")
+			var/state = M.icon_state
+			if (M.use_organ_tag)
+				state += "-[organ_tag]"
+			var/icon/I = icon(M.icon, state)
 			I.Blend(color, M.blend)
 			icon_cache_key += "[M.name][color]"
 			ADD_SORTED(sorted, list(list(M.draw_order, I, M)), /proc/cmp_marking_order)

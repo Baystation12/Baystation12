@@ -26,3 +26,6 @@
 	var/list/subspecies_allowed                    // Restrict some styles to specific species names
 	var/do_coloration = DO_COLORATION_USER         // Whether or not the accessory can be affected by colouration
 	var/blend = ICON_ADD
+
+	/// Sorts sprite accessories before composition. Lower is earlier. Same order is undefined behavior.
+	var/draw_order

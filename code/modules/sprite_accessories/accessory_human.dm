@@ -6,8 +6,8 @@
 /datum/sprite_accessory/marking/human/ears
 	body_parts = list(BP_HEAD)
 	draw_target = MARKING_TARGET_HEAD
-	draw_order = 75 //before horns
 	do_coloration = DO_COLORATION_AUTO
+	draw_order = 140
 	disallows = list(
 		/datum/sprite_accessory/marking/human/ears,
 		/datum/sprite_accessory/marking/human/horns/ram
@@ -51,7 +51,10 @@
 /datum/sprite_accessory/marking/human/horns
 	body_parts = list(BP_HEAD)
 	draw_target = MARKING_TARGET_HEAD
-	disallows = list(/datum/sprite_accessory/marking/human/horns)
+	draw_order = 160
+	disallows = list(
+		/datum/sprite_accessory/marking/human/horns
+	)
 
 
 /datum/sprite_accessory/marking/human/horns/ram

@@ -119,82 +119,70 @@
 
 	return mob_icon
 
+
 /obj/item/organ/external/head/proc/get_hair_icon()
-	var/image/res = image(species.icon_template,"")
-	if(owner.f_style)
-		var/datum/sprite_accessory/facial_hair_style = GLOB.facial_hair_styles_list[owner.f_style]
-		if(facial_hair_style)
-			if(!facial_hair_style.species_allowed || (species.get_bodytype(owner) in facial_hair_style.species_allowed))
-				if(!facial_hair_style.subspecies_allowed || (species.name in facial_hair_style.subspecies_allowed))
-					var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
-					if(facial_hair_style.do_coloration & DO_COLORATION_USER)
-						facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), facial_hair_style.blend)
-					res.overlays |= facial_s
-
-	if (owner.h_style)
-		var/icon/HI
-		var/datum/sprite_accessory/hair/H = GLOB.hair_styles_list[owner.h_style]
-		if ((owner.head?.flags_inv & BLOCKHEADHAIR) && !(H.flags & VERY_SHORT))
-			H = GLOB.hair_styles_list["Short Hair"]
-		if (H)
-			if (!length(H.species_allowed) || (species.get_bodytype(owner) in H.species_allowed))
-				if (!length(H.subspecies_allowed) || (species.name in H.subspecies_allowed))
-					HI = icon(H.icon, "[H.icon_state]_s")
-					if ((H.do_coloration & DO_COLORATION_USER) && length(h_col) >= 3)
-						HI.Blend(rgb(h_col[1], h_col[2], h_col[3]), H.blend)
-		if (HI)
-			var/list/sorted_hair_markings = list()
-			for (var/E in markings)
-				var/datum/sprite_accessory/marking/M = E
-				if (M.draw_target == MARKING_TARGET_HAIR)
-					var/color = markings[E]
-					var/icon/I = icon(M.icon, M.icon_state)
-					I.Blend(HI, ICON_AND)
-					I.Blend(color, ICON_MULTIPLY)
-					ADD_SORTED(sorted_hair_markings, list(list(M.draw_order, I)), /proc/cmp_marking_order)
-			for (var/entry in sorted_hair_markings)
-				HI.Blend(entry[2], ICON_OVERLAY)
-			res.overlays |= HI
-
-	var/list/sorted_head_markings = list()
-	for (var/E in markings)
-		var/datum/sprite_accessory/marking/M = E
-		if (M.draw_target == MARKING_TARGET_HEAD)
-			var/color = markings[E]
-			var/icon/I = icon(M.icon, M.icon_state)
-			if ((M.do_coloration & DO_COLORATION_AUTO) && owner.h_style)
-				var/datum/sprite_accessory/hair/H = GLOB.hair_styles_list[owner.h_style]
-				if ((~H.flags & HAIR_BALD) && (M.do_coloration & DO_COLORATION_HAIR) && length(h_col) >= 3)
-					I.MapColors(
-						1,0,0,0,
-						0,1,0,0,
-						0,0,1,0,
-						0,0,0,1,
-						h_col[1] / 255, h_col[2] / 255, h_col[3] / 255, 0
-					)
-				else if (M.do_coloration & DO_COLORATION_SKIN)
-					I.MapColors(
-						1,0,0,0,
-						0,1,0,0,
-						0,0,1,0,
-						0,0,0,1,
-						(200 + s_tone) / 255, (150 + s_tone) / 255, (123 + s_tone) / 255, 0
-					)
-			else
-				var/list/rgb = rgb2num(color)
-				I.MapColors(
-					1,0,0,0,
-					0,1,0,0,
-					0,0,1,0,
-					0,0,0,1,
-					rgb[1] / 255, rgb[2] / 255, rgb[3] / 255, 0
+	var/list/accessories = list()
+	var/datum/sprite_accessory/facial_hair/face_accessory = GLOB.facial_hair_styles_list[owner.f_style]
+	var/icon/face_icon
+	if (face_accessory && !face_accessory.species_allowed || (species.get_bodytype(owner) in face_accessory.species_allowed))
+		face_icon = new (face_accessory.icon, "[face_accessory.icon_state]_s")
+		if (face_accessory.do_coloration & DO_COLORATION_USER)
+			face_icon.MapColors(
+				1,0,0,0,  0,1,0,0,  0,0,1,0,  0,0,0,1,
+				owner.r_facial / 255, owner.g_facial / 255, owner.b_facial / 255, 0
+			)
+		accessories += list(list(face_accessory.draw_order, face_icon))
+	var/datum/sprite_accessory/hair/head_accessory = GLOB.hair_styles_list[owner.h_style]
+	var/icon/head_icon
+	if (head_accessory && !head_accessory.species_allowed || (species.get_bodytype(owner) in head_accessory.species_allowed))
+		if ((owner.head?.flags_inv & BLOCKHEADHAIR) && !(head_accessory.flags & VERY_SHORT))
+			head_accessory = species.get_default_hair()
+		if (head_accessory)
+			head_icon = new (head_accessory.icon, "[head_accessory.icon_state]_s")
+			if ((head_accessory.do_coloration & DO_COLORATION_USER) && length(h_col) > 2)
+				head_icon.MapColors(
+					1,0,0,0,  0,1,0,0,  0,0,1,0,  0,0,0,1,
+					h_col[1] / 255, h_col[2] / 255, h_col[3] / 255, 0
 				)
-			icon_cache_key += "[M.name][color]"
-			ADD_SORTED(sorted_head_markings, list(list(M.draw_order, I)), /proc/cmp_marking_order)
-	for (var/entry in sorted_head_markings)
-		res.overlays |= entry[2]
+			ADD_SORTED(accessories, list(list(head_accessory.draw_order, head_icon)), /proc/cmp_marking_order)
+	for (var/datum/sprite_accessory/marking/marking as anything in markings)
+		var/icon/marking_icon
+		var/marking_color = markings[marking]
+		if (marking.draw_target == MARKING_TARGET_HAIR)
+			if (!head_icon)
+				continue
+			marking_icon = new (marking.icon, marking.icon_state)
+			marking_icon.Blend(head_icon, ICON_AND)
+			marking_icon.Blend(marking_color, ICON_MULTIPLY)
+		else if (marking.draw_target == MARKING_TARGET_HEAD)
+			marking_icon = new (marking.icon, marking.icon_state)
+			var/list/rgba
+			if (marking.do_coloration & DO_COLORATION_USER)
+				rgba = rgb2num(marking_color)
+			if (marking.do_coloration & DO_COLORATION_HAIR)
+				if (head_icon && !(head_accessory.flags & HAIR_BALD) && length(h_col) > 2)
+					rgba = h_col
+			if ((marking.do_coloration & DO_COLORATION_SKIN) && !rgba) //intentional
+				rgba = species.get_skin_tone_base()
+				if (rgba)
+					for (var/i = rgba.len to 1 step -1)
+						rgba[i] += s_tone
+			if (rgba)
+				var/alpha = 0
+				if (rgba.len > 3)
+					alpha = rgba[4]
+				marking_icon.MapColors(
+					1,0,0,0,  0,1,0,0,  0,0,1,0,  0,0,0,1,
+					rgba[1] / 255, rgba[2] / 255, rgba[3] / 255, alpha / 255
+				)
+		if (marking_icon)
+			ADD_SORTED(accessories, list(list(marking.draw_order, marking_icon)), /proc/cmp_marking_order)
+			icon_cache_key += "[marking.name][marking_color]"
+	var/image/result = image(species.icon_template, "")
+	for (var/list/entry as anything in accessories)
+		result.overlays += entry[2]
+	return result
 
-	return res
 
 /obj/item/organ/external/head/no_eyes
 	draw_eyes = FALSE
