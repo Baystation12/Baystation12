@@ -1,0 +1,4 @@
+author: CrimsonShrike
+delete-after: true
+changes:
+  - rscadd: Hot zones will now be warped to represent the heat
