@@ -39,6 +39,9 @@
 
 #define BLACKNESS_PLANE                 0 //Blackness plane as per DM documentation.
 
+#define HEAT_EFFECT_PLANE -4
+#define HEAT_EFFECT_TARGET    "*heat"
+#define HEAT_COMPOSITE_TARGET "*heatc"
 #define WARP_EFFECT_PLANE -3
 
 #define DEFAULT_PLANE                   1

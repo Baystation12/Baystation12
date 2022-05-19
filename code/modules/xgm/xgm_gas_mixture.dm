@@ -347,6 +347,8 @@
 //Two lists can be passed by reference if you need know specifically which graphics were added and removed.
 /datum/gas_mixture/proc/check_tile_graphic(list/graphic_add = null, list/graphic_remove = null)
 	for(var/obj/effect/gas_overlay/O in graphic)
+		if(istype(O, /obj/effect/gas_overlay/heat))
+			continue
 		if(gas[O.gas_id] <= gas_data.overlay_limit[O.gas_id])
 			LAZYADD(graphic_remove, O)
 	for(var/g in gas_data.overlay_limit)
@@ -356,6 +358,13 @@
 			if(!(tile_overlay in graphic))
 				LAZYADD(graphic_add, tile_overlay)
 	. = 0
+
+	//If it's hot add something
+	if(temperature >= CARBON_LIFEFORM_FIRE_RESISTANCE)
+		var/tile_overlay = get_tile_overlay(GAS_HEAT)
+		if(!(tile_overlay in graphic))
+			LAZYADD(graphic_add, tile_overlay)
+
 	//Apply changes
 	if(graphic_add && graphic_add.len)
 		graphic |= graphic_add
@@ -366,6 +375,11 @@
 	if(graphic.len)
 		var/pressure_mod = clamp(return_pressure() / ONE_ATMOSPHERE, 0, 2)
 		for(var/obj/effect/gas_overlay/O in graphic)
+			if(istype(O, /obj/effect/gas_overlay/heat)) //Heat based
+				var/new_alpha = clamp(max(125, 255 * ((temperature - CARBON_LIFEFORM_FIRE_RESISTANCE) / CARBON_LIFEFORM_FIRE_RESISTANCE * 4)), 125, 255)
+				if(new_alpha != O.alpha)
+					O.update_alpha_animation(new_alpha)
+				continue
 			var/concentration_mod = clamp(gas[O.gas_id] / total_moles, 0.1, 1)
 			var/new_alpha = min(230, round(pressure_mod * concentration_mod * 180, 5))
 			if(new_alpha != O.alpha)
@@ -373,7 +387,10 @@
 
 /datum/gas_mixture/proc/get_tile_overlay(gas_id)
 	if(!LAZYACCESS(tile_overlay_cache, gas_id))
-		LAZYSET(tile_overlay_cache, gas_id, new/obj/effect/gas_overlay(null, gas_id))
+		if(gas_id == GAS_HEAT) //Not a real gas but functionally same thing
+			LAZYSET(tile_overlay_cache, gas_id, new/obj/effect/gas_overlay/heat(null, GAS_HEAT))
+		else
+			LAZYSET(tile_overlay_cache, gas_id, new/obj/effect/gas_overlay(null, gas_id))
 	return tile_overlay_cache[gas_id]
 
 //Simpler version of merge(), adjusts gas amounts directly and doesn't account for temperature or group_multiplier.

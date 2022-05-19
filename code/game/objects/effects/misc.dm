@@ -131,3 +131,8 @@
 		var/datum/gas_mixture/G = P.air_temporary
 		G.adjust_gas(GAS_OXYGEN,((pressure*P.volume)/(R_IDEAL_GAS_EQUATION*temperature)))
 	return INITIALIZE_HINT_QDEL
+
+/obj/effect/heat
+	icon = 'icons/effects/fire.dmi'
+	icon_state = "3"
+	render_target = HEAT_EFFECT_TARGET
