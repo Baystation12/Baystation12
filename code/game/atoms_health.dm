@@ -208,7 +208,10 @@
 /atom/proc/set_max_health(new_max_health, set_current_health = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	health_max = round(new_max_health)
-	health_current = set_current_health ? get_max_health() : min(health_current, get_max_health())
+	if (set_current_health)
+		set_health(health_max)
+	else
+		set_health(min(health_current, health_max))
 
 /**
  * Sets the atom's resistance/weakness to the given damage type.
