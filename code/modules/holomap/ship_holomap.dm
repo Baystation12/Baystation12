@@ -177,14 +177,14 @@
 
 /obj/machinery/ship_map/ex_act(severity)
 	switch(severity)
-		if(1)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
-		if(2)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
 			else
 				set_broken()
-		if(3)
+		if(EX_ACT_LIGHT)
 			if (prob(25))
 				set_broken()
 

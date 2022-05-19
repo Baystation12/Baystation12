@@ -143,7 +143,7 @@
 
 /obj/item/projectile/beam/pulse/destroy/on_hit(var/atom/target, var/blocked = 0)
 	if(isturf(target))
-		target.ex_act(2)
+		target.ex_act(EX_ACT_HEAVY)
 	..()
 
 /obj/item/projectile/beam/pulse/skrell

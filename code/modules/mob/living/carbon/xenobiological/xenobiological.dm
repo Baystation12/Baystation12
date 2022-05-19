@@ -195,17 +195,17 @@
 	var/b_loss = null
 	var/f_loss = null
 	switch (severity)
-		if (1.0)
+		if (EX_ACT_DEVASTATING)
 			qdel(src)
 			return
 
-		if (2.0)
+		if (EX_ACT_HEAVY)
 
 			b_loss += 60
 			f_loss += 60
 
 
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			b_loss += 30
 
 	adjustBruteLoss(b_loss)

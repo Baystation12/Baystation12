@@ -87,12 +87,12 @@
 
 /obj/machinery/self_destruct/ex_act(severity)
 	switch(severity)
-		if(1)
+		if(EX_ACT_DEVASTATING)
 			set_damaged()
-		if(2)
+		if(EX_ACT_HEAVY)
 			if(prob(50))
 				set_damaged()
-		if(3)
+		if(EX_ACT_LIGHT)
 			if(prob(25))
 				set_damaged()
 

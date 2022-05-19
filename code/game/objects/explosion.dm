@@ -65,9 +65,9 @@
 			for(var/turf/T in trange(max_range, epicenter))
 				var/dist = sqrt((T.x - x0)**2 + (T.y - y0)**2)
 
-				if(dist < devastation_range)		dist = 1
-				else if(dist < heavy_impact_range)	dist = 2
-				else if(dist < light_impact_range)	dist = 3
+				if(dist < devastation_range)		dist = EX_ACT_DEVASTATING
+				else if(dist < heavy_impact_range)	dist = EX_ACT_HEAVY
+				else if(dist < light_impact_range)	dist = EX_ACT_LIGHT
 				else								continue
 
 				T.ex_act(dist)
@@ -86,4 +86,4 @@
 
 /proc/secondaryexplosion(turf/epicenter, range)
 	for(var/turf/tile in range(range, epicenter))
-		tile.ex_act(2)
+		tile.ex_act(EX_ACT_HEAVY)

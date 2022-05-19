@@ -264,14 +264,14 @@
 
 /obj/effect/vine/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			die_off()
 			return
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				die_off()
 				return
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			if (prob(5))
 				die_off()
 				return

@@ -117,9 +117,9 @@
 	if(check_triggers(/datum/artifact_trigger/proc/on_explosion, severity))
 		return
 	switch(severity)
-		if(1)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
-		if(2)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
 

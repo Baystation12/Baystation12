@@ -679,7 +679,7 @@
 	)
 	log_and_message_admins("used [src] on [target]", user, owner.loc)
 	drill_head.durability -= 1
-	target.ex_act(2)
+	target.ex_act(EX_ACT_HEAVY)
 
 
 /obj/item/mech_equipment/drill/steel

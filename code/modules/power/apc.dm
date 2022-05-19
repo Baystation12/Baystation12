@@ -1066,21 +1066,21 @@
 /obj/machinery/power/apc/ex_act(severity)
 	var/obj/item/cell/C = get_cell()
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
 			if (C)
-				C.ex_act(1.0) // more lags woohoo
+				C.ex_act(EX_ACT_DEVASTATING) // more lags woohoo
 			return
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				set_broken(TRUE)
 				if (C && prob(50))
-					C.ex_act(2.0)
-		if(3.0)
+					C.ex_act(EX_ACT_HEAVY)
+		if(EX_ACT_LIGHT)
 			if (prob(25))
 				set_broken(TRUE)
 				if (C && prob(25))
-					C.ex_act(3.0)
+					C.ex_act(EX_ACT_LIGHT)
 
 /obj/machinery/power/apc/set_broken(new_state)
 	if(!new_state || (stat & BROKEN))

@@ -55,15 +55,15 @@
 
 /obj/structure/reagent_dispensers/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
 			return
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				new /obj/effect/effect/water(src.loc)
 				qdel(src)
 				return
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			if (prob(5))
 				new /obj/effect/effect/water(src.loc)
 				qdel(src)

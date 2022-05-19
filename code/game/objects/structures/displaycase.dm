@@ -23,7 +23,7 @@
 		to_chat(user, "Inside you see [english_list(contents)].")
 
 /obj/structure/displaycase/ex_act(severity)
-	if (severity < 3)
+	if (severity < EX_ACT_LIGHT)
 		var/shuffled_contents = shuffle(contents)
 		for (var/atom/A as anything in shuffled_contents)
 			A.ex_act(severity + 1)
