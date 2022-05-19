@@ -44,14 +44,16 @@
 				break
 	. = ..()
 
-/obj/structure/displaycase/handle_death_change(new_death_state)
-	if (new_death_state)
-		set_density(FALSE)
-		new /obj/item/material/shard(loc)
-		for(var/atom/movable/AM in src)
-			AM.dropInto(loc)
-		playsound(src, "shatter", 70, 1)
-		update_icon()
+/obj/structure/displaycase/on_death()
+	set_density(FALSE)
+	new /obj/item/material/shard(loc)
+	for(var/atom/movable/AM in src)
+		AM.dropInto(loc)
+	playsound(src, "shatter", 70, 1)
+	update_icon()
+
+/obj/structure/displaycase/on_revive()
+	update_icon()
 
 /obj/structure/displaycase/on_update_icon()
 	if(health_dead)

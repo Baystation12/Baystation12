@@ -163,9 +163,8 @@
 		return
 	damage_health(tforce, DAMAGE_BRUTE)
 
-/obj/structure/wall_frame/handle_death_change(new_death_state)
-	if (new_death_state)
-		dismantle()
+/obj/structure/wall_frame/on_death()
+	dismantle()
 
 /obj/structure/wall_frame/proc/dismantle()
 	new /obj/item/stack/material/steel(get_turf(src), 3)

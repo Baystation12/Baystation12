@@ -113,10 +113,8 @@
 		else
 			damage_health(1)
 
-/obj/item/material/handle_death_change(new_death_state)
-	. = ..()
-	if (new_death_state)
-		shatter()
+/obj/item/material/on_death()
+	shatter()
 
 /obj/item/material/proc/shatter()
 	var/turf/T = get_turf(src)

@@ -175,10 +175,8 @@
 /obj/structure/window/proc/get_repaired_per_unit()
 	return round(get_max_health() / get_glass_cost())
 
-/obj/structure/window/handle_death_change(new_death_state)
-	. = ..()
-	if (new_death_state)
-		shatter()
+/obj/structure/window/on_death()
+	shatter()
 
 /obj/structure/window/proc/shatter(var/display_message = 1)
 	playsound(src, "shatter", 70, 1)

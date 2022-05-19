@@ -296,11 +296,9 @@
 
 	..()
 
-/obj/effect/cultwall/handle_death_change(new_death_state)
-	. = ..()
-	if (new_death_state)
-		visible_message(SPAN_WARNING("\The [src] dissipates."))
-		qdel (src)
+/obj/effect/cultwall/on_death()
+	visible_message(SPAN_WARNING("\The [src] dissipates."))
+	qdel (src)
 
 /obj/effect/rune/ajorney
 	cultname = "astral journey"

@@ -53,10 +53,9 @@
 
 	. = ..()
 
-/obj/structure/table/handle_death_change(new_death_state)
-	if (new_death_state)
-		visible_message("<span class='warning'>\The [src] breaks down!</span>")
-		break_to_parts()
+/obj/structure/table/on_death()
+	visible_message("<span class='warning'>\The [src] breaks down!</span>")
+	break_to_parts()
 
 /obj/structure/table/Initialize()
 	. = ..()

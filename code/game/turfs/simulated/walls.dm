@@ -176,10 +176,8 @@
 	..()
 	update_icon()
 
-/turf/simulated/wall/handle_death_change(new_death_state)
-	..()
-	if (new_death_state)
-		dismantle_wall(TRUE)
+/turf/simulated/wall/on_death()
+	dismantle_wall(TRUE)
 
 /turf/simulated/wall/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)//Doesn't fucking work because walls don't interact with air
 	burn(exposed_temperature)

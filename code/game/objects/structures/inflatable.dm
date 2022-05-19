@@ -161,10 +161,8 @@
 
 	..()
 
-/obj/structure/inflatable/handle_death_change(new_death_state)
-	. = ..()
-	if (new_death_state)
-		deflate(TRUE)
+/obj/structure/inflatable/on_death()
+	deflate(TRUE)
 
 /obj/structure/inflatable/CtrlClick()
 	return hand_deflate()

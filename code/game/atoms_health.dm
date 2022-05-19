@@ -127,7 +127,10 @@
 		return FALSE
 	health_dead = new_death_state
 	if (!skip_death_state_change)
-		handle_death_change(new_death_state)
+		if (health_dead)
+			on_death()
+		else
+			on_revive()
 	return TRUE
 
 /**
@@ -194,11 +197,12 @@
 	SHOULD_CALL_PARENT(TRUE)
 	return set_health(health_max)
 
-/**
- * Proc called when death state changes.
- * Provided for override use.
- */
-/atom/proc/handle_death_change(new_death_state)
+/// Proc called when the atom transitions from alive to dead.
+/atom/proc/on_death()
+	return
+
+/// Proc called when the atom transitions from dead to alive.
+/atom/proc/on_revive()
 	return
 
 /**
