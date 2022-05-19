@@ -63,6 +63,7 @@
 
 	if (health_max)
 		health_current = health_max
+		health_dead = FALSE
 
 	return INITIALIZE_HINT_NORMAL
 

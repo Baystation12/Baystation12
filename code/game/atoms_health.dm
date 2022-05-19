@@ -4,6 +4,9 @@
 /// Maximum health for simple health processing. Use `get_max_health()` or `set_max_health()` to reference/modify.
 /atom/var/health_max
 
+/// Boolean. Whether or not the atom is dead. Toggled by death state changes in standardized health and provided as a simple way to check for death without additional proc call overhead from `is_alive()`.
+/atom/var/health_dead
+
 /**
  * LAZY List of damage type resistance or weakness multipliers, decimal form. Only applied to health reduction. Use `set_damage_resistance()`, `remove_damage_resistance()`, and `get_damage_resistance()` to reference/modify.
  *
@@ -92,7 +95,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if (!health_max)
 		return
-	if (!is_alive())
+	if (health_dead)
 		return FALSE
 	if (!damage || damage < health_min_damage)
 		return FALSE
@@ -106,16 +109,6 @@
 	. = ..()
 
 /**
- * Checks if the atom is 'alive' or 'dead'.
- * Returns `null` if health is not in use.
- */
-/atom/proc/is_alive()
-	SHOULD_CALL_PARENT(TRUE)
-	if (!health_max)
-		return
-	return health_current > 0
-
-/**
  * Health modification for the health system. Applies `health_mod` directly to `simple_health` via addition and calls `handle_death_change` as needed.
  * Has no pre-modification checks, you should be using `damage_health()` or `restore_health()` instead of this.
  * `skip_death_state_change` will skip calling `handle_death_change()` when applicable. Used for when the originally calling proc needs handle it in a unique way.
@@ -126,12 +119,13 @@
 	if (!health_max)
 		return
 	health_mod = round(health_mod)
-	var/death_state = !is_alive()
+	var/death_state = health_dead
 	health_current = round(clamp(health_current + health_mod, 0, get_max_health()))
 	post_health_change(health_mod, damage_type)
-	var/new_death_state = !is_alive()
+	var/new_death_state = health_current > 0 ? FALSE : TRUE
 	if (death_state == new_death_state)
 		return FALSE
+	health_dead = new_death_state
 	if (!skip_death_state_change)
 		handle_death_change(new_death_state)
 	return TRUE
@@ -250,7 +244,7 @@
  * Overrideable to allow for different messages, or restricting when the messages can or cannot appear.
  */
 /atom/proc/examine_damage_state(mob/user)
-	if (!is_alive())
+	if (health_dead)
 		to_chat(user, SPAN_DANGER("It looks broken."))
 		return
 
@@ -266,7 +260,7 @@
 			to_chat(user, SPAN_DANGER("It looks severely damaged."))
 
 /mob/examine_damage_state(mob/user)
-	if (!is_alive())
+	if (health_dead)
 		to_chat(user, SPAN_DANGER("They look severely hurt and is not moving or responding to anything around them."))
 		return
 
@@ -291,6 +285,7 @@
 	target_atom.health_max = source_atom.health_max
 	target_atom.health_resistances = source_atom.health_resistances
 	target_atom.health_min_damage = source_atom.health_min_damage
+	target_atom.health_dead = source_atom.health_dead
 
 
 // Generalized *_act() handlers

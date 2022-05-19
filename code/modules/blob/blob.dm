@@ -93,7 +93,7 @@
 	var/damage = rand(damage_min, damage_max)
 	var/damage_type = pick(DAMAGE_BRUTE, DAMAGE_BURN)
 
-	if (T.density && T.is_alive())
+	if (T.density && !T.health_dead)
 		visible_message(SPAN_DANGER("A tendril flies out from \the [src] and smashes into \the [T]!"))
 		playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 		T.damage_health(damage)

@@ -54,7 +54,7 @@
 		update_icon()
 
 /obj/structure/displaycase/on_update_icon()
-	if(!is_alive())
+	if(health_dead)
 		icon_state = "glassboxb"
 	else
 		icon_state = "glassbox"
@@ -64,7 +64,7 @@
 
 /obj/structure/displaycase/attack_hand(mob/user as mob)
 	add_fingerprint(user)
-	if(is_alive())
+	if(!health_dead)
 		to_chat(usr, text("<span class='warning'>You kick the display case.</span>"))
 		visible_message("<span class='warning'>[usr] kicks the display case.</span>")
 		damage_health(2, DAMAGE_BRUTE)
