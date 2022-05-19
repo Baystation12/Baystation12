@@ -44,36 +44,10 @@ var/global/list/limb_icon_cache = list()
 	if(species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = list(dna.GetUIValue(DNA_UI_SKIN_R), dna.GetUIValue(DNA_UI_SKIN_G), dna.GetUIValue(DNA_UI_SKIN_B))
 
-/obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
-	..()
-	var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[BP_EYES]
-	if(eyes) eyes.update_colour()
-
-/obj/item/organ/external/head/removed()
-	update_icon(1)
-	if(owner)
-		SetName("[owner.real_name]'s head")
-		addtimer(CALLBACK(owner, /mob/living/carbon/human/proc/update_hair), 1, TIMER_UNIQUE)
-	..()
-
-	var/list/sorted = list()
-	for(var/E in markings)
-		var/datum/sprite_accessory/marking/M = E
-		if (M.draw_target == MARKING_TARGET_SKIN)
-			var/color = markings[E]
-			var/state = M.icon_state
-			if (M.use_organ_tag)
-				state += "-[organ_tag]"
-			var/icon/I = icon(M.icon, state)
-			I.Blend(color, M.blend)
-			icon_cache_key += "[M.name][color]"
-			ADD_SORTED(sorted, list(list(M.draw_order, I, M)), /proc/cmp_marking_order)
-	for (var/entry in sorted)
-		overlays |= entry[2]
-		mob_icon.Blend(entry[2], entry[3]["layer_blend"])
 
 /obj/item/organ/external/var/icon_cache_key
-/obj/item/organ/external/on_update_icon(var/regenerate = 0)
+
+/obj/item/organ/external/on_update_icon()
 	var/gender = "_m"
 	if(!(limb_flags & ORGAN_FLAG_GENDERED_ICON))
 		gender = null

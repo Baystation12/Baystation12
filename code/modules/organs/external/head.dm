@@ -94,30 +94,56 @@
 		if (burn_dam > 40)
 			disfigure(INJURY_TYPE_BURN)
 
-/obj/item/organ/external/head/on_update_icon()
 
+/obj/item/organ/external/head/sync_colour_to_human(mob/living/carbon/human/human)
 	..()
+	var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[BP_EYES]
+	if (eyes)
+		eyes.update_colour()
 
+
+/obj/item/organ/external/head/removed()
+	update_icon()
 	if(owner)
-		// Base eye icon.
-		if(draw_eyes)
+		SetName("[owner.real_name]'s head")
+		addtimer(CALLBACK(owner, /mob/living/carbon/human/proc/update_hair), 1, TIMER_UNIQUE)
+	..()
+	var/list/sorted = list()
+	for(var/E in markings)
+		var/datum/sprite_accessory/marking/M = E
+		if (M.draw_target == MARKING_TARGET_SKIN)
+			var/color = markings[E]
+			var/state = M.icon_state
+			if (M.use_organ_tag)
+				state += "-[organ_tag]"
+			var/icon/I = icon(M.icon, state)
+			I.Blend(color, M.blend)
+			icon_cache_key += "[M.name][color]"
+			ADD_SORTED(sorted, list(list(M.draw_order, I, M)), /proc/cmp_marking_order)
+	for (var/entry in sorted)
+		overlays |= entry[2]
+		mob_icon.Blend(entry[2], entry[3]["layer_blend"])
+
+
+/obj/item/organ/external/head/on_update_icon()
+	..()
+	if (owner)
+		if (draw_eyes)
 			var/icon/I = get_eyes()
-			if(I)
+			if (I)
 				overlays |= I
 				mob_icon.Blend(I, ICON_OVERLAY)
-
-			// Floating eyes or other effects.
 			var/image/eye_glow = get_eye_overlay()
-			if(eye_glow) overlays |= eye_glow
-
-		if(owner.lip_style && !BP_IS_ROBOTIC(src) && (species && (species.appearance_flags & HAS_LIPS)))
+			if (eye_glow)
+				overlays |= eye_glow
+		if (owner.lip_style && !BP_IS_ROBOTIC(src) && (species && (species.appearance_flags & HAS_LIPS)))
 			var/icon/lip_icon = new/icon('icons/mob/human_races/species/human/lips.dmi', "lips_[owner.lip_style]_s")
 			overlays |= lip_icon
 			mob_icon.Blend(lip_icon, ICON_OVERLAY)
-
-		overlays |= get_hair_icon()
-
-	return mob_icon
+		var/icon/hair_icon = get_hair_icon()
+		overlays |= hair_icon
+		mob_icon.Blend(hair_icon, ICON_OVERLAY)
+	icon = mob_icon
 
 
 /obj/item/organ/external/head/proc/get_hair_icon()
@@ -182,9 +208,9 @@
 		if (marking_icon)
 			ADD_SORTED(accessories, list(list(marking.draw_order, marking_icon)), /proc/cmp_marking_order)
 			icon_cache_key += "[marking.name][marking_color]"
-	var/image/result = image(species.icon_template, "")
+	var/icon/result = icon(species.icon_template, "")
 	for (var/list/entry as anything in accessories)
-		result.overlays += entry[2]
+		result.Blend(entry[2], ICON_OVERLAY)
 	return result
 
 
