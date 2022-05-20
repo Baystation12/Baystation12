@@ -129,9 +129,11 @@ var/global/list/datum/dna/gene/dna_genes[0]
 		character.facial_hair_style = "Shaved"
 	var/beard	= list_find(GLOB.facial_hair_styles_list, character.facial_hair_style)
 
-	SetUIValueRange(DNA_UI_HAIR_R,    character.r_hair,    255,    1)
-	SetUIValueRange(DNA_UI_HAIR_G,    character.g_hair,    255,    1)
-	SetUIValueRange(DNA_UI_HAIR_B,    character.b_hair,    255,    1)
+	var/head_color = rgb2num(character.head_hair_color)
+
+	SetUIValueRange(DNA_UI_HAIR_R,    head_color[1],    255,    1)
+	SetUIValueRange(DNA_UI_HAIR_G,    head_color[2],    255,    1)
+	SetUIValueRange(DNA_UI_HAIR_B,    head_color[3],    255,    1)
 
 	SetUIValueRange(DNA_UI_BEARD_R,   character.r_facial,  255,    1)
 	SetUIValueRange(DNA_UI_BEARD_G,   character.g_facial,  255,    1)

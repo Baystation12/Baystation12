@@ -17,12 +17,12 @@
 		if(current_species.appearance_flags & HAS_HAIR_COLOR)
 			var/hair_colors = current_species.get_random_hair_color()
 			if(hair_colors)
-				ASSIGN_LIST_TO_COLORS(hair_colors, r_hair, g_hair, b_hair)
-
+				var/list/rgb = hair_colors
+				head_hair_color = rgb(rgb[1], rgb[2], rgb[3])
 				if(prob(75))
-					r_facial = r_hair
-					g_facial = g_hair
-					b_facial = b_hair
+					r_facial = rgb[1]
+					g_facial = rgb[2]
+					b_facial = rgb[3]
 				else
 					ASSIGN_LIST_TO_COLORS(current_species.get_random_facial_hair_color(), r_facial, g_facial, b_facial)
 

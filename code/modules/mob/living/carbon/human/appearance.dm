@@ -94,13 +94,10 @@
 	return 1
 
 /mob/living/carbon/human/proc/change_hair_color(var/red, var/green, var/blue)
-	if(red == r_hair && green == g_hair && blue == b_hair)
+	var/new_head_hair_color = rgb(red, green, blue)
+	if (head_hair_color == new_head_hair_color)
 		return
-
-	r_hair = red
-	g_hair = green
-	b_hair = blue
-
+	head_hair_color = new_head_hair_color
 	force_update_limbs()
 	update_body()
 	update_hair()

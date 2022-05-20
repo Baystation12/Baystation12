@@ -73,9 +73,7 @@ var/global/list/wrapped_species_by_ref = list()
 
 /datum/species/shapeshifter/handle_post_spawn(var/mob/living/carbon/human/H)
 	if(monochromatic)
-		H.r_hair =   H.r_skin
-		H.g_hair =   H.g_skin
-		H.b_hair =   H.b_skin
+		H.head_hair_color = rgb(H.r_skin, H.g_skin, H.b_skin)
 		H.r_facial = H.r_skin
 		H.g_facial = H.g_skin
 		H.b_facial = H.b_skin
@@ -167,9 +165,7 @@ var/global/list/wrapped_species_by_ref = list()
 
 	var/datum/species/shapeshifter/S = species
 	if(S.monochromatic)
-		r_hair =   r_skin
-		g_hair =   g_skin
-		b_hair =   b_skin
+		head_hair_color = rgb(r_skin, g_skin, b_skin)
 		r_facial = r_skin
 		g_facial = g_skin
 		b_facial = b_skin

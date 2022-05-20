@@ -5,9 +5,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	var/gender = MALE					//gender of character (well duh)
 	var/b_type = "A+"					//blood type (not-chooseable)
 	var/head_hair_style = "Bald"				//Hair type
-	var/r_hair = 0						//Hair color
-	var/g_hair = 0						//Hair color
-	var/b_hair = 0						//Hair color
+	var/head_hair_color = "#000000"
 	var/facial_hair_style = "Shaved"				//Face hair type
 	var/r_facial = 0					//Face hair color
 	var/g_facial = 0					//Face hair color
@@ -41,9 +39,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		pref.species = "human"
 	pref.age = R.read("age")
 	pref.gender = R.read("gender")
-	pref.r_hair = R.read("hair_red")
-	pref.g_hair = R.read("hair_green")
-	pref.b_hair = R.read("hair_blue")
+	pref.head_hair_color = R.read("head_hair_color")
+	if (!pref.head_hair_color)
+		pref.head_hair_color = rgb(R.read("hair_red"), R.read("hair_green"), R.read("hair_blue"))
 	pref.r_facial = R.read("facial_red")
 	pref.g_facial = R.read("facial_green")
 	pref.b_facial = R.read("facial_blue")
@@ -69,9 +67,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	W.write("species", pref.species)
 	W.write("gender", pref.gender)
 	W.write("age", pref.age)
-	W.write("hair_red", pref.r_hair)
-	W.write("hair_green", pref.g_hair)
-	W.write("hair_blue", pref.b_hair)
+	W.write("head_hair_color", pref.head_hair_color)
 	W.write("facial_red", pref.r_facial)
 	W.write("facial_green", pref.g_facial)
 	W.write("facial_blue", pref.b_facial)
@@ -94,9 +90,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 
 /datum/category_item/player_setup_item/physical/body/sanitize_character()
-	pref.r_hair			= sanitize_integer(pref.r_hair, 0, 255, initial(pref.r_hair))
-	pref.g_hair			= sanitize_integer(pref.g_hair, 0, 255, initial(pref.g_hair))
-	pref.b_hair			= sanitize_integer(pref.b_hair, 0, 255, initial(pref.b_hair))
+	pref.head_hair_color = sanitize_hexcolor(pref.head_hair_color)
 	pref.r_facial		= sanitize_integer(pref.r_facial, 0, 255, initial(pref.r_facial))
 	pref.g_facial		= sanitize_integer(pref.g_facial, 0, 255, initial(pref.g_facial))
 	pref.b_facial		= sanitize_integer(pref.b_facial, 0, 255, initial(pref.b_facial))
@@ -175,7 +169,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	if (has_head_hair > 1)
 		. += "<br />Hair "
 		if (has_flag(mob_species, HAS_HAIR_COLOR))
-			var/color = rgb(pref.r_hair, pref.g_hair, pref.b_hair)
+			var/color = pref.head_hair_color
 			. += "[BTN("hair_color", "Color")] [COLOR_PREVIEW(color)] "
 		. += "[BTN("hair_style=1;dec", "<")][BTN("hair_style=1;inc", ">")][BTN("hair_style", pref.head_hair_style)]"
 
@@ -328,9 +322,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			ResetAllHair()
 
 			//reset hair colour and skin colour
-			pref.r_hair = 0//hex2num(copytext(new_hair, 2, 4))
-			pref.g_hair = 0//hex2num(copytext(new_hair, 4, 6))
-			pref.b_hair = 0//hex2num(copytext(new_hair, 6, 8))
+			pref.head_hair_color = "#000000"
 			pref.s_tone = 0
 			pref.age = max(min(pref.age, mob_species.max_age), mob_species.min_age)
 
@@ -352,11 +344,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["hair_color"])
 		if(!has_flag(mob_species, HAS_HAIR_COLOR))
 			return TOPIC_NOACTION
-		var/new_hair = input(user, "Choose your character's hair colour:", CHARACTER_PREFERENCE_INPUT_TITLE, rgb(pref.r_hair, pref.g_hair, pref.b_hair)) as color|null
+		var/new_hair = input(user, "Choose your character's hair colour:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.head_hair_color) as color|null
 		if(new_hair && has_flag(all_species[pref.species], HAS_HAIR_COLOR) && CanUseTopic(user))
-			pref.r_hair = hex2num(copytext(new_hair, 2, 4))
-			pref.g_hair = hex2num(copytext(new_hair, 4, 6))
-			pref.b_hair = hex2num(copytext(new_hair, 6, 8))
+			pref.head_hair_color = new_hair
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["hair_style"])

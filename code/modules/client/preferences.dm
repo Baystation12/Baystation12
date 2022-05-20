@@ -238,9 +238,7 @@
 	character.b_eyes = b_eyes
 
 	character.head_hair_style = head_hair_style
-	character.r_hair = r_hair
-	character.g_hair = g_hair
-	character.b_hair = b_hair
+	character.head_hair_color = head_hair_color
 
 	character.facial_hair_style = facial_hair_style
 	character.r_facial = r_facial

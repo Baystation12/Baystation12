@@ -1,12 +1,10 @@
 /mob/living/carbon/human
 
-	//Hair colour and style
-	var/r_hair = 0
-	var/g_hair = 0
-	var/b_hair = 0
-
 	/// The style of head hair applied to this mob
 	var/head_hair_style = "Bald"
+
+	/// The color of head hair applied to this mob
+	var/head_hair_color = "#000000"
 
 	//Facial hair colour and style
 	var/r_facial = 0

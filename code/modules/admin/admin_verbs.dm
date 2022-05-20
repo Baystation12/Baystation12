@@ -714,10 +714,8 @@ var/global/list/admin_verbs_mod = list(
 		M.b_facial = hex2num(copytext(new_facial, 6, 8))
 
 	var/new_hair = input("Please select hair color.", "Character Generation") as color
-	if(new_facial)
-		M.r_hair = hex2num(copytext(new_hair, 2, 4))
-		M.g_hair = hex2num(copytext(new_hair, 4, 6))
-		M.b_hair = hex2num(copytext(new_hair, 6, 8))
+	if(new_hair)
+		M.head_hair_color = new_hair
 
 	var/new_eyes = input("Please select eye color.", "Character Generation") as color
 	if(new_eyes)

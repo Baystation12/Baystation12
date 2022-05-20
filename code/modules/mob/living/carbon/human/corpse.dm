@@ -79,7 +79,8 @@
 			M.change_hair_color(HEX_COLOR_TO_RGB_ARGS(pick(hair_colors_per_species[species_choice])))
 		else
 			M.randomize_hair_color()
-		M.change_facial_hair_color(M.r_hair, M.g_hair, M.b_hair)
+		var/list/rgb = rgb2num(M.head_hair_color)
+		M.change_facial_hair_color(rgb[1], rgb[2], rgb[3])
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_HAIR_STYLE))
 		if(species_choice in hair_styles_per_species)

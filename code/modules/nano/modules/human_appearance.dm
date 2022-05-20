@@ -82,7 +82,7 @@
 		return
 
 	if (href_list["hair_color"] && (flags & APPEARANCE_HEAD_COLOR))
-		var/color = rgb(owner.r_hair, owner.g_hair, owner.b_hair)
+		var/color = owner.head_hair_color
 		var/data = input(usr, "Hair Color:", "Hair Color", color) as null | color
 		if (isnull(data) || !can_still_topic(state))
 			return
