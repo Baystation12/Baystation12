@@ -125,9 +125,9 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	var/hair = list_find(GLOB.hair_styles_list, character.h_style)
 
 	// Facial Hair
-	if(!character.f_style)
-		character.f_style = "Shaved"
-	var/beard	= list_find(GLOB.facial_hair_styles_list, character.f_style)
+	if(!character.facial_hair_style)
+		character.facial_hair_style = "Shaved"
+	var/beard	= list_find(GLOB.facial_hair_styles_list, character.facial_hair_style)
 
 	SetUIValueRange(DNA_UI_HAIR_R,    character.r_hair,    255,    1)
 	SetUIValueRange(DNA_UI_HAIR_G,    character.g_hair,    255,    1)

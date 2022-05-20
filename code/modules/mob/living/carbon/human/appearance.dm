@@ -48,17 +48,17 @@
 	update_hair()
 	return 1
 
-/mob/living/carbon/human/proc/change_facial_hair(var/facial_hair_style)
-	if(!facial_hair_style)
+/mob/living/carbon/human/proc/change_facial_hair(new_facial_hair_style)
+	if(!new_facial_hair_style)
 		return
 
-	if(f_style == facial_hair_style)
+	if(facial_hair_style == new_facial_hair_style)
 		return
 
-	if(!(facial_hair_style in GLOB.facial_hair_styles_list))
+	if(!(new_facial_hair_style in GLOB.facial_hair_styles_list))
 		return
 
-	f_style = facial_hair_style
+	facial_hair_style = new_facial_hair_style
 
 	update_hair()
 	return 1
@@ -74,10 +74,10 @@
 		h_style = "Bald"
 
 	if(valid_facial_hairstyles.len)
-		f_style = pick(valid_facial_hairstyles)
+		facial_hair_style = pick(valid_facial_hairstyles)
 	else
 		//this shouldn't happen
-		f_style = "Shaved"
+		facial_hair_style = "Shaved"
 
 	update_hair()
 

@@ -6,7 +6,7 @@
 	gender = pick(current_species.genders)
 
 	h_style = random_hair_style(gender, species)
-	f_style = random_facial_hair_style(gender, species)
+	facial_hair_style = random_facial_hair_style(gender, species)
 	if(current_species)
 		if(current_species.appearance_flags & HAS_A_SKIN_TONE)
 			s_tone = current_species.get_random_skin_tone() || s_tone

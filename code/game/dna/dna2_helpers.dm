@@ -174,7 +174,7 @@
 		//Facial Hair
 		var/beard = dna.GetUIValueRange(DNA_UI_BEARD_STYLE,GLOB.facial_hair_styles_list.len)
 		if((0 < beard) && (beard <= GLOB.facial_hair_styles_list.len))
-			H.f_style = GLOB.facial_hair_styles_list[beard]
+			H.facial_hair_style = GLOB.facial_hair_styles_list[beard]
 
 		H.force_update_limbs()
 		H.update_body()

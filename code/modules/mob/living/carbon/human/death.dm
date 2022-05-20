@@ -75,8 +75,8 @@
 	if(MUTATION_HUSK in mutations)	return
 
 	if(species.name in HUMAN_SPECIES) //Only change hair, and not say, tentacles
-		if(f_style)
-			f_style = "Shaved"		//we only change the icon_state of the hair datum, so it doesn't mess up their UI/UE
+		if(facial_hair_style)
+			facial_hair_style = "Shaved"		//we only change the icon_state of the hair datum, so it doesn't mess up their UI/UE
 		if(h_style)
 			h_style = "Bald"
 		update_hair(0)
@@ -95,8 +95,8 @@
 /mob/living/carbon/human/proc/ChangeToSkeleton()
 	if(MUTATION_SKELETON in src.mutations)	return
 
-	if(f_style)
-		f_style = "Shaved"
+	if(facial_hair_style)
+		facial_hair_style = "Shaved"
 	if(h_style)
 		h_style = "Bald"
 	update_hair(0)

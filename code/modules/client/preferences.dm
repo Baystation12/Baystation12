@@ -242,7 +242,7 @@
 	character.g_hair = g_hair
 	character.b_hair = b_hair
 
-	character.f_style = f_style
+	character.facial_hair_style = facial_hair_style
 	character.r_facial = r_facial
 	character.g_facial = g_facial
 	character.b_facial = b_facial
@@ -253,9 +253,6 @@
 
 	character.s_tone = s_tone
 	character.s_base = s_base
-
-	character.h_style = h_style
-	character.f_style = f_style
 
 	// Replace any missing limbs.
 	for(var/name in BP_ALL_LIMBS)

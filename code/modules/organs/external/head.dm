@@ -121,8 +121,8 @@
 
 /obj/item/organ/external/head/proc/get_hair_icon()
 	var/image/res = image(species.icon_template,"")
-	if(owner.f_style)
-		var/datum/sprite_accessory/facial_hair_style = GLOB.facial_hair_styles_list[owner.f_style]
+	if(owner.facial_hair_style)
+		var/datum/sprite_accessory/facial_hair_style = GLOB.facial_hair_styles_list[owner.facial_hair_style]
 		if(facial_hair_style)
 			if(!facial_hair_style.species_allowed || (species.get_bodytype(owner) in facial_hair_style.species_allowed))
 				if(!facial_hair_style.subspecies_allowed || (species.name in facial_hair_style.subspecies_allowed))

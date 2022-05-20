@@ -10,7 +10,9 @@
 	var/r_facial = 0
 	var/g_facial = 0
 	var/b_facial = 0
-	var/f_style = "Shaved"
+
+	/// The style of facial hair applied to this mob
+	var/facial_hair_style = "Shaved"
 
 	//Eye colour
 	var/r_eyes = 0

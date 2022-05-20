@@ -177,7 +177,7 @@
 		var/list/entries = (data["facial_hair_styles"] = list())
 		for (var/face_key in faces)
 			entries += list(list("facialhairstyle" = face_key))
-		data["facial_hair_style"] = owner.f_style
+		data["facial_hair_style"] = owner.facial_hair_style
 
 	data["change_languages"] = !!(flags & APPEARANCE_LANG)
 	if (data["change_languages"])
