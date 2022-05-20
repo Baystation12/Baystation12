@@ -2127,6 +2127,11 @@
 	},
 /obj/random_multi/single_item/boombox,
 /obj/machinery/cell_charger,
+/obj/machinery/light_switch{
+	dir = 4;
+	pixel_x = -22;
+	pixel_y = -10
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/power)
 "eH" = (
@@ -2170,9 +2175,6 @@
 "eQ" = (
 /obj/machinery/power/smes/buildable/preset/torch/shuttle{
 	RCon_tag = "Shuttle - Charon"
-	},
-/obj/machinery/light/small{
-	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/cable/cyan{
@@ -2611,6 +2613,7 @@
 	c_tag = "Charon - Power Compartment";
 	dir = 1
 	},
+/obj/item/stack/material/phoron/ten,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/power)
 "fR" = (
@@ -2762,6 +2765,10 @@
 	},
 /obj/machinery/light{
 	dir = 1
+	},
+/obj/machinery/light_switch{
+	pixel_x = 10;
+	pixel_y = 22
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
@@ -3084,6 +3091,10 @@
 	},
 /obj/machinery/light{
 	dir = 1
+	},
+/obj/machinery/light_switch{
+	pixel_x = -10;
+	pixel_y = 22
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/fuel)
@@ -7355,7 +7366,7 @@
 /obj/structure/handrail{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/fuel)
 "ql" = (
 /obj/effect/wallframe_spawn/no_grille,
@@ -7972,7 +7983,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/fuel)
 "rt" = (
 /obj/structure/cable/green{
