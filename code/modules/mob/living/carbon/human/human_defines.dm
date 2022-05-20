@@ -28,7 +28,8 @@
 	var/damage_multiplier = 1 //multiplies melee combat damage
 	var/icon_update = 1 //whether icon updating shall take place
 
-	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
+	/// The style of makeup applied to this mob
+	var/makeup_style
 
 	var/age = 30		//Player's age (pure fluff)
 	var/b_type = "A+"	//Player's bloodtype

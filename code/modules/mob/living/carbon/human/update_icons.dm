@@ -341,8 +341,8 @@ var/global/list/damage_icon_parts = list()
 		g = "female"
 
 	var/icon_key = "[species.get_race_key(src)][g][s_tone][r_skin][g_skin][b_skin]"
-	if(lip_style)
-		icon_key += "[lip_style]"
+	if(makeup_style)
+		icon_key += "[makeup_style]"
 	else
 		icon_key += "nolips"
 	var/obj/item/organ/internal/eyes/eyes = internal_organs_by_name[species.vision_organ ? species.vision_organ : BP_EYES]
