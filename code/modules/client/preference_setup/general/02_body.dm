@@ -7,9 +7,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	var/head_hair_style = "Bald"				//Hair type
 	var/head_hair_color = "#000000"
 	var/facial_hair_style = "Shaved"				//Face hair type
-	var/r_facial = 0					//Face hair color
-	var/g_facial = 0					//Face hair color
-	var/b_facial = 0					//Face hair color
+	var/facial_hair_color = "#000000"
 	var/s_tone = 0						//Skin tone
 	var/r_skin = 0						//Skin color
 	var/g_skin = 0						//Skin color
@@ -42,9 +40,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.head_hair_color = R.read("head_hair_color")
 	if (!pref.head_hair_color)
 		pref.head_hair_color = rgb(R.read("hair_red"), R.read("hair_green"), R.read("hair_blue"))
-	pref.r_facial = R.read("facial_red")
-	pref.g_facial = R.read("facial_green")
-	pref.b_facial = R.read("facial_blue")
+	pref.facial_hair_color = R.read("facial_hair_color")
+	if (!pref.facial_hair_color)
+		pref.facial_hair_color = rgb(R.read("facial_red"), R.read("facial_green"), R.read("facial_blue"))
 	pref.s_tone = R.read("skin_tone")
 	pref.r_skin = R.read("skin_red")
 	pref.g_skin = R.read("skin_green")
@@ -68,9 +66,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	W.write("gender", pref.gender)
 	W.write("age", pref.age)
 	W.write("head_hair_color", pref.head_hair_color)
-	W.write("facial_red", pref.r_facial)
-	W.write("facial_green", pref.g_facial)
-	W.write("facial_blue", pref.b_facial)
+	W.write("facial_hair_color", pref.facial_hair_color)
 	W.write("skin_tone", pref.s_tone)
 	W.write("skin_red", pref.r_skin)
 	W.write("skin_green", pref.g_skin)
@@ -91,9 +87,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 /datum/category_item/player_setup_item/physical/body/sanitize_character()
 	pref.head_hair_color = sanitize_hexcolor(pref.head_hair_color)
-	pref.r_facial		= sanitize_integer(pref.r_facial, 0, 255, initial(pref.r_facial))
-	pref.g_facial		= sanitize_integer(pref.g_facial, 0, 255, initial(pref.g_facial))
-	pref.b_facial		= sanitize_integer(pref.b_facial, 0, 255, initial(pref.b_facial))
+	pref.facial_hair_color = sanitize_hexcolor(pref.facial_hair_color)
 	pref.r_skin			= sanitize_integer(pref.r_skin, 0, 255, initial(pref.r_skin))
 	pref.g_skin			= sanitize_integer(pref.g_skin, 0, 255, initial(pref.g_skin))
 	pref.b_skin			= sanitize_integer(pref.b_skin, 0, 255, initial(pref.b_skin))
@@ -177,7 +171,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	if (has_facial_hair > 1)
 		. += "<br />Facial Hair "
 		if (has_flag(mob_species, HAS_HAIR_COLOR))
-			var/color = rgb(pref.r_facial, pref.g_facial, pref.b_facial)
+			var/color = pref.facial_hair_color
 			. += "[BTN("facial_color", "Color")] [COLOR_PREVIEW(color)] "
 		. += "[BTN("facial_style=1;dec", "<")][BTN("facial_style=1;inc", ">")][BTN("facial_style", pref.facial_hair_style)]"
 
@@ -371,11 +365,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["facial_color"])
 		if(!has_flag(mob_species, HAS_HAIR_COLOR))
 			return TOPIC_NOACTION
-		var/new_facial = input(user, "Choose your character's facial-hair colour:", CHARACTER_PREFERENCE_INPUT_TITLE, rgb(pref.r_facial, pref.g_facial, pref.b_facial)) as color|null
+		var/new_facial = input(user, "Choose your character's facial-hair colour:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.facial_hair_color) as color|null
 		if(new_facial && has_flag(all_species[pref.species], HAS_HAIR_COLOR) && CanUseTopic(user))
-			pref.r_facial = hex2num(copytext(new_facial, 2, 4))
-			pref.g_facial = hex2num(copytext(new_facial, 4, 6))
-			pref.b_facial = hex2num(copytext(new_facial, 6, 8))
+			pref.facial_hair_color = new_facial
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["eye_color"])

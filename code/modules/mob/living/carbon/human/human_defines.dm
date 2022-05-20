@@ -6,13 +6,11 @@
 	/// The color of head hair applied to this mob
 	var/head_hair_color = "#000000"
 
-	//Facial hair colour and style
-	var/r_facial = 0
-	var/g_facial = 0
-	var/b_facial = 0
-
 	/// The style of facial hair applied to this mob
 	var/facial_hair_style = "Shaved"
+
+	/// The color of facial hair applied to this mob
+	var/facial_hair_color = "#000000"
 
 	//Eye colour
 	var/r_eyes = 0

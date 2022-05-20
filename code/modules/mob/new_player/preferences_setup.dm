@@ -20,11 +20,10 @@
 				var/list/rgb = hair_colors
 				head_hair_color = rgb(rgb[1], rgb[2], rgb[3])
 				if(prob(75))
-					r_facial = rgb[1]
-					g_facial = rgb[2]
-					b_facial = rgb[3]
+					facial_hair_color = head_hair_color
 				else
-					ASSIGN_LIST_TO_COLORS(current_species.get_random_facial_hair_color(), r_facial, g_facial, b_facial)
+					var/list/frgb = current_species.get_random_facial_hair_color()
+					facial_hair_color = rgb(frgb[1], frgb[2], frgb[3])
 
 	if(current_species.appearance_flags & HAS_UNDERWEAR)
 		if(all_underwear)

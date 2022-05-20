@@ -241,9 +241,7 @@
 	character.head_hair_color = head_hair_color
 
 	character.facial_hair_style = facial_hair_style
-	character.r_facial = r_facial
-	character.g_facial = g_facial
-	character.b_facial = b_facial
+	character.facial_hair_color = facial_hair_color
 
 	character.r_skin = r_skin
 	character.g_skin = g_skin

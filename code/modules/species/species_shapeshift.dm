@@ -74,9 +74,7 @@ var/global/list/wrapped_species_by_ref = list()
 /datum/species/shapeshifter/handle_post_spawn(var/mob/living/carbon/human/H)
 	if(monochromatic)
 		H.head_hair_color = rgb(H.r_skin, H.g_skin, H.b_skin)
-		H.r_facial = H.r_skin
-		H.g_facial = H.g_skin
-		H.b_facial = H.b_skin
+		H.facial_hair_color = H.head_hair_color
 	..()
 
 /datum/species/shapeshifter/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
@@ -166,9 +164,7 @@ var/global/list/wrapped_species_by_ref = list()
 	var/datum/species/shapeshifter/S = species
 	if(S.monochromatic)
 		head_hair_color = rgb(r_skin, g_skin, b_skin)
-		r_facial = r_skin
-		g_facial = g_skin
-		b_facial = b_skin
+		facial_hair_color = head_hair_color
 
 	for(var/obj/item/organ/external/E in organs)
 		E.sync_colour_to_human(src)

@@ -128,7 +128,7 @@
 				if(!facial_hair_style.subspecies_allowed || (species.name in facial_hair_style.subspecies_allowed))
 					var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
 					if(facial_hair_style.do_coloration & DO_COLORATION_USER)
-						facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), facial_hair_style.blend)
+						facial_s.Blend(owner.facial_hair_color, facial_hair_style.blend)
 					res.overlays |= facial_s
 
 	if (owner.head_hair_style)

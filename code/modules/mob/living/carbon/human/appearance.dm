@@ -104,13 +104,10 @@
 	return 1
 
 /mob/living/carbon/human/proc/change_facial_hair_color(var/red, var/green, var/blue)
-	if(red == r_facial && green == g_facial && blue == b_facial)
+	var/new_facial_hair_color = rgb(red, green, blue)
+	if (facial_hair_color == new_facial_hair_color)
 		return
-
-	r_facial = red
-	g_facial = green
-	b_facial = blue
-
+	facial_hair_color = new_facial_hair_color
 	update_hair()
 	return 1
 
