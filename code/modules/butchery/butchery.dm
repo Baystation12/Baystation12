@@ -138,9 +138,7 @@
 		occupant.set_dir(SOUTH)
 		var/image/I = image(null)
 		I.appearance = occupant
-		var/matrix/M = matrix()
-		M.Turn(occupant.butchery_rotation)
-		I.transform = M
+		I.SetTransform(rotation = occupant.butchery_rotation)
 		overlays += I
 
 /obj/structure/kitchenspike/mob_breakout(mob/living/escapee)

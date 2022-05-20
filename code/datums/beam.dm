@@ -84,10 +84,7 @@
 /datum/beam/proc/Draw()
 	LAZYINITLIST(elements)
 	var/Angle = round(Get_Angle(origin,target))
-	var/matrix/rot_matrix = matrix()
 	var/turf/origin_turf = get_turf(origin)
-	rot_matrix.Turn(Angle)
-
 	//Translation vector for origin and target
 	var/DX = (32*target.x+target.pixel_x)-(32*origin.x+origin.pixel_x)
 	var/DY = (32*target.y+target.pixel_y)-(32*origin.y+origin.pixel_y)
@@ -109,7 +106,7 @@
 			X.icon = II
 		else
 			X.vis_contents += visuals
-		X.transform = rot_matrix
+		X.SetTransform(rotation = Angle)
 
 		//Calculate pixel offsets (If necessary)
 		var/Pixel_x

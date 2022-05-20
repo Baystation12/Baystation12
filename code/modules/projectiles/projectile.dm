@@ -105,7 +105,7 @@
 
 //called when the projectile stops flying because it collided with something
 /obj/item/projectile/proc/on_impact(var/atom/A)
-	impact_effect(effect_transform)		// generate impact effect
+	impact_effect()		// generate impact effect
 	if (damage && damage_type == DAMAGE_BURN)
 		var/turf/T = get_turf(A)
 		if(T)
@@ -372,10 +372,10 @@
 						return
 
 		if(first_step)
-			muzzle_effect(effect_transform)
+			muzzle_effect()
 			first_step = 0
 		else if(!bumped && life_span > 0)
-			tracer_effect(effect_transform)
+			tracer_effect()
 		if(!hitscan)
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
 
@@ -396,17 +396,15 @@
 		offset = rand(-radius, radius)
 
 	// plot the initial trajectory
-	trajectory = new()
+	trajectory = new
 	trajectory.setup(starting, original, pixel_x, pixel_y, angle_offset=offset)
+	effect_transform = matrix().Update(
+		scale_x = round(trajectory.return_hypotenuse() + 0.005, 0.001),
+		rotation = round(-trajectory.angle, 0.1)
+	)
+	SetTransform(rotation = -(trajectory.angle + 90))
 
-	// generate this now since all visual effects the projectile makes can use it
-	effect_transform = new()
-	effect_transform.Scale(round(trajectory.return_hypotenuse() + 0.005, 0.001) , 1) //Seems like a weird spot to truncate, but it minimizes gaps.
-	effect_transform.Turn(round(-trajectory.return_angle(), 0.1))		//no idea why this has to be inverted, but it works
-
-	transform = turn(transform, -(trajectory.return_angle() + 90)) //no idea why 90 needs to be added, but it works
-
-/obj/item/projectile/proc/muzzle_effect(var/matrix/T)
+/obj/item/projectile/proc/muzzle_effect()
 	if(silenced)
 		return
 
@@ -414,7 +412,7 @@
 		var/obj/effect/projectile/M = new muzzle_type(get_turf(src))
 
 		if(istype(M))
-			M.set_transform(T)
+			M.SetTransform(others = effect_transform)
 			M.pixel_x = round(location.pixel_x, 1)
 			M.pixel_y = round(location.pixel_y, 1)
 			if(!hitscan) //Bullets don't hit their target instantly, so we can't link the deletion of the muzzle flash to the bullet's Destroy()
@@ -422,25 +420,23 @@
 			else
 				segments += M
 
-/obj/item/projectile/proc/tracer_effect(var/matrix/M)
+/obj/item/projectile/proc/tracer_effect()
 	if(ispath(tracer_type))
 		var/obj/effect/projectile/P = new tracer_type(location.loc)
 
 		if(istype(P))
-			P.set_transform(M)
+			P.SetTransform(others = effect_transform)
 			P.pixel_x = round(location.pixel_x, 1)
 			P.pixel_y = round(location.pixel_y, 1)
-			if(!hitscan)
-				QDEL_IN(M,1)
-			else
+			if(hitscan)
 				segments += P
 
-/obj/item/projectile/proc/impact_effect(var/matrix/M)
+/obj/item/projectile/proc/impact_effect()
 	if(ispath(impact_type))
 		var/obj/effect/projectile/P = new impact_type(location ? location.loc : get_turf(src))
 
 		if(istype(P) && location)
-			P.set_transform(M)
+			P.SetTransform(others = effect_transform)
 			P.pixel_x = round(location.pixel_x, 1)
 			P.pixel_y = round(location.pixel_y, 1)
 			segments += P

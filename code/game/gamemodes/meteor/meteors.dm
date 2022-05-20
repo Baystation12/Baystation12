@@ -169,9 +169,9 @@ var/global/list/meteors_cataclysm = list(\
 	GLOB.meteor_list -= src
 	return ..()
 
-/obj/effect/meteor/New()
-	..()
-	if(!ismissile)
+/obj/effect/meteor/Initialize()
+	. = ..()
+	if (!ismissile)
 		SpinAnimation()
 
 /obj/effect/meteor/Bump(atom/A)

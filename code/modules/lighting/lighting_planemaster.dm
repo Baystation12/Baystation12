@@ -11,10 +11,7 @@
 
 /obj/lighting_general/Initialize()
 	. = ..()
-	var/matrix/M = matrix()
-	M.Scale(world.view*2.2)
-
-	transform = M
+	SetTransform(scale = world.view * 2.2)
 
 /obj/lighting_general/proc/sync(var/new_colour)
 	color = new_colour

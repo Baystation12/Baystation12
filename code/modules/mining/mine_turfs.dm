@@ -145,9 +145,7 @@ var/global/list/mining_floors = list()
 	ore_overlay = image('icons/turf/mining_decals.dmi', "[mineral.ore_icon_overlay]")
 	ore_overlay.appearance_flags = RESET_COLOR
 	if(prob(50))
-		var/matrix/M = matrix()
-		M.Scale(-1,1)
-		ore_overlay.transform = M
+		ore_overlay.SetTransform(scale_x = -1)
 	ore_overlay.color = mineral.icon_colour
 	ore_overlay.turf_decal_layerise()
 	update_icon()

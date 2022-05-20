@@ -25,7 +25,6 @@
 	var/g_skin = 0
 	var/b_skin = 0
 
-	var/size_multiplier = 1 //multiplier for the mob's icon size
 	var/damage_multiplier = 1 //multiplies melee combat damage
 	var/icon_update = 1 //whether icon updating shall take place
 

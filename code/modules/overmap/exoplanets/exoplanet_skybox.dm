@@ -18,7 +18,7 @@
 		var/image/water = image('icons/skybox/planet.dmi', "water")
 		water.color = water_color
 		water.appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
-		water.transform = water.transform.Turn(rand(0,360))
+		water.SetTransform(rotation = rand(0, 360))
 		skybox_image.overlays += water
 
 	if (atmosphere && atmosphere.return_pressure() > SOUND_MINIMUM_PRESSURE)

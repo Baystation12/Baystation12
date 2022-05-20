@@ -188,16 +188,17 @@ Please contact me on #coderbus IRC. ~Carn x
 		overlays_to_apply += auras
 
 	overlays = overlays_to_apply
-
-	var/matrix/M = new
 	var/list/scale = get_scale()
-	M.Scale(scale[1], scale[2])
-	if (lying)
-		M.Turn(90)
-		M.Translate(1, -6 - default_pixel_z)
-	else
-		M.Translate(0, 16 * (scale[2] - 1))
-	animate(src, transform = M, time = ANIM_LYING_TIME)
+	animate(
+		src,
+		transform = matrix().Update(
+			scale_x = scale[1],
+			scale_y = scale[2],
+			rotation = lying ? 90 : 0,
+			offset_y = lying ? -6 - default_pixel_z : 16 * (scale[2] - 1)
+		),
+		time = ANIM_LYING_TIME
+	)
 
 
 /mob/living/carbon/human/proc/get_scale()
@@ -218,16 +219,15 @@ Please contact me on #coderbus IRC. ~Carn x
 			if (length(scale_effect))
 				build_modifier = 0.01 * scale_effect[build_descriptor]
 	return list(
-		(1 + build_modifier) * size_multiplier,
-		(1 + height_modifier) * size_multiplier
+		(1 + build_modifier) * (tf_scale_x || 1),
+		(1 + height_modifier) * (tf_scale_y || 1)
 	)
 
 var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/proc/get_lying_offset(var/image/I)
-	var/matrix/M = matrix()
 	if(!lying)
-		return M
+		return matrix()
 
 	var/overlay_key = "[I.icon][I.icon_state]"
 	if(!GLOB.overlay_icon_cache[overlay_key])
@@ -248,7 +248,10 @@ var/global/list/damage_icon_parts = list()
 	var/x_offset = Ceil(0.5*(icon_template.Width() - (overlay.Width() || 32)))
 	var/y_offset = Ceil(0.5*(icon_template.Height() - (overlay.Height() || 32)))
 
-	return M.Translate(x_offset-y_offset, -(x_offset+y_offset))
+	return matrix().Update(
+		offset_x = x_offset - y_offset,
+		offset_y = -(x_offset + y_offset)
+	)
 
 //DAMAGE OVERLAYS
 //constructs damage icon for each organ from mask * damage field and saves it in our overlays_ lists

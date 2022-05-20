@@ -206,12 +206,10 @@
 /datum/hud/proc/SetButtonCoords(var/obj/screen/button,var/number)
 	var/row = round((number-1)/AB_MAX_COLUMNS)
 	var/col = ((number - 1)%(AB_MAX_COLUMNS)) + 1
-	var/x_offset = 32*(col-1) + AB_WEST_OFFSET + 2*col
-	var/y_offset = -32*(row+1) + AB_NORTH_OFFSET
-
-	var/matrix/M = matrix()
-	M.Translate(x_offset,y_offset)
-	button.transform = M
+	button.SetTransform(
+		offset_x = 32 * (col - 1) + AB_WEST_OFFSET + 2 * col,
+		offset_y = -32 * (row + 1) + AB_NORTH_OFFSET
+	)
 
 //Presets for item actions
 /datum/action/item_action

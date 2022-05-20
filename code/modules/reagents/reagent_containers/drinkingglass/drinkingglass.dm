@@ -202,11 +202,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 			var/list/rim_pos_data = cached_key_number_decode(rim_pos)
 			var/fsy = rim_pos_data["y"] - 20
 			var/fsx = rim_pos_data[side == "left" ? "x_left" : "x_right"] - 16
-
-			var/matrix/M = matrix()
-			M.Scale(0.5)
-			M.Translate(fsx, fsy)
-			I.transform = M
+			I.SetTransform(scale = 0.5, offset_x = fsx, offset_y = fsy)
 			underlays += I
 		else continue
 		side = "right"
