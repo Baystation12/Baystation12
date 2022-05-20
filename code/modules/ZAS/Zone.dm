@@ -70,7 +70,7 @@ Class Procs:
 	add_tile_air(turf_air)
 	T.zone = src
 	contents.Add(T)
-	if(T.fire)
+	if(T.hotspot)
 		var/obj/effect/decal/cleanable/liquid_fuel/fuel = locate() in T
 		fire_tiles.Add(T)
 		SSair.active_fire_zones |= src
@@ -86,7 +86,7 @@ Class Procs:
 #endif
 	contents.Remove(T)
 	fire_tiles.Remove(T)
-	if(T.fire)
+	if(T.hotspot)
 		var/obj/effect/decal/cleanable/liquid_fuel/fuel = locate() in T
 		fuel_objs -= fuel
 	T.zone = null

@@ -8,7 +8,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 //#define FIREDBG
 
-/turf/var/obj/fire/fire = null
+/turf/var/obj/hotspot/hotspot = null
 
 //Some legacy definitions so fires can be started.
 /atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
@@ -26,7 +26,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 /turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	if(fire_protection > world.time-300)
 		return 0
-	if(locate(/obj/fire) in src)
+	if(locate(/obj/hotspot) in src)
 		return 1
 	var/datum/gas_mixture/air_contents = return_air()
 	if(!air_contents || exposed_temperature < PHORON_MINIMUM_BURN_TEMPERATURE)
@@ -37,8 +37,8 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	if(air_contents.check_combustability(liquid))
 		igniting = 1
-
-		create_fire(exposed_temperature)
+		IgniteTurf(liquid.amount * 10) //Conver this to pure chem based
+		//create_fire(exposed_temperature)
 	return igniting
 
 /zone/proc/process_fire()
@@ -50,16 +50,16 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	if(firelevel)
 		for(var/turf/T in fire_tiles)
-			if(T.fire)
-				T.fire.firelevel = firelevel
+			if(T.hotspot)
+				T.hotspot.firelevel = firelevel
 			else
 				var/obj/effect/decal/cleanable/liquid_fuel/fuel = locate() in T
 				fire_tiles -= T
 				fuel_objs -= fuel
 	else
 		for(var/turf/simulated/T in fire_tiles)
-			if(istype(T.fire))
-				qdel(T.fire)
+			if(istype(T.hotspot))
+				qdel(T.hotspot)
 		fire_tiles.Cut()
 		fuel_objs.Cut()
 
@@ -86,7 +86,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 			fuel_objs -= fuel
 			if(remove_fire)
 				var/turf/T = fuel.loc
-				if(istype(T) && T.fire) qdel(T.fire)
+				if(istype(T) && T.hotspot) qdel(T.hotspot)
 			qdel(fuel)
 
 /turf/proc/create_fire(fl)
@@ -97,14 +97,14 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	if(submerged())
 		return 1
 
-	if(fire)
-		fire.firelevel = max(fl, fire.firelevel)
+	if(hotspot)
+		hotspot.firelevel = max(fl, hotspot.firelevel)
 		return 1
 
 	if(!zone)
 		return 1
 
-	fire = new(src, fl)
+	hotspot = new(src, fl)
 	SSair.active_fire_zones |= zone
 
 	var/obj/effect/decal/cleanable/liquid_fuel/fuel = locate() in src
@@ -113,8 +113,9 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	return 0
 
-/obj/fire
-	//Icon for fire on turfs.
+/obj/hotspot
+	//Icon for gas fire on turfs.
+	//Different from turf fires
 
 	anchored = TRUE
 	mouse_opacity = 0
@@ -128,13 +129,13 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	var/firelevel = 1 //Calculated by gas_mixture.calculate_firelevel()
 
-/obj/fire/Process()
+/obj/hotspot/Process()
 	. = 1
 
 	var/turf/simulated/my_tile = loc
 	if(!istype(my_tile) || !my_tile.zone || my_tile.submerged())
-		if(my_tile && my_tile.fire == src)
-			my_tile.fire = null
+		if(my_tile && my_tile.hotspot == src)
+			my_tile.hotspot = null
 		qdel(src)
 		return PROCESS_KILL
 
@@ -163,7 +164,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 		if(istype(enemy_tile))
 			if(my_tile.open_directions & direction) //Grab all valid bordering tiles
-				if(!enemy_tile.zone || enemy_tile.fire)
+				if(!enemy_tile.zone || enemy_tile.hotspot)
 					continue
 
 				//if(!enemy_tile.zone.fire_tiles.len) TODO - optimize
@@ -188,7 +189,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	animate(src, color = fire_color(air_contents.temperature), 5)
 	set_light(l_color = color)
 
-/obj/fire/New(newLoc,fl)
+/obj/hotspot/New(newLoc,fl)
 	..()
 
 	if(!istype(loc, /turf))
@@ -204,15 +205,21 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	firelevel = fl
 	SSair.active_hotspots.Add(src)
 
-/obj/fire/proc/fire_color(var/env_temperature)
+	//If this is a turf and it can burn maybe it should be ignited too
+	var/turf/simulated/floor/F = loc //Maybe we should look back at what types of floor should burn
+	if(istype(F))
+		if(prob(30))
+			F.IgniteTurf(rand(8,22))
+
+/obj/hotspot/proc/fire_color(var/env_temperature)
 	var/temperature = max(4000*sqrt(firelevel/vsc.fire_firelevel_multiplier), env_temperature)
 	return heat2color(temperature)
 
-/obj/fire/Destroy()
+/obj/hotspot/Destroy()
 	var/turf/T = loc
 	if (istype(T))
 		set_light(0)
-		T.fire = null
+		T.hotspot = null
 	SSair.active_hotspots.Remove(src)
 	. = ..()
 

@@ -247,7 +247,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 			return
 
 	while (curr_hotspot.len)
-		var/obj/fire/F = curr_hotspot[curr_hotspot.len]
+		var/obj/hotspot/F = curr_hotspot[curr_hotspot.len]
 		curr_hotspot.len--
 
 		F.Process()

@@ -32,7 +32,8 @@
 
 	var/old_density = density
 	var/old_air = air
-	var/old_fire = fire
+	var/old_hotspot = hotspot
+	var/old_turf_fire = null
 	var/old_opacity = opacity
 	var/old_dynamic_lighting = dynamic_lighting
 	var/old_affecting_lights = affecting_lights
@@ -41,6 +42,11 @@
 	var/old_ao_neighbors = ao_neighbors
 	var/old_above = above
 	var/old_permit_ao = permit_ao
+
+	if(isspaceturf(N) || isopenspace(N))
+		QDEL_NULL(turf_fire)
+	else
+		old_turf_fire = turf_fire
 
 	//log_debug("Replacing [src.type] with [N]")
 
@@ -73,12 +79,13 @@
 		W.air = old_air
 
 	if(ispath(N, /turf/simulated))
-		if(old_fire)
-			fire = old_fire
+		if(old_hotspot)
+			hotspot = old_hotspot
 		if (istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
-	else if(old_fire)
-		qdel(old_fire)
+	else if(hotspot)
+		qdel(hotspot)
+
 
 	if(tell_universe)
 		GLOB.universe.OnTurfChange(W)
@@ -111,6 +118,11 @@
 
 	if(density != old_density)
 		GLOB.density_set_event.raise_event(src, old_density, density)
+
+	if(!density)
+		turf_fire = old_turf_fire
+	else if(old_turf_fire)
+		QDEL_NULL(old_turf_fire)
 
 	if(density != old_density || permit_ao != old_permit_ao)
 		regenerate_ao()

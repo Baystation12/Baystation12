@@ -229,6 +229,7 @@
 	reagent_state = LIQUID
 	color = "#673910"
 	touch_met = 50
+	accelerant_quality = 20
 
 /datum/reagent/napalm/touch_turf(var/turf/T)
 	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
@@ -342,7 +343,7 @@
 	var/datum/gas_mixture/environment = T.return_air()
 	var/min_temperature = 0 // Room temperature + some variance. An actual diminishing return would be better, but this is *like* that. In a way. . This has the potential for weird behavior, but I says fuck it. Water grenades for everyone.
 
-	var/hotspot = (locate(/obj/fire) in T)
+	var/hotspot = (locate(/obj/hotspot) in T)
 	if(hotspot && !istype(T, /turf/space))
 		var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles)
 		lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)

@@ -444,3 +444,6 @@ var/global/const/enterloopsanity = 100
 	else
 		has_dense_atom = null
 		has_opaque_atom = null
+
+/turf/proc/IgniteTurf(power, fire_colour)
+	return
