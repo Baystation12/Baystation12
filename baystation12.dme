@@ -990,6 +990,7 @@
 #include "code\game\objects\items\weapons\circuitboards\computer\station_alert.dm"
 #include "code\game\objects\items\weapons\circuitboards\computer\telecomms.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\biogenerator.dm"
+#include "code\game\objects\items\weapons\circuitboards\machinery\bluespacedrive.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\chemistry.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\cloning.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\commsantenna.dm"

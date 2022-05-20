@@ -1,27 +1,28 @@
 /obj/machinery/bluespacedrive
 	name = "bluespace drive"
-	desc = "A bewilderingly complex prototype designed to split the fabric of spacetime and allow access to Bluespace."
+	desc = "The Naophoros-pattern jump drive is a machine created by the skrell, mated with countless human devices and apparatuses to make it able to interface with the vastly different technology used in their ships."
 	icon = 'icons/obj/machines/bluespacedrive.dmi'
 	icon_state = "bsd_core"
 	anchored = TRUE
 	density = TRUE
 	pixel_y = -32
 	pixel_x = -32
-	idle_power_usage = 15000
+	idle_power_usage = 150 KILOWATTS
 	construct_state = /decl/machine_construction/default/panel_closed
 
-	machine_name = "bluespace drive"
-	machine_desc = "A bewilderingly complex prototype designed to split the fabric of spacetime and allow access to Bluespace."
-
-	var/drive_max_integrity = 1000		// How much damage can we sustain?
-	var/drive_integrity					// How much damage have we sustained?
-	var/drive_broken = FALSE			// Are we currently broken?
-	var/drive_repaired = FALSE			// Did someone repair us?
-	var/drive_core_unstable = FALSE		// Are we currently unstable?
+	/// How much damage can it sustain
+	var/drive_max_integrity = 1000
+	/// How much damage has it sustained
+	var/drive_integrity
+	/// Is it currently broken?
+	var/drive_broken = FALSE
+	/// Has it been repaired?
+	var/drive_repaired = FALSE
+	/// Is the core currently unstable?
+	var/drive_core_unstable = FALSE
 	var/drive_sound
-	var/image/overlay
 
-particles/bluespace_torus
+/particles/bluespace_torus
 	width = 700
 	height = 700
 	count = 2700
@@ -43,16 +44,16 @@ particles/bluespace_torus
 	update_icon()
 
 /obj/machinery/bluespacedrive/on_update_icon()
+	overlays.Cut()
 	if(!drive_core_unstable)
-		overlays += "bsd_stable"
+		overlays += "bsd_c_s"
 	else
-		overlays += "bsd_unstable"
+		overlays += "bsd_c_u"
 	if (!drive_broken)
 		icon_state = "bsd_core"
 	else
 		icon_state = "bsd_core_broken"
 	set_light(1, 5, 15, 10, COLOR_CYAN)
-	overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 
 /obj/machinery/bluespacedrive/emp_act(severity)
 	..()
@@ -63,24 +64,20 @@ particles/bluespace_torus
 
 /obj/machinery/bluespacedrive/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(1)
 			qdel(src)
 			return
-		if(2.0)
+		if(2)
 			if (prob(25))
 				qdel(src)
 				return
 			if (prob(50))
-				for(var/x in verbs)
-					verbs -= x
 				take_damage(drive_max_integrity)
-		if(3.0)
+		if(3)
 			if (prob(25))
-				for(var/x in verbs)
-					verbs -= x
 				take_damage(drive_max_integrity)
 
-/obj/machinery/bluespacedrive/bullet_act(var/obj/item/projectile/Proj)
+/obj/machinery/bluespacedrive/bullet_act(obj/item/projectile/Proj)
 	if(!drive_broken)
 		take_damage(Proj.get_structure_damage())
 		visible_message(SPAN_WARNING("\The [src]'s field crackles disturbingly!"))
@@ -96,18 +93,21 @@ particles/bluespace_torus
 	drive_integrity -= damage
 	if(drive_integrity <= 0)
 		playsound(loc, 'sound/machines/BSD_explosion.ogg', 100)
-		visible_message(SPAN_DANGER(FONT_LARGE("\The [src] beings emitting an ear-splitting, horrible shrill! get back!")))
-		if(do_after(src, 4 SECONDS))
-			visible_message(SPAN_DANGER(FONT_LARGE("\The [src]'s containment field is wracked by a series of horrendous distortions, buckling and twisting like a living thing before bursting in a flash of light!")))
-			explosion(get_turf(src),-1, 5, 10)
-			empulse(get_turf(src),7, 14)
-			drive_broken = TRUE
-			drive_core_unstable = TRUE
-			update_icon()
-		else
-			return
+		visible_message(SPAN_DANGER(FONT_LARGE("\The [src] begins emitting an ear-splitting, horrible shrill! Get back!")))
+		addtimer(CALLBACK(src, .proc/explode), 4 SECONDS)
 
-/obj/machinery/bluespacedrive/attackby(var/obj/item/O, var/mob/user)
+/obj/machinery/bluespacedrive/proc/explode()
+	visible_message(SPAN_DANGER(FONT_LARGE("\The [src]'s containment field is wracked by a series of horrendous distortions, buckling and twisting like a living thing before bursting in a flash of light!")))
+	drive_integrity = 0
+	explosion(get_turf(src),-1, 5, 10)
+	empulse(get_turf(src),7, 14)
+	drive_broken = TRUE
+	drive_core_unstable = TRUE
+	for(var/x in verbs)
+		verbs -= x
+	update_icon()
+
+/obj/machinery/bluespacedrive/attackby(obj/item/O, mob/user)
 	user.visible_message(
 		SPAN_WARNING("\The [user] reaches out \a [O] to \the [src], warping briefly as it disappears in a flash of blue light, scintillating motes left behind."),
 		SPAN_DANGER("You touch \the [src] with \a [O], the field buckling around it before retracting with a crackle as it leaves small, blue scintillas on your hand as you flinch away."),
@@ -130,19 +130,13 @@ particles/bluespace_torus
 	else
 		switch(drive_integrity) 	// Nightmare nightmare nightmare, swap for something prettier.
 			if(1 to 250)
-				user.visible_message(SPAN_DANGER("Its unstable field is cracking and shifting dangerously, revealing the core inside briefly!"))
+				to_chat(user,SPAN_DANGER("Its unstable field is cracking and shifting dangerously, revealing the core inside briefly!"))
 			if(206 to 500)
-				user.visible_message(SPAN_WARNING("Its damaged field is twitching and crackling dangerously!"))
+				to_chat(user,SPAN_WARNING("Its damaged field is twitching and crackling dangerously!"))
 			if(501 to 750)
-				user.visible_message(SPAN_NOTICE("Its field is crackling gently, with the ocassional twitch."))
+				to_chat(user,SPAN_NOTICE("Its field is crackling gently, with the ocassional twitch."))
 			else
-				user.visible_message(SPAN_NOTICE("At a glance, its field is peacefully humming without any alterations."))
-
-/obj/machinery/bluespacedrive/attack_hand(mob/user as mob)
-	. = ..()
-
-/obj/machinery/bluespacedrive/Process()
-	. = ..()
+				to_chat(user,SPAN_NOTICE("At a glance, its field is peacefully humming without any alterations."))
 
 /obj/machinery/bluespacedrive/Destroy()
 	QDEL_NULL(drive_sound)
