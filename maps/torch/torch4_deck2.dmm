@@ -676,6 +676,10 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/engine_room)
+"bq" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/bluegrid,
+/area/engineering/bluespace)
 "br" = (
 /obj/machinery/alarm{
 	dir = 4;
@@ -1138,6 +1142,15 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/forestarboard)
+"cg" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/bluegrid,
+/area/engineering/bluespace)
 "ch" = (
 /obj/structure/cable{
 	d1 = 2;
@@ -1313,6 +1326,17 @@
 /obj/item/stock_parts/circuitboard/arcade/orion_trail,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
+"ct" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/simulated/floor/bluegrid,
+/area/engineering/bluespace)
 "cu" = (
 /obj/machinery/door/window/brigdoor/northleft{
 	name = "Weapons locker"
@@ -8671,17 +8695,6 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/wastetank)
-"uV" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/bluegrid,
-/area/engineering/bluespace)
 "uY" = (
 /obj/effect/floor_decal/corner/yellow/half,
 /obj/effect/floor_decal/industrial/warning,
@@ -15531,14 +15544,6 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/maintenance/seconddeck/forestarboard)
-"PQ" = (
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/turf/simulated/floor/bluegrid,
-/area/engineering/bluespace)
 "PS" = (
 /obj/effect/floor_decal/floordetail/edgedrain{
 	dir = 6
@@ -17044,10 +17049,10 @@
 "Vf" = (
 /obj/machinery/computer/air_control{
 	dir = 8;
+	input_tag = "rust_injector";
 	name = "R-UST Gas Injection Controls";
 	sensor_name = "Fusion Chamber";
-	sensor_tag = "rust_sensor";
-	input_tag = "rust_injector"
+	sensor_tag = "rust_sensor"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/vacant/prototype/control)
@@ -35501,11 +35506,11 @@ XP
 ge
 gD
 ha
-yo
 tH
+bq
 NY
-uV
-PQ
+cg
+ct
 jV
 wz
 oy
