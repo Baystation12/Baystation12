@@ -262,9 +262,9 @@
 					if(!lying)
 						emote("collapse")
 				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT) && species.get_bodytype(src) == SPECIES_HUMAN) //apes go bald
-					if((h_style != "Bald" || facial_hair_style != "Shaved" ))
+					if((head_hair_style != "Bald" || facial_hair_style != "Shaved" ))
 						to_chat(src, "<span class='warning'>Your hair falls out.</span>")
-						h_style = "Bald"
+						head_hair_style = "Bald"
 						facial_hair_style = "Shaved"
 						update_hair()
 

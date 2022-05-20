@@ -33,17 +33,17 @@
 /mob/living/carbon/human/proc/randomize_gender()
 	change_gender(pick(species.genders))
 
-/mob/living/carbon/human/proc/change_hair(var/hair_style)
-	if(!hair_style)
+/mob/living/carbon/human/proc/change_hair(new_head_hair_style)
+	if(!new_head_hair_style)
 		return
 
-	if(h_style == hair_style)
+	if(head_hair_style == new_head_hair_style)
 		return
 
-	if(!(hair_style in GLOB.hair_styles_list))
+	if(!(new_head_hair_style in GLOB.hair_styles_list))
 		return
 
-	h_style = hair_style
+	head_hair_style = new_head_hair_style
 
 	update_hair()
 	return 1
@@ -68,10 +68,10 @@
 	var/list/valid_facial_hairstyles = generate_valid_facial_hairstyles()
 
 	if(valid_hairstyles.len)
-		h_style = pick(valid_hairstyles)
+		head_hair_style = pick(valid_hairstyles)
 	else
 		//this shouldn't happen
-		h_style = "Bald"
+		head_hair_style = "Bald"
 
 	if(valid_facial_hairstyles.len)
 		facial_hair_style = pick(valid_facial_hairstyles)

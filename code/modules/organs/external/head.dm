@@ -131,9 +131,9 @@
 						facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), facial_hair_style.blend)
 					res.overlays |= facial_s
 
-	if (owner.h_style)
+	if (owner.head_hair_style)
 		var/icon/HI
-		var/datum/sprite_accessory/hair/H = GLOB.hair_styles_list[owner.h_style]
+		var/datum/sprite_accessory/hair/H = GLOB.hair_styles_list[owner.head_hair_style]
 		if ((owner.head?.flags_inv & BLOCKHEADHAIR) && !(H.flags & VERY_SHORT))
 			H = GLOB.hair_styles_list["Short Hair"]
 		if (H)
@@ -162,8 +162,8 @@
 		if (M.draw_target == MARKING_TARGET_HEAD)
 			var/color = markings[E]
 			var/icon/I = icon(M.icon, M.icon_state)
-			if ((M.do_coloration & DO_COLORATION_AUTO) && owner.h_style)
-				var/datum/sprite_accessory/hair/H = GLOB.hair_styles_list[owner.h_style]
+			if ((M.do_coloration & DO_COLORATION_AUTO) && owner.head_hair_style)
+				var/datum/sprite_accessory/hair/H = GLOB.hair_styles_list[owner.head_hair_style]
 				if ((~H.flags & HAIR_BALD) && (M.do_coloration & DO_COLORATION_HAIR) && length(h_col) >= 3)
 					I.MapColors(
 						1,0,0,0,

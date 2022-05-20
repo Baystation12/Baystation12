@@ -10,8 +10,8 @@
 		to_chat(src, "<span class='warning'>You can't mess with your hair right now!</span>")
 		return
 
-	if(h_style)
-		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[h_style]
+	if(head_hair_style)
+		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[head_hair_style]
 		var/selected_string
 		if(!(hair_style.flags & HAIR_TIEABLE))
 			to_chat(src, "<span class ='warning'>Your hair isn't long enough to tie.</span>")
@@ -26,8 +26,8 @@
 		if(incapacitated())
 			to_chat(src, "<span class='warning'>You can't mess with your hair right now!</span>")
 			return
-		else if(selected_string && h_style != selected_string)
-			h_style = selected_string
+		else if(selected_string && head_hair_style != selected_string)
+			head_hair_style = selected_string
 			regenerate_icons()
 			visible_message("<span class='notice'>[src] pauses a moment to style their hair.</span>")
 		else

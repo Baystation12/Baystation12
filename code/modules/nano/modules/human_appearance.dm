@@ -170,7 +170,7 @@
 		var/list/entries = (data["hair_styles"] = list())
 		for (var/head_key in heads)
 			entries += list(list("hairstyle" = head_key))
-		data["hair_style"] = owner.h_style
+		data["hair_style"] = owner.head_hair_style
 
 	data["change_facial_hair"] = !!(flags & APPEARANCE_FACE)
 	if (data["change_facial_hair"])

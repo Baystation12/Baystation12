@@ -237,7 +237,7 @@
 	character.g_eyes = g_eyes
 	character.b_eyes = b_eyes
 
-	character.h_style = h_style
+	character.head_hair_style = head_hair_style
 	character.r_hair = r_hair
 	character.g_hair = g_hair
 	character.b_hair = b_hair

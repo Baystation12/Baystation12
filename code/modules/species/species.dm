@@ -40,7 +40,7 @@
 
 	var/organs_icon		//species specific internal organs icons
 
-	var/default_h_style = "Bald"
+	var/default_head_hair_style = "Bald"
 	var/default_facial_hair_style = "Shaved"
 
 	var/race_key = 0                          // Used for mob icon cache string.
@@ -594,7 +594,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	return clamp(max(prescriptions, light), 0, 7)
 
 /datum/species/proc/set_default_hair(var/mob/living/carbon/human/H)
-	H.h_style = H.species.default_h_style
+	H.head_hair_style = H.species.default_head_hair_style
 	H.facial_hair_style = H.species.default_facial_hair_style
 	H.update_hair()
 

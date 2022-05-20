@@ -120,9 +120,9 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	ResetUI(1)
 	// Hair
 	// FIXME:  Species-specific defaults pls
-	if(!character.h_style)
-		character.h_style = "Skinhead"
-	var/hair = list_find(GLOB.hair_styles_list, character.h_style)
+	if(!character.head_hair_style)
+		character.head_hair_style = "Bald"
+	var/hair = list_find(GLOB.hair_styles_list, character.head_hair_style)
 
 	// Facial Hair
 	if(!character.facial_hair_style)

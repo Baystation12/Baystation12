@@ -4,7 +4,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	var/species = SPECIES_HUMAN
 	var/gender = MALE					//gender of character (well duh)
 	var/b_type = "A+"					//blood type (not-chooseable)
-	var/h_style = "Bald"				//Hair type
+	var/head_hair_style = "Bald"				//Hair type
 	var/r_hair = 0						//Hair color
 	var/g_hair = 0						//Hair color
 	var/b_hair = 0						//Hair color
@@ -52,7 +52,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.g_skin = R.read("skin_green")
 	pref.b_skin = R.read("skin_blue")
 	pref.s_base = R.read("skin_base")
-	pref.h_style = R.read("hair_style_name")
+	pref.head_hair_style = R.read("hair_style_name")
 	pref.facial_hair_style = R.read("facial_style_name")
 	pref.r_eyes = R.read("eyes_red")
 	pref.g_eyes = R.read("eyes_green")
@@ -80,7 +80,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	W.write("skin_green", pref.g_skin)
 	W.write("skin_base", pref.s_base)
 	W.write("skin_blue", pref.b_skin)
-	W.write("hair_style_name", pref.h_style)
+	W.write("hair_style_name", pref.head_hair_style)
 	W.write("facial_style_name", pref.facial_hair_style)
 	W.write("eyes_red", pref.r_eyes)
 	W.write("eyes_green", pref.g_eyes)
@@ -103,7 +103,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.r_skin			= sanitize_integer(pref.r_skin, 0, 255, initial(pref.r_skin))
 	pref.g_skin			= sanitize_integer(pref.g_skin, 0, 255, initial(pref.g_skin))
 	pref.b_skin			= sanitize_integer(pref.b_skin, 0, 255, initial(pref.b_skin))
-	pref.h_style		= sanitize_inlist(pref.h_style, GLOB.hair_styles_list, initial(pref.h_style))
+	pref.head_hair_style		= sanitize_inlist(pref.head_hair_style, GLOB.hair_styles_list, initial(pref.head_hair_style))
 	pref.facial_hair_style		= sanitize_inlist(pref.facial_hair_style, GLOB.facial_hair_styles_list, initial(pref.facial_hair_style))
 	pref.r_eyes			= sanitize_integer(pref.r_eyes, 0, 255, initial(pref.r_eyes))
 	pref.g_eyes			= sanitize_integer(pref.g_eyes, 0, 255, initial(pref.g_eyes))
@@ -177,7 +177,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		if (has_flag(mob_species, HAS_HAIR_COLOR))
 			var/color = rgb(pref.r_hair, pref.g_hair, pref.b_hair)
 			. += "[BTN("hair_color", "Color")] [COLOR_PREVIEW(color)] "
-		. += "[BTN("hair_style=1;dec", "<")][BTN("hair_style=1;inc", ">")][BTN("hair_style", pref.h_style)]"
+		. += "[BTN("hair_style=1;dec", "<")][BTN("hair_style=1;inc", ">")][BTN("hair_style", pref.head_hair_style)]"
 
 	var/has_facial_hair = length(mob_species.get_facial_hair_styles(pref.gender))
 	if (has_facial_hair > 1)
@@ -362,7 +362,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["hair_style"])
 		var/list/valid_hairstyles = mob_species.get_hair_styles()
 		var/new_h_style
-		var/hair_index = list_find(valid_hairstyles, pref.h_style)
+		var/hair_index = list_find(valid_hairstyles, pref.head_hair_style)
 
 		if (href_list["inc"])
 			if (hair_index < valid_hairstyles.len && valid_hairstyles[hair_index + 1])
@@ -371,11 +371,11 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			if (hair_index > 1 && valid_hairstyles[hair_index - 1])
 				new_h_style = valid_hairstyles[hair_index - 1]
 		else
-			new_h_style = input(user, "Choose your character's hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.h_style)  as null|anything in valid_hairstyles
+			new_h_style = input(user, "Choose your character's hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.head_hair_style)  as null|anything in valid_hairstyles
 
 		mob_species = all_species[pref.species]
 		if(new_h_style && CanUseTopic(user) && (new_h_style in mob_species.get_hair_styles()))
-			pref.h_style = new_h_style
+			pref.head_hair_style = new_h_style
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["facial_color"])
@@ -663,10 +663,10 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	var/list/valid_hairstyles = mob_species.get_hair_styles()
 
 	if(valid_hairstyles.len)
-		pref.h_style = pick(valid_hairstyles)
+		pref.head_hair_style = pick(valid_hairstyles)
 	else
 		//this shouldn't happen
-		pref.h_style = GLOB.hair_styles_list["Bald"]
+		pref.head_hair_style = GLOB.hair_styles_list["Bald"]
 
 /datum/category_item/player_setup_item/proc/ResetFacialHair()
 	var/datum/species/mob_species = all_species[pref.species]
