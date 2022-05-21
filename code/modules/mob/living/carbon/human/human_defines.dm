@@ -24,8 +24,6 @@
 	/// The base icon that will be used for this mob if it allows more than one
 	var/base_skin = ""
 
-	var/icon_update = 1 //whether icon updating shall take place
-
 	/// The style of makeup applied to this mob
 	var/makeup_style
 
