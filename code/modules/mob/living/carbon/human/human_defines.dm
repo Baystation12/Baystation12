@@ -24,7 +24,6 @@
 	/// The base icon that will be used for this mob if it allows more than one
 	var/base_skin = ""
 
-	var/damage_multiplier = 1 //multiplies melee combat damage
 	var/icon_update = 1 //whether icon updating shall take place
 
 	/// The style of makeup applied to this mob
