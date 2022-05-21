@@ -113,7 +113,7 @@
 		return
 
 	if (href_list["eye_color"] && (flags & APPEARANCE_EYES))
-		var/color = rgb(owner.r_eyes, owner.g_eyes, owner.b_eyes)
+		var/color = owner.eye_color
 		var/data = input(usr, "Eye Color:", "Eye Color", color) as null | color
 		if (isnull(data) || !can_still_topic(state))
 			return

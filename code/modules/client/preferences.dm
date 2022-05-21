@@ -233,9 +233,7 @@
 	character.age = age
 	character.b_type = b_type
 
-	character.r_eyes = r_eyes
-	character.g_eyes = g_eyes
-	character.b_eyes = b_eyes
+	character.eye_color = eye_color
 
 	character.head_hair_style = head_hair_style
 	character.head_hair_color = head_hair_color

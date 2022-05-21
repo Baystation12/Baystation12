@@ -141,9 +141,11 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	SetUIValueRange(DNA_UI_BEARD_G,   face_color[2],  255,    1)
 	SetUIValueRange(DNA_UI_BEARD_B,   face_color[3],  255,    1)
 
-	SetUIValueRange(DNA_UI_EYES_R,    character.r_eyes,    255,    1)
-	SetUIValueRange(DNA_UI_EYES_G,    character.g_eyes,    255,    1)
-	SetUIValueRange(DNA_UI_EYES_B,    character.b_eyes,    255,    1)
+	var/list/eye_color = rgb2num(character.eye_color)
+
+	SetUIValueRange(DNA_UI_EYES_R,    eye_color[1],    255,    1)
+	SetUIValueRange(DNA_UI_EYES_G,    eye_color[2],    255,    1)
+	SetUIValueRange(DNA_UI_EYES_B,    eye_color[3],    255,    1)
 
 	SetUIValueRange(DNA_UI_SKIN_R,    character.r_skin,    255,    1)
 	SetUIValueRange(DNA_UI_SKIN_G,    character.g_skin,    255,    1)

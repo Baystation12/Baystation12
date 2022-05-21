@@ -82,13 +82,10 @@
 	update_hair()
 
 /mob/living/carbon/human/proc/change_eye_color(var/red, var/green, var/blue)
-	if(red == r_eyes && green == g_eyes && blue == b_eyes)
+	var/new_eye_color = rgb(red, green, blue)
+	if (eye_color == new_eye_color)
 		return
-
-	r_eyes = red
-	g_eyes = green
-	b_eyes = blue
-
+	eye_color = new_eye_color
 	update_eyes()
 	update_body()
 	return 1

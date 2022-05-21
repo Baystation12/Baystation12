@@ -12,10 +12,8 @@
 	/// The color of facial hair applied to this mob
 	var/facial_hair_color = "#000000"
 
-	//Eye colour
-	var/r_eyes = 0
-	var/g_eyes = 0
-	var/b_eyes = 0
+	/// The color that will be used for the eyes of this mob
+	var/eye_color = "#000000"
 
 	var/s_tone = 0  //Skin tone
 	var/s_base = "" //Skin base
