@@ -1,4 +1,7 @@
 /mob/living/carbon/human
+	mob_bump_flag = HUMAN
+	mob_push_flags = ~HEAVY
+	mob_swap_flags = ~HEAVY
 
 	/// The style of head hair applied to this mob
 	var/head_hair_style = "Bald"
@@ -37,22 +40,22 @@
 	var/list/cultural_info = list()
 
 	//Equipment slots
-	var/obj/item/wear_suit = null
-	var/obj/item/w_uniform = null
-	var/obj/item/shoes = null
-	var/obj/item/belt = null
-	var/obj/item/gloves = null
-	var/obj/item/glasses = null
-	var/obj/item/head = null
-	var/obj/item/l_ear = null
-	var/obj/item/r_ear = null
-	var/obj/item/wear_id = null
-	var/obj/item/r_store = null
-	var/obj/item/l_store = null
-	var/obj/item/s_store = null
+	var/obj/item/wear_suit
+	var/obj/item/w_uniform
+	var/obj/item/shoes
+	var/obj/item/belt
+	var/obj/item/gloves
+	var/obj/item/glasses
+	var/obj/item/head
+	var/obj/item/l_ear
+	var/obj/item/r_ear
+	var/obj/item/wear_id
+	var/obj/item/r_store
+	var/obj/item/l_store
+	var/obj/item/s_store
 
-	var/icon/stand_icon = null
-	var/icon/lying_icon = null
+	var/icon/stand_icon
+	var/icon/lying_icon
 
 	var/voice = ""	//Instead of new say code calling GetVoice() over and over and over, we're just going to ask this variable, which gets updated in Life()
 
@@ -61,7 +64,7 @@
 
 	var/xylophone = 0 //For the spoooooooky xylophone cooldown
 
-	var/mob/remoteview_target = null
+	var/mob/remoteview_target
 	var/hand_blood_color
 
 	var/list/flavor_texts = list()
@@ -69,10 +72,6 @@
 	var/full_prosthetic    // We are a robutt.
 	var/robolimb_count = 0 // Number of robot limbs.
 	var/last_attack = 0    // The world_time where an unarmed attack was done
-
-	mob_bump_flag = HUMAN
-	mob_push_flags = ~HEAVY
-	mob_swap_flags = ~HEAVY
 
 	var/flash_protection = 0				// Total level of flash protection
 	var/equipment_tint_total = 0			// Total level of visualy impairing items
@@ -89,8 +88,8 @@
 	var/gen_record = ""
 	var/exploit_record = ""
 
-	var/datum/mil_branch/char_branch = null
-	var/datum/mil_rank/char_rank = null
+	var/datum/mil_branch/char_branch
+	var/datum/mil_rank/char_rank
 
 	var/stance_damage = 0 //Whether this mob's ability to stand has been affected
 
