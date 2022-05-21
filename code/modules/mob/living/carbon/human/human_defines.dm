@@ -15,13 +15,11 @@
 	/// The color that will be used for the eyes of this mob
 	var/eye_color = "#000000"
 
+	/// The skin color that will be applied to this mob if it does not use a tone
+	var/skin_color = "#000000"
+
 	var/s_tone = 0  //Skin tone
 	var/s_base = "" //Skin base
-
-	//Skin colour
-	var/r_skin = 0
-	var/g_skin = 0
-	var/b_skin = 0
 
 	var/damage_multiplier = 1 //multiplies melee combat damage
 	var/icon_update = 1 //whether icon updating shall take place

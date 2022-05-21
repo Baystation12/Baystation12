@@ -28,7 +28,7 @@ var/global/list/limb_icon_cache = list()
 	if(!isnull(human.s_base) && (human.species.appearance_flags & HAS_BASE_SKIN_COLOURS))
 		s_base = human.s_base
 	if(human.species.appearance_flags & HAS_SKIN_COLOR)
-		s_col = list(human.r_skin, human.g_skin, human.b_skin)
+		s_col = rgb2num(human.skin_color)
 
 /obj/item/organ/external/proc/sync_colour_to_dna()
 	s_tone = null

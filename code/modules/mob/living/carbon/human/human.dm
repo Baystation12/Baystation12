@@ -1161,14 +1161,9 @@
 		current_grab_type = all_grabobjects[species.grab_type]
 
 	if(species.base_color && default_colour)
-		//Apply colour.
-		r_skin = hex2num(copytext(species.base_color,2,4))
-		g_skin = hex2num(copytext(species.base_color,4,6))
-		b_skin = hex2num(copytext(species.base_color,6,8))
+		skin_color = species.base_color
 	else
-		r_skin = 0
-		g_skin = 0
-		b_skin = 0
+		skin_color = "#000000"
 
 	if(species.holder_type)
 		holder_type = species.holder_type

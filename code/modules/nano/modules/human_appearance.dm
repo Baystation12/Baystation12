@@ -63,7 +63,7 @@
 		return owner.change_skin_tone(data)
 
 	if (href_list["skin_color"] && (flags & APPEARANCE_SKIN) && (owner.species.appearance_flags & HAS_SKIN_COLOR))
-		var/color = rgb(owner.r_skin, owner.g_skin, owner.b_skin)
+		var/color = owner.skin_color
 		var/data = input(usr, "Skin Color:", "Skin Color", color) as null | color
 		if (isnull(data) || !can_still_topic(state))
 			return
