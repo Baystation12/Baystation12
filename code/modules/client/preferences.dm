@@ -244,7 +244,7 @@
 	character.skin_color = skin_color
 
 	character.s_tone = s_tone
-	character.s_base = s_base
+	character.base_skin = base_skin
 
 	// Replace any missing limbs.
 	for(var/name in BP_ALL_LIMBS)

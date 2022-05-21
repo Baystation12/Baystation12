@@ -15,7 +15,7 @@ var/global/list/limb_icon_cache = list()
 /obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/carbon/human/human)
 	s_tone = null
 	s_col = null
-	s_base = ""
+	base_skin = ""
 	h_col = rgb2num(human.head_hair_color)
 	if(BP_IS_ROBOTIC(src) && !(human.species.appearance_flags & HAS_BASE_SKIN_COLOURS))
 		var/datum/robolimb/franchise = all_robolimbs[model]
@@ -25,15 +25,15 @@ var/global/list/limb_icon_cache = list()
 		return
 	if(!isnull(human.s_tone) && (human.species.appearance_flags & HAS_A_SKIN_TONE))
 		s_tone = human.s_tone
-	if(!isnull(human.s_base) && (human.species.appearance_flags & HAS_BASE_SKIN_COLOURS))
-		s_base = human.s_base
+	if(!isnull(human.base_skin) && (human.species.appearance_flags & HAS_BASE_SKIN_COLOURS))
+		base_skin = human.base_skin
 	if(human.species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = rgb2num(human.skin_color)
 
 /obj/item/organ/external/proc/sync_colour_to_dna()
 	s_tone = null
 	s_col = null
-	s_base = dna.s_base
+	base_skin = dna.base_skin
 	h_col = list(dna.GetUIValue(DNA_UI_HAIR_R),dna.GetUIValue(DNA_UI_HAIR_G),dna.GetUIValue(DNA_UI_HAIR_B))
 	if(BP_IS_ROBOTIC(src))
 		var/datum/robolimb/franchise = all_robolimbs[model]
@@ -80,8 +80,8 @@ var/global/list/limb_icon_cache = list()
 		gender = "_f"
 
 	icon_state = "[icon_name][gender]"
-	if(species.base_skin_colours && !isnull(species.base_skin_colours[s_base]))
-		icon_state += species.base_skin_colours[s_base]
+	if(species.base_skin_colours && !isnull(species.base_skin_colours[base_skin]))
+		icon_state += species.base_skin_colours[base_skin]
 
 	icon_cache_key = "[icon_state]_[species ? species.name : SPECIES_HUMAN]"
 
