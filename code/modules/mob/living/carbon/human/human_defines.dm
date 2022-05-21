@@ -33,6 +33,9 @@
 	var/age = 30		//Player's age (pure fluff)
 	var/b_type = "A+"	//Player's bloodtype
 
+	/// The amount this mob's age has been changed in the round, if it has
+	var/changed_age = 0
+
 	var/list/worn_underwear = list()
 
 	var/datum/backpack_setup/backpack_setup
@@ -99,10 +102,6 @@
 	var/shock_stage
 
 	var/obj/item/grab/current_grab_type 	// What type of grab they use when they grab someone.
-
-	//vars for fountain of youth examine lines
-	var/became_older
-	var/became_younger
 
 	var/list/descriptors
 

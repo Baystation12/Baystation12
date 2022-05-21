@@ -5,6 +5,7 @@
 	scan["name"] = H.name
 	if(H.fake_name)
 		scan["name"] = H.real_name
+	scan["age"] = H.age + H.changed_age
 	scan["time"] = stationtime2text()
 	var/brain_result
 	if(H.should_have_organ(BP_BRAIN))
@@ -133,6 +134,8 @@
 
 	var/list/subdat = list()
 	var/dat = list()
+
+	dat += "<tr><td><strong>Apparent Age:</strong></td><td>[scan["age"]]</td></tr>"
 
 	//Brain activity
 	/*
