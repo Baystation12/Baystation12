@@ -2996,6 +2996,7 @@
 #include "code\modules\sprite_accessories\accessory_hair_fade.dm"
 #include "code\modules\sprite_accessories\accessory_ipc.dm"
 #include "code\modules\sprite_accessories\accessory_skrell.dm"
+#include "code\modules\sprite_accessories\accessory_tattoo.dm"
 #include "code\modules\sprite_accessories\accessory_unathi.dm"
 #include "code\modules\sprite_accessories\accessory_vox.dm"
 #include "code\modules\submaps\_submap.dm"
