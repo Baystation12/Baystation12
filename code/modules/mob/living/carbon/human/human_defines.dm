@@ -18,10 +18,11 @@
 	/// The skin color that will be applied to this mob if it does not use a tone
 	var/skin_color = "#000000"
 
+	/// The skin tone scale that will be applied to this mob if it does not use a color
+	var/skin_tone = 0
+
 	/// The base icon that will be used for this mob if it allows more than one
 	var/base_skin = ""
-
-	var/s_tone = 0  //Skin tone
 
 	var/damage_multiplier = 1 //multiplies melee combat damage
 	var/icon_update = 1 //whether icon updating shall take place

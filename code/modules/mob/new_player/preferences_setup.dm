@@ -9,7 +9,7 @@
 	facial_hair_style = random_facial_hair_style(gender, species)
 	if(current_species)
 		if(current_species.appearance_flags & HAS_A_SKIN_TONE)
-			s_tone = current_species.get_random_skin_tone() || s_tone
+			skin_tone = current_species.get_random_skin_tone() || skin_tone
 		if(current_species.appearance_flags & HAS_EYE_COLOR)
 			var/list/ergb = current_species.get_random_eye_color()
 			eye_color = rgb(ergb[1], ergb[2], ergb[3])

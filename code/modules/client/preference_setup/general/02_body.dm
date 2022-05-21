@@ -9,7 +9,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	var/facial_hair_style = "Shaved"				//Face hair type
 	var/facial_hair_color = "#000000"
 	var/eye_color = "#000000"
-	var/s_tone = 0						//Skin tone
+	var/skin_tone = 0
 	var/skin_color = "#000000"
 	var/base_skin = ""
 	var/list/body_markings = list()
@@ -42,7 +42,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.eye_color = R.read("eye_color")
 	if (!pref.eye_color)
 		pref.eye_color = rgb(R.read("eyes_red"), R.read("eyes_green"), R.read("eyes_blue"))
-	pref.s_tone = R.read("skin_tone")
+	pref.skin_tone = R.read("skin_tone")
 	pref.skin_color = R.read("skin_color")
 	if (!pref.skin_color)
 		pref.skin_color = rgb(R.read("skin_red"), R.read("skin_green"), R.read("skin_blue"))
@@ -63,7 +63,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	W.write("age", pref.age)
 	W.write("head_hair_color", pref.head_hair_color)
 	W.write("facial_hair_color", pref.facial_hair_color)
-	W.write("skin_tone", pref.s_tone)
+	W.write("skin_tone", pref.skin_tone)
 	W.write("skin_color", pref.skin_color)
 	W.write("skin_base", pref.base_skin)
 	W.write("hair_style_name", pref.head_hair_style)
@@ -94,7 +94,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.age = sanitize_integer(pref.age, mob_species.min_age, mob_species.max_age, initial(pref.age))
 
 	var/low_skin_tone = mob_species ? (35 - mob_species.max_skin_tone()) : -185
-	sanitize_integer(pref.s_tone, low_skin_tone, 34, initial(pref.s_tone))
+	sanitize_integer(pref.skin_tone, low_skin_tone, 34, initial(pref.skin_tone))
 
 	if(!mob_species.base_skin_colours || isnull(mob_species.base_skin_colours[pref.base_skin]))
 		pref.base_skin = ""
@@ -169,7 +169,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		var/color = pref.skin_color
 		. += "[TBTN("skin_color", "Color", "<br />Skin Color")] [COLOR_PREVIEW(color)]"
 	else if (has_flag(mob_species, HAS_A_SKIN_TONE))
-		. += "[TBTN("skin_tone", "[-pref.s_tone + 35]/[mob_species.max_skin_tone()]", "<br />Skin Tone")]"
+		. += "[TBTN("skin_tone", "[-pref.skin_tone + 35]/[mob_species.max_skin_tone()]", "<br />Skin Tone")]"
 
 	. += "<br />[BTN("marking_style", "+ Body Marking")]"
 	for (var/marking in pref.body_markings)
@@ -305,7 +305,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 			//reset hair colour and skin colour
 			pref.head_hair_color = "#000000"
-			pref.s_tone = 0
+			pref.skin_tone = 0
 			pref.age = max(min(pref.age, mob_species.max_age), mob_species.min_age)
 
 			reset_limbs() // Safety for species with incompatible manufacturers; easier than trying to do it case by case.
@@ -377,10 +377,10 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["skin_tone"])
 		if(!has_flag(mob_species, HAS_A_SKIN_TONE))
 			return TOPIC_NOACTION
-		var/new_s_tone = input(user, "Choose your character's skin-tone. Lower numbers are lighter, higher are darker. Range: 1 to [mob_species.max_skin_tone()]", CHARACTER_PREFERENCE_INPUT_TITLE, (-pref.s_tone) + 35) as num|null
+		var/new_s_tone = input(user, "Choose your character's skin-tone. Lower numbers are lighter, higher are darker. Range: 1 to [mob_species.max_skin_tone()]", CHARACTER_PREFERENCE_INPUT_TITLE, (-pref.skin_tone) + 35) as num|null
 		mob_species = all_species[pref.species]
 		if(new_s_tone && has_flag(mob_species, HAS_A_SKIN_TONE) && CanUseTopic(user))
-			pref.s_tone = 35 - max(min(round(new_s_tone), mob_species.max_skin_tone()), 1)
+			pref.skin_tone = 35 - max(min(round(new_s_tone), mob_species.max_skin_tone()), 1)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["skin_color"])

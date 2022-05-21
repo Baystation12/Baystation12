@@ -178,7 +178,7 @@
 						0,1,0,0,
 						0,0,1,0,
 						0,0,0,1,
-						(200 + s_tone) / 255, (150 + s_tone) / 255, (123 + s_tone) / 255, 0
+						(200 + skin_tone) / 255, (150 + skin_tone) / 255, (123 + skin_tone) / 255, 0
 					)
 			else
 				var/list/rgb = rgb2num(color)

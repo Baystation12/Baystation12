@@ -56,7 +56,7 @@
 
 	if (href_list["skin_tone"] && (flags & APPEARANCE_SKIN) && (owner.species.appearance_flags & HAS_A_SKIN_TONE))
 		var/high = owner.species.max_skin_tone()
-		var/data = input(usr, "Skin Tone:\n1 (pale) ~ [high] (dark)", "Skin Tone", 35 - owner.s_tone) as null | num
+		var/data = input(usr, "Skin Tone:\n1 (pale) ~ [high] (dark)", "Skin Tone", 35 - owner.skin_tone) as null | num
 		if (isnull(data) || !can_still_topic(state))
 			return
 		data = 35 - max(min(round(data), high), 1)

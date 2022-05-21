@@ -72,7 +72,7 @@
 		if(species_choice in skin_colors_per_species)
 			M.change_skin_color(HEX_COLOR_TO_RGB_ARGS(pick(skin_colors_per_species[species_choice])))
 		else
-			M.s_tone = random_skin_tone(M.species)
+			M.skin_tone = random_skin_tone(M.species)
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_HAIR_COLOR))
 		if(species_choice in hair_colors_per_species)

@@ -13,7 +13,7 @@ var/global/list/limb_icon_cache = list()
 		overlays += organ.mob_icon
 
 /obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/carbon/human/human)
-	s_tone = null
+	skin_tone = null
 	s_col = null
 	base_skin = ""
 	h_col = rgb2num(human.head_hair_color)
@@ -23,15 +23,15 @@ var/global/list/limb_icon_cache = list()
 			return
 	if(species && human.species && species.name != human.species.name)
 		return
-	if(!isnull(human.s_tone) && (human.species.appearance_flags & HAS_A_SKIN_TONE))
-		s_tone = human.s_tone
+	if(!isnull(human.skin_tone) && (human.species.appearance_flags & HAS_A_SKIN_TONE))
+		skin_tone = human.skin_tone
 	if(!isnull(human.base_skin) && (human.species.appearance_flags & HAS_BASE_SKIN_COLOURS))
 		base_skin = human.base_skin
 	if(human.species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = rgb2num(human.skin_color)
 
 /obj/item/organ/external/proc/sync_colour_to_dna()
-	s_tone = null
+	skin_tone = null
 	s_col = null
 	base_skin = dna.base_skin
 	h_col = list(dna.GetUIValue(DNA_UI_HAIR_R),dna.GetUIValue(DNA_UI_HAIR_G),dna.GetUIValue(DNA_UI_HAIR_B))
@@ -40,7 +40,7 @@ var/global/list/limb_icon_cache = list()
 		if(!(franchise && franchise.skintone))
 			return
 	if(!isnull(dna.GetUIValue(DNA_UI_SKIN_TONE)) && (species.appearance_flags & HAS_A_SKIN_TONE))
-		s_tone = dna.GetUIValue(DNA_UI_SKIN_TONE)
+		skin_tone = dna.GetUIValue(DNA_UI_SKIN_TONE)
 	if(species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = list(dna.GetUIValue(DNA_UI_SKIN_R), dna.GetUIValue(DNA_UI_SKIN_G), dna.GetUIValue(DNA_UI_SKIN_B))
 
@@ -184,12 +184,12 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 		applying.ColorTone(rgb(10,50,0))
 		applying.SetIntensity(0.7)
 
-	if(s_tone)
-		if(s_tone >= 0)
-			applying.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
+	if(skin_tone)
+		if(skin_tone >= 0)
+			applying.Blend(rgb(skin_tone, skin_tone, skin_tone), ICON_ADD)
 		else
-			applying.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
-		icon_cache_key += "_tone_[s_tone]"
+			applying.Blend(rgb(-skin_tone,  -skin_tone,  -skin_tone), ICON_SUBTRACT)
+		icon_cache_key += "_tone_[skin_tone]"
 	if(species.appearance_flags & HAS_SKIN_COLOR)
 		if(s_col && s_col.len >= 3)
 			applying.Blend(rgb(s_col[1], s_col[2], s_col[3]), s_col_blend)

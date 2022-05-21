@@ -16,6 +16,6 @@
 			H.dust()
 
 /datum/species/human/cult/handle_post_spawn(var/mob/living/carbon/human/H)
-	H.s_tone = 35
+	H.skin_tone = 35
 	H.eye_color = "#e60707"
 	H.update_eyes()

@@ -1034,7 +1034,7 @@
 	meatchunks = list(O) | O.children
 	for(var/obj/item/organ/external/E in meatchunks)
 		E.species = all_species[SPECIES_PROMETHEAN]
-		E.s_tone = null
+		E.skin_tone = null
 		E.s_col = ReadRGB("#05ff9b")
 		E.s_col_blend = ICON_ADD
 		E.status &= ~ORGAN_BROKEN

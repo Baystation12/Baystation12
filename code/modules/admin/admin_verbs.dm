@@ -727,8 +727,8 @@ var/global/list/admin_verbs_mod = list(
 	var/new_tone = input("Please select skin tone level: 1-220 (1=albino, 35=caucasian, 150=black, 220='very' black)", "Character Generation")  as text
 
 	if (new_tone)
-		M.s_tone = max(min(round(text2num(new_tone)), 220), 1)
-		M.s_tone =  -M.s_tone + 35
+		M.skin_tone = max(min(round(text2num(new_tone)), 220), 1)
+		M.skin_tone =  -M.skin_tone + 35
 
 	// hair
 	var/new_hstyle = input(usr, "Select a hair style", "Grooming")  as null|anything in GLOB.hair_styles_list

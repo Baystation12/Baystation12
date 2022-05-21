@@ -243,7 +243,7 @@
 
 	character.skin_color = skin_color
 
-	character.s_tone = s_tone
+	character.skin_tone = skin_tone
 	character.base_skin = base_skin
 
 	// Replace any missing limbs.
