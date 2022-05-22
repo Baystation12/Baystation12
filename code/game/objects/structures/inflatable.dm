@@ -128,7 +128,7 @@
 
 /obj/structure/inflatable/bullet_act(obj/item/projectile/Proj)
 	. = ..()
-	if (!is_alive())
+	if (health_dead)
 		return PROJECTILE_CONTINUE
 
 /obj/structure/inflatable/ex_act(severity)
@@ -161,10 +161,8 @@
 
 	..()
 
-/obj/structure/inflatable/handle_death_change(new_death_state)
-	. = ..()
-	if (new_death_state)
-		deflate(TRUE)
+/obj/structure/inflatable/on_death()
+	deflate(TRUE)
 
 /obj/structure/inflatable/CtrlClick()
 	return hand_deflate()

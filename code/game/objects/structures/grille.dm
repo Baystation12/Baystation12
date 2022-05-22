@@ -195,18 +195,16 @@
 	if (!(W.obj_flags & OBJ_FLAG_CONDUCTIBLE) || !shock(user, 70))
 		..()
 
-/obj/structure/grille/handle_death_change(new_death_state)
-	if (new_death_state)
-		visible_message(SPAN_WARNING("\The [src] falls to pieces!"))
-		new /obj/item/stack/material/rods(get_turf(src), 1, material.name)
-		new /obj/structure/grille/broken(get_turf(src), material.name)
-		qdel(src)
+/obj/structure/grille/on_death(new_death_state)
+	visible_message(SPAN_WARNING("\The [src] falls to pieces!"))
+	new /obj/item/stack/material/rods(get_turf(src), 1, material.name)
+	new /obj/structure/grille/broken(get_turf(src), material.name)
+	qdel(src)
 
-/obj/structure/grille/broken/handle_death_change(new_death_state)
-	if (new_death_state)
-		visible_message(SPAN_WARNING("The remains of \the [src] break apart!"))
-		new /obj/item/stack/material/rods(get_turf(src), 1, material.name)
-		qdel(src)
+/obj/structure/grille/broken/on_death(new_death_state)
+	visible_message(SPAN_WARNING("The remains of \the [src] break apart!"))
+	new /obj/item/stack/material/rods(get_turf(src), 1, material.name)
+	qdel(src)
 
 // shock user with probability prb (if all connections & power are working)
 // returns 1 if shocked, 0 otherwise

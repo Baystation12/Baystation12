@@ -401,10 +401,9 @@
 				icon_state = "closed_unlocked[welded ? "_welded" : ""]"
 			overlays.Cut()
 
-/obj/structure/closet/handle_death_change(new_death_state)
-	if (new_death_state)
-		dump_contents()
-		qdel(src)
+/obj/structure/closet/on_death()
+	dump_contents()
+	qdel(src)
 
 /obj/structure/closet/proc/req_breakout()
 	if(opened)
