@@ -125,13 +125,14 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/proc/setup_tick()
 #ifndef UNIT_TEST
-	var/list/ready = ready_players()
-	if (!length(ready))
-		pregame_timeleft = config.vote_period + 30 SECONDS
-		gamemode_vote_results = null
-		Master.SetRunLevel(RUNLEVEL_LOBBY)
-		to_world("<b>No ready players.</b> Returning to pre-game lobby.")
-		return
+	if (!start_ASAP)
+		var/list/ready = ready_players()
+		if (!length(ready))
+			pregame_timeleft = config.vote_period + 30 SECONDS
+			gamemode_vote_results = null
+			Master.SetRunLevel(RUNLEVEL_LOBBY)
+			to_world("<b>No ready players.</b> Returning to pre-game lobby.")
+			return
 #endif
 
 	switch(choose_gamemode())
