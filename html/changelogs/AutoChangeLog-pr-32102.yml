@@ -1,0 +1,5 @@
+author: 'SomeAngryMiner '
+delete-after: true
+changes:
+  - rscadd: Replaces the portable generator sprites with new ones. Also replaces the
+      nuclear reactor sprite.
