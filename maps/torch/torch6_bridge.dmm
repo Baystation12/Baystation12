@@ -14784,6 +14784,10 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/bridge/hallway/starboard)
+"Um" = (
+/obj/structure/sign/poster/torch,
+/turf/simulated/wall/prepainted,
+/area/crew_quarters/heads/office/cos)
 "Uo" = (
 /obj/structure/bed/chair/padded/green,
 /turf/simulated/floor/wood/walnut,
@@ -28115,7 +28119,7 @@ mJ
 Mn
 eu
 fF
-mE
+Um
 xZ
 hu
 sL
