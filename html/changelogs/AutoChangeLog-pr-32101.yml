@@ -1,0 +1,7 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - balance: Adjusted how damage calculation of explosions against standardized health
+      is done. This currently affects, blobs, turfs, items, and some structures. Overall,
+      the devastation range of explosions should be far more devastating without making
+      the heavy and light ranges also absurdly strong.
