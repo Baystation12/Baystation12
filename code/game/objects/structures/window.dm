@@ -192,7 +192,7 @@
 	qdel(src)
 
 /obj/structure/window/ex_act(severity)
-	if (severity == 1)
+	if (severity == EX_ACT_DEVASTATING)
 		qdel(src)
 		return
 	..()

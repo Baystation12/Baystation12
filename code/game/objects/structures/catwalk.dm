@@ -46,10 +46,10 @@
 
 /obj/structure/catwalk/ex_act(severity)
 	switch(severity)
-		if(1)
+		if(EX_ACT_DEVASTATING)
 			new /obj/item/stack/material/rods(src.loc)
 			qdel(src)
-		if(2)
+		if(EX_ACT_HEAVY)
 			new /obj/item/stack/material/rods(src.loc)
 			qdel(src)
 

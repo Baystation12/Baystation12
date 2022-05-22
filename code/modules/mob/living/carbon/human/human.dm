@@ -133,12 +133,12 @@
 	var/b_loss = null
 	var/f_loss = null
 	switch (severity)
-		if (1.0)
+		if (EX_ACT_DEVASTATING)
 			b_loss = 400
 			f_loss = 100
 			var/atom/target = get_edge_target_turf(src, get_dir(src, get_step_away(src, src)))
 			throw_at(target, 200, 4)
-		if (2.0)
+		if (EX_ACT_HEAVY)
 			b_loss = 60
 			f_loss = 60
 
@@ -148,7 +148,7 @@
 			if (prob(70))
 				Paralyse(10)
 
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			b_loss = 30
 			if (get_sound_volume_multiplier() >= 0.2)
 				ear_damage += 15

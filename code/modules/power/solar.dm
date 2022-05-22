@@ -141,13 +141,13 @@ var/global/solar_gen_rate = 1500
 
 /obj/machinery/power/solar/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			if(prob(15))
 				new /obj/item/material/shard( src.loc )
 			qdel(src)
 			return
 
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if (prob(25))
 				new /obj/item/material/shard( src.loc )
 				qdel(src)
@@ -156,7 +156,7 @@ var/global/solar_gen_rate = 1500
 			if (prob(50))
 				set_broken(TRUE)
 
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			if (prob(25))
 				set_broken(TRUE)
 	return

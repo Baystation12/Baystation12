@@ -194,13 +194,13 @@
 
 	var/damage
 	switch (severity)
-		if (1)
+		if (EX_ACT_DEVASTATING)
 			damage = 500
 
-		if (2)
+		if (EX_ACT_HEAVY)
 			damage = 120
 
-		if(3)
+		if(EX_ACT_LIGHT)
 			damage = 30
 
 	apply_damage(damage, DAMAGE_BRUTE, damage_flags = DAMAGE_FLAG_EXPLODE)

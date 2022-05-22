@@ -266,13 +266,13 @@
 	var/brute
 	var/burn
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			brute = 400
 			burn = 100
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			brute = 60
 			burn = 60
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			brute = 30
 
 	apply_damage(brute, DAMAGE_BRUTE, damage_flags = DAMAGE_FLAG_EXPLODE)

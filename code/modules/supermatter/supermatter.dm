@@ -579,11 +579,11 @@
 /obj/machinery/power/supermatter/ex_act(var/severity)
 	..()
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			power *= 4
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			power *= 3
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			power *= 2
 	log_and_message_admins("WARN: Explosion near the Supermatter! New EER: [power].")
 

@@ -83,7 +83,7 @@
 			T.diggable = 0
 	else if(istype(get_turf(src), /turf/simulated/floor))
 		var/turf/simulated/floor/T = get_turf(src)
-		T.ex_act(2.0)
+		T.ex_act(EX_ACT_HEAVY)
 
 	//Dig out the tasty ores.
 	if(resource_field.len)
@@ -257,7 +257,7 @@
 	icon_state = "mining_brace"
 	obj_flags = OBJ_FLAG_ROTATABLE
 	interact_offline = 1
-	
+
 	machine_name = "mining drill brace"
 	machine_desc = "A mobile support strut that provides support for the head of a mining drill when anchored. Placed on either side of the drill head."
 

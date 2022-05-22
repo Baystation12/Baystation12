@@ -50,7 +50,7 @@
 	if(src)//Do not add to this if() statement, otherwise the meteor won't delete them
 		if(A)
 
-			A.ex_act(2)
+			A.ex_act(EX_ACT_HEAVY)
 			playsound(src.loc, 'sound/effects/meteorimpact.ogg', 40, 1)
 
 			for(var/mob/M in range(10, src))

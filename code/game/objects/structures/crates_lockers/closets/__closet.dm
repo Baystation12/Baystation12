@@ -223,7 +223,7 @@
 
 /obj/structure/closet/ex_act(severity)
 	// Damage everything inside the closet.
-	if (severity < 3)
+	if (severity < EX_ACT_LIGHT)
 		for (var/atom/A as anything in src)
 			A.ex_act(severity + 1)
 	..()

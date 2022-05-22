@@ -99,7 +99,7 @@ AUTOMATED ALERT: Link to [GLOB.using_map.boss_name] lost.
 /datum/universal_state/supermatter_cascade/proc/MiscSet()
 	for (var/obj/machinery/firealarm/alm in SSmachines.machinery)
 		if (!(alm.stat & BROKEN))
-			alm.ex_act(2)
+			alm.ex_act(EX_ACT_HEAVY)
 
 /datum/universal_state/supermatter_cascade/proc/APCSet()
 	for (var/obj/machinery/power/apc/APC in SSmachines.machinery)

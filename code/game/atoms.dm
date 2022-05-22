@@ -227,7 +227,8 @@
 /atom/proc/on_update_icon()
 	return
 
-/atom/proc/ex_act()
+/// Handler for the atom to be affected by explosions. `severity` will be one of the `EX_ACT_*` defines.
+/atom/proc/ex_act(severity)
 	return
 
 /atom/proc/emag_act(var/remaining_charges, var/mob/user, var/emag_source)

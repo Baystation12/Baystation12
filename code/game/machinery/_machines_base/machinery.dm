@@ -201,12 +201,12 @@ Class Procs:
 
 /obj/machinery/ex_act(severity)
 	switch(severity)
-		if(1)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
-		if(2)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
-		if(3)
+		if(EX_ACT_LIGHT)
 			if (prob(25))
 				qdel(src)
 
@@ -553,7 +553,7 @@ Class Procs:
 /obj/machinery/water_act(depth)
 	..()
 	if(!(stat & (NOPOWER|BROKEN)) && !waterproof && (depth > FLUID_DEEP))
-		ex_act(3)
+		ex_act(EX_ACT_LIGHT)
 
 /obj/machinery/Move()
 	. = ..()

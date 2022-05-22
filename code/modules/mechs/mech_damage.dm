@@ -4,13 +4,13 @@
 	var/b_loss = 0
 	var/f_loss = 0
 	switch (severity)
-		if (1)
+		if (EX_ACT_DEVASTATING)
 			b_loss = 200
 			f_loss = 200
-		if (2)
+		if (EX_ACT_HEAVY)
 			b_loss = 90
 			f_loss = 90
-		if(3)
+		if(EX_ACT_LIGHT)
 			b_loss = 45
 
 	// spread damage overall

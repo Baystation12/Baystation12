@@ -79,9 +79,9 @@
 			var/turf/simulated/wall/W = target
 			W.kill_health()
 		else if(istype(target, /mob/living))
-			target.ex_act(2) // c4 can't gib mobs anymore.
+			target.ex_act(EX_ACT_HEAVY) // c4 can't gib mobs anymore.
 		else
-			target.ex_act(1)
+			target.ex_act(EX_ACT_DEVASTATING)
 	if(target)
 		target.overlays -= image_overlay
 	qdel(src)
