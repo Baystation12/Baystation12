@@ -1,0 +1,5 @@
+author: Spookerton
+delete-after: true
+changes:
+  - tweak: A vox stack with a viable player implanted into a viable body will always
+      take it over.
