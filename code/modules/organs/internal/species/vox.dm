@@ -141,7 +141,7 @@
 						mat_stack.set_amount(mat_stack.amount + taking_sheets)
 						sheets -= taking_sheets
 						updated_stacks = TRUE
-						
+
 				// Create new stacks if needed.
 				while(sheets > 0)
 					var/obj/item/stack/material/mat_stack = new M.stack_type(src)
@@ -242,9 +242,6 @@
 		if(owner.mind == backup) // Oh, it's the same mind in the backup. Someone must've spammed the 'Start Procedure' button in a panic.
 			return
 		owner.visible_message(SPAN_DANGER("\The [owner] spasms violently!"))
-		if(prob(66))
-			to_chat(owner, SPAN_DANGER("You fight off the invading tendrils of another mind, holding onto your own body!"))
-			return
 		owner.ghostize()
 	backup.active = 1
 	backup.transfer_to(owner)
