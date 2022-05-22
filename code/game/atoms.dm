@@ -52,6 +52,10 @@
 		crash_with("Warning: [src]([type]) initialized multiple times!")
 	atom_flags |= ATOM_FLAG_INITIALIZED
 
+	if (IsAbstract())
+		log_debug("Abstract atom [type] created!")
+		return INITIALIZE_HINT_QDEL
+
 	if(light_max_bright && light_outer_range)
 		update_light()
 

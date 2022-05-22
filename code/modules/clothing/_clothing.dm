@@ -20,7 +20,6 @@
 
 /obj/item/clothing/Initialize()
 	. = ..()
-	INIT_SKIP_QDELETED
 	var/list/init_accessories = accessories
 	accessories = list()
 	for (var/path in init_accessories)

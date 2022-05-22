@@ -9,6 +9,7 @@
 
 /// The base /renderer definition and defaults.
 /atom/movable/renderer
+	abstract_type = /atom/movable/renderer
 	appearance_flags = PLANE_MASTER
 	screen_loc = "CENTER"
 	plane = LOWEST_PLANE
@@ -40,8 +41,9 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 
 /atom/movable/renderer/Initialize(mapload, mob/owner)
 	. = ..()
+	if (. == INITIALIZE_HINT_QDEL)
+		return
 	src.owner = owner
-	INIT_DISALLOW_TYPE(/atom/movable/renderer)
 	if (isnull(group))
 		if (istext(render_target_name))
 			render_target = render_target_name

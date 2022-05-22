@@ -1,6 +1,7 @@
 
 //Main Clothing
 /obj/item/clothing/under/iccgn
+	abstract_type = /obj/item/clothing/under/iccgn
 	name = "base uniform, ICCGN"
 	desc = "You should not see this."
 	icon = 'packs/faction_iccgn/clothing.dmi'
@@ -15,12 +16,6 @@
 		melee = ARMOR_MELEE_MINOR,
 		energy = ARMOR_ENERGY_MINOR
 	)
-
-
-/obj/item/clothing/under/iccgn/Initialize()
-	. = ..()
-	INIT_SKIP_QDELETED
-	INIT_DISALLOW_TYPE(/obj/item/clothing/under/iccgn)
 
 
 /obj/item/clothing/under/iccgn/get_gender_suffix(suffix)
@@ -77,6 +72,7 @@
 
 //Over Clothing
 /obj/item/clothing/suit/iccgn
+	abstract_type = /obj/item/clothing/suit/iccgn
 	name = "base jacket, ICCGN"
 	desc = "You should not see this."
 	icon = 'packs/faction_iccgn/clothing.dmi'
@@ -93,12 +89,6 @@
 		ACCESSORY_SLOT_MEDAL
 	)
 	allowed = list()
-
-
-/obj/item/clothing/suit/iccgn/Initialize()
-	. = ..()
-	INIT_SKIP_QDELETED
-	INIT_DISALLOW_TYPE(/obj/item/clothing/suit/iccgn)
 
 
 /obj/item/clothing/suit/iccgn/utility
@@ -207,6 +197,7 @@
 
 //Gloves
 /obj/item/clothing/gloves/iccgn
+	abstract_type = /obj/item/clothing/gloves/iccgn
 	name = "base gloves, ICCGN"
 	desc = "You should not see this."
 	icon = 'packs/faction_iccgn/clothing.dmi'
@@ -215,12 +206,6 @@
 	)
 	sprite_sheets = list()
 	icon_state = "error"
-
-
-/obj/item/clothing/gloves/iccgn/Initialize()
-	. = ..()
-	INIT_SKIP_QDELETED
-	INIT_DISALLOW_TYPE(/obj/item/clothing/gloves/iccgn)
 
 
 /obj/item/clothing/gloves/iccgn/duty
@@ -236,6 +221,7 @@
 
 //Shoes
 /obj/item/clothing/shoes/iccgn
+	abstract_type = /obj/item/clothing/shoes/iccgn
 	name = "base shoes, ICCGN"
 	desc = "You should not see this."
 	icon = 'packs/faction_iccgn/clothing.dmi'
@@ -244,12 +230,6 @@
 	)
 	sprite_sheets = list()
 	icon_state = "error"
-
-
-/obj/item/clothing/shoes/iccgn/Initialize()
-	. = ..()
-	INIT_SKIP_QDELETED
-	INIT_DISALLOW_TYPE(/obj/item/clothing/shoes/iccgn)
 
 
 /obj/item/clothing/shoes/iccgn/utility
@@ -276,6 +256,7 @@
 
 //Hats
 /obj/item/clothing/head/iccgn
+	abstract_type = /obj/item/clothing/head/iccgn
 	name = "base hat, ICCGN"
 	desc = "You should not see this."
 	icon = 'packs/faction_iccgn/clothing.dmi'
@@ -284,12 +265,6 @@
 	)
 	sprite_sheets = list()
 	icon_state = "error"
-
-
-/obj/item/clothing/head/iccgn/Initialize()
-	. = ..()
-	INIT_SKIP_QDELETED
-	INIT_DISALLOW_TYPE(/obj/item/clothing/head/iccgn)
 
 
 /obj/item/clothing/head/iccgn/beret

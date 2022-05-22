@@ -1,14 +1,9 @@
 /obj/item/clothing/accessory/pride_pin
+	abstract_type = /obj/item/clothing/accessory/pride_pin
 	name = "base pride pin"
 	item_state = "pridepins"
 	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_INSIGNIA
-
-
-/obj/item/clothing/accessory/pride_pin/Initialize()
-	. = ..()
-	INIT_SKIP_QDELETED
-	INIT_DISALLOW_TYPE(/obj/item/clothing/accessory/pride_pin)
 
 
 /obj/item/clothing/accessory/pride_pin/transgender

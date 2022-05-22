@@ -682,6 +682,7 @@
  */
 
 /obj/structure/plushie
+	abstract_type = /obj/structure/plushie
 	name = "generic plush"
 	desc = "A very generic plushie. It seems to not want to exist."
 	icon = 'icons/obj/toy.dmi'
@@ -690,11 +691,6 @@
 	anchored = FALSE
 	density = TRUE
 	var/phrase = "I don't want to exist anymore!"
-
-
-/obj/structure/plushie/Initialize()
-	. = ..()
-	INIT_DISALLOW_TYPE(/obj/structure/plushie)
 
 
 /obj/structure/plushie/attack_hand(mob/living/user)
@@ -745,16 +741,12 @@
 
 
 /obj/item/toy/plushie
+	abstract_type = /obj/item/toy/plushie
 	name = "generic small plush"
 	desc = "A very generic small plushie. It seems to not want to exist."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "nymphplushie"
 	w_class = ITEM_SIZE_SMALL
-
-
-/obj/item/toy/plushie/Initialize()
-	. = ..()
-	INIT_DISALLOW_TYPE(/obj/item/toy/plushie)
 
 
 /obj/item/toy/plushie/attack_self(mob/living/user)

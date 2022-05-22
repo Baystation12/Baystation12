@@ -1,4 +1,5 @@
 /obj/item/reagent_containers/food/snacks/fish
+	abstract_type = /obj/item/reagent_containers/food/snacks/fish
 	name = "base fish fillet"
 	desc = "A fillet of fish."
 	icon_state = "fishfillet"
@@ -11,8 +12,8 @@
 
 /obj/item/reagent_containers/food/snacks/fish/Initialize()
 	. = ..()
-	INIT_SKIP_QDELETED
-	INIT_DISALLOW_TYPE(/obj/item/reagent_containers/food/snacks/fish)
+	if (. == INITIALIZE_HINT_QDEL)
+		return
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 6)
 	name = "[fish_type] fillet"
 
@@ -41,7 +42,6 @@
 /// fish/generated permits arbitrary fish type and contents setting through new (loc, "type", list(/type = amount), 1/0)
 /obj/item/reagent_containers/food/snacks/fish/generated/Initialize(_mapload, _fish_type, list/_reagents, _replace_reagents)
 	. = ..()
-	INIT_SKIP_QDELETED
 	if (_fish_type)
 		fish_type = _fish_type
 		name = "[fish_type] fillet"
@@ -59,7 +59,6 @@
 
 /obj/item/reagent_containers/food/snacks/fish/space_carp/Initialize()
 	. = ..()
-	INIT_SKIP_QDELETED
 	reagents.add_reagent(/datum/reagent/toxin/carpotoxin, 6)
 
 
@@ -71,7 +70,6 @@
 
 /obj/item/reagent_containers/food/snacks/fish/space_pike/Initialize()
 	. = ..()
-	INIT_SKIP_QDELETED
 	reagents.add_reagent(/datum/reagent/toxin/carpotoxin, 6)
 
 
@@ -83,7 +81,6 @@
 
 /obj/item/reagent_containers/food/snacks/fish/space_shark/Initialize()
 	. = ..()
-	INIT_SKIP_QDELETED
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
 	reagents.add_reagent(/datum/reagent/space_drugs, 1)
 	reagents.add_reagent(/datum/reagent/toxin/phoron, 1)
