@@ -862,6 +862,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 			to_chat(usr, FONT_LARGE(SPAN_WARNING("The game will begin as normal.")))
 			log_and_message_admins("will begin the game as normal.")
 		return 0
+	SSticker.start_ASAP = TRUE
 	if(SSticker.start_now())
 		log_and_message_admins("has started the game.")
 		return 1
