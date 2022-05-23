@@ -1,5 +1,0 @@
-author: 'SomeAngryMiner, Beanysprout, Crimsonshrike, Dudezube '
-delete-after: true
-changes:
-  - rscadd: Replaces the bluespace drive placeholder with a proper machine, effects
-      and sounds included. Post-explosion effects not included.
