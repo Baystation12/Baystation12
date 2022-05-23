@@ -10,17 +10,142 @@
 	idle_power_usage = 150 KILOWATTS
 	construct_state = /decl/machine_construction/default/panel_closed
 
+	/// Indicates whether the drive should show effects.
+	var/const/STATE_BROKEN = FLAG(0)
+
+	/// Indicates whether the drive should use the unstable core effect.
+	var/const/STATE_UNSTABLE = FLAG(1)
+
+	/// A field of STATE_* flags related to the drive.
+	var/state = EMPTY_BITFIELD
+
 	/// How much damage can it sustain
 	var/drive_max_integrity = 1000
+
 	/// How much damage has it sustained
 	var/drive_integrity
-	/// Is it currently broken?
-	var/drive_broken = FALSE
-	/// Has it been repaired?
-	var/drive_repaired = FALSE
-	/// Is the core currently unstable?
-	var/drive_core_unstable = FALSE
+
+	/// The token for the drive's idle loop
 	var/drive_sound
+
+
+/obj/machinery/bluespacedrive/Destroy()
+	QDEL_NULL(drive_sound)
+	particles = null
+	return ..()
+
+
+/obj/machinery/bluespacedrive/Initialize()
+	. = ..()
+	drive_integrity = drive_max_integrity
+	drive_sound = GLOB.sound_player.PlayLoopingSound(src, "\ref[src]", 'sound/machines/BSD_idle.ogg', 50, 7)
+	particles = new /particles/bluespace_torus
+	set_light(1, 5, 15, 10, COLOR_CYAN)
+	update_icon()
+
+
+/obj/machinery/bluespacedrive/on_update_icon()
+	overlays.Cut()
+	if (state & STATE_BROKEN)
+		icon_state = "bsd_core_broken"
+	else
+		icon_state = "bsd_core"
+	if (state & STATE_UNSTABLE)
+		overlays += "bsd_c_u"
+	else
+		overlays += "bsd_c_s"
+
+
+/obj/machinery/bluespacedrive/emp_act(severity)
+	..()
+	var/damage
+	switch (severity)
+		if (1)
+			damage = 1
+		if (2)
+			damage = Frand(0.3, 0.7)
+		if (3)
+			damage = Frand(0.2, 0.4)
+	visible_message(SPAN_WARNING("\The [src]'s field warps and buckles uneasily!"))
+	if (damage)
+		playsound(loc, 'sound/machines/BSD_damaging.ogg', 80)
+		take_damage(damage * drive_max_integrity)
+
+
+/obj/machinery/bluespacedrive/ex_act(severity)
+	var/damage
+	switch (severity)
+		if (EX_ACT_DEVASTATING)
+			damage = 1
+		if (EX_ACT_HEAVY)
+			damage = Frand(0.3, 0.7)
+		if (EX_ACT_LIGHT)
+			damage = Frand(0.2, 0.4)
+	if (damage)
+		take_damage(damage * drive_max_integrity)
+
+
+/obj/machinery/bluespacedrive/bullet_act(obj/item/projectile/projectile)
+	if (!(state & STATE_BROKEN))
+		take_damage(projectile.get_structure_damage())
+		visible_message(SPAN_WARNING("\The [src]'s field crackles disturbingly!"))
+		playsound(loc, 'sound/machines/BSD_damaging.ogg', 80)
+
+
+/obj/machinery/bluespacedrive/proc/take_damage(damage)
+	if (drive_integrity <= 0)
+		return
+	drive_integrity -= damage
+	if (drive_integrity <= drive_max_integrity * 0.5)
+		if (!(state & STATE_UNSTABLE))
+			state |= STATE_UNSTABLE
+			update_icon()
+	if (drive_integrity <= 0)
+		playsound(loc, 'sound/machines/BSD_explosion.ogg', 100)
+		visible_message(SPAN_DANGER(FONT_LARGE("\The [src] begins emitting an ear-splitting, horrible shrill! Get back!")))
+		addtimer(CALLBACK(src, .proc/explode), 5 SECONDS)
+
+
+/obj/machinery/bluespacedrive/proc/explode()
+	visible_message(SPAN_DANGER(FONT_LARGE("\The [src]'s containment field is wracked by a series of horrendous distortions, buckling and twisting like a living thing before bursting in a flash of light!")))
+	drive_integrity = 0
+	explosion(get_turf(src), -1, 5, 10)
+	empulse(get_turf(src), 7, 14)
+	state |= STATE_BROKEN
+	for (var/verb in verbs)
+		verbs -= verb
+	update_icon()
+
+
+/obj/machinery/bluespacedrive/attackby(obj/item/O, mob/user)
+	user.visible_message(
+		SPAN_WARNING("\The [user] reaches out \a [O] to \the [src], warping briefly as it disappears in a flash of blue light, scintillating motes left behind."),
+		SPAN_DANGER("You touch \the [src] with \a [O], the field buckling around it before retracting with a crackle as it leaves small, blue scintillas on your hand as you flinch away."),
+		SPAN_WARNING("You hear an otherwordly crackle, followed by humming.")
+	)
+	if (prob(5))
+		playsound(loc, 'sound/items/eatfood.ogg', 40)		//Yum
+	else
+		playsound(loc, 'sound/machines/BSD_interact.ogg', 40)
+	user.drop_from_inventory(O)
+	qdel(O)
+
+
+/obj/machinery/bluespacedrive/examine(mob/user, distance)
+	. = ..()
+	if (state & STATE_BROKEN)
+		to_chat(user, SPAN_DANGER("Its field is completely destroyed, the core revealed under the arcing debris."))
+		return
+	switch (Percent(drive_integrity, drive_max_integrity, 0))
+		if (75 to INFINITY)
+			to_chat(user,SPAN_NOTICE("At a glance, its field is peacefully humming without any alterations."))
+		if (50 to 75)
+			to_chat(user,SPAN_NOTICE("Its field is crackling gently, with the occasional twitch."))
+		if (25 to 50)
+			to_chat(user,SPAN_WARNING("Its damaged field is twitching and crackling dangerously!"))
+		else
+			to_chat(user,SPAN_DANGER("Its unstable field is cracking and shifting dangerously, revealing the core inside briefly!"))
+
 
 /particles/bluespace_torus
 	width = 700
@@ -35,109 +160,3 @@
 	gradient = list(0, COLOR_WHITE, 0.75, COLOR_BLUE_LIGHT)
 	color_change = 0.125
 	drift = generator("vector", list(-0.2, -0.2), list(0.2, 0.2))
-
-/obj/machinery/bluespacedrive/Initialize()
-	. = ..()
-	drive_sound = GLOB.sound_player.PlayLoopingSound(src, "\ref[src]", 'sound/machines/BSD_idle.ogg', 50, 7)
-	drive_integrity = drive_max_integrity
-	particles = new/particles/bluespace_torus
-	update_icon()
-
-/obj/machinery/bluespacedrive/on_update_icon()
-	overlays.Cut()
-	if(!drive_core_unstable)
-		overlays += "bsd_c_s"
-	else
-		overlays += "bsd_c_u"
-	if (!drive_broken)
-		icon_state = "bsd_core"
-	else
-		icon_state = "bsd_core_broken"
-	set_light(1, 5, 15, 10, COLOR_CYAN)
-
-/obj/machinery/bluespacedrive/emp_act(severity)
-	..()
-	if(prob(50/severity))
-		visible_message(SPAN_WARNING("\The [src]'s field warps and buckles uneasily!"))
-		playsound(loc, 'sound/machines/BSD_damaging.ogg', 80)
-		take_damage(drive_max_integrity)
-
-/obj/machinery/bluespacedrive/ex_act(severity)
-	switch(severity)
-		if(1)
-			qdel(src)
-			return
-		if(2)
-			if (prob(25))
-				qdel(src)
-				return
-			if (prob(50))
-				take_damage(drive_max_integrity)
-		if(3)
-			if (prob(25))
-				take_damage(drive_max_integrity)
-
-/obj/machinery/bluespacedrive/bullet_act(obj/item/projectile/Proj)
-	if(!drive_broken)
-		take_damage(Proj.get_structure_damage())
-		visible_message(SPAN_WARNING("\The [src]'s field crackles disturbingly!"))
-		playsound(loc, 'sound/machines/BSD_damaging.ogg', 80)
-	else
-		return
-	..()
-
-/obj/machinery/bluespacedrive/proc/take_damage(var/damage)
-	if (drive_integrity <= 0)
-		return
-
-	drive_integrity -= damage
-	if(drive_integrity <= 0)
-		playsound(loc, 'sound/machines/BSD_explosion.ogg', 100)
-		visible_message(SPAN_DANGER(FONT_LARGE("\The [src] begins emitting an ear-splitting, horrible shrill! Get back!")))
-		addtimer(CALLBACK(src, .proc/explode), 4 SECONDS)
-
-/obj/machinery/bluespacedrive/proc/explode()
-	visible_message(SPAN_DANGER(FONT_LARGE("\The [src]'s containment field is wracked by a series of horrendous distortions, buckling and twisting like a living thing before bursting in a flash of light!")))
-	drive_integrity = 0
-	explosion(get_turf(src),-1, 5, 10)
-	empulse(get_turf(src),7, 14)
-	drive_broken = TRUE
-	drive_core_unstable = TRUE
-	for(var/x in verbs)
-		verbs -= x
-	update_icon()
-
-/obj/machinery/bluespacedrive/attackby(obj/item/O, mob/user)
-	user.visible_message(
-		SPAN_WARNING("\The [user] reaches out \a [O] to \the [src], warping briefly as it disappears in a flash of blue light, scintillating motes left behind."),
-		SPAN_DANGER("You touch \the [src] with \a [O], the field buckling around it before retracting with a crackle as it leaves small, blue scintillas on your hand as you flinch away."),
-		SPAN_WARNING("You hear an otherwordly crackle, followed by humming.")
-	)
-
-	if (prob(5))
-		playsound(loc, 'sound/items/eatfood.ogg', 40)		//Yum
-	else
-		playsound(loc, 'sound/machines/BSD_interact.ogg', 40)
-
-	user.drop_from_inventory(O)
-	qdel(O)
-
-/obj/machinery/bluespacedrive/examine(mob/user)
-	. = ..()
-	if(drive_broken)
-		user.visible_message(SPAN_DANGER("Its field is completely destroyed, the core revealed under the arcing debris."))
-		return
-	else
-		switch(drive_integrity) 	// Nightmare nightmare nightmare, swap for something prettier.
-			if(1 to 250)
-				to_chat(user,SPAN_DANGER("Its unstable field is cracking and shifting dangerously, revealing the core inside briefly!"))
-			if(206 to 500)
-				to_chat(user,SPAN_WARNING("Its damaged field is twitching and crackling dangerously!"))
-			if(501 to 750)
-				to_chat(user,SPAN_NOTICE("Its field is crackling gently, with the ocassional twitch."))
-			else
-				to_chat(user,SPAN_NOTICE("At a glance, its field is peacefully humming without any alterations."))
-
-/obj/machinery/bluespacedrive/Destroy()
-	QDEL_NULL(drive_sound)
-	. = ..()
