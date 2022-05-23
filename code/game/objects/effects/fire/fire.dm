@@ -36,6 +36,8 @@
 	/// Visual state of the fire. Kept track to not do too many updates.
 	var/current_fire_state
 
+	light_color = COLOR_ORANGE
+
 ///All the subtypes are for adminbussery and or mapping
 /obj/effect/turf_fire/magical
 	interact_with_atmos = FALSE
@@ -64,14 +66,10 @@
 	if(open_turf.turf_fire)
 		return INITIALIZE_HINT_QDEL
 
-	// var/static/list/loc_connections = list(
-	// 	COMSIG_ATOM_ENTERED = .proc/on_entered,
-	// )
-	// AddElement(/datum/element/connect_loc, loc_connections)
-
-	if(fire_color && (color != fire_color) && (color != null)) //Take colour from proc unless base colour was already custom
-		set_color(fire_color)
-	set_color(color)
+	if(fire_color && ((color != fire_color) && color == null)) //Take colour from proc unless base colour was already custom
+		color = fire_color
+	if(color != null)
+		set_color(color)
 
 	open_turf.turf_fire = src
 	SSturf_fire.fires += src
@@ -86,10 +84,11 @@
 	return ..()
 
 //Approximates colour. It will not change value or saturation, just hue.
-/obj/effect/turf_fire/set_color(color)
+/obj/effect/turf_fire/set_color(_color)
 	. = ..()
+	light_color = _color
 	var/base = rgb2num(COLOR_ORANGE, COLORSPACE_HSV) //Base sprite is red fire, but maybe other fires want to be different
-	var/target =  rgb2num(color, COLORSPACE_HSV)
+	var/target =  rgb2num(_color, COLORSPACE_HSV)
 	var/baseAngle  = base[1]
 	var/targetAngle= target[1]
 
@@ -103,21 +102,20 @@
 
 /obj/effect/turf_fire/proc/process_waste()
 	var/turf/T = loc
-	var/datum/gas_mixture/cached_air = T.air
-	var/oxy = cached_air.get_gas(GAS_OXYGEN)
+	var/datum/gas_mixture/env = T.return_air()
+	var/oxy = env.get_gas(GAS_OXYGEN) //Todo, make this play with any oxidizer
 	if (oxy < TURF_FIRE_BURN_MINIMUM_OXYGEN_REQUIRED)
 		return FALSE
 	var/burn_rate = TURF_FIRE_BURN_RATE_BASE + fire_power * TURF_FIRE_BURN_RATE_PER_POWER
 	if(burn_rate > oxy)
 		burn_rate = oxy
 
-	cached_air.adjust_gas(GAS_OXYGEN, -burn_rate)
+	env.adjust_gas(GAS_OXYGEN, -burn_rate)
 
-	cached_air.adjust_gas(GAS_CO2, burn_rate * TURF_FIRE_BURN_CARBON_DIOXIDE_MULTIPLIER)
+	env.adjust_gas(GAS_CO2, burn_rate * TURF_FIRE_BURN_CARBON_DIOXIDE_MULTIPLIER)
 
 	var/energy_released = burn_rate * TURF_FIRE_ENERGY_PER_BURNED_OXY_MOL
-	cached_air.add_thermal_energy(energy_released)
-	T.air = cached_air
+	env.add_thermal_energy(energy_released)
 	SSair.mark_for_update(T)
 	return TRUE
 
@@ -146,15 +144,17 @@
 	if(interact_with_atmos)
 		if(prob(fire_power))
 			T.burn_tile(effective_temperature)
-		// if(prob(TURF_FIRE_BURN_PLAY_SOUND_EFFECT_CHANCE))
-		// 	playsound(open_turf, 'sound/effects/comfyfire.ogg', 40, TRUE)
 		UpdateFireState()
 
-/obj/effect/turf_fire/proc/on_entered(datum/source, atom/movable/atom_crossing)
+/obj/effect/turf_fire/Crossed(O)
+	. = ..()
 	var/turf/T = loc
 	if(T.hotspot) //If we have an active hotspot, let it do the damage instead
 		return
-	atom_crossing.fire_act(TURF_FIRE_TEMP_BASE + (TURF_FIRE_TEMP_INCREMENT_PER_POWER*fire_power), TURF_FIRE_VOLUME)
+	var/atom/movable/crossing = O
+	if(istype(crossing))
+		crossing.fire_act(TURF_FIRE_TEMP_BASE + (TURF_FIRE_TEMP_INCREMENT_PER_POWER*fire_power), TURF_FIRE_VOLUME)
+	O << "You're crossing fire"
 	return
 
 /obj/effect/turf_fire/water_act(depth)
@@ -180,29 +180,16 @@
 		return
 	current_fire_state = new_state
 
-	// switch(base_icon_state) //switches light color depdning on the flame color
-	// 	if("greyscale")
-	// 		light_color = hex_color
-	// 	if("red")
-	// 		light_color = LIGHT_COLOR_FIRE
-	// 	if("blue")
-	// 		light_color = LIGHT_COLOR_CYAN
-	// 	if("green")
-	// 		light_color = LIGHT_COLOR_GREEN
-	// 	else
-	// 		light_color = COLOR_VERY_LIGHT_GRAY
-	//update_light()
-
 	switch(current_fire_state)
 		if(TURF_FIRE_STATE_SMALL)
 			icon_state = "small"
-			//set_light_range(1.5)
+			set_light(0.5, 1, 1.5)
 		if(TURF_FIRE_STATE_MEDIUM)
 			icon_state = "medium"
-			//set_light_range(2.5)
+			set_light(0.5, 1, 2,)
 		if(TURF_FIRE_STATE_LARGE)
 			icon_state = "big"
-			//set_light_range(3)
+			set_light(0.7, 1, 3)
 
 #undef TURF_FIRE_REQUIRED_TEMP
 #undef TURF_FIRE_TEMP_BASE
