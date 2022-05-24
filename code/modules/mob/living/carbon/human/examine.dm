@@ -191,10 +191,15 @@
 	if(istype(H) && H.forehead_graffiti && H.graffiti_style)
 		msg += "<span class='notice'>[T.He] [T.has] \"[H.forehead_graffiti]\" written on [T.his] [H.name] in [H.graffiti_style]!</span>\n"
 
-	if(became_younger)
-		msg += "[T.He] looks a lot younger than you remember.\n"
-	if(became_older)
-		msg += "[T.He] looks a lot older than you remember.\n"
+	if (changed_age)
+		var/scale = abs(changed_age) / age
+		if (scale > 0.5)
+			scale = "a lot "
+		else if (scale > 0.25)
+			scale = ""
+		else
+			scale = "a little "
+		msg += "[T.He] looks [scale][changed_age > 0 ? "older" : "younger"] than you remember.\n"
 
 	for (var/obj/aura/web/W in auras)
 		msg += SPAN_WARNING("[T.He] is covered in webs!\n")

@@ -5,26 +5,27 @@
 	if(!current_species) current_species = all_species[SPECIES_HUMAN]
 	gender = pick(current_species.genders)
 
-	h_style = random_hair_style(gender, species)
-	f_style = random_facial_hair_style(gender, species)
+	head_hair_style = random_hair_style(gender, species)
+	facial_hair_style = random_facial_hair_style(gender, species)
 	if(current_species)
 		if(current_species.appearance_flags & HAS_A_SKIN_TONE)
-			s_tone = current_species.get_random_skin_tone() || s_tone
+			skin_tone = current_species.get_random_skin_tone() || skin_tone
 		if(current_species.appearance_flags & HAS_EYE_COLOR)
-			ASSIGN_LIST_TO_COLORS(current_species.get_random_eye_color(), r_eyes, g_eyes, b_eyes)
+			var/list/ergb = current_species.get_random_eye_color()
+			eye_color = rgb(ergb[1], ergb[2], ergb[3])
 		if(current_species.appearance_flags & HAS_SKIN_COLOR)
-			ASSIGN_LIST_TO_COLORS(current_species.get_random_skin_color(), r_skin, g_skin, b_skin)
+			var/list/srgb = current_species.get_random_skin_color()
+			skin_color = rgb(srgb[1], srgb[2], srgb[3])
 		if(current_species.appearance_flags & HAS_HAIR_COLOR)
 			var/hair_colors = current_species.get_random_hair_color()
 			if(hair_colors)
-				ASSIGN_LIST_TO_COLORS(hair_colors, r_hair, g_hair, b_hair)
-
+				var/list/rgb = hair_colors
+				head_hair_color = rgb(rgb[1], rgb[2], rgb[3])
 				if(prob(75))
-					r_facial = r_hair
-					g_facial = g_hair
-					b_facial = b_hair
+					facial_hair_color = head_hair_color
 				else
-					ASSIGN_LIST_TO_COLORS(current_species.get_random_facial_hair_color(), r_facial, g_facial, b_facial)
+					var/list/frgb = current_species.get_random_facial_hair_color()
+					facial_hair_color = rgb(frgb[1], frgb[2], frgb[3])
 
 	if(current_species.appearance_flags & HAS_UNDERWEAR)
 		if(all_underwear)
