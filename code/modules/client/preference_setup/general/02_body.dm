@@ -173,9 +173,11 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	. += "<br />[BTN("marking_style", "+ Body Marking")]"
 	for (var/marking in pref.body_markings)
-		var/color = pref.body_markings[marking]
 		. += "<br />[VTBTN("marking_remove", marking, "-", marking)] "
-		. += "[VBTN("marking_color", marking, "Color")] [COLOR_PREVIEW(color)]"
+		var/datum/sprite_accessory/marking/instance = GLOB.body_marking_styles_list[marking]
+		if (instance.do_coloration == DO_COLORATION_USER)
+			var/color = pref.body_markings[marking]
+			. += "[VBTN("marking_color", marking, "Color")] [COLOR_PREVIEW(color)]"
 	if (length(pref.body_markings))
 		. += "<br />"
 
