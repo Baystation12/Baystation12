@@ -51,5 +51,17 @@
 	target = target[CONSTRUCT_SPELL_TYPE]
 	var/turf/T = get_turf(user)
 	new target(T, connected_god)
+
+/spell/construction/check_valid_targets(var/list/targets)
+    var/turf/T = get_turf(holder)
+
+    for (var/atom/thing in T.contents)
+        if (thing == holder)
+            continue
+
+        if (thing.density)
+            return 0
+    return 1
+
 #undef CONSTRUCT_SPELL_COST
 #undef CONSTRUCT_SPELL_TYPE

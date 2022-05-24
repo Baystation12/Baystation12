@@ -49,11 +49,10 @@
 		linked_god.form.sync_structure(src)
 		linked_god.adjust_source(power_adjustment, src)
 
-/obj/structure/deity/handle_death_change(new_death_state)
-	. = ..()
-	if (new_death_state)
-		playsound(loc, 'sound/effects/break_stone.ogg', 50, 1)
-		qdel(src)
+/obj/structure/deity/on_death()
+	visible_message(SPAN_WARNING("\The [src] falls to rubble."))
+	playsound(loc, 'sound/effects/break_stone.ogg', 50, 1)
+	qdel(src)
 
 /obj/structure/deity/post_health_change(health_mod, damage_type)
 	update_icon()
