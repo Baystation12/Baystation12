@@ -1,4 +1,5 @@
 /obj/item/clothing/accessory/helmet_decor
+	abstract_type = /obj/item/clothing/accessory/helmet_decor
 	name = "base helmet decor"
 	desc = "You should not see this."
 	icon = 'icons/obj/clothing/helmet_decor.dmi'
@@ -12,12 +13,6 @@
 	slot = ACCESSORY_SLOT_HELM_D
 	body_location = HEAD
 	gender = PLURAL
-
-
-/obj/item/clothing/accessory/helmet_decor/Initialize()
-	. = ..()
-	INIT_SKIP_QDELETED
-	INIT_DISALLOW_TYPE(/obj/item/clothing/accessory/helmet_decor)
 
 
 /obj/item/clothing/accessory/helmet_decor/get_fibers()

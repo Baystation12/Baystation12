@@ -17,13 +17,3 @@
 		SSatoms.InitAtom(src, args);\
 	}\
 }
-
-#define INIT_SKIP_QDELETED if (. == INITIALIZE_HINT_QDEL) {\
-return;\
-}
-
-#define INIT_DISALLOW_TYPE(path) if (type == path) {\
-. = INITIALIZE_HINT_QDEL;\
-crash_with("disallowed type [type] created");\
-return;\
-}

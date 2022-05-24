@@ -17,7 +17,6 @@
 
 /obj/item/clothing/Initialize()
 	. = ..()
-	INIT_SKIP_QDELETED
 	if (buttons_suffix)
 		verbs |= /obj/item/clothing/proc/toggle_buttons
 
