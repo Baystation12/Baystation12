@@ -49,7 +49,7 @@
 		linked_god.form.sync_structure(src)
 		linked_god.adjust_source(power_adjustment, src)
 
-/obj/structure/deity/handle_death_change(new_death_state)
+/obj/structure/deity/on_death(new_death_state)
 	. = ..()
 	if (new_death_state)
 		playsound(loc, 'sound/effects/break_stone.ogg', 50, 1)
