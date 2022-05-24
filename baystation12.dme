@@ -3188,5 +3188,6 @@
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\_maps.dm"
+#include "maps\event\placeholders\placeholders.dm"
 #include "~code\global_init.dm"
 // END_INCLUDE
