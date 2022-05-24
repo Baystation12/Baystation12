@@ -14027,6 +14027,10 @@
 /obj/random_multi/single_item/punitelly,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
+"IF" = (
+/obj/structure/sign/poster/torch,
+/turf/simulated/wall/prepainted,
+/area/crew_quarters/recreation)
 "IH" = (
 /obj/structure/table/steel,
 /obj/random_multi/single_item/punitelly,
@@ -33077,7 +33081,7 @@ CF
 CF
 QR
 CF
-CF
+IF
 wR
 xR
 Bm

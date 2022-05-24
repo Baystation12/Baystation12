@@ -16508,6 +16508,10 @@
 /obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled/monotile,
 /area/security/locker)
+"eim" = (
+/obj/structure/sign/poster/torch,
+/turf/simulated/wall/prepainted,
+/area/security/wing)
 "ejb" = (
 /obj/structure/curtain/open/shower,
 /obj/structure/hygiene/shower{
@@ -40873,7 +40877,7 @@ aiu
 aiu
 aiu
 aiu
-aNH
+eim
 vJO
 oIb
 avI

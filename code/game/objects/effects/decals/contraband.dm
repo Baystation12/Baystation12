@@ -88,12 +88,17 @@
 	anchored = TRUE
 	var/poster_type
 	var/ruined = 0
+	var/torch_poster = FALSE //for torch-specific content
 
 /obj/structure/sign/poster/bay_9
 	poster_type = /decl/poster/bay_9
 
 /obj/structure/sign/poster/bay_50
 	poster_type = /decl/poster/bay_50
+
+/obj/structure/sign/poster/torch
+	poster_type = /decl/poster/torch
+	torch_poster = TRUE
 
 /obj/structure/sign/poster/New(var/newloc, var/placement_dir = null, var/give_poster_type = null)
 	..(newloc)
@@ -102,7 +107,9 @@
 		if(give_poster_type)
 			poster_type = give_poster_type
 		else
-			poster_type = pick(subtypesof(/decl/poster))
+			poster_type = pick(subtypesof(/decl/poster) - typesof(/decl/poster/torch))
+	if(torch_poster)
+		poster_type = pick(subtypesof(/decl/poster/torch))
 	set_poster(poster_type)
 
 	switch (placement_dir)

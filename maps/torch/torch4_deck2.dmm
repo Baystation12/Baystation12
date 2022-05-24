@@ -4329,6 +4329,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engineering_bay)
+"jx" = (
+/obj/structure/sign/poster/torch,
+/turf/simulated/wall/prepainted,
+/area/assembly/robotics/surgery)
 "jy" = (
 /turf/simulated/wall/prepainted,
 /area/engineering/storage)
@@ -36512,7 +36516,7 @@ LD
 HQ
 IU
 xQ
-ZG
+jx
 pM
 Wx
 HP
