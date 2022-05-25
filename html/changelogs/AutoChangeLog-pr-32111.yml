@@ -1,0 +1,5 @@
+author: Spookerton
+delete-after: true
+changes:
+  - rscdel: Using a singularity to eat a supermatter no longer automatically ends
+      the game in a broken way.
