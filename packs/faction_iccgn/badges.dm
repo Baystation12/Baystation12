@@ -1,4 +1,5 @@
 /obj/item/clothing/accessory/iccgn_badge
+	abstract_type = /obj/item/clothing/accessory/iccgn_badge
 	name = "base badge, ICCGN"
 	desc = "You should not see this."
 	icon = 'packs/faction_iccgn/badges.dmi'
@@ -11,12 +12,6 @@
 	)
 	w_class = ITEM_SIZE_TINY
 	slot = ACCESSORY_SLOT_INSIGNIA
-
-
-/obj/item/clothing/accessory/iccgn_badge/Initialize()
-	. = ..()
-	INIT_SKIP_QDELETED
-	INIT_DISALLOW_TYPE(/obj/item/clothing/accessory/iccgn_badge)
 
 
 /obj/item/clothing/accessory/iccgn_badge/get_fibers()

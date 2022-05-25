@@ -125,15 +125,6 @@
 				"bio" = 100,
 				"rad" = 100
 				)
-	var/list/armor_soak = list(		// Values for getsoak() checks.
-				"melee" = 0,
-				"bullet" = 0,
-				"laser" = 0,
-				"energy" = 0,
-				"bomb" = 0,
-				"bio" = 0,
-				"rad" = 0
-				)
 
 	// Protection against heat/cold/electric/water effects.
 	// 0 is no protection, 1 is total protection. Negative numbers increase vulnerability.
@@ -194,13 +185,13 @@
 
 	var/damage
 	switch (severity)
-		if (1)
+		if (EX_ACT_DEVASTATING)
 			damage = 500
 
-		if (2)
+		if (EX_ACT_HEAVY)
 			damage = 120
 
-		if(3)
+		if(EX_ACT_LIGHT)
 			damage = 30
 
 	apply_damage(damage, DAMAGE_BRUTE, damage_flags = DAMAGE_FLAG_EXPLODE)
@@ -265,9 +256,7 @@
 				var/obj/effect/decal/cleanable/blood/B = blood_splatter(get_step(src, hit_dir), src, 1, hit_dir)
 				B.icon_state = pick("dir_splatter_1","dir_splatter_2")
 				B.basecolor = bleed_colour
-				var/scale = min(1, round(mob_size / MOB_MEDIUM, 0.1))
-				var/matrix/M = new()
-				B.transform = M.Scale(scale)
+				B.SetTransform(scale = min(1, round(mob_size / MOB_MEDIUM, 0.1)))
 				B.update_icon()
 
 /mob/living/simple_animal/handle_fire()

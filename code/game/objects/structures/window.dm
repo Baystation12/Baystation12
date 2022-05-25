@@ -175,10 +175,8 @@
 /obj/structure/window/proc/get_repaired_per_unit()
 	return round(get_max_health() / get_glass_cost())
 
-/obj/structure/window/handle_death_change(new_death_state)
-	. = ..()
-	if (new_death_state)
-		shatter()
+/obj/structure/window/on_death()
+	shatter()
 
 /obj/structure/window/proc/shatter(var/display_message = 1)
 	playsound(src, "shatter", 70, 1)
@@ -194,7 +192,7 @@
 	qdel(src)
 
 /obj/structure/window/ex_act(severity)
-	if (severity == 1)
+	if (severity == EX_ACT_DEVASTATING)
 		qdel(src)
 		return
 	..()
@@ -489,7 +487,7 @@
 		)
 
 /obj/structure/window/proc/deanchor(atom/impact_origin)
-	if (is_alive() && get_damage_percentage() >= 85)
+	if (!health_dead && get_damage_percentage() >= 85)
 		set_anchored(FALSE)
 		step(src, get_dir(impact_origin, src))
 

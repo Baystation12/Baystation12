@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: The VV 'type' option when adding/modifying var's now takes a manually entered
-      type path instead of listing all possible types.

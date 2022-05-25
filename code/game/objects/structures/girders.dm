@@ -38,10 +38,8 @@
 		return PROJECTILE_CONTINUE //pass through
 	. = ..()
 
-/obj/structure/girder/handle_death_change(new_death_state)
-	..()
-	if (new_death_state)
-		dismantle()
+/obj/structure/girder/on_death()
+	dismantle()
 
 /obj/structure/girder/CanFluidPass(var/coming_from)
 	return TRUE

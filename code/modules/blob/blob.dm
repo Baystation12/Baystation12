@@ -73,11 +73,9 @@
 		return
 	attempt_attack(GLOB.alldirs)
 
-/obj/effect/blob/handle_death_change(new_death_state)
-	. = ..()
-	if (new_death_state)
-		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-		qdel(src)
+/obj/effect/blob/on_death()
+	playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+	qdel(src)
 
 /obj/effect/blob/post_health_change(health_mod, damage_type)
 	update_icon()
@@ -93,7 +91,7 @@
 	var/damage = rand(damage_min, damage_max)
 	var/damage_type = pick(DAMAGE_BRUTE, DAMAGE_BURN)
 
-	if (T.density && T.is_alive())
+	if (T.density && !T.health_dead)
 		visible_message(SPAN_DANGER("A tendril flies out from \the [src] and smashes into \the [T]!"))
 		playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 		T.damage_health(damage)

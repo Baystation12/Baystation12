@@ -69,13 +69,13 @@
 
 /obj/machinery/shield/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			if (prob(75))
 				qdel(src)
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			if (prob(25))
 				qdel(src)
 	return
@@ -226,15 +226,15 @@
 
 /obj/machinery/shieldgen/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			src.health -= 75
 			src.checkhp()
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			src.health -= 30
 			if (prob(15))
 				src.malfunction = 1
 			src.checkhp()
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			src.health -= 10
 			src.checkhp()
 	return

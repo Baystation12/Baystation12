@@ -83,7 +83,7 @@
 				draw_pilot.pixel_x = pilot.default_pixel_x + directional_offset_values["x"]
 				draw_pilot.pixel_y = pilot.default_pixel_y + directional_offset_values["y"]
 				draw_pilot.pixel_z = 0
-				draw_pilot.transform = null
+				draw_pilot.ClearTransform()
 
 			//Mask pilots!
 			//Masks are 48x48 and pilots 32x32 (in theory at least) so some math is required for centering

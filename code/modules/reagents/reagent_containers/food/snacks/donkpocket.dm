@@ -5,42 +5,43 @@
 * become more useful.
 */
 
-/obj/item/reagent_containers/food/snacks/donkpocket/name = "donk-pocket"
+/obj/item/reagent_containers/food/snacks/donkpocket
+	abstract_type = /obj/item/reagent_containers/food/snacks/donkpocket
+	name = "donk-pocket"
+	icon_state = "donkpocket"
+	filling_color = "#dedeab"
+	center_of_mass = "x=16;y=10"
+	bitesize = 3
+	nutriment_amt = 2
+	nutriment_desc = list(
+		"heartiness" = 1,
+		"dough" = 2
+	)
 
-/obj/item/reagent_containers/food/snacks/donkpocket/icon_state = "donkpocket"
+	/// Whether the donk pocket is currently hot. Hot donk pockets have additional reagents
+	var/is_hot = FALSE
 
-/obj/item/reagent_containers/food/snacks/donkpocket/filling_color = "#dedeab"
+	/// Whether the donk pocket is able to be made hot without a microwave by using it in-hand
+	var/can_self_heat = FALSE
 
-/obj/item/reagent_containers/food/snacks/donkpocket/center_of_mass = "x=16;y=10"
+	/// Whether the donk pocket was heated up already. Reheating does not re-add the extra reagents.
+	var/was_heated = FALSE
 
-/obj/item/reagent_containers/food/snacks/donkpocket/bitesize = 3
+	/// The reagents to be added to the donk pocket when it is made hot (and removed when made cold)
+	var/list/hot_reagents = list(
+		/datum/reagent/tricordrazine = 5
+	)
 
-/obj/item/reagent_containers/food/snacks/donkpocket/nutriment_amt = 2
-
-/obj/item/reagent_containers/food/snacks/donkpocket/nutriment_desc = list(
-	"heartiness" = 1,
-	"dough" = 2
-)
-
-/// Whether the donk pocket is currently hot. Hot donk pockets have additional reagents
-/obj/item/reagent_containers/food/snacks/donkpocket/var/is_hot = FALSE
-
-/// Whether the donk pocket is able to be made hot without a microwave by using it in-hand
-/obj/item/reagent_containers/food/snacks/donkpocket/var/can_self_heat = FALSE
-
-/// Whether the donk pocket was heated up already. Reheating does not re-add the extra reagents.
-/obj/item/reagent_containers/food/snacks/donkpocket/var/was_heated = FALSE
-
-/// The reagents to be added to the donk pocket when it is made hot (and removed when made cold)
-/obj/item/reagent_containers/food/snacks/donkpocket/var/list/hot_reagents = list(
-	/datum/reagent/tricordrazine = 5
-)
+	/// The reagents to be added to the donk pocket when it is initialized
+	var/list/filling_options
 
 
 /obj/item/reagent_containers/food/snacks/donkpocket/Initialize()
 	. = ..()
-	INIT_SKIP_QDELETED
-	INIT_DISALLOW_TYPE(/obj/item/reagent_containers/food/snacks/donkpocket)
+	if (. == INITIALIZE_HINT_QDEL)
+		return
+	if (filling_options)
+		SetInitialReagents(filling_options)
 
 
 /obj/item/reagent_containers/food/snacks/donkpocket/OnConsume(mob/living/consumer)
@@ -109,30 +110,19 @@
 
 
 
-/obj/item/reagent_containers/food/snacks/donkpocket/protein/name = "protein donk-pocket"
-
-/obj/item/reagent_containers/food/snacks/donkpocket/protein/desc = "A mass produced shelf-stable turnover. Allegedly contains mixed meat product."
-
-
-/obj/item/reagent_containers/food/snacks/donkpocket/protein/Initialize()
-	. = ..()
-	var/static/list/options = list(
+/obj/item/reagent_containers/food/snacks/donkpocket/protein
+	name = "protein donk-pocket"
+	desc = "A mass produced shelf-stable turnover. Allegedly contains mixed meat product."
+	filling_options = list(
 		/datum/reagent/nutriment/protein,
 		/datum/reagent/drink/porksoda
 	)
-	SetInitialReagents(options)
 
 
-
-
-/obj/item/reagent_containers/food/snacks/donkpocket/vegetable/name = "vegetable donk-pocket"
-
-/obj/item/reagent_containers/food/snacks/donkpocket/vegetable/desc = "A mass produced shelf-stable turnover. Allegedly contains plant based nutrients."
-
-
-/obj/item/reagent_containers/food/snacks/donkpocket/vegetable/Initialize()
-	. = ..()
-	var/static/list/options = list(
+/obj/item/reagent_containers/food/snacks/donkpocket/vegetable
+	name = "vegetable donk-pocket"
+	desc = "A mass produced shelf-stable turnover. Allegedly contains plant based nutrients."
+	filling_options = list(
 		list(
 			/datum/reagent/drink/juice/potato,
 			/datum/reagent/drink/juice/onion,
@@ -143,38 +133,24 @@
 		/datum/reagent/drink/juice/cabbage,
 		/datum/reagent/drink/milk/soymilk
 	)
-	SetInitialReagents(options)
 
 
-
-
-/obj/item/reagent_containers/food/snacks/donkpocket/fruit/name = "fruit donk-pocket"
-
-/obj/item/reagent_containers/food/snacks/donkpocket/fruit/desc = "A mass produced shelf-stable turnover. Allegedly contains fruit derivatives."
-
-
-/obj/item/reagent_containers/food/snacks/donkpocket/fruit/Initialize()
-	. = ..()
-	var/static/list/options = list(
+/obj/item/reagent_containers/food/snacks/donkpocket/fruit
+	name = "fruit donk-pocket"
+	desc = "A mass produced shelf-stable turnover. Allegedly contains fruit derivatives."
+	filling_options = list(
 		/datum/reagent/drink/juice/apple,
 		/datum/reagent/drink/juice/berry,
 		/datum/reagent/drink/juice/melon,
 		/datum/reagent/drink/juice/orange,
 		/datum/reagent/drink/coconut
 	)
-	SetInitialReagents(options)
 
 
-
-
-/obj/item/reagent_containers/food/snacks/donkpocket/dessert/name = "dessert donk-pocket"
-
-/obj/item/reagent_containers/food/snacks/donkpocket/dessert/desc = "A mass produced shelf-stable turnover. Allegedly contains unnatural delights."
-
-
-/obj/item/reagent_containers/food/snacks/donkpocket/dessert/Initialize()
-	. = ..()
-	var/static/list/options = list(
+/obj/item/reagent_containers/food/snacks/donkpocket/dessert
+	name = "dessert donk-pocket"
+	desc = "A mass produced shelf-stable turnover. Allegedly contains unnatural delights."
+	filling_options = list(
 		/datum/reagent/drink/milk/chocolate,
 		/datum/reagent/drink/milk/cream,
 		/datum/reagent/drink/coffee/soy_latte/mocha,
@@ -185,42 +161,32 @@
 		/datum/reagent/cinnamon,
 		/datum/reagent/drink/kefir
 	)
-	SetInitialReagents(options)
+
+
+/obj/item/reagent_containers/food/snacks/donkpocket/premium
+	name = "premium donk-pocket"
+	desc = "A \"premium\" shelf-stable turnover. Possibly contains \"real\" fruit paste. Crush the packaging to cook it on the go!"
+	filling_color = "#6d6d00"
+	can_self_heat = TRUE
+	nutriment_amt = 4
+	nutriment_desc = list(
+		"nutritious goodness" = 1,
+		"flaky pastry" = 2
+	)
+	hot_reagents = list(
+		/datum/reagent/drink/doctor_delight = 4,
+		/datum/reagent/hyperzine = 0.5,
+		/datum/reagent/synaptizine = 0.1
+	)
 
 
 
 
-/obj/item/reagent_containers/food/snacks/donkpocket/premium/name = "premium donk-pocket"
-
-/obj/item/reagent_containers/food/snacks/donkpocket/premium/desc = "A \"premium\" shelf-stable turnover. Possibly contains \"real\" fruit paste. Crush the packaging to cook it on the go!"
-
-/obj/item/reagent_containers/food/snacks/donkpocket/premium/filling_color = "#6d6d00"
-
-/obj/item/reagent_containers/food/snacks/donkpocket/premium/nutriment_amt = 4
-
-/obj/item/reagent_containers/food/snacks/donkpocket/premium/nutriment_desc = list(
-	"nutritious goodness" = 1,
-	"flaky pastry" = 2
-)
-
-/obj/item/reagent_containers/food/snacks/donkpocket/premium/can_self_heat = TRUE
-
-/obj/item/reagent_containers/food/snacks/donkpocket/premium/hot_reagents = list(
-	/datum/reagent/drink/doctor_delight = 4,
-	/datum/reagent/hyperzine = 0.5,
-	/datum/reagent/synaptizine = 0.1
-)
-
-
-
-
-/obj/random/donkpocket/name = "random donk-pocket"
-
-/obj/random/donkpocket/desc = "This is a random donk-pocket."
-
-/obj/random/donkpocket/icon = 'icons/obj/food.dmi'
-
-/obj/random/donkpocket/icon_state = "donkpocket"
+/obj/random/donkpocket
+	name = "random donk-pocket"
+	desc = "This is a random donk-pocket."
+	icon = 'icons/obj/food.dmi'
+	icon_state = "donkpocket"
 
 
 /obj/random/donkpocket/spawn_choices()
@@ -235,92 +201,68 @@
 
 
 
-/obj/item/storage/box/donkpocket_protein/name = "box of protein donk-pockets"
-
-/obj/item/storage/box/donkpocket_protein/desc = "Heat in microwave. Product will cool if not eaten within seven minutes. Contains meat."
-
-/obj/item/storage/box/donkpocket_protein/icon_state = "donk_kit"
-
-/obj/item/storage/box/donkpocket_protein/startswith = list(
-	/obj/item/reagent_containers/food/snacks/donkpocket/protein = 4
-)
+/obj/item/storage/box/donkpocket_protein
+	name = "box of protein donk-pockets"
+	desc = "Heat in microwave. Product will cool if not eaten within seven minutes. Contains meat."
+	icon_state = "donk_kit"
+	startswith = list(
+		/obj/item/reagent_containers/food/snacks/donkpocket/protein = 4
+	)
 
 
+/obj/item/storage/box/donkpocket_vegetable
+	name = "box of vegetable donk-pockets"
+	desc = "Heat in microwave. Product will cool if not eaten within seven minutes. Suitable for vegetarians."
+	icon_state = "donk_kit"
+	startswith = list(
+		/obj/item/reagent_containers/food/snacks/donkpocket/vegetable = 4
+	)
 
 
-/obj/item/storage/box/donkpocket_vegetable/name = "box of vegetable donk-pockets"
-
-/obj/item/storage/box/donkpocket_vegetable/desc = "Heat in microwave. Product will cool if not eaten within seven minutes. Suitable for vegetarians."
-
-/obj/item/storage/box/donkpocket_vegetable/icon_state = "donk_kit"
-
-/obj/item/storage/box/donkpocket_vegetable/startswith = list(
-	/obj/item/reagent_containers/food/snacks/donkpocket/vegetable = 4
-)
+/obj/item/storage/box/donkpocket_fruit
+	name = "box of fruit donk-pockets"
+	desc = "Heat in microwave. Product will cool if not eaten within seven minutes. Contains plant sugars."
+	icon_state = "donk_kit"
+	startswith = list(
+		/obj/item/reagent_containers/food/snacks/donkpocket/fruit = 4
+	)
 
 
+/obj/item/storage/box/donkpocket_dessert
+	name = "box of dessert donk-pockets"
+	desc = "Heat in microwave. Product will cool if not eaten within seven minutes. Contains animal products."
+	icon_state = "donk_kit"
+	startswith = list(
+		/obj/item/reagent_containers/food/snacks/donkpocket/dessert = 4
+	)
 
 
-/obj/item/storage/box/donkpocket_fruit/name = "box of fruit donk-pockets"
-
-/obj/item/storage/box/donkpocket_fruit/desc = "Heat in microwave. Product will cool if not eaten within seven minutes. Contains plant sugars."
-
-/obj/item/storage/box/donkpocket_fruit/icon_state = "donk_kit"
-
-/obj/item/storage/box/donkpocket_fruit/startswith = list(
-	/obj/item/reagent_containers/food/snacks/donkpocket/fruit = 4
-)
-
-
-
-
-/obj/item/storage/box/donkpocket_dessert/name = "box of dessert donk-pockets"
-
-/obj/item/storage/box/donkpocket_dessert/desc = "Heat in microwave. Product will cool if not eaten within seven minutes. Contains animal products."
-
-/obj/item/storage/box/donkpocket_dessert/icon_state = "donk_kit"
-
-/obj/item/storage/box/donkpocket_dessert/startswith = list(
-	/obj/item/reagent_containers/food/snacks/donkpocket/dessert = 4
-)
-
-
-
-
-/obj/item/storage/box/donkpocket_premium/name = "box of premium donk-pockets"
-
-/obj/item/storage/box/donkpocket_premium/desc = "Heat in microwave or crush packaging in hand. Product will cool if not eaten within seven minutes. Suitable for vegetarians. Contains plant sugars."
-
-/obj/item/storage/box/donkpocket_premium/icon_state = "donk_kit"
-
-/obj/item/storage/box/donkpocket_premium/startswith = list(
-	/obj/item/reagent_containers/food/snacks/donkpocket/premium = 4
-)
-
-
+/obj/item/storage/box/donkpocket_premium
+	name = "box of premium donk-pockets"
+	desc = "Heat in microwave or crush packaging in hand. Product will cool if not eaten within seven minutes. Suitable for vegetarians. Contains plant sugars."
+	icon_state = "donk_kit"
+	startswith = list(
+		/obj/item/reagent_containers/food/snacks/donkpocket/premium = 4
+	)
 
 
 // Mixed donk pocket boxes gives you a couple of extras for taking a chance
-/obj/item/storage/box/donkpocket_mixed/name = "box of mixed donk-pockets"
-
-/obj/item/storage/box/donkpocket_mixed/desc = "Heat in microwave or crush packaging in hand. Product will cool if not eaten within seven minutes. Check packaged products for individual safety."
-
-/obj/item/storage/box/donkpocket_mixed/icon_state = "donk_kit"
-
-/obj/item/storage/box/donkpocket_mixed/startswith = list(
-	/obj/random/donkpocket = 6
-)
+/obj/item/storage/box/donkpocket_mixed
+	name = "box of mixed donk-pockets"
+	desc = "Heat in microwave or crush packaging in hand. Product will cool if not eaten within seven minutes. Check packaged products for individual safety."
+	icon_state = "donk_kit"
+	startswith = list(
+		/obj/random/donkpocket = 6
+	)
 
 
 
 
-/obj/random/donkpocket_box/name = "random box of donk-pockets"
-
-/obj/random/donkpocket_box/desc = "This is a random box of donk-pockets."
-
-/obj/random/donkpocket_box/icon = 'icons/obj/storage.dmi'
-
-/obj/random/donkpocket_box/icon_state = "donk_kit"
+/obj/random/donkpocket_box
+	name = "random box of donk-pockets"
+	desc = "This is a random box of donk-pockets."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "donk_kit"
 
 
 /obj/random/donkpocket_box/spawn_choices()

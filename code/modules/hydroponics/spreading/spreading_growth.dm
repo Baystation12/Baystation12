@@ -39,7 +39,7 @@
 
 		if(floor.density)
 			if(LAZYACCESS(seed.chems, /datum/reagent/acid/polyacid))
-				spawn(rand(5,25)) floor.ex_act(3)
+				spawn(rand(5,25)) floor.ex_act(EX_ACT_LIGHT)
 			continue
 
 		if(!Adjacent(floor) || !floor.Enter(src))
@@ -94,7 +94,7 @@
 		if(can_spawn_plant())
 			plant = new(T,seed)
 			plant.dir = src.dir
-			plant.transform = src.transform
+			plant.SetTransform(others = transform)
 			plant.age = seed.get_trait(TRAIT_MATURATION)-1
 			plant.update_icon()
 			if(growth_type==0) //Vines do not become invisible.
@@ -133,7 +133,7 @@
 		child.update_icon()
 		// Some plants eat through plating.
 		if(islist(seed.chems) && !isnull(seed.chems[/datum/reagent/acid/polyacid]))
-			target_turf.ex_act(prob(80) ? 3 : 2)
+			target_turf.ex_act(prob(80) ? EX_ACT_LIGHT : EX_ACT_HEAVY)
 	else
 		qdel(child)
 

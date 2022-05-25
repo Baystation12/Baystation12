@@ -97,11 +97,11 @@ var/global/list/mining_floors = list()
 
 /turf/simulated/mineral/ex_act(severity)
 	switch(severity)
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if (prob(70))
 				mined_ore = 1 //some of the stuff gets blown up
 				GetDrilled()
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			mined_ore = 2 //some of the stuff gets blown up
 			GetDrilled()
 
@@ -145,9 +145,7 @@ var/global/list/mining_floors = list()
 	ore_overlay = image('icons/turf/mining_decals.dmi', "[mineral.ore_icon_overlay]")
 	ore_overlay.appearance_flags = RESET_COLOR
 	if(prob(50))
-		var/matrix/M = matrix()
-		M.Scale(-1,1)
-		ore_overlay.transform = M
+		ore_overlay.SetTransform(scale_x = -1)
 	ore_overlay.color = mineral.icon_colour
 	ore_overlay.turf_decal_layerise()
 	update_icon()
@@ -445,12 +443,12 @@ var/global/list/mining_floors = list()
 
 /turf/simulated/floor/asteroid/ex_act(severity)
 	switch(severity)
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			return
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if (prob(70))
 				gets_dug()
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			gets_dug()
 	return
 

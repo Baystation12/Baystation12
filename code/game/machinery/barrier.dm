@@ -127,9 +127,9 @@
 /obj/machinery/barrier/ex_act(severity)
 	if (QDELETED(src))
 		return
-	if (severity == 1)
+	if (severity == EX_ACT_DEVASTATING)
 		explode()
-	else if (severity == 2)
+	else if (severity == EX_ACT_HEAVY)
 		modify_health(-25)
 
 /obj/machinery/barrier/emp_act(severity)

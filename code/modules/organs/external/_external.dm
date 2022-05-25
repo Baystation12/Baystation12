@@ -34,8 +34,8 @@
 	var/model                          // Used when caching robolimb icons.
 	var/force_icon                     // Used to force override of species-specific limb icons (for prosthetics).
 	var/icon/mob_icon                  // Cached icon for use in mob overlays.
-	var/s_tone                         // Skin tone.
-	var/s_base = ""                    // Skin base.
+	var/skin_tone                         // Skin tone.
+	var/base_skin = ""                    // Skin base.
 	var/list/s_col                     // skin colour
 	var/s_col_blend = ICON_ADD         // How the skin colour is applied.
 	var/list/h_col                     // hair colour
@@ -142,7 +142,7 @@
 /obj/item/organ/external/set_dna(var/datum/dna/new_dna)
 	..()
 	s_col_blend = species.limb_blend
-	s_base = new_dna.s_base
+	base_skin = new_dna.base_skin
 
 /obj/item/organ/external/emp_act(severity)
 
@@ -891,9 +891,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(DROPLIMB_EDGE)
 			compile_icon()
 			add_blood(victim)
-			var/matrix/M = matrix()
-			M.Turn(rand(180))
-			src.transform = M
+			SetTransform(rotation = rand(180))
 			forceMove(get_turf(src))
 			if(!clean)
 				// Throw limb around.

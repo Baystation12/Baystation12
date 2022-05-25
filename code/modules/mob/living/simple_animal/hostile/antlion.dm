@@ -129,9 +129,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/beast/antlion/mega/Initialize()
 	. = ..()
-	var/matrix/M = new
-	M.Scale(1.5)
-	transform = M
+	SetTransform(scale = 1.5)
 	update_icon()
 
 /datum/say_list/antlion

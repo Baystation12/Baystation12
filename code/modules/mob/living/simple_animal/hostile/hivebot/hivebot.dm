@@ -320,3 +320,6 @@ The megabot
 
 /obj/item/natural_weapon/hivebot/strong
 	force = 20
+
+/obj/item/projectile/bullet/hivebot
+	damage = 10

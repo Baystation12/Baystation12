@@ -24,7 +24,7 @@
 /obj/effect/overmap/visitable/sector/cluster/get_skybox_representation()
 	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
 	res.blend_mode = BLEND_OVERLAY
-	res.transform *= 0.5
+	res.SetTransform(scale = 0.5)
 	return res
 
 /datum/map_template/ruin/away_site/mining_asteroid
@@ -96,7 +96,7 @@
 /obj/effect/overmap/visitable/sector/away/get_skybox_representation()
 	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
 	res.blend_mode = BLEND_OVERLAY
-	res.transform *= 0.3
+	res.SetTransform(scale = 0.3)
 	return res
 
 /datum/map_template/ruin/away_site/mining_signal

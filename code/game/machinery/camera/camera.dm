@@ -143,7 +143,7 @@
 		return
 
 	//camera dies if an explosion touches it!
-	if(severity <= 2 || prob(50))
+	if(severity <= EX_ACT_HEAVY || prob(50))
 		destroy()
 
 	..() //and give it the regular chance of being deleted outright

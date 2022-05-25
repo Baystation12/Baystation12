@@ -132,7 +132,7 @@ var/global/list/meteors_cataclysm = list(\
 	density = TRUE
 	anchored = TRUE
 	var/hits = 4
-	var/hitpwr = 2 //Level of ex_act to be called on hit.
+	var/hitpwr = EX_ACT_HEAVY //Level of ex_act to be called on hit.
 	var/dest
 	pass_flags = PASS_FLAG_TABLE
 	var/heavy = 0
@@ -169,9 +169,9 @@ var/global/list/meteors_cataclysm = list(\
 	GLOB.meteor_list -= src
 	return ..()
 
-/obj/effect/meteor/New()
-	..()
-	if(!ismissile)
+/obj/effect/meteor/Initialize()
+	. = ..()
+	if (!ismissile)
 		SpinAnimation()
 
 /obj/effect/meteor/Bump(atom/A)
@@ -236,7 +236,7 @@ var/global/list/meteors_cataclysm = list(\
 	icon_state = "dust"
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	hits = 1
-	hitpwr = 3
+	hitpwr = EX_ACT_LIGHT
 	dropamt = 1
 	meteordrop = /obj/item/ore/glass
 
@@ -320,7 +320,7 @@ var/global/list/meteors_cataclysm = list(\
 	icon_state = "flaming"
 	desc = "Your life briefly passes before your eyes the moment you lay them on this monstrosity."
 	hits = 10
-	hitpwr = 1
+	hitpwr = EX_ACT_DEVASTATING
 	heavy = 1
 	meteordrop = /obj/item/ore/diamond	// Probably means why it penetrates the hull so easily before exploding.
 

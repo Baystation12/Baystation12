@@ -143,8 +143,13 @@ VOTE_AUTOTRANSFER_INITIAL 120
 # using seven semicolon (;) separated values allows for different weekday-based values
 VOTE_AUTOTRANSFER_INTERVAL 30
 
+
 ## Time left (seconds) before round start when automatic gamemote vote is called (default 160).
 VOTE_AUTOGAMEMODE_TIMELEFT 160
+
+## Time (seconds) before the server will attempt to start a round.
+# Should be bigger than VOTE_AUTOGAMEMODE_TIMELEFT + VOTE_PERIOD.
+PRE_GAME_TIME 180
 
 ## prevents dead players from voting or starting votes
 #NO_DEAD_VOTE

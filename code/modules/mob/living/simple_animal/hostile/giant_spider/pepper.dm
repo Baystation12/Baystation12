@@ -15,5 +15,5 @@
 	poison_type = /datum/reagent/toxin/irritanttoxin
 
 /mob/living/simple_animal/hostile/giant_spider/pepper/Initialize()
-	scale(1.1)
+	SetTransform(scale = 1.1)
 	return ..()

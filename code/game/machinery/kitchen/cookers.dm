@@ -486,7 +486,7 @@
 		var/image/I = image(source.icon, source.icon_state)
 		I.color = source.color
 		I.overlays += source.overlays
-		I.transform *= 0.5
+		I.SetTransform(scale = 0.5)
 		result.icon = 'icons/obj/food.dmi'
 		result.icon_state = "cereal_box"
 		result.color = null
@@ -698,7 +698,7 @@
 	I.pixel_y = rand(-8, 8)
 	I.color = other.color
 	I.overlays += other.overlays
-	I.transform *= 0.8
+	I.SetTransform(scale = 0.8)
 	overlays += I
 	qdel(other)
 	return TRUE

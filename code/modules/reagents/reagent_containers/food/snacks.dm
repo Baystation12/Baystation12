@@ -166,6 +166,11 @@
 			else
 				reagents.trans_to_obj(U, min(reagents.total_volume,5))
 				if (reagents.total_volume <= 0)
+					if (loc && trash)
+						if (ispath(trash))
+							trash = new trash
+						trash.dropInto(loc)
+						trash = null
 					qdel(src)
 			return
 

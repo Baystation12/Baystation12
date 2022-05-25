@@ -22,10 +22,10 @@
 	test.Turn(-45)
 	var/matrix/squished = new
 	squished.Scale(1, 0.5)
-	animate(src, transform = (test * m.Turn(90)), spin_rate / 4, loop = -1,)
-	animate(transform =      test * m.Turn(90), spin_rate / 4, loop = -1, )
-	animate(transform =      (test * m.Turn(90)), spin_rate / 4, loop = -1, )
-	animate(transform =      test * matrix(),   spin_rate / 4, loop = -1, )
+	animate(src, transform = test * m.Turn(90), spin_rate / 4, loop = -1)
+	animate(transform = test * m.Turn(90), spin_rate / 4, loop = -1)
+	animate(transform = test * m.Turn(90), spin_rate / 4, loop = -1)
+	animate(transform = test * matrix(),   spin_rate / 4, loop = -1)
 
 
 /obj/effect/spinning_light/set_color(_color)

@@ -13,34 +13,34 @@ var/global/list/limb_icon_cache = list()
 		overlays += organ.mob_icon
 
 /obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/carbon/human/human)
-	s_tone = null
+	skin_tone = null
 	s_col = null
-	s_base = ""
-	h_col = list(human.r_hair, human.g_hair, human.b_hair)
+	base_skin = ""
+	h_col = rgb2num(human.head_hair_color)
 	if(BP_IS_ROBOTIC(src) && !(human.species.appearance_flags & HAS_BASE_SKIN_COLOURS))
 		var/datum/robolimb/franchise = all_robolimbs[model]
 		if(!(franchise && franchise.skintone))
 			return
 	if(species && human.species && species.name != human.species.name)
 		return
-	if(!isnull(human.s_tone) && (human.species.appearance_flags & HAS_A_SKIN_TONE))
-		s_tone = human.s_tone
-	if(!isnull(human.s_base) && (human.species.appearance_flags & HAS_BASE_SKIN_COLOURS))
-		s_base = human.s_base
+	if(!isnull(human.skin_tone) && (human.species.appearance_flags & HAS_A_SKIN_TONE))
+		skin_tone = human.skin_tone
+	if(!isnull(human.base_skin) && (human.species.appearance_flags & HAS_BASE_SKIN_COLOURS))
+		base_skin = human.base_skin
 	if(human.species.appearance_flags & HAS_SKIN_COLOR)
-		s_col = list(human.r_skin, human.g_skin, human.b_skin)
+		s_col = rgb2num(human.skin_color)
 
 /obj/item/organ/external/proc/sync_colour_to_dna()
-	s_tone = null
+	skin_tone = null
 	s_col = null
-	s_base = dna.s_base
+	base_skin = dna.base_skin
 	h_col = list(dna.GetUIValue(DNA_UI_HAIR_R),dna.GetUIValue(DNA_UI_HAIR_G),dna.GetUIValue(DNA_UI_HAIR_B))
 	if(BP_IS_ROBOTIC(src))
 		var/datum/robolimb/franchise = all_robolimbs[model]
 		if(!(franchise && franchise.skintone))
 			return
 	if(!isnull(dna.GetUIValue(DNA_UI_SKIN_TONE)) && (species.appearance_flags & HAS_A_SKIN_TONE))
-		s_tone = dna.GetUIValue(DNA_UI_SKIN_TONE)
+		skin_tone = dna.GetUIValue(DNA_UI_SKIN_TONE)
 	if(species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = list(dna.GetUIValue(DNA_UI_SKIN_R), dna.GetUIValue(DNA_UI_SKIN_G), dna.GetUIValue(DNA_UI_SKIN_B))
 
@@ -61,7 +61,10 @@ var/global/list/limb_icon_cache = list()
 		var/datum/sprite_accessory/marking/M = E
 		if (M.draw_target == MARKING_TARGET_SKIN)
 			var/color = markings[E]
-			var/icon/I = icon(M.icon, "[M.icon_state]-[organ_tag]")
+			var/state = M.icon_state
+			if (M.use_organ_tag)
+				state = "[state]-[organ_tag]"
+			var/icon/I = icon(M.icon, state)
 			I.Blend(color, M.blend)
 			icon_cache_key += "[M.name][color]"
 			ADD_SORTED(sorted, list(list(M.draw_order, I, M)), /proc/cmp_marking_order)
@@ -80,8 +83,8 @@ var/global/list/limb_icon_cache = list()
 		gender = "_f"
 
 	icon_state = "[icon_name][gender]"
-	if(species.base_skin_colours && !isnull(species.base_skin_colours[s_base]))
-		icon_state += species.base_skin_colours[s_base]
+	if(species.base_skin_colours && !isnull(species.base_skin_colours[base_skin]))
+		icon_state += species.base_skin_colours[base_skin]
 
 	icon_cache_key = "[icon_state]_[species ? species.name : SPECIES_HUMAN]"
 
@@ -105,7 +108,10 @@ var/global/list/limb_icon_cache = list()
 		var/datum/sprite_accessory/marking/M = E
 		if (M.draw_target == MARKING_TARGET_SKIN)
 			var/color = markings[E]
-			var/icon/I = icon(M.icon, "[M.icon_state]-[organ_tag]")
+			var/state = M.icon_state
+			if (M.use_organ_tag)
+				state = "[state]-[organ_tag]"
+			var/icon/I = icon(M.icon, state)
 			I.Blend(color, M.blend)
 			icon_cache_key += "[M.name][color]"
 			ADD_SORTED(sorted, list(list(M.draw_order, I, M)), /proc/cmp_marking_order)
@@ -184,12 +190,12 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 		applying.ColorTone(rgb(10,50,0))
 		applying.SetIntensity(0.7)
 
-	if(s_tone)
-		if(s_tone >= 0)
-			applying.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
+	if(skin_tone)
+		if(skin_tone >= 0)
+			applying.Blend(rgb(skin_tone, skin_tone, skin_tone), ICON_ADD)
 		else
-			applying.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
-		icon_cache_key += "_tone_[s_tone]"
+			applying.Blend(rgb(-skin_tone,  -skin_tone,  -skin_tone), ICON_SUBTRACT)
+		icon_cache_key += "_tone_[skin_tone]"
 	if(species.appearance_flags & HAS_SKIN_COLOR)
 		if(s_col && s_col.len >= 3)
 			applying.Blend(rgb(s_col[1], s_col[2], s_col[3]), s_col_blend)
@@ -198,7 +204,7 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 	return applying
 
 /obj/item/organ/external/proc/bandage_level()
-	if(damage_state_text() == "00") 
+	if(damage_state_text() == "00")
 		return 0
 	if(!is_bandaged())
 		return 0

@@ -62,10 +62,8 @@
 		damage_health(W.force, W.damtype)
 		..()
 
-/obj/structure/barricade/handle_death_change(new_death_state)
-	..()
-	if (new_death_state)
-		dismantle()
+/obj/structure/barricade/on_death()
+	dismantle()
 
 /obj/structure/barricade/proc/dismantle()
 	visible_message("<span class='danger'>The barricade is smashed apart!</span>")

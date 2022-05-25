@@ -29,7 +29,7 @@
 
 /obj/singularity_act()
 	if(simulated)
-		ex_act(1)
+		ex_act(EX_ACT_DEVASTATING)
 		if(src)
 			qdel(src)
 		return 2

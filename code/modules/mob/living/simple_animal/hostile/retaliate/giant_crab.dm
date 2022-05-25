@@ -44,9 +44,8 @@
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/Initialize() //embiggen
 	. = ..()
-	var/matrix/M = new
-	M.Scale(1.5)
-	transform = M
+	SetTransform(scale = 1.5)
+
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/Destroy()
 	. = ..()

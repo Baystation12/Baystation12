@@ -411,7 +411,7 @@
 
 /obj/item/trash/cigbutt/New()
 	..()
-	transform = turn(transform,rand(0,360))
+	SetTransform(rotation = rand(0, 360))
 
 /obj/item/trash/cigbutt/cigarbutt
 	name = "cigar butt"

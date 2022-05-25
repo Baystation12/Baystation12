@@ -51,5 +51,5 @@
 	var/material/A = SSmaterials.get_material_by_name(MATERIAL_ALIENALLOY)
 	if(prob(A.explosion_resistance))
 		return
-	if(severity == 1)
+	if(severity == EX_ACT_DEVASTATING)
 		ChangeTurf(get_base_turf_by_area(src))

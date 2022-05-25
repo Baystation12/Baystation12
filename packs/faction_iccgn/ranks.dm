@@ -1,4 +1,5 @@
 /obj/item/clothing/accessory/iccgn_rank
+	abstract_type = /obj/item/clothing/accessory/iccgn_rank
 	name = "base rank insignia, ICCGN"
 	desc = "You should not see this."
 	icon = 'packs/faction_iccgn/ranks.dmi'
@@ -14,12 +15,6 @@
 	slot = ACCESSORY_SLOT_RANK
 	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
 	gender = PLURAL
-
-
-/obj/item/clothing/accessory/iccgn_rank/Initialize()
-	. = ..()
-	INIT_SKIP_QDELETED
-	INIT_DISALLOW_TYPE(/obj/item/clothing/accessory/iccgn_rank)
 
 
 /obj/item/clothing/accessory/iccgn_rank/get_fibers()

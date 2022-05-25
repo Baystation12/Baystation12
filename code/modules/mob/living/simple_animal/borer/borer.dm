@@ -97,9 +97,7 @@
 	aura_image.color = "#aaffaa"
 	aura_image.blend_mode = BLEND_SUBTRACT
 	aura_image.alpha = 125
-	var/matrix/M = matrix()
-	M.Scale(0.33)
-	aura_image.transform = M
+	aura_image.SetTransform(scale = 0.33)
 
 /mob/living/simple_animal/borer/death(gibbed, deathmessage, show_dead_message)
 	if(aura_image)

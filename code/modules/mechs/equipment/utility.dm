@@ -19,9 +19,7 @@
 		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
 		I.pixel_x = rand(-16,16)
 		I.pixel_y = rand(-16,16)
-		var/matrix/M = matrix()
-		M.Turn(rand(0,360))
-		I.transform = M
+		I.SetTransform(rotation = rand(0, 360))
 		overlays += I
 
 /obj/structure/cargopile/attack_hand(mob/user)
@@ -434,13 +432,14 @@
 
 				//effect and sound
 				warpeffect.forceMove(get_turf(target))
-				var/matrix/start = matrix()
-				start.Scale(0)
-				var/matrix/end= matrix()
-				end.Scale(1)
+				warpeffect.SetTransform(scale = 0)
 				warpeffect.alpha = 255
-				warpeffect.transform = start
-				animate(warpeffect,transform = end, alpha = 0, time= 1.25 SECONDS)
+				animate(
+					warpeffect,
+					transform = matrix(),
+					alpha = 0,
+					time = 1.25 SECONDS
+				)
 				addtimer(CALLBACK(warpeffect, /atom/movable/proc/forceMove, null), 1.25 SECONDS)
 				playsound(warpeffect, 'sound/effects/heavy_cannon_blast.ogg', 50, 1)
 
@@ -679,7 +678,7 @@
 	)
 	log_and_message_admins("used [src] on [target]", user, owner.loc)
 	drill_head.durability -= 1
-	target.ex_act(2)
+	target.ex_act(EX_ACT_HEAVY)
 
 
 /obj/item/mech_equipment/drill/steel

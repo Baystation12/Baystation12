@@ -299,3 +299,9 @@
 // Severities for emp_act()
 #define EMP_ACT_HEAVY 1
 #define EMP_ACT_LIGHT 2
+
+
+// Severities for ex_act()
+#define EX_ACT_DEVASTATING 1 // Within devastation range - Destructive/deadly, unlikely to survive.
+#define EX_ACT_HEAVY 2 // Within heavy range - Heavy damage, very dangerous
+#define EX_ACT_LIGHT 3 // Within light range - Minor damage.

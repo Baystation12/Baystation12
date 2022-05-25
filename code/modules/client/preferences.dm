@@ -29,11 +29,10 @@
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 
-	// Mob preview
-	var/icon/preview_icon = null
-
 	var/client/client = null
 	var/client_ckey = null
+
+	var/datum/browser/popup
 
 	var/datum/category_collection/player_setup_collection/player_setup
 	var/datum/browser/panel
@@ -151,8 +150,7 @@
 /datum/preferences/proc/open_setup_window(mob/user)
 	if (!SScharacter_setup.initialized)
 		return
-
-	var/datum/browser/popup = new(user, "preferences_browser", "Character Setup", 1200, 800, src)
+	popup = new (user, "preferences_browser", "Character Setup", 1200, 800, src)
 	var/content = {"
 	<script type='text/javascript'>
 		function update_content(data){
@@ -184,6 +182,9 @@
 /datum/preferences/Topic(href, list/href_list)
 	if(..())
 		return 1
+
+	if (href_list["close"])
+		popup = null
 
 	if(href_list["save"])
 		save_preferences()
@@ -226,39 +227,24 @@
 	player_setup.sanitize_setup()
 	character.set_species(species)
 
-	if(be_random_name)
-		var/decl/cultural_info/culture = SSculture.get_culture(cultural_info[TAG_CULTURE])
-		if(culture) real_name = culture.get_random_name(gender)
-
 	character.fully_replace_character_name(real_name)
 
 	character.gender = gender
 	character.age = age
 	character.b_type = b_type
 
-	character.r_eyes = r_eyes
-	character.g_eyes = g_eyes
-	character.b_eyes = b_eyes
+	character.eye_color = eye_color
 
-	character.h_style = h_style
-	character.r_hair = r_hair
-	character.g_hair = g_hair
-	character.b_hair = b_hair
+	character.head_hair_style = head_hair_style
+	character.head_hair_color = head_hair_color
 
-	character.f_style = f_style
-	character.r_facial = r_facial
-	character.g_facial = g_facial
-	character.b_facial = b_facial
+	character.facial_hair_style = facial_hair_style
+	character.facial_hair_color = facial_hair_color
 
-	character.r_skin = r_skin
-	character.g_skin = g_skin
-	character.b_skin = b_skin
+	character.skin_color = skin_color
 
-	character.s_tone = s_tone
-	character.s_base = s_base
-
-	character.h_style = h_style
-	character.f_style = f_style
+	character.skin_tone = skin_tone
+	character.base_skin = base_skin
 
 	// Replace any missing limbs.
 	for(var/name in BP_ALL_LIMBS)

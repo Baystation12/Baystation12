@@ -1,38 +1,40 @@
 /mob/living/carbon/human
+	mob_bump_flag = HUMAN
+	mob_push_flags = ~HEAVY
+	mob_swap_flags = ~HEAVY
 
-	//Hair colour and style
-	var/r_hair = 0
-	var/g_hair = 0
-	var/b_hair = 0
-	var/h_style = "Bald"
+	/// The style of head hair applied to this mob
+	var/head_hair_style = "Bald"
 
-	//Facial hair colour and style
-	var/r_facial = 0
-	var/g_facial = 0
-	var/b_facial = 0
-	var/f_style = "Shaved"
+	/// The color of head hair applied to this mob
+	var/head_hair_color = "#000000"
 
-	//Eye colour
-	var/r_eyes = 0
-	var/g_eyes = 0
-	var/b_eyes = 0
+	/// The style of facial hair applied to this mob
+	var/facial_hair_style = "Shaved"
 
-	var/s_tone = 0  //Skin tone
-	var/s_base = "" //Skin base
+	/// The color of facial hair applied to this mob
+	var/facial_hair_color = "#000000"
 
-	//Skin colour
-	var/r_skin = 0
-	var/g_skin = 0
-	var/b_skin = 0
+	/// The color that will be used for the eyes of this mob
+	var/eye_color = "#000000"
 
-	var/size_multiplier = 1 //multiplier for the mob's icon size
-	var/damage_multiplier = 1 //multiplies melee combat damage
-	var/icon_update = 1 //whether icon updating shall take place
+	/// The skin color that will be applied to this mob if it does not use a tone
+	var/skin_color = "#000000"
 
-	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
+	/// The skin tone scale that will be applied to this mob if it does not use a color
+	var/skin_tone = 0
+
+	/// The base icon that will be used for this mob if it allows more than one
+	var/base_skin = ""
+
+	/// The style of makeup applied to this mob
+	var/makeup_style
 
 	var/age = 30		//Player's age (pure fluff)
 	var/b_type = "A+"	//Player's bloodtype
+
+	/// The amount this mob's age has been changed in the round, if it has
+	var/changed_age = 0
 
 	var/list/worn_underwear = list()
 
@@ -41,22 +43,22 @@
 	var/list/cultural_info = list()
 
 	//Equipment slots
-	var/obj/item/wear_suit = null
-	var/obj/item/w_uniform = null
-	var/obj/item/shoes = null
-	var/obj/item/belt = null
-	var/obj/item/gloves = null
-	var/obj/item/glasses = null
-	var/obj/item/head = null
-	var/obj/item/l_ear = null
-	var/obj/item/r_ear = null
-	var/obj/item/wear_id = null
-	var/obj/item/r_store = null
-	var/obj/item/l_store = null
-	var/obj/item/s_store = null
+	var/obj/item/wear_suit
+	var/obj/item/w_uniform
+	var/obj/item/shoes
+	var/obj/item/belt
+	var/obj/item/gloves
+	var/obj/item/glasses
+	var/obj/item/head
+	var/obj/item/l_ear
+	var/obj/item/r_ear
+	var/obj/item/wear_id
+	var/obj/item/r_store
+	var/obj/item/l_store
+	var/obj/item/s_store
 
-	var/icon/stand_icon = null
-	var/icon/lying_icon = null
+	var/icon/stand_icon
+	var/icon/lying_icon
 
 	var/voice = ""	//Instead of new say code calling GetVoice() over and over and over, we're just going to ask this variable, which gets updated in Life()
 
@@ -65,7 +67,7 @@
 
 	var/xylophone = 0 //For the spoooooooky xylophone cooldown
 
-	var/mob/remoteview_target = null
+	var/mob/remoteview_target
 	var/hand_blood_color
 
 	var/list/flavor_texts = list()
@@ -73,10 +75,6 @@
 	var/full_prosthetic    // We are a robutt.
 	var/robolimb_count = 0 // Number of robot limbs.
 	var/last_attack = 0    // The world_time where an unarmed attack was done
-
-	mob_bump_flag = HUMAN
-	mob_push_flags = ~HEAVY
-	mob_swap_flags = ~HEAVY
 
 	var/flash_protection = 0				// Total level of flash protection
 	var/equipment_tint_total = 0			// Total level of visualy impairing items
@@ -93,8 +91,8 @@
 	var/gen_record = ""
 	var/exploit_record = ""
 
-	var/datum/mil_branch/char_branch = null
-	var/datum/mil_rank/char_rank = null
+	var/datum/mil_branch/char_branch
+	var/datum/mil_rank/char_rank
 
 	var/stance_damage = 0 //Whether this mob's ability to stand has been affected
 
@@ -104,10 +102,6 @@
 	var/shock_stage
 
 	var/obj/item/grab/current_grab_type 	// What type of grab they use when they grab someone.
-
-	//vars for fountain of youth examine lines
-	var/became_older
-	var/became_younger
 
 	var/list/descriptors
 

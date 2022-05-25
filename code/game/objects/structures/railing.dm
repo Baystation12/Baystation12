@@ -75,12 +75,11 @@
 		return !density
 	return TRUE
 
-/obj/structure/railing/handle_death_change(new_death_state)
-	if (new_death_state)
-		visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
-		playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
-		material.place_shard(get_turf(usr))
-		qdel(src)
+/obj/structure/railing/on_death()
+	visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
+	playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
+	material.place_shard(get_turf(usr))
+	qdel(src)
 
 /obj/structure/railing/proc/NeighborsCheck(var/UpdateNeighbors = 1)
 	neighbor_status = 0
