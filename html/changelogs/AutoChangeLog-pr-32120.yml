@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - admin: Staff now receive a notification when a player leaves/joins with an open
+      ticket.
