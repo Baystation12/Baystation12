@@ -1,0 +1,29 @@
+name: Check for DMI5
+
+# This check exists because dmi version 5 is a departure from prior
+# versions of the icon format and is probably incompatible with the
+# current versions of widely used tooling for tests etc. It may be
+# removed or disabled once that is no longer the case.
+
+permissions:
+  contents: read
+
+on:
+  pull_request_target:
+    branches:
+      - dev
+
+jobs:
+  check-dmi5:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+    - uses: ParadiseSS13/DMI5Checker@25839d2a92045540ba1a43959fcfa62db0a88d33
+      with:
+        icons-path: 'icons'
+    - uses: ParadiseSS13/DMI5Checker@25839d2a92045540ba1a43959fcfa62db0a88d33
+      with:
+        icons-path: 'maps'
+    - uses: ParadiseSS13/DMI5Checker@25839d2a92045540ba1a43959fcfa62db0a88d33
+      with:
+        icons-path: 'packs'
