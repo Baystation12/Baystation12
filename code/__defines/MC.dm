@@ -47,7 +47,7 @@
 }\
 /datum/controller/subsystem/##X
 
-#define TIMER_SUBSYSTEM_DEF(X) GLOBAL_REAL(SS##X, /datum/controller/subsystem/timer/##X);\
+#define TIMER_SUBSYSTEM_DEF(X) var/global/datum/controller/subsystem/timer/##X/SS##X;\
 /datum/controller/subsystem/timer/##X/New(){\
 	NEW_SS_GLOBAL(SS##X);\
 	PreInit();\
