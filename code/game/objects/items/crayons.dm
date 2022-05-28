@@ -95,7 +95,7 @@
 			if("letter")
 				drawtype = input("Choose the letter.", "Crayon scribbles") in list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
 				to_chat(user, "You start drawing a letter on the [target.name].")
-			if("graffiti" || "Fleet defector graffiti")
+			if("graffiti", "Fleet defector graffiti")
 				to_chat(user, "You start drawing graffiti on the [target.name].")
 			if("rune")
 				to_chat(user, "You start drawing a rune on the [target.name].")
