@@ -9,6 +9,10 @@
 	pixel_x = -32
 	idle_power_usage = 150 KILOWATTS
 	construct_state = /decl/machine_construction/default/panel_closed
+	health_max = 1000
+	health_resistances = DAMAGE_RESIST_ELECTRICAL
+	damage_hitsound = 'sound/machines/BSD_damaging.ogg'
+	health_min_damage = 10
 
 	/// Indicates whether the drive should show effects.
 	var/const/STATE_BROKEN = FLAG(0)
@@ -18,12 +22,6 @@
 
 	/// A field of STATE_* flags related to the drive.
 	var/state = EMPTY_BITFIELD
-
-	/// How much damage can it sustain
-	var/drive_max_integrity = 1000
-
-	/// How much damage has it sustained
-	var/drive_integrity
 
 	/// The token for the drive's idle loop
 	var/drive_sound
@@ -37,7 +35,6 @@
 
 /obj/machinery/bluespacedrive/Initialize()
 	. = ..()
-	drive_integrity = drive_max_integrity
 	drive_sound = GLOB.sound_player.PlayLoopingSound(src, "\ref[src]", 'sound/machines/BSD_idle.ogg', 50, 7)
 	particles = new /particles/bluespace_torus
 	set_light(1, 5, 15, 10, COLOR_CYAN)
@@ -58,57 +55,39 @@
 
 /obj/machinery/bluespacedrive/emp_act(severity)
 	..()
-	var/damage
-	switch (severity)
-		if (1)
-			damage = 1
-		if (2)
-			damage = Frand(0.3, 0.7)
-		if (3)
-			damage = Frand(0.2, 0.4)
-	visible_message(SPAN_WARNING("\The [src]'s field warps and buckles uneasily!"))
-	if (damage)
-		playsound(loc, 'sound/machines/BSD_damaging.ogg', 80)
-		take_damage(damage * drive_max_integrity)
-
-
-/obj/machinery/bluespacedrive/ex_act(severity)
-	var/damage
-	switch (severity)
-		if (EX_ACT_DEVASTATING)
-			damage = 1
-		if (EX_ACT_HEAVY)
-			damage = Frand(0.3, 0.7)
-		if (EX_ACT_LIGHT)
-			damage = Frand(0.2, 0.4)
-	if (damage)
-		take_damage(damage * drive_max_integrity)
+	if (!(state & STATE_BROKEN))
+		visible_message(SPAN_WARNING("\The [src]'s field warps and buckles uneasily!"))
+		playsound(loc, damage_hitsound, 80)
 
 
 /obj/machinery/bluespacedrive/bullet_act(obj/item/projectile/projectile)
+	. = ..()
 	if (!(state & STATE_BROKEN))
-		take_damage(projectile.get_structure_damage())
 		visible_message(SPAN_WARNING("\The [src]'s field crackles disturbingly!"))
-		playsound(loc, 'sound/machines/BSD_damaging.ogg', 80)
+		playsound(loc, damage_hitsound, 80)
 
 
-/obj/machinery/bluespacedrive/proc/take_damage(damage)
-	if (drive_integrity <= 0)
-		return
-	drive_integrity -= damage
-	if (drive_integrity <= drive_max_integrity * 0.5)
-		if (!(state & STATE_UNSTABLE))
-			state |= STATE_UNSTABLE
-			update_icon()
-	if (drive_integrity <= 0)
-		playsound(loc, 'sound/machines/BSD_explosion.ogg', 100)
-		visible_message(SPAN_DANGER(FONT_LARGE("\The [src] begins emitting an ear-splitting, horrible shrill! Get back!")))
-		addtimer(CALLBACK(src, .proc/explode), 5 SECONDS)
+/obj/machinery/bluespacedrive/post_health_change(health_mod, damage_type)
+	. = ..()
+	var/damage_percentage = get_damage_percentage()
+	if (damage_percentage >= 50 && !(state & STATE_UNSTABLE))
+		state |= STATE_UNSTABLE
+		update_icon()
+	else if (damage_percentage < 50 && (state & STATE_UNSTABLE))
+		state &= ~STATE_UNSTABLE
+		update_icon()
 
 
+/obj/machinery/bluespacedrive/on_death()
+	. = ..()
+	playsound(loc, 'sound/machines/BSD_explosion.ogg', 100)
+	visible_message(SPAN_DANGER(FONT_LARGE("\The [src] begins emitting an ear-splitting, horrible shrill! Get back!")))
+	addtimer(CALLBACK(src, .proc/explode), 5 SECONDS)
+
+
+/// Final death act handler for the drive where it explodes. You really shouldn't call this directly or you'll make weird broken things regarding health tracking. Use `kill_health()` instead, the death handler calls this.
 /obj/machinery/bluespacedrive/proc/explode()
 	visible_message(SPAN_DANGER(FONT_LARGE("\The [src]'s containment field is wracked by a series of horrendous distortions, buckling and twisting like a living thing before bursting in a flash of light!")))
-	drive_integrity = 0
 	explosion(get_turf(src), -1, 5, 10)
 	empulse(get_turf(src), 7, 14)
 	state |= STATE_BROKEN
@@ -131,20 +110,21 @@
 	qdel(O)
 
 
-/obj/machinery/bluespacedrive/examine(mob/user, distance)
-	. = ..()
-	if (state & STATE_BROKEN)
+/obj/machinery/bluespacedrive/examine_damage_state(mob/user)
+	if (health_dead)
 		to_chat(user, SPAN_DANGER("Its field is completely destroyed, the core revealed under the arcing debris."))
 		return
-	switch (Percent(drive_integrity, drive_max_integrity, 0))
-		if (75 to INFINITY)
-			to_chat(user,SPAN_NOTICE("At a glance, its field is peacefully humming without any alterations."))
-		if (50 to 75)
-			to_chat(user,SPAN_NOTICE("Its field is crackling gently, with the occasional twitch."))
-		if (25 to 50)
-			to_chat(user,SPAN_WARNING("Its damaged field is twitching and crackling dangerously!"))
+
+	var/damage_percentage = get_damage_percentage()
+	switch (damage_percentage)
+		if (0)
+			to_chat(user, SPAN_NOTICE("At a glance, its field is peacefully humming without any alterations."))
+		if (1 to 32)
+			to_chat(user, SPAN_WARNING("Its field is crackling gently, with the occasional twitch."))
+		if (33 to 65)
+			to_chat(user, SPAN_WARNING("Its damaged field is twitching and crackling dangerously!"))
 		else
-			to_chat(user,SPAN_DANGER("Its unstable field is cracking and shifting dangerously, revealing the core inside briefly!"))
+			to_chat(user, SPAN_DANGER("Its unstable field is cracking and shifting dangerously, revealing the core inside briefly!"))
 
 
 /particles/bluespace_torus
