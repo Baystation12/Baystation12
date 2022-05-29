@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscdel: The crashed SEV Icarus away site ruin is no longer a spawnable option
+      without admin intervention.
