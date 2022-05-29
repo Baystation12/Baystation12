@@ -146,8 +146,8 @@
 			return
 
 	for (var/datum/ticket/T in tickets)
-		if (T.owner.ckey == ckey)
-			message_staff("[key_name_admin(src)] has joined the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admins)]" : SPAN_DANGER("Unassigned.")]")
+		if (T.status == TICKET_OPEN && T.owner.ckey == ckey)
+			message_staff("[key_name_admin(src)] has joined the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admin_ckeys())]" : SPAN_DANGER("Unassigned.")]")
 			break
 
 	// Change the way they should download resources.
@@ -225,8 +225,8 @@
 
 /client/Destroy()
 	for (var/datum/ticket/T in tickets)
-		if (T.owner.ckey == ckey)
-			message_staff("[key_name_admin(src)] has left the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admins)]" : SPAN_DANGER("Unassigned.")]")
+		if (T.status == TICKET_OPEN && T.owner.ckey == ckey)
+			message_staff("[key_name_admin(src)] has left the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admin_ckeys())]" : SPAN_DANGER("Unassigned.")]")
 			break
 	if (holder)
 		holder.owner = null
