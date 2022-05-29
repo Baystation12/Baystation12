@@ -53,7 +53,7 @@
 	new target(T, connected_god)
 
 /spell/construction/check_valid_targets(var/list/targets)
-	/turf/T = get_turf(holder)
+	var/turf/T = get_turf(holder)
 
 	for (var/atom/thing in T.contents)
 		if (thing == holder)
