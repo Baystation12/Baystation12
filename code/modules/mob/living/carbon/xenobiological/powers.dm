@@ -161,7 +161,7 @@
 			var/list/mutations = GetMutations()
 			for(var/i = 1 to 4)
 				var/t = colour
-				if(prob(mutation_chance))
+				if (mutations && prob(mutation_chance))
 					t = pick(mutations)
 				var/mob/living/carbon/slime/M = new /mob/living/carbon/slime(loc, t)
 				if(i != 1)
