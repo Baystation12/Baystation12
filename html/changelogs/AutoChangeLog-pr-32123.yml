@@ -1,5 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - maptweak: Each charon thruster group now has an individual gas pump to provide
-      fuel.
