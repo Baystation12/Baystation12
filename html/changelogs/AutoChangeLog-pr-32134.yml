@@ -1,4 +1,0 @@
-author: Ninetailed
-delete-after: true
-changes:
-  - bugfix: Surgical robots are now able to implant organs with the organ gripper
