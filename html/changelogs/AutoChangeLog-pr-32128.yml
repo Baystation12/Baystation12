@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: The codex now includes mechanics information for HCMs, including steps
+      on how to deploy and use them. Examine any HCM or rig and click the 'Codex'
+      link in the description to see the mechanics guides.
