@@ -28,7 +28,7 @@
 	visible = actor.get_preference_value(/datum/client_preference/show_progress_bar) == GLOB.PREF_SHOW
 	if (!visible)
 		return
-	bar = image('icons/effects/progessbar.dmi', display_on_actor ? actor : actee, "prog_bar_0", HUD_ABOVE_ITEM_LAYER)
+	bar = image('icons/effects/progessbar.dmi', display_on_actor ? actor : actee, "priv_prog_bar_0", HUD_ABOVE_ITEM_LAYER)
 	bar.appearance_flags = DEFAULT_APPEARANCE_FLAGS | APPEARANCE_UI_IGNORE_ALPHA
 	bar.pixel_y = WORLD_ICON_SIZE
 	bar.plane = HUD_PLANE
@@ -43,7 +43,7 @@
 			shown = FALSE
 		client = actor.client
 	progress = clamp(progress, 0, max_progress)
-	bar.icon_state = "prog_bar_[round(progress * 100 / max_progress, 5)]"
+	bar.icon_state = "priv_prog_bar_[round(progress * 100 / max_progress, 5)]"
 	if (!shown)
 		client.images += bar
 		shown = TRUE
@@ -72,7 +72,7 @@
 	bar = new()
 	bar.mouse_opacity = 0
 	bar.icon = 'icons/effects/progessbar.dmi'
-	bar.icon_state = "prog_bar_0"
+	bar.icon_state = "pub_prog_bar_0"
 	calculate_position()
 	bar.layer = ABOVE_HUMAN_LAYER
 	actor.vis_contents += bar
@@ -81,7 +81,7 @@
 	if (!actor || !actee)
 		return
 	progress = clamp(progress, 0, max_progress)
-	bar.icon_state = "prog_bar_[round(progress * 100 / max_progress, 5)]"
+	bar.icon_state = "pub_prog_bar_[round(progress * 100 / max_progress, 5)]"
 	calculate_position()
 
 
