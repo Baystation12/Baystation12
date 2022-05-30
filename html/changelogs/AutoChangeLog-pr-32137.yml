@@ -1,6 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: The join/leave messages regarding players and their tickets now use ckeys
-      when listing admins assigned to the ticket.
-  - admin: Fixed the join/leave ticket message triggering with closed tickets.
