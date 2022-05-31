@@ -90,6 +90,7 @@
 #define TEMPLATE_FLAG_CLEAR_CONTENTS      FLAG(2)  // if it should destroy objects it spawns on top of
 #define TEMPLATE_FLAG_NO_RUINS            FLAG(3)  // if it should forbid ruins from spawning on top of it
 #define TEMPLATE_FLAG_NO_RADS             FLAG(4)  // Removes all radiation from the template after spawning.
+#define TEMPLATE_FLAG_NO_SPAWN            FLAG(5)  // Prevents the template from spawning automatically entirely.
 
 //Ruin map template flags
 #define TEMPLATE_FLAG_RUIN_STARTS_DISALLOWED FLAG(5)  // Ruin is not available during spawning unless another ruin permits it.

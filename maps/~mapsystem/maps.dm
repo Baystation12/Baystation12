@@ -359,6 +359,8 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	for (var/site_name in SSmapping.away_sites_templates)
 		var/datum/map_template/ruin/away_site/site = SSmapping.away_sites_templates[site_name]
+		if (site.template_flags & TEMPLATE_FLAG_NO_SPAWN)
+			continue
 		if (site.template_flags & TEMPLATE_FLAG_SPAWN_GUARANTEED)
 			guaranteed += site
 			if ((site.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES) && !(site.template_flags & TEMPLATE_FLAG_RUIN_STARTS_DISALLOWED))
