@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - admin: Bans will now display an error message to the banning admin of the targeted
+      mob ceases to exist while entering a ban reason, instead of silently (If you
+      have runtime logs disabled) crashing.
