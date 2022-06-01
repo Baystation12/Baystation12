@@ -17,7 +17,7 @@
 	source = 'sound/music/europa/asfarasitgets.ogg'
 	title = "As Far As It Gets"
 	author = "A Drop A Day"
-	license = /decl/license/cc_by_sa_4_0
+	license = /decl/license/cc_by_sa_3_0
 	url = "https://soundcloud.com/adrop_aday/32-as-far-as-it-gets"
 
 /decl/audio/track/businessend
@@ -77,7 +77,7 @@
 	source = 'sound/music/europa/80salloveragain.ogg'
 	title = "80s All Over Again"
 	author = "A Drop A Day"
-	license = /decl/license/cc_by_sa_4_0
+	license = /decl/license/cc_by_sa_3_0
 	url = "https://soundcloud.com/adrop_aday/9-80s-all-over-again"
 
 /decl/audio/track/elevator
@@ -294,5 +294,5 @@
 	source = 'sound/music/europa/WildEncounters.ogg'
 	title = "Wild Encounters"
 	author = "A Drop A Day"
-	license = /decl/license/cc_by_sa_4_0
+	license = /decl/license/cc_by_sa_3_0
 	url = "https://soundcloud.com/adrop_aday/14-wild-encounters"
