@@ -258,7 +258,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	. = ..()
 	if (!.)
 		return FALSE
-	if (target.is_species(SPECIES_ZOMBIE))
+	if (!target || target.is_species(SPECIES_ZOMBIE))
 		to_chat(usr, SPAN_WARNING("They don't look very appetizing!"))
 		return FALSE
 	return TRUE
