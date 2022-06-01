@@ -117,18 +117,24 @@
 	update_icon()
 
 
-/obj/machinery/bluespacedrive/attackby(obj/item/O, mob/user)
+/obj/machinery/bluespacedrive/attackby(obj/item/item, mob/user)
+	if (istype(item, /obj/item/grab))
+		var/obj/item/grab/grab = item
+		to_chat(user, SPAN_WARNING("\The [src] pulls at \the [grab.affecting] but they're too heavy."))
+		return
+	if (issilicon(user) || !user.unEquip(item, src))
+		to_chat(user, SPAN_WARNING("\The [src] pulls at \the [item] but it's attached to you."))
+		return
 	user.visible_message(
-		SPAN_WARNING("\The [user] reaches out \a [O] to \the [src], warping briefly as it disappears in a flash of blue light, scintillating motes left behind."),
-		SPAN_DANGER("You touch \the [src] with \a [O], the field buckling around it before retracting with a crackle as it leaves small, blue scintillas on your hand as you flinch away."),
+		SPAN_WARNING("\The [user] reaches out \a [item] to \the [src], warping briefly as it disappears in a flash of blue light, scintillating motes left behind."),
+		SPAN_DANGER("You touch \the [src] with \the [item], the field buckling around it before retracting with a crackle as it leaves small, blue scintillas on your hand as you flinch away."),
 		SPAN_WARNING("You hear an otherwordly crackle, followed by humming.")
 	)
+	qdel(item)
 	if (prob(5))
 		playsound(loc, 'sound/items/eatfood.ogg', 40)		//Yum
 	else
 		playsound(loc, 'sound/machines/BSD_interact.ogg', 40)
-	user.drop_from_inventory(O)
-	qdel(O)
 
 
 /obj/machinery/bluespacedrive/examine(mob/user, distance)
