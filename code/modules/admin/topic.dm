@@ -875,6 +875,9 @@
 				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as text|null)
 				if(!reason)
 					return
+				if (QDELETED(M))
+					to_chat(usr, SPAN_DANGER("The mob you are banning no longer exists."))
+					return
 				var/mob_key = LAST_CKEY(M)
 				if(mob_key != given_key)
 					to_chat(usr, SPAN_DANGER("This mob's occupant has changed from [given_key] to [mob_key]. Please try again."))
@@ -899,6 +902,9 @@
 				if(!check_rights(R_BAN))   return
 				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as text|null)
 				if(!reason)
+					return
+				if (QDELETED(M))
+					to_chat(usr, SPAN_DANGER("The mob you are banning no longer exists."))
 					return
 				var/mob_key = LAST_CKEY(M)
 				if(mob_key != given_key)

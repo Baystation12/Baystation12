@@ -100,10 +100,6 @@
 	name = "jetpack"
 	var/obj/item/rig/holder
 
-/obj/item/tank/jetpack/rig/examine()
-	. = ..()
-	CRASH("A [name] was examined")
-
 /obj/item/tank/jetpack/rig/allow_thrust(num, mob/living/user as mob)
 
 	if(!(src.on))

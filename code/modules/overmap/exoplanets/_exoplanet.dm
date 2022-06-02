@@ -104,6 +104,8 @@ GLOBAL_VAR(planet_repopulation_disabled)
 
 	for (var/T in subtypesof(/datum/map_template/ruin/exoplanet))
 		var/datum/map_template/ruin/exoplanet/ruin = T
+		if (initial(ruin.template_flags) & TEMPLATE_FLAG_RUIN_STARTS_DISALLOWED)
+			continue
 		if (ruin_tags_whitelist && !(ruin_tags_whitelist & initial(ruin.ruin_tags)))
 			continue
 		if (ruin_tags_blacklist & initial(ruin.ruin_tags))

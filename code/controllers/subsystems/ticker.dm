@@ -42,6 +42,9 @@ SUBSYSTEM_DEF(ticker)
 
 	var/static/list/votable_modes = list()
 
+	/// True when the game is over.
+	var/static/game_over = FALSE
+
 
 /datum/controller/subsystem/ticker/Initialize(start_uptime)
 	pregame_timeleft = config.pre_game_time SECONDS
@@ -205,7 +208,7 @@ SUBSYSTEM_DEF(ticker)
 		if(END_GAME_READY_TO_END)
 			end_game_state = END_GAME_ENDING
 			callHook("roundend")
-			if (universe_has_ended)
+			if (game_over)
 				if(!delay_end)
 					to_world("<span class='notice'><b>Rebooting due to destruction of [station_name()] in [restart_timeout/10] seconds</b></span>")
 
@@ -461,7 +464,7 @@ Helpers
 	if(config.continous_rounds)
 		return evacuation_controller.round_over() || mode.station_was_nuked
 	else
-		return mode.check_finished() || (evacuation_controller.round_over() && evacuation_controller.emergency_evacuation) || universe_has_ended
+		return mode.check_finished() || (evacuation_controller.round_over() && evacuation_controller.emergency_evacuation) || game_over
 
 /datum/controller/subsystem/ticker/proc/mode_finished()
 	if (forced_end)

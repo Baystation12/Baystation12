@@ -5474,7 +5474,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/obj/machinery/atmospherics/binary/pump/on{
+	name = "port thrust pump"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/atmos)
 "mB" = (
@@ -8545,7 +8547,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/obj/machinery/atmospherics/binary/pump/on{
+	name = "starboard thrust pump"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/fuel)
 "sC" = (
