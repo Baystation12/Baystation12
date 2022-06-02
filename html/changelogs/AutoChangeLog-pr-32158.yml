@@ -1,5 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - bugfix: Planet sites that are flagged disallowed actually obey it; Icarus and
-      Hydrobase don't spawn.
