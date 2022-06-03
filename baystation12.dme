@@ -1203,8 +1203,6 @@
 #include "code\game\verbs\who.dm"
 #include "code\js\byjax.dm"
 #include "code\js\menus.dm"
-#include "code\modules\TGS\tgs.dm"
-#include "code\modules\TGS\tgs\includes.dm"
 #include "code\modules\acting\acting_items.dm"
 #include "code\modules\admin\admin.dm"
 #include "code\modules\admin\admin_attack_log.dm"
@@ -3067,6 +3065,8 @@
 #include "code\modules\tables\tables.dm"
 #include "code\modules\tables\update_triggers.dm"
 #include "code\modules\tension\tension.dm"
+#include "code\modules\TGS\tgs.dm"
+#include "code\modules\TGS\tgs\includes.dm"
 #include "code\modules\turbolift\_turbolift.dm"
 #include "code\modules\turbolift\turbolift.dm"
 #include "code\modules\turbolift\turbolift_areas.dm"
@@ -3221,6 +3221,5 @@
 #include "proxima\code\music_player\_music_tape.dm"
 #include "proxima\code\music_player\subtypes_player.dm"
 #include "proxima\code\music_player\subtypes_tape.dm"
-
 #include "~code\global_init.dm"
 // END_INCLUDE

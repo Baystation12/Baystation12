@@ -338,3 +338,7 @@
 
 /decl/emote/visible/salute
 	emote_sound = 'sound/effects/salute.ogg'
+
+/decl/emote/visible/adjust
+	key = "adjust"
+	emote_message_3p = "USER поправляет снаряжение"
