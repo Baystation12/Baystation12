@@ -18,6 +18,19 @@
 			else
 				F.BeginInjecting()
 		return TOPIC_REFRESH
+	
+	if(href_list["global_rate"])
+		if(!lan || !fuel_injectors)
+			return TOPIC_NOACTION
+		var/new_injection_rate = input("Enter a new injection rate between 1 and 100. This will affect all injectors!", "Modifying injection rate") as num
+		for(var/obj/machinery/fusion_fuel_injector/F in fuel_injectors)
+			if(!istype(F))
+				return TOPIC_NOACTION
+			if(!new_injection_rate)
+				to_chat(user, SPAN_WARNING("That's not a valid injection rate."))
+				return TOPIC_NOACTION
+			F.injection_rate = clamp(new_injection_rate, 0, 100) / 100
+		return TOPIC_REFRESH
 
 	if(href_list["toggle_injecting"] || href_list["injection_rate"])
 		var/obj/machinery/fusion_fuel_injector/I = locate((href_list["toggle_injecting"] || href_list["machine"]))
@@ -31,7 +44,7 @@
 				I.BeginInjecting()
 
 		if(href_list["injection_rate"])
-			var/new_injection_rate = input("Enter a new injection rate between 0 and 100", "Modifying injection rate", I.injection_rate) as num
+			var/new_injection_rate = input("Enter a new injection rate between 1 and 100.", "Modifying injection rate", I.injection_rate) as num
 			if(!istype(I))
 				return TOPIC_NOACTION
 			if(!new_injection_rate)
