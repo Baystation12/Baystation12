@@ -57,12 +57,13 @@
 				/obj/item/weldingtool/largetank,
 				/obj/item/crowbar,
 				/obj/item/wrench,
-				/obj/item/device/flashlight)
+				/obj/item/device/flashlight,
+				/obj/item/device/flashlight/upgraded)
 
 /obj/random/technology_scanner
 	name = "random scanner"
 	desc = "This is a random technology scanner."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/atmos_analyzer.dmi'
 	icon_state = "atmos"
 
 /obj/random/technology_scanner/spawn_choices()
@@ -274,7 +275,9 @@
 	icon_state = "revolver"
 
 /obj/random/projectile/spawn_choices()
-	return list(/obj/item/gun/projectile/heavysniper/boltaction = 4,
+	return list(/obj/item/gun/projectile/automatic/battlerifle = 4,
+				/obj/item/gun/projectile/sniper/garand = 4,
+				/obj/item/gun/projectile/sniper/semistrip = 4,
 				/obj/item/gun/projectile/shotgun/pump = 3,
 				/obj/item/gun/projectile/automatic/merc_smg = 2,
 				/obj/item/gun/projectile/automatic/assault_rifle = 2,
@@ -291,7 +294,8 @@
 				/obj/item/gun/projectile/shotgun/doublebarrel/sawn = 3,
 				/obj/item/gun/projectile/heavysniper = 1,
 				/obj/item/gun/projectile/shotgun/pump/combat = 2,
-				/obj/item/gun/projectile/pistol/throwback = 1)
+				/obj/item/gun/projectile/pistol/throwback = 1,
+				/obj/item/gun/projectile/pistol/broomstick = 1)
 
 /obj/random/handgun
 	name = "Random Handgun"
@@ -305,7 +309,8 @@
 				/obj/item/gun/projectile/pistol/military/alt = 1,
 				/obj/item/gun/projectile/pistol/holdout = 2,
 				/obj/item/gun/energy/retro = 1,
-				/obj/item/gun/projectile/pistol/throwback = 1)
+				/obj/item/gun/projectile/pistol/throwback = 1,
+				/obj/item/gun/projectile/pistol/broomstick = 1)
 
 /obj/random/ammo
 	name = "Random Ammunition"
@@ -317,6 +322,7 @@
 	return list(/obj/item/storage/box/ammo/beanbags = 6,
 				/obj/item/storage/box/ammo/shotgunammo = 2,
 				/obj/item/storage/box/ammo/shotgunshells = 4,
+				/obj/item/storage/box/ammo/flechetteshells = 2,
 				/obj/item/storage/box/ammo/stunshells = 1,
 				/obj/item/ammo_magazine/pistol = 2,
 				/obj/item/ammo_magazine/smg_top = 2,
@@ -425,15 +431,15 @@
 				/obj/item/remains/robot)
 
 
-obj/random/closet //A couple of random closets to spice up maint
+/obj/random/closet //A couple of random closets to spice up maint
 	name = "random closet"
 	desc = "This is a random closet."
 	icon = 'icons/obj/closets/bases/closet.dmi'
 	icon_state = "base"
 	var/vermin_chance = 5
 	var/list/locker_vermin = list(
-		/mob/living/simple_animal/mouse,
-		/mob/living/simple_animal/opossum,
+		/mob/living/simple_animal/passive/mouse,
+		/mob/living/simple_animal/passive/opossum,
 		/mob/living/carbon/alien/diona
 	)
 
@@ -523,14 +529,14 @@ obj/random/closet //A couple of random closets to spice up maint
 
 /obj/random/tank/spawn_choices()
 	return list(/obj/item/tank/oxygen = 5,
-				/obj/item/tank/oxygen/yellow = 4,
-				/obj/item/tank/emergency/oxygen/double/red = 4,
+				/obj/item/tank/oxygen_yellow = 4,
+				/obj/item/tank/oxygen_scba = 4,
 				/obj/item/tank/air = 3,
-				/obj/item/tank/emergency/oxygen = 4,
-				/obj/item/tank/emergency/oxygen/engi = 3,
-				/obj/item/tank/emergency/oxygen/double = 2,
-				/obj/item/tank/emergency/nitrogen = 2,
-				/obj/item/tank/emergency/nitrogen/double = 1,
+				/obj/item/tank/oxygen_emergency = 4,
+				/obj/item/tank/oxygen_emergency_extended = 3,
+				/obj/item/tank/oxygen_emergency_double = 2,
+				/obj/item/tank/nitrogen_emergency = 2,
+				/obj/item/tank/nitrogen_emergency_double = 1,
 				/obj/item/tank/nitrogen = 1,
 				/obj/item/device/suit_cooling_unit = 1)
 
@@ -570,13 +576,13 @@ obj/random/closet //A couple of random closets to spice up maint
 				/obj/item/reagent_containers/spray/cleaner = 2,
 				/obj/item/grenade/chem_grenade/cleaner = 1)
 
-obj/random/obstruction //Large objects to block things off in maintenance
+/obj/random/obstruction //Large objects to block things off in maintenance
 	name = "random obstruction"
 	desc = "This is a random obstruction."
 	icon = 'icons/obj/cult.dmi'
 	icon_state = "cultgirder"
 
-obj/random/obstruction/spawn_choices()
+/obj/random/obstruction/spawn_choices()
 	return list(/obj/structure/barricade,
 				/obj/structure/girder,
 				/obj/structure/girder/displaced,
@@ -623,7 +629,8 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/device/flashlight/flare/glowstick/yellow,
 				/obj/item/device/flashlight/flare/glowstick/orange,
 				/obj/item/grenade/light,
-				/obj/item/device/oxycandle)
+				/obj/item/device/oxycandle,
+				/obj/item/device/flashlight/upgraded)
 
 /obj/random/smokes
 	name = "random smokeable"
@@ -700,32 +707,39 @@ obj/random/obstruction/spawn_choices()
 	icon_state = "idOld"
 
 /obj/random/storage/spawn_choices()
-	return list(/obj/item/storage/secure/briefcase = 2,
-				/obj/item/storage/briefcase = 4,
-				/obj/item/storage/briefcase/inflatable = 3,
-				/obj/item/storage/backpack = 5,
-				/obj/item/storage/backpack/satchel = 5,
-				/obj/item/storage/backpack/dufflebag = 2,
-				/obj/item/storage/box = 5,
-				/obj/item/storage/box/donkpockets = 3,
-				/obj/item/storage/box/sinpockets = 1,
-				/obj/item/storage/box/donut = 2,
-				/obj/item/storage/box/cups = 3,
-				/obj/item/storage/box/mousetraps = 4,
-				/obj/item/storage/box/engineer = 3,
-				/obj/item/storage/box/autoinjectors = 2,
-				/obj/item/storage/box/beakers = 3,
-				/obj/item/storage/box/syringes = 3,
-				/obj/item/storage/box/gloves = 3,
-				/obj/item/storage/box/large = 2,
-				/obj/item/storage/box/glowsticks = 3,
-				/obj/item/storage/wallet = 1,
-				/obj/item/storage/ore = 2,
-				/obj/item/storage/belt/utility/full = 2,
-				/obj/item/storage/belt/medical/emt = 2,
-				/obj/item/storage/belt/medical = 2,
-				/obj/item/storage/belt/holster/security = 2,
-				/obj/item/storage/belt/holster/security/tactical = 1)
+	return list(
+		/obj/item/storage/secure/briefcase = 3,
+		/obj/item/storage/briefcase = 5,
+		/obj/item/storage/briefcase/inflatable = 4,
+		/obj/item/storage/backpack = 6,
+		/obj/item/storage/backpack/satchel = 6,
+		/obj/item/storage/backpack/dufflebag = 3,
+		/obj/item/storage/box = 6,
+		/obj/item/storage/box/donkpocket_mixed = 2,
+		/obj/item/storage/box/donkpocket_protein = 1,
+		/obj/item/storage/box/donkpocket_vegetable = 1,
+		/obj/item/storage/box/donkpocket_fruit = 1,
+		/obj/item/storage/box/donkpocket_dessert = 1,
+		/obj/item/storage/box/donkpocket_premium = 1,
+		/obj/item/storage/box/donut = 3,
+		/obj/item/storage/box/cups = 4,
+		/obj/item/storage/box/mousetraps = 5,
+		/obj/item/storage/box/engineer = 4,
+		/obj/item/storage/box/autoinjectors = 3,
+		/obj/item/storage/box/beakers = 4,
+		/obj/item/storage/box/syringes = 4,
+		/obj/item/storage/box/gloves = 4,
+		/obj/item/storage/box/large = 3,
+		/obj/item/storage/box/glowsticks = 4,
+		/obj/item/storage/wallet = 2,
+		/obj/item/storage/ore = 3,
+		/obj/item/storage/belt/utility/full = 3,
+		/obj/item/storage/belt/medical/emt = 3,
+		/obj/item/storage/belt/medical = 3,
+		/obj/item/storage/belt/holster/security = 3,
+		/obj/item/storage/belt/holster/security/tactical = 2
+	)
+
 
 /obj/random/shoes
 	name = "random footwear"
@@ -793,9 +807,9 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/clothing/glasses/hud/health/prescription = 3,
 				/obj/item/clothing/glasses/hud/security = 4,
 				/obj/item/clothing/glasses/hud/security/prescription = 3,
-				/obj/item/clothing/glasses/sunglasses/sechud = 2,
-				/obj/item/clothing/glasses/sunglasses/sechud/toggle = 3,
-				/obj/item/clothing/glasses/sunglasses/sechud/goggles = 1,
+				/obj/item/clothing/glasses/hud/security/prot = 2,
+				/obj/item/clothing/glasses/hud/security/prot/sunglasses = 3,
+				/obj/item/clothing/glasses/hud/security/prot/aviators = 1,
 				/obj/item/clothing/glasses/tacgoggles = 1)
 
 /obj/random/hat
@@ -877,6 +891,30 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/clothing/accessory/storage/holster/armpit = 1,
 				/obj/item/clothing/accessory/kneepads = 3,
 				/obj/item/clothing/accessory/stethoscope = 2)
+
+GLOBAL_LIST_INIT(random_backpacks, list(
+	/obj/item/storage/backpack/cultpack,
+	/obj/item/storage/backpack/clown,
+	/obj/item/storage/backpack/medic,
+	/obj/item/storage/backpack/security,
+	/obj/item/storage/backpack/security/exo,
+	/obj/item/storage/backpack/command,
+	/obj/item/storage/backpack/industrial,
+	/obj/item/storage/backpack/toxins,
+	/obj/item/storage/backpack/hydroponics,
+	/obj/item/storage/backpack/genetics,
+	/obj/item/storage/backpack/virology,
+	/obj/item/storage/backpack/chemistry
+))
+
+/obj/random/backpack
+	name = "random backpack"
+	desc = "This is a random backpack."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "backpack"
+
+/obj/random/backpack/spawn_choices()
+	return GLOB.random_backpacks
 
 /obj/random/cash
 	name = "random currency"
@@ -1030,7 +1068,9 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/clothing/head/helmet/space/void/atmos/alt,
 				/obj/item/clothing/head/helmet/space/void/merc,
 				/obj/item/clothing/head/helmet/space/void/medical,
-				/obj/item/clothing/head/helmet/space/void/medical/alt)
+				/obj/item/clothing/head/helmet/space/void/medical/alt,
+				/obj/item/clothing/head/helmet/space/void/retro
+			)
 
 /obj/random/voidsuit
 	name = "Random Voidsuit"
@@ -1051,7 +1091,9 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/clothing/suit/space/void/atmos/alt,
 				/obj/item/clothing/suit/space/void/merc,
 				/obj/item/clothing/suit/space/void/medical,
-				/obj/item/clothing/suit/space/void/medical/alt)
+				/obj/item/clothing/suit/space/void/medical/alt,
+				/obj/item/clothing/suit/space/void/retro
+			)
 
 /obj/random/hardsuit
 	name = "Random Hardsuit"
@@ -1074,16 +1116,15 @@ something, make sure it's not in one of the other lists.*/
 	icon_state = "crow"
 	spawn_nothing_percentage = 80
 
-obj/random/hostile/spawn_choices()
+/obj/random/hostile/spawn_choices()
 	return list(/mob/living/simple_animal/hostile/viscerator,
 				/mob/living/simple_animal/hostile/carp,
-				/mob/living/simple_animal/hostile/carp/pike,
-				/mob/living/simple_animal/hostile/vagrant/swarm)
+				/mob/living/simple_animal/hostile/carp/pike)
 
 /*
 	Selects one spawn point out of a group of points with the same ID and asks it to generate its items
 */
-var/list/multi_point_spawns
+var/global/list/multi_point_spawns
 
 /obj/random_multi
 	name = "random object spawn point"
@@ -1146,8 +1187,8 @@ var/list/multi_point_spawns
 	id = "Maint Skeleton"
 	item_path = /obj/structure/skele_stand/maint
 
-var/list/random_junk_
-var/list/random_useful_
+var/global/list/random_junk_
+var/global/list/random_useful_
 /proc/get_random_useful_type()
 	if(!random_useful_)
 		random_useful_ = list()

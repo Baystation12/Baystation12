@@ -78,3 +78,60 @@
 		beaker = I
 		user.visible_message("<span class='notice'>\The [user] adds \a [I] to \the [src].</span>", "<span class='notice'>You add \a [I] to \the [src].</span>")
 
+/obj/item/mech_equipment/mender
+	name = "exosuit medigel spray"
+	desc = "An exosuit-mounted matrix of medical gel nozzles and radiation emitters designed to treat wounds before transporting patient."
+	icon_state = "mech_mender"
+	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
+	restricted_software = list(MECH_SOFTWARE_MEDICAL)
+	active_power_use = 0 //Usage doesn't really require power. It's per wound
+	origin_tech = list(TECH_DATA = 2, TECH_BIO = 3)
+	var/list/apply_sounds = list('sound/effects/spray.ogg', 'sound/effects/spray2.ogg', 'sound/effects/spray3.ogg')
+
+/obj/item/mech_equipment/mender/afterattack(atom/target, mob/living/user, inrange, params)
+	. = ..()
+	if(.)
+		if (istype(target, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = target
+			var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
+
+			if(affecting.is_bandaged() && affecting.is_disinfected() && affecting.is_salved())
+				to_chat(user, SPAN_WARNING("The wounds on \the [H]'s [affecting.name] have already been treated."))
+				return
+			else
+				if(!LAZYLEN(affecting.wounds))
+					return
+				owner.visible_message(SPAN_NOTICE("\The [owner] extends \the [src] towards \the [H]'s [affecting.name]."))
+				var/large_wound = FALSE
+				for (var/datum/wound/W as anything in affecting.wounds)
+					if (W.bandaged && W.disinfected && W.salved)
+						continue
+					var/delay = (W.damage / 4) * user.skill_delay_mult(SKILL_MEDICAL, 0.8)
+					owner.setClickCooldown(delay)
+					if(!do_after(user, delay, target))
+						break
+
+					var/obj/item/cell/C = owner.get_cell()
+					if(istype(C))
+						C.use(0.01 KILOWATTS) //Does cost power, so not a freebie, specially with large amount of wounds
+					else
+						return //Early out, cell is gone
+
+					if (W.current_stage <= W.max_bleeding_stage)
+						owner.visible_message(SPAN_NOTICE("\The [owner] covers \a [W.desc] on \the [H]'s [affecting.name] with large globs of medigel."))
+						large_wound = TRUE
+					else if (W.damage_type == INJURY_TYPE_BRUISE)
+						owner.visible_message(SPAN_NOTICE("\The [owner] sprays \a [W.desc] on \the [H]'s [affecting.name] with a fine layer of medigel."))
+					else
+						owner.visible_message(SPAN_NOTICE("\The [owner] drizzles some medigel over \a [W.desc] on \the [H]'s [affecting.name]."))
+					playsound(owner, pick(apply_sounds), 20)
+					W.bandage()
+					W.disinfect()
+					W.salve()
+					if (H.stat == UNCONSCIOUS && prob(25))
+						to_chat(H, SPAN_NOTICE(SPAN_BOLD("... [pick("feels better", "hurts less")] ...")))
+				if(large_wound)
+					owner.visible_message(SPAN_NOTICE("\The [src]'s UV matrix glows faintly as it cures the medigel."))
+					playsound(owner, 'sound/items/Welder2.ogg', 10)
+				affecting.update_damages()
+				H.update_bandages(TRUE)

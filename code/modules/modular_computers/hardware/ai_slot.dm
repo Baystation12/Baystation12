@@ -1,10 +1,10 @@
-// A wrapper that allows the computer to contain an inteliCard.
+/// A wrapper that allows the computer to contain an inteliCard.
 /obj/item/stock_parts/computer/ai_slot
 	name = "inteliCard slot"
 	desc = "An IIS interlink with connection uplinks that allow the device to interface with most common inteliCard models. Too large to fit into tablets. Uses a lot of power when active."
 	icon_state = "aislot"
 	hardware_size = 1
-	critical = 0
+	critical = FALSE
 	power_usage = 100
 	origin_tech = list(TECH_POWER = 2, TECH_DATA = 3)
 	external_slot = TRUE
@@ -19,9 +19,9 @@
 		power_usage = power_usage_occupied
 	..()
 
-/obj/item/stock_parts/computer/ai_slot/attackby(var/obj/item/W, var/mob/user)
+/obj/item/stock_parts/computer/ai_slot/attackby(obj/item/W, mob/user)
 	if(..())
-		return 1
+		return TRUE
 	if(istype(W, /obj/item/aicard))
 		if(stored_card)
 			to_chat(user, "\The [src] is already occupied.")
@@ -30,9 +30,10 @@
 			return
 		do_insert_ai(user, W)
 		return TRUE
-	if(isScrewdriver(W))
+	if(isScrewdriver(W) && stored_card)
 		to_chat(user, "You manually remove \the [stored_card] from \the [src].")
 		do_eject_ai(user)
+		return TRUE
 
 /obj/item/stock_parts/computer/ai_slot/Destroy()
 	if(stored_card)

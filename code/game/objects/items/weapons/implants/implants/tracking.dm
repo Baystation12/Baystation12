@@ -29,18 +29,11 @@
 /obj/item/implant/tracking/Topic(href, href_list)
 	..()
 	if (href_list["tracking_id"])
-		id = Clamp(id+text2num(href_list["tracking_id"]), 1, 100)
+		id = clamp(id+text2num(href_list["tracking_id"]), 1, 100)
 		interact(usr)
 
 /obj/item/implant/tracking/islegal()
 	return TRUE
-
-/obj/item/implant/tracking/emp_act(severity)
-	var/power = 4 - severity
-	if(prob(power * 15))
-		meltdown()
-	else if(prob(power * 40))
-		disable(rand(power*500,power*5000))//adds in extra time because this is the only other way to sabotage it
 
 /obj/item/implantcase/tracking
 	name = "glass case - 'tracking'"

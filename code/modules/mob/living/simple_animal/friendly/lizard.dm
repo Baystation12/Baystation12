@@ -1,4 +1,4 @@
-/mob/living/simple_animal/lizard
+/mob/living/simple_animal/passive/lizard
 	name = "lizard"
 	desc = "A cute tiny lizard."
 	icon = 'icons/mob/simple_animal/critter.dmi'
@@ -12,6 +12,7 @@
 	response_help  = "pets"
 	response_disarm = "shoos"
 	response_harm   = "stomps on"
+	holder_type = /obj/item/holder/small
 	mob_size = MOB_MINISCULE
 	possession_candidate = 1
 	can_escape = TRUE

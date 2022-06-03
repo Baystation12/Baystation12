@@ -8,6 +8,9 @@
 /datum/fabricator_recipe/engineering/firealarm
 	path = /obj/item/firealarm_electronics
 
+/datum/fabricator_recipe/engineering/intercom
+	path = /obj/item/intercom_electronics
+
 /datum/fabricator_recipe/engineering/powermodule
 	path = /obj/item/module/power_control
 

@@ -77,6 +77,7 @@ GLOBAL_DATUM_INIT(traitors, /datum/antagonist/traitor, new)
 			R.SetLockdown(0)
 			R.emagged = TRUE // Provides a traitor robot with its module's emag item
 			R.verbs |= /mob/living/silicon/robot/proc/ResetSecurityCodes
+			R.status_flags &= ~CANWEAKEN // Apply optical matrix protection (Flash resistance)
 		return 1
 
 	if(!..())
@@ -85,15 +86,24 @@ GLOBAL_DATUM_INIT(traitors, /datum/antagonist/traitor, new)
 	spawn_uplink(traitor_mob)
 	give_intel(traitor_mob)
 
+/datum/antagonist/traitor/unequip(mob/living/carbon/human/player)
+	if (istype(player, /mob/living/silicon/robot))
+		var/mob/living/silicon/robot/R = player
+		if (!R.flash_protected)
+			R.status_flags &= ~CANWEAKEN
+		return TRUE
+
+	return ..()
+
 /datum/antagonist/traitor/proc/give_intel(mob/living/traitor_mob)
 	give_codewords(traitor_mob)
 
 /datum/antagonist/traitor/proc/give_codewords(mob/living/traitor_mob)
 	to_chat(traitor_mob, "<u><b>Your employers provided you with the following information on how to identify possible allies:</b></u>")
-	to_chat(traitor_mob, "<b>Code Phrase</b>: <span class='danger'>[syndicate_code_phrase]</span>")
-	to_chat(traitor_mob, "<b>Code Response</b>: <span class='danger'>[syndicate_code_response]</span>")
-	traitor_mob.StoreMemory("<b>Code Phrase</b>: [syndicate_code_phrase]", /decl/memory_options/system)
-	traitor_mob.StoreMemory("<b>Code Response</b>: [syndicate_code_response]", /decl/memory_options/system)
+	to_chat(traitor_mob, "<b>Code Phrase</b>: <span class='danger'>[GLOB.antag_code_phrase]</span>")
+	to_chat(traitor_mob, "<b>Code Response</b>: <span class='danger'>[GLOB.antag_code_response]</span>")
+	traitor_mob.StoreMemory("<b>Code Phrase</b>: [GLOB.antag_code_phrase]", /decl/memory_options/system)
+	traitor_mob.StoreMemory("<b>Code Response</b>: [GLOB.antag_code_response]", /decl/memory_options/system)
 	to_chat(traitor_mob, "Use the code words, preferably in the order provided, during regular conversation, to identify other agents. Proceed with caution, however, as everyone is a potential foe.")
 
 /datum/antagonist/traitor/proc/spawn_uplink(var/mob/living/carbon/human/traitor_mob)

@@ -1,4 +1,4 @@
-/var/lighting_overlays_initialised = FALSE
+var/global/lighting_overlays_initialised = FALSE
 
 SUBSYSTEM_DEF(lighting)
 	name = "Lighting"
@@ -32,18 +32,25 @@ SUBSYSTEM_DEF(lighting)
 	var/tmp/processed_corners = 0
 	var/tmp/processed_overlays = 0
 
-/datum/controller/subsystem/lighting/stat_entry()
-	var/list/out = list("Queued:{L:[light_queue.len] C:[corner_queue.len] O:[overlay_queue.len]}")
-	for (var/stype in stats_lists)
-		out += "[stype] updates: [jointext(stats_lists[stype], " | ")]"
+/datum/controller/subsystem/lighting/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..({"\
+		Queues: \
+		Source [light_queue.len] \
+		Corner [corner_queue.len] \
+		Overlay [overlay_queue.len]\n\
+		Source Updates [length(stats_lists["Source"])]\n\
+		Corner Updates [length(stats_lists["Corner"])]\n\
+		Overlay Updates [length(stats_lists["Overlay"])]\
+	"})
 
-	..(out.Join("\n"))
 
-/datum/controller/subsystem/lighting/Initialize()
+/datum/controller/subsystem/lighting/Initialize(start_uptime)
 	InitializeTurfs()
 	lighting_overlays_initialised = TRUE
 	fire(FALSE, TRUE)
-	..()
+
 
 // It's safe to pass a list of non-turfs to this list - it'll only check turfs.
 /datum/controller/subsystem/lighting/proc/InitializeTurfs(list/targets)

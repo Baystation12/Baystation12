@@ -226,6 +226,15 @@
 	glass_name = "cabbage juice"
 	glass_desc = "It's a health drink, apparently."
 
+/datum/reagent/drink/juice/lettuce
+	name = "Lettuce Juice"
+	description = "It's mostly water, just a bit more lettucy"
+	taste_description = "fresh greens"
+	color = "#29df4b"
+
+	glass_name = "lettuce juice"
+	glass_desc = "This is just lettuce water. Fresh but boring."
+
 // Everything else
 
 /datum/reagent/drink/milk
@@ -936,12 +945,12 @@
 	description = "A refreshing cola in vanilla flavour."
 	taste_description = "vanilla cola"
 	reagent_state = LIQUID
-	color = "#100800"
+	color = "#55381b"
 	adj_drowsy = -3
 	adj_temp = -5
 
-	glass_name = "Space Cola"
-	glass_desc = "A glass of refreshing Space Cola"
+	glass_name = "Vanilla Cola"
+	glass_desc = "A glass of refreshing Space Cola with hints of vanilla."
 	glass_special = list(DRINK_FIZZ)
 
 /datum/reagent/drink/orange_cola
@@ -949,12 +958,12 @@
 	description = "A refreshing cola in orange flavour."
 	taste_description = "orange cola"
 	reagent_state = LIQUID
-	color = "#100800"
+	color = "#a86017"
 	adj_drowsy = -3
 	adj_temp = -5
 
-	glass_name = "Space Cola"
-	glass_desc = "A glass of refreshing Space Cola"
+	glass_name = "Orange Cola"
+	glass_desc = "A glass of refreshing Space Cola with orange flavoring."
 	glass_special = list(DRINK_FIZZ)
 
 /datum/reagent/drink/cherry_cola
@@ -962,12 +971,12 @@
 	description = "A refreshing cola in cherry flavour."
 	taste_description = "cherry cola"
 	reagent_state = LIQUID
-	color = "#100800"
+	color = "#641010"
 	adj_drowsy = -3
 	adj_temp = -5
 
-	glass_name = "Space Cola"
-	glass_desc = "A glass of refreshing Space Cola"
+	glass_name = "Cherry Cola"
+	glass_desc = "A glass of refreshing Space Cola with cherry flavoring."
 	glass_special = list(DRINK_FIZZ)
 
 /datum/reagent/drink/coffee/coffee_cola
@@ -975,7 +984,7 @@
 	description = "There are people in town, man, crazy people in town."
 	taste_description = "coffee and cola"
 	reagent_state = LIQUID
-	color = "#100800"
+	color = "#3b240c"
 	adj_drowsy = -3
 	adj_temp = -5
 
@@ -992,8 +1001,8 @@
 	adj_drowsy = -3
 	adj_temp = -5
 
-	glass_name = "Space Cola"
-	glass_desc = "A glass of refreshing Space Cola"
+	glass_name = "Diet Cola"
+	glass_desc = "A glass of refreshing Space Cola. This one's calorie-free!"
 	glass_special = list(DRINK_FIZZ)
 
 /datum/reagent/drink/ionbru

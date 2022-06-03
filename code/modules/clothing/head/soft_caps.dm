@@ -9,6 +9,8 @@
 	var/flipped = 0
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
+	species_restricted = list("exclude")
+
 
 /obj/item/clothing/head/soft/New()
 	..()

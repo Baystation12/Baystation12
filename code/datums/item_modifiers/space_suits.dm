@@ -67,7 +67,7 @@
 		/obj/item/clothing/head/helmet/space = list(
 			SETUP_NAME = "excavation voidsuit helmet",
 			SETUP_ICON_STATE = "rig0-excavation",
-			SETUP_ITEM_STATE = "excavation_helm"
+			SETUP_ITEM_STATE = "excavation-helm"
 		),
 		/obj/item/clothing/suit/space/void = list(
 			SETUP_NAME = "excavation voidsuit",
@@ -174,12 +174,12 @@
 	type_setups = list(
 		/obj/item/clothing/head/helmet/space = list(
 			SETUP_NAME = "exploration voidsuit helmet",
-			SETUP_ICON_STATE = "helm_explorer",
-			SETUP_ITEM_STATE = "helm_explorer"
+			SETUP_ICON_STATE = "rig0_explorer",
+			SETUP_ITEM_STATE = "explorer_helm"
 		),
 		/obj/item/clothing/suit/space/void = list(
 			SETUP_NAME = "exploration voidsuit",
-			SETUP_ICON_STATE = "void_explorer",
+			SETUP_ICON_STATE = "rig_explorer",
 			SETUP_ITEM_STATE_SLOTS = list(
 				slot_l_hand_str = "s_suit",
 				slot_r_hand_str = "s_suit"
@@ -240,6 +240,24 @@
 			SETUP_ITEM_STATE_SLOTS = list(
 				slot_l_hand_str = "eng_voidsuit",
 				slot_r_hand_str = "eng_voidsuit"
+			)
+		)
+	)
+
+/decl/item_modifier/space_suit/command
+	name = "Command"
+	type_setups = list(
+		/obj/item/clothing/head/helmet/space = list(
+			SETUP_NAME = "command voidsuit helmet",
+			SETUP_ICON_STATE = "rig0_command",
+			SETUP_ITEM_STATE = "command_helm"
+		),
+		/obj/item/clothing/suit/space/void = list(
+			SETUP_NAME = "command voidsuit",
+			SETUP_ICON_STATE = "rig_command",
+			SETUP_ITEM_STATE_SLOTS = list(
+				slot_l_hand_str = "s_suit",
+				slot_r_hand_str = "s_suit"
 			)
 		)
 	)

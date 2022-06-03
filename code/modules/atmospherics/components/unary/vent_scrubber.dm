@@ -76,11 +76,12 @@
 	var/scrubber_icon = "scrubber"
 	if(welded)
 		scrubber_icon += "weld"
+	else if (!powered() || !use_power)
+		scrubber_icon += "off"
+	else if(scrubbing == SCRUBBER_SIPHON)
+		scrubber_icon += "in"
 	else
-		if(!powered())
-			scrubber_icon += "off"
-		else
-			scrubber_icon += "[use_power ? "[scrubbing ? "on" : "in"]" : "off"]"
+		scrubber_icon += "on"
 
 	overlays += icon_manager.get_atmos_icon("device", , , scrubber_icon)
 
@@ -218,7 +219,7 @@
 		to_chat(user, "<span class='notice'>Now welding \the [src].</span>")
 		playsound(src, 'sound/items/Welder.ogg', 50, 1)
 
-		if(!do_after(user, 20, src))
+		if(!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>You must remain close to finish this task.</span>")
 			return 1
 

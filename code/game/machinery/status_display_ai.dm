@@ -6,7 +6,7 @@
 	overlay = over
 	ckey = key
 
-var/list/ai_status_emotions = list(
+var/global/list/ai_status_emotions = list(
 	"Very Happy" 				= new /datum/ai_emotion("ai_veryhappy"),
 	"Happy" 					= new /datum/ai_emotion("ai_happy"),
 	"Neutral" 					= new /datum/ai_emotion("ai_neutral"),

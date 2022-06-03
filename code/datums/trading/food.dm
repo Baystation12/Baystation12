@@ -24,10 +24,9 @@
 				TRADER_BRIBE_FAILURE     = "Uh... thanks for the cash, sir. As long as you're in the area, we'll be here...",
 				)
 
-/datum/trader/pizzaria/trade(var/list/offers, var/num, var/turf/location)
+/datum/trader/pizzaria/trade_quantity(quantity, list/offers, num, turf/location)
 	. = ..()
-	if(.)
-		var/atom/movable/M = .
+	for (var/atom/movable/M in .)
 		var/obj/item/pizzabox/box = new(location)
 		M.forceMove(box)
 		box.pizza = M
@@ -46,7 +45,6 @@
 							/obj/item/reagent_containers/food/snacks/slice/xenomeatbread/filled = TRADER_THIS_TYPE,
 							/obj/item/reagent_containers/food/snacks/soydope                    = TRADER_THIS_TYPE,
 							/obj/item/reagent_containers/food/snacks/stewedsoymeat              = TRADER_THIS_TYPE,
-							/obj/item/reagent_containers/food/snacks/wingfangchu                = TRADER_THIS_TYPE,
 							/obj/item/reagent_containers/food/drinks/dry_ramen                  = TRADER_THIS_TYPE
 							)
 
@@ -80,8 +78,9 @@
 				TRADER_BRIBE_SUCCESS      = "Oh yes! I think I'll stay a few more minutes, then.",
 				)
 
-/datum/trader/ship/chinese/trade(var/list/offers, var/num, var/turf/location)
+/datum/trader/ship/chinese/trade_quantity(quantity, list/offers, num, turf/location)
 	. = ..()
+	quantity = 1
 	if(.)
 		var/obj/item/reagent_containers/food/snacks/fortunecookie/cookie = new(location)
 		var/obj/item/paper/paper = new(cookie)

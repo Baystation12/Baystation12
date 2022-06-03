@@ -14,7 +14,7 @@ Random item spawning
 				/obj/item/clothing/head/soft/solgov/fleet = 4,
 				/obj/item/clothing/head/helmet/solgov = 1,
 				/obj/item/clothing/suit/storage/vest/solgov = 2,
-				/obj/item/clothing/under/solgov/utility = 5,
+				/obj/item/clothing/under/solgov/utility/expeditionary = 5,
 				/obj/item/clothing/under/solgov/utility/fleet = 3,
 				/obj/item/clothing/under/solgov/pt/expeditionary = 4,
 				/obj/item/clothing/under/solgov/pt/fleet = 4
@@ -59,11 +59,19 @@ Torch specific items
 	name = "explorer backpack"
 	desc = "A rugged backpack."
 	icon_state = "exppack"
+	item_state_slots = list(
+		slot_l_hand_str = "exppack",
+		slot_r_hand_str = "exppack",
+		)
 
 /obj/item/storage/backpack/satchel/explorer
 	name = "explorer satchel"
 	desc = "A rugged satchel for field work."
 	icon_state = "satchel-exp"
+	item_state_slots = list(
+		slot_l_hand_str = "satchel-exp",
+		slot_r_hand_str = "satchel-exp",
+		)
 
 /obj/item/storage/backpack/messenger/explorer
 	name = "explorer messenger bag"
@@ -95,10 +103,6 @@ Unique items
 /******
 Weapons
 ******/
-
-/obj/item/gun/energy/gun/small/secure/corporate
-	desc = "An access-locked EXO-branded LAEP90-CS. It's designed to please paranoid corporate liaisons. Body cam not included."
-	req_access = list(access_liaison)
 
 /obj/item/gun/projectile/revolver/medium/captain
 	name = "\improper Final Argument"

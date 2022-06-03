@@ -16,7 +16,7 @@
 	dat += " | <a href='?src=\ref[src];reset=1'>Reset</a>"
 	dat += "<HR>"
 	dat += "<table border='1' style='width:100%;border-collapse:collapse;'>"
-	dat += "<tr><th style='text-align:left;'>Time</th><th style='text-align:left;'>Attacker</th><th style='text-align:left;'>Intent</th><th style='text-align:left;'>Victim</th></tr>"
+	dat += "<tr><th style='text-align:left;'>Time</th><th style='text-align:left;'>Attacker</th><th style='text-align:left;'>Intent</th><th style='text-align:left;'>Zone Sel</th><th style='text-align:left;'>Victim</th></tr>"
 
 	for(var/log in attack_log_repository.attack_logs_)
 		var/datum/attack_log/al = log
@@ -32,13 +32,15 @@
 
 		dat += "<td>[al.intent]</td>"
 
+		dat += "<td>[al.zone_sel]</td>"
+
 		if(al.victim)
 			dat += "<td>[al.victim.key_name(check_if_offline = FALSE)] <a HREF='?_src_=holder;adminplayeropts=[al.victim.ref]'>PP</a></td>"
 		else
 			dat += "<td></td>"
 
 		dat += "</tr>"
-		dat += "<tr><td colspan=4>[al.message]"
+		dat += "<tr><td colspan=5>[al.message]"
 		if(al.location)
 			dat += " <a HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[al.location.x];Y=[al.location.y];Z=[al.location.z]'>JMP</a>"
 		dat += "</td></tr>"

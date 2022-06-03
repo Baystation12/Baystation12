@@ -9,7 +9,7 @@
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
 	build_type = PROTOLATHE
 	materials = list(MATERIAL_STEEL = 400, MATERIAL_GLASS = 100)
-	build_path = /obj/item/stock_parts/computer/hard_drive/
+	build_path = /obj/item/stock_parts/computer/hard_drive
 	sort_string = "VBAAA"
 
 /datum/design/item/modularcomponent/disk/advanced
@@ -219,6 +219,15 @@
 	build_path = /obj/item/stock_parts/computer/scanner/medical
 	sort_string = "VBADI"
 
+/datum/design/item/modularcomponent/accessory/robotic_scanner
+	name = "robotic scanner module"
+	id = "scan_robotic"
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2, TECH_MAGNET = 2, TECH_BIO = 1)
+	build_type = PROTOLATHE
+	materials = list(MATERIAL_STEEL = 600, MATERIAL_GLASS = 200)
+	build_path = /obj/item/stock_parts/computer/scanner/robotic
+	sort_string = "VBADJ"
+
 // Batteries
 /datum/design/item/modularcomponent/battery/AssembleDesignName()
 	..()
@@ -283,7 +292,7 @@
 	..()
 	name = "CPU design ([item_name])"
 
-/datum/design/item/modularcomponent/cpu/
+/datum/design/item/modularcomponent/cpu
 	name = "computer processor unit"
 	id = "cpu_normal"
 	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2)

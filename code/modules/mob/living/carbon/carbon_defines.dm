@@ -1,4 +1,4 @@
-/mob/living/carbon/
+/mob/living/carbon
 	gender = MALE
 	var/datum/species/species //Contains icon generation and language information, set during New().
 

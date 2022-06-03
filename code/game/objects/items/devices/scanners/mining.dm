@@ -7,6 +7,7 @@
 /obj/item/device/scanner/mining
 	name = "ore detector"
 	desc = "A complex device used to locate ore deep underground."
+	icon = 'icons/obj/ore_analyzer.dmi'
 	icon_state = "ore"
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 	use_delay = 50
@@ -126,7 +127,7 @@
 			if(76 to INFINITY) result = "huge quantities"
 
 		scandata += "- [result] of [ore_type]."
-	
+
 	return list(jointext(scandata, "<br>"), new_data)
 
 #undef  ORE_SURFACE

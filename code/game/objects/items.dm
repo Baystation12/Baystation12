@@ -7,7 +7,6 @@
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/randpixel = 6
 	var/r_speed = 1.0
-	var/health = null
 	var/burn_point = null
 	var/burning = null
 	var/hitsound = "swing_hit"
@@ -88,6 +87,7 @@
 
 	var/attack_ignore_harm_check = FALSE
 
+
 /obj/item/New()
 	..()
 	if(randpixel && (!pixel_x && !pixel_y) && isturf(loc)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
@@ -115,9 +115,6 @@
 		storage.on_item_post_deletion(src) // must be done after deletion
 	else
 		return ..()
-
-/obj/item/device
-	icon = 'icons/obj/device.dmi'
 
 //Checks if the item is being held by a mob, and if so, updates the held icons
 /obj/item/proc/update_twohanding()
@@ -154,13 +151,14 @@
 	return FALSE
 
 /obj/item/ex_act(severity)
+	..()
 	switch(severity)
-		if(1)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
-		if(2)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
-		if(3)
+		if(EX_ACT_LIGHT)
 			if (prob(5))
 				qdel(src)
 
@@ -207,7 +205,7 @@
 	if (!user) return
 	if (anchored)
 		return ..()
-	if (hasorgans(user))
+	if (ishuman(user))
 		var/mob/living/carbon/human/H = user
 		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
 		if (user.hand)
@@ -334,7 +332,7 @@
 		M.r_hand.update_twohanding()
 
 //Defines which slots correspond to which slot flags
-var/list/global/slot_flags_enumeration = list(
+var/global/list/slot_flags_enumeration = list(
 	"[slot_wear_mask]" = SLOT_MASK,
 	"[slot_back]" = SLOT_BACK,
 	"[slot_wear_suit]" = SLOT_OCLOTHING,
@@ -519,11 +517,10 @@ var/list/global/slot_flags_enumeration = list(
 //Otherwise should return 0 to indicate that the attack is not affected in any way.
 /obj/item/proc/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	var/parry_chance = get_parry_chance(user)
-	if(attacker)
-		parry_chance = max(0, parry_chance - 10 * attacker.get_skill_difference(SKILL_COMBAT, user))
 	if(parry_chance)
 		if(default_parry_check(user, attacker, damage_source) && prob(parry_chance))
 			user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
+			admin_attack_log(attacker, user, "Attempted to attack with \a [damage_source] but was parried", "Was targeted with \a [damage_source] but parried the attack", "attmpted to use \a [damage_source] to attack but was parried by")
 			playsound(user.loc, 'sound/weapons/punchmiss.ogg', 50, 1)
 			on_parry(damage_source)
 			return 1
@@ -534,9 +531,10 @@ var/list/global/slot_flags_enumeration = list(
 
 /obj/item/proc/get_parry_chance(mob/user)
 	. = base_parry_chance
-	if(user)
-		if(base_parry_chance || user.skill_check(SKILL_COMBAT, SKILL_ADEPT))
-			. += 10 * (user.get_skill_value(SKILL_COMBAT) - SKILL_BASIC)
+	if (user.a_intent == I_HELP)
+		. = 0
+	if (.)
+		. += clamp((user.get_skill_value(SKILL_COMBAT) * 10) - 20, 0, 75)
 
 /obj/item/proc/on_disarm_attempt(mob/target, mob/living/attacker)
 	if(force < 1)
@@ -545,13 +543,14 @@ var/list/global/slot_flags_enumeration = list(
 		return 0
 	attacker.apply_damage(force, damtype, attacker.hand ? BP_L_HAND : BP_R_HAND, used_weapon = src)
 	attacker.visible_message("<span class='danger'>[attacker] hurts \his hand on [src]!</span>")
+	admin_attack_log(attacker, target, "Attempted to disarm but was blocked", "Was targeted with a disarm but blocked the attack", "attmpted to disarm but was blocked by")
 	playsound(target, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 	playsound(target, hitsound, 50, 1, -1)
 	return 1
 
 /obj/item/proc/get_loc_turf()
 	var/atom/L = loc
-	while(L && !istype(L, /turf/))
+	while(L && !isturf(L))
 		L = L.loc
 	return loc
 
@@ -698,24 +697,22 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return
 
 	var/devicename = zoomdevicename || name
-
+	var/is_distracted = FALSE
 	var/mob/living/carbon/human/H = user
+
 	if(user.incapacitated(INCAPACITATION_DISABLED))
 		to_chat(user, "<span class='warning'>You are unable to focus through the [devicename].</span>")
 		return
 	else if(!zoom && istype(H) && H.equipment_tint_total >= TINT_MODERATE)
-		to_chat(user, "<span class='warning'>Your visor gets in the way of looking through the [devicename].</span>")
+		to_chat(user, "<span class='warning'>Your eyewear gets in the way of looking through the [devicename].</span>")
 		return
-	else if(!zoom && user.get_active_hand() != src)
-		to_chat(user, "<span class='warning'>You are too distracted to look through the [devicename], perhaps if it was in your active hand this might work better.</span>")
+	if (H) // Humans can zoom through items they wear on their eyes
+		is_distracted = !zoom && H.get_active_hand() != src && H.get_equipped_item(slot_glasses) != src
+	else
+		is_distracted = !zoom && user.get_active_hand() != src
+	if(is_distracted)
+		to_chat(user, SPAN_WARNING("You are too distracted to look through the [devicename]. Perhaps if it was in your active hand this might work better."))
 		return
-
-	if(user.hud_used.hud_shown)
-		user.toggle_zoom_hud()	// If the user has already limited their HUD this avoids them having a HUD when they zoom in
-	user.client.view = viewsize
-	if(istype(H))
-		H.handle_vision()
-	zoom = 1
 
 	var/viewoffset = WORLD_ICON_SIZE * tileoffset
 	switch(user.dir)
@@ -732,16 +729,26 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			user.client.pixel_x = -viewoffset
 			user.client.pixel_y = 0
 
-	user.visible_message("\The [user] peers through [zoomdevicename ? "the [zoomdevicename] of [src]" : "[src]"].")
+	if(user.hud_used.hud_shown)
+		user.toggle_zoom_hud()	// If the user has already limited their HUD this avoids them having a HUD when they zoom in
+	if(istype(H))
+		H.handle_vision()
+
+	user.client.view = viewsize
+	zoom = 1
 
 	GLOB.destroyed_event.register(src, src, /obj/item/proc/unzoom)
-	GLOB.moved_event.register(src, src, /obj/item/proc/unzoom)
-	GLOB.dir_set_event.register(src, src, /obj/item/proc/unzoom)
-	GLOB.item_unequipped_event.register(src, src, /obj/item/proc/zoom_drop)
+	GLOB.moved_event.register(user, src, /obj/item/proc/unzoom)
+	GLOB.dir_set_event.register(user, src, /obj/item/proc/unzoom)
+	GLOB.item_unequipped_event.register(src, user, /mob/living/proc/unzoom)
+
 	GLOB.stat_set_event.register(user, src, /obj/item/proc/unzoom)
 
-/obj/item/proc/zoom_drop(var/obj/item/I, var/mob/user)
-	unzoom(user)
+	user.visible_message("\The [user] peers through [zoomdevicename ? "the [zoomdevicename] of [src]" : "[src]"].")
+
+/mob/living/proc/unzoom(var/obj/item/I)
+	if(I)
+		I.unzoom(src)
 
 /obj/item/proc/unzoom(var/mob/user)
 	if(!zoom)
@@ -749,9 +756,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	zoom = 0
 
 	GLOB.destroyed_event.unregister(src, src, /obj/item/proc/unzoom)
-	GLOB.moved_event.unregister(src, src, /obj/item/proc/unzoom)
-	GLOB.dir_set_event.unregister(src, src, /obj/item/proc/unzoom)
-	GLOB.item_unequipped_event.unregister(src, src, /obj/item/proc/zoom_drop)
+	GLOB.moved_event.unregister(user, src, /obj/item/proc/unzoom)
+	GLOB.dir_set_event.unregister(user, src, /obj/item/proc/unzoom)
+	GLOB.item_unequipped_event.unregister(src, user, /mob/living/proc/unzoom)
 
 	user = user == src ? loc : (user || loc)
 	if(!istype(user))
@@ -889,3 +896,21 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/attack_message_name()
 	return "\a [src]"
+
+
+/// Optional delay for /mob/living/carbon/human/equip_to_slot_if_possible to do_after before succeeding
+/obj/item/var/equip_delay
+
+
+/// Flags to use for do_after when equip_delay is set
+/obj/item/var/equip_delay_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS
+
+
+/// Virtual for behavior to do before do_after if equip_delay is set
+/obj/item/proc/equip_delay_before(mob/user, slot, equip_flags)
+	return
+
+
+/// Virtual for behavior to do after successful do_after if equip_delay is set
+/obj/item/proc/equip_delay_after(mob/user, slot, equip_flags)
+	return

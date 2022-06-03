@@ -203,7 +203,7 @@
 	display_name = "killer tomato plant"
 	mutants = null
 	can_self_harvest = TRUE
-	has_mob_product = /mob/living/simple_animal/tomato
+	has_mob_product = /mob/living/simple_animal/passive/tomato
 
 /datum/seed/tomato/killer/New()
 	..()
@@ -403,7 +403,7 @@
 	display_name = "walking mushrooms"
 	mutants = null
 	can_self_harvest = TRUE
-	has_mob_product = /mob/living/simple_animal/mushroom
+	has_mob_product = /mob/living/simple_animal/passive/mushroom
 
 /datum/seed/mushroom/plump/walking/New()
 	..()
@@ -613,7 +613,7 @@
 	name = "grapes"
 	seed_name = "grape"
 	display_name = "grapevines"
-	mutants = list("greengrapes")
+	mutants = list("greengrapes","whitegrapes")
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/sugar = list(1,5), /datum/reagent/drink/juice/grape = list(10,10))
 
 /datum/seed/grapes/New()
@@ -639,7 +639,7 @@
 
 /datum/seed/grapes/green/New()
 	..()
-	set_trait(TRAIT_PRODUCT_COLOUR,"42ed2f")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#42ed2f")
 
 //Everything else
 /datum/seed/peanuts
@@ -697,6 +697,29 @@
 	set_trait(TRAIT_PRODUCT_ICON,"cabbage")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#84bd82")
 	set_trait(TRAIT_PLANT_COLOUR,"#6d9c6b")
+	set_trait(TRAIT_PLANT_ICON,"vine2")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
+
+/datum/seed/lettuce
+	name = "lettuce"
+	seed_name = "lettuce"
+	display_name = "lettuce"
+	chems = list(/datum/reagent/nutriment = list(1,5), /datum/reagent/drink/juice/lettuce = list (2, 4))
+	kitchen_tag = "lettuce"
+	fruit_size = ITEM_SIZE_NORMAL
+
+/datum/seed/lettuce/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,2)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"lettuce")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#59ca42")
+	set_trait(TRAIT_PLANT_COLOUR,"#4fcb5b")
 	set_trait(TRAIT_PLANT_ICON,"vine2")
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
@@ -1228,6 +1251,12 @@
 	mutants = list("tobacco")
 	chems = list(/datum/reagent/tobacco/bad = list(1,10))
 
+/datum/seed/tobacco/bad/New()
+	..()
+	set_trait(TRAIT_PRODUCT_COLOUR,"#8c8626")
+	set_trait(TRAIT_PLANT_COLOUR,"#8c8626")
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.1)
+
 /datum/seed/algae
 	name = "algae"
 	seed_name = "algae"
@@ -1276,6 +1305,50 @@
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
+/datum/seed/resin
+	name = "resinplant"
+	seed_name = "resin plant"
+	display_name = "resin plant"
+	chems = list(/datum/reagent/resinpulp = list(6,1))
+	mutants = null
+	exude_gasses = list(null)
+
+/datum/seed/resin/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,1)
+	set_trait(TRAIT_YIELD,5)
+	set_trait(TRAIT_POTENCY,1)
+	set_trait(TRAIT_PRODUCT_COLOUR,"#3a4e1b")
+	set_trait(TRAIT_PLANT_COLOUR,"#5e41be")
+	set_trait(TRAIT_PRODUCT_ICON,"resin")
+	set_trait(TRAIT_PLANT_ICON,"resin")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+
+/datum/seed/breather
+	name = "breather"
+	seed_name = "breather"
+	display_name = "breather"
+	chems = list(
+		/datum/reagent/nutriment = list(2,12),
+		/datum/reagent/ammonia = list(3,8)
+	)
+	exude_gasses = list(GAS_NITROGEN = 3)
+
+/datum/seed/breather/New()
+	..()
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"breather")
+	set_trait(TRAIT_PLANT_ICON,"breather")
+	set_trait(TRAIT_WATER_CONSUMPTION, 4)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 1)
+	set_trait(TRAIT_LIGHT_TOLERANCE, 6)
+
 // Fruit Expansion
 
 /datum/seed/melon
@@ -1321,7 +1394,7 @@
 
 /datum/seed/grapes/white
 	name = "whitegrapes"
-	seed_name = "white grape seeds"
+	seed_name = "white grape"
 	display_name = "white grapevines"
 	mutants = list("grapes","greengrapes")
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/sugar = list(1,5), /datum/reagent/drink/juice/grape/white = list(10,10))

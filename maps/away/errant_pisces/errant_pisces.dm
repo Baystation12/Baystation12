@@ -16,70 +16,6 @@
 	spawn_cost = 1
 	area_usage_test_exempted_root_areas = list(/area/errant_pisces)
 
-/mob/living/simple_animal/hostile/carp/shark // generally stronger version of a carp that doesn't die from a mean look. Fance new sprites included, credits to F-Tang Steve
-	name = "cosmoshark"
-	desc = "Enormous creature that resembles a shark with magenta glowing lines along its body and set of long deep-purple teeth."
-	icon = 'maps/away/errant_pisces/errant_pisces_sprites.dmi'
-	icon_state = "shark"
-	icon_living = "shark"
-	icon_dead = "shark_dead"
-	icon_gib = "shark_dead"
-	turns_per_move = 5
-	meat_type = /obj/item/reagent_containers/food/snacks/sharkmeat
-	speed = 2
-	maxHealth = 100
-	health = 100
-	harm_intent_damage = 5
-	natural_weapon = /obj/item/natural_weapon/bite/strong
-	break_stuff_probability = 35
-	faction = "shark"
-
-/mob/living/simple_animal/hostile/carp/shark/carp_randomify()
-	return
-
-/mob/living/simple_animal/hostile/carp/shark/on_update_icon()
-	return
-
-/mob/living/simple_animal/hostile/carp/shark/death()
-	..()
-	var/datum/gas_mixture/environment = loc.return_air()
-	if (environment)
-		var/datum/gas_mixture/sharkmaw_phoron = new
-		sharkmaw_phoron.adjust_gas(GAS_PHORON,  10)
-		environment.merge(sharkmaw_phoron)
-		visible_message("<span class='warning'>\The [src]'s body releases some gas from the gills with a quiet fizz!</span>")
-
-/mob/living/simple_animal/hostile/carp/shark/AttackingTarget()
-	set waitfor = 0//to deal with sleep() possibly stalling other procs
-	. =..()
-	var/mob/living/L = .
-	if(istype(L))
-		if(prob(25))//if one is unlucky enough, they get tackled few tiles away
-			L.visible_message("<span class='danger'>\The [src] tackles [L]!</span>")
-			var/tackle_length = rand(3,5)
-			for (var/i = 1 to tackle_length)
-				var/turf/T = get_step(L.loc, dir)//on a first step of tackling standing mob would block movement so let's check if there's something behind it. Works for consequent moves too
-				if (T.density || LinkBlocked(L.loc, T) || TurfBlockedNonWindow(T) || DirBlocked(T, GLOB.flip_dir[dir]))
-					break
-				sleep(2)
-				forceMove(T)//maybe there's better manner then just forceMove() them
-				L.forceMove(T)
-			visible_message("<span class='danger'>\The [src] releases [L].</span>")
-
-/obj/item/reagent_containers/food/snacks/sharkmeat
-	name = "cosmoshark fillet"
-	desc = "A fillet of cosmoshark meat."
-	icon_state = "fishfillet"
-	filling_color = "#cecece"
-	center_of_mass = "x=17;y=13"
-
-/obj/item/reagent_containers/food/snacks/sharkmeat/New()
-	..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
-	reagents.add_reagent(/datum/reagent/space_drugs, 1)
-	reagents.add_reagent(/datum/reagent/toxin/phoron, 1)
-	src.bitesize = 8
-
 
 /obj/structure/net//if you want to have fun, make them to be draggable as a whole unless at least one piece is attached to a non-space turf or anchored object
 	name = "industrial net"
@@ -90,7 +26,7 @@
 	layer = CATWALK_LAYER//probably? Should cover cables, pipes and the rest of objects that are secured on the floor
 	var/health = 100
 
-obj/structure/net/Initialize(var/mapload)
+/obj/structure/net/Initialize(var/mapload)
 	. = ..()
 	update_connections()
 	if (!mapload)//if it's not mapped object but rather created during round, we should update visuals of adjacent net objects
@@ -118,7 +54,7 @@ obj/structure/net/Initialize(var/mapload)
 			return
 		visible_message("<span class='warning'>[user] starts to cut through \the [src] with \the [W]!</span>")
 		while (health > 0)
-			if (!do_after(user, 20, src))
+			if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 				visible_message("<span class='warning'>[user] stops cutting through \the [src] with \the [W]!</span>")
 				return
 			health -= 20 * (1 + (SH.force-10)/10)//the sharper the faster, every point of force above 10 adds 10 % to damage
@@ -128,7 +64,7 @@ obj/structure/net/Initialize(var/mapload)
 
 /obj/structure/net/bullet_act(obj/item/projectile/P)
 	. = PROJECTILE_CONTINUE //few cloth ribbons won't stop bullet or energy ray
-	if(P.damage_type != BURN)//beams, lasers, fire. Bullets won't make a lot of damage to the few hanging belts.
+	if (P.damage_type != DAMAGE_BURN)//beams, lasers, fire. Bullets won't make a lot of damage to the few hanging belts.
 		return
 	visible_message("<span class='warning'>\The [P] hits \the [src] and tears it!</span>")
 	health -= P.damage
@@ -180,7 +116,6 @@ obj/structure/net/Initialize(var/mapload)
 	throw_range = 10
 	matter = list("cloth" = 1875, "plasteel" = 350)
 	max_amount = 30
-	center_of_mass = null
 	attack_verb = list("hit", "bludgeoned", "whacked")
 	lock_picking_level = 3
 
@@ -226,7 +161,7 @@ obj/structure/net/Initialize(var/mapload)
 	if (amount < 1)
 		qdel(src)
 
-/obj/item/clothing/under/carp//as far as I know sprites are taken from /tg/
+/obj/item/clothing/under/carp
 	name = "space carp suit"
 	desc = "A suit in a shape of a space carp. Usually worn by corporate interns who are sent to entertain children during HQ excursions."
 	icon_state = "carp_suit"

@@ -1,14 +1,21 @@
-/var/global/sent_spiders_to_station = 0
+var/global/sent_spiders_to_station = 0
 
 /datum/event/spider_infestation
 	announceWhen	= 90
 	var/spawncount = 1
+	var/guaranteed_to_grow = 0
 
 
 /datum/event/spider_infestation/setup()
+	var/list/active_with_role = number_active_with_role()
 	announceWhen = rand(announceWhen, announceWhen + 60)
-	spawncount = rand(3 * severity, 5 * severity)	//spiderlings only have a 50% chance to grow big and strong
-	sent_spiders_to_station = 0
+	if (severity <= EVENT_LEVEL_MODERATE)
+		spawncount = 3 * severity
+	else
+		spawncount = 5 * severity
+	spawncount = min(spawncount, round(active_with_role["Any"] / 2))
+	guaranteed_to_grow = max(round(rand(spawncount / 3, spawncount / 2)), severity <= EVENT_LEVEL_MODERATE ? 3 : 5)
+	sent_spiders_to_station = TRUE
 
 /datum/event/spider_infestation/announce()
 	GLOB.using_map.unidentified_lifesigns_announcement()
@@ -22,6 +29,10 @@
 
 	while((spawncount >= 1) && vents.len)
 		var/obj/vent = pick(vents)
-		new /obj/effect/spider/spiderling(vent.loc)
+		if (guaranteed_to_grow > 0)
+			new /obj/effect/spider/spiderling/growing(vent.loc)
+			guaranteed_to_grow--
+		else
+			new /obj/effect/spider/spiderling(vent.loc)
 		vents -= vent
 		spawncount--

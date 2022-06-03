@@ -33,14 +33,11 @@
 						return FALSE
 	return TRUE
 
+
 /obj/item/clothing/attackby(obj/item/I, mob/user)
-	if (istype(I, /obj/item/clothing/accessory))
-		if (can_attach_accessory(I, user) && user.unEquip(I))
-			attach_accessory(user, I)
+	if (attempt_attach_accessory(I, user))
 		return
-	if (length(accessories))
-		for (var/obj/item/clothing/accessory/A in accessories)
-			A.attackby(I, user)
+	if (attempt_store_item(I, user))
 		return
 	..()
 
@@ -63,20 +60,20 @@
 	if (usr.incapacitated())
 		return
 
-	if (!usr.unEquip(src))
-		return
-
 	switch(over_object.name)
 		if("r_hand")
-			usr.put_in_r_hand(src)
+			if (usr.unEquip(src))
+				usr.put_in_r_hand(src)
 		if("l_hand")
-			usr.put_in_l_hand(src)
+			if (usr.unEquip(src))
+				usr.put_in_l_hand(src)
 	src.add_fingerprint(usr)
 
 /obj/item/clothing/examine(mob/user)
 	. = ..()
 	for(var/obj/item/clothing/accessory/A in accessories)
-		to_chat(user, "[icon2html(A, user)] \A [A] is attached to it.")
+		if (!(A.accessory_flags & ACCESSORY_HIDDEN))
+			to_chat(user, "[icon2html(A, user)] \A [A] is attached to it.")
 	switch(ironed_state)
 		if(WRINKLES_WRINKLY)
 			to_chat(user, "<span class='bad'>It's wrinkly.</span>")
@@ -87,7 +84,7 @@
 			to_chat(user, "<span class='notice'>It smells clean!</span>")
 		if(SMELL_STINKY)
 			to_chat(user, "<span class='bad'>It's quite stinky!</span>")
-	
+
 
 /obj/item/clothing/proc/update_accessory_slowdown()
 	slowdown_accessory = 0
@@ -103,7 +100,7 @@
 /obj/item/clothing/proc/attach_accessory(mob/user, obj/item/clothing/accessory/A)
 	accessories += A
 	A.on_attached(src, user)
-	if(A.removable)
+	if (A.accessory_flags & ACCESSORY_REMOVABLE)
 		src.verbs |= /obj/item/clothing/proc/removetie_verb
 	update_accessory_slowdown()
 	update_clothing_icon()
@@ -117,6 +114,51 @@
 	update_accessory_slowdown()
 	update_clothing_icon()
 
+
+/obj/item/clothing/proc/attempt_attach_accessory(obj/item/I, mob/user)
+	if (!istype(I, /obj/item/clothing/accessory))
+		return FALSE
+	if (can_attach_accessory(I, user) && user.unEquip(I))
+		attach_accessory(user, I)
+		return TRUE
+	if (length(accessories))
+		for (var/obj/item/clothing/accessory/A in accessories)
+			if (A.attempt_attach_accessory(I, user))
+				return TRUE
+	return FALSE
+
+
+/obj/item/clothing/accessory/storage/proc/can_be_inserted(obj/item/I, mob/user, silent)
+	return container?.can_be_inserted(I, user, silent)
+
+
+/obj/item/clothing/accessory/storage/proc/handle_item_insertion(obj/item/I, silent, no_update)
+	return container?.handle_item_insertion(I, silent, no_update)
+
+
+/obj/item/clothing/proc/attempt_store_item(obj/item/I, mob/user, silent)
+	for (var/obj/item/clothing/accessory/storage/S in accessories)
+		if (S.can_be_inserted(I, user, TRUE) && S.handle_item_insertion(I, silent))
+			return TRUE
+	return FALSE
+
+
+/obj/item/clothing/suit/storage/attempt_store_item(obj/item/I, mob/user, silent)
+	if (pockets?.can_be_inserted(I, user, TRUE) && pockets.handle_item_insertion(I, silent))
+		return TRUE
+	return ..()
+
+
+/obj/item/clothing/accessory/storage/holster/can_be_inserted(obj/item/I, mob/user, silent)
+	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
+	return H?.can_holster(I)
+
+
+/obj/item/clothing/accessory/storage/holster/handle_item_insertion(obj/item/I, silent, no_update)
+	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
+	return H.holster(I, usr)
+
+
 /obj/item/clothing/proc/removetie_verb()
 	set name = "Remove Accessory"
 	set category = "Object"
@@ -127,7 +169,7 @@
 	var/obj/item/clothing/accessory/A
 	var/list/removables = list()
 	for(var/obj/item/clothing/accessory/ass in accessories)
-		if(ass.removable)
+		if (ass.accessory_flags & ACCESSORY_REMOVABLE)
 			removables |= ass
 	if(accessories.len > 1)
 		A = input("Select an accessory to remove from [src]") as null|anything in removables

@@ -23,12 +23,15 @@
 
 /datum/event/radiation_storm/start()
 	..()
-	GLOB.using_map.make_maint_all_access(1)
+	GLOB.using_map.make_maint_all_access(TRUE)
 
 /datum/event/radiation_storm/tick()
 	if(activeFor == enterBelt)
 		command_announcement.Announce("The [location_name()] has entered the radiation belt. Please remain in a sheltered area until the all clear is given.", "[location_name()] Sensor Array", zlevels = affecting_z)
-		radiate()
+		if(prob(66))
+			radiate()
+		else
+			postStartTicks -= rand(5,30)
 
 	if(activeFor >= enterBelt && activeFor <= leaveBelt)
 		postStartTicks++
@@ -53,7 +56,7 @@
 			continue
 		if(istype(C,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = C
-			if(prob(5 * (1 - H.get_blocked_ratio(null, IRRADIATE, damage_flags = DAM_DISPERSED, armor_pen = radiation_level))))
+			if(prob(5 * (1 - H.get_blocked_ratio(null, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED, armor_pen = radiation_level))))
 				if (prob(75))
 					randmutb(H) // Applies bad mutation
 					domutcheck(H,null,MUTCHK_FORCED)
@@ -62,7 +65,7 @@
 					domutcheck(H,null,MUTCHK_FORCED)
 
 /datum/event/radiation_storm/end()
-	GLOB.using_map.revoke_maint_all_access(1)
+	GLOB.using_map.revoke_maint_all_access(TRUE)
 
 /datum/event/radiation_storm/syndicate/radiate()
 	return

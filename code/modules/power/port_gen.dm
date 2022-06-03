@@ -85,22 +85,23 @@
 /obj/machinery/power/port_gen/emp_act(severity)
 	if(!active)
 		return
-	var/duration = 6000 //ten minutes
+	var/duration
 	switch(severity)
-		if(1)
+		if(EMP_ACT_HEAVY)
 			stat &= BROKEN
 			if(prob(75)) explode()
-		if(2)
+			else duration = 10 MINUTES
+		if(EMP_ACT_LIGHT)
 			if(prob(25)) stat &= BROKEN
 			if(prob(10)) explode()
-		if(3)
-			if(prob(10)) stat &= BROKEN
-			duration = 300
+			else duration = 30 SECONDS
 
-	stat |= EMPED
 	if(duration)
-		spawn(duration)
-			stat &= ~EMPED
+		stat |= EMPED
+		addtimer(CALLBACK(src, .proc/resolve_emp_timer), duration)
+
+/obj/machinery/power/port_gen/proc/resolve_emp_timer()
+	stat &= ~EMPED
 
 /obj/machinery/power/port_gen/proc/explode()
 	explosion(src.loc, -1, 3, 5, -1)
@@ -113,7 +114,7 @@
 /obj/machinery/power/port_gen/pacman
 	name = "\improper P.A.C.M.A.N.-type Portable Generator"
 	desc = "A power generator that runs on solid phoron sheets. Rated for 80 kW max safe output."
-	
+
 	machine_name = "\improper PACMAN-type generator"
 	machine_desc = "A portable generator often used for backup power or running small spacecraft. Runs on solid phoron sheets; rated for 80 kW max safe output."
 
@@ -157,9 +158,9 @@
 	var/temp_rating = total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
 	temp_rating += total_component_rating_of_type(/obj/item/stock_parts/capacitor)
 
-	max_sheets = 50 * Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 5) ** 2
+	max_sheets = 50 * clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 5) ** 2
 
-	power_gen = round(initial(power_gen) * Clamp(temp_rating, 0, 20) / 2)
+	power_gen = round(initial(power_gen) * clamp(temp_rating, 0, 20) / 2)
 	..()
 
 /obj/machinery/power/port_gen/pacman/examine(mob/user)
@@ -229,7 +230,7 @@
 	var/average = (upper_limit + lower_limit)/2
 
 	//calculate the temperature increase
-	var/bias = Clamp(round((average - operating_temperature)/TEMPERATURE_DIVISOR, 1),  -TEMPERATURE_CHANGE_MAX, TEMPERATURE_CHANGE_MAX)
+	var/bias = clamp(round((average - operating_temperature)/TEMPERATURE_DIVISOR, 1),  -TEMPERATURE_CHANGE_MAX, TEMPERATURE_CHANGE_MAX)
 	operating_temperature += bias + rand(-7, 7)
 
 	if (operating_temperature > max_temperature)
@@ -248,7 +249,7 @@
 
 	if (operating_temperature > cooling_temperature)
 		var/temp_loss = (operating_temperature - cooling_temperature)/TEMPERATURE_DIVISOR
-		temp_loss = between(2, round(temp_loss, 1), TEMPERATURE_CHANGE_MAX)
+		temp_loss = clamp(round(temp_loss, 1), 2, TEMPERATURE_CHANGE_MAX)
 		operating_temperature = max(operating_temperature - temp_loss, cooling_temperature)
 		src.updateDialog()
 
@@ -505,7 +506,7 @@
 		icon_state = "potatodanger"
 
 /obj/machinery/power/port_gen/pacman/super/potato/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/reagent_containers/))
+	if(istype(O, /obj/item/reagent_containers))
 		var/obj/item/reagent_containers/R = O
 		if(R.standard_pour_into(src,user))
 			if(reagents.has_reagent("vodka"))

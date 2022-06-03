@@ -4,7 +4,7 @@
 	endWhen = 60			// Set in start()
 	has_skybox_image = TRUE
 	var/list/valid_apcs		// Shuffled list of valid APCs.
-	var/global/lightning_color
+	var/static/lightning_color
 
 /datum/event/electrical_storm/get_skybox_image()
 	if(!lightning_color)

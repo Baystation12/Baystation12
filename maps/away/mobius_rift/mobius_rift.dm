@@ -4,7 +4,7 @@
 	name = "unusual asteroid"
 	desc = "Sensors error: ERROR #E0x003141592: recursive stack overflow for CALCULATE_APPROXIMATE_SIZE()."
 	icon_state = "object"
-	known = 0
+	known = FALSE
 
 /datum/map_template/ruin/away_site/mobius_rift
 	name = "Mobius rift"

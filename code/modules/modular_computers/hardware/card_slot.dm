@@ -2,7 +2,7 @@
 	name = "RFID card slot"
 	desc = "Slot that allows this computer to write data on RFID cards. Necessary for some programs to run properly."
 	power_usage = 10 //W
-	critical = 0
+	critical = FALSE
 	icon_state = "cardreader"
 	hardware_size = 1
 	origin_tech = list(TECH_DATA = 2)
@@ -84,7 +84,7 @@
 	loc.verbs -= /obj/item/stock_parts/computer/card_slot/proc/verb_eject_id
 	return TRUE
 
-/obj/item/stock_parts/computer/card_slot/proc/insert_id(var/obj/item/card/id/I, mob/user)
+/obj/item/stock_parts/computer/card_slot/proc/insert_id(obj/item/card/id/I, mob/user)
 	if(!istype(I))
 		return FALSE
 
@@ -116,7 +116,8 @@
 	usage_flags = PROGRAM_PDA
 
 /obj/item/stock_parts/computer/card_slot/Destroy()
-	loc.verbs -= /obj/item/stock_parts/computer/card_slot/proc/verb_eject_id
+	if (loc)
+		loc.verbs -= /obj/item/stock_parts/computer/card_slot/proc/verb_eject_id
 	if(stored_card)
 		QDEL_NULL(stored_card)
 	return ..()

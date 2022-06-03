@@ -30,7 +30,7 @@
 /obj/effect/landmark/clear/Initialize()
 	var/turf/simulated/wall/W = get_turf(src)
 	if(istype(W))
-		W.dismantle_wall(1,1,1)
+		W.dismantle_wall(TRUE, TRUE)
 	var/turf/simulated/mineral/M = W
 	if(istype(M))
 		M.GetDrilled()

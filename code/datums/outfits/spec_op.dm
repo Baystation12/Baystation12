@@ -83,7 +83,7 @@
 	mask = /obj/item/clothing/mask/gas/syndicate
 	head = /obj/item/clothing/head/helmet/space/void/merc
 	back = /obj/item/tank/jetpack/oxygen
-	l_pocket = /obj/item/tank/emergency/oxygen
+	l_pocket = /obj/item/tank/oxygen_emergency
 
 /decl/hierarchy/outfit/foundation
 	name = "Cuchulain Foundation Agent"

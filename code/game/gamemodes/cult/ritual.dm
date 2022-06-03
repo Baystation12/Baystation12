@@ -74,36 +74,36 @@
 	if(has_tome)
 		if(has_robes && cult_ground)
 			self = "Feeling greatly empowered, you slice open your finger and make a rune on the engraved floor. It shifts when your blood touches it, and starts vibrating as you begin to chant the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world."
-			timer = 10
+			timer = 1 SECOND
 			damage = 0.2
 		else if(has_robes)
 			self = "Feeling empowered in your robes, you slice open your finger and start drawing a rune, chanting the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world."
-			timer = 30
+			timer = 3 SECONDS
 			damage = 0.8
 		else if(cult_ground)
 			self = "You slice open your finger and slide it over the engraved floor, watching it shift when your blood touches it. It vibrates when you begin to chant the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world." // Sadly, you don't have access to the bell nor the candelbarum
-			timer = 20
+			timer = 2 SECONDS
 			damage = 0.8
 		else
 			self = "You slice open one of your fingers and begin drawing a rune on the floor whilst chanting the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world."
-			timer = 40
+			timer = 4 SECONDS
 	else
 		self = "Working without your tome, you try to draw the rune from your memory"
 		if(has_robes && cult_ground)
 			self += ". You feel that you remember it perfectly, finishing it with a few bold strokes. The engraved floor shifts under your touch, and vibrates once you begin your chants."
-			timer = 30
+			timer = 3 SECONDS
 		else if(has_robes)
 			self += ". You don't remember it well, but you feel strangely empowered. You begin chanting, the unknown words slipping into your mind from beyond."
-			timer = 50
+			timer = 5 SECONDS
 		else if(cult_ground)
 			self += ", watching as the floor shifts under your touch, correcting the rune. You begin your chants, and the ground starts to vibrate."
-			timer = 40
+			timer = 4 SECONDS
 		else
 			self += ", having to cut your finger two more times before you make it resemble the pattern in your memory. It still looks a little off."
-			timer = 80
+			timer = 8 SECONDS
 			damage = 2
 	visible_message("<span class='warning'>\The [src] slices open a finger and begins to chant and paint symbols on the floor.</span>", "<span class='notice'>[self]</span>", "You hear chanting.")
-	if(do_after(src, timer))
+	if(do_after(src, timer, T, DO_PUBLIC_UNIQUE))
 		remove_blood_simple(cost * damage)
 		if(locate(/obj/effect/rune) in T)
 			return
@@ -153,7 +153,7 @@
 /mob/living/carbon/human/get_rune_color()
 	return species.blood_color
 
-var/list/Tier1Runes = list(
+var/global/list/Tier1Runes = list(
 	/mob/proc/convert_rune,
 	/mob/proc/teleport_rune,
 	/mob/proc/tome_rune,
@@ -167,7 +167,7 @@ var/list/Tier1Runes = list(
 	/mob/proc/reveal
 	)
 
-var/list/Tier2Runes = list(
+var/global/list/Tier2Runes = list(
 	/mob/proc/armor_rune,
 	/mob/proc/offering_rune,
 	/mob/proc/drain_rune,
@@ -175,7 +175,7 @@ var/list/Tier2Runes = list(
 	/mob/proc/massdefile_rune
 	)
 
-var/list/Tier3Runes = list(
+var/global/list/Tier3Runes = list(
 	/mob/proc/weapon_rune,
 	/mob/proc/shell_rune,
 	/mob/proc/bloodboil_rune,
@@ -183,7 +183,7 @@ var/list/Tier3Runes = list(
 	/mob/proc/revive_rune
 )
 
-var/list/Tier4Runes = list(
+var/global/list/Tier4Runes = list(
 	/mob/proc/tearreality_rune
 	)
 

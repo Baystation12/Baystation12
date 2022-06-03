@@ -37,7 +37,7 @@
 	if(istype(H) && H.species.name == SPECIES_ADHERENT)
 		return
 	if(isrobot(user))
-		user.apply_damage(150, BURN, def_zone = BP_CHEST)
+		user.apply_damage(150, DAMAGE_BURN, def_zone = BP_CHEST)
 		visible_message("<span class='danger'>Electricity arcs off [user] as it touches \the [src]!</span>")
 		to_chat(user, "<span class='danger'><b>You detect damage to your components!</b></span>")
 	else

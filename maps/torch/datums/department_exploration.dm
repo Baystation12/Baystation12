@@ -12,7 +12,7 @@
 	description = "Plant the SCG banner on the surface of an exoplanet."
 
 /datum/goal/department/planet_claim/check_success()
-	return (SSstatistics.get_field(STAT_FLAGS_PLANTED) > 0)
+	return GLOB.stat_flags_planted > 0
 
 /datum/goal/department/plant_samples
 	var/seeds
@@ -31,13 +31,12 @@
 
 /datum/goal/department/plant_samples/update_strings()
 	description = "Scan at least [seeds] different plant\s native to exoplanets."
-	
+
 /datum/goal/department/plant_samples/get_summary_value()
-	var/scanned = SSstatistics.get_field(STAT_XENOPLANTS_SCANNED)
-	return " ([scanned ? scanned : 0 ] plant specie\s so far)"
+	return " ([GLOB.stat_flora_scanned] plant specie\s so far)"
 
 /datum/goal/department/plant_samples/check_success()
-	return (SSstatistics.get_field(STAT_XENOPLANTS_SCANNED) >= seeds)
+	return GLOB.stat_flora_scanned >= seeds
 
 /datum/goal/department/fauna_samples
 	var/species
@@ -56,10 +55,9 @@
 
 /datum/goal/department/fauna_samples/update_strings()
 	description = "Scan at least [species] different creature\s native to exoplanets."
-	
+
 /datum/goal/department/fauna_samples/get_summary_value()
-	var/scanned = length(SSstatistics.get_field(STAT_XENOFAUNA_SCANNED))
-	return " ([scanned ? scanned : 0 ] xenofauna specie\s so far)"
+	return " ([GLOB.stat_fauna_scanned.len] xenofauna specie\s so far)"
 
 /datum/goal/department/fauna_samples/check_success()
-	return (length(SSstatistics.get_field(STAT_XENOFAUNA_SCANNED)) >= species)
+	return GLOB.stat_fauna_scanned.len >= species

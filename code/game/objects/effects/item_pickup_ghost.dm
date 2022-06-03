@@ -10,4 +10,10 @@
 /obj/effect/temporary/item_pickup_ghost/proc/animate_towards(var/atom/target)
 	var/new_pixel_x = pixel_x + (target.x - src.x) * 32
 	var/new_pixel_y = pixel_y + (target.y - src.y) * 32
-	animate(src, pixel_x = new_pixel_x, pixel_y = new_pixel_y, transform = matrix()*0, time = lifetime)
+	animate(
+		src,
+		transform = matrix().Update(scale_x = 0, scale_y = 0),
+		pixel_x = new_pixel_x,
+		pixel_y = new_pixel_y,
+		time = lifetime
+	)

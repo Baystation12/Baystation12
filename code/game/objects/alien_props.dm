@@ -8,7 +8,7 @@
 	icon_state = "unknown1"
 	maxcharge = 5000
 	origin_tech = list(TECH_POWER = 7)
-	var/global/base_icon
+	var/static/base_icon
 
 /obj/item/cell/alien/on_update_icon()
 	if(!base_icon)
@@ -55,7 +55,7 @@
 	base_state = "lbulb"
 	desc = "A simple alien device, perhaps some sort of light source."
 	color = COLOR_PURPLE
-	var/global/random_light_color
+	var/static/random_light_color
 
 /obj/item/light/alien/Initialize()
 	. = ..()

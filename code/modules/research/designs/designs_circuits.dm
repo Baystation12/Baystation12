@@ -816,3 +816,26 @@
 	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	build_path = /obj/item/stock_parts/circuitboard/modular_computer
 	sort_string = "XAAAD"
+
+/datum/design/circuit/tele_beacon
+	name = "teleporter beacon"
+	id = "tele_beacon"
+	req_tech = list(
+		TECH_BLUESPACE = 1
+	)
+	build_path = /obj/item/stock_parts/circuitboard/tele_beacon
+	sort_string = "XAAAF"
+
+/datum/design/circuit/bluespacedrive
+	name = "Naophoros-pattern bluespace puncturer"
+	id = "bluespacedrive"
+	req_tech = list(TECH_BLUESPACE = 12, TECH_POWER = 12, TECH_ENGINEERING = 12) // You are not supposed to get this
+	build_path = /obj/item/stock_parts/circuitboard/bluespacedrive
+	sort_string = "XAAAF"
+
+/datum/design/circuit/shipmap
+	name = "ship holomap"
+	id = "shipmap"
+	req_tech = list(TECH_ENGINEERING = 1)
+	build_path = /obj/item/stock_parts/circuitboard/shipmap
+	sort_string = "SAAAT"

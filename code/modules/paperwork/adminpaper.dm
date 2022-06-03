@@ -8,7 +8,10 @@
 	var/isCrayon = 0
 	var/origin = null
 	var/mob/sender = null
-	var/obj/machinery/photocopier/faxmachine/destination
+	/// List (`/obj/machinery/photocopier/faxmachine`). List of fax machines matching the paper's target department.
+	var/list/destinations = list()
+	/// String. The paper's target department.
+	var/department = null
 
 	var/header = null
 	var/headerOn = TRUE
@@ -73,7 +76,7 @@
 	generateFooter()
 	updateDisplay()
 
-obj/item/paper/admin/proc/updateDisplay()
+/obj/item/paper/admin/proc/updateDisplay()
 	show_browser(usr, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[headerOn ? header : ""][info_links][stamps][footerOn ? footer : ""][interactions]</BODY></HTML>", "window=[name];can_close=0")
 
 
@@ -93,7 +96,7 @@ obj/item/paper/admin/proc/updateDisplay()
 
 		//t = html_encode(t)
 		t = replacetext(t, "\n", "<BR>")
-		t = parsepencode(t,,, isCrayon) // Encode everything from pencode to html
+		t = parsepencode(t, null, null, isCrayon, null, TRUE) // Encode everything from pencode to html
 
 
 		if(fields > 50)//large amount of fields creates a heavy load on the server, see updateinfolinks() and addtofield()
@@ -124,7 +127,7 @@ obj/item/paper/admin/proc/updateDisplay()
 					info += footer
 				updateinfolinks()
 				close_browser(usr, "window=[name]")
-				admindatum.faxCallback(src, destination)
+				admindatum.faxCallback(src)
 		return
 
 	if(href_list["penmode"])
@@ -163,6 +166,3 @@ obj/item/paper/admin/proc/updateDisplay()
 		choose_language(usr, TRUE)
 		updateDisplay()
 		return
-
-/obj/item/paper/admin/get_signature()
-	return input(usr, "Enter the name you wish to sign the paper with (will prompt for multiple entries, in order of entry)", "Signature") as text|null

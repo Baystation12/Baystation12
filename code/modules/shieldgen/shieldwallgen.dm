@@ -24,7 +24,7 @@
 	data["draw"] = round(power_draw)
 	data["power"] = round(storedpower)
 	data["maxpower"] = round(max_stored_power)
-	data["current_draw"] = ((between(500, max_stored_power - storedpower, power_draw)) + power ? active_power_usage : 0)
+	data["current_draw"] = clamp(max_stored_power - storedpower, 500, power_draw) + power ? active_power_usage : 0
 	data["online"] = active == 2 ? 1 : 0
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -61,22 +61,20 @@
 
 /obj/machinery/shieldwallgen/ex_act(var/severity)
 	switch(severity)
-		if(1)
+		if(EX_ACT_DEVASTATING)
 			active = 0
 			storedpower = 0
-		if(2)
+		if(EX_ACT_HEAVY)
 			storedpower -= rand(min(storedpower,max_stored_power/2), max_stored_power)
-		if(3)
+		if(EX_ACT_LIGHT)
 			storedpower -= rand(0, max_stored_power)
 
 /obj/machinery/shieldwallgen/emp_act(var/severity)
 	switch(severity)
-		if(1)
+		if(EMP_ACT_HEAVY)
 			storedpower = 0
-		if(2)
+		if(EMP_ACT_LIGHT)
 			storedpower -= rand(storedpower/2, storedpower)
-		if(3)
-			storedpower -= rand(storedpower/4, storedpower/2)
 	..()
 
 /obj/machinery/shieldwallgen/CanUseTopic(mob/user)
@@ -106,7 +104,7 @@
 	if(C)	PN = C.powernet		// find the powernet of the connected cable
 
 	if(PN)
-		var/shieldload = between(500, max_stored_power - storedpower, power_draw)	//what we try to draw
+		var/shieldload = clamp(max_stored_power - storedpower, 500, power_draw)	//what we try to draw
 		shieldload = PN.draw_power(shieldload) //what we actually get
 		storedpower += shieldload
 
@@ -326,13 +324,13 @@
 	if(needs_power)
 		var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary
 		switch(severity)
-			if(1.0) //big boom
+			if(EX_ACT_DEVASTATING) //big boom
 				G.storedpower -= rand(30000, min(G.storedpower, 60000))
 
-			if(2.0) //medium boom
+			if(EX_ACT_HEAVY) //medium boom
 				G.storedpower -= rand(15000, min(G.storedpower, 30000))
 
-			if(3.0) //lil boom
+			if(EX_ACT_LIGHT) //lil boom
 				G.storedpower -= rand(5000, min(G.storedpower, 15000))
 	return
 

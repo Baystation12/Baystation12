@@ -1,8 +1,8 @@
-/var/const/DRINK_FIZZ = "fizz"
-/var/const/DRINK_ICE = "ice"
-/var/const/DRINK_VAPOR = "vapor"
-/var/const/DRINK_ICON_DEFAULT = ""
-/var/const/DRINK_ICON_NOISY = "noise"
+var/global/const/DRINK_FIZZ = "fizz"
+var/global/const/DRINK_ICE = "ice"
+var/global/const/DRINK_VAPOR = "vapor"
+var/global/const/DRINK_ICON_DEFAULT = ""
+var/global/const/DRINK_ICON_NOISY = "noise"
 
 /obj/item/reagent_containers/food/drinks/glass2
 	name = "glass" // Name when empty
@@ -14,13 +14,12 @@
 	filling_states = "20;40;60;80;100"
 	volume = 30
 	matter = list(MATERIAL_GLASS = 65)
-	trash = /obj/item/material/shard
 
 	var/list/extras = list() // List of extras. Two extras maximum
 
 	var/rim_pos // Position of the rim for fruit slices. list(y, x_left, x_right)
 	var/filling_overlayed //if filling should go on top of the icon (e.g. opaque cups)
-	var/global/list/filling_icons_cache = list()
+	var/static/list/filling_icons_cache = list()
 
 	center_of_mass ="x=16;y=9"
 
@@ -50,7 +49,7 @@
 		to_chat(M, "It is fizzing slightly.")
 
 /obj/item/reagent_containers/food/drinks/glass2/proc/has_ice()
-	if(reagents.reagent_list.len > 0)
+	if(length(reagents?.reagent_list))
 		var/datum/reagent/R = reagents.get_master_reagent()
 		if(!((R.type == /datum/reagent/drink/ice) || ("ice" in R.glass_special))) // if it's not a cup of ice, and it's not already supposed to have ice in, see if the bartender's put ice in it
 			if(reagents.has_reagent(/datum/reagent/drink/ice, reagents.total_volume / 10)) // 10% ice by volume
@@ -59,7 +58,7 @@
 	return 0
 
 /obj/item/reagent_containers/food/drinks/glass2/proc/has_fizz()
-	if(reagents.reagent_list.len > 0)
+	if(length(reagents?.reagent_list))
 		var/datum/reagent/R = reagents.get_master_reagent()
 		if(("fizz" in R.glass_special))
 			return 1
@@ -72,7 +71,7 @@
 	return 0
 
 /obj/item/reagent_containers/food/drinks/glass2/proc/has_vapor()
-	if(reagents.reagent_list.len > 0)
+	if(length(reagents?.reagent_list))
 		if(temperature > T0C + 40)
 			return 1
 		var/datum/reagent/R = reagents.get_master_reagent()
@@ -98,7 +97,7 @@
 	if(QDELETED(src))
 		return
 	if(prob(80))
-		if(reagents.reagent_list.len > 0)
+		if(length(reagents?.reagent_list))
 			visible_message(
 				SPAN_DANGER("\The [src] shatters from the impact and spills all its contents!"),
 				SPAN_DANGER("You hear the sound of glass shattering!")
@@ -113,7 +112,7 @@
 		new /obj/item/material/shard(src.loc)
 		qdel(src)
 	else
-		if (reagents.reagent_list.len > 0)
+		if (length(reagents?.reagent_list))
 			visible_message(
 				SPAN_DANGER("\The [src] bounces and spills all its contents!"),
 				SPAN_WARNING("You hear the sound of glass hitting something.")
@@ -203,11 +202,7 @@
 			var/list/rim_pos_data = cached_key_number_decode(rim_pos)
 			var/fsy = rim_pos_data["y"] - 20
 			var/fsx = rim_pos_data[side == "left" ? "x_left" : "x_right"] - 16
-
-			var/matrix/M = matrix()
-			M.Scale(0.5)
-			M.Translate(fsx, fsy)
-			I.transform = M
+			I.SetTransform(scale = 0.5, offset_x = fsx, offset_y = fsy)
 			underlays += I
 		else continue
 		side = "right"

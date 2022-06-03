@@ -83,7 +83,7 @@
 			T.diggable = 0
 	else if(istype(get_turf(src), /turf/simulated/floor))
 		var/turf/simulated/floor/T = get_turf(src)
-		T.ex_act(2.0)
+		T.ex_act(EX_ACT_HEAVY)
 
 	//Dig out the tasty ores.
 	if(resource_field.len)
@@ -186,7 +186,7 @@
 	if(need_player_check)
 		icon_state = "mining_drill_error"
 	else if(active)
-		var/status = Clamp(round( (contents.len / capacity) * 4 ), 0, 3)
+		var/status = clamp(round( (contents.len / capacity) * 4 ), 0, 3)
 		icon_state = "mining_drill_active[status]"
 	else if(supported)
 		icon_state = "mining_drill_braced"
@@ -196,9 +196,9 @@
 
 /obj/machinery/mining/drill/RefreshParts()
 	..()
-	harvest_speed = Clamp(total_component_rating_of_type(/obj/item/stock_parts/micro_laser), 0, 10)
-	capacity = 200 * Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
-	var/charge_multiplier = Clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0.1, 10)
+	harvest_speed = clamp(total_component_rating_of_type(/obj/item/stock_parts/micro_laser), 0, 10)
+	capacity = 200 * clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
+	var/charge_multiplier = clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0.1, 10)
 	change_power_consumption(initial(active_power_usage) / charge_multiplier, POWER_USE_ACTIVE)
 
 /obj/machinery/mining/drill/proc/check_supports()
@@ -257,7 +257,7 @@
 	icon_state = "mining_brace"
 	obj_flags = OBJ_FLAG_ROTATABLE
 	interact_offline = 1
-	
+
 	machine_name = "mining drill brace"
 	machine_desc = "A mobile support strut that provides support for the head of a mining drill when anchored. Placed on either side of the drill head."
 

@@ -39,7 +39,7 @@
 	return instances
 
 //Removes any null entries from the list
-proc/listclearnulls(list/list)
+/proc/listclearnulls(list/list)
 	if(istype(list))
 		while(null in list)
 			list -= null
@@ -141,23 +141,23 @@ Checks if a list has the same entries and values as an element of big.
 		return L[len]
 	return null
 
-/* pickweightindex
+/* pickweight_index
 	given an indexed list of (index = weight, index + 1 = weight, ...), returns a random index biased by weights. Higher weight = more chance
 	if the argument is not an indexed list of weights, returns pick(list)
 	if the argument is empty or not a list, returns null
 */
-/proc/pickweightindex(list/L)
+/proc/pickweight_index(list/L)
 	var/len = length(L)
 	if (len && islist(L))
-		for(var/index = 1, index <= len, index++)
+		for(var/index = 1 to len)
 			if (isnull(L[index]))
 				return pick(L)
 			break
 		var/sum = 0
-		for(var/index = 1, index <= len, index++)
+		for(var/index = 1 to len)
 			sum += L[index]
 		sum *= rand()
-		for(var/index = 1, index <= len, index++)
+		for(var/index = 1 to len)
 			sum -= L[index]
 			if (sum <= 0)
 				return index
@@ -348,12 +348,6 @@ Checks if a list has the same entries and values as an element of big.
 		return (result + L.Copy(Li, 0))
 	return (result + R.Copy(Ri, 0))
 
-// Macros to test for bits in a bitfield. Note, that this is for use with indexes, not bit-masks!
-#define BITTEST(bitfield,index)  ((bitfield)  &   (1 << (index)))
-#define BITSET(bitfield,index)   (bitfield)  |=  (1 << (index))
-#define BITRESET(bitfield,index) (bitfield)  &= ~(1 << (index))
-#define BITFLIP(bitfield,index)  (bitfield)  ^=  (1 << (index))
-
 //Converts a bitfield to a list of numbers (or words if a wordlist is provided)
 /proc/bitfield2list(bitfield = 0, list/wordlist)
 	var/list/r = list()
@@ -363,9 +357,9 @@ Checks if a list has the same entries and values as an element of big.
 		for(var/i=1, i<=max, i++)
 			if(bitfield & bit)
 				r += wordlist[i]
-			bit = bit << 1
+			bit = SHIFTL(bit, 1)
 	else
-		for(var/bit=1, bit<=65535, bit = bit << 1)
+		for(var/bit=1, bit<=65535, bit = SHIFTL(bit, 1))
 			if(bitfield & bit)
 				r += bit
 
@@ -494,7 +488,7 @@ Checks if a list has the same entries and values as an element of big.
 		else
 			min = mid+1
 
-proc/dd_sortedtextlist(list/incoming, case_sensitive = 0)
+/proc/dd_sortedtextlist(list/incoming, case_sensitive = 0)
 	// Returns a new list with the text values sorted.
 	// Use binary search to order by sortValue.
 	// This works by going to the half-point of the list, seeing if the node in question is higher or lower cost,
@@ -553,7 +547,7 @@ proc/dd_sortedtextlist(list/incoming, case_sensitive = 0)
 	return sorted_text
 
 
-proc/dd_sortedTextList(list/incoming)
+/proc/dd_sortedTextList(list/incoming)
 	var/case_sensitive = 1
 	return dd_sortedtextlist(incoming, case_sensitive)
 
@@ -699,3 +693,44 @@ proc/dd_sortedTextList(list/incoming)
 		var/atom/A = key
 		if(A.type == T)
 			return A
+
+/**
+ * Returns a new list with only atoms that are in typecache L
+ *
+ */
+/proc/typecache_filter_list(list/atoms, list/typecache)
+	. = list()
+	for(var/thing in atoms)
+		var/atom/A = thing
+		if(typecache[A.type])
+			. += A
+
+/**
+ * Like typesof() or subtypesof(), but returns a typecache instead of a list
+ */
+/proc/typecacheof(path, ignore_root_path, only_root_path = FALSE)
+	if(ispath(path))
+		var/list/types = list()
+		if(only_root_path)
+			types = list(path)
+		else
+			types = ignore_root_path ? subtypesof(path) : typesof(path)
+		var/list/L = list()
+		for(var/T in types)
+			L[T] = TRUE
+		return L
+	else if(islist(path))
+		var/list/pathlist = path
+		var/list/L = list()
+		if(ignore_root_path)
+			for(var/P in pathlist)
+				for(var/T in subtypesof(P))
+					L[T] = TRUE
+		else
+			for(var/P in pathlist)
+				if(only_root_path)
+					L[P] = TRUE
+				else
+					for(var/T in typesof(P))
+						L[T] = TRUE
+		return L

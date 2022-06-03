@@ -12,12 +12,15 @@
 		strength = max(2, strength * user.get_jump_distance())
 		if(reflexively)
 			strength *= reflexive_modifier
+		user.jump_layer_shift()
 		animate(user, pixel_z = 16, time = 3, easing = SINE_EASING | EASE_IN)
 		animate(pixel_z = user.default_pixel_z, time = 3, easing = SINE_EASING | EASE_OUT)
 		user.throw_at(get_turf(target), strength, 1, user, FALSE, CALLBACK(src, /decl/maneuver/leap/proc/end_leap, user, target, old_pass_flags))
+		addtimer(CALLBACK(user, /mob/living/proc/jump_layer_shift_end), 4.5)
 
 /decl/maneuver/leap/proc/end_leap(var/mob/living/user, var/atom/target, var/pass_flag)
 	user.pass_flags = pass_flag
+	user.post_maneuver()
 
 /decl/maneuver/leap/show_initial_message(var/mob/living/user, var/atom/target)
 	user.visible_message(SPAN_WARNING("\The [user] crouches, preparing for a leap!"))
@@ -26,7 +29,19 @@
 	. = ..()
 	if(.)
 		var/can_leap_distance = user.get_jump_distance() * user.get_acrobatics_multiplier()
-		. = (can_leap_distance > 0 && (!target || get_dist(user, target) <= can_leap_distance))
+		if (can_leap_distance <= 0)
+			if (!silent)
+				to_chat(user, SPAN_WARNING("You can't leap in your current state."))
+			return FALSE
+		if (!istype(target))
+			if (!silent)
+				to_chat(user, SPAN_WARNING("That is not a valid leap target."))
+			return FALSE
+		if (get_dist(user, target) > can_leap_distance)
+			if (!silent)
+				to_chat(user, SPAN_WARNING("You can't leap that far."))
+			return FALSE
+		return TRUE
 
 /decl/maneuver/leap/spider
 	stamina_cost = 0

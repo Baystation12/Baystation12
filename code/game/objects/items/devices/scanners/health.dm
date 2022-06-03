@@ -1,6 +1,7 @@
 /obj/item/device/scanner/health
 	name = "health analyzer"
 	desc = "A hand-held body scanner able to distinguish vital signs of the subject."
+	icon = 'icons/obj/health_analyzer.dmi'
 	icon_state = "health"
 	item_state = "analyzer"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
@@ -208,7 +209,7 @@
 		var/found_disloc
 		for(var/obj/item/organ/external/e in H.organs)
 			if(e)
-				if(!found_disloc && e.dislocated == 2)
+				if(!found_disloc && e.dislocated >= 1)
 					dat += "<span class='scan_warning'>Dislocation detected. Advanced scanner required for location.</span>"
 					found_disloc = TRUE
 				if(!found_bleed && (e.status & ORGAN_ARTERY_CUT))
@@ -295,7 +296,7 @@
 	. = jointext(list(header,.),null)
 
 // Calculates severity based on the ratios defined external limbs.
-proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
+/proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
 	var/degree
 
 	switch(damage_ratio)

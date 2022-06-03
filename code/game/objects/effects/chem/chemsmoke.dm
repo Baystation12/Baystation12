@@ -6,8 +6,8 @@
 	opacity = 0
 	layer = ABOVE_PROJECTILE_LAYER
 	time_to_live = 300
-	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE | PASS_FLAG_GLASS //PASS_FLAG_GLASS is fine here, it's just so the visual effect can "flow" around glass
-	var/splash_amount = 10 //atoms moving through a smoke cloud get splashed with up to 10 units of reagent
+	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
+	var/splash_amount = 5 //atoms moving through a smoke cloud get splashed with up to 10 units of reagent
 	var/turf/destination
 
 /obj/effect/effect/smoke/chem/New(var/newloc, smoke_duration, turf/dest_turf = null, icon/cached_icon = null)
@@ -34,7 +34,6 @@
 		walk_to(src, destination)
 
 /obj/effect/effect/smoke/chem/Destroy()
-	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	set_opacity(0)
 	// TODO - fadeOut() sleeps.  Sleeping in /Destroy is Bad, this needs to be fixed.
 	fadeOut()
@@ -84,6 +83,7 @@
 	var/list/targetTurfs
 	var/list/wallList
 	var/density
+	var/smokeVolume
 	var/show_log = 1
 
 /datum/effect/effect/system/smoke_spread/chem/spores
@@ -110,8 +110,9 @@
 	range = n * 0.3
 	cardinals = c
 	carry.trans_to_obj(chemholder, carry.total_volume, copy = 1)
+	smokeVolume = n
 
-	if(istype(loca, /turf/))
+	if(isturf(loca))
 		location = loca
 	else
 		location = get_turf(loca)
@@ -179,12 +180,12 @@
 		I = icon('icons/effects/96x96.dmi', "smoke")
 
 	//Calculate smoke duration
-	var/smoke_duration = 150
+	var/smoke_duration = smokeVolume * 1.5 SECONDS
 
 	var/pressure = 0
 	var/datum/gas_mixture/environment = location.return_air()
 	if(environment) pressure = environment.return_pressure()
-	smoke_duration = between(5, smoke_duration*pressure/(ONE_ATMOSPHERE/3), smoke_duration)
+	smoke_duration = clamp(smoke_duration * pressure / (ONE_ATMOSPHERE / 3), 5, smoke_duration)
 
 	var/const/arcLength = 2.3559 //distance between each smoke cloud
 
@@ -192,12 +193,12 @@
 		var/radius = i * 1.5
 		if(!radius)
 			spawn(0)
-				spawnSmoke(location, I, 1, 1)
+				spawnSmoke(location, I, smoke_duration, 1)
 			continue
 
 		var/offset = 0
 		var/points = round((radius * 2 * M_PI) / arcLength)
-		var/angle = round(ToDegrees(arcLength / radius), 1)
+		var/angle = round(RAD_TO_DEG * arcLength / radius, 1)
 
 		if(!IsInteger(radius))
 			offset = 45		//degrees
@@ -211,7 +212,7 @@
 				continue
 			if(T in targetTurfs)
 				spawn(0)
-					spawnSmoke(T, I, range)
+					spawnSmoke(T, I, smoke_duration, range)
 
 //------------------------------------------
 // Randomizes and spawns the smoke effect.
@@ -223,7 +224,7 @@
 	if(passed_smoke)
 		smoke = passed_smoke
 	else
-		smoke = new /obj/effect/effect/smoke/chem(location, smoke_duration + rand(0, 20), T, I)
+		smoke = new /obj/effect/effect/smoke/chem(location, smoke_duration + rand(1.5 SECONDS, 3 SECONDS), T, I)
 
 	if(chemholder.reagents.reagent_list.len)
 		chemholder.reagents.trans_to_obj(smoke, chemholder.reagents.total_volume / dist, copy = 1) //copy reagents to the smoke so mob/breathe() can handle inhaling the reagents

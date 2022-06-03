@@ -7,8 +7,6 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	layer = ABOVE_WINDOW_LAYER
 
-	var/health = 100
-	var/maxhealth = 100
 	var/spiky = FALSE
 
 /obj/structure/barricade/Initialize(var/mapload, var/material_name)
@@ -21,8 +19,7 @@
 	SetName("[material.display_name] barricade")
 	desc = "A heavy, solid barrier made of [material.display_name]."
 	color = material.icon_colour
-	maxhealth = material.integrity
-	health = maxhealth
+	set_max_health(round(material.integrity * 1.33)) // Equivalent to a global resistance value of 0.75
 
 /obj/structure/barricade/get_material()
 	return material
@@ -34,7 +31,7 @@
 			to_chat(user, "<span class='warning'>You need more rods to build a cheval de frise.</span>")
 			return
 		visible_message("<span class='notice'>\The [user] begins to work on \the [src].</span>")
-		if(do_after(user, 4 SECONDS, src))
+		if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if(R.use(5))
 				visible_message("<span class='notice'>\The [user] fastens \the [R] to \the [src].</span>")
 				var/obj/structure/barricade/spike/CDF = new(loc, material.name, R.material.name)
@@ -48,49 +45,30 @@
 		var/obj/item/stack/D = W
 		if(D.get_material_name() != material.name)
 			return //hitting things with the wrong type of stack usually doesn't produce messages, and probably doesn't need to.
-		if (health < maxhealth)
+		if (get_damage_value())
 			if (D.get_amount() < 1)
 				to_chat(user, "<span class='warning'>You need one sheet of [material.display_name] to repair \the [src].</span>")
 				return
 			visible_message("<span class='notice'>[user] begins to repair \the [src].</span>")
-			if(do_after(user,20,src) && health < maxhealth)
+			if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) && get_damage_value())
 				if (D.use(1))
-					health = maxhealth
+					restore_health(get_max_health())
 					visible_message("<span class='notice'>[user] repairs \the [src].</span>")
 				return
 		return
 
 	else
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		switch(W.damtype)
-			if(BURN)
-				take_damage(W.force * 1)
-			if(BRUTE)
-				take_damage(W.force * 0.75)
+		damage_health(W.force, W.damtype)
 		..()
 
-/obj/structure/barricade/take_damage(amount)
-	health -= amount
-	if(health <= 0)
-		dismantle()
+/obj/structure/barricade/on_death()
+	dismantle()
 
 /obj/structure/barricade/proc/dismantle()
 	visible_message("<span class='danger'>The barricade is smashed apart!</span>")
 	material.place_dismantled_product(get_turf(src))
 	qdel(src)
-
-/obj/structure/barricade/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			visible_message("<span class='danger'>\The [src] is blown apart!</span>")
-			qdel(src)
-			return
-		if(2.0)
-			src.health -= 25
-			if (src.health <= 0)
-				visible_message("<span class='danger'>\The [src] is blown apart!</span>")
-				dismantle()
-			return
 
 /obj/structure/barricade/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.
 	if(air_group || (height==0))
@@ -138,5 +116,5 @@
 	if(isanimal(victim)) //simple animals have simple health, reduce our damage
 		damage_holder = (damage / 4)
 
-	victim.apply_damage(damage_holder, BRUTE, target_zone, damage_flags = DAM_SHARP, used_weapon = src)
+	victim.apply_damage(damage_holder, DAMAGE_BRUTE, target_zone, damage_flags = DAMAGE_FLAG_SHARP, used_weapon = src)
 	visible_message(SPAN_DANGER("\The [victim] is [pick(poke_description)] by \the [src]!"))

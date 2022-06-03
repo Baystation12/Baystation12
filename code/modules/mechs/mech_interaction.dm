@@ -2,13 +2,8 @@
 	if(usr == src && usr != over)
 		if(istype(over, /mob/living/exosuit))
 			var/mob/living/exosuit/exosuit = over
-			if(exosuit.body)
-				if(usr.mob_size >= exosuit.body.min_pilot_size && usr.mob_size <= exosuit.body.max_pilot_size)
-					if(exosuit.enter(src))
-						return
-				else
-					to_chat(usr, SPAN_WARNING("You cannot pilot a exosuit of this size."))
-					return
+			if(exosuit.enter(src))
+				return
 	return ..()
 
 /mob/living/exosuit/MouseDrop_T(atom/dropping, mob/user)
@@ -216,42 +211,50 @@
 		selected_system = null
 	selected_hardpoint = null
 
-/mob/living/exosuit/proc/check_enter(var/mob/user)
-	if(!user || user.incapacitated())
+/mob/living/exosuit/proc/check_enter(mob/user, silent = FALSE, check_incap = TRUE)
+	if(!user || (check_incap && user.incapacitated()))
+		return FALSE
+	if(!(user.mob_size >= body.min_pilot_size && user.mob_size <= body.max_pilot_size))
+		if(!silent)
+			to_chat(user, SPAN_WARNING("You cannot pilot an exosuit of this size."))
 		return FALSE
 	if(!user.Adjacent(src))
 		return FALSE
 	if(hatch_locked)
-		to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is locked."))
+		if(!silent)
+			to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is locked."))
 		return FALSE
 	if(hatch_closed)
-		to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is closed."))
+		if(!silent)
+			to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is closed."))
 		return FALSE
 	if(LAZYLEN(pilots) >= LAZYLEN(body.pilot_positions))
-		to_chat(user, SPAN_WARNING("\The [src] is occupied to capacity."))
+		if(!silent)
+			to_chat(user, SPAN_WARNING("\The [src] is occupied to capacity."))
 		return FALSE
 	return TRUE
 
-/mob/living/exosuit/proc/enter(var/mob/user)
-	if(!check_enter(user))
-		return
+/mob/living/exosuit/proc/enter(mob/user, silent = FALSE, check_incap = TRUE, instant = FALSE)
+	if(!check_enter(user, silent, check_incap))
+		return FALSE
 	to_chat(user, SPAN_NOTICE("You start climbing into \the [src]..."))
-	if(!body || !do_after(user, body.climb_time))
-		return
 	if(!body)
-		return
-	if(!check_enter(user))
-		return
-	to_chat(user, SPAN_NOTICE("You climb into \the [src]."))
+		return FALSE
+	if(!instant && !do_after(user, body.climb_time, src, DO_PUBLIC_UNIQUE))
+		return FALSE
+	if(!check_enter(user, silent, check_incap))
+		return FALSE
+	if(!silent)
+		to_chat(user, SPAN_NOTICE("You climb into \the [src]."))
+		playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
 	user.forceMove(src)
 	LAZYDISTINCTADD(pilots, user)
 	sync_access()
-	playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
 	if(user.client) user.client.screen |= hud_elements
 	LAZYDISTINCTADD(user.additional_vision_handlers, src)
 	update_pilots()
 	user.PushClickHandler(/datum/click_handler/default/mech)
-	return 1
+	return TRUE
 
 /mob/living/exosuit/proc/sync_access()
 	access_card.access = saved_access.Copy()
@@ -348,8 +351,8 @@
 					return
 
 				visible_message(SPAN_WARNING("\The [user] begins unwrenching the securing bolts holding \the [src] together."))
-				var/delay = 60 * user.skill_delay_mult(SKILL_DEVICES)
-				if(!do_after(user, delay) || !maintenance_protocols)
+				var/delay = 6 SECONDS * user.skill_delay_mult(SKILL_DEVICES)
+				if(!do_after(user, delay, src, DO_PUBLIC_UNIQUE) || !maintenance_protocols)
 					return
 				visible_message(SPAN_NOTICE("\The [user] loosens and removes the securing bolts, dismantling \the [src]."))
 				dismantle()
@@ -383,8 +386,8 @@
 				if(!body || !body.cell)
 					to_chat(user, SPAN_WARNING("There is no cell here for you to remove!"))
 					return
-				var/delay = 20 * user.skill_delay_mult(SKILL_DEVICES)
-				if(!do_after(user, delay) || !maintenance_protocols || !body || !body.cell)
+				var/delay = 2 SECONDS * user.skill_delay_mult(SKILL_DEVICES)
+				if(!do_after(user, delay, src, DO_PUBLIC_UNIQUE) || !maintenance_protocols || !body || !body.cell)
 					return
 
 				user.put_in_hands(body.cell)
@@ -403,7 +406,7 @@
 					return
 				var/delay = min(50 * user.skill_delay_mult(SKILL_DEVICES), 50 * user.skill_delay_mult(SKILL_EVA))
 				visible_message(SPAN_NOTICE("\The [user] starts forcing the \the [src]'s emergency [body.hatch_descriptor] release using \the [thing]."))
-				if(!do_after(user, delay, src, DO_DEFAULT | DO_PUBLIC_PROGRESS))
+				if(!do_after(user, delay, src, DO_PUBLIC_UNIQUE))
 					return
 				visible_message(SPAN_NOTICE("\The [user] forces \the [src]'s [body.hatch_descriptor] open using the \the [thing]."))
 				playsound(user.loc, 'sound/machines/bolts_up.ogg', 25, 1)
@@ -445,7 +448,7 @@
 		else if(!hatch_closed)
 			var/mob/pilot = pick(pilots)
 			user.visible_message(SPAN_DANGER("\The [user] is trying to pull \the [pilot] out of \the [src]!"))
-			if(do_after(user, 30) && user.Adjacent(src) && (pilot in pilots) && !hatch_closed)
+			if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) && user.Adjacent(src) && (pilot in pilots) && !hatch_closed)
 				user.visible_message(SPAN_DANGER("\The [user] drags \the [pilot] out of \the [src]!"))
 				eject(pilot, silent=1)
 		else if(hatch_closed)

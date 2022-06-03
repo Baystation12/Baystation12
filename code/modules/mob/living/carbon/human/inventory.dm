@@ -26,7 +26,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 /mob/living/carbon/human/proc/equip_in_one_of_slots(obj/item/W, list/slots, del_on_fail = 1)
 	for (var/slot in slots)
-		if (equip_to_slot_if_possible(W, slots[slot], del_on_fail = 0))
+		if (equip_to_slot_if_possible(W, slots[slot]))
 			return slot
 	if (del_on_fail)
 		qdel(W)
@@ -343,9 +343,9 @@ This saves us from having to call add_fingerprint() any time something is put in
 				src.remove_from_mob(W)
 			W.forceMove(src.back)
 		if(slot_tie)
-			var/obj/item/clothing/under/uniform = src.w_uniform
-			if(uniform)
-				uniform.attackby(W,src)
+			var/obj/item/clothing/under/uniform = w_uniform
+			if (uniform)
+				uniform.attempt_attach_accessory(W, src)
 		else
 			to_chat(src, "<span class='danger'>You are trying to eqip this item to an unsupported inventory slot. If possible, please write a ticket with steps to reproduce. Slot was: [slot]</span>")
 			return
@@ -441,4 +441,3 @@ This saves us from having to call add_fingerprint() any time something is put in
 	var/obj/item/organ/external/O = get_organ(zone)
 	if(O)
 		return get_covering_equipped_item(O.body_part)
-

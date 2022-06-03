@@ -22,6 +22,13 @@ GLOBAL_DATUM_INIT(opacity_set_event, /decl/observ/opacity_set, new)
 		var/old_opacity = opacity
 		opacity = new_opacity
 		GLOB.opacity_set_event.raise_event(src, old_opacity, new_opacity)
+		if (isturf(loc))
+			var/turf/T = loc
+			if (opacity)
+				T.has_opaque_atom = TRUE
+			else
+				T.has_opaque_atom = null
+
 		return TRUE
 	else
 		return FALSE

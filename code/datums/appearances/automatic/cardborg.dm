@@ -89,10 +89,10 @@
 
 /decl/cardborg_appearance/centcom
 	icon_state = "centcomborg"
-	backpack_type = /obj/item/storage/backpack/captain
+	backpack_type = /obj/item/storage/backpack/command
 
 /decl/cardborg_appearance/centcom/satchel
-	backpack_type = /obj/item/storage/backpack/satchel/cap
+	backpack_type = /obj/item/storage/backpack/satchel/com
 
 /decl/cardborg_appearance/syndicate
 	icon_state = "droid-combat"

@@ -10,15 +10,12 @@
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
 	one_hand_penalty = 4
-	charge_cost = 30
-	max_shots = 8
-	fire_delay = 30
+	charge_cost = 60
+	max_shots = 5
+	fire_delay = 60
 	projectile_type = /obj/item/projectile/ion
 	wielded_item_state = "ionrifle-wielded"
 	combustion = 0
-
-/obj/item/gun/energy/ionrifle/emp_act(severity)
-	..(max(severity, 2)) //so it doesn't EMP itself, I guess
 
 /obj/item/gun/energy/ionrifle/small
 	name = "ion pistol"
@@ -31,8 +28,8 @@
 	force = 5
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	one_hand_penalty = 0
-	charge_cost = 20
-	max_shots = 4
+	charge_cost = 40
+	max_shots = 3
 	projectile_type = /obj/item/projectile/ion/small
 
 /obj/item/gun/energy/decloner
@@ -178,7 +175,7 @@
 	return ..()
 
 /obj/item/gun/energy/plasmacutter/proc/slice(var/mob/M = null)
-	if(!safety() && power_supply.checked_use(charge_cost)) //consumes a shot per use
+	if(!safety())
 		if(M)
 			M.welding_eyecheck()//Welding tool eye check
 			if(check_accidents(M, "[M] loses grip on [src] from its sudden recoil!",SKILL_CONSTRUCTION, 60, SKILL_ADEPT))
@@ -194,7 +191,6 @@
 	icon = 'icons/obj/guns/incendiary_laser.dmi'
 	icon_state = "incen"
 	item_state = "incen"
-	safety_icon = "safety"
 	origin_tech = list(TECH_COMBAT = 7, TECH_MAGNET = 4, TECH_ESOTERIC = 4)
 	matter = list(MATERIAL_ALUMINIUM = 1000, MATERIAL_PLASTIC = 500, MATERIAL_DIAMOND = 500)
 	projectile_type = /obj/item/projectile/beam/incendiary_laser

@@ -38,12 +38,6 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		/obj/item/clothing/shoes/laceup
 		)
 
-	var/list/raider_glasses = list(
-		/obj/item/clothing/glasses/thermal,
-		/obj/item/clothing/glasses/thermal/plain/eyepatch,
-		/obj/item/clothing/glasses/thermal/plain/monocle
-		)
-
 	var/list/raider_helmets = list(
 		/obj/item/clothing/head/bearpelt,
 		/obj/item/clothing/head/ushanka,
@@ -92,7 +86,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		/obj/item/gun/projectile/revolver,
 		/obj/item/gun/projectile/pirate,
 		/obj/item/gun/projectile/revolver/medium,
-		/obj/item/gun/projectile/pistol/throwback
+		/obj/item/gun/projectile/pistol/broomstick
 		)
 
 	var/list/raider_holster = list(
@@ -156,7 +150,6 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	else
 		var/new_shoes =   pick(raider_shoes)
 		var/new_uniform = pick(raider_uniforms)
-		var/new_glasses = pick(raider_glasses)
 		var/new_helmet =  pick(raider_helmets)
 		var/new_suit =    pick(raider_suits)
 
@@ -167,7 +160,6 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 			player.equip_to_slot_or_del(new fallback_type(player), slot_shoes)
 
 		player.equip_to_slot_or_del(new new_uniform(player),slot_w_uniform)
-		player.equip_to_slot_or_del(new new_glasses(player),slot_glasses)
 		player.equip_to_slot_or_del(new new_helmet(player),slot_head)
 		player.equip_to_slot_or_del(new new_suit(player),slot_wear_suit)
 		equip_weapons(player)
@@ -239,7 +231,6 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 /datum/antagonist/raider/equip_vox(mob/living/carbon/human/vox, mob/living/carbon/human/old)
 
 	var/uniform_type = pick(list(/obj/item/clothing/under/vox/vox_robes,/obj/item/clothing/under/vox/vox_casual))
-	var/new_glasses = pick(raider_glasses)
 	var/new_holster = pick(raider_holster)
 
 	vox.equip_to_slot_or_del(new uniform_type(vox), slot_w_uniform)
@@ -248,7 +239,6 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	vox.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/swat/vox(vox), slot_wear_mask)
 	vox.equip_to_slot_or_del(new /obj/item/tank/nitrogen(vox), slot_back)
 	vox.equip_to_slot_or_del(new /obj/item/device/flashlight(vox), slot_r_store)
-	vox.equip_to_slot_or_del(new new_glasses(vox),slot_glasses)
 
 	var/obj/item/clothing/accessory/storage/holster/holster = new new_holster
 	if(holster)
@@ -274,54 +264,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 				/obj/item/rig/unathi
 	)
 
-/obj/random/raider/lilgun
-	name = "Random Raider Light Weapon"
-	desc = "This is a random raider sidearm."
-	icon = 'icons/obj/guns/pistol.dmi'
-	icon_state = "secguncomp"
 
-/obj/random/raider/lilgun/spawn_choices()
-	return list(/obj/item/gun/projectile/pistol/sec,
-				/obj/item/gun/energy/gun,
-				/obj/item/gun/energy/stunrevolver,
-				/obj/item/gun/projectile/shotgun/doublebarrel/sawn,
-				/obj/item/gun/energy/xray/pistol,
-				/obj/item/gun/energy/pulse_rifle/pistol,
-				/obj/item/gun/energy/plasmacutter,
-				/obj/item/gun/energy/incendiary_laser,
-				/obj/item/gun/projectile/automatic/machine_pistol,
-				/obj/item/gun/projectile/pistol/military/alt,
-				/obj/item/gun/projectile/pistol/holdout,
-				/obj/item/gun/projectile/revolver,
-				/obj/item/gun/projectile/revolver/medium,
-				/obj/item/gun/energy/retro,
-				/obj/item/gun/projectile/pistol/throwback,
-				/obj/item/gun/energy/ionrifle/small
-	)
-
-/obj/random/raider/biggun
-	name = "Random Raider Heavy Weapon"
-	desc = "This is a random raider rifle."
-	icon = 'icons/obj/guns/assault_rifle.dmi'
-	icon_state = "arifle"
-
-/obj/random/raider/biggun/spawn_choices()
-	return list(/obj/item/gun/energy/lasercannon,
-				/obj/item/gun/energy/laser,
-				/obj/item/gun/energy/captain,
-				/obj/item/gun/energy/pulse_rifle,
-				/obj/item/gun/energy/pulse_rifle/carbine,
-				/obj/item/gun/energy/sniperrifle,
-				/obj/item/gun/projectile/shotgun/doublebarrel,
-				/obj/item/gun/energy/xray,
-				/obj/item/gun/projectile/heavysniper/boltaction,
-				/obj/item/gun/projectile/automatic/assault_rifle,
-				/obj/item/gun/projectile/automatic/sec_smg,
-				/obj/item/gun/energy/crossbow/largecrossbow,
-				/obj/item/gun/projectile/shotgun/pump/combat,
-				/obj/item/gun/energy/ionrifle,
-				/obj/item/gun/projectile/shotgun/pump
-	)
 
 /obj/item/vox_changer/raider
 	allowed_role = "Raider"

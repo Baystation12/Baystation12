@@ -51,7 +51,7 @@
 //NEW NOTE: Do NOT set the price of any crates below 7 points. Doing so allows infinite points.
 */
 
-var/list/supply_methods_
+var/global/list/supply_methods_
 /proc/get_supply_method(var/method_type)
 	if(!supply_methods_)
 		supply_methods_ = list()

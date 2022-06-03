@@ -126,7 +126,6 @@
 	if(R.vtec)
 		return FALSE
 
-	R.speed--
 	R.vtec = TRUE
 	return TRUE
 
@@ -200,7 +199,7 @@
 		R.module.equipment += new/obj/item/rcd/borg(R.module)
 		return 1
 
-/obj/item/borg/upgrade/syndicate/
+/obj/item/borg/upgrade/syndicate
 	name = "illegal equipment module"
 	desc = "Unlocks the hidden, deadlier functions of a robot."
 	icon_state = "cyborg_upgrade3"
@@ -214,3 +213,19 @@
 
 	R.emagged = TRUE
 	return 1
+
+/obj/item/borg/upgrade/flash_protection
+	name = "optical matrix shielding"
+	desc = "Provides shielding for the optical matrix, rendering the robot immune to flashes."
+
+/obj/item/borg/upgrade/flash_protection/action(mob/living/silicon/robot/R)
+	if (..())
+		return FALSE
+
+	if (R.flash_protected)
+		to_chat(usr, SPAN_WARNING("\The [R]'s optical matrix is already shielded."))
+		return FALSE
+
+	R.status_flags &= ~CANWEAKEN
+	R.flash_protected = TRUE
+	return TRUE

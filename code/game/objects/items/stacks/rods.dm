@@ -12,6 +12,7 @@
 	throw_speed = 5
 	throw_range = 20
 	max_amount = 100
+	base_parry_chance = 15
 	attack_verb = list("hit", "bludgeoned", "whacked")
 	lock_picking_level = 3
 	matter_multiplier = 0.5

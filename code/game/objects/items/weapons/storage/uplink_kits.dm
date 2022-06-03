@@ -36,6 +36,16 @@
 		/obj/item/reagent_containers/hypospray/autoinjector/mindbreaker
 		)
 
+/obj/item/storage/box/syndie_kit/shuriken
+	startswith = list(
+		/obj/item/material/star/ninja,
+		/obj/item/material/star/ninja,
+		/obj/item/material/star/ninja,
+		/obj/item/material/star/ninja,
+		/obj/item/material/star/ninja,
+		/obj/item/material/star/ninja,
+	)
+
 // Space suit uplink kit
 /obj/item/storage/backpack/satchel/syndie_kit/space
 	//name = "\improper EVA gear pack"
@@ -44,7 +54,7 @@
 		/obj/item/clothing/suit/space/void/merc,
 		/obj/item/clothing/head/helmet/space/void/merc,
 		/obj/item/clothing/mask/gas/syndicate,
-		/obj/item/tank/emergency/oxygen/double,
+		/obj/item/tank/oxygen_emergency_double,
 		)
 
 // Chameleon uplink kit
@@ -135,7 +145,7 @@
 	pack.desc += " 'S' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/datum/reagent/dylovene = 1, /datum/reagent/silicon = 1, /datum/reagent/hydrazine = 1))
+	fill_cigarre_package(pack, list(/datum/reagent/mindbreaker = 4))
 	pack.desc += " 'MB' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)

@@ -32,6 +32,7 @@
 /obj/item/shield
 	name = "shield"
 	var/base_block_chance = 60
+	var/max_block = 0
 
 /obj/item/shield/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(user.incapacitated())
@@ -64,7 +65,6 @@
 	matter = list(MATERIAL_GLASS = 7500, MATERIAL_STEEL = 1000)
 	attack_verb = list("shoved", "bashed")
 	var/cooldown = 0 //shield bash cooldown. based on world.time
-	var/max_block = 15
 	var/can_block_lasers = FALSE
 
 /obj/item/shield/riot/handle_shield(mob/user)
@@ -103,18 +103,19 @@
 	matter = list(MATERIAL_PLASTEEL = 8500)
 	max_block = 50
 	can_block_lasers = TRUE
-	slowdown_general = 1.5
+	slowdown_general = 0.5
 
 /obj/item/shield/buckler
 	name = "buckler"
-	desc = "A wooden buckler used to block sharp things from entering your body back in the day.."
+	desc = "A wooden buckler used to block sharp things from entering your body back in the day. Not very good at stopping projectiles, but still better than nothing."
 	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "buckler"
 	slot_flags = SLOT_BACK
 	force = 8
 	throwforce = 8
-	base_block_chance = 60
-	throw_speed = 10
+	base_block_chance = 50
+	max_block = 15
+	throw_speed = 6
 	throw_range = 20
 	w_class = ITEM_SIZE_HUGE
 	origin_tech = list(TECH_MATERIAL = 1)
@@ -126,8 +127,11 @@
 	if(.) playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 
 /obj/item/shield/buckler/get_block_chance(mob/user, var/damage, atom/damage_source = null, mob/attacker = null)
-	if(istype(damage_source, /obj/item/projectile/bullet))
-		return 0 //No blocking bullets, I'm afraid.
+	if (istype(damage_source, /obj/item/projectile))
+		if (max_block && damage >= max_block)
+			return 0
+		else
+			return (base_block_chance / 2)
 	return base_block_chance
 
 /*

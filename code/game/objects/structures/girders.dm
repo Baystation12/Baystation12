@@ -4,8 +4,8 @@
 	density = TRUE
 	layer = BELOW_OBJ_LAYER
 	w_class = ITEM_SIZE_NO_CONTAINER
+	health_max = 100
 	var/state = 0
-	var/health = 100
 	var/cover = 50 //how much cover the girder provides against projectiles.
 	var/material/reinf_material
 	var/reinforcing = 0
@@ -17,7 +17,7 @@
 /obj/structure/girder/displaced
 	icon_state = "displaced"
 	anchored = FALSE
-	health = 50
+	health_max = 50
 	cover = 25
 
 /obj/structure/girder/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes apart", var/wallbreaker)
@@ -26,31 +26,20 @@
 	attack_animation(user)
 	playsound(loc, 'sound/weapons/tablehit1.ogg', 40, 1)
 	visible_message(SPAN_DANGER("[user] [attack_message] [src]!"))
-	take_damage(damage)
 	if(wallbreaker)
-		spawn(1) dismantle()
+		kill_health()
+	else
+		damage_health(damage, DAMAGE_BRUTE)
 	return 1
 
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
 	//Girders only provide partial cover. There's a chance that the projectiles will just pass through. (unless you are trying to shoot the girder)
 	if(Proj.original != src && !prob(cover))
 		return PROJECTILE_CONTINUE //pass through
+	. = ..()
 
-	var/damage = Proj.get_structure_damage()
-	if(!damage)
-		return
-
-	if(!istype(Proj, /obj/item/projectile/beam))
-		damage *= 0.4 //non beams do reduced damage
-
-	..()
-	take_damage(damage)
-
-/obj/structure/girder/take_damage(damage)
-	health -= damage
-	..()
-	if(health <= 0)
-		dismantle()
+/obj/structure/girder/on_death()
+	dismantle()
 
 /obj/structure/girder/CanFluidPass(var/coming_from)
 	return TRUE
@@ -58,65 +47,73 @@
 /obj/structure/girder/proc/reset_girder()
 	anchored = TRUE
 	cover = initial(cover)
-	health = min(health,initial(health))
+	revive_health()
 	state = 0
 	icon_state = initial(icon_state)
 	reinforcing = 0
 	if(reinf_material)
 		reinforce_girder()
 
-/obj/structure/girder/attackby(var/obj/item/W, var/mob/user)
+/obj/structure/girder/attackby(obj/item/W, mob/user)
+	if (user.a_intent == I_HURT)
+		..()
+		return
+
 	if(isWrench(W) && state == 0)
 		if(anchored && !reinf_material)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 			to_chat(user, "<span class='notice'>Now disassembling the girder...</span>")
-			if(do_after(user, 40,src))
+			if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 				to_chat(user, "<span class='notice'>You dissasembled the girder!</span>")
 				dismantle()
 		else if(!anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 			to_chat(user, "<span class='notice'>Now securing the girder...</span>")
-			if(do_after(user, 40,src))
+			if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 				to_chat(user, "<span class='notice'>You secured the girder!</span>")
 				reset_girder()
+		return
 
-	else if(istype(W, /obj/item/gun/energy/plasmacutter) || istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))
+	if(istype(W, /obj/item/gun/energy/plasmacutter) || istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))
 		if(istype(W, /obj/item/gun/energy/plasmacutter))
 			var/obj/item/gun/energy/plasmacutter/cutter = W
 			if(!cutter.slice(user))
 				return
 		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now slicing apart the girder...</span>")
-		if(do_after(user,reinf_material ? 40: 20,src))
+		if(do_after(user, (reinf_material ? 4 : 2) SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>You slice apart the girder!</span>")
 			if(reinf_material)
 				reinf_material.place_dismantled_product(get_turf(src))
 			dismantle()
+		return
 
-	else if(istype(W, /obj/item/pickaxe/diamonddrill))
+	if(istype(W, /obj/item/pickaxe/diamonddrill))
 		playsound(src.loc, 'sound/weapons/Genhit.ogg', 100, 1)
-		if(do_after(user,reinf_material ? 60 : 40,src))
+		if(do_after(user, (reinf_material ? 6 : 4) SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>You drill through the girder!</span>")
 			if(reinf_material)
 				reinf_material.place_dismantled_product(get_turf(src))
 			dismantle()
+		return
 
-	else if(isScrewdriver(W))
+	if(isScrewdriver(W))
 		if(state == 2)
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			to_chat(user, "<span class='notice'>Now unsecuring support struts...</span>")
-			if(do_after(user, 40,src))
+			if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 				to_chat(user, "<span class='notice'>You unsecured the support struts!</span>")
 				state = 1
 		else if(anchored && !reinf_material)
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			reinforcing = !reinforcing
 			to_chat(user, "<span class='notice'>\The [src] can now be [reinforcing? "reinforced" : "constructed"]!</span>")
+		return
 
-	else if(isWirecutter(W) && state == 1)
+	if(isWirecutter(W) && state == 1)
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now removing support struts...</span>")
-		if(do_after(user, 40,src))
+		if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>You removed the support struts!</span>")
 
 			if(reinf_material)
@@ -124,28 +121,29 @@
 				reinf_material = null
 
 			reset_girder()
+		return
 
-	else if(isCrowbar(W) && state == 0 && anchored)
+	if(isCrowbar(W) && state == 0 && anchored)
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now dislodging the girder...</span>")
-		if(do_after(user, 40,src))
+		if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>You dislodged the girder!</span>")
 			icon_state = "displaced"
 			anchored = FALSE
-			health = 50
+			health_max = 50
 			cover = 25
+		return
 
-	else if(istype(W, /obj/item/stack/material))
+	if(istype(W, /obj/item/stack/material))
 		if(reinforcing && !reinf_material)
 			if(!reinforce_with_material(W, user))
 				return ..()
 		else
 			if(!construct_wall(W, user))
 				return ..()
+		return
 
-	else
-		take_damage(W.force)
-		return ..()
+	..()
 
 /obj/structure/girder/proc/construct_wall(obj/item/stack/material/S, mob/user)
 	if(S.get_amount() < 2)
@@ -165,7 +163,7 @@
 
 	to_chat(user, "<span class='notice'>You begin adding the plating...</span>")
 
-	if(!do_after(user,40,src) || !S.use(2))
+	if(!do_after(user,4 SECONDS, src, DO_PUBLIC_UNIQUE) || !S.use(2))
 		return 1 //once we've gotten this far don't call parent attackby()
 
 	if(anchored)
@@ -199,7 +197,7 @@
 		return 0
 
 	to_chat(user, "<span class='notice'>Now reinforcing...</span>")
-	if (!do_after(user, 40,src) || !S.use(2))
+	if (!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE) || !S.use(2))
 		return 1 //don't call parent attackby() past this point
 	to_chat(user, "<span class='notice'>You added reinforcement!</span>")
 
@@ -209,7 +207,7 @@
 
 /obj/structure/girder/proc/reinforce_girder()
 	cover = 75
-	health = 500
+	health_max = 500
 	state = 2
 	icon_state = "reinforced"
 	reinforcing = 0
@@ -225,27 +223,10 @@
 		return
 	return ..()
 
-
-/obj/structure/girder/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			if (prob(30))
-				dismantle()
-			return
-		if(3.0)
-			if (prob(5))
-				dismantle()
-			return
-		else
-	return
-
 /obj/structure/girder/cult
 	icon= 'icons/obj/cult.dmi'
 	icon_state= "cultgirder"
-	health = 250
+	health_max = 250
 	cover = 70
 
 /obj/structure/girder/cult/dismantle()
@@ -255,7 +236,7 @@
 	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now disassembling the girder...</span>")
-		if(do_after(user,40,src))
+		if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>You dissasembled the girder!</span>")
 			dismantle()
 
@@ -266,12 +247,12 @@
 				return
 		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now slicing apart the girder...</span>")
-		if(do_after(user,30,src))
+		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>You slice apart the girder!</span>")
 			dismantle()
 
 	else if(istype(W, /obj/item/pickaxe/diamonddrill))
 		playsound(src.loc, 'sound/weapons/Genhit.ogg', 100, 1)
-		if(do_after(user,40,src))
+		if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>You drill through the girder!</span>")
 			dismantle()

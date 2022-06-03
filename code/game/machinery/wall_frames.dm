@@ -63,6 +63,22 @@
 	desc = "Used for building air alarms."
 	build_machine_type = /obj/machinery/alarm
 
+/obj/item/frame/intercom
+	name = "intercom frame"
+	desc = "Used for building intercoms."
+	icon = 'icons/obj/radio.dmi'
+	icon_state = "intercom-f"
+	build_machine_type = /obj/item/device/radio/intercom
+
+/obj/item/frame/intercom/get_mechanics_info()
+	. = ..()
+	. += "<p>To construct:</p>\
+			<ol>\
+				<li>Attach the frame to the wall</li>\
+				<li>Install the circuitboard into the frame</li>\
+				<li>Use cables to wire the intercom</li>\
+				<li>Screwdriver to close the panel</li>\
+			</ol>"
 /obj/item/frame/light
 	name = "light fixture frame"
 	desc = "Used for building lights."
@@ -84,3 +100,10 @@
 	name = "large light fixture frame"
 	build_machine_type = /obj/machinery/light_construct/spot
 	refund_amt = 3
+
+/obj/item/frame/supermatter_alarm
+	name = "supermatter alarm frame"
+	icon = 'icons/obj/lighting.dmi'
+	icon_state = "bulb-construct-item"
+	refund_amt = 1
+	build_machine_type = /obj/machinery/rotating_alarm/supermatter

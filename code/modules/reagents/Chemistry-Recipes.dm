@@ -137,6 +137,15 @@
 	minimum_temperature = 50 CELSIUS
 	maximum_temperature = (50 CELSIUS) + 100
 
+/datum/chemical_reaction/tilt
+	name = "Tilt"
+	result = /datum/reagent/tilt
+	required_reagents = list(
+		/datum/reagent/antidexafen = 1,
+		/datum/reagent/drink/space_up = 2
+	)
+	result_amount = 3
+
 /datum/chemical_reaction/pacid
 	name = "Polytrinic acid"
 	result = /datum/reagent/acid/polyacid
@@ -529,7 +538,7 @@
 	name = "Flash powder"
 	result = null
 	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1 )
-	result_amount = null
+	result_amount = 3
 	mix_message = "The solution bubbles vigorously!"
 
 /datum/chemical_reaction/flash_powder/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
@@ -540,21 +549,28 @@
 	s.start()
 	for(var/mob/living/carbon/M in viewers(world.view, location))
 		switch(get_dist(M, location))
-			if(0 to 3)
-				if(hasvar(M, "glasses"))
-					if(istype(M:glasses, /obj/item/clothing/glasses/sunglasses))
-						continue
+			if(0 to 1)
+				if (M.eyecheck() < FLASH_PROTECTION_MODERATE)
+					M.flash_eyes(2)
+					M.weakened = min(10, (created_volume / 20))
+					M.confused = min(20, (created_volume / 5))
+					M.eye_blurry = min(40, (created_volume / 5))
+				else
+					M.stunned = min(10, (created_volume / 30))
+					M.confused = min(20, (created_volume / 10))
+					M.eye_blurry = min(40, (created_volume / 10))
 
-				M.flash_eyes()
-				M.Weaken(15)
-
-			if(4 to 5)
-				if(hasvar(M, "glasses"))
-					if(istype(M:glasses, /obj/item/clothing/glasses/sunglasses))
-						continue
-
-				M.flash_eyes()
-				M.Stun(5)
+			if(2 to 4)
+				if (M.eyecheck() < FLASH_PROTECTION_MODERATE)
+					M.flash_eyes(2)
+					M.stunned = min(5, (created_volume / 30))
+					M.confused = min(10, (created_volume / 10))
+					M.eye_blurry = min(20, (created_volume / 10))
+				else
+					M.stunned = min(5, (created_volume / 60))
+					M.confused = min(10, (created_volume / 20))
+					M.eye_blurry = min(20, (created_volume / 20))
+		playsound(location, 'sound/effects/bang.ogg', 50, 1, 30)
 
 /datum/chemical_reaction/emp_pulse
 	name = "EMP Pulse"
@@ -589,20 +605,6 @@
 			e.amount *= 0.5
 	e.start()
 	holder.clear_reagents()
-
-/datum/chemical_reaction/phlogiston
-	name = "Phlogiston"
-	result = null
-	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/toxin/phoron = 1, /datum/reagent/acid = 1 )
-	result_amount = 1
-	mix_message = "The solution thickens and begins to bubble."
-
-/datum/chemical_reaction/phlogiston/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
-	..()
-	var/turf/location = get_turf(holder.my_atom.loc)
-	for(var/turf/simulated/floor/target_tile in range(0,location))
-		target_tile.assume_gas(/datum/reagent/toxin/phoron, created_volume, 400+T0C)
-		addtimer(CALLBACK(target_tile, /turf/proc/hotspot_expose, 700, 400), 0)
 
 /datum/chemical_reaction/napalm
 	name = "Napalm"
@@ -1005,13 +1007,13 @@
 	result_amount = 1
 	required = /obj/item/slime_extract/gold
 	var/list/possible_mobs = list(
-							/mob/living/simple_animal/cat,
-							/mob/living/simple_animal/cat/kitten,
-							/mob/living/simple_animal/corgi,
-							/mob/living/simple_animal/corgi/puppy,
-							/mob/living/simple_animal/cow,
-							/mob/living/simple_animal/chick,
-							/mob/living/simple_animal/chicken
+							/mob/living/simple_animal/passive/cat,
+							/mob/living/simple_animal/passive/cat/kitten,
+							/mob/living/simple_animal/passive/corgi,
+							/mob/living/simple_animal/passive/corgi/puppy,
+							/mob/living/simple_animal/passive/cow,
+							/mob/living/simple_animal/passive/chick,
+							/mob/living/simple_animal/passive/chicken
 							)
 
 /datum/chemical_reaction/slime/crit/on_reaction(var/datum/reagents/holder)
@@ -1037,6 +1039,29 @@
 
 	for(var/i = 1, i <= 4 + rand(1,2), i++)
 		var/chosen = pick(borks)
+		var/obj/B = new chosen(get_turf(holder.my_atom))
+		if(B)
+			if(prob(50))
+				for(var/j = 1, j <= rand(1, 3), j++)
+					step(B, pick(NORTH, SOUTH, EAST, WEST))
+
+/datum/chemical_reaction/slime/mixer
+	name = "Slime Mixer"
+	result = null
+	required_reagents = list(/datum/reagent/water = 1)
+	result_amount = 1
+	required = /obj/item/slime_extract/silver
+
+/datum/chemical_reaction/slime/mixer/on_reaction(var/datum/reagents/holder)
+	..()
+	var/list/mixers = typesof(/obj/item/reagent_containers/food/drinks) - typesof(/obj/item/reagent_containers/food/drinks/glass2)
+	playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
+	for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
+		if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
+			M.flash_eyes()
+
+	for(var/i = 1, i <= 4 + rand(1,2), i++)
+		var/chosen = pick(mixers)
 		var/obj/B = new chosen(get_turf(holder.my_atom))
 		if(B)
 			if(prob(50))
@@ -2552,9 +2577,9 @@
 	required_reagents = list(/datum/reagent/drink/tea = 2, /datum/reagent/ethanol/rum = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/lordaniawine
-	name = "Lordanian Wine"
-	result = /datum/reagent/ethanol/lordaniawine
+/datum/chemical_reaction/tadmorwine
+	name = "Tadmoran Wine"
+	result = /datum/reagent/ethanol/tadmorwine
 	required_reagents = list(/datum/reagent/ethanol/wine = 2, /datum/reagent/drink/grenadine = 1)
 	catalysts = list(/datum/reagent/nutriment/mint)
 	result_amount = 3
@@ -2643,12 +2668,12 @@
 /datum/chemical_reaction/alexander
 	name = "Alexander"
 	result = /datum/reagent/ethanol/alexander
-	required_reagents = list(/datum/reagent/ethanol/creme_de_menthe = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/milk/cream = 1)
+	required_reagents = list(/datum/reagent/ethanol/creme_de_cacao = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/milk/cream = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/between_the_sheets
-	name = "Between the Sheets"
-	result = /datum/reagent/ethanol/between_the_sheets
+/datum/chemical_reaction/drifter
+	name = "Drifter"
+	result = /datum/reagent/ethanol/drifter
 	required_reagents = list(/datum/reagent/ethanol/rum = 1, /datum/reagent/ethanol/cognac = 2, /datum/reagent/ethanol/triple_sec = 1, /datum/reagent/drink/juice/lemon = 1)
 	result_amount = 5
 
@@ -2799,8 +2824,8 @@
 /datum/chemical_reaction/orange_soda
 	name = "Fizzy Orange"
 	result = /datum/reagent/drink/orange_soda
-	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/drink/juice/orange = 1)
-	result_amount = 3
+	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/drink/juice/orange = 1, /datum/reagent/sugar = 1)
+	result_amount = 4
 	mix_message = "The liquid blends together smoothly"
 
 /datum/chemical_reaction/pork_soda
@@ -2985,7 +3010,7 @@
 /datum/chemical_reaction/frappe
 	name = "Iced Frappe"
 	result = /datum/reagent/drink/coffee/iced/frappe
-	required_reagents = list(/datum/reagent/drink/coffee = 2, /datum/reagent/drink/ice = 1, /datum/reagent/sugar = 1)
+	required_reagents = list(/datum/reagent/drink/coffee/icecoffee = 3, /datum/reagent/sugar = 1)
 	result_amount = 4
 	minimum_temperature = (0 CELSIUS) - 100
 	maximum_temperature = 0 CELSIUS

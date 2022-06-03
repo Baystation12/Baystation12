@@ -156,9 +156,7 @@
 			M.Stun(8)
 			M.Weaken(5)
 			seed.thrown_at(src,M)
-			sleep(-1)
-			if(src) qdel(src)
-			return
+			qdel(src)
 
 /obj/item/reagent_containers/food/snacks/grown/throw_impact(atom/hit_atom)
 	if(seed) seed.thrown_at(src,hit_atom)
@@ -194,6 +192,10 @@
 					else if(!isnull(seed.chems[/datum/reagent/bamboo]))
 						user.visible_message("<span class='notice'>\The [user] makes planks out of \the [src].</span>")
 						new /obj/item/stack/material/wood/bamboo(user.loc)
+						qdel(src)
+					else if(!isnull(seed.chems[/datum/reagent/resinpulp]))
+						user.visible_message(SPAN_NOTICE("\The [user] makes resin slabs out of \the [src]."))
+						new /obj/item/stack/material/wood/vox(user.loc)
 						qdel(src)
 					return
 				else if(!isnull(seed.chems[/datum/reagent/drink/juice/potato]))
@@ -305,7 +307,7 @@
 	icon = 'icons/obj/hydroponics_misc.dmi'
 	icon_state = ""
 
-var/list/fruit_icon_cache = list()
+var/global/list/fruit_icon_cache = list()
 
 /obj/item/reagent_containers/food/snacks/fruit_slice/New(var/newloc, var/datum/seed/S)
 	..(newloc)

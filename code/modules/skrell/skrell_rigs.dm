@@ -8,6 +8,13 @@
 	sprite_sheets = list(
 		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_chest_rig_skrell.dmi'
 	)
+	allowed = list(
+		/obj/item/gun,
+		/obj/item/ammo_magazine,
+		/obj/item/device/flashlight,
+		/obj/item/tank,
+		/obj/item/device/suit_cooling_unit
+	)
 
 /obj/item/clothing/head/helmet/space/rig/ert/skrell
 	name = "skrellian recon hardsuit helmet"
@@ -53,8 +60,8 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
-	online_slowdown = 0
-	offline_slowdown = 1
+	online_slowdown = 0.75
+	offline_slowdown = 2
 	equipment_overlay_icon = null
 	air_type = /obj/item/tank/skrell
 	cell_type = /obj/item/cell/skrell
@@ -62,13 +69,6 @@
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ert/skrell
 	boot_type = /obj/item/clothing/shoes/magboots/rig/ert/skrell
 	glove_type = /obj/item/clothing/gloves/rig/ert/skrell
-	allowed = list(
-		/obj/item/gun,
-		/obj/item/ammo_magazine,
-		/obj/item/device/flashlight,
-		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit
-	)
 	update_visible_name = TRUE
 	sprite_sheets = list(
 		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_back_rig_skrell.dmi'
@@ -228,8 +228,6 @@
 /obj/item/cell/skrell
 	name = "skrellian microfusion cell"
 	desc = "An impossibly tiny fusion power engine of Skrell design."
-	icon = 'icons/obj/ascent.dmi'
-	icon_state = "plant"
 	maxcharge = 1500
 	w_class = ITEM_SIZE_NORMAL
 	var/recharge_amount = 12

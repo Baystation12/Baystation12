@@ -7,8 +7,8 @@
 	matter = list(MATERIAL_GLASS = 200)
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	var/list/accept_mobs = list(
-		/mob/living/simple_animal/lizard, 
-		/mob/living/simple_animal/mouse,
+		/mob/living/simple_animal/passive/lizard,
+		/mob/living/simple_animal/passive/mouse,
 		/mob/living/simple_animal/borer
 	)
 	var/contains = 0 // 0 = nothing, 1 = money, 2 = animal, 3 = spiderling
@@ -96,7 +96,7 @@
 					var/image/money = image('icons/obj/items.dmi', A)
 					money.pixel_x = rand(-2, 3)
 					money.pixel_y = rand(-6, 6)
-					money.transform *= 0.6
+					money.SetTransform(scale = 0.6)
 					underlays += money
 		if(2)
 			for(var/mob/M in src)

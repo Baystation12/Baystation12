@@ -1,6 +1,6 @@
 /obj/item/mech_equipment/mounted_system/taser
-	name = "mounted electrolaser carbine"
-	desc = "A dual fire mode electrolaser system connected to the exosuit's targetting system."
+	name = "mounted burst electrolaser carbine"
+	desc = "A dual fire mode burst electrolaser system connected to the exosuit's targetting system."
 	icon_state = "mech_taser"
 	holding_type = /obj/item/gun/energy/taser/carbine/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
@@ -8,7 +8,7 @@
 
 /obj/item/mech_equipment/mounted_system/taser/MouseDragInteraction(src_object, over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
 	. = ..()
-	
+
 	if(over_object)
 		var/obj/item/gun/gun = holding
 		if(istype(gun) && gun.can_autofire())
@@ -24,23 +24,28 @@
 	name = "\improper CH-PS \"Immolator\" laser"
 	desc = "An exosuit-mounted laser rifle. Handle with care."
 	icon_state = "mech_lasercarbine"
-	holding_type = /obj/item/gun/energy/laser/mounted/mech
+	holding_type = /obj/item/gun/energy/lasercannon/mounted/mech
 
 /obj/item/gun/energy/taser/carbine/mounted/mech
 	use_external_power = TRUE
 	has_safety = FALSE
 	self_recharge = TRUE
+	burst = 3
+	burst_delay = 3
+	dispersion = list(-1.5,1,1.5)
 
 /obj/item/gun/energy/ionrifle/mounted/mech
 	use_external_power = TRUE
 	has_safety = FALSE
 	self_recharge = TRUE
 
-/obj/item/gun/energy/laser/mounted/mech
+/obj/item/gun/energy/lasercannon/mounted/mech
 	name = "\improper CH-PS \"Immolator\" laser"
 	use_external_power = TRUE
 	has_safety = FALSE
 	self_recharge = TRUE
+	fire_delay = 15
+	accuracy = 2
 
 /obj/item/gun/energy/get_hardpoint_maptext()
 	return "[round(power_supply.charge / charge_cost)]/[max_shots]"
@@ -79,7 +84,7 @@
 
 /obj/item/mech_equipment/shields/proc/stop_damage(var/damage)
 	var/difference = damage - charge
-	charge = Clamp(charge - damage, 0, max_charge)
+	charge = clamp(charge - damage, 0, max_charge)
 
 	last_recharge = world.time
 
@@ -90,7 +95,7 @@
 		playsound(owner.loc,'sound/mecha/internaldmgalarm.ogg',35,1)
 		return difference
 	else return 0
-		
+
 /obj/item/mech_equipment/shields/proc/toggle()
 	if(!aura)
 		return
@@ -99,7 +104,7 @@
 	update_icon()
 	if(aura.active)
 		START_PROCESSING(SSobj, src)
-	else 
+	else
 		STOP_PROCESSING(SSobj, src)
 	active = aura.active
 	passive_power_use = active ? 1 KILOWATTS : 0
@@ -116,17 +121,17 @@
 		return
 	if(aura.active)
 		icon_state = "shield_droid_a"
-	else 
+	else
 		icon_state = "shield_droid"
 
 /obj/item/mech_equipment/shields/Process()
 	if(charge >= max_charge)
 		return
 	if((world.time - last_recharge) < cooldown)
-		return	
+		return
 	var/obj/item/cell/cell = owner.get_cell()
-	
-	var/actual_required_power = Clamp(max_charge - charge, 0, charging_rate)
+
+	var/actual_required_power = clamp(max_charge - charge, 0, charging_rate)
 
 	if(cell)
 		charge += cell.use(actual_required_power)
@@ -134,7 +139,7 @@
 /obj/item/mech_equipment/shields/get_hardpoint_status_value()
 	return charge / max_charge
 
-/obj/item/mech_equipment/shields/get_hardpoint_maptext()	
+/obj/item/mech_equipment/shields/get_hardpoint_maptext()
 	return "[(aura && aura.active) ? "ONLINE" : "OFFLINE"]: [round((charge / max_charge) * 100)]%"
 
 /obj/aura/mechshield
@@ -147,12 +152,12 @@
 	plane = DEFAULT_PLANE
 	pixel_x = 8
 	pixel_y = 4
-	mouse_opacity = 0 
+	mouse_opacity = 0
 
 /obj/aura/mechshield/Initialize(var/maploading, var/obj/item/mech_equipment/shields/holder)
 	. = ..()
 	shields = holder
-		
+
 /obj/aura/mechshield/added_to(var/mob/living/target)
 	. = ..()
 	target.vis_contents += src
@@ -174,7 +179,7 @@
 		user.vis_contents -= src
 	shields = null
 	. = ..()
-	
+
 /obj/aura/mechshield/proc/toggle()
 	active = !active
 
@@ -182,15 +187,15 @@
 
 	if(active)
 		flick("shield_raise", src)
-	else 
+	else
 		flick("shield_drop", src)
-	
+
 
 /obj/aura/mechshield/on_update_icon()
 	. = ..()
 	if(active)
 		icon_state = "shield"
-	else 
+	else
 		icon_state = "shield_null"
 
 /obj/aura/mechshield/bullet_act(var/obj/item/projectile/P, var/def_zone)
@@ -269,7 +274,7 @@
 			E.setClickCooldown(1.35 SECONDS)
 			E.visible_message(SPAN_DANGER("\The [E] swings \the [src] back, preparing for an attack!"), blind_message = SPAN_DANGER("You hear the loud hissing of hydraulics!"))
 			playsound(E, 'sound/mecha/mechmove03.ogg', 35, 1)
-			if (do_after(E, 1.2 SECONDS, get_turf(user), do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) && E && MC)
+			if (do_after(E, 1.2 SECONDS, get_turf(user), DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && E && MC)
 				for (var/mob/living/M in orange(1, E))
 					attack(M, E, E.zone_sel.selecting, FALSE)
 				E.spin(0.65 SECONDS, 0.125 SECONDS)
@@ -290,7 +295,7 @@
 	var/chance = 60 //For attacks from the front, diminishing returns
 	var/last_max_block = 0 //Blocking during a perfect block window resets this, else there is an anti spam
 	var/max_block = 60 // Should block most things
-	var/blocking = FALSE 
+	var/blocking = FALSE
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 
@@ -310,7 +315,7 @@
 				owner.visible_message(SPAN_WARNING("\The [owner] retracts \the [src], preparing to push with it!"), blind_message = SPAN_WARNING("You hear the whine of hydraulics and feel a rush of air!"))
 				owner.setClickCooldown(0.7 SECONDS)
 				last_push = world.time
-				if (do_after(owner, 0.5 SECONDS, get_turf(owner), do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) && owner)
+				if (do_after(owner, 0.5 SECONDS, get_turf(owner), DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && owner)
 					owner.visible_message(SPAN_WARNING("\The [owner] slams the area in front \the [src]!"), blind_message = SPAN_WARNING("You hear a loud hiss and feel a strong gust of wind!"))
 					playsound(src ,'sound/effects/bang.ogg',35,1)
 					var/list/turfs = list()
@@ -325,7 +330,7 @@
 							M.attack_generic(owner, (owner.arms ? owner.arms.melee_damage * 1.2 : 0), "slammed")
 							M.throw_at(get_edge_target_turf(owner ,owner.dir),5, 2)
 						do_attack_effect(T, "smash")
-			
+
 /obj/item/mech_equipment/ballistic_shield/attack_self(mob/user)
 	. = ..()
 	if (.) //FORM A SHIELD WALL!
@@ -335,7 +340,7 @@
 			owner.setClickCooldown(0.8 SECONDS)
 			blocking = TRUE
 			last_max_block = world.time
-			do_after(owner, 0.75 SECONDS, get_turf(user), do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT)
+			do_after(owner, 0.75 SECONDS, get_turf(user), DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)
 			blocking = FALSE
 		else
 			to_chat(user, SPAN_WARNING("You are not ready to block again!"))
@@ -354,7 +359,7 @@
 
 		if (!conscious_pilot_exists)
 			effective_block *= 0.5 //Who is going to block anything?
-		
+
 		//Bit copypasta but I am doing something different from normal shields
 		var/attack_dir = 0
 		if (istype(source, /obj/item/projectile))
@@ -376,14 +381,14 @@
 	if (blocking)
 		//Reset timer for maximum chainblocks
 		last_max_block = 0
-	
+
 /obj/aura/mech_ballistic
 	icon = 'icons/mecha/ballistic_shield.dmi'
 	name = "mech_ballistic_shield"
 	var/obj/item/mech_equipment/ballistic_shield/shield = null
 	layer = MECH_UNDER_LAYER
 	plane = DEFAULT_PLANE
-	mouse_opacity = 0 
+	mouse_opacity = 0
 
 /obj/aura/mech_ballistic/Initialize(maploading, obj/item/mech_equipment/ballistic_shield/holder)
 	. = ..()
@@ -398,8 +403,8 @@
 				icon_state = "mech_shield_[hardpoint]"
 				var/image/I = image(icon, "[icon_state]_over")
 				I.layer = ABOVE_HUMAN_LAYER
-				overlays.Add(I)			
-		
+				overlays.Add(I)
+
 /obj/aura/mech_ballistic/added_to(mob/living/target)
 	. = ..()
 	target.vis_contents += src
@@ -415,7 +420,7 @@
 		user.vis_contents -= src
 	shield = null
 	. = ..()
-	
+
 /obj/aura/mech_ballistic/bullet_act(obj/item/projectile/P, def_zone)
 	. = ..()
 	if (shield)
@@ -428,7 +433,7 @@
 	. = ..()
 	if (shield)
 		var/throw_damage = 0
-		if (istype(M,/obj/))
+		if (isobj(M))
 			var/obj/O = M
 			throw_damage = O.throwforce*(TT.speed/THROWFORCE_SPEED_DIVISOR)
 
@@ -459,7 +464,7 @@
 
 /obj/item/mech_equipment/flash/proc/area_flash()
 	playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
-	var/flash_time = (rand(flash_min,flash_max) - 1) 
+	var/flash_time = (rand(flash_min,flash_max) - 1)
 
 	var/obj/item/cell/C = owner.get_cell()
 	C.use(active_power_use * CELLRATE)
@@ -471,7 +476,7 @@
 				return
 
 			if(protection >= FLASH_PROTECTION_MINOR)
-				flash_time /= 2	
+				flash_time /= 2
 
 			if(ishuman(O))
 				var/mob/living/carbon/human/H = O
@@ -483,7 +488,7 @@
 				O.flash_eyes(FLASH_PROTECTION_MODERATE - protection)
 				O.eye_blurry += flash_time
 				O.confused += (flash_time + 2)
-			
+
 /obj/item/mech_equipment/flash/attack_self(mob/user)
 	. = ..()
 	if(.)
@@ -503,7 +508,7 @@
 		var/mob/living/O = target
 		owner.setClickCooldown(5)
 		next_use = world.time + 15
-		
+
 		if(istype(O))
 
 			playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
@@ -517,7 +522,7 @@
 				return
 
 			if(protection >= FLASH_PROTECTION_MODERATE)
-				flash_time /= 2	
+				flash_time /= 2
 
 			if(ishuman(O))
 				var/mob/living/carbon/human/H = O

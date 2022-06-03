@@ -301,7 +301,7 @@ Sells devices, odds and ends, and medical stuff
 				)
 
 	possible_wanted_items = list(/mob/living/simple_animal/tindalos    = TRADER_THIS_TYPE,
-								/mob/living/simple_animal/tomato      = TRADER_THIS_TYPE,
+								/mob/living/simple_animal/passive/tomato      = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/yithian     = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/hostile/retaliate/beast/diyaab = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/hostile/retaliate/beast/shantak= TRADER_THIS_TYPE,
@@ -364,7 +364,7 @@ Sells devices, odds and ends, and medical stuff
 								  /obj/item/reagent_containers/glass/bottle/antitoxin = TRADER_THIS_TYPE,
 								  /obj/item/reagent_containers/glass/bottle/inaprovaline = TRADER_THIS_TYPE,
 								  /obj/item/bodybag/cryobag = TRADER_THIS_TYPE,
-								  /obj/item/reagent_containers/chem_disp_cartridge/dexalin/small = TRADER_THIS_TYPE,
+								  /obj/item/reagent_containers/chem_disp_cartridge/small/dexalin = TRADER_THIS_TYPE,
 								  /obj/item/sign/medipolma = TRADER_THIS_TYPE
 								)
 

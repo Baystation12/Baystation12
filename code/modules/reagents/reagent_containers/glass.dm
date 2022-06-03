@@ -18,7 +18,7 @@
 
 
 	var/list/can_be_placed_into = list(
-		/obj/machinery/chem_master/,
+		/obj/machinery/chem_master,
 		/obj/machinery/chem_master/condimaster,
 		/obj/machinery/chemical_dispenser,
 		/obj/machinery/reagentgrinder,
@@ -32,10 +32,10 @@
 		/obj/item/storage/secure/safe,
 		/obj/structure/iv_drip,
 		/obj/machinery/disposal,
-		/mob/living/simple_animal/cow,
+		/mob/living/simple_animal/passive/cow,
 		/mob/living/simple_animal/hostile/retaliate/goat,
 		/obj/machinery/sleeper,
-		/obj/machinery/smartfridge/,
+		/obj/machinery/smartfridge,
 		/obj/machinery/biogenerator,
 		/obj/machinery/constructable_frame,
 		/obj/machinery/radiocarbon_spectrometer
@@ -91,6 +91,9 @@
 /obj/item/reagent_containers/glass/throw_impact(atom/hit_atom)
 	if (QDELETED(src))
 		return
+	if (!LAZYISIN(matter, MATERIAL_GLASS))
+		return
+
 	if (prob(80))
 		if (reagents.reagent_list.len > 0)
 			visible_message(
@@ -125,6 +128,7 @@
 		return TRUE
 	splashtarget(target, user)
 
+
 /obj/item/reagent_containers/glass/beaker
 	name = "beaker"
 	desc = "A beaker."
@@ -134,47 +138,56 @@
 	center_of_mass = "x=15;y=10"
 	matter = list(MATERIAL_GLASS = 500)
 
-	New()
-		..()
-		desc += " It can hold up to [volume] units."
 
-	on_reagent_change()
-		update_icon()
+/obj/item/reagent_containers/glass/beaker/New()
+	..()
+	desc += " It can hold up to [volume] units."
 
-	pickup(mob/user)
-		..()
-		update_icon()
 
-	dropped(mob/user)
-		..()
-		update_icon()
-
-	attack_hand()
-		..()
-		update_icon()
-
+/obj/item/reagent_containers/glass/beaker/on_reagent_change()
 	update_icon()
-		overlays.Cut()
 
-		if(reagents.total_volume)
-			var/image/filling = image('icons/obj/reagentfillings.dmi', src, "[icon_state]10")
 
-			var/percent = round((reagents.total_volume / volume) * 100)
-			switch(percent)
-				if(0 to 9)		filling.icon_state = "[icon_state]-10"
-				if(10 to 24) 	filling.icon_state = "[icon_state]10"
-				if(25 to 49)	filling.icon_state = "[icon_state]25"
-				if(50 to 74)	filling.icon_state = "[icon_state]50"
-				if(75 to 79)	filling.icon_state = "[icon_state]75"
-				if(80 to 90)	filling.icon_state = "[icon_state]80"
-				if(91 to INFINITY)	filling.icon_state = "[icon_state]100"
+/obj/item/reagent_containers/glass/beaker/pickup(mob/user)
+	..()
+	update_icon()
 
-			filling.color = reagents.get_color()
-			overlays += filling
+/obj/item/reagent_containers/glass/beaker/dropped(mob/user)
+	..()
+	update_icon()
 
-		if (!is_open_container())
-			var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
-			overlays += lid
+
+/obj/item/reagent_containers/glass/beaker/attack_hand()
+	..()
+	update_icon()
+
+
+/obj/item/reagent_containers/glass/beaker/on_update_icon()
+	overlays.Cut()
+	if (reagents.total_volume)
+		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "[icon_state]10")
+		var/percent = round((reagents.total_volume / volume) * 100)
+		switch(percent)
+			if (0 to 9)
+				filling.icon_state = "[icon_state]-10"
+			if (10 to 24)
+				filling.icon_state = "[icon_state]10"
+			if (25 to 49)
+				filling.icon_state = "[icon_state]25"
+			if (50 to 74)
+				filling.icon_state = "[icon_state]50"
+			if (75 to 79)
+				filling.icon_state = "[icon_state]75"
+			if (80 to 90)
+				filling.icon_state = "[icon_state]80"
+			if (91 to INFINITY)
+				filling.icon_state = "[icon_state]100"
+		filling.color = reagents.get_color()
+		overlays += filling
+	if (!is_open_container())
+		var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
+		overlays += lid
+
 
 /obj/item/reagent_containers/glass/beaker/large
 	name = "large beaker"
@@ -250,17 +263,18 @@
 	matter = list(MATERIAL_GLASS = 5000, MATERIAL_PLASTIC = 2500)
 	volume = 120
 
-/obj/item/reagent_containers/glass/beaker/cryoxadone
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/cryoxadone, 30)
-		update_icon()
 
-/obj/item/reagent_containers/glass/beaker/sulphuric
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/acid, 60)
-		update_icon()
+/obj/item/reagent_containers/glass/beaker/cryoxadone/New()
+	..()
+	reagents.add_reagent(/datum/reagent/cryoxadone, 30)
+	update_icon()
+
+
+/obj/item/reagent_containers/glass/beaker/sulphuric/New()
+	..()
+	reagents.add_reagent(/datum/reagent/acid, 60)
+	update_icon()
+
 
 /obj/item/reagent_containers/glass/bucket
 	name = "bucket"

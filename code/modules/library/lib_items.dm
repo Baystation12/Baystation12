@@ -40,7 +40,7 @@
 	else if(isScrewdriver(O))
 		playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 		to_chat(user, "<span class='notice'>You begin dismantling \the [src].</span>")
-		if(do_after(user,25,src))
+		if(do_after(user, 2.5 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>You dismantle \the [src].</span>")
 			new/obj/item/stack/material/wood(get_turf(src), 5)
 			for(var/obj/item/book/b in contents)
@@ -66,18 +66,18 @@
 
 /obj/structure/bookcase/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			for(var/obj/item/book/b in contents)
 				qdel(b)
 			qdel(src)
 			return
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			for(var/obj/item/book/b in contents)
 				if (prob(50)) b.dropInto(loc)
 				else qdel(b)
 			qdel(src)
 			return
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			if (prob(50))
 				for(var/obj/item/book/b in contents)
 					b.dropInto(loc)
@@ -97,38 +97,38 @@
 /obj/structure/bookcase/manuals/medical
 	name = "Medical Manuals bookcase"
 
-	New()
-		..()
-		new /obj/item/book/manual/medical_cloning(src)
-		new /obj/item/book/manual/medical_diagnostics_manual(src)
-		new /obj/item/book/manual/medical_diagnostics_manual(src)
-		new /obj/item/book/manual/medical_diagnostics_manual(src)
-		new /obj/item/book/manual/chemistry_recipes(src)
-		update_icon()
+/obj/structure/bookcase/manuals/medical/New()
+	..()
+	new /obj/item/book/manual/medical_cloning(src)
+	new /obj/item/book/manual/medical_diagnostics_manual(src)
+	new /obj/item/book/manual/medical_diagnostics_manual(src)
+	new /obj/item/book/manual/medical_diagnostics_manual(src)
+	new /obj/item/book/manual/chemistry_recipes(src)
+	update_icon()
 
 
 /obj/structure/bookcase/manuals/engineering
 	name = "Engineering Manuals bookcase"
 
-	New()
-		..()
-		new /obj/item/book/manual/engineering_construction(src)
-		new /obj/item/book/manual/engineering_particle_accelerator(src)
-		new /obj/item/book/manual/engineering_hacking(src)
-		new /obj/item/book/manual/engineering_guide(src)
-		new /obj/item/book/manual/atmospipes(src)
-		new /obj/item/book/manual/engineering_singularity_safety(src)
-		new /obj/item/book/manual/evaguide(src)
-		new /obj/item/book/manual/rust_engine(src)
-		update_icon()
+/obj/structure/bookcase/manuals/engineering/New()
+	..()
+	new /obj/item/book/manual/engineering_construction(src)
+	new /obj/item/book/manual/engineering_particle_accelerator(src)
+	new /obj/item/book/manual/engineering_hacking(src)
+	new /obj/item/book/manual/engineering_guide(src)
+	new /obj/item/book/manual/atmospipes(src)
+	new /obj/item/book/manual/engineering_singularity_safety(src)
+	new /obj/item/book/manual/evaguide(src)
+	new /obj/item/book/manual/rust_engine(src)
+	update_icon()
 
 /obj/structure/bookcase/manuals/research_and_development
 	name = "R&D Manuals bookcase"
 
-	New()
-		..()
-		new /obj/item/book/manual/research_and_development(src)
-		update_icon()
+/obj/structure/bookcase/manuals/research_and_development/New()
+	..()
+	new /obj/item/book/manual/research_and_development(src)
+	update_icon()
 
 
 /*
@@ -214,7 +214,7 @@
 	else if(istype(W, /obj/item/material/knife) || isWirecutter(W))
 		if(carved)	return
 		to_chat(user, "<span class='notice'>You begin to carve out [title].</span>")
-		if(do_after(user, 30, src))
+		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>You carve out the pages from [title]! You didn't want to read it anyway.</span>")
 			carved = 1
 			return
@@ -240,15 +240,15 @@
 	..()
 	if(url)		// URL provided for this manual
 		// If we haven't wikiurl or it included in url - just use url
-		if(config.wikiurl && !findtextEx(url, config.wikiurl, 1, length(config.wikiurl)+1))
+		if(config.wiki_url && !findtextEx(url, config.wiki_url, 1, length(config.wiki_url)+1))
 			// If we have wikiurl, but it hasn't "index.php" then add it and making full link in url
-			if(config.wikiurl && !findtextEx(config.wikiurl, "/index.php", -10))
-				if(findtextEx(config.wikiurl, "/", -1))
-					url = config.wikiurl + "index.php?title=" + url
+			if(config.wiki_url && !findtextEx(config.wiki_url, "/index.php", -10))
+				if(findtextEx(config.wiki_url, "/", -1))
+					url = config.wiki_url + "index.php?title=" + url
 				else
-					url = config.wikiurl + "/index.php?title=" + url
+					url = config.wiki_url + "/index.php?title=" + url
 			else	//Or just making full link in url
-				url = config.wikiurl + "?title=" + url
+				url = config.wiki_url + "?title=" + url
 		dat = {"
 			<html>
 				<head>

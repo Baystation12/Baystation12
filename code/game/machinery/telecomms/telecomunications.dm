@@ -218,7 +218,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		if((T0C + 200) to INFINITY)					// More than 200C, INFERNO. Takes damage every tick.
 			damage_chance = 100
 	if (damage_chance && prob(damage_chance))
-		integrity = between(0, integrity - 1, 100)
+		integrity = clamp(integrity - 1, 0, 100)
 
 
 	if(delay > 0)
@@ -513,7 +513,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 				if(ishuman(M) || isbrain(M))
 					race = "Sapient Race"
 					log.parameters["intelligible"] = 1
-				else if(M.isMonkey())
+				else if(M.is_species(SPECIES_MONKEY))
 					race = "Monkey"
 				else if(issilicon(M))
 					race = "Artificial Life"

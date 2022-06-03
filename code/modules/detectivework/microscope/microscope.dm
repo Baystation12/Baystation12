@@ -44,7 +44,7 @@
 
 	to_chat(user, "<span class='notice'>The microscope whirrs as you examine \the [sample].</span>")
 
-	if(!user.do_skilled(25, SKILL_FORENSICS, src) || !sample)
+	if(!user.do_skilled(2.5 SECONDS, SKILL_FORENSICS, src) || !sample)
 		to_chat(user, "<span class='notice'>You stop examining \the [sample].</span>")
 		return
 
@@ -83,8 +83,10 @@
 	report.info = "<b>Scanned item:</b><br>[scaned_object]<br><br>"
 	if("gunshot_residue" in evidence)
 		report.info += "<b>Gunpowder residue analysis report #[report_num]</b>: [scaned_object]<br>"
-		if(evidence["gunshot_residue"])
-			report.info += "Residue from a [evidence["gunshot_residue"]] bullet detected."
+		if(LAZYLEN(evidence["gunshot_residue"]))
+			report.info += "Residue from the following bullets detected:"
+			for(var/residue in evidence["gunshot_residue"])
+				report.info += "<span class='notice'>[residue]</span><br><br>"
 		else
 			report.info += "No gunpowder residue found."
 	if("fibers" in evidence)

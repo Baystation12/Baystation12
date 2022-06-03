@@ -17,10 +17,13 @@
 	return list(
 		/obj/item/clothing/head/soft/mime,
 		/obj/item/device/radio/headset/headset_service,
-		/obj/item/storage/box/mousetraps = 2,
+		/obj/item/storage/box/mousetraps,
 		/obj/item/clothing/under/rank/chef,
 		/obj/item/clothing/head/chefhat,
-		/obj/item/clothing/suit/chef/classic
+		/obj/item/clothing/suit/chef/classic,
+		/obj/item/storage/box/silverware,
+		/obj/item/clothing/mask/surgical,
+		/obj/item/clothing/gloves/latex
 	)
 
 /obj/structure/closet/secure_closet/hydroponics_torch //done so that it has no access reqs
@@ -38,8 +41,7 @@
 		/obj/item/wirecutters/clippers,
 		/obj/item/reagent_containers/spray/plantbgone,
 		new /datum/atom_creator/weighted(list(/obj/item/clothing/suit/apron, /obj/item/clothing/suit/apron/overalls)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/hydroponics, /obj/item/storage/backpack/satchel/hyd)),
-		new /datum/atom_creator/simple(/obj/item/storage/backpack/messenger/hyd, 50)
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/hydroponics, /obj/item/storage/backpack/satchel/hyd))
 	)
 
 /obj/structure/closet/jcloset_torch
@@ -66,7 +68,7 @@
 /obj/structure/closet/secure_closet/bar_torch
 	name = "bar locker"
 	desc = "It's a storage unit for bar equipment."
-	req_access = list(access_bar)
+	req_access = list(access_kitchen)
 
 /obj/structure/closet/secure_closet/bar_torch/WillContain()
 	return list(
@@ -78,4 +80,3 @@
 		/obj/item/clothing/under/rank/bartender,
 		/obj/item/clothing/shoes/laceup
 	)
-

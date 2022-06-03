@@ -42,7 +42,7 @@
 		glass = 1
 		alpha = 180
 		set_opacity(0)
-	
+
 	if(!density)
 		set_opacity(0)
 	update_icon()
@@ -87,14 +87,14 @@
 /obj/machinery/door/unpowered/simple/close(var/forced = 0)
 	if(!can_close(forced))
 		return
-	
+
 	// If the door is blocked, don't close
 	for(var/turf/A in locs)
 		var/turf/T = A
 		var/obstruction = T.get_obstruction()
 		if (obstruction)
 			return
-	
+
 	playsound(src.loc, material.dooropen_noise, 100, 1)
 	..()
 
@@ -122,14 +122,14 @@
 
 /obj/machinery/door/unpowered/simple/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			set_broken(TRUE)
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if(prob(25))
 				set_broken(TRUE)
 			else
 				take_damage(300)
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			if(prob(20))
 				take_damage(150)
 
@@ -165,12 +165,12 @@
 
 		//figure out how much metal we need
 		var/obj/item/stack/stack = I
-		var/amount_needed = ceil((maxhealth - health)/DOOR_REPAIR_AMOUNT)
+		var/amount_needed = Ceil((maxhealth - health)/DOOR_REPAIR_AMOUNT)
 		var/used = min(amount_needed,stack.amount)
 		if (used)
 			to_chat(user, "<span class='notice'>You fit [used] [stack.singular_name]\s to damaged and broken parts on \the [src].</span>")
 			stack.use(used)
-			health = between(health, health + used*DOOR_REPAIR_AMOUNT, maxhealth)
+			health = clamp(health + used * DOOR_REPAIR_AMOUNT, health, maxhealth)
 		return
 
 	if (check_force(I, user))

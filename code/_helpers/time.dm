@@ -10,13 +10,23 @@
 #define DAY *864000
 #define DAYS *864000
 
-#define TimeOfGame (get_game_time())
-#define TimeOfTick (world.tick_usage*0.01*world.tick_lag)
 
-#define TICKS *world.tick_lag
-
-#define DS2TICKS(DS) ((DS)/world.tick_lag)
-#define TICKS2DS(T) ((T) TICKS)
+/// Real time since the server started. Same concept as REALTIMEOFDAY.
+/proc/Uptime(from_zero)
+	var/static/days = 0
+	var/static/result = 0
+	var/static/started = world.timeofday
+	var/static/last_time = started
+	var/time = world.timeofday
+	if (time == last_time)
+		return result
+	if (time < last_time)
+		++days
+	last_time = time
+	result = time + days DAYS
+	if (from_zero)
+		result -= started
+	return result
 
 
 /proc/minutes_to_readable(minutes)
@@ -68,9 +78,9 @@
 
 
 /proc/get_game_time()
-	var/global/time_offset = 0
-	var/global/last_time = 0
-	var/global/last_usage = 0
+	var/static/time_offset = 0
+	var/static/last_time = 0
+	var/static/last_usage = 0
 
 	var/wtime = world.time
 	var/wusage = world.tick_usage * 0.01
@@ -83,9 +93,9 @@
 
 	return wtime + (time_offset + wusage) * world.tick_lag
 
-var/roundstart_hour
-var/station_date = ""
-var/next_station_date_change = 1 DAY
+var/global/roundstart_hour
+var/global/station_date = ""
+var/global/next_station_date_change = 1 DAY
 
 #define duration2stationtime(time) time2text(station_time_in_ticks + time, "hh:mm")
 #define worldtime2stationtime(time) time2text(roundstart_hour HOURS + time, "hh:mm")
@@ -110,7 +120,7 @@ var/next_station_date_change = 1 DAY
 	return time2text(station_time_in_ticks, "hh:mm:ss")
 
 /* Returns 1 if it is the selected month and day */
-proc/isDay(var/month, var/day)
+/proc/isDay(var/month, var/day)
 	if(isnum(month) && isnum(day))
 		var/MM = text2num(time2text(world.timeofday, "MM")) // get the current month
 		var/DD = text2num(time2text(world.timeofday, "DD")) // get the current day
@@ -121,9 +131,9 @@ proc/isDay(var/month, var/day)
 		//else
 			//return 1
 
-var/next_duration_update = 0
-var/last_round_duration = 0
-var/round_start_time = 0
+var/global/next_duration_update = 0
+var/global/last_round_duration = 0
+var/global/round_start_time = 0
 
 /hook/roundstart/proc/start_timer()
 	round_start_time = world.time
@@ -140,8 +150,8 @@ var/round_start_time = 0
 	var/mins = round((mills % 36000) / 600)
 	var/hours = round(mills / 36000)
 
-	mins = mins < 10 ? add_zero(mins, 1) : mins
-	hours = hours < 10 ? add_zero(hours, 1) : hours
+	mins = pad_left("[mins]", 2, "0")
+	hours = pad_left("[hours]", 2, "0")
 
 	last_round_duration = "[hours]:[mins]"
 	next_duration_update = world.time + 1 MINUTES
@@ -151,30 +161,22 @@ var/round_start_time = 0
 	roundstart_hour = rand(0, 23)
 	return 1
 
-GLOBAL_VAR_INIT(midnight_rollovers, 0)
-GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
-/proc/update_midnight_rollover()
-	if (world.timeofday < GLOB.rollovercheck_last_timeofday) //TIME IS GOING BACKWARDS!
-		return GLOB.midnight_rollovers++
-	return GLOB.midnight_rollovers
 
-//Increases delay as the server gets more overloaded,
-//as sleeps aren't cheap and sleeping only to wake up and sleep again is wasteful
-#define DELTA_CALC max(((max(world.tick_usage, world.cpu) / 100) * max(Master.sleep_delta,1)), 1)
-
-/proc/stoplag()
+/proc/stoplag(initial_delay = world.tick_lag)
 	if (!Master || !(GAME_STATE & RUNLEVELS_DEFAULT))
 		sleep(world.tick_lag)
 		return 1
-	. = 0
-	var/i = 1
+	var/delta
+	var/total = 0
+	var/delay = initial_delay / world.tick_lag
 	do
-		. += round(i*DELTA_CALC)
-		sleep(i*world.tick_lag*DELTA_CALC)
-		i *= 2
-	while (world.tick_usage > min(TICK_LIMIT_TO_RUN, Master.current_ticklimit))
+		delta = delay * max(0.01 * max(world.tick_usage, world.cpu) * max(Master.sleep_delta, 1), 1) // Scale up delay under load; sleeps have entry overhead from proc duplication
+		sleep(world.tick_lag * delta)
+		total += Ceil(delta)
+		delay *= 2
+	while (world.tick_usage > min(Master.tick_limit_to_run, Master.current_ticklimit))
+	return total
 
-#undef DELTA_CALC
 
 /proc/acquire_days_per_month()
 	. = list(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)

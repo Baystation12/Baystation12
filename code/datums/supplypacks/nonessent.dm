@@ -89,7 +89,7 @@
 	num_contained = 2
 	contains = list(/obj/item/clothing/suit/pirate,
 					/obj/item/clothing/suit/judgerobe,
-					/obj/item/clothing/accessory/wcoat/black,
+					/obj/item/clothing/accessory/waistcoat/black,
 					/obj/item/clothing/suit/hastur,
 					/obj/item/clothing/suit/holidaypriest,
 					/obj/item/clothing/suit/nun,
@@ -136,7 +136,7 @@
 					/obj/item/clothing/shoes/black,
 					/obj/item/clothing/shoes/black,
 					/obj/item/clothing/shoes/leather,
-					/obj/item/clothing/accessory/wcoat/black)
+					/obj/item/clothing/accessory/waistcoat/black)
 	name = "Costume - Formalwear"
 	cost = 30
 	containertype = /obj/structure/closet
@@ -248,18 +248,24 @@
 	cost = 10
 	containername = "chaplain equipment crate"
 
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl3
+/decl/hierarchy/supply_pack/nonessent/exosuit_mod
+	num_contained = 1
 	name = "Mod - \"Firestarter\" exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/powerloader/flames_red)
+	contains = list(/obj/item/device/kit/paint/flames_red)
 	cost = 50
 	containername = "heavy exosuit modkit crate"
 
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl4
-	num_contained = 1
+/decl/hierarchy/supply_pack/nonessent/exosuit_mod/chrome
 	name = "Mod - \"Burning Chrome\" exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/powerloader/flames_blue)
-	cost = 50
-	containername = "heavy exosuit modkit crate"
+	contains = list(/obj/item/device/kit/paint/flames_blue)
+
+/decl/hierarchy/supply_pack/nonessent/exosuit_mod/military
+	name = "Mod - \"Guerilla\" exosuit modkit"
+	contains = list(/obj/item/device/kit/paint/camouflage)
+
+/decl/hierarchy/supply_pack/nonessent/exosuit_mod/alpine
+	name = "Mod - \"Alpine\" exosuit modkit"
+	contains = list(/obj/item/device/kit/paint/camouflage/forest)
 
 /decl/hierarchy/supply_pack/nonessent/aromatherapy
 	name = "Rec - Aromatherapy"
@@ -274,14 +280,14 @@
 /decl/hierarchy/supply_pack/nonessent/pins
 	name = "Costume - Pride Pin Crate"
 	contains = list(
-		/obj/item/clothing/accessory/pridepins = 2,
-		/obj/item/clothing/accessory/pridepins/lesbianpin = 2,
-		/obj/item/clothing/accessory/pridepins/bisexualpin = 2,
-		/obj/item/clothing/accessory/pridepins/gaypin = 2,
-		/obj/item/clothing/accessory/pridepins/pansexualpin = 2,
-		/obj/item/clothing/accessory/pridepins/nonbinarypin = 2,
-		/obj/item/clothing/accessory/pridepins/asexualpin = 2,
-		/obj/item/clothing/accessory/pridepins/intersexpin = 2
+		/obj/item/clothing/accessory/pride_pin/transgender = 2,
+		/obj/item/clothing/accessory/pride_pin/lesbian = 2,
+		/obj/item/clothing/accessory/pride_pin/bisexual = 2,
+		/obj/item/clothing/accessory/pride_pin/gay = 2,
+		/obj/item/clothing/accessory/pride_pin/pansexual = 2,
+		/obj/item/clothing/accessory/pride_pin/nonbinary = 2,
+		/obj/item/clothing/accessory/pride_pin/asexual = 2,
+		/obj/item/clothing/accessory/pride_pin/intersex = 2
 	)
 	cost = 20
 	containername = "pin crate"
@@ -289,13 +295,14 @@
 /decl/hierarchy/supply_pack/nonessent/pronounbadges
 	name = "Costume - Pronoun Badge Crate"
 	contains = list(
-		/obj/item/clothing/accessory/pronouns = 2,
-		/obj/item/clothing/accessory/pronouns/hehimbadge = 2,
-		/obj/item/clothing/accessory/pronouns/sheherbadge = 2,
-		/obj/item/clothing/accessory/pronouns/hetheybadge = 2,
-		/obj/item/clothing/accessory/pronouns/shetheybadge = 2,
-		/obj/item/clothing/accessory/pronouns/zehirbadge = 2,
-		/obj/item/clothing/accessory/pronouns/pleaseaskbadge = 2
+		/obj/item/clothing/accessory/pronouns/they = 2,
+		/obj/item/clothing/accessory/pronouns/hehim = 2,
+		/obj/item/clothing/accessory/pronouns/sheher = 2,
+		/obj/item/clothing/accessory/pronouns/hethey = 2,
+		/obj/item/clothing/accessory/pronouns/shethey = 2,
+		/obj/item/clothing/accessory/pronouns/heshe = 2,
+		/obj/item/clothing/accessory/pronouns/zehir = 2,
+		/obj/item/clothing/accessory/pronouns/ask = 2
 	)
 	cost = 20
 	containername = "pronoun badge crate"

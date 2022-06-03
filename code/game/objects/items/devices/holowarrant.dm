@@ -1,6 +1,7 @@
 /obj/item/device/holowarrant
 	name = "warrant projector"
 	desc = "The practical paperwork replacement for the officer on the go."
+	icon = 'icons/obj/holowarrant.dmi'
 	icon_state = "holowarrant"
 	item_state = "holowarrant"
 	throwforce = 5
@@ -40,15 +41,17 @@
 	var/list/warrants = list()
 	for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
 		if(!W.archived)
-			warrants += W.fields["namewarrant"]
+			warrants["[W.fields["namewarrant"]] ([capitalize(W.fields["arrestsearch"])])"] = W
 	if(warrants.len == 0)
 		to_chat(user,"<span class='notice'>There are no warrants available</span>")
 		return
-	var/temp
+	var/datum/computer_file/data/warrant/temp
 	temp = input(user, "Which warrant would you like to load?") as null|anything in warrants
-	for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
-		if(W.fields["namewarrant"] == temp)
-			active = W
+	if (!temp)
+		update_icon()
+		return
+	temp = warrants[temp]
+	active = temp
 	update_icon()
 
 /obj/item/device/holowarrant/attackby(obj/item/W, mob/user)

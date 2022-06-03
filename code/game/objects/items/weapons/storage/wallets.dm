@@ -23,26 +23,27 @@
 		/obj/item/disk,
 		/obj/item/implant,
 		/obj/item/implanter,
-		/obj/item/flame,
-		/obj/item/paper,
-		/obj/item/paper_bundle,
-		/obj/item/pen,
-		/obj/item/photo,
-		/obj/item/reagent_containers/dropper,
 		/obj/item/reagent_containers/syringe,
-		/obj/item/reagent_containers/pill,
 		/obj/item/reagent_containers/hypospray/autoinjector,
 		/obj/item/reagent_containers/glass/beaker/vial,
+		/obj/item/flame,
+		/obj/item/paper,
+		/obj/item/pen,
+		/obj/item/photo,
+		/obj/item/reagent_containers/pill,
 		/obj/item/device/radio/headset,
-		/obj/item/device/paicard,
-		/obj/item/stamp,
+		/obj/item/device/encryptionkey,
 		/obj/item/key,
 		/obj/item/clothing/accessory/badge,
 		/obj/item/clothing/accessory/medal,
-		/obj/item/clothing/accessory/armor/tag,
+		/obj/item/clothing/accessory/armor_tag,
 		/obj/item/clothing/ring,
-		/obj/item/passport
+		/obj/item/passport,
+		/obj/item/clothing/accessory/pride_pin,
+		/obj/item/clothing/accessory/pronouns,
+		/obj/item/storage/chewables/rollable
 	)
+
 	slot_flags = SLOT_ID
 
 	var/obj/item/card/id/front_id = null
@@ -78,7 +79,7 @@
 		if(("id-"+front_id.icon_state) in icon_states(icon))
 			tiny_state = "id-"+front_id.icon_state
 		var/image/tiny_image = new/image(icon, icon_state = tiny_state)
-		tiny_image.appearance_flags = RESET_COLOR
+		tiny_image.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 		overlays += tiny_image
 
 /obj/item/storage/wallet/GetIdCard()
@@ -90,6 +91,20 @@
 		return I.GetAccess()
 	else
 		return ..()
+
+
+/obj/item/storage/wallet/AltClick(mob/user)
+	if (user != loc || user.incapacitated() || !ishuman(user))
+		return ..()
+
+	var/obj/item/card/id/id = GetIdCard()
+	if (istype(id))
+		remove_from_storage(id)
+		user.put_in_hands(id)
+		return
+
+	return ..()
+
 
 /obj/item/storage/wallet/random/New()
 	..()
@@ -131,11 +146,12 @@
 		return
 	color = new_color
 
-/obj/item/storage/wallet/poly/emp_act()
+/obj/item/storage/wallet/poly/emp_act(severity)
 	icon_state = "wallet-emp"
 	update_icon()
+	addtimer(CALLBACK(src, .proc/resolve_emp_timer), 20 SECONDS)
+	..()
 
-	spawn(200)
-		if(src)
-			icon_state = initial(icon_state)
-			update_icon()
+/obj/item/storage/wallet/poly/proc/resolve_emp_timer()
+	icon_state = initial(icon_state)
+	update_icon()

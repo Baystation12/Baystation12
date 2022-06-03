@@ -36,7 +36,6 @@
 		/obj/item/device/tape/random,
 		/obj/item/device/gps,
 		/obj/item/pinpointer/radio,
-		/obj/item/device/radio/beacon,
 		/obj/item/taperoll/research,
 		/obj/item/material/hatchet/machete/deluxe,
 		/obj/item/storage/belt/holster/machete,
@@ -50,11 +49,10 @@
 		/obj/item/storage/box/encryptionkey/exploration,
 		/obj/item/device/binoculars,
 		/obj/item/material/knife/folding/swiss/explorer,
-		/obj/item/clothing/accessory/buddytag,
+		/obj/item/clothing/accessory/buddy_tag,
 		/obj/item/storage/firstaid/light,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack, /obj/item/storage/backpack/satchel/grey)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag, /obj/item/storage/backpack/messenger)),
-		new /datum/atom_creator/weighted(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare, /obj/item/device/flashlight/flare/glowstick/random))
+		/obj/item/storage/backpack/dufflebag,
+		/obj/item/device/flashlight/flare
 	)
 
 /obj/structure/closet/secure_closet/explorer
@@ -74,12 +72,12 @@
 		/obj/item/device/radio/headset/exploration,
 		/obj/item/device/radio/headset/exploration/alt,
 		/obj/item/device/binoculars,
-		/obj/item/clothing/accessory/buddytag,
+		/obj/item/clothing/accessory/buddy_tag,
 		/obj/item/storage/firstaid/light,
 		/obj/item/material/knife/folding/swiss/explorer,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack, /obj/item/storage/backpack/satchel/grey)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag, /obj/item/storage/backpack/messenger)),
-		new /datum/atom_creator/weighted(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare, /obj/item/device/flashlight/flare/glowstick/random))
+		/obj/item/device/camera,
+		/obj/item/storage/backpack/dufflebag,
+		/obj/item/device/flashlight/flare
 	)
 
 /obj/structure/closet/secure_closet/pilot
@@ -105,8 +103,6 @@
 		/obj/item/clothing/head/helmet/nt/pilot,
 		/obj/item/storage/firstaid/light,
 		/obj/item/material/knife/folding/swiss/explorer,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack, /obj/item/storage/backpack/satchel/grey)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag, /obj/item/storage/backpack/messenger)),
-		new /datum/atom_creator/weighted(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare, /obj/item/device/flashlight/flare/glowstick/random))
+		/obj/item/storage/backpack/dufflebag,
+		/obj/item/device/flashlight/flare
 	)
-

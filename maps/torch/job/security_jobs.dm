@@ -36,8 +36,6 @@
 		access_radio_sec
 	)
 
-	minimal_access = list()
-
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
 
@@ -86,10 +84,8 @@
 		access_security, access_brig, access_forensics_lockers,
 		access_maint_tunnels, access_emergency_storage,
 		access_sec_doors, access_solgov_crew, access_morgue,
-		access_torch_fax, access_radio_sec
+		access_torch_fax, access_network, access_radio_sec
 	)
-
-	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
@@ -130,8 +126,6 @@
 		access_eva, access_sec_doors, access_solgov_crew,
 		access_radio_sec
 	)
-
-	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)

@@ -38,3 +38,26 @@
 	desc = "A syringe gun disguised as an electronic cigarette with 4 darts included in the box. Chemicals not included!"
 	item_cost = 10
 	path = /obj/item/storage/box/syndie_kit/syringegun
+
+/datum/uplink_item/item/stealthy_weapons/razor_hat
+	name = "Razor-Brimmed Bowler Hat"
+	desc = "This dapper hat hides several microrazors in its brim, and also provides some head protection. Land a trickshot for maximum damage."
+	item_cost = 15
+	path = /obj/item/clothing/head/bowlerhat/razor
+
+/datum/uplink_item/item/stealthy_weapons/carp_plush
+	name = "Dehydrated Space Carp"
+	desc = "An innocuous-looking space carp plushie. Add water and step back for a nasty surprise!"
+	item_cost = 10
+	path = /obj/item/reagent_containers/food/snacks/dehydrated_carp
+
+/datum/uplink_item/item/stealthy_weapons/plush_bomb
+	name = "Plushie Bomb"
+	desc = "A cuddly plushie implanted with a voice-activated bomb. Set the trigger phrase and run for an explosive ending!"
+	item_cost = 20
+	path = /obj/item/plushbomb
+
+/datum/uplink_item/item/stealthy_weapons/plush_bomb/get_goods(obj/item/device/uplink/U, loc)
+	var/plushtype = pick(typesof(path))
+	var/obj/item/I = new plushtype(loc)
+	return I

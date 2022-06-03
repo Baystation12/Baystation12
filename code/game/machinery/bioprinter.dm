@@ -45,7 +45,7 @@
 	print_delay += 10 * number_of_components(/obj/item/stock_parts/manipulator)
 	print_delay = max(0, print_delay)
 
-	max_stored_matter = 50 * Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 20)
+	max_stored_matter = 50 * clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 20)
 	. = ..()
 
 /obj/machinery/organ_printer/components_are_accessible(path)
@@ -121,6 +121,7 @@
 		BP_R_FOOT   = list(/obj/item/organ/external/foot/right, 40),
 		BP_L_HAND   = list(/obj/item/organ/external/hand,       40),
 		BP_R_HAND   = list(/obj/item/organ/external/hand/right, 40),
+		BP_GROIN    = list(/obj/item/organ/external/groin,      75),
 		BP_CELL		= list(/obj/item/organ/internal/cell, 25)
 		)
 

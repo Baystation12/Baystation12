@@ -24,8 +24,9 @@
 #define SS_PRIORITY_RADIATION      20  // Radiation processing and cache updates.
 #define SS_PRIORITY_OPEN_SPACE     20  // Open turf updates.
 #define SS_PRIORITY_AIRFLOW        15  // Object movement from ZAS airflow.
+#define SS_PRIORITY_AI             15  // Mob AI
+#define SS_PRIORITY_PRESENCE       10  // z-level player presence testing
 #define SS_PRIORITY_VOTE           10  // Vote management.
-#define SS_PRIORITY_INACTIVITY     10  // Idle kicking.
 #define SS_PRIORITY_SUPPLY         10  // Supply point accumulation.
 #define SS_PRIORITY_TRADE          10  // Adds/removes traders.
 #define SS_PRIORITY_GHOST_IMAGES   10  // Updates ghost client images.
@@ -44,7 +45,7 @@
 #define SS_PRIORITY_GRAPH         30   // Merging and splitting of graphs
 #define SS_PRIORITY_CHAR_SETUP    25   // Writes player preferences to savefiles.
 #define SS_PRIORITY_GARBAGE       20   // Garbage collection.
-#define SS_PRIORITY_KV            10   // \ref based arbitrary storage.
+#define SS_PRIORITY_INACTIVITY    10  // Idle kicking.
 
 // Subsystem fire priority, from lowest to highest priority
 // If the subsystem isn't listed here it's either DEFAULT or PROCESS (if it's a processing subsystem child)

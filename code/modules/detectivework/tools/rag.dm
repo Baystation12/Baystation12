@@ -10,7 +10,7 @@
 	var/transfer_blood = 0
 	var/mob/living/carbon/human/bloody_hands_mob
 
-/obj/item/clothing/shoes/
+/obj/item/clothing/shoes
 	var/track_blood = 0
 
 /obj/item/reagent_containers/glass/rag
@@ -46,14 +46,15 @@
 		remove_contents(user)
 
 /obj/item/reagent_containers/glass/rag/attackby(obj/item/W, mob/user)
-	if(!on_fire && istype(W, /obj/item/flame))
-		var/obj/item/flame/F = W
-		if(F.lit)
-			ignite()
-			if(on_fire)
-				visible_message("<span class='warning'>\The [user] lights [src] with [W].</span>")
-			else
-				to_chat(user, "<span class='warning'>You manage to singe [src], but fail to light it.</span>")
+	if(!on_fire && isflamesource(W))
+		ignite()
+		if(on_fire)
+			user.visible_message(
+				SPAN_WARNING("\The [user] lights \the [src] with \the [W]!"),
+				SPAN_DANGER("You light \the [src]!")
+			)
+		else
+			to_chat(user, SPAN_WARNING("You manage to singe \the [src], but it won't burn on its own.")) // Give a hint about needing fuel
 
 	. = ..()
 	update_name()
@@ -81,15 +82,21 @@
 		return
 
 	if(reagents.total_volume)
-		var/target_text = trans_dest? "\the [trans_dest]" : "\the [user.loc]"
-		user.visible_message("<span class='danger'>\The [user] begins to wring out [src] over [target_text].</span>", "<span class='notice'>You begin to wring out [src] over [target_text].</span>")
+		var/atom/target = trans_dest ? trans_dest : user.loc
+		user.visible_message(
+			SPAN_DANGER("\The [user] begins to wring out \the [src] over \the [target]."),
+			SPAN_NOTICE("You begin to wring out \the [src] over \the [target].")
+		)
 
-		if(do_after(user, reagents.total_volume*5, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS)) //50 for a fully soaked rag
+		if (do_after(user, reagents.total_volume * 5, target, DO_PUBLIC_UNIQUE)) //50 for a fully soaked rag
 			if(trans_dest)
 				reagents.trans_to(trans_dest, reagents.total_volume)
 			else
 				reagents.splash(user.loc, reagents.total_volume)
-			user.visible_message("<span class='danger'>\The [user] wrings out [src] over [target_text].</span>", "<span class='notice'>You finish to wringing out [src].</span>")
+			user.visible_message(
+				SPAN_DANGER("\The [user] wrings out \the [src] over [target]."),
+				SPAN_NOTICE("You finish to wringing out \the [src].")
+			)
 			update_name()
 
 /obj/item/reagent_containers/glass/rag/proc/wipe_down(atom/A, mob/user)
@@ -99,7 +106,7 @@
 		user.visible_message("\The [user] starts to wipe down [A] with [src]!")
 		reagents.splash(A, 1) //get a small amount of liquid on the thing we're wiping.
 		update_name()
-		if(do_after(user,30))
+		if (do_after(user, 3 SECONDS, A, DO_PUBLIC_UNIQUE))
 			user.visible_message("\The [user] finishes wiping off the [A]!")
 			if(isturf(A))
 				var/turf/T = A
@@ -120,7 +127,25 @@
 			user.do_attack_animation(src)
 			admin_attack_log(user, M, "used \the [src] (ignited) to attack", "was attacked using \the [src] (ignited)", "attacked with \the [src] (ignited)")
 			M.IgniteMob()
-		else if(reagents.total_volume)
+		else if (reagents.total_volume)
+			if (iscarbon(target) && user.a_intent == I_HELP && flag == BP_HEAD)
+				var/mob/living/carbon/C = target
+				var/obj/item/organ/external/head/H = C.organs_by_name[BP_HEAD]
+				if (istype(H) && H.forehead_graffiti)
+					var/datum/reagent/R = /datum/reagent/acetone
+					var/wash_amount = 5
+					if (reagents.has_reagent(R, wash_amount))
+						H.forehead_graffiti = null
+						reagents.remove_reagent(R, wash_amount)
+						if (user == target)
+							var/datum/gender/G = gender_datums[M.get_gender()]
+							user.visible_message(SPAN_NOTICE("\The [user] scrubs the ink off [G.his] forehead."), SPAN_NOTICE("You scrub the ink off your forehead."))
+						else
+							user.visible_message(SPAN_NOTICE("\The [user] scrubs the ink off \the [M]'s forehead."), SPAN_NOTICE("You scrub the ink off \the [M]'s forehead."))
+					else
+						to_chat(user, SPAN_WARNING("You need to wet the rag with [wash_amount] units of [initial(R.name)] to get the ink off!"))
+					return
+
 			if(user.zone_sel.selecting == BP_MOUTH)
 				if (!M.has_danger_grab(user))
 					to_chat(user, SPAN_WARNING("You need to have a firm grip on \the [target] before you can use \the [src] on them!"))
@@ -137,7 +162,7 @@
 				if (user.skill_check(SKILL_COMBAT, SKILL_ADEPT))
 					grab_time = 3 SECONDS
 
-				if (do_after(user, grab_time, target, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+				if (do_after(user, grab_time, target, DO_PUBLIC_UNIQUE))
 					user.visible_message(
 						SPAN_DANGER("\The [user] smothers \the [target] with \the [src]!"),
 						SPAN_DANGER("You smother \the [target] with \the [src]!")
@@ -185,11 +210,14 @@
 		new /obj/effect/decal/cleanable/ash(get_turf(src))
 		qdel(src)
 
-//rag must have a minimum of 2 units welder fuel and at least 80% of the reagents must be welder fuel.
-//maybe generalize flammable reagents someday
+
 /obj/item/reagent_containers/glass/rag/proc/can_ignite()
-	var/fuel = reagents.get_reagent_amount(/datum/reagent/fuel)
-	return (fuel >= 2 && fuel >= reagents.total_volume*0.8)
+	var/fuel = 0
+	for (var/datum/reagent/R as anything in reagents?.reagent_list)
+		if (R.gas_flags & XGM_GAS_FUEL)
+			fuel += R.volume
+	return (fuel >= 2 && fuel >= reagents?.total_volume * 0.8)
+
 
 /obj/item/reagent_containers/glass/rag/proc/ignite()
 	if(on_fire)

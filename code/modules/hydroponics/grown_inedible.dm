@@ -32,7 +32,7 @@
 			blind_message = SPAN_ITALIC("You can hear quiet scraping."),
 			range = 5
 		)
-		if (!do_after(user, carve_time, src))
+		if (!do_after(user, carve_time, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, SPAN_ITALIC("You stop carving \the [src]."))
 			return
 		var/result = new result_type()

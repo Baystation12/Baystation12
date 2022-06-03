@@ -147,6 +147,18 @@
 	req_amount = 2
 	difficulty = 2
 
+/datum/stack_recipe/intercom
+	title = "intercom frame"
+	result_type = /obj/item/frame/intercom
+	req_amount = 2
+	difficulty = 2
+
+/datum/stack_recipe/supermatter_alarm
+	title = "supermatter alarm frame"
+	result_type = /obj/item/frame/supermatter_alarm
+	req_amount = 1
+	difficulty = 2
+
 /datum/stack_recipe/computer/telescreen
 	title = "modular telescreen frame"
 	result_type = /obj/item/modular_computer/telescreen
@@ -198,7 +210,7 @@
 	modifier = "large"
 	req_amount = 5
 
-/datum/stack_recipe/sandals
+/datum/stack_recipe/sandal
 	title = "sandals"
 	result_type = /obj/item/clothing/shoes/sandal
 
@@ -219,6 +231,14 @@
 	result_type = /obj/item/material/stick
 	send_material_data = 1
 	difficulty = 0
+
+/datum/stack_recipe/shield
+	title = "Buckler"
+	result_type = /obj/item/shield/buckler
+	req_amount = 5
+	send_material_data = TRUE
+	time = 20
+	difficulty = 2
 
 /datum/stack_recipe/crossbowframe
 	title = "crossbow frame"

@@ -19,7 +19,7 @@
 
 /datum/uplink_item/item/tools/ductape
 	name = "Duct Tape"
-	desc = "A roll of duct tape. changes \"HELP\" into sexy \"mmm\"."
+	desc = "A roll of duct tape."
 	item_cost = 2
 	path = /obj/item/tape_roll
 
@@ -102,11 +102,18 @@
 	item_cost = 28
 	path = /obj/item/storage/backpack/satchel/syndie_kit/space
 
+/datum/uplink_item/item/tools/divinghelmet
+	name = "Diving Helmet"
+	desc = "An antique diver's helmet that was designed to withstand immense pressures. Works as a space helmet. Only fits humans."
+	item_cost = 12
+	path = /obj/item/clothing/head/helmet/divinghelmet
+
 /datum/uplink_item/item/tools/thermal
 	name = "Thermal Imaging Glasses"
 	desc = "A pair of meson goggles that have been modified to instead show synthetics or living creatures, through thermal imaging."
 	item_cost = 24
 	path = /obj/item/clothing/glasses/thermal/syndi
+	antag_roles = list(MODE_TRAITOR)
 
 /datum/uplink_item/item/tools/flashdark
 	name = "Flashdark"
@@ -164,9 +171,3 @@
 	desc = "15 units of a tasteless dye that causes chemical mixtures to take on the color of the dye itself. \
 			Very useful for disguising poisons to the untrained eye; even large amounts of reagents can be fully recolored with only a few drops of dye. \
 			Like the mundane variety of polychromic dye, you can use the bottle in your hand to change the dye's color to suit your needs."
-
-/datum/uplink_item/item/tools/pickpocket_gloves
-	name = "Pickpocket's Gloves"
-	item_cost = 15
-	path = /obj/item/clothing/gloves/thick/duty/pickpocket
-	desc = "Through the use of synthetic fiber muscles, these gloves allow their wearer to easily and silently take small items from others or adjust their suit sensors."

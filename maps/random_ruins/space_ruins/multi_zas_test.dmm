@@ -6,7 +6,7 @@
 /turf/simulated/floor,
 /area/template_noop)
 "c" = (
-/mob/living/simple_animal/corgi,
+/mob/living/simple_animal/passive/corgi,
 /turf/simulated/floor,
 /area/template_noop)
 "d" = (

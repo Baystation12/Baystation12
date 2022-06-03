@@ -41,7 +41,7 @@
 		affecting.visible_message("<span class='notice'>[assailant] is trying to pin [affecting] to the ground!</span>")
 		G.attacking = 1
 
-		if(do_after(assailant, action_cooldown - 1, affecting))
+		if(do_after(assailant, action_cooldown - 1, affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 			G.attacking = 0
 			G.action_used()
 			affecting.Weaken(2)
@@ -71,7 +71,7 @@
 	assailant.visible_message("<span class='danger'>[assailant] begins to [pick("bend", "twist")] [affecting]'s [O.name] into a jointlock!</span>")
 	G.attacking = 1
 
-	if(do_after(assailant, action_cooldown - 1, affecting))
+	if(do_after(assailant, action_cooldown - 1, affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		if (!G.has_hold_on_organ(O))
 			to_chat(assailant, SPAN_WARNING("You must keep a hold on your target to jointlock!"))
 			return
@@ -108,7 +108,7 @@
 		assailant.visible_message("<span class='warning'>[assailant] begins to dislocate [affecting]'s [O.joint]!</span>")
 		G.attacking = 1
 
-		if(do_after(assailant, action_cooldown - 1, affecting))
+		if(do_after(assailant, action_cooldown - 1, affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 
 			if (!G.has_hold_on_organ(O))
 				to_chat(assailant, SPAN_WARNING("You must keep a hold on your target to dislocate!"))
@@ -184,17 +184,17 @@
 		damage += hat.force * 3
 		damage_flags = hat.damage_flags()
 
-	if(damage_flags & DAM_SHARP)
+	if(damage_flags & DAMAGE_FLAG_SHARP)
 		attacker.visible_message("<span class='danger'>[attacker] gores [target][istype(hat)? " with \the [hat]" : ""]!</span>")
 	else
 		attacker.visible_message("<span class='danger'>[attacker] thrusts \his head into [target]'s skull!</span>")
 
-	var/armor = target.get_blocked_ratio(BP_HEAD, BRUTE, damage = 10)
-	target.apply_damage(damage, BRUTE, BP_HEAD, damage_flags)
-	attacker.apply_damage(10, BRUTE, BP_HEAD)
+	var/armor = target.get_blocked_ratio(BP_HEAD, DAMAGE_BRUTE, damage = 10)
+	target.apply_damage(damage, DAMAGE_BRUTE, BP_HEAD, damage_flags)
+	attacker.apply_damage(10, DAMAGE_BRUTE, BP_HEAD)
 
 	if(armor < 0.5 && target.headcheck(BP_HEAD) && prob(damage))
-		target.apply_effect(20, PARALYZE)
+		target.apply_effect(20, EFFECT_PARALYZE)
 		target.visible_message("<span class='danger'>[target] [target.species.get_knockout_message(target)]</span>")
 
 	playsound(attacker.loc, "swing_hit", 25, 1, -1)
@@ -249,12 +249,12 @@
 	if(user.a_intent != I_HURT)
 		return 0 // Not trying to hurt them.
 
-	if(!W.edge || !W.force || W.damtype != BRUTE)
+	if (!W.edge || !W.force || W.damtype != DAMAGE_BRUTE)
 		return 0 //unsuitable weapon
 	user.visible_message("<span class='danger'>\The [user] begins to slit [affecting]'s throat with \the [W]!</span>")
 
 	user.next_move = world.time + 20 //also should prevent user from triggering this repeatedly
-	if(!do_after(user, 20 * user.skill_delay_mult(SKILL_COMBAT), do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
+	if(!do_after(user, 2 SECONDS * user.skill_delay_mult(SKILL_COMBAT), affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return 0
 	if(!(G && G.affecting == affecting)) //check that we still have a grab
 		return 0
@@ -266,7 +266,7 @@
 	if(istype(helmet) && (helmet.body_parts_covered & HEAD) && (helmet.item_flags & ITEM_FLAG_AIRTIGHT) && !isnull(helmet.max_pressure_protection))
 		var/datum/extension/armor/armor_datum = get_extension(helmet, /datum/extension/armor)
 		if(armor_datum)
-			damage_mod -= armor_datum.get_blocked(BRUTE, damage_flags, W.armor_penetration, W.force*1.5)
+			damage_mod -= armor_datum.get_blocked(DAMAGE_BRUTE, damage_flags, W.armor_penetration, W.force*1.5)
 
 	var/total_damage = 0
 	for(var/i in 1 to 3)
@@ -295,7 +295,7 @@
 	if(user.a_intent != I_HURT)
 		return 0 // Not trying to hurt them.
 
-	if(!W.edge || !W.force || W.damtype != BRUTE)
+	if (!W.edge || !W.force || W.damtype != DAMAGE_BRUTE)
 		return 0 //unsuitable weapon
 
 	var/obj/item/organ/external/O = affecting.get_organ(target_zone)
@@ -305,7 +305,7 @@
 	user.visible_message(SPAN_DANGER("\The [user] begins to cut \the [affecting]'s [O.tendon_name] with \the [W]!"))
 	user.next_move = world.time + 20
 
-	if(!do_after(user, 20, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
+	if(!do_after(user, 2 SECONDS, affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return 0
 	if(!(G && G.affecting == affecting)) //check that we still have a grab
 		return 0

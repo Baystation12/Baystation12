@@ -29,7 +29,7 @@
 /turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)
 	if(diggable && istype(C,/obj/item/shovel))
 		visible_message("<span class='notice'>\The [user] starts digging \the [src]</span>")
-		if(do_after(user, 50))
+		if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user,"<span class='notice'>You dig a deep pit.</span>")
 			new /obj/structure/pit(src)
 			diggable = 0
@@ -47,9 +47,9 @@
 
 /turf/simulated/floor/exoplanet/ex_act(severity)
 	switch(severity)
-		if(1)
+		if(EX_ACT_DEVASTATING)
 			ChangeTurf(get_base_turf_by_area(src))
-		if(2)
+		if(EX_ACT_HEAVY)
 			if(prob(40))
 				ChangeTurf(get_base_turf_by_area(src))
 

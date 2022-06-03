@@ -2,9 +2,7 @@
 
 	//The name of the job
 	var/title = "NOPE"
-	//Job access. The use of minimal_access or access is determined by a config setting: config.jobs_have_minimal_access
-	var/list/minimal_access = list()      // Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
-	var/list/access = list()              // Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
+	var/list/access = list()              // The job's default access tokens
 	var/list/software_on_spawn = list()   // Defines the software files that spawn on tablets and labtops
 	var/department_flag = 0
 	var/total_positions = 0               // How many players can be this job
@@ -44,8 +42,8 @@
 	var/available_by_default = TRUE
 
 	var/list/possible_goals
-	var/min_goals = 1
-	var/max_goals = 3
+	var/min_goals = 0
+	var/max_goals = 5
 
 	var/defer_roundstart_spawn = FALSE // If true, the job will be put off until all other jobs have been populated.
 	var/list/species_branch_rank_cache_ = list()
@@ -162,10 +160,7 @@
 	. = outfit.equip(H, title, alt_title, OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP|OUTFIT_ADJUSTMENT_SKIP_ID_PDA|additional_skips)
 
 /datum/job/proc/get_access()
-	if(minimal_access.len && (!config || config.jobs_have_minimal_access))
-		return src.minimal_access.Copy()
-	else
-		return src.access.Copy()
+	return access.Copy()
 
 //If the configuration option is set to require players to be logged as old enough to play certain jobs, then this proc checks that they are, otherwise it just returns 1
 /datum/job/proc/player_old_enough(client/C)
@@ -228,7 +223,7 @@
 
 /datum/job/proc/get_join_link(var/client/caller, var/href_string, var/show_invalid_jobs)
 	if(is_available(caller))
-		if(is_restricted(caller))
+		if(is_restricted(caller.prefs))
 			if(show_invalid_jobs)
 				return "<tr><td><a style='text-decoration: line-through' href='[href_string]'>[title]</a></td><td>[current_positions]</td><td>(Active: [get_active_count()])</td></tr>"
 		else
@@ -271,9 +266,9 @@
 	species_branch_rank_cache_[S] = list()
 	. = species_branch_rank_cache_[S]
 
-	var/spawn_branches = mil_branches.spawn_branches(S)
+	var/spawn_branches = GLOB.mil_branches.spawn_branches(S)
 	for(var/branch_type in allowed_branches)
-		var/datum/mil_branch/branch = mil_branches.get_branch_by_type(branch_type)
+		var/datum/mil_branch/branch = GLOB.mil_branches.get_branch_by_type(branch_type)
 		if(branch.name in spawn_branches)
 			if(!allowed_ranks || !(GLOB.using_map.flags & MAP_HAS_RANK))
 				LAZYADD(., branch.name)
@@ -297,7 +292,7 @@
 	if(branch_name == "None")
 		return 0
 
-	var/datum/mil_branch/branch = mil_branches.get_branch(branch_name)
+	var/datum/mil_branch/branch = GLOB.mil_branches.get_branch(branch_name)
 
 	if(!branch)
 		crash_with("unknown branch \"[branch_name]\" passed to is_branch_allowed()")
@@ -322,7 +317,7 @@
 	if(branch_name == "None" || rank_name == "None")
 		return 0
 
-	var/datum/mil_rank/rank = mil_branches.get_rank(branch_name, rank_name)
+	var/datum/mil_rank/rank = GLOB.mil_branches.get_rank(branch_name, rank_name)
 
 	if(!rank)
 		crash_with("unknown rank \"[rank_name]\" in branch \"[branch_name]\" passed to is_rank_allowed()")
@@ -337,14 +332,14 @@
 /datum/job/proc/get_branches()
 	var/list/res = list()
 	for(var/T in allowed_branches)
-		var/datum/mil_branch/B = mil_branches.get_branch_by_type(T)
+		var/datum/mil_branch/B = GLOB.mil_branches.get_branch_by_type(T)
 		res += B.name
 	return english_list(res)
 
 //Same as above but ranks
 /datum/job/proc/get_ranks(branch)
 	var/list/res = list()
-	var/datum/mil_branch/B = mil_branches.get_branch(branch)
+	var/datum/mil_branch/B = GLOB.mil_branches.get_branch(branch)
 	for(var/T in allowed_ranks)
 		var/datum/mil_rank/R = T
 		if(B && !(initial(R.name) in B.ranks))
@@ -407,6 +402,9 @@
 
 /datum/job/proc/make_position_available()
 	total_positions++
+
+/datum/job/proc/make_position_unavailable()
+	total_positions = 0
 
 /datum/job/proc/get_roundstart_spawnpoint()
 	var/list/loc_list = list()

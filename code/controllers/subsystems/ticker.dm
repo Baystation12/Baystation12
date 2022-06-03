@@ -6,7 +6,7 @@ SUBSYSTEM_DEF(ticker)
 	flags = SS_NO_TICK_CHECK | SS_KEEP_TIMING
 	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
 
-	var/pregame_timeleft = 3 MINUTES
+	var/pregame_timeleft
 	var/start_ASAP = FALSE          //the game will start as soon as possible, bypassing all pre-game nonsense
 	var/list/gamemode_vote_results  //Will be a list, in order of preference, of form list(config_tag = number of votes).
 	var/bypass_gamemode_vote = 0    //Intended for use with admin tools. Will avoid voting and ignore any results.
@@ -29,12 +29,31 @@ SUBSYSTEM_DEF(ticker)
 
 	var/secret_force_mode = "secret"
 
-/datum/controller/subsystem/ticker/Initialize()
+	///Set to TRUE when an admin forcefully ends the round.
+	var/forced_end = FALSE
+
+	var/static/list/mode_tags = list()
+
+	var/static/list/mode_names = list()
+
+	var/static/list/mode_cache = list()
+
+	var/static/list/mode_probabilities = list()
+
+	var/static/list/votable_modes = list()
+
+	/// True when the game is over.
+	var/static/game_over = FALSE
+
+
+/datum/controller/subsystem/ticker/Initialize(start_uptime)
+	pregame_timeleft = config.pre_game_time SECONDS
+	build_mode_cache()
 	to_world("<span class='info'><B>Welcome to the pre-game lobby!</B></span>")
 	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
-	return ..()
 
-/datum/controller/subsystem/ticker/fire(resumed = 0)
+
+/datum/controller/subsystem/ticker/fire(resumed, no_mc_tick)
 	switch(GAME_STATE)
 		if(RUNLEVEL_LOBBY)
 			pregame_tick()
@@ -44,6 +63,48 @@ SUBSYSTEM_DEF(ticker)
 			playing_tick()
 		if(RUNLEVEL_POSTGAME)
 			post_game_tick()
+
+
+/datum/controller/subsystem/ticker/proc/build_mode_cache()
+	mode_tags = list()
+	mode_names = list()
+	mode_cache = list()
+	mode_probabilities = list()
+	for (var/datum/game_mode/mode as anything in subtypesof(/datum/game_mode))
+		var/tag = initial(mode.config_tag)
+		if (!tag)
+			continue
+		mode_cache[tag] = (mode = new mode)
+		if (tag in mode_tags)
+			continue
+		mode_tags += tag
+		mode_names[tag] = mode.name
+		mode_probabilities[tag] = 0
+		if (mode.votable)
+			votable_modes += tag
+	votable_modes -= config.disallowed_modes
+	for (var/key in config.probabilities)
+		mode_probabilities[key] = config.probabilities[key]
+
+
+/datum/controller/subsystem/ticker/proc/get_runnable_modes()
+	var/list/lobby_players = lobby_players()
+	var/list/result = list()
+	for (var/tag in mode_cache)
+		var/datum/game_mode/mode = mode_cache[tag]
+		if (mode_probabilities[tag] > 0 && !mode.check_startable(lobby_players))
+			result[tag] = mode_probabilities[tag]
+	return result
+
+
+/datum/controller/subsystem/ticker/proc/pick_mode(mode_name)
+	if (!mode_name)
+		return
+	for (var/tag in SSticker.mode_cache)
+		var/datum/game_mode/M = SSticker.mode_cache[tag]
+		if (M.config_tag == mode_name)
+			return M
+
 
 /datum/controller/subsystem/ticker/proc/pregame_tick()
 	if(start_ASAP)
@@ -56,21 +117,39 @@ SUBSYSTEM_DEF(ticker)
 		return
 
 	if(!bypass_gamemode_vote && (pregame_timeleft <= config.vote_autogamemode_timeleft SECONDS) && !gamemode_vote_results)
+#ifndef UNIT_TEST
+		var/list/lobby = lobby_players()
+		if (!length(lobby))
+			pregame_timeleft = config.vote_period + 60 SECONDS
+			return
+#endif
 		if(!SSvote.active_vote)
 			SSvote.initiate_vote(/datum/vote/gamemode, automatic = 1)
 
 /datum/controller/subsystem/ticker/proc/setup_tick()
+#ifndef UNIT_TEST
+	if (!start_ASAP)
+		var/list/ready = ready_players()
+		if (!length(ready))
+			pregame_timeleft = config.vote_period + 30 SECONDS
+			gamemode_vote_results = null
+			Master.SetRunLevel(RUNLEVEL_LOBBY)
+			to_world("<b>No ready players.</b> Returning to pre-game lobby.")
+			return
+#endif
+
 	switch(choose_gamemode())
 		if(CHOOSE_GAMEMODE_SILENT_REDO)
+			log_debug("Silently re-rolling game mode...")
 			return
 		if(CHOOSE_GAMEMODE_RETRY)
-			pregame_timeleft = 60 SECONDS
+			pregame_timeleft = 30 SECONDS
 			Master.SetRunLevel(RUNLEVEL_LOBBY)
 			to_world("<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby to try again.")
 			return
 		if(CHOOSE_GAMEMODE_REVOTE)
 			revotes_allowed--
-			pregame_timeleft = initial(pregame_timeleft)
+			pregame_timeleft = config.vote_period + 30 SECONDS
 			gamemode_vote_results = null
 			Master.SetRunLevel(RUNLEVEL_LOBBY)
 			to_world("<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby for a revote.")
@@ -102,7 +181,7 @@ SUBSYSTEM_DEF(ticker)
 		for (var/mob/new_player/player in GLOB.player_list)
 			player.new_player_panel()
 
-	if(!length(GLOB.admins))
+	if(!GLOB.admins.len)
 		send2adminirc("Round has started with no admins online.")
 
 /datum/controller/subsystem/ticker/proc/playing_tick()
@@ -129,16 +208,11 @@ SUBSYSTEM_DEF(ticker)
 		if(END_GAME_READY_TO_END)
 			end_game_state = END_GAME_ENDING
 			callHook("roundend")
-			if (universe_has_ended)
-				if(mode.station_was_nuked)
-					SSstatistics.set_field_details("end_proper","nuke")
-				else
-					SSstatistics.set_field_details("end_proper","universe destroyed")
+			if (game_over)
 				if(!delay_end)
 					to_world("<span class='notice'><b>Rebooting due to destruction of [station_name()] in [restart_timeout/10] seconds</b></span>")
 
 			else
-				SSstatistics.set_field_details("end_proper","proper completion")
 				if(!delay_end)
 					to_world("<span class='notice'><b>Restarting in [restart_timeout/10] seconds</b></span>")
 			handle_tickets()
@@ -159,30 +233,37 @@ SUBSYSTEM_DEF(ticker)
 			log_error("Ticker arrived at round end in an unexpected endgame state.")
 
 
-/datum/controller/subsystem/ticker/stat_entry()
-	switch(GAME_STATE)
-		if(RUNLEVEL_LOBBY)
-			..("[round_progressing ? "START:[round(pregame_timeleft/10)]s" : "(PAUSED)"]")
-		if(RUNLEVEL_SETUP)
+/datum/controller/subsystem/ticker/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	switch (GAME_STATE)
+		if (RUNLEVEL_LOBBY)
+			..("[round_progressing ? "START: [round(pregame_timeleft / 10)]s" : "(PAUSED)"]")
+		if (RUNLEVEL_SETUP)
 			..("SETUP")
-		if(RUNLEVEL_GAME)
+		if (RUNLEVEL_GAME)
 			..("GAME")
-		if(RUNLEVEL_POSTGAME)
-			switch(end_game_state)
-				if(END_GAME_NOT_OVER)
+		if (RUNLEVEL_POSTGAME)
+			switch (end_game_state)
+				if (END_GAME_NOT_OVER)
 					..("ENDGAME ERROR")
-				if(END_GAME_AWAITING_MAP)
+				if (END_GAME_AWAITING_MAP)
 					..("MAP VOTE")
-				if(END_GAME_MODE_FINISH_DONE)
+				if (END_GAME_MODE_FINISH_DONE)
 					..("MODE OVER, WAITING")
-				if(END_GAME_READY_TO_END)
+				if (END_GAME_READY_TO_END)
 					..("ENDGAME PROCESSING")
-				if(END_GAME_DELAYED)
+				if (END_GAME_DELAYED)
 					..("PAUSED")
-				if(END_GAME_AWAITING_TICKETS)
+				if (END_GAME_AWAITING_TICKETS)
 					..("AWAITING TICKETS")
-				if(END_GAME_ENDING)
-					..("END IN [round(restart_timeout/10)]s")
+				if (END_GAME_ENDING)
+					..("END IN [round(restart_timeout / 10)]s")
+				else
+					..()
+		else
+			..()
+
 
 /datum/controller/subsystem/ticker/Recover()
 	pregame_timeleft = SSticker.pregame_timeleft
@@ -219,27 +300,31 @@ Helpers
 			mode_to_try = "extended"
 
 	if(!mode_to_try)
+		log_debug("Could not find a valid game mode from config or vote results.")
 		return
 	if(mode_to_try in bad_modes)
+		log_debug("Could not start game mode [mode_to_try] - Mode is listed in bad_modes.")
 		return
 
 	//Find the relevant datum, resolving secret in the process.
-	var/list/base_runnable_modes = config.get_runnable_modes() //format: list(config_tag = weight)
-	if((mode_to_try=="random") || (mode_to_try=="secret"))
+	var/list/base_runnable_modes = get_runnable_modes() //format: list(config_tag = weight)
+	if (mode_to_try=="secret")
 		var/list/runnable_modes = base_runnable_modes - bad_modes
 		if(secret_force_mode != "secret") // Config option to force secret to be a specific mode.
-			mode_datum = config.pick_mode(secret_force_mode)
+			mode_datum = pick_mode(secret_force_mode)
 		else if(!length(runnable_modes))  // Indicates major issues; will be handled on return.
 			bad_modes += mode_to_try
+			log_debug("Could not start game mode [mode_to_try] - No runnable modes available to start, or all options listed under bad modes.")
 			return
 		else
-			mode_datum = config.pick_mode(pickweight(runnable_modes))
+			mode_datum = pick_mode(pickweight(runnable_modes))
 			if(length(runnable_modes) > 1) // More to pick if we fail; we won't tell anyone we failed unless we fail all possibilities, though.
 				. = CHOOSE_GAMEMODE_SILENT_REDO
 	else
-		mode_datum = config.pick_mode(mode_to_try)
+		mode_datum = pick_mode(mode_to_try)
 	if(!istype(mode_datum))
 		bad_modes += mode_to_try
+		log_debug("Could not find a valid game mode for [mode_to_try].")
 		return
 
 	//Deal with jobs and antags, check that we can actually run the mode.
@@ -247,11 +332,13 @@ Helpers
 	mode_datum.create_antagonists() // Init operation on the mode; sets up antag datums and such.
 	mode_datum.pre_setup() // Makes lists of viable candidates; performs candidate draft for job-override roles; stores the draft result both internally and on the draftee.
 	SSjobs.divide_occupations(mode_datum) // Gives out jobs to everyone who was not selected to antag.
-
-	if(mode_datum.startRequirements())
+	var/list/lobby_players = SSticker.lobby_players()
+	var/result = mode_datum.check_startable(lobby_players)
+	if(result)
 		mode_datum.fail_setup()
 		SSjobs.reset_occupations()
 		bad_modes += mode_datum.config_tag
+		log_debug("Could not start game mode [mode_to_try] ([mode_datum.name]) - Failed to meet requirements - [result]")
 		return
 
 	//Declare victory, make an announcement.
@@ -262,7 +349,7 @@ Helpers
 		to_world("<B>The current game mode is Secret!</B>")
 		var/list/mode_names = list()
 		for (var/mode_tag in base_runnable_modes)
-			var/datum/game_mode/M = gamemode_cache[mode_tag]
+			var/datum/game_mode/M = mode_cache[mode_tag]
 			if(M)
 				mode_names += M.name
 		if (config.secret_hide_possibilities)
@@ -283,6 +370,28 @@ Helpers
 			else
 				if(player.create_character())
 					qdel(player)
+
+/datum/controller/subsystem/ticker/proc/lobby_players(list/players)
+	if (!players)
+		players = GLOB.player_list
+	var/list/lobby_players = list()
+	for (var/mob/new_player/player in players)
+		if (!player.client)
+			continue
+		lobby_players += player
+	return lobby_players
+
+
+/datum/controller/subsystem/ticker/proc/ready_players(list/players)
+	if (!players)
+		players = lobby_players()
+	var/list/ready_players = list()
+	for (var/mob/new_player/player as anything in players)
+		if (!player.ready)
+			continue
+		ready_players += player
+	return ready_players
+
 
 /datum/controller/subsystem/ticker/proc/collect_minds()
 	for(var/mob/living/player in GLOB.player_list)
@@ -347,14 +456,20 @@ Helpers
 	return 0
 
 /datum/controller/subsystem/ticker/proc/game_finished()
+	if (forced_end)
+		return TRUE
+
 	if(mode.explosion_in_progress)
 		return 0
 	if(config.continous_rounds)
 		return evacuation_controller.round_over() || mode.station_was_nuked
 	else
-		return mode.check_finished() || (evacuation_controller.round_over() && evacuation_controller.emergency_evacuation) || universe_has_ended
+		return mode.check_finished() || (evacuation_controller.round_over() && evacuation_controller.emergency_evacuation) || game_over
 
 /datum/controller/subsystem/ticker/proc/mode_finished()
+	if (forced_end)
+		return TRUE
+
 	if(config.continous_rounds)
 		return mode.check_finished()
 	else

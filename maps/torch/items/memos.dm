@@ -153,10 +153,13 @@
 		. = INITIALIZE_HINT_QDEL
 		crash_with("base [type] instantiated erroneously")
 
+/obj/item/paper/memo/set_content(text, title, parse_pencode)
+	return
+
 /obj/item/paper/memo/examine(mob/user, distance)
 	. = ..()
 	if (distance < 2)
-		to_chat(user, info)
+		to_chat(user, SPAN_NOTICE(info))
 
 
 
@@ -202,6 +205,17 @@
 	name = "per diem denials"
 	info = {"An "internal use only" document, explaining what not to file per diem reimbursement requests on. It lists examples of many per diem requests SCG representatives have filed in the past that have been denied. Some of the more interesting ones include casino debts, a request for per diem to cover the increased tax on alcohol on a station, and one odd case involving a possum, engineering PPE, and two injuries."}
 
+/obj/item/paper/memo/scgr/execution
+	name = "formal complaint"
+	info = {"A confidential memo from Rear Admiral Lambert of the SFV Bismarck issuing a formal complaint on behalf of Fleet regarding the execution of SLT Kristen Rohtin aboard a Corps vessel. The tone is furious and suggests significant consequences for the Expeditionary Corps."}
+
+/obj/item/paper/memo/scgr/floritstatement
+	name = "undersecretary statement"
+	info = {"A press release issued by the newly-appointed Undersecretary of Diplomatic Affairs, Isabel Florit. The statement assures the public that there will be "no repeats" of the mistakes carried out in recent months aboard the SEV Torch. It goes on to advocate the role of the Defense Forces in public affairs, and suggests that the Diplomatic Affairs office will be working closely with the SCG Fleet under Florit's leadership in the interest of preventing any further incidents."}
+
+/obj/item/paper/memo/scgr/senateminutes
+	name = "assembly floor proceedings"
+	info = {"A copy of the minutes from the Sol Assembly hearing over an emergency bill giving the SCG Defense Forces jurisdiction over the Expeditionary Corps (and by extension, the SEV Torch). The debate is vicious and devolves into angry bickering at points. The bill appears to have gotten uncomfortably close to being passed."}
 
 
 // command memos
@@ -257,6 +271,26 @@
 /obj/item/paper/memo/command/njprules
 	name = "non-judicial punishments"
 	info = {"A "for official use only" memorandum detailing options with regards to non-judicially punishing uniformed servicemembers. Such punishments include admonishment/reprimand, forfeiture of pay, restriction, extra duty, and reduction in rank. The punishments available and their severity depend on the rank of the accused and the imposing officer."}
+
+/obj/item/paper/memo/command/recall
+	name = "order of recall"
+	info = {"A notice from the Helios Board of Admiralty regarding the urgent return of the Torch to Mars - the Board has ordered debriefing and review regarding the diplomatic meetings with the Terran Pioneer Corps and the field execution of SLT Kristen Rohtin. The document stresses that the ship be wary of any vessels, Fleet or otherwise, masking their transponders."}
+
+/obj/item/paper/memo/command/roguefleeties
+	name = "rogue fleet movements"
+	info = {"An "internal use only" memorandum sent from Expeditionary Command, detailing the last known locations and naval capacity of several rogue Fifth Fleet vessels, including the SFV Nathan Hale. The data available in the report is uncomfortably sparse."}
+
+/obj/item/paper/memo/command/outpostreport1
+	name = "E-14b outpost report"
+	info = {"An "internal use only" memo detailing the status of the research outpost in the E-14b system. It states that construction is still underway, and suggests efforts would benefit from better communication between EC and Terran engineering personnel."}
+
+/obj/item/paper/memo/command/outpostreport2
+	name = "E-14b outpost report"
+	info = {"An "internal use only" memo detailing the status of the research outpost in the E-14b system. It states that construction has been delayed due to a migration of native ambulatory fungus at the site, and requests that the EC begin looking into low-impact mushroom removal methods."}
+
+/obj/item/paper/memo/command/evasiveflight
+	name = "evasive flight maneuvers"
+	info = {"A hastily-penned report detailing strategies for evading ship-to-ship laser fire and missile strikes in the event of another attack on the Torch. The author highly recommends the tactical use of space dust and other debris, citing the successful evasive action taken during the attack by the SFV Nathan Hale."}
 
 
 
@@ -338,6 +372,17 @@
 	name = "radio damage complaint"
 	info = {"An "internal use only" report on complaints of garbled static emitting from radios during shifts with IPC crew members onboard. The report further goes onto state that when inquiring about this to IPC crew members on the radio, their radios would emit the same noises instead of getting a clear answer from them."}
 
+/obj/item/paper/memo/engineering/hulldamage
+	name = "damage control report"
+	info = {"An "internal use only" report on damages to the hull following the attack by the SFV Nathan Hale. It suggests that the repairs currently in place are temporary at best, and that the Torch will need hefty drydock maintenance before its next deep space mission. The report goes on to recommend petitioning EXO for additional funding for maintenance and upkeep."}
+
+/obj/item/paper/memo/engineering/tcommssabotage
+	name = "damage control report"
+	info = {"An "internal use only" report on damages to ship systems following the 5/14 sabotage incident. It suggests that the saboteur exploited a previously-unknown vulnerability in the ship's telecommunications systems to shut down long-range communications - the system will need a full inspection from DAIS management before it can be deemed properly secure again. How the saboteur discovered the exploit is still unknown."}
+
+/obj/item/paper/memo/engineering/bsddamage
+	name = "\improper Bluespace drive safety notice"
+	info = {"A "confidential" memo from Krri'gli Engineering regarding the new Bluespace drive. It explains in very slow and simple language that this is a "Bluespace drive", a very expensive and volatile piece of machinery, and that you should not break this one or remove the exotic particle shielding. The author does not appear to have a very high opinion of human engineering or mental faculties."}
 
 
 // medical memos
@@ -442,6 +487,9 @@
 	name = "on documentation of sites"
 	info = {"Some "internal use only" reports discussing missing information on an exoplanet based on a lack of samples from the exploration team. It discusses the importance of making sure away teams document and report on the exoplanet, particularly taking samples and scans of plant life, xenofauna, atmospheric information, and mineral samples."}
 
+/obj/item/paper/memo/exploration/pioneers
+	name = "pioneers and you"
+	info = {"An "internal use only" memo detailing proper ettiquette for explorers interacting with Terran Pioneer Corps personnel. It stresses very heavily that yes, most Terrans do speak ZAC; no, you should not share your funny Pan-Slavic impression; and no, you should ABSOLUTELY not ask if they know any war criminals."}
 
 
 // research memos
@@ -478,17 +526,9 @@
 
 // corporate memos
 
-/obj/item/paper/memo/corporate/bodyarmourbad
-	name = "\improper LPA recommendations"
-	info = {"Some "internal use only" corporate documents, detailing that having loss prevention associates openly wear body armor and a smartgun is an extreme violation of trust between EXO and the SCG and will result in harsh penalties. It also notes that this issue will be brought up at every 3 months during contract renewal."}
-
 /obj/item/paper/memo/corporate/stipendcut
 	name = "corporate spending records"
 	info = {"A "confidential" memo on the current usage of funds provided to SEV Torch corporate liaisons; apparently there's threats of a strike over a cut to the cost-of-living stipends by the head office."}
-
-/obj/item/paper/memo/corporate/LPArenting
-	name = "\improper LPA usage notice"
-	info = {"A "confidential" notice to the corporate liaison aboard the SEV Torch that their security staff are for their use only, and renting them out as extra manpower to security is a gross violation of their contract."}
 
 /obj/item/paper/memo/corporate/uniondues
 	name = "union dues reminder"
@@ -497,10 +537,6 @@
 /obj/item/paper/memo/corporate/glueandtape
 	name = "proper document disposal"
 	info = {"Some "internal use only" corporate documents detailing the proper ways to dispose of top secret and classified documents. It highlights that burning is most applicable, and shows pictures of shredded documents reconstructed with glue and sticky tape with a red "Fail" written below."}
-
-/obj/item/paper/memo/corporate/lpainfo
-	name = "\improper LPA reminder"
-	info = {"An "internal use only" corporate document informing corporate liasions of the loss prevention associate's job aboard the ship. It cites concerns about the misuse of the LPA and general mistrust towards them from the rest of the crew, and warns how these tensions will damage EXO's image if they keep acting in this manner. It reminds them that LPAs are from an established industry and should have experience in many aspects other than carrying a firearm. It specifies good observation skills, solid restraint, an understanding of escalation rules in regards to their position, and that their experience as an industry professional can be useful as an advisor to their tasked liasion."}
 
 /obj/item/paper/memo/corporate/exointerest
 	name = "\improper EXO and you"
@@ -517,10 +553,6 @@
 /obj/item/paper/memo/corporate/spellchecker
 	name = "spellchecking and you"
 	info = {"Some "internal use only" corporate memos reminding corporate liaisons to proofread reports. It details various reasons behind why correct spelling and punctuation help in making EXO and Expeditionary Command take your report seriously."}
-
-/obj/item/paper/memo/corporate/assistants
-	name = "misuse of delegated personnel"
-	info = {"An "internal use only" corporate memo reminding corporate liaisons that just because the executive assistant is issued a firearm does not mean that they are expected to fulfill the same role as a loss prevention associate. It suggests using loss prevention associates to assist in tactical or physical affairs and executive assistants in bureaucratic or menial tasks."}
 
 /obj/item/paper/memo/corporate/safetyfirst
 	name = "contractor safety and you"
@@ -565,3 +597,11 @@
 /obj/item/paper/memo/security/lolly
 	name = "STOP STEALING CANDY FROM MED"
 	info = {"Why the fuck do I have to write this to you all when the records say you're all SUPPOSEDLY legal adults? The lollipop jar in medical is for PATIENTS, not MASTERS AT ARMS. Those lollipops contain COLD MEDICINE INSTEAD OF SUGAR. STOP STEALING THEM!!! If you want candy so goddamn much GO TO A VENDING MACHINE. If I see one of you stealing candy from medical, you're being demoted to sanitation tech of maintenance for the rest of your miserable tour here. Clean up and be more professional next shift!"}
+
+/obj/item/paper/memo/security/chaplain
+	name = "inter-department complaint"
+	info = {"An inter-departmental memo from the Chaplain's office detailing their objection at length to the Torch permitting capital punishment within its walls. A diplomatic and scientifically oriented ship should have "no part in warfare"."}
+
+/obj/item/paper/memo/security/extremism
+	name = "anti-radicalization pamphlet"
+	info = {"An "internal use only" document detailing strategies for identifying signs and risk factors for radicalization, created in light of perceived extremism in the SCGF. It discusses low self-esteem, stress, marginalization, repeat disciplinary issues, and excessive interest in weaponry."}

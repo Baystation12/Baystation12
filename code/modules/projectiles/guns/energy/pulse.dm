@@ -14,7 +14,7 @@
 	burst_delay = 3
 	burst = 3
 	move_delay = 4
-	accuracy = -1
+	accuracy = 1
 	wielded_item_state = "gun_wielded"
 	bulk = GUN_BULK_RIFLE
 
@@ -32,6 +32,7 @@
 	burst_delay = 2
 	move_delay = 2
 	bulk = GUN_BULK_RIFLE - 3
+	accuracy = 0
 
 /obj/item/gun/energy/pulse_rifle/pistol
 	name = "pulse pistol"
@@ -48,6 +49,7 @@
 	move_delay = 1
 	wielded_item_state = null
 	bulk = 0
+	accuracy = 0
 
 /obj/item/gun/energy/pulse_rifle/mounted
 	self_recharge = 1

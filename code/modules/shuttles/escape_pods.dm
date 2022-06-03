@@ -1,5 +1,5 @@
-var/list/escape_pods = list()
-var/list/escape_pods_by_name = list()
+var/global/list/escape_pods = list()
+var/global/list/escape_pods_by_name = list()
 
 /datum/shuttle/autodock/ferry/escape_pod
 	var/datum/computer/file/embedded_program/docking/simple/escape_pod_berth/arming_controller

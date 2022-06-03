@@ -9,9 +9,14 @@ SUBSYSTEM_DEF(codex)
 	var/list/index_file =        list()
 	var/list/search_cache =      list()
 
-/datum/controller/subsystem/codex/Initialize()
-	// Codex link syntax is such: 
-	// <l>keyword</l> when keyword is mentioned verbatim, 
+
+/datum/controller/subsystem/codex/UpdateStat(time)
+	return
+
+
+/datum/controller/subsystem/codex/Initialize(start_uptime)
+	// Codex link syntax is such:
+	// <l>keyword</l> when keyword is mentioned verbatim,
 	// <span codexlink='keyword'>whatever</span> when shit gets tricky
 	linkRegex = regex(@"<(span|l)(\s+codexlink='([^>]*)'|)>([^<]+)</(span|l)>","g")
 
@@ -42,7 +47,7 @@ SUBSYSTEM_DEF(codex)
 		var/datum/codex_entry/entry = SScodex.entries_by_string[thing]
 		index_file[entry.display_name] = entry
 	index_file = sortAssoc(index_file)
-	. = ..()
+
 
 /datum/controller/subsystem/codex/proc/parse_links(string, viewer)
 	while(regex_find(linkRegex, string))
@@ -109,7 +114,7 @@ SUBSYSTEM_DEF(codex)
 	if(!. && href_list["show_examined_info"] && href_list["show_to"])
 		var/mob/showing_mob =   locate(href_list["show_to"])
 		if(!istype(showing_mob) || !showing_mob.can_use_codex())
-			return 
+			return
 		var/atom/showing_atom = locate(href_list["show_examined_info"])
 		var/entry
 		if(istype(showing_atom, /datum/codex_entry))

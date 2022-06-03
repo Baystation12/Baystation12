@@ -44,7 +44,7 @@
 	else
 		user.visible_message("<span class='notice'>\The [user] begins pushing \the [patient] into \the [src].</span>")
 
-	if(!do_after(user, 3 SECONDS, src))
+	if(!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 		return FALSE
 
 	if(!user.Adjacent(src) || !(self_drop || user.Adjacent(patient)))
@@ -65,6 +65,14 @@
 	START_PROCESSING(SSobj, src)
 	return TRUE
 
+/obj/structure/adherent_bath/slam_into(mob/living/L)
+	L.forceMove(src)
+	occupant = L
+	L.Weaken(2)
+	L.visible_message(SPAN_WARNING("\The [L] falls into \the [src]!"))
+	playsound(L, "punch", 25, 1, FALSE)
+	START_PROCESSING(SSobj, src)
+
 /obj/structure/adherent_bath/attack_hand(var/mob/user)
 	eject_occupant()
 
@@ -84,7 +92,7 @@
 	enter_bath(O, user)
 
 /obj/structure/adherent_bath/relaymove(var/mob/user)
-	if(user == occupant)
+	if (!user.incapacitated() && (user == occupant))
 		eject_occupant()
 
 /obj/structure/adherent_bath/Process()

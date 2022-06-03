@@ -33,6 +33,7 @@
 /area/map_template/ecship/cockpit)
 "ag" = (
 /obj/structure/grille,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "ak" = (
@@ -54,8 +55,7 @@
 	d1 = 16;
 	d2 = 0;
 	dir = 1;
-	icon_state = "0-4";
-	pixel_y = 0
+	icon_state = "0-4"
 	},
 /turf/simulated/floor/airless,
 /area/map_template/ecship/cockpit)
@@ -66,7 +66,6 @@
 	},
 /obj/machinery/alarm/low{
 	dir = 4;
-	icon_state = "alarm0";
 	pixel_x = -24
 	},
 /turf/simulated/floor/airless,
@@ -111,8 +110,7 @@
 /area/map_template/ecship/cryo)
 "au" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/machinery/light{
 	dir = 4;
@@ -135,16 +133,14 @@
 	pixel_y = 32
 	},
 /obj/effect/floor_decal/corner/purple{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/machinery/suit_storage_unit/standard_unit,
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
 "ax" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/machinery/suit_storage_unit/standard_unit,
 /turf/simulated/floor/tiled/airless,
@@ -159,8 +155,7 @@
 /area/map_template/ecship/crew)
 "az" = (
 /obj/structure/shuttle/engine/propulsion{
-	dir = 8;
-	icon_state = "propulsion"
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/map_template/ecship/cryo)
@@ -194,9 +189,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
 "aE" = (
-/obj/structure/broken_cryo{
-	dir = 2
-	},
+/obj/structure/broken_cryo,
 /obj/machinery/light/small{
 	dir = 1;
 	icon_state = "bulb1"
@@ -218,12 +211,6 @@
 /obj/item/stool/padded,
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
-"aH" = (
-/obj/structure/broken_cryo{
-	dir = 2
-	},
-/turf/simulated/floor/tiled/white,
-/area/map_template/ecship/cryo)
 "aI" = (
 /obj/structure/broken_cryo,
 /turf/simulated/floor/tiled/white,
@@ -255,21 +242,18 @@
 "aM" = (
 /obj/structure/reagent_dispensers/water_cooler,
 /obj/structure/handrail{
-	dir = 4;
-	icon_state = "handrail"
+	dir = 4
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/effect/floor_decal/corner/paleblue/diagonal{
-	dir = 4;
-	icon_state = "corner_white_diagonal"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
 "aN" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/effect/floor_decal/corner/paleblue/diagonal{
-	dir = 4;
-	icon_state = "corner_white_diagonal"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
@@ -285,30 +269,25 @@
 "aP" = (
 /obj/structure/closet/crate/freezer/rations,
 /obj/structure/handrail{
-	dir = 8;
-	icon_state = "handrail"
+	dir = 8
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/effect/floor_decal/corner/paleblue/diagonal{
-	dir = 4;
-	icon_state = "corner_white_diagonal"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
 "aQ" = (
 /obj/structure/handrail{
-	dir = 4;
-	icon_state = "handrail"
+	dir = 4
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/item/stool/padded,
 /obj/effect/floor_decal/corner/paleblue/diagonal{
-	dir = 4;
-	icon_state = "corner_white_diagonal"
+	dir = 4
 	},
 /obj/machinery/alarm/low{
 	dir = 4;
-	icon_state = "alarm0";
 	pixel_x = -24
 	},
 /turf/simulated/floor/tiled/airless,
@@ -338,8 +317,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/map_template/ecship/cryo)
@@ -367,8 +345,7 @@
 /area/map_template/ecship/cryo)
 "aX" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/machinery/light{
 	dir = 8;
@@ -379,8 +356,7 @@
 /area/map_template/ecship/science)
 "aY" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/structure/table/glass,
 /obj/item/storage/box/monkeycubes,
@@ -388,8 +364,7 @@
 /area/map_template/ecship/science)
 "aZ" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/structure/table/glass,
 /turf/simulated/floor/tiled/white,
@@ -405,8 +380,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/cryo)
@@ -438,8 +412,7 @@
 /obj/structure/table/standard,
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/effect/floor_decal/corner/paleblue/diagonal{
-	dir = 4;
-	icon_state = "corner_white_diagonal"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
@@ -470,7 +443,6 @@
 /obj/structure/cable,
 /obj/machinery/alarm/low{
 	dir = 4;
-	icon_state = "alarm0";
 	pixel_x = -24
 	},
 /obj/machinery/power/apc/derelict,
@@ -493,18 +465,17 @@
 "bi" = (
 /obj/structure/catwalk,
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "bj" = (
 /obj/structure/handrail{
-	dir = 8;
-	icon_state = "handrail"
+	dir = 8
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/item/stool/padded,
 /obj/effect/floor_decal/corner/paleblue/diagonal{
-	dir = 4;
-	icon_state = "corner_white_diagonal"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
@@ -515,6 +486,7 @@
 	icon_state = "1-4"
 	},
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "bl" = (
@@ -555,19 +527,16 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/map_template/ecship/crew)
 "bp" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/structure/handrail{
-	dir = 4;
-	icon_state = "handrail"
+	dir = 4
 	},
 /obj/structure/window/reinforced{
 	dir = 1
@@ -576,8 +545,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/purple{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/item/remains/xeno,
 /turf/simulated/floor/tiled/white,
@@ -611,12 +579,10 @@
 /area/map_template/ecship/science)
 "bu" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 6;
-	icon_state = "corner_white"
+	dir = 6
 	},
 /obj/structure/handrail{
-	dir = 8;
-	icon_state = "handrail"
+	dir = 8
 	},
 /obj/structure/closet/secure_closet/hydroponics_torch,
 /turf/simulated/floor/tiled/white,
@@ -635,13 +601,13 @@
 	icon_state = "4-8"
 	},
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "bx" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/effect/floor_decal/corner/paleblue/diagonal{
-	dir = 4;
-	icon_state = "corner_white_diagonal"
+	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -669,8 +635,7 @@
 "bz" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/effect/floor_decal/corner/paleblue/diagonal{
-	dir = 4;
-	icon_state = "corner_white_diagonal"
+	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_pump/low{
 	dir = 8
@@ -678,31 +643,26 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
 "bA" = (
 /obj/structure/handrail{
-	dir = 8;
-	icon_state = "handrail"
+	dir = 8
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/effect/floor_decal/corner/paleblue/diagonal{
-	dir = 4;
-	icon_state = "corner_white_diagonal"
+	dir = 4
 	},
 /obj/machinery/power/apc{
-	dir = 4;
-	icon_state = "apc0"
+	dir = 4
 	},
 /obj/structure/cable{
 	d1 = 16;
 	d2 = 0;
 	dir = 1;
-	icon_state = "0-4";
-	pixel_y = 0
+	icon_state = "0-4"
 	},
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
@@ -728,21 +688,20 @@
 "bC" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 10;
-	icon_state = "intact"
+	dir = 10
 	},
 /obj/structure/cable{
 	dir = 4;
 	icon_state = "1-2"
 	},
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "bD" = (
 /obj/structure/closet/wardrobe/mixed,
 /obj/machinery/alarm/low{
 	dir = 4;
-	icon_state = "alarm0";
 	pixel_x = -24
 	},
 /turf/simulated/floor/tiled/white,
@@ -755,19 +714,16 @@
 /area/map_template/ecship/cryo)
 "bF" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/structure/handrail{
-	dir = 4;
-	icon_state = "handrail"
+	dir = 4
 	},
 /obj/structure/window/reinforced{
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/purple{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /obj/machinery/door/window/southright,
 /turf/simulated/floor/tiled/white,
@@ -776,17 +732,12 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/structure/window/reinforced{
-	dir = 2;
-	health = 1e+007
+/obj/structure/window/reinforced,
+/obj/effect/floor_decal/corner/purple{
+	dir = 6
 	},
 /obj/effect/floor_decal/corner/purple{
-	dir = 6;
-	icon_state = "corner_white"
-	},
-/obj/effect/floor_decal/corner/purple{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/ecship/science)
@@ -796,8 +747,7 @@
 /area/map_template/ecship/science)
 "bI" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/ecship/science)
@@ -806,12 +756,10 @@
 /area/map_template/ecship/science)
 "bK" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 6;
-	icon_state = "corner_white"
+	dir = 6
 	},
 /obj/structure/handrail{
-	dir = 8;
-	icon_state = "handrail"
+	dir = 8
 	},
 /obj/machinery/vending/hydronutrients{
 	categories = 3
@@ -872,8 +820,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/crew)
@@ -887,8 +834,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
@@ -906,8 +852,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
@@ -928,16 +873,15 @@
 	dir = 4;
 	icon_state = "1-2"
 	},
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "bW" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/structure/handrail{
-	dir = 4;
-	icon_state = "handrail"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/ecship/science)
@@ -949,8 +893,7 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/corner/purple{
-	dir = 6;
-	icon_state = "corner_white"
+	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/ecship/science)
@@ -959,6 +902,7 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "bZ" = (
@@ -985,8 +929,7 @@
 /area/map_template/ecship/science)
 "cb" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 6;
-	icon_state = "corner_white"
+	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -1055,8 +998,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/science)
@@ -1072,8 +1014,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/science)
@@ -1093,36 +1034,34 @@
 	icon_state = "1-4"
 	},
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "cj" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "ck" = (
 /obj/structure/shuttle/engine/propulsion{
-	dir = 8;
-	icon_state = "propulsion"
+	dir = 8
 	},
 /turf/simulated/wall/r_wall/hull,
 /area/map_template/ecship/cryo)
 "cl" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/structure/handrail{
-	dir = 4;
-	icon_state = "handrail"
+	dir = 4
 	},
 /obj/structure/window/reinforced{
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/purple{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/machinery/door/window/northleft,
 /turf/simulated/floor/tiled/white,
@@ -1135,12 +1074,10 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/purple{
-	dir = 6;
-	icon_state = "corner_white"
+	dir = 6
 	},
 /obj/effect/floor_decal/corner/purple{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/ecship/science)
@@ -1168,15 +1105,13 @@
 /area/map_template/ecship/science)
 "cq" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 6;
-	icon_state = "corner_white"
+	dir = 6
 	},
 /obj/structure/sign/warning/nosmoking_2{
 	pixel_x = 26
 	},
 /obj/structure/handrail{
-	dir = 8;
-	icon_state = "handrail"
+	dir = 8
 	},
 /obj/machinery/botany/extractor,
 /turf/simulated/floor/tiled/white,
@@ -1188,7 +1123,6 @@
 /obj/structure/closet/l3closet,
 /obj/machinery/alarm/low{
 	dir = 4;
-	icon_state = "alarm0";
 	pixel_x = -24
 	},
 /turf/simulated/floor/tiled/white,
@@ -1213,8 +1147,7 @@
 /obj/structure/closet/l3closet,
 /obj/structure/cable,
 /obj/machinery/power/apc/derelict{
-	dir = 4;
-	icon_state = "apc0"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/ecship/science)
@@ -1224,20 +1157,17 @@
 /area/map_template/ecship/crew)
 "cv" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/structure/handrail{
-	dir = 4;
-	icon_state = "handrail"
+	dir = 4
 	},
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/purple{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/ecship/science)
@@ -1247,12 +1177,10 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/purple{
-	dir = 6;
-	icon_state = "corner_white"
+	dir = 6
 	},
 /obj/effect/floor_decal/corner/purple{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /obj/item/remains/xeno,
 /turf/simulated/floor/tiled/white,
@@ -1276,16 +1204,13 @@
 /area/map_template/ecship/science)
 "cA" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 6;
-	icon_state = "corner_white"
+	dir = 6
 	},
 /obj/structure/handrail{
-	dir = 8;
-	icon_state = "handrail"
+	dir = 8
 	},
 /obj/machinery/alarm/low{
 	dir = 8;
-	icon_state = "alarm0";
 	pixel_x = 24
 	},
 /obj/machinery/botany/editor,
@@ -1297,8 +1222,7 @@
 /area/map_template/ecship/crew)
 "cD" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /obj/machinery/light{
 	dir = 8;
@@ -1309,8 +1233,7 @@
 /area/map_template/ecship/science)
 "cE" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /obj/machinery/portable_atmospherics/hydroponics{
 	closed_system = 1;
@@ -1320,20 +1243,16 @@
 /area/map_template/ecship/science)
 "cF" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /obj/machinery/smartfridge{
-	density = 0;
-	pixel_x = 0;
-	pixel_y = 0
+	density = 0
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/ecship/science)
 "cG" = (
 /obj/effect/floor_decal/corner/purple{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /obj/machinery/light{
 	dir = 4;
@@ -1357,12 +1276,10 @@
 "cJ" = (
 /obj/structure/closet/secure_closet/engineering_welding,
 /obj/effect/floor_decal/corner/yellow{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/structure/handrail{
-	dir = 4;
-	icon_state = "handrail"
+	dir = 4
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
@@ -1388,39 +1305,32 @@
 	d1 = 16;
 	d2 = 0;
 	dir = 1;
-	icon_state = "0-4";
-	pixel_y = 0
+	icon_state = "0-4"
 	},
 /obj/machinery/power/apc/derelict{
-	dir = 1;
-	icon_state = "apc0"
+	dir = 1
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "cN" = (
 /obj/effect/floor_decal/corner/yellow{
-	dir = 6;
-	icon_state = "corner_white"
+	dir = 6
 	},
 /obj/structure/handrail{
-	dir = 8;
-	icon_state = "handrail"
+	dir = 8
 	},
 /obj/machinery/computer/modular/preset/engineering,
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "cO" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 6;
-	icon_state = "intact"
+	dir = 6
 	},
 /obj/effect/floor_decal/corner/yellow{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/machinery/alarm/low{
 	dir = 4;
-	icon_state = "alarm0";
 	pixel_x = -24
 	},
 /obj/machinery/meter,
@@ -1448,20 +1358,17 @@
 /area/map_template/ecship/engineering)
 "cS" = (
 /obj/effect/floor_decal/corner/yellow{
-	dir = 6;
-	icon_state = "corner_white"
+	dir = 6
 	},
 /obj/item/stool/padded,
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "cT" = (
 /obj/machinery/atmospherics/binary/oxyregenerator{
-	dir = 1;
-	icon_state = "off"
+	dir = 1
 	},
 /obj/effect/floor_decal/corner/yellow{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
@@ -1484,15 +1391,13 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "cX" = (
 /obj/effect/floor_decal/corner/yellow{
-	dir = 6;
-	icon_state = "corner_white"
+	dir = 6
 	},
 /obj/structure/cable{
 	d1 = 2;
@@ -1510,8 +1415,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/yellow{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/structure/closet/walllocker/emerglocker/west,
 /obj/machinery/meter,
@@ -1536,8 +1440,7 @@
 	icon_state = "tube1"
 	},
 /obj/effect/floor_decal/corner/yellow{
-	dir = 6;
-	icon_state = "corner_white"
+	dir = 6
 	},
 /obj/machinery/power/smes/buildable,
 /obj/structure/cable,
@@ -1558,6 +1461,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dd" = (
@@ -1590,12 +1494,10 @@
 /area/map_template/ecship/engineering)
 "dh" = (
 /obj/effect/floor_decal/corner/yellow{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/structure/handrail{
-	dir = 4;
-	icon_state = "handrail"
+	dir = 4
 	},
 /obj/machinery/atmospherics/binary/pump/on{
 	dir = 1;
@@ -1611,21 +1513,17 @@
 /area/map_template/ecship/engineering)
 "dj" = (
 /obj/effect/floor_decal/corner/yellow{
-	dir = 6;
-	icon_state = "corner_white"
+	dir = 6
 	},
 /obj/structure/handrail{
-	dir = 8;
-	icon_state = "handrail"
+	dir = 8
 	},
 /obj/machinery/power/terminal{
-	dir = 1;
-	icon_state = "term"
+	dir = 1
 	},
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
@@ -1641,16 +1539,17 @@
 /obj/structure/catwalk,
 /obj/structure/handrail,
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dm" = (
 /obj/structure/catwalk,
 /obj/structure/handrail,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 6;
-	icon_state = "intact"
+	dir = 6
 	},
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dn" = (
@@ -1658,73 +1557,62 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "do" = (
 /obj/structure/handrail{
-	dir = 1;
-	icon_state = "handrail"
+	dir = 1
 	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "dp" = (
 /obj/effect/floor_decal/corner/yellow{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
 /obj/structure/handrail{
-	dir = 1;
-	icon_state = "handrail"
+	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "dq" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "dr" = (
 /obj/structure/bed/chair,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -1733,20 +1621,17 @@
 /area/map_template/ecship/engineering)
 "ds" = (
 /obj/effect/floor_decal/corner/yellow{
-	dir = 6;
-	icon_state = "corner_white"
+	dir = 6
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
 /obj/structure/handrail{
-	dir = 1;
-	icon_state = "handrail"
+	dir = 1
 	},
 /obj/machinery/atmospherics/valve/open{
-	dir = 4;
-	icon_state = "map_valve1"
+	dir = 4
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -1756,16 +1641,14 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "dt" = (
 /obj/machinery/door/airlock/external,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/structure/cable{
 	dir = 4;
@@ -1775,12 +1658,10 @@
 /area/map_template/ecship/engineering)
 "du" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/structure/handrail{
-	dir = 1;
-	icon_state = "handrail"
+	dir = 1
 	},
 /obj/structure/cable{
 	dir = 4;
@@ -1792,25 +1673,26 @@
 /obj/structure/catwalk,
 /obj/structure/handrail,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dw" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dx" = (
 /obj/structure/catwalk,
 /obj/effect/landmark/scorcher,
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dy" = (
@@ -1824,8 +1706,7 @@
 	d1 = 16;
 	d2 = 0;
 	dir = 4;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/airless,
 /area/map_template/ecship/engine)
@@ -1836,10 +1717,10 @@
 	d1 = 16;
 	d2 = 0;
 	dir = 4;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dA" = (
@@ -1895,6 +1776,7 @@
 	icon_state = "1-2"
 	},
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dH" = (
@@ -1904,18 +1786,17 @@
 	d1 = 16;
 	d2 = 0;
 	dir = 4;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/airless,
 /area/map_template/ecship/engine)
 "dI" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dJ" = (
@@ -1942,14 +1823,14 @@
 "dO" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 6;
-	icon_state = "intact"
+	dir = 6
 	},
 /obj/structure/cable{
 	dir = 4;
 	icon_state = "1-4"
 	},
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/engine)
 "dR" = (
@@ -1959,6 +1840,7 @@
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/engine)
 "dT" = (
@@ -1985,16 +1867,15 @@
 "dX" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/engine)
 "dY" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/effect/landmark/scorcher,
 /obj/effect/landmark/clear,
@@ -2003,9 +1884,6 @@
 "dZ" = (
 /obj/machinery/atmospherics/binary/passive_gate/on{
 	dir = 8;
-	icon_state = "map_on";
-	max_pressure_setting = 15000;
-	regulate_mode = 2;
 	target_pressure = 2500;
 	use_power = 1
 	},
@@ -2017,8 +1895,7 @@
 	name = "\improper OXYGEN"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/wall/r_wall/hull,
 /area/map_template/ecship/engine)
@@ -2027,7 +1904,6 @@
 	dir = 8;
 	external_pressure_bound = 4000;
 	external_pressure_bound_default = 4000;
-	icon_state = "map_vent";
 	pump_direction = 0;
 	use_power = 1
 	},
@@ -2041,7 +1917,6 @@
 	dir = 4;
 	external_pressure_bound = 4000;
 	external_pressure_bound_default = 4000;
-	icon_state = "map_vent";
 	pump_direction = 0;
 	use_power = 1
 	},
@@ -2049,28 +1924,23 @@
 /area/map_template/ecship/engine)
 "ee" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/wall/r_wall/hull,
 /area/map_template/ecship/engine)
 "ef" = (
 /obj/effect/floor_decal/corner/white/diagonal,
 /obj/effect/floor_decal/corner/white/diagonal{
-	dir = 4;
-	icon_state = "corner_white_diagonal"
+	dir = 4
 	},
 /obj/machinery/atmospherics/valve{
-	dir = 4;
-	icon_state = "map_valve0"
+	dir = 4
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/engine)
 "eg" = (
 /obj/machinery/atmospherics/binary/passive_gate/on{
 	dir = 4;
-	max_pressure_setting = 15000;
-	regulate_mode = 2;
 	target_pressure = 2500;
 	use_power = 1
 	},
@@ -2087,12 +1957,12 @@
 /area/map_template/ecship/engine)
 "ei" = (
 /obj/structure/catwalk,
+/obj/effect/landmark/clear,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/engine)
 "ej" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 6;
-	icon_state = "intact"
+	dir = 6
 	},
 /obj/effect/landmark/scorcher,
 /obj/effect/landmark/clear,
@@ -2101,9 +1971,6 @@
 "ek" = (
 /obj/machinery/atmospherics/binary/passive_gate/on{
 	dir = 8;
-	icon_state = "map_on";
-	max_pressure_setting = 15000;
-	regulate_mode = 2;
 	target_pressure = 2500;
 	use_power = 1
 	},
@@ -2112,27 +1979,22 @@
 /area/map_template/ecship/engine)
 "el" = (
 /obj/machinery/atmospherics/valve/open{
-	dir = 4;
-	icon_state = "map_valve1"
+	dir = 4
 	},
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/effect/floor_decal/corner/paleblue/diagonal{
-	dir = 4;
-	icon_state = "corner_white_diagonal"
+	dir = 4
 	},
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "em" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/wall/r_wall/hull,
 /area/map_template/ecship/engine)
 "en" = (
-/obj/structure/sign/warning/fire{
-	pixel_y = 0
-	},
+/obj/structure/sign/warning/fire,
 /turf/simulated/wall/r_wall/hull,
 /area/map_template/ecship/engine)
 "eo" = (
@@ -2152,6 +2014,7 @@
 "yZ" = (
 /obj/structure/grille,
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "NM" = (
@@ -2178,6 +2041,7 @@
 "YW" = (
 /obj/structure/catwalk,
 /obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/engine)
 "ZF" = (
@@ -3490,7 +3354,7 @@ aa
 aa
 ab
 as
-aH
+aI
 aV
 aV
 aV

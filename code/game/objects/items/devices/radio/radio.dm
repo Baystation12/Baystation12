@@ -103,7 +103,8 @@
 	if(b_stat)
 		wires.Interact(user)
 
-	return ui_interact(user)
+	else
+		ui_interact(user)
 
 /obj/item/device/radio/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, datum/nanoui/master_ui = null, datum/topic_state/state = GLOB.default_state)
 	var/data[0]
@@ -269,7 +270,7 @@
 		return TRUE
 
 	if(href_list["remove_cell"])
-		if(cell)
+		if(cell && b_stat)
 			var/mob/user = usr
 			user.put_in_hands(cell)
 			to_chat(user, "<span class='notice'>You remove [cell] from \the [src].</span>")
@@ -600,23 +601,22 @@
 	user.set_machine(src)
 	if(isScrewdriver(W))
 		b_stat = !b_stat
-		if(!istype(src, /obj/item/device/radio/beacon))
-			if (b_stat)
-				user.show_message("<span class='notice'>\The [src] can now be attached and modified!</span>")
-			else
-				user.show_message("<span class='notice'>\The [src] can no longer be modified or attached!</span>")
-			updateDialog()
-			return
+		if (b_stat)
+			user.show_message("<span class='notice'>\The [src] can now be attached and modified!</span>")
+		else
+			user.show_message("<span class='notice'>\The [src] can no longer be modified or attached!</span>")
+		updateDialog()
+		return
 	if(!cell && power_usage && istype(W, /obj/item/cell/device) && user.unEquip(W, target = src))
 		to_chat(user, "<span class='notice'>You put [W] in \the [src].</span>")
 		cell = W
 		return
 
 /obj/item/device/radio/emp_act(severity)
-	broadcasting = 0
-	listening = 0
+	broadcasting = prob(50)
+	listening = prob(50)
 	for (var/ch_name in channels)
-		channels[ch_name] = 0
+		channels[ch_name] = prob(50)
 	if(cell)
 		cell.emp_act(severity)
 	..()
@@ -698,7 +698,7 @@
 		else
 			to_chat(user, "This radio doesn't have any encryption keys!")
 
-	if(istype(W, /obj/item/device/encryptionkey/))
+	if(istype(W, /obj/item/device/encryptionkey))
 		if(keyslot)
 			to_chat(user, "The radio can't hold another key!")
 			return

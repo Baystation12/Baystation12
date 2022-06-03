@@ -13,26 +13,31 @@
 	stat_immune = 0
 	machine_name = "\improper NTNet quantum relay"
 	machine_desc = "Maintains a copy of proprietary software used to provide NTNet service to all valid devices in the region. Essentially a huge router."
-	var/datum/ntnet/NTNet = null // This is mostly for backwards reference and to allow varedit modifications from ingame.
-	var/enabled = 1				// Set to 0 if the relay was turned off
-	var/dos_failure = 0			// Set to 1 if the relay failed due to (D)DoS attack
-	var/list/dos_sources = list()	// Backwards reference for qdel() stuff
+	/// Reference to NTNet. This is mostly for backwards reference and to allow varedit modifications from ingame.
+	var/datum/ntnet/NTNet = null
+	/// Set to FALSE if the relay was turned off
+	var/enabled = TRUE
+	/// Set to TRUE if the relay failed due to (D)DoS attack
+	var/dos_failure = FALSE
+	/// List of backwards reference for qdel() stuff
+	var/list/dos_sources = list()
 
-	// Denial of Service attack variables
-	var/dos_overload = 0		// Amount of DoS "packets" in this relay's buffer
-	var/dos_capacity = 500		// Amount of DoS "packets" in buffer required to crash the relay
-	var/dos_dissipate = 1		// Amount of DoS "packets" dissipated over time.
-
+	/// Amount of DoS "packets" in this relay's buffer.
+	var/dos_overload = 0
+	/// Amount of DoS "packets" in buffer required to crash the relay.
+	var/dos_capacity = 500
+	/// Amount of DoS "packets" dissipated over time.
+	var/dos_dissipate = 1
 
 // TODO: Implement more logic here. For now it's only a placeholder.
 /obj/machinery/ntnet_relay/operable()
 	if(!..(EMPED))
-		return 0
+		return FALSE
 	if(dos_failure)
-		return 0
+		return FALSE
 	if(!enabled)
-		return 0
-	return 1
+		return FALSE
+	return TRUE
 
 /obj/machinery/ntnet_relay/on_update_icon()
 	if(operable())
@@ -51,14 +56,14 @@
 
 	// If DoS traffic exceeded capacity, crash.
 	if((dos_overload > dos_capacity) && !dos_failure)
-		dos_failure = 1
+		dos_failure = TRUE
 		update_icon()
-		ntnet_global.add_log("Quantum relay switched from normal operation mode to overload recovery mode.")
+		ntnet_global.add_log("Quantum relay ([uid]) switched from normal operation mode to overload recovery mode.")
 	// If the DoS buffer reaches 0 again, restart.
 	if((dos_overload == 0) && dos_failure)
-		dos_failure = 0
+		dos_failure = FALSE
 		update_icon()
-		ntnet_global.add_log("Quantum relay switched from overload recovery mode to normal operation mode.")
+		ntnet_global.add_log("Quantum relay ([uid]) switched from overload recovery mode to normal operation mode.")
 
 /obj/machinery/ntnet_relay/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = list()
@@ -81,22 +86,22 @@
 
 /obj/machinery/ntnet_relay/Topic(href, href_list)
 	if(..())
-		return 1
+		return TOPIC_HANDLED
 	if(href_list["restart"])
 		dos_overload = 0
-		dos_failure = 0
+		dos_failure = FALSE
 		update_icon()
-		ntnet_global.add_log("Quantum relay manually restarted from overload recovery mode to normal operation mode.")
-		return 1
+		ntnet_global.add_log("Quantum relay ([uid]) manually restarted from overload recovery mode to normal operation mode.")
+		return TOPIC_HANDLED
 	else if(href_list["toggle"])
 		enabled = !enabled
-		ntnet_global.add_log("Quantum relay manually [enabled ? "enabled" : "disabled"].")
+		ntnet_global.add_log("Quantum relay ([uid]) manually [enabled ? "enabled" : "disabled"].")
 		update_icon()
-		return 1
+		return TOPIC_HANDLED
 	else if(href_list["purge"])
 		ntnet_global.banned_nids.Cut()
-		ntnet_global.add_log("Manual override: Network blacklist cleared.")
-		return 1
+		ntnet_global.add_log("Override: Network blacklist manually cleared from Quantum relay ([uid]).")
+		return TOPIC_HANDLED
 	else if(href_list["eject_drive"] && uninstall_component(/obj/item/stock_parts/computer/hard_drive/portable))
 		visible_message("[icon2html(src, viewers(get_turf(src)))] [src] beeps and ejects its portable disk.")
 
@@ -106,13 +111,13 @@
 	if(ntnet_global)
 		ntnet_global.relays.Add(src)
 		NTNet = ntnet_global
-		ntnet_global.add_log("New quantum relay activated. Current amount of linked relays: [NTNet.relays.len]")
+		ntnet_global.add_log("New Quantum Relay ([uid]) activated. Current amount of linked relays: [NTNet.relays.len]")
 	..()
 
 /obj/machinery/ntnet_relay/Destroy()
 	if(ntnet_global)
 		ntnet_global.relays.Remove(src)
-		ntnet_global.add_log("Quantum relay connection severed. Current amount of linked relays: [NTNet.relays.len]")
+		ntnet_global.add_log("Quantum Relay ([uid]) connection severed. Current amount of linked relays: [NTNet.relays.len]")
 		NTNet = null
 	for(var/datum/computer_file/program/ntnet_dos/D in dos_sources)
 		D.target = null

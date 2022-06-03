@@ -14,7 +14,7 @@
 	containertype = /obj/structure/closet/crate/large
 	contains = list(/obj/item/storage/toolbox/emergency = 2,
 					/obj/item/clothing/suit/storage/hazardvest = 2,
-					/obj/item/tank/emergency/oxygen/engi = 4,
+					/obj/item/tank/oxygen_emergency_extended = 4,
 			 		/obj/item/clothing/suit/space/emergency = 4,
 					/obj/item/clothing/head/helmet/space/emergency = 4,
 					/obj/item/clothing/mask/gas = 4,
@@ -97,6 +97,14 @@
 	contains = list(/obj/machinery/portable_atmospherics/canister/carbon_dioxide)
 	cost = 40
 	containername = "\improper CO2 canister crate"
+	containertype = /obj/structure/closet/crate/secure/large
+	access = access_atmospherics
+
+/decl/hierarchy/supply_pack/atmospherics/canister_boron
+	name = "Gas - Boron gas canister"
+	contains = list(/obj/machinery/portable_atmospherics/canister/boron)
+	cost = 40
+	containername = "\improper Boron gas canister crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_atmospherics
 

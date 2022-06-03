@@ -75,6 +75,7 @@
 	desc = "A rectangular plastic crate."
 	points_per_crate = 1
 	closet_appearance = /decl/closet_appearance/crate/plastic
+	material = MATERIAL_PLASTIC
 
 /obj/structure/closet/crate/internals
 	name = "internals crate"
@@ -164,7 +165,7 @@
 	return list(
 		/obj/item/reagent_containers/food/snacks/meat/beef = 4,
 		/obj/item/reagent_containers/food/snacks/meat/syntiflesh = 4,
-		/obj/item/reagent_containers/food/snacks/fish = 4
+		/obj/random/fish = 8
 	)
 
 /obj/structure/closet/crate/bin
@@ -278,6 +279,7 @@
 /obj/structure/closet/crate/paper_refill
 	name = "paper refill crate"
 	desc = "A rectangular plastic crate, filled up with blank papers for refilling bins and printers. A bureaucrat's favorite."
+	material = MATERIAL_PLASTIC
 
 /obj/structure/closet/crate/paper_refill/WillContain()
 	return list(/obj/item/paper = 30)

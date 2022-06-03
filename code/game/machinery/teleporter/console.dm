@@ -11,6 +11,8 @@
 	var/atom/target
 	var/active
 	var/id
+	/// The timer ID for any active online timers, for stopping the timer if the teleporter is manually shut off, or dies before the timer ends.
+	var/active_timer
 
 
 /obj/machinery/computer/teleporter/Destroy()
@@ -97,9 +99,14 @@
 /obj/machinery/computer/teleporter/proc/clear_target()
 	if (!target)
 		return
+	var/old_target = target
 	GLOB.destroyed_event.unregister(target, src, /obj/machinery/computer/teleporter/proc/lost_target)
 	target = null
+	if (istype(old_target, /obj/machinery/tele_beacon))
+		var/obj/machinery/tele_beacon/beacon = old_target
+		beacon.disconnect_computer(src)
 	set_active(FALSE)
+	set_timer(TRUE)
 
 
 /obj/machinery/computer/teleporter/proc/lost_target()
@@ -111,8 +118,13 @@
 	if (target == _target)
 		return
 	clear_target()
+	if (istype(_target, /obj/machinery/tele_beacon))
+		var/obj/machinery/tele_beacon/beacon = _target
+		if (!beacon.connect_computer(src))
+			return FALSE
 	target = _target
 	GLOB.destroyed_event.register(target, src, /obj/machinery/computer/teleporter/proc/lost_target)
+	return TRUE
 
 
 /obj/machinery/computer/teleporter/proc/set_active(_active, notify)
@@ -120,6 +132,7 @@
 	if (active == effective)
 		return
 	active = effective
+	set_timer(!active)
 	if (notify && effective)
 		if (active)
 			visible_message(SPAN_NOTICE("The teleporter sparks and hums to life."))
@@ -131,16 +144,25 @@
 		pad.queue_icon_update()
 
 
+/obj/machinery/computer/teleporter/proc/set_timer(clear = FALSE)
+	if (clear)
+		if (active_timer)
+			deltimer(active_timer)
+			active_timer = null
+	else
+		active_timer = addtimer(CALLBACK(src, .proc/clear_target), 1 MINUTE, TIMER_UNIQUE | TIMER_OVERRIDE | TIMER_STOPPABLE)
+
+
 /obj/machinery/computer/teleporter/proc/get_targets()
 	var/list/ids = list()
 	var/list/result = list()
-	for (var/obj/item/device/radio/beacon/B)
-		if (QDELETED(B) || !B.functioning || !isPlayerLevel(B.z))
+	for (var/obj/machinery/tele_beacon/B)
+		if (QDELETED(B) || !B.functioning() || !isPlayerLevel(B.z))
 			continue
 		var/area/A = get_area(B)
 		if (!A)
 			continue
-		result["[A.name] \[[++ids[A]]\]"] = B
+		result["[B.beacon_name] \[[++ids[B.beacon_name]]\]"] = B
 	for (var/obj/item/implant/tracking/T)
 		if (QDELETED(T) || !T.implanted || !ismob(T.loc))
 			continue
@@ -149,7 +171,7 @@
 			continue
 		if (!isPlayerLevel(M.z))
 			continue
-		result["[M.name] \[[++ids[M]]\]"] = T
+		result["[M.name] \[[++ids[M.name]]\]"] = T
 	return result
 
 
@@ -187,5 +209,7 @@
 			var/data_target = input(user, "Select Target", "Teleporter") in null | targets
 			if (isnull(data_target) || !CanDefaultInteract(user))
 				return TRUE
-			audible_message(SPAN_NOTICE("\The [src] hums, \"Target updated.\""))
-			set_target(targets[data_target])
+			if (set_target(targets[data_target]))
+				audible_message(SPAN_NOTICE("\The [src] hums, \"Target updated.\""))
+			else
+				audible_message(SPAN_WARNING("\The [src] buzzes, \"Failed to establish teleporter lock.\""))

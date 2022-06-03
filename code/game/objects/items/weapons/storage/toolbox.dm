@@ -11,6 +11,7 @@
 	throwforce = 10
 	throw_speed = 1
 	throw_range = 7
+	base_parry_chance = 15
 	w_class = ITEM_SIZE_LARGE
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE //enough to hold all starting contents
@@ -18,6 +19,7 @@
 	attack_verb = list("robusted")
 	use_sound = 'sound/effects/storage/toolbox.ogg'
 	matter = list(MATERIAL_STEEL = 5000)
+	allow_slow_dump = TRUE
 
 /obj/item/storage/toolbox/emergency
 	name = "emergency toolbox"
@@ -65,4 +67,5 @@
 	item_state = "toolbox_syndi"
 	origin_tech = list(TECH_COMBAT = 1, TECH_ESOTERIC = 1)
 	attack_cooldown = 10
+	base_parry_chance = 30
 	startswith = list(/obj/item/clothing/gloves/insulated, /obj/item/screwdriver, /obj/item/wrench, /obj/item/weldingtool, /obj/item/crowbar, /obj/item/wirecutters, /obj/item/device/multitool)

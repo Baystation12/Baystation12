@@ -23,22 +23,27 @@ Small, little HP, poisonous.
 	can_escape = TRUE
 	pass_flags = PASS_FLAG_TABLE
 	natural_weapon = /obj/item/natural_weapon/bite
-	faction = SPECIES_VOX
 
-/mob/living/simple_animal/hostile/voxslug/ListTargets(var/dist = 7)
-	var/list/L = list()
-	for(var/a in hearers(src, dist))
-		if(istype(a,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = a
-			if(H.species.get_bodytype() == SPECIES_VOX)
-				continue
-		if(isliving(a))
-			var/mob/living/M = a
-			if(M.faction == faction)
-				continue
-		L += a
+	ai_holder = /datum/ai_holder/hostile/melee/voxslug
 
-	return L
+/datum/ai_holder/hostile/melee/voxslug/list_targets()
+	. = ..()
+
+	for (var/mob/living/carbon/human/H in .)
+		if (H.species.get_bodytype() == SPECIES_VOX)
+			. -= H
+
+/datum/ai_holder/hostile/melee/voxslug/engage_target()
+	if (isliving(holder.loc.loc))
+		return
+
+	. = ..()
+
+	var/mob/living/simple_animal/hostile/voxslug/V = holder
+	if(istype(target, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = target
+		if(prob(H.getBruteLoss()/2))
+			V.attach(H)
 
 /mob/living/simple_animal/hostile/voxslug/get_scooped(var/mob/living/carbon/grabber)
 	if(grabber.species.get_bodytype() != SPECIES_VOX)
@@ -49,21 +54,15 @@ Small, little HP, poisonous.
 /mob/living/simple_animal/hostile/voxslug/proc/attach(var/mob/living/carbon/human/H)
 	var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
 	if(istype(S) && !length(S.breaches))
-		S.create_breaches(BRUTE, 20)
+		S.create_breaches(DAMAGE_BRUTE, 20)
 		if(!length(S.breaches)) //unable to make a hole
 			return
 	var/obj/item/organ/external/chest = H.organs_by_name[BP_CHEST]
-	var/obj/item/holder/voxslug/holder = new(get_turf(src))
-	src.forceMove(holder)
-	chest.embed(holder,0,"\The [src] latches itself onto \the [H]!")
-	holder.sync(src)
+	var/obj/item/holder/voxslug/slug_holder = new(get_turf(src))
+	src.forceMove(slug_holder)
+	chest.embed(slug_holder,0,"\The [src] latches itself onto \the [H]!")
+	slug_holder.sync(src)
 
-/mob/living/simple_animal/hostile/voxslug/AttackingTarget()
-	. = ..()
-	if(istype(., /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = .
-		if(prob(H.getBruteLoss()/2))
-			attach(H)
 
 /mob/living/simple_animal/hostile/voxslug/Life()
 	. = ..()
@@ -79,7 +78,7 @@ Small, little HP, poisonous.
 	var/mob/living/simple_animal/hostile/voxslug/V = contents[1]
 	if(!V.stat && istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = target
-		if(!do_after(user, 3 SECONDS, H))
+		if(!do_after(user, 3 SECONDS, H, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 			return
 		V.attach(H)
 		qdel(src)

@@ -47,22 +47,6 @@
 	else
 		to_chat(user, (distance <= 1 ? "It has [get_fuel()] [welding_resource] remaining. " : "") + "[tank] is attached.")
 
-/obj/item/weldingtool/MouseDrop(atom/over)
-	if(!CanMouseDrop(over, usr))
-		return
-
-	if(istype(over, /obj/item/weldpack))
-		var/obj/item/weldpack/wp = over
-		if(wp.welder)
-			to_chat(usr, "\The [wp] already has \a [wp.welder] attached.")
-		else if(usr.unEquip(src, wp))
-			wp.welder = src
-			usr.visible_message("[usr] attaches \the [src] to \the [wp].", "You attach \the [src] to \the [wp].")
-			wp.update_icon()
-		return
-
-	..()
-
 /obj/item/weldingtool/attackby(obj/item/W as obj, mob/user as mob)
 	if(welding)
 		to_chat(user, SPAN_DANGER("Stop welding first!"))
@@ -251,10 +235,10 @@
 				T.visible_message(SPAN_WARNING("\The [src] turns on."))
 			if (istype(src, /obj/item/weldingtool/electric))
 				src.force = 11
-				src.damtype = ELECTROCUTE
+				src.damtype = DAMAGE_SHOCK
 			else
 				src.force = tank.lit_force
-				src.damtype = BURN
+				src.damtype = DAMAGE_BURN
 			welding = 1
 			update_icon()
 			START_PROCESSING(SSobj, src)
@@ -273,7 +257,7 @@
 			src.force = initial(force)
 		else
 			src.force = tank.unlit_force
-		src.damtype = BRUTE
+		src.damtype = DAMAGE_BRUTE
 		src.welding = 0
 		update_icon()
 
@@ -293,7 +277,7 @@
 			to_chat(user, SPAN_WARNING("You'll need to turn [src] on to patch the damage on [M]'s [S.name]!"))
 			return 1
 
-		if(S.robo_repair(15, BRUTE, "some dents", src, user))
+		if(S.robo_repair(15, DAMAGE_BRUTE, "some dents", src, user))
 			remove_fuel(1, user)
 
 	else

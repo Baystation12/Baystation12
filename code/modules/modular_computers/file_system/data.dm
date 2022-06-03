@@ -1,22 +1,24 @@
-// /data/ files store data in string format.
-// They don't contain other logic for now.
+// /data/ files store data in string format. They don't contain other logic for now.
 /datum/computer_file/data
-	var/stored_data = "" 			// Stored data in string format.
 	filetype = "DAT"
-	var/block_size = 2000			// Turns out, text is small.
-	var/do_not_edit = 0				// Whether the user will be reminded that the file probably shouldn't be edited.
-	var/read_only = 0				// Protects files that should never be edited by the user due to special properties.
+
+	/// Stored data in string format. Do not modify directly. Changes to file should be made through OS functions.
+	var/stored_data = ""
+	/// How much text can be stored per GQ, in characters
+	var/block_size = 2000
+	/// Whether the user will be reminded that the file probably shouldn't be edited.
+	var/do_not_edit = FALSE
 
 /datum/computer_file/data/clone()
 	var/datum/computer_file/data/temp = ..()
 	temp.stored_data = stored_data
 	return temp
 
-// Calculates file size from amount of characters in saved string
+/// Calculates file size from amount of characters in saved string
 /datum/computer_file/data/proc/calculate_size()
 	size = max(1, round(length(stored_data) / block_size))
 
-/datum/computer_file/data/proc/generate_file_data(var/mob/user)
+/datum/computer_file/data/proc/generate_file_data(mob/user)
 	return digitalPencode2html(stored_data)
 
 /datum/computer_file/data/logfile
@@ -27,10 +29,10 @@
 
 /datum/computer_file/data/bodyscan
 	filetype = "BSC"
-	read_only = 1
+	read_only = TRUE
 	papertype = /obj/item/paper/bodyscan
 
-/datum/computer_file/data/bodyscan/generate_file_data(var/mob/user)
+/datum/computer_file/data/bodyscan/generate_file_data(mob/user)
 	return display_medical_data(metadata, user.get_skill_value(SKILL_MEDICAL), TRUE)
 
 /// Mapping tool - creates a named modular computer file in a computer's storage on late initialize.
@@ -46,8 +48,10 @@
 	unacidable = TRUE
 	simulated = FALSE
 	invisibility = 101
-	var/file_name = "helloworld" // The name that the file will have once it's created
-	var/file_info = "Hello World!" // The contents of this file. Uses paper formatting.
+	/// The name that the file will have once it's created.
+	var/file_name = "helloworld"
+	/// The contents of this file. Uses paper formatting.
+	var/file_info = "Hello World!"
 
 /obj/effect/computer_file_creator/Initialize()
 	. = ..()
@@ -60,5 +64,5 @@
 			continue
 		var/datum/extension/interactive/ntos/os = get_extension(O, /datum/extension/interactive/ntos)
 		if (os)
-			os.save_file(file_name, file_info, /datum/computer_file/data/text)
+			os.create_data_file(file_name, file_info, /datum/computer_file/data/text)
 	qdel(src)

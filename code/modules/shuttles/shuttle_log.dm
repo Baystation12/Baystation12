@@ -106,7 +106,7 @@
 		current_mission.stage = SHUTTLE_MISSION_QUEUED
 		current_mission = null //We'll reset this at the end.
 	var/index = list_find(queued_missions, mission)
-	var/new_index = Clamp(index - relative_position, 1, length(queued_missions))
+	var/new_index = clamp(index - relative_position, 1, length(queued_missions))
 	queued_missions -= mission
 	queued_missions.Insert(new_index, mission)
 	process_queue()

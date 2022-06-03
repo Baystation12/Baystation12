@@ -81,20 +81,26 @@
 	lightlevel = 0.5
 	has_trees = TRUE
 	flora_diversity = 8
-	fauna_types = list(/mob/living/simple_animal/cat, /mob/living/simple_animal/chicken, /mob/living/simple_animal/mouse, /mob/living/simple_animal/opossum, /mob/living/simple_animal/hostile/retaliate/goat, /mob/living/simple_animal/hostile/retaliate/goose, /mob/living/simple_animal/cow)
+	fauna_types = list(/mob/living/simple_animal/passive/cat, /mob/living/simple_animal/passive/chicken, /mob/living/simple_animal/passive/mouse, /mob/living/simple_animal/passive/opossum, /mob/living/simple_animal/hostile/retaliate/goat, /mob/living/simple_animal/hostile/retaliate/goose, /mob/living/simple_animal/passive/cow)
 	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna, /mob/living/simple_animal/hostile/retaliate/goose/dire)
 
 	//Animals being named alien creature is a bit odd as these would just be earth transplants
-	species = list( /mob/living/simple_animal/cat 					  = "wild cat",
-					/mob/living/simple_animal/chicken 				  = "wild chicken",
-					/mob/living/simple_animal/mouse 				  = "mouse",
-					/mob/living/simple_animal/opossum 				  =	"opossum",
+	species = list( /mob/living/simple_animal/passive/cat 					  = "wild cat",
+					/mob/living/simple_animal/passive/chicken 				  = "wild chicken",
+					/mob/living/simple_animal/passive/mouse 				  = "mouse",
+					/mob/living/simple_animal/passive/opossum 				  =	"opossum",
 					/mob/living/simple_animal/hostile/retaliate/goat  = "wild goat",
 					/mob/living/simple_animal/hostile/retaliate/goose = "goose",
-					/mob/living/simple_animal/cow 					  = "wild cow")
+					/mob/living/simple_animal/passive/cow 					  = "wild cow")
 
 /obj/effect/overmap/visitable/sector/exoplanet/grass/terraformed/generate_habitability()
 	habitability_class = HABITABILITY_IDEAL
+
+/obj/effect/overmap/visitable/sector/exoplanet/grass/terraformed/generate_atmosphere()
+	..()
+	if(atmosphere)
+		atmosphere.temperature = T0C + rand(0, 50)
+		atmosphere.update_values()
 
 /obj/effect/overmap/visitable/sector/exoplanet/grass/generate_map()
 	lightlevel = rand(0.7,0.9)/10

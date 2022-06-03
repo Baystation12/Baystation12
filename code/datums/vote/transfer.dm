@@ -11,7 +11,7 @@
 		return
 	if(!evacuation_controller || !evacuation_controller.should_call_autotransfer_vote())
 		return FALSE
-	if(!automatic && !config.allow_vote_restart && !is_admin(creator))
+	if(!automatic && !config.allow_vote_restart && !isadmin(creator))
 		return FALSE // Admins and autovotes bypass the config setting.
 	if(check_rights(R_INVESTIGATE, 0, creator))
 		return //Mods bypass further checks.
@@ -59,13 +59,13 @@
 	if((. = ..()))
 		return
 	if(config.vote_no_dead_crew_transfer)
-		return !isliving(user) || ismouse(user) || is_drone(user)
+		return !isliving(user) || ismouse(user) || is_drone(user) || user.stat == DEAD
 
 /datum/vote/transfer/check_toggle()
 	return config.allow_vote_restart ? "Allowed" : "Disallowed"
 
 /datum/vote/transfer/toggle(mob/user)
-	if(is_admin(user))
+	if(isadmin(user))
 		config.allow_vote_restart = !config.allow_vote_restart
 
 #undef CHOICE_TRANSFER

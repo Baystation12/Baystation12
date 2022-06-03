@@ -1,7 +1,17 @@
-# Require reviews from Core team for changes to CI or infra stuff
+# Require reviews Core for changes to configuration, license, etc
+
 .github/ @Baystation12/Core
-.azure-pipelines.yml @Baystation12/Core
-Dockerfile @Baystation12/Core
-flyway.conf @Baystation12/Core
-sql/ @Baystation12/Core
-LICENSE @Baystation12/Core
+.vscode/ @Baystation12/Core
+
+.codebeatignore @Baystation12/Core
+.editorconfig @Baystation12/Core
+.git-blame-ignore-revs @Baystation12/Core
+.gitattributes @Baystation12/Core
+.gitignore @Baystation12/Core
+SpacemanDMM.toml @Baystation12/Core
+
+/docs/ @Baystation12/Core
+/tools/ @Baystation12/Core
+
+/LICENSE @Baystation12/Core
+/README.md @Baystation12/Core

@@ -27,7 +27,7 @@
 	// Power
 	idle_power_usage = 10
 	active_power_usage = 150
-	
+
 	machine_name = "washing machine"
 	machine_desc = "Uses detergent and water to get your clothes minty fresh. Good for those pesky bloodstains! Also decontaminates clothing that has been exposed to toxic elements, as long as detergent is used in the washing process."
 
@@ -110,8 +110,8 @@
 		return
 	if(state & WASHER_STATE_CLOSED)
 		to_chat(usr, SPAN_WARNING("\The [src] is closed."))
-		return	
-	if(!do_after(usr, 2 SECONDS, src))
+		return
+	if(!do_after(usr, 2 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return
 	if(!(state & WASHER_STATE_CLOSED))
 		usr.dropInto(loc)
@@ -122,7 +122,7 @@
 /obj/machinery/washing_machine/clean_blood()
 	. = ..()
 	state &= ~WASHER_STATE_BLOODY
-	update_icon()	
+	update_icon()
 
 /obj/machinery/washing_machine/components_are_accessible(path)
 	return !(state & WASHER_STATE_RUNNING) && ..()
@@ -147,65 +147,29 @@
 		update_icon()
 		return TRUE
 
-	else if(istype(W,/obj/item/stack/hairlesshide) || \
-		istype(W,/obj/item/clothing/under)  || \
-		istype(W,/obj/item/clothing/mask)   || \
-		istype(W,/obj/item/clothing/head)   || \
-		istype(W,/obj/item/clothing/gloves) || \
-		istype(W,/obj/item/clothing/shoes)  || \
-		istype(W,/obj/item/clothing/suit)   || \
-		istype(W,/obj/item/bedsheet) || \
-		istype(W,/obj/item/underwear/))
+	if (state & WASHER_STATE_RUNNING)
+		to_chat(user, SPAN_WARNING("\The [src] is currently running."))
+		return TRUE
 
-		//YES, it's hardcoded... saves a var/can_be_washed for every single clothing item.
-		if ( istype(W,/obj/item/clothing/suit/space ) )
-			to_chat(user, "This item does not fit.")
-			return
-		if ( istype(W,/obj/item/clothing/suit/syndicatefake ) )
-			to_chat(user, "This item does not fit.")
-			return
-		if ( istype(W,/obj/item/clothing/suit/cyborg_suit ) )
-			to_chat(user, "This item does not fit.")
-			return
-		if ( istype(W,/obj/item/clothing/suit/bomb_suit ) )
-			to_chat(user, "This item does not fit.")
-			return
-		if ( istype(W,/obj/item/clothing/suit/armor ) )
-			to_chat(user, "This item does not fit.")
-			return
-		if ( istype(W,/obj/item/clothing/suit/armor ) )
-			to_chat(user, "This item does not fit.")
-			return
-		if ( istype(W,/obj/item/clothing/mask/gas ) )
-			to_chat(user, "This item does not fit.")
-			return
-		if ( istype(W,/obj/item/clothing/mask/smokable/cigarette ) )
-			to_chat(user, "This item does not fit.")
-			return
-		if ( istype(W,/obj/item/clothing/head/syndicatefake ) )
-			to_chat(user, "This item does not fit.")
-			return
-		if ( istype(W,/obj/item/clothing/head/helmet ) )
-			to_chat(user, "This item does not fit.")
-			return
+	else if (!(W.item_flags & ITEM_FLAG_WASHER_ALLOWED))
+		if (isScrewdriver(W) || isCrowbar(W) || isWrench(W))
+			return ..()
 
-		if(contents.len < 5)
-			if(!(state & WASHER_STATE_CLOSED))
-				if(!user.unEquip(W, src))
+		to_chat(user, SPAN_WARNING("\The [W] can't be washed in \the [src]!"))
+		return
+
+	else
+		if (contents.len < 5)
+			if (!(state & WASHER_STATE_CLOSED))
+				if (!user.unEquip(W, src))
 					return
 				state |= WASHER_STATE_FULL
 				update_icon()
 			else
 				to_chat(user, SPAN_NOTICE("You can't put the item in right now."))
 		else
-			to_chat(user, SPAN_NOTICE("\The [src] is full"))
-		return TRUE
+			to_chat(user, SPAN_NOTICE("\The [src] is full."))
 
-	if(state & WASHER_STATE_RUNNING)
-		to_chat(user, SPAN_WARNING("\The [src] is currently running."))
-		return TRUE
-
-	return ..()
 
 /obj/machinery/washing_machine/physical_attack_hand(mob/user)
 	if(state & WASHER_STATE_RUNNING)

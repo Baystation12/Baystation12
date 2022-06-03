@@ -13,7 +13,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+
 	machine_name = "microwave"
 	machine_desc = "Required for preparing any dish more complicated than a slice of bread. In the future, <i>everything</i> is microwaved."
 
@@ -44,11 +44,11 @@
 	// Micro lasers speed cooking up at higher tiers.
 	// Matter bins decrease the chance of breaking or getting dirty.
 	..()
-	var/laser_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/micro_laser), 1, 5)
+	var/laser_rating = clamp(total_component_rating_of_type(/obj/item/stock_parts/micro_laser), 1, 5)
 
 	speed_multiplier = (laser_rating * 0.5)
 	power_efficiency = total_component_rating_of_type(/obj/item/stock_parts/manipulator)
-	break_multiplier = 1 / Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 1, 3)
+	break_multiplier = 1 / clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 1, 3)
 
 /*******************
 *   Item Adding
@@ -62,7 +62,7 @@
 				"<span class='notice'>\The [user] starts to fix part of the microwave.</span>", \
 				"<span class='notice'>You start to fix part of the microwave.</span>" \
 			)
-			if (do_after(user, 20, src))
+			if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 				user.visible_message( \
 					"<span class='notice'>\The [user] fixes part of the microwave.</span>", \
 					"<span class='notice'>You have fixed part of the microwave.</span>" \
@@ -75,7 +75,7 @@
 				"<span class='notice'>\The [user] starts to fix part of the microwave.</span>", \
 				"<span class='notice'>You start to fix part of the microwave.</span>" \
 			)
-			if (do_after(user, 20, src))
+			if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 				user.visible_message( \
 					"<span class='notice'>\The [user] fixes the microwave.</span>", \
 					"<span class='notice'>You have fixed the microwave.</span>" \
@@ -105,7 +105,7 @@
 				"<span class='notice'>\The [user] starts to clean the microwave.</span>", \
 				"<span class='notice'>You start to clean the microwave.</span>" \
 			)
-			if (do_after(user, 20, src))
+			if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 				user.visible_message( \
 					"<span class='notice'>\The [user] has cleaned the microwave.</span>", \
 					"<span class='notice'>You clean out the microwave.</span>" \
@@ -127,9 +127,9 @@
 			to_chat(user, "<span class='warning'>You need to clean [src] before you use it!</span>")
 			return
 
-	else if(is_type_in_list(O, SScuisine.microwave_accepts_items))
+	else if(is_type_in_list(O, GLOB.microwave_accepts_items))
 
-		if (LAZYLEN(ingredients) >= SScuisine.microwave_maximum_item_storage)
+		if (LAZYLEN(ingredients) >= GLOB.microwave_maximum_item_storage)
 			to_chat(user, "<span class='warning'>This [src] is full of ingredients - you can't fit any more.</span>")
 
 		else if(istype(O, /obj/item/stack)) // This is bad, but I can't think of how to change it
@@ -160,19 +160,19 @@
 		if (!O.reagents)
 			return
 		for (var/datum/reagent/R in O.reagents.reagent_list)
-			if (!(R.type in SScuisine.microwave_accepts_reagents))
+			if (!(R.type in GLOB.microwave_accepts_reagents))
 				to_chat(user, SPAN_WARNING("Your [O] contains components unsuitable for cookery."))
 		return
 
 	else if(istype(O, /obj/item/storage))
-		if (LAZYLEN(ingredients) >= SScuisine.microwave_maximum_item_storage)
+		if (LAZYLEN(ingredients) >= GLOB.microwave_maximum_item_storage)
 			to_chat(user, SPAN_WARNING("[src] is completely full!"))
 			return
 
 		var/obj/item/storage/bag/P = O
 		var/objects_loaded = 0
 		for(var/obj/G in P.contents)
-			if(is_type_in_list(G, SScuisine.microwave_accepts_items) && LAZYLEN(ingredients) < SScuisine.microwave_maximum_item_storage && P.remove_from_storage(G, src, 1))
+			if(length(ingredients) < GLOB.microwave_maximum_item_storage && is_type_in_list(G, GLOB.microwave_accepts_items) && P.remove_from_storage(G, src, 1))
 				objects_loaded++
 				LAZYADD(ingredients, G)
 		P.finish_bulk_removal()
@@ -201,7 +201,7 @@
 			"<span class='notice'>\The [user] begins [anchored ? "securing" : "unsecuring"] the microwave.</span>", \
 			"<span class='notice'>You attempt to [anchored ? "secure" : "unsecure"] the microwave.</span>"
 			)
-		if (do_after(user,20, src))
+		if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			anchored = !anchored
 			user.visible_message( \
 			"<span class='notice'>\The [user] [anchored ? "secures" : "unsecures"] the microwave.</span>", \
@@ -318,7 +318,7 @@
 		stop()
 		return
 
-	var/datum/recipe/recipe = select_recipe(SScuisine.microwave_recipes, src)
+	var/datum/recipe/recipe = select_recipe(GLOB.microwave_recipes, src)
 	var/obj/cooked
 	if (!recipe)
 		dirtiness += 1

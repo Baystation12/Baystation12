@@ -43,6 +43,6 @@
 			for (var/obj/item/cell/D in M.contents)
 				D.charge = max(D.charge - rand() * 150,0)
 				if(world.time - last_message > 200)
-					to_chat(M, "<span class='warning'>SYSTEM ALERT: Energy drain detected!</span>")
+					to_chat(M, SPAN_WARNING("SYSTEM ALERT: Energy drain detected!"))
 					last_message = world.time
 	return 1

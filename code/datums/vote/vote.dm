@@ -73,7 +73,7 @@
 		remaining_choices = shuffle(remaining_choices)
 		sortTim(remaining_choices, /proc/cmp_numeric_dsc, TRUE)
 		if(!length(remaining_votes) || !length(remaining_choices))  // we ran out of options or votes, you get what we have
-			result += remaining_choices.Copy(1, Clamp(result_length - length(result) + 1, 0, length(remaining_choices) + 1))
+			result += remaining_choices.Copy(1, clamp(result_length - length(result) + 1, 0, length(remaining_choices) + 1))
 			break
 		else 
 			// 50% majority or we don't have enough candidates to be picky, declare the winner and remove it from the possible candidates
@@ -151,8 +151,8 @@
 
 // Checks if the mob is participating in the round sufficiently to vote, as per config settings.
 /datum/vote/proc/mob_not_participating(mob/voter)
-	if(config.vote_no_dead && voter.stat == DEAD && !voter.client.holder)
-		return 1
+	if (config.vote_no_dead && voter.stat == DEAD && !check_rights(EMPTY_BITFIELD, FALSE, voter))
+		return TRUE
 
 //null = no toggle set. This is for UI purposes; a text return will give a link (toggle; currently "return") in the vote panel.
 /datum/vote/proc/check_toggle()

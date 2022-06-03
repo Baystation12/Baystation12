@@ -13,7 +13,7 @@
 	var/mob/living/carbon/breather
 	var/obj/item/clothing/mask/breath/contained
 
-	var/spawn_type = /obj/item/tank/emergency/oxygen/engi
+	var/spawn_type = /obj/item/tank/oxygen_emergency_extended
 	var/mask_type = /obj/item/clothing/mask/breath/emergency
 	var/icon_state_open = "emerg_open"
 	var/icon_state_closed = "emerg"
@@ -46,7 +46,7 @@
 		if(!can_apply_to_target(target, usr)) // There is no point in attempting to apply a mask if it's impossible.
 			return
 		usr.visible_message("\The [usr] begins placing the mask onto [target]..")
-		if(do_after(usr, 2.5 SECONDS, target))
+		if(do_after(usr, 2.5 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if(!can_apply_to_target(target, usr))
 				return
 			// place mask and add fingerprints

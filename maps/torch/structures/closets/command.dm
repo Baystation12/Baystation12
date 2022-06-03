@@ -47,7 +47,7 @@
 		/obj/item/device/holowarrant,
 		/obj/item/folder/blue,
 		/obj/item/material/knife/folding/swiss/officer,
-		/obj/item/storage/backpack/satchel/cap,
+		/obj/item/storage/backpack/satchel/com,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
 	)
@@ -75,7 +75,7 @@
 		/obj/item/device/holowarrant,
 		/obj/item/folder/blue,
 		/obj/item/material/knife/folding/swiss/officer,
-		/obj/item/storage/backpack/satchel/cap,
+		/obj/item/storage/backpack/satchel/com,
 		/obj/item/storage/box/imprinting,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command
@@ -103,8 +103,7 @@
 		/obj/item/device/holowarrant,
 		/obj/item/folder/blue,
 		/obj/item/material/knife/folding/swiss/officer,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack, /obj/item/storage/backpack/satchel/grey)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag, /obj/item/storage/backpack/messenger))
+		/obj/item/storage/backpack/dufflebag
 	)
 
 /obj/structure/closet/secure_closet/bridgeofficer
@@ -127,7 +126,6 @@
 		/obj/item/device/radio/headset/bridgeofficer/alt,
 		/obj/item/storage/belt/general,
 		/obj/item/material/knife/folding/swiss/officer,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack, /obj/item/storage/backpack/satchel/grey)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag, /obj/item/storage/backpack/messenger)),
-		new /datum/atom_creator/weighted(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare, /obj/item/device/flashlight/flare/glowstick/random))
+		/obj/item/storage/backpack/dufflebag,
+		/obj/item/device/flashlight
 	)

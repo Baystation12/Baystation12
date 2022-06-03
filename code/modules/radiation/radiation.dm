@@ -30,8 +30,7 @@
 		if(!flat)
 			range = min(round(sqrt(rad_power / config.radiation_lower_limit)), 31)  // R = rad_power / dist**2 - Solve for dist
 
-/turf
-	var/cached_rad_resistance = 0
+/turf/var/cached_rad_resistance = 0
 
 /turf/proc/calc_rad_resistance()
 	cached_rad_resistance = 0
@@ -64,6 +63,6 @@
 
 /mob/living/rad_act(var/severity)
 	if(severity > RAD_LEVEL_LOW)
-		src.apply_damage(severity, IRRADIATE, damage_flags = DAM_DISPERSED)
+		apply_damage(severity, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 		for(var/atom/I in src)
 			I.rad_act(severity)

@@ -4,6 +4,7 @@
 	icon_state = "eyepatch"
 	item_state = "eyepatch"
 	body_parts_covered = 0
+	item_flags = ITEM_FLAG_WASHER_ALLOWED
 	var/flipped = FALSE // Indicates left or right eye; 0 = on the right
 
 /obj/item/clothing/glasses/eyepatch/verb/flip_patch()
@@ -31,6 +32,7 @@
 	item_state = "hudpatch"
 	off_state = "hudpatch"
 	action_button_name = "Toggle iPatch"
+	item_flags = null
 	toggleable = TRUE
 	var/eye_color = COLOR_WHITE
 	electric = TRUE
@@ -61,21 +63,21 @@
 	return res
 
 /obj/item/clothing/glasses/eyepatch/hud/security
-	name = "HUDpatch"
+	name = "security iPatch"
 	desc = "A Security-type heads-up display that connects directly to the optical nerve of the user, replacing the need for that useless eyeball."
 	hud = /obj/item/clothing/glasses/hud/security
 	eye_color = COLOR_RED
 	req_access = list(access_security)
 
 /obj/item/clothing/glasses/eyepatch/hud/medical
-	name = "MEDpatch"
+	name = "medical iPatch"
 	desc = "A Medical-type heads-up display that connects directly to the ocular nerve of the user, replacing the need for that useless eyeball."
 	hud = /obj/item/clothing/glasses/hud/health
 	eye_color = COLOR_CYAN
 	req_access = list(access_medical)
 
 /obj/item/clothing/glasses/eyepatch/hud/meson
-	name = "MESpatch"
+	name = "meson iPatch"
 	desc = "An optical meson scanner display that connects directly to the ocular nerve of the user, replacing the need for that useless eyeball."
 	vision_flags = SEE_TURFS
 	see_invisible = SEE_INVISIBLE_NOLIGHTING

@@ -38,7 +38,7 @@
 			affecting.take_external_damage(1, 0)
 			H.updatehealth()
 	else if(ismouse(target))
-		var/mob/living/simple_animal/mouse/M = target
+		var/mob/living/simple_animal/passive/mouse/M = target
 		visible_message("<span class='danger'>SPLAT!</span>")
 		M.splat()
 	playsound(target.loc, 'sound/effects/snap.ogg', 50, 1)

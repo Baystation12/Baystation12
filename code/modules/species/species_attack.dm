@@ -42,7 +42,7 @@
 		to_chat(user, SPAN_WARNING("\The [target] does not have that bodypart!"))
 		return
 
-	attack_damage = Clamp(attack_damage, 1, 5)
+	attack_damage = clamp(attack_damage, 1, 5)
 
 	if(target == user)
 		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in the [affecting.name]!</span>")
@@ -142,7 +142,7 @@
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
 
 	var/organ = affecting.name
-	attack_damage = Clamp(attack_damage, 1, 6)
+	attack_damage = clamp(attack_damage, 1, 6)
 	attack_damage = 3 + attack_damage - rand(1, 5)
 	switch(attack_damage)
 
@@ -170,7 +170,7 @@
 	attack_name = "starborn strike"
 
 /datum/unarmed_attack/punch/starborn/get_damage_type()
-	return BURN
+	return DAMAGE_BURN
 
 /datum/unarmed_attack/bite/venom
 	attack_verb = list("bit", "sank their fangs into")
@@ -180,4 +180,4 @@
 	attack_name = "venomous bite"
 
 /datum/unarmed_attack/bite/venom/get_damage_type()
-	return TOX
+	return DAMAGE_TOXIN

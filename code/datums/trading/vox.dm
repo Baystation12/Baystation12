@@ -56,6 +56,7 @@
 	mob_transfer_message = "<span class='danger'>You are transported to the ORIGIN. When the transportation dizziness wears off, you find you are surrounded by cackling Vox...</span>"
 
 /datum/trader/ship/vox/New()
+	..()
 	speech[TRADER_HAIL_START + "silicon"] = "Hello metal thing! You trade metal for things?"
 	speech[TRADER_HAIL_START + SPECIES_HUMAN] = "Hello hueman! Kiikikikiki! MOB trade with us, yes? Good!"
 

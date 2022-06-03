@@ -3,6 +3,7 @@
 	description = "A beret denoting service in an organization within SolGov."
 	path = /obj/item/clothing/head/beret/solgov
 	allowed_branches = SOLGOV_BRANCHES
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/head/solberet/New()
 	..()
@@ -21,29 +22,40 @@
 	display_name = "veteran hat"
 	path = /obj/item/clothing/head/soft/solgov/veteranhat
 	allowed_branches = CIVILIAN_BRANCHES
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/head/solhat
 	display_name = "sol central government hat"
 	path = /obj/item/clothing/head/soft/solgov
 	allowed_branches = SOLGOV_BRANCHES
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/head/fleetcover
 	display_name = "fleet utilty cover"
 	path = /obj/item/clothing/head/solgov/utility/fleet
 	cost = 0
-	allowed_branches = list(/datum/mil_branch/fleet)
+	allowed_branches = list(
+		/datum/mil_branch/fleet
+	)
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/head/fleetcap
 	display_name = "fleet cap"
 	path = /obj/item/clothing/head/soft/solgov/fleet
 	cost = 0
-	allowed_branches = list(/datum/mil_branch/fleet)
+	allowed_branches = list(
+		/datum/mil_branch/fleet
+	)
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/head/echat
 	display_name = "EC cap"
 	path = /obj/item/clothing/head/soft/solgov/expedition
 	cost = 0
-	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+	allowed_branches = list(
+		/datum/mil_branch/expeditionary_corps
+	)
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/head/surgical
 	allowed_roles = STERILE_ROLES
@@ -51,8 +63,9 @@
 /datum/gear/head/beret
 	allowed_branches = CIVILIAN_BRANCHES
 
-/datum/gear/mask/bandana
-	allowed_branches = CIVILIAN_BRANCHES
+/datum/gear/sterile_mask
+	display_name = "sterile mask"
+	path = /obj/item/clothing/mask/surgical
 
 /datum/gear/head/bandana
 	allowed_branches = CIVILIAN_BRANCHES
@@ -89,7 +102,10 @@
 	display_name = "Fleet branch beret selection"
 	description = "A beret denoting service in one of the fleets within the SCG Fleet."
 	path = /obj/item/clothing/head/beret/solgov/fleet/branch
-	allowed_branches = list(/datum/mil_branch/fleet)
+	allowed_branches = list(
+		/datum/mil_branch/fleet
+	)
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/head/fleetberet/New()
 	..()
@@ -105,7 +121,10 @@
 	display_name = "EC sections beret selection"
 	description = "A beret denoting service in one of the branches within the SCG EC."
 	path = /obj/item/clothing/head/beret/solgov/expedition/branch
-	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+	allowed_branches = list(
+		/datum/mil_branch/expeditionary_corps
+		)
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/head/ECberet/New()
 	..()

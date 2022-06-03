@@ -20,7 +20,6 @@ GLOBAL_VAR_INIT(end_credits_title, null)
 	if (!track)
 		return
 	GLOB.end_credits_song = track.source
-	SSstatistics.add_field_details("admin_verb","CECS")
 
 
 
@@ -36,4 +35,3 @@ GLOBAL_VAR_INIT(end_credits_title, null)
 	if (data == "")
 		data = null
 	GLOB.end_credits_title = data
-	SSstatistics.add_field_details("admin_verb","CECT")

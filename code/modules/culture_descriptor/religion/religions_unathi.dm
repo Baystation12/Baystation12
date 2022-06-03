@@ -15,7 +15,6 @@
 	these events should always be opportunities to grow and learn so that you can be the pinnacle of the unathi, and your children can be even stronger. \
 	How else will the unathi defeat the cosmic evil and survive in a world like Moghes?"
 
-
 /decl/cultural_info/religion/unathi_lights
 	name = RELIGION_UNATHI_LIGHTS
 	description = "Followers of the Lights stress the importance of what *you* can do with your hands and mind. How can you create a better \

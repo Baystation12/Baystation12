@@ -1,5 +1,5 @@
 
-/obj/item/device/encryptionkey/
+/obj/item/device/encryptionkey
 	name = "standard encryption key"
 	desc = "An encryption key for a radio headset. Contains cypherkeys."
 	icon = 'icons/obj/radio.dmi'
@@ -41,6 +41,12 @@
 	channels = list("Raider" = 1, "Hailing" = 1)
 	origin_tech = list(TECH_ESOTERIC = 2)
 	syndie = 1
+
+/obj/item/device/encryptionkey/vox_raider
+	icon_state = "cypherkey"
+	channels = list("Vox Raider" = TRUE, "Hailing" = TRUE)
+	origin_tech = list(TECH_ESOTERIC = 2)
+	syndie = TRUE
 
 /obj/item/device/encryptionkey/binary
 	icon_state = "cypherkey"

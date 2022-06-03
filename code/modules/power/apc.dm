@@ -125,15 +125,15 @@
 	var/update_overlay = -1
 	var/list/update_overlay_chan		// Used to determine if there is a change in channels
 	var/is_critical = 0
-	var/global/status_overlays = 0
+	var/static/status_overlays = 0
 	var/failure_timer = 0               // Cooldown thing for apc outage event
 	var/force_update = 0
 	var/emp_hardened = 0
-	var/global/list/status_overlays_lock
-	var/global/list/status_overlays_charging
-	var/global/list/status_overlays_equipment
-	var/global/list/status_overlays_lighting
-	var/global/list/status_overlays_environ
+	var/static/list/status_overlays_lock
+	var/static/list/status_overlays_charging
+	var/static/list/status_overlays_equipment
+	var/static/list/status_overlays_lighting
+	var/static/list/status_overlays_environ
 	var/autoname = 1
 
 /obj/machinery/power/apc/updateDialog()
@@ -442,7 +442,7 @@
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 				to_chat(user, "You are trying to remove the power control board...")//lpeters - fixed grammar issues
 
-				if(do_after(user, 50, src) && opened && (has_electronics == 1) && !terminal()) // redo all checks.
+				if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) && opened && (has_electronics == 1) && !terminal()) // redo all checks.
 					has_electronics = 0
 					if ((stat & BROKEN))
 						user.visible_message(\
@@ -539,7 +539,7 @@
 		user.visible_message(SPAN_WARNING("\The [user] inserts the power control board into \the [src]."), \
 							"You start to insert the power control board into the frame...")
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		if(do_after(user, 10, src) && has_electronics == 0 && opened && !(stat & BROKEN))
+		if(do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE) && has_electronics == 0 && opened && !(stat & BROKEN))
 			has_electronics = 1
 			reboot() //completely new electronics
 			to_chat(user, SPAN_NOTICE("You place the power control board inside the frame."))
@@ -564,7 +564,7 @@
 							"You start welding the APC frame...", \
 							"You hear welding.")
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-		if(do_after(user, 50, src) && opened && has_electronics == 0 && !terminal())
+		if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) && opened && has_electronics == 0 && !terminal())
 			if(!WT.remove_fuel(3, user))
 				return TRUE
 			if (emagged || (stat & BROKEN) || opened==2)
@@ -605,7 +605,7 @@
 
 			user.visible_message("<span class='warning'>[user.name] replaces the damaged APC frame with a new one.</span>",\
 								"You begin to replace the damaged APC frame...")
-			if(do_after(user, 50, src) && opened && !has_electronics && ((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden)))
+			if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) && opened && !has_electronics && ((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden)))
 				user.visible_message(\
 					"<span class='notice'>[user.name] has replaced the damaged APC frame with new one.</span>",\
 					"You replace the damaged APC frame with new one.")
@@ -993,7 +993,7 @@
 			lighting = autoset(lighting, 0)
 			environ = autoset(environ, 0)
 			if(!suppress_alarms)
-				power_alarm.triggerAlarm(loc, src)
+				GLOB.power_alarm.triggerAlarm(loc, src)
 			autoflag = 0
 	else if((percent > AUTO_THRESHOLD_LIGHTING) || longtermpower >= 0)              // Put most likely at the top so we don't check it last, effeciency 101
 		if(autoflag != 3)
@@ -1001,14 +1001,14 @@
 			lighting = autoset(lighting, 1)
 			environ = autoset(environ, 1)
 			autoflag = 3
-			power_alarm.clearAlarm(loc, src)
+			GLOB.power_alarm.clearAlarm(loc, src)
 	else if((percent <= AUTO_THRESHOLD_LIGHTING) && (percent > AUTO_THRESHOLD_EQUIPMENT) && longtermpower < 0)                       // <50%, turn off lighting
 		if(autoflag != 2)
 			equipment = autoset(equipment, 1)
 			lighting = autoset(lighting, 2)
 			environ = autoset(environ, 1)
 			if(!suppress_alarms)
-				power_alarm.triggerAlarm(loc, src)
+				GLOB.power_alarm.triggerAlarm(loc, src)
 			autoflag = 2
 	else if(percent <= AUTO_THRESHOLD_EQUIPMENT)        // <25%, turn off lighting & equipment
 		if(autoflag != 1)
@@ -1016,13 +1016,13 @@
 			lighting = autoset(lighting, 2)
 			environ = autoset(environ, 1)
 			if(!suppress_alarms)
-				power_alarm.triggerAlarm(loc, src)
+				GLOB.power_alarm.triggerAlarm(loc, src)
 			autoflag = 1
 
 // val 0=off, 1=off(auto) 2=on 3=on(auto)
 // on 0=off, 1=on, 2=autooff
 // defines a state machine, returns the new state
-obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
+/obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	//autoset will never turn on a channel set to off
 	switch(cur_state)
 		if(POWERCHAN_OFF_TEMP)
@@ -1066,27 +1066,27 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 /obj/machinery/power/apc/ex_act(severity)
 	var/obj/item/cell/C = get_cell()
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
 			if (C)
-				C.ex_act(1.0) // more lags woohoo
+				C.ex_act(EX_ACT_DEVASTATING) // more lags woohoo
 			return
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				set_broken(TRUE)
 				if (C && prob(50))
-					C.ex_act(2.0)
-		if(3.0)
+					C.ex_act(EX_ACT_HEAVY)
+		if(EX_ACT_LIGHT)
 			if (prob(25))
 				set_broken(TRUE)
 				if (C && prob(25))
-					C.ex_act(3.0)
+					C.ex_act(EX_ACT_LIGHT)
 
 /obj/machinery/power/apc/set_broken(new_state)
 	if(!new_state || (stat & BROKEN))
 		return ..()
 	visible_message("<span class='notice'>[src]'s screen flickers with warnings briefly!</span>")
-	power_alarm.triggerAlarm(loc, src)
+	GLOB.power_alarm.triggerAlarm(loc, src)
 	spawn(rand(2,5))
 		..()
 		visible_message("<span class='notice'>[src]'s screen suddenly explodes in rain of sparks and small debris!</span>")
@@ -1105,7 +1105,7 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	operating = 0
 
 	set_chargemode(initial(chargemode))
-	power_alarm.clearAlarm(loc, src)
+	GLOB.power_alarm.clearAlarm(loc, src)
 
 	lighting = POWERCHAN_ON_AUTO
 	equipment = POWERCHAN_ON_AUTO

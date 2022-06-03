@@ -11,8 +11,8 @@
 	habitability_distribution = list(HABITABILITY_IDEAL = 30, HABITABILITY_OKAY = 50, HABITABILITY_BAD = 10)
 	has_trees = FALSE
 	flora_diversity = 4
-	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/voxslug, /mob/living/simple_animal/hostile/antlion)
-	megafauna_types = list(/mob/living/simple_animal/hostile/antlion/mega)
+	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/voxslug, /mob/living/simple_animal/hostile/retaliate/beast/antlion)
+	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/beast/antlion/mega)
 
 /obj/effect/overmap/visitable/sector/exoplanet/desert/generate_map()
 	if(prob(70))
@@ -53,7 +53,7 @@
 /datum/random_map/noise/exoplanet/desert/get_additional_spawns(var/value, var/turf/T)
 	..()
 	var/v = noise2value(value)
-	if(v > 6 && prob(10))
+	if(v > 6 && prob(2))
 		new/obj/effect/quicksand(T)
 
 /area/exoplanet/desert
@@ -82,7 +82,7 @@
 		if(busy)
 			to_chat(user, SPAN_NOTICE("\The [buckled_mob] is already getting out, be patient."))
 			return
-		var/delay = 60
+		var/delay = 6 SECONDS
 		if(user == buckled_mob)
 			delay *=2
 			user.visible_message(
@@ -97,7 +97,7 @@
 				SPAN_NOTICE("You hear water sloshing.")
 				)
 		busy = TRUE
-		if(do_after(user, delay, src))
+		if(do_after(user, delay, src, DO_PUBLIC_UNIQUE))
 			busy = FALSE
 			if(user == buckled_mob)
 				if(prob(80))

@@ -24,7 +24,7 @@
 	. = list()
 	for(var/i = 1 to LAZYLEN(goals))
 		var/datum/goal/goal = goals[i]
-		. += "[i]. [goal.summarize(show_success, position = i)]"
+		. += "[i]. [goal.summarize(show_success)]"
 
 /datum/department/proc/update_progress(var/goal_type, var/progress)
 	var/datum/goal/goal = locate(goal_type) in goals

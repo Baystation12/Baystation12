@@ -1,6 +1,12 @@
 // large amount of fields creates a heavy load on the server, see updateinfolinks() and addtofield()
 #define MAX_FIELDS 50
 
+#define PAPER_CAMERA_DISTANCE 2
+#define PAPER_EYEBALL_DISTANCE 3
+
+#define PAPER_META(message) "<p><i>[message]</i></p>"
+#define PAPER_META_BAD(message) "<p style='color:red'><i>[message]</i></p>"
+
 /*
  * Paper
  * also scraps of paper
@@ -40,31 +46,43 @@
 	var/datum/language/language = LANGUAGE_HUMAN_EURO // Language the paper was written in. Editable by users up until something's actually written
 
 	var/const/deffont = "Verdana"
-	var/const/signfont = "Times New Roman"
+	var/const/signfont = "Brush Script MT"
 	var/const/crayonfont = "Comic Sans MS"
-	var/const/fancyfont = "Segoe Script"
+	var/const/fancyfont = "Garamond"
 
 	var/scan_file_type = /datum/computer_file/data/text
 
-/obj/item/paper/New(loc, text, title, list/md = null)
+/obj/item/paper/New(loc, text, title, list/md = null, datum/language/L = null)
 	..(loc)
 	set_content(text ? text : info, title)
 	metadata = md
 
+	if (L)
+		language = L
 	var/old_language = language
-	language = global.all_languages[language]
-	if (!language)
+	if (!set_language(language, TRUE))
 		log_debug("[src] ([type]) initialized with invalid or missing language `[old_language]` defined.")
-		language = global.all_languages[LANGUAGE_HUMAN_EURO]
+		set_language(LANGUAGE_HUMAN_EURO, TRUE)
 
-/obj/item/paper/proc/set_content(text,title)
+/obj/item/paper/proc/set_content(text, title, parse_pencode = TRUE)
 	if(title)
 		SetName(title)
-	info = html_encode(text)
-	info = parsepencode(text)
+	info = parse_pencode ? parsepencode(text) : text
 	update_icon()
 	update_space(info)
 	updateinfolinks()
+
+/obj/item/paper/proc/set_language(datum/language/new_language, force = FALSE)
+	if (!new_language || (info && !force))
+		return FALSE
+
+	if (!istype(new_language))
+		new_language = global.all_languages[new_language]
+	if (!istype(new_language))
+		return FALSE
+
+	language = new_language
+	return TRUE
 
 /obj/item/paper/on_update_icon()
 	if(icon_state == "paper_talisman" || is_memo)
@@ -87,7 +105,7 @@
 	else
 		to_chat(user, "<span class='notice'>You have to go closer if you want to read it.</span>")
 
-/obj/item/paper/verb/set_language()
+/obj/item/paper/verb/user_set_language()
 	set name = "Set writing language"
 	set category = "Object"
 	set src in usr
@@ -120,47 +138,53 @@
 	if (!admin_force && !Adjacent(user) && !CanInteract(user, GLOB.deep_inventory_state))
 		to_chat(user, SPAN_WARNING("You must remain next to or continue holding \the [src] to do that."))
 		return
-	language = new_language
+	set_language(new_language)
 
-/obj/item/paper/proc/show_content(mob/user, forceshow, editable = FALSE)
-	var/can_read = (istype(user, /mob/living/carbon/human) || isghost(user) || istype(user, /mob/living/silicon)) || forceshow
-	if(!readable || is_memo)
+
+/obj/item/paper/proc/show_content(mob/user, force, editable)
+	if (!readable || is_memo)
 		return
-	else if(!forceshow && istype(user,/mob/living/silicon/ai))
-		var/mob/living/silicon/ai/AI = user
-		can_read = get_dist(src, AI.camera) < 2
-
+	if (isclient(user))
+		var/client/C = user
+		user = C.mob
+	if (!user)
+		return
+	var/can_read = force || isghost(user)
+	if (!can_read)
+		can_read = isAI(user)
+		if (can_read)
+			var/mob/living/silicon/ai/AI = user
+			can_read = get_dist(src, AI.camera) < PAPER_CAMERA_DISTANCE
+		else
+			can_read = ishuman(user) || issilicon(user)
+			if (can_read)
+				can_read = get_dist(src, user) < PAPER_EYEBALL_DISTANCE
 	var/html = "<html><head><title>[name]</title></head><body bgcolor='[color]'>"
-	var/body
-	if (can_read && editable)
-		body = info_links
-		if (isobserver(user) || (language in user.languages))
-			if (info)
-				html += "<p><i>This paper is written in [language.name].</i></p>"
-			else
-				html += "<p><i>You are writing in <a href='?src=\ref[src];change_language=1'>[language]</a>.</i></p>"
+	if (!can_read)
+		html += PAPER_META_BAD("The paper is too far away or you can't read.")
+		html += "<hr/></body></html>"
+	var/has_content = length(info)
+	var/has_language = force || (language in user.languages)
+	if (has_content && !has_language && !isghost(user))
+		html += PAPER_META_BAD("The paper is written in a language you don't understand.")
+		html += "<hr/>" + language.scramble(info)
+	else if (editable)
+		if (has_content)
+			html += PAPER_META("The paper is written in [language.name].")
+			html += "<hr/>" + info_links
+		else if (force || length(user.languages))
+			if (!has_language)
+				language = user.languages[1]
+			html += PAPER_META("You are writing in <a href='?src=\ref[src];change_language=1'>[language.name]</a>.")
+			html += "<hr/>" + info_links
 		else
-			html += "<p style=\"color: red;\"><i>This paper is written in a language you don't understand.</i></p>"
-			body = language.scramble(info, user.languages)
-	else if (!can_read)
-		html += "<p style=\"color:red;\"><i>The paper is too far away to read.</i></p>"
-	else
-		body = info
-		if (isobserver(user) || (language in user.languages))
-			html += "<p><i>This paper is written in [language.name].</i></p>"
-		else
-			html += "<p style=\"color: red;\"><i>This paper is written in a language you don't understand.</i></p>"
-			body = language.scramble(body, user.languages)
-
-	html += "<hr />"
-	html += body + stamps
-	html += "</body></html>"
+			html += PAPER_META_BAD("You can't write without knowing a language.")
+	else if (has_content)
+		html += PAPER_META("The paper is written in [language.name].")
+		html += "<hr/>" + info
+	html += "[stamps]</body></html>"
 	show_browser(user, html, "window=[name]")
-
-
 	onclose(user, "[name]")
-
-/obj/item/paper/proc/write_content(mob/user)
 
 
 /obj/item/paper/verb/rename()
@@ -208,15 +232,15 @@
 			var/mob/living/carbon/human/H = M
 			if(H == user)
 				to_chat(user, "<span class='notice'>You wipe off the lipstick with [src].</span>")
-				H.lip_style = null
+				H.makeup_style = null
 				H.update_body()
 			else
 				user.visible_message("<span class='warning'>[user] begins to wipe [H]'s lipstick off with \the [src].</span>", \
 								 	 "<span class='notice'>You begin to wipe off [H]'s lipstick.</span>")
-				if(do_after(user, 2 SECONDS, H, do_flags = DO_DEFAULT & ~DO_BOTH_CAN_TURN))
+				if(do_after(user, 2 SECONDS, H, (DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) & ~DO_BOTH_CAN_TURN))
 					user.visible_message("<span class='notice'>[user] wipes [H]'s lipstick off with \the [src].</span>", \
 										 "<span class='notice'>You wipe off [H]'s lipstick.</span>")
-					H.lip_style = null
+					H.makeup_style = null
 					H.update_body()
 
 /obj/item/paper/proc/addtofield(var/id, var/text, var/links = 0)
@@ -277,12 +301,15 @@
 		return P.get_signature(user)
 	return (user && user.real_name) ? user.real_name : "Anonymous"
 
-/obj/item/paper/proc/parsepencode(t, obj/item/pen/P, mob/user, iscrayon, isfancy)
+/obj/item/paper/proc/parsepencode(t, obj/item/pen/P, mob/user, iscrayon, isfancy, isadmin)
 	if(length(t) == 0)
 		return ""
 
-	if(findtext(t, "\[sign\]"))
-		t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[get_signature(P, user)]</i></font>")
+	if (isadmin) //TODO: let admins sign things again
+		t = replacetext(t, "\[sign\]", "")
+
+	if (findtext(t, "\[sign\]"))
+		t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\" style=\"font-size: 1.5em\"><i>[get_signature(P, user)]</i></font>")
 
 	if(iscrayon) // If it is a crayon, and he still tries to use these, make them empty!
 		t = replacetext(t, "\[*\]", "")
@@ -300,7 +327,7 @@
 	if(iscrayon)
 		t = "<font face=\"[crayonfont]\" color=[P ? P.colour : "black"]><b>[t]</b></font>"
 	else if(isfancy)
-		t = "<font face=\"[fancyfont]\" color=[P ? P.colour : "black"]><i>[t]</i></font>"
+		t = "<font face=\"[fancyfont]\" color=[P ? P.colour : "black"]>[t]</font>"
 	else
 		t = "<font face=\"[deffont]\" color=[P ? P.colour : "black"]>[t]</font>"
 
@@ -464,8 +491,6 @@
 		var/obj/item/pen/robopen/RP = P
 		if ( istype(RP) && RP.mode == 2 )
 			RP.RenamePaper(user,src)
-		if(is_memo || !readable || !(language in user.languages))
-			return
 		else
 			show_content(user, editable = TRUE)
 		return
@@ -588,3 +613,10 @@
 /obj/item/paper/aromatherapy_disclaimer
 	name = "aromatherapy disclaimer"
 	info = "<I>The manufacturer and the retailer make no claims of the contained products' effacy.</I> <BR><BR><B>Use at your own risk.</B>"
+
+
+#undef PAPER_CAMERA_DISTANCE
+#undef PAPER_EYEBALL_DISTANCE
+
+#undef PAPER_META
+#undef PAPER_META_BAD

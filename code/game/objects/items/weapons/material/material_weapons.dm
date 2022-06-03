@@ -2,12 +2,12 @@
 // This class of weapons takes force and appearance data from a material datum.
 // They are also fragile based on material data and many can break/smash apart.
 /obj/item/material
-	health = 10
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	gender = NEUTER
 	throw_speed = 3
 	throw_range = 7
 	w_class = ITEM_SIZE_NORMAL
+	health_max = 10
 
 	var/default_material = MATERIAL_STEEL
 	var/material/material
@@ -17,6 +17,7 @@
 	var/furniture_icon  //icon states for non-material colorable overlay, i.e. handles
 
 	var/max_force = 40	 //any damage above this is added to armor penetration value
+	var/max_pen = 100 //any penetration above this value is ignored
 	var/force_multiplier = 0.5	// multiplier to material's generic damage value for this specific type of weapon
 	var/thrown_force_multiplier = 0.5
 
@@ -24,6 +25,7 @@
 	var/unbreakable
 	var/drops_debris = 1
 	var/worth_multiplier = 1
+
 
 /obj/item/material/New(var/newloc, var/material_key)
 	if(!material_key)
@@ -56,6 +58,7 @@
 	if(new_force > max_force)
 		armor_penetration = initial(armor_penetration) + new_force - max_force
 	armor_penetration += 2*max(0, material.brute_armor - 2)
+	armor_penetration = min(max_pen, armor_penetration)
 
 	throwforce = round(material.get_blunt_damage()*thrown_force_multiplier)
 	attack_cooldown = material.get_attack_cooldown() + attack_cooldown_modifier
@@ -67,7 +70,8 @@
 	if(!material)
 		qdel(src)
 	else
-		health = round(material.integrity/5)
+		set_max_health(round(material.integrity / 5))
+		restore_health(get_max_health())
 		if(material.products_need_process())
 			START_PROCESSING(SSobj, src)
 		if(material.conductive)
@@ -86,7 +90,7 @@
 		alpha = 100 + material.opacity * 255
 	if(furniture_icon)
 		var/image/I = image(icon, icon_state = furniture_icon)
-		I.appearance_flags = RESET_COLOR
+		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 		overlays += I
 
 /obj/item/material/Destroy()
@@ -95,7 +99,7 @@
 
 /obj/item/material/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
-	if(material.is_brittle() || target.get_blocked_ratio(hit_zone, BRUTE, damage_flags(), armor_penetration, force) * 100 >= material.hardness/5)
+	if(material.is_brittle() || target.get_blocked_ratio(hit_zone, DAMAGE_BRUTE, damage_flags(), armor_penetration, force) * 100 >= material.hardness/5)
 		check_shatter()
 
 /obj/item/material/on_parry(damage_source)
@@ -105,19 +109,17 @@
 /obj/item/material/proc/check_shatter()
 	if(!unbreakable && prob(material.hardness))
 		if(material.is_brittle())
-			health = 0
+			kill_health()
 		else
-			health--
-		check_health()
+			damage_health(1)
 
-/obj/item/material/proc/check_health(var/consumed)
-	if(health<=0)
-		shatter(consumed)
+/obj/item/material/on_death()
+	shatter()
 
-/obj/item/material/proc/shatter(var/consumed)
+/obj/item/material/proc/shatter()
 	var/turf/T = get_turf(src)
 	T.visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
 	playsound(src, "shatter", 70, 1)
-	if(!consumed && drops_debris)
+	if(drops_debris)
 		material.place_shard(T)
 	qdel(src)

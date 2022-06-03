@@ -1,14 +1,14 @@
 #define SAVE_RESET -1
 
-#define JOB_PRIORITY_HIGH   0x1
-#define JOB_PRIORITY_MEDIUM 0x2
-#define JOB_PRIORITY_LOW    0x4
-#define JOB_PRIORITY_LIKELY 0x3
-#define JOB_PRIORITY_PICKED 0x7
+#define JOB_PRIORITY_HIGH   FLAG(0)
+#define JOB_PRIORITY_MEDIUM FLAG(1)
+#define JOB_PRIORITY_LOW    FLAG(2)
+#define JOB_PRIORITY_LIKELY (JOB_PRIORITY_HIGH | JOB_PRIORITY_MEDIUM)
+#define JOB_PRIORITY_PICKED (JOB_PRIORITY_HIGH | JOB_PRIORITY_MEDIUM | JOB_PRIORITY_LOW)
 
 #define MAX_LOAD_TRIES 5
 
-datum/preferences
+/datum/preferences
 	//doohickeys for savefiles
 	var/is_guest = FALSE
 	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
@@ -29,11 +29,10 @@ datum/preferences
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 
-	// Mob preview
-	var/icon/preview_icon = null
-
 	var/client/client = null
 	var/client_ckey = null
+
+	var/datum/browser/popup
 
 	var/datum/category_collection/player_setup_collection/player_setup
 	var/datum/browser/panel
@@ -123,18 +122,13 @@ datum/preferences
 
 	return 1
 
-/datum/preferences/proc/ShowChoices(mob/user)
+/datum/preferences/proc/get_content(mob/user)
 	if(!SScharacter_setup.initialized)
 		return
 	if(!user || !user.client)
 		return
 
-	if(!get_mob_by_key(client_ckey))
-		to_chat(user, "<span class='danger'>No mob exists for the given client!</span>")
-		close_load_dialog(user)
-		return
-
-	var/dat = "<html><body><center>"
+	var/dat = "<center>"
 
 	if(is_guest)
 		dat += "Please create an account to save your preferences. If you have an account and are seeing this, please adminhelp for assistance."
@@ -151,11 +145,25 @@ datum/preferences
 	dat += player_setup.header()
 	dat += "<br><HR></center>"
 	dat += player_setup.content(user)
+	return dat
 
-	dat += "</html></body>"
-	var/datum/browser/popup = new(user, "Character Setup","Character Setup", 1200, 800, src)
-	popup.set_content(dat)
+/datum/preferences/proc/open_setup_window(mob/user)
+	if (!SScharacter_setup.initialized)
+		return
+	popup = new (user, "preferences_browser", "Character Setup", 1200, 800, src)
+	var/content = {"
+	<script type='text/javascript'>
+		function update_content(data){
+			document.getElementById('content').innerHTML = data;
+		}
+	</script>
+	<div id='content'>[get_content(user)]</div>
+	"}
+	popup.set_content(content)
 	popup.open()
+
+/datum/preferences/proc/update_setup_window(mob/user)
+	send_output(user, url_encode(get_content(user)), "preferences_browser.browser:update_content")
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
 
@@ -163,17 +171,20 @@ datum/preferences
 	if(isliving(user)) return
 
 	if(href_list["preference"] == "open_whitelist_forum")
-		if(config.forumurl)
-			send_link(user, config.forumurl)
+		if(config.forum_url)
+			send_link(user, config.forum_url)
 		else
 			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
 			return
-	ShowChoices(usr)
+	update_setup_window(usr)
 	return 1
 
 /datum/preferences/Topic(href, list/href_list)
 	if(..())
 		return 1
+
+	if (href_list["close"])
+		popup = null
 
 	if(href_list["save"])
 		save_preferences()
@@ -191,6 +202,9 @@ datum/preferences
 		sanitize_preferences()
 		close_load_dialog(usr)
 
+		if (winget(usr, "preferences_browser", "is-visible") == "true")
+			open_setup_window(usr)
+
 		if (istype(client.mob, /mob/new_player))
 			var/mob/new_player/M = client.mob
 			M.new_player_panel()
@@ -205,7 +219,7 @@ datum/preferences
 	else
 		return 0
 
-	ShowChoices(usr)
+	update_setup_window(usr)
 	return 1
 
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, is_preview_copy = FALSE)
@@ -213,39 +227,24 @@ datum/preferences
 	player_setup.sanitize_setup()
 	character.set_species(species)
 
-	if(be_random_name)
-		var/decl/cultural_info/culture = SSculture.get_culture(cultural_info[TAG_CULTURE])
-		if(culture) real_name = culture.get_random_name(gender)
-
 	character.fully_replace_character_name(real_name)
 
 	character.gender = gender
 	character.age = age
 	character.b_type = b_type
 
-	character.r_eyes = r_eyes
-	character.g_eyes = g_eyes
-	character.b_eyes = b_eyes
+	character.eye_color = eye_color
 
-	character.h_style = h_style
-	character.r_hair = r_hair
-	character.g_hair = g_hair
-	character.b_hair = b_hair
+	character.head_hair_style = head_hair_style
+	character.head_hair_color = head_hair_color
 
-	character.f_style = f_style
-	character.r_facial = r_facial
-	character.g_facial = g_facial
-	character.b_facial = b_facial
+	character.facial_hair_style = facial_hair_style
+	character.facial_hair_color = facial_hair_color
 
-	character.r_skin = r_skin
-	character.g_skin = g_skin
-	character.b_skin = b_skin
+	character.skin_color = skin_color
 
-	character.s_tone = s_tone
-	character.s_base = s_base
-
-	character.h_style = h_style
-	character.f_style = f_style
+	character.skin_tone = skin_tone
+	character.base_skin = base_skin
 
 	// Replace any missing limbs.
 	for(var/name in BP_ALL_LIMBS)
@@ -422,7 +421,7 @@ datum/preferences
 		var/name = branches[job.title]
 		if (!name)
 			continue
-		. |= mil_branches.get_branch(name)
+		. |= GLOB.mil_branches.get_branch(name)
 
 /datum/preferences/proc/selected_branches_assoc(priority = JOB_PRIORITY_PICKED)
 	. = list()
@@ -430,7 +429,7 @@ datum/preferences
 		var/name = branches[job.title]
 		if (!name || .[name])
 			continue
-		.[name] = mil_branches.get_branch(name)
+		.[name] = GLOB.mil_branches.get_branch(name)
 
 /datum/preferences/proc/for_each_selected_job(datum/callback/callback, priority = JOB_PRIORITY_LIKELY)
 	. = list()

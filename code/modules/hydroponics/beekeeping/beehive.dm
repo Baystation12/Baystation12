@@ -121,7 +121,7 @@
 			return
 		to_chat(user, "<span class='notice'>You start dismantling \the [src]...</span>")
 		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 30, src))
+		if (do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>", "<span class='notice'>You dismantle \the [src].</span>")
 			new /obj/item/beehive_assembly(loc)
 			qdel(src)
@@ -137,7 +137,7 @@
 			to_chat(user, "<span class='notice'>The bees won't let you take the honeycombs out like this, smoke them first.</span>")
 			return
 		user.visible_message("<span class='notice'>\The [user] starts taking the honeycombs out of \the [src].</span>", "<span class='notice'>You start taking the honeycombs out of \the [src]...</span>")
-		while(honeycombs >= 100 && do_after(user, 30, src))
+		while (honeycombs >= 100 && do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			new /obj/item/honey_frame/filled(loc)
 			honeycombs -= 100
 			--frames
@@ -173,7 +173,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+
 	machine_name = "honey extractor"
 	machine_desc = "Extracts liquid honey and solid blocks of wax from filled beehive frames. Requires an attached reagent container to operate."
 
@@ -186,7 +186,7 @@
 /obj/machinery/honey_extractor/cannot_transition_to(state_path, mob/user)
 	if(processing)
 		return SPAN_NOTICE("You must wait for \the [src] to finish first!")
-	return ..()	
+	return ..()
 
 /obj/machinery/honey_extractor/attackby(var/obj/item/I, var/mob/user)
 	if(processing)
@@ -223,7 +223,7 @@
 /obj/item/bee_smoker
 	name = "bee smoker"
 	desc = "A device used to calm down bees before harvesting honey."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/batterer.dmi'
 	icon_state = "batterer"
 	w_class = ITEM_SIZE_SMALL
 
@@ -253,7 +253,7 @@
 
 /obj/item/beehive_assembly/attack_self(var/mob/user)
 	to_chat(user, "<span class='notice'>You start assembling \the [src]...</span>")
-	if(do_after(user, 30, src))
+	if (do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 		user.visible_message("<span class='notice'>\The [user] constructs a beehive.</span>", "<span class='notice'>You construct a beehive.</span>")
 		new /obj/machinery/beehive(get_turf(user))
 		qdel(src)

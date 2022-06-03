@@ -46,12 +46,18 @@
 			L.update_icon()
 
 /obj/structure/lattice/ex_act(severity)
-	if(severity <= 2)
+	if(severity <= EX_ACT_HEAVY)
 		qdel(src)
 
 /obj/structure/lattice/proc/deconstruct(var/mob/user)
-	to_chat(user, "<span class='notice'>Slicing lattice joints ...</span>")
+	to_chat(user, SPAN_NOTICE("Slicing lattice joints ..."))
 	new /obj/item/stack/material/rods(loc, 1, material.name)
+	var/turf/source = get_turf(src)
+	if(locate(/obj/structure/cable, source))
+		for(var/obj/structure/cable/C in source)
+			C.visible_message(SPAN_WARNING("\The [C] snaps!"))
+			new/obj/item/stack/cable_coil(source, (C.d1 ? 2 : 1), C.color)
+			qdel(C)
 	qdel(src)
 
 /obj/structure/lattice/attackby(obj/item/C as obj, mob/user as mob)
@@ -60,17 +66,25 @@
 		var/turf/T = get_turf(src)
 		T.attackby(C, user) //BubbleWrap - hand this off to the underlying turf instead
 		return
+
+	if (isCoil(C))
+		var/turf/T = get_turf(src)
+		T.attackby(C, user) //Also handing this off to turf, the checks should confirm the lattice exists
+		return
+
 	if(isWelder(C))
 		var/obj/item/weldingtool/WT = C
 		if(WT.remove_fuel(0, user))
 			deconstruct(user)
 		return
+
 	if(istype(C, /obj/item/gun/energy/plasmacutter))
 		var/obj/item/gun/energy/plasmacutter/cutter = C
 		if(!cutter.slice(user))
 			return
 		deconstruct(user)
 		return
+
 	if (istype(C, /obj/item/stack/material/rods))
 		var/obj/item/stack/material/rods/R = C
 		if(R.use(2))
@@ -80,7 +94,7 @@
 			qdel(src)
 			return
 		else
-			to_chat(user, "<span class='notice'>You require at least two rods to complete the catwalk.</span>")
+			to_chat(user, SPAN_NOTICE("You require at least two rods to complete the catwalk."))
 
 /obj/structure/lattice/on_update_icon()
 	var/dir_sum = 0

@@ -41,10 +41,6 @@
 		)
 	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/rcd,/obj/item/rpd)
 
-/obj/item/clothing/suit/space/void/engineering/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 1
-
 /obj/item/clothing/suit/space/void/engineering/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering
 	boots = /obj/item/clothing/shoes/magboots
@@ -67,7 +63,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
-	light_overlay = "helmet_light_dual"
+	light_overlay = "helmet_light_dual_alt"
 	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
 
 /obj/item/clothing/suit/space/void/mining
@@ -252,9 +248,9 @@
 		rad = ARMOR_RAD_SHIELDED
 		)
 
-/obj/item/clothing/suit/space/void/engineering/alt/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 2
+/obj/item/clothing/suit/space/void/engineering/alt/Initialize()
+	. = ..()
+	slowdown_per_slot[slot_wear_suit] = 1.25
 
 /obj/item/clothing/suit/space/void/engineering/alt/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering/alt
@@ -303,9 +299,9 @@
 		rad = ARMOR_RAD_RESISTANT
 		)
 
-/obj/item/clothing/suit/space/void/medical/alt/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 0
+/obj/item/clothing/suit/space/void/medical/alt/Initialize()
+	. = ..()
+	slowdown_per_slot[slot_wear_suit] = 0.5
 
 /obj/item/clothing/suit/space/void/medical/alt/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/medical/alt
@@ -317,6 +313,7 @@
 	desc = "A somewhat tacky voidsuit helmet, a fact mitigated by heavy armor plating."
 	icon_state = "rig0-secalt"
 	item_state = "secalt_helm"
+	light_overlay = "helmet_light_alt"
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
 		bullet = ARMOR_BALLISTIC_SMALL,
@@ -452,11 +449,15 @@
 	helmet = /obj/item/clothing/head/helmet/space/void/pilot
 	boots = /obj/item/clothing/shoes/magboots
 
-//Ceti
-/obj/item/clothing/suit/space/void/ceti
-	name = "CTI Voidsuit"
-	desc = "A xenoarcheology voidsuit designed for CTI researchers, by CTI researchers. Tools not included."
-	icon_state = "rig-ceti"
+/obj/item/clothing/suit/space/void/pilot/Initialize()
+	. = ..()
+	slowdown_per_slot[slot_wear_suit] = 0.75
+
+//Retro
+/obj/item/clothing/suit/space/void/retro
+	name = "retro voidsuit"
+	desc = "A voidsuit designed to replicate older designs with newer technology."
+	icon_state = "rig-retro"
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		energy = ARMOR_ENERGY_RESISTANT,
@@ -464,13 +465,13 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/storage/excavation,/obj/item/pickaxe,/obj/item/device/scanner/health,/obj/item/device/measuring_tape,/obj/item/device/ano_scanner,/obj/item/device/depth_scanner,/obj/item/device/core_sampler,/obj/item/device/gps,/obj/item/pinpointer/radio,/obj/item/device/radio/beacon,/obj/item/pickaxe/xeno,/obj/item/storage/bag/fossils)
+	allowed = list(/obj/item/gun,/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit)
 
-/obj/item/clothing/head/helmet/space/void/ceti
-	name = "CTI voidsuit helmet"
-	desc = "A specially made voidsuit helmet designed for use by CTI affiliated researchers."
-	icon_state = "rig0-ceti"
-	item_state = "helm-ceti"
+/obj/item/clothing/head/helmet/space/void/retro
+	name = "retro voidsuit helmet"
+	desc = "A voidsuit helmet designed to replicate older designs with newer technology."
+	icon_state = "rig0-retro"
+	item_state = "helm-retro"
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		energy = ARMOR_ENERGY_RESISTANT,
@@ -478,8 +479,8 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
-	light_overlay = "helmet_light"
+	light_overlay = "helmet_light_alt"
 
-/obj/item/clothing/suit/space/void/ceti/prepared
-	helmet = /obj/item/clothing/head/helmet/space/void/ceti
+/obj/item/clothing/suit/space/void/retro/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/retro
 	boots = /obj/item/clothing/shoes/magboots

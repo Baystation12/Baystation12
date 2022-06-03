@@ -22,7 +22,7 @@
 	for(var/skill_type in temp_buffs)
 		var/has_now = target.get_skill_value(skill_type)
 		var/current_buff = buffs[skill_type]
-		var/new_buff = Clamp(has_now + current_buff, SKILL_MIN, SKILL_MAX) - has_now
+		var/new_buff = clamp(has_now + current_buff, SKILL_MIN, SKILL_MAX) - has_now
 		new_buff ? (buffs[skill_type] = new_buff) : (buffs -= skill_type)
 	return length(buffs)
 

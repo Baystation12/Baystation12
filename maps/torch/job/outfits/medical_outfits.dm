@@ -70,10 +70,14 @@
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
 	name = OUTFIT_JOB_NAME("Chemist - Torch")
-	uniform = /obj/item/clothing/under/rank/medical
+	uniform = /obj/item/clothing/under/rank/chemist
 	shoes = /obj/item/clothing/shoes/white
-	pda_type = /obj/item/modular_computer/pda/medical
+	pda_type = /obj/item/modular_computer/pda/chemistry
 	id_types = list(/obj/item/card/id/torch/contractor/chemist)
+
+/decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist/New()
+	..()
+	BACKPACK_OVERRIDE_CHEMISTRY
 
 /decl/hierarchy/outfit/job/torch/crew/medical/counselor
 	name = OUTFIT_JOB_NAME("Counselor")

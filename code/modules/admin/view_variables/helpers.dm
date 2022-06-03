@@ -14,6 +14,12 @@
 		</font>
 		"}
 
+/atom/movable/get_view_variables_options()
+	return ..() + {"
+		<option value='?_src_=vars;addmovementhandler=\ref[src]'>Add Movement Handler</option>
+		<option value='?_src_=vars;removemovementhandler=\ref[src]'>Remove Movement Handler</option>
+		"}
+
 /mob/living/get_view_variables_header()
 	return {"
 		<a href='?_src_=vars;rename=\ref[src]'><b>[src]</b></a><font size='1'>
@@ -67,6 +73,7 @@
 	return ..() + {"
 		<option value='?_src_=vars;addaura=\ref[src]'>Add Aura</option>
 		<option value='?_src_=vars;removeaura=\ref[src]'>Remove Aura</option>
+		<option value='?_src_=vars;debug_mob_ai=\ref[src]'>Toggle AI Debug Output</option>
 		"}
 
 /mob/living/carbon/human/get_view_variables_options()
@@ -95,7 +102,10 @@
 		"}
 
 /datum/proc/get_variables()
-	. = vars - VV_hidden()
+	var/list/hidden = VV_hidden()
+	if (!hidden)
+		return list()
+	. = vars - hidden
 	if(!usr || !check_rights(R_ADMIN|R_DEBUG, FALSE))
 		. -= VV_secluded()
 
@@ -126,7 +136,7 @@
 
 // These methods are all procs and don't use stored lists to avoid VV exploits
 
-// The following vars cannot be viewed by anyone
+// The following vars cannot be viewed by anyone or, if null, no variables can be viewed.
 /datum/proc/VV_hidden()
 	return list()
 
@@ -134,7 +144,7 @@
 /datum/proc/VV_secluded()
 	return list()
 
-/datum/configuration/VV_secluded()
+/configuration/VV_secluded()
 	return vars
 
 // The following vars cannot be edited by anyone

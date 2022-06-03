@@ -18,22 +18,20 @@
 	mob_size = MOB_SMALL
 	density = FALSE
 
-	speak = list("Caw.", "Caw?", "Caw!", "CAW.")
 	speak_emote = list("caws")
-	emote_hear = list("caws")
-	emote_see = list("hops")
 
 	natural_weapon = /obj/item/natural_weapon/crow_claws
 
 	response_help  = "pets"
 	response_disarm = "gently moves aside"
 	response_harm   = "swats"
-	stop_automated_movement = TRUE
 	universal_speak = TRUE
 	pass_flags = PASS_FLAG_TABLE
 
 	var/obj/item/storage/messenger/messenger_bag
 	var/obj/item/card/id/access_card
+
+	say_list_type = /datum/say_list/crow
 
 /obj/item/natural_weapon/crow_claws
 	name = "claws"
@@ -158,3 +156,7 @@
 	else
 		overlays |= "cyber_dead"
 
+/datum/say_list/crow
+	speak = list("Caw.", "Caw?", "Caw!", "CAW.")
+	emote_hear = list("caws")
+	emote_see = list("hops")

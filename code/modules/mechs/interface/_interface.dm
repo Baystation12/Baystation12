@@ -46,10 +46,13 @@
 		hud_elements |= hud_health
 		hud_open = locate(/obj/screen/exosuit/toggle/hatch_open) in hud_elements
 		hud_power = new /obj/screen/exosuit/power(src)
-		hud_power.screen_loc = "EAST-1:12,CENTER-4:25"
+		hud_power.screen_loc = "EAST-1:24,CENTER-4:25"
 		hud_elements |= hud_power
 		hud_power_control = locate(/obj/screen/exosuit/toggle/power_control) in hud_elements
 		hud_camera = locate(/obj/screen/exosuit/toggle/camera) in hud_elements
+		hud_heat = new /obj/screen/exosuit/heat(src)
+		hud_heat.screen_loc = "EAST-1:28,CENTER-4"
+		hud_elements |= hud_heat
 
 	refresh_hud()
 

@@ -13,7 +13,7 @@ Single Use Emergency Pouches
 	opened = FALSE
 	open_sound = 'sound/effects/rip1.ogg'
 	var/injury_type = "generic"
-	var/global/image/cross_overlay
+	var/static/image/cross_overlay
 
 	var/instructions = {"
 	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
@@ -40,7 +40,7 @@ Single Use Emergency Pouches
 	overlays.Cut()
 	if(!cross_overlay)
 		cross_overlay = image(icon, "cross")
-		cross_overlay.appearance_flags = RESET_COLOR
+		cross_overlay.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 	overlays += cross_overlay
 	icon_state = "pack[opened]"
 

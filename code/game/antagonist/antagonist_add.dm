@@ -69,10 +69,11 @@
 /datum/antagonist/proc/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
 	if(!istype(player))
 		return 0
-	if(player.current && faction_verb)
-		player.current.verbs -= faction_verb
-	if(faction && player.current.faction == faction)
-		player.current.faction = MOB_FACTION_NEUTRAL
+	if (player.current)
+		if (faction_verb)
+			player.current.verbs -= faction_verb
+		if (faction && player.current.faction == faction)
+			player.current.faction = MOB_FACTION_NEUTRAL
 	if(player in current_antagonists)
 		to_chat(player.current, "<span class='danger'><font size = 3>You are no longer a [role_text]!</font></span>")
 		current_antagonists -= player
@@ -81,7 +82,7 @@
 		update_icons_removed(player)
 
 		if(player.current)
-			BITSET(player.current.hud_updateflag, SPECIALROLE_HUD)
+			SET_BIT(player.current.hud_updateflag, SPECIALROLE_HUD)
 			player.current.reset_skillset() //Reset their skills to be job-appropriate.
 
 		if(!is_special_character(player))

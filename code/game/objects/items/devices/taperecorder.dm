@@ -1,6 +1,7 @@
 /obj/item/device/taperecorder
 	name = "universal recorder"
 	desc = "A device that can record to cassette tapes, and play them. It automatically translates the content in playback."
+	icon = 'icons/obj/tape_recorder.dmi'
 	icon_state = "taperecorder"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_SMALL
@@ -179,12 +180,16 @@
 		//count seconds until full, or recording is stopped
 		while(mytape && recording && mytape.used_capacity < mytape.max_capacity)
 			sleep(10)
+			if (!mytape)
+				stop_recording()
+				break
 			mytape.used_capacity++
 			if(mytape.used_capacity >= mytape.max_capacity)
 				if(ismob(loc))
 					var/mob/M = loc
 					to_chat(M, "<span class='notice'>The tape is full.</span>")
 				stop_recording()
+				break
 
 
 		update_icon()
@@ -348,8 +353,9 @@
 		if (findtextEx(printedmessage,"*",1,2)) //replace action sounds
 			printedmessage = "\[[time2text(mytape.timestamp[i]*10,"mm:ss")]\] (Unrecognized sound)"
 		t1 += "[printedmessage]<BR>"
-	P.info = t1
-	P.SetName("Transcript")
+	P.set_content(t1, "Transcript", FALSE)
+	usr.put_in_hands(P)
+	playsound(src, "sound/machines/dotprinter.ogg", 30)
 	canprint = 0
 	sleep(300)
 	canprint = 1
@@ -381,6 +387,7 @@
 /obj/item/device/tape
 	name = "tape"
 	desc = "A magnetic tape that can hold up to ten minutes of content."
+	icon = 'icons/obj/tape_recorder.dmi'
 	icon_state = "tape_white"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_TINY
@@ -440,7 +447,7 @@
 			to_chat(user, "<span class='notice'>There is no tape left inside.</span>")
 			return
 		to_chat(user, "<span class='notice'>You start winding the tape back in...</span>")
-		if(do_after(user, 120, src))
+		if(do_after(user, 12 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 			to_chat(user, "<span class='notice'>You wound the tape back in.</span>")
 			fix()
 		return
@@ -496,7 +503,7 @@
 		var/index = text2num(href_list["cut_after"])
 		if(index >= timestamp.len)
 			return
-		
+
 		to_chat(user, "<span class='notice'>You remove part of the tape off.</span>")
 		get_loose_tape(user, index)
 		cut(user)
@@ -525,6 +532,7 @@
 /obj/item/device/tape/loose
 	name = "magnetic tape"
 	desc = "Quantum-enriched self-repairing nanotape, used for magnetic storage of information."
+	icon = 'icons/obj/tape_recorder.dmi'
 	icon_state = "magtape"
 	ruined = 1
 

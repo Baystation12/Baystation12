@@ -1,5 +1,5 @@
-var/list/loadout_categories = list()
-var/list/gear_datums = list()
+var/global/list/loadout_categories = list()
+var/global/list/gear_datums = list()
 
 /datum/preferences
 	var/list/gear_list //Custom/fluff item loadouts.
@@ -205,7 +205,7 @@ var/list/gear_datums = list()
 				var/good_branch = 0
 				entry += "<br><i>"
 				for(var/branch in branches)
-					var/datum/mil_branch/player_branch = mil_branches.get_branch(branch)
+					var/datum/mil_branch/player_branch = GLOB.mil_branches.get_branch(branch)
 					if(player_branch.type in G.allowed_branches)
 						branch_checks += "<font color=55cc55>[player_branch.name]</font>"
 						good_branch = 1
@@ -340,6 +340,9 @@ var/list/gear_datums = list()
 		description = initial(O.desc)
 	if(flags & GEAR_HAS_COLOR_SELECTION)
 		gear_tweaks += gear_tweak_free_color_choice()
+	if(!(flags & GEAR_HAS_NO_CUSTOMIZATION))
+		gear_tweaks += gear_tweak_free_name(display_name)
+		gear_tweaks += gear_tweak_free_desc(description)
 	if(flags & GEAR_HAS_TYPE_SELECTION)
 		gear_tweaks += new/datum/gear_tweak/path/type(path)
 	if(flags & GEAR_HAS_SUBTYPE_SELECTION)
@@ -371,19 +374,35 @@ var/list/gear_datums = list()
 
 /datum/gear/proc/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
 	var/obj/item/item = spawn_item(H, H, metadata)
-	if(H.equip_to_slot_if_possible(item, slot, del_on_fail = 1, force = 1))
+	if(H.equip_to_slot_if_possible(item, slot, TRYEQUIP_REDRAW | TRYEQUIP_DESTROY | TRYEQUIP_FORCE))
 		. = item
 
-/datum/gear/proc/spawn_in_storage_or_drop(var/mob/living/carbon/human/H, var/metadata)
-	var/obj/item/item = spawn_item(H, H, metadata)
-	item.add_fingerprint(H)
 
-	var/atom/placed_in = H.equip_to_storage(item)
-	if(placed_in)
-		to_chat(H, "<span class='notice'>Placing \the [item] in your [placed_in.name]!</span>")
-	else if(H.equip_to_appropriate_slot(item))
-		to_chat(H, "<span class='notice'>Placing \the [item] in your inventory!</span>")
-	else if(H.put_in_hands(item))
-		to_chat(H, "<span class='notice'>Placing \the [item] in your hands!</span>")
+/datum/gear/proc/spawn_in_storage_or_drop(mob/living/carbon/human/subject, metadata)
+	var/obj/item/item = spawn_item(subject, subject, metadata)
+	item.add_fingerprint(subject)
+	if (istype(item, /obj/item/organ/internal/augment))
+		var/obj/item/organ/internal/augment/augment = item
+		var/obj/item/organ/external/parent = augment.get_valid_parent_organ(subject)
+		if (!parent)
+			to_chat(subject, SPAN_WARNING("Failed to find a valid organ to install \the [augment] into!"))
+			qdel(augment)
+			return
+		var/surgery_step = decls_repository.get_decl(/decl/surgery_step/internal/replace_organ)
+		if (augment.surgery_configure(subject, subject, parent, null, surgery_step))
+			to_chat(subject, SPAN_WARNING("Failed to set up \the [augment] for installation in your [parent.name]!"))
+			qdel(augment)
+			return
+		augment.forceMove(subject)
+		augment.replaced(subject, parent)
+		augment.onRoundstart()
+		return
+	var/atom/container = subject.equip_to_storage(item)
+	if (container)
+		to_chat(subject, SPAN_NOTICE("Placing \the [item] in your [container.name]!"))
+	else if (subject.equip_to_appropriate_slot(item))
+		to_chat(subject, SPAN_NOTICE("Placing \the [item] in your inventory!"))
+	else if (subject.put_in_hands(item))
+		to_chat(subject, SPAN_NOTICE("Placing \the [item] in your hands!"))
 	else
-		to_chat(H, "<span class='danger'>Dropping \the [item] on the ground!</span>")
+		to_chat(subject, SPAN_WARNING("Dropping \the [item] on the ground!"))

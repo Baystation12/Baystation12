@@ -48,8 +48,10 @@
 
 	dat += "<br>"
 	dat += "<hr>"
-	dat += "<a href='?src=\ref[src]'>Refresh</a> <a href='?src=\ref[src];close=1'>Close</a>"
-	show_browser(user, dat, "window=artanalyser;size=450x500")
+	dat += "<a href='?src=\ref[src];close=1'>Close</a>"
+	var/datum/browser/popup = new(user, "artanalyser", "Artifact Analyzer", 450, 500)
+	popup.set_content(dat)
+	popup.open()
 	user.set_machine(src)
 	onclose(user, "artanalyser")
 
@@ -140,8 +142,6 @@
 			return "Tribal pylon - subject resembles statues/emblems built by cargo cult civilisations to honour energy systems from post-warp civilisations."
 		if(/obj/machinery/replicator)
 			return "Automated construction unit - subject appears to be able to synthesize various objects given a material, some with simple internal circuitry. Method unknown."
-		if(/obj/structure/crystal)
-			return "Crystal formation - pseudo-organic crystalline matrix, unlikely to have formed naturally. No known technology exists to synthesize this exact composition."
 		if(/obj/machinery/artifact)
 			var/obj/machinery/artifact/A = scanned_obj
 			var/out = "Anomalous alien device - composed of an unknown alloy.<br><br>"
@@ -152,6 +152,9 @@
 			if(A.secondary_effect)
 				out += "<br><br>Internal scans indicate ongoing secondary activity operating independently from primary systems.<br><br>"
 				out += A.secondary_effect.getDescription()
+
+			if (A.damage_desc)
+				out += "<br><br>[A.damage_desc]"
 
 			return out
 		else

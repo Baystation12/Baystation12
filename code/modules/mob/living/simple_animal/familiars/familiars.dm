@@ -50,7 +50,7 @@
 	name = "space pike"
 	desc = "A bigger, more magical cousin of the space carp."
 
-	icon = 'icons/mob/simple_animal/spaceshark.dmi'
+	icon = 'icons/mob/simple_animal/space_shark.dmi'
 	icon_state = "shark"
 	icon_living = "shark"
 	icon_dead = "shark_dead"
@@ -90,7 +90,7 @@
 /obj/item/natural_weapon/horror
 	name = "foul touch"
 	force = 10
-	damtype = BURN
+	damtype = DAMAGE_BURN
 	attack_verb = list("touched")
 
 /mob/living/simple_animal/familiar/horror/death(gibbed, deathmessage, show_dead_message)
@@ -122,7 +122,7 @@
 
 /mob/living/simple_animal/familiar/pet //basically variants of normal animals with spells.
 	icon = 'icons/mob/simple_animal/animal.dmi'
-	var/icon_rest //so that we can have resting little guys.
+	icon_rest //so that we can have resting little guys.
 
 /mob/living/simple_animal/familiar/pet/Life()
 	. = ..()

@@ -11,21 +11,22 @@ SUBSYSTEM_DEF(robots)
 
 	var/list/mob_types_by_title = list(
 		"robot, flying"  = /mob/living/silicon/robot/flying,
-		"drone, flying"  = /mob/living/silicon/robot/flying,
-		"cyborg, flying" = /mob/living/silicon/robot/flying
+		"drone, flying"  = /mob/living/silicon/robot/flying
 	)
 
 	var/list/mmi_types_by_title = list(
-		"cyborg"         = /obj/item/device/mmi,
 		"robot"          = /obj/item/organ/internal/posibrain,
 		"drone"          = /obj/item/device/mmi/digital/robot,
-		"cyborg, flying" = /obj/item/device/mmi,
 		"robot, flying"  = /obj/item/organ/internal/posibrain,
 		"drone, flying"  = /obj/item/device/mmi/digital/robot
 	)
 
-/datum/controller/subsystem/robots/Initialize()
-	. = ..()
+
+/datum/controller/subsystem/robots/UpdateStat(time)
+	return
+
+
+/datum/controller/subsystem/robots/Initialize(start_uptime)
 
 	// This is done via loop instead of just assignment in order to trim associations.
 	for(var/title in (mob_types_by_title|mmi_types_by_title))

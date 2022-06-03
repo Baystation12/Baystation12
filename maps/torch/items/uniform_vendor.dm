@@ -15,7 +15,7 @@
 	var/obj/item/card/id/ID
 	var/list/uniforms = list()
 	var/list/selected_outfit = list()
-	var/global/list/issued_items = list()
+	var/static/list/issued_items = list()
 
 /obj/machinery/uniform_vendor/on_update_icon()
 	if(stat & BROKEN)

@@ -15,7 +15,7 @@
 	var/access = list()
 	access = access_crate_cash
 	var/worth = 0
-	var/global/denominations = list(1000,500,200,100,50,20,10,1)
+	var/static/denominations = list(1000,500,200,100,50,20,10,1)
 
 /obj/item/spacecash/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/spacecash))
@@ -76,10 +76,11 @@
 
 	for(var/A in images)
 		var/image/banknote = image('icons/obj/items.dmi', A)
-		var/matrix/M = matrix()
-		M.Translate(rand(-6, 6), rand(-4, 8))
-		M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
-		banknote.transform = M
+		banknote.SetTransform(
+			rotation = pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45),
+			offset_x = rand(-6, 6),
+			offset_y = rand(-4, 8)
+		)
 		src.overlays += banknote
 
 	src.desc = "They are worth [worth] [GLOB.using_map.local_currency_name]."
@@ -93,24 +94,27 @@
 	else
 		w_class = ITEM_SIZE_SMALL
 
-/obj/item/spacecash/bundle/attack_self()
-	var/amount = input(usr, "How many [GLOB.using_map.local_currency_name] do you want to take? (0 to [src.worth])", "Take Money", 20) as num
-	amount = round(Clamp(amount, 0, src.worth))
-	if(amount==0) return 0
+/obj/item/spacecash/bundle/attack_hand(mob/user as mob)
+	if (user.get_inactive_hand() == src)
+		var/amount = input(usr, "How many [GLOB.using_map.local_currency_name] do you want to take? (0 to [src.worth])", "Take Money", 20) as num
+		amount = round(clamp(amount, 0, src.worth))
+		if (amount==0) return 0
 
-	src.worth -= amount
-	src.update_icon()
-	if(amount in list(1000,500,200,100,50,20,1))
-		var/cashtype = text2path("/obj/item/spacecash/bundle/c[amount]")
-		var/obj/cash = new cashtype (usr.loc)
-		usr.put_in_hands(cash)
+		src.worth -= amount
+		src.update_icon()
+		if (amount in list(1000,500,200,100,50,20,1))
+			var/cashtype = text2path("/obj/item/spacecash/bundle/c[amount]")
+			var/obj/cash = new cashtype (usr.loc)
+			usr.put_in_hands(cash)
+		else
+			var/obj/item/spacecash/bundle/bundle = new (usr.loc)
+			bundle.worth = amount
+			bundle.update_icon()
+			usr.put_in_hands(bundle)
+		if (!worth)
+			qdel(src)
 	else
-		var/obj/item/spacecash/bundle/bundle = new (usr.loc)
-		bundle.worth = amount
-		bundle.update_icon()
-		usr.put_in_hands(bundle)
-	if(!worth)
-		qdel(src)
+		..()
 
 /obj/item/spacecash/bundle/c1
 	name = "1 Thaler"
@@ -160,7 +164,7 @@
 	desc = "It's worth 1000 Thalers."
 	worth = 1000
 
-proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
+/proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
 	if(sum in list(1000,500,200,100,50,20,10,1))
 		var/cash_type = text2path("/obj/item/spacecash/bundle/c[sum]")
 		var/obj/cash = new cash_type (usr.loc)

@@ -1,6 +1,4 @@
-#define TANK_IDEAL_PRESSURE 1015 //Arbitrary.
-
-var/list/global/tank_gauge_cache = list()
+var/global/list/tank_gauge_cache = list()
 
 /obj/item/tank
 	name = "tank"
@@ -28,12 +26,13 @@ var/list/global/tank_gauge_cache = list()
 	var/obj/item/device/tankassemblyproxy/proxyassembly
 
 	var/volume = 70
+	var/tank_size = TANK_SIZE_MEDIUM
 	var/manipulated_by = null		//Used by _onclick/hud/screen_objects.dm internals to determine if someone has messed with our tank or not.
 						//If they have and we haven't scanned it with the PDA or gas analyzer then we might just breath whatever they put in it.
 	var/failure_temp = 173 //173 deg C Borate seal (yes it should be 153 F, but that's annoying)
 
 
-	var/tank_flags = 0x000000
+	var/tank_flags = EMPTY_BITFIELD
 
 	var/list/starting_pressure //list in format 'xgm gas id' = 'desired pressure at start'
 
@@ -117,7 +116,7 @@ var/list/global/tank_gauge_cache = list()
 	if (istype(W, /obj/item/device/scanner/gas))
 		return
 
-	if (W.isscrewdriver())
+	if (isScrewdriver(W))
 		add_fingerprint(user)
 		user.visible_message(
 			SPAN_ITALIC("\The [user] starts to use \the [W] on \the [src]."),
@@ -129,7 +128,7 @@ var/list/global/tank_gauge_cache = list()
 			to_chat(user, SPAN_WARNING("The valve is stuck. You can't move it at all!"))
 			return
 		var/reduction = round(user.get_skill_value(SKILL_ATMOS) * 0.5) //0,1,1,2,2
-		if (do_after(user, (5 - reduction) SECONDS, src))
+		if (do_after(user, (5 - reduction) SECONDS, src, DO_PUBLIC_UNIQUE))
 			if (GET_FLAGS(tank_flags, TANK_FLAG_WELDED))
 				to_chat(user, SPAN_WARNING("The valve is stuck. You can't move it at all!"))
 				return
@@ -160,7 +159,7 @@ var/list/global/tank_gauge_cache = list()
 		if(GET_FLAGS(tank_flags, TANK_FLAG_WIRED) && proxyassembly.assembly)
 
 			to_chat(user, "<span class='notice'>You carefully begin clipping the wires that attach to the tank.</span>")
-			if(do_after(user, 100,src))
+			if(do_after(user, 10 SECONDS, src))
 				CLEAR_FLAGS(tank_flags, TANK_FLAG_WIRED)
 				to_chat(user, "<span class='notice'>You cut the wire and remove the device.</span>")
 
@@ -184,7 +183,7 @@ var/list/global/tank_gauge_cache = list()
 					proxyassembly.receive_signal()
 
 		else if(GET_FLAGS(tank_flags, TANK_FLAG_WIRED))
-			if(do_after(user, 10, src))
+			if(do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE))
 				to_chat(user, "<span class='notice'>You quickly clip the wire from the tank.</span>")
 				CLEAR_FLAGS(tank_flags, TANK_FLAG_WIRED)
 				update_icon(TRUE)
@@ -196,7 +195,7 @@ var/list/global/tank_gauge_cache = list()
 		if(GET_FLAGS(tank_flags, TANK_FLAG_WIRED))
 			add_fingerprint(user)
 			to_chat(user, "<span class='notice'>You begin attaching the assembly to \the [src].</span>")
-			if(do_after(user, 50, src))
+			if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
 				to_chat(user, "<span class='notice'>You finish attaching the assembly to \the [src].</span>")
 				GLOB.bombers += "[key_name(user)] attached an assembly to a wired [src]. Temp: [air_contents.temperature-T0C]"
 				log_and_message_admins("attached an assembly to a wired [src]. Temp: [air_contents.temperature-T0C]", user)
@@ -215,7 +214,7 @@ var/list/global/tank_gauge_cache = list()
 			add_fingerprint(user)
 			if(!GET_FLAGS(tank_flags, TANK_FLAG_WELDED))
 				to_chat(user, "<span class='notice'>You begin welding the \the [src] emergency pressure relief valve.</span>")
-				if(do_after(user, 40,src))
+				if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 					to_chat(user, "<span class='notice'>You carefully weld \the [src] emergency pressure relief valve shut.</span><span class='warning'> \The [src] may now rupture under pressure!</span>")
 					SET_FLAGS(tank_flags, TANK_FLAG_WELDED)
 					CLEAR_FLAGS(tank_flags, TANK_FLAG_LEAKING)
@@ -398,6 +397,8 @@ var/list/global/tank_gauge_cache = list()
 	air_contents.react() //cooking up air tanks - add phoron and oxygen, then heat above PHORON_MINIMUM_BURN_TEMPERATURE
 	check_status()
 
+#define TANK_IDEAL_PRESSURE 1015
+
 /obj/item/tank/on_update_icon(var/override)
 
 	var/list/overlays_to_add
@@ -426,6 +427,8 @@ var/list/global/tank_gauge_cache = list()
 		previous_gauge_pressure = gauge_pressure
 
 	overlays = overlays_to_add
+
+#undef TANK_IDEAL_PRESSURE
 
 //Handle exploding, leaking, and rupturing of the tank
 /obj/item/tank/proc/check_status()
@@ -513,7 +516,7 @@ var/list/global/tank_gauge_cache = list()
 			var/datum/gas_mixture/environment = loc.return_air()
 			var/env_pressure = environment.return_pressure()
 
-			var/release_ratio = Clamp(0.002, sqrt(max(pressure-env_pressure,0)/pressure),1)
+			var/release_ratio = clamp(0.002, sqrt(max(pressure-env_pressure,0)/pressure),1)
 			var/datum/gas_mixture/leaked_gas = air_contents.remove_ratio(release_ratio)
 			//dynamic air release based on ambient pressure
 
@@ -655,4 +658,3 @@ var/list/global/tank_gauge_cache = list()
 /obj/item/projectile/bullet/pellet/fragment/tank/big
 	name = "large metal fragment"
 	damage = 17
-

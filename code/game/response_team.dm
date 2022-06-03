@@ -3,8 +3,8 @@
 
 var/global/send_emergency_team = 0 // Used for automagic response teams
 								   // 'admin_emergency_team' for admin-spawned response teams
-var/ert_base_chance = 10 // Default base chance. Will be incremented by increment ERT chance.
-var/can_call_ert
+var/global/ert_base_chance = 10 // Default base chance. Will be incremented by increment ERT chance.
+var/global/can_call_ert
 
 /client/proc/response_team()
 	set name = "Dispatch Emergency Response Team"
@@ -46,7 +46,7 @@ var/can_call_ert
 	log_admin("[key_name(usr)] used Dispatch Response Team.")
 	trigger_armed_response_team(1, reason)
 
-client/verb/JoinResponseTeam()
+/client/verb/JoinResponseTeam()
 
 	set name = "Join Response Team"
 	set category = "IC"
@@ -70,7 +70,7 @@ client/verb/JoinResponseTeam()
 		to_chat(usr, "You need to be an observer or new player to use this.")
 
 // returns a number of dead players in %
-proc/percentage_dead()
+/proc/percentage_dead()
 	var/total = 0
 	var/deadcount = 0
 	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
@@ -82,7 +82,7 @@ proc/percentage_dead()
 	else return round(100 * deadcount / total)
 
 // counts the number of antagonists in %
-proc/percentage_antagonists()
+/proc/percentage_antagonists()
 	var/total = 0
 	var/antagonists = 0
 	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
@@ -95,7 +95,7 @@ proc/percentage_antagonists()
 
 // Increments the ERT chance automatically, so that the later it is in the round,
 // the more likely an ERT is to be able to be called.
-proc/increment_ert_chance()
+/proc/increment_ert_chance()
 	while(send_emergency_team == 0) // There is no ERT at the time.
 		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 		var/index = list_find(security_state.all_security_levels, security_state.current_security_level)
@@ -103,7 +103,7 @@ proc/increment_ert_chance()
 		sleep(600 * 3) // Minute * Number of Minutes
 
 
-proc/trigger_armed_response_team(var/force = 0, var/reason = "")
+/proc/trigger_armed_response_team(var/force = 0, var/reason = "")
 	if(!can_call_ert && !force)
 		return
 	if(send_emergency_team)

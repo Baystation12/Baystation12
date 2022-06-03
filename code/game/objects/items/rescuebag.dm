@@ -9,7 +9,7 @@
 	var/obj/item/tank/airtank
 
 /obj/item/bodybag/rescue/loaded
-	airtank = /obj/item/tank/emergency/oxygen/double
+	airtank = /obj/item/tank/oxygen_emergency_double
 
 /obj/item/bodybag/rescue/Initialize()
 	. = ..()
@@ -87,7 +87,7 @@
 		overlays += image(icon, "tank")
 
 /obj/structure/closet/body_bag/rescue/attackby(obj/item/W, mob/user, var/click_params)
-	if(istype(W,/obj/item/tank/))
+	if(istype(W,/obj/item/tank))
 		if(airtank)
 			to_chat(user, "\The [src] already has an air tank installed.")
 			return 1

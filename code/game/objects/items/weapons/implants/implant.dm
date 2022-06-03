@@ -4,7 +4,7 @@
 
 /obj/item/implant
 	name = "implant"
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/implant.dmi'
 	icon_state = "implant"
 	w_class = ITEM_SIZE_TINY
 	var/implanted = null
@@ -60,7 +60,7 @@
 			affected.implants += src
 			part = affected
 
-		BITSET(H.hud_updateflag, IMPLOYAL_HUD)
+		SET_BIT(H.hud_updateflag, IMPLOYAL_HUD)
 
 	forceMove(M)
 	imp_in = M
@@ -102,7 +102,7 @@
 		part.take_external_damage(burn = 15, used_weapon = "Electronics meltdown")
 	else
 		var/mob/living/M = imp_in
-		M.apply_damage(15,BURN)
+		M.apply_damage(15, DAMAGE_BURN)
 	name = "melted implant"
 	desc = "Charred circuit in melted plastic case. Wonder what that used to be..."
 	icon_state = "implant_melted"
@@ -112,10 +112,11 @@
 	var/power = 4 - severity
 	if(prob(power * 15))
 		meltdown()
-	else if(prob(power * 25))
-		activate()
 	else if(prob(power * 33))
 		disable(rand(power*100,power*1000))
+	else if(prob(power * 25))
+		activate()
+	..()
 
 /obj/item/implant/Destroy()
 	if(part)

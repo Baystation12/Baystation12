@@ -337,7 +337,7 @@
 		return
 
 	if (istype(target, /obj/structure/inflatable))
-		if (!do_after(user, 0.5 SECONDS, target))
+		if (!do_after(user, 0.5 SECONDS, target, DO_PUBLIC_UNIQUE))
 			return
 		playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
 		var/obj/item/inflatable/I
@@ -359,7 +359,7 @@
 		)
 		if (I)
 			var/obj/structure/inflatable/S = target
-			I.health = S.health
+			copy_health(S, I)
 		qdel(target)
 
 	else if (istype(target, /obj/item/inflatable))
@@ -391,7 +391,7 @@
 		if (obstruction)
 			to_chat(user, SPAN_WARNING("\The [english_list(obstruction)] is blocking that spot."))
 			return
-		if (!do_after(user, 0.5 SECONDS))
+		if (!do_after(user, 0.5 SECONDS, T, DO_PUBLIC_UNIQUE))
 			return
 		obstruction = T.get_obstruction()
 		if (obstruction)
@@ -517,7 +517,7 @@
 		if(istype(A, /obj/item/reagent_containers/food/snacks/grown))
 			generating_power = base_power_generation
 			using_item = A
-		else 
+		else
 			for(var/fuel_type in fuel_types)
 				if(istype(A, fuel_type))
 					generating_power = fuel_types[fuel_type] * base_power_generation

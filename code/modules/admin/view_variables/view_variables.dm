@@ -1,7 +1,7 @@
 // Variables not to expand the lists of. Vars is pointless to expand, and overlays/underlays cannot be expanded.
-/var/list/view_variables_dont_expand = list("overlays", "underlays", "vars")
+var/global/list/view_variables_dont_expand = list("overlays", "underlays", "vars")
 // Variables that runtime if you try to test associativity of the lists they contain by indexing
-/var/list/view_variables_no_assoc = list("verbs", "contents","screen","images")
+var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","images")
 
 // Acceptable 'in world', as VV would be incredibly hampered otherwise
 /client/proc/debug_variables(datum/D in world)
@@ -13,6 +13,8 @@
 
 	if(!D)
 		return
+
+	var/static/cookieoffset = rand(1, 9999) //to force cookies to reset after the round.
 
 	var/icon/sprite
 	var/atom/A
@@ -34,7 +36,7 @@
 				.value { font-family: "Courier New", monospace; font-size: 8pt; }
 			</style>
 		</head>
-		<body onload='selectTextField(); updateSearch()'; onkeyup='updateSearch()'>
+		<body onload='selectTextField(\ref[D]); updateSearch(\ref[D])'; onkeyup='updateSearch(\ref[D])'>
 			<div align='center'>
 				<table width='100%'><tr>
 					<td width='50%'>
@@ -94,6 +96,11 @@
 			<ol id='vars'>
 				[make_view_variables_var_list(D)]
 			</ol>
+			<script type='text/javascript'>
+				var complete_list = \[\];
+				var lis = document.getElementById("vars").children;
+				for(var i = lis.length; i--;) complete_list\[i\] = lis\[i\];
+			</script>
 		</body>
 		</html>
 		"}

@@ -91,6 +91,7 @@
 	icon_state = "lava"
 	movement_delay = 4
 	dirt_color = COLOR_GRAY20
+	turf_flags = TURF_DISALLOW_BLOB
 	var/list/victims
 
 /turf/simulated/floor/exoplanet/lava/on_update_icon()
@@ -106,7 +107,7 @@
 
 /turf/simulated/floor/exoplanet/lava/Entered(atom/movable/AM)
 	..()
-	if(locate(/obj/structure/catwalk/) in src)
+	if(locate(/obj/structure/catwalk) in src)
 		return
 	var/mob/living/L = AM
 	if (istype(L) && L.can_overcome_gravity())
@@ -120,7 +121,7 @@
 	LAZYREMOVE(victims, weakref(AM))
 
 /turf/simulated/floor/exoplanet/lava/Process()
-	if(locate(/obj/structure/catwalk/) in src)
+	if(locate(/obj/structure/catwalk) in src)
 		victims = null
 		return PROCESS_KILL
 	for(var/weakref/W in victims)

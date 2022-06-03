@@ -3,8 +3,8 @@
 GLOBAL_DATUM_INIT(using_map, /datum/map, new using_map_DATUM)
 GLOBAL_LIST_EMPTY(all_maps)
 
-var/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
-var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
+var/global/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
+var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /hook/startup/proc/initialise_map_list()
 	for(var/type in subtypesof(/datum/map))
@@ -132,12 +132,13 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			HOME_SYSTEM_TAU_CETI,
 			HOME_SYSTEM_HELIOS,
 			HOME_SYSTEM_TERRA,
-			HOME_SYSTEM_TERSTEN,
-			HOME_SYSTEM_LORRIMAN,
-			HOME_SYSTEM_CINU,
-			HOME_SYSTEM_YUKLID,
-			HOME_SYSTEM_LORDANIA,
-			HOME_SYSTEM_KINGSTON,
+			HOME_SYSTEM_SAFFAR,
+			HOME_SYSTEM_PIRX,
+			HOME_SYSTEM_TADMOR,
+			HOME_SYSTEM_BRAHE,
+			HOME_SYSTEM_IOLAUS,
+			HOME_SYSTEM_FOSTER,
+			HOME_SYSTEM_CASTILLA,
 			HOME_SYSTEM_GAIA,
 			HOME_SYSTEM_MAGNITKA,
 			HOME_SYSTEM_OTHER
@@ -171,10 +172,12 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			CULTURE_HUMAN_SPACER,
 			CULTURE_HUMAN_SPAFRO,
 			CULTURE_HUMAN_CONFED,
+			CULTURE_HUMAN_GAIAN,
 			CULTURE_HUMAN_OTHER,
 			CULTURE_OTHER
 		),
 		TAG_RELIGION = list(
+			RELIGION_UNSTATED,
 			RELIGION_OTHER,
 			RELIGION_JUDAISM,
 			RELIGION_HINDUISM,
@@ -216,6 +219,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	// List of events specific to a map
 	var/list/map_event_container = list()
+
+	var/maint_all_access = FALSE
 
 /datum/map/New()
 	if(!map_levels)
@@ -472,11 +477,11 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	return // overriden by torch
 
 /datum/map/proc/make_maint_all_access(var/radstorm = 0) // parameter used by torch
-	maint_all_access = 1
+	maint_all_access = TRUE
 	priority_announcement.Announce("The maintenance access requirement has been revoked on all maintenance airlocks.", "Attention!")
 
 /datum/map/proc/revoke_maint_all_access(var/radstorm = 0) // parameter used by torch
-	maint_all_access = 0
+	maint_all_access = FALSE
 	priority_announcement.Announce("The maintenance access requirement has been readded on all maintenance airlocks.", "Attention!")
 
 // Access check is of the type requires one. These have been carefully selected to avoid allowing the janitor to see channels he shouldn't
@@ -570,20 +575,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 					data["offship_players"]++
 			else if(isghost(M))
 				data["ghosts"]++
-
-	if(data["clients"] > 0)
-		SSstatistics.set_field("round_end_clients",data["clients"])
-	if(data["ghosts"] > 0)
-		SSstatistics.set_field("round_end_ghosts",data["ghosts"])
-	if(data["surviving_humans"] > 0)
-		SSstatistics.set_field("survived_human",data["surviving_humans"])
-	if(data["surviving_total"] > 0)
-		SSstatistics.set_field("survived_total",data["surviving_total"])
-	if(data["escaped_humans"] > 0)
-		SSstatistics.set_field("escaped_human",data["escaped_humans"])
-	if(data["escaped_total"] > 0)
-		SSstatistics.set_field("escaped_total",data["escaped_total"])
-
 	return data
 
 /datum/map/proc/roundend_summary(list/data)

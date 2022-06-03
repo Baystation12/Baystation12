@@ -360,6 +360,13 @@
 	materials = list(MATERIAL_STEEL = 10000, MATERIAL_GLASS = 15000, MATERIAL_DIAMOND = 10000)
 	build_path = /obj/item/borg/upgrade/syndicate
 
+/datum/design/item/robot_upgrade/flash_protection
+	name = "Optical Matrix Shielding"
+	desc = "Provides shielding for the optical matrix, rendering the robot immune to flashes."
+	id = "borg_flash_protection_module"
+	materials = list(MATERIAL_STEEL = 80000, MATERIAL_GLASS = 6000, MATERIAL_GOLD = 5000)
+	build_path = /obj/item/borg/upgrade/flash_protection
+
 /datum/design/item/exosuit
 	build_type = MECHFAB
 	category = "Exosuit Equipment"
@@ -453,6 +460,12 @@
 	id   = "mech_sleeper"
 	build_path = /obj/item/mech_equipment/sleeper
 
+/datum/design/item/exosuit/mender
+	name = "mounted medigel spray"
+	id   = "mech_mender"
+	build_path = /obj/item/mech_equipment/mender
+	materials = list(MATERIAL_STEEL = 10000, MATERIAL_PLASTIC = 15000, MATERIAL_ALUMINIUM = 15000)
+
 /datum/design/item/exosuit/extinguisher
 	name = "mounted extinguisher"
 	id   = "mech_extinguisher"
@@ -481,6 +494,14 @@
 	materials = list(MATERIAL_STEEL = 20000, MATERIAL_ALUMINIUM = 10000, MATERIAL_PHORON = 2500)
 	req_tech = list(TECH_ENGINEERING = 2, TECH_MAGNET = 2)
 	build_path = /obj/item/mech_equipment/ionjets
+
+/datum/design/item/exosuit/mechshields/air
+	name = "exosuit atmospheric shields"
+	id = "mech_atmoshields"
+	time = 30
+	materials = list(MATERIAL_STEEL = 20000, MATERIAL_ALUMINIUM = 5000, MATERIAL_GLASS = 5000, MATERIAL_PHORON = 2500)
+	req_tech = list(TECH_ENGINEERING = 2, TECH_MAGNET = 2)
+	build_path = /obj/item/mech_equipment/atmos_shields
 // End mechs.
 
 /datum/design/item/synthetic_flash
@@ -498,17 +519,81 @@
 
 /datum/design/item/mechfab/augment/armblade
 	name = "Armblade"
-	build_path = /obj/item/organ/internal/augment/active/simple/armblade
+	build_path = /obj/item/organ/internal/augment/active/item/armblade
 	materials = list(DEFAULT_WALL_MATERIAL = 4000, "glass" = 750)
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 2, TECH_MATERIAL = 4, TECH_BIO = 3)
 	id = "augment_blade"
 
 /datum/design/item/mechfab/augment/armblade/wolverine
 	name = "Cyberclaws"
-	build_path = /obj/item/organ/internal/augment/active/simple/wolverine
+	build_path = /obj/item/organ/internal/augment/active/item/wolverine
 	materials = list(DEFAULT_WALL_MATERIAL = 6000, "diamond" = 250)
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4, TECH_MATERIAL = 4, TECH_BIO = 3)
 	id = "augment_wolverine"
+
+/datum/design/item/mechfab/augment/armblade/wrist_blade
+	name = "Wrist blade"
+	build_path = /obj/item/organ/internal/augment/active/item/wrist_blade
+	materials = list(MATERIAL_TITANIUM = 4000, MATERIAL_DIAMOND = 250)
+	req_tech = list(TECH_ESOTERIC = 4, TECH_COMBAT = 5, TECH_BIO = 3)
+	id = "augment_wristblade"
+
+/datum/design/item/mechfab/augment/powerfist
+	name = "Pneumatic Powerfist"
+	build_path = /obj/item/organ/internal/augment/active/item/powerfist
+	materials = list(DEFAULT_WALL_MATERIAL = 6000, MATERIAL_PHORON = 1000, MATERIAL_URANIUM = 500)
+	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4, TECH_MATERIAL = 4, TECH_BIO = 3)
+	id = "augment_powerfist"
+
+/datum/design/item/mechfab/augment/armblade/popout_shotgun
+	name = "Pop-out shotgun"
+	build_path = /obj/item/organ/internal/augment/active/item/popout_shotgun
+	materials = list(DEFAULT_WALL_MATERIAL = 5000, MATERIAL_SILVER = 500)
+	req_tech = list(TECH_ESOTERIC = 5, TECH_COMBAT = 6, TECH_BIO = 4)
+	id = "augment_popout_shotgun"
+
+/datum/design/item/mechfab/augment/corrective_lenses
+	name = "Corrective lenses"
+	build_path = /obj/item/organ/internal/augment/active/item/corrective_lenses
+	materials = list(DEFAULT_WALL_MATERIAL = 500, MATERIAL_GLASS = 1000)
+	req_tech = list(TECH_MATERIAL = 2)
+	id = "augment_corrective_lenses"
+
+/datum/design/item/mechfab/augment/glare_dampeners
+	name = "Glare dampeners"
+	build_path = /obj/item/organ/internal/augment/active/item/glare_dampeners
+	materials = list(DEFAULT_WALL_MATERIAL = 100, MATERIAL_GLASS = 2000)
+	req_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	id = "augment_glare_dampeners"
+
+/datum/design/item/mechfab/augment/adaptive_binoculars
+	name = "Adaptive binoculars"
+	build_path = /obj/item/organ/internal/augment/active/item/adaptive_binoculars
+	materials = list(MATERIAL_DIAMOND = 100, MATERIAL_GOLD = 100, MATERIAL_GLASS = 2000)
+	// We use decent requirements for this, because it allows someone to zoom in and grab ammo from an open container at the same time
+	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 4, TECH_COMBAT = 4)
+	id = "augment_adaptive_binoculars"
+
+/datum/design/item/mechfab/augment/iatric_monitor
+	name = "Iatric monitor"
+	build_path = /obj/item/organ/internal/augment/active/iatric_monitor
+	materials = list(DEFAULT_WALL_MATERIAL = 100, MATERIAL_GLASS = 2000)
+	req_tech = list(TECH_BIO = 3)
+	id = "augment_iatric_monitor"
+
+/datum/design/item/mechfab/augment/internal_air_system
+	name = "Internal air system"
+	build_path = /obj/item/organ/internal/augment/active/internal_air_system
+	materials = list(DEFAULT_WALL_MATERIAL = 500, MATERIAL_GLASS = 2000, MATERIAL_DIAMOND = 100)
+	req_tech = list(TECH_MATERIAL = 5, TECH_BIO = 5)
+	id = "augment_internal_air_system"
+
+/datum/design/item/mechfab/augment/leukocyte_breeder
+	name = "Leukocyte breeder"
+	build_path = /obj/item/organ/internal/augment/active/leukocyte_breeder
+	materials = list(DEFAULT_WALL_MATERIAL = 2000, MATERIAL_GLASS = 1000)
+	req_tech = list(TECH_MAGNET = 4, TECH_DATA = 4, TECH_BIO = 6)
+	id = "augment_leukocyte_breeder"
 
 /datum/design/item/mechfab/augment/engineering
 	name = "Engineering toolset"
@@ -569,6 +654,13 @@
 	req_tech = list(TECH_BIO = 1, TECH_MAGNET = 3)
 	id= "augment_jani_hud"
 
+/datum/design/item/mechfab/augment/hud/science
+	name = "Implantable science HUD"
+	build_path = /obj/item/organ/internal/augment/active/hud/science
+	materials = list(DEFAULT_WALL_MATERIAL = 250, "glass" = 250)
+	req_tech = list(TECH_BIO = 1, TECH_MAGNET = 3)
+	id= "augment_sci_hud"
+
 /datum/design/item/mechfab/augment/nanounit
 	name = "Nanite MCU"
 	build_path = /obj/item/organ/internal/augment/active/nanounit
@@ -578,10 +670,11 @@
 
 /datum/design/item/mechfab/augment/circuit
 	name = "Integrated circuit frame"
-	build_path = /obj/item/organ/internal/augment/active/simple/circuit
+	build_path = /obj/item/organ/internal/augment/active/item/circuit
 	materials = list(DEFAULT_WALL_MATERIAL = 3000)
 	id = "augment_circuitry"
 
+//BigRigs
 /datum/design/item/mechfab/rig/zero
 	category = "Hardsuits"
 	name = "Null suit control module"
@@ -589,3 +682,182 @@
 	materials = list(DEFAULT_WALL_MATERIAL = 30000, "glass" = 5000, "silver" = 1000)
 	id = "null _suit"
 	time = 120
+
+/datum/design/item/mechfab/rig/meson
+	category = "Hardsuits"
+	name = "Meson Scanner"
+	build_path = /obj/item/rig_module/vision/meson
+	materials = list(MATERIAL_STEEL = 100, MATERIAL_GLASS = 200, MATERIAL_PLASTIC = 300)
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 5)
+	id = "rig_meson"
+	sort_string = "WCAAA"
+
+/datum/design/item/mechfab/rig/medhud
+	category = "Hardsuits"
+	name = "Medical HUD"
+	build_path = /obj/item/rig_module/vision/medhud
+	materials = list(MATERIAL_STEEL = 100, MATERIAL_GLASS = 200,  MATERIAL_PLASTIC = 300)
+	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 2, TECH_ENGINEERING = 5)
+	id = "rig_medhud"
+	sort_string = "WCAAB"
+
+/datum/design/item/mechfab/rig/sechud
+	category = "Hardsuits"
+	name = "Security HUD"
+	build_path = /obj/item/rig_module/vision/sechud
+	materials = list(MATERIAL_STEEL = 100, MATERIAL_GLASS = 200,  MATERIAL_PLASTIC = 300)
+	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 2, TECH_ENGINEERING = 5)
+	id = "rig_sechud"
+	sort_string = "WCAAC"
+
+/datum/design/item/mechfab/rig/nvg
+	category = "Hardsuits"
+	name = "Night Vision"
+	build_path = /obj/item/rig_module/vision/nvg
+	materials = list(MATERIAL_PLASTIC = 500, MATERIAL_STEEL = 300, MATERIAL_GLASS = 200, MATERIAL_URANIUM = 200)
+	req_tech = list(TECH_MAGNET = 6, TECH_ENGINEERING = 6)
+	id = "rig_nvg"
+	sort_string = "WCAAD"
+
+/datum/design/item/mechfab/rig/healthscanner
+	category = "Hardsuits"
+	name = "Medical Scanner"
+	build_path = /obj/item/rig_module/device/healthscanner
+	materials = list(MATERIAL_PLASTIC = 1000, MATERIAL_STEEL = 700, MATERIAL_GLASS = 500)
+	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 3, TECH_ENGINEERING = 5)
+	id = "rig_healthscanner"
+	sort_string = "WCBAA"
+
+/datum/design/item/mechfab/rig/drill
+	category = "Hardsuits"
+	name = "Mining Drill"
+	build_path = /obj/item/rig_module/device/drill
+	materials = list(MATERIAL_STEEL = 3500, MATERIAL_GLASS = 1500, MATERIAL_DIAMOND = 2000, MATERIAL_PLASTIC = 1000)
+	req_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 6)
+	id = "rig_drill"
+	sort_string = "WCCAA"
+
+/datum/design/item/mechfab/rig/plasmacutter
+	category = "Hardsuits"
+	name = "Plasma Cutter"
+	build_path = /obj/item/rig_module/mounted/plasmacutter
+	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 1000, MATERIAL_PLASTIC = 1000, MATERIAL_GOLD = 700, MATERIAL_PHORON = 500)
+	req_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 6, TECH_COMBAT = 4)
+	id = "rig_plasmacutter"
+	sort_string = "VCCAB"
+
+/datum/design/item/mechfab/rig/orescanner
+	category = "Hardsuits"
+	name = "Ore Scanner"
+	build_path = /obj/item/rig_module/device/orescanner
+	materials = list(MATERIAL_PLASTIC = 1000, MATERIAL_STEEL = 800, MATERIAL_GLASS = 500)
+	req_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
+	id = "rig_orescanner"
+	sort_string = "WCDAA"
+
+/datum/design/item/mechfab/rig/anomaly_scanner
+	category = "Hardsuits"
+	name = "Anomaly Scanner"
+	build_path = /obj/item/rig_module/device/anomaly_scanner
+	materials = list(MATERIAL_PLASTIC = 1000, MATERIAL_STEEL = 800, MATERIAL_GLASS = 500)
+	req_tech = list(TECH_BLUESPACE = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
+	id = "rig_anomaly_scanner"
+	sort_string = "WCDAB"
+
+/datum/design/item/mechfab/rig/rcd
+	category = "Hardsuits"
+	name = "RCD Module"
+	build_path = /obj/item/rig_module/device/rcd
+	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 1000, MATERIAL_PLASTIC = 1000, MATERIAL_GOLD = 700, MATERIAL_SILVER = 700)
+	req_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 5, TECH_ENGINEERING = 7)
+	id = "rig_rcd"
+	sort_string = "WCEAA"
+
+/datum/design/item/mechfab/rig/jets
+	category = "Hardsuits"
+	name = "Maneuvering Jets"
+	build_path = /obj/item/rig_module/maneuvering_jets
+	materials = list(MATERIAL_STEEL = 3000, MATERIAL_PLASTIC = 2000, MATERIAL_GLASS = 1000)
+	req_tech = list(TECH_MATERIAL = 6,  TECH_ENGINEERING = 7)
+	id = "rig_jets"
+	sort_string = "WCFAA"
+
+/datum/design/item/mechfab/rig/decompiler
+	category = "Hardsuits"
+	name = "Matter Decompiler"
+	build_path = /obj/item/rig_module/device/decompiler
+	materials = list(MATERIAL_STEEL = 3000, MATERIAL_PLASTIC = 2000, MATERIAL_GLASS = 1000)
+	req_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5)
+	id = "rig_decompiler"
+	sort_string = "WCGAA"
+
+/datum/design/item/mechfab/rig/powersink
+	category = "Hardsuits"
+	name = "Power Sink"
+	build_path = /obj/item/rig_module/power_sink
+	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 2000, MATERIAL_GOLD = 1000, MATERIAL_PLASTIC = 1000)
+	req_tech = list(TECH_POWER = 6, TECH_ENGINEERING = 6)
+	id = "rig_powersink"
+	sort_string = "WCHAA"
+
+/datum/design/item/mechfab/rig/ai_container
+	category = "Hardsuits"
+	name = "AI Core Container"
+	build_path = /obj/item/rig_module/ai_container
+	materials = list(MATERIAL_STEEL = 1000, MATERIAL_GLASS = 1000, MATERIAL_PLASTIC = 1000, MATERIAL_GOLD = 500)
+	req_tech = list(TECH_DATA = 6, TECH_MATERIAL = 5, TECH_ENGINEERING = 6)
+	id = "rig_ai_container"
+	sort_string = "WCIAA"
+
+/datum/design/item/mechfab/rig/flash
+	category = "Hardsuits"
+	name = "Flash"
+	build_path = /obj/item/rig_module/device/flash
+	materials = list(MATERIAL_PLASTIC = 1500, MATERIAL_STEEL = 1000, MATERIAL_GLASS = 500)
+	req_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 3, TECH_ENGINEERING = 5)
+	id = "rig_flash"
+	sort_string = "WCJAA"
+
+/datum/design/item/mechfab/rig/taser
+	category = "Hardsuits"
+	name = "Electrolaser"
+	build_path = /obj/item/rig_module/mounted/taser
+	materials = list(MATERIAL_STEEL = 4000, MATERIAL_PLASTIC = 2500, MATERIAL_GLASS = 2000, MATERIAL_GOLD = 1000)
+	req_tech = list(TECH_POWER = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
+	id = "rig_taser"
+	sort_string = "WCKAA"
+
+/datum/design/item/mechfab/rig/egun
+	category = "Hardsuits"
+	name = "Energy Gun"
+	build_path = /obj/item/rig_module/mounted/egun
+	materials = list(MATERIAL_STEEL = 6000, MATERIAL_GLASS = 3000, MATERIAL_PLASTIC = 2500, MATERIAL_GOLD = 2000, MATERIAL_SILVER = 1000)
+	req_tech = list(TECH_POWER = 6, TECH_COMBAT = 6, TECH_ENGINEERING = 6)
+	id = "rig_egun"
+	sort_string = "WCKAB"
+/datum/design/item/mechfab/rig/enet
+	category = "Hardsuits"
+	name = "Energy Net"
+	build_path = /obj/item/rig_module/fabricator/energy_net
+	materials = list(MATERIAL_STEEL = 6000, MATERIAL_GLASS = 3000, MATERIAL_DIAMOND = 2000, MATERIAL_PLASTIC = 2000)
+	req_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 5, TECH_ESOTERIC = 4, TECH_ENGINEERING = 6)
+	id = "rig_enet"
+	sort_string = "WCKAC"
+
+/datum/design/item/mechfab/rig/stealth
+	category = "Hardsuits"
+	name = "Active Camouflage"
+	build_path = /obj/item/rig_module/stealth_field
+	materials = list(MATERIAL_STEEL = 6000, MATERIAL_GLASS = 3000, MATERIAL_DIAMOND = 2000, MATERIAL_SILVER = 2000, MATERIAL_URANIUM = 2000, MATERIAL_GOLD = 2000, MATERIAL_PLASTIC = 2000)
+	req_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 6, TECH_ESOTERIC = 6, TECH_ENGINEERING = 7)
+	id = "rig_stealth"
+	sort_string = "WCLAA"
+
+/datum/design/item/mechfab/rig/cooling_unit
+	category = "Hardsuits"
+	name = "Cooling Unit"
+	build_path = /obj/item/rig_module/cooling_unit
+	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 3500, MATERIAL_PLASTIC = 2000)
+	req_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 2, TECH_ENGINEERING = 5)
+	id = "rig_cooler"
+	sort_string = "WCLAB"

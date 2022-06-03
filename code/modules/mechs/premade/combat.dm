@@ -25,56 +25,14 @@
 	install_system(new /obj/item/mech_equipment/flash(src), HARDPOINT_LEFT_SHOULDER)
 	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_RIGHT_SHOULDER)
 
-/obj/item/mech_component/manipulators/combat
-	name = "combat arms"
-	exosuit_desc_string = "flexible, advanced manipulators"
-	icon_state = "combat_arms"
-	melee_damage = 5
-	action_delay = 10
-	power_use = 50
+/mob/living/exosuit/premade/combat/military
+	decal = "cammo1"
 
-/obj/item/mech_component/propulsion/combat
-	name = "combat legs"
-	exosuit_desc_string = "sleek hydraulic legs"
-	icon_state = "combat_legs"
-	move_delay = 3
-	turn_delay = 3
-	power_use = 20
+/mob/living/exosuit/premade/combat/military/alpine
+	decal = "cammo2"
 
-/obj/item/mech_component/sensors/combat
-	name = "combat sensors"
-	gender = PLURAL
-	exosuit_desc_string = "high-resolution thermal sensors"
-	icon_state = "combat_head"
-	vision_flags = SEE_MOBS
-	see_invisible = SEE_INVISIBLE_NOLIGHTING
-	power_use = 200
-
-/obj/item/mech_component/sensors/combat/prebuild()
-	..()
-	software = new(src)
-	software.installed_software = list(MECH_SOFTWARE_WEAPONS)
-
-/obj/item/mech_component/chassis/combat
-	name = "sealed exosuit chassis"
-	hatch_descriptor = "canopy"
-	pilot_coverage = 100
-	exosuit_desc_string = "an armoured chassis"
-	icon_state = "combat_body"
-	power_use = 40
-
-/obj/item/mech_component/chassis/combat/prebuild()
+/mob/living/exosuit/premade/combat/military/Initialize()
 	. = ..()
-	m_armour = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
+	for(var/obj/thing in list(arms,legs,head,body))
+		thing.color = COLOR_WHITE
 
-/obj/item/mech_component/chassis/combat/Initialize()
-	pilot_positions = list(
-		list(
-			"[NORTH]" = list("x" = 8,  "y" = 8),
-			"[SOUTH]" = list("x" = 8,  "y" = 8),
-			"[EAST]"  = list("x" = 4,  "y" = 8),
-			"[WEST]"  = list("x" = 12, "y" = 8)
-		)
-	)
-	
-	. = ..()

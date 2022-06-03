@@ -5,7 +5,7 @@
 	item_state = "flashbang"
 	det_time = 20
 
-/obj/item/grenade/light/detonate()
+/obj/item/grenade/light/detonate(mob/living/user)
 	..()
 	var/lifetime = rand(2 MINUTES, 4 MINUTES)
 	var/light_colour = pick("#49f37c", "#fc0f29", "#599dff", "#fa7c0b", "#fef923")

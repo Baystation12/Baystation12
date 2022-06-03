@@ -7,7 +7,7 @@
 	opacity = FALSE
 	anchored = FALSE
 	movement_handlers = list(/datum/movement_handler/deny_multiz, /datum/movement_handler/delay = list(5))
-	appearance_flags = PIXEL_SCALE
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
 
 	var/list/nymphs                  = list()
 	var/list/valid_things_to_roll_up = list(/mob/living/carbon/alien/diona = TRUE, /mob/living/carbon/alien/diona/sterile = TRUE)
@@ -29,12 +29,11 @@
 
 /obj/structure/diona_gestalt/on_update_icon()
 	overlays = list(eyes_overlay)
-	if(nymphs && nymphs.len)
-		var/matrix/M = matrix()
-		M.Scale(Clamp(nymphs.len * 0.1, 1, 2))
-		transform = M
+	if (length(nymphs))
+		SetTransform(scale = clamp(nymphs.len * 0.1, 1, 2))
 	else
-		transform = null
+		ClearTransform()
+
 
 /obj/structure/diona_gestalt/Destroy()
 	for(var/thing in contents)

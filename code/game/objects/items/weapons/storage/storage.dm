@@ -19,8 +19,13 @@
 	var/use_to_pickup	//Set this to make it possible to use this item in an inverse way, so you can have the item in your hand and click items on the floor to pick them up.
 	var/allow_quick_empty	//Set this variable to allow the object to have the 'empty' verb, which dumps all the contents on the floor.
 	var/allow_quick_gather	//Set this variable to allow the object to have the 'toggle mode' verb, which quickly collects all items from a tile.
+	///Allows dumping the contents of storage after a duration
+	var/allow_slow_dump
 	var/collection_mode = 1;  //0 = pick one at a time, 1 = pick all on tile
 	var/use_sound = "rustle"	//sound played when used. null for no sound.
+
+	///If true, will not permit use of the storage UI
+	var/virtual
 
 	//initializes the contents of the storage with some items based on an assoc list. The assoc key must be an item path,
 	//the assoc value can either be the quantity, or a list whose first value is the quantity and the rest are args.
@@ -91,6 +96,8 @@
 		storage_ui.hide_from(user)
 
 /obj/item/storage/proc/open(mob/user as mob)
+	if (virtual)
+		return
 	if(!opened)
 		playsound(src.loc, src.open_sound, 50, 0, -5)
 		opened = 1
@@ -155,7 +162,7 @@
 	//Bypassing storage procedures when not using help intent for labeler/forensic tools.
 	if((istype(W, /obj/item/hand_labeler) || istype(W, /obj/item/forensics)) && user.a_intent != I_HELP)
 		return FALSE
-	
+
 	// Don't allow insertion of unsafed compressed matter implants
 	// Since they are sucking something up now, their afterattack will delete the storage
 	if(istype(W, /obj/item/implanter/compressed))
@@ -347,6 +354,31 @@
 		remove_from_storage(I, T, 1)
 	finish_bulk_removal()
 
+/obj/item/storage/verb/dump_contents()
+	set name = "Dump Contents"
+	set category = "Object"
+
+	if ((!ishuman(usr) && (loc != usr)) || usr.stat || usr.restrained())
+		return
+
+	if ((src == usr.l_hand && usr.r_hand == null) || (src == usr.r_hand && usr.l_hand == null))
+		if (contents.len == 0)
+			to_chat(usr, SPAN_WARNING("\The [src] is already empty."))
+			return
+
+		var/turf/T = get_turf(src)
+		hide_from(usr)
+		usr.visible_message(SPAN_NOTICE("\The [usr] starts dumping out the contents of \the [src]."), SPAN_NOTICE("You begin dumping out the contents of \the [src]."))
+		if (do_after(usr, max(3 SECONDS, 1 SECONDS * contents.len), src, DO_PUBLIC_UNIQUE))
+			for(var/obj/item/I in contents)
+				remove_from_storage(I, T, 1)
+			finish_bulk_removal()
+			playsound(loc, use_sound, 50, 0, -5)
+			usr.visible_message(SPAN_WARNING("\The [usr] dumps out the contents of \the [src]!"), SPAN_WARNING("You dump out the contents of \the [src]!"))
+
+	else
+		to_chat(usr, SPAN_WARNING("You need to be holding \the [src] and have an empty hand to dump its contents!"))
+
 /obj/item/storage/Initialize()
 	. = ..()
 	if(allow_quick_empty)
@@ -358,6 +390,11 @@
 		verbs += /obj/item/storage/verb/toggle_gathering_mode
 	else
 		verbs -= /obj/item/storage/verb/toggle_gathering_mode
+
+	if (allow_slow_dump)
+		verbs += /obj/item/storage/verb/dump_contents
+	else
+		verbs -= /obj/item/storage/verb/dump_contents
 
 	if(isnull(max_storage_space) && !isnull(storage_slots))
 		max_storage_space = storage_slots*BASE_STORAGE_COST(max_w_class)
@@ -379,6 +416,20 @@
 					new item_path(src)
 		update_icon()
 
+/obj/item/storage/get_mechanics_info()
+	. = ..()
+
+	if (allow_slow_dump)
+		. += "<p>The contents of \the [src] can be dumped out onto the ground. \
+			Dumping the contents requires you to stand still briefly, but will then place all the items within \the [src] onto the ground where you're standing. \
+			It can be slower than removing a few items manually, however can be convenient if there are a large quantity of items that may be tedious to remove.</p>\
+			<p>To dump out \the [src]:</p>\
+			<ol>\
+				<li>Equip \the [src] in one of your hands, while having your other hand remain empty.</li>\
+				<li>Activate \the [src] by clicking it or using the hotkey in your active hand on HARM intent, or selecting the verb from \the [src]'s right-click menu or Object tab.</li>\
+				<li>Remain still for a short warm-up, which scales with the amount of items within \the [src].</li>\
+			</ol>"
+
 /obj/item/storage/emp_act(severity)
 	if(!istype(src.loc, /mob/living))
 		for(var/obj/O in contents)
@@ -390,6 +441,10 @@
 	if(user.get_active_hand() == src)
 		if(list_find(src.verbs, /obj/item/storage/verb/quick_empty))
 			src.quick_empty()
+			return 1
+
+		if (list_find(verbs, /obj/item/storage/verb/dump_contents) && user.a_intent == I_HURT)
+			dump_contents()
 			return 1
 
 /obj/item/storage/proc/make_exact_fit()

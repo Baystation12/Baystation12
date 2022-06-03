@@ -171,3 +171,13 @@
 		TAG_FACTION =   FACTION_TEST_SUBJECTS
 	)
 
+/datum/species/monkey/unathi/proc/handle_sugar(mob/living/carbon/human/M, datum/reagent/sugar, efficiency = 1)
+	var/effective_dose = efficiency * M.chem_doses[sugar.type]
+	if(effective_dose < 5)
+		return
+	M.druggy = max(M.druggy, 10)
+	M.add_chemical_effect(CE_PULSE, -1)
+	if(effective_dose > 15 && prob(7))
+		M.emote(pick("twitch", "drool"))
+	if(effective_dose > 20 && prob(10))
+		M.SelfMove(pick(GLOB.cardinal))

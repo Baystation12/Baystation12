@@ -16,6 +16,31 @@
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "kitchen supplies crate"
 
+
+/decl/hierarchy/supply_pack/galley/donkpocket
+	name = "General - Donk-Pocket Turnovers"
+	contains = list(
+		/obj/item/storage/box/donkpocket_protein = 2,
+		/obj/item/storage/box/donkpocket_vegetable = 2,
+		/obj/item/storage/box/donkpocket_fruit = 1,
+		/obj/item/storage/box/donkpocket_dessert = 1
+	)
+	cost = 10
+	containertype = /obj/item/storage/backpack/dufflebag
+	containername = "donk-pocket dufflebag"
+
+
+/decl/hierarchy/supply_pack/galley/donkpocket_premium
+	name = "General - Premium Donk-Pocket Turnovers"
+	contains = list(
+		/obj/item/storage/box/donkpocket_premium = 3
+	)
+	cost = 20
+	hidden = TRUE
+	containertype = /obj/item/storage/backpack/dufflebag
+	containername = "donk-pocket dufflebag"
+
+
 /decl/hierarchy/supply_pack/galley/beef
 	name = "Perishables - Beef"
 	contains = list(/obj/item/reagent_containers/food/snacks/meat/beef = 6)
@@ -40,10 +65,8 @@
 /decl/hierarchy/supply_pack/galley/seafood
 	name = "Perishables - Seafood"
 	contains = list(
-		/obj/item/reagent_containers/food/snacks/fish = 2,
-		/obj/item/reagent_containers/food/snacks/fish/shark = 2,
-		/obj/item/reagent_containers/food/snacks/fish/octopus = 2
-		)
+		/obj/random/fish = 8
+	)
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "seafood crate"
 	cost = 20
@@ -139,6 +162,7 @@
 	cost = 10
 	containername = "bar supplies crate"
 
+
 /decl/hierarchy/supply_pack/galley/beer_dispenser
 	name = "Equipment - Booze dispenser"
 	contains = list(
@@ -166,3 +190,13 @@
 	containertype = /obj/structure/largecrate
 	containername = "MRE dispenser crate"
 
+
+/decl/hierarchy/supply_pack/galley/silverware
+	name = "Equipment - Silver Cutlery"
+	cost = 50
+	containertype = /obj/structure/closet/crate/secure
+	containername = "silver cutlery crate"
+	access = access_kitchen
+	contains = list(
+		/obj/item/storage/box/silverware
+	)

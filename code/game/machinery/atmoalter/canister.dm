@@ -72,6 +72,12 @@
 	canister_color = "grey"
 	can_label = 0
 
+/obj/machinery/portable_atmospherics/canister/boron
+	name = "\improper Canister \[Boron\]"
+	icon_state = "brown"
+	canister_color = "brown"
+	can_label = 0
+
 /obj/machinery/portable_atmospherics/canister/air/airlock
 	start_pressure = 3 * ONE_ATMOSPHERE
 
@@ -244,7 +250,7 @@ update_flag
 	return 0
 
 /obj/machinery/portable_atmospherics/canister/bullet_act(var/obj/item/projectile/Proj)
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+	if (!(Proj.damage_type == DAMAGE_BRUTE || Proj.damage_type == DAMAGE_BURN))
 		return
 
 	if(Proj.damage)
@@ -429,7 +435,11 @@ update_flag
 	src.update_icon()
 	return 1
 
-
+/obj/machinery/portable_atmospherics/canister/boron/New()
+	..()
+	src.air_contents.adjust_gas(GAS_BORON, MolesForPressure())
+	src.update_icon()
+	return 1
 
 // Special types used for engine setup admin verb, they contain double amount of that of normal canister.
 /obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup/New()

@@ -141,7 +141,7 @@
 	affect_ingest(M, alien, removed)
 
 /datum/reagent/uranium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.apply_damage(5 * removed, IRRADIATE, armor_pen = 100)
+	M.apply_damage(5 * removed, DAMAGE_RADIATION, armor_pen = 100)
 
 /datum/reagent/uranium/touch_turf(var/turf/T)
 	if(volume >= 3)
@@ -351,7 +351,7 @@
 		qdel(hotspot)
 
 	if (environment && environment.temperature > min_temperature) // Abstracted as steam or something
-		var/removed_heat = between(0, volume * COOLANT_LATENT_HEAT, -environment.get_thermal_energy_change(min_temperature))
+		var/removed_heat = clamp(volume * COOLANT_LATENT_HEAT, 0, -environment.get_thermal_energy_change(min_temperature))
 		environment.add_thermal_energy(-removed_heat)
 		if (prob(5) && environment && environment.temperature > T100C)
 			T.visible_message("<span class='warning'>The water sizzles as it lands on \the [T]!</span>")
@@ -376,6 +376,13 @@
 	taste_description = "grass"
 	reagent_state = SOLID
 	color = WOOD_COLOR_PALE2
+
+/datum/reagent/resinpulp
+	name = "Resin Pulp"
+	description = "A mass of goopy resin."
+	taste_description = "gooey"
+	reagent_state = SOLID
+	color = "#3a4e1b"
 
 /datum/reagent/luminol
 	name = "Luminol"
@@ -505,8 +512,8 @@
 	taste_description = "bad choices"
 
 /datum/reagent/colored_hair_dye/proc/apply_dye_color(mob/living/carbon/human/H, red, green, blue)
-	if (H.h_style && H.species.appearance_flags & HAS_HAIR_COLOR)
-		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[H.h_style]
+	if (H.head_hair_style && H.species.appearance_flags & HAS_HAIR_COLOR)
+		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[H.head_hair_style]
 		if (~hair_style.flags & HAIR_BALD)
 			H.change_hair_color(red, green, blue)
 			H.change_facial_hair_color(red, green, blue)
@@ -523,27 +530,27 @@
 /datum/reagent/colored_hair_dye/red
 	name = "Red Hair Dye"
 	color = "#b33636"
-	
+
 /datum/reagent/colored_hair_dye/orange
 	name = "Orange Hair Dye"
 	color = "#b5772f"
-	
+
 /datum/reagent/colored_hair_dye/yellow
 	name = "Yellow Hair Dye"
 	color = "#a6a035"
-		
+
 /datum/reagent/colored_hair_dye/green
 	name = "Green Hair Dye"
 	color = "#61a834"
-	
+
 /datum/reagent/colored_hair_dye/blue
 	name = "Blue Hair Dye"
 	color = "#3470a8"
-	
+
 /datum/reagent/colored_hair_dye/purple
 	name = "Purple Hair Dye"
 	color = "#6d2d91"
-		
+
 /datum/reagent/colored_hair_dye/grey
 	name = "Grey Hair Dye"
 	color = "#696969"
@@ -569,4 +576,4 @@
 	description = "This hair dye can be any color! Only one way to find out what kind!"
 
 /datum/reagent/colored_hair_dye/chaos/affect_touch(mob/living/carbon/human/H, alien, removed)
-	apply_dye_color(H, RAND_F(1, 254), RAND_F(1, 254), RAND_F(1, 254))
+	apply_dye_color(H, Frand(1, 254), Frand(1, 254), Frand(1, 254))

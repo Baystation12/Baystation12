@@ -74,7 +74,7 @@
 	if(isturf(owner.loc)) //else, there's considered to be no light
 		var/turf/T = owner.loc
 		light_amount = T.get_lumcount() * 10
-	owner.set_nutrition(Clamp(owner.nutrition + light_amount, 0, 550))
+	owner.set_nutrition(clamp(owner.nutrition + light_amount, 0, 550))
 	owner.shock_stage -= light_amount
 
 /obj/item/organ/internal/diona/node/removed(var/mob/user)

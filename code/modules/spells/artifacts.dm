@@ -8,7 +8,7 @@
 	throw_speed = 3
 	throw_range = 7
 	throwforce = 10
-	damtype = BURN
+	damtype = DAMAGE_BURN
 	force = 10
 	hitsound = 'sound/magic/forcewall.ogg'
 

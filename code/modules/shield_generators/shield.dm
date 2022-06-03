@@ -19,7 +19,9 @@
 	else
 		set_opacity(0)
 
-	if(gen && gen.check_flag(MODEFLAG_OVERCHARGE))
+	if (!gen)
+		color = COLOR_RED_LIGHT
+	else if (gen.check_flag(MODEFLAG_OVERCHARGE))
 		color = COLOR_VIOLET
 	else
 		color = COLOR_DEEP_SKY_BLUE
@@ -35,6 +37,15 @@
 /obj/effect/shield/New()
 	..()
 	update_nearby_tiles()
+
+
+/obj/effect/shield/Initialize(mapload, obj/machinery/power/shield_generator/new_gen)
+	. = ..(mapload)
+
+	if (QDELETED(new_gen))
+		log_debug(append_admin_tools("Shield effect ([name]) was created without a valid generator in [get_area(src)].", location = get_turf(src)))
+		return INITIALIZE_HINT_QDEL
+	gen = new_gen
 
 
 /obj/effect/shield/Destroy()
@@ -82,6 +93,9 @@
 
 
 /obj/effect/shield/proc/diffuse(var/duration)
+	if (!gen)
+		return
+
 	// The shield is trying to counter diffusers. Cause lasting stress on the shield.
 	if(gen.check_flag(MODEFLAG_BYPASS) && !disabled_for)
 		take_damage(duration * rand(8, 12), SHIELD_DAMTYPE_EM)
@@ -97,7 +111,7 @@
 
 /obj/effect/shield/attack_generic(var/source, var/damage, var/emote)
 	take_damage(damage, SHIELD_DAMTYPE_PHYSICAL)
-	if(gen.check_flag(MODEFLAG_OVERCHARGE) && istype(source, /mob/living/))
+	if(gen?.check_flag(MODEFLAG_OVERCHARGE) && istype(source, /mob/living))
 		overcharge_shock(source)
 	..(source, damage, emote)
 
@@ -170,13 +184,14 @@
 
 
 /obj/effect/shield/c_airblock(turf/other)
-	return gen.check_flag(MODEFLAG_ATMOSPHERIC) ? BLOCKED : 0
+	return gen?.check_flag(MODEFLAG_ATMOSPHERIC) ? BLOCKED : 0
 
 
 // EMP. It may seem weak but keep in mind that multiple shield segments are likely to be affected.
 /obj/effect/shield/emp_act(var/severity)
 	if(!disabled_for)
 		take_damage(rand(30,60) / severity, SHIELD_DAMTYPE_EM)
+	..()
 
 
 // Explosions
@@ -193,9 +208,9 @@
 
 // Projectiles
 /obj/effect/shield/bullet_act(var/obj/item/projectile/proj)
-	if(proj.damage_type == BURN)
+	if (proj.damage_type == DAMAGE_BURN)
 		take_damage(proj.get_structure_damage(), SHIELD_DAMTYPE_HEAT)
-	else if (proj.damage_type == BRUTE)
+	else if (proj.damage_type == DAMAGE_BRUTE)
 		take_damage(proj.get_structure_damage(), SHIELD_DAMTYPE_PHYSICAL)
 	else
 		take_damage(proj.get_structure_damage(), SHIELD_DAMTYPE_EM)
@@ -208,9 +223,9 @@
 
 	if(gen.check_flag(MODEFLAG_HYPERKINETIC))
 		user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [I]!</span>")
-		if(I.damtype == BURN)
+		if (I.damtype == DAMAGE_BURN)
 			take_damage(I.force, SHIELD_DAMTYPE_HEAT)
-		else if (I.damtype == BRUTE)
+		else if (I.damtype == DAMAGE_BRUTE)
 			take_damage(I.force, SHIELD_DAMTYPE_PHYSICAL)
 		else
 			take_damage(I.force, SHIELD_DAMTYPE_EM)
@@ -303,7 +318,7 @@
 
 // Small visual effect, makes the shield tiles brighten up by changing color for a moment, and spreads to nearby shields.
 /obj/effect/shield/proc/impact_effect(var/i, var/list/affected_shields = list())
-	i = between(1, i, 10)
+	i = clamp(i, 1, 10)
 	var/backcolor = color
 	if(gen && gen.check_flag(MODEFLAG_OVERCHARGE))
 		color = COLOR_PINK

@@ -32,7 +32,7 @@
 			var/slot = armor_pieces[piece]
 			drop_piece(piece)
 			user.drop_from_inventory(user.get_equipped_item(slot))
-			user.equip_to_slot_if_possible(piece,slot,0,1,1,1)
+			user.equip_to_slot_if_possible(piece, slot, TRYEQUIP_REDRAW | TRYEQUIP_SILENT | TRYEQUIP_FORCE)
 	else
 		for(var/piece in armor_pieces)
 			var/obj/item/I = piece

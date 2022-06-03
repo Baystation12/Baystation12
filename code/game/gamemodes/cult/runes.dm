@@ -167,7 +167,7 @@
 		showOptions(user)
 	else if(user.loc == get_turf(src))
 		speak_incantation(user, "Sas[pick("'","`")]so c'arta forbici!")
-		if(do_after(user, 30))
+		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			user.visible_message("<span class='warning'>\The [user] disappears in a flash of red light!</span>", "<span class='warning'>You feel as your body gets dragged into the dimension of Nar-Sie!</span>", "You hear a sickening crunch.")
 			user.forceMove(src)
 			showOptions(user)
@@ -240,15 +240,15 @@
 /obj/effect/rune/wall/cast(var/mob/living/user)
 	var/t
 	if(wall)
-		if(wall.health >= wall.max_health)
+		if(!wall.health_damaged())
 			to_chat(user, "<span class='notice'>The wall doesn't need mending.</span>")
 			return
-		t = wall.max_health - wall.health
-		wall.health += t
+		t = wall.get_damage_value()
+		wall.restore_health()
 	else
 		wall = new /obj/effect/cultwall(get_turf(src), bcolor)
 		wall.rune = src
-		t = wall.health
+		t = wall.get_current_health()
 	user.remove_blood_simple(t / 50)
 	speak_incantation(user, "Khari[pick("'","`")]d! Eske'te tannin!")
 	to_chat(user, "<span class='warning'>Your blood flows into the rune, and you feel that the very space over the rune thickens.</span>")
@@ -263,12 +263,10 @@
 	density = TRUE
 	unacidable = TRUE
 	var/obj/effect/rune/wall/rune
-	var/health
-	var/max_health = 200
+	health_max = 200
 
 /obj/effect/cultwall/New(var/loc, var/bcolor)
 	..()
-	health = max_health
 	if(bcolor)
 		color = bcolor
 
@@ -278,15 +276,10 @@
 		rune = null
 	return ..()
 
-/obj/effect/cultwall/examine(mob/user)
-	. = ..()
-	if(iscultist(user))
-		if(health == max_health)
-			to_chat(user, "<span class='notice'>It is fully intact.</span>")
-		else if(health > max_health * 0.5)
-			to_chat(user, "<span class='warning'>It is damaged.</span>")
-		else
-			to_chat(user, "<span class='danger'>It is about to dissipate.</span>")
+/obj/effect/cultwall/examine_damage_state(mob/user)
+	if (!iscultist(user))
+		return
+	..()
 
 /obj/effect/cultwall/attack_hand(var/mob/living/user)
 	if(iscultist(user))
@@ -296,26 +289,16 @@
 		to_chat(user, "<span class='notice'>You touch \the [src]. It feels wet and becomes harder the further you push your arm.</span>")
 
 /obj/effect/cultwall/attackby(var/obj/item/I, var/mob/living/user)
-	if(istype(I, /obj/item/nullrod))
+	if (istype(I, /obj/item/nullrod))
 		user.visible_message("<span class='notice'>\The [user] touches \the [src] with \the [I], and it disappears.</span>", "<span class='notice'>You disrupt the vile magic with the deadening field of \the [I].</span>")
 		qdel(src)
-	else if(I.force)
-		user.visible_message("<span class='notice'>\The [user] hits \the [src] with \the [I].</span>", "<span class='notice'>You hit \the [src] with \the [I].</span>")
-		take_damage(I.force)
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		user.do_attack_animation(src)
-
-/obj/effect/cultwall/bullet_act(var/obj/item/projectile/Proj)
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
-	take_damage(Proj.damage)
+
 	..()
 
-/obj/effect/cultwall/proc/take_damage(var/amount)
-	health -= amount
-	if(health <= 0)
-		visible_message("<span class='warning'>\The [src] dissipates.</span>")
-		qdel(src)
+/obj/effect/cultwall/on_death()
+	visible_message(SPAN_WARNING("\The [src] dissipates."))
+	qdel (src)
 
 /obj/effect/rune/ajorney
 	cultname = "astral journey"

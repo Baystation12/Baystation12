@@ -22,6 +22,7 @@
 	closed_layer = ABOVE_WINDOW_LAYER
 	movable_flags = MOVABLE_FLAG_Z_INTERACT
 	pry_mod = 0.75
+	atom_flags = ATOM_FLAG_ADJACENT_EXCEPTION
 	var/locked = FALSE //If the door is forced open, it will not close again until the next atmosphere alert in the area
 
 	//These are frequently used with windows, so make sure zones can pass.
@@ -212,7 +213,7 @@
 				SPAN_ITALIC("You hear welding.")
 			)
 			playsound(loc, 'sound/items/Welder.ogg', 50, TRUE)
-			if(do_after(user, 2 SECONDS, src))
+			if(do_after(user, 2 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				if(!W.isOn())
 					return
 				blocked = !blocked
@@ -246,7 +247,7 @@
 				SPAN_ITALIC("You hear metal bumping against metal.")
 			)
 			playsound(loc, 'sound/items/Crowbar.ogg', 100, TRUE)
-			if(do_after(user, 30, src))
+			if(do_after(user, 3 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				if(blocked && density && hatch_open)
 					playsound(loc, 'sound/items/Deconstruct.ogg', 100, TRUE)
 					user.visible_message(
@@ -284,7 +285,7 @@
 			SPAN_WARNING("You hear metal groaning and grinding!")
 		)
 		playsound(loc, 'sound/machines/airlock_creaking.ogg', 100, TRUE)
-		if(do_after(user, 30, src))
+		if(do_after(user, 3 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 			if(isCrowbar(C))
 				if(stat & (BROKEN|NOPOWER) || !density)
 					user.visible_message(
@@ -429,7 +430,7 @@
 					SPAN_DANGER("\The [src] forcefully shoves you out of the way!"),
 					SPAN_WARNING("You hear metal smacking into something.")
 				)
-				M.apply_damage(10, BRUTE, used_weapon = src)
+				M.apply_damage(10, DAMAGE_BRUTE, used_weapon = src)
 				if(direction)
 					M.Move(get_step(src, direction))
 	playsound(loc, close_sound, 25, TRUE)
@@ -517,7 +518,7 @@
 			for(var/d=1; d<=4; d++)
 				var/cdir = GLOB.cardinal[d]
 				for(var/i=1; i<=ALERT_STATES.len; i++)
-					if(dir_alerts[d] & (1 << (i - 1)))
+					if(dir_alerts[d] & SHIFTL(1, (i - 1)))
 						overlays += new/icon(icon, "alert_[ALERT_STATES[i]]", dir = cdir)
 						do_set_light = TRUE
 	else

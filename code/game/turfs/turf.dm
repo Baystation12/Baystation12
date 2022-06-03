@@ -36,6 +36,12 @@
 
 	var/tmp/changing_turf
 
+	/// List of 'dangerous' objs that the turf holds that can cause something bad to happen when stepped on, used for AI mobs.
+	var/list/dangerous_objects
+
+	var/has_dense_atom
+	var/has_opaque_atom
+
 /turf/Initialize(mapload, ...)
 	. = ..()
 	if(dynamic_lighting)
@@ -79,14 +85,11 @@
 	if (z_flags & ZM_MIMIC_BELOW)
 		cleanup_zmimic()
 
-	if (bound_overlay)
-		QDEL_NULL(bound_overlay)
+	if (mimic_proxy)
+		QDEL_NULL(mimic_proxy)
 
 	..()
 	return QDEL_HINT_IWILLGC
-
-/turf/ex_act(severity)
-	return 0
 
 /turf/proc/is_solid_structure()
 	return 1
@@ -121,7 +124,7 @@
 	if(Adjacent(user))
 		attack_hand(user)
 
-turf/attackby(obj/item/W as obj, mob/user as mob)
+/turf/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/storage))
 		var/obj/item/storage/S = W
 		if(S.use_to_pickup && S.collection_mode)
@@ -169,7 +172,7 @@ turf/attackby(obj/item/W as obj, mob/user as mob)
 				return 0
 	return 1 //Nothing found to block so return success!
 
-var/const/enterloopsanity = 100
+var/global/const/enterloopsanity = 100
 /turf/Entered(var/atom/atom, var/atom/old_loc)
 
 	..()
@@ -215,7 +218,7 @@ var/const/enterloopsanity = 100
 
 /turf/proc/inertial_drift(atom/movable/A)
 	if(!(A.last_move))	return
-	if((istype(A, /mob/) && src.x > 2 && src.x < (world.maxx - 1) && src.y > 2 && src.y < (world.maxy-1)))
+	if((ismob(A) && src.x > 2 && src.x < (world.maxx - 1) && src.y > 2 && src.y < (world.maxy-1)))
 		var/mob/M = A
 		if(M.Allow_Spacemove(1)) //if this mob can control their own movement in space then they shouldn't be drifting
 			M.inertia_dir  = 0
@@ -275,7 +278,7 @@ var/const/enterloopsanity = 100
 //expects an atom containing the reagents used to clean the turf
 /turf/proc/clean(atom/source, mob/user = null, var/time = null, var/message = null)
 	if(source.reagents.has_reagent(/datum/reagent/water, 1) || source.reagents.has_reagent(/datum/reagent/space_cleaner, 1))
-		if(user && time && !do_after(user, time, src))
+		if(user && time && !do_after(user, time, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 			return
 		clean_blood()
 		remove_cleanables()
@@ -310,7 +313,7 @@ var/const/enterloopsanity = 100
 		var/intial_dir = TT.init_dir
 		spawn(2)
 			step(AM, turn(intial_dir, 180))
-				
+
 /turf/proc/can_engrave()
 	return FALSE
 
@@ -339,7 +342,7 @@ var/const/enterloopsanity = 100
 
 	vandal.visible_message("<span class='warning'>\The [vandal] begins carving something into \the [src].</span>")
 
-	if(!do_after(vandal, max(20, length(message)), src))
+	if(!do_after(vandal, max(20, length(message)), src, DO_PUBLIC_UNIQUE))
 		return FALSE
 
 	vandal.visible_message("<span class='danger'>\The [vandal] carves some graffiti into \the [src].</span>")
@@ -371,3 +374,70 @@ var/const/enterloopsanity = 100
 		var/atom/movable/AM = thing
 		if (AM.simulated && AM.blocks_airlock())
 			LAZYADD(., AM)
+
+/**
+ * Returns false if stepping into a tile would cause harm (e.g. open space while unable to fly, water tile while a slime, lava, etc).
+ */
+/turf/proc/is_safe_to_enter(mob/living/L)
+	if(LAZYLEN(dangerous_objects))
+		for(var/obj/O in dangerous_objects)
+			if(!O.is_safe_to_step(L))
+				return FALSE
+	return TRUE
+
+/**
+ * Tells the turf that it currently contains something that automated movement should consider if planning to enter the tile.
+ * This uses lazy list macros to reduce memory footprint since for 99% of turfs the list would've been empty anyway.
+ */
+/turf/proc/register_dangerous_object(obj/O)
+	if(!istype(O))
+		return FALSE
+	LAZYADD(dangerous_objects, O)
+
+/**
+ * Similar to `register_dangerous_object()`, for when the dangerous object stops being dangerous/gets deleted/moved/etc.
+ */
+/turf/proc/unregister_dangerous_object(obj/O)
+	if(!istype(O))
+		return FALSE
+	LAZYREMOVE(dangerous_objects, O)
+	UNSETEMPTY(dangerous_objects) // This nulls the list var if it's empty.
+
+/turf/proc/is_dense()
+	if (density)
+		return TRUE
+	if (isnull(has_dense_atom))
+		has_dense_atom = FALSE
+		if (contains_dense_objects())
+			has_dense_atom = TRUE
+	return has_dense_atom
+
+/turf/proc/is_opaque()
+	if (opacity)
+		return TRUE
+	if (isnull(has_opaque_atom))
+		has_opaque_atom = FALSE
+		for (var/atom/A in contents)
+			if (A.opacity)
+				has_opaque_atom = TRUE
+				break
+	return has_opaque_atom
+
+/turf/Entered(atom/movable/AM)
+	. = ..()
+	if (istype(AM))
+		if (AM.density)
+			has_dense_atom = TRUE
+		if (AM.opacity)
+			has_opaque_atom = TRUE
+
+/turf/Exited(atom/movable/AM, atom/newloc)
+	. = ..()
+	if (istype(AM))
+		if(AM.density)
+			has_dense_atom = null
+		if (AM.opacity)
+			has_opaque_atom = null
+	else
+		has_dense_atom = null
+		has_opaque_atom = null

@@ -2,14 +2,6 @@
 	..()
 	name = "Bluespace device ([item_name])"
 
-/datum/design/item/bluespace/beacon
-	name = "tracking beacon"
-	id = "beacon"
-	req_tech = list(TECH_BLUESPACE = 1)
-	materials = list (MATERIAL_ALUMINIUM = 20, MATERIAL_GLASS = 10)
-	build_path = /obj/item/device/radio/beacon
-	sort_string = "VADAA"
-
 /datum/design/item/bluespace/gps
 	name = "triangulating device"
 	desc = "Triangulates approximate co-ordinates using a nearby satellite network."

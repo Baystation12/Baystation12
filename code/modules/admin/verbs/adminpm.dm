@@ -7,7 +7,6 @@
 		return
 	if( !ismob(M) || !M.client )	return
 	cmd_admin_pm(M.client,null)
-	SSstatistics.add_field_details("admin_verb","APMM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 //shows a list of clients we could send PMs to, then forwards our choice to cmd_admin_pm
 /client/proc/cmd_admin_pm_panel()
@@ -30,7 +29,6 @@
 	var/list/sorted = sortList(targets)
 	var/target = input(src,"To whom shall we send a message?","Admin PM",null) in sorted|null
 	cmd_admin_pm(targets[target],null)
-	SSstatistics.add_field_details("admin_verb","APM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
 //takes input from cmd_admin_pm_context, cmd_admin_pm_panel or /client/Topic and sends them a PM.
@@ -130,7 +128,7 @@
 	//play the receiving admin the adminhelp sound (if they have them enabled)
 	//non-admins shouldn't be able to disable this
 	if(C.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == GLOB.PREF_HEAR)
-		sound_to(C, 'sound/effects/adminhelp.ogg')
+		sound_to(C, 'sound/misc/staff_message.ogg')
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
 	adminmsg2adminirc(src, C, html_decode(msg))
@@ -139,7 +137,7 @@
 	update_ticket_panels()
 
 	//we don't use message_admins here because the sender/receiver might get it too
-	for(var/client/X in GLOB.admins)
+	for(var/client/X as anything in GLOB.admins)
 		//check client/X is an admin and isn't the sender or recipient
 		if(X == C || X == src)
 			continue
@@ -162,12 +160,13 @@
 //		to_chat(src, "<span class='notice'>[msg]</span>")
 //		return
 
-	log_admin("PM: [key_name(src)]->IRC-[sender]: [msg]")
 	adminmsg2adminirc(src, sender, html_decode(msg))
+	msg = sanitize(msg)
+	log_admin("PM: [key_name(src)]->IRC-[sender]: [msg]")
 	admin_pm_repository.store_pm(src, "IRC-[sender]", msg)
 
 	to_chat(src, "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[sender]</span>: <span class='message linkify'>[msg]</span></span></span>")
-	for(var/client/X in GLOB.admins)
+	for(var/client/X as anything in GLOB.admins)
 		if(X == src)
 			continue
 		if(X.holder.rights & R_ADMIN|R_MOD)

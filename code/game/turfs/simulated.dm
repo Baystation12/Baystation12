@@ -107,7 +107,7 @@
 
 		if(src.wet)
 
-			if(M.buckled || (MOVING_DELIBERATELY(M) && prob(min(100, 100/(wet/10))) ) )
+			if(M.buckled || (!MOVING_QUICKLY(M) && prob(min(100, 100/(wet/10))) ) )
 				return
 
 			// skillcheck for slipping
@@ -124,13 +124,16 @@
 				slip_stun = 10
 
 			if(M.slip("the [floor_type] floor", slip_stun))
-				for(var/i = 1 to slip_dist)
-					step(M, M.dir)
-					sleep(1)
+				addtimer(CALLBACK(M, /mob/proc/slip_handler, M.dir, slip_dist - 1, 1), 1)
 			else
 				M.inertia_dir = 0
 		else
 			M.inertia_dir = 0
+
+/mob/proc/slip_handler(dir, dist, delay)
+	if (dist > 0)
+		addtimer(CALLBACK(src, .proc/slip_handler, dir, dist - 1, delay), delay)
+	step(src, dir)
 
 //returns 1 if made bloody, returns 0 otherwise
 /turf/simulated/add_blood(mob/living/carbon/human/M as mob)
@@ -169,4 +172,9 @@
 /turf/simulated/Initialize()
 	if(GAME_STATE >= RUNLEVEL_GAME)
 		fluid_update()
+	. = ..()
+
+/turf/simulated/damage_health(damage, damage_type, damage_flags, severity)
+	if (HAS_FLAGS(damage_flags, DAMAGE_FLAG_TURF_BREAKER))
+		damage *= 4
 	. = ..()

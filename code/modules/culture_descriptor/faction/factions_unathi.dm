@@ -3,14 +3,14 @@
 	description = "Headed by the so-called Council of Honourable light, the seats of the Hegemony are taken by the kaahnepos of the major clans and Krukzuz. \
 	The Hegemony's formal purpose is the promotion of unathi interests in trade and diplomacy with other species. In practice, this has often resulted \
 	in the reinforcement of city-states in the emerging market of off-world commerce."
-	
+
 /decl/cultural_info/faction/unathi/ssen_uuma
 	name = FACTION_UNATHI_SSEN_UUMA
 	description = "Established in 2257 by a group of prominent Diamond Peak Kaahnepos, the Ssen-Uuma Convent seeks to ensure the preservation of the \
 	established order, well-being, and independence of Moghes. This is done by protecting it from harmful influence and possible aggression of more \
 	developed alien races. Essentially a military alliance between major clans of the area, administered by a strictly ranked General Staff. Ssen-Uuma \
 	gathers military and political intelligence on alien empires, purchases modern equipment and supports unathi mercenaries operating off Moghes. \
-	They seek closer ties to the powerhouses of the region in the form of alien government agencies and corporations." 
+	They seek closer ties to the powerhouses of the region in the form of alien government agencies and corporations."
 
 /decl/cultural_info/faction/unathi/baask
 	name = FACTION_UNATHI_BAASK
@@ -36,17 +36,9 @@
 	name = FACTION_UNATHI_KHARZA
 	description = "The Kharza fleet pride themselves on their mastery of the sea, their prowess seemingly unmatched. Hailing from some of the earliest \
 	seafaring explorers, the Kharza put themselves at the forefront of Yeosa sea exploration. Today, they run a massive trade route spanning the entire \
-	Moghes continent. Many coastal Yeosa and even some Sinta clans rely on the Kharza for their efficient and prominent trade routes." 
-
-/decl/cultural_info/faction/unathi/tersten
-	name = FACTION_UNATHI_TERSTEN_HEGEMONY
-	description = "The Tersten Hegemony was formed as a result of the clans that have taken residence on Tersten. Its primary focus, much like the Moghes Hegemony, \
-	is to promote unathi interests in trade and diplomacy. However, most if not all clans that have settled on Tersten have joined the Hegemony with their \
-	kaahnepos seated as members of the council. The Tersten Hegemony enjoys a great deal of peace with the Tersten people. Most issues between the clans \
-	and the Tersten government are handled through the Hegemony, acting in the interests of maintaining their relationship with Tersten."
+	Moghes continent. Many coastal Yeosa and even some Sinta clans rely on the Kharza for their efficient and prominent trade routes."
 
 /decl/cultural_info/faction/unathi/independent
 	name = FACTION_UNATHI_INDEPENDENT
 	description = "The number of clans and alliances on Moghes is too numerous to name. You are either from an independent clan, are a lone outcast, or are \
 	part of a Krukzuz. Whatever the case, you are not affiliated with the Hegemony or one of the large unathi factions listed."
-	

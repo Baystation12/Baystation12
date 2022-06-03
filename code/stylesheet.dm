@@ -1,4 +1,4 @@
-client/script = {"<style>
+/client/script = {"<style>
 body					{font-family: Verdana, sans-serif;}
 
 h1, h2, h3, h4, h5, h6	{color: #0000ff;font-family: Georgia, Verdana, sans-serif;}
@@ -130,5 +130,17 @@ h1.alert, h2.alert		{color: #000080;}
 .bad                    {color: #ee0000; font-weight: bold;}
 
 BIG IMG.icon 			{width: 32px; height: 32px;}
+
+/* Admin: Misc */
+.who_dead				{color: #000000;}
+.who_observing			{color: #808080;}
+.who_new_account		{color: #ff0000;}
+.who_newish_account		{color: #ff8c00;}
+.who_new_account		{color: #000000;}
+.who_antag				{color: #ff0000;}
+
+/* Admin: PM */
+.pm						{color: #ff0000;}
+.staff_pm				{color: #0000FF;}
 
 </style>"}

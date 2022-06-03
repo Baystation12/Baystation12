@@ -207,6 +207,10 @@ TORCH_ESCAPE_POD(17)
 	name = "East of Bridge"
 	landmark_tag = "nav_merc_deck5"
 
+/obj/effect/shuttle_landmark/vox_raider/dock
+	name = "4th Deck, Aft Starboard Airlock"
+	landmark_tag = "nav_vox_raider_dock"
+
 //Skipjack
 /datum/shuttle/autodock/multi/antag/skipjack
 	destination_tags = list(
@@ -345,45 +349,45 @@ TORCH_ESCAPE_POD(17)
 /datum/shuttle/autodock/overmap/exploration_shuttle
 	name = "Charon"
 	move_time = 90
-	shuttle_area = list(/area/exploration_shuttle/cockpit, /area/exploration_shuttle/atmos, /area/exploration_shuttle/power, /area/exploration_shuttle/crew, /area/exploration_shuttle/cargo, /area/exploration_shuttle/airlock)
-	dock_target = "calypso_shuttle"
-	current_location = "nav_hangar_calypso"
-	landmark_transition = "nav_transit_calypso"
+	shuttle_area = list(/area/exploration_shuttle/cockpit, /area/exploration_shuttle/atmos, /area/exploration_shuttle/power, /area/exploration_shuttle/crew, /area/exploration_shuttle/cargo, /area/exploration_shuttle/airlock, /area/exploration_shuttle/medical, /area/exploration_shuttle/fuel)
+	dock_target = "charon_shuttle"
+	current_location = "nav_hangar_charon"
+	landmark_transition = "nav_transit_charon"
 	range = 1
 	fuel_consumption = 4
-	logging_home_tag = "nav_hangar_calypso"
+	logging_home_tag = "nav_hangar_charon"
 	logging_access = access_expedition_shuttle_helm
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/torch
 
 /obj/effect/shuttle_landmark/torch/hangar/exploration_shuttle
 	name = "Charon Hangar"
-	landmark_tag = "nav_hangar_calypso"
+	landmark_tag = "nav_hangar_charon"
 	base_area = /area/quartermaster/hangar
 	base_turf = /turf/simulated/floor/plating
 
 /obj/effect/shuttle_landmark/torch/deck1/exploration_shuttle
 	name = "Space near Forth Deck"
-	landmark_tag = "nav_deck1_calypso"
+	landmark_tag = "nav_deck1_charon"
 
 /obj/effect/shuttle_landmark/torch/deck2/exploration_shuttle
 	name = "Space near Third Deck"
-	landmark_tag = "nav_deck2_calypso"
+	landmark_tag = "nav_deck2_charon"
 
 /obj/effect/shuttle_landmark/torch/deck3/exploration_shuttle
 	name = "Space near Second Deck"
-	landmark_tag = "nav_deck3_calypso"
+	landmark_tag = "nav_deck3_charon"
 
 /obj/effect/shuttle_landmark/torch/deck4/exploration_shuttle
 	name = "Space near First Deck"
-	landmark_tag = "nav_deck4_calypso"
+	landmark_tag = "nav_deck4_charon"
 
 /obj/effect/shuttle_landmark/torch/deck5/exploration_shuttle
 	name = "Space near Bridge"
-	landmark_tag = "nav_bridge_calypso"
+	landmark_tag = "nav_bridge_charon"
 
 /obj/effect/shuttle_landmark/transit/torch/exploration_shuttle
 	name = "In transit"
-	landmark_tag = "nav_transit_calypso"
+	landmark_tag = "nav_transit_charon"
 
 /datum/shuttle/autodock/overmap/guppy
 	name = "Guppy"
@@ -434,7 +438,7 @@ TORCH_ESCAPE_POD(17)
 /datum/shuttle/autodock/overmap/aquila
 	name = "Aquila"
 	move_time = 60
-	shuttle_area = list(/area/aquila/cockpit, /area/aquila/maintenance, /area/aquila/storage, /area/aquila/secure_storage, /area/aquila/mess, /area/aquila/passenger, /area/aquila/medical, /area/aquila/head, /area/aquila/airlock)
+	shuttle_area = list(/area/aquila/cockpit, /area/aquila/power, /area/aquila/storage, /area/aquila/suits, /area/aquila/air, /area/aquila/crew, /area/aquila/medical, /area/aquila/airlock)
 	current_location = "nav_hangar_aquila"
 	landmark_transition = "nav_transit_aquila"
 	dock_target = "aquila_shuttle"

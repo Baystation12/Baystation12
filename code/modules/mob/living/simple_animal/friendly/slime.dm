@@ -11,9 +11,10 @@
 	response_help  = "pets"
 	response_disarm = "shoos"
 	response_harm   = "stomps on"
-	emote_see = list("jiggles", "bounces in place")
 	var/colour = "grey"
 	pass_flags = PASS_FLAG_TABLE
+
+	say_list_type = /datum/say_list/slime
 
 /mob/living/simple_animal/slime/can_force_feed(var/feeder, var/food, var/feedback)
 	if(feedback)
@@ -32,7 +33,6 @@
 	response_help  = "pets"
 	response_disarm = "shoos"
 	response_harm   = "stomps on"
-	emote_see = list("jiggles", "bounces in place")
 	var/colour = "grey"
 
 /mob/living/simple_animal/adultslime/New()
@@ -52,3 +52,6 @@
 	S2.icon_dead = "[src.colour] baby slime dead"
 	S2.colour = "[src.colour]"
 	qdel(src)
+
+/datum/say_list/slime
+	emote_see = list("jiggles", "bounces in place")

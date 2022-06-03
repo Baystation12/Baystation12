@@ -17,8 +17,8 @@
 	source = 'sound/music/europa/asfarasitgets.ogg'
 	title = "As Far As It Gets"
 	author = "A Drop A Day"
-	license = /decl/license/cc_by_sa_4_0
-	url = "https://ghyti.bandcamp.com/"
+	license = /decl/license/cc_by_sa_3_0
+	url = "https://soundcloud.com/adrop_aday/32-as-far-as-it-gets"
 
 /decl/audio/track/businessend
 	source = 'sound/music/businessend.ogg'
@@ -42,13 +42,6 @@
 	author = "Hector/dMk"
 	license = /decl/license/grandfathered
 	url = "https://modarchive.org/index.php?request=view_by_moduleid&query=73980"
-
-/decl/audio/track/cloudsofneptune
-	source = 'sound/music/Clouds_of_Neptune.ogg'
-	title = "Clouds of Neptune"
-	author = "Dukica99"
-	license = /decl/license/cc_by_4_0
-	url = "https://soundcloud.com/user-472035237/clouds-of-neptune"
 
 /decl/audio/track/comet_haley
 	source = 'sound/music/comet_haley.ogg'
@@ -84,8 +77,8 @@
 	source = 'sound/music/europa/80salloveragain.ogg'
 	title = "80s All Over Again"
 	author = "A Drop A Day"
-	license = /decl/license/cc_by_sa_4_0
-	url = "https://ghyti.bandcamp.com/"
+	license = /decl/license/cc_by_sa_3_0
+	url = "https://soundcloud.com/adrop_aday/9-80s-all-over-again"
 
 /decl/audio/track/elevator
 	display = "Please Come Back Any Time"
@@ -301,5 +294,5 @@
 	source = 'sound/music/europa/WildEncounters.ogg'
 	title = "Wild Encounters"
 	author = "A Drop A Day"
-	license = /decl/license/cc_by_sa_4_0
-	url = "https://ghyti.bandcamp.com/"
+	license = /decl/license/cc_by_sa_3_0
+	url = "https://soundcloud.com/adrop_aday/14-wild-encounters"

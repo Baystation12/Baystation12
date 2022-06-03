@@ -75,7 +75,7 @@
 		broadcast_medical_hud_message("[src] is treating <b>[H]</b> in <b>[location]</b>", src)
 	busy = 1
 	update_icons()
-	if(do_after(src, 3 SECONDS, H))
+	if(do_after(src, 3 SECONDS, H, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		if(t == 1)
 			reagent_glass.reagents.trans_to_mob(H, injection_amount, CHEM_BLOOD)
 		else
@@ -156,11 +156,11 @@
 			if("adj_threshold")
 				if(!locked || issilicon(user))
 					var/adjust_num = text2num(href_list["amount"])
-					heal_threshold = Clamp(heal_threshold + adjust_num, 5, 75)
+					heal_threshold = clamp(heal_threshold + adjust_num, 5, 75)
 			if("adj_inject")
 				if(!locked || issilicon(user))
 					var/adjust_num = text2num(href_list["amount"])
-					injection_amount = Clamp(injection_amount + adjust_num, 5, 15)
+					injection_amount = clamp(injection_amount + adjust_num, 5, 15)
 			if("use_beaker")
 				if(!locked || issilicon(user))
 					use_beaker = !use_beaker

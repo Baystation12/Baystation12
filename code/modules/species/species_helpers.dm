@@ -1,4 +1,4 @@
-var/list/stored_shock_by_ref = list()
+var/global/list/stored_shock_by_ref = list()
 
 /mob/living/proc/apply_stored_shock_to(var/mob/living/target)
 	if(stored_shock_by_ref["\ref[src]"])
@@ -65,7 +65,7 @@ var/list/stored_shock_by_ref = list()
 	return /datum/reagent/nutriment
 
 /datum/species/proc/get_resized_organ_w_class(var/organ_w_class)
-	. = Clamp(organ_w_class + mob_size_difference(mob_size, MOB_MEDIUM), ITEM_SIZE_TINY, ITEM_SIZE_GARGANTUAN)
+	. = clamp(organ_w_class + mob_size_difference(mob_size, MOB_MEDIUM), ITEM_SIZE_TINY, ITEM_SIZE_GARGANTUAN)
 
 /datum/species/proc/resize_organ(var/obj/item/organ/organ)
 	if(!istype(organ))

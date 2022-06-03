@@ -24,7 +24,17 @@
 	)
 	desc = "A crimson spacesuit sporting clean lines and durable plating. Robust, reliable, and slightly suspicious."
 	w_class = ITEM_SIZE_NORMAL
-	allowed = list(/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/melee/energy/sword,/obj/item/handcuffs,/obj/item/tank/emergency)
+	allowed = list(
+		/obj/item/gun,
+		/obj/item/ammo_magazine,
+		/obj/item/ammo_casing,
+		/obj/item/melee/baton,
+		/obj/item/melee/energy/sword,
+		/obj/item/handcuffs,
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency
+	)
 	armor = list(
 		melee = ARMOR_MELEE_MAJOR,
 		bullet = ARMOR_BALLISTIC_RESISTANT,
@@ -36,25 +46,19 @@
 		)
 	siemens_coefficient = 0.3
 
-/obj/item/clothing/suit/space/syndicate/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 1
-
-
 
 //Black syndicate space suit
 /obj/item/clothing/head/helmet/space/syndicate/black
 	name = "black space helmet"
+	desc = "A black helmet sporting clean lines and durable plating."
 	icon_state = "syndicate-helm-black"
 	item_state = "syndicate-helm-black"
 
 /obj/item/clothing/suit/space/syndicate/black
 	name = "black space suit"
+	desc = "A black spacesuit sporting clean lines and durable plating."
 	icon_state = "syndicate-black"
 	item_state_slots = list(
 		slot_l_hand_str = "syndicate-black",
 		slot_r_hand_str = "syndicate-black",
 	)
-
-
-

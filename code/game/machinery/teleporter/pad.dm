@@ -46,7 +46,11 @@
 	if (!T)
 		return
 	use_power_oneoff(5000)
+	if (istype(computer.target, /obj/machinery/tele_beacon))
+		var/obj/machinery/tele_beacon = computer.target
+		tele_beacon.use_power_oneoff(1 KILOWATTS)
 	do_teleport(AM, T)
+	computer.set_timer()
 
 
 /obj/machinery/tele_pad/attack_ghost(mob/user)

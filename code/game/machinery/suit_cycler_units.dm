@@ -58,7 +58,7 @@
 	model_text = "Nonstandard"
 	req_access = list(access_syndicate)
 	available_modifications = list(/decl/item_modifier/space_suit/mercenary)
-	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
+	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI, SPECIES_VOX)
 	can_repair = 1
 
 /obj/machinery/suit_cycler/pilot
@@ -67,3 +67,10 @@
 	req_access = list(access_mining_office)
 	available_modifications = list(/decl/item_modifier/space_suit/pilot)
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
+
+/obj/machinery/suit_cycler/command
+	name = "Command suit cycler"
+	model_text = "Command"
+	req_access = list(access_bridge)
+	available_modifications = list(/decl/item_modifier/space_suit/command)
+	species = list(SPECIES_HUMAN,SPECIES_SKRELL)

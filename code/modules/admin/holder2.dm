@@ -2,7 +2,7 @@
 #define STEALTH_MANUAL 1
 #define STEALTH_AUTO 2
 
-var/list/admin_datums = list()
+var/global/list/admin_datums = list()
 
 /datum/admins
 	var/rank         = "Temporary Admin"
@@ -63,32 +63,27 @@ if rights_required == 0, then it simply checks if they are an admin.
 if it doesn't return 1 and show_msg=1 it will prints a message explaining why the check has failed
 generally it would be used like so:
 
-proc/admin_proc()
+/proc/admin_proc()
 	if(!check_rights(R_ADMIN)) return
 	to_chat(usr, "you have enough rights!")
 
 NOTE: It checks usr by default. Supply the "user" argument if you wish to check for a specific mob.
 */
-/proc/check_rights(rights_required, show_msg=1, var/client/C = usr)
-	if(ismob(C))
-		var/mob/M = C
-		C = M.client
-	if(!C)
+/proc/check_rights(rights_required, show_msg = TRUE, client/C = usr)
+	C = resolve_client(C)
+	if (!C)
 		return FALSE
-	if(!C.holder)
-		if(show_msg)
-			to_chat(C, "<span class='warning'>Error: You are not an admin.</span>")
+	if (!C.holder)
+		if (show_msg)
+			to_chat(C, SPAN_WARNING("You are not a staff member."))
 		return FALSE
-
-	if(rights_required)
-		if(rights_required & C.holder.rights)
+	if (rights_required)
+		if (rights_required & C.holder.rights)
 			return TRUE
-		else
-			if(show_msg)
-				to_chat(C, "<span class='warning'>Error: You do not have sufficient rights to do that. You require one of the following flags:[rights2text(rights_required," ")].</span>")
-			return FALSE
-	else
-		return TRUE
+		if (show_msg)
+			to_chat(C, SPAN_WARNING("You lack the rights to do that. You need one of: [rights2text(rights_required," ")]"))
+		return FALSE
+	return TRUE
 
 //probably a bit iffy - will hopefully figure out a better solution
 /proc/check_if_greater_rights_than(client/other)
@@ -148,7 +143,6 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 	else
 		to_chat(src, "<span class='notice'>You are no longer stealthed.</span>")
 	log_and_message_admins("has turned stealth mode [holder.stealthy_ ? "ON" : "OFF"]")
-	SSstatistics.add_field_details("admin_verb","SM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 #undef STEALTH_OFF
 #undef STEALTH_MANUAL

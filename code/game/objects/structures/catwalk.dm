@@ -37,7 +37,7 @@
 	var/image/I
 	if(!hatch_open)
 		for(var/i = 1 to 4)
-			I = image('icons/obj/catwalks.dmi', "catwalk[connections[i]]", dir = 1<<(i-1))
+			I = image('icons/obj/catwalks.dmi', "catwalk[connections[i]]", dir = SHIFTL(1, i - 1))
 			overlays += I
 	if(plated_tile)
 		I = image('icons/obj/catwalks.dmi', "plated")
@@ -46,10 +46,10 @@
 
 /obj/structure/catwalk/ex_act(severity)
 	switch(severity)
-		if(1)
+		if(EX_ACT_DEVASTATING)
 			new /obj/item/stack/material/rods(src.loc)
 			qdel(src)
-		if(2)
+		if(EX_ACT_HEAVY)
 			new /obj/item/stack/material/rods(src.loc)
 			qdel(src)
 
@@ -103,7 +103,7 @@
 		if(!ST.in_use)
 			to_chat(user, "<span class='notice'>Placing tile...</span>")
 			ST.in_use = 1
-			if (!do_after(user, 10))
+			if (!do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE))
 				ST.in_use = 0
 				return
 			to_chat(user, "<span class='notice'>You plate \the [src]</span>")

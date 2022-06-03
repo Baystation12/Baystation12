@@ -14,7 +14,7 @@
 	..()
 
 /obj/aura/radiant_aura/bullet_act(var/obj/item/projectile/P, var/def_zone)
-	if(P.damage_flags() & DAM_LASER)
+	if(P.damage_flags() & DAMAGE_FLAG_LASER)
 		user.visible_message("<span class='warning'>\The [P] refracts, bending into \the [user]'s aura.</span>")
 		return AURA_FALSE
 	return 0

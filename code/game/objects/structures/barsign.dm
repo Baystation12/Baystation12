@@ -2,7 +2,7 @@
 	desc = "A jumbo-sized LED sign. This one seems to be showing its age."
 	icon = 'icons/obj/barsigns.dmi'
 	icon_state = "empty"
-	appearance_flags = 0
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS
 	anchored = TRUE
 	var/cult = 0
 
@@ -36,7 +36,7 @@
 
 	var/obj/item/card/id/card = I.GetIdCard()
 	if(istype(card))
-		if(access_bar in card.GetAccess())
+		if(access_kitchen in card.GetAccess())
 			var/sign_type = input(user, "What would you like to change the barsign to?") as null|anything in get_valid_states(0)
 			if(!sign_type)
 				return

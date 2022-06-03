@@ -1,27 +1,24 @@
 /obj/item/modular_computer/pda/install_default_hardware()
 	..()
-
-	network_card = new /obj/item/stock_parts/computer/network_card/(src)
-	hard_drive = new /obj/item/stock_parts/computer/hard_drive/small(src)
-	processor_unit = new /obj/item/stock_parts/computer/processor_unit/small(src)
+	processor_unit = new/obj/item/stock_parts/computer/processor_unit/small(src)
+	tesla_link = new/obj/item/stock_parts/computer/tesla_link(src)
+	hard_drive = new/obj/item/stock_parts/computer/hard_drive/small(src)
+	network_card = new/obj/item/stock_parts/computer/network_card/(src)
 	card_slot = new /obj/item/stock_parts/computer/card_slot/broadcaster(src)
-	battery_module = new /obj/item/stock_parts/computer/battery_module(src)
+	battery_module = new/obj/item/stock_parts/computer/battery_module(src)
 	battery_module.charge_to_full()
-
-	tesla_link = new /obj/item/stock_parts/computer/tesla_link(src)
 
 /obj/item/modular_computer/pda/install_default_programs()
 	..()
-
-	hard_drive.store_file(new /datum/computer_file/program/email_client())
-	hard_drive.store_file(new /datum/computer_file/program/crew_manifest())
-	hard_drive.store_file(new /datum/computer_file/program/wordprocessor())
-	hard_drive.store_file(new /datum/computer_file/program/records())
-	hard_drive.store_file(new /datum/computer_file/program/newscast())
-	if(prob(50)) //harmless tax software
-		hard_drive.store_file(new /datum/computer_file/program/uplink())
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
+		os.create_file(new/datum/computer_file/program/email_client())
+		os.create_file(new/datum/computer_file/program/crew_manifest())
+		os.create_file(new/datum/computer_file/program/wordprocessor())
+		os.create_file(new/datum/computer_file/program/records())
+		os.create_file(new/datum/computer_file/program/newscast())
+		if(prob(50)) //harmless tax software
+			os.create_file(new /datum/computer_file/program/uplink())
 		os.set_autorun("emailc")
 
 /obj/item/modular_computer/pda/medical/install_default_hardware()
@@ -46,7 +43,9 @@
 
 /obj/item/modular_computer/pda/heads/install_default_programs()
 	..()
-	hard_drive.store_file(new /datum/computer_file/program/reports())
+	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	if(os)
+		os.create_file(new/datum/computer_file/program/reports())
 
 /obj/item/modular_computer/pda/heads/hop/install_default_hardware()
 	..()
@@ -70,7 +69,9 @@
 
 /obj/item/modular_computer/pda/cargo/install_default_programs()
 	..()
-	hard_drive.store_file(new /datum/computer_file/program/reports())
+	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	if(os)
+		os.create_file(new/datum/computer_file/program/reports())
 
 /obj/item/modular_computer/pda/cargo/install_default_hardware()
 	..()
@@ -87,3 +88,7 @@
 /obj/item/modular_computer/pda/captain/install_default_hardware()
 	..()
 	scanner = new /obj/item/stock_parts/computer/scanner/paper(src)
+
+/obj/item/modular_computer/pda/roboticist/install_default_hardware()
+	..()
+	scanner = new /obj/item/stock_parts/computer/scanner/robotic(src)

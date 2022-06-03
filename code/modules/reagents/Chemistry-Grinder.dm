@@ -87,7 +87,7 @@
 				for (var/chem in M.chem_products)
 					sheet_volume += M.chem_products[chem] * skill_multiplier
 				var/obj/item/stack/material/S = I
-				var/used_sheets = min(ceil((container.reagents.maximum_volume - container.reagents.total_volume) / sheet_volume), S.get_amount())
+				var/used_sheets = min(Ceil((container.reagents.maximum_volume - container.reagents.total_volume) / sheet_volume), S.get_amount())
 				var/used_all = used_sheets == S.get_amount()
 				S.use(used_sheets)
 				for (var/chem in M.chem_products)
@@ -130,7 +130,7 @@
 		else if (user.unEquip(I, src))
 			container = I
 			update_icon()
-			updateUsrDialog()
+			updateDialog()
 
 	else if (is_type_in_list(I, storage_types))
 		var/obj/item/storage/S = I
@@ -157,7 +157,7 @@
 					"\The [user] empties things from \the [S] into \the [src].",
 					"You empty [english_list(removed)] from \the [S] into \the [src][full ? ", filling it to capacity" : ""]."
 				)
-				updateUsrDialog()
+				updateDialog()
 			else
 				to_chat(user, SPAN_WARNING("Nothing more in \the [S] will go into \the [src]."))
 
@@ -204,13 +204,15 @@
 		if (!container)
 			window += " (not attached)"
 		else
-			window += " (\an [container], [PERCENT(container.reagents.total_volume, container.reagents.maximum_volume, 1)]% full)"
+			window += " (\an [container], [Percent(container.reagents.total_volume, container.reagents.maximum_volume, 1)]% full)"
 			window += "<br><a href='?src=\ref[src];action=detach'>(detach)</a><br>"
 			for (var/datum/reagent/R in container.reagents.reagent_list)
 				window += "<br>[R.volume] - [R.name]"
 
 	window = strip_improper("<head><title>[name]</title></head><tt>[JOINTEXT(window)]</tt>")
-	show_browser(user, window, "window=reagentgrinder")
+	var/datum/browser/popup = new(user, "reagentgrinder", "Reagent Grinder")
+	popup.set_content(window)
+	popup.open()
 	onclose(user, "reagentgrinder")
 
 

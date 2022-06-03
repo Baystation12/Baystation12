@@ -37,14 +37,17 @@
 
 	default_cultural_info = list(TAG_FACTION = FACTION_UNATHI_INDEPENDENT)
 
-	has_organ = list(
-		BP_HEAD =     /obj/item/organ/external/head/yeosa,
-		BP_HEART =    /obj/item/organ/internal/heart,
-		BP_STOMACH =  /obj/item/organ/internal/stomach,
-		BP_LUNGS =    /obj/item/organ/internal/lungs/gills,
-		BP_LIVER =    /obj/item/organ/internal/liver,
-		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
-		BP_BRAIN =    /obj/item/organ/internal/brain,
-		BP_EYES =     /obj/item/organ/internal/eyes
-		)
+	override_organ_types = list(
+		BP_LUNGS =  /obj/item/organ/internal/lungs/gills
+	)
 
+	override_limb_types = list(
+		BP_HEAD =   /obj/item/organ/external/head/yeosa
+	)
+
+
+/datum/species/unathi/yeosa/can_float(mob/living/carbon/human/H)
+	if(!H.is_physically_disabled())
+		if(H.encumbrance() < 2)
+			return TRUE
+	return FALSE

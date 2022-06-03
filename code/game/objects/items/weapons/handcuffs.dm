@@ -4,7 +4,6 @@
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "handcuff"
-	health = 0
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	throwforce = 5
@@ -18,14 +17,6 @@
 	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes
 	var/cuff_sound = 'sound/weapons/handcuffs.ogg'
 	var/cuff_type = "handcuffs"
-
-/obj/item/handcuffs/examine(mob/user)
-	. = ..()
-	if (health)
-		var display = health / initial(health) * 100
-		if (display > 66)
-			return
-		to_chat(user, SPAN_WARNING("They look [display < 33 ? "badly ": ""]damaged."))
 
 /obj/item/handcuffs/get_icon_state(mob/user_mob, slot)
 	if(slot == slot_handcuffed_str)
@@ -87,7 +78,7 @@
 
 	user.visible_message("<span class='danger'>\The [user] is attempting to put [cuff_type] on \the [H]!</span>")
 
-	if(!do_after(user,30, target))
+	if(!do_after(user, 3 SECONDS, target, DO_EQUIP | DO_TARGET_UNIQUE_ACT))
 		return 0
 
 	if(!target.has_danger_grab(user)) // victim may have resisted out of the grab in the meantime
@@ -100,7 +91,6 @@
 		return 0
 
 	admin_attack_log(user, H, "Attempted to handcuff the victim", "Was target of an attempted handcuff", "attempted to handcuff")
-	SSstatistics.add_field_details("handcuffs","H")
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(H)
@@ -111,7 +101,7 @@
 	target.equip_to_slot(cuffs,slot_handcuffed)
 	return 1
 
-var/last_chew = 0
+var/global/last_chew = 0
 /mob/living/carbon/human/RestrainedClickOn(var/atom/A)
 	if (A != src) return ..()
 	if (last_chew + 26 > world.time) return
@@ -129,7 +119,7 @@ var/last_chew = 0
 	H.visible_message("<span class='warning'>\The [H] chews on \his [O.name]!</span>", "<span class='warning'>You chew on your [O.name]!</span>")
 	admin_attacker_log(H, "chewed on their [O.name]!")
 
-	O.take_external_damage(3,0, DAM_SHARP|DAM_EDGE ,"teeth marks")
+	O.take_external_damage(3,0, DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE ,"teeth marks")
 
 	last_chew = world.time
 
@@ -141,7 +131,7 @@ var/last_chew = 0
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
 	cuff_type = "cable restraints"
 	elastic = 1
-	health = 75
+	health_max = 75
 
 /obj/item/handcuffs/cable/red
 	color = COLOR_MAROON
@@ -178,4 +168,4 @@ var/last_chew = 0
 	icon = 'icons/obj/bureaucracy.dmi'
 	breakouttime = 200
 	cuff_type = "duct tape"
-	health = 50
+	health_max = 50

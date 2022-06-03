@@ -9,14 +9,17 @@
 	requires_ntnet = TRUE
 	available_on_ntnet = FALSE
 	available_on_syndinet = TRUE
-	nanomodule_path = /datum/nano_module/program/access_decrypter/
+	nanomodule_path = /datum/nano_module/program/access_decrypter
 	var/message = ""
 	var/running = FALSE
 	var/progress = 0
 	var/target_progress = 300
 	var/datum/access/target_access = null
 	var/list/restricted_access_codes = list(access_change_ids) // access codes that are not hackable due to balance reasons
-	var/list/skill_restricted_access_codes_master = list(access_network)
+	var/list/skill_restricted_access_codes = list(
+		access_network = SKILL_EXPERT,
+		access_network_admin = SKILL_PROF
+	)
 
 /datum/computer_file/program/access_decrypter/on_shutdown(var/forced)
 	reset()
@@ -47,27 +50,28 @@
 			var/list/valid_access_values = get_all_station_access()
 			valid_access_values -= restricted_access_codes
 			valid_access_values -= RFID.stored_card.access
-			if(operator_skill < SKILL_PROF) // Don't want to randomly assign an access that we wouldn't be able to decrypt normally
-				valid_access_values -= skill_restricted_access_codes_master
+			for(var/skill_access in skill_restricted_access_codes)
+				// Don't want to randomly assign an access that we wouldn't be able to decrypt normally
+				if(skill_restricted_access_codes[skill_access] && operator_skill < skill_restricted_access_codes[skill_access])
+					valid_access_values -= skill_access
 			target_access = get_access_by_id(pick(valid_access_values))
 		RFID.stored_card.access |= target_access.id
-		if(ntnet_global.intrusion_detection_enabled && !prob(get_sneak_chance()))
-			ntnet_global.add_log("IDS WARNING - Unauthorised access to primary keycode database from device: [computer.get_network_tag()]  - downloaded access codes for: [target_access.desc].")
-			ntnet_global.intrusion_detection_alarm = 1
+		if (!prob(get_sneak_chance()))
+			ntnet_global.add_log_with_ids_check("Unauthorised access to primary keycode database - downloaded access codes for: [target_access.desc].", computer.get_component(PART_NETWORK))
 		message = "Successfully decrypted and saved operational key codes. Downloaded access codes for: [target_access.desc]."
 		target_access = null
 		reset()
 
 /datum/computer_file/program/access_decrypter/Topic(href, href_list)
 	if(..())
-		return 1
+		return TOPIC_HANDLED
 	operator_skill = usr.get_skill_value(SKILL_COMPUTER)
 	if(href_list["PRG_reset"])
 		reset()
-		return 1
+		return TOPIC_HANDLED
 	if(href_list["PRG_execute"])
 		if(running)
-			return 1
+			return TOPIC_HANDLED
 		var/obj/item/stock_parts/computer/processor_unit/CPU = computer.get_component(PART_CPU)
 		var/obj/item/stock_parts/computer/card_slot/RFID = computer.get_component(PART_CARD)
 		if(!istype(CPU) || !CPU.check_functionality() || !istype(RFID) || !RFID.check_functionality())
@@ -80,21 +84,20 @@
 		var/access = href_list["PRG_execute"]
 		var/obj/item/card/id/id_card = RFID.stored_card
 		if(access in id_card.access)
-			return 1
+			return TOPIC_HANDLED
 		if(access in restricted_access_codes)
-			return 1
-		if((access in skill_restricted_access_codes_master) && operator_skill < SKILL_PROF)
-			return 1
+			return TOPIC_HANDLED
+		if(skill_restricted_access_codes[access] && operator_skill < skill_restricted_access_codes[access])
+			return TOPIC_HANDLED
 		target_access = get_access_by_id(access)
 		if(!target_access)
-			return 1
+			return TOPIC_HANDLED
 
 		running = TRUE
 
-		if(ntnet_global.intrusion_detection_enabled && !prob(get_sneak_chance()))
-			ntnet_global.add_log("IDS WARNING - Unauthorised access attempt to primary keycode database from device: [computer.get_network_tag()]")
-			ntnet_global.intrusion_detection_alarm = 1
-		return 1
+		if (!prob(get_sneak_chance()))
+			ntnet_global.add_log_with_ids_check("Unauthorised access attempt to primary keycode database.", computer.get_component(PART_NETWORK))
+		return TOPIC_HANDLED
 
 /datum/computer_file/program/access_decrypter/proc/get_sneak_chance()
 	return max(operator_skill - SKILL_ADEPT, 0) * 30
@@ -107,7 +110,7 @@
 /datum/nano_module/program/access_decrypter
 	name = "NTNet Access Decrypter"
 
-/datum/nano_module/program/access_decrypter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/access_decrypter/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 	if(!ntnet_global)
 		return
 	var/datum/computer_file/program/access_decrypter/PRG = program
@@ -143,7 +146,8 @@
 						"desc" = replacetext(get_access_desc(access), " ", "&nbsp"),
 						"ref" = access,
 						"allowed" = (access in id_card.access) ? 1 : 0,
-						"blocked" = ((access in PRG.restricted_access_codes) || ((access in PRG.skill_restricted_access_codes_master) && PRG.operator_skill < SKILL_PROF)) ? 1 : 0)))
+						"blocked" = ((access in PRG.restricted_access_codes) || (PRG.skill_restricted_access_codes[access] && PRG.operator_skill < PRG.skill_restricted_access_codes[access])) ? 1 : 0
+					)))
 
 			regions.Add(list(list(
 				"name" = get_region_accesses_name(i),

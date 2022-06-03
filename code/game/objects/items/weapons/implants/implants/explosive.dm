@@ -64,7 +64,7 @@
 			code = input("Set radio activation code","Radio activation") as num
 		else
 			code += adj
-		code = Clamp(code,1,100)
+		code = clamp(code,1,100)
 		interact(usr)
 	if (href_list["mode"])
 		var/mod = input("Set explosion mode", "Explosion mode") as null|anything in list("Localized Limb", "Destroy Body", "Full Explosion")

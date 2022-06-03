@@ -2,10 +2,6 @@
 	name = "vocal synthesiser"
 	assists_languages = list(LANGUAGE_HUMAN_RUSSIAN, LANGUAGE_GUTTER, LANGUAGE_HUMAN_EURO, LANGUAGE_EAL)
 
-/obj/item/organ/internal/voicebox/nabber/ascent
-	name = "mantid vocal synthesiser"
-	assists_languages = list(LANGUAGE_SKRELLIAN, LANGUAGE_HUMAN_RUSSIAN, LANGUAGE_GUTTER, LANGUAGE_HUMAN_EURO, LANGUAGE_EAL)
-
 /obj/item/organ/internal/voicebox/nabber/Initialize()
 	. = ..()
 	robotize()

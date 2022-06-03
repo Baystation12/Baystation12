@@ -36,7 +36,7 @@
 		var/obj/item/I = new etype(get_turf(H))
 		if(istype(I, /obj/item/clothing))
 			I.canremove = 0
-		H.equip_to_slot_if_possible(I,equipment[etype],0,1,1,1)
+		H.equip_to_slot_if_possible(I,equipment[etype], TRYEQUIP_REDRAW | TRYEQUIP_SILENT | TRYEQUIP_FORCE)
 		. += I
 
 /datum/spellbound_type/proc/set_antag(var/datum/mind/M, var/mob/master)
@@ -104,10 +104,10 @@
 			familiar_type = /mob/living/simple_animal/hostile/carp/pike
 		if("Mouse")
 			H.verbs |= /mob/living/proc/ventcrawl
-			familiar_type = /mob/living/simple_animal/mouse
+			familiar_type = /mob/living/simple_animal/passive/mouse
 		if("Cat")
 			H.mutations |= mRun
-			familiar_type = /mob/living/simple_animal/cat
+			familiar_type = /mob/living/simple_animal/passive/cat
 		if("Bear")
 			var/obj/item/clothing/under/under = locate() in equipment
 			var/obj/item/clothing/head/head = locate() in equipment
@@ -115,17 +115,17 @@
 			var/datum/extension/armor/A = get_extension(under, /datum/extension/armor)
 			if(A)
 				A.armor_values = list(
-					melee = ARMOR_MELEE_VERY_HIGH, 
-					bullet = ARMOR_BALLISTIC_PISTOL, 
-					laser = ARMOR_LASER_SMALL, 
+					melee = ARMOR_MELEE_VERY_HIGH,
+					bullet = ARMOR_BALLISTIC_PISTOL,
+					laser = ARMOR_LASER_SMALL,
 					energy = ARMOR_ENERGY_SMALL
 					) //More armor
 			A = get_extension(head, /datum/extension/armor)
 			if(A)
 				A.armor_values = list(
-					melee = ARMOR_MELEE_RESISTANT, 
-					bullet = ARMOR_BALLISTIC_MINOR, 
-					laser = ARMOR_LASER_MINOR, 
+					melee = ARMOR_MELEE_RESISTANT,
+					bullet = ARMOR_BALLISTIC_MINOR,
+					laser = ARMOR_LASER_MINOR,
 					energy = ARMOR_ENERGY_MINOR
 					)
 			familiar_type = /mob/living/simple_animal/hostile/bear
@@ -179,7 +179,7 @@
 	desc = "A ghost, or an imaginary friend; the Overseer is immune to space and can turn invisible at a whim, but has little offensive capabilities."
 	spiel = "Physicality is not something you are familiar with. Indeed, injuries cannot slow you down, but you can't fight back, either! In addition to this, you can reach into the void and return the soul of a single departed crewmember via the revoke death verb, if so desired; this can even revive your Master, should they fall in combat before you do. Serve them well."
 	equipment = list(/obj/item/clothing/under/grimhoodie = slot_w_uniform,
-					/obj/item/clothing/shoes/sandals/grimboots = slot_shoes,
+					/obj/item/clothing/shoes/sandal/grimboots = slot_shoes,
 					/obj/item/contract/wizard/xray = slot_l_hand,
 					/obj/item/contract/wizard/telepathy = slot_r_hand)
 	spells = list(/spell/toggle_armor/overseer,

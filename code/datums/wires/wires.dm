@@ -5,9 +5,9 @@
 
 #define MAX_FLAG 65535
 
-var/list/same_wires = list()
+var/global/list/same_wires = list()
 // 14 colours, if you're adding more than 14 wires then add more colours here
-var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown", "gold", "gray", "cyan", "navy", "purple", "pink", "black", "yellow")
+var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown", "gold", "gray", "cyan", "navy", "purple", "pink", "black", "yellow")
 
 /datum/wires
 
@@ -54,11 +54,14 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 	holder = null
 	return ..()
 
+/datum/wires/proc/get_mechanics_info()
+	return
+
 /datum/wires/proc/GenerateWires()
 	var/list/colours_to_pick = wireColours.Copy() // Get a copy, not a reference.
 	var/list/indexes_to_pick = list()
 	//Generate our indexes
-	for(var/i = 1; i < MAX_FLAG && i < (1 << wire_count); i += i)
+	for(var/i = 1; i < MAX_FLAG && i < SHIFTL(1, wire_count); i += i)
 		indexes_to_pick += i
 	colours_to_pick.len = wire_count // Downsize it to our specifications.
 
@@ -211,12 +214,16 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 // Overridable Procs
 //
 
-// Called when wires cut/mended.
-/datum/wires/proc/UpdateCut(var/index, var/mended)
+/// Called when wires cut/mended.
+/datum/wires/proc/UpdateCut(index, mended)
 	return
 
-// Called when wire pulsed. Add code here.
-/datum/wires/proc/UpdatePulsed(var/index)
+/// Called when wire pulsed. Add code here.
+/datum/wires/proc/UpdatePulsed(index)
+	return
+
+/// Intended to be called when a pulsed wire 'resets'. You'll have to call this yourself in an `addtimer()` call in `UpdatePulsed()`.
+/datum/wires/proc/ResetPulsed(index)
 	return
 
 /datum/wires/proc/examine(index, mob/user)
@@ -235,10 +242,10 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 // Example of use:
 /*
 
-var/const/BOLTED= 1
-var/const/SHOCKED = 2
-var/const/SAFETY = 4
-var/const/POWER = 8
+var/global/const/BOLTED= 1
+var/global/const/SHOCKED = 2
+var/global/const/SAFETY = 4
+var/global/const/POWER = 8
 
 /datum/wires/door/UpdateCut(var/index, var/mended)
 	var/obj/machinery/door/airlock/A = holder
@@ -356,21 +363,21 @@ var/const/POWER = 8
 	CutWireColour(wires[r])
 
 /datum/wires/proc/RandomCutAll(var/probability = 10)
-	for(var/i = 1; i < MAX_FLAG && i < (1 << wire_count); i += i)
+	for(var/i = 1; i < MAX_FLAG && i < SHIFTL(1, wire_count); i += i)
 		if(prob(probability))
 			CutWireIndex(i)
 
 /datum/wires/proc/CutAll()
-	for(var/i = 1; i < MAX_FLAG && i < (1 << wire_count); i += i)
+	for(var/i = 1; i < MAX_FLAG && i < SHIFTL(1, wire_count); i += i)
 		CutWireIndex(i)
 
 /datum/wires/proc/IsAllCut()
-	if(wires_status == (1 << wire_count) - 1)
+	if(wires_status == SHIFTL(1, wire_count) - 1)
 		return 1
 	return 0
 
 /datum/wires/proc/MendAll()
-	for(var/i = 1; i < MAX_FLAG && i < (1 << wire_count); i += i)
+	for(var/i = 1; i < MAX_FLAG && i < SHIFTL(1, wire_count); i += i)
 		if(IsIndexCut(i))
 			CutWireIndex(i)
 

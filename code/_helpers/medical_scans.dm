@@ -3,6 +3,9 @@
 	var/list/scan = list()
 
 	scan["name"] = H.name
+	if(H.fake_name)
+		scan["name"] = H.real_name
+	scan["age"] = H.age + H.changed_age
 	scan["time"] = stationtime2text()
 	var/brain_result
 	if(H.should_have_organ(BP_BRAIN))
@@ -76,6 +79,10 @@
 	scan["internal_organs"] = list()
 
 	for(var/obj/item/organ/internal/I in H.internal_organs)
+		if (istype(I, /obj/item/organ/internal/augment))
+			var/obj/item/organ/internal/augment/A = I
+			if (~A.augment_flags & AUGMENT_SCANNABLE)
+				continue
 		var/list/O = list()
 		O["name"] = I.name
 		O["is_broken"] = I.is_broken()
@@ -127,6 +134,8 @@
 
 	var/list/subdat = list()
 	var/dat = list()
+
+	dat += "<tr><td><strong>Apparent Age:</strong></td><td>[scan["age"]]</td></tr>"
 
 	//Brain activity
 	/*

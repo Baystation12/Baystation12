@@ -1,4 +1,3 @@
-//Loadout
 /obj/item/modular_computer/tablet/preset/custom_loadout/cheap/install_default_hardware()
 	..()
 	processor_unit = new/obj/item/stock_parts/computer/processor_unit/small(src)
@@ -33,7 +32,9 @@
 	var/mob/living/carbon/human/H = get_holder_of_type(src, /mob)
 	if(!istype(H)) return
 	install_default_programs_by_job(H)
-	hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
+	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	if(os)
+		os.create_file(new/datum/computer_file/program/wordprocessor())
 
 //Map presets
 
@@ -51,8 +52,10 @@
 
 /obj/item/modular_computer/tablet/lease/preset/command/install_default_programs()
 	..()
-	hard_drive.store_file(new /datum/computer_file/program/reports())
-	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
-	hard_drive.store_file(new/datum/computer_file/program/email_client())
-	hard_drive.store_file(new/datum/computer_file/program/records())
-	hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
+	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	if(os)
+		os.create_file(new/datum/computer_file/program/reports())
+		os.create_file(new/datum/computer_file/program/camera_monitor())
+		os.create_file(new/datum/computer_file/program/email_client())
+		os.create_file(new/datum/computer_file/program/records())
+		os.create_file(new/datum/computer_file/program/wordprocessor())

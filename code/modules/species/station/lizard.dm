@@ -83,10 +83,15 @@
 		/mob/living/carbon/human/proc/diona_heal_toggle
 		)
 
-	override_organ_types = list(
-		BP_EYES = /obj/item/organ/internal/eyes/unathi,
-		BP_BRAIN = /obj/item/organ/internal/brain/unathi
-	)
+	has_organ = list(
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
+		BP_LUNGS =    /obj/item/organ/internal/lungs,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_EYES =   /obj/item/organ/internal/eyes/unathi,
+		BP_BRAIN =  /obj/item/organ/internal/brain/unathi
+		)
 
 	descriptors = list(
 		/datum/mob_descriptor/height = 2,
@@ -101,17 +106,14 @@
 			CULTURE_UNATHI_SAVANNAH,
 			CULTURE_UNATHI_SALT_SWAMP,
 			CULTURE_UNATHI_SPACE,
-			CULTURE_UNATHI_TERSTEN,
 		),
 		TAG_HOMEWORLD = list(
 			HOME_SYSTEM_MOGHES,
 			HOME_SYSTEM_OUERE,
-			HOME_SYSTEM_UNATHI_TERSTEN,
 			HOME_SYSTEM_OFFWORLD
 		),
 		TAG_FACTION = list(
 			FACTION_UNATHI_HEGEMONY,
-			FACTION_UNATHI_TERSTEN_HEGEMONY,
 			FACTION_UNATHI_SSEN_UUMA,
 			FACTION_UNATHI_BAASK,
 			FACTION_UNATHI_GRESIS,
@@ -124,7 +126,8 @@
 			RELIGION_UNATHI_LIGHTS,
 			RELIGION_UNATHI_MARKESHELI,
 			RELIGION_UNATHI_ANCESTOR,
-			RELIGION_OTHER
+			RELIGION_OTHER,
+			RELIGION_UNSTATED
 		)
 	)
 	default_cultural_info = list(

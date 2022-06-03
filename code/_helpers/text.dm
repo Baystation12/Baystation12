@@ -28,13 +28,12 @@
 	if(!input)
 		return
 
-	if(max_length)
-		//testing shows that just looking for > max_length alone will actually cut off the final character if message is precisely max_length, so >= instead
-		if(length(input) >= max_length)
-			var/overflow = ((length(input)+1) - max_length)
-			to_chat(usr, "<span class='warning'>Your message is too long by [overflow] character\s.</span>")
+	if (max_length)
+		var/len = length_char(input)
+		if (len > max_length)
+			to_chat(usr, SPAN_WARNING("Your message is too long by [len - max_length] char\s."))
 			return
-		input = copytext(input,1,max_length)
+		input = copytext_char(input, 1, max_length + 1)
 
 	if(extra)
 		input = replace_characters(input, list("\n"=" ","\t"=" "))
@@ -215,37 +214,46 @@
 		t = replacetext(t, char, repl_chars[char])
 	return t
 
-//Adds 'u' number of zeros ahead of the text 't'
-/proc/add_zero(t, u)
-	return pad_left(t, u, "0")
 
-//Adds 'u' number of spaces ahead of the text 't'
-/proc/add_lspace(t, u)
-	return pad_left(t, u, " ")
-
-//Adds 'u' number of spaces behind the text 't'
-/proc/add_tspace(t, u)
-	return pad_right(t, u, " ")
-
-// Adds the required amount of 'character' in front of 'text' to extend the lengh to 'desired_length', if it is shorter
-// No consideration are made for a multi-character 'character' input
-/proc/pad_left(text, desired_length, character)
-	var/padding = generate_padding(length(text), desired_length, character)
-	return length(padding) ? "[padding][text]" : text
-
-// Adds the required amount of 'character' after 'text' to extend the lengh to 'desired_length', if it is shorter
-// No consideration are made for a multi-character 'character' input
-/proc/pad_right(text, desired_length, character)
-	var/padding = generate_padding(length(text), desired_length, character)
-	return length(padding) ? "[text][padding]" : text
-
-/proc/generate_padding(current_length, desired_length, character)
-	if(current_length >= desired_length)
+/// Builds a string of padding repeated until its character count meets or exceeds size
+/proc/generate_padding(size, padding)
+	var/padding_size = length_char(padding)
+	if (!padding_size)
 		return ""
-	var/characters = list()
-	for(var/i = 1 to (desired_length - current_length))
-		characters += character
-	return JOINTEXT(characters)
+	var/padding_count = Ceil(size / padding_size)
+	var/list/result = list()
+	for (var/i = padding_count to 1 step -1)
+		result += padding // pow2 strategies could be used here at the cost of complexity
+	return result.Join(null)
+
+
+/// Pads the matter of padding onto the start of text until the result length is size
+/proc/pad_left(text, size, padding)
+	var/text_length = length_char(text)
+	if (text_length >= size)
+		return text
+	if (!text_length)
+		text = ""
+	var/result = "[generate_padding(size - text_length, padding)][text]"
+	var/length_difference = length_char(result) - size
+	if (!length_difference)
+		return result
+	return copytext_char(result, length_difference + 1)
+
+
+/// Pads the matter of padding onto the start of text until the result length is size
+/proc/pad_right(text, size, padding)
+	var/text_length = length_char(text)
+	if (text_length >= size)
+		return text
+	if (!text_length)
+		text = ""
+	var/result = "[text][generate_padding(size - text_length, padding)]"
+	var/length_difference = length_char(result) - size
+	if (!length_difference)
+		return result
+	return copytext_char(result, 1, -length_difference)
+
 
 //Returns a string with reserved characters and spaces before the first letter removed
 /proc/trim_left(text)
@@ -256,7 +264,7 @@
 
 //Returns a string with reserved characters and spaces after the last letter removed
 /proc/trim_right(text)
-	for (var/i = length(text), i > 0, i--)
+	for (var/i = length(text) to 1 step -1)
 		if (text2ascii(text, i) > 32)
 			return copytext(text, 1, i + 1)
 	return ""
@@ -266,8 +274,8 @@
 	return trim_left(trim_right(text))
 
 //Returns a string with the first element of the string capitalized.
-/proc/capitalize(var/t as text)
-	return uppertext(copytext(t, 1, 2)) + copytext(t, 2)
+/proc/capitalize(text)
+	return uppertext(copytext_char(text, 1, 2)) + copytext_char(text, 2)
 
 //This proc strips html properly, remove < > and all text between
 //for complete text sanitizing should be used sanitize()
@@ -327,15 +335,14 @@
 			count++
 	return count
 
-/proc/reverse_text(var/text = "")
-	var/new_text = ""
-	for(var/i = length(text); i > 0; i--)
-		new_text += copytext(text, i, i+1)
-	return new_text
+/proc/reverse_text(text)
+	. = ""
+	for (var/i = length_char(text) to 1 step -1)
+		. += copytext_char(text, i, i + 1)
 
 //Used in preferences' SetFlavorText and human's set_flavor verb
 //Previews a string of len or less length
-proc/TextPreview(var/string,var/len=40)
+/proc/TextPreview(var/string,var/len=40)
 	if(length(string) <= len)
 		if(!length(string))
 			return "\[...\]"
@@ -376,7 +383,8 @@ proc/TextPreview(var/string,var/len=40)
 		. += ascii2text(letter)
 	. = jointext(.,null)
 
-#define starts_with(string, substring) (copytext(string,1,1+length(substring)) == substring)
+#define text_starts_with(string, substring) !!findtext_char((string), (substring), 1, 1 + length_char(substring))
+#define text_ends_with(string, substring) !!findtext_char((string), (substring), -length_char(substring))
 
 #define gender2text(gender) capitalize(gender)
 
@@ -582,10 +590,10 @@ proc/TextPreview(var/string,var/len=40)
 	return "[result]" == text ? result : default
 
 /proc/text2regex(text)
-	var/end = findlasttext(text, "/")
-	if (end > 2 && length(text) > 2 && text[1] == "/")
-		var/flags = end == length(text) ? FALSE : copytext(text, end + 1)
-		var/matcher = copytext(text, 2, end)
+	var/end = findlasttext_char(text, "/")
+	if (end > 2 && length_char(text) > 2 && copytext_char(text, 1, 2) == "/")
+		var/flags = end == length_char(text) ? FALSE : copytext_char(text, end + 1)
+		var/matcher = copytext_char(text, 2, end)
 		try
 			return flags ? regex(matcher, flags) : regex(matcher)
 		catch()
@@ -597,3 +605,28 @@ proc/TextPreview(var/string,var/len=40)
 			var/regex/matcher = entry[1]
 			message = replacetext_char(message, matcher, entry[2])
 	return message
+
+
+/**
+* Connects either a list or variadic arguments with "/" and cleans up multiple joins.
+* eg:
+*   join_url("a", "b", "c") => "a/b/c"
+*   join_url(list("a", "b", "c")) => "a/b/c"
+*   join_url("https://some.tld/", "/cats", "~", "//dogs") => "https://some.tld/cats/~/dogs"
+*/
+/proc/join_url()
+	var/len = length(args)
+	if (!len)
+		return ""
+	var/list/parts
+	if (len == 1)
+		if (!islist(args[1]))
+			parts = list(args[1])
+		else
+			parts = args[1]
+	else
+		parts = args
+	var/static/regex/clean1 = regex(@"\/\/+", "g") //Squash //+ to /
+	var/static/regex/clean2 = regex(@"^([^:]+:)\/([^\/])") //Fix "blah://" if we killed it in clean1
+	parts = replacetext_char(parts.Join("/"), clean1, "/")
+	return replacetext_char(parts, clean2, "$1//$2")

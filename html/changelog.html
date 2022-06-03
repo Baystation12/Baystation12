@@ -5,7 +5,7 @@
   <link rel="stylesheet" type="text/css" href="changelog.css">
   <base target="_blank" />
   <script type='text/javascript'>
-  
+
 	function changeText(tagID, newText, linkTagID){
 		var tag = document.getElementById(tagID);
 		tag.innerHTML = newText;
@@ -13,8 +13,8 @@
 		linkTag.removeAttribute("href");
 		linkTag.removeAttribute("onclick");
 	}
-	
-  </script>  
+
+  </script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 
@@ -25,8 +25,8 @@
 		<td valign='top'>
 			<div align='center'><font size='3'><b>Baystation 12</b></font></div>
 			<div align='center'><font size='3'><b><i>A Space Station 13 Project</i></b></font></div>
-			
-			<p><div align='center'><font size='3'><a href="http://wiki.baystation12.net/">Wiki</a> | <a href="https://github.com/Baystation12/Baystation12/">Source code</a></font></div></p>
+
+			<p><div align='center'><font size='3'><a href="https://baydoc.ss13.me/">Wiki</a> | <a href="https://github.com/Baystation12/Baystation12/">Source code</a></font></div></p>
             <font size='2'>Code licensed under <a href="http://www.gnu.org/licenses/agpl.html">AGPLv3</a>. Content licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>.<br><br>
 			<font size='2'><b>Visit our IRC channels:</b> #bs12 and #codershuttle on irc.sorcery.net</font><br>
 			<font size='2'><b>Join our Discord server:</b> <a href='https://discord.gg/DrtRFxs'>-Click Here-</a><br></font>
@@ -49,533 +49,630 @@
 </table>
 
 		<!--
-		
-		TO ADD AN ENTRY, ADD AND MAINTAIN YOUR OWN changelog/USERNAME.yml FILE. 
-		
+
+		TO ADD AN ENTRY, ADD AND MAINTAIN YOUR OWN changelog/USERNAME.yml FILE.
+
 		*** DO NOT MODIFY THIS FILE OR YOU WILL CAUSE MERGE CONFLICTS. ***
-		
+
 		-->
 		<div class="commit sansserif">
 
-			<h2 class="date">26 April 2021</h2>
-			<h3 class="author"> updated:</h3>
+			<h2 class="date">02 June 2022</h2>
+			<h3 class="author">Spookerton updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="tweak">CPR now is much less likely to restart a stopped heart.</li>
-				<li class="tweak">Skrellship hardsuits no show skin on their hands.</li>
-				<li class="tweak">Nanoblood now dents a mob's immunity more.</li>
-				<li class="tweak">Merc TTVs contain less gas for overall less boom.</li>
-			</ul>
-			<h3 class="author">CrimsonShrike updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">New exosuit sprites. Courtesy of Azlan.</li>
-				<li class="tweak">Combat chassis is no longer transparent. Power loss will affect it.</li>
-			</ul>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Tweak Petrov's atmos laptop access so all science personnel can use it.</li>
-				<li class="bugfix">Fixed science players not having access to Petrov cameras.</li>
-			</ul>
-			<h3 class="author">SealCure updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Mil-pistols now show belt overlays when holstered, and pistol magazines do not.</li>
+				<li class="bugfix">Planet sites that are flagged disallowed actually obey it; Icarus and Hydrobase don't spawn.</li>
+				<li class="bugfix">Robots can't feed their items to the bluespace drive.</li>
 			</ul>
 
-			<h2 class="date">21 April 2021</h2>
-			<h3 class="author">BlueNexus updated:</h3>
+			<h2 class="date">01 June 2022</h2>
+			<h3 class="author">SierraKomodo updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="tweak">Temperature should have an increased impact on thrust, and burn mode works again.</li>
+				<li class="admin">Bans will now display an error message to the banning admin of the targeted mob ceases to exist while entering a ban reason, instead of silently (If you have runtime logs disabled) crashing.</li>
 			</ul>
+
+			<h2 class="date">30 May 2022</h2>
+			<h3 class="author">Mucker updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="admin">The join/leave messages regarding players and their tickets now use ckeys when listing admins assigned to the ticket.</li>
+				<li class="admin">Fixed the join/leave ticket message triggering with closed tickets.</li>
+			</ul>
+
+			<h2 class="date">29 May 2022</h2>
+			<h3 class="author">Jux updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">Each charon thruster group now has an individual gas pump to provide fuel.</li>
+			</ul>
+			<h3 class="author">Ninetailed updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Reduce spontaneous wardrobe malfunctions</li>
+				<li class="bugfix">Surgical robots are now able to implant organs with the organ gripper</li>
+			</ul>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">The codex now includes mechanics information for HCMs, including steps on how to deploy and use them. Examine any HCM or rig and click the 'Codex' link in the description to see the mechanics guides.</li>
+				<li class="rscdel">The crashed SEV Icarus away site ruin is no longer a spawnable option without admin intervention.</li>
+				<li class="bugfix">You can now break out of lockers again.</li>
+				<li class="tweak">Shuttle control consoles will now send a message to users if they horribly break in a certain way. If this happens, please help and have a dev look at it. I've been trying to figure out these shuttle controller crashes for a week now.</li>
+			</ul>
+
+			<h2 class="date">28 May 2022</h2>
+			<h3 class="author">Mucker updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="admin">Staff now receive a notification when a player leaves/joins with an open ticket.</li>
+			</ul>
+
+			<h2 class="date">26 May 2022</h2>
+			<h3 class="author">Spookerton updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscdel">Using a singularity to eat a supermatter no longer automatically ends the game in a broken way.</li>
+			</ul>
+
+			<h2 class="date">25 May 2022</h2>
+			<h3 class="author">Rootoo807 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds 4 new event-themed posters and 14 new event-themed memos.</li>
+				<li class="maptweak">Adds several event-specific poster spawns to the Torch.</li>
+				<li class="rscadd">Adds "defector graffiti" as a new type of crayon decal.</li>
+			</ul>
+			<h3 class="author">Spookerton updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Added "Apparent Age" field to body scans.</li>
+				<li class="tweak">A couple more tattoos are available in the bands / tiger stripes sets.</li>
+				<li class="tweak">Markings that can't be colored don't offer a button to do so.</li>
+				<li class="rscadd">Added overmap ship placeholders and build mode.</li>
+			</ul>
+			<h3 class="author">SuckerPunchSyd updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">added an interaction between water and silver slime extract</li>
+			</ul>
+
+			<h2 class="date">24 May 2022</h2>
+			<h3 class="author">Mucker updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Port some polaris hivebot variants</li>
+			</ul>
+
+			<h2 class="date">23 May 2022</h2>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="balance">Adjusted how damage calculation of explosions against standardized health is done. This currently affects, blobs, turfs, items, and some structures. Overall, the devastation range of explosions should be far more devastating without making the heavy and light ranges also absurdly strong.</li>
+			</ul>
+			<h3 class="author">SomeAngryMiner, Beanysprout, Crimsonshrike, Dudezube  updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Replaces the bluespace drive placeholder with a proper machine, effects and sounds included. Post-explosion effects not included.</li>
+			</ul>
+
+			<h2 class="date">22 May 2022</h2>
+			<h3 class="author">Jux updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">The Charon now has ten phoron sheets for the generator.</li>
+				<li class="maptweak">The Aquila's floors have been touched up to be less bland.</li>
+				<li class="maptweak">Some Charon & Aquila rooms now have lightswitches.</li>
+			</ul>
+			<h3 class="author">SomeAngryMiner  updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Replaces the portable generator sprites with new ones. Also replaces the nuclear reactor sprite.</li>
+			</ul>
+			<h3 class="author">Spookerton updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">A vox stack with a viable player implanted into a viable body will always take it over.</li>
+				<li class="tweak">Human subspecies get human mods. Cat ears? Vat ears.</li>
+			</ul>
+
+			<h2 class="date">19 May 2022</h2>
 			<h3 class="author">CrimsonShrike updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="tweak">Exosuits no longer accumulate radiation. They will instead return radiation at current location reduced by armour directly.</li>
+				<li class="rscadd">Hot zones will now be warped to represent the heat</li>
+			</ul>
+
+			<h2 class="date">18 May 2022</h2>
+			<h3 class="author">Rootoo807 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Eating food that normally produces trash with a utensil now properly spawns trash.</li>
+			</ul>
+
+			<h2 class="date">17 May 2022</h2>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Unwrenched faucets now have sprites again.</li>
+			</ul>
+
+			<h2 class="date">16 May 2022</h2>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Creating cult runes now have timers associated with them once more. Creating runes also now displays a public progress bar and requires unique action checks for both the user and the target tile, as was intended in #32010.</li>
+			</ul>
+			<h3 class="author">Spookerton updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Typing indicators and speech bubbles appear over lighting.</li>
+				<li class="tweak">There is a preference for seeing language names as a ghost.</li>
+				<li class="tweak">The physical part of character setup has changed to be less tabley.</li>
+				<li class="tweak">You can set your character preview to be small (2x), medium (3x), or large (4x).</li>
+			</ul>
+
+			<h2 class="date">15 May 2022</h2>
+			<h3 class="author">Jux updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">The GUP has been remapped to make better use of the space.</li>
+				<li class="maptweak">The Aquila has been remapped so as to not have redundant rooms.</li>
+				<li class="bugfix">The GUP no longer appears to be a convertible from D4 at spawn.</li>
+			</ul>
+			<h3 class="author">Linth updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">There is another higher scent level for viscera, and "haze" and "plume" descriptors for smoking.</li>
+				<li class="tweak">Added an all in one rolling kit with tobacco, paper, and filters to cigarette machines.</li>
+				<li class="tweak">Cigarette paper and filter packs are smaller and can fit inside one another and wallets.</li>
+				<li class="tweak">Tobacco rolling pouches can hold any tiny item.</li>
 			</ul>
 			<h3 class="author">Mucker updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="rscadd">Ported exoplanet themes from Nebula, includes Ruined City, Robot Guardians, and Radiation Bombing</li>
-				<li class="tweak">Desert planets now have much less quicksand, but the quicksand that does exist is now invisible.</li>
-				<li class="rscdel">Removed the ruined planet type, replaced with the 'Ruined City' theme which can occur on any planet.</li>
-				<li class="admin">Fixed some buildmode nanoui's not working if you weren't ghosted.</li>
+				<li class="admin">The VV 'type' option when adding/modifying var's now takes a manually entered type path instead of listing all possible types.</li>
+				<li class="bugfix">Fixed psychokinesis in-hand abilities (tools, psyblade) not working.</li>
 			</ul>
-			<h3 class="author">Paprikue/Dox updated:</h3>
+			<h3 class="author">Rootoo807 updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="rscadd">You can now toggle your HUDs on and off, without having to remove them, in case you wanted to pull off the look while resting your eyes. Includes new sprites for when they're off, and flashy sound effects to boot.</li>
-				<li class="rscadd">The science nerds can now get prescription Science HUDs so they can be even nerdier. Available in loadout.</li>
-				<li class="tweak">Tweaked the Medical HUD visor colors slightly to better match normal medHUD colors.</li>
-				<li class="tweak">EMPs now don't blind you if your HUD or goggles are deactivated. Security HUDs also don't protect from flashes if they're not active.</li>
-				<li class="bugfix">HUDs no longer say that you're blinded after being EMP'd when they're not on your eyes.</li>
+				<li class="tweak">Prosthetic organ fabricator can print lower bodies.</li>
+				<li class="rscadd">Adds serving bowls, which can be used to serve custom dishes of up to 4 ingredients. Use "Rename Bowl" verb to give rename.</li>
+				<li class="rscadd">Adds 20 serving bowls to the Dinnerware vendor.</li>
+				<li class="tweak">Custom sandwiches can be renamed.</li>
+				<li class="tweak">Tweaks icons for some cooker results, adds filling color to some foods.</li>
+			</ul>
+
+			<h2 class="date">14 May 2022</h2>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Leaping distance is now 100% based on skill level and mob-type specific overrides instead of relying on a flat basic athletics skill check that resulted in a flat line instead of a curve between the middle tiers of skill.</li>
+				<li class="tweak">Fractured legs and feet now affect your ability to leap by reducing how far you can jump. Splinted limbs reduce this effect by half.</li>
+				<li class="tweak">You now receive a message indicating why you can't leap instead of silence when you attempt to leap beyond your range.</li>
+				<li class="tweak">Leaping with fractured legs or feet now causes pain on landing, and has a chance of your broken limb(s) buckling beneath you, causing you to collapse and taking more damage. 50% chance per broken limb, 25% chance if splinted.</li>
+			</ul>
+
+			<h2 class="date">13 May 2022</h2>
+			<h3 class="author">Spookerton updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Rebalanced all item/clothing based slowdowns to be less punishing and make a bit more relative sense for suits.</li>
+			</ul>
+
+			<h2 class="date">12 May 2022</h2>
+			<h3 class="author">Mucker updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="admin">Adjusted aft-end of the event shuttle so it can dock with the Torch.</li>
+				<li class="admin">Added toggleable blastdoors to event shuttle windows.</li>
+				<li class="admin">Removed the need for hydrogen on the event shuttle.</li>
+			</ul>
+
+			<h2 class="date">11 May 2022</h2>
+			<h3 class="author">CrimsonShrike updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Exosuit gravity catapult is now a bit faster and has new effects to make it clearer.</li>
+			</ul>
+			<h3 class="author">Ryan180602, Azlanonpc updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds admin-spawn Fleet rig.</li>
+				<li class="rscdel">Removes Asset Protection rig.</li>
+				<li class="tweak">Deathsquads now use the generic combat rig.</li>
+				<li class="maptweak">Asset Protection rig from ERT base have been removed entirely. (Rack has a wall in it's place, now.)</li>
+			</ul>
+
+			<h2 class="date">09 May 2022</h2>
+			<h3 class="author">Mucker updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Drills can mine multiple mineral turfs at once again.</li>
 			</ul>
 			<h3 class="author">Ryan180602 updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="maptweak">Change Physician's Paperwork Office to Medical Paperwork Office (for all medical personnel)</li>
-				<li class="maptweak">Remapped Exam Room</li>
-				<li class="maptweak">Added 3 Runtime spawn locations</li>
-			</ul>
-			<h3 class="author">SealCure updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Adds janihud implants, buildable from the robotics fabricators.</li>
+				<li class="tweak">Increases max_desc_len to 256 chars. Custom descriptions are longer.</li>
 			</ul>
 
-			<h2 class="date">20 April 2021</h2>
-			<h3 class="author"> updated:</h3>
+			<h2 class="date">06 May 2022</h2>
+			<h3 class="author">Jeff updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="tweak">All torch fleet crew now spawn with departmental coveralls.</li>
-				<li class="tweak">All torch fleet crew can obtain fatigues from uniform vendors.</li>
-				<li class="tweak">The fleet jacket and fleet polo are no longer available from uniform vendors.</li>
-				<li class="rscdel">Fleet officer's coveralls no longer exist.</li>
-				<li class="tweak">Fleet security enlisted now ACTUALLY spawn with coveralls.</li>
-				<li class="tweak">Orbital mining station description changed to be less important sounding.</li>
-				<li class="tweak">More guns have been added to the random raider spawns.</li>
-				<li class="tweak">Toolbelts can hold geiger counters.</li>
-				<li class="rscadd">The SEV Icarus ruin now has a green haze.</li>
-				<li class="tweak">Sealed skrellian hardsuits now contain skrellian booty properly.</li>
-				<li class="tweak">The skrellian engineering hardsuit's funny little welding arm is layered properly now.</li>
+				<li class="rscadd">Emagging the cargo console now makes it all access.</li>
 			</ul>
+			<h3 class="author">Mucker updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="admin">Fixed stealthed staff showing in credits</li>
+				<li class="bugfix">Fixed the spelling of 'coffee' in the credits</li>
+			</ul>
+			<h3 class="author">Ninetailed updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscdel">Most ghost roles (except pAI) no longer require a preference to be set</li>
+				<li class="rscadd">Yes/no confirmation prompt when accepting a ghost role</li>
+				<li class="tweak">pAI preference now Yes/No instead of High/Low/Never</li>
+			</ul>
+			<h3 class="author">Rootoo807 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Lizards, chickens, and chicks can be picked up.</li>
+				<li class="tweak">Lisa and puppies are no longer invisible when held.</li>
+				<li class="rscadd">Adds bacon. Obtain it by using a knife on raw cutlets.</li>
+				<li class="tweak">Resprites bacon, enchiladas, tacos, muffins, and baguettes.</li>
+				<li class="rscadd">Resprites command hardsuits.</li>
+			</ul>
+
+			<h2 class="date">05 May 2022</h2>
+			<h3 class="author">Mucker updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Fixed new gateway effect being underneath most things</li>
+			</ul>
+			<h3 class="author">Rootoo807 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Garden and Xenobotany seed vendors have been alphabetized. Garden and Xenobotany seed vendors now have the same contents, besides random Xenobotany seeds.</li>
+				<li class="tweak">Missing low-grade tobacco seeds now exists. Low-grade tobacco stats (color, nutrient consumption rate) have been tweaked slightly to be distinct from regular tobacco.</li>
+				<li class="tweak">All grape variants can evolve into all other grape variants.</li>
+				<li class="bugfix">Green grapes are now green. White grapes now display as "white grape" rather than "white grape seeds".</li>
+			</ul>
+			<h3 class="author">Ryan180602 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Lets descriptions be longer (128 char limit).</li>
+				<li class="tweak">Lets fluff augments (minus eye-ones) be customised.</li>
+			</ul>
+
+			<h2 class="date">04 May 2022</h2>
+			<h3 class="author">Jux updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Security HUD goggles protect from teargas to the eyes again.</li>
+			</ul>
+			<h3 class="author">Ryan updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="admin">Adds Close Job Slot button for Crew/Submap</li>
+			</ul>
+
+			<h2 class="date">01 May 2022</h2>
+			<h3 class="author">CrimsonShrike updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds the exosuit medigel spray. Now ambulance passengers don't need to bleed all the way there</li>
+			</ul>
+			<h3 class="author">Ryan180602 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Add editable custom description/names for loadout items.</li>
+			</ul>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Various existing do_after() timers are now configured to allow the user to only perform one action and the target to have one action performed on them at a time. This ONLY affects interactions that already had a timer associated with them and does not add any new timers. Notable exceptions are provided in the PR. See https://github.com/Baystation12/Baystation12/pull/32010</li>
+				<li class="tweak">Various existing do_after() timers now display public progress bars.</li>
+				<li class="tweak">Faxes tagged 'Unknown' no longer appear on the list of targetable fax machines.</li>
+				<li class="rscadd">Fax machines can now be emagged, which in turn allows you to use multitools to change the fax machine's department tag, so that you can pretend your faxes came from somewhere else. Paperwork antags rejoice.</li>
+				<li class="rscadd">Fax machines with department tags set to off-ship places, i.e. Expeditionary Command, can now intercept faxes sent off-ship. Now you can reply to people replying to your fake faxes!</li>
+				<li class="bugfix">Sending faxes to destination tags that have multiple matching fax machines no longer does weird loopy things and then break.</li>
+				<li class="tweak">Fax machines now display a visible message indicating a fax has been received and which department the fax came from.</li>
+				<li class="tweak">All papers printed by a fax machine now display the origin department in the paper's title, regardless of if they were an admin fax or a player fax. No more using fax titles to metagame antag faxes.</li>
+				<li class="tweak">A fax machine's configured department now appears in the UI when using the fax machine as `Fax Machine (Department Name)`.</li>
+				<li class="bugfix">The redundant 'The paper is titled XYZ' line from fax descriptions has been removed.</li>
+				<li class="admin">send-fax now includes the same list of pre-made origin departments as the emag+multitool options for consistency and further reduction of potential metagame.</li>
+				<li class="bugfix">Fax machines and send-fax no longer have a perceived delay in processing when sending faxes.</li>
+				<li class="tweak">Fax machines no longer lock themselves whenever sending a fax to off-ship places, i.e. Expeditionary Command.</li>
+				<li class="bugfix">Portable air pumps can no longer be set to a target pressure higher than the normal limit by EMPs.</li>
+				<li class="bugfix">Non-powered doors (I.e. wood or material doors) no longer randomly open when EMP'd.</li>
+				<li class="tweak">Radios now randomize their on/off states instead of disabling everything when EMP'd.</li>
+				<li class="tweak">Imprinting implants now may send a 'reminder' when EMP'd.</li>
+				<li class="tweak">Integrated HUD implants now take the same amount of EMP damage as all other implants.</li>
+			</ul>
+			<h3 class="author">SomeAngryMiner updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds snakes, both venomous and non venomous ones. Venomous ones are currently admin only. They are able to be picked up, and worn as a scarf. Not like you should, though.</li>
+				<li class="rscadd">The Brig chief has a new pet, Cobby. Its located on its office.</li>
+				<li class="rscadd">Leeches have received a resprite, and their dens are considerably more subtle.</li>
+				<li class="rscadd">Leeches have received a tiny damage buff, from 5 to 8, making them something to mind for voidsuited people.</li>
+				<li class="rscadd">Resprites cult portals and anomaly hellportals. Sprites done by UDaV73rus.</li>
+			</ul>
+			<h3 class="author">SomeAngryMiner, Pawn updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Resprites the Obstruction Field Disperser and its beam.</li>
+			</ul>
+			<h3 class="author">Textor updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Binoculars now cancel zoom correctly when you move, drop them, put them in a bag, or have them stolen by a parrot.</li>
+			</ul>
+
+			<h2 class="date">29 April 2022</h2>
+			<h3 class="author">Jux updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">Moved the Charon main airlock interior button so it's more easily used.</li>
+				<li class="maptweak">Makes the Charon's medical compartment and cockpit airlocks windowed.</li>
+			</ul>
+
+			<h2 class="date">28 April 2022</h2>
+			<h3 class="author">Kell-E updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="balance">Flechette shells cost: 8 -> 12.</li>
+				<li class="balance">Flechette shells availability: Everyone -> Mercenaries only.</li>
+				<li class="tweak">You can no longer print flechette shells at a lathe.</li>
+				<li class="balance">Plasma cutter damage: 30 -> 20</li>
+				<li class="balance">Plasma cutter falloff has been significantly increased.</li>
+				<li class="rscdel">Removes the organ printer (Bio-printer) from OR one.</li>
+				<li class="rscadd">Adds a 5u dropper with peridaxon preset to 1u increments to both OR one and two.</li>
+			</ul>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Exosuits can no longer be pinned to walls by spears and spikes.</li>
+			</ul>
+			<h3 class="author">Spookerton updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">The flashdark, maint drone pen light, glow sticks, slime lights, and lava lamps do not eye-flash people when used on their eyes.</li>
+				<li class="bugfix">Pain has effects again, bluespace is blue again (but less, I hear you).</li>
+			</ul>
+
+			<h2 class="date">26 April 2022</h2>
+			<h3 class="author">Jeff updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Crisis borgs can now synthesize adrenaline</li>
+			</ul>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="balance">Effective range of EMP grenades reduced from 10 tiles to 5.</li>
+				<li class="balance">Heavy severity range of EMP grenades reduced from 4 tiles to 2.</li>
+				<li class="bugfix">Fixed low yield EMP grenade range being limited to 1 tile; Low-yield grenades now have an effective range of 3 tiles and a heavy severity range of 1 tile.</li>
+				<li class="balance">Ion projectile effective splash range reduced from 2 to 1. To be effective, ion rifles now must hit their target or hit the target's turf. This change now makes the difference between ion rifles and ion pistols solely the strength of the EMP effect and no longer the additional splash radius.</li>
+				<li class="tweak">Placing mobs onto tables, railings, etc using a grab now has a timer.</li>
+				<li class="tweak">Blobs will no longer expand onto dense objects, instead trying to attack and destroy them before taking the tile if they are objects that use standardized health.</li>
+				<li class="tweak">Blobs will no longer expand onto tiles housing a standing mob. If you fall over, however, the blob will happily consume you.</li>
+				<li class="tweak">Blobs will not target or attack canisters or fuel tanks, to avoid blobs becoming self-detonating hellgas monsters.</li>
+			</ul>
+			<h3 class="author">Spookerton updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">When not on help intent, buckling/unbuckling other mobs takes a few uninterrupted seconds.</li>
+			</ul>
+			<h3 class="author">Tennessee updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Two new posters about the SCGF and serpentids have been added.</li>
+				<li class="rscdel">The Wasteland poster has been removed.</li>
+			</ul>
+			<h3 class="author">Textor updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Crowbarring up the bottom tile of a shuttle will no longer yield an infinite supply of tiles.</li>
+				<li class="bugfix">Traitor uplinks now quit the program when you use the close button on the popup or in the UI. Closing the window leaves the program running, still.</li>
+				<li class="bugfix">Fixes atmos console in R-UST chamber to control the injector on the input rather than output.</li>
+			</ul>
+
+			<h2 class="date">25 April 2022</h2>
+			<h3 class="author">Jux updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">The missing Charon is no longer missing important cameras.</li>
+				<li class="maptweak">The Charon airlocks actually have interior and exterior buttons.</li>
+			</ul>
+			<h3 class="author">Spookerton updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Secret works again.</li>
+			</ul>
+			<h3 class="author">Textor updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Sounds end when you respawn, meaning you no longer have that one tune stuck in your head for the rest of the round.</li>
+				<li class="rscadd">The disposal bin can now be ejected by right clicking and selecting the verb, even without power.</li>
+			</ul>
+
+			<h2 class="date">23 April 2022</h2>
+			<h3 class="author">CrimsonShrike updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">A number of actions and items now have particles.</li>
+			</ul>
+			<h3 class="author">Spookerton updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Timer buckets shouldn't reset hitting the lobby.</li>
+			</ul>
+			<h3 class="author">Textor updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Air alarms in xenobiology will now have distinct names.</li>
+				<li class="maptweak">The power in xenobiology has been recabled to allow for better access to cabling and easier repairs. Each cell also now has an APC.</li>
+				<li class="rscadd">Adds boron gas. The boron canister can be ordered from supply. Boron is theorized to be good for fusion reactions.</li>
+				<li class="maptweak">Adds gas sensor to RUST chamber.</li>
+				<li class="bugfix">Fixes atmosphere control console in RUST chamber. It now can actually control the injector.</li>
+				<li class="bugfix">Placed tiles should now always be the correct type.</li>
+				<li class="tweak">The space cola variants now have adjusted descriptions and color variation.</li>
+			</ul>
+
+			<h2 class="date">22 April 2022</h2>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">The vent and scrubber in the port hangar catwalk are now properly connected to pipes.</li>
+			</ul>
+			<h3 class="author">Textor updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Researchers have the ability to control the environment inside the xenobiology lab again.</li>
+				<li class="bugfix">Sledgehammers are no longer invisible.</li>
+				<li class="bugfix">Replacing blinded eyes with undamaged new eyes or undamaged optical sensors now gives you the gift of sight.</li>
+			</ul>
+
+			<h2 class="date">21 April 2022</h2>
+			<h3 class="author">Jux updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">Remaps the Charon to make better use of the space.</li>
+			</ul>
+
+			<h2 class="date">20 April 2022</h2>
+			<h3 class="author">Textor updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Deck 4 now has a hallway stretching through the hangar, allowing people to pass more easily or observe hangar operations.</li>
+				<li class="rscdel">Air Traffic Control has been removed to make room for this hallway.</li>
+				<li class="bugfix">Engineers no longer try to pry out intellicards from empty intellicard slots instead of opening the maintenance hatch on multifunctional computers.</li>
+				<li class="bugfix">Newly built plating no longer will be called "airless" plating.</li>
+				<li class="bugfix">Closets and crates made out of materials other than steel will now deconstruct to their constituent material.</li>
+			</ul>
+
+			<h2 class="date">18 April 2022</h2>
+			<h3 class="author">Mucker updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Fixed the excavation suit cycler not properly setting the item_state of helmets.</li>
+			</ul>
+			<h3 class="author">Ryan updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">ERT commander pack onmob and obj sprites are now similar</li>
+				<li class="tweak">Sec satchel now has red straps onmob (left/right too)</li>
+				<li class="tweak">Sec backpack onmob has red accents on straps</li>
+				<li class="tweak">Left/right onmob sprite for toxsatchel is now ntsatchel</li>
+				<li class="tweak">Norm backpack highlights are duller</li>
+				<li class="tweak">Attempt at fixing weird bulge on satchels</li>
+			</ul>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">Cyborg Upload is no longer protected by an impenetrable blast door and is easier to hack into.</li>
+			</ul>
+			<h3 class="author">Spookerton updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Uplinks spawn a box of premium donk pockets instead of a single one. Whoops.</li>
+			</ul>
+			<h3 class="author">nol4, azlanonpc updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Adds new hair styles (Shoulder Bob 2, Ponytail Tied, Ponytail Dinky 1/2/3, Big Bun)</li>
+			</ul>
+
+			<h2 class="date">17 April 2022</h2>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">The Deck Chief's fax machine is now labelled as 'Torch - Deck Chief's Office' instead of 'Quartermaster's Office'.</li>
+				<li class="maptweak">The computer lab and medical paperwork offices now have fax machines.</li>
+				<li class="tweak">Fax machines no longer have access requirements.</li>
+			</ul>
+
+			<h2 class="date">16 April 2022</h2>
 			<h3 class="author">AzlanonPC updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="rscadd">implantable HUDs and multitools have different sprites for each variation.</li>
+				<li class="rscadd">Rollerbed got a visual overhaul.</li>
 			</ul>
-			<h3 class="author">Boznar updated:</h3>
+			<h3 class="author">Kell-E updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="maptweak">unmaps flash from physician lockers</li>
+				<li class="balance">Traitors now have one additional master skill at the cost of one less trained skill.</li>
+				<li class="rscadd">Adds a new variable for controlling weapon penetration values</li>
+				<li class="balance">The pocket knife is no longer sharp enough to penetrate armor</li>
 			</ul>
-			<h3 class="author">CrimsonShrike updated:</h3>
+			<h3 class="author">SierraKomodo updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="rscadd">Adds exosuit flash.</li>
-				<li class="rscadd">Adds exosuit camera.</li>
-				<li class="tweak">Exosuit floodlights can be mounted on shoulders now too.</li>
-				<li class="tweak">Light exosuit chassis now has a single shoulder slot.</li>
-				<li class="tweak">Spherical exosuit chassis now seats 2.</li>
-				<li class="rscadd">Adds looking down.</li>
-				<li class="tweak">Changes and bugfixes for zmimic.</li>
-				<li class="rscadd">Adds diona nymph chirp as instrument. Don't say I don't ever give you anything.</li>
+				<li class="bugfix">Cables no longer appear on top of walls.</li>
+				<li class="rscadd">Added dress-up categories for the various EC uniforms and tiers of uniforms.</li>
+				<li class="tweak">Spinning lights should now be less lag-inducing.</li>
 			</ul>
-			<h3 class="author">Cupax3 updated:</h3>
+
+			<h2 class="date">14 April 2022</h2>
+			<h3 class="author">BurpleBineapple updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="rscadd">Added a new Xynergy labcoat to the loadouts, available to all Civilian & Labcoat-wearing personnel.</li>
+				<li class="bugfix">Fixes the Fifth Fleet beret's description to be grammatically correct.</li>
+				<li class="bugfix">Fixes minor grammatical issues with all division berets.</li>
 			</ul>
-			<h3 class="author">Hubblenaut updated:</h3>
+			<h3 class="author">ComradeCheekiBreeki updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="tweak">Regular use of the sauna will no longer trigger the air alarm in it.</li>
-			</ul>
-			<h3 class="author">Ilysen updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">While unconscious or asleep, you may now get bolded message similar to dreams to indicate that you're being treated, floating in a cryo tube, sitting in a sleeper with stasis, or on an operating table - these are added with the goal of helping someone understand what's happening to them even though they can't see around them while unconscious.</li>
-				<li class="rscadd">Added a codex entry describing how SSD messages are displayed from a mechanical perspective.</li>
-				<li class="spellcheck">Ghosted mobs now have a distinct examine message from disconnected mobs.</li>
-				<li class="bugfix">Monkeys are no longer permanently comatose.</li>
-			</ul>
-			<h3 class="author">Imienny updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscdel">Its no longer possible to make combat mech sensors(thermal mech sensors)</li>
-				<li class="rscdel">Skrell scout ship no longer spawns with thermal goggles</li>
-			</ul>
-			<h3 class="author">JAR-OSKI updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fixes hudpatch rogue pixel</li>
+				<li class="rscadd">Adds ability to place cables from a cable coil on lattices in open space (space between levels on a multi-level map) or space (the vacuum)</li>
+				<li class="bugfix">Fixes cables underneath catwalks being able to be manipulated by opening the Turf menu.</li>
+				<li class="tweak">Tweaks messages to players about why they can't place cables in certain places</li>
 			</ul>
 			<h3 class="author">Mucker updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="admin">Adds a faction modifier to mob spawner buildmode.</li>
-				<li class="bugfix">Player mobs inside things are properly notified of exoplanet spawn events.</li>
-				<li class="tweak">Added spiders and lowered meat horror spawn chance for exoplanet spawn events.</li>
-				<li class="bugfix">Fixed the skill panel losing focus when editing skills.</li>
-				<li class="tweak">Moved the 'rename species' verb for exoplanet mobs to the IC tab and added a right-click option.</li>
-				<li class="admin">Added a verb for spawning exoplanets, 'Create Exoplanet' in the Debug tab.</li>
-				<li class="admin">Adds the 'Notarget' verb to 'Special Verbs', toggling a mobs visibility to simple mobs.</li>
-				<li class="rscadd">Nurse spiders can now 'feed' a small number of spiderlings to cause them to begin growing.</li>
-				<li class="rscadd">Spiders can now use ladders. Cower in fear.</li>
-				<li class="bugfix">Fixed guard/nurse spiders not pairing up, so guards will now go 'berserk' when their nurse is killed.</li>
-				<li class="bugfix">Nurse spiders will no longer cocoon other spiders (or themselves).</li>
-				<li class="tweak">Nurse spiders now have a chance to be able to spawn an egg cluster after spawning, instead of needing to feed first.</li>
-				<li class="tweak">Egg clusters now take slightly more time to spawn spiderlings.</li>
-				<li class="tweak">Nurse spiders will no longer cocoon items.</li>
-				<li class="tweak">The hellportal artifact effect will now spawn abominations much less often, so we may keep our limbs.</li>
+				<li class="balance">Zombies no longer have xray vision, do not infect people nearby on death, and transfer fewer reagents on bite.</li>
+			</ul>
+			<h3 class="author">Mucker, AzlanonPC updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="admin">Added a new shuttle for event usage, does not spawn on its own.</li>
+			</ul>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Unique shuttle control consoles can no longer be broken or dismantled because this places them in an unfixable state.</li>
+				<li class="bugfix">Rotating alarm lights are now anchored and can no longer be dragged around by people or the supermatter.</li>
+				<li class="bugfix">Shuttles can no longer delete shuttle landmarks and break themselves by landing on beacons.</li>
+				<li class="rscadd">Supply can now order empty dispenser cartridges. For those bartenders that want to add their juiced fruits to the dispenser machines.</li>
+				<li class="maptweak">The bluespace drive has been removed from the Casino away site.</li>
+			</ul>
+
+			<h2 class="date">12 April 2022</h2>
+			<h3 class="author">Asillyn00b updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Replaced base jeans sprite and altered denim hoodie hood to be white.</li>
+			</ul>
+			<h3 class="author">Kell-E updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="balance">Armor is somewhat less effective at blocking weapons below their protection values</li>
+				<li class="rscadd">Adds a box of shurikens to the uplink for 18TC.</li>
+				<li class="balance">reduces the size of shurikens from medium to tiny (Pistol -> syringe size), removes shurikens ability to gib limbs and wall splat but increased their throw force from 15 to 20.</li>
+				<li class="rscadd">Adds a katana to the uplink for 24 TC.</li>
+				<li class="balance">reduces the cost of the pike cube from 70 to 44.</li>
+				<li class="rscdel">Removes the replica pistol and zipgun from the uplink.</li>
+				<li class="balance">Reduces the cost of the two merc railguns from 109/130 to 65/75 respectively.</li>
+				<li class="rscadd">Added a stimulant autoinjector to the uplink (Cost: 14)</li>
+				<li class="rscadd">Added coagulant (Cannot be created at this time, but does appear in coagulant autoinjectors). Coagulant can staunch internal and external bleeding.</li>
+				<li class="balance">Improved the stabilization kit available in the uplink, it now takes up much less space, fits into a pocket and has had the quality of it's contents improved. Includes one coagulant autoinjector.</li>
+				<li class="rscdel">Removed the medical HUD from the uplink</li>
+				<li class="rscdel">Removed the medical scanner from the uplink</li>
+				<li class="rscadd">Added an advanced medical toolkit to the uplink, contains a large number of medical tools including a HUD, scanner, rollerbed, auto-resuscitator, auto-compressor, nanoblood IV bag, advanced first-aid kit, nitrile gloves and a box of syringes. (Cost: 24)</li>
+				<li class="rscadd">All guns may now optionally have damage falloff</li>
+				<li class="balance">All laser weapons suffer from damage falloff relative to their size</li>
+				<li class="balance">Compact smartgun: Shots (5 ->6), Lethal damage (25 -> 35), Armor penetration (10 -> 0)</li>
+				<li class="balance">Pulse pistol: Armor penetration (0 -> 25), Accuracy (-1 -> 0)</li>
+				<li class="balance">Pulse carbine: Armor penetration (0 ->30), Accuracy (-1 -> 0)</li>
+				<li class="balance">Pulse rifle: Armor penetration (0 -> 35), Accuracy (-1 -> 1)</li>
+				<li class="balance">Plasma cutter: Damage (15 -> 30), Armor penetration (0 -> 30)</li>
 			</ul>
 			<h3 class="author">Ryan180602 updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="rscdel">Remove Space-Adapted themed accessories</li>
-				<li class="tweak">Over-exertion and over-utilisation of pulse-heightening drugs like nicotine, caffeine and hyperzine can cause cardiac arrests</li>
-				<li class="tweak">Add Construction/Electrical BASIC as default for Roboticists</li>
-				<li class="bugfix">Fixes splashing liquids in beaker when transferring to Condimasters</li>
+				<li class="tweak">Backpacks and Satchel have new on-mob/obj sprites</li>
+				<li class="tweak">Holowarrant has new obj sprite</li>
+				<li class="tweak">Added specific left/right hand on-mob sprite for backpacks and satchels.</li>
+				<li class="tweak">toxpack is now ntpack (same for satchels).</li>
 			</ul>
-			<h3 class="author">SealCure updated:</h3>
+
+			<h2 class="date">11 April 2022</h2>
+			<h3 class="author">BurpleBineapple updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="tweak">Ascent caulship is no longer referred to as 'colony ship' in the join menu.</li>
+				<li class="imageadd">New balaclava and tactical balaclava sprites made by Azlan.</li>
+				<li class="imageadd">New gas mask sprite made by Asillyn00b. Item sprite made by PurplePineapple with help from Azlan.</li>
+			</ul>
+			<h3 class="author">Kell-E updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="balance">Slightly reduced melee accuracy penalties (By about 33%) and slightly upped the threshold of sustained damage before the penalties begin to kick in.</li>
+			</ul>
+			<h3 class="author">Mucker updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscdel">Removed bluespace residue from the overmap.</li>
+			</ul>
+
+			<h2 class="date">10 April 2022</h2>
+			<h3 class="author">Kell-E updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds two new dress undershirts.</li>
+			</ul>
+
+			<h2 class="date">08 April 2022</h2>
+			<h3 class="author">ComradeCheekiBreeki updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Differentiated existing loadout lists for awards into SolGov military awards, SolGov civilian awards and SolGov military ribbons. Anyone who had medals or ribbons in their loadout before will need to add them again.</li>
+				<li class="tweak">Redid all SolGov medals and ribbons (name, icon and description).</li>
+				<li class="rscadd">Added 14 new ribbons, 11 of which are medal ribbons and 3 of which are new awards.</li>
+			</ul>
+			<h3 class="author">Kell-E updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">the replica katana is more difficult to identify on an examine</li>
+				<li class="tweak">the toy vendors contraband now includes the cap gun and ammo.</li>
 			</ul>
 			<h3 class="author">SierraKomodo updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="tweak">Thermals have been re-added to various antag sources that were previously removed.</li>
-				<li class="admin">Mech weapons now generate proper attack logs instead of admin logs, and only appear when targeting mobs.</li>
-				<li class="tweak">Windows now have a minimum damage threshold based on the hardness of their material before they can actually be damaged by melee attacks, adjustments to their health calculation based on material integrity, and now have proper armor handling for melee attacks (Projectile processing for walls already had this). Walls are overall more robust when attacking them. See PR #30429 for specifics.</li>
-				<li class="rscdel">Uniform jackets and winter coats no longer provide any armor or protections.</li>
-				<li class="admin">Pulled punches no longer generate attack logs.</li>
-				<li class="rscadd">Papers are now written in languages. If you understand the language, you can read it. If not, it has the same effects as hearing people talking in a language you don't understand. You can set the language you're writing in when writing on a blank sheet by clicking the language name at the top of the paper's UI window. ZAC is used by default for each paper.</li>
-				<li class="admin">The fax prompt now has a 'Change Language' button to set what language the fax is written in. ZAC is used by default.</li>
-				<li class="bugfix">Grilles of non-default materials now drop the correct material rod when dismantled with wirecutters.</li>
-				<li class="tweak">Blob attacks on structures now use consistent damage handling.</li>
-				<li class="rscadd">Blobs will now open broken doors.</li>
-				<li class="bugfix">Wet people no longer show up as 'flammable' when examined, and instead show up as 'wet'.</li>
-				<li class="tweak">Flying medic drones now have rollerbeds.</li>
-			</ul>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="admin">Added a Reload Character option to player panel - rebuilds a valid mob from current preferences.</li>
-			</ul>
-			<h3 class="author">Sweedle updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Added a recipe for Kamikaze! Combine 1 part vodka, triple sec and lime juice for a sour treat.</li>
-				<li class="tweak">Cherry and strawberry soda are now made with cherry jelly and berry juice respectively.</li>
-				<li class="bugfix">Hooch can now be made as normal. Fringe weaver is now made with 2 parts ethanol, 1 part sugar and 1 part water.</li>
-				<li class="tweak">Fringe weaver will now get you significantly drunker.</li>
-			</ul>
-			<h3 class="author">Tennessee116 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="imageadd">Replaced the sprites of the secure briefcase and captain's backwear</li>
-			</ul>
-			<h3 class="author">gy1ta23 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Added an extra box of sterile gloves to the infirmary, and a supply crate for more.</li>
+				<li class="tweak">Fancy pen fonts are now a fancy but legible serif font.</li>
+				<li class="tweak">Signatures are now in cursive.</li>
+				<li class="rscadd">Added a Gaian culture to the character setup menu.</li>
 			</ul>
 
-			<h2 class="date">29 March 2021</h2>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">There is now a delay between the exoplanet awakening event starting and mobs actually spawning.</li>
-				<li class="tweak">Cargo trolleys can now be hitched together regardless of what direction the trolley is facing.</li>
-				<li class="tweak">Cargo trolleys now tell you if and what they're linked to when you examine them.</li>
-				<li class="bugfix">Natural weapons (I.e. teeth) will no longer embed in people.</li>
-			</ul>
-
-			<h2 class="date">28 March 2021</h2>
-			<h3 class="author">Ilysen updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">You can now examine many circuit boards to learn some short information about the machine they're used to build. Your Construction skill affects the amount of info you glean, with Trained construction getting the most results.</li>
-				<li class="rscadd">Examining a machine with at least Basic construction skill will tell you about its function.</li>
-			</ul>
-
-			<h2 class="date">27 March 2021</h2>
-			<h3 class="author">SammasC123 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Pain multiplier for hits to the groin (and theoretically other genitals) lowered from x2 to x1.5.</li>
-			</ul>
-
-			<h2 class="date">26 March 2021</h2>
+			<h2 class="date">07 April 2022</h2>
 			<h3 class="author">CrimsonShrike updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="tweak">Mech light legs now prevent fall damage.</li>
-				<li class="rscadd">Exosuit manouvering units added. Space awaits! Added one to the exploration exosuit to make it usable for away sites. Added another to salvage gantry mech so it stops floating into space and dying.</li>
-				<li class="tweak">Mechetes have been adjusted to be more powerful but slower.</li>
-				<li class="rscadd">Exosuits now have power states. Remember to turn them on using power button!</li>
-				<li class="tweak">Adjusts some exosuit buttons to better reflect real state of suit</li>
-				<li class="tweak">Some exosuit modules will now consume power passively too.</li>
-				<li class="tweak">Flaregun impacts now have a chance to set victim on fire</li>
-				<li class="rscadd">Slide projectors. Maps one to the briefing room on Deck 1</li>
+				<li class="rscadd">Ship holomaps. Now you know where you are.</li>
 			</ul>
-			<h3 class="author">EvenInDeathIStillServe updated:</h3>
+			<h3 class="author">Kell-e updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="tweak">Speech bubbles are animated now.</li>
-				<li class="tweak">Matter cartridges can be partially loaded to refill RCDs, both of the construction and crossbow varieties.</li>
+				<li class="balance">Characters are now 75% less likely to cha-cha slide through projectiles using their extreme speed.</li>
 			</ul>
-			<h3 class="author">Ilysen updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Added some digital logs on modular computers on the Ahab's Harpoon away site that elucidates more about what happened. Keep an eye out for new digital logs going forward!</li>
-				<li class="tweak">Cultist pylons are now destroyed permanently when they shatter, instead of being placed into a weird "broken" state where have the exact same sprite but can be passed over.</li>
-				<li class="tweak">Cult pylons now have a proper health system, instead of using random chance to determine if they're damaged.</li>
-				<li class="tweak">Wraiths now float, preventing them from falling down z-levels and letting them counteract gravity. They'll still drift in space, though.</li>
-				<li class="tweak">Artificer abilities no longer use a super loud sound.</li>
-				<li class="bugfix">Finally fixed wraiths being unable to use their Phase Shift.</li>
-				<li class="bugfix">Fixed player-controlled simple animals (like constructs) being unable to hurt things.</li>
-				<li class="bugfix">Natural weapons can no longer embed into wounds.</li>
-				<li class="bugfix">Artificers now correctly repair constructs on an attack instead of bashing them.</li>
-			</ul>
-			<h3 class="author">Lorwp updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">New changelog generation method</li>
-			</ul>
+
+			<h2 class="date">06 April 2022</h2>
 			<h3 class="author">Mucker updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="rscdel">Removed the 'teleport_far' artifact effect.</li>
-				<li class="admin">Adds a buildmode for editing an area, turf, and container atmospheres.</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Drinking glasses can now be used to splash mobs</li>
-				<li class="rscadd">Beakers can now break when thrown, spilling its contents</li>
-				<li class="tweak">Add a harm-intent check when clicking on self with glasses/beakers</li>
-				<li class="tweak">FBPs are no longer affected by the effects of smoke</li>
-				<li class="bugfix">Fixes an oversight with unintentionally pouring reagents into dispensers</li>
-			</ul>
-			<h3 class="author">SealCure updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Adds user feedback to toggling a HUDimplant.</li>
-				<li class="tweak">Nymphs engulfing drinking glasses will now obtain a glass shard instead of deleting the container.</li>
-				<li class="tweak">Punitelli will now sometimes spawn with a fashionable pair of sandals for his poor feet.</li>
-			</ul>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">The appearance editor from antag appearance selection has languages on it.</li>
-				<li class="bugfix">The vox mirror creates vox mobs appropriately equipped for their antag type.</li>
+				<li class="admin">Fixed 'Advanced ProcCall' verb to allow for global proc-calling</li>
+				<li class="admin">Added the 'path' argument to 'Advanced ProcCall' verb</li>
 			</ul>
 
-			<h2 class="date">20 March 2021</h2>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="maptweak">The crashed survivor pod's fuel tank has been moved to a less exposed area so it stops being shot randomly by mobs, events, and security.</li>
-				<li class="tweak">Most timed actions now tell you why they failed if they fail.</li>
-			</ul>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Emagging a jukebox no longer causes it to airhorn everyone and then explode.</li>
-				<li class="tweak">Boomboxes don't break on their own anymore, and only do so when EMPd.</li>
-				<li class="tweak">Boomboxes and headphones share a new simplified jukebox nano interface.</li>
-				<li class="tweak">Teleporters are only configured by their console. No more projector clicking.</li>
-				<li class="tweak">Teleporters can be reconnected if they get trashed but you have the bits.</li>
-			</ul>
-
-			<h2 class="date">19 March 2021</h2>
-			<h3 class="author">CrimsonShrike updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Intercomm quick access will now use exosuit radios if possible. (Use :i while in a mech to use the mech radio)</li>
-				<li class="bugfix">Exosuit radios now will check distance correctly.</li>
-			</ul>
-			<h3 class="author">Ilysen updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Admin-sent faxes no longer open the fax editing menu when you finish writing on them.</li>
-			</ul>
-			<h3 class="author">Shadowtail117 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Skrell are now more tolerant of space drugs (found in qokk'loa) and will no longer randomly giggle or move around when under its effects.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Stunbatons now work on help intent</li>
-			</ul>
-			<h3 class="author">Tennessee116 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Only security can select balaclavas in their loadout.</li>
-				<li class="rscdel">The forest planetoid away site has been removed.</li>
-				<li class="rscadd">There is a new exoplanet ruin, the crash of the SEV Icarus.</li>
-			</ul>
-			<h3 class="author">gy1ta23 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Indie-Sympathizing leather supply office chairs replaced with God-Intended SolGov Office Chairs.</li>
-			</ul>
-			<h3 class="author">juxtaposed9930 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="maptweak">Repaints the teleporter walls to normal hull black.</li>
-			</ul>
-			<h3 class="author">lorwp updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">High Visibility Jackets from loadout can now take ACCESSORY_SLOT_INSIGNIA (pins, badges, etc)</li>
-				<li class="bugfix">Yeosa'Unathi can now take Cultural Exchange Patches</li>
-			</ul>
-
-			<h2 class="date">18 March 2021</h2>
-			<h3 class="author">CrimsonShrike updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Adds terraformed planet subtype: Safe and a good source of meat and animal products.</li>
-				<li class="tweak">Planet generation has been tweaked. Expect more habitable or tolerable planets where you won't need to use spacesuits.</li>
-				<li class="bugfix">Fixes some planets not being hostile as often they should be.</li>
-			</ul>
-			<h3 class="author">Tennessee116 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Hull blue is now Sol blue.</li>
-			</ul>
-
-			<h2 class="date">17 March 2021</h2>
-			<h3 class="author">Imienny updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Prescription glasses once again work while using camera.</li>
-				<li class="bugfix">Goggles once again work when looking up.</li>
-				<li class="tweak">Its no longer possible to use binoculars inside of mechs with sensors providing any vision flags.</li>
-				<li class="tweak">Binoculars/scopes temporarily disable worn goggles when used.</li>
-			</ul>
+			<h2 class="date">04 April 2022</h2>
 			<h3 class="author">Mucker updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="rscdel">Removes gas generation artifact effects.</li>
-				<li class="bugfix">The artifact scanner will now properly detect secondary artifact effects.</li>
-				<li class="bugfix">Fixed the 'Touch' trigger for artifacts, poking rocks now actually has consequences!</li>
-				<li class="tweak">Artifact effects will now remain on for longer when activated in order for effects to have time to happen.</li>
-				<li class="tweak">'Pushback' artifact effect will no longer tear off limbs.</li>
-			</ul>
-			<h3 class="author">juxtaposed9930 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="maptweak">Because of intense budget cuts, many of the Torch's reinforced walls have been replaced with normal walls.</li>
-			</ul>
-
-			<h2 class="date">15 March 2021</h2>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Emagging exosuit fabricators succeeds immediately.</li>
-			</ul>
-
-			<h2 class="date">11 March 2021</h2>
-			<h3 class="author">EvenInDeathIStillServe updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">The R-UST fusion field now changes coloration and light intensity depending on temperature.</li>
+				<li class="bugfix">Fixed the 'Analyze Air' ghost verb not working</li>
 			</ul>
 			<h3 class="author">Spookerton updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="tweak">The succumb verb is gone. Use ghost instead if you're going to.</li>
-			</ul>
-			<h3 class="author">juxtaposed9930 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Steel and plasteel are now slightly more resistant to brute damage.</li>
-			</ul>
-
-			<h2 class="date">10 March 2021</h2>
-			<h3 class="author">Ilysen updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Emergency shutters now play sounds when they open and close.</li>
-				<li class="spellcheck">Rewrote some emergency shutter messages from past tense to present tense (i.e. "has opened" -> "opens").</li>
-				<li class="bugfix">Fixed some mildly broken examine text for multipurpose cable coils.</li>
-				<li class="spellcheck">Lowercased the names of the emergency softsuit, emergency space helmet, anomaly suit, and anomaly hood, to bring them in line with normal object naming schemes.</li>
-				<li class="spellcheck">Fixed run-on sentences in the descriptions of the emergency softsuit and emergency space helmet.</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Adds seperate smell feedback messages for synthetics</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="admin">Attack logs generated by ranged simple mobs now properly display the source, and only appear in chat if both parties have a ckey (Like all other attack logs)</li>
-			</ul>
-			<h3 class="author">SierraKomodo & Pawn updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="imageadd">New sprites and lighting overlays for teleporters have been added.</li>
-			</ul>
-
-			<h2 class="date">09 March 2021</h2>
-			<h3 class="author">Parazoid updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Departmental pagers will now still alert you if you're using any handheld computer instead of just PDAs.</li>
-			</ul>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">You can't use ram horns and ears at the same time.</li>
-				<li class="tweak">Deployable barriers use access_brig because half the damn ship has access_security.</li>
-				<li class="tweak">Deployable barriers have more health, show condition on examine, and apply cooldowns.</li>
-				<li class="tweak">Deployable barriers fail to anchor if EMPd or emagged. This is shown on nearby examine.</li>
-				<li class="tweak">You can repair barrier health with a wrench and its anchorability with a welding tool.</li>
-			</ul>
-
-			<h2 class="date">08 March 2021</h2>
-			<h3 class="author">CrimsonShrike updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Added new exosuit module. Rotatory plasma cutter. It's automatic!</li>
-			</ul>
-			<h3 class="author">Lorwp updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="spellcheck">Voleyball > Volleyball</li>
-			</ul>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Buffs damage of spiders, meat monsters, and planet fauna now that they respect armor.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Teleporters and other things dependent on the `player_levels` global no longer break whenever a `teleport_far` anomaly is loaded.</li>
-			</ul>
-
-			<h2 class="date">06 March 2021</h2>
-			<h3 class="author">juxtaposed9930 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="maptweak">Robotics now has a paint sprayer, for all your exosuit painting needs.</li>
-			</ul>
-
-			<h2 class="date">04 March 2021</h2>
-			<h3 class="author">JAR-OSKI updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscdel">Removes thermals from uplinks</li>
-			</ul>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Adds 3 new artifact effects.</li>
-				<li class="tweak">The teleportation anomaly now has a small buildup and warns affected players before the teleportation occurs.</li>
-			</ul>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="admin">Took per-action logs back out of build mode after spam complaints.</li>
-				<li class="rscadd">You can add fades to your hair through markings now, if you're a human.</li>
-			</ul>
-
-			<h2 class="date">02 March 2021</h2>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fix crates/closets being deleted when fired from the OFD instead of sent to their target.</li>
-			</ul>
-			<h3 class="author">SealCure updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Removes mention of smell for synthetics when examining gunshot residue.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">The scavver gantry coilgun now comes pre-loaded with a fully-charged power cell and advanced capacitor, instead of having to load it yourself.</li>
-				<li class="tweak">Magnetic weapons (Coilguns and railguns) now have proper codex entries, including mechanics tips on how to use them.</li>
-				<li class="rscadd">Light bulbs and lights can now be painted with paint sprayers.</li>
-				<li class="tweak">You will no longer bash lights with random objects if you're on help intent.</li>
-				<li class="admin">Light colors can now be easily modified by running the `set_color()` proc on a light tube or a light fixture that has lighting installed.</li>
-			</ul>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">You can no longer drain donut souls directly from donuts into your own blood; IV stands and roller beds can only use IV bags as IV bags.</li>
-			</ul>
-
-			<h2 class="date">01 March 2021</h2>
-			<h3 class="author">Ilysen updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Rewrote names and messages associated with supermatter cores and shards.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="admin">Supply beacons now generate attack logs when activated</li>
-				<li class="admin">Suicide by gun in the mouth now trigger attack logs instead of admin logs, including a new log when starting the suicide process</li>
-			</ul>
-
-			<h2 class="date">28 February 2021</h2>
-			<h3 class="author">RustingWithYou updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">The OFD can now fire at away sites again.</li>
-				<li class="rscadd">The OFD now has strength and range settings on its console again.</li>
-			</ul>
-			<h3 class="author">Tennessee116 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="maptweak">The CL's Office now has green carpet instead of brown.</li>
-			</ul>
-
-			<h2 class="date">27 February 2021</h2>
-			<h3 class="author">Ilysen updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Emitters can be rotated with alt-click if they're unsecured from the floor.</li>
-				<li class="tweak">Examining an emitter with Trained engines skill or higher will show you if it's emagged.</li>
-				<li class="spellcheck">Emitters have received a grammar and message pass.</li>
-			</ul>
-			<h3 class="author">Shadowtail117 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Holopads now show incoming caller ID and up to the last 5 recent calls on examine.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="admin">Fixes the cremation attack log reversing the order of attacker/victim and claiming the crematee was the one creating the cremator.</li>
-				<li class="admin">Turret admin logs now display the user instead of 'INVALID' and have working MOB and LOC links.</li>
-			</ul>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Yeosa'Unathi can spawn in the same locations as Sinta'Unathi.</li>
-				<li class="admin">Build Mode Basic is gone, advanced was renamed to "build mode" and became the default mode.</li>
-			</ul>
-
-			<h2 class="date">26 February 2021</h2>
-			<h3 class="author">AzlanonPC updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="imageadd">Sprites for robot components have been completely replaced.</li>
-				<li class="imageadd">Different exosuit plating components now have unique sprites.</li>
-				<li class="tweak">Robot components now have descriptions.</li>
-			</ul>
-			<h3 class="author">Ilysen updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">The ChemMaster has received a visual revamp. It's no longer stuck with the ancient basic HTML browser, and has received a NanoUI facelift.</li>
-				<li class="tweak">You can now cancel pill or bottle creation in the ChemMaster, instead of being forced to finish once you started.</li>
+				<li class="admin">MC stat lines should update more reliably after midnight. Still don't feed them though.</li>
+				<li class="admin">Added the config and global datums to the MC tab.</li>
+				<li class="admin">Fixed SSlighting showing /list instead of update count.</li>
 			</ul>
 		</div>
 

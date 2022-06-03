@@ -1,7 +1,7 @@
 /datum/computer_file/program/power_monitor
 	filename = "powermonitor"
 	filedesc = "Power Monitoring"
-	nanomodule_path = /datum/nano_module/power_monitor/
+	nanomodule_path = /datum/nano_module/power_monitor
 	program_icon_state = "power_monitor"
 	program_key_state = "power_key"
 	program_menu_icon = "battery-3"

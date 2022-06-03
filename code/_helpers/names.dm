@@ -63,54 +63,6 @@
 
 	return name
 
-var/syndicate_name = null
-/proc/syndicate_name()
-	if (syndicate_name)
-		return syndicate_name
-
-	var/name = ""
-
-	// Prefix
-	name += pick("Clandestine", "Prima", "Blue", "Zero-G", "Max", "Blasto", "Waffle", "North", "Omni", "Newton", "Cyber", "Bonk", "Gene", "Gib")
-
-	// Suffix
-	if (prob(80))
-		name += " "
-
-		// Full
-		if (prob(60))
-			name += pick("Syndicate", "Consortium", "Collective", "Corporation", "Group", "Holdings", "Biotech", "Industries", "Systems", "Products", "Chemicals", "Enterprises", "Family", "Creations", "International", "Intergalactic", "Interplanetary", "Foundation", "Positronics", "Hive")
-		// Broken
-		else
-			name += pick("Syndi", "Corp", "Bio", "System", "Prod", "Chem", "Inter", "Hive")
-			name += pick("", "-")
-			name += pick("Tech", "Sun", "Co", "Tek", "X", "Inc", "Code")
-	// Small
-	else
-		name += pick("-", "*", "")
-		name += pick("Tech", "Sun", "Co", "Tek", "X", "Inc", "Gen", "Star", "Dyne", "Code", "Hive")
-
-	syndicate_name = name
-	return name
-
-
-//Traitors and traitor silicons will get these. Revs will not.
-var/syndicate_code_phrase//Code phrase for traitors.
-var/syndicate_code_response//Code response for traitors.
-
-	/*
-	Should be expanded.
-	How this works:
-	Instead of "I'm looking for James Smith," the traitor would say "James Smith" as part of a conversation.
-	Another traitor may then respond with: "They enjoy running through the void-filled vacuum of the derelict."
-	The phrase should then have the words: James Smith.
-	The response should then have the words: run, void, and derelict.
-	This way assures that the code is suited to the conversation and is unpredicatable.
-	Obviously, some people will be better at this than others but in theory, everyone should be able to do it and it only enhances roleplay.
-	Can probably be done through "{ }" but I don't really see the practical benefit.
-	One example of an earlier system is commented below.
-	-N
-	*/
 
 /proc/generate_code_phrase()//Proc is used for phrase and response in subsystem init.
 

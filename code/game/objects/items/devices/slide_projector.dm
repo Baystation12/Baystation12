@@ -83,6 +83,8 @@
 	stop_projecting()
 	if(!current_slide)
 		return
+	if(!(target in view(7,get_turf(src))))
+		return
 	var/projection_type
 	for(var/T in projection_types)
 		if(istype(current_slide, T))
@@ -168,7 +170,7 @@
 	var/mutable_appearance/MA = new(I)
 	MA.plane = FLOAT_PLANE
 	MA.layer = FLOAT_LAYER
-	MA.appearance_flags = RESET_ALPHA
+	MA.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_ALPHA
 	MA.alpha = 170
 	MA.pixel_x = 0
 	MA.pixel_y = 0
@@ -196,8 +198,7 @@
 		qdel(src)
 		return
 	icon = slide.img
-	transform = matrix()
-	transform *= 1 / slide.photo_size
+	SetTransform(scale = 1 / slide.photo_size)
 	pixel_x = -32 * round(slide.photo_size/2)
 	pixel_y = -32 * round(slide.photo_size/2)
 
