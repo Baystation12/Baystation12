@@ -136,7 +136,7 @@
 		playsound(loc, 'sound/items/welderdeactivate.ogg', 50, TRUE)
 		STOP_PROCESSING(SSobj,src)
 	if(lit)
-		set_light(0.7, 2, 5, l_color = COLOR_ORANGE)
+		set_light(0.7, 1, 2.5, l_color = COLOR_ORANGE)
 	else
 		set_light(0)
 
