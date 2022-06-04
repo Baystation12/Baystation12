@@ -1,7 +1,14 @@
+#define BATTERY_VERYSMALL 0
+#define BATTERY_SMALL 1
+#define BATTERY_MEDIUM 2
+#define BATTERY_LARGE 3
+#define BATTERY_MEGALARGE 4
+#define BATTERY_HUGE 5
 /obj/item/cell/guncell
 	w_class = ITEM_SIZE_SMALL
 	name = "Small battery"
 	icon = 'proxima/icons/obj/guns/guncells.dmi'
+	var/battery_chamber_size
 
 /obj/item/cell/guncell/on_update_icon()
 
@@ -20,11 +27,19 @@
 		if(overlay_state)
 			overlays += image(icon, overlay_state)
 
+/obj/item/cell/guncell/verysmall
+	name = "Very-Small weapon battery"
+	desc = "A small battery for energy guns. Rated for 100Wh."
+	charge = 100 // base 5 shots
+	maxcharge = 100
+	battery_chamber_size = BATTERY_VERYSMALL
+	icon_state = "b_0"
 /obj/item/cell/guncell/small
 	name = "Small weapon battery"
 	desc = "A small battery for energy guns. Rated for 200Wh."
 	charge = 200 // base 10 shots
 	maxcharge = 200
+	battery_chamber_size = BATTERY_SMALL
 	icon_state = "b_1"
 
 /obj/item/cell/guncell/medium
@@ -32,6 +47,7 @@
 	desc = "A medium battery for energy guns. Rated for 300Wh."
 	charge = 300 // base 15 shots
 	maxcharge = 300
+	battery_chamber_size = BATTERY_MEDIUM
 	icon_state = "b_2"
 
 /obj/item/cell/guncell/large
@@ -39,6 +55,7 @@
 	desc = "A large battery for energy guns. Rated for 400Wh."
 	charge = 400 // base 20 shots
 	maxcharge = 400
+	battery_chamber_size = BATTERY_LARGE
 	icon_state = "b_3"
 
 /obj/item/cell/guncell/megalarge
@@ -46,6 +63,7 @@
 	desc = "A very large battery for energy guns. Rated for 500Wh."
 	charge = 500 // base 25 shots
 	maxcharge = 500
+	battery_chamber_size = BATTERY_MEGALARGE
 	icon_state = "b_4"
 
 /obj/item/cell/guncell/huge
@@ -53,6 +71,7 @@
 	desc = "A huge battery for energy guns. Rated for 600Wh."
 	charge = 600 // base 30 shots
 	maxcharge = 600
+	battery_chamber_size = BATTERY_HUGE
 	icon_state = "b_5"
 
 /obj/item/gun/energy
@@ -71,6 +90,7 @@
 	var/cell_type = null
 	var/projectile_type = /obj/item/projectile/beam/practice
 	var/modifystate
+	var/battery_chamber_size = 2
 	var/battery_changable = FALSE
 	var/battery_type = /obj/item/cell/guncell
 	var/charge_meter = 1	//if set, the icon state will be chosen based on the current charge
@@ -92,6 +112,10 @@
 
 /obj/item/gun/energy/attackby(obj/item/W, mob/living/user)
 	if(istype(W, battery_type))
+		var/obj/item/cell/guncell/B = W
+		if(B.battery_chamber_size > src.battery_chamber_size)
+			to_chat(usr, SPAN_WARNING("This battery is too big for this weapon!"))
+			return
 		if(power_supply)
 			to_chat(usr, SPAN_WARNING("[src] is already loaded."))
 			return

@@ -6,6 +6,7 @@
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns_secure.dmi',
 		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi',
 		)
+	max_shots = 5
 	req_access = list(list(access_brig, access_bridge))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
 
@@ -31,6 +32,10 @@
 		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi',
 		)
 	item_state = null	//so the human update icon uses the icon_state instead.
+	max_shots = 10
+	battery_changable = TRUE
+	battery_chamber_size = 2
+	power_supply = /obj/item/cell/guncell/medium
 	req_access = list(list(access_brig, access_bridge))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
 

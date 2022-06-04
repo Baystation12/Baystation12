@@ -7,6 +7,9 @@
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = ITEM_SIZE_LARGE
 	force = 10
+	battery_changable = TRUE
+	battery_chamber_size = 4
+	power_supply = /obj/item/cell/guncell/large
 	one_hand_penalty = 2
 	bulk = GUN_BULK_RIFLE
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
@@ -141,6 +144,9 @@
 	slot_flags = SLOT_BACK
 	charge_cost = 40
 	max_shots = 4
+	battery_changable = TRUE
+	battery_chamber_size = 5
+	power_supply = /obj/item/cell/guncell/verysmall
 	fire_delay = 35
 	force = 10
 	w_class = ITEM_SIZE_HUGE
