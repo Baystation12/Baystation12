@@ -237,7 +237,7 @@
 		qdel(src)
 
 //Revival potion//
-/obj/item/slimepotion3/
+/obj/item/slimepotion3
 	name= "revival potion"
 	desc= "A potent chemical mix that will revitalize a recently dead slime"
 	icon= 'icons/obj/chemical.dmi'
