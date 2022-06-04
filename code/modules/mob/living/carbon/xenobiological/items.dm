@@ -236,6 +236,34 @@
 		extract.enhanced = 1
 		qdel(src)
 
+//Revival potion//
+/obj/item/slimepotion3
+	name= "revival potion"
+	desc= "A potent chemical mix that will revitalize a recently dead slime"
+	icon= 'icons/obj/chemical.dmi'
+	icon_state= "bottle15"
+
+/obj/item/slimepotion3/attack(mob/living/carbon/slime/M, mob/user)
+	if(!istype(M)) //If target is not a slime.
+		to_chat(user, SPAN_WARNING("\The [src] only works on slimes!"))
+		return..()
+	if(M.is_adult) //Can't revive adults
+		to_chat(user, SPAN_WARNING("Only baby slimes can use \the [src]!"))
+		return FALSE
+	if(M.cores < 1)
+		to_chat(user, SPAN_WARNING("\The [M] has no cores!"))
+		return FALSE
+	if(M.stat== CONSCIOUS)//need to change this to living?
+		to_chat(user, SPAN_WARNING("\The [M] is already alive!"))
+		return FALSE
+	user.visible_message(
+		visible_message(user, SPAN_NOTICE("The [user] feeds \a [src] to \the [M]. Life floods back into it!")),
+		to_chat(user, SPAN_NOTICE("You feed \the [src] to \the [M]. Life floods back into it!"))
+		)
+	M.revive()
+	qdel(src)
+
+
 /obj/effect/golemrune
 	anchored = TRUE
 	desc = "a strange rune used to create golems. It glows when it can be activated."
