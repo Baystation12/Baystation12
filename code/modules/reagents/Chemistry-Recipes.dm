@@ -1028,7 +1028,7 @@
 	result_amount = 1
 	required = /obj/item/slime_extract/gold
 
-/datum/chemical_reaction/slime/grevive/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
+/datum/chemical_reaction/slime/grevive/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
 	..()
 	new /obj/item/slimepotion3(get_turf(holder.my_atom))
 

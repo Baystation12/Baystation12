@@ -243,20 +243,20 @@
 	icon= 'icons/obj/chemical.dmi'
 	icon_state= "bottle15"
 
-/obj/item/slimepotion3/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
-	if(!istype(M, /mob/living/carbon/slime))//If target is not a slime.
-		to_chat(user, "<span class='warning'> The steroid only works on baby slimes!</span>")
+/obj/item/slimepotion3/attack(mob/living/carbon/slime/M, mob/user)
+	if(!istype(M)) //If target is not a slime.
+		to_chat(user, SPAN_WARNING("\The [src] only works on slimes!"))
 		return ..()
 	if(M.is_adult) //Can't revive adults
-		to_chat(user, "<span class='warning'> Only baby slimes can use the steroid!</span>")
+		to_chat(user, SPAN_WARNING("Only baby slimes can use \the [src]!"))
 		return..()
-	if(M.cores==0)
-		to_chat(user,"<span class='warning'> This slime has no cores!</span>" )
+	if(M.cores < 1)
+		to_chat(user, SPAN_WARNING("\The [M] has no cores!"))
 		return..()
 	if(M.stat== CONSCIOUS)//need to change this to living?
-		to_chat(user, "<span class='warning'> This slime is still alive!</span>")
+		to_chat(user, SPAN_WARNING("\The [M] is already alive!"))
 		return..()
-	to_chat(user,"You feed the slime the potion. Life floods back into it! ")
+	to_chat(user,"You feed \the [src] to \the [M]. Life floods back into it! ")
 	M.revive()
 	qdel(src)
 
