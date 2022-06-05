@@ -20,6 +20,8 @@
 	var/obj/item/weldingtool/weldtool = null
 	var/obj/item/device/assembly/igniter/igniter = null
 	var/obj/item/reagent_containers/beaker = null
+	var/range = 4
+	var/max_beaker = ITEM_SIZE_SMALL
 
 /obj/item/flamethrower/Destroy()
 	QDEL_NULL(weldtool)
@@ -56,14 +58,23 @@
 
 /obj/item/flamethrower/afterattack(atom/target, mob/user, proximity)
 	// Make sure our user is still holding us
-	if(user && user.get_active_hand() == src)
-		if(user.a_intent == I_HELP) //don't shoot if we're on help intent
-			to_chat(user, "<span class='warning'>You refrain from firing \the [src] as your intent is set to help.</span>")
-			return
-		var/turf/target_turf = get_turf(target)
-		if(target_turf)
-			var/turflist = getline(user, target_turf)
-			flame_turf(turflist)
+	if(user.a_intent == I_HELP) //don't shoot if we're on help intent
+		to_chat(user, SPAN_WARNING("You refrain from firing \the [src] as your intent is set to help."))
+		return
+	var/turf/target_turf = get_turf(target)
+	if(target_turf)
+		var/turflist = getline(user, target_turf)
+		flame_turf(turflist)
+
+/obj/item/flamethrower/attack_hand(mob/user)
+	if(user.get_inactive_hand() == src)
+		if(beaker && CanPhysicallyInteract(user))
+			user.put_in_hands(beaker)
+			beaker = null
+			to_chat(user, SPAN_NOTICE("You remove the fuel container from [src]!"))
+			update_icon()
+	else
+		return ..()
 
 /obj/item/flamethrower/attackby(obj/item/W as obj, mob/user as mob)
 	if(user.stat || user.restrained() || user.lying)	return
@@ -97,7 +108,7 @@
 		update_icon()
 		return
 
-	if (istype(W, /obj/item/reagent_containers) && W.is_open_container())
+	if (istype(W, /obj/item/reagent_containers) && W.is_open_container() && (W.w_class <= max_beaker))
 		if(user.unEquip(W, src))
 			if(beaker)
 				beaker.forceMove(get_turf(src))
@@ -112,13 +123,6 @@
 
 /obj/item/flamethrower/attack_self(mob/user as mob)
 	toggle_igniter(user)
-
-/obj/item/flamethrower/AltClick(mob/user)
-	if(beaker && isliving(user) && CanPhysicallyInteract(user))
-		user.put_in_hands(beaker)
-		beaker = null
-		to_chat(user, SPAN_NOTICE("You remove the fuel container from [src]!"))
-		update_icon()
 
 /obj/item/flamethrower/proc/toggle_igniter(mob/user)
 	if(!beaker)
@@ -144,7 +148,6 @@
 
 #define REQUIRED_POWER_TO_FIRE_FLAMETHROWER 10
 #define FLAMETHROWER_POWER_MULTIPLIER 1.5
-#define FLAMETHROWER_RANGE 4
 #define FLAMETHROWER_RELEASE_AMOUNT 5
 
 /obj/item/flamethrower/proc/flame_turf(list/turflist)
@@ -155,7 +158,7 @@
 	var/length = LAZYLEN(turflist)
 	if(length < 1)
 		return
-	turflist.len = min(length, FLAMETHROWER_RANGE)
+	turflist.len = min(length, range)
 
 	var/power = 0
 	var/datum/reagents/beaker_reagents = beaker.reagents
@@ -182,8 +185,9 @@
 		if(!previousturf && length(turflist)>1)
 			previousturf = get_turf(src)
 			continue	//so we don't burn the tile we be standin on
-		if(previousturf && LinkBlocked(previousturf, T))
+		if(previousturf && (!T.CanPass(null, previousturf, 0,0) || !previousturf.CanPass(null, T, 0,0)))
 			break
+		previousturf = T
 
 		//Consume part of our fuel to create a fire spot
 		T.IgniteTurf(power / turflist.len, fire_colour)
@@ -199,7 +203,6 @@
 
 #undef REQUIRED_POWER_TO_FIRE_FLAMETHROWER
 #undef FLAMETHROWER_POWER_MULTIPLIER
-#undef FLAMETHROWER_RANGE
 
 /obj/item/flamethrower/full
 	icon = 'icons/obj/flamethrower_new.dmi'

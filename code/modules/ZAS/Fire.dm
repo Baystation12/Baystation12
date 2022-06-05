@@ -34,7 +34,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	var/igniting = 0
 	var/obj/effect/decal/cleanable/liquid_fuel/liquid = locate() in src
-	if(air_contents.check_combustability(liquid))
+	if(liquid && air_contents.check_combustability(liquid))
 		IgniteTurf(liquid.amount * 10)
 		QDEL_NULL(liquid)
 	if(air_contents.check_combustability())
@@ -248,9 +248,9 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 		var/used_oxidizers = used_fuel*(FIRE_REACTION_OXIDIZER_AMOUNT/FIRE_REACTION_FUEL_AMOUNT)
 
 		#ifdef FIREDBG
-		log_debug("gas_fuel = [gas_fuel], liquid_fuel = [liquid_fuel], total_oxidizers = [total_oxidizers]")
+		log_debug("gas_fuel = [gas_fuel], total_oxidizers = [total_oxidizers]")
 		log_debug("fuel_area = [fuel_area], total_fuel = [total_fuel], reaction_limit = [reaction_limit]")
-		log_debug("firelevel -> [firelevel] (gas: [gas_firelevel], liquid: [liquid_firelevel])")
+		log_debug("firelevel -> [firelevel] (gas: [gas_firelevel]")
 		log_debug("gas_reaction_progress = [gas_reaction_progress]")
 		log_debug("total_reaction_progress = [total_reaction_progress]")
 		log_debug("used_fuel = [used_fuel], used_oxidizers = [used_oxidizers]; ")

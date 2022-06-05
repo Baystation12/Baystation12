@@ -1,11 +1,11 @@
 #define TURF_FIRE_REQUIRED_TEMP (T0C+10)
-#define TURF_FIRE_TEMP_BASE (T0C+100)
+#define TURF_FIRE_TEMP_BASE (T100C)
 #define TURF_FIRE_POWER_LOSS_ON_LOW_TEMP 7
-#define TURF_FIRE_TEMP_INCREMENT_PER_POWER 3
+#define TURF_FIRE_TEMP_INCREMENT_PER_POWER 13
 #define TURF_FIRE_VOLUME 150
 #define TURF_FIRE_MAX_POWER 50
 
-#define TURF_FIRE_ENERGY_PER_BURNED_OXY_MOL 12000
+#define TURF_FIRE_ENERGY_PER_BURNED_OXY_MOL 50000 // 50000J/mol, consider adjusting it to be a fraction of vs_control for atmos fires. We want it to be less hot than real fire though
 #define TURF_FIRE_BURN_RATE_BASE 0.12
 #define TURF_FIRE_BURN_RATE_PER_POWER 0.02
 #define TURF_FIRE_BURN_CARBON_DIOXIDE_MULTIPLIER 0.75
@@ -15,15 +15,13 @@
 #define TURF_FIRE_STATE_SMALL 1
 #define TURF_FIRE_STATE_MEDIUM 2
 #define TURF_FIRE_STATE_LARGE 3
+#define TURF_FIRE_STATE_MAX 4
 
 /obj/effect/turf_fire
 	icon = 'icons/effects/turf_fire.dmi'
 	icon_state = "red_small"
 	layer = BELOW_DOOR_LAYER
 	anchored = TRUE
-	// light_range = 1.5
-	// light_power = 1.5
-	// light_color = LIGHT_COLOR_FIRE
 	mouse_opacity = FALSE
 	/// How much power have we got. This is treated like fuel, be it flamethrower liquid or any random thing you could come up with
 	var/fire_power = 20
@@ -165,7 +163,7 @@
 		return
 	var/atom/movable/crossing = O
 	if(istype(crossing))
-		crossing.fire_act(TURF_FIRE_TEMP_BASE + (TURF_FIRE_TEMP_INCREMENT_PER_POWER*fire_power), TURF_FIRE_VOLUME)
+		crossing.fire_act(exposed_temperature = TURF_FIRE_TEMP_BASE + (TURF_FIRE_TEMP_INCREMENT_PER_POWER*fire_power), exposed_volume = TURF_FIRE_VOLUME)
 	return
 
 /obj/effect/turf_fire/water_act(depth)
@@ -184,8 +182,10 @@
 			new_state = TURF_FIRE_STATE_SMALL
 		if(11 to 24)
 			new_state = TURF_FIRE_STATE_MEDIUM
-		if(25 to INFINITY)
+		if(25 to 39)
 			new_state = TURF_FIRE_STATE_LARGE
+		if(40 to INFINITY)
+			new_state = TURF_FIRE_STATE_MAX
 
 	if(new_state == current_fire_state)
 		return
@@ -200,7 +200,10 @@
 			set_light(0.5, 1, 2,)
 		if(TURF_FIRE_STATE_LARGE)
 			icon_state = "big"
-			set_light(0.7, 1, 3)
+			set_light(0.5, 1.5, 2,)
+		if(TURF_FIRE_STATE_MAX)
+			icon_state = "max"
+			set_light(0.7, 1.6, 3)
 
 #undef TURF_FIRE_REQUIRED_TEMP
 #undef TURF_FIRE_TEMP_BASE

@@ -216,6 +216,7 @@
 	for (var/datum/reagent/R as anything in reagents?.reagent_list)
 		if (R.gas_flags & XGM_GAS_FUEL)
 			fuel += R.volume
+		fuel += R.accelerant_quality * R.volume
 	return (fuel >= 2 && fuel >= reagents?.total_volume * 0.8)
 
 
