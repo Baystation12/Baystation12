@@ -134,7 +134,7 @@
 /obj/effect/energy_net/Process()
 	if(temporary)
 		countdown--
-	if(captured.buckled != src)
+	if(!captured || captured.buckled != src)
 		health = 0
 	if(get_turf(src) != get_turf(captured))  //just in case they somehow teleport around or
 		countdown = 0
