@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscdel: Borgs can no longer use the `rest` verb since it's not handled properly,
+      gives no feedback, and causes confusion when you inevitably discover you can
+      no longer interact with anything or move and don't know why.
