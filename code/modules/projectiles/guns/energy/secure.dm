@@ -6,6 +6,9 @@
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns_secure.dmi',
 		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi',
 		)
+	battery_changable = TRUE
+	battery_type = /obj/item/cell/guncell/verysmall
+	battery_chamber_size = 1
 	max_shots = 5
 	req_access = list(list(access_brig, access_bridge))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
@@ -20,6 +23,9 @@
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns_secure.dmi',
 		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi',
 		)
+	battery_changable = TRUE
+	battery_type = /obj/item/cell/guncell/small
+	battery_chamber_size = 2
 	item_state = null
 	req_access = list(list(access_brig, access_bridge))
 
@@ -35,7 +41,7 @@
 	max_shots = 10
 	battery_changable = TRUE
 	battery_chamber_size = 2
-	power_supply = /obj/item/cell/guncell/medium
+	battery_type = /obj/item/cell/guncell/small
 	req_access = list(list(access_brig, access_bridge))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
 
@@ -60,6 +66,9 @@
 		)
 	req_access = list(list(access_brig, access_heads))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
+	battery_changable = TRUE
+	battery_chamber_size = 2
+	battery_type = /obj/item/cell/guncell/small
 
 /obj/item/gun/energy/gun/secure/mounted
 	name = "robot energy gun"

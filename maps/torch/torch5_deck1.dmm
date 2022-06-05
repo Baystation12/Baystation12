@@ -9163,8 +9163,8 @@
 /obj/item/clothing/shoes/dutyboots,
 /obj/item/clothing/accessory/storage/holster/thigh,
 /obj/item/clothing/glasses/tacgoggles,
-/obj/item/clothing/suit/armor/pcarrier/medium/sol,
-/obj/item/clothing/head/helmet,
+/obj/item/clothing/suit/armor/pcarrier/blue/sol,
+/obj/item/clothing/head/helmet/solgov,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "aEH" = (
@@ -10602,10 +10602,17 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/fabricator/hacked{
-	desc = "A typical autolathe. This one is hacked.";
-	name = "autolathe"
+/obj/structure/table/rack{
+	dir = 4
 	},
+/obj/item/material/knife/combat,
+/obj/item/material/knife/combat,
+/obj/item/material/knife/combat,
+/obj/item/material/knife/combat,
+/obj/item/clothing/accessory/storage/holster/knife/polymer,
+/obj/item/clothing/accessory/storage/holster/knife/polymer,
+/obj/item/clothing/accessory/storage/holster/knife/polymer,
+/obj/item/clothing/accessory/storage/holster/knife/polymer,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/storage)
 "aLx" = (
@@ -10613,13 +10620,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/stack/material/glass/fifty,
 /obj/structure/table/rack{
 	dir = 4
 	},
-/obj/item/stack/material/aluminium/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/plastic/ten,
+/obj/item/stack/package_wrap/twenty_five,
+/obj/item/cell/guncell/verysmall,
+/obj/item/cell/guncell/verysmall,
+/obj/item/cell/guncell/verysmall,
+/obj/item/cell/guncell/verysmall,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/storage)
 "aLy" = (
@@ -11382,6 +11390,8 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/item/cell/guncell/small,
+/obj/item/cell/guncell/small,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "aOF" = (
@@ -11396,12 +11406,22 @@
 "aOG" = (
 /obj/structure/table/steel,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/cell_charger,
+/obj/item/storage/box/chemimp{
+	pixel_x = 8;
+	pixel_y = 14
+	},
+/obj/machinery/cell_charger{
+	pixel_y = -2
+	},
 /obj/item/screwdriver,
 /obj/machinery/recharger/wallcharger{
 	dir = 8;
 	pixel_x = 23;
 	pixel_y = -3
+	},
+/obj/item/storage/box/chemimp{
+	pixel_x = -5;
+	pixel_y = 14
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
@@ -16672,6 +16692,8 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
+/obj/item/cell/guncell/small,
+/obj/item/cell/guncell/small,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "evb" = (
@@ -18322,6 +18344,9 @@
 /obj/item/gun/energy/stunrevolver/rifle,
 /obj/item/gun/energy/taser/carbine,
 /obj/item/gun/energy/taser/carbine,
+/obj/item/cell/guncell/small,
+/obj/item/cell/guncell/medium,
+/obj/item/cell/guncell/medium,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "hub" = (
@@ -18596,6 +18621,9 @@
 /obj/item/gun/energy/laser/secure,
 /obj/item/gun/energy/laser/secure,
 /obj/item/gun/energy/laser/secure,
+/obj/item/cell/guncell/medium,
+/obj/item/cell/guncell/medium,
+/obj/item/cell/guncell/medium,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "hGb" = (
@@ -18684,6 +18712,8 @@
 	},
 /obj/item/gun/energy/ionrifle,
 /obj/item/gun/energy/ionrifle/small,
+/obj/item/cell/guncell/small,
+/obj/item/cell/guncell/medium,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "hOZ" = (
@@ -19210,10 +19240,6 @@
 	},
 /obj/item/cell/guncell/medium,
 /obj/item/cell/guncell/medium,
-/obj/item/cell/guncell/medium,
-/obj/item/cell/guncell/medium,
-/obj/item/cell/guncell/medium,
-/obj/item/cell/guncell/medium,
 /obj/item/gun/energy/k342,
 /obj/item/gun/energy/k342,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -19698,15 +19724,16 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/firstdeck/aft)
 "jhf" = (
-/obj/structure/table/steel,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/recharger/wallcharger{
 	dir = 8;
 	pixel_x = 23;
 	pixel_y = -3
 	},
-/obj/item/storage/box/trackimp,
-/obj/item/storage/box/chemimp,
+/obj/machinery/fabricator/hacked{
+	desc = "A typical autolathe. This one is hacked.";
+	name = "autolathe"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "jhq" = (
@@ -21074,6 +21101,8 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/item/cell/guncell/small,
+/obj/item/cell/guncell/small,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "kTb" = (
@@ -21211,7 +21240,14 @@
 	c_tag = "Security Wing - Armory";
 	dir = 8
 	},
+/obj/structure/table/rack{
+	dir = 4
+	},
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/item/stack/material/plastic/ten,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/aluminium/fifty,
+/obj/item/stack/material/glass/fifty,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "lcL" = (
@@ -24548,6 +24584,7 @@
 	dir = 4;
 	pixel_x = 21
 	},
+/obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "puw" = (
@@ -26540,6 +26577,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
+/obj/item/cell/guncell/medium,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "rFb" = (
@@ -27414,7 +27452,7 @@
 	dir = 8;
 	id_tag = "BrigFoyer";
 	name = "Security Wing";
-	req_access = list(list("ACCESS_SEC_DOORS","ACCESS_TORCH_CREW"))
+	req_access = list("ACCESS_SEC_DOORS")
 	},
 /turf/simulated/floor/tiled,
 /area/security/wing)
@@ -28696,6 +28734,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
+/obj/item/cell/guncell/medium,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "umI" = (
@@ -29136,6 +29175,9 @@
 /obj/item/gun/energy/gun/secure,
 /obj/item/gun/energy/gun/secure,
 /obj/item/gun/energy/gun/secure,
+/obj/item/cell/guncell/small,
+/obj/item/cell/guncell/small,
+/obj/item/cell/guncell/small,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "vkW" = (

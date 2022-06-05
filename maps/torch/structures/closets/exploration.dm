@@ -102,6 +102,7 @@
 		/obj/item/material/knife/folding/swiss/explorer,
 		/obj/item/clothing/glasses/welding,
 		/obj/item/clothing/head/welding,
+		/obj/item/gun/energy/plasmacutter,
 		/obj/item/device/camera,
 		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/explorer, /obj/item/storage/backpack/satchel/explorer)),
 		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag, /obj/item/storage/backpack/messenger/explorer)),

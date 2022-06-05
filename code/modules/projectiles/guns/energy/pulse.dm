@@ -10,7 +10,7 @@
 	max_shots = 36
 	battery_changable = TRUE
 	battery_chamber_size = 5
-	power_supply = /obj/item/cell/guncell/megalarge
+	battery_type = /obj/item/cell/guncell/megalarge
 	w_class = ITEM_SIZE_HUGE
 	one_hand_penalty= 6
 	multi_aim = 1
@@ -32,7 +32,7 @@
 	max_shots = 24
 	battery_changable = TRUE
 	battery_chamber_size = 5
-	power_supply = /obj/item/cell/guncell/megalarge
+	battery_type = /obj/item/cell/guncell/megalarge
 	w_class = ITEM_SIZE_LARGE
 	one_hand_penalty= 3
 	burst_delay = 2
@@ -50,7 +50,7 @@
 	max_shots = 21
 	battery_changable = TRUE
 	battery_chamber_size = 4
-	power_supply = /obj/item/cell/guncell/large
+	battery_type = /obj/item/cell/guncell/large
 	w_class = ITEM_SIZE_NORMAL
 	one_hand_penalty=1 //a bit heavy
 	burst_delay = 1

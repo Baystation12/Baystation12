@@ -285,6 +285,24 @@ badges
 	var/religion = culture ? culture.name : "Unset"
 	desc = "[initial(desc)]\nName: [H.real_name] ([H.get_species()])[H.char_branch ? "\nBranch: [H.char_branch.name]" : ""]\nReligion: [religion]\nBlood type: [H.b_type]"
 
+//proxima coding.moment
+/obj/item/clothing/accessory/badge/solgov/tags/iccgn
+	name = "dog tags"
+	desc = "Plain identification tags made from a durable metal. They are stamped with a variety of informational details."
+	gender = PLURAL
+	icon_state = "tags"
+	badge_string = "Independent Colonial Confederation of Gilgamesh"
+	slot_flags = SLOT_MASK | SLOT_TIE
+
+
+/obj/item/clothing/accessory/badge/solgov/tags/iccgn/set_desc(mob/living/carbon/human/H)
+	if(!istype(H))
+		return
+	owner_name = H.real_name
+	var/decl/cultural_info/culture = H.get_cultural_value(TAG_RELIGION)
+	var/religion = culture ? culture.name : "Unset"
+	desc = "[initial(desc)]\nName: [H.real_name] ([H.get_species()])\nReligion: [religion]\nBlood type: [H.b_type]"
+
 /obj/item/clothing/accessory/badge/solgov/representative
 	name = "representative's badge"
 	desc = "A leather-backed plastic badge with a variety of information printed on it. Belongs to a representative of the Sol Central Government."
