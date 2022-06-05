@@ -303,6 +303,7 @@
 	desc = "Hand-held device which allows rapid deployment and removal of inflatables."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "inf_deployer"
+	item_state = "RPED"
 	w_class = ITEM_SIZE_LARGE
 
 	var/stored_walls = 5
