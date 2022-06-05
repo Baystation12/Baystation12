@@ -1104,3 +1104,7 @@
 	var/obj/item/robot_parts/robot_suit/C = new dismantle_type(loc)
 	C.dismantled_from(src)
 	qdel(src)
+
+// Resting as a robot breaks things. Block it from happening.
+/mob/living/silicon/robot/lay_down()
+	return
