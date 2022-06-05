@@ -6,10 +6,6 @@
 	item_state = null	//so the human update icon uses the icon_state instead.
 	max_shots = 10
 	fire_delay = 10 // To balance for the fact that it is a pistol and can be used one-handed without penalty
-	battery_changable = TRUE
-	battery_chamber_size = 2
-	battery_type = /obj/item/cell/guncell/small
-
 	projectile_type = /obj/item/projectile/beam/stun
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
 	modifystate = "energystun"
@@ -53,7 +49,7 @@
 	force = 2 //it's the size of a car key, what did you expect?
 	modifystate = "smallgunstun"
 	battery_changable = TRUE
-	battery_type = /obj/item/cell/guncell/verysmall
+	power_supply = /obj/item/cell/guncell/verysmall
 	battery_chamber_size = 1
 
 	init_firemodes = list(

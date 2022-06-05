@@ -40,8 +40,8 @@
 	item_state = null	//so the human update icon uses the icon_state instead.
 	max_shots = 10
 	battery_changable = TRUE
-	battery_chamber_size = 2
-	battery_type = /obj/item/cell/guncell/small
+	battery_chamber_size = 1
+	power_supply = /obj/item/cell/guncell/small
 	req_access = list(list(access_brig, access_bridge))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
 
