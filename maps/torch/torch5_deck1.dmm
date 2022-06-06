@@ -26108,9 +26108,6 @@
 "riC" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/window/brigdoor/westright{
-	name = "Brig Chief Desk"
-	},
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "bo_windows"
 	},
