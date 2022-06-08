@@ -8,6 +8,7 @@
 	faculty = PSI_PSYCHOKINESIS
 	use_manifest = TRUE
 	use_sound = null
+	abstract_type = /decl/psionic_power/psychokinesis
 
 /decl/psionic_power/psychokinesis/psiblade
 	name =            "Psiblade"

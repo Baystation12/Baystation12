@@ -1,4 +1,5 @@
 /decl/psionic_power
+	abstract_type = /decl/psionic_power
 	var/name             // Name. If null, psipower won't be generated on roundstart.
 	var/faculty          // Associated psi faculty.
 	var/min_rank         // Minimum psi rank to use this power.

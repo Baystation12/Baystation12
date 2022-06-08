@@ -6,6 +6,7 @@
 
 /decl/psionic_power/energistics
 	faculty = PSI_ENERGISTICS
+	abstract_type = /decl/psionic_power/energistics
 
 /decl/psionic_power/energistics/disrupt
 	name =            "Disrupt"

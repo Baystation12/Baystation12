@@ -10,9 +10,9 @@
 					LAZYADD(holder.psi.manifested_items, result); \
 					holder.put_in_hands(result); \
 				} \
+				return return_on_invocation; \
 			} \
 		} \
-		return return_on_invocation; \
 	}
 
 /mob/living/UnarmedAttack(var/atom/A, var/proximity)

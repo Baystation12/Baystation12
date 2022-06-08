@@ -28,7 +28,7 @@ PROCESSING_SUBSYSTEM_DEF(psi)
 	var/list/powers = decls_repository.get_decls_of_subtype(/decl/psionic_power)
 	for(var/ptype in powers)
 		var/decl/psionic_power/power = powers[ptype]
-		if(power.faculty)
+		if(!is_abstract(power) && power.faculty)
 			var/decl/psionic_faculty/faculty = get_faculty(power.faculty)
 			if(faculty)
 				faculty.powers |= power
