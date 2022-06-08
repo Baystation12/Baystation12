@@ -1,0 +1,5 @@
+author: 'SomeAngryMiner '
+delete-after: true
+changes:
+  - rscadd: Replaces the inflatable, inflatable dispenser, inflatable box and canister
+      sprites with all the related overlays.
