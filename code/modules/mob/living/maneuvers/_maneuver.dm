@@ -41,7 +41,7 @@
 	if(can_be_used_by(user, target))
 		var/do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT
 		if(!reflexively)
-			do_flags |= DO_PUBLIC_PROGRESS
+			do_flags |= DO_PUBLIC_PROGRESS | DO_BAR_OVER_USER
 			show_initial_message(user, target)
 		user.face_atom(target)
 		. = (!delay || reflexively || (do_after(user, delay, target, do_flags) && can_be_used_by(user, target)))

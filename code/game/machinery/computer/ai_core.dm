@@ -28,7 +28,7 @@ var/global/list/empty_playable_ai_cores = list()
 		if(0)
 			if(isWrench(P))
 				playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-				if(do_after(user, 2 SECONDS, src))
+				if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 					to_chat(user, "<span class='notice'>You wrench the frame into place.</span>")
 					anchored = TRUE
 					state = 1
