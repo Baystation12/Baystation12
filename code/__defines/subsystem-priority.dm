@@ -7,7 +7,8 @@
 
 // SS_TICKER
 #define SS_PRIORITY_TIMER          20
-#define SS_PRIORITY_ICON_UPDATE    20  // Queued icon updates. Mostly used by APCs and tables.
+#define SS_PRIORITY_RUNECHAT       15
+#define SS_PRIORITY_ICON_UPDATE    10  // Queued icon updates. Mostly used by APCs and tables.
 
 // Normal
 #define SS_PRIORITY_TICKER         100 // Gameticker.

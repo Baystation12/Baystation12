@@ -320,12 +320,13 @@
 // Use for objects performing visible actions
 // message is output to anyone who can see, e.g. "The [src] does something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
-/atom/proc/visible_message(message, blind_message, range = world.view, checkghosts = null, list/exclude_objs = null, list/exclude_mobs = null)
+/atom/proc/visible_message(message, blind_message, range = world.view, checkghosts = null, list/exclude_objs = null, list/exclude_mobs = null, maptext = "👁")
 	set waitfor = FALSE
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()
 	get_mobs_and_objs_in_view_fast(T,range, mobs, objs, checkghosts)
+	var/is_movable = ismovable(src)
 
 	for(var/o in objs)
 		var/obj/O = o
@@ -341,15 +342,18 @@
 			continue
 		if(M.see_invisible >= invisibility)
 			M.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
+			if (is_movable && maptext)
+				M.hear_runechat(src, null, maptext, list("large"))
 		else if(blind_message)
 			M.show_message(blind_message, AUDIBLE_MESSAGE)
+
 
 // Show a message to all mobs and objects in earshot of this atom
 // Use for objects performing audible actions
 // message is the message output to anyone who can hear.
 // deaf_message (optional) is what deaf people will see.
 // hearing_distance (optional) is the range, how many tiles away the message can be heard.
-/atom/proc/audible_message(message, deaf_message, hearing_distance = world.view, checkghosts = null, list/exclude_objs = null, list/exclude_mobs = null)
+/atom/proc/audible_message(message, deaf_message, hearing_distance = world.view, checkghosts = null, list/exclude_objs = null, list/exclude_mobs = null, rune_message = "")
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()

@@ -237,6 +237,7 @@
 #include "code\controllers\subsystems\processing\temperature.dm"
 #include "code\controllers\subsystems\processing\turf.dm"
 #include "code\controllers\subsystems\processing\vines.dm"
+#include "code\controllers\subsystems\timer\runechat.dm"
 #include "code\core\atom\Transform.dm"
 #include "code\core\datum\IsAbstract.dm"
 #include "code\core\image\Transform.dm"
