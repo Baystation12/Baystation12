@@ -15,12 +15,22 @@
 #define LAZYINSERT(L, I, X) if(!L) { L = list(); } L.Insert(X, I);
 // Adds I to L, initalizing L if necessary, if I is not already in L
 #define LAZYDISTINCTADD(L, I) if(!L) { L = list(); } L |= I;
+///Returns the key of the submitted item in the list
+#define LAZYFIND(L, V) (L ? L.Find(V) : 0)
 // Sets L[A] to I, initalizing L if necessary
-#define LAZYSET(L, A, I) if(!L) { L = list(); } L[A] = I;
-// Reads I from L safely - Works with both associative and traditional lists.
+#define LAZYSET(L, K, V) if(!L) { L = list(); } L[K] = V;
+///returns L[I] if L exists and I is a valid index of L, runtimes if L is not a list
 #define LAZYACCESS(L, I) (L ? (isnum(I) ? (I > 0 && I <= length(L) ? L[I] : null) : L[I]) : null)
 // Reads the length of L, returning 0 if null
 #define LAZYLEN(L) length(L)
+///Adds to the item K the value V, if the list is null it will initialize it
+#define LAZYADDASSOC(L, K, V) if(!L) { L = list(); } L[K] += V;
+///This is used to add onto lazy assoc list when the value you're adding is a /list/. This one has extra safety over lazyaddassoc because the value could be null (and thus cant be used to += objects)
+#define LAZYADDASSOCLIST(L, K, V) if(!L) { L = list(); } L[K] += list(V);
+///Removes the value V from the item K, if the item K is empty will remove it from the list, if the list is empty will set the list to null
+#define LAZYREMOVEASSOC(L, K, V) if(L) { if(L[K]) { L[K] -= V; if(!length(L[K])) L -= K; } if(!length(L)) L = null; }
+///Accesses an associative list, returns null if nothing is found
+#define LAZYACCESSASSOC(L, I, K) L ? L[I] ? L[I][K] ? L[I][K] : null : null : null
 // Safely checks if I is in L
 #define LAZYISIN(L, I) (L ? (I in L) : FALSE)
 // Null-safe List.Cut() and discard.
