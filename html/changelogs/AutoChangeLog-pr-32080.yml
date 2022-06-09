@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fixed having psionics active breaking hand interactions with most things.
-  - bugfix: Properly fixed psychokinesis manifestation abilities not working.
