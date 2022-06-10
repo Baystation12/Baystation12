@@ -46,10 +46,10 @@
 		if (!(language?.flags & INNATE))
 			if (speaker == src)
 				to_chat(src, SPAN_WARNING("You cannot hear yourself speak!"))
-				hear_runechat(speaker, null, "...", list(), EMPTY_BITFIELD)
+				show_runechat(speaker, "...")
 			else if (!is_blind())
 				to_chat(src, {"<span class="name">[display_name]</span>[alt_name] says something you cannot hear."})
-				hear_runechat(speaker, null, "...", list(), EMPTY_BITFIELD)
+				show_runechat(speaker, "...")
 			return
 		speech_sound = null
 
@@ -74,7 +74,7 @@
 		hear_sleep(display_message)
 		return
 
-	hear_runechat(speaker, language, display_message, list(), EMPTY_BITFIELD)
+	show_runechat(speaker, display_message, language)
 
 	if (italics)
 		display_message = "<i>[display_message]</i>"

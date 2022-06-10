@@ -343,7 +343,7 @@
 		if(M.see_invisible >= invisibility)
 			M.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			if (is_movable && maptext)
-				M.hear_runechat(src, null, maptext, list("large"))
+				M.show_runechat(src, maptext, classes = list("large"))
 		else if(blind_message)
 			M.show_message(blind_message, AUDIBLE_MESSAGE)
 

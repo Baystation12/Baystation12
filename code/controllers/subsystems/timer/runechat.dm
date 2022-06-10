@@ -69,24 +69,14 @@ TIMER_SUBSYSTEM_DEF(runechat)
 	movable.chat_color = rgb(hue, chroma, grey_luminance + 15, space = COLORSPACE_HCY)
 	movable.chat_color_text = using_text ? using_text : movable.name
 
-
 /// The last text used to calculate a color for this atom
 /atom/var/chat_color_text
 
 /// The color to use for runechat from this atom
-/atom/var/chat_color = "#cccccc"
+/atom/var/chat_color
 
 /// The color to use for italicized runechat from this atom
-/atom/var/chat_color_darkened = "#a0a0a0"
-
-// We set a default color on atoms, but humans and other important things should generate a color
-/mob/living/carbon/chat_color = null
-
-/mob/living/carbon/chat_color_darkened = null
-
-/mob/living/silicon/chat_color = null
-
-/mob/living/silicon/chat_color_darkened = null
+/atom/var/chat_color_darkened
 
 
 /// Messages currently visible to this client, as list(loc = list(/datum/runechat, ...))
@@ -181,39 +171,48 @@ TIMER_SUBSYSTEM_DEF(runechat)
 	///the layer mark given to the last stage of the animation sequence after it has been edited but not forced into the fading animation.
 	var/const/MESSAGE_ANIMATION_EDIT_FADE_LAYER_MARK = 1022
 
-
 	/// list of images generated for the message sent to each hearing client.
 	/// associative list of the form: list(message image = client using that image)
 	var/list/image/messages
+
 	/// The clients who heard this message. only populated with clients that have been assigned an image
 	/// associative list of the form: list(client who hears this message = chat message image that client uses)
 	var/list/client/hearers
-	/// all clients that have been assigned to this chatmessage datum from hear_runechat().
+
+	/// all clients that have been assigned to this chatmessage datum from show_runechat().
 	/// needed to ensure that the same client cant be a hearer to a message twice.
 	/// associative list of the form: list(client = TRUE)
 	var/list/client/all_hearers
+
 	/// The location in which the message is appearing
 	var/atom/message_loc
+
 	/// what language the message is spoken in.
 	var/datum/language/message_language
+
 	/// Contains the approximate amount of lines for height decay for each message image.
 	/// associative list of the form: list(message image = approximate lines for that image)
 	var/list/approx_lines
 
 	/// The current index used for adjusting the layer of each sequential chat message such that recent messages will overlay older ones
 	var/static/current_z_idx = 0
+
 	/// Contains the hash of our main assigned timer for the qdel_self fading event. by the time this timer executes all clients should have
 	///already seen the end of the maptext animation sequence and cant see their message anymore. so this will remove all message images from all clients
 	var/fadertimer = null
 
 	///concatenated string of parameters given to us at creation
 	var/creation_parameters = ""
+
 	///if TRUE, then this datum was dropped from its spot in SSrunechat.messages_by_creation_string and thus wont remove that spot of the list.
 	var/dropped_hash = FALSE
+
 	///how long the main stage of this message lasts (maptext fully visible) by default.
 	var/lifespan = 0
+
 	///associative list of the form: list(message image = world.time that image is set to fade out)
 	var/list/fade_times_by_image
+
 	///what world.time this message datum was created.
 	var/creation_time = 0
 
@@ -228,27 +227,17 @@ TIMER_SUBSYSTEM_DEF(runechat)
  * * extra_classes - Extra classes to apply to the span that holds the text
  * * lifespan - The lifespan of the message in deciseconds
  */
-/datum/chatmessage/New(creation_parameters, text, atom/target, datum/language/language, list/extra_classes = list(), lifespan = CHAT_MESSAGE_LIFESPAN)
+/datum/chatmessage/New(text, atom/target, datum/language/language, list/classes, lifespan = CHAT_MESSAGE_LIFESPAN)
 	. = ..()
 	if (!istype(target))
 		CRASH("Invalid target given for chatmessage")
-
-	if(istext(creation_parameters))
-		src.creation_parameters = creation_parameters
-	else
-		src.creation_parameters = "[text]-\ref[target]-[language]-[list2params(extra_classes)]-[lifespan]-[world.time]"
-
-	current_z_idx++
-	// Reset z index if relevant
-	if (current_z_idx >= CHAT_LAYER_MAX_Z)
+	src.lifespan = lifespan
+	creation_time = world.time
+	creation_parameters = "[text]-\ref[target]-[language]-[classes ? list2params(classes) : ""]-[creation_time]"
+	if (++current_z_idx >= CHAT_LAYER_MAX_Z)
 		current_z_idx = 0
-
 	message_loc = isturf(target) ? target : get_atom_on_turf(target)
 	GLOB.destroyed_event.register(message_loc, src, .proc/qdel_self)
-
-	creation_time = world.time
-	src.lifespan = lifespan
-	///how long this datum will actually exist for. its how long the default message animations take + 1 second buffer
 	var/total_existence_time = CHAT_MESSAGE_SPAWN_TIME + lifespan + CHAT_MESSAGE_EOL_FADE + 1 SECONDS
 	fadertimer = addtimer(CALLBACK(src, .proc/qdel_self), total_existence_time, TIMER_STOPPABLE|TIMER_DELETE_ME, SSrunechat)
 
@@ -319,7 +308,7 @@ TIMER_SUBSYSTEM_DEF(runechat)
  * * lanugage - the language typepath this message is spoken in
  * * extra_classes - the spans used for this message
  */
-/datum/chatmessage/proc/PrepareMessage(text, atom/target, mob/owner, datum/language/language, list/extra_classes)
+/datum/chatmessage/proc/PrepareMessage(text, atom/target, mob/owner, datum/language/language, list/classes)
 	set waitfor = FALSE //because this waits on info passed from the client
 
 	var/client/owned_by = owner.client
@@ -360,15 +349,15 @@ TIMER_SUBSYSTEM_DEF(runechat)
 
 	// Non mobs speakers can be small
 	if (!ismob(target))
-		extra_classes |= "small"
+		classes |= "small"
 
 	var/list/prefixes
 
 	// Append radio icon if from a virtual speaker
-	if (extra_classes.Find("virtual-speaker"))
+	if (classes.Find("virtual-speaker"))
 		var/image/r_icon = image('icons/chat_icons.dmi', icon_state = "radio")
 		LAZYADD(prefixes, "\icon[r_icon]")
-	else if (extra_classes.Find("emote"))
+	else if (classes.Find("emote"))
 		var/image/r_icon = image('icons/chat_icons.dmi', icon_state = "emote")
 		LAZYADD(prefixes, "\icon[r_icon]")
 
@@ -378,8 +367,8 @@ TIMER_SUBSYSTEM_DEF(runechat)
 	text = "[prefixes?.Join("&nbsp;")][text]"
 
 	// We dim italicized text to make it more distinguishable from regular text
-	var/tgt_color = extra_classes.Find("italic") ? target.chat_color_darkened : target.chat_color
-	var/complete_text = "<span class='maptext center [extra_classes.Join(" ")]' style='color: [tgt_color]'>[text]</span>"
+	var/tgt_color = classes.Find("italic") ? target.chat_color_darkened : target.chat_color
+	var/complete_text = "<span class='maptext center [classes.Join(" ")]' style='color: [tgt_color]'>[text]</span>"
 
 	// Retrieve the display height of the message from the client using MeasureText. We must split on x because it returns a WidthxHeight string.
 	var/message_height = owned_by.MeasureText(complete_text, null, max_pixels)
@@ -499,9 +488,14 @@ TIMER_SUBSYSTEM_DEF(runechat)
  * * raw_message - The text content of the message
  * * spans - Additional classes to be added to the message
  */
-/mob/proc/hear_runechat(atom/movable/speaker, datum/language/message_language, raw_message, list/spans, runechat_flags = SSrunechat.FLAGS_DEFAULT)
+/mob/proc/show_runechat(atom/movable/speaker, message, datum/language/language, list/classes, flags = SSrunechat.FLAGS_DEFAULT)
 	if (!client)
 		return
+	if (get_preference_value(/datum/client_preference/runechat) != GLOB.PREF_YES)
+		return
+	if (!ismob(speaker) && get_preference_value(/datum/client_preference/runechat_atoms) != GLOB.PREF_YES)
+		return
+
 
 	/*
 	// Check for virtual speakers (aka hearing a message through a radio)
@@ -519,18 +513,18 @@ TIMER_SUBSYSTEM_DEF(runechat)
 	var/datum/chatmessage/message_to_use
 	var/text_to_use
 
-	if(runechat_flags & SSrunechat.FLAGS_EMOTE)
-		text_to_use = raw_message
-		spans = list("emote", "italic")
+	if(flags & SSrunechat.FLAGS_EMOTE)
+		text_to_use = message
+		classes = list("emote", "italic")
 	else
-		//text_to_use = lang_treat(speaker, message_language, raw_message, spans, null, TRUE)
-		text_to_use = raw_message
-		spans = spans ? spans.Copy() : list()
+		//text_to_use = lang_treat(speaker, language, message, classes, null, TRUE)
+		text_to_use = message
+		classes = classes ? classes.Copy() : list()
 
-	var/message_parameters = "[text_to_use]-\ref[speaker]-[message_language]-[list2params(spans)]-[world.time]"
+	var/message_parameters = "[text_to_use]-\ref[speaker]-[language]-[list2params(classes)]-[world.time]"
 	message_to_use = SSrunechat.messages_by_creation_string[message_parameters]
 	//if an already existing message already has processed us as a hearer then we have to assume that this is from a new, identical message sent in the same tick
 	//as the already existing one. thats the only time this can happen. if this is the case then create a new chatmessage
 	if(!message_to_use || (message_to_use && message_to_use.all_hearers?[client]))
-		message_to_use = new /datum/chatmessage (message_parameters, text_to_use, speaker, message_language, spans)
-	message_to_use.PrepareMessage(text_to_use, speaker, src, message_language, spans)
+		message_to_use = new /datum/chatmessage (message_parameters, text_to_use, speaker, language, classes)
+	message_to_use.PrepareMessage(text_to_use, speaker, src, language, classes)
