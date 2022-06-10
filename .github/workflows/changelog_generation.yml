@@ -23,8 +23,8 @@ jobs:
         run: python tools/changelog/ss13_genchangelog.py html/changelog.html html/changelogs
       - name: Commit And Push
         run: |
-          git config --global user.email "${{ secrets.BOT_EMAIL }}"
-          git config --global user.name "${{ secrets.BOT_NAME }}"
+          git config --global user.name "Changelogs"
+          git config --global user.email "action@github.com"
           git diff --quiet --exit-code && echo "No changes found, aborting." && exit 0
           git commit -am "Automatic changelog generation"
           git push
