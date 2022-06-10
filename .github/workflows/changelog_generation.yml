@@ -12,9 +12,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          ref: dev
-          token: ${{ secrets.BOT_TOKEN }}
       - name: Python setup
         uses: actions/setup-python@v4
         with:
