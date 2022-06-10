@@ -3217,6 +3217,7 @@
 #include "proxima\code\game\objects\structures\holoplants.dm"
 #include "proxima\code\modules\filmgrain.dm"
 #include "proxima\code\modules\poraz_corgi.dm"
+#include "proxima\code\modules\clothing\under\under.dm"
 #include "proxima\code\music_player\_music_player.dm"
 #include "proxima\code\music_player\_music_tape.dm"
 #include "proxima\code\music_player\subtypes_player.dm"
