@@ -554,6 +554,9 @@
 /atom/proc/get_cell()
 	return
 
+/atom/proc/isflamesource()
+	. = FALSE
+
 /atom/proc/slam_into(mob/living/L)
 	L.Weaken(2)
 	L.visible_message(SPAN_WARNING("\The [L] [pick("ran", "slammed")] into \the [src]!"))

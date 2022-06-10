@@ -10,6 +10,7 @@
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 	surface_color = "#261e19"
 	water_color = "#c74d00"
+	weather_system = /decl/state/weather/ash
 	habitability_distribution = HABITABILITY_BAD
 	has_trees = FALSE
 	flora_diversity = 3

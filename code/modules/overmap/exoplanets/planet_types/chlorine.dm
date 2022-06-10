@@ -9,6 +9,8 @@
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 	surface_color = "#a3b879"
 	water_color = COLOR_BOTTLE_GREEN
+	water_material = /datum/reagent/toxin/chlorine
+	ice_material = /datum/reagent/toxin/chlorine
 	habitability_distribution = HABITABILITY_BAD
 	has_trees = FALSE
 	flora_diversity = 5

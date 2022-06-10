@@ -109,6 +109,8 @@
 	// Modifies skill checks when constructing with this material.
 	var/construction_difficulty = MATERIAL_EASY_DIY
 
+	var/fuel_value = 0
+
 	// Mining behavior.
 	var/alloy_product
 	var/ore_name

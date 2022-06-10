@@ -12,7 +12,7 @@
 	var/obj/item/holding = null
 	var/obj/item/device/bot_controller/controller = null
 
-/mob/living/bot/remotebot/movement_delay()
+/mob/living/bot/remotebot/get_movement_delay()
 	var/tally = ..()
 	tally += speed
 	if(holding)
@@ -87,7 +87,7 @@
 	if(working || stat || !on || a == src) //can't touch itself
 		return
 	if(isturf(a) || get_dist(src,a) > 1)
-		walk_to(src,a,0,movement_delay())
+		walk_to(src,a,0,get_movement_delay())
 	else if(istype(a, /obj/item))
 		pickup(a)
 	else

@@ -1,14 +1,14 @@
 /mob/living/carbon/human
 	move_intents = list(/decl/move_intent/walk)
 
-/mob/living/carbon/human/movement_delay()
+/mob/living/carbon/human/get_movement_delay(var/travel_dir)
 	var/tally = ..()
 
 	var/obj/item/organ/external/H = get_organ(BP_GROIN) // gets species slowdown, which can be reset by robotize()
 	if(istype(H))
 		tally += H.slowdown
 
-	tally += species.handle_movement_delay_special(src)
+	tally += species.handle_get_movement_delay_special(src)
 
 	var/area/a = get_area(src)
 	if(a && !a.has_gravity())
@@ -31,7 +31,7 @@
 	if(istype(buckled, /obj/structure/bed/chair/wheelchair))
 		for(var/organ_name in list(BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM))
 			var/obj/item/organ/external/E = get_organ(organ_name)
-			tally += E ? E.movement_delay(4) : 4
+			tally += E ? E.get_movement_delay(4) : 4
 	else
 		var/total_item_slowdown = -1
 		for(var/slot = slot_first to slot_last)
@@ -53,7 +53,7 @@
 
 		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/E = get_organ(organ_name)
-			tally += E ? E.movement_delay(4) : 4
+			tally += E ? E.get_movement_delay(4) : 4
 
 	if(shock_stage >= 10 || get_stamina() <= 0)
 		tally += 3

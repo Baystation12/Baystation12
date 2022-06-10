@@ -6,9 +6,29 @@
 	footstep_type = /decl/footsteps/asteroid
 	var/diggable = 1
 	var/dirt_color = "#7c5e42"
+	var/list/affecting_heat_sources
+	var/obj/effect/overmap/visitable/sector/exoplanet/owner
 
 /turf/simulated/floor/exoplanet/can_engrave()
 	return FALSE
+
+/turf/simulated/floor/exoplanet/return_air()
+	var/datum/gas_mixture/gas
+	if(owner)
+		gas = new
+		gas.copy_from(owner.atmosphere)
+	else
+		gas = GLOB.using_map.get_exterior_atmosphere()
+
+	var/initial_temperature = gas.temperature
+	if(weather)
+		initial_temperature = weather.adjust_temperature(initial_temperature)
+	for(var/thing in affecting_heat_sources)
+		if((gas.temperature - initial_temperature) >= 100)
+			break
+		var/obj/structure/fire_source/heat = thing
+		gas.temperature = gas.temperature + heat.exterior_temperature / max(1, get_dist(src, get_turf(heat)))
+	return gas
 
 /turf/simulated/floor/exoplanet/New()
 	if(GLOB.using_map.use_overmap)
@@ -25,6 +45,31 @@
 			if(E.planetary_area && istype(loc, world.area))
 				ChangeArea(src, E.planetary_area)
 	..()
+
+/turf/simulated/floor/exoplanet/Destroy()
+	owner = null
+	for(var/thing in affecting_heat_sources)
+		var/obj/structure/fire_source/heat = thing
+		LAZYREMOVE(heat.affected_exterior_turfs, src)
+	affecting_heat_sources = null
+	. = ..()
+
+/turf/simulated/floor/exoplanet/initialize_ambient_light(mapload)
+	update_ambient_light(mapload)
+
+/turf/simulated/floor/exoplanet/update_ambient_light(mapload)
+	if(is_outside())
+		if(owner) // Exoplanets do their own lighting shenanigans.
+			//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
+			set_light(owner.lightlevel)
+			return
+		if(config.starlight)
+			var/area/A = get_area(src)
+			if(A.show_starlight)
+				set_light(config.starlight, 0.75, l_color = SSskybox.background_color)
+				return
+	if(!mapload)
+		set_light(0)
 
 /turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)
 	if(diggable && istype(C,/obj/item/shovel))
@@ -216,27 +261,26 @@
 	dynamic_lighting = FALSE
 	icon = null
 	icon_state = null
+	var/mimicx
+	var/mimicy
 
 /turf/simulated/planet_edge/Initialize()
 	. = ..()
-	var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
+	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.map_sectors["[z]"]
 	if(!istype(E))
 		return
-	var/nx = x
+	mimicx = x
 	if (x <= TRANSITIONEDGE)
-		nx = x + (E.maxx - 2*TRANSITIONEDGE) - 1
+		mimicx = x + (E.maxx - 2*TRANSITIONEDGE) - 1
 	else if (x >= (E.maxx - TRANSITIONEDGE))
-		nx = x - (E.maxx  - 2*TRANSITIONEDGE) + 1
+		mimicx = x - (E.maxx  - 2*TRANSITIONEDGE) + 1
 
-	var/ny = y
+	mimicy = y
 	if(y <= TRANSITIONEDGE)
-		ny = y + (E.maxy - 2*TRANSITIONEDGE) - 1
+		mimicy = y + (E.maxy - 2*TRANSITIONEDGE) - 1
 	else if (y >= (E.maxy - TRANSITIONEDGE))
-		ny = y - (E.maxy - 2*TRANSITIONEDGE) + 1
-
-	var/turf/NT = locate(nx, ny, z)
-	if(NT)
-		vis_contents = list(NT)
+		mimicy = y - (E.maxy - 2*TRANSITIONEDGE) + 1
+	refresh_vis_contents()
 
 	//Need to put a mouse-opaque overlay there to prevent people turning/shooting towards ACTUAL location of vis_content things
 	var/obj/effect/overlay/O = new(src)
@@ -270,3 +314,9 @@
 			if(L.pulling)
 				var/atom/movable/AM = L.pulling
 				AM.forceMove(T)
+
+/turf/simulated/planet_edge/get_vis_contents_to_add()
+	. = ..()
+	var/turf/NT = mimicx && mimicy && locate(mimicx, mimicy, z)
+	if(NT)
+		LAZYADD(., NT)

@@ -35,6 +35,9 @@
 	var/footstep_type
 
 	var/tmp/changing_turf
+	var/tmp/prev_type // Previous type of the turf, prior to turf translation.
+	var/tmp/obj/abstract/weather_system/weather
+	var/tmp/is_outside = OUTSIDE_AREA
 
 	/// List of 'dangerous' objs that the turf holds that can cause something bad to happen when stepped on, used for AI mobs.
 	var/list/dangerous_objects
@@ -88,11 +91,26 @@
 	if (mimic_proxy)
 		QDEL_NULL(mimic_proxy)
 
+	if(weather)
+		remove_vis_contents(src, weather.vis_contents_additions)
+		weather = null
+
 	..()
 	return QDEL_HINT_IWILLGC
 
 /turf/proc/is_solid_structure()
 	return 1
+
+/turf/examine(mob/user, distance, infix, suffix)
+	. = ..()
+	if(user && weather)
+		weather.examine(user)
+
+/turf/proc/initialize_ambient_light(var/mapload)
+	return
+
+/turf/proc/update_ambient_light(var/mapload)
+	return
 
 /turf/attack_hand(mob/user)
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
@@ -109,6 +127,54 @@
 	.=handle_hand_interception(user)
 	if (!.)
 		return 1
+
+/turf/proc/update_weather(var/obj/abstract/weather_system/new_weather)
+
+	if(isnull(new_weather))
+		new_weather = global.weather_by_z["[z]"]
+
+	// We have a weather system and we are exposed to it; update our vis contents.
+	var/old_weather = weather
+	if(istype(new_weather) && is_outside())
+		if(weather != new_weather)
+			if(weather)
+				remove_vis_contents(src, weather.vis_contents_additions)
+			weather = new_weather
+			add_vis_contents(src, weather.vis_contents_additions)
+
+	// We are indoors or there is no local weather system, clear our vis contents.
+	else if(weather)
+		remove_vis_contents(src, weather.vis_contents_additions)
+		weather = null
+
+	// Propagate our weather downwards if we permit it.
+	if(is_open() && old_weather != weather)
+		var/turf/below = GetBelow(src)
+		if(below)
+			below.update_weather(new_weather)
+
+/turf/proc/is_outside()
+
+	if(density)
+		return OUTSIDE_NO
+
+	var/turf/above = GetAbove(src)
+	if(above && above.is_open())
+		return above.is_outside()
+
+	if(is_outside != OUTSIDE_AREA)
+		return is_outside
+	var/area/A = get_area(src)
+	if(A)
+		return A.is_outside
+	return OUTSIDE_NO
+
+/turf/proc/set_outside(var/new_outside)
+	if(is_outside != new_outside)
+		is_outside = new_outside
+		update_weather()
+		return TRUE
+	return FALSE
 
 /turf/proc/handle_hand_interception(var/mob/user)
 	var/datum/extension/turf_hand/THE
@@ -130,6 +196,14 @@
 		if(S.use_to_pickup && S.collection_mode)
 			S.gather_all(src, user)
 	return ..()
+
+/turf/proc/get_base_movement_delay()
+	return movement_delay
+
+/turf/proc/get_movement_delay(var/travel_dir)
+	. = get_base_movement_delay()
+	if(weather)
+		. += weather.get_movement_delay(return_air(), travel_dir)
 
 /turf/Enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
 
@@ -441,3 +515,10 @@ var/global/const/enterloopsanity = 100
 	else
 		has_dense_atom = null
 		has_opaque_atom = null
+
+/turf/get_vis_contents_to_add()
+	var/datum/gas_mixture/air = return_air()
+	if(air && length(air.graphic))
+		LAZYADD(., air.graphic)
+	if(weather)
+		LAZYADD(., weather)

@@ -261,6 +261,9 @@
 	/// Modifier for ticks between moves while creeping
 	var/static/creep_delay = 6
 
+	/// Modifier for ticks between moves when gliding
+	var/glide_size_delay = 1
+
 	/// Modifier for base stamina cost while sprinting
 	var/static/minimum_sprint_cost = 0.8
 

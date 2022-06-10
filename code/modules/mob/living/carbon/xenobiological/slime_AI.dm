@@ -178,7 +178,7 @@
 				a_intent = I_HURT
 			UnarmedAttack(frenemy)
 
-	var/sleeptime = max(movement_delay(), 5) + addedDelay // Maximum one action per half a second
+	var/sleeptime = max(get_movement_delay(), 5) + addedDelay // Maximum one action per half a second
 	addtimer(CALLBACK(src, .proc/handle_AI), sleeptime)
 
 

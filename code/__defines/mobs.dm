@@ -36,6 +36,7 @@
 #define BORGXRAY  FLAG(2)
 #define BORGMATERIAL FLAG(3)
 
+#define ADJUSTED_GLIDE_SIZE(DELAY) (Ceilm((WORLD_ICON_SIZE / max((DELAY), world.tick_lag) * world.tick_lag) - world.tick_lag, 1) + (config.glide_size_delay))
 
 #define STANCE_SLEEP        0	// Doing (almost) nothing, to save on CPU because nobody is around to notice or the mob died.
 #define STANCE_IDLE         1	// The more or less default state. Wanders around, looks for baddies, and spouts one-liners.

@@ -141,6 +141,7 @@
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 	equip_delay = 5 SECONDS
+	protects_against_weather = TRUE
 
 
 /obj/item/clothing/suit/space/equip_delay_before(mob/user, slot, equip_flags)

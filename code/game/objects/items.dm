@@ -914,3 +914,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /// Virtual for behavior to do after successful do_after if equip_delay is set
 /obj/item/proc/equip_delay_after(mob/user, slot, equip_flags)
 	return
+
+/// Virtual behavior for items giving WEATHER_PROTECTED flag
+/obj/item/proc/gives_weather_protection()
+	return FALSE

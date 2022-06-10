@@ -173,7 +173,7 @@
 	if (web)
 		web.remove_webbing(owner)
 
-/mob/living/movement_delay()
+/mob/living/get_movement_delay()
 	. = ..()
 
 	if (!auras)

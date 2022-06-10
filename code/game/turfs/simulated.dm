@@ -8,10 +8,14 @@
 	var/list/resources
 
 	var/thermite = 0
-	initial_gas = list(GAS_OXYGEN = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
+	initial_gas = list(
+		/decl/xgm_gas/oxygen = MOLES_O2STANDARD,
+		/decl/xgm_gas/nitrogen = MOLES_N2STANDARD
+	)
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
 	var/max_fire_temperature_sustained = 0 //The max temperature of the fire which it was subjected to
 	var/dirt = 0
+	is_outside = OUTSIDE_NO
 
 	var/timer_id
 

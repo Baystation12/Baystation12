@@ -231,7 +231,7 @@
 	else
 		return 0
 
-/datum/species/nabber/handle_movement_delay_special(var/mob/living/carbon/human/H)
+/datum/species/nabber/handle_get_movement_delay_special(var/mob/living/carbon/human/H)
 	var/tally = 0
 
 	H.remove_cloaking_source(src)

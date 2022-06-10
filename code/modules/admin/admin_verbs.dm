@@ -201,7 +201,10 @@ var/global/list/admin_verbs_debug = list(
 	/client/proc/ping_webhook,
 	/client/proc/reload_webhooks,
 	/client/proc/toggle_planet_repopulating,
-	/client/proc/spawn_exoplanet
+	/client/proc/spawn_exoplanet,
+	/datum/admins/proc/force_initialize_weather,
+	/datum/admins/proc/force_weather_state,
+	/datum/admins/proc/force_kill_weather
 	)
 
 var/global/list/admin_verbs_paranoid_debug = list(

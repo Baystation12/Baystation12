@@ -3,6 +3,7 @@ GLOBAL_VAR_INIT(lobby_sound_channel, GLOB.sound_channels.RequestChannel("LOBBY")
 GLOBAL_VAR_INIT(vote_sound_channel, GLOB.sound_channels.RequestChannel("VOTE"))
 GLOBAL_VAR_INIT(ambience_sound_channel, GLOB.sound_channels.RequestChannel("AMBIENCE"))
 GLOBAL_VAR_INIT(admin_sound_channel, GLOB.sound_channels.RequestChannel("ADMIN_FUN"))
+GLOBAL_VAR_INIT(weather_channel, GLOB.sound_channels.RequestChannel("WEATHER"))
 
 /repository/sound_channels
 	var/datum/stack/available_channels

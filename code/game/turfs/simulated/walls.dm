@@ -125,7 +125,7 @@
 			plant.pixel_x = 0
 			plant.pixel_y = 0
 
-/turf/simulated/wall/ChangeTurf(var/newtype, tell_universe = TRUE, force_lighting_update = FALSE, keep_air = FALSE)
+/turf/simulated/wall/ChangeTurf(var/newtype, tell_universe = TRUE, force_lighting_update = FALSE, keep_air = FALSE, keep_outside = FALSE)
 	clear_plants()
 	. = ..(newtype, tell_universe, force_lighting_update, keep_air)
 	var/turf/new_turf = .

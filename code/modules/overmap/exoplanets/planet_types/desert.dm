@@ -8,6 +8,9 @@
 	map_generators = list(/datum/random_map/noise/exoplanet/desert, /datum/random_map/noise/ore/rich)
 	surface_color = "#d6cca4"
 	water_color = null
+	water_material = null
+	ice_material = null
+	weather_system = null
 	habitability_distribution = list(HABITABILITY_IDEAL = 30, HABITABILITY_OKAY = 50, HABITABILITY_BAD = 10)
 	has_trees = FALSE
 	flora_diversity = 4

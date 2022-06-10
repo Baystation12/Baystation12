@@ -34,6 +34,7 @@
 
 
 /mob/living/carbon/brain/handle_environment(datum/gas_mixture/environment)
+	..()
 	if(!environment)
 		return
 	var/environment_heat_capacity = environment.heat_capacity()

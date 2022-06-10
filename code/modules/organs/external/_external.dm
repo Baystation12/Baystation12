@@ -1368,7 +1368,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	return !BP_IS_ROBOTIC(src) && species && species.sexybits_location == organ_tag
 
 // Added to the mob's move delay tally if this organ is being used to move with.
-/obj/item/organ/external/proc/movement_delay(max_delay)
+/obj/item/organ/external/proc/get_movement_delay(max_delay)
 	. = 0
 	if(is_stump())
 		. += max_delay

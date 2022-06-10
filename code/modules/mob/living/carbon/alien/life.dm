@@ -122,11 +122,10 @@
 	return 1
 
 /mob/living/carbon/alien/handle_environment(var/datum/gas_mixture/environment)
+	..()
 	// Both alien subtypes survive in vaccum and suffer in high temperatures,
 	// so I'll just define this once, for both (see radiation comment above)
-	if(!environment) return
-
-	if(environment.temperature > (T0C+66))
+	if(environment && environment.temperature > (T0C+66))
 		adjustFireLoss((environment.temperature - (T0C+66))/5) // Might be too high, check in testing.
 		if (fire) fire.icon_state = "fire2"
 		if(prob(20))

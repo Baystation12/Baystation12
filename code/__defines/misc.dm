@@ -305,3 +305,22 @@
 #define EX_ACT_DEVASTATING 1 // Within devastation range - Destructive/deadly, unlikely to survive.
 #define EX_ACT_HEAVY 2 // Within heavy range - Heavy damage, very dangerous
 #define EX_ACT_LIGHT 3 // Within light range - Minor damage.
+
+#if DM_BUILD < 1540
+#define AS_ANYTHING as()
+#else
+#define AS_ANYTHING as anything
+#endif
+
+//Turf/area values for 'this space is outside' checks
+#define OUTSIDE_AREA null
+#define OUTSIDE_NO   FALSE
+#define OUTSIDE_YES  TRUE
+
+// Weather exposure values for being rained on or hailed on.
+#define WEATHER_IGNORE    -1
+#define WEATHER_PROTECTED  0
+#define WEATHER_EXPOSED    1
+
+// arbitrary low pressure bound for wind weather effects
+#define MIN_WIND_PRESSURE 10

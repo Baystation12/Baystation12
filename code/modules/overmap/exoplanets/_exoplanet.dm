@@ -51,6 +51,9 @@ GLOBAL_VAR(planet_repopulation_disabled)
 		)
 	var/list/themes = list()
 
+	var/water_material = /datum/reagent/water
+	var/ice_material =   /datum/reagent/drink/ice
+
 	var/list/map_generators = list()
 
 	//Flags deciding what features to pick
@@ -59,6 +62,8 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	var/features_budget = 5
 	var/list/possible_features = list()
 	var/list/spawned_features
+
+	var/obj/abstract/weather_system/weather_system = /decl/state/weather/calm // Initial weather is passed to the system as its default state.
 
 	//Either a type or a list of types and weights. You must include all types if it's a list
 	var/list/habitability_distribution = list(
@@ -112,6 +117,11 @@ GLOBAL_VAR(planet_repopulation_disabled)
 			continue
 		possible_features += new ruin
 	..()
+
+	if(ispath(weather_system, /decl/state/weather))
+		weather_system = new /obj/abstract/weather_system(null, map_z[1], weather_system)
+		weather_system.water_material = water_material
+		weather_system.ice_material = ice_material
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/build_level()
 	generate_habitability()
@@ -316,3 +326,4 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	always_unpowered = TRUE
 	area_flags = AREA_FLAG_EXTERNAL
 	planetary_surface = TRUE
+	is_outside = OUTSIDE_YES

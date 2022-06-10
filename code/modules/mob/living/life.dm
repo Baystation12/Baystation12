@@ -13,9 +13,7 @@
 		machine = null
 
 	//Handle temperature/pressure differences between body and environment
-	var/datum/gas_mixture/environment = loc.return_air()
-	if(environment)
-		handle_environment(environment)
+	handle_environment(loc.return_air())
 
 	blinded = 0 // Placing this here just show how out of place it is.
 	// human/handle_regular_status_updates() needs a cleanup, as blindness should be handled in handle_disabilities()
@@ -56,8 +54,58 @@
 /mob/living/proc/handle_random_events()
 	return
 
+/mob/living
+	var/weakref/last_weather
+
+/mob/living/proc/is_outside()
+	var/turf/T = loc
+	return istype(T) && T.is_outside()
+
+/mob/living/proc/get_affecting_weather()
+	var/turf/my_turf = get_turf(src)
+	if(!istype(my_turf))
+		return
+	var/turf/actual_loc = loc
+	// If we're standing in the rain, use the turf weather.
+	. = istype(actual_loc) && actual_loc.weather
+	if(!.) // If we're under or inside shelter, use the z-level rain (for ambience)
+		. = global.weather_by_z["[my_turf.z]"]
+
 /mob/living/proc/handle_environment(var/datum/gas_mixture/environment)
-	return
+
+	SHOULD_CALL_PARENT(TRUE)
+
+	// Handle physical effects of weather.
+	var/decl/state/weather/weather_state
+	var/obj/abstract/weather_system/weather = get_affecting_weather()
+	if(weather)
+		weather_state = weather.weather_system.current_state
+		if(istype(weather_state))
+			weather_state.handle_exposure(src, get_weather_exposure(weather), weather)
+
+	// Refresh weather ambience.
+	// Show messages and play ambience.
+	if(client && get_preference_value(/datum/client_preference/play_ambiance) == GLOB.PREF_YES)
+
+		// Work out if we need to change or cancel the current ambience sound.
+		var/send_sound
+		var/mob_ref = weakref(src)
+		if(istype(weather_state))
+			var/ambient_sounds = !is_outside() ? weather_state.ambient_indoors_sounds : weather_state.ambient_sounds
+			var/ambient_sound = length(ambient_sounds) && pick(ambient_sounds)
+			if(global.current_mob_ambience[mob_ref] == ambient_sound)
+				return
+			send_sound = ambient_sound
+			global.current_mob_ambience[mob_ref] = send_sound
+		else if(mob_ref in global.current_mob_ambience)
+			global.current_mob_ambience -= mob_ref
+		else
+			return
+
+		// Push sound to client. Pipe dream TODO: crossfade between the new and old weather ambience.
+		sound_to(src, sound(null, repeat = 0, wait = 0, volume = 0, channel = GLOB.weather_channel))
+		if(send_sound)
+			sound_to(src, sound(send_sound, repeat = TRUE, wait = 0, volume = 30, channel = GLOB.weather_channel))
 
 /mob/living/proc/update_pulling()
 	if(pulling)

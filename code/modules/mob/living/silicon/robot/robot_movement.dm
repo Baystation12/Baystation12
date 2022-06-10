@@ -16,10 +16,10 @@
 	. = ..()
 
 
-/mob/living/silicon/robot/movement_delay()
+/mob/living/silicon/robot/get_movement_delay()
 	var/tally = ..()
 
-	// Subtract 1 to match Human base movement_delay of -1
+	// Subtract 1 to match Human base get_movement_delay of -1
 	tally -= 1
 
 	if (vtec)

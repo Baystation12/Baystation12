@@ -17,7 +17,7 @@
 		above.update_mimic()
 
 //Creates a new turf
-/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
+/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_outside = FALSE)
 	if (!N)
 		return
 
@@ -41,6 +41,7 @@
 	var/old_ao_neighbors = ao_neighbors
 	var/old_above = above
 	var/old_permit_ao = permit_ao
+	var/old_outside = is_outside
 
 	//log_debug("Replacing [src.type] with [N]")
 
@@ -117,6 +118,11 @@
 
 	GLOB.turf_changed_event.raise_event(src, old_density, density, old_opacity, opacity)
 	updateVisibility(src, FALSE)
+
+	// Outside/weather stuff. set_outside() updates weather already
+	// so only call it again if it doesn't already handle it.
+	if(!keep_outside || !W.set_outside(old_outside))
+		W.update_weather()
 
 /turf/proc/transport_properties_from(turf/other)
 	if(!istype(other, src.type))

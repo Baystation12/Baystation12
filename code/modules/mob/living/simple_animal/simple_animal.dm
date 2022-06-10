@@ -317,13 +317,13 @@
 	else if(movement_sound && old_turf != get_turf(src)) // Playing both sounds at the same time generally sounds bad.
 		playsound(src, movement_sound, 50, 1)
 
-/mob/living/simple_animal/movement_delay()
+/mob/living/simple_animal/get_movement_delay(var/travel_dir)
 	. = movement_cooldown
 
 	// Turf related slowdown
 	var/turf/T = get_turf(src)
-	if(T && T.movement_delay && !is_floating) // Flying mobs ignore turf-based slowdown. Aquatic mobs ignore water slowdown, and can gain bonus speed in it.
-		. += T.movement_delay
+	if(T && T.get_movement_delay(travel_dir) && !is_floating) // Flying mobs ignore turf-based slowdown. Aquatic mobs ignore water slowdown, and can gain bonus speed in it.
+		. += T.get_movement_delay(travel_dir)
 
 	if(purge)//Purged creatures will move more slowly. The more time before their purge stops, the slower they'll move.
 		if(. <= 0)

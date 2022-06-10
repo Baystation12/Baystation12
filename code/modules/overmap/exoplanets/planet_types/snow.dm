@@ -8,6 +8,8 @@
 	map_generators = list(/datum/random_map/noise/exoplanet/snow, /datum/random_map/noise/ore/poor)
 	surface_color = "#e8faff"
 	water_color = "#b5dfeb"
+	water_material = null // Will prevent the weather system causing rainfall.
+	weather_system = /decl/state/weather/snow
 	habitability_distribution = list(HABITABILITY_IDEAL = 30, HABITABILITY_OKAY = 50, HABITABILITY_BAD = 10)
 	has_trees = TRUE
 	flora_diversity = 4

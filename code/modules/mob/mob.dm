@@ -191,11 +191,11 @@
 	return -1
 
 
-/mob/proc/movement_delay()
+/mob/proc/get_movement_delay(var/travel_dir)
 	. = 0
 	if(istype(loc, /turf))
 		var/turf/T = loc
-		. += T.movement_delay
+		. += T.get_movement_delay(travel_dir)
 
 	if (drowsyness > 0)
 		. += 6
@@ -753,7 +753,7 @@
 	set_dir(ndir)
 	if(buckled && buckled.buckle_movable)
 		buckled.set_dir(ndir)
-	SetMoveCooldown(movement_delay())
+	SetMoveCooldown(get_movement_delay())
 	return 1
 
 
@@ -1156,3 +1156,50 @@
 	if(ear_deaf)
 		return 0
 	return 1
+
+/mob/proc/set_glide_size(var/delay)
+	glide_size = ADJUSTED_GLIDE_SIZE(delay)
+
+/mob/proc/get_weather_protection()
+	for(var/obj/item/brolly in (slot_l_hand || slot_r_hand))
+		if(brolly.gives_weather_protection())
+			LAZYADD(., brolly)
+	if(!LAZYLEN(.))
+		for(var/turf/T AS_ANYTHING in RANGE_TURFS(loc, 1))
+			for(var/obj/structure/flora/tree/tree in T)
+				if(tree.protects_against_weather)
+					LAZYADD(., tree)
+
+/mob/living/carbon/human/get_weather_protection()
+	. = ..()
+	if(!LAZYLEN(.))
+		var/obj/item/clothing/head/check_head = head
+		if(!istype(check_head) || !check_head.protects_against_weather)
+			return
+		var/obj/item/clothing/suit/check_body = wear_suit
+		if(!istype(check_body) || !check_body.protects_against_weather)
+			return
+		LAZYADD(., check_head)
+		LAZYADD(., check_body)
+
+/mob/proc/get_weather_exposure(var/obj/abstract/weather_system/weather)
+	var/turf/T = loc
+
+	// We're inside something else.
+	if(!istype(T))
+		return WEATHER_PROTECTED
+
+	// Either we're outside being rained on, or we're in turf-local weather being rained on.
+	if(T.is_outside() || T.weather == weather)
+		var/list/weather_protection = get_weather_protection()
+		if(LAZYLEN(weather_protection))
+			return WEATHER_PROTECTED
+		return WEATHER_EXPOSED
+
+	// The z-level has weather, but we aren't standing in it, so it's probably above us.
+	T = GetAbove(T)
+	if(!T || !T.is_open())
+		return WEATHER_PROTECTED
+
+	// We're inside, and more than one z-level below the roof, so ignore it.
+	return WEATHER_IGNORE

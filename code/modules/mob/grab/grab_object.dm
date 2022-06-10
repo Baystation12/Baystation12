@@ -180,6 +180,13 @@
 			return 0
 	return 1
 
+/obj/item/grab/proc/get_affecting_mob()
+	if(isobj(affecting))
+		var/obj/O = affecting
+		return O.buckled_mob
+	if(isliving(affecting))
+		return affecting
+
 // This will run from Initialize, after can_grab and other checks have succeeded. Must call parent; returning FALSE means failure and qdels the grab.
 /obj/item/grab/proc/init()
 	if(!assailant.put_in_active_hand(src))

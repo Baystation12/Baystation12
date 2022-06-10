@@ -385,6 +385,7 @@ BLIND     // can't see anything
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_head_unathi.dmi',
 		SPECIES_NABBER = 'icons/mob/species/nabber/onmob_head_gas.dmi'
 	)
+	var/protects_against_weather = FALSE
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
 	item_flags = ITEM_FLAG_WASHER_ALLOWED
@@ -752,6 +753,7 @@ BLIND     // can't see anything
 	blood_overlay_type = "suit"
 	siemens_coefficient = 0.9
 	w_class = ITEM_SIZE_NORMAL
+	var/protects_against_weather = TRUE
 
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_suit_vox.dmi',

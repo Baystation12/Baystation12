@@ -45,6 +45,7 @@
 #define SS_PRIORITY_GRAPH         30   // Merging and splitting of graphs
 #define SS_PRIORITY_CHAR_SETUP    25   // Writes player preferences to savefiles.
 #define SS_PRIORITY_GARBAGE       20   // Garbage collection.
+#define SS_PRIORITY_WEATHER       10   // Weather processing.
 #define SS_PRIORITY_INACTIVITY    10  // Idle kicking.
 
 // Subsystem fire priority, from lowest to highest priority

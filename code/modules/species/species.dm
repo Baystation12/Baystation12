@@ -475,7 +475,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 /datum/species/proc/handle_environment_special(var/mob/living/carbon/human/H)
 	return
 
-/datum/species/proc/handle_movement_delay_special(var/mob/living/carbon/human/H)
+/datum/species/proc/handle_get_movement_delay_special(var/mob/living/carbon/human/H)
 	return 0
 
 // Used to update alien icons for aliens.
