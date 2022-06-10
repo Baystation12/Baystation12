@@ -8,29 +8,26 @@ on:
 jobs:
   CompileCL:
     runs-on: ubuntu-latest
-    if: github.repository == 'Baystation12/Baystation12' # to prevent this running on forks
+    if: github.repository == 'Proxima-Project/Proxi-Bay12' # to prevent this running on forks
     steps:
       - name: Checkout
-        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # Otherwise, we will fail to push refs
           ref: dev
           token: ${{ secrets.BOT_TOKEN }}
       - name: Python setup
-        uses: actions/setup-python@f38219332975fe8f9c04cca981d674bf22aea1d3
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
+          cache: 'pip'
       - name: Install depends
-        run: |
-          python -m pip install --upgrade pip
-          pip install pyyaml bs4
+        run: pip install pyyaml bs4
       - name: Compile CL
-        run: |
-          python tools/changelog/ss13_genchangelog.py html/changelog.html html/changelogs
+        run: python tools/changelog/ss13_genchangelog.py html/changelog.html html/changelogs
       - name: Commit And Push
         run: |
           git config --global user.email "${{ secrets.BOT_EMAIL }}"
           git config --global user.name "${{ secrets.BOT_NAME }}"
-          git diff --quiet --exit-code && echo "No changes found, abort." && exit 0
-          git commit -m "Automatic changelog generation" -a
+          git diff --quiet --exit-code && echo "No changes found, aborting." && exit 0
+          git commit -am "Automatic changelog generation"
           git push
