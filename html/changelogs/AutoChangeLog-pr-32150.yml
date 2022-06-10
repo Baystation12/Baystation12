@@ -1,8 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Various timed interactions now appear over the user or the target as applicable
-      by context, instead of strictly based on whether or the timer is public or private.
-  - bugfix: Wrenching down an AI core now displays a public progress bar.
-  - imageadd: Timed progress bars are now color-coded based on whether they are public
-      or not. Public bars are teal, private bars are purple.

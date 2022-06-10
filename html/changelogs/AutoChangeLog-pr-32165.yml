@@ -1,7 +1,0 @@
-author: Nl208
-delete-after: true
-changes:
-  - rscadd: Adds a "set injection rates for all" button to the RUST injector console's
-      interface.
-  - tweak: Adds some punctuation to the popup windows. Changed instructions to say
-      "enter new injection rate between 1 and 100" instead of "0 and 100".
