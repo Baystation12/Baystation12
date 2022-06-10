@@ -8,7 +8,7 @@ on:
 jobs:
   MakeCL:
     runs-on: ubuntu-latest
-    if: github.repository == 'Baystation12/Baystation12' # to prevent this running on forks
+    if: github.repository == 'Proxima-Project/Proxi-Bay12' # to prevent this running on forks
     steps:
       - name: Checkout
         uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
@@ -23,8 +23,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install ruamel.yaml PyGithub
       - name: Make CL
-        env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          GIT_EMAIL: "${{ secrets.BOT_EMAIL }}"
-          GIT_NAME: "${{ secrets.BOT_NAME }}"
-        run: python tools/changelog/generate_cl.py
+        run: |
+          python tools/changelog/generate_cl.py
+          echo "pr_number=$PR_NUM" >> $GITHUB_ENV
+      - name: Commit and Push Changes
+        if: env.pr_number != "-1"
+        run: |
+          git config --local user.name "Changelogs"
+          git config --local user.email "action@github.com"
+          git commit -m "Automatic changelog generation for PR #${{ env.pr_number }} [ci skip]" -a
+          git push
