@@ -32,6 +32,7 @@
 #define R_SPAWN          FLAG(12)
 #define R_MOD            FLAG(13)
 #define R_HOST           FLAG(14)
+#define R_XENO	         0x4000
 #define R_INVESTIGATE    (R_ADMIN | R_MOD)
 #define R_MAXPERMISSION  R_HOST
 

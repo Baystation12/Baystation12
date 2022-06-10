@@ -7,3 +7,6 @@
 #define WEBHOOK_REG      		  "webhook_reg"
 #define WEBHOOK_BAN      		  "webhook_ban"
 #define WEBHOOK_NOTES      		  "webhook_notes"
+
+//[INF]
+#define WEBHOOK_XENO_WHITELIST	  "webhook_xeno_whitelist"		// xenoWL changes
