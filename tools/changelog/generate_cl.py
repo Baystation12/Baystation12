@@ -30,7 +30,7 @@ CL_SPLIT = re.compile(r"(^\w+):\s+(\w.+)", re.MULTILINE)
 repo = os.getenv("GITHUB_REPOSITORY")
 sha = os.getenv("GITHUB_SHA")
 
-os.putenv("PR_NUM", "-1")  # Don't commit if we don't need to
+print(f"::set-output name=pr_number::{-1}") # Don't commit if we don't need to
 
 git = Github()
 repo = git.get_repo(repo)
@@ -70,7 +70,7 @@ write_cl['changes'] = []
 for k, v in cl_list:
     if k in tags['tags'].keys():  # Check to see if there are any valid tags, as determined by tags.yml
         v = v.rstrip()
-        if v not in list(tags['defaults'].values()): 
+        if v not in list(tags['defaults'].values()):
             # Check to see if the tags are associated with something that isn't the default text
             write_cl['changes'].append({ tags['tags'][k]: v })
 
@@ -84,7 +84,7 @@ if write_cl['changes']:
         with open(f"html/changelogs/AutoChangeLog-pr-{pr_number}.yml", 'w') as f:
             shutil.copyfileobj(cl_contents, f)
 
-    os.putenv("PR_NUM", f"{pr_number}")  # For the PR number in the commit info
+    print(f"::set-output name=pr_number::{pr_number}") # For the PR number in the commit info
     print("Done!")
 else:
     print("No CL changes detected!")
