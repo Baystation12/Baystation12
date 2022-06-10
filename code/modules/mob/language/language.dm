@@ -26,6 +26,10 @@
 	var/category = /datum/language    // Used to point at root language types that shouldn't be visible
 	var/has_written_form = FALSE
 
+	/// The path of the language's forced accent, if any.
+	var/decl/accent/accent
+
+
 /datum/language/proc/can_be_spoken_properly_by(var/mob/speaker)
 	return TRUE
 

@@ -5,6 +5,7 @@
 	key = ""
 	flags = RESTRICTED|NONGLOBAL|INNATE|NO_TALK_MSG|NO_STUTTER
 	hidden_from_codex = 1
+	accent = /decl/accent/none
 
 /datum/language/noise/format_message(message, verb)
 	return "<span class='message'><span class='[colour]'>[message]</span></span>"
@@ -27,3 +28,4 @@
 	key = "s"
 	flags = SIGNLANG | NO_STUTTER | NONVERBAL
 	shorthand = "HS"
+	accent = /decl/accent/none

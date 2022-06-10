@@ -1,26 +1,50 @@
 /datum/preferences
 	var/list/alternate_languages
+	var/accent
 
 /datum/category_item/player_setup_item/background/languages
 	name = "Languages"
 	sort_order = 2
+	var/list/allowed_accents
 	var/list/allowed_languages
 	var/list/free_languages
 
 /datum/category_item/player_setup_item/background/languages/load_character(datum/pref_record_reader/R)
 	pref.alternate_languages = R.read("language")
+	pref.accent = R.read("accent")
 
 /datum/category_item/player_setup_item/background/languages/save_character(datum/pref_record_writer/W)
 	W.write("language", pref.alternate_languages)
+	W.write("accent", pref.accent)
 
 /datum/category_item/player_setup_item/background/languages/sanitize_character()
 	if(!islist(pref.alternate_languages))
 		pref.alternate_languages = list()
 	sanitize_alt_languages()
+	sanitize_accent()
+
+
+/datum/category_item/player_setup_item/background/languages/proc/sanitize_accent()
+	if (!allowed_accents)
+		build_allowed_accents()
+	if (!(pref.accent in allowed_accents))
+		pref.accent = allowed_accents[1]
+
+
+/datum/category_item/player_setup_item/background/languages/proc/build_allowed_accents()
+	allowed_accents = list( GLOB.accent_path_to_name[/decl/accent/unknown] )
+	for (var/token in pref.cultural_info)
+		var/decl/cultural_info/culture = SSculture.get_culture(pref.cultural_info[token])
+		for (var/decl/accent/path in culture.allowed_accents)
+			allowed_accents |= GLOB.accent_path_to_name[path]
+
 
 /datum/category_item/player_setup_item/background/languages/content()
 	. = list()
-	. += "<b>Languages</b><br>"
+	. += "<b>Accent</b><br />"
+	. += BTN("change_accent", pref.accent || "Not Set")
+	//TODO: use list/hidden & list/expanded to provide available accent buttons & desc
+	. += "<br /><b>Languages</b><br />"
 	var/list/show_langs = get_language_text()
 	if(LAZYLEN(show_langs))
 		for(var/lang in show_langs)

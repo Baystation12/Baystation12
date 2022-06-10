@@ -7,6 +7,7 @@
 	flags = RESTRICTED | HIVEMIND
 	shorthand = "N/A"
 	hidden_from_codex = TRUE
+	accent = /decl/accent/none
 
 /datum/language/ling/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 
@@ -26,6 +27,7 @@
 	flags = RESTRICTED | HIVEMIND
 	shorthand = "N/A"
 	hidden_from_codex = TRUE
+	accent = /decl/accent/none
 
 /datum/language/corticalborer/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 
@@ -60,6 +62,7 @@
 	machine_understands = 0
 	shorthand = "Vox"
 	has_written_form = TRUE
+	accent = /decl/accent/vox
 
 /datum/language/vox/can_speak_special(var/mob/speaker)
 	if(!ishuman(speaker))
@@ -95,6 +98,7 @@
 	shorthand = "CT"
 	hidden_from_codex = TRUE
 	has_written_form = TRUE
+	accent = /decl/accent/unknown
 
 /datum/language/cult
 	name = LANGUAGE_CULT_GLOBAL
@@ -107,6 +111,7 @@
 	flags = RESTRICTED | HIVEMIND
 	shorthand = "N/A"
 	hidden_from_codex = TRUE
+	accent = /decl/accent/unknown
 
 /datum/language/alium
 	name = LANGUAGE_ALIUM
@@ -121,6 +126,7 @@
 	shorthand = "AL"
 	hidden_from_codex = TRUE
 	has_written_form = TRUE
+	accent = /decl/accent/unknown
 
 /datum/language/alium/New()
 	speech_verb = pick("hisses","growls","whistles","blubbers","chirps","skreeches","rumbles","clicks")
