@@ -1,5 +1,0 @@
-author: Nl208
-delete-after: true
-changes:
-  - bugfix: The stamina bar appears above the movement-method indicator on the HUD
-      properly again.
