@@ -4327,17 +4327,17 @@
 /area/maintenance/seconddeck/forestarboard)
 "iS" = (
 /obj/structure/table/standard,
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/random/maintenance/solgov,
 /obj/structure/cable/cyan{
 	d2 = 2;
 	icon_state = "0-2"
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/synth/borg_upload)
@@ -4348,13 +4348,6 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/machinery/door/window/brigdoor/northleft{
-	dir = 2
-	},
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/item/aiModule/reset,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/synth/borg_upload)
 "iW" = (
@@ -4515,6 +4508,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/random/junk,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/synth/borg_upload)
 "jv" = (
@@ -4560,16 +4554,10 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engineering_bay)
 "jB" = (
-/obj/structure/table/standard,
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -22
 	},
-/obj/machinery/camera/network/engineering{
-	c_tag = "Cyborg Upload";
-	dir = 4
-	},
-/obj/machinery/recharger,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/synth/borg_upload)
 "jC" = (
@@ -4586,12 +4574,10 @@
 	dir = 8
 	},
 /obj/structure/window/reinforced,
-/obj/machinery/door/window/brigdoor/northleft,
 /obj/structure/table/rack{
 	dir = 8
 	},
-/obj/item/aiModule/purge,
-/obj/item/aiModule/quarantine,
+/obj/random/gloves,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/synth/borg_upload)
 "jE" = (
@@ -4600,11 +4586,6 @@
 	},
 /obj/structure/window/reinforced,
 /obj/machinery/door/window/brigdoor/northleft,
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/item/aiModule/robocop,
-/obj/item/aiModule/solgov_aggressive,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/synth/borg_upload)
 "jH" = (
@@ -8634,8 +8615,8 @@
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/engine_monitoring)
 "tD" = (
-/obj/machinery/computer/upload/robot,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/synth/borg_upload)
 "tE" = (
@@ -8671,6 +8652,12 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos)
+"tK" = (
+/obj/machinery/door/airlock/highsecurity{
+	name = "Cyborg Upload"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/synth/borg_upload)
 "tL" = (
 /obj/structure/closet/secure_closet/atmos_torch,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -10907,6 +10894,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/random/junk,
 /turf/simulated/floor/bluegrid,
 /area/synth/borg_upload)
 "Aw" = (
@@ -13374,6 +13362,24 @@
 "GM" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftstarboard)
+"GP" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/catwalk_plated,
+/obj/machinery/camera/network/second_deck{
+	c_tag = "Second Deck Hallway - Fore Corridor"
+	},
+/turf/simulated/floor/plating,
+/area/hallway/primary/seconddeck/fore)
 "GQ" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -13896,24 +13902,18 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftport)
 "Io" = (
-/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/door/blast/regular{
-	dir = 8;
-	id_tag = "borg";
-	name = "Cyborg Upload"
-	},
 /obj/structure/cable/cyan{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/wall/r_wall/prepainted,
 /area/synth/borg_upload)
 "Ip" = (
 /obj/machinery/alarm{
@@ -15683,7 +15683,7 @@
 "Om" = (
 /obj/item/stool,
 /obj/machinery/camera/network/second_deck{
-	c_tag = "Second Deck Hallway - Elevator Landing";
+	c_tag = "ss";
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -16408,7 +16408,7 @@
 "QA" = (
 /obj/machinery/vending/robotics{
 	dir = 4;
-	products = list(/obj/item/reagent_containers/food/drinks/bottle/oiljug = 5, /obj/item/stack/cable_coil = 6, /obj/item/device/flash/synthetic = 4, /obj/item/cell/standard = 4, /obj/item/device/scanner/health = 2, /obj/item/scalpel = 1, /obj/item/circular_saw = 1, /obj/item/tank/anesthetic = 2, /obj/item/clothing/mask/breath/medical = 5, /obj/item/screwdriver = 2, /obj/item/crowbar = 2)
+	products = list(/obj/item/reagent_containers/food/drinks/bottle/oiljug=5,/obj/item/stack/cable_coil=6,/obj/item/device/flash/synthetic=4,/obj/item/cell/standard=4,/obj/item/device/scanner/health=2,/obj/item/scalpel=1,/obj/item/circular_saw=1,/obj/item/tank/anesthetic=2,/obj/item/clothing/mask/breath/medical=5,/obj/item/screwdriver=2,/obj/item/crowbar=2)
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/requests_console{
@@ -16824,10 +16824,10 @@
 /obj/structure/table/rack{
 	dir = 8
 	},
-/obj/item/aiModule/solgov,
 /obj/structure/window/reinforced{
 	dir = 8
 	},
+/obj/random/maintenance/solgov,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/synth/borg_upload)
 "RO" = (
@@ -18261,13 +18261,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
-	},
-/obj/machinery/button/blast_door{
-	id_tag = "borg";
-	name = "Cyborg Upload Blast Doors";
-	pixel_x = -6;
-	pixel_y = -26;
-	req_access = list("ACCESS_AI_UPLOAD")
 	},
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -31746,7 +31739,7 @@ nk
 Lp
 Lp
 Lp
-Lp
+tK
 Lp
 dX
 aK
@@ -32347,7 +32340,7 @@ SD
 lq
 mZ
 kD
-qm
+GP
 XA
 Lp
 RL

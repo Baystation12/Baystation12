@@ -560,7 +560,7 @@
 	name = "lift (bridge)"
 	lift_floor_label = "Bridge"
 	lift_floor_name = "Bridge"
-	lift_announce_str = "Arriving at Command Deck: Bridge. Meeting Room. Command Offices. Auxiliary Hangar. Auxiliary EVA."
+	lift_announce_str = "Arriving at Command Deck: Bridge. Meeting Room. Command Offices.  AI Core. Auxiliary Hangar. Auxiliary EVA."
 
 /area/turbolift/torch_fourth
 	name = "lift (first deck)"
@@ -1095,6 +1095,19 @@
 	name = "\improper Fourth Deck Security Checkpoint"
 	icon_state = "checkpoint"
 
+// AI
+/area/turret_protected/ai_foyer
+	name = "\improper AI Chamber Foyer"
+	icon_state = "ai_foyer"
+	sound_env = SMALL_ENCLOSED
+	req_access = list(access_ai_upload)
+
+/area/turret_protected/ai_outer_chamber
+	name = "\improper Outer AI Chamber"
+	icon_state = "ai_chamber"
+	sound_env = SMALL_ENCLOSED
+	req_access = list(access_ai_upload)
+
 // Medbay
 
 /area/medical/equipstorage
@@ -1627,6 +1640,35 @@ area/assembly/robotics/office
 /area/tcommsat/computer
 	name = "\improper Telecoms Control Room"
 	icon_state = "tcomsatcomp"
+
+// AI
+
+///area/ai_monitored
+	//name = "AI Monitored Area" unused proxima
+
+//area/ai_monitored/storage/eva
+	//name = "\improper EVA Storage"
+//	icon_state = "eva"
+//	req_access = list(access_eva) unused proxima
+
+/area/turret_protected/ai
+	name = "\improper AI Chamber"
+	icon_state = "ai_chamber"
+	ambience = list('sound/ambience/ambimalf.ogg')
+	req_access = list(access_ai_upload)
+
+/area/turret_protected/ai_upload
+	name = "\improper AI Upload Chamber"
+	icon_state = "ai_upload"
+	ambience = list('sound/ambience/ambimalf.ogg')
+	req_access = list(access_ai_upload)
+
+/area/turret_protected/ai_upload_foyer
+	name = "\improper  AI Upload Access"
+	icon_state = "ai_foyer"
+	ambience = list('sound/ambience/ambimalf.ogg')
+	sound_env = SMALL_ENCLOSED
+	req_access = list(access_ai_upload)
 
 // Chapel
 

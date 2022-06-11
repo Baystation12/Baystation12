@@ -3,6 +3,14 @@
 
 var/list/ai_list = list()
 var/list/ai_verbs_default = list(
+	//[inf],
+	/mob/living/silicon/ai/proc/ai_view_images,
+	/mob/living/silicon/ai/proc/ai_take_image,
+	/mob/living/silicon/ai/proc/change_floor,
+	/mob/living/silicon/ai/proc/show_crew_monitor,
+	/mob/living/silicon/ai/proc/show_crew_records,
+	/mob/living/silicon/ai/proc/show_crew_manifest,
+	//[/inf],
 	/mob/living/silicon/ai/proc/ai_announcement,
 	/mob/living/silicon/ai/proc/ai_call_shuttle,
 	/mob/living/silicon/ai/proc/ai_emergency_message,
@@ -59,6 +67,15 @@ var/list/ai_verbs_default = list(
 	var/icon/holo_icon_longrange //Yellow hologram.
 	var/holo_icon_malf = FALSE // for new hologram system
 	var/obj/item/device/multitool/aiMulti = null
+
+	//[inf]
+	speech_sounds = list(
+		'sound/voice/emotes/robot_talk_heavy_1.ogg',
+		'sound/voice/emotes/robot_talk_heavy_2.ogg',
+		'sound/voice/emotes/robot_talk_heavy_3.ogg',
+		'sound/voice/emotes/robot_talk_heavy_4.ogg'
+	)
+	//[/inf]
 
 	silicon_camera = /obj/item/device/camera/siliconcam/ai_camera
 	silicon_radio = /obj/item/device/radio/headset/heads/ai_integrated
@@ -175,7 +192,7 @@ var/list/ai_verbs_default = list(
 	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[LIFE_HUD] 		  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[ID_HUD]          = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[ID_HUD]          = new /image/hud_overlay(GLOB.using_map.id_hud_icons, src, "hudblank") //INF, was 'icons/mob/hud.dmi'
 	hud_list[WANTED_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPLOYAL_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPCHEM_HUD]     = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
@@ -188,12 +205,12 @@ var/list/ai_verbs_default = list(
 	ai_radio.myAi = src
 
 /mob/living/silicon/ai/proc/on_mob_init()
-	to_chat(src, "<B>You are playing the [station_name()]'s AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>")
-	to_chat(src, "<B>To look at other areas, click on yourself to get a camera menu.</B>")
-	to_chat(src, "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>")
-	to_chat(src, "To use something, simply click on it.")
-	to_chat(src, "Use say [get_language_prefix()]b to speak to your cyborgs through binary. Use say :h to speak from an active holopad.")
-	to_chat(src, "For department channels, use the following say commands:")
+	to_chat(src, "<B>Вы играете за Искусстенный Интеллект объекта [station_name()]. ИИ не может перемещаться сам по себе, но можно взаимодействовать со множеством электронных объектов в момент, когда они находятся его зоне видимости (через камеры).</B>")
+	to_chat(src, "<B>Чтобы увидеть другие зоны, нажмите на себя для выведения списка доступных камер.</B>")
+	to_chat(src, "<B>В момент просмотра через камеры, вы можете использовать подключенные к системе энергоснабжения объекты. Например компьютеры, АПС, шлюзы, интеркомы, системы контроля атмосферы и т.п.</B>")
+	to_chat(src, "Чтобы начать взаимодействие, просто нажмите на объект.")
+	to_chat(src, "Для общения с подчиненными вам киборгами, андроидами и роботами пишите перед своими сообщениями в игровой чат ',b'. Для общения через активный голопад, используйте ':h'.")
+	to_chat(src, "Для использования каналов различных департаментов:")
 
 	var/radio_text = ""
 	for(var/i = 1 to silicon_radio.channels.len)
@@ -211,7 +228,7 @@ var/list/ai_verbs_default = list(
 
 	if (GLOB.malf && !(mind in GLOB.malf.current_antagonists))
 		show_laws()
-		to_chat(src, "<b>These laws may be changed by other players or by other random events.</b>")
+		to_chat(src, "<b>Данные законы могут быть изменены другими игроками, случайными событиями или в том случае, если вы являетесь сбойным ИИ.</b>")
 
 	job = "AI"
 	setup_icon()
@@ -287,7 +304,7 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/pick_icon()
 	set category = "Silicon Commands"
-	set name = "Set AI Core Display"
+	set name = "MOOD: AI Core Display"
 	if(stat || !has_power())
 		return
 
@@ -311,7 +328,7 @@ var/list/ai_verbs_default = list(
 /mob/living/silicon/ai/var/message_cooldown = 0
 /mob/living/silicon/ai/proc/ai_announcement()
 	set category = "Silicon Commands"
-	set name = "Make Announcement"
+	set name = "CREW: Make Announcement"
 
 	if(check_unable(AI_CHECK_WIRELESS | AI_CHECK_RADIO))
 		return
@@ -326,14 +343,14 @@ var/list/ai_verbs_default = list(
 	if(check_unable(AI_CHECK_WIRELESS | AI_CHECK_RADIO))
 		return
 
-	announcement.Announce(input)
+	announcement.Announce(input, new_sound = 'proxima/sound/AI/attention.ogg')
 	message_cooldown = 1
 	spawn(600)//One minute cooldown
 		message_cooldown = 0
 
 /mob/living/silicon/ai/proc/ai_call_shuttle()
 	set category = "Silicon Commands"
-	set name = "Call Evacuation"
+	set name = "EVACUATION: Call"
 
 	if(check_unable(AI_CHECK_WIRELESS))
 		return
@@ -350,7 +367,7 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/ai_recall_shuttle()
 	set category = "Silicon Commands"
-	set name = "Cancel Evacuation"
+	set name = "EVACUATION: Cancel"
 
 	if(check_unable(AI_CHECK_WIRELESS))
 		return
@@ -365,7 +382,7 @@ var/list/ai_verbs_default = list(
 /mob/living/silicon/ai/var/emergency_message_cooldown = 0
 /mob/living/silicon/ai/proc/ai_emergency_message()
 	set category = "Silicon Commands"
-	set name = "Send Emergency Message"
+	set name = "COMM: Send Emergency Message"
 
 	if(check_unable(AI_CHECK_WIRELESS))
 		return
@@ -463,9 +480,9 @@ var/list/ai_verbs_default = list(
 
 	return 1
 
-/mob/living/silicon/ai/cancel_camera()
+/mob/living/silicon/ai/verb/cancel_camera_ai()
+	set name = "CAMERA: Cancel View"
 	set category = "Silicon Commands"
-	set name = "Cancel Camera View"
 
 	//src.cameraFollow = null
 	src.view_core()
@@ -490,7 +507,7 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/ai_network_change(var/network in get_camera_network_list())
 	set category = "Silicon Commands"
-	set name = "Jump To Network"
+	set name = "CAMERA: Jump To Network"
 	unset_machine()
 
 	if(!network)
@@ -513,7 +530,7 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/ai_statuschange()
 	set category = "Silicon Commands"
-	set name = "AI Status"
+	set name = "MOOD: AI Status"
 
 	if(check_unable(AI_CHECK_WIRELESS))
 		return
@@ -523,7 +540,7 @@ var/list/ai_verbs_default = list(
 
 //I am the icon meister. Bow fefore me.	//>fefore
 /mob/living/silicon/ai/proc/ai_hologram_change()
-	set name = "Change Hologram"
+	set name = "HOLOGRAM: Change"
 	set desc = "Change the default hologram available to AI to something else."
 	set category = "Silicon Commands"
 
@@ -567,7 +584,7 @@ var/list/ai_verbs_default = list(
 
 //Toggles the luminosity and applies it by re-entereing the camera.
 /mob/living/silicon/ai/proc/toggle_camera_light()
-	set name = "Toggle Camera Light"
+	set name = "CAMERA: Toggle Light"
 	set desc = "Toggles the light on the camera the AI is looking through."
 	set category = "Silicon Commands"
 
@@ -637,7 +654,7 @@ var/list/ai_verbs_default = list(
 		return ..()
 
 /mob/living/silicon/ai/proc/control_integrated_radio()
-	set name = "Radio Settings"
+	set name = "COMM: Radio Settings"
 	set desc = "Allows you to change settings of your radio."
 	set category = "Silicon Commands"
 
@@ -649,13 +666,13 @@ var/list/ai_verbs_default = list(
 		src.silicon_radio.interact(src)
 
 /mob/living/silicon/ai/proc/sensor_mode()
-	set name = "Set Sensor Augmentation"
+	set name = "TOOL: Sensor Augmentation"
 	set category = "Silicon Commands"
 	set desc = "Augment visual feed with internal sensor overlays."
 	toggle_sensor_mode()
 
 /mob/living/silicon/ai/proc/toggle_hologram_movement()
-	set name = "Toggle Hologram Movement"
+	set name = "HOLOGRAM: Toggle Movement"
 	set category = "Silicon Commands"
 	set desc = "Toggles hologram movement based on moving with your virtual eye."
 
@@ -687,7 +704,7 @@ var/list/ai_verbs_default = list(
 	return istype(loc, /turf)
 
 /mob/living/silicon/ai/proc/multitool_mode()
-	set name = "Toggle Multitool Mode"
+	set name = "TOOL: Multitool Mode"
 	set category = "Silicon Commands"
 
 	multitool_mode = !multitool_mode
