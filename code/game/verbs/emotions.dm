@@ -20,15 +20,15 @@
 	set category = "Emote"
 	emote("giggle")
 
-/mob/living/verb/scream()
-	set name = "Кричать"
-	set category = "Emote"
-	emote("scream")
-
 /mob/living/verb/scratch()
 	set name = "Почесаться"
 	set category = "Emote"
 	emote("scratch")
+
+/mob/living/verb/scream()
+	set name = "Кричать"
+	set category = "Emote"
+	emote("scream")
 
 /mob/living/verb/blush()
 	set name = "Краснеть"
@@ -96,9 +96,14 @@
 	emote("gasp")
 
 /mob/living/verb/glare()
-	set name = "Смотреть с ненавистью"
+	set name = "Недовольно смотреть"
 	set category = "Emote"
 	emote("glare")
+
+/mob/living/verb/tfist()
+	set name = "Сжать руки в кулаки"
+	set category = "Emote"
+	emote("tfist")
 
 /mob/living/verb/groan()
 	set name = "Болезненный стон"
@@ -165,6 +170,11 @@
 	set category = "Emote"
 	emote("shrug")
 
+/mob/living/verb/hshrug()
+	set name = "Слегка пожать плечами"
+	set category = "Emote"
+	emote("hshrug")
+
 /mob/living/verb/stare()
 	set name = "Пялиться"
 	set category = "Emote"
@@ -215,10 +225,20 @@
 	set category = "Emote"
 	emote("salute")
 
+/mob/living/verb/rsalute()
+	set name = "Ответить на воинское приветствие"
+	set category = "Emote"
+	emote("rsalute")
+
 /mob/living/verb/eyebrow()
 	set name = "Приподнять бровь"
 	set category = "Emote"
 	emote("eyebrow")
+
+/mob/living/verb/alook()
+	set name = "Отвести взгляд"
+	set category = "Emote"
+	emote("alook")
 
 /mob/living/verb/snap()
 	set name = "Щёлкнуть пальцами"
