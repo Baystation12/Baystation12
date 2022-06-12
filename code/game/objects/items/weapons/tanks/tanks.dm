@@ -229,13 +229,6 @@ var/global/list/tank_gauge_cache = list()
 			else
 				to_chat(user, "<span class='notice'>The emergency pressure relief valve has already been welded.</span>")
 
-	if(istype(W, /obj/item/flamethrower))
-		var/obj/item/flamethrower/F = W
-		if(!F.status || F.tank || !user.unEquip(src, F))
-			return
-		master = F
-		F.tank = src
-
 /obj/item/tank/attack_self(mob/user as mob)
 	add_fingerprint(user)
 	if (!air_contents)

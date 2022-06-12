@@ -42,6 +42,9 @@
 	var/has_dense_atom
 	var/has_opaque_atom
 
+	/// Reference to the turf fire on the turf
+	var/obj/effect/turf_fire/turf_fire
+
 /turf/Initialize(mapload, ...)
 	. = ..()
 	if(dynamic_lighting)
@@ -441,3 +444,6 @@ var/global/const/enterloopsanity = 100
 	else
 		has_dense_atom = null
 		has_opaque_atom = null
+
+/turf/proc/IgniteTurf(power, fire_colour)
+	return
