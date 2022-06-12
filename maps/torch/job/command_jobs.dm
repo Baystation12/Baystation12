@@ -183,7 +183,7 @@
 	title = "Chief Engineer"
 	supervisors = "the Commanding Officer and the Executive Officer"
 	economic_power = 12
-	minimum_character_age = list(SPECIES_HUMAN = 27)
+	minimum_character_age = list(SPECIES_HUMAN = 25)
 	ideal_character_age = 40
 	minimal_player_age = 14
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer
