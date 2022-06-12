@@ -623,6 +623,7 @@
 #include "code\game\jobs\job\science.dm"
 #include "code\game\jobs\job\security.dm"
 #include "code\game\jobs\job\silicon.dm"
+#include "code\game\machinery\ai_slipper.dm"
 #include "code\game\machinery\air_sensor.dm"
 #include "code\game\machinery\alarm.dm"
 #include "code\game\machinery\atmo_control.dm"

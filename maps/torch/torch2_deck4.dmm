@@ -654,6 +654,10 @@
 	pixel_y = 32
 	},
 /obj/structure/table/marble,
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/dais,
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/dais,
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/STC,
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/metal,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/captainmess)
 "cr" = (
@@ -1403,7 +1407,6 @@
 /area/command/captainmess)
 "eC" = (
 /obj/structure/table/marble,
-/obj/item/reagent_containers/food/drinks/glass2/carafe,
 /obj/item/reagent_containers/food/drinks/pitcher,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/captainmess)
@@ -1696,6 +1699,7 @@
 "fB" = (
 /obj/structure/table/woodentable/walnut,
 /obj/random_multi/single_item/runtime,
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/SCG,
 /turf/simulated/floor/carpet/blue2,
 /area/command/captainmess)
 "fC" = (
@@ -13149,6 +13153,9 @@
 /area/hallway/primary/fourthdeck/aft)
 "RL" = (
 /obj/structure/table/marble,
+/obj/machinery/chemical_dispenser/bar_coffee/full{
+	pixel_y = 3
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/captainmess)
 "RM" = (
@@ -15160,6 +15167,7 @@
 "WU" = (
 /obj/structure/table/marble,
 /obj/item/storage/box/glasses/wine,
+/obj/item/reagent_containers/food/drinks/glass2/carafe,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/captainmess)
 "WW" = (

@@ -23382,12 +23382,6 @@
 /obj/effect/floor_decal/corner/research{
 	dir = 10
 	},
-/obj/machinery/button/blast_door{
-	dir = 1;
-	id_tag = "d1ladderwindow";
-	name = "Ladderwell Shutter Control";
-	pixel_y = -25
-	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "nWP" = (
@@ -26071,9 +26065,6 @@
 "riC" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/window/brigdoor/westright{
-	name = "Brig Chief Desk"
-	},
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "bo_windows"
 	},
