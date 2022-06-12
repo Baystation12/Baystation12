@@ -152,7 +152,7 @@
 GLOBAL_LIST_INIT(jukebox_tracks, list(
 	/decl/audio/track/absconditus,
 	/decl/audio/track/ambispace,
-	/decl/audio/track/asfarasitgets,
+	/decl/audio/track/as_far_as_it_gets,
 	/decl/audio/track/clouds_of_fire,
 	/decl/audio/track/comet_haley,
 	/decl/audio/track/df_theme,
@@ -170,7 +170,7 @@ GLOBAL_LIST_INIT(jukebox_tracks, list(
 	/decl/audio/track/level3_mod,
 	/decl/audio/track/lysendraa,
 	/decl/audio/track/marhaba,
-	/decl/audio/track/martiancowboy,
+	/decl/audio/track/martian_cowboy,
 	/decl/audio/track/misanthropic_corridors,
 	/decl/audio/track/monument,
 	/decl/audio/track/nebula,
@@ -185,5 +185,6 @@ GLOBAL_LIST_INIT(jukebox_tracks, list(
 	/decl/audio/track/treacherous_voyage,
 	/decl/audio/track/voidsent,
 	/decl/audio/track/wake,
-	/decl/audio/track/wildencounters
+	/decl/audio/track/wild_encounters,
+	/decl/audio/track/your_love_is_a_drug
 ))
