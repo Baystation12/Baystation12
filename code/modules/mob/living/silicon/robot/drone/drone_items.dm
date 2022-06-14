@@ -90,6 +90,7 @@
 		/obj/item/reagent_containers/glass,
 		/obj/item/reagent_containers/food/snacks/monkeycube,
 		/obj/item/stock_parts/computer,
+		/obj/item/storage/part_replacer,
 		/obj/item/device/transfer_valve,
 		/obj/item/device/assembly/signaler,
 		/obj/item/device/assembly/timer,
@@ -97,6 +98,7 @@
 		/obj/item/device/assembly/infra,
 		/obj/item/tank
 		)
+
 
 /obj/item/gripper/cultivator
 	name = "cultivator gripper"
