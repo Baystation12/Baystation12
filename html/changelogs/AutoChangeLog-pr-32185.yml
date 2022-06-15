@@ -1,0 +1,4 @@
+author: Nl208
+delete-after: true
+changes:
+  - bugfix: Bots such as Beepsky and cleanbots now take damage and die properly.
