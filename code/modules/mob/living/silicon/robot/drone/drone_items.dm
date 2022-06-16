@@ -66,6 +66,7 @@
 		/obj/item/reagent_containers/glass,
 		/obj/item/reagent_containers/pill,
 		/obj/item/reagent_containers/ivbag,
+		/obj/item/reagent_containers/chem_disp_cartridge,
 		/obj/item/stack/material/phoron,
 		/obj/item/storage/pill_bottle,
 		)
@@ -130,6 +131,19 @@
 		/obj/item/robot_parts,
 		/obj/item/reagent_containers/ivbag
 	)
+
+/obj/item/gripper/auto_cpr // Special gripper that looks like an auto-compressor, for that item only
+	name = "auto-compressor unit"
+	desc = "A manipulator unit for carrying and operating an auto-compressor, a device that gives regular compression to the victim's ribcage, used in case of urgent heart issues."
+	icon = 'icons/obj/auto_cpr.dmi'
+	icon_state = "pumper"
+	can_hold = list(/obj/item/auto_cpr)
+
+/obj/item/gripper/ivbag // Used to handle IV bags. Deliberately more limited than the organ gripper so the Emergency Response module can't do surgery.
+	name = "\improper IV bag gripper"
+	icon_state = "gripper"
+	desc = "A simple grasping tool for holding and manipulating IV bags."
+	can_hold = list(/obj/item/reagent_containers/ivbag)
 
 /obj/item/gripper/forensics// Used to handle forensics equipment.
 	name = "forensics gripper"
