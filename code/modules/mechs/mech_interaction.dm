@@ -214,6 +214,10 @@
 /mob/living/exosuit/proc/check_enter(mob/user, silent = FALSE, check_incap = TRUE)
 	if(!user || (check_incap && user.incapacitated()))
 		return FALSE
+	if (user.buckled)
+		if (!silent)
+			to_chat(user, SPAN_WARNING("You are currently buckled to \the [user.buckled]."))
+		return FALSE
 	if(!(user.mob_size >= body.min_pilot_size && user.mob_size <= body.max_pilot_size))
 		if(!silent)
 			to_chat(user, SPAN_WARNING("You cannot pilot an exosuit of this size."))
