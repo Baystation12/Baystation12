@@ -429,6 +429,14 @@
 	id = "mech_machete"
 	req_tech = list(TECH_COMBAT = 2)
 	build_path = /obj/item/mech_equipment/mounted_system/melee/mechete
+
+/datum/design/item/exosuit/weapon/flamethrower
+	name = "mounted flamethrower"
+	id = "mech_flamer"
+	materials = list(MATERIAL_STEEL = 20000, MATERIAL_PLASTIC = 10000)
+	req_tech = list(TECH_COMBAT = 1, TECH_MATERIAL = 2)
+	build_path = /obj/item/mech_equipment/mounted_system/flamethrower
+
 /datum/design/item/exosuit/rcd
 	name = "RCD"
 	id = "mech_rcd"

@@ -464,6 +464,7 @@
 #define DO_PUBLIC_PROGRESS   FLAG(9)
 #define DO_MOVE_CHECKS_TURFS FLAG(10)
 #define DO_FAIL_FEEDBACK     FLAG(11)
+#define DO_BAR_OVER_USER     FLAG(12) // Forces the progress bar to appear over the user instead of the target
 
 #define DO_BOTH_CAN_MOVE     (DO_USER_CAN_MOVE | DO_TARGET_CAN_MOVE)
 #define DO_BOTH_CAN_TURN     (DO_USER_CAN_TURN | DO_TARGET_CAN_TURN)

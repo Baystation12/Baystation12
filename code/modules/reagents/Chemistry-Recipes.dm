@@ -1021,6 +1021,17 @@
 	var/type = pick(possible_mobs)
 	new type(get_turf(holder.my_atom))
 
+/datum/chemical_reaction/slime/grevive
+	name = "Slime Revive"
+	result = null
+	required_reagents = list(/datum/reagent/blood = 1)
+	result_amount = 1
+	required = /obj/item/slime_extract/gold
+
+/datum/chemical_reaction/slime/grevive/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
+	..()
+	new /obj/item/slimepotion3(get_turf(holder.my_atom))
+
 //Silver
 /datum/chemical_reaction/slime/bork
 	name = "Slime Bork"

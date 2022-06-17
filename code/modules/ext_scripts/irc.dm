@@ -37,7 +37,10 @@
 		else
 			params["type"] = "adminpm"
 			params["trg_key"] = target.key
-			params["trg_char"] = target.mob.real_name || target.mob.name
+			if (target.mob)
+				params["trg_char"] = target.mob.real_name || target.mob.name
+			else
+				params["trg_char"] = "\[NO CHARACTER\]"
 
 		export2irc(params)
 

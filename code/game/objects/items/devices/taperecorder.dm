@@ -181,6 +181,9 @@
 		while(mytape && recording && mytape.used_capacity < mytape.max_capacity)
 			sleep(10)
 			if (!mytape)
+				if(ismob(loc))
+					var/mob/M = loc
+					to_chat(M, SPAN_NOTICE("\The [src]'s tape has been removed."))
 				stop_recording()
 				break
 			mytape.used_capacity++
@@ -202,7 +205,8 @@
 	//Sanity checks skipped, should not be called unless actually recording
 	recording = 0
 	update_icon()
-	mytape.record_speech("Recording stopped.")
+	if (mytape)
+		mytape.record_speech("Recording stopped.")
 	if(ismob(loc))
 		var/mob/M = loc
 		to_chat(M, "<span class='notice'>Recording stopped.</span>")

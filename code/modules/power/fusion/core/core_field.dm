@@ -75,6 +75,7 @@
 	owned_core = new_owned_core
 	if(!owned_core)
 		qdel(src)
+		return
 
 	particles.spawning = 0 //Turn off particles until something calls for it
 

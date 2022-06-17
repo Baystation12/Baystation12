@@ -6,6 +6,7 @@
 
 /decl/psionic_power/coercion
 	faculty = PSI_COERCION
+	abstract_type = /decl/psionic_power/coercion
 
 /decl/psionic_power/coercion/invoke(var/mob/living/user, var/mob/living/target)
 	if (!istype(target))

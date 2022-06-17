@@ -78,8 +78,8 @@
 		Paralyse(3)
 		src.sleeping--
 
-	if(src.resting)
-		Weaken(5)
+	if (resting) // Just in case. This breaks things so never allow robots to rest.
+		resting = FALSE
 
 	if(health < config.health_threshold_dead && src.stat != 2) //die only once
 		death()
