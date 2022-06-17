@@ -7,7 +7,7 @@
 
 /decl/accent/gaia
 	name = "Gaian"
-	state = "gaian"
+	state = "gaia"
 	code = "GAI"
 	desc = "An accent common among Gaians."
 

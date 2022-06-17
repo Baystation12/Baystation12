@@ -1,8 +1,8 @@
-/decl/accent/sol_core
-	name = "Core Systems"
-	state = "sol_core"
-	code = "SOL"
-	desc = "An accent common in the inner Sol colonies."
+/decl/accent/brahe
+	name = "Brahean"
+	state = "brahe"
+	code = "BRA"
+	desc = "An accent common among Braheans."
 
 
 /decl/accent/ceti_epsilon
@@ -19,6 +19,13 @@
 	desc = "An accent common among Eosians."
 
 
+/decl/accent/fosters_world
+	name = "Fosterite"
+	state = "fosters_world"
+	code = "FOS"
+	desc = "An accent common among Fosterites."
+
+
 /decl/accent/iolaus
 	name = "Iolaun"
 	state = "iolaus"
@@ -26,11 +33,11 @@
 	desc = "An accent common among Iolauns."
 
 
-/decl/accent/brahe
-	name = "Brahean"
-	state = "brahe"
-	code = "BRA"
-	desc = "An accent common among Braheans."
+/decl/accent/nueva_castilla
+	name = "Castillan"
+	state = "nueva_castilla"
+	code = "NVC"
+	desc = "An accent common among Castillans."
 
 
 /decl/accent/pirx
@@ -47,22 +54,15 @@
 	desc = "An accent common among Saffarites."
 
 
+/decl/accent/sol_core
+	name = "Core Systems"
+	state = "sol"
+	code = "SOL"
+	desc = "An accent common in the inner Sol colonies."
+
+
 /decl/accent/tadmor
 	name = "Tadmorean"
 	state = "tadmor"
 	code = "TAD"
 	desc = "An accent common among Tadmoreans."
-
-
-/decl/accent/fosters_world
-	name = "Fosterite"
-	state = "fosters"
-	code = "FOS"
-	desc = "An accent common among Fosterites."
-
-
-/decl/accent/nueva_castilla
-	name = "Castillan"
-	state = "nvc"
-	code = "NVC"
-	desc = "An accent common among Castillans."

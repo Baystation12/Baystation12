@@ -32,17 +32,20 @@
 
 
 /datum/category_item/player_setup_item/background/languages/proc/build_allowed_accents()
-	allowed_accents = list( GLOB.accent_path_to_name[/decl/accent/unknown] )
+	allowed_accents = list()
 	for (var/token in pref.cultural_info)
 		var/decl/cultural_info/culture = SSculture.get_culture(pref.cultural_info[token])
-		for (var/decl/accent/path in culture.allowed_accents)
+		for (var/path in culture.allowed_accents)
 			allowed_accents |= GLOB.accent_path_to_name[path]
+	allowed_accents |=  GLOB.accent_path_to_name[/decl/accent/unknown]
 
 
 /datum/category_item/player_setup_item/background/languages/content()
 	. = list()
 	. += "<b>Accent</b><br />"
-	. += BTN("change_accent", pref.accent || "Not Set")
+	. += BTN("change_accent", pref.accent)
+	var/decl/accent/accent = decls_repository.get_decl(GLOB.accent_name_to_path[pref.accent])
+	. += " - [accent.desc]"
 	//TODO: use list/hidden & list/expanded to provide available accent buttons & desc
 	. += "<br /><b>Languages</b><br />"
 	var/list/show_langs = get_language_text()
@@ -55,7 +58,14 @@
 
 /datum/category_item/player_setup_item/background/languages/OnTopic(var/href,var/list/href_list, var/mob/user)
 
-	if(href_list["remove_language"])
+	if (href_list["change_accent"])
+		var/response = input(user, "Choose an Accent", null, pref.accent) as null | anything in allowed_accents
+		if (isnull(response) || !(response in allowed_accents))
+			return
+		pref.accent = response
+		return TOPIC_REFRESH
+
+	else if(href_list["remove_language"])
 		var/index = text2num(href_list["remove_language"])
 		pref.alternate_languages.Cut(index, index+1)
 		return TOPIC_REFRESH

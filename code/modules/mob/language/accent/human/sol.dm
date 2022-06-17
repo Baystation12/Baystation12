@@ -1,15 +1,8 @@
-/decl/accent/venus_zoner
-	name = "Venusian Zoner"
-	state = "venus_zoner"
-	code = "VSZ"
-	desc = "An accent associated with the Venusian elite."
-
-
-/decl/accent/venus_surfacer
-	name = "Venusian Surfacer"
-	state = "venus_surfacer"
-	code = "VSL"
-	desc = "An accent common among Venusians."
+/decl/accent/ceres
+	name = "Ceresian"
+	state = "ceres"
+	code = "CER"
+	desc = "An accent common among Ceresians."
 
 
 /decl/accent/earth
@@ -19,18 +12,18 @@
 	desc = "An accent common among Earthlings."
 
 
-/decl/accent/luna_upper
-	name = "Upper Class Lunar"
-	state = "luna_upper"
-	code = "LUU"
-	desc = "An accent associated with the Selenian elite."
-
-
 /decl/accent/luna_lower
 	name = "Lower Class Lunar"
 	state = "luna_lower"
 	code = "LUL"
 	desc = "An accent common among Selenians."
+
+
+/decl/accent/luna_upper
+	name = "Upper Class Lunar"
+	state = "luna_upper"
+	code = "LUU"
+	desc = "An accent associated with the Selenian elite."
 
 
 /decl/accent/mars_surface
@@ -47,15 +40,22 @@
 	desc = "An accent common among Martian tunnel-dwellers."
 
 
-/decl/accent/ceres
-	name = "Ceresian"
-	state = "ceres"
-	code = "CER"
-	desc = "An accent common among Ceresians."
-
-
 /decl/accent/pluto
 	name = "Plutonian"
 	state = "pluto"
 	code = "PLU"
 	desc = "An accent common among Plutonians."
+
+
+/decl/accent/venus_surfacer
+	name = "Venusian Surfacer"
+	state = "venus_factory"
+	code = "VSL"
+	desc = "An accent common among Venusians."
+
+
+/decl/accent/venus_zoner
+	name = "Venusian Zoner"
+	state = "venus_orbit"
+	code = "VSZ"
+	desc = "An accent associated with the Venusian elite."

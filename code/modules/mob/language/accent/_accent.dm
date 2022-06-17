@@ -27,7 +27,8 @@
 		return ""
 	if (pref == GLOB.PREF_PLAIN)
 		return code
-	return icon2html(icon, recipient, realsize = TRUE, class = "text_tag")
+	return "\icon[icon]"
+	//icon2html(icon, recipient, realsize = TRUE, class = "text_tag")
 
 
 /decl/accent/none
@@ -50,6 +51,7 @@ GLOBAL_LIST_EMPTY(accent_path_to_name)
 		var/name = initial(path.name)
 		GLOB.accent_name_to_path[name] = path
 		GLOB.accent_path_to_name[path] = name
+	return TRUE
 
 
 /datum/client_preference/accent_tags

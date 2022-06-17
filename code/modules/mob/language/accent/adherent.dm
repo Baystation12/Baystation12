@@ -1,5 +1,5 @@
 /decl/accent/adherent
 	name = "Protocol"
 	state = "adherent"
-	code = "PRO"
+	code = "PTC"
 	desc = "An Adherent accent."
