@@ -189,6 +189,11 @@
 	pixel_y = 32
 	},
 /obj/item/soap,
+/obj/item/storage/box/detergent{
+	desc = "A bag full of juicy, yummy detergent pods. Warranty void if swallowed."
+	},
+/obj/item/mop,
+/obj/item/reagent_containers/glass/bucket,
 /turf/unsimulated/floor{
 	icon_state = "freezerfloor"
 	},
@@ -730,7 +735,7 @@
 /obj/item/tray{
 	pixel_y = 5
 	},
-/obj/item/storage/backpack,
+/obj/random/backpack,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -908,7 +913,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "cf" = (
-/obj/item/storage/backpack,
+/obj/random/backpack,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -1363,6 +1368,7 @@
 /obj/structure/table/rack,
 /obj/item/storage/belt/utility/full,
 /obj/item/storage/belt/utility/full,
+/obj/item/tape_roll,
 /obj/item/device/multitool,
 /obj/item/device/multitool,
 /obj/item/clothing/shoes/magboots,
