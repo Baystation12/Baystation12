@@ -91,23 +91,31 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 	if (!renderers)
 		renderers = list()
 	for (var/atom/movable/renderer/renderer as anything in subtypesof(/atom/movable/renderer))
+		if(istype(renderer, /atom/movable/renderer/shared))
+			continue
 		renderer = new renderer (null, src)
 		renderers[renderer] = renderer.plane // (renderer = plane) format for visual debugging
 		if (renderer.relay)
 			my_client.screen += renderer.relay
 		my_client.screen += renderer
 
+	for (var/atom/movable/renderer/zrenderer as anything in GLOB.zmimic_renderers)
+		if (zrenderer.relay)
+			my_client.screen += zrenderer.relay
+		my_client.screen += zrenderer
 
 /// Removes the mob's renderers on /Logout()
 /mob/proc/RemoveRenderers()
-	for(var/atom/movable/renderer/renderer as anything in renderers)
-		my_client.screen -= renderer
-		if (renderer.relay)
-			my_client.screen -= renderer.relay
-		qdel(renderer)
+	if(my_client)
+		for(var/atom/movable/renderer/renderer as anything in renderers)
+			my_client.screen -= renderer
+			if (renderer.relay)
+				my_client.screen -= renderer.relay
+			qdel(renderer)
+		for (var/atom/movable/renderer/renderer as anything in GLOB.zmimic_renderers)
+			my_client.screen -= renderer
 	if (renderers)
 		renderers.Cut()
-
 
 /* *
 * Plane Renderers
@@ -129,13 +137,41 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 	color = list(null, null, null, "#0000", "#000f")
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
+/atom/movable/renderer/space
+	name = "Space"
+	group = RENDER_GROUP_SCENE
+	plane = SPACE_PLANE
+
+/atom/movable/renderer/skybox
+	name = "Skybox"
+	group = RENDER_GROUP_SCENE
+	plane = SKYBOX_PLANE
+	relay_blend_mode = BLEND_MULTIPLY
+
+//Z Mimic planemasters -> Could apply scaling for parallax though that requires copying appearances from adjacent turfs
+GLOBAL_LIST_EMPTY(zmimic_renderers)
+
+/hook/startup/proc/create_global_renderers() //Some (most) renderers probably do not need to be instantiated per mob. So may as well make them global and just add to screen
+	//Zmimic planemasters
+	for(var/i = 0 to OPENTURF_MAX_DEPTH)
+		GLOB.zmimic_renderers += new /atom/movable/renderer/shared/zmimic(null, null, OPENTURF_MAX_PLANE - i)
+
+	return TRUE
+
+/atom/movable/renderer/shared/zmimic
+	name = "Zrenderer"
+	group = RENDER_GROUP_SCENE
+
+/atom/movable/renderer/shared/zmimic/Initialize(mapload, _owner, _plane)
+	plane = _plane
+	name = "Zrenderer [plane]"
+	. = ..()
 
 // Draws the game world; live mobs, items, turfs, etc.
 /atom/movable/renderer/game
 	name = "Game"
 	group = RENDER_GROUP_SCENE
 	plane = DEFAULT_PLANE
-
 
 /// Draws observers; ghosts, camera eyes, etc.
 /atom/movable/renderer/observers
@@ -159,7 +195,6 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 		 1,  1,  1,  1  // Mapping
 	)
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
-
 
 /// Draws visuals that should not be affected by darkness.
 /atom/movable/renderer/above_lighting
