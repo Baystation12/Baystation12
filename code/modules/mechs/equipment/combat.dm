@@ -48,6 +48,8 @@
 	accuracy = 2
 
 /obj/item/gun/energy/get_hardpoint_maptext()
+	if (charge_cost <= 0)
+		return "INF"
 	return "[round(power_supply.charge / charge_cost)]/[max_shots]"
 
 /obj/item/gun/energy/get_hardpoint_status_value()
