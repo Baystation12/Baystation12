@@ -12,7 +12,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+
 	machine_name = "exosuit dock"
 	machine_desc = "An industrial recharger built into the floor. Exosuits standing on top of the dock will have their power cell recharged."
 
@@ -58,8 +58,8 @@
 		return
 
 	if(stat & (BROKEN|NOPOWER))
-		stop_charging()
 		charging.show_message(SPAN_WARNING("Internal system Error - Charging aborted."))
+		stop_charging()
 		return
 
 	// Cell could have been removed.
