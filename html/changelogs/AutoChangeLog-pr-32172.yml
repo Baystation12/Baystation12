@@ -1,4 +1,0 @@
-author: Ninetailed
-delete-after: true
-changes:
-  - bugfix: Robots can now remove shuttle H2 tanks from ports
