@@ -93,7 +93,7 @@
 	skill_points = 20
 	possible_goals = list(/datum/goal/achievement/notslimefodder)
 
-datum/job/scientist/get_description_blurb()
+/datum/job/scientist/get_description_blurb()
 		return "Un cientifico produce nuevas formas de tecnologia o informacion que pueda ser util para EXO. En la practica, muchos cientificos hacen este tipo de trabajo por sus propios motivos, la mayoria de las veces, solo para ver lo que realmente pueden lograr. Siempre que los laboratorios permanezcan intactos y el trabajo este lo suficientemente bien documentado como para permitir su reproduccion posterior y el Jefe de ciencias oficial permita el projecto, ya que dicha experimentacion suele producir algo, bueno o malo, pero algo."
 
 /datum/job/scientist_assistant
