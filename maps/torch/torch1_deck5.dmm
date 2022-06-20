@@ -4471,7 +4471,6 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
@@ -4480,6 +4479,9 @@
 	pixel_x = -27
 	},
 /obj/structure/cable/cyan,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/fuel)
 "kn" = (
@@ -4724,6 +4726,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/fuel)
@@ -7362,12 +7367,10 @@
 	c_tag = "Charon - Fuel Compartment";
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
-	},
 /obj/structure/handrail{
 	dir = 4
 	},
+/obj/machinery/meter,
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/fuel)
 "ql" = (
@@ -7983,7 +7986,7 @@
 	dir = 10
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
+	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/fuel)
