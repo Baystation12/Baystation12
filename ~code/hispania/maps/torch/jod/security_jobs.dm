@@ -43,7 +43,7 @@
 		return "El Agente supervisor de seguridad, en un universo ideal, nunca tiene que abandonar el departamento de seguridad. Como su nombre lo indica, son responsables de cuidar las diversas celdas y areas de detencion disponibles para el departamento de Seguridad, asi como de asegurarse de que todo el personal acusado sea tratado adecuadamente y castigado apropiadamente. Esto incluye actualizar sus registros para reflejar los cargos en su contra y los castigos administrados, ademas de arrastrarlos a las celdas y cerrar la puerta. gestiona las asignaciones y ordenes de patrulla de seguridad, coordinando a los Agentes de seguridad para garantizar que el barco este completamente seguro."
 
 /datum/job/detective
-	title = "TForensic Technician"
+	title = "Forensic Technician"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "El Jefe de seguridad"
