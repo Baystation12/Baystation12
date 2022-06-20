@@ -34,6 +34,8 @@
 	#define DUST_LAYER                   2
 
 // Openspace uses planes -80 through -70.
+#define OPENTURF_MAX_PLANE -70
+#define OPENTURF_MAX_DEPTH 10		// The maxiumum number of planes deep we'll go before we just dump everything on the same plane.
 
 #define OVER_OPENSPACE_PLANE        -4
 
