@@ -1,5 +1,5 @@
 /datum/job/senior_scientist
-	title = "Cientifico supervisor"
+	title = "Senior Researcher"
 	department = "Ciencias"
 	department_flag = SCI
 
@@ -47,7 +47,7 @@
 		return "El miembro mas antiguo del equipo de investigacion, el investigador principal, esta a cargo de asegurarse de que el resto del departamento sepan lo que se supone que deben hacer y lo hagan de manera rapida y profesional. Es su trabajo converti las ordenes del Jefe de ciencias oficial en acciones y supervisar las operaciones diarias del departamento para asegurarse de que todo se haga correctamente. Eres el ejecutivo y administrador del Jefe de ciencias oficial, el que convierte la lista de prioridades e instrucciones en trabajo real para el resto del departamento, y deben coordinarse estrechamente con ambos."
 
 /datum/job/scientist
-	title = "Cientifico"
+	title = "Scientist"
 	total_positions = 6
 	spawn_positions = 6
 	supervisors = "El Jefe de ciencias oficial"
@@ -97,7 +97,7 @@ datum/job/scientist/get_description_blurb()
 		return "Un cientifico produce nuevas formas de tecnologia o informacion que pueda ser util para EXO. En la practica, muchos cientificos hacen este tipo de trabajo por sus propios motivos, la mayoria de las veces, solo para ver lo que realmente pueden lograr. Siempre que los laboratorios permanezcan intactos y el trabajo este lo suficientemente bien documentado como para permitir su reproduccion posterior y el Jefe de ciencias oficial permita el projecto, ya que dicha experimentacion suele producir algo, bueno o malo, pero algo."
 
 /datum/job/scientist_assistant
-	title = "Asistente de ciencias"
+	title = "Research Assistant"
 	department = "ciencias"
 	department_flag = SCI
 	total_positions = 4

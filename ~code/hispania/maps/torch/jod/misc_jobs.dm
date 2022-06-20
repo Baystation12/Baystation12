@@ -27,7 +27,7 @@ Civilian
 *******/
 
 /datum/job/assistant
-	title = "Pasajero"
+	title = "Passenger"
 	total_positions = 12
 	spawn_positions = 12
 	supervisors = "El Ejecutivo oficial"
@@ -58,7 +58,7 @@ Civilian
 		return "Eres un Civil. Un pasajero de la nave ya sea pagando por ello o enviado por alguna corporacion para realizar alguna funcion en la nave."
 
 /datum/job/merchant
-	title = "Comerciante"
+	title = "Merchant"
 	department = "Civil"
 	department_flag = CIV
 	total_positions = 2

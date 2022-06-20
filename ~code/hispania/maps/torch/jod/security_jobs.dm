@@ -1,5 +1,5 @@
 /datum/job/warden
-	title = "Agente supervisor de seguridad"
+	title = "Brig Chief"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "El Jefe de seguridad"
@@ -43,7 +43,7 @@
 		return "El Agente supervisor de seguridad, en un universo ideal, nunca tiene que abandonar el departamento de seguridad. Como su nombre lo indica, son responsables de cuidar las diversas celdas y areas de detencion disponibles para el departamento de Seguridad, asi como de asegurarse de que todo el personal acusado sea tratado adecuadamente y castigado apropiadamente. Esto incluye actualizar sus registros para reflejar los cargos en su contra y los castigos administrados, ademas de arrastrarlos a las celdas y cerrar la puerta. gestiona las asignaciones y ordenes de patrulla de seguridad, coordinando a los Agentes de seguridad para garantizar que el barco este completamente seguro."
 
 /datum/job/detective
-	title = "Tecnico Forense"
+	title = "TForensic Technician"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "El Jefe de seguridad"
@@ -98,7 +98,7 @@
 		return "El tecnico forense tiene acceso a una amplia variedad de equipos, desde iluminacion ultravioleta hasta camaras, limpiadores de huellas dactilares, microscopios electronicos y espectrometros de masas portatiles. Cada uno de estos dispositivos tiene una funcion unica para ayudar a rastrear e identificar a los perpetradores de cualquier delito cometido en la estacion. El trabajo del tecnico forense es asegurar las escenas del crimen, entrevistar a los testigos y examinar minuciosamente las pruebas resultantes. A traves de un analisis cuidadoso, convertiran esta evidencia en una descripcion clara de lo que sucedio, quien lo hizo y como."
 
 /datum/job/officer
-	title = "Agente de seguridad"
+	title = "Master at Arms"
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "El Jefe de seguridad"

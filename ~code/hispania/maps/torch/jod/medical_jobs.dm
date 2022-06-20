@@ -1,5 +1,5 @@
 /datum/job/senior_doctor
-	title = "Medico"
+	title = "Physician"
 	department = "Medico"
 	department_flag = MED
 	minimal_player_age = 2
@@ -48,7 +48,7 @@
 	return "Eres un medico. A diferencia del tecnico medico, que por lo general se ocupa de recuperar a los pacientes del campo y actuar como ayudante del resto del personal medico, se espera que el medico realice medicina intensiva con regularidad, desde chequeos a la tripulacion hasta cirugia intensiva. Son el principal caballo de batalla del departamento y deben estar listos para manejar todo tipo de emergencias medicas en caso de que surjan."
 
 /datum/job/junior_doctor
-	title = "Medico residente"
+	title = "Medical Resident"
 	department = "Medico"
 	department_flag = MED
 	minimal_player_age = 2
@@ -94,7 +94,7 @@
 	return "Eres un Medico residente. Esta aprendiendo del personal medico a como Tratar, medicar y operar a los tripulates abordo de la nave. Estas subordinado a todos los otros medicos a bordo."
 
 /datum/job/doctor
-	title = "Tecnico medico"
+	title = "Medical Technician"
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "El Jefe medico oficial y el personal medico"
@@ -142,7 +142,7 @@
 	return "Eres un medico. A diferencia del tecnico medico, que por lo general se ocupa de recuperar a los pacientes del campo y actuar como ayudante del resto del personal medico, se espera que el medico realice medicina intensiva con regularidad, desde chequeos a la tripulacion hasta cirugia intensiva. Son el principal caballo de batalla del departamento y deben estar listos para manejar todo tipo de emergencias medicas en caso de que surjan."
 
 /datum/job/medical_trainee
-	title = "Aprendiz de tecnico medico"
+	title = "Trainee Medical Technician"
 	department = "Medical"
 	department_flag = MED
 	total_positions = 1
@@ -190,7 +190,7 @@
 	return "Usted es Aprendiz de enfermero. Esta aprendiendo del personal medico mas experimentado a tratar y recuperar a la tripulacion herida a bordo de la nave. Estas subordinado al resto del equipo medico."
 
 /datum/job/chemist
-	title = "Farmaceutico"
+	title = "Pharmacist"
 	department = "Medico"
 	department_flag = MED
 	total_positions = 1
@@ -225,7 +225,7 @@
 	return "Eres el farmaceutico. Usted hace medicina y otras sustancias utiles. No es medico ni cirujano; No debe tratar a los pacientes, sino proporcionar el medicamento. Estas subordinado a los médicos y tecnicos medicos."
 
 /datum/job/psychiatrist
-	title = "Consejero"
+	title = "Counselor"
 	total_positions = 1
 	spawn_positions = 1
 	ideal_character_age = 40

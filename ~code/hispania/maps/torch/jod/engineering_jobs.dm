@@ -1,5 +1,5 @@
 /datum/job/senior_engineer
-	title = "Ingeniero supervisor"
+	title = "Senior Engineer"
 	department = "Ingenieria"
 	department_flag = ENG
 	total_positions = 1
@@ -52,7 +52,7 @@
 	return "Eres el Ingeniero supervisor. Eres un veterano SNCO. Usted este subordinado con el Jefe de ingenieria, aunque puede tener mucha mas de experiencia que el y sus subordinados, son el resto del departamento de ingenieria. Debe ser un experto en practicamente todas las areas de ingenieria y poseer habilidades de liderazgo. Coordine el equipo y garantice el funcionamiento sin problemas del departamento junto con el Jefe de ingenieria."
 
 /datum/job/engineer
-	title = "Ingeniero"
+	title = "Engineer"
 	total_positions = 6
 	spawn_positions = 6
 	supervisors = "El Jefe de ingenieria"
@@ -111,7 +111,7 @@
 	return "Eres un ingeniero. Usted opera bajo uno de los muchos titulos y puede ser altamente especializado en un area especifica de ingenieria. Probablemente tenga al menos una familiaridad general con la mayoria de las otras areas, aunque esto no se espera. Usted esta subordinado al Ingeniero supervisor y al Jefe de ingenieria y se espera que los obedezca."
 
 /datum/job/engineer_trainee
-	title = "Aprendiz de ingeniero"
+	title = "Engineer Trainee"
 	department = "Ingenieria"
 	department_flag = ENG
 	total_positions = 2
@@ -165,7 +165,7 @@
 	return "Eres un aprendiz de ingeniero. Esta aprendiendo del personal de ingenieria a como operar los diversos sistemas de ingenieria en la nave. Estas subordinado a todos los otros ingenieros a bordo."
 
 /datum/job/roboticist
-	title = "Robotista"
+	title = "Roboticist"
 	department = "Ingenieria"
 	department_flag = ENG|ROB
 

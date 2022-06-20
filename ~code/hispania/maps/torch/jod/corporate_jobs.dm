@@ -1,5 +1,5 @@
 /datum/job/liaison
-	title = "Representante de EXO"
+	title = "Workplace Liaison"
 	department = "Apoyo"
 	department_flag = SPT
 	total_positions = 1

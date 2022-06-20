@@ -1,5 +1,5 @@
 /datum/job/pathfinder
-	title = "Explorador supervisor"
+	title = "Pathfinder"
 	department = "Exploracion"
 	department_flag = EXP
 	total_positions = 1
@@ -41,7 +41,7 @@
 	return "Eres el Explorador supervisor. Su deber es organizar y llevar las expediciones a sitios fuera de la nave, llevando a cabo la mision principal de la CE. Ordene a los exploradores. Asegurese de que la expedicion tenga los suministros y el personal que necesita. Puede pilotar a Charon si nadie mas puede. Una vez en la mision, su deber es asegurarse de que cualquier cosa de interes cientifico sea devuelto a la nave y pase al laboratorio de investigacion."
 
 /datum/job/nt_pilot
-	title = "Piloto de exploracion"
+	title = "Shuttle Pilot"
 	supervisors = "Explorador supervisor"
 	department = "Exploracion"
 	department_flag = EXP
@@ -78,7 +78,7 @@
 	                    SKILL_SCIENCE     = SKILL_MAX)
 
 /datum/job/explorer
-	title = "Explorador"
+	title = "Explorer"
 	department = "Exploracion"
 	department_flag = EXP
 	total_positions = 5

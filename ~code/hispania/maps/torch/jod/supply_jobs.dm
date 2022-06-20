@@ -1,5 +1,5 @@
 /datum/job/qm
-	title = "Supervisor de abastecimiento"
+	title = "Deck Chief"
 	department = "Abastecimiento"
 	department_flag = SUP
 	total_positions = 1
@@ -45,7 +45,7 @@
 		return "Se ocupan principalmente de aprobar los pedidos entregados al departamento de abastecimiento y garantizar que los Tecnicos de abastecimiento hagan su trabajo para asegurarse de que dichos pedidos se reciban, cataloguen y envien a sus destinos correspondientes, ademas de asegurarse de que los transbordadores esten en condiciones de volar."
 
 /datum/job/cargo_tech
-	title = "Tecnico de abastecimiento"
+	title = "Deck Technician"
 	department = "Abastecimiento"
 	department_flag = SUP
 	total_positions = 3

@@ -1,5 +1,5 @@
 /datum/job/captain
-	title = "Comandante oficial"
+	title = "Commanding Officer"
 	supervisors = "El gobierno central de Sol y el codigo de justicia uniforme"
 	minimal_player_age = 14
 	economic_power = 16
@@ -34,7 +34,7 @@
 	..()
 
 /datum/job/hop
-	title = "Ejecutivo oficial"
+	title = "Executive Officer"
 	supervisors = "El Comandante oficial"
 	department = "Comando"
 	department_flag = COM
@@ -85,7 +85,7 @@
 	return "Eres el Ejecutivo oficial. Usted es un oficial superior experimentado, segundo al mando del barco, y es responsable del funcionamiento sin problemas de la nave bajo su Comandante oficial. En su ausencia, se espera que tome su lugar. Su deber principal es administrar directamente a los jefes de departamento y a todos los que estan fuera de un departamento. Tambien usted es responsable de los contratistas y pasajeros a bordo de la nave. Considere al Senior asesor encargado y al Oficial de puente herramientas a su disposición."
 
 /datum/job/rd
-	title = "Jefe de ciencias oficial"
+	title = "Chief Science Officer"
 	supervisors = "El Comandante oficial"
 	economic_power = 12
 	minimal_player_age = 14
@@ -132,7 +132,7 @@
 	return "Eres el Jefe de ciencias oficial. Usted es responsable del departamento de ciencias. Usted maneja los aspectos cientificos del proyecto y el enlace con los intereses corporativos de la organizacion del Cuerpo Expedicionario. Asegurese de que las investigaciones se hagan, haga algunas usted mismo y que sus cientificos vayan en misiones al exterior para encontrar cosas que beneficien al proyecto. Aconsejar a al CO sobre asuntos cientificos."
 
 /datum/job/cmo
-	title = "Jefe medico oficial"
+	title = "Chief Medical Officer"
 	supervisors = "El Comandante oficial y El Ejecutivo oficial"
 	economic_power = 14
 	minimal_player_age = 14
@@ -177,7 +177,7 @@
 	return "Usted es el Jefe medico oficial. Usted administra el departamento medico. Usted se asegura de que todos los miembros medicos sean capacitados, instruidos y encargandose de sus deberes. Asegurese de siempre tener medicos atendiendo la enfermeria y que su Paramedico este listo para cualquier respuesta. Actuar como un segundo cirujano o farmaceutico de respaldo en ausencia de cualquiera de los dos. Se espera que sepa muy bien todo sobre medicina, junto con las regulaciones generales."
 
 /datum/job/chief_engineer
-	title = "Jefe de ingenieria"
+	title = "Chief Engineer"
 	supervisors = "El Comandante oficial y El Ejecutivo oficial"
 	economic_power = 12
 	minimum_character_age = list(SPECIES_HUMAN = 27)
@@ -231,7 +231,7 @@
 	return "Eres el Jefe de ingenieria. Usted gestiona el departamento de ingenieria. Usted es responsable del Ingeniero supervisor, delega y escucha a su Ingeniero supervisor, es su mano derecha y (debe ser) un ingeniero experimentado y experto. Administre a sus ingenieros, asegurese de que la energia de la nave se mantenga activa, que las brechas se sellen y solucionar cualquier otro problema. Asesorar al CO sobre asuntos de ingenieria. Tambien usted es responsable del mantenimiento y el control de cualquier sintetico de la nave. Eres un ingeniero experimentado con una gran cantidad de conocimiento teorico. Tambien debe conocer las regulaciones generales en un grado razonable."
 
 /datum/job/hos
-	title = "Jefe de seguridad"
+	title = "Chief of Security"
 	supervisors = "El Comandante oficial y El Ejecutivo oficial"
 	economic_power = 10
 	minimal_player_age = 14
@@ -276,7 +276,7 @@
 	return "Eres el Jefe de seguridad. Gestionas la seguridad del barco. Los Agentes de seguridad, asi como el Agente supervisor de seguridad y el Tecnico Forense. Mantienes la nave segura. Usted maneja asuntos de seguridad internos y externos. Eres la ley. Estas subordinado al CO y el XO. Se espera que conozca la ley SCMJ y SOL y el procedimiento de alerta en un grado muy alto junto con las regulaciones generales."
 
 /datum/job/representative
-	title = "Representante de SolGov"
+	title = "SolGov Representative"
 	department = "Apoyo"
 	department_flag = SPT
 	total_positions = 1
@@ -305,7 +305,7 @@
 	return "Eres el representante de SolGov. Usted es un civil asignado como un enlace diplomatico para las situaciones de primer contacto y asunto extranjero a bordode la nave. Tambien es responsable de monitorear cualquier paso en falso de justicia de la ley SOL u otros asuntos eticos o legales a bordo e informar y asesorar al Comandante oficial de ellos. Eres un burocrata de nivel medio. Usted es el enlace entre la tripulacion y los intereses corporativos de GCS. Envie faxes de regreso a Sol sobre el progreso de la mision y eventos importantes."
 
 /datum/job/sea
-	title = "Senior asesor encargado"
+	title = "Senior Enlisted Advisor"
 	department = "Apoyo"
 	department_flag = SPT
 	total_positions = 1
@@ -354,7 +354,7 @@
 	return "Usted es el Senior asesor encargado. Eres la persona rango alistado mas alto en el barco. Usted esta directamente subordinado al CO. Les aconseja, brinda experiencia y asesoramiento a los oficiales. Usted es responsable de garantizar la disciplina y la buena conducta entre el personal, ademas de notificar a los oficiales de cualquier problema y \"asesorarlos\" sobre los errores que cometen. Tambien manejas diversos deberes en nombre del CO y XO. Eres una persona experimentada, muy probablemente solo el CO y XO pueden igualarlo en experiencia. Conoces las regulaciones mejor que nadie."
 
 /datum/job/bridgeofficer
-	title = "Oficial de puente"
+	title = "Bridge Officer"
 	department = "Apoyo"
 	department_flag = SPT
 	total_positions = 3
