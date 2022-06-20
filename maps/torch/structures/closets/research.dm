@@ -79,7 +79,7 @@
 
 /obj/structure/closet/secure_closet/scientist_torch
 	name = "researcher's locker"
-	req_access = list(access_research)
+	req_access = list(access_research_storage)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/science
 
 /obj/structure/closet/secure_closet/scientist_torch/WillContain()
@@ -144,7 +144,7 @@
 
 /obj/structure/closet/secure_closet/ec_scientist
 	name = "scientist locker"
-	req_access = list(access_research)
+	req_access = list(access_research_storage)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/science
 
 /obj/structure/closet/secure_closet/ec_scientist/WillContain()
