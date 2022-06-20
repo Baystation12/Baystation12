@@ -545,15 +545,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if (!(config.abandon_allowed))
 		to_chat(usr, SPAN_WARNING("Respawn is disabled."))
 		return
-	if (!SSticker.mode)
-		to_chat(usr, SPAN_WARNING("<b>You may not attempt to respawn yet.</b>"))
-		return
-	if (SSticker.mode.deny_respawn)
-		to_chat(usr, SPAN_WARNING("Respawn is disabled for this roundtype."))
-		return
-	else if(!MayRespawn(1, config.respawn_delay))
-		return
-
+	if (SSticker.mode)
+		if (SSticker.mode.deny_respawn)
+			to_chat(usr, SPAN_WARNING("Respawn is disabled for this roundtype."))
+			return
+		else if (!MayRespawn(TRUE, config.respawn_delay))
+			return
 	to_chat(usr, SPAN_NOTICE("You can respawn now, enjoy your new life!"))
 	to_chat(usr, SPAN_NOTICE("<b>Make sure to play a different character, and please roleplay correctly!</b>"))
 	announce_ghost_joinleave(client, 0)
