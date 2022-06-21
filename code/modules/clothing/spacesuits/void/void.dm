@@ -289,9 +289,6 @@ else if(##equipment_var) {\
 			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		return
 	else if(istype(W,/obj/item/tank))
-		if(user.get_inventory_slot(src) == slot_wear_suit)
-			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
-			return
 		if(tank)
 			to_chat(user, "\The [src] already has an airtank installed.")
 			return
