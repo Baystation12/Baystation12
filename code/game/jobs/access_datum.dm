@@ -376,6 +376,12 @@ var/global/const/access_heads = "ACCESS_HEADS" //67
 	desc = "Command"
 	region = ACCESS_REGION_COMMAND
 
+var/global/const/access_research_storage = "ACCESS_RESEARCH_STORAGE"
+/datum/access/research_storage
+	id = access_research_storage
+	desc = "Science Storage"
+	region = ACCESS_REGION_RESEARCH
+
 /******************
 * Central Command *
 ******************/
