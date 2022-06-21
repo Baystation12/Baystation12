@@ -52,6 +52,11 @@
 	if(!. && feedback_receiver)
 		to_chat(feedback_receiver, "<span class='warning'>Value must be a direction.</span>")
 
+/proc/is_strict_bool_predicate(value, feedback_receiver)
+	. = (value == TRUE || value == FALSE)
+	if (!. && feedback_receiver)
+		to_chat(feedback_receiver, SPAN_WARNING("Value must be a boolean (Strict)."))
+
 /proc/can_locate(var/atom/container, var/container_thing)
 	return (locate(container_thing) in container)
 
