@@ -3,9 +3,9 @@ SUBSYSTEM_DEF(fabrication)
 	flags = SS_NO_FIRE
 	init_order = SS_INIT_MISC_LATE
 
-	var/static/tmp/list/recipes = list()
-	var/static/tmp/list/categories = list()
-	var/static/tmp/list/stages_by_type = list()
+	var/static/list/recipes = list()
+	var/static/list/categories = list()
+	var/static/list/stages_by_type = list()
 
 
 /datum/controller/subsystem/fabrication/UpdateStat(time)

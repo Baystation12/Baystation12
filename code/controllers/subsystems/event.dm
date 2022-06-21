@@ -3,8 +3,8 @@ SUBSYSTEM_DEF(event)
 	wait = 2 SECONDS
 	priority = SS_PRIORITY_EVENT
 
-	var/tmp/list/processing_events = list()
-	var/tmp/pos = EVENT_LEVEL_MUNDANE
+	var/list/processing_events = list()
+	var/pos = EVENT_LEVEL_MUNDANE
 
 	//UI related
 	var/window_x = 700

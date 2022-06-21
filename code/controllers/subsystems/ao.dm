@@ -4,8 +4,8 @@ SUBSYSTEM_DEF(ao)
 	wait = 1
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 	flags = SS_NO_INIT
-	var/static/tmp/list/queue = list()
-	var/static/tmp/list/cache = list()
+	var/static/list/queue = list()
+	var/static/list/cache = list()
 
 
 /datum/controller/subsystem/ao/UpdateStat(time)

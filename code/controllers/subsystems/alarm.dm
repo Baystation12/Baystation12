@@ -3,9 +3,9 @@ SUBSYSTEM_DEF(alarm)
 	wait = 2 SECONDS
 	priority = SS_PRIORITY_ALARM
 	init_order = SS_INIT_ALARM
-	var/static/tmp/list/datum/alarm_handler/handlers
-	var/static/tmp/list/current = list()
-	var/static/tmp/list/active = list()
+	var/static/list/datum/alarm_handler/handlers
+	var/static/list/current = list()
+	var/static/list/active = list()
 
 
 /datum/controller/subsystem/alarm/Initialize(start_uptime)

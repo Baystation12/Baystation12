@@ -62,17 +62,17 @@ var/global/datum/globals/GLOB
 	##X = V; \
 }
 
-#define GLOBAL_VAR_CONST(X, V) /datum/globals/var/static/const/##X = V;
+#define GLOBAL_VAR_CONST(X, V) /datum/globals/var/const/##X = V;
 
-#define GLOBAL_VAR(X) /datum/globals/var/static/tmp/##X;
+#define GLOBAL_VAR(X) /datum/globals/var/static/##X;
 
 #define GLOBAL_VAR_INIT(X, V) GLOBAL_VAR(X) GLOBAL_INIT(X, V)
 
-#define GLOBAL_DATUM(X, P) /datum/globals/var/static/tmp##P/##X;
+#define GLOBAL_DATUM(X, P) /datum/globals/var/static##P/##X;
 
 #define GLOBAL_DATUM_INIT(X, P, V) GLOBAL_DATUM(X, P) GLOBAL_INIT(X, V)
 
-#define GLOBAL_LIST(X) /datum/globals/var/static/list/tmp/##X;
+#define GLOBAL_LIST(X) /datum/globals/var/static/list/##X;
 
 #define GLOBAL_LIST_INIT(X, V) GLOBAL_LIST(X) GLOBAL_INIT(X, V)
 

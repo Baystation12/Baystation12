@@ -40,17 +40,17 @@ SUBSYSTEM_DEF(machines)
 	priority = SS_PRIORITY_MACHINERY
 	flags = SS_KEEP_TIMING
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
-	var/static/tmp/current_step = SSMACHINES_PIPENETS
-	var/static/tmp/cost_pipenets = 0
-	var/static/tmp/cost_machinery = 0
-	var/static/tmp/cost_powernets = 0
-	var/static/tmp/cost_power_objects = 0
-	var/static/tmp/list/pipenets = list()
-	var/static/tmp/list/machinery = list()
-	var/static/tmp/list/powernets = list()
-	var/static/tmp/list/power_objects = list()
-	var/static/tmp/list/processing = list()
-	var/static/tmp/list/queue = list()
+	var/static/current_step = SSMACHINES_PIPENETS
+	var/static/cost_pipenets = 0
+	var/static/cost_machinery = 0
+	var/static/cost_powernets = 0
+	var/static/cost_power_objects = 0
+	var/static/list/pipenets = list()
+	var/static/list/machinery = list()
+	var/static/list/powernets = list()
+	var/static/list/power_objects = list()
+	var/static/list/processing = list()
+	var/static/list/queue = list()
 
 
 /datum/controller/subsystem/machines/Recover()

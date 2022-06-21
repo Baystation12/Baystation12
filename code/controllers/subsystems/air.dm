@@ -78,11 +78,11 @@ SUBSYSTEM_DEF(air)
 	var/list/active_hotspots = list()
 	var/list/active_edges = list()
 
-	var/tmp/list/deferred = list()
-	var/tmp/list/processing_edges
-	var/tmp/list/processing_fires
-	var/tmp/list/processing_hotspots
-	var/tmp/list/processing_zones
+	var/list/deferred = list()
+	var/list/processing_edges
+	var/list/processing_fires
+	var/list/processing_hotspots
+	var/list/processing_zones
 
 	var/active_zones = 0
 	var/next_id = 1

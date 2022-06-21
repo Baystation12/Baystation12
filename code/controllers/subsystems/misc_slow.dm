@@ -5,7 +5,7 @@ SUBSYSTEM_DEF(misc_slow)
 	wait = 5 MINUTES
 
 	/// The number of times dbcon can fail in a row before being considered dead
-	var/static/const/DB_RECONNECTS_ALLOWED = 3
+	var/const/DB_RECONNECTS_ALLOWED = 3
 
 	/// a list of (reconnects succeeded, reconnects failed) for dbcon
 	var/static/db_status = list(0, 0)
@@ -14,7 +14,7 @@ SUBSYSTEM_DEF(misc_slow)
 	var/static/db_info = "-"
 
 	/// The number of times dbcon_old can fail in a row before being considered dead
-	var/static/const/DB_OLD_RECONNECTS_ALLOWED = 3
+	var/const/DB_OLD_RECONNECTS_ALLOWED = 3
 
 	/// a list of (reconnects succeeded, reconnects failed) for dbcon_old
 	var/static/db_old_status = list(0, 0)

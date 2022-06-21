@@ -9,11 +9,11 @@ SUBSYSTEM_DEF(atoms)
 	init_order = SS_INIT_ATOMS
 	flags = SS_NO_FIRE | SS_NEEDS_SHUTDOWN
 
-	var/static/tmp/atom_init_stage = INITIALIZATION_INSSATOMS
-	var/static/tmp/old_init_stage
-	var/static/tmp/list/late_loaders = list()
-	var/static/tmp/list/created_atoms = list()
-	var/static/tmp/list/BadInitializeCalls = list()
+	var/static/atom_init_stage = INITIALIZATION_INSSATOMS
+	var/static/old_init_stage
+	var/static/list/late_loaders = list()
+	var/static/list/created_atoms = list()
+	var/static/list/BadInitializeCalls = list()
 
 
 /datum/controller/subsystem/atoms/UpdateStat(time)

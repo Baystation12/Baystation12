@@ -8,9 +8,9 @@ SUBSYSTEM_DEF(radiation)
 	var/list/sources_assoc = list()		// Sources indexed by turf for de-duplication.
 	var/list/resistance_cache = list()	// Cache of turf's radiation resistance.
 
-	var/tmp/list/current_sources   = list()
-	var/tmp/list/current_res_cache = list()
-	var/tmp/list/listeners         = list()
+	var/list/current_sources   = list()
+	var/list/current_res_cache = list()
+	var/list/listeners         = list()
 
 /datum/controller/subsystem/radiation/fire(resumed = FALSE)
 	if (!resumed)

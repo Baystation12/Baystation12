@@ -21,7 +21,7 @@ SUBSYSTEM_DEF(shuttle)
 	var/list/sectors_to_initialize               //Used to find all sector objects at the appropriate time.
 	var/block_queue = TRUE
 
-	var/tmp/list/working_shuttles
+	var/list/working_shuttles
 
 /datum/controller/subsystem/shuttle/Initialize(start_uptime)
 	last_landmark_registration_time = world.time
