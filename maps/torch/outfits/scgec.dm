@@ -226,11 +226,11 @@
 		/obj/item/storage/box/scgec_badges,
 		/obj/item/storage/box/scgec_scarves,
 		/obj/item/storage/box/large/scgec_berets,
-		/obj/item/storage/box/scgec_gloves,
+		/obj/item/storage/box/large/scgec_gloves,
 		/obj/item/storage/box/scgec_department,
 		/obj/item/storage/box/scgec_department_service
 	)
-	max_storage_space = 40 // Special snowflake for tests and UI scaling sanity. 40 is the exact size taken up by the contained boxes.
+	max_storage_space = 44 // Special snowflake for tests and UI scaling sanity. 40 is the exact size taken up by the contained boxes.
 
 
 /obj/item/storage/box/large/scgec_ranks
@@ -314,12 +314,13 @@
 	)
 
 
-/obj/item/storage/box/scgec_gloves
+/obj/item/storage/box/large/scgec_gloves
 	name = "gloves box, SCGEC"
 	startswith = list(
 		/obj/item/clothing/gloves/thick/duty/solgov/eng,
 		/obj/item/clothing/gloves/thick/duty/solgov/cmd,
 		/obj/item/clothing/gloves/thick/duty/solgov/exp,
+		/obj/item/clothing/gloves/thick/duty/solgov/sci,
 		/obj/item/clothing/gloves/thick/duty/solgov/med,
 		/obj/item/clothing/gloves/thick/duty/solgov/sec,
 		/obj/item/clothing/gloves/thick/duty/solgov/svc,

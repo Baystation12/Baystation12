@@ -1,9 +1,15 @@
-/obj/item/device/radio/headset/torchnanotrasen
+/obj/item/device/radio/headset/science
 	name = "research headset"
 	desc = "A headset for researchers."
 	icon_state = "sci_headset"
 	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/headset_torchnt
+	ks1type = /obj/item/device/encryptionkey/science
+
+/obj/item/device/radio/headset/science/alt
+	name = "research headset"
+	desc = "A headset for researchers."
+	icon_state = "sci_headset_alt"
+	item_state = "sci_headset_alt"
 
 /obj/item/device/radio/headset/heads/torchexec
 	name = "executive headset"

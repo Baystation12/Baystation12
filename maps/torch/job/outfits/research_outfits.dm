@@ -4,7 +4,7 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_types = list(/obj/item/card/id/torch/crew/research)
 	pda_type = /obj/item/modular_computer/pda/science
-	l_ear = /obj/item/device/radio/headset/torchnanotrasen
+	l_ear = /obj/item/device/radio/headset/science
 
 /decl/hierarchy/outfit/job/torch/crew/research/cso
 	name = OUTFIT_JOB_NAME("Chief Science Officer - Expeditionary Corps")
