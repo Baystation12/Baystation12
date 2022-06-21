@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Rubble now properly dies when hit enough times. It still won't drop loot
+      unless you use the right tools, however.
