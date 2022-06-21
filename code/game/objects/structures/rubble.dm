@@ -80,6 +80,10 @@
 
 	..()
 
+/obj/structure/rubble/on_death()
+	visible_message(SPAN_WARNING("\The [src] breaks apart!"))
+	qdel(src)
+
 /obj/structure/rubble/house
 	loot = list(/obj/item/archaeological_find/bowl,
 	/obj/item/archaeological_find/remains,
