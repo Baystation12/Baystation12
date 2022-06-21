@@ -284,6 +284,7 @@ var/global/photo_count = 0
 
 	p.photo_size = photo_size
 	p.scribble = scribble
+	p.desc = desc	// Proxima
 
 	if(copy_id)
 		p.id = id

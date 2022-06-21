@@ -1556,6 +1556,7 @@ datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
 	var/obj/item/rcvdcopy
 	rcvdcopy = destination.copy(P)
 	rcvdcopy.forceMove(null) //hopefully this shouldn't cause trouble
+	fax2TGS(rcvdcopy, P.origin, destination.department, key_name(src.owner))	// Proxima
 	GLOB.adminfaxes += rcvdcopy
 
 

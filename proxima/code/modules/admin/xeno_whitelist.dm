@@ -1,4 +1,4 @@
-#define HOLDER_LIST		list(SPECIES_FBP)
+#define HOLDER_LIST		list("AI")
 
 /datum/admins/proc/xeno_whitelist_panel()
 	set name = "Xenos Whitelist Panel"

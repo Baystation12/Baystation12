@@ -223,6 +223,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 
 	var/mob/intercepted = check_for_interception()
 
+	fax2TGS(rcvdcopy, department, destination, key_name(sender.client), intercepted)	// Proxima
 	message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, destination ? destination : "UNKNOWN")
 
 	sendcooldown = 1800
