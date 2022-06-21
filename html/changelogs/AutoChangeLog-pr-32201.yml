@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Mech weapons with no charge cost now display an ammo count of `INF` instead
-      of whatever outputted when it runtimed from dividing by zero.
