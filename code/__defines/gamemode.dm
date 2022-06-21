@@ -59,6 +59,7 @@
 #define MODE_VOXRAIDER     "vox raider"
 
 #define DEFAULT_TELECRYSTAL_AMOUNT 130
+#define TEAM_TELECRYSTAL_AMOUNT 780 //DEFAULT_TELECRYSTAL_AMOUNT*6 //proxima
 #define IMPLANT_TELECRYSTAL_AMOUNT(x) (round(x * 0.49)) // If this cost is ever greater than half of DEFAULT_TELECRYSTAL_AMOUNT then it is possible to buy more TC than you spend
 
 /////////////////

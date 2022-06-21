@@ -15683,7 +15683,7 @@
 "Om" = (
 /obj/item/stool,
 /obj/machinery/camera/network/second_deck{
-	c_tag = "ss";
+	c_tag = "Second Deck Hallway - Lift";
 	dir = 4
 	},
 /turf/simulated/floor/tiled,

@@ -10309,7 +10309,7 @@
 	dir = 4
 	},
 /obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Teleporteыыыыыr"
+	c_tag = "Third Deck Hallway - Teleporter"
 	},
 /obj/effect/catwalk_plated,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
