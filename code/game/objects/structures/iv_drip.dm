@@ -60,7 +60,7 @@
 	if(!CanMouseDrop(over_object))
 		return
 	if(attached)
-		drip_detach()
+		drip_detach(usr)
 	else if(ishuman(over_object))
 		hook_up(over_object, usr)
 
@@ -123,7 +123,7 @@
 
 /obj/structure/iv_drip/attack_hand(mob/user as mob)
 	if(attached)
-		drip_detach()
+		drip_detach(user)
 	else if(beaker)
 		beaker.dropInto(loc)
 		beaker = null
@@ -135,26 +135,33 @@
 	if(Adjacent(user))
 		attack_hand(user)
 
-/obj/structure/iv_drip/verb/drip_detach()
+/obj/structure/iv_drip/verb/drip_detach_verb()
 	set category = "Object"
 	set name = "Detach IV Drip"
 	set src in range(1)
 
-	if(!attached)
+	drip_detach(usr)
+
+/obj/structure/iv_drip/proc/drip_detach(mob/user)
+	if (!attached)
+		to_chat(user, SPAN_WARNING("\The [src] is not attached to anything."))
 		return
 
-	if(!CanPhysicallyInteractWith(usr, src))
-		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!"))
+	if (!CanPhysicallyInteractWith(user, src))
+		to_chat(user, SPAN_WARNING("You're in no condition to do that!"))
 		return
 
-	if(!usr.skill_check(SKILL_MEDICAL, SKILL_BASIC))
+	if (!user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
 		rip_out()
 	else
-		visible_message("\The [attached] is taken off \the [src].")
+		user.visible_message(
+			SPAN_WARNING("\The [user] detaches \the [attached] from \the [src]."),
+			SPAN_NOTICE("You detach \the [attached] from \the [src]."),
+		)
 		attached = null
 
 	queue_icon_update()
-	STOP_PROCESSING(SSobj,src)
+	STOP_PROCESSING(SSobj, src)
 
 /obj/structure/iv_drip/verb/toggle_mode()
 	set category = "Object"
