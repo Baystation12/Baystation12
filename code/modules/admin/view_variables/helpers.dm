@@ -144,7 +144,7 @@
 /datum/proc/VV_secluded()
 	return list()
 
-/configuration/VV_secluded()
+/datum/configuration/VV_secluded()
 	return vars
 
 // The following vars cannot be edited by anyone

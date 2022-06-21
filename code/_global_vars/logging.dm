@@ -1,4 +1,4 @@
-var/global/configuration/config
+var/global/datum/configuration/config
 var/global/diary
 
 
