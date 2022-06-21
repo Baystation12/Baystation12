@@ -154,8 +154,9 @@
 	else if(href_list["lock"])
 		toggle()
 		SSnano.close_user_uis(user, src, "main")
-		program.authenticated = FALSE
-		program.computer.kill_program(program)
+		if (program)
+			program.authenticated = FALSE
+			program.computer.kill_program(program)
 		. = TOPIC_HANDLED
 	else if(href_list["return"])
 		nanoui_menu = round(nanoui_menu/10)

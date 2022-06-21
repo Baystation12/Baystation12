@@ -388,7 +388,7 @@
 		if(occupant.mind.assigned_job)
 			occupant.mind.assigned_job.clear_slot()
 
-		if(occupant.mind.objectives.len)
+		if(LAZYLEN(occupant.mind.objectives))
 			occupant.mind.objectives = null
 			occupant.mind.special_role = null
 

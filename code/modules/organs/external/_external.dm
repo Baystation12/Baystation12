@@ -1339,7 +1339,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(internal_organs.len && prob(brute_dam + force))
 		owner.custom_pain("A piece of bone in your [encased ? encased : name] moves painfully!", 50, affecting = src)
 		var/obj/item/organ/internal/I = pick(internal_organs)
-		I.take_internal_damage(rand(3,5))
+		if (I)
+			I.take_internal_damage(rand(3,5))
 
 /obj/item/organ/external/proc/jointlock(mob/attacker)
 	if(!can_feel_pain())

@@ -252,7 +252,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	var/message
 	if(isanimal(M) && !M.universal_speak)
 		var/datum/say_list/SA = M.say_list
-		if (SA?.speak)
+		if (SA && length(SA.speak))
 			message = get_hear_message(name_used, pick(SA.speak), verb, speaking)
 	else
 		message = get_hear_message(name_used, text, verb, speaking)
