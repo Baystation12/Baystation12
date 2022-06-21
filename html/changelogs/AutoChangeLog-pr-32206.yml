@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - tweak: Charon and GUP will both take off and land faster, and be faster with overmap
+      travel.
