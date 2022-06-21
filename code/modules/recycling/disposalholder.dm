@@ -45,7 +45,7 @@
 			var/obj/item/smallDelivery/T = AM
 			src.destinationTag = T.sortTag
 		//Drones can mail themselves through maint.
-		if(is_drone(AM))
+		if(isdrone(AM))
 			var/mob/living/silicon/robot/drone/drone = AM
 			src.destinationTag = drone.mail_destination
 

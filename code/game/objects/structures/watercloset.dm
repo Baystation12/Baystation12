@@ -26,7 +26,7 @@
 	clogged = 0
 
 /obj/structure/hygiene/attackby(var/obj/item/thing, var/mob/user)
-	if(clogged > 0 && isPlunger(thing))
+	if(clogged > 0 && isplunger(thing))
 		user.visible_message("<span class='notice'>\The [user] strives valiantly to unclog \the [src] with \the [thing]!</span>")
 		spawn
 			playsound(loc, 'sound/effects/plunger.ogg', 75, 1)
@@ -396,7 +396,7 @@
 
 /obj/structure/hygiene/sink/attackby(obj/item/O as obj, var/mob/living/user)
 
-	if(isPlunger(O) && clogged > 0)
+	if(isplunger(O) && clogged > 0)
 		return ..()
 
 	if(busy)
