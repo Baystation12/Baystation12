@@ -1,0 +1,6 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - rscadd: Adds EC Science Duty Gloves.
+  - rscadd: Adds EC Science Bowman Headset.
+  - tweak: Makes most bowman headsets have antenna on .N-S onmob sprite.
