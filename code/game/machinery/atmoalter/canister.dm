@@ -19,6 +19,11 @@
 	volume = 1000
 	interact_offline = 1 // Allows this to be used when not in powered area.
 
+	var/const/CANISTER_PRESSURE_EMPTY = ONE_ATMOSPHERE
+	var/const/CANISTER_PRESSURE_LOW = 50 * ONE_ATMOSPHERE
+	var/const/CANISTER_PRESSURE_MID = 100 * ONE_ATMOSPHERE
+	var/const/CANISTER_PRESSURE_HIGH = 150 * ONE_ATMOSPHERE
+
 /obj/machinery/portable_atmospherics/canister/drain_power()
 	return -1
 
@@ -131,11 +136,11 @@
 		overlays += "can-connector"
 
 	var/tank_pressure = return_pressure()
-	if (tank_pressure < 0)
+	if (tank_pressure <= CANISTER_PRESSURE_EMPTY)
 		overlays += "can-o0"
-	else if (tank_pressure < ONE_ATMOSPHERE)
+	else if (tank_pressure <= CANISTER_PRESSURE_LOW)
 		overlays += "can-o1"
-	else if (tank_pressure < 15 * ONE_ATMOSPHERE)
+	else if (tank_pressure <= CANISTER_PRESSURE_MID)
 		overlays += "can-o2"
 	else
 		overlays += "can-o3"
