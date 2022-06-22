@@ -61,7 +61,7 @@ SUBSYSTEM_DEF(jobs)
 	if(!GLOB.skills.len)
 		decls_repository.get_decl(/decl/hierarchy/skill)
 	if(!GLOB.skills.len)
-		log_error("<span class='warning'>Error al configurar los requisitos de habilidades laborales, no se encontraron datos de habilidades!</span>")
+		log_error("<span class='warning'>Error setting up job skill requirements, no skill datums found!</span>")
 
 	// Update title and path tracking, submap list, etc.
 	// Populate/set up map job lists.
@@ -135,16 +135,16 @@ SUBSYSTEM_DEF(jobs)
 	if(!istype(joining) || !joining.client || !joining.client.prefs)
 		return FALSE
 	if(!istype(job))
-		log_debug("Error de asignacion de trabajo para [joining] - el trabajo no existe o es del tipo incorrecto.")
+		log_debug("Job assignment error for [joining] - job does not exist or is of the incorrect type.")
 		return FALSE
 	if(!job.is_position_available())
-		to_chat(joining, "<span class='warning'>Desafortunadamente, ese trabajo ya no esta disponible.</span>")
+		to_chat(joining, "<span class='warning'>Unfortunately, that job is no longer available.</span>")
 		return FALSE
 	if(!config.enter_allowed)
-		to_chat(joining, "<span class='warning'>Hay un bloqueo administrativo al ingresar al juego.!</span>")
+		to_chat(joining, "<span class='warning'>There is an administrative lock on entering the game!</span>")
 		return FALSE
 	if(SSticker.mode && SSticker.mode.explosion_in_progress)
-		to_chat(joining, "<span class='warning'>La [station_name()] actualmente esta explotando. Unirse iria mal.</span>")
+		to_chat(joining, "<span class='warning'>The [station_name()] is currently exploding. Joining would go poorly.</span>")
 		return FALSE
 	return TRUE
 
@@ -152,13 +152,13 @@ SUBSYSTEM_DEF(jobs)
 	if(!check_general_join_blockers(joining, job))
 		return FALSE
 	if(job.minimum_character_age && (joining.client.prefs.age < job.minimum_character_age))
-		to_chat(joining, "<span class='warning'>La edad de tu personaje en el juego es demasiado baja para este trabajo.</span>")
+		to_chat(joining, "<span class='warning'>Your character's in-game age is too low for this job.</span>")
 		return FALSE
 	if(!job.player_old_enough(joining.client))
-		to_chat(joining, "<span class='warning'>La edad de tu jugador (dias desde que se vio por primera vez en el servidor) es demasiado baja para este trabajo.</span>")
+		to_chat(joining, "<span class='warning'>Your player age (days since first seen on the server) is too low for this job.</span>")
 		return FALSE
 	if(GAME_STATE != RUNLEVEL_GAME)
-		to_chat(joining, "<span class='warning'>La ronda no esta lista o ya ha terminado...</span>")
+		to_chat(joining, "<span class='warning'>The round is either not ready, or has already finished...</span>")
 		return FALSE
 	return TRUE
 
@@ -166,14 +166,14 @@ SUBSYSTEM_DEF(jobs)
 	var/radlevel = SSradiation.get_rads_at_turf(spawn_turf)
 	var/airstatus = IsTurfAtmosUnsafe(spawn_turf)
 	if(airstatus || radlevel > 0)
-		var/reply = alert(spawner, "Advertencia. Su ubicacion de generacion seleccionada parece tener condiciones desfavorables. \
-		Puedes morir poco despues de aparecer.. \
-		Aparecer de todos modos? Mas informacion: [airstatus] Radiacion: [radlevel] IU/s", "Advertencia de atmosfera", "Abortar", "Aparecer de todos modos")
+		var/reply = alert(spawner, "Warning. Your selected spawn location seems to have unfavorable conditions. \
+		You may die shortly after spawning. \
+		Spawn anyway? More information: [airstatus] Radiation: [radlevel] IU/s", "Atmosphere warning", "Abort", "Spawn anyway")
 		if(reply == "Abort")
 			return FALSE
 		else
 			// Let the staff know, in case the person complains about dying due to this later. They've been warned.
-			log_and_message_admins("Usuario [spawner] generado en el punto de aparicion con una atmosfera peligrosa.")
+			log_and_message_admins("User [spawner] spawned at spawn point with dangerous atmosphere.")
 	return TRUE
 
 /datum/controller/subsystem/jobs/proc/assign_role(var/mob/new_player/player, var/rank, var/latejoin = 0, var/datum/game_mode/mode = SSticker.mode)
@@ -405,7 +405,7 @@ SUBSYSTEM_DEF(jobs)
 					permitted = 0
 
 				if(!permitted)
-					to_chat(H, "<span class='warning'>Su estado actual de especie, trabajo, rama, habilidades o lista blanca no le permite engendrar con [thing]!</span>")
+					to_chat(H, "<span class='warning'>Your current species, job, branch, skills or whitelist status does not permit you to spawn with [thing]!</span>")
 					continue
 
 				if(!G.slot || G.slot == slot_tie || (G.slot in loadout_taken_slots) || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.display_name]))
@@ -477,7 +477,7 @@ SUBSYSTEM_DEF(jobs)
 			if(H.client.prefs.sensors_locked)
 				uniform.has_sensor = SUIT_LOCKED_SENSORS
 	else
-		to_chat(H, "tu trabajo es [rank] y el juego simplemente no puede manejarlo! Informe este error a un administrador.")
+		to_chat(H, "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator.")
 
 	H.job = rank
 
@@ -502,9 +502,9 @@ SUBSYSTEM_DEF(jobs)
 		var/datum/money_account/department_account = department_accounts[job.department]
 
 		if(department_account)
-			remembered_info += "<b>El numero de cuenta de su departamento es:</b> #[department_account.account_number]<br>"
-			remembered_info += "<b>El PIN de la cuenta de su departamento es:</b> [department_account.remote_access_pin]<br>"
-			remembered_info += "<b>Los fondos de la cuenta de su departamento estan:</b> [GLOB.using_map.local_currency_name_short][department_account.money]<br>"
+			remembered_info += "<b>Your department's account number is:</b> #[department_account.account_number]<br>"
+			remembered_info += "<b>Your department's account pin is:</b> [department_account.remote_access_pin]<br>"
+			remembered_info += "<b>Your department's account funds are:</b> [GLOB.using_map.local_currency_name_short][department_account.money]<br>"
 
 		H.StoreMemory(remembered_info, /decl/memory_options/system)
 
@@ -534,15 +534,15 @@ SUBSYSTEM_DEF(jobs)
 			W.buckled_mob = H
 			W.add_fingerprint(H)
 
-	to_chat(H, "<font size = 3><B>Usted esta [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B></font>")
+	to_chat(H, "<font size = 3><B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B></font>")
 
 	if(job.supervisors)
-		to_chat(H, "<b>como el [alt_title ? alt_title : rank] respondes directamente a [job.supervisors]. Circunstancias especiales pueden cambiar esto.</b>")
+		to_chat(H, "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
 
-	to_chat(H, "<b>Para hablar en el canal de radio de su departamento utilice .h. Para el uso de otros canales, examine sus auriculares.</b>")
+	to_chat(H, "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>")
 
 	if(job.req_admin_notify)
-		to_chat(H, "<b>Estas a cargo un trabajo que es importante para la progresion del juego. Si tiene que desconectarse ingrese a las camaras de cryoestasis o notifique a los administradores a traves de adminhelp.</b>")
+		to_chat(H, "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>")
 
 	if (H.disabilities & NEARSIGHTED) //Try to give glasses to the vision impaired
 		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(H), slot_glasses)
