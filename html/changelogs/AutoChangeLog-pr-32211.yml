@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Detaching IV drips from people now displays messages indicating who detached
-      the IV.
