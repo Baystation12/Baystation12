@@ -31,10 +31,10 @@
 	else
 		var/obj/machinery/atmospherics/pipe/node1 = target.node1
 		var/obj/machinery/atmospherics/pipe/node2 = target.node2
-		if(istype(node1))
+		if(istype(node1) && node1.parent)
 			var/datum/pipeline/P1 = node1.parent
 			network_node1 = P1.network
-		if(istype(node2))
+		if(istype(node2) && node2.parent)
 			var/datum/pipeline/P2 = node2.parent
 			network_node2 = P2.network
 
