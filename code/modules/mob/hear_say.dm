@@ -95,7 +95,8 @@
 		if (accent)
 			to_world("got accent [accent.name]")
 			accent_tag = accent.GetTag(client)
-			to_world(length(accent_tag))
+			to_world("[length(accent_tag)]")
+			to_world(accent_tag)
 		else
 			to_world("no accent collected")
 	else
@@ -103,7 +104,7 @@
 
 	var/display_verb = verb
 	if (!language)
-		display_message = {"[display_verb],[accent_tag] <span class="message"><span class="body">"[display_message]"</span></span>"}
+		display_message = {"[display_verb], <span class="message"><span class="body">"[display_message]"</span></span>"}
 	else
 		var/hint_preference = get_preference_value(/datum/client_preference/language_display)
 		if (is_ghost)
@@ -120,7 +121,7 @@
 			if (GLOB.PREF_SHORTHAND)
 				display_verb = "[verb] ([language.shorthand])"
 		display_message = language.format_message(display_message, display_verb)
-
+	//[!accent_tag?" ":isicon(accent_tag)?"\icon[accent_tag]":accent_tag]
 	on_hear_say({"<span class="game say">[display_controls]<span class="name">[display_name]</span>[alt_name] [display_message]</span>"})
 
 
