@@ -12,7 +12,7 @@
 			break
 		var/word = pick(unstuttered_words)
 		unstuttered_words -= word //Remove from unstuttered words so we don't stutter it again.
-		var/index = list_find(split_phrase, word) //Find the word in the split phrase so we can replace it.
+		var/index = split_phrase.Find(word) //Find the word in the split phrase so we can replace it.
 
 		//Search for dipthongs (two letters that make one sound.)
 		var/first_sound = copytext_char(word,1,3)

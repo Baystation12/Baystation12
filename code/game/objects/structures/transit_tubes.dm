@@ -458,7 +458,7 @@
 
 	tube_dirs = select_automatic_dirs(connected)
 
-	if(length(tube_dirs) == 2 && list_find(tube_dir_list, tube_dirs[1]) > list_find(tube_dir_list, tube_dirs[2]))
+	if(length(tube_dirs) == 2 && tube_dir_list.Find(tube_dirs[1]) > tube_dir_list.Find(tube_dirs[2]))
 		tube_dirs.Swap(1, 2)
 
 	generate_automatic_corners(tube_dirs)

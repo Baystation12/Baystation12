@@ -3,8 +3,6 @@
 //Do (almost) nothing - indev placeholder for switch case implementations etc
 #define NOOP (.=.);
 
-#define list_find(L, needle, LIMITS...) L.Find(needle, LIMITS)
-
 #define PUBLIC_GAME_MODE SSticker.master_mode
 
 #define CLAMP01(x) clamp(x, 0, 1)

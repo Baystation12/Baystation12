@@ -110,7 +110,7 @@
 	if (!query)
 		return
 	else if (query["cyclebg"])
-		var/index = list_find(pref.background_states, pref.bgstate)
+		var/index = pref.background_states.Find(pref.bgstate)
 		if (!index || index == length(pref.background_states))
 			pref.bgstate = pref.background_states[1]
 		else

@@ -98,7 +98,7 @@ var/global/can_call_ert
 /proc/increment_ert_chance()
 	while(send_emergency_team == 0) // There is no ERT at the time.
 		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-		var/index = list_find(security_state.all_security_levels, security_state.current_security_level)
+		var/index = security_state.all_security_levels.Find(security_state.current_security_level)
 		ert_base_chance += 2**index
 		sleep(600 * 3) // Minute * Number of Minutes
 

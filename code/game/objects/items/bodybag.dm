@@ -94,7 +94,7 @@
 
 /obj/structure/closet/body_bag/MouseDrop(over_object, src_location, over_location)
 	..()
-	if((over_object == usr && (in_range(src, usr) || list_find(usr.contents, src))))
+	if((over_object == usr && (in_range(src, usr) || usr.contents.Find(src))))
 		fold(usr)
 
 /obj/item/robot_rack/body_bag

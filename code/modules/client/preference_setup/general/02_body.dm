@@ -336,7 +336,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["hair_style"])
 		var/list/valid_hairstyles = mob_species.get_hair_styles()
 		var/new_h_style
-		var/hair_index = list_find(valid_hairstyles, pref.head_hair_style)
+		var/hair_index = valid_hairstyles.Find(pref.head_hair_style)
 
 		if (href_list["inc"])
 			if (hair_index < valid_hairstyles.len && valid_hairstyles[hair_index + 1])
@@ -396,7 +396,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["facial_style"])
 		var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(pref.gender)
 		var/new_f_style
-		var/hair_index = list_find(valid_facialhairstyles, pref.facial_hair_style)
+		var/hair_index = valid_facialhairstyles.Find(pref.facial_hair_style)
 
 		if (href_list["inc"])
 			if (hair_index < valid_facialhairstyles.len && valid_facialhairstyles[hair_index + 1])

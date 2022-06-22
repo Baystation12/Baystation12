@@ -59,7 +59,7 @@
 /mob/Login()
 
 	// Add to player list if missing
-	if (!list_find(GLOB.player_list, src))
+	if (!GLOB.player_list.Find(src))
 		ADD_SORTED(GLOB.player_list, src, /proc/cmp_mob_key)
 
 	update_Login_details()

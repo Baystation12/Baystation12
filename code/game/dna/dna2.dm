@@ -122,12 +122,12 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	// FIXME:  Species-specific defaults pls
 	if(!character.head_hair_style)
 		character.head_hair_style = "Bald"
-	var/hair = list_find(GLOB.hair_styles_list, character.head_hair_style)
+	var/hair = GLOB.hair_styles_list.Find(character.head_hair_style)
 
 	// Facial Hair
 	if(!character.facial_hair_style)
 		character.facial_hair_style = "Shaved"
-	var/beard	= list_find(GLOB.facial_hair_styles_list, character.facial_hair_style)
+	var/beard	= GLOB.facial_hair_styles_list.Find(character.facial_hair_style)
 
 	var/list/head_color = rgb2num(character.head_hair_color)
 

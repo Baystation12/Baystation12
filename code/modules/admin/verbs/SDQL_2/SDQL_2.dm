@@ -139,7 +139,7 @@
 										temp.SDQL_update(v, SDQL_expression(d, set_list[sets]))
 										break
 
-									if(list_find(temp.vars, v) && (istype(temp.vars[v], /datum) || istype(temp.vars[v], /client)))
+									if(temp.vars.Find(v) && (istype(temp.vars[v], /datum) || istype(temp.vars[v], /client)))
 										temp = temp.vars[v]
 
 									else

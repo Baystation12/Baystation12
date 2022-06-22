@@ -74,7 +74,7 @@
 
 	//Actually enforce the air sharing
 	var/datum/pipe_network/network = connected_port.return_network(src)
-	if(network && !list_find(network.gases, air_contents))
+	if(network && !network.gases.Find(air_contents))
 		network.gases += air_contents
 		network.update = 1
 

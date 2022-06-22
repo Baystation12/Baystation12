@@ -73,7 +73,7 @@
 		src.connected = new /obj/structure/m_tray( src.loc )
 		step(src.connected, src.dir)
 		var/turf/T = get_step(src, src.dir)
-		if (list_find(T.contents, src.connected))
+		if (T.contents.Find(src.connected))
 			src.connected.connected = src
 			src.icon_state = "morgue0"
 			for(var/atom/movable/A as mob|obj in src)
@@ -113,7 +113,7 @@
 	src.connected = new /obj/structure/m_tray( src.loc )
 	step(src.connected, EAST)
 	var/turf/T = get_step(src, EAST)
-	if (list_find(T.contents, src.connected))
+	if (T.contents.Find(src.connected))
 		src.connected.connected = src
 		src.icon_state = "morgue0"
 		for(var/atom/movable/A as mob|obj in src)
@@ -159,7 +159,7 @@
 	return
 
 /obj/structure/m_tray/MouseDrop_T(atom/movable/O as mob|obj, mob/user as mob)
-	if ((!( istype(O, /atom/movable) ) || O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || list_find(user.contents, src) || list_find(user.contents, O)))
+	if ((!( istype(O, /atom/movable) ) || O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || user.contents.Find(src) || user.contents.Find(O)))
 		return
 	if (!ismob(O) && !istype(O, /obj/structure/closet/body_bag))
 		return
@@ -246,7 +246,7 @@
 		src.connected = new /obj/structure/c_tray(src.loc)
 		step(src.connected, dir)
 		var/turf/T = get_step(src, dir)
-		if (list_find(T.contents, src.connected))
+		if (T.contents.Find(src.connected))
 			src.connected.connected = src
 			src.icon_state = "crema0"
 			for(var/atom/movable/A as mob|obj in src)
@@ -279,7 +279,7 @@
 	src.connected = new /obj/structure/c_tray( src.loc )
 	step(src.connected, SOUTH)
 	var/turf/T = get_step(src, SOUTH)
-	if (list_find(T.contents, src.connected))
+	if (T.contents.Find(src.connected))
 		src.connected.connected = src
 		src.icon_state = "crema0"
 		for(var/atom/movable/A as mob|obj in src)
@@ -408,7 +408,7 @@
 	return
 
 /obj/structure/c_tray/MouseDrop_T(atom/movable/O as mob|obj, mob/user as mob)
-	if ((!( istype(O, /atom/movable) ) || O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || list_find(user.contents, src) || list_find(user.contents, O)))
+	if ((!( istype(O, /atom/movable) ) || O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || user.contents.Find(src) || user.contents.Find(O)))
 		return
 	if (!ismob(O) && !istype(O, /obj/structure/closet/body_bag))
 		return

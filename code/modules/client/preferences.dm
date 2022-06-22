@@ -108,7 +108,7 @@
 
 	S.cd = "/torch"
 	for(var/slot = 1 to 40)
-		if(!list_find(S.dir, "character[slot]"))
+		if(!S.dir.Find("character[slot]"))
 			continue
 		S.cd = "/torch/character[slot]"
 		default_slot = slot

@@ -260,9 +260,9 @@
 				shown_objects += embedlist
 				var/parsedembed[0]
 				for(var/obj/embedded in embedlist)
-					if(!parsedembed.len || (!list_find(parsedembed, embedded.name) && !list_find(parsedembed, "multiple [embedded.name]")))
+					if(!parsedembed.len || (!parsedembed.Find(embedded.name) && !parsedembed.Find("multiple [embedded.name]")))
 						parsedembed.Add(embedded.name)
-					else if(!list_find(parsedembed, "multiple [embedded.name]"))
+					else if(!parsedembed.Find("multiple [embedded.name]"))
 						parsedembed.Remove(embedded.name)
 						parsedembed.Add("multiple "+embedded.name)
 				wound_flavor_text["[E.name]"] += "The [wound.desc] on [T.his] [E.name] has \a [english_list(parsedembed, and_text = " and \a ", comma_text = ", \a ")] sticking out of it!<br>"
