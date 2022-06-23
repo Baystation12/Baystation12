@@ -98,6 +98,10 @@
 	// Salvage moves into the wreck unless we're exploding violently.
 	var/obj/wreck = new wreckage_path(get_turf(src), src, gibbed)
 	wreck.name = "wreckage of \the [name]"
+
+	// Handle the rest of things.
+	..(gibbed, (gibbed ? "explodes!" : "grinds to a halt before collapsing!"))
+
 	if(!gibbed)
 		if(arms.loc != src)
 			arms = null
@@ -107,10 +111,7 @@
 			head = null
 		if(body.loc != src)
 			body = null
-
-	// Handle the rest of things.
-	..(gibbed, (gibbed ? "explodes!" : "grinds to a halt before collapsing!"))
-	if(!gibbed) qdel(src)
+		qdel(src)
 
 /mob/living/exosuit/gib()
 	death(1)
