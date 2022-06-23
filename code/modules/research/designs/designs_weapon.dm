@@ -140,7 +140,7 @@
 
 /datum/design/item/weapon/bullpup
 	id = "bullpup"
-	req_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 3)
+	req_tech = list(TECH_COMBAT = 7, TECH_MATERIAL = 3)
 	materials = list(MATERIAL_STEEL = 10000, MATERIAL_SILVER = 5000, MATERIAL_DIAMOND = 3000)
 	build_path = /obj/item/gun/projectile/automatic/bullpup_rifle
 	sort_string = "TAPAC"
@@ -198,3 +198,30 @@
 	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
 	build_path = /obj/item/ammo_casing/shotgun/emp
 	sort_string = "TBAAG"
+
+/datum/design/item/melee/energy/minuano
+	name = "High frequency katana"
+	id = "high_frequency_katana"
+	desc = "light like wind minuano."
+	materials = list(MATERIAL_STEEL = 9000,MATERIAL_GLASS = 3000, MATERIAL_GOLD = 3000, MATERIAL_URANIUM = 1000)
+	req_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 6, TECH_ENERGY = 6)
+	build_path = /obj/item/melee/energy/minuano
+	sort_string = "TBAAD"
+
+/datum/design/item/melee/energy/machete/sundowner
+	name = "High frequency machete"
+	id = "high_frequency_machete"
+	desc = "Absolute power of war criminal."
+	materials = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 3000, MATERIAL_URANIUM = 750)
+	req_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_ENERGY = 4)
+	build_path = /obj/item/melee/energy/machete/sundowner
+	sort_string = "TBAAD"
+
+/datum/design/item/melee/sword/raiden
+	name = "High frequency sword"
+	id = "high_frequency_sword"
+	desc = "standart high frequency sword feels like tool of justice."
+	materials = list(MATERIAL_STEEL = 2500, MATERIAL_GLASS = 3000, MATERIAL_URANIUM = 750)
+	req_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 6)
+	build_path = /obj/item/melee/sword/raiden
+	sort_string = "TBAAD"
