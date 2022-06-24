@@ -3,7 +3,7 @@ SUBSYSTEM_DEF(inactivity)
 	wait = 1 MINUTE
 	priority = SS_PRIORITY_INACTIVITY
 	flags = SS_BACKGROUND
-	var/static/tmp/list/current = list()
+	var/static/list/current = list()
 
 
 /datum/controller/subsystem/inactivity/Destroy()

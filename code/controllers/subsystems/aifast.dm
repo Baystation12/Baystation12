@@ -4,8 +4,8 @@ SUBSYSTEM_DEF(aifast)
 	priority = SS_PRIORITY_AI
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	wait = 0.25 SECONDS
-	var/static/tmp/list/active = list()
-	var/static/tmp/list/queue = list()
+	var/static/list/active = list()
+	var/static/list/queue = list()
 
 
 /datum/controller/subsystem/aifast/UpdateStat(time)

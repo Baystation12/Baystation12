@@ -4,8 +4,8 @@ SUBSYSTEM_DEF(mobs)
 	flags = SS_NO_INIT | SS_KEEP_TIMING
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	wait = 2 SECONDS
-	var/static/tmp/list/mob_list = list()
-	var/static/tmp/list/queue = list()
+	var/static/list/mob_list = list()
+	var/static/list/queue = list()
 
 
 /datum/controller/subsystem/mobs/UpdateStat(time)

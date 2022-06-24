@@ -15,8 +15,8 @@ SUBSYSTEM_DEF(airflow)
 	flags = SS_NO_INIT
 	priority = SS_PRIORITY_AIRFLOW
 
-	var/static/tmp/list/processing = list()
-	var/static/tmp/list/current = list()
+	var/static/list/processing = list()
+	var/static/list/current = list()
 
 
 /datum/controller/subsystem/airflow/Recover()

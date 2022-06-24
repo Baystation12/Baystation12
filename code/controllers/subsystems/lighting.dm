@@ -28,9 +28,9 @@ SUBSYSTEM_DEF(lighting)
 	var/list/overlay_queue = list() // lighting overlays queued for update.
 	var/oq_idex = 1
 
-	var/tmp/processed_lights = 0
-	var/tmp/processed_corners = 0
-	var/tmp/processed_overlays = 0
+	var/processed_lights = 0
+	var/processed_corners = 0
+	var/processed_overlays = 0
 
 /datum/controller/subsystem/lighting/UpdateStat(time)
 	if (PreventUpdateStat(time))

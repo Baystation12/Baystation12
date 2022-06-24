@@ -54,10 +54,10 @@ var/global/datum/controller/master/Master = new
 	var/static/restart_timeout = 0
 	var/static/restart_count = 0
 
-	var/static/const/tick_limit_default = 80
-	var/static/const/tick_limit_init = 98
-	var/static/const/tick_limit_to_run = 78
-	var/static/const/tick_limit_mc = 70
+	var/const/tick_limit_default = 80
+	var/const/tick_limit_init = 98
+	var/const/tick_limit_to_run = 78
+	var/const/tick_limit_mc = 70
 
 	//current tick limit, assigned before running a subsystem.
 	//used by CHECK_TICK as well so that the procs subsystems call can obey that SS's tick limits

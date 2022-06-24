@@ -176,7 +176,7 @@
 
 	var/list/L = list()
 	for(var/mob/living/silicon/robot/RB in SSmobs.mob_list)
-		if(is_drone(RB))
+		if(isdrone(RB))
 			continue
 		if(RB.connected_ai == A)
 			continue

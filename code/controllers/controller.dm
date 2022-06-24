@@ -1,12 +1,13 @@
 /// The name of the controller
-/datum/controller/var/name
+/datum/controller
+	var/name
 
-/// The atom used to hold information about the controller for client UI output
-/datum/controller/var/tmp/atom/movable/clickable_stat/statLine
+	/// The atom used to hold information about the controller for client UI output
+	var/atom/movable/clickable_stat/statLine
 
 
-/// The next time we should do work updating stat_line
-/datum/controller/var/tmp/statNext = 0
+	/// The next time we should do work updating statLine
+	var/statNext = 0
 
 
 /datum/controller/Destroy(force)

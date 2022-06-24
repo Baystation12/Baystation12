@@ -1,4 +1,4 @@
-/configuration
+/datum/configuration
 	var/static/atom/movable/clickable_stat/statLine
 
 	/// server name (for world name / status)
@@ -298,9 +298,9 @@
 	/// Clients with these byond versions will be banned. "512.1234;513.2345" etc.
 	var/static/list/forbidden_versions = list()
 
-	var/static/minimum_byond_version = 512
+	var/static/minimum_byond_version = 514
 
-	var/static/minimum_byond_build = 1488
+	var/static/minimum_byond_build = 1568
 
 	var/static/login_export_addr
 
@@ -435,7 +435,7 @@
 	var/static/run_empty_levels = FALSE
 
 
-/configuration/New()
+/datum/configuration/New()
 	load_config()
 	load_options()
 	load_map()
@@ -446,7 +446,7 @@
 
 
 /// Read a text file, stripping lines starting with # and empties
-/configuration/proc/read_commentable(filename)
+/datum/configuration/proc/read_commentable(filename)
 	var/list/result = list()
 	var/list/lines = file2list(filename)
 	for (var/line in lines)
@@ -459,7 +459,7 @@
 	return result
 
 
-/configuration/proc/read_config(filename)
+/datum/configuration/proc/read_config(filename)
 	var/list/result = list()
 	var/lines = read_commentable(filename)
 	for (var/line in lines)
@@ -477,7 +477,7 @@
 	return result
 
 
-/configuration/proc/load_config()
+/datum/configuration/proc/load_config()
 	var/list/file = read_config("config/config.txt")
 	for (var/name in file)
 		var/value = file[name]
@@ -853,7 +853,7 @@
 				log_misc("Unknown setting in config/config.txt: '[name]'")
 
 
-/configuration/proc/load_options()
+/datum/configuration/proc/load_options()
 	var/list/file = read_config("config/game_options.txt")
 	for (var/name in file)
 		var/value = file[name]
@@ -901,7 +901,7 @@
 				log_misc("Unknown setting in config/game_options.txt: '[name]'")
 
 
-/configuration/proc/load_map()
+/datum/configuration/proc/load_map()
 	if (!GLOB.using_map?.config_path)
 		return
 	var/list/file = read_config(GLOB.using_map.config_path)
@@ -910,7 +910,7 @@
 		GLOB.using_map.setup_config(name, value, GLOB.using_map.config_path)
 
 
-/configuration/proc/load_sql()
+/datum/configuration/proc/load_sql()
 	var/list/file = read_config("config/dbconfig.txt")
 	for (var/name in file)
 		var/value = file[name]
@@ -937,14 +937,14 @@
 				log_misc("Unknown setting in config/dbconfig.txt: '[name]'")
 
 
-/configuration/proc/load_hub_entry()
+/datum/configuration/proc/load_hub_entry()
 	var/list/file = read_commentable("config/hub.txt")
 	if (!length(file))
 		return
 	hub_entry = file.Join("<br>")
 
 
-/configuration/proc/generate_hub_entry()
+/datum/configuration/proc/generate_hub_entry()
 	var/static/regex/replace_server = new (@"\$SERVER", "g")
 	var/static/regex/replace_host = new (@"\$HOST", "g")
 	var/static/regex/replace_wiki = new (@"\$WIKI", "g")
@@ -985,7 +985,7 @@
 	return entry
 
 
-/configuration/proc/UpdateStat()
+/datum/configuration/proc/UpdateStat()
 	if (!statLine)
 		statLine = new (null, src)
 		statLine.name = "Edit"

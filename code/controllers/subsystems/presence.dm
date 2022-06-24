@@ -6,9 +6,9 @@ SUBSYSTEM_DEF(presence)
 	priority = SS_PRIORITY_PRESENCE
 	runlevels = RUNLEVEL_GAME
 	wait = 2 SECONDS
-	var/static/tmp/list/levels = list()
-	var/static/tmp/list/queue = list()
-	var/static/tmp/list/build
+	var/static/list/levels = list()
+	var/static/list/queue = list()
+	var/static/list/build
 
 
 /datum/controller/subsystem/presence/UpdateStat(time)

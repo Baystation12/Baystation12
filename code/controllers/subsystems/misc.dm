@@ -7,8 +7,8 @@ SUBSYSTEM_DEF(misc)
 	var/static/cost_traders = 0
 	var/static/cost_solars = 0
 
-	var/static/const/STAGE_TRADERS = FLAG(0)
-	var/static/const/STAGE_SOLARS = FLAG(1)
+	var/const/STAGE_TRADERS = FLAG(0)
+	var/const/STAGE_SOLARS = FLAG(1)
 
 
 /datum/controller/subsystem/misc/VV_static()

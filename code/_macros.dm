@@ -43,7 +43,9 @@ var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define iscorgi(A) istype(A, /mob/living/simple_animal/passive/corgi)
 
-#define is_drone(A) istype(A, /mob/living/silicon/robot/drone)
+#define isdatum(A) istype(A, /datum)
+
+#define isdrone(A) istype(A, /mob/living/silicon/robot/drone)
 
 #define isEye(A) istype(A, /mob/observer/eye)
 
@@ -95,7 +97,7 @@ var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define isopenspace(A) istype(A, /turf/simulated/open)
 
-#define isPlunger(A) istype(A, /obj/item/clothing/mask/plunger) || istype(A, /obj/item/device/plunger/robot)
+#define isplunger(A) istype(A, /obj/item/clothing/mask/plunger) || istype(A, /obj/item/device/plunger/robot)
 
 #define isadmin(X) (check_rights(R_ADMIN, 0, (X)) != 0)
 
