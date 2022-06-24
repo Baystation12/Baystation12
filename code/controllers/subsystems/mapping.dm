@@ -57,7 +57,7 @@ SUBSYSTEM_DEF(mapping)
 		if (banned_maps)
 			var/is_banned = FALSE
 			for (var/mappath in MT.mappaths)
-				if(list_find(banned_maps, mappath))
+				if(banned_maps.Find(mappath))
 					is_banned = TRUE
 					break
 			if (is_banned)

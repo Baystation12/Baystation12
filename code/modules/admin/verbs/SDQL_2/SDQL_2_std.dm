@@ -166,7 +166,7 @@
 	L.Cut(Start, End)
 
 /proc/_list_find(var/list/L, var/Elem, var/Start = 1, var/End = 0)
-	return list_find(L, Elem, Start, End)
+	return L.Find(Elem, Start, End)
 
 /proc/_list_insert(var/list/L, var/Index, var/Item)
 	return L.Insert(Index, Item)

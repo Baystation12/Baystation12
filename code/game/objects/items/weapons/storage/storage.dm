@@ -439,11 +439,11 @@
 /obj/item/storage/attack_self(mob/user as mob)
 	//Clicking on itself will empty it, if it has the verb to do that.
 	if(user.get_active_hand() == src)
-		if(list_find(src.verbs, /obj/item/storage/verb/quick_empty))
+		if(src.verbs.Find(/obj/item/storage/verb/quick_empty))
 			src.quick_empty()
 			return 1
 
-		if (list_find(verbs, /obj/item/storage/verb/dump_contents) && user.a_intent == I_HURT)
+		if (verbs.Find(/obj/item/storage/verb/dump_contents) && user.a_intent == I_HURT)
 			dump_contents()
 			return 1
 

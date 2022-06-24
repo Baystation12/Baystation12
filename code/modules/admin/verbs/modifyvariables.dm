@@ -235,7 +235,7 @@
 	if(assoc)
 		original_var = L[assoc_key]
 	else
-		original_var = L[list_find(L, variable)]
+		original_var = L[L.Find(variable)]
 
 	var/new_var
 	switch(class) //Spits a runtime error if you try to modify an entry in the contents list. Dunno how to fix it, yet.
@@ -248,7 +248,7 @@
 			if(assoc)
 				L[assoc_key] = new_var
 			else
-				L[list_find(L, variable)] = new_var
+				L[L.Find(variable)] = new_var
 
 		if("edit referenced object")
 			modify_variables(variable)
@@ -265,14 +265,14 @@
 			if(assoc)
 				L[assoc_key] = new_var
 			else
-				L[list_find(L, variable)] = new_var
+				L[L.Find(variable)] = new_var
 
 		if("num")
 			new_var = input("Enter new number:","Num") as num
 			if(assoc)
 				L[assoc_key] = new_var
 			else
-				L[list_find(L, variable)] = new_var
+				L[L.Find(variable)] = new_var
 
 		if("type")
 			new_var = select_subpath(/obj/item/latexballon, /datum)
@@ -280,35 +280,35 @@
 			if(assoc)
 				L[assoc_key] = new_var
 			else
-				L[list_find(L, variable)] = new_var
+				L[L.Find(variable)] = new_var
 
 		if("reference")
 			new_var = input("Select reference:","Reference") as mob|obj|turf|area in world
 			if(assoc)
 				L[assoc_key] = new_var
 			else
-				L[list_find(L, variable)] = new_var
+				L[L.Find(variable)] = new_var
 
 		if("mob reference")
 			new_var = input("Select reference:","Reference") as mob in world
 			if(assoc)
 				L[assoc_key] = new_var
 			else
-				L[list_find(L, variable)] = new_var
+				L[L.Find(variable)] = new_var
 
 		if("file")
 			new_var = input("Pick file:","File") as file
 			if(assoc)
 				L[assoc_key] = new_var
 			else
-				L[list_find(L, variable)] = new_var
+				L[L.Find(variable)] = new_var
 
 		if("icon")
 			new_var = input("Pick icon:","Icon") as icon
 			if(assoc)
 				L[assoc_key] = new_var
 			else
-				L[list_find(L, variable)] = new_var
+				L[L.Find(variable)] = new_var
 
 		if("marked datum")
 			new_var = holder.marked_datum()
@@ -317,7 +317,7 @@
 			if(assoc)
 				L[assoc_key] = new_var
 			else
-				L[list_find(L, variable)] = new_var
+				L[L.Find(variable)] = new_var
 
 	to_world_log("### ListVarEdit by [src]: [O.type] [objectvar]: [original_var]=[new_var]")
 	log_admin("[key_name(src)] modified [original_name]'s [objectvar]: [original_var]=[new_var]")

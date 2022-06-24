@@ -218,7 +218,7 @@
 			P.network = new_network
 			break
 
-	if(list_find(new_network.normal_members, src))
+	if(new_network.normal_members.Find(src))
 		return 0
 
 	new_network.normal_members += src

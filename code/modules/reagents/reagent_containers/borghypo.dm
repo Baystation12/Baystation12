@@ -180,7 +180,7 @@
 			to_chat(user, SPAN_NOTICE("Dispensing from \the [bottle]."))
 		return TOPIC_REFRESH
 
-	var/index = list_find(reagent_names, selection)
+	var/index = reagent_names.Find(selection)
 	if (index)
 		mode = index
 		dispense = null

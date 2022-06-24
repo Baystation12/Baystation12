@@ -202,7 +202,7 @@
 		dat += "Anomaly depth: [current.depth] cm<br>"
 		dat += "Anomaly size: [current.clearance] cm<br>"
 		dat += "Dissonance spread: [current.dissonance_spread]<br>"
-		var/index = list_find(responsive_carriers, current.material)
+		var/index = responsive_carriers.Find(current.material)
 		if(index > 0 && index <= finds_as_strings.len)
 			dat += "Anomaly material: [finds_as_strings[index]]<br>"
 		else

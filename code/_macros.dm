@@ -3,8 +3,6 @@
 //Do (almost) nothing - indev placeholder for switch case implementations etc
 #define NOOP (.=.);
 
-#define list_find(L, needle, LIMITS...) L.Find(needle, LIMITS)
-
 #define PUBLIC_GAME_MODE SSticker.master_mode
 
 #define CLAMP01(x) clamp(x, 0, 1)
@@ -255,18 +253,6 @@ var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 /// Flip bits of MASK in FIELD
 #define FLIP_FLAGS(FIELD, MASK) ((FIELD) ^= (MASK))
-
-
-#define regex_replace_char(RE, ARGS...) RE.Replace_char(ARGS)
-
-
-#define regex_replace(RE, ARGS...) RE.Replace(ARGS)
-
-
-#define regex_find_char(RE, ARGS...) RE.Find_char(ARGS)
-
-
-#define regex_find(RE, ARGS...) RE.Find(ARGS)
 
 
 #define hex2num(hex) (text2num(hex, 16) || 0)

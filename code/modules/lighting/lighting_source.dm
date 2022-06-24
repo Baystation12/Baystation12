@@ -269,7 +269,7 @@ var/global/total_lighting_sources = 0
 	effect_str.Cut()
 
 /datum/light_source/proc/recalc_corner(var/datum/lighting_corner/C)
-	if(list_find(effect_str, C)) // Already have one.
+	if(effect_str.Find(C)) // Already have one.
 		REMOVE_CORNER(C)
 
 	APPLY_CORNER(C)

@@ -133,7 +133,7 @@
 	return db_connection.Quote(str)
 
 /DBQuery/proc/SetConversion(column,conversion)
-	if(istext(column)) column = list_find(columns, column)
+	if(istext(column)) column = columns.Find(column)
 	if(!conversions) conversions = new/list(column)
 	else if(conversions.len < column) conversions.len = column
 	conversions[column] = conversion

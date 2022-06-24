@@ -302,7 +302,7 @@
 /stat_rig_module/Click()
 	if(CanUse())
 		var/list/href_list = list(
-							"interact_module" = list_find(module.holder.installed_modules, module),
+							"interact_module" = module.holder.installed_modules.Find(module),
 							"module_mode" = module_mode
 							)
 		AddHref(href_list)
@@ -360,7 +360,7 @@
 	module_mode = "select_charge_type"
 
 /stat_rig_module/charge/AddHref(var/list/href_list)
-	var/charge_index = list_find(module.charges, module.charge_selected)
+	var/charge_index = module.charges.Find(module.charge_selected)
 	if(!charge_index)
 		charge_index = 0
 	else

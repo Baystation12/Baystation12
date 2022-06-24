@@ -130,7 +130,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 	var/list/atoms_to_initialise = list()
 	var/list/atoms_to_delete = list()
 
-	while(regex_find(dmmRegex, tfile, stored_index))
+	while(dmmRegex.Find_char(tfile, stored_index))
 		stored_index = dmmRegex.next
 
 		// "aa" = (/type{vars=blah})

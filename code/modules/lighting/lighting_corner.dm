@@ -56,7 +56,7 @@ var/global/list/LIGHTING_CORNER_DIAGONAL = list(NORTHEAST, SOUTHEAST, SOUTHWEST,
 			T.corners = list(null, null, null, null)
 
 		masters[T]   = diagonal
-		i            = list_find(LIGHTING_CORNER_DIAGONAL, turn(diagonal, 180))
+		i            = LIGHTING_CORNER_DIAGONAL.Find(turn(diagonal, 180))
 		T.corners[i] = src
 
 	// Now the horizontal one.
@@ -66,7 +66,7 @@ var/global/list/LIGHTING_CORNER_DIAGONAL = list(NORTHEAST, SOUTHEAST, SOUTHWEST,
 			T.corners = list(null, null, null, null)
 
 		masters[T]   = ((T.x > x) ? EAST : WEST) | ((T.y > y) ? NORTH : SOUTH) // Get the dir based on coordinates.
-		i            = list_find(LIGHTING_CORNER_DIAGONAL, turn(masters[T], 180))
+		i            = LIGHTING_CORNER_DIAGONAL.Find(turn(masters[T], 180))
 		T.corners[i] = src
 
 	// And finally the vertical one.
@@ -76,7 +76,7 @@ var/global/list/LIGHTING_CORNER_DIAGONAL = list(NORTHEAST, SOUTHEAST, SOUTHWEST,
 			T.corners = list(null, null, null, null)
 
 		masters[T]   = ((T.x > x) ? EAST : WEST) | ((T.y > y) ? NORTH : SOUTH) // Get the dir based on coordinates.
-		i            = list_find(LIGHTING_CORNER_DIAGONAL, turn(masters[T], 180))
+		i            = LIGHTING_CORNER_DIAGONAL.Find(turn(masters[T], 180))
 		T.corners[i] = src
 
 	update_active()
