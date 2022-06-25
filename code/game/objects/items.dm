@@ -331,6 +331,9 @@
 	if(M.r_hand)
 		M.r_hand.update_twohanding()
 
+/obj/item/proc/equipped_robot(var/mob/user)
+	return
+
 //Defines which slots correspond to which slot flags
 var/global/list/slot_flags_enumeration = list(
 	"[slot_wear_mask]" = SLOT_MASK,

@@ -813,18 +813,21 @@
 				module_state_1 = O
 				O.hud_layerise()
 				O.forceMove(src)
+				O.equipped_robot()
 				if(istype(module_state_1,/obj/item/borg/sight))
 					sight_mode |= module_state_1:sight_mode
 			else if(!module_state_2)
 				module_state_2 = O
 				O.hud_layerise()
 				O.forceMove(src)
+				O.equipped_robot()
 				if(istype(module_state_2,/obj/item/borg/sight))
 					sight_mode |= module_state_2:sight_mode
 			else if(!module_state_3)
 				module_state_3 = O
 				O.hud_layerise()
 				O.forceMove(src)
+				O.equipped_robot()
 				if(istype(module_state_3,/obj/item/borg/sight))
 					sight_mode |= module_state_3:sight_mode
 			else
