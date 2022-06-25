@@ -2,6 +2,7 @@
 	name = "Exhude Blood"
 	desc = "Take pity on a follower, converting a pitance of your power into blood. Don't let them forget your mercy."
 	cost = 20
+	cooldown = 30
 	flags = PHENOMENA_FOLLOWER
 	expected_type = /mob/living/carbon/human
 
