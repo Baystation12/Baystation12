@@ -84,6 +84,7 @@ GLOBAL_DATUM_INIT(godcult, /datum/antagonist/godcultist, new)
 /datum/antagonist/godcultist/proc/add_cultist(datum/mind/player, mob/living/deity/deity)
 	deity.add_follower(player.current)
 	player.current.add_language(LANGUAGE_CULT)
+	log_and_message_admins("has been converted into a cultist under [deity.name]", player.current)
 
 /datum/antagonist/godcultist/proc/remove_cultist(datum/mind/player, mob/living/deity/god)
 	god.remove_follower(player.current)

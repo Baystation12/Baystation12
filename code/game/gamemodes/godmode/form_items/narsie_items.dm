@@ -29,6 +29,7 @@
 			SPAN_WARNING("You hover \the [src] over \the [a], whispering an incantation.")
 		)
 		if(!do_after(user, 20 SECONDS, L))
+			to_chat(user, SPAN_WARNING("You and your target must remain still!"))
 			return
 		user.visible_message(
 			SPAN_DANGER("\The [user] plunges \the [src] down into \the [a]!"),
