@@ -194,6 +194,19 @@ default behaviour is:
 
 	return can_move_mob(tmob, 1, 0)
 
+/mob/living/Stat()
+	. = ..()
+	if(statpanel("Status"))
+		stat("Intent:", "[a_intent]")
+		stat("Move Mode:", "[move_intent.name]")
+		var/obj/item/device/gps/G = get_active_hand()
+		if(istype(G))
+			stat("Coordinates:", "[G.fetch_coordinates()]")
+
+		if(evacuation_controller)
+			var/eta_status = evacuation_controller.get_status_panel_eta()
+			if(eta_status)
+				stat(null, eta_status)
 
 /mob/living/proc/updatehealth()
 	if(status_flags & GODMODE)

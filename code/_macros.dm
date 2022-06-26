@@ -182,6 +182,10 @@ var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define SPAN_INFO(X) "<span class='info'>[X]</span>"
 
+#define STYLE_SMALLFONTS(X, S, C1) "<span style=\"font-family: 'Small Fonts'; color: [C1]; font-size: [S]px\">[X]</span>"
+
+#define STYLE_SMALLFONTS_OUTLINE(X, S, C1, C2) "<span style=\"font-family: 'Small Fonts'; color: [C1]; -dm-text-outline: 1 [C2]; font-size: [S]px\">[X]</span>"
+
 #define SPAN_DEBUG(X) "<span class='debug'>[X]</span>"
 
 #define SPAN_STYLE(style, X) "<span style=\"[style]\">[X]</span>"

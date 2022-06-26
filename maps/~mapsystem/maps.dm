@@ -437,7 +437,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		empty_levels = list(world.maxz)
 	return pick(empty_levels)
 
-
 /datum/map/proc/setup_economy()
 	for (var/datum/feed_network/N in news_network)
 		N.CreateFeedChannel("Nyx Daily", "SolGov Minister of Information", 1, 1)
