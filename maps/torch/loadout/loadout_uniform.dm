@@ -5,6 +5,7 @@
 /datum/gear/uniform/utility
 	display_name = "Contractor Utility Uniform"
 	path = /obj/item/clothing/under/solgov/utility
+	allowed_branches = list(/datum/mil_branch/civilian)
 
 /datum/gear/uniform/shortjumpskirt
 	allowed_roles = CASUAL_ROLES

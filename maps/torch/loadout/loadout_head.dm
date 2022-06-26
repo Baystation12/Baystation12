@@ -133,4 +133,4 @@
 	gear_tweaks += new/datum/gear_tweak/path(berets)
 
 /datum/gear/head/corporateberet
-	allowed_branches = CIVILIAN_BRANCHES
+	allowed_branches = list(/datum/mil_branch/civilian)

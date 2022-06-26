@@ -149,7 +149,8 @@
 /datum/gear/uniform/corporate
 	display_name = "corporate uniform selection"
 	path = /obj/item/clothing/under
-
+	allowed_branches = list(/datum/mil_branch/civilian)
+	
 /datum/gear/uniform/corporate/New()
 	..()
 	var/corps = list()
