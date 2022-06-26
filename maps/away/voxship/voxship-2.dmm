@@ -263,9 +263,6 @@
 /obj/effect/decal/cleanable/filth,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/scavship)
-"aN" = (
-/turf/simulated/floor/tiled/techmaint/vox,
-/area/voxship/scavship)
 "aO" = (
 /turf/simulated/floor/reinforced/nitrogen,
 /area/voxship/engineering)
@@ -718,10 +715,12 @@
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/engineering)
 "bQ" = (
-/obj/machinery/atmospherics/unary/tank/nitrogen,
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 4;
 	icon_state = "borderfloor_white"
+	},
+/obj/machinery/atmospherics/unary/tank/nitrogen{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/engineering)
@@ -1703,20 +1702,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating/vox,
 /area/voxship/thrusters)
-"dI" = (
-/obj/machinery/button/blast_door{
-	id_tag = "vox_engineview";
-	name = "chamber viewing port control"
-	},
-/turf/simulated/wall/ocp_wall,
-/area/voxship/thrusters)
-"dJ" = (
-/obj/machinery/button/blast_door{
-	id_tag = "vox_fusion";
-	name = "Chamber Vent Control"
-	},
-/turf/simulated/wall/ocp_wall,
-/area/voxship/thrusters)
 "dK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/black,
 /obj/effect/wallframe_spawn/reinforced_phoron/hull,
@@ -1737,13 +1722,6 @@
 	locked = 1
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/voxship/thrusters)
-"dM" = (
-/obj/machinery/button/alternate/door/bolts{
-	id_tag = "voxengine";
-	name = "Chamber Hatch Control"
-	},
-/turf/simulated/wall/ocp_wall,
 /area/voxship/thrusters)
 "dN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1906,9 +1884,19 @@
 /area/voxship/thrusters)
 "ef" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/machinery/button/blast_door{
+	id_tag = "vox_engineview";
+	name = "chamber viewing port control";
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/thrusters)
 "eg" = (
+/obj/machinery/button/blast_door{
+	id_tag = "vox_fusion";
+	name = "Chamber Vent Control";
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/thrusters)
 "eh" = (
@@ -1927,6 +1915,11 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4;
 	name = "emergency fuel vent"
+	},
+/obj/machinery/button/alternate/door/bolts{
+	id_tag = "voxengine";
+	name = "Chamber Hatch Control";
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/thrusters)
@@ -2488,6 +2481,8 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/structure/reagent_dispensers/coolanttank,
+/obj/item/reagent_containers/glass/bucket,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/engineering)
 "fv" = (
@@ -2703,8 +2698,8 @@
 /turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/thrusters)
 "gc" = (
-/obj/machinery/power/port_gen/pacman/super/potato,
 /obj/structure/cable,
+/obj/machinery/power/port_gen/pacman/super/potato/reactor,
 /turf/simulated/floor/plating/vox,
 /area/voxship/engineering)
 "gd" = (
@@ -8770,7 +8765,7 @@ as
 dD
 ed
 ez
-aN
+ey
 aa
 aa
 dV
@@ -9583,7 +9578,7 @@ bU
 bU
 bU
 bU
-dI
+bU
 ef
 eH
 fd
@@ -9685,7 +9680,7 @@ bV
 cp
 cP
 dn
-dJ
+bU
 eg
 eI
 cg
@@ -9991,7 +9986,7 @@ bU
 bU
 cR
 bU
-dM
+bU
 ej
 eL
 fg
