@@ -213,7 +213,7 @@
 	id = "high_frequency_machete"
 	desc = "Absolute power of war criminal."
 	materials = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 3000, MATERIAL_URANIUM = 750)
-	req_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_ENERGY = 4)
+	req_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 4, TECH_ENERGY = 4)
 	build_path = /obj/item/melee/energy/machete/sundowner
 	sort_string = "TBAAH"
 
@@ -222,6 +222,6 @@
 	id = "high_frequency_sword"
 	desc = "standart high frequency sword feels like tool of justice."
 	materials = list(MATERIAL_STEEL = 2500, MATERIAL_GLASS = 3000, MATERIAL_URANIUM = 750)
-	req_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 6)
+	req_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 6)
 	build_path = /obj/item/melee/sword/raiden
 	sort_string = "TBAAI"
