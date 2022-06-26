@@ -743,12 +743,12 @@
 	dir = 1;
 	icon_state = "corner_white"
 	},
+/obj/structure/sign/ecplaque{
+	pixel_y = 30
+	},
 /obj/machinery/light{
 	dir = 1;
 	icon_state = "tube1"
-	},
-/obj/structure/sign/ecplaque{
-	pixel_y = 30
 	},
 /obj/structure/bed/chair/shuttle/blue,
 /turf/simulated/floor/tiled,
@@ -925,7 +925,8 @@
 /obj/machinery/button/blast_door{
 	id_tag = "charon_shutters";
 	name = "Protective Shutters Control";
-	pixel_x = -32
+	pixel_x = -32;
+	pixel_y = 9
 	},
 /obj/structure/cable/cyan{
 	d1 = 2;
@@ -1126,6 +1127,9 @@
 /obj/item/device/radio/intercom/hailing{
 	dir = 1;
 	pixel_y = -28
+	},
+/obj/machinery/dummy_airlock_controller{
+	id_tag = "charon_shuttle"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
@@ -1839,10 +1843,6 @@
 	pixel_y = -32
 	},
 /obj/effect/floor_decal/techfloor,
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_y = -26
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
 "dx" = (
@@ -1856,6 +1856,10 @@
 	id_tag = "charon_shuttle_pump"
 	},
 /obj/effect/floor_decal/techfloor,
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -26
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
 "dy" = (
@@ -3372,6 +3376,7 @@
 /obj/structure/sign/ecplaque{
 	pixel_y = 30
 	},
+/obj/item/material/hatchet/machete,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/pilot)
 "hn" = (
@@ -11160,7 +11165,6 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline,
-/obj/machinery/firealarm,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
 "AK" = (
