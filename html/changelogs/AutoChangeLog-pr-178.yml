@@ -1,0 +1,4 @@
+author: Drakon341
+delete-after: true
+changes:
+  - tweak: Теперь формы контратников могут взять только люди из бранча цивилиан.
