@@ -167,6 +167,7 @@
 	#include "../away/miningstation/miningstation.dm"
 	#include "../away/mininghome/mininghome.dm"
 	#include "../away/scavver/scavver_gantry.dm"
+	#include "../away/icarus2/icarus2.dm"
 
 	#include "../event/iccgn_ship/icgnv_hound.dm"
 
