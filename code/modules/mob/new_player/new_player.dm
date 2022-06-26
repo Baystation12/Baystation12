@@ -269,7 +269,7 @@
 		var/mob/living/silicon/ai/A = character
 		A.on_mob_init()
 
-		AnnounceCyborg(character, job.title, "has been downloaded to the empty core in \the [character.loc.loc]")
+		/*AnnounceCyborg(character, job.title, "has been downloaded to the empty core in \the [character.loc.loc]")*/
 		SSticker.mode.handle_latejoin(character)
 
 		qdel(C)

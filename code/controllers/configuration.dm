@@ -178,7 +178,7 @@
 	var/static/max_maint_drones = 5
 
 	/// assuming the admin allow them to.
-	var/static/allow_drone_spawn = FALSE
+	var/static/allow_drone_spawn = TRUE
 
 	/// A drone will become available every X ticks since last drone spawn. Default is 2 minutes.
 	var/static/drone_build_time = 1200
