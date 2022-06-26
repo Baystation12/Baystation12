@@ -1,0 +1,5 @@
+author: Imienny
+delete-after: true
+changes:
+  - tweak: Dufflebags no longer slow you down, as trade off they cant be opened while
+      on your back.
