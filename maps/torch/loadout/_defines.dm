@@ -4,28 +4,28 @@
 #define FORMAL_ROLES list(/datum/job/liaison, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/research_guard, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/representative, /datum/job/assistant, /datum/job/merchant, /datum/job/detective, /datum/job/chaplain, /datum/job/submap/bearcat_captain, /datum/job/submap/bearcat_crewman, /datum/job/submap/colonist, /datum/job/submap/pod, /datum/job/chef, /datum/job/submap/scavver_pilot, /datum/job/submap/scavver_doctor, /datum/job/submap/scavver_engineer)
 
 //For civilian jobs that may have a uniform, but not a strict one
-#define SEMIFORMAL_ROLES list(/datum/job/assistant, /datum/job/cargo_tech, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/senior_scientist, /datum/job/detective, /datum/job/chaplain, /datum/job/engineer, /datum/job/roboticist, /datum/job/submap/bearcat_captain, /datum/job/submap/bearcat_crewman, /datum/job/submap/colonist, /datum/job/submap/pod, /datum/job/chef, /datum/job/submap/scavver_pilot, /datum/job/submap/scavver_doctor, /datum/job/submap/scavver_engineer, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/doctor)
+#define SEMIFORMAL_ROLES list(/datum/job/assistant, /datum/job/cargo_tech, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/senior_scientist, /datum/job/detective, /datum/job/chaplain, /datum/job/engineer, /datum/job/roboticist, /datum/job/submap/bearcat_captain, /datum/job/submap/bearcat_crewman, /datum/job/submap/colonist, /datum/job/submap/pod, /datum/job/chef, /datum/job/submap/scavver_pilot, /datum/job/submap/scavver_doctor, /datum/job/submap/scavver_engineer, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/doctor, /datum/job/synthetic)
 
 //For civilian jobs that may have a strict uniform.
-#define SEMIANDFORMAL_ROLES list(/datum/job/assistant, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/liaison, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/research_guard, /datum/job/representative, /datum/job/detective, /datum/job/chaplain, /datum/job/submap/bearcat_captain, /datum/job/submap/bearcat_crewman, /datum/job/submap/colonist, /datum/job/submap/pod, /datum/job/chef, /datum/job/submap/scavver_pilot, /datum/job/submap/scavver_doctor, /datum/job/submap/scavver_engineer, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/doctor)
+#define SEMIANDFORMAL_ROLES list(/datum/job/assistant, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/liaison, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/research_guard, /datum/job/representative, /datum/job/detective, /datum/job/chaplain, /datum/job/submap/bearcat_captain, /datum/job/submap/bearcat_crewman, /datum/job/submap/colonist, /datum/job/submap/pod, /datum/job/chef, /datum/job/submap/scavver_pilot, /datum/job/submap/scavver_doctor, /datum/job/submap/scavver_engineer, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/doctor, /datum/job/synthetic)
 
 //For civilian jobs with no uniform or formal clothing requirements.
-#define CASUAL_ROLES list(/datum/job/assistant, /datum/job/janitor, /datum/job/chef, /datum/job/cargo_tech, /datum/job/roboticist, /datum/job/mining, /datum/job/chaplain, /datum/job/merchant, /datum/job/submap/bearcat_captain, /datum/job/submap/bearcat_crewman, /datum/job/submap/colonist, /datum/job/submap/pod, /datum/job/submap/scavver_pilot, /datum/job/submap/scavver_doctor, /datum/job/submap/scavver_engineer, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/doctor, /datum/job/scientist, /datum/job/senior_scientist, /datum/job/scientist_assistant)
+#define CASUAL_ROLES list(/datum/job/assistant, /datum/job/janitor, /datum/job/chef, /datum/job/cargo_tech, /datum/job/roboticist, /datum/job/mining, /datum/job/chaplain, /datum/job/merchant, /datum/job/submap/bearcat_captain, /datum/job/submap/bearcat_crewman, /datum/job/submap/colonist, /datum/job/submap/pod, /datum/job/submap/scavver_pilot, /datum/job/submap/scavver_doctor, /datum/job/submap/scavver_engineer, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/doctor, /datum/job/scientist, /datum/job/senior_scientist, /datum/job/scientist_assistant, /datum/job/synthetic)
 
 //For roles that would have a higher level of education, typically doctors and other scientists
-#define DOCTOR_ROLES list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/roboticist, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist)
+#define DOCTOR_ROLES list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/roboticist, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/synthetic)
 
 //For members of the medical department
-#define MEDICAL_ROLES list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/doctor, /datum/job/psychiatrist, /datum/job/chemist, /datum/job/medical_trainee, /datum/job/expmed)
+#define MEDICAL_ROLES list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/doctor, /datum/job/psychiatrist, /datum/job/chemist, /datum/job/medical_trainee, /datum/job/expmed, /datum/job/synthetic)
 
 //For members of the medical department, roboticists, and some Research
-#define STERILE_ROLES list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/doctor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/roboticist, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/medical_trainee, /datum/job/expmed)
+#define STERILE_ROLES list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/doctor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/roboticist, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/medical_trainee, /datum/job/expmed, /datum/job/synthetic)
 
 //For members of the engineering department
-#define ENGINEERING_ROLES list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/roboticist, /datum/job/engineer_trainee, /datum/job/expeng)
+#define ENGINEERING_ROLES list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/roboticist, /datum/job/engineer_trainee, /datum/job/expeng, /datum/job/synthetic)
 
 //For members of Engineering, Cargo, and Research
-#define TECHNICAL_ROLES list(/datum/job/senior_engineer, /datum/job/engineer, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/merchant, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/chief_engineer, /datum/job/janitor, /datum/job/engineer_trainee, /datum/job/nt_pilot, /datum/job/expeng)
+#define TECHNICAL_ROLES list(/datum/job/senior_engineer, /datum/job/engineer, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/merchant, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/chief_engineer, /datum/job/janitor, /datum/job/engineer_trainee, /datum/job/nt_pilot, /datum/job/expeng, /datum/job/synthetic)
 
 //For members of the security department
 #define SECURITY_ROLES list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/expmar)
@@ -34,13 +34,13 @@
 #define SUPPLY_ROLES list(/datum/job/qm, /datum/job/cargo_tech)
 
 //For members of the service department
-#define SERVICE_ROLES list(/datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/chaplain)
+#define SERVICE_ROLES list(/datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/chaplain, /datum/job/synthetic)
 
 //For members of the exploration department
-#define EXPLORATION_ROLES list(/datum/job/pathfinder, /datum/job/nt_pilot, /datum/job/explorer, /datum/job/expmar, /datum/job/expeng, /datum/job/expmed)
+#define EXPLORATION_ROLES list(/datum/job/pathfinder, /datum/job/nt_pilot, /datum/job/explorer, /datum/job/expmar, /datum/job/expeng, /datum/job/expmed, /datum/job/synthetic)
 
 //For members of the research department and jobs that are scientific
-#define RESEARCH_ROLES list(/datum/job/rd, /datum/job/scientist, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/assistant, /datum/job/nt_pilot, /datum/job/senior_scientist, /datum/job/roboticist, /datum/job/research_guard)
+#define RESEARCH_ROLES list(/datum/job/rd, /datum/job/scientist, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/assistant, /datum/job/nt_pilot, /datum/job/senior_scientist, /datum/job/roboticist, /datum/job/research_guard, /datum/job/synthetic)
 
 //For jobs that spawn with weapons in their lockers
 #define ARMED_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/sea, /datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/merchant, /datum/job/submap/scavver_pilot, /datum/job/submap/scavver_doctor, /datum/job/submap/scavver_engineer, /datum/job/research_guard, /datum/job/expmar)
@@ -50,6 +50,6 @@
 
 #define UNIFORMED_BRANCHES list(/datum/mil_branch/expeditionary_corps, /datum/mil_branch/fleet, /datum/mil_branch/army)
 
-#define CIVILIAN_BRANCHES list(/datum/mil_branch/civilian, /datum/mil_branch/solgov)
+#define CIVILIAN_BRANCHES list(/datum/mil_branch/civilian, /datum/mil_branch/solgov, /datum/job/synthetic)
 
 #define SOLGOV_BRANCHES list(/datum/mil_branch/expeditionary_corps, /datum/mil_branch/fleet, /datum/mil_branch/army, /datum/mil_branch/solgov)

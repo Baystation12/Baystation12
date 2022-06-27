@@ -1,33 +1,28 @@
 //Original code in: https://github.com/Skyrat-SS13/Vesta.Bay/blob/dev/modular_boh/code/modules/species/shell/shell.dm
 
 /datum/robolimb/veymed
-	allowed_bodytypes = list(SPECIES_HUMAN, SPECIES_IPC, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_SHELL)
+	allowed_bodytypes = list(SPECIES_HUMAN, SPECIES_IPC, SPECIES_SHELL)
 
 /datum/species/machine/shell
 	name = SPECIES_SHELL
 	name_plural = "shells"
 
-	description = "Created in 2296 century by Way-Med Corporation, first crude Shell IPC become a new milestone \
+	description = "Created in 2296 century by Vey-Med Corporation, first crude Shell IPC become a new milestone \
 	in the history of human robotics. There a very little Free Shells, that managed to buy themselves, because of \
-	their astronomical market price, and quite a lot of them managed to break free by themselves,making them illegal \
-	and criminal. Some of Rogue Shell decided to live just like humans, and there is even human - illigal - groups \
-	that helps them to pass medical checks and abtain documents for their own pesonal gain."
-	/*
-	description = "A relatively new generation of Integrated Positronic Chassis, Shell IPCs fill the niche for convincing mimicry of \
-	humans at a glance. Mass-produced models are known to be similar to their predecessors in acting, with human-like articulation \
-	but robotic personalities. Some high-end or custom made models (both of which are of ludicrous value), are nearly indistingishable \
-	from humans in most regards, however still share the same ''logical'' thinking of a machine at their core."
-	*/
+	their astronomical market price, and quite a lot of them managed to break free by themselves, making them illegal \
+	and criminal. Some of Rogue Shell decided to live just like humans, and there is even human - illegals - groups \
+	that helps them to pass medical checks and obtain documents for their own personal gain."
+
 	cyborg_noun = null
 
 	preview_icon = 'icons/mob/human_races/species/human/preview.dmi'
 
-	unarmed_types = list(/datum/unarmed_attack/punch, /datum/unarmed_attack/kick, /datum/unarmed_attack/stomp)
+	unarmed_types = list(/datum/unarmed_attack/punch, /datum/unarmed_attack/kick, /datum/unarmed_attack/stomp, /datum/unarmed_attack/bite)
 	rarity_value = 2
 	strength = STR_HIGH
 
 	min_age = 1
-	max_age = 14
+	max_age = 15
 
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
@@ -46,8 +41,9 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_UNDERWEAR | HAS_EYE_COLOR | HAS_SKIN_TONE_NORMAL | HAS_LIPS //IPCs can wear undies too :)
 
-	blood_color = "#75c6f4"
-	flesh_color = "#575757"
+	blood_color = "#61b6de"
+	show_ssd = "fast asleep"
+	show_coma = "completely comatose"
 
 	has_organ = list(
 		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
@@ -83,11 +79,12 @@
 			FACTION_FREETRADE,
 			FACTION_XYNERGY,
 			FACTION_FLEET,
+			FACTION_ARMY,
 			FACTION_EXPEDITIONARY,
-			FACTION_OTHER,
 			FACTION_SPACECOPS,
 			FACTION_CORPORATE,
-			FACTION_INDIE_CONFED
+			FACTION_INDIE_CONFED,
+			FACTION_OTHER
 		)
 	)
 
@@ -99,13 +96,6 @@
 
 	brute_mod =      1.2
 	burn_mod =       1.6
-
-/datum/species/machine/shell/handle_death(var/mob/living/carbon/human/H)
-	..()
-	if(istype(H.wear_mask,/obj/item/clothing/mask/monitor))
-		var/obj/item/clothing/mask/monitor/M = H.wear_mask
-		M.monitor_state_index = "blank"
-		M.update_icon()
 
 /datum/species/machine/shell/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	var/obj/item/organ/external/E = org

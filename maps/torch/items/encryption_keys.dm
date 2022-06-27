@@ -23,6 +23,11 @@
 	icon_state = "nt_cypherkey"
 	channels = list("Science" = 1)
 
+/obj/item/device/encryptionkey/headset_modsci
+	name = "medical science encryption key"
+	icon_state = "nt_cypherkey"
+	channels = list("Science" = 1, "Medical" = 1)
+
 /obj/item/device/encryptionkey/headset_torchcl
 	name = "corporate liaison radio encryption key"
 	icon_state = "nt_cypherkey"

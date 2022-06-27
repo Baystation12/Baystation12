@@ -1027,10 +1027,10 @@
 	name = "\improper Telecoms Storage"
 	icon_state = "tcomsatstore"
 
-// Borg Upload
+// Borg Upload ((now synth's storage -- evie))
 
 /area/synth/borg_upload
-	name = "\improper Cyborg Upload Chamber"
+	name = "\improper Synthetic Storage"
 	icon_state = "ai_upload"
 	ambience = list('sound/ambience/ambimalf.ogg')
 	req_access = list(access_ai_upload)

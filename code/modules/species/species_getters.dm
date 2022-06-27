@@ -48,15 +48,15 @@
 		return
 
 	if (H.key)
-		return ((H && H.isSynthetic()) ? "flashing a 'system offline' glyph on their monitor" : show_ssd)
+		return ((H && H.isSynthetic() && (H.get_species() == SPECIES_IPC == SPECIES_SHELL)) ? "flashing a 'system offline' glyph on their monitor" : show_ssd)
 	else
-		return ((H && H.isSynthetic()) ? "displaying a blue screen on their monitor indicating total system failure" : show_coma)
+		return ((H && H.isSynthetic() && (H.get_species() == SPECIES_SHELL)) ? "displaying a blue screen on their monitor indicating total system failure" : show_coma)
 
 /datum/species/proc/get_blood_colour(var/mob/living/carbon/human/H)
-	return ((H && H.isSynthetic()) ? SYNTH_BLOOD_COLOUR : blood_color)
+	return ((H && H.isSynthetic() && (H.get_species() != SPECIES_SHELL)) ? SYNTH_BLOOD_COLOUR : blood_color)
 
 /datum/species/proc/get_flesh_colour(var/mob/living/carbon/human/H)
-	return ((H && H.isSynthetic()) ? SYNTH_FLESH_COLOUR : flesh_color)
+	return ((H && H.isSynthetic() && (H.get_species() != SPECIES_SHELL)) ? SYNTH_FLESH_COLOUR : flesh_color)
 
 /datum/species/proc/get_environment_discomfort(var/mob/living/carbon/human/H, var/msg_type)
 

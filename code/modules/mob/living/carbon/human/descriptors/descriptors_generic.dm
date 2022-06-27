@@ -21,7 +21,17 @@
 		"towering over you"
 		)
 	var/list/scale_effect = list(
-		SPECIES_HUMAN = list(-7, -4, 0, 4, 7)
+		SPECIES_HUMAN = list(-7, -4, 0, 4, 7),
+		SPECIES_VATGROWN = list(-7, -4, 0, 4, 7),
+		SPECIES_SPACER = list(-7, -4, 0, 4, 7),
+		SPECIES_GRAVWORLDER = list(-7, -4, 0, 4, 7),
+		SPECIES_MULE = list(-7, -4, 0, 4, 7),
+		SPECIES_SHELL = list(-7, -4, 0, 4, 7),
+		SPECIES_IPC = list(-7, -4, 0, 4, 7),
+		SPECIES_UNATHI = list(-7, -4, 0, 4, 7),
+		SPECIES_YEOSA = list(-7, -4, 0, 4, 7),
+		SPECIES_SKRELL = list(-7, -4, 0, 4, 7),
+		SPECIES_TRITONIAN = list(-7, -4, 0, 4, 7),
 	)
 
 /datum/mob_descriptor/build

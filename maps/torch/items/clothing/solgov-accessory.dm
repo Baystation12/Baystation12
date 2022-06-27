@@ -271,6 +271,7 @@ badges
 	var/owner_name
 	var/owner_branch
 
+
 /obj/item/clothing/accessory/badge/solgov/tags/proc/loadout_setup(mob/M)
 	set_name(M.real_name)
 	set_desc(M)
@@ -284,6 +285,15 @@ badges
 	var/decl/cultural_info/culture = H.get_cultural_value(TAG_RELIGION)
 	var/religion = culture ? culture.name : "Unset"
 	desc = "[initial(desc)]\nName: [H.real_name] ([H.get_species()])[H.char_branch ? "\nBranch: [H.char_branch.name]" : ""]\nReligion: [religion]\nBlood type: [H.b_type]"
+
+/obj/item/clothing/accessory/badge/solgov/synthetic
+	name = "\improper synthetic's badge"
+	desc = "A red leather-backed gold badge with silver 'SYNTH' letters written on it, displaying advanced EXO Corporative Shell IPC."
+	icon = 'maps/torch/icons/obj/obj_accessories_solgov.dmi'
+	icon_state = "solbadge"
+	slot_flags = SLOT_BELT | SLOT_TIE | ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
+	slot = ACCESSORY_SLOT_RANK
+
 
 /obj/item/clothing/accessory/badge/solgov/representative
 	name = "representative's badge"

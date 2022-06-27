@@ -623,7 +623,7 @@
 /mob/proc/is_mechanical()
 	if(mind && (mind.assigned_role == "Robot" || mind.assigned_role == "AI"))
 		return 1
-	return istype(src, /mob/living/silicon) || get_species() == SPECIES_IPC
+	return istype(src, /mob/living/silicon) || get_species() == SPECIES_IPC || get_species() == SPECIES_SHELL
 
 /mob/proc/is_ready()
 	return client && !!mind

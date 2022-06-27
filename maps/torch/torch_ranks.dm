@@ -302,13 +302,15 @@
 	rank_types = list(
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/civ/synthetic
+		/datum/mil_rank/civ/synthetic,
+		/datum/mil_rank/civ/exo_synth
 	)
 
 	spawn_rank_types = list(
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/civ/synthetic
+		/datum/mil_rank/civ/synthetic,
+		/datum/mil_rank/civ/exo_synth
 	)
 
 /datum/mil_branch/solgov
@@ -712,6 +714,12 @@
 
 /datum/mil_rank/civ/synthetic
 	name = "Synthetic"
+	name_short = "Synth"
+
+/datum/mil_rank/civ/exo_synth
+	name = "EXO Synthetic"
+	name_short = "Synth"
+	accessory = list(/obj/item/clothing/accessory/badge/solgov/synthetic)
 
 /*
  *  SolGov Employees

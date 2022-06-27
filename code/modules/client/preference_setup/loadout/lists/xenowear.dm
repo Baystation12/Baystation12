@@ -98,7 +98,7 @@
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/xyn_machine
 	slot = slot_wear_suit
 	sort_category = "Xenowear"
-	whitelisted = list(SPECIES_IPC)
+	whitelisted = list(SPECIES_IPC, SPECIES_SHELL)
 
 // Misc clothing
 /datum/gear/uniform/harness

@@ -59,7 +59,7 @@
 		melee = ARMOR_MELEE_MINOR,
 		bio = ARMOR_BIO_MINOR
 		)
-	species_restricted = list(SPECIES_IPC)
+	species_restricted = list(SPECIES_IPC, SPECIES_SHELL)
 
 /obj/item/clothing/suit/storage/toggle/labcoat/foundation
 	name = "\improper Foundation labcoat"
