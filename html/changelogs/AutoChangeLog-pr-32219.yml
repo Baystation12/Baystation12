@@ -1,0 +1,7 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: The red, yellow, and green indicator lights on gas canisters now update
+      at roughly 30% and 60% of the effective maximum pressure (15,000 kPa). This
+      means that canisters will show red if below ~5,000, yellow if below ~10,000,
+      and green above those values.
