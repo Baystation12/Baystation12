@@ -199,7 +199,7 @@ default behaviour is:
 	if(statpanel("Status"))
 		stat("Intent:", "[a_intent]")
 		stat("Move Mode:", "[move_intent.name]")
-		var/obj/item/device/gps/G = get_active_hand()
+		var/obj/item/device/gps/G = locate() in src
 		if(istype(G))
 			stat("Coordinates:", "[G.fetch_coordinates()]")
 
