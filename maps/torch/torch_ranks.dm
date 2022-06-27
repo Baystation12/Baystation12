@@ -295,7 +295,6 @@
 
 /datum/mil_branch/civilian
 	name = "Civilian"
-	name_short = "Civ"
 	email_domain = "freemail.net"
 	allow_custom_email = TRUE
 
@@ -706,9 +705,11 @@
 
 /datum/mil_rank/civ/civ
 	name = "Civilian"
+	name_short = "Civ"
 
 /datum/mil_rank/civ/contractor
 	name = "Contractor"
+	name_short = "Civ"
 
 /datum/mil_rank/civ/synthetic
 	name = "Synthetic"
@@ -717,6 +718,10 @@
 /datum/mil_rank/civ/exo_synth
 	name = "EXO Synthetic"
 	name_short = "Synth"
+	accessory = list(/obj/item/clothing/accessory/badge/solgov/synthetic)
+
+/datum/mil_rank/civ/exo_synth
+	name = "EXO Synthetic"
 	accessory = list(/obj/item/clothing/accessory/badge/solgov/synthetic)
 
 /*

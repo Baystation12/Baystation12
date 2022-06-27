@@ -35,12 +35,12 @@
 	return "You are the Workplace Liaison. You are a civilian employee of EXO, the Expeditionary Corps Organisation, the government-owned corporate conglomerate that partially funds the Torch. You are on board the vessel to promote corporate interests and protect the rights of the contractors on board as their union leader. You are not internal affairs. You advise command on corporate and union matters and contractors on their rights and obligations. Maximise profit. Be the shady corporate shill you always wanted to be."
 
 /datum/job/synthetic
-	title = "EXO Synth"
+	title = "Synthetic"
 	supervisors = "The SEV Torch's acting command offcer, it's regulations and laws of SCG."
 	department = "Support"
 	department_flag = SPT
 	minimal_player_age = 14
-	economic_power = 1
+	economic_power = 0
 	ideal_character_age = 1
 	minimum_character_age = list(SPECIES_SHELL = 1)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/synth
@@ -58,28 +58,28 @@
 	)
 	use_species_whitelist = SPECIES_SHELL
 
-	min_skill = list(   SKILL_COMBAT      = SKILL_BASIC,
+	min_skill = list(   SKILL_COMBAT      = SKILL_PROF,
 						SKILL_WEAPONS	  = SKILL_NONE,
 
-						SKILL_BUREAUCRACY  = SKILL_ADEPT,
-						SKILL_FINANCE      = SKILL_ADEPT,
-						SKILL_EVA          = SKILL_EXPERT,
+						SKILL_BUREAUCRACY  = SKILL_PROF,
+						SKILL_FINANCE      = SKILL_EXPERT,
+						SKILL_EVA          = SKILL_PROF,
 						SKILL_MECH         = HAS_PERK,
-						SKILL_PILOT        = SKILL_EXPERT,
-						SKILL_HAULING      = SKILL_EXPERT,
+						SKILL_PILOT        = SKILL_PROF,
+						SKILL_HAULING      = SKILL_PROF,
 						SKILL_COMPUTER     = SKILL_PROF,
-						SKILL_BOTANY       = SKILL_EXPERT,
-						SKILL_COOKING      = SKILL_EXPERT,
-						SKILL_FORENSICS    = SKILL_EXPERT,
-						SKILL_CONSTRUCTION = SKILL_EXPERT,
+						SKILL_BOTANY       = SKILL_PROF,
+						SKILL_COOKING      = SKILL_PROF,
+						SKILL_FORENSICS    = SKILL_PROF,
+						SKILL_CONSTRUCTION = SKILL_PROF,
 						SKILL_ELECTRICAL   = SKILL_PROF,
-						SKILL_ATMOS        = SKILL_EXPERT,
-						SKILL_ENGINES      = SKILL_EXPERT,
-						SKILL_DEVICES      = SKILL_EXPERT,
-						SKILL_SCIENCE      = SKILL_EXPERT,
-						SKILL_MEDICAL      = SKILL_EXPERT,
-						SKILL_ANATOMY      = SKILL_EXPERT,
-						SKILL_CHEMISTRY    = SKILL_EXPERT)
+						SKILL_ATMOS        = SKILL_PROF,
+						SKILL_ENGINES      = SKILL_PROF,
+						SKILL_DEVICES      = SKILL_PROF,
+						SKILL_SCIENCE      = SKILL_PROF,
+						SKILL_MEDICAL      = SKILL_PROF,
+						SKILL_ANATOMY      = SKILL_PROF,
+						SKILL_CHEMISTRY    = SKILL_PROF)
 
 	skill_points = 0
 
