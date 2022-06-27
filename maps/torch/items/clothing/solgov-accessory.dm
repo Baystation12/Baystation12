@@ -323,6 +323,11 @@ armbands
 	name = "box of spare security armbands"
 	desc = "A box full of security armbands. For use in emergencies when provisional security personnel are needed."
 	startswith = list(/obj/item/clothing/accessory/armband/solgov/ma = 5)
+
+/obj/item/storage/box/armband/red_sec
+	name = "box of spare red security armbands"
+	desc = "A box full of red security armbands. For use in emergencies when provisional security peronnel are needed."
+	startswith = list(/obj/item/clothing/accessory/armband = 5)
 //proxima code end
 
 /*****************

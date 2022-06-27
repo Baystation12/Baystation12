@@ -44,6 +44,7 @@
 		/obj/item/device/camera,
 		//proxima code start,
 		/obj/item/device/remote_device/research_director,
+		/obj/item/storage/box/encryptionkey/science,
 		//proxima code end,
 		/obj/item/material/clipboard/steel,
 		/obj/item/taperoll/research,

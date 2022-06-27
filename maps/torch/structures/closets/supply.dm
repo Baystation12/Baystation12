@@ -70,6 +70,7 @@
 		/obj/item/device/flash,
 		//proxima code start,
 		/obj/item/device/remote_device/quartermaster,
+		/obj/item/storage/box/encryptionkey/supply,
 		//proxima code end,
 		/obj/item/device/megaphone,
 		/obj/item/device/holowarrant,

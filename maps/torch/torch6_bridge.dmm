@@ -4451,6 +4451,7 @@
 	dir = 6
 	},
 /obj/random_multi/single_item/memo_engineering,
+/obj/item/storage/box/encryptionkey/engineering,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/ce)
 "iU" = (
@@ -7327,6 +7328,7 @@
 /obj/item/pen/blue,
 /obj/random/clipboard,
 /obj/item/storage/medical_lolli_jar,
+/obj/item/storage/box/encryptionkey/medical,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
 "qw" = (
@@ -12151,6 +12153,8 @@
 /obj/item/crowbar/prybar,
 /obj/item/device/binoculars,
 /obj/item/storage/box/armband/sec,
+/obj/item/storage/box/encryptionkey/security,
+/obj/item/storage/box/armband/red_sec,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/cos)
 "Fg" = (
