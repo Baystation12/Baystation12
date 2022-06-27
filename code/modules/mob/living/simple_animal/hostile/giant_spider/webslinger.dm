@@ -119,9 +119,10 @@
 	if (istype(P, /obj/item/projectile/webball))
 		add_stack()
 
-/obj/aura/web/hitby(obj/O, mob/living/M)
+/obj/aura/web/hitby(atom/movable/AM, datum/thrownthing/TT)
 	. = ..()
-	remove_webbing(M)
+	if (isliving(AM))
+		remove_webbing(AM)
 
 /obj/aura/web/proc/remove_webbing(mob/living/M)
 	if (!M)
