@@ -53,12 +53,10 @@
 /area/exoplanet/grass
 	base_turf = /turf/simulated/floor/exoplanet/grass
 	ambience = list('sound/effects/wind/wind_2_1.ogg','sound/effects/wind/wind_2_2.ogg','sound/effects/wind/wind_3_1.ogg','sound/effects/wind/wind_4_1.ogg','sound/ambience/eeriejungle2.ogg','sound/ambience/eeriejungle1.ogg')
+	forced_ambience = list(
+		'sound/ambience/jungle.ogg'
+	)
 
-/area/exoplanet/grass/play_ambience(var/mob/living/L)
-	..()
-	if(!L.ear_deaf && L.client && !L.client.ambience_playing)
-		L.client.ambience_playing = TRUE
-		L.playsound_local(get_turf(L),sound('sound/ambience/jungle.ogg', repeat = 1, wait = 0, volume = 25, channel = GLOB.ambience_sound_channel))
 
 /datum/random_map/noise/exoplanet/grass
 	descriptor = "grass exoplanet"

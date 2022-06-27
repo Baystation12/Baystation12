@@ -1,8 +1,11 @@
 GLOBAL_DATUM_INIT(sound_channels, /repository/sound_channels, new)
 GLOBAL_VAR_INIT(lobby_sound_channel, GLOB.sound_channels.RequestChannel("LOBBY"))
 GLOBAL_VAR_INIT(vote_sound_channel, GLOB.sound_channels.RequestChannel("VOTE"))
-GLOBAL_VAR_INIT(ambience_sound_channel, GLOB.sound_channels.RequestChannel("AMBIENCE"))
 GLOBAL_VAR_INIT(admin_sound_channel, GLOB.sound_channels.RequestChannel("ADMIN_FUN"))
+
+GLOBAL_VAR_INIT(ambience_channel_vents, GLOB.sound_channels.RequestChannel("AMBIENCE_VENTS"))
+GLOBAL_VAR_INIT(ambience_channel_forced, GLOB.sound_channels.RequestChannel("AMBIENCE_FORCED"))
+GLOBAL_VAR_INIT(ambience_channel_common, GLOB.sound_channels.RequestChannel("AMBIENCE_COMMON"))
 
 /repository/sound_channels
 	var/datum/stack/available_channels

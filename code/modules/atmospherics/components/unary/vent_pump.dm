@@ -97,15 +97,19 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/Initialize()
 	. = ..()
+	var/area/area = get_area(src)
+	if (area)
+		LAZYADD(area.vent_pumps, src)
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	icon = null
 
 /obj/machinery/atmospherics/unary/vent_pump/Destroy()
-	var/area/A = get_area(src)
-	if(A)
-		A.air_vent_info -= id_tag
-		A.air_vent_names -= id_tag
-	. = ..()
+	var/area/area = get_area(src)
+	if(area)
+		area.air_vent_info -= id_tag
+		area.air_vent_names -= id_tag
+		LAZYREMOVE(area.vent_pumps, src)
+	return ..()
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume
 	name = "Large Air Vent"

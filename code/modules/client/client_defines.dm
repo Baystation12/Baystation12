@@ -22,8 +22,13 @@
 		///////////////
 		//SOUND STUFF//
 		///////////////
-	var/ambience_playing= null
-	var/played			= 0
+
+	/// Whether or not the client is currently playing the "ship hum" ambience sound.
+	var/playing_vent_ambience = FALSE
+
+	/// The next threshold time for the client to be able to play basic ambience sounds.
+	var/next_ambience_time = 0
+
 
 		////////////
 		//SECURITY//

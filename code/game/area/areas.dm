@@ -1,14 +1,17 @@
 // Areas.dm
 
+/area
+	/// Integer. Global counter for `uid` values assigned to areas. Increments by one for each new area.
+	var/static/global_uid = 0
 
+	/// Integer. The area's unique ID number. set to the value of `global_uid` + 1 when the area is created.
+	var/uid
 
-// ===
-/// Integer. Global counter for `uid` values assigned to areas. Increments by one for each new area.
-/area/var/static/global_uid = 0
-/// Integer. The area's unique ID number. set to the value of `global_uid` + 1 when the area is created.
-/area/var/uid
-/// Bitflag (Any of `AREA_FLAG_*`). See `code\__defines\misc.dm`.
-/area/var/area_flags
+	/// Bitflag (Any of `AREA_FLAG_*`). See `code\__defines\misc.dm`.
+	var/area_flags
+
+	/// A lazy list of vent pumps currently in the area
+	var/list/obj/machinery/atmospherics/unary/vent_pump/vent_pumps
 
 /area/New()
 	icon_state = ""
@@ -231,8 +234,6 @@
 		M.set_emergency_lighting(enable)
 
 
-var/global/list/mob/living/forced_ambiance_list = new
-
 /area/Entered(A)
 	..()
 	if(!istype(A,/mob/living))	return
@@ -252,42 +253,46 @@ var/global/list/mob/living/forced_ambiance_list = new
 	play_ambience(L)
 	L.lastarea = newarea
 
-/**
- * Handles playing of ambient sounds for a given mob, including ship humming and any ambience sounds defined in the area.
- *
- * **Parameters**:
- * - `L` Instance of `/mob/living`. The mob to play the sound file to.
- */
-/area/proc/play_ambience(var/mob/living/L)
-	// Ambience goes down here -- make sure to list each area seperately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
-	if(!(L && L.client && L.get_preference_value(/datum/client_preference/play_ambiance) == GLOB.PREF_YES))	return
 
-	var/turf/T = get_turf(L)
-	var/hum = 0
-	if(L.get_sound_volume_multiplier() >= 0.2 && !always_unpowered && power_environ)
-		for(var/obj/machinery/atmospherics/unary/vent_pump/vent in src)
-			if(vent.can_pump())
-				hum = 1
+/// Handles playing ambient sounds to a given mob, including ship hum.
+/area/proc/play_ambience(mob/living/living)
+	if (!living?.client)
+		return
+	if (living.get_preference_value(/datum/client_preference/play_ambiance) != GLOB.PREF_YES)
+		return
+	var/turf/turf = get_turf(living)
+	if (!turf)
+		return
+
+	var/vent_ambience
+	if (!always_unpowered && power_environ && length(vent_pumps) && living.get_sound_volume_multiplier() > 0.2)
+		for (var/obj/machinery/atmospherics/unary/vent_pump/vent as anything in vent_pumps)
+			if (vent.can_pump())
+				vent_ambience = TRUE
 				break
-	if(hum)
-		if(!L.client.ambience_playing)
-			L.client.ambience_playing = 1
-			L.playsound_local(T,sound('sound/ambience/shipambience.ogg', repeat = 1, wait = 0, volume = 20, channel = GLOB.ambience_sound_channel))
+	var/client/client = living.client
+	if (vent_ambience)
+		if (!client.playing_vent_ambience)
+			var/sound = sound('sound/ambience/shipambience.ogg', repeat = TRUE, wait = 0, volume = 10, channel = GLOB.ambience_channel_vents)
+			living.playsound_local(turf, sound)
+			client.playing_vent_ambience = TRUE
 	else
-		if(L.client.ambience_playing)
-			L.client.ambience_playing = 0
-			sound_to(L, sound(null, channel = GLOB.ambience_sound_channel))
+		sound_to(living, sound(null, channel = GLOB.ambience_channel_vents))
+		client.playing_vent_ambience = FALSE
 
-	if(L.lastarea != src)
-		if(LAZYLEN(forced_ambience))
-			forced_ambiance_list |= L
-			L.playsound_local(T,sound(pick(forced_ambience), repeat = 1, wait = 0, volume = 25, channel = GLOB.lobby_sound_channel))
-		else	//stop any old area's forced ambience, and try to play our non-forced ones
-			sound_to(L, sound(null, channel = GLOB.lobby_sound_channel))
-			forced_ambiance_list -= L
-	if(ambience.len && prob(5) && (world.time >= L.client.played + 3 MINUTES))
-		L.playsound_local(T, sound(pick(ambience), repeat = 0, wait = 0, volume = 15, channel = GLOB.lobby_sound_channel))
-		L.client.played = world.time
+	if (living.lastarea != src)
+		if (forced_ambience)
+			var/sound = sound(pick(forced_ambience), repeat = TRUE, wait = 0, volume = 25, channel = GLOB.ambience_channel_forced)
+			living.playsound_local(turf, sound)
+		else
+			sound_to(living, sound(null, channel = GLOB.ambience_channel_forced))
+
+	var/time = world.time
+	if (ambience && time > client.next_ambience_time)
+		var/sound = sound(pick(ambience), repeat = FALSE, wait = 0, volume = 15, channel = GLOB.ambience_channel_common)
+		living.playsound_local(turf, sound)
+		client.next_ambience_time = time + rand(3, 5) MINUTES
+
 
 /**
  * Sets the area's `has_gravity` state.
