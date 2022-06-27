@@ -18,7 +18,11 @@
 	var/temperature_resistance = 1000 + T0C
 	volume = 1000
 	interact_offline = 1 // Allows this to be used when not in powered area.
-	var/update_flag = 0
+
+	var/const/CANISTER_PRESSURE_EMPTY = ONE_ATMOSPHERE
+	var/const/CANISTER_PRESSURE_LOW = 50 * ONE_ATMOSPHERE
+	var/const/CANISTER_PRESSURE_MID = 100 * ONE_ATMOSPHERE
+	var/const/CANISTER_PRESSURE_HIGH = 150 * ONE_ATMOSPHERE
 
 /obj/machinery/portable_atmospherics/canister/drain_power()
 	return -1
@@ -115,68 +119,31 @@
 	canister_type = /obj/machinery/portable_atmospherics/canister/hydrogen
 
 
-
-
-/obj/machinery/portable_atmospherics/canister/proc/check_change()
-	var/old_flag = update_flag
-	update_flag = 0
-	if(holding)
-		update_flag |= 1
-	if(connected_port)
-		update_flag |= 2
-
-	var/tank_pressure = return_pressure()
-	if(tank_pressure < 10)
-		update_flag |= 4
-	else if(tank_pressure < ONE_ATMOSPHERE)
-		update_flag |= 8
-	else if(tank_pressure < 15*ONE_ATMOSPHERE)
-		update_flag |= 16
-	else
-		update_flag |= 32
-
-	if(update_flag == old_flag)
-		return 1
-	else
-		return 0
-
 /obj/machinery/portable_atmospherics/canister/on_update_icon()
-/*
-update_flag
-1 = holding
-2 = connected_port
-4 = tank_pressure < 10
-8 = tank_pressure < ONE_ATMOS
-16 = tank_pressure < 15*ONE_ATMOS
-32 = tank_pressure go boom.
-*/
-
-	if (src.destroyed)
+	if (destroyed)
 		overlays.Cut()
-		src.icon_state = text("[]-1", src.canister_color)
+		icon_state = "[canister_color]-1"
 		return
 
-	if(icon_state != "[canister_color]")
+	if (icon_state != "[canister_color]")
 		icon_state = "[canister_color]"
-
-	if(check_change()) //Returns 1 if no change needed to icons.
-		return
 
 	overlays.Cut()
 
-	if(update_flag & 1)
+	if (holding)
 		overlays += "can-open"
-	if(update_flag & 2)
+	if (connected_port)
 		overlays += "can-connector"
-	if(update_flag & 4)
+
+	var/tank_pressure = return_pressure()
+	if (tank_pressure <= CANISTER_PRESSURE_EMPTY)
 		overlays += "can-o0"
-	if(update_flag & 8)
+	else if (tank_pressure <= CANISTER_PRESSURE_LOW)
 		overlays += "can-o1"
-	else if(update_flag & 16)
+	else if (tank_pressure <= CANISTER_PRESSURE_MID)
 		overlays += "can-o2"
-	else if(update_flag & 32)
+	else
 		overlays += "can-o3"
-	return
 
 /obj/machinery/portable_atmospherics/canister/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > temperature_resistance)
