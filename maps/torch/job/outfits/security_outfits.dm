@@ -65,8 +65,10 @@
 	uniform = /obj/item/clothing/under/solgov/utility/army/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 
+
+ /*//maybe later //Drakon
 /decl/hierarchy/outfit/job/torch/crew/security/maa/agent
 	name = OUTFIT_JOB_NAME("Master at Arms - SFP Agent")
 	uniform = /obj/item/clothing/under/det
 	suit = /obj/item/clothing/suit/storage/toggle/agent_jacket
-	shoes = /obj/item/clothing/shoes/dutyboots
+	shoes = /obj/item/clothing/shoes/dutyboots */

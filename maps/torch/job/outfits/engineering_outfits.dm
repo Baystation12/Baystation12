@@ -59,3 +59,10 @@
 	id_types = list(/obj/item/card/id/torch/contractor/engineering/roboticist)
 	shoes = /obj/item/clothing/shoes/dutyboots
 	pda_type = /obj/item/modular_computer/pda/roboticist
+
+/decl/hierarchy/outfit/job/torch/crew/engineering/roboticistarmy
+	name = OUTFIT_JOB_NAME("Roboticist - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/engineering
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_types = list(/obj/item/card/id/torch/contractor/engineering/roboticist)
+	pda_type = /obj/item/modular_computer/pda/roboticist
