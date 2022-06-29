@@ -124,7 +124,6 @@
 		/obj/item/clothing/accessory/storage/holster/knife/polymer,
 		/obj/item/material/knife/combat,
 		/obj/item/storage/firstaid/individual/military,
-		/obj/item/gun/energy/stunrevolver/secure,
 		/obj/item/storage/belt/holster/security,
 		/obj/item/clothing/accessory/storage/webbing_large,
 		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/security, /obj/item/storage/backpack/satchel/sec)),
