@@ -104,16 +104,19 @@
 /datum/gear/tactical/pcarrier/navy
 	display_name = "navy blue plate carrier"
 	path = /obj/item/clothing/suit/armor/pcarrier/navy
-	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/civilian)
+	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/army, /datum/mil_branch/civilian)
 
 /datum/gear/tactical/pcarrier/misc
-	display_name = "miscellaneous plate carrier selection"
+	display_name = "plate carrier selection"
 	allowed_roles = ARMORED_ROLES
 	allowed_branches = list(/datum/mil_branch/army, /datum/mil_branch/civilian)
 
 /datum/gear/tactical/pcarrier/misc/New()
 	..()
 	var/armors = list()
+	//armors["black plate carrier"] = /obj/item/clothing/suit/armor/pcarrier
+	//armors["navy blue plate carrier"] = /obj/item/clothing/suit/armor/pcarrier/navy
+	armors["blue plate carrier"] = /obj/item/clothing/suit/armor/pcarrier/blue
 	armors["green plate carrier"] = /obj/item/clothing/suit/armor/pcarrier/green
 	armors["tan plate carrier"] = /obj/item/clothing/suit/armor/pcarrier/tan
 	gear_tweaks += new/datum/gear_tweak/path(armors)

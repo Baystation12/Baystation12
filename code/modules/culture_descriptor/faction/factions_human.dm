@@ -26,10 +26,10 @@
 
 /decl/cultural_info/faction/scg/army
 	name = FACTION_ARMY
-	description = "The Sol Central Government Army is the SCG's main land force. The Army is responsible for handling any ground conflicts and many peacekeeping missions that the SCG may be engaged in. \
-	Smaller than the Fleet, with only a partial full time component, much of the Army is composed of reservists and, in times of large scale war, \
-	is authorized to draft and integrate the regular Planetary Defence Forces (PDFs) in order to be able to scale up their military as-required. \
-	While not as famous or as glamorous as the Fleet the Army is never the less a respected part of the military, though one which is often looked down on by the Fleet because of their reliance on reservists."
+	description = "The Sol Central Government Marine Corps is the part of SCG's Army. \
+	The Marine Corps is responsible for handling any ground conflicts and many peacekeeping missions that the SCG may be engaged in. \
+	Marine Corps is much smaller than Fleet, thus less funded, but never had same low respect as Army force in general even after their failures during War of Gaia. \
+	Corps is created to serve with it's 'bigger brother' to assist in planetary missions."
 
 /decl/cultural_info/faction/torchco
 	name = FACTION_CORPORATE

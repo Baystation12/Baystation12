@@ -81,7 +81,7 @@
 				/datum/mil_rank/army/e1,
 				/datum/mil_rank/army/e2,
 				/datum/mil_rank/army/e3,
-				/datum/mil_rank/army/e4,
+				///datum/mil_rank/army/e4,
 				/datum/mil_rank/army/e4_alt,
 				/datum/mil_rank/army/e5,
 				/datum/mil_rank/army/e6,
@@ -110,7 +110,7 @@
 				/datum/mil_rank/army/e1,
 				/datum/mil_rank/army/e2,
 				/datum/mil_rank/army/e3,
-				/datum/mil_rank/army/e4,
+				///datum/mil_rank/army/e4,
 				/datum/mil_rank/army/e4_alt,
 				/datum/mil_rank/army/e5,
 				/datum/mil_rank/army/e6,
@@ -236,15 +236,15 @@
 						SKILL_EVA     = SKILL_BASIC)
 
 /datum/mil_branch/army
-	name = "Army"
-	name_short = "SCGA"
-	email_domain = "army.mil"
+	name = "Marine Corps"
+	name_short = "SCGM"
+	email_domain = "marine.mil"
 
 	rank_types = list(
 		/datum/mil_rank/army/e1,
 		/datum/mil_rank/army/e2,
 		/datum/mil_rank/army/e3,
-		/datum/mil_rank/army/e4,
+		///datum/mil_rank/army/e4,
 		/datum/mil_rank/army/e4_alt,
 		/datum/mil_rank/army/e5,
 		/datum/mil_rank/army/e6,
@@ -271,7 +271,7 @@
 		/datum/mil_rank/army/e1,
 		/datum/mil_rank/army/e2,
 		/datum/mil_rank/army/e3,
-		/datum/mil_rank/army/e4,
+		///datum/mil_rank/army/e4,
 		/datum/mil_rank/army/e4_alt,
 		/datum/mil_rank/army/e5,
 		/datum/mil_rank/army/e6,
@@ -555,28 +555,22 @@
  *  ====
  */
 /datum/mil_rank/army/e1
-	name = "Private Recruit"
-	name_short = "PVTR"
+	name = "Private"
+	name_short = "PVT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted)
 	sort_order = 1
 
 /datum/mil_rank/army/e2
-	name = "Private"
-	name_short = "PVT"
+	name = "Private First Class"
+	name_short = "PFC"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e2)
 	sort_order = 2
 
 /datum/mil_rank/army/e3
-	name = "Private First Class"
-	name_short = "PFC"
+	name = "Lance Corporal"
+	name_short = "LCPL"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e3)
 	sort_order = 3
-
-/datum/mil_rank/army/e4
-	name = "Specialist"
-	name_short = "SPC"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e4)
-	sort_order = 4
 
 /datum/mil_rank/army/e4_alt
 	name = "Corporal"
@@ -592,43 +586,43 @@
 
 /datum/mil_rank/army/e6
 	name = "Staff Sergeant"
-	name_short = "SSG"
+	name_short = "SSGT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e6)
 	sort_order = 6
 
 /datum/mil_rank/army/e7
-	name = "Sergeant First Class"
-	name_short = "SFC"
+	name = "Gunnery Sergeant"
+	name_short = "GYSGT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e7)
 	sort_order = 7
 
 /datum/mil_rank/army/e8
 	name = "Master Sergeant"
-	name_short = "MSG"
+	name_short = "MSGT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e8)
 	sort_order = 8
 
 /datum/mil_rank/army/e8_alt
 	name = "First Sergeant"
-	name_short = "1SG"
+	name_short = "1SGT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e8_alt)
 	sort_order = 8
 
 /datum/mil_rank/army/e9
 	name = "Sergeant Major"
-	name_short = "SGM"
+	name_short = "SGTMaj"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e9)
 	sort_order = 9
 
 /datum/mil_rank/army/e9_alt1
-	name = "Command Sergeant Major"
-	name_short = "CSM"
+	name = "Master Gunnery Sergeant"
+	name_short = "MGySGT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e9_alt1)
 	sort_order = 9
 
 /datum/mil_rank/army/e9_alt2
-	name = "Sergeant Major of the Army"
-	name_short = "SMA"
+	name = "Sergeant Major of the Corps"
+	name_short = "SgtMajMarCor"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e9_alt2)
 	sort_order = 9
 
@@ -645,8 +639,8 @@
 	sort_order = 12
 
 /datum/mil_rank/army/o3
-	name = "Army Captain"
-	name_short = "ACPT"
+	name = "Marine Captain"
+	name_short = "MarCPT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/officer/o3)
 	sort_order = 13
 
@@ -670,13 +664,13 @@
 
 /datum/mil_rank/army/o7
 	name = "Brigadier General"
-	name_short = "BG"
+	name_short = "BGen"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/flag)
 	sort_order = 17
 
 /datum/mil_rank/army/o8
 	name = "Major General"
-	name_short = "MG"
+	name_short = "MajGen"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/flag/o8)
 	sort_order = 18
 
@@ -693,8 +687,8 @@
 	sort_order = 20
 
 /datum/mil_rank/army/o10_alt
-	name = "General of the Army"
-	name_short = "GA"
+	name = "General of the Marine Corps"
+	name_short = "GenMarCor"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/flag/o10_alt)
 	sort_order = 20
 

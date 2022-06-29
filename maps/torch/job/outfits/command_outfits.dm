@@ -53,8 +53,8 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/command/cmo/army
-	name = OUTFIT_JOB_NAME("Chief Medical Officer - Army")
-	uniform = /obj/item/clothing/under/solgov/utility/army/medical
+	name = OUTFIT_JOB_NAME("Chief Medical Officer - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/army/urban/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer
@@ -77,8 +77,8 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/army
-	name = OUTFIT_JOB_NAME("Chief Engineer - Army")
-	uniform = /obj/item/clothing/under/solgov/utility/army/engineering
+	name = OUTFIT_JOB_NAME("Chief Engineer - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/army/urban/engineering
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/command/cos
@@ -99,8 +99,8 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/command/cos/army
-	name = OUTFIT_JOB_NAME("Chief of Security - Army")
-	uniform = /obj/item/clothing/under/solgov/utility/army/security
+	name = OUTFIT_JOB_NAME("Chief of Security - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/army/urban/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/passenger/workplace_liaison

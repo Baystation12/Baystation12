@@ -138,7 +138,7 @@
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/army/e3,
-		/datum/mil_rank/army/e4,
+		/datum/mil_rank/army/e4_alt,
 		/datum/mil_rank/army/e5
 	)
 	min_skill = list(   SKILL_EVA = SKILL_BASIC,
@@ -185,7 +185,7 @@
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/army/e3,
-		/datum/mil_rank/army/e4,
+		/datum/mil_rank/army/e4_alt,
 		/datum/mil_rank/army/e5
 	)
 	min_skill = list(   SKILL_EVA = SKILL_BASIC,

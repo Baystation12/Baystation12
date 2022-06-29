@@ -53,10 +53,10 @@
 /datum/gear/tactical/gorka_jacket/New()
 	..()
 	var/gorka_jacket = list()
-	gorka_jacket["light gorka uniform"] = /obj/item/clothing/suit/storage/toggle/gorka_jacket
+	gorka_jacket["light gorka jacket"] = /obj/item/clothing/suit/storage/toggle/gorka_jacket
 	gorka_jacket["old gorka jacket"] = /obj/item/clothing/suit/storage/toggle/gorka_jacket/old
-	gorka_jacket["gorka camouflage uniform"] = /obj/item/clothing/suit/storage/toggle/gorka_jacket/ss
-	gorka_jacket["tan gorka uniform"] = /obj/item/clothing/suit/storage/toggle/gorka_jacket/tan
+	gorka_jacket["camouflage gorka jacket"] = /obj/item/clothing/suit/storage/toggle/gorka_jacket/ss
+	gorka_jacket["tan gorka jacket"] = /obj/item/clothing/suit/storage/toggle/gorka_jacket/tan
 	gear_tweaks += new/datum/gear_tweak/path(gorka_jacket)
 
 /datum/gear/tactical/bdu

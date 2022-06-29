@@ -286,6 +286,24 @@ badges
 	var/religion = culture ? culture.name : "Unset"
 	desc = "[initial(desc)]\nName: [H.real_name] ([H.get_species()])[H.char_branch ? "\nBranch: [H.char_branch.name]" : ""]\nReligion: [religion]\nBlood type: [H.b_type]"
 
+//proxima coding.moment
+/obj/item/clothing/accessory/badge/solgov/tags/iccgn
+	name = "dog tags"
+	desc = "Plain identification tags made from a durable metal. They are stamped with a variety of informational details."
+	gender = PLURAL
+	icon_state = "tags"
+	badge_string = "Independent Colonial Confederation of Gilgamesh"
+	slot_flags = SLOT_MASK | SLOT_TIE
+
+
+/obj/item/clothing/accessory/badge/solgov/tags/iccgn/set_desc(mob/living/carbon/human/H)
+	if(!istype(H))
+		return
+	owner_name = H.real_name
+	var/decl/cultural_info/culture = H.get_cultural_value(TAG_RELIGION)
+	var/religion = culture ? culture.name : "Unset"
+	desc = "[initial(desc)]\nName: [H.real_name] ([H.get_species()])\nReligion: [religion]\nBlood type: [H.b_type]"
+
 /obj/item/clothing/accessory/badge/solgov/synthetic
 	name = "\improper synthetic's badge"
 	desc = "A red leather-backed gold badge with silver 'SYNTH' letters written on it, displaying advanced EXO Corporative Shell IPC."
@@ -752,17 +770,17 @@ ranks - marines
 	on_rolled = list("down" = "none")
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted
-	name = "ranks (E-1 private recruit)"
-	desc = "Insignia denoting the rank of Private Recruit."
+	name = "ranks (E-1 private)"
+	desc = "Insignia denoting the rank of Private."
 	icon_state = "armyrank_enlisted"
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e2
-	name = "ranks (E-2 private)"
-	desc = "Insignia denoting the rank of Private."
+	name = "ranks (E-2 private first class)"
+	desc = "Insignia denoting the rank of Private First Class."
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e3
-	name = "ranks (E-3 private first class)"
-	desc = "Insignia denoting the rank of Private First Class."
+	name = "ranks (E-3 lance corporal)"
+	desc = "Insignia denoting the rank of Lance Corporal."
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e4
 	name = "ranks (E-4 specialist)"
@@ -781,8 +799,8 @@ ranks - marines
 	desc = "Insignia denoting the rank of Staff Sergeant."
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e7
-	name = "ranks (E-7 sergeant first class)"
-	desc = "Insignia denoting the rank of Sergeant First Class."
+	name = "ranks (E-7 gunnery sergeant)"
+	desc = "Insignia denoting the rank of Gunnery Sergeant."
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e8
 	name = "ranks (E-8 master sergeant)"
@@ -797,12 +815,12 @@ ranks - marines
 	desc = "Insignia denoting the rank of Sergeant Major."
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e9_alt1
-	name = "ranks (E-9 command sergeant major)"
-	desc = "Insignia denoting the rank of Command Sergeant Major."
+	name = "ranks (E-9 master gunnery sergeant)"
+	desc = "Insignia denoting the rank of Master Gunnery Sergeant."
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e9_alt2
-	name = "ranks (E-9 sergeant major of the Army)"
-	desc = "Insignia denoting the rank of Sergeant Major of the Army."
+	name = "ranks (E-9 sergeant major of the corps)"
+	desc = "Insignia denoting the rank of Sergeant Major of the Corps."
 
 /obj/item/clothing/accessory/solgov/rank/army/officer
 	name = "ranks (O-1 second lieutenant)"
@@ -814,8 +832,8 @@ ranks - marines
 	desc = "Insignia denoting the rank of First Lieutenant."
 
 /obj/item/clothing/accessory/solgov/rank/army/officer/o3
-	name = "ranks (O-3 army captain)"
-	desc = "Insignia denoting the rank of Army Captain."
+	name = "ranks (O-3 marine captain)"
+	desc = "Insignia denoting the rank of Marine Captain."
 
 /obj/item/clothing/accessory/solgov/rank/army/officer/o4
 	name = "ranks (O-4 major)"
@@ -847,5 +865,5 @@ ranks - marines
 	desc = "Insignia denoting the rank of General."
 
 /obj/item/clothing/accessory/solgov/rank/army/flag/o10_alt
-	name = "ranks (O-10 general of the army)"
-	desc = "Insignia denoting the rank of General of the Army."
+	name = "ranks (O-10 general of the corps)"
+	desc = "Insignia denoting the rank of General of the Corps."

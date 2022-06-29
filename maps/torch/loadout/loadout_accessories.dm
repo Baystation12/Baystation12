@@ -39,6 +39,12 @@
 	path = /obj/item/clothing/accessory/badge/solgov/tags
 	custom_setup_proc = /obj/item/clothing/accessory/badge/solgov/tags/proc/loadout_setup
 
+/datum/gear/accessory/tags/iccgn
+	display_name = "ICCGN dog tags"
+	path = /obj/item/clothing/accessory/badge/solgov/tags/iccgn
+	custom_setup_proc = /obj/item/clothing/accessory/badge/solgov/tags/proc/loadout_setup
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps, /datum/mil_branch/solgov, /datum/mil_branch/civilian)
+
 /datum/gear/accessory/ec_scarf
 	display_name = "Expeditionary Corps scarf"
 	path = /obj/item/clothing/accessory/solgov/ec_scarf
