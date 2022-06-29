@@ -11074,6 +11074,11 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/foreport)
+"aMT" = (
+/obj/structure/disposalpipe/segment,
+/obj/machinery/hologram/holopad,
+/turf/simulated/floor/tiled,
+/area/security/detectives_office)
 "aMV" = (
 /obj/structure/disposalpipe/up,
 /obj/effect/floor_decal/industrial/warning,
@@ -38640,7 +38645,7 @@ adK
 qWE
 pVv
 nOO
-nOO
+aMT
 yeI
 mgb
 iVM
