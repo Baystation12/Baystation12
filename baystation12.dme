@@ -3212,6 +3212,7 @@
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\_maps.dm"
+#include "customs\code\eloncake.dm"
 #include "proxima\code\_helpers\colors.dm"
 #include "proxima\code\_helpers\_onclick\hud\_defines_ai.dm"
 #include "proxima\code\_helpers\_onclick\hud\ai_hud.dm"
