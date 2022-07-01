@@ -321,6 +321,94 @@
 	worn_state = "whiteservice"
 	siemens_coefficient = 0.9
 
+/obj/item/clothing/under/solgov/service/expeditionary
+	name = "expeditionary service uniform"
+	desc = "The service uniform of the SCG Expeditionary Corps in silver trim."
+	icon_state = "greydress"
+	worn_state = "greydress"
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
+		)
+
+/obj/item/clothing/under/solgov/service/expeditionary/engineering
+
+/obj/item/clothing/under/solgov/service/expeditionary/security
+
+/obj/item/clothing/under/solgov/service/expeditionary/medical
+
+/obj/item/clothing/under/solgov/service/expeditionary/supply
+
+/obj/item/clothing/under/solgov/service/expeditionary/service
+
+/obj/item/clothing/under/solgov/service/expeditionary/exploration
+
+/obj/item/clothing/under/solgov/service/expeditionary/research
+
+/obj/item/clothing/under/solgov/service/expeditionary/skirt
+	name = "expeditionary service skirt"
+	desc = "A feminine version of the SCG Expeditionary Corps service uniform in silver trim."
+	icon_state = "greydressfem"
+	worn_state = "greydressfem"
+
+/obj/item/clothing/under/solgov/service/expeditionary/skirt/engineering
+
+/obj/item/clothing/under/solgov/service/expeditionary/skirt/security
+
+/obj/item/clothing/under/solgov/service/expeditionary/skirt/medical
+
+/obj/item/clothing/under/solgov/service/expeditionary/skirt/supply
+
+/obj/item/clothing/under/solgov/service/expeditionary/skirt/service
+
+/obj/item/clothing/under/solgov/service/expeditionary/skirt/exploration
+
+/obj/item/clothing/under/solgov/service/expeditionary/skirt/research
+
+/obj/item/clothing/under/solgov/service/expeditionary/command
+	name = "expeditionary officer's service uniform"
+	desc = "The service uniform of the SCG Expeditionary Corps in gold trim."
+	icon_state = "greydress_com"
+	worn_state = "greydress_com"
+/obj/item/clothing/under/solgov/service/expeditionary/command/command
+	accessories = list(/obj/item/clothing/accessory/solgov/department/command/jumper)
+
+/obj/item/clothing/under/solgov/service/expeditionary/command/engineering
+
+/obj/item/clothing/under/solgov/service/expeditionary/command/security
+
+/obj/item/clothing/under/solgov/service/expeditionary/command/medical
+
+/obj/item/clothing/under/solgov/service/expeditionary/command/supply
+
+/obj/item/clothing/under/solgov/service/expeditionary/command/service
+
+/obj/item/clothing/under/solgov/service/expeditionary/command/exploration
+
+/obj/item/clothing/under/solgov/service/expeditionary/command/research
+
+/obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	name = "expeditionary officer's service skirt"
+	desc = "A feminine version of the SCG Expeditionary Corps service uniform in gold trim."
+	icon_state = "greydressfem_com"
+	worn_state = "greydressfem_com"
+
+/obj/item/clothing/under/solgov/service/expeditionary/command/skirt/command
+	accessories = list(/obj/item/clothing/accessory/solgov/department/command/jumper)
+
+/obj/item/clothing/under/solgov/service/expeditionary/command/skirt/engineering
+
+/obj/item/clothing/under/solgov/service/expeditionary/command/skirt/security
+
+/obj/item/clothing/under/solgov/service/expeditionary/command/skirt/medical
+
+/obj/item/clothing/under/solgov/service/expeditionary/command/skirt/supply
+
+/obj/item/clothing/under/solgov/service/expeditionary/command/skirt/service
+
+/obj/item/clothing/under/solgov/service/expeditionary/command/skirt/exploration
+
+/obj/item/clothing/under/solgov/service/expeditionary/command/skirt/research
+
 /obj/item/clothing/under/solgov/service/fleet
 	name = "fleet service uniform"
 	desc = "The service uniform of the SCG Fleet, made from immaculate white fabric."
