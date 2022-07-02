@@ -2,6 +2,15 @@
 	name = "master solgov jacket"
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
+	valid_accessory_slots = list(
+		ACCESSORY_SLOT_ARMBAND,
+		ACCESSORY_SLOT_MEDAL,
+		ACCESSORY_SLOT_INSIGNIA,
+		ACCESSORY_SLOT_RANK,
+		ACCESSORY_SLOT_DEPT,
+		ACCESSORY_SLOT_DECOR
+	)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 
 //Service
 
@@ -26,15 +35,6 @@
 		/obj/item/device/radio,
 		/obj/item/taperoll
 	)
-	valid_accessory_slots = list(
-		ACCESSORY_SLOT_ARMBAND,
-		ACCESSORY_SLOT_MEDAL,
-		ACCESSORY_SLOT_INSIGNIA,
-		ACCESSORY_SLOT_RANK,
-		ACCESSORY_SLOT_DEPT,
-		ACCESSORY_SLOT_DECOR
-	)
-	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary
 	name = "expeditionary jacket"

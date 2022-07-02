@@ -220,7 +220,7 @@
 	accessories = list(/obj/item/clothing/accessory/solgov/department/supply/fleet)
 
 /obj/item/clothing/under/solgov/utility/army
-	name = "marine fatigues"
+	name = "green marine fatigues"
 	desc = "The utility uniform of the SCG Marine Corps, made from durable material."
 	icon_state = "greenutility"
 	item_state = "jensensuit"
@@ -251,8 +251,8 @@
 	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/army)
 
 /obj/item/clothing/under/solgov/utility/army/urban
-	name = "marine fatigues"
-	desc = "An urban version of the SCG Marine Corps utility uniform, made from durable material."
+	name = "navy marine fatigues"
+	desc = "A dark 'urban' version of the SCG Marine Corps utility uniform, made from durable material."
 	icon_state = "greyutility"
 	item_state = "gy_suit"
 	worn_state = "greyutility"
@@ -282,7 +282,7 @@
 	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/army)
 
 /obj/item/clothing/under/solgov/utility/army/tan
-	name = "marine fatigues"
+	name = "tan marine fatigues"
 	desc = "A tan version of the SCG Marine Corps utility uniform, made from durable material."
 	icon_state = "tanutility"
 	item_state = "johnny"
