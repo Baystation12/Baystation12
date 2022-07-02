@@ -1102,22 +1102,29 @@
 /turf/simulated/floor/tiled/dark,
 /area/medical/morgue)
 "bY" = (
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 8;
-	icon_state = "warningcorner"
+/obj/structure/closet/crate/plastic,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/item/device/scanner/health,
+/obj/item/storage/firstaid/empty,
+/obj/item/device/assembly/prox_sensor{
+	pixel_x = -8;
+	pixel_y = 4
 	},
-/obj/machinery/alarm{
-	pixel_y = 24
+/obj/item/device/assembly/prox_sensor{
+	pixel_x = -8;
+	pixel_y = 4
 	},
-/obj/machinery/light_switch{
-	pixel_x = -22;
-	pixel_y = 24
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 8;
-	icon_state = "warning"
-	},
-/turf/simulated/floor/tiled/dark,
+/obj/item/device/flash/synthetic,
+/obj/item/device/flash/synthetic,
+/obj/item/device/flash/synthetic,
+/obj/item/device/flash/synthetic,
+/obj/item/device/flash,
+/obj/item/device/flash,
+/obj/item/stack/cable_coil,
+/obj/item/stack/cable_coil,
+/obj/item/storage/toolbox/mechanical,
+/obj/item/storage/box/beakers,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics)
 "bZ" = (
 /obj/item/stock_parts/scanning_module,
@@ -1419,35 +1426,24 @@
 /turf/simulated/floor/plating,
 /area/vacant/armory)
 "cv" = (
-/obj/effect/shuttle_landmark/lift/robotics_bottom,
-/turf/simulated/floor/plating,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
+/obj/machinery/light_switch{
+	pixel_x = -22;
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/dark,
 /area/assembly/robotics)
 "cw" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/storage/tech)
 "cx" = (
-/obj/structure/closet/crate/plastic,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/device/scanner/health,
-/obj/item/storage/firstaid/empty,
-/obj/item/device/assembly/prox_sensor{
-	pixel_x = -8;
-	pixel_y = 4
+/obj/structure/table/steel,
+/obj/machinery/alarm{
+	pixel_y = 24
 	},
-/obj/item/device/assembly/prox_sensor{
-	pixel_x = -8;
-	pixel_y = 4
-	},
-/obj/item/device/flash/synthetic,
-/obj/item/device/flash/synthetic,
-/obj/item/device/flash/synthetic,
-/obj/item/device/flash/synthetic,
-/obj/item/device/flash,
-/obj/item/device/flash,
-/obj/item/stack/cable_coil,
-/obj/item/stack/cable_coil,
-/obj/item/storage/toolbox/mechanical,
-/obj/item/storage/box/beakers,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics)
 "cy" = (
@@ -4339,12 +4335,6 @@
 /obj/structure/bed/chair/armchair/green,
 /obj/machinery/computer/cryopod{
 	pixel_y = 32
-	},
-/obj/effect/landmark/start{
-	name = "EXO Synth"
-	},
-/obj/effect/landmark{
-	name = "EXO Synth"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/synth/borg_upload)
@@ -15446,6 +15436,10 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/foreport)
+"NL" = (
+/obj/effect/shuttle_landmark/lift/robotics_bottom,
+/turf/simulated/floor/plating,
+/area/assembly/robotics)
 "NN" = (
 /obj/structure/closet/crate/med_crate/toxin,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -35145,7 +35139,7 @@ Fa
 dS
 eC
 Xl
-bI
+Xl
 XP
 XP
 XP
@@ -35347,11 +35341,11 @@ bf
 dT
 eD
 TL
-bI
-vO
-vO
-cv
+Zr
 XP
+vO
+vO
+NL
 XP
 SQ
 Wi
@@ -35550,10 +35544,10 @@ dU
 eE
 rU
 XP
-vO
-vO
-vO
 XP
+vO
+vO
+vO
 XP
 XP
 XP
@@ -35753,9 +35747,9 @@ eT
 bI
 XP
 bY
+cv
 dk
 dk
-cx
 eR
 QA
 su
@@ -36763,7 +36757,7 @@ eG
 bK
 bw
 XP
-fD
+cx
 dF
 ee
 ZG

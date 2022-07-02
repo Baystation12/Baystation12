@@ -222,13 +222,19 @@
 /obj/item/clothing/head/beret/solgov/army
 	name = "marine beret"
 	desc = "A green beret belonging to the SCG Marine. For personnel that are more inclined towards style than safety."
-	icon_state = "beret_green"
+	icon_state = "beret_army_infantry"
 	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
 
 /obj/item/clothing/head/beret/solgov/army/orbital
 	name = "orbital assault marine beret"
 	desc = "A blue beret denoting orbital assault marine training. For helljumpers that are more inclined towards style than safety."
+	icon_state = "beret_army_airborne"
+
+/obj/item/clothing/head/beret/solgov/army/elite
+	name = "elite marine beret"
+	desc = "A blue beret with Space Shark denoting special training of Space Carps, an elite secret team consisting of members both Marine Corps and Fleet. They have been declassified after the end of War on Gaia, denouncing their war crimes and failures. For operatives that are more inclined towards style than safety."
+	icon_state = "beret_blue"
 
 /obj/item/clothing/head/beret/solgov/army/airborne
 	name = "airborne marine beret"

@@ -238,7 +238,7 @@
 /datum/mil_branch/army
 	name = "Marine Corps"
 	name_short = "SCGM"
-	email_domain = "marine.mil"
+	email_domain = "torch.marine.mil"
 
 	rank_types = list(
 		/datum/mil_rank/army/e1,
@@ -249,11 +249,13 @@
 		/datum/mil_rank/army/e5,
 		/datum/mil_rank/army/e6,
 		/datum/mil_rank/army/e7,
+		/datum/mil_rank/army/e7_meme,
 		/datum/mil_rank/army/e8,
 		/datum/mil_rank/army/e8_alt,
 		/datum/mil_rank/army/e9,
 		/datum/mil_rank/army/e9_alt1,
 		/datum/mil_rank/army/e9_alt2,
+		/datum/mil_rank/army/e9_meme,
 		/datum/mil_rank/army/o1,
 		/datum/mil_rank/army/o2,
 		/datum/mil_rank/army/o3,
@@ -596,6 +598,12 @@
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e7)
 	sort_order = 7
 
+/datum/mil_rank/army/e7_meme
+	name = "Gaming Sergeant"
+	name_short = "GmSGT"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e7_meme)
+	sort_order = 7
+
 /datum/mil_rank/army/e8
 	name = "Master Sergeant"
 	name_short = "MSGT"
@@ -620,6 +628,12 @@
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e9_alt1)
 	sort_order = 9
 
+/datum/mil_rank/army/e9_meme
+	name = "Master Gaming Sergeant"
+	name_short = "MGmSGT"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e9_meme)
+	sort_order = 9
+
 /datum/mil_rank/army/e9_alt2
 	name = "Sergeant Major of the Corps"
 	name_short = "SgtMajMarCor"
@@ -640,7 +654,7 @@
 
 /datum/mil_rank/army/o3
 	name = "Marine Captain"
-	name_short = "MarCPT"
+	name_short = "MCPT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/officer/o3)
 	sort_order = 13
 

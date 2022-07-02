@@ -220,8 +220,8 @@
 	accessories = list(/obj/item/clothing/accessory/solgov/department/supply/fleet)
 
 /obj/item/clothing/under/solgov/utility/army
-	name = "army fatigues"
-	desc = "The utility uniform of the SCG Army, made from durable material."
+	name = "marine fatigues"
+	desc = "The utility uniform of the SCG Marine Corps, made from durable material."
 	icon_state = "greenutility"
 	item_state = "jensensuit"
 	worn_state = "greenutility"
@@ -251,8 +251,8 @@
 	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/army)
 
 /obj/item/clothing/under/solgov/utility/army/urban
-	name = "urban fatigues"
-	desc = "An urban version of the SCG Army utility uniform, made from durable material."
+	name = "marine fatigues"
+	desc = "An urban version of the SCG Marine Corps utility uniform, made from durable material."
 	icon_state = "greyutility"
 	item_state = "gy_suit"
 	worn_state = "greyutility"
@@ -282,8 +282,8 @@
 	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/army)
 
 /obj/item/clothing/under/solgov/utility/army/tan
-	name = "tan fatigues"
-	desc = "A tan version of the SCG Army utility uniform, made from durable material."
+	name = "marine fatigues"
+	desc = "A tan version of the SCG Marine Corps utility uniform, made from durable material."
 	icon_state = "tanutility"
 	item_state = "johnny"
 	worn_state = "tanutility"
@@ -424,30 +424,30 @@
 	worn_state = "whiteservicefem"
 
 /obj/item/clothing/under/solgov/service/army
-	name = "army service uniform"
-	desc = "The service uniform of the SCG Army. Slimming."
+	name = "marine service uniform"
+	desc = "The service uniform of the SCG Marine Corps. Slimming."
 	icon_state = "greenservice"
 	item_state = "johnny"
 	worn_state = "greenservice"
 	accessories = list(/obj/item/clothing/accessory/brown)
 
 /obj/item/clothing/under/solgov/service/army/skirt
-	name = "army service skirt"
-	desc = "The service uniform skirt of the SCG Army. Slimming."
+	name = "marine service skirt"
+	desc = "The service uniform skirt of the SCG Marine Corps. Slimming."
 	icon_state = "greenservicefem"
 	worn_state = "greenservicefem"
 
 /obj/item/clothing/under/solgov/service/army/command
-	name = "army officer's service uniform"
-	desc = "The service uniform of the SCG Army. Slimming and stylish."
+	name = "marine officer's service uniform"
+	desc = "The service uniform of the SCG Marine Corps. Slimming and stylish."
 	icon_state = "greenservice_com"
 	item_state = "johnny"
 	worn_state = "greenservice_com"
 	accessories = list(/obj/item/clothing/accessory/brown)
 
 /obj/item/clothing/under/solgov/service/army/command/skirt
-	name = "army officer's service skirt"
-	desc = "The service uniform skirt of the SCG Army. Slimming and stylish."
+	name = "marine officer's service skirt"
+	desc = "The service uniform skirt of the SCG Marine Corps. Slimming and stylish."
 	icon_state = "greenservicefem_com"
 	worn_state = "greenservicefem_com"
 
@@ -460,26 +460,26 @@
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/solgov/mildress/army
-	name = "army dress uniform"
-	desc = "The dress uniform of the SCG Army, class given form."
+	name = "marine dress uniform"
+	desc = "The dress uniform of the SCG Marine Corps, class given form."
 	icon_state = "blackdress"
 	worn_state = "blackdress"
 
 /obj/item/clothing/under/solgov/mildress/army/skirt
-	name = "army dress skirt"
-	desc = "A  feminine version of the SCG Army dress uniform, class given form."
+	name = "marine dress skirt"
+	desc = "A  feminine version of the SCG Marine Corps dress uniform, class given form."
 	icon_state = "blackdressfem"
 	worn_state = "blackdressfem"
 
 /obj/item/clothing/under/solgov/mildress/army/command
-	name = "army officer's dress uniform"
-	desc = "The dress uniform of the SCG Army, even classier in gold."
+	name = "marine officer's dress uniform"
+	desc = "The dress uniform of the SCG Marine Corps, even classier in gold."
 	icon_state = "blackdress"
 	worn_state = "blackdress_com"
 
 /obj/item/clothing/under/solgov/mildress/army/command/skirt
-	name = "army officer's dress skirt"
-	desc = "A feminine version of the SCG Army dress uniform, even classier in gold."
+	name = "marine officer's dress skirt"
+	desc = "A feminine version of the SCG Marine Corps dress uniform, even classier in gold."
 	icon_state = "blackdressfem"
 	worn_state = "blackdressfem_com"
 
