@@ -181,18 +181,54 @@
 	icon_state = "intelbadge"
 	badge_string = "Office of Interstellar Intelligence"
 
-/obj/item/clothing/accessory/badge/curator_agent
-	name = "\improper SFP Supervisory Agent's badge"
-	desc = "A synthleather holographic badge bearing the crest of the Sol Federal Police."
-	icon_state = "intelbadge"
-	badge_string = FACTION_SPACECOPS
-
 /obj/item/clothing/accessory/badge/nanotrasen
 	name = "corporate badge"
 	desc = "A leather-backed plastic badge with a variety of information printed on it. Belongs to a corporate executive."
 	icon_state = "ntbadge"
 	badge_string = "Corporate Executive Body"
 
+// SolFedPolice //
+// ============ //
+
+/obj/item/clothing/accessory/badge/director_agent //Proxima
+	name = "\improper SFP Director's badge"
+	desc = "A synthleather holographic badge bearing the crest of the Sol Federal Police."
+	icon_state = "intelbadge"
+	slot_flags = SLOT_BELT | SLOT_TIE | SLOT_MASK
+	slot = ACCESSORY_SLOT_INSIGNIA
+	badge_string = FACTION_SPACECOPS
+
+/obj/item/clothing/accessory/badge/deputy_agent //Proxima
+	name = "\improper SFP Deputy Director's badge"
+	desc = "A synthleather holographic badge bearing the crest of the Sol Federal Police."
+	icon_state = "intelbadge"
+	slot_flags = SLOT_BELT | SLOT_TIE | SLOT_MASK
+	slot = ACCESSORY_SLOT_INSIGNIA
+	badge_string = FACTION_SPACECOPS
+
+/obj/item/clothing/accessory/badge/curator_agent //Proxima
+	name = "\improper SFP Supervisory Agent's badge"
+	desc = "A synthleather holographic badge bearing the crest of the Sol Federal Police."
+	icon_state = "intelbadge"
+	slot_flags = SLOT_BELT | SLOT_TIE | SLOT_MASK
+	slot = ACCESSORY_SLOT_INSIGNIA
+	badge_string = FACTION_SPACECOPS
+
+/obj/item/clothing/accessory/badge/inspector_agent //Proxima
+	name = "\improper SFP Agent Inspector's badge"
+	desc = "A synthleather holographic badge bearing the crest of the Sol Federal Police."
+	icon_state = "intelbadge"
+	slot_flags = SLOT_BELT | SLOT_TIE | SLOT_MASK
+	slot = ACCESSORY_SLOT_INSIGNIA
+	badge_string = FACTION_SPACECOPS
+
+/obj/item/clothing/accessory/badge/senior_agent //Proxima
+	name = "\improper SFP Senior Agent's badge"
+	desc = "A leather-backed gold badge displaying the crest of the Sol Federal Police."
+	icon_state = "agentbadge"
+	slot_flags = SLOT_BELT | SLOT_TIE | SLOT_MASK
+	slot = ACCESSORY_SLOT_INSIGNIA
+	badge_string = FACTION_SPACECOPS
 
 /obj/item/clothing/accessory/badge/agent
 	name = "\improper SFP Agent's badge"
@@ -202,6 +238,21 @@
 	slot = ACCESSORY_SLOT_INSIGNIA
 	badge_string = FACTION_SPACECOPS
 
+/obj/item/clothing/accessory/badge/duty_agent //Proxima
+	name = "\improper SFP Duty Agent's badge"
+	desc = "A leather-backed gold badge displaying the crest of the Sol Federal Police."
+	icon_state = "agentbadge"
+	slot_flags = SLOT_BELT | SLOT_TIE | SLOT_MASK
+	slot = ACCESSORY_SLOT_INSIGNIA
+	badge_string = FACTION_SPACECOPS
+
+/obj/item/clothing/accessory/badge/junior_agent //Proxima
+	name = "\improper SFP Junior Agent's badge"
+	desc = "A blue leather-backed gold badge displaying the crest of the Sol Federal Police."
+	icon_state = "trackerbadge"
+	slot_flags = SLOT_BELT | SLOT_TIE
+	slot = ACCESSORY_SLOT_INSIGNIA
+	badge_string = FACTION_SPACECOPS
 
 /obj/item/clothing/accessory/badge/tracker
 	name = "\improper Tracker's badge"

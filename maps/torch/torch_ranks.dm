@@ -321,13 +321,27 @@
 
 	rank_types = list(
 		/datum/mil_rank/sol/gov,
+		/datum/mil_rank/sol/junior_agent,
+		/datum/mil_rank/sol/duty_agent,
 		/datum/mil_rank/sol/agent,
+		/datum/mil_rank/sol/senior_agent,
+		/datum/mil_rank/sol/inspector_agent,
+		/datum/mil_rank/sol/curator_agent,
+		/datum/mil_rank/sol/deputy_agent,
+		/datum/mil_rank/sol/director_agent,
 		/datum/mil_rank/sol/scientist
 	)
 
 	spawn_rank_types = list(
 		/datum/mil_rank/sol/gov,
+		/datum/mil_rank/sol/junior_agent,
+		/datum/mil_rank/sol/duty_agent,
 		/datum/mil_rank/sol/agent,
+		/datum/mil_rank/sol/senior_agent,
+		/datum/mil_rank/sol/inspector_agent,
+		/datum/mil_rank/sol/curator_agent,
+		/datum/mil_rank/sol/deputy_agent,
+		/datum/mil_rank/sol/director_agent,
 		/datum/mil_rank/sol/scientist
 	)
 
@@ -742,17 +756,45 @@
 	name_short = "SGR"
 	accessory = list(/obj/item/clothing/accessory/badge/solgov/representative)
 
+/datum/mil_rank/sol/junior_agent  //Proxima
+	name = "SFP Junior Agent"
+	name_short = "JAGT"
+	accessory = list(/obj/item/clothing/accessory/badge/junior_agent)
+
+/datum/mil_rank/sol/duty_agent //Proxima
+	name = "SFP Duty Agent"
+	name_short = "DAGT"
+	accessory = list(/obj/item/clothing/accessory/badge/deputy_agent)
+
 /datum/mil_rank/sol/agent
 	name = "SFP Agent"
 	name_short = "AGT"
 	accessory = list(/obj/item/clothing/accessory/badge/agent)
 
-/* //maybe later //Drakon
-/datum/mil_rank/sol/curator_agent
-	name = "SFP Supervisory Agent"
+/datum/mil_rank/sol/senior_agent //Proxima
+	name = "SFP Senior Agent"
 	name_short = "SAGT"
-	accessory = list(/obj/item/clothing/accessory/badge/curator_agent) */
+	accessory = list(/obj/item/clothing/accessory/badge/senior_agent)
 
+/datum/mil_rank/sol/inspector_agent //Proxima
+	name = "SFP Agent Inspector"
+	name_short = "AGTI"
+	accessory = list(/obj/item/clothing/accessory/badge/inspector_agent)
+
+/datum/mil_rank/sol/curator_agent //Proxima
+	name = "SFP Supervisory Agent"
+	name_short = "SUPAGT"
+	accessory = list(/obj/item/clothing/accessory/badge/curator_agent)
+
+/datum/mil_rank/sol/deputy_agent //Proxima
+	name = "SFP Deputy Director"
+	name_short = "DDIR"
+	accessory = list(/obj/item/clothing/accessory/badge/deputy_agent)
+
+/datum/mil_rank/sol/director_agent //Proxima
+	name = "SFP Director"
+	name_short = "DIR"
+	accessory = list(/obj/item/clothing/accessory/badge/director_agent)
 
 /datum/mil_rank/sol/scientist
 	name = "Government Scientist"

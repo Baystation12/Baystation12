@@ -57,6 +57,7 @@
 		"Criminal Investigator"
 	)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech
+
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/civilian = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/contractor,
@@ -70,7 +71,9 @@
 		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/fleet/e5,
 		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/sol/agent
+		/datum/mil_rank/sol/agent,
+		/datum/mil_rank/sol/duty_agent,
+		/datum/mil_rank/sol/senior_agent,
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
@@ -140,3 +143,22 @@
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
+
+/* До лучших времен
+/datum/job/officer/sfp
+	title = "Police Enforcer"
+	total_positions = 2
+	spawn_positions = 2
+	hud_icon = "hudmasteratarms"
+	alt_titles = list(
+		"Police Officer",
+		"Police Operative"
+	)
+	allowed_branches = list(
+		/datum/mil_branch/solgov = /decl/hierarchy/outfit/job/torch/crew/security/maa/agent
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/sol/junior_agent,
+		/datum/mil_rank/sol/agent
+	)
+*/
