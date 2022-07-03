@@ -252,7 +252,8 @@
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o3,
 		/datum/mil_rank/army/o2,
-		/datum/mil_rank/army/o3
+		/datum/mil_rank/army/o3,
+		/datum/mil_rank/army/o4
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_EVA         = SKILL_BASIC,
@@ -325,12 +326,17 @@
 	ideal_character_age = 45
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
 	allowed_branches = list(
-		/datum/mil_branch/fleet
+		/datum/mil_branch/fleet,
+		/datum/mil_branch/army = /decl/hierarchy/outfit/job/torch/crew/command/sea/army
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e8,
 		/datum/mil_rank/fleet/e9_alt1,
-		/datum/mil_rank/fleet/e9
+		/datum/mil_rank/fleet/e9,
+		/datum/mil_rank/army/e8,
+		/datum/mil_rank/army/e8_alt,
+		/datum/mil_rank/army/e9,
+		/datum/mil_rank/army/e9_alt1
 	)
 	min_skill = list(   SKILL_EVA        = SKILL_BASIC,
 	                    SKILL_COMBAT     = SKILL_BASIC,
