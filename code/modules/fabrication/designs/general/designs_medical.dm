@@ -42,4 +42,4 @@
 	path = /obj/item/storage/pill_bottle
 
 /datum/fabricator_recipe/medical/hypospray/autoinjector
-	path = /obj/item/reagent_containers/hypospray/autoinjector/empty
+	path = /obj/item/reagent_containers/hypospray/autoinjector

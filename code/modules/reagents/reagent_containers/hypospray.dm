@@ -169,8 +169,9 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 2)
 	slot_flags = SLOT_BELT | SLOT_EARS
 	w_class = ITEM_SIZE_TINY
-	var/list/starts_with = list(/datum/reagent/inaprovaline = 5)
-	var/band_color = COLOR_CYAN
+	matter = list(MATERIAL_PLASTIC = 150, MATERIAL_GLASS = 50)
+	var/list/starts_with = list()
+	var/band_color = COLOR_GRAY
 
 /obj/item/reagent_containers/hypospray/autoinjector/New()
 	..()
@@ -240,8 +241,7 @@
 	band_color = COLOR_BLUE
 	starts_with = list(/datum/reagent/dexalinp = 5)
 
-/obj/item/reagent_containers/hypospray/autoinjector/empty
-	name = "autoinjector"
-	band_color = COLOR_WHITE
-	starts_with = list()
-	matter = list(MATERIAL_PLASTIC = 150, MATERIAL_GLASS = 50)
+/obj/item/reagent_containers/hypospray/autoinjector/inaprovaline
+	name = "autoinjector (inaprovaline)"
+	band_color = COLOR_CYAN
+	starts_with = list(/datum/reagent/inaprovaline = 5)
