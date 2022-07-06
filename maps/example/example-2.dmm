@@ -93,7 +93,7 @@
 /area/medical/surgery)
 "jS" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/machinery/seed_storage/garden,
+/obj/machinery/seed_storage/all,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "kA" = (
