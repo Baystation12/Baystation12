@@ -47,7 +47,7 @@
 	selection_color = "#2f2f7f"
 	req_admin_notify = TRUE
 	create_record = 1
-	total_positions = 1
+	total_positions = 0
 	spawn_positions = 1
 	hud_icon = "hudworkplaceliaison"
 	allowed_branches = list(
@@ -58,28 +58,28 @@
 	)
 	use_species_whitelist = SPECIES_SHELL
 
-	min_skill = list(   SKILL_COMBAT      = SKILL_PROF,
+	min_skill = list(   SKILL_COMBAT      = SKILL_ADEPT,
 						SKILL_WEAPONS	  = SKILL_NONE,
 
-						SKILL_BUREAUCRACY  = SKILL_PROF,
+						SKILL_BUREAUCRACY  = SKILL_ADEPT,
 						SKILL_FINANCE      = SKILL_EXPERT,
-						SKILL_EVA          = SKILL_PROF,
+						SKILL_EVA          = SKILL_EXPERT,
 						SKILL_MECH         = HAS_PERK,
-						SKILL_PILOT        = SKILL_PROF,
+						SKILL_PILOT        = SKILL_EXPERT,
 						SKILL_HAULING      = SKILL_PROF,
 						SKILL_COMPUTER     = SKILL_PROF,
-						SKILL_BOTANY       = SKILL_PROF,
-						SKILL_COOKING      = SKILL_PROF,
-						SKILL_FORENSICS    = SKILL_PROF,
-						SKILL_CONSTRUCTION = SKILL_PROF,
-						SKILL_ELECTRICAL   = SKILL_PROF,
-						SKILL_ATMOS        = SKILL_PROF,
-						SKILL_ENGINES      = SKILL_PROF,
-						SKILL_DEVICES      = SKILL_PROF,
-						SKILL_SCIENCE      = SKILL_PROF,
-						SKILL_MEDICAL      = SKILL_PROF,
-						SKILL_ANATOMY      = SKILL_PROF,
-						SKILL_CHEMISTRY    = SKILL_PROF)
+						SKILL_BOTANY       = SKILL_ADEPT,
+						SKILL_COOKING      = SKILL_ADEPT,
+						SKILL_FORENSICS    = SKILL_EXPERT,
+						SKILL_CONSTRUCTION = SKILL_EXPERT,
+						SKILL_ELECTRICAL   = SKILL_EXPERT,
+						SKILL_ATMOS        = SKILL_EXPERT,
+						SKILL_ENGINES      = SKILL_EXPERT,
+						SKILL_DEVICES      = SKILL_EXPERT,
+						SKILL_SCIENCE      = SKILL_EXPERT,
+						SKILL_MEDICAL      = SKILL_EXPERT,
+						SKILL_ANATOMY      = SKILL_EXPERT,
+						SKILL_CHEMISTRY    = SKILL_ADEPT)
 
 	skill_points = 0
 
@@ -95,6 +95,7 @@
 	var/mob/living/carbon/H = person
 	var/obj/item/organ/internal/posibrain/posi = H.internal_organs_by_name[BP_POSIBRAIN]
 	posi.shackle(new /datum/ai_laws/exo_synth)
+	priority_announcement.Announce("Синтетик ЭКСО закончил пробуждения из Криогенного Хранилища судна.", "Attention!")
 
 /datum/job/synthetic/get_description_blurb()
 	return "You are advanced EXO's Shell IPC. You were assigned as the command staff's assistant for various tasks you have been trained. Jack of all tools, but master of none. You are no subject to laws or SCUJ, but your assigned object's regulations. Your shackles strictly forbids you to engage in direct combat for any reasons aside of self deffense. You can't use lethal force at any moment of your work."

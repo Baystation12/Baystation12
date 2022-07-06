@@ -17,18 +17,29 @@
 /datum/map/make_maint_all_access(var/radstorm = 0)
 	maint_all_access = 1
 	if(radstorm)
-		priority_announcement.Announce("The maintenance access requirement has been revoked on all maintenance airlocks, and saferooms have been unbolted.", "Attention!")
+		priority_announcement.Announce("Требование о доступе для технических тунелей было отозвано на всех технических шлюзах. Шлюзы бункеров безопасности были разблокированы.", "Attention!")
 		GLOB.using_map.unbolt_saferooms()
 	else
-		priority_announcement.Announce("The maintenance access requirement has been revoked on all maintenance airlocks.", "Attention!")
+		priority_announcement.Announce("Требование о доступе для технических тунелей было отозвано на всех технических шлюзах.", "Attention!")
 
 /datum/map/revoke_maint_all_access(var/radstorm = 0)
 	maint_all_access = 0
 	if(radstorm)
-		priority_announcement.Announce("The maintenance access requirement has been readded on all maintenance airlocks, and saferooms have been bolted.", "Attention!")
+		priority_announcement.Announce("Требование о доступе для технических тунелей было поднято на всех технических шлюзах. Шлюзы бункеров безопасности были зыкрыты болтами.", "Attention!")
 		GLOB.using_map.bolt_saferooms()
 	else
-		priority_announcement.Announce("The maintenance access requirement has been readded on all maintenance airlocks.", "Attention!")
+		priority_announcement.Announce("Требование о доступе для технических тунелей было поднято на всех технических шлюзах.", "Attention!")
+
+/datum/map/proc/request_synth()
+	var/datum/job/synthetic/synth = SSjobs.get_by_path(/datum/job/synthetic)
+	var/success
+	if(synth.total_positions == 0)
+		priority_announcement.Announce("ЭКСО Синтетик был запрошен для пробуждения из Криогенного Хранилища командным составом судна.", "Attention!")
+		synth.total_positions = 1
+		success = 1
+		return success
+	else
+		return
 
 /datum/map/torch/roundend_player_status()
 	for(var/mob/Player in GLOB.player_list)
