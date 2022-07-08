@@ -117,12 +117,6 @@ var/global/const/access_pathfinder = "ACCESS_TORCH_PATHFINDER" //94
 	desc = "Pathfinder"
 	region = ACCESS_REGION_GENERAL
 
-var/global/const/access_pilot = "ACCESS_TORCH_PILOT" //95
-/datum/access/pilot
-	id = access_pilot
-	desc = "Pilot"
-	region = ACCESS_REGION_GENERAL
-
 var/global/const/access_commissary = "ACCESS_TORCH_SHOP" //96
 /datum/access/commissary
 	id = access_commissary
