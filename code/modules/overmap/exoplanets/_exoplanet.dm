@@ -243,7 +243,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	while(num)
 		attempts--
 		var/turf/T = locate(rand(TRANSITIONEDGE + LANDING_ZONE_RADIUS, maxx - TRANSITIONEDGE - LANDING_ZONE_RADIUS), rand(TRANSITIONEDGE + LANDING_ZONE_RADIUS, maxy - TRANSITIONEDGE - LANDING_ZONE_RADIUS),map_z[map_z.len])
-		if (!T || (T in places)) // Two landmarks on one turf is forbidden as the landmark code doesn't work with it.
+		if (!T || (T in places) || T.density) // Don't allow two landmarks on one turf, and don't use a dense turf.
 			continue
 		if (attempts >= 0) // While we have the patience, try to find better spawn points. If out of patience, put them down wherever, so long as there are no repeats.
 			var/valid = TRUE
