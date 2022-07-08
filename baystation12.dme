@@ -2602,6 +2602,8 @@
 #include "code\modules\paperwork\pen\pen.dm"
 #include "code\modules\paperwork\pen\reagent_pen.dm"
 #include "code\modules\paperwork\pen\retractable_pen.dm"
+#include "code\modules\parkour\human.dm"
+#include "code\modules\parkour\obj.dm"
 #include "code\modules\persistence\filth.dm"
 #include "code\modules\persistence\graffiti.dm"
 #include "code\modules\persistence\noticeboards.dm"

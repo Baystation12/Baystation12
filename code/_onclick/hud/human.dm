@@ -289,6 +289,11 @@
 		if(GLOB.film_grain_stat)
 			hud_elements |= target.film_grain
 
+		target.parkour = new /obj/screen/parkour(null)
+		target.parkour.screen_loc = ui_parkour
+		target.parkour.passthrought = image(target.parkour.icon, "passthrought")
+		hud_elements |= target.parkour
+
 	mymob.client.screen = list()
 
 	mymob.client.screen += hud_elements
