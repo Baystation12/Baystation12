@@ -119,9 +119,9 @@
 				var/datum/mil_branch/player_branch
 				var/branch_string = ""
 				var/rank_branch_string = ""
-				var/branch_rank = job.allowed_branches ? job.get_branch_rank(S) : mil_branches.spawn_branches(S)
+				var/branch_rank = job.allowed_branches ? job.get_branch_rank(S) : GLOB.mil_branches.spawn_branches(S)
 				if(GLOB.using_map && (GLOB.using_map.flags & MAP_HAS_BRANCH) && LAZYLEN(branch_rank))
-					player_branch = mil_branches.get_branch(pref.branches[job.title])
+					player_branch = GLOB.mil_branches.get_branch(pref.branches[job.title])
 					if(player_branch)
 						if(LAZYLEN(branch_rank) > 1)
 							branch_string += "<td width='10%' align='left'><a href='?src=\ref[src];char_branch=1;checking_job=\ref[job]'>[player_branch.name_short || player_branch.name]</a></td>"
@@ -130,9 +130,9 @@
 				if(!branch_string)
 					branch_string = "<td>-</td>"
 				if(player_branch)
-					var/ranks = branch_rank[player_branch.name] || mil_branches.spawn_ranks(player_branch.name, S)
+					var/ranks = branch_rank[player_branch.name] || GLOB.mil_branches.spawn_ranks(player_branch.name, S)
 					if(LAZYLEN(ranks))
-						player_rank = mil_branches.get_rank(player_branch.name, pref.ranks[job.title])
+						player_rank = GLOB.mil_branches.get_rank(player_branch.name, pref.ranks[job.title])
 						if(player_rank)
 							if(LAZYLEN(ranks) > 1)
 								rank_branch_string += "<td width='10%' align='left'><a href='?src=\ref[src];char_rank=1;checking_job=\ref[job]'>[player_rank.name_short || player_rank.name]</a></td>"
@@ -269,16 +269,16 @@
 
 		var/datum/job/job = SSjobs.get_by_title(job_name)
 
-		var/datum/mil_branch/player_branch = pref.branches[job.title] ? mil_branches.get_branch(pref.branches[job.title]) : null
-		var/branch_rank = job.allowed_branches ? job.get_branch_rank(S) : mil_branches.spawn_branches(S)
+		var/datum/mil_branch/player_branch = pref.branches[job.title] ? GLOB.mil_branches.get_branch(pref.branches[job.title]) : null
+		var/branch_rank = job.allowed_branches ? job.get_branch_rank(S) : GLOB.mil_branches.spawn_branches(S)
 		if(!player_branch || !(player_branch.name in branch_rank))
-			player_branch = LAZYLEN(branch_rank) ? mil_branches.get_branch(branch_rank[1]) : null
+			player_branch = LAZYLEN(branch_rank) ? GLOB.mil_branches.get_branch(branch_rank[1]) : null
 
 		if(player_branch)
-			var/datum/mil_rank/player_rank = pref.ranks[job.title] ? mil_branches.get_rank(player_branch.name, pref.ranks[job.title]) : null
-			var/ranks = branch_rank[player_branch.name] || mil_branches.spawn_ranks(player_branch.name, S)
+			var/datum/mil_rank/player_rank = pref.ranks[job.title] ? GLOB.mil_branches.get_rank(player_branch.name, pref.ranks[job.title]) : null
+			var/ranks = branch_rank[player_branch.name] || GLOB.mil_branches.spawn_ranks(player_branch.name, S)
 			if(!player_rank || !(player_rank.name in ranks))
-				player_rank = LAZYLEN(ranks) ? mil_branches.get_rank(player_branch.name, ranks[1]) : null
+				player_rank = LAZYLEN(ranks) ? GLOB.mil_branches.get_rank(player_branch.name, ranks[1]) : null
 
 			// Now make the assignments
 			pref.branches[job.title] = player_branch.name
@@ -314,7 +314,7 @@
 			var/choice = input("Choose an title for [job.title].", "Choose Title", pref.GetPlayerAltTitle(job)) as anything in choices|null
 			if(choice && CanUseTopic(user))
 				SetPlayerAltTitle(job, choice)
-				return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
+				return ((pref.preview_job || pref.preview_gear) ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
 
 	else if(href_list["set_job"])
 		var/set_job = href_list["set_job"]
@@ -328,35 +328,35 @@
 			else if(set_to > JOB_LEVEL_NEVER)
 				set_to = JOB_LEVEL_HIGH
 		if(SetJob(user, set_job, set_to))
-			return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
+			return ((pref.preview_job || pref.preview_gear) ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
 
 	else if(href_list["char_branch"])
 		var/datum/job/job = locate(href_list["checking_job"])
 		if(istype(job))
 			var/datum/species/S = preference_species()
-			var/list/options = job.allowed_branches ? job.get_branch_rank(S) : mil_branches.spawn_branches(S)
+			var/list/options = job.allowed_branches ? job.get_branch_rank(S) : GLOB.mil_branches.spawn_branches(S)
 			var/choice = input(user, "Choose your branch of service.", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in options
-			if(choice && CanUseTopic(user) && mil_branches.is_spawn_branch(choice, S))
+			if(choice && CanUseTopic(user) && GLOB.mil_branches.is_spawn_branch(choice, S))
 				pref.branches[job.title] = choice
 				pref.ranks -= job.title
 				pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)		// Check our skillset is still valid
 				validate_branch_and_rank()
-				return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
+				return ((pref.preview_job || pref.preview_gear) ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
 			return TOPIC_REFRESH
 
 	else if(href_list["char_rank"])
 		var/datum/job/job = locate(href_list["checking_job"])
 		if(istype(job))
-			var/datum/mil_branch/branch = mil_branches.get_branch(pref.branches[job.title])
+			var/datum/mil_branch/branch = GLOB.mil_branches.get_branch(pref.branches[job.title])
 			var/datum/species/S = preference_species()
-			var/list/branch_rank = job.allowed_branches ? job.get_branch_rank(S) : mil_branches.spawn_branches(S)
-			var/list/options = branch_rank[branch.name] || mil_branches.spawn_ranks(branch.name, S)
+			var/list/branch_rank = job.allowed_branches ? job.get_branch_rank(S) : GLOB.mil_branches.spawn_branches(S)
+			var/list/options = branch_rank[branch.name] || GLOB.mil_branches.spawn_ranks(branch.name, S)
 			var/choice = input(user, "Choose your rank.", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in options
-			if(choice && CanUseTopic(user) && mil_branches.is_spawn_rank(branch.name, choice, preference_species()))
+			if(choice && CanUseTopic(user) && GLOB.mil_branches.is_spawn_rank(branch.name, choice, preference_species()))
 				pref.ranks[job.title] = choice
 				pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)		// Check our skillset is still valid
 				validate_branch_and_rank()
-				return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
+				return ((pref.preview_job || pref.preview_gear) ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
 			return TOPIC_REFRESH
 	else if(href_list["set_skills"])
 		var/rank = href_list["set_skills"]
@@ -412,7 +412,7 @@
 		if(job.allowed_branches)
 			dat += "You can be of following ranks:"
 			for(var/T in job.allowed_branches)
-				var/datum/mil_branch/B = mil_branches.get_branch_by_type(T)
+				var/datum/mil_branch/B = GLOB.mil_branches.get_branch_by_type(T)
 				dat += "<li>[B.name]: [job.get_ranks(B.name)]"
 		dat += "<hr style='clear:left;'>"
 		if(config.wiki_url)
@@ -426,8 +426,13 @@
 		popup.open()
 
 	else if(href_list["job_wiki"])
+		if (!config.wiki_url)
+			return
 		var/rank = href_list["job_wiki"]
-		send_link(user,"[config.wiki_url][rank]")
+		var/datum/job/job = SSjobs.get_by_title(rank)
+		if (!job)
+			return
+		send_link(user, join_url(config.wiki_url, "roles", ckey(rank)))
 
 	return ..()
 
@@ -537,7 +542,7 @@
 		if(!(job_title in allowed_titles))
 			pref.job_low -= job_title
 
-datum/category_item/player_setup_item/proc/prune_occupation_prefs()
+/datum/category_item/player_setup_item/proc/prune_occupation_prefs()
 	prune_job_prefs()
 	validate_branch_and_rank()
 

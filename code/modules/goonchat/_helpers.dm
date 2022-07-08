@@ -37,17 +37,25 @@ GLOBAL_DATUM_INIT(is_http_protocol, /regex, regex("^https?://"))
 			for (var/thing2 in targets)
 				send_asset(thing2, key, FALSE)
 			return "<img class='icon icon-misc [class]' src=\"[url_encode(name)]\">"
-		var/atom/A = thing
-		if (isnull(dir))
-			dir = A.dir
-		if (isnull(icon_state))
-			icon_state = A.icon_state
-		I = A.icon
-		if (ishuman(thing)) // Shitty workaround for a BYOND issue.
-			var/icon/temp = I
-			I = icon()
-			I.Insert(temp, dir = SOUTH)
-			dir = SOUTH
+		if (ispath(thing))
+			var/atom/A = thing
+			if (isnull(dir))
+				dir = SOUTH
+			if (isnull(icon_state))
+				icon_state = initial(A.icon_state)
+			I = initial(A.icon)
+		else
+			var/atom/A = thing
+			if (isnull(dir))
+				dir = A.dir
+			if (isnull(icon_state))
+				icon_state = A.icon_state
+			I = A.icon
+			if (ishuman(thing)) // Shitty workaround for a BYOND issue.
+				var/icon/temp = I
+				I = icon()
+				I.Insert(temp, dir = SOUTH)
+				dir = SOUTH
 	else
 		if (isnull(dir))
 			dir = SOUTH

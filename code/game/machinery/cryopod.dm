@@ -388,7 +388,7 @@
 		if(occupant.mind.assigned_job)
 			occupant.mind.assigned_job.clear_slot()
 
-		if(occupant.mind.objectives.len)
+		if(LAZYLEN(occupant.mind.objectives))
 			occupant.mind.objectives = null
 			occupant.mind.special_role = null
 
@@ -450,7 +450,7 @@
 		to_chat(user, SPAN_WARNING("\The [target] isn't close enough."))
 		return
 	add_fingerprint(user)
-	if (!do_after(user, 2 SECONDS, src, do_flags = DO_DEFAULT | DO_TARGET_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+	if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 		return
 	if (QDELETED(target))
 		return
@@ -531,7 +531,7 @@
 
 	visible_message("\The [usr] starts climbing into \the [src].", range = 3)
 
-	if(do_after(usr, 20, src))
+	if(do_after(usr, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 
 		if(!usr || !usr.client)
 			return
@@ -612,7 +612,7 @@
 		if (isCrowbar(W))
 			busy = 1
 			visible_message("[user] starts to pry the glass cover off of \the [src].")
-			if (!do_after(user, 50, src))
+			if (!do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
 				visible_message("[user] stops trying to pry the glass off of \the [src].")
 				busy = 0
 				return

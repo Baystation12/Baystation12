@@ -64,8 +64,8 @@
 		comm_console_security_levels += security_level
 
 	// Now we ensure the high security level is not above the severe one (but we allow them to be equal)
-	var/severe_index = list_find(all_security_levels, severe_security_level)
-	var/high_index = list_find(all_security_levels, high_security_level)
+	var/severe_index = all_security_levels.Find(severe_security_level)
+	var/high_index = all_security_levels.Find(high_security_level)
 	if(high_index > severe_index)
 		high_security_level = severe_security_level
 
@@ -83,20 +83,20 @@
 	return given_security_level in standard_security_levels
 
 /decl/security_state/proc/current_security_level_is_lower_than(var/given_security_level)
-	var/current_index = list_find(all_security_levels, current_security_level)
-	var/given_index   = list_find(all_security_levels, given_security_level)
+	var/current_index = all_security_levels.Find(current_security_level)
+	var/given_index   = all_security_levels.Find(given_security_level)
 
 	return given_index && current_index < given_index
 
 /decl/security_state/proc/current_security_level_is_same_or_higher_than(var/given_security_level)
-	var/current_index = list_find(all_security_levels, current_security_level)
-	var/given_index   = list_find(all_security_levels, given_security_level)
+	var/current_index = all_security_levels.Find(current_security_level)
+	var/given_index   = all_security_levels.Find(given_security_level)
 
 	return given_index && current_index >= given_index
 
 /decl/security_state/proc/current_security_level_is_higher_than(var/given_security_level)
-	var/current_index = list_find(all_security_levels, current_security_level)
-	var/given_index   = list_find(all_security_levels, given_security_level)
+	var/current_index = all_security_levels.Find(current_security_level)
+	var/given_index   = all_security_levels.Find(given_security_level)
 
 	return given_index && current_index > given_index
 
@@ -111,8 +111,8 @@
 	var/decl/security_level/previous_security_level = current_security_level
 	current_security_level = new_security_level
 
-	var/previous_index = list_find(all_security_levels, previous_security_level)
-	var/new_index      = list_find(all_security_levels, new_security_level)
+	var/previous_index = all_security_levels.Find(previous_security_level)
+	var/new_index      = all_security_levels.Find(new_security_level)
 
 	if(new_index > previous_index)
 		previous_security_level.switching_up_from()
@@ -130,7 +130,7 @@
 
 // This proc decreases the current security level, if possible
 /decl/security_state/proc/decrease_security_level(var/force_change = FALSE)
-	var/current_index = list_find(all_security_levels, current_security_level)
+	var/current_index = all_security_levels.Find(current_security_level)
 	if(current_index == 1)
 		return FALSE
 	return set_security_level(all_security_levels[current_index - 1], force_change)
@@ -138,6 +138,7 @@
 /decl/security_level
 	var/icon
 	var/name
+	var/alarm_level = "off"
 
 	// These values are primarily for station alarms and status displays, and which light colors and overlays to use
 	var/light_max_bright = 0.5
@@ -196,6 +197,9 @@
 	for(var/obj/machinery/firealarm/FA in SSmachines.machinery)
 		if(FA.z in GLOB.using_map.contact_levels)
 			FA.update_icon()
+	for (var/obj/machinery/rotating_alarm/security_alarm/SA in SSmachines.machinery)
+		if (SA.z in GLOB.using_map.contact_levels)
+			SA.set_alert(name, alarm_level, light_color_alarm)
 	post_status("alert")
 
 /decl/security_level/default/code_green
@@ -216,6 +220,7 @@
 
 /decl/security_level/default/code_blue
 	name = "code blue"
+	alarm_level = "on"
 
 	light_max_bright = 0.5
 	light_inner_range = 0.1
@@ -234,6 +239,7 @@
 
 /decl/security_level/default/code_red
 	name = "code red"
+	alarm_level = "on"
 
 	light_max_bright = 0.5
 	light_inner_range = 0.1
@@ -252,6 +258,7 @@
 
 /decl/security_level/default/code_delta
 	name = "code delta"
+	alarm_level = "on"
 
 	light_max_bright = 0.75
 	light_inner_range = 0.1

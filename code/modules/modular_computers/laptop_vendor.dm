@@ -269,7 +269,7 @@
 		ui.set_auto_update(1)
 
 
-obj/machinery/lapvend/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/lapvend/attackby(obj/item/W as obj, mob/user as mob)
 	var/obj/item/card/id/I = W.GetIdCard()
 	// Awaiting payment state
 	if(state == 2)

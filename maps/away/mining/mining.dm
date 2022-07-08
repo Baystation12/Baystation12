@@ -14,14 +14,17 @@
 		"nav_cluster_6",
 		"nav_cluster_7"
 	)
-	known = 0
+	known = FALSE
 
 /obj/effect/overmap/visitable/sector/cluster/generate_skybox()
-	return overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
+	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
+	res.blend_mode = BLEND_OVERLAY
+	return res
 
 /obj/effect/overmap/visitable/sector/cluster/get_skybox_representation()
 	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
-	res.transform *= 0.5
+	res.blend_mode = BLEND_OVERLAY
+	res.SetTransform(scale = 0.5)
 	return res
 
 /datum/map_template/ruin/away_site/mining_asteroid
@@ -85,14 +88,15 @@
 		"nav_away_6",
 		"nav_away_7"
 	)
-	known = 0
+	known = FALSE
 
 /obj/effect/overmap/visitable/sector/away/generate_skybox()
 	return overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
 
 /obj/effect/overmap/visitable/sector/away/get_skybox_representation()
 	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
-	res.transform *= 0.3
+	res.blend_mode = BLEND_OVERLAY
+	res.SetTransform(scale = 0.3)
 	return res
 
 /datum/map_template/ruin/away_site/mining_signal
@@ -155,10 +159,11 @@
 		"nav_orb_6",
 		"nav_orb_7"
 	)
-	known = 0
+	known = FALSE
 
 /obj/effect/overmap/visitable/sector/orb/get_skybox_representation()
 	var/image/res = overlay_image('icons/skybox/skybox_rock_128.dmi', "bigrock", COLOR_ASTEROID_ROCK, RESET_COLOR)
+	res.blend_mode = BLEND_OVERLAY
 	res.pixel_x = rand(256,512)
 	res.pixel_y = rand(256,512)
 	return res

@@ -1,6 +1,6 @@
-var/const/TELEBEACON_WIRE_POWER     = 1
-var/const/TELEBEACON_WIRE_RELAY     = 2
-var/const/TELEBEACON_WIRE_SIGNALLER = 4
+var/global/const/TELEBEACON_WIRE_POWER     = 1
+var/global/const/TELEBEACON_WIRE_RELAY     = 2
+var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 
 
 // Targetable beacon used by teleporters
@@ -60,7 +60,7 @@ var/const/TELEBEACON_WIRE_SIGNALLER = 4
 				SPAN_NOTICE("You start to [anchored ? "disconnect" : "connect"] \the [src] [anchored ? "to" : "from"] \the [T].")
 			)
 
-			if (!do_after(user, 3 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+			if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 				return TRUE
 
 			anchored = !anchored

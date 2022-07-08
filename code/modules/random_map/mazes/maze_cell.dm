@@ -1,4 +1,4 @@
-var/maze_cell_count = 0
+var/global/maze_cell_count = 0
 
 /datum/maze_cell
 	var/name

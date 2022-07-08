@@ -60,14 +60,14 @@
 	if(max_fall_damage > 0)
 		var/mob/living/exosuit/E = loc
 		if(istype(E)) //route it through exosuit for proper handling
-			E.apply_damage(rand(0, max_fall_damage), BRUTE, BP_R_LEG) //Any leg is good, will damage us correctly
+			E.apply_damage(rand(0, max_fall_damage), DAMAGE_BRUTE, BP_R_LEG) //Any leg is good, will damage us correctly
 
 /obj/item/mech_component/propulsion/powerloader
 	name = "exosuit legs"
 	exosuit_desc_string = "reinforced hydraulic legs"
 	desc = "Wide and stable but not particularly fast."
 	max_damage = 70
-	move_delay = 3
+	move_delay = 4
 	turn_delay = 4
 	power_use = 10
 
@@ -105,7 +105,6 @@
 	move_delay = 2 //It´s fast
 	turn_delay = 7
 	power_use = 150
-	color = COLOR_WHITE
 
 /obj/item/mech_component/propulsion/heavy
 	name = "heavy legs"

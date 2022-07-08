@@ -176,7 +176,7 @@
 
 	var/list/L = list()
 	for(var/mob/living/silicon/robot/RB in SSmobs.mob_list)
-		if(is_drone(RB))
+		if(isdrone(RB))
 			continue
 		if(RB.connected_ai == A)
 			continue
@@ -207,7 +207,7 @@
 		message = text("used malf ability/function: [ability_name].")
 	admin_attack_log(A, null, message, null, message)
 
-proc/check_for_interception()
+/proc/check_for_interception()
 	for(var/mob/living/silicon/ai/A in SSmobs.mob_list)
 		if(A.intercepts_communication)
 			return A

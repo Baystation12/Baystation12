@@ -25,7 +25,6 @@
 
 /decl/move_intent/walk
 	name = "Walk"
-	flags = MOVE_INTENT_DELIBERATE
 	hud_icon_state = "walking"
 
 /decl/move_intent/walk/Initialize()

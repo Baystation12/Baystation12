@@ -14,6 +14,12 @@
 	var/spawn_reagent = null
 	var/label = ""
 
+/obj/item/reagent_containers/chem_disp_cartridge/small
+	volume = CARTRIDGE_VOLUME_SMALL
+
+/obj/item/reagent_containers/chem_disp_cartridge/medium
+	volume = CARTRIDGE_VOLUME_MEDIUM
+
 /obj/item/reagent_containers/chem_disp_cartridge/New()
 	. = ..()
 	if(spawn_reagent)

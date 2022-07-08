@@ -151,5 +151,7 @@
 		parts -= picked
 
 /mob/living/silicon/robot/emp_act(severity)
+	if (status_flags & GODMODE)
+		return
 	uneq_all()
 	..() //Damage is handled at /silicon/ level.

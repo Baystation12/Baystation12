@@ -34,7 +34,6 @@
 		walk_to(src, destination)
 
 /obj/effect/effect/smoke/chem/Destroy()
-	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	set_opacity(0)
 	// TODO - fadeOut() sleeps.  Sleeping in /Destroy is Bad, this needs to be fixed.
 	fadeOut()
@@ -113,7 +112,7 @@
 	carry.trans_to_obj(chemholder, carry.total_volume, copy = 1)
 	smokeVolume = n
 
-	if(istype(loca, /turf/))
+	if(isturf(loca))
 		location = loca
 	else
 		location = get_turf(loca)

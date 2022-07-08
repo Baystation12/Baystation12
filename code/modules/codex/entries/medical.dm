@@ -78,7 +78,7 @@
 	You can use a health analyzer to scan the occupant's vitals without opening the bag by clicking the occupied bag with the analyzer."
 
 /datum/codex_entry/autopump
-	associated_paths = list(/obj/item/auto_cpr/)
+	associated_paths = list(/obj/item/auto_cpr)
 	mechanics_text = "This automatic pump will help a patient whose heart is stopped, much like CPR, when put in the patient's suit slot.<br>\
 	<br>\
 	There are several things to keep in mind when using it. First off, you need Basic Medicine AND Anatomy skills to align it properly, otherwise it'll hurt patient. \

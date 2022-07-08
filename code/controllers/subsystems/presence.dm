@@ -5,10 +5,14 @@ SUBSYSTEM_DEF(presence)
 	name = "Player Presence"
 	priority = SS_PRIORITY_PRESENCE
 	runlevels = RUNLEVEL_GAME
-	wait = 10 SECONDS
-	var/static/tmp/list/levels = list()
-	var/static/tmp/list/queue = list()
-	var/static/tmp/list/build
+	wait = 2 SECONDS
+	var/static/list/levels = list()
+	var/static/list/queue = list()
+	var/static/list/build
+
+
+/datum/controller/subsystem/presence/UpdateStat(time)
+	return
 
 
 /datum/controller/subsystem/presence/Recover()
@@ -37,9 +41,6 @@ SUBSYSTEM_DEF(presence)
 
 /datum/controller/subsystem/presence/flags = SS_NO_INIT
 
-/hook/roundstart/proc/update_presence_subsystem()
-	SSpresence.fire(FALSE, TRUE)
-
 /// 0, or the number of living players on level
 /datum/controller/subsystem/presence/proc/population(level)
 	return levels["[level]"] || 0
@@ -52,7 +53,3 @@ SUBSYSTEM_DEF(presence)
 	return 1
 
 #endif
-
-
-/// Convenience shortcut to use with atoms that want this info, like: if (!LEVEL_HAS_PLAYERS) return
-#define LEVEL_HAS_PLAYERS (SSpresence.levels["[src.z]"])

@@ -182,7 +182,7 @@
 					/obj/item/reagent_containers/spray/pepper,
 					/obj/item/grenade/chem_grenade/teargas,
 					/obj/item/melee/baton/loaded,
-					/obj/item/clothing/glasses/sunglasses/sechud/goggles,
+					/obj/item/clothing/glasses/hud/security/prot,
 					/obj/item/taperoll/police,
 					/obj/item/device/hailer,
 					/obj/item/clothing/accessory/storage/black_vest,
@@ -200,7 +200,7 @@
 /decl/hierarchy/supply_pack/security/cosextragear
 	name = "Gear - Chief of Security equipment"
 	contains = list(/obj/item/device/radio/headset/heads/cos,
-					/obj/item/clothing/glasses/sunglasses/sechud/goggles,
+					/obj/item/clothing/glasses/hud/security/prot,
 					/obj/item/taperoll/police,
 					/obj/item/storage/belt/holster/security,
 					/obj/item/device/hailer,

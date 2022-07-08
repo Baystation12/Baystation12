@@ -87,7 +87,7 @@
 /////////////////////////////////////////
 //Seals and Signet Rings
 
-/obj/item/clothing/ring/seal/
+/obj/item/clothing/ring/seal
 	icon = 'icons/obj/clothing/obj_hands_ring.dmi'
 
 /obj/item/clothing/ring/seal/secgen

@@ -1,4 +1,4 @@
-/datum/codex_category/languages/
+/datum/codex_category/languages
 	name = "Languages"
 	desc = "Languages spoken in known space."
 

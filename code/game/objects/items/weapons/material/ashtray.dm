@@ -27,7 +27,7 @@
 		overlays |= image('icons/obj/objects.dmi',"ashtray_half")
 
 /obj/item/material/ashtray/attackby(obj/item/W as obj, mob/user as mob)
-	if (!is_alive())
+	if (health_dead)
 		return
 
 	if (user.a_intent == I_HURT)

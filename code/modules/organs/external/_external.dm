@@ -34,8 +34,8 @@
 	var/model                          // Used when caching robolimb icons.
 	var/force_icon                     // Used to force override of species-specific limb icons (for prosthetics).
 	var/icon/mob_icon                  // Cached icon for use in mob overlays.
-	var/s_tone                         // Skin tone.
-	var/s_base = ""                    // Skin base.
+	var/skin_tone                         // Skin tone.
+	var/base_skin = ""                    // Skin base.
 	var/list/s_col                     // skin colour
 	var/s_col_blend = ICON_ADD         // How the skin colour is applied.
 	var/list/h_col                     // hair colour
@@ -142,7 +142,7 @@
 /obj/item/organ/external/set_dna(var/datum/dna/new_dna)
 	..()
 	s_col_blend = species.limb_blend
-	s_base = new_dna.s_base
+	base_skin = new_dna.base_skin
 
 /obj/item/organ/external/emp_act(severity)
 
@@ -156,9 +156,9 @@
 
 	var/burn_damage = 0
 	switch (severity)
-		if (1)
+		if (EMP_ACT_HEAVY)
 			burn_damage = 30
-		if (2)
+		if (EMP_ACT_LIGHT)
 			burn_damage = 15
 		if (3)
 			burn_damage = 7.5
@@ -180,6 +180,8 @@
 
 	if(owner && limb_flags & ORGAN_FLAG_CAN_STAND)
 		owner.stance_damage_prone(src)
+
+	..()
 
 /obj/item/organ/external/attack_self(var/mob/user)
 	if((owner && loc == owner) || !contents.len)
@@ -360,8 +362,10 @@
 
 	var/damage_amount
 	switch(damage_type)
-		if(BRUTE) damage_amount = brute_dam
-		if(BURN)  damage_amount = burn_dam
+		if (DAMAGE_BRUTE)
+			damage_amount = brute_dam
+		if (DAMAGE_BURN)
+			damage_amount = burn_dam
 		else return 0
 
 	if(!damage_amount)
@@ -385,13 +389,14 @@
 			return 0
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(!do_after(user, 1 SECOND, owner))
-		to_chat(user, "<span class='warning'>You must stand still to do that.</span>")
+	if(!do_after(user, 1 SECOND, owner, DO_SURGERY))
 		return 0
 
 	switch(damage_type)
-		if(BRUTE) src.heal_damage(repair_amount, 0, 0, 1)
-		if(BURN)  src.heal_damage(0, repair_amount, 0, 1)
+		if (DAMAGE_BRUTE)
+			src.heal_damage(repair_amount, 0, 0, 1)
+		if (DAMAGE_BURN)
+			heal_damage(0, repair_amount, 0, 1)
 	owner.regenerate_icons()
 	if(user == src.owner)
 		user.visible_message("<span class='notice'>\The [user] patches [damage_desc] on \his [src.name] with [tool].</span>")
@@ -457,19 +462,19 @@ This function completely restores a damaged organ to perfect condition.
 		I.remove_rejuv()
 	..()
 
-/obj/item/organ/external/proc/createwound(var/type = CUT, var/damage, var/surgical)
+/obj/item/organ/external/proc/createwound(type = INJURY_TYPE_CUT, damage, surgical)
 
 	if(damage <= 0)
 		return
 
 	if(BP_IS_CRYSTAL(src) && (damage >= 15 || prob(1)))
-		type = SHATTER
+		type = INJURY_TYPE_SHATTER
 		playsound(loc, 'sound/effects/hit_on_shattered_glass.ogg', 40, 1) // Crash!
 
 	//moved these before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage (because of the return)
 	//Brute damage can possibly trigger an internal wound, too.
 	var/local_damage = brute_dam + burn_dam + damage
-	if(!surgical && (type in list(CUT, PIERCE, BRUISE)) && damage > 15 && local_damage > 30)
+	if (!surgical && (type in list(INJURY_TYPE_CUT, INJURY_TYPE_PIERCE, INJURY_TYPE_BRUISE)) && damage > 15 && local_damage > 30)
 
 		var/internal_damage
 		if(prob(damage) && sever_artery())
@@ -480,17 +485,19 @@ This function completely restores a damaged organ to perfect condition.
 			owner.custom_pain("You feel something rip in your [name]!", 50, affecting = src)
 
 	//Burn damage can cause fluid loss due to blistering and cook-off
-	if((type in list(BURN, LASER)) && (damage > 5 || damage + burn_dam >= 15) && !BP_IS_ROBOTIC(src))
+	if ((type in list(INJURY_TYPE_BURN, INJURY_TYPE_LASER)) && (damage > 5 || damage + burn_dam >= 15) && !BP_IS_ROBOTIC(src))
 		var/fluid_loss_severity
 		switch(type)
-			if(BURN)  fluid_loss_severity = FLUIDLOSS_WIDE_BURN
-			if(LASER) fluid_loss_severity = FLUIDLOSS_CONC_BURN
+			if (INJURY_TYPE_BURN)
+				fluid_loss_severity = FLUIDLOSS_WIDE_BURN
+			if (INJURY_TYPE_LASER)
+				fluid_loss_severity = FLUIDLOSS_CONC_BURN
 		var/fluid_loss = (damage/(owner.maxHealth - config.health_threshold_dead)) * SPECIES_BLOOD_DEFAULT * fluid_loss_severity
 		owner.remove_blood(fluid_loss)
 
 	// first check whether we can widen an existing wound
 	if(!surgical && LAZYLEN(wounds) && prob(max(50+(number_wounds-1)*10,90)))
-		if((type == CUT || type == BRUISE) && damage >= 5)
+		if ((type == INJURY_TYPE_CUT || type == INJURY_TYPE_BRUISE) && damage >= 5)
 			//we need to make sure that the wound we are going to worsen is compatible with the type of damage...
 			var/list/compatible_wounds = list()
 			for (var/datum/wound/W in wounds)
@@ -708,9 +715,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 		heal_amt = heal_amt / (LAZYLEN(wounds) + 1)
 		// making it look prettier on scanners
 		heal_amt = round(heal_amt,0.1)
-		var/dam_type = BRUTE
-		if(W.damage_type == BURN)
-			dam_type = BURN
+		var/dam_type = DAMAGE_BRUTE
+		if (W.damage_type == INJURY_TYPE_BURN)
+			dam_type = DAMAGE_BURN
 		if(owner.can_autoheal(dam_type))
 			W.heal_damage(heal_amt)
 
@@ -742,7 +749,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			qdel(W)
 			continue
 
-		if(W.damage_type == BURN)
+		if (W.damage_type == INJURY_TYPE_BURN)
 			burn_dam += W.damage
 		else
 			brute_dam += W.damage
@@ -886,9 +893,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(DROPLIMB_EDGE)
 			compile_icon()
 			add_blood(victim)
-			var/matrix/M = matrix()
-			M.Turn(rand(180))
-			src.transform = M
+			SetTransform(rotation = rand(180))
 			forceMove(get_turf(src))
 			if(!clean)
 				// Throw limb around.
@@ -1023,7 +1028,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(W.clamped)
 			return 1
 
-obj/item/organ/external/proc/remove_clamps()
+/obj/item/organ/external/proc/remove_clamps()
 	var/rval = 0
 	for(var/datum/wound/W in wounds)
 		rval |= W.clamped
@@ -1181,11 +1186,11 @@ obj/item/organ/external/proc/remove_clamps()
 
 	if(!supplied_wound)
 		for(var/datum/wound/wound in wounds)
-			if((wound.damage_type == CUT || wound.damage_type == PIERCE) && wound.damage >= W.w_class * 5)
+			if ((wound.damage_type == INJURY_TYPE_CUT || wound.damage_type == INJURY_TYPE_PIERCE) && wound.damage >= W.w_class * 5)
 				supplied_wound = wound
 				break
 	if(!supplied_wound)
-		supplied_wound = createwound(PIERCE, W.w_class * 5)
+		supplied_wound = createwound(INJURY_TYPE_PIERCE, W.w_class * 5)
 
 	if(!supplied_wound || (W in supplied_wound.embedded_objects)) // Just in case.
 		return
@@ -1293,15 +1298,15 @@ obj/item/organ/external/proc/remove_clamps()
 	else if(is_stump())
 		qdel(src)
 
-/obj/item/organ/external/proc/disfigure(var/type = "brute")
+/obj/item/organ/external/proc/disfigure(var/type = INJURY_TYPE_BRUISE)
 	if(status & ORGAN_DISFIGURED)
 		return
 	if(owner)
-		if(type == "brute")
+		if (type == INJURY_TYPE_BRUISE)
 			owner.visible_message("<span class='danger'>You hear a sickening cracking sound coming from \the [owner]'s [name].</span>",	\
 			"<span class='danger'>Your [name] becomes a mangled mess!</span>",	\
 			"<span class='danger'>You hear a sickening crack.</span>")
-		else
+		else if (type == INJURY_TYPE_BURN)
 			owner.visible_message("<span class='danger'>\The [owner]'s [name] melts away, turning into mangled mess!</span>",	\
 			"<span class='danger'>Your [name] melts away!</span>",	\
 			"<span class='danger'>You hear a sickening sizzle.</span>")
@@ -1360,13 +1365,14 @@ obj/item/organ/external/proc/remove_clamps()
 	if(internal_organs.len && prob(brute_dam + force))
 		owner.custom_pain("A piece of bone in your [encased ? encased : name] moves painfully!", 50, affecting = src)
 		var/obj/item/organ/internal/I = pick(internal_organs)
-		I.take_internal_damage(rand(3,5))
+		if (I)
+			I.take_internal_damage(rand(3,5))
 
 /obj/item/organ/external/proc/jointlock(mob/attacker)
 	if(!can_feel_pain())
 		return
 
-	var/armor = 100 * owner.get_blocked_ratio(owner, BRUTE, damage = 30)
+	var/armor = 100 * owner.get_blocked_ratio(owner, DAMAGE_BRUTE, damage = 30)
 	if(armor < 70)
 		to_chat(owner, "<span class='danger'>You feel extreme pain!</span>")
 

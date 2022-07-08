@@ -10,70 +10,70 @@
 	},
 /area/bluespaceriver/ground)
 "ac" = (
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "ad" = (
 /obj/structure/flora/grass/brown,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "ae" = (
 /obj/structure/flora/tree/pine,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "af" = (
 /obj/structure/flora/bush,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "ag" = (
 /obj/structure/flora/bush,
 /obj/structure/flora/grass/both,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "ah" = (
 /obj/structure/flora/grass/green,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "ai" = (
 /obj/structure/flora/grass/both,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "aj" = (
 /obj/structure/flora/ausbushes/brflowers,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "ak" = (
 /obj/effect/shuttle_landmark/nav_blueriv/nav3,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "al" = (
 /obj/effect/overmap/visitable/sector/arcticplanet{
-	desc = "Sensor array an arctic planet with a small vessle on the surface. The vessle is located in the western region of a plateu surrounded by mineral rich mountains on all four sides. Scans further indicate strange energy levels below the planet's surface. Sunrise expected in 56 hours."
+	desc = "Sensors show an arctic planet with a small vessel on the surface. The vessel is located in the western region of a trough surrounded by mineral-rich mountains on all four sides. Scans further indicate strange energy emissions from below the planet's surface. Sunrise is expected in 56 hours."
 	},
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "am" = (
 /obj/effect/shuttle_landmark/nav_blueriv/nav1,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
@@ -99,7 +99,7 @@
 /area/bluespaceriver/ship)
 "as" = (
 /obj/machinery/light,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ship)
@@ -188,7 +188,6 @@
 "aI" = (
 /obj/machinery/vending/wallmed1{
 	name = "Emergency NanoMed";
-	pixel_x = 0;
 	pixel_y = 29
 	},
 /obj/structure/table/woodentable,
@@ -266,10 +265,8 @@
 "aW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/alarm{
-	alarm_id = "petrov3";
 	dir = 4;
 	pixel_x = -25;
-	pixel_y = 0;
 	rcon_setting = 3
 	},
 /turf/simulated/floor/tiled,
@@ -300,7 +297,7 @@
 /obj/machinery/r_n_d/circuit_imprinter,
 /obj/item/device/ano_scanner,
 /obj/item/paper{
-	info = "I don't understand where they could have gone, but one of the researchers and a guard disappeared last night. We've started looking for them, figuring maybe they got trapped somewhere in the ruins, maybe a booby trap or something that was still functioning, but we haven't seen any sign of them. their equipment, both of their equipment, is still in the ship, and there's no signs of anything grabbing them in the night, they're just... Gone.  Tomorrow morning we head back into space to go resupply and submit what we've found so far, but when we come back we'll have more than enough manpower to really dig into this place."
+	info = "I don't understand where they could have gone, but one of the researchers and a guard disappeared last night. We've started looking for them, figuring maybe they got trapped somewhere in the ruins, maybe a booby trap or something that was still functioning, but we haven't seen any sign of them. Their equipment, both of their equipment, is still in the ship, and there's no signs of anything grabbing them in the night, they're just... Gone.  Tomorrow morning we head back into space to go resupply and submit what we've found so far, but when we come back we'll have more than enough manpower to really dig into this place."
 	},
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
@@ -413,7 +410,7 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ship)
@@ -498,7 +495,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ship)
@@ -604,7 +601,6 @@
 /obj/machinery/vending/wallmed1{
 	name = "Emergency NanoMed";
 	pixel_x = 28;
-	pixel_y = 0;
 	req_access = newlist()
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -621,8 +617,7 @@
 	},
 /obj/structure/cable,
 /obj/machinery/power/smes/buildable{
-	RCon_tag = "Solar - Port";
-	charge = 0
+	RCon_tag = "Solar - Port"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bluespaceriver/ship)
@@ -634,8 +629,7 @@
 /area/bluespaceriver/ship)
 "bV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	dir = 4;
-	icon_state = "map_universal"
+	dir = 4
 	},
 /turf/simulated/wall/titanium,
 /area/bluespaceriver/ship)
@@ -644,7 +638,7 @@
 	dir = 8;
 	use_power = 1
 	},
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ship)
@@ -779,51 +773,51 @@
 /area/bluespaceriver/ship)
 "cv" = (
 /obj/machinery/mining/brace,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "cw" = (
 /obj/machinery/mining/drill,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "cx" = (
 /obj/effect/shuttle_landmark/nav_blueriv/nav4,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "cy" = (
 /obj/structure/ladder,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "cz" = (
 /obj/item/remains/human,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "cA" = (
 /obj/structure/flora/grass/both,
 /obj/structure/flora/grass/both,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "cB" = (
 /obj/structure/flora/grass/both,
 /obj/structure/flora/bush,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "cC" = (
 /obj/effect/shuttle_landmark/nav_blueriv/nav2,
-/turf/unsimulated/floor/exoplanet/snow{
+/turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)

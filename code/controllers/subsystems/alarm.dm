@@ -3,12 +3,12 @@ SUBSYSTEM_DEF(alarm)
 	wait = 2 SECONDS
 	priority = SS_PRIORITY_ALARM
 	init_order = SS_INIT_ALARM
-	var/static/tmp/list/datum/alarm_handler/handlers
-	var/static/tmp/list/current = list()
-	var/static/tmp/list/active = list()
+	var/static/list/datum/alarm_handler/handlers
+	var/static/list/current = list()
+	var/static/list/active = list()
 
 
-/datum/controller/subsystem/alarm/Initialize(timeofday)
+/datum/controller/subsystem/alarm/Initialize(start_uptime)
 	handlers = list(
 		GLOB.atmosphere_alarm,
 		GLOB.camera_alarm,
@@ -18,11 +18,10 @@ SUBSYSTEM_DEF(alarm)
 	)
 
 
-/datum/controller/subsystem/alarm/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Alarms: [active.len]"
-	..(text, force)
+/datum/controller/subsystem/alarm/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Alarms: [active.len]")
 
 
 /datum/controller/subsystem/alarm/fire(resumed, no_mc_tick)

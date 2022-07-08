@@ -17,9 +17,6 @@
 	wielded_item_state = "ionrifle-wielded"
 	combustion = 0
 
-/obj/item/gun/energy/ionrifle/emp_act(severity)
-	..(max(severity, 2)) //so it doesn't EMP itself, I guess
-
 /obj/item/gun/energy/ionrifle/small
 	name = "ion pistol"
 	desc = "The NT Mk72 EW Preston is a personal defense weapon designed to disable mechanical threats."

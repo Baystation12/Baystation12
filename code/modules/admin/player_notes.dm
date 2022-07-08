@@ -6,7 +6,8 @@
 		return
 
 	//Loading list of notes for this key
-	var/savefile/info = new("data/player_saves/[copytext_char(key, 1, 2)]/[key]/info.sav")
+	var/target = ckey(key)
+	var/savefile/info = new("data/player_saves/[copytext_char(target, 1, 2)]/[target]/info.sav")
 	var/list/infos
 	from_save(info, infos)
 	if(!infos) infos = list()
@@ -53,13 +54,14 @@
 	var/list/note_keys
 	from_save(note_list, note_keys)
 	if(!note_keys) note_keys = list()
-	if(!list_find(note_keys, key)) note_keys += key
+	if(!note_keys.Find(target)) note_keys += target
 	to_save(note_list, note_keys)
 	del(note_list) // savefile, so NOT qdel
 
 
 /proc/notes_del(var/key, var/index)
-	var/savefile/info = new("data/player_saves/[copytext_char(key, 1, 2)]/[key]/info.sav")
+	var/target = ckey(key)
+	var/savefile/info = new("data/player_saves/[copytext_char(target, 1, 2)]/[target]/info.sav")
 	var/list/infos
 	from_save(info, infos)
 	if(!infos || infos.len < index) return
@@ -68,14 +70,15 @@
 	infos.Remove(item)
 	to_save(info, infos)
 
-	message_staff("<span class='notice'>[key_name_admin(usr)] deleted one of [key]'s notes.</span>")
-	log_admin("[key_name(usr)] deleted one of [key]'s notes.")
+	message_staff("<span class='notice'>[key_name_admin(usr)] deleted one of [target]'s notes.</span>")
+	log_admin("[key_name(usr)] deleted one of [target]'s notes.")
 
 	del(info) // savefile, so NOT qdel
 
 /proc/show_player_info_irc(var/key as text)
 	var/dat = "          Info on [key]\n"
-	var/savefile/info = new("data/player_saves/[copytext_char(key, 1, 2)]/[key]/info.sav")
+	var/target = ckey(key)
+	var/savefile/info = new("data/player_saves/[copytext_char(target, 1, 2)]/[target]/info.sav")
 	var/list/infos
 	from_save(info, infos)
 	if(!infos)

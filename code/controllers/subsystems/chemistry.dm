@@ -4,22 +4,21 @@ SUBSYSTEM_DEF(chemistry)
 	init_order = SS_INIT_CHEMISTRY
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 	wait = 0.5 SECONDS
-	var/static/tmp/list/reactions = list()
-	var/static/tmp/list/reactions_by_id = list()
-	var/static/tmp/list/reactions_by_result = list()
-	var/static/tmp/list/random_chem_prototypes = list()
-	var/static/tmp/list/processing = list()
-	var/static/tmp/list/current = list()
+	var/static/list/reactions = list()
+	var/static/list/reactions_by_id = list()
+	var/static/list/reactions_by_result = list()
+	var/static/list/random_chem_prototypes = list()
+	var/static/list/processing = list()
+	var/static/list/current = list()
 
 
-/datum/controller/subsystem/chemistry/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Reaction Queue: [processing.len]"
-	..(text, force)
+/datum/controller/subsystem/chemistry/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Reaction Queue: [processing.len]")
 
 
-/datum/controller/subsystem/chemistry/Initialize()
+/datum/controller/subsystem/chemistry/Initialize(start_uptime)
 	for (var/datum/chemical_reaction/reaction as anything in subtypesof(/datum/chemical_reaction))
 		reaction = new reaction
 		var/result = reaction.result

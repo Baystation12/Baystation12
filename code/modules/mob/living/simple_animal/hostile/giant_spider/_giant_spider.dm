@@ -17,8 +17,8 @@
 	// has_eye_glow = TRUE
 
 	faction = "spiders"
-	maxHealth = 125
-	health = 125
+	maxHealth = 110
+	health = 110
 	natural_weapon = /obj/item/natural_weapon/bite/spider
 	pass_flags = PASS_FLAG_TABLE
 	poison_resist = 0.5
@@ -106,10 +106,3 @@
 	if(prob(poison_chance))
 		to_chat(L, SPAN_WARNING("You feel a tiny prick."))
 		L.reagents.add_reagent(poison_type, poison_per_bite)
-
-/// Scale the spiders icon up or down.
-/mob/living/simple_animal/hostile/giant_spider/proc/scale(factor)
-	if (factor)
-		var/matrix/M = matrix()
-		M.Scale(factor)
-		src.transform = M

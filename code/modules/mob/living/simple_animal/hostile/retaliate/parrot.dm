@@ -39,7 +39,7 @@
 
 	natural_weapon = /obj/item/natural_weapon/beak
 	turns_per_move = 5
-	meat_type = /obj/item/reagent_containers/food/snacks/cracker/
+	meat_type = /obj/item/reagent_containers/food/snacks/cracker
 
 	response_help  = "pets"
 	response_disarm = "gently moves aside"
@@ -268,6 +268,8 @@
 
 //Bullets
 /mob/living/simple_animal/hostile/retaliate/parrot/bullet_act(var/obj/item/projectile/Proj)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 	..()
 	if(!stat && !client)
 		if(parrot_state == PARROT_PERCH)

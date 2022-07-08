@@ -1,5 +1,5 @@
-var/list/escape_pods = list()
-var/list/escape_pods_by_name = list()
+var/global/list/escape_pods = list()
+var/global/list/escape_pods_by_name = list()
 
 #define ISEVAC_STARSHIP_FAST_CONTROLER istype(evacuation_controller, /datum/evacuation_controller/starship/fast)
 

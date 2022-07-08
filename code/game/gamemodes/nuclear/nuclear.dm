@@ -2,7 +2,7 @@
 	MERCENARY ROUNDTYPE
 */
 
-var/list/nuke_disks = list()
+var/global/list/nuke_disks = list()
 
 /datum/game_mode/nuclear
 	name = "Mercenary"
@@ -46,35 +46,35 @@ var/list/nuke_disks = list()
 
 	if(!disk_rescued &&  station_was_nuked && !syndies_didnt_escape)
 		to_world("<FONT size = 3><B>Mercenary Major Victory!</B></FONT>")
-		to_world("<B>[syndicate_name()] operatives have destroyed [station_name()]!</B>")
+		to_world("<B>Mercenary operatives have destroyed [station_name()]!</B>")
 
 	else if (!disk_rescued &&  station_was_nuked && syndies_didnt_escape)
 		to_world("<FONT size = 3><B>Total Annihilation</B></FONT>")
-		to_world("<B>[syndicate_name()] operatives destroyed [station_name()] but did not leave the area in time and got caught in the explosion.</B> Next time, don't lose the disk!")
+		to_world("<B>Mercenary operatives destroyed [station_name()] but did not leave the area in time and got caught in the explosion.</B> Next time, don't lose the disk!")
 
 	else if (!disk_rescued && !station_was_nuked &&  nuke_off_station && !syndies_didnt_escape)
 		to_world("<FONT size = 3><B>Crew Minor Victory</B></FONT>")
-		to_world("<B>[syndicate_name()] operatives secured the authentication disk but blew up something that wasn't [station_name()].</B> Next time, don't lose the disk!")
+		to_world("<B>Mercenary operatives secured the authentication disk but blew up something that wasn't [station_name()].</B> Next time, don't lose the disk!")
 
 	else if (!disk_rescued && !station_was_nuked &&  nuke_off_station && syndies_didnt_escape)
-		to_world("<FONT size = 3><B>[syndicate_name()] operatives have earned Darwin Award!</B></FONT>")
-		to_world("<B>[syndicate_name()] operatives blew up something that wasn't [station_name()] and got caught in the explosion.</B> Next time, don't lose the disk!")
+		to_world("<FONT size = 3><B>Mercenary operatives have earned Darwin Award!</B></FONT>")
+		to_world("<B>Mercenary operatives blew up something that wasn't [station_name()] and got caught in the explosion.</B> Next time, don't lose the disk!")
 
 	else if (disk_rescued && GLOB.mercs.antags_are_dead())
 		to_world("<FONT size = 3><B>Crew Major Victory!</B></FONT>")
-		to_world("<B>The Research Staff has saved the disc and killed the [syndicate_name()] Operatives</B>")
+		to_world("<B>The Research Staff has saved the disc and killed the Mercenary Operatives</B>")
 
 	else if ( disk_rescued                                        )
 		to_world("<FONT size = 3><B>Crew Major Victory</B></FONT>")
-		to_world("<B>The Research Staff has saved the disc and stopped the [syndicate_name()] Operatives!</B>")
+		to_world("<B>The Research Staff has saved the disc and stopped the Mercenary Operatives!</B>")
 
 	else if (!disk_rescued && GLOB.mercs.antags_are_dead())
 		to_world("<FONT size = 3><B>Mercenary Minor Victory!</B></FONT>")
-		to_world("<B>The Research Staff failed to secure the authentication disk but did manage to kill most of the [syndicate_name()] Operatives!</B>")
+		to_world("<B>The Research Staff failed to secure the authentication disk but did manage to kill most of the Mercenary Operatives!</B>")
 
 	else if (!disk_rescued && crew_evacuated)
 		to_world("<FONT size = 3><B>Mercenary Minor Victory!</B></FONT>")
-		to_world("<B>[syndicate_name()] operatives recovered the abandoned authentication disk but detonation of [station_name()] was averted.</B> Next time, don't lose the disk!")
+		to_world("<B>Mercenary operatives recovered the abandoned authentication disk but detonation of [station_name()] was averted.</B> Next time, don't lose the disk!")
 
 	else if (!disk_rescued && !crew_evacuated)
 		to_world("<FONT size = 3><B>Neutral Victory</B></FONT>")

@@ -121,7 +121,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 /obj/machinery/computer/rdconsole/New()
 	..()
-	files = new /datum/research(src) //Setup the research data holder.
+	files = new
 	if(!id)
 		for(var/obj/machinery/r_n_d/server/centcom/S in SSmachines.machinery)
 			S.update_connections()
@@ -416,7 +416,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(choice == "Continue")
 			screen = 0.0
 			qdel(files)
-			files = new /datum/research(src)
+			files = new
 			spawn(20)
 				screen = 1.6
 				interact(user)

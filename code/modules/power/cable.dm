@@ -81,15 +81,19 @@ By design, d1 is the smallest direction and d2 is the highest
 
 	d2 = text2num( copytext_char( icon_state, dash+1 ) )
 
-	var/turf/T = src.loc			// hide if turf is not intact
-	if(level==1) hide(!T.is_plating())
-	cable_list += src //add it to the global cable list
+	// hide the cable
+	var/turf/T = src.loc
+	if (level == 1)
+		var/hideme = !T.is_plating() && !T.is_open()
+		hide(hideme)
+
+	GLOB.cable_list += src //add it to the global cable list
 
 
 /obj/structure/cable/Destroy()     // called when a cable is deleted
 	if(powernet)
 		cut_cable_from_powernet()  // update the powernets
-	cable_list -= src              // remove it from global cable list
+	GLOB.cable_list -= src              // remove it from global cable list
 	. = ..()                       // then go ahead and delete the cable
 
 
@@ -99,9 +103,9 @@ By design, d1 is the smallest direction and d2 is the highest
 		user.examinate(src)
 		// following code taken from attackby (multitool)
 		if(powernet && (powernet.avail > 0))
-			to_chat(user, "<span class='warning'>[get_wattage()] in power network.</span>")
+			to_chat(user, SPAN_WARNING("[get_wattage()] in power network."))
 		else
-			to_chat(user, "<span class='warning'>The cable is not powered.</span>")
+			to_chat(user, SPAN_WARNING("The cable is not powered."))
 	return
 
 ///////////////////////////////////
@@ -139,6 +143,28 @@ By design, d1 is the smallest direction and d2 is the highest
 //
 
 /obj/structure/cable/attackby(obj/item/W, mob/user)
+	var/turf/T = get_turf(src)
+	//sanity checking
+	if(!isturf(T))
+		return
+
+	if(istype(T, /turf/simulated/floor) && !T.is_plating())
+		return
+
+	if(get_dist(T, user) > 1) // make sure it's close enough
+		to_chat(user, SPAN_WARNING("You can't lay cable at a place that far away."))
+		return
+
+	// handle catwalks and plated catwalks
+	var/obj/structure/catwalk/cwalk = locate(/obj/structure/catwalk, T)
+	if(cwalk)
+		if(cwalk.plated_tile && !cwalk.hatch_open)
+			to_chat(user, SPAN_WARNING("Open the catwalk hatch first."))
+			return
+		else if(!cwalk.plated_tile)
+			to_chat(user, SPAN_WARNING("The catwalk is blocking the cable."))
+			return
+
 	if(isWirecutter(W))
 		cut_wire(W, user)
 
@@ -152,10 +178,10 @@ By design, d1 is the smallest direction and d2 is the highest
 	else if(isMultitool(W))
 
 		if(powernet && (powernet.avail > 0))		// is it powered?
-			to_chat(user, "<span class='warning'>[get_wattage()] in power network.</span>")
+			to_chat(user, SPAN_WARNING("[get_wattage()] in power network."))
 
 		else
-			to_chat(user, "<span class='warning'>The cable is not powered.</span>")
+			to_chat(user, SPAN_WARNING("The cable is not powered."))
 
 		shock(user, 5, 0.2)
 
@@ -165,10 +191,10 @@ By design, d1 is the smallest direction and d2 is the highest
 		var/delay_holder
 
 		if(W.force < 5)
-			visible_message("<span class='warning'>[user] starts sawing away roughly at the cable with \the [W].</span>")
+			visible_message(SPAN_WARNING("[user] starts sawing away roughly at the cable with \the [W]."))
 			delay_holder = 8 SECONDS
 		else
-			visible_message("<span class='warning'>[user] begins to cut through the cable with \the [W].</span>")
+			visible_message(SPAN_WARNING("[user] begins to cut through the cable with \the [W]."))
 			delay_holder = 3 SECONDS
 
 		if(user.do_skilled(delay_holder, SKILL_ELECTRICAL, src))
@@ -176,21 +202,19 @@ By design, d1 is the smallest direction and d2 is the highest
 			if(W.obj_flags & OBJ_FLAG_CONDUCTIBLE)
 				shock(user, 66, 0.7)
 		else
-			visible_message("<span class='warning'>[user] stops cutting before any damage is done.</span>")
+			visible_message(SPAN_WARNING("[user] stops cutting before any damage is done."))
 
 	src.add_fingerprint(user)
 
 /obj/structure/cable/proc/cut_wire(obj/item/W, mob/user)
 	var/turf/T = get_turf(src)
-	if(!T || !T.is_plating())
-		return
 
 	if(d1 == UP || d2 == UP)
-		to_chat(user, "<span class='warning'>You must cut this cable from above.</span>")
+		to_chat(user, SPAN_WARNING("You must cut this cable from above."))
 		return
 
 	if(breaker_box)
-		to_chat(user, "<span class='warning'>This cable is connected to a nearby breaker box. Use the breaker box to interact with it.</span>")
+		to_chat(user, SPAN_WARNING("This cable is connected to a nearby breaker box. Use the breaker box to interact with it."))
 		return
 
 	if (shock(user, 50))
@@ -198,7 +222,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 	new/obj/item/stack/cable_coil(T, (src.d1 ? 2 : 1), color)
 
-	visible_message("<span class='warning'>[user] cuts the cable.</span>")
+	visible_message(SPAN_WARNING("[user] cuts the cable."))
 
 	if(HasBelow(z))
 		for(var/turf/turf in GetBelow(src))
@@ -225,19 +249,19 @@ By design, d1 is the smallest direction and d2 is the highest
 //explosion handling
 /obj/structure/cable/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				new/obj/item/stack/cable_coil(src.loc, src.d1 ? 2 : 1, color)
 				qdel(src)
 
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			if (prob(25))
 				new/obj/item/stack/cable_coil(src.loc, src.d1 ? 2 : 1, color)
 				qdel(src)
 
-obj/structure/cable/proc/cableColor(var/colorC)
+/obj/structure/cable/proc/cableColor(var/colorC)
 	var/color_n = "#dd0000"
 	if(colorC)
 		color_n = colorC
@@ -526,12 +550,12 @@ obj/structure/cable/proc/cableColor(var/colorC)
 			return ..()
 
 		if(BP_IS_BRITTLE(S))
-			to_chat(user, "<span class='warning'>\The [H]'s [S.name] is hard and brittle - \the [src] cannot repair it.</span>")
+			to_chat(user, SPAN_WARNING("\The [H]'s [S.name] is hard and brittle - \the [src] cannot repair it."))
 			return 1
 
 		var/use_amt = min(src.amount, Ceil(S.burn_dam/3), 5)
 		if(can_use(use_amt))
-			if(S.robo_repair(3*use_amt, BURN, "some damaged wiring", src, user))
+			if(S.robo_repair(3 * use_amt, DAMAGE_BURN, "some damaged wiring", src, user))
 				src.use(use_amt)
 		return
 	return ..()
@@ -562,7 +586,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		selected_color = "Red"
 		final_color = GLOB.possible_cable_colours[selected_color]
 	color = final_color
-	to_chat(user, "<span class='notice'>You change \the [src]'s color to [lowertext(selected_color)].</span>")
+	to_chat(user, SPAN_NOTICE("You change \the [src]'s color to [lowertext(selected_color)]."))
 
 /obj/item/stack/cable_coil/proc/update_wclass()
 	if(amount == 1)
@@ -578,13 +602,13 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	if(ishuman(M) && !M.incapacitated())
 		if(!istype(usr.loc,/turf)) return
 		if(!src.use(15))
-			to_chat(usr, "<span class='warning'>You need at least 15 lengths to make restraints!</span>")
+			to_chat(usr, SPAN_WARNING("You need at least 15 lengths to make restraints!"))
 			return
 		var/obj/item/handcuffs/cable/B = new /obj/item/handcuffs/cable(usr.loc)
 		B.color = color
-		to_chat(usr, "<span class='notice'>You wind some cable together to make some restraints.</span>")
+		to_chat(usr, SPAN_NOTICE("You wind some cable together to make some restraints."))
 	else
-		to_chat(usr, "<span class='notice'>You cannot do that.</span>")
+		to_chat(usr, SPAN_NOTICE("You cannot do that."))
 
 /obj/item/stack/cable_coil/cyborg/verb/set_colour()
 	set name = "Change Colour"
@@ -614,39 +638,52 @@ obj/structure/cable/proc/cableColor(var/colorC)
 // Cable laying procedures
 //////////////////////////////////////////////
 
-// called when cable_coil is clicked on a turf/simulated/floor
-/obj/item/stack/cable_coil/proc/turf_place(turf/simulated/F, mob/user)
+// called when cable_coil is clicked on a turf (special exception made for space & open space)
+/obj/item/stack/cable_coil/proc/turf_place(turf/F, mob/user)
+	// all four of these checks should already be handeled by the attackby behavior and behavior of the cable coil object, but just in case I kept them here
 	if(!isturf(user.loc))
 		return
 
-	if(get_amount() < 1) // Out of cable
-		to_chat(user, "There is no cable left.")
+	if(get_amount() < 1) // Out of cable (should never happen)
+		to_chat(user, SPAN_WARNING("There is no cable left."))
 		return
 
-	if(get_dist(F,user) > 1) // Too far
-		to_chat(user, "You can't lay cable at a place that far away.")
+	if(get_dist(F,user) > 1) // Too far (also should never happen unless fuckery)
+		to_chat(user, SPAN_WARNING("You can't lay cable at a place that far away."))
 		return
 
-	if(!F.is_plating())		// Ff floor is intact, complain
-		to_chat(user, "You can't lay cable there unless the floor tiles are removed.")
+	if(istype(F, /turf/simulated/floor) && !F.is_plating()) // Making sure it's not a floor tile
+		to_chat(user, SPAN_WARNING("Remove the tiling first."))
 		return
+	// end of hopefully unnecessary checks
 
-	var/dirn
-	if(user.loc == F)
-		dirn = user.dir			// if laying on the tile we're on, lay in the direction we're facing
-	else
-		dirn = get_dir(F, user)
+	// catwalk handling
+	var/obj/structure/catwalk/cwalk = locate(/obj/structure/catwalk, F)
+	if(cwalk)
+		if(cwalk.plated_tile && !cwalk.hatch_open)
+			to_chat(user, SPAN_WARNING("Open the catwalk hatch first."))
+			return
+		else if(!cwalk.plated_tile)
+			to_chat(user, SPAN_WARNING("You can't reach underneath the catwalk."))
+			return
 
+	// Check if the player is clicking an open space
 	var/end_dir = 0
-	if(istype(F, /turf/simulated/open))
+	if(istype(F, /turf/simulated/open) && !locate(/obj/structure/lattice, F))
 		if(!can_use(2))
-			to_chat(user, "You don't have enough cable to do this!")
+			to_chat(user, SPAN_WARNING("You don't have enough cable to hang a wire down."))
 			return
 		end_dir = DOWN
 
+	var/dirn
+	if(user.loc == F)
+		dirn = user.dir	// if laying on the tile we're on, lay in the direction we're facing
+	else
+		dirn = get_dir(F, user)
+
 	for(var/obj/structure/cable/LC in F)
 		if((LC.d1 == dirn && LC.d2 == end_dir ) || ( LC.d2 == dirn && LC.d1 == end_dir))
-			to_chat(user, "<span class='warning'>There's already a cable at that position.</span>")
+			to_chat(user, SPAN_WARNING("There's already a cable at that position."))
 			return
 
 	put_cable(F, user, end_dir, dirn)
@@ -657,16 +694,9 @@ obj/structure/cable/proc/cableColor(var/colorC)
 // or click on a turf that already contains a "node" cable
 /obj/item/stack/cable_coil/proc/cable_join(obj/structure/cable/C, mob/user)
 	var/turf/U = user.loc
-	if(!isturf(U))
-		return
-
 	var/turf/T = C.loc
-
-	if(!isturf(T) || !T.is_plating())		// sanity checks, also stop use interacting with T-scanner revealed cable
-		return
-
-	if(get_dist(C, user) > 1)		// make sure it's close enough
-		to_chat(user, "You can't lay cable at a place that far away.")
+	// making sure the player is not in an invalid place
+	if(!isturf(U))
 		return
 
 	if(U == T) //if clicked on the turf we're standing on, try to put a cable in the direction we're facing
@@ -677,18 +707,21 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 	// one end of the clicked cable is pointing towards us
 	if(C.d1 == dirn || C.d2 == dirn)
-		if(!U.is_plating())						// can't place a cable if the floor is complete
-			to_chat(user, "You can't lay cable there unless the floor tiles are removed.")
+		if(istype(U, /turf/simulated/floor) && !U.is_plating()) // make sure we aren't placing cable connections under floors
+			to_chat(user, SPAN_WARNING("Remove the tiling first."))
+			return
+		// make sure we aren't placing cable connections in open space (both kinds) with no support
+		else if((istype(U, /turf/space) || istype(U, /turf/simulated/open)) && !locate(/obj/structure/lattice, U))
+			to_chat(user, SPAN_WARNING("The cable connection needs something to be secured to."))
 			return
 		else
 			// cable is pointing at us, we're standing on an open tile
 			// so create a stub pointing at the clicked cable on our tile
+			var/fdirn = turn(dirn, 180)	// the opposite direction
 
-			var/fdirn = turn(dirn, 180)		// the opposite direction
-
-			for(var/obj/structure/cable/LC in U)		// check to make sure there's not a cable there already
+			for(var/obj/structure/cable/LC in U) // check to make sure there's not a cable there already
 				if(LC.d1 == fdirn || LC.d2 == fdirn)
-					to_chat(user, "There's already a cable at that position.")
+					to_chat(user, SPAN_WARNING("There's already a cable at that position."))
 					return
 			put_cable(U,user,0,fdirn)
 			return
@@ -709,7 +742,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 			if(LC == C)			// skip the cable we're interacting with
 				continue
 			if((LC.d1 == nd1 && LC.d2 == nd2) || (LC.d1 == nd2 && LC.d2 == nd1) )	// make sure no cable matches either direction
-				to_chat(user, "There's already a cable at that position.")
+				to_chat(user, SPAN_WARNING("There's already a cable at that position."))
 				return
 
 
@@ -743,7 +776,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		C.denode()// this call may have disconnected some cables that terminated on the centre of the turf, if so split the powernets.
 		return
 
-/obj/item/stack/cable_coil/proc/put_cable(turf/simulated/F, mob/user, d1, d2)
+/obj/item/stack/cable_coil/proc/put_cable(turf/F, mob/user, d1, d2)
 	if(!istype(F))
 		return
 

@@ -199,7 +199,7 @@
 
 /turf/simulated/floor/tiled/white/monotile
 	name = "floor"
-	icon_state = "monotile"
+	icon_state = "monotile_light"
 	initial_flooring = /decl/flooring/tiling/mono/white
 
 /turf/simulated/floor/tiled/monofloor
@@ -367,7 +367,7 @@
 
 /turf/simulated/floor/beach/sand/desert
 	icon_state = "desert"
-	resources = TRUE
+	has_resources = 1
 
 /turf/simulated/floor/beach/sand/desert/New()
 	icon_state = "desert[rand(0,5)]"

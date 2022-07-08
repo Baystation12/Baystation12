@@ -1,0 +1,1828 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/template_noop,
+/area/template_noop)
+"ab" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/clothing/accessory/iccgn_badge/enlisted,
+/obj/item/clothing/accessory/iccgn_badge/enlisted,
+/obj/item/clothing/accessory/iccgn_badge/enlisted,
+/obj/item/clothing/accessory/iccgn_badge/enlisted,
+/obj/item/clothing/accessory/iccgn_badge/enlisted,
+/obj/item/clothing/accessory/iccgn_patch/pioneer,
+/obj/item/clothing/accessory/iccgn_patch/pioneer,
+/obj/item/clothing/accessory/iccgn_patch/pioneer,
+/obj/item/clothing/accessory/iccgn_patch/pioneer,
+/obj/item/clothing/accessory/iccgn_patch/pioneer,
+/obj/item/clothing/accessory/iccgn_patch/pioneer,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/machinery/cell_charger,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"ac" = (
+/obj/machinery/porta_turret{
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/turf/simulated/floor/plating,
+/area/map_template/icgnv_hound)
+"ad" = (
+/obj/effect/paint/iccgn,
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"ae" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/icgnv_hound)
+"af" = (
+/turf/simulated/floor/plating,
+/area/map_template/icgnv_hound)
+"ag" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"aj" = (
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/map_template/icgnv_hound)
+"ak" = (
+/obj/effect/paint/hull,
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"al" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1;
+	icon_state = "map-scrubbers"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"am" = (
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"an" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/stasis_cage,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"ao" = (
+/obj/effect/paint/red,
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"ap" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/reagent_dispensers/fueltank,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"aq" = (
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	color = "#4c535b"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"ar" = (
+/obj/structure/table/rack{
+	dir = 4
+	},
+/obj/item/clothing/accessory/storage/black_drop,
+/obj/item/clothing/accessory/storage/black_drop,
+/obj/item/clothing/accessory/storage/black_drop,
+/obj/item/clothing/accessory/storage/black_vest,
+/obj/item/clothing/accessory/storage/black_vest,
+/obj/item/clothing/accessory/storage/black_vest,
+/obj/item/clothing/gloves/iccgn/duty,
+/obj/item/clothing/gloves/iccgn/duty,
+/obj/item/clothing/gloves/iccgn/duty,
+/obj/item/clothing/gloves/iccgn/duty,
+/obj/item/clothing/gloves/iccgn/duty,
+/obj/item/clothing/glasses/thermal/plain,
+/obj/item/clothing/glasses/thermal/plain,
+/obj/item/clothing/glasses/thermal/plain,
+/obj/item/clothing/glasses/thermal/plain,
+/obj/item/clothing/glasses/thermal/plain,
+/obj/item/clothing/accessory/solgov/department/exploration/fleet,
+/obj/item/clothing/accessory/solgov/department/exploration/fleet,
+/obj/item/clothing/accessory/solgov/department/exploration/fleet,
+/obj/item/clothing/accessory/solgov/department/exploration/fleet,
+/obj/item/clothing/accessory/solgov/department/exploration/fleet,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"as" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/anomaly_container,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"at" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"au" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/iccgn,
+/turf/simulated/floor/plating,
+/area/map_template/icgnv_hound)
+"av" = (
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 8;
+	icon_state = "shuttle_chair_preview"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"aw" = (
+/obj/structure/table/rack{
+	dir = 4
+	},
+/obj/item/clothing/shoes/iccgn/utility,
+/obj/item/clothing/shoes/iccgn/utility,
+/obj/item/clothing/shoes/iccgn/utility,
+/obj/item/clothing/shoes/iccgn/utility,
+/obj/item/clothing/shoes/iccgn/utility,
+/obj/item/clothing/under/iccgn/utility,
+/obj/item/clothing/under/iccgn/utility,
+/obj/item/clothing/under/iccgn/utility,
+/obj/item/clothing/under/iccgn/utility,
+/obj/item/clothing/under/iccgn/utility,
+/obj/item/clothing/accessory/iccgn_rank/e3,
+/obj/item/clothing/accessory/iccgn_rank/e3,
+/obj/item/clothing/accessory/iccgn_rank/e6,
+/obj/item/clothing/accessory/iccgn_rank/e4,
+/obj/item/clothing/accessory/iccgn_rank/e4,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"ax" = (
+/obj/structure/closet/secure_closet/guncabinet{
+	locked = 0;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/item/gun/projectile/pistol/military/alt,
+/obj/item/gun/projectile/pistol/military/alt,
+/obj/item/gun/projectile/pistol/military/alt,
+/obj/item/gun/projectile/pistol/military/alt,
+/obj/item/gun/projectile/automatic/bullpup_rifle,
+/obj/item/gun/projectile/automatic/bullpup_rifle,
+/obj/item/gun/projectile/automatic/bullpup_rifle,
+/obj/item/gun/projectile/automatic/bullpup_rifle,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/mil_rifle,
+/obj/item/ammo_magazine/mil_rifle,
+/obj/item/ammo_magazine/mil_rifle,
+/obj/item/ammo_magazine/mil_rifle,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"az" = (
+/obj/machinery/shipsensors,
+/turf/simulated/floor/plating,
+/area/map_template/icgnv_hound)
+"aC" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"aD" = (
+/obj/machinery/computer/ship/helm{
+	req_access = list(list("ACCESS_SYNDICATE"))
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/icgnv_hound)
+"aE" = (
+/obj/machinery/light/small{
+	dir = 4;
+	pixel_y = 8
+	},
+/obj/structure/catwalk,
+/obj/machinery/porta_turret{
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/turf/simulated/floor/plating,
+/area/map_template/icgnv_hound)
+"aF" = (
+/obj/effect/floor_decal/corner_techfloor_grid,
+/obj/effect/floor_decal/techfloor/corner,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"aG" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"aH" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"aI" = (
+/obj/structure/closet/toolcloset,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"aJ" = (
+/obj/machinery/computer/shuttle_control/explore/icgnv_hound_shuttle,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/icgnv_hound)
+"aK" = (
+/obj/machinery/computer/ship/sensors/spacer,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/icgnv_hound)
+"aL" = (
+/obj/machinery/light/small{
+	dir = 4;
+	icon_state = "bulb1"
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "1983";
+	identifier = "1983";
+	name = "access shutters control";
+	pixel_x = 25;
+	pixel_y = 0
+	},
+/obj/item/clothing/accessory/iccgn_badge/officer,
+/obj/item/clothing/gloves/iccgn/duty,
+/obj/item/clothing/accessory/iccgn_rank/o1,
+/obj/item/clothing/accessory/iccgn_patch/pioneer,
+/obj/item/device/personal_shield,
+/obj/item/clothing/glasses/thermal/plain,
+/obj/item/card/id/syndicate,
+/obj/item/clothing/shoes/iccgn/service,
+/obj/item/clothing/suit/iccgn/service_command,
+/obj/item/clothing/under/iccgn/service_command,
+/obj/item/clothing/head/iccgn/service_command,
+/obj/item/clothing/accessory/solgov/department/exploration/fleet,
+/obj/structure/table/steel_reinforced,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"aM" = (
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	color = "#4c535b"
+	},
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "charon_shutters";
+	name = "Protective Shutters";
+	opacity = 0
+	},
+/turf/simulated/floor/plating,
+/area/map_template/icgnv_hound)
+"aN" = (
+/obj/effect/paint/iccgn,
+/obj/structure/sign/warning/docking_area,
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"aO" = (
+/obj/machinery/door/airlock,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"aP" = (
+/obj/effect/floor_decal/corner_techfloor_grid{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor/corner{
+	dir = 8;
+	icon_state = "techfloor_corners"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"aQ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"aR" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/storage/firstaid/surgery,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icgnv_hound)
+"aS" = (
+/obj/effect/paint/iccgn,
+/obj/structure/sign/warning/caution,
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"aT" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1;
+	icon_state = "techfloor_edges"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"aU" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4;
+	icon_state = "techfloor_edges"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"aV" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8;
+	icon_state = "techfloor_edges"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"aW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 1;
+	icon_state = "shuttle_chair_preview"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"aX" = (
+/obj/effect/paint/iccgn,
+/obj/machinery/recharger/wallcharger,
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"aY" = (
+/obj/structure/handrail{
+	dir = 8;
+	icon_state = "handrail"
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "1984";
+	identifier = "1984";
+	name = "access shutters control";
+	pixel_y = 25
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	icon_state = "map_scrubber_on";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"aZ" = (
+/obj/machinery/portable_atmospherics/powered/scrubber/huge,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"ba" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4;
+	icon_state = "techfloor_edges"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bb" = (
+/obj/structure/handrail{
+	dir = 4;
+	icon_state = "handrail"
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "1983";
+	identifier = "1983";
+	name = "access shutters control";
+	pixel_y = 25
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bc" = (
+/obj/machinery/sleeper{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/icgnv_hound)
+"bd" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8;
+	icon_state = "techfloor_edges"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"be" = (
+/obj/machinery/alarm{
+	pixel_y = 24;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/icgnv_hound)
+"bf" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bg" = (
+/obj/machinery/portable_atmospherics/powered/pump/filled,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"bh" = (
+/obj/effect/floor_decal/techfloor,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bi" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 2;
+	icon_state = "warning"
+	},
+/obj/machinery/access_button/airlock_interior{
+	frequency = 1380;
+	master_tag = "icgnv_hound_shuttle";
+	pixel_x = -24;
+	pixel_y = -24
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bj" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8;
+	icon_state = "techfloor_edges"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "icgnv_hound_shuttle_pump"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"bk" = (
+/turf/simulated/floor/tiled/white,
+/area/map_template/icgnv_hound)
+"bl" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/structure/closet/walllocker{
+	pixel_y = 32
+	},
+/obj/item/clothing/head/iccgn/service,
+/obj/item/clothing/head/iccgn/service,
+/obj/item/clothing/head/iccgn/service,
+/obj/item/clothing/head/iccgn/service,
+/obj/item/clothing/head/iccgn/service,
+/obj/item/clothing/shoes/iccgn/service,
+/obj/item/clothing/shoes/iccgn/service,
+/obj/item/clothing/shoes/iccgn/service,
+/obj/item/clothing/shoes/iccgn/service,
+/obj/item/clothing/shoes/iccgn/service,
+/obj/item/clothing/suit/iccgn/service_enlisted,
+/obj/item/clothing/suit/iccgn/service_enlisted,
+/obj/item/clothing/suit/iccgn/service_enlisted,
+/obj/item/clothing/suit/iccgn/service_enlisted,
+/obj/item/clothing/suit/iccgn/service_enlisted,
+/obj/item/clothing/under/iccgn/service,
+/obj/item/clothing/under/iccgn/service,
+/obj/item/clothing/under/iccgn/service,
+/obj/item/clothing/under/iccgn/service,
+/obj/item/clothing/under/iccgn/service,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bm" = (
+/obj/machinery/turretid/lethal{
+	ailock = 1;
+	check_arrest = 0;
+	check_records = 0;
+	enabled = 0;
+	pixel_x = -4;
+	pixel_y = 28;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/icgnv_hound)
+"bn" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icgnv_hound)
+"bo" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1380;
+	id_tag = "icgnv_hound_shuttle_inner"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"bp" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4;
+	icon_state = "techfloor_edges"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bq" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8;
+	icon_state = "techfloor_edges"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"br" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bs" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/icgnv_hound)
+"bt" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 4;
+	icon_state = "shuttle_chair_preview"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bu" = (
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"bv" = (
+/obj/machinery/hologram/holopad/longrange,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/effect/overmap/visitable/ship/landable/icgnv_hound,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"bw" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bx" = (
+/obj/effect/paint/sun,
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"by" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "stripe"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "4-8";
+	dir = 8;
+	d1 = 4;
+	d2 = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/icgnv_hound)
+"bz" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/portable_atmospherics/canister/empty,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"bA" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4;
+	icon_state = "techfloor_edges"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bB" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8;
+	icon_state = "techfloor_edges"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bC" = (
+/obj/structure/handrail{
+	dir = 8;
+	icon_state = "handrail"
+	},
+/obj/machinery/light/small,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bD" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"bE" = (
+/obj/machinery/ion_engine{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/icgnv_hound)
+"bF" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bG" = (
+/obj/machinery/computer/ship/engines{
+	dir = 4;
+	icon_state = "computer"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bH" = (
+/obj/structure/handrail{
+	dir = 4;
+	icon_state = "handrail"
+	},
+/obj/machinery/light/small,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	icon_state = "map_vent_out";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bI" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4;
+	icon_state = "techfloor_edges"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bJ" = (
+/obj/effect/paint/iccgn,
+/obj/structure/sign/warning/detailed,
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"bK" = (
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_x = -32
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	icon_state = "map_vent_out";
+	dir = 1
+	},
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 4;
+	icon_state = "shuttle_chair_preview"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bL" = (
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_x = 32
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	icon_state = "map_scrubber_on";
+	dir = 1
+	},
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 8;
+	icon_state = "shuttle_chair_preview"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bM" = (
+/obj/effect/paint/iccgn,
+/obj/structure/sign/bluecross_2,
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"bN" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "stripe"
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "0-1";
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/power/apc/debug/iccgn{
+	dir = 8;
+	icon_state = "apc0";
+	pixel_x = -25
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/icgnv_hound)
+"bO" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/recharge_station,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"bP" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/mech_recharger,
+/obj/item/mech_equipment/light,
+/obj/item/mech_equipment/shields,
+/obj/item/mech_equipment/ionjets,
+/obj/item/mech_equipment/ballistic_shield,
+/obj/item/mech_equipment/clamp,
+/obj/item/mech_equipment/drill/diamond,
+/obj/item/circuitboard/exosystem/weapons,
+/obj/item/circuitboard/exosystem/utility,
+/mob/living/exosuit/premade/combat/military/alpine,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"bQ" = (
+/obj/machinery/light/small{
+	dir = 4;
+	pixel_y = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/organ_printer/flesh/mapped{
+	pixel_x = 32;
+	density = 0
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/icgnv_hound)
+"bR" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/structure/catwalk,
+/obj/machinery/porta_turret{
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/turf/simulated/floor/plating,
+/area/map_template/icgnv_hound)
+"bS" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "stripe"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "4-8";
+	dir = 8;
+	d1 = 4;
+	d2 = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/icgnv_hound)
+"bT" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	icon_state = "warningcorner";
+	dir = 2
+	},
+/obj/machinery/light/small,
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/air/airlock{
+	start_pressure = 1900
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bU" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 8;
+	icon_state = "warningcorner"
+	},
+/obj/machinery/light/small,
+/obj/machinery/fabricator/hacked,
+/obj/item/stack/material/aluminium/ten,
+/obj/item/stack/material/glass/ten,
+/obj/item/stack/material/plastic/ten,
+/obj/item/stack/material/steel/ten,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"bV" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icgnv_hound)
+"bW" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"bX" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"bY" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"bZ" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"ca" = (
+/obj/machinery/bodyscanner{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	icon_state = "map_vent_out";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/icgnv_hound)
+"cb" = (
+/obj/machinery/body_scanconsole{
+	icon_state = "body_scannerconsole";
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/icgnv_hound)
+"cc" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/cyan,
+/obj/structure/cable{
+	icon_state = "0-1";
+	dir = 8;
+	d1 = 4;
+	d2 = 8
+	},
+/obj/machinery/power/port_gen/pacman,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/icgnv_hound)
+"cd" = (
+/obj/effect/floor_decal/industrial/outline/blue,
+/obj/machinery/atmospherics/unary/tank/air{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"cf" = (
+/obj/effect/floor_decal/corner_techfloor_grid{
+	dir = 1
+	},
+/obj/effect/floor_decal/techfloor/corner{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"cg" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"ch" = (
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"ck" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/crate/medical,
+/obj/item/stack/nanopaste,
+/obj/item/storage/firstaid/adv,
+/obj/item/storage/firstaid/combat,
+/obj/item/storage/firstaid/fire,
+/obj/item/storage/firstaid/o2,
+/obj/item/storage/firstaid/regular,
+/obj/item/storage/firstaid/stab,
+/obj/item/storage/firstaid/toxin,
+/obj/item/storage/firstaid/trauma,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	icon_state = "map_scrubber_on";
+	dir = 8
+	},
+/obj/item/storage/box/beakers,
+/obj/machinery/light/small{
+	dir = 4;
+	icon_state = "bulb1"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"cl" = (
+/obj/effect/floor_decal/techfloor,
+/obj/effect/shuttle_landmark/icgnv_hound/start,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"cm" = (
+/obj/effect/paint/sun,
+/obj/structure/sign/warning/hot_exhaust,
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"cn" = (
+/obj/machinery/acting/changer{
+	pixel_x = -32;
+	density = 0
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icgnv_hound)
+"cp" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1;
+	icon_state = "stripecorner"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "stripe"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/icgnv_hound)
+"cq" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/roller,
+/obj/item/bodybag/cryobag,
+/obj/structure/closet/medical_wall/filled{
+	pixel_x = -32
+	},
+/obj/item/auto_cpr,
+/obj/item/defibrillator/compact/loaded,
+/obj/item/clothing/gloves/latex,
+/obj/item/clothing/mask/surgical,
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/spray/sterilizine,
+/obj/item/reagent_containers/spray/cleaner,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/icgnv_hound)
+"cr" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/device/scanner/health,
+/obj/item/clothing/glasses/hud/health/goggle,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/icgnv_hound)
+"cF" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	icon_state = "map_scrubber_on";
+	dir = 8
+	},
+/obj/machinery/vitals_monitor,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/icgnv_hound)
+"mz" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4;
+	icon_state = "techfloor_edges"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	id_tag = "icgnv_hound_shuttle_pump_out_internal";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"pR" = (
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	dir = 4
+	},
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"qz" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1380;
+	id_tag = "icgnv_hound_shuttle_outer"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"sR" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"ug" = (
+/obj/effect/floor_decal/corner_techfloor_grid{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/corner{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"uB" = (
+/obj/effect/floor_decal/corner_techfloor_grid,
+/obj/effect/floor_decal/techfloor{
+	dir = 8;
+	icon_state = "techfloor_edges"
+	},
+/obj/effect/floor_decal/techfloor/corner,
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "icgnv_hound_shuttle_pump"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"we" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/pipe/simple/hidden/cyan,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"wf" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	icon_state = "map_vent_in";
+	dir = 4;
+	pump_direction = 0
+	},
+/turf/simulated/floor/plating,
+/area/map_template/icgnv_hound)
+"wV" = (
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	color = "#4c535b"
+	},
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "charon_shutters";
+	name = "Protective Shutters";
+	opacity = 0
+	},
+/turf/simulated/floor/plating,
+/area/map_template/icgnv_hound)
+"ze" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 1;
+	icon_state = "shuttle_chair_preview"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"Bf" = (
+/obj/effect/paint/iccgn,
+/obj/structure/sign/warning/airlock{
+	icon_state = "doors";
+	dir = 4
+	},
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"Bl" = (
+/obj/effect/paint/iccgn,
+/obj/structure/sign/warning/docking_area,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5;
+	icon_state = "intact"
+	},
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"CK" = (
+/obj/effect/floor_decal/corner_techfloor_grid{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor{
+	dir = 4;
+	icon_state = "techfloor_edges"
+	},
+/obj/effect/floor_decal/techfloor/corner{
+	dir = 8;
+	icon_state = "techfloor_corners"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	id_tag = "icgnv_hound_shuttle_pump_out_internal";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"Eo" = (
+/obj/machinery/light/small{
+	dir = 4;
+	pixel_y = 8
+	},
+/obj/machinery/optable,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/icgnv_hound)
+"Ih" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor{
+	dir = 8;
+	icon_state = "techfloor_edges"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"IR" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/storage/box/ammo/explo_shells,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	icon_state = "map_vent_out";
+	dir = 4
+	},
+/obj/item/gun/projectile/shotgun/pump,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/machinery/cell_charger,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"Lo" = (
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	cycle_to_external_air = 1;
+	dir = 4;
+	frequency = 1380;
+	id_tag = "icgnv_hound_shuttle";
+	pixel_x = -25;
+	pixel_y = 0;
+	req_access = list("ACCESS_SYNDICATE");
+	tag_airpump = "icgnv_hound_shuttle_pump";
+	tag_exterior_door = "icgnv_hound_shuttle_outer";
+	tag_exterior_sensor = "icgnv_hound_shuttle_exterior";
+	tag_interior_door = "icgnv_hound_shuttle_inner";
+	tag_interior_sensor = "icgnv_hound_shuttle_sensor"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "icgnv_hound_shuttle_pump"
+	},
+/obj/effect/floor_decal/techfloor{
+	dir = 8;
+	icon_state = "techfloor_edges"
+	},
+/obj/effect/floor_decal/corner_techfloor_grid{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor/corner{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"NJ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"OD" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/button/blast_door{
+	id_tag = "charon_shutters";
+	name = "Protective Shutters Control";
+	pixel_y = 25
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"PD" = (
+/obj/machinery/light/small{
+	dir = 4;
+	pixel_y = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	id_tag = "icgnv_hound_shuttle_pump_out_internal";
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor{
+	dir = 4;
+	icon_state = "techfloor_edges"
+	},
+/obj/machinery/airlock_sensor{
+	pixel_y = 24;
+	id_tag = "icgnv_hound_shuttle_sensor";
+	frequency = 1380
+	},
+/obj/effect/floor_decal/corner_techfloor_grid{
+	dir = 1
+	},
+/obj/effect/floor_decal/techfloor/corner{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"Qc" = (
+/obj/effect/landmark/map_data,
+/obj/effect/overmap/visitable/sector/icgnv_hound_space,
+/turf/template_noop,
+/area/template_noop)
+"QT" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/clothing/suit/space/void/pilot/prepared,
+/obj/item/tank/jetpack/void,
+/obj/item/tank/jetpack/void,
+/obj/item/tank/jetpack/void,
+/obj/item/tank/jetpack/void,
+/obj/item/tank/jetpack/void,
+/obj/item/tank/jetpack/void,
+/obj/item/rig/combat/equipped,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"QU" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1;
+	icon_state = "techfloor_edges"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	icon_state = "map";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"QY" = (
+/obj/effect/paint/iccgn,
+/obj/structure/sign/warning/airlock{
+	icon_state = "doors";
+	dir = 8
+	},
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"Ti" = (
+/obj/effect/paint/iccgn,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"TB" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/reagent_dispensers/watertank,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/item/extinguisher,
+/obj/item/extinguisher,
+/obj/item/extinguisher,
+/obj/item/extinguisher,
+/obj/machinery/light/small{
+	dir = 4;
+	icon_state = "bulb1"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"Uy" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"UU" = (
+/obj/machinery/access_button/airlock_exterior{
+	frequency = 1380;
+	master_tag = "icgnv_hound_shuttle";
+	pixel_x = 8;
+	pixel_y = 24
+	},
+/turf/template_noop,
+/area/template_noop)
+"Vp" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "1984";
+	identifier = "1984";
+	name = "access shutters control";
+	pixel_x = -25;
+	pixel_y = 0
+	},
+/obj/item/clothing/accessory/iccgn_badge/officer,
+/obj/item/clothing/gloves/iccgn/duty,
+/obj/item/clothing/accessory/iccgn_rank/o1,
+/obj/item/clothing/accessory/iccgn_patch/pioneer,
+/obj/item/device/personal_shield,
+/obj/item/clothing/glasses/thermal/plain,
+/obj/item/card/id/syndicate,
+/obj/item/clothing/shoes/iccgn/service,
+/obj/item/clothing/suit/iccgn/service_command,
+/obj/item/clothing/under/iccgn/service_command,
+/obj/item/clothing/head/iccgn/service_command,
+/obj/structure/table/steel_reinforced,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"Vw" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	icon_state = "map";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"VJ" = (
+/obj/structure/closet/walllocker/emerglocker/west,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"VN" = (
+/obj/effect/paint/iccgn,
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	icon_state = "map";
+	dir = 8
+	},
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
+"Wk" = (
+/obj/structure/closet/walllocker/emerglocker/east,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+"Zi" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
+
+(1,1,1) = {"
+aa
+ad
+ad
+ak
+ao
+ad
+ad
+ad
+aE
+aj
+aj
+aj
+aj
+aE
+ad
+ad
+ad
+ad
+ad
+bx
+cm
+aa
+"}
+(2,1,1) = {"
+aa
+ad
+ab
+ar
+aw
+ax
+IR
+ad
+aN
+ad
+aM
+aM
+ad
+aN
+ad
+bz
+bW
+cc
+we
+cd
+bx
+bE
+"}
+(3,1,1) = {"
+aa
+ad
+bl
+at
+at
+at
+aC
+aH
+aO
+aV
+bd
+bq
+bB
+aO
+bN
+by
+bS
+cp
+bX
+bD
+bx
+bE
+"}
+(4,1,1) = {"
+ac
+ad
+am
+am
+am
+am
+Wk
+QT
+ad
+aY
+am
+br
+bC
+bJ
+aZ
+bg
+cg
+ch
+bu
+bx
+cm
+aa
+"}
+(5,1,1) = {"
+aS
+ad
+ad
+ak
+ao
+ad
+ad
+ad
+ad
+ad
+be
+bs
+Bf
+ad
+au
+au
+ad
+bY
+bY
+ad
+ac
+aa
+"}
+(6,1,1) = {"
+aa
+af
+aj
+aj
+az
+ad
+ad
+bG
+Vp
+aX
+bw
+bf
+bt
+bK
+bO
+bT
+Ti
+VN
+VN
+Bl
+ad
+aa
+"}
+(7,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+wV
+aJ
+ze
+Uy
+aq
+aF
+aU
+ug
+am
+am
+am
+ad
+Lo
+bj
+uB
+ad
+UU
+"}
+(8,1,1) = {"
+Qc
+aa
+aa
+aa
+aa
+wV
+aD
+am
+aQ
+aO
+bh
+bv
+aT
+NJ
+sR
+bi
+bo
+QU
+Vw
+cl
+qz
+aa
+"}
+(9,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+wV
+aK
+aW
+aG
+aq
+aP
+Ih
+cf
+am
+am
+am
+ad
+PD
+mz
+CK
+ad
+aa
+"}
+(10,1,1) = {"
+aa
+af
+aj
+aj
+wf
+ad
+ad
+OD
+aL
+aX
+bw
+al
+av
+bL
+bP
+bU
+ad
+ad
+ad
+aN
+ad
+aa
+"}
+(11,1,1) = {"
+aS
+ad
+ad
+ak
+pR
+ad
+ad
+ad
+ad
+ad
+bm
+bs
+QY
+ad
+au
+au
+ad
+ca
+cn
+ad
+ac
+aa
+"}
+(12,1,1) = {"
+ac
+ad
+am
+am
+ag
+VJ
+am
+aI
+ad
+bb
+am
+br
+bH
+bM
+bc
+bk
+bk
+cb
+bk
+bx
+cm
+aa
+"}
+(13,1,1) = {"
+aa
+ad
+Zi
+at
+bZ
+at
+bF
+aH
+aO
+ba
+bp
+bA
+bI
+aO
+bQ
+bV
+bn
+ae
+bk
+cq
+bx
+bE
+"}
+(14,1,1) = {"
+aa
+ad
+ck
+an
+ap
+as
+TB
+ad
+aN
+ad
+aM
+aM
+ad
+aN
+ad
+bk
+cF
+Eo
+aR
+cr
+bx
+bE
+"}
+(15,1,1) = {"
+aa
+ad
+ad
+ak
+ao
+ad
+ad
+ad
+bR
+aj
+aj
+aj
+aj
+bR
+ad
+ad
+ad
+ad
+ad
+bx
+cm
+aa
+"}

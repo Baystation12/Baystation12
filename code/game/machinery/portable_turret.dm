@@ -154,7 +154,7 @@
 			eshot_sound = 'sound/weapons/Laser.ogg'
 			egun = 1
 
-var/list/turret_icons
+var/global/list/turret_icons
 
 /obj/machinery/porta_turret/on_update_icon()
 	if(!turret_icons)
@@ -279,7 +279,7 @@ var/list/turret_icons
 			//If the turret is destroyed, you can remove it with a crowbar to
 			//try and salvage its components
 			to_chat(user, "<span class='notice'>You begin prying the metal coverings off.</span>")
-			if(do_after(user, 20, src))
+			if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 				if(prob(70))
 					to_chat(user, "<span class='notice'>You remove the turret and salvage some components.</span>")
 					if(installation)
@@ -311,7 +311,7 @@ var/list/turret_icons
 			)
 
 		wrenching = 1
-		if(do_after(user, 50, src))
+		if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
 			//This code handles moving the turret around. After all, it's a portable turret!
 			if(!anchored)
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
@@ -413,14 +413,14 @@ var/list/turret_icons
 
 /obj/machinery/porta_turret/ex_act(severity)
 	switch (severity)
-		if (1)
+		if (EX_ACT_DEVASTATING)
 			qdel(src)
-		if (2)
+		if (EX_ACT_HEAVY)
 			if (prob(25))
 				qdel(src)
 			else
 				take_damage(initial(health) * 8) //should instakill most turrets
-		if (3)
+		if (EX_ACT_LIGHT)
 			take_damage(initial(health) * 8 / 3)
 
 /obj/machinery/porta_turret/proc/die()	//called when the turret dies, ie, health <= 0
@@ -722,7 +722,7 @@ var/list/turret_icons
 					return
 
 				playsound(loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
-				if(do_after(user, 20, src))
+				if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 					if(!src || !WT.remove_fuel(5, user)) return
 					build_step = 1
 					to_chat(user, "You remove the turret's interior metal armor.")
@@ -799,7 +799,7 @@ var/list/turret_icons
 					to_chat(user, "<span class='notice'>You need more fuel to complete this task.</span>")
 
 				playsound(loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
-				if(do_after(user, 30, src))
+				if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 					if(!src || !WT.remove_fuel(5, user))
 						return
 					build_step = 8

@@ -1,4 +1,4 @@
-/datum/codex_category/materials/
+/datum/codex_category/materials
 	name = "Materials"
 	desc = "Various natural and artificial materials."
 

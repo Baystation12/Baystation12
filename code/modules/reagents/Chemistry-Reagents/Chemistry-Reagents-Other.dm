@@ -141,7 +141,7 @@
 	affect_ingest(M, alien, removed)
 
 /datum/reagent/uranium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.apply_damage(5 * removed, IRRADIATE, armor_pen = 100)
+	M.apply_damage(5 * removed, DAMAGE_RADIATION, armor_pen = 100)
 
 /datum/reagent/uranium/touch_turf(var/turf/T)
 	if(volume >= 3)
@@ -229,6 +229,7 @@
 	reagent_state = LIQUID
 	color = "#673910"
 	touch_met = 50
+	accelerant_quality = 20
 
 /datum/reagent/napalm/touch_turf(var/turf/T)
 	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
@@ -342,7 +343,7 @@
 	var/datum/gas_mixture/environment = T.return_air()
 	var/min_temperature = 0 // Room temperature + some variance. An actual diminishing return would be better, but this is *like* that. In a way. . This has the potential for weird behavior, but I says fuck it. Water grenades for everyone.
 
-	var/hotspot = (locate(/obj/fire) in T)
+	var/hotspot = (locate(/obj/hotspot) in T)
 	if(hotspot && !istype(T, /turf/space))
 		var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles)
 		lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)
@@ -512,8 +513,8 @@
 	taste_description = "bad choices"
 
 /datum/reagent/colored_hair_dye/proc/apply_dye_color(mob/living/carbon/human/H, red, green, blue)
-	if (H.h_style && H.species.appearance_flags & HAS_HAIR_COLOR)
-		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[H.h_style]
+	if (H.head_hair_style && H.species.appearance_flags & HAS_HAIR_COLOR)
+		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[H.head_hair_style]
 		if (~hair_style.flags & HAIR_BALD)
 			H.change_hair_color(red, green, blue)
 			H.change_facial_hair_color(red, green, blue)

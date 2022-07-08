@@ -6,7 +6,7 @@
 	det_time = 20
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 4)
 
-/obj/item/grenade/anti_photon/detonate()
+/obj/item/grenade/anti_photon/detonate(mob/living/user)
 	playsound(src.loc, 'sound/effects/phasein.ogg', 50, 1, 5)
 	set_light(-1, 6, 10, 2, "#ffffff")
 	addtimer(CALLBACK(src, .proc/finish), rand(20 SECONDS, 29 SECONDS))

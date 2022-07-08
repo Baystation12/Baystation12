@@ -86,7 +86,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				to_chat(user, "You start slicing the floorweld off the disposal unit.")
 
-				if(do_after(user,20,src))
+				if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 					if(!src || !W.isOn()) return
 					to_chat(user, "You sliced the floorweld off the disposal unit.")
 					var/obj/structure/disposalconstruct/machine/C = new (loc, src)
@@ -116,7 +116,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		if(ismob(G.affecting))
 			var/mob/GM = G.affecting
 			usr.visible_message(SPAN_DANGER("\The [usr] starts putting [GM.name] into the disposal."))
-			if(do_after(usr, 20, src))
+			if(do_after(usr, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 				if (GM.client)
 					GM.client.perspective = EYE_PERSPECTIVE
 					GM.client.eye = src
@@ -175,7 +175,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		user.visible_message("<span class='[is_dangerous ? "warning" : "notice"]'>[user] starts stuffing [AM] into [src].</span>", \
 							 "<span class='notice'>You start stuffing [AM] into [src].</span>")
 
-	if(!do_after(user, 2 SECONDS, src))
+	if(!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 		return
 
 	// Repeat checks
@@ -311,6 +311,20 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 	if(. == TOPIC_REFRESH)
 		interact(user)
+
+/obj/machinery/disposal/verb/manual_eject()
+	set src in oview(1)
+	set category = "Object"
+	set name = "Eject Items From Bin"
+
+	if (!isliving(usr) || usr.incapacitated())
+		return
+	usr.visible_message(
+		SPAN_NOTICE("\The [usr] ejects \the [src]'s contents'."),
+		SPAN_NOTICE("You eject \the [initial(name)]'s contents."),
+	)
+	eject()
+	add_fingerprint(usr)
 
 // eject the contents of the disposal unit
 /obj/machinery/disposal/proc/eject()
@@ -631,7 +645,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		if(W.remove_fuel(0,user))
 			playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 			to_chat(user, "You start slicing the floorweld off the disposal outlet.")
-			if(do_after(user,20, src))
+			if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 				if(!src || !W.isOn()) return
 				to_chat(user, "You sliced the floorweld off the disposal outlet.")
 				var/obj/structure/disposalconstruct/machine/outlet/C = new (loc, src)

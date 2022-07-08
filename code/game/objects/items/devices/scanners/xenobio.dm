@@ -12,7 +12,6 @@
 		/mob/living/carbon/human,
 		/mob/living/simple_animal,
 		/mob/living/carbon/slime,
-		/mob/living/carbon/alien/chorus
 	)
 
 /obj/item/device/scanner/xenobio/is_valid_scan_target(atom/O)
@@ -66,7 +65,7 @@
 				GLOB.stat_fauna_scanned |= "[P.name]-[A.type]"
 				. += "New xenofauna species discovered!"
 				break
-	else if(istype(target, /mob/living/carbon/slime/))
+	else if(istype(target, /mob/living/carbon/slime))
 		var/mob/living/carbon/slime/T = target
 		. += "Slime scan result for \the [T]:"
 		. += "[T.colour] [T.is_adult ? "adult" : "baby"] slime"
@@ -101,8 +100,6 @@
 		if (T.cores > 1)
 			. += "Anomalous slime core amount detected."
 		. += "Growth progress:\t[T.amount_grown]/10."
-	else if(istype(target, /mob/living/carbon/alien/chorus))
-		. += "Warning. Biological contaminant detected. Limit contact."
 	else
 		. += "Incompatible life form, analysis failed."
 

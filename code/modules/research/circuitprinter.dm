@@ -21,7 +21,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 
 	idle_power_usage = 30
 	active_power_usage = 2500
-	
+
 	machine_name = "circuit imprinter"
 	machine_desc = "Creates circuit boards by etching raw sheets of material with sulphuric acid. Part of an R&D network."
 
@@ -130,7 +130,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 
 	var/t = stack.material.name
 	if(t)
-		if(do_after(usr, 16, src))
+		if(do_after(usr, 1.6 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if(stack.use(amount))
 				to_chat(user, "<span class='notice'>You add [amount] sheet\s to \the [src].</span>")
 				materials[t] += amount * SHEET_MATERIAL_AMOUNT

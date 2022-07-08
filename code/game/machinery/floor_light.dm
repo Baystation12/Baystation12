@@ -1,4 +1,4 @@
-var/list/floor_light_cache = list()
+var/global/list/floor_light_cache = list()
 
 /obj/machinery/floor_light
 	name = "floor light"
@@ -19,8 +19,22 @@ var/list/floor_light_cache = list()
 	var/default_light_outer_range = 3
 	var/default_light_colour = "#ffffff"
 
-/obj/machinery/floor_light/prebuilt
+
+/obj/machinery/floor_light/Initialize()
+	. = ..()
+	update_use_power(use_power)
+	queue_icon_update()
+
+
+/obj/machinery/floor_light/mapped_off
 	anchored = TRUE
+	use_power = POWER_USE_OFF
+
+
+/obj/machinery/floor_light/mapped_on
+	anchored = TRUE
+	use_power = POWER_USE_ACTIVE
+
 
 /obj/machinery/floor_light/attackby(var/obj/item/W, var/mob/user)
 	if(isScrewdriver(W))
@@ -35,7 +49,7 @@ var/list/floor_light_cache = list()
 			to_chat(user, "<span class='warning'>\The [src] must be on to complete this task.</span>")
 			return
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-		if(!do_after(user, 20, src))
+		if(!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			return
 		if(!src || !WT.isOn())
 			return
@@ -77,15 +91,17 @@ var/list/floor_light_cache = list()
 	queue_icon_update()
 	return TRUE
 
+
 /obj/machinery/floor_light/set_broken(new_state)
 	. = ..()
 	if(. && (stat & BROKEN))
 		update_use_power(POWER_USE_OFF)
 
+
 /obj/machinery/floor_light/power_change(new_state)
 	. = ..()
-	if(. && (stat & NOPOWER))
-		update_use_power(POWER_USE_OFF)
+	queue_icon_update()
+
 
 /obj/machinery/floor_light/proc/update_brightness()
 	if((use_power == POWER_USE_ACTIVE) && !(stat & (NOPOWER | BROKEN)))
@@ -123,9 +139,9 @@ var/list/floor_light_cache = list()
 
 /obj/machinery/floor_light/ex_act(severity)
 	switch(severity)
-		if(1)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
-		if(2)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
 			else if(prob(20))
@@ -133,7 +149,7 @@ var/list/floor_light_cache = list()
 			else
 				if(isnull(damaged))
 					damaged = 0
-		if(3)
+		if(EX_ACT_LIGHT)
 			if (prob(5))
 				qdel(src)
 			else if(isnull(damaged))

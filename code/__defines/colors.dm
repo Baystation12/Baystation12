@@ -193,3 +193,5 @@
 
 //just for xeno-panel
 #define COLOR_WEBHOOK_XENO 0xf2b000 //proxima
+//proxima code end
+#define COLORED_SQUARE(COLOR) "<span style='font-face: fixedsys; font-size: 14px; background-color: [COLOR]; color: [COLOR]'>___</span>"

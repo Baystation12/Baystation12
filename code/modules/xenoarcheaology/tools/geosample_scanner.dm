@@ -293,7 +293,7 @@
 
 		var/anom_found = 0
 		if(G)
-			data = " - Spectometric analysis on mineral sample has determined type [finds_as_strings[list_find(responsive_carriers, G.source_mineral)]]<br>"
+			data = " - Spectometric analysis on mineral sample has determined type [finds_as_strings[responsive_carriers.Find(G.source_mineral)]]<br>"
 			if(G.age_billion > 0)
 				data += " - Radiometric dating shows age of [G.age_billion].[G.age_million] billion years<br>"
 			else if(G.age_million > 0)
@@ -303,7 +303,7 @@
 			data += " - Chromatographic analysis shows the following materials present:<br>"
 			for(var/carrier in G.find_presence)
 				if(G.find_presence[carrier])
-					var/index = list_find(responsive_carriers, carrier)
+					var/index = responsive_carriers.Find(carrier)
 					if(index > 0 && index <= finds_as_strings.len)
 						data += "	> [100 * G.find_presence[carrier]]% [finds_as_strings[index]]<br>"
 

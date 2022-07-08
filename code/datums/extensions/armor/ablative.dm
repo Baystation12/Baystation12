@@ -11,7 +11,7 @@
 		armor_degradation_coef = _armor_degradation_speed
 
 /datum/extension/armor/ablative/on_blocking(damage, damage_type, damage_flags, armor_pen, blocked)
-	if(!(damage_type == BRUTE || damage_type == BURN))
+	if (!(damage_type == DAMAGE_BRUTE || damage_type == DAMAGE_BURN))
 		return
 	if(armor_degradation_coef)
 		var/key = get_armor_key(damage_type, damage_flags)

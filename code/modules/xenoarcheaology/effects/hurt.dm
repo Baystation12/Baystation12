@@ -9,7 +9,7 @@
 			var/mob/living/carbon/C = toucher
 			to_chat(C, SPAN_DANGER("A painful discharge of energy strikes you!"))
 			do_damage(C, rand(5,25), rand(5,25), rand(5,25), rand(5,25), rand(1, 5))
-			C.apply_damage(25 * weakness, IRRADIATE, damage_flags = DAM_DISPERSED)
+			C.apply_damage(25 * weakness, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 			C.set_nutrition(min(50 * weakness, C.nutrition))
 			C.make_dizzy(6 * weakness)
 			C.weakened += 6 * weakness

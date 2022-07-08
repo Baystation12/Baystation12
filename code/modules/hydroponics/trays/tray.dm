@@ -50,7 +50,7 @@
 
 	// Reagent information for process(), consider moving this to a controller along
 	// with cycle information under 'mechanical concerns' at some point.
-	var/global/list/toxic_reagents = list(
+	var/static/list/toxic_reagents = list(
 		/datum/reagent/dylovene =         -2,
 		/datum/reagent/toxin =             2,
 		/datum/reagent/hydrazine =         2.5,
@@ -63,7 +63,7 @@
 		/datum/reagent/radium =            2,
 		/datum/reagent/three_eye =         2
 		)
-	var/global/list/nutrient_reagents = list(
+	var/static/list/nutrient_reagents = list(
 		/datum/reagent/drink/milk =                     0.1,
 		/datum/reagent/ethanol/beer =                   0.25,
 		/datum/reagent/phosphorus =                     0.1,
@@ -77,7 +77,7 @@
 		/datum/reagent/toxin/fertilizer/robustharvest = 1,
 		/datum/reagent/toxin/fertilizer/left4zed =      1
 		)
-	var/global/list/weedkiller_reagents = list(
+	var/static/list/weedkiller_reagents = list(
 		/datum/reagent/hydrazine =          -4,
 		/datum/reagent/phosphorus =         -2,
 		/datum/reagent/sugar =               2,
@@ -87,14 +87,14 @@
 		/datum/reagent/toxin/plantbgone =   -8,
 		/datum/reagent/adminordrazine =     -5
 		)
-	var/global/list/pestkiller_reagents = list(
+	var/static/list/pestkiller_reagents = list(
 		/datum/reagent/sugar =                 2,
 		/datum/reagent/diethylamine =         -2,
 		/datum/reagent/toxin/bromide =        -2,
 		/datum/reagent/toxin/methyl_bromide = -4,
 		/datum/reagent/adminordrazine =       -5
 		)
-	var/global/list/water_reagents = list(
+	var/static/list/water_reagents = list(
 		/datum/reagent/water =           1,
 		/datum/reagent/adminordrazine =  1,
 		/datum/reagent/drink/milk =      0.9,
@@ -106,7 +106,7 @@
 		)
 
 	// Beneficial reagents also have values for modifying yield_mod and mut_mod (in that order).
-	var/global/list/beneficial_reagents = list(
+	var/static/list/beneficial_reagents = list(
 		/datum/reagent/ethanol/beer =                    list( -0.05, 0,   0  ),
 		/datum/reagent/hydrazine =                       list( -2,    0,   0  ),
 		/datum/reagent/phosphorus =                      list( -0.75, 0,   0  ),
@@ -128,7 +128,7 @@
 
 	// Mutagen list specifies minimum value for the mutation to take place, rather
 	// than a bound as the lists above specify.
-	var/global/list/mutagenic_reagents = list(
+	var/static/list/mutagenic_reagents = list(
 		/datum/reagent/radium =  8,
 		/datum/reagent/mutagen = 15,
 		/datum/reagent/toxin/fertilizer/left4zed = 30)
@@ -508,7 +508,7 @@
 	else if(mechanical && isWrench(O))
 
 		//If there's a connector here, the portable_atmospherics setup can handle it.
-		if(locate(/obj/machinery/atmospherics/portables_connector/) in loc)
+		if(locate(/obj/machinery/atmospherics/portables_connector) in loc)
 			return ..()
 
 		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)

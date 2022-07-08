@@ -25,7 +25,7 @@
 
 /obj/item/contraband/poster/Initialize()
 	var/list/posters = subtypesof(/decl/poster)
-	var/serial_number = list_find(posters, poster_type)
+	var/serial_number = posters.Find(poster_type)
 	name += " - No. [serial_number]"
 
 	return ..()
@@ -59,7 +59,7 @@
 	qdel(src)
 	flick("poster_being_set", P)
 	// Time to place is equal to the time needed to play the flick animation
-	if(do_after(user, 28, W) && W.is_wall() && !ArePostersOnWall(W, P))
+	if(do_after(user, 2.8 SECONDS, W, DO_PUBLIC_UNIQUE) && W.is_wall() && !ArePostersOnWall(W, P))
 		user.visible_message("<span class='notice'>\The [user] has placed a poster on \the [W].</span>","<span class='notice'>You have placed the poster on \the [W].</span>")
 	else
 		// We cannot rely on user being on the appropriate turf when placement fails
@@ -88,12 +88,17 @@
 	anchored = TRUE
 	var/poster_type
 	var/ruined = 0
+	var/torch_poster = FALSE //for torch-specific content
 
 /obj/structure/sign/poster/bay_9
 	poster_type = /decl/poster/bay_9
 
 /obj/structure/sign/poster/bay_50
 	poster_type = /decl/poster/bay_50
+
+/obj/structure/sign/poster/torch
+	poster_type = /decl/poster/torch
+	torch_poster = TRUE
 
 /obj/structure/sign/poster/New(var/newloc, var/placement_dir = null, var/give_poster_type = null)
 	..(newloc)
@@ -102,7 +107,9 @@
 		if(give_poster_type)
 			poster_type = give_poster_type
 		else
-			poster_type = pick(subtypesof(/decl/poster))
+			poster_type = pick(subtypesof(/decl/poster) - typesof(/decl/poster/torch))
+	if(torch_poster)
+		poster_type = pick(subtypesof(/decl/poster/torch))
 	set_poster(poster_type)
 
 	switch (placement_dir)

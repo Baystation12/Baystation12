@@ -14890,9 +14890,6 @@
 	pixel_x = -32
 	},
 /obj/effect/floor_decal/corner/research/mono,
-/obj/machinery/photocopier/faxmachine/torch{
-	department = "Torch - Research Paperwork Office"
-	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/office)
 "bTb" = (
@@ -18546,7 +18543,6 @@
 /area/medical/foyer/storeroom)
 "hAb" = (
 /obj/structure/table/standard,
-/obj/random/clipboard,
 /obj/effect/floor_decal/corner/red{
 	dir = 5
 	},
@@ -18556,15 +18552,6 @@
 	icon_state = "1-2"
 	},
 /obj/item/paper_bin,
-/obj/item/pen,
-/obj/item/pen/blue{
-	pixel_x = -5;
-	pixel_y = -1
-	},
-/obj/item/pen/red{
-	pixel_x = -1;
-	pixel_y = 3
-	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/rnd_sec)
 "hBb" = (
@@ -18572,7 +18559,17 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 5
 	},
-/obj/structure/closet/secure_closet/research_guard,
+/obj/structure/table/standard,
+/obj/random/clipboard,
+/obj/item/pen,
+/obj/item/pen/red{
+	pixel_x = -1;
+	pixel_y = 3
+	},
+/obj/item/pen/blue{
+	pixel_x = -5;
+	pixel_y = -1
+	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/rnd_sec)
 "hBr" = (
@@ -21172,7 +21169,6 @@
 /area/security/evidence)
 "kVb" = (
 /obj/structure/table/standard,
-/obj/item/weldpack,
 /obj/item/reagent_containers/spray/sterilizine,
 /obj/item/storage/toolbox/mechanical,
 /obj/effect/floor_decal/corner/paleblue{
@@ -21857,13 +21853,13 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/storage)
 "lVb" = (
-/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/security{
 	id_tag = "detdoor";
 	name = "Forensic Lab";
 	secured_wires = 1
 	},
-/turf/simulated/floor/tiled/steel_ridged,
+/obj/machinery/door/firedoor,
+/turf/simulated/wall/prepainted,
 /area/security/evidence)
 "lVZ" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -23200,9 +23196,6 @@
 /area/teleporter/firstdeck)
 "nFh" = (
 /obj/structure/table/steel,
-/obj/machinery/photocopier/faxmachine/torch{
-	department = "Torch - Brig Chief"
-	},
 /obj/machinery/camera/network/security{
 	c_tag = "Security Wing - Brig Chief";
 	dir = 4
@@ -23210,6 +23203,7 @@
 /obj/machinery/newscaster/security_unit{
 	pixel_x = -32
 	},
+/obj/machinery/photocopier/faxmachine,
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "nHf" = (
@@ -28572,12 +28566,7 @@
 /area/maintenance/firstdeck/centralport)
 "tTA" = (
 /obj/structure/table/standard,
-/obj/item/storage/box/donkpockets,
 /obj/item/storage/box/cups,
-/obj/item/storage/box/donkpockets{
-	pixel_x = -3;
-	pixel_y = -3
-	},
 /turf/simulated/floor/tiled/monotile,
 /area/security/brig)
 "tTY" = (
@@ -39887,7 +39876,7 @@ lJb
 uXW
 qWE
 uGu
-aNH
+aiu
 cXj
 wyb
 sxG
@@ -40089,7 +40078,7 @@ aiu
 lVb
 aiu
 cfn
-aNH
+aiu
 vJO
 oIb
 avI
@@ -40291,7 +40280,7 @@ lKb
 lWb
 qya
 mfb
-aNH
+aiu
 vJO
 auv
 jpt
@@ -40493,7 +40482,7 @@ alW
 alW
 tUl
 hCE
-aNH
+aiu
 mCk
 hnL
 dPA
@@ -40695,7 +40684,7 @@ dkG
 ape
 amb
 kUt
-aNH
+aiu
 xzK
 auv
 jpt
@@ -40897,7 +40886,7 @@ aiu
 aiu
 aiu
 aiu
-aNH
+aiu
 vJO
 oIb
 avI

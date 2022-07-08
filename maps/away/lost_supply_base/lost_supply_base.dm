@@ -5,7 +5,7 @@
 	name = "supply station"
 	desc = "This looks like abandoned and heavy damaged supply station."
 	icon_state = "object"
-	known = 0
+	known = FALSE
 
 	initial_generic_waypoints = list(
 		"nav_lost_supply_base_1",

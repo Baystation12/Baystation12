@@ -1,5 +1,4 @@
-/mob/living/carbon/human
-	hud_type = /datum/hud/human
+/mob/living/carbon/human/hud_type = /datum/hud/human
 
 /datum/hud/human/FinalizeInstantiation(var/ui_style='icons/mob/screen1_White.dmi', var/ui_color = "#ffffff", var/ui_alpha = 255)
 	var/mob/living/carbon/human/target = mymob

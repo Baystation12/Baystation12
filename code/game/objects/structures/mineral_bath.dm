@@ -44,7 +44,7 @@
 	else
 		user.visible_message("<span class='notice'>\The [user] begins pushing \the [patient] into \the [src].</span>")
 
-	if(!do_after(user, 3 SECONDS, src))
+	if(!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 		return FALSE
 
 	if(!user.Adjacent(src) || !(self_drop || user.Adjacent(patient)))

@@ -46,7 +46,7 @@
 //  on or off.
 var/global/list/dna_activity_bounds[DNA_SE_LENGTH]
 
-// Used to determine what each block means (admin hax and species stuff on /vg/, mostly)
+// Used to determine what each block means
 var/global/list/assigned_blocks[DNA_SE_LENGTH]
 
 var/global/list/datum/dna/gene/dna_genes[0]
@@ -80,7 +80,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 	// New stuff
 	var/species = SPECIES_HUMAN
-	var/s_base = ""
+	var/base_skin = ""
 	var/list/body_markings = list()
 
 // Make a copy of this strand.
@@ -92,7 +92,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	new_dna.real_name=real_name
 	new_dna.species=species
 	new_dna.body_markings=body_markings.Copy()
-	new_dna.s_base=s_base
+	new_dna.base_skin = base_skin
 	for(var/b=1;b<=DNA_SE_LENGTH;b++)
 		new_dna.SE[b]=SE[b]
 		if(b<=DNA_UI_LENGTH)
@@ -120,32 +120,39 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	ResetUI(1)
 	// Hair
 	// FIXME:  Species-specific defaults pls
-	if(!character.h_style)
-		character.h_style = "Skinhead"
-	var/hair = list_find(GLOB.hair_styles_list, character.h_style)
+	if(!character.head_hair_style)
+		character.head_hair_style = "Bald"
+	var/hair = GLOB.hair_styles_list.Find(character.head_hair_style)
 
 	// Facial Hair
-	if(!character.f_style)
-		character.f_style = "Shaved"
-	var/beard	= list_find(GLOB.facial_hair_styles_list, character.f_style)
+	if(!character.facial_hair_style)
+		character.facial_hair_style = "Shaved"
+	var/beard	= GLOB.facial_hair_styles_list.Find(character.facial_hair_style)
 
-	SetUIValueRange(DNA_UI_HAIR_R,    character.r_hair,    255,    1)
-	SetUIValueRange(DNA_UI_HAIR_G,    character.g_hair,    255,    1)
-	SetUIValueRange(DNA_UI_HAIR_B,    character.b_hair,    255,    1)
+	var/list/head_color = rgb2num(character.head_hair_color)
 
-	SetUIValueRange(DNA_UI_BEARD_R,   character.r_facial,  255,    1)
-	SetUIValueRange(DNA_UI_BEARD_G,   character.g_facial,  255,    1)
-	SetUIValueRange(DNA_UI_BEARD_B,   character.b_facial,  255,    1)
+	SetUIValueRange(DNA_UI_HAIR_R,    head_color[1],    255,    1)
+	SetUIValueRange(DNA_UI_HAIR_G,    head_color[2],    255,    1)
+	SetUIValueRange(DNA_UI_HAIR_B,    head_color[3],    255,    1)
 
-	SetUIValueRange(DNA_UI_EYES_R,    character.r_eyes,    255,    1)
-	SetUIValueRange(DNA_UI_EYES_G,    character.g_eyes,    255,    1)
-	SetUIValueRange(DNA_UI_EYES_B,    character.b_eyes,    255,    1)
+	var/list/face_color = rgb2num(character.facial_hair_color)
 
-	SetUIValueRange(DNA_UI_SKIN_R,    character.r_skin,    255,    1)
-	SetUIValueRange(DNA_UI_SKIN_G,    character.g_skin,    255,    1)
-	SetUIValueRange(DNA_UI_SKIN_B,    character.b_skin,    255,    1)
+	SetUIValueRange(DNA_UI_BEARD_R,   face_color[1],  255,    1)
+	SetUIValueRange(DNA_UI_BEARD_G,   face_color[2],  255,    1)
+	SetUIValueRange(DNA_UI_BEARD_B,   face_color[3],  255,    1)
 
-	SetUIValueRange(DNA_UI_SKIN_TONE, 35-character.s_tone, 220,    1) // Value can be negative.
+	var/list/eye_color = rgb2num(character.eye_color)
+
+	SetUIValueRange(DNA_UI_EYES_R,    eye_color[1],    255,    1)
+	SetUIValueRange(DNA_UI_EYES_G,    eye_color[2],    255,    1)
+	SetUIValueRange(DNA_UI_EYES_B,    eye_color[3],    255,    1)
+
+	var/list/skin_color = rgb2num(character.skin_color)
+	SetUIValueRange(DNA_UI_SKIN_R,    skin_color[1],    255,    1)
+	SetUIValueRange(DNA_UI_SKIN_G,    skin_color[2],    255,    1)
+	SetUIValueRange(DNA_UI_SKIN_B,    skin_color[3],    255,    1)
+
+	SetUIValueRange(DNA_UI_SKIN_TONE, 35-character.skin_tone, 220,    1) // Value can be negative.
 
 	SetUIState(DNA_UI_GENDER,         character.gender!=MALE,        1)
 
@@ -153,9 +160,9 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	SetUIValueRange(DNA_UI_BEARD_STYLE, beard, GLOB.facial_hair_styles_list.len,1)
 
 	body_markings.Cut()
-	s_base = character.s_base
+	base_skin = character.base_skin
 	for(var/obj/item/organ/external/E in character.organs)
-		E.s_base = s_base
+		E.base_skin = base_skin
 		if(E.markings.len)
 			body_markings[E.organ_tag] = E.markings.Copy()
 
@@ -329,7 +336,8 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 
 /proc/EncodeDNABlock(var/value)
-	return add_zero2(num2hex(value & 0xF), 3)
+	return pad_left(num2hex(value & 0xF), 3, "0")
+
 
 /datum/dna/proc/UpdateUI()
 	src.uni_identity=""

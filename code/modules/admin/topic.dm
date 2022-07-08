@@ -875,6 +875,9 @@
 				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as text|null)
 				if(!reason)
 					return
+				if (QDELETED(M))
+					to_chat(usr, SPAN_DANGER("The mob you are banning no longer exists."))
+					return
 				var/mob_key = LAST_CKEY(M)
 				if(mob_key != given_key)
 					to_chat(usr, SPAN_DANGER("This mob's occupant has changed from [given_key] to [mob_key]. Please try again."))
@@ -899,6 +902,9 @@
 				if(!check_rights(R_BAN))   return
 				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as text|null)
 				if(!reason)
+					return
+				if (QDELETED(M))
+					to_chat(usr, SPAN_DANGER("The mob you are banning no longer exists."))
 					return
 				var/mob_key = LAST_CKEY(M)
 				if(mob_key != given_key)
@@ -946,8 +952,8 @@
 		if(SSticker.mode)
 			return alert(usr, "The game has already started.", null, null, null, null)
 		var/dat = {"<B>What mode do you wish to play?</B><HR>"}
-		for(var/mode in config.modes)
-			dat += {"<A href='?src=\ref[src];c_mode2=[mode]'>[config.mode_names[mode]]</A><br>"}
+		for(var/mode in SSticker.mode_tags)
+			dat += {"<A href='?src=\ref[src];c_mode2=[mode]'>[SSticker.mode_names[mode]]</A><br>"}
 		dat += {"<A href='?src=\ref[src];c_mode2=secret'>Secret</A><br>"}
 		dat += {"<A href='?src=\ref[src];c_mode2=random'>Random</A><br>"}
 		dat += {"Now: [SSticker.master_mode]"}
@@ -961,8 +967,8 @@
 		if(SSticker.master_mode != "secret")
 			return alert(usr, "The game mode has to be secret!", null, null, null, null)
 		var/dat = {"<B>What game mode do you want to force secret to be? Use this if you want to change the game mode, but want the players to believe it's secret. This will only work if the current game mode is secret.</B><HR>"}
-		for(var/mode in config.modes)
-			dat += {"<A href='?src=\ref[src];f_secret2=[mode]'>[config.mode_names[mode]]</A><br>"}
+		for(var/mode in SSticker.mode_tags)
+			dat += {"<A href='?src=\ref[src];f_secret2=[mode]'>[SSticker.mode_names[mode]]</A><br>"}
 		dat += {"<A href='?src=\ref[src];f_secret2=secret'>Random (default)</A><br>"}
 		dat += {"Now: [SSticker.secret_force_mode]"}
 		show_browser(usr, dat, "window=f_secret")
@@ -1343,7 +1349,7 @@
 		var/mob/M = locate(href_list["take_question"])
 		if(ismob(M))
 			var/take_msg = "<span class='notice'><b>[key_name(usr.client)]</b> is attending to <b>[key_name(M)]'s</b> message.</span>"
-			for(var/client/X in GLOB.admins)
+			for(var/client/X as anything in GLOB.admins)
 				if((R_ADMIN|R_MOD) & X.holder.rights)
 					to_chat(X, take_msg)
 			to_chat(M, "<span class='notice'><b>Your message is being attended to by [usr.client]. Thanks for your patience!</b></span>")
@@ -1573,7 +1579,8 @@
 
 		P.admindatum = src
 		P.origin = replyorigin
-		P.destination = fax
+
+		P.destinations = get_fax_machines_by_department(fax.department)
 		P.sender = sender
 
 		P.adminbrowse()
@@ -2079,14 +2086,62 @@
 
 		show_player_panel(M)
 
+	if (href_list["cryo"])
+		var/mob/M = locate(href_list["cryo"])
+		if (!isliving(M))
+			return
 
-mob/living/proc/can_centcom_reply()
+		var/response = alert("This will put [M] into a cryopod and despawn them. Are you sure?",,"Yes","No") == "Yes"
+		if (response)
+			if (M.client)
+				var/sanity_check = alert("This player is currently online. Do you really want to cryo them?",,"Yes","No") == "Yes"
+
+				if (!sanity_check)
+					return
+
+			if (M.buckled)
+				M.buckled.unbuckle_mob()
+
+			var/last_ckey = LAST_CKEY(M)
+
+			if (isAI(M))
+				var/mob/living/silicon/ai/AI = M
+				AI.despawn()
+				log_and_message_admins("has forced [last_ckey]/([M]) to ghost and deactivate.")
+				return
+
+			var/obj/machinery/cryopod/C
+			if (isrobot(M))
+				for (var/obj/machinery/cryopod/robot/CP in SSmachines.machinery)
+					if (CP.occupant || !(CP.z in GLOB.using_map.station_levels))
+						continue
+					C = CP
+			else
+				for (var/obj/machinery/cryopod/CP in SSmachines.machinery)
+					if (CP.occupant || !(CP.z in GLOB.using_map.station_levels))
+						continue
+					C = CP
+
+			if (!C || C.occupant)
+				to_chat(usr, SPAN_WARNING("Could not find an empty cryopod!"))
+				return
+
+			log_and_message_admins("has put [last_ckey]/([M]) into a cryopod and ghosted them.")
+
+			C.set_occupant(M)
+			var/ghost = M.ghostize(FALSE)
+			if (ghost)
+				show_player_panel(M)
+			return
+
+
+/mob/living/proc/can_centcom_reply()
 	return 0
 
-mob/living/carbon/human/can_centcom_reply()
+/mob/living/carbon/human/can_centcom_reply()
 	return istype(l_ear, /obj/item/device/radio/headset) || istype(r_ear, /obj/item/device/radio/headset)
 
-mob/living/silicon/ai/can_centcom_reply()
+/mob/living/silicon/ai/can_centcom_reply()
 	return silicon_radio != null && !check_unable(2)
 
 /datum/proc/extra_admin_link(var/prefix, var/sufix, var/short_links)

@@ -1,38 +1,3 @@
-/obj/item/device/gps
-	name = "relay positioning device"
-	desc = "Triangulates the approximate co-ordinates using a nearby satellite network."
-	icon = 'icons/obj/locator.dmi'
-	icon_state = "locator"
-	item_state = "locator"
-	origin_tech = list(TECH_MATERIAL = 2, TECH_DATA = 2, TECH_BLUESPACE = 2)
-	matter = list(MATERIAL_ALUMINIUM = 250, MATERIAL_STEEL = 250, MATERIAL_GLASS = 50)
-	w_class = ITEM_SIZE_SMALL
-
-/obj/item/device/gps/attack_self(var/mob/user as mob)
-	to_chat(user, "<span class='notice'>[icon2html(src, user)] \The [src] flashes <i>[get_coordinates()]</i>.</span>")
-
-/obj/item/device/gps/examine(mob/user)
-	. = ..()
-	to_chat(user, "<span class='notice'>\The [src]'s screen shows: <i>[get_coordinates()]</i>.</span>")
-
-/obj/item/device/gps/proc/get_coordinates()
-	var/turf/T = get_turf(src)
-	return T ? "[T.x]:[T.y]:[T.z]" : "N/A"
-
-/mob/living/carbon/human/Stat()
-	. = ..()
-	if(statpanel("Status"))
-		var/obj/item/device/gps/L = locate() in src
-		if(L)
-			stat("Coordinates:", "[L.get_coordinates()]")
-
-/mob/living/silicon/robot/Stat()
-	. = ..()
-	if(statpanel("Status") && (istype(module_state_1, /obj/item/device/gps) || istype(module_state_2, /obj/item/device/gps) || istype(module_state_3, /obj/item/device/gps)))
-		var/obj/item/device/gps/L = locate() in src
-		if(L)
-			stat("Coordinates:", "[L.get_coordinates()]")
-
 /obj/item/device/measuring_tape
 	name = "measuring tape"
 	desc = "A coiled metallic tape used to check dimensions and lengths."
@@ -202,7 +167,7 @@
 		dat += "Anomaly depth: [current.depth] cm<br>"
 		dat += "Anomaly size: [current.clearance] cm<br>"
 		dat += "Dissonance spread: [current.dissonance_spread]<br>"
-		var/index = list_find(responsive_carriers, current.material)
+		var/index = responsive_carriers.Find(current.material)
 		if(index > 0 && index <= finds_as_strings.len)
 			dat += "Anomaly material: [finds_as_strings[index]]<br>"
 		else

@@ -1,6 +1,6 @@
 //TODO: Flash range does nothing currently
 
-proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN, shaped)
+/proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN, shaped, turf_breaker)
 	var/multi_z_scalar = 0.35
 	UNLINT(src = null)	//so we don't abort once src is deleted
 	spawn(0)
@@ -65,9 +65,9 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			for(var/turf/T in trange(max_range, epicenter))
 				var/dist = sqrt((T.x - x0)**2 + (T.y - y0)**2)
 
-				if(dist < devastation_range)		dist = 1
-				else if(dist < heavy_impact_range)	dist = 2
-				else if(dist < light_impact_range)	dist = 3
+				if(dist < devastation_range)		dist = EX_ACT_DEVASTATING
+				else if(dist < heavy_impact_range)	dist = EX_ACT_HEAVY
+				else if(dist < light_impact_range)	dist = EX_ACT_LIGHT
 				else								continue
 
 				T.ex_act(dist)
@@ -86,6 +86,6 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 
 
 
-proc/secondaryexplosion(turf/epicenter, range)
+/proc/secondaryexplosion(turf/epicenter, range)
 	for(var/turf/tile in range(range, epicenter))
-		tile.ex_act(2)
+		tile.ex_act(EX_ACT_HEAVY)

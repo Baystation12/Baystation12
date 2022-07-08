@@ -18,7 +18,7 @@
 /obj/item/organ/internal/augment/active/leukocyte_breeder/emp_act(severity)
 	. = ..()
 	if (owner && active)
-		if (prob(100 - (20 * severity))) // 40% chance for 3, 60% chance for 2, and 80% chance for 1 severity, respectively
+		if (prob(100 - (20 * severity))) // 60% chance for EMP_ACT_LIGHT and 80% chance for EMP_ACT_HEAVY severity, respectively
 			to_chat(owner, SPAN_WARNING("You feel a wave of nausea as your [name] deactivates."))
 			active = FALSE
 

@@ -67,6 +67,7 @@
 	display_name = "Head Augments (Vision)"
 	description = "Head augments with vision effects."
 	path = /obj/item/organ/internal/augment
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/augment/head_vision/New()

@@ -44,7 +44,7 @@
 	desc = "A smaller model of the versatile LAEP90 Perun, the LAEP90-C packs considerable utility in a smaller package. Best used in situations where full-sized sidearms are inappropriate."
 	icon = 'icons/obj/guns/small_egun.dmi'
 	icon_state = "smallgunstun"
-	max_shots = 5
+	max_shots = 6
 	w_class = ITEM_SIZE_SMALL
 	force = 2 //it's the size of a car key, what did you expect?
 	modifystate = "smallgunstun"
@@ -93,10 +93,10 @@
 /obj/item/gun/energy/gun/nuclear/emp_act(severity)
 	..()
 	switch(severity)
-		if(1)
+		if(EMP_ACT_HEAVY)
 			fail_counter = max(fail_counter, 30)
 			visible_message("\The [src]'s reactor overloads!")
-		if(2)
+		if(EMP_ACT_LIGHT)
 			fail_counter = max(fail_counter, 10)
 			if(ismob(loc))
 				to_chat(loc, "<span class='warning'>\The [src] feels pleasantly warm.</span>")

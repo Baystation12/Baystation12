@@ -25,10 +25,16 @@ GLOBAL_VAR_CONST(PREF_SHORTHAND, "Shorthand")
 GLOBAL_VAR_CONST(PREF_NEVER, "Never")
 GLOBAL_VAR_CONST(PREF_NON_ANTAG, "Non-Antag Only")
 GLOBAL_VAR_CONST(PREF_ALWAYS, "Always")
+GLOBAL_VAR_CONST(PREF_SMALL, "Small")
+GLOBAL_VAR_CONST(PREF_MEDIUM, "Medium")
+GLOBAL_VAR_CONST(PREF_LARGE, "Large")
+GLOBAL_VAR_CONST(PREF_LOW, "Low")
+GLOBAL_VAR_CONST(PREF_MED, "Medium")
+GLOBAL_VAR_CONST(PREF_HIGH, "High")
 
-var/list/_client_preferences
-var/list/_client_preferences_by_key
-var/list/_client_preferences_by_type
+var/global/list/_client_preferences
+var/global/list/_client_preferences_by_key
+var/global/list/_client_preferences_by_type
 
 /proc/get_client_preferences()
 	if(!_client_preferences)
@@ -106,8 +112,9 @@ var/list/_client_preferences_by_type
 
 /datum/client_preference/play_ambiance/changed(var/mob/preference_mob, var/new_value)
 	if(new_value == GLOB.PREF_NO)
-		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = GLOB.lobby_sound_channel))
-		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = GLOB.ambience_sound_channel))
+		sound_to(preference_mob, sound(null, channel = GLOB.ambience_channel_vents))
+		sound_to(preference_mob, sound(null, channel = GLOB.ambience_channel_forced))
+		sound_to(preference_mob, sound(null, channel = GLOB.ambience_channel_common))
 
 /datum/client_preference/play_jukeboxes
 	description ="Play jukeboxes and boomboxes"
@@ -138,15 +145,33 @@ var/list/_client_preferences_by_type
 	key = "CHAT_GHOSTRADIO"
 	options = list(GLOB.PREF_ALL_CHATTER, GLOB.PREF_NEARBY)
 
+/datum/client_preference/preview_scale
+	description = "Options Preview Scale"
+	key = "PREVIEW_SCALE"
+	options = list(GLOB.PREF_MEDIUM, GLOB.PREF_LARGE, GLOB.PREF_SMALL)
+
+/datum/client_preference/preview_scale/changed(mob/mob, val)
+	var/datum/preferences/prefs = mob.client?.prefs
+	if (!prefs)
+		return
+	prefs.update_preview_icon(TRUE)
+	if (!prefs.popup)
+		return
+	prefs.update_setup_window(usr)
+
 /datum/client_preference/language_display
-	description = "Display Language Names"
+	description = "Show Language Names"
 	key = "LANGUAGE_DISPLAY"
 	options = list(GLOB.PREF_SHORTHAND, GLOB.PREF_FULL, GLOB.PREF_OFF)
+
+/datum/client_preference/ghost_language_hide
+	description = "Hide Language Names As Ghost"
+	key = "LANGUAGE_DISPLAY_GHOST"
 
 /datum/client_preference/ghost_follow_link_length
 	description = "Ghost Follow Links"
 	key = "CHAT_GHOSTFOLLOWLINKLENGTH"
-	options = list(GLOB.PREF_SHORT, GLOB.PREF_LONG)
+	options = list(GLOB.PREF_SHORT, GLOB.PREF_LONG, GLOB.PREF_OFF)
 
 /datum/client_preference/chat_tags
 	description = "Chat tags"
@@ -259,6 +284,17 @@ var/list/_client_preferences_by_type
 	key = "EXAMINE_MESSAGES"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
+/datum/client_preference/graphics_quality
+	description = "Graphics quality (where relevant it will reduce effects)"
+	key = "GRAPHICS_QUALITY"
+	options = list(GLOB.PREF_LOW, GLOB.PREF_MED, GLOB.PREF_HIGH)
+	default_value = GLOB.PREF_HIGH
+
+/datum/client_preference/graphics_quality/changed(mob/preference_mob, new_value)
+	if(preference_mob?.client)
+		for(var/atom/movable/renderer/R as anything in preference_mob.renderers)
+			R.GraphicsUpdate()
+
 /datum/client_preference/goonchat
 	description = "Use Goon Chat"
 	key = "USE_GOONCHAT"
@@ -328,3 +364,11 @@ var/list/_client_preferences_by_type
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 	default_value = GLOB.PREF_HIDE
 	flags = R_ADMIN|R_DEBUG
+
+
+/datum/client_preference/staff/show_runtime_logs
+	description = "Runtime Log Messages"
+	key = "CHAT_RUNTIMELOGS"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	default_value = GLOB.PREF_HIDE
+	flags = R_ADMIN | R_DEBUG

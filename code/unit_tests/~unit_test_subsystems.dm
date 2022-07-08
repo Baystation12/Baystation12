@@ -12,7 +12,7 @@ SUBSYSTEM_DEF(unit_tests)
 	var/stage = 1
 	var/end_unit_tests
 
-/datum/controller/subsystem/unit_tests/Initialize(timeofday)
+/datum/controller/subsystem/unit_tests/Initialize(start_uptime)
 
 	#ifndef UNIT_TEST_COLOURED
 	if(world.system_type != UNIX) // Not a Unix/Linux/etc system, we probably don't want to print color escapes (unless UNIT_TEST_COLOURED was defined to force escapes)
@@ -34,7 +34,7 @@ SUBSYSTEM_DEF(unit_tests)
 	for(var/test_datum_type in get_test_datums())
 		queue += new test_datum_type
 	log_unit_test("[queue.len] unit tests loaded.")
-	. = ..()
+
 
 /datum/controller/subsystem/unit_tests/proc/load_map_templates()
 	for(var/map_template_name in (SSmapping.map_templates))

@@ -62,14 +62,14 @@
 		if(H) H.update_system_info()
 	handle_hud_icons_health()
 	var/obj/item/cell/C = get_cell()
-	if(istype(C)) 
+	if(istype(C))
 		hud_power.maptext_x = initial(hud_power.maptext_x)
 		hud_power.maptext_y = initial(hud_power.maptext_y)
-		hud_power.maptext = SPAN_STYLE("font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 7px;",  "[round(get_cell().charge)]/[round(get_cell().maxcharge)]")
+		hud_power.maptext = STYLE_SMALLFONTS_OUTLINE("[round(get_cell().charge)]/[round(get_cell().maxcharge)]", 7, COLOR_WHITE, COLOR_BLACK)
 	else
 		hud_power.maptext_x = 16
 		hud_power.maptext_y = -8
-		hud_power.maptext = SPAN_STYLE("font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 7px;", "CHECK POWER")
+		hud_power.maptext = STYLE_SMALLFONTS_OUTLINE("CHECK POWER", 7, COLOR_WHITE, COLOR_BLACK)
 
 	refresh_hud()
 
@@ -123,5 +123,5 @@
 		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
 		if(H)
 			H.color = "#a03b3b"
-			animate(H, color = COLOR_WHITE, time = timeout, easing = CUBIC_EASING | EASE_IN)	
+			animate(H, color = COLOR_WHITE, time = timeout, easing = CUBIC_EASING | EASE_IN)
 	addtimer(CALLBACK(src, .proc/reset_hardpoint_color), timeout)

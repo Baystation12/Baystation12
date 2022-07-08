@@ -12,6 +12,7 @@
 	its massive bureaucracy and the distance between worlds. Through its member states, the SCG governs as one of the \
 	most advanced and powerful civilisations in the known galaxy."
 
+
 /decl/cultural_info/faction/scg/fleet
 	name = FACTION_FLEET
 	description = "The Fleet is the primary component of the SCG Defence Forces. It mostly protects SCG space from pirates, smugglers, \
@@ -42,7 +43,7 @@
 	protocols, and xenoartifacts being 'lost' in transit, but nothing has been conclusively proven as of yet, and SCG doubtless is \
 	reluctant to harpoon their own project."
 	economic_power = 1.2
-	subversive_potential = 35
+
 
 /decl/cultural_info/faction/gcc
 	name = FACTION_INDIE_CONFED
@@ -55,7 +56,7 @@
 	heavily mistrusted and in some instances, met with downright hostility. Today the GCC continues to be an economic powerhouse following \
 	a period of steady economic recovery, with most of its exports being manufactured goods, primarily armaments."
 	economic_power = 0.9
-	subversive_potential = 50
+
 
 /decl/cultural_info/faction/remote
 	name = FACTION_EXPEDITIONARY
@@ -68,6 +69,7 @@
 	Any SCG citizen of age (18 and older) with no outstanding SCG-wide warrants can sign up for a 2-year contract. \
 	Officer candidates are required to have at least a bachelor's degree in a relevant field (astrogation, engineering, xenoarcheology, etc)."
 
+
 /decl/cultural_info/faction/police
 	name = FACTION_SPACECOPS
 	description = "The Sol Federal (SFP) is a government law enforcement agency tasked with enforcing Sol Central Government law, \
@@ -76,6 +78,7 @@
 	Notable units are Organized Crime & Vice (self-explanatory), Territory Support (ports of entry and helping local law enforcement), \
 	Special Investigations (sensitive and urgent cases) and Fugitive Recovery Division (for when local authorities are unable or unwilling to arrest someone). \
 	The contractor SFP Trackers are also used find and arrest low-profile fugitives from justice."
+
 
 /decl/cultural_info/faction/remote/nanotrasen
 	name = FACTION_NANOTRASEN
@@ -87,7 +90,7 @@
 	NanoTrasen is characterized by its aggression and questionable ethics, which, combined with the high emphasis they put on new, untested and dangerous \
 	technology, means their installations are often considered unsafe and hazardous."
 	economic_power = 1.2
-	subversive_potential = 15
+
 
 /decl/cultural_info/faction/remote/xynergy
 	name = FACTION_XYNERGY
@@ -96,7 +99,7 @@
 	fisher of space faring animals such as space carp and pike. They recently gained media presence by discovering and \
 	training the giant armoured serpentids."
 	economic_power = 1.1
-	subversive_potential = 15
+
 
 /decl/cultural_info/faction/remote/hephaestus
 	name = FACTION_HEPHAESTUS
@@ -107,7 +110,7 @@
 	reliability of its equipment as well as its general affordability. Internally, Hephaestus is a desirable employer as a result of its \
 	many employee benefits and focus on employee development, though many dread being transferred to one of the 'remote' branches."
 	economic_power = 1.2
-	subversive_potential = 15
+
 
 /decl/cultural_info/faction/free
 	name = FACTION_FREETRADE
@@ -118,7 +121,7 @@
 	Gateway installations and planets. Somewhat unscrupulous, FTU stations and merchants are known for \
 	selling a great many restricted items and supplying all manner of goods indiscriminately."
 	economic_power = 1.3
-	subversive_potential = 15
+
 
 /decl/cultural_info/faction/pcrc
 	name = FACTION_PCRC
@@ -127,7 +130,7 @@
 	security, close protection, asset protection, search and rescue and peacekeeping and escort duties. A relatively quiet and new company, \
 	it has quickly established itself as a reliable and effective provider of security solutions. This has often put it at odds with its main \
 	competitor, SAARE."
-	subversive_potential = 15
+
 
 /decl/cultural_info/faction/saare
 	name = FACTION_SAARE
@@ -136,7 +139,7 @@
 	military services but have begun instituting training programs to breed their own operatives for the future. Typical assignments for SAARE \
 	contractors include private law enforcement, ship escort, location security, VIP escort, and VIP or asset recovery. In the last decade, the \
 	company has recently signed onto a number of contracts with NanoTrasen to complement their own Asset Protection forces."
-	subversive_potential = 15
+
 
 /decl/cultural_info/faction/dais
 	name = FACTION_DAIS
@@ -147,9 +150,8 @@
 	Currently DAIS is invested in bluespace computing research and artificial intelligence research. Despite recent intrusions by NanoTrasen into their sector with NTNet \
 	and related products, they still remain the market leader in computer technologies."
 	economic_power = 1.1
-	subversive_potential = 15
+
 
 /decl/cultural_info/faction/other
 	name = FACTION_OTHER
 	description = "You belong to one of the many other factions that operate in the galaxy. Numerous, too numerous to list, these factions represent a variety of interests, purposes, intents and goals."
-	subversive_potential = 25

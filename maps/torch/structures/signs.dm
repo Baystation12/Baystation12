@@ -42,7 +42,7 @@
 		var/obj/item/grab/G = I
 		if(!ishuman(G.affecting))
 			return
-		G.affecting.apply_damage(5, BRUTE, BP_HEAD, used_weapon="Metal Plaque")
+		G.affecting.apply_damage(5, DAMAGE_BRUTE, BP_HEAD, used_weapon="Metal Plaque")
 		visible_message("<span class='warning'>[G.assailant] smashes [G.assailant] into \the [src] face-first!</span>")
 		playsound(get_turf(src), 'sound/weapons/tablehit1.ogg', 50)
 		to_chat(G.affecting, "<span class='danger'>[directives]</span>")

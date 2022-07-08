@@ -1,15 +1,18 @@
-var/const/ENG = FLAG(0)
-var/const/SEC = FLAG(1)
-var/const/MED = FLAG(2)
-var/const/SCI = FLAG(3)
-var/const/CIV = FLAG(4)
-var/const/COM = FLAG(5)
-var/const/MSC = FLAG(6)
-var/const/SRV = FLAG(7)
-var/const/SUP = FLAG(8)
-var/const/SPT = FLAG(9)
-var/const/EXP = FLAG(10)
-var/const/ROB = FLAG(11)
+var/global/const/ENG = FLAG(0)
+var/global/const/SEC = FLAG(1)
+var/global/const/MED = FLAG(2)
+var/global/const/SCI = FLAG(3)
+var/global/const/CIV = FLAG(4)
+var/global/const/COM = FLAG(5)
+var/global/const/MSC = FLAG(6)
+var/global/const/SRV = FLAG(7)
+var/global/const/SUP = FLAG(8)
+var/global/const/SPT = FLAG(9)
+var/global/const/EXP = FLAG(10)
+var/global/const/ROB = FLAG(11)
+
+GLOBAL_VAR(antag_code_phrase)
+GLOBAL_VAR(antag_code_response)
 
 SUBSYSTEM_DEF(jobs)
 	name = "Jobs"
@@ -25,7 +28,12 @@ SUBSYSTEM_DEF(jobs)
 	var/list/positions_by_department = list()
 	var/list/job_icons =               list()
 
-/datum/controller/subsystem/jobs/Initialize(timeofday)
+
+/datum/controller/subsystem/jobs/UpdateStat(time)
+	return
+
+
+/datum/controller/subsystem/jobs/Initialize(start_uptime)
 
 	// Create main map jobs.
 	primary_job_datums.Cut()
@@ -93,13 +101,12 @@ SUBSYSTEM_DEF(jobs)
 							LAZYDISTINCTADD(positions_by_department["[GLOB.bitflags[I]]"], job.alt_titles)
 
 	// Set up syndicate phrases.
-	syndicate_code_phrase = generate_code_phrase()
-	syndicate_code_response	= generate_code_phrase()
+	GLOB.antag_code_phrase = generate_code_phrase()
+	GLOB.antag_code_response = generate_code_phrase()
 
 	// Set up AI spawn locations
 	spawn_empty_ai()
 
-	. = ..()
 
 /datum/controller/subsystem/jobs/proc/guest_jobbans(var/job)
 	for(var/dept in list(COM, MSC, SEC))
@@ -316,7 +323,7 @@ SUBSYSTEM_DEF(jobs)
 		for(var/mob/new_player/player in unassigned_roundstart)
 			// Loop through all jobs
 			for(var/datum/job/job in shuffledoccupations) // SHUFFLE ME BABY
-				if(job && !list_find(mode.disabled_jobs, job.title))
+				if(job && !mode.disabled_jobs.Find(job.title))
 					if(job.defer_roundstart_spawn)
 						deferred_jobs[job] = TRUE
 					else if(attempt_role_assignment(player, job, level, mode))
@@ -341,7 +348,7 @@ SUBSYSTEM_DEF(jobs)
 		if(player.client.prefs.alternate_option == BE_ASSISTANT)
 			var/datum/job/ass = DEFAULT_JOB_TYPE
 			if((GLOB.using_map.flags & MAP_HAS_BRANCH) && player.client.prefs.branches[initial(ass.title)])
-				var/datum/mil_branch/branch = mil_branches.get_branch(player.client.prefs.branches[initial(ass.title)])
+				var/datum/mil_branch/branch = GLOB.mil_branches.get_branch(player.client.prefs.branches[initial(ass.title)])
 				ass = branch.assistant_job
 			assign_role(player, initial(ass.title), mode = mode)
 	//For ones returning to lobby
@@ -432,9 +439,9 @@ SUBSYSTEM_DEF(jobs)
 	if(job)
 		if(H.client)
 			if(GLOB.using_map.flags & MAP_HAS_BRANCH)
-				H.char_branch = mil_branches.get_branch(H.client.prefs.branches[rank])
+				H.char_branch = GLOB.mil_branches.get_branch(H.client.prefs.branches[rank])
 			if(GLOB.using_map.flags & MAP_HAS_RANK)
-				H.char_rank = mil_branches.get_rank(H.client.prefs.branches[rank], H.client.prefs.ranks[rank])
+				H.char_rank = GLOB.mil_branches.get_rank(H.client.prefs.branches[rank], H.client.prefs.ranks[rank])
 
 		// Transfers the skill settings for the job to the mob
 		H.skillset.obtain_from_client(job, H.client)

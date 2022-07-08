@@ -32,7 +32,7 @@
 		S.confused += ionbug
 		S.eye_blurry += ionbug-1
 	for(var/mob/living/silicon/S in SSmobs.mob_list)
-		if(is_drone(S) || !(isAI(S) || isrobot(S)))
+		if(isdrone(S) || !(isAI(S) || isrobot(S)))
 			continue
 		if(!(S.z in affecting_z))
 			continue

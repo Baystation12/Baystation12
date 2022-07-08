@@ -80,10 +80,9 @@
 /obj/structure/closet/statue/toggle()
 	return
 
-/obj/structure/closet/statue/handle_death_change(new_death_state)
-	if (new_death_state)
-		for (var/mob/M in src)
-			shatter(M)
+/obj/structure/closet/statue/on_death()
+	for (var/mob/M in src)
+		shatter(M)
 
 /obj/structure/closet/statue/attack_generic(var/mob/user, damage, attacktext, environment_smash)
 	if(damage && environment_smash)

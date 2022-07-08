@@ -643,8 +643,8 @@
 
 /mob/Stat()
 	..()
-	. = (is_client_active(10 MINUTES))
-	if(!.)
+	. = (is_client_active(5 MINUTES))
+	if (!.)
 		return
 
 	if(statpanel("Status"))
@@ -660,20 +660,24 @@
 			stat("CPU:","[world.cpu]")
 			stat("Instances:","[world.contents.len]")
 			stat(null)
+			var/time = Uptime()
 			if(Master)
-				Master.stat_entry()
+				Master.UpdateStat(time)
 			else
 				stat("Master Controller:", "ERROR")
 			if(Failsafe)
-				Failsafe.stat_entry()
+				Failsafe.UpdateStat(time)
 			else if (Master.initializing)
 				stat("Failsafe Controller:", "Waiting for MC")
 			else
 				stat("Failsafe Controller:", "ERROR")
 			if(Master)
 				stat(null)
-				for(var/datum/controller/subsystem/SS in Master.subsystems)
-					SS.stat_entry()
+				config.UpdateStat()
+				GLOB.UpdateStat()
+				stat(null)
+				for (var/datum/controller/subsystem/subsystem as anything in Master.subsystems)
+					subsystem.UpdateStat(time)
 
 	if(listed_turf && client)
 		if(!TurfAdjacent(listed_turf))
@@ -901,7 +905,7 @@
 			LAZYREMOVE(wound.embedded_objects, implant)
 		if(!surgical_removal)
 			shock_stage+=20
-			affected.take_external_damage((implant.w_class * 3), 0, DAM_EDGE, "Embedded object extraction")
+			affected.take_external_damage((implant.w_class * 3), 0, DAMAGE_FLAG_EDGE, "Embedded object extraction")
 			if(!BP_IS_ROBOTIC(affected) && prob(implant.w_class * 5) && affected.sever_artery()) //I'M SO ANEMIC I COULD JUST -DIE-.
 				custom_pain("Something tears wetly in your [affected.name] as [implant] is pulled free!", 50, affecting = affected)
 	. = ..()
@@ -944,7 +948,7 @@
 		to_chat(src, "<span class='warning'>You attempt to get a good grip on [selection] in your body.</span>")
 	else
 		to_chat(U, "<span class='warning'>You attempt to get a good grip on [selection] in [S]'s body.</span>")
-	if(!do_after(U, 3 SECONDS, S, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_FORCELYING)) //let people pinned to stuff yank it out, otherwise they're stuck... forever!!!
+	if(!do_after(U, 3 SECONDS, S, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS, INCAPACITATION_DEFAULT & ~INCAPACITATION_FORCELYING)) //let people pinned to stuff yank it out, otherwise they're stuck... forever!!!
 		return
 	if(!selection || !S || !U)
 		return

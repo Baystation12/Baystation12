@@ -87,7 +87,7 @@
 //// Unathi Tatoos
 
 /datum/sprite_accessory/marking/unathi
-	icon = 'icons/mob/human_races/species/unathi/default_markings.dmi'
+	icon = 'icons/mob/human_races/species/unathi/markings.dmi'
 	species_allowed = list(SPECIES_UNATHI)
 
 

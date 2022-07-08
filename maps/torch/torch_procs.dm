@@ -15,7 +15,7 @@
 					V.unlock()
 
 /datum/map/make_maint_all_access(var/radstorm = 0)
-	maint_all_access = 1
+	maint_all_access = TRUE
 	if(radstorm)
 		priority_announcement.Announce("Требование о доступе для технических тунелей было отозвано на всех технических шлюзах. Шлюзы бункеров безопасности были разблокированы.", "Attention!")
 		GLOB.using_map.unbolt_saferooms()
@@ -23,7 +23,7 @@
 		priority_announcement.Announce("Требование о доступе для технических тунелей было отозвано на всех технических шлюзах.", "Attention!")
 
 /datum/map/revoke_maint_all_access(var/radstorm = 0)
-	maint_all_access = 0
+	maint_all_access = FALSE
 	if(radstorm)
 		priority_announcement.Announce("Требование о доступе для технических тунелей было поднято на всех технических шлюзах. Шлюзы бункеров безопасности были зыкрыты болтами.", "Attention!")
 		GLOB.using_map.bolt_saferooms()

@@ -220,9 +220,7 @@
 /turf/simulated/floor/plating/vox,
 /area/map_template/vox_raider)
 "dq" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 2
-	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -430,8 +428,7 @@
 /area/map_template/vox_raider)
 "kI" = (
 /obj/machinery/power/terminal{
-	dir = 1;
-	icon_state = "term"
+	dir = 1
 	},
 /obj/structure/cable/yellow{
 	d2 = 4;
@@ -475,8 +472,7 @@
 "rM" = (
 /obj/effect/paint/vox,
 /obj/machinery/atmospherics/pipe/simple/hidden/black{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/wall/titanium,
 /area/map_template/vox_raider)
@@ -515,8 +511,7 @@
 /area/map_template/vox_raider)
 "vU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9;
-	icon_state = "intact-supply"
+	dir = 9
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
@@ -567,8 +562,7 @@
 	pixel_y = -24
 	},
 /obj/structure/handrail{
-	dir = 1;
-	icon_state = "handrail"
+	dir = 1
 	},
 /obj/machinery/light/vox{
 	dir = 4
@@ -625,9 +619,7 @@
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 "yQ" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 2
-	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/effect/floor_decal/corner/b_green{
 	dir = 5
@@ -639,9 +631,7 @@
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 "Ah" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 2
-	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -708,8 +698,8 @@
 /obj/item/stack/material/rods/fifty,
 /obj/item/device/spaceflare,
 /obj/item/device/spaceflare,
-/obj/item/weldpack,
-/obj/item/weldpack,
+/obj/item/storage/backpack/weldpack,
+/obj/item/storage/backpack/weldpack,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "DR" = (
@@ -832,8 +822,7 @@
 /area/map_template/vox_raider)
 "NI" = (
 /obj/machinery/atmospherics/pipe/vent/high_volume{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/shuttle_ceiling/vox,
 /area/map_template/vox_raider)
@@ -906,8 +895,7 @@
 	id_tag = "vox_raider_pump"
 	},
 /obj/structure/handrail{
-	dir = 1;
-	icon_state = "handrail"
+	dir = 1
 	},
 /turf/simulated/floor/plating/vox,
 /area/map_template/vox_raider)

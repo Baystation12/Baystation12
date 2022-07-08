@@ -116,7 +116,7 @@ Class Procs:
 	/// Boolean. Whether or not the maintenance panel is open.
 	var/panel_open = FALSE
 	/// Numeric unique ID number tracker. Used for ensuring `uid` is unique.
-	var/global/gl_uid = 1
+	var/static/gl_uid = 1
 	/// Boolean. Can the machine be interacted with while de-powered.
 	var/interact_offline = FALSE
 	/// Sound played on succesful interface use by a carbon lifeform.
@@ -135,6 +135,8 @@ Class Procs:
 	var/id_tag
 	/// What is created when the machine is dismantled.
 	var/frame_type = /obj/machinery/constructable_frame/machine_frame/deconstruct
+	/// Whether or not the machine is allowed to be dismantled/modified. Used for snowflake consoles that would break permanently if dismantled. Also prevents damage, since the machine would be irreparable in this state. Has to be defined here because machinery datums.
+	var/can_use_tools = TRUE
 
 	/// Component parts queued for processing by the machine. Expected type: `/obj/item/stock_parts`
 	var/list/processing_parts
@@ -206,12 +208,12 @@ Class Procs:
 
 /obj/machinery/ex_act(severity)
 	switch(severity)
-		if(1)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
-		if(2)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
-		if(3)
+		if(EX_ACT_LIGHT)
 			if (prob(25))
 				qdel(src)
 
@@ -524,7 +526,7 @@ Class Procs:
 		switch (silicon_restriction)
 			if (STATUS_UPDATE)
 				. += "<p>Silicons are blocked from controlling it.</p>"
-			if (STATUS_DISABLED || STATUS_CLOSE)
+			if (STATUS_DISABLED, STATUS_CLOSE)
 				. += "<p>Silicons are blocked from viewing or controlling it.</p>"
 
 	var/power_channel_name
@@ -558,7 +560,7 @@ Class Procs:
 /obj/machinery/water_act(depth)
 	..()
 	if(!(stat & (NOPOWER|BROKEN)) && !waterproof && (depth > FLUID_DEEP))
-		ex_act(3)
+		ex_act(EX_ACT_LIGHT)
 
 /obj/machinery/Move()
 	. = ..()

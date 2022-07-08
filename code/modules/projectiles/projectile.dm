@@ -28,11 +28,19 @@
 
 	var/hitchance_mod = 0
 	var/distance_falloff = 2  //multiplier, higher value means accuracy drops faster with distance
+	var/damage_falloff = FALSE
+	/// List(Distance, Multiplier), intended to represent short / medium / long ranges. Uses default of 1 for anything lower than the first value.
+	var/damage_falloff_list = list(
+		list(4, 0.9),
+		list(6, 0.8),
+		list(8, 0.7)
+	)
 
 	var/damage = 10
-	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, ELECTROCUTE are the only things that should be in here, Try not to use PAIN as it doesn't go through stun_effect_act
+	/// String (One of `DAMAGE_*`).
+	var/damage_type = DAMAGE_BRUTE
 	var/nodamage = FALSE //Determines if the projectile will skip any damage inflictions
-	var/damage_flags = DAM_BULLET
+	var/damage_flags = DAMAGE_FLAG_BULLET
 	var/projectile_type = /obj/item/projectile
 	var/penetrating = 0 //If greater than zero, the projectile will pass through dense objects as specified by on_penetrate()
 	var/life_span = 50 //This will de-increment every process(). When 0, it will delete the projectile.
@@ -60,7 +68,7 @@
 	var/miss_sounds
 	var/ricochet_sounds
 	var/list/impact_sounds	//for different categories, IMPACT_MEAT etc
-	var/shrapnel_type = /obj/item/material/shard/shrapnel
+	var/shrapnel_type = /obj/item/material/shard/shrapnel/steel
 
 	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
 
@@ -92,14 +100,14 @@
 	L.apply_effects(0, weaken, paralyze, stutter, eyeblur, drowsy, 0, blocked)
 	L.stun_effect_act(stun, agony, def_zone, src)
 	//radiation protection is handled separately from other armour types.
-	L.apply_damage(irradiate, IRRADIATE, damage_flags = DAM_DISPERSED)
+	L.apply_damage(irradiate, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 
 	return 1
 
 //called when the projectile stops flying because it collided with something
 /obj/item/projectile/proc/on_impact(var/atom/A)
-	impact_effect(effect_transform)		// generate impact effect
-	if(damage && damage_type == BURN)
+	impact_effect()		// generate impact effect
+	if (damage && damage_type == DAMAGE_BURN)
 		var/turf/T = get_turf(A)
 		if(T)
 			T.hotspot_expose(700, 5)
@@ -107,12 +115,12 @@
 //Checks if the projectile is eligible for embedding. Not that it necessarily will.
 /obj/item/projectile/can_embed()
 	//embed must be enabled and damage type must be brute
-	if(!embed || damage_type != BRUTE)
+	if(!embed || damage_type != DAMAGE_BRUTE)
 		return 0
 	return 1
 
 /obj/item/projectile/proc/get_structure_damage()
-	if(damage_type == BRUTE || damage_type == BURN)
+	if (damage_type == DAMAGE_BRUTE || damage_type == DAMAGE_BURN)
 		return damage
 	return 0
 
@@ -205,7 +213,17 @@
 	//roll to-hit
 	var/miss_modifier = max(distance_falloff*(distance)*(distance) - hitchance_mod + special_miss_modifier, -30)
 	//makes moving targets harder to hit, and stationary easier to hit
-	var/movment_mod = min(5, (world.time - target_mob.l_move_time) - 20)
+	var/movment_mod = min(5, (world.time - target_mob.l_move_time) - 5)
+
+	if (damage_falloff)
+		var/damage_mod = 1
+		for (var/list/entry as anything in damage_falloff_list)
+			if (entry[1] > distance)
+				break
+			damage_mod = entry[2]
+		damage = damage * damage_mod
+		armor_penetration = armor_penetration * damage_mod
+		agony = agony * damage_mod
 	//running in a straight line isnt as helpful tho
 	if(movment_mod < 0)
 		if(target_mob.last_move == get_dir(firer, target_mob))
@@ -363,10 +381,10 @@
 						return
 
 		if(first_step)
-			muzzle_effect(effect_transform)
+			muzzle_effect()
 			first_step = 0
 		else if(!bumped && life_span > 0)
-			tracer_effect(effect_transform)
+			tracer_effect()
 		if(!hitscan)
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
 
@@ -381,20 +399,16 @@
 	xo = round(targloc.x - startloc.x + x_offset, 1)
 
 	// plot the initial trajectory
-	trajectory = new()
-	trajectory.setup(starting, original, pixel_x, pixel_y, angle_offset)
+	var/offset = 0
+	trajectory = new
+	trajectory.setup(starting, original, pixel_x, pixel_y, angle_offset=offset)
+	effect_transform = matrix().Update(
+		scale_x = round(trajectory.return_hypotenuse() + 0.005, 0.001),
+		rotation = round(-trajectory.angle, 0.1)
+	)
+	SetTransform(rotation = -(trajectory.angle + 90))
 
-	// generate this now since all visual effects the projectile makes can use it
-	effect_transform = new()
-	effect_transform.Scale(trajectory.return_hypotenuse(), 1)
-	effect_transform.Turn(-trajectory.return_angle())		//no idea why this has to be inverted, but it works
-
-	transform = turn(transform, -(trajectory.return_angle() + 90)) //no idea why 90 needs to be added, but it works
-
-/obj/item/projectile/proc/muzzle_effect(var/matrix/T)
-	if (!location)
-		return
-
+/obj/item/projectile/proc/muzzle_effect()
 	if(silenced)
 		return
 
@@ -402,53 +416,33 @@
 		var/obj/effect/projectile/M = new muzzle_type(get_turf(src))
 
 		if(istype(M))
-			if(proj_color)
-				var/icon/I = new(M.icon, M.icon_state)
-				I.Blend(proj_color)
-				M.icon = I
-			M.set_transform(T)
-			M.pixel_x = location.pixel_x
-			M.pixel_y = location.pixel_y
+			M.SetTransform(others = effect_transform)
+			M.pixel_x = round(location.pixel_x, 1)
+			M.pixel_y = round(location.pixel_y, 1)
 			if(!hitscan) //Bullets don't hit their target instantly, so we can't link the deletion of the muzzle flash to the bullet's Destroy()
 				QDEL_IN(M,1)
 			else
 				segments += M
 
-/obj/item/projectile/proc/tracer_effect(var/matrix/M)
-	if (!location)
-		return
-
+/obj/item/projectile/proc/tracer_effect()
 	if(ispath(tracer_type))
 		var/obj/effect/projectile/P = new tracer_type(location.loc)
 
 		if(istype(P))
-			if(proj_color)
-				var/icon/I = new(P.icon, P.icon_state)
-				I.Blend(proj_color)
-				P.icon = I
-			P.set_transform(M)
-			P.pixel_x = location.pixel_x
-			P.pixel_y = location.pixel_y
-			if(!hitscan)
-				QDEL_IN(M,1)
-			else
+			P.SetTransform(others = effect_transform)
+			P.pixel_x = round(location.pixel_x, 1)
+			P.pixel_y = round(location.pixel_y, 1)
+			if(hitscan)
 				segments += P
 
-/obj/item/projectile/proc/impact_effect(var/matrix/M)
-	if (!location)
-		return
-
+/obj/item/projectile/proc/impact_effect()
 	if(ispath(impact_type))
 		var/obj/effect/projectile/P = new impact_type(location ? location.loc : get_turf(src))
 
 		if(istype(P) && location)
-			if(proj_color)
-				var/icon/I = new(P.icon, P.icon_state)
-				I.Blend(proj_color)
-				P.icon = I
-			P.set_transform(M)
-			P.pixel_x = location.pixel_x
-			P.pixel_y = location.pixel_y
+			P.SetTransform(others = effect_transform)
+			P.pixel_x = round(location.pixel_x, 1)
+			P.pixel_y = round(location.pixel_y, 1)
 			segments += P
 
 //"Tracing" projectile
@@ -528,7 +522,7 @@
 
 /obj/item/projectile/after_wounding(obj/item/organ/external/organ, datum/wound/wound)
 	//Check if we even broke skin in first place
-	if(!wound || !(wound.damage_type == CUT || wound.damage_type == PIERCE))
+	if (!wound || !(wound.damage_type == INJURY_TYPE_CUT || wound.damage_type == INJURY_TYPE_PIERCE))
 		return
 	//Check if we can do nasty stuff inside
 	if(!can_embed() || (organ.species.species_flags & SPECIES_FLAG_NO_EMBED))

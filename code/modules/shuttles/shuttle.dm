@@ -189,16 +189,9 @@
 		var/turf/dst_turf = turf_translation[src_turf]
 		if(src_turf.is_solid_structure()) //in case someone put a hole in the shuttle and you were lucky enough to be under it
 			for(var/atom/movable/AM in dst_turf)
-				if(AM.movable_flags & MOVABLE_FLAG_DEL_SHUTTLE)
-					qdel(AM)
-					continue
 				if(!AM.simulated)
 					continue
-				if(isliving(AM))
-					var/mob/living/bug = AM
-					bug.gib()
-				else
-					qdel(AM) //it just gets atomized I guess? TODO throw it into space somewhere, prevents people from using shuttles as an atom-smasher
+				AM.shuttle_land_on()
 	var/list/powernets = list()
 	for(var/area/A in shuttle_area)
 		// if there was a zlevel above our origin, erase our ceiling now we're leaving
@@ -257,6 +250,13 @@
 				mothership.shuttle_area |= shuttle_area
 			else
 				mothership.shuttle_area -= shuttle_area
+
+/// Handler for shuttles landing on atoms. Called by `shuttle_moved()`.
+/atom/movable/proc/shuttle_land_on()
+	qdel(src)
+
+/mob/living/shuttle_land_on()
+	gib()
 
 //returns 1 if the shuttle has a valid arrive time
 /datum/shuttle/proc/has_arrive_time()

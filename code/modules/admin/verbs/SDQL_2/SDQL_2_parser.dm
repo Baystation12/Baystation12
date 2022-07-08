@@ -242,7 +242,7 @@
 		parse_error("Expected either FROM, IN or WHERE token, found [token(i)] instead.")
 		return i + 1
 
-	if (!list_find(node, "from"))
+	if (!node.Find("from"))
 		node["from"] = list("world")
 
 	return i

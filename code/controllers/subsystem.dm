@@ -94,7 +94,7 @@
 		queue_node_priority = queue_node.queued_priority
 		queue_node_flags = queue_node.flags
 
-		if (queue_node_flags & SS_TICKER)
+		if (queue_node_flags & (SS_TICKER|SS_BACKGROUND) == SS_TICKER)
 			if (!(SS_flags & SS_TICKER))
 				continue
 			if (queue_node_priority < SS_priority)
@@ -165,12 +165,12 @@
 
 
 // Wrapper so things continue to work even in the case of a SS that doesn't call parent.
-/datum/controller/subsystem/proc/DoInitialize(timeofday)
+/datum/controller/subsystem/proc/DoInitialize(start_uptime)
 	init_state = SS_INITSTATE_STARTED
-	init_start = timeofday
-	Initialize(timeofday)
-	init_finish = REALTIMEOFDAY
-	. = (REALTIMEOFDAY - timeofday)/10
+	init_start = start_uptime
+	Initialize(start_uptime)
+	init_finish = Uptime()
+	. = (Uptime() - start_uptime) / 10
 	var/msg = "Initialized [name] subsystem within [.] second[. == 1 ? "" : "s"]!"
 	to_chat(world, "<span class='boldannounce'>[msg]</span>")
 	log_world(msg)
@@ -178,74 +178,59 @@
 	init_state = SS_INITSTATE_DONE
 	initialized = TRUE	// Legacy.
 
-//used to initialize the subsystem AFTER the map has loaded
-/datum/controller/subsystem/Initialize(start_timeofday)
-	// Stub, no default behavior here please.
 
-//hook for printing stats to the "MC" statuspanel for admins to see performance and related stats etc.
-/datum/controller/subsystem/stat_entry(text, force)
-	if (!stat_line)
-		stat_line = new (null, src)
-	IF_UPDATE_STAT
+/// Used to initialize the subsystem AFTER the map has loaded. No default behaviors please.
+/datum/controller/subsystem/Initialize(start_uptime)
+	return
+
+
+/// Builds subsystem stats & VV clickable for the MC status panel
+/datum/controller/subsystem/UpdateStat(text)
+	if (istext(text))
+		var/list/build = list()
 		if (Master.initializing)
-			text = "[stat_entry_init()]\t[text]"
-			var/letter = init_state_letter()
-			if (letter)
-				text = "\[[letter]] [text]"
+			if (init_state == SS_INITSTATE_DONE)
+				build += "DONE ([init_time]s)"
+			else if (flags & SS_NO_INIT)
+				build += "NO INIT"
+			else if (init_state == SS_INITSTATE_STARTED)
+				if (init_start)
+					build += "LOAD ([(Uptime() - init_start)/10]s)"
+				else
+					build += "LOAD"
+			else
+				build += "WAIT"
+			if (!(flags & SS_NO_INIT))
+				switch (init_state)
+					if (SS_INITSTATE_NONE)
+						build += " W"
+					if (SS_INITSTATE_STARTED)
+						build += " L"
+					if (SS_INITSTATE_DONE)
+						build += " D"
 		else
-			text = "[stat_entry_run()]\t[text]"
-			if (can_fire && !suspended && !(flags & SS_NO_FIRE))
-				text = "\[[state_letter()]] [text]"
-		stat_line.name = text
-	stat(name, stat_line)
+			if (flags & SS_NO_FIRE)
+				build += "NO FIRE"
+			else if (!can_fire)
+				build += "OFFLINE"
+			else if (suspended)
+				build += "SUSPEND"
+			else
+				build += "[round(cost,1)]ms | [round(tick_usage,1)]% ([round(tick_overrun,1)]%) | [round(ticks,0.1)]"
+				switch (state)
+					if (SS_RUNNING)
+						build += "R"
+					if (SS_QUEUED)
+						build += "Q"
+					if (SS_PAUSED, SS_PAUSING)
+						build += "P"
+					if (SS_SLEEPING)
+						build += "S"
+					if (SS_IDLE)
+						build += "  "
+		text = "[build.Join(null)] | [text]"
+	..(text)
 
-/datum/controller/subsystem/proc/stat_entry_init()
-	if (init_state == SS_INITSTATE_DONE)
-		. = "DONE ([init_time]s)"
-	else if (flags & SS_NO_INIT)
-		. = "NO INIT"
-	else if (init_state == SS_INITSTATE_STARTED)
-		if (init_start)
-			. = "LOAD ([(REALTIMEOFDAY - init_start)/10]s)"
-		else
-			. = "LOAD"
-	else
-		. = "WAIT"
-
-// Generates the message shown before a subsystem during normal MC operation.
-/datum/controller/subsystem/proc/stat_entry_run()
-	if (flags & SS_NO_FIRE)
-		. = "NO FIRE"
-	else if (can_fire && !suspended)
-		. = "[round(cost,1)]ms|[round(tick_usage,1)]%([round(tick_overrun,1)]%)|[round(ticks,0.1)]"
-	else if (!can_fire)
-		. = "OFFLINE"
-	else
-		. = "SUSPEND"
-
-/datum/controller/subsystem/proc/init_state_letter()
-	if (flags & SS_NO_INIT)
-		return
-	switch (init_state)
-		if (SS_INITSTATE_NONE)
-			. = "W"
-		if (SS_INITSTATE_STARTED)
-			. = "L"
-		if (SS_INITSTATE_DONE)
-			. = "D"
-
-/datum/controller/subsystem/proc/state_letter()
-	switch (state)
-		if (SS_RUNNING)
-			. = "R"
-		if (SS_QUEUED)
-			. = "Q"
-		if (SS_PAUSED, SS_PAUSING)
-			. = "P"
-		if (SS_SLEEPING)
-			. = "S"
-		if (SS_IDLE)
-			. = "  "
 
 //could be used to postpone a costly subsystem for (default one) var/cycles, cycles
 //for instance, during cpu intensive operations like explosions

@@ -1,5 +1,5 @@
 
-obj/machinery/atmospherics/pipe/simple/heat_exchanging
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging
 	icon = 'icons/atmos/heat.dmi'
 	icon_state = "intact"
 	pipe_icon = "hepipe"
@@ -21,15 +21,15 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 	can_buckle = 1
 	buckle_lying = 1
 
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/Initialize()
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/Initialize()
 	. = ..()
 	color = "#404040" //we don't make use of the fancy overlay system for colours, use this to set the default.
 
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/set_dir(new_dir)
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/set_dir(new_dir)
 	..()
 	initialize_directions_he = initialize_directions	// The auto-detection from /pipe is good enough for a simple HE pipe
 
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/atmos_init()
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/atmos_init()
 	..()
 	var/node1_dir
 	var/node2_dir
@@ -55,12 +55,12 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/atmos_init()
 
 	update_icon()
 
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/Process()
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/Process()
 	if(!parent)
 		..()
 	else
 		var/datum/gas_mixture/pipe_air = return_air()
-		if(istype(loc, /turf/simulated/))
+		if(istype(loc, /turf/simulated))
 			var/environment_temperature = 0
 			if(loc:blocks_air)
 				environment_temperature = loc:temperature
@@ -69,7 +69,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/Process()
 				environment_temperature = environment.temperature
 			if(abs(environment_temperature-pipe_air.temperature) > minimum_temperature_difference)
 				parent.temperature_interact(loc, volume, thermal_conductivity)
-		else if(istype(loc, /turf/space/))
+		else if(istype(loc, /turf/space))
 			parent.radiate_heat_to_space(surface, 1)
 
 		if(buckled_mob)
@@ -85,7 +85,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/Process()
 				heat_limit = H.species.heat_level_3
 
 			if(pipe_air.temperature > heat_limit + 1)
-				buckled_mob.apply_damage(4 * log(pipe_air.temperature - heat_limit), BURN, BP_CHEST, used_weapon = "Excessive Heat")
+				buckled_mob.apply_damage(4 * log(pipe_air.temperature - heat_limit), DAMAGE_BURN, BP_CHEST, used_weapon = "Excessive Heat")
 
 		//fancy radiation glowing
 		if(pipe_air.temperature && (icon_temperature > 500 || pipe_air.temperature > 500)) //start glowing at 500K
@@ -107,7 +107,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/Process()
 
 
 
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 	icon = 'icons/atmos/junction.dmi'
 	icon_state = "intact"
 	pipe_icon = "hejunction"
@@ -116,11 +116,11 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 	build_icon_state = "junction"
 
 // Doubling up on initialize_directions is necessary to allow HE pipes to connect
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/set_dir(new_dir)
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/set_dir(new_dir)
 	..()
 	initialize_directions_he = dir
 
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/atmos_init()
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/atmos_init()
 	..()
 	// Only check back side for normal pipes
 	for(var/obj/machinery/atmospherics/target in get_step(src,GLOB.flip_dir[src.dir]))

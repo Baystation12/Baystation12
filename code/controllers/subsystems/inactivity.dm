@@ -3,7 +3,7 @@ SUBSYSTEM_DEF(inactivity)
 	wait = 1 MINUTE
 	priority = SS_PRIORITY_INACTIVITY
 	flags = SS_BACKGROUND
-	var/static/tmp/list/current = list()
+	var/static/list/current = list()
 
 
 /datum/controller/subsystem/inactivity/Destroy()
@@ -11,13 +11,17 @@ SUBSYSTEM_DEF(inactivity)
 	..()
 
 
-/datum/controller/subsystem/inactivity/Initialize(start_timeofday)
+/datum/controller/subsystem/inactivity/Initialize(start_uptime)
 	if (!config.kick_inactive)
 		suspend()
 
 
 /datum/controller/subsystem/inactivity/Recover()
 	current.Cut()
+
+
+/datum/controller/subsystem/inactivity/UpdateStat(time)
+	return
 
 
 /datum/controller/subsystem/inactivity/fire(resumed, no_mc_tick)

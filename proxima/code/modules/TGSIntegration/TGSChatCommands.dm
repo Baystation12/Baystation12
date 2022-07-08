@@ -7,7 +7,7 @@
 	var/last_irc_status = 0
 
 /datum/tgs_chat_command/ircstatus/Run(datum/tgs_chat_user/sender, params)
-	var/rtod = REALTIMEOFDAY
+	var/rtod = Uptime()
 	if(rtod - last_irc_status < IRC_STATUS_THROTTLE)
 		return
 	last_irc_status = rtod
@@ -23,7 +23,7 @@
 	var/last_irc_check = 0
 
 /datum/tgs_chat_command/irccheck/Run(datum/tgs_chat_user/sender, params)
-	var/rtod = REALTIMEOFDAY
+	var/rtod = Uptime()
 	if(rtod - last_irc_check < IRC_STATUS_THROTTLE)
 		return
 	last_irc_check = rtod
@@ -35,7 +35,7 @@
 	var/last_irc_check = 0
 
 /datum/tgs_chat_command/ircmanifest/Run(datum/tgs_chat_user/sender, params)
-	var/rtod = REALTIMEOFDAY
+	var/rtod = Uptime()
 	if(rtod - last_irc_check < IRC_STATUS_THROTTLE)
 		return
 	last_irc_check = rtod
@@ -67,8 +67,8 @@
 				else depString = dept
 			msg += "__**[depString]**__"
 			for(var/list/person in dept_list)
-				var/datum/mil_branch/branch_obj = mil_branches.get_branch(person["branch"])
-				var/datum/mil_rank/rank_obj = mil_branches.get_rank(person["branch"], person["milrank"])
+				var/datum/mil_branch/branch_obj = GLOB.mil_branches.get_branch(person["branch"])
+				var/datum/mil_rank/rank_obj = GLOB.mil_branches.get_rank(person["branch"], person["milrank"])
 				msg += "*[person["rank"]]* - `[branch_obj != null ? "[branch_obj.name_short] " : ""][((rank_obj != null) && (rank_obj.name_short != "")) ? "[rank_obj.name_short] " : ""][replacetext_char(person["name"], "&#39;", "'")]`"
 	return jointext(msg, "\n")
 

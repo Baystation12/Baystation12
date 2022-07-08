@@ -361,7 +361,7 @@
 /mob/living/silicon/robot/verb/toggle_panel_lock()
 	set name = "Toggle Panel Lock"
 	set category = "Silicon Commands"
-	if(!opened && has_power && do_after(usr, 60) && !opened && has_power)
+	if(!opened && has_power && do_after(usr, 6 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT) && !opened && has_power)
 		to_chat(src, "You [locked ? "un" : ""]lock your panel.")
 		locked = !locked
 
@@ -476,6 +476,8 @@
 	return 0
 
 /mob/living/silicon/robot/bullet_act(var/obj/item/projectile/Proj)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 	..(Proj)
 	if(prob(75) && Proj.damage > 0) spark_system.start()
 	return 2
@@ -541,7 +543,7 @@
 		if(opened)
 			if(cell)
 				user.visible_message("<span class='notice'>\The [user] begins clasping shut \the [src]'s maintenance hatch.</span>", "<span class='notice'>You begin closing up \the [src].</span>")
-				if(do_after(user, 50, src))
+				if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
 					to_chat(user, "<span class='notice'>You close \the [src]'s maintenance hatch.</span>")
 					opened = FALSE
 					update_icon()
@@ -553,7 +555,7 @@
 					return
 
 				user.visible_message("<span class='notice'>\The [user] begins ripping [mmi] from [src].</span>", "<span class='notice'>You jam the crowbar into the robot and begin levering [mmi].</span>")
-				if(do_after(user, 50, src))
+				if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
 					dismantle(user)
 
 			else
@@ -586,7 +588,7 @@
 				to_chat(user, "The cover is locked and cannot be opened.")
 			else
 				user.visible_message("<span class='notice'>\The [user] begins prying open \the [src]'s maintenance hatch.</span>", "<span class='notice'>You start opening \the [src]'s maintenance hatch.</span>")
-				if(do_after(user, 50, src))
+				if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
 					to_chat(user, "<span class='notice'>You open \the [src]'s maintenance hatch.</span>")
 					opened = TRUE
 					update_icon()
@@ -641,7 +643,7 @@
 			to_chat(user, "Unable to locate a radio.")
 		update_icon()
 
-	else if(istype(W, /obj/item/device/encryptionkey/) && opened)
+	else if(istype(W, /obj/item/device/encryptionkey) && opened)
 		if(silicon_radio)//sanityyyyyy
 			silicon_radio.attackby(W,user)//GTFO, you have your own procs
 		else
@@ -658,7 +660,7 @@
 				update_icon()
 			else
 				to_chat(user, "<span class='warning'>Access denied.</span>")
-	else if(istype(W, /obj/item/borg/upgrade/))
+	else if(istype(W, /obj/item/borg/upgrade))
 		var/obj/item/borg/upgrade/U = W
 		if(!opened)
 			to_chat(usr, "You must access the borgs internals!")
@@ -820,18 +822,21 @@
 				module_state_1 = O
 				O.hud_layerise()
 				O.forceMove(src)
+				O.equipped_robot()
 				if(istype(module_state_1,/obj/item/borg/sight))
 					sight_mode |= module_state_1:sight_mode
 			else if(!module_state_2)
 				module_state_2 = O
 				O.hud_layerise()
 				O.forceMove(src)
+				O.equipped_robot()
 				if(istype(module_state_2,/obj/item/borg/sight))
 					sight_mode |= module_state_2:sight_mode
 			else if(!module_state_3)
 				module_state_3 = O
 				O.hud_layerise()
 				O.forceMove(src)
+				O.equipped_robot()
 				if(istype(module_state_3,/obj/item/borg/sight))
 					sight_mode |= module_state_3:sight_mode
 			else
@@ -1111,3 +1116,7 @@
 	var/obj/item/robot_parts/robot_suit/C = new dismantle_type(loc)
 	C.dismantled_from(src)
 	qdel(src)
+
+// Resting as a robot breaks things. Block it from happening.
+/mob/living/silicon/robot/lay_down()
+	return

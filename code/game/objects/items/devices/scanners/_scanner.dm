@@ -42,10 +42,14 @@
 	if(!can_use(user))
 		return
 	if(is_valid_scan_target(A))
-		user.visible_message("<span class='notice'>[user] runs \the [src] over \the [A].</span>", range = 2)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] runs \the [src] over \the [A]."),
+			SPAN_NOTICE("You run \the [src] over \the [A]."),
+			range = 2
+		)
 		if(scan_sound)
 			playsound(src, scan_sound, 30)
-		if(use_delay && !do_after(user, use_delay, A))
+		if(use_delay && !do_after(user, use_delay, A, DO_PUBLIC_UNIQUE))
 			to_chat(user, "You stop scanning \the [A] with \the [src].")
 			return
 		scan(A, user)

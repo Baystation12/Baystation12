@@ -64,7 +64,7 @@
 			to_chat(M, "<span class='warning'>It reads: [stored_name], [badge_string].</span>")
 
 
-/obj/item/clothing/accessory/badge/PI
+/obj/item/clothing/accessory/badge/investigator
 	name = "private investigator's badge"
 	badge_string = "Private Investigator"
 

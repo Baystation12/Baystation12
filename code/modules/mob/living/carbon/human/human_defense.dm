@@ -8,6 +8,8 @@ meteor_act
 */
 
 /mob/living/carbon/human/bullet_act(var/obj/item/projectile/P, var/def_zone)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 
 	def_zone = check_zone(def_zone)
 	if(!has_organ(def_zone))
@@ -47,7 +49,7 @@ meteor_act
 	..(stun_amount, agony_amount, def_zone)
 
 /mob/living/carbon/human/get_blocked_ratio(def_zone, damage_type, damage_flags, armor_pen, damage)
-	if(!def_zone && (damage_flags & DAM_DISPERSED))
+	if(!def_zone && (damage_flags & DAMAGE_FLAG_DISPERSED))
 		var/tally
 		for(var/zone in organ_rel_size)
 			tally += organ_rel_size[zone]
@@ -220,28 +222,19 @@ meteor_act
 	if(effective_force > 10 || effective_force >= 5 && prob(33))
 		forcesay(GLOB.hit_appends)	//forcesay checks stat already
 		radio_interrupt_cooldown = world.time + (RADIO_INTERRUPT_DEFAULT * 0.8) //getting beat on can briefly prevent radio use
-	if((I.damtype == BRUTE || I.damtype == PAIN) && prob(25 + (unimpeded_force * 2)))
+	if ((I.damtype == DAMAGE_BRUTE || I.damtype == DAMAGE_PAIN) && prob(25 + (unimpeded_force * 2)))
 		if(!stat)
-			if(headcheck(hit_zone))
-				//Harder to score a stun but if you do it lasts a bit longer
-				if(prob(unimpeded_force))
-					apply_effect(20, PARALYZE, 100 * blocked)
-					if(lying)
-						visible_message("<span class='danger'>[src] [species.knockout_message]</span>")
-			else
-				//Easier to score a stun but lasts less time
+			if(!headcheck(hit_zone))
 				if(prob(unimpeded_force + 5))
-					apply_effect(3, WEAKEN, 100 * blocked)
-					if(lying)
-						visible_message("<span class='danger'>[src] has been knocked down!</span>")
-
+					apply_effect(3, EFFECT_WEAKEN, 100 * blocked)
+					visible_message("<span class='danger'>[src] has been knocked down!</span>")
 		//Apply blood
 		attack_bloody(I, user, effective_force, hit_zone)
 
 	return 1
 
 /mob/living/carbon/human/proc/attack_bloody(obj/item/W, mob/living/attacker, var/effective_force, var/hit_zone)
-	if(W.damtype != BRUTE)
+	if (W.damtype != DAMAGE_BRUTE)
 		return
 
 	//make non-sharp low-force weapons less likely to be bloodied
@@ -277,7 +270,7 @@ meteor_act
 				bloody_body(src)
 
 /mob/living/carbon/human/proc/projectile_hit_bloody(obj/item/projectile/P, var/effective_force, var/hit_zone, var/obj/item/organ/external/organ)
-	if(P.damage_type != BRUTE || P.nodamage)
+	if (P.damage_type != DAMAGE_BRUTE || P.nodamage)
 		return
 	if(!(P.sharp || prob(effective_force*4)))
 		return
@@ -295,7 +288,7 @@ meteor_act
 /mob/living/carbon/human/proc/attack_joint(var/obj/item/organ/external/organ, var/obj/item/W, var/effective_force, var/dislocate_mult, var/blocked)
 	if(!organ || (organ.dislocated == 2) || (organ.dislocated == -1) || blocked >= 100)
 		return 0
-	if(W.damtype != BRUTE)
+	if (W.damtype != DAMAGE_BRUTE)
 		return 0
 
 	//want the dislocation chance to be such that the limb is expected to dislocate after dealing a fraction of the damage needed to break the limb
@@ -321,7 +314,7 @@ meteor_act
 //this proc handles being hit by a thrown atom
 /mob/living/carbon/human/hitby(atom/movable/AM as mob|obj, var/datum/thrownthing/TT)
 
-	if(istype(AM,/obj/))
+	if(isobj(AM))
 		var/obj/O = AM
 
 		if(in_throw_mode && !get_active_hand() && TT.speed <= THROWFORCE_SPEED_DIVISOR)	//empty active hand and we're in throw mode
@@ -373,12 +366,12 @@ meteor_act
 				admin_attack_log(TT.thrower, src, "Threw \an [O] at their victim.", "Had \an [O] thrown at them", "threw \an [O] at")
 
 		//thrown weapon embedded object code.
-		if(dtype == BRUTE && istype(O,/obj/item))
+		if (dtype == DAMAGE_BRUTE && istype(O,/obj/item))
 			var/obj/item/I = O
 			if (!is_robot_module(I))
 				var/sharp = I.can_embed()
 				var/damage = throw_damage //the effective damage used for embedding purposes, no actual damage is dealt here
-				damage *= (1 - get_blocked_ratio(zone, BRUTE, O.damage_flags(), O.armor_penetration, throw_damage))
+				damage *= (1 - get_blocked_ratio(zone, DAMAGE_BRUTE, O.damage_flags(), O.armor_penetration, throw_damage))
 
 				//blunt objects should really not be embedding in things unless a huge amount of force is involved
 				var/embed_chance = sharp? damage/I.w_class : damage/(I.w_class*3)
@@ -407,7 +400,7 @@ meteor_act
 
 			if(!O || !src) return
 
-			if(O.loc == src && O.sharp) //Projectile is embedded and suitable for pinning.
+			if(O.loc == src && O.sharp && !(mob_flags & MOB_FLAG_UNPINNABLE)) //Projectile is embedded and suitable for pinning.
 				var/turf/T = near_wall(dir,2)
 
 				if(T)
@@ -448,7 +441,8 @@ meteor_act
 /mob/living/carbon/human/proc/handle_suit_punctures(var/damtype, var/damage, var/def_zone)
 
 	// Tox and oxy don't matter to suits.
-	if(damtype != BURN && damtype != BRUTE) return
+	if (damtype != DAMAGE_BURN && damtype != DAMAGE_BRUTE)
+		return
 
 	// The rig might soak this hit, if we're wearing one.
 	if(back && istype(back,/obj/item/rig))
@@ -498,6 +492,8 @@ meteor_act
 	return perm
 
 /mob/living/carbon/human/lava_act(datum/gas_mixture/air, temperature, pressure)
+	if (status_flags & GODMODE)
+		return
 	var/was_burned = FireBurn(0.4 * vsc.fire_firelevel_multiplier, temperature, pressure)
 	if (was_burned)
 		fire_act(air, temperature)

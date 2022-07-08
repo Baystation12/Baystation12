@@ -580,7 +580,7 @@
 				randmutg(M)
 			domutcheck(M, null)
 			M.UpdateAppearance()
-	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100)
+	M.apply_damage(10 * removed, DAMAGE_RADIATION, armor_pen = 100)
 
 /datum/reagent/slimejelly
 	name = "Slime Jelly"
@@ -744,6 +744,53 @@
 			M.emote(pick("twitch", "drool", "moan", "giggle"))
 	M.add_chemical_effect(CE_PULSE, -1)
 
+/datum/reagent/tilt
+	name = "Tilt"
+	description = "A potent downer made from mixing cough medicine and Space-Up."
+	taste_description = "purple sweetness"
+	reagent_state = LIQUID
+	color = "#800080"
+	metabolism = REM * 0.5
+	overdose = REAGENTS_OVERDOSE
+	value = 1.5
+	var/strength = 10
+
+	glass_name = "tilt"
+	glass_desc = "The best way there is to get tilted."
+
+/datum/reagent/tilt/affect_blood(mob/living/carbon/M, alien, removed)
+	if (alien == IS_DIONA)
+		return
+
+	var/strength_mod = 1
+	if (alien == IS_SKRELL)
+		strength_mod *= 0.5
+
+	var/effective_dose = M.chem_doses[type] * strength_mod
+
+	if (effective_dose >= strength * 0.5)
+		M.add_chemical_effect(CE_SLOWDOWN, 1)
+		M.make_dizzy(6)
+	if (effective_dose >= strength)
+		M.slurring = max(M.slurring, 40)
+		M.confused = max(M.confused, 30)
+		M.make_dizzy(10)
+		M.eye_blurry = max(M.eye_blurry, 10)
+	if (effective_dose >= strength * 1.5)
+		M.drowsyness = max(M.drowsyness, 20)
+		M.make_dizzy(40)
+		if (prob(10))
+			M.emote("drool")
+
+/datum/reagent/tilt/overdose(mob/living/carbon/M, alien)
+	M.add_chemical_effect(CE_TOXIN, 1)
+	if (prob(90))
+		M.add_chemical_effect(CE_BREATHLOSS, 5)
+	if (prob(10))
+		M.Paralyse(20)
+		M.Sleeping(30)
+
+
 /datum/reagent/serotrotium
 	name = "Serotrotium"
 	description = "A chemical compound that promotes concentrated production of the serotonin neurotransmitter in humans."
@@ -804,7 +851,7 @@
 		M.drowsyness = max(M.drowsyness, 3)
 	if(prob(10))
 		M.emote("drool")
-		M.apply_effect(STUTTER, 3)
+		M.apply_effect(EFFECT_STUTTER, 3)
 
 	if (M.getBrainLoss() < 60)
 		M.adjustBrainLoss(14 * removed)
@@ -851,12 +898,12 @@
 	M.druggy = max(M.druggy, 30)
 
 	if(M.chem_doses[type] < 1 * threshold)
-		M.apply_effect(3, STUTTER)
+		M.apply_effect(3, EFFECT_STUTTER)
 		M.make_dizzy(5)
 		if(prob(5))
 			M.emote(pick("twitch", "giggle"))
 	else if(M.chem_doses[type] < 2 * threshold)
-		M.apply_effect(3, STUTTER)
+		M.apply_effect(3, EFFECT_STUTTER)
 		M.make_jittery(5)
 		M.make_dizzy(5)
 		M.druggy = max(M.druggy, 35)
@@ -864,7 +911,7 @@
 			M.emote(pick("twitch", "giggle"))
 	else
 		M.add_chemical_effect(CE_MIND, -1)
-		M.apply_effect(3, STUTTER)
+		M.apply_effect(3, EFFECT_STUTTER)
 		M.make_jittery(10)
 		M.make_dizzy(10)
 		M.druggy = max(M.druggy, 40)
@@ -889,7 +936,7 @@
 	should_admin_log = TRUE
 
 	// M A X I M U M C H E E S E
-	var/global/list/dose_messages = list(
+	var/static/list/dose_messages = list(
 		"Your name is called. It is your time.",
 		"You are dissolving. Your hands are wax...",
 		"It all runs together. It all mixes.",
@@ -910,7 +957,7 @@
 		"Come back from there. Please."
 	)
 
-	var/global/list/overdose_messages = list(
+	var/static/list/overdose_messages = list(
 		"THE SIGNAL THE SIGNAL THE SIGNAL THE SIGNAL",
 		"IT CRIES IT CRIES IT WAITS IT CRIES",
 		"NOT YOURS NOT YOURS NOT YOURS NOT YOURS",
@@ -987,7 +1034,7 @@
 	meatchunks = list(O) | O.children
 	for(var/obj/item/organ/external/E in meatchunks)
 		E.species = all_species[SPECIES_PROMETHEAN]
-		E.s_tone = null
+		E.skin_tone = null
 		E.s_col = ReadRGB("#05ff9b")
 		E.s_col_blend = ICON_ADD
 		E.status &= ~ORGAN_BROKEN

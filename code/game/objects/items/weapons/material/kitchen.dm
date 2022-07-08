@@ -56,7 +56,7 @@
 
 		else
 			user.visible_message("<span class='warning'>\The [user] begins to feed \the [M]!</span>")
-			if(!M.can_force_feed(user, loaded) || !do_after(user, 5 SECONDS, M))
+			if(!M.can_force_feed(user, loaded) || !do_after(user, 5 SECONDS, M, DO_PUBLIC_UNIQUE))
 				return
 
 			if (user.get_active_hand() != src)

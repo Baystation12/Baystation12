@@ -180,7 +180,7 @@
 		addtimer(CALLBACK(src, .proc/open), 6, TIMER_UNIQUE | TIMER_OVERRIDE)
 	return TRUE
 
-/obj/machinery/door/emp_act(severity)
+/obj/machinery/door/window/emp_act(severity)
 	if(prob(20/severity))
 		spawn(0)
 			open()
@@ -210,7 +210,7 @@
 	if (src.operating == -1 && isCrowbar(I))
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		user.visible_message("[user] removes the electronics from the windoor.", "You start to remove electronics from the windoor.")
-		if (do_after(user,40,src))
+		if (do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>You removed the windoor electronics!</span>")
 
 			var/obj/structure/windoor_assembly/wa = new/obj/structure/windoor_assembly(src.loc)

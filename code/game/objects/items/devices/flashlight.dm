@@ -1,5 +1,6 @@
-#define FLASHLIGHT_ALWAYS_ON 1
-#define FLASHLIGHT_SINGLE_USE 2
+#define FLASHLIGHT_ALWAYS_ON FLAG(0)
+#define FLASHLIGHT_SINGLE_USE FLAG(1)
+#define FLASHLIGHT_CANNOT_BLIND FLAG(2)
 
 /obj/item/device/flashlight
 	name = "flashlight"
@@ -19,7 +20,7 @@
 	var/flashlight_max_bright = 0.5 //brightness of light when on, must be no greater than 1.
 	var/flashlight_inner_range = 1 //inner range of light when on, can be negative
 	var/flashlight_outer_range = 3 //outer range of light when on, can be negative
-	var/flashlight_flags = 0 // FLASHLIGHT_ bitflags
+	var/flashlight_flags = EMPTY_BITFIELD // FLASHLIGHT_ bitflags
 
 /obj/item/device/flashlight/Initialize()
 	. = ..()
@@ -94,7 +95,8 @@
 			inspect_vision(vision, user)
 
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //can be used offensively
-			M.flash_eyes()
+			if (!(flashlight_flags & FLASHLIGHT_CANNOT_BLIND))
+				M.flash_eyes()
 	else
 		return ..()
 
@@ -147,6 +149,7 @@
 	flashlight_max_bright = -1
 	flashlight_outer_range = 4
 	flashlight_inner_range = 1
+	flashlight_flags = FLASHLIGHT_CANNOT_BLIND
 
 /obj/item/device/flashlight/pen
 	name = "penlight"
@@ -207,6 +210,7 @@
 	flashlight_max_bright = 0.25
 	flashlight_inner_range = 0.1
 	flashlight_outer_range = 2
+	flashlight_flags = FLASHLIGHT_CANNOT_BLIND
 
 
 // the desk lamps are a bit special
@@ -307,7 +311,7 @@
 /obj/item/device/flashlight/flare/proc/update_damage()
 	if(on)
 		force = on_damage
-		damtype = BURN
+		damtype = DAMAGE_BURN
 	else
 		force = initial(force)
 		damtype = initial(damtype)
@@ -332,6 +336,8 @@
 	flashlight_max_bright = 0.6
 	flashlight_inner_range = 0.1
 	flashlight_outer_range = 3
+	flashlight_flags = FLASHLIGHT_CANNOT_BLIND
+
 
 /obj/item/device/flashlight/flare/glowstick/Initialize()
 	. = ..()
@@ -396,7 +402,7 @@
 	item_state = "slime"
 	w_class = ITEM_SIZE_TINY
 	on = TRUE //Bio-luminesence has one setting, on.
-	flashlight_flags = FLASHLIGHT_ALWAYS_ON
+	flashlight_flags = FLASHLIGHT_ALWAYS_ON | FLASHLIGHT_CANNOT_BLIND
 
 	flashlight_max_bright = 1
 	flashlight_inner_range = 0.1
@@ -434,6 +440,7 @@
 	action_button_name = "Toggle lamp"
 	flashlight_outer_range = 3 //range of light when on
 	matter = list(MATERIAL_ALUMINIUM = 250, MATERIAL_GLASS = 200)
+	flashlight_flags = FLASHLIGHT_CANNOT_BLIND
 
 /obj/item/device/flashlight/lamp/lava/on_update_icon()
 	overlays.Cut()
@@ -474,3 +481,4 @@
 
 #undef FLASHLIGHT_ALWAYS_ON
 #undef FLASHLIGHT_SINGLE_USE
+#undef FLASHLIGHT_CANNOT_BLIND

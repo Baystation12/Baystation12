@@ -28,14 +28,14 @@
 				explosion(T,1,2,3)
 				continue
 			else
-				T.ex_act(1)
+				T.ex_act(EX_ACT_DEVASTATING)
 		for(var/atom/A in T)
 			if(A.density)
 				if(distance < 7)
 					explosion(A,1,2,3)
 					break
 				else
-					A.ex_act(1)
+					A.ex_act(EX_ACT_DEVASTATING)
 
 	var/list/relevant_z = GetConnectedZlevels(start.z)
 	for(var/mob/M in GLOB.player_list)
@@ -129,21 +129,24 @@
 /obj/machinery/computer/ship/disperser/proc/fire_at_sector(obj/effect/overmap/visitable/finaltarget, obj/structure/ship_munition/disperser_charge/charge, chargetype)
 	var/list/targetareas = finaltarget.get_areas()
 	targetareas -= locate(/area/space)
+	if (!length(targetareas))
+		qdel(charge)
+		return
 	var/area/finalarea = pick(targetareas)
 	var/turf/targetturf = pick_area_turf(finalarea.type, list(/proc/is_not_space_turf))
 
 	log_and_message_admins("Disperser beam hit sector at [get_area(targetturf)].", location=targetturf)
 	if(chargetype == OVERMAP_WEAKNESS_DROPPOD)
 		if(targetturf.density)
-			targetturf.ex_act(1)
+			targetturf.ex_act(EX_ACT_DEVASTATING)
 		for(var/atom/A in targetturf)
-			A.ex_act(3)
+			A.ex_act(EX_ACT_LIGHT)
 		charge.forceMove(targetturf)
 		//The disperser is not a taxi
 		for(var/mob/living/L in charge)
 			to_chat(L, SPAN_DANGER("Your body shakes violently, immense and agonising forces tearing it apart."))
 			L.forceMove(targetturf)
-			L.ex_act(1)
+			L.ex_act(EX_ACT_DEVASTATING)
 	else
 		charge.fire(targetturf, strength, range)
 		qdel(charge)

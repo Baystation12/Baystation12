@@ -1,4 +1,4 @@
-var/list/department_radio_keys = list(
+var/global/list/department_radio_keys = list(
 	  ":r" = "right ear",	".r" = "right ear",
 	  ":l" = "left ear",	".l" = "left ear",
 	  ":i" = "intercom",	".i" = "intercom",
@@ -84,8 +84,8 @@ var/list/department_radio_keys = list(
 )
 
 
-var/list/channel_to_radio_key = new
-proc/get_radio_key_from_channel(var/channel)
+var/global/list/channel_to_radio_key = new
+/proc/get_radio_key_from_channel(var/channel)
 	var/key = channel_to_radio_key[channel]
 	if(!key)
 		for(var/radio_key in department_radio_keys)
@@ -346,10 +346,9 @@ proc/get_radio_key_from_channel(var/channel)
 		eavesdroping_obj -= listening_obj
 		for(var/mob/M in eavesdroping)
 			if(M)
-				image_to(M, speech_bubble)
 				M.hear_say(stars(message), verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
 				if(M.client)
-					// speech_bubble_recipients |= M.client
+					speech_bubble_recipients |= M.client
 					eavesdroppers |= M.client
 
 		for(var/obj/O in eavesdroping)
@@ -362,7 +361,6 @@ proc/get_radio_key_from_channel(var/channel)
 	if(length(eavesdroppers))
 		INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, stars(message), speaking, italics, eavesdroppers)
 
-
 	if(whispering)
 		log_whisper("[name]/[key] : [message]")
 	else
@@ -372,8 +370,8 @@ proc/get_radio_key_from_channel(var/channel)
 	animate(speech_bubble, alpha = 255, time = 10, easing = CIRCULAR_EASING)
 	animate(time = 20)
 	animate(alpha = 0, pixel_y = 12, time = 20, easing = CIRCULAR_EASING)
-
 	return 1
+
 
 /mob/living/proc/say_signlang(var/message, var/verb="gestures", var/datum/language/language)
 	for (var/mob/O in viewers(src, null))

@@ -2,10 +2,10 @@
 	Global associative list for caching humanoid icons.
 	Index format m or f, followed by a string of 0 and 1 to represent bodyparts followed by husk fat hulk skeleton 1 or 0.
 	TODO: Proper documentation
-	icon_key is [species.race_key][g][husk][fat][hulk][skeleton][s_tone]
+	icon_key is [species.race_key][g][husk][fat][hulk][skeleton][skin_tone]
 */
 var/global/list/human_icon_cache = list()
-var/global/list/tail_icon_cache = list() //key is [species.race_key][r_skin][g_skin][b_skin]
+var/global/list/tail_icon_cache = list() //key is [species.race_key][skin_color]
 var/global/list/light_overlay_cache = list()
 GLOBAL_LIST_EMPTY(overlay_icon_cache)
 GLOBAL_LIST_EMPTY(species_icon_template_cache)
@@ -154,50 +154,50 @@ Please contact me on #coderbus IRC. ~Carn x
 	overlays.Cut()
 
 	var/list/overlays_to_apply = list()
-	if (icon_update)
 
-		var/list/visible_overlays
-		if(is_cloaked())
-			icon = 'icons/mob/human.dmi'
-			icon_state = "blank"
-			visible_overlays = list(overlays_standing[HO_R_HAND_LAYER], overlays_standing[HO_L_HAND_LAYER])
-		else
-			icon = stand_icon
-			icon_state = null
-			visible_overlays = overlays_standing
+	var/list/visible_overlays
+	if(is_cloaked())
+		icon = 'icons/mob/human.dmi'
+		icon_state = "blank"
+		visible_overlays = list(overlays_standing[HO_R_HAND_LAYER], overlays_standing[HO_L_HAND_LAYER])
+	else
+		icon = stand_icon
+		icon_state = null
+		visible_overlays = overlays_standing
 
-		for(var/i = 1 to LAZYLEN(visible_overlays))
-			var/entry = visible_overlays[i]
-			if(istype(entry, /image))
-				var/image/overlay = entry
+	for(var/i = 1 to LAZYLEN(visible_overlays))
+		var/entry = visible_overlays[i]
+		if(istype(entry, /image))
+			var/image/overlay = entry
+			if(i != HO_DAMAGE_LAYER)
+				overlay.transform = get_lying_offset(overlay)
+			overlays_to_apply += overlay
+		else if(istype(entry, /list))
+			for(var/image/overlay in entry)
 				if(i != HO_DAMAGE_LAYER)
 					overlay.transform = get_lying_offset(overlay)
 				overlays_to_apply += overlay
-			else if(istype(entry, /list))
-				for(var/image/overlay in entry)
-					if(i != HO_DAMAGE_LAYER)
-						overlay.transform = get_lying_offset(overlay)
-					overlays_to_apply += overlay
 
-		var/obj/item/organ/external/head/head = organs_by_name[BP_HEAD]
-		if(istype(head) && !head.is_stump())
-			var/image/I = head.get_eye_overlay()
-			if(I) overlays_to_apply += I
+	var/obj/item/organ/external/head/head = organs_by_name[BP_HEAD]
+	if(istype(head) && !head.is_stump())
+		var/image/I = head.get_eye_overlay()
+		if(I) overlays_to_apply += I
 
 	if(auras)
 		overlays_to_apply += auras
 
 	overlays = overlays_to_apply
-
-	var/matrix/M = new
 	var/list/scale = get_scale()
-	M.Scale(scale[1], scale[2])
-	if (lying)
-		M.Turn(90)
-		M.Translate(1, -6 - default_pixel_z)
-	else
-		M.Translate(0, 16 * (scale[2] - 1))
-	animate(src, transform = M, time = ANIM_LYING_TIME)
+	animate(
+		src,
+		transform = matrix().Update(
+			scale_x = scale[1],
+			scale_y = scale[2],
+			rotation = lying ? 90 : 0,
+			offset_y = lying ? -6 - default_pixel_z : 16 * (scale[2] - 1)
+		),
+		time = ANIM_LYING_TIME
+	)
 
 
 /mob/living/carbon/human/proc/get_scale()
@@ -218,16 +218,15 @@ Please contact me on #coderbus IRC. ~Carn x
 			if (length(scale_effect))
 				build_modifier = 0.01 * scale_effect[build_descriptor]
 	return list(
-		(1 + build_modifier) * size_multiplier,
-		(1 + height_modifier) * size_multiplier
+		(1 + build_modifier) * (tf_scale_x || 1),
+		(1 + height_modifier) * (tf_scale_y || 1)
 	)
 
 var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/proc/get_lying_offset(var/image/I)
-	var/matrix/M = matrix()
 	if(!lying)
-		return M
+		return matrix()
 
 	var/overlay_key = "[I.icon][I.icon_state]"
 	if(!GLOB.overlay_icon_cache[overlay_key])
@@ -248,7 +247,10 @@ var/global/list/damage_icon_parts = list()
 	var/x_offset = Ceil(0.5*(icon_template.Width() - (overlay.Width() || 32)))
 	var/y_offset = Ceil(0.5*(icon_template.Height() - (overlay.Height() || 32)))
 
-	return M.Translate(x_offset-y_offset, -(x_offset+y_offset))
+	return matrix().Update(
+		offset_x = x_offset - y_offset,
+		offset_y = -(x_offset + y_offset)
+	)
 
 //DAMAGE OVERLAYS
 //constructs damage icon for each organ from mask * damage field and saves it in our overlays_ lists
@@ -337,9 +339,9 @@ var/global/list/damage_icon_parts = list()
 	if(gender == FEMALE)
 		g = "female"
 
-	var/icon_key = "[species.get_race_key(src)][g][s_tone][r_skin][g_skin][b_skin]"
-	if(lip_style)
-		icon_key += "[lip_style]"
+	var/icon_key = "[species.get_race_key(src)][g][skin_tone][skin_color]"
+	if(makeup_style)
+		icon_key += "[makeup_style]"
 	else
 		icon_key += "nolips"
 	var/obj/item/organ/internal/eyes/eyes = internal_organs_by_name[species.vision_organ ? species.vision_organ : BP_EYES]
@@ -360,8 +362,8 @@ var/global/list/damage_icon_parts = list()
 		if(part)
 			icon_key += "[part.species.get_race_key(part.owner)]"
 			icon_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
-			icon_key += "[part.s_tone]"
-			icon_key += "[part.s_base]"
+			icon_key += "[part.skin_tone]"
+			icon_key += "[part.base_skin]"
 			if(part.s_col && part.s_col.len >= 3)
 				icon_key += "[rgb(part.s_col[1],part.s_col[2],part.s_col[3])]"
 				icon_key += "[part.s_col_blend]"
@@ -756,19 +758,19 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/proc/get_tail_icon()
-	var/icon_key = "[species.get_race_key(src)][r_skin][g_skin][b_skin][r_hair][g_hair][b_hair]"
+	var/icon_key = "[species.get_race_key(src)][skin_color][head_hair_color]"
 	var/icon/tail_icon = tail_icon_cache[icon_key]
 	if(!tail_icon)
 		//generate a new one
 		var/species_tail_anim = species.get_tail_animation(src)
 		if(!species_tail_anim) species_tail_anim = 'icons/effects/species.dmi'
 		tail_icon = new/icon(species_tail_anim)
-		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), species.tail_blend)
+		tail_icon.Blend(skin_color, species.tail_blend)
 		// The following will not work with animated tails.
 		var/use_species_tail = species.get_tail_hair(src)
 		if(use_species_tail)
 			var/icon/hair_icon = icon('icons/effects/species.dmi', "[species.get_tail(src)]_[use_species_tail]")
-			hair_icon.Blend(rgb(r_hair, g_hair, b_hair), ICON_ADD)
+			hair_icon.Blend(head_hair_color, ICON_ADD)
 			tail_icon.Blend(hair_icon, ICON_OVERLAY)
 		tail_icon_cache[icon_key] = tail_icon
 

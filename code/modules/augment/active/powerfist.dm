@@ -51,7 +51,7 @@
 		SPAN_ITALIC("You start connecting \the [item] to \the [src]."),
 		range = 5
 	)
-	if (!do_after(user, 3 SECONDS, item, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_USER_SAME_HAND))
+	if (!do_after(user, 3 SECONDS, item, DO_PUBLIC_UNIQUE))
 		return
 	if (!user.unEquip(item, src))
 		return
@@ -104,7 +104,7 @@
 		SPAN_ITALIC("You start disconnecting \the [tank] from \the [src]."),
 		range = 5
 	)
-	if (!do_after(user, 3 SECONDS, src, DO_DEFAULT | DO_SHOW_PROGRESS | DO_USER_UNIQUE_ACT | DO_USER_SAME_HAND))
+	if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 		return
 	user.visible_message(
 		SPAN_ITALIC("\The [user] finishes disconnecting \a [tank] from \his [src]."),
@@ -163,7 +163,7 @@
 			if (!A.operating && !A.locked)
 				if (A.welded)
 					A.visible_message(SPAN_DANGER("\The [user] forces the fingers of \the [src] in through the welded metal, beginning to pry \the [A] open!"))
-					if (do_after(user, 13 SECONDS, A, DO_DEFAULT | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) && !A.locked)
+					if (do_after(user, 13 SECONDS, A, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && !A.locked)
 						A.welded = FALSE
 						A.update_icon()
 						playsound(A, 'sound/effects/meteorimpact.ogg', 100, 1)
@@ -174,7 +174,7 @@
 						return
 				else
 					A.visible_message(SPAN_DANGER("\The [user] pries the fingers of \a [src] in, beginning to force \the [A]!"))
-					if ((A.is_broken(NOPOWER) || do_after(user, 10 SECONDS, A, DO_DEFAULT | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT)) && !(A.operating || A.welded || A.locked))
+					if ((A.is_broken(NOPOWER) || do_after(user, 10 SECONDS, A, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)) && !(A.operating || A.welded || A.locked))
 						playsound(A, 'sound/machines/airlock_creaking.ogg', 100, 1)
 						if (A.density)
 							addtimer(CALLBACK(A, /obj/machinery/door/airlock/.proc/open, TRUE), 0)

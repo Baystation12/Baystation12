@@ -1,5 +1,5 @@
 //this function places received data into element with specified id.
-var/const/js_byjax = {"
+var/global/const/js_byjax = {"
 
 function replaceContent() {
 	var args = Array.prototype.slice.call(arguments);
@@ -34,7 +34,7 @@ callback_args - arguments for callback function
 
 Be sure to include required js functions in your page, or it'll raise an exception.
 */
-proc/send_byjax(receiver, control_id, target_element, new_content=null, callback=null, list/callback_args=null)
+/proc/send_byjax(receiver, control_id, target_element, new_content=null, callback=null, list/callback_args=null)
 	if(receiver && target_element && control_id) // && winexists(receiver, control_id))
 		var/list/argums = list(target_element, new_content)
 		if(callback)

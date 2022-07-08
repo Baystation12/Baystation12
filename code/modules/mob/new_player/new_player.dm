@@ -94,7 +94,7 @@
 						highjob = " as [player.client.prefs.job_high]"
 					if (!player.is_stealthed())
 						var/can_see_hidden = check_rights(R_INVESTIGATE, 0)
-						var/datum/game_mode/mode = config.pick_mode(SSticker.master_mode)
+						var/datum/game_mode/mode = SSticker.pick_mode(SSticker.master_mode)
 						var/list/readied_antag_roles = list()
 						if (mode && can_see_hidden)
 							for (var/role in player.client.prefs.be_special_role)
@@ -166,8 +166,6 @@
 			observer.set_appearance(mannequin)
 			qdel(mannequin)
 
-			if(client.prefs.be_random_name)
-				client.prefs.real_name = random_name(client.prefs.gender)
 			observer.real_name = client.prefs.real_name
 			observer.SetName(observer.real_name)
 			if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
@@ -302,7 +300,7 @@
 		GLOB.global_announcer.autosay("Новый [rank ? "[rank]" : "visitor" ] [join_message ? join_message : "активировался"].", "Arrivals Announcement Computer")
 
 /mob/new_player/proc/LateChoices()
-	var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
+	var/name = client.prefs.real_name
 
 	var/list/header = list("<html><body><center>")
 	header += "<b>Welcome, [name].<br></b>"
@@ -618,7 +616,7 @@
 /mob/new_player/show_message(msg, type, alt, alt_type)
 	return
 
-mob/new_player/MayRespawn()
+/mob/new_player/MayRespawn()
 	return 1
 
 /mob/new_player/touch_map_edge()

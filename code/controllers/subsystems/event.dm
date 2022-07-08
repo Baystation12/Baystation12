@@ -3,8 +3,8 @@ SUBSYSTEM_DEF(event)
 	wait = 2 SECONDS
 	priority = SS_PRIORITY_EVENT
 
-	var/tmp/list/processing_events = list()
-	var/tmp/pos = EVENT_LEVEL_MUNDANE
+	var/list/processing_events = list()
+	var/pos = EVENT_LEVEL_MUNDANE
 
 	//UI related
 	var/window_x = 700
@@ -25,7 +25,7 @@ SUBSYSTEM_DEF(event)
 	var/datum/event_meta/new_event = new
 
 //Subsystem procs
-/datum/controller/subsystem/event/Initialize()
+/datum/controller/subsystem/event/Initialize(start_uptime)
 	if(!all_events)
 		all_events = subtypesof(/datum/event)
 	if(!event_containers)
@@ -43,7 +43,6 @@ SUBSYSTEM_DEF(event)
 		var/datum/event_container/receiver = event_containers[text2num(event_level)]
 		var/datum/event_container/donor = GLOB.using_map.map_event_container[event_level]
 		receiver.available_events += donor.available_events
-	. = ..()
 
 /datum/controller/subsystem/event/Recover()
 	active_events = SSevent.active_events
@@ -72,11 +71,12 @@ SUBSYSTEM_DEF(event)
 		if (MC_TICK_CHECK)
 			return
 
-/datum/controller/subsystem/event/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Active Events: [active_events.len]"
-	..(text, force)
+
+/datum/controller/subsystem/event/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Active Events: [active_events.len]")
+
 
 //Actual event handling
 /datum/controller/subsystem/event/proc/event_complete(var/datum/event/E)

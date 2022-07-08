@@ -108,7 +108,7 @@
 	var/uses = 10
 	var/list/emag_sounds = list('sound/effects/emag_act.wav')
 
-var/const/NO_EMAG_ACT = -50
+var/global/const/NO_EMAG_ACT = -50
 
 /obj/item/card/emag/resolve_attackby(atom/A, mob/user)
 	var/used_uses = A.emag_act(uses, user, src)
@@ -333,7 +333,7 @@ var/const/NO_EMAG_ACT = -50
 		return
 
 	if(ispath(var_value, /datum/mil_branch) || istext(var_value))
-		var/datum/mil_branch/new_branch = mil_branches.get_branch(var_value)
+		var/datum/mil_branch/new_branch = GLOB.mil_branches.get_branch(var_value)
 		if(new_branch)
 			if(new_branch != id.military_branch)
 				id.military_branch = new_branch
@@ -364,7 +364,7 @@ var/const/NO_EMAG_ACT = -50
 		var_value = rank.name
 
 	if(istext(var_value))
-		var/new_rank = mil_branches.get_rank(id.military_branch.name, var_value)
+		var/new_rank = GLOB.mil_branches.get_rank(id.military_branch.name, var_value)
 		if(new_rank)
 			id.military_rank = new_rank
 			return

@@ -1,6 +1,6 @@
 /decl/hierarchy/outfit/job/torch/passenger/research
 	hierarchy_type = /decl/hierarchy/outfit/job/torch/passenger/research
-	l_ear = /obj/item/device/radio/headset/torchnanotrasen
+	l_ear = /obj/item/device/radio/headset/science
 
 /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot //pending better uniform
 	name = OUTFIT_JOB_NAME("Corporate Pilot")

@@ -4,7 +4,6 @@
 	desc = "A lighter, less armoured rig suit."
 	icon_state = "ninja_rig"
 	suit_type = "light suit"
-	allowed = list(/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/handcuffs,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/cell)
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
 		bullet = ARMOR_BALLISTIC_PISTOL,
@@ -14,9 +13,9 @@
 		)
 	siemens_coefficient = 0.4
 	emp_protection = 10
-	online_slowdown = 0
+	online_slowdown = 0.5
+	offline_slowdown = 1
 	item_flags = ITEM_FLAG_THICKMATERIAL
-	offline_slowdown = TINT_NONE
 	offline_vision_restriction = TINT_NONE
 	max_pressure_protection = LIGHT_RIG_MAX_PRESSURE
 	min_pressure_protection = 0

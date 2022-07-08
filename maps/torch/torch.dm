@@ -107,9 +107,10 @@
 	#include "language/human/misc/spacer.dm"
 
 	#include "machinery/apc_shuttle.dm"
-	#include "machinery/faxmachine.dm"
 	#include "machinery/keycard authentication.dm"
 	#include "machinery/suit_storage.dm"
+
+	#include "outfits/scgec.dm"
 
 	#include "robot/module_flying_surveyor.dm"
 
@@ -168,6 +169,8 @@
 	#include "../away/miningstation/miningstation.dm"
 	#include "../away/mininghome/mininghome.dm"
 	#include "../away/scavver/scavver_gantry.dm"
+
+	#include "../event/iccgn_ship/icgnv_hound.dm"
 
 
 	#define using_map_DATUM /datum/map/torch

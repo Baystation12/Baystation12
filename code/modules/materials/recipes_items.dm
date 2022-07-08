@@ -210,7 +210,7 @@
 	modifier = "large"
 	req_amount = 5
 
-/datum/stack_recipe/sandals
+/datum/stack_recipe/sandal
 	title = "sandals"
 	result_type = /obj/item/clothing/shoes/sandal
 

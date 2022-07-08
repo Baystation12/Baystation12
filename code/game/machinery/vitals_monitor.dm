@@ -120,8 +120,8 @@
 	if(victim)
 		update_victim()
 	else if(ishuman(over_object))
-		update_victim(over_object)	
-	else if(istype(over_object, /obj/machinery/optable/))
+		update_victim(over_object)
+	else if(istype(over_object, /obj/machinery/optable))
 		var/obj/machinery/optable/new_table_connection = over_object
 		update_optable(new_table_connection)
 

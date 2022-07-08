@@ -196,13 +196,6 @@
 /obj/effect/decal/cleanable/mucus,
 /turf/simulated/floor/tiled/white,
 /area/template_noop)
-"aO" = (
-/obj/machinery/door/airlock/vault{
-	name = "Door";
-	welded = null
-	},
-/turf/simulated/floor/tiled/steel_ridged,
-/area/template_noop)
 "aP" = (
 /obj/machinery/door/airlock/external,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -386,7 +379,7 @@ aa
 ab
 ah
 aF
-aO
+aT
 aN
 aA
 ab

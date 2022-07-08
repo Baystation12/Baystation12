@@ -50,7 +50,7 @@
 		return TRUE
 	if (user.a_intent == I_HURT)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if (I.force < 7 || (I.damtype != BRUTE && I.damtype != BURN))
+		if (I.force < 7 || (I.damtype != DAMAGE_BRUTE && I.damtype != DAMAGE_BURN))
 			user.visible_message(
 				SPAN_WARNING("\The [user] bonks \an [I] against \the [src]."),
 				SPAN_WARNING("You whack \the [I] against \the [src]. Nothing happens."),
@@ -64,9 +64,9 @@
 			SPAN_WARNING("You hear a violent impact!")
 		)
 		playsound(src, 'sound/weapons/smash.ogg', 50, TRUE)
-		if (I.damtype == BRUTE)
+		if (I.damtype == DAMAGE_BRUTE)
 			modify_health(-I.force * 0.75)
-		else if (I.damtype == BURN)
+		else if (I.damtype == DAMAGE_BURN)
 			modify_health(-I.force * 0.5)
 		return TRUE
 	if (isWrench(I))
@@ -78,7 +78,7 @@
 			"You start to repair \the [src]'s plating with \the [I].",
 			"You hear creaking metal."
 		)
-		if (do_after(user, 15 SECONDS, src, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+		if (do_after(user, 15 SECONDS, src, do_flags = DO_PUBLIC_UNIQUE))
 			to_chat(user, SPAN_NOTICE("There - Good as new."))
 			modify_health(initial(health) - health)
 		return TRUE
@@ -95,7 +95,7 @@
 			"You start to repair \the [src]'s locking clamps with \the [I].",
 			"You hear a hissing flame."
 		)
-		if (do_after(user, 15 SECONDS, src, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+		if (do_after(user, 15 SECONDS, src, do_flags = DO_PUBLIC_UNIQUE))
 			to_chat(user, SPAN_NOTICE("There - Good as new."))
 			emagged = FALSE
 			if (locked)
@@ -127,9 +127,9 @@
 /obj/machinery/barrier/ex_act(severity)
 	if (QDELETED(src))
 		return
-	if (severity == 1)
+	if (severity == EX_ACT_DEVASTATING)
 		explode()
-	else if (severity == 2)
+	else if (severity == EX_ACT_HEAVY)
 		modify_health(-25)
 
 /obj/machinery/barrier/emp_act(severity)

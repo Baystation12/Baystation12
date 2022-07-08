@@ -1,14 +1,46 @@
 {
-	"editor.detectIndentation": false,
-	"editor.insertSpaces": false,
-	"editor.tabSize": 4,
-	"files.eol": "\r\n",
-	"files.insertFinalNewline": true,
-	"files.trimFinalNewlines": true,
-	"files.trimTrailingWhitespace": true,
-	"gitblame.commitUrl": "https://github.com/baystation12/baystation12/commit/${hash}",
-	"gitlens.advanced.blame.customArguments": [
-		"--ignore-revs-file",
-		".git-blame-ignore-revs"
-	]
+  "files.eol": "\n",
+  "files.encoding": "utf8",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+
+  "files.associations": {
+    "*.{dme,dmf,dmm,dm}": "dm",
+  },
+  "[dm]": {
+    "files.eol": "\r\n",
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": false
+  },
+
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
+
+  "[python]": {
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4
+  },
+
+  "[yaml]": {
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+
+  "workbench.editorAssociations": {
+    "*.dmi": "imagePreview.previewEditor"
+  },
+
+  "debug.onTaskErrors": "abort",
+  "dreammaker.objectTreePane": true,
+  "dreammaker.autoUpdate": true,
+  "dreammaker.tickOnCreate": true,
+
+  "gitlens.advanced.blame.customArguments": [
+    "--ignore-revs-file", ".git-blame-ignore-revs"
+],
+"diffEditor.ignoreTrimWhitespace": false
 }

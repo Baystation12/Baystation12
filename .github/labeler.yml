@@ -1,0 +1,27 @@
+Repo:
+- .github/**/*
+- .vscode/**/*
+- docs/**/*
+- scripts/**/*
+- test/**/*
+- tools/**/*
+- .codebeatignore
+- .editorconfig
+- .git*
+- LICENSE
+- README.md
+- SpacemanDMM.toml
+
+Map:
+- '**/*.dmm'
+
+Sprites:
+- '**/*.dmi'
+
+Sound:
+- '**/*.ogg'
+- '**/*.wav'
+- '**/*.mp3'
+
+Config Update:
+- config/example/**/*

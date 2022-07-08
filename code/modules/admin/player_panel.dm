@@ -334,7 +334,7 @@
 		else
 			var/timeleft = evacuation_controller.get_eta()
 			if (evacuation_controller.waiting_to_leave())
-				dat += "ETA: [(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]<BR>"
+				dat += "ETA: [(timeleft / 60) % 60]:[pad_left(num2text(timeleft % 60), 2, "0")]<BR>"
 				dat += "<a href='?src=\ref[src];call_shuttle=2'>Send Back</a><br>"
 
 		dat += "<a href='?src=\ref[src];delay_round_end=1'>[SSticker.delay_end ? "End Round Normally" : "Delay Round End"]</a><br>"

@@ -281,7 +281,7 @@
 		if (href_list["obj_edit"])
 			objective = locate(href_list["obj_edit"])
 			if (!objective) return
-			objective_pos = list_find(objectives, objective)
+			objective_pos = objectives.Find(objective)
 
 			//Text strings are easy to manipulate. Revised for simplicity.
 			var/temp_obj_type = "[objective.type]"//Convert path into a text string.

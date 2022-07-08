@@ -169,7 +169,7 @@
 		return ..()
 	if(pilot_coverage < 100)
 		to_chat(user, SPAN_NOTICE("This type of chassis doesn't support internals."))
-	if(!C.anchored && do_after(user, 5, src))
+	if(!C.anchored && do_after(user, 0.5 SECONDS, src, DO_PUBLIC_UNIQUE))
 		if(C.anchored)
 			return
 		to_chat(user, SPAN_NOTICE("You install the canister in the [src]."))
@@ -180,7 +180,7 @@
 		update_components()
 	else . = ..()
 
-obj/item/mech_component/chassis/MouseDrop(atom/over)
+/obj/item/mech_component/chassis/MouseDrop(atom/over)
 	if(!usr || !over) return
 	if(!Adjacent(usr) || !over.Adjacent(usr)) return
 

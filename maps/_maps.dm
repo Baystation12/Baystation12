@@ -5,7 +5,6 @@
 #include "using.dm"
 
 #include "antag_spawn\antag_spawn_bases.dm"
-#include "antag_spawn\deity\deity.dm"
 #include "antag_spawn\ert\ert.dm"
 #include "antag_spawn\heist\heist.dm"
 #include "antag_spawn\mercenary\mercenary.dm"
@@ -22,6 +21,7 @@
 #include "random_ruins\exoplanet_ruins\drill_site\drill_site.dm"
 #include "random_ruins\exoplanet_ruins\fountain\fountain_ruin.dm"
 #include "random_ruins\exoplanet_ruins\hut\hut.dm"
+#include "random_ruins\exoplanet_ruins\hydrobase\hydrobase.dm"
 #include "random_ruins\exoplanet_ruins\icarus\icarus.dm"
 #include "random_ruins\exoplanet_ruins\lodge\lodge.dm"
 #include "random_ruins\exoplanet_ruins\marooned\marooned.dm"

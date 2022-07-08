@@ -161,7 +161,7 @@
 	if(isScrewdriver(W) || isCrowbar(W) || isWrench(W))
 		to_chat(user, ("<span class='notice'>It's a holowindow, you can't dismantle it!</span>"))
 	else
-		if(W.damtype == BRUTE || W.damtype == BURN)
+		if (W.damtype == DAMAGE_BRUTE || W.damtype == DAMAGE_BURN)
 			hit(W.force, user, W)
 		else
 			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
@@ -220,7 +220,7 @@
 	return
 
 /obj/item/holo
-	damtype = PAIN
+	damtype = DAMAGE_PAIN
 	no_attack_log = TRUE
 
 /obj/item/holo/esword

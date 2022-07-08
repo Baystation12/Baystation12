@@ -43,10 +43,6 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS
 
-/obj/item/clothing/suit/space/void/wizard/Initialize()
-	. = ..()
-	slowdown_per_slot[slot_wear_suit] = 1
-
 /obj/item/clothing/gloves/wizard
 	name = "mystical gloves"
 	desc = "Reinforced, gem-studded gloves that radiate energy. They look like they go along with a matching voidsuit."

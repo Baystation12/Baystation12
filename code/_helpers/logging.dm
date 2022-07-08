@@ -3,7 +3,7 @@
 // will get logs that are one big line if the system is Linux and they are using notepad.  This solves it by adding CR to every line ending
 // in the logs.  ascii character 13 = CR
 
-/var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
+var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 
 
 /proc/error(msg)
@@ -30,7 +30,7 @@
 	to_world_log("## TESTING: [msg][log_end]")
 
 /proc/game_log(category, text)
-	to_file(diary, "\[[time_stamp()]] [game_id] [category]: [text][log_end]")
+	to_file(global.diary, "\[[time_stamp()]] [game_id] [category]: [text][log_end]")
 
 /proc/log_admin(text)
 	GLOB.admin_log.Add(text)
@@ -42,6 +42,11 @@
 		game_log("DEBUG", text)
 	to_debug_listeners(text)
 
+/proc/log_runtime(text)
+	for (var/client/C as anything in GLOB.admins)
+		if (C.get_preference_value(/datum/client_preference/staff/show_runtime_logs) == GLOB.PREF_SHOW)
+			to_chat(C, append_admin_tools(SPAN_DEBUG("<b>RUNTIME</b>: [text]"), usr, usr?.loc))
+
 /proc/log_error(text)
 	error(text)
 	to_debug_listeners(text, "ERROR")
@@ -51,7 +56,7 @@
 	to_debug_listeners(text, "WARNING")
 
 /proc/to_debug_listeners(text, prefix = "DEBUG")
-	for(var/client/C in GLOB.admins)
+	for(var/client/C as anything in GLOB.admins)
 		if(C.get_preference_value(/datum/client_preference/staff/show_debug_logs) == GLOB.PREF_SHOW)
 			to_chat(C, SPAN_DEBUG("<b>[prefix]</b>: [text]"))
 

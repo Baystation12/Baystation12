@@ -1,4 +1,4 @@
-var/repository/admin_pm/admin_pm_repository = new()
+var/global/repository/admin_pm/admin_pm_repository = new()
 
 /repository/admin_pm
 	var/list/admin_pms_

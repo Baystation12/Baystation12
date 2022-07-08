@@ -59,8 +59,11 @@
 /obj/effect/gateway
 	name = "gateway"
 	desc = "You're pretty sure that abyss is staring back."
-	icon = 'icons/obj/cult.dmi'
-	icon_state = "hole"
+	icon = 'icons/effects/64x64.dmi'
+	icon_state = "portal"
+	pixel_x = -16
+	pixel_y = -16
+	plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	density = TRUE
 	unacidable = TRUE
 	anchored = TRUE

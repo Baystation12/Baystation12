@@ -851,9 +851,9 @@
 /obj/item/integrated_circuit/input/microphone
 	name = "microphone"
 	desc = "Useful for spying on people, or for voice-activated machines."
-	extended_desc = "This will automatically translate most languages it hears to Zurich Accord Common. \
+	extended_desc = "This will automatically translate most human languages to Zurich Accord Common. \
 	The first activation pin is always pulsed when the circuit hears someone talk, while the second one \
-	is only triggered if it hears someone speaking a language other than Zurich Accord Common."
+	is only triggered if it successfully translated another language."
 	icon_state = "recorder"
 	complexity = 8
 	inputs = list()
@@ -866,6 +866,10 @@
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	power_draw_per_use = 5
 
+	var/language_preferred = LANGUAGE_HUMAN_EURO
+	var/languages_understood = list(LANGUAGE_HUMAN_EURO, LANGUAGE_HUMAN_CHINESE, LANGUAGE_HUMAN_ARABIC, LANGUAGE_HUMAN_INDIAN, LANGUAGE_HUMAN_IBERIAN, LANGUAGE_HUMAN_RUSSIAN, LANGUAGE_HUMAN_SELENIAN, LANGUAGE_SPACER)
+	var/invalid_flags = NONVERBAL | SIGNLANG | HIVEMIND | ALT_TRANSMIT
+
 /obj/item/integrated_circuit/input/microphone/Initialize()
 	. = ..()
 	GLOB.listening_objects += src
@@ -875,18 +879,43 @@
 	. = ..()
 
 /obj/item/integrated_circuit/input/microphone/hear_talk(var/mob/living/M as mob, text, verb, datum/language/speaking)
-	var/translated = TRUE
-	if(M && text)
-		if(speaking && !speaking.machine_understands)
-			text = speaking.scramble(text)
-			translated = FALSE
-		set_pin_data(IC_OUTPUT, 1, M.GetVoice())
-		set_pin_data(IC_OUTPUT, 2, text)
+	var/translated = FALSE
+	if(M && text && speaking)
+		if(!(speaking.flags & invalid_flags))
+			if(speaking.name in languages_understood)
+				translated = TRUE
+			else
+				text = speaking.scramble(text)
 
-	push_data()
-	activate_pin(1)
-	if(speaking && translated && !(speaking.name == LANGUAGE_HUMAN_EURO))
-		activate_pin(2)
+			set_pin_data(IC_OUTPUT, 1, M.GetVoice())
+			set_pin_data(IC_OUTPUT, 2, text)
+
+			push_data()
+			activate_pin(1)
+			if(translated && !(speaking.name == language_preferred))
+				activate_pin(2)
+
+
+/obj/item/integrated_circuit/input/microphone/modem
+	name = "machine modulating microphone"
+	languages_understood = list(LANGUAGE_HUMAN_EURO, LANGUAGE_EAL)
+	spawn_flags = IC_SPAWN_RESEARCH
+	extended_desc = "A microphone combined with repurposed fax machine circuitry, this will translate Encoded Audio Language used by some synthetics into ZAC."
+
+/obj/item/integrated_circuit/input/microphone/exo
+	name = "interspecies exchange microphone"
+	languages_understood = list(LANGUAGE_HUMAN_EURO, LANGUAGE_HUMAN_SELENIAN, LANGUAGE_UNATHI_SINTA, LANGUAGE_SKRELLIAN)
+	spawn_flags = IC_SPAWN_RESEARCH
+	extended_desc = "A microphone with a xenolinguistic database to facilitate EXO missions with mixed species. It translates the most common Skrellian and Unathi dialects to ZAC."
+	//Selenian is an in-character undocumented feature demanded by a corp exec
+
+/obj/item/integrated_circuit/input/microphone/fringe
+	name = "gray market microphone"
+	languages_understood = list(LANGUAGE_SPACER, LANGUAGE_GUTTER, LANGUAGE_HUMAN_CHINESE, LANGUAGE_HUMAN_ARABIC, LANGUAGE_HUMAN_INDIAN, LANGUAGE_HUMAN_IBERIAN, LANGUAGE_HUMAN_RUSSIAN)
+	language_preferred = LANGUAGE_HUMAN_RUSSIAN
+	spawn_flags = 0
+	extended_desc = "This microphone did not come with any documentation."
+
 
 /obj/item/integrated_circuit/input/sensor
 	name = "sensor"
@@ -906,7 +935,7 @@
 	if(!check_then_do_work())
 		return FALSE
 	var/ignore_bags = get_pin_data(IC_INPUT, 1)
-	if(ignore_bags && istype(A, /obj/item/storage/))
+	if(ignore_bags && istype(A, /obj/item/storage))
 		return FALSE
 	set_pin_data(IC_OUTPUT, 1, weakref(A))
 	push_data()

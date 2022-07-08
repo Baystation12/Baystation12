@@ -103,6 +103,11 @@
 		SKILL_CHEMISTRY = SKILL_BASIC,
 		SKILL_COOKING = SKILL_ADEPT
 	)
+	min_skill = list(
+		SKILL_BOTANY = SKILL_BASIC,
+		SKILL_CHEMISTRY = SKILL_BASIC,
+		SKILL_COOKING = SKILL_ADEPT
+	)
 	access = list(
 		access_commissary,
 		access_hydroponics,

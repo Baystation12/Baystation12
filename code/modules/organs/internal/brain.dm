@@ -202,17 +202,17 @@
 						take_internal_damage(1)
 	..()
 
-/obj/item/organ/internal/brain/take_internal_damage(var/damage, var/silent)
+/obj/item/organ/internal/brain/take_internal_damage(var/damageTaken, var/silent)
 	set waitfor = 0
 	..()
-	if(damage >= 20) //This probably won't be triggered by oxyloss or mercury. Probably.
-		var/damage_secondary = damage * 0.20
+	if(damageTaken >= 20 && damage >= (max_damage * 0.5)) //This probably won't be triggered by oxyloss or mercury. Probably.
+		var/damage_secondary = damageTaken * 0.20
 		if (owner)
 			owner.flash_eyes()
 			owner.eye_blurry += damage_secondary
 			owner.confused += damage_secondary * 2
 			owner.Paralyse(damage_secondary)
-			owner.Weaken(round(damage, 1))
+			owner.Weaken(round(damageTaken, 1))
 			if (prob(30))
 				addtimer(CALLBACK(src, .proc/brain_damage_callback, damage), rand(6, 20) SECONDS, TIMER_UNIQUE)
 
@@ -228,14 +228,6 @@
 		return
 	if((owner.disabilities & EPILEPSY) && prob(1))
 		owner.seizure()
-	else if((owner.disabilities & TOURETTES) && prob(10))
-		owner.Stun(10)
-		switch(rand(1, 3))
-			if(1)
-				owner.emote("twitch")
-			if(2 to 3)
-				owner.say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
-		owner.make_jittery(100)
 	else if((owner.disabilities & NERVOUS) && prob(10))
 		owner.stuttering = max(10, owner.stuttering)
 

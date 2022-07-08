@@ -76,15 +76,6 @@
 		spawn(0)
 			handleAI()
 
-/mob/living/bot/updatehealth()
-	if(status_flags & GODMODE)
-		health = maxHealth
-		set_stat(CONSCIOUS)
-	else
-		health = maxHealth - getFireLoss() - getBruteLoss()
-	setOxyLoss(0)
-	setToxLoss(0)
-
 /mob/living/bot/death()
 	explode()
 

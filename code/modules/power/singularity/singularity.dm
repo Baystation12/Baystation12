@@ -56,14 +56,14 @@
 	if(current_size == STAGE_SUPER)//IT'S UNSTOPPABLE
 		return
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			if(prob(25))
 				investigate_log("has been destroyed by an explosion.", I_SINGULO)
 				qdel(src)
 				return
 			else
 				energy += 50
-		if(2.0 to 3.0)
+		if(EX_ACT_HEAVY to EX_ACT_LIGHT)
 			energy += round((rand(20,60)/2),1)
 			return
 
@@ -342,10 +342,10 @@
 	var/dir2 = 0
 	var/dir3 = 0
 	switch(direction)
-		if(NORTH||SOUTH)
+		if(NORTH, SOUTH)
 			dir2 = 4
 			dir3 = 8
-		if(EAST||WEST)
+		if(EAST, WEST)
 			dir2 = 1
 			dir3 = 2
 	var/turf/T2 = T
@@ -412,7 +412,7 @@
 	for(var/mob/living/M in view(toxrange, src.loc))
 		if(M.status_flags & GODMODE)
 			continue
-		M.apply_damage(toxdamage, TOX, null, damage_flags = DAM_DISPERSED)
+		M.apply_damage(toxdamage, DAMAGE_TOXIN, null, damage_flags = DAMAGE_FLAG_DISPERSED)
 
 /obj/singularity/proc/mezzer()
 	for(var/mob/living/carbon/M in oviewers(8, src))
@@ -429,7 +429,7 @@
 				else
 					to_chat(H, "<span class=\"warning\">You look directly into The [src.name], but your eyewear does absolutely nothing to protect you from it!</span>")
 		to_chat(M, "<span class='danger'>You look directly into The [src.name] and feel [current_size == 11 ? "helpless" : "weak"].</span>")
-		M.apply_effect(3, STUN)
+		M.apply_effect(3, EFFECT_STUN)
 		for(var/mob/O in viewers(M, null))
 			O.show_message(text("<span class='danger'>[] stares blankly at The []!</span>", M, src), 1)
 

@@ -4,7 +4,7 @@
 	name = "orbital station"
 	desc = "Sensors detect an orbital station above the exoplanet. Sporadic magentic impulses are registred inside it. Planet landing is impossible due to lower orbits being cluttered with chaotically moving metal chunks."
 	icon_state = "object"
-	known = 0
+	known = FALSE
 
 	initial_generic_waypoints = list(
 		"nav_magshield_1",
@@ -92,7 +92,7 @@
 		var/obj/item/stack/material/rods/R = W
 		to_chat(user, "<span class='notice'> You start to stick [R.singular_name] into rotating hands to make them stuck.</span>")
 		being_stopped = 1
-		if (!do_after(user, 100, src))
+		if (!do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'> You pull back [R.singular_name].</span>")
 			being_stopped = 0
 			return

@@ -38,7 +38,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		else
 			return 0
 
-	if(check_cache && (list_find(client.cache, asset_name) || list_find(client.sending, asset_name)))
+	if(check_cache && (client.cache.Find(asset_name) || client.sending.Find(asset_name)))
 		return 0
 
 	var/decl/asset_cache/asset_cache = decls_repository.get_decl(/decl/asset_cache)
@@ -57,7 +57,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 	var/t = 0
 	var/timeout_time = (ASSET_CACHE_SEND_TIMEOUT * client.sending.len) + ASSET_CACHE_SEND_TIMEOUT
-	while(client && !list_find(client.completed_asset_jobs, job) && t < timeout_time) // Reception is handled in Topic()
+	while(client && !client.completed_asset_jobs.Find(job) && t < timeout_time) // Reception is handled in Topic()
 		sleep(1) // Lock up the caller until this is received.
 		t++
 
@@ -105,7 +105,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 	var/t = 0
 	var/timeout_time = ASSET_CACHE_SEND_TIMEOUT * client.sending.len
-	while(client && !list_find(client.completed_asset_jobs, job) && t < timeout_time) // Reception is handled in Topic()
+	while(client && !client.completed_asset_jobs.Find(job) && t < timeout_time) // Reception is handled in Topic()
 		sleep(1) // Lock up the caller until this is received.
 		t++
 
@@ -142,7 +142,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 //These datums are used to populate the asset cache, the proc "register()" does this.
 
 //all of our asset datums, used for referring to these later
-/var/global/list/asset_datums = list()
+var/global/list/asset_datums = list()
 
 //get a assetdatum or make a new one
 /proc/get_asset_datum(var/type)

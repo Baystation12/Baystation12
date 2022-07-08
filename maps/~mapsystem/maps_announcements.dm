@@ -56,7 +56,7 @@
 	command_announcement.Announce(replacetext_char(radiation_detected_message, "%STATION_NAME%", station_name()), "Неизвестная Аномалия", new_sound = radiation_detected_sound)
 
 /datum/map/proc/space_time_anomaly_detected_annoncement()
-	command_announcement.Announce(replacetext_char(space_time_anomaly_message, "%STATION_NAME%", station_name()),, "Неизвестная Аномалия", new_sound = space_time_anomaly_sound)
+	command_announcement.Announce("Space-time anomalies have been detected on the [station_name()]. Internals and voidsuits recommended.", "Anomaly Alert", new_sound = space_time_anomaly_sound)
 
 /datum/map/proc/unidentified_lifesigns_announcement()
 	command_announcement.Announce(replacetext_char(unidentified_lifesigns_message, "%STATION_NAME%", station_name()), "Неизвестная Форма Жизни", new_sound = unidentified_lifesigns_sound)

@@ -89,6 +89,7 @@
 	for(var/i in 1 to activators.len)
 		var/datum/integrated_io/activate/A = activators[i]
 		A.scramble()
+	..()
 
 /obj/item/integrated_circuit/memory/constant/save_special()
 	var/datum/integrated_io/O = outputs[1]

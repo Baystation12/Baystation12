@@ -131,7 +131,7 @@
 			if(H.species.name in sounded_species)
 				if(islist(emote_sound))
 					if(H.species.name == SPECIES_SKRELL)
-						if(H.h_style == "Skrell Male Tentacles")
+						if(H.head_hair_style == "Skrell Male Tentacles")
 							return playsound(user.loc, pick(emote_sound[MALE]), 50, 0)
 						else
 							return playsound(user.loc, pick(emote_sound[FEMALE]), 50, 0)

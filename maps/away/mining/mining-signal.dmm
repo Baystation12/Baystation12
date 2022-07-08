@@ -42,8 +42,7 @@
 	dir = 8
 	},
 /obj/structure/window/reinforced{
-	dir = 4;
-	icon_state = "rwindow"
+	dir = 4
 	},
 /obj/machinery/door/window/brigdoor/southleft,
 /turf/simulated/floor/holofloor/tiled/dark,
@@ -310,8 +309,7 @@
 /area/outpost/abandoned)
 "bo" = (
 /obj/machinery/door/blast/shutters{
-	dir = 2;
-	icon_state = "shutter1"
+	dir = 2
 	},
 /turf/simulated/floor/tiled,
 /area/outpost/abandoned)
@@ -391,7 +389,6 @@
 	pixel_y = -10
 	},
 /obj/effect/decal/cleanable/blood{
-	pixel_x = 0;
 	pixel_y = 32
 	},
 /obj/effect/floor_decal/corner/purple{
@@ -565,8 +562,7 @@
 "ca" = (
 /obj/structure/table/steel,
 /obj/effect/floor_decal/corner/paleblue/three_quarters{
-	dir = 8;
-	icon_state = "corner_white_three_quarters"
+	dir = 8
 	},
 /obj/random/loot,
 /turf/simulated/floor/tiled/airless,
@@ -574,8 +570,7 @@
 "cb" = (
 /obj/structure/table/steel,
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/airless,
@@ -583,8 +578,7 @@
 "cc" = (
 /obj/machinery/optable,
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/machinery/light/small{
 	dir = 1;
@@ -596,8 +590,7 @@
 "cd" = (
 /obj/machinery/computer/operating,
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -606,15 +599,13 @@
 "ce" = (
 /obj/structure/closet/secure_closet/medical2,
 /obj/effect/floor_decal/corner/paleblue/three_quarters{
-	dir = 1;
-	icon_state = "corner_white_three_quarters"
+	dir = 1
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "cf" = (
 /obj/effect/floor_decal/corner/red/three_quarters{
-	dir = 8;
-	icon_state = "corner_white_three_quarters"
+	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/item/ammo_casing/pistol/magnum,
@@ -622,8 +613,7 @@
 /area/outpost/abandoned)
 "cg" = (
 /obj/effect/floor_decal/corner/red{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/item/ammo_casing/pistol/magnum,
@@ -633,8 +623,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/machinery/embedded_controller/radio/airlock/access_controller,
 /obj/effect/floor_decal/corner/red/three_quarters{
-	dir = 1;
-	icon_state = "corner_white_three_quarters"
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
@@ -652,8 +641,7 @@
 /area/outpost/abandoned)
 "cl" = (
 /obj/structure/hygiene/shower{
-	dir = 8;
-	icon_state = "shower"
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 5;
@@ -661,8 +649,7 @@
 	},
 /obj/structure/window/reinforced/tinted/frosted,
 /obj/machinery/atmospherics/unary/vent_pump{
-	dir = 4;
-	icon_state = "map_vent"
+	dir = 4
 	},
 /obj/structure/sign/warning/secure_area{
 	pixel_y = 32
@@ -671,15 +658,13 @@
 /area/outpost/abandoned)
 "cm" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	dir = 9;
-	icon_state = "spline_fancy"
+	dir = 9
 	},
 /turf/simulated/floor/wood,
 /area/outpost/abandoned)
 "cn" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	dir = 1;
-	icon_state = "spline_fancy"
+	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood{
@@ -704,8 +689,7 @@
 /area/outpost/abandoned)
 "cr" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	dir = 1;
-	icon_state = "spline_fancy"
+	dir = 1
 	},
 /turf/simulated/floor/wood{
 	icon_state = "wood_broken2"
@@ -713,8 +697,7 @@
 /area/outpost/abandoned)
 "cs" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	dir = 5;
-	icon_state = "spline_fancy"
+	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood,
@@ -728,8 +711,7 @@
 /area/outpost/abandoned)
 "cu" = (
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
@@ -746,8 +728,7 @@
 /area/outpost/abandoned)
 "cx" = (
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 6;
-	icon_state = "corner_white"
+	dir = 6
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
@@ -761,8 +742,7 @@
 /area/outpost/abandoned)
 "cH" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	dir = 8;
-	icon_state = "spline_fancy"
+	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -795,8 +775,7 @@
 /area/outpost/abandoned)
 "cM" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	dir = 4;
-	icon_state = "spline_fancy"
+	dir = 4
 	},
 /turf/simulated/floor/wood,
 /area/outpost/abandoned)
@@ -838,8 +817,7 @@
 /area/outpost/abandoned)
 "cV" = (
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -852,8 +830,7 @@
 "cX" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/random/loot,
@@ -861,8 +838,7 @@
 /area/outpost/abandoned)
 "cY" = (
 /obj/effect/floor_decal/corner/paleblue/three_quarters{
-	dir = 4;
-	icon_state = "corner_white_three_quarters"
+	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/airless,
@@ -877,16 +853,14 @@
 	pixel_y = -32
 	},
 /obj/effect/floor_decal/corner/red{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "db" = (
 /obj/effect/floor_decal/corner/red/three_quarters{
-	dir = 4;
-	icon_state = "corner_white_three_quarters"
+	dir = 4
 	},
 /obj/machinery/computer/modular/preset/security{
 	dir = 8;
@@ -908,8 +882,7 @@
 /area/outpost/abandoned)
 "de" = (
 /obj/structure/hygiene/shower{
-	dir = 8;
-	icon_state = "shower"
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6;
@@ -921,15 +894,13 @@
 	icon_state = "fwindow"
 	},
 /obj/machinery/atmospherics/unary/vent_pump{
-	dir = 4;
-	icon_state = "map_vent"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "dg" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	dir = 10;
-	icon_state = "spline_fancy"
+	dir = 10
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/carpet,
@@ -941,8 +912,7 @@
 /area/outpost/abandoned)
 "dl" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	dir = 6;
-	icon_state = "spline_fancy"
+	dir = 6
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/carpet,
@@ -992,8 +962,7 @@
 /area/outpost/abandoned)
 "dw" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	dir = 10;
-	icon_state = "spline_fancy"
+	dir = 10
 	},
 /obj/structure/table/woodentable,
 /obj/random/loot,
@@ -1006,8 +975,7 @@
 /area/outpost/abandoned)
 "dA" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	dir = 6;
-	icon_state = "spline_fancy"
+	dir = 6
 	},
 /obj/structure/table/woodentable,
 /turf/simulated/floor/carpet,
@@ -1037,16 +1005,14 @@
 	icon_state = "shardsmall"
 	},
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "dG" = (
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
@@ -1058,8 +1024,7 @@
 /obj/machinery/alarm{
 	dir = 4;
 	icon_state = "alarmx";
-	pixel_x = -23;
-	pixel_y = 0
+	pixel_x = -23
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
@@ -1126,8 +1091,7 @@
 /area/outpost/abandoned)
 "dU" = (
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/machinery/light/small{
 	dir = 8
@@ -1250,12 +1214,10 @@
 /area/outpost/abandoned)
 "er" = (
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/white/airless,
@@ -1270,8 +1232,7 @@
 /obj/effect/decal/cleanable/liquid_fuel,
 /obj/structure/table,
 /obj/structure/window/reinforced{
-	dir = 1;
-	icon_state = "rwindow"
+	dir = 1
 	},
 /obj/item/material/shard,
 /obj/effect/decal/cleanable/dirt,
@@ -1336,8 +1297,7 @@
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/warning/dust{
-	dir = 4;
-	icon_state = "warning_dust"
+	dir = 4
 	},
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
@@ -1380,8 +1340,7 @@
 /area/outpost/abandoned)
 "eM" = (
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/white/airless,
@@ -1389,8 +1348,7 @@
 "eO" = (
 /obj/structure/table/glass,
 /obj/structure/window/reinforced{
-	dir = 4;
-	icon_state = "rwindow"
+	dir = 4
 	},
 /obj/structure/window/reinforced,
 /obj/random/loot,
@@ -1404,8 +1362,7 @@
 /area/outpost/abandoned)
 "eQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
@@ -1413,43 +1370,37 @@
 /obj/structure/door_assembly,
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "eS" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "eT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/random/trash,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "eU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "eV" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/plating{
 	icon_state = "dmg1"
@@ -1460,8 +1411,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/liquid_fuel,
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
@@ -1471,8 +1421,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/generic,
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
@@ -1481,32 +1430,28 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/item/wrench,
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "eZ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "fa" = (
 /obj/effect/decal/cleanable/ash,
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "fb" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/red,
 /turf/simulated/floor/plating{
@@ -1574,12 +1519,10 @@
 /area/outpost/abandoned)
 "fr" = (
 /obj/structure/window/basic{
-	dir = 1;
-	icon_state = "window"
+	dir = 1
 	},
 /obj/structure/window/basic{
-	dir = 4;
-	icon_state = "window"
+	dir = 4
 	},
 /obj/structure/flora/ausbushes/brflowers,
 /turf/simulated/floor/grass,
@@ -1667,8 +1610,7 @@
 /area/outpost/abandoned)
 "fF" = (
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -1677,8 +1619,7 @@
 "fG" = (
 /obj/structure/mech_wreckage/powerloader,
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -1694,12 +1635,10 @@
 "fJ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/window/basic{
-	dir = 4;
-	icon_state = "window"
+	dir = 4
 	},
 /obj/structure/window/basic{
-	dir = 1;
-	icon_state = "window"
+	dir = 1
 	},
 /obj/structure/flora/ausbushes/stalkybush,
 /turf/simulated/floor/grass,
@@ -1716,7 +1655,6 @@
 /obj/machinery/firealarm{
 	dir = 1;
 	icon_state = "firex";
-	pixel_x = 0;
 	pixel_y = -24
 	},
 /turf/simulated/floor/tiled/airless,
@@ -1735,11 +1673,9 @@
 	d1 = 16;
 	d2 = 0;
 	dir = 4;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /obj/machinery/power/apc/high/inactive{
-	dir = 2;
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -1752,8 +1688,7 @@
 	d1 = 16;
 	d2 = 0;
 	dir = 4;
-	icon_state = "1-8";
-	pixel_y = 0
+	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
@@ -1775,7 +1710,6 @@
 /obj/machinery/firealarm{
 	dir = 1;
 	icon_state = "firex";
-	pixel_x = 0;
 	pixel_y = -24
 	},
 /turf/simulated/floor/tiled/dark,
@@ -1815,8 +1749,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/wall/titanium,
 /area/outpost/abandoned)
@@ -1835,8 +1768,7 @@
 /area/outpost/abandoned)
 "ga" = (
 /obj/structure/bed/chair{
-	dir = 8;
-	icon_state = "chair_preview"
+	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/airless,
@@ -1852,8 +1784,7 @@
 "gd" = (
 /obj/structure/windoor_assembly{
 	anchored = 1;
-	dir = 8;
-	icon_state = "l_windoor_assembly01"
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
@@ -1892,12 +1823,10 @@
 "gk" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/power/terminal{
-	dir = 1;
-	icon_state = "term"
+	dir = 1
 	},
 /obj/structure/cable/orange{
-	dir = 1;
-	icon_state = "0-1"
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
@@ -1928,16 +1857,14 @@
 /area/outpost/abandoned)
 "gp" = (
 /obj/effect/floor_decal/industrial/warning/dust{
-	dir = 9;
-	icon_state = "warning_dust"
+	dir = 9
 	},
 /obj/random/loot,
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "gq" = (
 /obj/effect/floor_decal/industrial/warning/dust{
-	dir = 5;
-	icon_state = "warning_dust"
+	dir = 5
 	},
 /obj/machinery/light/small/emergency{
 	dir = 1;
@@ -1953,8 +1880,7 @@
 /area/outpost/abandoned)
 "gs" = (
 /obj/effect/floor_decal/industrial/warning/dust{
-	dir = 8;
-	icon_state = "warning_dust"
+	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/asteroid,
@@ -2013,15 +1939,13 @@
 /area/outpost/abandoned)
 "gA" = (
 /obj/effect/floor_decal/industrial/warning/dust{
-	dir = 10;
-	icon_state = "warning_dust"
+	dir = 10
 	},
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "gB" = (
 /obj/effect/floor_decal/industrial/warning/dust{
-	dir = 6;
-	icon_state = "warning_dust"
+	dir = 6
 	},
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
@@ -2118,8 +2042,7 @@
 /area/outpost/abandoned)
 "gQ" = (
 /obj/structure/cable/orange{
-	dir = 1;
-	icon_state = "0-1"
+	dir = 1
 	},
 /obj/machinery/power/tracker,
 /turf/simulated/floor/asteroid,
@@ -2144,8 +2067,7 @@
 "gT" = (
 /obj/effect/floor_decal/solarpanel,
 /obj/structure/cable/orange{
-	dir = 8;
-	icon_state = "0-1"
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
@@ -2165,8 +2087,7 @@
 "gV" = (
 /obj/effect/floor_decal/solarpanel,
 /obj/structure/cable/orange{
-	dir = 4;
-	icon_state = "0-1"
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
@@ -2199,8 +2120,7 @@
 "gY" = (
 /obj/effect/floor_decal/solarpanel,
 /obj/structure/cable/orange{
-	dir = 4;
-	icon_state = "0-1"
+	dir = 4
 	},
 /obj/machinery/power/solar,
 /turf/simulated/floor/plating,
@@ -2249,8 +2169,7 @@
 /obj/effect/floor_decal/solarpanel,
 /obj/machinery/power/solar,
 /obj/structure/cable/orange{
-	dir = 8;
-	icon_state = "0-1"
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
@@ -2258,8 +2177,7 @@
 /obj/effect/floor_decal/solarpanel,
 /obj/machinery/power/solar,
 /obj/structure/cable/orange{
-	dir = 4;
-	icon_state = "0-1"
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
@@ -2283,8 +2201,7 @@
 /area/outpost/abandoned)
 "hk" = (
 /obj/structure/bed/chair{
-	dir = 8;
-	icon_state = "chair_preview"
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4;
@@ -2298,16 +2215,14 @@
 /area/outpost/abandoned)
 "hm" = (
 /obj/structure/bed/chair{
-	dir = 8;
-	icon_state = "chair_preview"
+	dir = 8
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "hn" = (
 /obj/effect/floor_decal/solarpanel,
 /obj/structure/cable/orange{
-	dir = 8;
-	icon_state = "0-1"
+	dir = 8
 	},
 /obj/machinery/power/solar,
 /turf/simulated/floor/plating,
@@ -2521,12 +2436,10 @@
 /area/outpost/abandoned)
 "qb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/effect/floor_decal/corner/red{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/item/ammo_casing/pistol/magnum,
@@ -2534,8 +2447,7 @@
 /area/outpost/abandoned)
 "rb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/dirt,
@@ -2547,12 +2459,10 @@
 "sb" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/effect/floor_decal/corner/red{
-	dir = 6;
-	icon_state = "corner_white"
+	dir = 6
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "mars_blast"
@@ -2562,22 +2472,19 @@
 "tb" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "ub" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/diona,
 /area/outpost/abandoned)
 "vb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/effect/decal/cleanable/vomit,
 /obj/effect/decal/cleanable/dirt,
@@ -2596,7 +2503,6 @@
 "yb" = (
 /obj/item/storage/mirror{
 	icon_state = "mirror_broke";
-	name = "mirror";
 	pixel_x = 30
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -2604,8 +2510,7 @@
 	icon_state = "warning"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
-	dir = 10;
-	icon_state = "intact"
+	dir = 10
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/small/emergency{

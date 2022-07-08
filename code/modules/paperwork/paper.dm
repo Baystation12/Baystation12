@@ -46,9 +46,9 @@
 	var/datum/language/language = LANGUAGE_HUMAN_EURO // Language the paper was written in. Editable by users up until something's actually written
 
 	var/const/deffont = "Verdana"
-	var/const/signfont = "Times New Roman"
+	var/const/signfont = "Brush Script MT"
 	var/const/crayonfont = "Comic Sans MS"
-	var/const/fancyfont = "Segoe Print"
+	var/const/fancyfont = "Garamond"
 
 	var/scan_file_type = /datum/computer_file/data/text
 
@@ -232,15 +232,15 @@
 			var/mob/living/carbon/human/H = M
 			if(H == user)
 				to_chat(user, "<span class='notice'>You wipe off the lipstick with [src].</span>")
-				H.lip_style = null
+				H.makeup_style = null
 				H.update_body()
 			else
 				user.visible_message("<span class='warning'>[user] begins to wipe [H]'s lipstick off with \the [src].</span>", \
 								 	 "<span class='notice'>You begin to wipe off [H]'s lipstick.</span>")
-				if(do_after(user, 2 SECONDS, H, do_flags = DO_DEFAULT & ~DO_BOTH_CAN_TURN))
+				if(do_after(user, 2 SECONDS, H, (DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) & ~DO_BOTH_CAN_TURN))
 					user.visible_message("<span class='notice'>[user] wipes [H]'s lipstick off with \the [src].</span>", \
 										 "<span class='notice'>You wipe off [H]'s lipstick.</span>")
-					H.lip_style = null
+					H.makeup_style = null
 					H.update_body()
 
 /obj/item/paper/proc/addtofield(var/id, var/text, var/links = 0)
@@ -327,7 +327,7 @@
 	if(iscrayon)
 		t = "<font face=\"[crayonfont]\" color=[P ? P.colour : "black"]><b>[t]</b></font>"
 	else if(isfancy)
-		t = "<font face=\"[fancyfont]\" color=[P ? P.colour : "black"]><i>[t]</i></font>"
+		t = "<font face=\"[fancyfont]\" color=[P ? P.colour : "black"]>[t]</font>"
 	else
 		t = "<font face=\"[deffont]\" color=[P ? P.colour : "black"]>[t]</font>"
 

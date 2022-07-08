@@ -1,4 +1,4 @@
-/datum/codex_category/skills/
+/datum/codex_category/skills
 	name = "Skills"
 	desc = "Certifiable skills."
 

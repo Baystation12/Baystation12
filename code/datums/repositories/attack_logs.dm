@@ -1,4 +1,4 @@
-var/repository/attack_logs/attack_log_repository = new()
+var/global/repository/attack_logs/attack_log_repository = new()
 
 /repository/attack_logs
 	var/list/attack_logs_
@@ -34,7 +34,7 @@ var/repository/attack_logs/attack_log_repository = new()
 		message = "[victim.name] [action_message]"
 
 	intent = mob_attacker ? uppertext(mob_attacker.a_intent) : "N/A"
-	zone_sel = mob_attacker.zone_sel?.selecting ? uppertext(mob_attacker.zone_sel.selecting) : "N/A"
+	zone_sel = mob_attacker?.zone_sel?.selecting ? uppertext(mob_attacker.zone_sel.selecting) : "N/A"
 
 	if(mob_attacker)
 		location = get_turf(mob_attacker)

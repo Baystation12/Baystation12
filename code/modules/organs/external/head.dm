@@ -64,7 +64,7 @@
 
 		penman.visible_message("<span class='warning'>[penman] begins writing something on [head_name]!</span>", "You begin writing something on [head_name].")
 
-		if(do_after(penman, 3 SECONDS, target))
+		if(do_after(penman, 3 SECONDS, target, DO_PUBLIC_UNIQUE))
 			if(owner && owner.check_head_coverage())
 				to_chat(penman, "<span class='notice'>[head_name] is covered up.</span>")
 				return
@@ -90,9 +90,9 @@
 	if (!(status & ORGAN_DISFIGURED))
 		if (brute_dam > 40)
 			if (prob(50))
-				disfigure("brute")
+				disfigure(INJURY_TYPE_BRUISE)
 		if (burn_dam > 40)
-			disfigure("burn")
+			disfigure(INJURY_TYPE_BURN)
 
 /obj/item/organ/external/head/on_update_icon()
 
@@ -110,8 +110,8 @@
 			var/image/eye_glow = get_eye_overlay()
 			if(eye_glow) overlays |= eye_glow
 
-		if(owner.lip_style && !BP_IS_ROBOTIC(src) && (species && (species.appearance_flags & HAS_LIPS)))
-			var/icon/lip_icon = new/icon('icons/mob/human_races/species/human/lips.dmi', "lips_[owner.lip_style]_s")
+		if(owner.makeup_style && !BP_IS_ROBOTIC(src) && (species && (species.appearance_flags & HAS_LIPS)))
+			var/icon/lip_icon = new/icon('icons/mob/human_races/species/human/lips.dmi', "lips_[owner.makeup_style]_s")
 			overlays |= lip_icon
 			mob_icon.Blend(lip_icon, ICON_OVERLAY)
 
@@ -121,19 +121,19 @@
 
 /obj/item/organ/external/head/proc/get_hair_icon()
 	var/image/res = image(species.icon_template,"")
-	if(owner.f_style)
-		var/datum/sprite_accessory/facial_hair_style = GLOB.facial_hair_styles_list[owner.f_style]
+	if(owner.facial_hair_style)
+		var/datum/sprite_accessory/facial_hair_style = GLOB.facial_hair_styles_list[owner.facial_hair_style]
 		if(facial_hair_style)
 			if(!facial_hair_style.species_allowed || (species.get_bodytype(owner) in facial_hair_style.species_allowed))
 				if(!facial_hair_style.subspecies_allowed || (species.name in facial_hair_style.subspecies_allowed))
 					var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
 					if(facial_hair_style.do_coloration & DO_COLORATION_USER)
-						facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), facial_hair_style.blend)
+						facial_s.Blend(owner.facial_hair_color, facial_hair_style.blend)
 					res.overlays |= facial_s
 
-	if (owner.h_style)
+	if (owner.head_hair_style)
 		var/icon/HI
-		var/datum/sprite_accessory/hair/H = GLOB.hair_styles_list[owner.h_style]
+		var/datum/sprite_accessory/hair/H = GLOB.hair_styles_list[owner.head_hair_style]
 		if ((owner.head?.flags_inv & BLOCKHEADHAIR) && !(H.flags & VERY_SHORT))
 			H = GLOB.hair_styles_list["Short Hair"]
 		if (H)
@@ -162,8 +162,8 @@
 		if (M.draw_target == MARKING_TARGET_HEAD)
 			var/color = markings[E]
 			var/icon/I = icon(M.icon, M.icon_state)
-			if ((M.do_coloration & DO_COLORATION_AUTO) && owner.h_style)
-				var/datum/sprite_accessory/hair/H = GLOB.hair_styles_list[owner.h_style]
+			if ((M.do_coloration & DO_COLORATION_AUTO) && owner.head_hair_style)
+				var/datum/sprite_accessory/hair/H = GLOB.hair_styles_list[owner.head_hair_style]
 				if ((~H.flags & HAIR_BALD) && (M.do_coloration & DO_COLORATION_HAIR) && length(h_col) >= 3)
 					I.MapColors(
 						1,0,0,0,
@@ -178,7 +178,7 @@
 						0,1,0,0,
 						0,0,1,0,
 						0,0,0,1,
-						(200 + s_tone) / 255, (150 + s_tone) / 255, (123 + s_tone) / 255, 0
+						(200 + skin_tone) / 255, (150 + skin_tone) / 255, (123 + skin_tone) / 255, 0
 					)
 			else
 				var/list/rgb = rgb2num(color)

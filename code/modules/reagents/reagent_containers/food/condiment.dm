@@ -15,7 +15,7 @@
 	center_of_mass = "x=16;y=6"
 	volume = 50
 	var/list/starting_reagents
-	var/global/list/special_bottles = list(
+	var/static/list/special_bottles = list(
 		/datum/reagent/nutriment/ketchup = /obj/item/reagent_containers/food/condiment/ketchup,
 		/datum/reagent/nutriment/barbecue = /obj/item/reagent_containers/food/condiment/barbecue,
 		/datum/reagent/capsaicin = /obj/item/reagent_containers/food/condiment/capsaicin,
@@ -34,22 +34,9 @@
 /obj/item/reagent_containers/food/condiment/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if(istype(W, /obj/item/pen) || istype(W, /obj/item/device/flashlight/pen))
 		var/tmp_label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
-		if(tmp_label == label_text)
-			return
-		if(length(tmp_label) > 10)
-			to_chat(user, "<span class='notice'>The label can be at most 10 characters long.</span>")
-		else
-			if(length(tmp_label))
-				to_chat(user, "<span class='notice'>You set the label to \"[tmp_label]\".</span>")
-				label_text = tmp_label
-				name = addtext(name," ([label_text])")
-			else
-				to_chat(user, "<span class='notice'>You remove the label.</span>")
-				label_text = null
-				on_reagent_change()
+		var/datum/extension/labels/L = get_or_create_extension(src, /datum/extension/labels)
+		L.AttachLabel(user, tmp_label)
 		return
-
-
 
 /obj/item/reagent_containers/food/condiment/attack_self(var/mob/user as mob)
 	return
@@ -96,20 +83,18 @@
 	var/reagent = reagents.get_master_reagent_type()
 	if(reagent in special_bottles)
 		var/obj/item/reagent_containers/food/condiment/special_bottle = special_bottles[reagent]
-		name = initial(special_bottle.name)
+		SetName(initial(special_bottle.name))
 		desc = initial(special_bottle.desc)
 		icon_state = initial(special_bottle.icon_state)
 		center_of_mass = initial(special_bottle.center_of_mass)
 	else
-		name = initial(name)
+		SetName(initial(name))
 		desc = initial(desc)
 		center_of_mass = initial(center_of_mass)
 		if(reagents.reagent_list.len > 0)
 			icon_state = "mixedcondiments"
 		else
 			icon_state = "emptycondiment"
-	if(label_text)
-		name = addtext(name," ([label_text])")
 
 /obj/item/reagent_containers/food/condiment/enzyme
 	name = "universal enzyme"

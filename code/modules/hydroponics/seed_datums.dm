@@ -613,7 +613,7 @@
 	name = "grapes"
 	seed_name = "grape"
 	display_name = "grapevines"
-	mutants = list("greengrapes")
+	mutants = list("greengrapes","whitegrapes")
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/sugar = list(1,5), /datum/reagent/drink/juice/grape = list(10,10))
 
 /datum/seed/grapes/New()
@@ -639,7 +639,7 @@
 
 /datum/seed/grapes/green/New()
 	..()
-	set_trait(TRAIT_PRODUCT_COLOUR,"42ed2f")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#42ed2f")
 
 //Everything else
 /datum/seed/peanuts
@@ -697,6 +697,29 @@
 	set_trait(TRAIT_PRODUCT_ICON,"cabbage")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#84bd82")
 	set_trait(TRAIT_PLANT_COLOUR,"#6d9c6b")
+	set_trait(TRAIT_PLANT_ICON,"vine2")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
+
+/datum/seed/lettuce
+	name = "lettuce"
+	seed_name = "lettuce"
+	display_name = "lettuce"
+	chems = list(/datum/reagent/nutriment = list(1,5), /datum/reagent/drink/juice/lettuce = list (2, 4))
+	kitchen_tag = "lettuce"
+	fruit_size = ITEM_SIZE_NORMAL
+
+/datum/seed/lettuce/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,2)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"lettuce")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#59ca42")
+	set_trait(TRAIT_PLANT_COLOUR,"#4fcb5b")
 	set_trait(TRAIT_PLANT_ICON,"vine2")
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
@@ -1228,6 +1251,12 @@
 	mutants = list("tobacco")
 	chems = list(/datum/reagent/tobacco/bad = list(1,10))
 
+/datum/seed/tobacco/bad/New()
+	..()
+	set_trait(TRAIT_PRODUCT_COLOUR,"#8c8626")
+	set_trait(TRAIT_PLANT_COLOUR,"#8c8626")
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.1)
+
 /datum/seed/algae
 	name = "algae"
 	seed_name = "algae"
@@ -1365,7 +1394,7 @@
 
 /datum/seed/grapes/white
 	name = "whitegrapes"
-	seed_name = "white grape seeds"
+	seed_name = "white grape"
 	display_name = "white grapevines"
 	mutants = list("grapes","greengrapes")
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/sugar = list(1,5), /datum/reagent/drink/juice/grape/white = list(10,10))

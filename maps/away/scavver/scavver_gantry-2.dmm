@@ -76,8 +76,7 @@
 /area/scavver/lifepod)
 "aB" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/black{
-	dir = 1;
-	icon_state = "map"
+	dir = 1
 	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
@@ -200,8 +199,7 @@
 "bX" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 10;
-	icon_state = "intact"
+	dir = 10
 	},
 /turf/space,
 /area/space)
@@ -316,8 +314,7 @@
 /area/scavver/lifepod)
 "cQ" = (
 /obj/machinery/atmospherics/pipe/cap/visible{
-	dir = 4;
-	icon_state = "cap"
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
@@ -488,14 +485,12 @@
 /area/scavver/yachtup)
 "dV" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	cycle_to_external_air = 0;
 	frequency = 1380;
 	id_tag = "scav_hab";
 	pixel_y = 26;
 	tag_airpump = "scav_hab_pump";
 	tag_chamber_sensor = "scav_hab_sensor_chamber";
 	tag_exterior_door = "scav_hab_exterior_door";
-	tag_exterior_sensor = null;
 	tag_interior_door = "scav_hab_interior_door"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -507,8 +502,7 @@
 /area/scavver/hab)
 "dX" = (
 /obj/machinery/power/terminal{
-	dir = 1;
-	icon_state = "term"
+	dir = 1
 	},
 /obj/structure/cable{
 	d2 = 8;
@@ -660,12 +654,10 @@
 /area/scavver/yachtup)
 "fL" = (
 /obj/effect/floor_decal/techfloor{
-	dir = 8;
-	icon_state = "techfloor_edges"
+	dir = 8
 	},
 /obj/effect/floor_decal/corner/brown{
-	dir = 4;
-	icon_state = "corner_white"
+	dir = 4
 	},
 /obj/machinery/computer/shuttle_control/lift/gantry,
 /turf/simulated/floor/tiled/steel_grid{
@@ -780,10 +772,8 @@
 "gr" = (
 /obj/structure/cable,
 /obj/machinery/power/apc{
-	dir = 2;
 	locked = 0;
 	name = "south bump";
-	operating = 1;
 	pixel_y = -28;
 	req_access = list()
 	},
@@ -1060,8 +1050,7 @@
 /area/scavver/harvestpod)
 "jb" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 10;
-	icon_state = "intact"
+	dir = 10
 	},
 /obj/structure/lattice,
 /turf/space,
@@ -1263,7 +1252,6 @@
 	dir = 4;
 	locked = 0;
 	pixel_x = -25;
-	pixel_y = 0;
 	req_access = list()
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -1280,8 +1268,7 @@
 	pixel_y = -24
 	},
 /obj/machinery/power/terminal{
-	dir = 1;
-	icon_state = "term"
+	dir = 1
 	},
 /obj/structure/cable{
 	d2 = 4;
@@ -1683,12 +1670,10 @@
 /area/scavver/harvestpod)
 "nI" = (
 /obj/effect/floor_decal/techfloor{
-	dir = 4;
-	icon_state = "techfloor_edges"
+	dir = 4
 	},
 /obj/effect/floor_decal/corner/brown{
-	dir = 1;
-	icon_state = "corner_white"
+	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid{
 	initial_gas = newlist()
@@ -1748,8 +1733,7 @@
 "ok" = (
 /obj/effect/decal/cleanable/liquid_fuel,
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 10;
-	icon_state = "intact"
+	dir = 10
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/scavver/yachtup)
@@ -1883,7 +1867,6 @@
 	dir = 4;
 	locked = 0;
 	pixel_x = -25;
-	pixel_y = 0;
 	req_access = list()
 	},
 /obj/effect/floor_decal/corner/lightgrey/mono,
@@ -2575,8 +2558,7 @@
 /area/scavver/hab)
 "tQ" = (
 /obj/machinery/power/terminal{
-	dir = 1;
-	icon_state = "term"
+	dir = 1
 	},
 /obj/structure/cable{
 	d2 = 4;
@@ -2587,8 +2569,7 @@
 	},
 /obj/machinery/firealarm{
 	dir = 8;
-	pixel_x = -24;
-	pixel_y = 0
+	pixel_x = -24
 	},
 /turf/simulated/floor/tiled/white/monotile{
 	initial_gas = newlist()
@@ -2766,8 +2747,7 @@
 /area/scavver/escapepod)
 "vb" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 6;
-	icon_state = "intact"
+	dir = 6
 	},
 /turf/space,
 /area/space)
@@ -2995,17 +2975,14 @@
 /area/space)
 "wE" = (
 /obj/structure/hygiene/shower{
-	dir = 4;
-	icon_state = "shower";
-	pixel_x = 0
+	dir = 4
 	},
 /obj/structure/curtain/open/shower/engineering,
 /turf/simulated/floor/tiled/freezer,
 /area/scavver/hab)
 "wF" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 6;
-	icon_state = "intact"
+	dir = 6
 	},
 /obj/structure/lattice,
 /turf/space,
@@ -3019,7 +2996,7 @@
 /obj/item/material/kitchen/utensil/spork,
 /obj/item/material/kitchen/utensil/spork,
 /obj/item/reagent_containers/food/condiment/enzyme,
-/obj/item/storage/box/donkpockets,
+/obj/random/donkpocket_box,
 /obj/item/material/kitchen/utensil/spork,
 /obj/random/loot,
 /mob/living/simple_animal/passive/mouse/brown/Tom,
@@ -3275,7 +3252,6 @@
 "zm" = (
 /obj/machinery/recharger/wallcharger{
 	dir = 8;
-	icon_state = "wrecharger0";
 	pixel_x = 23;
 	pixel_y = -3
 	},
@@ -3387,8 +3363,7 @@
 "Aw" = (
 /obj/effect/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /turf/simulated/floor/plating,
 /area/scavver/hab)
@@ -3562,22 +3537,18 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/hygiene/sink{
 	dir = 8;
-	icon_state = "sink";
-	pixel_x = -12;
-	pixel_y = 0
+	pixel_x = -12
 	},
 /obj/item/storage/mirror{
 	dir = 4;
-	pixel_x = -32;
-	pixel_y = 0
+	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/scavver/hab)
 "BT" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/manifold/visible/black{
-	dir = 8;
-	icon_state = "map"
+	dir = 8
 	},
 /turf/space,
 /area/space)
@@ -3923,13 +3894,6 @@
 /obj/item/caution/cone,
 /turf/space,
 /area/space)
-"FE" = (
-/obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 4;
-	icon_state = "intact"
-	},
-/turf/simulated/floor/airless,
-/area/scavver/yachtup)
 "FF" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/airless,
@@ -4160,7 +4124,6 @@
 	dir = 4;
 	locked = 0;
 	pixel_x = -25;
-	pixel_y = 0;
 	req_access = list()
 	},
 /turf/simulated/floor/tiled/dark,
@@ -4177,8 +4140,7 @@
 /area/scavver/gantry/up1)
 "HY" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 10;
-	icon_state = "intact"
+	dir = 10
 	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
@@ -4249,10 +4211,8 @@
 /area/scavver/lifepod)
 "IH" = (
 /obj/machinery/power/apc{
-	dir = 2;
 	locked = 0;
 	name = "south bump";
-	operating = 1;
 	pixel_y = -28;
 	req_access = list()
 	},
@@ -4335,8 +4295,7 @@
 /area/scavver/gantry/up1)
 "Jt" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 10;
-	icon_state = "intact"
+	dir = 10
 	},
 /turf/space,
 /area/space)
@@ -4347,8 +4306,7 @@
 /area/scavver/escapepod)
 "JH" = (
 /obj/effect/floor_decal/techfloor{
-	dir = 8;
-	icon_state = "techfloor_edges"
+	dir = 8
 	},
 /obj/effect/floor_decal/corner/brown,
 /turf/simulated/floor/tiled/steel_grid{
@@ -4365,7 +4323,6 @@
 /obj/item/stack/material/rods/ten,
 /obj/machinery/recharger/wallcharger{
 	dir = 8;
-	icon_state = "wrecharger0";
 	pixel_x = 23;
 	pixel_y = -3
 	},
@@ -4400,8 +4357,7 @@
 /area/scavver/lifepod)
 "Ko" = (
 /obj/structure/reagent_dispensers/water_cooler{
-	dir = 4;
-	icon_state = "water_cooler"
+	dir = 4
 	},
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
@@ -4434,7 +4390,6 @@
 	},
 /obj/machinery/recharger/wallcharger{
 	dir = 8;
-	icon_state = "wrecharger0";
 	pixel_x = 23;
 	pixel_y = -3
 	},
@@ -4478,12 +4433,10 @@
 /area/scavver/gantry/up1)
 "Lp" = (
 /obj/effect/floor_decal/techfloor{
-	dir = 4;
-	icon_state = "techfloor_edges"
+	dir = 4
 	},
 /obj/effect/floor_decal/corner/brown{
-	dir = 8;
-	icon_state = "corner_white"
+	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid{
 	initial_gas = newlist()
@@ -4538,8 +4491,7 @@
 /area/scavver/hab)
 "LL" = (
 /obj/machinery/atmospherics/portables_connector{
-	dir = 4;
-	icon_state = "map_connector"
+	dir = 4
 	},
 /obj/machinery/portable_atmospherics/canister/empty/air,
 /turf/simulated/floor/airless,
@@ -4583,8 +4535,7 @@
 /area/scavver/lifepod)
 "Mg" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 6;
-	icon_state = "intact"
+	dir = 6
 	},
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 1;
@@ -4661,7 +4612,6 @@
 /obj/effect/floor_decal/corner_steel_grid,
 /obj/structure/cable{
 	d1 = 32;
-	d2 = 1;
 	icon_state = "32-1"
 	},
 /turf/simulated/open,
@@ -4878,13 +4828,6 @@
 	initial_gas = newlist()
 	},
 /area/scavver/lifepod)
-"OT" = (
-/obj/machinery/atmospherics/portables_connector{
-	dir = 4;
-	icon_state = "map_connector"
-	},
-/turf/simulated/floor/airless,
-/area/scavver/yachtup)
 "Pc" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
@@ -5323,8 +5266,7 @@
 	dir = 5
 	},
 /obj/structure/bed/chair{
-	dir = 8;
-	icon_state = "chair_preview"
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/scavver/hab)
@@ -16486,7 +16428,7 @@ eN
 eN
 VX
 VX
-OT
+Ii
 LL
 LL
 VX
@@ -16941,7 +16883,7 @@ hv
 te
 te
 hv
-FE
+RE
 bE
 Ek
 Oj

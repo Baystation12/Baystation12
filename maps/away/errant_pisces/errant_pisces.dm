@@ -26,7 +26,7 @@
 	layer = CATWALK_LAYER//probably? Should cover cables, pipes and the rest of objects that are secured on the floor
 	var/health = 100
 
-obj/structure/net/Initialize(var/mapload)
+/obj/structure/net/Initialize(var/mapload)
 	. = ..()
 	update_connections()
 	if (!mapload)//if it's not mapped object but rather created during round, we should update visuals of adjacent net objects
@@ -54,7 +54,7 @@ obj/structure/net/Initialize(var/mapload)
 			return
 		visible_message("<span class='warning'>[user] starts to cut through \the [src] with \the [W]!</span>")
 		while (health > 0)
-			if (!do_after(user, 20, src))
+			if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 				visible_message("<span class='warning'>[user] stops cutting through \the [src] with \the [W]!</span>")
 				return
 			health -= 20 * (1 + (SH.force-10)/10)//the sharper the faster, every point of force above 10 adds 10 % to damage
@@ -64,7 +64,7 @@ obj/structure/net/Initialize(var/mapload)
 
 /obj/structure/net/bullet_act(obj/item/projectile/P)
 	. = PROJECTILE_CONTINUE //few cloth ribbons won't stop bullet or energy ray
-	if(P.damage_type != BURN)//beams, lasers, fire. Bullets won't make a lot of damage to the few hanging belts.
+	if (P.damage_type != DAMAGE_BURN)//beams, lasers, fire. Bullets won't make a lot of damage to the few hanging belts.
 		return
 	visible_message("<span class='warning'>\The [P] hits \the [src] and tears it!</span>")
 	health -= P.damage
@@ -161,7 +161,7 @@ obj/structure/net/Initialize(var/mapload)
 	if (amount < 1)
 		qdel(src)
 
-/obj/item/clothing/under/carp//as far as I know sprites are taken from /tg/
+/obj/item/clothing/under/carp
 	name = "space carp suit"
 	desc = "A suit in a shape of a space carp. Usually worn by corporate interns who are sent to entertain children during HQ excursions."
 	icon_state = "carp_suit"

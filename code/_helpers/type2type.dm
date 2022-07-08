@@ -110,7 +110,7 @@
 	if (rights & R_XENO)		. += "[seperator]+XENOMODERATOR"	//INF
 	return .
 
-// heat2color functions. Adapted from: http://www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code/
+// heat2color functions. Adapted from: http://www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code
 /proc/heat2color(temp)
 	return rgb(heat2color_r(temp), heat2color_g(temp), heat2color_b(temp))
 

@@ -23,17 +23,17 @@
 		if ("pockets")
 			if (stripping)
 				visible_message(SPAN_DANGER("\The [user] is trying to empty [src]'s pockets!"))
-				if (do_after(user, strip_delay, src, do_flags = DO_DEFAULT | DO_PUBLIC_PROGRESS))
+				if (do_after(user, strip_delay, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 					empty_pockets(user)
 			else
 				visible_message(SPAN_DANGER("\The [user] is trying to stuff \a [held] into \the [src]'s pocket!"))
-				if (do_after(user, strip_delay, src, do_flags = DO_DEFAULT | DO_PUBLIC_PROGRESS))
+				if (do_after(user, strip_delay, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 					place_in_pockets(held, user)
 			return
 
 		if ("sensors")
 			visible_message(SPAN_DANGER("\The [user] is trying to set \the [src]'s sensors!"))
-			if (do_after(user, strip_delay, src, do_flags = DO_DEFAULT | DO_PUBLIC_PROGRESS))
+			if (do_after(user, strip_delay, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				toggle_sensors(user)
 			return
 
@@ -42,7 +42,7 @@
 				return
 			var/obj/item/clothing/under/subject_uniform = w_uniform
 			visible_message(SPAN_DANGER("\The [user] is trying to [subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? "un" : ""]lock \the [src]'s sensors!"), range = 3)
-			if (do_after(user, strip_delay, src, do_flags = DO_DEFAULT | DO_PUBLIC_PROGRESS))
+			if (do_after(user, strip_delay, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				if (subject_uniform != w_uniform)
 					to_chat(user, SPAN_WARNING("\The [src] is not wearing \the [subject_uniform] anymore."))
 					return
@@ -59,7 +59,7 @@
 
 		if ("internals")
 			visible_message(SPAN_DANGER("\The [usr] is trying to set \the [src]'s internals!"))
-			if (do_after(user, strip_delay, src, do_flags = DO_DEFAULT | DO_PUBLIC_PROGRESS))
+			if (do_after(user, strip_delay, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				toggle_internals(user)
 			return
 
@@ -75,7 +75,7 @@
 			if (isnull(A))
 				return
 			visible_message(SPAN_DANGER("\The [user] starts trying to remove \the [src]'s [A.name]!"))
-			if (!do_after(user, strip_delay, src, do_flags = DO_DEFAULT | DO_PUBLIC_PROGRESS))
+			if (!do_after(user, strip_delay, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				return
 			if (!A || holder.loc != src || !(A in holder.accessories))
 				return
@@ -107,7 +107,7 @@
 	else
 		visible_message(SPAN_DANGER("\The [user] is trying to put \a [held] on \the [src]!"))
 
-	if (!do_after(user, strip_delay, src))
+	if (!do_after(user, strip_delay, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return
 
 	if (stripping)

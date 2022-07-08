@@ -123,7 +123,7 @@
 	min_broken_damage = Floor(0.75 * max_damage)
 	min_bruised_damage = Floor(0.25 * max_damage)
 
-obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
+/obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 	take_internal_damage(amount, silent)
 
 /obj/item/organ/internal/proc/take_internal_damage(amount, var/silent=0)
@@ -192,9 +192,8 @@ obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 	if(!BP_IS_ROBOTIC(src))
 		return
 	switch (severity)
-		if (1)
+		if (EMP_ACT_HEAVY)
 			take_internal_damage(16)
-		if (2)
+		if (EMP_ACT_LIGHT)
 			take_internal_damage(9)
-		if (3)
-			take_internal_damage(6.5)
+	..()

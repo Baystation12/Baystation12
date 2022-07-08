@@ -144,12 +144,12 @@
 		update_icons()
 		if(F.flooring)
 			visible_message("<span class='warning'>[src] begins to tear the floor tile from the floor.</span>")
-			if(do_after(src, 50, F))
+			if(do_after(src, 5 SECONDS, F, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				F.break_tile_to_plating()
 				addTiles(1)
 		else
 			visible_message("<span class='danger'>[src] begins to tear through the floor!</span>")
-			if(do_after(src, 150, F)) // Extra time because this can and will kill.
+			if(do_after(src, 15 SECONDS, F, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)) // Extra time because this can and will kill.
 				F.ReplaceWithLattice()
 				addTiles(1)
 		target = null
@@ -161,7 +161,7 @@
 			update_icons()
 			visible_message("<span class='notice'>[src] begins to remove the broken floor.</span>")
 			anchored = TRUE
-			if(do_after(src, 50, F))
+			if(do_after(src, 5 SECONDS, F, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				if(F.broken || F.burnt)
 					F.make_plating()
 			anchored = FALSE
@@ -173,7 +173,7 @@
 			update_icons()
 			visible_message("<span class='notice'>[src] begins to improve the floor.</span>")
 			anchored = TRUE
-			if(do_after(src, 50, F))
+			if(do_after(src, 5 SECONDS, F, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				if(!F.flooring)
 					F.set_flooring(decls_repository.get_decl(floor_build_type))
 					addTiles(-1)
@@ -186,7 +186,7 @@
 		busy = 1
 		update_icons()
 		anchored = TRUE
-		if(do_after(src, 20))
+		if(do_after(src, 2 SECONDS, T, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 			if(T)
 				var/eaten = min(maxAmount - amount, T.get_amount())
 				T.use(eaten)
@@ -201,7 +201,7 @@
 			busy = 1
 			anchored = TRUE
 			update_icons()
-			if(do_after(src, 50))
+			if(do_after(src, 5 SECONDS, M, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				if(M)
 					M.use(1)
 					addTiles(4)
@@ -220,7 +220,7 @@
 	var/list/shrapnel = list()
 
 	for(var/I = 3, I<3 , I++) //Toolbox shatters.
-		shrapnel += new /obj/item/material/shard/shrapnel(Tsec)
+		shrapnel += new /obj/item/material/shard/shrapnel/steel(Tsec)
 
 	for(var/Amt = amount, Amt>0, Amt--) //Why not just spit them out in a disorganized jumble?
 		shrapnel += new /obj/item/stack/tile/floor(Tsec)

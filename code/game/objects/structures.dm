@@ -21,7 +21,7 @@
 		return 1
 	visible_message("<span class='danger'>\The [user] [attack_verb] \the [src]!</span>")
 	attack_animation(user)
-	damage_health(damage, BRUTE)
+	damage_health(damage, DAMAGE_BRUTE)
 	return 1
 
 /obj/structure/proc/mob_breakout(var/mob/living/escapee)
@@ -88,19 +88,25 @@
 		return TRUE
 	if (G.assailant.a_intent == I_HURT)
 		// Slam their face against the table.
-		var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, BRUTE, damage = 8)
+		var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, DAMAGE_BRUTE, damage = 8)
 		if (prob(30 * (1 - blocked)))
 			G.affecting.Weaken(5)
-		G.affecting.apply_damage(8, BRUTE, BP_HEAD)
+		G.affecting.apply_damage(8, DAMAGE_BRUTE, BP_HEAD)
 		visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
 		if (material)
 			playsound(loc, material.tableslam_noise, 50, 1)
 		else
 			playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
-		damage_health(rand(1, 5), BRUTE)
+		damage_health(rand(1, 5), DAMAGE_BRUTE)
 		qdel(G)
 	else if(atom_flags & ATOM_FLAG_CLIMBABLE)
 		var/obj/occupied = turf_is_crowded()
+		if (occupied)
+			to_chat(G.assailant, "<span class='danger'>There's \a [occupied] in the way.</span>")
+			return TRUE
+		if (!do_after(G.assailant, 3 SECONDS, G.affecting, DO_PUBLIC_UNIQUE))
+			return TRUE
+		occupied = turf_is_crowded()
 		if (occupied)
 			to_chat(G.assailant, "<span class='danger'>There's \a [occupied] in the way.</span>")
 			return TRUE

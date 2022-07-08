@@ -85,7 +85,7 @@
 	var/seal_delay = SEAL_DELAY
 	var/sealing                                               // Keeps track of seal status independantly of canremove.
 	var/offline = 1                                           // Should we be applying suit maluses?
-	var/online_slowdown = 0                                   // If the suit is deployed and powered, it sets slowdown to this.
+	var/online_slowdown = 1                                   // If the suit is deployed and powered, it sets slowdown to this.
 	var/offline_slowdown = 3                                  // If the suit is deployed and unpowered, it sets slowdown to this.
 	var/vision_restriction = TINT_NONE
 	var/offline_vision_restriction = TINT_HEAVY               // tint value given to helmet
@@ -100,6 +100,54 @@
 	var/datum/effect/effect/system/spark_spread/spark_system
 
 	var/banned_modules = list()
+
+/obj/item/rig/get_mechanics_info()
+	. = ..()
+	. += {"
+		<p>A Hardsuit Control Module, or HCM, is a large device that goes into your backpack slot and can be deployed into a full powered hardsuit.</p>
+		<p>HCM oxygen tanks must be refilled like a normal void suit's tank.</p>
+		<p>HCM power cells must be recharged.</p>
+		<p>HCMs and their components are susceptible to damage from EMPs.</p>
+		<p>HCMs rely on an internal power cell to function, and will de-activate themselves if the power cell fully drains. Using modules increases the speed at which the HCM's cell drains.</p>
+
+		<h4>ACTIVATION</h4>
+		<p>To deploy and activate an HCM, follow these steps:</p>
+		<ol>
+			<li>Put the HCM onto your backpack slot. This is a timed action that will require you to remain still while you put it on.</li>
+			<li>Ensure you are not wearing anything on your head, suit, or glove slots, and ensure you are not wearing any magboots. These items will block the HCM from fully deploying.</li>
+			<li>Use the <code>toggle-hardsuit</code> verb in the chat bar, the <code>Toggle Hardsuit</code> option under the <code>Hardsuit</code> tab in the upper right, or the <code>Toggle</code> button next to the Suit status in the Hardsuit Interface. This is a timed action that will require you to remain still until all components of the suit are deployed and sealed.</li>
+			<li>Monitor your chat log - You'll know it's done when you see bold blue text stating the suit tightens around you.</li>
+		</ol>
+
+		<h4>DE-ACTIVATION</h4>
+		<p>You can de-activate the HCM so you can take it off by following these steps:</p>
+		<ol>
+			<li>Use the <code>toggle-hardsuit</code> verb in the chat bar, the <code>Toggle Hardsuit</code> option under the <code>Hardsuit</code> tab in the upper right, or the <code>Toggle</code> button next to the Suit status in the Hardsuit Interface. This is a timed action that will require you to remain still until all components of the suit are retracted and unsealed.</li>
+			<li>Monitor your chat log - You'll know it's done when you see bold blue text stating the suit loosens around you.</li>
+			<li>Click on the HCM with an empty hand to remove it from your back.</li>
+		</ol>
+
+		<h4>TOOL INTERACTIONS</h4>
+		<ul>
+			<li>You can toggle the HCM's access panel lock by using an ID card with the required access on it.</li>
+			<li>You can open or close the HCM's maintenance panel by using a crowbar on it. The panel can only be opened if the HCM's access panel is unlocked.</li>
+			<li>You can remove modules or the oxygen tank by using a wrench on the HCM. You can only do this if the maintenance panel is open.</li>
+			<li>You can insert modules, power cells, oxygen tanks by using them on the HCM while its maintenance panel is open.</li>
+			<li>You can repair the HCM's internals by using nanopaste on it while the maintenance panel is open.</li>
+			<li>You can open or close the HCM's wire panel by using a screwdriver on it. This operates as a standard wire control panel, interactable with a multitool, wirecutters, signallers, etc. once open.</li>
+			<li>You can repair damage to the HCM's chest piece by using a stack of the relevant material or a welder on the HCM or the chest piece while the chest piece is deployed.</li>
+		</ul>
+
+		<h4>HARDSUIT INTERFACE</h4>
+		<p>The HCM's Hardsuit Interface can be accessed by using the <code>Open Hardsuit Interface</code> option under the <code>Hardsuit</code> tab in the top right, or using the <code>open-hardsuit-interface`</code>verb in the chat bar.</p>
+		<ul>
+			<li><b>Power Supply</b> tells you how much charge is remaining in the HCM's power cell.</li>
+			<li><b>AI Control</b> displays and allows you to toggle an inserted pAI or AI intellicard's ability to control movement (CURRENTLY BROKEN, DO NOT USE).</li>
+			<li><b>Cover Status</b> displays and allows you to toggle the HCM's access panel lock.</li>
+			<li><b>Suit Pieces</b> displays the name and status of the major components of the hardsuit, and allows you to toggle the helmet on or off.</li>
+			<li>Additional HCM modules and their controls are displayed in the HCM's interface as well.</li>
+		</ul>
+	"}
 
 /obj/item/rig/get_cell()
 	return cell
@@ -149,18 +197,15 @@
 		air_supply = new air_type(src)
 	if(glove_type)
 		gloves = new glove_type(src)
-		verbs |= /obj/item/rig/proc/toggle_gauntlets
 	if(helm_type)
 		helmet = new helm_type(src)
 		verbs |= /obj/item/rig/proc/toggle_helmet
 	if(boot_type)
 		boots = new boot_type(src)
-		verbs |= /obj/item/rig/proc/toggle_boots
 	if(chest_type)
 		chest = new chest_type(src)
 		if(allowed)
 			chest.allowed = allowed
-		verbs |= /obj/item/rig/proc/toggle_chest
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
 		if(!istype(piece))
@@ -678,7 +723,7 @@
 		"<span class='info'>[M] starts putting on \the [src]...</span>", \
 		"<span class='info'>You start putting on \the [src]...</span>")
 
-		if(!do_after(M,seal_delay,src))
+		if(!do_after(M, seal_delay, src, DO_PUBLIC_UNIQUE))
 			if(M && M.back == src)
 				if(!M.unEquip(src))
 					return
@@ -825,6 +870,7 @@
 
 	//possibly damage some modules
 	take_hit((100/severity_class), "electrical pulse", 1)
+	..()
 
 /obj/item/rig/proc/shock(mob/user)
 	if (electrocute_mob(user, cell, src)) //electrocute_mob() handles removing charge from the cell, no need to do that here.

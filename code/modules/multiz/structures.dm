@@ -117,7 +117,7 @@
 
 	target_ladder.audible_message("<span class='notice'>You hear something coming [direction] \the [src]</span>")
 
-	if(do_after(M, climb_time, src))
+	if(do_after(M, climb_time, src, DO_PUBLIC_UNIQUE))
 		climbLadder(M, target_ladder, I)
 		for (var/obj/item/grab/G in M)
 			G.adjust_position(force = 1)

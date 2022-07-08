@@ -43,7 +43,7 @@
 			user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [M]'s suit!"))
 		else
 			to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
-		if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M))
+		if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
 			return
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
@@ -51,7 +51,7 @@
 
 	if(user != M && !M.incapacitated() && time) // you're injecting someone else who is concious, so apply the device's intrisic delay
 		to_chat(user, SPAN_WARNING("\The [user] is trying to inject \the [M] with \the [name]."))
-		if(!user.do_skilled(time, SKILL_MEDICAL, M))
+		if(!user.do_skilled(time, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
 			return
 
 	if(single_use && reagents.total_volume <= 0) // currently only applies to autoinjectors
@@ -117,7 +117,7 @@
 /obj/item/reagent_containers/hypospray/vial/attackby(obj/item/W, mob/user)
 	var/usermessage = ""
 	if(istype(W, /obj/item/reagent_containers/glass/beaker/vial))
-		if(!do_after(user,10) || !(W in user))
+		if(!do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE) || !(W in user))
 			return 0
 		if(!user.unEquip(W, src))
 			return
@@ -239,6 +239,23 @@
 	name = "autoinjector"
 	band_color = COLOR_DARK_GRAY
 	starts_with = list(/datum/reagent/mindbreaker = 5)
+
+/obj/item/reagent_containers/hypospray/autoinjector/combatstim
+	name ="autoinjector (combat Stimulants)"
+	band_color = COLOR_RED
+	volume = 15
+	amount_per_transfer_from_this = 15
+	starts_with = list(/datum/reagent/inaprovaline = 10, /datum/reagent/hyperzine = 3, /datum/reagent/synaptizine = 1)
+
+/obj/item/reagent_containers/hypospray/autoinjector/coagulant
+	name ="autoinjector (coagulant)"
+	band_color = COLOR_RED
+	starts_with = list(/datum/reagent/coagulant = 1, /datum/reagent/nanoblood = 4)
+
+/obj/item/reagent_containers/hypospray/autoinjector/dexalin_plus
+	name ="autoinjector (dexalin plus)"
+	band_color = COLOR_BLUE
+	starts_with = list(/datum/reagent/dexalinp = 5)
 
 /obj/item/reagent_containers/hypospray/autoinjector/empty
 	name = "autoinjector"

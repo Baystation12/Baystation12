@@ -78,7 +78,7 @@
 
 	user.visible_message("<span class='danger'>\The [user] is attempting to put [cuff_type] on \the [H]!</span>")
 
-	if(!do_after(user,30, target))
+	if(!do_after(user, 3 SECONDS, target, DO_EQUIP | DO_TARGET_UNIQUE_ACT))
 		return 0
 
 	if(!target.has_danger_grab(user)) // victim may have resisted out of the grab in the meantime
@@ -103,7 +103,7 @@
 	target.equip_to_slot(cuffs,slot_handcuffed)
 	return 1
 
-var/last_chew = 0
+var/global/last_chew = 0
 /mob/living/carbon/human/RestrainedClickOn(var/atom/A)
 	if (A != src) return ..()
 	if (last_chew + 26 > world.time) return
@@ -121,7 +121,7 @@ var/last_chew = 0
 	H.visible_message("<span class='warning'>\The [H] chews on \his [O.name]!</span>", "<span class='warning'>You chew on your [O.name]!</span>")
 	admin_attacker_log(H, "chewed on their [O.name]!")
 
-	O.take_external_damage(3,0, DAM_SHARP|DAM_EDGE ,"teeth marks")
+	O.take_external_damage(3,0, DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE ,"teeth marks")
 
 	last_chew = world.time
 

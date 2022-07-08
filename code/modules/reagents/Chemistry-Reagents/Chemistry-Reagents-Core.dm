@@ -114,7 +114,7 @@
 	var/datum/gas_mixture/environment = T.return_air()
 	var/min_temperature = T20C + rand(0, 20) // Room temperature + some variance. An actual diminishing return would be better, but this is *like* that. In a way. . This has the potential for weird behavior, but I says fuck it. Water grenades for everyone.
 
-	var/hotspot = (locate(/obj/fire) in T)
+	var/hotspot = (locate(/obj/hotspot) in T)
 	if(hotspot && !istype(T, /turf/space))
 		var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles)
 		lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)
@@ -137,6 +137,11 @@
 		var/obj/item/reagent_containers/food/snacks/monkeycube/cube = O
 		if(!cube.wrapped)
 			cube.Expand()
+	if(istype(O, /obj/effect/turf_fire))
+		var/obj/effect/turf_fire/TF = O
+		TF.AddPower(-volume)
+		if(TF.fire_power <= 0)
+			qdel(TF)
 
 /datum/reagent/water/touch_mob(var/mob/living/L, var/amount)
 	var/mob/living/carbon/human/H = L
@@ -210,6 +215,7 @@
 	glass_name = "welder fuel"
 	glass_desc = "Unless you are an industrial tool, this is probably not safe for consumption."
 	value = 6.8
+	accelerant_quality = 10
 
 /datum/reagent/fuel/touch_turf(var/turf/T)
 	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)

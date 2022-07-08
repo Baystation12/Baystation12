@@ -16,10 +16,10 @@ PROCESSING_SUBSYSTEM_DEF(circuit)
 	var/list/circuit_fabricator_recipe_list = list() // Associative list of [category_name]:[list_of_circuit_paths] pairs
 	var/cost_multiplier = SHEET_MATERIAL_AMOUNT / 10 // Each circuit cost unit is 200cm3
 
-/datum/controller/subsystem/processing/circuit/Initialize()
+/datum/controller/subsystem/processing/circuit/Initialize(start_uptime)
 	SScircuit.cipherkey = generateRandomString(2000+rand(0,10))
 	circuits_init()
-	. = ..()
+
 
 /datum/controller/subsystem/processing/circuit/proc/circuits_init()
 	//Cached lists for free performance

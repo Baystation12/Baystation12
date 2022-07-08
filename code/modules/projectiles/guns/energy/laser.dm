@@ -140,7 +140,7 @@
 	one_hand_penalty = 5 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 	slot_flags = SLOT_BACK
 	charge_cost = 40
-	max_shots = 4
+	max_shots = 8
 	fire_delay = 35
 	force = 10
 	w_class = ITEM_SIZE_HUGE

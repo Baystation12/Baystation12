@@ -28,7 +28,7 @@
 
 // pipe is deleted
 // ensure if holder is present, it is expelled
-obj/structure/disposalpipe/Destroy()
+/obj/structure/disposalpipe/Destroy()
 	var/obj/structure/disposalholder/H = locate() in src
 	if(H)
 		// holder was present
@@ -194,9 +194,8 @@ obj/structure/disposalpipe/Destroy()
 	spawn(2)	// delete pipe after 2 ticks to ensure expel proc finished
 		qdel(src)
 
-/obj/structure/disposalpipe/handle_death_change(new_death_state)
-	if (new_death_state)
-		broken(prob(0.5))
+/obj/structure/disposalpipe/on_death()
+	broken(prob(0.5))
 
 //attack by item
 //weldingtool: unfasten and convert to obj/disposalconstruct

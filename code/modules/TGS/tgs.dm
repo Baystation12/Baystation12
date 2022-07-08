@@ -352,7 +352,7 @@
 
 var/global/client_count = 0
 
-hook/startup/proc/InitTgs()
+/hook/startup/proc/InitTgs()
 	world.TgsNew()
 	return TRUE
 

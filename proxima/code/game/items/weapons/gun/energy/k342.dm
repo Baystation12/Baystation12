@@ -4,7 +4,7 @@
 	fire_sound='proxima/sound/weapons/guns/incinerate.ogg'
 	armor_penetration = 25
 	damage = 33
-	damage_type = BURN
+	damage_type = DAMAGE_BURN
 	step_delay = 0.5
 
 	muzzle_type = /obj/effect/projectile/plasma/muzzle

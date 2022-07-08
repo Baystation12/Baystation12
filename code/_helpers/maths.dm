@@ -6,6 +6,10 @@
 #define RAD_TO_DEG 57.2957795
 
 
+/// The mathematical constant pi to f32 precision
+#define PI 3.141592
+
+
 /// A random real number between low and high inclusive
 #define Frand(low, high) ( rand() * ((high) - (low)) + (low) )
 
@@ -120,6 +124,71 @@
 /proc/VecMag(...)
 	var/squareMag = VecSquareMag(arglist(args))
 	return sqrt(squareMag)
+
+
+/// Returns a random real from an arbitrary XdY dice roll
+/proc/Drand(x, y, normalize)
+	var/sum = 0
+	for (var/i = 1 to x)
+		sum += Floor(rand() * y)
+	if (normalize)
+		return sum / ((x * y) - x)
+	return sum + x
+
+
+/// An aproximate, fairly granular random normal real number in 0..1
+#define Nrand Drand(4, 6, TRUE)
+
+
+/// A circular random coordinate pair from 0, unit by default, scaled by radius, then rounded if round.
+/proc/CircularRandomCoordinate(radius = 1, round)
+	var/angle = rand(0, 359)
+	var/x = cos(angle) * radius
+	var/y = sin(angle) * radius
+	if (round)
+		x = Round(x)
+		y = Round(y)
+	return list(x, y)
+
+
+/**
+* A circular random coordinate with radius on center_x, center_y,
+* reflected into low_x,low_y -> high_x,high_y, clamped in low,high,
+* and rounded if round is set
+*
+* Generally this proc is useful for placement around a point (eg a
+* player) that must stay within map boundaries, or some similar circle
+* in box constraint
+*
+* A "donut" pattern can be achieved by varying the number supplied as
+* radius outside the scope of the proc, eg as BoundedCircularRandomCoordinate(Frand(1, 3), ...)
+*/
+/proc/BoundedCircularRandomCoordinate(radius, center_x, center_y, low_x, low_y, high_x, high_y, round)
+	var/list/xy = CircularRandomCoordinate(radius, round)
+	var/dx = xy[1]
+	var/dy = xy[2]
+	var/x = center_x + dx
+	var/y = center_y + dy
+	if (x < low_x || x > high_x)
+		x = center_x - dx
+	if (y < low_y || y > high_y)
+		y = center_y - dy
+	return list(
+		clamp(x, low_x, high_x),
+		clamp(y, low_y, high_y)
+	)
+
+
+/// Pick a random turf using BoundedCircularRandomCoordinate about x,y on level z
+/proc/CircularRandomTurf(radius, z, center_x, center_y, low_x = 1, low_y = 1, high_x = world.maxx, high_y = world.maxy)
+	var/list/xy = BoundedCircularRandomCoordinate(radius, center_x, center_y, low_x, low_y, high_x, high_y, TRUE)
+	return locate(xy[1], xy[2], z)
+
+
+/// Pick a random turf using BoundedCircularRandomCoordinate around the turf of target
+/proc/CircularRandomTurfAround(atom/target, radius, low_x = 1, low_y = 1, high_x = world.maxx, high_y = world.maxy)
+	var/turf/turf = get_turf(target)
+	return CircularRandomTurf(radius, turf.z, turf.x, turf.y, low_x, low_y, high_x, high_y)
 
 
 /// Returns the angle of the matrix according to atan2 on the b, a parts

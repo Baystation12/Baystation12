@@ -45,7 +45,7 @@
 	if(state_path == /decl/machine_construction/default/deconstructed)
 		to_chat(user, "You begin prying out the circuit board other components...")
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-		if(do_after(user,60, src))
+		if(do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "You finish prying out the components.")
 			return
 		return MCS_BLOCK

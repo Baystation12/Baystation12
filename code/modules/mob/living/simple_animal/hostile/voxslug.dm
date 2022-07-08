@@ -54,7 +54,7 @@ Small, little HP, poisonous.
 /mob/living/simple_animal/hostile/voxslug/proc/attach(var/mob/living/carbon/human/H)
 	var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
 	if(istype(S) && !length(S.breaches))
-		S.create_breaches(BRUTE, 20)
+		S.create_breaches(DAMAGE_BRUTE, 20)
 		if(!length(S.breaches)) //unable to make a hole
 			return
 	var/obj/item/organ/external/chest = H.organs_by_name[BP_CHEST]
@@ -78,7 +78,7 @@ Small, little HP, poisonous.
 	var/mob/living/simple_animal/hostile/voxslug/V = contents[1]
 	if(!V.stat && istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = target
-		if(!do_after(user, 3 SECONDS, H))
+		if(!do_after(user, 3 SECONDS, H, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 			return
 		V.attach(H)
 		qdel(src)

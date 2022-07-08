@@ -14,8 +14,6 @@
 #define END_GAME_AWAITING_TICKETS 6
 #define END_GAME_DELAYED          7
 
-#define BE_PLANT "BE_PLANT"
-#define BE_SYNTH "BE_SYNTH"
 #define BE_PAI   "BE_PAI"
 
 // Antagonist datum flags.
@@ -49,8 +47,6 @@
 #define MODE_REVOLUTIONARY "revolutionary"
 #define MODE_MALFUNCTION   "malf"
 #define MODE_TRAITOR       "traitor"
-#define MODE_DEITY         "deity"
-#define MODE_GODCULTIST    "god cultist"
 #define MODE_THRALL        "mind thrall"
 #define MODE_PARAMOUNT     "paramount"
 #define MODE_FOUNDATION    "foundation agent"

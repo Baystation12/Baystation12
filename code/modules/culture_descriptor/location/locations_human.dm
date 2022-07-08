@@ -227,3 +227,27 @@
 	capital = "Labortown"
 	economic_power = 0.8
 	ruling_body = "Magnitka"
+
+/decl/cultural_info/location/human/castilla
+	name = HOME_SYSTEM_CASTILLA
+	distance = "10 light years"
+	description = "Nueva Castilla is an exoplanet in the Culebre system, currently \
+	in the late stages of terraforming. Formerly a barren rock, it was chosen for future \
+	colonization because of its size, core composition and location in the Culebre system's \
+	'goldilocks zone'. Since the project began, Nueva Castilla has developed a functional, if \
+	decidedly unique biosphere where much of the planet is covered in a fast growing moss. \
+	There are two major human settlements, and a number of smaller ones both planetside and in-system."
+	capital = "Placida"
+	economic_power = 1.0
+
+/decl/cultural_info/location/human/fosters
+	name = HOME_SYSTEM_FOSTER
+	distance = "11 light years"
+	description = "Foster's World, located in the Sanura system, is a small, icy exoplanet with \
+	a planetary mass slightly lower than Earth. A highly active core caused the formation of \
+	several small oceans with wide and temperate coastlines, the only reason the planet sports a \
+	breathable atmosphere at all. The planet and system are owned by a privately-funded \
+	cooperative. The colonists who brave the planet have flourished in spite of the planet's \
+	hostile weather, exporting seafood and hosting tourists eager to experience the alien planet."
+	capital = "Foster's Landing"
+	economic_power = 1.2

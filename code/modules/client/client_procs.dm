@@ -145,6 +145,11 @@
 			qdel(src)
 			return
 
+	for (var/datum/ticket/T in tickets)
+		if (T.status == TICKET_OPEN && T.owner.ckey == ckey)
+			message_staff("[key_name_admin(src)] has joined the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admin_ckeys())]" : SPAN_DANGER("Unassigned.")]")
+			break
+
 	// Change the way they should download resources.
 	if(config.resource_urls && config.resource_urls.len)
 		src.preload_rsc = pick(config.resource_urls)
@@ -219,6 +224,10 @@
 
 
 /client/Destroy()
+	for (var/datum/ticket/T in tickets)
+		if (T.status == TICKET_OPEN && T.owner.ckey == ckey)
+			message_staff("[key_name_admin(src)] has left the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admin_ckeys())]" : SPAN_DANGER("Unassigned.")]")
+			break
 	if (holder)
 		holder.owner = null
 		GLOB.admins -= src
@@ -380,17 +389,17 @@
 	getFilesSlow(src, asset_cache.cache, register_asset = FALSE)
 
 
-mob/proc/MayRespawn()
+/mob/proc/MayRespawn()
 	return 0
 
-client/proc/MayRespawn()
+/client/proc/MayRespawn()
 	if(mob)
 		return mob.MayRespawn()
 
 	// Something went wrong, client is usually kicked or transfered to a new mob at this point
 	return 0
 
-client/verb/character_setup()
+/client/verb/character_setup()
 	set name = "Character Setup"
 	set category = "OOC"
 	if(prefs)

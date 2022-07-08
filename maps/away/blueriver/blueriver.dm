@@ -2,9 +2,8 @@
 #include "blueriver_areas.dm"
 /obj/effect/overmap/visitable/sector/arcticplanet
 	name = "arctic planetoid"
-	desc = "Sensor array detects an arctic planet with a small vessle on the planet's surface. Scans further indicate strange energy levels below the planet's surface."
-	in_space = 0
-	known = 1
+	desc = "Sensor array detects an arctic planet with a small vessel on the planet's surface. Scans further indicate strange energy emissions from below the planet's surface."
+	in_space = FALSE
 	icon_state = "globe"
 	initial_generic_waypoints = list(
 		"nav_blueriv_1",
@@ -21,7 +20,7 @@
 	name = "Bluespace River"
 	id = "awaysite_blue"
 	spawn_cost = 2
-	description = "Two z-level map with an arctic planet and an alien underground surface"
+	description = "An arctic planet and an alien underground surface"
 	suffixes = list("blueriver/blueriver-1.dmm", "blueriver/blueriver-2.dmm")
 	generate_mining_by_z = 2
 	area_usage_test_exempted_root_areas = list(/area/bluespaceriver)
@@ -197,10 +196,9 @@
 		)
 	damage_health(W.force, W.damtype)
 
-/obj/structure/deity/handle_death_change(new_death_state)
-	if (new_death_state)
-		visible_message(SPAN_DANGER("\The [src] crumbles!"))
-		qdel(src)
+/obj/structure/deity/on_death()
+	visible_message(SPAN_DANGER("\The [src] crumbles!"))
+	qdel(src)
 
 /obj/structure/deity/bullet_act(var/obj/item/projectile/P)
 	damage_health(P.get_structure_damage(), P.damage_type)

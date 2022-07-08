@@ -71,7 +71,7 @@
 			if (LIGHT_STAGE_EMPTY)
 				playsound(loc, 'sound/items/Ratchet.ogg', 50, TRUE)
 				to_chat(user, SPAN_NOTICE("You begin deconstructing \the [src]."))
-				if (!user.do_skilled(30, SKILL_CONSTRUCTION, src))
+				if (!user.do_skilled(3 SECONDS, SKILL_CONSTRUCTION, src))
 					return
 				new /obj/item/stack/material/steel( get_turf(loc), sheets_refunded )
 				user.visible_message(
@@ -285,7 +285,7 @@
 			_state = "[base_state]_broken"
 			on = FALSE
 
-	if(istype(lightbulb, /obj/item/light/))
+	if(istype(lightbulb, /obj/item/light))
 		var/image/I = image(icon, src, _state)
 		I.color = get_mode_color()
 		if (on)
@@ -544,7 +544,7 @@
 		else if(user.a_intent != I_HELP)
 			var/obj/item/organ/external/hand = H.organs_by_name[user.hand ? BP_L_HAND : BP_R_HAND]
 			if(hand && hand.is_usable() && !hand.can_feel_pain())
-				user.apply_damage(3, BURN, user.hand ? BP_L_HAND : BP_R_HAND, used_weapon = src)
+				user.apply_damage(3, DAMAGE_BURN, user.hand ? BP_L_HAND : BP_R_HAND, used_weapon = src)
 				user.visible_message(
 					SPAN_WARNING("\The [user]'s [hand] burns and sizzles as \he touches the hot [get_fitting_name()]."),
 					SPAN_WARNING("Your [hand.name] burns and sizzles as you remove the hot [get_fitting_name()].")
@@ -590,13 +590,13 @@
 // destroy the whole light fixture or just shatter it
 /obj/machinery/light/ex_act(severity)
 	switch(severity)
-		if(1)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
 			return
-		if(2)
+		if(EX_ACT_HEAVY)
 			if (prob(75))
 				broken()
-		if(3)
+		if(EX_ACT_LIGHT)
 			if (prob(50))
 				broken()
 

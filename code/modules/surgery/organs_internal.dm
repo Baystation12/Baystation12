@@ -76,7 +76,7 @@
 	else
 		dam_amt = 5
 		target.adjustToxLoss(10)
-		affected.take_external_damage(dam_amt, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+		affected.take_external_damage(dam_amt, 0, (DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE), used_weapon = tool)
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
 		if(I && I.damage > 0 && !BP_IS_ROBOTIC(I) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 			I.take_internal_damage(dam_amt)
@@ -128,7 +128,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, slicing an artery inside [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, slicing an artery inside [target]'s [affected.name] with \the [tool]!</span>")
-	affected.take_external_damage(rand(30,50), 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+	affected.take_external_damage(rand(30,50), 0, (DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE), used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
 //	 Organ removal surgery step
@@ -371,6 +371,14 @@
 		I.status &= ~ORGAN_CUT_AWAY //apply fixovein
 		affected.implants -= I
 		I.replaced(target, affected)
+
+	if(istype(I, /obj/item/organ/internal/eyes))
+		var/obj/item/organ/internal/eyes/E = I
+		if(!E.is_broken())
+			I.owner.eye_blind = 0
+			target.disabilities &= ~BLINDED
+		if(!E.is_bruised())
+			I.owner.eye_blurry = 0
 
 /decl/surgery_step/internal/attach_organ/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
