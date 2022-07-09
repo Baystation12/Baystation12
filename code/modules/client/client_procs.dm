@@ -126,14 +126,14 @@
 		to_chat(src, "You are attempting to connect with a out of date version of BYOND. Please update to the latest version at http://www.byond.com/ before trying again.\
 		Your version is [byond_version].[byond_build]")
 		//qdel(src)
-		return
+		//return
 
 	if("[byond_version].[byond_build]" in config.forbidden_versions)
 		_DB_staffwarn_record(ckey, "Tried to connect with broken and possibly exploitable BYOND build.")
 		to_chat(src, "You are attempting to connect with a broken and possibly exploitable BYOND build. Please update to the latest version at http://www.byond.com/ before trying again.\
 		Your version is [byond_version].[byond_build]")
 		//qdel(src)
-		return
+		//return
 
 	if(!config.guests_allowed && IsGuestKey(key))
 		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
