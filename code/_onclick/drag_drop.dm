@@ -25,4 +25,7 @@
 
 // Receive a mouse drop
 /atom/proc/MouseDrop_T(atom/dropping, mob/user)
+	// Mitigation for some user's mouses click+dragging for a split second when clicking on moving sprites.
+	if (src == dropping && user.canClick())
+		user.ClickOn(src)
 	return
