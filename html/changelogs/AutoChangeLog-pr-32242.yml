@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fixed wall turfs sometimes being left behind after shuttles took off from
-      planets.
