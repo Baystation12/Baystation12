@@ -528,49 +528,49 @@
 /datum/design/item/mechfab/augment/armblade
 	name = "Armblade"
 	build_path = /obj/item/organ/internal/augment/active/item/armblade
-	materials = list(DEFAULT_WALL_MATERIAL = 4000, "glass" = 750)
+	materials = list(MATERIAL_STEEL = 4000, MATERIAL_GLASS = 750)
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 2, TECH_MATERIAL = 4, TECH_BIO = 3)
 	id = "augment_blade"
 
 /datum/design/item/mechfab/augment/armblade/wolverine
 	name = "Cyberclaws"
 	build_path = /obj/item/organ/internal/augment/active/item/wolverine
-	materials = list(DEFAULT_WALL_MATERIAL = 6000, "diamond" = 250)
+	materials = list(MATERIAL_STEEL = 6000, MATERIAL_DIAMOND = 250)
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4, TECH_MATERIAL = 4, TECH_BIO = 3)
 	id = "augment_wolverine"
 
 /datum/design/item/mechfab/augment/armblade/wrist_blade
 	name = "Wrist blade"
 	build_path = /obj/item/organ/internal/augment/active/item/wrist_blade
-	materials = list(MATERIAL_TITANIUM = 4000, MATERIAL_DIAMOND = 250)
+	materials = list(MATERIAL_SILVER = 4000, MATERIAL_DIAMOND = 250)
 	req_tech = list(TECH_ESOTERIC = 4, TECH_COMBAT = 5, TECH_BIO = 3)
 	id = "augment_wristblade"
 
 /datum/design/item/mechfab/augment/powerfist
 	name = "Pneumatic Powerfist"
 	build_path = /obj/item/organ/internal/augment/active/item/powerfist
-	materials = list(DEFAULT_WALL_MATERIAL = 6000, MATERIAL_PHORON = 1000, MATERIAL_URANIUM = 500)
+	materials = list(MATERIAL_STEEL = 6000, MATERIAL_PHORON = 1000, MATERIAL_URANIUM = 500)
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4, TECH_MATERIAL = 4, TECH_BIO = 3)
 	id = "augment_powerfist"
 
 /datum/design/item/mechfab/augment/armblade/popout_shotgun
 	name = "Pop-out shotgun"
 	build_path = /obj/item/organ/internal/augment/active/item/popout_shotgun
-	materials = list(DEFAULT_WALL_MATERIAL = 5000, MATERIAL_SILVER = 500)
+	materials = list(MATERIAL_STEEL = 5000, MATERIAL_SILVER = 500)
 	req_tech = list(TECH_ESOTERIC = 5, TECH_COMBAT = 6, TECH_BIO = 4)
 	id = "augment_popout_shotgun"
 
 /datum/design/item/mechfab/augment/corrective_lenses
 	name = "Corrective lenses"
 	build_path = /obj/item/organ/internal/augment/active/item/corrective_lenses
-	materials = list(DEFAULT_WALL_MATERIAL = 500, MATERIAL_GLASS = 1000)
+	materials = list(MATERIAL_STEEL = 500, MATERIAL_GLASS = 1000)
 	req_tech = list(TECH_MATERIAL = 2)
 	id = "augment_corrective_lenses"
 
 /datum/design/item/mechfab/augment/glare_dampeners
 	name = "Glare dampeners"
 	build_path = /obj/item/organ/internal/augment/active/item/glare_dampeners
-	materials = list(DEFAULT_WALL_MATERIAL = 100, MATERIAL_GLASS = 2000)
+	materials = list(MATERIAL_STEEL = 100, MATERIAL_GLASS = 2000)
 	req_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
 	id = "augment_glare_dampeners"
 
@@ -585,101 +585,101 @@
 /datum/design/item/mechfab/augment/iatric_monitor
 	name = "Iatric monitor"
 	build_path = /obj/item/organ/internal/augment/active/iatric_monitor
-	materials = list(DEFAULT_WALL_MATERIAL = 100, MATERIAL_GLASS = 2000)
+	materials = list(MATERIAL_STEEL = 100, MATERIAL_GLASS = 2000)
 	req_tech = list(TECH_BIO = 3)
 	id = "augment_iatric_monitor"
 
 /datum/design/item/mechfab/augment/internal_air_system
 	name = "Internal air system"
 	build_path = /obj/item/organ/internal/augment/active/internal_air_system
-	materials = list(DEFAULT_WALL_MATERIAL = 500, MATERIAL_GLASS = 2000, MATERIAL_DIAMOND = 100)
+	materials = list(MATERIAL_STEEL = 500, MATERIAL_GLASS = 2000, MATERIAL_URANIUM = 100)
 	req_tech = list(TECH_MATERIAL = 5, TECH_BIO = 5)
 	id = "augment_internal_air_system"
 
 /datum/design/item/mechfab/augment/leukocyte_breeder
 	name = "Leukocyte breeder"
 	build_path = /obj/item/organ/internal/augment/active/leukocyte_breeder
-	materials = list(DEFAULT_WALL_MATERIAL = 2000, MATERIAL_GLASS = 1000)
+	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 1000)
 	req_tech = list(TECH_MAGNET = 4, TECH_DATA = 4, TECH_BIO = 6)
 	id = "augment_leukocyte_breeder"
 
 /datum/design/item/mechfab/augment/engineering
 	name = "Engineering toolset"
 	build_path = /obj/item/organ/internal/augment/active/polytool/engineer
-	materials = list(DEFAULT_WALL_MATERIAL = 3000, "glass" = 1000)
+	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 1000)
 	id = "augment_toolset_engineering"
 
 /datum/design/item/mechfab/augment/surgery
 	name = "Surgical toolset"
 	build_path = /obj/item/organ/internal/augment/active/polytool/surgical
-	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 2000)
+	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 2000)
 	id = "augment_toolset_surgery"
 
 /datum/design/item/mechfab/augment/reflex
 	name = "Synapse interceptors"
 	build_path = /obj/item/organ/internal/augment/boost/reflex
-	materials = list(DEFAULT_WALL_MATERIAL = 750, "glass" = 750, "silver" = 100)
+	materials = list(MATERIAL_STEEL = 750, MATERIAL_GLASS = 750, MATERIAL_SILVER = 100)
 	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 4, TECH_BIO = 4, TECH_MAGNET = 5)
 	id = "augment_booster_reflex"
 
 /datum/design/item/mechfab/augment/shooting
 	name = "Gunnery booster"
 	build_path = /obj/item/organ/internal/augment/boost/shooting
-	materials = list(DEFAULT_WALL_MATERIAL = 750, "glass" = 750, "silver" = 100)
+	materials = list(MATERIAL_STEEL = 750, MATERIAL_GLASS = 750, MATERIAL_SILVER = 100)
 	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 5, TECH_BIO = 4)
 	id = "augment_booster_gunnery"
 
 /datum/design/item/mechfab/augment/muscle
 	name = "Mechanical muscles"
 	build_path = /obj/item/organ/internal/augment/boost/muscle
-	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 1000)
+	materials = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 1000)
 	id = "augment_booster_muscles"
 
 /datum/design/item/mechfab/augment/armor
 	name = "Subdermal armor"
 	build_path = /obj/item/organ/internal/augment/armor
-	materials = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 750)
+	materials = list(MATERIAL_STEEL = 10000, MATERIAL_GLASS = 750)
 	id = "augment_armor"
 
 /datum/design/item/mechfab/augment/hud/health
 	name = "Implantable health HUD"
 	build_path = /obj/item/organ/internal/augment/active/hud/health
-	materials = list(DEFAULT_WALL_MATERIAL = 250, "glass" = 250)
+	materials = list(MATERIAL_STEEL = 250, MATERIAL_GLASS = 250)
 	req_tech = list(TECH_BIO = 2, TECH_MAGNET = 3)
 	id = "augment_med_hud"
 
 /datum/design/item/mechfab/augment/hud/security
 	name = "Implantable security HUD"
 	build_path = /obj/item/organ/internal/augment/active/hud/security
-	materials = list(DEFAULT_WALL_MATERIAL = 250, "glass" = 250)
+	materials = list(MATERIAL_STEEL = 250, MATERIAL_GLASS = 250)
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 2)
 	id = "augment_sec_hud"
 
 /datum/design/item/mechfab/augment/hud/janitor
 	name = "Implantable filth HUD"
 	build_path = /obj/item/organ/internal/augment/active/hud/janitor
-	materials = list(DEFAULT_WALL_MATERIAL = 250, "glass" = 250)
+	materials = list(MATERIAL_STEEL = 250, MATERIAL_GLASS = 250)
 	req_tech = list(TECH_BIO = 1, TECH_MAGNET = 3)
 	id= "augment_jani_hud"
 
 /datum/design/item/mechfab/augment/hud/science
 	name = "Implantable science HUD"
 	build_path = /obj/item/organ/internal/augment/active/hud/science
-	materials = list(DEFAULT_WALL_MATERIAL = 250, "glass" = 250)
+	materials = list(MATERIAL_STEEL = 250, MATERIAL_GLASS = 250)
 	req_tech = list(TECH_BIO = 1, TECH_MAGNET = 3)
 	id= "augment_sci_hud"
 
 /datum/design/item/mechfab/augment/nanounit
 	name = "Nanite MCU"
 	build_path = /obj/item/organ/internal/augment/active/nanounit
-	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 1000, "gold" = 100, "uranium" = 500)
+	materials = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 1000, MATERIAL_GOLD = 100, MATERIAL_URANIUM = 500)
 	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 5, TECH_BIO = 5, TECH_ENGINEERING = 5)
 	id = "augment_nanounit"
 
 /datum/design/item/mechfab/augment/circuit
 	name = "Integrated circuit frame"
 	build_path = /obj/item/organ/internal/augment/active/item/circuit
-	materials = list(DEFAULT_WALL_MATERIAL = 3000)
+	materials = list(MATERIAL_STEEL = 3000)
 	id = "augment_circuitry"
 
 //BigRigs
@@ -687,7 +687,7 @@
 	category = "Hardsuits"
 	name = "Null suit control module"
 	build_path = /obj/item/rig/zero
-	materials = list(DEFAULT_WALL_MATERIAL = 30000, "glass" = 5000, "silver" = 1000)
+	materials = list(MATERIAL_STEEL = 30000, MATERIAL_GLASS = 5000, MATERIAL_SILVER = 1000)
 	id = "null _suit"
 	time = 120
 
