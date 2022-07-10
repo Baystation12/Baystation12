@@ -1,6 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: It should now be a lot easier to trigger click actions on moving sprites
-      or while you yourself are moving. This will be most noticeable in combat. Report
-      any weirdness with click or click+drag interactions.
