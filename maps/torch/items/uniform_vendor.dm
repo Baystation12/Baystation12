@@ -205,13 +205,21 @@
 	if(selected_outfit.len > 1)
 		var/obj/item/clothingbag/bag = new /obj/item/clothingbag
 		for(var/item in selected_outfit)
-			new item(bag)
+			spawn_uniform_component(item, bag)
 			checkedout += item
 		bag.dropInto(loc)
 	else if (selected_outfit.len)
-		var/obj/item/clothing/C = selected_outfit[1]
-		new C(get_turf(src))
-		checkedout += C
+		var/item = selected_outfit[1]
+		spawn_uniform_component(item, get_turf(src))
+		checkedout += item
+
+/// Handles spawning an individual uniform component and attaching ranks, if applicable.
+/obj/machinery/uniform_vendor/proc/spawn_uniform_component(component_path, atom/loc)
+	var/obj/item/clothing/new_component = new component_path(loc)
+	if (!ID || !LAZYLEN(ID.military_rank.accessory) || !(ACCESSORY_SLOT_RANK in new_component.valid_accessory_slots))
+		return
+	for (var/path in ID.military_rank.accessory)
+		new_component.attach_accessory(null, new path(new_component))
 
 /obj/machinery/uniform_vendor/proc/user_id()
 	if(!ID)
