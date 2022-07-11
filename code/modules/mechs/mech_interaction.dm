@@ -468,8 +468,7 @@
 
 /mob/living/exosuit/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes into")
 	if(..())
-		playsound(loc, 'sound/effects/metal_close.ogg', 40, 1)
-		playsound(loc, 'sound/weapons/tablehit1.ogg', 40, 1)
+		playsound(loc, arms.mech_punch_sound, 40, 1)
 
 /mob/living/exosuit/proc/attack_self(var/mob/user)
 	return visible_message("\The [src] pokes itself.")

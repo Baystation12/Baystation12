@@ -367,14 +367,14 @@
 /obj/item/toy/prize/attack_self(mob/user as mob)
 	if(cooldown < world.time - 8)
 		to_chat(user, "<span class='notice'>You play with [src].</span>")
-		playsound(user, 'sound/mecha/mechstep.ogg', 20, 1)
+		playsound(user, 'sound/mecha/mechstep01.ogg', 20, 1)
 		cooldown = world.time
 
 /obj/item/toy/prize/attack_hand(mob/user as mob)
 	if(loc == user)
 		if(cooldown < world.time - 8)
 			to_chat(user, "<span class='notice'>You play with [src].</span>")
-			playsound(user, 'sound/mecha/mechturn.ogg', 20, 1)
+			playsound(user, 'sound/mecha/mechmove01.ogg', 20, 1)
 			cooldown = world.time
 			return
 	..()

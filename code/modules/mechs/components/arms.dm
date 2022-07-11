@@ -10,6 +10,8 @@
 	power_use = 10
 	w_class = ITEM_SIZE_LARGE
 
+	var/mech_punch_sound = 'sound/weapons/pushhiss.ogg'
+
 /obj/item/mech_component/manipulators/Destroy()
 	QDEL_NULL(motivator)
 	. = ..()
@@ -59,12 +61,13 @@
 	name = "light arms"
 	exosuit_desc_string = "lightweight, segmented manipulators"
 	icon_state = "light_arms"
-	melee_damage = 5
-	action_delay = 15
+	melee_damage = 10
+	action_delay = 10
 	max_damage = 40
 	power_use = 10
 	desc = "As flexible as they are fragile, these Vey-Med manipulators can follow a pilot's movements in close to real time."
 
+	mech_punch_sound = 'sound/items/Crowbar.ogg'
 
 /obj/item/mech_component/manipulators/heavy
 	name = "heavy arms"
@@ -72,14 +75,17 @@
 	icon_state = "heavy_arms"
 	desc = "Designed to function where any other piece of equipment would have long fallen apart, the Hephaestus Superheavy Lifter series can take a beating and excel at delivering it."
 	melee_damage = 25
-	action_delay = 15
 	max_damage = 90
 	power_use = 60
+
+	mech_punch_sound = 'sound/effects/bang.ogg'
 
 /obj/item/mech_component/manipulators/combat
 	name = "combat arms"
 	exosuit_desc_string = "flexible, advanced manipulators"
 	icon_state = "combat_arms"
-	melee_damage = 5
+	melee_damage = 20
 	action_delay = 10
 	power_use = 50
+
+	mech_punch_sound = 'sound/effects/bamf.ogg'
