@@ -1,0 +1,7 @@
+author: SomeAngryMiner
+delete-after: true
+changes:
+  - rscadd: wrist blade recipe on exosuit fabricators has been fixed. It now requires
+      silver.
+  - rscadd: the internal airtank on exosuit fabricators now requires uranium, instead
+      of diamond.
