@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Autoinjector color bands now serve as a 'window' showing the color of the
+      reagent inside. Just like syringes. Except those special autoinjectors in pouches
+      that have snowflake colors. Rely on the labels for those.
