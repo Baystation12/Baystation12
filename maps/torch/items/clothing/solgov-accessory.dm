@@ -663,7 +663,7 @@ ranks - fleet
 /obj/item/clothing/accessory/solgov/rank/fleet
 	name = "naval ranks"
 	desc = "Insignia denoting naval rank of some kind. These appear blank."
-	icon_state = "fleetrank_e1"
+	icon_state = "fleetrank"
 	on_rolled = list("down" = "none")
 
 /obj/item/clothing/accessory/solgov/rank/fleet/enlisted
