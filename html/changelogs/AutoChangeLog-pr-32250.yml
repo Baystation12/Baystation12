@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Failing to craft something in the holodeck no longer displays a message
+      to everyone.
