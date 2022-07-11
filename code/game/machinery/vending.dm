@@ -990,7 +990,7 @@
 	density = FALSE //It is wall-mounted, and thus, not dense. --Superxpdude
 	base_type = /obj/machinery/vending/wallmed2
 	products = list(
-		/obj/item/reagent_containers/hypospray/autoinjector = 5,
+		/obj/item/reagent_containers/hypospray/autoinjector/inaprovaline = 5,
 		/obj/item/stack/medical/bruise_pack = 4,
 		/obj/item/stack/medical/ointment = 4,
 		/obj/item/storage/med_pouch/trauma,

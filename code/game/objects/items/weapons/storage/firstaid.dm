@@ -398,7 +398,7 @@
 	max_w_class = ITEM_SIZE_SMALL
 	startswith = list(
 	/obj/item/clothing/gloves/latex/nitrile,
-	/obj/item/reagent_containers/hypospray/autoinjector,
+	/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline,
 	/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/deletrathol,
 	/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/dexalin,
 	/obj/item/stack/medical/bruise_pack
