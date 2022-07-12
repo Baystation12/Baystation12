@@ -2,7 +2,7 @@
 	name = "master xenoarch pickaxe"
 	desc = "A miniature excavation tool for precise digging."
 	icon = 'icons/obj/xenoarchaeology.dmi'
-	item_state = "screwdriver_brown"
+	item_state = "xenoarch_pick"
 	force = 3
 	throwforce = 0
 	attack_verb = list("stabbed", "jabbed", "spiked", "attacked")
@@ -15,7 +15,7 @@
 
 /obj/item/pickaxe/xeno/examine(mob/user)
 	. = ..()
-	to_chat(user, "This tool has a [excavation_amount] centimetre excavation depth.")
+	to_chat(user, "This tool has a [excavation_amount] centimeter excavation depth.")
 
 /obj/item/pickaxe/xeno/brush
 	name = "wire brush"
@@ -23,7 +23,7 @@
 	slot_flags = SLOT_EARS
 	force = 1
 	attack_verb = list("prodded", "attacked")
-	desc = "A wood-handled brush with thick metallic wires for clearing away dust and loose scree."
+	desc = "A polymer-handled brush with thick metallic wires for clearing away dust and loose scree."
 	excavation_amount = 1
 	drill_sound = 'sound/weapons/thudswoosh.ogg'
 	drill_verb = "brushing"
@@ -67,7 +67,7 @@
 /obj/item/pickaxe/xeno/hand
 	name = "hand pickaxe"
 	icon_state = "pick_hand"
-	item_state = "sword0"
+	item_state = "pickaxe"
 	digspeed = 30
 	desc = "A smaller, more precise version of the pickaxe."
 	excavation_amount = 30
@@ -79,6 +79,88 @@
 	throwforce = 3
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Adjustable drills from research work
+
+/obj/item/pickaxe/xeno/drill
+	name = "excavation drill"
+	icon_state = "pick_drill1"
+	item_state = "xenoarch_device"
+	digspeed = 15
+	desc = "A miniature excavation tool for precise digging, equipped with an adjustable drill tip. Not recommended for dental work."
+	excavation_amount = 1
+	drill_sound = 'sound/items/jaws_pry.ogg'
+	drill_verb = "carefully drilling"
+	origin_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 5)
+	matter = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 700, MATERIAL_ALUMINIUM = 250)
+	w_class = ITEM_SIZE_NORMAL
+	force = 12
+	throwforce = 6
+	var/max_depth = 15
+
+/obj/item/pickaxe/xeno/drill/attack_self(mob/user)
+	var/depth = round(input("Input the desired depth.", "Set Depth", excavation_amount) as num | null)
+	if (isnull(depth))
+		return
+	if(depth>max_depth || depth<1)
+		to_chat(user, SPAN_WARNING("Invalid depth, input a number from 1 to [max_depth]."))
+		return
+	excavation_amount = depth
+	to_chat(user, SPAN_NOTICE("You set the depth to [depth]cm."))
+	playsound(loc, 'sound/items/Screwdriver.ogg', 40)
+	update_icon()
+
+/obj/item/pickaxe/xeno/drill/on_update_icon()
+	if (excavation_amount <6)
+		icon_state = "pick_drill1"
+	else if (excavation_amount >=6 && excavation_amount <11)
+		icon_state = "pick_drill2"
+	else
+		icon_state = "pick_drill3"
+
+/obj/item/pickaxe/xeno/drill/examine(mob/user)
+	. = ..()
+	to_chat(user, SPAN_NOTICE("This tool can have its excavation depth adjusted up to [max_depth]cm."))
+
+/obj/item/pickaxe/xeno/drill/plasma
+	name = "excavation plasma torch"
+	icon_state = "pick_cutter1"
+	item_state = "xenoarch_device"
+	digspeed = 5
+	desc = "A phoron fueled, high emission plasma emitter the size of a small handgun with its own laser cleaning protocols. Perfect for excavations, or cutting limbs off really small xenos."
+	excavation_amount = 1
+	drill_sound = 'sound/weapons/plasma_cutter.ogg'
+	drill_verb = "carefully cutting"
+	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 4, TECH_ENGINEERING = 6, TECH_BLUESPACE = 2)
+	matter = list(MATERIAL_STEEL = 1800, MATERIAL_GLASS = 1000, MATERIAL_ALUMINIUM = 500)
+	w_class = ITEM_SIZE_NORMAL
+	force = 12
+	throwforce = 6
+	max_depth = 50
+	sharp = FALSE
+
+/obj/item/pickaxe/xeno/drill/plasma/attack_self(mob/user)
+	var/depth = round(input("Input the desired depth.", "Set Depth", excavation_amount) as num | null)
+	if(depth>max_depth || depth<1)
+		to_chat(user, SPAN_WARNING("Invalid depth, input a number from 1 to [max_depth]."))
+		return
+	excavation_amount = depth
+	to_chat(user, SPAN_NOTICE("You set the depth to [depth]cm."))
+	playsound(loc, 'sound/weapons/armbomb.ogg', 40)
+	update_icon()
+
+/obj/item/pickaxe/xeno/drill/plasma/on_update_icon()
+	if (excavation_amount <11)
+		icon_state = "pick_cutter1"
+	else if (excavation_amount >=11 && excavation_amount <21)
+		icon_state = "pick_cutter2"
+	else if (excavation_amount >=21 && excavation_amount <31)
+		icon_state = "pick_cutter3"
+	else if (excavation_amount >=31 && excavation_amount <41)
+		icon_state = "pick_cutter4"
+	else
+		icon_state = "pick_cutter5"
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Pack for holding pickaxes
 
 /obj/item/storage/excavation
@@ -86,7 +168,9 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "excavation"
 	item_state = "utility"
-	desc = "A rugged case containing a set of standardized picks used in archaeological digs."
+	desc = "A rugged metal case containing a set of standardized picks used in archaeological digs."
+	origin_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 2)
+	matter = list(MATERIAL_STEEL = 700)
 	item_state = "syringe_kit"
 	storage_slots = 7
 	slot_flags = SLOT_BELT
