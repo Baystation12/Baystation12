@@ -2946,7 +2946,6 @@
 "jY" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/mining{
-	id_tag = "hangarexit";
 	name = "Hangar Catwalk Access"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -14836,7 +14835,6 @@
 "Wo" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/mining{
-	id_tag = "hangarexit";
 	name = "Hangar Catwalk Access"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
