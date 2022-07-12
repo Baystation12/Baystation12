@@ -34,8 +34,8 @@
 	name = "\improper Alden-Saraspova counter"
 	desc = "A device which aids in triangulation of exotic particles."
 	icon = 'icons/obj/xenoarchaeology.dmi'
-	icon_state = "flashgun"
-	item_state = "lampgreen"
+	icon_state = "alden"
+	item_state = "analyzer"
 	origin_tech = list(TECH_BLUESPACE = 3, TECH_MAGNET = 3)
 	matter = list(MATERIAL_STEEL = 5000, MATERIAL_ALUMINIUM = 5000, MATERIAL_GLASS = 5000)
 	w_class = ITEM_SIZE_SMALL
@@ -77,20 +77,21 @@
 				GLOB.xeno_digsite_turfs -= T
 
 		if(nearestTargetDist >= 0)
-			to_chat(user, "Exotic energy detected on wavelength '[nearestTargetId]' in a radius of [nearestTargetDist]m[nearestSimpleTargetDist > 0 ? "; small anomaly detected in a radius of [nearestSimpleTargetDist]m" : ""]")
+			to_chat(user, SPAN_NOTICE("Exotic energy detected on wavelength '[nearestTargetId]' in a radius of [nearestTargetDist]m[nearestSimpleTargetDist > 0 ? "; small anomaly detected in a radius of [nearestSimpleTargetDist]m" : ""]"))
 		else if(nearestSimpleTargetDist >= 0)
-			to_chat(user, "Small anomaly detected in a radius of [nearestSimpleTargetDist]m.")
+			to_chat(user, SPAN_NOTICE("Small anomaly detected in a radius of [nearestSimpleTargetDist]m."))
 		else
-			to_chat(user, "Background radiation levels detected.")
+			to_chat(user, SPAN_NOTICE("Background radiation levels detected."))
+		playsound(loc, 'sound/machines/boop2.ogg', 40)
 	else
-		to_chat(user, "Scanning array is recharging.")
+		to_chat(user, SPAN_NOTICE("Scanning array is recharging."))
 
 /obj/item/device/depth_scanner
 	name = "depth analysis scanner"
 	desc = "A device used to check spatial depth and density of rock outcroppings."
-	icon = 'icons/obj/pda.dmi'
-	icon_state = "crap"
-	item_state = "analyzer"
+	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon_state = "depth"
+	item_state = "xenoarch_device"
 	origin_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2, TECH_BLUESPACE = 2)
 	matter = list(MATERIAL_STEEL = 1000, MATERIAL_GLASS = 500, MATERIAL_ALUMINIUM = 150)
 	w_class = ITEM_SIZE_SMALL
@@ -131,6 +132,7 @@
 			positive_locations.Add(D)
 
 			to_chat(user, "<span class='notice'>[icon2html(src, user)] [src] pings.</span>")
+			playsound(loc, 'sound/machines/twobeep.ogg', 40)
 
 	else if(istype(A, /obj/structure/boulder))
 		var/obj/structure/boulder/B = A
@@ -149,6 +151,7 @@
 			positive_locations.Add(D)
 
 			to_chat(user, "<span class='notice'>[icon2html(src, user)] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>")
+			playsound(loc, 'sound/machines/triple_beep.ogg', 40)
 
 	updateSelfDialog()
 
