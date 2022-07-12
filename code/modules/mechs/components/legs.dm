@@ -8,6 +8,9 @@
 	power_use = 50
 	var/max_fall_damage = 30
 
+	var/mech_turn_sound = 'sound/mecha/mechmove01.ogg'
+	var/mech_step_sound = 'sound/mecha/mechstep01.ogg'
+
 /obj/item/mech_component/propulsion/Destroy()
 	QDEL_NULL(motivator)
 	. = ..()
@@ -71,6 +74,8 @@
 	turn_delay = 4
 	power_use = 10
 
+	mech_step_sound = 'sound/mecha/mechstep03.ogg'
+
 /obj/item/mech_component/propulsion/light
 	name = "light legs"
 	exosuit_desc_string = "flexible electromechanic legs"
@@ -81,6 +86,9 @@
 	power_use = 5
 	desc = "These Odysseus series legs are built from lightweight flexible polymers, making them capable of handling falls from up to 120 meters in 1g environments. Provided that the exosuit lands on its feet."
 	max_fall_damage = 0
+
+	mech_turn_sound = 'sound/mecha/mechmove02.ogg'
+	mech_step_sound = 'sound/mecha/mechstep02.ogg'
 
 /obj/item/mech_component/propulsion/light/handle_vehicle_fall()
 	..()
@@ -96,6 +104,8 @@
 	turn_delay = 1
 	power_use = 25
 
+	mech_turn_sound = 'sound/mecha/mechmove03.ogg'
+
 /obj/item/mech_component/propulsion/tracks
 	name = "tracks"
 	exosuit_desc_string = "armored tracks"
@@ -105,6 +115,9 @@
 	move_delay = 2 //It´s fast
 	turn_delay = 7
 	power_use = 150
+
+	mech_turn_sound = 'sound/mecha/mechstep03.ogg' //Now, i know what you're thinking, but it works.
+	mech_step_sound = 'sound/machines/engine.ogg'
 
 /obj/item/mech_component/propulsion/heavy
 	name = "heavy legs"
@@ -116,6 +129,9 @@
 	max_damage = 160
 	power_use = 100
 
+	mech_turn_sound = 'sound/mecha/mechmove01.ogg'
+	mech_step_sound = 'sound/mecha/mechstep03.ogg'
+
 /obj/item/mech_component/propulsion/combat
 	name = "combat legs"
 	exosuit_desc_string = "sleek hydraulic legs"
@@ -123,3 +139,6 @@
 	move_delay = 3
 	turn_delay = 3
 	power_use = 20
+
+	mech_turn_sound = 'sound/mecha/mechmove03.ogg'
+	mech_step_sound = 'sound/mecha/mechstep03.ogg'

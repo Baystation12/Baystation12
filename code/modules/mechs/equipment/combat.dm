@@ -280,7 +280,7 @@
 				for (var/mob/living/M in orange(1, E))
 					attack(M, E, E.zone_sel.selecting, FALSE)
 				E.spin(0.65 SECONDS, 0.125 SECONDS)
-				playsound(E, 'sound/mecha/mechturn.ogg', 40, 1)
+				playsound(E, 'sound/weapons/blade1.ogg', 40, 1)
 
 /obj/item/mech_equipment/mounted_system/melee/mechete
 	icon_state = "mech_blade"
