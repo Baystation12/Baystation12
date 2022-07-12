@@ -120,6 +120,9 @@ var/global/explosion_in_progress = 0
 	if(is_below_sound_pressure(src))
 		. *= 3
 
+/turf/simulated/wall/get_explosion_resistance()
+	return 5 // Standardized health results in explosion_resistance being used to reduce overall damage taken, instead of changing explosion severity. 5 was the original default, so 5 is always returned here.
+
 /turf/simulated/floor/explosion_resistance = 1
 
 /turf/simulated/mineral/explosion_resistance = 2
