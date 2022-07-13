@@ -1,6 +1,0 @@
-author: AzlanonPC
-delete-after: true
-changes:
-  - rscadd: Science can now print advanced xenoarchaeology drills.
-  - rscadd: Suspension generators have received new sprites, states and sounds
-  - rscadd: Xenoarchaeology tools have received a sprite pass.
