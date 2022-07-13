@@ -1,0 +1,5 @@
+author: Green Macready
+delete-after: true
+changes:
+  - bugfix: The west hangar exit button no longer opens the east catwalk doors on
+      deck 4.
