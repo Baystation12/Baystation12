@@ -2,6 +2,7 @@
 	name = "Asteroid Mining Station"
 	desc = "A small mining station. No active lifesigns found on the station. Sensors indicate an abundance of valuable ore."
 	icon_state = "object"
+	place_near_main = list(1, 1)
 	initial_generic_waypoints = list(
 		"nav_mininghome_1",
 		"nav_mininghome_2",
@@ -15,6 +16,7 @@
 	description = "A chill asteroid mining station."
 	suffixes = list("mininghome/mininghome.dmm")
 	spawn_cost = 0.5
+	template_flags = TEMPLATE_FLAG_SPAWN_GUARANTEED
 
 /obj/effect/shuttle_landmark/nav_mininghome_1
 	name = "Navpoint #1"
