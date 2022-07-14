@@ -16,6 +16,7 @@
 	var/list/uniforms = list()
 	var/list/selected_outfit = list()
 	var/static/list/issued_items = list()
+	var/decl/hierarchy/mil_uniform/user_outfit
 
 /obj/machinery/uniform_vendor/on_update_icon()
 	if(stat & BROKEN)
@@ -67,6 +68,7 @@
 				ID.dropInto(loc)
 			ID = null
 			selected_outfit.Cut()
+			user_outfit = null
 		else
 			var/obj/item/card/id/I = user.get_active_hand()
 			if(istype(I) && user.unEquip(I, src))
@@ -122,7 +124,7 @@
 	be in command, and there are no variants as a result. Also no special CO uniform :(
 */
 /obj/machinery/uniform_vendor/proc/find_uniforms(var/datum/mil_rank/user_rank, var/datum/mil_branch/user_branch, var/department) //returns 1 if found branch and thus has a base uniform, 2, branch and department, 0 if failed.
-	var/decl/hierarchy/mil_uniform/user_outfit = decls_repository.get_decl(/decl/hierarchy/mil_uniform)
+	user_outfit = decls_repository.get_decl(/decl/hierarchy/mil_uniform)
 	var/mil_uniforms = user_outfit
 	for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
 		if(is_type_in_list(user_branch, child.branches))
@@ -202,16 +204,31 @@
 	if(!issued_items[user_id()])
 		issued_items[user_id()] = list()
 	var/list/checkedout = issued_items[user_id()]
+
+	// mkalash todo: trying to reduce copy/paste, but not sure this is the way to go
+	var/atom/spawn_loc = selected_outfit.len > 1 ? new /obj/item/clothingbag : get_turf(src)
+	for(var/item in selected_outfit)
+		spawn_uniform_part(item, spawn_loc)
+		checkedout += item
 	if(selected_outfit.len > 1)
-		var/obj/item/clothingbag/bag = new /obj/item/clothingbag
-		for(var/item in selected_outfit)
-			new item(bag)
-			checkedout += item
+		var/obj/item/clothingbag/bag = spawn_loc
 		bag.dropInto(loc)
-	else if (selected_outfit.len)
-		var/obj/item/clothing/C = selected_outfit[1]
-		new C(get_turf(src))
-		checkedout += C
+
+/obj/machinery/uniform_vendor/proc/spawn_uniform_part(part_path, atom/loc)
+	var/obj/item/clothing/C = new part_path(loc)
+
+	if(!user_outfit || !ID)
+		return
+
+	if(LAZYISIN(user_outfit.spawns_with_ranks, part_path) && LAZYLEN(ID.military_rank.accessory))
+		for(var/acc_path in ID.military_rank.accessory)
+			C.attempt_attach_accessory(new acc_path(loc), null)
+
+	/* mkalash todo
+	if(LAZYISIN(user_outfit.spawns_with_patches, part_path) && )
+
+	if(LAZYISIN(user_outfit.spawns_with_awards, part_path) && )
+	*/
 
 /obj/machinery/uniform_vendor/proc/user_id()
 	if(!ID)

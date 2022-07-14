@@ -29,6 +29,10 @@
 	var/dress_gloves = null
 	var/dress_extra = null
 
+	var/list/spawns_with_ranks
+	var/list/spawns_with_patches
+	var/list/spawns_with_awards
+
 /decl/hierarchy/mil_uniform/ec
 	name = "Master EC outfit"
 	hierarchy_type = /decl/hierarchy/mil_uniform/ec
@@ -53,6 +57,13 @@
 	dress_gloves = /obj/item/clothing/gloves/white
 
 	dress_extra = list(/obj/item/clothing/accessory/solgov/ec_scarf)
+
+/decl/hierarchy/mil_uniform/ec/Initialize()
+	. = ..()
+
+	LAZYADD(spawns_with_ranks, list(utility_under, service_over, dress_over))
+	LAZYADD(spawns_with_patches, list(utility_under, service_over))
+	LAZYADD(spawns_with_awards, list(service_over, dress_over))
 
 /decl/hierarchy/mil_uniform/fleet
 	name = "Master fleet outfit"
@@ -79,6 +90,13 @@
 	dress_shoes = /obj/item/clothing/shoes/dress
 	dress_hat = /obj/item/clothing/head/solgov/dress/fleet/garrison
 	dress_gloves = /obj/item/clothing/gloves/white
+
+/decl/hierarchy/mil_uniform/ec/Initialize()
+	. = ..()
+
+	LAZYADD(spawns_with_ranks, list(utility_under, service_over, dress_over))
+	LAZYADD(spawns_with_patches, list(utility_under))
+	LAZYADD(spawns_with_awards, list(service_over, dress_over))
 
 /decl/hierarchy/mil_uniform/civilian
 	name = "Master civilian outfit"		//Basically just here for the rent-a-tux, ahem, I mean... dress uniform.
