@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: 'Body scan readouts are now color-coded for different types of items. Some
+      examples include: Implants are purple, robotic limbs are blue-gray, broken limbs
+      are pink, etc.'
