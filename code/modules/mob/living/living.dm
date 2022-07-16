@@ -572,8 +572,11 @@ default behaviour is:
 	else
 		var/mob/living/M = pulling
 		if(M.grabbed_by.len)
+			var/obj/item/grab/G = pick(M.grabbed_by)
+			if (G.current_grab.shield_assailant)
+				visible_message(SPAN_WARNING("\The [G.assailant] stops \the [src] from pulling \the [G.affecting] from their grip!"), SPAN_WARNING("\The [G.assailant] is holding \the [G.affecting] too tight for you to pull them away!"))
+				return
 			if (prob(75))
-				var/obj/item/grab/G = pick(M.grabbed_by)
 				if(istype(G))
 					M.visible_message(SPAN_WARNING("[G.affecting] has been pulled from [G.assailant]'s grip by [src]!"), SPAN_WARNING("[G.affecting] has been pulled from your grip by [src]!"))
 					qdel(G)
