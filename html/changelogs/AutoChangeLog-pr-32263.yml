@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscdel: Borgs no longer receive alarm notifications in chat. Alarms can still
+      be monitored using the subsystem if desired by borgs.
