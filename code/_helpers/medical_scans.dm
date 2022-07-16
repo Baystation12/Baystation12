@@ -310,9 +310,9 @@
 		var/row = list()
 		row += "<tr><td>[E["name"]]</td>"
 		if(E["is_stump"])
-			row += "<td><span class='bad'>Missing</span></td>"
+			row += "<td><span style='font-weight: bold; color: [COLOR_MEDICAL_MISSING]'>Missing</span></td>"
 			if(skill_level >= SKILL_ADEPT)
-				row += "<td><span class='bad'>[english_list(E["scan_results"], nothing_text = "&nbsp;")]</span></td>"
+				row += "<td><span>[english_list(E["scan_results"], nothing_text = "&nbsp;")]</span></td>"
 			else
 				row += "<td>&nbsp;</td>"
 		else
@@ -321,17 +321,17 @@
 				row += "None</td>"
 			if(skill_level < SKILL_ADEPT)
 				if(E["brute_dam"])
-					row += "<span class='bad'>Damaged</span><br>"
+					row += "<span style='font-weight: bold; color: [COLOR_MEDICAL_BRUTE]'>Damaged</span><br>"
 				if(E["burn_dam"])
-					row += "<span class='average'>Burned</span></td>"
+					row += "<span style='font-weight: bold; color: [COLOR_MEDICAL_BURN]'>Burned</span></td>"
 			else
 				if(E["brute_dam"])
-					row += "<span class='bad'>[capitalize(get_wound_severity(E["brute_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] physical trauma</span><br>"
+					row += "<span style='font-weight: bold; color: [COLOR_MEDICAL_BRUTE]'>[capitalize(get_wound_severity(E["brute_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] physical trauma</span><br>"
 				if(E["burn_dam"])
-					row += "<span class='average'>[capitalize(get_wound_severity(E["burn_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] burns</span></td>"
+					row += "<span style='font-weight: bold; color: [COLOR_MEDICAL_BURN]'>[capitalize(get_wound_severity(E["burn_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] burns</span></td>"
 			if(skill_level >= SKILL_ADEPT)
 				row += "<td>"
-				row += "<span class='bad'>[english_list(E["scan_results"], nothing_text="&nbsp;")]</span>"
+				row += "<span>[english_list(E["scan_results"], nothing_text="&nbsp;")]</span>"
 				row += "</td>"
 			else
 				row += "<td>&nbsp;</td>"

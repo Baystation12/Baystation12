@@ -331,55 +331,44 @@ var/global/list/organ_cache = list()
 /obj/item/organ/proc/get_scan_results(var/tag = FALSE)
 	. = list()
 	if(BP_IS_CRYSTAL(src))
-		. += tag ? "<span class='average'>Crystalline</span>" : "Crystalline"
+		. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_CRYSTAL]'>Crystalline</span>" : "Crystalline"
 	else if(BP_IS_ASSISTED(src))
-		. += tag ? "<span class='average'>Assisted</span>" : "Assisted"
+		. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_ROBOTIC]'>Assisted</span>" : "Assisted"
 	else if(BP_IS_ROBOTIC(src))
-		. += tag ? "<span class='average'>Mechanical</span>" : "Mechanical"
+		. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_ROBOTIC]'>Mechanical</span>" : "Mechanical"
 	if(status & ORGAN_CUT_AWAY)
-		. += tag ? "<span class='bad'>Severed</span>" : "Severed"
+		. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_INTERNAL]'>Severed</span>" : "Severed"
 	if(status & ORGAN_MUTATED)
-		. += tag ? "<span class='bad'>Genetic Deformation</span>" : "Genetic Deformation"
+		. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_RADIATION]'>Genetic Deformation</span>" : "Genetic Deformation"
 	if(status & ORGAN_DEAD)
 		if(can_recover())
-			. += tag ? "<span class='bad'>Decaying</span>" : "Decaying"
+			. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_INTERNAL_DANGER]'>Decaying</span>" : "Decaying"
 		else
-			. += tag ? "<span style='color:#999999'>Necrotic</span>" : "Necrotic"
+			. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_NECROTIC]'>Necrotic</span>" : "Necrotic"
 	if(BP_IS_BRITTLE(src))
-		. += tag ? "<span class='bad'>Brittle</span>" : "Brittle"
+		. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_CRYSTAL]'>Brittle</span>" : "Brittle"
 
+	var/germ_message
 	switch (germ_level)
 		if (INFECTION_LEVEL_ONE to INFECTION_LEVEL_ONE + ((INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3))
-			. +=  "Mild Infection"
+			germ_message =  "Mild Infection"
 		if (INFECTION_LEVEL_ONE + ((INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3) to INFECTION_LEVEL_ONE + (2 * (INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3))
-			. +=  "Mild Infection+"
+			germ_message =  "Mild Infection+"
 		if (INFECTION_LEVEL_ONE + (2 * (INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3) to INFECTION_LEVEL_TWO)
-			. +=  "Mild Infection++"
+			germ_message =  "Mild Infection++"
 		if (INFECTION_LEVEL_TWO to INFECTION_LEVEL_TWO + ((INFECTION_LEVEL_THREE - INFECTION_LEVEL_THREE) / 3))
-			if(tag)
-				. += "<span class='average'>Acute Infection</span>"
-			else
-				. +=  "Acute Infection"
+			germ_message =  "Acute Infection"
 		if (INFECTION_LEVEL_TWO + ((INFECTION_LEVEL_THREE - INFECTION_LEVEL_THREE) / 3) to INFECTION_LEVEL_TWO + (2 * (INFECTION_LEVEL_THREE - INFECTION_LEVEL_TWO) / 3))
-			if(tag)
-				. += "<span class='average'>Acute Infection+</span>"
-			else
-				. +=  "Acute Infection+"
+			germ_message =  "Acute Infection+"
 		if (INFECTION_LEVEL_TWO + (2 * (INFECTION_LEVEL_THREE - INFECTION_LEVEL_TWO) / 3) to INFECTION_LEVEL_THREE)
-			if(tag)
-				. += "<span class='average'>Acute Infection++</span>"
-			else
-				. +=  "Acute Infection++"
+			germ_message =  "Acute Infection++"
 		if (INFECTION_LEVEL_THREE to INFINITY)
-			if(tag)
-				. += "<span class='bad'>Septic</span>"
-			else
-				. +=  "Septic"
+			germ_message =  "Septic"
+	if (germ_message)
+		. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_TOXIN]'>[germ_message]</span>" : germ_message
 	if(rejecting)
 		if(tag)
-			. += "<span class='bad'>Genetic Rejection</span>"
-		else
-			. += "Genetic Rejection"
+			. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_INTERNAL]'>Genetic Rejection</span>" : "Genetic Rejection"
 
 //used by stethoscope
 /obj/item/organ/proc/listen()
