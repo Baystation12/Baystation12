@@ -1,0 +1,9 @@
+author: Fre3bie
+delete-after: true
+changes:
+  - tweak: Hostage meat shields are forced to stand until they go unconscious/die,
+      then stop blocking shots
+  - tweak: Hostage/assailant can no longer be pulled away from each other while being
+      used as a meat shield
+  - bugfix: Pulling an assailant away from their grab target makes them properly drop
+      the grab
