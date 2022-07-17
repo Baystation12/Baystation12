@@ -1,5 +1,0 @@
-author: Ryan180602
-delete-after: true
-changes:
-  - tweak: Makes the asteroid mining station spawn beside the Torch whenever it does
-      spawn.
