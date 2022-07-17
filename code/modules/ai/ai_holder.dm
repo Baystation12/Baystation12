@@ -6,25 +6,25 @@
 #define START_AIPROCESSING(datum) \
 if (!(datum.process_flags & AI_PROCESSING)) { \
 	datum.process_flags |= AI_PROCESSING; \
-	SSai.active += datum \
+	SSai.ai_holders += datum \
 }
 
 
 #define STOP_AIPROCESSING(datum) \
 	datum.process_flags &= ~AI_PROCESSING; \
-	SSai.active -= datum
+	SSai.ai_holders -= datum
 
 
 #define START_AIFASTPROCESSING(datum) \
 if (!(datum.process_flags & AI_FASTPROCESSING)) { \
 	datum.process_flags |= AI_FASTPROCESSING; \
-	SSaifast.active += datum \
+	SSaifast.ai_holders += datum \
 }
 
 
 #define STOP_AIFASTPROCESSING(datum) \
 	datum.process_flags &= ~AI_FASTPROCESSING; \
-	SSaifast.active -= datum
+	SSaifast.ai_holders -= datum
 
 
 /mob/living
