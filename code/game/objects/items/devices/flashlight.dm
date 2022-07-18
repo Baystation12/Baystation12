@@ -336,7 +336,7 @@
 	flashlight_max_bright = 0.6
 	flashlight_inner_range = 0.1
 	flashlight_outer_range = 3
-	flashlight_flags = FLASHLIGHT_CANNOT_BLIND
+	flashlight_flags = FLASHLIGHT_SINGLE_USE | FLASHLIGHT_CANNOT_BLIND
 
 
 /obj/item/device/flashlight/flare/glowstick/Initialize()
