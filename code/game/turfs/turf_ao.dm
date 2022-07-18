@@ -28,7 +28,7 @@
 		CALCULATE_NEIGHBORS(src, ao_neighbors, T, AO_TURF_CHECK(T))
 
 /proc/make_ao_image(corner, i, px = 0, py = 0, pz = 0, pw = 0)
-	var/list/cache = SSao.cache
+	var/list/cache = SSao.image_cache
 	var/cstr = "[corner]"
 	var/key = "[cstr]-[i]-[px]/[py]/[pz]/[pw]"
 
@@ -93,7 +93,7 @@
 	}
 
 /turf/proc/update_ao()
-	var/list/cache = SSao.cache
+	var/list/cache = SSao.image_cache
 	CUT_AO(shadower, ao_overlays_mimic)
 	CUT_AO(src, ao_overlays)
 	if (z_flags & ZM_MIMIC_BELOW)

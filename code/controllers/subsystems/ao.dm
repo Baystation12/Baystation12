@@ -4,8 +4,8 @@ SUBSYSTEM_DEF(ao)
 	wait = 1
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 	flags = SS_NO_INIT
-	var/static/list/queue = list()
-	var/static/list/cache = list()
+	var/static/list/image_cache = list()
+	var/static/list/turf/queue = list()
 
 
 /datum/controller/subsystem/ao/UpdateStat(time)
@@ -15,21 +15,22 @@ SUBSYSTEM_DEF(ao)
 
 
 /datum/controller/subsystem/ao/fire(resume, no_mc_tick)
-	if (!resume)
-		queue = cache.Copy()
-	var/turf/target
-	for (var/i = queue.len to 1 step -1)
-		target = queue[i]
-		if(QDELETED(target))
+	if (!queue.len)
+		return
+	var/cut_until = 1
+	for (var/turf/turf as anything in queue)
+		++cut_until
+		if(QDELETED(turf))
 			continue
-		if (target.ao_queued == AO_UPDATE_REBUILD)
-			var/previous_neighbours = target.ao_neighbors
-			target.calculate_ao_neighbors()
-			if (previous_neighbours != target.ao_neighbors)
-				target.update_ao()
-		target.ao_queued = AO_UPDATE_NONE
+		if (turf.ao_queued == AO_UPDATE_REBUILD)
+			var/previous_neighbours = turf.ao_neighbors
+			turf.calculate_ao_neighbors()
+			if (previous_neighbours != turf.ao_neighbors)
+				turf.update_ao()
+		turf.ao_queued = AO_UPDATE_NONE
 		if (no_mc_tick)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
-			queue.Cut(i)
+			queue.Cut(1, cut_until)
 			return
+	queue.Cut()
