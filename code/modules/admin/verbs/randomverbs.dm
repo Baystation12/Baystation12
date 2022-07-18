@@ -873,3 +873,51 @@ Ccomp's first proc.
 			mob.AdjustStunned(2)
 			++floored
 	log_and_message_admins("[key_name_admin(user)] simulated a distant explosion, affecting [affected] players and flooring [floored] on levels [levels.Join(", ")].")
+
+
+/client/proc/bombard_zlevel()
+	set category = "Fun"
+	set name = "Bombard Z-Level"
+	set desc = "Bombard a z-level with randomly placed explosions."
+	set waitfor = FALSE
+
+	var/zlevel = input("What z-level?", "Z-Level", get_z(usr)) as num|null
+	if (!isnum(zlevel))
+		return
+
+	var/connected = alert("Bomb connected z-levels?", "Connected Zs", "Yes", "No", "Cancel")
+	if (connected == "Cancel")
+		return
+
+	var/delay = input("How much delay between explosions? (In seconds)", "Delay") as num|null
+	if (!delay)
+		return
+
+	var/booms = input("How many explosions to create?", "Number of Booms") as num|null
+	if (!booms)
+		return
+
+	var/break_turfs = alert("Turf breaker explosions?", "Break Turfs?", "Yes", "No", "Cancel")
+	if (break_turfs == "Cancel")
+		return
+
+	if (break_turfs == "Yes")
+		break_turfs = TRUE
+	else
+		break_turfs = FALSE
+
+	var/range
+	var/high_intensity
+	var/low_intensity
+	while(booms > 0)
+		range = rand(0, 2)
+		high_intensity = rand(5,8)
+		low_intensity = rand(7,10)
+		var/turf/T
+		if (connected == "Yes")
+			T = pick_area_turf_in_connected_z_levels(list(/proc/is_not_space_area), z_level = zlevel)
+		else
+			T = pick_area_turf_in_single_z_level(list(/proc/is_not_space_area), z_level = zlevel)
+		explosion(T, range, high_intensity, low_intensity, turf_breaker = break_turfs)
+		booms = booms - 1
+		sleep(delay SECONDS)
