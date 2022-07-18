@@ -36,3 +36,10 @@
 
 /obj/item/gun/projectile/pirate/unloaded
 	starts_loaded = FALSE
+
+/obj/item/gun/projectile/pirate/on_update_icon()
+	..()
+	if(length(loaded))
+		icon_state = initial(icon_state)
+	else
+		icon_state = "[initial(icon_state)]-empty"

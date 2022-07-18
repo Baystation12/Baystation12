@@ -75,7 +75,7 @@
 				P.attack_mob(M, 0, 5)
 			else
 				P.attack_mob(M, 0, 50)
-		
+
 /obj/item/grenade/frag/proc/on_explosion(var/turf/O)
 	if(explosion_size)
 		explosion(O, -1, -1, explosion_size, round(explosion_size/2), 0)
@@ -103,3 +103,49 @@
 /obj/item/grenade/frag/high_yield/on_explosion(var/turf/O)
 	if(explosion_size)
 		explosion(O, -1, round(explosion_size/2), explosion_size, round(explosion_size/2), 0) //has a chance to blow a hole in the floor
+
+/obj/item/grenade/frag/makeshift
+	name = "improvised explosive device"
+	desc = "An aluminum can with a wire fuse leading inside of it. Partially guaranteed to blow your mind AND hands!"
+	icon_state = "ghetto"
+	arm_sound = 'sound/effects/flare.ogg'
+
+	num_fragments = 10  // Its a /can/ , not nearly as strong as an industrially produced grenade.
+	explosion_size = 1
+
+	det_time = 5
+
+	var/shrapnel_reinforced = 0 //But, with some patience, you can make it worth your time.
+
+	var/possible_reinforcements = list(
+		/obj/item/ammo_casing,
+		/obj/item/material/coin,
+		/obj/item/material/shard,
+		/obj/item/reagent_containers/syringe,
+		/obj/item/pen,
+		/obj/item/material/knife/table,
+		/obj/item/material/kitchen/utensil
+		)
+
+/obj/item/grenade/frag/makeshift/Initialize()
+	det_time = rand(5,100) // Fuse is randomized.
+	. = ..()
+
+/obj/item/grenade/frag/makeshift/attackby(obj/item/W, mob/user)
+	if(isScrewdriver(W)) //overrides the act to screwdrive a grenade to set its fuse.
+		to_chat(user, SPAN_WARNING("You can't adjust the timer on \the [src]!"))
+		return TRUE
+	if (ispath(possible_reinforcements))
+		if(shrapnel_reinforced<10) //you can only add 10 items inside the can
+			user.visible_message(
+				SPAN_WARNING("\The [user] pries \the [src] open and drops \a [W] inside."),
+				SPAN_DANGER("You open \the [src], carefully adding \a [W] before sealing the lid again."),
+				SPAN_WARNING("You hear a metallic crack, followed by clinking.")
+			)
+			num_fragments += rand(3,7) // add 3 to 7 pellets. If you're /REALLY/ lucky, you'll end up with something similar to a standard grenade
+			shrapnel_reinforced += 1
+			qdel(W)
+		else
+			to_chat(user, SPAN_WARNING("You can't add any more items to \the [src]!"))
+		return TRUE
+	return ..()
