@@ -71,4 +71,5 @@ When a meteor is spawned, its type is randomly chosen from the list. The list mu
 	var/Me = pickweight(meteors)
 	var/obj/effect/meteor/M = new Me(spawn_point)
 	var/turf/edge = get_edge_target_turf(spawn_point, direction)
+	M.dest = edge
 	walk_towards(M, edge, 3)
