@@ -3,21 +3,22 @@
 	var/list/drones_list = list()
 
 /datum/event/rogue_drone/start()
-	//spawn them at the same place as carp
-	var/list/possible_spawns = list()
-	for(var/obj/effect/landmark/C in landmarks_list)
-		if(C.name == "carpspawn")
-			possible_spawns.Add(C)
 
-	//25% chance for this to be a false alarm
-	var/num = 0
-	if (length(possible_spawns) && prob(75))
-		num = rand(2, 6)
-	for(var/i=0, i<num, i++)
-		var/mob/living/simple_animal/hostile/retaliate/malf_drone/D = new(get_turf(pick(possible_spawns)))
-		drones_list.Add(D)
-		if(prob(25))
-			D.disabled = rand(15, 60)
+	var/n = rand(2, 6)
+	var/I = 0
+	while(I < n)
+		var/speed = rand(1,3)
+		var/dir = pick(GLOB.cardinal)
+		var/Z = pick(affecting_z)
+		var/turf/T = get_random_edge_turf(dir,TRANSITIONEDGE + 2, Z)
+		if(istype(T,/turf/space))
+			var/mob/living/simple_animal/hostile/retaliate/malf_drone/M
+			M = new /mob/living/simple_animal/hostile/retaliate/malf_drone(T)
+			drones_list.Add(M)
+			if(prob(25))
+				M.disabled = rand(15, 60)
+			M.throw_at(get_random_edge_turf(GLOB.reverse_dir[dir],TRANSITIONEDGE + 2, Z), 5, speed)
+		I++
 
 /datum/event/rogue_drone/announce()
 	command_announcement.Announce("Attention: unidentified patrol drones detected within proximity to the [location_name()]", "[location_name()] Sensor Array", zlevels = affecting_z)
