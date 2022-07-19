@@ -389,3 +389,47 @@ var/global/list/meteors_cataclysm = list(\
 	meteordrop = null
 	ismissile = TRUE
 	dropamt = 0
+
+/obj/effect/meteor/supermatter/missile/admin_missile
+	name = "Hull Buster"
+	desc = "A highly advanced warhead capable of destroying even the most well-armoured space installations."
+	icon = 'icons/obj/missile.dmi'
+	icon_state = "photon"
+	meteordrop = null
+	ismissile = TRUE
+	hitpwr = EX_ACT_DEVASTATING
+	hits = 6
+
+/obj/effect/meteor/supermatter/missile/admin_missile/meteor_effect()
+	explosion(loc, 1, 2, 4, 0, 0, shaped = get_dir(src, dest), turf_breaker = TRUE)
+
+
+/obj/effect/meteor/supermatter/missile/sabot_round
+	name = "Sabot Round"
+	desc = "A warhead that penetrates the hull and detonates to send a secondary warhead further in before exploding for massive damage."
+	icon = 'icons/obj/missile.dmi'
+	icon_state = "sabot"
+	meteordrop = null
+	ismissile = TRUE
+	hitpwr = EX_ACT_HEAVY
+	hits = 6
+
+/obj/effect/meteor/supermatter/missile/sabot_round/meteor_effect()
+	explosion(loc, 0, 1, 4, 0, 0, shaped = TRUE, turf_breaker = TRUE)
+	var/obj/effect/meteor/supermatter/missile/sabot_secondary_round/M = new(get_turf(src))
+	M.dest = dest
+	spawn(0)
+		walk_towards(M, dest, 3)
+
+/obj/effect/meteor/supermatter/missile/sabot_secondary_round
+	name = "Sabot Round Secondary"
+	desc = "Secondary warhead of the Sabot Round, causes extreme damage."
+	icon = 'icons/obj/missile.dmi'
+	icon_state = "sabot_2"
+	meteordrop = null
+	ismissile = TRUE
+	hitpwr = EX_ACT_DEVASTATING
+	hits = 4
+
+/obj/effect/meteor/supermatter/missile/sabot_secondary_round/meteor_effect()
+	explosion(loc, 0.5, 2, 3, 0, shaped = get_dir(src, dest), turf_breaker = TRUE)

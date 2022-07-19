@@ -125,7 +125,8 @@ var/global/list/admin_verbs_fun = list(
 	/datum/admins/proc/call_drop_pod,
 	/client/proc/create_dungeon,
 	/client/proc/cmd_admin_simulate_distant_explosion,
-	/datum/admins/proc/ai_hologram_set
+	/datum/admins/proc/ai_hologram_set,
+	/client/proc/bombard_zlevel
 	)
 
 var/global/list/admin_verbs_spawn = list(

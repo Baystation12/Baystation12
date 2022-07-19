@@ -73,6 +73,11 @@
 	area_predicates[/proc/area_belongs_to_zlevels] = z_levels
 	return pick_area_and_turf(area_predicates, turf_predicates)
 
+/proc/pick_area_turf_in_single_z_level(list/area_predicates, list/turf_predicates, z_level)
+	area_predicates = area_predicates.Copy()
+	area_predicates[/proc/area_belongs_to_zlevels] = list(z_level)
+	return pick_area_and_turf(area_predicates, turf_predicates)
+
 /*
 	Predicate Helpers
 */
