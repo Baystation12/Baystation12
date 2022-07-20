@@ -1,6 +1,0 @@
-author: Mucker, sprites by Azlan
-delete-after: true
-changes:
-  - admin: Adds a couple of new admin-spawnable meteor variants for extreme destruction.
-  - admin: Adds the 'Bombard Z-Level' verb to make spontaneous and random explosions
-      over a zlevel, or connected zlevels.
