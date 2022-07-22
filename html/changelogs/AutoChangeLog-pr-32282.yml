@@ -1,0 +1,6 @@
+author: Spookerton
+delete-after: true
+changes:
+  - rscadd: Cheese is now fresh, aged, or blue. Making cheese makes fresh cheese,
+      microwaves are used to turn that into either aged or blue. Aged and blue cheese
+      have smells. All cheese types work with existing recipes interchangeably.
