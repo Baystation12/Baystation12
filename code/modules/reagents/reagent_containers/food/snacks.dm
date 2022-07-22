@@ -2357,28 +2357,6 @@
 /obj/item/reagent_containers/food/snacks/slice/chocolatecake/filled
 	filled = TRUE
 
-/obj/item/reagent_containers/food/snacks/sliceable/cheesewheel
-	name = "cheese wheel"
-	desc = "A big wheel of delcious cheddar."
-	icon_state = "cheesewheel"
-	slice_path = /obj/item/reagent_containers/food/snacks/cheesewedge
-	slices_num = 5
-	filling_color = "#fff700"
-	center_of_mass = "x=16;y=10"
-	nutriment_desc = list("cheese" = 10)
-	nutriment_amt = 10
-	bitesize = 2
-/obj/item/reagent_containers/food/snacks/sliceable/cheesewheel/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 10)
-
-/obj/item/reagent_containers/food/snacks/cheesewedge
-	name = "cheese wedge"
-	desc = "A wedge of delicious cheddar. The cheese wheel it was cut from can't have gone far."
-	icon_state = "cheesewedge"
-	filling_color = "#fff700"
-	bitesize = 2
-	center_of_mass = "x=16;y=10"
 
 /obj/item/reagent_containers/food/snacks/sliceable/birthdaycake
 	name = "birthday cake"
@@ -2391,6 +2369,7 @@
 	nutriment_desc = list("cake" = 10, "sweetness" = 10)
 	nutriment_amt = 20
 	bitesize = 3
+
 /obj/item/reagent_containers/food/snacks/sliceable/birthdaycake/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 10)

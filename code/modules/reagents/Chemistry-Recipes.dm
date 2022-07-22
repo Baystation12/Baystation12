@@ -1528,8 +1528,8 @@
 /datum/chemical_reaction/cheesewheel/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
 	var/location = get_turf(holder.my_atom)
-	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/reagent_containers/food/snacks/sliceable/cheesewheel(location)
+	for (var/i = 1 to created_volume)
+		new /obj/item/reagent_containers/food/snacks/sliceable/cheesewheel/fresh (location)
 
 /datum/chemical_reaction/rawmeatball
 	name = "Raw Meatball"
