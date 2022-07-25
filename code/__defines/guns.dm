@@ -4,10 +4,12 @@
 #define CALIBER_PISTOL_FLECHETTE "4mm"
 #define CALIBER_PISTOL_ANTIQUE	"~10mm"
 #define CALIBER_PISTOL_CUSTOM	".38 special"
+#define CALIBER_PISTOL_FAST 	"6mmR"
 
-#define CALIBER_RIFLE			"5mmR"
-#define CALIBER_RIFLE_MILITARY  "7mmR"
-#define CALIBER_ANTIMATERIAL    "15mmR"
+#define CALIBER_RIFLE				"5mmR"
+#define CALIBER_RIFLE_MILITARY  	"7mmR"
+#define CALIBER_ANTIMATERIAL    	"15mmR"
+#define CALIBER_ANTIMATERIAL_SMALL	"12mmR" //Порт с инфинити. Калибр КорпоАМР винтовки
 
 #define CALIBER_SHOTGUN			"12g"
 #define CALIBER_GYROJET			"20mmG"
