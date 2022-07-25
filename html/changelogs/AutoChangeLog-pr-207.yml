@@ -1,0 +1,6 @@
+author: Evie7056
+delete-after: true
+changes:
+  - rscadd: Порт НТ41
+  - rscadd: Порт корпоративной АМР винтовки
+  - rscadd: Порт корпо СМГ
