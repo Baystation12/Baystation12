@@ -148,17 +148,17 @@ var/global/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
 
 /obj/item/reagent_containers/food/condiment/psilocybin
 	label_text = "Psilocybin"
-	starting_reagents = list(/datum/reagent/psilocybin = 50)
+	starting_reagents = list(/datum/reagent/drugs/psilocybin = 50)
 
 
 /obj/item/reagent_containers/food/condiment/mindbreaker
 	label_text = "Mindbreaker"
-	starting_reagents = list(/datum/reagent/mindbreaker = 50)
+	starting_reagents = list(/datum/reagent/drugs/mindbreaker = 50)
 
 
-/obj/item/reagent_containers/food/condiment/space_drugs
+/obj/item/reagent_containers/food/condiment/hextro
 	label_text = "Ambrosia"
-	starting_reagents = list(/datum/reagent/space_drugs = 50)
+	starting_reagents = list(/datum/reagent/drugs/hextro = 50)
 
 
 /datum/mil_branch/skrell_fleet

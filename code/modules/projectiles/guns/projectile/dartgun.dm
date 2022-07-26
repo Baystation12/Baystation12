@@ -202,4 +202,4 @@
 	starting_chems = list(/datum/reagent/kelotane,/datum/reagent/bicaridine,/datum/reagent/dylovene)
 
 /obj/item/gun/projectile/dartgun/vox/raider
-	starting_chems = list(/datum/reagent/space_drugs,/datum/reagent/soporific,/datum/reagent/impedrezene)
+	starting_chems = list(/datum/reagent/drugs/hextro,/datum/reagent/soporific,/datum/reagent/impedrezene)

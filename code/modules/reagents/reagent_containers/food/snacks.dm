@@ -453,7 +453,7 @@
 	bitesize = 6
 /obj/item/reagent_containers/food/snacks/hugemushroomslice/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/psilocybin, 3)
+	reagents.add_reagent(/datum/reagent/drugs/psilocybin, 3)
 
 /obj/item/reagent_containers/food/snacks/tomatomeat
 	name = "tomato slice"
@@ -867,7 +867,7 @@
 /obj/item/reagent_containers/food/snacks/amanita_pie/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/toxin/amatoxin, 3)
-	reagents.add_reagent(/datum/reagent/psilocybin, 1)
+	reagents.add_reagent(/datum/reagent/drugs/psilocybin, 1)
 
 /obj/item/reagent_containers/food/snacks/plump_pie
 	name = "plump pie"
@@ -1097,7 +1097,7 @@
 	bitesize = 3
 /obj/item/reagent_containers/food/snacks/spacylibertyduff/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/psilocybin, 6)
+	reagents.add_reagent(/datum/reagent/drugs/psilocybin, 6)
 
 /obj/item/reagent_containers/food/snacks/amanitajelly
 	name = "amanita jelly"
@@ -1112,7 +1112,7 @@
 /obj/item/reagent_containers/food/snacks/amanitajelly/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/toxin/amatoxin, 6)
-	reagents.add_reagent(/datum/reagent/psilocybin, 3)
+	reagents.add_reagent(/datum/reagent/drugs/psilocybin, 3)
 
 /obj/item/reagent_containers/food/snacks/poppypretzel
 	name = "poppy pretzel"
@@ -1596,7 +1596,7 @@
 	bitesize = 4
 /obj/item/reagent_containers/food/snacks/rofflewaffles/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/psilocybin, 8)
+	reagents.add_reagent(/datum/reagent/drugs/psilocybin, 8)
 
 /obj/item/reagent_containers/food/snacks/stew
 	name = "stew"
@@ -3860,8 +3860,8 @@
 				/datum/reagent/toxin/amatoxin,
 				/datum/reagent/toxin/carpotoxin,
 				/datum/reagent/toxin/zombiepowder,
-				/datum/reagent/cryptobiolin,
-				/datum/reagent/psilocybin)), 5)
+				/datum/reagent/drugs/cryptobiolin,
+				/datum/reagent/drugs/psilocybin)), 5)
 
 
 /obj/item/reagent_containers/food/snacks/old/pizza

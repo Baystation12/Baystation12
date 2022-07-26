@@ -603,7 +603,7 @@
 	reagents = list(
 		/datum/reagent/water = 10,
 		/datum/reagent/ethanol/vodka = 5,
-		/datum/reagent/psilocybin = 5
+		/datum/reagent/drugs/psilocybin = 5
 	)
 	result = /obj/item/reagent_containers/food/snacks/spacylibertyduff
 
@@ -843,7 +843,7 @@
 
 /datum/recipe/rofflewaffles
 	reagents = list(
-		/datum/reagent/psilocybin = 5,
+		/datum/reagent/drugs/psilocybin = 5,
 		/datum/reagent/nutriment/batter/cakebatter = 20
 	)
 	result = /obj/item/reagent_containers/food/snacks/rofflewaffles

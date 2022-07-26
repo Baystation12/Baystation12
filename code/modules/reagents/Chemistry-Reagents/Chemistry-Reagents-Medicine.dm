@@ -376,7 +376,7 @@
 	M.AdjustParalysis(-1)
 	M.AdjustStunned(-1)
 	M.AdjustWeakened(-1)
-	holder.remove_reagent(/datum/reagent/mindbreaker, 5)
+	holder.remove_reagent(/datum/reagent/drugs/mindbreaker, 5)
 	M.adjust_hallucination(-10)
 	M.add_chemical_effect(CE_MIND, 2)
 	M.adjustToxLoss(5 * removed) // It used to be incredibly deadly due to an oversight. Not anymore!
@@ -923,8 +923,8 @@
 			heart.take_internal_damage(heart.max_damage * 0.075)
 
 /datum/reagent/lactate
-	name = "Lactate"
-	description = "Lactate is produced by the body during strenuous exercise. It often correlates with elevated heart rate, shortness of breath, and general exhaustion."
+	name = "Lactic acid"
+	description = "Lactic acid is produced by the body during strenuous exercise. It often correlates with elevated heart rate, shortness of breath, and general exhaustion."
 	taste_description = "sourness"
 	reagent_state = LIQUID
 	color = "#eeddcc"

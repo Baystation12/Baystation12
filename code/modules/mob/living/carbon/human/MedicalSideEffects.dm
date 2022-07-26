@@ -139,7 +139,7 @@
 // ====
 /datum/medical_effect/itch
 	name = "Itch"
-	triggers = list(/datum/reagent/space_drugs = 10)
+	triggers = list(/datum/reagent/drugs/hextro = 10)
 	cures = list(/datum/reagent/inaprovaline)
 	cure_message = "The itching stops..."
 

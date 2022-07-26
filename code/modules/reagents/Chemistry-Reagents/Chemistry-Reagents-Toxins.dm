@@ -714,75 +714,6 @@
 	if(M.chem_doses[type] > 1 * threshold)
 		M.adjustToxLoss(removed)
 
-/* Drugs */
-
-/datum/reagent/space_drugs
-	name = "Space drugs"
-	description = "An illegal chemical compound used as drug."
-	taste_description = "bitterness"
-	taste_mult = 0.4
-	reagent_state = LIQUID
-	color = "#60a584"
-	metabolism = REM * 0.5
-	overdose = REAGENTS_OVERDOSE
-	value = 2.8
-	should_admin_log = TRUE
-
-/datum/reagent/space_drugs/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-
-	var/drug_strength = 15
-	if(alien == IS_SKRELL)
-		drug_strength = drug_strength * 0.8
-
-	M.druggy = max(M.druggy, drug_strength)
-	if (alien != IS_SKRELL)
-		if (prob(10))
-			M.SelfMove(pick(GLOB.cardinal))
-		if(prob(7))
-			M.emote(pick("twitch", "drool", "moan", "giggle"))
-	M.add_chemical_effect(CE_PULSE, -1)
-
-
-/datum/reagent/serotrotium
-	name = "Serotrotium"
-	description = "A chemical compound that promotes concentrated production of the serotonin neurotransmitter in humans."
-	taste_description = "bitterness"
-	reagent_state = LIQUID
-	color = "#202040"
-	metabolism = REM * 0.25
-	overdose = REAGENTS_OVERDOSE
-	value = 2.5
-
-/datum/reagent/serotrotium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-	if(prob(7))
-		M.emote(pick("twitch", "drool", "moan", "gasp"))
-	return
-
-/datum/reagent/cryptobiolin
-	name = "Cryptobiolin"
-	description = "Cryptobiolin causes confusion and dizzyness."
-	taste_description = "sourness"
-	reagent_state = LIQUID
-	color = "#000055"
-	metabolism = REM * 0.5
-	overdose = REAGENTS_OVERDOSE
-	heating_point = 61 CELSIUS
-	heating_products = list(/datum/reagent/potassium, /datum/reagent/acetone, /datum/reagent/sugar)
-	value = 2
-
-/datum/reagent/cryptobiolin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-	var/drug_strength = 4
-	if(alien == IS_SKRELL)
-		drug_strength = drug_strength * 0.8
-	M.make_dizzy(drug_strength)
-	M.confused = max(M.confused, drug_strength * 5)
-
 /datum/reagent/impedrezene // Impairs mental function correctly, takes an overwhelming dose to kill.
 	name = "Impedrezene"
 	description = "Impedrezene is a narcotic that impedes one's ability by slowing down the higher brain cell functions."
@@ -812,18 +743,156 @@
 	else
 		M.adjustBrainLoss(7 * removed)
 
-/datum/reagent/mindbreaker
+/* Drugs */
+
+/datum/reagent/drugs
+	name = "Parent drug reagent"
+	description = "The parent reagent for all illegal drugs."
+	taste_description = "something you should report to coders"
+	taste_mult = 1.2
+	color = "#f2f2f2"
+	var/high_messages = TRUE
+	var/list/high_message_list = list("You feel great! For now...", "You feel a wave of happiness!")
+	var/list/sober_message_list = list("You feel like garbage...", "Your head aches.")
+	var/last_message_time
+
+	var/prob_proc = FALSE
+
+	reagent_state = LIQUID
+	metabolism = REM * 0.5
+	ingest_met = REM * 1.5
+	overdose = REAGENTS_OVERDOSE
+
+/datum/reagent/drugs/affect_blood(mob/living/carbon/M, alien, removed)
+	if(alien == IS_DIONA)
+		return
+
+	if(high_messages == TRUE)
+		if(world.time > last_message_time + 30 SECONDS && volume > 0.5) /// Spam prevention.
+			last_message_time = world.time
+			var/msg = pick(high_message_list)
+			to_chat(M, SPAN_DANGER("[msg]"))
+		else if(volume <= 0.2 && data != -1)
+			data = -1
+			var/msg = pick(sober_message_list)
+			to_chat(M, SPAN_DANGER("[msg]"))
+	if(prob(5) && prob_proc == FALSE) /// Enables procs to activate, remains true until THAT PROC sets it to false again.
+		prob_proc = TRUE
+
+
+/datum/reagent/drugs/hextro
+	name = "Hextromycosalinate"
+	description = "Coloquially known as 'Hector', or by the name of 'Hex', This concoction is a \
+	dizzying mix of psychedelics, hallucinogens and other reagents of both synthetic and organic sources. \
+	With such broad and hardly traceable origins, its a common saying that each dose is unique in nature. \
+	Its hazardous and erratic origin usually entails a great deal of mixed adverse side effects, but  \
+	its cheap cost and potent hallucinations make it enticing for anyone willing to escape the real world \
+	briefly, at the cost of severe addiction."
+	taste_description = "bittersweetness"
+	taste_mult = 0.4
+	reagent_state = LIQUID
+	color = "#60a584"
+	metabolism = REM * 0.5
+	value = 2.8
+	should_admin_log = TRUE
+	high_message_list = list("You feel so much more relaxed.",
+	"You can't quite focus on anything.",
+	"Colors around you seem much more intense.",
+	"You could snack on something right now...",
+	"You feel lightheaded and giggly.",
+	"Everything seems so hilarious.",
+	"You really could go for some takeout right now.",
+	"You momentarily forget where you are.",
+	"You have a mild urge to look over your shoulder.")
+	sober_message_list = list("You feel the urge to just sit there and do nothing.",
+	"Reality seems like a real pain in the ass to deal with right now.",
+	"Things feel really colourless to you all of a sudden.",
+	"You feel the urge to lie down and nap.")
+
+/datum/reagent/drugs/hextro/affect_blood(mob/living/carbon/M, alien, removed)
+	if(alien == IS_DIONA)
+		return
+
+	var/drug_strength = 15
+	if(alien == IS_SKRELL)
+		drug_strength = drug_strength * 0.8
+
+	if(prob(5) && prob_proc == TRUE)
+		M.apply_effect(3, EFFECT_STUTTER)
+		M.emote("giggle")
+		prob_proc = FALSE
+	if(prob(10) && prob_proc == TRUE)
+		M.adjust_nutrition(-10)
+		prob_proc = FALSE
+
+	M.add_chemical_effect(CE_PULSE, -1)
+
+	..()
+
+/datum/reagent/drugs/serotrotium
+	name = "Serotrotium"
+	description = "A chemical compound that promotes concentrated production of the serotonin neurotransmitter in humans."
+	taste_description = "bitterness"
+	reagent_state = LIQUID
+	color = "#202040"
+	metabolism = REM * 0.25
+	value = 2.5
+	high_message_list = list("Everything feels good, stable.", "You feel grounded.")
+	sober_message_list = list("The stability is gone...", "Everything is much less stable.")
+
+/datum/reagent/drugs/serotrotium/affect_blood(mob/living/carbon/M, alien, removed)
+	if(alien == IS_DIONA)
+		return FALSE
+	if(prob(7))
+		M.emote(pick("giggle", "laugh", "smile"))
+	return ..()
+
+/datum/reagent/drugs/cryptobiolin
+	name = "Cryptobiolin"
+	description = "A narcotic known to cause confusion and dizzyness."
+	taste_description = "sourness"
+	reagent_state = LIQUID
+	color = "#000055"
+	metabolism = REM * 0.5
+	heating_point = 61 CELSIUS
+	heating_products = list(/datum/reagent/potassium, /datum/reagent/acetone, /datum/reagent/sugar)
+	value = 2
+	high_message_list = list("The world distorts around you...!",
+	"The walls look like they're moving...",
+	"Nothing really makes sense right now.",
+	"It feels like you've melded with the world around you...")
+	sober_message_list = list("Everything feels... flat.", "You feel almost TOO grounded in your surroundings.")
+
+/datum/reagent/drugs/cryptobiolin/affect_blood(mob/living/carbon/M, alien, removed)
+	if(alien == IS_DIONA)
+		return FALSE
+	var/drug_strength = 4
+	if(alien == IS_SKRELL)
+		drug_strength = drug_strength * 0.8
+	M.make_dizzy(drug_strength)
+	M.confused = max(M.confused, drug_strength * 5)
+	..()
+
+/datum/reagent/drugs/mindbreaker
 	name = "Mindbreaker Toxin"
 	description = "A powerful hallucinogen, it can cause fatal effects in users."
 	taste_description = "sourness"
 	reagent_state = LIQUID
 	color = "#b31008"
 	metabolism = REM * 0.25
-	overdose = REAGENTS_OVERDOSE
 	value = 0.6
 	should_admin_log = TRUE
+	high_message_list = list("You don't quite know what up or down is anymore...",
+	"Colors just seem much more amazing.",
+	"You feel incredibly confident. No one can stop you.",
+	"You clench your jaw involuntarily.",
+	"You feel... unsteady.",
+	"You really feel like talking about your feelings!")
+	sober_message_list = list("Everything feels a little more grounded.",
+	"Colors seem... flatter.",
+	"Everything feels a little dull, now.")
 
-/datum/reagent/mindbreaker/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drugs/mindbreaker/affect_blood(mob/living/carbon/M, alien, removed)
 	if(alien == IS_DIONA)
 		return
 	M.add_chemical_effect(CE_MIND, -2)
@@ -831,17 +900,23 @@
 		M.hallucination(25, 30)
 	else
 		M.hallucination(50, 50)
+	..()
 
-/datum/reagent/psilocybin
+/datum/reagent/drugs/psilocybin
 	name = "Psilocybin"
 	description = "A strong psycotropic derived from certain species of mushroom."
 	taste_description = "mushroom"
 	color = "#e700e7"
-	overdose = REAGENTS_OVERDOSE
 	metabolism = REM * 0.5
 	value = 0.7
+	high_message_list = list("The world distorts around you...!",
+	"The walls look like they're moving...",
+	"Nothing really makes sense right now.",
+	"It feels like you've melded with the world around you..."
+	)
+	sober_message_list = list("Everything feels... flat.", "You feel almost TOO grounded in your surroundings.")
 
-/datum/reagent/psilocybin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drugs/psilocybin/affect_blood(mob/living/carbon/M, alien, removed)
 	if(alien == IS_DIONA)
 		return
 
@@ -852,17 +927,14 @@
 	M.druggy = max(M.druggy, 30)
 
 	if(M.chem_doses[type] < 1 * threshold)
-		M.apply_effect(3, EFFECT_STUTTER)
 		M.make_dizzy(5)
-		if(prob(5))
-			M.emote(pick("twitch", "giggle"))
 	else if(M.chem_doses[type] < 2 * threshold)
 		M.apply_effect(3, EFFECT_STUTTER)
 		M.make_jittery(5)
 		M.make_dizzy(5)
 		M.druggy = max(M.druggy, 35)
 		if(prob(10))
-			M.emote(pick("twitch", "giggle"))
+			M.emote("giggle")
 	else
 		M.add_chemical_effect(CE_MIND, -1)
 		M.apply_effect(3, EFFECT_STUTTER)
@@ -871,11 +943,11 @@
 		M.druggy = max(M.druggy, 40)
 		if(prob(15))
 			M.emote(pick("twitch", "giggle"))
+	..()
 
 
-/datum/reagent/three_eye
+/datum/reagent/drugs/three_eye
 	name = "Three Eye"
-	taste_description = "liquid starlight"
 	description = "Out on the edge of human space, at the limits of scientific understanding and \
 	cultural taboo, people develop and dose themselves with substances that would curl the hair on \
 	a brinker's vatgrown second head. Three Eye is one of the most notorious narcotics to ever come \
@@ -883,14 +955,13 @@
 	Stok does with an Unathi strike trooper. It is equally effective on humans, Skrell, dionaea and \
 	probably the Captain's cat, and distributing it will get you guaranteed jail time in every \
 	human territory."
+	taste_description = "liquid starlight"
 	reagent_state = LIQUID
 	color = "#ccccff"
 	metabolism = REM
 	overdose = 25
 	should_admin_log = TRUE
-
-	// M A X I M U M C H E E S E
-	var/static/list/dose_messages = list(
+	high_message_list = list(
 		"Your name is called. It is your time.",
 		"You are dissolving. Your hands are wax...",
 		"It all runs together. It all mixes.",
@@ -910,7 +981,6 @@
 		"We miss you. Where are you?",
 		"Come back from there. Please."
 	)
-
 	var/static/list/overdose_messages = list(
 		"THE SIGNAL THE SIGNAL THE SIGNAL THE SIGNAL",
 		"IT CRIES IT CRIES IT WAITS IT CRIES",
@@ -921,7 +991,7 @@
 		"THE LIGHT THE DARK A STAR IN CHAINS"
 	)
 
-/datum/reagent/three_eye/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drugs/three_eye/affect_blood(mob/living/carbon/M, alien, removed)
 	M.add_client_color(/datum/client_color/thirdeye)
 	M.add_chemical_effect(CE_THIRDEYE, 1)
 	M.add_chemical_effect(CE_MIND, -2)
@@ -932,13 +1002,12 @@
 		var/mob/living/carbon/human/H = M
 		H.seizure()
 		H.adjustBrainLoss(rand(8, 12))
-	if(prob(5))
-		to_chat(M, SPAN_WARNING("<font size = [rand(1,3)]>[pick(dose_messages)]</font>"))
+	..()
 
-/datum/reagent/three_eye/on_leaving_metabolism(var/mob/parent, var/metabolism_class)
+/datum/reagent/drugs/three_eye/on_leaving_metabolism(mob/parent, metabolism_class)
 	parent.remove_client_color(/datum/client_color/thirdeye)
 
-/datum/reagent/three_eye/overdose(var/mob/living/carbon/M, var/alien)
+/datum/reagent/drugs/three_eye/overdose(mob/living/carbon/M, alien)
 	..()
 	M.adjustBrainLoss(rand(1, 5))
 	if(ishuman(M) && prob(10))

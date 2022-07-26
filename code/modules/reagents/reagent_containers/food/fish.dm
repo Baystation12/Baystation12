@@ -82,7 +82,7 @@
 /obj/item/reagent_containers/food/snacks/fish/space_shark/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
-	reagents.add_reagent(/datum/reagent/space_drugs, 1)
+	reagents.add_reagent(/datum/reagent/drugs/hextro, 1)
 	reagents.add_reagent(/datum/reagent/toxin/phoron, 1)
 
 

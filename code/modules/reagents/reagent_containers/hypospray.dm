@@ -227,7 +227,7 @@
 
 /obj/item/reagent_containers/hypospray/autoinjector/mindbreaker
 	name = "autoinjector"
-	starts_with = list(/datum/reagent/mindbreaker = 5)
+	starts_with = list(/datum/reagent/drugs/mindbreaker = 5)
 
 /obj/item/reagent_containers/hypospray/autoinjector/combatstim
 	name ="autoinjector (combat Stimulants)"
