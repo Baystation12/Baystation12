@@ -49,19 +49,25 @@ Class Procs:
 
 */
 
-/connection/var/turf/simulated/A
-/connection/var/turf/simulated/B
-/connection/var/zone/zoneA
-/connection/var/zone/zoneB
+/connection
+	var/turf/simulated/A
+	var/turf/simulated/B
+	var/zone/zoneA
+	var/zone/zoneB
 
-/connection/var/connection_edge/edge
+	var/connection_edge/edge
 
-/connection/var/state = 0
+	///Invalid or Valid
+	var/state = 0
+
+	#ifdef ZASDBG
+	///Set to true during testing to get verbose debug information
+	var/tmp/verbose = FALSE
+	#endif
 
 /connection/New(turf/simulated/A, turf/simulated/B)
 	#ifdef ZASDBG
-	ASSERT(SSair.has_valid_zone(A))
-	//ASSERT(SSair.has_valid_zone(B))
+	ASSERT(TURF_HAS_VALID_ZONE(A))
 	#endif
 	src.A = A
 	src.B = B
@@ -75,17 +81,31 @@ Class Procs:
 		edge = SSair.get_edge(A.zone,B.zone)
 		edge.add_connection(src)
 
+#ifdef ZASDBG
+/connection/simulated/New(turf/simulated/A, turf/simulated/B)
+	. = ..()
+	ASSERT(TURF_HAS_VALID_ZONE(B))
+#endif
+
 /connection/proc/mark_direct()
 	if(!direct())
 		state |= CONNECTION_DIRECT
 		edge.direct++
-//	log_debug("Marked direct.")
+
+	#ifdef ZASDBG
+	if(verbose)
+		zas_log("Marked direct.")
+	#endif
 
 /connection/proc/mark_indirect()
 	if(direct())
 		state &= ~CONNECTION_DIRECT
 		edge.direct--
-//	log_debug("Marked indirect.")
+
+	#ifdef ZASDBG
+	if(verbose)
+		zas_log("Marked indirect.")
+	#endif
 
 /connection/proc/mark_space()
 	state |= CONNECTION_SPACE
@@ -99,18 +119,34 @@ Class Procs:
 /connection/proc/erase()
 	edge.remove_connection(src)
 	state |= CONNECTION_INVALID
-//	log_debug("Connection Erased: [state]")
+
+	#ifdef ZASDBG
+	if(verbose)
+		zas_log("Connection Erased: [state]")
+	#endif
 
 /connection/proc/update()
-//	log_debug("Updated, \...")
+	#ifdef ZASDBG
+	if(verbose)
+		zas_log("Updated, \...")
+	#endif
+
 	if(!istype(A,/turf/simulated))
-//		log_debug("Invalid A.")
+		#ifdef ZASDBG
+		if(verbose)
+			zas_log("Invalid A. Erasing...")
+		#endif
+
 		erase()
 		return
 
 	var/block_status = SSair.air_blocked(A,B)
 	if(block_status & AIR_BLOCKED)
-//		log_debug("Blocked connection.")
+		#ifdef ZASDBG
+		if(verbose)
+			zas_log("Blocked connection. Erasing...")
+		#endif
+
 		erase()
 		return
 	else if(block_status & ZONE_BLOCKED)
@@ -122,14 +158,25 @@ Class Procs:
 
 	if(state & CONNECTION_SPACE)
 		if(!b_is_space)
-//			log_debug("Invalid B.")
+			#ifdef ZASDBG
+			if(verbose)
+				zas_log("Invalid B. Erasing...")
+			#endif
+
 			erase()
 			return
 		if(A.zone != zoneA)
-//			log_debug("Zone changed, \...")
+			#ifdef ZASDBG
+			if(verbose)
+				zas_log("Zone changed, \...")
+			#endif
+
 			if(!A.zone)
 				erase()
-//				log_debug("erased.")
+				#ifdef ZASDBG
+				if(verbose)
+					zas_log("Turf A's zone has disappeared. Erasing...")
+				#endif
 				return
 			else
 				edge.remove_connection(src)
@@ -137,22 +184,34 @@ Class Procs:
 				edge.add_connection(src)
 				zoneA = A.zone
 
-//		log_debug("valid.")
+		#ifdef ZASDBG
+		if(verbose)
+			zas_log("Connection is valid.")
+		#endif
 		return
 
 	else if(b_is_space)
-//		log_debug("Invalid B.")
+		#ifdef ZASDBG
+		if(verbose)
+			zas_log("Turf B is unsimulated, but this is a simulated connection. Erasing...")
+		#endif
 		erase()
 		return
 
 	if(A.zone == B.zone)
-//		log_debug("A == B")
+		#ifdef ZASDBG
+		if(verbose)
+			zas_log("Turf A and Turf B share a zone. Erasing...")
+		#endif
 		erase()
 		return
 
 	if(A.zone != zoneA || (zoneB && (B.zone != zoneB)))
 
-//		log_debug("Zones changed, \...")
+		#ifdef ZASDBG
+		if(verbose)
+			zas_log("Zones changed, \...")
+		#endif
 		if(A.zone && B.zone)
 			edge.remove_connection(src)
 			edge = SSair.get_edge(A.zone, B.zone)
@@ -160,9 +219,15 @@ Class Procs:
 			zoneA = A.zone
 			zoneB = B.zone
 		else
-//			log_debug("erased.")
+			#ifdef ZASDBG
+			if(verbose)
+				zas_log("Turf A or B lost it's zone. Erasing...")
+			#endif
 			erase()
 			return
 
 
-//	log_debug("valid.")
+	#ifdef ZASDBG
+	if(verbose)
+		zas_log("Connection is valid.")
+	#endif

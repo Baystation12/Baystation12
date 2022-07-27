@@ -58,13 +58,18 @@ Class Procs:
 */
 
 
-/connection_edge/var/zone/A
+/connection_edge
+	var/zone/A
 
-/connection_edge/var/list/connecting_turfs = list()
-/connection_edge/var/direct = 0
-/connection_edge/var/sleeping = 1
+	var/list/connecting_turfs = list()
+	var/direct = 0
+	var/sleeping = 1
+	var/coefficient = 0
 
-/connection_edge/var/coefficient = 0
+	#ifdef ZASDBG
+	///Set this to TRUE during testing to get verbose debug information.
+	var/tmp/verbose = FALSE
+	#endif
 
 /connection_edge/New()
 	CRASH("Cannot make connection edge without specifications.")
@@ -72,23 +77,33 @@ Class Procs:
 /connection_edge/proc/add_connection(connection/c)
 	coefficient++
 	if(c.direct()) direct++
-//	log_debug("Connection added: [type] Coefficient: [coefficient]")
+
+	#ifdef ZASDBG
+	if(verbose)
+		zas_log("Connection added: [type] Coefficient: [coefficient]")
+	#endif
 
 
 /connection_edge/proc/remove_connection(connection/c)
-//	log_debug("Connection removed: [type] Coefficient: [coefficient-1]")
-
 	coefficient--
 	if(coefficient <= 0)
 		erase()
 	if(c.direct()) direct--
 
+	#ifdef ZASDBG
+	if(verbose)
+		zas_log("Connection removed: [type] Coefficient: [coefficient-1]")
+	#endif
+
 /connection_edge/proc/contains_zone(zone/Z)
 
 /connection_edge/proc/erase()
 	SSair.remove_edge(src)
-//	log_debug("[type] Erased.")
 
+	#ifdef ZASDBG
+	if(verbose)
+		zas_log("[type] Erased.")
+	#endif
 
 /connection_edge/proc/tick()
 
@@ -130,9 +145,11 @@ Class Procs:
 	src.B = B
 	A.edges.Add(src)
 	B.edges.Add(src)
-	//id = edge_id(A,B)
-//	log_debug("New edge between [A] and [B]")
 
+	#ifdef ZASDBG
+	if(verbose)
+		zas_log("New edge between [A] and [B]")
+	#endif
 
 /connection_edge/zone/add_connection(connection/c)
 	. = ..()
@@ -201,9 +218,11 @@ Class Procs:
 	src.B = B
 	A.edges.Add(src)
 	air = B.return_air()
-	//id = 52*A.id
-//	log_debug("New edge from [A] to [B].")
 
+	#ifdef ZASDBG
+	if(verbose)
+		zas_log("New edge from [A] to [B] ([B.x], [B.y], [B.z]).")
+	#endif
 
 /connection_edge/unsimulated/add_connection(connection/c)
 	. = ..()

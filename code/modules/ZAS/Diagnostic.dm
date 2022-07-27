@@ -1,21 +1,18 @@
 /client/proc/Zone_Info(turf/T as null|turf)
 	set category = "Debug"
-	if(T)
-		if(istype(T,/turf/simulated) && T:zone)
-			T:zone:dbg_data(src)
-		else
-			to_chat(mob, "No zone here.")
-			var/datum/gas_mixture/mix = T.return_air()
-			to_chat(mob, "[mix.return_pressure()] kPa [mix.temperature]C")
-			for(var/g in mix.gas)
-				to_chat(mob, "[g]: [mix.gas[g]]\n")
+	if(!T)
+		return
+	if(istype(T,/turf/simulated) && T:zone)
+		T:zone:dbg_data(src)
 	else
-		if(zone_debug_images)
-			for(var/zone in  zone_debug_images)
-				images -= zone_debug_images[zone]
-			zone_debug_images = null
+		to_chat(mob, "ZONE: No zone here.")
+		var/datum/gas_mixture/mix = T.return_air()
+		to_chat(mob, "ZONE: [mix.return_pressure()] kPa [mix.temperature] k")
+		for(var/g in mix.gas)
+			to_chat(mob, "ZONE GASES: [g]: [mix.gas[g]]\n")
 
-/client/var/list/zone_debug_images
+		if((T:zone && (length(T:zone:contents) > ZONE_MIN_SIZE)))
+			to_chat(mob, SPAN_NOTICE("This turf's zone is below the minimum size, and will merge over zone blockers."))
 
 /client/proc/Test_ZAS_Connection(var/turf/simulated/T as turf)
 	set category = "Debug"
@@ -37,6 +34,7 @@
 		return
 
 	if(direction == "N/A")
+		to_chat(mob, "Testing self-blocking...")
 		if(!(T.c_airblock(T) & AIR_BLOCKED))
 			to_chat(mob, "The turf can pass air! :D")
 		else
@@ -50,6 +48,7 @@
 	var/t_block = T.c_airblock(other_turf)
 	var/o_block = other_turf.c_airblock(T)
 
+	to_chat(mob, "Testing connection between ([T.x], [T.y], [T.z]) and ([other_turf.x], [other_turf.y], [other_turf.z])...")
 	if(o_block & AIR_BLOCKED)
 		if(t_block & AIR_BLOCKED)
 			to_chat(mob, "Neither turf can connect. :(")

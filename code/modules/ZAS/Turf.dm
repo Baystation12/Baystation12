@@ -1,8 +1,15 @@
-/turf/simulated/var/zone/zone
-/turf/simulated/var/open_directions
-
-/turf/var/needs_air_update = 0
-/turf/var/datum/gas_mixture/air
+/turf/simulated
+	///The turf's current zone.
+	var/zone/zone
+	///All directions in which a turf that can contain air is present.
+	var/open_directions
+/turf
+	var/datum/gas_mixture/air
+	var/needs_air_update = 0
+#ifdef ZASDBG
+	///Set to TRUE during debugging to get descriptive to_chats of the object. Works for all atmos-related datums.
+	var/tmp/verbose = FALSE
+#endif
 
 /turf/simulated/proc/update_graphic(list/graphic_add = null, list/graphic_remove = null)
 	if(graphic_add && graphic_add.len)
@@ -14,7 +21,11 @@
 	var/block
 	ATMOS_CANPASS_TURF(block, src, src)
 	if(block & AIR_BLOCKED)
-		//dbg(blocked)
+		#ifdef ZASDBG
+		if(verbose)
+			zas_log("Self-blocked.")
+		src.dbg(zasdbgovl_blocked)
+		#endif
 		return 1
 
 	#ifdef MULTIZAS
@@ -31,7 +42,9 @@
 		block = unsim.c_airblock(src)
 
 		if(block & AIR_BLOCKED)
-			//unsim.dbg(air_blocked, turn(180,d))
+			#ifdef ZASDBG
+			//target.dbg(ZAS_DIRECTIONAL_BLOCKER(turn(d, 180)))
+			#endif
 			continue
 
 		var/r_block = c_airblock(unsim)
@@ -101,8 +114,9 @@
 	ATMOS_CANPASS_TURF(s_block, src, src)
 	if(s_block & AIR_BLOCKED)
 		#ifdef ZASDBG
-		if(verbose) log_debug("Self-blocked.")
-		//dbg(blocked)
+		if(verbose)
+			zas_log("Self-blocked.")
+		src.dbg(zasdbgovl_blocked)
 		#endif
 		if(zone)
 			var/zone/z = zone
@@ -134,8 +148,9 @@
 		if(block & AIR_BLOCKED)
 
 			#ifdef ZASDBG
-			if(verbose) log_debug("[d] is blocked.")
-			//unsim.dbg(air_blocked, turn(180,d))
+			if(verbose)
+				zas_log("[dir2text(d)] is blocked.")
+			//src.dbg(ZAS_DIRECTIONAL_BLOCKER(d))
 			#endif
 
 			continue
@@ -144,8 +159,9 @@
 		if(r_block & AIR_BLOCKED)
 
 			#ifdef ZASDBG
-			if(verbose) log_debug("[d] is blocked.")
-			//dbg(air_blocked, d)
+			if(verbose)
+				zas_log("[dir2text(d)] is blocked.")
+			//target.dbg(ZAS_DIRECTIONAL_BLOCKER(turn(d, 180)))
 			#endif
 
 			//Check that our zone hasn't been cut off recently.
@@ -175,9 +191,9 @@
 					//    we are blocking them and not blocking ourselves - this prevents tiny zones from forming on doorways.
 					if(((block & ZONE_BLOCKED) && !(r_block & ZONE_BLOCKED)) || ((r_block & ZONE_BLOCKED) && !(s_block & ZONE_BLOCKED)))
 						#ifdef ZASDBG
-						if(verbose) log_debug("[d] is zone blocked.")
-
-						//dbg(zone_blocked, d)
+						if(verbose)
+							zas_log("[dir2text(d)] is zone blocked.")
+						//dbg(ZAS_ZONE_BLOCKER(d))
 						#endif
 
 						//Postpone this tile rather than exit, since a connection can still be made.
@@ -189,23 +205,27 @@
 						sim.zone.add(src)
 
 						#ifdef ZASDBG
-						dbg(assigned)
-						if(verbose) log_debug("Added to [zone]")
+						dbg(zasdbgovl_assigned)
+						if(verbose)
+							zas_log("Added to [zone]")
 						#endif
 
 				else if(sim.zone != zone)
 
 					#ifdef ZASDBG
-					if(verbose) log_debug("Connecting to [sim.zone]")
+					if(verbose)
+						zas_log("Connecting to [sim.zone]")
 					#endif
 
 					SSair.connect(src, sim)
 
 
 			#ifdef ZASDBG
-				else if(verbose) log_debug("[d] has same zone.")
+				else if(verbose)
+					zas_log("[dir2text(d)] has same zone.")
 
-			else if(verbose) log_debug("[d] has invalid zone.")
+			else if(verbose)
+				zas_log("[dir2text(d)] has an invalid or rebuilding zone.")
 			#endif
 
 		else
@@ -219,7 +239,9 @@
 		newzone.add(src)
 
 	#ifdef ZASDBG
-		dbg(created)
+		dbg(zasdbgovl_created)
+		if(verbose)
+			zas_log("New zone created for src.")
 
 	ASSERT(zone)
 	#endif

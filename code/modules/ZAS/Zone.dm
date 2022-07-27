@@ -62,7 +62,7 @@ Class Procs:
 #ifdef ZASDBG
 	ASSERT(!invalid)
 	ASSERT(istype(T))
-	ASSERT(!SSair.has_valid_zone(T))
+	ASSERT(!TURF_HAS_VALID_ZONE(T))
 #endif
 
 	var/datum/gas_mixture/turf_air = T.return_air()
@@ -102,7 +102,7 @@ Class Procs:
 		into.add(T)
 		T.update_graphic(graphic_remove = air.graphic)
 		#ifdef ZASDBG
-		T.dbg(merged)
+		T.dbg(zasdbgovl_merged)
 		#endif
 
 	//rebuild the old zone's edges so that they will be possessed by the new zone
@@ -117,7 +117,7 @@ Class Procs:
 	SSair.remove_zone(src)
 	#ifdef ZASDBG
 	for(var/turf/simulated/T in contents)
-		T.dbg(invalid_zone)
+		T.dbg(zasdbgovl_invalid_zone)
 	#endif
 
 /zone/proc/rebuild()
@@ -125,7 +125,6 @@ Class Procs:
 	c_invalidate()
 	for(var/turf/simulated/T in contents)
 		T.update_graphic(graphic_remove = air.graphic) //we need to remove the overlays so they're not doubled when the zone is rebuilt
-		//T.dbg(invalid_zone)
 		T.needs_air_update = 0 //Reset the marker so that it will be added to the list.
 		SSair.mark_for_update(T)
 
@@ -188,8 +187,7 @@ Class Procs:
 	to_chat(M, "P: [air.return_pressure()] kPa V: [air.volume]L T: [air.temperature]°K ([air.temperature - T0C]°C)")
 	to_chat(M, "O2 per N2: [(air.gas[GAS_NITROGEN] ? air.gas[GAS_OXYGEN]/air.gas[GAS_NITROGEN] : "N/A")] Moles: [air.total_moles]")
 	to_chat(M, "Simulated: [contents.len] ([air.group_multiplier])")
-//	to_chat(M, "Unsimulated: [unsimulated_contents.len]")
-//	to_chat(M, "Edges: [edges.len]")
+	to_chat(M, "Edges: [length(edges)]")
 	if(invalid) to_chat(M, "Invalid!")
 	var/zone_edges = 0
 	var/space_edges = 0

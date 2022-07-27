@@ -1,3 +1,15 @@
+///
+ /*
+ / Uncomment this to enable ZAS debugging tools. While ghosted, you will see a visualization of the atmos status of turfs.
+ / Green turfs are zones that are existing happily.
+ / Yellow-orange turfs are a zone that has recently been merged into another zone.
+ / Red turfs are turfs are an invalidated zone. Invalid zones are zones that were destroyed.
+ / White/overlay-less turfs are turfs that are the origin point of a zone. This is completely useless information.
+ / Purple squares indicate the turf was marked for an update by SSair, and is in its processing list.
+ / In addition, all ZAS-related datums and turfs will have a "verbose" var. Set this to 1 using View Variables to get robust to_chat()s about activity.
+ / Finally, this is a friendly reminder that using Debug Verbs gives access to the Zone Info and Test ZAS Connection verbs when you right click a turf.
+*/
+///
 //#define ZASDBG
 #define MULTIZAS
 
@@ -5,7 +17,7 @@
 #define ZONE_BLOCKED 2
 #define BLOCKED 3
 
-#define ZONE_MIN_SIZE 14 //zones with less than this many turfs will always merge, even if the connection is not direct
+#define ZONE_MIN_SIZE 5 //zones with less than this many turfs will always merge, even if the connection is not direct
 
 #define CANPASS_ALWAYS 1
 #define CANPASS_DENSITY 2
