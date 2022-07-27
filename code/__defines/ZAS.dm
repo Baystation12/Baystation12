@@ -1,5 +1,5 @@
-///
- /*
+
+/*
  / Uncomment this to enable ZAS debugging tools. While ghosted, you will see a visualization of the atmos status of turfs.
  / Green turfs are zones that are existing happily.
  / Yellow-orange turfs are a zone that has recently been merged into another zone.
@@ -9,7 +9,6 @@
  / In addition, all ZAS-related datums and turfs will have a "verbose" var. Set this to 1 using View Variables to get robust to_chat()s about activity.
  / Finally, this is a friendly reminder that using Debug Verbs gives access to the Zone Info and Test ZAS Connection verbs when you right click a turf.
 */
-///
 //#define ZASDBG
 #define MULTIZAS
 
