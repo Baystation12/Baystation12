@@ -64,6 +64,7 @@
 	#include "items/memos.dm"
 
 	#include "../../packs/faction_iccgn/_pack.dm"
+	#include "../../packs/event_2022jul30/_pack.dm"
 
 	#include "items/clothing/ec_skillbadges.dm"
 	#include "items/clothing/solgov-accessory.dm"

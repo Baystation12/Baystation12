@@ -2220,6 +2220,7 @@
 	c_tag = "Bridge";
 	dir = 1
 	},
+/obj/item/folder/envelope/declassified1,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "dY" = (
@@ -11190,6 +11191,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/item/folder/envelope/lauletter1,
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/office/co)
 "Fn" = (
