@@ -16,7 +16,6 @@
 	description = "A chill asteroid mining station."
 	suffixes = list("mininghome/mininghome.dmm")
 	spawn_cost = 0.5
-	template_flags = TEMPLATE_FLAG_SPAWN_GUARANTEED
 
 /obj/effect/shuttle_landmark/nav_mininghome_1
 	name = "Navpoint #1"
