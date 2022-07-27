@@ -212,7 +212,7 @@
 
 /datum/uplink_item/item/visible_weapons/harpoonbomb
 	name = "Explosive Harpoon"
-	item_cost = 12
+	item_cost = 32
 	path = /obj/item/material/harpoon/bomb
 
 /datum/uplink_item/item/visible_weapons/incendiary_laser
