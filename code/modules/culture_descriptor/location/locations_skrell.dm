@@ -17,7 +17,7 @@
 	Established some 500 years ago Talamira is considered a trade and commerce hub in its sector. This is largely a result of its central position between a large \
 	number of established frontier city-states and the rest of Skrell space, The planet itself consists of a single swamp ridden supercontinent that is mildly \
 	warmer than Qerr'Balak, with hundreds of city-states dotting the surface, most of which are heavily invested in manufacturing and logistics, benefiting from the \
-	trade of raw resources with frontier worlds.This rising star of the Skrell territories is considered an economic powerhouse, with its city states wielding influence \
+	trade of raw resources with frontier worlds. This rising star of the Skrell territories is considered an economic powerhouse, with its city states wielding influence \
 	across the frontier."
 	capital = "None"
 	ruling_body = "None"
@@ -31,7 +31,7 @@
 	only as the 'Throom,' a name given because of a distinctive sound made by their vessels. The species, which appear to do little other than raid, make regular incursions.\
 	It is because of this state that Roa'Sora is heavily militarised in nature, with a heavy Raskinta influence and strong cooperation with its SDTF, Sora'terr.\
 	The primary export of the planet is rare minerals, though it possesses a strong military defence industry also. In spite of their situation the city-state regularly \
-	attempts to negotiate and open diplomatic channels with their assailants to little avail.Geographically, the planet is fairly mountainous and rocky, with a few deep lakes \
+	attempts to negotiate and open diplomatic channels with their assailants to little avail. Geographically, the planet is fairly mountainous and rocky, with a few deep lakes \
 	in mountain valleys, around which most mining stations are built."
 	capital = "None"
 	ruling_body = "None"
@@ -54,9 +54,18 @@
 	name = HOME_SYSTEM_SKRELLSPACE
 	description = "A very different style of living from a more traditional city-state based Skrell, those who live and reside in space belong to no particular city-state \
 	and instead are governed by the SDTF of the system in which they reside, with all services and installations under the control of the local Raskinta SDTF Commander \
-	rather than a Qerr-Skria.Life in these circumstances is often more regimented and disciplined, with a stronger emphasis on community and collaboration, with varying extremes \
+	rather than a Qerr-Skria. Life in these circumstances is often more regimented and disciplined, with a stronger emphasis on community and collaboration, with varying extremes \
 	depending on the status, funding and level of military engagements the SDTF is currently in."
 	capital = "None"
 	ruling_body = "Your local SDTF"
 	distance = "None"
 	economic_power = 1.9
+
+/decl/cultural_info/location/otherskrell
+	name = HOME_SYSTEM_OTHERSKRELL
+	description = "Skrell control a much wider region of space than humanity, and to many their space is seen as uncountably infinite. This planet is one of the many skrellian worlds \
+	 that are less known."
+	capital = "None"
+	ruling_body = "None"
+	distance = "None"
+	economic_power = 1.5

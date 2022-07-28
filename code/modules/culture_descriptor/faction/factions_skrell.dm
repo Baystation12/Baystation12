@@ -39,3 +39,15 @@
 	unfounded, and Qonn'prri is known for offering a professional, reliable and able service to Humans and Skrell alike."
 	additional_langs = list(LANGUAGE_HUMAN_EURO)
 	economic_power = 1.4
+
+/decl/cultural_info/faction/skrell/otherskrellfac
+	name = FACTION_SKRELL_OTHERSKRELLFAC
+	description = "There are more factions in skrellian space than can be counted, from corporations to crime syndicates to royal courts. This faction is one of those many outliers."
+	additional_langs = list(LANGUAGE_HUMAN_EURO)
+	economic_power = 1.5
+
+/decl/cultural_info/faction/skrell/othersdtf
+	name = FACTION_SKRELL_OTHERSDTF
+	description = "SDTFs control skrell space from the human frontiers to far, far beyond. There are too many Defense Task Forces to name, and this SDTF is one of them."
+	additional_langs = list(LANGUAGE_HUMAN_EURO)
+	economic_power = 1.5
