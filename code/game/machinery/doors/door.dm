@@ -455,8 +455,8 @@
 
 	close_door_at = 0
 	do_animate("closing")
-	sleep(3)
 	src.set_density(1)
+	sleep(3)
 	src.layer = closed_layer
 	update_nearby_tiles()
 	sleep(7)
