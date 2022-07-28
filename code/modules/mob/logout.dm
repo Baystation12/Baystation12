@@ -13,6 +13,7 @@
 	..()
 
 	my_client = null
+	logout_time = world.time
 	return 1
 
 /mob/proc/handle_admin_logout()

@@ -55,6 +55,8 @@
 
 /mob
 	var/client/my_client // Need to keep track of this ourselves, since by the time Logout() is called the client has already been nulled
+	/// Integer or null. Stores the `world.time` value at the time of `Logout()`. If `null`, the mob is either considered logged in or has never logged out.
+	var/logout_time = null
 
 /mob/Login()
 
@@ -76,6 +78,7 @@
 	..()
 
 	my_client = client
+	logout_time = null
 
 	if(loc && !isturf(loc))
 		client.eye = loc

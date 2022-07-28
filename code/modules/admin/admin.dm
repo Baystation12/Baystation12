@@ -65,6 +65,12 @@ var/global/floorIsLava = 0
 			body += "[pilot] "
 			body += " \[<A href='?src=\ref[src];pilot=\ref[pilot]'>link</a>\]<br>"
 
+	var/inactivity_time = M.client?.inactivity ? time_to_readable(M.client.inactivity) : null
+
+	var/logout_time = null
+	if (!isnull(M.logout_time))
+		logout_time = time_to_readable(world.time - M.logout_time)
+
 	body += {"
 		<br><br>\[
 		<a href='?_src_=vars;Vars=\ref[M]'>VV</a> -
@@ -73,7 +79,8 @@ var/global/floorIsLava = 0
 		<a href='?src=\ref[src];narrateto=\ref[M]'>DN</a> -
 		[admin_jump_link(M, src)]\] <br>
 		<b>Mob type:</b> [M.type]<br>
-		<b>Inactivity time:</b> [M.client ? "[M.client.inactivity/600] minutes" : "Logged out"]<br/><br/>
+		<b>Inactivity time:</b> [inactivity_time ? "[inactivity_time]" : "Logged out"]<br/>
+		<b>Logout time:</b> [logout_time ? "[logout_time] ago" : "N/A"]<br/><br/>
 		<A href='?src=\ref[src];paralyze=\ref[M]'>PARALYZE</A> |
 		<A href='?src=\ref[src];boot2=\ref[M]'>Kick</A> |
 		<A href='?_src_=holder;warn=[last_ckey]'>Warn</A> |
