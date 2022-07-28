@@ -744,52 +744,6 @@
 			M.emote(pick("twitch", "drool", "moan", "giggle"))
 	M.add_chemical_effect(CE_PULSE, -1)
 
-/datum/reagent/tilt
-	name = "Tilt"
-	description = "A potent downer made from mixing cough medicine and Space-Up."
-	taste_description = "purple sweetness"
-	reagent_state = LIQUID
-	color = "#800080"
-	metabolism = REM * 0.5
-	overdose = REAGENTS_OVERDOSE
-	value = 1.5
-	var/strength = 10
-
-	glass_name = "tilt"
-	glass_desc = "The best way there is to get tilted."
-
-/datum/reagent/tilt/affect_blood(mob/living/carbon/M, alien, removed)
-	if (alien == IS_DIONA)
-		return
-
-	var/strength_mod = 1
-	if (alien == IS_SKRELL)
-		strength_mod *= 0.5
-
-	var/effective_dose = M.chem_doses[type] * strength_mod
-
-	if (effective_dose >= strength * 0.5)
-		M.add_chemical_effect(CE_SLOWDOWN, 1)
-		M.make_dizzy(6)
-	if (effective_dose >= strength)
-		M.slurring = max(M.slurring, 40)
-		M.confused = max(M.confused, 30)
-		M.make_dizzy(10)
-		M.eye_blurry = max(M.eye_blurry, 10)
-	if (effective_dose >= strength * 1.5)
-		M.drowsyness = max(M.drowsyness, 20)
-		M.make_dizzy(40)
-		if (prob(10))
-			M.emote("drool")
-
-/datum/reagent/tilt/overdose(mob/living/carbon/M, alien)
-	M.add_chemical_effect(CE_TOXIN, 1)
-	if (prob(90))
-		M.add_chemical_effect(CE_BREATHLOSS, 5)
-	if (prob(10))
-		M.Paralyse(20)
-		M.Sleeping(30)
-
 
 /datum/reagent/serotrotium
 	name = "Serotrotium"
