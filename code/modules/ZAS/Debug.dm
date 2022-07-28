@@ -1,13 +1,13 @@
 #ifdef ZASDBG
 
-var/obj/effect/zasdbg/assigned/zasdbgovl_assigned = new
-var/obj/effect/zasdbg/created/zasdbgovl_created = new
-var/obj/effect/zasdbg/merged/zasdbgovl_merged = new
-var/obj/effect/zasdbg/invalid_zone/zasdbgovl_invalid_zone = new
-var/obj/effect/zasdbg/blocked/zasdbgovl_blocked = new
-var/obj/effect/zasdbg/mark/zasdbgovl_mark = new
+var/global/obj/effect/zasdbg/assigned/zasdbgovl_assigned = new
+var/global/obj/effect/zasdbg/created/zasdbgovl_created = new
+var/global/obj/effect/zasdbg/merged/zasdbgovl_merged = new
+var/global/obj/effect/zasdbg/invalid_zone/zasdbgovl_invalid_zone = new
+var/global/obj/effect/zasdbg/blocked/zasdbgovl_blocked = new
+var/global/obj/effect/zasdbg/mark/zasdbgovl_mark = new
 
-var/list/zasdbgovl_dirblock = list(
+var/global/list/zasdbgovl_dirblock = list(
 	"north" = new /obj/effect/zasdbg/air_blocked/north,
 	"east" = new /obj/effect/zasdbg/air_blocked/east,
 	"south" = new /obj/effect/zasdbg/air_blocked/south,
@@ -16,7 +16,7 @@ var/list/zasdbgovl_dirblock = list(
 ///Retrives the directional block indicator overlay for a given direction
 #define ZAS_DIRECTIONAL_BLOCKER(d) (zasdbgovl_dirblock[dir2text(d)])
 
-var/list/zasdbgovl_dirzoneblock = list(
+var/global/list/zasdbgovl_dirzoneblock = list(
 	"north" = new /obj/effect/zasdbg/zone_blocked/north,
 	"east" = new /obj/effect/zasdbg/zone_blocked/east,
 	"south" = new /obj/effect/zasdbg/zone_blocked/south,
