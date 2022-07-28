@@ -28,51 +28,66 @@
 		result -= started
 	return result
 
+/// Converts an integer of world.time to a user-readable string split into time measurements from seconds to years.
+/proc/time_to_readable(time, round = TRUE)
+	if (!isnum(time))
+		time = text2num(time)
 
-/proc/minutes_to_readable(minutes)
-	if (!isnum(minutes))
-		minutes = text2num(minutes)
-
-	if (minutes < 0)
+	if (time < 0)
 		return "INFINITE"
-	else if (isnull(minutes))
+	if (isnull(time))
 		return "BAD INPUT"
 
+	var/seconds = time / 10
+	var/minutes = 0
 	var/hours = 0
 	var/days = 0
 	var/weeks = 0
 	var/months = 0
 	var/years = 0
+	var/list/result = list()
 
-	if (minutes >= 518400)
-		years = round(minutes / 518400)
-		minutes = minutes - (years * 518400)
-	if (minutes >= 43200)
-		months = round(minutes / 43200)
-		minutes = minutes - (months * 43200)
-	if (minutes >= 10080)
-		weeks = round(minutes / 10080)
-		minutes = minutes - (weeks * 10080)
-	if (minutes >= 1440)
-		days = round(minutes / 1440)
-		minutes = minutes - (days * 1440)
-	if (minutes >= 60)
-		hours = round(minutes / 60)
-		minutes = minutes - (hours * 60)
-
-	var/result = list()
-	if (years)
+	// Years
+	if (seconds > 31536000)
+		years = round(seconds / 31536000)
+		seconds -= years * 31536000
 		result += "[years] year\s"
-	if (months)
+
+	// Months
+	if (seconds >= 259200)
+		months = round(seconds / 259200)
+		seconds -= months * 259200
 		result += "[months] month\s"
-	if (weeks)
+
+	// Weeks
+	if (seconds >= 604800)
+		weeks = round(seconds / 604800)
+		seconds -= weeks * 604800
 		result += "[weeks] week\s"
-	if (days)
+
+	// Days
+	if (seconds >= 86400)
+		days = round(seconds / 86400)
+		seconds -= days * 86400
 		result += "[days] day\s"
-	if (hours)
+
+	// Hours
+	if (seconds >= 3600)
+		hours = round(seconds / 3600)
+		seconds -= hours * 3600
 		result += "[hours] hour\s"
-	if (minutes)
+
+	// Minutes
+	if (seconds >= 60)
+		minutes = round(seconds / 60)
+		seconds -= minutes * 60
 		result += "[minutes] minute\s"
+
+	// Seconds
+	if (round)
+		seconds = round(seconds)
+	if (seconds > 0 || !result) // Empty result should just say 0 seconds
+		result += "[seconds] second\s"
 
 	return jointext(result, ", ")
 
