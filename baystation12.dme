@@ -1689,6 +1689,7 @@
 #include "code\modules\culture_descriptor\location\locations_vox.dm"
 #include "code\modules\culture_descriptor\religion\_religion.dm"
 #include "code\modules\culture_descriptor\religion\religions_human.dm"
+#include "code\modules\culture_descriptor\religion\religions_skrell.dm"
 #include "code\modules\culture_descriptor\religion\religions_unathi.dm"
 #include "code\modules\culture_descriptor\religion\religions_vox.dm"
 #include "code\modules\detectivework\forensics.dm"
