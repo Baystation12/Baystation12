@@ -7675,15 +7675,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
-"qt" = (
-/obj/effect/floor_decal/corner/lime/three_quarters{
-	dir = 1
-	},
-/obj/machinery/vending/cola{
-	dir = 8
-	},
-/turf/simulated/floor/tiled,
-/area/hallway/primary/thirddeck/aft)
 "qu" = (
 /turf/simulated/floor/carpet,
 /area/crew_quarters/recreation)
@@ -9620,9 +9611,6 @@
 /obj/machinery/light/spot{
 	dir = 8
 	},
-/obj/machinery/vending/snack{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
 "vS" = (
@@ -10050,9 +10038,6 @@
 "wY" = (
 /obj/machinery/camera/network/third_deck{
 	c_tag = "Cryogenic Storage - Fore Starboard";
-	dir = 4
-	},
-/obj/machinery/vending/cola{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -11228,7 +11213,6 @@
 /area/storage/tools)
 "AL" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/vending/assist,
 /turf/simulated/floor/tiled/monotile,
 /area/storage/tools)
 "AM" = (
@@ -12546,9 +12530,6 @@
 	c_tag = "Cryogenic Storage - Fore Port";
 	dir = 4
 	},
-/obj/machinery/vending/coffee{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
 "Ew" = (
@@ -12731,9 +12712,6 @@
 	},
 /obj/structure/sign/ecplaque{
 	pixel_y = -30
-	},
-/obj/machinery/vending/cigarette{
-	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
@@ -16777,9 +16755,6 @@
 /obj/effect/floor_decal/corner/lime/three_quarters{
 	dir = 4
 	},
-/obj/machinery/vending/coffee{
-	dir = 8
-	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
 "PV" = (
@@ -17396,9 +17371,6 @@
 "RW" = (
 /obj/machinery/light{
 	dir = 8
-	},
-/obj/machinery/vending/fitness{
-	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/gym)
@@ -19980,9 +19952,6 @@
 /area/maintenance/thirddeck/port)
 "Zn" = (
 /obj/effect/floor_decal/corner/green/half,
-/obj/machinery/vending/fitness{
-	dir = 1
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/observation)
 "Zo" = (
@@ -46610,7 +46579,7 @@ aT
 aT
 MM
 Su
-qt
+rB
 ux
 tA
 Kt
