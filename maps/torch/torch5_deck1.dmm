@@ -6848,7 +6848,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "atB" = (
-/obj/machinery/lapvend,
 /obj/structure/window/reinforced{
 	dir = 4
 	},
@@ -8616,15 +8615,6 @@
 	},
 /turf/simulated/wall/prepainted,
 /area/hallway/primary/firstdeck/center)
-"aBy" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4
-	},
-/obj/machinery/vending/coffee{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white/monotile,
-/area/crew_quarters/sleep/cryo/aux)
 "aBz" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
@@ -9128,9 +9118,6 @@
 /obj/item/device/radio/intercom/entertainment{
 	dir = 8;
 	pixel_x = 22
-	},
-/obj/machinery/vending/fitness{
-	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo/aux)
@@ -11111,9 +11098,6 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/obj/machinery/vending/cigarette{
-	dir = 8
-	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo/aux)
 "aNy" = (
@@ -11247,9 +11231,6 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/machinery/vending/cola{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo/aux)
 "aOb" = (
@@ -11297,9 +11278,6 @@
 /area/crew_quarters/sleep/cryo/aux)
 "aOg" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
-	},
-/obj/machinery/vending/snack{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -17392,9 +17370,6 @@
 "fVw" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_x = -32
-	},
-/obj/machinery/vending/fitness{
-	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/teleporter/firstdeck)
@@ -46542,7 +46517,7 @@ rsV
 ayg
 ure
 aAs
-aBy
+aOa
 aCP
 aDX
 aFg
