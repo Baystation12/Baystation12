@@ -154,12 +154,6 @@
 			update_material()
 		return 1
 
-	if(istype(W, /obj/item/hand)) //playing cards
-		var/obj/item/hand/H = W
-		if(H.cards && H.cards.len == 1)
-			usr.visible_message("\The [user] plays \the [H.cards[1].name].")
-		return
-
 	// Handle dismantling or placing things on the table from here on.
 	if(isrobot(user))
 		return
