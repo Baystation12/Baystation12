@@ -583,6 +583,22 @@
 	result = /obj/item/reagent_containers/food/snacks/sliceable/pizza/vegetablepizza
 
 
+/datum/recipe/fruitpizza
+	items = list(
+		/obj/item/reagent_containers/food/snacks/sliceable/flatdough
+	)
+	reagents = list(
+		/datum/reagent/drink/milk/cream = 20,
+		/datum/reagent/sugar = 20
+	)
+	fruit = list(
+		"pineapple" = 1,
+		"banana" = 1,
+		"blueberries" = 1
+	)
+	result = /obj/item/reagent_containers/food/snacks/sliceable/pizza/fruitpizza
+
+
 /datum/recipe/spacylibertyduff
 	reagents = list(
 		/datum/reagent/water = 10,

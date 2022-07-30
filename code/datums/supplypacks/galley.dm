@@ -86,12 +86,14 @@
 	cost = 150
 
 /decl/hierarchy/supply_pack/galley/pizza
-	num_contained = 4
 	name = "Emergency - Surprise pack of five pizzas"
-	contains = list(/obj/item/pizzabox/margherita,
-					/obj/item/pizzabox/mushroom,
-					/obj/item/pizzabox/meat,
-					/obj/item/pizzabox/vegetable)
+	contains = list(
+		/obj/item/pizzabox/margherita,
+		/obj/item/pizzabox/mushroom,
+		/obj/item/pizzabox/meat,
+		/obj/item/pizzabox/vegetable,
+		/obj/item/pizzabox/fruit
+	)
 	cost = 150
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "pizza crate"
