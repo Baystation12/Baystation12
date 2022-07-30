@@ -1,0 +1,4 @@
+author: Spookerton
+delete-after: true
+changes:
+  - bugfix: SSao doesn't replace its turf queue with its image cache anymore. Whoops.
