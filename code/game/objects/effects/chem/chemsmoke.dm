@@ -28,11 +28,6 @@
 	if(destination)
 		walk_to(src, destination)
 
-/obj/effect/effect/smoke/chem/Destroy()
-	// TODO - fadeOut() sleeps.  Sleeping in /Destroy is Bad, this needs to be fixed.
-	fadeOut()
-	return ..()
-
 /obj/effect/effect/smoke/chem/Move()
 	var/list/oldlocs = view(1, src)
 	. = ..()
@@ -55,17 +50,6 @@
 		for(var/atom/movable/AM in T)
 			if(!istype(AM, /obj/effect/effect/smoke/chem))
 				reagents.splash(AM, splash_amount, copy = 1)
-
-// Fades out the smoke smoothly using it's alpha variable.
-/obj/effect/effect/smoke/chem/proc/fadeOut(var/frames = 16)
-	set waitfor = FALSE
-	if(!alpha) return //already transparent
-
-	frames = max(frames, 1) //We will just assume that by 0 frames, the coder meant "during one frame".
-	var/alpha_step = round(alpha / frames)
-	while(alpha > 0)
-		alpha = max(0, alpha - alpha_step)
-		sleep(world.tick_lag)
 
 /////////////////////////////////////////////
 // Chem Smoke Effect System
