@@ -1431,6 +1431,7 @@
 	display_name = "pineapple plant"
 	chems = list(/datum/reagent/drink/juice/pineapple = list(10,10), /datum/reagent/enzyme = list(1,5),/datum/reagent/nutriment = list(1,10))
 	trash_type = /obj/item/carvable/corncob/hollowpineapple
+	kitchen_tag = "pineapple"
 
 /datum/seed/pineapple/New()
 	..()
