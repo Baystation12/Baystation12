@@ -10,7 +10,8 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+	init_flags = EMPTY_BITFIELD
+
 	machine_name = "hydroponics tray"
 	machine_desc = "These are waist-high trays that can grow a vast variety of plants in a nutrient bath. Also comes with a sealable lid for plants that don't grow in a surrounding atmosphere. A cornerstone of self-sufficient spaceships across the galaxy."
 
@@ -161,16 +162,15 @@
 	if(mechanical)
 		connect()
 	update_icon()
-	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_ALL)
-	START_PROCESSING(SSplants, src)
+	SSplants.active_plants += src
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/portable_atmospherics/hydroponics/Destroy()
-	STOP_PROCESSING(SSplants, src)
-	. = ..()
+	SSplants.active_plants -= src
+	return ..()
 
 /obj/machinery/portable_atmospherics/hydroponics/LateInitialize()
-	. = ..()
+	..()
 	if(locate(/obj/item/seeds) in get_turf(src))
 		plant()
 
@@ -643,4 +643,3 @@
 	else if(harvest)
 		harvest()
 	return TRUE
-
