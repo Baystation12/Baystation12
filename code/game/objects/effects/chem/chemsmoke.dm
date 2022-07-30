@@ -3,7 +3,6 @@
 /////////////////////////////////////////////
 /obj/effect/effect/smoke/chem
 	icon = 'icons/effects/chemsmoke.dmi'
-	opacity = 0
 	layer = ABOVE_PROJECTILE_LAYER
 	time_to_live = 300
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
@@ -24,17 +23,12 @@
 	pixel_x = -32 + rand(-8, 8)
 	pixel_y = -32 + rand(-8, 8)
 
-	//switching opacity on after the smoke has spawned, and then turning it off before it is deleted results in cleaner
-	//lighting and view range updates (Is this still true with the new lighting system?)
-	set_opacity(1)
-
 	//float over to our destination, if we have one
 	destination = dest_turf
 	if(destination)
 		walk_to(src, destination)
 
 /obj/effect/effect/smoke/chem/Destroy()
-	set_opacity(0)
 	// TODO - fadeOut() sleeps.  Sleeping in /Destroy is Bad, this needs to be fixed.
 	fadeOut()
 	return ..()
