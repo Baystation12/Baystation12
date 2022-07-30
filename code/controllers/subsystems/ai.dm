@@ -4,25 +4,27 @@ SUBSYSTEM_DEF(ai)
 	priority = SS_PRIORITY_AI
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	wait = 2 SECONDS
-	var/static/list/active = list()
-	var/static/list/queue = list()
+	var/static/list/datum/ai_holder/ai_holders = list()
+	var/static/list/datum/ai_holder/queue = list()
 
 
 /datum/controller/subsystem/ai/UpdateStat(time)
 	if (PreventUpdateStat(time))
 		return ..()
 	..({"\
-		Active AI: [active.len] \
+		Active AI: [ai_holders.len] \
 		Run Empty Levels: [config.run_empty_levels ? "Y" : "N"]\
 	"})
 
 
 /datum/controller/subsystem/ai/fire(resume, no_mc_tick)
 	if (!resume)
-		queue = active.Copy()
-	var/datum/ai_holder/ai
-	for (var/i = queue.len to 1 step -1)
-		ai = queue[i]
+		queue = ai_holders.Copy()
+		if (!queue.len)
+			return
+	var/cut_until = 1
+	for (var/datum/ai_holder/ai as anything in queue)
+		++cut_until
 		if (QDELETED(ai) || ai.busy)
 			continue
 		if (!ai.holder)
@@ -33,8 +35,9 @@ SUBSYSTEM_DEF(ai)
 		if (no_mc_tick)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
-			queue.Cut(i)
+			queue.Cut(1, cut_until)
 			return
+	queue.Cut()
 
 
 #ifdef UNIT_TEST
