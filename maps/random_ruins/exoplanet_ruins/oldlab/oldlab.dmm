@@ -1404,8 +1404,7 @@
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/shutters{
 	icon_state = "shutter0";
-	id_tag = "research_lab_shutters";
-	opacity = 0
+	id_tag = "research_lab_shutters"
 	},
 /obj/effect/paint/black,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1516,8 +1515,7 @@
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/shutters{
 	icon_state = "shutter0";
-	id_tag = "research_lab_shutters";
-	opacity = 0
+	id_tag = "research_lab_shutters"
 	},
 /obj/effect/paint/black,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -2280,8 +2278,7 @@
 /obj/machinery/door/blast/shutters{
 	dir = 4;
 	icon_state = "shutter0";
-	id_tag = "research_lab_shutters";
-	opacity = 0
+	id_tag = "research_lab_shutters"
 	},
 /obj/effect/paint/black,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -2736,8 +2733,7 @@
 /obj/machinery/door/blast/shutters{
 	dir = 4;
 	icon_state = "shutter0";
-	id_tag = "exterior_lab_shutters";
-	opacity = 0
+	id_tag = "exterior_lab_shutters"
 	},
 /obj/effect/paint/black,
 /turf/simulated/floor/tiled/techfloor/grid,
