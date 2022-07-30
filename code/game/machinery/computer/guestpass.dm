@@ -34,8 +34,8 @@
 	to_chat(usr, SPAN_NOTICE("Issuing reason: [reason]."))
 
 /obj/item/card/id/guest/proc/expire()
-	color = COLOR_BLACK
-	detail_color = COLOR_BLACK
+	color = COLOR_PALE_GREEN_GRAY
+	detail_color = COLOR_NT_RED
 	update_icon()
 
 	expired = TRUE
@@ -103,7 +103,7 @@
 				"selected" = (A in accesses))))
 
 		data["giver_access"] = giver_access
-		
+
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "guestpass.tmpl", "Guest Pass Terminal", 600, 800)
@@ -128,9 +128,9 @@
 			. = TOPIC_REFRESH
 
 	else if (href_list["duration"])
-		var/dur = input(user, "Duration (in minutes) during which pass is valid (up to 60 minutes).", "Duration") as num|null
+		var/dur = input(user, "Duration (in minutes) during which pass is valid (up to 45 minutes).", "Duration") as num|null
 		if (dur && CanUseTopic(user, state))
-			if (dur > 0 && dur <= 30)
+			if (dur > 0 && dur <= 45)
 				duration = dur
 				. = TOPIC_REFRESH
 			else
