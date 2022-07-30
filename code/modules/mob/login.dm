@@ -7,7 +7,7 @@
 	if(config.log_access)
 		log_access("Login: [key_name(src)] from [lastKnownIP ? lastKnownIP : "localhost"]-[computer_id] || BYOND v[client.byond_version]")
 		var/is_multikeying = 0
-		if (!check_rights(R_MOD, FALSE, client) || !config.warn_if_staff_same_ip)
+		if (config.warn_if_staff_same_ip || !check_rights(R_MOD, FALSE, client))
 			for(var/mob/M in GLOB.player_list)
 				if(M == src)	continue
 				if( M.key && (M.key != key) )
