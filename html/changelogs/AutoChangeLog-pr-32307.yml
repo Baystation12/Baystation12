@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Janitor borgs can no longer delete holograms and other things that use
+      effects overlays.
