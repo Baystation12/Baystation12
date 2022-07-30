@@ -20,8 +20,6 @@
 		icon = cached_icon
 
 	set_dir(pick(GLOB.cardinal))
-	pixel_x = -32 + rand(-8, 8)
-	pixel_y = -32 + rand(-8, 8)
 
 	//float over to our destination, if we have one
 	destination = dest_turf
@@ -36,9 +34,6 @@
 			for(var/atom/movable/AM in T)
 				if(!istype(AM, /obj/effect/effect/smoke/chem))
 					reagents.splash(AM, splash_amount, copy = 1)
-		if(loc == destination)
-			bound_width = 96
-			bound_height = 96
 
 /obj/effect/effect/smoke/chem/Crossed(atom/movable/AM)
 	..()
