@@ -4,26 +4,27 @@
 	lastKnownIP	= client.address
 	computer_id	= client.computer_id
 	last_ckey = ckey
-	log_access("Login: [key_name(src)] from [lastKnownIP ? lastKnownIP : "localhost"]-[computer_id] || BYOND v[client.byond_version]")
 	if(config.log_access)
+		log_access("Login: [key_name(src)] from [lastKnownIP ? lastKnownIP : "localhost"]-[computer_id] || BYOND v[client.byond_version]")
 		var/is_multikeying = 0
-		for(var/mob/M in GLOB.player_list)
-			if(M == src)	continue
-			if( M.key && (M.key != key) )
-				var/matches
-				if( (M.lastKnownIP == client.address) )
-					matches += "IP ([client.address])"
-				if( (client.connection != "web") && (M.computer_id == client.computer_id) )
-					if(matches)	matches += " and "
-					matches += "ID ([client.computer_id])"
-					is_multikeying = 1
-				if(matches)
-					if(M.client)
-						message_admins("[SPAN_DANGER("<B>Notice:</B>")] <span class='info'><A href='?src=\ref[usr];priv_msg=\ref[src]'>[key_name_admin(src)]</A> has the same [matches] as <A href='?src=\ref[usr];priv_msg=\ref[M]'>[key_name_admin(M)]</A>.</span>", 1)
-						log_access("Notice: [key_name(src)] has the same [matches] as [key_name(M)].")
-					else
-						message_admins("[SPAN_DANGER("<B>Notice:</B>")] <span class='info'><A href='?src=\ref[usr];priv_msg=\ref[src]'>[key_name_admin(src)]</A> has the same [matches] as [key_name_admin(M)] (no longer logged in).</span>", 1)
-						log_access("Notice: [key_name(src)] has the same [matches] as [key_name(M)] (no longer logged in).")
+		if (!check_rights(R_MOD, FALSE, client) || !config.warn_if_staff_same_ip)
+			for(var/mob/M in GLOB.player_list)
+				if(M == src)	continue
+				if( M.key && (M.key != key) )
+					var/matches
+					if( (M.lastKnownIP == client.address) )
+						matches += "IP ([client.address])"
+					if( (client.connection != "web") && (M.computer_id == client.computer_id) )
+						if(matches)	matches += " and "
+						matches += "ID ([client.computer_id])"
+						is_multikeying = 1
+					if(matches)
+						if(M.client)
+							message_admins("[SPAN_DANGER("<B>Notice:</B>")] <span class='info'><A href='?src=\ref[usr];priv_msg=\ref[src]'>[key_name_admin(src)]</A> has the same [matches] as <A href='?src=\ref[usr];priv_msg=\ref[M]'>[key_name_admin(M)]</A>.</span>", 1)
+							log_access("Notice: [key_name(src)] has the same [matches] as [key_name(M)].")
+						else
+							message_admins("[SPAN_DANGER("<B>Notice:</B>")] <span class='info'><A href='?src=\ref[usr];priv_msg=\ref[src]'>[key_name_admin(src)]</A> has the same [matches] as [key_name_admin(M)] (no longer logged in).</span>", 1)
+							log_access("Notice: [key_name(src)] has the same [matches] as [key_name(M)] (no longer logged in).")
 		if(is_multikeying && !client.warned_about_multikeying)
 			client.warned_about_multikeying = 1
 			spawn(1 SECOND)

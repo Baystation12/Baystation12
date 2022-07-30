@@ -49,6 +49,9 @@ LOG_ADMIN
 ## log client access (logon/logoff)
 LOG_ACCESS
 
+## When not set, staff with R_MOD and shared IPs do not cause warnings.
+WARN_IF_STAFF_SAME_IP
+
 ## log game actions (start of round, results, etc.)
 LOG_GAME
 
