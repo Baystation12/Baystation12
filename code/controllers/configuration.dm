@@ -304,6 +304,8 @@
 
 	var/static/login_export_addr
 
+	var/static/warn_if_staff_same_ip = FALSE
+
 	var/static/enter_allowed = TRUE
 
 	var/static/player_limit = FALSE
@@ -849,6 +851,8 @@
 				warn_autoban_duration = max(1, text2num(value))
 			if ("run_empty_levels")
 				run_empty_levels = TRUE
+			if ("warn_if_staff_same_ip")
+				warn_if_staff_same_ip = TRUE
 			else
 				log_misc("Unknown setting in config/config.txt: '[name]'")
 
