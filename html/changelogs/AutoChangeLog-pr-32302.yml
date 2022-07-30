@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: The audible message displayed from thrusters that fail and shut down should
+      now appear properly again.
