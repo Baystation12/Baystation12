@@ -154,3 +154,12 @@
 			target.kill_health()
 		if (FALSE)
 			target.revive_health()
+
+/decl/vv_set_handler/vessel_mass
+	handled_type = /obj/effect/overmap/visitable/ship
+	handled_vars = list("vessel_mass")
+	predicates = list(
+		/proc/is_num_predicate,
+		/proc/is_non_zero_predicate,
+		/proc/is_non_negative_predicate
+	)

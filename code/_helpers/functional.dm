@@ -42,6 +42,21 @@
 	if(!. && feedback_receiver)
 		to_chat(feedback_receiver, "<span class='warning'>Value must be a numeral.</span>")
 
+/proc/is_non_zero_predicate(value, feedback_receiver)
+	. = value != 0
+	if (!. && feedback_receiver)
+		to_chat(feedback_receiver, SPAN_WARNING("Value cannot be 0."))
+
+/proc/is_non_negative_predicate(value, feedback_receiver)
+	. = value >= 0
+	if (!. && feedback_receiver)
+		to_chat(feedback_receiver, SPAN_WARNING("Value must be a positive number."))
+
+/proc/is_non_positive_predicate(value, feedback_receiver)
+	. = value <= 0
+	if (!. && feedback_receiver)
+		to_chat(feedback_receiver, SPAN_WARNING("Value must be a negative number."))
+
 /proc/is_text_predicate(var/value, var/feedback_receiver)
 	. = !value || istext(value)
 	if(!. && feedback_receiver)
