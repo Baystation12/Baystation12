@@ -501,7 +501,7 @@ var/global/list/admin_verbs_mod = list(
 		return
 	++D.warns
 	if (config.warn_autoban_threshold && D.warns >= config.warn_autoban_threshold)
-		var/mins_readable = minutes_to_readable(config.warn_autoban_duration)
+		var/mins_readable = time_to_readable(config.warn_autoban_duration MINUTES)
 		ban_unban_log_save("[ckey] warned [warned_ckey], resulting in a [mins_readable] autoban.")
 		if(C)
 			message_admins("[key_name_admin(src)] has warned [key_name_admin(C)] resulting in a [mins_readable] ban.")

@@ -756,7 +756,7 @@
 						return
 
 					var/msg
-					var/mins_readable = minutes_to_readable(mins)
+					var/mins_readable = time_to_readable(mins MINUTES)
 					for(var/job in notbannedlist)
 						ban_unban_log_save("[key_name(usr)] temp-jobbanned [key_name(M)] from [job] for [mins_readable]. reason: [reason]")
 						log_admin("[key_name(usr)] temp-jobbanned [key_name(M)] from [job] for [mins_readable]")
@@ -884,7 +884,7 @@
 					show_player_panel(M)
 					return
 				AddBan(mob_key, M.computer_id, reason, usr.ckey, 1, mins)
-				var/mins_readable = minutes_to_readable(mins)
+				var/mins_readable = time_to_readable(mins MINUTES)
 				ban_unban_log_save("[usr.client.ckey] has banned [mob_key]. - Reason: [reason] - This will be removed in [mins_readable].")
 				notes_add(mob_key,"[usr.client.ckey] has banned [mob_key]. - Reason: [reason] - This will be removed in [mins_readable].",usr)
 				to_chat(M, "<span class='danger'>You have been banned by [usr.client.ckey].\nReason: [reason].</span>")
