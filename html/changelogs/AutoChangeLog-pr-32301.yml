@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Doors should no longer allow mobs to enter their turfs while doing the
-      close animation.

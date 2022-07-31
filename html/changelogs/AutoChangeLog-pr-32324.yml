@@ -1,7 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - rscadd: You can make fruit pizza with a flat dough, 20 cream, 20 sugar, a pineapple,
-      a banana, and a blueberry.
-  - bugfix: Pizza boxes update their contents tag on spawn.
-  - bugfix: Pineapple has a recipe tag. Stuff that used it probably works now.
