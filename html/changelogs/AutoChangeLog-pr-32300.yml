@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - admin: Player panel now displays how long a player's been logged out for.
+  - admin: Player panel inactivity time now converts to minutes, hours, etc as applicable.
