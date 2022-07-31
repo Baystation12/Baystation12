@@ -46,7 +46,7 @@
 	response_harm   = "swats"
 	universal_speak = TRUE
 
-	meat_type = /obj/item/reagent_containers/food/snacks/meat/chicken/game
+	meat_type = /obj/item/reagent_containers/food/snacks/meat/gamebird
 	meat_amount = 3
 	skin_material = MATERIAL_SKIN_FEATHERS
 

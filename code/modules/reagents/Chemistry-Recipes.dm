@@ -1522,18 +1522,6 @@
 	for (var/i = 1 to created_volume)
 		new /obj/item/reagent_containers/food/snacks/sliceable/cheesewheel/fresh (location)
 
-/datum/chemical_reaction/rawmeatball
-	name = "Raw Meatball"
-	result = null
-	required_reagents = list(/datum/reagent/nutriment/protein = 3, /datum/reagent/nutriment/flour = 5)
-	result_amount = 3
-	mix_message = "The flour thickens the processed meat until it clumps."
-
-/datum/chemical_reaction/rawmeatball/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
-	..()
-	var/location = get_turf(holder.my_atom)
-	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/reagent_containers/food/snacks/rawmeatball(location)
 
 /datum/chemical_reaction/dough
 	name = "Dough"
@@ -1584,8 +1572,8 @@
 	result_amount = 10
 	mix_message = "The solution thickens into a glossy batter."
 
-/datum/chemical_reaction/syntiflesh
-	name = "Syntiflesh"
+/datum/chemical_reaction/synthmeat
+	name = "Synthmeat"
 	result = null
 	required_reagents = list(/datum/reagent/blood = 5, /datum/reagent/clonexadone = 1)
 	result_amount = 1
@@ -1595,7 +1583,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/reagent_containers/food/snacks/meat/syntiflesh(location)
+		new /obj/item/reagent_containers/food/snacks/meat/synthmeat(location)
 
 /datum/chemical_reaction/hot_ramen
 	name = "Hot Ramen"

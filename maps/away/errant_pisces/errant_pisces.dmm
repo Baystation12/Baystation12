@@ -6813,7 +6813,7 @@
 /area/space)
 "rb" = (
 /obj/structure/net,
-/obj/item/reagent_containers/food/snacks/meat/syntiflesh,
+/obj/item/reagent_containers/food/snacks/meat/synthmeat,
 /turf/space,
 /area/space)
 "rc" = (

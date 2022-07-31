@@ -17,7 +17,7 @@
 	pry_time = 8 SECONDS
 	break_stuff_probability = 5
 
-	meat_type = /obj/item/reagent_containers/food/snacks/meat/chicken/game
+	meat_type = /obj/item/reagent_containers/food/snacks/meat/gamebird
 	meat_amount = 6
 	bone_amount = 8
 	skin_amount = 8

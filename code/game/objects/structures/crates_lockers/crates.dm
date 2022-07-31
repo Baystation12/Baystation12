@@ -164,7 +164,7 @@
 /obj/structure/closet/crate/freezer/meat/WillContain()
 	return list(
 		/obj/item/reagent_containers/food/snacks/meat/beef = 4,
-		/obj/item/reagent_containers/food/snacks/meat/syntiflesh = 4,
+		/obj/item/reagent_containers/food/snacks/meat/synthmeat = 4,
 		/obj/random/fish = 8
 	)
 

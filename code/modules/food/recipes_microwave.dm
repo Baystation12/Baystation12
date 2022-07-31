@@ -526,7 +526,7 @@
 		/datum/reagent/blackpepper = 1
 	)
 	items = list(
-		/obj/item/reagent_containers/food/snacks/meat/syntiflesh
+		/obj/item/reagent_containers/food/snacks/meat/synthmeat
 	)
 	result = /obj/item/reagent_containers/food/snacks/meatsteak/synthetic
 
@@ -1154,25 +1154,6 @@
 	result = /obj/item/reagent_containers/food/snacks/chocolateegg
 
 
-/datum/recipe/sausage
-	items = list(
-		/obj/item/reagent_containers/food/snacks/rawmeatball,
-		/obj/item/reagent_containers/food/snacks/rawcutlet
-	)
-	result = /obj/item/reagent_containers/food/snacks/sausage
-
-
-/datum/recipe/fatsausage
-	reagents = list(
-		/datum/reagent/blackpepper = 2
-	)
-	items = list(
-		/obj/item/reagent_containers/food/snacks/rawmeatball,
-		/obj/item/reagent_containers/food/snacks/rawcutlet
-	)
-	result = /obj/item/reagent_containers/food/snacks/fatsausage
-
-
 /datum/recipe/fishfingers
 	reagents = list(
 		/datum/reagent/nutriment/flour = 10
@@ -1365,25 +1346,6 @@
 	)
 	result = /obj/item/reagent_containers/food/snacks/flatbread
 
-
-/datum/recipe/meatball
-	items = list(
-		/obj/item/reagent_containers/food/snacks/rawmeatball
-	)
-	result = /obj/item/reagent_containers/food/snacks/meatball
-
-
-/datum/recipe/cutlet
-	items = list(
-		/obj/item/reagent_containers/food/snacks/rawcutlet
-	)
-	result = /obj/item/reagent_containers/food/snacks/cutlet
-
-/datum/recipe/bacon
-	items = list(
-		/obj/item/reagent_containers/food/snacks/rawbacon
-	)
-	result = /obj/item/reagent_containers/food/snacks/bacon
 
 /datum/recipe/fries
 	items = list(

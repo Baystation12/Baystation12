@@ -507,43 +507,6 @@
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 6)
 	reagents.add_reagent(/datum/reagent/acid/polyacid,6)
 
-/obj/item/reagent_containers/food/snacks/meatball
-	name = "meatball"
-	desc = "A great meal all round."
-	icon_state = "meatball"
-	filling_color = "#db0000"
-	center_of_mass = "x=16;y=16"
-	bitesize = 2
-/obj/item/reagent_containers/food/snacks/meatball/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
-
-/obj/item/reagent_containers/food/snacks/sausage
-	name = "sausage"
-	desc = "A piece of mixed, long meat."
-	icon = 'icons/obj/food_ingredients.dmi'
-	icon_state = "sausage"
-	filling_color = "#db0000"
-	center_of_mass = "x=16;y=16"
-	bitesize = 2
-/obj/item/reagent_containers/food/snacks/sausage/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 6)
-
-/obj/item/reagent_containers/food/snacks/fatsausage
-	name = "fat sausage"
-	desc = "A piece of mixed, long meat, with some bite to it."
-	icon_state = "sausage"
-	filling_color = "#db0000"
-	center_of_mass = "x=16;y=16"
-	bitesize = 2
-/obj/item/reagent_containers/food/snacks/fatsausage/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 8)
-
-
-
-
 
 /obj/item/reagent_containers/food/snacks/brainburger
 	name = "brainburger"
@@ -3038,70 +3001,6 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
 
-/obj/item/reagent_containers/food/snacks/rawcutlet
-	name = "raw cutlet"
-	desc = "A thin piece of raw meat."
-	icon = 'icons/obj/food_ingredients.dmi'
-	icon_state = "rawcutlet"
-	filling_color = "#fb8258"
-	slice_path = /obj/item/reagent_containers/food/snacks/rawbacon
-	slices_num = 2
-	bitesize = 1
-	center_of_mass = "x=17;y=20"
-
-/obj/item/reagent_containers/food/snacks/rawcutlet/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 1)
-
-/obj/item/reagent_containers/food/snacks/cutlet
-	name = "cutlet"
-	desc = "A tasty meat slice."
-	icon = 'icons/obj/food_ingredients.dmi'
-	icon_state = "cutlet"
-	filling_color = "#d75608"
-	bitesize = 2
-	center_of_mass = "x=17;y=20"
-
-/obj/item/reagent_containers/food/snacks/cutlet/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
-
-/obj/item/reagent_containers/food/snacks/rawbacon
-	name = "raw bacon"
-	desc = "A raw, fatty strip of meat."
-	icon_state = "rawbacon"
-	filling_color = "#ffa7a3"
-	bitesize = 1
-	center_of_mass = "x=16;y=15"
-
-/obj/item/reagent_containers/food/snacks/rawbacon/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 1)
-
-/obj/item/reagent_containers/food/snacks/bacon
-	name = "bacon"
-	desc = "A delicious, crispy strip of meat."
-	icon_state = "bacon"
-	filling_color = "#cb5d27"
-	bitesize = 2
-	center_of_mass = "x=16;y=15"
-
-/obj/item/reagent_containers/food/snacks/bacon/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 1)
-
-/obj/item/reagent_containers/food/snacks/rawmeatball
-	name = "raw meatball"
-	desc = "A raw meatball."
-	icon = 'icons/obj/food_ingredients.dmi'
-	icon_state = "rawmeatball"
-	filling_color = "#ce3711"
-	bitesize = 2
-	center_of_mass = "x=16;y=15"
-
-/obj/item/reagent_containers/food/snacks/rawmeatball/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
 
 /obj/item/reagent_containers/food/snacks/hotdog
 	name = "hotdog"
