@@ -1,6 +1,6 @@
 SUBSYSTEM_DEF(supply)
 	name = "Supply"
-	wait = 60 SECONDS
+	wait = 20 SECONDS
 	priority = SS_PRIORITY_SUPPLY
 	//Initializes at default time
 	flags = SS_NO_TICK_CHECK
@@ -31,7 +31,6 @@ SUBSYSTEM_DEF(supply)
 
 /datum/controller/subsystem/supply/Initialize(start_uptime)
 	ordernum = rand(1,9000)
-	points = rand(40, 80)
 
 	//Build master supply list
 	var/decl/hierarchy/supply_pack/root = decls_repository.get_decl(/decl/hierarchy/supply_pack)
