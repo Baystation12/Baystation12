@@ -1,7 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Did you know smoke was supposed to have a fade out effect when it goes
-      away? Me either! That feature works now.
-  - bugfix: Smoke will no longer affect mobs through walls and windows.
-  - bugfix: Smoke no longer leaves behind broken turfs shadows.

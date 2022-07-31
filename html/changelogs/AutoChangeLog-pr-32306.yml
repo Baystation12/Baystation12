@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: Maintenance and construction drones can now be made immune to z-transfer
-      self-destruct by setting their `z_locked` var to `null`.

@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: Var-editing a ship's vessel_mass var is restricted to positive, non-zero
-      numbers.
