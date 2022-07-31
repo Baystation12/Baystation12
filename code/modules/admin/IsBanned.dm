@@ -63,7 +63,7 @@
 
 			var/expires = ""
 			if(text2num(duration) > 0)
-				expires = " The ban is for [time_to_readable(duration MINUTES)] and expires on [expiration] (server time)."
+				expires = " The ban is for [time_to_readable(text2num(duration) MINUTES)] and expires on [expiration] (server time)."
 
 			var/desc = "\nReason: You, or another user of this computer or connection ([pckey]) is banned from playing here. The ban reason is:\n[reason]\nThis ban was applied by [ackey] on [bantime], [expires]"
 
