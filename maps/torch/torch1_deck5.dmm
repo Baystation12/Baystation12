@@ -3462,6 +3462,9 @@
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/machinery/vending/coffee{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fifthdeck/fore)
 "iq" = (
@@ -5013,6 +5016,9 @@
 	},
 /obj/machinery/light{
 	dir = 4
+	},
+/obj/machinery/vending/snack{
+	dir = 8
 	},
 /obj/machinery/rotating_alarm/security_alarm{
 	dir = 8
@@ -6731,11 +6737,17 @@
 	dir = 8;
 	pixel_x = 40
 	},
+/obj/machinery/vending/cigarette{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
 "oR" = (
 /obj/effect/floor_decal/corner/brown/half{
 	dir = 4
+	},
+/obj/machinery/vending/cola{
+	dir = 8
 	},
 /obj/machinery/firealarm{
 	dir = 4;
