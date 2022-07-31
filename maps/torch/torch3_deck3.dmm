@@ -845,6 +845,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/structure/closet/crate/hydroponics/beekeeping,
 /obj/item/screwdriver,
 /obj/effect/floor_decal/corner/green{
 	dir = 8
@@ -883,6 +884,7 @@
 	pixel_x = 26;
 	pixel_y = 6
 	},
+/obj/machinery/portable_atmospherics/hydroponics,
 /obj/effect/floor_decal/corner/green/mono,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
@@ -1498,9 +1500,9 @@
 /turf/simulated/floor/tiled/dark,
 /area/vacant/mess)
 "dk" = (
+/obj/structure/closet/secure_closet/freezer/fridge,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/item/reagent_containers/food/condiment/enzyme,
-/obj/structure/closet/secure_closet/freezer/fridge/bugmeat,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/galleybackroom)
 "dl" = (
@@ -1709,6 +1711,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/machinery/seed_storage/garden,
 /turf/simulated/floor/tiled,
 /area/hydroponics)
 "dI" = (
@@ -2030,8 +2033,8 @@
 	icon_state = "0-2"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/secure_closet/freezer/meat,
 /obj/item/reagent_containers/food/condiment/barbecue,
-/obj/structure/closet/secure_closet/freezer/meat/bugmeat,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/galleybackroom)
 "eu" = (
@@ -4440,8 +4443,8 @@
 /turf/simulated/open,
 /area/maintenance/thirddeck/forestarboard)
 "iU" = (
+/obj/structure/closet/secure_closet/freezer/meat,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/closet/secure_closet/freezer/meat/bugmeat,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/galleybackroom)
 "iV" = (
@@ -4965,6 +4968,7 @@
 	name = "Emergency NanoMed";
 	pixel_x = 28
 	},
+/obj/machinery/portable_atmospherics/hydroponics,
 /obj/effect/floor_decal/corner/green/mono,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
@@ -6292,11 +6296,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/forestarboard)
-"mX" = (
-/obj/effect/floor_decal/corner/green/mono,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/monotile,
-/area/hydroponics)
 "mY" = (
 /obj/structure/sign/directions/bridge{
 	dir = 1;
@@ -10124,6 +10123,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/vending/hydronutrients/generic,
 /turf/simulated/floor/tiled,
 /area/hydroponics)
 "xo" = (
@@ -10824,6 +10824,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/portable_atmospherics/hydroponics,
 /obj/effect/floor_decal/corner/green/mono,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
@@ -11289,8 +11290,10 @@
 	dir = 4;
 	pixel_x = -21
 	},
+/obj/structure/closet/secure_closet/freezer/kitchen{
+	req_access = newlist()
+	},
 /obj/item/reagent_containers/food/snacks/mint,
-/obj/structure/closet/secure_closet/freezer/kitchen/bugmeat,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/galleybackroom)
 "Ba" = (
@@ -16558,7 +16561,7 @@
 /obj/effect/floor_decal/corner/green{
 	dir = 10
 	},
-/obj/structure/closet/crate/hydroponics/beekeeping,
+/obj/machinery/beehive,
 /turf/simulated/floor/tiled,
 /area/hydroponics)
 "Po" = (
@@ -17771,6 +17774,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/portable_atmospherics/hydroponics,
 /obj/effect/floor_decal/corner/green/mono,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
@@ -37472,7 +37476,7 @@ CS
 be
 TX
 Td
-mX
+TX
 wn
 Kn
 ev
@@ -37876,7 +37880,7 @@ CS
 be
 TX
 zg
-mX
+TX
 wn
 nZ
 Sw
@@ -38279,8 +38283,8 @@ aa
 CS
 be
 TX
-mX
-mX
+TX
+TX
 wn
 XT
 bA
@@ -38683,8 +38687,8 @@ aa
 CS
 be
 TX
-mX
-mX
+TX
+TX
 wn
 Rn
 bA
