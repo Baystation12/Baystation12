@@ -162,6 +162,11 @@
 	icon_state = "spinach"
 
 
+/obj/item/trash/berries
+	name = "empty can"
+	icon_state = "berries"
+
+
 /obj/item/trash/cakewrap
 	name = "wrapper"
 	icon_state = "cakewrap"

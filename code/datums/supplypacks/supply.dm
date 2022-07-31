@@ -100,17 +100,21 @@
 	containername = "snack foods crate"
 	supply_method = /decl/supply_method/randomized
 
+
 /decl/hierarchy/supply_pack/supply/canned
-	num_contained = 2
-	contains = list(/obj/item/storage/box/canned,
-					/obj/item/storage/box/canned/beef,
-					/obj/item/storage/box/canned/beans,
-					/obj/item/storage/box/canned/tomato,
-)
-	name = "Emergency - Canned foods"
+	name = "Emergency - Canned goods"
 	cost = 30
-	containername = "canneds crate"
+	containername = "canned goods crate"
 	supply_method = /decl/supply_method/randomized
+	num_contained = 2
+	contains = list(
+		/obj/item/storage/box/canned_spinach,
+		/obj/item/storage/box/canned_beef,
+		/obj/item/storage/box/canned_beans,
+		/obj/item/storage/box/canned_tomato,
+		/obj/item/storage/box/canned_berries
+	)
+
 
 /decl/hierarchy/supply_pack/supply/coolanttank
 	name = "Liquid - Coolant tank"
