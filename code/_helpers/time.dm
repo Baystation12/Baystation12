@@ -54,9 +54,9 @@
 		result += "[years] year\s"
 
 	// Months
-	if (seconds >= 259200)
-		months = round(seconds / 259200)
-		seconds -= months * 259200
+	if (seconds >= 2592000)
+		months = round(seconds / 2592000)
+		seconds -= months * 2592000
 		result += "[months] month\s"
 
 	// Weeks
