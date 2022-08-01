@@ -1,6 +1,7 @@
 /obj/item/clothing/suit/storage
 	var/obj/item/storage/internal/pockets/pockets
 	var/slots = 2
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_RANK, ACCESSORY_SLOT_MEDAL)
 
 /obj/item/clothing/suit/storage/Initialize()
 	. = ..()
