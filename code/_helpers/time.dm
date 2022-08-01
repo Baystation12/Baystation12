@@ -86,7 +86,7 @@
 	// Seconds
 	if (round)
 		seconds = round(seconds)
-	if (seconds > 0 || !result) // Empty result should just say 0 seconds
+	if (seconds > 0 || !result.len) // Empty result should just say 0 seconds
 		result += "[seconds] second\s"
 
 	return jointext(result, ", ")
