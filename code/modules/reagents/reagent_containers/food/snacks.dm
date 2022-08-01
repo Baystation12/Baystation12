@@ -3244,12 +3244,33 @@
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("soggy" = 1, "vegetable" = 1)
 	bitesize = 20
+
+
 /obj/item/reagent_containers/food/snacks/canned/spinach/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment, 5,
-						/datum/reagent/adrenaline, 5,
-						/datum/reagent/hyperzine, 5,
-						/datum/reagent/iron, 5)
+	. = ..()
+	reagents.add_reagent(/datum/reagent/nutriment, 5)
+	reagents.add_reagent(/datum/reagent/adrenaline, 5)
+	reagents.add_reagent(/datum/reagent/hyperzine, 5)
+	reagents.add_reagent(/datum/reagent/iron, 5)
+
+
+/obj/item/reagent_containers/food/snacks/canned/berries
+	name = "berries"
+	icon_state = "berries"
+	desc = "Berries preserved in syrup. Good enough for ancient Egypt."
+	trash = /obj/item/trash/berries
+	filling_color = "#801a39"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("soggy" = 1, "vegetable" = 1)
+	bitesize = 20
+
+
+/obj/item/reagent_containers/food/snacks/canned/berries/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/nutriment, 3)
+	reagents.add_reagent(/datum/reagent/sugar, 5)
+	reagents.add_reagent(/datum/reagent/drink/juice/berry, 5)
+
 
 //Vending Machine Foods should go here.
 

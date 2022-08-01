@@ -2557,7 +2557,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/meatstation/cargo)
 "fG" = (
-/obj/item/storage/box/canned/beans,
+/obj/item/storage/box/canned_beans,
 /turf/space,
 /area/space)
 "fH" = (
@@ -3842,7 +3842,7 @@
 /turf/simulated/floor/lino,
 /area/meatstation/mess)
 "iR" = (
-/obj/item/storage/box/canned/tomato,
+/obj/item/storage/box/canned_tomato,
 /turf/space,
 /area/space)
 "iS" = (
@@ -6450,15 +6450,15 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/meatstation/cargo)
 "pU" = (
-/obj/item/storage/box/canned/tomato,
+/obj/item/storage/box/canned_tomato,
 /turf/simulated/floor/tiled/dark/airless,
 /area/meatstation/cargo)
 "pV" = (
-/obj/item/storage/box/canned/beef,
+/obj/item/storage/box/canned_beef,
 /turf/space,
 /area/space)
 "pW" = (
-/obj/item/storage/box/canned,
+/obj/item/storage/box/canned_spinach,
 /turf/simulated/floor/airless,
 /area/meatstation/cargo)
 "pX" = (
@@ -6472,7 +6472,7 @@
 /turf/simulated/floor/plating,
 /area/meatstation/storage)
 "pY" = (
-/obj/item/storage/box/canned,
+/obj/item/storage/box/canned_spinach,
 /turf/space,
 /area/space)
 "pZ" = (
@@ -8488,7 +8488,7 @@
 /area/meatstation/cargo)
 "uH" = (
 /obj/structure/table/rack,
-/obj/item/storage/box/canned/beans,
+/obj/item/storage/box/canned_beans,
 /obj/effect/floor_decal/corner/brown/diagonal,
 /turf/simulated/floor/tiled/dark/airless,
 /area/meatstation/cargo)

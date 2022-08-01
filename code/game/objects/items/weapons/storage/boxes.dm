@@ -606,17 +606,42 @@
 /obj/item/storage/box/snack/chips
 	startswith = list(/obj/item/reagent_containers/food/snacks/chips = 7)
 
-//canned goods in cardboard
-/obj/item/storage/box/canned
+
+/obj/item/storage/box/canned_spinach
 	name = "box of canned food"
 	desc = "A box full of canned foods."
-	startswith = list(/obj/item/reagent_containers/food/snacks/canned/spinach = 1)
+	startswith = list(
+		/obj/item/reagent_containers/food/snacks/canned/spinach = 6
+	)
 
-/obj/item/storage/box/canned/beef
-	startswith = list(/obj/item/reagent_containers/food/snacks/canned/beef = 6)
 
-/obj/item/storage/box/canned/beans
-	startswith = list(/obj/item/reagent_containers/food/snacks/canned/beans = 6)
+/obj/item/storage/box/canned_beef
+	name = "box of canned food"
+	desc = "A box full of canned foods."
+	startswith = list(
+		/obj/item/reagent_containers/food/snacks/canned/beef = 6
+	)
 
-/obj/item/storage/box/canned/tomato
-	startswith = list(/obj/item/reagent_containers/food/snacks/canned/tomato = 6)
+
+/obj/item/storage/box/canned_beans
+	name = "box of canned food"
+	desc = "A box full of canned foods."
+	startswith = list(
+		/obj/item/reagent_containers/food/snacks/canned/beans = 6
+	)
+
+
+/obj/item/storage/box/canned_tomato
+	name = "box of canned food"
+	desc = "A box full of canned foods."
+	startswith = list(
+		/obj/item/reagent_containers/food/snacks/canned/tomato = 6
+	)
+
+
+/obj/item/storage/box/canned_berries
+	name = "box of canned food"
+	desc = "A box full of canned foods."
+	startswith = list(
+		/obj/item/reagent_containers/food/snacks/canned/berries = 6
+	)
