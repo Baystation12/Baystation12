@@ -1,0 +1,5 @@
+author: Spookerton
+delete-after: true
+changes:
+  - rscadd: Canned berries exist in canned goods supply packs.
+  - bugfix: Canned spinach comes with six cans instead of one.
