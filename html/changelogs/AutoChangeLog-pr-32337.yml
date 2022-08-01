@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Text displaying a readable duration based on computer time/ticks no longer
-      thinks 3 days is a month.

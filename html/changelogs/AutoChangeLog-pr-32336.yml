@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: The admin unban panel no longer crashes when loading up ban histories
-      with durations defined.
