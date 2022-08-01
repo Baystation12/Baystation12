@@ -118,6 +118,7 @@
 	grow_chance = 2
 	grow_threshold = 150
 	ignore_tag = BP_HEAD
+	innate_heal = FALSE
 	var/toggle_blocked_until = 0 // A time
 
 /obj/aura/regenerating/human/unathi/toggle()
