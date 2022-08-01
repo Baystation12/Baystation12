@@ -1,4 +1,4 @@
-//Procedures in this file: Robotic surgery steps, organ removal, replacement. MMI insertion, synthetic organ repair.
+//Procedures in this file: Robotic surgery steps, organ removal, replacement. MMI insertion, synthetic organ repair, robone repair
 //////////////////////////////////////////////////////////////////
 //						ROBOTIC SURGERY							//
 //////////////////////////////////////////////////////////////////
@@ -602,3 +602,168 @@
 	SPAN_WARNING("\The [user]'s hand slips, damaging \the [target]'s [affected.name] with \the [tool]!"), \
 	SPAN_WARNING("Your hand slips, damaging \the [target]'s [affected.name] with \the [tool]!"))
 	affected.take_external_damage(3, 0, used_weapon = tool)
+
+//////////////////////////////////////////////////////////////////
+//					BROKEN PROSTHETIC SURGERY					//
+//////////////////////////////////////////////////////////////////
+
+/decl/surgery_step/robone
+	surgery_candidate_flags = SURGERY_NO_FLESH | SURGERY_NO_CRYSTAL | SURGERY_NEEDS_ENCASEMENT
+	var/required_stage = 0
+
+/decl/surgery_step/robone/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = ..()
+	if(affected && (affected.status & ORGAN_BROKEN) && affected.stage == required_stage)
+		return affected
+
+/decl/surgery_step/robone/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	if(target.isSynthetic())
+		return SURGERY_SKILLS_ROBOTIC
+	else
+		return SURGERY_SKILLS_ROBOTIC_ON_MEAT
+
+//////////////////////////////////////////////////////////////////
+//	welding surgery step
+//////////////////////////////////////////////////////////////////
+/decl/surgery_step/robone/weld
+	name = "Begin structural support repair"
+	allowed_tools = list(
+		/obj/item/weldingtool = 100,
+		/obj/item/tape_roll = 75,
+		/obj/item/bonegel = 30
+	)
+	min_duration = 50
+	max_duration = 60
+
+/decl/surgery_step/robone/weld/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	var/prosthetic = affected.encased ? "\the [target]'s [affected.encased]" : "structural support in \the [target]'s [affected.name]"
+	if (affected.stage == 0)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts mending \the [prosthetic] with \the [tool]."),
+			SPAN_NOTICE("You start mending \the [prosthetic] with \the [tool].")
+		)
+	..()
+
+/decl/surgery_step/robone/weld/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	var/prosthetic = affected.encased ? "\the [target]'s [affected.encased]" : "structural support in \the [target]'s [affected.name]"
+	user.visible_message(
+		SPAN_INFO("\The [user] finishes mending \the [prosthetic] with \the [tool.name]"),
+		SPAN_INFO("You finish mending \the [prosthetic] with \the [tool.name].")
+	)
+	if(affected.stage == 0)
+		affected.stage = 1
+	affected.status &= ~ORGAN_BRITTLE
+
+/decl/surgery_step/robone/weld/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	user.visible_message(
+		SPAN_WARNING("\The [user]'s hand slips, causing damage with \the [tool] in the open panel on [target]'s [affected.name]!"),
+		SPAN_WARNING("Your hand slips, causing damage with \the [tool] in the open panel on [target]'s [affected.name]!")
+	)
+	affected.take_external_damage(5, 0, used_weapon = tool)
+
+//////////////////////////////////////////////////////////////////
+//	prosthetic realignment surgery step
+//////////////////////////////////////////////////////////////////
+/decl/surgery_step/robone/realign_support
+	name = "Realign support"
+	allowed_tools = list(
+		/obj/item/wrench = 100,
+		/obj/item/bonesetter = 75
+	)
+	min_duration = 60
+	max_duration = 70
+	shock_level = 40
+	delicate = 1
+	surgery_candidate_flags = SURGERY_NO_FLESH | SURGERY_NEEDS_ENCASEMENT
+	required_stage = 1
+
+/decl/surgery_step/robone/realign_support/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	var/prosthetic = affected.encased ? "\the [target]'s [affected.encased]" : "structural support in \the [target]'s [affected.name]"
+	if(affected.encased == "skull")
+		user.visible_message(
+			SPAN_NOTICE("\The [user] begins to piece \the [prosthetic] back together with \the [tool]."),
+			SPAN_NOTICE("You begin to piece \the [prosthetic] back together with \the [tool].")
+		)
+	else
+		user.visible_message(
+			SPAN_NOTICE("\The [user] is beginning to twist \the [prosthetic] in place with \the [tool]."),
+			SPAN_NOTICE("You are beginning to twist \the [prosthetic] in place with \the [tool].")
+		)
+	..()
+
+/decl/surgery_step/robone/realign_support/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	var/prosthetic = affected.encased ? "\the [target]'s [affected.encased]" : "structural support in \the [target]'s [affected.name]"
+	if (affected.status & ORGAN_BROKEN)
+		if(affected.encased == "skull")
+			user.visible_message(
+				SPAN_INFO("\The [user] pieces \the [prosthetic] back together with \the [tool]."),
+				SPAN_INFO("You piece \the [prosthetic] back together with \the [tool].")
+			)
+		else
+			user.visible_message(
+				SPAN_INFO("\The [user] twists \the [prosthetic] in place with \the [tool]."),
+				SPAN_INFO("You twist \the [prosthetic] in place with \the [tool].")
+			)
+		affected.stage = 2
+	else
+		user.visible_message(
+			SPAN_WARNING("\The [user] twists \the [prosthetic] in the WRONG place with \the [tool]!."),
+			SPAN_WARNING("You twist \the [prosthetic] in the WRONG place with \the [tool]!.")
+		)
+		affected.fracture()
+
+/decl/surgery_step/robone/realign_support/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	user.visible_message(
+		SPAN_WARNING("\The [user]'s hand slips, damaging the [affected.encased ? affected.encased : "structural support"] in \the [target]'s [affected.name] with \the [tool]!"),
+		SPAN_WARNING("Your hand slips, damaging the [affected.encased ? affected.encased : "structural support"] in \the [target]'s [affected.name] with \the [tool]!")
+	)
+	affected.fracture()
+	affected.take_external_damage(5, used_weapon = tool)
+
+//////////////////////////////////////////////////////////////////
+//	post realignment surgery step
+//////////////////////////////////////////////////////////////////
+/decl/surgery_step/robone/finish
+	name = "Finish structural support repair"
+	allowed_tools = list(
+		/obj/item/weldingtool = 100,
+		/obj/item/tape_roll = 75,
+		/obj/item/bonegel = 30
+	)
+	min_duration = 50
+	max_duration = 60
+	required_stage = 2
+
+/decl/surgery_step/robone/finish/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	var/prosthetic = affected.encased ? "\the [target]'s damaged [affected.encased]" : "structural support in \the [target]'s [affected.name]"
+	user.visible_message(
+		SPAN_NOTICE("\the [user] starts to finish mending [prosthetic] with \the [tool]."),
+		SPAN_NOTICE("You start to finish mending [prosthetic] with \the [tool].")
+	)
+	..()
+
+/decl/surgery_step/robone/finish/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	var/prosthetic = affected.encased ? "\the [target]'s damaged [affected.encased]" : "structural support in [target]'s [affected.name]"
+	user.visible_message(
+		SPAN_INFO("\The [user] has finished mending [prosthetic] with \the [tool]."),
+		SPAN_INFO("You have finished mending [prosthetic] with \the [tool]." )
+	)
+	affected.status &= ~ORGAN_BROKEN
+	affected.stage = 0
+	affected.update_wounds()
+
+/decl/surgery_step/robone/finish/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	user.visible_message(
+		SPAN_WARNING("\The [user]'s hand slips, causing damage with \the [tool] in the open panel in [target]'s [affected.name]!"),
+		SPAN_WARNING("Your hand slips, causing damage with \the [tool] in the open panel in [target]'s [affected.name]!")
+	)
+	affected.take_external_damage(5, 0, used_weapon = tool)
