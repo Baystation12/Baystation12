@@ -23,10 +23,6 @@
 	eye_icon = 'icons/mob/human_races/species/vox/eyes.dmi'
 	color = "#0033cc"
 
-/obj/item/organ/internal/eyes/vox/armalis
-	eye_icon = 'icons/mob/human_races/species/vox/armalis_eyes.dmi'
-	color = "#0033cc"
-
 /obj/item/organ/internal/stomach/vox
 	name = "gizzard"
 	color = "#0033cc"
@@ -185,7 +181,7 @@
 /obj/item/organ/internal/voxstack/examine(mob/user)
 	. = ..()
 
-	var/user_vox = user.is_species(SPECIES_VOX) || user.is_species(SPECIES_VOX_ARMALIS)
+	var/user_vox = user.is_species(SPECIES_VOX)
 	if (istype(backup))
 		var/owner_viable = find_dead_player(ownerckey, TRUE)
 		if (user_vox)

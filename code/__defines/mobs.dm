@@ -359,7 +359,6 @@
 #define SPECIES_HUMAN       "Human"
 #define SPECIES_DIONA       "Diona"
 #define SPECIES_VOX         "Vox"
-#define SPECIES_VOX_ARMALIS "Vox Armalis"
 #define SPECIES_IPC         "Machine"
 #define SPECIES_UNATHI      "Unathi"
 #define SPECIES_SKRELL      "Skrell"

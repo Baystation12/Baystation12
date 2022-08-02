@@ -16,7 +16,7 @@
 	siemens_coefficient = 0.6
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	species_restricted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
+	species_restricted = list(SPECIES_VOX)
 	flags_inv = HIDEJUMPSUIT
 
 
@@ -34,7 +34,7 @@
 	siemens_coefficient = 0.6
 	item_flags = 0
 	flags_inv = 0
-	species_restricted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
+	species_restricted = list(SPECIES_VOX)
 
 /obj/item/clothing/head/helmet/space/vox/pressure
 	name = "alien helmet"
@@ -112,7 +112,7 @@
 
 /obj/item/clothing/under/vox
 	has_sensor = 0
-	species_restricted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
+	species_restricted = list(SPECIES_VOX)
 
 /obj/item/clothing/under/vox/vox_casual
 	name = "alien clothing"
@@ -134,7 +134,7 @@
 	item_state = "gloves-vox"
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
-	species_restricted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
+	species_restricted = list(SPECIES_VOX)
 
 /obj/item/clothing/shoes/magboots/vox
 
@@ -142,7 +142,7 @@
 	name = "vox magclaws"
 	item_state = "boots-vox"
 	icon_state = "boots-vox"
-	species_restricted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
+	species_restricted = list(SPECIES_VOX)
 
 	action_button_name = "Toggle the magclaws"
 

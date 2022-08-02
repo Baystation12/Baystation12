@@ -140,48 +140,6 @@
 /datum/species/vox/skills_from_age(age)
 	. = 8
 
-/datum/species/vox/armalis
-	name = SPECIES_VOX_ARMALIS
-	name_plural = SPECIES_VOX_ARMALIS
-	icon_template =   'icons/mob/human_races/species/template_tall.dmi'
-	icobase =         'icons/mob/human_races/species/vox/armalis_body.dmi'
-	deform =          'icons/mob/human_races/species/vox/armalis_body.dmi'
-	husk_icon =       'icons/mob/human_races/species/vox/armalis_husk.dmi'
-	damage_overlays = 'icons/mob/human_races/species/vox/damage_overlay_armalis.dmi'
-	damage_mask =     'icons/mob/human_races/species/vox/damage_mask_armalis.dmi'
-	blood_mask =      'icons/mob/human_races/species/vox/blood_mask_armalis.dmi'
-
-	speech_sounds = list('sound/voice/ashriek.ogg')
-	speech_chance = 10
-
-	slowdown = 1
-	hidden_from_codex = TRUE
-	spawn_flags = SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
-	brute_mod = 0.8
-	burn_mod = 0.8
-	strength = STR_HIGH
-
-	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/vox/armalis)
-
-	descriptors = list(
-		/datum/mob_descriptor/height = 2,
-		/datum/mob_descriptor/build = 2,
-		/datum/mob_descriptor/vox_markings = 0
-	)
-
-/datum/species/vox/armalis/New()
-	..()
-	equip_adjust = list(
-		slot_l_hand_str = list("[NORTH]" = list("x" = 0, "y" = 4), "[EAST]" = list("x" = -3, "y" = 4), "[SOUTH]" = list("x" = 0, "y" = 4), "[WEST]" = list("x" =  3, "y" = 4)),
-		slot_r_hand_str = list("[NORTH]" = list("x" = 0, "y" = 4), "[EAST]" = list("x" =  3, "y" = 4), "[SOUTH]" = list("x" = 0, "y" = 4), "[WEST]" = list("x" = -3, "y" = 4)),
-		slot_back_str =   list("[NORTH]" = list("x" = 0, "y" = 8), "[EAST]" = list("x" = -3, "y" = 8), "[SOUTH]" = list("x" = 0, "y" = 8), "[WEST]" = list("x" =  3, "y" = 8)),
-		slot_belt_str =   list("[NORTH]" = list("x" = 0, "y" = 8), "[EAST]" = list("x" = -4, "y" = 8), "[SOUTH]" = list("x" = 0, "y" = 8), "[WEST]" = list("x" =  4, "y" = 8)),
-		slot_l_ear_str =  list("[NORTH]" = list("x" = 0, "y" = 8), "[EAST]" = list("x" =  6, "y" = 8), "[SOUTH]" = list("x" = 0, "y" = 8), "[WEST]" = list("x" =  8, "y" = 8)),
-		slot_r_ear_str =  list("[NORTH]" = list("x" = 0, "y" = 8), "[EAST]" = list("x" =  8, "y" = 8), "[SOUTH]" = list("x" = 0, "y" = 8), "[WEST]" = list("x" =  6, "y" = 8))
-
-	)
-
-
 /obj/item/vox_changer
 	name = "mouldy mirror"
 	desc = "Something seems strange about this old, dirty mirror. Your reflection doesn't look like you remember it."
