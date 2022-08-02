@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: Fixes the inactivity timer saying 'Logged out' when it should be '0 seconds'.

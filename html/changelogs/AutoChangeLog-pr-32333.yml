@@ -1,6 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Playing cards can now be placed on tables instead of simply displaying
-      a "User displays their hand" message. Users can still show their hand by using
-      the show-held-object verb.

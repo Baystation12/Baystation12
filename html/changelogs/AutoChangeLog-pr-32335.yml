@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Unathi health regeneration is now toggled off by default.
