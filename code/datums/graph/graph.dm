@@ -47,7 +47,7 @@
 
 	LAZYSET(pending_connections, node, neighbours)
 	if(queue)
-		SSgraphs_update.Queue(src)
+		SSgraphs.Queue(src)
 	return TRUE
 
 /datum/graph/proc/Disconnect(var/datum/node/node, var/list/neighbours_to_disconnect, var/queue = TRUE)
@@ -64,7 +64,7 @@
 
 	LAZYSET(pending_disconnections, node, neighbours_to_disconnect)
 	if(queue)
-		SSgraphs_update.Queue(src)
+		SSgraphs.Queue(src)
 	return TRUE
 
 /datum/graph/proc/Merge(var/datum/graph/other)
