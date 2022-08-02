@@ -169,8 +169,10 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 2)
 	slot_flags = SLOT_BELT | SLOT_EARS
 	w_class = ITEM_SIZE_TINY
-	var/list/starts_with = list(/datum/reagent/inaprovaline = 5)
-	var/band_color = COLOR_CYAN
+	matter = list(MATERIAL_PLASTIC = 150, MATERIAL_GLASS = 50)
+	var/list/starts_with = list()
+	/// Color. If set, forces the autoinjectors window color to instead be a solid band color matching the provided color. If not set, the band color instead matches the contained reagent color.
+	var/band_color
 
 /obj/item/reagent_containers/hypospray/autoinjector/New()
 	..()
@@ -183,13 +185,22 @@
 	..()
 	update_icon()
 
+/obj/item/reagent_containers/hypospray/autoinjector/on_reagent_change()
+	update_icon()
+
 /obj/item/reagent_containers/hypospray/autoinjector/on_update_icon()
 	overlays.Cut()
 	if(reagents.total_volume > 0)
 		icon_state = "[initial(icon_state)]1"
 	else
 		icon_state = "[initial(icon_state)]0"
-	overlays+= overlay_image(icon,"injector_band",band_color,RESET_COLOR)
+	var/overlay_color = band_color
+	if (isnull(overlay_color))
+		if (reagents.total_volume)
+			overlay_color = reagents.get_color()
+		else
+			overlay_color = COLOR_GRAY
+	overlays += overlay_image(icon, "injector_band", overlay_color, RESET_COLOR)
 
 /obj/item/reagent_containers/hypospray/autoinjector/examine(mob/user)
 	. = ..(user)
@@ -200,12 +211,10 @@
 
 /obj/item/reagent_containers/hypospray/autoinjector/detox
 	name = "autoinjector (antitox)"
-	band_color = COLOR_GREEN
 	starts_with = list(/datum/reagent/dylovene = 5)
 
 /obj/item/reagent_containers/hypospray/autoinjector/pain
 	name = "autoinjector (painkiller)"
-	band_color = COLOR_PURPLE
 	starts_with = list(/datum/reagent/tramadol = 5)
 
 //from infinity
@@ -227,38 +236,30 @@
 
 /obj/item/reagent_containers/hypospray/autoinjector/combatpain
 	name = "autoinjector (oxycodone)"
-	band_color = COLOR_DARK_GRAY
 	starts_with = list(/datum/reagent/tramadol/oxycodone = 5)
 
 /obj/item/reagent_containers/hypospray/autoinjector/antirad
 	name = "autoinjector (anti-rad)"
-	band_color = COLOR_AMBER
 	starts_with = list(/datum/reagent/hyronalin = 5)
 
 /obj/item/reagent_containers/hypospray/autoinjector/mindbreaker
 	name = "autoinjector"
-	band_color = COLOR_DARK_GRAY
 	starts_with = list(/datum/reagent/mindbreaker = 5)
 
 /obj/item/reagent_containers/hypospray/autoinjector/combatstim
 	name ="autoinjector (combat Stimulants)"
-	band_color = COLOR_RED
 	volume = 15
 	amount_per_transfer_from_this = 15
 	starts_with = list(/datum/reagent/inaprovaline = 10, /datum/reagent/hyperzine = 3, /datum/reagent/synaptizine = 1)
 
 /obj/item/reagent_containers/hypospray/autoinjector/coagulant
 	name ="autoinjector (coagulant)"
-	band_color = COLOR_RED
 	starts_with = list(/datum/reagent/coagulant = 1, /datum/reagent/nanoblood = 4)
 
 /obj/item/reagent_containers/hypospray/autoinjector/dexalin_plus
 	name ="autoinjector (dexalin plus)"
-	band_color = COLOR_BLUE
 	starts_with = list(/datum/reagent/dexalinp = 5)
 
-/obj/item/reagent_containers/hypospray/autoinjector/empty
-	name = "autoinjector"
-	band_color = COLOR_WHITE
-	starts_with = list()
-	matter = list(MATERIAL_PLASTIC = 150, MATERIAL_GLASS = 50)
+/obj/item/reagent_containers/hypospray/autoinjector/inaprovaline
+	name = "autoinjector (inaprovaline)"
+	starts_with = list(/datum/reagent/inaprovaline = 5)

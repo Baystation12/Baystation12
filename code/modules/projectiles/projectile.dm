@@ -294,7 +294,7 @@
 			//if they have a neck grab on someone, that person gets hit instead
 			var/obj/item/grab/G = locate() in M
 			if(G && G.shield_assailant())
-				visible_message("<span class='danger'>\The [M] uses [G.affecting] as a shield!</span>")
+				G.affecting.visible_message(SPAN_DANGER("\The [M] uses \the [G.affecting] as a shield!"))
 				if(Bump(G.affecting, forced=1))
 					return //If Bump() returns 0 (keep going) then we continue on to attack M.
 

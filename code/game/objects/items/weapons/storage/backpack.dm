@@ -23,9 +23,13 @@
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	open_sound = 'sound/effects/storage/unzip.ogg'
 	allow_slow_dump = TRUE
-
-	/// Can this backpack be opened while worn on the back?
+	/// can be opened while worn on back?
 	var/worn_access = TRUE
+
+/obj/item/storage/backpack/equipped()
+	if(!has_extension(src, /datum/extension/appearance))
+		set_extension(src, /datum/extension/appearance/cardborg)
+	..()
 
 /obj/item/storage/backpack/attackby(obj/item/W as obj, mob/user as mob)
 	if (src.use_sound)
@@ -37,21 +41,28 @@
 		set_extension(src, /datum/extension/appearance/cardborg)
 	if (slot == slot_back && src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 1, -5)
-	if (!worn_access && user.isEquipped(src, slot_back))
+	if(is_worn() && !worn_access)
 		close_all()
 	..(user, slot)
 
 /obj/item/storage/backpack/handle_item_insertion(obj/item/W, prevent_warning = FALSE, NoUpdate = 0)
-	if (!worn_access && usr?.isEquipped(src, slot_back))
+	if(is_worn() && !worn_access)
 		to_chat(usr, SPAN_WARNING("You can't insert \the [W] while \the [src] is on your back."))
 		return
 	..()
 
 /obj/item/storage/backpack/open(mob/user)
-	if (!worn_access && user.isEquipped(src, slot_back))
+	if(is_worn() && !worn_access)
 		to_chat(user, SPAN_WARNING("You can't open \the [src] while it is on your back."))
 		return
 	..()
+
+/obj/item/proc/is_worn()
+	if(ishuman(loc))
+		var/mob/living/carbon/human/H = loc
+		if(H.get_inventory_slot(src) == slot_back)
+			return TRUE
+	return FALSE
 
 /*
  * Backpack Types

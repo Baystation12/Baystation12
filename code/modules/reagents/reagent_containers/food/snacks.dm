@@ -2357,28 +2357,6 @@
 /obj/item/reagent_containers/food/snacks/slice/chocolatecake/filled
 	filled = TRUE
 
-/obj/item/reagent_containers/food/snacks/sliceable/cheesewheel
-	name = "cheese wheel"
-	desc = "A big wheel of delcious cheddar."
-	icon_state = "cheesewheel"
-	slice_path = /obj/item/reagent_containers/food/snacks/cheesewedge
-	slices_num = 5
-	filling_color = "#fff700"
-	center_of_mass = "x=16;y=10"
-	nutriment_desc = list("cheese" = 10)
-	nutriment_amt = 10
-	bitesize = 2
-/obj/item/reagent_containers/food/snacks/sliceable/cheesewheel/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 10)
-
-/obj/item/reagent_containers/food/snacks/cheesewedge
-	name = "cheese wedge"
-	desc = "A wedge of delicious cheddar. The cheese wheel it was cut from can't have gone far."
-	icon_state = "cheesewedge"
-	filling_color = "#fff700"
-	bitesize = 2
-	center_of_mass = "x=16;y=10"
 
 /obj/item/reagent_containers/food/snacks/sliceable/birthdaycake
 	name = "birthday cake"
@@ -2391,6 +2369,7 @@
 	nutriment_desc = list("cake" = 10, "sweetness" = 10)
 	nutriment_amt = 20
 	bitesize = 3
+
 /obj/item/reagent_containers/food/snacks/sliceable/birthdaycake/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 10)
@@ -2643,6 +2622,40 @@
 /obj/item/reagent_containers/food/snacks/slice/vegetablepizza/filled
 	filled = TRUE
 
+
+/obj/item/reagent_containers/food/snacks/sliceable/pizza/fruitpizza
+	name = "fruit pizza"
+	desc = "Cream and mixed fruit on a pizza crust. Is it even legal?"
+	icon_state = "fruitpizza"
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/fruitpizza
+	slices_num = 6
+	center_of_mass = "x=16;y=11"
+	nutriment_desc = list("pizza crust" = 10, "cream" = 10, "pineapple" = 5, "banana" = 5, "blueberry" = 5, "sugar" = 5)
+	nutriment_amt = 15
+	bitesize = 2
+
+
+/obj/item/reagent_containers/food/snacks/sliceable/pizza/fruitpizza/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/juice/banana, 5)
+	reagents.add_reagent(/datum/reagent/drink/juice/berry, 5)
+	reagents.add_reagent(/datum/reagent/drink/juice/pineapple, 5)
+
+
+/obj/item/reagent_containers/food/snacks/slice/fruitpizza
+	name = "fruit pizza slice"
+	desc = "A slice of cream, fruit, and crust. How strange."
+	icon_state = "fruitpizzaslice"
+	filling_color = "#baa14c"
+	bitesize = 2
+	center_of_mass = "x=18;y=13"
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/pizza/fruitpizza
+
+
+/obj/item/reagent_containers/food/snacks/slice/fruitpizza/filled
+	filled = TRUE
+
+
 /obj/item/pizzabox
 	name = "pizza box"
 	desc = "A box suited for pizzas."
@@ -2806,21 +2819,31 @@
 	. = ..()
 	pizza = new /obj/item/reagent_containers/food/snacks/sliceable/pizza/margherita(src)
 	boxtag = "Margherita Deluxe"
+	queue_icon_update()
 
 /obj/item/pizzabox/vegetable/Initialize()
 	. = ..()
 	pizza = new /obj/item/reagent_containers/food/snacks/sliceable/pizza/vegetablepizza(src)
 	boxtag = "Gourmet Vegatable"
+	queue_icon_update()
 
 /obj/item/pizzabox/mushroom/Initialize()
 	. = ..()
 	pizza = new /obj/item/reagent_containers/food/snacks/sliceable/pizza/mushroompizza(src)
 	boxtag = "Mushroom Special"
+	queue_icon_update()
 
 /obj/item/pizzabox/meat/Initialize()
 	. = ..()
 	pizza = new /obj/item/reagent_containers/food/snacks/sliceable/pizza/meatpizza(src)
 	boxtag = "Meatlover's Supreme"
+	queue_icon_update()
+
+/obj/item/pizzabox/fruit/Initialize()
+	. = ..()
+	pizza = new /obj/item/reagent_containers/food/snacks/sliceable/pizza/fruitpizza(src)
+	boxtag = "Fruit Fanatic"
+	queue_icon_update()
 
 /obj/item/reagent_containers/food/snacks/dionaroast
 	name = "roast diona"

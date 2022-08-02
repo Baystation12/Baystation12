@@ -92,7 +92,7 @@
 #define RELIGION_SPIRITUALISM  "Spiritualism"
 #define RELIGION_SHINTO        "Shinto"
 #define RELIGION_TAOISM        "Taoism"
-#define RELIGION_UNSTATED        "Unstated"
+#define RELIGION_UNSTATED      "Unstated"
 
 // Skrellian cultures.
 #define CULTURE_SKRELL_QERR     "Qerr-Katish"
@@ -106,12 +106,17 @@
 #define HOME_SYSTEM_ROASORA "Roa'sora"
 #define HOME_SYSTEM_MITORQI "Mi'tor'qi"
 #define HOME_SYSTEM_SKRELLSPACE "Skrell Space"
+#define HOME_SYSTEM_OTHERSKRELL "Other Skrell Systems"
 
 #define FACTION_SKRELL_QERRVOAL "Qerr'voal"
 #define FACTION_SKRELL_QALAOA "Qala'oa"
 #define FACTION_SKRELL_YIITALANA "Yii'talana"
 #define FACTION_SKRELL_KRRIGLI "Krri'gli"
 #define FACTION_SKRELL_QONPRRI "Qon'prri"
+#define FACTION_SKRELL_OTHERSKRELLFAC "Other Skrell Factions"
+#define FACTION_SKRELL_OTHERSDTF "Other SDTF"
+
+#define RELIGION_SKRELL "Skrellian Spiritualism"
 
 // Adherent cultures.
 #define CULTURE_ADHERENT             "The Vigil"

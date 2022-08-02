@@ -171,7 +171,7 @@
 				/obj/item/stack/medical/advanced/bruise_pack = 2,
 				/obj/item/stack/medical/advanced/ointment = 2,
 				/obj/item/stack/medical/splint = 1,
-				/obj/item/reagent_containers/hypospray/autoinjector = 3,
+				/obj/item/reagent_containers/hypospray/autoinjector/inaprovaline = 3,
 				/obj/item/storage/pill_bottle/kelotane = 2,
 				/obj/item/storage/pill_bottle/antitox = 2,
 				/obj/item/storage/med_pouch/trauma = 2,
@@ -212,7 +212,7 @@
 				/obj/item/reagent_containers/glass/beaker/vial/random/toxin = 1,
 				/obj/item/reagent_containers/glass/beaker/sulphuric = 1,
 				/obj/item/contraband/poster = 5,
-				/obj/item/material/butterflyblade = 3,
+				/obj/item/material/small_blade = 3,
 				/obj/item/material/butterflyhandle = 3,
 				/obj/item/melee/baton/cattleprod = 1,
 				/obj/item/material/knife/combat = 1,
@@ -696,6 +696,7 @@
 				/obj/item/pizzabox/vegetable,
 				/obj/item/pizzabox/margherita,
 				/obj/item/pizzabox/mushroom,
+				/obj/item/pizzabox/fruit,
 				/obj/item/reagent_containers/food/snacks/plumphelmetbiscuit,
 				/obj/item/reagent_containers/food/snacks/skrellsnacks)
 

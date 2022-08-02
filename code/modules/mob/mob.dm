@@ -532,6 +532,16 @@
 	var/mob/M = AM
 	if(ismob(AM))
 
+		var/obj/item/grab/G = locate() in M
+		if(istype(G))
+			if(G.current_grab.shield_assailant) // Check that the pull target isn't holding someone hostage to prevent just yanking them away from their victim.
+				visible_message(SPAN_WARNING("\The [G.assailant] uses \the [G.affecting] to block \the [src] from getting a firm grip!"), SPAN_WARNING("Your grip is blocked by \the [G.assailant] using \the [G.affecting] as a shield!"))
+				return
+			if(prob(25))
+				visible_message(SPAN_WARNING("\The [src] fails to pull \the [G.assailant] away from \the [G.affecting]!"), SPAN_WARNING("You fail to pull \the [G.assailant] away from \the [G.affecting]!"))
+				return
+			qdel(G) // Makes sure dragging the assailant away from their victim makes them release the grab instead of holding it at long range forever.
+
 		if(!can_pull_mobs || !can_pull_size)
 			to_chat(src, "<span class='warning'>It won't budge!</span>")
 			return

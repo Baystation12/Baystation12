@@ -59,6 +59,8 @@ var/global/list/mob_hat_cache = list()
 	var/obj/item/hat
 	var/hat_x_offset = 0
 	var/hat_y_offset = -13
+	/// Integer or null. If set, the drone will self destruct upon leaving any z-levels connected to the provided value.
+	var/z_locked = null
 
 	holder_type = /obj/item/holder/drone
 
@@ -71,7 +73,7 @@ var/global/list/mob_hat_cache = list()
 	)
 	//[/inf]
 
-/mob/living/silicon/robot/drone/Initialize()
+/mob/living/silicon/robot/drone/Initialize(mapload, lock_to_current_z = TRUE)
 	. = ..()
 
 	verbs += /mob/living/proc/hide
@@ -90,6 +92,9 @@ var/global/list/mob_hat_cache = list()
 	verbs -= /mob/living/silicon/robot/verb/Namepick
 	update_icon()
 
+	if (lock_to_current_z)
+		z_locked = get_z(src)
+
 	GLOB.moved_event.register(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
 
 /mob/living/silicon/robot/drone/Destroy()
@@ -100,12 +105,11 @@ var/global/list/mob_hat_cache = list()
 	. = ..()
 
 /mob/living/silicon/robot/drone/proc/on_moved(var/atom/movable/am, var/turf/old_loc, var/turf/new_loc)
-	old_loc = get_turf(old_loc)
-	new_loc = get_turf(new_loc)
-
-	if(!(old_loc && new_loc)) // Allows inventive admins to move drones between non-adjacent Z-levels by moving them to null space first I suppose
+	if (isnull(z_locked))
 		return
-	if(AreConnectedZLevels(old_loc.z, new_loc.z))
+	var/new_z = get_z(new_loc)
+
+	if (AreConnectedZLevels(z_locked, new_z))
 		return
 
 	// None of the tests passed, good bye

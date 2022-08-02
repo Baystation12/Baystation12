@@ -194,4 +194,23 @@
 //just for xeno-panel
 #define COLOR_WEBHOOK_XENO 0xf2b000 //proxima
 //proxima code end
+// Medical readout colors
+#define COLOR_MEDICAL_BRUTE "#ff0000"
+#define COLOR_MEDICAL_BURN "#ff7700"
+#define COLOR_MEDICAL_TOXIN "#00ff00"
+#define COLOR_MEDICAL_OXYLOSS "#0000ff"
+#define COLOR_MEDICAL_CRYSTAL "#0066ff"
+#define COLOR_MEDICAL_ROBOTIC "#666688"
+#define COLOR_MEDICAL_INTERNAL "#ff66ff"
+#define COLOR_MEDICAL_RADIATION "#66ff66"
+#define COLOR_MEDICAL_NECROTIC "#663333"
+#define COLOR_MEDICAL_INTERNAL_DANGER "#aa3333"
+#define COLOR_MEDICAL_DISLOCATED "#6666ff"
+#define COLOR_MEDICAL_BROKEN "#ff00aa"
+#define COLOR_MEDICAL_SPLINTED "#ff66aa"
+#define COLOR_MEDICAL_IMPLANT "#aa66ff"
+#define COLOR_MEDICAL_UNKNOWN_IMPLANT "#aa00ff"
+#define COLOR_MEDICAL_SCARRING "#aa9999"
+#define COLOR_MEDICAL_MISSING "#886666"
+
 #define COLORED_SQUARE(COLOR) "<span style='font-face: fixedsys; font-size: 14px; background-color: [COLOR]; color: [COLOR]'>___</span>"

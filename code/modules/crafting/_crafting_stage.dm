@@ -91,10 +91,16 @@
 
 /decl/crafting_stage/tape
 	consume_completion_trigger = FALSE
-	completion_trigger_type = /obj/item/tape_roll
+	completion_trigger_type = /obj/item
+
+/decl/crafting_stage/tape/is_appropriate_tool(obj/item/thing)
+	. = istype(thing, /obj/item/tape_roll) || istype(thing, /obj/item/taperoll) || istype(thing, /obj/item/stack/cable_coil)
 
 /decl/crafting_stage/pipe
-	completion_trigger_type = /obj/item/pipe
+	completion_trigger_type = /obj/item
+
+/decl/crafting_stage/pipe/is_appropriate_tool(obj/item/thing)
+	. = istype(thing, /obj/item/pipe) || istype(thing, /obj/item/makeshift_barrel)
 
 /decl/crafting_stage/scanner
 	completion_trigger_type = /obj/item/device/scanner/health

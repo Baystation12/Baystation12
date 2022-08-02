@@ -182,11 +182,11 @@
 /obj/item/organ/internal/proc/get_scarring_level()
 	. = (initial(max_damage) - max_damage)/initial(max_damage)
 
-/obj/item/organ/internal/get_scan_results()
+/obj/item/organ/internal/get_scan_results(tag = FALSE)
 	. = ..()
 	var/scar_level = get_scarring_level()
 	if(scar_level > 0.01)
-		. += "[get_wound_severity(get_scarring_level())] scarring"
+		. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_SCARRING]'>[get_wound_severity(get_scarring_level())] scarring</span>" : "[get_wound_severity(get_scarring_level())] scarring"
 
 /obj/item/organ/internal/emp_act(severity)
 	if(!BP_IS_ROBOTIC(src))

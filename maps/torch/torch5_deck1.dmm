@@ -29030,6 +29030,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
+/obj/item/storage/box/autoinjectors,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
 "uVf" = (

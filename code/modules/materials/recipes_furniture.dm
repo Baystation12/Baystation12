@@ -271,6 +271,12 @@ ARMCHAIR(yellow)
 	req_amount = 5
 	time = 15
 
+/datum/stack_recipe/furniture/truss
+	title = "truss"
+	result_type = /obj/structure/kitchenspike/improvised
+	req_amount = 10
+	time = 20
+
 /datum/stack_recipe/furniture/planting_bed
 	title = "planting bed"
 	result_type = /obj/machinery/portable_atmospherics/hydroponics/soil
