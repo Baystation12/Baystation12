@@ -154,6 +154,8 @@
 		/decl/emote/exertion/biological/pant
 	)
 
+	ingest_amount = 6
+
 /datum/species/nabber/New()
 	equip_adjust = list(
 		slot_head_str =    list("[NORTH]" = list("x" = 0, "y" = 7),  "[EAST]" = list("x" = 0, "y" = 8),  "[SOUTH]" = list("x" = 0, "y" = 8),  "[WEST]" = list("x" = 0, "y" = 8)),

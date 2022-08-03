@@ -54,6 +54,8 @@
 		TAG_FACTION =   FACTION_TEST_SUBJECTS
 	)
 
+	ingest_amount = 6
+
 	var/list/no_touchie = list(/obj/item/mirror,
 							   /obj/item/storage/mirror)
 
