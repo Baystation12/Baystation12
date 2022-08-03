@@ -280,7 +280,7 @@
 
 /obj/item/organ/external/proc/stun_act(var/stun_amount, var/agony_amount)
 	if(agony_amount && owner && can_feel_pain())
-		agony_amount -= (owner.chem_effects[CE_PAINKILLER]/2)//painkillers does wonders!
+		agony_amount -= (owner.chem_effects[CE_PAINKILLER]/4)//painkillers does wonders!
 		agony_amount += get_pain()
 		if(agony_amount < 5) return
 
@@ -294,14 +294,9 @@
 				owner.stance_damage_prone(src)
 				return 1
 
-		else if(agony_amount > 0.5 * max_damage)
+		else if(agony_amount >= max_damage)
 			owner.visible_message("<span class='warning'>[owner] reels in pain!</span>")
-			if(agony_amount > max_damage)
-				owner.Weaken(4)
-			else
-				owner.Stun(4)
-				owner.drop_l_hand()
-				owner.drop_r_hand()
+			owner.Weaken(4)
 			return 1
 
 /obj/item/organ/external/proc/get_agony_multiplier()

@@ -331,6 +331,9 @@
 	pain_power = 200
 	effective_dose = 2
 
+/datum/reagent/oxycodone/affect_blood(mob/living/carbon/M, alien, removed)
+	M.add_chemical_effect(CE_SLOWDOWN, 1)
+
 /datum/reagent/deletrathol
 	name = "Deletrathol"
 	description = "An effective painkiller that causes confusion."
