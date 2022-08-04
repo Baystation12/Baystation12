@@ -1,0 +1,13 @@
+author: AzlanonPC
+delete-after: true
+changes:
+  - rscadd: you can now powder pills with anything sharp, or your ID.
+  - rscadd: with thalers, straws or rolling paper, you can snort these to have them
+      enter your bloodstream directly. Adherents, Dionae, robots and FBPs without
+      a mouth can't do this.
+  - rscadd: Most drugs dont cause moaning, screaming, giggling or laughing at random
+      anymore. Those who still do, are much subtler, or require higher doses. Some
+      have received different effects like stuttering instead.
+  - rscadd: they have also received unique messages for the person when you are under
+      their effect, and withdrawal.
+  - rscadd: Lactic acid is no longer referred to as lactate.
