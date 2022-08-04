@@ -493,6 +493,9 @@
 			return 1
 		if(e.status & ORGAN_BLEEDING)
 			return 1
+		var/incision_state = affected.how_organ()
+		if (incision_state && (!affected.encased || incision_state == SURGERY_ENCASED))
+			return 1
 	return 0
 
 /mob/MouseDrop(mob/M as mob)
