@@ -135,7 +135,7 @@
 	if(isScrewdriver(W)) //overrides the act to screwdrive a grenade to set its fuse.
 		to_chat(user, SPAN_WARNING("You can't adjust the timer on \the [src]!"))
 		return TRUE
-	if (ispath(possible_reinforcements))
+	if (is_type_in_list(W, possible_reinforcements))
 		if(shrapnel_reinforced<10) //you can only add 10 items inside the can
 			user.visible_message(
 				SPAN_WARNING("\The [user] pries \the [src] open and drops \a [W] inside."),
