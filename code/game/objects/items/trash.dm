@@ -226,3 +226,7 @@
 	name = "stick"
 	desc = "a stick from some snack food item or a lollipop, not even useful as crafting material."
 	icon_state = "stick"
+
+/obj/item/trash/usedplatter
+	name = "dirty platter"
+	icon_state = "usedplatter"
