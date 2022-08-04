@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: Unban panel and player panel inactivity timers should both actually be
-      fixed now (Take 2).
