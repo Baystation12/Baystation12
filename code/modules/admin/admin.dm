@@ -65,7 +65,7 @@ var/global/floorIsLava = 0
 			body += "[pilot] "
 			body += " \[<A href='?src=\ref[src];pilot=\ref[pilot]'>link</a>\]<br>"
 
-	var/inactivity_time = M.client?.inactivity ? time_to_readable(M.client.inactivity) : null
+	var/inactivity_time = M.client ? time_to_readable(M.client.inactivity) : null
 
 	var/logout_time = null
 	if (!isnull(M.logout_time))
