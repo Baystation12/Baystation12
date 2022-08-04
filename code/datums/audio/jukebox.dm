@@ -45,6 +45,11 @@
 	tracks += new /jukebox_track (title, source)
 
 
+/jukebox/proc/ClearTracks()
+	QDEL_NULL_LIST(tracks)
+	tracks = list()
+
+
 /jukebox/proc/Next()
 	if (++index > length(tracks))
 		index = 1
