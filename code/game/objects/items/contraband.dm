@@ -25,7 +25,7 @@
 
 /obj/item/reagent_containers/glass/beaker/vial/random/toxin
 	random_reagent_list = list(
-		list(/datum/reagent/mindbreaker = 10, /datum/reagent/space_drugs = 20) = 3,
+		list(/datum/reagent/drugs/mindbreaker = 10, /datum/reagent/drugs/hextro = 20) = 3,
 		list(/datum/reagent/toxin/carpotoxin = 15)                             = 2,
 		list(/datum/reagent/impedrezene = 15)                                  = 2,
 		list(/datum/reagent/toxin/zombiepowder = 10)                           = 1)
@@ -45,3 +45,52 @@
 
 	desc = "Contains [english_list(names)]."
 	update_icon()
+
+// Powdered drug item
+
+/obj/item/reagent_containers/powder
+	name = "chemical powder"
+	desc = "A powdered form of... something."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "powder"
+	item_state = "powder"
+	amount_per_transfer_from_this = 5
+	possible_transfer_amounts = 5
+	w_class = ITEM_SIZE_TINY
+	volume = 50
+
+/obj/item/reagent_containers/powder/examine(mob/user)
+	. = ..()
+	if(reagents)
+		to_chat(user, SPAN_NOTICE("There's about [reagents.total_volume] unit\s here."))
+
+/obj/item/reagent_containers/powder/Initialize()
+	..()
+	get_appearance()
+
+/obj/item/reagent_containers/powder/proc/get_appearance()
+	/// Color based on dominant reagent.
+	if (reagents.reagent_list.len > 0)
+		color = reagents.get_color()
+
+// Proc to shove them up your nose
+
+/obj/item/reagent_containers/powder/attackby(obj/item/W, mob/living/user)
+	if(istype(W, /obj/item/glass_extra/straw) || istype(W, /obj/item/paper/cig) || istype(W, /obj/item/spacecash))
+		if(!user.check_has_mouth()) // We dont want dionae or adherents doing lines of cocaine. Probably.
+			to_chat(SPAN_WARNING("Without a nose, you seem unable to snort from \the [src]."))
+			return TRUE
+		else
+			user.visible_message(
+				SPAN_WARNING("\The [user] snorts some of \the [src] with \a [W]!"),
+				SPAN_NOTICE("You snort \the [src] with \the [W]!")
+			)
+			playsound(loc, 'sound/effects/snort.ogg', 50, 1)
+
+			if(reagents)
+				reagents.trans_to_mob(user, amount_per_transfer_from_this, CHEM_BLOOD)
+
+			if(!reagents.total_volume)
+				qdel(src)
+		return TRUE
+	return ..()

@@ -18,7 +18,7 @@
 	natural_weapon = /obj/item/natural_weapon/bite/spider/webslinger
 
 	poison_per_bite = 2
-	poison_type = /datum/reagent/psilocybin
+	poison_type = /datum/reagent/drugs/psilocybin
 	ai_holder = /datum/ai_holder/simple_animal/ranged
 
 // Check if we should bola, or just shoot the pain ball

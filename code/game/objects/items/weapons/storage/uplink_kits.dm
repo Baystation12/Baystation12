@@ -145,7 +145,7 @@
 	pack.desc += " 'S' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/datum/reagent/mindbreaker = 4))
+	fill_cigarre_package(pack, list(/datum/reagent/drugs/mindbreaker = 4))
 	pack.desc += " 'MB' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)

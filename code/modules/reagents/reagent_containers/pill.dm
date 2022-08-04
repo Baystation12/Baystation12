@@ -222,7 +222,7 @@
 	icon_state = "pill4"
 /obj/item/reagent_containers/pill/happy/New()
 	..()
-	reagents.add_reagent(/datum/reagent/space_drugs, 15)
+	reagents.add_reagent(/datum/reagent/drugs/hextro, 15)
 	reagents.add_reagent(/datum/reagent/sugar, 15)
 	color = reagents.get_color()
 
@@ -245,7 +245,7 @@
 
 /obj/item/reagent_containers/pill/three_eye/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/three_eye, 10)
+	reagents.add_reagent(/datum/reagent/drugs/three_eye, 10)
 	color = reagents.get_color()
 
 /obj/item/reagent_containers/pill/spaceacillin
@@ -395,3 +395,22 @@
 	..()
 	reagents.add_reagent(/datum/reagent/nutriment/mint, 1) //mint is used as a catalyst in all reactions as of writing
 	color = reagents.get_color()
+
+// Chopping up pills
+
+/obj/item/reagent_containers/pill/attackby(obj/item/W, mob/user)
+	if(is_sharp(W) || istype(W, /obj/item/card/id))
+		var/obj/item/reagent_containers/powder/J = new /obj/item/reagent_containers/powder(loc)
+		user.visible_message(
+			SPAN_WARNING("\The [user] gently cuts up \the [src] with \a [W]!"),
+			SPAN_NOTICE("You gently cut up \the [src] with \the [W]."),
+			SPAN_WARNING("You hear quiet grinding.")
+		)
+		playsound(loc, 'sound/effects/chop.ogg', 50, 1)
+
+		if(reagents)
+			reagents.trans_to_obj(J, reagents.total_volume)
+		J.get_appearance()
+		qdel(src)
+
+	return ..()

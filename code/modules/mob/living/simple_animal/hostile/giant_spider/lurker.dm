@@ -19,7 +19,7 @@
 
 	natural_weapon = /obj/item/natural_weapon/bite/spider/lurker
 	poison_chance = 30
-	poison_type = /datum/reagent/cryptobiolin
+	poison_type = /datum/reagent/drugs/cryptobiolin
 	poison_per_bite = 1
 
 	ai_holder = /datum/ai_holder/simple_animal/melee/hit_and_run
