@@ -400,11 +400,19 @@
 
 /obj/item/reagent_containers/pill/attackby(obj/item/W, mob/user)
 	if(is_sharp(W) || istype(W, /obj/item/card/id))
+		user.visible_message(
+			SPAN_WARNING("\The [user] starts to gently cut up \the [src] with \a [W]!"),
+			SPAN_NOTICE("You start to gently cut up \the [src] with \the [W]."),
+			SPAN_WARNING("You hear quiet grinding.")
+		)
+		playsound(loc, 'sound/effects/chop.ogg', 50, 1)
+		if (!do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
+			return TRUE
+
 		var/obj/item/reagent_containers/powder/J = new /obj/item/reagent_containers/powder(loc)
 		user.visible_message(
 			SPAN_WARNING("\The [user] gently cuts up \the [src] with \a [W]!"),
-			SPAN_NOTICE("You gently cut up \the [src] with \the [W]."),
-			SPAN_WARNING("You hear quiet grinding.")
+			SPAN_NOTICE("You gently cut up \the [src] with \the [W].")
 		)
 		playsound(loc, 'sound/effects/chop.ogg', 50, 1)
 
