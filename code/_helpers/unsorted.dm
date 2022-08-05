@@ -528,7 +528,14 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /proc/GaussRandRound(sigma,roundto)
 	return round(GaussRand(sigma),roundto)
 
-//Will return the contents of an atom recursivly to a depth of 'searchDepth'
+/**
+ * Retrieves the contents of this atom and all atoms contained within, recursively.
+ *
+ * **Parameters**:
+ * - `searchDepth` (int) - The depth to recursively retrieve contents for.
+ *
+ * Returns a list of atoms.
+ */
 /atom/proc/GetAllContents(searchDepth = 5)
 	var/list/toReturn = list()
 
@@ -1115,6 +1122,14 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	crash_with("Prevented attempt to delete dview mob: [log_info_line(src)]")
 	return QDEL_HINT_LETMELIVE // Prevents destruction
 
+/**
+ * Sets the atom's color and light values to those of `origin`.
+ *
+ * TODO: Update this to use `set_color()` and `get_color()`.
+ *
+ * **Parameters**:
+ * - `origin` - The atom to copy light and color values from.
+ */
 /atom/proc/get_light_and_color(atom/origin)
 	if(origin)
 		color = origin.color

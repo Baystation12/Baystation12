@@ -458,8 +458,16 @@
 		max_w_class = max(I.w_class, max_w_class)
 		max_storage_space += I.get_storage_cost()
 
-//Returns the storage depth of an atom. This is the number of storage items the atom is contained in before reaching toplevel (the area).
-//Returns -1 if the atom was not found on container.
+/**
+ * Determines the storage depth of an atom. This is the number of storage items (`/obj/item/storage`) the atom is
+ * contained in before reaching `container`.
+ *
+ * **Parameters**:
+ * - `container` - The top level container to stop at. If this is never encountered during the loop, the proc will
+ * return `-1`.
+ *
+ * Returns integer or `-1` if the atom was not found in the container.
+ */
 /atom/proc/storage_depth(atom/container)
 	var/depth = 0
 	var/atom/cur_atom = src
@@ -476,8 +484,12 @@
 
 	return depth
 
-//Like storage depth, but returns the depth to the nearest turf
-//Returns -1 if no top level turf (a loc was null somewhere, or a non-turf atom's loc was an area somehow).
+/**
+ * Determines the storage depth of an atom. This is the number of storage items (`/obj/item/storage`) the atom is
+ * contained in before reaching the turf.
+ *
+ * Returns integer or `-1` if the atom was not found in a turf.
+ */
 /atom/proc/storage_depth_turf()
 	var/depth = 0
 	var/atom/cur_atom = src

@@ -1,7 +1,9 @@
 #define MIN_TEMPERATURE_COEFFICIENT 1
 #define MAX_TEMPERATURE_COEFFICIENT 10
 
+/// Float. The atom's current temperature.
 /atom/var/temperature = T20C
+/// Float. Multiplier used to determine how much temperature can change/transfer to this atom when a temperature change proc is called. See `ProcessAtomTemperature()` and `/obj/proc/HandleObjectHeating()`. Should be a value between `MIN_TEMPERATURE_COEFFICIENT` and `MAX_TEMPERATURE_COEFFICIENT`.
 /atom/var/temperature_coefficient = MAX_TEMPERATURE_COEFFICIENT
 
 /atom/movable/Entered(atom/movable/atom, atom/old_loc)
@@ -30,6 +32,11 @@
 	. = ..()
 	temperature_coefficient = isnull(temperature_coefficient) ? clamp(MAX_TEMPERATURE_COEFFICIENT - Floor(mob_size/4), MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
 
+/**
+ * Temperature subsystem process.
+ *
+ * Returns void or `PROCESS_KILL`.
+ */
 /atom/proc/ProcessAtomTemperature()
 
 	// Get our location temperature if possible.

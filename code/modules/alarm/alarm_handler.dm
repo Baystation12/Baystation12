@@ -100,6 +100,12 @@
 
 	return existing.max_severity()
 
+/**
+ * Retrieves the 'origin' point for any alarms the atom declares. For turfs, this will be the area. For any other
+ * atom, this is itself.
+ *
+ * Returns instance of `/atom`.
+ */
 /atom/proc/get_alarm_origin()
 	return src
 

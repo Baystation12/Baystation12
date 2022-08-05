@@ -82,6 +82,13 @@
 			return L.labels.Copy()
 		return list()
 
+
+/**
+ * Removes a labeller label from the atom.
+ *
+ * **Parameters**:
+ * - `label` - The label to remove.
+ */
 /atom/proc/RemoveLabel(label in get_attached_labels(src))
 	set name = "Remove Label"
 	set desc = "Used to remove labels"

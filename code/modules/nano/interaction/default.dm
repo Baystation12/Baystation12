@@ -59,7 +59,16 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 
 	return STATUS_CLOSE
 
-//Some atoms such as vehicles might have special rules for how mobs inside them interact with NanoUI.
+/**
+ * Handles additional special checks for whether or not NanoUI interactions are valid. Some atoms such as vehicles might
+ * have special rules for how mobs inside them interact with NanoUI.
+ *
+ * **Parameters**:
+ * - `src_object` - The original object being interacted with.
+ * - `user` - The mob attempting the interaction.
+ *
+ * Returns int (One of `STATUS_*`).
+ */
 /atom/proc/contents_nano_distance(src_object, mob/living/user)
 	return user.shared_living_nano_distance(src_object)
 

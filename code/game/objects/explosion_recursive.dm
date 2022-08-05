@@ -105,7 +105,12 @@ var/global/explosion_in_progress = 0
 /turf/unsimulated/explosion_spread(power)
 	return //So it doesn't get to the parent proc, which simulates explosions
 
-/atom/var/explosion_resistance
+/// Float. The atom's explosion resistance value. Used to calculate how much of an explosion is 'absorbed' and not passed on to tiles on the other side of the atom's turf. See `/proc/explosion_rec()`.
+/atom/var/explosion_resistance = 0
+
+/**
+ * Retrieves the atom's explosion resistance. Generally, this is `explosion_resistance` for simulated atoms.
+ */
 /atom/proc/get_explosion_resistance()
 	if(simulated)
 		return explosion_resistance

@@ -33,6 +33,10 @@ PROCESSING_SUBSYSTEM_DEF(icon_update)
 		else if (MC_TICK_CHECK)
 			return
 
+/**
+ * Adds the atom to the icon_update subsystem to be queued for icon updates. Use this if you're going to be pushing a
+ * lot of icon updates at once.
+ */
 /atom/proc/queue_icon_update(...)
 	SSicon_update.queue[src] = args.len ? args : TRUE
 	SSicon_update.wake()

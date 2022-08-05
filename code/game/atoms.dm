@@ -1,18 +1,33 @@
 /atom
+	/// Integer. The atom's layering level. Primarily used for determining whether the atom is visible or not on certain tile/flooring types/layers (I.e. plating and non-plating).
 	var/level = 2
+	/// Bitflag (Any of `ATOM_FLAG_*`). General atom level flags. See `code\__defines\flags.dm`.
 	var/atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
+	/// LAZYLIST of all DNA strings present on the atom from blood. Do not modify directly. See `add_blood()` and `clean_blood()`.
 	var/list/blood_DNA
-	var/was_bloodied
+	/// Boolean. Whether or not the atom was bloodied at any point. This remains TRUE even when `is_bloodied` is set to FALSE, except in very specific circumstances. Used for luminol handling to detect cleaned blood.
+	var/was_bloodied = FALSE
+	/// Color. The color of the blood overlay effect, if present.
 	var/blood_color
+	/// Integer. The `world.time` the atom was last bumped into. Only used by some subtypes to prevent bump spamming.
 	var/last_bumped = 0
-	var/pass_flags = 0
-	var/throwpass = 0
-	var/germ_level = GERM_LEVEL_AMBIENT // The higher the germ level, the more germ on the atom.
-	var/simulated = TRUE //filter for actions - used by lighting overlays
-	var/fluorescent // Shows up under a UV light.
-	var/datum/reagents/reagents // chemical contents.
+	/// Bitflag (Any of `PASS_FLAG_*`). Flags indicating the types of dense objects this atom is able to pass through/over.
+	var/pass_flags = EMPTY_BITFIELD
+	/// Boolean. Whether or not thrown objects can pass through/over the atom.
+	var/throwpass = FALSE
+	/// Integer. The atom's current germ level. The higher the germ level, the more germ on the atom.
+	var/germ_level = GERM_LEVEL_AMBIENT
+	/// Boolean. Whether or not the atom is considered simulated. If `FALSE`, blocks a majority of interactions, processes, etc.
+	var/simulated = TRUE
+	/// Integer. Whether or not the atom is visible under a UV light. If set to `2`, the atom is actively highlighted by a light,
+	var/fluorescent = 0
+	/// The reagents contained within the atom. Handles all reagent interactions and processing.
+	var/datum/reagents/reagents
+	/// LAZYLIST of mobs currently climbing the atom.
 	var/list/climbers
+	/// Float. The multiplier applied to the `do_after()` timer when a mob climbs the atom.
 	var/climb_speed_mult = 1
+	/// Bitflag (Any of `INIT_*`). Flags for special/additional handling of the `Initialize()` chain. See `code\__defines\misc.dm`.
 	var/init_flags = EMPTY_BITFIELD
 
 /atom/New(loc, ...)
@@ -28,6 +43,7 @@
 			//we were deleted
 			return
 	else if(created)
+
 		var/list/argument_list
 		if(length(args) > 1)
 			argument_list = args.Copy(2)
@@ -37,13 +53,19 @@
 	if(atom_flags & ATOM_FLAG_CLIMBABLE)
 		verbs += /atom/proc/climb_on
 
-//Called after New if the map is being loaded. mapload = TRUE
-//Called from base of New if the map is not being loaded. mapload = FALSE
-//This base must be called or derivatives must set initialized to TRUE
-//must not sleep
-//Other parameters are passed from New (excluding loc)
-//Must return an Initialize hint. Defined in __DEFINES/subsystems.dm
-
+/**
+ * Initialization handler for atoms. It is preferred to use this over `New()`.
+ *
+ * This is called after `New()` if the map is being loaded (`mapload` is `TRUE`), or called from the base of `New()` otherwise.
+ *
+ * All overrides should call parent or set the `ATOM_FLAG_INITIALIZED` flag and return a valid `INITIALIZE_HINT_*` value. All overrides must not sleep.
+ *
+ * **Parameters**:
+ * - `mapload` - Whether or not the initialization was called while the map was being loaded.
+ * - All parameters except `loc` are passed directly from `New()`.
+ *
+ * Returns int (One of `INITIALIZE_HINT_*`). Return hint indicates what should be done with the atom once the initialization process is finished. See `code\__defines\__initialization.dm`.
+ */
 /atom/proc/Initialize(mapload, ...)
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
@@ -71,74 +93,166 @@
 
 	return INITIALIZE_HINT_NORMAL
 
-//called if Initialize returns INITIALIZE_HINT_LATELOAD
-/atom/proc/LateInitialize()
+/**
+ * Late initialization handler. Called after the `Initialize()` chain for any atoms that returned `INITIALIZE_HINT_LATELOAD`. Primarily used for atoms that rely on initialized values from other atoms.
+ *
+ * **Parameters**:
+ * - `mapload` - Whether or not the initialization was called while the map was being loaded.
+ * - All parameters except `loc` are passed directly from `New()`.
+ */
+/atom/proc/LateInitialize(mapload, ...)
 	return
 
 /atom/Destroy()
 	QDEL_NULL(reagents)
 	. = ..()
 
+/**
+ * Called when the atom is affected by luminol. Reveals blood present on the atom, or blood decal atoms.
+ */
 /atom/proc/reveal_blood()
 	return
 
+/**
+ * Whether or not the atom is permitted to 'zoom' - I.e., binocular or scope handlers.
+ *
+ * Returns boolean.
+ */
 /atom/proc/MayZoom()
 	return TRUE
 
+
+/**
+ * Handler for receiving gas.
+ *
+ * **Parameters**:
+ * - `giver` - The gas mixture to receive gas from.
+ */
 /atom/proc/assume_air(datum/gas_mixture/giver)
 	return null
 
+
+/**
+ * Removes air from the atom.
+ *
+ * **Parameters**:
+ * - `amount` integer - The number of moles to remove.
+ *
+ * Returns instance of `/datum/gas_mixture`. The air that was removed from the atom.
+ */
 /atom/proc/remove_air(amount)
 	return null
 
+/**
+ * Retrieves the atom's air contents. Used for subtypes that implement their own forms of air contents.
+ *
+ * Returns instance of `/datum/gas_mixture`.
+ */
 /atom/proc/return_air()
 	if(loc)
 		return loc.return_air()
 	else
 		return null
 
-//return flags that should be added to the viewer's sight var.
-//Otherwise return a negative number to indicate that the view should be cancelled.
+/**
+ * Determines sight flags that should be added to user's sight var.
+ *
+ * Returns bitflag or `-1` to indicate the view should be cancelled.
+ */
 /atom/proc/check_eye(user as mob)
 	if (istype(user, /mob/living/silicon/ai)) // WHYYYY
 		return 0
 	return -1
 
-//Return flags that may be added as part of a mobs sight
+
+/**
+ * Retrieves additional sight flags the atom may provide. Called on atoms contained in a mob's `additional_vision_handlers` list. See `/mob/proc/get_accumulated_vision_handlers()`.
+ *
+ * Returns bitflag (Any valid flag for `sight` - See DM reference).
+ */
 /atom/proc/additional_sight_flags()
 	return 0
 
+
+/**
+ * Retrieves see invisible values the atom may provide. Called on atoms contained in a mob's `additional_vision_handlers` list. See `/mob/proc/get_accumulated_vision_handlers()`.
+ *
+ * Returns int.
+ */
 /atom/proc/additional_see_invisible()
 	return 0
 
+/**
+ * Called whenever the contents of the atom's `reagents` changes.
+ */
 /atom/proc/on_reagent_change()
 	return
 
+/**
+ * Handler for color changes related to transferred reagents. For atoms whos color is based on the contents of
+ * `reagents`.
+ */
 /atom/proc/on_color_transfer_reagent_change()
 	return
 
+/**
+ * Called when an object 'bumps' into the atom, typically by entering or attempting to enter the same tile.
+ *
+ * **Parameters**:
+ * - `AM` - The atom that bumped into src.
+ */
 /atom/proc/Bumped(AM as mob|obj)
 	return
 
-// Convenience proc to see if a container is open for chemistry handling
-// returns true if open
-// false if closed
+/**
+ * Whether or not the atom is considered an open container for chemistry handling.
+ *
+ * TODO: Redundant. Replace with flat bit check.
+ *
+ * Returns int (`ATOM_FLAG_OPEN_CONTAINER` or `0`).
+ */
 /atom/proc/is_open_container()
 	return atom_flags & ATOM_FLAG_OPEN_CONTAINER
 
 
-/atom/proc/CheckExit()
-	return 1
+/**
+ * Used to check if this atom blocks another atom's movement to the target turf. Called on all atom's in `mover`'s current location.
+ *
+ * **Parameters**:
+ * - `mover` - The atom that's attempting to move.
+ * - `target` - The detination turf `mover` is attempting to move to.
+ *
+ * Returns boolean. If `FALSE`, blocks movement and calls `mover.Bump(src)`.
+ */
+/atom/proc/CheckExit(atom/movable/mover, turf/target)
+	return TRUE
 
-// If you want to use this, the atom must have the PROXMOVE flag, and the moving
-// atom must also have the PROXMOVE flag currently to help with lag. ~ ComicIronic
+/**
+ * Called when an atom moves into 'proximity' (Currently, `range(1)`) of src. Only called on atoms that have the `MOVABLE_FLAG_PROXMOVE` flag in `movable_flags`.
+ *
+ * **Parameters**:
+ * - `AM` - The movable atom triggering the call.
+ */
 /atom/proc/HasProximity(atom/movable/AM as mob|obj)
 	return
 
+
+/**
+ * Called when the atom is affected by an EMP.
+ *
+ * **Parameters**:
+ * - `severity` Integer. The strength of the EMP, ranging from 1 to 3. NOTE: Lower numbers are stronger.
+ */
 /atom/proc/emp_act(severity)
 	return
 
 
+/**
+ * Sets the atom's density, raises the density set event, and updates turfs for dense atom checks.
+ *
+ * **Parameters**:
+ * - `new_density` boolean - The new density value to set.
+ */
 /atom/proc/set_density(new_density)
 	var/changed = density != new_density
 	if(changed)
@@ -152,10 +266,30 @@
 		GLOB.density_set_event.raise_event(src, !density, density)
 
 
+/**
+ * Called when a projectile impacts the atom.
+ *
+ * **Parameters**:
+ * - `P` - The projectile impacting the atom.
+ * - `def_zone` (string) - The targeting zone the projectile is hitting.
+ *
+ * Returns boolean. Whether or not the projectile should pass through the atom.
+ */
 /atom/proc/bullet_act(obj/item/projectile/P, def_zone)
 	P.on_hit(src, 0, def_zone)
 	. = 0
 
+/**
+ * Determines whether or not the atom is in the contents of the container or an instance of container if provided as a
+ * path.
+ *
+ * TODO: Only used once, and the usage is redundant. Replace with `istype(loc)` check.
+ *
+ * **Parameters**:
+ * - `container` instance or path of `/atom`
+ *
+ * Returns boolean.
+ */
 /atom/proc/in_contents_of(container)//can take class or object instance as argument
 	if(ispath(container))
 		if(istype(src.loc, container))
@@ -164,16 +298,15 @@
 		return 1
 	return
 
-/*
- *	atom/proc/search_contents_for(path,list/filter_path=null)
- * Recursevly searches all atom contens (including contents contents and so on).
+/**
+ * Recursively searches all atom contents for a given path.
  *
- * ARGS: path - search atom contents for atoms of this type
- *	   list/filter_path - if set, contents of atoms not of types in this list are excluded from search.
+ * **Parameters**:
+ * - `path` type path - The type path to search for.
+ * - `filter_path` list (type paths) - Any paths provided here will not be searched if found during the recursive search.
  *
- * RETURNS: list of found atoms
+ * Returns list (Instances of `/atom`). All found matches.
  */
-
 /atom/proc/search_contents_for(path,list/filter_path=null)
 	var/list/found = list()
 	for(var/atom/A in src)
@@ -189,9 +322,24 @@
 			found += A.search_contents_for(path,filter_path)
 	return found
 
-// A type overriding /examine() should either return the result of ..() or return TRUE if not calling ..()
-// Calls to ..() should generally not supply any arguments and instead rely on BYOND's automatic argument passing
-// There is no need to check the return value of ..(), this is only done by the calling /examinate() proc to validate the call chain
+/**
+ * Called when a user examines the atom. This proc and its overrides handle displaying the text that appears in chat
+ * during examines.
+ *
+ * Any overrides must either call parent, or return `TRUE`. There is no need to check the return value of `..()`, this
+ * is only used by the calling `examinate()` proc to validate the call chain.
+ *
+ * For `infix` and `suffix`, generally, these are inserted at the beginning of the examine text, as:
+ * `That's \a [name][infix]. [suffix]`.
+ *
+ * **Parameters**:
+ * - `user` - The mob performing the examine.
+ * - `distance` - The distance in tiles from `user` to `src`.
+ * - `infix` String - String that is appended immediately after the atom's name.
+ * - `suffix` String - Additional string appended after the atom's name and infix.
+ *
+ * Returns boolean.
+ */
 /atom/proc/examine(mob/user, distance, infix = "", suffix = "")
 	//This reformat names to get a/an properly working on item descriptions when they are bloody
 	var/f_name = "\a [src][infix]."
@@ -208,13 +356,21 @@
 		examine_damage_state(user)
 	return TRUE
 
-// called by mobs when e.g. having the atom as their machine, pulledby, loc (AKA mob being inside the atom) or buckled var set.
-// see code/modules/mob/mob_movement.dm for more.
+/**
+ * Called when a mob with this atom as their machine, pulledby, loc, buckled, or other relevant var atom attempts to move.
+ */
 /atom/proc/relaymove()
 	return
 
 
-/// Called to set the atom's dir and used to add behaviour to dir-changes
+/**
+ * Sets the atom's direction and raises the dir set event.
+ *
+ * **Parameters**:
+ * - new_dir direction - The new direction to set.
+ *
+ * Returns boolean. Whether or not the direction was changed.
+ */
 /atom/proc/set_dir(new_dir)
 	var/old_dir = dir
 	if(new_dir == old_dir)
@@ -223,6 +379,13 @@
 	GLOB.dir_set_event.raise_event(src, old_dir, dir)
 	return TRUE
 
+/**
+ * Sets the atom's icon state, also updating the base icon state extension if present. You should only use this proc if
+ * you intend to permanently alter the base state.
+ *
+ * **Parameters**:
+ * - `new_icon_state` icon state.
+ */
 /atom/proc/set_icon_state(new_icon_state)
 	if(has_extension(src, /datum/extension/base_icon_state))
 		var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
@@ -231,37 +394,101 @@
 	else
 		icon_state = new_icon_state
 
+/**
+ * Updates the atom's icon. You should call this to trigger icon updates, but should not override it. Override
+ * `on_update_icon()` instead.
+ *
+ * If you're expecting to be calling a lot of icon updates at once, use `queue_icon_update()` instead.
+ */
 /atom/proc/update_icon()
 	on_update_icon(arglist(args))
 
+/**
+ * Handler for updating the atom's icon and overlay states. Generally, all changes to `overlays`, `underlays`, `icon`,
+ * `icon_state`, `item_state`, etc should be contained in here.
+ *
+ * Do not call this directly. Use `update_icon()` or `queue_icon_update()` instead.
+ */
 /atom/proc/on_update_icon()
 	return
 
-/// Handler for the atom to be affected by explosions. `severity` will be one of the `EX_ACT_*` defines.
+/**
+ * Called when an explosion affects the atom.
+ *
+ * **Parameters**:
+ * - `severity` Integer (One of `EX_ACT_*`) - The strength of the explosion affecting the atom. NOTE: Lower numbers are
+ * stronger.
+ */
 /atom/proc/ex_act(severity)
 	return
 
+
+/**
+ * Handler for the effects of being emagged by a cryptographic sequencer. Other situations may also call this for
+ * certain atoms, such as EMP'd or hacked machinery, or antagonist robots.
+ *
+ * **Parameters**:
+ * - `remaining_charges` - The number of emag charges left on the atom used to perform the emag.
+ * - `user` - The user performing the emag.
+ * - `emag_source` - The atom used to perform the emag.
+ *
+ * Returns integer. The amount of emag charges to expend. If `NO_EMAG_ACT`, then emag interactions are skipped and the
+ * emag will be passed on to other interaction checks.
+ */
 /atom/proc/emag_act(remaining_charges, mob/user, emag_source)
 	return NO_EMAG_ACT
 
+/**
+ * Called when fire affects the atom.
+ *
+ * **Parameters**:
+ * - `air` - Air contents of the turf that's on fire and affecting this atom. It could be from the current atom's turf
+ * or an adjacent one.
+ * - `exposed_temperature` - The temperature of the fire affecting the atom. Usually, this is `air.temperature`.
+ * - `exposed_volume` - The volume of the air for the fire affecting the atom. Usually, this is `air.volume`.
+ */
 /atom/proc/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	return
 
+/**
+ * Handler for melting from heat or other sources. Called by terrain generation and some instances of `fire_act()` or
+ * `lava_act()`.
+ */
 /atom/proc/melt()
 	return
 
+/**
+ * Called when lava affects the atom. By default, this melts and deletes the atom.
+ *
+ * Returns boolean. Whether or not the atom was destroyed.
+ */
 /atom/proc/lava_act()
 	visible_message(SPAN_DANGER("\The [src] sizzles and melts away, consumed by the lava!"))
 	playsound(src, 'sound/effects/flare.ogg', 100, 3)
 	qdel(src)
 	. = TRUE
 
+/**
+ * Called when the atom is hit by a thrown object.
+ *
+ * **Parameters**:
+ * - `AM` - The atom impacting `src`.
+ * - `TT` - The thrownthing datum associated with the impact.
+ */
 /atom/proc/hitby(atom/movable/AM, datum/thrownthing/TT)//already handled by throw impact
 	if(isliving(AM))
 		var/mob/living/M = AM
 		M.apply_damage(TT.speed * 5, DAMAGE_BRUTE)
 
-//returns 1 if made bloody, returns 0 otherwise
+
+/**
+ * Adds blood effects and DNA to the atom.
+ *
+ * **Parameters**:
+ * - `M` - The mob the blood and DNA originated from.
+ *
+ * Returns boolean - `TRUE` if the atom was bloodied, `FALSE` otherwise.
+ */
 /atom/proc/add_blood(mob/living/carbon/human/M as mob)
 	if(atom_flags & ATOM_FLAG_NO_BLOOD)
 		return 0
@@ -283,6 +510,11 @@
 /mob/living/proc/handle_additional_vomit_reagents(obj/effect/decal/cleanable/vomit/vomit)
 	vomit.reagents.add_reagent(/datum/reagent/acid/stomach, 5)
 
+/**
+ * Removes all blood, DNA, residue, germs, etc from the atom.
+ *
+ * Returns boolean. If `TRUE`, blood DNA was present and removed.
+ */
 /atom/proc/clean_blood()
 	if(!simulated)
 		return
@@ -294,6 +526,14 @@
 		blood_DNA = null
 		return 1
 
+/**
+ * Retrieves the atom's x and y coordinates from the global map.
+ *
+ * TODO: Unused. Remove.
+ *
+ * Returns list ("x" and "y" values as integers), `null` if there is no global map, or `0` if the atom has no position
+ * within the global map..
+ */
 /atom/proc/get_global_map_pos()
 	if (!islist(GLOB.global_map) || !length(GLOB.global_map))
 		return
@@ -312,9 +552,24 @@
 	else
 		return 0
 
+/**
+ * Whether or not the atom allows the given passflag to pass through it.
+ *
+ * **Parameters**
+ * `passflag` bitfield (Any of `PASS_FLAG_*`) - The passflag(s) to check.
+ *
+ * Returns bitfield (Any of `PASS_FLAG_*`). All matching bitflags provided in `passflag` that the atom allows to pass through, or `0` if the atom does not allow them.
+ */
 /atom/proc/checkpass(passflag)
 	return pass_flags&passflag
 
+/**
+ * Whether or not the atom is in space.
+ *
+ * TODO: Redundant.
+ *
+ * Returns boolean.
+ */
 /atom/proc/isinspace()
 	if(istype(get_turf(src), /turf/space))
 		return 1
@@ -326,6 +581,19 @@
 // Use for objects performing visible actions
 // message is output to anyone who can see, e.g. "The [src] does something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
+/**
+ * Shows a message to all atoms in sight of this item. Use for objects performing visible actions.
+ *
+ * **Parameters**:
+ * - `message` string - The message to display.
+ * - `blind_message` string - If set, this message is displayed to blind mobs in range.
+ * - `range` int (Default `world.view`) - The range, in tiles, the message should display.
+ * - `checkghosts` path (`/datum/client_preference`) - If set, will also display for ghosts with the provided preference
+ * enabled. Typically, `ghost_sight`.
+ * - `exclude_objs` LAZYLIST of instances of `/obj` - If provided, objects in this list will not be displayed the
+ * message.
+ * - `exclude_mobs` LAZYLIST of instances of `/mob` - Ig provided, mobs in this list will not be displayed the message.
+ */
 /atom/proc/visible_message(message, blind_message, range = world.view, checkghosts = null, list/exclude_objs = null, list/exclude_mobs = null)
 	set waitfor = FALSE
 	var/turf/T = get_turf(src)
@@ -350,11 +618,20 @@
 		else if(blind_message)
 			M.show_message(blind_message, AUDIBLE_MESSAGE)
 
-// Show a message to all mobs and objects in earshot of this atom
-// Use for objects performing audible actions
-// message is the message output to anyone who can hear.
-// deaf_message (optional) is what deaf people will see.
-// hearing_distance (optional) is the range, how many tiles away the message can be heard.
+
+/**
+ * Shows a message to all mobs and objects within earshot of this atom. Use for objects performing audible actions.
+ *
+ * Calls `show_message()` on all valid mobs and objects in range.
+ *
+ * **Parameters**:
+ * - `message` (string) - The message output to anyone who can hear.
+ * - `deaf_message` (string) - The message output to anyone who is deaf.
+ * - `hearing_distance` (int) - The range of the message in tiles.
+ * - `checkghosts` (null or `/datum/client_preference/ghost_sight`) - If set, will also display to any ghosts with global ears turned on.
+ * - `exclude_objs` - List of objects to not display the message to.
+ * - `exclude_mobs` - List of mobs to not display the message to.
+ */
 /atom/proc/audible_message(message, deaf_message, hearing_distance = world.view, checkghosts = null, list/exclude_objs = null, list/exclude_mobs = null)
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
@@ -383,12 +660,23 @@
 		destination = drop_destination
 	return forceMove(null)
 
+/**
+ * Handler for items being dropped onto or into the atom. Called by `dropInto()`.
+ *
+ * **Parameters**:
+ * - `AM` - The atom being dragged and dropped.
+ *
+ * Returns instance of `/atom` or `null`. The atom to `forceMove()` `AM` into. If `null`, assumes `src`.
+ */
 /atom/proc/onDropInto(atom/movable/AM)
-	return // If onDropInto returns null, then dropInto will forceMove AM into us.
+	return
 
 /atom/movable/onDropInto(atom/movable/AM)
-	return loc // If onDropInto returns something, then dropInto will attempt to drop AM there.
+	return loc
 
+/**
+ * Returns a list of contents that can be inserted and/or removed. By default, this simply returns `contents`.
+ */
 /atom/proc/InsertedContents()
 	return contents
 
@@ -401,11 +689,20 @@
 					SPAN_NOTICE("You shake \the [src]."))
 		object_shaken()
 
-// Called when hitting the atom with a grab.
-// Will skip attackby() and afterattack() if returning TRUE.
+/**
+ * Called when the atom is clicked on with an active grab.
+ *
+ * **Parameters**:
+ * - `G` - The grab the atom was clicked on with.
+ *
+ * Returns boolean. Whether or not the interaction was handled. If `TRUE`, skips `attackby()` and `afterattack()` calls.
+ */
 /atom/proc/grab_attack(obj/item/grab/G)
 	return FALSE
 
+/**
+ * Verb to allow climbing onto an object. Passes directly to `/atom/proc/do_climb(usr)`.
+ */
 /atom/proc/climb_on()
 
 	set name = "Climb"
@@ -415,6 +712,18 @@
 
 	do_climb(usr)
 
+/**
+ * Whether or not a mob can climb this atom.
+ *
+ * If this check fails, it generally also sends a feedback message to `user`.
+ *
+ * **Parameters**:
+ * - `user` - The mob attempting the climb check.
+ * - `post_climb_check` boolean default `FALSE` - If set, skips checking the `climbers` list for if the mob is already attempting to climb.
+ * - `check_silicon` boolean default `TRUE` - If set, blocks silicon mobs. Passed directly to `can_touch()`.
+ *
+ * Returns boolean.
+ */
 /atom/proc/can_climb(mob/living/user, post_climb_check=FALSE, check_silicon=TRUE)
 	if (!(atom_flags & ATOM_FLAG_CLIMBABLE) || !can_touch(user, check_silicon) || (!post_climb_check && climbers && (user in climbers)))
 		return 0
@@ -448,6 +757,17 @@
 		return 0
 	return 1
 
+/**
+ * Checks if a mob can perform certain physical interactions with the atom. Primarily used for climbing and flipping tables.
+ *
+ * If this check fails, it generally also sends a feedback mesage to `user`.
+ *
+ * **Parameters**:
+ * - `user` - The mob attempting the interaction check.
+ * - `check_silicon` boolean default `TRUE` - If set, blocks silicon mobs.
+ *
+ * Returns boolean.
+ */
 /atom/proc/can_touch(mob/user, check_silicon=TRUE)
 	if (!user)
 		return 0
@@ -463,6 +783,14 @@
 		return 0
 	return 1
 
+/**
+ * Whether or not dense atoms exist on the same turf.
+ *
+ * **Parameters**:
+ * - `ignore` - If set, this atom will be ignored during checks.
+ *
+ * Returns instance of `/atom` (The atom with density found on the turf) or `FALSE` (No dense atoms were found).
+ */
 /atom/proc/turf_is_crowded(atom/ignore)
 	var/turf/T = get_turf(src)
 	if(!istype(T))
@@ -476,6 +804,16 @@
 			return A
 	return 0
 
+/**
+ * Handles climbing atoms for mobs. This proc includes a `do_after()` timer.
+ *
+ * **Parameters**:
+ * - `user` - The mob attempting to climb the atom.
+ * - `check_silicon` boolean (default `TRUE`) - Passed directly to `/atom/proc/can_climb()` - If set, will block silicon
+ *     mobs.
+ *
+ * Returns boolean. Whether or not the mob successfully completed the climb action.
+ */
 /atom/proc/do_climb(mob/living/user, check_silicon=TRUE)
 	if (!can_climb(user, check_silicon=check_silicon))
 		return 0
@@ -505,6 +843,9 @@
 	LAZYREMOVE(climbers,user)
 	return 1
 
+/**
+ * Handler for atoms being moved, shaken, or otherwise interacted with in a manner that would affect atoms on top of if.
+ */
 /atom/proc/object_shaken()
 	for(var/mob/living/M in climbers)
 		M.Weaken(1)
@@ -551,15 +892,32 @@
 	else
 		return ..()
 
+/**
+ * Returns the atom's current color or white if it has no color.
+ */
 /atom/proc/get_color()
 	return isnull(color) ? COLOR_WHITE : color
 
+/**
+ * Handler for setting the atom's color.
+ */
 /atom/proc/set_color(color)
 	src.color = color
 
+/**
+ * Retrieves the atom's power cell, if it has one.
+ *
+ * Returns instance of `/obj/item/cell` or `null`.
+ */
 /atom/proc/get_cell()
 	return
 
+/**
+ * Called when a mob walks into the atom while confused.
+ *
+ * **Parameters**:
+ * - `L` - The mob that walked into the atom.
+ */
 /atom/proc/slam_into(mob/living/L)
 	L.Weaken(2)
 	L.visible_message(SPAN_WARNING("\The [L] [pick("ran", "slammed")] into \the [src]!"))

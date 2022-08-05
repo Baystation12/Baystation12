@@ -96,6 +96,9 @@
 		add_chameleon_choice(choices, path)
 	return sortAssoc(choices)
 
+/**
+ * Verb to handle changing the appearance of atoms that have the chameleon extension.
+ */
 /atom/proc/chameleon_appearance()
 	set name = "Change Appearance"
 	set desc = "Activate the holographic appearance changing module."

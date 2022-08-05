@@ -108,6 +108,10 @@
 	if(holstered.loc != storage)
 		clear_holster()
 
+/**
+ * Verb to handle quick-holstering an item in the mob's active hand, or retrieving an item from this atom's holster
+ * extension.
+ */
 /atom/proc/holster_verb(holster_name in get_holsters())
 	set name = "Holster"
 	set category = "Object"
@@ -129,6 +133,12 @@
 	else
 		H.unholster(usr, 1)
 
+/**
+ * Retrieves all holsters contained within the atom, including itself. Generally, this is any atom that has the
+ * `/datum/extension/holster` extension.
+ *
+ * Returns associative list (name = instance of `/datum/extension/holster`)
+ */
 /atom/proc/get_holsters()
 	. = list()
 	if(has_extension(src, /datum/extension/holster))

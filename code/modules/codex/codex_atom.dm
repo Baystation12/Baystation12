@@ -1,6 +1,17 @@
+/**
+ * The codex entry name to use for this atom. By default, itself. Used for items that should direct to a codex entry
+ * other than itself, such as Fleet lore.
+ *
+ * Returns instance of `/atom` or string.
+ */
 /atom/proc/get_codex_value()
 	return src
 
+/**
+ * Retrieves the atom's codex entry, generating a new one if not already cached.
+ *
+ * Returns instance of `/datum/codex_entry` or `FALSE` if there's no codex data to generate.
+ */
 /atom/proc/get_specific_codex_entry()
 	if(SScodex.entries_by_path[type])
 		return SScodex.entries_by_path[type]
@@ -14,12 +25,27 @@
 	var/datum/codex_entry/entry = new(name, list(type), _lore_text = lore, _mechanics_text = mechanics, _antag_text = antag)
 	return entry
 
+/**
+ * Handler for displaying information in the Mechanics section of the atom's codex entry.
+ *
+ * Returns string.
+ */
 /atom/proc/get_mechanics_info()
 	return
 
+/**
+ * Handler for displaying information in the Antagonist section of the atom's codex entry.
+ *
+ * Returns string.
+ */
 /atom/proc/get_antag_info()
 	return
 
+/**
+ * Handler for displaying information in the Lore section of the atom's codex entry.
+ *
+ * Returns string.
+ */
 /atom/proc/get_lore_info()
 	return
 

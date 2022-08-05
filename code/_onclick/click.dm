@@ -29,6 +29,17 @@
 	var/datum/click_handler/click_handler = usr.GetClickHandler()
 	click_handler.OnDblClick(src, params)
 
+
+/**
+ * Whether or not the atom should allow a mob to click things while inside it's contents.
+ *
+ * **Parameters**:
+ * - `A` - The atom being clicked on.
+ * - `params` (list) - The click parameters
+ * - `user` - The mob performing the click action.
+ *
+ * Returns boolean.
+ */
 /atom/proc/allow_click_through(atom/A, params, mob/user)
 	return FALSE
 

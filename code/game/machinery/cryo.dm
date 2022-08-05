@@ -379,7 +379,11 @@
 /obj/machinery/atmospherics/unary/cryo_cell/return_air()
 	return air_contents
 
-//This proc literally only exists for cryo cells.
+/**
+ * Alternative to `return_air()` used for internal organ and lung checks.
+ *
+ * Returns instance of `/datum/gas_mixture`.
+ */
 /atom/proc/return_air_for_internal_lifeform()
 	return return_air()
 

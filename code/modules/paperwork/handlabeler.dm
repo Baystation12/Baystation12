@@ -31,6 +31,15 @@
 			return
 	A.attach_label(user, src, label)
 
+
+/**
+ * Handles attaching a labeller label to the atom.
+ *
+ * **Parameters**:
+ * - `user` - The mob attaching the label.
+ * - `labeler` - The labeler being used to attach the label.
+ * - `label_text` (string) - The text to be added as a label.
+ */
 /atom/proc/attach_label(user, atom/labeler, label_text)
 	to_chat(user, SPAN_NOTICE("The label refuses to stick to [name]."))
 

@@ -1,4 +1,16 @@
-
+/**
+ * Whether or not an atom can move through or onto the same tile as this atom.
+ *
+ * Generally called by movement and airflow procs.
+ *
+ * **Parameters**:
+ * - `mover` - The atom attempting to move onto `target`.
+ * - `target` - The originally targeted turf that `src `may be blocking.
+ * - `height` (float) -
+ * - `air_group` (boolean) - Intended use unknown - No references to this proc actually set this.
+ *
+ * Returns boolean.
+ */
 /atom/proc/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
 	//Purpose: Determines if the object (or airflow) can pass this atom.
 	//Called by: Movement, airflow.

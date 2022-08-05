@@ -344,6 +344,10 @@
 		see = hear(view_range, pos)
 	return see
 
+
+/**
+ * Automatically sets the atom's direction based on nearby walls. Used for atoms that should appear 'attached' to walls.
+ */
 /atom/proc/auto_turn()
 	//Automatically turns based on nearby walls.
 	var/turf/simulated/wall/T = null

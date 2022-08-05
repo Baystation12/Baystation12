@@ -895,6 +895,11 @@
 		remoteview_target = null
 		reset_view(0)
 
+/**
+ * Retrieves the atom's visible gender. Generally this is just `gender` but some factors may mask or change this.
+ *
+ * Returns a valid gender value. See DM documentation for `/mob/var/gender`.
+ */
 /atom/proc/get_visible_gender()
 	return gender
 

@@ -63,10 +63,20 @@
 	pulling.forceMove(destination)
 	return 1
 
+/**
+ * Whether or not an atom can move through or onto the same tile as this atom. Primarily used for z-level transitioning in multi-z areas.
+ *
+ * By default, passes directly to `CanPass()` and also checks upward movement with climbable atoms.
+ *
+ * **Parameters**:
+ * - `mover` - The atom attempting to move onto `target`.
+ * - `target` - The originally targeted turf that `src `may be blocking.
+ * - `height` (float) -
+ * - `direction` (bitflag/direction) - The direction of movement. This should only ever be `DOWN` or `UP`.
+ *
+ * Returns boolean.
+ */
 /atom/proc/CanMoveOnto(atom/movable/mover, turf/target, height=1.5, direction = 0)
-	//Purpose: Determines if the object can move through this
-	//Uses regular limitations plus whatever we think is an exception for the purpose of
-	//moving up and down z levles
 	return CanPass(mover, target, height, 0) || (direction == DOWN && (atom_flags & ATOM_FLAG_CLIMBABLE))
 
 /mob/proc/can_overcome_gravity()

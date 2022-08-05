@@ -176,6 +176,12 @@
 	A.attack_robot(src)
 	return TRUE
 
+/**
+ * Called when a silicon robot mob clicks on an atom.
+ *
+ * **Parameters**:
+ * - `user` - The mob clicking on the atom.
+ */
 /atom/proc/attack_robot(mob/user as mob)
 	attack_ai(user)
 	return

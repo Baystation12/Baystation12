@@ -490,8 +490,17 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 			return TRUE
 	return FALSE
 
-/* Atom reagent creation - use it all the time */
-
+/**
+ * Creates a reagent holder for the atom. This shouldn't be used if a reagents holder already exists, but it will
+ * partially function by increasing the existing holder's maximum volume instead of creating a new one. If the existing
+ * holder's maximum already exceeded the given value, however, this will not reduce the volume.
+ *
+ * **Parameters**:
+ * - `max_vol` integer - The maximum volume of the new reagents holder.
+ *
+ * Returns instance of `/datum/reagents`. The newly created reagents holder or, if the atom already had a holder, the
+ * pre-existing holder.
+ */
 /atom/proc/create_reagents(max_vol)
 	if(reagents)
 		log_debug("Attempted to create a new reagents holder when already referencing one: [log_info_line(src)]")
