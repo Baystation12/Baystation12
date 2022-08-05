@@ -1,0 +1,7 @@
+author: Spookerton
+delete-after: true
+changes:
+  - tweak: 'Drinking from containers is based on species and intent. Different species
+      drink different amounts per sip, with monkeys drinking the least and vox the
+      most. Disarm halves the amount, Grab increases by half again. See #32353 for
+      initial specifics.'
