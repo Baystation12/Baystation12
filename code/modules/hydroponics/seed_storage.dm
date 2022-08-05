@@ -129,6 +129,16 @@
 	starting_seeds += list(/obj/item/seeds/random = 5)
 	. = ..()
 
+/obj/machinery/seed_storage/all
+	name = "Debug seed storage"
+	scanner = list("stats", "produce", "soil", "temperature", "light")
+	starting_seeds = list()
+
+/obj/machinery/seed_storage/all/Initialize(mapload)
+	for (var/typepath in subtypesof(/obj/item/seeds))
+		starting_seeds += list(typepath = 5)
+	. = ..()
+
 /obj/machinery/seed_storage/interface_interact(mob/user)
 	interact(user)
 	return TRUE
