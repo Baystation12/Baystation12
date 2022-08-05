@@ -267,6 +267,9 @@
 	var/list/exertion_emotes_biological = null
 	var/list/exertion_emotes_synthetic = null
 
+	/// When being fed a reagent item, the amount this species eats per bite on help intent.
+	var/ingest_amount = 10
+
 /*
 These are all the things that can be adjusted for equipping stuff and
 each one can be in the NORTH, SOUTH, EAST, and WEST direction. Specify

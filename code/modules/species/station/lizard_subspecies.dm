@@ -45,6 +45,8 @@
 		BP_HEAD =   /obj/item/organ/external/head/yeosa
 	)
 
+	ingest_amount = 15
+
 
 /datum/species/unathi/yeosa/can_float(mob/living/carbon/human/H)
 	if(!H.is_physically_disabled())

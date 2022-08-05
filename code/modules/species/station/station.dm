@@ -243,6 +243,8 @@
 		/decl/emote/exertion/synthetic/creak
 	)
 
+	ingest_amount = 15
+
 
 /datum/species/skrell/proc/handle_protein(mob/living/carbon/human/M, datum/reagent/protein)
 	var/effective_dose = M.chem_doses[protein.type] * protein.protein_amount

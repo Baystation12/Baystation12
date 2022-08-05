@@ -130,66 +130,43 @@
 /obj/item/reagent_containers/proc/feed_sound(var/mob/user)
 	return
 
-/obj/item/reagent_containers/proc/standard_feed_mob(var/mob/user, var/mob/target) // This goes into attack
-	if(!istype(target))
-		return 0
-
+/obj/item/reagent_containers/proc/standard_feed_mob(mob/living/user, mob/living/carbon/human/target)
+	if (!istype(target))
+		return FALSE
 	if(!reagents || !reagents.total_volume)
-		to_chat(user, "<span class='notice'>\The [src] is empty.</span>")
-		return 1
+		to_chat(user, SPAN_WARNING("\The [src] is empty."))
+		return TRUE
+	if (user?.a_intent == I_HURT)
+		return FALSE
+	var/is_self = target == user
+	if (!target.check_has_mouth())
+		to_chat(user, SPAN_WARNING("[is_self ? "You" : "\The [target]"] can't consume \the [src] - [is_self ? "you" : "they"] don't have a mouth!"))
+		return FALSE
+	var/obj/item/blocker = target.check_mouth_coverage()
+	if (blocker)
+		to_chat(user, SPAN_WARNING("[is_self ? "Your" : "\The [target]'s"] [blocker] is in the way!"))
+		return FALSE
+	user?.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	if (is_self)
+		self_feed_message(target)
+		add_trace_DNA(target)
+	else
+		other_feed_message_start(user, target)
+		if (!do_after(user, 3 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+			return FALSE
+		other_feed_message_finish(user, target)
+		add_trace_DNA(target)
+		var/contained = reagentlist()
+		admin_attack_log(user, target, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
+	feed_sound(target)
+	var/transfer_amount = target.species?.ingest_amount || 10
+	if (user.a_intent == I_DISARM)
+		transfer_amount = Ceil(transfer_amount * 0.5)
+	else if (user.a_intent == I_GRAB)
+		transfer_amount = Ceil(transfer_amount * 1.5)
+	reagents.trans_to_mob(target, transfer_amount, CHEM_INGEST)
+	return TRUE
 
-	// only carbons can eat
-	if(istype(target, /mob/living/carbon))
-		if(target == user)
-			if(istype(user, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = user
-				if (user.a_intent == I_HURT)
-					return
-				if (!H.check_has_mouth())
-					to_chat(user, "Where do you intend to put \the [src]? You don't have a mouth!")
-					return
-				var/obj/item/blocked = H.check_mouth_coverage()
-				if (blocked)
-					to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
-					return
-
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //puts a limit on how fast people can eat/drink things
-			self_feed_message(user)
-			reagents.trans_to_mob(user, issmall(user) ? Ceil(amount_per_transfer_from_this/2) : amount_per_transfer_from_this, CHEM_INGEST)
-			feed_sound(user)
-			add_trace_DNA(user)
-			return 1
-
-
-		else
-			if (user.a_intent == I_HURT)
-				return
-			var/mob/living/carbon/H = target
-			if (!H.check_has_mouth())
-				to_chat(user, "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!")
-				return
-			var/obj/item/blocked = H.check_mouth_coverage()
-			if (blocked)
-				to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
-				return
-
-			other_feed_message_start(user, target)
-
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			if(!do_after(user, 3 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
-				return
-
-			other_feed_message_finish(user, target)
-
-			var/contained = reagentlist()
-			admin_attack_log(user, target, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
-
-			reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INGEST)
-			feed_sound(user)
-			add_trace_DNA(target)
-			return 1
-
-	return 0
 
 /obj/item/reagent_containers/proc/standard_pour_into(var/mob/user, var/atom/target) // This goes into afterattack and yes, it's atom-level
 	if(!target.reagents)
