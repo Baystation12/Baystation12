@@ -15,27 +15,25 @@
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	break_stuff_probability = 35
 	faction = "shark"
-	ai_holder = /datum/ai_holder/simple_animal/melee/carp/shark
+	special_attack_min_range = 0
+	special_attack_max_range = 2
+	special_attack_cooldown = 15 SECONDS
 
-
-/datum/ai_holder/simple_animal/melee/carp/shark/engage_target()
-	set waitfor = 0//to deal with sleep() possibly stalling other procs
-	. = ..()
-	var/mob/living/simple_animal/hostile/carp/shark/S = holder
-	var/mob/living/L = .
+/mob/living/simple_animal/hostile/carp/shark/do_special_attack(atom/A)
+	var/mob/living/L = A
 	if(istype(L))
-		if(prob(25))//if one is unlucky enough, they get tackled few tiles away
-			L.visible_message("<span class='danger'>\The [src] tackles [L]!</span>")
+		if(prob(45))//if one is unlucky enough, they get tackled few tiles away
+			L.visible_message(SPAN_DANGER("\The [src] tackles [L]!"))
 			var/tackle_length = rand(3,5)
 			for (var/i = 1 to tackle_length)
-				var/turf/T = get_step(L.loc, S.dir)//on a first step of tackling standing mob would block movement so let's check if there's something behind it. Works for consequent moves too
-				if (T.density || LinkBlocked(L.loc, T) || TurfBlockedNonWindow(T) || DirBlocked(T, GLOB.flip_dir[S.dir]))
+				var/turf/T = get_step(L.loc, dir)//on a first step of tackling standing mob would block movement so let's check if there's something behind it. Works for consequent moves too
+				if (T.density || LinkBlocked(L.loc, T) || TurfBlockedNonWindow(T) || DirBlocked(T, GLOB.flip_dir[dir]))
 					break
 				sleep(2)
-				S.forceMove(T)//maybe there's better manner then just forceMove() them
+				forceMove(T)//maybe there's better manner then just forceMove() them
 				L.forceMove(T)
-			S.visible_message("<span class='danger'>\The [S] releases [L].</span>")
-
+			visible_message(SPAN_DANGER("\The [src] releases [L]."))
+	return TRUE
 
 /mob/living/simple_animal/hostile/carp/shark/carp_randomify()
 	return
