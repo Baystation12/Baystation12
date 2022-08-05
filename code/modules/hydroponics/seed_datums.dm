@@ -1535,7 +1535,7 @@
 	seed_name = "gukhe bloom"
 	display_name = "gukhe bloom"
 	chems = list(/datum/reagent/nutriment = list(2,12), /datum/reagent/capsaicin = list(10,10))
-	kitchen_tag = "algae"
+	kitchen_tag = "gukhe"
 
 /datum/seed/gukhe/New()
 	..()
@@ -1640,6 +1640,7 @@
 	seed_name = "aghrassh"
 	display_name = "aghrassh trees"
 	chems = list(/datum/reagent/nutriment = list(1,20))
+	kitchen_tag = "aghrassh"
 
 /datum/seed/aghrassh/New()
 	..()
