@@ -275,7 +275,7 @@
 	graphs = list()
 
 /datum/unit_test/graph_test/proc/ReadyToCheckExpectations()
-	return length(SSgraphs_update.pending_graphs) == 0 && length(SSgraphs_update.current_run) == 0
+	return length(SSgraphs.pending_graphs) == 0 && length(SSgraphs.queue) == 0
 
 /datum/unit_test/graph_test/check_result()
 	if(!ReadyToCheckExpectations())
