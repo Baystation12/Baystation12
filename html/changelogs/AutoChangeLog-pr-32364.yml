@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Cutting up pills to make powders now has a 5-second unique timer.
+  - tweak: Snorting powders now have a 2-second unique timer. This is 1 second faster
+      than self-injecting.
