@@ -483,7 +483,13 @@
 	return 0
 
 /mob/living/carbon/human/pull_damage()
-	if(!lying || getBruteLoss() + getFireLoss() < 100)
+	if(!lying)
+		return 0
+	for (var/obj/item/organ/external/e in organs)
+		var/incision_state = e.how_open()
+		if(incision_state == SURGERY_RETRACTED || incision_state == SURGERY_ENCASED)
+			return 1
+	if(getBruteLoss() + getFireLoss() < 100)
 		return 0
 	for(var/thing in organs)
 		var/obj/item/organ/external/e = thing
