@@ -80,17 +80,25 @@
 		if(!user.check_has_mouth()) // We dont want dionae or adherents doing lines of cocaine. Probably.
 			to_chat(SPAN_WARNING("Without a nose, you seem unable to snort from \the [src]."))
 			return TRUE
-		else
-			user.visible_message(
-				SPAN_WARNING("\The [user] snorts some of \the [src] with \a [W]!"),
-				SPAN_NOTICE("You snort \the [src] with \the [W]!")
-			)
-			playsound(loc, 'sound/effects/snort.ogg', 50, 1)
 
-			if(reagents)
-				reagents.trans_to_mob(user, amount_per_transfer_from_this, CHEM_BLOOD)
+		user.visible_message(
+			SPAN_WARNING("\The [user] starts to snort some of \the [src] with \a [W]!"),
+			SPAN_NOTICE("You start to snort some of \the [src] with \the [W]!")
+		)
+		playsound(loc, 'sound/effects/snort.ogg', 50, 1)
+		if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
+			return TRUE
 
-			if(!reagents.total_volume)
-				qdel(src)
+		user.visible_message(
+			SPAN_WARNING("\The [user] snorts some of \the [src] with \a [W]!"),
+			SPAN_NOTICE("You snort \the [src] with \the [W]!")
+		)
+		playsound(loc, 'sound/effects/snort.ogg', 50, 1)
+
+		if(reagents)
+			reagents.trans_to_mob(user, amount_per_transfer_from_this, CHEM_BLOOD)
+
+		if(!reagents.total_volume)
+			qdel(src)
 		return TRUE
 	return ..()
