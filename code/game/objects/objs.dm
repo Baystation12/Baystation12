@@ -96,7 +96,7 @@
 	set_invisibility(hide ? INVISIBILITY_MAXIMUM : initial(invisibility))
 
 /obj/proc/hides_under_flooring()
-	return level == 1
+	return level == ATOM_LEVEL_UNDER_TILE
 
 /obj/proc/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
 	if(talking_atom)

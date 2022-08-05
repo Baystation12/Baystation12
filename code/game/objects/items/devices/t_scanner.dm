@@ -142,7 +142,7 @@
 			continue
 
 		for(var/obj/O in T.contents)
-			if(O.level != 1)
+			if(O.level != ATOM_LEVEL_UNDER_TILE)
 				continue
 			if(!O.invisibility)
 				continue //if it's already visible don't need an overlay for it

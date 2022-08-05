@@ -57,7 +57,7 @@ Pipelines + Other Objects -> Pipe network
 	atmos_initalized = TRUE
 
 /obj/machinery/atmospherics/hide(do_hide)
-	if(do_hide && level == 1)
+	if(do_hide && level == ATOM_LEVEL_UNDER_TILE)
 		layer = PIPE_LAYER
 	else
 		reset_plane_and_layer()
@@ -69,7 +69,7 @@ Pipelines + Other Objects -> Pipe network
 
 /obj/machinery/atmospherics/proc/add_underlay(turf/T, obj/machinery/atmospherics/node, direction, icon_connect_type)
 	if(node)
-		if(!T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
+		if(!T.is_plating() && node.level == ATOM_LEVEL_UNDER_TILE && istype(node, /obj/machinery/atmospherics/pipe))
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "down" + icon_connect_type)
 		else
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "intact" + icon_connect_type)
@@ -169,4 +169,4 @@ Pipelines + Other Objects -> Pipe network
 /obj/machinery/proc/set_initial_level()
 	var/turf/T = get_turf(src)
 	if(T)
-		level = (!T.is_plating() ? 2 : 1)
+		level = (!T.is_plating() ? ATOM_LEVEL_OVER_TILE : ATOM_LEVEL_UNDER_TILE)

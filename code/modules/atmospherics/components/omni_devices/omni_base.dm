@@ -6,7 +6,7 @@
 	icon = 'icons/atmos/omni_devices.dmi'
 	icon_state = "base"
 	initialize_directions = 0
-	level = 1
+	level = ATOM_LEVEL_UNDER_TILE
 	layer = ABOVE_CATWALK_LAYER
 
 	var/configuring = 0
@@ -183,7 +183,7 @@
 		var/turf/T = get_turf(src)
 		if(!istype(T))
 			return
-		if(!T.is_plating() && istype(P.node, /obj/machinery/atmospherics/pipe) && P.node.level == 1 )
+		if(!T.is_plating() && istype(P.node, /obj/machinery/atmospherics/pipe) && P.node.level == ATOM_LEVEL_UNDER_TILE )
 			//pipe_state = icon_manager.get_atmos_icon("underlay_down", P.dir, color_cache_name(P.node))
 			pipe_state = icon_manager.get_atmos_icon("underlay", P.dir, color_cache_name(P.node), "down")
 		else

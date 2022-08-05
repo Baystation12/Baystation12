@@ -12,7 +12,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 	idle_power_usage = 10
 	active_power_usage = 50
 	anchored = TRUE
-	level = 1
+	level = ATOM_LEVEL_UNDER_TILE
 
 	machine_name = "teleporter beacon"
 	machine_desc = "Teleporter beacons allow teleporter systems to target them, for accurate, instantaneous transport of objects and people."
@@ -64,7 +64,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 				return TRUE
 
 			anchored = !anchored
-			level = anchored ? 1 : 2
+			level = anchored ? ATOM_LEVEL_UNDER_TILE : ATOM_LEVEL_OVER_TILE
 			user.visible_message(
 				SPAN_NOTICE("\The [user] [anchored ? "connects" : "disconnects"] \the [src] [anchored ? "to" : "from"] \the [T] with \the [I]."),
 				SPAN_NOTICE("You [anchored ? "connect" : "disconnect"] \the [src] [anchored ? "to" : "from"] \the [T] with \the [I].")

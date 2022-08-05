@@ -1,6 +1,6 @@
 /turf
 	icon = 'icons/turf/floors.dmi'
-	level = 1
+	level = ATOM_LEVEL_UNDER_TILE
 
 	layer = TURF_LAYER
 

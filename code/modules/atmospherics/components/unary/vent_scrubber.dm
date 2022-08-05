@@ -11,7 +11,7 @@
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER //connects to regular and scrubber pipes
 	identifier = "AScr"
 
-	level = 1
+	level = ATOM_LEVEL_UNDER_TILE
 
 	var/hibernate = 0 //Do we even process?
 	var/scrubbing = SCRUBBER_EXCHANGE
@@ -91,7 +91,7 @@
 		var/turf/T = get_turf(src)
 		if(!istype(T))
 			return
-		if(!T.is_plating() && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
+		if(!T.is_plating() && node && node.level == ATOM_LEVEL_UNDER_TILE && istype(node, /obj/machinery/atmospherics/pipe))
 			return
 		else
 			if(node)
@@ -195,7 +195,7 @@
 		if (is_powered() && use_power)
 			return SPAN_WARNING("You cannot take this [src] apart, turn it off first.")
 		var/turf/T = get_turf(src)
-		if (node && node.level==1 && isturf(T) && !T.is_plating())
+		if (node && node.level==ATOM_LEVEL_UNDER_TILE && isturf(T) && !T.is_plating())
 			return SPAN_WARNING("You must remove the plating first.")
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()

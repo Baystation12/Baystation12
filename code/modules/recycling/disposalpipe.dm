@@ -7,7 +7,7 @@
 	anchored = TRUE
 	density = FALSE
 
-	level = 1			// underfloor only
+	level = ATOM_LEVEL_UNDER_TILE
 	var/dpdir = 0		// bitmask of pipe directions
 	dir = 0				// dir will contain dominant direction for junction pipes
 	health_max = 10

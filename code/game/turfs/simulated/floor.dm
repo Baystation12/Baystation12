@@ -31,7 +31,7 @@
 	return !flooring
 
 /turf/simulated/floor/protects_atom(atom/A)
-	return (A.level <= 1 && !is_plating()) || ..()
+	return (A.level == ATOM_LEVEL_UNDER_TILE && !is_plating()) || ..()
 
 /turf/simulated/floor/New(newloc, floortype)
 	..(newloc)

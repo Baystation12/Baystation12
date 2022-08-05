@@ -5,7 +5,7 @@
 	name = "manual valve"
 	desc = "A pipe valve."
 
-	level = 1
+	level = ATOM_LEVEL_UNDER_TILE
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH
 	layer = ABOVE_CATWALK_LAYER

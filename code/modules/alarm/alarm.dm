@@ -107,7 +107,7 @@
 * Assisting procs *
 ******************/
 /**
- * Determine's the alarm's z-level.
+ * Determines the alarm's z-level.
  *
  * TODO: Possibly redundant. Check how areas respond to `get_z()` and potentially just replace this call with that.
  *

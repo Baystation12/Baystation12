@@ -5,7 +5,7 @@ var/global/list/navbeacons = list()
 	icon_state = "navbeacon0-f"
 	name = "navigation beacon"
 	desc = "A radio beacon used for bot navigation."
-	level = 1
+	level = ATOM_LEVEL_UNDER_TILE
 	layer = ABOVE_WIRE_LAYER
 	anchored = TRUE
 

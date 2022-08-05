@@ -23,7 +23,7 @@ By design, d1 is the smallest direction and d2 is the highest
 */
 
 /obj/structure/cable
-	level = 1
+	level = ATOM_LEVEL_UNDER_TILE
 	anchored = TRUE
 	name = "power cable"
 	desc = "A flexible superconducting cable for heavy-duty power transfer."
@@ -54,7 +54,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	var/turf/turf = loc
 	if (!isturf(turf))
 		return INITIALIZE_HINT_QDEL
-	if (level == 1)
+	if (level == ATOM_LEVEL_UNDER_TILE)
 		hide(!turf.is_plating() && !turf.is_open())
 	GLOB.cable_list += src
 

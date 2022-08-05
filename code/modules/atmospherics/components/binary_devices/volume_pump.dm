@@ -1,7 +1,6 @@
 /obj/machinery/atmospherics/binary/pump/high_power
 	icon = 'icons/atmos/volume_pump.dmi'
 	icon_state = "map_off"
-	level = 1
 
 	name = "high power gas pump"
 	desc = "A pump. Has double the power rating of the standard gas pump."

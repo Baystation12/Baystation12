@@ -16,7 +16,7 @@
 	var/minimum_temperature_difference = 300
 	var/thermal_conductivity = 0 //WALL_HEAT_TRANSFER_COEFFICIENT No
 
-	level = 1
+	level = ATOM_LEVEL_UNDER_TILE
 
 /obj/machinery/atmospherics/pipe/zpipe/hide(i)
 	if(istype(loc, /turf/simulated))

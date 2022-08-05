@@ -1,6 +1,6 @@
 /atom
 	/// Integer. The atom's layering level. Primarily used for determining whether the atom is visible or not on certain tile/flooring types/layers (I.e. plating and non-plating).
-	var/level = 2
+	var/level = ATOM_LEVEL_OVER_TILE
 	/// Bitflag (Any of `ATOM_FLAG_*`). General atom level flags. See `code\__defines\flags.dm`.
 	var/atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
 	/// LAZYLIST of all DNA strings present on the atom from blood. Do not modify directly. See `add_blood()` and `clean_blood()`.
