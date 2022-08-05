@@ -3280,6 +3280,7 @@
 "zR" = (
 /obj/structure/table/reinforced,
 /obj/item/storage/box/glasses/pint,
+/obj/item/storage/box/mousetraps,
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "zU" = (
