@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscdel: Vox armalis have been removed from the codebase.
