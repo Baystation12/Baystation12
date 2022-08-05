@@ -131,7 +131,7 @@
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
 		if(growth_type in list(GROWTH_VINES,GROWTH_BIOMASS))
 			set_opacity(1)
-		if(islist(seed.chems) && !isnull(seed.chems[/datum/reagent/woodpulp]))
+		if(LAZYACCESS(seed.chems, /datum/reagent/woodpulp))
 			set_density(1)
 			set_opacity(1)
 
@@ -143,18 +143,10 @@
 		set_density(0)
 
 	if(!growth_type && !floor)
-		src.transform = null
-		var/matrix/M = matrix()
-		// should make the plant flush against the wall it's meant to be growing from.
-		M.Translate(0,-(rand(12,14)))
-		switch(dir)
-			if(WEST)
-				M.Turn(90)
-			if(NORTH)
-				M.Turn(180)
-			if(EAST)
-				M.Turn(270)
-		src.transform = M
+		SetTransform(
+			rotation = dir == WEST ? 90 : dir == NORTH ? 180 : dir == EAST ? 270 : 0,
+			offset_y = -rand(12, 14)
+		)
 
 	// Apply colour and light from seed datum.
 	if(seed.get_trait(TRAIT_BIOLUM))
@@ -221,7 +213,7 @@
 			damage *= 2
 		adjust_health(-damage)
 		playsound(get_turf(src), W.hitsound, 100, 1)
-		
+
 /obj/effect/vine/AltClick(var/mob/user)
 	if(!CanPhysicallyInteract(user) || user.incapacitated())
 		return ..()
@@ -232,7 +224,7 @@
 		var/chop_time = (health/W.force) * 0.5 SECONDS
 		if(user.skill_check(SKILL_BOTANY, SKILL_ADEPT))
 			chop_time *= 0.5
-		if(do_after(user, chop_time, src))
+		if (do_after(user, chop_time, src, DO_PUBLIC_UNIQUE))
 			visible_message(SPAN_NOTICE("[user] chops down \the [src]."))
 			playsound(get_turf(src), W.hitsound, 100, 1)
 			die_off()
@@ -264,14 +256,14 @@
 
 /obj/effect/vine/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			die_off()
 			return
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				die_off()
 				return
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			if (prob(5))
 				die_off()
 				return

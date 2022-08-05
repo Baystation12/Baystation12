@@ -31,20 +31,21 @@ exactly 2 "/mob text paths" '"/mob'
 exactly 10 "/obj text paths" '"/obj'
 exactly 8 "/turf text paths" '"/turf'
 exactly 117 "to_world uses" '\sto_world\('
-exactly 53 "to_world_log uses" '\sto_world_log\('
+exactly 0 "globals with leading /" '^/var' -P
+exactly 0 "globals without global sugar" '^var/(?!global/)' -P
+exactly 0 "apparent paths with trailing /" '\w/[,\)\n]' -P
+exactly 51 "to_world_log uses" '\sto_world_log\('
 exactly 0 "world<< uses" 'world<<|world[[:space:]]<<'
 exactly 0 "world.log<< uses" 'world.log<<|world.log[[:space:]]<<'
 exactly 2 "<< uses" '(?<!<)<<(?!<)' -P
 exactly 2 ">> uses" '(?<!>)>>(?!>)' -P
 exactly 0 "incorrect indentations" '^( {4,})' -P
-exactly 22 "text2path uses" 'text2path'
-exactly 6 "update_icon() override" '/update_icon\((.*)\)'  -P
+exactly 24 "text2path uses" 'text2path'
+exactly 3 "update_icon() override" '/update_icon\((.*)\)'  -P
 exactly 5 "goto use" 'goto '
 exactly 1 "NOOP match" 'NOOP'
-exactly 370 "spawn uses" '^\s*spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
+exactly 364 "spawn uses" '^\s*spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
 exactly 0 "tag uses" '\stag = ' -P '**/*.dmm'
-exactly 2 ".Replace( matches" '\.Replace(_char)?\(' -P
-exactly 3 ".Find( matches" '\.Find(_char)?\(' -P
 exactly 0 "anchored = 0/1" 'anchored\s*=\s*\d' -P
 exactly 2 "density = 0/1" 'density\s*=\s*\d' -P
 exactly 0 "emagged = 0/1" 'emagged\s*=\s*\d' -P

@@ -199,7 +199,7 @@
 		R.module.equipment += new/obj/item/rcd/borg(R.module)
 		return 1
 
-/obj/item/borg/upgrade/syndicate/
+/obj/item/borg/upgrade/syndicate
 	name = "illegal equipment module"
 	desc = "Unlocks the hidden, deadlier functions of a robot."
 	icon_state = "cyborg_upgrade3"

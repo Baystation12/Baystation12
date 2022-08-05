@@ -10,7 +10,7 @@
 			/obj/item/reagent_containers/chem_disp_cartridge/silicon,
 			/obj/item/reagent_containers/chem_disp_cartridge/phosphorus,
 			/obj/item/reagent_containers/chem_disp_cartridge/sulfur,
-			/obj/item/reagent_containers/chem_disp_cartridge/hclacid,
+			/obj/item/reagent_containers/chem_disp_cartridge/hydrochloric,
 			/obj/item/reagent_containers/chem_disp_cartridge/potassium,
 			/obj/item/reagent_containers/chem_disp_cartridge/iron,
 			/obj/item/reagent_containers/chem_disp_cartridge/copper,
@@ -19,7 +19,7 @@
 			/obj/item/reagent_containers/chem_disp_cartridge/water,
 			/obj/item/reagent_containers/chem_disp_cartridge/ethanol,
 			/obj/item/reagent_containers/chem_disp_cartridge/sugar,
-			/obj/item/reagent_containers/chem_disp_cartridge/sacid,
+			/obj/item/reagent_containers/chem_disp_cartridge/acid,
 			/obj/item/reagent_containers/chem_disp_cartridge/tungsten
 		)
 

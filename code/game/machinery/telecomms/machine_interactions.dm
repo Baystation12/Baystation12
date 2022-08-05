@@ -45,7 +45,7 @@
 	if(state_path == /decl/machine_construction/default/deconstructed)
 		to_chat(user, "You begin prying out the circuit board other components...")
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-		if(do_after(user,60, src))
+		if(do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "You finish prying out the components.")
 			return
 		return MCS_BLOCK
@@ -53,7 +53,7 @@
 /obj/machinery/telecomms/dismantle()
 	for(var/obj/x in (contents - component_parts))
 		x.dropInto(loc)
-	. = ..()	
+	. = ..()
 
 // This should all be a multitool extension, but outside the scope of current rework.
 /obj/machinery/telecomms/CanUseTopic(mob/user)
@@ -135,7 +135,7 @@
 
 	dat += "</font>"
 	temp = ""
-	
+
 	var/datum/browser/popup = new(user, "tcommmachine", "Telecommunications Machine Configuration Panel", 520, 600)
 	popup.set_content(JOINTEXT(dat))
 	popup.open()

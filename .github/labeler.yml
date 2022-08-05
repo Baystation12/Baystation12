@@ -5,6 +5,7 @@ Repo:
 - scripts/**/*
 - test/**/*
 - tools/**/*
+- .codebeatignore
 - .editorconfig
 - .git*
 - LICENSE

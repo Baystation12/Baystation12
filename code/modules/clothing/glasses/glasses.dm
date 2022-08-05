@@ -3,7 +3,6 @@
 	icon = 'icons/obj/clothing/obj_eyes.dmi'
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_eyes_vox.dmi',
-		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_eyes_vox_armalis.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_eyes_unathi.dmi'
 		)
 	var/hud_type
@@ -92,6 +91,7 @@
 						M.disabilities &= ~NEARSIGHTED
 			if(toggleable)
 				deactivate(M, FALSE)
+	..()
 
 /obj/item/clothing/glasses/attack_self(mob/user)
 	if(toggleable && !user.incapacitated())

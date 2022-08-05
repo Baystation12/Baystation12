@@ -180,12 +180,19 @@
 		//count seconds until full, or recording is stopped
 		while(mytape && recording && mytape.used_capacity < mytape.max_capacity)
 			sleep(10)
+			if (!mytape)
+				if(ismob(loc))
+					var/mob/M = loc
+					to_chat(M, SPAN_NOTICE("\The [src]'s tape has been removed."))
+				stop_recording()
+				break
 			mytape.used_capacity++
 			if(mytape.used_capacity >= mytape.max_capacity)
 				if(ismob(loc))
 					var/mob/M = loc
 					to_chat(M, "<span class='notice'>The tape is full.</span>")
 				stop_recording()
+				break
 
 
 		update_icon()
@@ -198,7 +205,8 @@
 	//Sanity checks skipped, should not be called unless actually recording
 	recording = 0
 	update_icon()
-	mytape.record_speech("Recording stopped.")
+	if (mytape)
+		mytape.record_speech("Recording stopped.")
 	if(ismob(loc))
 		var/mob/M = loc
 		to_chat(M, "<span class='notice'>Recording stopped.</span>")
@@ -443,7 +451,7 @@
 			to_chat(user, "<span class='notice'>There is no tape left inside.</span>")
 			return
 		to_chat(user, "<span class='notice'>You start winding the tape back in...</span>")
-		if(do_after(user, 120, src))
+		if(do_after(user, 12 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 			to_chat(user, "<span class='notice'>You wound the tape back in.</span>")
 			fix()
 		return

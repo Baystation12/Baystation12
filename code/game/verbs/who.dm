@@ -68,7 +68,7 @@
 	var/total_staff = 0
 	var/can_investigate = check_rights(R_INVESTIGATE, 0)
 
-	for(var/client/C in GLOB.admins)
+	for(var/client/C as anything in GLOB.admins)
 		var/line = list()
 		if(!can_investigate && C.is_stealthed())
 			continue

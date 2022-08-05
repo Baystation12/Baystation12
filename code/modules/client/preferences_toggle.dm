@@ -1,4 +1,4 @@
-var/list/client_preference_stats_
+var/global/list/client_preference_stats_
 
 /proc/client_preference_stats_for_usr(var/mob/user = usr)
 	. = list()

@@ -4,7 +4,7 @@
 
 	..()
 
-	if (HasMovementHandler(/datum/movement_handler/mob/transformation/))
+	if (HasMovementHandler(/datum/movement_handler/mob/transformation))
 		return
 	if (!loc)
 		return

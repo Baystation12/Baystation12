@@ -9,7 +9,7 @@
 
 /obj/item/organ/internal/augment/active/iatric_monitor/emp_act(severity)
 	. = ..()
-	if (severity)
+	if (prob(100 / severity))
 		var/scan_results = medical_scan_results(owner, TRUE, SKILL_NONE)
 		owner.playsound_local(null, 'sound/effects/fastbeep.ogg', 20, is_global = TRUE)
 		to_chat(owner, "<br>[scan_results]<br>")

@@ -8,6 +8,7 @@
 	color = "#808080"
 	metabolism = REM * 0.2
 	value = DISPENSER_REAGENT_VALUE
+	accelerant_quality = 3
 
 /datum/reagent/acetone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_NABBER)
@@ -120,6 +121,7 @@
 	glass_name = "ethanol"
 	glass_desc = "A well-known alcohol with a variety of applications."
 	value = DISPENSER_REAGENT_VALUE
+	accelerant_quality = 5
 
 /datum/reagent/ethanol/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
@@ -287,7 +289,7 @@
 	should_admin_log = TRUE
 
 /datum/reagent/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100) // Radium may increase your chances to cure a disease
+	M.apply_damage(10 * removed, DAMAGE_RADIATION, armor_pen = 100) // Radium may increase your chances to cure a disease
 
 /datum/reagent/radium/touch_turf(var/turf/T)
 	if(volume >= 3)

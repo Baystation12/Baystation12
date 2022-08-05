@@ -3,30 +3,29 @@ SUBSYSTEM_DEF(inactivity)
 	wait = 1 MINUTE
 	priority = SS_PRIORITY_INACTIVITY
 	flags = SS_BACKGROUND
-	var/static/tmp/list/current = list()
+
+	/// The current run of clients to check for inactivity.
+	var/static/list/client/queue = list()
 
 
-/datum/controller/subsystem/inactivity/Destroy()
-	current.Cut()
-	..()
+/datum/controller/subsystem/inactivity/Recover()
+	queue.Cut()
 
 
-/datum/controller/subsystem/inactivity/Initialize(start_timeofday)
+/datum/controller/subsystem/inactivity/Initialize(start_uptime)
 	if (!config.kick_inactive)
 		suspend()
 
 
-/datum/controller/subsystem/inactivity/Recover()
-	current.Cut()
-
-
 /datum/controller/subsystem/inactivity/fire(resumed, no_mc_tick)
 	if (!resumed)
-		current = GLOB.clients.Copy()
-	var/client/client
+		if (!GLOB.clients.len)
+			return
+		queue = GLOB.clients.Copy()
 	var/kick_time = config.kick_inactive MINUTES
-	for (var/i = current.len to 1 step -1)
-		client = current[i]
+	var/cut_until = 1
+	for (var/client/client as anything in queue)
+		++cut_until
 		if (QDELETED(client))
 			continue
 		if (client.inactivity > kick_time && !client.holder)
@@ -34,5 +33,6 @@ SUBSYSTEM_DEF(inactivity)
 			to_chat_immediate(SPAN_WARNING("You were inactive for [config.kick_inactive] minutes and have been disconnected."))
 			qdel(client)
 		if (MC_TICK_CHECK)
-			current.Cut(i)
+			queue.Cut(1, cut_until)
 			return
+	queue.Cut()

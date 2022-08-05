@@ -95,7 +95,7 @@
 			descriptors |= "radioactive"
 		if(reagents.has_reagent(/datum/reagent/toxin/amatoxin) || reagents.has_reagent(/datum/reagent/toxin))
 			descriptors |= "poisonous"
-		if(reagents.has_reagent(/datum/reagent/psilocybin) || reagents.has_reagent(/datum/reagent/space_drugs))
+		if(reagents.has_reagent(/datum/reagent/drugs/psilocybin) || reagents.has_reagent(/datum/reagent/drugs/hextro))
 			descriptors |= "hallucinogenic"
 		if(reagents.has_reagent(/datum/reagent/bicaridine))
 			descriptors |= "medicinal"
@@ -307,7 +307,7 @@
 	icon = 'icons/obj/hydroponics_misc.dmi'
 	icon_state = ""
 
-var/list/fruit_icon_cache = list()
+var/global/list/fruit_icon_cache = list()
 
 /obj/item/reagent_containers/food/snacks/fruit_slice/New(var/newloc, var/datum/seed/S)
 	..(newloc)

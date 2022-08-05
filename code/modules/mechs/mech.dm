@@ -12,6 +12,7 @@
 	status_flags = PASSEMOTES
 	a_intent =     I_HURT
 	mob_size =     MOB_LARGE
+	mob_flags = MOB_FLAG_UNPINNABLE
 
 	meat_type = null
 	meat_amount = 0
@@ -27,8 +28,6 @@
 	var/obj/item/device/radio/exosuit/radio
 
 	var/wreckage_path = /obj/structure/mech_wreckage
-	var/mech_turn_sound = 'sound/mecha/mechturn.ogg'
-	var/mech_step_sound = 'sound/mecha/mechstep.ogg'
 
 	// Access updating/container.
 	var/obj/item/card/id/access_card
@@ -74,8 +73,11 @@
 	var/obj/screen/exosuit/heat/hud_heat
 	var/obj/screen/exosuit/toggle/power_control/hud_power_control
 	var/obj/screen/exosuit/toggle/camera/hud_camera
+
 	//POWER
 	var/power = MECH_POWER_OFF
+
+	// Sounds for mech_movement.dm and mech_interaction.dm are stored on legs.dm and arms.dm, respectively
 
 /mob/living/exosuit/MayZoom()
 	if(head?.vision_flags)
@@ -224,7 +226,7 @@
 		//Start power up sequence
 		power = MECH_POWER_TRANSITION
 		playsound(src, 'sound/mecha/powerup.ogg', 50, 0)
-		if(user.do_skilled(1.5 SECONDS, SKILL_MECH, src, 0.5) && power == MECH_POWER_TRANSITION)
+		if(user.do_skilled(1.5 SECONDS, SKILL_MECH, src, 0.5, DO_DEFAULT | DO_USER_UNIQUE_ACT) && power == MECH_POWER_TRANSITION)
 			playsound(src, 'sound/mecha/nominal.ogg', 50, 0)
 			power = MECH_POWER_ON
 		else

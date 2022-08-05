@@ -119,7 +119,7 @@
 
 	var/area/A = get_area(user)
 	if (!A.can_modify_area())
-		visible_message("You can't seem to make anything with \the [src] here.")
+		to_chat(user, SPAN_WARNING("You can't seem to make anything with \the [src] here."))
 		return
 
 	if (!can_use(required))
@@ -134,7 +134,7 @@
 
 	if (recipe.time)
 		to_chat(user, "<span class='notice'>Building [recipe.display_name()] ...</span>")
-		if (!user.do_skilled(recipe.time, SKILL_CONSTRUCTION))
+		if (!user.do_skilled(recipe.time, SKILL_CONSTRUCTION, src))
 			return
 
 	if (use(required))

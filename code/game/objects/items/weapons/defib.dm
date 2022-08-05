@@ -333,7 +333,7 @@
 
 	//beginning to place the paddles on patient's chest to allow some time for people to move away to stop the process
 	user.visible_message("<span class='warning'>\The [user] begins to place [src] on [H]'s chest.</span>", "<span class='warning'>You begin to place [src] on [H]'s chest...</span>")
-	if(!user.do_skilled(3 SECONDS, SKILL_MEDICAL, H))
+	if(!user.do_skilled(3 SECONDS, SKILL_MEDICAL, H, do_flags = DO_MEDICAL | DO_USER_UNIQUE_ACT))
 		return
 	user.visible_message("<span class='notice'>\The [user] places [src] on [H]'s chest.</span>", "<span class='warning'>You place [src] on [H]'s chest.</span>")
 	playsound(get_turf(src), 'sound/machines/defib_charge.ogg', 50, 0)
@@ -348,7 +348,7 @@
 		make_announcement("buzzes, \"Warning - Patient is in hypovolemic shock and may require a blood transfusion.\"", "warning") //also includes heart damage
 
 	//placed on chest and short delay to shock for dramatic effect, revive time is 5sec total
-	if(!do_after(user, chargetime, H))
+	if(!do_after(user, chargetime, H, DO_MEDICAL | DO_USER_UNIQUE_ACT))
 		return
 
 	//deduct charge here, in case the base unit was EMPed or something during the delay time
@@ -369,7 +369,7 @@
 		return
 	if(!user.skill_check(SKILL_MEDICAL, SKILL_BASIC) && !lowskill_revive(H, user))
 		return
-	H.apply_damage(burn_damage_amt, BURN, BP_CHEST)
+	H.apply_damage(burn_damage_amt, DAMAGE_BURN, BP_CHEST)
 
 	//set oxyloss so that the patient is just barely in crit, if possible
 	make_announcement("pings, \"Resuscitation successful.\"", "notice")
@@ -413,7 +413,7 @@
 	playsound(get_turf(src), 'sound/machines/defib_charge.ogg', 50, 0)
 	audible_message("<span class='warning'>\The [src] lets out a steadily rising hum...</span>")
 
-	if(!do_after(user, chargetime, H))
+	if(!do_after(user, chargetime, H, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return
 
 	//deduct charge here, in case the base unit was EMPed or something during the delay time
@@ -607,10 +607,10 @@
 	..()
 	var/new_fail = 0
 	switch(severity)
-		if(1)
+		if(EMP_ACT_HEAVY)
 			new_fail = max(fail_counter, 20)
 			visible_message("\The [src]'s reactor overloads!")
-		if(2)
+		if(EMP_ACT_LIGHT)
 			new_fail = max(fail_counter, 8)
 			if(ismob(loc))
 				to_chat(loc, "<span class='warning'>\The [src] feel pleasantly warm.</span>")

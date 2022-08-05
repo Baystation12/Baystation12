@@ -296,7 +296,7 @@
 	. = jointext(list(header,.),null)
 
 // Calculates severity based on the ratios defined external limbs.
-proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
+/proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
 	var/degree
 
 	switch(damage_ratio)

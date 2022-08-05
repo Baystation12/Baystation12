@@ -30,7 +30,7 @@
 			var/obj/item/mech_equipment/M = hardpoints[hardpoint]
 			if(istype(M) && M.active && M.passive_power_use)
 				M.deactivate()
-		
+
 
 	updatehealth()
 	if(health <= 0 && stat != DEAD)
@@ -81,7 +81,7 @@
 			damage = 10
 		if(bodytemperature > material.melting_point * 2.15 )
 			damage = 15
-		apply_damage(damage, BURN)
+		apply_damage(damage, DAMAGE_BURN)
 	//A possibility is to hook up interface icons here. But this works pretty well in my experience
 		if(prob(damage))
 			visible_message(SPAN_DANGER("\The [src]'s hull bends and buckles under the intense heat!"))
@@ -98,6 +98,10 @@
 	// Salvage moves into the wreck unless we're exploding violently.
 	var/obj/wreck = new wreckage_path(get_turf(src), src, gibbed)
 	wreck.name = "wreckage of \the [name]"
+
+	// Handle the rest of things.
+	..(gibbed, (gibbed ? "explodes!" : "grinds to a halt before collapsing!"))
+
 	if(!gibbed)
 		if(arms.loc != src)
 			arms = null
@@ -107,10 +111,7 @@
 			head = null
 		if(body.loc != src)
 			body = null
-
-	// Handle the rest of things.
-	..(gibbed, (gibbed ? "explodes!" : "grinds to a halt before collapsing!"))
-	if(!gibbed) qdel(src)
+		qdel(src)
 
 /mob/living/exosuit/gib()
 	death(1)

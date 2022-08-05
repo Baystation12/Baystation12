@@ -192,8 +192,8 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 				to_chat(src, "<span class='notice'>We stab [T] with the proboscis.</span>")
 				src.visible_message("<span class='danger'>[src] stabs [T] with the proboscis!</span>")
 				to_chat(T, "<span class='danger'>You feel a sharp stabbing pain!</span>")
-				affecting.take_external_damage(39, 0, DAM_SHARP, "large organic needle")
-		if(!do_after(src, 15 SECONDS, T))
+				affecting.take_external_damage(39, 0, DAMAGE_FLAG_SHARP, "large organic needle")
+		if(!do_after(src, 15 SECONDS, T, DO_PUBLIC_UNIQUE))
 			to_chat(src, "<span class='warning'>Our absorption of [T] has been interrupted!</span>")
 			changeling.isabsorbing = 0
 			return
@@ -283,7 +283,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	else
 		src.visible_message("<span class='warning'>[src]'s body begins to twist, changing rapidly!</span>")
 
-	if(!do_after(src, changeTime))
+	if(!do_after(src, changeTime, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT))
 		to_chat(src, "<span class='notice'>You fail to change shape.</span>")
 		return
 	handle_changeling_transform(chosen_dna)
@@ -562,7 +562,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 // HIVE MIND UPLOAD/DOWNLOAD DNA
 
-var/list/datum/absorbed_dna/hivemind_bank = list()
+var/global/list/datum/absorbed_dna/hivemind_bank = list()
 
 /mob/proc/changeling_hiveupload()
 	set category = "Changeling"

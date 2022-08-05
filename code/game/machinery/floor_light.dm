@@ -1,4 +1,4 @@
-var/list/floor_light_cache = list()
+var/global/list/floor_light_cache = list()
 
 /obj/machinery/floor_light
 	name = "floor light"
@@ -49,7 +49,7 @@ var/list/floor_light_cache = list()
 			to_chat(user, "<span class='warning'>\The [src] must be on to complete this task.</span>")
 			return
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-		if(!do_after(user, 20, src))
+		if(!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			return
 		if(!src || !WT.isOn())
 			return
@@ -139,9 +139,9 @@ var/list/floor_light_cache = list()
 
 /obj/machinery/floor_light/ex_act(severity)
 	switch(severity)
-		if(1)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
-		if(2)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
 			else if(prob(20))
@@ -149,7 +149,7 @@ var/list/floor_light_cache = list()
 			else
 				if(isnull(damaged))
 					damaged = 0
-		if(3)
+		if(EX_ACT_LIGHT)
 			if (prob(5))
 				qdel(src)
 			else if(isnull(damaged))

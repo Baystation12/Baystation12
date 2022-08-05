@@ -202,9 +202,7 @@
 
 	storage_start.overlays.Cut()
 
-	var/matrix/M = matrix()
-	M.Scale((storage_width-storage_cap_width*2+3)/32,1)
-	storage_continue.transform = M
+	storage_continue.SetTransform(scale_x = (storage_width - storage_cap_width * 2 + 3) / 32)
 
 	storage_start.screen_loc = "4:16,2:16"
 	storage_continue.screen_loc = "4:[storage_cap_width+(storage_width-storage_cap_width*2)/2+2],2:16"
@@ -216,17 +214,12 @@
 	for(var/obj/item/O in storage.contents)
 		startpoint = endpoint + 1
 		endpoint += storage_width * O.get_storage_cost()/storage.max_storage_space
-
-		var/matrix/M_start = matrix()
-		var/matrix/M_continue = matrix()
-		var/matrix/M_end = matrix()
-		M_start.Translate(startpoint,0)
-		M_continue.Scale((endpoint-startpoint-stored_cap_width*2)/32,1)
-		M_continue.Translate(startpoint+stored_cap_width+(endpoint-startpoint-stored_cap_width*2)/2 - 16,0)
-		M_end.Translate(endpoint-stored_cap_width,0)
-		stored_start.transform = M_start
-		stored_continue.transform = M_continue
-		stored_end.transform = M_end
+		stored_start.SetTransform(offset_x = startpoint)
+		stored_end.SetTransform(offset_x = endpoint - stored_cap_width)
+		stored_continue.SetTransform(
+			offset_x = startpoint + stored_cap_width + (endpoint - startpoint - stored_cap_width * 2) / 2 - 16,
+			scale_x = (endpoint - startpoint - stored_cap_width * 2) / 32
+		)
 		storage_start.overlays += stored_start
 		storage_start.overlays += stored_continue
 		storage_start.overlays += stored_end

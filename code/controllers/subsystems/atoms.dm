@@ -9,18 +9,17 @@ SUBSYSTEM_DEF(atoms)
 	init_order = SS_INIT_ATOMS
 	flags = SS_NO_FIRE | SS_NEEDS_SHUTDOWN
 
-	var/static/tmp/atom_init_stage = INITIALIZATION_INSSATOMS
-	var/static/tmp/old_init_stage
-	var/static/tmp/list/late_loaders = list()
-	var/static/tmp/list/created_atoms = list()
-	var/static/tmp/list/BadInitializeCalls = list()
+	var/static/atom_init_stage = INITIALIZATION_INSSATOMS
+	var/static/old_init_stage
+	var/static/list/late_loaders = list()
+	var/static/list/created_atoms = list()
+	var/static/list/BadInitializeCalls = list()
 
 
-/datum/controller/subsystem/atoms/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Bad Inits: [BadInitializeCalls.len]"
-	..(text, force)
+/datum/controller/subsystem/atoms/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Bad Inits: [BadInitializeCalls.len]")
 
 
 /datum/controller/subsystem/atoms/Shutdown()
@@ -29,7 +28,7 @@ SUBSYSTEM_DEF(atoms)
 		text2file(initlog, "[GLOB.log_directory]/initialize.log")
 
 
-/datum/controller/subsystem/atoms/Initialize(timeofday)
+/datum/controller/subsystem/atoms/Initialize(start_uptime)
 	atom_init_stage = INITIALIZATION_INNEW_MAPLOAD
 	InitializeAtoms()
 

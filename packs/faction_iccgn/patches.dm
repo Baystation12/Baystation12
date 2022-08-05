@@ -2,13 +2,14 @@
 	display_name = "ICCGN Patch Selection"
 	description = "Uniform patches of the confederation navy."
 	path = /obj/item/clothing/accessory/iccgn_patch
-	flags = GEAR_HAS_SUBTYPE_SELECTION
+	flags = GEAR_HAS_SUBTYPE_SELECTION | GEAR_HAS_NO_CUSTOMIZATION
 	allowed_branches = list(
 		/datum/mil_branch/iccgn
 	)
 
 
 /obj/item/clothing/accessory/iccgn_patch
+	abstract_type = /obj/item/clothing/accessory/iccgn_patch
 	name = "base uniform patch, ICCGN"
 	desc = "You should not see this."
 	icon = 'packs/faction_iccgn/patches.dmi'
@@ -23,12 +24,6 @@
 	w_class = ITEM_SIZE_TINY
 	slot = ACCESSORY_SLOT_INSIGNIA
 	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
-
-
-/obj/item/clothing/accessory/iccgn_patch/Initialize()
-	. = ..()
-	INIT_SKIP_QDELETED
-	INIT_DISALLOW_TYPE(/obj/item/clothing/accessory/iccgn_patch)
 
 
 /obj/item/clothing/accessory/iccgn_patch/get_fibers()

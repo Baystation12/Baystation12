@@ -1,4 +1,4 @@
-var/repository/cameras/camera_repository = new()
+var/global/repository/cameras/camera_repository = new()
 
 /proc/invalidateCameraCache()
 	camera_repository.networks.Cut()

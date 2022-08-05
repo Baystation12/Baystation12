@@ -90,7 +90,7 @@
 
 /obj/item/integrated_circuit/lists/search/do_work()
 	var/list/input_list = get_pin_data(IC_INPUT, 1)
-	var/output = list_find(input_list, get_pin_data(IC_INPUT, 2))
+	var/output = input_list.Find(get_pin_data(IC_INPUT, 2))
 
 	set_pin_data(IC_OUTPUT, 1, output)
 	push_data()

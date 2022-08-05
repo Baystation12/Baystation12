@@ -13,7 +13,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+
 	machine_name = "microwave"
 	machine_desc = "Required for preparing any dish more complicated than a slice of bread. In the future, <i>everything</i> is microwaved."
 
@@ -62,7 +62,7 @@
 				"<span class='notice'>\The [user] starts to fix part of the microwave.</span>", \
 				"<span class='notice'>You start to fix part of the microwave.</span>" \
 			)
-			if (do_after(user, 20, src))
+			if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 				user.visible_message( \
 					"<span class='notice'>\The [user] fixes part of the microwave.</span>", \
 					"<span class='notice'>You have fixed part of the microwave.</span>" \
@@ -75,7 +75,7 @@
 				"<span class='notice'>\The [user] starts to fix part of the microwave.</span>", \
 				"<span class='notice'>You start to fix part of the microwave.</span>" \
 			)
-			if (do_after(user, 20, src))
+			if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 				user.visible_message( \
 					"<span class='notice'>\The [user] fixes the microwave.</span>", \
 					"<span class='notice'>You have fixed the microwave.</span>" \
@@ -105,7 +105,7 @@
 				"<span class='notice'>\The [user] starts to clean the microwave.</span>", \
 				"<span class='notice'>You start to clean the microwave.</span>" \
 			)
-			if (do_after(user, 20, src))
+			if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 				user.visible_message( \
 					"<span class='notice'>\The [user] has cleaned the microwave.</span>", \
 					"<span class='notice'>You clean out the microwave.</span>" \
@@ -201,7 +201,7 @@
 			"<span class='notice'>\The [user] begins [anchored ? "securing" : "unsecuring"] the microwave.</span>", \
 			"<span class='notice'>You attempt to [anchored ? "secure" : "unsecure"] the microwave.</span>"
 			)
-		if (do_after(user,20, src))
+		if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			anchored = !anchored
 			user.visible_message( \
 			"<span class='notice'>\The [user] [anchored ? "secures" : "unsecures"] the microwave.</span>", \

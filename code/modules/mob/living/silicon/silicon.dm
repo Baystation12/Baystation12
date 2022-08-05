@@ -29,9 +29,6 @@
 
 	var/sensor_mode = 0 //Determines the current HUD.
 
-	var/next_alarm_notice
-	var/list/datum/alarm/queued_alarms = new()
-
 	var/list/access_rights
 	var/obj/item/card/id/idcard = /obj/item/card/id/synthetic
 
@@ -58,7 +55,7 @@
 	GLOB.silicon_mob_list -= src
 	QDEL_NULL(silicon_radio)
 	QDEL_NULL(silicon_camera)
-	for(var/datum/alarm_handler/AH as anything in SSalarm.handlers)
+	for(var/datum/alarm_handler/AH as anything in SSalarm.alarm_handlers)
 		AH.unregister_alarm(src)
 	return ..()
 
@@ -80,12 +77,14 @@
 	return
 
 /mob/living/silicon/emp_act(severity)
+	if (status_flags & GODMODE)
+		return
 	switch(severity)
-		if(1)
+		if(EMP_ACT_HEAVY)
 			take_organ_damage(0, 16, ORGAN_DAMAGE_SILICON_EMP)
 			if(prob(50)) Stun(rand(5,10))
 			else confused = (min(confused + 2, 40))
-		if(2)
+		if(EMP_ACT_LIGHT)
 			take_organ_damage(0, 7, ORGAN_DAMAGE_SILICON_EMP)
 			confused = (min(confused + 2, 30))
 	flash_eyes(affect_silicon = 1)
@@ -119,19 +118,21 @@
 	return 1
 
 /mob/living/silicon/bullet_act(var/obj/item/projectile/Proj)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 
 	if(!Proj.nodamage)
 		switch(Proj.damage_type)
-			if(BRUTE)
+			if (DAMAGE_BRUTE)
 				adjustBruteLoss(Proj.damage)
-			if(BURN)
+			if (DAMAGE_BURN)
 				adjustFireLoss(Proj.damage)
 
 	Proj.on_hit(src,100) //wow this is a terrible hack
 	updatehealth()
 	return 100
 
-/mob/living/silicon/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
+/mob/living/silicon/apply_effect(effect = 0, effecttype = EFFECT_STUN, blocked = 0)
 	return 0//The only effect that can hit them atm is flashes and they still directly edit so this works for now
 
 /proc/islinked(var/mob/living/silicon/robot/bot, var/mob/living/silicon/ai/ai)
@@ -254,74 +255,25 @@
 	return 1
 
 /mob/living/silicon/ex_act(severity)
+	if (status_flags & GODMODE)
+		return
 	if(!blinded)
 		flash_eyes()
 
 	var/brute
 	var/burn
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			brute = 400
 			burn = 100
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			brute = 60
 			burn = 60
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			brute = 30
 
-	apply_damage(brute, BRUTE, damage_flags = DAM_EXPLODE)
-	apply_damage(burn, BURN, damage_flags = DAM_EXPLODE)
-
-/mob/living/silicon/proc/receive_alarm(var/datum/alarm_handler/alarm_handler, var/datum/alarm/alarm, was_raised)
-	if(!(alarm.alarm_z() in GetConnectedZlevels(get_z(src))))
-		return // Didn't actually hear it as far as we're concerned.
-	if(!next_alarm_notice)
-		next_alarm_notice = world.time + SecondsToTicks(10)
-
-	var/list/alarms = queued_alarms[alarm_handler]
-	if(was_raised)
-		// Raised alarms are always set
-		alarms[alarm] = 1
-	else
-		// Alarms that were raised but then cleared before the next notice are instead removed
-		if(alarm in alarms)
-			alarms -= alarm
-		// And alarms that have only been cleared thus far are set as such
-		else
-			alarms[alarm] = -1
-
-/mob/living/silicon/proc/process_queued_alarms()
-	if(next_alarm_notice && (world.time > next_alarm_notice))
-		next_alarm_notice = 0
-
-		var/alarm_raised = 0
-		for(var/datum/alarm_handler/AH in queued_alarms)
-			var/list/alarms = queued_alarms[AH]
-			var/reported = 0
-			for(var/datum/alarm/A in alarms)
-				if(alarms[A] == 1)
-					alarm_raised = 1
-					if(!reported)
-						reported = 1
-						to_chat(src, "<span class='warning'>--- [AH.category] Detected ---</span>")
-					raised_alarm(A)
-
-		for(var/datum/alarm_handler/AH in queued_alarms)
-			var/list/alarms = queued_alarms[AH]
-			var/reported = 0
-			for(var/datum/alarm/A in alarms)
-				if(alarms[A] == -1)
-					if(!reported)
-						reported = 1
-						to_chat(src, "<span class='notice'>--- [AH.category] Cleared ---</span>")
-					to_chat(src, "\The [A.alarm_name()].")
-
-		if(alarm_raised)
-			to_chat(src, "<A HREF=?src=\ref[src];showalerts=1>\[Show Alerts\]</A>")
-
-		for(var/datum/alarm_handler/AH in queued_alarms)
-			var/list/alarms = queued_alarms[AH]
-			alarms.Cut()
+	apply_damage(brute, DAMAGE_BRUTE, damage_flags = DAMAGE_FLAG_EXPLODE)
+	apply_damage(burn, DAMAGE_BURN, damage_flags = DAMAGE_FLAG_EXPLODE)
 
 /mob/living/silicon/proc/raised_alarm(var/datum/alarm/A)
 	to_chat(src, "[A.alarm_name()]!")

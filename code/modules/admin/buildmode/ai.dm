@@ -34,7 +34,7 @@
 
 /datum/build_mode/ai/Configurate()
 	. = ..()
-	ai_type = select_subpath(ai_type || /datum/ai_holder/, /datum/ai_holder)
+	ai_type = select_subpath(ai_type || /datum/ai_holder, /datum/ai_holder)
 	to_chat(user, SPAN_NOTICE("AI Type selected: [ai_type]" ))
 
 /datum/build_mode/ai/Unselected()

@@ -65,6 +65,7 @@
 	description = "A medal or ribbon awarded to corporate personnel for significant accomplishments."
 	path = /obj/item/clothing/accessory/medal
 	cost = 8
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/accessory/ntaward/New()
@@ -79,33 +80,45 @@
 /datum/gear/accessory/armband_security
 	display_name = "security armband"
 	path = /obj/item/clothing/accessory/armband
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/accessory/armband_cargo
 	display_name = "cargo armband"
 	path = /obj/item/clothing/accessory/armband/cargo
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/accessory/armband_medical
 	display_name = "medical armband"
 	path = /obj/item/clothing/accessory/armband/med
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/accessory/armband_emt
 	display_name = "EMT armband"
 	path = /obj/item/clothing/accessory/armband/medgreen
-	allowed_roles = list(/datum/job/doctor)
+	allowed_roles = list(
+		/datum/job/doctor
+	)
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/accessory/armband_engineering
 	display_name = "engineering armband"
 	path = /obj/item/clothing/accessory/armband/engine
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/accessory/armband_hydro
 	display_name = "hydroponics armband"
 	path = /obj/item/clothing/accessory/armband/hydro
-	allowed_roles = list(/datum/job/rd, /datum/job/scientist, /datum/job/assistant)
+	allowed_roles = list(
+		/datum/job/rd,
+		/datum/job/scientist,
+		/datum/job/assistant
+	)
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/accessory/armband_nt
@@ -116,12 +129,16 @@
 /datum/gear/accessory/ftu_pin
 	display_name = "Free Trade Union pin"
 	path = /obj/item/clothing/accessory/ftu_pin
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/accessory/chaplain
 	display_name = "chaplain insignia"
 	path = /obj/item/clothing/accessory/chaplain
-	allowed_roles = list(/datum/job/chaplain)
+	allowed_roles = list(
+		/datum/job/chaplain
+	)
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/accessory/chaplain/New()

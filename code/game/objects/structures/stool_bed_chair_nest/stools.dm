@@ -89,23 +89,23 @@ var/global/list/stool_cache = list() //haha stool
 		user.do_attack_animation(target)
 		dismantle() //This deletes self.
 
-		var/blocked = target.get_blocked_ratio(hit_zone, BRUTE, damage = 20)
+		var/blocked = target.get_blocked_ratio(hit_zone, DAMAGE_BRUTE, damage = 20)
 		target.Weaken(10 * (1 - blocked))
-		target.apply_damage(20, BRUTE, hit_zone, src)
+		target.apply_damage(20, DAMAGE_BRUTE, hit_zone, src)
 		return 1
 
 	return ..()
 
 /obj/item/stool/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
 			return
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
 				return
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			if (prob(5))
 				qdel(src)
 				return

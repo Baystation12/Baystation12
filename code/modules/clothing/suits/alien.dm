@@ -63,5 +63,5 @@
 	icon = 'icons/obj/clothing/species/vox/obj_suit_vox.dmi'
 	icon_state = "vox-scrap"
 	body_parts_covered = UPPER_TORSO|ARMS|LOWER_TORSO|LEGS
-	species_restricted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
+	species_restricted = list(SPECIES_VOX)
 	siemens_coefficient = 1 //Its literally metal

@@ -308,7 +308,7 @@
 	seed_name = "ambrosia vulgaris"
 	display_name = "ambrosia vulgaris"
 	mutants = list("ambrosiadeus")
-	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/space_drugs = list(1,8), /datum/reagent/kelotane = list(1,8,1), /datum/reagent/bicaridine = list(1,10,1), /datum/reagent/toxin = list(1,10))
+	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/drugs/hextro = list(1,8), /datum/reagent/kelotane = list(1,8,1), /datum/reagent/bicaridine = list(1,10,1), /datum/reagent/toxin = list(1,10))
 	kitchen_tag = "ambrosia"
 
 /datum/seed/ambrosia/New()
@@ -328,7 +328,7 @@
 	seed_name = "ambrosia deus"
 	display_name = "ambrosia deus"
 	mutants = null
-	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/bicaridine = list(1,8), /datum/reagent/synaptizine = list(1,8,1), /datum/reagent/hyperzine = list(1,10,1), /datum/reagent/space_drugs = list(1,10))
+	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/bicaridine = list(1,8), /datum/reagent/synaptizine = list(1,8,1), /datum/reagent/hyperzine = list(1,10,1), /datum/reagent/drugs/hextro = list(1,10))
 	kitchen_tag = "ambrosiadeus"
 
 /datum/seed/ambrosia/deus/New()
@@ -417,7 +417,7 @@
 	seed_name = "reishi"
 	display_name = "reishi"
 	mutants = list("libertycap","glowshroom")
-	chems = list(/datum/reagent/nutriment = list(1,50), /datum/reagent/psilocybin = list(3,5))
+	chems = list(/datum/reagent/nutriment = list(1,50), /datum/reagent/drugs/psilocybin = list(3,5))
 
 /datum/seed/mushroom/hallucinogenic/New()
 	..()
@@ -435,7 +435,7 @@
 	seed_name = "liberty cap"
 	display_name = "liberty cap mushrooms"
 	mutants = null
-	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/soporific = list(3,3), /datum/reagent/space_drugs = list(1,25))
+	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/soporific = list(3,3), /datum/reagent/drugs/hextro = list(1,25))
 
 /datum/seed/mushroom/hallucinogenic/strong/New()
 	..()
@@ -451,7 +451,7 @@
 	seed_name = "fly amanita"
 	display_name = "fly amanita mushrooms"
 	mutants = list("destroyingangel","plastic")
-	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/toxin/amatoxin = list(3,3), /datum/reagent/psilocybin = list(1,25))
+	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/toxin/amatoxin = list(3,3), /datum/reagent/drugs/psilocybin = list(1,25))
 
 /datum/seed/mushroom/poison/New()
 	..()
@@ -469,7 +469,7 @@
 	seed_name = "destroying angel"
 	display_name = "destroying angel mushrooms"
 	mutants = null
-	chems = list(/datum/reagent/nutriment = list(1,50), /datum/reagent/toxin/amatoxin = list(13,3), /datum/reagent/psilocybin = list(1,25))
+	chems = list(/datum/reagent/nutriment = list(1,50), /datum/reagent/toxin/amatoxin = list(13,3), /datum/reagent/drugs/psilocybin = list(1,25))
 
 /datum/seed/mushroom/poison/death/New()
 	..()
@@ -613,7 +613,7 @@
 	name = "grapes"
 	seed_name = "grape"
 	display_name = "grapevines"
-	mutants = list("greengrapes")
+	mutants = list("greengrapes","whitegrapes")
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/sugar = list(1,5), /datum/reagent/drink/juice/grape = list(10,10))
 
 /datum/seed/grapes/New()
@@ -639,7 +639,7 @@
 
 /datum/seed/grapes/green/New()
 	..()
-	set_trait(TRAIT_PRODUCT_COLOUR,"42ed2f")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#42ed2f")
 
 //Everything else
 /datum/seed/peanuts
@@ -1251,6 +1251,12 @@
 	mutants = list("tobacco")
 	chems = list(/datum/reagent/tobacco/bad = list(1,10))
 
+/datum/seed/tobacco/bad/New()
+	..()
+	set_trait(TRAIT_PRODUCT_COLOUR,"#8c8626")
+	set_trait(TRAIT_PLANT_COLOUR,"#8c8626")
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.1)
+
 /datum/seed/algae
 	name = "algae"
 	seed_name = "algae"
@@ -1388,7 +1394,7 @@
 
 /datum/seed/grapes/white
 	name = "whitegrapes"
-	seed_name = "white grape seeds"
+	seed_name = "white grape"
 	display_name = "white grapevines"
 	mutants = list("grapes","greengrapes")
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/sugar = list(1,5), /datum/reagent/drink/juice/grape/white = list(10,10))
@@ -1425,6 +1431,7 @@
 	display_name = "pineapple plant"
 	chems = list(/datum/reagent/drink/juice/pineapple = list(10,10), /datum/reagent/enzyme = list(1,5),/datum/reagent/nutriment = list(1,10))
 	trash_type = /obj/item/carvable/corncob/hollowpineapple
+	kitchen_tag = "pineapple"
 
 /datum/seed/pineapple/New()
 	..()
@@ -1528,7 +1535,7 @@
 	seed_name = "gukhe bloom"
 	display_name = "gukhe bloom"
 	chems = list(/datum/reagent/nutriment = list(2,12), /datum/reagent/capsaicin = list(10,10))
-	kitchen_tag = "algae"
+	kitchen_tag = "gukhe"
 
 /datum/seed/gukhe/New()
 	..()
@@ -1570,7 +1577,7 @@
 	seed_name = "o'krri mushroom"
 	seed_noun = SEED_NOUN_SPORES
 	display_name = "o'krri mushrooms"
-	chems = list(/datum/reagent/nutriment = list(1,25), /datum/reagent/psilocybin = list(1,3))
+	chems = list(/datum/reagent/nutriment = list(1,25), /datum/reagent/drugs/psilocybin = list(1,3))
 	splat_type = /obj/effect/vine
 	kitchen_tag = "mushroom"
 
@@ -1612,7 +1619,7 @@
 	name = "qokkloa"
 	seed_name = "qokk'loa moss"
 	display_name = "qokk'loa moss"
-	chems = list(/datum/reagent/space_drugs = list(1,25), /datum/reagent/ethanol/alien/qokkloa = list(10,10) )
+	chems = list(/datum/reagent/drugs/hextro = list(1,25), /datum/reagent/ethanol/alien/qokkloa = list(10,10) )
 
 /datum/seed/qokkloa/New()
 	..()
@@ -1633,6 +1640,7 @@
 	seed_name = "aghrassh"
 	display_name = "aghrassh trees"
 	chems = list(/datum/reagent/nutriment = list(1,20))
+	kitchen_tag = "aghrassh"
 
 /datum/seed/aghrassh/New()
 	..()
@@ -1689,7 +1697,7 @@
 	seed_name = "iridast"
 	display_name = "iridast bush"
 	mutants = list("berries","glowberries","poisonberries","blueberries")
-	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/ethanol/iridast = list(10,10), /datum/reagent/psilocybin = list(1,3))
+	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/ethanol/iridast = list(10,10), /datum/reagent/drugs/psilocybin = list(1,3))
 	kitchen_tag = "berries"
 
 /datum/seed/berry/iridast/New()

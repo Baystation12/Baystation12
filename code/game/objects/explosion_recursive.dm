@@ -2,12 +2,12 @@
 
 
 
-var/list/explosion_turfs = list()
+var/global/list/explosion_turfs = list()
 
-var/explosion_in_progress = 0
+var/global/explosion_in_progress = 0
 
 
-proc/explosion_rec(turf/epicenter, power, shaped)
+/proc/explosion_rec(turf/epicenter, power, shaped)
 	var/loopbreak = 0
 	while(explosion_in_progress)
 		if(loopbreak >= 15) return
@@ -44,9 +44,11 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 		if(!T) continue
 
 		//Wow severity looks confusing to calculate... Fret not, I didn't leave you with any additional instructions or help. (just kidding, see the line under the calculation)
-		var/severity = 4 - round(max(min( 3, ((explosion_turfs[T] - T.get_explosion_resistance()) / (max(3,(power/3)))) ) ,1), 1)								//sanity			effective power on tile				divided by either 3 or one third the total explosion power
-								//															One third because there are three power levels and I
-								//															want each one to take up a third of the crater
+		var/severity = explosion_turfs[T] - T.get_explosion_resistance() // effective power on tile, factoring in the tile's explosion resistance
+		severity /= max(3, power / 3) // One third the total explosion power - One third because there are three power levels and I want each one to take up a third of the crater
+		severity = clamp(severity, 1, 3) // Sanity
+		severity = 4 - severity // Invert the value to accomodate lower numbers being a higher severity. Removing this inversion would require a lot of refactoring of math in `ex_act()` handlers.
+
 		var/x = T.x
 		var/y = T.y
 		var/z = T.z
@@ -117,6 +119,9 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 	. = ..()
 	if(is_below_sound_pressure(src))
 		. *= 3
+
+/turf/simulated/wall/get_explosion_resistance()
+	return 5 // Standardized health results in explosion_resistance being used to reduce overall damage taken, instead of changing explosion severity. 5 was the original default, so 5 is always returned here.
 
 /turf/simulated/floor/explosion_resistance = 1
 

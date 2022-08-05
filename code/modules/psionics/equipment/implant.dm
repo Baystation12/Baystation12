@@ -19,7 +19,7 @@
 	. = ..()
 
 /obj/item/implant/psi_control/emp_act()
-	. = ..()
+	..()
 	update_functionality()
 
 /obj/item/implant/psi_control/meltdown()

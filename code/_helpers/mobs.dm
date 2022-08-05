@@ -21,7 +21,7 @@
 
 	return mobs
 
-proc/random_hair_style(gender, species = SPECIES_HUMAN)
+/proc/random_hair_style(gender, species = SPECIES_HUMAN)
 	var/h_style = "Bald"
 
 	var/datum/species/mob_species = all_species[species]
@@ -31,7 +31,7 @@ proc/random_hair_style(gender, species = SPECIES_HUMAN)
 
 	return h_style
 
-proc/random_facial_hair_style(gender, var/species = SPECIES_HUMAN)
+/proc/random_facial_hair_style(gender, var/species = SPECIES_HUMAN)
 	var/f_style = "Shaved"
 	var/datum/species/mob_species = all_species[species]
 	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(gender)
@@ -39,7 +39,7 @@ proc/random_facial_hair_style(gender, var/species = SPECIES_HUMAN)
 		f_style = pick(valid_facialhairstyles)
 		return f_style
 
-proc/random_name(gender, species = SPECIES_HUMAN)
+/proc/random_name(gender, species = SPECIES_HUMAN)
 	if(species)
 		var/datum/species/current_species = all_species[species]
 		if(current_species)
@@ -48,7 +48,7 @@ proc/random_name(gender, species = SPECIES_HUMAN)
 				return current_culture.get_random_name(gender)
 	return capitalize(pick(gender == FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 
-proc/random_skin_tone(var/datum/species/current_species)
+/proc/random_skin_tone(var/datum/species/current_species)
 	var/species_tone = current_species ? 35 - current_species.max_skin_tone() : -185
 	switch(pick(60;"caucasian", 15;"afroamerican", 10;"african", 10;"latino", 5;"albino"))
 		if("caucasian")		. = -10
@@ -60,7 +60,7 @@ proc/random_skin_tone(var/datum/species/current_species)
 
 	return min(max(. + rand(-25, 25), species_tone), 34)
 
-proc/skintone2racedescription(tone)
+/proc/skintone2racedescription(tone)
 	switch (tone)
 		if(30 to INFINITY)		return "albino"
 		if(20 to 30)			return "pale"
@@ -72,7 +72,7 @@ proc/skintone2racedescription(tone)
 		if(-INFINITY to -65)	return "black"
 		else					return "unknown"
 
-proc/age2agedescription(age)
+/proc/age2agedescription(age)
 	switch(age)
 		if(0 to 1)			return "infant"
 		if(1 to 3)			return "toddler"
@@ -154,9 +154,9 @@ proc/age2agedescription(age)
 	var/datum/progressbar/bar
 	if (do_flags & DO_SHOW_PROGRESS)
 		if (do_flags & DO_PUBLIC_PROGRESS)
-			bar = new /datum/progressbar/public(user, delay, target)
+			bar = new /datum/progressbar/public(user, delay, target, !!(do_flags & DO_BAR_OVER_USER))
 		else
-			bar = new /datum/progressbar/private(user, delay, target)
+			bar = new /datum/progressbar/private(user, delay, target, !!(do_flags & DO_BAR_OVER_USER))
 
 	var/start_time = world.time
 	var/end_time = start_time + delay
@@ -300,18 +300,18 @@ proc/age2agedescription(age)
 
 /proc/damflags_to_strings(damflags)
 	var/list/res = list()
-	if(damflags & DAM_SHARP)
+	if(damflags & DAMAGE_FLAG_SHARP)
 		res += "sharp"
-	if(damflags & DAM_EDGE)
+	if(damflags & DAMAGE_FLAG_EDGE)
 		res += "edge"
-	if(damflags & DAM_LASER)
+	if(damflags & DAMAGE_FLAG_LASER)
 		res += "laser"
-	if(damflags & DAM_BULLET)
+	if(damflags & DAMAGE_FLAG_BULLET)
 		res += "bullet"
-	if(damflags & DAM_EXPLODE)
+	if(damflags & DAMAGE_FLAG_EXPLODE)
 		res += "explode"
-	if(damflags & DAM_DISPERSED)
+	if(damflags & DAMAGE_FLAG_DISPERSED)
 		res += "dispersed"
-	if(damflags & DAM_BIO)
+	if(damflags & DAMAGE_FLAG_BIO)
 		res += "bio"
 	return english_list(res)

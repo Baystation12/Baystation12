@@ -49,7 +49,7 @@
 
 
 /obj/item/clothing/accessory/get_mob_overlay(mob/user_mob, slot)
-	if(!istype(loc,/obj/item/clothing/))	//don't need special handling if it's worn as normal item.
+	if(!istype(loc,/obj/item/clothing))	//don't need special handling if it's worn as normal item.
 		return ..()
 	var/bodytype = "Default"
 	if(ishuman(user_mob))

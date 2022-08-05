@@ -85,7 +85,7 @@
 				return
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now disassembling the low wall...</span>")
-		if(do_after(user, 40,src))
+		if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>You dissasembled the low wall!</span>")
 			dismantle()
 		return
@@ -96,7 +96,7 @@
 			return
 		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now slicing through the low wall...</span>")
-		if(do_after(user, 20,src))
+		if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='warning'>You have sliced through the low wall!</span>")
 			dismantle()
 		return
@@ -161,11 +161,10 @@
 		tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 	if (tforce < 15)
 		return
-	damage_health(tforce, BRUTE)
+	damage_health(tforce, DAMAGE_BRUTE)
 
-/obj/structure/wall_frame/handle_death_change(new_death_state)
-	if (new_death_state)
-		dismantle()
+/obj/structure/wall_frame/on_death()
+	dismantle()
 
 /obj/structure/wall_frame/proc/dismantle()
 	new /obj/item/stack/material/steel(get_turf(src), 3)

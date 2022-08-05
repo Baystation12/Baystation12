@@ -369,7 +369,7 @@
 		var/turf/T = get_turf(src)
 		hide_from(usr)
 		usr.visible_message(SPAN_NOTICE("\The [usr] starts dumping out the contents of \the [src]."), SPAN_NOTICE("You begin dumping out the contents of \the [src]."))
-		if (do_after(usr, max(3 SECONDS, 1 SECONDS * contents.len)))
+		if (do_after(usr, max(3 SECONDS, 1 SECONDS * contents.len), src, DO_PUBLIC_UNIQUE))
 			for(var/obj/item/I in contents)
 				remove_from_storage(I, T, 1)
 			finish_bulk_removal()
@@ -439,11 +439,11 @@
 /obj/item/storage/attack_self(mob/user as mob)
 	//Clicking on itself will empty it, if it has the verb to do that.
 	if(user.get_active_hand() == src)
-		if(list_find(src.verbs, /obj/item/storage/verb/quick_empty))
+		if(src.verbs.Find(/obj/item/storage/verb/quick_empty))
 			src.quick_empty()
 			return 1
 
-		if (list_find(verbs, /obj/item/storage/verb/dump_contents) && user.a_intent == I_HURT)
+		if (verbs.Find(/obj/item/storage/verb/dump_contents) && user.a_intent == I_HURT)
 			dump_contents()
 			return 1
 

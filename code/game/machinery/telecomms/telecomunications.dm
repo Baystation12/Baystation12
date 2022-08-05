@@ -154,7 +154,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/turf/T_position = get_turf(T)
 	if((position.z == T_position.z) || (src.long_range_link && T.long_range_link))
 		for(var/x in autolinkers)
-			if(list_find(T.autolinkers, x))
+			if(T.autolinkers.Find(x))
 				if(src != T)
 					links |= T
 

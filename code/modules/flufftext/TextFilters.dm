@@ -1,4 +1,4 @@
-proc/NewStutter(phrase,stunned)
+/proc/NewStutter(phrase,stunned)
 	phrase = html_decode(phrase)
 
 	var/list/split_phrase = splittext(phrase," ") //Split it up into words.
@@ -12,7 +12,7 @@ proc/NewStutter(phrase,stunned)
 			break
 		var/word = pick(unstuttered_words)
 		unstuttered_words -= word //Remove from unstuttered words so we don't stutter it again.
-		var/index = list_find(split_phrase, word) //Find the word in the split phrase so we can replace it.
+		var/index = split_phrase.Find(word) //Find the word in the split phrase so we can replace it.
 
 		//Search for dipthongs (two letters that make one sound.)
 		var/first_sound = copytext_char(word,1,3)
@@ -34,10 +34,10 @@ proc/NewStutter(phrase,stunned)
 
 	return sanitize(jointext(split_phrase," "))
 
-proc/Stagger(mob/M,d) //Technically not a filter, but it relates to drunkenness.
+/proc/Stagger(mob/M,d) //Technically not a filter, but it relates to drunkenness.
 	step(M, pick(d,turn(d,90),turn(d,-90)))
 
-proc/Ellipsis(original_msg, chance = 50)
+/proc/Ellipsis(original_msg, chance = 50)
 	if(chance <= 0) return "..."
 	if(chance >= 100) return original_msg
 
@@ -64,7 +64,7 @@ distortion_speed - multiplier for the chance increase.
 distortion - starting distortion.
 english_only - whether to use traditional english letters only (for use in NanoUI)
 */
-proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_speed = 1, distortion = 1, english_only = 0)
+/proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_speed = 1, distortion = 1, english_only = 0)
 	var/datum/language/language
 	if(user)
 		language = user.get_default_language()
@@ -109,14 +109,14 @@ proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_spee
 					if(english_only)
 						newletter += "*"
 					else
-						newletter = pick("ø", "Ð", "%", "æ", "µ")
+						newletter = pick("Ã¸", "Ã°", "%", "Ã¦", "Âµ")
 				distortion += 0.5 * distortion_speed
 			else if(prob(0.75 * distortion)) // Incomprehensible
 				newletter = pick("<", ">", "!", "$", "%", "^", "&", "*", "~", "#")
 				distortion += 0.75 * distortion_speed
 			else if(prob(0.05 * distortion)) // Total cut out
 				if(!english_only)
-					newletter = "¦w¡¼b»%> -BZZT-"
+					newletter = "|wÂ¡Â¼bÂ»%> -BZZT-"
 				else
 					newletter = "srgt%$hjc< -BZZT-"
 				new_message += newletter
@@ -126,15 +126,15 @@ proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_spee
 					if("s")
 						newletter = "$"
 					if("e")
-						newletter = "£"
+						newletter = "Â£"
 					if("w")
-						newletter = "ø"
+						newletter = "Ã¸"
 					if("y")
-						newletter = "¡"
+						newletter = "Â¡"
 					if("x")
-						newletter = "æ"
+						newletter = "Ã¦"
 					if("u")
-						newletter = "µ"
+						newletter = "Âµ"
 		else
 			if(prob(0.2 * distortion))
 				newletter = " *crackle* "
@@ -144,4 +144,3 @@ proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_spee
 		new_message += newletter
 		lentext += 1
 	return new_message
-

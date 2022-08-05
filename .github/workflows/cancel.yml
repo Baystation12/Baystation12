@@ -1,4 +1,8 @@
 name: Cancel
+
+permissions:
+  contents: read
+
 on:
   push:
     branches:
@@ -8,10 +12,12 @@ on:
 jobs:
   cancel:
     name: 'Cancel Redundant Builds'
+    permissions:
+      actions: write # required to cancel other actions
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
-      - uses: styfle/cancel-workflow-action@a40b8845c0683271d9f53dfcb887a7e181d3918b
+      - uses: styfle/cancel-workflow-action@bb6001c4ea612bf59c3abfc4756fbceee4f870c7
         with:
           workflow_id: 3545321
           access_token: ${{ github.token }}

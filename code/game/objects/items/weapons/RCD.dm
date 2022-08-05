@@ -211,7 +211,7 @@
 
 		if(rcdm.delay)
 			var/work_id = rcd.work_id
-			if(!(do_after(user, rcdm.delay, target) && work_id == rcd.work_id && rcd.can_use(user, target) && rcdm.can_handle_work(rcd, target)))
+			if(!(do_after(user, rcdm.delay, target, DO_PUBLIC_UNIQUE) && work_id == rcd.work_id && rcd.can_use(user, target) && rcdm.can_handle_work(rcd, target)))
 				return FALSE
 
 		rcdm.do_handle_work(target)

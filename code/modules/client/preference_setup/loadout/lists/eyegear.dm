@@ -25,6 +25,7 @@
 	display_name = "Science Eyewear"
 	description = "Provides research and chemical assessments."
 	path = /obj/item/clothing/glasses
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/eyes/science/New()
@@ -41,6 +42,7 @@
 	display_name = "Security Eyewear"
 	description = "Provides security vision overlays."
 	path = /obj/item/clothing/glasses
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/eyes/security/New()
@@ -48,12 +50,12 @@
 	var/list/options = list()
 	options["HUD"] = /obj/item/clothing/glasses/hud/security
 	options["HUD, corrective"] = /obj/item/clothing/glasses/hud/security/prescription
-	options["Sunglasses"] = /obj/item/clothing/glasses/sunglasses/sechud
-	options["Sunglasses, corrective"] = /obj/item/clothing/glasses/sunglasses/sechud/prescription
-	options["Aviators"] = /obj/item/clothing/glasses/sunglasses/sechud/toggle
-	options["Aviators, corrective"] = /obj/item/clothing/glasses/sunglasses/sechud/toggle/prescription
-	options["Goggles"] = /obj/item/clothing/glasses/sunglasses/sechud/goggles
-	options["Goggles, corrective"] = /obj/item/clothing/glasses/sunglasses/sechud/goggles/prescription
+	options["Sunglasses"] = /obj/item/clothing/glasses/hud/security/prot/sunglasses
+	options["Sunglasses, corrective"] = /obj/item/clothing/glasses/hud/security/prot/sunglasses/prescription
+	options["Aviators"] = /obj/item/clothing/glasses/hud/security/prot/aviators
+	options["Aviators, corrective"] = /obj/item/clothing/glasses/hud/security/prot/aviators/prescription
+	options["Goggles"] = /obj/item/clothing/glasses/hud/security/prot
+	options["Goggles, corrective"] = /obj/item/clothing/glasses/hud/security/prot/prescription
 	options["Eyepatch"] = /obj/item/clothing/glasses/eyepatch/hud/security
 	gear_tweaks += new /datum/gear_tweak/path (options)
 
@@ -62,6 +64,7 @@
 	display_name = "Medical Eyewear"
 	description = "Provides medical vision overlays."
 	path = /obj/item/clothing/glasses
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/eyes/medical/New()
@@ -79,6 +82,7 @@
 	display_name = "Meson Eyewear"
 	description = "Provides meson-vision."
 	path = /obj/item/clothing/glasses
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/eyes/meson/New()
@@ -94,6 +98,7 @@
 	display_name = "Sanitation Eyewear"
 	description = "Provides filth-vision."
 	path = /obj/item/clothing/glasses
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/eyes/janitor/New()
@@ -156,6 +161,7 @@
 /datum/gear/eyes/material
 	display_name = "Material Goggles"
 	path = /obj/item/clothing/glasses/material
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/eyes/monocle

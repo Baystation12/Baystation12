@@ -61,21 +61,6 @@
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
 		)
 
-/obj/item/clothing/under/solgov/utility/expeditionary_skirt
-	name = "expeditionary skirt"
-	desc = "A black turtleneck and skirt, the elusive ladies' uniform of the Expeditionary Corps."
-	icon_state = "blackservicefem"
-	worn_state = "blackservicefem"
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
-		)
-
-/obj/item/clothing/under/solgov/utility/expeditionary_skirt/officer
-	name = "expeditionary officer skirt"
-	desc = "A black turtleneck and skirt, the elusive ladies' uniform of the Expeditionary Corps. This one has gold trim."
-	icon_state = "blackservicefem_com"
-	worn_state = "blackservicefem_com"
-
 /obj/item/clothing/under/solgov/utility/expeditionary/command
 	accessories = list(/obj/item/clothing/accessory/solgov/department/command)
 

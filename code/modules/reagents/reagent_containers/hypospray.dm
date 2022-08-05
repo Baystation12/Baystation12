@@ -43,7 +43,7 @@
 			user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [M]'s suit!"))
 		else
 			to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
-		if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M))
+		if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
 			return
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
@@ -51,7 +51,7 @@
 
 	if(user != M && !M.incapacitated() && time) // you're injecting someone else who is concious, so apply the device's intrisic delay
 		to_chat(user, SPAN_WARNING("\The [user] is trying to inject \the [M] with \the [name]."))
-		if(!user.do_skilled(time, SKILL_MEDICAL, M))
+		if(!user.do_skilled(time, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
 			return
 
 	if(single_use && reagents.total_volume <= 0) // currently only applies to autoinjectors
@@ -117,7 +117,7 @@
 /obj/item/reagent_containers/hypospray/vial/attackby(obj/item/W, mob/user)
 	var/usermessage = ""
 	if(istype(W, /obj/item/reagent_containers/glass/beaker/vial))
-		if(!do_after(user,10) || !(W in user))
+		if(!do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE) || !(W in user))
 			return 0
 		if(!user.unEquip(W, src))
 			return
@@ -169,8 +169,10 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 2)
 	slot_flags = SLOT_BELT | SLOT_EARS
 	w_class = ITEM_SIZE_TINY
-	var/list/starts_with = list(/datum/reagent/inaprovaline = 5)
-	var/band_color = COLOR_CYAN
+	matter = list(MATERIAL_PLASTIC = 150, MATERIAL_GLASS = 50)
+	var/list/starts_with = list()
+	/// Color. If set, forces the autoinjectors window color to instead be a solid band color matching the provided color. If not set, the band color instead matches the contained reagent color.
+	var/band_color
 
 /obj/item/reagent_containers/hypospray/autoinjector/New()
 	..()
@@ -183,13 +185,22 @@
 	..()
 	update_icon()
 
+/obj/item/reagent_containers/hypospray/autoinjector/on_reagent_change()
+	update_icon()
+
 /obj/item/reagent_containers/hypospray/autoinjector/on_update_icon()
 	overlays.Cut()
 	if(reagents.total_volume > 0)
 		icon_state = "[initial(icon_state)]1"
 	else
 		icon_state = "[initial(icon_state)]0"
-	overlays+= overlay_image(icon,"injector_band",band_color,RESET_COLOR)
+	var/overlay_color = band_color
+	if (isnull(overlay_color))
+		if (reagents.total_volume)
+			overlay_color = reagents.get_color()
+		else
+			overlay_color = COLOR_GRAY
+	overlays += overlay_image(icon, "injector_band", overlay_color, RESET_COLOR)
 
 /obj/item/reagent_containers/hypospray/autoinjector/examine(mob/user)
 	. = ..(user)
@@ -200,31 +211,38 @@
 
 /obj/item/reagent_containers/hypospray/autoinjector/detox
 	name = "autoinjector (antitox)"
-	band_color = COLOR_GREEN
 	starts_with = list(/datum/reagent/dylovene = 5)
 
 /obj/item/reagent_containers/hypospray/autoinjector/pain
 	name = "autoinjector (painkiller)"
-	band_color = COLOR_PURPLE
 	starts_with = list(/datum/reagent/tramadol = 5)
 
 /obj/item/reagent_containers/hypospray/autoinjector/combatpain
 	name = "autoinjector (oxycodone)"
-	band_color = COLOR_DARK_GRAY
 	starts_with = list(/datum/reagent/tramadol/oxycodone = 5)
 
 /obj/item/reagent_containers/hypospray/autoinjector/antirad
 	name = "autoinjector (anti-rad)"
-	band_color = COLOR_AMBER
 	starts_with = list(/datum/reagent/hyronalin = 5)
 
 /obj/item/reagent_containers/hypospray/autoinjector/mindbreaker
 	name = "autoinjector"
-	band_color = COLOR_DARK_GRAY
-	starts_with = list(/datum/reagent/mindbreaker = 5)
+	starts_with = list(/datum/reagent/drugs/mindbreaker = 5)
 
-/obj/item/reagent_containers/hypospray/autoinjector/empty
-	name = "autoinjector"
-	band_color = COLOR_WHITE
-	starts_with = list()
-	matter = list(MATERIAL_PLASTIC = 150, MATERIAL_GLASS = 50)
+/obj/item/reagent_containers/hypospray/autoinjector/combatstim
+	name ="autoinjector (combat Stimulants)"
+	volume = 15
+	amount_per_transfer_from_this = 15
+	starts_with = list(/datum/reagent/inaprovaline = 10, /datum/reagent/hyperzine = 3, /datum/reagent/synaptizine = 1)
+
+/obj/item/reagent_containers/hypospray/autoinjector/coagulant
+	name ="autoinjector (coagulant)"
+	starts_with = list(/datum/reagent/coagulant = 1, /datum/reagent/nanoblood = 4)
+
+/obj/item/reagent_containers/hypospray/autoinjector/dexalin_plus
+	name ="autoinjector (dexalin plus)"
+	starts_with = list(/datum/reagent/dexalinp = 5)
+
+/obj/item/reagent_containers/hypospray/autoinjector/inaprovaline
+	name = "autoinjector (inaprovaline)"
+	starts_with = list(/datum/reagent/inaprovaline = 5)

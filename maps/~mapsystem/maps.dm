@@ -3,8 +3,8 @@
 GLOBAL_DATUM_INIT(using_map, /datum/map, new using_map_DATUM)
 GLOBAL_LIST_EMPTY(all_maps)
 
-var/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
-var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
+var/global/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
+var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /hook/startup/proc/initialise_map_list()
 	for(var/type in subtypesof(/datum/map))
@@ -172,6 +172,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			CULTURE_HUMAN_SPACER,
 			CULTURE_HUMAN_SPAFRO,
 			CULTURE_HUMAN_CONFED,
+			CULTURE_HUMAN_GAIAN,
 			CULTURE_HUMAN_OTHER,
 			CULTURE_OTHER
 		),
@@ -435,7 +436,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		INCREMENT_WORLD_Z_SIZE
 		empty_levels = list(world.maxz)
 	return pick(empty_levels)
-
 
 /datum/map/proc/setup_economy()
 	for (var/datum/feed_network/N in news_network)

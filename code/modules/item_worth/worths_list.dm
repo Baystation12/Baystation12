@@ -2,7 +2,7 @@
 //Mainly used so that stuff inside them can also add to their value, and other things like material,
 //stuff like that.
 
-var/list/worths = list(
+var/global/list/worths = list(
 //ROBOT ASSEMBLIES,
 					/obj/item/device/bot_kit = 300,
 //REAGENT CONTAINERS,
@@ -250,7 +250,7 @@ var/list/worths = list(
 					/obj/item/crowbar = 10,
 					/obj/item/beartrap = 35,
 					/obj/item/nullrod = 60,
-					/obj/item/weldpack = 300,
+					/obj/item/storage/backpack/weldpack = 300,
 					/obj/item/stock_parts/circuitboard/aicore = 6000,
 					/obj/item/stock_parts/circuitboard = 1000,
 //GRENADES,
@@ -258,7 +258,7 @@ var/list/worths = list(
 					/obj/item/grenade/anti_photon = 200,
 					/obj/item/grenade/empgrenade = 180,
 					/obj/item/grenade/frag = 300,
-					/obj/item/grenade/spawnergrenade/manhacks = 600,
+					/obj/item/grenade/spawnergrenade/viscerator = 600,
 					/obj/item/grenade/spawnergrenade/spesscarp = 350,
 					/obj/item/grenade/spawnergrenade = 300,
 					/obj/item/grenade = 150,
@@ -331,8 +331,8 @@ var/list/worths = list(
 					/obj/item/clothing/glasses/welding/superior = 450,
 					/obj/item/clothing/glasses/welding = 250,
 					/obj/item/clothing/glasses/sunglasses/prescription = 230,
-					/obj/item/clothing/glasses/sunglasses/sechud/goggles = 550,
-					/obj/item/clothing/glasses/sunglasses/sechud = 530,
+					/obj/item/clothing/glasses/hud/security/prot = 550,
+					/obj/item/clothing/glasses/hud/security/prot/sunglasses = 530,
 					/obj/item/clothing/glasses/thermal = 1990,
 					/obj/item/clothing/glasses = 150,
 					/obj/item/clothing/glasses/tacgoggles = 1200,

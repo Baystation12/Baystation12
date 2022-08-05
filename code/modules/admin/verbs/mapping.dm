@@ -19,8 +19,8 @@
 //- Identify how hard it is to break into the area and where the weak points are
 //- Check if the area has too much empty space. If so, make it smaller and replace the rest with maintenance tunnels.
 
-var/camera_range_display_status = 0
-var/intercom_range_display_status = 0
+var/global/camera_range_display_status = 0
+var/global/intercom_range_display_status = 0
 
 /obj/effect/debugging/camera_range
 	icon = 'icons/480x480.dmi'
@@ -115,7 +115,7 @@ var/intercom_range_display_status = 0
 				if (!(F in view(7,I.loc)))
 					qdel(F)
 
-var/list/debug_verbs = list (
+var/global/list/debug_verbs = list (
 		/client/proc/do_not_use_these
 		,/client/proc/camera_view
 		,/client/proc/sec_camera_report
@@ -127,7 +127,6 @@ var/list/debug_verbs = list (
 		,/client/proc/count_objects_all
 		,/client/proc/cmd_assume_direct_control
 		,/client/proc/startSinglo
-		,/client/proc/ticklag
 		,/client/proc/cmd_admin_grantfullaccess
 		,/client/proc/cmd_admin_areatest
 		,/client/proc/cmd_admin_rejuvenate

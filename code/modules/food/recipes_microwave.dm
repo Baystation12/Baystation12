@@ -203,35 +203,7 @@
 	result = /obj/item/reagent_containers/food/snacks/pancakes
 
 
-/datum/recipe/donkpocket
-	items = list(
-		/obj/item/reagent_containers/food/snacks/doughslice,
-		/obj/item/reagent_containers/food/snacks/meatball
-	)
-	result = /obj/item/reagent_containers/food/snacks/donkpocket
-
-
-/datum/recipe/donkpocket/make_food(obj/container)
-	var/obj/item/reagent_containers/food/snacks/donkpocket/donk = ..(container)
-	donk.heat()
-	return donk
-
-
-/datum/recipe/donkpocket2
-	items = list(
-		/obj/item/reagent_containers/food/snacks/doughslice,
-		/obj/item/reagent_containers/food/snacks/rawmeatball
-	)
-	result = /obj/item/reagent_containers/food/snacks/donkpocket
-
-
-/datum/recipe/donkpocket2/make_food(obj/container)
-	var/obj/item/reagent_containers/food/snacks/donkpocket/donk = ..(container)
-	donk.heat()
-	return donk
-
-
-/datum/recipe/donkpocket/warm
+/datum/recipe/hot_donkpocket
 	reagents = list()
 	items = list(
 		/obj/item/reagent_containers/food/snacks/donkpocket
@@ -239,10 +211,9 @@
 	result = /obj/item/reagent_containers/food/snacks/donkpocket
 
 
-/datum/recipe/donkpocket/warm/make_food(obj/container)
+/datum/recipe/hot_donkpocket/warm/make_food(obj/container)
 	var/obj/item/reagent_containers/food/snacks/donkpocket/donk = locate() in container
-	if (donk && !donk.warm)
-		donk.heat()
+	donk?.SetHot()
 	return donk
 
 
@@ -612,11 +583,27 @@
 	result = /obj/item/reagent_containers/food/snacks/sliceable/pizza/vegetablepizza
 
 
+/datum/recipe/fruitpizza
+	items = list(
+		/obj/item/reagent_containers/food/snacks/sliceable/flatdough
+	)
+	reagents = list(
+		/datum/reagent/drink/milk/cream = 20,
+		/datum/reagent/sugar = 20
+	)
+	fruit = list(
+		"pineapple" = 1,
+		"banana" = 1,
+		"blueberries" = 1
+	)
+	result = /obj/item/reagent_containers/food/snacks/sliceable/pizza/fruitpizza
+
+
 /datum/recipe/spacylibertyduff
 	reagents = list(
 		/datum/reagent/water = 10,
 		/datum/reagent/ethanol/vodka = 5,
-		/datum/reagent/psilocybin = 5
+		/datum/reagent/drugs/psilocybin = 5
 	)
 	result = /obj/item/reagent_containers/food/snacks/spacylibertyduff
 
@@ -856,7 +843,7 @@
 
 /datum/recipe/rofflewaffles
 	reagents = list(
-		/datum/reagent/psilocybin = 5,
+		/datum/reagent/drugs/psilocybin = 5,
 		/datum/reagent/nutriment/batter/cakebatter = 20
 	)
 	result = /obj/item/reagent_containers/food/snacks/rofflewaffles
@@ -1392,6 +1379,11 @@
 	)
 	result = /obj/item/reagent_containers/food/snacks/cutlet
 
+/datum/recipe/bacon
+	items = list(
+		/obj/item/reagent_containers/food/snacks/rawbacon
+	)
+	result = /obj/item/reagent_containers/food/snacks/bacon
 
 /datum/recipe/fries
 	items = list(
@@ -1507,3 +1499,88 @@
 		/obj/item/reagent_containers/food/snacks/spider
 	)
 	result = /obj/item/reagent_containers/food/snacks/spider/cooked
+
+
+/datum/recipe/chilied_eggs
+	items = list(
+		/obj/item/reagent_containers/food/snacks/boiledegg,
+		/obj/item/reagent_containers/food/snacks/boiledegg,
+		/obj/item/reagent_containers/food/snacks/boiledegg,
+		/obj/item/reagent_containers/food/snacks/hotchili
+	)
+	result = /obj/item/reagent_containers/food/snacks/chilied_eggs
+
+
+/datum/recipe/hatchling_suprise
+	items = list(
+		/obj/item/reagent_containers/food/snacks/bacon,
+		/obj/item/reagent_containers/food/snacks/bacon,
+		/obj/item/reagent_containers/food/snacks/bacon,
+		/obj/item/reagent_containers/food/snacks/friedegg
+	)
+	result = /obj/item/reagent_containers/food/snacks/hatchling_suprise
+
+
+/datum/recipe/red_sun_special
+	items = list(
+		/obj/item/reagent_containers/food/snacks/sausage,
+		/obj/item/reagent_containers/food/snacks/cheesewedge
+	)
+	result = /obj/item/reagent_containers/food/snacks/red_sun_special
+
+
+/datum/recipe/sea_delight
+	reagents = list(
+		/datum/reagent/water = 10
+	)
+	items = list(
+		/obj/item/reagent_containers/food/snacks/egg,
+		/obj/item/reagent_containers/food/snacks/egg,
+		/obj/item/reagent_containers/food/snacks/egg
+	)
+	fruit = list(
+		"gukhe" = 2
+	)
+	result = /obj/item/reagent_containers/food/snacks/sea_delight
+
+/datum/recipe/stok_skewers
+	reagents = list(
+		/datum/reagent/nutriment/vinegar = 5
+	)
+	items = list(
+		/obj/item/reagent_containers/food/snacks/cutlet,
+		/obj/item/reagent_containers/food/snacks/cutlet
+	)
+	fruit = list(
+		"gukhe" = 1
+	)
+	result = /obj/item/reagent_containers/food/snacks/stok_skewers
+
+
+/datum/recipe/gukhe_fish
+	reagents = list(
+		/datum/reagent/sodiumchloride = 3,
+		/datum/reagent/nutriment/vinegar = 3
+	)
+	items = list(
+		/obj/item/reagent_containers/food/snacks/fish
+	)
+	fruit = list(
+		"gukhe" = 1
+	)
+	result = /obj/item/reagent_containers/food/snacks/gukhe_fish
+
+
+/datum/recipe/aghrassh_cake
+	reagents = list(
+		/datum/reagent/nutriment/protein = 8,
+		/datum/reagent/nutriment/coco = 3,
+		/datum/reagent/blackpepper = 3
+	)
+	items = list(
+		/obj/item/reagent_containers/food/snacks/egg
+	)
+	fruit = list(
+		"aghrassh" = 1
+	)
+	result = /obj/item/reagent_containers/food/snacks/aghrassh_cake

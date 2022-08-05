@@ -31,7 +31,7 @@
 			to_chat(user, "<span class='warning'>You need more rods to build a cheval de frise.</span>")
 			return
 		visible_message("<span class='notice'>\The [user] begins to work on \the [src].</span>")
-		if(do_after(user, 4 SECONDS, src))
+		if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if(R.use(5))
 				visible_message("<span class='notice'>\The [user] fastens \the [R] to \the [src].</span>")
 				var/obj/structure/barricade/spike/CDF = new(loc, material.name, R.material.name)
@@ -50,7 +50,7 @@
 				to_chat(user, "<span class='warning'>You need one sheet of [material.display_name] to repair \the [src].</span>")
 				return
 			visible_message("<span class='notice'>[user] begins to repair \the [src].</span>")
-			if(do_after(user, 2 SECONDS, src) && get_damage_value())
+			if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) && get_damage_value())
 				if (D.use(1))
 					restore_health(get_max_health())
 					visible_message("<span class='notice'>[user] repairs \the [src].</span>")
@@ -62,10 +62,8 @@
 		damage_health(W.force, W.damtype)
 		..()
 
-/obj/structure/barricade/handle_death_change(new_death_state)
-	..()
-	if (new_death_state)
-		dismantle()
+/obj/structure/barricade/on_death()
+	dismantle()
 
 /obj/structure/barricade/proc/dismantle()
 	visible_message("<span class='danger'>The barricade is smashed apart!</span>")
@@ -118,5 +116,5 @@
 	if(isanimal(victim)) //simple animals have simple health, reduce our damage
 		damage_holder = (damage / 4)
 
-	victim.apply_damage(damage_holder, BRUTE, target_zone, damage_flags = DAM_SHARP, used_weapon = src)
+	victim.apply_damage(damage_holder, DAMAGE_BRUTE, target_zone, damage_flags = DAMAGE_FLAG_SHARP, used_weapon = src)
 	visible_message(SPAN_DANGER("\The [victim] is [pick(poke_description)] by \the [src]!"))

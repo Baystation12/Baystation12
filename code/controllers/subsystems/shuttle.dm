@@ -21,9 +21,9 @@ SUBSYSTEM_DEF(shuttle)
 	var/list/sectors_to_initialize               //Used to find all sector objects at the appropriate time.
 	var/block_queue = TRUE
 
-	var/tmp/list/working_shuttles
+	var/list/working_shuttles
 
-/datum/controller/subsystem/shuttle/Initialize()
+/datum/controller/subsystem/shuttle/Initialize(start_uptime)
 	last_landmark_registration_time = world.time
 	for(var/shuttle_type in subtypesof(/datum/shuttle)) // This accounts for most shuttles, though away maps can queue up more.
 		var/datum/shuttle/shuttle = shuttle_type
@@ -31,7 +31,7 @@ SUBSYSTEM_DEF(shuttle)
 			LAZYDISTINCTADD(shuttles_to_initialize, shuttle_type)
 	block_queue = FALSE
 	clear_init_queue()
-	. = ..()
+
 
 /datum/controller/subsystem/shuttle/fire(resumed = FALSE)
 	if (!resumed)
@@ -155,8 +155,7 @@ SUBSYSTEM_DEF(shuttle)
 			return ship
 	return null
 
-/datum/controller/subsystem/shuttle/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Shuttles [shuttles.len] Ships [ships.len] Landmarks [registered_shuttle_landmarks.len] Halted [overmap_halted ? "Y" : "N"]"
-	..(text, force)
+/datum/controller/subsystem/shuttle/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Shuttles [shuttles.len] Ships [ships.len] Landmarks [registered_shuttle_landmarks.len] Halted [overmap_halted ? "Y" : "N"]")

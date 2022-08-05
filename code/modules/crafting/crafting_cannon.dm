@@ -1,10 +1,3 @@
-/obj/item/cannonframe
-	name = "pneumatic cannon frame"
-	desc = "A half-finished pneumatic cannon."
-	icon = 'icons/obj/crafting_icons.dmi'
-	icon_state = "pneumatic0"
-	item_state = "pneumatic"
-
 /decl/crafting_stage/pipe/cannon
 	item_desc = "It is a half-finished pneumatic cannon with a pipe segment installed."
 	progress_message = "You secure the piping inside the frame."

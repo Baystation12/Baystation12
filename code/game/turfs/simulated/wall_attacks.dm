@@ -58,7 +58,7 @@
 
 /turf/simulated/wall/proc/fail_smash(var/mob/user)
 	to_chat(user, "<span class='danger'>You smash against \the [src]!</span>")
-	damage_health(rand(25, 75), BRUTE)
+	damage_health(rand(25, 75), DAMAGE_BRUTE)
 
 /turf/simulated/wall/proc/success_smash(var/mob/user)
 	to_chat(user, "<span class='danger'>You smash through \the [src]!</span>")
@@ -115,12 +115,12 @@
 				if (MUTATION_FERAL in user.mutations)
 					M.visible_message(SPAN_DANGER("[M.name] slams into \the [src]!"), SPAN_DANGER("You slam into \the [src]!"))
 					playsound(src, pick(GLOB.punch_sound), 45)
-					damage_health(5, BRUTE)
+					damage_health(5, DAMAGE_BRUTE)
 					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2) //Additional cooldown
 					attack_animation(user)
 				else
 					M.visible_message(SPAN_DANGER("[M.name] punches \the [src]!"), SPAN_DANGER("You punch \the [src]!"))
-					M.apply_damage(3, BRUTE, M.hand ? BP_L_HAND : BP_R_HAND)
+					M.apply_damage(3, DAMAGE_BRUTE, M.hand ? BP_L_HAND : BP_R_HAND)
 					playsound(src, pick(GLOB.punch_sound), 40)
 
 	else
@@ -219,7 +219,7 @@
 		if(WT.remove_fuel(0,user))
 			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, max(5, damage / 5), src) && WT && WT.isOn())
+			if(do_after(user, max(5, damage / 5), src, DO_PUBLIC_UNIQUE) && WT && WT.isOn())
 				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
 				restore_health(damage)
 		return
@@ -261,7 +261,7 @@
 			if(cut_delay < 0)
 				cut_delay = 0
 
-			if (do_after(user, cut_delay, src, DO_DEFAULT | DO_TARGET_UNIQUE_ACT))
+			if (do_after(user, cut_delay, src, DO_PUBLIC_UNIQUE))
 				dismantle_wall()
 				user.visible_message(SPAN_WARNING("\The [src] was torn open by [user]!"), SPAN_NOTICE("You remove the outer plating."))
 				return
@@ -278,7 +278,7 @@
 					to_chat(user, "<span class='notice'>You sink \the [W] into the wall and begin trying to rip out the support frame...</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 
-					if(!do_after(user, 60, src))
+					if(!do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE))
 						return
 
 					to_chat(user, "<span class='notice'>You tear through the wall's support system and plating!</span>")
@@ -298,7 +298,7 @@
 				if(isScrewdriver(W))
 					to_chat(user, "<span class='notice'>You begin removing the support lines.</span>")
 					playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
-					if(!do_after(user,40,src) || construction_stage != 5)
+					if(!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE) || construction_stage != 5)
 						return
 					construction_stage = 4
 					update_icon()
@@ -328,7 +328,7 @@
 				if(cut_cover)
 					to_chat(user, "<span class='notice'>You begin slicing through the metal cover.</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
-					if(!do_after(user, 60, src) || construction_stage != 4)
+					if(!do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE) || construction_stage != 4)
 						return
 					construction_stage = 3
 					update_icon()
@@ -338,7 +338,7 @@
 				if(isCrowbar(W))
 					to_chat(user, "<span class='notice'>You struggle to pry off the cover.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
-					if(!do_after(user,100,src) || construction_stage != 3)
+					if(!do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE) || construction_stage != 3)
 						return
 					construction_stage = 2
 					update_icon()
@@ -348,7 +348,7 @@
 				if(isWrench(W))
 					to_chat(user, "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame.</span>")
 					playsound(src, 'sound/items/Ratchet.ogg', 100, 1)
-					if(!do_after(user,40,src) || construction_stage != 2)
+					if(!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE) || construction_stage != 2)
 						return
 					construction_stage = 1
 					update_icon()
@@ -371,7 +371,7 @@
 				if(cut_cover)
 					to_chat(user, "<span class='notice'>You begin slicing through the support rods.</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
-					if(!do_after(user,70,src) || construction_stage != 1)
+					if(!do_after(user, 7 SECONDS, src, DO_PUBLIC_UNIQUE) || construction_stage != 1)
 						return
 					construction_stage = 0
 					update_icon()
@@ -382,7 +382,7 @@
 				if(isCrowbar(W))
 					to_chat(user, "<span class='notice'>You struggle to pry off the outer sheath.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
-					if(!do_after(user,100,src) || !W || !T )	return
+					if(!do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE) || !W || !T )	return
 					if(user.loc == T && user.get_active_hand() == W )
 						to_chat(user, "<span class='notice'>You pry off the outer sheath.</span>")
 						dismantle_wall()

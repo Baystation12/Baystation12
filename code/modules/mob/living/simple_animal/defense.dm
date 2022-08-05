@@ -1,13 +1,15 @@
 /mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj || Proj.nodamage)
 		return
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 
 	var/damage = Proj.damage
-	if(Proj.damtype == STUN)
+	if (Proj.damtype == DAMAGE_STUN)
 		damage = Proj.damage / 6
-	if(Proj.damtype == BRUTE)
+	if (Proj.damtype == DAMAGE_BRUTE)
 		damage = Proj.damage / 2
-	if(Proj.damtype == BURN)
+	if (Proj.damtype == DAMAGE_BURN)
 		damage = Proj.damage / 1.5
 	if(Proj.agony)
 		damage += Proj.agony / 6
@@ -86,7 +88,7 @@
 				return
 			var/time_to_butcher = (mob_size)
 			to_chat(user, SPAN_NOTICE("You begin harvesting \the [src]."))
-			if(do_after(user, time_to_butcher, src, do_flags = DO_DEFAULT & ~DO_BOTH_CAN_TURN))
+			if(do_after(user, time_to_butcher, src, DO_PUBLIC_UNIQUE))
 				if(prob(user.skill_fail_chance(SKILL_COOKING, 60, SKILL_ADEPT)))
 					to_chat(user, SPAN_NOTICE("You botch harvesting \the [src], and ruin some of the meat in the process."))
 					subtract_meat(user)
@@ -117,9 +119,9 @@
 		return FALSE
 
 	var/damage = O.force
-	if (O.damtype == PAIN)
+	if (O.damtype == DAMAGE_PAIN)
 		damage = 0
-	if (O.damtype == STUN)
+	if (O.damtype == DAMAGE_STUN)
 		damage = (O.force / 8)
 	if(supernatural && istype(O,/obj/item/nullrod))
 		damage *= 2

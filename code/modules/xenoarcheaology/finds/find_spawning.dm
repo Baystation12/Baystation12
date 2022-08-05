@@ -160,7 +160,7 @@
 	if(prob(25))
 		new_item = new /obj/item/vampiric(loc)
 	else
-		new_item = new(loc)
+		new_item = ..()
 	new_item.SetName("statuette")
 	new_item.icon = 'icons/obj/xenoarchaeology.dmi'
 	new_item.icon_state = "statuette"
@@ -304,7 +304,7 @@
 	if(prob(25))
 		new_item = new /obj/item/device/soulstone(loc)
 	else
-		new_item = new(loc)
+		new_item = ..()
 	apply_image_decorations = 1
 	additional_desc = pick("It shines faintly as it catches the light.","It appears to have a faint inner glow.","It seems to draw you inward as you look it at.","Something twinkles faintly as you look at it.","It's mesmerizing to behold.")
 
@@ -318,6 +318,7 @@
 	else
 		item_type = "rough red crystal"
 		new_item.icon_state = "changerock"
+	return new_item
 
 /obj/item/archaeological_find/blade
 	item_type = "blade"

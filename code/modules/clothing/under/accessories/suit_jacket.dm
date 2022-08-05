@@ -30,5 +30,4 @@
 
 /obj/item/clothing/accessory/toggleable/tan_jacket/Initialize()
 	. = ..()
-	INIT_SKIP_QDELETED
 	do_toggle()

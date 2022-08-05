@@ -66,7 +66,7 @@
 
 /datum/stack_recipe/blade
 	title = "knife"
-	result_type = /obj/item/material/butterflyblade
+	result_type = /obj/item/material/small_blade
 	req_amount = 6
 	time = 20
 	on_floor = 1
@@ -80,6 +80,15 @@
 	time = 20
 	on_floor = 1
 	difficulty = 1
+	send_material_data = 1
+
+/datum/stack_recipe/large_blade
+	title = "large blade"
+	result_type = /obj/item/material/large_blade
+	req_amount = 10
+	time = 30
+	on_floor = 1
+	difficulty = 2
 	send_material_data = 1
 
 /datum/stack_recipe/key
@@ -214,18 +223,6 @@
 	title = "sandals"
 	result_type = /obj/item/clothing/shoes/sandal
 
-/datum/stack_recipe/zipgunframe
-	title = "zip gun frame"
-	result_type = /obj/item/zipgunframe
-	req_amount = 5
-	difficulty = 3
-
-/datum/stack_recipe/coilgun
-	title = "coilgun stock"
-	result_type = /obj/item/coilgun_assembly
-	req_amount = 5
-	difficulty = 3
-
 /datum/stack_recipe/stick
 	title = "stick"
 	result_type = /obj/item/material/stick
@@ -240,9 +237,9 @@
 	time = 20
 	difficulty = 2
 
-/datum/stack_recipe/crossbowframe
-	title = "crossbow frame"
-	result_type = /obj/item/crossbowframe
+/datum/stack_recipe/weapon_frame
+	title = "weapon frame"
+	result_type = /obj/item/weapon_frame
 	req_amount = 5
 	time = 25
 	difficulty = 3
@@ -297,3 +294,53 @@
 	req_amount = 2
 	on_floor = 1
 	send_material_data = 1
+
+/datum/stack_recipe/toolbelt
+	title = "tool belt"
+	result_type = /obj/item/storage/belt/utility
+	req_amount = 5
+	difficulty = 2
+	time = 15
+
+/datum/stack_recipe/pockets
+	title = "pockets"
+	result_type = /obj/item/clothing/accessory/storage/pockets
+	req_amount = 2
+	difficulty = 1
+	time = 5
+
+/datum/stack_recipe/large_webbing
+	title = "large webbing"
+	result_type = /obj/item/clothing/accessory/storage/webbing_large
+	req_amount = 7
+	difficulty = 3
+	time = 20
+
+/datum/stack_recipe/bandolier
+	title = "bandolier"
+	result_type = /obj/item/clothing/accessory/storage/bandolier
+	req_amount = 7
+	difficulty = 3
+	time = 20
+
+/datum/stack_recipe/holster
+	title = "holster"
+	result_type = /obj/item/clothing/accessory/storage/holster
+	req_amount = 5
+	difficulty = 2
+	time = 15
+
+/datum/stack_recipe/holster_machete
+	title = "machete sheath"
+	result_type = /obj/item/clothing/accessory/storage/holster/machete
+	req_amount = 5
+	difficulty = 2
+	time = 15
+
+/datum/stack_recipe/holster_knife
+	title = "knife sheath"
+	result_type = /obj/item/clothing/accessory/storage/holster/knife
+	req_amount = 2
+	difficulty = 1
+	time = 5
+

@@ -92,18 +92,18 @@
 
 /obj/machinery/suit_storage_unit/ex_act(severity)
 	switch(severity)
-		if(1)
+		if(EX_ACT_DEVASTATING)
 			if(prob(50))
 				dump_everything()
 			qdel(src)
-		if(2)
+		if(EX_ACT_HEAVY)
 			if(prob(35))
 				dump_everything()
 				qdel(src)
 
 /obj/machinery/suit_storage_unit/attackby(var/obj/item/I, var/mob/user)
 	if(isScrewdriver(I))
-		if(do_after(user, 50, src))
+		if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
 			panelopen = !panelopen
 			playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			to_chat(user, SPAN_NOTICE("You [panelopen ? "open" : "close"] the unit's maintenance panel."))
@@ -113,7 +113,7 @@
 	if(isCrowbar(I))
 		if(inoperable() && !islocked && !isopen)
 			to_chat(user, SPAN_NOTICE("You begin prying the unit open."))
-			if(do_after(user, 50, src))
+			if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
 				isopen = TRUE
 				to_chat(user, SPAN_NOTICE("You pry the unit open."))
 				SSnano.update_uis(src)
@@ -135,7 +135,7 @@
 			to_chat(user, SPAN_NOTICE("The unit's storage area is too cluttered."))
 			return
 		visible_message(SPAN_WARNING("[user] starts putting [G.affecting.name] into the Suit Storage Unit."))
-		if(do_after(user, 20, src) && G && G.affecting)
+		if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) && G && G.affecting)
 			var/mob/M = G.affecting
 			if(M.client)
 				M.client.perspective = EYE_PERSPECTIVE
@@ -328,7 +328,7 @@
 
 /obj/machinery/suit_storage_unit/proc/uv_burn()
 	if(occupant)
-		occupant.apply_damage(50, IRRADIATE, damage_flags = DAM_DISPERSED)
+		occupant.apply_damage(50, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 		var/obj/item/organ/internal/diona/nutrients/rad_organ = locate() in occupant.internal_organs
 		if(!rad_organ)
 			if(occupant.can_feel_pain())
@@ -415,7 +415,7 @@
 		to_chat(usr, SPAN_WARNING("It's too cluttered inside for you to fit in!"))
 		return
 	visible_message(SPAN_NOTICE("\The [usr] starts squeezing into the suit storage unit!"))
-	if(do_after(usr, 10, src))
+	if(do_after(usr, 1 SECOND, src, DO_PUBLIC_UNIQUE))
 		usr.reset_view(src)
 		usr.stop_pulling()
 		usr.forceMove(src)

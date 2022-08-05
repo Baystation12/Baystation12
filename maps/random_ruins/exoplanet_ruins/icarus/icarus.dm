@@ -5,7 +5,7 @@
 	suffixes = list("icarus/icarus.dmm")
 	spawn_cost = 1
 	ruin_tags = RUIN_HUMAN|RUIN_WRECK
-	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
+	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_RUIN_STARTS_DISALLOWED
 	apc_test_exempt_areas = list(
 		/area/map_template/icarus = NO_SCRUBBER|NO_VENT|NO_APC
 	)

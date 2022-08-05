@@ -1,10 +1,10 @@
 //Meteor groups, used for various random events and the Meteor gamemode.
 
 // Dust, used by space dust event and during earliest stages of meteor mode.
-/var/list/meteors_dust = list(/obj/effect/meteor/dust)
+var/global/list/meteors_dust = list(/obj/effect/meteor/dust)
 
 // Standard meteors, used during early stages of the meteor gamemode.
-/var/list/meteors_normal = list(\
+var/global/list/meteors_normal = list(\
 		/obj/effect/meteor/medium=8,\
 		/obj/effect/meteor/dust=3,\
 		/obj/effect/meteor/irradiated=3,\
@@ -15,7 +15,7 @@
 		)
 
 // Threatening meteors, used during the meteor gamemode.
-/var/list/meteors_threatening = list(\
+var/global/list/meteors_threatening = list(\
 		/obj/effect/meteor/big=10,\
 		/obj/effect/meteor/medium=5,\
 		/obj/effect/meteor/golden=3,\
@@ -26,7 +26,7 @@
 		)
 
 // Catastrophic meteors, pretty dangerous without shields and used during the meteor gamemode.
-/var/list/meteors_catastrophic = list(\
+var/global/list/meteors_catastrophic = list(\
 		/obj/effect/meteor/big=75,\
 		/obj/effect/meteor/flaming=10,\
 		/obj/effect/meteor/irradiated=10,\
@@ -38,7 +38,7 @@
 		)
 
 // Armageddon meteors, very dangerous, and currently used only during the meteor gamemode.
-/var/list/meteors_armageddon = list(\
+var/global/list/meteors_armageddon = list(\
 		/obj/effect/meteor/big=25,\
 		/obj/effect/meteor/flaming=10,\
 		/obj/effect/meteor/irradiated=10,\
@@ -50,7 +50,7 @@
 		)
 
 // Cataclysm meteor selection. Very very dangerous and effective even against shields. Used in late game meteor gamemode only.
-/var/list/meteors_cataclysm = list(\
+var/global/list/meteors_cataclysm = list(\
 		/obj/effect/meteor/big=40,\
 		/obj/effect/meteor/emp=20,\
 		/obj/effect/meteor/tunguska=20,\
@@ -132,7 +132,7 @@
 	density = TRUE
 	anchored = TRUE
 	var/hits = 4
-	var/hitpwr = 2 //Level of ex_act to be called on hit.
+	var/hitpwr = EX_ACT_HEAVY //Level of ex_act to be called on hit.
 	var/dest
 	pass_flags = PASS_FLAG_TABLE
 	var/heavy = 0
@@ -169,9 +169,9 @@
 	GLOB.meteor_list -= src
 	return ..()
 
-/obj/effect/meteor/New()
-	..()
-	if(!ismissile)
+/obj/effect/meteor/Initialize()
+	. = ..()
+	if (!ismissile)
 		SpinAnimation()
 
 /obj/effect/meteor/Bump(atom/A)
@@ -236,7 +236,7 @@
 	icon_state = "dust"
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	hits = 1
-	hitpwr = 3
+	hitpwr = EX_ACT_LIGHT
 	dropamt = 1
 	meteordrop = /obj/item/ore/glass
 
@@ -320,7 +320,7 @@
 	icon_state = "flaming"
 	desc = "Your life briefly passes before your eyes the moment you lay them on this monstrosity."
 	hits = 10
-	hitpwr = 1
+	hitpwr = EX_ACT_DEVASTATING
 	heavy = 1
 	meteordrop = /obj/item/ore/diamond	// Probably means why it penetrates the hull so easily before exploding.
 
@@ -389,3 +389,47 @@
 	meteordrop = null
 	ismissile = TRUE
 	dropamt = 0
+
+/obj/effect/meteor/supermatter/missile/admin_missile
+	name = "Hull Buster"
+	desc = "A highly advanced warhead capable of destroying even the most well-armoured space installations."
+	icon = 'icons/obj/missile.dmi'
+	icon_state = "photon"
+	meteordrop = null
+	ismissile = TRUE
+	hitpwr = EX_ACT_DEVASTATING
+	hits = 6
+
+/obj/effect/meteor/supermatter/missile/admin_missile/meteor_effect()
+	explosion(loc, 1, 2, 4, 0, 0, shaped = get_dir(src, dest), turf_breaker = TRUE)
+
+
+/obj/effect/meteor/supermatter/missile/sabot_round
+	name = "Sabot Round"
+	desc = "A warhead that penetrates the hull and detonates to send a secondary warhead further in before exploding for massive damage."
+	icon = 'icons/obj/missile.dmi'
+	icon_state = "sabot"
+	meteordrop = null
+	ismissile = TRUE
+	hitpwr = EX_ACT_HEAVY
+	hits = 6
+
+/obj/effect/meteor/supermatter/missile/sabot_round/meteor_effect()
+	explosion(loc, 0, 1, 4, 0, 0, shaped = TRUE, turf_breaker = TRUE)
+	var/obj/effect/meteor/supermatter/missile/sabot_secondary_round/M = new(get_turf(src))
+	M.dest = dest
+	spawn(0)
+		walk_towards(M, dest, 3)
+
+/obj/effect/meteor/supermatter/missile/sabot_secondary_round
+	name = "Sabot Round Secondary"
+	desc = "Secondary warhead of the Sabot Round, causes extreme damage."
+	icon = 'icons/obj/missile.dmi'
+	icon_state = "sabot_2"
+	meteordrop = null
+	ismissile = TRUE
+	hitpwr = EX_ACT_DEVASTATING
+	hits = 4
+
+/obj/effect/meteor/supermatter/missile/sabot_secondary_round/meteor_effect()
+	explosion(loc, 0.5, 2, 3, 0, shaped = get_dir(src, dest), turf_breaker = TRUE)

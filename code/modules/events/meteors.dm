@@ -10,7 +10,9 @@
 	var/next_meteor_upper = 20
 
 /datum/event/meteor_wave/get_skybox_image()
-	return overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
+	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
+	res.blend_mode = BLEND_OVERLAY
+	return res
 
 /datum/event/meteor_wave/setup()
 	waves = 0
@@ -66,7 +68,7 @@
 		else
 			return meteors_minor
 
-/var/list/meteors_minor = list(
+var/global/list/meteors_minor = list(
 	/obj/effect/meteor/medium     = 80,
 	/obj/effect/meteor/dust       = 30,
 	/obj/effect/meteor/irradiated = 30,
@@ -76,7 +78,7 @@
 	/obj/effect/meteor/silver     = 10,
 )
 
-/var/list/meteors_moderate = list(
+var/global/list/meteors_moderate = list(
 	/obj/effect/meteor/medium     = 80,
 	/obj/effect/meteor/big        = 30,
 	/obj/effect/meteor/dust       = 30,
@@ -87,7 +89,7 @@
 	/obj/effect/meteor/emp        = 10,
 )
 
-/var/list/meteors_major = list(
+var/global/list/meteors_major = list(
 	/obj/effect/meteor/medium     = 80,
 	/obj/effect/meteor/big        = 30,
 	/obj/effect/meteor/dust       = 30,

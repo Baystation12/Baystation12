@@ -29,12 +29,11 @@
 
 /obj/structure/diona_gestalt/on_update_icon()
 	overlays = list(eyes_overlay)
-	if(nymphs && nymphs.len)
-		var/matrix/M = matrix()
-		M.Scale(clamp(nymphs.len * 0.1, 1, 2))
-		transform = M
+	if (length(nymphs))
+		SetTransform(scale = clamp(nymphs.len * 0.1, 1, 2))
 	else
-		transform = null
+		ClearTransform()
+
 
 /obj/structure/diona_gestalt/Destroy()
 	for(var/thing in contents)

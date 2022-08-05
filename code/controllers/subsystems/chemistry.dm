@@ -4,22 +4,20 @@ SUBSYSTEM_DEF(chemistry)
 	init_order = SS_INIT_CHEMISTRY
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 	wait = 0.5 SECONDS
-	var/static/tmp/list/reactions = list()
-	var/static/tmp/list/reactions_by_id = list()
-	var/static/tmp/list/reactions_by_result = list()
-	var/static/tmp/list/random_chem_prototypes = list()
-	var/static/tmp/list/processing = list()
-	var/static/tmp/list/current = list()
+	var/static/list/reactions_by_id = list()
+	var/static/list/reactions_by_result = list()
+	var/static/list/datum/reagent/random/random_chem_prototypes = list()
+	var/static/list/datum/reagents/active_reagents = list()
+	var/static/list/datum/reagents/queue = list()
 
 
-/datum/controller/subsystem/chemistry/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Reaction Queue: [processing.len]"
-	..(text, force)
+/datum/controller/subsystem/chemistry/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Reaction Queue: [active_reagents.len]")
 
 
-/datum/controller/subsystem/chemistry/Initialize()
+/datum/controller/subsystem/chemistry/Initialize(start_uptime)
 	for (var/datum/chemical_reaction/reaction as anything in subtypesof(/datum/chemical_reaction))
 		reaction = new reaction
 		var/result = reaction.result
@@ -35,26 +33,29 @@ SUBSYSTEM_DEF(chemistry)
 
 
 /datum/controller/subsystem/chemistry/Recover()
-	current.Cut()
+	queue.Cut()
 
 
 /datum/controller/subsystem/chemistry/fire(resumed, no_mc_tick)
 	if (!resumed)
-		current = processing.Copy()
-	for (var/i = current.len to 1 step -1)
-		var/datum/reagents/R = current[i]
-		if (QDELETED(R))
-			log_debug("SSchemistry: deleted reagents datum in processing queue! Info: [R?.del_info || "(nulled)"]")
-			processing -= R
-			if (MC_TICK_CHECK)
-				current.Cut(i)
-				return
-			continue
-		if (!R.process_reactions())
-			processing -= R
-		if (MC_TICK_CHECK)
-			current.Cut(i)
+		queue = active_reagents.Copy()
+		if (!queue.len)
 			return
+	var/cut_until = 1
+	for (var/datum/reagents/reagents as anything in queue)
+		++cut_until
+		if (QDELETED(reagents))
+			log_debug("SSchemistry: deleted reagents datum in active set! Info: [reagents?.del_info || "(nulled)"]")
+			active_reagents -= reagents
+			continue
+		if (!reagents.process_reactions())
+			active_reagents -= reagents
+		if (no_mc_tick)
+			CHECK_TICK
+		else if (MC_TICK_CHECK)
+			queue.Cut(1, cut_until)
+			return
+	queue.Cut()
 
 
 /datum/controller/subsystem/chemistry/proc/get_prototype(given_type, temperature)

@@ -89,7 +89,7 @@
 			var/parsed = parse_zone(zone)
 
 			visible_message("<span class='danger'>[user] begins ironing [src.buckled_mob]'s [parsed]!</span>", "<span class='danger'>You begin ironing [buckled_mob]'s [parsed]!</span>")
-			if(!do_after(user, 40, src))
+			if(!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 				return
 			visible_message("<span class='danger'>[user] irons [src.buckled_mob]'s [parsed]!</span>", "<span class='danger'>You iron [buckled_mob]'s [parsed]!</span>")
 
@@ -103,12 +103,12 @@
 				holding = R
 				GLOB.destroyed_event.register(I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
 				update_icon()
-				return	
+				return
 			to_chat(user, "<span class='notice'>There isn't anything on the ironing board.</span>")
 			return
 
 		visible_message("[user] begins ironing [cloth].")
-		if(!do_after(user, 40, src))
+		if(!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 			return
 
 		visible_message("[user] finishes ironing [cloth].")

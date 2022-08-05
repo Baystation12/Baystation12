@@ -46,27 +46,6 @@
 /datum/build_mode/proc/Warn(message)
 	to_chat(user, "BUILD MODE - [name] - [message])")
 
-/datum/build_mode/proc/select_subpath(given_path, within_scope = /atom)
-	var/desired_path = input("Enter full or partial typepath.","Typepath","[given_path]") as text|null
-	if(!desired_path)
-		return
-
-	var/list/types = typesof(within_scope)
-	var/list/matches = list()
-
-	for(var/path in types)
-		if(findtext("[path]", desired_path))
-			matches += path
-
-	if(!matches.len)
-		alert("No results found. Sorry.")
-		return
-
-	if(matches.len==1)
-		return matches[1]
-	else
-		return (input("Select a type", "Select Type", matches[1]) as null|anything in matches)
-
 /datum/build_mode/CanUseTopic(mob/user)
 	if (check_rights(R_BUILDMODE, TRUE, user))
 		return STATUS_INTERACTIVE

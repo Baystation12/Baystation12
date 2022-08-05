@@ -39,8 +39,8 @@
 /obj/item/arrow/rod/removed(mob/user)
 	if(throwforce == 15) // The rod has been superheated - we don't want it to be useable when removed from the bow.
 		to_chat(user, "[src] shatters into a scattering of overstressed metal shards as it leaves the crossbow.")
-		var/obj/item/material/shard/shrapnel/S = new()
-		S.dropInto(loc)
+		var/obj/item/material/shard/shrapnel/steel/shrapnel = new
+		shrapnel.dropInto(loc)
 		qdel(src)
 
 /obj/item/gun/launcher/crossbow
@@ -110,7 +110,7 @@
 	tension = 1
 
 	while(bolt && tension && loc == current_user)
-		if(!do_after(user, draw_time, src)) //crossbow strings don't just magically pull back on their own.
+		if(!do_after(user, draw_time, src, DO_PUBLIC_UNIQUE)) //crossbow strings don't just magically pull back on their own.
 			user.visible_message("[usr] stops drawing and relaxes the string of [src].","<span class='warning'>You stop drawing back and relax the string of [src].</span>")
 			tension = 0
 			update_icon()

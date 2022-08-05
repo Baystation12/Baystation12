@@ -122,14 +122,14 @@
 
 /obj/machinery/vending/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
 			return
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
 				return
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			if (prob(25))
 				spawn(0)
 					src.malfunction()
@@ -848,6 +848,7 @@
 					/obj/item/storage/chewables/rollable/bad = 2,
 					/obj/item/storage/chewables/rollable/generic = 2,
 					/obj/item/storage/chewables/rollable/fine = 2,
+					/obj/item/storage/chewables/rollable/rollingkit = 2,
 					/obj/item/storage/fancy/cigarettes = 5,
 					/obj/item/storage/fancy/cigarettes/luckystars = 2,
 					/obj/item/storage/fancy/cigarettes/jerichos = 2,
@@ -888,6 +889,7 @@
 					/obj/item/storage/chewables/rollable/bad = 20,
 					/obj/item/storage/chewables/rollable/generic = 40,
 					/obj/item/storage/chewables/rollable/fine = 60,
+					/obj/item/storage/chewables/rollable/rollingkit = 45,
 					/obj/item/storage/fancy/cigarettes = 45,
 					/obj/item/storage/fancy/cigarettes/luckystars = 50,
 					/obj/item/storage/fancy/cigarettes/jerichos = 65,
@@ -988,7 +990,7 @@
 	density = FALSE //It is wall-mounted, and thus, not dense. --Superxpdude
 	base_type = /obj/machinery/vending/wallmed2
 	products = list(
-		/obj/item/reagent_containers/hypospray/autoinjector = 5,
+		/obj/item/reagent_containers/hypospray/autoinjector/inaprovaline = 5,
 		/obj/item/stack/medical/bruise_pack = 4,
 		/obj/item/stack/medical/ointment = 4,
 		/obj/item/storage/med_pouch/trauma,
@@ -1118,6 +1120,7 @@
 	/obj/item/tray = 8,
 	/obj/item/material/knife/kitchen = 3,
 	/obj/item/material/kitchen/rollingpin = 2,
+	/obj/item/serving_bowl = 20,
 	/obj/item/reagent_containers/food/drinks/pitcher = 2,
 	/obj/item/reagent_containers/food/drinks/flask/vacuumflask = 4,
 	/obj/item/reagent_containers/food/drinks/glass2/coffeecup = 8,
@@ -1308,8 +1311,8 @@
 	base_type = /obj/machinery/vending/games
 	products = list(/obj/item/toy/blink = 5, /obj/item/toy/eightball = 8, /obj/item/deck/cards = 5, /obj/item/deck/tarot = 5, /obj/item/pack/cardemon = 6, /obj/item/pack/spaceball = 6, /obj/item/storage/pill_bottle/dice_nerd = 5, /obj/item/storage/pill_bottle/dice = 5, /obj/item/storage/box/checkers = 2, /obj/item/storage/box/checkers/chess/red = 2, /obj/item/storage/box/checkers/chess = 2, /obj/item/board = 2, /obj/item/storage/fancy/crayons = 3)
 	prices = list(/obj/item/toy/blink = 3, /obj/item/toy/eightball = 10, /obj/item/deck/tarot = 3, /obj/item/deck/cards = 3, /obj/item/pack/cardemon = 5, /obj/item/pack/spaceball = 5, /obj/item/storage/pill_bottle/dice_nerd = 6, /obj/item/storage/pill_bottle/dice = 6, /obj/item/storage/box/checkers = 10, /obj/item/storage/box/checkers/chess/red = 10, /obj/item/storage/box/checkers/chess = 10, /obj/item/board = 2, /obj/item/storage/fancy/crayons = 3)
-	premium = list(/obj/item/spirit_board = 1, /obj/item/gun/projectile/revolver/capgun = 1, /obj/item/ammo_magazine/caps = 4)
-	contraband = list(/obj/item/reagent_containers/spray/waterflower = 2, /obj/item/storage/box/snappops = 3, /obj/item/toy/sword = 3, /obj/item/toy/katana = 3)
+	premium = list(/obj/item/spirit_board = 1)
+	contraband = list(/obj/item/reagent_containers/spray/waterflower = 2, /obj/item/storage/box/snappops = 3, /obj/item/toy/sword = 3, /obj/item/toy/katana = 3, /obj/item/gun/projectile/revolver/capgun = 1, /obj/item/ammo_magazine/caps = 4)
 
 //Cajoes/Kyos/BloodyMan's Lavatory Articles Dispensiary
 

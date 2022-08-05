@@ -30,9 +30,9 @@
 	flora_prob = 5
 	large_flora_prob = 10
 	water_level_max = 3
-	land_type = /turf/unsimulated/floor/exoplanet/snow
-	water_type = /turf/unsimulated/floor/exoplanet/ice
+	land_type = /turf/simulated/floor/exoplanet/snow
+	water_type = /turf/simulated/floor/exoplanet/ice
 
 /area/exoplanet/snow
 	ambience = list('sound/effects/wind/tundra0.ogg','sound/effects/wind/tundra1.ogg','sound/effects/wind/tundra2.ogg','sound/effects/wind/spooky0.ogg','sound/effects/wind/spooky1.ogg')
-	base_turf = /turf/unsimulated/floor/exoplanet/snow/
+	base_turf = /turf/simulated/floor/exoplanet/snow

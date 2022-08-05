@@ -42,11 +42,14 @@
 #define MIN_TEMPERATURE -40
 
 //all air alarms in area are connected via magic
-/area
-	var/list/air_vent_names = list()
-	var/list/air_scrub_names = list()
-	var/list/air_vent_info = list()
-	var/list/air_scrub_info = list()
+/// List (`string (id_tag)` => `string`). List of 'long names' for vents within the area. Also serves as a list of all vents registered with the area. Set by `./register_env_machine()`.
+/area/var/list/air_vent_names = list()
+/// List (`string (id_tag)` => `string`). List of 'long names' for scrubbers within the area. Also serves as a list of all scrubbers registered with the area. Set by `./register_env_machine()`.
+/area/var/list/air_scrub_names = list()
+/// List (`string (id_tag)` => `/datum/signal/data`). List of radio signal data received from vents in the area, indexed by the vent's `id_tag`. Do not modify directly; See `./receive_signal()` and `./send_signal()`.
+/area/var/list/air_vent_info = list()
+/// List (`string (id_tag)` => `/datum/signal/data`). List of radio signal data received from scrubbers in the area, indexed by the scrubber's `id_tag`. Do not modify directly; See `./receive_signal()` and `./send_signal()`.
+/area/var/list/air_scrub_info = list()
 
 /obj/machinery/alarm
 	name = "alarm"
@@ -295,7 +298,7 @@
 
 	if(!istype(location))
 		return FALSE
-	
+
 	if(breach_cooldown)
 		return FALSE
 
@@ -610,7 +613,7 @@
 		if(AALARM_SCREEN_SENSORS)
 			var/list/selected
 			var/thresholds[0]
-			
+
 			var/breach_data = list("selected" = breach_pressure)
 			data["breach_data"] = breach_data
 
@@ -850,7 +853,7 @@
 			else if(isCrowbar(W))
 				to_chat(user, "You start prying out the circuit.")
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-				if(do_after(user,20) && buildstage == 1)
+				if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) && buildstage == 1)
 					to_chat(user, "You pry out the circuit!")
 					var/obj/item/airalarm_electronics/circuit = new /obj/item/airalarm_electronics()
 					circuit.dropInto(user.loc)
@@ -912,7 +915,7 @@ FIRE ALARM
 	var/wiresexposed = FALSE
 	var/buildstage = 2 // 2 = complete, 1 = no wires,  0 = circuit gone
 	var/seclevel
-	var/global/list/overlays_cache
+	var/static/list/overlays_cache
 
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..()
@@ -1020,7 +1023,7 @@ FIRE ALARM
 				else if(isCrowbar(W))
 					to_chat(user, "You start prying out the circuit.")
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-					if (do_after(user,20))
+					if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 						to_chat(user, "You pry out the circuit!")
 						var/obj/item/firealarm_electronics/circuit = new /obj/item/firealarm_electronics()
 						circuit.dropInto(user.loc)
@@ -1058,7 +1061,7 @@ FIRE ALARM
 		src.updateDialog()
 	last_process = world.timeofday
 
-	if(locate(/obj/fire) in loc)
+	if(locate(/obj/hotspot) in loc)
 		alarm()
 
 /obj/machinery/firealarm/interface_interact(mob/user)

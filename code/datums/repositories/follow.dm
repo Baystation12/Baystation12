@@ -1,4 +1,4 @@
-/var/repository/follow/follow_repository = new()
+var/global/repository/follow/follow_repository = new()
 
 /repository/follow
 	var/datum/cache_entry/valid_until/cache

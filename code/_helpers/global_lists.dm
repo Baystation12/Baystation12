@@ -28,7 +28,7 @@ var/global/list/all_grabstates[0]
 var/global/list/all_grabobjects[0]
 
 // Uplinks
-var/list/obj/item/device/uplink/world_uplinks = list()
+var/global/list/obj/item/device/uplink/world_uplinks = list()
 
 //Preferences stuff
 //Hairstyles
@@ -41,8 +41,8 @@ GLOBAL_LIST_EMPTY(body_marking_styles_list)		//stores /datum/sprite_accessory/ma
 GLOBAL_DATUM_INIT(underwear, /datum/category_collection/underwear, new())
 
 // Visual nets
-var/list/datum/visualnet/visual_nets = list()
-var/datum/visualnet/camera/cameranet = new()
+var/global/list/datum/visualnet/visual_nets = list()
+var/global/datum/visualnet/camera/cameranet = new()
 
 // Runes
 var/global/list/rune_list = new()

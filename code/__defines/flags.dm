@@ -11,12 +11,12 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 
 // Flags bitmasks.
 
-#define ATOM_FLAG_CHECKS_BORDER          FLAG(0)  // If a dense atom (potentially) only blocks movements from a given direction, i.e. window panes
-#define ATOM_FLAG_CLIMBABLE              FLAG(1)  // This object can be climbed on
+// NOTE: We declare ATOM_FLAG_INITIALIZED earlier, in __initialization.dm, as FLAG(0)
+#define ATOM_FLAG_CHECKS_BORDER          FLAG(1)  // If a dense atom (potentially) only blocks movements from a given direction, i.e. window panes
 #define ATOM_FLAG_NO_BLOOD               FLAG(2)  // Used for items if they don't want to get a blood overlay.
 #define ATOM_FLAG_NO_REACT               FLAG(3)  // Reagents don't react inside this container.
 #define ATOM_FLAG_OPEN_CONTAINER         FLAG(4)  // Is an open container for chemistry purposes.
-#define ATOM_FLAG_INITIALIZED            FLAG(5)  // Has this atom been initialized
+#define ATOM_FLAG_CLIMBABLE              FLAG(5)  // This object can be climbed on
 #define ATOM_FLAG_NO_TEMP_CHANGE         FLAG(6)  // Reagents do not cool or heat to ambient temperature in this container.
 #define ATOM_FLAG_CAN_BE_PAINTED         FLAG(7)  // Can be painted using a paint sprayer or similar.
 #define ATOM_FLAG_ADJACENT_EXCEPTION     FLAG(8)  // Skips adjacent checks for atoms that should always be reachable in window tiles
@@ -24,7 +24,6 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define MOVABLE_FLAG_PROXMOVE       FLAG(0)  // Does this object require proximity checking in Enter()?
 #define MOVABLE_FLAG_Z_INTERACT     FLAG(1)  // Should attackby and attack_hand be relayed through ladders and open spaces?
 #define MOVABLE_FLAG_EFFECTMOVE     FLAG(2)  // Is this an effect that should move?
-#define MOVABLE_FLAG_DEL_SHUTTLE    FLAG(3)  // Shuttle transistion will delete this.
 
 #define OBJ_FLAG_ANCHORABLE     FLAG(0)  // This object can be stuck in place with a tool
 #define OBJ_FLAG_CONDUCTIBLE    FLAG(1)  // Conducts electricity. (metal etc.)

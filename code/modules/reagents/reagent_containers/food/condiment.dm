@@ -15,7 +15,7 @@
 	center_of_mass = "x=16;y=6"
 	volume = 50
 	var/list/starting_reagents
-	var/global/list/special_bottles = list(
+	var/static/list/special_bottles = list(
 		/datum/reagent/nutriment/ketchup = /obj/item/reagent_containers/food/condiment/ketchup,
 		/datum/reagent/nutriment/barbecue = /obj/item/reagent_containers/food/condiment/barbecue,
 		/datum/reagent/capsaicin = /obj/item/reagent_containers/food/condiment/capsaicin,

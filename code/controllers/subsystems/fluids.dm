@@ -11,10 +11,10 @@ SUBSYSTEM_DEF(fluids)
 	var/list/pushing_atoms = list()
 	var/list/hygiene_props = list()
 
-	var/tmp/list/processing_sources
-	var/tmp/list/processing_fluids
+	var/list/processing_sources
+	var/list/processing_fluids
 
-	var/tmp/active_fluids_copied_yet = FALSE
+	var/active_fluids_copied_yet = FALSE
 	var/af_index = 1
 	var/downward_fluid_overlay_position = 1 // Bit of an odd hack, set in fluid spread code to determine which overlay
 	                                        // in the list is 'down'. More maintainer-friendly than hardcoding it.
@@ -28,11 +28,10 @@ SUBSYSTEM_DEF(fluids)
 		)
 
 
-/datum/controller/subsystem/fluids/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Sources: [water_sources.len] Active Fluids: [active_fluids.len]"
-	..(text, force)
+/datum/controller/subsystem/fluids/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Sources: [water_sources.len] Active Fluids: [active_fluids.len]")
 
 
 /datum/controller/subsystem/fluids/fire(resumed = 0)

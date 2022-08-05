@@ -1,4 +1,4 @@
-var/list/ventcrawl_machinery = list(
+var/global/list/ventcrawl_machinery = list(
 	/obj/machinery/atmospherics/unary/vent_scrubber,
 	/obj/machinery/atmospherics/unary/vent_pump
 	)
@@ -13,7 +13,7 @@ var/list/ventcrawl_machinery = list(
 	/obj/item/clothing/head/culthood,
 	/obj/item/clothing/suit/cultrobes,
 	/obj/item/book/tome,
-	/obj/item/paper/,
+	/obj/item/paper,
 	/obj/item/melee/cultblade
 	)
 
@@ -142,7 +142,7 @@ var/list/ventcrawl_machinery = list(
 						to_chat(src, "<span class='warning'>You feel a strong current pushing you away from the vent.</span>")
 					if(HAZARD_HIGH_PRESSURE to INFINITY)
 						to_chat(src, "<span class='danger'>You feel a roaring wind pushing you away from the vent!</span>")
-			if(!do_after(src, 45, vent_found))
+			if(!do_after(src, 4.5 SECONDS, vent_found, DO_PUBLIC_UNIQUE))
 				return
 			if(!can_ventcrawl())
 				return

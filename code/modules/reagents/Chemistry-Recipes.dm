@@ -129,9 +129,9 @@
 	result_amount = 3
 	mix_message = "The solution thickens into a coarse metallic paste."
 
-/datum/chemical_reaction/space_drugs
-	name = "Space Drugs"
-	result = /datum/reagent/space_drugs
+/datum/chemical_reaction/hextro
+	name = "Hextromycosalinate"
+	result = /datum/reagent/drugs/hextro
 	required_reagents = list(/datum/reagent/mercury = 1, /datum/reagent/sugar = 1, /datum/reagent/lithium = 1)
 	result_amount = 3
 	minimum_temperature = 50 CELSIUS
@@ -192,7 +192,7 @@
 
 /datum/chemical_reaction/cryptobiolin
 	name = "Cryptobiolin"
-	result = /datum/reagent/cryptobiolin
+	result = /datum/reagent/drugs/cryptobiolin
 	required_reagents = list(/datum/reagent/potassium = 1, /datum/reagent/acetone = 1, /datum/reagent/sugar = 1)
 	minimum_temperature = 30 CELSIUS
 	maximum_temperature = 60 CELSIUS
@@ -291,7 +291,7 @@
 /datum/chemical_reaction/spaceacillin
 	name = "Spaceacillin"
 	result = /datum/reagent/spaceacillin
-	required_reagents = list(/datum/reagent/cryptobiolin = 1, /datum/reagent/inaprovaline = 1)
+	required_reagents = list(/datum/reagent/drugs/cryptobiolin = 1, /datum/reagent/inaprovaline = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/imidazoline
@@ -350,7 +350,7 @@
 
 /datum/chemical_reaction/mindbreaker
 	name = "Mindbreaker Toxin"
-	result = /datum/reagent/mindbreaker
+	result = /datum/reagent/drugs/mindbreaker
 	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/hydrazine = 1, /datum/reagent/dylovene = 1)
 	result_amount = 3
 	mix_message = "The solution takes on an iridescent sheen."
@@ -425,7 +425,7 @@
 /datum/chemical_reaction/rezadone
 	name = "Rezadone"
 	result = /datum/reagent/rezadone
-	required_reagents = list(/datum/reagent/toxin/carpotoxin = 1, /datum/reagent/cryptobiolin = 1, /datum/reagent/copper = 1)
+	required_reagents = list(/datum/reagent/toxin/carpotoxin = 1, /datum/reagent/drugs/cryptobiolin = 1, /datum/reagent/copper = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/lexorin
@@ -437,19 +437,19 @@
 /datum/chemical_reaction/methylphenidate
 	name = "Methylphenidate"
 	result = /datum/reagent/methylphenidate
-	required_reagents = list(/datum/reagent/mindbreaker = 1, /datum/reagent/lithium = 1)
+	required_reagents = list(/datum/reagent/drugs/mindbreaker = 1, /datum/reagent/lithium = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/citalopram
 	name = "Citalopram"
 	result = /datum/reagent/citalopram
-	required_reagents = list(/datum/reagent/mindbreaker = 1, /datum/reagent/carbon = 1)
+	required_reagents = list(/datum/reagent/drugs/mindbreaker = 1, /datum/reagent/carbon = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/paroxetine
 	name = "Paroxetine"
 	result = /datum/reagent/paroxetine
-	required_reagents = list(/datum/reagent/mindbreaker = 1, /datum/reagent/acetone = 1, /datum/reagent/inaprovaline = 1)
+	required_reagents = list(/datum/reagent/drugs/mindbreaker = 1, /datum/reagent/acetone = 1, /datum/reagent/inaprovaline = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/hair_remover
@@ -1012,6 +1012,17 @@
 	var/type = pick(possible_mobs)
 	new type(get_turf(holder.my_atom))
 
+/datum/chemical_reaction/slime/grevive
+	name = "Slime Revive"
+	result = null
+	required_reagents = list(/datum/reagent/blood = 1)
+	result_amount = 1
+	required = /obj/item/slime_extract/gold
+
+/datum/chemical_reaction/slime/grevive/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
+	..()
+	new /obj/item/slimepotion3(get_turf(holder.my_atom))
+
 //Silver
 /datum/chemical_reaction/slime/bork
 	name = "Slime Bork"
@@ -1030,6 +1041,29 @@
 
 	for(var/i = 1, i <= 4 + rand(1,2), i++)
 		var/chosen = pick(borks)
+		var/obj/B = new chosen(get_turf(holder.my_atom))
+		if(B)
+			if(prob(50))
+				for(var/j = 1, j <= rand(1, 3), j++)
+					step(B, pick(NORTH, SOUTH, EAST, WEST))
+
+/datum/chemical_reaction/slime/mixer
+	name = "Slime Mixer"
+	result = null
+	required_reagents = list(/datum/reagent/water = 1)
+	result_amount = 1
+	required = /obj/item/slime_extract/silver
+
+/datum/chemical_reaction/slime/mixer/on_reaction(var/datum/reagents/holder)
+	..()
+	var/list/mixers = typesof(/obj/item/reagent_containers/food/drinks) - typesof(/obj/item/reagent_containers/food/drinks/glass2)
+	playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
+	for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
+		if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
+			M.flash_eyes()
+
+	for(var/i = 1, i <= 4 + rand(1,2), i++)
+		var/chosen = pick(mixers)
 		var/obj/B = new chosen(get_turf(holder.my_atom))
 		if(B)
 			if(prob(50))
@@ -1485,8 +1519,8 @@
 /datum/chemical_reaction/cheesewheel/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
 	var/location = get_turf(holder.my_atom)
-	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/reagent_containers/food/snacks/sliceable/cheesewheel(location)
+	for (var/i = 1 to created_volume)
+		new /obj/item/reagent_containers/food/snacks/sliceable/cheesewheel/fresh (location)
 
 /datum/chemical_reaction/rawmeatball
 	name = "Raw Meatball"
@@ -2149,7 +2183,7 @@
 /datum/chemical_reaction/hippiesdelight
 	name = "Hippies Delight"
 	result = /datum/reagent/ethanol/hippies_delight
-	required_reagents = list(/datum/reagent/psilocybin = 1, /datum/reagent/ethanol/gargle_blaster = 1)
+	required_reagents = list(/datum/reagent/drugs/psilocybin = 1, /datum/reagent/ethanol/gargle_blaster = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/bananahonk
@@ -2294,7 +2328,7 @@
 // psi-altering drug
 /datum/chemical_reaction/three_eye
 	name = "Three Eye"
-	result = /datum/reagent/three_eye
+	result = /datum/reagent/drugs/three_eye
 	result_amount = 2
 	mix_message = "The surface of the oily, iridescent liquid twitches like a living thing."
 	minimum_temperature = 40 CELSIUS
@@ -2307,7 +2341,7 @@
 	)
 
 	required_reagents = list(
-		/datum/reagent/mindbreaker = 2,
+		/datum/reagent/drugs/mindbreaker = 2,
 		/datum/reagent/toxin/phoron = 1,
 		/datum/reagent/blood = 1
 	)
@@ -2478,7 +2512,7 @@
 
 /datum/chemical_reaction/immunobooster
 	result = /datum/reagent/immunobooster
-	required_reagents = list(/datum/reagent/cryptobiolin = 1, /datum/reagent/dylovene = 1)
+	required_reagents = list(/datum/reagent/drugs/cryptobiolin = 1, /datum/reagent/dylovene = 1)
 	minimum_temperature = 40 CELSIUS
 	result_amount = 2
 

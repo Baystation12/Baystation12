@@ -17,14 +17,11 @@
 
 /obj/item/clothing/Initialize()
 	. = ..()
-	INIT_SKIP_QDELETED
 	if (buttons_suffix)
 		verbs |= /obj/item/clothing/proc/toggle_buttons
 
 
 /obj/item/clothing/suit/storage/toggle/buttons_suffix = "_open"
-/obj/item/clothing/suit/storage/toggle/valid_accessory_slots = ACCESSORY_SLOT_INSIGNIA
-
 
 
 /obj/item/clothing/suit/storage/toggle/inherit_custom_item_data(datum/custom_item/citem)

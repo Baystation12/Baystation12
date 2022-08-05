@@ -2,8 +2,7 @@
 "ad" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/body_scanconsole{
-	dir = 4;
-	icon_state = "body_scannerconsole"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -24,10 +23,12 @@
 /area/medical/surgery)
 "gk" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
+/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/item/reagent_containers/food/condiment/enzyme,
+/obj/item/reagent_containers/food/condiment/barbecue,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "gm" = (
@@ -53,8 +54,7 @@
 "hO" = (
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /obj/machinery/power/apc{
 	dir = 8;
@@ -81,14 +81,32 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
+"jo" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/cooker/fryer,
+/turf/simulated/floor/tiled/white,
+/area/medical/surgery)
 "jM" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/structure/closet/secure_closet/freezer/meat,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
+"jS" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/seed_storage/all,
+/turf/simulated/floor/tiled/white,
+/area/medical/surgery)
 "kA" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/fabricator,
+/turf/simulated/floor/tiled/white,
+/area/medical/surgery)
+"kL" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/mob/living/bot/farmbot,
+/obj/structure/hygiene/sink/kitchen{
+	pixel_y = 28
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "lf" = (
@@ -97,6 +115,8 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
+/obj/machinery/reagentgrinder/juicer,
+/obj/item/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "lM" = (
@@ -118,8 +138,7 @@
 "mQ" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/structure/hygiene/sink{
-	dir = 4;
-	icon_state = "sink"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -132,18 +151,24 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "nu" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
+/turf/simulated/floor/tiled/white,
+/area/medical/surgery)
+"nw" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/microwave{
+	pixel_x = -3;
+	pixel_y = 6
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "ou" = (
@@ -153,8 +178,7 @@
 /area/medical/surgery)
 "oy" = (
 /obj/machinery/atmospherics/portables_connector{
-	dir = 8;
-	icon_state = "map_connector"
+	dir = 8
 	},
 /obj/machinery/portable_atmospherics/canister/empty,
 /obj/effect/floor_decal/corner/blue/diagonal,
@@ -186,6 +210,11 @@
 	},
 /turf/space,
 /area/space)
+"qA" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/cooker/grill,
+/turf/simulated/floor/tiled/white,
+/area/medical/surgery)
 "qQ" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/r_n_d/destructive_analyzer,
@@ -219,6 +248,12 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/vending/hydronutrients/generic,
+/turf/simulated/floor/tiled/white,
+/area/medical/surgery)
+"vD" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/cooker/cereal,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "vL" = (
@@ -226,12 +261,40 @@
 /obj/machinery/recharge_station,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
+"wF" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/structure/table/marble,
+/obj/item/material/kitchen/rollingpin,
+/obj/item/material/chopping_board,
+/obj/item/reagent_containers/food/condiment/small/saltshaker{
+	pixel_x = -3;
+	pixel_y = 0
+	},
+/obj/item/reagent_containers/food/condiment/small/peppermill{
+	pixel_x = 3
+	},
+/turf/simulated/floor/tiled/white,
+/area/medical/surgery)
+"xe" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/cooker/oven,
+/turf/simulated/floor/tiled/white,
+/area/medical/surgery)
+"xu" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/portable_atmospherics/hydroponics,
+/turf/simulated/floor/tiled/white,
+/area/medical/surgery)
 "xA" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 6;
-	icon_state = "intact"
+	dir = 6
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
+/turf/simulated/floor/tiled/white,
+/area/medical/surgery)
+"yq" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/item/reagent_containers/syringe,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "zN" = (
@@ -247,8 +310,7 @@
 "CE" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -303,14 +365,18 @@
 "LV" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/sleeper{
-	dir = 8;
-	icon_state = "sleeper_0"
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "Mn" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/organ_printer/robot/mapped,
+/turf/simulated/floor/tiled/white,
+/area/medical/surgery)
+"Nd" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/vending/dinnerware,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "NH" = (
@@ -321,8 +387,7 @@
 /area/medical/surgery)
 "NP" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1;
-	icon_state = "map_scrubber_on"
+	dir = 1
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled/white,
@@ -330,6 +395,12 @@
 "OD" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/organ_printer/flesh/mapped,
+/turf/simulated/floor/tiled/white,
+/area/medical/surgery)
+"OQ" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/structure/reagent_dispensers/watertank,
+/obj/item/reagent_containers/glass/bucket,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "QF" = (
@@ -340,8 +411,7 @@
 /area/medical/surgery)
 "QN" = (
 /obj/machinery/atmospherics/portables_connector{
-	dir = 8;
-	icon_state = "map_connector"
+	dir = 8
 	},
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/effect/floor_decal/corner/blue/diagonal,
@@ -412,8 +482,7 @@
 "Tm" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/bodyscanner{
-	dir = 4;
-	icon_state = "body_scanner_0"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -436,6 +505,7 @@
 	pixel_x = 25
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/portable_atmospherics/hydroponics,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "XT" = (
@@ -456,8 +526,7 @@
 "Yt" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -1368,12 +1437,12 @@ oP
 oP
 oP
 DL
+OQ
 HE
+vD
+Nd
 HE
-HE
-HE
-HE
-HE
+wF
 HE
 HE
 HE
@@ -1404,10 +1473,10 @@ oP
 DL
 uV
 HE
+xe
+qA
 HE
-HE
-HE
-HE
+jM
 HE
 HE
 HE
@@ -1436,10 +1505,10 @@ oP
 oP
 oP
 DL
-HE
-HE
-HE
-HE
+jS
+yq
+nw
+jo
 pD
 gk
 HE
@@ -1470,7 +1539,7 @@ oP
 oP
 oP
 DL
-HE
+kL
 HE
 HE
 HE
@@ -1504,8 +1573,8 @@ oP
 oP
 oP
 DL
-HE
-HE
+xu
+xu
 XF
 lf
 HE

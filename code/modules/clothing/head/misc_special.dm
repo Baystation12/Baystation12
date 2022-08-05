@@ -127,7 +127,7 @@
 		return
 
 	var/turf/location = src.loc
-	if(istype(location, /mob/))
+	if(ismob(location))
 		var/mob/living/carbon/human/M = location
 		if(M.l_hand == src || M.r_hand == src || M.head == src)
 			location = M.loc
@@ -139,13 +139,13 @@
 	src.onfire = !( src.onfire )
 	if (src.onfire)
 		src.force = 3
-		src.damtype = "fire"
+		src.damtype = DAMAGE_BURN
 		src.icon_state = "cake1"
 		src.item_state = "cake1"
 		START_PROCESSING(SSobj, src)
 	else
 		src.force = null
-		src.damtype = "brute"
+		src.damtype = DAMAGE_BRUTE
 		src.icon_state = "cake0"
 		src.item_state = "cake0"
 	return
@@ -202,13 +202,13 @@
 	siemens_coefficient = 1.5
 	item_icons = list()
 
-	update_icon(var/mob/living/carbon/human/user)
-		if(!istype(user)) return
-		var/icon/ears = new/icon("icon" = 'icons/mob/onmob/onmob_head.dmi', "icon_state" = "kitty")
-		ears.Blend(rgb(user.r_hair, user.g_hair, user.b_hair), ICON_ADD)
+/obj/item/clothing/head/kitty/on_update_icon(var/mob/living/carbon/human/user)
+	if(!istype(user)) return
+	var/icon/ears = new/icon("icon" = 'icons/mob/onmob/onmob_head.dmi', "icon_state" = "kitty")
+	ears.Blend(user.head_hair_color, ICON_ADD)
 
-		var/icon/earbit = new/icon("icon" = 'icons/mob/onmob/onmob_head.dmi', "icon_state" = "kittyinner")
-		ears.Blend(earbit, ICON_OVERLAY)
+	var/icon/earbit = new/icon("icon" = 'icons/mob/onmob/onmob_head.dmi', "icon_state" = "kittyinner")
+	ears.Blend(earbit, ICON_OVERLAY)
 
 /obj/item/clothing/head/richard
 	name = "chicken mask"

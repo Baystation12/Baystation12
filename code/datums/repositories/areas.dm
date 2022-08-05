@@ -1,4 +1,4 @@
-/var/repository/area/area_repository = new()
+var/global/repository/area/area_repository = new()
 
 /repository/area
 	var/list/by_name_coords_cache_data

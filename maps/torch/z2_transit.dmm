@@ -26,7 +26,6 @@
 /obj/effect/step_trigger/thrower{
 	direction = 1;
 	name = "thrower_throwup";
-	nostop = 0;
 	tiles = 0
 	},
 /turf/space,
@@ -70,7 +69,6 @@
 /obj/effect/step_trigger/thrower{
 	direction = 1;
 	name = "thrower_throwup";
-	nostop = 0;
 	tiles = 0
 	},
 /turf/space/bluespace,
@@ -82,7 +80,6 @@
 "pB" = (
 /obj/effect/step_trigger/thrower{
 	affect_ghosts = 1;
-	direction = 2;
 	name = "thrower_throwdownside";
 	nostop = 1;
 	stopper = 0;
@@ -97,7 +94,6 @@
 "qg" = (
 /obj/effect/step_trigger/thrower{
 	affect_ghosts = 1;
-	direction = 2;
 	name = "thrower_throwdownside";
 	nostop = 1;
 	stopper = 0;
@@ -113,7 +109,6 @@
 /obj/effect/step_trigger/thrower{
 	direction = 1;
 	name = "thrower_throwup";
-	nostop = 0;
 	tiles = 0
 	},
 /turf/space/transit/north,
@@ -125,7 +120,6 @@
 "vV" = (
 /obj/effect/step_trigger/thrower{
 	affect_ghosts = 1;
-	direction = 2;
 	name = "thrower_throwdownside";
 	nostop = 1;
 	stopper = 0;
@@ -286,7 +280,6 @@
 "Lp" = (
 /obj/effect/step_trigger/thrower{
 	affect_ghosts = 1;
-	direction = 2;
 	name = "thrower_throwdown";
 	tiles = 0
 	},
@@ -340,13 +333,11 @@
 /obj/effect/step_trigger/thrower{
 	direction = 1;
 	name = "thrower_throwup";
-	nostop = 0;
 	tiles = 0
 	},
 /obj/effect/step_trigger/thrower{
 	direction = 1;
 	name = "thrower_throwup";
-	nostop = 0;
 	tiles = 0
 	},
 /turf/space,

@@ -1,5 +1,5 @@
 #define CLEAR_OBJECT(TARGET) \
-	processing -= TARGET; \
+	movables -= TARGET; \
 	TARGET.airflow_dest = null; \
 	TARGET.airflow_speed = 0; \
 	TARGET.airflow_time = 0; \
@@ -15,37 +15,43 @@ SUBSYSTEM_DEF(airflow)
 	flags = SS_NO_INIT
 	priority = SS_PRIORITY_AIRFLOW
 
-	var/static/tmp/list/processing = list()
-	var/static/tmp/list/current = list()
+	var/static/list/atom/movable/movables = list()
+	var/static/list/atom/movable/queue = list()
 
 
 /datum/controller/subsystem/airflow/Recover()
-	current.Cut()
+	queue.Cut()
+
+
+/datum/controller/subsystem/airflow/UpdateStat(time)
+	return
 
 
 /datum/controller/subsystem/airflow/fire(resumed, no_mc_tick)
 	if (!resumed)
-		current = processing.Copy()
-	var/atom/movable/target
-	for (var/i = current.len to 1 step -1)
-		target = current[i]
+		queue = movables.Copy()
+		if (!queue.len)
+			return
+	var/cut_until = 1
+	for (var/atom/movable/target as anything in queue)
+		++cut_until
 		if (QDELETED(target))
 			if (target)
 				CLEAR_OBJECT(target)
 			if (MC_TICK_CHECK)
-				current.Cut(i)
+				queue.Cut(1, cut_until)
 				return
 			continue
 		if (target.airflow_speed <= 0)
 			CLEAR_OBJECT(target)
 			if (MC_TICK_CHECK)
-				current.Cut(i)
+				queue.Cut(1, cut_until)
 				return
 			continue
 		if (target.airflow_process_delay > 0)
 			target.airflow_process_delay -= 1
 			if (MC_TICK_CHECK)
-				current.Cut(i)
+				queue.Cut(1, cut_until)
 				return
 			continue
 		else if (target.airflow_process_delay)
@@ -59,7 +65,7 @@ SUBSYSTEM_DEF(airflow)
 						target.set_density(FALSE)
 					target.airflow_skip_speedcheck = TRUE
 					if (MC_TICK_CHECK)
-						current.Cut(i)
+						queue.Cut(1, cut_until)
 						return
 					continue
 			else
@@ -68,7 +74,7 @@ SUBSYSTEM_DEF(airflow)
 				target.airflow_process_delay = max(1, 10 - (target.airflow_speed + 3))
 				target.airflow_skip_speedcheck = TRUE
 				if (MC_TICK_CHECK)
-					current.Cut(i)
+					queue.Cut(1, cut_until)
 					return
 				continue
 		target.airflow_skip_speedcheck = FALSE
@@ -79,13 +85,13 @@ SUBSYSTEM_DEF(airflow)
 		if ((target.x == 1) || (target.x == world.maxx) || (target.y == 1) || (target.y == world.maxy))
 			CLEAR_OBJECT(target)
 			if (MC_TICK_CHECK)
-				current.Cut(i)
+				queue.Cut(1, cut_until)
 				return
 			continue
 		if (!isturf(target.loc))
 			CLEAR_OBJECT(target)
 			if (MC_TICK_CHECK)
-				current.Cut(i)
+				queue.Cut(1, cut_until)
 				return
 			continue
 		step_towards(target, target.airflow_dest)
@@ -93,8 +99,9 @@ SUBSYSTEM_DEF(airflow)
 			var/mob/M = target
 			M.SetMoveCooldown(vsc.airflow_mob_slowdown)
 		if (MC_TICK_CHECK)
-			current.Cut(i)
+			queue.Cut(1, cut_until)
 			return
+	queue.Cut()
 
 #undef CLEAR_OBJECT
 
@@ -137,7 +144,7 @@ SUBSYSTEM_DEF(airflow)
 	airflow_xo = airflow_dest.x - x
 	airflow_yo = airflow_dest.y - y
 	airflow_dest = null
-	SSairflow.processing += src
+	SSairflow.movables += src
 
 
 /atom/movable/proc/RepelAirflowDest(strength)
@@ -146,4 +153,4 @@ SUBSYSTEM_DEF(airflow)
 	airflow_xo = -(airflow_dest.x - x)
 	airflow_yo = -(airflow_dest.y - y)
 	airflow_dest = null
-	SSairflow.processing += src
+	SSairflow.movables += src

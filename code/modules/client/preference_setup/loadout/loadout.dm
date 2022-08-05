@@ -1,5 +1,5 @@
-var/list/loadout_categories = list()
-var/list/gear_datums = list()
+var/global/list/loadout_categories = list()
+var/global/list/gear_datums = list()
 
 /datum/preferences
 	var/list/gear_list //Custom/fluff item loadouts.
@@ -340,6 +340,9 @@ var/list/gear_datums = list()
 		description = initial(O.desc)
 	if(flags & GEAR_HAS_COLOR_SELECTION)
 		gear_tweaks += gear_tweak_free_color_choice()
+	if(!(flags & GEAR_HAS_NO_CUSTOMIZATION))
+		gear_tweaks += gear_tweak_free_name(display_name)
+		gear_tweaks += gear_tweak_free_desc(description)
 	if(flags & GEAR_HAS_TYPE_SELECTION)
 		gear_tweaks += new/datum/gear_tweak/path/type(path)
 	if(flags & GEAR_HAS_SUBTYPE_SELECTION)

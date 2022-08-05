@@ -1,6 +1,6 @@
 SUBSYSTEM_DEF(supply)
 	name = "Supply"
-	wait = 20 SECONDS
+	wait = 60 SECONDS
 	priority = SS_PRIORITY_SUPPLY
 	//Initializes at default time
 	flags = SS_NO_TICK_CHECK
@@ -29,9 +29,9 @@ SUBSYSTEM_DEF(supply)
 		"total" = "Total" // If you're adding additional point sources, add it here in a new line. Don't forget to put a comma after the old last line.
 	)
 
-/datum/controller/subsystem/supply/Initialize()
-	. = ..()
+/datum/controller/subsystem/supply/Initialize(start_uptime)
 	ordernum = rand(1,9000)
+	points = rand(40, 80)
 
 	//Build master supply list
 	var/decl/hierarchy/supply_pack/root = decls_repository.get_decl(/decl/hierarchy/supply_pack)
@@ -50,11 +50,10 @@ SUBSYSTEM_DEF(supply)
 	add_points_from_source(points_per_process, "time")
 
 
-/datum/controller/subsystem/supply/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Points [points]"
-	..(text, force)
+/datum/controller/subsystem/supply/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Points: [points]")
 
 
 //Supply-related helper procs.
@@ -87,7 +86,7 @@ SUBSYSTEM_DEF(supply)
 		for(var/atom/movable/AM in subarea)
 			if(AM.anchored)
 				continue
-			if(istype(AM, /obj/structure/closet/crate/))
+			if(istype(AM, /obj/structure/closet/crate))
 				var/obj/structure/closet/crate/CR = AM
 				callHook("sell_crate", list(CR, subarea))
 				add_points_from_source(CR.points_per_crate, "crate")

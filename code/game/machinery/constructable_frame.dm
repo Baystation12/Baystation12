@@ -1,6 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
-//Circuit boards are in /code/game/objects/items/weapons/circuitboards/machinery/
+//Circuit boards are in /code/game/objects/items/weapons/circuitboards/machinery
 
 /obj/machinery/constructable_frame //Made into a seperate type to make future revisions easier.
 	name = "machine frame"
@@ -35,6 +35,12 @@
 			icon_state = "box_2"
 		else
 			icon_state = "box_0"
+
+/obj/machinery/constructable_frame/machine_frame/AltClick(mob/user)
+	. = ..()
+	if(!anchored)
+		set_dir(turn(dir, -90))
+		to_chat(user, SPAN_NOTICE("You turn \the [src] around."))
 
 /obj/machinery/constructable_frame/machine_frame/deconstruct
 	anchored = TRUE

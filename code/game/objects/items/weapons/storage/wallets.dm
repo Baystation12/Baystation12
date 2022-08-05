@@ -40,7 +40,8 @@
 		/obj/item/clothing/ring,
 		/obj/item/passport,
 		/obj/item/clothing/accessory/pride_pin,
-		/obj/item/clothing/accessory/pronouns
+		/obj/item/clothing/accessory/pronouns,
+		/obj/item/storage/chewables/rollable
 	)
 
 	slot_flags = SLOT_ID
@@ -145,11 +146,12 @@
 		return
 	color = new_color
 
-/obj/item/storage/wallet/poly/emp_act()
+/obj/item/storage/wallet/poly/emp_act(severity)
 	icon_state = "wallet-emp"
 	update_icon()
+	addtimer(CALLBACK(src, .proc/resolve_emp_timer), 20 SECONDS)
+	..()
 
-	spawn(200)
-		if(src)
-			icon_state = initial(icon_state)
-			update_icon()
+/obj/item/storage/wallet/poly/proc/resolve_emp_timer()
+	icon_state = initial(icon_state)
+	update_icon()

@@ -219,7 +219,7 @@
 		to_chat(user, "<span class='notice'>Now welding \the [src].</span>")
 		playsound(src, 'sound/items/Welder.ogg', 50, 1)
 
-		if(!do_after(user, 20, src))
+		if(!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>You must remain close to finish this task.</span>")
 			return 1
 

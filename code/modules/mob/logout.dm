@@ -5,13 +5,15 @@
 	handle_admin_logout()
 	if(my_client)
 		my_client.screen -= l_general
-		my_client.screen -= l_plane
+
+	RemoveRenderers()
+
 	QDEL_NULL(l_general)
-	QDEL_NULL(l_plane)
 	hide_client_images()
 	..()
 
 	my_client = null
+	logout_time = world.time
 	return 1
 
 /mob/proc/handle_admin_logout()

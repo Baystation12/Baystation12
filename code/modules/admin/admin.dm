@@ -7,19 +7,19 @@ var/global/floorIsLava = 0
 /proc/message_admins(var/msg)
 	msg = "<span class=\"log_message\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
 	log_adminwarn(msg)
-	for(var/client/C in GLOB.admins)
+	for(var/client/C as anything in GLOB.admins)
 		if(R_ADMIN & C.holder.rights)
 			to_chat(C, msg)
 /proc/message_staff(var/msg)
 	msg = "<span class=\"log_message\"><span class=\"prefix\">STAFF LOG:</span> <span class=\"message\">[msg]</span></span>"
 	log_adminwarn(msg)
-	for(var/client/C in GLOB.admins)
+	for(var/client/C as anything in GLOB.admins)
 		if(C && C.holder && (R_INVESTIGATE & C.holder.rights))
 			to_chat(C, msg)
 /proc/msg_admin_attack(var/text) //Toggleable Attack Messages
 	log_attack(text)
 	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
-	for(var/client/C in GLOB.admins)
+	for(var/client/C as anything in GLOB.admins)
 		if(check_rights(R_INVESTIGATE, 0, C))
 			if(C.get_preference_value(/datum/client_preference/staff/show_attack_logs) == GLOB.PREF_SHOW)
 				var/msg = rendered
@@ -65,6 +65,12 @@ var/global/floorIsLava = 0
 			body += "[pilot] "
 			body += " \[<A href='?src=\ref[src];pilot=\ref[pilot]'>link</a>\]<br>"
 
+	var/inactivity_time = M.client ? time_to_readable(M.client.inactivity) : null
+
+	var/logout_time = null
+	if (!isnull(M.logout_time))
+		logout_time = time_to_readable(world.time - M.logout_time)
+
 	body += {"
 		<br><br>\[
 		<a href='?_src_=vars;Vars=\ref[M]'>VV</a> -
@@ -73,7 +79,8 @@ var/global/floorIsLava = 0
 		<a href='?src=\ref[src];narrateto=\ref[M]'>DN</a> -
 		[admin_jump_link(M, src)]\] <br>
 		<b>Mob type:</b> [M.type]<br>
-		<b>Inactivity time:</b> [M.client ? "[M.client.inactivity/600] minutes" : "Logged out"]<br/><br/>
+		<b>Inactivity time:</b> [inactivity_time ? "[inactivity_time]" : "Logged out"]<br/>
+		<b>Logout time:</b> [logout_time ? "[logout_time] ago" : "N/A"]<br/><br/>
 		<A href='?src=\ref[src];paralyze=\ref[M]'>PARALYZE</A> |
 		<A href='?src=\ref[src];boot2=\ref[M]'>Kick</A> |
 		<A href='?_src_=holder;warn=[last_ckey]'>Warn</A> |
@@ -300,12 +307,14 @@ var/global/floorIsLava = 0
 	popup.open()
 
 
-/datum/admins/proc/player_has_info(var/key as text)
-	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
+/datum/admins/proc/player_has_info(key)
+	var/target = ckey(key)
+	var/savefile/info = new("data/player_saves/[copytext_char(target, 1, 2)]/[target]/info.sav")
 	var/list/infos
 	from_save(info, infos)
-	if(!infos || !infos.len) return 0
-	else return 1
+	if (!length(infos))
+		return FALSE
+	return TRUE
 
 
 /// Page matter from #30904, to be replaced by that behavior later
@@ -860,6 +869,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 			to_chat(usr, FONT_LARGE(SPAN_WARNING("The game will begin as normal.")))
 			log_and_message_admins("will begin the game as normal.")
 		return 0
+	SSticker.start_ASAP = TRUE
 	if(SSticker.start_now())
 		log_and_message_admins("has started the game.")
 		return 1
@@ -1154,7 +1164,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 			if (!ispath(secondary_trigger))
 				return
 
-		var/damage_types = list("Sharp" = DAM_SHARP, "Bullet" = DAM_BULLET, "Edge" = DAM_EDGE, "Laser" = DAM_LASER)
+		var/damage_types = list("Sharp" = DAMAGE_FLAG_SHARP, "Bullet" = DAMAGE_FLAG_BULLET, "Edge" = DAMAGE_FLAG_EDGE, "Laser" = DAMAGE_FLAG_LASER)
 		choice = input(usr, "Choose a damage effect", "Choose Damage Effect") as null | anything in damage_types | "Invincible"
 
 		if (!choice)
@@ -1176,7 +1186,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		else
 			QDEL_NULL(A.secondary_effect)
 
-		log_and_message_admins("spawned an artifact with effects [english_list(A.my_effect, A.secondary_effect)].")
+		log_and_message_admins("spawned an artifact with effects [A.my_effect][A.secondary_effect ? ", [A.secondary_effect]" : ""].")
 
 /datum/admins/proc/show_traitor_panel(var/mob/M in SSmobs.mob_list)
 	set category = "Admin"
@@ -1483,26 +1493,38 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	set category = "Special Verbs"
 	set name = "Send Fax"
 	set desc = "Sends a fax to this machine"
-	var/department = input("Choose a fax", "Fax") as null|anything in GLOB.alldepartments
-	for(var/obj/machinery/photocopier/faxmachine/sendto in GLOB.allfaxes)
-		if(sendto.department == department)
 
-			if (!istype(src,/datum/admins))
-				src = usr.client.holder
-			if (!istype(src,/datum/admins))
-				to_chat(usr, "Error: you are not an admin!")
-				return
+	// Admin status checks
+	if (!istype(src,/datum/admins))
+		src = usr.client.holder
+	if (!istype(src,/datum/admins))
+		to_chat(usr, "Error: you are not an admin!")
+		return
 
-			var/replyorigin = input(src.owner, "Please specify who the fax is coming from", "Origin") as text|null
+	// Origin
+	var/list/option_list = GLOB.admin_departments.Copy() + GLOB.alldepartments.Copy() + "(Custom)" + "(Cancel)"
+	var/replyorigin = input(owner, "Please specify who the fax is coming from. Choose '(Custom)' to enter a custom department or '(Cancel) to cancel.", "Fax Origin") as null|anything in option_list
+	if (!replyorigin || replyorigin == "(Cancel)")
+		return
+	if (replyorigin == "(Custom)")
+		replyorigin = input(owner, "Please specify who the fax is coming from.", "Fax Machine Department Tag") as text|null
+		if (!replyorigin)
+			return
+	if (replyorigin == "Unknown" || replyorigin == "(Custom)" || replyorigin == "(Cancel)")
+		to_chat(owner, SPAN_WARNING("Invalid origin selected."))
+		return
 
-			var/obj/item/paper/admin/P = new /obj/item/paper/admin( null ) //hopefully the null loc won't cause trouble for us
-			faxreply = P
+	// Destination
+	var/department = input("Choose a destination fax", "Fax Target") as null|anything in GLOB.alldepartments
 
-			P.admindatum = src
-			P.origin = replyorigin
-			P.destination = sendto
-
-			P.adminbrowse()
+	// Generate the fax
+	var/obj/item/paper/admin/P = new /obj/item/paper/admin( null ) //hopefully the null loc won't cause trouble for us
+	faxreply = P
+	P.admindatum = src
+	P.origin = replyorigin
+	P.department = department
+	P.destinations = get_fax_machines_by_department(department)
+	P.adminbrowse()
 
 
 /client/proc/check_fax_history()
@@ -1519,13 +1541,12 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		data += "<center>No faxes yet.</center>"
 	show_browser(usr, "<HTML><HEAD><TITLE>Fax History</TITLE></HEAD><BODY>[data]</BODY></HTML>", "window=FaxHistory;size=450x400")
 
-datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
+/datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
 
-/datum/admins/proc/faxCallback(var/obj/item/paper/admin/P, var/obj/machinery/photocopier/faxmachine/destination)
+/datum/admins/proc/faxCallback(obj/item/paper/admin/P)
 	var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
 
-	P.SetName("[P.origin] - [customname]")
-	P.desc = "This is a paper titled '" + P.name + "'."
+	P.SetName("[customname]")
 
 	var/shouldStamp = 1
 	if(!P.sender) // admin initiated
@@ -1557,25 +1578,24 @@ datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
 		P.overlays += stampoverlay
 
 	var/obj/item/rcvdcopy
-	rcvdcopy = destination.copy(P)
+	var/obj/machinery/photocopier/faxmachine/destination = P.destinations[1]
+	rcvdcopy = destination.copy(P, FALSE)
 	rcvdcopy.forceMove(null) //hopefully this shouldn't cause trouble
 	GLOB.adminfaxes += rcvdcopy
+	var/success = send_fax_loop(P, P.department, P.origin)
 
-
-
-	if(destination.recievefax(P))
+	if (success)
 		to_chat(src.owner, "<span class='notice'>Message reply to transmitted successfully.</span>")
 		if(P.sender) // sent as a reply
 			log_admin("[key_name(src.owner)] replied to a fax message from [key_name(P.sender)]")
-			for(var/client/C in GLOB.admins)
+			for(var/client/C as anything in GLOB.admins)
 				if((R_INVESTIGATE) & C.holder.rights)
 					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(P.sender)] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>")
 		else
-			log_admin("[key_name(src.owner)] has sent a fax message to [destination.department]")
-			for(var/client/C in GLOB.admins)
+			log_admin("[key_name(src.owner)] has sent a fax message to [P.department]")
+			for(var/client/C as anything in GLOB.admins)
 				if((R_INVESTIGATE) & C.holder.rights)
-					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] has sent a fax message to [destination.department] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>")
-
+					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] has sent a fax message to [P.department] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>")
 	else
 		to_chat(src.owner, "<span class='warning'>Message reply failed.</span>")
 

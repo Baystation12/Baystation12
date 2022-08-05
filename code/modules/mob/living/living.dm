@@ -194,6 +194,19 @@ default behaviour is:
 
 	return can_move_mob(tmob, 1, 0)
 
+/mob/living/Stat()
+	. = ..()
+	if(statpanel("Status"))
+		stat("Intent:", "[a_intent]")
+		stat("Move Mode:", "[move_intent.name]")
+		var/obj/item/device/gps/G = locate() in src
+		if(istype(G))
+			stat("Coordinates:", "[G.fetch_coordinates()]")
+
+		if(evacuation_controller)
+			var/eta_status = evacuation_controller.get_status_panel_eta()
+			if(eta_status)
+				stat(null, eta_status)
 
 /mob/living/proc/updatehealth()
 	if(status_flags & GODMODE)
@@ -559,8 +572,11 @@ default behaviour is:
 	else
 		var/mob/living/M = pulling
 		if(M.grabbed_by.len)
+			var/obj/item/grab/G = pick(M.grabbed_by)
+			if (G.current_grab.shield_assailant)
+				visible_message(SPAN_WARNING("\The [G.assailant] stops \the [src] from pulling \the [G.affecting] from their grip!"), SPAN_WARNING("\The [G.assailant] is holding \the [G.affecting] too tight for you to pull them away!"))
+				return
 			if (prob(75))
-				var/obj/item/grab/G = pick(M.grabbed_by)
 				if(istype(G))
 					M.visible_message(SPAN_WARNING("[G.affecting] has been pulled from [G.assailant]'s grip by [src]!"), SPAN_WARNING("[G.affecting] has been pulled from your grip by [src]!"))
 					qdel(G)
@@ -820,11 +836,11 @@ default behaviour is:
 	if(incapacitated(INCAPACITATION_UNRESISTING))
 		. += 100
 	if(confused)
-		. += 15
+		. += 10
 	if(weakened)
 		. += 15
 	if(eye_blurry)
-		. += 15
+		. += 5
 	if(eye_blind)
 		. += 60
 	if(MUTATION_CLUMSY in mutations)

@@ -1,4 +1,4 @@
-var/list/sounds_cache = list()
+var/global/list/sounds_cache = list()
 
 /client/proc/play_sound(S as sound)
 	set category = "Fun"

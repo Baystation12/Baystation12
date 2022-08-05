@@ -1,4 +1,4 @@
-var/list/holder_mob_icon_cache = list()
+var/global/list/holder_mob_icon_cache = list()
 
 //Helper object for picking dionaea (and other creatures) up.
 /obj/item/holder
@@ -8,8 +8,7 @@ var/list/holder_mob_icon_cache = list()
 	slot_flags = SLOT_HEAD | SLOT_HOLSTER
 
 	sprite_sheets = list(
-		SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi',
-		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_head_vox_armalis.dmi'
+		SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi'
 		)
 
 	origin_tech = null
@@ -116,6 +115,9 @@ var/list/holder_mob_icon_cache = list()
 
 /obj/item/holder/mouse
 	w_class = ITEM_SIZE_TINY
+
+/obj/item/holder/small
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/holder/borer
 	origin_tech = list(TECH_BIO = 6)

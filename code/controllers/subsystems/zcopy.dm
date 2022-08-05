@@ -1,5 +1,3 @@
-#define OPENTURF_MAX_PLANE -70
-#define OPENTURF_MAX_DEPTH 10		// The maxiumum number of planes deep we'll go before we just dump everything on the same plane.
 #define SHADOWER_DARKENING_FACTOR 0.6	// The multiplication factor for openturf shadower darkness. Lighting will be multiplied by this.
 #define SHADOWER_DARKENING_COLOR "#999999"	// The above, but as an RGB string for lighting-less turfs.
 
@@ -81,25 +79,23 @@ SUBSYSTEM_DEF(zcopy)
 
 	enable()
 
-/datum/controller/subsystem/zcopy/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = {"\
-			[text]\n\
-			Mx: [json_encode(zlev_maximums)]\n\
-			Queues: \
-			Turfs [queued_turfs.len - (qt_idex - 1)] \
-			Overlays [queued_overlays.len - (qo_idex - 1)]\n\
-			Open Turfs: \
-			Turfs [openspace_turfs] \
-			Overlays [openspace_overlays]\n\
-			Skips: \
-			Turfs [multiqueue_skips_turf] \
-			Objects [multiqueue_skips_object]\
-		"}
-	..(text, force)
+/datum/controller/subsystem/zcopy/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..({"\
+		Mx: [json_encode(zlev_maximums)]\n\
+		Queues: \
+		Turfs [queued_turfs.len - (qt_idex - 1)] \
+		Overlays [queued_overlays.len - (qo_idex - 1)]\n\
+		Open Turfs: \
+		Turfs [openspace_turfs] \
+		Overlays [openspace_overlays]\n\
+		Skips: \
+		Turfs [multiqueue_skips_turf] \
+		Objects [multiqueue_skips_object]\
+	"})
 
-/datum/controller/subsystem/zcopy/Initialize(timeofday)
+/datum/controller/subsystem/zcopy/Initialize(start_uptime)
 	calculate_zstack_limits()
 	// Flush the queue.
 	fire(FALSE, TRUE)

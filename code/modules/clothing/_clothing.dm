@@ -20,7 +20,6 @@
 
 /obj/item/clothing/Initialize()
 	. = ..()
-	INIT_SKIP_QDELETED
 	var/list/init_accessories = accessories
 	accessories = list()
 	for (var/path in init_accessories)
@@ -244,7 +243,6 @@ BLIND     // can't see anything
 	var/light_protection = 0
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_eyes_vox.dmi',
-		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_eyes_vox_armalis.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_eyes_unathi.dmi',
 	)
 
@@ -276,10 +274,9 @@ BLIND     // can't see anything
 	slot_flags = SLOT_GLOVES
 	item_flags = ITEM_FLAG_WASHER_ALLOWED
 	attack_verb = list("challenged")
-	species_restricted = list("exclude",SPECIES_NABBER, SPECIES_UNATHI, SPECIES_VOX, SPECIES_VOX_ARMALIS)
+	species_restricted = list("exclude",SPECIES_NABBER, SPECIES_UNATHI, SPECIES_VOX)
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_hands_vox.dmi',
-		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_hands_vox_armalis.dmi',
 		SPECIES_NABBER = 'icons/mob/species/nabber/onmob_hands_gas.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_hands_unathi.dmi'
 	)
@@ -382,7 +379,6 @@ BLIND     // can't see anything
 		)
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi',
-		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_head_vox_armalis.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_head_unathi.dmi',
 		SPECIES_NABBER = 'icons/mob/species/nabber/onmob_head_gas.dmi'
 	)
@@ -456,7 +452,7 @@ BLIND     // can't see anything
 	if(!Adjacent(user))
 		return 0
 	var/success
-	if(is_drone(user))
+	if(isdrone(user))
 		var/mob/living/silicon/robot/drone/D = user
 		if(D.hat)
 			success = 2
@@ -507,7 +503,6 @@ BLIND     // can't see anything
 	body_parts_covered = FACE|EYES
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_mask_vox.dmi',
-		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_mask_vox_armalis.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_mask_unathi.dmi',
 		)
 
@@ -588,10 +583,9 @@ BLIND     // can't see anything
 	item_flags = ITEM_FLAG_WASHER_ALLOWED
 	permeability_coefficient = 0.50
 	force = 2
-	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_UNATHI, SPECIES_VOX, SPECIES_VOX_ARMALIS)
+	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_UNATHI, SPECIES_VOX)
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_feet_vox.dmi',
-		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_feet_vox_armalis.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_feet_unathi.dmi',
 		)
 	blood_overlay_type = "shoeblood"
@@ -628,13 +622,15 @@ BLIND     // can't see anything
 	remove_cuffs(user)
 	..()
 
-/obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
-	if (istype(I, /obj/item/handcuffs))
-		add_cuffs(I, user)
-		return
+
+/obj/item/clothing/shoes/attackby(obj/item/item, mob/living/user)
+	if (istype(item, /obj/item/handcuffs))
+		add_cuffs(item, user)
+	else if (istype(item, /obj/item/clothing/shoes/magboots))
+		user.equip_to_slot_if_possible(item, slot_shoes)
 	else
-		add_hidden(I, user)
-		return
+		add_hidden(item, user)
+
 
 /obj/item/clothing/shoes/proc/add_cuffs(var/obj/item/handcuffs/cuffs, var/mob/user)
 	if (!can_add_cuffs)
@@ -643,12 +639,12 @@ BLIND     // can't see anything
 	if (attached_cuffs)
 		to_chat(user, SPAN_WARNING("\The [src] already has [attached_cuffs] attached."))
 		return
-	if (do_after(user, 5 SECONDS))
+	if (do_after(user, 5 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if(!user.unEquip(cuffs, src))
 			return
 		user.visible_message(SPAN_ITALIC("\The [user] attaches \the [cuffs] to \the [src]."), range = 2)
 		verbs |= /obj/item/clothing/shoes/proc/remove_cuffs
-		slowdown_per_slot[slot_shoes] += cuffs.elastic ? 10 : 15
+		slowdown_per_slot[slot_shoes] += cuffs.elastic ? 5 : 10
 		attached_cuffs = cuffs
 
 /obj/item/clothing/shoes/proc/remove_cuffs(var/mob/user)
@@ -664,13 +660,13 @@ BLIND     // can't see anything
 		return
 	if (user.incapacitated())
 		return
-	if (do_after(user, 5 SECONDS))
+	if (do_after(user, 5 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if (!user.put_in_hands(attached_cuffs))
 			to_chat(usr, SPAN_WARNING("You need an empty, unbroken hand to remove the [attached_cuffs] from the [src]."))
 			return
 		user.visible_message(SPAN_ITALIC("\The [user] removes \the [attached_cuffs] from \the [src]."), range = 2)
 		attached_cuffs.add_fingerprint(user)
-		slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 10 : 15
+		slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 5 : 10
 		verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
 		attached_cuffs = null
 
@@ -687,7 +683,7 @@ BLIND     // can't see anything
 	if (I.w_class > hidden_item_max_w_class)
 		to_chat(user, SPAN_WARNING("\The [I] is too large to fit in the [src]."))
 		return
-	if (do_after(user, 1 SECONDS))
+	if (do_after(user, 1 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if(!user.unEquip(I, src))
 			return
 		user.visible_message(SPAN_ITALIC("\The [user] shoves \the [I] into \the [src]."), range = 1)
@@ -709,7 +705,7 @@ BLIND     // can't see anything
 		return FALSE
 	if (loc != user)
 		return FALSE
-	if (do_after(user, 2 SECONDS))
+	if (do_after(user, 2 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if (!user.put_in_hands(hidden_item))
 			to_chat(usr, SPAN_WARNING("You need an empty, unbroken hand to pull the [hidden_item] from the [src]."))
 			return TRUE
@@ -723,7 +719,7 @@ BLIND     // can't see anything
 	if (running && attached_cuffs?.damage_health(1))
 		visible_message(SPAN_WARNING("\The [attached_cuffs] attached to \the [src] snap and fall away!"), range = 1)
 		verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
-		slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 10 : 15
+		slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 5 : 10
 		QDEL_NULL(attached_cuffs)
 	return
 
@@ -754,7 +750,6 @@ BLIND     // can't see anything
 
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_suit_vox.dmi',
-		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_suit_vox_armalis.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_suit_unathi.dmi',
 		SPECIES_NABBER = 'icons/mob/species/nabber/onmob_suit_gas.dmi'
 	)
@@ -810,7 +805,6 @@ BLIND     // can't see anything
 	var/rolled_sleeves = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_under_vox.dmi',
-		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_under_vox_armalis.dmi',
 		SPECIES_NABBER = 'icons/mob/species/nabber/onmob_under_gas.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_unathi.dmi'
 	)
@@ -987,12 +981,10 @@ BLIND     // can't see anything
 	..()
 	var/new_mode
 	switch(severity)
-		if(1)
+		if (EMP_ACT_HEAVY)
 			new_mode = pick(75;SUIT_SENSOR_OFF, 15;SUIT_SENSOR_BINARY, 10;SUIT_SENSOR_VITAL)
-		if(2)
+		if (EMP_ACT_LIGHT)
 			new_mode = pick(50;SUIT_SENSOR_OFF, 25;SUIT_SENSOR_BINARY, 20;SUIT_SENSOR_VITAL, 5;SUIT_SENSOR_TRACKING)
-		else
-			new_mode = pick(25;SUIT_SENSOR_OFF, 35;SUIT_SENSOR_BINARY, 30;SUIT_SENSOR_VITAL, 10;SUIT_SENSOR_TRACKING)
 
 	sensor_mode = new_mode
 

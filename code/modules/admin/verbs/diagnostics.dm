@@ -10,7 +10,7 @@
 	var/inactive_groups = SSair.zones.len - active_groups
 
 	var/hotspots = 0
-	for(var/obj/fire/hotspot in world)
+	for(var/obj/hotspot/hotspot in world)
 		hotspots++
 
 	var/active_on_main_station = 0

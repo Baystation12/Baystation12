@@ -1,4 +1,4 @@
-var/repository/uplink_purchases/uplink_purchase_repository = new()
+var/global/repository/uplink_purchases/uplink_purchase_repository = new()
 
 /repository/uplink_purchases
 	var/list/purchases_by_mind

@@ -256,6 +256,14 @@
 		W.dropInto(loc)
 	return FALSE
 
+/// Check if the thing being dropped is in a gripper and clear the gripper's reference to it if so
+/mob/living/silicon/robot/remove_from_mob(obj/thing, atom/target)
+	. = ..()
+	if (.)
+		for (var/obj/item/gripper/gripper in module?.equipment)
+			if (gripper.wrapped == thing)
+				gripper.wrapped = null
+
 //Robots don't use inventory slots, so we need to override this.
 /mob/living/silicon/robot/canUnEquip(obj/item/I)
 	if(!I)

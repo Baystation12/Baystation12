@@ -75,14 +75,14 @@
 
 /obj/structure/bed/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
 			return
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
 				return
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			if (prob(5))
 				qdel(src)
 				return
@@ -129,7 +129,7 @@
 		var/obj/item/grab/G = W
 		var/mob/living/affecting = G.affecting
 		user.visible_message("<span class='notice'>[user] attempts to buckle [affecting] into \the [src]!</span>")
-		if(do_after(user, 20, src))
+		if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if(user_buckle_mob(affecting, user))
 				qdel(W)
 	else

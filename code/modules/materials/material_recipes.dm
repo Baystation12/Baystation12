@@ -54,7 +54,9 @@
 		. += new/datum/stack_recipe/knife(src)
 		. += new/datum/stack_recipe/bell(src)
 		. += new/datum/stack_recipe/blade(src)
+		. += new/datum/stack_recipe/large_blade(src)
 		. += new/datum/stack_recipe/drill_head(src)
+		. += new/datum/stack_recipe/weapon_frame(src)
 
 /material/steel/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -127,17 +129,16 @@
 	. += new/datum/stack_recipe/sandal(src)
 	. += new/datum/stack_recipe/tile/wood(src)
 	. += create_recipe_list(/datum/stack_recipe/furniture/chair/wood)
-	. += new/datum/stack_recipe/crossbowframe(src)
 	. += new/datum/stack_recipe/furniture/coffin/wooden(src)
 	. += new/datum/stack_recipe/beehive_assembly(src)
 	. += new/datum/stack_recipe/beehive_frame(src)
 	. += new/datum/stack_recipe/furniture/bookcase(src)
-	. += new/datum/stack_recipe/zipgunframe(src)
-	. += new/datum/stack_recipe/coilgun(src)
+	. += new/datum/stack_recipe/weapon_frame(src)
 	. += new/datum/stack_recipe/stick(src)
 	. += new/datum/stack_recipe/noticeboard(src)
 	. += new/datum/stack_recipe/furniture/table_frame(src)
 	. += new/datum/stack_recipe/shield(src)
+	. += new/datum/stack_recipe/furniture/truss(src)
 
 /material/wood/mahogany/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -177,3 +178,15 @@
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/grenade(src)
+
+/material/leather/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)	//recipes below don't support composite materials
+		return
+	. += new/datum/stack_recipe/toolbelt(src)
+	. += new/datum/stack_recipe/pockets(src)
+	. += new/datum/stack_recipe/large_webbing(src)
+	. += new/datum/stack_recipe/bandolier(src)
+	. += new/datum/stack_recipe/holster(src)
+	. += new/datum/stack_recipe/holster_machete(src)
+	. += new/datum/stack_recipe/holster_knife(src)

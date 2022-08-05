@@ -43,4 +43,4 @@
 		<br>A sign on it reads: <i>KEEP AWAY FROM LIVING MATERIAL!</i>"
 	icon_state = "back"
 	density = FALSE
-	layer = BELOW_DOOR_LAYER //So the charges go above us.
+	layer = ABOVE_HUMAN_LAYER //So the charges go inside us.

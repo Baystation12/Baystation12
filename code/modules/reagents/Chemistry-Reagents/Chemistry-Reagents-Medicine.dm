@@ -376,7 +376,7 @@
 	M.AdjustParalysis(-1)
 	M.AdjustStunned(-1)
 	M.AdjustWeakened(-1)
-	holder.remove_reagent(/datum/reagent/mindbreaker, 5)
+	holder.remove_reagent(/datum/reagent/drugs/mindbreaker, 5)
 	M.adjust_hallucination(-10)
 	M.add_chemical_effect(CE_MIND, 2)
 	M.adjustToxLoss(5 * removed) // It used to be incredibly deadly due to an oversight. Not anymore!
@@ -790,7 +790,7 @@
 	taste_description = "fine tobacco"
 	value = 5
 	scent = "fine tobacco smoke"
-	scent_descriptor = SCENT_DESC_FRAGRANCE
+	scent_descriptor = SCENT_DESC_PLUME
 
 /datum/reagent/tobacco/bad
 	name = "Terrible Tobacco"
@@ -798,7 +798,7 @@
 	value = 0
 	scent = "acrid tobacco smoke"
 	scent_intensity = /decl/scent_intensity/strong
-	scent_descriptor = SCENT_DESC_ODOR
+	scent_descriptor = SCENT_DESC_HAZE
 
 /datum/reagent/tobacco/liquid
 	name = "Nicotine Solution"
@@ -923,8 +923,8 @@
 			heart.take_internal_damage(heart.max_damage * 0.075)
 
 /datum/reagent/lactate
-	name = "Lactate"
-	description = "Lactate is produced by the body during strenuous exercise. It often correlates with elevated heart rate, shortness of breath, and general exhaustion."
+	name = "Lactic acid"
+	description = "Lactic acid is produced by the body during strenuous exercise. It often correlates with elevated heart rate, shortness of breath, and general exhaustion."
 	taste_description = "sourness"
 	reagent_state = LIQUID
 	color = "#eeddcc"
@@ -1021,3 +1021,25 @@
 	..()
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.immunity -= 0.5 //inverse effects when abused
+
+/datum/reagent/coagulant
+	name = "Coagulant"
+	description = "An experimental coagulant capable of staunching both internal and external bleeding."
+	taste_description = "iron"
+	reagent_state = LIQUID
+	color = "#bf0000"
+	metabolism = REM * 0.05
+	scannable = TRUE
+
+/datum/reagent/coagulant/affect_blood(mob/living/carbon/M, alien, removed)
+	if(alien == IS_DIONA)
+		return
+	if(ishuman(M))
+		for(var/obj/item/organ/external/E in M.organs)
+			if(E.status & ORGAN_ARTERY_CUT && prob(10))
+				E.status &= ~ORGAN_ARTERY_CUT
+			for(var/datum/wound/W in E.wounds)
+				if(W.bleeding() && prob(20))
+					W.bleed_timer = 0
+					W.clamped = TRUE
+					E.status &= ~ORGAN_BLEEDING

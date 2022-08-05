@@ -4,26 +4,27 @@
 	lastKnownIP	= client.address
 	computer_id	= client.computer_id
 	last_ckey = ckey
-	log_access("Login: [key_name(src)] from [lastKnownIP ? lastKnownIP : "localhost"]-[computer_id] || BYOND v[client.byond_version]")
 	if(config.log_access)
+		log_access("Login: [key_name(src)] from [lastKnownIP ? lastKnownIP : "localhost"]-[computer_id] || BYOND v[client.byond_version]")
 		var/is_multikeying = 0
-		for(var/mob/M in GLOB.player_list)
-			if(M == src)	continue
-			if( M.key && (M.key != key) )
-				var/matches
-				if( (M.lastKnownIP == client.address) )
-					matches += "IP ([client.address])"
-				if( (client.connection != "web") && (M.computer_id == client.computer_id) )
-					if(matches)	matches += " and "
-					matches += "ID ([client.computer_id])"
-					is_multikeying = 1
-				if(matches)
-					if(M.client)
-						message_admins("[SPAN_DANGER("<B>Notice:</B>")] <span class='info'><A href='?src=\ref[usr];priv_msg=\ref[src]'>[key_name_admin(src)]</A> has the same [matches] as <A href='?src=\ref[usr];priv_msg=\ref[M]'>[key_name_admin(M)]</A>.</span>", 1)
-						log_access("Notice: [key_name(src)] has the same [matches] as [key_name(M)].")
-					else
-						message_admins("[SPAN_DANGER("<B>Notice:</B>")] <span class='info'><A href='?src=\ref[usr];priv_msg=\ref[src]'>[key_name_admin(src)]</A> has the same [matches] as [key_name_admin(M)] (no longer logged in).</span>", 1)
-						log_access("Notice: [key_name(src)] has the same [matches] as [key_name(M)] (no longer logged in).")
+		if (config.warn_if_staff_same_ip || !check_rights(R_MOD, FALSE, client))
+			for(var/mob/M in GLOB.player_list)
+				if(M == src)	continue
+				if( M.key && (M.key != key) )
+					var/matches
+					if( (M.lastKnownIP == client.address) )
+						matches += "IP ([client.address])"
+					if( (client.connection != "web") && (M.computer_id == client.computer_id) )
+						if(matches)	matches += " and "
+						matches += "ID ([client.computer_id])"
+						is_multikeying = 1
+					if(matches)
+						if(M.client)
+							message_admins("[SPAN_DANGER("<B>Notice:</B>")] <span class='info'><A href='?src=\ref[usr];priv_msg=\ref[src]'>[key_name_admin(src)]</A> has the same [matches] as <A href='?src=\ref[usr];priv_msg=\ref[M]'>[key_name_admin(M)]</A>.</span>", 1)
+							log_access("Notice: [key_name(src)] has the same [matches] as [key_name(M)].")
+						else
+							message_admins("[SPAN_DANGER("<B>Notice:</B>")] <span class='info'><A href='?src=\ref[usr];priv_msg=\ref[src]'>[key_name_admin(src)]</A> has the same [matches] as [key_name_admin(M)] (no longer logged in).</span>", 1)
+							log_access("Notice: [key_name(src)] has the same [matches] as [key_name(M)] (no longer logged in).")
 		if(is_multikeying && !client.warned_about_multikeying)
 			client.warned_about_multikeying = 1
 			spawn(1 SECOND)
@@ -44,7 +45,7 @@
 
 /mob/proc/maybe_send_staffwarns(var/action)
 	if(client?.staffwarn)
-		for(var/client/C in GLOB.admins)
+		for(var/client/C as anything in GLOB.admins)
 			send_staffwarn(C, action)
 
 /mob/proc/send_staffwarn(var/client/C, var/action, var/noise = 1)
@@ -55,11 +56,13 @@
 
 /mob
 	var/client/my_client // Need to keep track of this ourselves, since by the time Logout() is called the client has already been nulled
+	/// Integer or null. Stores the `world.time` value at the time of `Logout()`. If `null`, the mob is either considered logged in or has never logged out.
+	var/logout_time = null
 
 /mob/Login()
 
 	// Add to player list if missing
-	if (!list_find(GLOB.player_list, src))
+	if (!GLOB.player_list.Find(src))
 		ADD_SORTED(GLOB.player_list, src, /proc/cmp_mob_key)
 
 	update_Login_details()
@@ -76,6 +79,7 @@
 	..()
 
 	my_client = client
+	logout_time = null
 
 	if(loc && !isturf(loc))
 		client.eye = loc
@@ -87,10 +91,10 @@
 	if(eyeobj)
 		eyeobj.possess(src)
 
-	l_plane = new()
 	l_general = new()
-	client.screen += l_plane
 	client.screen += l_general
+
+	CreateRenderers()
 
 	refresh_client_images()
 	reload_fullscreen() // Reload any fullscreen overlays this mob has.

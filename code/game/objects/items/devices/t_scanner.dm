@@ -18,7 +18,7 @@
 	var/list/active_scanned = list() //assoc list of objects being scanned, mapped to their overlay
 	var/client/user_client //since making sure overlays are properly added and removed is pretty important, so we track the current user explicitly
 
-	var/global/list/overlay_cache = list() //cache recent overlays
+	var/static/list/overlay_cache = list() //cache recent overlays
 
 /obj/item/device/t_scanner/Destroy()
 	. = ..()
@@ -31,6 +31,7 @@
 /obj/item/device/t_scanner/emp_act()
 	audible_message("<span class = 'notice'> \The [src] buzzes oddly.</span>")
 	set_active(FALSE)
+	..()
 
 /obj/item/device/t_scanner/attack_self(mob/user)
 	set_active(!on)
@@ -103,7 +104,7 @@
 			if(ishuman(scanned))
 				var/mob/living/carbon/human/H = scanned
 				if(H.species.appearance_flags & HAS_SKIN_COLOR)
-					I.color = rgb(H.r_skin, H.g_skin, H.b_skin)
+					I.color = H.skin_color
 					I.icon = 'icons/mob/mob.dmi'
 					I.icon_state = "phaseout"
 			var/mob/M = scanned

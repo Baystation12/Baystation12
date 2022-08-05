@@ -14,28 +14,30 @@
 
 	Feedon(M)
 
-/mob/living/carbon/slime/proc/invalidFeedTarget(var/mob/living/M)
-	if (!istype(M))
+
+/mob/living/carbon/slime/proc/invalidFeedTarget(mob/living/living)
+	if (!istype(living))
 		return "This subject is incompatible..."
-	if (istype(M, /mob/living/carbon/slime)) // No cannibalism... yet
-		return "I cannot feed on other slimes..."
-	if (!Adjacent(M))
+	if (living.stat == DEAD)
+		return "This subject is dead..."
+	if (!Adjacent(living))
 		return "This subject is too far away..."
-	if (issilicon(M))
+	if (living.isSynthetic())
 		return "This subject does not have an edible life energy..."
-	if (M.get_blocked_ratio(null, TOX, damage_flags = DAM_DISPERSED | DAM_BIO) >= 1)
-		return "This subject is protected..."
-	if (ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(H.species.species_flags & (SPECIES_FLAG_NO_POISON|SPECIES_FLAG_NO_SCAN))
-			//they can't take clone or tox damage, then for the most part they aren't affected by being fed on - and presumably feeding on them would not affect the slime either
+	if (iscarbon(living))
+		var/mob/living/carbon/carbon = living
+		if (carbon.species?.species_flags & (SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_SCAN))
 			return "This subject does not have an edible life energy..."
-	if (istype(M, /mob/living/carbon) && M.getCloneLoss() >= M.maxHealth * 1.5 || istype(M, /mob/living/simple_animal) && M.stat == DEAD)
-		return "This subject does not have an edible life energy..."
-	for(var/mob/living/carbon/slime/met in view())
-		if(met.Victim == M && met != src)
-			return "\The [met] is already feeding on this subject..."
-	return 0
+		if (carbon.getCloneLoss() >= carbon.maxHealth * 1.5)
+			return "This subject does not have an edible life energy..."
+		if (istype(carbon, /mob/living/carbon/slime))
+			return "I cannot feed on other slimes..."
+	if (living.get_blocked_ratio(null, DAMAGE_TOXIN, damage_flags = DAMAGE_FLAG_DISPERSED | DAMAGE_FLAG_BIO) >= 1)
+		return "This subject is protected..."
+	for (var/mob/living/carbon/slime/other in oview())
+		if (other.Victim == living)
+			return "\The [other] is already feeding on this subject..."
+
 
 /mob/living/carbon/slime/proc/Feedon(var/mob/living/M)
 	set waitfor = 0
@@ -52,7 +54,7 @@
 		if(Adjacent(M))
 			UpdateFeed()
 
-			var/hazmat = 1 - M.get_blocked_ratio(null, TOX, damage_flags = DAM_DISPERSED | DAM_BIO) //scale feeding rate by overall bio protection
+			var/hazmat = 1 - M.get_blocked_ratio(null, DAMAGE_TOXIN, damage_flags = DAMAGE_FLAG_DISPERSED | DAMAGE_FLAG_BIO) //scale feeding rate by overall bio protection
 			if(istype(M, /mob/living/carbon))
 				Victim.adjustCloneLoss(5 * hazmat)
 				Victim.adjustToxLoss(1 * hazmat)
@@ -159,7 +161,7 @@
 			var/list/mutations = GetMutations()
 			for(var/i = 1 to 4)
 				var/t = colour
-				if(prob(mutation_chance))
+				if (mutations.len && prob(mutation_chance))
 					t = pick(mutations)
 				var/mob/living/carbon/slime/M = new /mob/living/carbon/slime(loc, t)
 				if(i != 1)

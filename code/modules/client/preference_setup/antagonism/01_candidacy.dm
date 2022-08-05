@@ -48,38 +48,15 @@
 			. += "<a href='?src=\ref[src];add_special=[antag.id]'>High</a> <a href='?src=\ref[src];add_maybe=[antag.id]'>Low</a> <span class='linkOn'>Never</span></br>"
 
 		. += "</td></tr>"
-	. += "</table>"
-	. += "<b>Ghost Role Availability:</b>"
-	. += "<table>"
-	var/list/ghost_traps = get_ghost_traps()
-	for(var/ghost_trap_key in ghost_traps)
-		var/datum/ghosttrap/ghost_trap = ghost_traps[ghost_trap_key]
-		if(!ghost_trap.list_as_special_role)
-			continue
 
-		. += "<tr><td>[(ghost_trap.ghost_trap_role)]: </td><td>"
-		if(banned_from_ghost_role(preference_mob(), ghost_trap))
-			. += "<span class='danger'>\[BANNED\]</span><br>"
-		else if (!ghost_trap.assess_whitelist(user))
-			var/datum/species/S = new ghost_trap.species_whitelist()
-			. += "[SPAN_DANGER("\[WHITELIST RESTRICTED - [S]\]")]<br />"
-		else if(ghost_trap.pref_check in pref.be_special_role)
-			. += "<span class='linkOn'>High</span> <a href='?src=\ref[src];add_maybe=[ghost_trap.pref_check]'>Low</a> <a href='?src=\ref[src];del_special=[ghost_trap.pref_check]'>Never</a></br>"
-		else if(ghost_trap.pref_check in pref.may_be_special_role)
-			. += "<a href='?src=\ref[src];add_special=[ghost_trap.pref_check]'>High</a> <span class='linkOn'>Low</span> <a href='?src=\ref[src];del_special=[ghost_trap.pref_check]'>Never</a></br>"
-		else
-			. += "<a href='?src=\ref[src];add_special=[ghost_trap.pref_check]'>High</a> <a href='?src=\ref[src];add_maybe=[ghost_trap.pref_check]'>Low</a> <span class='linkOn'>Never</span></br>"
-
-		. += "</td></tr>"
-	. += "<tr><td>Select All: </td><td><a href='?src=\ref[src];select_all=2'>High</a> <a href='?src=\ref[src];select_all=1'>Low</a> <a href='?src=\ref[src];select_all=0'>Never</a></td></tr>"
+	// Special handling for pAI role
+	. += "<tr></tr><tr><td>pAI:</td>"
+	if (BE_PAI in pref.be_special_role)
+		. += "<td><span class='linkOn'>Yes</span> <a href='?src=\ref[src];del_special=[BE_PAI]'>No</a></br></td></tr>"
+	else
+		. += "<td><a href='?src=\ref[src];add_special=[BE_PAI]'>Yes</a> <span class='linkOn'>No</span></br></td></tr>"
 	. += "</table>"
 	. = jointext(.,null)
-
-/datum/category_item/player_setup_item/proc/banned_from_ghost_role(var/mob, var/datum/ghosttrap/ghost_trap)
-	for(var/ban_type in ghost_trap.ban_checks)
-		if(jobban_isbanned(mob, ban_type))
-			return 1
-	return 0
 
 /datum/category_item/player_setup_item/antagonism/candidacy/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["add_special"])
@@ -131,15 +108,8 @@
 				continue
 		private_valid_special_roles += antag_type
 
-	var/list/ghost_traps = get_ghost_traps()
-	for(var/ghost_trap_key in ghost_traps)
-		var/datum/ghosttrap/ghost_trap = ghost_traps[ghost_trap_key]
-		if(!ghost_trap.list_as_special_role)
-			continue
-		if(!include_bans)
-			if(banned_from_ghost_role(preference_mob(), ghost_trap))
-				continue
-		private_valid_special_roles += ghost_trap.pref_check
+	// Special handling to allow pAI selection as it is not an antagonist but does have a role pref
+	private_valid_special_roles += BE_PAI
 
 
 	return private_valid_special_roles

@@ -38,9 +38,8 @@
 
 /proc/group_areas_by_z_level(var/list/predicates)
 	. = list()
-	var/enough_digits_to_contain_all_zlevels = 3
 	for(var/area/A in get_filtered_areas(predicates))
-		group_by(., add_zero(num2text(A.z), enough_digits_to_contain_all_zlevels), A)
+		group_by(., pad_left(num2text(A.z), 3, "0"), A)
 
 /*
 	Pick helpers
@@ -72,6 +71,11 @@
 
 	var/z_levels = GetConnectedZlevels(z_level)
 	area_predicates[/proc/area_belongs_to_zlevels] = z_levels
+	return pick_area_and_turf(area_predicates, turf_predicates)
+
+/proc/pick_area_turf_in_single_z_level(list/area_predicates, list/turf_predicates, z_level)
+	area_predicates = area_predicates.Copy()
+	area_predicates[/proc/area_belongs_to_zlevels] = list(z_level)
 	return pick_area_and_turf(area_predicates, turf_predicates)
 
 /*

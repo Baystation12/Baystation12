@@ -2,10 +2,11 @@
 	id = PSI_COERCION
 	name = "Coercion"
 	associated_intent = I_DISARM
-	armour_types = list(PSIONIC)
+	armour_types = list(DAMAGE_PSIONIC)
 
 /decl/psionic_power/coercion
 	faculty = PSI_COERCION
+	abstract_type = /decl/psionic_power/coercion
 
 /decl/psionic_power/coercion/invoke(var/mob/living/user, var/mob/living/target)
 	if (!istype(target))
@@ -35,7 +36,7 @@
 		for(var/mob/living/M in orange(user, user.psi.get_rank(PSI_COERCION)))
 			if(M == user)
 				continue
-			var/blocked = 100 * M.get_blocked_ratio(null, PSIONIC)
+			var/blocked = 100 * M.get_blocked_ratio(null, DAMAGE_PSIONIC)
 			if(prob(blocked))
 				to_chat(M, SPAN_DANGER("A psionic onslaught strikes your mind, but you withstand it!"))
 				continue
@@ -71,7 +72,7 @@
 
 	user.visible_message(SPAN_WARNING("\The [user] touches \the [target]'s temple..."))
 	var/question =  input(user, "Say something?", "Read Mind", "Penny for your thoughts?") as null|text
-	if(!question || user.incapacitated() || !do_after(user, 20))
+	if(!question || user.incapacitated() || !do_after(user, 2 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT))
 		return TRUE
 
 	var/started_mindread = world.time
@@ -160,7 +161,7 @@
 		user.visible_message("<span class='danger'><i>\The [user] seizes the head of \the [target] in both hands...</i></span>")
 		to_chat(user, "<span class='warning'>You plunge your mentality into that of \the [target]...</span>")
 		to_chat(target, "<span class='danger'>Your mind is invaded by the presence of \the [user]! They are trying to make you a slave!</span>")
-		if(!do_after(user, target.stat == CONSCIOUS ? 80 : 40, target))
+		if(!do_after(user, (target.stat == CONSCIOUS ? 8 : 4) SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT))
 			user.psi.backblast(rand(10,25))
 			return TRUE
 		to_chat(user, "<span class='danger'>You sear through \the [target]'s neurons, reshaping as you see fit and leaving them subservient to your will!</span>")
@@ -184,7 +185,7 @@
 		user.visible_message(SPAN_WARNING("\The [user] holds the head of \the [target] in both hands..."))
 		to_chat(user, SPAN_NOTICE("You insinuate your mentality into that of \the [target]..."))
 		to_chat(target, SPAN_WARNING("Your persona is being probed by the psychic lens of \the [user]."))
-		if(!do_after(user, (target.stat == CONSCIOUS ? 50 : 25), target))
+		if(!do_after(user, (target.stat == CONSCIOUS ? 5 : 2.5) SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT))
 			user.psi.backblast(rand(5,10))
 			return TRUE
 		to_chat(user, SPAN_NOTICE("You retreat from \the [target], holding your new knowledge close."))
@@ -208,7 +209,7 @@
 		user.visible_message(SPAN_WARNING("\The [user] holds the head of \the [target] in both hands..."))
 		to_chat(user, SPAN_NOTICE("You probe \the [target]'s mind for various ailments.."))
 		to_chat(target, SPAN_WARNING("Your mind is being cleansed of ailments by \the [user]."))
-		if(!do_after(user, (target.stat == CONSCIOUS ? 50 : 25), target))
+		if(!do_after(user, (target.stat == CONSCIOUS ? 5 : 2.5) SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT))
 			user.psi.backblast(rand(5,10))
 			return TRUE
 		to_chat(user, SPAN_WARNING("You clear \the [target]'s mind of ailments."))

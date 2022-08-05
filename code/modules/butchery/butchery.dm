@@ -113,7 +113,7 @@
 	if(suitable_for_butchery(target))
 
 		user.visible_message(SPAN_WARNING("\The [user] begins wrestling \the [target] onto \the [src]."))
-		if(!do_after(user, 3 SECONDS, target) || occupant || !target || QDELETED(target) || target.stat == CONSCIOUS || !target.Adjacent(user))
+		if(!do_after(user, 3 SECONDS, target, DO_PUBLIC_UNIQUE) || occupant || !target || QDELETED(target) || target.stat == CONSCIOUS || !target.Adjacent(user))
 			return
 
 		if(secures_occupant)
@@ -138,16 +138,14 @@
 		occupant.set_dir(SOUTH)
 		var/image/I = image(null)
 		I.appearance = occupant
-		var/matrix/M = matrix()
-		M.Turn(occupant.butchery_rotation)
-		I.transform = M
+		I.SetTransform(rotation = occupant.butchery_rotation)
 		overlays += I
 
 /obj/structure/kitchenspike/mob_breakout(mob/living/escapee)
 	. = ..()
 	if(secures_occupant)
 		escapee.visible_message(SPAN_WARNING("\The [escapee] begins writhing free of \the [src]!"))
-		if(!do_after(escapee, 5 SECONDS, src))
+		if(!do_after(escapee, 5 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 			return FALSE
 	escapee.visible_message(SPAN_DANGER("\The [escapee] escapes from \the [src]!"))
 	escapee.dropInto(loc)
@@ -184,7 +182,7 @@
 	occupant.adjustBruteLoss(rand(50,60))
 	update_icon()
 
-	if(do_after(user, 3 SECONDS, src) && !QDELETED(user) && !QDELETED(last_occupant) && occupant == last_occupant && occupant_state == last_state)
+	if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) && !QDELETED(user) && !QDELETED(last_occupant) && occupant == last_occupant && occupant_state == last_state)
 		user.visible_message(SPAN_NOTICE("\The [user] finishes [butchery_string] \the [occupant]."))
 		switch(next_state)
 			if(CARCASS_SKINNED)

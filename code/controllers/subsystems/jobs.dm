@@ -1,15 +1,15 @@
-var/const/ENG = FLAG(0)
-var/const/SEC = FLAG(1)
-var/const/MED = FLAG(2)
-var/const/SCI = FLAG(3)
-var/const/CIV = FLAG(4)
-var/const/COM = FLAG(5)
-var/const/MSC = FLAG(6)
-var/const/SRV = FLAG(7)
-var/const/SUP = FLAG(8)
-var/const/SPT = FLAG(9)
-var/const/EXP = FLAG(10)
-var/const/ROB = FLAG(11)
+var/global/const/ENG = FLAG(0)
+var/global/const/SEC = FLAG(1)
+var/global/const/MED = FLAG(2)
+var/global/const/SCI = FLAG(3)
+var/global/const/CIV = FLAG(4)
+var/global/const/COM = FLAG(5)
+var/global/const/MSC = FLAG(6)
+var/global/const/SRV = FLAG(7)
+var/global/const/SUP = FLAG(8)
+var/global/const/SPT = FLAG(9)
+var/global/const/EXP = FLAG(10)
+var/global/const/ROB = FLAG(11)
 
 GLOBAL_VAR(antag_code_phrase)
 GLOBAL_VAR(antag_code_response)
@@ -28,7 +28,12 @@ SUBSYSTEM_DEF(jobs)
 	var/list/positions_by_department = list()
 	var/list/job_icons =               list()
 
-/datum/controller/subsystem/jobs/Initialize(timeofday)
+
+/datum/controller/subsystem/jobs/UpdateStat(time)
+	return
+
+
+/datum/controller/subsystem/jobs/Initialize(start_uptime)
 
 	// Create main map jobs.
 	primary_job_datums.Cut()
@@ -102,7 +107,6 @@ SUBSYSTEM_DEF(jobs)
 	// Set up AI spawn locations
 	spawn_empty_ai()
 
-	. = ..()
 
 /datum/controller/subsystem/jobs/proc/guest_jobbans(var/job)
 	for(var/dept in list(COM, MSC, SEC))
@@ -319,7 +323,7 @@ SUBSYSTEM_DEF(jobs)
 		for(var/mob/new_player/player in unassigned_roundstart)
 			// Loop through all jobs
 			for(var/datum/job/job in shuffledoccupations) // SHUFFLE ME BABY
-				if(job && !list_find(mode.disabled_jobs, job.title))
+				if(job && !mode.disabled_jobs.Find(job.title))
 					if(job.defer_roundstart_spawn)
 						deferred_jobs[job] = TRUE
 					else if(attempt_role_assignment(player, job, level, mode))

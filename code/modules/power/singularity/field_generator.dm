@@ -131,7 +131,7 @@ field_generator power level display
 					user.visible_message("[user.name] starts to weld the [src.name] to the floor.", \
 						"You start to weld the [src] to the floor.", \
 						"You hear welding")
-					if (do_after(user,20,src))
+					if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 						if(!src || !WT.isOn()) return
 						state = 2
 						to_chat(user, "You weld the field generator to the floor.")
@@ -143,7 +143,7 @@ field_generator power level display
 					user.visible_message("[user.name] starts to cut the [src.name] free from the floor.", \
 						"You start to cut the [src] free from the floor.", \
 						"You hear welding")
-					if (do_after(user,20,src))
+					if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 						if(!src || !WT.isOn()) return
 						state = 1
 						to_chat(user, "You cut the [src] free from the floor.")
@@ -155,7 +155,7 @@ field_generator power level display
 
 
 /obj/machinery/field_generator/emp_act()
-	return 0
+	return
 
 /obj/machinery/field_generator/bullet_act(var/obj/item/projectile/Proj)
 	if(istype(Proj, /obj/item/projectile/beam))

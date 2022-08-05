@@ -72,7 +72,7 @@
 		var/decl/uplink_source/US = locate(href_list["move_source_up"]) in pref.uplink_sources
 		if(!US)
 			return TOPIC_NOACTION
-		var/index = list_find(pref.uplink_sources, US)
+		var/index = pref.uplink_sources.Find(US)
 		if(index <= 1)
 			return TOPIC_NOACTION
 		pref.uplink_sources.Swap(index, index - 1)
@@ -82,7 +82,7 @@
 		var/decl/uplink_source/US = locate(href_list["move_source_down"]) in pref.uplink_sources
 		if(!US)
 			return TOPIC_NOACTION
-		var/index = list_find(pref.uplink_sources, US)
+		var/index = pref.uplink_sources.Find(US)
 		if(index >= pref.uplink_sources.len)
 			return TOPIC_NOACTION
 		pref.uplink_sources.Swap(index, index + 1)

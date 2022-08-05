@@ -3,12 +3,16 @@ SUBSYSTEM_DEF(fabrication)
 	flags = SS_NO_FIRE
 	init_order = SS_INIT_MISC_LATE
 
-	var/static/tmp/list/recipes = list()
-	var/static/tmp/list/categories = list()
-	var/static/tmp/list/stages_by_type = list()
+	var/static/list/recipes = list()
+	var/static/list/categories = list()
+	var/static/list/stages_by_type = list()
 
 
-/datum/controller/subsystem/fabrication/Initialize()
+/datum/controller/subsystem/fabrication/UpdateStat(time)
+	return
+
+
+/datum/controller/subsystem/fabrication/Initialize(start_uptime)
 	for (var/datum/fabricator_recipe/recipe as anything in subtypesof(/datum/fabricator_recipe))
 		recipe = new recipe
 		if (!recipe.name)

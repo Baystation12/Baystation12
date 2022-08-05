@@ -130,7 +130,6 @@
 "z" = (
 /obj/machinery/artifact{
 	alpha = 123;
-	anchored = 0;
 	color = "BLUE"
 	},
 /turf/simulated/floor/away/blueriver/alienfloor,

@@ -10,7 +10,8 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+	init_flags = EMPTY_BITFIELD
+
 	machine_name = "hydroponics tray"
 	machine_desc = "These are waist-high trays that can grow a vast variety of plants in a nutrient bath. Also comes with a sealable lid for plants that don't grow in a surrounding atmosphere. A cornerstone of self-sufficient spaceships across the galaxy."
 
@@ -50,7 +51,7 @@
 
 	// Reagent information for process(), consider moving this to a controller along
 	// with cycle information under 'mechanical concerns' at some point.
-	var/global/list/toxic_reagents = list(
+	var/static/list/toxic_reagents = list(
 		/datum/reagent/dylovene =         -2,
 		/datum/reagent/toxin =             2,
 		/datum/reagent/hydrazine =         2.5,
@@ -61,9 +62,9 @@
 		/datum/reagent/toxin/plantbgone =  3,
 		/datum/reagent/cryoxadone =       -3,
 		/datum/reagent/radium =            2,
-		/datum/reagent/three_eye =         2
+		/datum/reagent/drugs/three_eye =         2
 		)
-	var/global/list/nutrient_reagents = list(
+	var/static/list/nutrient_reagents = list(
 		/datum/reagent/drink/milk =                     0.1,
 		/datum/reagent/ethanol/beer =                   0.25,
 		/datum/reagent/phosphorus =                     0.1,
@@ -77,7 +78,7 @@
 		/datum/reagent/toxin/fertilizer/robustharvest = 1,
 		/datum/reagent/toxin/fertilizer/left4zed =      1
 		)
-	var/global/list/weedkiller_reagents = list(
+	var/static/list/weedkiller_reagents = list(
 		/datum/reagent/hydrazine =          -4,
 		/datum/reagent/phosphorus =         -2,
 		/datum/reagent/sugar =               2,
@@ -87,14 +88,14 @@
 		/datum/reagent/toxin/plantbgone =   -8,
 		/datum/reagent/adminordrazine =     -5
 		)
-	var/global/list/pestkiller_reagents = list(
+	var/static/list/pestkiller_reagents = list(
 		/datum/reagent/sugar =                 2,
 		/datum/reagent/diethylamine =         -2,
 		/datum/reagent/toxin/bromide =        -2,
 		/datum/reagent/toxin/methyl_bromide = -4,
 		/datum/reagent/adminordrazine =       -5
 		)
-	var/global/list/water_reagents = list(
+	var/static/list/water_reagents = list(
 		/datum/reagent/water =           1,
 		/datum/reagent/adminordrazine =  1,
 		/datum/reagent/drink/milk =      0.9,
@@ -106,7 +107,7 @@
 		)
 
 	// Beneficial reagents also have values for modifying yield_mod and mut_mod (in that order).
-	var/global/list/beneficial_reagents = list(
+	var/static/list/beneficial_reagents = list(
 		/datum/reagent/ethanol/beer =                    list( -0.05, 0,   0  ),
 		/datum/reagent/hydrazine =                       list( -2,    0,   0  ),
 		/datum/reagent/phosphorus =                      list( -0.75, 0,   0  ),
@@ -123,12 +124,12 @@
 		/datum/reagent/adminordrazine =                  list(  1,    1,   1  ),
 		/datum/reagent/toxin/fertilizer/robustharvest =  list(  0,    0.2, 0  ),
 		/datum/reagent/toxin/fertilizer/left4zed =       list(  0,    0,   0.2),
-		/datum/reagent/three_eye =                       list(  -1  , 0,   0.5)
+		/datum/reagent/drugs/three_eye =                       list(  -1  , 0,   0.5)
 		)
 
 	// Mutagen list specifies minimum value for the mutation to take place, rather
 	// than a bound as the lists above specify.
-	var/global/list/mutagenic_reagents = list(
+	var/static/list/mutagenic_reagents = list(
 		/datum/reagent/radium =  8,
 		/datum/reagent/mutagen = 15,
 		/datum/reagent/toxin/fertilizer/left4zed = 30)
@@ -161,16 +162,15 @@
 	if(mechanical)
 		connect()
 	update_icon()
-	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_ALL)
-	START_PROCESSING(SSplants, src)
+	SSplants.active_plants += src
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/portable_atmospherics/hydroponics/Destroy()
-	STOP_PROCESSING(SSplants, src)
-	. = ..()
+	SSplants.active_plants -= src
+	return ..()
 
 /obj/machinery/portable_atmospherics/hydroponics/LateInitialize()
-	. = ..()
+	..()
 	if(locate(/obj/item/seeds) in get_turf(src))
 		plant()
 
@@ -508,7 +508,7 @@
 	else if(mechanical && isWrench(O))
 
 		//If there's a connector here, the portable_atmospherics setup can handle it.
-		if(locate(/obj/machinery/atmospherics/portables_connector/) in loc)
+		if(locate(/obj/machinery/atmospherics/portables_connector) in loc)
 			return ..()
 
 		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -643,4 +643,3 @@
 	else if(harvest)
 		harvest()
 	return TRUE
-

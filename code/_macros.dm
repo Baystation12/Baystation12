@@ -3,14 +3,12 @@
 //Do (almost) nothing - indev placeholder for switch case implementations etc
 #define NOOP (.=.);
 
-#define list_find(L, needle, LIMITS...) L.Find(needle, LIMITS)
-
 #define PUBLIC_GAME_MODE SSticker.master_mode
 
 #define CLAMP01(x) clamp(x, 0, 1)
 
-var/const/POSITIVE_INFINITY = 1#INF // win: 1.#INF, lin: inf
-var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
+var/global/const/POSITIVE_INFINITY = 1#INF // win: 1.#INF, lin: inf
+var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 //var/const/POSITIVE_NAN = -(1#INF/1#INF) // win: 1.#QNAN, lin: nan -- demonstration of creation, but not useful
 //var/const/NEGATIVE_NAN = (1#INF/1#INF) //win: -1.#IND, lin: -nan -- demonstration of creation, but not useful
 #define isfinite(N) (isnum(N) && ((N) == (N)) && ((N) != POSITIVE_INFINITY) && ((N) != NEGATIVE_INFINITY))
@@ -33,7 +31,7 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define isairlock(A) istype(A, /obj/machinery/door/airlock)
 
-#define isatom(A) isloc(A)
+#define isatom(A) (isloc(A) && !isarea(A))
 
 #define isbrain(A) istype(A, /mob/living/carbon/brain)
 
@@ -45,7 +43,9 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define iscorgi(A) istype(A, /mob/living/simple_animal/passive/corgi)
 
-#define is_drone(A) istype(A, /mob/living/silicon/robot/drone)
+#define isdatum(A) istype(A, /datum)
+
+#define isdrone(A) istype(A, /mob/living/silicon/robot/drone)
 
 #define isEye(A) istype(A, /mob/observer/eye)
 
@@ -75,6 +75,8 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define isspaceturf(A) istype(A, /turf/space)
 
+#define isopenturf(A) istype(A, /turf/simulated/open)
+
 #define ispAI(A) istype(A, /mob/living/silicon/pai)
 
 #define isrobot(A) istype(A, /mob/living/silicon/robot)
@@ -95,7 +97,7 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define isopenspace(A) istype(A, /turf/simulated/open)
 
-#define isPlunger(A) istype(A, /obj/item/clothing/mask/plunger) || istype(A, /obj/item/device/plunger/robot)
+#define isplunger(A) istype(A, /obj/item/clothing/mask/plunger) || istype(A, /obj/item/device/plunger/robot)
 
 #define isadmin(X) (check_rights(R_ADMIN, 0, (X)) != 0)
 
@@ -180,6 +182,10 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define SPAN_INFO(X) "<span class='info'>[X]</span>"
 
+#define STYLE_SMALLFONTS(X, S, C1) "<span style=\"font-family: 'Small Fonts'; color: [C1]; font-size: [S]px\">[X]</span>"
+
+#define STYLE_SMALLFONTS_OUTLINE(X, S, C1, C2) "<span style=\"font-family: 'Small Fonts'; color: [C1]; -dm-text-outline: 1 [C2]; font-size: [S]px\">[X]</span>"
+
 #define SPAN_DEBUG(X) "<span class='debug'>[X]</span>"
 
 #define SPAN_STYLE(style, X) "<span style=\"[style]\">[X]</span>"
@@ -253,18 +259,6 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 /// Flip bits of MASK in FIELD
 #define FLIP_FLAGS(FIELD, MASK) ((FIELD) ^= (MASK))
-
-
-#define regex_replace_char(RE, ARGS...) RE.Replace_char(ARGS)
-
-
-#define regex_replace(RE, ARGS...) RE.Replace(ARGS)
-
-
-#define regex_find_char(RE, ARGS...) RE.Find_char(ARGS)
-
-
-#define regex_find(RE, ARGS...) RE.Find(ARGS)
 
 
 #define hex2num(hex) (text2num(hex, 16) || 0)

@@ -4,17 +4,23 @@
 /datum/uplink_item/item/medical
 	category = /datum/uplink_category/medical
 
-/datum/uplink_item/item/medical/sinpockets
-	name = "Box of Sin-Pockets"
-	desc = "A box of filled dough pockets. Great for a quick meal when you're hiding from Security. Instructions included on the box."
+/datum/uplink_item/item/medical/healthyfood
+	name = "Box of Premium Donk-Pockets"
+	desc = "A box of healthy fruit turnovers. Great for a quick meal when you're hiding from Security. Instructions included on the box."
 	item_cost = 8
-	path = /obj/item/storage/box/sinpockets
+	path = /obj/item/storage/box/donkpocket_premium
+
+/datum/uplink_item/item/medical/combatstim
+	name = "Combat Stimulants"
+	desc = "A single-use medical injector filled with performance enhancing drugs."
+	item_cost = 14
+	path = /obj/item/reagent_containers/hypospray/autoinjector/combatstim
 
 /datum/uplink_item/item/medical/stabilisation
-	name = "Stabilisation First Aid Kit"
-	desc = "Contains variety of emergency medical pouches."
+	name = "Slimline Stabilisation Kit"
+	desc = "A pocket-sized medkit filled with lifesaving equipment."
 	item_cost = 16
-	path = /obj/item/storage/firstaid/stab
+	path = /obj/item/storage/firstaid/sleekstab
 
 /datum/uplink_item/item/medical/stasis
 	name = "Stasis Bag"
@@ -28,6 +34,12 @@
 	item_cost = 24
 	path = /obj/item/defibrillator/compact/combat/loaded
 
+/datum/uplink_item/item/medical/advancedmedibag
+	name = "Advanced medical toolkit"
+	desc = "A duffle bag containing a roller bed, syringes, health analyzer, health HUD, auto-compressor, auto-resuscitator, nanoblood, an advanced first-aid kit, and a pair of nitrile gloves."
+	item_cost = 24
+	path = /obj/item/storage/backpack/dufflebag/syndie/med/full
+
 /datum/uplink_item/item/medical/surgery
 	name = "Surgery Kit"
 	desc = "Contains all the tools needed for on the spot surgery, assuming you actually know what you're doing with them. Floor sterilization not included."
@@ -39,15 +51,3 @@
 	desc = "Contains most medicines you need to recover from injuries and illnesses, all in a convenient pill form. Splints for broken bones also included!"
 	item_cost = 48
 	path = /obj/item/storage/firstaid/combat
-
-/datum/uplink_item/item/medical/scanner
-	name = "Health Scanner"
-	desc = "A hand-held body scanner able to distinguish vital signs of the subject."
-	item_cost = 18
-	path = /obj/item/device/scanner/health
-
-/datum/uplink_item/item/medical/scanner
-	name = "Health HUD"
-	desc = "A heads-up display that scans the humans in view and provides accurate data about their health status."
-	item_cost = 18
-	path = /obj/item/clothing/glasses/hud/health

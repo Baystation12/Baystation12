@@ -316,7 +316,7 @@
 	M.status_flags ^= NOTARGET
 	log_and_message_admins("has toggled [key_name(M)]'s notarget to [(M.status_flags & NOTARGET) ? "On" : "Off"]")
 
-proc/cmd_admin_mute(mob/M as mob, mute_type)
+/proc/cmd_admin_mute(mob/M as mob, mute_type)
 	if(!usr || !usr.client)
 		return
 	if(!usr.client.holder)
@@ -809,3 +809,115 @@ Ccomp's first proc.
 		config.allow_random_events = 0
 		to_chat(usr, "Random events disabled")
 		message_admins("Admin [key_name_admin(usr)] has disabled random events.", 1)
+
+
+/client/proc/cmd_admin_simulate_distant_explosion()
+	set category = "Fun"
+	set name = "Simulate Distant Explosion"
+	set desc = "Plays distant explosion audio and optionally causes players to fall over"
+	var/client/user = resolve_client()
+	if (!check_rights(R_ADMIN, TRUE, user))
+		return
+	var/mob/mob = user.mob
+	if (!mob || !isliving(mob) && !isobserver(mob))
+		to_chat(user, SPAN_WARNING("You must be in the game world to use this command."))
+		return
+	var/turf/turf = get_turf(mob)
+	if (!turf)
+		to_chat(user, SPAN_WARNING("You must be in the game world to use this command."))
+		return
+	var/list/levels = GetConnectedZlevels(turf.z)
+	if (!length(levels))
+		to_chat(user, SPAN_WARNING("No levels connected to this z-group."))
+		return
+	levels = sortList(levels)
+	var/mode
+	var/response = alert(user, "Players on levels [levels.Join(", ")] will be affected.\nShould they be knocked over?", "Simulate Distant Explosion", "Yes", "No", "Cancel")
+	if (!response || response == "Cancel")
+		return
+	if (response == "Yes")
+		response = alert(user, "Should all players be knocked down, or only unstable ones?", "Simulate Distant Explosion", "Unstable", "All", "Cancel")
+		if (!response || response == "Cancel")
+			return
+		if (response == "All")
+			mode = 2
+		else
+			mode = 1
+	var/affected = 0
+	var/floored = 0
+	for (mob as anything in GLOB.player_list)
+		var/living = isliving(mob)
+		if (!living && !isobserver(mob))
+			continue
+		turf = get_turf(mob)
+		if (!(turf?.z in levels))
+			continue
+		++affected
+		mob.playsound_local(mob, 'sound/effects/explosionfar.ogg', 15)
+		if (!mode)
+			continue
+		if (!living || !mob.can_be_floored())
+			continue
+		var/fall = mode
+		if (fall == 1)
+			var/since_move = world.time - mob.l_move_time
+			if (since_move > 5 SECONDS)
+				fall = prob(20)
+			else if (since_move > 3 SECONDS)
+				fall = MOVING_QUICKLY(mob) ? prob(75) : prob(20)
+			else
+				fall = MOVING_QUICKLY(mob) ? prob(75) : prob(50)
+		if (fall)
+			to_chat(mob, SPAN_DANGER("You stumble onto the floor from the shaking!"))
+			mob.AdjustWeakened(2)
+			mob.AdjustStunned(2)
+			++floored
+	log_and_message_admins("[key_name_admin(user)] simulated a distant explosion, affecting [affected] players and flooring [floored] on levels [levels.Join(", ")].")
+
+
+/client/proc/bombard_zlevel()
+	set category = "Fun"
+	set name = "Bombard Z-Level"
+	set desc = "Bombard a z-level with randomly placed explosions."
+	set waitfor = FALSE
+
+	var/zlevel = input("What z-level?", "Z-Level", get_z(usr)) as num|null
+	if (!isnum(zlevel))
+		return
+
+	var/connected = alert("Bomb connected z-levels?", "Connected Zs", "Yes", "No", "Cancel")
+	if (connected == "Cancel")
+		return
+
+	var/delay = input("How much delay between explosions? (In seconds)", "Delay") as num|null
+	if (!delay)
+		return
+
+	var/booms = input("How many explosions to create?", "Number of Booms") as num|null
+	if (!booms)
+		return
+
+	var/break_turfs = alert("Turf breaker explosions?", "Break Turfs?", "Yes", "No", "Cancel")
+	if (break_turfs == "Cancel")
+		return
+
+	if (break_turfs == "Yes")
+		break_turfs = TRUE
+	else
+		break_turfs = FALSE
+
+	var/range
+	var/high_intensity
+	var/low_intensity
+	while(booms > 0)
+		range = rand(0, 2)
+		high_intensity = rand(5,8)
+		low_intensity = rand(7,10)
+		var/turf/T
+		if (connected == "Yes")
+			T = pick_area_turf_in_connected_z_levels(list(/proc/is_not_space_area), z_level = zlevel)
+		else
+			T = pick_area_turf_in_single_z_level(list(/proc/is_not_space_area), z_level = zlevel)
+		explosion(T, range, high_intensity, low_intensity, turf_breaker = break_turfs)
+		booms = booms - 1
+		sleep(delay SECONDS)
