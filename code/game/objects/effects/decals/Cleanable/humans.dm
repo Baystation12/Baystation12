@@ -30,12 +30,12 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/reveal_blood()
 	if(!fluorescent)
-		fluorescent = 1
+		fluorescent = ATOM_FLOURESCENCE_INACTIVE
 		basecolor = COLOR_LUMINOL
 		update_icon()
 
 /obj/effect/decal/cleanable/blood/clean_blood()
-	fluorescent = 0
+	fluorescent = ATOM_FLOURESCENCE_NONE
 	if(invisibility != 100)
 		set_invisibility(100)
 		amount = 0

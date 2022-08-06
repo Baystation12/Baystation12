@@ -19,8 +19,8 @@
 	var/germ_level = GERM_LEVEL_AMBIENT
 	/// Boolean. Whether or not the atom is considered simulated. If `FALSE`, blocks a majority of interactions, processes, etc.
 	var/simulated = TRUE
-	/// Integer. Whether or not the atom is visible under a UV light. If set to `2`, the atom is actively highlighted by a light,
-	var/fluorescent = 0
+	/// Integer (One of `ATOM_FLOURESCENCE_*`). Whether or not the atom is visible under a UV light. If set to `2`, the atom is actively highlighted by a light. See `code\__defines\misc.dm`.
+	var/fluorescent = ATOM_FLOURESCENCE_NONE
 	/// The reagents contained within the atom. Handles all reagent interactions and processing.
 	var/datum/reagents/reagents
 	/// LAZYLIST of mobs currently climbing the atom.
@@ -518,7 +518,7 @@
 /atom/proc/clean_blood()
 	if(!simulated)
 		return
-	fluorescent = 0
+	fluorescent = ATOM_FLOURESCENCE_NONE
 	germ_level = 0
 	blood_color = null
 	gunshot_residue = null

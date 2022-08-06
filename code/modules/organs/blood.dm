@@ -264,7 +264,7 @@
 		else
 			B.blood_DNA[source.data["blood_DNA"]] = "O+"
 
-	B.fluorescent  = 0
+	B.fluorescent  = ATOM_FLOURESCENCE_NONE
 	B.set_invisibility(0)
 	return B
 
