@@ -25,6 +25,8 @@
 #define LAZYISIN(L, I) (L ? (I in L) : FALSE)
 // Null-safe List.Cut() and discard.
 #define LAZYCLEARLIST(L) if(L) { L.Cut(); L = null; }
+// Safely merges L2 into L1 as lazy lists, initializing L1 if necessary.
+#define LAZYMERGELIST(L1, L2) if (length(L2)) { if (!L1) { L1 = list() } L1 |= L2 }
 // Reads L or an empty list if L is not a list.  Note: Does NOT assign, L may be an expression.
 #define SANITIZE_LIST(L) ( islist(L) ? L : list() )
 
