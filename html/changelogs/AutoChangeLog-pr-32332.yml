@@ -1,0 +1,7 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - maptweak: All mapped meats replaced with bug meat for the scarcity event have
+      been reverted to normal meat.
+  - maptweak: Kitchen freezers have permanently had some of their beef and fish replaced
+      with bugmeat.
