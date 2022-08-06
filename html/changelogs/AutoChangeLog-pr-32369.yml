@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - rscadd: Added the 'Discord' button to skin, uses the discord link specified in
+      the config.
