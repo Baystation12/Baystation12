@@ -247,6 +247,14 @@
 	return isnull(resistance_value) ? 1 : resistance_value
 
 /**
+ * Determines whether or not the atom has full immunity to the given damage type.
+ */
+/atom/proc/is_damage_immune(damage_type)
+	if (get_damage_resistance(damage_type) == 0)
+		return TRUE
+	return FALSE
+
+/**
  * Handles sending damage state to users on `examine()`.
  * Overrideable to allow for different messages, or restricting when the messages can or cannot appear.
  */
@@ -338,6 +346,16 @@
 		playsound(damage_hitsound, src, 75)
 		damage_health(damage, P.damage_type)
 		return 0
+
+
+/atom/lava_act(datum/gas_mixture/air, temperature, pressure)
+	if (is_damage_immune(DAMAGE_FIRE))
+		return FALSE
+	if (get_max_health())
+		fire_act(air, temperature)
+		if (!health_dead)
+			return FALSE
+	. = ..()
 
 
 /atom/attackby(obj/item/W, mob/user, click_params)
