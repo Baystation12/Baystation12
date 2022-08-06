@@ -44,6 +44,10 @@
 	set hidden = TRUE
 	link_url(config.lore_url, "Lore", TRUE)
 
+/client/verb/link_discord()
+	set name = "link discord"
+	set hidden = TRUE
+	link_url(config.discord_url, "Discord", TRUE)
 
 /client/verb/hotkeys_help()
 	set name = "Hotkeys Help"
