@@ -1,0 +1,7 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Lava now correctly damages atoms using standardized health instead of just
+      deleting them immediately. Atoms that die to the resulting fire damage still
+      cease existing.
+  - tweak: Atoms with immunity to fire damage are now immune to lava damage as well.
