@@ -4096,6 +4096,7 @@
 	pixel_y = 32
 	},
 /obj/item/storage/firstaid/regular,
+/obj/item/storage/firstaid/radiation,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/engineering)
 "hu" = (

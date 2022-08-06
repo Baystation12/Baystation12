@@ -149,6 +149,7 @@ var/global/list/datum/supply_drop_loot/supply_drop
 		/obj/item/storage/firstaid/fire,
 		/obj/item/storage/firstaid/toxin,
 		/obj/item/storage/firstaid/o2,
+		/obj/item/storage/firstaid/radiation,
 		/obj/item/storage/firstaid/adv,
 		/obj/item/reagent_containers/glass/bottle/antitoxin,
 		/obj/item/reagent_containers/glass/bottle/inaprovaline,

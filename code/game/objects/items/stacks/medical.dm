@@ -1,7 +1,8 @@
 /obj/item/stack/medical
+	abstract_type = /obj/item/stack/medical
 	name = "medical pack"
 	singular_name = "medical pack"
-	icon = 'icons/obj/medical_kits.dmi'
+	icon = 'icons/obj/medical.dmi'
 	amount = 5
 	max_amount = 5
 	w_class = ITEM_SIZE_SMALL
@@ -69,7 +70,7 @@
 	name = "roll of gauze"
 	singular_name = "gauze length"
 	desc = "Some sterile gauze to wrap around bloody stumps."
-	icon_state = "brutepack"
+	icon_state = "gauze"
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 5
 	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg')
