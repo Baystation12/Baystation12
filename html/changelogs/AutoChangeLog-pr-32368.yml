@@ -1,0 +1,4 @@
+author: karljohansson
+delete-after: true
+changes:
+  - tweak: Changes dragging to also deal damage to people with open surgical incisions.
