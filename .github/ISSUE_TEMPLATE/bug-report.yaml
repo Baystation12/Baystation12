@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Make sure to [search for an existing issue report ](https://github.com/Baystation12/Baystation12/issues) before making a new one.
+        Make sure to [search for an existing issue report](https://github.com/Baystation12/Baystation12/issues) before making a new one.
 
         Your issue will be tagged by a developer with reproduction status and a priority once it has been reviewed and verified.
   - type: textarea
@@ -64,4 +64,4 @@ body:
         - label: Issue could be reproduced by different players
         - label: Issue could be reproduced in multiple rounds
         - label: Issue happened in a recent (less than 7 days ago) round
-        - label: [Couldn't find an existing issue about this](https://github.com/Baystation12/Baystation12/issues)
+        - label: "[Couldn't find an existing issue about this](https://github.com/Baystation12/Baystation12/issues)"
