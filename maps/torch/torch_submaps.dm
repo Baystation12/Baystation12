@@ -3,6 +3,7 @@
 	branch = /datum/mil_branch/alien
 	allowed_branches = list(/datum/mil_branch/alien)
 	allowed_ranks = list(/datum/mil_rank/alien)
+	required_language = null
 
 /datum/job/submap
 	psi_latency_chance = 1

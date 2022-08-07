@@ -95,6 +95,7 @@ var/global/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
 					SKILL_COMBAT = SKILL_ADEPT,
 					SKILL_WEAPONS = SKILL_ADEPT,
 					SKILL_MEDICAL = SKILL_BASIC)
+	required_language = null
 
 /datum/job/submap/skrellscoutship_crew/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	. = ..(H, alt_title, branch, grade)	//passing through arguments

@@ -34,6 +34,7 @@
 	                    SKILL_MEDICAL = SKILL_MAX,
 	                    SKILL_ANATOMY = SKILL_MAX,
 	                    SKILL_CHEMISTRY = SKILL_MAX)
+	required_language = LANGUAGE_SPACER
 
 	var/info = "You have survived a terrible disaster. Make the best of things that you can."
 	var/rank

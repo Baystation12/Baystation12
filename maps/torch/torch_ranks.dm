@@ -3,7 +3,6 @@
 	rank =   /datum/mil_rank/civ/civ
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
-	required_language = null
 
 /datum/map/torch
 	branch_types = list(
