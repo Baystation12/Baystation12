@@ -125,7 +125,7 @@
 		access_medical, access_morgue, access_maint_tunnels,
 		access_external_airlocks, access_emergency_storage,
 		access_eva, access_surgery, access_medical_equip,
-		access_solgov_crew, access_hangar, access_radio_med
+		access_solgov_crew, access_radio_med
 	)
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,

@@ -37,7 +37,7 @@
 	access = list(
 		access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 		access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
-		access_tcomsat, access_solgov_crew, access_seneng, access_hangar, access_network, access_network_admin, access_radio_eng
+		access_tcomsat, access_solgov_crew, access_seneng, access_network, access_network_admin, access_radio_eng
 	)
 
 	software_on_spawn = list(/datum/computer_file/program/power_monitor,
@@ -96,7 +96,7 @@
 	access = list(
 		access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 		access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
-		access_solgov_crew, access_hangar, access_network, access_radio_eng
+		access_solgov_crew, access_network, access_radio_eng
 	)
 
 	software_on_spawn = list(/datum/computer_file/program/power_monitor,
@@ -150,7 +150,7 @@
 	access = list(
 		access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 		access_eva, access_tech_storage, access_janitor, access_construction,
-		access_solgov_crew, access_hangar, access_radio_eng
+		access_solgov_crew, access_radio_eng
 	)
 
 	software_on_spawn = list(/datum/computer_file/program/power_monitor,
