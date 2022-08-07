@@ -122,6 +122,6 @@
 	)
 
 	access = list(
-		access_maint_tunnels, access_emergency_storage,
+		access_emergency_storage,
 		access_solgov_crew, access_radio_serv
 	)

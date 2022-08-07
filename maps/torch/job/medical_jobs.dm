@@ -36,7 +36,7 @@
 	skill_points = 20
 
 	access = list(
-		access_medical, access_morgue, access_virology, access_maint_tunnels, access_emergency_storage,
+		access_medical, access_morgue, access_virology, access_emergency_storage,
 		access_crematorium, access_chemistry, access_surgery,
 		access_medical_equip, access_solgov_crew, access_senmed, access_radio_med
 	)
@@ -79,7 +79,7 @@
 	skill_points = 16
 
 	access = list(
-		access_medical, access_morgue, access_virology, access_maint_tunnels, access_emergency_storage,
+		access_medical, access_morgue, access_virology, access_emergency_storage,
 		access_crematorium, access_chemistry, access_surgery,
 		access_medical_equip, access_solgov_crew, access_senmed, access_radio_med
 	)
@@ -122,7 +122,7 @@
 	                    SKILL_CHEMISTRY   = SKILL_MAX)
 
 	access = list(
-		access_medical, access_morgue, access_maint_tunnels,
+		access_medical, access_morgue,
 		access_external_airlocks, access_emergency_storage,
 		access_eva, access_surgery, access_medical_equip,
 		access_solgov_crew, access_hangar, access_radio_med
@@ -168,7 +168,7 @@
 	                    SKILL_CHEMISTRY   = SKILL_MAX)
 
 	access = list(
-		access_medical, access_morgue, access_maint_tunnels,
+		access_medical, access_morgue,
 		access_external_airlocks, access_emergency_storage,
 		access_surgery, access_medical_equip, access_solgov_crew,
 		access_radio_med
@@ -207,7 +207,7 @@
 	skill_points = 16
 
 	access = list(
-		access_medical, access_maint_tunnels, access_emergency_storage,
+		access_medical, access_emergency_storage,
 		access_medical_equip, access_solgov_crew, access_chemistry,
 	 	access_virology, access_morgue, access_crematorium, access_radio_med
 	)

@@ -119,7 +119,7 @@
 		access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm,
 		access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_rd,
 		access_petrov_control, access_petrov_maint, access_pathfinder, access_explorer, access_eva, access_solgov_crew,
-		access_expedition_shuttle, access_expedition_shuttle_helm, access_maint_tunnels, access_torch_fax, access_radio_comm,
+		access_expedition_shuttle, access_expedition_shuttle_helm, access_torch_fax, access_radio_comm,
 		access_radio_sci, access_radio_exp, access_research_storage
 	)
 
@@ -160,7 +160,7 @@
 	skill_points = 26
 
 	access = list(
-		access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+		access_medical, access_morgue, access_external_airlocks, access_emergency_storage,
 		access_teleporter, access_eva, access_bridge, access_heads,
 		access_chapel_office, access_crematorium, access_chemistry, access_virology, access_aquila,
 		access_cmo, access_surgery, access_RC_announce, access_keycard_auth, access_psychiatrist,
@@ -260,7 +260,7 @@
 
 	access = list(
 		access_security, access_brig, access_armory, access_forensics_lockers,
-		access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+		access_external_airlocks, access_emergency_storage,
 		access_teleporter, access_eva, access_bridge, access_heads, access_aquila,
 		access_hos, access_RC_announce, access_keycard_auth, access_sec_doors,
 		access_solgov_crew, access_gun, access_emergency_armory, access_hangar, access_torch_fax,
@@ -340,7 +340,7 @@
 
 
 	access = list(
-		access_security, access_medical, access_engine, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+		access_security, access_medical, access_engine, access_external_airlocks, access_emergency_storage,
 		access_teleporter, access_eva, access_bridge, access_all_personal_lockers, access_janitor,
 		access_kitchen, access_cargo, access_RC_announce, access_keycard_auth, access_aquila, access_guppy_helm,
 		access_solgov_crew, access_gun, access_expedition_shuttle, access_guppy, access_senadv, access_hangar, access_torch_fax,
@@ -382,7 +382,7 @@
 
 
 	access = list(
-		access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage,
+		access_security, access_medical, access_engine, access_emergency_storage,
 		access_bridge, access_janitor, access_kitchen, access_cargo, access_mailsorting, access_RC_announce, access_keycard_auth,
 		access_solgov_crew, access_aquila, access_aquila_helm, access_guppy, access_guppy_helm, access_external_airlocks,
 		access_eva, access_hangar, access_cent_creed, access_explorer, access_expedition_shuttle, access_expedition_shuttle_helm, access_teleporter,
