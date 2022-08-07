@@ -1,4 +1,5 @@
 #include "icgnv_hound_shuttle.dm"
+#include "icgnv_hound_radio.dm"
 
 /datum/map_template/ruin/icgnv_hound
 	name = "ICGNV Hound"

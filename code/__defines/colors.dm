@@ -116,6 +116,7 @@
 #define COMMS_COLOR_BEARCAT    "#590e2d"
 #define COMMS_COLOR_COLONY     "#ceaf3e"
 #define COMMS_COLOR_VERNE      "#738465"
+#define COMMS_COLOR_ICCG       "#f06016"
 
 #define WOOD_COLOR_GENERIC     "#d5a66e"
 #define WOOD_COLOR_RICH        "#792f27"

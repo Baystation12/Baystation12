@@ -47,6 +47,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/telecomms/hub/map_preset/icgnv_hound,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icgnv_hound)
 "aj" = (
@@ -400,8 +401,8 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	icon_state = "map_scrubber_on";
-	dir = 8
+	dir = 8;
+	icon_state = "map_scrubber_on"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icgnv_hound)
@@ -659,10 +660,10 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	icon_state = "4-8";
-	dir = 8;
 	d1 = 4;
-	d2 = 8
+	d2 = 8;
+	dir = 8;
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -756,8 +757,8 @@
 /obj/machinery/light/small,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/unary/vent_pump/on{
-	icon_state = "map_vent_out";
-	dir = 4
+	dir = 4;
+	icon_state = "map_vent_out"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icgnv_hound)
@@ -786,8 +787,8 @@
 	pixel_x = -32
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
-	icon_state = "map_vent_out";
-	dir = 1
+	dir = 1;
+	icon_state = "map_vent_out"
 	},
 /obj/structure/bed/chair/shuttle/blue{
 	dir = 4;
@@ -800,8 +801,8 @@
 	pixel_x = 32
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	icon_state = "map_scrubber_on";
-	dir = 1
+	dir = 1;
+	icon_state = "map_scrubber_on"
 	},
 /obj/structure/bed/chair/shuttle/blue{
 	dir = 8;
@@ -826,8 +827,8 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	icon_state = "0-1";
-	dir = 1
+	dir = 1;
+	icon_state = "0-1"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -865,8 +866,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/organ_printer/flesh/mapped{
-	pixel_x = 32;
-	density = 0
+	density = 0;
+	pixel_x = 32
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/icgnv_hound)
@@ -889,10 +890,10 @@
 	dir = 8
 	},
 /obj/structure/cable{
-	icon_state = "4-8";
-	dir = 8;
 	d1 = 4;
-	d2 = 8
+	d2 = 8;
+	dir = 8;
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
@@ -904,8 +905,8 @@
 /area/map_template/icgnv_hound)
 "bT" = (
 /obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 2
+	dir = 2;
+	icon_state = "warningcorner"
 	},
 /obj/machinery/light/small,
 /obj/machinery/atmospherics/portables_connector,
@@ -961,15 +962,15 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
-	icon_state = "map_vent_out";
-	dir = 4
+	dir = 4;
+	icon_state = "map_vent_out"
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/icgnv_hound)
 "cb" = (
 /obj/machinery/body_scanconsole{
-	icon_state = "body_scannerconsole";
-	dir = 8
+	dir = 8;
+	icon_state = "body_scannerconsole"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -986,10 +987,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan,
 /obj/structure/cable{
-	icon_state = "0-1";
-	dir = 8;
 	d1 = 4;
-	d2 = 8
+	d2 = 8;
+	dir = 8;
+	icon_state = "0-1"
 	},
 /obj/machinery/power/port_gen/pacman,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1032,8 +1033,8 @@
 /obj/item/storage/firstaid/toxin,
 /obj/item/storage/firstaid/trauma,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	icon_state = "map_scrubber_on";
-	dir = 8
+	dir = 8;
+	icon_state = "map_scrubber_on"
 	},
 /obj/item/storage/box/beakers,
 /obj/machinery/light/small{
@@ -1058,8 +1059,8 @@
 /area/map_template/icgnv_hound)
 "cn" = (
 /obj/machinery/acting/changer{
-	pixel_x = -32;
-	density = 0
+	density = 0;
+	pixel_x = -32
 	},
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled/white,
@@ -1108,11 +1109,27 @@
 /area/map_template/icgnv_hound)
 "cF" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	icon_state = "map_scrubber_on";
-	dir = 8
+	dir = 8;
+	icon_state = "map_scrubber_on"
 	},
 /obj/machinery/vitals_monitor,
 /turf/simulated/floor/tiled/white/monotile,
+/area/map_template/icgnv_hound)
+"ip" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/device/radio/map_preset/icgnv_hound,
+/obj/item/device/radio/map_preset/icgnv_hound,
+/obj/item/device/radio/map_preset/icgnv_hound,
+/obj/item/device/radio/map_preset/icgnv_hound,
+/obj/item/device/radio/map_preset/icgnv_hound,
+/obj/item/device/radio/map_preset/icgnv_hound,
+/obj/item/device/radio/headset/map_preset/icgnv_hound,
+/obj/item/device/radio/headset/map_preset/icgnv_hound,
+/obj/item/device/radio/headset/map_preset/icgnv_hound,
+/obj/item/device/radio/headset/map_preset/icgnv_hound,
+/obj/item/device/radio/headset/map_preset/icgnv_hound,
+/obj/item/device/radio/headset/map_preset/icgnv_hound,
+/turf/simulated/floor/tiled/dark,
 /area/map_template/icgnv_hound)
 "mz" = (
 /obj/effect/floor_decal/techfloor{
@@ -1120,8 +1137,8 @@
 	icon_state = "techfloor_edges"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	id_tag = "icgnv_hound_shuttle_pump_out_internal";
-	dir = 8
+	dir = 8;
+	id_tag = "icgnv_hound_shuttle_pump_out_internal"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
@@ -1172,8 +1189,8 @@
 /area/map_template/icgnv_hound)
 "wf" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
-	icon_state = "map_vent_in";
 	dir = 4;
+	icon_state = "map_vent_in";
 	pump_direction = 0
 	},
 /turf/simulated/floor/plating,
@@ -1191,6 +1208,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/map_template/icgnv_hound)
+"xA" = (
+/obj/machinery/telecomms/broadcaster/map_preset/icgnv_hound,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
 "ze" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/bed/chair/shuttle/blue{
@@ -1199,11 +1220,15 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icgnv_hound)
+"Ak" = (
+/obj/machinery/telecomms/receiver/map_preset/icgnv_hound,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
 "Bf" = (
 /obj/effect/paint/iccgn,
 /obj/structure/sign/warning/airlock{
-	icon_state = "doors";
-	dir = 4
+	dir = 4;
+	icon_state = "doors"
 	},
 /turf/simulated/wall/r_titanium,
 /area/map_template/icgnv_hound)
@@ -1229,8 +1254,8 @@
 	icon_state = "techfloor_corners"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	id_tag = "icgnv_hound_shuttle_pump_out_internal";
-	dir = 8
+	dir = 8;
+	id_tag = "icgnv_hound_shuttle_pump_out_internal"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
@@ -1255,12 +1280,16 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icgnv_hound)
+"Iw" = (
+/obj/machinery/telecomms/processor/map_preset/icgnv_hound,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
 "IR" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/storage/box/ammo/explo_shells,
 /obj/machinery/atmospherics/unary/vent_pump/on{
-	icon_state = "map_vent_out";
-	dir = 4
+	dir = 4;
+	icon_state = "map_vent_out"
 	},
 /obj/item/gun/projectile/shotgun/pump,
 /obj/machinery/light/small{
@@ -1313,23 +1342,27 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icgnv_hound)
+"Ph" = (
+/obj/machinery/telecomms/server/map_preset/icgnv_hound,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icgnv_hound)
 "PD" = (
 /obj/machinery/light/small{
 	dir = 4;
 	pixel_y = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	id_tag = "icgnv_hound_shuttle_pump_out_internal";
-	dir = 8
+	dir = 8;
+	id_tag = "icgnv_hound_shuttle_pump_out_internal"
 	},
 /obj/effect/floor_decal/techfloor{
 	dir = 4;
 	icon_state = "techfloor_edges"
 	},
 /obj/machinery/airlock_sensor{
-	pixel_y = 24;
+	frequency = 1380;
 	id_tag = "icgnv_hound_shuttle_sensor";
-	frequency = 1380
+	pixel_y = 24
 	},
 /obj/effect/floor_decal/corner_techfloor_grid{
 	dir = 1
@@ -1362,16 +1395,16 @@
 	icon_state = "techfloor_edges"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden{
-	icon_state = "map";
-	dir = 8
+	dir = 8;
+	icon_state = "map"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
 "QY" = (
 /obj/effect/paint/iccgn,
 /obj/structure/sign/warning/airlock{
-	icon_state = "doors";
-	dir = 8
+	dir = 8;
+	icon_state = "doors"
 	},
 /turf/simulated/wall/r_titanium,
 /area/map_template/icgnv_hound)
@@ -1395,6 +1428,10 @@
 	icon_state = "bulb1"
 	},
 /turf/simulated/floor/tiled/techfloor,
+/area/map_template/icgnv_hound)
+"Um" = (
+/obj/machinery/telecomms/bus/map_preset/icgnv_hound,
+/turf/simulated/floor/tiled/dark,
 /area/map_template/icgnv_hound)
 "Uy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1438,8 +1475,8 @@
 /area/map_template/icgnv_hound)
 "Vw" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
-	icon_state = "map";
-	dir = 8
+	dir = 8;
+	icon_state = "map"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
@@ -1450,8 +1487,8 @@
 "VN" = (
 /obj/effect/paint/iccgn,
 /obj/machinery/atmospherics/pipe/manifold/hidden{
-	icon_state = "map";
-	dir = 8
+	dir = 8;
+	icon_state = "map"
 	},
 /turf/simulated/wall/r_titanium,
 /area/map_template/icgnv_hound)
@@ -1541,10 +1578,10 @@ bE
 (4,1,1) = {"
 ac
 ad
-am
-am
-am
-am
+xA
+Ak
+Iw
+ip
 Wk
 QT
 ad
@@ -1733,8 +1770,8 @@ aa
 (12,1,1) = {"
 ac
 ad
-am
-am
+Ph
+Um
 ag
 VJ
 am
