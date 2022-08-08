@@ -1,0 +1,7 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Shield Generator nanoUI windows are no longer usable if the panel is opened
+      while the window was open. This prevents generators from being placed into a
+      broken state where they are on and have an open panel, and become unable to
+      be interacted with due to restriction checks.
