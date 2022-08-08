@@ -277,6 +277,8 @@
 	return TRUE
 
 /obj/machinery/power/shield_generator/CanUseTopic(var/mob/user)
+	if (panel_open)
+		return STATUS_CLOSE
 	if(issilicon(user) && !Adjacent(user) && ai_control_disabled)
 		return STATUS_UPDATE
 	return ..()
