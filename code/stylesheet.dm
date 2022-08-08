@@ -122,7 +122,8 @@ h1.alert, h2.alert		{color: #000080;}
 .russian				{color: #9c250b;}
 .arabic					{color: #128b11;}
 .spacer					{color: #9c660b;}
-.selenian       {color: #22228b;}
+.selenian               {color: #22228b;}
+.lirris                  {color: #00BFFF;}
 
 .interface				{color: #330033;}
 

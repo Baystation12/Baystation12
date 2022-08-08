@@ -146,6 +146,7 @@
 	to the planet, but exceptions have been made. A scientifically driven people, they have served many organisations loyally."
 	capital = "The Hub"
 	economic_power = 1.0
+	secondary_langs = list(LANGUAGE_HUMAN_LORRIMAN)
 
 /decl/cultural_info/location/human/cinu
 	name = HOME_SYSTEM_CINU

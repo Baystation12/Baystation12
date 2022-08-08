@@ -12,7 +12,8 @@
 		LANGUAGE_HUMAN_INDIAN = 25,
 		LANGUAGE_HUMAN_IBERIAN = 15,
 		LANGUAGE_HUMAN_RUSSIAN = 5,
-		LANGUAGE_SPACER = 20
+		LANGUAGE_SPACER = 20,
+		LANGUAGE_HUMAN_LORRIMAN = 80
 	)
 	syllables = list(
 		"al", "an", "ar", "as", "at", "ed", "er", "ha", "he", "hi", "is", "le", "me", "on", "se", "ti",
