@@ -75,7 +75,7 @@
 		if(!length(remaining_votes) || !length(remaining_choices))  // we ran out of options or votes, you get what we have
 			result += remaining_choices.Copy(1, clamp(result_length - length(result) + 1, 0, length(remaining_choices) + 1))
 			break
-		else 
+		else
 			// 50% majority or we don't have enough candidates to be picky, declare the winner and remove it from the possible candidates
 			if(remaining_choices[remaining_choices[1]] > length(remaining_votes) / 2 || length(remaining_choices) <= result_length - length(result))
 				var/winner = remaining_choices[1]
@@ -84,7 +84,7 @@
 			else // no winner, remove the biggest loser and go again
 				var/loser = remaining_choices[length(remaining_choices)]
 				remove_candidate(remaining_choices, remaining_votes, loser)
-			
+
 // Remove candidate from choice_list and any votes for it from vote_list, transfering first choices to second
 /datum/vote/proc/remove_candidate(list/choice_list, list/vote_list, candidate)
 	var/candidate_index = choices.Find(candidate) // use choices instead of choice_list because we need the original indexing
@@ -105,7 +105,7 @@
 
 	var/text = get_result_announcement()
 	log_vote(text)
-	to_world("<font color='purple'>[text]</font>")	
+	to_world("<font color='purple'>[text]</font>")
 
 	if(!(result[result[1]] > 0))
 		return 1
@@ -151,7 +151,7 @@
 
 // Checks if the mob is participating in the round sufficiently to vote, as per config settings.
 /datum/vote/proc/mob_not_participating(mob/voter)
-	if (config.vote_no_dead && voter.stat == DEAD && !check_rights(EMPTY_BITFIELD, FALSE, voter))
+	if (config.vote_no_dead && voter.stat == DEAD && !check_rights(EMPTY_BITFIELD, FALSE, voter.client))
 		return TRUE
 
 //null = no toggle set. This is for UI purposes; a text return will give a link (toggle; currently "return") in the vote panel.
