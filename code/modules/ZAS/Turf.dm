@@ -1,14 +1,22 @@
-/turf/simulated
-	///The turf's current zone.
-	var/zone/zone
-	///All directions in which a turf that can contain air is present.
-	var/open_directions
-/turf
-	var/datum/gas_mixture/air
-	var/needs_air_update = 0
+
+
+////Turf Vars////
+///The cached air mixture of a turf. Never directly access, use `return_air()`.
+//This exists to store air during zone rebuilds, as well as for unsimulated turfs.
+//They are never deleted to not overwhelm the garbage collector.
+/turf/var/datum/gas_mixture/air
+///Is this turf queued in the TURFS cycle of SSair?
+/turf/var/needs_air_update = 0
+
+////Simulated Turf Vars////
+///The turf's current zone.
+/turf/simulated/var/zone/zone
+///All directions in which a turf that can contain air is present.
+/turf/simulated/var/open_directions
+
 #ifdef ZASDBG
-	///Set to TRUE during debugging to get descriptive to_chats of the object. Works for all atmos-related datums.
-	var/tmp/verbose = FALSE
+///Set to TRUE during debugging to get descriptive to_chats of the object. Works for all atmos-related datums.
+/turf/var/tmp/verbose = FALSE
 #endif
 
 /turf/simulated/proc/update_graphic(list/graphic_add = null, list/graphic_remove = null)
@@ -24,7 +32,7 @@
 		#ifdef ZASDBG
 		if(verbose)
 			zas_log("Self-blocked.")
-		src.dbg(zasdbgovl_blocked)
+		dbg(zasdbgovl_blocked)
 		#endif
 		return 1
 
@@ -116,7 +124,7 @@
 		#ifdef ZASDBG
 		if(verbose)
 			zas_log("Self-blocked.")
-		src.dbg(zasdbgovl_blocked)
+		dbg(zasdbgovl_blocked)
 		#endif
 		if(zone)
 			var/zone/z = zone
@@ -150,7 +158,7 @@
 			#ifdef ZASDBG
 			if(verbose)
 				zas_log("[dir2text(d)] is blocked.")
-			//src.dbg(ZAS_DIRECTIONAL_BLOCKER(d))
+			//dbg(ZAS_DIRECTIONAL_BLOCKER(d))
 			#endif
 
 			continue

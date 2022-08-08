@@ -8,6 +8,10 @@
 	Purple outlines indicate the turf was marked for an update by SSair, and is in its processing list.
 	In addition, all ZAS-related datums and turfs will have a "verbose" var. Set this to 1 using View Variables to get robust to_chat()s about activity.
 	Finally, this is a friendly reminder that using Debug Verbs gives access to the Zone Info and Test ZAS Connection verbs when you right click a turf.
+
+	Addendum:
+		There are additional debug overlays that use ZAS_ZONE_BLOCKER and ZAS_DIRECTIONAL_BLOCKER.
+		They take priority over standard overlays, displaying directional airflow, and are generally not needed so they are commented out by default.
 */
 //#define ZASDBG
 #define MULTIZAS
