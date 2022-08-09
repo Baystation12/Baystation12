@@ -56,6 +56,31 @@
 	req_access = list(list(access_brig, access_heads))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
 
+/obj/item/gun/energy/revolver/secure/small
+	name = "compact smart revolver"
+	desc = "The LAER680-CS, a compact variant of its bigger service revolver cousin commonly nicknamed a 'snubber' for it's snub-nosed appearance. This one includes a remote authorization uplink and a dialed down capacitor, putting it on par with the traditional compact smartgun."
+	icon = 'icons/obj/guns/small_energy_revolver.dmi'
+	max_shots = 6
+	w_class = ITEM_SIZE_SMALL
+	force = 2
+	firemodes = list(
+		list(
+			mode_name="stun",
+			projectile_type=/obj/item/projectile/beam/stun/smalllaser,
+			modifystate="energyrevolverstun"
+		),
+		list(
+			mode_name="shock",
+			projectile_type=/obj/item/projectile/beam/stun/shock/smalllaser,
+			modifystate="energyrevolvershock"
+		),
+		list(
+			mode_name="kill",
+			projectile_type=/obj/item/projectile/beam/smalllaser,
+			modifystate="energyrevolverkill"
+		)
+	)
+
 /obj/item/gun/energy/gun/secure/mounted
 	name = "robot energy gun"
 	desc = "A robot-mounted equivalent of the LAEP90-S, which is always registered to its owner."
