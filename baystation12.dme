@@ -643,6 +643,7 @@
 #include "code\game\machinery\cracker.dm"
 #include "code\game\machinery\cryo.dm"
 #include "code\game\machinery\cryopod.dm"
+#include "code\game\machinery\distress_beacon.dm"
 #include "code\game\machinery\doppler_array.dm"
 #include "code\game\machinery\flasher.dm"
 #include "code\game\machinery\floodlight.dm"
