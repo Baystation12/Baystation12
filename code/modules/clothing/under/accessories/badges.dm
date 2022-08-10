@@ -5,6 +5,9 @@
 	slot_flags = SLOT_BELT | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
 	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
+	on_rolled = list(
+		"down" = "none"
+	)
 	var/badge_string = "Detective"
 	var/stored_name
 

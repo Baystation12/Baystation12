@@ -3,6 +3,7 @@
 	name = "skill badge"
 	desc = "An EC skill badge signifying that the bearer has passed the advanced training on spawning wrong types. Informally known as 'Shouldn't be seeing this'."
 	slot = ACCESSORY_SLOT_INSIGNIA
+	on_rolled = list("down" = "none")
 	var/badgecolor //for on-mob sprite cause im not putting 9000 colored pixels in dmi
 
 /obj/item/clothing/accessory/solgov/skillbadge/get_mob_overlay(mob/user_mob, slot)

@@ -3,6 +3,9 @@
 	desc = "A simple medal."
 	icon_state = "bronze"
 	slot = ACCESSORY_SLOT_MEDAL
+	on_rolled = list(
+		"down" = "none"
+	)
 
 
 /obj/item/clothing/accessory/medal/iron
