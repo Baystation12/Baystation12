@@ -53,7 +53,7 @@
 
 /obj/machinery/telecomms/allinone/iccgn
 	listening_freqs = list(ICCGN_FREQ)
-	channel_color = COMMS_COLOR_CENTCOMM
+	channel_color = COMMS_COLOR_ICCG
 	channel_name = "ICGNV Hound"
 	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/allinone/iccgn
 
@@ -66,9 +66,9 @@
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/iccgn
 
-/obj/item/device/radio/headset/ert/Initialize()
+/obj/item/device/radio/headset/iccgn/Initialize()
 	. = ..()
-	set_frequency(ERT_FREQ)
+	set_frequency(ICCGN_FREQ)
 
 /obj/item/device/encryptionkey/iccgn
 	name = "\improper ICCGN radio encryption key"
