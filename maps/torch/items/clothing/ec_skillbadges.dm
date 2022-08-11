@@ -3,7 +3,7 @@
 	name = "skill badge"
 	desc = "An EC skill badge signifying that the bearer has passed the advanced training on spawning wrong types. Informally known as 'Shouldn't be seeing this'."
 	slot = ACCESSORY_SLOT_INSIGNIA
-	on_rolled = list("down" = "none")
+	on_rolled_down = ACCESSORY_ROLLED_NONE
 	var/badgecolor //for on-mob sprite cause im not putting 9000 colored pixels in dmi
 
 /obj/item/clothing/accessory/solgov/skillbadge/get_mob_overlay(mob/user_mob, slot)
@@ -62,7 +62,7 @@
 	name = "specialist stripe"
 	desc = "A thin stripe of spaceworthy material with vacuum-rated adhesive, for attaching to the voidsuit. Indicates some sort of specialist training."
 	slot = ACCESSORY_SLOT_INSIGNIA
-	on_rolled = list("down" = "none")
+	on_rolled_down = ACCESSORY_ROLLED_NONE
 	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
 	icon_state = "ec_stripe"
 

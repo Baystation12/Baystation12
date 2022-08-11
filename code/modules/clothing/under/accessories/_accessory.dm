@@ -1,3 +1,6 @@
+#define ACCESSORY_ROLLED_DEFAULT null // Use the default/base sprite for the accessory.
+#define ACCESSORY_ROLLED_NONE "none" // Use no sprite/hide the accessory.
+
 /obj/item/clothing/accessory
 	name = "tie"
 	desc = "A neosilk clip-on tie."
@@ -18,7 +21,10 @@
 		SPECIES_NABBER = 'icons/mob/species/nabber/onmob_accessories_gas.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_accessories_unathi.dmi'
 		)
-	var/list/on_rolled = list()	//used when jumpsuit sleevels are rolled ("rolled" entry) or it's rolled down ("down"). Set to "none" to hide in those states.
+	/// String (One of `ACCESSORY_ROLLED_*` or a valid icon state). The icon_state or flag to use when the attached uniform is rolled down.
+	var/on_rolled_down = ACCESSORY_ROLLED_DEFAULT
+	/// String (One of `ACCESSORY_ROLLED_*` or a valid icon state). The icon_state or flag to use when the attached uniform has its sleeves rolled up.
+	var/on_rolled_sleeves = ACCESSORY_ROLLED_DEFAULT
 	var/slowdown //used when an accessory is meant to slow the wearer down when attached to clothing
 
 
@@ -61,10 +67,10 @@
 
 		if(istype(loc,/obj/item/clothing/under))
 			var/obj/item/clothing/under/C = loc
-			if(on_rolled["down"] && C.rolled_down > 0)
-				tmp_icon_state = on_rolled["down"]
-			else if(on_rolled["rolled"] && C.rolled_sleeves > 0)
-				tmp_icon_state = on_rolled["rolled"]
+			if (on_rolled_down && C.rolled_down > 0)
+				tmp_icon_state = on_rolled_down
+			else if (on_rolled_sleeves && C.rolled_sleeves > 0)
+				tmp_icon_state = on_rolled_sleeves
 
 		var/use_sprite_sheet = accessory_icons[slot]
 		if(sprite_sheets[bodytype])

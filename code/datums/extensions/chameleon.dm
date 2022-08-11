@@ -15,7 +15,7 @@
 		chameleon_choices = LAZYACCESS(chameleon_choices_by_type, chameleon_type)
 		if(!chameleon_choices)
 			chameleon_choices = generate_chameleon_choices(chameleon_type)
-			LAZYSET(chameleon_choices_by_type, chameleon_type, chameleon_choices)	
+			LAZYSET(chameleon_choices_by_type, chameleon_type, chameleon_choices)
 	else
 		var/list/choices = list()
 		for(var/path in chameleon_choices)
@@ -71,7 +71,8 @@
 	A.mob_overlay = copy.mob_overlay
 	A.overlay_state = copy.overlay_state
 	A.accessory_icons = copy.accessory_icons
-	A.on_rolled = copy.on_rolled
+	A.on_rolled_down = copy.on_rolled_down
+	A.on_rolled_sleeves = copy.on_rolled_sleeves
 	A.accessory_flags = copy.accessory_flags
 
 /datum/extension/chameleon/proc/add_chameleon_choice(list/target, path)
