@@ -61,6 +61,12 @@
 	cost = 10
 	containername = "low oxygen pouch crate"
 
+/decl/hierarchy/supply_pack/medical/radiation
+	name = "EMERGENCY - Radiation pouches"
+	contains = list(/obj/item/storage/firstaid/radiation = 3)
+	cost = 10
+	containername = "radiation pouch crate"
+
 /decl/hierarchy/supply_pack/medical/stab
 	name = "Triage - Stability kit"
 	contains = list(/obj/item/storage/firstaid/stab = 3)

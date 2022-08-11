@@ -1511,6 +1511,9 @@
 /obj/item/storage/firstaid/o2,
 /obj/item/storage/firstaid/o2,
 /obj/item/storage/firstaid/o2,
+/obj/item/storage/firstaid/radiation,
+/obj/item/storage/firstaid/radiation,
+/obj/item/storage/firstaid/radiation,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"

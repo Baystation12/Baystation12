@@ -207,6 +207,7 @@
 /obj/item/storage/firstaid/adv{
 	pixel_x = 1
 	},
+/obj/item/storage/firstaid/radiation,
 /obj/structure/window/reinforced/crescent{
 	dir = 4
 	},

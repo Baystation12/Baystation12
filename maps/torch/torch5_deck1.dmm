@@ -17666,6 +17666,7 @@
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/light,
+/obj/item/storage/firstaid/radiation,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/equipstorage)
 "gvC" = (

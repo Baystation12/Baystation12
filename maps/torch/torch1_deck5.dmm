@@ -1834,6 +1834,7 @@
 	name = "south bump";
 	pixel_y = -28
 	},
+/obj/item/storage/firstaid/radiation,
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/medical)
 "dY" = (
@@ -7353,6 +7354,7 @@
 /obj/item/storage/ore,
 /obj/item/storage/ore,
 /obj/item/storage/belt/archaeology,
+/obj/item/storage/firstaid/radiation,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/expedition)
 "qj" = (
@@ -11719,6 +11721,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/item/storage/firstaid/radiation,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/isolation)
 "CW" = (

@@ -183,19 +183,22 @@
 /obj/random/firstaid
 	name = "Random First Aid Kit"
 	desc = "This is a random first aid kit."
-	icon = 'icons/obj/storage.dmi'
-	icon_state = "firstaid"
+	icon = 'icons/obj/medical.dmi'
+	icon_state = "fak-basic"
 
 /obj/random/firstaid/spawn_choices()
-	return list(/obj/item/storage/firstaid/regular = 4,
-				/obj/item/storage/firstaid/trauma = 3,
-				/obj/item/storage/firstaid/toxin = 3,
-				/obj/item/storage/firstaid/o2 = 3,
-				/obj/item/storage/firstaid/stab = 2,
-				/obj/item/storage/firstaid/adv = 2,
-				/obj/item/storage/firstaid/combat = 1,
-				/obj/item/storage/firstaid/empty = 2,
-				/obj/item/storage/firstaid/fire = 3)
+	return list(
+		/obj/item/storage/firstaid/regular = 4,
+		/obj/item/storage/firstaid/trauma = 3,
+		/obj/item/storage/firstaid/toxin = 3,
+		/obj/item/storage/firstaid/o2 = 3,
+		/obj/item/storage/firstaid/fire = 3,
+		/obj/item/storage/firstaid/radiation = 3,
+		/obj/item/storage/firstaid/stab = 2,
+		/obj/item/storage/firstaid/adv = 2,
+		/obj/item/storage/firstaid/combat = 1,
+		/obj/item/storage/firstaid/empty = 2
+	)
 
 /obj/random/contraband
 	name = "Random Illegal Item"

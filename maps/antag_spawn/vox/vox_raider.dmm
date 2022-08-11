@@ -101,6 +101,7 @@
 /obj/item/reagent_containers/spray/sterilizine,
 /obj/item/defibrillator/loaded,
 /obj/item/storage/firstaid/combat,
+/obj/item/storage/firstaid/radiation,
 /obj/item/bodybag/cryobag,
 /obj/item/reagent_containers/ivbag/nanoblood,
 /obj/item/storage/firstaid/adv,
