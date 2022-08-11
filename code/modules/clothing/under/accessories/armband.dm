@@ -8,9 +8,6 @@
 	sprite_sheets = list(
 		SPECIES_NABBER = 'icons/mob/species/nabber/onmob_accessories_gas.dmi'
 	)
-	on_rolled = list(
-		"down" = "none"
-	)
 
 
 /obj/item/clothing/accessory/armband/cargo

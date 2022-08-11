@@ -149,7 +149,6 @@ scarves
 	icon = 'icons/obj/clothing/obj_accessories.dmi'
 	accessory_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_accessories.dmi', slot_wear_suit_str = 'icons/mob/onmob/onmob_accessories.dmi')
 	icon_state = "whitescarf"
-	on_rolled = list("down" = "none")
 	color = "#68a0ce"
 	check_codex_val = FACTION_EXPEDITIONARY
 
