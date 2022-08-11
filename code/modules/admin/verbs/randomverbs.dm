@@ -436,6 +436,72 @@ Ccomp's first proc.
 	G.show_message("<span class=notice><b>You may now respawn.  You should roleplay as if you learned nothing about the round during your time with the dead.</b></span>", 1)
 	log_and_message_admins("has allowed [key_name(G)] to bypass the [config.respawn_delay] minute respawn limit.")
 
+
+/client/proc/allow_respawn()
+	set category = "Special Verbs"
+	set name = "Allow Respawn"
+	set desc = "Allows a ghost or lobby player to bypass respawn timers."
+	if(!check_rights(R_ADMIN))
+		return
+	var/time = world.time
+	var/list/candidates = list()
+	for (var/client/candidate as anything in GLOB.clients)
+		if (candidate.holder)
+			continue
+		if (!candidate.mob)
+			continue
+		if (candidate.mob.type == /mob/new_player)
+			if (config.respawn_menu_delay)
+				var/mob/new_player/subject = candidate.mob
+				if (!subject.respawned_time)
+					continue
+				if (subject.respawned_time + config.respawn_menu_delay < time)
+					continue
+			candidates["[candidate.ckey] (Lobby)"] = list(candidate, 1)
+		else if (candidate.mob.type == /mob/observer/ghost)
+			candidates["[candidate.ckey] (Ghost)"] = list(candidate, 2)
+	if (!length(candidates))
+		to_chat(usr, SPAN_WARNING("There are no users eligible to be respawned."))
+		return
+	var/response = input(usr, null, "Allow Respawn") in null | candidates
+	if (!response)
+		return
+	response = candidates[response]
+	if (!response)
+		return
+	var/client/selected = response[1]
+	var/state = response[2]
+	if (state == 2)
+		if (selected.mob.type == /mob/observer/ghost)
+			var/mob/observer/ghost/subject = selected.mob
+			if (subject.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
+				var/confirm = alert(src, "[subject.ckey] has enabled antag HUD. Are you sure?", "Confirm Respawn", "Yes", "No")
+				if (confirm != "Yes")
+					return
+				if (selected.mob.type != /mob/observer/ghost)
+					if (selected.mob.type == /mob/new_player)
+						state = 1
+					else
+						to_chat(usr, SPAN_WARNING("Something went wrong. [selected.ckey] re-entered their body or disconnected."))
+						return
+			if (state == 2)
+				subject.timeofdeath = -1e5
+				subject.has_enabled_antagHUD = 2
+				subject.can_reenter_corpse = CORPSE_CAN_REENTER_AND_RESPAWN
+				state = 3
+		else if (selected.mob.type == /mob/new_player)
+			state = 1
+	if (state == 1 && selected.mob.type == /mob/new_player)
+		var/mob/new_player/subject = selected.mob
+		subject.respawned_time = -1e5
+		state = 3
+	if (state == 3)
+		log_and_message_admins("has allowed [key_name(selected)] to bypass respawn timers.")
+		to_chat(selected, SPAN_NOTICE("You have been allowed to bypass respawn timers."))
+	else
+		to_chat(usr, SPAN_WARNING("Something went wrong. [selected.ckey] re-entered their body or disconnected."))
+
+
 /client/proc/toggle_antagHUD_use()
 	set category = "Server"
 	set name = "Toggle antagHUD usage"
