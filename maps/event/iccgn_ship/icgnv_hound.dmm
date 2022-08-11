@@ -22,6 +22,8 @@
 	dir = 8
 	},
 /obj/machinery/cell_charger,
+/obj/item/device/radio/headset/iccgn,
+/obj/item/device/radio/headset/iccgn,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icgnv_hound)
 "ac" = (
@@ -278,6 +280,7 @@
 /obj/item/clothing/head/iccgn/service_command,
 /obj/item/clothing/accessory/solgov/department/exploration/fleet,
 /obj/structure/table/steel_reinforced,
+/obj/item/device/radio/headset/iccgn,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icgnv_hound)
 "aM" = (
@@ -726,6 +729,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
+/obj/machinery/telecomms/allinone/iccgn,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
 "bE" = (
@@ -1434,6 +1438,7 @@
 /obj/item/clothing/under/iccgn/service_command,
 /obj/item/clothing/head/iccgn/service_command,
 /obj/structure/table/steel_reinforced,
+/obj/item/device/radio/headset/iccgn,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icgnv_hound)
 "Vw" = (

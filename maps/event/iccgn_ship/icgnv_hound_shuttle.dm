@@ -50,3 +50,29 @@
 /obj/machinery/power/apc/debug/iccgn
 	cell_type = /obj/item/cell/infinite
 	req_access = list(access_syndicate)
+
+/obj/machinery/telecomms/allinone/iccgn
+	listening_freqs = list(ICCGN_FREQ)
+	channel_color = COMMS_COLOR_CENTCOMM
+	channel_name = "ICGNV Hound"
+	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/allinone/iccgn
+
+
+//Items
+/obj/item/device/radio/headset/iccgn
+	name = "iccgn headset"
+	desc = "Headset belonging to an ICCGN operative."
+	icon_state = "syndie_headset"
+	item_state = "headset"
+	ks1type = /obj/item/device/encryptionkey/iccgn
+
+/obj/item/device/radio/headset/ert/Initialize()
+	. = ..()
+	set_frequency(ERT_FREQ)
+
+/obj/item/device/encryptionkey/iccgn
+	name = "\improper ICCGN radio encryption key"
+	channels = list("ICGNV Hound" = 1)
+
+/obj/item/stock_parts/circuitboard/telecomms/allinone/iccgn
+	build_path = /obj/machinery/telecomms/allinone/iccgn
