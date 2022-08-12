@@ -109,6 +109,7 @@ patches
 	name = "\improper Cultural Exchange patch"
 	desc = "A radiation-shielded shoulder patch, denoting service in the the Sol Central Government Expeditionary Corps Cultural Exchange program."
 	icon_state = "ecpatch3"
+	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_INSIGNIA
 	check_codex_val = FACTION_EXPEDITIONARY
 
@@ -148,7 +149,6 @@ scarves
 	icon = 'icons/obj/clothing/obj_accessories.dmi'
 	accessory_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_accessories.dmi', slot_wear_suit_str = 'icons/mob/onmob/onmob_accessories.dmi')
 	icon_state = "whitescarf"
-	on_rolled = list("down" = "none")
 	color = "#68a0ce"
 	check_codex_val = FACTION_EXPEDITIONARY
 
@@ -165,6 +165,11 @@ scarves
 /******
 ribbons
 ******/
+/obj/item/clothing/accessory/ribbon
+	on_rolled = list(
+		"down" = "none"
+	)
+
 /obj/item/clothing/accessory/ribbon/solgov
 	name = "ribbon"
 	desc = "A simple military decoration."
@@ -277,6 +282,7 @@ specialty pins
 	icon_state = "marinerank_command"
 	slot = ACCESSORY_SLOT_INSIGNIA
 	icon_state = "fleetspec"
+	on_rolled = list("down" = "none")
 
 /obj/item/clothing/accessory/solgov/specialty/janitor
 	name = "custodial blazes"
