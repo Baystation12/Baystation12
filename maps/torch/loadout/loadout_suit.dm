@@ -81,6 +81,10 @@
 	allowed_roles = FORMAL_ROLES
 	allowed_branches = CIVILIAN_BRANCHES
 
+/datum/gear/suit/custom_suit_jacket_double
+	allowed_roles = FORMAL_ROLES
+	allowed_branches = CIVILIAN_BRANCHES
+
 /datum/gear/suit/hoodie
 	allowed_roles = CASUAL_ROLES
 	allowed_branches = CIVILIAN_BRANCHES
@@ -89,6 +93,13 @@
 	allowed_roles = CASUAL_ROLES
 	allowed_branches = CIVILIAN_BRANCHES
 
+/datum/gear/suit/pullover
+	allowed_roles = CASUAL_ROLES
+	allowed_branches = CIVILIAN_BRANCHES
+
+/datum/gear/suit/zipper
+	allowed_roles = CASUAL_ROLES
+	allowed_branches = CIVILIAN_BRANCHES
 /datum/gear/suit/labcoat
 	allowed_roles = DOCTOR_ROLES
 
