@@ -1,7 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Badges, medals, patches, qualification pins, etc no longer appear to be
-      pinned to a mob's chest when their uniforms are rolled down.
-  - tweak: Webbing vests, storage pouches, scarves, and armbands now remain visible
-      when the uniform they're attached to is rolled down.

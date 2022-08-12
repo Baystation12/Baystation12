@@ -1,5 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - admin: Adds Allow Respawn verb in Special category. Is an alternative to Allow
-      player to respawn.

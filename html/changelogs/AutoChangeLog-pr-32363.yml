@@ -1,4 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fixed special attacks for the vagrant, cosmoshark, and the drake.

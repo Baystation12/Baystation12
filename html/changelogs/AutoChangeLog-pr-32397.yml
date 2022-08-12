@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: The on mob sprite for the alternate medical uniform now renders correctly.
