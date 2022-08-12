@@ -1,0 +1,7 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: Zipper Sweater and Pullover Sweater have been restricted to casual civilian
+      in the loadout system.
+  - bugfix: Double-Breasted Suit Jacket has been restricted to formal civilian in
+      the loadout system.
