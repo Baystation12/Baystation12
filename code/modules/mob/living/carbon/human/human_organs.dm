@@ -177,7 +177,7 @@
 	for (var/obj/item/organ/external/E in organs)
 		if(!E || !(E.limb_flags & ORGAN_FLAG_CAN_GRASP))
 			continue
-		if(((E.is_broken() || E.is_dislocated()) && !E.splinted) || E.is_malfunctioning())
+		if(((E.is_broken() || E.is_dislocated()) && !E.splinted))
 			grasp_damage_disarm(E)
 
 /mob/living/carbon/human/proc/stance_damage_prone(var/obj/item/organ/external/affected)

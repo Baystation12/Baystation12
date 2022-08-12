@@ -8,9 +8,9 @@
 	status = ORGAN_ROBOTIC
 	vital = 1
 	var/open
-	var/obj/item/cell/cell = /obj/item/cell/hyper
-	//at 0.8 completely depleted after 60ish minutes of constant walking or 130 minutes of standing still
-	var/servo_cost = 0.8
+	var/obj/item/cell/cell = /obj/item/cell/high
+	//at 0.26 completely depleted after 60ish minutes of constant walking or 130 minutes of standing still
+	var/servo_cost = 0.26
 
 /obj/item/organ/internal/cell/New()
 	robotize()
@@ -57,6 +57,8 @@
 		if(!owner.lying && !owner.buckled)
 			to_chat(owner, "<span class='warning'>You don't have enough energy to function!</span>")
 		owner.Paralyse(3)
+	if(percent() < 10 && prob(1))
+		to_chat(owner, SPAN_WARNING("Your internal battery beeps an alert code, it is low on charge!"))
 
 /obj/item/organ/internal/cell/emp_act(severity)
 	..()
@@ -121,6 +123,17 @@
 	update_from_mmi()
 	persistantMind = owner.mind
 	ownerckey = owner.ckey
+
+/obj/item/organ/internal/mmi_holder/Process()
+	..()
+	if(owner.is_asystole())
+		take_internal_damage(0.5)
+
+/obj/item/organ/internal/mmi_holder/handle_regeneration() // MMI will regenerate from small amounts of damage, e.g. damage that might occur when swapping a power cell
+	if(!damage || !owner || owner.is_asystole())
+		return
+	if(damage < 0.1*max_damage)
+		heal_damage(0.1)
 
 /obj/item/organ/internal/mmi_holder/proc/update_from_mmi()
 

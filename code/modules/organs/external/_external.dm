@@ -164,7 +164,7 @@
 	var/mult = 1 + !!(BP_IS_ASSISTED(src)) // This macro returns (large) bitflags.
 	burn_damage *= mult/species.get_burn_mod(owner) //ignore burn mod for EMP damage
 
-	var/power = 3 - severity //stupid reverse severity
+	var/power = (3 - severity)/5 //stupid reverse severity
 	for(var/obj/item/I in implants)
 		if(I.obj_flags & OBJ_FLAG_CONDUCTIBLE)
 			burn_damage += I.w_class * rand(power, 3*power)
@@ -1029,8 +1029,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/proc/fracture()
 	if(!config.bones_can_break)
 		return
-	if(BP_IS_ROBOTIC(src))
-		return	//ORGAN_BROKEN doesn't have the same meaning for robot limbs
 	if((status & ORGAN_BROKEN) || !(limb_flags & ORGAN_FLAG_CAN_BREAK))
 		return
 
@@ -1045,7 +1043,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	playsound(src.loc, "fracture", 100, 1, -2)
 	status |= ORGAN_BROKEN
-	broken_description = pick("broken","fracture","hairline fracture")
+	if(BP_IS_ROBOTIC(src) || BP_IS_CRYSTAL(src))
+		broken_description = pick("broken","shattered","structural rupture")
+	else
+		broken_description = pick("broken","fracture","hairline fracture")
 
 	// Fractures have a chance of getting you out of restraints
 	if (prob(25))
@@ -1059,8 +1060,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 		suit.handle_fracture(owner, src)
 
 /obj/item/organ/external/proc/mend_fracture()
-	if(BP_IS_ROBOTIC(src))
-		return 0	//ORGAN_BROKEN doesn't have the same meaning for robot limbs
 	if(brute_dam > min_broken_damage * config.organ_health_multiplier)
 		return 0	//will just immediately fracture again
 

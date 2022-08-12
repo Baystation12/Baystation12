@@ -75,16 +75,31 @@
 				to_chat(user, SPAN_NOTICE("Cell charge: [C.percent()] %"))
 			else
 				to_chat(user, SPAN_NOTICE("Cell charge: ERROR - Cell not present"))
+
+			to_chat(user, "<hr>")
+
+			to_chat(user, "<span class='notice'>Internal brain activity:</span>")
+			var/obj/item/organ/internal/B = H.internal_organs_by_name[BP_BRAIN]
+			if(B)
+				to_chat(user, "[B.name]: <font color='red'>[(B.status & ORGAN_DEAD) ? "NO ACTIVITY DETECTED - DAMAGED PAST POINT OF NO RETURN" : B.damage]</font>")
+			else
+				to_chat(user, "<font color='red'>ERROR - Brain not present</font>")
+
+			to_chat(user, "<hr>")
+
 			to_chat(user, "<span class='notice'>External prosthetics:</span>")
+
 			var/organ_found
 			for(var/obj/item/organ/external/E in H.organs)
 				if(!BP_IS_ROBOTIC(E))
 					continue
 				organ_found = 1
-				to_chat(user, "[E.name]: <font color='red'>[E.brute_dam]</font> <font color='#ffa500'>[E.burn_dam]</font>")
+				to_chat(user, "[E.name]: <font color='red'>[E.brute_dam]</font> <font color='#ffa500'>[E.burn_dam]</font><font color='red'>[(E.status & ORGAN_BROKEN) ? "- INTERNAL STRUCTURE FRACTURED" : ""]</font>")
 			if(!organ_found)
 				to_chat(user, "No prosthetics located.")
+
 			to_chat(user, "<hr>")
+
 			to_chat(user, "<span class='notice'>Internal prosthetics:</span>")
 			organ_found = null
 			for(var/obj/item/organ/O in H.internal_organs)
@@ -94,6 +109,8 @@
 				to_chat(user, "[O.name]: <font color='red'>[(O.status & ORGAN_DEAD) ? "DESTROYED" : O.damage]</font>")
 			if(!organ_found)
 				to_chat(user, "No prosthetics located.")
+
+	playsound(user,'sound/effects/scanbeep.ogg', 30)
 	return
 
 /obj/item/device/robotanalyzer/attack(mob/living/M, mob/living/user)

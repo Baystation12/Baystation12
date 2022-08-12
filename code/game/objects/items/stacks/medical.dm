@@ -261,12 +261,6 @@
 	animal_heal = 0
 	var/list/splintable_organs = list(BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT)	//List of organs you can splint, natch.
 
-/obj/item/stack/medical/splint/check_limb_state(var/mob/user, var/obj/item/organ/external/limb)
-	if(BP_IS_ROBOTIC(limb))
-		to_chat(user, SPAN_WARNING("You cannot use \the [src] to treat a robotic limb."))
-		return FALSE
-	return TRUE
-
 /obj/item/stack/medical/splint/attack(var/mob/living/carbon/M, var/mob/user)
 	if(..())
 		return 1
