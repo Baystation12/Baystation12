@@ -36,10 +36,8 @@
 /datum/ai_holder/hostile/melee/vagrant
 
 /datum/ai_holder/hostile/melee/vagrant/engage_target()
-	. = ..()
-
-	if(ishuman(.))
-		var/mob/living/carbon/human/H = .
+	if(ishuman(target))
+		var/mob/living/carbon/human/H = target
 		var/mob/living/simple_animal/hostile/vagrant/V = holder
 		if(V.gripping == H)
 			H.Weaken(1)
@@ -53,7 +51,7 @@
 			V.update_icon()
 			H.Weaken(1)
 			H.Stun(1)
-			H.visible_message("<span class='danger'>\the [src] latches onto \the [H], pulsating!</span>")
+			H.visible_message("<span class='danger'>\the [holder] latches onto \the [H], pulsating!</span>")
 			V.forceMove(V.gripping.loc)
 
 /mob/living/simple_animal/hostile/vagrant/Allow_Spacemove(var/check_drift = 0)
