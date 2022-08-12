@@ -85,6 +85,13 @@
 	A.attack_ai(src)
 	return TRUE
 
+
+/**
+ * Called when an AI mob clicks on an atom.
+ *
+ * **Parameters**:
+ * - `user` - The mob clicking on the atom.
+ */
 /atom/proc/attack_ai(mob/user as mob)
 	return
 

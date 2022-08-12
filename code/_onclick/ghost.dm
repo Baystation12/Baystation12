@@ -44,7 +44,13 @@
 		return
 	A.attack_ghost(src)
 
-// Oh by the way this didn't work with old click code which is why clicking shit didn't spam you
+
+/**
+ * Called when a ghost mob clicks on an atom.
+ *
+ * **Parameters**:
+ * - `user` - The mob clicking on the atom.
+ */
 /atom/proc/attack_ghost(mob/observer/ghost/user as mob)
 	if(!istype(user))
 		return

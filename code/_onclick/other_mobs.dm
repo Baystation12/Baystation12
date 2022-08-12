@@ -1,6 +1,20 @@
-// Generic damage proc (slimes and monkeys).
-/atom/proc/attack_generic(mob/user as mob)
-	return 0
+/**
+ * Generic attack and damage proc, called on the attacked atom.
+ *
+ * **Parameters**:
+ * - `user` - The attacking mob.
+ * - `damage` (int) - The damage value.
+ * - `attack_verb` (string) - The verb/string used for attack messages.
+ * - `wallbreaker` (boolean) - Whether or not the attack is considered a 'wallbreaker' attack - I.e., hulk.
+ * - `damtype` (string, one of `DAMAGE_*`) - The attack's damage type.
+ * - `armorcheck` (string) - TODO: Unused. Remove.
+ * - `dam_flags` (bitfield, any of `DAMAGE_FLAG_*`) - Damage flags associated with the attack.
+ *
+ * Returns boolean. TODO: Return value is unused. Remove.
+ */
+/atom/proc/attack_generic(mob/user, damage, attack_verb = "hits", wallbreaker = FALSE, damtype = DAMAGE_BRUTE, armorcheck = "melee", dam_flags = EMPTY_BITFIELD)
+	return FALSE
+
 
 /*
 	Humans:
@@ -22,11 +36,26 @@
 
 	A.attack_hand(src)
 
-/atom/proc/attack_hand(mob/user as mob)
+
+/**
+ * Called when the atom is clicked on by a mob with an empty hand.
+ *
+ * **Parameters**:
+ * - `user` - The mob that clicked on the atom.
+ */
+/atom/proc/attack_hand(mob/user)
 	return
 
-/mob/proc/attack_empty_hand(var/bp_hand)
+
+/**
+ * Called when a mob attempts to use an empty hand on itself.
+ *
+ * **Parameters**:
+ * - `bp_hand` (string, `BP_R_HAND` or `BP_L_HAND`) - The targeted and used hand's bodypart slot.
+ */
+/mob/proc/attack_empty_hand(bp_hand)
 	return
+
 
 /mob/living/carbon/human/RestrainedClickOn(var/atom/A)
 	return
@@ -153,6 +182,12 @@
 	else if (get_natural_weapon())
 		A.attackby(get_natural_weapon(), src)
 
-// Attack hand but for simple animals
+
+/**
+ * Called when a `simple_animal` mob clicks on the atom with an 'empty hand.'
+ *
+ * **Parameters**:
+ * - `user` - The mob clicking on the atom.
+ */
 /atom/proc/attack_animal(mob/user)
 	return attack_hand(user)

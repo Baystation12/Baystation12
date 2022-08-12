@@ -165,16 +165,17 @@
 /mob/proc/DblClickOn(var/atom/A, var/params)
 	return
 
-/*
-	Translates into attack_hand, etc.
-
-	Note: proximity_flag here is used to distinguish between normal usage (flag=1),
-	and usage when clicking on things telekinetically (flag=0).  This proc will
-	not be called at ranged except with telekinesis.
-
-	proximity_flag is not currently passed to attack_hand, and is instead used
-	in human click code to allow glove touches only at melee range.
-*/
+/**
+ * Called when the mob interacts with something it is adjacent to. For complex mobs, this includes interacting with an empty hand or empty module. Generally, this translates to `attack_hand()`, `attack_robot()`, etc.
+ *
+ * Exception: This is also called when telekinesis is used, even if not adjacent to the target.
+ *
+ * **Parameters**:
+ * - `A` - The atom that was clicked on/interacted with.
+ * - `proximity_flag` - Whether or not the mob was at range from the targeted atom. Generally, this is always `1` unless telekinesis was used, where this will be `0`. This is not currently passed to attack_hand, and is instead used in human click code to allow glove touches only at melee range.
+ *
+ * Returns boolean - Whether or not the mob was able to perform the interaction.
+ */
 /mob/proc/UnarmedAttack(var/atom/A, var/proximity_flag)
 	return
 
@@ -197,6 +198,17 @@
 	for things like ranged glove touches, spitting alien acid/neurotoxin,
 	animals lunging, etc.
 */
+/**
+ * Called when a mob attmepts to interact with an object that it is not adjacent to. For complex mobs, this includes interacting with an empty hand or empty module.
+ *
+ * Exception: Telekinesis will call `UnarmedAttack([target], 0)` instead.
+ *
+ * **Parameters**:
+ * - `A` - The atom that was clicked on/interacted with.
+ * - `params` - List of click parameters. See BYOND's `CLick()` documentation.
+ *
+ * Returns boolean - Whether or not the mob was able to perform the interaction.
+ */
 /mob/proc/RangedAttack(var/atom/A, var/params)
 	if(!mutations.len)
 		return FALSE
@@ -205,19 +217,22 @@
 		LaserEyes(A) // moved into a proc below
 		return TRUE
 
-/*
-	Restrained ClickOn
-
-	Used when you are handcuffed and click things.
-	Not currently used by anything but could easily be.
-*/
+/**
+ * Called when a mob attempts to interact with an atom while handcuffed or otherwise restrained. Not currently used.
+ *
+ * **Parameters**:
+ * - `A` - The atom that was clicked on/interacted with.
+ */
 /mob/proc/RestrainedClickOn(var/atom/A)
 	return
 
-/*
-	Middle click
-	Only used for swapping hands
-*/
+
+/**
+ * Called when a mob middle-clicks on an object. By default, this is used only as a hotkey to call `swap_hand()`.
+ *
+ * **Parameters**:
+ * - `A` - The atom that was clicked on.
+ */
 /mob/proc/MiddleClickOn(var/atom/A)
 	swap_hand()
 	return
@@ -228,26 +243,46 @@
 	return
 */
 
-/*
-	Shift click
-	For most mobs, examine.
-	This is overridden in ai.dm
-*/
+/**
+ * Called when the mob shift+clicks on an atom. By default, this calls the targeted atom's `ShiftClick()` proc.
+ *
+ * **Parameters**:
+ * - `A` - The atom that was clicked on.
+ */
 /mob/proc/ShiftClickOn(var/atom/A)
 	A.ShiftClick(src)
 	return
+
+/**
+ * Called when a mob shift+clicks on the atom. By default, this calls the examine proc chain.
+ *
+ * **Parameters**:
+ * - `user` - The mob that clicked on the atom.
+ */
 /atom/proc/ShiftClick(var/mob/user)
 	if(user.client && user.client.eye == user)
 		user.examinate(src)
 	return
 
-/*
-	Ctrl click
-	For most objects, pull
-*/
+/**
+ * Called when the mob ctrl+clicks on an atom. By default, this calls the targeted atom's `CtrlClick()` proc.
+ *
+ * **Parameters**:
+ * - `A` - The atom that was clicked on.
+ *
+ * Returns boolean - Whether or not the action was handled.
+ */
 /mob/proc/CtrlClickOn(var/atom/A)
 	return A.CtrlClick(src)
 
+/**
+ * Called when a mob ctrl+clicks on the atom. By default, this starts pulling a movable atom if adjacent.
+ *
+ * **Parameters**:
+ * - `user` - The mob that clicked on the atom.
+ *
+ * Returns boolean - Whether or not the action was handled.
+ */
 /atom/proc/CtrlClick(var/mob/user)
 	return FALSE
 
@@ -257,16 +292,26 @@
 		return TRUE
 	. = ..()
 
-/*
-	Alt click
-	Unused except for AI
-*/
+/**
+ * Called when the mob alt+clicks on an atom. By default, this calls the targeted atom's `on_click/alt` extension's `on_click()` proc, or the atom's `AltClick()` proc.
+ *
+ * **Parameters**:
+ * - `A` - The atom that was clicked on.
+ */
 /mob/proc/AltClickOn(var/atom/A)
 	var/datum/extension/on_click/alt = get_extension(A, /datum/extension/on_click/alt)
 	if(alt && alt.on_click(src))
 		return
 	A.AltClick(src)
 
+/**
+ * Called when a mob alt+clicks the atom. By default, this creates and populates the Turf panel, displaying all objects on the atom's turf.
+ *
+ * **Parameters**:
+ * - `user` - The mob that clicked on the atom.
+ *
+ * Returns boolean - Whether or not the action was handled.
+ */
 /atom/proc/AltClick(var/mob/user)
 	var/turf/T = get_turf(src)
 	if(T && user.TurfAdjacent(T))
@@ -285,25 +330,44 @@
 		return FALSE
 	return z == T.z && (get_dist(loc, T) <= client.view)
 
-/*
-	Control+Shift click
-	Unused except for AI
-*/
+/**
+ * Called when the mob ctrl+shift+clicks on an atom. By default, calls the atom's `CtrlShiftClick()` proc.
+ *
+ * **Parameters**:
+ * - `A` - The atom that was clicked on.
+ */
 /mob/proc/CtrlShiftClickOn(var/atom/A)
 	A.CtrlShiftClick(src)
 	return
 
+/**
+ * Called when a mob ctrl+shift+clicks on the atom.
+ *
+ * **Parameters**:
+ * - `user` - The mob that clicked on the atom.
+ */
 /atom/proc/CtrlShiftClick(var/mob/user)
 	return
 
-/*
-	Control+Alt click
-*/
+/**
+ * Called when the mob ctrl+alt+clicks on an atom. By default, this calls the atom's `CtrlAltClick()` proc or calls the mob's `pointed()` proc.
+ *
+ * **Parameters**:
+ * - `A` - The atom that was clicked on.
+ */
 /mob/proc/CtrlAltClickOn(var/atom/A)
 	if(A.CtrlAltClick(src))
 		return
 	pointed(A)
 
+/**
+ * Called when a mob ctrl+alt+clicks on the atom.
+ *
+ * **Parameters**:
+ * - `user` - The mob that clicked on the atom.
+ *
+ * Returns boolean - Whather or not the interaction was handled.
+ */
 /atom/proc/CtrlAltClick(var/mob/user)
 	return
 
