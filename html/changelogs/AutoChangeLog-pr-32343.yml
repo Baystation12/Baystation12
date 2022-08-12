@@ -1,0 +1,15 @@
+author: AzlanonPC
+delete-after: true
+changes:
+  - rscadd: prosthetic organs now have bone-adjacent structures; Broken in similar
+      ways, and repaired through robotic surgery.
+  - rscadd: 'Robotic hands and arms will no longer deal grasp damage when mildly damaged
+      (Read: dropping objects), Instead, this will be affected by structural damage.
+      Legs remain the same'
+  - rscadd: When their battery drops to critical, MMIs will start taking damage. Put
+      your fellows in a charger. Positronic brains unchanged. MMIs will regenerate
+      very minor amounts of damage like normal brains, as well.
+  - rscadd: Robot analyzers now show damage to robot brains and MMIs. Also do sound.
+  - rscadd: Robotic and crystalline parts now have custom broken names.
+  - rscadd: microbatteries now have 1000w cell, instead of 3000w. The cost of moving
+      and power damage received by EMPs adjusted accordingly.
