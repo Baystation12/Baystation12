@@ -55,11 +55,23 @@
 	else if(result[1] == CHOICE_ADD_ANTAG)
 		SSvote.queued_auto_vote = /datum/vote/add_antagonist
 
-/datum/vote/transfer/mob_not_participating(mob/user)
-	if((. = ..()))
-		return
-	if(config.vote_no_dead_crew_transfer)
-		return !isliving(user) || ismouse(user) || isdrone(user) || user.stat == DEAD
+
+/datum/vote/transfer/mob_not_participating(mob/voter)
+	if (check_rights(EMPTY_BITFIELD, FALSE, voter))
+		return FALSE
+	if (config.vote_no_dead && voter.stat == DEAD)
+		return TRUE
+	if (!config.vote_no_dead_crew_transfer)
+		if (voter.stat == DEAD)
+			return TRUE
+		if (!isliving(voter))
+			return TRUE
+		if (ismouse(voter))
+			return TRUE
+		if (isdrone(voter))
+			return TRUE
+	return FALSE
+
 
 /datum/vote/transfer/check_toggle()
 	return config.allow_vote_restart ? "Allowed" : "Disallowed"
