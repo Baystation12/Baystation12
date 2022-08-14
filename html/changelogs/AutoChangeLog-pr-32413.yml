@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: AI processing no longer hangs for all mobs whenever any mob tries to pry
+      open a door.
