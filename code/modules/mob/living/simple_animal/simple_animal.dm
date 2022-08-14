@@ -351,6 +351,7 @@
 	return -1
 
 /mob/living/simple_animal/proc/pry_door(var/mob/user, var/delay, var/obj/machinery/door/pesky_door)
+	set waitfor = FALSE
 	visible_message(SPAN_WARNING("\The [user] begins [pry_desc] at \the [pesky_door]!"))
 	set_AI_busy(TRUE)
 	if(do_after(user, delay, pesky_door, DO_DEFAULT | DO_PUBLIC_PROGRESS))
