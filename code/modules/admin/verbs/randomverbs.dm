@@ -987,3 +987,47 @@ Ccomp's first proc.
 		explosion(T, range, high_intensity, low_intensity, turf_breaker = break_turfs)
 		booms = booms - 1
 		sleep(delay SECONDS)
+
+/client/proc/rename_shuttle()
+	set category = "Fun"
+	set name = "Rename Ship"
+	set desc = "Rename a ship (Does not rename areas on the ship)"
+
+	var/obj/effect/overmap/visitable/ship/ship = input("What ship?", "Rename Ship") as anything in SSshuttle.ships | null
+	if (!ship)
+		return
+
+	var/original_name = ship.name
+
+	var/name = input("What do you want to name it?", "New Name") as text | null
+	if (!name)
+		return
+
+	ship.name = name
+
+	for (var/S in SSshuttle.shuttles)
+		if (S == original_name)
+			var/datum/shuttle/shuttle = SSshuttle.shuttles[S]
+			SSshuttle.shuttles[name] = shuttle
+			SSshuttle.shuttles -= original_name
+			shuttle.name = name
+			break
+
+	//rename waypoints based on the origin ship name
+	for (var/obj/effect/overmap/visitable/ship/S in SSshuttle.ships)
+		for (var/key in S.restricted_waypoints)
+			if (key == original_name)
+				S.add_landmark(S.restricted_waypoints[key][1], name)
+				S.remove_landmark(S.restricted_waypoints[key][1], original_name)
+				if (istype(S, /obj/effect/overmap/visitable/ship/landable))
+					var/obj/effect/overmap/visitable/ship/landable/SL = S
+					SL.landmark.landmark_tag = "ship_[name]"
+					SL.landmark.shuttle_name = name
+
+	for (var/obj/machinery/computer/shuttle_control/S in SSmachines.machinery)
+		if (S.shuttle_tag == original_name)
+			S.shuttle_tag = name
+			S.name = "[name] Control Console"
+
+	var/client/user = resolve_client()
+	log_and_message_admins("[key_name_admin(user)] renamed \the [original_name] ship to [name].", )
