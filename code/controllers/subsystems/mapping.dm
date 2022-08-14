@@ -75,7 +75,7 @@ SUBSYSTEM_DEF(mapping)
 
 /proc/generateMapList(filename)
 	var/list/potentialMaps = list()
-	var/list/Lines = world.file2list(filename)
+	var/list/Lines = read_lines(filename)
 	if(!Lines.len)
 		return
 	for (var/t in Lines)

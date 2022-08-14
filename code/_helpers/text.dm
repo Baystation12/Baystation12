@@ -255,23 +255,42 @@
 	return copytext_char(result, 1, -length_difference)
 
 
-//Returns a string with reserved characters and spaces before the first letter removed
+///Returns a string with leading whitespace removed.
 /proc/trim_left(text)
-	for (var/i = 1 to length(text))
-		if (text2ascii(text, i) > 32)
-			return copytext(text, i)
-	return ""
+	var/static/regex/pattern = regex(@"^\s*(.+)$")
+	if (!pattern.Find_char(text))
+		return ""
+	return pattern.group[1]
 
-//Returns a string with reserved characters and spaces after the last letter removed
+
+///Returns a string with trailing whitespace removed.
 /proc/trim_right(text)
-	for (var/i = length(text) to 1 step -1)
-		if (text2ascii(text, i) > 32)
-			return copytext(text, 1, i + 1)
-	return ""
+	var/static/regex/pattern = regex(@"^(.+?)\s*$")
+	if (!pattern.Find_char(text))
+		return ""
+	return pattern.group[1]
 
-//Returns a string with reserved characters and spaces before the first word and after the last word removed.
+
+/// Returns a string with leading and trailing whitespace removed.
 /proc/trim(text)
-	return trim_left(trim_right(text))
+	var/static/regex/pattern = regex(@"^\s*(.+?)\s*$")
+	if (!pattern.Find_char(text))
+		return ""
+	return pattern.group[1]
+
+
+/// Strips all symbols from text except printable basic latin, not including < and >. Adds cyrillic if mode is "ru" on first run.
+/proc/cleantext(text, mode = "en")
+	var/static/regex/pattern
+	if (!isnull(pattern))
+		return pattern.Replace_char(text, "")
+	switch (mode)
+		if ("ru")
+			pattern = regex(@"[^\x20-\x3b\x3d\x3f-\x7e\n\u0400-\u04ff]", "g")
+		else //en
+			pattern = regex(@"[^\x20-\x3b\x3d\x3f-\x7e\n]", "g")
+	return pattern.Replace_char(text, "")
+
 
 //Returns a string with the first element of the string capitalized.
 /proc/capitalize(text)

@@ -7,7 +7,7 @@ var/global/list/admin_ranks = list()								//list of all ranks with associated 
 	var/previous_rights = 0
 
 	//load text from file
-	var/list/Lines = file2list("config/admin_ranks.txt")
+	var/list/Lines = read_lines("config/admin_ranks.txt")
 
 	//process each line seperately
 	for(var/line in Lines)
@@ -72,7 +72,7 @@ var/global/list/admin_ranks = list()								//list of all ranks with associated 
 		load_admin_ranks()
 
 		//load text from file
-		var/list/Lines = file2list("config/admins.txt")
+		var/list/Lines = read_lines("config/admins.txt")
 
 		//process each line seperately
 		for(var/line in Lines)

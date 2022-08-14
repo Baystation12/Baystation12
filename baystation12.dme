@@ -104,6 +104,7 @@
 #include "code\_helpers\builtin_proc_callers.dm"
 #include "code\_helpers\client.dm"
 #include "code\_helpers\cmp.dm"
+#include "code\_helpers\files.dm"
 #include "code\_helpers\functional.dm"
 #include "code\_helpers\game.dm"
 #include "code\_helpers\global_lists.dm"

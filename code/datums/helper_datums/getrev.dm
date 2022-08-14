@@ -7,11 +7,11 @@ var/global/datum/getrev/revdata = new()
 	var/showinfo
 
 /datum/getrev/New()
-	var/list/head_branch = file2list(".git/HEAD", "\n")
+	var/list/head_branch = read_lines(".git/HEAD")
 	if(head_branch.len)
 		branch = copytext(head_branch[1], 17)
 
-	var/list/head_log = file2list(".git/logs/HEAD", "\n")
+	var/list/head_log = read_lines(".git/logs/HEAD")
 	for(var/line=head_log.len, line>=1, line--)
 		if(head_log[line])
 			var/list/last_entry = splittext(head_log[line], " ")

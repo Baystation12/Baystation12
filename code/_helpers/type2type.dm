@@ -1,22 +1,8 @@
-/*
- * Holds procs designed to change one type of value, into another.
- * Contains:
- *			text2list & list2text
- *			file2list
- *			angle2dir
- *			angle2text
- *			worldtime2text
- */
-
 /proc/text2numlist(text, delimiter="\n")
 	var/list/num_list = list()
 	for(var/x in splittext(text, delimiter))
 		num_list += text2num(x)
 	return num_list
-
-// Splits the text of a file at seperator and returns them in a list.
-/proc/file2list(filename, seperator="\n")
-	return splittext(file2text(filename) || "", seperator)
 
 // Turns a direction into text
 /proc/num2dir(direction)
@@ -190,7 +176,3 @@
 
 /proc/atomtype2nameassoclist(atom_type)
 	return atomtypes2nameassoclist(typesof(atom_type))
-
-//Splits the text of a file at seperator and returns them in a list.
-/world/proc/file2list(filename, seperator="\n")
-	return splittext(file2text(filename), seperator)

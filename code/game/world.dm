@@ -492,7 +492,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 	if(!fexists("data/mode.txt"))
 		return
 
-	var/list/Lines = file2list("data/mode.txt")
+	var/list/Lines = read_lines("data/mode.txt")
 	if(Lines.len)
 		if(Lines[1])
 			SSticker.master_mode = Lines[1]

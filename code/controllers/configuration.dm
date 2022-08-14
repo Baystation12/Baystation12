@@ -447,38 +447,6 @@
 	event = file2text("config/event.txt") || ""
 
 
-/// Read a text file, stripping lines starting with # and empties
-/datum/configuration/proc/read_commentable(filename)
-	var/list/result = list()
-	var/list/lines = file2list(filename)
-	for (var/line in lines)
-		if (!line)
-			continue
-		line = trim(line)
-		if (!line || line[1] == "#")
-			continue
-		result += line
-	return result
-
-
-/datum/configuration/proc/read_config(filename)
-	var/list/result = list()
-	var/lines = read_commentable(filename)
-	for (var/line in lines)
-		var/index = findtext(line, " ")
-		var/name = index ? lowertext(copytext(line, 1, index)) : lowertext(line)
-		if (!name)
-			continue
-		var/value = index ? copytext(line, index + 1) : TRUE
-		if (!result[name])
-			result[name] = value
-			continue
-		if (!islist(result[name]))
-			result[name] = list(result[name])
-		result[name] += value
-	return result
-
-
 /datum/configuration/proc/load_config()
 	var/list/file = read_config("config/config.txt")
 	for (var/name in file)
