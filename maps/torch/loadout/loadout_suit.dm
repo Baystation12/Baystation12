@@ -1,6 +1,12 @@
 /datum/gear/suit/blueapron
 	allowed_branches = CIVILIAN_BRANCHES
 
+/datum/gear/suit/militaryjacket
+	display_name = "military jacket selection"
+	path = /obj/item/clothing/suit/storage/militaryjacket
+	flags = GEAR_HAS_TYPE_SELECTION
+	allowed_branches = CIVILIAN_BRANCHES
+
 /datum/gear/suit/overalls
 	allowed_branches = CIVILIAN_BRANCHES
 

@@ -117,6 +117,12 @@
 /datum/gear/tactical/balaclava
 	allowed_roles = SECURITY_ROLES
 
+/datum/gear/tactical/balaclava/humanized
+	display_name = "balaclava - human's special"
+	path = /obj/item/clothing/mask/balaclava/humanized
+	flags = GEAR_HAS_SUBTYPE_SELECTION
+	allowed_roles = SECURITY_ROLES
+
 /datum/gear/head/fleetberet
 	display_name = "Fleet branch beret selection"
 	description = "A beret denoting service in one of the fleets within the SCG Fleet."

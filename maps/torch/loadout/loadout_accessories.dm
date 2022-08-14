@@ -260,6 +260,59 @@
 	allowed_roles = SEMIFORMAL_ROLES
 	allowed_branches = CIVILIAN_BRANCHES
 
+/datum/gear/clothing/cloak_custom // common cloak
+	display_name = "cloak, colorable"
+	path = /obj/item/clothing/accessory/cloak
+	flags = GEAR_HAS_COLOR_SELECTION
+	allowed_branches = CIVILIAN_BRANCHES
+
+/datum/gear/clothing/cloak_cargo // departaments cloaks
+	display_name = "cloak, cargo"
+	path = /obj/item/clothing/accessory/cloak/cargo
+	allowed_branches = CIVILIAN_BRANCHES
+	allowed_roles = SUPPLY_ROLES
+
+/datum/gear/clothing/cloak_mining
+	display_name = "cloak, mining"
+	path = /obj/item/clothing/accessory/cloak/mining
+	allowed_roles = list(/datum/job/mining)
+
+/datum/gear/clothing/cloak_security
+	display_name = "cloak, security"
+	path = /obj/item/clothing/accessory/cloak/security
+	allowed_branches = CIVILIAN_BRANCHES
+	allowed_roles = SECURITY_ROLES
+
+/datum/gear/clothing/cloak_service
+	display_name = "cloak, service"
+	path = /obj/item/clothing/accessory/cloak/service
+	allowed_branches = CIVILIAN_BRANCHES
+	allowed_roles = SERVICE_ROLES
+
+/datum/gear/clothing/cloak_engineer
+	display_name = "cloak, engineer"
+	path = /obj/item/clothing/accessory/cloak/engineer
+	allowed_branches = CIVILIAN_BRANCHES
+	allowed_roles = ENGINEERING_ROLES
+
+/datum/gear/clothing/cloak_atmos
+	display_name = "cloak, atmos"
+	path = /obj/item/clothing/accessory/cloak/atmos
+	allowed_branches = CIVILIAN_BRANCHES
+	allowed_roles = ENGINEERING_ROLES
+
+/datum/gear/clothing/cloak_research
+	display_name = "cloak, science"
+	path = /obj/item/clothing/accessory/cloak/research
+	allowed_branches = CIVILIAN_BRANCHES
+	allowed_roles = RESEARCH_ROLES
+
+/datum/gear/clothing/cloak_medical
+	display_name = "cloak, medical"
+	path = /obj/item/clothing/accessory/cloak/medical
+	allowed_branches = CIVILIAN_BRANCHES
+	allowed_roles = MEDICAL_ROLES
+
 /datum/gear/clothing/vest
 	allowed_roles = FORMAL_ROLES
 	allowed_branches = CIVILIAN_BRANCHES
