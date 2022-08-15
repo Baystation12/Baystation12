@@ -7,6 +7,8 @@ GLOBAL_LIST_EMPTY(ckey_directory) //all ckeys with associated client
 /// List of all mobs with clients currently attached
 GLOBAL_LIST_EMPTY(player_list)
 
+/// List of all living mobs with clients currently attached
+GLOBAL_LIST_EMPTY(living_players)
 
 /// List of all carbon/human* mobs
 GLOBAL_LIST_EMPTY(human_mobs)
