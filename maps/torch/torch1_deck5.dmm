@@ -1097,6 +1097,9 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
+/obj/structure/handrail{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "cj" = (
@@ -5193,9 +5196,6 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/quartermaster/hangar)
 "lU" = (
-/obj/structure/bed/chair/shuttle/blue{
-	dir = 4
-	},
 /obj/machinery/power/apc/hyper{
 	name = "east bump";
 	pixel_y = -24;
@@ -5209,10 +5209,8 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/machinery/recharger/wallcharger{
-	dir = 4;
-	pixel_x = -23
-	},
+/obj/machinery/recharger,
+/obj/structure/table/steel_reinforced,
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "lV" = (
