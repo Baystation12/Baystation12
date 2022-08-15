@@ -1,0 +1,4 @@
+author: Azlan
+delete-after: true
+changes:
+  - rscadd: Fixes Adherents using 1000w batteries instead of 3000w
