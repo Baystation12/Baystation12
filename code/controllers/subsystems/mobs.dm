@@ -4,8 +4,8 @@ SUBSYSTEM_DEF(mobs)
 	flags = SS_NO_INIT | SS_KEEP_TIMING
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	wait = 2 SECONDS
-	var/static/list/mob_list = list()
-	var/static/list/queue = list()
+	var/static/list/mob/mob_list = list()
+	var/static/list/mob/queue = list()
 
 
 /datum/controller/subsystem/mobs/UpdateStat(time)
@@ -24,9 +24,9 @@ SUBSYSTEM_DEF(mobs)
 /datum/controller/subsystem/mobs/fire(resume, no_mc_tick)
 	if (!resume)
 		queue = mob_list.Copy()
-	var/mob/mob
-	for (var/i = queue.len to 1 step -1)
-		mob = queue[i]
+	var/cut_until = 1
+	for (var/mob/mob as anything in queue)
+		++cut_until
 		if (QDELETED(mob))
 			continue
 		if (!config.run_empty_levels && !SSpresence.population(get_z(mob)))
@@ -35,8 +35,9 @@ SUBSYSTEM_DEF(mobs)
 		if (no_mc_tick)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
-			queue.Cut(i)
+			queue.Cut(1, cut_until)
 			return
+	queue.Cut()
 
 
 #define START_PROCESSING_MOB(MOB) \
