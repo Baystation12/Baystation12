@@ -3,8 +3,8 @@ SUBSYSTEM_DEF(ping)
 	flags = SS_NO_INIT
 	runlevels = RUNLEVELS_ALL
 	wait = 30 SECONDS
-	var/static/list/chats = list()
-	var/static/list/queue = list()
+	var/static/list/datum/chatOutput/chats = list()
+	var/static/list/datum/chatOutput/queue = list()
 
 
 /datum/controller/subsystem/ping/fire(resumed, no_mc_tick)
@@ -13,7 +13,7 @@ SUBSYSTEM_DEF(ping)
 			return
 		queue = chats.Copy()
 	var/cut_until = 1
-	for (var/chatOutput/chat as anything in chats)
+	for (var/datum/chatOutput/chat as anything in chats)
 		++cut_until
 		if (QDELETED(chat))
 			continue
