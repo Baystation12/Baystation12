@@ -208,7 +208,7 @@
 	for(var/z in affected_z)
 		SSradiation.z_radiate(locate(1, 1, z), DETONATION_RADS, 1)
 
-	for(var/mob/living/mob in GLOB.living_mob_list_)
+	for(var/mob/living/mob in GLOB.alive_mobs)
 		var/turf/TM = get_turf(mob)
 		if(!TM)
 			continue

@@ -70,7 +70,7 @@
 	var/area/AO = TO.loc
 	if(AO && (AO.area_flags & AREA_FLAG_EXTERNAL))
 		//Everyone saw that!
-		for(var/mob/living/mob in GLOB.living_mob_list_)
+		for(var/mob/living/mob in GLOB.alive_mobs)
 			var/turf/T = get_turf(mob)
 			if(T && (T != TO) && (TO.z == T.z) && !mob.blinded)
 				to_chat(mob, SPAN_NOTICE("You see a bright light to \the [dir2text(get_dir(T,TO))]"))

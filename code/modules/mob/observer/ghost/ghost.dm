@@ -70,12 +70,12 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 
 	ghost_multitool = new(src)
 
-	GLOB.ghost_mob_list += src
+	GLOB.ghost_mobs += src
 
 	..()
 
 /mob/observer/ghost/Destroy()
-	GLOB.ghost_mob_list -= src
+	GLOB.ghost_mobs -= src
 	stop_following()
 	qdel(ghost_multitool)
 	ghost_multitool = null

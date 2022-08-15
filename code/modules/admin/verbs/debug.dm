@@ -261,7 +261,7 @@
 	if(!check_rights(R_FUN))
 		return
 
-	var/mob/living/carbon/human/H = input("Select mob.", "Select equipment.") as null|anything in GLOB.human_mob_list
+	var/mob/living/carbon/human/H = input("Select mob.", "Select equipment.") as null|anything in GLOB.human_mobs
 	if(!H)
 		return
 
@@ -345,11 +345,11 @@
 		if("Mobs")
 			to_chat(usr, jointext(SSmobs.mob_list,","))
 		if("Living Mobs")
-			to_chat(usr, jointext(GLOB.living_mob_list_,","))
+			to_chat(usr, jointext(GLOB.alive_mobs,","))
 		if("Dead Mobs")
-			to_chat(usr, jointext(GLOB.dead_mob_list_,","))
+			to_chat(usr, jointext(GLOB.dead_mobs,","))
 		if("Ghost Mobs")
-			to_chat(usr, jointext(GLOB.ghost_mob_list,","))
+			to_chat(usr, jointext(GLOB.ghost_mobs,","))
 		if("Clients")
 			to_chat(usr, jointext(GLOB.clients,","))
 
@@ -384,7 +384,7 @@
 	set name = "Analyse Health"
 	set desc = "Get an advanced health reading on a human mob."
 
-	var/mob/living/carbon/human/H = input("Select mob.", "Analyse Health") as null|anything in GLOB.human_mob_list
+	var/mob/living/carbon/human/H = input("Select mob.", "Analyse Health") as null|anything in GLOB.human_mobs
 	if(!H)	return
 
 	cmd_analyse_health(H)
@@ -401,7 +401,7 @@
 	dat += text("<BR><A href='?src=\ref[];mach_close=scanconsole'>Close</A>", usr)
 	show_browser(usr, dat, "window=scanconsole;size=430x600")
 
-/client/proc/cmd_analyse_health_context(mob/living/carbon/human/H as mob in GLOB.human_mob_list)
+/client/proc/cmd_analyse_health_context(mob/living/carbon/human/H as mob in GLOB.human_mobs)
 	set category = null
 	set name = "Analyse Human Health"
 

@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(ghost_images)
 
 /datum/controller/subsystem/ghost_images/fire(resumed, no_mc_tick)
 	if (!resumed && queue_all)
-		queue = GLOB.ghost_mob_list.Copy()
+		queue = GLOB.ghost_mobs.Copy()
 		queue_all = FALSE
 	if (!queue.len)
 		return

@@ -62,7 +62,7 @@
 
 /datum/goal/department/paperwork/proc/generate_signatory_list()
 	. = list()
-	for(var/mob/M in GLOB.living_mob_list_)
+	for(var/mob/M in GLOB.alive_mobs)
 		if(!M.mind?.assigned_job)
 			continue
 		for(var/job_type in signatory_job_list)

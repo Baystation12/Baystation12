@@ -118,7 +118,7 @@
 
 /datum/event/ionstorm/tick()
 	if(botEmagChance)
-		for(var/mob/living/bot/bot in GLOB.living_mob_list_)
+		for(var/mob/living/bot/bot in GLOB.alive_mobs)
 			if(!(bot.z in affecting_z))
 				continue
 			if(prob(botEmagChance))

@@ -51,7 +51,7 @@ var/global/list/stored_shock_by_ref = list()
 		return FALSE
 	else if(!isnull(max_players))
 		var/player_count = 0
-		for(var/mob/living/carbon/human/H in GLOB.living_mob_list_)
+		for(var/mob/living/carbon/human/H in GLOB.alive_mobs)
 			if(H.client && H.key && H.species == src)
 				player_count++
 				if(player_count >= max_players)

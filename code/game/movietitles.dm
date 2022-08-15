@@ -113,7 +113,7 @@ GLOBAL_LIST(end_titles)
 	else
 		titles += "<center><h1>EPISODE [rand(1,1000)]<br>[GLOB.end_credits_title]<h1></h1></h1></center>"
 
-	for(var/mob/living/carbon/human/H in GLOB.living_mob_list_|GLOB.dead_mob_list_)
+	for(var/mob/living/carbon/human/H in GLOB.alive_mobs|GLOB.dead_mobs)
 		if(findtext(H.real_name,"(mannequin)"))
 			continue
 		if(H.is_species(SPECIES_MONKEY) && findtext(H.real_name,"[lowertext(H.species.name)]")) //no monki
@@ -158,7 +158,7 @@ GLOBAL_LIST(end_titles)
 
 	var/list/corpses = list()
 	var/list/monkies = list()
-	for(var/mob/living/carbon/human/H in GLOB.dead_mob_list_)
+	for(var/mob/living/carbon/human/H in GLOB.dead_mobs)
 		if(H.timeofdeath < 5 MINUTES) //no prespawned corpses
 			continue
 		if(H.is_species(SPECIES_MONKEY) && findtext(H.real_name,"[lowertext(H.species.name)]"))

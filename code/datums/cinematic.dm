@@ -31,7 +31,7 @@ GLOBAL_DATUM_INIT(cinematic, /datum/cinematic, new)
 
 	//Let's not discuss how this worked previously.
 	var/list/viewers = list()
-	for(var/mob/living/M in GLOB.living_mob_list_)
+	for(var/mob/living/M in GLOB.alive_mobs)
 		if(M.client)
 			M.client.screen += cinematic_screen //show every client the cinematic
 			viewers[M.client] = M.stunned

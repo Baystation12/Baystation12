@@ -139,7 +139,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 /obj/machinery/message_server/proc/send_to_department(var/department, var/message, var/tone)
 	var/reached = 0
 
-	for(var/mob/living/carbon/human/H in GLOB.human_mob_list)
+	for(var/mob/living/carbon/human/H in GLOB.human_mobs)
 		var/obj/item/modular_computer/device = locate() in H
 		if(!device || !(get_z(device) in GLOB.using_map.station_levels))
 			continue

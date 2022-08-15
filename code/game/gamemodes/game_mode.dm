@@ -431,7 +431,7 @@ var/global/list/additional_antag_types = list()
 		if(!station_missed)
 			end = cinematic_icon_states[2]
 			to_flick = "station_explode_fade_red"
-			for(var/mob/living/M in GLOB.living_mob_list_)
+			for(var/mob/living/M in GLOB.alive_mobs)
 				if(is_station_turf(get_turf(M)))
 					M.death()//No mercy
 		if(end)

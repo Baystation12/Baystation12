@@ -645,7 +645,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 
 //Tries to find the mob's email.
 /proc/find_email(real_name)
-	for(var/mob/mob in GLOB.living_mob_list_)
+	for(var/mob/mob in GLOB.alive_mobs)
 		if(mob.real_name == real_name)
 			if(!mob.mind)
 				return

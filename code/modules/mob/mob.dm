@@ -1,7 +1,7 @@
 /mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
 	STOP_PROCESSING_MOB(src)
-	GLOB.dead_mob_list_ -= src
-	GLOB.living_mob_list_ -= src
+	GLOB.dead_mobs -= src
+	GLOB.alive_mobs -= src
 	GLOB.player_list -= src
 	unset_machine()
 	QDEL_NULL(hud_used)
