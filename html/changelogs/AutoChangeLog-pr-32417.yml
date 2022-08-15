@@ -1,6 +1,0 @@
-author: DasFox
-delete-after: true
-changes:
-  - tweak: Add new obj sprites for EC Ranks.
-  - tweak: Add new obj sprites for Fleet patches
-  - tweak: Add o8_alt rank tabs for EC.
