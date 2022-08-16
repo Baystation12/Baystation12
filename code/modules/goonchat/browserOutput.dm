@@ -10,14 +10,14 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 #define MAX_COOKIE_LENGTH 5
 #define SPAM_TRIGGER_AUTOMUTE 10
 
-/client/var/chatOutput/chatOutput
+/client/var/datum/chatOutput/chatOutput
 
 /client/New()
 	chatOutput = new (src)
 	return ..()
 
 /// Member of /client that manages caching and sending messages to its holder
-/chatOutput
+/datum/chatOutput
 	var/client/owner
 
 	/// How many times client data has been checked
@@ -42,17 +42,17 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 	var/list/connectionHistory = list()
 
 
-/chatOutput/Destroy(force)
+/datum/chatOutput/Destroy(force)
 	SSping.chats -= src
 	return ..()
 
 
-/chatOutput/New(client/C)
+/datum/chatOutput/New(client/C)
 	SSping.chats += src
 	owner = C
 
 
-/chatOutput/proc/start()
+/datum/chatOutput/proc/start()
 	if (!owner)
 		return FALSE
 	if (!winexists(owner, "browseroutput"))
@@ -69,7 +69,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 	return TRUE
 
 
-/chatOutput/proc/load()
+/datum/chatOutput/proc/load()
 	set waitfor = FALSE
 	if(!owner)
 		return
@@ -78,7 +78,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 	show_browser(owner, file('code/modules/goonchat/browserassets/html/browserOutput.html'), "window=browseroutput")
 
 
-/chatOutput/Topic(href, list/href_list)
+/datum/chatOutput/Topic(href, list/href_list)
 	if(usr.client != owner)
 		return TRUE
 	var/list/params = list() // Build proc parameters from the form "param[paramname]=thing"
@@ -104,7 +104,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 
 
 //Called on chat output done-loading by JS.
-/chatOutput/proc/doneLoading()
+/datum/chatOutput/proc/doneLoading()
 	if(loaded)
 		return
 	loaded = TRUE
@@ -117,12 +117,12 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 	legacy_chat(owner, SPAN_DANGER("Failed to load fancy chat. Some features won't work.")) // do NOT convert to to_chat()
 
 
-/chatOutput/proc/showChat()
+/datum/chatOutput/proc/showChat()
 	winset(owner, "output", "is-visible=false")
 	winset(owner, "browseroutput", "is-disabled=false;is-visible=true")
 
 
-/chatOutput/proc/updatePing()
+/datum/chatOutput/proc/updatePing()
 	if (!owner)
 		qdel(src)
 		return
@@ -132,25 +132,25 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 /proc/syncChatRegexes()
 	for (var/user in GLOB.clients)
 		var/client/C = user
-		var/chatOutput/Cchat = C.chatOutput
+		var/datum/chatOutput/Cchat = C.chatOutput
 		if (Cchat && !Cchat.broken && Cchat.loaded)
 			Cchat.syncRegex()
 
 
-/chatOutput/proc/syncRegex()
+/datum/chatOutput/proc/syncRegex()
 	var/list/regexes = list()
 	if (regexes.len)
 		ehjax_send(data = list("syncRegex" = regexes))
 
 
-/chatOutput/proc/ehjax_send(client/C = owner, window = "browseroutput", data)
+/datum/chatOutput/proc/ehjax_send(client/C = owner, window = "browseroutput", data)
 	if(islist(data))
 		data = json_encode(data)
 	send_output(C, "[data]", "[window]:ehjaxCallback")
 
 
 //Sends client connection details to the chat to handle and save
-/chatOutput/proc/sendClientData()
+/datum/chatOutput/proc/sendClientData()
 	var/list/deets = list("clientData" = list())
 	deets["clientData"]["ckey"] = owner.ckey
 	deets["clientData"]["ip"] = owner.address
@@ -160,7 +160,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 
 
 //Called by client, sent data to investigate (cookie history so far)
-/chatOutput/proc/analyzeClientData(cookie = "")
+/datum/chatOutput/proc/analyzeClientData(cookie = "")
 	if(world.time  >  next_time_to_clear)
 		next_time_to_clear = world.time + (3 SECONDS)
 		total_checks = 0
@@ -198,12 +198,12 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 
 
 //Called by js client every 60 seconds
-/chatOutput/proc/ping()
+/datum/chatOutput/proc/ping()
 	return "pong"
 
 
 //Called by js client on js error
-/chatOutput/proc/debug(error)
+/datum/chatOutput/proc/debug(error)
 	log_world("\[[time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")]\] Client: [(src.owner.key ? src.owner.key : src.owner)] triggered JS error: [error]")
 
 
@@ -274,11 +274,11 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 	SSchat.queue(target, message, handle_whitespace, trailing_newline)
 
 
-/chatOutput/proc/swaptolightmode() //Dark mode light mode stuff. Yell at KMC if this breaks! (See darkmode.dm for documentation)
+/datum/chatOutput/proc/swaptolightmode() //Dark mode light mode stuff. Yell at KMC if this breaks! (See darkmode.dm for documentation)
 	owner.force_white_theme()
 
 
-/chatOutput/proc/swaptodarkmode()
+/datum/chatOutput/proc/swaptodarkmode()
 	owner.force_dark_theme()
 
 
