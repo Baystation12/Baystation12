@@ -72,16 +72,30 @@
 	if(do_after(user, 5 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT) && in_range(user, target))
 		if(!user.unequip_item())
 			return
-		src.target = target
 		var/timer_readable = time_to_readable(timer * 10)
-		forceMove(target)
+		set_target(target)
 		log_and_message_admins("planted \a [src] with a [timer_readable] fuse on \the [target].")
-		target.overlays += image_overlay
 		user.visible_message(
 			SPAN_DANGER("\The [user] plants \a [src] on \the [target]!"),
 			SPAN_WARNING("You plant \the [src] on \the [target]. Timer counting down from [timer_readable].")
 		)
 		run_timer()
+
+
+/**
+ * Defines a target for the C4. Checks for and removes itself from the previous target.
+ *
+ * **Parameters**:
+ * - `new_target` - The new atom to be defined as the C4's target.
+ */
+/obj/item/plastique/proc/set_target(atom/new_target)
+	if (QDELETED(new_target) || target == new_target)
+		return
+	if (target)
+		target.overlays -= image_overlay
+	target = new_target
+	forceMove(target)
+	target.overlays |= image_overlay
 
 
 /**
