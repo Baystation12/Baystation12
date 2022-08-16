@@ -50,11 +50,11 @@
 
 
 /obj/item/plastique/attack_self(mob/user)
-	var/newtime = input(usr, "Please set the timer.", "Timer", 10) as num
+	var/newtime = input(usr, "Please set the timer (Seconds).", "Timer", 10) as num
 	if(user.get_active_hand() == src)
 		newtime = clamp(newtime, 10, 60000)
 		timer = newtime
-		to_chat(user, "Timer set for [timer] seconds.")
+		to_chat(user, "Timer set for [time_to_readable(timer * 10)].")
 
 
 /obj/item/plastique/afterattack(atom/movable/target, mob/user, flag)
@@ -73,12 +73,13 @@
 		if(!user.unequip_item())
 			return
 		src.target = target
+		var/timer_readable = time_to_readable(timer * 10)
 		forceMove(target)
-		log_and_message_admins("planted \a [src] with a [timer] second fuse on \the [target].")
+		log_and_message_admins("planted \a [src] with a [timer_readable] fuse on \the [target].")
 		target.overlays += image_overlay
 		user.visible_message(
 			SPAN_DANGER("\The [user] plants \a [src] on \the [target]!"),
-			SPAN_WARNING("You plant \the [src] on \the [target]. Timer counting down from [timer] seconds.")
+			SPAN_WARNING("You plant \the [src] on \the [target]. Timer counting down from [timer_readable].")
 		)
 		run_timer()
 
