@@ -22,15 +22,15 @@
 	var/image_overlay
 
 
-/obj/item/plastique/New()
+/obj/item/plastique/Initialize()
+	. = ..()
 	wires = new(src)
 	image_overlay = image('icons/obj/assemblies.dmi', "plastic-explosive2")
-	..()
 
 
 /obj/item/plastique/Destroy()
-	qdel(wires)
-	wires = null
+	QDEL_NULL(wires)
+	target = null
 	return ..()
 
 
