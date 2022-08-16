@@ -13,7 +13,7 @@
 	var/datum/wires/explosive/c4/wires
 	/// Integer. The time, in seconds, the C4's timer is set to.
 	var/timer = 10
-	/// The atom the C4 is attached to.
+	/// The atom the C4 is attached to. Used to ensure synchronization in `update_overlay()`.
 	var/atom/target
 	/// Boolean. Whether or not the C4's panel is open.
 	var/open_panel = FALSE
@@ -35,7 +35,9 @@
 
 /obj/item/plastique/Destroy()
 	QDEL_NULL(wires)
-	target = null
+	if (target)
+		GLOB.icon_updated_event.unregister(target, src, .proc/update_overlay)
+		target = null
 	return ..()
 
 
@@ -93,9 +95,21 @@
 		return
 	if (target)
 		target.overlays -= image_overlay
+		GLOB.icon_updated_event.unregister(target, src, .proc/update_overlay)
 	target = new_target
+	GLOB.icon_updated_event.register(target, src, .proc/update_overlay)
 	forceMove(target)
 	target.overlays |= image_overlay
+
+
+/**
+ * Called by the `icon_updated` event. Used to ensure the C4 overlay remains present even if icon update operations cut overlays.
+ *
+ * **Parameters**:
+ * - `event_target` - The atom that raised the icon update event.
+ */
+/obj/item/plastique/proc/update_overlay(atom/event_target)
+	event_target.overlays |= image_overlay
 
 
 /**
