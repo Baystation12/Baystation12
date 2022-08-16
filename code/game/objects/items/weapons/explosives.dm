@@ -98,13 +98,7 @@
 		explosion(location, -1, -1, 2, 3)
 
 	if(target)
-		if (istype(target, /turf/simulated/wall))
-			var/turf/simulated/wall/W = target
-			W.kill_health()
-		else if(istype(target, /mob/living))
-			target.ex_act(EX_ACT_HEAVY) // c4 can't gib mobs anymore.
-		else
-			target.ex_act(EX_ACT_DEVASTATING)
+		target.c4_act()
 	if(target)
 		target.overlays -= image_overlay
 	qdel(src)
@@ -128,3 +122,16 @@
 
 /obj/item/plastique/attack(mob/M, mob/user, def_zone)
 	return
+
+
+/// Called when C4 explodes on the atom. By default, this calls `ex_act()`
+/atom/proc/c4_act()
+	ex_act(EX_ACT_DEVASTATING)
+
+
+/turf/simulated/wall/c4_act()
+	kill_health() // Still leaves behind girders
+
+
+/mob/c4_act()
+	ex_act(EX_ACT_HEAVY) // Less likely to instagib
