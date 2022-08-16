@@ -19,6 +19,12 @@
 	var/open_panel = FALSE
 	/// The generated image overlay used to display the C4 on `target`.
 	var/image_overlay
+	/// List of atom paths the C4 can be planted on.
+	var/list/valid_targets = list(
+		/turf/simulated/wall,
+		/obj/structure,
+		/obj/machinery/door
+	)
 
 
 /obj/item/plastique/Initialize()
@@ -54,7 +60,8 @@
 /obj/item/plastique/afterattack(atom/movable/target, mob/user, flag)
 	if (!flag)
 		return
-	if (ismob(target) || istype(target, /turf/unsimulated) || istype(target, /turf/simulated/shuttle) || istype(target, /obj/item/storage) || istype(target, /obj/item/clothing/accessory/storage) || istype(target, /obj/item/clothing/under))
+	if (!is_type_in_list(target, valid_targets))
+		to_chat(user, SPAN_WARNING("\The [src] cannot be planted on \the [target]"))
 		return
 	user.visible_message(
 		SPAN_DANGER("\The [user] starts planting \a [src] on \the [target]!"),
@@ -67,14 +74,7 @@
 			return
 		src.target = target
 		forceMove(target)
-
-		if (ismob(target))
-			admin_attack_log(user, target, "Planted \a [src] with a [timer] second fuse.", "Had \a [src] with a [timer] second fuse planted on them.", "planted \a [src] with a [timer] second fuse on")
-			log_game("[key_name(user)] planted [src.name] on [key_name(target)] with [timer] second fuse")
-
-		else
-			log_and_message_admins("planted \a [src] with a [timer] second fuse on \the [target].")
-
+		log_and_message_admins("planted \a [src] with a [timer] second fuse on \the [target].")
 		target.overlays += image_overlay
 		user.visible_message(
 			SPAN_DANGER("\The [user] plants \a [src] on \the [target]!"),
