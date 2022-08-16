@@ -57,7 +57,10 @@
 		return
 	if (ismob(target) || istype(target, /turf/unsimulated) || istype(target, /turf/simulated/shuttle) || istype(target, /obj/item/storage) || istype(target, /obj/item/clothing/accessory/storage) || istype(target, /obj/item/clothing/under))
 		return
-	to_chat(user, "Planting explosives...")
+	user.visible_message(
+		SPAN_DANGER("\The [user] starts planting \a [src] on \the [target]!"),
+		SPAN_WARNING("You start planting \the [src] on \the [target]!")
+	)
 	user.do_attack_animation(target)
 
 	if(do_after(user, 5 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT) && in_range(user, target))
@@ -68,14 +71,16 @@
 
 		if (ismob(target))
 			admin_attack_log(user, target, "Planted \a [src] with a [timer] second fuse.", "Had \a [src] with a [timer] second fuse planted on them.", "planted \a [src] with a [timer] second fuse on")
-			user.visible_message("<span class='danger'>[user.name] finished planting an explosive on [target.name]!</span>")
 			log_game("[key_name(user)] planted [src.name] on [key_name(target)] with [timer] second fuse")
 
 		else
 			log_and_message_admins("planted \a [src] with a [timer] second fuse on \the [target].")
 
 		target.overlays += image_overlay
-		to_chat(user, "Bomb has been planted. Timer counting down from [timer].")
+		user.visible_message(
+			SPAN_DANGER("\The [user] plants \a [src] on \the [target]!"),
+			SPAN_WARNING("You plant \the [src] on \the [target]. Timer counting down from [timer] seconds.")
+		)
 		run_timer()
 
 
