@@ -64,7 +64,7 @@
 		if(!user.unequip_item())
 			return
 		src.target = target
-		forceMove(null)
+		forceMove(target)
 
 		if (ismob(target))
 			admin_attack_log(user, target, "Planted \a [src] with a [timer] second fuse.", "Had \a [src] with a [timer] second fuse planted on them.", "planted \a [src] with a [timer] second fuse on")
