@@ -30,7 +30,7 @@
 
 /datum/event/solar_storm/proc/radiate()
 	// Note: Too complicated to be worth trying to use the radiation system for this.  Its only in space anyway, so we make an exception in this case.
-	for(var/mob/living/L in GLOB.living_mob_list_)
+	for(var/mob/living/L in GLOB.alive_mobs)
 		if(istype(L.loc, /mob/living/exosuit)) //Todo, generalize this further like I did for rads if other things need to block or mitigate heat - CrimsonShrike
 			continue
 		var/turf/T = get_turf(L)

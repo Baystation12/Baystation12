@@ -339,7 +339,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/list/zs = get_valid_silicon_zs(z)
 
 	. = list()
-	for(var/mob/living/silicon/ai/A in GLOB.living_mob_list_)
+	for(var/mob/living/silicon/ai/A in GLOB.alive_mobs)
 		if(A.stat == DEAD || A.control_disabled || !(get_z(A) in zs))
 			continue
 		. += A

@@ -11,30 +11,28 @@ SUBSYSTEM_DEF(presence)
 	var/static/list/build
 
 
-/datum/controller/subsystem/presence/UpdateStat(time)
-	return
-
-
 /datum/controller/subsystem/presence/Recover()
 	queue.Cut()
+	build.Cut()
 
 
 /datum/controller/subsystem/presence/fire(resume, no_mc_tick)
 	if (!resume)
 		queue = GLOB.player_list.Copy()
 		build = list()
-	var/mob/living/player
-	for (var/i = queue.len to 1 step -1)
-		player = queue[i]
-		if (QDELETED(player) || !istype(player))
+	var/cut_until = 1
+	for (var/mob/living/player as anything in GLOB.living_players)
+		++cut_until
+		if (QDELETED(player) || player.stat == DEAD)
 			continue
 		++build["[get_z(player)]"]
 		if (no_mc_tick)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
-			queue.Cut(i)
+			queue.Cut(1, cut_until)
 			return
 	levels = build
+	queue.Cut()
 
 
 #ifndef UNIT_TEST

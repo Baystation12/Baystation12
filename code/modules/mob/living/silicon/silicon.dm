@@ -38,7 +38,7 @@
 	#define MED_HUD 2 //Medical HUD mode
 
 /mob/living/silicon/Initialize()
-	GLOB.silicon_mob_list += src
+	GLOB.silicon_mobs += src
 	. = ..()
 
 	if(silicon_radio)
@@ -52,7 +52,7 @@
 	init_subsystems()
 
 /mob/living/silicon/Destroy()
-	GLOB.silicon_mob_list -= src
+	GLOB.silicon_mobs -= src
 	QDEL_NULL(silicon_radio)
 	QDEL_NULL(silicon_camera)
 	for(var/datum/alarm_handler/AH as anything in SSalarm.alarm_handlers)

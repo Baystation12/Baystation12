@@ -827,7 +827,7 @@ default behaviour is:
 	if(auras)
 		for(var/a in auras)
 			remove_aura(a)
-
+	GLOB.living_players -= src
 	qdel(selected_image)
 	return ..()
 

@@ -46,7 +46,7 @@
 	hud_list[SPECIALROLE_HUD] = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD_OOC]  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
 
-	GLOB.human_mob_list |= src
+	GLOB.human_mobs |= src
 	..()
 
 	if(dna)
@@ -60,7 +60,7 @@
 	if (dream_timer)
 		deltimer(dream_timer)
 		dream_timer = null
-	GLOB.human_mob_list -= src
+	GLOB.human_mobs -= src
 	worn_underwear = null
 	for(var/organ in organs)
 		qdel(organ)

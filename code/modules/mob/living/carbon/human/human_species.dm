@@ -6,7 +6,7 @@
 /mob/living/carbon/human/dummy/mannequin/Initialize()
 	. = ..()
 	STOP_PROCESSING_MOB(src)
-	GLOB.human_mob_list -= src
+	GLOB.human_mobs -= src
 	delete_inventory()
 
 /mob/living/carbon/human/dummy/mannequin/add_to_living_mob_list()
