@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Attack logs for cremation now longer make the victim appear as the attacker.
