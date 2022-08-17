@@ -3,7 +3,7 @@
 	name = "base pronouns badge"
 	icon_state = "pronounpin"
 	item_state = "pronouns"
-	on_rolled = list("down" = "none")
+	on_rolled_down = ACCESSORY_ROLLED_NONE
 	slot = ACCESSORY_SLOT_INSIGNIA
 	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
 

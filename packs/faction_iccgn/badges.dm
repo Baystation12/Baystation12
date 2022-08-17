@@ -7,9 +7,7 @@
 		slot_w_uniform_str = 'packs/faction_iccgn/badges.dmi',
 		slot_wear_suit_str = 'packs/faction_iccgn/badges.dmi'
 	)
-	on_rolled = list(
-		"down" = "none"
-	)
+	on_rolled_down = ACCESSORY_ROLLED_NONE
 	w_class = ITEM_SIZE_TINY
 	slot = ACCESSORY_SLOT_INSIGNIA
 

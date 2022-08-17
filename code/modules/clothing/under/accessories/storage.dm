@@ -5,6 +5,7 @@
 	slot = ACCESSORY_SLOT_UTILITY
 	w_class = ITEM_SIZE_NORMAL
 	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
+	on_rolled_down = ACCESSORY_ROLLED_NONE
 
 	var/obj/item/storage/internal/container
 	var/max_w_class = ITEM_SIZE_SMALL

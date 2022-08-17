@@ -2,7 +2,7 @@
 	abstract_type = /obj/item/clothing/accessory/pride_pin
 	name = "base pride pin"
 	item_state = "pridepins"
-	on_rolled = list("down" = "none")
+	on_rolled_down = ACCESSORY_ROLLED_NONE
 	slot = ACCESSORY_SLOT_INSIGNIA
 
 

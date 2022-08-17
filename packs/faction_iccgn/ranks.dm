@@ -8,9 +8,7 @@
 		slot_wear_suit_str = 'packs/faction_iccgn/ranks.dmi'
 	)
 	icon_state = "error"
-	on_rolled = list(
-		"down" = "none"
-	)
+	on_rolled_down = ACCESSORY_ROLLED_NONE
 	w_class = ITEM_SIZE_TINY
 	slot = ACCESSORY_SLOT_RANK
 	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
