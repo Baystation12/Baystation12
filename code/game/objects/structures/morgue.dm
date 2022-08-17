@@ -359,7 +359,7 @@
 					else
 						playsound(src, 'sound/effects/ghost2.ogg', 10, 5)
 
-				admin_attack_log(M, A, "Cremated their victim.", "Was cremated.", "cremated alive")
+				admin_attack_log(A, M, "Cremated their victim.", "Was cremated.", "cremated alive")
 				M.audible_message("[M]'s screams cease, as does any movement within the [src]. All that remains is a dull, empty silence.")
 				M.dust()
 
