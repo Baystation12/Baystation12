@@ -274,6 +274,7 @@ Standard helpers for users interacting with machinery parts.
 			if(istype(new_component_part, component_part.base_type) && new_component_part.rating > component_part.rating)
 				replace_part(user, part_replacer, component_part, new_component_part)
 				. = TRUE
+				playsound(loc, 'sound/items/rped.ogg', 70)
 				break
 
 	for(var/path in uncreated_component_parts)
@@ -288,6 +289,7 @@ Standard helpers for users interacting with machinery parts.
 					if(istype(new_component_part, base_type) && new_component_part.rating > initial(component_part.rating))
 						replace_part(user, part_replacer, component_part, new_component_part)
 						. = TRUE
+						playsound(loc, 'sound/items/rped.ogg', 70)
 						break
 
 
