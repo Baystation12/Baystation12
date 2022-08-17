@@ -153,8 +153,6 @@
 		SpinAnimation(4,1)
 
 	SSthrowing.processing[src] = TT
-	if (SSthrowing.state == SS_PAUSED && length(SSthrowing.currentrun))
-		SSthrowing.currentrun[src] = TT
 
 //Overlays
 /atom/movable/overlay
