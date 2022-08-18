@@ -1,0 +1,4 @@
+author: Mucker
+delete-after: true
+changes:
+  - tweak: ICCGN military ranks can now be used on the agent ID card.
