@@ -47,7 +47,6 @@
 #define NETWORK_MERCENARY "MercurialNet"
 #define NETWORK_MINE "Mining"
 #define NETWORK_RESEARCH "Research"
-#define NETWORK_ROBOTS "Robots"
 #define NETWORK_SECURITY "Security"
 #define NETWORK_THUNDER "Thunderdome"
 

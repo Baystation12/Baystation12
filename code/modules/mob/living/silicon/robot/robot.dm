@@ -55,7 +55,6 @@
 
 	var/mob/living/silicon/ai/connected_ai = null
 	var/obj/item/cell/cell = /obj/item/cell/high
-	var/obj/machinery/camera/camera = null
 
 	var/cell_emp_mult = 2.5
 
@@ -112,13 +111,6 @@
 	icontype = "Basic"
 	updatename(modtype)
 	update_icon()
-
-	if(!scrambledcodes && !camera)
-		camera = new /obj/machinery/camera(src)
-		camera.c_tag = real_name
-		camera.replace_networks(list(NETWORK_EXODUS,NETWORK_ROBOTS))
-		if(wires.IsIndexCut(BORG_WIRE_CAMERA))
-			camera.status = 0
 	init()
 	initialize_components()
 
@@ -319,10 +311,6 @@
 	name = real_name
 	if(mind)
 		mind.name = changed_name
-
-	//We also need to update name of internal camera.
-	if (camera)
-		camera.c_tag = changed_name
 
 	if(!custom_sprite) //Check for custom sprite
 		set_custom_sprite()
@@ -907,9 +895,6 @@
 	lawupdate = FALSE
 	lockcharge = FALSE
 	scrambledcodes = TRUE
-	//Disconnect it's camera so it's not so easily tracked.
-	if(src.camera)
-		src.camera.clear_all_networks()
 
 
 /mob/living/silicon/robot/proc/ResetSecurityCodes()
