@@ -828,7 +828,10 @@
 		if (ismob(M))
 			if(!check_if_greater_rights_than(M.client))
 				return
-			var/reason = sanitize(input("Please enter reason"))
+			var/reason = input("Please enter reason") as text | null
+			if (isnull(reason))
+				return
+			reason = sanitize(reason)
 			if(!reason)
 				to_chat(M, "<span class='warning'>You have been kicked from the server</span>")
 			else
