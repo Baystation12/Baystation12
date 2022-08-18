@@ -2,10 +2,10 @@
 /decl/cultural_info/culture/nabber
 	name = CULTURE_NABBER_CMINUS
 
-	description = "You have been trained to ICCG Xynergy Grade PLACEHOLDER."
+	description = "You have been trained to Xynergy Grade PLACEHOLDER."
 	language = LANGUAGE_NABBER
 	secondary_langs = list(
-		LANGUAGE_HUMAN_RUSSIAN,
+		LANGUAGE_HUMAN_EURO,
 		LANGUAGE_SPACER,
 	)
 	var/list/valid_jobs = list()
@@ -28,7 +28,7 @@
 		LAZYADD(job_titles, initial(job.title))
 	if(!LAZYLEN(job_titles))
 		LAZYADD(job_titles, "none")
-	description = "You have been trained by ICCG Xynergy to [name]. This makes you suitable for the following roles: [english_list(job_titles)]."
+	description = "You have been trained by Xynergy to [name]. This makes you suitable for the following roles: [english_list(job_titles)]."
 
 	// Set up our qualifications.
 	LAZYADD(qualifications, "<b>[name]</b>")
@@ -48,7 +48,7 @@
 
 /decl/cultural_info/culture/nabber/b
 	name = CULTURE_NABBER_B
-	valid_jobs = list(/datum/job/canworker)
+	valid_jobs = list(/datum/job/chef)
 
 /decl/cultural_info/culture/nabber/b/minus
 	name = CULTURE_NABBER_BMINUS
