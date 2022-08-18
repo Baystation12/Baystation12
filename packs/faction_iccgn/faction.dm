@@ -9,6 +9,46 @@
 		SKILL_EVA = SKILL_BASIC
 	)
 
+	rank_types = list(
+		/datum/mil_rank/iccgn/e1,
+		/datum/mil_rank/iccgn/e3,
+		/datum/mil_rank/iccgn/e4,
+		/datum/mil_rank/iccgn/e5,
+		/datum/mil_rank/iccgn/e6,
+		/datum/mil_rank/iccgn/e7,
+		/datum/mil_rank/iccgn/e8,
+		/datum/mil_rank/iccgn/e9,
+		/datum/mil_rank/iccgn/o1,
+		/datum/mil_rank/iccgn/o2,
+		/datum/mil_rank/iccgn/o3,
+		/datum/mil_rank/iccgn/o4,
+		/datum/mil_rank/iccgn/o5,
+		/datum/mil_rank/iccgn/o6,
+		/datum/mil_rank/iccgn/o7,
+		/datum/mil_rank/iccgn/o8,
+		/datum/mil_rank/iccgn/o9,
+	)
+
+	spawn_rank_types = list(
+		/datum/mil_rank/iccgn/e1,
+		/datum/mil_rank/iccgn/e3,
+		/datum/mil_rank/iccgn/e4,
+		/datum/mil_rank/iccgn/e5,
+		/datum/mil_rank/iccgn/e6,
+		/datum/mil_rank/iccgn/e7,
+		/datum/mil_rank/iccgn/e8,
+		/datum/mil_rank/iccgn/e9,
+		/datum/mil_rank/iccgn/o1,
+		/datum/mil_rank/iccgn/o2,
+		/datum/mil_rank/iccgn/o3,
+		/datum/mil_rank/iccgn/o4,
+		/datum/mil_rank/iccgn/o5,
+		/datum/mil_rank/iccgn/o6,
+		/datum/mil_rank/iccgn/o7,
+		/datum/mil_rank/iccgn/o8,
+		/datum/mil_rank/iccgn/o9,
+	)
+
 
 /datum/mil_branch/iccgn/New()
 	rank_types = subtypesof(/datum/mil_rank/iccgn)
