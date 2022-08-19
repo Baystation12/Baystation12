@@ -1,0 +1,5 @@
+author: Azlan
+delete-after: true
+changes:
+  - rscadd: Splints now properly work on robotic limbs.
+  - rscadd: resin patches now have sound.
