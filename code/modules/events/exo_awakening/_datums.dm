@@ -50,6 +50,8 @@
 				list(/mob/living/simple_animal/hostile/hivebot/range, 45),
 				list(/mob/living/simple_animal/hostile/hivebot/strong, 25),
 				list(/mob/living/simple_animal/hostile/hivebot/mega, 2),
+				list(/obj/random/single/hivebot/ranged, 40),
+				list(/obj/random/single/hivebot/tank, 25)
 			)
 	arrival_message = "The ground beneath you rumbles as you hear the sounds of machinery from all around you..."
 	arrival_sound   = 'sound/effects/wind/wind_3_1.ogg'
@@ -74,7 +76,9 @@
 /datum/mob_list/moderate/machines
 	mobs = list(
 				list(/mob/living/simple_animal/hostile/hivebot, 95),
-				list(/mob/living/simple_animal/hostile/hivebot/range, 15)
+				list(/mob/living/simple_animal/hostile/hivebot/range, 15),
+				list(/obj/random/single/hivebot/ranged, 5),
+				list(/obj/random/single/hivebot/tank, 15)
 			)
 	arrival_message = "You hear the distant sound of creaking metal joints, what is that?"
 	arrival_sound = 'sound/effects/wind/wind_3_1.ogg'

@@ -9,16 +9,16 @@
 /mob/living/simple_animal/hostile/hivebot/ranged_damage/basic
 	name = "ranged hivebot"
 	desc = "A robot with a makeshift integrated ballistic weapon."
-	projectile_dispersion = 2
-	projectile_accuracy = -1
+	projectile_dispersion = 0.5
+	projectile_accuracy = -0.5
 
 // This one shoots quickly, and is considerably more dangerous.
 /mob/living/simple_animal/hostile/hivebot/ranged_damage/rapid
 	name = "rapid hivebot"
 	desc = "A robot with a crude but deadly integrated rifle."
 	base_attack_cooldown = 5 // Two attacks a second or so.
-	projectile_dispersion = 2
-	projectile_accuracy = -2
+	projectile_dispersion = 1
+	projectile_accuracy = -0.5
 
 // Shoots deadly lasers.
 /mob/living/simple_animal/hostile/hivebot/ranged_damage/laser
@@ -26,7 +26,7 @@
 	desc = "A robot with a photonic weapon integrated into itself."
 	projectiletype = /obj/item/projectile/beam/blue
 	projectilesound = 'sound/weapons/Laser.ogg'
-	projectile_dispersion = 2
+	projectile_dispersion = 0.5
 	projectile_accuracy = -1
 
 // Shoots EMPs, to screw over other robots.
@@ -39,7 +39,7 @@
 	projectiletype = /obj/item/projectile/ion
 	projectilesound = 'sound/weapons/Laser.ogg'
 	projectile_dispersion = 1
-	projectile_accuracy = -2
+	projectile_accuracy = -1
 	base_attack_cooldown = 28
 
 
@@ -49,8 +49,8 @@
 	desc = "A robot with a crude ballistic weapon and strong armor."
 	maxHealth = 120
 	health = 120
-	projectile_dispersion = 2
-	projectile_accuracy = -1
+	projectile_dispersion = 1
+	projectile_accuracy = -0.5
 	projectilesound = 'sound/weapons/gunshot/mech_autocannon.ogg'
 
 // Also beefy, but tries to stay at their 'home', ideal for base defense.
@@ -86,3 +86,18 @@
 		C.fire_stacks += 1
 		if (!C.on_fire)
 			C.IgniteMob()
+
+/obj/random/single/hivebot
+	icon = 'icons/mob/simple_animal/hivebot.dmi'
+	icon_state = "basic"
+	spawn_object = /mob/living/simple_animal/hostile/hivebot
+
+
+/obj/random/single/hivebot/ranged/spawn_choices()
+	. = ..()
+	return typesof(/mob/living/simple_animal/hostile/hivebot/ranged_damage)
+
+
+/obj/random/single/hivebot/tank/spawn_choices()
+	. = ..()
+	return typesof(/mob/living/simple_animal/hostile/hivebot/tank)
