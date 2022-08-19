@@ -1,0 +1,4 @@
+author: Mucker
+delete-after: true
+changes:
+  - bugfix: Fixed senior researchers not having access to some science lockers.
