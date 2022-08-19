@@ -26,7 +26,7 @@
 		access_mining_station, access_xenobiology, access_xenoarch, access_nanotrasen, access_solgov_crew,
 		access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm,
 		access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_control,
-		access_petrov_maint, access_torch_fax, access_radio_sci, access_radio_exp
+		access_petrov_maint, access_torch_fax, access_radio_sci, access_radio_exp, access_research_storage
 	)
 
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
