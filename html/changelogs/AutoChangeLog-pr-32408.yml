@@ -1,6 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: Tickets that go unanswered after 5 minutes  of being open will notify staff,
-      and will only autoclose after 10 minutes of no activity.
-  - admin: Tickets assigned to admins will auto-close after 30 minutes.

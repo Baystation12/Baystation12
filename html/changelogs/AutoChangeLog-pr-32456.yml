@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - tweak: Gave the ranged hivebots better aim.
-  - rscadd: Added the new hivebot variants to the exoplanet event.
