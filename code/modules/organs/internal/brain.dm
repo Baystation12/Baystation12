@@ -136,7 +136,7 @@
 	if (!owner || owner.stat == DEAD || (status & ORGAN_DEAD))
 		return
 	to_chat(owner, "<span class = 'notice' font size='10'><B>What happened...?</B></span>")
-	alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
+	alert(owner, "You have taken massive brain damage! This could affect speech, memory, or any other skill, but provided you've been treated, it shouldn't be permanent.", "Brain Damaged")
 	if (owner.psi)
 		owner.psi.check_latency_trigger(20, "physical trauma")
 
