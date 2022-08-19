@@ -46,8 +46,8 @@
 		/area/ship/skrellscoutship/externalwing/port, /area/ship/skrellscoutship/externalwing/starboard, /area/ship/skrellscoutship/corridor,
 		/area/ship/skrellscoutship/crew/quarters, /area/ship/skrellscoutship/crew/medbay, /area/ship/skrellscoutship/crew/kitchen,
 		/area/ship/skrellscoutship/maintenance/power, /area/ship/skrellscoutship/hangar, /area/ship/skrellscoutship/command/armory,
-		/area/ship/skrellscoutship/dock, /area/ship/skrellscoutship/maintenance/atmos, /area/ship/skrellscoutship/robotics, 
-		/area/ship/skrellscoutship/crew/rec 
+		/area/ship/skrellscoutship/dock, /area/ship/skrellscoutship/maintenance/atmos, /area/ship/skrellscoutship/robotics,
+		/area/ship/skrellscoutship/crew/rec
 	)
 	defer_initialisation = TRUE
 	knockdown = FALSE
