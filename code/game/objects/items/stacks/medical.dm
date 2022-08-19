@@ -13,12 +13,13 @@
 	var/heal_burn = 0
 	var/animal_heal = 3
 	var/apply_sounds
+	var/can_treat_robots = FALSE
 
 /obj/item/stack/medical/proc/check_limb_state(var/mob/user, var/obj/item/organ/external/limb)
 	. = FALSE
 	if(BP_IS_CRYSTAL(limb))
 		to_chat(user, SPAN_WARNING("You cannot use \the [src] to treat a crystalline limb."))
-	else if(BP_IS_ROBOTIC(limb))
+	else if(BP_IS_ROBOTIC(limb) && !can_treat_robots)
 		to_chat(user, SPAN_WARNING("You cannot use \the [src] to treat a robotic limb."))
 	else
 		. = TRUE
@@ -259,6 +260,7 @@
 	amount = 5
 	max_amount = 5
 	animal_heal = 0
+	can_treat_robots = TRUE
 	var/list/splintable_organs = list(BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT)	//List of organs you can splint, natch.
 
 /obj/item/stack/medical/splint/attack(var/mob/living/carbon/M, var/mob/user)
@@ -315,6 +317,8 @@
 	singular_name = "resin patch"
 	desc = "A resin-based patching kit used to repair crystalline bodyparts. The label is written in a colourful, angular, unreadable script."
 	icon_state = "resin-pack"
+	can_treat_robots = TRUE
+	apply_sounds = list('sound/effects/ointment.ogg')
 	heal_brute = 10
 	heal_burn =  10
 
