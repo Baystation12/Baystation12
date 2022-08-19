@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: The kick dialog now includes a cancel button to cancel kicking.
