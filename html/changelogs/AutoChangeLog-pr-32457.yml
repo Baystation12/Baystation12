@@ -1,0 +1,4 @@
+author: Mucker
+delete-after: true
+changes:
+  - tweak: Changed the brain damage notification message to be more open-ended.
