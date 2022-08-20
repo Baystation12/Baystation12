@@ -1013,6 +1013,13 @@ Ccomp's first proc.
 			shuttle.name = name
 			break
 
+	for (var/obj/effect/shuttle_landmark/ship/S in landmarks_list)
+		if (S.name == original_name)
+			S.shuttle_name = name
+		if (istype(S, /obj/effect/overmap/visitable/ship/landable))
+			var/obj/effect/overmap/visitable/ship/landable/SL = S
+			SL.landmark.landmark_tag = "ship_[name]"
+			SL.landmark.shuttle_name = name
 	//rename waypoints based on the origin ship name
 	for (var/obj/effect/overmap/visitable/ship/S in SSshuttle.ships)
 		for (var/key in S.restricted_waypoints)
@@ -1023,6 +1030,7 @@ Ccomp's first proc.
 					var/obj/effect/overmap/visitable/ship/landable/SL = S
 					SL.landmark.landmark_tag = "ship_[name]"
 					SL.landmark.shuttle_name = name
+					SL.shuttle = name
 
 	for (var/obj/machinery/computer/shuttle_control/S in SSmachines.machinery)
 		if (S.shuttle_tag == original_name)
