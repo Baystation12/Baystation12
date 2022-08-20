@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - rscdel: The spin-view verbs have been removed due to how broken overlays and effects
-      become after using them.
