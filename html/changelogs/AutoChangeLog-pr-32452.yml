@@ -1,6 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - rscdel: Borgs/robots/etc no longer have cameras. This means camera monitoring
-      programs can no longer be used to track borgs, and AI cores cannot use borgs
-      to gain vision where they otherwise can't see.
