@@ -10,8 +10,6 @@
 	switch(network)
 		if(NETWORK_ENGINEERING, NETWORK_ALARM_ATMOS, NETWORK_ALARM_CAMERA, NETWORK_ALARM_FIRE, NETWORK_ALARM_POWER)
 			return access_engine
-		if(NETWORK_ROBOTS)
-			return access_ai_upload
 		if(NETWORK_CRESCENT, NETWORK_ERT)
 			return access_cent_specops
 		if(NETWORK_MEDICAL)

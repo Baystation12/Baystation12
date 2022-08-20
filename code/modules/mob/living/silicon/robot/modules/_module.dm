@@ -61,7 +61,6 @@
 	R.module = src
 
 	grant_skills(R)
-	add_camera_networks(R)
 	add_languages(R)
 	add_subsystems(R)
 	apply_status_flags(R)
@@ -126,7 +125,6 @@
 		emag = null
 
 /obj/item/robot_module/proc/Reset(var/mob/living/silicon/robot/R)
-	remove_camera_networks(R)
 	remove_languages(R)
 	remove_subsystems(R)
 	remove_status_flags(R)
@@ -189,18 +187,6 @@
 		var/datum/language/language_datum = original_language
 		R.add_language(language_datum.name, original_languages[original_language])
 	original_languages.Cut()
-
-/obj/item/robot_module/proc/add_camera_networks(var/mob/living/silicon/robot/R)
-	if(R.camera && (NETWORK_ROBOTS in R.camera.network))
-		for(var/network in networks)
-			if(!(network in R.camera.network))
-				R.camera.add_network(network)
-				added_networks |= network
-
-/obj/item/robot_module/proc/remove_camera_networks(var/mob/living/silicon/robot/R)
-	if(R.camera)
-		R.camera.remove_networks(added_networks)
-	added_networks.Cut()
 
 /obj/item/robot_module/proc/add_subsystems(var/mob/living/silicon/robot/R)
 	for(var/subsystem_type in subsystems)

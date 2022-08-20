@@ -36,7 +36,6 @@ var/global/const/NETWORK_PETROV  = "Petrov"
 /datum/map/torch
 	// Networks that will show up as options in the camera monitor program
 	station_networks = list(
-		NETWORK_ROBOTS,
 		NETWORK_FIRST_DECK,
 		NETWORK_SECOND_DECK,
 		NETWORK_THIRD_DECK,

@@ -232,11 +232,6 @@
 	 // Now, are they viewable by a camera? (This is last because it's the most intensive check)
 	return near_camera() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
 
-/mob/living/silicon/robot/tracking_status()
-	. = ..()
-	if(. == TRACKING_NO_COVERAGE)
-		return camera && camera.can_use() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
-
 /mob/living/carbon/human/tracking_status()
 	if(is_cloaked())
 		. = TRACKING_TERMINATE
