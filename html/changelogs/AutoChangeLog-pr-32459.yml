@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - admin: Gave the 'Rename Ship' verb a cancel button on the initial popup window.
+  - bugfix: Fixed the 'Rename Ship' verb outputting the admin name twice in the log.
