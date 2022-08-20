@@ -3,6 +3,7 @@
 	name = "mop"
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "mop"
+	matter = list(MATERIAL_STEEL = 60)
 	force = 5
 	throwforce = 10.0
 	throw_speed = 5
