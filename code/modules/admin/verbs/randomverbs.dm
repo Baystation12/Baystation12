@@ -993,7 +993,7 @@ Ccomp's first proc.
 	set name = "Rename Ship"
 	set desc = "Rename a ship (Does not rename areas on the ship)"
 
-	var/obj/effect/overmap/visitable/ship/ship = input("What ship?", "Rename Ship") as anything in SSshuttle.ships | null
+	var/obj/effect/overmap/visitable/ship/ship = input("What ship?", "Rename Ship") as null | anything in SSshuttle.ships
 	if (!ship)
 		return
 
