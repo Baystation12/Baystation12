@@ -1,0 +1,4 @@
+author: Exapster
+delete-after: true
+changes:
+  - tweak: Теперь автолат (стандартного размера) умеет печатать и швабры, и бинокли!
