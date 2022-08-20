@@ -207,22 +207,68 @@
 	if(air_contents.total_moles < gas_regen_cap && istype(holder) && holder.cell && holder.cell.use(charge_cost))
 		air_contents.adjust_gas(refill_gas_type, gas_regen_amount)
 
-//Skrell Cluster Tool
-
-/obj/item/rig_module/device/clustertool/skrell
-	name = "skrellian clustertool"
-
 //More Skrell Modules to replace Mantid
+
 /obj/item/rig_module/device/multitool/skrell
 	name = "skrellian integrated multitool"
+	desc = "A limited-sentience integrated multitool capable of interfacing with any number of systems."
+	interface_name = "multitool"
+	interface_desc = "A limited-sentience integrated multitool capable of interfacing with any number of systems."
+	device = /obj/item/device/multitool/skrell
+	icon = 'icons/obj/tools.dmi'
+	icon_state = "skrell_multitool"
+	usable = FALSE
+	selectable = TRUE
+
+/obj/item/rig_module/device/multitool/skrell/IsMultitool()
+	return TRUE
 
 /obj/item/rig_module/device/cable_coil/skrell
 	name = "skrellian cable extruder"
+	desc = "A cable nanofabricator of Skrellian design."
+	interface_name = "cable fabricator"
+	interface_desc = "A cable nanofabricator of Skrellian design."
+	device = /obj/item/stack/cable_coil/fabricator
+	icon = 'icons/obj/tools.dmi'
+	icon_state = "cablecoil"
+	usable = FALSE
+	selectable = TRUE
 
 /obj/item/rig_module/device/welder/skrell
 	name = "skrellian welding arm"
-	desc = "An electrical cutting torch of Skrell design."
-	interface_desc = "An electrical cutting torch of Skrell design."
+	desc = "An electrical cutting torch of Skrellian design."
+	interface_name = "welding arm"
+	interface_desc = "An electrical cutting torch of Skrellian design."
+	icon = 'icons/obj/tools.dmi'
+	icon_state = "skrell_welder1"
+	engage_string = "Toggle Welder"
+	device = /obj/item/weldingtool/electric
+	usable = TRUE
+	selectable = TRUE
+
+/obj/item/rig_module/device/clustertool/skrell
+	name = "skrellian clustertool"
+	desc = "A complex assembly of self-guiding, modular heads capable of performing most manual tasks."
+	interface_name = "modular clustertool"
+	interface_desc = "A complex assembly of self-guiding, modular heads capable of performing most manual tasks."
+	icon = 'icons/obj/tools.dmi'
+	icon_state = "clustertool"
+	engage_string = "Select Mode"
+	device = /obj/item/clustertool
+	usable = TRUE
+	selectable = TRUE
+
+/obj/item/rig_module/device/clustertool/IsWrench()
+	return device.IsWrench(device)
+
+/obj/item/rig_module/device/clustertool/IsWirecutter()
+	return device.IsWirecutter(device)
+
+/obj/item/rig_module/device/clustertool/IsScrewdriver()
+	return device.IsScrewdriver(device)
+
+/obj/item/rig_module/device/clustertool/IsCrowbar()
+	return device.IsCrowbar(device)
 
 // Self-charging power cell.
 /obj/item/cell/skrell
@@ -243,3 +289,50 @@
 /obj/item/cell/skrell/Process()
 	if(charge < maxcharge)
 		give(recharge_amount)
+
+/obj/item/clustertool
+	name = "alien clustertool"
+	desc = "A bewilderingly complex knot of tool heads."
+	icon = 'icons/obj/tools.dmi'
+	icon_state = "clustertool"
+	w_class = ITEM_SIZE_SMALL
+
+	var/tool_mode
+	var/list/tool_modes = list("wrench", "wirecutters", "crowbar", "screwdriver")
+
+/obj/item/clustertool/attack_self(var/mob/user)
+	var/new_index = _list_find(tool_modes, tool_mode) + 1
+	if(new_index > tool_modes.len)
+		new_index = 1
+	tool_mode = tool_modes[new_index]
+	name = "[initial(name)] ([tool_mode])"
+	playsound(user, 'sound/machines/bolts_down.ogg', 10)
+	to_chat(user, SPAN_NOTICE("You select the [tool_mode] attachment."))
+	update_icon()
+
+/obj/item/clustertool/on_update_icon()
+	icon_state = "[initial(icon_state)]-[tool_mode]"
+
+/obj/item/clustertool/Initialize()
+	. = ..()
+	tool_mode = tool_modes[1]
+	name = "[initial(name)] ([tool_mode])"
+	update_icon()
+
+/obj/item/clustertool/IsWrench()
+	return tool_mode == "wrench"
+
+/obj/item/clustertool/IsWirecutter()
+	return tool_mode == "wirecutters"
+
+/obj/item/clustertool/IsScrewdriver()
+	return tool_mode == "screwdriver"
+
+/obj/item/clustertool/IsCrowbar()
+	return tool_mode == "crowbar"
+
+/obj/item/device/multitool/skrell
+	name = "skrellian multitool"
+	name = "An extreme sophisticated microcomputer capable of interfacing with practically any system."
+	icon = 'icons/obj/tools.dmi'
+	icon_state = "skrell_multitool"
