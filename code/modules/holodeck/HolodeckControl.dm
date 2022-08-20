@@ -287,9 +287,9 @@
 			set_extension(holo_obj,/datum/extension/chameleon/clothing)
 
 	if(HP.ambience)
-		linkedholodeck.forced_ambience = HP.ambience
+		linkedholodeck.forced_ambience = HP.ambience.Copy()
 	else
-		linkedholodeck.forced_ambience = list()
+		LAZYCLEARLIST(linkedholodeck.forced_ambience)
 
 	for(var/mob/living/M in mobs_in_area(linkedholodeck))
 		if(M.mind)

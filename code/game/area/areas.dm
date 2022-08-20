@@ -281,7 +281,7 @@
 		client.playing_vent_ambience = FALSE
 
 	if (living.lastarea != src)
-		if (forced_ambience)
+		if (length(forced_ambience))
 			var/sound = sound(pick(forced_ambience), repeat = TRUE, wait = 0, volume = 25, channel = GLOB.ambience_channel_forced)
 			living.playsound_local(turf, sound)
 		else
