@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Exoplanet flora now only will ever consume and exude gasses already present
+      in the planet's atmosphere. No more plants pumping phoron into what should have
+      been a habitable world.
