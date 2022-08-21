@@ -460,8 +460,8 @@
 	flushing = 0
 	// now reset disposal state
 	flush = 0
-	if(mode == 2)	// if was ready,
-		mode = 1	// switch to charging
+	if(mode == DISPOSAL_MODE_CHARGED)
+		mode = DISPOSAL_MODE_CHARGING
 	update_icon()
 	return
 

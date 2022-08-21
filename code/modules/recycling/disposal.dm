@@ -21,8 +21,8 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 	/// Internal gas reservoir.
 	var/datum/gas_mixture/air_contents
-	/// Integer. The disposal's item mode. 0=off 1=charging 2=charged
-	var/mode = 1
+	/// Integer. The disposal's item mode. See `code\__defines\disposal.dm`.
+	var/mode = DISPOSAL_MODE_CHARGING
 	/// Boolean. Whether or not the flush handle is pulled.
 	var/flush = 0
 	/// The attached pipe trunk.
@@ -52,7 +52,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	spawn(5)
 		trunk = locate() in src.loc
 		if(!trunk)
-			mode = 0
+			mode = DISPOSAL_MODE_OFF
 			flush = 0
 		else
 			trunk.linked = src	// link the pipe trunk to self
@@ -73,22 +73,22 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		return
 
 	add_fingerprint(user, 0, I)
-	if(mode<=0) // It's off
+	if(mode <= DISPOSAL_MODE_OFF) // It's off
 		if(isScrewdriver(I))
 			if(contents.len > LAZYLEN(component_parts))
 				to_chat(user, "Eject the items first!")
 				return
-			if(mode==0) // It's off but still not unscrewed
-				mode=-1 // Set it to doubleoff l0l
+			if(mode == DISPOSAL_MODE_OFF)
+				mode = DISPOSAL_MODE_DISCONNECTED
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				to_chat(user, "You remove the screws around the power connection.")
 				return
-			else if(mode==-1)
-				mode=0
+			else if(mode == DISPOSAL_MODE_DISCONNECTED)
+				mode = DISPOSAL_MODE_OFF
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				to_chat(user, "You attach the screws around the power connection.")
 				return
-		else if(isWelder(I) && mode==-1)
+		else if(isWelder(I) && mode == DISPOSAL_MODE_DISCONNECTED)
 			if(contents.len > LAZYLEN(component_parts))
 				to_chat(user, "Eject the items first!")
 				return
@@ -272,9 +272,9 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 		dat += "<BR><HR><A href='?src=\ref[src];eject=1'>Eject contents</A><HR>"
 
-	if(mode <= 0)
+	if(mode <= DISPOSAL_MODE_OFF)
 		dat += "Pump: <B>Off</B> <A href='?src=\ref[src];pump=1'>On</A><BR>"
-	else if(mode == 1)
+	else if(mode == DISPOSAL_MODE_CHARGING)
 		dat += "Pump: <A href='?src=\ref[src];pump=0'>Off</A> <B>On</B> (pressurizing)<BR>"
 	else
 		dat += "Pump: <A href='?src=\ref[src];pump=0'>Off</A> <B>On</B> (idle)<BR>"
@@ -296,7 +296,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		return STATUS_CLOSE
 	if(isAI(user) && href_list && (href_list["handle"] || href_list["eject"]))
 		return min(STATUS_UPDATE, ..())
-	if(mode==-1 && href_list && !href_list["eject"]) // only allow ejecting if mode is -1
+	if(mode == DISPOSAL_MODE_DISCONNECTED && href_list && !href_list["eject"]) // only allow ejecting if mode is -1
 		to_chat(user, "<span class='warning'>The disposal units power is disabled.</span>")
 		return min(STATUS_UPDATE, ..())
 	if(flushing)
@@ -310,9 +310,9 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 	if(href_list["pump"])
 		if(text2num(href_list["pump"]))
-			mode = 1
+			mode = DISPOSAL_MODE_CHARGING
 		else
-			mode = 0
+			mode = DISPOSAL_MODE_OFF
 		update_icon()
 		. = TOPIC_REFRESH
 
@@ -362,7 +362,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 /obj/machinery/disposal/on_update_icon()
 	overlays.Cut()
 	if(MACHINE_IS_BROKEN(src))
-		mode = 0
+		mode = DISPOSAL_MODE_OFF
 		flush = 0
 		return
 
@@ -371,7 +371,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-handle")
 
 	// only handle is shown if no power
-	if(!is_powered() || mode == -1)
+	if(!is_powered() || mode == DISPOSAL_MODE_DISCONNECTED)
 		return
 
 	// 	check for items/vomit in disposal - occupied light
@@ -379,9 +379,9 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-full")
 
 	// charging and ready light
-	if(mode == 1)
+	if(mode == DISPOSAL_MODE_CHARGING)
 		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-charge")
-	else if(mode == 2)
+	else if(mode == DISPOSAL_MODE_CHARGED)
 		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-ready")
 
 // timed process
@@ -394,7 +394,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	flush_count++
 	if( flush_count >= flush_every_ticks )
 		if( contents.len > LAZYLEN(component_parts) || reagents.total_volume)
-			if(mode == 2)
+			if(mode == DISPOSAL_MODE_CHARGED)
 				spawn(0)
 					flush()
 		flush_count = 0
@@ -404,10 +404,10 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if(flush && air_contents.return_pressure() >= SEND_PRESSURE )	// flush can happen even without power
 		flush()
 
-	if(mode != 1) //if off or ready, no need to charge
+	if(mode != DISPOSAL_MODE_CHARGING)
 		update_use_power(POWER_USE_IDLE)
 	else if(air_contents.return_pressure() >= SEND_PRESSURE)
-		mode = 2 //if full enough, switch to ready mode
+		mode = DISPOSAL_MODE_CHARGED
 		update_icon()
 	else
 		src.pressurize() //otherwise charge
@@ -471,8 +471,8 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	flushing = 0
 	// now reset disposal state
 	flush = 0
-	if(mode == 2)	// if was ready,
-		mode = 1	// switch to charging
+	if(mode == DISPOSAL_MODE_CHARGED)
+		mode = DISPOSAL_MODE_CHARGING
 	update_icon()
 	return
 

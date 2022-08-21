@@ -225,7 +225,7 @@
 	var/obj/machinery/disposal/P = new /obj/machinery/disposal(src.loc)
 	transfer_fingerprints_to(P)
 	P.set_dir(dir)
-	P.mode = 0 // start with pump off
+	P.mode = DISPOSAL_MODE_OFF
 
 /obj/structure/disposalconstruct/machine/on_update_icon()
 	if(anchored)
