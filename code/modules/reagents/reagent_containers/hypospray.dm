@@ -83,7 +83,7 @@
 	possible_transfer_amounts = "1;2;5;10;15;20;30"
 	amount_per_transfer_from_this = 5
 	volume = 0
-	time = 0 // hyposprays are instant for conscious people
+	time = 7
 	single_use = FALSE
 
 /obj/item/reagent_containers/hypospray/vial/New()
