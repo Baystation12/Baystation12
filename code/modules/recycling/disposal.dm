@@ -24,11 +24,11 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	/// Integer. The disposal's item mode. See `code\__defines\disposal.dm`.
 	var/mode = DISPOSAL_MODE_CHARGING
 	/// Boolean. Whether or not the flush handle is pulled.
-	var/flush = 0
+	var/flush = FALSE
 	/// The attached pipe trunk.
 	var/obj/structure/disposalpipe/trunk/trunk = null
 	/// Boolean. Whether or not flushing is in progress.
-	var/flushing = 0
+	var/flushing = FALSE
 	/// Integer. How frequently the disposal checks if it's ready to flush.
 	var/flush_every_ticks = 30
 	/// Integer. Counter to `flush_every_ticks`.
@@ -53,7 +53,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		trunk = locate() in src.loc
 		if(!trunk)
 			mode = DISPOSAL_MODE_OFF
-			flush = 0
+			flush = FALSE
 		else
 			trunk.linked = src	// link the pipe trunk to self
 
@@ -363,7 +363,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	overlays.Cut()
 	if(MACHINE_IS_BROKEN(src))
 		mode = DISPOSAL_MODE_OFF
-		flush = 0
+		flush = FALSE
 		return
 
 	// flush handle
@@ -432,7 +432,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 /// Flushes the disposal's contents into the network.
 /obj/machinery/disposal/proc/flush()
 
-	flushing = 1
+	flushing = TRUE
 	flick("[icon_state]-flush", src)
 
 	var/wrapcheck = 0
@@ -468,9 +468,9 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		if (M.ckey)
 			admin_attack_log(null, M, null, "Was flushed down [src].", "has been flushed down [src].")
 	H.start(src) // start the holder processing movement
-	flushing = 0
+	flushing = FALSE
 	// now reset disposal state
-	flush = 0
+	flush = FALSE
 	if(mode == DISPOSAL_MODE_CHARGED)
 		mode = DISPOSAL_MODE_CHARGING
 	update_icon()

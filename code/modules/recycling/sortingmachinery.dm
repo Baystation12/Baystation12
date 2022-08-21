@@ -433,7 +433,7 @@
 	src.flush()
 
 /obj/machinery/disposal/deliveryChute/flush()
-	flushing = 1
+	flushing = TRUE
 	flick("intake-closing", src)
 	var/obj/structure/disposalholder/H = new()	// virtual holder object which actually
 												// travels through the pipes.
@@ -457,9 +457,9 @@
 	H.init(src)	// copy the contents of disposer to holder
 
 	H.start(src) // start the holder processing movement
-	flushing = 0
+	flushing = FALSE
 	// now reset disposal state
-	flush = 0
+	flush = FALSE
 	if(mode == DISPOSAL_MODE_CHARGED)
 		mode = DISPOSAL_MODE_CHARGING
 	update_icon()

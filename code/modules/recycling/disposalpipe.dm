@@ -9,7 +9,7 @@
 
 	level = 1			// underfloor only
 	/// Bitmask (Directions). Pipe connection directions.
-	var/dpdir = 0
+	var/dpdir = EMPTY_BITFIELD
 	dir = 0				// dir will contain dominant direction for junction pipes
 	health_max = 10
 	alpha = 192 // Plane and alpha modified for mapping, reset to normal on spawn.
@@ -846,7 +846,7 @@
 // a broken pipe
 /obj/structure/disposalpipe/broken
 	icon_state = "pipe-b"
-	dpdir = 0		// broken pipes have dpdir=0 so they're not found as 'real' pipes
+	dpdir = EMPTY_BITFIELD		// broken pipes have dpdir=0 so they're not found as 'real' pipes
 					// i.e. will be treated as an empty turf
 	desc = "A broken piece of disposal pipe."
 
