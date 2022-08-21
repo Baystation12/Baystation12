@@ -1,7 +1,10 @@
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_flora()
 	for (var/i = 1 to flora_diversity)
 		var/datum/seed/S = new()
-		S.randomize()
+		if (atmosphere?.gas)
+			S.randomize(atmosphere.gas.Copy())
+		else
+			S.randomize()
 		var/planticon = "alien[rand(1,4)]"
 		S.set_trait(TRAIT_PRODUCT_ICON,planticon)
 		S.set_trait(TRAIT_PLANT_ICON,planticon)
@@ -38,11 +41,7 @@
 	S.set_trait(TRAIT_HEAT_TOLERANCE,      S.get_trait(TRAIT_HEAT_TOLERANCE) + rand(-5,5),800,70)
 	S.set_trait(TRAIT_LOWKPA_TOLERANCE,    atmosphere.return_pressure() + rand(-5,-50),80,0)
 	S.set_trait(TRAIT_HIGHKPA_TOLERANCE,   atmosphere.return_pressure() + rand(5,50),500,110)
-	if (S.exude_gasses)
-		S.exude_gasses -= badgas
 	if (atmosphere)
-		if (S.consume_gasses)
-			S.consume_gasses = list(pick(atmosphere.gas)) // ensure that if the plant consumes a gas, the atmosphere will have it
 		for (var/g in atmosphere.gas)
 			if (gas_data.flags[g] & XGM_GAS_CONTAMINANT)
 				S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(10,15))

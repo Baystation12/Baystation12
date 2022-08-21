@@ -415,8 +415,13 @@
 	seed_name = name
 	display_name = name
 
-//Creates a random seed. MAKE SURE THE LINE HAS DIVERGED BEFORE THIS IS CALLED.
-/datum/seed/proc/randomize()
+/**
+ * Creates a random seed. MAKE SURE THE LINE HAS DIVERGED BEFORE THIS IS CALLED.
+ *
+ * **Parameters**:
+ * - `native_gasses` - List of `GAS_*` entries used to randomize `consume_gasses` and `exude_gasses`. This parameter is modified by the proc so make sure you pass `.Copy()` as relevant if you don't want gasses removed from your lists.
+ */
+/datum/seed/proc/randomize(list/native_gasses = list(GAS_OXYGEN, GAS_NITROGEN, GAS_PHORON, GAS_CO2))
 
 	roundstart = 0
 	mysterious = 1
@@ -451,12 +456,12 @@
 
 	if(prob(5))
 		consume_gasses = list()
-		var/gas = pick(GAS_OXYGEN,GAS_NITROGEN,GAS_PHORON,GAS_CO2)
+		var/gas = pick_n_take(native_gasses)
 		consume_gasses[gas] = rand(3,9)
 
 	if(prob(5))
 		exude_gasses = list()
-		var/gas = pick(GAS_OXYGEN,GAS_NITROGEN,GAS_PHORON,GAS_CO2)
+		var/gas = pick_n_take(native_gasses)
 		exude_gasses[gas] = rand(3,9)
 
 	chems = list()
