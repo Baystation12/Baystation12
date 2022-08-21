@@ -49,17 +49,20 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 // initializes the reagents datum for storing vomit reagents
 /obj/machinery/disposal/Initialize()
 	. = ..()
-	spawn(5)
-		trunk = locate() in src.loc
-		if(!trunk)
-			mode = DISPOSAL_MODE_OFF
-			flush = FALSE
-		else
-			trunk.linked = src	// link the pipe trunk to self
-
-		air_contents = new/datum/gas_mixture(PRESSURE_TANK_VOLUME)
-		update_icon()
 	src.create_reagents(500)
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/machinery/disposal/LateInitialize()
+	. = ..()
+	trunk = locate() in src.loc
+	if(!trunk)
+		mode = DISPOSAL_MODE_OFF
+		flush = FALSE
+	else
+		trunk.linked = src	// link the pipe trunk to self
+
+	air_contents = new/datum/gas_mixture(PRESSURE_TANK_VOLUME)
+	update_icon()
 
 /obj/machinery/disposal/Destroy()
 	eject()
