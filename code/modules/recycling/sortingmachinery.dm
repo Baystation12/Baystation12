@@ -393,6 +393,7 @@
 	density = TRUE
 	icon_state = "intake"
 
+	/// Integer. The delivery chute's construction state.
 	var/c_mode = 0
 
 /obj/machinery/disposal/deliveryChute/New()

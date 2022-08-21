@@ -8,16 +8,20 @@
 	density = FALSE
 
 	level = 1			// underfloor only
-	var/dpdir = 0		// bitmask of pipe directions
+	/// Bitmask (Directions). Pipe connection directions.
+	var/dpdir = 0
 	dir = 0				// dir will contain dominant direction for junction pipes
 	health_max = 10
 	alpha = 192 // Plane and alpha modified for mapping, reset to normal on spawn.
-	layer = ABOVE_TILE_LAYER
-	var/base_icon_state	// initial icon state on map
+	layer = ABOVE_TILE_LAYER // For mapping purposes. Set to `DISPOSALS_PIPE_LAYER` on init.
+	/// Initial icon state on the map.
+	var/base_icon_state
+	/// String. The sorting tag this disposal pipe filters.
 	var/sort_type = ""
+	/// Bitflag (Any of `DISPOSAL_FLIP_*`).
 	var/turn = DISPOSAL_FLIP_NONE
-	var/flipped_state // If it has a mirrored version, this is the typepath for it.
-	// new pipe, set the icon_state as on map
+	/// If it has a mirrored version, this is the typepath for it.
+	var/flipped_state
 
 /obj/structure/disposalpipe/Initialize()
 	. = ..()
@@ -49,18 +53,30 @@
 			expel(H, T, 0)
 	. = ..()
 
+/**
+ * Called by `/obj/structure/disposalconstruct/proc/build()` when the disposal pipe construction is finalized.
+ */
 /obj/structure/disposalpipe/proc/on_build()
 	update()
 	update_icon()
 
-	// returns the direction of the next pipe object, given the entrance dir
-	// by default, returns the bitmask of remaining directions
+/**
+ * Returns the available directions of the next pipe object(s) based on the entrance direction.
+ *
+ * **Parameters**:
+ * - `fromdir` - The entrance direction.
+ */
 /obj/structure/disposalpipe/proc/nextdir(fromdir)
 	return dpdir & (~turn(fromdir, 180))
 
-	// transfer the holder through this pipe segment
-	// overriden for special behaviour
-	//
+/**
+ * Transfers the disposal holder through this pipe segment. By default, this will either push the holder onto the next pipe in the network or out onto a turf if there is no valid target pipe.
+ *
+ * **Parameters**:
+ * - `H` - The disposal holder to transfer.
+ *
+ * Returns `/obj/structure/disposalpipe`|`null` - The next disposal pipe the holder is transfered to or null if the holder was ejected onto a turf.
+ */
 /obj/structure/disposalpipe/proc/transfer(obj/structure/disposalholder/H)
 	var/nextdir = nextdir(H.dir)
 	H.set_dir(nextdir)
@@ -81,7 +97,7 @@
 	return P
 
 
-	// update the icon_state to reflect hidden status
+/// Updates the pipe's hidden state.
 /obj/structure/disposalpipe/proc/update()
 	var/turf/T = src.loc
 	hide(!T.is_plating() && !istype(T,/turf/space))	// space never hides pipes
@@ -92,8 +108,14 @@
 	set_invisibility(intact ? 101: 0)	// hide if floor is intact
 	update_icon()
 
-// expel the held objects into a turf
-// called when there is a break in the pipe
+/**
+ * Ejects the contents of the disposal holder onto a turf.
+ *
+ * **Parameters**:
+ * - `H` - The disposal holder to eject.
+ * - `T` - The turf to eject onto.
+ * - `direction` - The direction to through objects in. If not set, a random direction is chosen for each object.
+ */
 /obj/structure/disposalpipe/proc/expel(obj/structure/disposalholder/H, turf/T, direction)
 	if(!istype(H))
 		return
@@ -160,10 +182,12 @@
 			qdel(H)
 	return
 
-// call to break the pipe
-// will expel any holder inside at the time
-// then delete the pipe
-// remains : set to leave broken pipe pieces in place
+/**
+ * Breaks the disposal pipe.
+ *
+ * **Parameters**:
+ * - `remains` (Boolean) - Whether or not to leave broken pipe pieces behind.
+ */
 /obj/structure/disposalpipe/proc/broken(remains = 0)
 	if(remains)
 		for(var/D in GLOB.cardinal)
@@ -230,7 +254,7 @@
 
 	..()
 
-	// called when pipe is cut with welder
+/// Called when the pipe is welded.
 /obj/structure/disposalpipe/proc/welded()
 	var/obj/structure/disposalconstruct/C = new (src.loc, src)
 	src.transfer_fingerprints_to(C)

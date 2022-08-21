@@ -18,18 +18,29 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	icon_state = "disposal"
 	anchored = TRUE
 	density = TRUE
-	var/datum/gas_mixture/air_contents	// internal reservoir
-	var/mode = 1	// item mode 0=off 1=charging 2=charged
-	var/flush = 0	// true if flush handle is pulled
-	var/obj/structure/disposalpipe/trunk/trunk = null // the attached pipe trunk
-	var/flushing = 0	// true if flushing in progress
-	var/flush_every_ticks = 30 //Every 30 ticks it will look whether it is ready to flush
-	var/flush_count = 0 //this var adds 1 once per tick. When it reaches flush_every_ticks it resets and tries to flush.
+
+	/// Internal gas reservoir.
+	var/datum/gas_mixture/air_contents
+	/// Integer. The disposal's item mode. 0=off 1=charging 2=charged
+	var/mode = 1
+	/// Boolean. Whether or not the flush handle is pulled.
+	var/flush = 0
+	/// The attached pipe trunk.
+	var/obj/structure/disposalpipe/trunk/trunk = null
+	/// Boolean. Whether or not flushing is in progress.
+	var/flushing = 0
+	/// Integer. How frequently the disposal checks if it's ready to flush.
+	var/flush_every_ticks = 30
+	/// Integer. Counter to `flush_every_ticks`.
+	var/flush_count = 0
+	/// Integer. `world.time` of the last flush sound effect.
 	var/last_sound = 0
+	/// List of objects that can be put into the disposal.
 	var/list/allowed_objects = list(/obj/structure/closet)
 	active_power_usage = 2200	//the pneumatic pump power. 3 HP ~ 2200W
 	idle_power_usage = 100
 	atom_flags = ATOM_FLAG_CLIMBABLE
+	/// Bitflag (Any of `DISPOSAL_FLIP_*`). Used to set the trunk's `turn` when constructed.
 	var/turn = DISPOSAL_FLIP_NONE
 	throwpass = TRUE
 
@@ -212,7 +223,12 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		src.go_out(user)
 	return
 
-// leave the disposal
+/**
+ * Ejects a mob from the disposal.
+ *
+ * **Parameters**:
+ * - `user`- The mob leaving the disposal.
+ */
 /obj/machinery/disposal/proc/go_out(mob/user)
 
 	if (user.client)
@@ -312,6 +328,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if(. == TOPIC_REFRESH)
 		interact(user)
 
+/// Ejects the outlet's contents onto its turf.
 /obj/machinery/disposal/verb/manual_eject()
 	set src in oview(1)
 	set category = "Object"
@@ -326,7 +343,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	eject()
 	add_fingerprint(usr)
 
-// eject the contents of the disposal unit
+/// Ejects the contents of the disposal unit.
 /obj/machinery/disposal/proc/eject()
 	for(var/atom/movable/AM in (contents - component_parts))
 		AM.forceMove(src.loc)
@@ -395,6 +412,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	else
 		src.pressurize() //otherwise charge
 
+/// Restores pressure to the disposal.
 /obj/machinery/disposal/proc/pressurize()
 	if(!is_powered())			// won't charge if no power
 		update_use_power(POWER_USE_OFF)
@@ -411,7 +429,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if (power_draw > 0)
 		use_power_oneoff(power_draw)
 
-// perform a flush
+/// Flushes the disposal's contents into the network.
 /obj/machinery/disposal/proc/flush()
 
 	flushing = 1
@@ -458,8 +476,12 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	update_icon()
 	return
 
-// called when holder is expelled from a disposal
-// should usually only occur if the pipe network is modified
+/**
+ * Called when a disposal holder is expelled from the outlet. Should usually only occur if the pipe network is modified.area
+ *
+ * **Parameters**:
+ * - `H` - The disposal holder being expelled.
+ */
 /obj/machinery/disposal/proc/expel(obj/structure/disposalholder/H)
 
 	var/turf/target
