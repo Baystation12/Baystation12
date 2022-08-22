@@ -1,8 +1,9 @@
 /decl/hierarchy/outfit/iccgn
 	hierarchy_type = /decl/hierarchy/outfit/iccgn
 	flags = OUTFIT_RESET_EQUIPMENT | OUTFIT_ADJUSTMENT_ALL_SKIPS
-	l_ear = /obj/item/device/radio/headset
-	l_hand = /obj/item/storage/box/large/iccgn_ranks
+	l_ear = /obj/item/device/radio/headset/iccgn
+	back = /obj/item/storage/backpack/satchel/pocketbook/gray
+	l_hand = /obj/item/storage/backpack/dufflebag/iccgn_accessories
 
 
 /decl/hierarchy/outfit/iccgn/utility
@@ -13,8 +14,6 @@
 	shoes = /obj/item/clothing/shoes/iccgn/utility
 	gloves = /obj/item/clothing/gloves/iccgn/duty
 	belt = /obj/item/storage/belt/general
-	back = /obj/item/storage/backpack/satchel/pocketbook/gray
-	r_hand = /obj/item/storage/box/iccgn_patches
 
 
 /decl/hierarchy/outfit/iccgn/enlisted_service
@@ -25,8 +24,6 @@
 	shoes = /obj/item/clothing/shoes/iccgn/service
 	gloves = /obj/item/clothing/gloves/iccgn/duty
 	belt = /obj/item/storage/belt/general
-	back = /obj/item/storage/backpack/satchel/pocketbook/gray
-	r_hand = /obj/item/storage/box/iccgn_patches
 
 
 /decl/hierarchy/outfit/iccgn/enlisted_dress
@@ -46,8 +43,6 @@
 	shoes = /obj/item/clothing/shoes/iccgn/service
 	gloves = /obj/item/clothing/gloves/iccgn/duty
 	belt = /obj/item/storage/belt/general
-	back = /obj/item/storage/backpack/satchel/pocketbook/gray
-	r_hand = /obj/item/storage/box/iccgn_patches
 
 
 /decl/hierarchy/outfit/iccgn/officer_dress
@@ -67,8 +62,6 @@
 	shoes = /obj/item/clothing/shoes/iccgn/service
 	gloves = /obj/item/clothing/gloves/iccgn/duty
 	belt = /obj/item/storage/belt/general
-	back = /obj/item/storage/backpack/satchel/pocketbook/gray
-	r_hand = /obj/item/storage/box/iccgn_patches
 
 
 /decl/hierarchy/outfit/iccgn/command_dress
