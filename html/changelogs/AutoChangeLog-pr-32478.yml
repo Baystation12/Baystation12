@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: An invisible 'HEAT' overlay no longer blocks interacting with your own
-      tile or yourself when on the Low graphics quality preset.
