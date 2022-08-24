@@ -1,34 +1,18 @@
-/obj/item/paper/talisman/stun/attack_self(mob/living/user)
-	if(iscultist(user))
-		to_chat(user, "This is a stun talisman.")
-	..()
+/obj/item/paper/talisman/stun
+	talisman_name = "stun"
+	talisman_desc = "temporarily stuns a targeted mob"
+	valid_target_type = list(
+		/mob/living/carbon,
+		/mob/living/silicon
+	)
 
 
-/obj/item/paper/talisman/stun/attack(mob/living/M, mob/living/user)
-	if(!iscultist(user))
-		return
-	user.say("Dream Sign: Evil Sealing Talisman!") //TODO: never change this shit
-	var/obj/item/nullrod/nrod = locate() in M
-	if(nrod)
-		user.visible_message(
-			SPAN_DANGER("\The [user] invokes \the [src] at [M], but they are unaffected."),
-			SPAN_DANGER("You invoke \the [src] at [M], but they are unaffected.")
-		)
-		return
-	else
-		user.visible_message(
-			SPAN_DANGER("\The [user] invokes \the [src] at [M]."),
-			SPAN_DANGER("You invoke \the [src] at [M].")
-		)
-
-	if(issilicon(M))
-		M.Weaken(15)
-		M.silent += 15
-	else if(iscarbon(M))
-		var/mob/living/carbon/C = M
+/obj/item/paper/talisman/stun/invoke(mob/living/target, mob/user)
+	if(issilicon(target))
+		target.Weaken(15)
+		target.silent += 15
+	else if(iscarbon(target))
+		var/mob/living/carbon/C = target
 		C.silent += 15
 		C.Weaken(20)
 		C.Stun(20)
-	admin_attack_log(user, M, "Used a stun talisman.", "Was victim of a stun talisman.", "used a stun talisman on")
-	user.unEquip(src)
-	qdel(src)
