@@ -1,6 +1,5 @@
 /obj/item/paper/talisman
 	icon_state = "paper_talisman"
-	var/imbue = null
 	info = "<center><img src='talisman.png'></center><br/><br/>"
 	language = LANGUAGE_CULT
 
