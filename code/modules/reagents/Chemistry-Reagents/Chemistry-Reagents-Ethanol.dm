@@ -71,7 +71,7 @@
 
 /datum/reagent/ethanol/beer/affect_ingest(mob/living/carbon/M, alien, removed)
 	..()
-	if(alien == IS_DIONA)
+	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
 		return
 	M.jitteriness = max(M.jitteriness - 3, 0)
 
@@ -159,7 +159,7 @@
 
 /datum/reagent/ethanol/deadrum/affect_ingest(mob/living/carbon/M, alien, removed)
 	..()
-	if(alien == IS_DIONA)
+	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
 		return
 	M.dizziness +=5
 
@@ -189,7 +189,7 @@
 	overdose = 45
 
 /datum/reagent/ethanol/coffee/affect_ingest(mob/living/carbon/M, alien, removed)
-	if(alien == IS_DIONA)
+	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
 		return
 	..()
 	M.dizziness = max(0, M.dizziness - 5)
@@ -309,7 +309,7 @@
 
 /datum/reagent/ethanol/thirteenloko/affect_ingest(mob/living/carbon/M, alien, removed)
 	..()
-	if(alien == IS_DIONA)
+	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
 		return
 	M.drowsyness = max(0, M.drowsyness - 7)
 	if (M.bodytemperature > 310)
@@ -571,11 +571,9 @@
 
 /datum/reagent/ethanol/drifter/affect_ingest(mob/living/carbon/M, alien, removed)
 	. = ..()
-	if (alien == IS_DIONA)
+	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
 		return
-	var/sleep_chance = 1
-	if (alien == IS_SKRELL)
-		sleep_chance = 2
+	var/sleep_chance = M.GetTraitLevel(/decl/trait/malus/ethanol) || 1
 	if (prob(sleep_chance))
 		M.sleeping = max(M.sleeping, 1)
 
@@ -1525,9 +1523,7 @@
 
 /datum/reagent/ethanol/alien/qokkloa/affect_ingest(mob/living/carbon/M, alien, removed)
 	..()
-	if(alien == IS_SKRELL)
-		return
-	if(alien == IS_DIONA)
+	if(M.HasTrait(/decl/trait/boon/clear_mind))
 		return
 
 	if(M.chem_doses[type] < 5)

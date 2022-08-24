@@ -245,16 +245,11 @@
 
 	ingest_amount = 15
 
-
-/datum/species/skrell/proc/handle_protein(mob/living/carbon/human/M, datum/reagent/protein)
-	var/effective_dose = M.chem_doses[protein.type] * protein.protein_amount
-	if (effective_dose > 20)
-		M.adjustToxLoss(clamp((effective_dose - 20) / 4, 2, 10))
-		M.vomit(8, 3, rand(1 SECONDS, 5 SECONDS))
-	else if (effective_dose > 10)
-		M.vomit(4, 2, rand(3 SECONDS, 10 SECONDS))
-	else
-		M.vomit(1, 1, rand(5 SECONDS, 15 SECONDS))
+	traits = list(
+		/decl/trait/boon/clear_mind = TRAIT_LEVEL_EXISTS,
+		/decl/trait/malus/animal_protein = TRAIT_LEVEL_MAJOR,
+		/decl/trait/malus/ethanol = TRAIT_LEVEL_MODERATE
+	)
 
 /datum/species/skrell/get_sex(mob/living/carbon/human/H)
 	return istype(H) && (H.descriptors["headtail length"] == 1 ? MALE : FEMALE)
@@ -362,6 +357,11 @@
 		TAG_HOMEWORLD = list(HOME_SYSTEM_DIONAEA),
 		TAG_FACTION =   list(FACTION_OTHER),
 		TAG_RELIGION =  list(RELIGION_OTHER)
+	)
+
+	traits = list(
+		/decl/trait/metabolically_inert = TRAIT_LEVEL_MODERATE,
+		/decl/trait/boon/clear_mind = TRAIT_LEVEL_EXISTS
 	)
 
 /proc/spawn_diona_nymph(turf/target)

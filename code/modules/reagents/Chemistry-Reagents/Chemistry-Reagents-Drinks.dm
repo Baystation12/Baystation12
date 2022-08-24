@@ -16,9 +16,10 @@
 	return
 
 /datum/reagent/drink/affect_ingest(mob/living/carbon/M, alien, removed)
-	if (alien == IS_SKRELL && protein_amount > 0)
-		var/datum/species/skrell/S = M.species
-		S.handle_protein(M, src)
+	if (protein_amount)
+		handle_protein(M, src)
+	if (sugar_amount)
+		handle_sugar(M, src)
 	if(nutrition)
 		M.adjust_nutrition(nutrition * removed)
 	if(hydration)
@@ -32,12 +33,12 @@
 		M.bodytemperature = min(310, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 // Juices
+/datum/reagent/drink/juice
+	sugar_amount = 0.5
+
 /datum/reagent/drink/juice/affect_ingest(mob/living/carbon/human/M, alien, removed)
 	..()
 	M.immunity = min(M.immunity + 0.25, M.immunity_norm*1.5)
-	if(alien == IS_UNATHI)
-		var/datum/species/unathi/S = M.species
-		S.handle_sugar(M,src,0.5)
 
 /datum/reagent/drink/juice/banana
 	name = "Banana Juice"
@@ -101,7 +102,7 @@
 
 /datum/reagent/drink/juice/lime/affect_ingest(mob/living/carbon/M, alien, removed)
 	..()
-	if(alien == IS_DIONA)
+	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
 		return
 	M.adjustToxLoss(-0.5 * removed)
 
@@ -116,7 +117,7 @@
 
 /datum/reagent/drink/juice/orange/affect_ingest(mob/living/carbon/M, alien, removed)
 	..()
-	if(alien == IS_DIONA)
+	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
 		return
 	M.adjustOxyLoss(-2 * removed)
 
@@ -131,8 +132,8 @@
 	glass_desc = "A glass of deadly juice."
 
 /datum/reagent/toxin/poisonberryjuice/affect_blood(mob/living/carbon/M, alien, removed)
-	if(alien == IS_UNATHI)
-		return //unathi are immune!
+	if(M.HasTrait(/decl/trait/boon/filtered_blood))
+		return
 	return ..()
 
 /datum/reagent/drink/juice/potato
@@ -176,7 +177,7 @@
 
 /datum/reagent/drink/juice/tomato/affect_ingest(mob/living/carbon/M, alien, removed)
 	..()
-	if(alien == IS_DIONA)
+	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
 		return
 	M.heal_organ_damage(0, 0.5 * removed)
 
@@ -249,10 +250,11 @@
 
 /datum/reagent/drink/milk/affect_ingest(mob/living/carbon/M, alien, removed)
 	..()
-	if (alien == IS_DIONA)
+	holder.remove_reagent(/datum/reagent/capsaicin, 10 * removed)
+
+	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
 		return
 	M.heal_organ_damage(0.5 * removed, 0)
-	holder.remove_reagent(/datum/reagent/capsaicin, 10 * removed)
 
 /datum/reagent/drink/milk/chocolate
 	name =  "Chocolate Milk"
@@ -300,12 +302,13 @@
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
 
 /datum/reagent/drink/coffee/affect_ingest(mob/living/carbon/M, alien, removed)
-	if(alien == IS_DIONA)
+	if(adj_temp > 0)
+		holder.remove_reagent(/datum/reagent/frostoil, 10 * removed)
+
+	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
 		return
 	..()
 
-	if(adj_temp > 0)
-		holder.remove_reagent(/datum/reagent/frostoil, 10 * removed)
 	if(volume > 15)
 		M.add_chemical_effect(CE_PULSE, 1)
 	if(volume > 45)
@@ -599,15 +602,10 @@
 	color = "#aee5e4"
 	adj_temp = -9
 	protein_amount = 0.5
+	sugar_amount = 0.5
 
 	glass_name = "milkshake"
 	glass_desc = "Glorious brainfreezing mixture."
-
-/datum/reagent/milkshake/affect_ingest(mob/living/carbon/human/M, alien, removed)
-	..()
-	if(alien == IS_UNATHI)
-		var/datum/species/unathi/S = M.species
-		S.handle_sugar(M,src,0.5)
 
 /datum/reagent/drink/rewriter
 	name = "Rewriter"
@@ -657,15 +655,10 @@
 	description = "Canada is still going at it, no one can stop them."
 	taste_description = "nutty, sugary goodness"
 	color = "#b24403"
+	sugar_amount = 2/3 //Maple syrup is about 2/3 sugar in real life
 
 	glass_name = "maple syrup"
 	glass_desc = "Thick and very sweet, the perfect Canadian treat to enjoy under a clear sky."
-
-/datum/reagent/drink/maplesyrup/affect_ingest(mob/living/carbon/M, alien, removed)
-	..()
-	if(alien == IS_UNATHI)
-		var/datum/species/unathi/S = M.species
-		S.handle_sugar(M, src, 0.66)	//Maple syrup is about 2/3 sugar in real life
 
 /datum/reagent/drink/space_cola
 	name = "Space Cola"
@@ -739,7 +732,7 @@
 
 /datum/reagent/drink/doctor_delight/affect_ingest(mob/living/carbon/M, alien, removed)
 	..()
-	if(alien == IS_DIONA)
+	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
 		return
 	M.adjustOxyLoss(-4 * removed)
 	M.heal_organ_damage(2 * removed, 2 * removed)
@@ -776,7 +769,7 @@
 
 /datum/reagent/drink/hell_ramen/affect_ingest(mob/living/carbon/M, alien, removed)
 	..()
-	if(alien == IS_DIONA)
+	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
 		return
 	M.bodytemperature += 10 * TEMPERATURE_DAMAGE_COEFFICIENT
 
@@ -831,7 +824,7 @@
 
 /datum/reagent/drink/beastenergy/affect_ingest(mob/living/carbon/M, alien, removed)
 	..()
-	if(alien == IS_DIONA)
+	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
 		return
 	M.drowsyness = max(0, M.drowsyness - 7)
 	M.make_jittery(2)
@@ -1096,7 +1089,7 @@
 
 /datum/reagent/drink/tea/affect_ingest(mob/living/carbon/M, alien, removed)
 	..()
-	if(alien == IS_DIONA)
+	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
 		return
 	M.adjustToxLoss(-0.5 * removed)
 
