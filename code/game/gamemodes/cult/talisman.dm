@@ -11,6 +11,31 @@
 	var/valid_target_type = /atom
 
 
+/obj/item/paper/talisman/get_antag_info()
+	. = ..()
+	. += {"
+		<p>This is a [talisman_name] talisman. It [talisman_desc].</p>
+		<p>Talismans have a single use, and are deleted when used.</p>
+		<p>If used on a mob carrying a null rod, the talisman's effect will be blocked, but the talisman will still be consumed.</p>
+		<p>Only cultists can read or use a talisman. To any non-cultist mob, the talisman appears as a paper written in gibberish.</p>
+		<p>Talismans can be created by drawing and using an Imbue rune.</p>
+		<p>It can be used on the following types of atoms:</p>
+		<ul>
+	"}
+	if (islist(valid_target_type))
+		for (var/type in valid_target_type)
+			. += {"
+				<li>[type]</li>
+			"}
+	else
+		. += {"
+			<li>[valid_target_type]</li>
+		"}
+	. += {"
+		</ul>
+	"}
+
+
 /obj/item/paper/talisman/examine(mob/user, distance)
 	. = ..()
 	if (iscultist(user))
