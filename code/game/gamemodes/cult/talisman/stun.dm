@@ -1,6 +1,7 @@
 /obj/item/paper/talisman/stun
 	talisman_name = "stun"
 	talisman_desc = "temporarily stuns a targeted mob"
+	talisman_sound = 'sound/weapons/flash.ogg'
 	valid_target_type = list(
 		/mob/living/carbon,
 		/mob/living/silicon

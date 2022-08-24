@@ -7,6 +7,8 @@
 	var/talisman_name = "default"
 	/// String. The description of the talisman effect exposed to cultists on examine.
 	var/talisman_desc
+	/// Sound file. The sound to play when the talisman is invoked.
+	var/talisman_sound
 	/// Type or list of types. The type(s) that this talisman can be used on.
 	var/valid_target_type = /atom
 
@@ -72,6 +74,8 @@
 	user.say("Talisman {talisman_name}!", all_languages[LANGUAGE_CULT])
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(target)
+	if (talisman_sound)
+		playsound(src, talisman_sound, 100, 1)
 	qdel(src)
 
 
