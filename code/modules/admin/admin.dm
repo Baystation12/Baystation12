@@ -839,7 +839,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	if(!check_rights(R_ADMIN))
 		return
 
-	world.update_hub_visibility(TRUE)
+	world.update_hub_visibility()
 	var/long_message = "Updated hub visibility. The server is now [config.hub_visible ? "visible" : "invisible"]."
 	if (config.hub_visible && !world.reachable)
 		message_admins("WARNING: The server will not show up on the hub because byond is detecting that a firewall is blocking incoming connections.")
