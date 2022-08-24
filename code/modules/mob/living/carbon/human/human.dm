@@ -727,8 +727,7 @@
 		handle_additional_vomit_reagents(splat)
 		splat.update_icon()
 
-/mob/living/carbon/human/proc/vomit(timevomit = 1, level = 3, delay = 0)
-
+/mob/living/carbon/human/vomit(timevomit = 1, level = 3, delay = 0)
 	set waitfor = 0
 
 	if(!check_has_mouth() || isSynthetic() || !timevomit || !level || stat == DEAD || lastpuke)

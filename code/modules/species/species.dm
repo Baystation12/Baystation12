@@ -270,6 +270,8 @@
 	/// When being fed a reagent item, the amount this species eats per bite on help intent.
 	var/ingest_amount = 10
 
+
+	var/list/traits = list() // An associative list of /decl/traits and trait level - See individual traits for valid levels
 /*
 These are all the things that can be adjusted for equipping stuff and
 each one can be in the NORTH, SOUTH, EAST, and WEST direction. Specify
