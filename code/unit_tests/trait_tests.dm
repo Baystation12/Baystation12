@@ -11,7 +11,7 @@
 
 /datum/unit_test/trait/all_traits_shall_have_valid_names/start_test()
 	var/list/invalid_traits = list()
-	for(var/trait in decls_repository.get_decls_unassociated(trait_types()))
+	for(var/trait in decls_repository.get_decls_unassociated(subtypesof(/decl/trait)))
 		var/decl/trait/T = trait
 		if(!T.name || !istext(T.name)) // Empty strings are valid texts
 			invalid_traits += T.type
@@ -30,7 +30,7 @@
 /datum/unit_test/trait/all_traits_shall_have_unique_name/start_test()
 	var/list/trait_names = list()
 
-	for(var/trait in decls_repository.get_decls_unassociated(trait_types()))
+	for(var/trait in decls_repository.get_decls_unassociated(subtypesof(/decl/trait)))
 		var/decl/trait/T = trait
 		group_by(trait_names, T.name, T.type)
 
@@ -47,7 +47,7 @@
 
 /datum/unit_test/trait/all_traits_shall_have_valid_levels/start_test()
 	var/list/invalid_traits = list()
-	for(var/trait in decls_repository.get_decls_unassociated(trait_types()))
+	for(var/trait in decls_repository.get_decls_unassociated(subtypesof(/decl/trait)))
 		var/decl/trait/T = trait
 		if(!length(T.levels) || (T.levels.len > 1 && (TRAIT_LEVEL_EXISTS in T.levels)))
 			invalid_traits += T.type

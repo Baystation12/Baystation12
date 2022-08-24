@@ -1,15 +1,3 @@
-var/global/list/_trait_types
-
-/proc/trait_types()
-	if(!_trait_types)
-		_trait_types = list()
-		for(var/trait_type in subtypesof(/decl/trait))
-			var/decl/trait/T = trait_type
-			if(initial(T.abstract_type) != trait_type)
-				_trait_types += trait_type
-
-	return _trait_types
-
 /mob/living
 	var/list/traits
 
@@ -19,6 +7,7 @@ var/global/list/_trait_types
 	return (trait_type in GetTraits())
 
 /mob/living/proc/GetTraitLevel(trait_type)
+	SHOULD_NOT_OVERRIDE(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 	var/traits = GetTraits()
 	if(!traits)
