@@ -176,7 +176,7 @@
 			return
 
 		to_chat(user, "You begin repairing damage to \the [src]...")
-		if(WT.remove_fuel(round(damage/75)) && do_after(usr, damage/10, src, DO_PUBLIC_UNIQUE))
+		if(WT.remove_fuel(round(damage/75)) && do_after(usr, damage/10, src, DO_REPAIR_CONSTRUCT))
 			damage = 0
 			to_chat(user, "You repair \the [src].")
 		return

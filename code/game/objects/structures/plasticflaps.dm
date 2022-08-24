@@ -46,7 +46,7 @@
 			SPAN_NOTICE("\The [user] begins deconstructing \the [src]."),
 			SPAN_NOTICE("You start deconstructing \the [src].")
 			)
-		if(user.do_skilled(3 SECONDS, SKILL_CONSTRUCTION, src))
+		if(user.do_skilled(3 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT))
 			user.visible_message(
 				SPAN_WARNING("\The [user] deconstructs \the [src]."),
 				SPAN_WARNING("You deconstruct \the [src].")

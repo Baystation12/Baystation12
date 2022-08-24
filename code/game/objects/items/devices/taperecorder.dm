@@ -451,7 +451,7 @@
 			to_chat(user, "<span class='notice'>There is no tape left inside.</span>")
 			return
 		to_chat(user, "<span class='notice'>You start winding the tape back in...</span>")
-		if(do_after(user, 12 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
+		if(do_after(user, 12 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			to_chat(user, "<span class='notice'>You wound the tape back in.</span>")
 			fix()
 		return

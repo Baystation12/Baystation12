@@ -31,7 +31,7 @@
 						SPAN_NOTICE("You begin prying up \the [flooring.descriptor] with \the [C].")
 					)
 					playsound(src, 'sound/items/Crowbar.ogg', 80, 1)
-					if (do_after(user, flooring.remove_timer, src, DO_PUBLIC_UNIQUE))
+					if (do_after(user, flooring.remove_timer, src, DO_REPAIR_CONSTRUCT))
 						user.visible_message(
 							SPAN_NOTICE("\The [user] pries up \the [flooring.descriptor] with \the [C]!"),
 							SPAN_NOTICE("You pry up \the [flooring.descriptor] with \the [C].")
@@ -55,7 +55,7 @@
 					SPAN_NOTICE("You begin unscrewing \the [flooring.descriptor] with \the [C].")
 				)
 				playsound(src, 'sound/items/Screwdriver.ogg', 80, 1)
-				if (do_after(user, flooring.remove_timer, src, DO_PUBLIC_UNIQUE))
+				if (do_after(user, flooring.remove_timer, src, DO_REPAIR_CONSTRUCT))
 					user.visible_message(
 						SPAN_NOTICE("\The [user] unscrews \the [flooring.descriptor] with \the [C]!"),
 						SPAN_NOTICE("You unscrew \the [flooring.descriptor] with \the [C].")
@@ -75,7 +75,7 @@
 					SPAN_NOTICE("You begin unwrenching \the [flooring.descriptor] with \the [C].")
 				)
 				playsound(src, 'sound/items/Ratchet.ogg', 80, 1)
-				if (do_after(user, flooring.remove_timer, src, DO_PUBLIC_UNIQUE))
+				if (do_after(user, flooring.remove_timer, src, DO_REPAIR_CONSTRUCT))
 					user.visible_message(
 						SPAN_NOTICE("\The [user] unwrench \the [flooring.descriptor] with \the [C]!"),
 						SPAN_NOTICE("You unwrench \the [flooring.descriptor] with \the [C].")
@@ -128,7 +128,7 @@
 				to_chat(user, "<span class='warning'>You require at least [use_flooring.build_cost] [S.name] to complete the [use_flooring.descriptor].</span>")
 				return
 			// Stay still and focus...
-			if(use_flooring.build_time && !do_after(user, use_flooring.build_time, src, DO_PUBLIC_UNIQUE))
+			if(use_flooring.build_time && !do_after(user, use_flooring.build_time, src, DO_REPAIR_CONSTRUCT))
 				return
 			if(flooring || !S || !user || !use_flooring)
 				return
@@ -144,7 +144,7 @@
 				var/turf/T = GetBelow(src)
 				if(T)
 					T.visible_message("<span class='warning'>The ceiling above looks as if it's being pried off.</span>")
-				if(do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE))
+				if(do_after(user, 10 SECONDS, src, DO_REPAIR_CONSTRUCT))
 					if(!istype(src, /turf/simulated/floor))
 						return
 					if(!broken && !burnt || !(is_plating()))
@@ -173,7 +173,7 @@
 					if(welder.remove_fuel(0, user))
 						playsound(src, 'sound/items/Welder.ogg', 80, 1)
 						visible_message("<span class='notice'>[user] has started melting the plating's reinforcements!</span>")
-						if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) && welder.isOn() && welder_melt())
+						if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT) && welder.isOn() && welder_melt())
 							visible_message("<span class='warning'>[user] has melted the plating's reinforcements! It should be possible to pry it off.</span>")
 							playsound(src, 'sound/items/Welder.ogg', 80, 1)
 					return

@@ -31,7 +31,7 @@
 			to_chat(user, "<span class='warning'>You need more rods to build a cheval de frise.</span>")
 			return
 		visible_message("<span class='notice'>\The [user] begins to work on \the [src].</span>")
-		if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			if(R.use(5))
 				visible_message("<span class='notice'>\The [user] fastens \the [R] to \the [src].</span>")
 				var/obj/structure/barricade/spike/CDF = new(loc, material.name, R.material.name)
@@ -50,7 +50,7 @@
 				to_chat(user, "<span class='warning'>You need one sheet of [material.display_name] to repair \the [src].</span>")
 				return
 			visible_message("<span class='notice'>[user] begins to repair \the [src].</span>")
-			if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) && get_damage_value())
+			if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) && get_damage_value())
 				if (D.use(1))
 					restore_health(get_max_health())
 					visible_message("<span class='notice'>[user] repairs \the [src].</span>")

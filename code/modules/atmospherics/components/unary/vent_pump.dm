@@ -278,7 +278,7 @@
 		to_chat(user, "<span class='notice'>Now welding \the [src].</span>")
 		playsound(src, 'sound/items/Welder.ogg', 50, 1)
 
-		if(!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if(!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			to_chat(user, "<span class='notice'>You must remain close to finish this task.</span>")
 			return 1
 
@@ -326,7 +326,7 @@
 			return 1
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-		if (do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if (do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			user.visible_message( \
 				"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 				"<span class='notice'>You have unfastened \the [src].</span>", \

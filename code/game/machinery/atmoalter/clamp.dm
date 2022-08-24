@@ -124,7 +124,7 @@
 
 	if(open && over_object == usr && Adjacent(usr))
 		to_chat(usr, "<span class='notice'>You begin to remove \the [src]...</span>")
-		if (do_after(usr, 3 SECONDS, over_object, DO_PUBLIC_UNIQUE))
+		if (do_after(usr, 3 SECONDS, over_object, DO_REPAIR_CONSTRUCT))
 			to_chat(usr, "<span class='notice'>You have removed \the [src].</span>")
 			var/obj/item/clamp/C = new/obj/item/clamp(src.loc)
 			C.forceMove(usr.loc)
@@ -159,7 +159,7 @@
 			return
 
 		to_chat(user, "<span class='notice'>You begin to attach \the [src] to \the [A]...</span>")
-		if (do_after(user, 3 SECONDS, A, DO_PUBLIC_UNIQUE))
+		if (do_after(user, 3 SECONDS, A, DO_REPAIR_CONSTRUCT))
 			if (QDELETED(P))
 				return
 			if (P.clamp)
