@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: The Hub Visibility Toggle is now actually a toggle instead of always and
-      only turning hub visibility on.
