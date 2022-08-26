@@ -219,7 +219,7 @@
 		if(WT.remove_fuel(0,user))
 			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, max(5, damage / 5), src, DO_PUBLIC_UNIQUE) && WT && WT.isOn())
+			if(do_after(user, max(5, damage / 5), src, DO_REPAIR_CONSTRUCT) && WT && WT.isOn())
 				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
 				restore_health(damage)
 		return
@@ -230,6 +230,7 @@
 		var/cut_delay = 60 - material.cut_delay
 		var/dismantle_verb
 		var/dismantle_sound
+		var/strict_timer_flags = FALSE
 
 		if(istype(W,/obj/item/weldingtool))
 			var/obj/item/weldingtool/WT = W
@@ -246,11 +247,13 @@
 			dismantle_sound = "sparks"
 			dismantle_verb = "slicing"
 			cut_delay *= 0.5
+			strict_timer_flags = TRUE
 		else if(istype(W,/obj/item/pickaxe))
 			var/obj/item/pickaxe/P = W
 			dismantle_verb = P.drill_verb
 			dismantle_sound = P.drill_sound
 			cut_delay -= P.digspeed
+			strict_timer_flags = TRUE
 
 		if(dismantle_verb)
 
@@ -261,7 +264,7 @@
 			if(cut_delay < 0)
 				cut_delay = 0
 
-			if (do_after(user, cut_delay, src, DO_PUBLIC_UNIQUE))
+			if (do_after(user, cut_delay, src, strict_timer_flags ? DO_PUBLIC_UNIQUE : DO_REPAIR_CONSTRUCT))
 				dismantle_wall()
 				user.visible_message(SPAN_WARNING("\The [src] was torn open by [user]!"), SPAN_NOTICE("You remove the outer plating."))
 				return
@@ -298,7 +301,7 @@
 				if(isScrewdriver(W))
 					to_chat(user, "<span class='notice'>You begin removing the support lines.</span>")
 					playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
-					if(!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE) || construction_stage != 5)
+					if(!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT) || construction_stage != 5)
 						return
 					construction_stage = 4
 					update_icon()
@@ -313,6 +316,7 @@
 						return
 			if(4)
 				var/cut_cover
+				var/strict_timer_flags = FALSE
 				if(istype(W,/obj/item/weldingtool))
 					var/obj/item/weldingtool/WT = W
 					if(WT.remove_fuel(0,user))
@@ -325,10 +329,11 @@
 						if(!cutter.slice(user))
 							return
 					cut_cover = 1
+					strict_timer_flags = TRUE
 				if(cut_cover)
 					to_chat(user, "<span class='notice'>You begin slicing through the metal cover.</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
-					if(!do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE) || construction_stage != 4)
+					if(!do_after(user, 6 SECONDS, src, strict_timer_flags ? DO_PUBLIC_UNIQUE : DO_REPAIR_CONSTRUCT) || construction_stage != 4)
 						return
 					construction_stage = 3
 					update_icon()
@@ -338,7 +343,7 @@
 				if(isCrowbar(W))
 					to_chat(user, "<span class='notice'>You struggle to pry off the cover.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
-					if(!do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE) || construction_stage != 3)
+					if(!do_after(user, 10 SECONDS, src, DO_REPAIR_CONSTRUCT) || construction_stage != 3)
 						return
 					construction_stage = 2
 					update_icon()
@@ -348,7 +353,7 @@
 				if(isWrench(W))
 					to_chat(user, "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame.</span>")
 					playsound(src, 'sound/items/Ratchet.ogg', 100, 1)
-					if(!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE) || construction_stage != 2)
+					if(!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT) || construction_stage != 2)
 						return
 					construction_stage = 1
 					update_icon()
@@ -356,6 +361,7 @@
 					return
 			if(1)
 				var/cut_cover
+				var/strict_timer_flags = FALSE
 				if(istype(W, /obj/item/weldingtool))
 					var/obj/item/weldingtool/WT = W
 					if( WT.remove_fuel(0,user) )
@@ -368,10 +374,11 @@
 						if(!cutter.slice(user))
 							return
 					cut_cover = 1
+					strict_timer_flags = TRUE
 				if(cut_cover)
 					to_chat(user, "<span class='notice'>You begin slicing through the support rods.</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
-					if(!do_after(user, 7 SECONDS, src, DO_PUBLIC_UNIQUE) || construction_stage != 1)
+					if(!do_after(user, 7 SECONDS, src, strict_timer_flags ? DO_PUBLIC_UNIQUE : DO_REPAIR_CONSTRUCT) || construction_stage != 1)
 						return
 					construction_stage = 0
 					update_icon()
@@ -382,7 +389,7 @@
 				if(isCrowbar(W))
 					to_chat(user, "<span class='notice'>You struggle to pry off the outer sheath.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
-					if(!do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE) || !W || !T )	return
+					if(!do_after(user, 10 SECONDS, src, DO_REPAIR_CONSTRUCT) || !W || !T )	return
 					if(user.loc == T && user.get_active_hand() == W )
 						to_chat(user, "<span class='notice'>You pry off the outer sheath.</span>")
 						dismantle_wall()

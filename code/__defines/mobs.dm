@@ -474,6 +474,7 @@
 #define DO_PUBLIC_UNIQUE     (DO_DEFAULT | DO_PUBLIC_PROGRESS | DO_BOTH_UNIQUE_ACT) // Common flags for actions that should be public and unique
 #define DO_SURGERY           (DO_DEFAULT | DO_PUBLIC_PROGRESS) // Flags for surgery steps. No unique checks to allow multi-surgery steps.
 #define DO_MEDICAL           (DO_DEFAULT | DO_PUBLIC_PROGRESS) // Flags for medical steps. No unique checks to allow multi-bandaging steps.
+#define DO_REPAIR_CONSTRUCT  (DO_DEFAULT | DO_PUBLIC_PROGRESS | DO_TARGET_UNIQUE_ACT) // Flags for repair and construction steps.
 #define DO_EQUIP             (DO_DEFAULT | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) // Flags for equipping/unequipping mobs. Set to allow a mob to be targeted by multiple sources, but for a source to only be able to perform one action at a time.
 
 #define DO_MISSING_USER      (-1)

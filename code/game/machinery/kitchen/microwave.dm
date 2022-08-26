@@ -62,7 +62,7 @@
 				"<span class='notice'>\The [user] starts to fix part of the microwave.</span>", \
 				"<span class='notice'>You start to fix part of the microwave.</span>" \
 			)
-			if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
+			if (do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
 				user.visible_message( \
 					"<span class='notice'>\The [user] fixes part of the microwave.</span>", \
 					"<span class='notice'>You have fixed part of the microwave.</span>" \
@@ -75,7 +75,7 @@
 				"<span class='notice'>\The [user] starts to fix part of the microwave.</span>", \
 				"<span class='notice'>You start to fix part of the microwave.</span>" \
 			)
-			if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
+			if (do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
 				user.visible_message( \
 					"<span class='notice'>\The [user] fixes the microwave.</span>", \
 					"<span class='notice'>You have fixed the microwave.</span>" \
@@ -201,7 +201,7 @@
 			"<span class='notice'>\The [user] begins [anchored ? "securing" : "unsecuring"] the microwave.</span>", \
 			"<span class='notice'>You attempt to [anchored ? "secure" : "unsecure"] the microwave.</span>"
 			)
-		if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if (do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			anchored = !anchored
 			user.visible_message( \
 			"<span class='notice'>\The [user] [anchored ? "secures" : "unsecures"] the microwave.</span>", \

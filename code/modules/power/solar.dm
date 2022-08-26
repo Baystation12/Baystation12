@@ -67,7 +67,7 @@ var/global/solar_gen_rate = 1500
 	if(isCrowbar(W))
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		user.visible_message("<span class='notice'>[user] begins to take the glass off the solar panel.</span>")
-		if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			var/obj/item/solar_assembly/S = locate() in src
 			if(S)
 				S.dropInto(loc)

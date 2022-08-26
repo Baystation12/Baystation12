@@ -63,13 +63,13 @@
 		if(anchored && !reinf_material)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 			to_chat(user, "<span class='notice'>Now disassembling the girder...</span>")
-			if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
+			if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
 				to_chat(user, "<span class='notice'>You dissasembled the girder!</span>")
 				dismantle()
 		else if(!anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 			to_chat(user, "<span class='notice'>Now securing the girder...</span>")
-			if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
+			if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
 				to_chat(user, "<span class='notice'>You secured the girder!</span>")
 				reset_girder()
 		return
@@ -101,7 +101,7 @@
 		if(state == 2)
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			to_chat(user, "<span class='notice'>Now unsecuring support struts...</span>")
-			if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
+			if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
 				to_chat(user, "<span class='notice'>You unsecured the support struts!</span>")
 				state = 1
 		else if(anchored && !reinf_material)
@@ -113,7 +113,7 @@
 	if(isWirecutter(W) && state == 1)
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now removing support struts...</span>")
-		if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			to_chat(user, "<span class='notice'>You removed the support struts!</span>")
 
 			if(reinf_material)
@@ -126,7 +126,7 @@
 	if(isCrowbar(W) && state == 0 && anchored)
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now dislodging the girder...</span>")
-		if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			to_chat(user, "<span class='notice'>You dislodged the girder!</span>")
 			icon_state = "displaced"
 			anchored = FALSE
@@ -163,7 +163,7 @@
 
 	to_chat(user, "<span class='notice'>You begin adding the plating...</span>")
 
-	if(!do_after(user,4 SECONDS, src, DO_PUBLIC_UNIQUE) || !S.use(2))
+	if(!do_after(user,4 SECONDS, src, DO_REPAIR_CONSTRUCT) || !S.use(2))
 		return 1 //once we've gotten this far don't call parent attackby()
 
 	if(anchored)
@@ -197,7 +197,7 @@
 		return 0
 
 	to_chat(user, "<span class='notice'>Now reinforcing...</span>")
-	if (!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE) || !S.use(2))
+	if (!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT) || !S.use(2))
 		return 1 //don't call parent attackby() past this point
 	to_chat(user, "<span class='notice'>You added reinforcement!</span>")
 
@@ -236,7 +236,7 @@
 	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now disassembling the girder...</span>")
-		if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			to_chat(user, "<span class='notice'>You dissasembled the girder!</span>")
 			dismantle()
 

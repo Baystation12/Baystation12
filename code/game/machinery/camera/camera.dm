@@ -385,7 +385,7 @@
 		to_chat(user, "<span class='notice'>You start to weld \the [src]..</span>")
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 		busy = 1
-		if(do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE) && WT.isOn())
+		if(do_after(user, 10 SECONDS, src, DO_REPAIR_CONSTRUCT) && WT.isOn())
 			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 			busy = 0
 			return 1

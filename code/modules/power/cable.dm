@@ -197,7 +197,7 @@ By design, d1 is the smallest direction and d2 is the highest
 			visible_message(SPAN_WARNING("[user] begins to cut through the cable with \the [W]."))
 			delay_holder = 3 SECONDS
 
-		if(user.do_skilled(delay_holder, SKILL_ELECTRICAL, src))
+		if(user.do_skilled(delay_holder, SKILL_ELECTRICAL, src, do_flags = DO_REPAIR_CONSTRUCT))
 			cut_wire(W, user)
 			if(W.obj_flags & OBJ_FLAG_CONDUCTIBLE)
 				shock(user, 66, 0.7)
