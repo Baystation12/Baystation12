@@ -19,6 +19,7 @@
 		"SRV Venerable Catfish" = list("nav_verne_5"), //docking location for verne shuttle
 		"Cyclopes" = list("nav_merc_dock"),
 		"ICGNV Hound" = list("nav_hound_dock"),
+		"SFV Arbiter" = list("nav_sfv_arbiter_dock")
 	)
 
 	initial_generic_waypoints = list(

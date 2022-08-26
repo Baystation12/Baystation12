@@ -478,6 +478,7 @@
 /area/hallway/primary/fourthdeck/aft)
 "bK" = (
 /obj/effect/shuttle_landmark/icgnv_hound/dock,
+/obj/effect/shuttle_landmark/sfv_arbiter/dock,
 /turf/space,
 /area/space)
 "bM" = (
