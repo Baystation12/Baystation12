@@ -3,6 +3,7 @@
 	warmup_time = 5
 	shuttle_area = list(/area/map_template/icgnv_hound)
 	current_location = "nav_icgnv_hound_start"
+	dock_target = "icgnv_hound_shuttle"
 	range = 1
 	fuel_consumption = 0
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling
@@ -32,9 +33,10 @@
 /obj/effect/shuttle_landmark/icgnv_hound/nav4
 	landmark_tag = "nav_icgnv_hound_4"
 
-/obj/effect/shuttle_landmark/icgnv_hound/dock //gotta actually make a proper docking point at the torch i think
+/obj/effect/shuttle_landmark/icgnv_hound/dock
 	name = "4th Deck, Fore Airlock"
 	landmark_tag = "nav_icgnv_hound_dock"
+	docking_controller = "admin_shuttle_dock_airlock"
 
 /obj/effect/shuttle_landmark/transit/iccgn
 	name = "In transit"
