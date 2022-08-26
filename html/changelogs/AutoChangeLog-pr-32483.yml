@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Repair and construction steps no longer have user uniqueness checks, allowing
-      mobs to repair, build, or deconstruct multiple things at once.
