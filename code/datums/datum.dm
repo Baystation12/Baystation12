@@ -44,6 +44,12 @@
 	if (!isturf(src))	// Not great, but the 'correct' way to do it would add overhead for little benefit.
 		cleanup_events(src)
 
+	var/list/machines = global.state_machines["\ref[src]"]
+	if(length(machines))
+		for(var/base_type in machines)
+			qdel(machines[base_type])
+		global.state_machines -= "\ref[src]"
+
 	return QDEL_HINT_QUEUE
 
 /datum/proc/Process()
