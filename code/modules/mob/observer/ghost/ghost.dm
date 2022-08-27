@@ -162,6 +162,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Ghost"
 	set desc = "Relinquish your life and enter the land of the dead."
 
+	if (admin_paralyzed)
+		to_chat(usr, SPAN_DEBUG("You cannot ghost while admin paralyzed."))
+		return
+
 	if(stat == DEAD)
 		announce_ghost_joinleave(ghostize(1))
 	else
