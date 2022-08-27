@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - admin: Mobs that are admin paralyzed can no longer ghost out of their bodies.
