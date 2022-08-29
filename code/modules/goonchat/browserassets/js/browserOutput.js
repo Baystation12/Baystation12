@@ -62,7 +62,7 @@ var opts = {
 	'clientData': [],
 
 	'font': 'Arial',
-	'messageCombining': true,
+	'messageCombining': true
 
 };
 var replaceRegexes = {};
@@ -675,7 +675,7 @@ $(function() {
 		'shighlightColor': getCookie('highlightcolor'),
 		'sfont': getCookie('font'),
 		'smessagecombining': getCookie('messagecombining'),
-		'stheme': getCookie('theme'),
+		'stheme': getCookie('theme')
 	};
 
 	if (savedConfig.fontsize) {
