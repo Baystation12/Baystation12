@@ -19306,7 +19306,7 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
-/obj/structure/closet/crate/secure/biohazard/alt,
+/obj/machinery/organ_printer/flesh/mapped,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "iHb" = (
@@ -22845,7 +22845,6 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 8
 	},
-/obj/item/reagent_containers/dropper/peridaxon,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "njj" = (
@@ -26216,7 +26215,6 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 8
 	},
-/obj/item/reagent_containers/dropper/peridaxon,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery2)
 "rpB" = (
@@ -29954,6 +29952,7 @@
 	c_tag = "Infirmary - Operating Theatre 1";
 	dir = 1
 	},
+/obj/structure/closet/crate/secure/biohazard/alt,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "xxl" = (
