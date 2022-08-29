@@ -25312,6 +25312,10 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/device/mmi,
+/obj/structure/closet/crate/freezer,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery2)
 "qkb" = (
@@ -28271,8 +28275,8 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/alarm/monitor{
 	alarm_id = "xenobio3_alarm";
-	req_access = list(list("ACCESS_RESEARCH","ACCESS_ATMOS","ACCESS_ENGINE_EQUIP"));
-	dir = 8
+	dir = 8;
+	req_access = list(list("ACCESS_RESEARCH","ACCESS_ATMOS","ACCESS_ENGINE_EQUIP"))
 	},
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/cell_3)
@@ -28388,10 +28392,7 @@
 	dir = 8;
 	pixel_x = -24
 	},
-/obj/structure/closet/crate/freezer,
-/obj/item/device/mmi,
-/obj/item/reagent_containers/ivbag/nanoblood,
-/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/machinery/organ_printer/flesh/gas/mapped,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery2)
 "tCO" = (

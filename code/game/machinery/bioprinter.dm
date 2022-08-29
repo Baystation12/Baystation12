@@ -200,6 +200,10 @@
 		)
 	var/datum/dna/loaded_dna_datum
 	var/datum/species/loaded_species //For quick refrencing
+	/// String (One of `SPECIES_*`). Species the printer is allowed to print for. If null, implies no restriction.
+	var/allowed_species
+	/// LAZYLIST (Any of `BP_*`). List of body parts this printer is allowed to print. If null, implies no restriction.
+	var/list/allowed_parts
 
 /obj/machinery/organ_printer/flesh/mapped/Initialize()
 	. = ..()
@@ -264,6 +268,9 @@
 			var/weakref/R = loaded_dna["donor"]
 			var/mob/living/carbon/human/H = R.resolve()
 			if(H && istype(H) && H.species && H.dna)
+				if (allowed_species && H.species.name != allowed_species)
+					to_chat(user, SPAN_WARNING("\The [src] displays an error: Invalid sample species. Acceptable species: [allowed_species]."))
+					return TRUE
 				loaded_species = H.species
 				loaded_dna_datum = H.dna && H.dna.Clone()
 				products = get_possible_products()
@@ -278,10 +285,13 @@
 		return
 	var/list/organs = list()
 	for(var/organ in loaded_species.has_organ)
+		if (LAZYLEN(allowed_parts) && !(organ in allowed_parts))
+			continue
 		organs += loaded_species.has_organ[organ]
 	for(var/organ in loaded_species.has_limbs)
-		if ((loaded_species.name == SPECIES_NABBER) || (organ == BP_GROIN))
-			organs += loaded_species.has_limbs[organ]["path"]
+		if (LAZYLEN(allowed_parts) && !(organ in allowed_parts))
+			continue
+		organs += loaded_species.has_limbs[organ]["path"]
 	for(var/organ in organs)
 		var/obj/item/organ/O = organ
 		if(check_printable(organ))
@@ -305,5 +315,23 @@
 		if(initial(E.limb_flags) & ORGAN_FLAG_HEALS_OVERKILL)
 			return FALSE
 	return TRUE
+
+/obj/machinery/organ_printer/flesh/gas
+	name = "\improper Xynergy serpentid bioprinter"
+	desc = "It's a machine that prints replacement organs for giant armored serpentids, emblazoned with the Xynergy logo and a silhouette of a GAS."
+	base_type = /obj/machinery/organ_printer/flesh/gas
+	machine_name = "serpentid organ bioprinter"
+	machine_desc = "Bioprinters can create surrogate organs for many species by using a blood sample from the intended recipient. Uses meat for biological matter. This one can print organs for giant armored serpentids."
+	allowed_species = SPECIES_NABBER
+	allowed_parts = list(
+		BP_EYES,
+		BP_LIVER,
+		BP_STOMACH,
+		BP_TRACH
+	)
+
+/obj/machinery/organ_printer/flesh/gas/mapped/Initialize()
+	. = ..()
+	stored_matter = max_stored_matter
 
 // END FLESH ORGAN PRINTER

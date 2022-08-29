@@ -109,6 +109,13 @@
 	build_path = /obj/item/stock_parts/circuitboard/roboprinter
 	sort_string = "FAGAM"
 
+/datum/design/circuit/gasbioprinter
+	name = "serpentid bioprinter"
+	id = "gasbioprinter"
+	req_tech = list(TECH_ENGINEERING = 1, TECH_BIO = 3, TECH_DATA = 3)
+	build_path = /obj/item/stock_parts/circuitboard/gasbioprinter
+	sort_string = "FAGAN"
+
 /datum/design/circuit/teleconsole
 	name = "teleporter control console"
 	id = "teleconsole"
