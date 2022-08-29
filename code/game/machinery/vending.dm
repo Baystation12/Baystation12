@@ -797,6 +797,7 @@
 					/obj/item/reagent_containers/food/drinks/glass2/fitnessflask/proteinshake = 8,
 					/obj/item/reagent_containers/food/drinks/glass2/fitnessflask = 8,
 					/obj/item/reagent_containers/food/snacks/proteinbar = 8,
+					/obj/item/reagent_containers/food/snacks/meatcube = 8,
 					/obj/item/reagent_containers/pill/diet = 8,
 					/obj/item/towel/random = 8)
 
@@ -806,6 +807,7 @@
 					/obj/item/reagent_containers/food/drinks/glass2/fitnessflask/proteinshake = 20,
 					/obj/item/reagent_containers/food/drinks/glass2/fitnessflask = 5,
 					/obj/item/reagent_containers/food/snacks/proteinbar = 5,
+					/obj/item/reagent_containers/food/snacks/meatcube = 10,
 					/obj/item/reagent_containers/pill/diet = 25,
 					/obj/item/towel/random = 40)
 
