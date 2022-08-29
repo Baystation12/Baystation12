@@ -15,8 +15,10 @@
 	var/color = "#000000"
 	var/color_weight = 1
 	var/color_foods = FALSE // If TRUE, this reagent affects the color of food items it's added to
-	var/protein_amount = 0 //What *percentage* of this is made of *animal* protein (1 is 100%). Used to calculate how it affects skrell
-	var/sugar_amount //What *percentage* of this is made of sugar
+	/// What *percentage* of this is made of *animal* protein (1 is 100%). Used to calculate how it affects skrell
+	var/protein_amount = 0
+	/// What *percentage* of this is made of sugar
+	var/sugar_amount
 
 	// If TRUE, this reagent transfers changes to its 'color' var when moving to other containers
 	// Of note: Mixing two reagents of the same type with this var that have different colors

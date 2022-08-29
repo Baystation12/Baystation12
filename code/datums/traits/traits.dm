@@ -1,5 +1,4 @@
-/mob/living
-	var/list/traits
+/mob/living/var/list/traits
 
 /mob/living/proc/HasTrait(trait_type)
 	SHOULD_NOT_OVERRIDE(TRUE)
@@ -60,7 +59,8 @@
 /decl/trait
 	var/name
 	var/description
-	var/list/levels = list(TRAIT_LEVEL_EXISTS) // Should either only contain TRAIT_LEVEL_EXISTS or a set of the other TRAIT_LEVEL_* levels
+	/// Should either only contain TRAIT_LEVEL_EXISTS or a set of the other TRAIT_LEVEL_* levels
+	var/list/levels = list(TRAIT_LEVEL_EXISTS)
 	abstract_type = /decl/trait
 
 /decl/trait/New()
