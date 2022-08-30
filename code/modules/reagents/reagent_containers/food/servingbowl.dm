@@ -8,14 +8,25 @@
 	matter = list(MATERIAL_PLASTIC = 300)
 
 
-/obj/item/serving_bowl/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/reagent_containers/food/snacks))
-		var/obj/item/reagent_containers/food/snacks/custombowl/S = new(get_turf(src))
-		user.put_in_hands(S)
-		S.attackby(W,user)
-		qdel(src)
+/obj/item/serving_bowl/attackby(obj/item/item, mob/living/user)
+	if (!istype(item, /obj/item/reagent_containers/food/snacks))
+		return ..()
+	if (is_path_in_list(item.type, list(/obj/item/reagent_containers/food/snacks/custombowl, /obj/item/reagent_containers/food/snacks/csandwich)))
+		return ..()
+	var/allowed = isturf(loc) | SHIFTL(src == user.l_hand, 1) | SHIFTL(src == user.r_hand, 2)
+	if (!allowed)
+		to_chat(user, SPAN_WARNING("Put down or hold the bowl first."))
 		return
-	. = ..()
+	var/obj/item/reagent_containers/food/snacks/custombowl/bowl = new (get_turf(src), item)
+	bowl.pixel_x = pixel_x
+	bowl.pixel_y = pixel_y
+	qdel(src)
+	switch (allowed)
+		if (2)
+			user.put_in_l_hand(bowl)
+		if (4)
+			user.put_in_r_hand(bowl)
+
 
 /obj/item/reagent_containers/food/snacks/custombowl
 	name = "serving bowl"
@@ -23,68 +34,78 @@
 	icon = 'icons/obj/food_custom.dmi'
 	icon_state = "serving_bowl"
 	filling_color = null
-	trash = /obj/item/serving_bowl //reusable
+	trash = /obj/item/serving_bowl
 	bitesize = 2
 	var/list/ingredients = list()
-	var/fullname = ""
-	var/renamed = 0
+	var/ingredients_left = 4
+	var/fullname
+	var/renamed
+
+
+/obj/item/reagent_containers/food/snacks/custombowl/Destroy()
+	ingredients.Cut()
+	return ..()
+
+
+/obj/item/reagent_containers/food/snacks/custombowl/Initialize(mapload, ingredients)
+	. = ..()
+	if (islist(ingredients))
+		for (var/ingredient in ingredients)
+			UpdateIngredients(ingredient)
+	else if (isobj(ingredients))
+		UpdateIngredients(ingredients)
+
 
 /obj/item/reagent_containers/food/snacks/custombowl/verb/rename_bowl()
 	set name = "Rename Bowl"
 	set category = "Object"
-	var/mob/user = usr
-	var/bowl_label = ""
+	if (renamed)
+		return
+	var/response = sanitizeSafe(input(usr, "Enter a new name for \the [src]."), 32)
+	if (!response)
+		return
+	to_chat(usr, SPAN_ITALIC("You rename \the [src] to \"[response]\"."))
+	SetName("\improper [response]")
+	verbs -= /obj/item/reagent_containers/food/snacks/custombowl/verb/rename_bowl
+	renamed = TRUE
 
-	if(!renamed)
-		bowl_label = sanitizeSafe(input(user, "Enter a new name for \the [src].", "Name", label_text), MAX_NAME_LEN)
-		if(bowl_label)
-			to_chat(user, SPAN_NOTICE("You rename \the [src] to \"[bowl_label] bowl\"."))
-			SetName("\improper [bowl_label] bowl")
-			renamed = 1
 
-/obj/item/reagent_containers/food/snacks/custombowl/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/reagent_containers/food/snacks))
-		if(contents.len >= 4)
-			to_chat(user, SPAN_WARNING("There's no room for any more ingredients in \the [src]."))
-			return
-		else
-			if(!user.unEquip(W, src))
-				return
-			user.visible_message(
-				SPAN_NOTICE("\The [user] adds \the [W] to \the [src]."),
-				SPAN_NOTICE("You add \the [W] to \the [src].")
-			)
-			var/obj/item/reagent_containers/F = W
-			F.reagents.trans_to_obj(src, F.reagents.total_volume)
-			ingredients += W
-			update()
-			return
-	. = ..()
+/obj/item/reagent_containers/food/snacks/custombowl/attackby(obj/item/item, mob/living/user)
+	if (!istype(item, /obj/item/reagent_containers/food/snacks))
+		return ..()
+	if (is_path_in_list(item.type, list(/obj/item/reagent_containers/food/snacks/custombowl, /obj/item/reagent_containers/food/snacks/csandwich)))
+		return ..()
+	if (ingredients_left < 1)
+		to_chat(user, SPAN_WARNING("There's no room for any more ingredients in \the [src]."))
+		return
+	if (!user.unEquip(item, src))
+		return
+	user.visible_message(
+		SPAN_ITALIC("\The [user] adds \a [item] to \the [src]."),
+		SPAN_NOTICE("You add \the [item] to \the [src]."),
+		range = 3
+	)
+	UpdateIngredients(item, user)
 
-/obj/item/reagent_containers/food/snacks/custombowl/proc/update()
-	var/i = 0
-	overlays.Cut()
 
-	filling_color = null
-	var/list/ingredient_names = list()
-	for (var/obj/item/reagent_containers/food/snacks/O as anything in ingredients)
-		if (isnull(filling_color))
-			filling_color = O.filling_color
-		ingredient_names |= O.name // Use |= instead of += in case of duplicates, to avoid i.e. 'Chocolate, chocolate, and vanilla'
+/obj/item/reagent_containers/food/snacks/custombowl/proc/UpdateIngredients(obj/item/reagent_containers/food/snacks/snack)
+	snack.reagents.trans_to_obj(src, snack.reagents.total_volume)
+	if (isnull(filling_color))
+		filling_color = snack.filling_color
+	ingredients |= snack.name
+	var/image/image = new (icon, "serving_bowl_[ingredients_left]")
+	image.color = snack.filling_color
+	overlays += image
+	fullname = english_list(ingredients)
+	SetName(lowertext("[fullname] bowl"))
+	--ingredients_left
+	if (renamed)
+		verbs += /obj/item/reagent_containers/food/snacks/custombowl/verb/rename_bowl
+		renamed = FALSE
+	qdel(snack)
 
-		i++
-		var/image/I = new(icon, "serving_bowl_[i]")
-		I.color = O.filling_color
-		overlays += I
 
-	fullname = english_list(ingredient_names)
-	SetName(lowertext("[english_list(ingredient_names)] bowl"))
-	renamed = 0 //updating removes custom name
-
-/obj/item/reagent_containers/food/snacks/custombowl/Destroy()
-	QDEL_NULL_LIST(ingredients)
-	. = ..()
-
-/obj/item/reagent_containers/food/snacks/custombowl/examine(mob/user)
+/obj/item/reagent_containers/food/snacks/custombowl/examine(mob/user, distance)
 	. = ..(user)
-	to_chat(user, SPAN_ITALIC("This one contains [fullname]."))
+	if (distance < 2)
+		to_chat(user, SPAN_ITALIC("This one contains [fullname]."))

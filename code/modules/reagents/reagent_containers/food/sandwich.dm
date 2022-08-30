@@ -1,6 +1,7 @@
 /obj/item/reagent_containers/food/snacks/slice/bread/attackby(obj/item/W as obj, mob/user as mob)
-
 	if(istype(W,/obj/item/material/shard) || istype(W,/obj/item/reagent_containers/food/snacks))
+		if (is_path_in_list(W.type, list(/obj/item/reagent_containers/food/snacks/custombowl, /obj/item/reagent_containers/food/snacks/csandwich)))
+			return
 		var/obj/item/reagent_containers/food/snacks/csandwich/S = new(get_turf(src))
 		S.attackby(W,user)
 		qdel(src)
@@ -47,6 +48,8 @@
 		update()
 		return
 	else if(istype(W,/obj/item/reagent_containers/food/snacks))
+		if (is_path_in_list(W.type, list(/obj/item/reagent_containers/food/snacks/custombowl, /obj/item/reagent_containers/food/snacks/csandwich)))
+			return
 		if(!user.unEquip(W, src))
 			return
 		user.visible_message(
