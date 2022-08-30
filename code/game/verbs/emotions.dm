@@ -76,7 +76,7 @@
 	emote("clap")
 
 /mob/living/verb/drool()
-	set name = "Нести чепуху"
+	set name = "Пускать слюни"
 	set category = "Emote"
 	emote("drool")
 

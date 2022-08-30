@@ -10,7 +10,7 @@
 
 /decl/emote/visible/drool
 	key ="drool"
-	emote_message_3p = "USER неразборчиво бурчит."
+	emote_message_3p = "USER пускает слюни."
 	conscious = 0
 
 /decl/emote/visible/nod
