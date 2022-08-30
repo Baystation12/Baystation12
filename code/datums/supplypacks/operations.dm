@@ -92,3 +92,23 @@
 	cost = 15
 	containertype = /obj/structure/closet/crate/large
 	containername = "office supplies crate"
+
+//START-PRX@CODE
+/decl/hierarchy/supply_pack/operations/armengi
+	contains = list(/obj/item/storage/box/armband/engine)
+	name = "Emergency - Engineer armband"
+	cost = 10
+	containername = "engineer armband crate"
+
+/decl/hierarchy/supply_pack/operations/armsec
+	contains = list(/obj/item/storage/box/armband/peace)
+	name = "Emergency - Peacekeeper armband"
+	cost = 10
+	containername = "peacekeeper armband crate"
+
+/decl/hierarchy/supply_pack/operations/armmed
+	contains = list(/obj/item/storage/box/armband/med)
+	name = "Emergency - Medical armband"
+	cost = 10
+	containername = "medical armband crate"
+//FIN-PRX@CODE

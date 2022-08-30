@@ -6,7 +6,7 @@
 	contains = list(/obj/item/storage/box/emps,
 					/obj/item/grenade/smokebomb = 3,
 					/obj/item/grenade/chem_grenade/incendiary)
-	cost = 20
+	cost = 25
 	containername = "special ops crate"
 	hidden = 1
 
@@ -21,11 +21,11 @@
 
 /decl/hierarchy/supply_pack/security/armor
 	name = "Armor - Unmarked"
-	contains = list(/obj/item/clothing/suit/armor/pcarrier/medium = 2,
-					/obj/item/clothing/head/helmet =2)
-	cost = 20
+	contains = list(/obj/item/clothing/suit/armor/pcarrier/medium = 3,
+					/obj/item/clothing/head/helmet =3)
+	cost = 25
 	containertype = /obj/structure/closet/crate/secure
-	containername = "armor crate"
+	containername = "unmarked armor crate"
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/tacticalarmor
@@ -38,52 +38,52 @@
 					/obj/item/storage/belt/holster/security/tactical,
 					/obj/item/clothing/shoes/tactical,
 					/obj/item/clothing/gloves/tactical)
-	cost = 45
+	cost = 40
 	containertype = /obj/structure/closet/crate/secure
 	containername = "tactical armor crate"
 	access = access_armory
 
 /decl/hierarchy/supply_pack/security/blackguards
 	name = "Armor - Arm and leg guards, black"
-	contains = list(/obj/item/clothing/accessory/arm_guards = 2,
-					/obj/item/clothing/accessory/leg_guards = 2)
-	cost = 20
+	contains = list(/obj/item/clothing/accessory/arm_guards = 3,
+					/obj/item/clothing/accessory/leg_guards = 3)
+	cost = 15
 	containertype = /obj/structure/closet/crate/secure
 	containername = "arm and leg guards crate"
 	access = access_armory
 
 /decl/hierarchy/supply_pack/security/blueguards
 	name = "Armor - Arm and leg guards, blue"
-	contains = list(/obj/item/clothing/accessory/arm_guards/blue = 2,
-					/obj/item/clothing/accessory/leg_guards/blue = 2)
-	cost = 20
+	contains = list(/obj/item/clothing/accessory/arm_guards/blue = 3,
+					/obj/item/clothing/accessory/leg_guards/blue = 3)
+	cost = 15
 	containertype = /obj/structure/closet/crate/secure
 	containername = "arm and leg guards crate"
 	access = access_armory
 
 /decl/hierarchy/supply_pack/security/greenguards
 	name = "Armor - Arm and leg guards, green"
-	contains = list(/obj/item/clothing/accessory/arm_guards/green = 2,
-					/obj/item/clothing/accessory/leg_guards/green = 2)
-	cost = 20
+	contains = list(/obj/item/clothing/accessory/arm_guards/green = 3,
+					/obj/item/clothing/accessory/leg_guards/green = 3)
+	cost = 15
 	containertype = /obj/structure/closet/crate/secure
 	containername = "arm and leg guards crate"
 	access = access_armory
 
 /decl/hierarchy/supply_pack/security/navyguards
 	name = "Armor - Arm and leg guards, navy blue"
-	contains = list(/obj/item/clothing/accessory/arm_guards/navy = 2,
-					/obj/item/clothing/accessory/leg_guards/navy = 2)
-	cost = 20
+	contains = list(/obj/item/clothing/accessory/arm_guards/navy = 3,
+					/obj/item/clothing/accessory/leg_guards/navy = 3)
+	cost = 15
 	containertype = /obj/structure/closet/crate/secure
 	containername = "arm and leg guards crate"
 	access = access_armory
 
 /decl/hierarchy/supply_pack/security/tanguards
 	name = "Armor - Arm and leg guards, tan"
-	contains = list(/obj/item/clothing/accessory/arm_guards/tan = 2,
-					/obj/item/clothing/accessory/leg_guards/tan = 2)
-	cost = 20
+	contains = list(/obj/item/clothing/accessory/arm_guards/tan = 3,
+					/obj/item/clothing/accessory/leg_guards/tan = 3)
+	cost = 15
 	containertype = /obj/structure/closet/crate/secure
 	containername = "arm and leg guards crate"
 	access = access_armory
@@ -95,9 +95,9 @@
 					/obj/item/clothing/suit/armor/riot = 4,
 					/obj/item/storage/box/flashbangs,
 					/obj/item/storage/box/teargas)
-	cost = 80
+	cost = 65
 	containertype = /obj/structure/closet/crate/secure
-	containername = "riot armor crate"
+	containername = "riot gear crate"
 	access = access_armory
 
 /decl/hierarchy/supply_pack/security/ballisticarmor
@@ -126,13 +126,13 @@
 					/obj/item/gun/energy/taser = 4)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure/weapon
-	containername = "weapons crate"
+	containername = "security weapons crate"
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/egun
 	name = "Weapons - Energy sidearms"
-	contains = list(/obj/item/gun/energy/gun/secure = 4)
-	cost = 40
+	contains = list(/obj/item/gun/energy/gun/secure = 3)
+	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "energy sidearms crate"
 	access = access_armory
@@ -149,7 +149,7 @@
 	name = "Weapons - Plasma assault rifles"
 	contains = list(/obj/item/gun/energy/k342 = 2,
 					/obj/item/cell/guncell/medium = 6)
-	cost = 110
+	cost = 100
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "plasma longarms crate"
 	access = access_armory
@@ -159,8 +159,7 @@
 	name = "Weapons - Plasma assault rifles (Expeditionary Corps)"
 	contains = list(/obj/item/gun/energy/k342/explo = 2,
 					/obj/item/cell/guncell/medium = 6)
-	cost = 130
-	security_level = SUPPLY_SECURITY_ELEVATED
+	cost = 120
 
 /decl/hierarchy/supply_pack/security/plasma/stingray
 	name = "Weapons - Plasma sniper rifles"
@@ -172,8 +171,9 @@
 /decl/hierarchy/supply_pack/security/ion
 	name = "Weapons - Electromagnetic"
 	contains = list(/obj/item/gun/energy/ionrifle = 2,
+					/obj/item/gun/energy/ionrifle/small,
 					/obj/item/storage/box/emps)
-	cost = 50
+	cost = 60
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "electromagnetic weapons crate"
 	access = access_armory
@@ -182,12 +182,23 @@
 /decl/hierarchy/supply_pack/security/shotgun
 	name = "Weapons - Shotgun"
 	contains = list(/obj/item/gun/projectile/shotgun/pump/combat = 2)
-	cost = 60
+	cost = 50
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "shotgun crate"
 	access = access_armory
 	security_level = SUPPLY_SECURITY_ELEVATED
 
+//START-PRX@CODE
+/decl/hierarchy/supply_pack/security/frags
+	name = "Weapons - Fragmentation grenades"
+	contains = list(/obj/item/storage/box/frags = 2)
+	cost = 80
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "frag grenade crate"
+	access = access_emergency_armory
+	security_level = SUPPLY_SECURITY_HIGH
+
+//FIN-PRX@CODE
 /decl/hierarchy/supply_pack/security/flashbang
 	name = "Weapons - Flashbangs"
 	contains = list(/obj/item/storage/box/flashbangs = 2)

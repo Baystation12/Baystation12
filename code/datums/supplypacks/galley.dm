@@ -94,7 +94,7 @@
 		/obj/item/pizzabox/vegetable,
 		/obj/item/pizzabox/fruit
 	)
-	cost = 15
+	cost = 20
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "pizza crate"
 	supply_method = /decl/supply_method/randomized
@@ -112,7 +112,7 @@
 					/obj/item/storage/mre/menu8,
 					/obj/item/storage/mre/menu9,
 					/obj/item/storage/mre/menu10)
-	cost = 30
+	cost = 35
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "emergency rations"
 	supply_method = /decl/supply_method/randomized
@@ -142,7 +142,7 @@
 	name = "Bar - Premium drinks"
 	contains = list(/obj/item/reagent_containers/food/drinks/bottle/premiumwine = 1,
 					/obj/item/reagent_containers/food/drinks/bottle/premiumvodka = 1)
-	cost = 60
+	cost = 55
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "premium drinks crate"
 

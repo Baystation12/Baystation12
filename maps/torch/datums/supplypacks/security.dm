@@ -104,7 +104,7 @@
 
 /decl/hierarchy/supply_pack/security/sniperlaser
 	name = "Weapons - Energy marksman"
-	contains = list(/obj/item/gun/energy/sniperrifle = 2)
+	contains = list(/obj/item/gun/energy/sniperrifle = 1)
 	cost = 70
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "energy marksman crate"
@@ -131,11 +131,11 @@
 
 //rubay code
 /decl/hierarchy/supply_pack/security/gren_launch
-	name = "Weapons - Grenade Launcher Ammunition"
+	name = "Weapons - Fragmentation shell"
 	contains = list(/obj/item/grenade/frag/shell = 6)
 	cost = 65
 	containertype = /obj/structure/closet/crate/secure/weapon
-	containername = "grenade launcher ammunition crate"
+	containername = "fragmentation shell crate"
 	access = access_emergency_armory
 	security_level = SUPPLY_SECURITY_HIGH
 //rubay code end
