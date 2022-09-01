@@ -28,11 +28,11 @@
 		return waypoint_station
 	return waypoint_offsite
 
-/datum/shuttle/autodock/ferry/short_jump(var/destination)
+/datum/shuttle/autodock/ferry/short_jump(destination)
 	direction = !location
 	..()
 
-/datum/shuttle/autodock/ferry/long_jump(var/destination, var/obj/effect/shuttle_landmark/interim, var/travel_time)
+/datum/shuttle/autodock/ferry/long_jump(destination, obj/effect/shuttle_landmark/interim, travel_time)
 	direction = !location
 	..()
 

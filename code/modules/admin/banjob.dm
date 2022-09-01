@@ -28,7 +28,7 @@ var/global/jobban_keylist[0]		//to store the keys & ranks
 		return ckey_is_jobbanned(M.ckey, rank)
 	return 0
 
-/proc/ckey_is_jobbanned(var/check_key, var/rank)
+/proc/ckey_is_jobbanned(check_key, rank)
 	for(var/s in jobban_keylist)
 		if(findtext(s,"[check_key] - [rank]") == 1 )
 			var/startpos = findtext(s, "## ")+3
@@ -90,7 +90,7 @@ var/global/jobban_keylist[0]		//to store the keys & ranks
 	jobban_savebanfile()
 
 
-/proc/ban_unban_log_save(var/formatted_log)
+/proc/ban_unban_log_save(formatted_log)
 	text2file(formatted_log,"data/ban_unban_log.txt")
 
 

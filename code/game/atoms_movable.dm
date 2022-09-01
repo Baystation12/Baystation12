@@ -46,7 +46,7 @@
 		virtual_mob = null
 	return ..()
 
-/atom/movable/Bump(var/atom/A, yes)
+/atom/movable/Bump(atom/A, yes)
 	if(!QDELETED(throwing))
 		throwing.hit_atom(A)
 
@@ -122,7 +122,7 @@
 				L.source_atom.update_light()
 
 //called when src is thrown into hit_atom
-/atom/movable/proc/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
+/atom/movable/proc/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	if(istype(hit_atom,/mob/living))
 		var/mob/living/M = hit_atom
 		M.hitby(src,TT)

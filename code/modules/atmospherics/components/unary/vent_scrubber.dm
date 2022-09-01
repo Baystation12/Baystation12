@@ -62,7 +62,7 @@
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_FILTER
 	icon = null
 
-/obj/machinery/atmospherics/unary/vent_scrubber/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/unary/vent_scrubber/on_update_icon(safety = 0)
 	if(!check_icon_cache())
 		return
 
@@ -177,7 +177,7 @@
 
 	return 1
 
-/obj/machinery/atmospherics/unary/vent_scrubber/hide(var/i) //to make the little pipe section invisible, the icon changes.
+/obj/machinery/atmospherics/unary/vent_scrubber/hide(i) //to make the little pipe section invisible, the icon changes.
 	update_icon()
 	update_underlays()
 
@@ -185,7 +185,7 @@
 	var/decl/public_access/public_variable/panic/panic = decls_repository.get_decl(/decl/public_access/public_variable/panic)
 	panic.write_var(src, !panic)
 
-/obj/machinery/atmospherics/unary/vent_scrubber/proc/set_scrub_gas(var/list/gases)
+/obj/machinery/atmospherics/unary/vent_scrubber/proc/set_scrub_gas(list/gases)
 	for(var/gas_id in gases)
 		if((gas_id in scrubbing_gas) ^ gases[gas_id])
 			scrubbing_gas ^= gas_id
@@ -203,7 +203,7 @@
 			return SPAN_WARNING("You cannot take this [src] apart, it too exerted due to internal pressure.")
 	return ..()
 
-/obj/machinery/atmospherics/unary/vent_scrubber/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/unary/vent_scrubber/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weldingtool))
 
 		var/obj/item/weldingtool/WT = W

@@ -14,7 +14,7 @@
 	vermin_probability = 0
 	web_probability = 0
 
-/decl/turf_initializer/maintenance/InitializeTurf(var/turf/simulated/T)
+/decl/turf_initializer/maintenance/InitializeTurf(turf/simulated/T)
 	if(T.density)
 		return
 	// Quick and dirty check to avoid placing things inside windows
@@ -46,7 +46,7 @@
 	if(prob(web_probability))	// Keep in mind that only "corners" get any sort of web
 		attempt_web(T, cardinal_turfs)
 
-/decl/turf_initializer/maintenance/proc/dirty_neighbors(var/list/cardinal_turfs)
+/decl/turf_initializer/maintenance/proc/dirty_neighbors(list/cardinal_turfs)
 	var/how_dirty = 0
 	for(var/turf/simulated/T in cardinal_turfs)
 		// Considered dirty if more than halfway to visible dirt
@@ -54,7 +54,7 @@
 			how_dirty++
 	return how_dirty
 
-/decl/turf_initializer/maintenance/proc/attempt_web(var/turf/simulated/T)
+/decl/turf_initializer/maintenance/proc/attempt_web(turf/simulated/T)
 	var/turf/north_turf = get_step(T, NORTH)
 	if(!north_turf || !north_turf.density)
 		return

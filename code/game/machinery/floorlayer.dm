@@ -34,7 +34,7 @@
 	user.visible_message("<span class='notice'>[user] has [!on?"de":""]activated \the [src].</span>", "<span class='notice'>You [!on?"de":""]activate \the [src].</span>")
 	return TRUE
 
-/obj/machinery/floorlayer/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/floorlayer/attackby(obj/item/W as obj, mob/user as mob)
 
 	if(isWrench(W))
 		var/m = input("Choose work mode", "Mode") as null|anything in mode
@@ -77,7 +77,7 @@
 /obj/machinery/floorlayer/proc/reset()
 	on = 0
 
-/obj/machinery/floorlayer/proc/dismantleFloor(var/turf/new_turf)
+/obj/machinery/floorlayer/proc/dismantleFloor(turf/new_turf)
 	if(istype(new_turf, /turf/simulated/floor))
 		var/turf/simulated/floor/T = new_turf
 		if(!T.is_plating())
@@ -95,19 +95,19 @@
 		for(var/obj/item/stack/tile/tile2 in contents)
 			tile2.transfer_to(tile1)
 
-/obj/machinery/floorlayer/proc/layFloor(var/turf/w_turf)
+/obj/machinery/floorlayer/proc/layFloor(turf/w_turf)
 	if(!T)
 		if(!TakeNewStack())
 			return 0
 	w_turf.attackby(T , src)
 	return 1
 
-/obj/machinery/floorlayer/proc/TakeTile(var/obj/item/stack/tile/tile)
+/obj/machinery/floorlayer/proc/TakeTile(obj/item/stack/tile/tile)
 	if(!T)	T = tile
 	tile.forceMove(src)
 
 	SortStacks()
 
-/obj/machinery/floorlayer/proc/CollectTiles(var/turf/w_turf)
+/obj/machinery/floorlayer/proc/CollectTiles(turf/w_turf)
 	for(var/obj/item/stack/tile/tile in w_turf)
 		TakeTile(tile)

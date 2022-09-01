@@ -22,7 +22,7 @@ var/global/repository/follow/follow_repository = new()
 		var/datum/follow_holder/fh = fht
 		followed_subtypes[initial(fh.followed_type)] = fht
 
-/repository/follow/proc/add_subject(var/atom/movable/AM)
+/repository/follow/proc/add_subject(atom/movable/AM)
 	cache = null
 
 	var/follow_holder_type = get_follow_type(AM)
@@ -33,7 +33,7 @@ var/global/repository/follow/follow_repository = new()
 
 	GLOB.destroyed_event.register(AM, src, /repository/follow/proc/remove_subject)
 
-/repository/follow/proc/remove_subject(var/atom/movable/AM)
+/repository/follow/proc/remove_subject(atom/movable/AM)
 	cache = null
 
 	var/follow_holder = followed_objects_assoc[AM]
@@ -45,7 +45,7 @@ var/global/repository/follow/follow_repository = new()
 
 	qdel(follow_holder)
 
-/repository/follow/proc/get_follow_type(var/atom/movable/AM)
+/repository/follow/proc/get_follow_type(atom/movable/AM)
 	for(var/follow_type in followed_subtypes)
 		if(istype(AM, follow_type))
 			return followed_subtypes[follow_type]
@@ -96,7 +96,7 @@ var/global/repository/follow/follow_repository = new()
 	var/sort_order
 	var/atom/movable/followed_instance
 
-/datum/follow_holder/New(var/atom/movable/followed_instance)
+/datum/follow_holder/New(atom/movable/followed_instance)
 	..()
 	src.followed_instance = followed_instance
 	suffix = suffix ? "\[[suffix]\]" : suffix
@@ -105,7 +105,7 @@ var/global/repository/follow/follow_repository = new()
 	followed_instance = null
 	. = ..()
 
-/datum/follow_holder/proc/get_name(var/recalc = FALSE)
+/datum/follow_holder/proc/get_name(recalc = FALSE)
 	if(!name || recalc)
 		var/suffix = get_suffix(followed_instance)
 		name = "[followed_instance.follow_name()][instance ? " ([instance])" : ""][suffix ? " [suffix]" : ""]"
@@ -161,7 +161,7 @@ var/global/repository/follow/follow_repository = new()
 	var/mob/living/silicon/robot/R = followed_instance
 	return ..() && R.braintype
 
-/datum/follow_holder/robot/get_suffix(var/mob/living/silicon/robot/R)
+/datum/follow_holder/robot/get_suffix(mob/living/silicon/robot/R)
 	suffix = "\[[R.braintype]\][R.module ? " \[[R.module.name]\]" : ""]"
 	return ..()
 
@@ -169,7 +169,7 @@ var/global/repository/follow/follow_repository = new()
 	sort_order = 2
 	followed_type = /mob/living/carbon/human
 
-/datum/follow_holder/human/get_suffix(var/mob/living/carbon/human/H)
+/datum/follow_holder/human/get_suffix(mob/living/carbon/human/H)
 	suffix = "\[[H.species.name]\]"
 	return ..()
 

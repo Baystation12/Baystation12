@@ -9,7 +9,7 @@
 	effect = pick(EFFECT_TOUCH, EFFECT_AURA)
 	effect_type = pick(EFFECT_ORGANIC, EFFECT_BLUESPACE, EFFECT_SYNTH)
 
-/datum/artifact_effect/cold/DoEffectTouch(var/mob/user)
+/datum/artifact_effect/cold/DoEffectTouch(mob/user)
 	if(holder)
 		if (istype(user))
 			to_chat(user, "<span class='notice'>A chill passes up your spine!</span>")

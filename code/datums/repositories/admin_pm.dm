@@ -9,7 +9,7 @@ var/global/repository/admin_pm/admin_pm_repository = new()
 	admin_pms_ = list()
 	irc_clients_by_name = list()
 
-/repository/admin_pm/proc/store_pm(var/client/sender, var/client/receiver, var/message)
+/repository/admin_pm/proc/store_pm(client/sender, client/receiver, message)
 	if(receiver)
 		if(istype(receiver))
 			receiver = client_repository.get_lite_client(receiver)
@@ -36,7 +36,7 @@ var/global/repository/admin_pm/admin_pm_repository = new()
 	var/datum/client_lite/receiver
 	var/message
 
-/datum/admin_privat_message/New(var/sender, var/receiver, var/message)
+/datum/admin_privat_message/New(sender, receiver, message)
 	station_time = time_stamp()
 	src.message = message
 	src.sender = sender

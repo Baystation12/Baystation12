@@ -45,13 +45,13 @@ Small, little HP, poisonous.
 		if(prob(H.getBruteLoss()/2))
 			V.attach(H)
 
-/mob/living/simple_animal/hostile/voxslug/get_scooped(var/mob/living/carbon/grabber)
+/mob/living/simple_animal/hostile/voxslug/get_scooped(mob/living/carbon/grabber)
 	if(grabber.species.get_bodytype() != SPECIES_VOX)
 		to_chat(grabber, "<span class='warning'>\The [src] wriggles out of your hands before you can pick it up!</span>")
 		return
 	else return ..()
 
-/mob/living/simple_animal/hostile/voxslug/proc/attach(var/mob/living/carbon/human/H)
+/mob/living/simple_animal/hostile/voxslug/proc/attach(mob/living/carbon/human/H)
 	var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
 	if(istype(S) && !length(S.breaches))
 		S.create_breaches(DAMAGE_BRUTE, 20)
@@ -74,7 +74,7 @@ Small, little HP, poisonous.
 			var/datum/reagents/R = L.reagents
 			R.add_reagent(/datum/reagent/drugs/cryptobiolin, 0.5)
 
-/obj/item/holder/voxslug/attack(var/mob/target, var/mob/user)
+/obj/item/holder/voxslug/attack(mob/target, mob/user)
 	var/mob/living/simple_animal/hostile/voxslug/V = contents[1]
 	if(!V.stat && istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = target

@@ -1,7 +1,7 @@
 /obj/item/frame_holder
 	matter = list(MATERIAL_STEEL = 175000, MATERIAL_PLASTIC = 50000, MATERIAL_OSMIUM = 30000)
 
-/obj/item/frame_holder/Initialize(mapload, var/newloc)
+/obj/item/frame_holder/Initialize(mapload, newloc)
 	..()
 	new /obj/structure/heavy_vehicle_frame(newloc)
 	return  INITIALIZE_HINT_QDEL
@@ -25,7 +25,7 @@
 	var/set_name
 	dir = SOUTH
 
-/obj/structure/heavy_vehicle_frame/set_color(var/new_colour)
+/obj/structure/heavy_vehicle_frame/set_color(new_colour)
 	var/painted_component = FALSE
 	for(var/obj/item/mech_component/comp in list(body, arms, legs, head))
 		if(comp.set_color(new_colour))
@@ -77,7 +77,7 @@
 /obj/structure/heavy_vehicle_frame/set_dir()
 	..(SOUTH)
 
-/obj/structure/heavy_vehicle_frame/attackby(var/obj/item/thing, var/mob/user)
+/obj/structure/heavy_vehicle_frame/attackby(obj/item/thing, mob/user)
 
 	// Removing components.
 	if(isCrowbar(thing))
@@ -300,7 +300,7 @@
 		return ..()
 	update_icon()
 
-/obj/structure/heavy_vehicle_frame/proc/install_component(var/obj/item/thing, var/mob/user)
+/obj/structure/heavy_vehicle_frame/proc/install_component(obj/item/thing, mob/user)
 	var/obj/item/mech_component/MC = thing
 	if(istype(MC) && !MC.ready_to_install())
 		to_chat(user, SPAN_WARNING("\The [MC] [MC.gender == PLURAL ? "are" : "is"] not ready to install."))
@@ -316,7 +316,7 @@
 	playsound(user.loc, 'sound/machines/click.ogg', 50, 1)
 	return 1
 
-/obj/structure/heavy_vehicle_frame/proc/uninstall_component(var/obj/item/component, var/mob/user)
+/obj/structure/heavy_vehicle_frame/proc/uninstall_component(obj/item/component, mob/user)
 	if(!istype(component) || (component.loc != src) || !istype(user))
 		return FALSE
 	if(!do_after(user, 4 SECONDS * user.skill_delay_mult(SKILL_DEVICES), src, DO_PUBLIC_UNIQUE) || component.loc != src)

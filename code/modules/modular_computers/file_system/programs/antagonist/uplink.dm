@@ -12,13 +12,13 @@
 	var/password
 	var/authenticated = 0
 
-/datum/computer_file/program/uplink/New(var/password)
+/datum/computer_file/program/uplink/New(password)
 	src.password = password
 
 /datum/nano_module/program/uplink
 	name = "TaxQuickly 1.45b"
 
-/datum/nano_module/program/uplink/ui_interact(var/mob/user, var/ui_key = "main", datum/nanoui/ui = null, var/force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/uplink/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, master_ui = null, datum/topic_state/state = GLOB.default_state)
 	var/datum/computer_file/program/uplink/prog = program
 	var/obj/item/holder = program.computer.get_physical_host()
 	if(istype(holder) && holder.hidden_uplink && prog.password)

@@ -12,7 +12,7 @@
 //helper for inverting armor blocked values into a multiplier
 #define blocked_mult(blocked) max(1 - (blocked/100), 0)
 
-/proc/mobs_in_view(var/range, var/source)
+/proc/mobs_in_view(range, source)
 	var/list/mobs = list()
 	for(var/atom/movable/AM in view(range, source))
 		var/M = AM.get_mob()
@@ -31,7 +31,7 @@
 
 	return h_style
 
-/proc/random_facial_hair_style(gender, var/species = SPECIES_HUMAN)
+/proc/random_facial_hair_style(gender, species = SPECIES_HUMAN)
 	var/f_style = "Shaved"
 	var/datum/species/mob_species = all_species[species]
 	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(gender)
@@ -48,7 +48,7 @@
 				return current_culture.get_random_name(gender)
 	return capitalize(pick(gender == FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 
-/proc/random_skin_tone(var/datum/species/current_species)
+/proc/random_skin_tone(datum/species/current_species)
 	var/species_tone = current_species ? 35 - current_species.max_skin_tone() : -185
 	switch(pick(60;"caucasian", 15;"afroamerican", 10;"african", 10;"latino", 5;"albino"))
 		if("caucasian")		. = -10
@@ -93,7 +93,7 @@
 	return icon_states[icon_states.len] // If we had no match, return the last element
 
 //checks whether this item is a module of the robot it is located in.
-/proc/is_robot_module(var/obj/item/thing)
+/proc/is_robot_module(obj/item/thing)
 	if(!thing)
 		return FALSE
 	if(istype(thing.loc, /mob/living/exosuit))
@@ -103,7 +103,7 @@
 	var/mob/living/silicon/robot/R = thing.loc
 	return (thing in R.module.equipment)
 
-/proc/get_exposed_defense_zone(var/atom/movable/target)
+/proc/get_exposed_defense_zone(atom/movable/target)
 	return pick(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT, BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG, BP_CHEST, BP_GROIN)
 
 
@@ -226,7 +226,7 @@
 	if ((do_flags & DO_TARGET_UNIQUE_ACT) && target)
 		target.do_unique_target_user = null
 
-/proc/able_mobs_in_oview(var/origin)
+/proc/able_mobs_in_oview(origin)
 	var/list/mobs = list()
 	for(var/mob/living/M in oview(origin)) // Only living mobs are considered able.
 		if(!M.is_physically_disabled())
@@ -270,7 +270,7 @@
 	return GLOB.dead_mobs.Remove(src)
 
 //Find a dead mob with a brain and client.
-/proc/find_dead_player(var/find_key, var/include_observers = 0)
+/proc/find_dead_player(find_key, include_observers = 0)
 	if(isnull(find_key))
 		return
 

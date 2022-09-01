@@ -7,7 +7,7 @@
 	var/obj/structure/diona_gestalt/owner
 	var/minimum_nymphs = 3
 
-/datum/gestalt_vote/New(var/obj/structure/diona_gestalt/_owner, var/mob/_caller)
+/datum/gestalt_vote/New(obj/structure/diona_gestalt/_owner, mob/_caller)
 	owner = _owner
 	caller =_caller
 	addtimer(CALLBACK(src, .proc/timed_out), vote_time)

@@ -34,16 +34,16 @@
 		remote_state = null
 	return ..()
 
-/obj/machinery/dummy_airlock_controller/interface_interact(var/mob/user)
+/obj/machinery/dummy_airlock_controller/interface_interact(mob/user)
 	open_remote_ui(user)
 	return TRUE
 
-/obj/machinery/dummy_airlock_controller/proc/open_remote_ui(var/mob/user)
+/obj/machinery/dummy_airlock_controller/proc/open_remote_ui(mob/user)
 	if(master_controller)
 		appearance = master_controller
 		return master_controller.ui_interact(user, state = remote_state)
 
-/obj/machinery/dummy_airlock_controller/powered(var/chan = -1, var/area/check_area = null)
+/obj/machinery/dummy_airlock_controller/powered(chan = -1, area/check_area = null)
 	if(master_controller)
 		var/area/A = get_area(master_controller)
 		return master_controller.powered(chan, A)

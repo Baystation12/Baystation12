@@ -65,7 +65,7 @@ SUBSYSTEM_DEF(radiation)
 
 
 // Ray trace from all active radiation sources to T and return the strongest effect.
-/datum/controller/subsystem/radiation/proc/get_rads_at_turf(var/turf/T)
+/datum/controller/subsystem/radiation/proc/get_rads_at_turf(turf/T)
 	. = 0
 	if(!istype(T))
 		return
@@ -104,7 +104,7 @@ SUBSYSTEM_DEF(radiation)
 			. = 0
 
 // Add a radiation source instance to the repository.  It will override any existing source on the same turf.
-/datum/controller/subsystem/radiation/proc/add_source(var/datum/radiation_source/S)
+/datum/controller/subsystem/radiation/proc/add_source(datum/radiation_source/S)
 	if(!isturf(S.source_turf))
 		return
 	var/datum/radiation_source/existing = sources_assoc[S.source_turf]
@@ -123,7 +123,7 @@ SUBSYSTEM_DEF(radiation)
 	add_source(S)
 
 // Sets the radiation in a range to a constant value.
-/datum/controller/subsystem/radiation/proc/flat_radiate(source, power, range, var/respect_maint = FALSE)
+/datum/controller/subsystem/radiation/proc/flat_radiate(source, power, range, respect_maint = FALSE)
 	if(!(source && power && range))
 		return
 	var/datum/radiation_source/S = new()
@@ -135,7 +135,7 @@ SUBSYSTEM_DEF(radiation)
 	add_source(S)
 
 // Irradiates a full Z-level. Hacky way of doing it, but not too expensive.
-/datum/controller/subsystem/radiation/proc/z_radiate(var/atom/source, power, var/respect_maint = FALSE)
+/datum/controller/subsystem/radiation/proc/z_radiate(atom/source, power, respect_maint = FALSE)
 	if(!(power && source))
 		return
 	var/turf/epicentre = locate(round(world.maxx / 2), round(world.maxy / 2), source.z)

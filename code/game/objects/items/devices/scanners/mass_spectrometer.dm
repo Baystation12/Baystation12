@@ -47,7 +47,7 @@
 	else
 		..()
 
-/proc/mass_spectrometer_scan(var/datum/reagents/reagents, mob/user, var/details)
+/proc/mass_spectrometer_scan(datum/reagents/reagents, mob/user, details)
 	if(!reagents || !reagents.total_volume)
 		return "<span class='warning'>No sample to scan.</span>"
 	var/list/blood_traces = list()

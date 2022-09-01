@@ -101,7 +101,7 @@
 		list("EMP grenade", "EMP grenade", /obj/item/grenade/empgrenade, 3),
 		)
 
-/obj/item/rig_module/grenade_launcher/accepts_item(var/obj/item/input_device, var/mob/living/user)
+/obj/item/rig_module/grenade_launcher/accepts_item(obj/item/input_device, mob/living/user)
 
 	if(!istype(input_device) || !istype(user))
 		return 0

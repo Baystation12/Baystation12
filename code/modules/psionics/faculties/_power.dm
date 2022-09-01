@@ -14,7 +14,7 @@
 	// A sound effect to play when the power is used.
 	var/use_sound = 'sound/effects/psi/power_used.ogg'
 
-/decl/psionic_power/proc/invoke(var/mob/living/user, var/atom/target)
+/decl/psionic_power/proc/invoke(mob/living/user, atom/target)
 
 	if(!user.psi)
 		return FALSE
@@ -38,7 +38,7 @@
 
 	return TRUE
 
-/decl/psionic_power/proc/handle_post_power(var/mob/living/user, var/atom/target)
+/decl/psionic_power/proc/handle_post_power(mob/living/user, atom/target)
 	if(cooldown)
 		user.psi.set_cooldown(cooldown)
 	if(admin_log && ismob(user) && ismob(target))

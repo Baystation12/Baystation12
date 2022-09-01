@@ -53,7 +53,7 @@
 	key ="collapse"
 	emote_message_3p = "USER collapses!"
 
-/decl/emote/visible/collapse/do_extra(var/mob/user)
+/decl/emote/visible/collapse/do_extra(mob/user)
 	if(istype(user))
 		user.Paralyse(2)
 
@@ -113,7 +113,7 @@
 	key = "faint"
 	emote_message_3p = "USER faints."
 
-/decl/emote/visible/faint/do_extra(var/mob/user)
+/decl/emote/visible/faint/do_extra(mob/user)
 	if(istype(user) && user.sleeping <= 0)
 		user.sleeping += 10
 
@@ -224,7 +224,7 @@
 	emote_message_3p = "USER shakes hands with USER_SELF."
 	check_range = 1
 
-/decl/emote/visible/handshake/get_emote_message_3p(var/atom/user, var/atom/target, var/extra_params)
+/decl/emote/visible/handshake/get_emote_message_3p(atom/user, atom/target, extra_params)
 	if(target && !user.Adjacent(target))
 		return "USER holds out USER_THEIR hand out to TARGET."
 	return ..()
@@ -238,7 +238,7 @@
 /decl/emote/visible/signal/check_user(atom/user)
 	return ismob(user)
 
-/decl/emote/visible/signal/get_emote_message_3p(var/mob/user, var/atom/target, var/extra_params)
+/decl/emote/visible/signal/get_emote_message_3p(mob/user, atom/target, extra_params)
 	if(istype(user) && !(user.r_hand && user.l_hand))
 		var/t1 = round(text2num(extra_params))
 		if(isnum(t1) && t1 <= 5)

@@ -1,7 +1,7 @@
 /decl/appearance_handler/cardborg
 	var/static/list/appearances
 
-/decl/appearance_handler/cardborg/proc/item_equipped(var/obj/item/item, var/mob/user, var/slot)
+/decl/appearance_handler/cardborg/proc/item_equipped(obj/item/item, mob/user, slot)
 	if(!(slot == slot_head || slot == slot_wear_suit|| slot == slot_back))
 		return
 	if(!ishuman(user))
@@ -19,17 +19,17 @@
 	AddAltAppearance(H, I, GLOB.silicon_mobs+H) //you look like a robot to robots! (including yourself because you're totally a robot)
 	GLOB.logged_in_event.register_global(src, /decl/appearance_handler/cardborg/proc/mob_joined)	// Duplicate registration request are handled for us
 
-/decl/appearance_handler/cardborg/proc/item_removed(var/obj/item/item, var/mob/user)
+/decl/appearance_handler/cardborg/proc/item_removed(obj/item/item, mob/user)
 	if((istype(item, /obj/item/clothing/suit/cardborg) || istype(item, /obj/item/clothing/head/cardborg)) || istype(item, /obj/item/storage/backpack))
 		RemoveAltAppearance(user)
 		if(!appearance_sources.len)
 			GLOB.logged_in_event.unregister_global(src)	// Only listen to the logged in event for as long as it's relevant
 
-/decl/appearance_handler/cardborg/proc/mob_joined(var/mob/user)
+/decl/appearance_handler/cardborg/proc/mob_joined(mob/user)
 	if(issilicon(user))
 		DisplayAllAltAppearancesTo(user)
 
-/decl/appearance_handler/cardborg/proc/get_image_from_backpack(var/mob/living/carbon/human/H)
+/decl/appearance_handler/cardborg/proc/get_image_from_backpack(mob/living/carbon/human/H)
 	init_appearances()
 	var/decl/cardborg_appearance/ca = appearances[H.back.type]
 	if(!ca) ca = appearances[/obj/item/storage/backpack]

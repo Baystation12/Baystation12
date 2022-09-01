@@ -50,7 +50,7 @@
 	return var_value
 
 
-/client/proc/mod_list_add(var/list/L, atom/O, original_name, objectvar)
+/client/proc/mod_list_add(list/L, atom/O, original_name, objectvar)
 
 	var/class = "text"
 	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","color","edit referenced object","restore to default")
@@ -107,7 +107,7 @@
 	log_admin("[key_name(src)] modified [original_name]'s [objectvar]: ADDED=[var_value]")
 	message_admins("[key_name_admin(src)] modified [original_name]'s [objectvar]: ADDED=[var_value]")
 
-/client/proc/mod_list(var/list/L, atom/O, original_name, objectvar)
+/client/proc/mod_list(list/L, atom/O, original_name, objectvar)
 	if(!check_rights(R_VAREDIT))	return
 	if(!istype(L,/list)) to_chat(src, "Not a List.")
 	if(L.len > 1000)
@@ -323,7 +323,7 @@
 	log_admin("[key_name(src)] modified [original_name]'s [objectvar]: [original_var]=[new_var]")
 	message_admins("[key_name_admin(src)] modified [original_name]'s varlist [objectvar]: [original_var]=[new_var]")
 
-/client/proc/modify_variables(var/atom/O, var/param_var_name = null, var/autodetect_class = 0)
+/client/proc/modify_variables(atom/O, param_var_name = null, autodetect_class = 0)
 	if(!check_rights(R_VAREDIT))	return
 
 	for(var/p in forbidden_varedit_object_types())
@@ -571,7 +571,7 @@
 /client
 	var/static/vv_set_handlers
 
-/client/proc/special_set_vv_var(var/datum/O, variable, var_value, client)
+/client/proc/special_set_vv_var(datum/O, variable, var_value, client)
 	if(!vv_set_handlers)
 		vv_set_handlers = init_subtypes(/decl/vv_set_handler)
 	for(var/vv_handler in vv_set_handlers)

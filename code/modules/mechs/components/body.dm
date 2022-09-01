@@ -5,13 +5,13 @@
 	use_sound = 'sound/effects/storage/toolbox.ogg'
 	anchored = TRUE
 
-/obj/item/mech_component/chassis/Adjacent(var/atom/neighbor, var/recurse = 1) //For interaction purposes we consider body to be adjacent to whatever holder mob is adjacent
+/obj/item/mech_component/chassis/Adjacent(atom/neighbor, recurse = 1) //For interaction purposes we consider body to be adjacent to whatever holder mob is adjacent
 	var/mob/living/exosuit/E = loc
 	if(istype(E))
 		. = E.Adjacent(neighbor, recurse)
 	return . || ..()
 
-/obj/item/storage/mech/Adjacent(var/atom/neighbor, var/recurse = 1) //in order to properly retrieve items
+/obj/item/storage/mech/Adjacent(atom/neighbor, recurse = 1) //in order to properly retrieve items
 	var/obj/item/mech_component/chassis/C = loc
 	if(istype(C))
 		. = C.Adjacent(neighbor, recurse-1)
@@ -66,7 +66,7 @@
 	air_supply =  locate() in src
 	storage_compartment = locate() in src
 
-/obj/item/mech_component/chassis/show_missing_parts(var/mob/user)
+/obj/item/mech_component/chassis/show_missing_parts(mob/user)
 	if(!cell)
 		to_chat(user, SPAN_WARNING("It is missing a power cell."))
 	if(!diagnostics)
@@ -94,7 +94,7 @@
 		air_supply = new /obj/machinery/portable_atmospherics/canister/air(src)
 	storage_compartment = new(src)
 
-/obj/item/mech_component/chassis/proc/update_air(var/take_from_supply)
+/obj/item/mech_component/chassis/proc/update_air(take_from_supply)
 
 	var/changed
 	if(!cockpit)
@@ -143,7 +143,7 @@
 	cell = new /obj/item/cell/high(src)
 	cell.charge = cell.maxcharge
 
-/obj/item/mech_component/chassis/attackby(var/obj/item/thing, var/mob/user)
+/obj/item/mech_component/chassis/attackby(obj/item/thing, mob/user)
 	if(istype(thing,/obj/item/robot_parts/robot_component/diagnosis_unit))
 		if(diagnostics)
 			to_chat(user, SPAN_WARNING("\The [src] already has a diagnostic system installed."))

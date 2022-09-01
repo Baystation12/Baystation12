@@ -205,7 +205,7 @@ var/global/list/DEPT_FREQS = list(AI_FREQ, COMM_FREQ, ENG_FREQ, MED_FREQ, SEC_FR
 #define TRANSMISSION_WIRE	0
 #define TRANSMISSION_RADIO	1
 
-/proc/frequency_span_class(var/frequency)
+/proc/frequency_span_class(frequency)
 	// Antags!
 	if (frequency in ANTAG_FREQS)
 		return "syndradio"
@@ -312,7 +312,7 @@ var/global/datum/controller/radio/radio_controller
 /datum/controller/radio
 	var/list/datum/radio_frequency/frequencies = list()
 
-/datum/controller/radio/proc/add_object(obj/device as obj, var/new_frequency as num, var/object_filter = null as text|null)
+/datum/controller/radio/proc/add_object(obj/device as obj, new_frequency as num, object_filter = null as text|null)
 	var/f_text = num2text(new_frequency)
 	var/datum/radio_frequency/frequency = frequencies[f_text]
 
@@ -337,7 +337,7 @@ var/global/datum/controller/radio/radio_controller
 
 	return 1
 
-/datum/controller/radio/proc/return_frequency(var/new_frequency as num)
+/datum/controller/radio/proc/return_frequency(new_frequency as num)
 	var/f_text = num2text(new_frequency)
 	var/datum/radio_frequency/frequency = frequencies[f_text]
 
@@ -352,7 +352,7 @@ var/global/datum/controller/radio/radio_controller
 	var/frequency as num
 	var/list/list/obj/devices = list()
 
-/datum/radio_frequency/proc/post_signal(obj/source as obj|null, datum/signal/signal, var/radio_filter = null as text|null, var/range = null as num|null)
+/datum/radio_frequency/proc/post_signal(obj/source as obj|null, datum/signal/signal, radio_filter = null as text|null, range = null as num|null)
 	var/turf/start_point
 	if(range)
 		start_point = get_turf(source)
@@ -368,7 +368,7 @@ var/global/datum/controller/radio/radio_controller
 			send_to_filter(source, signal, next_filter, start_point, range)
 
 //Sends a signal to all machines belonging to a given filter. Should be called by post_signal()
-/datum/radio_frequency/proc/send_to_filter(obj/source, datum/signal/signal, var/radio_filter, var/turf/start_point = null, var/range = null)
+/datum/radio_frequency/proc/send_to_filter(obj/source, datum/signal/signal, radio_filter, turf/start_point = null, range = null)
 	var/list/z_levels
 	if(start_point)
 		z_levels = GetConnectedZlevels(start_point.z)
@@ -386,7 +386,7 @@ var/global/datum/controller/radio/radio_controller
 
 		device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
 
-/datum/radio_frequency/proc/add_listener(obj/device as obj, var/radio_filter as text|null)
+/datum/radio_frequency/proc/add_listener(obj/device as obj, radio_filter as text|null)
 	if (!radio_filter)
 		radio_filter = RADIO_DEFAULT
 	var/list/obj/devices_line = devices[radio_filter]

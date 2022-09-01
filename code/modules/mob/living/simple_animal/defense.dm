@@ -1,4 +1,4 @@
-/mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
+/mob/living/simple_animal/bullet_act(obj/item/projectile/Proj)
 	if(!Proj || Proj.nodamage)
 		return
 	if (status_flags & GODMODE)
@@ -59,7 +59,7 @@
 
 	return
 
-/mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)
+/mob/living/simple_animal/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/stack/medical))
 		if(stat != DEAD)
 			var/obj/item/stack/medical/MED = O
@@ -110,7 +110,7 @@
 			if (ai_holder)
 				ai_holder.react_to_attack(user)
 
-/mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
+/mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, effective_force, hit_zone)
 
 	visible_message(SPAN_DANGER("\The [src] has been attacked with \the [O] by [user]!"))
 
@@ -135,7 +135,7 @@
 
 	return TRUE
 
-/mob/living/simple_animal/proc/reflect_unarmed_damage(var/mob/living/carbon/human/attacker, var/damage_type, var/description)
+/mob/living/simple_animal/proc/reflect_unarmed_damage(mob/living/carbon/human/attacker, damage_type, description)
 	if(attacker.a_intent == I_HURT)
 		var/hand_hurtie
 		if(attacker.hand)

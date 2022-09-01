@@ -26,7 +26,7 @@ The answer was five and a half years -ZeroBits
 	var/obj/machinery/libraryscanner/scanner
 	var/sort_by = "id"
 
-/datum/nano_module/library/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/library/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 
 	if(error_message)
@@ -167,7 +167,7 @@ The answer was five and a half years -ZeroBits
 			error_message = ""
 		return 1
 
-/datum/nano_module/library/proc/view_book(var/id)
+/datum/nano_module/library/proc/view_book(id)
 	if(current_book || !id)
 		return 0
 

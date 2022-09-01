@@ -1,4 +1,4 @@
-/datum/seed/proc/diverge_mutate_gene(var/decl/plantgene/G, var/turf/T)
+/datum/seed/proc/diverge_mutate_gene(decl/plantgene/G, turf/T)
 	if(!istype(G))
 		log_debug("Attempted to mutate [src] with a non-plantgene var.")
 		return src
@@ -48,13 +48,13 @@
 /decl/plantgene/special
 	gene_tag = GENE_SPECIAL
 
-/decl/plantgene/proc/mutate(var/datum/seed/S)
+/decl/plantgene/proc/mutate(datum/seed/S)
 	return
 
-/decl/plantgene/biochem/mutate(var/datum/seed/S)
+/decl/plantgene/biochem/mutate(datum/seed/S)
 	S.set_trait(TRAIT_POTENCY, S.get_trait(TRAIT_POTENCY)+rand(-20,20),200, 0)
 
-/decl/plantgene/hardiness/mutate(var/datum/seed/S)
+/decl/plantgene/hardiness/mutate(datum/seed/S)
 	if(prob(60))
 		S.set_trait(TRAIT_TOXINS_TOLERANCE, S.get_trait(TRAIT_TOXINS_TOLERANCE)+rand(-2,2),10,0)
 	if(prob(60))
@@ -64,7 +64,7 @@
 	if(prob(60))
 		S.set_trait(TRAIT_ENDURANCE, S.get_trait(TRAIT_ENDURANCE)+rand(-5,5),100,0)
 
-/decl/plantgene/environment/mutate(var/datum/seed/S)
+/decl/plantgene/environment/mutate(datum/seed/S)
 	if(prob(60))
 		S.set_trait(TRAIT_IDEAL_HEAT, S.get_trait(TRAIT_IDEAL_HEAT)+rand(-2,2),10,0)
 	if(prob(60))
@@ -72,7 +72,7 @@
 	if(prob(60))
 		S.set_trait(TRAIT_LIGHT_TOLERANCE, S.get_trait(TRAIT_LIGHT_TOLERANCE)+rand(-5,5),100,0)
 
-/decl/plantgene/metabolism/mutate(var/datum/seed/S)
+/decl/plantgene/metabolism/mutate(datum/seed/S)
 	if(prob(65))
 		S.set_trait(TRAIT_REQUIRES_NUTRIENTS, S.get_trait(TRAIT_REQUIRES_NUTRIENTS)+rand(-2,2),10,0)
 	if(prob(65))
@@ -80,7 +80,7 @@
 	if(prob(40))
 		S.set_trait(TRAIT_ALTER_TEMP, S.get_trait(TRAIT_ALTER_TEMP)+rand(-5,5),100,0)
 
-/decl/plantgene/diet/mutate(var/datum/seed/S)
+/decl/plantgene/diet/mutate(datum/seed/S)
 	if(prob(60))
 		S.set_trait(TRAIT_CARNIVOROUS, S.get_trait(TRAIT_CARNIVOROUS)+rand(-1,1),2,0)
 	if(prob(60))
@@ -90,7 +90,7 @@
 	if(prob(65))
 		S.set_trait(TRAIT_WATER_CONSUMPTION, S.get_trait(TRAIT_WATER_CONSUMPTION)+rand(-1,1),50,0)
 
-/decl/plantgene/output/mutate(var/datum/seed/S, var/turf/T)
+/decl/plantgene/output/mutate(datum/seed/S, turf/T)
 	if(prob(50))
 		S.set_trait(TRAIT_BIOLUM,         !S.get_trait(TRAIT_BIOLUM))
 		if(S.get_trait(TRAIT_BIOLUM))
@@ -103,7 +103,7 @@
 	if(prob(60))
 		S.set_trait(TRAIT_PRODUCES_POWER, !S.get_trait(TRAIT_PRODUCES_POWER))
 
-/decl/plantgene/atmosphere/mutate(var/datum/seed/S)
+/decl/plantgene/atmosphere/mutate(datum/seed/S)
 	if(prob(60))
 		S.set_trait(TRAIT_HEAT_TOLERANCE, S.get_trait(TRAIT_HEAT_TOLERANCE)+rand(-5,5),800,70)
 	if(prob(60))
@@ -111,7 +111,7 @@
 	if(prob(60))
 		S.set_trait(TRAIT_HIGHKPA_TOLERANCE, S.get_trait(TRAIT_HIGHKPA_TOLERANCE)+rand(-5,5),500,110)
 
-/decl/plantgene/vigour/mutate(var/datum/seed/S, var/turf/T)
+/decl/plantgene/vigour/mutate(datum/seed/S, turf/T)
 	if(prob(65))
 		S.set_trait(TRAIT_PRODUCTION, S.get_trait(TRAIT_PRODUCTION)+rand(-1,1),10,0)
 	if(prob(65))
@@ -120,7 +120,7 @@
 		S.set_trait(TRAIT_SPREAD, S.get_trait(TRAIT_SPREAD)+rand(-1,1),2,0)
 		T.visible_message("<span class='notice'>\The [S.display_name] spasms visibly, shifting in the tray.</span>")
 
-/decl/plantgene/fruit/mutate(var/datum/seed/S)
+/decl/plantgene/fruit/mutate(datum/seed/S)
 	if(prob(65))
 		S.set_trait(TRAIT_STINGS, !S.get_trait(TRAIT_STINGS))
 	if(prob(65))
@@ -128,6 +128,6 @@
 	if(prob(65))
 		S.set_trait(TRAIT_JUICY, !S.get_trait(TRAIT_JUICY))
 
-/decl/plantgene/special/mutate(var/datum/seed/S)
+/decl/plantgene/special/mutate(datum/seed/S)
 	if(prob(65))
 		S.set_trait(TRAIT_TELEPORTING, !S.get_trait(TRAIT_TELEPORTING))

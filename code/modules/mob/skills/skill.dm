@@ -16,7 +16,7 @@ GLOBAL_LIST_EMPTY(skills)
 	var/default_max = SKILL_ADEPT          //Makes the skill capped at this value in selection unless overriden at job level.
 	var/prerequisites                      // A list of skill prerequisites, if needed.
 
-/decl/hierarchy/skill/proc/get_cost(var/level)
+/decl/hierarchy/skill/proc/get_cost(level)
 	switch(level)
 		if(SKILL_BASIC, SKILL_ADEPT)
 			return difficulty
@@ -185,7 +185,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You're good at hand-to-hand combat. You've trained explicitly in a martial art or as a close combatant as part of a military or police unit. You can use weaponry competently and you can think strategically and quickly in a melee. You're in good shape and you spend time training.",
 						"Master"		= "You specialize in hand-to-hand combat. You're well-trained in a practical martial art, and in good shape. You spend a lot of time practicing. You can take on just about anyone, use just about any weapon, and usually come out on top. You may be a professional athlete or special forces member.")
 
-/decl/hierarchy/skill/security/combat/get_cost(var/level)
+/decl/hierarchy/skill/security/combat/get_cost(level)
 	switch(level)
 		if(SKILL_BASIC)
 			return difficulty
@@ -206,7 +206,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You've used firearms and other ranged weapons in high-stress situations, and your skills have become automatic. Your aim is good.<br>-You will automatically unsafety a gun when firing it on harm intent.<br>-You can perform tactical and speed reloads. The time taken decreases with level.",
 						"Master"		= "You are an exceptional shot with a variety of weapons, from simple to exotic. You use a weapon as naturally as though it were a part of your own body. You may be a sniper or special forces operator of some kind.<br>- You get extra accuracy for sniper rifles.<br>- You automatically eject shells from bolt-action firearms.")
 
-/decl/hierarchy/skill/security/weapons/get_cost(var/level)
+/decl/hierarchy/skill/security/weapons/get_cost(level)
 	switch(level)
 		if(SKILL_BASIC)
 			return difficulty
@@ -230,7 +230,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Master"		= "You're a big name in forensic science. You might be an investigator who cracked a famous case, or you published papers on new methods of forensics. Either way, if there's a forensic trail, you will find it, period.<br>- You can notice traces of wiped off blood.")
 
 
-/decl/hierarchy/skill/security/forensics/get_cost(var/level)
+/decl/hierarchy/skill/security/forensics/get_cost(level)
 	switch(level)
 		if(SKILL_BASIC, SKILL_ADEPT, SKILL_EXPERT)
 			return difficulty * 2

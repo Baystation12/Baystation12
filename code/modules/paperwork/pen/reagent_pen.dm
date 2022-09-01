@@ -6,7 +6,7 @@
 	..()
 	create_reagents(30)
 
-/obj/item/pen/reagent/attack(mob/living/M, mob/user, var/target_zone)
+/obj/item/pen/reagent/attack(mob/living/M, mob/user, target_zone)
 
 	if(!istype(M))
 		return

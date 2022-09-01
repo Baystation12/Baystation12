@@ -1,4 +1,4 @@
-/datum/psi_complexus/proc/update(var/force)
+/datum/psi_complexus/proc/update(force)
 
 	set waitfor = FALSE
 

@@ -32,7 +32,7 @@
 
 	var/tag_air_alarm
 
-/datum/computer/file/embedded_program/airlock/New(var/obj/machinery/embedded_controller/M)
+/datum/computer/file/embedded_program/airlock/New(obj/machinery/embedded_controller/M)
 	..(M)
 
 	memory["chamber_sensor_pressure"] = ONE_ATMOSPHERE
@@ -322,7 +322,7 @@
 	var/int_closed = check_interior_door_secured()
 	return (ext_closed && int_closed)
 
-/datum/computer/file/embedded_program/airlock/proc/signalDoor(var/tag, var/command)
+/datum/computer/file/embedded_program/airlock/proc/signalDoor(tag, command)
 	var/datum/signal/signal = new
 	signal.data["tag"] = tag
 	signal.data["command"] = command
@@ -334,7 +334,7 @@
 	signal.data["command"] = "shutdown"
 	post_signal(signal, RADIO_TO_AIRALARM)
 
-/datum/computer/file/embedded_program/airlock/proc/signalPump(var/tag, var/power, var/direction, var/pressure)
+/datum/computer/file/embedded_program/airlock/proc/signalPump(tag, power, direction, pressure)
 	var/datum/signal/signal = new
 	signal.data = list(
 		"tag" = tag,
@@ -347,7 +347,7 @@
 	post_signal(signal, RADIO_FROM_AIRALARM)
 
 //this is called to set the appropriate door state at the end of a cycling process, or for the exterior buttons
-/datum/computer/file/embedded_program/airlock/proc/cycleDoors(var/target)
+/datum/computer/file/embedded_program/airlock/proc/cycleDoors(target)
 	switch(target)
 		if(TARGET_OUTOPEN)
 			toggleDoor(memory["interior_status"], tag_interior_door, memory["secure"], "close")
@@ -363,7 +363,7 @@
 			signalDoor(tag_exterior_door, command)
 			signalDoor(tag_interior_door, command)
 
-/datum/computer/file/embedded_program/airlock/proc/signal_mech_sensor(var/command, var/sensor)
+/datum/computer/file/embedded_program/airlock/proc/signal_mech_sensor(command, sensor)
 	var/datum/signal/signal = new
 	signal.data["tag"] = sensor
 	signal.data["command"] = command
@@ -389,7 +389,7 @@ Only sends a command if it is needed, i.e. if the door is
 already open, passing an open command to this proc will not
 send an additional command to open the door again.
 ----------------------------------------------------------*/
-/datum/computer/file/embedded_program/airlock/proc/toggleDoor(var/list/doorStatus, var/doorTag, var/secure, var/command)
+/datum/computer/file/embedded_program/airlock/proc/toggleDoor(list/doorStatus, doorTag, secure, command)
 	var/doorCommand = null
 
 	if(command == "toggle")

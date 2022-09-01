@@ -3,23 +3,23 @@
 	waterproof = FALSE
 	var/lit = 0
 
-/obj/item/flame/afterattack(var/obj/O, var/mob/user, proximity)
+/obj/item/flame/afterattack(obj/O, mob/user, proximity)
 	..()
 	if(proximity && lit && istype(O))
 		O.HandleObjectHeating(src, user, 700)
 
-/obj/item/flame/proc/extinguish(var/mob/user, var/no_message)
+/obj/item/flame/proc/extinguish(mob/user, no_message)
 	lit = 0
 	damtype = DAMAGE_BRUTE
 	STOP_PROCESSING(SSobj, src)
 
-/obj/item/flame/water_act(var/depth)
+/obj/item/flame/water_act(depth)
 	..()
 	if(!waterproof && lit)
 		if(submerged(depth))
 			extinguish(no_message = TRUE)
 
-/proc/isflamesource(var/atom/A)
+/proc/isflamesource(atom/A)
 	if(!istype(A))
 		return FALSE
 	if(isWelder(A))
@@ -62,7 +62,7 @@
 	if(location)
 		location.hotspot_expose(700, 5)
 
-/obj/item/flame/match/dropped(var/mob/user)
+/obj/item/flame/match/dropped(mob/user)
 	//If dropped, put ourselves out
 	//not before lighting up the turf we land on, though.
 	if(lit)
@@ -72,7 +72,7 @@
 		extinguish()
 	return ..()
 
-/obj/item/flame/match/extinguish(var/mob/user, var/no_message)
+/obj/item/flame/match/extinguish(mob/user, no_message)
 	. = ..()
 	name = "burnt match"
 	desc = "A match. This one has seen better days."

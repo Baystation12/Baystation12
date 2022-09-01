@@ -50,7 +50,7 @@ SUBSYSTEM_DEF(customitems)
 
 
 // Places the item on the target mob.
-/datum/controller/subsystem/customitems/proc/place_custom_item(mob/living/carbon/human/M, var/datum/custom_item/citem)
+/datum/controller/subsystem/customitems/proc/place_custom_item(mob/living/carbon/human/M, datum/custom_item/citem)
 	. = M && citem && citem.spawn_item(get_turf(M))
 	if(. && !M.equip_to_appropriate_slot(.) && !M.equip_to_storage(.))
 		to_chat(M, SPAN_WARNING("Your custom item, \the [.], could not be placed on your character."))
@@ -95,7 +95,7 @@ SUBSYSTEM_DEF(customitems)
 	var/list/req_titles
 	var/list/additional_data
 
-/datum/custom_item/New(var/list/data)
+/datum/custom_item/New(list/data)
 	ckey                 = ckey(data["ckey"])
 	character_name       = lowertext(data["character_name"])
 	item_name            = data["item_name"]
@@ -124,9 +124,9 @@ SUBSYSTEM_DEF(customitems)
 				if(!(state in SScustomitems.item_states))
 					return SPAN_WARNING("The given item icon [state] does not exist.")
 
-/datum/custom_item/proc/spawn_item(var/newloc)
+/datum/custom_item/proc/spawn_item(newloc)
 	. = new item_path(newloc)
 	apply_to_item(.)
 
-/datum/custom_item/proc/apply_to_item(var/obj/item/item)
+/datum/custom_item/proc/apply_to_item(obj/item/item)
 	. = item.inherit_custom_item_data(src)

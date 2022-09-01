@@ -57,14 +57,14 @@
 		return
 	qdel(src)
 
-/obj/effect/accelerated_particle/proc/toxmob(var/mob/living/M)
+/obj/effect/accelerated_particle/proc/toxmob(mob/living/M)
 	if (!active)
 		return
 	var/radiation = (energy*2)
 	M.apply_damage((radiation*3), DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 	M.updatehealth()
 
-/obj/effect/accelerated_particle/proc/move(var/lag)
+/obj/effect/accelerated_particle/proc/move(lag)
 	set waitfor = FALSE
 	if(QDELETED(src))
 		return

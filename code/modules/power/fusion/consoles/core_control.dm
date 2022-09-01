@@ -2,7 +2,7 @@
 	name = "\improper R-UST Mk. 8 core control"
 	ui_template = "fusion_core_control.tmpl"
 
-/obj/machinery/computer/fusion/core_control/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
+/obj/machinery/computer/fusion/core_control/OnTopic(mob/user, href_list, datum/topic_state/state)
 
 	if(href_list["toggle_active"] || href_list["str"])
 		var/obj/machinery/power/fusion_core/C = locate(href_list["machine"])

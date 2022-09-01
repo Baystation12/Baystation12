@@ -59,7 +59,7 @@
 		else if(E) // If they're in normally, implant removal can get them out.
 			E.implants += src
 
-/mob/living/simple_animal/borer/RangedAttack(atom/A, var/params)
+/mob/living/simple_animal/borer/RangedAttack(atom/A, params)
 	. = ..()
 	if(!. && a_intent == I_DISARM && !host && isliving(A) && !neutered && can_use_borer_ability(requires_host_value = FALSE))
 		var/mob/living/M = A

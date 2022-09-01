@@ -62,7 +62,7 @@
 	to_chat(user, "The safety is [safety ? "on" : "off"].")
 	return
 
-/obj/item/extinguisher/attack(var/mob/living/M, var/mob/user)
+/obj/item/extinguisher/attack(mob/living/M, mob/user)
 	if(user.a_intent == I_HELP)
 		if(src.safety || (world.time < src.last_use + 20)) // We still catch help intent to not randomly attack people
 			return
@@ -79,7 +79,7 @@
 		return 1 // No afterattack
 	return ..()
 
-/obj/item/extinguisher/proc/propel_object(var/obj/O, mob/user, movementdirection)
+/obj/item/extinguisher/proc/propel_object(obj/O, mob/user, movementdirection)
 	if(O.anchored) return
 
 	var/obj/structure/bed/chair/C
@@ -97,13 +97,13 @@
 		O.Move(get_step(user,movementdirection), movementdirection)
 		sleep(3)
 
-/obj/item/extinguisher/resolve_attackby(var/atom/target, var/mob/user, var/flag)
+/obj/item/extinguisher/resolve_attackby(atom/target, mob/user, flag)
 	if (istype(target, /obj/structure/hygiene/sink) && reagents.get_free_space() > 0) // fill first, wash if full
 		return FALSE
 	return ..()
 
 
-/obj/item/extinguisher/afterattack(var/atom/target, var/mob/user, var/flag)
+/obj/item/extinguisher/afterattack(atom/target, mob/user, flag)
 	var/issink = istype(target, /obj/structure/hygiene/sink)
 
 	if (flag && (issink || istype(target, /obj/structure/reagent_dispensers)))
@@ -154,7 +154,7 @@
 		return ..()
 	return
 
-/obj/item/extinguisher/proc/do_spray(var/atom/Target)
+/obj/item/extinguisher/proc/do_spray(atom/Target)
 	var/turf/T = get_turf(Target)
 	var/per_particle = min(spray_amount, reagents.total_volume)/spray_particles
 	for(var/a = 1 to spray_particles)

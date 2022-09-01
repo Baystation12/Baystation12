@@ -7,13 +7,13 @@
 	descriptor = "seafloor (replace space)"
 	target_turf_type = /turf/space
 
-/datum/random_map/noise/seafloor/replace_space/get_appropriate_path(var/value)
+/datum/random_map/noise/seafloor/replace_space/get_appropriate_path(value)
 	return /turf/simulated/ocean
 
-/datum/random_map/noise/seafloor/get_appropriate_path(var/value)
+/datum/random_map/noise/seafloor/get_appropriate_path(value)
 	return
 
-/datum/random_map/noise/seafloor/get_additional_spawns(var/value, var/turf/T)
+/datum/random_map/noise/seafloor/get_additional_spawns(value, turf/T)
 	var/val = min(9,max(0,round((value/cell_range)*10)))
 	if(isnull(val)) val = 0
 	switch(val)

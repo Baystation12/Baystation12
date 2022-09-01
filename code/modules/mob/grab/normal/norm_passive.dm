@@ -17,17 +17,17 @@
 
 	break_chance_table = list(15, 60, 100)
 
-/datum/grab/normal/passive/on_hit_disarm(var/obj/item/grab/normal/G)
+/datum/grab/normal/passive/on_hit_disarm(obj/item/grab/normal/G)
 	to_chat(G.assailant, "<span class='warning'>Your grip isn't strong enough to pin.</span>")
 	return 0
 
-/datum/grab/normal/passive/on_hit_grab(var/obj/item/grab/normal/G)
+/datum/grab/normal/passive/on_hit_grab(obj/item/grab/normal/G)
 	to_chat(G.assailant, "<span class='warning'>Your grip isn't strong enough to jointlock.</span>")
 	return 0
 
-/datum/grab/normal/passive/on_hit_harm(var/obj/item/grab/normal/G)
+/datum/grab/normal/passive/on_hit_harm(obj/item/grab/normal/G)
 	to_chat(G.assailant, "<span class='warning'>Your grip isn't strong enough to dislocate.</span>")
 	return 0
 
-/datum/grab/normal/passive/resolve_openhand_attack(var/obj/item/grab/G)
+/datum/grab/normal/passive/resolve_openhand_attack(obj/item/grab/G)
 	return 0

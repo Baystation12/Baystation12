@@ -16,7 +16,7 @@
 	QDEL_NULL(motivator)
 	. = ..()
 
-/obj/item/mech_component/manipulators/show_missing_parts(var/mob/user)
+/obj/item/mech_component/manipulators/show_missing_parts(mob/user)
 	if(!motivator)
 		to_chat(user, SPAN_WARNING("It is missing an actuator."))
 
@@ -26,7 +26,7 @@
 /obj/item/mech_component/manipulators/prebuild()
 	motivator = new(src)
 
-/obj/item/mech_component/manipulators/attackby(var/obj/item/thing, var/mob/user)
+/obj/item/mech_component/manipulators/attackby(obj/item/thing, mob/user)
 	if(istype(thing,/obj/item/robot_parts/robot_component/actuator))
 		if(motivator)
 			to_chat(user, SPAN_WARNING("\The [src] already has an actuator installed."))

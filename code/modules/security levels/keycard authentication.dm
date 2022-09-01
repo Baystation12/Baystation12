@@ -87,7 +87,7 @@
 		show_browser(user, dat, "window=keycard_auth;size=500x250")
 	return
 
-/obj/machinery/keycard_auth/CanUseTopic(var/mob/user, href_list)
+/obj/machinery/keycard_auth/CanUseTopic(mob/user, href_list)
 	if(busy)
 		to_chat(user, "This device is busy.")
 		return STATUS_CLOSE
@@ -133,7 +133,7 @@
 		log_and_message_admins("triggered and [key_name(event_confirmed_by)] confirmed event [event]", event_triggered_by || usr)
 	reset()
 
-/obj/machinery/keycard_auth/proc/receive_request(var/obj/machinery/keycard_auth/source)
+/obj/machinery/keycard_auth/proc/receive_request(obj/machinery/keycard_auth/source)
 	if(stat & (BROKEN|NOPOWER))
 		return
 	event_source = source

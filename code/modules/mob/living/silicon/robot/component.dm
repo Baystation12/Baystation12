@@ -20,7 +20,7 @@
 /datum/robot_component/New(mob/living/silicon/robot/R)
 	src.owner = R
 
-/datum/robot_component/proc/accepts_component(var/obj/item/thing)
+/datum/robot_component/proc/accepts_component(obj/item/thing)
 	. = istype(thing, external_type)
 
 /datum/robot_component/proc/install()
@@ -88,7 +88,7 @@
 	external_type = /obj/item/robot_parts/robot_component/armour/light
 	max_damage = 75
 
-/datum/robot_component/armour/accepts_component(var/obj/item/thing)
+/datum/robot_component/armour/accepts_component(obj/item/thing)
 	. = (!istype(thing, /obj/item/robot_parts/robot_component/armour/exosuit) && ..())
 
 // ACTUATOR
@@ -176,7 +176,7 @@
 	return C && C.installed == 1 && C.toggled && C.is_powered()
 
 // Returns component by it's string name
-/mob/living/silicon/robot/proc/get_component(var/component_name)
+/mob/living/silicon/robot/proc/get_component(component_name)
 	var/datum/robot_component/C = components[component_name]
 	return C
 
@@ -197,7 +197,7 @@
 	var/total_dam = 0
 	var/max_dam = 30
 
-/obj/item/robot_parts/robot_component/proc/take_damage(var/brute_amt, var/burn_amt)
+/obj/item/robot_parts/robot_component/proc/take_damage(brute_amt, burn_amt)
 	brute += brute_amt
 	burn += burn_amt
 	total_dam = brute+burn

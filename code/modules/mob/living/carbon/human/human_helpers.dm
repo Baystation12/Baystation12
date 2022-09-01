@@ -7,7 +7,7 @@
 	flash_protection += C.flash_protection; \
 	equipment_tint_total += C.tint;
 
-/mob/living/carbon/human/can_eat(var/food, var/feedback = 1)
+/mob/living/carbon/human/can_eat(food, feedback = 1)
 	var/list/status = can_eat_status()
 	if(status[1] == HUMAN_EATING_NO_ISSUE)
 		return 1
@@ -18,7 +18,7 @@
 			to_chat(src, "<span class='warning'>\The [status[2]] is in the way!</span>")
 	return 0
 
-/mob/living/carbon/human/can_force_feed(var/feeder, var/food, var/feedback = 1)
+/mob/living/carbon/human/can_force_feed(feeder, food, feedback = 1)
 	var/list/status = can_eat_status()
 	if(status[1] == HUMAN_EATING_NO_ISSUE)
 		return 1
@@ -53,7 +53,7 @@
 
 	if(istype(glasses, /obj/item/clothing/glasses))
 		process_prescription(glasses)
-	
+
 	var/binoc_check
 	if(client)
 		binoc_check = client.view == world.view
@@ -70,11 +70,11 @@
 		if(istype(back,/obj/item/rig))
 			process_rig(back)
 
-/mob/living/carbon/human/proc/process_prescription(var/obj/item/clothing/glasses/G)
+/mob/living/carbon/human/proc/process_prescription(obj/item/clothing/glasses/G)
 	if(G)
 		equipment_prescription += G.prescription
 
-/mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
+/mob/living/carbon/human/proc/process_glasses(obj/item/clothing/glasses/G)
 	if(G?.active)
 		equipment_darkness_modifier += G.darkness_view
 		equipment_vision_flags |= G.vision_flags
@@ -90,14 +90,14 @@
 		add_clothing_protection(G)
 		G.process_hud(src)
 
-/mob/living/carbon/human/proc/process_rig(var/obj/item/rig/O)
+/mob/living/carbon/human/proc/process_rig(obj/item/rig/O)
 	if(O.visor && O.visor.active && O.visor.vision && O.visor.vision.glasses && (!O.helmet || (head && O.helmet == head)))
 		process_glasses(O.visor.vision.glasses)
 
 /mob/living/carbon/human/get_gender()
 	return gender
 
-/mob/living/carbon/human/fully_replace_character_name(var/new_name, var/in_depth = TRUE)
+/mob/living/carbon/human/fully_replace_character_name(new_name, in_depth = TRUE)
 	var/old_name = real_name
 	. = ..()
 	if(!. || !in_depth)
@@ -130,7 +130,7 @@
 
 //Get species or synthetic temp if the mob is a FBP. Used when a synthetic type human mob is exposed to a temp check.
 //Essentially, used when a synthetic human mob should act diffferently than a normal type mob.
-/mob/living/carbon/human/proc/getSpeciesOrSynthTemp(var/temptype)
+/mob/living/carbon/human/proc/getSpeciesOrSynthTemp(temptype)
 	switch(temptype)
 		if(COLD_LEVEL_1)
 			return isSynthetic()? SYNTH_COLD_LEVEL_1 : species.cold_level_1
@@ -145,7 +145,7 @@
 		if(HEAT_LEVEL_3)
 			return isSynthetic()? SYNTH_HEAT_LEVEL_3 : species.heat_level_3
 
-/mob/living/carbon/human/proc/getCryogenicFactor(var/bodytemperature)
+/mob/living/carbon/human/proc/getCryogenicFactor(bodytemperature)
 	if(isSynthetic())
 		return 0
 	if(!species)
@@ -267,7 +267,7 @@
 			spawn(100)
 				disabilities &= ~NEARSIGHTED
 
-/mob/living/carbon/human/proc/make_grab(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/victim, var/grab_tag)
+/mob/living/carbon/human/proc/make_grab(mob/living/carbon/human/attacker, mob/living/carbon/human/victim, grab_tag)
 	var/obj/item/grab/G
 	if(!grab_tag)
 		G = new attacker.current_grab_type(attacker, victim)
@@ -282,7 +282,7 @@
 	var/list/cloaking_sources
 
 // Returns true if, and only if, the human has gone from uncloaked to cloaked
-/mob/living/carbon/human/proc/add_cloaking_source(var/datum/cloaking_source)
+/mob/living/carbon/human/proc/add_cloaking_source(datum/cloaking_source)
 	var/has_uncloaked = clean_cloaking_sources()
 	LAZYDISTINCTADD(cloaking_sources, weakref(cloaking_source))
 
@@ -297,7 +297,7 @@
 #define CLOAK_APPEAR_SELF "<span class='notice'>You have re-appeared.</span>"
 
 // Returns true if, and only if, the human has gone from cloaked to uncloaked
-/mob/living/carbon/human/proc/remove_cloaking_source(var/datum/cloaking_source)
+/mob/living/carbon/human/proc/remove_cloaking_source(datum/cloaking_source)
 	var/was_cloaked = LAZYLEN(cloaking_sources)
 	clean_cloaking_sources()
 	LAZYREMOVE(cloaking_sources, weakref(cloaking_source))
@@ -322,7 +322,7 @@
 #undef CLOAK_APPEAR_SELF
 
 // Returns true if the human is cloaked by the given source
-/mob/living/carbon/human/proc/is_cloaked_by(var/cloaking_source)
+/mob/living/carbon/human/proc/is_cloaked_by(cloaking_source)
 	return LAZYISIN(cloaking_sources, weakref(cloaking_source))
 
 // Returns true if this operation caused the mob to go from cloaked to uncloaked
@@ -355,5 +355,5 @@
 		if (equipment_screen.icon_state == "meson_hud")
 			return TRUE
 
-/mob/living/carbon/human/proc/is_in_pocket(var/obj/item/I)
+/mob/living/carbon/human/proc/is_in_pocket(obj/item/I)
 	return I in list(l_store, r_store)

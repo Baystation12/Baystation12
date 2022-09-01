@@ -3,7 +3,7 @@
 	var/list/images
 	var/list/viewers
 
-/datum/appearance_data/New(var/images, var/viewers, var/priority)
+/datum/appearance_data/New(images, viewers, priority)
 	..()
 	src.priority = priority
 	src.images = images
@@ -18,7 +18,7 @@
 	src.viewers = null
 	. = ..()
 
-/datum/appearance_data/proc/AddViewer(var/mob/viewer, var/check_if_viewer = TRUE)
+/datum/appearance_data/proc/AddViewer(mob/viewer, check_if_viewer = TRUE)
 	if(check_if_viewer && (viewer in viewers))
 		return FALSE
 	if(!istype(viewer))
@@ -27,7 +27,7 @@
 	appearance_manager.add_appearance(viewer, src)
 	return TRUE
 
-/datum/appearance_data/proc/RemoveViewer(var/mob/viewer, var/refresh_images = TRUE)
+/datum/appearance_data/proc/RemoveViewer(mob/viewer, refresh_images = TRUE)
 	if(!(viewer in viewers))
 		return FALSE
 	viewers -= viewer

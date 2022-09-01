@@ -30,7 +30,7 @@
 								"<span class='danger'>Your face burns up, and shortly after the fire you realise you have the face of a horse!</span>")
 		target.flash_eyes()
 
-/spell/targeted/equip_item/horsemask/summon_item(var/new_type)
+/spell/targeted/equip_item/horsemask/summon_item(new_type)
 	var/obj/item/new_item = new new_type
 	new_item.canremove = 0		//curses!
 	if(istype(new_item, /obj/item/clothing/mask/horsehead))

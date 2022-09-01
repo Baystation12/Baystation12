@@ -146,7 +146,7 @@
 		qdel(thing)
 	. = ..()
 
-/obj/item/robot_parts/robot_suit/proc/dismantled_from(var/mob/living/silicon/robot/donor)
+/obj/item/robot_parts/robot_suit/proc/dismantled_from(mob/living/silicon/robot/donor)
 	for(var/thing in required_parts - list(BP_CHEST, BP_HEAD))
 		var/part_type = required_parts[thing]
 		parts[thing] = new part_type(src)

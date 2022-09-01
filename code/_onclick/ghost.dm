@@ -10,7 +10,7 @@
 	else
 		to_chat(src, "<span class='notice'>You will no longer examine things you click on.</span>")
 
-/mob/observer/ghost/DblClickOn(var/atom/A, var/params)
+/mob/observer/ghost/DblClickOn(atom/A, params)
 	if(can_reenter_corpse && mind && mind.current)
 		if(A == mind.current || (mind.current in A)) // double click your corpse or whatever holds it
 			reenter_corpse()						// (cloning scanner, body bag, closet, exosuit, etc)
@@ -24,7 +24,7 @@
 		stop_following()
 		forceMove(get_turf(A))
 
-/mob/observer/ghost/ClickOn(var/atom/A, var/params)
+/mob/observer/ghost/ClickOn(atom/A, params)
 	if(!canClick()) return
 	setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 

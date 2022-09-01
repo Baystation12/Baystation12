@@ -145,7 +145,7 @@ PROCESSING_SUBSYSTEM_DEF(nano)
   *
   * @return int 0 if no ui was removed, 1 if removed successfully
   */
-/datum/controller/subsystem/processing/nano/proc/ui_closed(var/datum/nanoui/ui)
+/datum/controller/subsystem/processing/nano/proc/ui_closed(datum/nanoui/ui)
 	var/src_object_key = "\ref[ui.src_object]"
 	if (!open_uis[src_object_key] || !open_uis[src_object_key][ui.ui_key])
 		return 0 // wasn't open

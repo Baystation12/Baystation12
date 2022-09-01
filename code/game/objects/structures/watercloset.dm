@@ -16,7 +16,7 @@
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/structure/hygiene/proc/clog(var/severity)
+/obj/structure/hygiene/proc/clog(severity)
 	if(clogged) //We can only clog if our state is zero, aka completely unclogged and cloggable
 		return FALSE
 	clogged = severity
@@ -25,7 +25,7 @@
 /obj/structure/hygiene/proc/unclog()
 	clogged = 0
 
-/obj/structure/hygiene/attackby(var/obj/item/thing, var/mob/user)
+/obj/structure/hygiene/attackby(obj/item/thing, mob/user)
 	if(clogged > 0 && isplunger(thing))
 		user.visible_message("<span class='notice'>\The [user] strives valiantly to unclog \the [src] with \the [thing]!</span>")
 		spawn
@@ -106,7 +106,7 @@
 	open = round(rand(0, 1))
 	update_icon()
 
-/obj/structure/hygiene/toilet/attack_hand(var/mob/living/user)
+/obj/structure/hygiene/toilet/attack_hand(mob/living/user)
 	if(swirlie)
 		usr.visible_message("<span class='danger'>[user] slams the toilet seat onto [swirlie.name]'s head!</span>", "<span class='notice'>You slam the toilet seat onto [swirlie.name]'s head!</span>", "You hear reverberating porcelain.")
 		swirlie.adjustBruteLoss(8)
@@ -132,7 +132,7 @@
 /obj/structure/hygiene/toilet/on_update_icon()
 	icon_state = "toilet[open][cistern]"
 
-/obj/structure/hygiene/toilet/attackby(obj/item/I as obj, var/mob/living/user)
+/obj/structure/hygiene/toilet/attackby(obj/item/I as obj, mob/living/user)
 	if(isCrowbar(I))
 		to_chat(user, "<span class='notice'>You start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"].</span>")
 		playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
@@ -184,7 +184,7 @@
 	density = FALSE
 	anchored = TRUE
 
-/obj/structure/hygiene/urinal/attackby(var/obj/item/I, var/mob/user)
+/obj/structure/hygiene/urinal/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/grab))
 		var/obj/item/grab/G = I
 		if(isliving(G.affecting))
@@ -228,7 +228,7 @@
 	anchored = TRUE
 	mouse_opacity = 0
 
-/obj/structure/hygiene/shower/attack_hand(var/mob/M)
+/obj/structure/hygiene/shower/attack_hand(mob/M)
 	on = !on
 	update_icon()
 	if(on)
@@ -238,7 +238,7 @@
 		for (var/atom/movable/G in src.loc)
 			G.clean_blood()
 
-/obj/structure/hygiene/shower/attackby(obj/item/I as obj, var/mob/user)
+/obj/structure/hygiene/shower/attackby(obj/item/I as obj, mob/user)
 	if(istype(I, /obj/item/device/scanner/gas))
 		to_chat(user, "<span class='notice'>The water temperature seems to be [watertemp].</span>")
 		return
@@ -282,7 +282,7 @@
 				ismist = 0
 
 //Yes, showers are super powerful as far as washing goes.
-/obj/structure/hygiene/shower/proc/wash(var/atom/movable/washing)
+/obj/structure/hygiene/shower/proc/wash(atom/movable/washing)
 	if(on)
 		wash_mob(washing)
 		if(isturf(loc))
@@ -345,7 +345,7 @@
 	anchored = TRUE
 	var/busy = 0 	//Something's being washed at the moment
 
-/obj/structure/hygiene/sink/MouseDrop_T(var/obj/item/thing, var/mob/user)
+/obj/structure/hygiene/sink/MouseDrop_T(obj/item/thing, mob/user)
 	..()
 	if(!istype(thing) || !thing.is_open_container())
 		return ..()
@@ -359,7 +359,7 @@
 	thing.reagents.clear_reagents()
 	thing.update_icon()
 
-/obj/structure/hygiene/sink/attack_hand(var/mob/user)
+/obj/structure/hygiene/sink/attack_hand(mob/user)
 	if (ishuman(user))
 		var/mob/living/carbon/human/H = user
 		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
@@ -394,7 +394,7 @@
 		"<span class='notice'>You wash your hands using \the [src].</span>")
 
 
-/obj/structure/hygiene/sink/attackby(obj/item/O as obj, var/mob/living/user)
+/obj/structure/hygiene/sink/attackby(obj/item/O as obj, mob/living/user)
 
 	if(isplunger(O) && clogged > 0)
 		return ..()
@@ -465,12 +465,12 @@
 	icon_state = "puddle"
 	clogged = -1 // how do you clog a puddle
 
-/obj/structure/hygiene/sink/puddle/attack_hand(var/mob/M)
+/obj/structure/hygiene/sink/puddle/attack_hand(mob/M)
 	icon_state = "puddle-splash"
 	..()
 	icon_state = "puddle"
 
-/obj/structure/hygiene/sink/puddle/attackby(obj/item/O as obj, var/mob/user)
+/obj/structure/hygiene/sink/puddle/attackby(obj/item/O as obj, mob/user)
 	icon_state = "puddle-splash"
 	..()
 	icon_state = "puddle"

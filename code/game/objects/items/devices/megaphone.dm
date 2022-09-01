@@ -44,7 +44,7 @@
 			spamcheck = 0
 		return
 
-/obj/item/device/megaphone/emag_act(var/remaining_charges, var/mob/user)
+/obj/item/device/megaphone/emag_act(remaining_charges, mob/user)
 	if(!emagged)
 		to_chat(user, "<span class='warning'>You overload \the [src]'s voice synthesizer.</span>")
 		emagged = TRUE

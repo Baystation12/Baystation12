@@ -81,7 +81,7 @@
 	material.place_shard(get_turf(usr))
 	qdel(src)
 
-/obj/structure/railing/proc/NeighborsCheck(var/UpdateNeighbors = 1)
+/obj/structure/railing/proc/NeighborsCheck(UpdateNeighbors = 1)
 	neighbor_status = 0
 	var/Rturn = turn(src.dir, -90)
 	var/Lturn = turn(src.dir, 90)
@@ -126,7 +126,7 @@
 			if (UpdateNeighbors)
 				R.update_icon(0)
 
-/obj/structure/railing/on_update_icon(var/update_neighbors = TRUE)
+/obj/structure/railing/on_update_icon(update_neighbors = TRUE)
 	NeighborsCheck(update_neighbors)
 	overlays.Cut()
 	if (!neighbor_status || !anchored)
@@ -183,7 +183,7 @@
 	set_dir(turn(dir, 180))
 	update_icon()
 
-/obj/structure/railing/CheckExit(var/atom/movable/O, var/turf/target)
+/obj/structure/railing/CheckExit(atom/movable/O, turf/target)
 	if(istype(O) && O.checkpass(PASS_FLAG_TABLE))
 		return 1
 	if(get_dir(O.loc, target) == dir)
@@ -192,7 +192,7 @@
 		return 0
 	return 1
 
-/obj/structure/railing/attackby(var/obj/item/W, var/mob/user)
+/obj/structure/railing/attackby(obj/item/W, mob/user)
 	if (user.a_intent == I_HURT)
 		..()
 		return
@@ -277,7 +277,7 @@
 
 	..()
 
-/obj/structure/railing/can_climb(var/mob/living/user, post_climb_check=FALSE, check_silicon=TRUE)
+/obj/structure/railing/can_climb(mob/living/user, post_climb_check=FALSE, check_silicon=TRUE)
 	. = ..()
 	if (. && get_turf(user) == get_turf(src))
 		var/turf/T = get_step(src, src.dir)
@@ -285,7 +285,7 @@
 			to_chat(user, "<span class='warning'>You can't climb there, the way is blocked.</span>")
 			return 0
 
-/obj/structure/railing/do_climb(var/mob/living/user)
+/obj/structure/railing/do_climb(mob/living/user)
 	. = ..()
 	if(.)
 		if(!anchored || material.is_brittle())

@@ -5,7 +5,7 @@
 	..()
 	effect_type = pick(EFFECT_PSIONIC, EFFECT_ORGANIC)
 
-/datum/artifact_effect/stun/DoEffectTouch(var/mob/toucher)
+/datum/artifact_effect/stun/DoEffectTouch(mob/toucher)
 	if(toucher && iscarbon(toucher))
 		var/mob/living/carbon/C = toucher
 		var/susceptibility = GetAnomalySusceptibility(C)

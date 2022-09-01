@@ -27,7 +27,7 @@ var/global/repository/unique/uniqueness_repository = new()
 	..()
 	ids_by_key = list()
 
-/datum/uniqueness_generator/id_sequential/Generate(var/key, var/default_id = 100)
+/datum/uniqueness_generator/id_sequential/Generate(key, default_id = 100)
 	var/id = ids_by_key[key]
 	if(id)
 		id++
@@ -44,7 +44,7 @@ var/global/repository/unique/uniqueness_repository = new()
 	..()
 	ids_by_key = list()
 
-/datum/uniqueness_generator/id_random/Generate(var/key, var/min, var/max)
+/datum/uniqueness_generator/id_random/Generate(key, min, max)
 	var/list/ids = ids_by_key[key]
 	if(!ids)
 		ids = list()

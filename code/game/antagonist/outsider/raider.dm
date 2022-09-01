@@ -95,7 +95,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		/obj/item/clothing/accessory/storage/holster/hip
 		)
 
-/datum/antagonist/raider/update_access(var/mob/living/player)
+/datum/antagonist/raider/update_access(mob/living/player)
 	for(var/obj/item/storage/wallet/W in player.contents)
 		for(var/obj/item/card/id/id in W.contents)
 			id.SetName("[player.real_name]'s Passport")
@@ -140,7 +140,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 			return 0
 	return 1
 
-/datum/antagonist/raider/equip(var/mob/living/carbon/human/player)
+/datum/antagonist/raider/equip(mob/living/carbon/human/player)
 
 	if(!..())
 		return 0
@@ -175,7 +175,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 
 	return 1
 
-/datum/antagonist/raider/proc/equip_weapons(var/mob/living/carbon/human/player)
+/datum/antagonist/raider/proc/equip_weapons(mob/living/carbon/human/player)
 	var/new_gun = pick(raider_guns)
 	var/new_holster = pick(raider_holster) //raiders don't start with any backpacks, so let's be nice and give them a holster if they can use it.
 	var/turf/T = get_turf(player)
@@ -214,7 +214,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		else
 			player.put_in_any_hand_if_possible(holster)
 
-/datum/antagonist/raider/proc/equip_ammo(var/mob/living/carbon/human/player, var/obj/item/gun/gun)
+/datum/antagonist/raider/proc/equip_ammo(mob/living/carbon/human/player, obj/item/gun/gun)
 	if(istype(gun, /obj/item/gun/projectile))
 		var/obj/item/gun/projectile/bullet_thrower = gun
 		if(bullet_thrower.magazine_type)

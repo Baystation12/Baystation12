@@ -1,12 +1,12 @@
 /obj/aura/personal_shield
 	name = "personal shield"
 
-/obj/aura/personal_shield/added_to(var/mob/living/L)
+/obj/aura/personal_shield/added_to(mob/living/L)
 	..()
 	playsound(user,'sound/weapons/flash.ogg',35,1)
 	to_chat(user,"<span class='notice'>You feel your body prickle as \the [src] comes online.</span>")
 
-/obj/aura/personal_shield/bullet_act(var/obj/item/projectile/P, var/def_zone)
+/obj/aura/personal_shield/bullet_act(obj/item/projectile/P, def_zone)
 	user.visible_message("<span class='warning'>\The [user]'s [src.name] flashes before \the [P] can hit them!</span>")
 	new /obj/effect/temporary(get_turf(src), 2 SECONDS,'icons/obj/machines/shielding.dmi',"shield_impact")
 	playsound(user,'sound/effects/basscannon.ogg',35,1)
@@ -25,7 +25,7 @@
 	if(shield)
 		shield.take_charge()
 
-/obj/aura/personal_shield/device/New(var/mob/living/user, var/user_shield)
+/obj/aura/personal_shield/device/New(mob/living/user, user_shield)
 	..()
 	shield = user_shield
 

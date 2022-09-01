@@ -24,7 +24,7 @@
 
 	amt_dam_fire = 10
 
-/spell/targeted/projectile/magic_missile/prox_cast(var/list/targets, atom/spell_holder)
+/spell/targeted/projectile/magic_missile/prox_cast(list/targets, atom/spell_holder)
 	spell_holder.visible_message("<span class='danger'>\The [spell_holder] pops with a flash!</span>")
 	playsound(src, 'sound/magic/mm_hit.ogg', 40)
 	for(var/mob/living/M in targets)

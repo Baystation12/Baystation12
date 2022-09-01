@@ -33,7 +33,7 @@
 		Paralyse(3)
 	. = ..()
 
-/mob/living/simple_animal/aquatic/handle_atmos(var/atmos_suitable = 1)
+/mob/living/simple_animal/aquatic/handle_atmos(atmos_suitable = 1)
 	. = ..(atmos_suitable = submerged())
 
 /datum/say_list/aquatic

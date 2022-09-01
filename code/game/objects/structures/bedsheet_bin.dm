@@ -138,14 +138,14 @@ LINEN BINS
 		hidden = I
 		to_chat(user, "<span class='notice'>You hide [I] among the sheets.</span>")
 
-/obj/structure/bedsheetbin/attack_hand(var/mob/user)
+/obj/structure/bedsheetbin/attack_hand(mob/user)
 	var/obj/item/bedsheet/B = remove_sheet()
 	if(B)
 		user.put_in_hands(B)
 		to_chat(user, SPAN_NOTICE("You take \a [B] out of \the [src]."))
 		add_fingerprint(user)
 
-/obj/structure/bedsheetbin/do_simple_ranged_interaction(var/mob/user)
+/obj/structure/bedsheetbin/do_simple_ranged_interaction(mob/user)
 	remove_sheet()
 	return TRUE
 

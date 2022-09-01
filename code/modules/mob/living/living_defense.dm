@@ -21,7 +21,7 @@
 	if(psi)
 		. += get_extension(psi, /datum/extension/armor)
 
-/mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
+/mob/living/bullet_act(obj/item/projectile/P, def_zone)
 	if (status_flags & GODMODE)
 		return PROJECTILE_FORCE_MISS
 
@@ -47,15 +47,15 @@
 		ai_holder.react_to_attack(P.firer)
 
 // For visuals and blood splatters etc
-/mob/living/proc/bullet_impact_visuals(var/obj/item/projectile/P, var/def_zone, var/damage)
+/mob/living/proc/bullet_impact_visuals(obj/item/projectile/P, def_zone, damage)
 	var/list/impact_sounds = LAZYACCESS(P.impact_sounds, get_bullet_impact_effect_type(def_zone))
 	if(length(impact_sounds))
 		playsound(src, pick(impact_sounds), 75)
 
-/mob/living/get_bullet_impact_effect_type(var/def_zone)
+/mob/living/get_bullet_impact_effect_type(def_zone)
 	return BULLET_IMPACT_MEAT
 
-/mob/living/proc/aura_check(var/type)
+/mob/living/proc/aura_check(type)
 	if(!auras)
 		return TRUE
 	. = TRUE
@@ -79,7 +79,7 @@
 
 
 //Handles the effects of "stun" weapons
-/mob/living/proc/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone, var/used_weapon=null)
+/mob/living/proc/stun_effect_act(stun_amount, agony_amount, def_zone, used_weapon=null)
 	flash_pain()
 
 	if (stun_amount)
@@ -93,7 +93,7 @@
 		apply_effect(agony_amount/10, EFFECT_STUTTER)
 		apply_effect(agony_amount/10, EFFECT_EYE_BLUR)
 
-/mob/living/proc/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, def_zone = null)
+/mob/living/proc/electrocute_act(shock_damage, obj/source, siemens_coeff = 1.0, def_zone = null)
 	  return FALSE //only carbon liveforms have this proc
 
 /mob/living/emp_act(severity)
@@ -104,11 +104,11 @@
 		O.emp_act(severity)
 	..()
 
-/mob/living/proc/resolve_item_attack(obj/item/I, mob/living/user, var/target_zone)
+/mob/living/proc/resolve_item_attack(obj/item/I, mob/living/user, target_zone)
 	return target_zone
 
 //Called when the mob is hit with an item in combat. Returns the blocked result
-/mob/living/proc/hit_with_weapon(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
+/mob/living/proc/hit_with_weapon(obj/item/I, mob/living/user, effective_force, hit_zone)
 	var/weapon_mention
 	if(I.attack_message_name())
 		weapon_mention = " with [I.attack_message_name()]"
@@ -124,7 +124,7 @@
 		ai_holder.react_to_attack(user)
 
 ///returns false if the effects failed to apply for some reason, true otherwise.
-/mob/living/proc/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
+/mob/living/proc/standard_weapon_hit_effects(obj/item/I, mob/living/user, effective_force, hit_zone)
 	if(!effective_force)
 		return FALSE
 
@@ -134,7 +134,7 @@
 	return apply_damage(effective_force, I.damtype, hit_zone, damage_flags, used_weapon=I, armor_pen=I.armor_penetration)
 
 //this proc handles being hit by a thrown atom
-/mob/living/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
+/mob/living/hitby(atom/movable/AM, datum/thrownthing/TT)
 
 	if(isliving(AM))
 		var/mob/living/M = AM
@@ -197,18 +197,18 @@
 					anchored = TRUE
 					pinned += O
 
-/mob/living/proc/embed(var/obj/O, var/def_zone=null, var/datum/wound/supplied_wound)
+/mob/living/proc/embed(obj/O, def_zone=null, datum/wound/supplied_wound)
 	O.forceMove(src)
 	embedded += O
 	verbs += /mob/proc/yank_out_object
 
 //This is called when the mob is thrown into a dense turf
-/mob/living/proc/turf_collision(var/turf/T, var/speed)
+/mob/living/proc/turf_collision(turf/T, speed)
 	visible_message(SPAN_DANGER("[src] slams into \the [T]"))
 	playsound(T, 'sound/effects/bangtaper.ogg', 50, 1, 1)//so it plays sounds on the turf instead, makes for awesome carps to hull collision and such
 	apply_damage(speed * 2, DAMAGE_BRUTE)
 
-/mob/living/proc/near_wall(var/direction,var/distance=1)
+/mob/living/proc/near_wall(direction,distance=1)
 	var/turf/T = get_step(get_turf(src),direction)
 	var/turf/last_turf = loc
 	var/i = 1
@@ -224,7 +224,7 @@
 
 // End BS12 momentum-transfer code.
 
-/mob/living/attack_generic(var/mob/user, var/damage, var/attack_message)
+/mob/living/attack_generic(mob/user, damage, attack_message)
 
 	if(!damage || !istype(user))
 		return

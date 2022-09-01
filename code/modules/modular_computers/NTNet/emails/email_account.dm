@@ -62,7 +62,7 @@
 	ntnet_global.add_log_with_ids_check("EMAIL LOG: [login] -> [recipient.login] title: [message.title].", intrusion = FALSE)
 	return TRUE
 
-/datum/computer_file/data/email_account/proc/receive_mail(var/datum/computer_file/data/email_message/received_message, var/relayed)
+/datum/computer_file/data/email_account/proc/receive_mail(datum/computer_file/data/email_message/received_message, relayed)
 	received_message.set_timestamp()
 	if(!ntnet_global.intrusion_detection_enabled)
 		inbox.Add(received_message)
@@ -91,7 +91,7 @@
 /datum/computer_file/data/email_account/service/broadcaster
 	login = EMAIL_BROADCAST
 
-/datum/computer_file/data/email_account/service/broadcaster/receive_mail(var/datum/computer_file/data/email_message/received_message, var/relayed)
+/datum/computer_file/data/email_account/service/broadcaster/receive_mail(datum/computer_file/data/email_message/received_message, relayed)
 	if(suspended || !istype(received_message) || relayed)
 		return FALSE
 	// Possibly exploitable for user spamming so keep admins informed.

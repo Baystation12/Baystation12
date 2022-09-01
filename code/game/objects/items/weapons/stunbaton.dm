@@ -42,7 +42,7 @@
 		status = 0
 		update_icon()
 
-/obj/item/melee/baton/proc/deductcharge(var/chrgdeductamt)
+/obj/item/melee/baton/proc/deductcharge(chrgdeductamt)
 	if(bcell)
 		if(bcell.checked_use(chrgdeductamt))
 			update_status()
@@ -102,13 +102,13 @@
 	set_status(!status, user)
 	add_fingerprint(user)
 
-/obj/item/melee/baton/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
+/obj/item/melee/baton/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	if(istype(hit_atom,/mob/living))
 		apply_hit_effect(hit_atom, hit_zone = ran_zone(TT.target_zone, 30))//more likely to hit the zone you target!
 	else
 		..()
 
-/obj/item/melee/baton/proc/set_status(var/newstatus, mob/user)
+/obj/item/melee/baton/proc/set_status(newstatus, mob/user)
 	if(bcell && bcell.charge >= hitcost)
 		if(status != newstatus)
 			change_status(newstatus)
@@ -124,7 +124,7 @@
 // Proc to -actually- change the status, and update the icons as well.
 // Also exists to ease "helpful" admin-abuse in case an bug prevents attack_self
 // to occur would appear. Hopefully it wasn't necessary.
-/obj/item/melee/baton/proc/change_status(var/s)
+/obj/item/melee/baton/proc/change_status(s)
 	if (status != s)
 		status = s
 		update_icon()
@@ -137,7 +137,7 @@
 		return
 	return ..()
 
-/obj/item/melee/baton/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
+/obj/item/melee/baton/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	if(isrobot(target))
 		return ..()
 
@@ -215,7 +215,7 @@
 /obj/item/melee/baton/robot/attackby(obj/item/W, mob/user)
 	return
 
-/obj/item/melee/baton/robot/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
+/obj/item/melee/baton/robot/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	update_cell(isrobot(user) ? user : null) // update the status before we apply the effects
 	return ..()
 

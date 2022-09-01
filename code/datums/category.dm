@@ -34,7 +34,7 @@
 	var/list/datum/category_item/items_by_name  // Associative list of initialized items, by name
 	var/datum/category_collection/collection    // The collection this group belongs to
 
-/datum/category_group/New(var/datum/category_collection/cc)
+/datum/category_group/New(datum/category_collection/cc)
 	..()
 	collection = cc
 	items = new()
@@ -69,7 +69,7 @@
 	var/name = ""
 	var/datum/category_group/category		// The group this item belongs to
 
-/datum/category_item/New(var/datum/category_group/cg)
+/datum/category_item/New(datum/category_group/cg)
 	..()
 	category = cg
 

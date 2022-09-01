@@ -26,12 +26,12 @@
 	. = ..()
 	. += "Use in hand to open the interface."
 
-/obj/item/storage/slide_projector/remove_from_storage(obj/item/W, atom/new_location, var/NoUpdate = 0)
+/obj/item/storage/slide_projector/remove_from_storage(obj/item/W, atom/new_location, NoUpdate = 0)
 	. = ..()
 	if(. && W == current_slide)
 		set_slide(length(contents) ? contents[1] : null)
 
-/obj/item/storage/slide_projector/handle_item_insertion(var/obj/item/W, var/prevent_warning = 0, var/NoUpdate = 0)
+/obj/item/storage/slide_projector/handle_item_insertion(obj/item/W, prevent_warning = 0, NoUpdate = 0)
 	. = ..()
 	if(. && !current_slide)
 		set_slide(W)
@@ -39,7 +39,7 @@
 /obj/item/storage/slide_projector/on_item_pre_deletion(obj/item/W)
 	if(W == current_slide)
 		set_slide(null)
-	
+
 /obj/item/storage/slide_projector/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	if(!current_slide)
 		to_chat(user, SPAN_WARNING("\The [src] does not have a slide loaded."))
@@ -78,7 +78,7 @@
 	GLOB.moved_event.unregister(src, src, .proc/check_projections)
 	set_light(0)
 	update_icon()
-	
+
 /obj/item/storage/slide_projector/proc/project_at(turf/target)
 	stop_projecting()
 	if(!current_slide)
@@ -99,13 +99,13 @@
 /obj/item/storage/slide_projector/attack_self(mob/user)
 	interact(user)
 
-/obj/item/storage/slide_projector/interact(mob/user)	
+/obj/item/storage/slide_projector/interact(mob/user)
 	var/data = list()
 	if(projection)
 		data += "<a href='?src=\ref[src];stop_projector=1'>Disable projector</a>"
 	else
 		data += "Projector inactive"
-	
+
 	var/table = list("<table><tr><th>#</th><th>SLIDE</th><th>SHOW</th></tr>")
 	var/i = 1
 	for(var/obj/item/I in contents)
@@ -122,7 +122,7 @@
 	popup.set_content(jointext(data, "<br>"))
 	popup.open()
 
-/obj/item/storage/slide_projector/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
+/obj/item/storage/slide_projector/OnTopic(mob/user, href_list, datum/topic_state/state)
 	. = ..()
 	if(.)
 		return
@@ -138,7 +138,7 @@
 			return TOPIC_HANDLED
 		set_slide(contents[index])
 		. = TOPIC_REFRESH
-	
+
 	if(. == TOPIC_REFRESH)
 		interact(user)
 

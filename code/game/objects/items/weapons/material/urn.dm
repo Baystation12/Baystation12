@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_SMALL
 	default_material = MATERIAL_WOOD
 
-/obj/item/material/urn/afterattack(var/obj/A, var/mob/user, var/proximity)
+/obj/item/material/urn/afterattack(obj/A, mob/user, proximity)
 	if(!istype(A, /obj/effect/decal/cleanable/ash))
 		return ..()
 	else if(proximity)

@@ -38,7 +38,7 @@
 	..()
 	return
 
-/obj/machinery/computer/message_monitor/emag_act(var/remaining_charges, var/mob/user)
+/obj/machinery/computer/message_monitor/emag_act(remaining_charges, mob/user)
 	// Will create sparks and print out the console's password. You will then have to wait a while for the console to be back online.
 	// It'll take more time if there's more characters in the password..
 	if(!emag && operable())
@@ -76,7 +76,7 @@
 	interact(user)
 	return TRUE
 
-/obj/machinery/computer/message_monitor/interact(var/mob/living/user)
+/obj/machinery/computer/message_monitor/interact(mob/living/user)
 	//If the computer is being hacked or is emagged, display the reboot message.
 	if(hacking || emag)
 		message = rebootmsg

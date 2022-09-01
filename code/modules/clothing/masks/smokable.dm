@@ -78,7 +78,7 @@
 		M.update_inv_l_hand(0)
 		M.update_inv_r_hand(1)
 
-/obj/item/clothing/mask/smokable/water_act(var/depth)
+/obj/item/clothing/mask/smokable/water_act(depth)
 	..()
 	if(!waterproof && lit)
 		if(submerged(depth))
@@ -89,7 +89,7 @@
 		var/mob/living/carbon/human/C = loc
 		return locate(/datum/reagent/water) in C.touching.reagent_list
 
-/obj/item/clothing/mask/smokable/proc/light(var/flavor_text = "[usr] lights the [name].")
+/obj/item/clothing/mask/smokable/proc/light(flavor_text = "[usr] lights the [name].")
 	if(QDELETED(src))
 		return
 	if(!lit)
@@ -121,14 +121,14 @@
 			T.visible_message(flavor_text)
 		START_PROCESSING(SSobj, src)
 
-/obj/item/clothing/mask/smokable/proc/extinguish(var/mob/user, var/no_message)
+/obj/item/clothing/mask/smokable/proc/extinguish(mob/user, no_message)
 	lit = 0
 	damtype = DAMAGE_BRUTE
 	STOP_PROCESSING(SSobj, src)
 	set_light(0)
 	update_icon()
 
-/obj/item/clothing/mask/smokable/attackby(var/obj/item/W, var/mob/user)
+/obj/item/clothing/mask/smokable/attackby(obj/item/W, mob/user)
 	..()
 	if(isflamesource(W) || is_hot(W))
 		var/text = matchmes
@@ -149,7 +149,7 @@
 		text = replacetext(text, "FLAME", "[W.name]")
 		light(text)
 
-/obj/item/clothing/mask/smokable/attack(var/mob/living/M, var/mob/living/user, def_zone)
+/obj/item/clothing/mask/smokable/attack(mob/living/M, mob/living/user, def_zone)
 	if(istype(M) && M.on_fire)
 		user.do_attack_animation(M)
 		light("<span class='notice'>\The [user] coldly lights the \the [src] with the burning body of \the [M].</span>")
@@ -182,7 +182,7 @@
 	for(var/R in filling)
 		reagents.add_reagent(R, filling[R])
 
-/obj/item/clothing/mask/smokable/cigarette/light(var/flavor_text = "[usr] lights the [name].")
+/obj/item/clothing/mask/smokable/cigarette/light(flavor_text = "[usr] lights the [name].")
 	..()
 	if(is_processing)
 		set_scent_by_reagents(src)
@@ -199,7 +199,7 @@
 	if(lit)
 		overlays += overlay_image(icon, "cigarello-on", flags=RESET_COLOR)
 
-/obj/item/clothing/mask/smokable/extinguish(var/mob/user, var/no_message)
+/obj/item/clothing/mask/smokable/extinguish(mob/user, no_message)
 	..()
 	remove_extension(src, /datum/extension/scent)
 	if (type_butt)
@@ -304,7 +304,7 @@
 	icon_state = "woodbutt"
 	matter = list(MATERIAL_WOOD = 1)
 
-/obj/item/clothing/mask/smokable/cigarette/attackby(var/obj/item/W, var/mob/user)
+/obj/item/clothing/mask/smokable/cigarette/attackby(obj/item/W, mob/user)
 	..()
 
 	if(istype(W, /obj/item/melee/energy/sword))
@@ -326,7 +326,7 @@
 		return 1
 	return ..()
 
-/obj/item/clothing/mask/smokable/cigarette/afterattack(obj/item/reagent_containers/glass/glass, var/mob/user, proximity)
+/obj/item/clothing/mask/smokable/cigarette/afterattack(obj/item/reagent_containers/glass/glass, mob/user, proximity)
 	..()
 	if(!proximity)
 		return
@@ -343,7 +343,7 @@
 			else
 				to_chat(user, "<span class='notice'>[src] is full.</span>")
 
-/obj/item/clothing/mask/smokable/cigarette/attack_self(var/mob/user)
+/obj/item/clothing/mask/smokable/cigarette/attack_self(mob/user)
 	if(lit == 1)
 		user.visible_message("<span class='notice'>[user] puts out the lit [src].</span>")
 		extinguish(no_message = 1)
@@ -418,7 +418,7 @@
 	desc = "A manky old cigar butt."
 	icon_state = "cigarbutt"
 
-/obj/item/clothing/mask/smokable/cigarette/cigar/attackby(var/obj/item/W, var/mob/user)
+/obj/item/clothing/mask/smokable/cigarette/cigar/attackby(obj/item/W, mob/user)
 	..()
 
 	user.update_inv_wear_mask(0)
@@ -466,7 +466,7 @@
 	..()
 	name = "empty [initial(name)]"
 
-/obj/item/clothing/mask/smokable/pipe/light(var/flavor_text = "[usr] lights the [name].")
+/obj/item/clothing/mask/smokable/pipe/light(flavor_text = "[usr] lights the [name].")
 	if(!lit && smoketime)
 		if(submerged())
 			to_chat(usr, "<span class='warning'>You cannot light \the [src] underwater.</span>")
@@ -485,7 +485,7 @@
 			M.update_inv_r_hand(1)
 		set_scent_by_reagents(src)
 
-/obj/item/clothing/mask/smokable/pipe/extinguish(var/mob/user, var/no_message)
+/obj/item/clothing/mask/smokable/pipe/extinguish(mob/user, no_message)
 	..()
 	new /obj/effect/decal/cleanable/ash(get_turf(src))
 	if(ismob(loc))
@@ -494,7 +494,7 @@
 			to_chat(M, "<span class='notice'>Your [name] goes out, and you empty the ash.</span>")
 	remove_extension(src, /datum/extension/scent)
 
-/obj/item/clothing/mask/smokable/pipe/attack_self(var/mob/user)
+/obj/item/clothing/mask/smokable/pipe/attack_self(mob/user)
 	if(lit == 1)
 		user.visible_message("<span class='notice'>[user] puts out [src].</span>", "<span class='notice'>You put out [src].</span>")
 		lit = 0
@@ -509,7 +509,7 @@
 		reagents.clear_reagents()
 		SetName("empty [initial(name)]")
 
-/obj/item/clothing/mask/smokable/pipe/attackby(var/obj/item/W, var/mob/user)
+/obj/item/clothing/mask/smokable/pipe/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/melee/energy/sword))
 		return
 

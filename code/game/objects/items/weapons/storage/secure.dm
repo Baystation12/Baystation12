@@ -111,7 +111,7 @@
 		to_chat(user, text("The service panel is [src.open ? "open" : "closed"]."))
 
 
-/obj/item/storage/secure/emag_act(var/remaining_charges, var/mob/user, var/feedback)
+/obj/item/storage/secure/emag_act(remaining_charges, mob/user, feedback)
 	if (emagged)
 		return
 	emagged = TRUE

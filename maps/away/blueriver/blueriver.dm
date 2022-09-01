@@ -200,5 +200,5 @@
 	visible_message(SPAN_DANGER("\The [src] crumbles!"))
 	qdel(src)
 
-/obj/structure/deity/bullet_act(var/obj/item/projectile/P)
+/obj/structure/deity/bullet_act(obj/item/projectile/P)
 	damage_health(P.get_structure_damage(), P.damage_type)

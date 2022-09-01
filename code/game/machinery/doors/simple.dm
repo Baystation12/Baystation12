@@ -17,7 +17,7 @@
 /obj/machinery/door/unpowered/simple/proc/TemperatureAct(temperature)
 	take_damage(100*material.combustion_effect(get_turf(src),temperature, 0.3))
 
-/obj/machinery/door/unpowered/simple/New(var/newloc, var/material_name, var/locked)
+/obj/machinery/door/unpowered/simple/New(newloc, material_name, locked)
 	..()
 	if(!material_name)
 		material_name = MATERIAL_STEEL
@@ -59,7 +59,7 @@
 /obj/machinery/door/unpowered/simple/get_material_name()
 	return material.name
 
-/obj/machinery/door/unpowered/simple/bullet_act(var/obj/item/projectile/Proj)
+/obj/machinery/door/unpowered/simple/bullet_act(obj/item/projectile/Proj)
 	var/damage = Proj.get_structure_damage()
 	if(damage)
 		//cap projectile damage so that there's still a minimum number of hits required to break the door
@@ -81,10 +81,10 @@
 			flick("[icon_base]closing", src)
 	return
 
-/obj/machinery/door/unpowered/simple/inoperable(var/additional_flags = 0)
+/obj/machinery/door/unpowered/simple/inoperable(additional_flags = 0)
 	return (stat & (BROKEN|additional_flags))
 
-/obj/machinery/door/unpowered/simple/close(var/forced = 0)
+/obj/machinery/door/unpowered/simple/close(forced = 0)
 	if(!can_close(forced))
 		return
 
@@ -98,13 +98,13 @@
 	playsound(src.loc, material.dooropen_noise, 100, 1)
 	..()
 
-/obj/machinery/door/unpowered/simple/open(var/forced = 0)
+/obj/machinery/door/unpowered/simple/open(forced = 0)
 	if(!can_open(forced))
 		return
 	playsound(src.loc, material.dooropen_noise, 100, 1)
 	..()
 
-/obj/machinery/door/unpowered/simple/set_broken(var/new_state, var/cause = MACHINE_BROKEN_GENERIC)
+/obj/machinery/door/unpowered/simple/set_broken(new_state, cause = MACHINE_BROKEN_GENERIC)
 	..()
 	if(new_state)
 		deconstruct(null)
@@ -204,50 +204,50 @@
 	QDEL_NULL(lock)
 	return ..()
 
-/obj/machinery/door/unpowered/simple/iron/New(var/newloc,var/material_name,var/complexity)
+/obj/machinery/door/unpowered/simple/iron/New(newloc,material_name,complexity)
 	..(newloc, MATERIAL_IRON, complexity)
 
-/obj/machinery/door/unpowered/simple/silver/New(var/newloc,var/material_name,var/complexity)
+/obj/machinery/door/unpowered/simple/silver/New(newloc,material_name,complexity)
 	..(newloc, MATERIAL_SILVER, complexity)
 
-/obj/machinery/door/unpowered/simple/gold/New(var/newloc,var/material_name,var/complexity)
+/obj/machinery/door/unpowered/simple/gold/New(newloc,material_name,complexity)
 	..(newloc, MATERIAL_GOLD, complexity)
 
-/obj/machinery/door/unpowered/simple/uranium/New(var/newloc,var/material_name,var/complexity)
+/obj/machinery/door/unpowered/simple/uranium/New(newloc,material_name,complexity)
 	..(newloc, MATERIAL_URANIUM, complexity)
 
-/obj/machinery/door/unpowered/simple/sandstone/New(var/newloc,var/material_name,var/complexity)
+/obj/machinery/door/unpowered/simple/sandstone/New(newloc,material_name,complexity)
 	..(newloc, MATERIAL_SANDSTONE, complexity)
 
-/obj/machinery/door/unpowered/simple/diamond/New(var/newloc,var/material_name,var/complexity)
+/obj/machinery/door/unpowered/simple/diamond/New(newloc,material_name,complexity)
 	..(newloc, MATERIAL_DIAMOND, complexity)
 
-/obj/machinery/door/unpowered/simple/wood/New(var/newloc,var/material_name,var/complexity)
+/obj/machinery/door/unpowered/simple/wood/New(newloc,material_name,complexity)
 	..(newloc, MATERIAL_WOOD, complexity)
 
-/obj/machinery/door/unpowered/simple/mahogany/New(var/newloc,var/material_name,var/complexity)
+/obj/machinery/door/unpowered/simple/mahogany/New(newloc,material_name,complexity)
 	..(newloc, MATERIAL_MAHOGANY, complexity)
 
-/obj/machinery/door/unpowered/simple/maple/New(var/newloc,var/material_name,var/complexity)
+/obj/machinery/door/unpowered/simple/maple/New(newloc,material_name,complexity)
 	..(newloc, MATERIAL_MAPLE, complexity)
 
-/obj/machinery/door/unpowered/simple/ebony/New(var/newloc,var/material_name,var/complexity)
+/obj/machinery/door/unpowered/simple/ebony/New(newloc,material_name,complexity)
 	..(newloc, MATERIAL_EBONY, complexity)
 
-/obj/machinery/door/unpowered/simple/walnut/New(var/newloc,var/material_name,var/complexity)
+/obj/machinery/door/unpowered/simple/walnut/New(newloc,material_name,complexity)
 	..(newloc, MATERIAL_WALNUT, complexity)
 
-/obj/machinery/door/unpowered/simple/plastic/New(var/newloc,var/material_name,var/complexity)
+/obj/machinery/door/unpowered/simple/plastic/New(newloc,material_name,complexity)
 	..(newloc, MATERIAL_PLASTIC, complexity)
 
 /obj/machinery/door/unpowered/simple/plastic/open
 	density = FALSE
 
-/obj/machinery/door/unpowered/simple/glass/New(var/newloc,var/material_name,var/complexity)
+/obj/machinery/door/unpowered/simple/glass/New(newloc,material_name,complexity)
 	..(newloc, MATERIAL_GLASS, complexity)
 
-/obj/machinery/door/unpowered/simple/cult/New(var/newloc,var/material_name,var/complexity)
+/obj/machinery/door/unpowered/simple/cult/New(newloc,material_name,complexity)
 	..(newloc, MATERIAL_CULT, complexity)
 
-/obj/machinery/door/unpowered/simple/supermatter/New(var/newloc,var/material_name,var/complexity)
+/obj/machinery/door/unpowered/simple/supermatter/New(newloc,material_name,complexity)
 	..(newloc, MATERIAL_SUPERMATTER, complexity)

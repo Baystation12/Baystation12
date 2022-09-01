@@ -28,21 +28,21 @@
 		if(RANDOM_CHEM_EFFECT_FLOAT)
 			return first_value * first_ratio + second_value * (1 - first_ratio)
 
-/decl/random_chem_effect/proc/prototype_process(var/datum/reagent/random/prototype, temperature)
+/decl/random_chem_effect/proc/prototype_process(datum/reagent/random/prototype, temperature)
 	prototype.data[type] = get_random_value()
 
-/decl/random_chem_effect/proc/on_property_recompute(var/datum/reagent/random/reagent, var/value)
+/decl/random_chem_effect/proc/on_property_recompute(datum/reagent/random/reagent, value)
 
-/decl/random_chem_effect/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/value)
+/decl/random_chem_effect/proc/affect_blood(mob/living/carbon/M, alien, removed, value)
 
-/decl/random_chem_effect/proc/distillation_act(var/datum/reagent/random/reagent, var/datum/reagents/reagents)
+/decl/random_chem_effect/proc/distillation_act(datum/reagent/random/reagent, datum/reagents/reagents)
 
-/decl/random_chem_effect/proc/cooling_act(var/datum/reagent/random/reagent, var/datum/reagents/reagents)
+/decl/random_chem_effect/proc/cooling_act(datum/reagent/random/reagent, datum/reagents/reagents)
 
 /decl/random_chem_effect/proc/get_interactions()
 
 // This is referring to monetary value.
-/decl/random_chem_effect/proc/get_value(var/value)
+/decl/random_chem_effect/proc/get_value(value)
 	switch(beneficial)
 		if(1)
 			return cost * (value - minimum)/(maximum - minimum)
@@ -58,7 +58,7 @@
 	minimum = 100
 	mode = RANDOM_CHEM_EFFECT_INT
 
-/decl/random_chem_effect/general_properties/name/on_property_recompute(var/datum/reagent/random/reagent, var/value)
+/decl/random_chem_effect/general_properties/name/on_property_recompute(datum/reagent/random/reagent, value)
 	reagent.name = "[initial(reagent.name)]-[value]"
 
 /decl/random_chem_effect/general_properties/color_r
@@ -73,7 +73,7 @@
 	maximum = 255
 	mode = RANDOM_CHEM_EFFECT_INT
 
-/decl/random_chem_effect/general_properties/color_r/on_property_recompute(var/datum/reagent/random/reagent, var/value)
+/decl/random_chem_effect/general_properties/color_r/on_property_recompute(datum/reagent/random/reagent, value)
 	reagent.color = rgb(\
 		reagent.data[/decl/random_chem_effect/general_properties/color_r],\
 		reagent.data[/decl/random_chem_effect/general_properties/color_r],\
@@ -85,7 +85,7 @@
 	maximum = REAGENTS_OVERDOSE * 2
 	mode = RANDOM_CHEM_EFFECT_FLOAT
 
-/decl/random_chem_effect/general_properties/overdose/on_property_recompute(var/datum/reagent/random/reagent, var/value)
+/decl/random_chem_effect/general_properties/overdose/on_property_recompute(datum/reagent/random/reagent, value)
 	reagent.overdose = value
 
 /decl/random_chem_effect/general_properties/metabolism
@@ -93,7 +93,7 @@
 	maximum = REM * 3
 	mode = RANDOM_CHEM_EFFECT_FLOAT
 
-/decl/random_chem_effect/general_properties/metabolism/on_property_recompute(var/datum/reagent/random/reagent, var/value)
+/decl/random_chem_effect/general_properties/metabolism/on_property_recompute(datum/reagent/random/reagent, value)
 	reagent.metabolism = value
 
 /decl/random_chem_effect/general_properties/chilling_point
@@ -107,10 +107,10 @@
 	var/min = max(min(generic_minimum, max - 20), minimum) // Use the generic min as min unless that's above the max - margin
 	return rand() * (max - min) + min
 
-/decl/random_chem_effect/general_properties/chilling_point/prototype_process(var/datum/reagent/random/prototype, temperature = T20C)
+/decl/random_chem_effect/general_properties/chilling_point/prototype_process(datum/reagent/random/prototype, temperature = T20C)
 	prototype.data[type] = get_random_value(temperature)
 
-/decl/random_chem_effect/general_properties/chilling_point/on_property_recompute(var/datum/reagent/random/reagent, var/value)
+/decl/random_chem_effect/general_properties/chilling_point/on_property_recompute(datum/reagent/random/reagent, value)
 	reagent.chilling_point = value
 
 /decl/random_chem_effect/general_properties/heating_point
@@ -124,10 +124,10 @@
 	var/max = min(max(generic_maximum, min + 20), maximum)
 	return rand() * (max - min) + min
 
-/decl/random_chem_effect/general_properties/heating_point/prototype_process(var/datum/reagent/random/prototype, temperature = T20C)
+/decl/random_chem_effect/general_properties/heating_point/prototype_process(datum/reagent/random/prototype, temperature = T20C)
 	prototype.data[type] = get_random_value(temperature)
 
-/decl/random_chem_effect/general_properties/heating_point/on_property_recompute(var/datum/reagent/random/reagent, var/value)
+/decl/random_chem_effect/general_properties/heating_point/on_property_recompute(datum/reagent/random/reagent, value)
 	reagent.heating_point = value
 
 // Only some random properties are picked.
@@ -139,7 +139,7 @@
 	var/list/reaction_rate_cache
 	var/number_of_reaction_modifiers = 3
 
-/decl/random_chem_effect/random_properties/proc/set_caches(var/datum/reagent/random/prototype, var/list/whitelist)
+/decl/random_chem_effect/random_properties/proc/set_caches(datum/reagent/random/prototype, list/whitelist)
 	LAZYSET(reaction_rate_cache, prototype.type, 1.5 * rand() + 0.5)
 	for(var/i = 1, i <= number_of_reaction_modifiers, i++)
 		if(length(whitelist))
@@ -149,19 +149,19 @@
 			LAZYINITLIST(cooling_enhancer_cache)
 			LAZYADD(cooling_enhancer_cache[prototype.type], pick_n_take(whitelist))
 
-/decl/random_chem_effect/random_properties/distillation_act(var/datum/reagent/random/reagent, var/datum/reagents/reagents, var/value)
+/decl/random_chem_effect/random_properties/distillation_act(datum/reagent/random/reagent, datum/reagents/reagents, value)
 	var/list/inhibitors = distillation_inhibitor_cache[reagent.type]
 	if(reagents.has_any_reagent(inhibitors))
 		return
 	return purify(reagent, reagents, value)
 
-/decl/random_chem_effect/random_properties/cooling_act(var/datum/reagent/random/reagent, var/datum/reagents/reagents, var/value)
+/decl/random_chem_effect/random_properties/cooling_act(datum/reagent/random/reagent, datum/reagents/reagents, value)
 	var/list/enhancers = cooling_enhancer_cache[reagent.type]
 	if(!reagents.has_any_reagent(enhancers))
 		return
 	return purify(reagent, reagents, value)
 
-/decl/random_chem_effect/random_properties/proc/purify(var/datum/reagent/random/reagent, var/datum/reagents/reagents, var/value)
+/decl/random_chem_effect/random_properties/proc/purify(datum/reagent/random/reagent, datum/reagents/reagents, value)
 	var/target = reagents.has_reagent(/datum/reagent/toxin/phoron) ? minimum : maximum
 	if(target == value)
 		return
@@ -185,13 +185,13 @@
 			new_val = round(round_dir * new_val / resolution) * round_dir * resolution // makes this finish in finite time to save processing power.
 			return new_val
 
-/decl/random_chem_effect/random_properties/cooling_act(var/datum/reagent/random/reagent, var/datum/reagents/reagents)
+/decl/random_chem_effect/random_properties/cooling_act(datum/reagent/random/reagent, datum/reagents/reagents)
 
-/decl/random_chem_effect/random_properties/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/value)
+/decl/random_chem_effect/random_properties/affect_blood(mob/living/carbon/M, alien, removed, value)
 	if(chem_effect_define && alien != IS_DIONA) // screw diona
 		M.add_chemical_effect(chem_effect_define, value)
 
-/decl/random_chem_effect/random_properties/get_interactions(var/datum/reagent/random/reagent, var/sci_skill, var/chem_skill)
+/decl/random_chem_effect/random_properties/get_interactions(datum/reagent/random/reagent, sci_skill, chem_skill)
 	if(chem_skill < SKILL_EXPERT)
 		return
 	. = list("<br>")
@@ -346,7 +346,7 @@
 	mode = RANDOM_CHEM_EFFECT_INT
 	desc = "acute toxicity"
 
-/decl/random_chem_effect/random_properties/heal_brute/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/value)
+/decl/random_chem_effect/random_properties/heal_brute/affect_blood(mob/living/carbon/M, alien, removed, value)
 	if(alien != IS_DIONA)
 		M.adjustToxLoss(value * removed)
 
@@ -355,7 +355,7 @@
 	maximum = 10
 	desc = "tissue repair"
 
-/decl/random_chem_effect/random_properties/heal_brute/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/value)
+/decl/random_chem_effect/random_properties/heal_brute/affect_blood(mob/living/carbon/M, alien, removed, value)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(removed * value, 0)
 
@@ -364,7 +364,7 @@
 	maximum = 10
 	desc = "burn repair"
 
-/decl/random_chem_effect/random_properties/heal_brute/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/value)
+/decl/random_chem_effect/random_properties/heal_brute/affect_blood(mob/living/carbon/M, alien, removed, value)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(0, removed * value)
 

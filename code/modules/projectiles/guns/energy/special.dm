@@ -174,7 +174,7 @@
 	QDEL_NULL(spark_system)
 	return ..()
 
-/obj/item/gun/energy/plasmacutter/proc/slice(var/mob/M = null)
+/obj/item/gun/energy/plasmacutter/proc/slice(mob/M = null)
 	if(!safety())
 		if(M)
 			M.welding_eyecheck()//Welding tool eye check

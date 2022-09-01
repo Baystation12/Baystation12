@@ -1,16 +1,16 @@
-/proc/cmp_appearance_data(var/datum/appearance_data/a, var/datum/appearance_data/b)
+/proc/cmp_appearance_data(datum/appearance_data/a, datum/appearance_data/b)
 	return b.priority - a.priority
 
-/proc/cmp_camera_ctag_asc(var/obj/machinery/camera/a, var/obj/machinery/camera/b)
+/proc/cmp_camera_ctag_asc(obj/machinery/camera/a, obj/machinery/camera/b)
 	return sorttext(b.c_tag, a.c_tag)
 
-/proc/cmp_camera_ctag_dsc(var/obj/machinery/camera/a, var/obj/machinery/camera/b)
+/proc/cmp_camera_ctag_dsc(obj/machinery/camera/a, obj/machinery/camera/b)
 	return sorttext(a.c_tag, b.c_tag)
 
-/proc/cmp_crew_sensor_modifier(var/crew_sensor_modifier/a, var/crew_sensor_modifier/b)
+/proc/cmp_crew_sensor_modifier(crew_sensor_modifier/a, crew_sensor_modifier/b)
 	return b.priority - a.priority
 
-/proc/cmp_follow_holder(var/datum/follow_holder/a, var/datum/follow_holder/b)
+/proc/cmp_follow_holder(datum/follow_holder/a, datum/follow_holder/b)
 	if(a.sort_order == b.sort_order)
 		return sorttext(b.get_name(), a.get_name())
 
@@ -70,16 +70,16 @@
 /proc/cmp_power_component_priority(obj/item/stock_parts/power/A, obj/item/stock_parts/power/B)
 	return B.priority - A.priority
 
-/proc/cmp_fusion_reaction_asc(var/decl/fusion_reaction/A, var/decl/fusion_reaction/B)
+/proc/cmp_fusion_reaction_asc(decl/fusion_reaction/A, decl/fusion_reaction/B)
 	return A.priority - B.priority
 
-/proc/cmp_fusion_reaction_des(var/decl/fusion_reaction/A, var/decl/fusion_reaction/B)
+/proc/cmp_fusion_reaction_des(decl/fusion_reaction/A, decl/fusion_reaction/B)
 	return B.priority - A.priority
 
-/proc/cmp_program(var/datum/computer_file/program/A, var/datum/computer_file/program/B)
+/proc/cmp_program(datum/computer_file/program/A, datum/computer_file/program/B)
 	return cmp_text_asc(A.filedesc, B.filedesc)
 
-/proc/cmp_emails_asc(var/datum/computer_file/data/email_account/A, var/datum/computer_file/data/email_account/B)
+/proc/cmp_emails_asc(datum/computer_file/data/email_account/A, datum/computer_file/data/email_account/B)
 	return cmp_text_asc(A.login,B.login)
 
 /proc/cmp_planelayer(atom/A, atom/B)

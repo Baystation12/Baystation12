@@ -8,7 +8,7 @@ var/global/repository/mob/mob_repository = new()
 	mobs_ = list()
 
 // A lite mob is unique per ckey and mob real name/ref (ref conflicts possible.. but oh well)
-/repository/mob/proc/get_lite_mob(var/mob/M)
+/repository/mob/proc/get_lite_mob(mob/M)
 	. = mobs_[mob2unique(M)]
 	if(!.)
 		. = new/datum/mob_lite(M)
@@ -19,10 +19,10 @@ var/global/repository/mob/mob_repository = new()
 	var/ref
 	var/datum/client_lite/client
 
-/datum/mob_lite/New(var/mob/M)
+/datum/mob_lite/New(mob/M)
 	name = M ? (M.real_name ? M.real_name : M.name) : name
 	ref = any2ref(M)
 	client = client_repository.get_lite_client(M)
 
-/datum/mob_lite/proc/key_name(var/pm_link = TRUE, var/check_if_offline = TRUE)
+/datum/mob_lite/proc/key_name(pm_link = TRUE, check_if_offline = TRUE)
 	return client.key_name(pm_link, check_if_offline)

@@ -182,7 +182,7 @@ var/global/list/rad_collectors = list()
 	else
 		update_icon()
 
-/obj/machinery/power/rad_collector/proc/receive_pulse(var/pulse_strength)
+/obj/machinery/power/rad_collector/proc/receive_pulse(pulse_strength)
 	if(P && active)
 		var/power_produced = 0
 		power_produced = min(100*P.air_contents.gas[GAS_PHORON]*pulse_strength*pulse_coeff,max_power)

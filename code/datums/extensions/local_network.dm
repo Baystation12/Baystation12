@@ -9,7 +9,7 @@
 			lan.remove_device(holder)
 	. = ..()
 
-/datum/extension/local_network_member/proc/set_tag(var/mob/user, var/new_ident)
+/datum/extension/local_network_member/proc/set_tag(mob/user, new_ident)
 	if(id_tag == new_ident)
 		to_chat(user, SPAN_WARNING("\The [holder] is already part of the [new_ident] local network."))
 		return FALSE
@@ -49,14 +49,14 @@
 		return holder.nano_host()
 	. = ..()
 
-/datum/extension/local_network_member/proc/get_new_tag(var/mob/user)
+/datum/extension/local_network_member/proc/get_new_tag(mob/user)
 	var/new_ident = input(user, "Enter a new ident tag.", "[holder]", id_tag) as null|text
 	if(new_ident && holder && user.Adjacent(holder) && CanPhysicallyInteract(user))
 		return set_tag(user, new_ident)
 
 //
 
-/datum/extension/local_network_member/multilevel/set_tag(var/mob/user, var/new_ident)
+/datum/extension/local_network_member/multilevel/set_tag(mob/user, new_ident)
 	if(id_tag == new_ident)
 		to_chat(user, SPAN_WARNING("\The [holder] is already part of the [new_ident] local network."))
 		return FALSE

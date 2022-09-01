@@ -203,7 +203,7 @@
 	else if(!href_list["late_join"])
 		new_player_panel()
 
-/mob/new_player/proc/AttemptLateSpawn(var/datum/job/job, var/spawning_at)
+/mob/new_player/proc/AttemptLateSpawn(datum/job/job, spawning_at)
 
 	if(src != usr)
 		return 0
@@ -281,7 +281,7 @@
 	qdel(src)
 
 
-/mob/new_player/proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
+/mob/new_player/proc/AnnounceCyborg(mob/living/character, rank, join_message)
 	if (GAME_STATE == RUNLEVEL_GAME)
 		if(character.mind.role_alt_title)
 			rank = character.mind.role_alt_title
@@ -357,7 +357,7 @@
 	dat = header + dat
 	show_browser(src, jointext(dat, null), "window=latechoices;size=450x640;can_close=1")
 
-/mob/new_player/proc/create_character(var/turf/spawn_turf)
+/mob/new_player/proc/create_character(turf/spawn_turf)
 	spawning = 1
 	close_spawn_windows()
 
@@ -430,7 +430,7 @@
 	close_browser(src, "window=latechoices") //closes late choices window
 	panel.close()
 
-/mob/new_player/proc/check_species_allowed(datum/species/S, var/show_alert=1)
+/mob/new_player/proc/check_species_allowed(datum/species/S, show_alert=1)
 	if(!S.is_available_for_join() && !has_admin_rights())
 		if(show_alert)
 			to_chat(src, alert("Your current species, [client.prefs.species], is not available for play."))
@@ -458,10 +458,10 @@
 /mob/new_player/is_ready()
 	return ready && ..()
 
-/mob/new_player/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
+/mob/new_player/hear_say(message, verb = "says", datum/language/language = null, alt_name = "",italics = 0, mob/speaker = null)
 	return
 
-/mob/new_player/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
+/mob/new_player/hear_radio(message, verb="says", datum/language/language=null, part_a, part_b, part_c, mob/speaker = null, hard_to_hear = 0)
 	return
 
 /mob/new_player/show_message(msg, type, alt, alt_type)
@@ -473,7 +473,7 @@
 /mob/new_player/touch_map_edge()
 	return
 
-/mob/new_player/say(var/message)
+/mob/new_player/say(message)
 	sanitize_and_communicate(/decl/communication_channel/ooc, client, message)
 
 /mob/new_player/verb/next_lobby_track()

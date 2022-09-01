@@ -28,7 +28,7 @@
 /datum/build_mode/atmosphere/Help()
 	to_chat(user, SPAN_NOTICE(help_text))
 
-/datum/build_mode/atmosphere/ui_interact(mob/user, ui_key = "atmosphere_editor", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
+/datum/build_mode/atmosphere/ui_interact(mob/user, ui_key = "atmosphere_editor", datum/nanoui/ui = null, force_open = 1, master_ui = null, datum/topic_state/state = GLOB.default_state)
 	. = ..()
 
 	var/data[0]

@@ -8,7 +8,7 @@
 	var/default_assistant_title = "Assistant"
 
 // The white, and blacklist are type specific, any subtypes (of both species and jobs) have to be added explicitly
-/datum/map/proc/is_species_job_restricted(var/datum/species/S, var/datum/job/J)
+/datum/map/proc/is_species_job_restricted(datum/species/S, datum/job/J)
 	if(!istype(S) || !istype(J))
 		return TRUE
 

@@ -205,14 +205,14 @@
 	..()
 
 
-/obj/item/rig/attack_hand(var/mob/user)
+/obj/item/rig/attack_hand(mob/user)
 
 	if(electrified != 0)
 		if(shock(user)) //Handles removing charge from the cell, as well. No need to do that here.
 			return
 	..()
 
-/obj/item/rig/emag_act(var/remaining_charges, var/mob/user)
+/obj/item/rig/emag_act(remaining_charges, mob/user)
 	if(!subverted)
 		req_access.Cut()
 		locked = 0

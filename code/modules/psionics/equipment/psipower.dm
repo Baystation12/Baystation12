@@ -6,7 +6,7 @@
 	var/maintain_cost = 3
 	var/mob/living/owner
 
-/obj/item/psychic_power/New(var/mob/living/_owner)
+/obj/item/psychic_power/New(mob/living/_owner)
 	owner = _owner
 	if(!istype(owner))
 		qdel(src)
@@ -24,17 +24,17 @@
 /obj/item/psychic_power/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER
 
-/obj/item/psychic_power/attack_self(var/mob/user)
+/obj/item/psychic_power/attack_self(mob/user)
 	sound_to(owner, 'sound/effects/psi/power_fail.ogg')
 	user.drop_from_inventory(src)
 
-/obj/item/psychic_power/attack(var/mob/living/M, var/mob/living/user, var/target_zone)
+/obj/item/psychic_power/attack(mob/living/M, mob/living/user, target_zone)
 	if(M.do_psionics_check(max(force, maintain_cost), user))
 		to_chat(user, "<span class='danger'>\The [src] flickers violently out of phase!</span>")
 		return 1
 	. = ..()
 
-/obj/item/psychic_power/afterattack(var/atom/target, var/mob/living/user, var/proximity)
+/obj/item/psychic_power/afterattack(atom/target, mob/living/user, proximity)
 	if(target.do_psionics_check(max(force, maintain_cost), user))
 		to_chat(user, "<span class='danger'>\The [src] flickers violently out of phase!</span>")
 		return

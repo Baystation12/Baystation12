@@ -17,7 +17,7 @@
 	scan_data = medical_scan_action(A, user, src, mode)
 	playsound(src, 'sound/effects/fastbeep.ogg', 20)
 
-/proc/medical_scan_action(atom/target, mob/living/user, obj/scanner, var/verbose)
+/proc/medical_scan_action(atom/target, mob/living/user, obj/scanner, verbose)
 	if (!user.IsAdvancedToolUser())
 		to_chat(user, "<span class='warning'>You are not nimble enough to use this device.</span>")
 		return
@@ -60,7 +60,7 @@
 	to_chat(user, .)
 	to_chat(user, "<hr>")
 
-/proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose, var/skill_level = SKILL_DEFAULT)
+/proc/medical_scan_results(mob/living/carbon/human/H, verbose, skill_level = SKILL_DEFAULT)
 	. = list()
 	var/header = list()
 	var/b
@@ -296,7 +296,7 @@
 	. = jointext(list(header,.),null)
 
 // Calculates severity based on the ratios defined external limbs.
-/proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
+/proc/get_wound_severity(damage_ratio, can_heal_overkill = 0)
 	var/degree
 
 	switch(damage_ratio)

@@ -6,7 +6,7 @@
 	var/datum/sound_player/player
 
 //Slight duplication, but there's key differences
-/datum/sound_token/instrument/New(var/atom/source, var/sound_id, var/sound/sound, var/range = 4, var/prefer_mute = FALSE, var/use_env, var/datum/sound_player/player)
+/datum/sound_token/instrument/New(atom/source, sound_id, sound/sound, range = 4, prefer_mute = FALSE, use_env, datum/sound_player/player)
 	if(!istype(source))
 		CRASH("Invalid sound source: [log_info_line(source)]")
 	if(!istype(sound))
@@ -37,7 +37,7 @@
 	player.subscribe(src)
 
 
-/datum/sound_token/instrument/PrivGetEnvironment(var/listener)
+/datum/sound_token/instrument/PrivGetEnvironment(listener)
 	//Allow override (in case your instrument has to sound funky or muted)
 	if(use_env)
 		return sound.environment
@@ -46,7 +46,7 @@
 		return A && PrivIsValidEnvironment(A.sound_env) ? A.sound_env : sound.environment
 
 
-/datum/sound_token/instrument/PrivAddListener(var/atom/listener)
+/datum/sound_token/instrument/PrivAddListener(atom/listener)
 	var/mob/m = listener
 	if(istype(m))
 		if(m.get_preference_value(/datum/client_preference/play_instruments) != GLOB.PREF_YES)
@@ -54,7 +54,7 @@
 	return ..()
 
 
-/datum/sound_token/instrument/PrivUpdateListener(var/listener)
+/datum/sound_token/instrument/PrivUpdateListener(listener)
 	var/mob/m = listener
 	if(istype(m))
 		if(m.get_preference_value(/datum/client_preference/play_instruments) != GLOB.PREF_YES)

@@ -32,7 +32,7 @@
 	var/contains_body = 0
 	var/has_label = FALSE
 
-/obj/structure/closet/body_bag/attackby(var/obj/item/W, mob/user as mob)
+/obj/structure/closet/body_bag/attackby(obj/item/W, mob/user as mob)
 	if (istype(W, /obj/item/pen))
 		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
 		if (user.get_active_hand() != W)
@@ -65,7 +65,7 @@
 	if(has_label)
 		src.overlays += image(src.icon, "bodybag_label")
 
-/obj/structure/closet/body_bag/store_mobs(var/stored_units)
+/obj/structure/closet/body_bag/store_mobs(stored_units)
 	contains_body = ..()
 	return contains_body
 
@@ -75,7 +75,7 @@
 		return 1
 	return 0
 
-/obj/structure/closet/body_bag/proc/fold(var/user)
+/obj/structure/closet/body_bag/proc/fold(user)
 	if(!(ishuman(user) || isrobot(user)))
 		to_chat(user, SPAN_NOTICE("You lack the dexterity to close \the [name]."))
 		return FALSE

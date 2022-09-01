@@ -25,7 +25,7 @@
 		"OH GOD!",
 		"HELP ME!")
 
-/datum/artifact_effect/badfeeling/DoEffectTouch(var/mob/user)
+/datum/artifact_effect/badfeeling/DoEffectTouch(mob/user)
 	if(user)
 		if (istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user

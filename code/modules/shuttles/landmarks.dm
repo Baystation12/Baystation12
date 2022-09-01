@@ -62,10 +62,10 @@
 			map_destination.add_landmark(src, shuttle_restricted)
 
 //Called when the landmark is added to an overmap sector.
-/obj/effect/shuttle_landmark/proc/sector_set(var/obj/effect/overmap/visitable/O, shuttle_name)
+/obj/effect/shuttle_landmark/proc/sector_set(obj/effect/overmap/visitable/O, shuttle_name)
 	shuttle_restricted = shuttle_name
 
-/obj/effect/shuttle_landmark/proc/is_valid(var/datum/shuttle/shuttle)
+/obj/effect/shuttle_landmark/proc/is_valid(datum/shuttle/shuttle)
 	if(shuttle.current_location == src)
 		return FALSE
 	for(var/area/A in shuttle.shuttle_area)
@@ -104,7 +104,7 @@
 	landmark_tag += "-[x]-[y]-[z]-[random_id("landmarks",1,9999)]"
 	return ..()
 
-/obj/effect/shuttle_landmark/automatic/sector_set(var/obj/effect/overmap/visitable/O)
+/obj/effect/shuttle_landmark/automatic/sector_set(obj/effect/overmap/visitable/O)
 	..()
 	SetName("[O.name] - [initial(name)] ([x],[y])")
 

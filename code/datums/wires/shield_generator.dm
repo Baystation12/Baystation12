@@ -37,7 +37,7 @@ var/global/const/SHIELDGEN_WIRE_NOTHING = 16		// A blank wire that doesn't have 
 		if(SHIELDGEN_WIRE_AICONTROL)
 			S.ai_control_disabled = !mended
 
-/datum/wires/shield_generator/UpdatePulsed(var/index)
+/datum/wires/shield_generator/UpdatePulsed(index)
 	var/obj/machinery/power/shield_generator/S = holder
 	switch(index)
 		if(SHIELDGEN_WIRE_HACK)

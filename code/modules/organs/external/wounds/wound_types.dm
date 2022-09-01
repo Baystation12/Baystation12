@@ -3,7 +3,7 @@
 //the damage amount for the stage with the same name as the wound.
 //e.g. /datum/wound/cut/deep should only be applied for 15 damage and up,
 //because in it's stages list, "deep cut" = 15.
-/proc/get_wound_type(var/type, var/damage)
+/proc/get_wound_type(type, damage)
 	switch(type)
 		if (INJURY_TYPE_CUT)
 			switch(damage)
@@ -269,7 +269,7 @@
 /** EXTERNAL ORGAN LOSS **/
 /datum/wound/lost_limb
 
-/datum/wound/lost_limb/New(var/obj/item/organ/external/lost_limb, var/losstype, var/clean)
+/datum/wound/lost_limb/New(obj/item/organ/external/lost_limb, losstype, clean)
 	var/damage_amt = lost_limb.max_damage
 	if(clean) damage_amt /= 2
 
@@ -303,7 +303,7 @@
 
 	..(damage_amt)
 
-/datum/wound/lost_limb/can_merge(var/datum/wound/other)
+/datum/wound/lost_limb/can_merge(datum/wound/other)
 	return 0 //cannot be merged
 
 /** CRYSTALLINE WOUNDS **/

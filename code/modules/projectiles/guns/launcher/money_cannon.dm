@@ -19,7 +19,7 @@
 /obj/item/gun/launcher/money/hacked
 	emagged = TRUE
 
-/obj/item/gun/launcher/money/proc/vomit_cash(var/mob/vomit_onto, var/projectile_vomit)
+/obj/item/gun/launcher/money/proc/vomit_cash(mob/vomit_onto, projectile_vomit)
 	var/bundle_worth = Floor(receptacle_value / 10)
 	if(bundle_worth > max_capacity / 10)
 		bundle_worth = max_capacity / 10
@@ -49,7 +49,7 @@
 
 	receptacle_value = 0
 
-/obj/item/gun/launcher/money/proc/make_it_rain(var/mob/user)
+/obj/item/gun/launcher/money/proc/make_it_rain(mob/user)
 	vomit_cash(user, receptacle_value >= 10)
 
 /obj/item/gun/launcher/money/update_release_force()
@@ -72,7 +72,7 @@
 	to_chat(user, "<span class='notice'>You eject [receptacle_value] [GLOB.using_map.local_currency_name_singular] from [src]'s receptacle.</span>")
 	receptacle_value = 0
 
-/obj/item/gun/launcher/money/proc/absorb_cash(var/obj/item/spacecash/bling, mob/user)
+/obj/item/gun/launcher/money/proc/absorb_cash(obj/item/spacecash/bling, mob/user)
 	if(!istype(bling) || !bling.worth || bling.worth < 1)
 		to_chat(user, "<span class='warning'>[src] refuses to pick up [bling].</span>")
 		return
@@ -180,7 +180,7 @@
 
 	src.make_it_rain(user)
 
-/obj/item/gun/launcher/money/emag_act(var/remaining_charges, var/mob/user)
+/obj/item/gun/launcher/money/emag_act(remaining_charges, mob/user)
 	// Overloads the motors, causing it to shoot money harder and do harm.
 	if(!emagged)
 		emagged = TRUE

@@ -39,14 +39,14 @@
 		SKILL_CHEMISTRY     = SKILL_EXPERT
 	)
 
-/datum/job/ai/equip(var/mob/living/carbon/human/H)
+/datum/job/ai/equip(mob/living/carbon/human/H)
 	if(!H)	return 0
 	return 1
 
 /datum/job/ai/is_position_available()
 	return (empty_playable_ai_cores.len != 0)
 
-/datum/job/ai/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
+/datum/job/ai/handle_variant_join(mob/living/carbon/human/H, alt_title)
 	return H
 
 /datum/job/cyborg
@@ -65,10 +65,10 @@
 	skill_points = 0
 	no_skill_buffs = TRUE
 
-/datum/job/cyborg/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
+/datum/job/cyborg/handle_variant_join(mob/living/carbon/human/H, alt_title)
 	return H && H.Robotize(SSrobots.get_mob_type_by_title(alt_title || title))
 
-/datum/job/cyborg/equip(var/mob/living/carbon/human/H)
+/datum/job/cyborg/equip(mob/living/carbon/human/H)
 	return !!H
 
 /datum/job/cyborg/New()

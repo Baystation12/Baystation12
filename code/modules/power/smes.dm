@@ -60,7 +60,7 @@
 	var/num_terminals = 0    // internal bookkeeping for number of connected terminals
 	var/should_be_mapped = 0 // If this is set to 0 it will send out warning on New()
 
-/obj/machinery/power/smes/drain_power(var/drain_check, var/surge, var/amount = 0)
+/obj/machinery/power/smes/drain_power(drain_check, surge, amount = 0)
 
 	if(drain_check)
 		return 1
@@ -90,7 +90,7 @@
 				term.connect_to_network()
 	..()
 
-/obj/machinery/power/smes/add_avail(var/amount)
+/obj/machinery/power/smes/add_avail(amount)
 	if(..(amount))
 		powernet.smes_newavail += amount
 		return 1
@@ -131,7 +131,7 @@
 /obj/machinery/power/smes/proc/chargedisplay()
 	return round(5.5*charge/(capacity ? capacity : 5e6))
 
-/obj/machinery/power/smes/proc/input_power(var/percentage)
+/obj/machinery/power/smes/proc/input_power(percentage)
 	var/to_input = target_load * (percentage/100)
 	to_input = clamp(to_input, 0, target_load)
 	input_available = 0
@@ -147,13 +147,13 @@
 		input_available += inputted
 
 // Mostly in place due to child types that may store power in other way (PSUs)
-/obj/machinery/power/smes/proc/add_charge(var/amount)
+/obj/machinery/power/smes/proc/add_charge(amount)
 	charge += amount*CELLRATE
 
-/obj/machinery/power/smes/proc/remove_charge(var/amount)
+/obj/machinery/power/smes/proc/remove_charge(amount)
 	charge -= amount*CELLRATE
 
-/obj/machinery/power/smes/component_stat_change(var/obj/item/stock_parts/power/terminal/part, old_stat, flag)
+/obj/machinery/power/smes/component_stat_change(obj/item/stock_parts/power/terminal/part, old_stat, flag)
 	if(istype(part) && flag == PART_STAT_CONNECTED)
 		if(old_stat & flag)
 			num_terminals--
@@ -205,7 +205,7 @@
 
 // called after all power processes are finished
 // restores charge level to smes if there was excess this ptick
-/obj/machinery/power/smes/proc/restore(var/percent_load)
+/obj/machinery/power/smes/proc/restore(percent_load)
 	if(stat & BROKEN)
 		return
 
@@ -230,14 +230,14 @@
 		update_icon()
 	return
 
-/obj/machinery/power/smes/draw_power(var/amount)
+/obj/machinery/power/smes/draw_power(amount)
 	return amount - use_power_oneoff(amount)
 
 /obj/machinery/power/smes/interface_interact(mob/user)
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/power/smes/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/power/smes/attackby(obj/item/W as obj, mob/user as mob)
 	if(component_attackby(W, user))
 		return TRUE
 
@@ -258,7 +258,7 @@
 			damage = 0
 		return TRUE
 
-/obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	// this is the data which will be sent to the ui
 	var/data[0]
 	data["nameTag"] = name_tag
@@ -334,20 +334,20 @@
 		return 1
 
 
-/obj/machinery/power/smes/proc/energy_fail(var/duration)
+/obj/machinery/power/smes/proc/energy_fail(duration)
 	failure_timer = max(failure_timer, duration)
 
-/obj/machinery/power/smes/proc/inputting(var/do_input)
+/obj/machinery/power/smes/proc/inputting(do_input)
 	input_attempt = do_input
 	if(!input_attempt)
 		inputting = 0
 
-/obj/machinery/power/smes/proc/outputting(var/do_output)
+/obj/machinery/power/smes/proc/outputting(do_output)
 	output_attempt = do_output
 	if(!output_attempt)
 		outputting = 0
 
-/obj/machinery/power/smes/proc/take_damage(var/amount)
+/obj/machinery/power/smes/proc/take_damage(amount)
 	amount = max(0, round(amount))
 	damage += amount
 	if(damage > maxdamage)
@@ -381,11 +381,11 @@
 	update_icon()
 	..()
 
-/obj/machinery/power/smes/bullet_act(var/obj/item/projectile/Proj)
+/obj/machinery/power/smes/bullet_act(obj/item/projectile/Proj)
 	if (Proj.damage_type == DAMAGE_BRUTE || Proj.damage_type == DAMAGE_BURN)
 		take_damage(Proj.damage)
 
-/obj/machinery/power/smes/ex_act(var/severity)
+/obj/machinery/power/smes/ex_act(severity)
 	// Two strong explosions will destroy a SMES.
 	// Given the SMES creates another explosion on it's destruction it sounds fairly reasonable.
 	take_damage(250 / severity)

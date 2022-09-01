@@ -14,7 +14,7 @@
 	var/insisting = 0
 
 // Just override; we're special.
-/obj/machinery/wish_granter/attack_hand(var/mob/user as mob)
+/obj/machinery/wish_granter/attack_hand(mob/user as mob)
 	usr.set_machine(src)
 
 	if(charges <= 0)

@@ -2,7 +2,7 @@
 	for(var/zlevel = 1 to world.maxz)
 		create_lighting_overlays_zlevel(zlevel)
 
-/proc/create_lighting_overlays_zlevel(var/zlevel)
+/proc/create_lighting_overlays_zlevel(zlevel)
 	ASSERT(zlevel)
 
 	for(var/turf/T in block(locate(1, 1, zlevel), locate(world.maxx, world.maxy, zlevel)))

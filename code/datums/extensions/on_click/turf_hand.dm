@@ -10,11 +10,11 @@
 	var/priority = 1
 	expected_type = /atom
 
-/datum/extension/turf_hand/New(var/holder, var/priority = 1)
+/datum/extension/turf_hand/New(holder, priority = 1)
 	..()
 	src.priority = priority
 
 
-/datum/extension/turf_hand/proc/OnHandInterception(var/mob/user)
+/datum/extension/turf_hand/proc/OnHandInterception(mob/user)
 	var/atom/A = holder
 	return A.attack_hand(user)

@@ -32,7 +32,7 @@
 	electrical_storm_moderate_sound = sound('sound/AI/torch/electricalstormmoderate.ogg', volume = 45)
 	electrical_storm_major_sound = sound('sound/AI/torch/electricalstormmajor.ogg', volume = 45)
 
-/datum/map/torch/level_x_biohazard_sound(var/bio_level)
+/datum/map/torch/level_x_biohazard_sound(bio_level)
 	switch(bio_level)
 		if(7)
 			return sound('sound/AI/torch/outbreak7.ogg', volume = 45)

@@ -285,7 +285,7 @@
 		update_icon()
 		STOP_PROCESSING(SSobj, src)
 
-/obj/item/device/flashlight/flare/attack_self(var/mob/user)
+/obj/item/device/flashlight/flare/attack_self(mob/user)
 	if(fuel <= 0)
 		to_chat(user,"<span class='notice'>\The [src] is spent.</span>")
 		return 0
@@ -299,12 +299,12 @@
 		update_icon()
 		START_PROCESSING(SSobj, src)
 
-/obj/item/device/flashlight/flare/afterattack(var/obj/O, var/mob/user, var/proximity)
+/obj/item/device/flashlight/flare/afterattack(obj/O, mob/user, proximity)
 	if(proximity && istype(O) && on)
 		O.HandleObjectHeating(src, user, 500)
 	..()
 
-/obj/item/device/flashlight/flare/proc/activate(var/mob/user)
+/obj/item/device/flashlight/flare/proc/activate(mob/user)
 	if(istype(user))
 		user.visible_message("<span class='notice'>[user] pulls the cord on \the [src], activating it.</span>", "<span class='notice'>You pull the cord on \the [src], activating it!</span>")
 
@@ -364,7 +364,7 @@
 		if(M.r_hand == src)
 			M.update_inv_r_hand()
 
-/obj/item/device/flashlight/flare/glowstick/activate(var/mob/user)
+/obj/item/device/flashlight/flare/glowstick/activate(mob/user)
 	if(istype(user))
 		user.visible_message("<span class='notice'>[user] cracks and shakes \the [src].</span>", "<span class='notice'>You crack and shake \the [src], turning it on!</span>")
 

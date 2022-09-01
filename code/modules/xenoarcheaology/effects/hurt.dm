@@ -2,7 +2,7 @@
 	name = "hurt"
 	effect_type = EFFECT_ORGANIC
 
-/datum/artifact_effect/hurt/DoEffectTouch(var/mob/toucher)
+/datum/artifact_effect/hurt/DoEffectTouch(mob/toucher)
 	if(toucher)
 		var/weakness = GetAnomalySusceptibility(toucher)
 		if(iscarbon(toucher) && prob(weakness * 100))

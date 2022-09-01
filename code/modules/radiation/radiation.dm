@@ -8,7 +8,7 @@
 	var/flat = FALSE			// True for power falloff with distance.
 	var/range					// Cached maximum range, used for quick checks against mobs.
 
-/datum/radiation_source/New(var/source_turf, rad_power, decay = TRUE)
+/datum/radiation_source/New(source_turf, rad_power, decay = TRUE)
 	src.source_turf = source_turf
 	src.rad_power = rad_power
 	src.decay = decay
@@ -20,7 +20,7 @@
 	src.source_turf = null
 	. = ..()
 
-/datum/radiation_source/proc/update_rad_power(var/new_power = null)
+/datum/radiation_source/proc/update_rad_power(new_power = null)
 	if(new_power == null || new_power == rad_power)
 		return // No change
 	else if(new_power <= config.radiation_lower_limit)
@@ -58,10 +58,10 @@
 	return SSradiation.get_rads_at_turf(src)
 
 // If people expand the system, this may be useful. Here as a placeholder until then
-/atom/proc/rad_act(var/severity)
+/atom/proc/rad_act(severity)
 	return 1
 
-/mob/living/rad_act(var/severity)
+/mob/living/rad_act(severity)
 	if(severity > RAD_LEVEL_LOW)
 		apply_damage(severity, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 		for(var/atom/I in src)

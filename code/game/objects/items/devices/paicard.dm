@@ -10,7 +10,7 @@
 	var/looking_for_personality = 0
 	var/mob/living/silicon/pai/pai
 
-/obj/item/device/paicard/relaymove(var/mob/user, var/direction)
+/obj/item/device/paicard/relaymove(mob/user, direction)
 	if(user.stat || user.stunned)
 		return
 	var/obj/item/rig/rig = src.get_rig()
@@ -289,7 +289,7 @@
 
 /obj/item/device/paicard
 	var/current_emotion = 1
-/obj/item/device/paicard/proc/setEmotion(var/emotion)
+/obj/item/device/paicard/proc/setEmotion(emotion)
 	if(pai)
 		src.overlays.Cut()
 		switch(emotion)

@@ -27,7 +27,7 @@
 				var/spell/S = screen.spell
 				mind.learned_spells |= S
 
-/proc/restore_spells(var/mob/H)
+/proc/restore_spells(mob/H)
 	if(H.mind && H.mind.learned_spells)
 		var/list/spells = list()
 		for(var/spell/spell_to_remove in H.mind.learned_spells) //remove all the spells from other people.
@@ -40,7 +40,7 @@
 			H.add_spell(spell_to_add)
 	H.ability_master.update_abilities(0,H)
 
-/mob/proc/add_spell(var/spell/spell_to_add, var/spell_base = "wiz_spell_ready")
+/mob/proc/add_spell(spell/spell_to_add, spell_base = "wiz_spell_ready")
 	if(!ability_master)
 		ability_master = new()
 	spell_to_add.holder = src
@@ -51,7 +51,7 @@
 	ability_master.add_spell(spell_to_add, spell_base)
 	return 1
 
-/mob/proc/remove_spell(var/spell/spell_to_remove)
+/mob/proc/remove_spell(spell/spell_to_remove)
 	if(!spell_to_remove || !istype(spell_to_remove))
 		return
 
@@ -61,7 +61,7 @@
 		ability_master.remove_ability(ability_master.get_ability_by_spell(spell_to_remove))
 	return 1
 
-/mob/proc/silence_spells(var/amount = 0)
+/mob/proc/silence_spells(amount = 0)
 	if(amount < 0)
 		return
 

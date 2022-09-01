@@ -94,7 +94,7 @@
 /mob/living/carbon/human/get_stamina()
 	return stamina
 
-/mob/living/carbon/human/adjust_stamina(var/amt)
+/mob/living/carbon/human/adjust_stamina(amt)
 	var/last_stamina = stamina
 	if(stat == DEAD)
 		stamina = 0
@@ -112,7 +112,7 @@
 		var/mod = (lying + (nutrition / initial(nutrition))) / 2
 		adjust_stamina(max(config.minimum_stamina_recovery, config.maximum_stamina_recovery * mod) * (1+chem_effects[CE_ENERGETIC]))
 
-/mob/living/carbon/human/set_stat(var/new_stat)
+/mob/living/carbon/human/set_stat(new_stat)
 	var/old_stat = stat
 	. = ..()
 	if(stat)
@@ -156,7 +156,7 @@
 	return pressure_adjustment_coefficient
 
 // Calculate how much of the environment pressure-difference affects the human.
-/mob/living/carbon/human/calculate_affecting_pressure(var/pressure)
+/mob/living/carbon/human/calculate_affecting_pressure(pressure)
 	var/pressure_difference
 
 	// First get the absolute pressure difference.
@@ -293,7 +293,7 @@
 
 	/** breathing **/
 
-/mob/living/carbon/human/handle_chemical_smoke(var/datum/gas_mixture/environment)
+/mob/living/carbon/human/handle_chemical_smoke(datum/gas_mixture/environment)
 	if(wear_mask && (wear_mask.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
 		return
 	if(glasses && (glasses.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
@@ -512,7 +512,7 @@
 	var/thermal_protection_flags = get_cold_protection_flags(temperature)
 	return get_thermal_protection(thermal_protection_flags)
 
-/mob/living/carbon/human/proc/get_thermal_protection(var/flags)
+/mob/living/carbon/human/proc/get_thermal_protection(flags)
 	.=0
 	if(flags)
 		if(flags & HEAD)

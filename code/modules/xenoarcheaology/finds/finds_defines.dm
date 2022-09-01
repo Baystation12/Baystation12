@@ -20,7 +20,7 @@ var/global/list/finds_as_strings = list(
 	"Metamorphic/sedimentary rock composite",
 	"Anomalous material")
 
-/proc/get_responsive_reagent(var/find_type)
+/proc/get_responsive_reagent(find_type)
 	switch(find_type)
 		if(ARCHAEO_BOWL, ARCHAEO_URN, ARCHAEO_CUTLERY, ARCHAEO_STATUETTE, ARCHAEO_INSTRUMENT, ARCHAEO_HANDCUFFS, ARCHAEO_BEARTRAP, ARCHAEO_BOX, ARCHAEO_GASTANK, ARCHAEO_UNKNOWN)
 			return /datum/reagent/mercury
@@ -37,7 +37,7 @@ var/global/list/finds_as_strings = list(
 /proc/get_random_digsite_type()
 	return pick(100;DIGSITE_GARDEN, 95;DIGSITE_ANIMAL, 90;DIGSITE_HOUSE, 85;DIGSITE_TECHNICAL, 80;DIGSITE_TEMPLE, 75;DIGSITE_WAR)
 
-/proc/get_random_find_type(var/digsite)
+/proc/get_random_find_type(digsite)
 	. = 0
 	switch(digsite)
 		if(DIGSITE_GARDEN)

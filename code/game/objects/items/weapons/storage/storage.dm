@@ -63,7 +63,7 @@
 				if(BP_L_HAND)
 					usr.put_in_l_hand(src)
 
-/obj/item/storage/AltClick(var/mob/usr)
+/obj/item/storage/AltClick(mob/usr)
 
 	if(!canremove)
 		return
@@ -198,7 +198,7 @@
 //This proc handles items being inserted. It does not perform any checks of whether an item can or can't be inserted. That's done by can_be_inserted()
 //The stop_warning parameter will stop the insertion message from being displayed. It is intended for cases where you are inserting multiple items at once,
 //such as when picking up all the items on a tile with one click.
-/obj/item/storage/proc/handle_item_insertion(var/obj/item/W, var/prevent_warning = 0, var/NoUpdate = 0)
+/obj/item/storage/proc/handle_item_insertion(obj/item/W, prevent_warning = 0, NoUpdate = 0)
 	if(!istype(W))
 		return 0
 	if(istype(W.loc, /mob))
@@ -235,7 +235,7 @@
 		storage_ui.on_post_remove(usr)
 
 //Call this proc to handle the removal of an item from the storage item. The item will be moved to the atom sent as new_target
-/obj/item/storage/proc/remove_from_storage(obj/item/W as obj, atom/new_location, var/NoUpdate = 0)
+/obj/item/storage/proc/remove_from_storage(obj/item/W as obj, atom/new_location, NoUpdate = 0)
 	if(!istype(W)) return 0
 	new_location = new_location || get_turf(src)
 
@@ -311,7 +311,7 @@
 	src.add_fingerprint(user)
 	return
 
-/obj/item/storage/proc/gather_all(var/turf/T, var/mob/user)
+/obj/item/storage/proc/gather_all(turf/T, mob/user)
 	var/success = 0
 	var/failure = 0
 

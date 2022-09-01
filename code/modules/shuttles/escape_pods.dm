@@ -53,7 +53,7 @@ var/global/list/escape_pods_by_name = list()
 	var/datum/shuttle/autodock/ferry/escape_pod/pod
 	var/tag_pump
 
-/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/data[0]
 	var/datum/computer/file/embedded_program/docking/simple/docking_program = program
 
@@ -91,7 +91,7 @@ var/global/list/escape_pods_by_name = list()
 	name = "escape pod berth controller"
 	program = /datum/computer/file/embedded_program/docking/simple/escape_pod_berth
 
-/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/data[0]
 	var/datum/computer/file/embedded_program/docking/simple/docking_program = program
 
@@ -114,7 +114,7 @@ var/global/list/escape_pods_by_name = list()
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth/emag_act(var/remaining_charges, var/mob/user)
+/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth/emag_act(remaining_charges, mob/user)
 	if (!emagged)
 		to_chat(user, "<span class='notice'>You emag the [src], arming the escape pod!</span>")
 		emagged = TRUE
@@ -164,7 +164,7 @@ var/global/list/escape_pods_by_name = list()
 /datum/computer/file/embedded_program/docking/simple/escape_pod
 	var/tag_pump
 
-/datum/computer/file/embedded_program/docking/simple/escape_pod/New(var/obj/machinery/embedded_controller/M)
+/datum/computer/file/embedded_program/docking/simple/escape_pod/New(obj/machinery/embedded_controller/M)
 	..(M)
 	if (istype(M, /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod))
 		var/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/controller = M

@@ -36,7 +36,7 @@
 /obj/machinery/atmospherics/pipe/hides_under_flooring()
 	return level != 2
 
-/obj/machinery/atmospherics/pipe/proc/set_leaking(var/new_leaking)
+/obj/machinery/atmospherics/pipe/proc/set_leaking(new_leaking)
 	if(new_leaking && !leaking)
 		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 		leaking = TRUE
@@ -53,7 +53,7 @@
 			if(parent.network)
 				parent.network.leaks -= src
 
-/obj/machinery/atmospherics/pipe/proc/update_sound(var/playing)
+/obj/machinery/atmospherics/pipe/proc/update_sound(playing)
 	if(playing && !sound_token)
 		sound_token = GLOB.sound_player.PlayLoopingSound(src, SOUND_ID, "sound/machines/pipeleak.ogg", volume = 8, range = 3, falloff = 1, prefer_mute = TRUE)
 	else if(!playing && sound_token)
@@ -106,7 +106,7 @@
 
 	. = ..()
 
-/obj/machinery/atmospherics/pipe/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/pipe/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(src, /obj/machinery/atmospherics/unary/tank))
 		return ..()
 	if (istype(src, /obj/machinery/atmospherics/pipe/vent))
@@ -150,11 +150,11 @@
 /obj/machinery/atmospherics/get_color()
 	return pipe_color
 
-/obj/machinery/atmospherics/set_color(var/new_color)
+/obj/machinery/atmospherics/set_color(new_color)
 	pipe_color = new_color
 	update_icon()
 
-/obj/machinery/atmospherics/pipe/color_cache_name(var/obj/machinery/atmospherics/node)
+/obj/machinery/atmospherics/pipe/color_cache_name(obj/machinery/atmospherics/node)
 	if(istype(src, /obj/machinery/atmospherics/unary/tank))
 		return ..()
 
@@ -195,7 +195,7 @@
 	icon = null
 	alpha = 255
 
-/obj/machinery/atmospherics/pipe/simple/hide(var/i)
+/obj/machinery/atmospherics/pipe/simple/hide(i)
 	if(istype(loc, /turf/simulated))
 		set_invisibility(i ? 101 : 0)
 	update_icon()
@@ -254,7 +254,7 @@
 /obj/machinery/atmospherics/pipe/simple/pipeline_expansion()
 	return list(node1, node2)
 
-/obj/machinery/atmospherics/pipe/simple/set_color(var/new_color)
+/obj/machinery/atmospherics/pipe/simple/set_color(new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
 	if(node1)
@@ -262,7 +262,7 @@
 	if(node2)
 		node2.update_underlays()
 
-/obj/machinery/atmospherics/pipe/simple/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/simple/on_update_icon(safety = 0)
 	if(!atmos_initalized)
 		return
 	if(!check_icon_cache())
@@ -450,7 +450,7 @@
 	alpha = 255
 	icon = null
 
-/obj/machinery/atmospherics/pipe/manifold/hide(var/i)
+/obj/machinery/atmospherics/pipe/manifold/hide(i)
 	if(istype(loc, /turf/simulated))
 		set_invisibility(i ? 101 : 0)
 	update_icon()
@@ -497,7 +497,7 @@
 
 	..()
 
-/obj/machinery/atmospherics/pipe/manifold/set_color(var/new_color)
+/obj/machinery/atmospherics/pipe/manifold/set_color(new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
 	if(node1)
@@ -507,7 +507,7 @@
 	if(node3)
 		node3.update_underlays()
 
-/obj/machinery/atmospherics/pipe/manifold/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/manifold/on_update_icon(safety = 0)
 	if(!atmos_initalized)
 		return
 	if(!check_icon_cache())
@@ -757,7 +757,7 @@
 
 	..()
 
-/obj/machinery/atmospherics/pipe/manifold4w/set_color(var/new_color)
+/obj/machinery/atmospherics/pipe/manifold4w/set_color(new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
 	if(node1)
@@ -769,7 +769,7 @@
 	if(node4)
 		node4.update_underlays()
 
-/obj/machinery/atmospherics/pipe/manifold4w/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/manifold4w/on_update_icon(safety = 0)
 	if(!atmos_initalized)
 		return
 	if(!check_icon_cache())
@@ -826,7 +826,7 @@
 	..()
 	update_icon()
 
-/obj/machinery/atmospherics/pipe/manifold4w/hide(var/i)
+/obj/machinery/atmospherics/pipe/manifold4w/hide(i)
 	if(istype(loc, /turf/simulated))
 		set_invisibility(i ? 101 : 0)
 	update_icon()
@@ -967,7 +967,7 @@
 
 	var/obj/machinery/atmospherics/node
 
-/obj/machinery/atmospherics/pipe/cap/hide(var/i)
+/obj/machinery/atmospherics/pipe/cap/hide(i)
 	if(istype(loc, /turf/simulated))
 		set_invisibility(i ? 101 : 0)
 	update_icon()
@@ -996,13 +996,13 @@
 
 	..()
 
-/obj/machinery/atmospherics/pipe/cap/set_color(var/new_color)
+/obj/machinery/atmospherics/pipe/cap/set_color(new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
 	if(node)
 		node.update_underlays()
 
-/obj/machinery/atmospherics/pipe/cap/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/cap/on_update_icon(safety = 0)
 	if(!check_icon_cache())
 		return
 
@@ -1148,7 +1148,7 @@
 
 	return null
 
-/obj/machinery/atmospherics/pipe/vent/hide(var/i) //to make the little pipe section invisible, the icon changes.
+/obj/machinery/atmospherics/pipe/vent/hide(i) //to make the little pipe section invisible, the icon changes.
 	if(node1)
 		icon_state = "[i == 1 && istype(loc, /turf/simulated) ? "h" : "" ]intact"
 		set_dir(get_dir(src, node1))
@@ -1163,7 +1163,7 @@
 	icon_state = "map_universal"
 	build_icon_state = "universal"
 
-/obj/machinery/atmospherics/pipe/simple/visible/universal/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/simple/visible/universal/on_update_icon(safety = 0)
 	if(!check_icon_cache())
 		return
 
@@ -1198,7 +1198,7 @@
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL|CONNECT_TYPE_HE
 	icon_state = "map_universal"
 
-/obj/machinery/atmospherics/pipe/simple/hidden/universal/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/pipe/simple/hidden/universal/on_update_icon(safety = 0)
 	if(!check_icon_cache())
 		return
 
@@ -1227,7 +1227,7 @@
 	..()
 	update_icon()
 
-/obj/machinery/atmospherics/proc/universal_underlays(var/obj/machinery/atmospherics/node, var/direction)
+/obj/machinery/atmospherics/proc/universal_underlays(obj/machinery/atmospherics/node, direction)
 	var/turf/T = loc
 	if(node)
 		var/node_dir = get_dir(src,node)
@@ -1248,7 +1248,7 @@
 		add_underlay_adapter(T, , direction, "-scrubbers")
 		add_underlay_adapter(T, , direction, "")
 
-/obj/machinery/atmospherics/proc/add_underlay_adapter(var/turf/T, var/obj/machinery/atmospherics/node, var/direction, var/icon_connect_type) //modified from add_underlay, does not make exposed underlays
+/obj/machinery/atmospherics/proc/add_underlay_adapter(turf/T, obj/machinery/atmospherics/node, direction, icon_connect_type) //modified from add_underlay, does not make exposed underlays
 	if(node)
 		if(!T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "down" + icon_connect_type)

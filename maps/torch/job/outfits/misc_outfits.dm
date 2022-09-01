@@ -19,7 +19,7 @@
 /decl/hierarchy/outfit/job/torch/passenger/passenger/investor
 	name = OUTFIT_JOB_NAME("Investor - Torch")
 
-/decl/hierarchy/outfit/job/torch/passenger/passenger/investor/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/job/torch/passenger/passenger/investor/post_equip(mob/living/carbon/human/H)
 	..()
 	var/obj/item/storage/secure/briefcase/money/case = new(H.loc)
 	H.put_in_hands(case)

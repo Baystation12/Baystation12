@@ -22,7 +22,7 @@
 
 	Otherwise pretty standard.
 */
-/mob/living/carbon/human/UnarmedAttack(var/atom/A, var/proximity)
+/mob/living/carbon/human/UnarmedAttack(atom/A, proximity)
 
 	if(!..())
 		return
@@ -57,15 +57,15 @@
 	return
 
 
-/mob/living/carbon/human/RestrainedClickOn(var/atom/A)
+/mob/living/carbon/human/RestrainedClickOn(atom/A)
 	return
 
-/mob/living/CtrlClickOn(var/atom/A)
+/mob/living/CtrlClickOn(atom/A)
 	. = ..()
 	if(!. && a_intent == I_GRAB && length(available_maneuvers))
 		. = perform_maneuver(prepared_maneuver || available_maneuvers[1], A)
 
-/mob/living/carbon/human/RangedAttack(var/atom/A, var/params)
+/mob/living/carbon/human/RangedAttack(atom/A, params)
 	//Climbing up open spaces
 	if((istype(A, /turf/simulated/floor) || istype(A, /turf/unsimulated/floor) || istype(A, /obj/structure/lattice) || istype(A, /obj/structure/catwalk)) && isturf(loc) && bound_overlay && !is_physically_disabled()) //Climbing through openspace
 		return climb_up(A)
@@ -77,17 +77,17 @@
 
 	. = ..()
 
-/mob/living/RestrainedClickOn(var/atom/A)
+/mob/living/RestrainedClickOn(atom/A)
 	return
 
 /*
 	Aliens
 */
 
-/mob/living/carbon/alien/RestrainedClickOn(var/atom/A)
+/mob/living/carbon/alien/RestrainedClickOn(atom/A)
 	return
 
-/mob/living/carbon/alien/UnarmedAttack(var/atom/A, var/proximity)
+/mob/living/carbon/alien/UnarmedAttack(atom/A, proximity)
 
 	if(!..())
 		return 0
@@ -100,10 +100,10 @@
 	Nothing happening here
 */
 
-/mob/living/carbon/slime/RestrainedClickOn(var/atom/A)
+/mob/living/carbon/slime/RestrainedClickOn(atom/A)
 	return
 
-/mob/living/carbon/slime/UnarmedAttack(var/atom/A, var/proximity)
+/mob/living/carbon/slime/UnarmedAttack(atom/A, proximity)
 
 	if(!..())
 		return
@@ -166,7 +166,7 @@
 /*
 	Animals
 */
-/mob/living/simple_animal/UnarmedAttack(var/atom/A, var/proximity)
+/mob/living/simple_animal/UnarmedAttack(atom/A, proximity)
 
 	if(!..())
 		return

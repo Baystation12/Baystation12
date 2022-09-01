@@ -11,7 +11,7 @@
 /datum/cache_entry/proc/is_valid()
 	return FALSE
 
-/datum/cache_entry/valid_until/New(var/valid_duration)
+/datum/cache_entry/valid_until/New(valid_duration)
 	..()
 	timestamp += valid_duration
 

@@ -37,12 +37,12 @@
 /turf/simulated/open/update_dirt()
 	return 0
 
-/turf/simulated/open/Entered(var/atom/movable/mover, var/atom/oldloc)
+/turf/simulated/open/Entered(atom/movable/mover, atom/oldloc)
 	..()
 	mover.fall(oldloc)
 
 // Called when thrown object lands on this turf.
-/turf/simulated/open/hitby(var/atom/movable/AM)
+/turf/simulated/open/hitby(atom/movable/AM)
 	. = ..()
 	AM.fall()
 

@@ -5,7 +5,7 @@
 //This is the output of the stringpercent(print) proc, and means about 80% of
 //the print must be there for it to be complete.  (Prints are 32 digits)
 var/global/const/FINGERPRINT_COMPLETE = 6
-/proc/is_complete_print(var/print)
+/proc/is_complete_print(print)
 	return stringpercent(print) <= FINGERPRINT_COMPLETE
 
 /atom/var/list/fingerprintshidden
@@ -111,7 +111,7 @@ var/global/const/FINGERPRINT_COMPLETE = 6
 				else
 					fingerprints[full_print] = full_print
 
-/atom/proc/transfer_fingerprints_to(var/atom/A)
+/atom/proc/transfer_fingerprints_to(atom/A)
 	if(fingerprints)
 		LAZYDISTINCTADD(A.fingerprints, fingerprints)
 	if(fingerprintshidden)
@@ -125,7 +125,7 @@ var/global/const/FINGERPRINT_COMPLETE = 6
 		var/obj/item/clothing/C = A
 		LAZYDISTINCTADD(C.gunshot_residue, gunshot_residue)
 
-/obj/item/transfer_fingerprints_to(var/atom/A)
+/obj/item/transfer_fingerprints_to(atom/A)
 	..()
 	if(istype(A,/obj/item) && trace_DNA)
 		var/obj/item/I = A

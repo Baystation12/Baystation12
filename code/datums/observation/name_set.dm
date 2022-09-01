@@ -18,7 +18,7 @@ GLOBAL_DATUM_INIT(name_set_event, /decl/observ/name_set, new)
 * Name Set Handling *
 *********************/
 
-/atom/proc/SetName(var/new_name)
+/atom/proc/SetName(new_name)
 	var/old_name = name
 	if(old_name != new_name)
 		name = new_name

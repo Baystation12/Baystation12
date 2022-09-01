@@ -17,7 +17,7 @@
 	..()
 	update_icon()
 
-/obj/item/glass_jar/afterattack(var/atom/A, var/mob/user, var/proximity)
+/obj/item/glass_jar/afterattack(atom/A, mob/user, proximity)
 	if(!proximity || contains)
 		return
 	if(istype(A, /mob))
@@ -43,7 +43,7 @@
 		update_icon()
 		return
 
-/obj/item/glass_jar/attack_self(var/mob/user)
+/obj/item/glass_jar/attack_self(mob/user)
 	switch(contains)
 		if(1)
 			for(var/obj/O in src)
@@ -68,7 +68,7 @@
 			update_icon()
 			return
 
-/obj/item/glass_jar/attackby(var/obj/item/W, var/mob/user)
+/obj/item/glass_jar/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/spacecash))
 		if(contains == 0)
 			contains = 1

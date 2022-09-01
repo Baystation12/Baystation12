@@ -60,7 +60,7 @@
 	canremove = 1
 	return ..()
 
-/obj/item/clothing/mask/monitor/mob_can_equip(var/mob/living/carbon/human/user, var/slot)
+/obj/item/clothing/mask/monitor/mob_can_equip(mob/living/carbon/human/user, slot)
 	if (!..())
 		return 0
 	if(istype(user))
@@ -94,5 +94,5 @@
 	var/mob/living/carbon/human/H = loc
 	if(istype(H)) H.update_inv_wear_mask()
 
-/obj/item/clothing/mask/monitor/AltClick(var/mob/user)
+/obj/item/clothing/mask/monitor/AltClick(mob/user)
 	set_monitor_state(user)

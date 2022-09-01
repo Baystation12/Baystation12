@@ -59,11 +59,11 @@
 	coolant_reagents_purity[/datum/reagent/coolant] = 1
 	coolant_reagents_purity[/datum/reagent/adminordrazine] = 2
 
-/obj/machinery/radiocarbon_spectrometer/interface_interact(var/mob/user)
+/obj/machinery/radiocarbon_spectrometer/interface_interact(mob/user)
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/radiocarbon_spectrometer/attackby(var/obj/I as obj, var/mob/user as mob)
+/obj/machinery/radiocarbon_spectrometer/attackby(obj/I as obj, mob/user as mob)
 	if(scanning)
 		to_chat(user, "<span class='warning'>You can't do that while [src] is scanning!</span>")
 	else
@@ -118,7 +118,7 @@
 	if(total_purity && fresh_coolant)
 		coolant_purity = total_purity / fresh_coolant
 
-/obj/machinery/radiocarbon_spectrometer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/radiocarbon_spectrometer/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 
 	if(user.stat)
 		return

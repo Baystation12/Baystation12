@@ -1,4 +1,4 @@
-/mob/living/carbon/alien/diona/get_scooped(var/mob/living/carbon/grabber)
+/mob/living/carbon/alien/diona/get_scooped(mob/living/carbon/grabber)
 	if(grabber.species.name == SPECIES_DIONA && do_merge(grabber))
 		return
 	else return ..()
@@ -15,7 +15,7 @@
 
 	return ..()
 
-/mob/living/carbon/alien/diona/attackby(var/obj/item/W, var/mob/user)
+/mob/living/carbon/alien/diona/attackby(obj/item/W, mob/user)
 	if(user.a_intent == I_HELP && istype(W, /obj/item/clothing/head))
 		if(hat)
 			to_chat(user, "<span class='warning'>\The [src] is already wearing \the [hat].</span>")
@@ -26,7 +26,7 @@
 		return
 	return ..()
 
-/mob/living/carbon/alien/diona/UnarmedAttack(var/atom/A)
+/mob/living/carbon/alien/diona/UnarmedAttack(atom/A)
 
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
@@ -72,7 +72,7 @@
 
 	. = ..()
 
-/mob/living/carbon/alien/diona/RangedAttack(atom/A, var/params)
+/mob/living/carbon/alien/diona/RangedAttack(atom/A, params)
 	if((a_intent == I_HURT || a_intent == I_GRAB) && holding_item)
 		setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		visible_message("<span class='danger'>\The [src] spits \a [holding_item] at \the [A]!</span>")
@@ -83,7 +83,7 @@
 		return TRUE
 	. = ..()
 
-/mob/living/carbon/alien/diona/proc/handle_tray_interaction(var/obj/machinery/portable_atmospherics/hydroponics/tray)
+/mob/living/carbon/alien/diona/proc/handle_tray_interaction(obj/machinery/portable_atmospherics/hydroponics/tray)
 
 	if(incapacitated())
 		return

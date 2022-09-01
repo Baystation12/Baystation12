@@ -33,14 +33,14 @@ This saves us from having to call add_fingerprint() any time something is put in
 	return null
 
 //Puts the item into our active hand if possible. returns 1 on success.
-/mob/living/carbon/human/put_in_active_hand(var/obj/item/W)
+/mob/living/carbon/human/put_in_active_hand(obj/item/W)
 	return (hand ? put_in_l_hand(W) : put_in_r_hand(W))
 
 //Puts the item into our inactive hand if possible. returns 1 on success.
-/mob/living/carbon/human/put_in_inactive_hand(var/obj/item/W)
+/mob/living/carbon/human/put_in_inactive_hand(obj/item/W)
 	return (hand ? put_in_r_hand(W) : put_in_l_hand(W))
 
-/mob/living/carbon/human/put_in_hands(var/obj/item/W)
+/mob/living/carbon/human/put_in_hands(obj/item/W)
 	if(!W)
 		return 0
 	if(put_in_active_hand(W) || put_in_inactive_hand(W))
@@ -48,7 +48,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		return 1
 	return ..()
 
-/mob/living/carbon/human/put_in_l_hand(var/obj/item/W)
+/mob/living/carbon/human/put_in_l_hand(obj/item/W)
 	if(!..() || l_hand)
 		return 0
 	var/obj/item/organ/external/hand = organs_by_name["l_hand"]
@@ -58,7 +58,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 	W.add_fingerprint(src)
 	return 1
 
-/mob/living/carbon/human/put_in_r_hand(var/obj/item/W)
+/mob/living/carbon/human/put_in_r_hand(obj/item/W)
 	if(!..() || r_hand)
 		return 0
 	var/obj/item/organ/external/hand = organs_by_name["r_hand"]
@@ -376,7 +376,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 	return 1
 
 //Checks if a given slot can be accessed at this time, either to equip or unequip I
-/mob/living/carbon/human/slot_is_accessible(var/slot, var/obj/item/I, mob/user=null)
+/mob/living/carbon/human/slot_is_accessible(slot, obj/item/I, mob/user=null)
 	var/obj/item/covering = null
 	var/check_flags = 0
 
@@ -395,7 +395,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		return 0
 	return 1
 
-/mob/living/carbon/human/get_equipped_item(var/slot)
+/mob/living/carbon/human/get_equipped_item(slot)
 	switch(slot)
 		if(slot_back)       return back
 		if(slot_handcuffed) return handcuffed
@@ -417,7 +417,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(slot_r_ear)      return r_ear
 	return ..()
 
-/mob/living/carbon/human/get_equipped_items(var/include_carried = 0)
+/mob/living/carbon/human/get_equipped_items(include_carried = 0)
 	. = ..()
 	if(belt)      . += belt
 	if(l_ear)     . += l_ear
@@ -437,7 +437,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(s_store)    . += s_store
 
 //Same as get_covering_equipped_items, but using target zone instead of bodyparts flags
-/mob/living/carbon/human/proc/get_covering_equipped_item_by_zone(var/zone)
+/mob/living/carbon/human/proc/get_covering_equipped_item_by_zone(zone)
 	var/obj/item/organ/external/O = get_organ(zone)
 	if(O)
 		return get_covering_equipped_item(O.body_part)

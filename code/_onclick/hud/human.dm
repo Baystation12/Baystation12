@@ -1,6 +1,6 @@
 /mob/living/carbon/human/hud_type = /datum/hud/human
 
-/datum/hud/human/FinalizeInstantiation(var/ui_style='icons/mob/screen1_White.dmi', var/ui_color = "#ffffff", var/ui_alpha = 255)
+/datum/hud/human/FinalizeInstantiation(ui_style='icons/mob/screen1_White.dmi', ui_color = "#ffffff", ui_alpha = 255)
 	var/mob/living/carbon/human/target = mymob
 	var/datum/hud_data/hud_data
 	if(!istype(target))
@@ -302,7 +302,7 @@
 // Yes, these use icon state. Yes, these are terrible. The alternative is duplicating
 // a bunch of fairly blobby logic for every click override on these objects.
 
-/obj/screen/food/Click(var/location, var/control, var/params)
+/obj/screen/food/Click(location, control, params)
 	if(istype(usr) && usr.nutrition_icon == src)
 		switch(icon_state)
 			if("nutrition0")
@@ -316,7 +316,7 @@
 			if("nutrition4")
 				to_chat(usr, SPAN_DANGER("You are starving!"))
 
-/obj/screen/drink/Click(var/location, var/control, var/params)
+/obj/screen/drink/Click(location, control, params)
 	if(istype(usr) && usr.hydration_icon == src)
 		switch(icon_state)
 			if("hydration0")
@@ -330,7 +330,7 @@
 			if("hydration4")
 				to_chat(usr, SPAN_DANGER("You are dying of thirst!"))
 
-/obj/screen/bodytemp/Click(var/location, var/control, var/params)
+/obj/screen/bodytemp/Click(location, control, params)
 	if(istype(usr) && usr.bodytemp == src)
 		switch(icon_state)
 			if("temp4")
@@ -352,7 +352,7 @@
 			else
 				to_chat(usr, SPAN_NOTICE("Your body is at a comfortable temperature."))
 
-/obj/screen/pressure/Click(var/location, var/control, var/params)
+/obj/screen/pressure/Click(location, control, params)
 	if(istype(usr) && usr.pressure == src)
 		switch(icon_state)
 			if("pressure2")
@@ -366,20 +366,20 @@
 			else
 				to_chat(usr, SPAN_NOTICE("The local air pressure is comfortable."))
 
-/obj/screen/toxins/Click(var/location, var/control, var/params)
+/obj/screen/toxins/Click(location, control, params)
 	if(istype(usr) && usr.toxin == src)
 		if(icon_state == "tox0")
 			to_chat(usr, SPAN_NOTICE("The air is clear of toxins."))
 		else
 			to_chat(usr, SPAN_DANGER("The air is eating away at your skin!"))
 
-/obj/screen/oxygen/Click(var/location, var/control, var/params)
+/obj/screen/oxygen/Click(location, control, params)
 	if(istype(usr) && usr.oxygen == src)
 		if(icon_state == "oxy0")
 			to_chat(usr, SPAN_NOTICE("You are breathing easy."))
 		else
 			to_chat(usr, SPAN_DANGER("You cannot breathe!"))
 
-/obj/screen/movement/Click(var/location, var/control, var/params)
+/obj/screen/movement/Click(location, control, params)
 	if(istype(usr))
 		usr.set_next_usable_move_intent()

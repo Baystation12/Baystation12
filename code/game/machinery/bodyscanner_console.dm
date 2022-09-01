@@ -70,7 +70,7 @@
 		return STATUS_CLOSE
 	return ..()
 
-/obj/machinery/body_scanconsole/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/body_scanconsole/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	if(connected && connected.occupant)
 		data["scanEnabled"] = TRUE
 		if(ishuman(connected.occupant))
@@ -150,12 +150,12 @@
 		data["pushEnabled"] = FALSE
 		return TOPIC_REFRESH
 
-/obj/machinery/body_scanconsole/state_transition(var/decl/machine_construction/default/new_state)
+/obj/machinery/body_scanconsole/state_transition(decl/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state))
 		updateUsrDialog()
 
-/obj/machinery/body_scanconsole/proc/remove_display(var/obj/machinery/body_scan_display/display)
+/obj/machinery/body_scanconsole/proc/remove_display(obj/machinery/body_scan_display/display)
 	connected_displays -= display
 	GLOB.destroyed_event.unregister(display, src, .proc/remove_display)
 

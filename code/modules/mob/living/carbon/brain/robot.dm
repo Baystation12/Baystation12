@@ -10,7 +10,7 @@
 	src.brainmob.SetName("[pick(list("ADA","DOS","GNU","MAC","WIN"))]-[random_id(type,1000,9999)]")
 	src.brainmob.real_name = src.brainmob.name
 
-/obj/item/device/mmi/digital/robot/transfer_identity(var/mob/living/carbon/H)
+/obj/item/device/mmi/digital/robot/transfer_identity(mob/living/carbon/H)
 	..()
 	if(brainmob.mind)
 		brainmob.mind.assigned_role = "Robotic Intelligence"

@@ -4,7 +4,7 @@
 		eyes.update_colour()
 		regenerate_icons()
 
-/mob/living/carbon/human/proc/get_bodypart_name(var/zone)
+/mob/living/carbon/human/proc/get_bodypart_name(zone)
 	var/obj/item/organ/external/E = get_organ(zone)
 	if(E) . = E.name
 
@@ -180,7 +180,7 @@
 		if(((E.is_broken() || E.is_dislocated()) && !E.splinted))
 			grasp_damage_disarm(E)
 
-/mob/living/carbon/human/proc/stance_damage_prone(var/obj/item/organ/external/affected)
+/mob/living/carbon/human/proc/stance_damage_prone(obj/item/organ/external/affected)
 
 	if(affected)
 		switch(affected.body_part)
@@ -198,7 +198,7 @@
 				return
 	Weaken(4)
 
-/mob/living/carbon/human/proc/grasp_damage_disarm(var/obj/item/organ/external/affected)
+/mob/living/carbon/human/proc/grasp_damage_disarm(obj/item/organ/external/affected)
 	var/disarm_slot
 	switch(affected.body_part)
 		if(HAND_LEFT, ARM_LEFT)

@@ -1,8 +1,8 @@
 //as core click exists at the mob level
-/mob/proc/trigger_aiming(var/trigger_type)
+/mob/proc/trigger_aiming(trigger_type)
 	return
 
-/mob/living/trigger_aiming(var/trigger_type)
+/mob/living/trigger_aiming(trigger_type)
 	if(!aimed.len)
 		return
 	for(var/obj/aiming_overlay/AO in aimed)
@@ -12,7 +12,7 @@
 				AO.trigger(trigger_type)
 				AO.update_aiming_deferred()
 
-/obj/aiming_overlay/proc/trigger(var/perm)
+/obj/aiming_overlay/proc/trigger(perm)
 	if (!owner || !aiming_with || !aiming_at || !locked)
 		return
 	if (perm && (target_permissions & perm))

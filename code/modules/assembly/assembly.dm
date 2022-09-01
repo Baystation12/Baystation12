@@ -26,16 +26,16 @@
 /obj/item/device/assembly/proc/activate()									//What the device does when turned on
 	return
 
-/obj/item/device/assembly/proc/pulsed(var/radio = 0)						//Called when another assembly acts on this one, var/radio will determine where it came from for wire calcs
+/obj/item/device/assembly/proc/pulsed(radio = 0)						//Called when another assembly acts on this one, radio will determine where it came from for wire calcs
 	return
 
-/obj/item/device/assembly/proc/pulse(var/radio = 0)						//Called when this device attempts to act on another device, var/radio determines if it was sent via radio or direct
+/obj/item/device/assembly/proc/pulse(radio = 0)						//Called when this device attempts to act on another device, radio determines if it was sent via radio or direct
 	return
 
 /obj/item/device/assembly/proc/toggle_secure()								//Code that has to happen when the assembly is un\secured goes here
 	return
 
-/obj/item/device/assembly/proc/attach_assembly(var/obj/A, var/mob/user)	//Called when an assembly is attacked by another
+/obj/item/device/assembly/proc/attach_assembly(obj/A, mob/user)	//Called when an assembly is attacked by another
 	return
 
 /obj/item/device/assembly/proc/process_cooldown()							//Called via spawn(10) to have it count down the cooldown var
@@ -56,7 +56,7 @@
 	return 1
 
 
-/obj/item/device/assembly/pulsed(var/radio = 0)
+/obj/item/device/assembly/pulsed(radio = 0)
 	if(holder && (wires & WIRE_RECEIVE))
 		activate()
 	if(radio && (wires & WIRE_RADIO_RECEIVE))
@@ -64,7 +64,7 @@
 	return 1
 
 
-/obj/item/device/assembly/pulse(var/radio = 0)
+/obj/item/device/assembly/pulse(radio = 0)
 	if(holder && (wires & WIRE_PULSE))
 		holder.process_activation(src, 1, 0)
 	if(holder && (wires & WIRE_PULSE_SPECIAL))
@@ -88,7 +88,7 @@
 	return secured
 
 
-/obj/item/device/assembly/attach_assembly(var/obj/item/device/assembly/A, var/mob/user)
+/obj/item/device/assembly/attach_assembly(obj/item/device/assembly/A, mob/user)
 	holder = new/obj/item/device/assembly_holder(get_turf(src))
 	if(holder.attach(A,src,user))
 		to_chat(user, "<span class='notice'>You attach \the [A] to \the [src]!</span>")

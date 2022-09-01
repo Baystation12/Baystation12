@@ -43,7 +43,7 @@
 
 // Changes the area of T to A. Do not do this manually.
 // Area is expected to be a non-null instance.
-/proc/ChangeArea(var/turf/T, var/area/A)
+/proc/ChangeArea(turf/T, area/A)
 	if(!istype(A))
 		CRASH("Area change attempt failed: invalid area supplied.")
 	var/area/old_area = get_area(T)
@@ -77,7 +77,7 @@
  *
  * Returns boolean. `TRUE` if the atmosphere alarm level was changed, `FALSE` otherwise.
  */
-/area/proc/atmosalert(danger_level, var/alarm_source)
+/area/proc/atmosalert(danger_level, alarm_source)
 	if (danger_level == 0)
 		GLOB.atmosphere_alarm.clearAlarm(src, alarm_source)
 	else
@@ -220,7 +220,7 @@
 		icon_state = null
 
 /// Sets the area's light switch state to on or off, in turn turning all lights in the area on or off.
-/area/proc/set_lightswitch(var/new_switch)
+/area/proc/set_lightswitch(new_switch)
 	if(lightswitch != new_switch)
 		lightswitch = new_switch
 		for(var/obj/machinery/light_switch/L in src)
@@ -229,7 +229,7 @@
 		power_change()
 
 /// Calls `set_emergency_lighting(enable)` on all `/obj/machinery/light` in src.
-/area/proc/set_emergency_lighting(var/enable)
+/area/proc/set_emergency_lighting(enable)
 	for(var/obj/machinery/light/M in src)
 		M.set_emergency_lighting(enable)
 
@@ -300,7 +300,7 @@
  * **Parameters**:
  * - `gravitystate` Boolean, default `FALSE`. The new state to set `has_gravity` to.
  */
-/area/proc/gravitychange(var/gravitystate = 0)
+/area/proc/gravitychange(gravitystate = 0)
 	has_gravity = gravitystate
 
 	for(var/mob/M in src)

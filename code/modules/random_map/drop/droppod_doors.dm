@@ -10,22 +10,22 @@
 	var/deploying
 	var/deployed
 
-/obj/structure/droppod_door/New(var/newloc, var/autoopen)
+/obj/structure/droppod_door/New(newloc, autoopen)
 	..(newloc)
 	if(autoopen)
 		spawn(10 SECONDS)
 			deploy()
 
-/obj/structure/droppod_door/attack_ai(var/mob/user)
+/obj/structure/droppod_door/attack_ai(mob/user)
 	if(!user.Adjacent(src))
 		return
 	attack_hand(user)
 
-/obj/structure/droppod_door/attack_generic(var/mob/user)
+/obj/structure/droppod_door/attack_generic(mob/user)
 	if(istype(user))
 		attack_hand(user)
 
-/obj/structure/droppod_door/attack_hand(var/mob/user)
+/obj/structure/droppod_door/attack_hand(mob/user)
 	if(deploying) return
 	to_chat(user, "<span class='danger'>You prime the explosive bolts. Better get clear!</span>")
 	sleep(30)

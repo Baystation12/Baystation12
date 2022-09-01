@@ -17,24 +17,24 @@ var/global/list/z_levels = list()// Each bit re... haha just kidding this is a l
 	..()
 	return INITIALIZE_HINT_QDEL
 
-/proc/HasAbove(var/z)
+/proc/HasAbove(z)
 	if(z >= world.maxz || z < 1 || z > z_levels.len)
 		return 0
 	return z_levels[z]
 
-/proc/HasBelow(var/z)
+/proc/HasBelow(z)
 	if(z > world.maxz || z < 2 || (z-1) > z_levels.len)
 		return 0
 	return z_levels[z-1]
 
 // Thankfully, no bitwise magic is needed here.
-/proc/GetAbove(var/atom/atom)
+/proc/GetAbove(atom/atom)
 	var/turf/turf = get_turf(atom)
 	if(!turf)
 		return null
 	return HasAbove(turf.z) ? get_step(turf, UP) : null
 
-/proc/GetBelow(var/atom/atom)
+/proc/GetBelow(atom/atom)
 	var/turf/turf = get_turf(atom)
 	if(!turf)
 		return null
@@ -47,7 +47,7 @@ var/global/list/z_levels = list()// Each bit re... haha just kidding this is a l
 	for(var/level = z, HasAbove(level), level++)
 		. |= level+1
 
-/proc/AreConnectedZLevels(var/zA, var/zB)
+/proc/AreConnectedZLevels(zA, zB)
 	return zA == zB || (zB in GetConnectedZlevels(zA))
 
 /proc/get_zstep(ref, dir)

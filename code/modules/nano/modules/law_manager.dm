@@ -12,7 +12,7 @@
 	var/static/list/datum/ai_laws/player_laws
 	var/mob/living/silicon/owner = null
 
-/datum/nano_module/law_manager/New(var/mob/living/silicon/S)
+/datum/nano_module/law_manager/New(mob/living/silicon/S)
 	..()
 	owner = S
 
@@ -147,7 +147,7 @@
 
 	return 0
 
-/datum/nano_module/law_manager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/law_manager/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 	var/data[0]
 	owner.lawsync()
 
@@ -183,14 +183,14 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/datum/nano_module/law_manager/proc/package_laws(var/list/data, var/field, var/list/datum/ai_law/laws)
+/datum/nano_module/law_manager/proc/package_laws(list/data, field, list/datum/ai_law/laws)
 	var/packaged_laws[0]
 	for(var/datum/ai_law/AL in laws)
 		packaged_laws[++packaged_laws.len] = list("law" = AL.law, "index" = AL.get_index(), "state" = owner.laws.get_state_law(AL), "ref" = "\ref[AL]")
 	data[field] = packaged_laws
 	data["has_[field]"] = packaged_laws.len
 
-/datum/nano_module/law_manager/proc/package_multiple_laws(var/list/datum/ai_laws/laws)
+/datum/nano_module/law_manager/proc/package_multiple_laws(list/datum/ai_laws/laws)
 	var/law_sets[0]
 	for(var/datum/ai_laws/ALs in laws)
 		var/packaged_laws[0]
@@ -202,7 +202,7 @@
 
 	return law_sets
 
-/datum/nano_module/law_manager/proc/is_malf(var/mob/user)
+/datum/nano_module/law_manager/proc/is_malf(mob/user)
 	return (isadmin(user) && !owner.is_slaved()) || owner.is_malf_or_traitor()
 
 /mob/living/silicon/proc/is_slaved()
@@ -211,7 +211,7 @@
 /mob/living/silicon/robot/is_slaved()
 	return lawupdate && connected_ai ? sanitize(connected_ai.name) : null
 
-/datum/nano_module/law_manager/proc/sync_laws(var/mob/living/silicon/ai/AI)
+/datum/nano_module/law_manager/proc/sync_laws(mob/living/silicon/ai/AI)
 	if(!AI)
 		return
 	for(var/mob/living/silicon/robot/R in AI.connected_robots)

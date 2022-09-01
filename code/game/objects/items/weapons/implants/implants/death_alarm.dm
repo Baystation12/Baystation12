@@ -29,7 +29,7 @@
 	else if(M.stat == DEAD)
 		activate("death")
 
-/obj/item/implant/death_alarm/activate(var/cause = "emp")
+/obj/item/implant/death_alarm/activate(cause = "emp")
 	if(malfunction) return
 	var/mob/M = imp_in
 	var/area/t = get_area(M)

@@ -69,7 +69,7 @@
 			D.set_up(my_target, spray_size, step_delay)
 	return
 
-/obj/item/reagent_containers/spray/attack_self(var/mob/user)
+/obj/item/reagent_containers/spray/attack_self(mob/user)
 	if(!possible_transfer_amounts)
 		return
 	amount_per_transfer_from_this = next_in_list(amount_per_transfer_from_this, cached_number_list_decode(possible_transfer_amounts))
@@ -139,7 +139,7 @@
 	if(distance <= 1)
 		to_chat(user, "The safety is [safety ? "on" : "off"].")
 
-/obj/item/reagent_containers/spray/pepper/attack_self(var/mob/user)
+/obj/item/reagent_containers/spray/pepper/attack_self(mob/user)
 	safety = !safety
 	to_chat(usr, "<span class = 'notice'>You switch the safety [safety ? "on" : "off"].</span>")
 

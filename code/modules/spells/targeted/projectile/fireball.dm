@@ -29,7 +29,7 @@
 	hud_state = "wiz_fireball"
 	cast_sound = 'sound/magic/fireball.ogg'
 
-/spell/targeted/projectile/dumbfire/fireball/prox_cast(var/list/targets, spell_holder)
+/spell/targeted/projectile/dumbfire/fireball/prox_cast(list/targets, spell_holder)
 	for(var/mob/living/M in targets)
 		apply_spell_damage(M)
 	explosion(get_turf(spell_holder), ex_severe, ex_heavy, ex_light, ex_flash)

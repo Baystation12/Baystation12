@@ -3,10 +3,10 @@
 	var/list/urls
 	var/mentions
 
-/decl/webhook/proc/get_message(var/list/data)
+/decl/webhook/proc/get_message(list/data)
 	. = list()
 
-/decl/webhook/proc/http_post(var/target_url, var/payload)
+/decl/webhook/proc/http_post(target_url, payload)
 	if (!target_url)
 		return -1
 
@@ -22,7 +22,7 @@
 		"body" = result["body"]
 	)
 
-/decl/webhook/proc/send(var/list/data)
+/decl/webhook/proc/send(list/data)
 	var/message = get_message(data)
 	if(message)
 		if(mentions)

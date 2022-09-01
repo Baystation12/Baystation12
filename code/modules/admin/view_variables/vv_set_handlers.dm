@@ -3,7 +3,7 @@
 	var/predicates
 	var/list/handled_vars
 
-/decl/vv_set_handler/proc/can_handle_set_var(var/datum/O, variable, var_value, client)
+/decl/vv_set_handler/proc/can_handle_set_var(datum/O, variable, var_value, client)
 	if(!istype(O, handled_type))
 		return FALSE
 	if(!(variable in handled_vars))
@@ -17,7 +17,7 @@
 				return FALSE
 	return TRUE
 
-/decl/vv_set_handler/proc/handle_set_var(var/datum/O, variable, var_value, client)
+/decl/vv_set_handler/proc/handle_set_var(datum/O, variable, var_value, client)
 	var/proc_to_call = handled_vars[variable]
 	if(proc_to_call)
 		call(O, proc_to_call)(var_value)
@@ -28,7 +28,7 @@
 	handled_type = /atom/movable
 	handled_vars = list("loc","x","y","z")
 
-/decl/vv_set_handler/location_handler/handle_set_var(var/atom/movable/AM, variable, var_value, client)
+/decl/vv_set_handler/location_handler/handle_set_var(atom/movable/AM, variable, var_value, client)
 	if(variable == "loc")
 		if(istype(var_value, /atom) || isnull(var_value) || var_value == "")	// Proper null or empty string is fine, 0 is not
 			AM.forceMove(var_value)
@@ -78,7 +78,7 @@
 	handled_vars = list("abilities")
 	predicates = list(/proc/is_num_predicate)
 
-/decl/vv_set_handler/virtual_ability_handler/handle_set_var(var/mob/observer/virtual/virtual, variable, var_value, client)
+/decl/vv_set_handler/virtual_ability_handler/handle_set_var(mob/observer/virtual/virtual, variable, var_value, client)
 	..()
 	virtual.update_icon()
 
@@ -120,7 +120,7 @@
 	handled_type = /atom
 	handled_vars = list("light_max_bright","light_inner_range","light_outer_range","light_falloff_curve")
 
-/decl/vv_set_handler/light_handler/handle_set_var(var/atom/A, variable, var_value, client)
+/decl/vv_set_handler/light_handler/handle_set_var(atom/A, variable, var_value, client)
 	var_value = text2num(var_value)
 	if(!is_num_predicate(var_value, client))
 		return

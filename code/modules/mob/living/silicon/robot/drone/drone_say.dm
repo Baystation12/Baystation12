@@ -1,4 +1,4 @@
-/mob/living/silicon/robot/drone/say(var/message)
+/mob/living/silicon/robot/drone/say(message)
 	if(local_transmit)
 		if (src.client)
 			if(client.prefs.muted & MUTE_IC)

@@ -8,7 +8,7 @@
 	user.adjustToxLoss(-10)
 	return 0
 
-/obj/aura/blueforge_aura/bullet_act(var/obj/item/projectile/P)
+/obj/aura/blueforge_aura/bullet_act(obj/item/projectile/P)
 	if (P.damtype == DAMAGE_BURN)
 		P.damage *=2
 	else if(P.agony || P.stun)

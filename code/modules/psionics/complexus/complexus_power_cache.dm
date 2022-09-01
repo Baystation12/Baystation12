@@ -28,19 +28,19 @@
 						grab_powers[faculty] += power
 		rebuild_power_cache = FALSE
 
-/datum/psi_complexus/proc/get_powers_by_faculty(var/faculty)
+/datum/psi_complexus/proc/get_powers_by_faculty(faculty)
 	rebuild_power_cache()
 	return powers_by_faculty[faculty]
 
-/datum/psi_complexus/proc/get_melee_powers(var/faculty)
+/datum/psi_complexus/proc/get_melee_powers(faculty)
 	rebuild_power_cache()
 	return melee_powers[faculty]
 
-/datum/psi_complexus/proc/get_ranged_powers(var/faculty)
+/datum/psi_complexus/proc/get_ranged_powers(faculty)
 	rebuild_power_cache()
 	return ranged_powers[faculty]
 
-/datum/psi_complexus/proc/get_grab_powers(var/faculty)
+/datum/psi_complexus/proc/get_grab_powers(faculty)
 	rebuild_power_cache()
 	return grab_powers[faculty]
 

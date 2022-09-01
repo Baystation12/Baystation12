@@ -1,7 +1,7 @@
-/decl/turf_selection/proc/get_turfs(var/atom/origin, var/range)
+/decl/turf_selection/proc/get_turfs(atom/origin, range)
 	return list()
 
-/decl/turf_selection/line/get_turfs(var/atom/origin, var/range)
+/decl/turf_selection/line/get_turfs(atom/origin, range)
 	. = list()
 	var/center = get_turf(origin)
 	if(!center)
@@ -12,7 +12,7 @@
 			return
 		. += center
 
-/decl/turf_selection/square/get_turfs(var/atom/origin, var/range)
+/decl/turf_selection/square/get_turfs(atom/origin, range)
 	. = list()
 	var/center = get_turf(origin)
 	if(!center)

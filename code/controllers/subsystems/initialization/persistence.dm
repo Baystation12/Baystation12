@@ -21,7 +21,7 @@ SUBSYSTEM_DEF(persistence)
 		var/datum/persistent/P = persistence_datums[thing]
 		P.Shutdown()
 
-/datum/controller/subsystem/persistence/proc/track_value(var/atom/value, var/track_type)
+/datum/controller/subsystem/persistence/proc/track_value(atom/value, track_type)
 
 	var/turf/T = get_turf(value)
 	if(!T)
@@ -38,11 +38,11 @@ SUBSYSTEM_DEF(persistence)
 		tracking_values[track_type] = list()
 	tracking_values[track_type] += value
 
-/datum/controller/subsystem/persistence/proc/forget_value(var/atom/value, var/track_type)
+/datum/controller/subsystem/persistence/proc/forget_value(atom/value, track_type)
 	if(tracking_values[track_type])
 		tracking_values[track_type] -= value
 
-/datum/controller/subsystem/persistence/proc/show_info(var/mob/user)
+/datum/controller/subsystem/persistence/proc/show_info(mob/user)
 
 	if(!check_rights(R_INVESTIGATE, C = user))
 		return

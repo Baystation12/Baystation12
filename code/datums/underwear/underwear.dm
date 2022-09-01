@@ -57,10 +57,10 @@
 		return "~"+name
 	return name
 
-/datum/category_item/underwear/proc/is_default(var/gender)
+/datum/category_item/underwear/proc/is_default(gender)
 	return is_default
 
-/datum/category_item/underwear/proc/create_underwear(var/mob/user, var/list/metadata)
+/datum/category_item/underwear/proc/create_underwear(mob/user, list/metadata)
 	if(!underwear_type)
 		return
 

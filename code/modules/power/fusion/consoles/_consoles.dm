@@ -18,7 +18,7 @@
 	var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 	return fusion.get_local_network()
 
-/obj/machinery/computer/fusion/attackby(var/obj/item/thing, var/mob/user)
+/obj/machinery/computer/fusion/attackby(obj/item/thing, mob/user)
 	if(isMultitool(thing))
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.get_new_tag(user)
@@ -26,7 +26,7 @@
 	else
 		return ..()
 
-/obj/machinery/computer/fusion/interface_interact(var/mob/user)
+/obj/machinery/computer/fusion/interface_interact(mob/user)
 	ui_interact(user)
 	return TRUE
 
@@ -38,7 +38,7 @@
 	data["name"] = name
 	. = data
 
-/obj/machinery/computer/fusion/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/computer/fusion/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	if(ui_template)
 		var/list/data = build_ui_data()
 		ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)

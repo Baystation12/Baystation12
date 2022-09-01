@@ -16,12 +16,12 @@ var/global/list/pipe_colors = list(
 	"orange" = PIPE_COLOR_ORANGE,
 	"white" = PIPE_COLOR_WHITE)
 
-/proc/pipe_color_lookup(var/color)
+/proc/pipe_color_lookup(color)
 	for(var/C in pipe_colors)
 		if(color == pipe_colors[C])
 			return "[C]"
 
-/proc/pipe_color_check(var/color)
+/proc/pipe_color_check(color)
 	if(!color)
 		return 1
 	for(var/C in pipe_colors)
@@ -48,7 +48,7 @@ var/global/list/pipe_colors = list(
 /datum/pipe_icon_manager/New()
 	check_icons()
 
-/datum/pipe_icon_manager/proc/get_atmos_icon(var/device, var/dir, var/color, var/state)
+/datum/pipe_icon_manager/proc/get_atmos_icon(device, dir, color, state)
 	check_icons(device, dir, color, state)
 
 	device = "[device]"
@@ -78,7 +78,7 @@ var/global/list/pipe_colors = list(
 	//	if("pipe_underlay_intact")
 	//		return pipe_underlays_intact[state + dir + color]
 
-/datum/pipe_icon_manager/proc/check_icons(var/device, var/dir, var/color, var/state)
+/datum/pipe_icon_manager/proc/check_icons(device, dir, color, state)
 	if(!pipe_icons)
 		gen_pipe_icons()
 	if(!manifold_icons)
@@ -90,7 +90,7 @@ var/global/list/pipe_colors = list(
 	//if(!underlays_intact || !underlays_down || !underlays_exposed || !pipe_underlays_exposed || !pipe_underlays_intact)
 	if(!underlays)
 		gen_underlay_icons()
-	
+
 	// In case of a non-default color, generate the missing icon and add it to the cache.
 	if(pipe_color_check(color))
 		return
@@ -136,7 +136,7 @@ var/global/list/pipe_colors = list(
 			continue
 		pipe_icons["hejunction" + state] = image('icons/atmos/junction.dmi', icon_state = state)
 
-/datum/pipe_icon_manager/proc/gen_single_pipe_icon(var/color, var/state)
+/datum/pipe_icon_manager/proc/gen_single_pipe_icon(color, state)
 	var/image/I = image('icons/atmos/pipes.dmi', icon_state = state)
 	I.color = color
 	pipe_icons[state + color] = I
@@ -161,7 +161,7 @@ var/global/list/pipe_colors = list(
 				I.color = pipe_colors[pipe_color]
 				manifold_icons[state + pipe_colors[pipe_color]] = I
 
-/datum/pipe_icon_manager/proc/gen_single_manifold_icon(var/color, var/state)
+/datum/pipe_icon_manager/proc/gen_single_manifold_icon(color, state)
 	var/image/I = image('icons/atmos/manifold.dmi', icon_state = state)
 	manifold_icons[state] = I
 	if(findtext(state, "clamps"))
@@ -221,7 +221,7 @@ var/global/list/pipe_colors = list(
 				I.color = pipe_colors[pipe_color]
 				underlays[state + "[D]" + "[pipe_colors[pipe_color]]"] = I
 
-/datum/pipe_icon_manager/proc/gen_single_underlay_icon(var/dir, var/color, var/state)
+/datum/pipe_icon_manager/proc/gen_single_underlay_icon(dir, color, state)
 	var/image/I = image('icons/atmos/pipe_underlays.dmi', icon_state = state, dir = dir)
 	I.color = color
 	underlays[state + "[dir]" + color] = I

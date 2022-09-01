@@ -2,7 +2,7 @@
 	var/decl/crafting_stage/current_crafting_stage
 	var/label_name
 
-/obj/item/crafting_holder/Initialize(var/ml, var/decl/crafting_stage/initial_stage, var/obj/item/target, var/obj/item/tool, var/mob/user)
+/obj/item/crafting_holder/Initialize(ml, decl/crafting_stage/initial_stage, obj/item/target, obj/item/tool, mob/user)
 	. = ..()
 	name = "[target.name] assembly"
 	var/mob/M = target.loc
@@ -18,7 +18,7 @@
 		qdel(thing)
 	. = ..()
 
-/obj/item/crafting_holder/attackby(var/obj/item/W, var/mob/user)
+/obj/item/crafting_holder/attackby(obj/item/W, mob/user)
 
 	if(istype(W, /obj/item/pen))
 		var/new_label = sanitizeSafe(input(user, "What do you wish to label this assembly?", "Assembly Labelling", label_name), MAX_NAME_LEN)
@@ -35,7 +35,7 @@
 
 	. = ..()
 
-/obj/item/crafting_holder/proc/advance_to(var/decl/crafting_stage/next_stage, var/mob/user, var/obj/item/tool)
+/obj/item/crafting_holder/proc/advance_to(decl/crafting_stage/next_stage, mob/user, obj/item/tool)
 	var/obj/item/product = next_stage && next_stage.get_product(src)
 	if(product)
 		if(ismob(product) && label_name)

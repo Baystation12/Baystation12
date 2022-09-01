@@ -17,7 +17,7 @@
 
 	addtimer(CALLBACK(src, .proc/check_delete, animation), 15)
 
-/mob/proc/check_delete(var/atom/movable/overlay/animation)
+/mob/proc/check_delete(atom/movable/overlay/animation)
 	if(animation)	qdel(animation)
 	if(src)			qdel(src)
 

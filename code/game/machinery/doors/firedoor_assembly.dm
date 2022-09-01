@@ -11,7 +11,7 @@
 //construction: wrenched > cables > electronics > screwdriver & open
 //deconstruction: closed & welded > screwdriver > crowbar > wire cutters > wrench > welder
 
-/obj/structure/firedoor_assembly/attackby(var/obj/item/C, var/mob/user)
+/obj/structure/firedoor_assembly/attackby(obj/item/C, mob/user)
 	if(isCoil(C) && !wired && anchored)
 		var/obj/item/stack/cable_coil/cable = C
 		if (cable.get_amount() < 1)

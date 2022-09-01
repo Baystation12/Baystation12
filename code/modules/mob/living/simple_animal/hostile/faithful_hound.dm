@@ -59,7 +59,7 @@
 			if(3)
 				src.visible_message("<span class='danger'>\The [src] snaps at the air!</span>")
 
-/mob/living/simple_animal/faithful_hound/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+/mob/living/simple_animal/faithful_hound/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol)
 	if(password && findtext(message,password))
 		allowed_mobs |= speaker
 		spawn(10)

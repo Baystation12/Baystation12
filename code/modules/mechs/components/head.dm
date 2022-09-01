@@ -19,7 +19,7 @@
 	QDEL_NULL(software)
 	. = ..()
 
-/obj/item/mech_component/sensors/show_missing_parts(var/mob/user)
+/obj/item/mech_component/sensors/show_missing_parts(mob/user)
 	if(!radio)
 		to_chat(user, SPAN_WARNING("It is missing a radio."))
 	if(!camera)
@@ -56,7 +56,7 @@
 /obj/item/mech_component/sensors/ready_to_install()
 	return (radio && camera)
 
-/obj/item/mech_component/sensors/attackby(var/obj/item/thing, var/mob/user)
+/obj/item/mech_component/sensors/attackby(obj/item/thing, mob/user)
 	if(istype(thing, /obj/item/mech_component/control_module))
 		if(software)
 			to_chat(user, SPAN_WARNING("\The [src] already has a control modules installed."))
@@ -107,7 +107,7 @@
 	. = ..()
 	to_chat(user, SPAN_NOTICE("It has [max_installed_software - LAZYLEN(installed_software)] empty slot\s remaining out of [max_installed_software]."))
 
-/obj/item/mech_component/control_module/attackby(var/obj/item/thing, var/mob/user)
+/obj/item/mech_component/control_module/attackby(obj/item/thing, mob/user)
 
 	if(istype(thing, /obj/item/circuitboard/exosystem))
 		install_software(thing, user)
@@ -120,7 +120,7 @@
 	else
 		return ..()
 
-/obj/item/mech_component/control_module/proc/install_software(var/obj/item/circuitboard/exosystem/software, var/mob/user)
+/obj/item/mech_component/control_module/proc/install_software(obj/item/circuitboard/exosystem/software, mob/user)
 	if(installed_software.len >= max_installed_software)
 		if(user)
 			to_chat(user, SPAN_WARNING("\The [src] can only hold [max_installed_software] software modules."))

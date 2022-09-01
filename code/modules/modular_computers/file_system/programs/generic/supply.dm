@@ -119,7 +119,7 @@
 		ui.open()
 
 // Supply the order ID and where to look. This is just to reduce copypaste code.
-/datum/nano_module/supply/proc/find_order_by_id(var/order_id, var/list/find_in)
+/datum/nano_module/supply/proc/find_order_by_id(order_id, list/find_in)
 	for(var/datum/supply_order/SO in find_in)
 		if(SO.ordernum == order_id)
 			return SO
@@ -311,7 +311,7 @@
 			)))
 		category_contents[sp.name] = category
 
-/datum/nano_module/supply/proc/generate_order_contents(var/order_ref)
+/datum/nano_module/supply/proc/generate_order_contents(order_ref)
 	var/decl/hierarchy/supply_pack/sp = locate(order_ref) in SSsupply.master_supply_list
 	if(!istype(sp))
 		return FALSE
@@ -355,7 +355,7 @@
 		return "Docked"
 	return "Docking/Undocking"
 
-/datum/nano_module/supply/proc/order_to_nanoui(var/datum/supply_order/SO, var/list_id)
+/datum/nano_module/supply/proc/order_to_nanoui(datum/supply_order/SO, list_id)
 	return list(list(
 		"id" = SO.ordernum,
 		"object" = SO.object.name,
@@ -371,7 +371,7 @@
 		return os.has_component(PART_PRINTER)
 	return 0
 
-/datum/nano_module/supply/proc/print_order(var/datum/supply_order/O, var/mob/user)
+/datum/nano_module/supply/proc/print_order(datum/supply_order/O, mob/user)
 	if(!O)
 		return
 
@@ -388,7 +388,7 @@
 	t += "<hr>"
 	print_text(t, user)
 
-/datum/nano_module/supply/proc/print_summary(var/mob/user)
+/datum/nano_module/supply/proc/print_summary(mob/user)
 	var/t = ""
 	t += "<center><BR><b><large>[GLOB.using_map.station_name]</large></b><BR><i>[station_date]</i><BR><i>Export overview<field></i></center><hr>"
 	for(var/source in SSsupply.point_source_descriptions)

@@ -317,7 +317,7 @@
 // slot uses the slot_X defines found in setup.dm
 // for items that can be placed in multiple slots
 // note this isn't called during the initial dressing of a player
-/obj/item/proc/equipped(var/mob/user, var/slot)
+/obj/item/proc/equipped(mob/user, slot)
 	hud_layerise()
 	if(user.client)	user.client.screen |= src
 	if(user.pulling == src) user.stop_pulling()
@@ -331,7 +331,7 @@
 	if(M.r_hand)
 		M.r_hand.update_twohanding()
 
-/obj/item/proc/equipped_robot(var/mob/user)
+/obj/item/proc/equipped_robot(mob/user)
 	return
 
 //Defines which slots correspond to which slot flags
@@ -518,7 +518,7 @@ var/global/list/slot_flags_enumeration = list(
 //If a negative value is returned, it should be treated as a special return value for bullet_act() and handled appropriately.
 //For non-projectile attacks this usually means the attack is blocked.
 //Otherwise should return 0 to indicate that the attack is not affected in any way.
-/obj/item/proc/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+/obj/item/proc/handle_shield(mob/user, damage, atom/damage_source = null, mob/attacker = null, def_zone = null, attack_text = "the attack")
 	var/parry_chance = get_parry_chance(user)
 	if(parry_chance)
 		if(default_parry_check(user, attacker, damage_source) && prob(parry_chance))
@@ -690,7 +690,7 @@ modules/mob/mob_movement.dm if you move you will be zoomed out
 modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 */
 //Looking through a scope or binoculars should /not/ improve your periphereal vision. Still, increase viewsize a tiny bit so that sniping isn't as restricted to NSEW
-/obj/item/proc/zoom(mob/user, var/tileoffset = 14,var/viewsize = 9) //tileoffset is client view offset in the direction the user is facing. viewsize is how far out this thing zooms. 7 is normal view
+/obj/item/proc/zoom(mob/user, tileoffset = 14,viewsize = 9) //tileoffset is client view offset in the direction the user is facing. viewsize is how far out this thing zooms. 7 is normal view
 	if(!user.client)
 		return
 	if(zoom)
@@ -749,11 +749,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 	user.visible_message("\The [user] peers through [zoomdevicename ? "the [zoomdevicename] of [src]" : "[src]"].")
 
-/mob/living/proc/unzoom(var/obj/item/I)
+/mob/living/proc/unzoom(obj/item/I)
 	if(I)
 		I.unzoom(src)
 
-/obj/item/proc/unzoom(var/mob/user)
+/obj/item/proc/unzoom(mob/user)
 	if(!zoom)
 		return
 	zoom = 0
@@ -788,7 +788,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/pwr_drain()
 	return 0 // Process Kill
 
-/obj/item/proc/use_spritesheet(var/bodytype, var/slot, var/icon_state)
+/obj/item/proc/use_spritesheet(bodytype, slot, icon_state)
 	if(!sprite_sheets || !sprite_sheets[bodytype])
 		return 0
 	if(slot == slot_r_hand_str || slot == slot_l_hand_str)
@@ -878,12 +878,12 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			else
 				return 0
 
-/obj/item/do_simple_ranged_interaction(var/mob/user)
+/obj/item/do_simple_ranged_interaction(mob/user)
 	if(user)
 		attack_self(user)
 	return TRUE
 
-/obj/item/proc/inherit_custom_item_data(var/datum/custom_item/citem)
+/obj/item/proc/inherit_custom_item_data(datum/custom_item/citem)
 	. = src
 	if(citem.item_name)
 		SetName(citem.item_name)

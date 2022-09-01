@@ -73,7 +73,7 @@
 	else
 		verb_holder.forceMove(src)
 
-/obj/item/rig_module/ai_container/accepts_item(var/obj/item/input_device, var/mob/living/user)
+/obj/item/rig_module/ai_container/accepts_item(obj/item/input_device, mob/living/user)
 
 	// Check if there's actually an AI to deal with.
 	var/mob/living/silicon/ai/target_ai
@@ -161,7 +161,7 @@
 	eject_ai()
 	..()
 
-/obj/item/rig_module/ai_container/proc/eject_ai(var/mob/user)
+/obj/item/rig_module/ai_container/proc/eject_ai(mob/user)
 
 	if(ai_card)
 		if(istype(ai_card, /obj/item/aicard))
@@ -185,7 +185,7 @@
 	integrated_ai = null
 	update_verb_holder()
 
-/obj/item/rig_module/ai_container/proc/integrate_ai(var/obj/item/ai,var/mob/user)
+/obj/item/rig_module/ai_container/proc/integrate_ai(obj/item/ai,mob/user)
 	if(!ai) return
 
 	// The ONLY THING all the different AI systems have in common is that they all store the mob inside an item.
@@ -256,7 +256,7 @@
 			return 0
 	return 1
 
-/obj/item/rig_module/datajack/accepts_item(var/obj/item/input_device, var/mob/living/user)
+/obj/item/rig_module/datajack/accepts_item(obj/item/input_device, mob/living/user)
 
 	if(istype(input_device,/obj/item/disk/tech_disk))
 		to_chat(user, "You slot the disk into [src].")
@@ -292,7 +292,7 @@
 		return 1
 	return 0
 
-/obj/item/rig_module/datajack/proc/load_data(var/incoming_data)
+/obj/item/rig_module/datajack/proc/load_data(incoming_data)
 
 	if(islist(incoming_data))
 		for(var/entry in incoming_data)
@@ -411,7 +411,7 @@
 
 	return 1
 
-/obj/item/rig_module/power_sink/accepts_item(var/obj/item/input_device, var/mob/living/user)
+/obj/item/rig_module/power_sink/accepts_item(obj/item/input_device, mob/living/user)
 	var/can_drain = input_device.drain_power(1)
 	if(can_drain > 0)
 		engage(input_device)
@@ -459,7 +459,7 @@
 
 	return
 
-/obj/item/rig_module/power_sink/proc/drain_complete(var/mob/living/M)
+/obj/item/rig_module/power_sink/proc/drain_complete(mob/living/M)
 
 	if(!interfaced_with)
 		if(M) to_chat(M, "<span class='info'><b>Total power drained:</b> [round(total_power_drained*CELLRATE)] Wh.</span>")

@@ -86,7 +86,7 @@
 		if(!O.blinded)
 			do_flash(O, flash_time)
 
-/obj/machinery/flasher/proc/do_flash(var/mob/living/victim, var/flash_time)
+/obj/machinery/flasher/proc/do_flash(mob/living/victim, flash_time)
 	victim.flash_eyes()
 	victim.eye_blurry += flash_time
 	victim.confused += (flash_time + 2)
@@ -118,7 +118,7 @@
 		var/mob/living/carbon/M = AM
 		if(!MOVING_DELIBERATELY(M))
 			flash()
-	
+
 	if(isanimal(AM))
 		flash()
 

@@ -16,7 +16,7 @@
 	charge_meter = 0
 	var/required_antag_type = MODE_WIZARD
 
-/obj/item/gun/energy/staff/special_check(var/mob/user)
+/obj/item/gun/energy/staff/special_check(mob/user)
 	if(required_antag_type)
 		var/datum/antagonist/antag = get_antag_data(required_antag_type)
 		if(user.mind && !antag.is_antagonist(user.mind))

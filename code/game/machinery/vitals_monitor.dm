@@ -25,7 +25,7 @@
 	var/last_alert_time = 0
 	var/list/alerts = null
 	var/list/last_alert = null
-	
+
 /obj/machinery/vitals_monitor/Initialize()
 	. = ..()
 	alerts = new /list(3)
@@ -40,7 +40,7 @@
 	victim = null
 	update_optable()
 	. = ..()
-	
+
 /obj/machinery/vitals_monitor/examine(mob/user)
 	. = ..()
 	if(victim)
@@ -72,7 +72,7 @@
 				breathing = "normal"
 			else if(lungs.breath_fail_ratio < 1)
 				breathing = "shallow"
-		
+
 		to_chat(user, SPAN_NOTICE("Breathing: [breathing]"))
 	if(connected_optable)
 		to_chat(user, SPAN_NOTICE("Connected to adjacent [connected_optable]."))
@@ -88,7 +88,7 @@
 	if(victim)
 		update_icon()
 
-/obj/machinery/vitals_monitor/proc/update_victim(var/new_victim = null)
+/obj/machinery/vitals_monitor/proc/update_victim(new_victim = null)
 	var/old_victim = victim
 	victim = new_victim
 	if(victim)
@@ -112,7 +112,7 @@
 		update_victim(connected_optable.victim)
 	else
 		visible_message(SPAN_NOTICE("\The [src] is no longer relaying data from a connected operating table."))
-	
+
 /obj/machinery/vitals_monitor/MouseDrop(over_object, src_location, over_location)
 	if(!CanMouseDrop(over_object))
 		return
@@ -220,7 +220,7 @@
 			audible_message(SPAN_WARNING("<b>\The [src]</b> warns, \"[alerts[LUNGS_ALERT]]\""))
 		last_alert = alerts.Copy()
 		last_alert_time = world.time
-		
+
 
 
 /obj/machinery/vitals_monitor/verb/toggle_beep()
@@ -231,7 +231,7 @@
 	var/mob/user = usr
 	if(!istype(user))
 		return
-	
+
 	if(CanPhysicallyInteract(user))
 		beep = !beep
 		to_chat(user, SPAN_NOTICE("You turn the sound on \the [src] [beep ? "on" : "off"]."))
@@ -244,7 +244,7 @@
 	var/mob/user = usr
 	if(!istype(user))
 		return
-	
+
 	if(CanPhysicallyInteract(user))
 		read_alerts = !read_alerts
 		to_chat(user, SPAN_NOTICE("You turn the alert reader on \the [src] [read_alerts ? "on" : "off"]."))

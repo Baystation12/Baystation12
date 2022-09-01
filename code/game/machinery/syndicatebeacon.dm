@@ -19,11 +19,11 @@
 	var/selfdestructing = 0
 	var/charges = 1
 
-/obj/machinery/syndicate_beacon/interface_interact(var/mob/user)
+/obj/machinery/syndicate_beacon/interface_interact(mob/user)
 	interact(user)
 	return TRUE
 
-/obj/machinery/syndicate_beacon/interact(var/mob/user)
+/obj/machinery/syndicate_beacon/interact(mob/user)
 	user.set_machine(src)
 	var/dat = "<font color=#005500><i>Scanning [pick("retina pattern", "voice print", "fingerprints", "dna sequence")]...<br>Identity confirmed,<br></i></font>"
 	if(istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon/ai))
@@ -118,7 +118,7 @@
 		to_chat(user, "<span class='notice'>You deactivate the beacon.</span>")
 
 
-/obj/machinery/power/singularity_beacon/physical_attack_hand(var/mob/user)
+/obj/machinery/power/singularity_beacon/physical_attack_hand(mob/user)
 	. = TRUE
 	if(anchored)
 		if(active)

@@ -26,13 +26,13 @@
 	var/category = /datum/language    // Used to point at root language types that shouldn't be visible
 	var/has_written_form = FALSE
 
-/datum/language/proc/can_be_spoken_properly_by(var/mob/speaker)
+/datum/language/proc/can_be_spoken_properly_by(mob/speaker)
 	return TRUE
 
-/datum/language/proc/muddle(var/message)
+/datum/language/proc/muddle(message)
 	return message
 
-/datum/language/proc/get_random_name(var/gender, name_count=2, syllable_count=4, syllable_divisor=2)
+/datum/language/proc/get_random_name(gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	if(!syllables || !syllables.len)
 		if(gender==FEMALE)
 			return capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
@@ -53,7 +53,7 @@
 /datum/language
 	var/list/scramble_cache = list()
 
-/datum/language/proc/scramble(var/input, var/list/known_languages)
+/datum/language/proc/scramble(input, list/known_languages)
 
 	var/understand_chance = 0
 	for(var/datum/language/L in known_languages)
@@ -85,7 +85,7 @@
 	. = capitalize(.)
 	. = trim(.)
 
-/datum/language/proc/scramble_word(var/input)
+/datum/language/proc/scramble_word(input)
 	if(!syllables || !syllables.len)
 		return stars(input)
 
@@ -133,7 +133,7 @@
 	// if you yell, you'll be heard from two tiles over instead of one
 	return (copytext(message, -1) == "!") ? 2 : 1
 
-/datum/language/proc/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
+/datum/language/proc/broadcast(mob/living/speaker,message,speaker_mask)
 	log_say("[key_name(speaker)] : ([name]) [message]")
 
 	if(!speaker_mask) speaker_mask = speaker.name
@@ -142,24 +142,24 @@
 	for(var/mob/player in GLOB.player_list)
 		player.hear_broadcast(src, speaker, speaker_mask, message)
 
-/mob/proc/hear_broadcast(var/datum/language/language, var/mob/speaker, var/speaker_name, var/message)
+/mob/proc/hear_broadcast(datum/language/language, mob/speaker, speaker_name, message)
 	if((language in languages) && language.check_special_condition(src))
 		var/msg = "<i><span class='game say'>[language.name], <span class='name'>[speaker_name]</span> [message]</span></i>"
 		to_chat(src, msg)
 
-/mob/new_player/hear_broadcast(var/datum/language/language, var/mob/speaker, var/speaker_name, var/message)
+/mob/new_player/hear_broadcast(datum/language/language, mob/speaker, speaker_name, message)
 	return
 
-/mob/observer/ghost/hear_broadcast(var/datum/language/language, var/mob/speaker, var/speaker_name, var/message)
+/mob/observer/ghost/hear_broadcast(datum/language/language, mob/speaker, speaker_name, message)
 	if(speaker.name == speaker_name || antagHUD)
 		to_chat(src, "<i><span class='game say'>[language.name], <span class='name'>[speaker_name]</span> ([ghost_follow_link(speaker, src)]) [message]</span></i>")
 	else
 		to_chat(src, "<i><span class='game say'>[language.name], <span class='name'>[speaker_name]</span> [message]</span></i>")
 
-/datum/language/proc/check_special_condition(var/mob/other)
+/datum/language/proc/check_special_condition(mob/other)
 	return 1
 
-/datum/language/proc/get_spoken_verb(var/msg_end)
+/datum/language/proc/get_spoken_verb(msg_end)
 	switch(msg_end)
 		if("!")
 			return exclaim_verb
@@ -167,11 +167,11 @@
 			return ask_verb
 	return speech_verb
 
-/datum/language/proc/can_speak_special(var/mob/speaker)
+/datum/language/proc/can_speak_special(mob/speaker)
 	return 1
 
 // Language handling.
-/mob/proc/add_language(var/language)
+/mob/proc/add_language(language)
 
 	var/datum/language/new_language = all_languages[language]
 
@@ -181,7 +181,7 @@
 	languages.Add(new_language)
 	return 1
 
-/mob/proc/remove_language(var/rem_language)
+/mob/proc/remove_language(rem_language)
 	var/datum/language/L = all_languages[rem_language]
 	. = (L in languages)
 	languages.Remove(L)
@@ -205,7 +205,7 @@
 /mob/proc/get_language_prefix()
 	return get_prefix_key(/decl/prefix/language)
 
-/mob/proc/is_language_prefix(var/prefix)
+/mob/proc/is_language_prefix(prefix)
 	return prefix == get_prefix_key(/decl/prefix/language)
 
 //TBD
@@ -257,7 +257,7 @@
 		return TOPIC_HANDLED
 	return ..()
 
-/proc/transfer_languages(var/mob/source, var/mob/target, var/except_flags)
+/proc/transfer_languages(mob/source, mob/target, except_flags)
 	for(var/datum/language/L in source.languages)
 		if(L.flags & except_flags)
 			continue

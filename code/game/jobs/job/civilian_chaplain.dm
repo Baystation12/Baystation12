@@ -10,7 +10,7 @@
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels)
 	outfit_type = /decl/hierarchy/outfit/job/chaplain
 
-/datum/job/chaplain/equip(var/mob/living/carbon/human/H, var/alt_title, var/ask_questions = TRUE)
+/datum/job/chaplain/equip(mob/living/carbon/human/H, alt_title, ask_questions = TRUE)
 	. = ..()
 	if(!.)
 		return

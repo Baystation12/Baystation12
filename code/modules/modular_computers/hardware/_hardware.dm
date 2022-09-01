@@ -94,13 +94,13 @@
 		to_chat(user, "It seems to be slightly damaged.")
 
 /// Damages the component. Contains necessary checks. Negative damage "heals" the component.
-/obj/item/stock_parts/computer/proc/take_damage(var/amount)
+/obj/item/stock_parts/computer/proc/take_damage(amount)
 	damage += round(amount) 					// We want nice rounded numbers here.
 	damage = clamp(damage, 0, max_damage)		// Clamp the value.
 
 /// Called when component is disabled/enabled by the OS
 /obj/item/stock_parts/computer/proc/on_disable()
-/obj/item/stock_parts/computer/proc/on_enable(var/datum/extension/interactive/ntos/os)
+/obj/item/stock_parts/computer/proc/on_enable(datum/extension/interactive/ntos/os)
 
 /obj/item/stock_parts/computer/proc/update_power_usage()
 	var/datum/extension/interactive/ntos/os = get_extension(loc, /datum/extension/interactive/ntos)

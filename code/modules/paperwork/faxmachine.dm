@@ -179,7 +179,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 		authenticated = 0
 		return TOPIC_REFRESH
 
-/obj/machinery/photocopier/faxmachine/proc/sendfax(var/destination)
+/obj/machinery/photocopier/faxmachine/proc/sendfax(destination)
 	if(stat & (BROKEN|NOPOWER))
 		return
 
@@ -227,7 +227,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	use_power_oneoff(active_power_usage)
 	return
 
-/obj/machinery/photocopier/faxmachine/proc/send_admin_fax(var/mob/sender, var/destination)
+/obj/machinery/photocopier/faxmachine/proc/send_admin_fax(mob/sender, destination)
 	if(stat & (BROKEN|NOPOWER))
 		return
 

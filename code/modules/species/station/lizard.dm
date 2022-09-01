@@ -154,11 +154,11 @@
 
 	ingest_amount = 20
 
-/datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
+/datum/species/unathi/equip_survival_gear(mob/living/carbon/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
 
-/datum/species/unathi/proc/handle_sugar(var/mob/living/carbon/human/M, var/datum/reagent/sugar, var/efficiency = 1)
+/datum/species/unathi/proc/handle_sugar(mob/living/carbon/human/M, datum/reagent/sugar, efficiency = 1)
 	var/effective_dose = efficiency * M.chem_doses[sugar.type]
 	if(effective_dose < 5)
 		return
@@ -169,5 +169,5 @@
 	if(effective_dose > 20 && prob(10))
 		M.SelfMove(pick(GLOB.cardinal))
 
-/datum/species/unathi/get_bodytype(var/mob/living/carbon/human/H)
+/datum/species/unathi/get_bodytype(mob/living/carbon/human/H)
 	return SPECIES_UNATHI

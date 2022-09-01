@@ -12,15 +12,15 @@
 	layer = 4
 	construct_state = /decl/machine_construction/default/panel_closed
 
-/obj/machinery/fusion_fuel_compressor/MouseDrop_T(var/atom/movable/target, var/mob/user)
+/obj/machinery/fusion_fuel_compressor/MouseDrop_T(atom/movable/target, mob/user)
 	if(user.incapacitated() || !user.Adjacent(src))
 		return
 	return do_fuel_compression(target, user)
 
-/obj/machinery/fusion_fuel_compressor/attackby(var/obj/item/thing, var/mob/user)
+/obj/machinery/fusion_fuel_compressor/attackby(obj/item/thing, mob/user)
 	return do_fuel_compression(thing, user) || ..()
 
-/obj/machinery/fusion_fuel_compressor/proc/do_fuel_compression(var/obj/item/thing, var/mob/user)
+/obj/machinery/fusion_fuel_compressor/proc/do_fuel_compression(obj/item/thing, mob/user)
 	if(istype(thing) && thing.reagents && thing.reagents.total_volume && thing.is_open_container())
 		if(thing.reagents.reagent_list.len > 1)
 			to_chat(user, "<span class='warning'>The contents of \the [thing] are impure and cannot be used as fuel.</span>")

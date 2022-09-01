@@ -60,7 +60,7 @@
 	animation.forceMove(mob_loc)
 	addtimer(CALLBACK(src, .proc/reappear, mob_loc, user), reappear_duration)
 
-/spell/targeted/ethereal_jaunt/proc/reappear(var/mob_loc, mob/living/user)
+/spell/targeted/ethereal_jaunt/proc/reappear(mob_loc, mob/living/user)
 	if(!user.forceMove(mob_loc))
 		for(var/direction in list(1,2,4,8,5,6,9,10))
 			var/turf/T = get_step(mob_loc, direction)
@@ -77,16 +77,16 @@
 
 	return "[src] now lasts longer."
 
-/spell/targeted/ethereal_jaunt/proc/jaunt_disappear(var/atom/movable/overlay/animation, var/mob/living/target)
+/spell/targeted/ethereal_jaunt/proc/jaunt_disappear(atom/movable/overlay/animation, mob/living/target)
 	animation.icon_state = "liquify"
 	flick("liquify",animation)
 	playsound(get_turf(target), 'sound/magic/ethereal_enter.ogg', 30)
 
-/spell/targeted/ethereal_jaunt/proc/jaunt_reappear(var/atom/movable/overlay/animation, var/mob/living/target)
+/spell/targeted/ethereal_jaunt/proc/jaunt_reappear(atom/movable/overlay/animation, mob/living/target)
 	flick("reappear",animation)
 	playsound(get_turf(target), 'sound/magic/ethereal_exit.ogg', 30)
 
-/spell/targeted/ethereal_jaunt/proc/jaunt_steam(var/mobloc)
+/spell/targeted/ethereal_jaunt/proc/jaunt_steam(mobloc)
 	var/datum/effect/effect/system/steam_spread/steam = new /datum/effect/effect/system/steam_spread()
 	steam.set_up(10, 0, mobloc)
 	steam.start()
@@ -101,7 +101,7 @@
 	anchored = TRUE
 	var/turf/last_valid_turf
 
-/obj/effect/dummy/spell_jaunt/New(var/location)
+/obj/effect/dummy/spell_jaunt/New(location)
 	..()
 	last_valid_turf = get_turf(location)
 
@@ -111,7 +111,7 @@
 		AM.dropInto(loc)
 	return ..()
 
-/obj/effect/dummy/spell_jaunt/relaymove(var/mob/user, direction)
+/obj/effect/dummy/spell_jaunt/relaymove(mob/user, direction)
 	if (!canmove || reappearing) return
 	var/turf/newLoc = get_step(src, direction)
 	if (!newLoc)

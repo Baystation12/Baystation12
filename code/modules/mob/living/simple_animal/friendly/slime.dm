@@ -16,7 +16,7 @@
 
 	say_list_type = /datum/say_list/slime
 
-/mob/living/simple_animal/slime/can_force_feed(var/feeder, var/food, var/feedback)
+/mob/living/simple_animal/slime/can_force_feed(feeder, food, feedback)
 	if(feedback)
 		to_chat(feeder, "Where do you intend to put \the [food]? \The [src] doesn't have a mouth!")
 	return 0

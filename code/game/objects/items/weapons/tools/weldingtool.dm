@@ -114,7 +114,7 @@
 		if((!waterproof && submerged()) || !remove_fuel(0.05))
 			setWelding(0)
 
-/obj/item/weldingtool/afterattack(var/obj/O, var/mob/user, proximity)
+/obj/item/weldingtool/afterattack(obj/O, mob/user, proximity)
 	if(!proximity)
 		return
 
@@ -151,7 +151,7 @@
 	return tank ? tank.reagents.get_reagent_amount(/datum/reagent/fuel) : 0
 
 //Removes fuel from the welding tool. If a mob is passed, it will perform an eyecheck on the mob. This should probably be renamed to use()
-/obj/item/weldingtool/proc/remove_fuel(var/amount = 1, var/mob/M = null)
+/obj/item/weldingtool/proc/remove_fuel(amount = 1, mob/M = null)
 	if(!welding)
 		return 0
 	if(get_fuel() >= amount)
@@ -166,7 +166,7 @@
 			to_chat(M, SPAN_NOTICE("You need more [welding_resource] to complete this task."))
 		return 0
 
-/obj/item/weldingtool/proc/burn_fuel(var/amount)
+/obj/item/weldingtool/proc/burn_fuel(amount)
 	if(!tank)
 		return
 
@@ -216,7 +216,7 @@
 
 //Sets the welding state of the welding tool. If you see W.welding = 1 anywhere, please change it to W.setWelding(1)
 //so that the welding tool updates accordingly
-/obj/item/weldingtool/proc/setWelding(var/set_welding, var/mob/M)
+/obj/item/weldingtool/proc/setWelding(set_welding, mob/M)
 	if (!status)
 		return
 

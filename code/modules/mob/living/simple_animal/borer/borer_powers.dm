@@ -1,4 +1,4 @@
-/mob/living/simple_animal/borer/proc/can_use_borer_ability(var/silent = FALSE, var/requires_host_value = TRUE, var/usable_while_docile = FALSE, var/check_last_special = TRUE)
+/mob/living/simple_animal/borer/proc/can_use_borer_ability(silent = FALSE, requires_host_value = TRUE, usable_while_docile = FALSE, check_last_special = TRUE)
 
 	if(controlling)
 		return FALSE

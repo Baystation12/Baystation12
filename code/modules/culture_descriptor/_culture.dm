@@ -38,7 +38,7 @@
 
 	..()
 
-/decl/cultural_info/proc/get_random_name(var/gender)
+/decl/cultural_info/proc/get_random_name(gender)
 	var/datum/language/_language
 	if(name_language)
 		_language = all_languages[name_language]
@@ -50,11 +50,11 @@
 		return _language.get_random_name(gender)
 	return capitalize(pick(gender==FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 
-/decl/cultural_info/proc/sanitize_name(var/new_name)
+/decl/cultural_info/proc/sanitize_name(new_name)
 	return sanitizeName(new_name)
 
 #define COLLAPSED_CULTURE_BLURB_LEN 48
-/decl/cultural_info/proc/get_description(var/header, var/append, var/verbose = TRUE)
+/decl/cultural_info/proc/get_description(header, append, verbose = TRUE)
 	var/list/dat = list()
 	dat += "<table padding='8px'><tr>"
 	dat += "<td width='260px'>"
@@ -103,5 +103,5 @@
 /decl/cultural_info/proc/get_qualifications()
 	return qualifications
 
-/decl/cultural_info/proc/get_possible_personal_goals(var/department_flag)
+/decl/cultural_info/proc/get_possible_personal_goals(department_flag)
 	return

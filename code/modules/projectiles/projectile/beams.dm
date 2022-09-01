@@ -141,7 +141,7 @@
 		list(11, 0.97),
 	)
 
-/obj/item/projectile/beam/pulse/destroy/on_hit(var/atom/target, var/blocked = 0)
+/obj/item/projectile/beam/pulse/destroy/on_hit(atom/target, blocked = 0)
 	if(isturf(target))
 		target.ex_act(EX_ACT_HEAVY)
 	..()
@@ -181,7 +181,7 @@
 	tracer_type = /obj/effect/projectile/laser/blue/tracer
 	impact_type = /obj/effect/projectile/laser/blue/impact
 
-/obj/item/projectile/beam/lastertag/blue/on_hit(var/atom/target, var/blocked = 0)
+/obj/item/projectile/beam/lastertag/blue/on_hit(atom/target, blocked = 0)
 	if(istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = target
 		if(istype(M.wear_suit, /obj/item/clothing/suit/redtag))
@@ -196,7 +196,7 @@
 	no_attack_log = TRUE
 	damage_type = DAMAGE_BURN
 
-/obj/item/projectile/beam/lastertag/red/on_hit(var/atom/target, var/blocked = 0)
+/obj/item/projectile/beam/lastertag/red/on_hit(atom/target, blocked = 0)
 	if(istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = target
 		if(istype(M.wear_suit, /obj/item/clothing/suit/bluetag))
@@ -214,7 +214,7 @@
 	tracer_type = /obj/effect/projectile/laser/omni/tracer
 	impact_type = /obj/effect/projectile/laser/omni/impact
 
-/obj/item/projectile/beam/lastertag/omni/on_hit(var/atom/target, var/blocked = 0)
+/obj/item/projectile/beam/lastertag/omni/on_hit(atom/target, blocked = 0)
 	if(istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = target
 		if((istype(M.wear_suit, /obj/item/clothing/suit/bluetag))||(istype(M.wear_suit, /obj/item/clothing/suit/redtag)))
@@ -329,7 +329,7 @@
 	tracer_type = /obj/effect/projectile/trilaser/tracer
 	impact_type = /obj/effect/projectile/trilaser/impact
 
-/obj/item/projectile/beam/plasmacutter/on_impact(var/atom/A)
+/obj/item/projectile/beam/plasmacutter/on_impact(atom/A)
 	if(istype(A, /turf/simulated/mineral))
 		var/turf/simulated/mineral/M = A
 		M.GetDrilled(1)
@@ -354,7 +354,7 @@
 	tracer_type = /obj/effect/projectile/confuseray/tracer
 	impact_type = /obj/effect/projectile/confuseray/impact
 
-/obj/item/projectile/beam/confuseray/on_hit(var/atom/target, var/blocked = 0)
+/obj/item/projectile/beam/confuseray/on_hit(atom/target, blocked = 0)
 	if(istype(target, /mob/living))
 		var/mob/living/L = target
 		var/potency = rand(potency_min, potency_max)
@@ -435,7 +435,7 @@
 	tracer_type = /obj/effect/projectile/incen/tracer
 	impact_type = /obj/effect/projectile/incen/impact
 
-/obj/item/projectile/beam/incendiary_laser/on_hit(var/atom/target, var/blocked = 0)
+/obj/item/projectile/beam/incendiary_laser/on_hit(atom/target, blocked = 0)
 	..()
 	if(isliving(target))
 		var/mob/living/L = target

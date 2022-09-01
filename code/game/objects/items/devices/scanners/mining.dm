@@ -38,7 +38,7 @@
 		playsound(loc, 'sound/machines/ping.ogg', 40, 1)
 		to_chat(user,"<span class='notice'>New survey data stored - [scan_results[2]] GEP.</span>")
 
-/obj/item/device/scanner/mining/proc/put_disk_in_hand(var/mob/M)
+/obj/item/device/scanner/mining/proc/put_disk_in_hand(mob/M)
 	if(!survey_data)
 		to_chat(M,"<span class='warning'>There is no survey data stored on the [src].</span>")
 		return 0

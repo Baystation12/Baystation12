@@ -24,7 +24,7 @@
 	else
 		return list(mark)
 
-/spell/mark_recall/cast(var/list/targets,mob/user)
+/spell/mark_recall/cast(list/targets,mob/user)
 	if(!targets.len)
 		return 0
 	var/target = targets[1]
@@ -59,7 +59,7 @@
 
 	var/spell/mark_recall/spell
 
-/obj/effect/cleanable/wizard_mark/New(var/newloc,var/mrspell)
+/obj/effect/cleanable/wizard_mark/New(newloc,mrspell)
 	..()
 	spell = mrspell
 
@@ -68,13 +68,13 @@
 	spell = null
 	..()
 
-/obj/effect/cleanable/wizard_mark/attack_hand(var/mob/user)
+/obj/effect/cleanable/wizard_mark/attack_hand(mob/user)
 	if(user == spell.holder)
 		user.visible_message("\The [user] mutters an incantation and \the [src] disappears!")
 		qdel(src)
 	..()
 
-/obj/effect/cleanable/wizard_mark/attackby(var/obj/item/I, var/mob/user)
+/obj/effect/cleanable/wizard_mark/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/nullrod) || istype(I, /obj/item/spellbook))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		src.visible_message("\The [src] fades away!")

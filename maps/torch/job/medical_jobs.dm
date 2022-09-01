@@ -258,7 +258,7 @@
 	)
 	give_psionic_implant_on_join = FALSE
 
-/datum/job/psychiatrist/equip(var/mob/living/carbon/human/H)
+/datum/job/psychiatrist/equip(mob/living/carbon/human/H)
 	if(H.mind?.role_alt_title == "Psionic Counselor")
 		psi_faculties = list("[PSI_REDACTION]" = PSI_RANK_OPERANT)
 	if(H.mind?.role_alt_title == "Mentalist")

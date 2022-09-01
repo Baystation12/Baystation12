@@ -206,7 +206,7 @@ The megabot
 			if(ATTACK_MODE_ROCKET)
 				overlays += image(icon, "rocket")
 
-/mob/living/simple_animal/hostile/hivebot/mega/proc/switch_mode(var/new_mode)
+/mob/living/simple_animal/hostile/hivebot/mega/proc/switch_mode(new_mode)
 	if(!new_mode || new_mode == attack_mode)
 		return
 

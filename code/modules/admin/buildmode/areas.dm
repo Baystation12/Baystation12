@@ -43,7 +43,7 @@ Shift + Right Click - Select point B
 		return
 	M.color = colors.get(T.loc)
 
-/datum/build_mode/areas/OnClick(var/atom/A, var/list/parameters)
+/datum/build_mode/areas/OnClick(atom/A, list/parameters)
 	if (parameters["right"] && !parameters["shift"])
 		Configurate()
 		return
@@ -103,7 +103,7 @@ Shift + Right Click - Select point B
 		user.client.debug_variables(selected_area)
 		to_chat(user, "Created area [new_area.name]")
 
-/datum/build_mode/areas/proc/SelectArea(var/area/A)
+/datum/build_mode/areas/proc/SelectArea(area/A)
 	if(!A || A == selected_area)
 		return
 	UnselectArea()

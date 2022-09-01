@@ -13,7 +13,7 @@
 	if(istype(holder, /mob/living/carbon/human))
 		return holder
 
-/spell/invisibility/cast(var/mob/living/carbon/human/H, var/mob/user)
+/spell/invisibility/cast(mob/living/carbon/human/H, mob/user)
 	on = !on
 	if(on)
 		if(H.add_cloaking_source(src))

@@ -34,10 +34,10 @@
 	damtype = DAMAGE_BURN
 	force = 15
 
-/mob/living/simple_animal/hostile/faithless/Allow_Spacemove(var/check_drift = 0)
+/mob/living/simple_animal/hostile/faithless/Allow_Spacemove(check_drift = 0)
 	return 1
 
-/mob/living/simple_animal/hostile/faithless/apply_melee_effects(var/atom/A)
+/mob/living/simple_animal/hostile/faithless/apply_melee_effects(atom/A)
 	if(isliving(A))
 		var/mob/living/L = A
 		if(prob(12))

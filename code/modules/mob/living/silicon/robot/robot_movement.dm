@@ -1,4 +1,4 @@
-/mob/living/silicon/robot/slip_chance(var/prob_slip)
+/mob/living/silicon/robot/slip_chance(prob_slip)
 	if(module && module.no_slip)
 		return 0
 	..(prob_slip)

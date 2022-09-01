@@ -8,7 +8,7 @@
 	var/image/on_cooldown
 	var/list/components
 
-/obj/screen/psi/hub/New(var/mob/living/_owner)
+/obj/screen/psi/hub/New(mob/living/_owner)
 	on_cooldown = image(icon, "cooldown")
 	components = list(
 		new /obj/screen/psi/armour(_owner),
@@ -50,7 +50,7 @@
 	maptext = "[round((owner.psi.stamina/owner.psi.max_stamina)*100)]%"
 	update_icon()
 
-/obj/screen/psi/hub/Click(var/location, var/control, var/params)
+/obj/screen/psi/hub/Click(location, control, params)
 	var/list/click_params = params2list(params)
 	if(click_params["shift"])
 		owner.show_psi_assay(owner)

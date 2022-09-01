@@ -64,7 +64,7 @@
 	spawn(15 SECONDS)
 		user.hacking = 0
 
-/datum/game_mode/malfunction/verb/reboot_camera(var/obj/machinery/camera/target in cameranet.cameras)
+/datum/game_mode/malfunction/verb/reboot_camera(obj/machinery/camera/target in cameranet.cameras)
 	set name = "Reboot Camera"
 	set desc = "100 CPU - Reboots a damaged but not completely destroyed camera."
 	set category = "Software"
@@ -89,7 +89,7 @@
 	log_ability_use(user, "reset camera", target)
 
 
-/datum/game_mode/malfunction/verb/emergency_forcefield(var/turf/T as turf in world)
+/datum/game_mode/malfunction/verb/emergency_forcefield(turf/T as turf in world)
 	set name = "Emergency Forcefield"
 	set desc = "275 CPU - Uses the emergency shielding system to create temporary barrier which lasts for few minutes, but won't resist gunfire."
 	set category = "Software"

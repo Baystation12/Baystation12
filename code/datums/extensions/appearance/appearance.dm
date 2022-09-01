@@ -6,7 +6,7 @@
 	var/item_equipment_proc
 	var/item_removal_proc
 
-/datum/extension/appearance/New(var/holder)
+/datum/extension/appearance/New(holder)
 	var/appearance_handler = appearance_manager.get_appearance_handler(appearance_handler_type)
 	if(!appearance_handler)
 		CRASH("Unable to acquire the [appearance_handler_type] appearance handler.")

@@ -55,7 +55,7 @@
 	update_use_power(POWER_USE_ACTIVE)
 	. = 1
 
-/obj/machinery/power/fusion_core/proc/Shutdown(var/force_rupture)
+/obj/machinery/power/fusion_core/proc/Shutdown(force_rupture)
 	if(owned_field)
 		icon_state = "core0"
 		if(force_rupture || owned_field.plasma_temperature > 1000)
@@ -66,29 +66,29 @@
 		owned_field = null
 	update_use_power(POWER_USE_IDLE)
 
-/obj/machinery/power/fusion_core/proc/AddParticles(var/name, var/quantity = 1)
+/obj/machinery/power/fusion_core/proc/AddParticles(name, quantity = 1)
 	if(owned_field)
 		owned_field.AddParticles(name, quantity)
 		. = 1
 
-/obj/machinery/power/fusion_core/bullet_act(var/obj/item/projectile/Proj)
+/obj/machinery/power/fusion_core/bullet_act(obj/item/projectile/Proj)
 	if(owned_field)
 		. = owned_field.bullet_act(Proj)
 
-/obj/machinery/power/fusion_core/proc/set_strength(var/value)
+/obj/machinery/power/fusion_core/proc/set_strength(value)
 	value = clamp(value, MIN_FIELD_STR, MAX_FIELD_STR)
 	field_strength = value
 	change_power_consumption(5 * value, POWER_USE_ACTIVE)
 	if(owned_field)
 		owned_field.ChangeFieldStrength(value)
 
-/obj/machinery/power/fusion_core/physical_attack_hand(var/mob/user)
+/obj/machinery/power/fusion_core/physical_attack_hand(mob/user)
 	visible_message("<span class='notice'>\The [user] hugs \the [src] to make it feel better!</span>")
 	if(owned_field)
 		Shutdown()
 	return TRUE
 
-/obj/machinery/power/fusion_core/attackby(var/obj/item/W, var/mob/user)
+/obj/machinery/power/fusion_core/attackby(obj/item/W, mob/user)
 
 	if(owned_field)
 		to_chat(user,"<span class='warning'>Shut \the [src] off first!</span>")
@@ -98,7 +98,7 @@
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.get_new_tag(user)
 		return
-	
+
 	else if(isWrench(W))
 		anchored = !anchored
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
@@ -114,7 +114,7 @@
 
 	return ..()
 
-/obj/machinery/power/fusion_core/proc/jumpstart(var/field_temperature)
+/obj/machinery/power/fusion_core/proc/jumpstart(field_temperature)
 	field_strength = 501 // Generally a good size.
 	Startup()
 	if(!owned_field)

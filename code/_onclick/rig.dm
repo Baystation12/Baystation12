@@ -37,7 +37,7 @@
 /mob/living/silicon/pai/can_use_rig()
 	return loc == card
 
-/mob/living/proc/HardsuitClickOn(var/atom/A, var/alert_ai = 0)
+/mob/living/proc/HardsuitClickOn(atom/A, alert_ai = 0)
 	if(!can_use_rig() || !canClick())
 		return 0
 	var/obj/item/rig/rig = get_rig()

@@ -77,14 +77,14 @@
 		if(docking_program.override_enabled)
 			overlays += image(icon, "indicator_forced")
 		airlock_program = docking_program.airlock_program
-	
+
 	if(istype(airlock_program) && airlock_program.memory["processing"])
 		if(airlock_program.memory["pump_status"] == "siphon")
 			overlays += image(icon, "screen_drain")
 		else
 			overlays += image(icon, "screen_fill")
 
-/obj/machinery/embedded_controller/radio/post_signal(datum/signal/signal, var/radio_filter = null)
+/obj/machinery/embedded_controller/radio/post_signal(datum/signal/signal, radio_filter = null)
 	signal.transmission_method = TRANSMISSION_RADIO
 	if(radio_connection)
 		return radio_connection.post_signal(src, signal, radio_filter, AIRLOCK_CONTROL_RANGE)

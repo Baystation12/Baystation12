@@ -37,7 +37,7 @@
 	pda_type = /obj/item/modular_computer/pda/captain
 	id_types = list(/obj/item/card/id/bearcat_captain)
 
-/decl/hierarchy/outfit/job/bearcat/captain/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/job/bearcat/captain/post_equip(mob/living/carbon/human/H)
 	..()
 	var/obj/item/clothing/uniform = H.w_uniform
 	if(uniform)

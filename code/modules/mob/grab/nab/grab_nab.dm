@@ -26,7 +26,7 @@
 	force_danger = 1
 	can_grab_self = 0
 
-/datum/grab/nab/on_hit_grab(var/obj/item/grab/G)
+/datum/grab/nab/on_hit_grab(obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
 
@@ -44,7 +44,7 @@
 		affecting.visible_message("<span class='notice'>[assailant] stops crushing [affecting]!</span>")
 		return 0
 
-/datum/grab/nab/on_hit_harm(var/obj/item/grab/G)
+/datum/grab/nab/on_hit_harm(obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
 
@@ -65,7 +65,7 @@
 
 // This causes the assailant to crush the affecting mob. There is a chance that the crush will cause the
 // forelimb spikes to dig into the affecting mob, doing extra damage and likely causing them to bleed.
-/datum/grab/nab/proc/crush(var/obj/item/grab/G, var/attack_damage)
+/datum/grab/nab/proc/crush(obj/item/grab/G, attack_damage)
 	var/obj/item/organ/external/damaging = G.get_targeted_organ()
 	var/hit_zone = G.target_zone
 	G.affecting.visible_message("<span class='danger'>[G.assailant] crushes [G.affecting]'s [damaging.name]!</span>")
@@ -83,7 +83,7 @@
 	admin_attack_log(G.assailant, G.affecting, "Crushed their victim.", "Was crushed.", "crushed")
 
 // This causes the assailant to chew on the affecting mob.
-/datum/grab/nab/proc/masticate(var/obj/item/grab/G, var/attack_damage)
+/datum/grab/nab/proc/masticate(obj/item/grab/G, attack_damage)
 	var/hit_zone = G.assailant.zone_sel.selecting
 	var/obj/item/organ/external/damaging = G.affecting.get_organ(hit_zone)
 

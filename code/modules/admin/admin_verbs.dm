@@ -562,7 +562,7 @@ var/global/list/admin_verbs_mod = list(
 	if(!usr.RemoveClickHandler(/datum/click_handler/build_mode))
 		usr.PushClickHandler(/datum/click_handler/build_mode)
 
-/client/proc/object_talk(var/msg as text) // -- TLE
+/client/proc/object_talk(msg as text) // -- TLE
 	set category = "Special Verbs"
 	set name = "oSay"
 	set desc = "Display a message to everyone who can hear the target"

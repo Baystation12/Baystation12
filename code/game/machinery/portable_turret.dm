@@ -77,7 +77,7 @@
 	lethal = 1
 	installation = /obj/item/gun/energy/laser
 
-/obj/machinery/porta_turret/malf_upgrade(var/mob/living/silicon/ai/user)
+/obj/machinery/porta_turret/malf_upgrade(mob/living/silicon/ai/user)
 	..()
 	ailock = 0
 	malf_upgraded = 1
@@ -114,7 +114,7 @@
 
 	weapon_setup(installation)
 
-/obj/machinery/porta_turret/proc/weapon_setup(var/guntype)
+/obj/machinery/porta_turret/proc/weapon_setup(guntype)
 	switch(guntype)
 		if(/obj/item/gun/energy/laser/practice)
 			iconholder = 1
@@ -194,7 +194,7 @@ var/global/list/turret_icons
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/porta_turret/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/porta_turret/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/data[0]
 	data["access"] = !isLocked(user)
 	data["locked"] = locked
@@ -223,7 +223,7 @@ var/global/list/turret_icons
 	var/area/A = get_area(src)
 	return A && A.turret_controls.len > 0
 
-/obj/machinery/porta_turret/CanUseTopic(var/mob/user)
+/obj/machinery/porta_turret/CanUseTopic(mob/user)
 	if(HasController())
 		to_chat(user, "<span class='notice'>Turrets can only be controlled using the assigned turret controller.</span>")
 		return STATUS_CLOSE
@@ -346,7 +346,7 @@ var/global/list/turret_icons
 					attacked = 0
 		..()
 
-/obj/machinery/porta_turret/emag_act(var/remaining_charges, var/mob/user)
+/obj/machinery/porta_turret/emag_act(remaining_charges, mob/user)
 	if(!emagged)
 		//Emagging the turret makes it go bonkers and stun everyone. It also makes
 		//the turret shoot much, much faster.
@@ -360,7 +360,7 @@ var/global/list/turret_icons
 		enabled = 1 //turns it back on. The cover popUp() popDown() are automatically called in process(), no need to define it here
 		return 1
 
-/obj/machinery/porta_turret/proc/take_damage(var/force)
+/obj/machinery/porta_turret/proc/take_damage(force)
 	if(!raised && !raising)
 		force = force / 8
 		if(force < 5)
@@ -454,14 +454,14 @@ var/global/list/turret_icons
 		use_power_oneoff(20000)
 		health = min(health+1, maxhealth) // 1HP for 20kJ
 
-/obj/machinery/porta_turret/proc/assess_and_assign(var/mob/living/L, var/list/targets, var/list/secondarytargets)
+/obj/machinery/porta_turret/proc/assess_and_assign(mob/living/L, list/targets, list/secondarytargets)
 	switch(assess_living(L))
 		if(TURRET_PRIORITY_TARGET)
 			targets += L
 		if(TURRET_SECONDARY_TARGET)
 			secondarytargets += L
 
-/obj/machinery/porta_turret/proc/assess_living(var/mob/living/L)
+/obj/machinery/porta_turret/proc/assess_living(mob/living/L)
 	if(!istype(L))
 		return TURRET_NOT_TARGET
 
@@ -509,7 +509,7 @@ var/global/list/turret_icons
 
 	return TURRET_PRIORITY_TARGET	//if the perp has passed all previous tests, congrats, it is now a "shoot-me!" nominee
 
-/obj/machinery/porta_turret/proc/assess_perp(var/mob/living/carbon/human/H)
+/obj/machinery/porta_turret/proc/assess_perp(mob/living/carbon/human/H)
 	if(!H || !istype(H))
 		return 0
 
@@ -518,7 +518,7 @@ var/global/list/turret_icons
 
 	return H.assess_perp(src, check_access, check_weapons, check_records, check_arrest)
 
-/obj/machinery/porta_turret/proc/tryToShootAt(var/list/mob/living/targets)
+/obj/machinery/porta_turret/proc/tryToShootAt(list/mob/living/targets)
 	if(targets.len && last_target && (last_target in targets) && target(last_target))
 		return 1
 
@@ -569,12 +569,12 @@ var/global/list/turret_icons
 	set_raised_raising(0, 0)
 	update_icon()
 
-/obj/machinery/porta_turret/proc/set_raised_raising(var/raised, var/raising)
+/obj/machinery/porta_turret/proc/set_raised_raising(raised, raising)
 	src.raised = raised
 	src.raising = raising
 	set_density(raised || raising)
 
-/obj/machinery/porta_turret/proc/target(var/mob/living/target)
+/obj/machinery/porta_turret/proc/target(mob/living/target)
 	if(disabled)
 		return
 	if(target)
@@ -587,7 +587,7 @@ var/global/list/turret_icons
 		return 1
 	return
 
-/obj/machinery/porta_turret/proc/shootAt(var/mob/living/target)
+/obj/machinery/porta_turret/proc/shootAt(mob/living/target)
 	//any emagged turrets will shoot extremely fast! This not only is deadly, but drains a lot power!
 	if(!(emagged || attacked))		//if it hasn't been emagged or attacked, it has to obey a cooldown rate
 		if(last_fired || !raised)	//prevents rapid-fire shooting, unless it's been emagged
@@ -635,7 +635,7 @@ var/global/list/turret_icons
 	var/check_anomalies
 	var/ailock
 
-/obj/machinery/porta_turret/proc/setState(var/datum/turret_checks/TC)
+/obj/machinery/porta_turret/proc/setState(datum/turret_checks/TC)
 	if(controllock)
 		return
 	src.enabled = TC.enabled

@@ -2,7 +2,7 @@
 
 // An addition to deactivate which removes/adds the camera from the chunk list based on if it works or not.
 
-/obj/machinery/camera/deactivate(user as mob, var/choice = 1)
+/obj/machinery/camera/deactivate(user as mob, choice = 1)
 	..(user, choice)
 	invalidateCameraCache()
 	if(!can_use())
@@ -21,7 +21,7 @@
 		cameranet.remove_source(src)
 	. = ..()
 
-/obj/machinery/camera/proc/update_coverage(var/network_change = 0)
+/obj/machinery/camera/proc/update_coverage(network_change = 0)
 	if(network_change)
 		var/list/open_networks = difflist(network, GLOB.restricted_camera_networks)
 		// Add or remove camera from the camera net as necessary

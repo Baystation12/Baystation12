@@ -1,4 +1,4 @@
-/mob/living/carbon/human/proc/handle_strip(var/slot_to_strip_text,var/mob/living/user,var/obj/item/clothing/holder)
+/mob/living/carbon/human/proc/handle_strip(slot_to_strip_text,mob/living/user,obj/item/clothing/holder)
 	if(!slot_to_strip_text || !istype(user))
 		return
 
@@ -133,7 +133,7 @@
 		unEquip(l_store)
 	visible_message(SPAN_DANGER("\The [user] empties [src]'s pockets!"))
 
-/mob/living/carbon/human/proc/place_in_pockets(obj/item/I, var/mob/living/user)
+/mob/living/carbon/human/proc/place_in_pockets(obj/item/I, mob/living/user)
 	if(!user.unEquip(I))
 		return
 	if(!r_store)
@@ -146,7 +146,7 @@
 	user.put_in_active_hand(I)
 
 // Modify the current target sensor level.
-/mob/living/carbon/human/proc/toggle_sensors(var/mob/living/user)
+/mob/living/carbon/human/proc/toggle_sensors(mob/living/user)
 	var/obj/item/clothing/under/suit = w_uniform
 	if(!suit)
 		to_chat(user, "<span class='warning'>\The [src] is not wearing a suit with sensors.</span>")
@@ -159,7 +159,7 @@
 	suit.set_sensors(user)
 
 // Set internals on or off.
-/mob/living/carbon/human/proc/toggle_internals(var/mob/living/user)
+/mob/living/carbon/human/proc/toggle_internals(mob/living/user)
 	if(internal)
 		visible_message("<span class='danger'>\The [user] disables \the [src]'s internals!</span>")
 		internal.add_fingerprint(user)

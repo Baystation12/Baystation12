@@ -56,7 +56,7 @@
 				qdel(src)
 				return
 
-/obj/machinery/chem_master/attackby(var/obj/item/B as obj, var/mob/user as mob)
+/obj/machinery/chem_master/attackby(obj/item/B as obj, mob/user as mob)
 
 	if(istype(B, /obj/item/reagent_containers/glass))
 
@@ -284,7 +284,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/chem_master/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = TRUE)
+/obj/machinery/chem_master/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = TRUE)
 	if(!(user.client in has_sprites))
 		spawn()
 			has_sprites += user.client

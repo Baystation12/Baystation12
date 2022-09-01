@@ -1,6 +1,6 @@
 // Returns the lowest turf available on a given Z-level
 
-/proc/get_base_turf(var/z_num)
+/proc/get_base_turf(z_num)
 	var/z = num2text(z_num)
 	if(!GLOB.using_map.base_turf_by_z[z])
 		GLOB.using_map.base_turf_by_z[z] = world.turf

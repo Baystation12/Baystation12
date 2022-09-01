@@ -12,7 +12,7 @@ var/global/list/gear_datums = list()
 	var/category = ""
 	var/list/gear = list()
 
-/datum/loadout_category/New(var/cat)
+/datum/loadout_category/New(cat)
 	category = cat
 	..()
 
@@ -55,7 +55,7 @@ var/global/list/gear_datums = list()
 	W.write("gear_list", pref.gear_list)
 	W.write("gear_slot", pref.gear_slot)
 
-/datum/category_item/player_setup_item/loadout/proc/valid_gear_choices(var/max_cost)
+/datum/category_item/player_setup_item/loadout/proc/valid_gear_choices(max_cost)
 	. = list()
 	var/mob/preference_mob = preference_mob()
 	for(var/gear_name in gear_datums)
@@ -73,7 +73,7 @@ var/global/list/gear_datums = list()
 			continue
 		. += gear_name
 
-/datum/category_item/player_setup_item/loadout/proc/skill_check(var/list/jobs, var/list/skills_required)
+/datum/category_item/player_setup_item/loadout/proc/skill_check(list/jobs, list/skills_required)
 	for(var/datum/job/J in jobs)
 		. = TRUE
 		for(var/R in skills_required)
@@ -250,7 +250,7 @@ var/global/list/gear_datums = list()
 	. += "</table>"
 	. = jointext(.,null)
 
-/datum/category_item/player_setup_item/loadout/proc/get_gear_metadata(var/datum/gear/G, var/readonly)
+/datum/category_item/player_setup_item/loadout/proc/get_gear_metadata(datum/gear/G, readonly)
 	var/list/gear = pref.gear_list[pref.gear_slot]
 	. = gear[G.display_name]
 	if(!.)
@@ -258,14 +258,14 @@ var/global/list/gear_datums = list()
 		if(!readonly)
 			gear[G.display_name] = .
 
-/datum/category_item/player_setup_item/loadout/proc/get_tweak_metadata(var/datum/gear/G, var/datum/gear_tweak/tweak)
+/datum/category_item/player_setup_item/loadout/proc/get_tweak_metadata(datum/gear/G, datum/gear_tweak/tweak)
 	var/list/metadata = get_gear_metadata(G)
 	. = metadata["[tweak]"]
 	if(!.)
 		. = tweak.get_default()
 		metadata["[tweak]"] = .
 
-/datum/category_item/player_setup_item/loadout/proc/set_tweak_metadata(var/datum/gear/G, var/datum/gear_tweak/tweak, var/new_metadata)
+/datum/category_item/player_setup_item/loadout/proc/set_tweak_metadata(datum/gear/G, datum/gear_tweak/tweak, new_metadata)
 	var/list/metadata = get_gear_metadata(G)
 	metadata["[tweak]"] = new_metadata
 
@@ -350,7 +350,7 @@ var/global/list/gear_datums = list()
 	if(custom_setup_proc)
 		gear_tweaks += new/datum/gear_tweak/custom_setup(custom_setup_proc)
 
-/datum/gear/proc/get_description(var/metadata)
+/datum/gear/proc/get_description(metadata)
 	. = description
 	for(var/datum/gear_tweak/gt in gear_tweaks)
 		. = gt.tweak_description(., metadata["[gt]"])
@@ -359,7 +359,7 @@ var/global/list/gear_datums = list()
 	var/path
 	var/location
 
-/datum/gear_data/New(var/path, var/location)
+/datum/gear_data/New(path, location)
 	src.path = path
 	src.location = location
 
@@ -372,7 +372,7 @@ var/global/list/gear_datums = list()
 		gt.tweak_item(user, item, metadata && metadata["[gt]"])
 	return item
 
-/datum/gear/proc/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
+/datum/gear/proc/spawn_on_mob(mob/living/carbon/human/H, metadata)
 	var/obj/item/item = spawn_item(H, H, metadata)
 	if(H.equip_to_slot_if_possible(item, slot, TRYEQUIP_REDRAW | TRYEQUIP_DESTROY | TRYEQUIP_FORCE))
 		. = item

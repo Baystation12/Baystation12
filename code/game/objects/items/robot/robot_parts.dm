@@ -14,7 +14,7 @@
 /obj/item/robot_parts/set_dir()
 	return
 
-/obj/item/robot_parts/New(var/newloc, var/model)
+/obj/item/robot_parts/New(newloc, model)
 	..(newloc)
 	if(model_info && model)
 		model_info = model
@@ -211,7 +211,7 @@
 		to_chat(user, "<span class='notice'>You insert the flash into the eye socket!</span>")
 
 
-/obj/item/robot_parts/emag_act(var/remaining_charges, var/mob/user)
+/obj/item/robot_parts/emag_act(remaining_charges, mob/user)
 	if(sabotaged)
 		to_chat(user, "<span class='warning'>[src] is already sabotaged!</span>")
 	else

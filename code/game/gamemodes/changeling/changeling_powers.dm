@@ -34,12 +34,12 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	chem_charges = min(max(0, chem_charges+chem_recharge_rate), chem_storage)
 	geneticdamage = max(0, geneticdamage-1)
 
-/datum/changeling/proc/GetDNA(var/dna_owner)
+/datum/changeling/proc/GetDNA(dna_owner)
 	for(var/datum/absorbed_dna/DNA in absorbed_dna)
 		if(dna_owner == DNA.name)
 			return DNA
 
-/mob/proc/absorbDNA(var/datum/absorbed_dna/newDNA)
+/mob/proc/absorbDNA(datum/absorbed_dna/newDNA)
 	var/datum/changeling/changeling = null
 	if(src.mind && src.mind.changeling)
 		changeling = src.mind.changeling
@@ -100,7 +100,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 
 //Helper proc. Does all the checks and stuff for us to avoid copypasta
-/mob/proc/changeling_power(var/required_chems=0, var/required_dna=0, var/max_genetic_damage=100, var/max_stat=0)
+/mob/proc/changeling_power(required_chems=0, required_dna=0, max_genetic_damage=100, max_stat=0)
 
 	if(!src.mind)		return
 	if(!iscarbon(src))	return
@@ -130,7 +130,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 
 //Used to dump the languages from the changeling datum into the actual mob.
-/mob/proc/changeling_update_languages(var/updated_languages)
+/mob/proc/changeling_update_languages(updated_languages)
 
 	languages = list()
 	for(var/language in updated_languages)
@@ -295,7 +295,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	changeling_update_languages(changeling.absorbed_languages)
 	return 1
 
-/mob/proc/handle_changeling_transform(var/datum/absorbed_dna/chosen_dna)
+/mob/proc/handle_changeling_transform(datum/absorbed_dna/chosen_dna)
 	src.visible_message("<span class='warning'>[src] transforms!</span>")
 
 	src.dna = chosen_dna.dna
@@ -680,7 +680,7 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 	return 1
 
 //Handles the general sting code to reduce on copypasta (seeming as somebody decided to make SO MANY dumb abilities)
-/mob/proc/changeling_sting(var/required_chems=0, var/verb_path, var/loud, sting_name = "unnamed sting")
+/mob/proc/changeling_sting(required_chems=0, verb_path, loud, sting_name = "unnamed sting")
 	var/datum/changeling/changeling = changeling_power(required_chems)
 	if(!changeling)								return
 

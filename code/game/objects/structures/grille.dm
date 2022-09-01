@@ -30,7 +30,7 @@
 /obj/structure/grille/proc/is_broken()
 	return istype(src, /obj/structure/grille/broken)
 
-/obj/structure/grille/Initialize(mapload, var/new_material)
+/obj/structure/grille/Initialize(mapload, new_material)
 	. = ..()
 	if(!new_material)
 		new_material = init_material
@@ -118,7 +118,7 @@
 		else
 			return !density
 
-/obj/structure/grille/bullet_act(var/obj/item/projectile/Proj)
+/obj/structure/grille/bullet_act(obj/item/projectile/Proj)
 	if(!Proj)	return
 
 	//Flimsy grilles aren't so great at stopping projectiles. However they can absorb some of the impact

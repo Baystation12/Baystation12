@@ -45,14 +45,14 @@ var/global/list/_client_preferences_by_type
 				_client_preferences += new client_type()
 	return _client_preferences
 
-/proc/get_client_preference(var/datum/client_preference/preference)
+/proc/get_client_preference(datum/client_preference/preference)
 	if(istype(preference))
 		return preference
 	if(ispath(preference))
 		return get_client_preference_by_type(preference)
 	return get_client_preference_by_key(preference)
 
-/proc/get_client_preference_by_key(var/preference)
+/proc/get_client_preference_by_key(preference)
 	if(!_client_preferences_by_key)
 		_client_preferences_by_key = list()
 		for(var/ct in get_client_preferences())
@@ -60,7 +60,7 @@ var/global/list/_client_preferences_by_type
 			_client_preferences_by_key[client_pref.key] = client_pref
 	return _client_preferences_by_key[preference]
 
-/proc/get_client_preference_by_type(var/preference)
+/proc/get_client_preference_by_type(preference)
 	if(!_client_preferences_by_type)
 		_client_preferences_by_type = list()
 		for(var/ct in get_client_preferences())
@@ -83,7 +83,7 @@ var/global/list/_client_preferences_by_type
 /datum/client_preference/proc/may_set(client/given_client)
 	return TRUE
 
-/datum/client_preference/proc/changed(var/mob/preference_mob, var/new_value)
+/datum/client_preference/proc/changed(mob/preference_mob, new_value)
 	return
 
 /*********************
@@ -98,7 +98,7 @@ var/global/list/_client_preferences_by_type
 	description = "Play lobby music"
 	key = "SOUND_LOBBY"
 
-/datum/client_preference/play_lobby_music/changed(var/mob/preference_mob, var/new_value)
+/datum/client_preference/play_lobby_music/changed(mob/preference_mob, new_value)
 	if(new_value == GLOB.PREF_YES)
 		if(isnewplayer(preference_mob))
 			sound_to(preference_mob, GLOB.using_map.lobby_track.get_sound())
@@ -110,7 +110,7 @@ var/global/list/_client_preferences_by_type
 	description = "Play ambience"
 	key = "SOUND_AMBIENCE"
 
-/datum/client_preference/play_ambiance/changed(var/mob/preference_mob, var/new_value)
+/datum/client_preference/play_ambiance/changed(mob/preference_mob, new_value)
 	if(new_value == GLOB.PREF_NO)
 		sound_to(preference_mob, sound(null, channel = GLOB.ambience_channel_vents))
 		sound_to(preference_mob, sound(null, channel = GLOB.ambience_channel_forced))
@@ -173,7 +173,7 @@ var/global/list/_client_preferences_by_type
 	key = "SHOW_TYPING"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
-/datum/client_preference/show_typing_indicator/changed(var/mob/preference_mob, var/new_value)
+/datum/client_preference/show_typing_indicator/changed(mob/preference_mob, new_value)
 	if(new_value == GLOB.PREF_HIDE)
 		preference_mob.remove_typing_indicator()
 
@@ -279,7 +279,7 @@ var/global/list/_client_preferences_by_type
 	description = "Use Goon Chat"
 	key = "USE_GOONCHAT"
 
-/datum/client_preference/goonchat/changed(var/mob/preference_mob, var/new_value)
+/datum/client_preference/goonchat/changed(mob/preference_mob, new_value)
 	if(preference_mob && preference_mob.client)
 		var/client/C = preference_mob.client
 		if(new_value == GLOB.PREF_YES)

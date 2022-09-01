@@ -108,7 +108,7 @@ var/global/list/tank_gauge_cache = list()
 					descriptive = "bitterly cold"
 		to_chat(user, SPAN_ITALIC("\The [src] feels [descriptive]."))
 
-/obj/item/tank/attackby(var/obj/item/W, var/mob/user)
+/obj/item/tank/attackby(obj/item/W, mob/user)
 	..()
 	if (istype(loc, /obj/item/assembly))
 		icon = loc
@@ -239,7 +239,7 @@ var/global/list/tank_gauge_cache = list()
 	if (proxyassembly.assembly)
 		proxyassembly.assembly.attack_self(user)
 
-/obj/item/tank/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/item/tank/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/mob/living/carbon/location = null
 
 	if(istype(loc, /obj/item/rig))		// check for tanks in rigs
@@ -314,7 +314,7 @@ var/global/list/tank_gauge_cache = list()
 		toggle_valve(usr)
 		return TOPIC_REFRESH
 
-/obj/item/tank/proc/toggle_valve(var/mob/user)
+/obj/item/tank/proc/toggle_valve(mob/user)
 
 	var/mob/living/carbon/location
 	if(istype(loc,/mob/living/carbon))
@@ -392,7 +392,7 @@ var/global/list/tank_gauge_cache = list()
 
 #define TANK_IDEAL_PRESSURE 1015
 
-/obj/item/tank/on_update_icon(var/override)
+/obj/item/tank/on_update_icon(override)
 
 	var/list/overlays_to_add
 	if(override && (proxyassembly.assembly || GET_FLAGS(tank_flags, TANK_FLAG_WIRED)))

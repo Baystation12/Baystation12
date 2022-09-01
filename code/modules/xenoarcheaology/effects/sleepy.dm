@@ -6,7 +6,7 @@
 	..()
 	effect_type = pick(EFFECT_PSIONIC, EFFECT_ORGANIC)
 
-/datum/artifact_effect/sleepy/DoEffectTouch(var/mob/living/toucher)
+/datum/artifact_effect/sleepy/DoEffectTouch(mob/living/toucher)
 	if(istype(toucher))
 		var/weakness = GetAnomalySusceptibility(toucher)
 		if(toucher.isSynthetic())

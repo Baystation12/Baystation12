@@ -3,7 +3,7 @@
 	var/window_x = 370
 	var/window_y = 470
 
-/datum/extension/interactive/multitool/proc/interact(var/obj/item/device/multitool/M, var/mob/user)
+/datum/extension/interactive/multitool/proc/interact(obj/item/device/multitool/M, mob/user)
 	if(extension_status(user) != STATUS_INTERACTIVE)
 		return
 
@@ -16,13 +16,13 @@
 	else
 		close_window(usr)
 
-/datum/extension/interactive/multitool/proc/get_interact_window(var/obj/item/device/multitool/M, var/mob/user)
+/datum/extension/interactive/multitool/proc/get_interact_window(obj/item/device/multitool/M, mob/user)
 	return
 
-/datum/extension/interactive/multitool/proc/close_window(var/mob/user)
+/datum/extension/interactive/multitool/proc/close_window(mob/user)
 	close_browser(user, "window=multitool")
 
-/datum/extension/interactive/multitool/proc/buffer(var/obj/item/device/multitool/multitool)
+/datum/extension/interactive/multitool/proc/buffer(obj/item/device/multitool/multitool)
 	. += "<b>Buffer Memory:</b><br>"
 	var/buffer_name = multitool.get_buffer_name()
 	if(buffer_name)
@@ -30,12 +30,12 @@
 	else
 		. += "No connection stored in the buffer."
 
-/datum/extension/interactive/multitool/extension_status(var/mob/user)
+/datum/extension/interactive/multitool/extension_status(mob/user)
 	if(!user.get_multitool())
 		return STATUS_CLOSE
 	. = ..()
 
-/datum/extension/interactive/multitool/extension_act(href, href_list, var/mob/user)
+/datum/extension/interactive/multitool/extension_act(href, href_list, mob/user)
 	if(..())
 		close_window(usr)
 		return TRUE
@@ -60,12 +60,12 @@
 /datum/extension/interactive/multitool/proc/on_topic(href, href_list, user)
 	return MT_NOACTION
 
-/datum/extension/interactive/multitool/proc/send_buffer(var/obj/item/device/multitool/M, var/atom/buffer, var/mob/user)
+/datum/extension/interactive/multitool/proc/send_buffer(obj/item/device/multitool/M, atom/buffer, mob/user)
 	if(M.get_buffer() == buffer && buffer)
 		receive_buffer(M, buffer, user)
 	else if(!buffer)
 		to_chat(user, "<span class='warning'>Unable to acquire data from the buffered object. Purging from memory.</span>")
 	return MT_REFRESH
 
-/datum/extension/interactive/multitool/proc/receive_buffer(var/obj/item/device/multitool/M, var/atom/buffer, var/mob/user)
+/datum/extension/interactive/multitool/proc/receive_buffer(obj/item/device/multitool/M, atom/buffer, mob/user)
 	return

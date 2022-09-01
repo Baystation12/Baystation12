@@ -9,7 +9,7 @@
 	var/move_delay = 1
 	var/hud_icon_state
 
-/decl/move_intent/proc/can_be_used_by(var/mob/user)
+/decl/move_intent/proc/can_be_used_by(mob/user)
 	if(flags & MOVE_INTENT_QUICK)
 		return user.can_sprint()
 	return TRUE

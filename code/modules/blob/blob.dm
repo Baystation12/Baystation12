@@ -55,7 +55,7 @@
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/effect/blob/CanPass(var/atom/movable/mover, var/turf/target, var/height = 0, var/air_group = 0)
+/obj/effect/blob/CanPass(atom/movable/mover, turf/target, height = 0, air_group = 0)
 	if(air_group || height == 0)
 		return 1
 	return 0
@@ -147,7 +147,7 @@
 		new expandType(T, min(get_current_health(), 30))
 
 
-/obj/effect/blob/proc/pulse(var/forceLeft, var/list/dirs)
+/obj/effect/blob/proc/pulse(forceLeft, list/dirs)
 	sleep(4)
 	var/pushDir = pick(dirs)
 	var/turf/T = get_step(src, pushDir)
@@ -159,7 +159,7 @@
 	if(forceLeft)
 		B.pulse(forceLeft - 1, dirs)
 
-/obj/effect/blob/proc/attack_living(var/mob/living/L)
+/obj/effect/blob/proc/attack_living(mob/living/L)
 	if(!L)
 		return
 	var/blob_damage = pick(DAMAGE_BRUTE, DAMAGE_BURN)
@@ -167,7 +167,7 @@
 	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 	L.apply_damage(rand(damage_min, damage_max), blob_damage, used_weapon = "blob tendril")
 
-/obj/effect/blob/proc/attempt_attack(var/list/dirs)
+/obj/effect/blob/proc/attempt_attack(list/dirs)
 	var/attackDir = pick(dirs)
 	var/turf/T = get_step(src, attackDir)
 	for(var/mob/living/victim in T)
@@ -282,7 +282,7 @@ regen() will cover update_icon() for this proc
 			if(!reported_low_damage)
 				report_shield_status("low")
 
-/obj/effect/blob/core/proc/report_shield_status(var/status)
+/obj/effect/blob/core/proc/report_shield_status(status)
 	if(status == "low")
 		visible_message(SPAN_DANGER("The [src]'s tendril shield fails, leaving the nucleus vulnerable!"), 3)
 		reported_low_damage = TRUE
@@ -368,7 +368,7 @@ regen() will cover update_icon() for this proc
 		else
 			icon_state = "blob_damaged"
 
-/obj/effect/blob/shield/CanPass(var/atom/movable/mover, var/turf/target, var/height = 0, var/air_group = 0)
+/obj/effect/blob/shield/CanPass(atom/movable/mover, turf/target, height = 0, air_group = 0)
 	return !density
 
 /obj/effect/blob/ravaging

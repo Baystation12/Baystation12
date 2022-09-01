@@ -19,7 +19,7 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 	descriptor = "crashed survival pod"
 	crew_jobs = list(/datum/job/submap/pod)
 
-/datum/submap/crashed_pod/sync_cell(var/obj/effect/overmap/visitable/cell)
+/datum/submap/crashed_pod/sync_cell(obj/effect/overmap/visitable/cell)
 	return
 
 /datum/job/submap/pod
@@ -33,7 +33,7 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 	id_types = null
 	pda_type = null
 
-/datum/job/submap/pod/New(var/datum/submap/_owner, var/abstract_job = FALSE)
+/datum/job/submap/pod/New(datum/submap/_owner, abstract_job = FALSE)
 	..()
 	if(_owner) // Might be called from admin tools, etc
 		info = "Your ship, the [_owner.name], has been destroyed by a terrible disaster, \

@@ -743,7 +743,7 @@
 	max_complexity = IC_COMPLEXITY_BASE * 2
 	health_max = 40
 
-/obj/item/device/electronic_assembly/wallmount/afterattack(var/atom/a, var/mob/user, var/proximity)
+/obj/item/device/electronic_assembly/wallmount/afterattack(atom/a, mob/user, proximity)
 	if(proximity && istype(a ,/turf) && a.density)
 		mount_assembly(a,user)
 

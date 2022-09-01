@@ -5,7 +5,7 @@
 	var/list/jobs
 	var/associated_z
 
-/datum/submap/New(var/existing_z)
+/datum/submap/New(existing_z)
 	SSmapping.submaps[src] = TRUE
 	associated_z = existing_z
 
@@ -13,7 +13,7 @@
 	SSmapping.submaps -= src
 	. = ..()
 
-/datum/submap/proc/setup_submap(var/decl/submap_archetype/_archetype)
+/datum/submap/proc/setup_submap(decl/submap_archetype/_archetype)
 
 	if(!istype(_archetype))
 		testing( "Submap error - [name] - null or invalid archetype supplied ([_archetype]).")
@@ -68,7 +68,7 @@
 	if(archetype && archetype.call_webhook)
 		SSwebhooks.send(archetype.call_webhook, list("name" = name))
 
-/datum/submap/proc/sync_cell(var/obj/effect/overmap/visitable/cell)
+/datum/submap/proc/sync_cell(obj/effect/overmap/visitable/cell)
 	name = cell.name
 
 /datum/submap/proc/available()

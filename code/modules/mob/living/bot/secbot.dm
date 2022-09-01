@@ -86,7 +86,7 @@
 		if(2)
 			. += "ERROROROROROR-----"
 
-/mob/living/bot/secbot/ProcessCommand(var/mob/user, var/command, var/href_list)
+/mob/living/bot/secbot/ProcessCommand(mob/user, command, href_list)
 	..()
 	if(CanAccessPanel(user))
 		switch(command)
@@ -107,13 +107,13 @@
 				if(emagged < 2)
 					emagged = !emagged
 
-/mob/living/bot/secbot/attackby(var/obj/item/O, var/mob/user)
+/mob/living/bot/secbot/attackby(obj/item/O, mob/user)
 	var/curhealth = health
 	. = ..()
 	if(health < curhealth)
 		react_to_attack(user)
 
-/mob/living/bot/secbot/emag_act(var/remaining_charges, var/mob/user)
+/mob/living/bot/secbot/emag_act(remaining_charges, mob/user)
 	. = ..()
 	if(!emagged)
 		if(user)
@@ -122,7 +122,7 @@
 		emagged = TRUE
 		return 1
 
-/mob/living/bot/secbot/bullet_act(var/obj/item/projectile/P)
+/mob/living/bot/secbot/bullet_act(obj/item/projectile/P)
 	if (status_flags & GODMODE)
 		return PROJECTILE_FORCE_MISS
 	var/curhealth = health
@@ -132,7 +132,7 @@
 	if(!target && health < curhealth && shooter && (shooter in view(world.view, src)))
 		react_to_attack(shooter)
 
-/mob/living/bot/secbot/proc/begin_arrest(mob/target, var/threat)
+/mob/living/bot/secbot/proc/begin_arrest(mob/target, threat)
 	var/suspect_name = target_name(target)
 	if(declare_arrests)
 		broadcast_security_hud_message("[src] is arresting a level [threat] suspect <b>[suspect_name]</b> in <b>[get_area(src)]</b>.", src)
@@ -164,7 +164,7 @@
 		return
 	..()
 
-/mob/living/bot/secbot/confirmTarget(var/atom/A)
+/mob/living/bot/secbot/confirmTarget(atom/A)
 	if(!..())
 		return 0
 	return (check_threat(A) >= SECBOT_THREAT_ARREST)
@@ -191,12 +191,12 @@
 	else
 		UnarmedAttack(target)
 
-/mob/living/bot/secbot/proc/cuff_target(var/mob/living/carbon/C)
+/mob/living/bot/secbot/proc/cuff_target(mob/living/carbon/C)
 	if(istype(C) && !C.handcuffed)
 		handcuffs.place_handcuffs(C, src)
 	resetTarget() //we're done, failed or not. Don't want to get stuck if C is not
 
-/mob/living/bot/secbot/UnarmedAttack(var/mob/M, var/proximity)
+/mob/living/bot/secbot/UnarmedAttack(mob/M, proximity)
 	if(!..())
 		return
 
@@ -237,7 +237,7 @@
 		return H.get_id_name("unidentified person")
 	return "unidentified lifeform"
 
-/mob/living/bot/secbot/proc/check_threat(var/mob/living/M)
+/mob/living/bot/secbot/proc/check_threat(mob/living/M)
 	if(!M || !istype(M) || M.stat == DEAD || src == M)
 		return 0
 

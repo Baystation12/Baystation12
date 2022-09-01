@@ -63,7 +63,7 @@
 	var/current_user                        // Used to check if the crossbow has changed hands since being drawn.
 	var/draw_time = 20						// Time needed to draw the bow back by one "tension"
 
-/obj/item/gun/launcher/crossbow/toggle_safety(var/mob/user)
+/obj/item/gun/launcher/crossbow/toggle_safety(mob/user)
 	to_chat(user, "<span class='warning'>There's no safety on \the [src]!</span>")
 
 /obj/item/gun/launcher/crossbow/update_release_force()
@@ -96,7 +96,7 @@
 	else
 		draw(user)
 
-/obj/item/gun/launcher/crossbow/proc/draw(var/mob/user as mob)
+/obj/item/gun/launcher/crossbow/proc/draw(mob/user as mob)
 
 	if(!bolt)
 		to_chat(user, "You don't have anything nocked to [src].")
@@ -130,7 +130,7 @@
 
 		user.visible_message("[usr] draws back the string of [src]!","<span class='notice'>You continue drawing back the string of [src]!</span>")
 
-/obj/item/gun/launcher/crossbow/proc/increase_tension(var/mob/user as mob)
+/obj/item/gun/launcher/crossbow/proc/increase_tension(mob/user as mob)
 
 	if(!bolt || !tension || current_user != user) //Arrow has been fired, bow has been relaxed or user has changed.
 		return
@@ -186,7 +186,7 @@
 	else
 		..()
 
-/obj/item/gun/launcher/crossbow/proc/superheat_rod(var/mob/user)
+/obj/item/gun/launcher/crossbow/proc/superheat_rod(mob/user)
 	if(!user || !cell || !bolt) return
 	if(cell.charge < 500) return
 	if(bolt.throwforce >= 15) return
@@ -224,7 +224,7 @@
 	var/max_stored_matter = 120
 	var/boltcost = 30
 
-/obj/item/gun/launcher/crossbow/rapidcrossbowdevice/proc/generate_bolt(var/mob/user)
+/obj/item/gun/launcher/crossbow/rapidcrossbowdevice/proc/generate_bolt(mob/user)
 	if(stored_matter >= boltcost && !bolt)
 		bolt = new/obj/item/arrow/rapidcrossbowdevice(src)
 		stored_matter -= boltcost

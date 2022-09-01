@@ -31,5 +31,5 @@
 /datum/mob_descriptor/vox_markings/get_first_person_message_start()
 	. = "Your neck markings are"
 
-/datum/mob_descriptor/vox_markings/get_third_person_message_start(var/datum/gender/my_gender)
+/datum/mob_descriptor/vox_markings/get_third_person_message_start(datum/gender/my_gender)
 	. = "[my_gender.His] neck markings are"

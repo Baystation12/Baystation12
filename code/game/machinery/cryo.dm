@@ -108,7 +108,7 @@
   *
   * @return nothing
   */
-/obj/machinery/atmospherics/unary/cryo_cell/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/atmospherics/unary/cryo_cell/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	if(user == occupant || user.stat)
 		return
 
@@ -192,12 +192,12 @@
 		go_out()
 		return TOPIC_REFRESH
 
-/obj/machinery/atmospherics/unary/cryo_cell/state_transition(var/decl/machine_construction/default/new_state)
+/obj/machinery/atmospherics/unary/cryo_cell/state_transition(decl/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state))
 		updateUsrDialog()
 
-/obj/machinery/atmospherics/unary/cryo_cell/attackby(var/obj/G, var/mob/user as mob)
+/obj/machinery/atmospherics/unary/cryo_cell/attackby(obj/G, mob/user as mob)
 	if(component_attackby(G, user))
 		return TRUE
 	if(istype(G, /obj/item/reagent_containers/glass))
@@ -330,7 +330,7 @@
 	return 1
 
 	//Like grab-putting, but for mouse-dropping.
-/obj/machinery/atmospherics/unary/cryo_cell/MouseDrop_T(var/mob/target, var/mob/user)
+/obj/machinery/atmospherics/unary/cryo_cell/MouseDrop_T(mob/target, mob/user)
 	if(!CanMouseDrop(target, user))
 		return
 	if (!istype(target))

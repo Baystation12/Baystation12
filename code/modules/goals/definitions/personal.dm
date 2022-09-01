@@ -13,7 +13,7 @@
 /datum/goal/clean/check_success()
 	return (cleaned >= need_cleaned)
 
-/datum/goal/clean/update_progress(var/progress)
+/datum/goal/clean/update_progress(progress)
 	if(cleaned < need_cleaned)
 		cleaned += progress
 		if(cleaned >= need_cleaned)
@@ -58,7 +58,7 @@
 /datum/goal/weights/check_success()
 	return (reps >= need_reps)
 
-/datum/goal/weights/update_progress(var/progress)
+/datum/goal/weights/update_progress(progress)
 	if(reps < need_reps)
 		reps += progress
 		if(reps >= need_reps)
@@ -83,7 +83,7 @@
 /datum/goal/punchingbag/check_success()
 	return (hits >= need_hits)
 
-/datum/goal/punchingbag/update_progress(var/progress)
+/datum/goal/punchingbag/update_progress(progress)
 	if(hits < need_hits)
 		hits += progress
 		if(hits >= need_hits)

@@ -121,7 +121,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/item/airlock_electronics/proc/set_access(var/obj/object)
+/obj/item/airlock_electronics/proc/set_access(obj/object)
 	if(!object.req_access)
 		object.check_access()
 	if(object.req_access.len)

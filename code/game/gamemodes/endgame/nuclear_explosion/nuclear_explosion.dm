@@ -51,7 +51,7 @@
 	if(SSticker.mode)
 		SSticker.mode.explosion_in_progress = 0
 
-/datum/universal_state/nuclear_explosion/proc/dust_mobs(var/list/affected_z_levels)
+/datum/universal_state/nuclear_explosion/proc/dust_mobs(list/affected_z_levels)
 	for(var/mob/living/L in SSmobs.mob_list)
 		var/turf/T = get_turf(L)
 		if(T && (T.z in affected_z_levels))

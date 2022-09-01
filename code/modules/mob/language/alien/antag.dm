@@ -8,7 +8,7 @@
 	shorthand = "N/A"
 	hidden_from_codex = TRUE
 
-/datum/language/ling/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
+/datum/language/ling/broadcast(mob/living/speaker,message,speaker_mask)
 
 	if(speaker.mind && speaker.mind.changeling)
 		..(speaker,message,speaker.mind.changeling.changelingID)
@@ -27,7 +27,7 @@
 	shorthand = "N/A"
 	hidden_from_codex = TRUE
 
-/datum/language/corticalborer/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
+/datum/language/corticalborer/broadcast(mob/living/speaker,message,speaker_mask)
 
 	var/mob/living/simple_animal/borer/B
 
@@ -61,7 +61,7 @@
 	shorthand = "Vox"
 	has_written_form = TRUE
 
-/datum/language/vox/can_speak_special(var/mob/speaker)
+/datum/language/vox/can_speak_special(mob/speaker)
 	if(!ishuman(speaker))
 		return FALSE
 	var/mob/living/carbon/human/H = speaker

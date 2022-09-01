@@ -8,16 +8,16 @@
 	var/y = 0
 	var/list/item_spawns
 
-/datum/random_room/New(var/_x,var/_y,var/_width,var/_height)
+/datum/random_room/New(_x,_y,_width,_height)
 	width = _width
 	height = _height
 	x = _x
 	y = _y
 
-/datum/random_room/proc/apply_to_map(var/xorigin = 1,var/yorigin = 1,var/zorigin = 1)
+/datum/random_room/proc/apply_to_map(xorigin = 1,yorigin = 1,zorigin = 1)
 	return 1
 
-/datum/random_room/proc/apply_loot(var/xorigin = 1,var/yorigin = 1,var/zorigin = 1, var/type)
+/datum/random_room/proc/apply_loot(xorigin = 1,yorigin = 1,zorigin = 1, type)
 	if(!item_spawns || !item_spawns.len)
 		return 0
 	var/place = pick(item_spawns)

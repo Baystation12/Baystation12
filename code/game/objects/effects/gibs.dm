@@ -1,4 +1,4 @@
-/proc/gibs(atom/location, var/datum/dna/MobDNA, gibber_type = /obj/effect/gibspawner/generic, var/fleshcolor, var/bloodcolor)
+/proc/gibs(atom/location, datum/dna/MobDNA, gibber_type = /obj/effect/gibspawner/generic, fleshcolor, bloodcolor)
 	new gibber_type(location,MobDNA,fleshcolor,bloodcolor)
 
 /obj/effect/gibspawner

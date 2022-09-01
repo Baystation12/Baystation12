@@ -23,7 +23,7 @@
 		"You're so happy suddenly, you almost want to dance and sing.",
 		"You feel like the world is out to help you.")
 
-/datum/artifact_effect/goodfeeling/DoEffectTouch(var/mob/user)
+/datum/artifact_effect/goodfeeling/DoEffectTouch(mob/user)
 	if(user)
 		if (istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user

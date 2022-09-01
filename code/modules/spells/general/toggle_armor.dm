@@ -16,7 +16,7 @@
 		armor_pieces = nlist
 	return ..()
 
-/spell/toggle_armor/proc/drop_piece(var/obj/I)
+/spell/toggle_armor/proc/drop_piece(obj/I)
 	if(istype(I.loc, /mob))
 		var/mob/M = I.loc
 		M.drop_from_inventory(I)
@@ -24,7 +24,7 @@
 /spell/toggle_armor/choose_targets()
 	return list(holder)
 
-/spell/toggle_armor/cast(var/list/targets, var/mob/user)
+/spell/toggle_armor/cast(list/targets, mob/user)
 	equip = !equip
 	name = "[initial(name)] ([equip ? "off" : "on"])"
 	if(equip)

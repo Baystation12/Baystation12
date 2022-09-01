@@ -61,7 +61,7 @@
 
 	var/list/initial_email_login = list("login" = "", "password" = "")
 
-/datum/mind/New(var/key)
+/datum/mind/New(key)
 	src.key = key
 	..()
 

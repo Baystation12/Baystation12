@@ -4,21 +4,21 @@
 	info = "<center><img src='talisman.png'></center><br/><br/>"
 	language = LANGUAGE_CULT
 
-/obj/item/paper/talisman/attack_self(var/mob/living/user)
+/obj/item/paper/talisman/attack_self(mob/living/user)
 	if(iscultist(user))
 		to_chat(user, "Attack your target to use this talisman.")
 	else
 		to_chat(user, "You see strange symbols on the paper. Are they supposed to mean something?")
 
-/obj/item/paper/talisman/attack(var/mob/living/M, var/mob/living/user)
+/obj/item/paper/talisman/attack(mob/living/M, mob/living/user)
 	return
 
-/obj/item/paper/talisman/stun/attack_self(var/mob/living/user)
+/obj/item/paper/talisman/stun/attack_self(mob/living/user)
 	if(iscultist(user))
 		to_chat(user, "This is a stun talisman.")
 	..()
 
-/obj/item/paper/talisman/stun/attack(var/mob/living/M, var/mob/living/user)
+/obj/item/paper/talisman/stun/attack(mob/living/M, mob/living/user)
 	if(!iscultist(user))
 		return
 	user.say("Dream Sign: Evil Sealing Talisman!") //TODO: never change this shit
@@ -41,12 +41,12 @@
 	user.unEquip(src)
 	qdel(src)
 
-/obj/item/paper/talisman/emp/attack_self(var/mob/living/user)
+/obj/item/paper/talisman/emp/attack_self(mob/living/user)
 	if(iscultist(user))
 		to_chat(user, "This is an emp talisman.")
 	..()
 
-/obj/item/paper/talisman/emp/afterattack(var/atom/target, var/mob/user, var/proximity)
+/obj/item/paper/talisman/emp/afterattack(atom/target, mob/user, proximity)
 	if(!iscultist(user))
 		return
 	if(!proximity)

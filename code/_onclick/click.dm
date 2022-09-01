@@ -16,7 +16,7 @@
 	Note that this proc can be overridden, and is in the case of screen objects.
 */
 
-/atom/Click(var/location, var/control, var/params) // This is their reaction to being clicked on (standard proc)
+/atom/Click(location, control, params) // This is their reaction to being clicked on (standard proc)
 	var/list/L = params2list(params)
 	var/dragged = L["drag"]
 	if(dragged && !L[dragged])
@@ -25,14 +25,14 @@
 	var/datum/click_handler/click_handler = usr.GetClickHandler()
 	click_handler.OnClick(src, params)
 
-/atom/DblClick(var/location, var/control, var/params)
+/atom/DblClick(location, control, params)
 	var/datum/click_handler/click_handler = usr.GetClickHandler()
 	click_handler.OnDblClick(src, params)
 
-/atom/proc/allow_click_through(var/atom/A, var/params, var/mob/user)
+/atom/proc/allow_click_through(atom/A, params, mob/user)
 	return FALSE
 
-/turf/allow_click_through(var/atom/A, var/params, var/mob/user)
+/turf/allow_click_through(atom/A, params, mob/user)
 	return TRUE
 
 /*
@@ -48,7 +48,7 @@
 	* item/afterattack(atom,user,adjacent,params) - used both ranged and adjacent
 	* mob/RangedAttack(atom,params) - used only ranged, only used for tk and laser eyes but could be changed
 */
-/mob/proc/ClickOn(var/atom/A, var/params)
+/mob/proc/ClickOn(atom/A, params)
 
 	if(world.time <= next_click) // Hard check, before anything else, to avoid crashing
 		return
@@ -153,7 +153,7 @@
 			trigger_aiming(TARGET_CAN_CLICK)
 	return 1
 
-/mob/proc/setClickCooldown(var/timeout)
+/mob/proc/setClickCooldown(timeout)
 	next_move = max(world.time + timeout, next_move)
 
 /mob/proc/canClick()
@@ -162,7 +162,7 @@
 	return 0
 
 // Default behavior: ignore double clicks, the second click that makes the doubleclick call already calls for a normal click
-/mob/proc/DblClickOn(var/atom/A, var/params)
+/mob/proc/DblClickOn(atom/A, params)
 	return
 
 /**
@@ -176,10 +176,10 @@
  *
  * Returns boolean - Whether or not the mob was able to perform the interaction.
  */
-/mob/proc/UnarmedAttack(var/atom/A, var/proximity_flag)
+/mob/proc/UnarmedAttack(atom/A, proximity_flag)
 	return
 
-/mob/living/UnarmedAttack(var/atom/A, var/proximity_flag)
+/mob/living/UnarmedAttack(atom/A, proximity_flag)
 
 	if(GAME_STATE < RUNLEVEL_GAME)
 		to_chat(src, "You cannot attack people before the game has started.")
@@ -209,7 +209,7 @@
  *
  * Returns boolean - Whether or not the mob was able to perform the interaction.
  */
-/mob/proc/RangedAttack(var/atom/A, var/params)
+/mob/proc/RangedAttack(atom/A, params)
 	if(!mutations.len)
 		return FALSE
 
@@ -223,7 +223,7 @@
  * **Parameters**:
  * - `A` - The atom that was clicked on/interacted with.
  */
-/mob/proc/RestrainedClickOn(var/atom/A)
+/mob/proc/RestrainedClickOn(atom/A)
 	return
 
 
@@ -233,13 +233,13 @@
  * **Parameters**:
  * - `A` - The atom that was clicked on.
  */
-/mob/proc/MiddleClickOn(var/atom/A)
+/mob/proc/MiddleClickOn(atom/A)
 	swap_hand()
 	return
 
 // In case of use break glass
 /*
-/atom/proc/MiddleClick(var/mob/M as mob)
+/atom/proc/MiddleClick(mob/M as mob)
 	return
 */
 
@@ -249,7 +249,7 @@
  * **Parameters**:
  * - `A` - The atom that was clicked on.
  */
-/mob/proc/ShiftClickOn(var/atom/A)
+/mob/proc/ShiftClickOn(atom/A)
 	A.ShiftClick(src)
 	return
 
@@ -259,7 +259,7 @@
  * **Parameters**:
  * - `user` - The mob that clicked on the atom.
  */
-/atom/proc/ShiftClick(var/mob/user)
+/atom/proc/ShiftClick(mob/user)
 	if(user.client && user.client.eye == user)
 		user.examinate(src)
 	return
@@ -272,7 +272,7 @@
  *
  * Returns boolean - Whether or not the action was handled.
  */
-/mob/proc/CtrlClickOn(var/atom/A)
+/mob/proc/CtrlClickOn(atom/A)
 	return A.CtrlClick(src)
 
 /**
@@ -283,10 +283,10 @@
  *
  * Returns boolean - Whether or not the action was handled.
  */
-/atom/proc/CtrlClick(var/mob/user)
+/atom/proc/CtrlClick(mob/user)
 	return FALSE
 
-/atom/movable/CtrlClick(var/mob/user)
+/atom/movable/CtrlClick(mob/user)
 	if(Adjacent(user))
 		user.start_pulling(src)
 		return TRUE
@@ -298,7 +298,7 @@
  * **Parameters**:
  * - `A` - The atom that was clicked on.
  */
-/mob/proc/AltClickOn(var/atom/A)
+/mob/proc/AltClickOn(atom/A)
 	var/datum/extension/on_click/alt = get_extension(A, /datum/extension/on_click/alt)
 	if(alt && alt.on_click(src))
 		return
@@ -312,7 +312,7 @@
  *
  * Returns boolean - Whether or not the action was handled.
  */
-/atom/proc/AltClick(var/mob/user)
+/atom/proc/AltClick(mob/user)
 	var/turf/T = get_turf(src)
 	if(T && user.TurfAdjacent(T))
 		if(user.listed_turf == T)
@@ -322,10 +322,10 @@
 			user.client.statpanel = "Turf"
 	return 1
 
-/mob/proc/TurfAdjacent(var/turf/T)
+/mob/proc/TurfAdjacent(turf/T)
 	return T.AdjacentQuick(src)
 
-/mob/observer/ghost/TurfAdjacent(var/turf/T)
+/mob/observer/ghost/TurfAdjacent(turf/T)
 	if(!isturf(loc) || !client)
 		return FALSE
 	return z == T.z && (get_dist(loc, T) <= client.view)
@@ -336,7 +336,7 @@
  * **Parameters**:
  * - `A` - The atom that was clicked on.
  */
-/mob/proc/CtrlShiftClickOn(var/atom/A)
+/mob/proc/CtrlShiftClickOn(atom/A)
 	A.CtrlShiftClick(src)
 	return
 
@@ -346,7 +346,7 @@
  * **Parameters**:
  * - `user` - The mob that clicked on the atom.
  */
-/atom/proc/CtrlShiftClick(var/mob/user)
+/atom/proc/CtrlShiftClick(mob/user)
 	return
 
 /**
@@ -355,7 +355,7 @@
  * **Parameters**:
  * - `A` - The atom that was clicked on.
  */
-/mob/proc/CtrlAltClickOn(var/atom/A)
+/mob/proc/CtrlAltClickOn(atom/A)
 	if(A.CtrlAltClick(src))
 		return
 	pointed(A)
@@ -368,7 +368,7 @@
  *
  * Returns boolean - Whather or not the interaction was handled.
  */
-/atom/proc/CtrlAltClick(var/mob/user)
+/atom/proc/CtrlAltClick(mob/user)
 	return
 
 /*
@@ -398,7 +398,7 @@
 		to_chat(src, SPAN_WARNING("You're out of energy! You need food!"))
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
-/mob/proc/face_atom(var/atom/A)
+/mob/proc/face_atom(atom/A)
 	if(!A || !x || !y || !A.x || !A.y) return
 	var/dx = A.x - x
 	var/dy = A.y - y

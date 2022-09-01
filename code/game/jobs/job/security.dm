@@ -17,7 +17,7 @@
 	minimal_player_age = 14
 	outfit_type = /decl/hierarchy/outfit/job/security/hos
 
-/datum/job/hos/equip(var/mob/living/carbon/human/H)
+/datum/job/hos/equip(mob/living/carbon/human/H)
 	. = ..()
 	if(.)
 		H.implant_loyalty(H)

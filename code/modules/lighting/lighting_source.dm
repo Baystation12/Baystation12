@@ -33,7 +33,7 @@ var/global/total_lighting_sources = 0
 	var/destroyed       // Whether we are destroyed and need to stop emitting light.
 	var/force_update
 
-/datum/light_source/New(var/atom/owner, var/atom/top)
+/datum/light_source/New(atom/owner, atom/top)
 	total_lighting_sources++
 	source_atom = owner // Set our new owner.
 	if(!source_atom.light_sources)
@@ -97,7 +97,7 @@ var/global/total_lighting_sources = 0
 	}
 
 // This proc will cause the light source to update the top atom, and add itself to the update queue.
-/datum/light_source/proc/update(var/atom/new_top_atom)
+/datum/light_source/proc/update(atom/new_top_atom)
 	// This top atom is different.
 	if(new_top_atom && new_top_atom != top_atom)
 		if(top_atom != source_atom) // Remove ourselves from the light sources of that top atom.
@@ -268,7 +268,7 @@ var/global/total_lighting_sources = 0
 
 	effect_str.Cut()
 
-/datum/light_source/proc/recalc_corner(var/datum/lighting_corner/C)
+/datum/light_source/proc/recalc_corner(datum/lighting_corner/C)
 	if(effect_str.Find(C)) // Already have one.
 		REMOVE_CORNER(C)
 
@@ -315,7 +315,7 @@ var/global/total_lighting_sources = 0
 		effect_str -= C
 
 
-/datum/light_source/proc/update_the_turf(var/turf/T, var/list/datum/lighting_corner/corners, var/list/turf/turfs)
+/datum/light_source/proc/update_the_turf(turf/T, list/datum/lighting_corner/corners, list/turf/turfs)
 	if(!T.lighting_corners_initialised)
 		T.generate_missing_corners()
 	corners |= T.get_corners()

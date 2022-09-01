@@ -319,7 +319,7 @@
 
 	interact(usr)
 
-/obj/item/device/integrated_circuit_printer/proc/subtract_material_costs(var/list/cost, var/mob/user)
+/obj/item/device/integrated_circuit_printer/proc/subtract_material_costs(list/cost, mob/user)
 	for(var/material in cost)
 		if(materials[material] < cost[material])
 			var/material/material_datum = SSmaterials.get_material_by_name(material)

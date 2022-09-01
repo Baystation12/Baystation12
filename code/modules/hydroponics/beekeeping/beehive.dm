@@ -45,7 +45,7 @@
 	if(!closed)
 		to_chat(user, "The lid is open.")
 
-/obj/machinery/beehive/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/beehive/attackby(obj/item/I, mob/user)
 	if(isCrowbar(I))
 		closed = !closed
 		user.visible_message("<span class='notice'>\The [user] [closed ? "closes" : "opens"] \the [src].</span>", "<span class='notice'>You [closed ? "close" : "open"] \the [src].</span>")
@@ -127,7 +127,7 @@
 			qdel(src)
 		return
 
-/obj/machinery/beehive/physical_attack_hand(var/mob/user)
+/obj/machinery/beehive/physical_attack_hand(mob/user)
 	if(!closed)
 		. = TRUE
 		if(honeycombs < 100)
@@ -188,7 +188,7 @@
 		return SPAN_NOTICE("You must wait for \the [src] to finish first!")
 	return ..()
 
-/obj/machinery/honey_extractor/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/honey_extractor/attackby(obj/item/I, mob/user)
 	if(processing)
 		to_chat(user, "<span class='notice'>\The [src] is currently spinning, wait until it's finished.</span>")
 		return
@@ -251,7 +251,7 @@
 	icon = 'icons/obj/apiary_bees_etc.dmi'
 	icon_state = "apiary"
 
-/obj/item/beehive_assembly/attack_self(var/mob/user)
+/obj/item/beehive_assembly/attack_self(mob/user)
 	to_chat(user, "<span class='notice'>You start assembling \the [src]...</span>")
 	if (do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 		user.visible_message("<span class='notice'>\The [user] constructs a beehive.</span>", "<span class='notice'>You construct a beehive.</span>")

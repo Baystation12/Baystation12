@@ -172,19 +172,19 @@ var/global/list/paramslist_cache = list()
 #define cached_key_number_decode(key_number_data) cached_params_decode(key_number_data, /proc/key_number_decode)
 #define cached_number_list_decode(number_list_data) cached_params_decode(number_list_data, /proc/number_list_decode)
 
-/proc/cached_params_decode(var/params_data, var/decode_proc)
+/proc/cached_params_decode(params_data, decode_proc)
 	. = paramslist_cache[params_data]
 	if(!.)
 		. = call(decode_proc)(params_data)
 		paramslist_cache[params_data] = .
 
-/proc/key_number_decode(var/key_number_data)
+/proc/key_number_decode(key_number_data)
 	var/list/L = params2list(key_number_data)
 	for(var/key in L)
 		L[key] = text2num(L[key])
 	return L
 
-/proc/number_list_decode(var/number_list_data)
+/proc/number_list_decode(number_list_data)
 	var/list/L = params2list(number_list_data)
 	for(var/i in 1 to L.len)
 		L[i] = text2num(L[i])

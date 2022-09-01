@@ -79,7 +79,7 @@
 	icon_state = "improvised"
 	secures_occupant = FALSE
 
-/obj/structure/kitchenspike/attack_hand(var/mob/user)
+/obj/structure/kitchenspike/attack_hand(mob/user)
 
 	if(!occupant)
 		return ..()
@@ -95,10 +95,10 @@
 		to_chat(user, SPAN_WARNING("\The [occupant] is so badly mangled that removing them from \the [src] would be pointless."))
 		return
 
-/obj/structure/kitchenspike/MouseDrop_T(var/mob/target, var/mob/user)
+/obj/structure/kitchenspike/MouseDrop_T(mob/target, mob/user)
 	try_spike(target, user)
 
-/obj/structure/kitchenspike/proc/try_spike(var/mob/living/target, var/mob/living/user)
+/obj/structure/kitchenspike/proc/try_spike(mob/living/target, mob/living/user)
 	if(!istype(target) || !Adjacent(user) || user.incapacitated())
 		return
 
@@ -129,7 +129,7 @@
 	else
 		to_chat(user, SPAN_WARNING("You cannot butcher \the [target]."))
 
-/obj/structure/kitchenspike/proc/suitable_for_butchery(var/mob/living/victim)
+/obj/structure/kitchenspike/proc/suitable_for_butchery(mob/living/victim)
 	return istype(victim) && ((victim.meat_type && victim.meat_amount) || (victim.skin_material && victim.skin_amount) || (victim.bone_material && victim.bone_amount))
 
 /obj/structure/kitchenspike/on_update_icon()
@@ -155,7 +155,7 @@
 		update_icon()
 	return TRUE
 
-/obj/structure/kitchenspike/proc/set_carcass_state(var/_state)
+/obj/structure/kitchenspike/proc/set_carcass_state(_state)
 	occupant_state = _state
 	if(occupant)
 		occupant.adjustBruteLoss(rand(50,60))
@@ -170,7 +170,7 @@
 		QDEL_NULL(occupant)
 	update_icon()
 
-/obj/structure/kitchenspike/proc/do_butchery_step(var/mob/user, var/next_state, var/butchery_string)
+/obj/structure/kitchenspike/proc/do_butchery_step(mob/user, next_state, butchery_string)
 
 	if(QDELETED(occupant))
 		return FALSE
@@ -195,7 +195,7 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/kitchenspike/attackby(var/obj/item/thing, var/mob/user)
+/obj/structure/kitchenspike/attackby(obj/item/thing, mob/user)
 	if(!thing.sharp)
 		return ..()
 	if(!occupant)

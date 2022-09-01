@@ -3,7 +3,7 @@
 	var/mob/living/living_holder
 	var/death_proc
 
-/datum/extension/on_click/alt/ghost_admin_killer/New(var/host, var/death_proc)
+/datum/extension/on_click/alt/ghost_admin_killer/New(host, death_proc)
 	..()
 	living_holder = host
 	src.death_proc = death_proc || /mob/proc/death
@@ -12,7 +12,7 @@
 	living_holder = null
 	. = ..()
 
-/datum/extension/on_click/alt/ghost_admin_killer/on_click(var/mob/user)
+/datum/extension/on_click/alt/ghost_admin_killer/on_click(mob/user)
 	if(!valid_preconditions(user))
 		return FALSE
 
@@ -28,7 +28,7 @@
 
 	return TRUE
 
-/datum/extension/on_click/alt/ghost_admin_killer/proc/valid_preconditions(var/mob/observer/ghost/user)
+/datum/extension/on_click/alt/ghost_admin_killer/proc/valid_preconditions(mob/observer/ghost/user)
 	if(QDELETED(living_holder))               // Sanity check
 		return FALSE
 	if(!istype(user))                         // Only ghosts may attempt to alt-kill mobs

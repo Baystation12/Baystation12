@@ -25,7 +25,7 @@
 	desc += " It has [number_of_pins] input pins."
 	extended_desc += " This multiplexer has a range from 1 to [inputs.len - 1]."
 
-/obj/item/integrated_circuit/transfer/multiplexer/do_work(var/ord)
+/obj/item/integrated_circuit/transfer/multiplexer/do_work(ord)
 	if(ord != 1)
 		return
 	var/input_index = get_pin_data(IC_INPUT, 1)
@@ -75,7 +75,7 @@
 	desc += " It has [number_of_pins] output pins."
 	extended_desc += " This demultiplexer has a range from 1 to [outputs.len]."
 
-/obj/item/integrated_circuit/transfer/demultiplexer/do_work(var/ord)
+/obj/item/integrated_circuit/transfer/demultiplexer/do_work(ord)
 	if(ord != 1)
 		return
 	var/output_index = get_pin_data(IC_INPUT, 1)

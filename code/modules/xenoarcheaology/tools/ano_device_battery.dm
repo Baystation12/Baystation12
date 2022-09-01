@@ -12,7 +12,7 @@
 	p = min(p, 100)
 	icon_state = "anobattery[round(p,25)]"
 
-/obj/item/anobattery/proc/use_power(var/amount)
+/obj/item/anobattery/proc/use_power(amount)
 	stored_charge = max(0, stored_charge - amount)
 
 /obj/item/anodevice
@@ -33,7 +33,7 @@
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
-/obj/item/anodevice/attackby(var/obj/I as obj, var/mob/user as mob)
+/obj/item/anodevice/attackby(obj/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/anobattery))
 		if(!inserted_battery)
 			if(!user.unEquip(I, src))
@@ -44,10 +44,10 @@
 	else
 		return ..()
 
-/obj/item/anodevice/attack_self(var/mob/user as mob)
+/obj/item/anodevice/attack_self(mob/user as mob)
 	return src.interact(user)
 
-/obj/item/anodevice/interact(var/mob/user)
+/obj/item/anodevice/interact(mob/user)
 	var/dat = "<b>Anomalous Materials Energy Utiliser</b><br>"
 	if(inserted_battery)
 		if(activated)

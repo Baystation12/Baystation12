@@ -18,7 +18,7 @@
 	var/active =    0          // Is our owner intending to take hostages?
 	var/target_permissions = TARGET_CAN_MOVE | TARGET_CAN_CLICK | TARGET_CAN_RADIO	// Permission bitflags.
 
-/obj/aiming_overlay/New(var/newowner)
+/obj/aiming_overlay/New(newowner)
 	..()
 	owner = newowner
 	loc = null
@@ -139,7 +139,7 @@
 		spawn(0)
 			owner.set_dir(get_dir(get_turf(owner), get_turf(src)))
 
-/obj/aiming_overlay/proc/aim_at(var/mob/target, var/obj/thing, var/no_target_change)
+/obj/aiming_overlay/proc/aim_at(mob/target, obj/thing, no_target_change)
 
 	if (!owner || !isliving(target))
 		return
@@ -214,7 +214,7 @@
 	else
 		icon_state = "locking"
 
-/obj/aiming_overlay/proc/toggle_active(var/force_state = null, var/no_message = FALSE)
+/obj/aiming_overlay/proc/toggle_active(force_state = null, no_message = FALSE)
 	if(!isnull(force_state))
 		if(active == force_state)
 			return
@@ -236,7 +236,7 @@
 			owner.client.remove_gun_icons()
 		owner.gun_setting_icon.icon_state = "gun[active]"
 
-/obj/aiming_overlay/proc/cancel_aiming(var/no_message = 0)
+/obj/aiming_overlay/proc/cancel_aiming(no_message = 0)
 	if(!aiming_with || !aiming_at)
 		return
 	if(!no_message)

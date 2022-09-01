@@ -52,16 +52,16 @@ a creative player the means to solve many problems.  Circuits are held inside an
 /obj/item/integrated_circuit/proc/any_examine(mob/user)
 	return
 
-/obj/item/integrated_circuit/proc/attackby_react(var/atom/movable/A,mob/user)
+/obj/item/integrated_circuit/proc/attackby_react(atom/movable/A,mob/user)
 	return
 
-/obj/item/integrated_circuit/proc/sense(var/atom/movable/A,mob/user,prox)
+/obj/item/integrated_circuit/proc/sense(atom/movable/A,mob/user,prox)
 	return
 
 /obj/item/integrated_circuit/proc/OnICTopic(href_list, user)
 	return
 
-/obj/item/integrated_circuit/proc/get_topic_data(var/mob/user)
+/obj/item/integrated_circuit/proc/get_topic_data(mob/user)
 	return
 
 /obj/item/integrated_circuit/proc/check_interactivity(mob/user)
@@ -301,7 +301,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	if(. == IC_TOPIC_REFRESH)
 		interact_with_assembly(usr)
 
-/obj/item/integrated_circuit/proc/interact_with_assembly(var/mob/user)
+/obj/item/integrated_circuit/proc/interact_with_assembly(mob/user)
 	if(assembly)
 		assembly.interact(user)
 		if(assembly.opened)
@@ -333,7 +333,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		return TRUE // Battery has enough.
 	return FALSE // Not enough power.
 
-/obj/item/integrated_circuit/proc/check_then_do_work(ord,var/ignore_power = FALSE)
+/obj/item/integrated_circuit/proc/check_then_do_work(ord,ignore_power = FALSE)
 	if(world.time < next_use) 	// All intergrated circuits have an internal cooldown, to protect from spam.
 		return FALSE
 	if(assembly && ext_cooldown && (world.time < assembly.ext_next_use)) 	// Some circuits have external cooldown, to protect from spam.
@@ -402,8 +402,8 @@ a creative player the means to solve many problems.  Circuits are held inside an
 
 	return FALSE
 
-/obj/item/integrated_circuit/proc/added_to_assembly(var/obj/item/device/electronic_assembly/assembly)
+/obj/item/integrated_circuit/proc/added_to_assembly(obj/item/device/electronic_assembly/assembly)
 	return
 
-/obj/item/integrated_circuit/proc/removed_from_assembly(var/obj/item/device/electronic_assembly/assembly)
+/obj/item/integrated_circuit/proc/removed_from_assembly(obj/item/device/electronic_assembly/assembly)
 	return

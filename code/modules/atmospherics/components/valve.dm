@@ -42,7 +42,7 @@
 		add_underlay(T, node1, get_dir(src, node1), node1 ? node1.icon_connect_type : "")
 		add_underlay(T, node2, get_dir(src, node2), node2 ? node2.icon_connect_type : "")
 
-/obj/machinery/atmospherics/valve/hide(var/i)
+/obj/machinery/atmospherics/valve/hide(i)
 	update_underlays()
 
 /obj/machinery/atmospherics/valve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
@@ -215,7 +215,7 @@
 
 	return null
 
-/obj/machinery/atmospherics/valve/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/valve/attackby(obj/item/W as obj, mob/user as mob)
 	if (!istype(W, /obj/item/wrench))
 		return ..()
 	var/datum/gas_mixture/int_air = return_air()

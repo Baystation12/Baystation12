@@ -9,7 +9,7 @@
 
 	var/spiky = FALSE
 
-/obj/structure/barricade/Initialize(var/mapload, var/material_name)
+/obj/structure/barricade/Initialize(mapload, material_name)
 	. = ..(mapload)
 	if(!material_name)
 		material_name = MATERIAL_WOOD
@@ -90,7 +90,7 @@
 	var/damage //how badly it smarts when you run into this like a rube
 	var/list/poke_description = list("gored", "spiked", "speared", "stuck", "stabbed")
 
-/obj/structure/barricade/spike/Initialize(var/mapload, var/material_name, var/rod_material_name)
+/obj/structure/barricade/spike/Initialize(mapload, material_name, rod_material_name)
 	. = ..(mapload, material_name)
 	if(!rod_material_name)
 		rod_material_name = MATERIAL_WOOD

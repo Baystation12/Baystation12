@@ -64,14 +64,14 @@ var/global/list/protected_objects = list(/obj/machinery,
 		return . - M.creator.resolve()
 
 
-/mob/living/simple_animal/hostile/mimic/New(newloc, var/obj/o, var/mob/living/creator)
+/mob/living/simple_animal/hostile/mimic/New(newloc, obj/o, mob/living/creator)
 	..()
 	if(o)
 		if(ispath(o))
 			o = new o(newloc)
 		CopyObject(o,creator)
 
-/mob/living/simple_animal/hostile/mimic/proc/CopyObject(var/obj/O, var/mob/living/creator)
+/mob/living/simple_animal/hostile/mimic/proc/CopyObject(obj/O, mob/living/creator)
 
 	if((istype(O, /obj/item) || istype(O, /obj/structure)) && !is_type_in_list(O, protected_objects))
 		O.forceMove(src)
@@ -164,7 +164,7 @@ var/global/list/protected_objects = list(/obj/machinery,
 		set_AI_busy(FALSE)
 		awake = 1
 
-/mob/living/simple_animal/hostile/mimic/sleeping/adjustBruteLoss(var/damage)
+/mob/living/simple_animal/hostile/mimic/sleeping/adjustBruteLoss(damage)
 	trigger()
 	..(damage)
 

@@ -71,7 +71,7 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 	available_events -= picked_event
 	return picked_event
 
-/datum/event_container/proc/get_weight(var/datum/event_meta/EM, var/list/active_with_role)
+/datum/event_container/proc/get_weight(datum/event_meta/EM, list/active_with_role)
 	if(!EM.enabled)
 		return 0
 

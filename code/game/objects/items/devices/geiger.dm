@@ -22,7 +22,7 @@
 	. = ..()
 	sound_id = "[type]_[sequential_id(type)]"
 
-/obj/item/device/geiger/proc/update_sound(var/playing)
+/obj/item/device/geiger/proc/update_sound(playing)
 	if(playing && !sound_token)
 		sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, "sound/items/geiger.ogg", volume = geiger_volume, range = 4, falloff = 3, prefer_mute = TRUE)
 	else if(!playing && sound_token)
@@ -47,7 +47,7 @@
 	else
 		to_chat(user, "<span class='notice'>[msg]</span>")
 
-/obj/item/device/geiger/attack_self(var/mob/user)
+/obj/item/device/geiger/attack_self(mob/user)
 	scanning = !scanning
 	if(scanning)
 		START_PROCESSING(SSobj, src)

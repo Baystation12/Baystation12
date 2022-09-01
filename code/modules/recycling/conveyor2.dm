@@ -95,7 +95,7 @@
 			step(A,movedir)
 
 // attack with item, place item on conveyor
-/obj/machinery/conveyor/attackby(var/obj/item/I, mob/user)
+/obj/machinery/conveyor/attackby(obj/item/I, mob/user)
 	if(isCrowbar(I))
 		if(!(stat & BROKEN))
 			var/obj/item/conveyor_construct/C = new/obj/item/conveyor_construct(src.loc)

@@ -35,7 +35,7 @@
 				suspension_field.overlays += "shield2"
 			I.forceMove(suspension_field)
 
-/obj/machinery/suspension_gen/interact(var/mob/user)
+/obj/machinery/suspension_gen/interact(mob/user)
 	user.set_machine(src)
 	var/dat = "<b>Multi-phase mobile suspension field generator MK II \"Steadfast\"</b><br>"
 	var/obj/item/cell/cell = get_cell()
@@ -59,7 +59,7 @@
 	popup.open()
 	onclose(user, "suspension")
 
-/obj/machinery/suspension_gen/OnTopic(var/mob/user, href_list)
+/obj/machinery/suspension_gen/OnTopic(mob/user, href_list)
 	if(href_list["toggle_field"])
 		if(!suspension_field)
 			var/obj/item/cell/cell = get_cell()
@@ -78,7 +78,7 @@
 	if(. == TOPIC_REFRESH)
 		interact(user)
 
-/obj/machinery/suspension_gen/interface_interact(var/mob/user)
+/obj/machinery/suspension_gen/interface_interact(mob/user)
 	interact(user)
 	return TRUE
 

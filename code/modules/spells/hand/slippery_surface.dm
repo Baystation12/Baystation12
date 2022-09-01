@@ -11,7 +11,7 @@
 	hud_state = "gen_ice"
 	cast_sound = 'sound/magic/summonitems_generic.ogg'
 
-/spell/hand/slippery_surface/cast_hand(var/atom/a, var/mob/user)
+/spell/hand/slippery_surface/cast_hand(atom/a, mob/user)
 	for(var/turf/simulated/T in view(1,a))
 		T.wet_floor(50)
 		new /obj/effect/temporary(T,3, 'icons/effects/effects.dmi', "sonar_ping")

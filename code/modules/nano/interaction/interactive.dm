@@ -3,5 +3,5 @@
 */
 GLOBAL_DATUM_INIT(interactive_state, /datum/topic_state/interactive, new)
 
-/datum/topic_state/interactive/can_use_topic(var/src_object, var/mob/user)
+/datum/topic_state/interactive/can_use_topic(src_object, mob/user)
 	return STATUS_INTERACTIVE

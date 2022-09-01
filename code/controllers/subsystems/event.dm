@@ -79,7 +79,7 @@ SUBSYSTEM_DEF(event)
 
 
 //Actual event handling
-/datum/controller/subsystem/event/proc/event_complete(var/datum/event/E)
+/datum/controller/subsystem/event/proc/event_complete(datum/event/E)
 	active_events -= E
 
 	if(!E.event_meta || !E.severity)	// datum/event is used here and there for random reasons, maintaining "backwards compatibility"
@@ -95,11 +95,11 @@ SUBSYSTEM_DEF(event)
 
 	log_debug("Event '[EM.name]' has completed at [worldtime2stationtime(world.time)].")
 
-/datum/controller/subsystem/event/proc/delay_events(var/severity, var/delay)
+/datum/controller/subsystem/event/proc/delay_events(severity, delay)
 	var/datum/event_container/EC = event_containers[severity]
 	EC.next_event_time += delay
 
-/datum/controller/subsystem/event/proc/Interact(var/mob/living/user)
+/datum/controller/subsystem/event/proc/Interact(mob/living/user)
 
 	var/html = GetInteractWindow()
 
@@ -335,7 +335,7 @@ SUBSYSTEM_DEF(event)
 	Interact(usr)
 
 //Event admin verbs
-/client/proc/forceEvent(var/type in SSevent.all_events)
+/client/proc/forceEvent(type in SSevent.all_events)
 	set name = "Trigger Event (Debug Only)"
 	set category = "Debug"
 

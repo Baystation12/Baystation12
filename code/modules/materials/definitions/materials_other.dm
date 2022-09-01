@@ -20,10 +20,9 @@
 	construction_difficulty = MATERIAL_NORMAL_DIY
 	hidden_from_codex = TRUE
 
-/material/cult/place_dismantled_girder(var/turf/target)
+/material/cult/place_dismantled_girder(turf/target)
 	new /obj/structure/girder/cult(target)
 
 /material/cult/reinf
 	name = MATERIAL_REINFORCED_CULT
 	display_name = "runic inscriptions"
-	

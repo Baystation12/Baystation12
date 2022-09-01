@@ -21,7 +21,7 @@
 	hud_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	set_cleanable_scent()
 
-/obj/effect/decal/cleanable/Initialize(var/ml, var/_age)
+/obj/effect/decal/cleanable/Initialize(ml, _age)
 	if(!isnull(_age))
 		age = _age
 	if(random_icon_states && length(src.random_icon_states) > 0)
@@ -33,11 +33,11 @@
 	SSpersistence.forget_value(src, /datum/persistent/filth)
 	. = ..()
 
-/obj/effect/decal/cleanable/water_act(var/depth)
+/obj/effect/decal/cleanable/water_act(depth)
 	..()
 	qdel(src)
 
-/obj/effect/decal/cleanable/clean_blood(var/ignore = 0)
+/obj/effect/decal/cleanable/clean_blood(ignore = 0)
 	if(!ignore)
 		qdel(src)
 		return

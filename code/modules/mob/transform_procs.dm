@@ -107,7 +107,7 @@
 	return O
 
 //human -> robot
-/mob/living/carbon/human/proc/Robotize(var/supplied_robot_type = /mob/living/silicon/robot)
+/mob/living/carbon/human/proc/Robotize(supplied_robot_type = /mob/living/silicon/robot)
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	QDEL_NULL_LIST(worn_underwear)
@@ -252,7 +252,7 @@
  * This proc is here to force coders to manually place their mob in this list, hopefully tested.
  * This also gives a place to explain -why- players shouldn't be turn into certain mobs and hopefully someone can fix them.
  */
-/mob/proc/safe_animal(var/MP)
+/mob/proc/safe_animal(MP)
 
 //Bad mobs! - Remember to add a comment explaining what's wrong with the mob
 	if(!MP)

@@ -19,7 +19,7 @@
 /obj/structure/bigDelivery/attack_hand(mob/user as mob)
 	unwrap(user)
 
-/obj/structure/bigDelivery/proc/unwrap(var/mob/user)
+/obj/structure/bigDelivery/proc/unwrap(mob/user)
 	if(Adjacent(user))
 		// Destroy will drop our wrapped object on the turf, so let it.
 		qdel(src)
@@ -132,7 +132,7 @@
 	var/nameset = 0
 	var/tag_x
 
-/obj/item/smallDelivery/proc/unwrap(var/mob/user)
+/obj/item/smallDelivery/proc/unwrap(mob/user)
 	if (!contents.len || !Adjacent(user))
 		return
 
@@ -254,7 +254,7 @@
 	throw_speed = 4
 	throw_range = 5
 
-/obj/item/stack/package_wrap/afterattack(var/obj/target as obj, mob/user as mob, proximity)
+/obj/item/stack/package_wrap/afterattack(obj/target as obj, mob/user as mob, proximity)
 	if(!proximity) return
 	if(!istype(target))	//this really shouldn't be necessary (but it is).	-Pete
 		return
@@ -408,7 +408,7 @@
 /obj/machinery/disposal/deliveryChute/on_update_icon()
 	return
 
-/obj/machinery/disposal/deliveryChute/Bumped(var/atom/movable/AM) //Go straight into the chute
+/obj/machinery/disposal/deliveryChute/Bumped(atom/movable/AM) //Go straight into the chute
 	if(istype(AM, /obj/item/projectile) || istype(AM, /obj/effect))	return
 	switch(dir)
 		if(NORTH)
@@ -464,7 +464,7 @@
 	update_icon()
 	return
 
-/obj/machinery/disposal/deliveryChute/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/disposal/deliveryChute/attackby(obj/item/I, mob/user)
 	if(!I || !user)
 		return
 

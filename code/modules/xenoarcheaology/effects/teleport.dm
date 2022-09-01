@@ -3,7 +3,7 @@
 	effect_type = EFFECT_BLUESPACE
 	var/list/teleporting = list() //mobs waiting to be teleported
 
-/datum/artifact_effect/teleport/DoEffectTouch(var/mob/user)
+/datum/artifact_effect/teleport/DoEffectTouch(mob/user)
 	if (istype(user))
 		try_teleport(user, get_turf(holder))
 

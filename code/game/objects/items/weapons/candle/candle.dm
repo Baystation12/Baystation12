@@ -42,7 +42,7 @@
 	if(isflamesource(W) || is_hot(W))
 		light(user)
 
-/obj/item/flame/candle/resolve_attackby(var/atom/A, mob/user)
+/obj/item/flame/candle/resolve_attackby(atom/A, mob/user)
 	. = ..()
 	if(istype(A, /obj/item/flame/candle) && is_hot(src))
 		var/obj/item/flame/candle/other_candle = A

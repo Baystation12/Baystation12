@@ -216,7 +216,7 @@
 		return GM.return_pressure()
 	return 0
 
-/obj/machinery/portable_atmospherics/canister/bullet_act(var/obj/item/projectile/Proj)
+/obj/machinery/portable_atmospherics/canister/bullet_act(obj/item/projectile/Proj)
 	if (!(Proj.damage_type == DAMAGE_BRUTE || Proj.damage_type == DAMAGE_BURN))
 		return
 
@@ -225,7 +225,7 @@
 		healthcheck()
 	..()
 
-/obj/machinery/portable_atmospherics/canister/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/portable_atmospherics/canister/attackby(obj/item/W as obj, mob/user as mob)
 	if(!isWrench(W) && !istype(W, /obj/item/tank) && !istype(W, /obj/item/device/scanner/gas) && !istype(W, /obj/item/modular_computer/pda))
 		visible_message("<span class='warning'>\The [user] hits \the [src] with \a [W]!</span>")
 		src.health -= W.force
@@ -252,7 +252,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/portable_atmospherics/canister/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/portable_atmospherics/canister/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	// this is the data which will be sent to the ui
 	var/data[0]
 	data["name"] = name
@@ -275,7 +275,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/portable_atmospherics/canister/OnTopic(var/mob/user, href_list, state)
+/obj/machinery/portable_atmospherics/canister/OnTopic(mob/user, href_list, state)
 	if(href_list["toggle"])
 		if (!valve_open)
 			if(!holding)

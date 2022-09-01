@@ -2,7 +2,7 @@
 	var/name
 	var/list/type_setups
 
-/decl/item_modifier/proc/RefitItem(var/obj/item/I)
+/decl/item_modifier/proc/RefitItem(obj/item/I)
 	if(!istype(I))
 		return FALSE
 

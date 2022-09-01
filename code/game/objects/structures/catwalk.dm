@@ -58,7 +58,7 @@
 		do_pull_click(user, src)
 	..()
 
-/obj/structure/catwalk/attack_robot(var/mob/user)
+/obj/structure/catwalk/attack_robot(mob/user)
 	if(Adjacent(user))
 		attack_hand(user)
 

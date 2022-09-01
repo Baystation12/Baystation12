@@ -64,11 +64,11 @@
 			return STATUS_CLOSE
 	return ..()
 
-/obj/machinery/telecomms/interface_interact(var/mob/user)
+/obj/machinery/telecomms/interface_interact(mob/user)
 	interact(user)
 	return TRUE
 
-/obj/machinery/telecomms/interact(var/mob/user)
+/obj/machinery/telecomms/interact(mob/user)
 	var/obj/item/device/multitool/P = get_multitool(user)
 
 	user.set_machine(src)
@@ -359,7 +359,7 @@
 
 	updateUsrDialog()
 
-/obj/machinery/telecomms/proc/canAccess(var/mob/user)
+/obj/machinery/telecomms/proc/canAccess(mob/user)
 	if(issilicon(user) || in_range(user, src))
 		return 1
 	return 0

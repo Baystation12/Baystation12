@@ -1,10 +1,10 @@
-/mob/proc/can_emote(var/emote_type)
+/mob/proc/can_emote(emote_type)
 	return (stat == CONSCIOUS)
 
-/mob/living/can_emote(var/emote_type)
+/mob/living/can_emote(emote_type)
 	return (..() && !(silent && emote_type == AUDIBLE_MESSAGE))
 
-/mob/proc/emote(var/act, var/m_type, var/message)
+/mob/proc/emote(act, m_type, message)
 	// s-s-snowflake
 	if((src.stat == DEAD || status_flags & FAKEDEATH) && act != "deathgasp")
 		return
@@ -60,7 +60,7 @@
 		if (I.implanted)
 			I.trigger(act, src)
 
-/mob/proc/format_emote(var/emoter = null, var/message = null)
+/mob/proc/format_emote(emoter = null, message = null)
 	var/pretext
 	var/subtext
 	var/nametext
@@ -115,7 +115,7 @@
 	nametext = "<B>[emoter]</B>"
 	return pretext + nametext + subtext
 
-/mob/proc/custom_emote(var/m_type = VISIBLE_MESSAGE, var/message = null)
+/mob/proc/custom_emote(m_type = VISIBLE_MESSAGE, message = null)
 
 	if((usr && stat) || (!use_me && usr == src))
 		to_chat(src, "You are unable to emote.")
@@ -142,16 +142,16 @@
 		audible_message(message, checkghosts = check_ghosts)
 
 // Specific mob type exceptions below.
-/mob/living/silicon/ai/emote(var/act, var/type, var/message)
+/mob/living/silicon/ai/emote(act, type, message)
 	var/obj/machinery/hologram/holopad/T = src.holo
 	if(T && T.masters[src]) //Is the AI using a holopad?
 		src.holopad_emote(message)
 	else //Emote normally, then.
 		..()
 
-/mob/living/captive_brain/emote(var/message)
+/mob/living/captive_brain/emote(message)
 	return
 
-/mob/observer/ghost/emote(var/act, var/type, var/message)
+/mob/observer/ghost/emote(act, type, message)
 	if(message && act == "me")
 		communicate(/decl/communication_channel/dsay, client, message, /decl/dsay_communication/emote)

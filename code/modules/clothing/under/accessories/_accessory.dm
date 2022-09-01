@@ -83,7 +83,7 @@
 
 
 //when user attached an accessory to S
-/obj/item/clothing/accessory/proc/on_attached(var/obj/item/clothing/S, var/mob/user)
+/obj/item/clothing/accessory/proc/on_attached(obj/item/clothing/S, mob/user)
 	if(!istype(S))
 		return
 	parent = S
@@ -95,7 +95,7 @@
 		src.add_fingerprint(user)
 
 
-/obj/item/clothing/accessory/proc/on_removed(var/mob/user)
+/obj/item/clothing/accessory/proc/on_removed(mob/user)
 	if(!parent)
 		return
 	parent.overlays -= get_inv_overlay()

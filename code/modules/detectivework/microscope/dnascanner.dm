@@ -15,7 +15,7 @@
 	var/last_process_worldtime = 0
 	var/report_num = 0
 
-/obj/machinery/dnaforensics/attackby(var/obj/item/W, mob/user as mob)
+/obj/machinery/dnaforensics/attackby(obj/item/W, mob/user as mob)
 
 	if(bloodsamp)
 		to_chat(user, "<span class='warning'>There is already a sample in the machine.</span>")
@@ -35,7 +35,7 @@
 		to_chat(user, "<span class='warning'>\The [src] only accepts used swabs.</span>")
 		return
 
-/obj/machinery/dnaforensics/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null)
+/obj/machinery/dnaforensics/ui_interact(mob/user, ui_key = "main",datum/nanoui/ui = null)
 	if(stat & (NOPOWER)) return
 	if(user.stat || user.restrained()) return
 	var/list/data = list()

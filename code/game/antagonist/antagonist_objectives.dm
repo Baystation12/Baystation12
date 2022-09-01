@@ -1,11 +1,11 @@
-/datum/antagonist/proc/create_global_objectives(var/override=0)
+/datum/antagonist/proc/create_global_objectives(override=0)
 	if(config.objectives_disabled != CONFIG_OBJECTIVE_ALL && !override)
 		return 0
 	if(global_objectives && global_objectives.len)
 		return 0
 	return 1
 
-/datum/antagonist/proc/create_objectives(var/datum/mind/player, var/override=0)
+/datum/antagonist/proc/create_objectives(datum/mind/player, override=0)
 	if(config.objectives_disabled != CONFIG_OBJECTIVE_ALL && !override)
 		return 0
 	if(create_global_objectives(override) || global_objectives.len)
@@ -64,6 +64,6 @@
 //some antagonist datums are not actually antagonists, so we might want to avoid
 //sending them the antagonist meet'n'greet messages.
 //E.G. ERT
-/datum/antagonist/proc/show_objectives_at_creation(var/datum/mind/player)
+/datum/antagonist/proc/show_objectives_at_creation(datum/mind/player)
 	if(src.show_objectives_on_creation)
 		show_objectives(player)

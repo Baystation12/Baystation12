@@ -1,6 +1,6 @@
 GLOBAL_LIST_EMPTY(banned_ruin_ids)
 
-/proc/seedRuins(list/zlevels, budget, list/potentialRuins, allowed_area = /area/space, var/maxx = world.maxx, var/maxy = world.maxy)
+/proc/seedRuins(list/zlevels, budget, list/potentialRuins, allowed_area = /area/space, maxx = world.maxx, maxy = world.maxy)
 	if (!length(z_levels))
 		UNLINT(WARNING("No Z levels provided - Not generating ruins"))
 		return

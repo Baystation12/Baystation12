@@ -1,7 +1,7 @@
-/datum/evacuation_controller/proc/set_launch_time(var/val)
+/datum/evacuation_controller/proc/set_launch_time(val)
 	evac_launch_time = val
 
-/datum/evacuation_controller/proc/set_arrival_time(var/val)
+/datum/evacuation_controller/proc/set_arrival_time(val)
 	evac_arrival_time = val
 
 /datum/evacuation_controller/proc/is_prepared()
@@ -25,7 +25,7 @@
 /datum/evacuation_controller/proc/is_evacuating()
 	return state != EVAC_IDLE
 
-/datum/evacuation_controller/proc/can_evacuate(var/mob/user, var/forced)
+/datum/evacuation_controller/proc/can_evacuate(mob/user, forced)
 
 	if(!isnull(evac_called_at))
 		return 0

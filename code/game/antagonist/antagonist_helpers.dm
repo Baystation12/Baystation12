@@ -52,11 +52,11 @@
 		active_antags++
 	return active_antags
 
-/datum/antagonist/proc/is_antagonist(var/datum/mind/player)
+/datum/antagonist/proc/is_antagonist(datum/mind/player)
 	if(player in current_antagonists)
 		return 1
 
-/datum/antagonist/proc/is_type(var/antag_type)
+/datum/antagonist/proc/is_type(antag_type)
 	if(antag_type == id || antag_type == role_text)
 		return 1
 	return 0

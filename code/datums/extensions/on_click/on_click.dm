@@ -14,5 +14,5 @@
 	atom_holder = null
 	return ..()
 
-/datum/extension/on_click/proc/on_click(var/mob/user)
+/datum/extension/on_click/proc/on_click(mob/user)
 	return FALSE

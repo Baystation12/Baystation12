@@ -11,7 +11,7 @@ var/global/list/all_objectives = list()
 	//If they are focused on a particular number. Steal objectives have their own counter.
 	var/target_amount = 0
 
-/datum/objective/New(var/text)
+/datum/objective/New(text)
 	all_objectives |= src
 	if(text)
 		explanation_text = text
@@ -302,7 +302,7 @@ var/global/list/all_objectives = list()
 
 // Changeling Absorb //
 
-/datum/objective/absorb/proc/gen_amount_goal(var/lowbound = 4, var/highbound = 6)
+/datum/objective/absorb/proc/gen_amount_goal(lowbound = 4, highbound = 6)
 	target_amount = rand (lowbound,highbound)
 	var/n_p = 1 //autowin
 	if (GAME_STATE == RUNLEVEL_SETUP)

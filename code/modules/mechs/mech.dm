@@ -87,7 +87,7 @@
 /mob/living/exosuit/is_flooded(lying_mob, absolute)
 	. = (body && body.pilot_coverage >= 100 && hatch_closed) ? FALSE : ..()
 
-/mob/living/exosuit/Initialize(mapload, var/obj/structure/heavy_vehicle_frame/source_frame)
+/mob/living/exosuit/Initialize(mapload, obj/structure/heavy_vehicle_frame/source_frame)
 	. = ..()
 
 	if(!access_card) access_card = new (src)
@@ -216,7 +216,7 @@
 	if(.)
 		update_pilots()
 
-/mob/living/exosuit/proc/toggle_power(var/mob/user)
+/mob/living/exosuit/proc/toggle_power(mob/user)
 	if(power == MECH_POWER_TRANSITION)
 		to_chat(user, SPAN_NOTICE("Power transition in progress. Please wait."))
 	else if(power == MECH_POWER_ON) //Turning it off is instant

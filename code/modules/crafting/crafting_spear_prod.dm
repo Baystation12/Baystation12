@@ -5,7 +5,7 @@
 	progress_message = "You fasten the shard to the top of the rod with the cable."
 	product = /obj/item/material/twohanded/spear
 
-/decl/crafting_stage/spear_blade_shard/get_product(var/obj/item/work)
+/decl/crafting_stage/spear_blade_shard/get_product(obj/item/work)
 	var/obj/item/material/shard/blade = locate() in work
 	. = ispath(product, /obj/item/material) && new product(get_turf(work), blade && blade.material && blade.material.name)
 
@@ -16,7 +16,7 @@
 	progress_message = "You fasten the blade to the top of the rod with the cable."
 	product = /obj/item/material/twohanded/spear
 
-/decl/crafting_stage/spear_blade_blade/get_product(var/obj/item/work)
+/decl/crafting_stage/spear_blade_blade/get_product(obj/item/work)
 	var/obj/item/material/small_blade/blade = locate() in work
 	. = ispath(product, /obj/item/material) && new product(get_turf(work), blade && blade.material && blade.material.name)
 

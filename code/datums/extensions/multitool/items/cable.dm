@@ -2,7 +2,7 @@
 	set_extension(src, /datum/extension/interactive/multitool/items/cable)
 	..()
 
-/datum/extension/interactive/multitool/items/cable/get_interact_window(var/obj/item/device/multitool/M, var/mob/user)
+/datum/extension/interactive/multitool/items/cable/get_interact_window(obj/item/device/multitool/M, mob/user)
 	var/obj/item/stack/cable_coil/cable_coil = holder
 	. += "<b>Available Colors</b><br>"
 	. += "<table>"

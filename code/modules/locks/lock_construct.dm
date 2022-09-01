@@ -12,7 +12,7 @@
 	throwforce = 0
 	lock_data = generateRandomString(round(material.integrity/50))
 
-/obj/item/material/lock_construct/attackby(var/obj/item/I, var/mob/user)
+/obj/item/material/lock_construct/attackby(obj/item/I, mob/user)
 	if(istype(I,/obj/item/key))
 		var/obj/item/key/K = I
 		if(!K.key_data)
@@ -28,7 +28,7 @@
 		return
 	..()
 
-/obj/item/material/lock_construct/proc/create_lock(var/atom/target, var/mob/user)
+/obj/item/material/lock_construct/proc/create_lock(atom/target, mob/user)
 	. = new /datum/lock(target,lock_data)
 	user.visible_message("\The [user] attaches \the [src] to \the [target]")
 	qdel(src)

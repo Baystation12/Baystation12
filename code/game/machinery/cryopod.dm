@@ -463,7 +463,7 @@
 	log_and_message_admins("placed [target == user ? "themself" : key_name_admin(target)] into \a [src]")
 
 //Like grap-put, but for mouse-drop.
-/obj/machinery/cryopod/MouseDrop_T(var/mob/target, var/mob/user)
+/obj/machinery/cryopod/MouseDrop_T(mob/target, mob/user)
 	if(!check_occupant_allowed(target))
 		return
 	if(occupant)
@@ -473,7 +473,7 @@
 	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
 	attempt_enter(target, user)
 
-/obj/machinery/cryopod/attackby(var/obj/item/G as obj, var/mob/user as mob)
+/obj/machinery/cryopod/attackby(obj/item/G as obj, mob/user as mob)
 
 	if(istype(G, /obj/item/grab))
 		var/obj/item/grab/grab = G
@@ -562,7 +562,7 @@
 
 	return
 
-/obj/machinery/cryopod/proc/set_occupant(var/mob/living/carbon/occupant, var/silent)
+/obj/machinery/cryopod/proc/set_occupant(mob/living/carbon/occupant, silent)
 	src.occupant = occupant
 	if(!occupant)
 		SetName(initial(name))
@@ -581,7 +581,7 @@
 	SetName("[name] ([occupant])")
 	icon_state = occupied_icon_state
 
-/obj/machinery/cryopod/relaymove(var/mob/user)
+/obj/machinery/cryopod/relaymove(mob/user)
 	go_out()
 
 //A prop version for away missions and such

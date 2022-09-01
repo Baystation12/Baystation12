@@ -10,7 +10,7 @@
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
 	buckle_movable = TRUE
 
-/obj/structure/bed/chair/do_simple_ranged_interaction(var/mob/user)
+/obj/structure/bed/chair/do_simple_ranged_interaction(mob/user)
 	if(!buckled_mob && user)
 		rotate(user)
 	return TRUE
@@ -342,7 +342,7 @@
 		return
 	..()
 
-/obj/structure/bed/chair/wood/New(var/newloc)
+/obj/structure/bed/chair/wood/New(newloc)
 	..(newloc, chair_material)
 
 /obj/structure/bed/chair/wood/mahogany
@@ -396,7 +396,7 @@
 	icon_state = "pew_left"
 	base_icon = "pew_left"
 
-/obj/structure/bed/chair/pew/New(var/newloc)
+/obj/structure/bed/chair/pew/New(newloc)
 	..(newloc, pew_material)
 
 /obj/structure/bed/chair/pew/mahogany

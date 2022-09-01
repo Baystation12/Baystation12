@@ -76,7 +76,7 @@
 		return 0
 	return 1
 
-/obj/machinery/atmospherics/omni/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/omni/attackby(obj/item/W as obj, mob/user as mob)
 	if(!isWrench(W))
 		return ..()
 
@@ -157,7 +157,7 @@
 
 	update_icon()
 
-/obj/machinery/atmospherics/omni/proc/select_port_icons(var/datum/omni_port/P)
+/obj/machinery/atmospherics/omni/proc/select_port_icons(datum/omni_port/P)
 	if(!istype(P))
 		return
 
@@ -197,7 +197,7 @@
 		P.update = 1
 	update_ports()
 
-/obj/machinery/atmospherics/omni/hide(var/i)
+/obj/machinery/atmospherics/omni/hide(i)
 	update_underlays()
 
 /obj/machinery/atmospherics/omni/proc/update_ports()

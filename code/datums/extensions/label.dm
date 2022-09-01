@@ -12,7 +12,7 @@
 	atom_holder = null
 	return ..()
 
-/datum/extension/labels/proc/AttachLabel(var/mob/user, var/label)
+/datum/extension/labels/proc/AttachLabel(mob/user, label)
 	if(!CanAttachLabel(user, label))
 		return
 
@@ -27,7 +27,7 @@
 	atom_holder.name = "[atom_holder.name] ([label])"
 	GLOB.name_set_event.raise_event(src, old_name, atom_holder.name)
 
-/datum/extension/labels/proc/RemoveLabel(var/mob/user, var/label)
+/datum/extension/labels/proc/RemoveLabel(mob/user, label)
 	if(!(label in labels))
 		return
 
@@ -51,7 +51,7 @@
 // We may have to do something more complex here
 // in case something appends strings to something that's labelled rather than replace the name outright
 // Non-printable characters should be of help if this comes up
-/datum/extension/labels/proc/AppendLabelsToName(var/name)
+/datum/extension/labels/proc/AppendLabelsToName(name)
 	if(!LAZYLEN(labels))
 		return name
 	. = list(name)
@@ -59,14 +59,14 @@
 		. += " ([entry])"
 	. = jointext(., null)
 
-/datum/extension/labels/proc/CanAttachLabel(var/user, var/label)
+/datum/extension/labels/proc/CanAttachLabel(user, label)
 	if(!length(label))
 		return FALSE
 	if(ExcessLabelLength(label, user))
 		return FALSE
 	return TRUE
 
-/datum/extension/labels/proc/ExcessLabelLength(var/label, var/user)
+/datum/extension/labels/proc/ExcessLabelLength(label, user)
 	. = length(label) + 3 // Each label also adds a space and two brackets when applied to a name
 	if(LAZYLEN(labels))
 		for(var/entry in labels)
@@ -75,14 +75,14 @@
 	if(. && user)
 		to_chat(user, "<span class='warning'>The label won't fit.</span>")
 
-/proc/get_attached_labels(var/atom/source)
+/proc/get_attached_labels(atom/source)
 	if(has_extension(source, /datum/extension/labels))
 		var/datum/extension/labels/L = get_extension(source, /datum/extension/labels)
 		if(LAZYLEN(L.labels))
 			return L.labels.Copy()
 		return list()
 
-/atom/proc/RemoveLabel(var/label in get_attached_labels(src))
+/atom/proc/RemoveLabel(label in get_attached_labels(src))
 	set name = "Remove Label"
 	set desc = "Used to remove labels"
 	set category = "Object"

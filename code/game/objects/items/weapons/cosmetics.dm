@@ -86,7 +86,7 @@
 	. = ..()
 	color = get_random_colour(lower = 150)
 
-/obj/item/haircomb/attack_self(var/mob/living/carbon/human/user)
+/obj/item/haircomb/attack_self(mob/living/carbon/human/user)
 	if(!user.incapacitated())
 		user.visible_message("<span class='notice'>\The [user] uses \the [src] to comb their hair with incredible style and sophistication. What a [user.gender == FEMALE ? "lady" : "guy"].</span>")
 

@@ -44,7 +44,7 @@
 		_aura_image = create_aura_image(owner)
 	return _aura_image
 
-/proc/create_aura_image(var/newloc)
+/proc/create_aura_image(newloc)
 	var/image/aura_image = image(loc = newloc, icon = 'icons/effects/psi_aura_small.dmi', icon_state = "aura")
 	aura_image.blend_mode = BLEND_MULTIPLY
 	aura_image.appearance_flags = DEFAULT_APPEARANCE_FLAGS | NO_CLIENT_COLOR | RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
@@ -61,14 +61,14 @@
 	SSpsi.all_aura_images[aura_image] = TRUE
 	return aura_image
 
-/proc/destroy_aura_image(var/image/aura_image)
+/proc/destroy_aura_image(image/aura_image)
 	for(var/thing in SSpsi.processing)
 		var/datum/psi_complexus/psychic = thing
 		if(psychic.owner.client)
 			psychic.owner.client.images -= aura_image
 	SSpsi.all_aura_images -= aura_image
 
-/datum/psi_complexus/New(var/mob/_owner)
+/datum/psi_complexus/New(mob/_owner)
 	owner = _owner
 	START_PROCESSING(SSpsi, src)
 	set_extension(src, /datum/extension/armor/psionic)

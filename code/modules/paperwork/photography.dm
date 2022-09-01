@@ -272,7 +272,7 @@ var/global/photo_count = 0
 	if(!user.put_in_inactive_hand(p))
 		p.dropInto(loc)
 
-/obj/item/photo/proc/copy(var/copy_id = 0)
+/obj/item/photo/proc/copy(copy_id = 0)
 	var/obj/item/photo/p = new/obj/item/photo()
 
 	p.SetName(name) // Do this first, manually, to make sure listeners are alerted properly.

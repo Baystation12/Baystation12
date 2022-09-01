@@ -19,7 +19,7 @@
 	if(!lit)
 		remove_extension(src, /datum/extension/scent)
 
-/obj/item/flame/candle/scented/extinguish(var/mob/user, var/no_message)
+/obj/item/flame/candle/scented/extinguish(mob/user, no_message)
 	..()
 	remove_extension(src, /datum/extension/scent)
 

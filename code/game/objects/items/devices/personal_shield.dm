@@ -46,7 +46,7 @@
 			to_chat(user, "There is no cell in \the [src].")
 	to_chat(user, "The internal capacitor currently has [round(currently_stored_power/max_stored_power * 100)]% charge.")
 
-/obj/item/device/personal_shield/attackby(var/obj/item/W, var/mob/user)
+/obj/item/device/personal_shield/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/cell))
 		if(!open)
 			to_chat(user, SPAN_WARNING("\The [src] needs to be open first."))
@@ -63,7 +63,7 @@
 		open = !open
 		update_icon()
 
-/obj/item/device/personal_shield/attack_self(var/mob/living/user)
+/obj/item/device/personal_shield/attack_self(mob/living/user)
 	if (open && power_cell)
 		user.visible_message("\The [user] shakes \the [power_cell] out of \the [src].", SPAN_NOTICE("You shake \the [power_cell] out of \the [src]."))
 		turn_off()
@@ -72,7 +72,7 @@
 	else
 		toggle(user)
 
-/obj/item/device/personal_shield/attack_hand(var/mob/living/user)
+/obj/item/device/personal_shield/attack_hand(mob/living/user)
 	if(open && (loc == user))
 		if(power_cell)
 			user.visible_message("\The [user] removes \the [power_cell] from \the [src].", SPAN_NOTICE("You remove \the [power_cell] from \the [src]."))
@@ -89,11 +89,11 @@
 	enable_when_powered = FALSE
 	update_icon()
 
-/obj/item/device/personal_shield/dropped(var/mob/user)
+/obj/item/device/personal_shield/dropped(mob/user)
 	turn_off()
 	. = ..()
 
-/obj/item/device/personal_shield/equipped(var/mob/user, var/slot)
+/obj/item/device/personal_shield/equipped(mob/user, slot)
 	if(slot != slot_belt && slot != slot_l_hand && slot != slot_r_hand)
 		turn_off()
 	. = ..()
@@ -108,7 +108,7 @@
 	..()
 
 
-/obj/item/device/personal_shield/proc/turn_on(var/mob/user)
+/obj/item/device/personal_shield/proc/turn_on(mob/user)
 	enable_when_powered = FALSE
 	if(shield || open || !user)
 		return
@@ -122,14 +122,14 @@
 	update_name()
 	update_icon()
 
-/obj/item/device/personal_shield/proc/turn_off(var/mob/user)
+/obj/item/device/personal_shield/proc/turn_off(mob/user)
 	if(!shield)
 		return
 	QDEL_NULL(shield)
 	update_name()
 	update_icon()
 
-/obj/item/device/personal_shield/proc/toggle(var/mob/user)
+/obj/item/device/personal_shield/proc/toggle(mob/user)
 	if(shield)
 		turn_off(user)
 	else

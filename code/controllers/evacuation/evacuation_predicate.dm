@@ -9,5 +9,5 @@
 /datum/evacuation_predicate/proc/is_valid()
 	return FALSE
 
-/datum/evacuation_predicate/proc/can_call(var/user)
+/datum/evacuation_predicate/proc/can_call(user)
 	return TRUE

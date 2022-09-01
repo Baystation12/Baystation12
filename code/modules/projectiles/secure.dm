@@ -38,7 +38,7 @@ GLOBAL_LIST_INIT(secure_weapons, list())
 	else
 		..()
 
-/obj/item/gun/emag_act(var/charges, var/mob/user)
+/obj/item/gun/emag_act(charges, mob/user)
 	if(!charges)
 		return NO_EMAG_ACT
 

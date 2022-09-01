@@ -15,7 +15,7 @@
 	)
 	var/emagged
 
-/obj/item/stock_parts/circuitboard/modular_computer/emag_act(var/remaining_charges, var/mob/user)
+/obj/item/stock_parts/circuitboard/modular_computer/emag_act(remaining_charges, mob/user)
 	if(emagged)
 		return ..()
 	else

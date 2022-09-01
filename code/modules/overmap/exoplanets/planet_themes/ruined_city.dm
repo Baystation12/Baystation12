@@ -99,7 +99,7 @@
 					LAZYADD(building_maps, building) // They're applied later to let buildings handle their own shit
 	return 1
 
-/datum/random_map/city/get_appropriate_path(var/value)
+/datum/random_map/city/get_appropriate_path(value)
 	if (value == ROAD_VALUE)
 		return /turf/simulated/floor/exoplanet/concrete/reinforced/road
 
@@ -116,7 +116,7 @@
 	floor_type = /turf/simulated/floor/exoplanet/concrete/reinforced
 	preserve_map = 0
 
-/datum/random_map/maze/concrete/get_appropriate_path(var/value)
+/datum/random_map/maze/concrete/get_appropriate_path(value)
 	if (value == WALL_VALUE)
 		if (prob(80))
 			return /turf/simulated/wall/concrete
@@ -124,7 +124,7 @@
 			return /turf/simulated/floor/exoplanet/concrete/reinforced/damaged
 	return ..()
 
-/datum/random_map/maze/concrete/get_additional_spawns(var/value, var/turf/simulated/floor/T)
+/datum/random_map/maze/concrete/get_additional_spawns(value, turf/simulated/floor/T)
 	if (!istype(T))
 		return
 	if (prob(10))
@@ -136,7 +136,7 @@
 /turf/simulated/wall/containment
 	paint_color = COLOR_GRAY20
 
-/turf/simulated/wall/containment/New(var/newloc)
+/turf/simulated/wall/containment/New(newloc)
 	..(newloc,MATERIAL_CONCRETE, MATERIAL_ALIENALLOY)
 
 /datum/random_map/maze/lab
@@ -145,7 +145,7 @@
 	preserve_map = 0
 	var/artifacts_to_spawn = 1
 
-/datum/random_map/maze/lab/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0)
+/datum/random_map/maze/lab/New(seed, tx, ty, tz, tlx, tly, do_not_apply, do_not_announce, never_be_priority = 0)
 	if (prob(10))
 		artifacts_to_spawn = rand(2,3)
 	..()
@@ -175,14 +175,14 @@
 		entrance_y = rand(2,limit_y-1)
 	map[get_map_cell(entrance_x,entrance_y)] = DOOR_VALUE
 
-/datum/random_map/maze/lab/get_appropriate_path(var/value)
+/datum/random_map/maze/lab/get_appropriate_path(value)
 	if (value == ARTIFACT_VALUE)
 		return floor_type
 	if (value == DOOR_VALUE)
 		return floor_type
 	. = ..()
 
-/datum/random_map/maze/lab/get_additional_spawns(var/value, var/turf/simulated/floor/T)
+/datum/random_map/maze/lab/get_additional_spawns(value, turf/simulated/floor/T)
 	if (!istype(T))
 		return
 

@@ -4,7 +4,7 @@
 /datum/admin_secret_item/admin_secret/show_law_changes/name()
 	return "Show Last [length(GLOB.lawchanges)] Law change\s"
 
-/datum/admin_secret_item/admin_secret/show_law_changes/execute(var/mob/user)
+/datum/admin_secret_item/admin_secret/show_law_changes/execute(mob/user)
 	. = ..()
 	if(!.)
 		return

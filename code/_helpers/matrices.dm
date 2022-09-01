@@ -6,7 +6,7 @@
 	animate(transform = m240, time = speed / 3)
 	animate(transform = m360, time = speed / 3)
 
-/atom/proc/shake_animation(var/intensity = 8)
+/atom/proc/shake_animation(intensity = 8)
 	var/init_px = pixel_x
 	var/shake_dir = pick(-1, 1)
 	animate(

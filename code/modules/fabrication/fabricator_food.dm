@@ -19,7 +19,7 @@
 		<i>\"Fish!\" \
 		<br>\"Today's fish is trout a la creme. Enjoy your meal.\"</i>"
 
-/obj/machinery/fabricator/replicator/hear_talk(var/mob/M, var/text, var/verb, var/datum/language/speaking)
+/obj/machinery/fabricator/replicator/hear_talk(mob/M, text, verb, datum/language/speaking)
 	if(speaking && !speaking.machine_understands)
 		return ..()
 	var/true_text = lowertext(html_decode(text))
@@ -27,7 +27,7 @@
 		addtimer(CALLBACK(src, /obj/machinery/fabricator/replicator/proc/state_status), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
 	else if(findtext(true_text, "menu"))
 		addtimer(CALLBACK(src, /obj/machinery/fabricator/replicator/proc/state_menu), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
-	else 
+	else
 		for(var/datum/fabricator_recipe/recipe in SSfabrication.get_recipes(fabricator_class))
 			if(recipe.hidden && !(fab_status_flags & FAB_HACKED))
 				continue

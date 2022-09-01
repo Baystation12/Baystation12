@@ -2,7 +2,7 @@
 //These are shared by various items that have shield-like behaviour
 
 //bad_arc is the ABSOLUTE arc of directions from which we cannot block. If you want to fix it to e.g. the user's facing you will need to rotate the dirs yourself.
-/proc/check_shield_arc(mob/user, var/bad_arc, atom/damage_source = null, mob/attacker = null)
+/proc/check_shield_arc(mob/user, bad_arc, atom/damage_source = null, mob/attacker = null)
 	//check attack direction
 	var/attack_dir = 0 //direction from the user to the source of the attack
 	if(istype(damage_source, /obj/item/projectile))
@@ -34,7 +34,7 @@
 	var/base_block_chance = 60
 	var/max_block = 0
 
-/obj/item/shield/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+/obj/item/shield/handle_shield(mob/user, damage, atom/damage_source = null, mob/attacker = null, def_zone = null, attack_text = "the attack")
 	if(user.incapacitated())
 		return 0
 
@@ -46,7 +46,7 @@
 			return 1
 	return 0
 
-/obj/item/shield/proc/get_block_chance(mob/user, var/damage, atom/damage_source = null, mob/attacker = null)
+/obj/item/shield/proc/get_block_chance(mob/user, damage, atom/damage_source = null, mob/attacker = null)
 	return base_block_chance
 
 /obj/item/shield/riot
@@ -71,7 +71,7 @@
 	. = ..()
 	if(.) playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 
-/obj/item/shield/riot/get_block_chance(mob/user, var/damage, atom/damage_source = null, mob/attacker = null)
+/obj/item/shield/riot/get_block_chance(mob/user, damage, atom/damage_source = null, mob/attacker = null)
 	if(istype(damage_source, /obj/item/projectile))
 		var/obj/item/projectile/P = damage_source
 		//plastic shields do not stop bullets or lasers, even in space. Will block beanbags, rubber bullets, and stunshots just fine though.
@@ -126,7 +126,7 @@
 	. = ..()
 	if(.) playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 
-/obj/item/shield/buckler/get_block_chance(mob/user, var/damage, atom/damage_source = null, mob/attacker = null)
+/obj/item/shield/buckler/get_block_chance(mob/user, damage, atom/damage_source = null, mob/attacker = null)
 	if (istype(damage_source, /obj/item/projectile))
 		if (max_block && damage >= max_block)
 			return 0
@@ -164,7 +164,7 @@
 		spark_system.start()
 		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
 
-/obj/item/shield/energy/get_block_chance(mob/user, var/damage, atom/damage_source = null, mob/attacker = null)
+/obj/item/shield/energy/get_block_chance(mob/user, damage, atom/damage_source = null, mob/attacker = null)
 	if(istype(damage_source, /obj/item/projectile))
 		var/obj/item/projectile/P = damage_source
 		if((is_sharp(P) && damage > 10) || istype(P, /obj/item/projectile/beam))

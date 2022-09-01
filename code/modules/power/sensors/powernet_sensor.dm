@@ -45,7 +45,7 @@
 // Proc: reading_to_text()
 // Parameters: 1 (amount - Power in Watts to be converted to W, kW or MW)
 // Description: Helper proc that converts reading in Watts to kW or MW (returns string version of amount parameter)
-/obj/machinery/power/sensor/proc/reading_to_text(var/amount = 0)
+/obj/machinery/power/sensor/proc/reading_to_text(amount = 0)
 	var/units = ""
 	// 10kW and less - Watts
 	if(amount < 10000)
@@ -178,8 +178,3 @@
 		data["load_percentage"] = 100
 	data["alarm"] = powernet.problem ? 1 : 0
 	return data
-
-
-
-
-

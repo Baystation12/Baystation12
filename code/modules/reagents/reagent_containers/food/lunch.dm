@@ -130,14 +130,14 @@ var/global/list/lunchables_ethanol_reagents_ = list(
 		lunchables_ethanol_reagents_ = init_lunchable_reagent_list(lunchables_ethanol_reagents_, /datum/reagent/ethanol)
 	return lunchables_ethanol_reagents_
 
-/proc/init_lunchable_list(var/list/lunches)
+/proc/init_lunchable_list(list/lunches)
 	. = list()
 	for(var/lunch in lunches)
 		var/obj/O = lunch
 		.[initial(O.name)] = lunch
 	return sortAssoc(.)
 
-/proc/init_lunchable_reagent_list(var/list/banned_reagents, var/reagent_types)
+/proc/init_lunchable_reagent_list(list/banned_reagents, reagent_types)
 	. = list()
 	for(var/reagent_type in subtypesof(reagent_types))
 		if(reagent_type in banned_reagents)

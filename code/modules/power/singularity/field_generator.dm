@@ -157,7 +157,7 @@ field_generator power level display
 /obj/machinery/field_generator/emp_act()
 	return
 
-/obj/machinery/field_generator/bullet_act(var/obj/item/projectile/Proj)
+/obj/machinery/field_generator/bullet_act(obj/item/projectile/Proj)
 	if(istype(Proj, /obj/item/projectile/beam))
 		power += Proj.damage * EMITTER_DAMAGE_POWER_TRANSFER
 		update_icon()
@@ -216,7 +216,7 @@ field_generator power level display
 		return 0
 
 //Tries to draw the needed power from our own power reserve, or connected generators if we can. Returns the amount of power we were able to get.
-/obj/machinery/field_generator/proc/draw_power(var/draw = 0, var/list/flood_list = list())
+/obj/machinery/field_generator/proc/draw_power(draw = 0, list/flood_list = list())
 	flood_list += src
 
 	if(src.power >= draw)//We have enough power
@@ -251,7 +251,7 @@ field_generator power level display
 	src.active = 2
 
 
-/obj/machinery/field_generator/proc/setup_field(var/NSEW)
+/obj/machinery/field_generator/proc/setup_field(NSEW)
 	var/turf/T = src.loc
 	var/obj/machinery/field_generator/G
 	var/steps = 0

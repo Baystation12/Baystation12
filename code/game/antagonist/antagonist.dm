@@ -142,7 +142,7 @@
 	return candidates
 
 // Builds a list of potential antags without actually setting them. Used to test mode viability.
-/datum/antagonist/proc/get_potential_candidates(var/datum/game_mode/mode, var/ghosts_only)
+/datum/antagonist/proc/get_potential_candidates(datum/game_mode/mode, ghosts_only)
 	var/candidates = list()
 
 	// Keeping broken up for readability
@@ -200,7 +200,7 @@
 //Attempting to spawn an antag role with ANTAG_OVERRIDE_JOB should be done before jobs are assigned,
 //so that they do not occupy regular job slots. All other antag roles should be spawned after jobs are
 //assigned, so that job restrictions can be respected.
-/datum/antagonist/proc/attempt_spawn(var/spawn_target = null)
+/datum/antagonist/proc/attempt_spawn(spawn_target = null)
 	if(spawn_target == null)
 		spawn_target = initial_spawn_target
 

@@ -3,7 +3,7 @@
 	desc = "An implant gun customized to interact with psi dampeners."
 	var/implanter_mode = PSI_IMPLANT_AUTOMATIC
 
-/obj/item/implanter/psi/attack_self(var/mob/user)
+/obj/item/implanter/psi/attack_self(mob/user)
 	var/choice = input("Select a new implant mode.", "Psi Dampener") as null|anything in list(PSI_IMPLANT_AUTOMATIC, PSI_IMPLANT_SHOCK, PSI_IMPLANT_WARN, PSI_IMPLANT_LOG, PSI_IMPLANT_DISABLED)
 	if(!choice || user != loc) return
 	var/obj/item/implant/psi_control/implant = imp

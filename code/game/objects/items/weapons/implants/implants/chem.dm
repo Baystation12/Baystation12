@@ -25,7 +25,7 @@
 	..()
 	create_reagents(50)
 
-/obj/item/implant/chem/activate(var/amount)
+/obj/item/implant/chem/activate(amount)
 	if(malfunction || (!iscarbon(imp_in)))	return 0
 	if(!amount)
 		amount = rand(1,25)

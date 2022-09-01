@@ -152,7 +152,7 @@
 	if(!anchored)
 		..()
 
-/obj/item/camera_assembly/proc/weld(var/obj/item/weldingtool/WT, var/mob/user)
+/obj/item/camera_assembly/proc/weld(obj/item/weldingtool/WT, mob/user)
 
 	if(busy)
 		return 0

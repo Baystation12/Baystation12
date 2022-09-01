@@ -3,7 +3,7 @@
 	stamina_cost = 10
 	reflexive_modifier = 1.5
 
-/decl/maneuver/leap/perform(var/mob/living/user, var/atom/target, var/strength, var/reflexively = FALSE)
+/decl/maneuver/leap/perform(mob/living/user, atom/target, strength, reflexively = FALSE)
 	. = ..()
 	if(.)
 		var/old_pass_flags = user.pass_flags
@@ -18,14 +18,14 @@
 		user.throw_at(get_turf(target), strength, 1, user, FALSE, CALLBACK(src, /decl/maneuver/leap/proc/end_leap, user, target, old_pass_flags))
 		addtimer(CALLBACK(user, /mob/living/proc/jump_layer_shift_end), 4.5)
 
-/decl/maneuver/leap/proc/end_leap(var/mob/living/user, var/atom/target, var/pass_flag)
+/decl/maneuver/leap/proc/end_leap(mob/living/user, atom/target, pass_flag)
 	user.pass_flags = pass_flag
 	user.post_maneuver()
 
-/decl/maneuver/leap/show_initial_message(var/mob/living/user, var/atom/target)
+/decl/maneuver/leap/show_initial_message(mob/living/user, atom/target)
 	user.visible_message(SPAN_WARNING("\The [user] crouches, preparing for a leap!"))
 
-/decl/maneuver/leap/can_be_used_by(var/mob/living/user, var/atom/target, var/silent = FALSE)
+/decl/maneuver/leap/can_be_used_by(mob/living/user, atom/target, silent = FALSE)
 	. = ..()
 	if(.)
 		var/can_leap_distance = user.get_jump_distance() * user.get_acrobatics_multiplier()
@@ -46,10 +46,10 @@
 /decl/maneuver/leap/spider
 	stamina_cost = 0
 
-/decl/maneuver/leap/spider/show_initial_message(var/mob/living/user, var/atom/target)
+/decl/maneuver/leap/spider/show_initial_message(mob/living/user, atom/target)
 	user.visible_message(SPAN_WARNING("\The [user] reels back and prepares to launch itself at \the [target]!"))
 
-/decl/maneuver/leap/grab/end_leap(var/mob/living/user, var/atom/target)
+/decl/maneuver/leap/grab/end_leap(mob/living/user, atom/target)
 	. = ..()
 	if(ishuman(user) && !user.lying && ismob(target) && user.Adjacent(target))
 		var/mob/living/carbon/human/H = user

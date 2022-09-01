@@ -17,7 +17,7 @@ GLOBAL_DATUM_INIT(stat_set_event, /decl/observ/stat_set, new)
 /****************
 * Stat Handling *
 ****************/
-/mob/living/set_stat(var/new_stat)
+/mob/living/set_stat(new_stat)
 	var/old_stat = stat
 	. = ..()
 	if(stat != old_stat)

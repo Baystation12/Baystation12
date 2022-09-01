@@ -26,7 +26,7 @@ GLOBAL_DATUM_INIT(ert, /datum/antagonist/ert, new)
 
 	var/reason = ""
 
-/datum/antagonist/ert/create_default(var/mob/source)
+/datum/antagonist/ert/create_default(mob/source)
 	var/mob/living/carbon/human/M = ..()
 	if(istype(M)) M.age = rand(25,45)
 
@@ -35,7 +35,7 @@ GLOBAL_DATUM_INIT(ert, /datum/antagonist/ert, new)
 	leader_welcome_text = SPAN_BOLD("You are the leader of the Emergency Response Team. ") + "As the leader, you answer only to [GLOB.using_map.company_name] officials. You have authorization to override the Commanding Officer where it is necessary to achieve your goals. However, it is recommended that you work with them to achieve your goals if possible."
 	welcome_text =        SPAN_BOLD("You are a member of the Emergency Response Team.") + "As a member of the Emergency Response Team, you answer only to your leader and [GLOB.using_map.company_name] officials."
 
-/datum/antagonist/ert/greet(var/datum/mind/player)
+/datum/antagonist/ert/greet(datum/mind/player)
 	if(!..())
 		return
 	to_chat(player.current, "You are part of a Fifth Fleet Quick Reaction Force. There is a severe emergency on \the [GLOB.using_map.station_name] and you are tasked to fix the problem.")

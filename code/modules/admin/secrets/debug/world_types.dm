@@ -2,7 +2,7 @@
 	name = "Instance Type Count"
 	warn_before_use = "This is a potentially long-running operation."
 
-/datum/admin_secret_item/debug/instance_type_count/do_execute(var/mob/user)
+/datum/admin_secret_item/debug/instance_type_count/do_execute(mob/user)
 	var/instance_count_by_type = list()
 
 	for(var/datum/thing in world) // Atoms (don't believe its lies)

@@ -12,7 +12,7 @@
 	slot_flags = SLOT_EARS
 	volume = 5
 
-/obj/item/reagent_containers/dropper/afterattack(var/obj/target, var/mob/user, var/proximity)
+/obj/item/reagent_containers/dropper/afterattack(obj/target, mob/user, proximity)
 	if(!target.reagents || !proximity) return
 
 	if(reagents.total_volume)
@@ -118,4 +118,3 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/peridaxon, 5)
 	update_icon()
-

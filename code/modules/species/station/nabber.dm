@@ -168,7 +168,7 @@
 /datum/species/nabber/get_blood_name()
 	return "haemolymph"
 
-/datum/species/nabber/can_overcome_gravity(var/mob/living/carbon/human/H)
+/datum/species/nabber/can_overcome_gravity(mob/living/carbon/human/H)
 	var/datum/gas_mixture/mixture = H.loc.return_air()
 
 	if(mixture)
@@ -187,7 +187,7 @@
 	return
 
 // Nabbers will only fall when there isn't enough air pressure for them to keep themselves aloft.
-/datum/species/nabber/can_fall(var/mob/living/carbon/human/H)
+/datum/species/nabber/can_fall(mob/living/carbon/human/H)
 	var/datum/gas_mixture/mixture = H.loc.return_air()
 
 	//nabbers should not be trying to break their fall on stairs.
@@ -203,7 +203,7 @@
 	return TRUE
 
 // Even when nabbers do fall, if there's enough air pressure they won't hurt themselves.
-/datum/species/nabber/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
+/datum/species/nabber/handle_fall_special(mob/living/carbon/human/H, turf/landing)
 
 	var/datum/gas_mixture/mixture = H.loc.return_air()
 
@@ -227,13 +227,13 @@
 	return FALSE
 
 
-/datum/species/nabber/can_shred(var/mob/living/carbon/human/H, var/ignore_intent, var/ignore_antag)
+/datum/species/nabber/can_shred(mob/living/carbon/human/H, ignore_intent, ignore_antag)
 	if(!H.handcuffed || H.buckled)
 		return ..(H, ignore_intent, TRUE)
 	else
 		return 0
 
-/datum/species/nabber/handle_movement_delay_special(var/mob/living/carbon/human/H)
+/datum/species/nabber/handle_movement_delay_special(mob/living/carbon/human/H)
 	var/tally = 0
 
 	H.remove_cloaking_source(src)
@@ -256,7 +256,7 @@
 	affecting.visible_message("<span class='danger'>[assailant]'s spikes dig in painfully!</span>")
 	affecting.Stun(10)
 
-/datum/species/nabber/update_skin(var/mob/living/carbon/human/H)
+/datum/species/nabber/update_skin(mob/living/carbon/human/H)
 
 	if(H.stat)
 		H.skin_state = SKIN_NORMAL
@@ -295,7 +295,7 @@
 			return(threat_image)
 	return
 
-/datum/species/nabber/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
+/datum/species/nabber/disarm_attackhand(mob/living/carbon/human/attacker, mob/living/carbon/human/target)
 	if(attacker.pulling_punches || target.lying || attacker == target)
 		return ..(attacker, target)
 	if(world.time < attacker.last_attack + 20)
@@ -312,21 +312,21 @@
 	if(prob(50))
 		target.set_dir(GLOB.reverse_dir[target.dir])
 
-/datum/species/nabber/get_additional_examine_text(var/mob/living/carbon/human/H)
+/datum/species/nabber/get_additional_examine_text(mob/living/carbon/human/H)
 	var/datum/gender/T = gender_datums[H.get_gender()]
 	if(H.pulling_punches)
 		return "\n[T.His] manipulation arms are out and [T.he] looks ready to use complex items."
 	else
 		return "\n<span class='warning'>[T.His] deadly upper arms are raised and [T.he] looks ready to attack!</span>"
 
-/datum/species/nabber/handle_post_spawn(var/mob/living/carbon/human/H)
+/datum/species/nabber/handle_post_spawn(mob/living/carbon/human/H)
 	..()
 	return H.pulling_punches = TRUE
 
-/datum/species/nabber/has_fine_manipulation(var/mob/living/carbon/human/H)
+/datum/species/nabber/has_fine_manipulation(mob/living/carbon/human/H)
 	return (..() && (H && H.pulling_punches))
 
-/datum/species/nabber/attempt_grab(var/mob/living/carbon/human/grabber, var/mob/living/target)
+/datum/species/nabber/attempt_grab(mob/living/carbon/human/grabber, mob/living/target)
 	if(grabber.pulling_punches)
 		return ..()
 	if(grabber == target)
@@ -357,7 +357,7 @@
 	else
 		grabber.visible_message("<span class='danger'>\The [grabber] suddenly lunges out, almost grabbing \the [target]!</span>")
 
-/datum/species/nabber/toggle_stance(var/mob/living/carbon/human/H)
+/datum/species/nabber/toggle_stance(mob/living/carbon/human/H)
 	if(H.incapacitated())
 		return FALSE
 	var/datum/gender/T = gender_datums[H.get_gender()]
@@ -372,7 +372,7 @@
 		to_chat(H, "<span class='notice'>You stop adjusting your arms and don't switch between them.</span>")
 	return TRUE
 
-/datum/species/nabber/proc/arm_swap(var/mob/living/carbon/human/H, var/forced)
+/datum/species/nabber/proc/arm_swap(mob/living/carbon/human/H, forced)
 	H.unEquip(H.l_hand)
 	H.unEquip(H.r_hand)
 	var/hidden = H.is_cloaked()
@@ -397,7 +397,7 @@
 			H.visible_message("<span class='warning'>[H] tenses as [T.he] brings [T.his] smaller arms in close to [T.his] body. [T.His] two massive spiked arms reach \
 			out. [T.He] looks ready to attack.</span>")
 
-/datum/species/nabber/check_background(var/datum/job/job, var/datum/preferences/prefs)
+/datum/species/nabber/check_background(datum/job/job, datum/preferences/prefs)
 	var/decl/cultural_info/culture/nabber/grade = SSculture.get_culture(prefs.cultural_info[TAG_CULTURE])
 	. = istype(grade) ? (job.type in grade.valid_jobs) : ..()
 

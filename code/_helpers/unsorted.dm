@@ -38,11 +38,11 @@
 	return text("#[][][]", textr, textg, textb)
 
 //Returns the middle-most value
-/proc/dd_range(var/low, var/high, var/num)
+/proc/dd_range(low, high, num)
 	return max(low,min(high,num))
 
 //Returns whether or not A is the middle most value
-/proc/InRange(var/A, var/lower, var/upper)
+/proc/InRange(A, lower, upper)
 	if(A < lower) return 0
 	if(A > upper) return 0
 	return 1
@@ -174,7 +174,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	return 0
 
 
-/proc/DirBlocked(turf/loc,var/dir)
+/proc/DirBlocked(turf/loc,dir)
 	for(var/obj/structure/window/D in loc)
 		if(!D.density)			continue
 		if(D.dir == SOUTHWEST)	return 1
@@ -229,7 +229,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	return line
 
 #define LOCATE_COORDS(X, Y, Z) locate(clamp(X, 1, world.maxx), clamp(Y, 1, world.maxy), Z)
-/proc/getcircle(turf/center, var/radius) //Uses a fast Bresenham rasterization algorithm to return the turfs in a thin circle.
+/proc/getcircle(turf/center, radius) //Uses a fast Bresenham rasterization algorithm to return the turfs in a thin circle.
 	if(!radius) return list(center)
 
 	var/x = 0
@@ -272,7 +272,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	return 1
 
 //Ensure the frequency is within bounds of what it should be sending/recieving at
-/proc/sanitize_frequency(var/f, var/low = PUBLIC_LOW_FREQ, var/high = PUBLIC_HIGH_FREQ)
+/proc/sanitize_frequency(f, low = PUBLIC_LOW_FREQ, high = PUBLIC_HIGH_FREQ)
 	f = round(f)
 	f = max(low, f)
 	f = min(high, f)
@@ -281,12 +281,12 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	return f
 
 //Turns 1479 into 147.9
-/proc/format_frequency(var/f)
+/proc/format_frequency(f)
 	return "[round(f / 10)].[f % 10]"
 
 //Generalised helper proc for letting mobs rename themselves. Used to be clname() and ainame()
 //Last modified by Carn
-/mob/proc/rename_self(var/role, var/allow_numbers=0)
+/mob/proc/rename_self(role, allow_numbers=0)
 	spawn(0)
 		var/oldname = real_name
 
@@ -458,7 +458,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	return moblist
 
 //Forces a variable to be posative
-/proc/modulus(var/M)
+/proc/modulus(M)
 	if(M >= 0)
 		return M
 	if(M < 0)
@@ -466,7 +466,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 // returns the turf located at the map edge in the specified direction relative to A
 // used for mass driver
-/proc/get_edge_target_turf(var/atom/A, var/direction)
+/proc/get_edge_target_turf(atom/A, direction)
 
 	var/turf/target = locate(A.x, A.y, A.z)
 	if(!A || !target)
@@ -490,7 +490,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 // result is bounded to map size
 // note range is non-pythagorean
 // used for disposal system
-/proc/get_ranged_target_turf(var/atom/A, var/direction, var/range)
+/proc/get_ranged_target_turf(atom/A, direction, range)
 
 	var/x = A.x
 	var/y = A.y
@@ -508,14 +508,14 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 // returns turf relative to A offset in dx and dy tiles
 // bound to map limits
-/proc/get_offset_target_turf(var/atom/A, var/dx, var/dy)
+/proc/get_offset_target_turf(atom/A, dx, dy)
 	var/x = min(world.maxx, max(1, A.x + dx))
 	var/y = min(world.maxy, max(1, A.y + dy))
 	return locate(x,y,A.z)
 
 
 //returns random gauss number
-/proc/GaussRand(var/sigma)
+/proc/GaussRand(sigma)
 	var/x,y,rsq
 	do
 		x=2*rand()-1
@@ -525,7 +525,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	return sigma*y*sqrt(-2*log(rsq)/rsq)
 
 //returns random gauss number, rounded to 'roundto'
-/proc/GaussRandRound(var/sigma,var/roundto)
+/proc/GaussRandRound(sigma,roundto)
 	return round(GaussRand(sigma),roundto)
 
 //Will return the contents of an atom recursivly to a depth of 'searchDepth'
@@ -540,7 +540,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	return toReturn
 
 //Step-towards method of determining whether one atom can see another. Similar to viewers()
-/proc/can_see(var/atom/source, var/atom/target, var/length=5) // I couldn't be arsed to do actual raycasting :I This is horribly inaccurate.
+/proc/can_see(atom/source, atom/target, length=5) // I couldn't be arsed to do actual raycasting :I This is horribly inaccurate.
 	var/turf/current = get_turf(source)
 	var/turf/target_turf = get_turf(target)
 	var/steps = 0
@@ -558,7 +558,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	return 1
 
-/proc/is_blocked_turf(var/turf/T)
+/proc/is_blocked_turf(turf/T)
 	var/cant_pass = 0
 	if(T.density) cant_pass = 1
 	for(var/atom/A in T)
@@ -566,7 +566,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			cant_pass = 1
 	return cant_pass
 
-/proc/get_step_towards2(var/atom/ref , var/atom/trg)
+/proc/get_step_towards2(atom/ref , atom/trg)
 	var/base_dir = get_dir(ref, get_step_towards(ref,trg))
 	var/turf/temp = get_step_towards(ref,trg)
 
@@ -596,12 +596,12 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 //Takes: Anything that could possibly have variables and a varname to check.
 //Returns: 1 if found, 0 if not.
-/proc/hasvar(var/datum/A, var/varname)
+/proc/hasvar(datum/A, varname)
 	return A.vars.Find(varname) != 0
 
 //Takes: Area type as text string or as typepath OR an instance of the area.
 //Returns: A list of all areas of that type in the world.
-/proc/get_areas(var/areatype)
+/proc/get_areas(areatype)
 	if(!areatype) return null
 	if(istext(areatype)) areatype = text2path(areatype)
 	if(isarea(areatype))
@@ -615,7 +615,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 //Takes: Area type as a typepath OR an instance of the area.
 //Returns: A list of all atoms	(objs, turfs, mobs) in areas of that type of that type in the world.
-/proc/get_area_all_atoms(var/areatype)
+/proc/get_area_all_atoms(areatype)
 	if(!areatype)
 		return null
 	if(isarea(areatype))
@@ -631,7 +631,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 				atoms += A
 	return atoms
 
-/area/proc/move_contents_to(var/area/A)
+/area/proc/move_contents_to(area/A)
 	//Takes: Area.
 	//Returns: Nothing.
 	//Notes: Attempts to move the contents of one area to another area.
@@ -652,7 +652,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		var/translation = get_turf_translation(src_origin, trg_origin, turfs_src)
 		translate_turfs(translation, null)
 
-/proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
+/proc/DuplicateObject(obj/original, perfectcopy = 0 , sameloc = 0)
 	if(!original)
 		return null
 
@@ -692,7 +692,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
  *
  * Returns List (`/atom`). A list containing all atoms that were created at the target area during the process.
  */
-/area/proc/copy_contents_to(var/area/A , var/platingRequired = 0 )
+/area/proc/copy_contents_to(area/A , platingRequired = 0 )
 	if(!A || !src) return 0
 
 	var/list/turfs_src = get_area_turfs(src.type)
@@ -1003,7 +1003,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		if(hitzone in badzones)
 			return FALSE
 
-/proc/reverse_direction(var/dir)
+/proc/reverse_direction(dir)
 	switch(dir)
 		if(NORTH)
 			return SOUTH
@@ -1068,12 +1068,12 @@ var/global/list/WALLITEMS = list(
 /proc/format_text(text)
 	return replacetext(replacetext(text,"\proper ",""),"\improper ","")
 
-/proc/topic_link(var/datum/D, var/arglist, var/content)
+/proc/topic_link(datum/D, arglist, content)
 	if(istype(arglist,/list))
 		arglist = list2params(arglist)
 	return "<a href='?src=\ref[D];[arglist]'>[content]</a>"
 
-/proc/get_random_colour(var/simple = FALSE, var/lower = 0, var/upper = 255)
+/proc/get_random_colour(simple = FALSE, lower = 0, upper = 255)
 	var/colour
 	if(simple)
 		colour = pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))
@@ -1088,7 +1088,7 @@ var/global/list/WALLITEMS = list(
 GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 
 //Version of view() which ignores darkness, because BYOND doesn't have it.
-/proc/dview(var/range = world.view, var/center, var/invis_flags = 0)
+/proc/dview(range = world.view, center, invis_flags = 0)
 	if(!center)
 		return
 
@@ -1115,7 +1115,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	crash_with("Prevented attempt to delete dview mob: [log_info_line(src)]")
 	return QDEL_HINT_LETMELIVE // Prevents destruction
 
-/atom/proc/get_light_and_color(var/atom/origin)
+/atom/proc/get_light_and_color(atom/origin)
 	if(origin)
 		color = origin.color
 		set_light(origin.light_max_bright, origin.light_inner_range, origin.light_outer_range, origin.light_falloff_curve)

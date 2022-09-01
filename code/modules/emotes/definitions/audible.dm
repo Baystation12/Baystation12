@@ -4,7 +4,7 @@
 	message_type = AUDIBLE_MESSAGE
 	var/emote_sound
 
-/decl/emote/audible/do_extra(var/atom/user)
+/decl/emote/audible/do_extra(atom/user)
 	if(emote_sound)
 		playsound(user.loc, emote_sound, 50, 0)
 
@@ -192,7 +192,7 @@
 	key ="hiss_"
 	emote_message_3p_target = "USER hisses softly at TARGET."
 	emote_message_3p = "USER hisses softly."
-	
+
 /decl/emote/audible/lizard_bellow
 	key = "bellow"
 	emote_message_3p_target = "USER bellows deeply at TARGET!"

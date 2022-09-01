@@ -2,7 +2,7 @@
 	name = "Toggle Waddling"
 	var/waddling = FALSE
 
-/datum/admin_secret_item/fun_secret/waddle/do_execute(var/mob/user)
+/datum/admin_secret_item/fun_secret/waddle/do_execute(mob/user)
 	waddling = !waddling
 	if(waddling)
 		GLOB.moved_event.register_global(src, .proc/waddle)

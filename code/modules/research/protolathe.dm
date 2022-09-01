@@ -77,7 +77,7 @@
 	else
 		icon_state = "protolathe"
 
-/obj/machinery/r_n_d/protolathe/state_transition(var/decl/machine_construction/default/new_state)
+/obj/machinery/r_n_d/protolathe/state_transition(decl/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state) && linked_console)
 		linked_console.linked_lathe = null
@@ -91,7 +91,7 @@
 		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
 	return ..()
 
-/obj/machinery/r_n_d/protolathe/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/r_n_d/protolathe/attackby(obj/item/O as obj, mob/user as mob)
 	if(busy)
 		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
 		return 1
@@ -136,16 +136,16 @@
 	busy = 0
 	updateUsrDialog()
 
-/obj/machinery/r_n_d/protolathe/proc/addToQueue(var/datum/design/D)
+/obj/machinery/r_n_d/protolathe/proc/addToQueue(datum/design/D)
 	queue += D
 	return
 
-/obj/machinery/r_n_d/protolathe/proc/removeFromQueue(var/index)
+/obj/machinery/r_n_d/protolathe/proc/removeFromQueue(index)
 	if(!is_valid_index(index, queue))
 		return
 	queue.Cut(index, index + 1)
 
-/obj/machinery/r_n_d/protolathe/proc/canBuild(var/datum/design/D)
+/obj/machinery/r_n_d/protolathe/proc/canBuild(datum/design/D)
 	for(var/M in D.materials)
 		if(materials[M] < D.materials[M])
 			return 0
@@ -154,7 +154,7 @@
 			return 0
 	return 1
 
-/obj/machinery/r_n_d/protolathe/proc/build(var/datum/design/D)
+/obj/machinery/r_n_d/protolathe/proc/build(datum/design/D)
 	var/power = active_power_usage
 	for(var/M in D.materials)
 		power += round(D.materials[M] / 5)

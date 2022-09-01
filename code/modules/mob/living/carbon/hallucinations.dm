@@ -67,7 +67,7 @@
 
 /datum/hallucination/proc/end()
 
-/datum/hallucination/proc/can_affect(var/mob/living/carbon/C)
+/datum/hallucination/proc/can_affect(mob/living/carbon/C)
 	if(!C.client)
 		return 0
 	if(min_power > C.hallucination_power)
@@ -133,7 +133,7 @@
 	holder.playsound_local(origin,gunshot,50)
 
 //Hearing someone talking to/about you.
-/datum/hallucination/talking/can_affect(var/mob/living/carbon/C)
+/datum/hallucination/talking/can_affect(mob/living/carbon/C)
 	if(!..())
 		return 0
 	for(var/mob/living/M in oview(C))
@@ -245,7 +245,7 @@
 /datum/hallucination/fakeattack
 	min_power = 30
 
-/datum/hallucination/fakeattack/can_affect(var/mob/living/carbon/C)
+/datum/hallucination/fakeattack/can_affect(mob/living/carbon/C)
 	if(!..())
 		return 0
 	for(var/mob/living/M in oview(C,1))

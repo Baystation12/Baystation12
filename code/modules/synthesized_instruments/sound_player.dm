@@ -40,7 +40,7 @@
 	tokens.Cut()
 	. = ..()
 
-/datum/sound_player/proc/subscribe(var/datum/sound_token/instrument/newtoken)
+/datum/sound_player/proc/subscribe(datum/sound_token/instrument/newtoken)
 	if(!istype(newtoken))
 		CRASH("Non token type passed to subscribe function.")
 	tokens += newtoken
@@ -49,16 +49,16 @@
 	newtoken.PrivLocateListeners(list(), seen_turfs.Copy())
 
 
-/datum/sound_player/proc/unsubscribe(var/datum/sound_token/instrument/oldtoken)
+/datum/sound_player/proc/unsubscribe(datum/sound_token/instrument/oldtoken)
 	if(!istype(oldtoken))
 		CRASH("Non token type passed to unsubscribe function.")
 	tokens -= oldtoken
 
-/datum/sound_player/proc/on_turf_entered_relay(var/atom/enteree)
+/datum/sound_player/proc/on_turf_entered_relay(atom/enteree)
 	for(var/datum/sound_token/instrument/I in tokens)
 		I.PrivAddListener(enteree)
 
-/datum/sound_player/proc/on_turfs_changed_relay(var/list/prior_turfs, var/list/current_turfs)
+/datum/sound_player/proc/on_turfs_changed_relay(list/prior_turfs, list/current_turfs)
 	seen_turfs = current_turfs
 	for(var/datum/sound_token/instrument/I in tokens)
 		I.PrivLocateListeners(prior_turfs.Copy(), current_turfs.Copy())
@@ -81,6 +81,3 @@
 		return D.shouldStopPlaying(user)
 
 	return 1 //Well if you got this far you did something very wrong
-
-
-

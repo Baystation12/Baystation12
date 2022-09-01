@@ -35,7 +35,7 @@
 	QDEL_NULL_LIST(encryption_keys)
 	return ..()
 
-/obj/item/device/radio/headset/list_channels(var/mob/user)
+/obj/item/device/radio/headset/list_channels(mob/user)
 	return list_secure_channels()
 
 /obj/item/device/radio/headset/examine(mob/user, distance)
@@ -360,13 +360,13 @@
 			encryption_keys += W
 			recalculateChannels(1)
 
-/obj/item/device/radio/headset/MouseDrop(var/obj/over_object)
+/obj/item/device/radio/headset/MouseDrop(obj/over_object)
 	var/mob/M = usr
 	if((!istype(over_object, /obj/screen)) && (src in M) && CanUseTopic(M))
 		return attack_self(M)
 	return
 
-/obj/item/device/radio/headset/recalculateChannels(var/setDescription = 0)
+/obj/item/device/radio/headset/recalculateChannels(setDescription = 0)
 	src.channels = list()
 	src.translate_binary = 0
 	src.syndie = 0

@@ -23,7 +23,7 @@
 	name = "Docking Control program"
 	var/list/docking_controllers = list() //list of tags
 
-/datum/nano_module/docking/New(var/datum/host, var/topic_manager)
+/datum/nano_module/docking/New(datum/host, topic_manager)
 	..()
 	refresh_docks()
 

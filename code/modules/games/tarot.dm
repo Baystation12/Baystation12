@@ -28,7 +28,7 @@
 			P.desc = "A Rider-Waite tarot card."
 			cards += P
 
-/obj/item/deck/tarot/attack_self(var/mob/user as mob)
+/obj/item/deck/tarot/attack_self(mob/user as mob)
 	var/list/newcards = list()
 	while(cards.len)
 		var/datum/playingcard/P = pick(cards)

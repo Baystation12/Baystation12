@@ -2,7 +2,7 @@
 	set_extension(src, /datum/extension/interactive/multitool/items/clothing)
 	..()
 
-/datum/extension/interactive/multitool/items/clothing/interact(var/obj/item/device/multitool/M, var/mob/user)
+/datum/extension/interactive/multitool/items/clothing/interact(obj/item/device/multitool/M, mob/user)
 	if(extension_status(user) != STATUS_INTERACTIVE)
 		return
 	var/obj/item/clothing/under/u = holder

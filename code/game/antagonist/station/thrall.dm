@@ -9,7 +9,7 @@ GLOBAL_DATUM_INIT(thralls, /datum/antagonist/thrall, new)
 
 	var/list/thrall_controllers = list()
 
-/datum/antagonist/thrall/create_objectives(var/datum/mind/player)
+/datum/antagonist/thrall/create_objectives(datum/mind/player)
 	var/mob/living/controller = thrall_controllers["\ref[player]"]
 	if(!controller)
 		return // Someone is playing with buttons they shouldn't be.
@@ -18,13 +18,13 @@ GLOBAL_DATUM_INIT(thralls, /datum/antagonist/thrall, new)
 	obey.explanation_text = "Obey your master, [controller.real_name], in all things."
 	player.objectives |= obey
 
-/datum/antagonist/thrall/add_antagonist(var/datum/mind/player, var/ignore_role, var/do_not_equip, var/move_to_spawn, var/do_not_announce, var/preserve_appearance, var/mob/new_controller)
+/datum/antagonist/thrall/add_antagonist(datum/mind/player, ignore_role, do_not_equip, move_to_spawn, do_not_announce, preserve_appearance, mob/new_controller)
 	if(!new_controller)
 		return 0
 	. = ..()
 	if(.) thrall_controllers["\ref[player]"] = new_controller
 
-/datum/antagonist/thrall/greet(var/datum/mind/player)
+/datum/antagonist/thrall/greet(datum/mind/player)
 	. = ..()
 	var/mob/living/controller = thrall_controllers["\ref[player]"]
 	if(controller)

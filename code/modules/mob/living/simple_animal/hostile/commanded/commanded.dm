@@ -38,13 +38,13 @@
 			C.stance = C.new_stance
 			return A
 
-/mob/living/simple_animal/hostile/commanded/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+/mob/living/simple_animal/hostile/commanded/hear_say(message, verb = "says", datum/language/language = null, alt_name = "", italics = 0, mob/speaker = null, sound/speech_sound, sound_vol)
 	if((weakref(speaker) in friends) || speaker == master)
 		command_buffer.Add(speaker)
 		command_buffer.Add(lowertext(html_decode(message)))
 	return 0
 
-/mob/living/simple_animal/hostile/commanded/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
+/mob/living/simple_animal/hostile/commanded/hear_radio(message, verb="says", datum/language/language=null, part_a, part_b, part_c, mob/speaker = null, hard_to_hear = 0)
 	if((weakref(speaker) in friends) || speaker == master)
 		command_buffer.Add(speaker)
 		command_buffer.Add(lowertext(html_decode(message)))
@@ -81,7 +81,7 @@
 /mob/living/simple_animal/hostile/commanded/proc/commanded_stop() //basically a proc that runs whenever we are asked to stay put. Probably going to remain unused.
 	return
 
-/mob/living/simple_animal/hostile/commanded/proc/listen(var/mob/speaker, var/text)
+/mob/living/simple_animal/hostile/commanded/proc/listen(mob/speaker, text)
 	for(var/command in known_commands)
 		if(findtext(text,command))
 			switch(command)
@@ -103,7 +103,7 @@
 	return 1
 
 //returns a list of everybody we wanna do stuff with.
-/mob/living/simple_animal/hostile/commanded/proc/get_targets_by_name(var/text, var/filter_friendlies = 0)
+/mob/living/simple_animal/hostile/commanded/proc/get_targets_by_name(text, filter_friendlies = 0)
 	var/list/possible_targets = hearers(src,10)
 	. = list()
 	for(var/mob/M in possible_targets)
@@ -124,7 +124,7 @@
 			. += M
 
 
-/mob/living/simple_animal/hostile/commanded/proc/attack_command(var/mob/speaker,var/text)
+/mob/living/simple_animal/hostile/commanded/proc/attack_command(mob/speaker,text)
 	target_mob = null //want me to attack something? Well I better forget my old target.
 	walk_to(src,0)
 	stance = STANCE_IDLE
@@ -136,14 +136,14 @@
 	allowed_targets += targets
 	return targets.len != 0
 
-/mob/living/simple_animal/hostile/commanded/proc/stay_command(var/mob/speaker,var/text)
+/mob/living/simple_animal/hostile/commanded/proc/stay_command(mob/speaker,text)
 	target_mob = null
 	stance = COMMANDED_STOP
 	set_AI_busy(TRUE)
 	walk_to(src,0)
 	return 1
 
-/mob/living/simple_animal/hostile/commanded/proc/stop_command(var/mob/speaker,var/text)
+/mob/living/simple_animal/hostile/commanded/proc/stop_command(mob/speaker,text)
 	allowed_targets = list()
 	walk_to(src,0)
 	target_mob = null //gotta stop SOMETHIN
@@ -151,7 +151,7 @@
 	set_AI_busy(FALSE)
 	return 1
 
-/mob/living/simple_animal/hostile/commanded/proc/follow_command(var/mob/speaker,var/text)
+/mob/living/simple_animal/hostile/commanded/proc/follow_command(mob/speaker,text)
 	//we can assume 'stop following' is handled by stop_command
 	if(findtext(text,"me"))
 		stance = COMMANDED_FOLLOW
@@ -166,11 +166,11 @@
 
 	return 1
 
-/mob/living/simple_animal/hostile/commanded/proc/misc_command(var/mob/speaker,var/text)
+/mob/living/simple_animal/hostile/commanded/proc/misc_command(mob/speaker,text)
 	return 0
 
 
-/mob/living/simple_animal/hostile/commanded/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
+/mob/living/simple_animal/hostile/commanded/hit_with_weapon(obj/item/O, mob/living/user, effective_force, hit_zone)
 	//if they attack us, we want to kill them. None of that "you weren't given a command so free kill" bullshit.
 	. = ..()
 	if(. && retribution)

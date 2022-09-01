@@ -159,7 +159,7 @@
 		padding_material = null
 	update_icon()
 
-/obj/structure/bed/proc/add_padding(var/padding_type)
+/obj/structure/bed/proc/add_padding(padding_type)
 	padding_material = SSmaterials.get_material_by_name(padding_type)
 	update_icon()
 
@@ -174,10 +174,10 @@
 	icon_state = "psychbed"
 	base_icon = "psychbed"
 
-/obj/structure/bed/psych/New(var/newloc)
+/obj/structure/bed/psych/New(newloc)
 	..(newloc,MATERIAL_WALNUT, MATERIAL_LEATHER_GENERIC)
 
-/obj/structure/bed/padded/New(var/newloc)
+/obj/structure/bed/padded/New(newloc)
 	..(newloc,MATERIAL_ALUMINIUM,MATERIAL_CLOTH)
 
 /*

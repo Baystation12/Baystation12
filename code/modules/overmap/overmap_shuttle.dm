@@ -11,7 +11,7 @@
 	var/skill_needed = SKILL_BASIC
 	var/operator_skill = SKILL_MIN
 
-/datum/shuttle/autodock/overmap/New(var/_name, var/obj/effect/shuttle_landmark/start_waypoint)
+/datum/shuttle/autodock/overmap/New(_name, obj/effect/shuttle_landmark/start_waypoint)
 	..(_name, start_waypoint)
 	refresh_fuel_ports_list()
 
@@ -56,7 +56,7 @@
 		set_destination(places[place])
 	..()
 
-/datum/shuttle/autodock/overmap/proc/set_destination(var/obj/effect/shuttle_landmark/A)
+/datum/shuttle/autodock/overmap/proc/set_destination(obj/effect/shuttle_landmark/A)
 	if(A != current_location)
 		next_location = A
 

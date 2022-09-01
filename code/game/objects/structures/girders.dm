@@ -20,7 +20,7 @@
 	health_max = 50
 	cover = 25
 
-/obj/structure/girder/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes apart", var/wallbreaker)
+/obj/structure/girder/attack_generic(mob/user, damage, attack_message = "smashes apart", wallbreaker)
 	if(!damage)
 		return 0
 	attack_animation(user)
@@ -32,7 +32,7 @@
 		damage_health(damage, DAMAGE_BRUTE)
 	return 1
 
-/obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
+/obj/structure/girder/bullet_act(obj/item/projectile/Proj)
 	//Girders only provide partial cover. There's a chance that the projectiles will just pass through. (unless you are trying to shoot the girder)
 	if(Proj.original != src && !prob(cover))
 		return PROJECTILE_CONTINUE //pass through
@@ -41,7 +41,7 @@
 /obj/structure/girder/on_death()
 	dismantle()
 
-/obj/structure/girder/CanFluidPass(var/coming_from)
+/obj/structure/girder/CanFluidPass(coming_from)
 	return TRUE
 
 /obj/structure/girder/proc/reset_girder()

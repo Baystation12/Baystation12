@@ -13,7 +13,7 @@ If its complexity is lower than our theme's then
 	var/datum/room_theme/room_theme = null
 	var/generate_doors = 1 //do we want to generate doors for this place?
 
-/datum/room/New(var/rt, var/_x, var/_y, var/w, var/h, var/doors)
+/datum/room/New(rt, _x, _y, w, h, doors)
 	var/gen_type
 	if(rt)
 		room_theme = rt
@@ -35,7 +35,7 @@ If its complexity is lower than our theme's then
 		room_generator = null
 	return ..()
 
-/datum/room/proc/apply_to_map(var/xorigin,var/yorigin,var/zorigin, var/datum/random_map/map)
+/datum/room/proc/apply_to_map(xorigin,yorigin,zorigin, datum/random_map/map)
 	if(room_theme)
 		for(var/i = 0, i < width, i++)
 			for(var/j = 0, j < height, j++)
@@ -82,7 +82,7 @@ If its complexity is lower than our theme's then
 
 	return 1
 
-/datum/room/proc/add_loot(var/xorigin,var/yorigin,var/zorigin,var/type)
+/datum/room/proc/add_loot(xorigin,yorigin,zorigin,type)
 	if(room_generator && room_generator.apply_loot(xorigin,yorigin,zorigin,type))
 		return 1
 	var/rx = xorigin+x+rand(width-3)

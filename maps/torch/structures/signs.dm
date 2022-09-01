@@ -37,7 +37,7 @@
 		to_chat(usr, directives)
 		return TOPIC_HANDLED
 
-/obj/structure/sign/ecplaque/attackby(var/obj/I, var/mob/user)
+/obj/structure/sign/ecplaque/attackby(obj/I, mob/user)
 	if(istype(I, /obj/item/grab))
 		var/obj/item/grab/G = I
 		if(!ishuman(G.affecting))
@@ -85,7 +85,7 @@
 	unacidable = TRUE
 	var/list/fallen = list()
 
-/obj/structure/sign/memorial/attackby(var/obj/D, var/mob/user)
+/obj/structure/sign/memorial/attackby(obj/D, mob/user)
 	if(istype(D, /obj/item/clothing/accessory/badge/solgov/tags))
 		var/obj/item/clothing/accessory/badge/solgov/tags/T = D
 		if(T.owner_branch in list("Expeditionary Corps", "Fleet"))

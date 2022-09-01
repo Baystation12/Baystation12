@@ -25,7 +25,7 @@ var/global/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL
 	return ..()
 
 
-/obj/machinery/r_n_d/proc/eject(var/material, var/amount)
+/obj/machinery/r_n_d/proc/eject(material, amount)
 	if(!(material in materials))
 		return
 	var/material/mat = SSmaterials.get_material_by_name(material)
@@ -38,7 +38,7 @@ var/global/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL
 	for(var/f in materials)
 		. += materials[f]
 
-/obj/machinery/r_n_d/proc/getLackingMaterials(var/datum/design/D)
+/obj/machinery/r_n_d/proc/getLackingMaterials(datum/design/D)
 	var/list/ret = list()
 	for(var/M in D.materials)
 		if(materials[M] < D.materials[M])

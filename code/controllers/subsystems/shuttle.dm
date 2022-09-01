@@ -81,7 +81,7 @@ SUBSYSTEM_DEF(shuttle)
 			O = map_sectors["[shuttle_landmark.z]"]
 			O ? O.add_landmark(shuttle_landmark, shuttle_landmark.shuttle_restricted) : (landmarks_awaiting_sector += shuttle_landmark)
 
-/datum/controller/subsystem/shuttle/proc/get_landmark(var/shuttle_landmark_tag)
+/datum/controller/subsystem/shuttle/proc/get_landmark(shuttle_landmark_tag)
 	return registered_shuttle_landmarks[shuttle_landmark_tag]
 
 //Checks if the given sector's landmarks have initialized; if so, registers them with the sector, if not, marks them for assignment after they come in.
@@ -118,7 +118,7 @@ SUBSYSTEM_DEF(shuttle)
 			given_sector.add_landmark(landmark, shuttle_name)
 			. = 1
 
-/datum/controller/subsystem/shuttle/proc/initialize_shuttle(var/shuttle_type)
+/datum/controller/subsystem/shuttle/proc/initialize_shuttle(shuttle_type)
 	var/datum/shuttle/shuttle = shuttle_type
 	if(initial(shuttle.category) != shuttle_type)
 		shuttle = new shuttle()

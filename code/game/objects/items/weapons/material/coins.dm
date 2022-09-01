@@ -27,7 +27,7 @@
 	else
 		overlays.Cut()
 
-/obj/item/material/coin/attackby(var/obj/item/W, var/mob/user)
+/obj/item/material/coin/attackby(obj/item/W, mob/user)
 	if(isCoil(W) && isnull(string_colour))
 		var/obj/item/stack/cable_coil/CC = W
 		if(CC.use(1))
@@ -42,7 +42,7 @@
 		update_icon()
 	else ..()
 
-/obj/item/material/coin/attack_self(var/mob/user)
+/obj/item/material/coin/attack_self(mob/user)
 	playsound(user.loc, 'sound/effects/coin_flip.ogg', 75, 1)
 	user.visible_message(SPAN_NOTICE("\The [user] flips \the [src] into the air and catches it, revealing that it landed on [pick("tails", "heads")]!"))
 

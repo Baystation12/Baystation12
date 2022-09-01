@@ -34,7 +34,7 @@
 	QDEL_NULL(installed_gun)
 	return ..()
 
-/obj/item/integrated_circuit/manipulation/weapon_firing/attackby(var/obj/O, var/mob/user)
+/obj/item/integrated_circuit/manipulation/weapon_firing/attackby(obj/O, mob/user)
 	if(istype(O, /obj/item/gun/energy))
 		var/obj/item/gun/energy/gun = O
 		if(installed_gun)
@@ -59,7 +59,7 @@
 	else
 		..()
 
-/obj/item/integrated_circuit/manipulation/weapon_firing/attack_self(var/mob/user)
+/obj/item/integrated_circuit/manipulation/weapon_firing/attack_self(mob/user)
 	if(installed_gun)
 		installed_gun.dropInto(loc)
 		to_chat(user, "<span class='notice'>You slide \the [installed_gun] out of the firing mechanism.</span>")
@@ -180,7 +180,7 @@
 	detach_grenade()
 	return ..()
 
-/obj/item/integrated_circuit/manipulation/grenade/attackby(var/obj/item/grenade/G, var/mob/user)
+/obj/item/integrated_circuit/manipulation/grenade/attackby(obj/item/grenade/G, mob/user)
 	if(istype(G))
 		if(attached_grenade)
 			to_chat(user, "<span class='warning'>There is already a grenade attached!</span>")
@@ -191,7 +191,7 @@
 	else
 		return ..()
 
-/obj/item/integrated_circuit/manipulation/grenade/attack_self(var/mob/user)
+/obj/item/integrated_circuit/manipulation/grenade/attack_self(mob/user)
 	if(attached_grenade)
 		user.visible_message("<span class='warning'>\The [user] removes \an [attached_grenade] from \the [src]!</span>", "<span class='notice'>You remove \the [attached_grenade] from \the [src].</span>")
 		user.put_in_hands(attached_grenade)
@@ -212,7 +212,7 @@
 		log_and_message_admins("activated a grenade assembly. Last touches: Assembly: [holder.fingerprintslast] Circuit: [fingerprintslast] Grenade: [attached_grenade.fingerprintslast]")
 
 // These procs do not relocate the grenade, that's the callers responsibility
-/obj/item/integrated_circuit/manipulation/grenade/proc/attach_grenade(var/obj/item/grenade/G)
+/obj/item/integrated_circuit/manipulation/grenade/proc/attach_grenade(obj/item/grenade/G)
 	attached_grenade = G
 	G.forceMove(src)
 	desc += " \An [attached_grenade] is attached to it!"
@@ -380,7 +380,7 @@
 	set_pin_data(IC_OUTPUT, 4, contents)
 	push_data()
 
-/obj/item/integrated_circuit/manipulation/grabber/attack_self(var/mob/user)
+/obj/item/integrated_circuit/manipulation/grabber/attack_self(mob/user)
 	if(contents.len)
 		var/turf/T = get_turf(src)
 		var/obj/item/U
@@ -440,7 +440,7 @@
 							step_towards(pulling, F)
 	activate_pin(2)
 
-/obj/item/integrated_circuit/manipulation/claw/proc/can_pull(var/obj/item/I)
+/obj/item/integrated_circuit/manipulation/claw/proc/can_pull(obj/item/I)
 	return assembly && I && I.w_class <= assembly.w_class && !I.anchored
 
 /obj/item/integrated_circuit/manipulation/claw/proc/pull()
@@ -610,7 +610,7 @@
 	var/obj/item/device/electronic_assembly/assembly = get_object()
 	assembly.closed_interact(usr)
 
-/obj/item/integrated_circuit/manipulation/ai/relaymove(var/mob/user, var/direction)
+/obj/item/integrated_circuit/manipulation/ai/relaymove(mob/user, direction)
 	switch(direction)
 		if(1)
 			activate_pin(1)
@@ -621,7 +621,7 @@
 		if(8)
 			activate_pin(4)
 
-/obj/item/integrated_circuit/manipulation/ai/proc/load_ai(var/mob/user, var/obj/item/card)
+/obj/item/integrated_circuit/manipulation/ai/proc/load_ai(mob/user, obj/item/card)
 	if(controlling)
 		to_chat(user, "<span class='warning'>There is already a card in there!</span>")
 		return

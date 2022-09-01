@@ -1,6 +1,6 @@
 /mob/observer/ghost/var/ghost_magic_cd = 0
 
-/datum/antagonist/cultist/proc/add_ghost_magic(var/mob/observer/ghost/M)
+/datum/antagonist/cultist/proc/add_ghost_magic(mob/observer/ghost/M)
 	if(max_cult_rating >= CULT_GHOSTS_1)
 		M.verbs += /mob/observer/ghost/proc/flick_lights
 		M.verbs += /mob/observer/ghost/proc/bloody_doodle
@@ -46,7 +46,7 @@
 
 	bloody_doodle_proc(0)
 
-/mob/observer/ghost/proc/bloody_doodle_proc(var/bloodless = 0)
+/mob/observer/ghost/proc/bloody_doodle_proc(bloodless = 0)
 	if(!ghost_ability_check())
 		return
 
@@ -170,7 +170,7 @@
 
 	whisper_proc()
 
-/mob/observer/ghost/proc/whisper_proc(var/anyone = 0)
+/mob/observer/ghost/proc/whisper_proc(anyone = 0)
 	if(!ghost_ability_check())
 		return
 

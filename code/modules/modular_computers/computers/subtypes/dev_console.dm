@@ -62,11 +62,11 @@
 	if(os)
 		return os.get_keyboard_overlay()
 
-/obj/machinery/computer/modular/emag_act(var/remaining_charges, var/mob/user)
+/obj/machinery/computer/modular/emag_act(remaining_charges, mob/user)
 	var/obj/item/stock_parts/circuitboard/modular_computer/MB = get_component_of_type(/obj/item/stock_parts/circuitboard/modular_computer)
 	return MB && MB.emag_act(remaining_charges, user)
 
-/obj/machinery/computer/modular/components_are_accessible(var/path)
+/obj/machinery/computer/modular/components_are_accessible(path)
 	. = ..()
 	if(.)
 		return
@@ -105,7 +105,7 @@
 	portable_drive = null
 	verbs -= /obj/machinery/computer/modular/proc/eject_usb
 
-/obj/machinery/computer/modular/CouldUseTopic(var/mob/user)
+/obj/machinery/computer/modular/CouldUseTopic(mob/user)
 	..()
 	if(LAZYLEN(interact_sounds) && CanPhysicallyInteract(user))
 		playsound(src, pick(interact_sounds), 40)

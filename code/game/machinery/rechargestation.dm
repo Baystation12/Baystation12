@@ -166,10 +166,10 @@
 	last_overlay_state = overlay_state()
 	overlays = list(image(overlay_icon, overlay_state()))
 
-/obj/machinery/recharge_station/Bumped(var/mob/living/silicon/robot/R)
+/obj/machinery/recharge_station/Bumped(mob/living/silicon/robot/R)
 	go_in(R)
 
-/obj/machinery/recharge_station/proc/go_in(var/mob/M)
+/obj/machinery/recharge_station/proc/go_in(mob/M)
 
 
 	if(occupant)
@@ -185,7 +185,7 @@
 	update_icon()
 	return 1
 
-/obj/machinery/recharge_station/proc/hascell(var/mob/M)
+/obj/machinery/recharge_station/proc/hascell(mob/M)
 	if(isrobot(M))
 		var/mob/living/silicon/robot/R = M
 		return (R.cell)

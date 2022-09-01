@@ -116,7 +116,7 @@
 	container = null
 	update_icon()
 
-/obj/machinery/chemical_dispenser/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/chemical_dispenser/ui_interact(mob/user, ui_key = "main",datum/nanoui/ui = null, force_open = 1)
 	// this is the data which will be sent to the ui
 	var/data[0]
 	data["amount"] = amount

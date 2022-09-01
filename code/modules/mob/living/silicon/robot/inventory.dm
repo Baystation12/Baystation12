@@ -106,11 +106,11 @@
 //These are hackish but they help clean up code elsewhere.
 
 //module_selected(module) - Checks whether the module slot specified by "module" is currently selected.
-/mob/living/silicon/robot/proc/module_selected(var/module) //Module is 1-3
+/mob/living/silicon/robot/proc/module_selected(module) //Module is 1-3
 	return module == get_selected_module()
 
 //module_active(module) - Checks whether there is a module active in the slot specified by "module".
-/mob/living/silicon/robot/proc/module_active(var/module) //Module is 1-3
+/mob/living/silicon/robot/proc/module_active(module) //Module is 1-3
 	if(module < 1 || module > 3) return 0
 
 	switch(module)
@@ -249,7 +249,7 @@
 		return
 	GLOB.module_activated_event.raise_event(src, O)
 
-/mob/living/silicon/put_in_hands(var/obj/item/W) // No hands.
+/mob/living/silicon/put_in_hands(obj/item/W) // No hands.
 	if(W.loc)
 		W.dropInto(W.loc)
 	else if(loc)

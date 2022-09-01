@@ -30,19 +30,19 @@ var/global/can_call_ert
 				return
 
 	var/reason = input("What is the reason for dispatching this Emergency Response Team?", "Dispatching Emergency Response Team")
-		
+
 	if(!reason && alert("You did not input a reason. Continue anyway?",,"Yes", "No") != "Yes")
 		return
-	
+
 	if(send_emergency_team)
 		to_chat(usr, SPAN_DANGER("Looks like someone beat you to it!"))
 		return
-	
+
 	if(reason)
 		message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team for the reason: [reason]", 1)
 	else
 		message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team.", 1)
-		
+
 	log_admin("[key_name(usr)] used Dispatch Response Team.")
 	trigger_armed_response_team(1, reason)
 
@@ -103,7 +103,7 @@ var/global/can_call_ert
 		sleep(600 * 3) // Minute * Number of Minutes
 
 
-/proc/trigger_armed_response_team(var/force = 0, var/reason = "")
+/proc/trigger_armed_response_team(force = 0, reason = "")
 	if(!can_call_ert && !force)
 		return
 	if(send_emergency_team)
@@ -143,7 +143,7 @@ var/global/can_call_ert
 /datum/evacuation_predicate/ert/is_valid()
 	return world.time < prevent_until
 
-/datum/evacuation_predicate/ert/can_call(var/user)
+/datum/evacuation_predicate/ert/can_call(user)
 	if(world.time >= prevent_until)
 		return TRUE
 	to_chat(user, "<span class='warning'>An emergency response team has been dispatched. Evacuation requests will be denied until [duration2stationtime(prevent_until - world.time)].</span>")

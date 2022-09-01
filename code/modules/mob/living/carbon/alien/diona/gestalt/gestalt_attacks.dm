@@ -1,4 +1,4 @@
-/obj/structure/diona_gestalt/attack_generic(var/mob/user, var/damage, var/attack_message)
+/obj/structure/diona_gestalt/attack_generic(mob/user, damage, attack_message)
 	if(user.loc == src)
 		return
 
@@ -9,7 +9,7 @@
 	visible_message("<span class='danger'>\The [user] has [attack_message] \the [src]!</span>")
 	shed_atom(forcefully = TRUE)
 
-/obj/structure/diona_gestalt/attackby(var/obj/item/thing, var/mob/user)
+/obj/structure/diona_gestalt/attackby(obj/item/thing, mob/user)
 	. = ..()
 	if(thing.force) shed_atom(forcefully = TRUE)
 
@@ -17,7 +17,7 @@
 	. = ..()
 	shed_atom(forcefully = TRUE)
 
-/obj/structure/diona_gestalt/bullet_act(var/obj/item/projectile/P, var/def_zone)
+/obj/structure/diona_gestalt/bullet_act(obj/item/projectile/P, def_zone)
 	. = ..()
 	if (P && (P.damage_type == DAMAGE_BRUTE || P.damage_type == DAMAGE_BURN))
 		shed_atom(forcefully = TRUE)
@@ -28,5 +28,5 @@
 		shed_count--
 		shed_atom(forcefully = TRUE)
 
-/obj/structure/diona_gestalt/proc/handle_member_click(var/mob/living/carbon/alien/diona/clicker)
+/obj/structure/diona_gestalt/proc/handle_member_click(mob/living/carbon/alien/diona/clicker)
 	return

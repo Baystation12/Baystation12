@@ -26,7 +26,7 @@
 	if(holder)
 		nanomapgen_DumpTile(1, 1, text2num(input(usr,"Enter the Z level to generate")))
 
-/client/proc/nanomapgen_DumpTile(var/startX = 1, var/startY = 1, var/currentZ = 1, var/endX = -1, var/endY = -1)
+/client/proc/nanomapgen_DumpTile(startX = 1, startY = 1, currentZ = 1, endX = -1, endY = -1)
 
 	if (endX < 0 || endX > world.maxx)
 		endX = world.maxx

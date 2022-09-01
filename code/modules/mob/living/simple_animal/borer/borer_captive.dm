@@ -10,7 +10,7 @@
 	bone_material = null
 	bone_amount = 0
 
-/mob/living/captive_brain/say(var/message)
+/mob/living/captive_brain/say(message)
 
 	if (src.client)
 		if(client.prefs.muted & MUTE_IC)

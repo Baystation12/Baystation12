@@ -116,7 +116,7 @@
 	. += "Suit Sensors Locked: <a href='?src=\ref[src];toggle_sensors_locked=1'>[pref.sensors_locked ? "Locked" : "Unlocked"]</a><br />"
 	return jointext(.,null)
 
-/datum/category_item/player_setup_item/physical/equipment/proc/get_underwear_metadata(var/underwear_category, var/datum/gear_tweak/gt)
+/datum/category_item/player_setup_item/physical/equipment/proc/get_underwear_metadata(underwear_category, datum/gear_tweak/gt)
 	var/metadata = pref.all_underwear_metadata[underwear_category]
 	if(!metadata)
 		metadata = list()
@@ -128,7 +128,7 @@
 		metadata["[gt]"] = tweak_data
 	return tweak_data
 
-/datum/category_item/player_setup_item/physical/equipment/proc/get_backpack_metadata(var/decl/backpack_outfit/backpack_outfit, var/datum/backpack_tweak/bt)
+/datum/category_item/player_setup_item/physical/equipment/proc/get_backpack_metadata(decl/backpack_outfit/backpack_outfit, datum/backpack_tweak/bt)
 	var/metadata = pref.backpack_metadata[backpack_outfit.name]
 	if(!metadata)
 		metadata = list()
@@ -140,15 +140,15 @@
 		metadata["[bt]"] = tweak_data
 	return tweak_data
 
-/datum/category_item/player_setup_item/physical/equipment/proc/set_underwear_metadata(var/underwear_category, var/datum/gear_tweak/gt, var/new_metadata)
+/datum/category_item/player_setup_item/physical/equipment/proc/set_underwear_metadata(underwear_category, datum/gear_tweak/gt, new_metadata)
 	var/list/metadata = pref.all_underwear_metadata[underwear_category]
 	metadata["[gt]"] = new_metadata
 
-/datum/category_item/player_setup_item/physical/equipment/proc/set_backpack_metadata(var/decl/backpack_outfit/backpack_outfit, var/datum/backpack_tweak/bt, var/new_metadata)
+/datum/category_item/player_setup_item/physical/equipment/proc/set_backpack_metadata(decl/backpack_outfit/backpack_outfit, datum/backpack_tweak/bt, new_metadata)
 	var/metadata = pref.backpack_metadata[backpack_outfit.name]
 	metadata["[bt]"] = new_metadata
 
-/datum/category_item/player_setup_item/physical/equipment/OnTopic(var/href,var/list/href_list, var/mob/user)
+/datum/category_item/player_setup_item/physical/equipment/OnTopic(href,list/href_list, mob/user)
 	if(href_list["change_underwear"])
 		var/datum/category_group/underwear/UWC = GLOB.underwear.categories_by_name[href_list["change_underwear"]]
 		if(!UWC)

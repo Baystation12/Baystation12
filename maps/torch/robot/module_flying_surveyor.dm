@@ -52,7 +52,7 @@
 	for(var/flag_type in flag_types)
 		equipment += new flag_type(src)
 
-/obj/item/robot_module/flying/surveyor/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/flying/surveyor/respawn_consumable(mob/living/silicon/robot/R, amount)
 	var/obj/item/gun/launcher/net/borg/gun = locate() in equipment
 	if(!gun)
 		gun = new(src)
@@ -68,4 +68,3 @@
 		if(flag.amount < flag.max_amount)
 			flag.add(1)
 	..()
-

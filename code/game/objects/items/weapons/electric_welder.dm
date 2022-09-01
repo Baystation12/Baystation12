@@ -23,7 +23,7 @@
 	else
 		to_chat(user, (distance == 0 ? "It has [get_fuel()] [welding_resource] remaining. " : "") + "[cell] is attached.")
 
-/obj/item/weldingtool/electric/afterattack(var/obj/O, var/mob/user, var/proximity)
+/obj/item/weldingtool/electric/afterattack(obj/O, mob/user, proximity)
 	if(proximity && istype(O, /obj/structure/reagent_dispensers/fueltank))
 		if(!welding)
 			to_chat(user, SPAN_WARNING("\The [src] runs on an internal charge and does not need to be refuelled."))
@@ -45,7 +45,7 @@
 	var/obj/item/cell/cell = get_cell()
 	return cell ? cell.charge : 0
 
-/obj/item/weldingtool/electric/attackby(var/obj/item/W, var/mob/user)
+/obj/item/weldingtool/electric/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/stack/material/rods) || istype(W, /obj/item/welder_tank))
 		return
 	if(isScrewdriver(W))
@@ -70,7 +70,7 @@
 		return
 	. = ..()
 
-/obj/item/weldingtool/electric/burn_fuel(var/amount)
+/obj/item/weldingtool/electric/burn_fuel(amount)
 	spend_charge(amount * fuel_cost_multiplier)
 	var/turf/T = get_turf(src)
 	if(T)
@@ -82,7 +82,7 @@
 	if(cell)
 		underlays += image(icon = icon, icon_state = "[initial(icon_state)]_cell")
 
-/obj/item/weldingtool/electric/proc/spend_charge(var/amount)
+/obj/item/weldingtool/electric/proc/spend_charge(amount)
 	var/obj/item/cell/cell = get_cell()
 	if(cell)
 		cell.use(amount * CELLRATE)

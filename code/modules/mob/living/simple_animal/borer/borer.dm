@@ -68,7 +68,7 @@
 		client.screen -= hud_elements
 		client.screen -= hud_intent_selector
 
-/mob/living/simple_animal/borer/Initialize(var/mapload, var/gen=1)
+/mob/living/simple_animal/borer/Initialize(mapload, gen=1)
 
 	hud_intent_selector =  new
 	hud_inject_chemicals = new
@@ -246,7 +246,7 @@
 	qdel(host_brain)
 
 #define COLOR_BORER_RED "#ff5555"
-/mob/living/simple_animal/borer/proc/set_ability_cooldown(var/amt)
+/mob/living/simple_animal/borer/proc/set_ability_cooldown(amt)
 	last_special = world.time + amt
 	for(var/obj/thing in hud_elements)
 		thing.color = COLOR_BORER_RED

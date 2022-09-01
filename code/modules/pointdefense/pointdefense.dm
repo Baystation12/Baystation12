@@ -28,7 +28,7 @@
 			if(pointdefense_controllers.len > 1)
 				lan.remove_device(src)
 
-/obj/machinery/pointdefense_control/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/pointdefense_control/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	if(ui_template)
 		var/list/data = build_ui_data()
 		ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -38,11 +38,11 @@
 			ui.open()
 			ui.set_auto_update(1)
 
-/obj/machinery/pointdefense_control/interface_interact(var/mob/user)
+/obj/machinery/pointdefense_control/interface_interact(mob/user)
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/pointdefense_control/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
+/obj/machinery/pointdefense_control/OnTopic(mob/user, href_list, datum/topic_state/state)
 
 	if(href_list["toggle_active"])
 		var/obj/machinery/pointdefense/PD = locate(href_list["toggle_active"])
@@ -82,7 +82,7 @@
 	data["turrets"] = turrets
 	return data
 
-/obj/machinery/pointdefense_control/attackby(var/obj/item/thing, var/mob/user)
+/obj/machinery/pointdefense_control/attackby(obj/item/thing, mob/user)
 	if(isMultitool(thing))
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.get_new_tag(user)
@@ -128,7 +128,7 @@
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.set_tag(null, initial_id_tag)
 
-/obj/machinery/pointdefense/attackby(var/obj/item/thing, var/mob/user)
+/obj/machinery/pointdefense/attackby(obj/item/thing, mob/user)
 	if(isMultitool(thing))
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.get_new_tag(user)
@@ -140,7 +140,7 @@
 			return FALSE
 	return TRUE
 
-/obj/machinery/pointdefense/proc/Shoot(var/weakref/target)
+/obj/machinery/pointdefense/proc/Shoot(weakref/target)
 	var/obj/effect/meteor/M = target.resolve()
 	if(!istype(M))
 		return
@@ -156,7 +156,7 @@
 
 	set_dir(transform.get_angle() > 0 ? NORTH : SOUTH)
 
-/obj/machinery/pointdefense/proc/finish_shot(var/weakref/target)
+/obj/machinery/pointdefense/proc/finish_shot(weakref/target)
 	//Cleanup from list
 	var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 	var/datum/local_network/lan = pointdefense.get_local_network()

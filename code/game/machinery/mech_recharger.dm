@@ -21,12 +21,12 @@
 	var/repair_power_usage = 10 KILOWATTS		// Per 1 HP of health.
 	var/repair = 0
 
-/obj/machinery/mech_recharger/Crossed(var/mob/living/exosuit/M)
+/obj/machinery/mech_recharger/Crossed(mob/living/exosuit/M)
 	. = ..()
 	if(istype(M) && charging != M)
 		start_charging(M)
 
-/obj/machinery/mech_recharger/Uncrossed(var/mob/living/exosuit/M)
+/obj/machinery/mech_recharger/Uncrossed(mob/living/exosuit/M)
 	. = ..()
 	if(M == charging)
 		stop_charging()
@@ -94,7 +94,7 @@
 /obj/machinery/mech_recharger/proc/fully_repaired()
 	return charging && (charging.health == charging.maxHealth)
 
-/obj/machinery/mech_recharger/proc/start_charging(var/mob/living/exosuit/M)
+/obj/machinery/mech_recharger/proc/start_charging(mob/living/exosuit/M)
 	if(stat & (NOPOWER | BROKEN))
 		M.show_message(SPAN_WARNING("Power port not responding. Terminating."))
 		return

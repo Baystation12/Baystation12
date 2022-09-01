@@ -1,4 +1,4 @@
-/mob/living/proc/show_psi_assay(var/mob/viewer, var/obj/machinery/psi_meter/machine)
+/mob/living/proc/show_psi_assay(mob/viewer, obj/machinery/psi_meter/machine)
 
 	if(!viewer) viewer = usr
 

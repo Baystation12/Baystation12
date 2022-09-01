@@ -15,7 +15,7 @@
 	QDEL_NULL(motivator)
 	. = ..()
 
-/obj/item/mech_component/propulsion/show_missing_parts(var/mob/user)
+/obj/item/mech_component/propulsion/show_missing_parts(mob/user)
 	if(!motivator)
 		to_chat(user, SPAN_WARNING("It is missing an actuator."))
 
@@ -25,7 +25,7 @@
 /obj/item/mech_component/propulsion/update_components()
 	motivator = locate() in src
 
-/obj/item/mech_component/propulsion/attackby(var/obj/item/thing, var/mob/user)
+/obj/item/mech_component/propulsion/attackby(obj/item/thing, mob/user)
 	if(istype(thing,/obj/item/robot_parts/robot_component/actuator))
 		if(motivator)
 			to_chat(user, SPAN_WARNING("\The [src] already has an actuator installed."))
@@ -37,7 +37,7 @@
 /obj/item/mech_component/propulsion/prebuild()
 	motivator = new(src)
 
-/obj/item/mech_component/propulsion/proc/can_move_on(var/turf/location, var/turf/target_loc)
+/obj/item/mech_component/propulsion/proc/can_move_on(turf/location, turf/target_loc)
 	if(!location) //Unsure on how that'd even work
 		return 0
 	if(!istype(location))

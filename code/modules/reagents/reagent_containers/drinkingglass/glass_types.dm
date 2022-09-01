@@ -240,7 +240,7 @@
 	base_name = "teacup"
 	base_icon = "teacup"
 
-/obj/item/reagent_containers/food/drinks/glass2/coffeecup/custom/inherit_custom_item_data(var/datum/custom_item/citem)
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/custom/inherit_custom_item_data(datum/custom_item/citem)
 	. = ..()
 	if(citem.additional_data["base_name"])
 		base_name = citem.additional_data["base_name"] || base_name

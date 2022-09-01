@@ -78,11 +78,11 @@
 		return
 	..()
 
-/obj/machinery/computer/guestpass/interface_interact(var/mob/user)
+/obj/machinery/computer/guestpass/interface_interact(mob/user)
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/computer/guestpass/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open=1)
+/obj/machinery/computer/guestpass/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open=1)
 	var/list/data = list()
 
 	data["mode"] = mode
@@ -103,14 +103,14 @@
 				"selected" = (A in accesses))))
 
 		data["giver_access"] = giver_access
-		
+
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "guestpass.tmpl", "Guest Pass Terminal", 600, 800)
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/machinery/computer/guestpass/OnTopic(var/mob/user, href_list, state)
+/obj/machinery/computer/guestpass/OnTopic(mob/user, href_list, state)
 	if (href_list["mode"])
 		mode = text2num(href_list["mode"])
 		. = TOPIC_REFRESH

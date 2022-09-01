@@ -17,7 +17,7 @@
 	var/target_organ
 	var/strength = 4 // How much damage it deals per unit
 
-/datum/reagent/toxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/affect_blood(mob/living/carbon/M, alien, removed)
 	if(strength && alien != IS_DIONA)
 		M.add_chemical_effect(CE_TOXIN, strength)
 		var/dam = (strength * removed)
@@ -140,7 +140,7 @@
 	target_organ = BP_LIVER
 	strength = 5
 
-/datum/reagent/toxin/venom/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/venom/affect_blood(mob/living/carbon/M, alien, removed)
 	if(prob(volume*2))
 		M.confused = max(M.confused, 3)
 	..()
@@ -277,21 +277,21 @@
 	heating_point = null
 	heating_products = null
 
-/datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
+/datum/reagent/toxin/phoron/touch_mob(mob/living/L, amount)
 	if(istype(L))
 		L.adjust_fire_stacks(amount / fire_mult)
 
-/datum/reagent/toxin/phoron/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/phoron/affect_blood(mob/living/carbon/M, alien, removed)
 	if(alien == IS_NABBER)
 		return
 	..()
 
-/datum/reagent/toxin/phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/phoron/affect_touch(mob/living/carbon/M, alien, removed)
 	M.take_organ_damage(0, removed * 0.1) //being splashed directly with phoron causes minor chemical burns
 	if(prob(10 * fire_mult))
 		M.pl_effects()
 
-/datum/reagent/toxin/phoron/touch_turf(var/turf/simulated/T)
+/datum/reagent/toxin/phoron/touch_turf(turf/simulated/T)
 	if(!istype(T))
 		return
 	T.assume_gas(GAS_PHORON, volume, T20C)
@@ -304,7 +304,7 @@
 	strength = 15
 	fire_mult = 15
 
-/datum/reagent/toxin/phoron/oxygen/touch_turf(var/turf/simulated/T)
+/datum/reagent/toxin/phoron/oxygen/touch_turf(turf/simulated/T)
 	if(!istype(T))
 		return
 	T.assume_gas(GAS_OXYGEN, Ceil(volume/2), T20C)
@@ -323,7 +323,7 @@
 	heating_point = null
 	heating_products = null
 
-/datum/reagent/toxin/cyanide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/cyanide/affect_blood(mob/living/carbon/M, alien, removed)
 	..()
 	M.sleeping += 1
 
@@ -339,11 +339,11 @@
 	heating_point = null
 	heating_products = null
 
-/datum/reagent/toxin/taxine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/taxine/affect_blood(mob/living/carbon/M, alien, removed)
 	..()
 	M.confused += 1.5
 
-/datum/reagent/toxin/taxine/overdose(var/mob/living/carbon/M, var/alien)
+/datum/reagent/toxin/taxine/overdose(mob/living/carbon/M, alien)
 	..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -362,7 +362,7 @@
 	heating_point = null
 	heating_products = null
 
-/datum/reagent/toxin/potassium_chloride/overdose(var/mob/living/carbon/M, var/alien)
+/datum/reagent/toxin/potassium_chloride/overdose(mob/living/carbon/M, alien)
 	..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -385,7 +385,7 @@
 	heating_point = null
 	heating_products = null
 
-/datum/reagent/toxin/potassium_chlorophoride/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/potassium_chlorophoride/affect_blood(mob/living/carbon/M, alien, removed)
 	..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -408,7 +408,7 @@
 	heating_message = "melts into a liquid slurry."
 	heating_products = list(/datum/reagent/toxin/carpotoxin, /datum/reagent/soporific, /datum/reagent/copper)
 
-/datum/reagent/toxin/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/zombiepowder/affect_blood(mob/living/carbon/M, alien, removed)
 	..()
 	if(alien == IS_DIONA)
 		return
@@ -455,7 +455,7 @@
 	strength = 4
 	heating_products = list(/datum/reagent/toxin, /datum/reagent/water)
 
-/datum/reagent/toxin/plantbgone/touch_turf(var/turf/T)
+/datum/reagent/toxin/plantbgone/touch_turf(turf/T)
 	if(istype(T, /turf/simulated/wall))
 		var/turf/simulated/wall/W = T
 		if(locate(/obj/effect/overlay/wallrot) in W)
@@ -463,16 +463,16 @@
 				qdel(E)
 			W.visible_message("<span class='notice'>The fungi are completely dissolved by the solution!</span>")
 
-/datum/reagent/toxin/plantbgone/touch_obj(var/obj/O, var/volume)
+/datum/reagent/toxin/plantbgone/touch_obj(obj/O, volume)
 	if(istype(O, /obj/effect/vine))
 		qdel(O)
 
-/datum/reagent/toxin/plantbgone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/plantbgone/affect_blood(mob/living/carbon/M, alien, removed)
 	..()
 	if(alien == IS_DIONA)
 		M.adjustToxLoss(50 * removed)
 
-/datum/reagent/toxin/plantbgone/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/plantbgone/affect_touch(mob/living/carbon/M, alien, removed)
 	..()
 	if(alien == IS_DIONA)
 		M.adjustToxLoss(50 * removed)
@@ -554,15 +554,15 @@
 	color = "#13bc5e"
 	value = 3.1
 
-/datum/reagent/mutagen/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/mutagen/affect_touch(mob/living/carbon/M, alien, removed)
 	if(prob(33))
 		affect_blood(M, alien, removed)
 
-/datum/reagent/mutagen/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/mutagen/affect_ingest(mob/living/carbon/M, alien, removed)
 	if(prob(67))
 		affect_blood(M, alien, removed)
 
-/datum/reagent/mutagen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/mutagen/affect_blood(mob/living/carbon/M, alien, removed)
 
 	if(M.isSynthetic())
 		return
@@ -592,7 +592,7 @@
 	value = 1.2
 	should_admin_log = TRUE
 
-/datum/reagent/slimejelly/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/slimejelly/affect_blood(mob/living/carbon/M, alien, removed)
 	if(alien == IS_DIONA)
 		return
 	if(prob(10))
@@ -613,7 +613,7 @@
 	scannable = TRUE
 	should_admin_log = TRUE
 
-/datum/reagent/soporific/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/soporific/affect_blood(mob/living/carbon/M, alien, removed)
 	if(alien == IS_DIONA)
 		return
 
@@ -648,7 +648,7 @@
 	value = 2.6
 	should_admin_log = TRUE
 
-/datum/reagent/chloralhydrate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/chloralhydrate/affect_blood(mob/living/carbon/M, alien, removed)
 	if(alien == IS_DIONA)
 		return
 
@@ -691,7 +691,7 @@
 	value = 2.6
 	should_admin_log = TRUE
 
-/datum/reagent/vecuronium_bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/vecuronium_bromide/affect_blood(mob/living/carbon/M, alien, removed)
 	if(alien == IS_DIONA)
 		return
 
@@ -1029,7 +1029,7 @@
 	value = 2
 	should_admin_log = TRUE
 
-/datum/reagent/slimetoxin/affect_blood(var/mob/living/carbon/human/H, var/alien, var/removed)
+/datum/reagent/slimetoxin/affect_blood(mob/living/carbon/human/H, alien, removed)
 	if(!istype(H))
 		return
 	if(H.species.name == SPECIES_PROMETHEAN)
@@ -1079,7 +1079,7 @@
 	reagent_state = LIQUID
 	color = "#13bc5e"
 
-/datum/reagent/aslimetoxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed) // TODO: check if there's similar code anywhere else
+/datum/reagent/aslimetoxin/affect_blood(mob/living/carbon/M, alien, removed) // TODO: check if there's similar code anywhere else
 	if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(M))
 		return
 	to_chat(M, "<span class='danger'>Your flesh rapidly mutates!</span>")
@@ -1131,7 +1131,7 @@
 	heating_products = null
 	heating_point = null
 
-/datum/reagent/toxin/hair_remover/affect_touch(var/mob/living/carbon/human/M, var/alien, var/removed)
+/datum/reagent/toxin/hair_remover/affect_touch(mob/living/carbon/human/M, alien, removed)
 	if(alien == IS_SKRELL)	//skrell can't have hair unless you hack it in, also to prevent tentacles from falling off
 		return
 	M.species.set_default_hair(M)
@@ -1158,18 +1158,18 @@
 	heating_products = null
 	heating_point = null
 
-/datum/reagent/toxin/methyl_bromide/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/methyl_bromide/affect_touch(mob/living/carbon/M, alien, removed)
 	. = (alien != IS_NABBER && ..())
 
-/datum/reagent/toxin/methyl_bromide/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/methyl_bromide/affect_ingest(mob/living/carbon/M, alien, removed)
 	. = (alien != IS_NABBER && ..())
 
-/datum/reagent/toxin/methyl_bromide/touch_turf(var/turf/simulated/T)
+/datum/reagent/toxin/methyl_bromide/touch_turf(turf/simulated/T)
 	if(istype(T))
 		T.assume_gas(GAS_METHYL_BROMIDE, volume, T20C)
 		remove_self(volume)
 
-/datum/reagent/toxin/methyl_bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/methyl_bromide/affect_blood(mob/living/carbon/M, alien, removed)
 	. = (alien != IS_NABBER && ..())
 	if(istype(M))
 		for(var/obj/item/organ/external/E in M.organs)

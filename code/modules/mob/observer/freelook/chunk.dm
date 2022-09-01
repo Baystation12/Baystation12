@@ -16,10 +16,10 @@
 	obfuscation_images.Cut()
 	. = ..()
 
-/datum/obfuscation/proc/has_obfuscation(var/turf/T)
+/datum/obfuscation/proc/has_obfuscation(turf/T)
 	return !isnull(obfuscation_images[T])
 
-/datum/obfuscation/proc/get_obfuscation(var/turf/T)
+/datum/obfuscation/proc/get_obfuscation(turf/T)
 	var/image/obfuscation = obfuscation_images[T]
 	if(!obfuscation)
 		obfuscation = image(icon, T, icon_state)
@@ -49,7 +49,7 @@
 	var/datum/obfuscation/obfuscation = new()
 
 // Create a new chunk, since the chunks are made as they are needed.
-/datum/chunk/New(var/datum/visualnet/visualnet, x, y, z)
+/datum/chunk/New(datum/visualnet/visualnet, x, y, z)
 	..()
 	src.visualnet = visualnet
 	// 0xf = 15
@@ -79,7 +79,7 @@
 	visualnet = null
 	. = ..()
 
-/datum/chunk/proc/add_sources(var/list/sources)
+/datum/chunk/proc/add_sources(list/sources)
 	var/turf/center = locate(x + 8, y + 8, z)
 	for(var/entry in sources)
 		var/atom/A = entry
@@ -87,14 +87,14 @@
 			continue
 		add_source(A)
 
-/datum/chunk/proc/add_source(var/atom/source)
+/datum/chunk/proc/add_source(atom/source)
 	if(source in sources)
 		return FALSE
 	sources += source
 	visibility_changed()
 	return TRUE
 
-/datum/chunk/proc/remove_source(var/atom/source)
+/datum/chunk/proc/remove_source(atom/source)
 	if(sources.Remove(source))
 		visibility_changed()
 		return TRUE
@@ -118,7 +118,7 @@
 // Updates the chunk, makes sure that it doesn't update too much. If the chunk isn't being watched it will
 // instead be flagged to update the next time an AI Eye moves near it.
 
-/datum/chunk/proc/visibility_changed(var/update_now = FALSE)
+/datum/chunk/proc/visibility_changed(update_now = FALSE)
 	if(update_now)
 		update()
 		return
@@ -172,10 +172,10 @@
 	dirty = FALSE
 	updating = FALSE
 
-/datum/chunk/proc/acquire_visible_turfs(var/list/visible)
+/datum/chunk/proc/acquire_visible_turfs(list/visible)
 	return
 
-/proc/seen_turfs_in_range(var/source, var/range)
+/proc/seen_turfs_in_range(source, range)
 	var/turf/pos = get_turf(source)
 	if(pos)
 		. = hear(range, pos)

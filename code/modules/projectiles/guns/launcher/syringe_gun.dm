@@ -40,7 +40,7 @@
 	icon_state = icon_flight
 	underlays.Cut()
 
-/obj/item/syringe_cartridge/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
+/obj/item/syringe_cartridge/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	..() //handles embedding for us. Should have a decent chance if thrown fast enough
 	if(syringe)
 		//check speed to see if we hit hard enough to trigger the rapid injection
@@ -118,7 +118,7 @@
 	else
 		..()
 
-/obj/item/gun/launcher/syringe/attackby(var/obj/item/A as obj, mob/user as mob)
+/obj/item/gun/launcher/syringe/attackby(obj/item/A as obj, mob/user as mob)
 	if(istype(A, /obj/item/syringe_cartridge))
 		var/obj/item/syringe_cartridge/C = A
 		if(darts.len >= max_darts)

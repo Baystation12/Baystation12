@@ -39,5 +39,5 @@ SUBSYSTEM_DEF(character_setup)
 		if(MC_TICK_CHECK)
 			return
 
-/datum/controller/subsystem/character_setup/proc/queue_preferences_save(var/datum/preferences/prefs)
+/datum/controller/subsystem/character_setup/proc/queue_preferences_save(datum/preferences/prefs)
 	save_queue |= prefs

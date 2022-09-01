@@ -51,7 +51,7 @@ Single Use Emergency Pouches
 /obj/item/storage/med_pouch/CanUseTopic()
 	return STATUS_INTERACTIVE
 
-/obj/item/storage/med_pouch/OnTopic(var/user, var/list/href_list)
+/obj/item/storage/med_pouch/OnTopic(user, list/href_list)
 	if(href_list["show_info"])
 		to_chat(user, instructions)
 		return TOPIC_HANDLED

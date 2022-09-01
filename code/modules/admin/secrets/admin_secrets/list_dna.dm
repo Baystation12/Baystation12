@@ -1,7 +1,7 @@
 /datum/admin_secret_item/admin_secret/list_dna
 	name = "List DNA (Blood)"
 
-/datum/admin_secret_item/admin_secret/list_dna/execute(var/mob/user)
+/datum/admin_secret_item/admin_secret/list_dna/execute(mob/user)
 	. = ..()
 	if(!.)
 		return

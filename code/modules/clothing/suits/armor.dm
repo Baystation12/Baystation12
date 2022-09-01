@@ -102,7 +102,7 @@
 	armor = null
 
 
-/obj/item/clothing/suit/armor/reactive/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+/obj/item/clothing/suit/armor/reactive/handle_shield(mob/user, damage, atom/damage_source = null, mob/attacker = null, def_zone = null, attack_text = "the attack")
 	if(prob(50))
 		user.visible_message("<span class='danger'>The reactive teleport system flings [user] clear of the attack!</span>")
 		var/list/turfs = new/list()
@@ -414,7 +414,7 @@
 	siemens_coefficient = 0
 	accessories = list(/obj/item/clothing/accessory/arm_guards/ablative, /obj/item/clothing/accessory/leg_guards/ablative)
 
-/obj/item/clothing/suit/armor/laserproof/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+/obj/item/clothing/suit/armor/laserproof/handle_shield(mob/user, damage, atom/damage_source = null, mob/attacker = null, def_zone = null, attack_text = "the attack")
 	if(istype(damage_source, /obj/item/projectile/energy) || istype(damage_source, /obj/item/projectile/beam))
 		var/obj/item/projectile/P = damage_source
 

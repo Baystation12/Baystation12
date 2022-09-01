@@ -23,7 +23,7 @@
 		color_selection = new_color_selection
 		to_chat(user, "<span class='notice'>You change the paint mode to [lowertext(color_selection)].</span>")
 
-/obj/item/device/cable_painter/afterattack(var/atom/A, var/mob/user, var/proximity)
+/obj/item/device/cable_painter/afterattack(atom/A, mob/user, proximity)
 	if(!proximity)
 		return ..()
 	if(istype(A, /obj/structure/cable))

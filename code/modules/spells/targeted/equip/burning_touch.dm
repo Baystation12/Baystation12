@@ -25,7 +25,7 @@
 	var/burn_timer
 	var/obj/item/organ/external/hand/connected
 
-/obj/item/flame/hands/pickup(var/mob/user)
+/obj/item/flame/hands/pickup(mob/user)
 	burn_power = 0
 	burn_timer = world.time + 10 SECONDS
 	START_PROCESSING(SSobj,src)

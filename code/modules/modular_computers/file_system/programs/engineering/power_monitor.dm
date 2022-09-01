@@ -54,7 +54,7 @@
 
 // If PC is not null header template is loaded. Use PC.get_header_data() to get relevant nanoui data from it. All data entries begin with "PC_...."
 // In future it may be expanded to other modular computer devices.
-/datum/nano_module/power_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/power_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 
 	var/list/sensors = list()
@@ -95,7 +95,7 @@
 				grid_sensors += S
 				GLOB.destroyed_event.register(S, src, /datum/nano_module/power_monitor/proc/remove_sensor)
 
-/datum/nano_module/power_monitor/proc/remove_sensor(var/removed_sensor, var/update_ui = TRUE)
+/datum/nano_module/power_monitor/proc/remove_sensor(removed_sensor, update_ui = TRUE)
 	if(active_sensor == removed_sensor)
 		active_sensor = null
 		if(update_ui)

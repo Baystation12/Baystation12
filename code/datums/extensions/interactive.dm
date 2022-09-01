@@ -4,7 +4,7 @@
 	var/list/host_predicates
 	var/list/user_predicates
 
-/datum/extension/interactive/New(var/datum/holder, var/host_predicates = list(), var/user_predicates = list())
+/datum/extension/interactive/New(datum/holder, host_predicates = list(), user_predicates = list())
 	..()
 
 	src.host_predicates = host_predicates ? host_predicates : list()
@@ -15,7 +15,7 @@
 	user_predicates.Cut()
 	return ..()
 
-/datum/extension/interactive/proc/extension_status(var/mob/user)
+/datum/extension/interactive/proc/extension_status(mob/user)
 	if(!holder || !user)
 		return STATUS_CLOSE
 	if(!all_predicates_true(list(holder), host_predicates))
@@ -27,10 +27,10 @@
 
 	return STATUS_INTERACTIVE
 
-/datum/extension/interactive/proc/extension_act(var/href, var/list/href_list, var/mob/user)
+/datum/extension/interactive/proc/extension_act(href, list/href_list, mob/user)
 	return extension_status(user) == STATUS_CLOSE
 
-/datum/extension/interactive/Topic(var/href, var/list/href_list)
+/datum/extension/interactive/Topic(href, list/href_list)
 	if(..())
 		return TRUE
 	return extension_act(href, href_list, usr)

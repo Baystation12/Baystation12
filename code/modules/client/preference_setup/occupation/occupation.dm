@@ -461,7 +461,7 @@
 
 	return 1
 
-/datum/category_item/player_setup_item/occupation/proc/GetCurrentJobLevel(var/job_title)
+/datum/category_item/player_setup_item/occupation/proc/GetCurrentJobLevel(job_title)
 	if(pref.job_high == job_title)
 		. = JOB_LEVEL_HIGH
 	else if(job_title in pref.job_medium)
@@ -471,7 +471,7 @@
 	else
 		. = JOB_LEVEL_NEVER
 
-/datum/category_item/player_setup_item/occupation/proc/SetJobDepartment(var/datum/job/job, var/level)
+/datum/category_item/player_setup_item/occupation/proc/SetJobDepartment(datum/job/job, level)
 	if(!job || !level)	return 0
 
 	var/current_level = GetCurrentJobLevel(job.title)
@@ -496,7 +496,7 @@
 
 	return 1
 
-/datum/preferences/proc/CorrectLevel(var/datum/job/job, var/level)
+/datum/preferences/proc/CorrectLevel(datum/job/job, level)
 	if(!job || !level)	return 0
 	switch(level)
 		if(1)

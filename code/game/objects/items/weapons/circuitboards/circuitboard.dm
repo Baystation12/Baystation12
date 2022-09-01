@@ -53,14 +53,14 @@
 				to_chat(user, SPAN_NOTICE("&nbsp;&nbsp;[additional_spawn_components[V]] [initial(I.name)]"))
 
 //Called when the circuitboard is used to contruct a new machine.
-/obj/item/stock_parts/circuitboard/proc/construct(var/obj/machinery/M)
+/obj/item/stock_parts/circuitboard/proc/construct(obj/machinery/M)
 	if (istype(M, build_path))
 		return 1
 	return 0
 
 //Called when a computer is deconstructed to produce a circuitboard.
 //Only used by computers, as other machines store their circuitboard instance.
-/obj/item/stock_parts/circuitboard/proc/deconstruct(var/obj/machinery/M)
+/obj/item/stock_parts/circuitboard/proc/deconstruct(obj/machinery/M)
 	if (istype(M, build_path))
 		return 1
 	return 0

@@ -19,7 +19,7 @@
 
 	command(signal.data["command"])
 
-/obj/machinery/door/airlock/proc/command(var/new_command)
+/obj/machinery/door/airlock/proc/command(new_command)
 	cur_command = new_command
 
 	//if there's no power, recieve the signal but just don't do anything. This allows airlocks to continue to work normally once power is restored
@@ -38,7 +38,7 @@
 	if (command_completed(cur_command))
 		cur_command = null
 
-/obj/machinery/door/airlock/proc/do_command(var/command)
+/obj/machinery/door/airlock/proc/do_command(command)
 	switch(command)
 		if("open")
 			open()
@@ -69,7 +69,7 @@
 
 	send_status()
 
-/obj/machinery/door/airlock/proc/command_completed(var/command)
+/obj/machinery/door/airlock/proc/command_completed(command)
 	switch(command)
 		if("open")
 			return (!density)
@@ -91,7 +91,7 @@
 
 	return 1	//Unknown command. Just assume it's completed.
 
-/obj/machinery/door/airlock/proc/send_status(var/bumped = 0)
+/obj/machinery/door/airlock/proc/send_status(bumped = 0)
 	if(radio_connection)
 		var/datum/signal/signal = new
 		signal.transmission_method = 1 //radio signal

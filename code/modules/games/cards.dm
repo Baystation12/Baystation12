@@ -22,7 +22,7 @@
 	icon = 'icons/obj/playing_cards.dmi'
 	var/list/cards = list()
 
-/obj/item/deck/inherit_custom_item_data(var/datum/custom_item/citem)
+/obj/item/deck/inherit_custom_item_data(datum/custom_item/citem)
 	. = ..()
 	if(islist(citem.additional_data["extra_cards"]))
 		for(var/card_decl in citem.additional_data["extra_cards"])
@@ -179,7 +179,7 @@
 		return
 	..()
 
-/obj/item/deck/attack_self(var/mob/user)
+/obj/item/deck/attack_self(mob/user)
 
 	cards = shuffle(cards)
 	user.visible_message("\The [user] shuffles [src].")
@@ -212,7 +212,7 @@
 /obj/item/pack/proc/SetupCards()
 	return
 
-/obj/item/pack/attack_self(var/mob/user)
+/obj/item/pack/attack_self(mob/user)
 	user.visible_message("[user] rips open \the [src]!")
 	var/obj/item/hand/H = new()
 
@@ -233,7 +233,7 @@
 	var/concealed = 0
 	var/list/datum/playingcard/cards = list()
 
-/obj/item/hand/attack_self(var/mob/user)
+/obj/item/hand/attack_self(mob/user)
 	concealed = !concealed
 	update_icon()
 	user.visible_message("\The [user] [concealed ? "conceals" : "reveals"] their hand.")
@@ -274,7 +274,7 @@
 		for(var/datum/playingcard/P in cards)
 			to_chat(user, "The [P.name].")
 
-/obj/item/hand/on_update_icon(var/direction = 0)
+/obj/item/hand/on_update_icon(direction = 0)
 	if(!cards.len)
 		qdel(src)
 		return

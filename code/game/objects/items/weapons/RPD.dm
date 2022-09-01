@@ -93,7 +93,7 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 	QDEL_NULL(spark_system)
 	return ..()
 
-/obj/item/rpd/proc/get_console_data(var/list/pipe_categories, var/color_options = FALSE)
+/obj/item/rpd/proc/get_console_data(list/pipe_categories, color_options = FALSE)
 	. = list()
 	. += "<table>"
 	if(color_options)
@@ -111,7 +111,7 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 	popup.set_content(get_console_data(user.skill_check(SKILL_ATMOS,SKILL_EXPERT) ? GLOB.rpd_pipe_selection_skilled : GLOB.rpd_pipe_selection, TRUE))
 	popup.open()
 
-/obj/item/rpd/OnTopic(var/user, var/list/href_list)
+/obj/item/rpd/OnTopic(user, list/href_list)
 	if(href_list["select"])
 		P = locate(href_list["select"])
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
@@ -152,7 +152,7 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 		P.Build(P, T, pipe_colors[pipe_color])
 		if(prob(20)) src.spark_system.start()
 
-/obj/item/rpd/examine(var/mob/user, distance)
+/obj/item/rpd/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
 		if(user.skill_check(SKILL_ATMOS,SKILL_BASIC))
@@ -164,7 +164,7 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 	interact(user)
 	add_fingerprint(user)
 
-/obj/item/rpd/attackby(var/obj/item/W, var/mob/user)
+/obj/item/rpd/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/pipe))
 		if(!user.unEquip(W))
 			return
@@ -172,7 +172,7 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 		return
 	..()
 
-/obj/item/rpd/proc/recycle(var/obj/item/W,var/mob/user)
+/obj/item/rpd/proc/recycle(obj/item/W,mob/user)
 	if(!user.skill_check(SKILL_ATMOS,SKILL_BASIC))
 		user.visible_message("[user] struggles with \the [src], as they futilely jam \the [W] against it")
 		return

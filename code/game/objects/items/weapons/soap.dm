@@ -37,7 +37,7 @@
 /obj/item/soap/proc/wet()
 	reagents.add_reagent(/datum/reagent/space_cleaner, 15)
 
-/obj/item/soap/Crossed(var/mob/living/AM)
+/obj/item/soap/Crossed(mob/living/AM)
 	if (istype(AM))
 		if(AM.pulledby)
 			return
@@ -74,7 +74,7 @@
 			reagents.trans_to(target, reagents.total_volume / 8)
 		target.clean_blood() //Clean bloodied atoms. Blood decals themselves need to be handled above.
 		cleaned = TRUE
-	else 
+	else
 		to_chat(user, "<span class='notice'>You clean \the [target.name].</span>")
 		target.clean_blood() //Clean bloodied atoms. Blood decals themselves need to be handled above.
 		cleaned = TRUE
@@ -83,7 +83,7 @@
 		user.update_personal_goal(/datum/goal/clean, 1)
 
 //attack_as_weapon
-/obj/item/soap/attack(mob/living/target, mob/living/user, var/target_zone)
+/obj/item/soap/attack(mob/living/target, mob/living/user, target_zone)
 	if(target && user && ishuman(target) && ishuman(user) && !target.stat && !user.stat && user.zone_sel &&user.zone_sel.selecting == BP_MOUTH)
 		user.visible_message("<span class='danger'>\The [user] washes \the [target]'s mouth out with soap!</span>")
 		if(reagents)
@@ -92,7 +92,7 @@
 		return
 	..()
 
-/obj/item/soap/attackby(var/obj/item/I, var/mob/user)
+/obj/item/soap/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/key))
 		if(!key_data)
 			to_chat(user, "<span class='notice'>You imprint \the [I] into \the [src].</span>")

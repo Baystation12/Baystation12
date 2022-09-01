@@ -57,7 +57,7 @@
 	. = ..()
 	update_icon(1)
 
-/turf/simulated/floor/exoplanet/on_update_icon(var/update_neighbors)
+/turf/simulated/floor/exoplanet/on_update_icon(update_neighbors)
 	overlays.Cut()
 	if(LAZYLEN(decals))
 		overlays += decals
@@ -94,7 +94,7 @@
 	footstep_type = /decl/footsteps/water
 	var/reagent_type = /datum/reagent/water
 
-/turf/simulated/floor/exoplanet/water/shallow/attackby(obj/item/O, var/mob/living/user)
+/turf/simulated/floor/exoplanet/water/shallow/attackby(obj/item/O, mob/living/user)
 	var/obj/item/reagent_containers/RG = O
 	if (reagent_type && istype(RG) && RG.is_open_container() && RG.reagents)
 		RG.reagents.add_reagent(reagent_type, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))

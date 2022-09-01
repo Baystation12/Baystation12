@@ -145,7 +145,7 @@
 
 
 
-/datum/real_instrument/proc/ui_call(mob/user, ui_key, var/datum/nanoui/ui = null, var/force_open = 0)
+/datum/real_instrument/proc/ui_call(mob/user, ui_key, datum/nanoui/ui = null, force_open = 0)
 	var/list/data
 	data = list(
 		"playback" = list(
@@ -235,7 +235,7 @@
 	src.ui_interact(user)
 
 
-/obj/structure/synthesized_instrument/ui_interact(mob/user, ui_key = "instrument", var/datum/nanoui/ui = null, var/force_open = 0)
+/obj/structure/synthesized_instrument/ui_interact(mob/user, ui_key = "instrument", datum/nanoui/ui = null, force_open = 0)
 	real_instrument.ui_call(user,ui_key,ui,force_open)
 
 
@@ -289,7 +289,7 @@
 	src.ui_interact(user)
 
 
-/obj/item/device/synthesized_instrument/ui_interact(mob/user, ui_key = "instrument", var/datum/nanoui/ui = null, var/force_open = 0)
+/obj/item/device/synthesized_instrument/ui_interact(mob/user, ui_key = "instrument", datum/nanoui/ui = null, force_open = 0)
 	if (real_instrument)
 		real_instrument.ui_call(user,ui_key,ui,force_open)
 

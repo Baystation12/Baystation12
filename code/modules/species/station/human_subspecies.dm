@@ -29,7 +29,7 @@
 	. = ..()
 	if(.)
 		return H.skill_check(SKILL_HAULING, SKILL_EXPERT) //Hard for them to swim
-	
+
 /datum/species/human/spacer
 	name = SPECIES_SPACER
 	name_plural = "Space-Adapted Humans"
@@ -166,7 +166,7 @@
 	min_age =       18
 	max_age =       45
 
-/datum/species/human/mule/handle_post_spawn(var/mob/living/carbon/human/H)
+/datum/species/human/mule/handle_post_spawn(mob/living/carbon/human/H)
 	if(!H.psi)
 		H.psi = new(H)
 		var/list/faculties = list("[PSI_COERCION]", "[PSI_REDACTION]", "[PSI_ENERGISTICS]", "[PSI_PSYCHOKINESIS]")

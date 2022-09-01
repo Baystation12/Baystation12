@@ -80,7 +80,7 @@
 /mob/proc/unset_machine()
 	src.machine = null
 
-/mob/proc/set_machine(var/obj/O)
+/mob/proc/set_machine(obj/O)
 	if(src.machine)
 		unset_machine()
 	src.machine = O
@@ -92,7 +92,7 @@
 	if(istype(M) && M.client && M.machine == src)
 		src.attack_self(M)
 
-/obj/proc/hide(var/hide)
+/obj/proc/hide(hide)
 	set_invisibility(hide ? INVISIBILITY_MAXIMUM : initial(invisibility))
 
 /obj/proc/hides_under_flooring()
@@ -109,7 +109,7 @@
 		*/
 	return
 
-/obj/proc/see_emote(mob/M as mob, text, var/emote_type)
+/obj/proc/see_emote(mob/M as mob, text, emote_type)
 	return
 
 /obj/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
@@ -149,7 +149,7 @@
 		add_fingerprint(user)
 	..()
 
-/obj/is_fluid_pushable(var/amt)
+/obj/is_fluid_pushable(amt)
 	return ..() && w_class <= round(amt/20)
 
 /obj/proc/can_embed()

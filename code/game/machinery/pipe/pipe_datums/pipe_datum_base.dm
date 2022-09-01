@@ -61,7 +61,7 @@ GLOBAL_LIST_EMPTY(all_disposal_pipe_datums_by_category)
 	if(!desc)								//Try to make up a nice description if we don't have one
 		desc = "\A [name]."
 
-/datum/pipe/proc/Build(var/datum/pipe/D, var/loc, var/pipe_color = PIPE_COLOR_WHITE)
+/datum/pipe/proc/Build(datum/pipe/D, loc, pipe_color = PIPE_COLOR_WHITE)
 	if(D.build_path)
 		var/obj/item/pipe/new_item = new build_path(loc)
 		if(istype(new_item))
@@ -80,7 +80,7 @@ GLOBAL_LIST_EMPTY(all_disposal_pipe_datums_by_category)
 		new_item.icon = D.build_icon
 		new_item.icon_state = D.build_icon_state
 
-/datum/pipe/disposal_dispenser/Build(var/datum/pipe/disposal_dispenser/D, var/loc, var/pipe_color = PIPE_COLOR_GREY)
+/datum/pipe/disposal_dispenser/Build(datum/pipe/disposal_dispenser/D, loc, pipe_color = PIPE_COLOR_GREY)
 	if(D.build_path)
 		var/obj/structure/disposalconstruct/new_item = new build_path(loc)
 		new_item.SetName(D.name)
