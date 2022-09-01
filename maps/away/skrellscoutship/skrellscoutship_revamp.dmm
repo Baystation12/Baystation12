@@ -2348,8 +2348,7 @@
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/rec)
 "hp" = (
-/obj/structure/table/standard,
-/obj/machinery/reagent_temperature,
+/obj/machinery/seed_extractor,
 /obj/machinery/light/skrell,
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/crew/labs)
@@ -2394,6 +2393,7 @@
 /area/ship/skrellscoutship/crew/labs)
 "hs" = (
 /obj/structure/anomaly_container,
+/obj/effect/floor_decal/industrial/hatch/red,
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/crew/labs)
 "ht" = (
@@ -2484,6 +2484,7 @@
 /obj/structure/table/rack,
 /obj/item/device/taperecorder,
 /obj/item/device/camera,
+/obj/item/storage/briefcase/crimekit,
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/crew/labs)
 "hQ" = (
@@ -2522,7 +2523,6 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/seed_extractor,
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/crew/labs)
 "hT" = (
@@ -2536,10 +2536,6 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/structure/table/standard,
-/obj/item/device/scanner/spectrometer/adv,
-/obj/item/device/scanner/reagent,
-/obj/machinery/recharger,
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/crew/labs)
 "hU" = (
@@ -3559,6 +3555,13 @@
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutshuttle)
+"kR" = (
+/obj/structure/table/standard,
+/obj/item/device/scanner/spectrometer/adv,
+/obj/item/device/scanner/reagent,
+/obj/machinery/recharger,
+/turf/simulated/floor/tiled/skrell/red,
+/area/ship/skrellscoutship/crew/labs)
 "kV" = (
 /obj/machinery/light/skrell,
 /obj/structure/table/glass,
@@ -4024,9 +4027,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/skrellscoutship/maintenance/atmos)
 "ry" = (
-/obj/machinery/vending/security{
-	scan_id = 0
-	},
+/obj/machinery/seed_storage/garden,
 /turf/simulated/floor/tiled/skrell/green,
 /area/ship/skrellscoutship/robotics)
 "rz" = (
@@ -4538,6 +4539,11 @@
 	},
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
+"Al" = (
+/obj/machinery/reagent_temperature/cooler,
+/obj/structure/table/standard,
+/turf/simulated/floor/tiled/skrell/red,
+/area/ship/skrellscoutship/crew/labs)
 "An" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/accessory/storage/black_vest,
@@ -4593,7 +4599,7 @@
 /area/ship/skrellscoutship/crew/rec)
 "BH" = (
 /obj/structure/table/standard,
-/obj/machinery/reagent_temperature/cooler,
+/obj/machinery/reagent_temperature,
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/crew/labs)
 "BK" = (
@@ -5742,6 +5748,7 @@
 /area/ship/skrellscoutshuttle)
 "SS" = (
 /obj/machinery/artifact_scanpad,
+/obj/effect/floor_decal/industrial/hatch/red,
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/crew/labs)
 "SY" = (
@@ -10207,7 +10214,7 @@ Gw
 Gw
 Gw
 yV
-wi
+kR
 hz
 nc
 zK
@@ -10309,7 +10316,7 @@ Gw
 Gw
 Gw
 yV
-wi
+Al
 hz
 py
 zK
@@ -10411,7 +10418,7 @@ Gw
 Gw
 Gw
 yV
-wi
+BH
 hA
 hR
 hY
@@ -10719,7 +10726,7 @@ Gw
 yV
 SS
 wi
-BH
+wi
 nJ
 kq
 kt
