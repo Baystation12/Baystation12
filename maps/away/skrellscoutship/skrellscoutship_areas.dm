@@ -6,7 +6,7 @@
 
 /area/ship/skrellscoutship/solars
 	name = "\improper Solar Area"
-	
+
 /area/ship/skrellscoutship/crew/hallway/d1
 	name = "\improper Hallway - Deck 1"
 
@@ -16,7 +16,7 @@
 /area/ship/skrellscoutship/crew/rec
 	name = "\improper Recreational Area"
 	icon_state = "green"
-	
+
 /area/ship/skrellscoutship/crew/fit
 	name = "\improper Exercise Area"
 	icon_state = "green"
@@ -32,7 +32,7 @@
 /area/ship/skrellscoutship/robotics
 	name = "\improper Maintenance"
 	icon_state = "green"
-	
+
 /area/ship/skrellscoutship/maintenance/power
 	name = "\improper Engineering"
 	icon_state = "engine_smes"
@@ -41,11 +41,11 @@
 /area/ship/skrellscoutship/command/bridge
 	name = "\improper SSV Helm"
 	icon_state = "bridge"
-	
+
 /area/ship/skrellscoutship/command/armory
 	name = "\improper Armory"
 	icon_state = "shuttlered"
-	
+
 /area/ship/skrellscoutshuttle
 	name = "\improper SSV Shuttle"
 	icon_state = "bridge"
@@ -95,9 +95,9 @@
 	name = "\improper Medical Bay"
 	icon_state = "medbay"
 
-/area/ship/skrellscoutship/crew/kitchen
-	name = "\improper Galley"
-	icon_state = "kitchen"
+/area/ship/skrellscoutship/crew/labs
+	name = "\improper Research Labs"
+	icon_state = "labwing"
 
 /area/ship/skrellscoutship/maintenance/power
 	name = "\improper Engineering"
