@@ -1639,7 +1639,7 @@
 "de" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/crowbar/brace_jack,
+/obj/item/material/twohanded/jack,
 /obj/item/clothing/gloves/insulated,
 /obj/item/storage/toolbox/electrical{
 	pixel_x = 1;

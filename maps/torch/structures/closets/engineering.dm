@@ -52,7 +52,7 @@
 		/obj/item/gun/energy/confuseray,
 		/obj/item/taperoll/engineering,
 		/obj/item/device/megaphone,
-		/obj/item/crowbar/brace_jack,
+		/obj/item/material/twohanded/jack,
 		/obj/item/clothing/glasses/meson,
 		/obj/item/clothing/glasses/welding/superior,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,

@@ -1024,7 +1024,7 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/attackby(obj/item/C, mob/user)
 	// Brace is considered installed on the airlock, so interacting with it is protected from electrification.
-	if(brace && C && (istype(C.GetIdCard(), /obj/item/card/id) || istype(C, /obj/item/crowbar/brace_jack)))
+	if(brace && C && (istype(C.GetIdCard(), /obj/item/card/id) || istype(C, /obj/item/material/twohanded/jack)))
 		return brace.attackby(C, user)
 
 	if(!brace && istype(C, /obj/item/airlock_brace))
@@ -1428,7 +1428,7 @@ About the new airlock wires panel:
 // Braces can act as an extra layer of armor - they will take damage first.
 /obj/machinery/door/airlock/take_damage(amount)
 	if(brace)
-		brace.take_damage(amount)
+		brace.damage_health(amount)
 	else
 		..(amount)
 	update_icon()
@@ -1441,7 +1441,7 @@ About the new airlock wires panel:
 		to_chat(user, "The door bolts have been cut.")
 	if(brace)
 		to_chat(user, "\The [brace] is installed on \the [src], preventing it from opening.")
-		to_chat(user, brace.examine_health())
+		brace.examine_damage_state(user)
 
 /obj/machinery/door/airlock/autoname
 
