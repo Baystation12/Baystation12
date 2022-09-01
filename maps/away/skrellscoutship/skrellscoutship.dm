@@ -98,11 +98,12 @@ var/global/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
 
 /datum/job/submap/skrellscoutship_crew/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	. = ..(H, alt_title, branch, grade)	//passing through arguments
-	//Limited to subcastes that make sense on the vessel. No need for ground-forces or R&D on such a ship.
+	//Limited to subcastes that make sense on the vessel. No need for ground-forces on such a ship.
 	var/skrellscoutcastes = list(
 		"Malish-Katish" = list(
 			"Mero'ta-Ketish",
-			"Toglo'i-Ketish"
+			"Toglo'i-Ketish",
+			"Keloa-Ketish"
 		),
 		"Kanin-Katish" = list(
 			"Xiqarr-Ketish",
