@@ -147,9 +147,11 @@
 /datum/configuration/VV_secluded()
 	return vars
 
+
 // The following vars cannot be edited by anyone
 /datum/proc/VV_static()
-	return list("parent_type")
+	return list("parent_type", "gc_destroyed", "is_processing")
+
 
 /atom/VV_static()
 	return ..() + list("bound_x", "bound_y", "bound_height", "bound_width", "bounds", "step_x", "step_y", "step_size")

@@ -29,12 +29,3 @@ GLOBAL_DATUM_INIT(item_equipped_event, /decl/observ/item_equipped, new)
 /decl/observ/item_equipped
 	name = "Item Equipped"
 	expected_type = /obj/item
-
-/********************
-* Equipped Handling *
-********************/
-
-/obj/item/equipped(mob/user, slot)
-	UNLINT(. = ..())
-	GLOB.mob_equipped_event.raise_event(user, src, slot)
-	GLOB.item_equipped_event.raise_event(src, user, slot)

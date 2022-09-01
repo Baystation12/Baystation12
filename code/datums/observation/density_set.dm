@@ -13,12 +13,3 @@ GLOBAL_DATUM_INIT(density_set_event, /decl/observ/density_set, new)
 /decl/observ/density_set
 	name = "Density Set"
 	expected_type = /atom
-
-/*******************
-* Density Handling *
-*******************/
-/atom/set_density(new_density)
-	var/old_density = density
-	UNLINT(. = ..())
-	if(density != old_density)
-		GLOB.density_set_event.raise_event(src, old_density, density)

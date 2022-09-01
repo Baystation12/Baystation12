@@ -188,39 +188,3 @@ var/global/const/FINGERPRINT_COMPLETE = 6
 	var/obj/item/organ/external/E = organs_by_name[hand ? BP_L_HAND : BP_R_HAND]
 	if(E)
 		return E.get_fingerprint()
-
-
-
-//on examination get hints of evidence
-/mob/examinate(atom/A as mob|obj|turf in view())
-	if(UNLINT(..()))
-		return 1 //I'll admit I am just imitating examine.dm
-
-
-	//Detective is on the case
-	if(get_skill_value(SKILL_FORENSICS) >= SKILL_EXPERT && get_dist(src, A) <= (get_skill_value(SKILL_FORENSICS) - SKILL_ADEPT))
-		var/clue
-		if(LAZYLEN(A.suit_fibers))
-			to_chat(src, SPAN_NOTICE("You notice some fibers embedded in \the [A]."))
-			clue = 1
-		if(LAZYLEN(A.fingerprints))
-			to_chat(src, SPAN_NOTICE("You notice a partial print on \the [A]."))
-			clue = 1
-		if(LAZYLEN(A.gunshot_residue))
-			if(isliving(src))
-				var/mob/living/M = src
-				if(M.isSynthetic())
-					to_chat(src, SPAN_NOTICE("You notice faint black residue on \the [A]."))
-				else
-					to_chat(src, SPAN_NOTICE("You notice a faint acrid smell coming from \the [A]."))
-			else if(isrobot(src))
-				to_chat(src, SPAN_NOTICE("You notice faint black residue on \the [A]."))
-			else
-				to_chat(src, SPAN_NOTICE("You notice a faint acrid smell coming from \the [A]."))
-			clue = 1
-		//Noticing wiped blood is a bit harder
-		if((get_skill_value(SKILL_FORENSICS) >= SKILL_PROF) && LAZYLEN(A.blood_DNA))
-			to_chat(src, SPAN_WARNING("You notice faint blood traces on \The [A]."))
-			clue = 1
-		if(clue && has_client_color(/datum/client_color/noir))
-			playsound_local(null, pick('sound/effects/clue1.ogg','sound/effects/clue2.ogg'), 60, is_global = TRUE)

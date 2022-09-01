@@ -1121,6 +1121,7 @@
 	else
 		to_chat(src, "<span class='notice'>You can't look below right now.</span>")
 
+
 /mob/living/carbon/human/proc/set_species(new_species, default_colour = 1)
 	if(!dna)
 		if(!new_species)
@@ -1244,8 +1245,9 @@
 		var/obj/item/clothing/C = get_equipped_item(slot)
 		if(istype(C) && !C.mob_can_equip(src, slot, 1))
 			unEquip(C)
-
+	update_emotes()
 	return 1
+
 
 /mob/living/carbon/human/proc/update_languages()
 
