@@ -915,15 +915,14 @@
 	sound_env = LARGE_ENCLOSED
 	req_access = list(access_hangar)
 
-/area/quartermaster/hangar/catwalks_port
-	name = "\improper Hangar Port Upper Walkway"
+/area/quartermaster/hangar/top
+	name = "\improper Hangar Upper Walkway"
 	req_access = list()
-	icon_state = "hangar_catwalk_p"
 
-/area/quartermaster/hangar/catwalks_starboard
-	name = "\improper Hangar Starboard Upper Walkway"
-	req_access = list()
-	icon_state = "hangar_catwalk_s"
+/area/quartermaster/flightcontrol
+	name = "\improper Flight Control Tower"
+	icon_state = "hangar"
+	req_access = list(access_hangar)
 
 // Research
 /area/rnd/canister
