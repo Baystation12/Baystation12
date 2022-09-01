@@ -56,21 +56,24 @@
 		SSvote.queued_auto_vote = /datum/vote/add_antagonist
 
 
-/datum/vote/transfer/mob_not_participating(mob/voter)
-	if (check_rights(EMPTY_BITFIELD, FALSE, voter))
-		return FALSE
-	if (config.vote_no_dead && voter.stat == DEAD)
+/datum/vote/transfer/mob_can_vote(mob/voter)
+	if (check_rights(R_MOD, FALSE, voter))
 		return TRUE
-	if (!config.vote_no_dead_crew_transfer)
+	if (config.vote_no_dead)
 		if (voter.stat == DEAD)
-			return TRUE
+			return FALSE
+		if (isghost(voter))
+			return FALSE
+	if (config.vote_no_dead_crew_transfer)
+		if (voter.stat == DEAD)
+			return FALSE
 		if (!isliving(voter))
-			return TRUE
+			return FALSE
 		if (ismouse(voter))
-			return TRUE
+			return FALSE
 		if (isdrone(voter))
-			return TRUE
-	return FALSE
+			return FALSE
+	return TRUE
 
 
 /datum/vote/transfer/check_toggle()
