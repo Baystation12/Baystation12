@@ -44,7 +44,7 @@
 		var/pix_Y = text2num(screen_loc_Y[2]) - 16
 		screen_loc = "[screen_loc_X[1]]:[pix_X],[screen_loc_Y[1]]:[pix_Y]"
 
-/obj/screen/movable/proc/encode_screen_X(var/X, var/mob/viewer)
+/obj/screen/movable/proc/encode_screen_X(X, mob/viewer)
 	var/view = viewer.client ? viewer.client.view : world.view
 	if(X > view+1)
 		. = "EAST-[view*2 + 1-X]"
@@ -53,7 +53,7 @@
 	else
 		. = "CENTER"
 
-/obj/screen/movable/proc/decode_screen_X(var/X, var/mob/viewer)
+/obj/screen/movable/proc/decode_screen_X(X, mob/viewer)
 	var/view = viewer.client ? viewer.client.view : world.view
 	//Find EAST/WEST implementations
 	if(findtext(X,"EAST-"))
@@ -69,7 +69,7 @@
 	else if(findtext(X,"CENTER"))
 		. = view+1
 
-/obj/screen/movable/proc/encode_screen_Y(var/Y, var/mob/viewer)
+/obj/screen/movable/proc/encode_screen_Y(Y, mob/viewer)
 	var/view = viewer.client ? viewer.client.view : world.view
 	if(Y > view+1)
 		. = "NORTH-[view*2 + 1-Y]"
@@ -78,7 +78,7 @@
 	else
 		. = "CENTER"
 
-/obj/screen/movable/proc/decode_screen_Y(var/Y, var/mob/viewer)
+/obj/screen/movable/proc/decode_screen_Y(Y, mob/viewer)
 	var/view = viewer.client ? viewer.client.view : world.view
 	if(findtext(Y,"NORTH-"))
 		var/num = text2num(copytext(Y,7)) //Trim NORTH-

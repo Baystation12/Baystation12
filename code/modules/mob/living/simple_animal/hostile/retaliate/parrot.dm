@@ -253,7 +253,7 @@
 	return
 
 //Mobs with objects
-/mob/living/simple_animal/hostile/retaliate/parrot/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/mob/living/simple_animal/hostile/retaliate/parrot/attackby(obj/item/O as obj, mob/user as mob)
 	..()
 	if(!stat && !client && !istype(O, /obj/item/stack/medical))
 		if(O.force)
@@ -267,7 +267,7 @@
 	return
 
 //Bullets
-/mob/living/simple_animal/hostile/retaliate/parrot/bullet_act(var/obj/item/projectile/Proj)
+/mob/living/simple_animal/hostile/retaliate/parrot/bullet_act(obj/item/projectile/Proj)
 	if (status_flags & GODMODE)
 		return PROJECTILE_FORCE_MISS
 	..()
@@ -647,7 +647,7 @@
 
 	return
 
-/mob/living/simple_animal/hostile/retaliate/parrot/proc/drop_held_item(var/drop_gently = 1)
+/mob/living/simple_animal/hostile/retaliate/parrot/proc/drop_held_item(drop_gently = 1)
 	set name = "Drop held item"
 	set category = "Parrot"
 	set desc = "Drop the item you're holding."
@@ -704,7 +704,7 @@
 	available_channels = list(":e")
 	..()
 
-/mob/living/simple_animal/hostile/retaliate/parrot/say(var/message)
+/mob/living/simple_animal/hostile/retaliate/parrot/say(message)
 
 	if(stat)
 		return
@@ -738,25 +738,25 @@
 	..(message)
 
 
-/mob/living/simple_animal/hostile/retaliate/parrot/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
+/mob/living/simple_animal/hostile/retaliate/parrot/hear_say(message, verb = "says", datum/language/language = null, alt_name = "",italics = 0, mob/speaker = null)
 	if(prob(50))
 		parrot_hear(message)
 	..()
 
 
 
-/mob/living/simple_animal/hostile/retaliate/parrot/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
+/mob/living/simple_animal/hostile/retaliate/parrot/hear_radio(message, verb="says", datum/language/language=null, part_a, part_b, part_c, mob/speaker = null, hard_to_hear = 0)
 	if(prob(50) && available_channels.len)
 		parrot_hear("[pick(available_channels)] [message]")
 	..()
 
 
-/mob/living/simple_animal/hostile/retaliate/parrot/proc/parrot_hear(var/message="")
+/mob/living/simple_animal/hostile/retaliate/parrot/proc/parrot_hear(message="")
 	if(!message || stat)
 		return
 	speech_buffer.Add(message)
 
-/mob/living/simple_animal/hostile/retaliate/parrot/attack_generic(var/mob/user, var/damage, var/attack_message)
+/mob/living/simple_animal/hostile/retaliate/parrot/attack_generic(mob/user, damage, attack_message)
 
 	var/success = ..()
 

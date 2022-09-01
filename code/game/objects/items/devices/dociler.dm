@@ -18,7 +18,7 @@
 	. = ..()
 	to_chat(user, "<span class='notice'>It is currently set to [mode] docile mode.</span>")
 
-/obj/item/device/dociler/attack_self(var/mob/user)
+/obj/item/device/dociler/attack_self(mob/user)
 	if(mode == "somewhat")
 		mode = "completely"
 	else
@@ -26,7 +26,7 @@
 
 	to_chat(user, "You set \the [src] to [mode] docile mode.")
 
-/obj/item/device/dociler/attack(var/mob/living/L, var/mob/user)
+/obj/item/device/dociler/attack(mob/living/L, mob/user)
 	if(!istype(L, /mob/living/simple_animal))
 		to_chat(user, "<span class='warning'>\The [src] cannot not work on \the [L].</span>")
 		return

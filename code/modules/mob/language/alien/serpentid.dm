@@ -7,9 +7,8 @@
 	colour = ".nabber_lang"
 	shorthand = "SD"
 
-/datum/language/nabber/get_random_name(var/gender)
+/datum/language/nabber/get_random_name(gender)
 	if(gender == FEMALE)
 		return capitalize(pick(GLOB.first_names_female))
 	else
 		return capitalize(pick(GLOB.first_names_male))
-

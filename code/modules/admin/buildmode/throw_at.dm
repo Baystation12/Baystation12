@@ -13,7 +13,7 @@
 	to_chat(user, "<span class='notice'>Right Click on Atom        = Throw at the target</span>")
 	to_chat(user, "<span class='notice'>***********************************************************</span>")
 
-/datum/build_mode/throw_at/OnClick(var/atom/A, var/list/parameters)
+/datum/build_mode/throw_at/OnClick(atom/A, list/parameters)
 	if(parameters["left"])
 		if(istype(A, /atom/movable))
 			SetThrowable(A)
@@ -27,7 +27,7 @@
 		else
 			to_chat(user, "<span class='warning'>You have nothing selected to throw.</span>")
 
-/datum/build_mode/throw_at/proc/SetThrowable(var/new_throwable)
+/datum/build_mode/throw_at/proc/SetThrowable(new_throwable)
 	if(to_throw == new_throwable)
 		return
 	ClearThrowable()
@@ -36,7 +36,7 @@
 	GLOB.destroyed_event.register(to_throw, src, /datum/build_mode/throw_at/proc/ClearThrowable)
 	to_chat(user, "<span class='notice'>Will now be throwing \the [to_throw].</span>")
 
-/datum/build_mode/throw_at/proc/ClearThrowable(var/feedback)
+/datum/build_mode/throw_at/proc/ClearThrowable(feedback)
 	if(!to_throw)
 		return
 

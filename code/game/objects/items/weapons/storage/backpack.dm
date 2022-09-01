@@ -32,7 +32,7 @@
 		playsound(src.loc, src.use_sound, 50, 1, -5)
 	return ..()
 
-/obj/item/storage/backpack/equipped(var/mob/user, var/slot)
+/obj/item/storage/backpack/equipped(mob/user, slot)
 	if (!has_extension(src, /datum/extension/appearance))
 		set_extension(src, /datum/extension/appearance/cardborg)
 	if (slot == slot_back && src.use_sound)
@@ -462,13 +462,13 @@
 		/obj/item/crowbar
 		)
 
-/obj/item/storage/backpack/satchel/flat/MouseDrop(var/obj/over_object)
+/obj/item/storage/backpack/satchel/flat/MouseDrop(obj/over_object)
 	var/turf/T = get_turf(src)
 	if(hides_under_flooring() && isturf(T) && !T.is_plating())
 		return
 	..()
 
-/obj/item/storage/backpack/satchel/flat/hide(var/i)
+/obj/item/storage/backpack/satchel/flat/hide(i)
 	set_invisibility(i ? 101 : 0)
 	anchored = i ? TRUE : FALSE
 	alpha = i ? 128 : initial(alpha)

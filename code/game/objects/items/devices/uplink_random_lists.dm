@@ -4,7 +4,7 @@
 	var/reselect_probability	// Probability that we'll decide to keep this item if previously selected.
 								// Is done together with the keep_probability check. Being selected more than once does not affect this probability.
 
-/datum/uplink_random_item/New(var/uplink_item, var/keep_probability = 100, var/reselect_propbability = 33)
+/datum/uplink_random_item/New(uplink_item, keep_probability = 100, reselect_propbability = 33)
 	..()
 	src.uplink_item = uplink_item
 	src.keep_probability = keep_probability
@@ -17,7 +17,7 @@
 	..()
 	items = list()
 
-/datum/uplink_random_selection/proc/get_random_item(var/telecrystals, obj/item/device/uplink/U, var/list/bought_items)
+/datum/uplink_random_selection/proc/get_random_item(telecrystals, obj/item/device/uplink/U, list/bought_items)
 	var/const/attempts = 50
 
 	for(var/i = 0; i < attempts; i++)
@@ -35,7 +35,7 @@
 	return uplink.items_assoc[/datum/uplink_item/item/stealthy_weapons/soap]
 
 var/global/list/uplink_random_selections_
-/proc/get_uplink_random_selection_by_type(var/uplist_selection_type)
+/proc/get_uplink_random_selection_by_type(uplist_selection_type)
 	if(!uplink_random_selections_)
 		uplink_random_selections_ = init_subtypes(/datum/uplink_random_selection)
 		for(var/datum/entry in uplink_random_selections_)
@@ -115,7 +115,7 @@ var/global/list/uplink_random_selections_
 		var/new_thing = new/datum/uplink_random_item(uplink_item_type)
 		items += new_thing
 
-/datum/uplink_random_selection/blacklist/get_random_item(var/telecrystals, obj/item/device/uplink/U, var/list/bought_items)
+/datum/uplink_random_selection/blacklist/get_random_item(telecrystals, obj/item/device/uplink/U, list/bought_items)
 	var/const/attempts = 50
 	for(var/i = 0; i < attempts; i++)
 		var/datum/uplink_random_item/RI = pick(items)

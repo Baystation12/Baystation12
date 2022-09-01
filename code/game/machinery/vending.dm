@@ -138,7 +138,7 @@
 		else
 	return
 
-/obj/machinery/vending/emag_act(var/remaining_charges, var/mob/user)
+/obj/machinery/vending/emag_act(remaining_charges, mob/user)
 	if (!emagged)
 		emagged = TRUE
 		wires.CutWireIndex(VENDING_WIRE_CONTRABAND, FALSE)
@@ -202,12 +202,12 @@
 	. = ..()
 	SSnano.update_uis(src)
 
-/obj/machinery/vending/MouseDrop_T(var/obj/item/I as obj, var/mob/user as mob)
+/obj/machinery/vending/MouseDrop_T(obj/item/I as obj, mob/user as mob)
 	if(!CanMouseDrop(I, user) || (I.loc != user))
 		return
 	return attempt_to_stock(I, user)
 
-/obj/machinery/vending/proc/attempt_to_stock(var/obj/item/I as obj, var/mob/user as mob)
+/obj/machinery/vending/proc/attempt_to_stock(obj/item/I as obj, mob/user as mob)
 	for(var/datum/stored_items/vending_products/R in product_records)
 		if(I.type == R.item_path)
 			stock(I, R, user)
@@ -216,7 +216,7 @@
 /**
  *  Receive payment with cashmoney.
  */
-/obj/machinery/vending/proc/pay_with_cash(var/obj/item/spacecash/bundle/cashmoney)
+/obj/machinery/vending/proc/pay_with_cash(obj/item/spacecash/bundle/cashmoney)
 	if(currently_vending.price > cashmoney.worth)
 		// This is not a status display message, since it's something the character
 		// themselves is meant to see BEFORE putting the money in
@@ -241,7 +241,7 @@
  * Takes payment for whatever is the currently_vending item. Returns 1 if
  * successful, 0 if failed.
  */
-/obj/machinery/vending/proc/pay_with_ewallet(var/obj/item/spacecash/ewallet/wallet)
+/obj/machinery/vending/proc/pay_with_ewallet(obj/item/spacecash/ewallet/wallet)
 	visible_message("<span class='info'>\The [usr] swipes \the [wallet] through \the [src].</span>")
 	if(currently_vending.price > wallet.worth)
 		src.status_message = "Insufficient funds on chargecard."
@@ -258,7 +258,7 @@
  * Takes payment for whatever is the currently_vending item. Returns 1 if
  * successful, 0 if failed
  */
-/obj/machinery/vending/proc/pay_with_card(var/obj/item/card/id/I, var/obj/item/ID_container)
+/obj/machinery/vending/proc/pay_with_card(obj/item/card/id/I, obj/item/ID_container)
 	if(I==ID_container || ID_container == null)
 		visible_message("<span class='info'>\The [usr] swipes \the [I] through \the [src].</span>")
 	else
@@ -300,7 +300,7 @@
  *
  *  Called after the money has already been taken from the customer.
  */
-/obj/machinery/vending/proc/credit_purchase(var/target as text)
+/obj/machinery/vending/proc/credit_purchase(target as text)
 	vendor_account.deposit(currently_vending.price, "Purchase of [currently_vending.item_name]", target)
 
 /obj/machinery/vending/physical_attack_hand(mob/user)
@@ -317,7 +317,7 @@
  *
  *  See NanoUI documentation for details.
  */
-/obj/machinery/vending/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/vending/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	user.set_machine(src)
 
 	var/list/data = list()
@@ -415,7 +415,7 @@
 		return list()
 	return ..()
 
-/obj/machinery/vending/proc/vend(var/datum/stored_items/vending_products/R, mob/user)
+/obj/machinery/vending/proc/vend(datum/stored_items/vending_products/R, mob/user)
 	if((!allowed(user)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
 		to_chat(user, "<span class='warning'>Access denied.</span>")//Unless emagged of course
 		flick(src.icon_deny,src)
@@ -476,7 +476,7 @@
  * Checks if item is vendable in this machine should be performed before
  * calling. W is the item being inserted, R is the associated vending_product entry.
  */
-/obj/machinery/vending/proc/stock(obj/item/W, var/datum/stored_items/vending_products/R, var/mob/user)
+/obj/machinery/vending/proc/stock(obj/item/W, datum/stored_items/vending_products/R, mob/user)
 	if(!user.unEquip(W))
 		return
 
@@ -508,7 +508,7 @@
 
 	return
 
-/obj/machinery/vending/proc/speak(var/message)
+/obj/machinery/vending/proc/speak(message)
 	if(stat & NOPOWER)
 		return
 
@@ -1062,7 +1062,7 @@
 					  /obj/item/seeds/nettleseed = 2,/obj/item/seeds/reishimycelium = 2,/obj/item/seeds/reishimycelium = 2,/obj/item/seeds/shandseed = 2,)
 	premium = list(/obj/item/reagent_containers/spray/waterflower = 1)
 
-/obj/machinery/vending/hydroseeds/vend(var/datum/stored_items/vending_products/R, mob/user)
+/obj/machinery/vending/hydroseeds/vend(datum/stored_items/vending_products/R, mob/user)
 	..()
 	flick("[icon_state]-shelf[rand(3)]", src)
 
@@ -1192,7 +1192,7 @@
 					/obj/item/storage/belt/utility/crystal = 5,
 					/obj/item/storage/toolbox/crystal = 5)
 
-/obj/machinery/vending/tool/adherent/vend(var/datum/stored_items/vending_products/R, var/mob/living/carbon/user)
+/obj/machinery/vending/tool/adherent/vend(datum/stored_items/vending_products/R, mob/living/carbon/user)
 	if((istype(user) && user.species.name == SPECIES_ADHERENT) || emagged)
 		. = ..()
 	else

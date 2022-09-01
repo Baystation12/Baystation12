@@ -25,7 +25,7 @@
  	var/decay_rate = 0
 
 // Actually decay the turf.
-/datum/universal_state/proc/DecayTurf(var/turf/T)
+/datum/universal_state/proc/DecayTurf(turf/T)
 	if(istype(T,/turf/simulated/wall))
 		var/turf/simulated/wall/W=T
 		W.melt()
@@ -40,11 +40,11 @@
 		return
 
 // Return 0 to cause shuttle call to fail.
-/datum/universal_state/proc/OnShuttleCall(var/mob/user)
+/datum/universal_state/proc/OnShuttleCall(mob/user)
 	return 1
 
 // Processed per tick
-/datum/universal_state/proc/OnTurfTick(var/turf/T)
+/datum/universal_state/proc/OnTurfTick(turf/T)
 	if(decay_rate && prob(decay_rate))
 		DecayTurf(T)
 
@@ -57,19 +57,19 @@
  	// Does nothing by default
 
 // Apply changes to a new turf.
-/datum/universal_state/proc/OnTurfChange(var/turf/NT)
+/datum/universal_state/proc/OnTurfChange(turf/NT)
  	return
 
 /datum/universal_state/proc/OverlayAndAmbientSet()
 	return
 
-/datum/universal_state/proc/OnPlayerLatejoin(var/mob/living/M)
+/datum/universal_state/proc/OnPlayerLatejoin(mob/living/M)
 	return
 
-/datum/universal_state/proc/OnTouchMapEdge(var/atom/A)
+/datum/universal_state/proc/OnTouchMapEdge(atom/A)
 	return TRUE //return FALSE to cancel map edge handling
 
-/proc/SetUniversalState(var/newstate,var/on_exit=1, var/on_enter=1, list/arguments=null)
+/proc/SetUniversalState(newstate,on_exit=1, on_enter=1, list/arguments=null)
 	if(on_exit)
 		GLOB.universe.OnExit()
 	if(arguments)

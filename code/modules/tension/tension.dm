@@ -2,17 +2,17 @@
 // You could use this to have an effect trigger when someone is in serious danger, or as a means for an AI to guess which mob needs to die first.
 // The idea and the code structure was taken from Dungeon Crawl Stone Soup.
 
-/atom/movable/proc/get_threat(var/mob/living/threatened)
+/atom/movable/proc/get_threat(mob/living/threatened)
 	return 0
 
 
-/atom/movable/proc/guess_threat_level(var/mob/living/threatened)
+/atom/movable/proc/guess_threat_level(mob/living/threatened)
 	return 0
 
 /mob/living/simple_animal
 	var/threat_level = null // Set this if you want an explicit danger rating.
 
-/mob/living/simple_animal/guess_threat_level(var/mob/living/threatened)
+/mob/living/simple_animal/guess_threat_level(mob/living/threatened)
 	if(threat_level) // If they have a predefined number, use it.
 		return threat_level
 	// Otherwise we need to guess how scary this thing is.
@@ -52,12 +52,12 @@
 
 	return threat_guess
 
-/mob/living/get_threat(var/mob/living/threatened)
+/mob/living/get_threat(mob/living/threatened)
 	if(stat)
 		return 0
 
 
-/mob/living/simple_animal/get_threat(var/mob/living/threatened)
+/mob/living/simple_animal/get_threat(mob/living/threatened)
 	. = ..()
 
 	if(has_AI())
@@ -100,7 +100,7 @@
 	return threat
 
 // Carbon / mostly Human threat check.
-/mob/living/carbon/get_threat(var/mob/living/threatened)
+/mob/living/carbon/get_threat(mob/living/threatened)
 	. = ..()
 
 	if(has_AI())
@@ -136,7 +136,7 @@
 
 	return threat
 
-/mob/living/carbon/guess_threat_level(var/mob/living/threatened)
+/mob/living/carbon/guess_threat_level(mob/living/threatened)
 	var/threat_guess = 0
 
 	// First lets consider their attack ability.

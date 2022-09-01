@@ -2,7 +2,7 @@
 	name = "heal"
 	effect_type = EFFECT_ORGANIC
 
-/datum/artifact_effect/heal/DoEffectTouch(var/mob/toucher)
+/datum/artifact_effect/heal/DoEffectTouch(mob/toucher)
 	//todo: check over this properly
 	if(toucher && iscarbon(toucher))
 		var/weakness = GetAnomalySusceptibility(toucher)

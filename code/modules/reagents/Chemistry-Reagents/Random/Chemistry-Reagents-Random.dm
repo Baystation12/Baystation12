@@ -26,12 +26,12 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	reagent_state = LIQUID
 	var/max_effect_number = 8
 
-/datum/reagent/random/New(var/datum/reagents/holder, var/override = FALSE)
+/datum/reagent/random/New(datum/reagents/holder, override = FALSE)
 	if(override)
 		return // This is used for random prototypes, so we bypass further init
 	return ..(holder)
 
-/datum/reagent/random/initialize_data(var/list/newdata)
+/datum/reagent/random/initialize_data(list/newdata)
 	var/datum/reagent/random/other = SSchemistry.get_prototype(type)
 	if(istype(newdata))
 		data = newdata.Copy()
@@ -48,12 +48,12 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 		shuffle(effects_to_get)
 		effects_to_get.Cut(max_effect_number + 1)
 	effects_to_get += subtypesof(/decl/random_chem_effect/general_properties)
-	
+
 	var/list/decls = decls_repository.get_decls_unassociated(effects_to_get)
 	for(var/item in decls)
 		var/decl/random_chem_effect/effect = item
 		effect.prototype_process(src, temperature)
-	
+
 	var/whitelist = subtypesof(/datum/reagent)
 	for(var/bad_type in GLOB.random_chem_interaction_blacklist)
 		whitelist -= typesof(bad_type)
@@ -64,7 +64,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	heating_products = list()
 	for(var/i in 1 to rand(1,3))
 		heating_products += pick_n_take(whitelist)
-	
+
 	for(var/decl/random_chem_effect/random_properties/effect in decls)
 		effect.set_caches(src, whitelist)
 
@@ -72,7 +72,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	if(temperature > chilling_point && temperature < heating_point)
 		return TRUE
 
-/datum/reagent/random/mix_data(var/list/other_data, var/amount)
+/datum/reagent/random/mix_data(list/other_data, amount)
 	if(volume <= 0)
 		return // ?? but we're about to divide by 0 if this happens, so let's avoid.
 	var/old_amount = max(volume - amount, 0) // how much we had prior to the addition
@@ -84,7 +84,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	FOR_ALL_EFFECTS
 		effect.on_property_recompute(src, data[effect.type])
 
-/datum/reagent/random/custom_temperature_effects(var/temperature, var/datum/reagents/reagents)
+/datum/reagent/random/custom_temperature_effects(temperature, datum/reagents/reagents)
 	if(temperature in (heating_point - 20) to heating_point)
 		FOR_ALL_EFFECTS
 			var/result = effect.distillation_act(src, reagents, data[effect.type])
@@ -100,7 +100,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	if(.)
 		reagents.my_atom.visible_message("The chemicals in \the [reagents.my_atom] bubble slightly!")
 
-/datum/reagent/random/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/random/affect_blood(mob/living/carbon/M, alien, removed)
 	FOR_ALL_EFFECTS
 		effect.affect_blood(M, alien, removed, data[effect.type])
 

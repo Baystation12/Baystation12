@@ -84,7 +84,7 @@ Thus, the two variables affect pump operation are set in New():
 		add_underlay(T, node1, turn(dir, -180))
 		add_underlay(T, node2, dir)
 
-/obj/machinery/atmospherics/binary/pump/hide(var/i)
+/obj/machinery/atmospherics/binary/pump/hide(i)
 	update_underlays()
 
 /obj/machinery/atmospherics/binary/pump/Process()
@@ -120,7 +120,7 @@ Thus, the two variables affect pump operation are set in New():
 	else
 		return air2
 
-/obj/machinery/atmospherics/binary/pump/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/atmospherics/binary/pump/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	if(stat & (BROKEN|NOPOWER))
 		return
 

@@ -127,7 +127,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 
 	return 1
 
-/obj/machinery/atmospherics/omni/filter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/atmospherics/omni/filter/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	if(!user)
 		if (ui)
 			ui.close()
@@ -186,7 +186,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 
 	return data
 
-/obj/machinery/atmospherics/omni/filter/proc/mode_send_switch(var/mode = ATM_NONE)
+/obj/machinery/atmospherics/omni/filter/proc/mode_send_switch(mode = ATM_NONE)
 	return GLOB.filter_mode_to_gas["[mode]"]
 
 /obj/machinery/atmospherics/omni/filter/Topic(href, href_list)
@@ -218,7 +218,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 	SSnano.update_uis(src)
 	return
 
-/obj/machinery/atmospherics/omni/filter/proc/mode_return_switch(var/mode)
+/obj/machinery/atmospherics/omni/filter/proc/mode_return_switch(mode)
 	. = GLOB.filter_gas_to_mode[mode]
 	if(!.)
 		switch(mode)
@@ -227,7 +227,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 			if("out")
 				return ATM_OUTPUT
 
-/obj/machinery/atmospherics/omni/filter/proc/switch_filter(var/dir, var/mode)
+/obj/machinery/atmospherics/omni/filter/proc/switch_filter(dir, mode)
 	//check they aren't trying to disable the input or output ~this can only happen if they hack the cached tmpl file
 	for(var/datum/omni_port/P in ports)
 		if(P.dir == dir)
@@ -236,7 +236,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 
 	switch_mode(dir, mode)
 
-/obj/machinery/atmospherics/omni/filter/proc/switch_mode(var/port, var/mode)
+/obj/machinery/atmospherics/omni/filter/proc/switch_mode(port, mode)
 	if(mode == null || !port)
 		return
 	var/datum/omni_port/target_port = null
@@ -276,7 +276,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 		if(gasid)
 			filtering_outputs[gasid] = P.air
 
-/obj/machinery/atmospherics/omni/filter/proc/handle_port_change(var/datum/omni_port/P)
+/obj/machinery/atmospherics/omni/filter/proc/handle_port_change(datum/omni_port/P)
 	switch(P.mode)
 		if(ATM_NONE)
 			initialize_directions &= ~P.dir

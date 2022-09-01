@@ -32,7 +32,7 @@
 	name = "mismatched exosuit"
 	desc = "It seems to have been roughly thrown together and then spraypainted a single colour."
 
-/mob/living/exosuit/premade/random/Initialize(mapload, var/obj/structure/heavy_vehicle_frame/source_frame, var/super_random = FALSE, var/using_boring_colours = FALSE)
+/mob/living/exosuit/premade/random/Initialize(mapload, obj/structure/heavy_vehicle_frame/source_frame, super_random = FALSE, using_boring_colours = FALSE)
 	//if(!prob(100/(LAZYLEN(GLOB.mech_decals)+1)))
 	//	decal = pick(GLOB.mech_decals)
 
@@ -150,8 +150,8 @@
 // Used for spawning/debugging.
 /mob/living/exosuit/premade/random/normal
 
-/mob/living/exosuit/premade/random/boring/Initialize(mapload, var/obj/structure/heavy_vehicle_frame/source_frame)
+/mob/living/exosuit/premade/random/boring/Initialize(mapload, obj/structure/heavy_vehicle_frame/source_frame)
 	..(mapload, source_frame, using_boring_colours = TRUE)
 
-/mob/living/exosuit/premade/random/extra/Initialize(mapload, var/obj/structure/heavy_vehicle_frame/source_frame)
+/mob/living/exosuit/premade/random/extra/Initialize(mapload, obj/structure/heavy_vehicle_frame/source_frame)
 	..(mapload, source_frame, super_random = TRUE)

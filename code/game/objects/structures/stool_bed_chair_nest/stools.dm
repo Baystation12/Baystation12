@@ -72,7 +72,7 @@ var/global/list/stool_cache = list() //haha stool
 		SetName("[material.display_name] [initial(name)]")
 		desc = "A stool. Apply butt with care. It's made of [material.use_name]."
 
-/obj/item/stool/proc/add_padding(var/padding_type)
+/obj/item/stool/proc/add_padding(padding_type)
 	padding_material = SSmaterials.get_material_by_name(padding_type)
 	update_icon()
 
@@ -82,7 +82,7 @@ var/global/list/stool_cache = list() //haha stool
 		padding_material = null
 	update_icon()
 
-/obj/item/stool/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
+/obj/item/stool/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	if (prob(5))
 		user.visible_message("<span class='danger'>[user] breaks [src] over [target]'s back!</span>")
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -159,5 +159,5 @@ var/global/list/stool_cache = list() //haha stool
 
 //Generated subtypes for mapping porpoises
 
-/obj/item/stool/wood/New(var/newloc)
+/obj/item/stool/wood/New(newloc)
 	..(newloc,MATERIAL_WOOD)

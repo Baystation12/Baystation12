@@ -4,7 +4,7 @@
 	var/last_cache_rebuild_time = 0
 	category = /datum/shuttle/autodock/multi
 
-/datum/shuttle/autodock/multi/proc/set_destination(var/destination_key, mob/user)
+/datum/shuttle/autodock/multi/proc/set_destination(destination_key, mob/user)
 	if(moving_status != SHUTTLE_IDLE)
 		return
 	next_location = destinations_cache[destination_key]

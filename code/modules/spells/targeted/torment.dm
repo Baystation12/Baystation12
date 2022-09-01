@@ -20,7 +20,7 @@
 	hud_state = "wiz_horse"
 	cast_sound = 'sound/magic/cowhead_curse.ogg'
 
-/spell/targeted/torment/cast(var/list/targets, var/mob/user)
+/spell/targeted/torment/cast(list/targets, mob/user)
 	gibs(user.loc)
 	for(var/mob/living/carbon/human/H in targets)
 		H.adjustHalLoss(loss)

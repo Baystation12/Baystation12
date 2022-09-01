@@ -20,7 +20,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 	name = "Warrant Assistant"
 	var/datum/computer_file/data/warrant/activewarrant
 
-/datum/nano_module/program/digitalwarrant/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/digitalwarrant/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 
 	if(activewarrant)
@@ -150,7 +150,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 					break
 		if(activewarrant)
 			program.computer.print_paper(warranttotext(activewarrant), capitalize(activewarrant.fields["arrestsearch"]) + " Warrant - " + activewarrant.fields["namewarrant"])
-		else 
+		else
 			to_chat(src, SPAN_WARNING("Internal error: Warrant not found."))
 
 
@@ -242,7 +242,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 //Access authorized by: Notthe Capitano - Commanding Officer
 //
 //(legal notice)
-/datum/nano_module/program/digitalwarrant/proc/warranttotext(var/datum/computer_file/data/warrant/warrant)
+/datum/nano_module/program/digitalwarrant/proc/warranttotext(datum/computer_file/data/warrant/warrant)
 	. += "\[center]\[h3]" + GLOB.using_map.station_name + " " + capitalize(warrant.fields["arrestsearch"]) + " Warrant\[/center]\[/h3] \
 	      \[b]System: \[/b]" + GLOB.using_map.system_name
 	. += "\n\n\[b]Suspect Name: \[/b]" + warrant.fields["namewarrant"]

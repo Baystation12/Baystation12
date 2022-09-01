@@ -97,7 +97,7 @@ var/global/list/narsie_list = list()
 	else if(istype(A, /obj/structure/cult))
 		qdel(A)
 
-/obj/singularity/narsie/move(var/force_move = 0)
+/obj/singularity/narsie/move(force_move = 0)
 	if(!move_self)
 		return 0
 
@@ -115,7 +115,7 @@ var/global/list/narsie_list = list()
 		step(src, movement_dir)
 	return 1
 
-/obj/singularity/narsie/large/move(var/force_move = 0)
+/obj/singularity/narsie/large/move(force_move = 0)
 	if(!move_self)
 		return 0
 
@@ -140,7 +140,7 @@ var/global/list/narsie_list = list()
 				M.see_narsie(src,movement_dir)
 	return 1
 
-/obj/singularity/narsie/proc/narsiefloor(var/turf/T)//leaving "footprints"
+/obj/singularity/narsie/proc/narsiefloor(turf/T)//leaving "footprints"
 	if(!(istype(T, /turf/simulated/wall/cult)||istype(T, /turf/space)))
 		if(T.icon_state != "cult-narsie")
 			T.desc = "Something that goes beyond your understanding went this way."
@@ -148,7 +148,7 @@ var/global/list/narsie_list = list()
 			T.icon_state = "cult-narsie"
 			T.set_light(1)
 
-/obj/singularity/narsie/proc/narsiewall(var/turf/T)
+/obj/singularity/narsie/proc/narsiewall(turf/T)
 	T.desc = "An opening has been made on that wall, but who can say if what you seek truly lies on the other side?"
 	T.icon = 'icons/turf/walls.dmi'
 	T.icon_state = "cult-narsie"

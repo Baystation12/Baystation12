@@ -19,7 +19,7 @@
 	use_power = POWER_USE_OFF	//Draws directly from power net. Does not use APC power.
 	active_power_usage = 1200
 
-/obj/machinery/shieldwallgen/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/obj/machinery/shieldwallgen/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 	var/list/data = list()
 	data["draw"] = round(power_draw)
 	data["power"] = round(storedpower)
@@ -41,7 +41,7 @@
 	else
 		icon_state = "Shield_Gen +a"
 
-/obj/machinery/shieldwallgen/OnTopic(var/mob/user, href_list)
+/obj/machinery/shieldwallgen/OnTopic(mob/user, href_list)
 	if(href_list["toggle"])
 		if(src.active >= 1)
 			src.active = 0
@@ -59,7 +59,7 @@
 				"You hear heavy droning.")
 		return TOPIC_REFRESH
 
-/obj/machinery/shieldwallgen/ex_act(var/severity)
+/obj/machinery/shieldwallgen/ex_act(severity)
 	switch(severity)
 		if(EX_ACT_DEVASTATING)
 			active = 0
@@ -69,7 +69,7 @@
 		if(EX_ACT_LIGHT)
 			storedpower -= rand(0, max_stored_power)
 
-/obj/machinery/shieldwallgen/emp_act(var/severity)
+/obj/machinery/shieldwallgen/emp_act(severity)
 	switch(severity)
 		if(EMP_ACT_HEAVY)
 			storedpower = 0
@@ -150,7 +150,7 @@
 			update_icon()
 			for(var/dir in list(1,2,4,8)) src.cleanup(dir)
 
-/obj/machinery/shieldwallgen/proc/setup_field(var/NSEW = 0)
+/obj/machinery/shieldwallgen/proc/setup_field(NSEW = 0)
 	var/turf/T = get_turf(src)
 	if(!T) return
 	var/turf/T2 = T
@@ -226,7 +226,7 @@
 		..()
 
 
-/obj/machinery/shieldwallgen/proc/cleanup(var/NSEW)
+/obj/machinery/shieldwallgen/proc/cleanup(NSEW)
 	var/obj/machinery/shieldwall/F
 	var/obj/machinery/shieldwallgen/G
 	var/turf/T = src.loc
@@ -290,7 +290,7 @@
 	update_nearby_tiles()
 	..()
 
-/obj/machinery/shieldwall/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/shieldwall/attackby(obj/item/I, mob/user)
 	var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary
 	G.storedpower -= I.force*2500
 	user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [I]!</span>")
@@ -312,7 +312,7 @@
 		G.storedpower -= power_usage
 
 
-/obj/machinery/shieldwall/bullet_act(var/obj/item/projectile/Proj)
+/obj/machinery/shieldwall/bullet_act(obj/item/projectile/Proj)
 	if(needs_power)
 		var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary
 		G.storedpower -= 400 * Proj.get_structure_damage()

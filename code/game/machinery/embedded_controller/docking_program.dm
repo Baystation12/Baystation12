@@ -62,7 +62,7 @@
 	var/docking_codes			//would only allow docking when receiving signal with these, if set
 	var/display_name			//how would it show up on docking monitoring program, area name + coordinates if unset
 
-/datum/computer/file/embedded_program/docking/New(var/obj/machinery/embedded_controller/M)
+/datum/computer/file/embedded_program/docking/New(obj/machinery/embedded_controller/M)
 	..()
 	if(id_tag)
 		if(SSshuttle.docking_registry[id_tag])
@@ -199,7 +199,7 @@
 		control_mode = MODE_NONE
 
 
-/datum/computer/file/embedded_program/docking/proc/initiate_docking(var/target)
+/datum/computer/file/embedded_program/docking/proc/initiate_docking(target)
 	if (dock_state != STATE_UNDOCKED || control_mode == MODE_SERVER)	//must be undocked and not serving another request to begin a new docking handshake
 		return
 
@@ -276,7 +276,7 @@
 /datum/computer/file/embedded_program/docking/proc/can_launch()
 	return undocked()
 
-/datum/computer/file/embedded_program/docking/proc/send_docking_command(var/recipient, var/command)
+/datum/computer/file/embedded_program/docking/proc/send_docking_command(recipient, command)
 	var/datum/signal/signal = new
 	signal.data["tag"] = id_tag
 	signal.data["command"] = command

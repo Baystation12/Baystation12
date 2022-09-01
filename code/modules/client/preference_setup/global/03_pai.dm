@@ -25,7 +25,7 @@
 
 	candidate.savefile_save(preference_mob())
 
-/datum/category_item/player_setup_item/player_global/pai/content(var/mob/user)
+/datum/category_item/player_setup_item/player_global/pai/content(mob/user)
 	if(!candidate)
 		candidate = new()
 	if (!pai_preview)
@@ -44,7 +44,7 @@
 	. += "<table><tr style='vertical-align:top'><td><div class='statusDisplay'><center><img src=pai_preview.png width=[pai_preview.Width()] height=[pai_preview.Height()]></center><a href='?src=\ref[src];option=cyclebg'>Cycle Background</a></div>"
 	. += "</td></tr></table>"
 
-/datum/category_item/player_setup_item/player_global/pai/OnTopic(var/href,var/list/href_list, var/mob/user)
+/datum/category_item/player_setup_item/player_global/pai/OnTopic(href,list/href_list, mob/user)
 	if(href_list["option"])
 		var/t
 		. = TOPIC_REFRESH
@@ -80,7 +80,7 @@
 
 	return ..()
 
-/datum/category_item/player_setup_item/player_global/pai/proc/update_pai_preview(var/mob/user)
+/datum/category_item/player_setup_item/player_global/pai/proc/update_pai_preview(mob/user)
 	pai_preview = icon('icons/effects/128x48.dmi', bgstate)
 	var/icon/pai = icon('icons/mob/pai.dmi', GLOB.possible_chassis[candidate.chassis], NORTH)
 	pai_preview.Scale(48+32, 16+32)

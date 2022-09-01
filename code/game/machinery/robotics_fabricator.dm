@@ -71,11 +71,11 @@
 	T += total_component_rating_of_type(/obj/item/stock_parts/micro_laser)// Not resetting T is intended; speed is affected by both
 	speed = T / 2 // 1 -> 3
 
-/obj/machinery/robotics_fabricator/interface_interact(var/mob/user)
+/obj/machinery/robotics_fabricator/interface_interact(mob/user)
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/robotics_fabricator/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/robotics_fabricator/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/data[0]
 
 	var/datum/design/current = queue.len ? queue[1] : null
@@ -143,7 +143,7 @@
 		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
 	return ..()
 
-/obj/machinery/robotics_fabricator/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/robotics_fabricator/attackby(obj/item/I, mob/user)
 	if(busy)
 		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
 		return 1
@@ -180,7 +180,7 @@
 		to_chat(user, "The fabricator cannot hold more [stack_plural].")// use the plural form even if the given sheet is singular
 
 
-/obj/machinery/robotics_fabricator/emag_act(var/remaining_charges, var/mob/user)
+/obj/machinery/robotics_fabricator/emag_act(remaining_charges, mob/user)
 	if (emagged)
 		to_chat(user, SPAN_WARNING("No records in user DB."))
 		return
@@ -198,19 +198,19 @@
 	else
 		busy = 0
 
-/obj/machinery/robotics_fabricator/proc/add_to_queue(var/index)
+/obj/machinery/robotics_fabricator/proc/add_to_queue(index)
 	var/datum/design/D = files.known_designs[index]
 	queue += D
 	update_busy()
 
-/obj/machinery/robotics_fabricator/proc/remove_from_queue(var/index)
+/obj/machinery/robotics_fabricator/proc/remove_from_queue(index)
 	if(index == 1)
 		progress = 0
 	if (length(queue) >= index)
 		queue.Cut(index, index + 1)
 	update_busy()
 
-/obj/machinery/robotics_fabricator/proc/can_build(var/datum/design/D)
+/obj/machinery/robotics_fabricator/proc/can_build(datum/design/D)
 	for(var/M in D.materials)
 		if(materials[M] <= D.materials[M] * mat_efficiency)
 			return 0
@@ -251,13 +251,13 @@
 			continue
 		. += list(list("name" = D.name, "id" = i, "category" = D.category, "resourses" = get_design_resourses(D), "time" = get_design_time(D)))
 
-/obj/machinery/robotics_fabricator/proc/get_design_resourses(var/datum/design/D)
+/obj/machinery/robotics_fabricator/proc/get_design_resourses(datum/design/D)
 	var/list/F = list()
 	for(var/T in D.materials)
 		F += "[capitalize(T)]: [D.materials[T] * mat_efficiency]"
 	return english_list(F, and_text = ", ")
 
-/obj/machinery/robotics_fabricator/proc/get_design_time(var/datum/design/D)
+/obj/machinery/robotics_fabricator/proc/get_design_time(datum/design/D)
 	if (speed == 0)
 		return "INFINITE"
 
@@ -277,7 +277,7 @@
 	for(var/T in materials)
 		. += list(list("mat" = capitalize(T), "amt" = materials[T]))
 
-/obj/machinery/robotics_fabricator/proc/eject_materials(var/material, var/amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
+/obj/machinery/robotics_fabricator/proc/eject_materials(material, amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
 	var/recursive = amount == -1 ? 1 : 0
 	material = lowertext(material)
 	var/mattype

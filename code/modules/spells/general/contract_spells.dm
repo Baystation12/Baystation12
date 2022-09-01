@@ -13,7 +13,7 @@
 
 	var/mob/subject
 
-/spell/contract/New(var/mob/M)
+/spell/contract/New(mob/M)
 	..()
 	subject = M
 	name += " ([M.real_name])"

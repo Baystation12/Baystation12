@@ -87,7 +87,7 @@
 
 	uninstall_component(user, portable_drive)
 
-/obj/item/modular_computer/attack_ghost(var/mob/observer/ghost/user)
+/obj/item/modular_computer/attack_ghost(mob/observer/ghost/user)
 	if(enabled)
 		ui_interact(user)
 	else if(check_rights(R_ADMIN, 0, user))
@@ -95,16 +95,16 @@
 		if(response == "Yes")
 			turn_on(user)
 
-/obj/item/modular_computer/attack_ai(var/mob/user)
+/obj/item/modular_computer/attack_ai(mob/user)
 	return attack_self(user)
 
-/obj/item/modular_computer/attack_hand(var/mob/user)
+/obj/item/modular_computer/attack_hand(mob/user)
 	if(anchored)
 		return attack_self(user)
 	return ..()
 
 // On-click handling. Turns on the computer if it's off and opens the GUI.
-/obj/item/modular_computer/attack_self(var/mob/user)
+/obj/item/modular_computer/attack_self(mob/user)
 	if(MUTATION_CLUMSY in user.mutations)
 		to_chat(user, SPAN_WARNING("You can't quite work out how to use [src]."))
 		return
@@ -113,7 +113,7 @@
 	else if(!enabled && screen_on)
 		turn_on(user)
 
-/obj/item/modular_computer/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/item/modular_computer/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/card/id)) // ID Card, try to insert it.
 		var/obj/item/card/id/I = W
 		if(!card_slot)
@@ -218,7 +218,7 @@
 	if(card_slot && card_slot.stored_card)
 		to_chat(user, "[card_slot.stored_card] is inserted into it.")
 
-/obj/item/modular_computer/MouseDrop(var/atom/over_object)
+/obj/item/modular_computer/MouseDrop(atom/over_object)
 	var/mob/M = usr
 	if(!istype(over_object, /obj/screen) && CanMouseDrop(M))
 		return attack_self(M)
@@ -236,7 +236,7 @@
 		os.open_terminal(user)
 		return 1
 
-/obj/item/modular_computer/CouldUseTopic(var/mob/user)
+/obj/item/modular_computer/CouldUseTopic(mob/user)
 	..()
 	if(LAZYLEN(interact_sounds) && CanPhysicallyInteract(user))
 		playsound(src, pick(interact_sounds), interact_sound_volume)

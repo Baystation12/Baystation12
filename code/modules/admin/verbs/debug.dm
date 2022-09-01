@@ -18,7 +18,7 @@
 
 	usr.show_message(t, 1)
 
-/client/proc/cmd_admin_robotize(var/mob/M in SSmobs.mob_list)
+/client/proc/cmd_admin_robotize(mob/M in SSmobs.mob_list)
 	set category = "Fun"
 	set name = "Make Robot"
 
@@ -33,7 +33,7 @@
 	else
 		alert("Invalid mob")
 
-/client/proc/cmd_admin_animalize(var/mob/M in SSmobs.mob_list)
+/client/proc/cmd_admin_animalize(mob/M in SSmobs.mob_list)
 	set category = "Fun"
 	set name = "Make Simple Animal"
 
@@ -54,7 +54,7 @@
 		M.Animalize()
 
 
-/client/proc/makepAI(var/turf/T in SSmobs.mob_list)
+/client/proc/makepAI(turf/T in SSmobs.mob_list)
 	set category = "Fun"
 	set name = "Make pAI"
 	set desc = "Specify a location to spawn a pAI device, then specify a key to play that pAI"
@@ -80,7 +80,7 @@
 		if(candidate.key == choice.key)
 			paiController.pai_candidates.Remove(candidate)
 
-/client/proc/cmd_admin_slimeize(var/mob/M in SSmobs.mob_list)
+/client/proc/cmd_admin_slimeize(mob/M in SSmobs.mob_list)
 	set category = "Fun"
 	set name = "Make slime"
 
@@ -117,7 +117,7 @@
 	log_admin("[key_name(src)] has remade the powernet. makepowernets() called.")
 	message_admins("[key_name_admin(src)] has remade the powernets. makepowernets() called.", 0)
 
-/client/proc/cmd_admin_grantfullaccess(var/mob/M in SSmobs.mob_list)
+/client/proc/cmd_admin_grantfullaccess(mob/M in SSmobs.mob_list)
 	set category = "Admin"
 	set name = "Grant Full Access"
 
@@ -143,7 +143,7 @@
 		alert("Invalid mob")
 	log_and_message_admins("has granted [M.key] full access.")
 
-/client/proc/cmd_assume_direct_control(var/mob/M in SSmobs.mob_list)
+/client/proc/cmd_assume_direct_control(mob/M in SSmobs.mob_list)
 	set category = "Admin"
 	set name = "Assume direct control"
 	set desc = "Direct intervention"
@@ -274,7 +274,7 @@
 		reset_equipment = alert("Do you wish to delete all current equipment first?", "Delete Equipment?","Yes", "No") == "Yes"
 	dressup_human(H, outfit, reset_equipment)
 
-/proc/dressup_human(var/mob/living/carbon/human/H, var/decl/hierarchy/outfit/outfit, var/undress = TRUE)
+/proc/dressup_human(mob/living/carbon/human/H, decl/hierarchy/outfit/outfit, undress = TRUE)
 	if(!H || !outfit)
 		return
 	if(undress)
@@ -354,7 +354,7 @@
 			to_chat(usr, jointext(GLOB.clients,","))
 
 // DNA2 - Admin Hax
-/client/proc/cmd_admin_toggle_block(var/mob/M,var/block)
+/client/proc/cmd_admin_toggle_block(mob/M,block)
 	if(GAME_STATE < RUNLEVEL_GAME)
 		alert("Wait until the game starts")
 		return
@@ -389,7 +389,7 @@
 
 	cmd_analyse_health(H)
 
-/client/proc/cmd_analyse_health(var/mob/living/carbon/human/H)
+/client/proc/cmd_analyse_health(mob/living/carbon/human/H)
 
 	if(!check_rights(R_DEBUG))
 		return

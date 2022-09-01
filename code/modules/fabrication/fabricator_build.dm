@@ -1,4 +1,4 @@
-/obj/machinery/fabricator/proc/update_current_build(var/spend_time)
+/obj/machinery/fabricator/proc/update_current_build(spend_time)
 
 	if(!istype(currently_building) || !is_functioning())
 		return
@@ -39,7 +39,7 @@
 		stop_building()
 	updateUsrDialog()
 
-/obj/machinery/fabricator/proc/try_queue_build(var/datum/fabricator_recipe/recipe, var/multiplier)
+/obj/machinery/fabricator/proc/try_queue_build(datum/fabricator_recipe/recipe, multiplier)
 
 	// Do some basic sanity checking.
 	if(!is_functioning() || !istype(recipe) || !(recipe in SSfabrication.get_recipes(fabricator_class)))

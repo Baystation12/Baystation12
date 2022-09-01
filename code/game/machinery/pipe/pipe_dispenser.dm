@@ -23,7 +23,7 @@
 	if(anchored)
 		update_use_power(POWER_USE_IDLE)
 
-/obj/machinery/pipedispenser/proc/get_console_data(var/list/pipe_categories, var/color_options = FALSE)
+/obj/machinery/pipedispenser/proc/get_console_data(list/pipe_categories, color_options = FALSE)
 	. = list()
 	. += "<table>"
 	if(color_options)
@@ -37,7 +37,7 @@
 	.+= "</table>"
 	. = JOINTEXT(.)
 
-/obj/machinery/pipedispenser/proc/build_quantity(var/datum/pipe/P, var/quantity)
+/obj/machinery/pipedispenser/proc/build_quantity(datum/pipe/P, quantity)
 	for(var/I = quantity;I > 0;I -= 1)
 		P.Build(P, loc, pipe_colors[pipe_color])
 		use_power_oneoff(500)
@@ -70,7 +70,7 @@
 	popup.set_content(get_console_data(GLOB.all_pipe_datums_by_category, TRUE))
 	popup.open()
 
-/obj/machinery/pipedispenser/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/pipedispenser/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/machine_chassis))
 		if(!user.unEquip(W))
 			return
@@ -116,7 +116,7 @@
 	machine_desc = "Similar to a normal pipe dispenser, but calibrated for the heavy, dense metal tubes used in disposals networks."
 
 //Allow you to drag-drop disposal pipes into it
-/obj/machinery/pipedispenser/disposal/MouseDrop_T(var/obj/structure/disposalconstruct/pipe as obj, mob/user as mob)
+/obj/machinery/pipedispenser/disposal/MouseDrop_T(obj/structure/disposalconstruct/pipe as obj, mob/user as mob)
 	if(!CanPhysicallyInteract(user))
 		return
 

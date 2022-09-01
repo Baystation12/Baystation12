@@ -56,7 +56,7 @@
 					verbs -= x
 				take_damage(max_health)
 
-/obj/machinery/computer/bullet_act(var/obj/item/projectile/Proj)
+/obj/machinery/computer/bullet_act(obj/item/projectile/Proj)
 	take_damage(Proj.get_structure_damage())
 	..()
 
@@ -72,7 +72,7 @@
 	take_damage(I.force)
 	..()
 
-/obj/machinery/computer/proc/take_damage(var/damage)
+/obj/machinery/computer/proc/take_damage(damage)
 	if (health <= 0 || !can_use_tools)
 		return
 

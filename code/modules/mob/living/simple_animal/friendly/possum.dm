@@ -103,11 +103,11 @@
 	. = ..()
 	addtimer(CALLBACK(src, .proc/check_keywords, message), rand(1 SECOND, 3 SECONDS))
 
-/mob/living/simple_animal/passive/opossum/poppy/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+/mob/living/simple_animal/passive/opossum/poppy/hear_say(message, verb = "says", datum/language/language = null, alt_name = "",italics = 0, mob/speaker = null, sound/speech_sound, sound_vol)
 	. = ..()
 	addtimer(CALLBACK(src, .proc/check_keywords, message), rand(1 SECOND, 3 SECONDS))
 
-/mob/living/simple_animal/passive/opossum/poppy/proc/check_keywords(var/message)
+/mob/living/simple_animal/passive/opossum/poppy/proc/check_keywords(message)
 	if(!client && stat == CONSCIOUS)
 		message = lowertext(message)
 		for(var/aaa in aaa_words)

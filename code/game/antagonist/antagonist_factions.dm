@@ -5,7 +5,7 @@
 		return
 	convert_to_faction(M.mind, GLOB.revs)
 
-/mob/living/proc/convert_to_faction(var/datum/mind/player, var/datum/antagonist/faction)
+/mob/living/proc/convert_to_faction(datum/mind/player, datum/antagonist/faction)
 
 	if(!player || !faction || !player.current)
 		return

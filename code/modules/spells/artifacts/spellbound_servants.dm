@@ -4,7 +4,7 @@
 	var/equipment = list()
 	var/spells = list()
 
-/datum/spellbound_type/proc/spawn_servant(var/atom/a, var/mob/master, var/mob/user)
+/datum/spellbound_type/proc/spawn_servant(atom/a, mob/master, mob/user)
 	set waitfor = 0
 	var/mob/living/carbon/human/H = new(a)
 	H.ckey = user.ckey
@@ -25,7 +25,7 @@
 		H.SetName(name_choice)
 		H.real_name = name_choice
 
-/datum/spellbound_type/proc/equip_servant(var/mob/living/carbon/human/H)
+/datum/spellbound_type/proc/equip_servant(mob/living/carbon/human/H)
 	for(var/stype in spells)
 		var/spell/S = new stype()
 		if(S.spell_flags & NEEDSCLOTHES)
@@ -39,10 +39,10 @@
 		H.equip_to_slot_if_possible(I,equipment[etype], TRYEQUIP_REDRAW | TRYEQUIP_SILENT | TRYEQUIP_FORCE)
 		. += I
 
-/datum/spellbound_type/proc/set_antag(var/datum/mind/M, var/mob/master)
+/datum/spellbound_type/proc/set_antag(datum/mind/M, mob/master)
 	return
 
-/datum/spellbound_type/proc/modify_servant(var/list/items, var/mob/living/carbon/human/H)
+/datum/spellbound_type/proc/modify_servant(list/items, mob/living/carbon/human/H)
 	return
 
 /datum/spellbound_type/apprentice
@@ -56,13 +56,13 @@
 					/obj/item/clothing/suit/wizrobe = slot_wear_suit)
 	spells = list(/spell/noclothes)
 
-/datum/spellbound_type/apprentice/set_antag(var/datum/mind/M, var/mob/master)
+/datum/spellbound_type/apprentice/set_antag(datum/mind/M, mob/master)
 	GLOB.wizards.add_antagonist_mind(M,1,ANTAG_APPRENTICE,"<b>You are an apprentice-type Servant! You're just an ordinary Wizard-To-Be, with no special abilities, but do not need robes to cast spells. Follow your teacher's orders!</b>")
 
 /datum/spellbound_type/servant
 	var/spiel = "You don't do anything in particular."
 
-/datum/spellbound_type/servant/set_antag(var/datum/mind/M, var/mob/master)
+/datum/spellbound_type/servant/set_antag(datum/mind/M, mob/master)
 	GLOB.wizards.add_antagonist_mind(M,1,ANTAG_SERVANT, "<b>You are a [name]-type Servant!</b> [spiel]")
 
 /datum/spellbound_type/servant/caretaker
@@ -95,7 +95,7 @@
 	equipment = list(/obj/item/clothing/head/bandana/familiarband = slot_head,
 					/obj/item/clothing/under/familiargarb = slot_w_uniform)
 
-/datum/spellbound_type/servant/familiar/modify_servant(var/list/equipment, var/mob/living/carbon/human/H)
+/datum/spellbound_type/servant/familiar/modify_servant(list/equipment, mob/living/carbon/human/H)
 	var/familiar_type
 	switch(input(H,"Choose your desired animal form:", "Form") as anything in list("Space Pike", "Mouse", "Cat", "Bear"))
 		if("Space Pike")
@@ -144,7 +144,7 @@
 				/spell/hand/charges/blood_shard
 				)
 
-/datum/spellbound_type/servant/fiend/equip_servant(var/mob/living/carbon/human/H)
+/datum/spellbound_type/servant/fiend/equip_servant(mob/living/carbon/human/H)
 	if(H.gender == MALE)
 		equipment = list(/obj/item/clothing/under/lawyer/fiendsuit = slot_w_uniform,
 						/obj/item/clothing/shoes/dress/devilshoes = slot_shoes)
@@ -163,7 +163,7 @@
 				/spell/targeted/exhude_pleasantness,
 				/spell/targeted/genetic/blind/hysteria)
 
-/datum/spellbound_type/servant/infiltrator/equip_servant(var/mob/living/carbon/human/H)
+/datum/spellbound_type/servant/infiltrator/equip_servant(mob/living/carbon/human/H)
 	if(H.gender == MALE)
 		equipment = list(/obj/item/clothing/under/lawyer/infil = slot_w_uniform,
 						/obj/item/clothing/shoes/dress/infilshoes = slot_shoes)
@@ -187,7 +187,7 @@
 				/spell/invisibility,
 				/spell/targeted/revoke)
 
-/datum/spellbound_type/servant/overseer/equip_servant(var/mob/living/carbon/human/H)
+/datum/spellbound_type/servant/overseer/equip_servant(mob/living/carbon/human/H)
 	..()
 	H.add_aura(new /obj/aura/regenerating(H))
 
@@ -199,11 +199,11 @@
 	var/datum/spellbound_type/stype
 	var/last_called = 0
 
-/obj/effect/cleanable/spellbound/New(var/loc, var/spell_type)
+/obj/effect/cleanable/spellbound/New(loc, spell_type)
 	stype = new spell_type()
 	return ..(loc)
 
-/obj/effect/cleanable/spellbound/attack_hand(var/mob/user)
+/obj/effect/cleanable/spellbound/attack_hand(mob/user)
 	if(last_called > world.time )
 		return
 	last_called = world.time + 30 SECONDS
@@ -212,12 +212,12 @@
 		if(G.assess_candidate(ghost,null,FALSE))
 			to_chat(ghost,"<span class='notice'><b>A wizard is requesting a Spell-Bound Servant!</b></span> (<a href='?src=\ref[src];master=\ref[user]'>Join</a>)")
 
-/obj/effect/cleanable/spellbound/CanUseTopic(var/mob)
+/obj/effect/cleanable/spellbound/CanUseTopic(mob)
 	if(isliving(mob))
 		return STATUS_CLOSE
 	return STATUS_INTERACTIVE
 
-/obj/effect/cleanable/spellbound/OnTopic(var/mob/user, href_list, state)
+/obj/effect/cleanable/spellbound/OnTopic(mob/user, href_list, state)
 	if(href_list["master"])
 		var/mob/master = locate(href_list["master"])
 		stype.spawn_servant(get_turf(src),master,user)
@@ -238,14 +238,14 @@
 	throw_range = 10
 	w_class = ITEM_SIZE_TINY
 
-/obj/item/summoning_stone/attack_self(var/mob/user)
+/obj/item/summoning_stone/attack_self(mob/user)
 	if(user.z in GLOB.using_map.admin_levels)
 		to_chat(user, "<span class='warning'>You cannot use \the [src] here.</span>")
 		return
 	user.set_machine(src)
 	interact(user)
 
-/obj/item/summoning_stone/interact(var/mob/user)
+/obj/item/summoning_stone/interact(mob/user)
 	var/list/types = subtypesof(/datum/spellbound_type) - /datum/spellbound_type/servant
 	if(user.mind && !GLOB.wizards.is_antagonist(user.mind))
 		use_type(pick(types),user)
@@ -257,7 +257,7 @@
 	show_browser(user,dat,"window=summoning")
 	onclose(user,"summoning")
 
-/obj/item/summoning_stone/proc/use_type(var/type, var/mob/user)
+/obj/item/summoning_stone/proc/use_type(type, mob/user)
 	new /obj/effect/cleanable/spellbound(get_turf(src),type)
 	if(prob(20))
 		var/list/base_areas = maintlocs //Have to do it this way as its a macro

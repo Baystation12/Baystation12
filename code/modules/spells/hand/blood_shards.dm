@@ -13,7 +13,7 @@
 	hud_state = "wiz_bshard"
 	cast_sound = 'sound/magic/demon_attack1.ogg'
 
-/spell/hand/charges/blood_shard/cast_hand(var/atom/A,var/mob/user)
+/spell/hand/charges/blood_shard/cast_hand(atom/A,mob/user)
 	var/obj/item/projectile/blood_shard/B = new(get_turf(user))
 	B.firer = user
 	B.launch(A, BP_CHEST)
@@ -27,7 +27,7 @@
 	damage_type = DAMAGE_BRUTE
 	damage_flags = 0
 
-/obj/item/projectile/blood_shard/on_hit(var/atom/movable/target, var/blocked = 0)
+/obj/item/projectile/blood_shard/on_hit(atom/movable/target, blocked = 0)
 	if(..())
 		if(istype(target, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = target

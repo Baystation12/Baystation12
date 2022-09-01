@@ -273,7 +273,7 @@ var/global/message_delay = 0 // To make sure restarting the recentmessages list 
 
 **/
 
-/proc/Broadcast_Message(var/datum/radio_frequency/connection, var/mob/M,
+/proc/Broadcast_Message(datum/radio_frequency/connection, mob/M,
 						var/vmask, var/vmessage, var/obj/item/device/radio/radio,
 						var/message, var/name, var/job, var/realname, var/vname,
 						var/data, var/compression, var/list/level, var/freq, var/verbage = "says", var/datum/language/speaking = null,
@@ -438,7 +438,7 @@ var/global/message_delay = 0 // To make sure restarting the recentmessages list 
 
 	return 1
 
-/proc/Broadcast_SimpleMessage(var/source, var/frequency, var/text, var/data, var/mob/M, var/compression, var/level, var/channel_tag, var/channel_color)
+/proc/Broadcast_SimpleMessage(source, frequency, text, data, mob/M, compression, level, channel_tag, channel_color)
 
   /* ###### Prepare the radio connection ###### */
 
@@ -587,7 +587,7 @@ var/global/message_delay = 0 // To make sure restarting the recentmessages list 
 	var/turf/position = get_turf(src)
 	return (position.z in signal.data["level"] && signal.data["done"])
 
-/atom/proc/telecomms_process(var/do_sleep = 1)
+/atom/proc/telecomms_process(do_sleep = 1)
 
 	// First, we want to generate a new radio signal
 	var/datum/signal/signal = new
@@ -617,4 +617,3 @@ var/global/message_delay = 0 // To make sure restarting the recentmessages list 
 	//to_world_log("Level: [signal.data["level"]] - Done: [signal.data["done"]]")
 
 	return signal
-

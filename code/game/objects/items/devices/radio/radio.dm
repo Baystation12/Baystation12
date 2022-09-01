@@ -106,7 +106,7 @@
 	else
 		ui_interact(user)
 
-/obj/item/device/radio/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, datum/nanoui/master_ui = null, datum/topic_state/state = GLOB.default_state)
+/obj/item/device/radio/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/nanoui/master_ui = null, datum/topic_state/state = GLOB.default_state)
 	var/data[0]
 
 	data["power"] = on
@@ -136,10 +136,10 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/item/device/radio/proc/list_channels(var/mob/user)
+/obj/item/device/radio/proc/list_channels(mob/user)
 	return list_internal_channels(user)
 
-/obj/item/device/radio/proc/list_secure_channels(var/mob/user)
+/obj/item/device/radio/proc/list_secure_channels(mob/user)
 	var/dat[0]
 
 	for(var/ch_name in channels)
@@ -150,7 +150,7 @@
 
 	return dat
 
-/obj/item/device/radio/proc/list_internal_channels(var/mob/user)
+/obj/item/device/radio/proc/list_internal_channels(mob/user)
 	var/dat[0]
 	for(var/internal_chan in internal_channels)
 		if(has_channel_access(user, internal_chan))
@@ -158,7 +158,7 @@
 
 	return dat
 
-/obj/item/device/radio/proc/has_channel_access(var/mob/user, var/freq)
+/obj/item/device/radio/proc/has_channel_access(mob/user, freq)
 	if(!user)
 		return 0
 
@@ -167,20 +167,20 @@
 
 	return user.has_internal_radio_channel_access(internal_channels[freq])
 
-/mob/proc/has_internal_radio_channel_access(var/list/req_one_accesses)
+/mob/proc/has_internal_radio_channel_access(list/req_one_accesses)
 	var/obj/item/card/id/I = GetIdCard()
 	if (!length(req_one_accesses))
 		return TRUE // No access flags means all access
 	else
 		return has_access(list(req_one_accesses), I ? I.GetAccess() : list()) // Double list does an OR check instead of the usual AND.
 
-/mob/observer/ghost/has_internal_radio_channel_access(var/list/req_one_accesses)
+/mob/observer/ghost/has_internal_radio_channel_access(list/req_one_accesses)
 	return can_admin_interact()
 
 /obj/item/device/radio/get_cell()
 	return cell
 
-/obj/item/device/radio/proc/text_sec_channel(var/chan_name, var/chan_stat)
+/obj/item/device/radio/proc/text_sec_channel(chan_name, chan_stat)
 	var/list = !!(chan_stat&FREQ_LISTENING)!=0
 	return {"
 			<B>[chan_name]</B><br>
@@ -280,7 +280,7 @@
 	if(.)
 		SSnano.update_uis(src)
 
-/obj/item/device/radio/proc/autosay(var/message, var/from, var/channel) //BS12 EDIT
+/obj/item/device/radio/proc/autosay(message, from, channel) //BS12 EDIT
 	var/datum/radio_frequency/connection = null
 	if(channel && channels && channels.len > 0)
 		if (channel == "department")
@@ -313,7 +313,7 @@
 	// If we were to send to a channel we don't have, drop it.
 	return null
 
-/obj/item/device/radio/talk_into(mob/living/M, message, channel, var/verb = "says", var/datum/language/speaking = null)
+/obj/item/device/radio/talk_into(mob/living/M, message, channel, verb = "says", datum/language/speaking = null)
 	if(!on) return 0 // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
 	if(!M || !message) return 0
@@ -538,7 +538,7 @@
 					  "[connection.frequency]", channel_color_presets["Menacing Maroon"])
 
 
-/obj/item/device/radio/hear_talk(mob/M as mob, msg, var/verb = "says", var/datum/language/speaking = null)
+/obj/item/device/radio/hear_talk(mob/M as mob, msg, verb = "says", datum/language/speaking = null)
 
 	if (broadcasting)
 		if(get_dist(src, M) <= canhear_range)
@@ -646,7 +646,7 @@
 /obj/item/device/radio/borg/syndicate
 	keyslot = /obj/item/device/encryptionkey/syndicate
 
-/obj/item/device/radio/borg/New(var/mob/living/silicon/robot/loc)
+/obj/item/device/radio/borg/New(mob/living/silicon/robot/loc)
 	if(!istype(loc))
 		CRASH("Invalid spawn location: [log_info_line(loc)]")
 	..()
@@ -667,7 +667,7 @@
 	myborg = null
 	return ..()
 
-/obj/item/device/radio/borg/list_channels(var/mob/user)
+/obj/item/device/radio/borg/list_channels(mob/user)
 	return list_secure_channels(user)
 
 /obj/item/device/radio/borg/talk_into()
@@ -776,7 +776,7 @@
 
 	. = ..()
 
-/obj/item/device/radio/borg/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/item/device/radio/borg/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/data[0]
 
 	data["mic_status"] = broadcasting
@@ -881,7 +881,7 @@
 	..()
 	internal_channels = GLOB.default_medbay_channels.Copy()
 
-/obj/item/device/radio/CouldUseTopic(var/mob/user)
+/obj/item/device/radio/CouldUseTopic(mob/user)
 	..()
 	if(istype(user, /mob/living/carbon))
 		playsound(src, "button", 10)
@@ -914,7 +914,7 @@
 		return E
 	return null
 
-/obj/item/device/radio/exosuit/attack_self(var/mob/user)
+/obj/item/device/radio/exosuit/attack_self(mob/user)
 	var/mob/living/exosuit/exosuit = loc
 	if(istype(exosuit) && exosuit.head && exosuit.head.radio && exosuit.head.radio.is_functional())
 		user.set_machine(src)
@@ -929,5 +929,5 @@
 		if(istype(exosuit) && exosuit.head && exosuit.head.radio && exosuit.head.radio.is_functional())
 			return ..()
 
-/obj/item/device/radio/exosuit/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, datum/nanoui/master_ui = null, var/datum/topic_state/state = GLOB.mech_state)
+/obj/item/device/radio/exosuit/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/nanoui/master_ui = null, datum/topic_state/state = GLOB.mech_state)
 	. = ..()

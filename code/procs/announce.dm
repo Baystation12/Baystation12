@@ -19,17 +19,17 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	title = "Security Announcement"
 	announcement_type = "Security Announcement"
 
-/datum/announcement/New(var/do_log = 0, var/new_sound = null, var/do_newscast = 0)
+/datum/announcement/New(do_log = 0, new_sound = null, do_newscast = 0)
 	sound = new_sound
 	log = do_log
 	newscast = do_newscast
 
-/datum/announcement/priority/command/New(var/do_log = 1, var/new_sound = 'sound/misc/notice2.ogg', var/do_newscast = 0)
+/datum/announcement/priority/command/New(do_log = 1, new_sound = 'sound/misc/notice2.ogg', do_newscast = 0)
 	..(do_log, new_sound, do_newscast)
 	title = "[GLOB.using_map.boss_name] Update"
 	announcement_type = "[GLOB.using_map.boss_name] Update"
 
-/datum/announcement/proc/Announce(var/message as text, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0, var/zlevels = GLOB.using_map.contact_levels)
+/datum/announcement/proc/Announce(message as text, new_title = "", new_sound = null, do_newscast = newscast, msg_sanitized = 0, zlevels = GLOB.using_map.contact_levels)
 	if(!message)
 		return
 	var/message_title = new_title ? new_title : title
@@ -107,7 +107,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	network.SubmitArticle(message, announcer || channel.author, channel_name, null, FALSE, announcement_type)
 
 
-/proc/GetNameAndAssignmentFromId(var/obj/item/card/id/I)
+/proc/GetNameAndAssignmentFromId(obj/item/card/id/I)
 	// Format currently matches that of newscaster feeds: Registered Name (Assigned Rank)
 	if (!I)
 		return "Unknown"
@@ -121,7 +121,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 /proc/ion_storm_announcement(list/affecting_z)
 	command_announcement.Announce("It has come to our attention that the [station_name()] passed through an ion storm.  Please monitor all electronic equipment for malfunctions.", "Anomaly Alert", zlevels = affecting_z)
 
-/proc/AnnounceArrival(var/mob/living/carbon/human/character, var/datum/job/job, var/join_message)
+/proc/AnnounceArrival(mob/living/carbon/human/character, datum/job/job, join_message)
 	if(!istype(job) || !job.announced)
 		return
 	if (GAME_STATE != RUNLEVEL_GAME)
@@ -132,10 +132,10 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 
 	AnnounceArrivalSimple(character.real_name, rank, join_message, get_announcement_frequency(job))
 
-/proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "has arrived on the [station_name()]", var/frequency)
+/proc/AnnounceArrivalSimple(name, rank = "visitor", join_message = "has arrived on the [station_name()]", frequency)
 	GLOB.global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer", frequency)
 
-/proc/get_announcement_frequency(var/datum/job/job)
+/proc/get_announcement_frequency(datum/job/job)
 	// During red alert all jobs are announced on main frequency.
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 	if (security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))

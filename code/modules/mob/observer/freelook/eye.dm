@@ -34,7 +34,7 @@
 		return EyeMove(direct)
 	return 0
 
-/mob/observer/eye/facedir(var/ndir)
+/mob/observer/eye/facedir(ndir)
 	if(!canface())
 		return 0
 	set_dir(ndir)
@@ -53,7 +53,7 @@
 /mob/observer/eye/examine(mob/user)
 	return TRUE
 
-/mob/observer/eye/proc/possess(var/mob/user)
+/mob/observer/eye/proc/possess(mob/user)
 	if(owner && owner != user)
 		return
 	if(owner && owner.eyeobj != src)
@@ -66,7 +66,7 @@
 	setLoc(owner)
 	visualnet.update_eye_chunks(src, TRUE)
 
-/mob/observer/eye/proc/release(var/mob/user)
+/mob/observer/eye/proc/release(mob/user)
 	if(owner != user || !user)
 		return
 	if(owner.eyeobj != src)
@@ -78,7 +78,7 @@
 
 // Use this when setting the eye's location.
 // It will also stream the chunk that the new loc is in.
-/mob/observer/eye/proc/setLoc(var/T)
+/mob/observer/eye/proc/setLoc(T)
 	if(!owner)
 		return FALSE
 

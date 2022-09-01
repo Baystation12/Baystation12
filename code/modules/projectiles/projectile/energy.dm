@@ -20,7 +20,7 @@
 	var/brightness = 7
 	var/light_colour = "#ffffff"
 
-/obj/item/projectile/energy/flash/on_impact(var/atom/A)
+/obj/item/projectile/energy/flash/on_impact(atom/A)
 	var/turf/T = flash_range? src.loc : get_turf(A)
 	if(!istype(T)) return
 
@@ -58,7 +58,7 @@
 			M.fire_stacks = max(2, M.fire_stacks)
 			M.IgniteMob()
 
-/obj/item/projectile/energy/flash/flare/on_impact(var/atom/A)
+/obj/item/projectile/energy/flash/flare/on_impact(atom/A)
 	light_colour = pick("#e58775", "#ffffff", "#faa159", "#e34e0e")
 	set_light(1, 2, 6, 1, light_colour)
 	..() //initial flash
@@ -155,7 +155,7 @@
 	var/med_dizziness_amt = 120
 	var/max_dizziness_amt = 300
 
-/obj/item/projectile/energy/plasmastun/proc/bang(var/mob/living/carbon/M)
+/obj/item/projectile/energy/plasmastun/proc/bang(mob/living/carbon/M)
 
 	if(!istype(M))
 		return
@@ -190,7 +190,7 @@
 		if(M.ear_damage >= 5)
 			to_chat(M, SPAN_DANGER("Your ears start to ring!"))
 
-/obj/item/projectile/energy/plasmastun/on_hit(var/atom/target)
+/obj/item/projectile/energy/plasmastun/on_hit(atom/target)
 	bang(target)
 	. = ..()
 
@@ -208,7 +208,7 @@
 	med_dizziness_amt = 60
 	max_dizziness_amt = 120
 
-/obj/item/projectile/energy/plasmastun/sonic/bang(var/mob/living/carbon/M)
+/obj/item/projectile/energy/plasmastun/sonic/bang(mob/living/carbon/M)
 	..()
 	if(istype(M, /atom/movable) && M.simulated && !M.anchored)
 		M.throw_at(get_edge_target_turf(M, get_dir(src, M)), rand(1,5), 6)

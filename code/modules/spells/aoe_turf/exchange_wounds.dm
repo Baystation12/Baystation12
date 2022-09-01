@@ -21,7 +21,7 @@
 	amt_healed = 0
 	..()
 
-/spell/aoe_turf/exchange_wounds/cast(var/list/targets, var/mob/living/user)
+/spell/aoe_turf/exchange_wounds/cast(list/targets, mob/living/user)
 	new /obj/effect/temporary(get_turf(user),10,'icons/effects/effects.dmi',"purple_electricity_constant")
 	for(var/t in targets)
 		for(var/mob/living/L in t)

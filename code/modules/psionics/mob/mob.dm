@@ -12,7 +12,7 @@
 	QDEL_NULL(psi)
 	. = ..()
 
-/mob/living/proc/set_psi_rank(var/faculty, var/rank, var/take_larger, var/defer_update, var/temporary)
+/mob/living/proc/set_psi_rank(faculty, rank, take_larger, defer_update, temporary)
 	if(!src.zone_sel)
 		to_chat(src, SPAN_NOTICE("You feel something strange brush against your mind... but your brain is not able to grasp it."))
 		return
@@ -22,7 +22,7 @@
 	if(current_rank != rank && (!take_larger || current_rank < rank))
 		psi.set_rank(faculty, rank, defer_update, temporary)
 
-/mob/living/proc/deflect_psionic_attack(var/attacker)
+/mob/living/proc/deflect_psionic_attack(attacker)
 	var/blocked = 100 * get_blocked_ratio(null, DAMAGE_PSIONIC)
 	if(prob(blocked))
 		if(attacker)

@@ -207,7 +207,7 @@
 	// Don't fall through and smack people with gripper, instead just no-op
 	return 0
 
-/obj/item/gripper/resolve_attackby(var/atom/target, var/mob/living/user, params)
+/obj/item/gripper/resolve_attackby(atom/target, mob/living/user, params)
 
 	// Ensure fumbled items are accessible.
 	if(!wrapped)
@@ -285,7 +285,7 @@
 				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
 				A.power_down()
 
-/obj/item/gripper/proc/finish_using(var/atom/target, var/mob/living/user, params, force_holder, resolved)
+/obj/item/gripper/proc/finish_using(atom/target, mob/living/user, params, force_holder, resolved)
 
 	if(QDELETED(wrapped))
 		if (wrapped)

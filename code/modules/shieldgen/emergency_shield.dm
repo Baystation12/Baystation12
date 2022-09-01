@@ -60,7 +60,7 @@
 
 	..()
 
-/obj/machinery/shield/bullet_act(var/obj/item/projectile/Proj)
+/obj/machinery/shield/bullet_act(obj/item/projectile/Proj)
 	health -= Proj.get_structure_damage()
 	..()
 	check_failure()
@@ -90,7 +90,7 @@
 	..()
 
 
-/obj/machinery/shield/hitby(AM as mob|obj, var/datum/thrownthing/TT)
+/obj/machinery/shield/hitby(AM as mob|obj, datum/thrownthing/TT)
 	//Let everyone know we've been hit!
 	visible_message("<span class='notice'><B>\[src] was hit by [AM].</B></span>")
 
@@ -277,7 +277,7 @@
 			to_chat(user, "The device must first be secured to the floor.")
 	return TRUE
 
-/obj/machinery/shieldgen/emag_act(var/remaining_charges, var/mob/user)
+/obj/machinery/shieldgen/emag_act(remaining_charges, mob/user)
 	if(!malfunction)
 		malfunction = 1
 		update_icon()

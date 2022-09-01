@@ -1,4 +1,4 @@
-/material/proc/get_recipes(var/reinf_mat)
+/material/proc/get_recipes(reinf_mat)
 	var/key = reinf_mat ? reinf_mat : "base"
 	if(!LAZYACCESS(recipes,key))
 		LAZYSET(recipes,key,generate_recipes(reinf_mat))
@@ -9,7 +9,7 @@
 	for(var/recipe_type in subtypesof(base_type))
 		. += new recipe_type(src)
 
-/material/proc/generate_recipes(var/reinforce_material)
+/material/proc/generate_recipes(reinforce_material)
 	. = list()
 
 	if(opacity < 0.6)
@@ -58,7 +58,7 @@
 		. += new/datum/stack_recipe/drill_head(src)
 		. += new/datum/stack_recipe/weapon_frame(src)
 
-/material/steel/generate_recipes(var/reinforce_material)
+/material/steel/generate_recipes(reinforce_material)
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
@@ -96,7 +96,7 @@
 	. += new/datum/stack_recipe_list("modular computer frames", create_recipe_list(/datum/stack_recipe/computer))
 	. += new/datum/stack_recipe/furniture/coffin(src)
 
-/material/plasteel/generate_recipes(var/reinforce_material)
+/material/plasteel/generate_recipes(reinforce_material)
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
@@ -104,13 +104,13 @@
 	. += new/datum/stack_recipe/furniture/crate(src)
 	. += new/datum/stack_recipe/grip(src)
 
-/material/stone/generate_recipes(var/reinforce_material)
+/material/stone/generate_recipes(reinforce_material)
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/furniture/planting_bed(src)
 
-/material/plastic/generate_recipes(var/reinforce_material)
+/material/plastic/generate_recipes(reinforce_material)
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
@@ -122,7 +122,7 @@
 	. += new/datum/stack_recipe/hazard_cone(src)
 	. += new/datum/stack_recipe/furniture/flaps(src)
 
-/material/wood/generate_recipes(var/reinforce_material)
+/material/wood/generate_recipes(reinforce_material)
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
@@ -140,31 +140,31 @@
 	. += new/datum/stack_recipe/shield(src)
 	. += new/datum/stack_recipe/furniture/truss(src)
 
-/material/wood/mahogany/generate_recipes(var/reinforce_material)
+/material/wood/mahogany/generate_recipes(reinforce_material)
 	. = ..()
 	if(reinforce_material)
 		return
 	. += new/datum/stack_recipe/tile/mahogany(src)
 
-/material/wood/maple/generate_recipes(var/reinforce_material)
+/material/wood/maple/generate_recipes(reinforce_material)
 	. = ..()
 	if(reinforce_material)
 		return
 	. += new/datum/stack_recipe/tile/maple(src)
 
-/material/wood/ebony/generate_recipes(var/reinforce_material)
+/material/wood/ebony/generate_recipes(reinforce_material)
 	. = ..()
 	if(reinforce_material)
 		return
 	. += new/datum/stack_recipe/tile/ebony(src)
 
-/material/wood/walnut/generate_recipes(var/reinforce_material)
+/material/wood/walnut/generate_recipes(reinforce_material)
 	. = ..()
 	if(reinforce_material)
 		return
 	. += new/datum/stack_recipe/tile/walnut(src)
 
-/material/cardboard/generate_recipes(var/reinforce_material)
+/material/cardboard/generate_recipes(reinforce_material)
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
@@ -173,13 +173,13 @@
 	. += new/datum/stack_recipe/cardborg_helmet(src)
 	. += new/datum/stack_recipe_list("folders", create_recipe_list(/datum/stack_recipe/folder))
 
-/material/aluminium/generate_recipes(var/reinforce_material)
+/material/aluminium/generate_recipes(reinforce_material)
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/grenade(src)
 
-/material/leather/generate_recipes(var/reinforce_material)
+/material/leather/generate_recipes(reinforce_material)
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return

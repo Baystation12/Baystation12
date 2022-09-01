@@ -58,7 +58,7 @@
 	. = ..()
 	update_icon()
 
-/mob/living/simple_animal/hostile/retaliate/goose/proc/enrage(var/potency)
+/mob/living/simple_animal/hostile/retaliate/goose/proc/enrage(potency)
 	var/obj/item/W = get_natural_weapon()
 	if(W)
 		W.force = min((W.force + potency), max_damage)

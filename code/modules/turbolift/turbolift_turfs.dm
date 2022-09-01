@@ -1,2 +1,2 @@
-/turf/simulated/wall/elevator/New(var/newloc)
+/turf/simulated/wall/elevator/New(newloc)
 	..(newloc,MATERIAL_ELEVATORIUM)

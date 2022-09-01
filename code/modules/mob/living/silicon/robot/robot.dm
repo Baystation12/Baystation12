@@ -172,7 +172,7 @@
 		lawsync()
 		photosync()
 
-/mob/living/silicon/robot/drain_power(var/drain_check, var/surge, var/amount = 0)
+/mob/living/silicon/robot/drain_power(drain_check, surge, amount = 0)
 
 	if(drain_check)
 		return 1
@@ -213,7 +213,7 @@
 	QDEL_NULL(wires)
 	. = ..()
 
-/mob/living/silicon/robot/proc/set_module_sprites(var/list/new_sprites)
+/mob/living/silicon/robot/proc/set_module_sprites(list/new_sprites)
 	if(new_sprites && new_sprites.len)
 		module_sprites = new_sprites.Copy()
 		//Custom_sprite check and entry
@@ -234,7 +234,7 @@
 	update_icon()
 	return module_sprites
 
-/mob/living/silicon/robot/proc/reset_module(var/suppress_alert = null)
+/mob/living/silicon/robot/proc/reset_module(suppress_alert = null)
 	// Clear hands and module icon.
 	uneq_all()
 	if(shown_robot_modules)
@@ -251,7 +251,7 @@
 		QDEL_NULL(module)
 	updatename("Default")
 
-/mob/living/silicon/robot/proc/pick_module(var/override)
+/mob/living/silicon/robot/proc/pick_module(override)
 	if(module && !override)
 		return
 
@@ -288,7 +288,7 @@
 /mob/living/silicon/robot/get_cell()
 	return cell
 
-/mob/living/silicon/robot/proc/updatename(var/prefix as text)
+/mob/living/silicon/robot/proc/updatename(prefix as text)
 	if(prefix)
 		modtype = prefix
 
@@ -454,7 +454,7 @@
 /mob/living/silicon/robot/restrained()
 	return 0
 
-/mob/living/silicon/robot/bullet_act(var/obj/item/projectile/Proj)
+/mob/living/silicon/robot/bullet_act(obj/item/projectile/Proj)
 	if (status_flags & GODMODE)
 		return PROJECTILE_FORCE_MISS
 	..(Proj)
@@ -697,7 +697,7 @@
 			user.put_in_active_hand(broken_device)
 
 //Robots take half damage from basic attacks.
-/mob/living/silicon/robot/attack_generic(var/mob/user, var/damage, var/attack_message)
+/mob/living/silicon/robot/attack_generic(mob/user, damage, attack_message)
 	return ..(user,Floor(damage/2),attack_message)
 
 /mob/living/silicon/robot/get_req_access()
@@ -909,7 +909,7 @@
 		to_chat(R, "Buffers flushed and reset. Camera system shutdown.  All systems operational.")
 		src.verbs -= /mob/living/silicon/robot/proc/ResetSecurityCodes
 
-/mob/living/silicon/robot/proc/SetLockdown(var/state = 1)
+/mob/living/silicon/robot/proc/SetLockdown(state = 1)
 	// They stay locked down if their wire is cut.
 	if(wires.LockedCut())
 		state = 1
@@ -933,7 +933,7 @@
 
 	return
 
-/mob/living/silicon/robot/proc/choose_icon(var/triesleft, var/list/module_sprites)
+/mob/living/silicon/robot/proc/choose_icon(triesleft, list/module_sprites)
 	set waitfor = 0
 	if(!module_sprites.len)
 		to_chat(src, "Something is badly wrong with the sprite selection. Harass a coder.")
@@ -974,7 +974,7 @@
 
 // Uses power from cyborg's cell. Returns 1 on success or 0 on failure.
 // Properly converts using CELLRATE now! Amount is in Joules.
-/mob/living/silicon/robot/proc/cell_use_power(var/amount = 0)
+/mob/living/silicon/robot/proc/cell_use_power(amount = 0)
 	// No cell inserted
 	if(!cell)
 		return 0
@@ -992,7 +992,7 @@
 		return 1
 	return 0
 
-/mob/living/silicon/robot/proc/notify_ai(var/notifytype, var/first_arg, var/second_arg)
+/mob/living/silicon/robot/proc/notify_ai(notifytype, first_arg, second_arg)
 	if(!connected_ai)
 		return
 	switch(notifytype)
@@ -1011,7 +1011,7 @@
 		connected_ai.connected_robots -= src
 		connected_ai = null
 
-/mob/living/silicon/robot/proc/connect_to_ai(var/mob/living/silicon/ai/AI)
+/mob/living/silicon/robot/proc/connect_to_ai(mob/living/silicon/ai/AI)
 	if(AI && AI != connected_ai)
 		disconnect_from_ai()
 		connected_ai = AI
@@ -1019,7 +1019,7 @@
 		notify_ai(ROBOT_NOTIFICATION_NEW_UNIT)
 		sync()
 
-/mob/living/silicon/robot/emag_act(var/remaining_charges, var/mob/user)
+/mob/living/silicon/robot/emag_act(remaining_charges, mob/user)
 	if(!opened)//Cover is closed
 		if(locked)
 			if(prob(90))
@@ -1080,14 +1080,14 @@
 				to_chat(src, "Hack attempt detected.")
 			return 1
 
-/mob/living/silicon/robot/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
+/mob/living/silicon/robot/incapacitated(incapacitation_flags = INCAPACITATION_DEFAULT)
 	if ((incapacitation_flags & INCAPACITATION_FORCELYING) && (lockcharge || !is_component_functioning("actuator")))
 		return 1
 	if ((incapacitation_flags & INCAPACITATION_KNOCKOUT) && !is_component_functioning("actuator"))
 		return 1
 	return ..()
 
-/mob/living/silicon/robot/proc/dismantle(var/mob/user)
+/mob/living/silicon/robot/proc/dismantle(mob/user)
 	to_chat(user, SPAN_NOTICE("You damage some parts of the chassis, but eventually manage to rip out the central processor."))
 	var/obj/item/robot_parts/robot_suit/C = new dismantle_type(loc)
 	C.dismantled_from(src)

@@ -29,7 +29,7 @@
 	next = new/datum/malf_research_ability/passive/relay_override()
 	name = "T3 - Relay Suppression"
 
-/datum/malf_research_ability/passive/relay_suppression/research_finished(var/mob/living/silicon/ai/user)
+/datum/malf_research_ability/passive/relay_suppression/research_finished(mob/living/silicon/ai/user)
 	..()
 	if(!user)
 		return
@@ -42,7 +42,7 @@
 	price = 4000
 	name = "T4 - Relay Override"
 
-/datum/malf_research_ability/passive/relay_override/research_finished(var/mob/living/silicon/ai/user)
+/datum/malf_research_ability/passive/relay_override/research_finished(mob/living/silicon/ai/user)
 	..()
 	if(!user)
 		return

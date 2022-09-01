@@ -13,7 +13,7 @@
 	create_reagents(reagent_amount)
 	..()
 
-/obj/item/projectile/bullet/chemdart/on_hit(var/atom/target, var/blocked = 0, var/def_zone = null)
+/obj/item/projectile/bullet/chemdart/on_hit(atom/target, blocked = 0, def_zone = null)
 	if(blocked < 100 && isliving(target))
 		var/mob/living/L = target
 		if(L.can_inject(null, def_zone) == CAN_INJECT)
@@ -110,7 +110,7 @@
 		return 1
 	..()
 
-/obj/item/gun/projectile/dartgun/proc/add_beaker(var/obj/item/reagent_containers/glass/B, mob/user)
+/obj/item/gun/projectile/dartgun/proc/add_beaker(obj/item/reagent_containers/glass/B, mob/user)
 	if(!istype(B, container_type))
 		to_chat(user, "<span class='warning'>[B] doesn't seem to fit into [src].</span>")
 		return
@@ -122,14 +122,14 @@
 	beakers |= B
 	user.visible_message("\The [user] inserts \a [B] into [src].", "<span class='notice'>You slot [B] into [src].</span>")
 
-/obj/item/gun/projectile/dartgun/proc/remove_beaker(var/obj/item/reagent_containers/glass/B, mob/user)
+/obj/item/gun/projectile/dartgun/proc/remove_beaker(obj/item/reagent_containers/glass/B, mob/user)
 	mixing -= B
 	beakers -= B
 	user.put_in_hands(B)
 	user.visible_message("\The [user] removes \a [B] from [src].", "<span class='notice'>You remove [B] from [src].</span>")
 
 //fills the given dart with reagents
-/obj/item/gun/projectile/dartgun/proc/fill_dart(var/obj/item/projectile/bullet/chemdart/dart)
+/obj/item/gun/projectile/dartgun/proc/fill_dart(obj/item/projectile/bullet/chemdart/dart)
 	if(mixing.len)
 		var/mix_amount = dart.reagent_amount/mixing.len
 		for(var/obj/item/reagent_containers/glass/beaker/B in mixing)

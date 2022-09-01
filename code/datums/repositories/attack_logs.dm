@@ -7,7 +7,7 @@ var/global/repository/attack_logs/attack_log_repository = new()
 	..()
 	attack_logs_ = list()
 
-/repository/attack_logs/proc/store_attack_log(var/mob/attacker, var/mob/victim, var/action_message)
+/repository/attack_logs/proc/store_attack_log(mob/attacker, mob/victim, action_message)
 	// Newest logs first
 	attack_logs_.Insert(1, new/datum/attack_log(attacker, victim, action_message))
 
@@ -20,7 +20,7 @@ var/global/repository/attack_logs/attack_log_repository = new()
 	var/turf/location                // Turfs are forever
 	var/message
 
-/datum/attack_log/New(var/mob/mob_attacker, var/mob/mob_victim, var/action_message)
+/datum/attack_log/New(mob/mob_attacker, mob/mob_victim, action_message)
 	station_time = time_stamp()
 
 	attacker = mob_repository.get_lite_mob(mob_attacker)

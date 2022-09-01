@@ -44,7 +44,7 @@
 		user.visible_message("<span class='notice'>After a few attempts, [user] manages to light \the [src], burning their finger in the process.</span>")
 	playsound(src.loc, "light_bic", 100, 1, -4)
 
-/obj/item/flame/lighter/extinguish(var/mob/user, var/no_message)
+/obj/item/flame/lighter/extinguish(mob/user, no_message)
 	..()
 	update_icon()
 	if(user)
@@ -74,7 +74,7 @@
 	else
 		overlays += overlay_image(icon, "[bis.base_icon_state]_striker", flags=RESET_COLOR)
 
-/obj/item/flame/lighter/attack(var/mob/living/M, var/mob/living/carbon/user)
+/obj/item/flame/lighter/attack(mob/living/M, mob/living/carbon/user)
 	if(!istype(M, /mob))
 		return
 

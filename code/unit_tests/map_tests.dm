@@ -59,7 +59,7 @@
 
 	return 1
 
-/datum/unit_test/apc_area_test/proc/get_exemptions(var/area)
+/datum/unit_test/apc_area_test/proc/get_exemptions(area)
 	// We assume deeper types come last
 	for(var/i = GLOB.using_map.apc_test_exempt_areas.len; i>0; i--)
 		var/exempt_type = GLOB.using_map.apc_test_exempt_areas[i]
@@ -317,7 +317,7 @@
 
 	return 1
 
-/datum/unit_test/ladder_check/proc/check_direction(var/obj/structure/ladder/L, var/turf/destination_turf, var/check_direction, var/other_ladder_direction)
+/datum/unit_test/ladder_check/proc/check_direction(obj/structure/ladder/L, turf/destination_turf, check_direction, other_ladder_direction)
 	if(!destination_turf)
 		log_bad("Unable to acquire turf in the [dir2text(check_direction)] for [log_info_line(L)]")
 		return FALSE
@@ -330,7 +330,7 @@
 		return FALSE
 	return TRUE
 
-/datum/unit_test/ladder_check/proc/check_open_space(var/obj/structure/ladder/L)
+/datum/unit_test/ladder_check/proc/check_open_space(obj/structure/ladder/L)
 	if(!istype(get_turf(L), /turf/simulated/open))
 		log_bad("There is a non-open turf blocking the way for [log_info_line(L)]")
 		return FALSE
@@ -488,7 +488,7 @@
 
 	return 1
 
-/datum/unit_test/disposal_segments_shall_connect_with_other_disposal_pipes/proc/turf_contains_matching_disposal_pipe(var/turf/T, var/straight_dir, var/list/curved_dirs)
+/datum/unit_test/disposal_segments_shall_connect_with_other_disposal_pipes/proc/turf_contains_matching_disposal_pipe(turf/T, straight_dir, list/curved_dirs)
 	if(!T)
 		return FALSE
 
@@ -630,7 +630,7 @@
 	return 1
 
 // We work on the assumption that another test ensures we only have valid directions
-/datum/unit_test/station_wires_shall_be_connected/proc/all_ends_connected(var/obj/structure/cable/C)
+/datum/unit_test/station_wires_shall_be_connected/proc/all_ends_connected(obj/structure/cable/C)
 	. = TRUE
 
 	var/turf/source_turf = get_turf(C)
@@ -753,7 +753,7 @@
 		return
 	return 0
 
-/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/package_delivered(var/obj/structure/disposalholder/unit_test/package)
+/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/package_delivered(obj/structure/disposalholder/unit_test/package)
 	if(!packages_awaiting_delivery[package])
 		return
 	var/obj/structure/disposalpipe/trunk/trunk = package.loc
@@ -767,7 +767,7 @@
 		return
 	packages_awaiting_delivery -= package
 
-/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/get_bin_from_junction(var/obj/structure/disposalpipe/sortjunction/sort)
+/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/get_bin_from_junction(obj/structure/disposalpipe/sortjunction/sort)
 	var/list/traversed = list(sort) // Avoid self-looping, infinite loops.
 	var/obj/structure/disposalpipe/our_pipe = sort
 	var/current_dir = sort.sortdir
@@ -816,7 +816,7 @@
 
 	return 1
 
-/datum/unit_test/req_access_shall_have_valid_strings/proc/is_invalid(var/value)
+/datum/unit_test/req_access_shall_have_valid_strings/proc/is_invalid(value)
 	if(!istext(value))
 		return TRUE //Someone tried to use a non-string as an access. There is no case where this is allowed.
 

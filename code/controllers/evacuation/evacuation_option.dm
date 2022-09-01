@@ -6,5 +6,5 @@
 	var/silicon_allowed = TRUE
 	var/abandon_ship = FALSE
 
-/datum/evacuation_option/proc/execute(var/mob/user)
+/datum/evacuation_option/proc/execute(mob/user)
 	return

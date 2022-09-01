@@ -113,7 +113,7 @@
 	return TRUE
 
 /decl/surgery_step/hardsuit/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
-	return list(SKILL_EVA = SKILL_BASIC) 
+	return list(SKILL_EVA = SKILL_BASIC)
 
 /decl/surgery_step/hardsuit/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(!istype(target))
@@ -169,7 +169,7 @@
 		return affected
 
 /decl/surgery_step/sterilize/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
-	return list(SKILL_MEDICAL = SKILL_BASIC) 
+	return list(SKILL_MEDICAL = SKILL_BASIC)
 
 /decl/surgery_step/sterilize/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -213,7 +213,7 @@
 	"<span class='warning'>Your hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!</span>")
 	affected.disinfect()
 
-/decl/surgery_step/sterilize/proc/check_chemicals(var/obj/item/reagent_containers/container)
+/decl/surgery_step/sterilize/proc/check_chemicals(obj/item/reagent_containers/container)
 	if(istype(container) && container.is_open_container())
 		if(container.reagents.has_reagent(/datum/reagent/sterilizine))
 			return TRUE

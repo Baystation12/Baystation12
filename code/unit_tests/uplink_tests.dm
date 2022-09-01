@@ -24,7 +24,7 @@
 
 	return TRUE
 
-/datum/unit_test/uplink_setup_test/proc/is_valid_uplink_item(var/datum/uplink_item/ui, var/type, var/optional_uplink_item_type)
+/datum/unit_test/uplink_setup_test/proc/is_valid_uplink_item(datum/uplink_item/ui, type, optional_uplink_item_type)
 	. = TRUE
 	if(!istype(ui))
 		log_bad("[type]: [ui] was of an unexpected type: [log_info_line(ui)]")

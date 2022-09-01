@@ -167,7 +167,7 @@
 /obj/structure/inflatable/CtrlClick()
 	return hand_deflate()
 
-/obj/structure/inflatable/proc/deflate(var/violent=0)
+/obj/structure/inflatable/proc/deflate(violent=0)
 	playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
 	if(violent)
 		visible_message("[src] rapidly deflates!")
@@ -196,7 +196,7 @@
 	deflate()
 	return TRUE
 
-/obj/structure/inflatable/attack_generic(var/mob/user, var/damage, var/attack_verb)
+/obj/structure/inflatable/attack_generic(mob/user, damage, attack_verb)
 	attack_animation(user)
 	if (damage_health(damage))
 		user.visible_message("<span class='danger'>[user] [attack_verb] open the [src]!</span>")
@@ -204,7 +204,7 @@
 		user.visible_message("<span class='danger'>[user] [attack_verb] at [src]!</span>")
 	return 1
 
-/obj/structure/inflatable/CanFluidPass(var/coming_from)
+/obj/structure/inflatable/CanFluidPass(coming_from)
 	return !density
 
 /obj/structure/inflatable/door //Based on mineral door code
@@ -288,7 +288,7 @@
 	else
 		icon_state = "door_closed"
 
-/obj/structure/inflatable/door/deflate(var/violent=0)
+/obj/structure/inflatable/door/deflate(violent=0)
 	playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
 	if(violent)
 		visible_message("[src] rapidly deflates!")

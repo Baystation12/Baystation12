@@ -11,7 +11,7 @@
 	var/shattered
 	var/obj/item/material/twohanded/fireaxe/fireaxe
 
-/obj/structure/fireaxecabinet/attack_generic(var/mob/user, var/damage, var/attack_verb, var/wallbreaker)
+/obj/structure/fireaxecabinet/attack_generic(mob/user, damage, attack_verb, wallbreaker)
 	attack_animation(user)
 	playsound(user, 'sound/effects/Glasshit.ogg', 50, 1)
 	visible_message("<span class='danger'>[user] [attack_verb] \the [src]!</span>")
@@ -40,10 +40,10 @@
 	fireaxe = new(src)
 	update_icon()
 
-/obj/structure/fireaxecabinet/attack_ai(var/mob/user)
+/obj/structure/fireaxecabinet/attack_ai(mob/user)
 	toggle_lock(user)
 
-/obj/structure/fireaxecabinet/attack_hand(var/mob/user)
+/obj/structure/fireaxecabinet/attack_hand(mob/user)
 	if(!unlocked)
 		to_chat(user, "<span class='warning'>\The [src] is locked.</span>")
 		return
@@ -75,7 +75,7 @@
 		fireaxe = null
 	return ..()
 
-/obj/structure/fireaxecabinet/attackby(var/obj/item/O, var/mob/user)
+/obj/structure/fireaxecabinet/attackby(obj/item/O, mob/user)
 
 	if(isMultitool(O))
 		toggle_lock(user)
@@ -99,7 +99,7 @@
 
 	return ..()
 
-/obj/structure/fireaxecabinet/proc/toggle_open(var/mob/user)
+/obj/structure/fireaxecabinet/proc/toggle_open(mob/user)
 	if(shattered)
 		open = 1
 		unlocked = 1
@@ -109,7 +109,7 @@
 		to_chat(user, "<span class='notice'>You [open ? "open" : "close"] \the [src].</span>")
 	update_icon()
 
-/obj/structure/fireaxecabinet/proc/toggle_lock(var/mob/user)
+/obj/structure/fireaxecabinet/proc/toggle_lock(mob/user)
 
 
 	if(open)

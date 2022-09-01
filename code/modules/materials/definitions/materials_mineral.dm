@@ -260,7 +260,7 @@
 	sale_price = null
 
 //Controls phoron and phoron based objects reaction to being in a turf over 200c -- Phoron's flashpoint.
-/material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)
+/material/phoron/combustion_effect(turf/T, temperature, effect_multiplier)
 	if(isnull(ignition_point))
 		return 0
 	if(temperature < ignition_point)

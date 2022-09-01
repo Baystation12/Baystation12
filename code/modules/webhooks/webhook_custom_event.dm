@@ -2,7 +2,7 @@
 	id = WEBHOOK_CUSTOM_EVENT
 
 // Data expects a "text" field containing the new custom event text.
-/decl/webhook/custom_event/get_message(var/list/data)
+/decl/webhook/custom_event/get_message(list/data)
 	. = ..()
 	.["embeds"] = list(list(
 		"title" = "An event is beginning.",

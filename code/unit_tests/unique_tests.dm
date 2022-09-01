@@ -174,7 +174,7 @@
 		pass("All space suit modifiers have unique names.")
 	return 1
 
-/datum/unit_test/proc/number_of_issues(var/list/entries, var/type, var/feedback = /decl/noi_feedback)
+/datum/unit_test/proc/number_of_issues(list/entries, type, feedback = /decl/noi_feedback)
 	var/issues = 0
 	for(var/key in entries)
 		var/list/values = entries[key]
@@ -185,13 +185,13 @@
 
 	return issues
 
-/decl/noi_feedback/proc/priv_print(var/datum/unit_test/ut, var/type, var/key, var/output_text)
+/decl/noi_feedback/proc/priv_print(datum/unit_test/ut, type, key, output_text)
 	ut.log_bad("[type] - [key] - The following entries have the same value: [output_text]")
 
-/decl/noi_feedback/proc/print(var/datum/unit_test/ut, var/type, var/key, var/list/entries)
+/decl/noi_feedback/proc/print(datum/unit_test/ut, type, key, list/entries)
 	priv_print(ut, type, key, english_list(entries))
 
-/decl/noi_feedback/detailed/print(var/datum/unit_test/ut, var/type, var/key, var/list/entries)
+/decl/noi_feedback/detailed/print(datum/unit_test/ut, type, key, list/entries)
 	var/list/pretty_print = list()
 	pretty_print += ""
 	for(var/entry in entries)

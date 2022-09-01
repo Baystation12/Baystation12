@@ -13,7 +13,7 @@
 
 	var/enabled = 0
 
-/obj/item/ironingiron/attack_self(var/mob/user)
+/obj/item/ironingiron/attack_self(mob/user)
 	enabled = !enabled
 	to_chat(user, "<span class='notice'>You turn \the [src.name] [enabled ? "on" : "off"].</span>")
 	..()

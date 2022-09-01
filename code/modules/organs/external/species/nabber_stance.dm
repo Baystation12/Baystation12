@@ -15,7 +15,7 @@
 		action.button_icon_state = "nabber-stance-[owner && owner.pulling_punches ? 1 : 0]"
 		if(action.button) action.button.UpdateIcon()
 
-/obj/item/organ/external/head/insectoid/nabber/attack_self(var/mob/user)
+/obj/item/organ/external/head/insectoid/nabber/attack_self(mob/user)
 	. = ..()
 	if(.)
 		owner.pull_punches()

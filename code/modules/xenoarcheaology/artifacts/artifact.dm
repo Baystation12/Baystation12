@@ -110,7 +110,7 @@
 	..()
 	check_triggers(/datum/artifact_trigger/proc/on_bump, M)
 
-/obj/machinery/artifact/bullet_act(var/obj/item/projectile/P)
+/obj/machinery/artifact/bullet_act(obj/item/projectile/P)
 	check_triggers(/datum/artifact_trigger/proc/on_hit, P)
 
 /obj/machinery/artifact/ex_act(severity)

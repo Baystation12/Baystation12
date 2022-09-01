@@ -17,7 +17,7 @@
 	var/str_min = 2 //how weak the effect CAN be
 	var/str_max = 7 //how powerful the effect COULD be
 
-/obj/item/device/flash/proc/clown_check(var/mob/user)
+/obj/item/device/flash/proc/clown_check(mob/user)
 	if(user && (MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='warning'>\The [src] slips out of your hand.</span>")
 		user.unequip_item()
@@ -35,7 +35,7 @@
 	times_used = max(0,round(times_used)) //sanity
 
 //attack_as_weapon
-/obj/item/device/flash/attack(mob/living/M, mob/living/user, var/target_zone)
+/obj/item/device/flash/attack(mob/living/M, mob/living/user, target_zone)
 	if(!user || !M)	return 0 //sanity
 	admin_attack_log(user, M, "flashed their victim using \a [src].", "Was flashed by \a [src].", "used \a [src] to flash")
 

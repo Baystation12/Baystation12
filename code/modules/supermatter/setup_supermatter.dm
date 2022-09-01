@@ -115,7 +115,7 @@
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x3"
 
-/obj/effect/engine_setup/proc/activate(var/last = 0)
+/obj/effect/engine_setup/proc/activate(last = 0)
 	return 1
 
 
@@ -178,7 +178,7 @@
 	name = "Supermatter Core Marker"
 	var/energy_setting = 0
 
-/obj/effect/engine_setup/core/activate(var/last = 0)
+/obj/effect/engine_setup/core/activate(last = 0)
 	if(!last)
 		return SETUP_DELAYED
 	..()

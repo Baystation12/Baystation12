@@ -42,7 +42,7 @@
 		TAG_FACTION =   FACTION_OTHER
 	)
 
-/datum/species/golem/handle_post_spawn(var/mob/living/carbon/human/H)
+/datum/species/golem/handle_post_spawn(mob/living/carbon/human/H)
 	if(H.mind)
 		H.mind.reset()
 		H.mind.assigned_role = "Golem"
@@ -52,7 +52,7 @@
 	H.status_flags |= NO_ANTAG
 	..()
 
-/datum/species/golem/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
+/datum/species/golem/post_organ_rejuvenate(obj/item/organ/org, mob/living/carbon/human/H)
 	org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL)
 
 /datum/species/golem/can_float(mob/living/carbon/human/H)

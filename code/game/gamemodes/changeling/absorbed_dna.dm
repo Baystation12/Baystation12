@@ -4,7 +4,7 @@
 	var/speciesName
 	var/list/languages
 
-/datum/absorbed_dna/New(var/newName, var/newDNA, var/newSpecies, var/newLanguages)
+/datum/absorbed_dna/New(newName, newDNA, newSpecies, newLanguages)
 	..()
 	name = newName
 	dna = newDNA

@@ -68,7 +68,7 @@
 	target_mob.adjustBruteLoss(-5)
 	target_mob.adjustFireLoss(-5)
 
-/mob/living/simple_animal/hostile/commanded/nanomachine/misc_command(var/mob/speaker,var/text)
+/mob/living/simple_animal/hostile/commanded/nanomachine/misc_command(mob/speaker,text)
 	if(stance != COMMANDED_HEAL || stance != COMMANDED_HEALING) //dont want attack to bleed into heal.
 		allowed_targets = list()
 		target_mob = null

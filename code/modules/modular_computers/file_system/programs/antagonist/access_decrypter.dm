@@ -21,7 +21,7 @@
 		access_network_admin = SKILL_PROF
 	)
 
-/datum/computer_file/program/access_decrypter/on_shutdown(var/forced)
+/datum/computer_file/program/access_decrypter/on_shutdown(forced)
 	reset()
 	..(forced)
 

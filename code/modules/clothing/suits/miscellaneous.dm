@@ -188,7 +188,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 
-/obj/item/clothing/suit/straight_jacket/equipped(var/mob/user, var/slot)
+/obj/item/clothing/suit/straight_jacket/equipped(mob/user, slot)
 	if(slot == slot_wear_suit)
 		if(iscarbon(user))
 			var/mob/living/carbon/C = user

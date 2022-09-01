@@ -21,7 +21,7 @@
 	else
 		overlays.Cut()
 
-/obj/machinery/cell_charger/examine(var/mob/user, var/distance)
+/obj/machinery/cell_charger/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 5)
 		to_chat(user, "There's [charging ? "a" : "no"] cell in the charger.")

@@ -8,7 +8,7 @@
 	cell = null
 	fuel_cost_multiplier = 1
 
-/obj/item/weldingtool/electric/crystal/attackby(var/obj/item/W, var/mob/user)
+/obj/item/weldingtool/electric/crystal/attackby(obj/item/W, mob/user)
 	return
 
 /obj/item/weldingtool/electric/crystal/on_update_icon()
@@ -27,7 +27,7 @@
 			if(!cell.is_broken())
 				. += cell.get_charge()
 
-/obj/item/weldingtool/electric/crystal/spend_charge(var/amount)
+/obj/item/weldingtool/electric/crystal/spend_charge(amount)
 	var/mob/living/carbon/human/adherent = loc
 	if(istype(adherent))
 		for(var/obj/item/organ/internal/cell/cell in adherent.internal_organs)

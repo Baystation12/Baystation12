@@ -39,7 +39,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	var/obj/machinery/power/breakerbox/breaker_box
 
 
-/obj/structure/cable/drain_power(var/drain_check, var/surge, var/amount = 0)
+/obj/structure/cable/drain_power(drain_check, surge, amount = 0)
 
 	if(drain_check)
 		return 1
@@ -120,7 +120,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	return "[round(powernet.avail)] W"
 
 //If underfloor, hide the cable
-/obj/structure/cable/hide(var/i)
+/obj/structure/cable/hide(i)
 	if(istype(loc, /turf))
 		set_invisibility(i ? 101 : 0)
 	update_icon()
@@ -235,7 +235,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	qdel(src)
 
 // shock the user with probability prb
-/obj/structure/cable/proc/shock(mob/user, prb, var/siemens_coeff = 1.0)
+/obj/structure/cable/proc/shock(mob/user, prb, siemens_coeff = 1.0)
 	if(!prob(prb))
 		return 0
 	if (electrocute_mob(user, powernet, src, siemens_coeff))
@@ -261,7 +261,7 @@ By design, d1 is the smallest direction and d2 is the highest
 				new/obj/item/stack/cable_coil(src.loc, src.d1 ? 2 : 1, color)
 				qdel(src)
 
-/obj/structure/cable/proc/cableColor(var/colorC)
+/obj/structure/cable/proc/cableColor(colorC)
 	var/color_n = "#dd0000"
 	if(colorC)
 		color_n = colorC
@@ -273,7 +273,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 //handles merging diagonally matching cables
 //for info : direction^3 is flipping horizontally, direction^12 is flipping vertically
-/obj/structure/cable/proc/mergeDiagonalsNetworks(var/direction)
+/obj/structure/cable/proc/mergeDiagonalsNetworks(direction)
 
 	//search for and merge diagonally matching cables from the first direction component (north/south)
 	var/turf/T  = get_step(src, direction&3)//go north/south
@@ -317,7 +317,7 @@ By design, d1 is the smallest direction and d2 is the highest
 				C.powernet.add_cable(src) //else, we simply connect to the matching cable powernet
 
 // merge with the powernets of power objects in the given direction
-/obj/structure/cable/proc/mergeConnectedNetworks(var/direction)
+/obj/structure/cable/proc/mergeConnectedNetworks(direction)
 
 	var/fdir = direction ? GLOB.reverse_dir[direction] : 0 //flip the direction, to match with the source position on its turf
 
@@ -392,7 +392,7 @@ By design, d1 is the smallest direction and d2 is the highest
 //////////////////////////////////////////////
 
 //if powernetless_only = 1, will only get connections without powernet
-/obj/structure/cable/proc/get_connections(var/powernetless_only = 0)
+/obj/structure/cable/proc/get_connections(powernetless_only = 0)
 	. = list()	// this will be a list of all connected power objects
 	var/turf/T
 
@@ -516,7 +516,7 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/item/stack/cable_coil/single
 	amount = 1
 
-/obj/item/stack/cable_coil/single/New(var/loc, var/length = 1, var/param_color = null)
+/obj/item/stack/cable_coil/single/New(loc, length = 1, param_color = null)
 	..(loc, length, param_color)
 
 /obj/item/stack/cable_coil/cyborg
@@ -527,7 +527,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	uses_charge = 1
 	charge_costs = list(1)
 
-/obj/item/stack/cable_coil/New(loc, length = MAXCOIL, var/param_color = null)
+/obj/item/stack/cable_coil/New(loc, length = MAXCOIL, param_color = null)
 	..()
 	src.amount = length
 	if (param_color) // It should be red by default, so only recolor it if parameter was specified.
@@ -540,7 +540,7 @@ By design, d1 is the smallest direction and d2 is the highest
 ///////////////////////////////////
 
 //you can use wires to heal robotics
-/obj/item/stack/cable_coil/attack(var/atom/A, var/mob/living/user, var/def_zone)
+/obj/item/stack/cable_coil/attack(atom/A, mob/living/user, def_zone)
 	if(ishuman(A) && user.a_intent == I_HELP)
 		var/mob/living/carbon/human/H = A
 		var/obj/item/organ/external/S = H.organs_by_name[user.zone_sel.selecting]
@@ -577,7 +577,7 @@ By design, d1 is the smallest direction and d2 is the highest
 		icon_state = "coil-max"
 		SetName(initial(name))
 
-/obj/item/stack/cable_coil/proc/set_cable_color(var/selected_color, var/user)
+/obj/item/stack/cable_coil/proc/set_cable_color(selected_color, user)
 	if(!selected_color)
 		return
 
@@ -620,7 +620,7 @@ By design, d1 is the smallest direction and d2 is the highest
 // Items usable on a cable coil :
 //   - Wirecutters : cut them duh !
 //   - Cable coil : merge cables
-/obj/item/stack/cable_coil/proc/can_merge(var/obj/item/stack/cable_coil/C)
+/obj/item/stack/cable_coil/proc/can_merge(obj/item/stack/cable_coil/C)
 	return color == C.color
 
 /obj/item/stack/cable_coil/cyborg/can_merge()
@@ -850,7 +850,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	name = "cable fabricator"
 	var/cost_per_cable = 10
 
-/obj/item/stack/cable_coil/fabricator/split(var/tamount, var/force=FALSE)
+/obj/item/stack/cable_coil/fabricator/split(tamount, force=FALSE)
 	return
 
 /obj/item/stack/cable_coil/fabricator/get_cell()
@@ -861,7 +861,7 @@ By design, d1 is the smallest direction and d2 is the highest
 		var/mob/living/silicon/robot/R = loc
 		return R.get_cell()
 
-/obj/item/stack/cable_coil/fabricator/use(var/used)
+/obj/item/stack/cable_coil/fabricator/use(used)
 	var/obj/item/cell/cell = get_cell()
 	if(cell) cell.use(used * cost_per_cable)
 

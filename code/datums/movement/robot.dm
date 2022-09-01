@@ -5,7 +5,7 @@
 	expected_host_type = /mob/living/silicon/robot
 	var/mob/living/silicon/robot/robot
 
-/datum/movement_handler/robot/New(var/host)
+/datum/movement_handler/robot/New(host)
 	..()
 	src.robot = host
 

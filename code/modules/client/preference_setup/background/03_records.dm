@@ -55,7 +55,7 @@
 	. += TBTN("set_email_pass", pref.email_pass ? pref.email_pass : "(random)", "Email Password")
 	. = jointext(., "<br>")
 
-/datum/category_item/player_setup_item/background/records/OnTopic(var/href,var/list/href_list, var/mob/user)
+/datum/category_item/player_setup_item/background/records/OnTopic(href,list/href_list, mob/user)
 	if (href_list["set_public_record"])
 		var/new_public = sanitize(input(user,"Enter general public record information here.",CHARACTER_PREFERENCE_INPUT_TITLE, html_decode(pref.public_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
 		if (!isnull(new_public) && !jobban_isbanned(user, "Records") && CanUseTopic(user))

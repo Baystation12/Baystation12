@@ -1,7 +1,7 @@
 /mob
 	var/moving           = FALSE
 
-/mob/proc/SelfMove(var/direction)
+/mob/proc/SelfMove(direction)
 	if(DoMove(direction, src) & MOVEMENT_HANDLED)
 		return TRUE // Doesn't necessarily mean the mob physically moved
 
@@ -16,12 +16,12 @@
 	else
 		return (!mover.density || !density || lying)
 
-/mob/proc/SetMoveCooldown(var/timeout)
+/mob/proc/SetMoveCooldown(timeout)
 	var/datum/movement_handler/mob/delay/delay = GetMovementHandler(/datum/movement_handler/mob/delay)
 	if(delay)
 		delay.SetDelay(timeout)
 
-/mob/proc/ExtraMoveCooldown(var/timeout)
+/mob/proc/ExtraMoveCooldown(timeout)
 	var/datum/movement_handler/mob/delay/delay = GetMovementHandler(/datum/movement_handler/mob/delay)
 	if(delay)
 		delay.AddDelay(timeout)
@@ -172,7 +172,7 @@
 // Checks whether this mob is allowed to move in space
 // Return 1 for movement, 0 for none,
 // -1 to allow movement but with a chance of slipping
-/mob/proc/Allow_Spacemove(var/check_drift = 0)
+/mob/proc/Allow_Spacemove(check_drift = 0)
 	if(!Check_Dense_Object()) //Nothing to push off of so end here
 		return 0
 
@@ -229,7 +229,7 @@
 		return 1
 	return 0
 
-/mob/proc/slip_chance(var/prob_slip = 10)
+/mob/proc/slip_chance(prob_slip = 10)
 	if(stat)
 		return 0
 	if(buckled)
@@ -271,7 +271,7 @@
 		if(set_move_intent(decls_repository.get_decl(checking_intent)))
 			return
 
-/mob/proc/set_move_intent(var/decl/move_intent/next_intent)
+/mob/proc/set_move_intent(decl/move_intent/next_intent)
 	if(next_intent && move_intent != next_intent && next_intent.can_be_used_by(src))
 		move_intent = next_intent
 		if(hud_used)
@@ -279,26 +279,26 @@
 		return TRUE
 	return FALSE
 
-/mob/proc/get_movement_datum_by_flag(var/move_flag = MOVE_INTENT_DELIBERATE)
+/mob/proc/get_movement_datum_by_flag(move_flag = MOVE_INTENT_DELIBERATE)
 	for(var/m_intent in move_intents)
 		var/decl/move_intent/check_move_intent = decls_repository.get_decl(m_intent)
 		if(check_move_intent.flags & move_flag)
 			return check_move_intent
 
-/mob/proc/get_movement_datum_by_missing_flag(var/move_flag = MOVE_INTENT_DELIBERATE)
+/mob/proc/get_movement_datum_by_missing_flag(move_flag = MOVE_INTENT_DELIBERATE)
 	for(var/m_intent in move_intents)
 		var/decl/move_intent/check_move_intent = decls_repository.get_decl(m_intent)
 		if(!(check_move_intent.flags & move_flag))
 			return check_move_intent
 
-/mob/proc/get_movement_datums_by_flag(var/move_flag = MOVE_INTENT_DELIBERATE)
+/mob/proc/get_movement_datums_by_flag(move_flag = MOVE_INTENT_DELIBERATE)
 	. = list()
 	for(var/m_intent in move_intents)
 		var/decl/move_intent/check_move_intent = decls_repository.get_decl(m_intent)
 		if(check_move_intent.flags & move_flag)
 			. += check_move_intent
 
-/mob/proc/get_movement_datums_by_missing_flag(var/move_flag = MOVE_INTENT_DELIBERATE)
+/mob/proc/get_movement_datums_by_missing_flag(move_flag = MOVE_INTENT_DELIBERATE)
 	. = list()
 	for(var/m_intent in move_intents)
 		var/decl/move_intent/check_move_intent = decls_repository.get_decl(m_intent)
@@ -348,7 +348,7 @@
 /mob/proc/can_sprint()
 	return FALSE
 
-/mob/proc/adjust_stamina(var/amt)
+/mob/proc/adjust_stamina(amt)
 	return
 
 /mob/proc/get_stamina()

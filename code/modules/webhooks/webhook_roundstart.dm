@@ -2,7 +2,7 @@
 	id = WEBHOOK_ROUNDSTART
 
 // Data expects a "url" field pointing to the current hosted server and port to connect on.
-/decl/webhook/roundstart/get_message(var/list/data)
+/decl/webhook/roundstart/get_message(list/data)
 	. = ..()
 	var/desc = "A new round is starting"
 	if(data && data["url"])

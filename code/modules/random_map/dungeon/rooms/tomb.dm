@@ -6,7 +6,7 @@
 
 
 //attempts to line the walls with coffins with corpses inside
-/datum/random_room/tomb/apply_to_map(var/xorigin, var/yorigin, var/zorigin)
+/datum/random_room/tomb/apply_to_map(xorigin, yorigin, zorigin)
 	item_spawns = list()
 	direction = pick(0,1)
 	var/limit = (direction ? height : width)

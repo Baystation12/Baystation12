@@ -9,7 +9,7 @@
 	effect_type = pick(EFFECT_ORGANIC, EFFECT_BLUESPACE, EFFECT_SYNTH)
 	target_temp = rand(300, 600)
 
-/datum/artifact_effect/heat/DoEffectTouch(var/mob/user)
+/datum/artifact_effect/heat/DoEffectTouch(mob/user)
 	if(holder)
 		if (istype(user))
 			to_chat(user, "<span class='warning'>You feel a wave of heat travel up your spine!</span>")

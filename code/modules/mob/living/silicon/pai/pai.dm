@@ -87,7 +87,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 	hud_type = /datum/hud/pai
 
-/mob/living/silicon/pai/New(var/obj/item/device/paicard)
+/mob/living/silicon/pai/New(obj/item/device/paicard)
 	status_flags |= NO_ANTAG
 	card = paicard
 
@@ -119,7 +119,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	if (client.statpanel == "Status")
 		show_silenced()
 
-/mob/living/silicon/pai/check_eye(var/mob/user as mob)
+/mob/living/silicon/pai/check_eye(mob/user as mob)
 	if (!current)
 		return -1
 	return 0
@@ -289,7 +289,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	return 0
 
 // Handle being picked up.
-/mob/living/silicon/pai/get_scooped(var/mob/living/carbon/grabber, var/self_drop)
+/mob/living/silicon/pai/get_scooped(mob/living/carbon/grabber, self_drop)
 	. = ..()
 	if(.)
 		var/obj/item/holder/H = .
@@ -323,7 +323,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 		to_chat(src, SPAN_NOTICE("You disable your integrated light."))
 		light_on = FALSE
 
-/mob/living/silicon/pai/start_pulling(var/atom/movable/AM)
+/mob/living/silicon/pai/start_pulling(atom/movable/AM)
 	. = ..()
 	if (pulling)
 		pullin.screen_loc = ui_pull_resist

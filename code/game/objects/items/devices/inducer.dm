@@ -38,7 +38,7 @@
 	if(cell)
 		cell.emp_act(severity)
 
-/obj/item/inducer/afterattack(obj/O, mob/living/carbon/user, var/proximity)
+/obj/item/inducer/afterattack(obj/O, mob/living/carbon/user, proximity)
 	if (!proximity || user.a_intent == I_HURT || CannotUse(user) || !recharge(O, user))
 		return ..()
 
@@ -189,7 +189,7 @@
 	. = ..()
 	overlays += image("icons/obj/guns/gui.dmi","safety[safety()]")
 
-/obj/item/inducer/borg/verb/toggle_safety(var/mob/user)
+/obj/item/inducer/borg/verb/toggle_safety(mob/user)
 	set src in usr
 	set category = "Object"
 	set name = "Toggle Inducer Safety"

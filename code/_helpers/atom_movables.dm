@@ -33,7 +33,7 @@
 	for(A, A && !istype(A, holder_type), A=A.loc);
 	return A
 
-/atom/movable/proc/throw_at_random(var/include_own_turf, var/maxrange, var/speed)
+/atom/movable/proc/throw_at_random(include_own_turf, maxrange, speed)
 	var/list/turfs = trange(maxrange, src)
 	if(!maxrange)
 		maxrange = 1
@@ -43,15 +43,15 @@
 	if (length(turfs))
 		throw_at(pick(turfs), maxrange, speed)
 
-/atom/movable/proc/do_simple_ranged_interaction(var/mob/user)
+/atom/movable/proc/do_simple_ranged_interaction(mob/user)
 	return FALSE
 
-/atom/movable/hitby(var/atom/movable/AM)
+/atom/movable/hitby(atom/movable/AM)
 	..()
 	if(density && prob(50))
 		do_simple_ranged_interaction()
 
-/proc/get_atom_closest_to_atom(var/atom/a, var/list/possibilities)
+/proc/get_atom_closest_to_atom(atom/a, list/possibilities)
 	if(!possibilities || !possibilities.len)
 		return null
 	var/closest_distance = get_dist(a, possibilities[1])

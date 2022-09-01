@@ -70,7 +70,7 @@
 				// html_encode() doesn't properly sanitize + symbols, otherwise we could just use that
 				// instead, we manually rip out the plus symbol and then replace it on OnTopic
 				var/sanitized_value = html_encode(replacetext(V, "+", "PLUS"))
-				
+
 				if (pref.cultural_info[token] == V)
 					. += "<span class='linkOn'>[V]</span> "
 				else
@@ -79,14 +79,14 @@
 		. += "<hr>"
 	. = jointext(.,null)
 
-/datum/category_item/player_setup_item/background/culture/OnTopic(var/href,var/list/href_list, var/mob/user)
+/datum/category_item/player_setup_item/background/culture/OnTopic(href,list/href_list, mob/user)
 
 	for(var/token in tokens)
 
 		if(href_list["toggle_verbose_[token]"])
 			hidden[token] = !hidden[token]
 			return TOPIC_REFRESH
-		
+
 		if(href_list["expand_options_[token]"])
 			expanded[token] = !expanded[token]
 			return TOPIC_REFRESH
@@ -95,7 +95,7 @@
 		if (!isnull(new_token))
 			pref.cultural_info[token] = html_decode(replacetext(new_token, "PLUS", "+"))
 			return TOPIC_REFRESH
-			
+
 	. = ..()
 
 #undef GET_ALLOWED_VALUES

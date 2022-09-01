@@ -138,7 +138,7 @@
 	unregister_radio(src, frequency)
 	return ..()
 
-/obj/machinery/alarm/New(var/loc, var/dir, atom/frame)
+/obj/machinery/alarm/New(loc, dir, atom/frame)
 	..(loc)
 
 	if(dir)
@@ -225,7 +225,7 @@
 
 	return
 
-/obj/machinery/alarm/proc/handle_heating_cooling(var/datum/gas_mixture/environment)
+/obj/machinery/alarm/proc/handle_heating_cooling(datum/gas_mixture/environment)
 	if (!regulating_temperature)
 		//check for when we should start adjusting temperature
 		if(!get_danger_level(target_temperature, TLV["temperature"]) && abs(environment.temperature - target_temperature) > 2.0)
@@ -270,7 +270,7 @@
 
 			environment.merge(gas)
 
-/obj/machinery/alarm/proc/overall_danger_level(var/datum/gas_mixture/environment)
+/obj/machinery/alarm/proc/overall_danger_level(datum/gas_mixture/environment)
 	var/partial_pressure = R_IDEAL_GAS_EQUATION*environment.temperature/environment.volume
 	var/environment_pressure = environment.return_pressure()
 
@@ -324,7 +324,7 @@
 	addtimer(CALLBACK(src,/obj/machinery/alarm/proc/breach_end_cooldown), 10 MINUTES, TIMER_UNIQUE | TIMER_OVERRIDE)
 	return
 
-/obj/machinery/alarm/proc/get_danger_level(var/current_value, var/list/danger_levels)
+/obj/machinery/alarm/proc/get_danger_level(current_value, list/danger_levels)
 	if((current_value >= danger_levels[4] && danger_levels[4] > 0) || current_value <= danger_levels[1])
 		return 2
 	if((current_value > danger_levels[3] && danger_levels[3] > 0) || current_value < danger_levels[2])
@@ -395,7 +395,7 @@
 	else if(dev_type == "AVP")
 		alarm_area.air_vent_info[id_tag] = signal.data
 
-/obj/machinery/alarm/proc/register_env_machine(var/m_id, var/device_type)
+/obj/machinery/alarm/proc/register_env_machine(m_id, device_type)
 	var/new_name
 	if (device_type=="AVP")
 		new_name = "[alarm_area.name] Vent Pump #[alarm_area.air_vent_names.len+1]"
@@ -410,7 +410,7 @@
 	frequency = new_frequency
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_TO_AIRALARM)
 
-/obj/machinery/alarm/proc/send_signal(var/target, var/list/command)//sends signal 'command' to 'target'. Returns 0 if no radio connection, 1 otherwise
+/obj/machinery/alarm/proc/send_signal(target, list/command)//sends signal 'command' to 'target'. Returns 0 if no radio connection, 1 otherwise
 	if(!radio_connection)
 		return 0
 
@@ -467,7 +467,7 @@
 			for(var/device_id in alarm_area.air_vent_names)
 				send_signal(device_id, list("set_power"= 0) )
 
-/obj/machinery/alarm/proc/apply_danger_level(var/new_danger_level)
+/obj/machinery/alarm/proc/apply_danger_level(new_danger_level)
 	if (report_danger_level && alarm_area.atmosalert(new_danger_level, src))
 		post_alert(new_danger_level)
 
@@ -497,7 +497,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
+/obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, master_ui = null, datum/topic_state/state = GLOB.default_state)
 	var/data[0]
 	var/remote_connection = 0
 	var/remote_access = 0
@@ -524,7 +524,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/alarm/proc/populate_status(var/data)
+/obj/machinery/alarm/proc/populate_status(data)
 	var/turf/location = get_turf(src)
 	var/datum/gas_mixture/environment = location.return_air()
 	var/total = environment.total_moles
@@ -554,7 +554,7 @@
 	data["fire_alarm"] = alarm_area.fire != null
 	data["target_temperature"] = "[target_temperature - T0C]C"
 
-/obj/machinery/alarm/proc/populate_controls(var/list/data)
+/obj/machinery/alarm/proc/populate_controls(list/data)
 	switch(screen)
 		if(AALARM_SCREEN_MAIN)
 			data["mode"] = mode
@@ -640,7 +640,7 @@
 
 			data["thresholds"] = thresholds
 
-/obj/machinery/alarm/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list = list())
+/obj/machinery/alarm/CanUseTopic(mob/user, datum/topic_state/state, href_list = list())
 	if(buildstage != 2)
 		return STATUS_CLOSE
 
@@ -658,7 +658,7 @@
 
 	return min(..(), .)
 
-/obj/machinery/alarm/OnTopic(user, href_list, var/datum/topic_state/state)
+/obj/machinery/alarm/OnTopic(user, href_list, datum/topic_state/state)
 	// hrefs that can always be called -walter0o
 	if(href_list["rcon"])
 		var/attempted_rcon_setting = text2num(href_list["rcon"])
@@ -1143,7 +1143,7 @@ FIRE ALARM
 	update_icon()
 	return
 
-/obj/machinery/firealarm/proc/alarm(var/duration = 0)
+/obj/machinery/firealarm/proc/alarm(duration = 0)
 	if (!( src.working))
 		return
 	var/area/area = get_area(src)

@@ -77,30 +77,30 @@
 /decl/security_state/proc/can_change_security_level()
 	return current_security_level in standard_security_levels
 
-/decl/security_state/proc/can_switch_to(var/given_security_level)
+/decl/security_state/proc/can_switch_to(given_security_level)
 	if(!can_change_security_level())
 		return FALSE
 	return given_security_level in standard_security_levels
 
-/decl/security_state/proc/current_security_level_is_lower_than(var/given_security_level)
+/decl/security_state/proc/current_security_level_is_lower_than(given_security_level)
 	var/current_index = all_security_levels.Find(current_security_level)
 	var/given_index   = all_security_levels.Find(given_security_level)
 
 	return given_index && current_index < given_index
 
-/decl/security_state/proc/current_security_level_is_same_or_higher_than(var/given_security_level)
+/decl/security_state/proc/current_security_level_is_same_or_higher_than(given_security_level)
 	var/current_index = all_security_levels.Find(current_security_level)
 	var/given_index   = all_security_levels.Find(given_security_level)
 
 	return given_index && current_index >= given_index
 
-/decl/security_state/proc/current_security_level_is_higher_than(var/given_security_level)
+/decl/security_state/proc/current_security_level_is_higher_than(given_security_level)
 	var/current_index = all_security_levels.Find(current_security_level)
 	var/given_index   = all_security_levels.Find(given_security_level)
 
 	return given_index && current_index > given_index
 
-/decl/security_state/proc/set_security_level(var/decl/security_level/new_security_level, var/force_change = FALSE)
+/decl/security_state/proc/set_security_level(decl/security_level/new_security_level, force_change = FALSE)
 	if(new_security_level == current_security_level)
 		return FALSE
 	if(!(new_security_level in all_security_levels))
@@ -129,7 +129,7 @@
 	return TRUE
 
 // This proc decreases the current security level, if possible
-/decl/security_state/proc/decrease_security_level(var/force_change = FALSE)
+/decl/security_state/proc/decrease_security_level(force_change = FALSE)
 	var/current_index = all_security_levels.Find(current_security_level)
 	if(current_index == 1)
 		return FALSE

@@ -45,7 +45,7 @@
 	else
 		icon_state = "[base_state]open"
 
-/obj/machinery/door/window/proc/shatter(var/display_message = 1)
+/obj/machinery/door/window/proc/shatter(display_message = 1)
 	new /obj/item/material/shard(src.loc)
 	var/obj/item/stack/cable_coil/CC = new /obj/item/stack/cable_coil(src.loc)
 	CC.amount = 2
@@ -64,7 +64,7 @@
 		visible_message("[src] shatters!")
 	qdel(src)
 
-/obj/machinery/door/window/deconstruct(mob/user, var/moved = FALSE)
+/obj/machinery/door/window/deconstruct(mob/user, moved = FALSE)
 	shatter()
 
 /obj/machinery/door/window/Destroy()
@@ -149,7 +149,7 @@
 /obj/machinery/door/window/proc/close_final()
 	operating = 0
 
-/obj/machinery/door/window/take_damage(var/damage)
+/obj/machinery/door/window/take_damage(damage)
 	src.health = max(0, src.health - damage)
 	if (src.health <= 0)
 		shatter()
@@ -164,7 +164,7 @@
 			take_damage(25)
 			return TRUE
 
-/obj/machinery/door/window/emag_act(var/remaining_charges, var/mob/user)
+/obj/machinery/door/window/emag_act(remaining_charges, mob/user)
 	if (emagged)
 		to_chat(user, SPAN_WARNING("\The [src] has already been locked open."))
 		return FALSE
@@ -186,7 +186,7 @@
 			open()
 	..()
 
-/obj/machinery/door/window/CanFluidPass(var/coming_from)
+/obj/machinery/door/window/CanFluidPass(coming_from)
 	return !density || ((dir in GLOB.cardinal) && coming_from != dir)
 
 /obj/machinery/door/window/attackby(obj/item/I as obj, mob/user as mob)
@@ -246,7 +246,7 @@
 	else if (src.density)
 		flick(text("[]deny", src.base_state), src)
 
-/obj/machinery/door/window/create_electronics(var/electronics_type = /obj/item/airlock_electronics)
+/obj/machinery/door/window/create_electronics(electronics_type = /obj/item/airlock_electronics)
 	electronics = ..()
 	return electronics
 

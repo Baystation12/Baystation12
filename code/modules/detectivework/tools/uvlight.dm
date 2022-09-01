@@ -18,7 +18,7 @@
 	var/on = 0
 	var/step_alpha = 50
 
-/obj/item/device/uv_light/attack_self(var/mob/user)
+/obj/item/device/uv_light/attack_self(mob/user)
 	on = !on
 	if(on)
 		set_light(0.5, 0.1, range, 2, "#007fff")

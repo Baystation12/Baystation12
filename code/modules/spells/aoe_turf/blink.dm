@@ -15,7 +15,7 @@
 	hud_state = "wiz_blink"
 	cast_sound = 'sound/magic/blink.ogg'
 
-/spell/aoe_turf/blink/cast(var/list/targets, mob/user)
+/spell/aoe_turf/blink/cast(list/targets, mob/user)
 	if(!targets.len)
 		return
 

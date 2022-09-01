@@ -488,7 +488,7 @@
 		/obj/item/device/suit_cooling_unit
 	)
 
-/obj/item/rig/zero/on_update_icon(var/update_mob_icon)
+/obj/item/rig/zero/on_update_icon(update_mob_icon)
 	..()
 	//Append the f for female states
 	if(!ishuman(loc))

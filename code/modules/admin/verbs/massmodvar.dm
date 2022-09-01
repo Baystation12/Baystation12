@@ -1,4 +1,4 @@
-/client/proc/cmd_mass_modify_object_variables(atom/A, var/var_name)
+/client/proc/cmd_mass_modify_object_variables(atom/A, var_name)
 	set category = "Debug"
 	set name = "Mass Edit Variables"
 	set desc="(target) Edit all instances of a target item's variables"
@@ -22,7 +22,7 @@
 	src.massmodify_variables(A, var_name, method)
 
 
-/client/proc/massmodify_variables(var/atom/O, var/var_name = "", var/method = 0)
+/client/proc/massmodify_variables(atom/O, var_name = "", method = 0)
 	if(!check_rights(R_VAREDIT))	return
 
 	var/list/locked = list("vars", "key", "ckey", "client")

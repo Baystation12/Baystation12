@@ -20,7 +20,7 @@
 		SKILL_BUREAUCRACY = SKILL_ADEPT
 	)
 
-/obj/item/robot_module/security/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/security/respawn_consumable(mob/living/silicon/robot/R, amount)
 	..()
 	for(var/obj/item/gun/energy/T in equipment)
 		if(T && T.power_supply)

@@ -9,7 +9,7 @@ var/global/decl/overmap_event_handler/overmap_event_handler = new()
 	hazard_by_turf = list()
 	ship_events = list()
 
-/decl/overmap_event_handler/proc/create_events(var/z_level, var/overmap_size, var/number_of_events)
+/decl/overmap_event_handler/proc/create_events(z_level, overmap_size, number_of_events)
 	// Acquire the list of not-yet utilized overmap turfs on this Z-level
 	var/list/candidate_turfs = block(locate(OVERMAP_EDGE, OVERMAP_EDGE, z_level),locate(overmap_size - OVERMAP_EDGE, overmap_size - OVERMAP_EDGE,z_level))
 	candidate_turfs = where(candidate_turfs, /proc/can_not_locate, /obj/effect/overmap/visitable)
@@ -29,7 +29,7 @@ var/global/decl/overmap_event_handler/overmap_event_handler = new()
 
 		qdel(datum_spawn)//idk help how do I do this better?
 
-/decl/overmap_event_handler/proc/acquire_event_turfs(var/number_of_turfs, var/distance_from_origin, var/list/candidate_turfs, var/continuous = TRUE)
+/decl/overmap_event_handler/proc/acquire_event_turfs(number_of_turfs, distance_from_origin, list/candidate_turfs, continuous = TRUE)
 	number_of_turfs = min(number_of_turfs, candidate_turfs.len)
 	candidate_turfs = candidate_turfs.Copy() // Not this proc's responsibility to adjust the given lists
 
@@ -52,7 +52,7 @@ var/global/decl/overmap_event_handler/overmap_event_handler = new()
 
 	return selected_turfs
 
-/decl/overmap_event_handler/proc/get_random_neighbour(var/turf/origin_turf, var/list/candidate_turfs, var/continuous = TRUE, var/range)
+/decl/overmap_event_handler/proc/get_random_neighbour(turf/origin_turf, list/candidate_turfs, continuous = TRUE, range)
 	var/fitting_turfs
 	if(continuous)
 		fitting_turfs = origin_turf.CardinalTurfs(FALSE)
@@ -63,7 +63,7 @@ var/global/decl/overmap_event_handler/overmap_event_handler = new()
 		if(T in candidate_turfs)
 			return T
 
-/decl/overmap_event_handler/proc/start_hazard(var/obj/effect/overmap/visitable/ship/ship, var/obj/effect/overmap/event/hazard)//make these accept both hazards or events
+/decl/overmap_event_handler/proc/start_hazard(obj/effect/overmap/visitable/ship/ship, obj/effect/overmap/event/hazard)//make these accept both hazards or events
 	if(!(ship in ship_events))
 		ship_events += ship
 
@@ -79,20 +79,20 @@ var/global/decl/overmap_event_handler/overmap_event_handler = new()
 			E.vars["victim"] = ship
 		LAZYADD(ship_events[ship], E)
 
-/decl/overmap_event_handler/proc/stop_hazard(var/obj/effect/overmap/visitable/ship/ship, var/obj/effect/overmap/event/hazard)
+/decl/overmap_event_handler/proc/stop_hazard(obj/effect/overmap/visitable/ship/ship, obj/effect/overmap/event/hazard)
 	for(var/event_type in hazard.events)
 		var/datum/event/E = is_event_active(ship,event_type,hazard.difficulty)
 		if(E)
 			E.kill()
 			LAZYREMOVE(ship_events[ship], E)
 
-/decl/overmap_event_handler/proc/is_event_active(var/ship, var/event_type, var/severity)
+/decl/overmap_event_handler/proc/is_event_active(ship, event_type, severity)
 	if(!ship_events[ship])	return
 	for(var/datum/event/E in ship_events[ship])
 		if(E.type == event_type && E.severity == severity)
 			return E
 
-/decl/overmap_event_handler/proc/on_turf_entered(var/turf/new_loc, var/obj/effect/overmap/visitable/ship/ship, var/old_loc)
+/decl/overmap_event_handler/proc/on_turf_entered(turf/new_loc, obj/effect/overmap/visitable/ship/ship, old_loc)
 	if(!istype(ship))
 		return
 	if(new_loc == old_loc)
@@ -101,7 +101,7 @@ var/global/decl/overmap_event_handler/overmap_event_handler = new()
 	for(var/obj/effect/overmap/event/E in hazard_by_turf[new_loc])
 		start_hazard(ship, E)
 
-/decl/overmap_event_handler/proc/on_turf_exited(var/turf/old_loc, var/obj/effect/overmap/visitable/ship/ship, var/new_loc)
+/decl/overmap_event_handler/proc/on_turf_exited(turf/old_loc, obj/effect/overmap/visitable/ship/ship, new_loc)
 	if(!istype(ship))
 		return
 	if(new_loc == old_loc)
@@ -112,7 +112,7 @@ var/global/decl/overmap_event_handler/overmap_event_handler = new()
 			continue
 		stop_hazard(ship,E)
 
-/decl/overmap_event_handler/proc/update_hazards(var/turf/T)//catch all updater
+/decl/overmap_event_handler/proc/update_hazards(turf/T)//catch all updater
 	if(!istype(T))
 		return
 
@@ -142,12 +142,12 @@ var/global/decl/overmap_event_handler/overmap_event_handler = new()
 		for(var/obj/effect/overmap/event/E in active_hazards)
 			start_hazard(ship,E)
 
-/decl/overmap_event_handler/proc/is_event_in_turf(var/datum/event/E, var/turf/T)
+/decl/overmap_event_handler/proc/is_event_in_turf(datum/event/E, turf/T)
 	for(var/obj/effect/overmap/event/hazard in hazard_by_turf[T])
 		if(E in hazard.events && E.severity == hazard.difficulty)
 			return TRUE
 
-/decl/overmap_event_handler/proc/is_event_included(var/list/hazards, var/obj/effect/overmap/event/E, var/equal_or_better)//this proc is only used so it can break out of 2 loops cleanly
+/decl/overmap_event_handler/proc/is_event_included(list/hazards, obj/effect/overmap/event/E, equal_or_better)//this proc is only used so it can break out of 2 loops cleanly
 	for(var/obj/effect/overmap/event/A in hazards)
 		if(istype(A,E.type) || istype(E,A.type))
 			if(same_entries(A.events, E.events))

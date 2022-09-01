@@ -30,7 +30,7 @@
 		var/obj/item/device/radio/source = victims[victim]
 		do_spasm(victim, source)
 
-/datum/event/minispasm/proc/do_spasm(var/mob/living/victim, var/obj/item/device/radio/source)
+/datum/event/minispasm/proc/do_spasm(mob/living/victim, obj/item/device/radio/source)
 	set waitfor = 0
 
 	if(iscarbon(victim) && !victim.isSynthetic())

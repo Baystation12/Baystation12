@@ -1,7 +1,7 @@
 /datum/admin_secret_item/admin_secret/bombing_list
 	name = "Bombing List"
 
-/datum/admin_secret_item/admin_secret/bombing_list/execute(var/mob/user)
+/datum/admin_secret_item/admin_secret/bombing_list/execute(mob/user)
 	. = ..()
 	if(!.)
 		return

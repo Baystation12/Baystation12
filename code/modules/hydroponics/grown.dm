@@ -138,7 +138,7 @@
 		fruit_leaves.color = seed.get_trait(TRAIT_PLANT_COLOUR)
 		overlays |= fruit_leaves
 
-/obj/item/reagent_containers/food/snacks/grown/Crossed(var/mob/living/M)
+/obj/item/reagent_containers/food/snacks/grown/Crossed(mob/living/M)
 	if(seed && seed.get_trait(TRAIT_JUICY) == 2)
 		if(istype(M))
 
@@ -162,7 +162,7 @@
 	if(seed) seed.thrown_at(src,hit_atom)
 	..()
 
-/obj/item/reagent_containers/food/snacks/grown/attackby(var/obj/item/W, var/mob/user)
+/obj/item/reagent_containers/food/snacks/grown/attackby(obj/item/W, mob/user)
 
 	if(seed)
 		if(seed.get_trait(TRAIT_PRODUCES_POWER) && isCoil(W))
@@ -224,7 +224,7 @@
 					return
 	..()
 
-/obj/item/reagent_containers/food/snacks/grown/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
+/obj/item/reagent_containers/food/snacks/grown/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	. = ..()
 
 	if(seed && seed.get_trait(TRAIT_STINGS))
@@ -309,7 +309,7 @@
 
 var/global/list/fruit_icon_cache = list()
 
-/obj/item/reagent_containers/food/snacks/fruit_slice/New(var/newloc, var/datum/seed/S)
+/obj/item/reagent_containers/food/snacks/fruit_slice/New(newloc, datum/seed/S)
 	..(newloc)
 	// Need to go through and make a general image caching controller. Todo.
 	if(!istype(S))

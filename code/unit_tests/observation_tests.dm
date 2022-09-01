@@ -1,4 +1,4 @@
-/proc/is_listening_to_movement(var/atom/movable/listening_to, var/listener)
+/proc/is_listening_to_movement(atom/movable/listening_to, listener)
 	return GLOB.moved_event.is_listening(listening_to, listener)
 
 /datum/unit_test/observation
@@ -27,7 +27,7 @@
 	. = conduct_test()
 	sanity_check_events("Post-Test")
 
-/datum/unit_test/observation/proc/sanity_check_events(var/phase)
+/datum/unit_test/observation/proc/sanity_check_events(phase)
 	for(var/entry in GLOB.all_observable_events)
 		var/decl/observ/event = entry
 		if(null in event.global_listeners)
@@ -62,7 +62,7 @@
 /datum/unit_test/observation/proc/conduct_test()
 	return 0
 
-/datum/unit_test/observation/proc/receive_move(var/atom/movable/am, var/old_loc, var/new_loc)
+/datum/unit_test/observation/proc/receive_move(atom/movable/am, old_loc, new_loc)
 	received_moves[++received_moves.len] =  list(am, old_loc, new_loc)
 
 /datum/unit_test/observation/proc/dump_received_moves()

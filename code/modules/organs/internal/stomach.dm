@@ -37,10 +37,10 @@
 	. = ..()
 	icon_state = "stomach-prosthetic"
 
-/obj/item/organ/internal/stomach/proc/can_eat_atom(var/atom/movable/food)
+/obj/item/organ/internal/stomach/proc/can_eat_atom(atom/movable/food)
 	return !isnull(get_devour_time(food))
 
-/obj/item/organ/internal/stomach/proc/is_full(var/atom/movable/food)
+/obj/item/organ/internal/stomach/proc/is_full(atom/movable/food)
 	var/total = Floor(ingested.total_volume / 10)
 	for(var/a in contents + food)
 		if(ismob(a))
@@ -55,7 +55,7 @@
 			return TRUE
 	return FALSE
 
-/obj/item/organ/internal/stomach/proc/get_devour_time(var/atom/movable/food)
+/obj/item/organ/internal/stomach/proc/get_devour_time(atom/movable/food)
 	if(iscarbon(food) || isanimal(food))
 		var/mob/living/L = food
 		if((species.gluttonous & GLUT_TINY) && (L.mob_size <= MOB_TINY) && !ishuman(food)) // Anything MOB_TINY or smaller

@@ -63,7 +63,7 @@
 	if(produce_drones && drone_progress >= 100 && isghost(user) && config.allow_drone_spawn && count_drones() < config.max_maint_drones)
 		to_chat(user, "<BR><B>A drone is prepared. Select 'Join As Drone' from the Ghost tab to spawn as a maintenance drone.</B>")
 
-/obj/machinery/drone_fabricator/proc/create_drone(var/client/player)
+/obj/machinery/drone_fabricator/proc/create_drone(client/player)
 
 	if(stat & NOPOWER)
 		return
@@ -93,7 +93,7 @@
 	set desc = "If there is a powered, enabled fabricator in the game world with a prepared chassis, join as a maintenance drone."
 	try_drone_spawn(src)
 
-/proc/try_drone_spawn(var/mob/user, var/obj/machinery/drone_fabricator/fabricator)
+/proc/try_drone_spawn(mob/user, obj/machinery/drone_fabricator/fabricator)
 
 	if(GAME_STATE < RUNLEVEL_GAME)
 		to_chat(user, "<span class='danger'>The game hasn't started yet!</span>")

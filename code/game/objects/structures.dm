@@ -13,7 +13,7 @@
 	var/footstep_type
 	var/mob_offset = 0 //used for on_structure_offset mob animation
 
-/obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/wallbreaker)
+/obj/structure/attack_generic(mob/user, damage, attack_verb, wallbreaker)
 	if(wallbreaker && damage && breakable)
 		visible_message("<span class='danger'>\The [user] smashes the \[src] to pieces!</span>")
 		attack_animation(user)
@@ -24,7 +24,7 @@
 	damage_health(damage, DAMAGE_BRUTE)
 	return 1
 
-/obj/structure/proc/mob_breakout(var/mob/living/escapee)
+/obj/structure/proc/mob_breakout(mob/living/escapee)
 	set waitfor = FALSE
 	return FALSE
 
@@ -82,7 +82,7 @@
 				attack_generic(user,1,"slices")
 	return ..()
 
-/obj/structure/grab_attack(var/obj/item/grab/G)
+/obj/structure/grab_attack(obj/item/grab/G)
 	if (!G.force_danger())
 		to_chat(G.assailant, "<span class='danger'>You need a better grip to do that!</span>")
 		return TRUE
@@ -119,7 +119,7 @@
 /obj/structure/proc/can_visually_connect()
 	return anchored
 
-/obj/structure/proc/can_visually_connect_to(var/obj/structure/S)
+/obj/structure/proc/can_visually_connect_to(obj/structure/S)
 	return istype(S, src)
 
 /obj/structure/proc/refresh_neighbors()

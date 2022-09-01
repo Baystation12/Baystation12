@@ -17,7 +17,7 @@
 		return list(holder)
 	. = null
 
-/spell/veil_of_shadows/cast(var/list/targets, var/mob/user)
+/spell/veil_of_shadows/cast(list/targets, mob/user)
 	var/mob/living/carbon/human/H = user
 	H.AddMovementHandler(/datum/movement_handler/mob/incorporeal)
 	if(H.add_cloaking_source(src))

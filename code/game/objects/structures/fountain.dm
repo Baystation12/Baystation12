@@ -16,7 +16,7 @@
 	light_color = get_random_colour(lower = 190)
 	set_light(0.6, 3, 5, 2, light_color)
 
-/obj/structure/fountain/attack_hand(var/mob/living/user as mob)
+/obj/structure/fountain/attack_hand(mob/living/user as mob)
 	if(user.incapacitated())
 		return
 	if(!CanPhysicallyInteract(user))
@@ -34,7 +34,7 @@
 	else
 		visible_message("\The [user] retracts their hand suddenly.")
 
-/obj/structure/fountain/proc/time_dilation(var/mob/living/carbon/human/user as mob)
+/obj/structure/fountain/proc/time_dilation(mob/living/carbon/human/user as mob)
 	for(var/mob/living/L in oviewers(7, src))
 		L.flash_eyes(3)
 		L.eye_blurry += 9

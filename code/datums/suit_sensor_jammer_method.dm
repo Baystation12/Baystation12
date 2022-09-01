@@ -3,7 +3,7 @@
 	var/energy_cost
 	var/list/jammer_methods
 
-/suit_sensor_jammer_method/New(var/holder, var/proc_call)
+/suit_sensor_jammer_method/New(holder, proc_call)
 	..()
 	for(var/jammer_method in jammer_methods)
 		var/jammer_method_type = jammer_methods[jammer_method]

@@ -3,21 +3,21 @@
 	var/datum/mob_lite/last_attacked_ = null
 	var/mob/attack_logs_ = list()
 
-/proc/log_and_message_admins(var/message as text, var/mob/user = usr, var/turf/location)
+/proc/log_and_message_admins(message as text, mob/user = usr, turf/location)
 	var/turf/T = location ? get_turf(location) : (user ? get_turf(user) : null)
 	message = append_admin_tools(message, user, T)
 
 	log_admin(user ? "[key_name(user)] [message]" : "EVENT [message]")
 	message_admins(user ? "[key_name_admin(user)] [message]" : "EVENT [message]")
 
-/proc/log_and_message_staff(var/message as text, var/mob/user = usr, var/turf/location)
+/proc/log_and_message_staff(message as text, mob/user = usr, turf/location)
 	var/turf/T = location ? location : (user ? get_turf(user) : null)
 	message = append_admin_tools(message, user, T)
 
 	log_admin(user ? "[key_name(user)] [message]" : "EVENT [message]")
 	message_staff(user ? "[key_name_admin(user)] [message]" : "EVENT [message]")
 
-/proc/log_and_message_admins_many(var/list/mob/users, var/message)
+/proc/log_and_message_admins_many(list/mob/users, message)
 	if(!users || !users.len)
 		return
 
@@ -28,17 +28,17 @@
 	log_admin("[english_list(user_keys)] [message]")
 	message_admins("[english_list(user_keys)] [message]")
 
-/proc/admin_attacker_log(var/mob/attacker, var/attacker_message)
+/proc/admin_attacker_log(mob/attacker, attacker_message)
 	if(!attacker)
 		EXCEPTION("No attacker was supplied.")
 	admin_attack_log(attacker, null, attacker_message, null, attacker_message)
 
-/proc/admin_victim_log(var/mob/victim, var/victim_message)
+/proc/admin_victim_log(mob/victim, victim_message)
 	if(!victim)
 		EXCEPTION("No victim was supplied.")
 	admin_attack_log(null, victim, null, victim_message, victim_message)
 
-/proc/admin_attack_log(var/mob/attacker, var/mob/victim, var/attacker_message, var/victim_message, var/admin_message)
+/proc/admin_attack_log(mob/attacker, mob/victim, attacker_message, victim_message, admin_message)
 	if(!(attacker || victim))
 		EXCEPTION("Neither attacker or victim was supplied.")
 	if ((attacker && !istype(attacker)) || (victim && !istype(victim)))
@@ -84,7 +84,7 @@
 	msg_admin_attack(full_admin_message)
 
 // Only store attack logs if any of the involved subjects have (had) a client
-/proc/store_admin_attack_log(var/mob/attacker, var/mob/victim)
+/proc/store_admin_attack_log(mob/attacker, mob/victim)
 	if(attacker && attacker.ckey)
 		return TRUE
 	if(victim && victim.ckey)
@@ -92,7 +92,7 @@
 	return FALSE
 
 // Only notify admins if all involved subjects have (had) a client
-/proc/notify_about_admin_attack_log(var/mob/attacker, var/mob/victim)
+/proc/notify_about_admin_attack_log(mob/attacker, mob/victim)
 	if(attacker && victim)
 		return attacker.ckey && victim.ckey
 	if(attacker)
@@ -101,7 +101,7 @@
 		return victim.ckey
 	return FALSE
 
-/proc/admin_attacker_log_many_victims(var/mob/attacker, var/list/mob/victims, var/attacker_message, var/victim_message, var/admin_message)
+/proc/admin_attacker_log_many_victims(mob/attacker, list/mob/victims, attacker_message, victim_message, admin_message)
 	if(!victims || !victims.len)
 		return
 
@@ -119,7 +119,7 @@
 	                 "was [violent]injected with \the [weapon] - [reagents] - [amount_transferred]u transferred",
 	                 "used \the [weapon] - [reagents] - to [violent]inject [amount_transferred]u into")
 
-/proc/append_admin_tools(var/message, var/mob, var/turf/location)
+/proc/append_admin_tools(message, mob, turf/location)
 	if(location)
 		message = message + " (<a HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>LOC</a>)"
 	if(mob)

@@ -37,7 +37,7 @@
 	. = jointext(., null)
 
 
-/datum/category_item/player_setup_item/physical/basic/OnTopic(var/href,var/list/href_list, var/mob/user)
+/datum/category_item/player_setup_item/physical/basic/OnTopic(href,list/href_list, mob/user)
 	if(href_list["rename"])
 		var/raw_name = input(user, "Choose your character's name:", "Character Name")  as text|null
 		if (!isnull(raw_name) && CanUseTopic(user))

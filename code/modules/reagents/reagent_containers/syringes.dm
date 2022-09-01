@@ -24,7 +24,7 @@
 	var/visible_name = "a syringe"
 	var/time = 30
 
-/obj/item/reagent_containers/syringe/Initialize(var/mapload)
+/obj/item/reagent_containers/syringe/Initialize(mapload)
 	. = ..()
 	update_icon()
 
@@ -107,7 +107,7 @@
 		filling.color = reagents.get_color()
 		underlays += filling
 
-/obj/item/reagent_containers/syringe/proc/handleTarget(var/atom/target, var/mob/user)
+/obj/item/reagent_containers/syringe/proc/handleTarget(atom/target, mob/user)
 	switch(mode)
 		if(SYRINGE_DRAW)
 			drawReagents(target, user)
@@ -115,7 +115,7 @@
 		if(SYRINGE_INJECT)
 			injectReagents(target, user)
 
-/obj/item/reagent_containers/syringe/proc/drawReagents(var/atom/target, var/mob/user)
+/obj/item/reagent_containers/syringe/proc/drawReagents(atom/target, mob/user)
 	if(!reagents.get_free_space())
 		to_chat(user, "<span class='warning'>The syringe is full.</span>")
 		mode = SYRINGE_INJECT
@@ -199,7 +199,7 @@
 		mode = SYRINGE_INJECT
 		update_icon()
 
-/obj/item/reagent_containers/syringe/proc/injectReagents(var/atom/target, var/mob/user)
+/obj/item/reagent_containers/syringe/proc/injectReagents(atom/target, mob/user)
 	if(ismob(target) && !user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
 		syringestab(target, user)
 
@@ -227,7 +227,7 @@
 		mode = SYRINGE_DRAW
 		update_icon()
 
-/obj/item/reagent_containers/syringe/proc/handleBodyBag(var/obj/structure/closet/body_bag/bag, var/mob/living/carbon/user)
+/obj/item/reagent_containers/syringe/proc/handleBodyBag(obj/structure/closet/body_bag/bag, mob/living/carbon/user)
 	if(bag.opened || !bag.contains_body)
 		return
 
@@ -235,7 +235,7 @@
 	if(L)
 		injectMob(L, user, bag)
 
-/obj/item/reagent_containers/syringe/proc/injectMob(var/mob/living/carbon/target, var/mob/living/carbon/user, var/atom/trackTarget)
+/obj/item/reagent_containers/syringe/proc/injectMob(mob/living/carbon/target, mob/living/carbon/user, atom/trackTarget)
 	if(!trackTarget)
 		trackTarget = target
 
@@ -281,7 +281,7 @@
 		mode = SYRINGE_DRAW
 		update_icon()
 
-/obj/item/reagent_containers/syringe/proc/syringestab(var/mob/living/carbon/target, var/mob/living/carbon/user)
+/obj/item/reagent_containers/syringe/proc/syringestab(mob/living/carbon/target, mob/living/carbon/user)
 	var/should_admin_log = reagents.should_admin_log()
 	if(istype(target, /mob/living/carbon/human))
 
@@ -339,11 +339,11 @@
 	visible_name = "a giant syringe"
 	time = 300
 
-/obj/item/reagent_containers/syringe/ld50_syringe/syringestab(var/mob/living/carbon/target, var/mob/living/carbon/user)
+/obj/item/reagent_containers/syringe/ld50_syringe/syringestab(mob/living/carbon/target, mob/living/carbon/user)
 	to_chat(user, "<span class='notice'>This syringe is too big to stab someone with it.</span>")
 	return // No instant injecting
 
-/obj/item/reagent_containers/syringe/ld50_syringe/drawReagents(var/target, var/mob/user)
+/obj/item/reagent_containers/syringe/ld50_syringe/drawReagents(target, mob/user)
 	if(ismob(target)) // No drawing 60 units of blood at once
 		to_chat(user, "<span class='notice'>This needle isn't designed for drawing blood.</span>")
 		return

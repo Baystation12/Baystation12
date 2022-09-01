@@ -21,7 +21,7 @@
 	var/ui_ref
 	var/list/monitored_alarms = list()
 
-/datum/nano_module/atmos_control/New(atmos_computer, var/list/req_access, monitored_alarm_ids)
+/datum/nano_module/atmos_control/New(atmos_computer, list/req_access, monitored_alarm_ids)
 	..()
 
 	if(istype(req_access))
@@ -48,7 +48,7 @@
 				alarm.ui_interact(usr, master_ui = ui_ref, state = TS)
 		return 1
 
-/datum/nano_module/atmos_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/atmos_control/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, master_ui = null, datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 	var/alarms[0]
 	var/alarmsAlert[0]
@@ -91,17 +91,17 @@
 	var/datum/nano_module/atmos_control/atmos_control	= null
 	var/obj/machinery/alarm/air_alarm					= null
 
-/datum/topic_state/air_alarm/can_use_topic(var/src_object, var/mob/user)
+/datum/topic_state/air_alarm/can_use_topic(src_object, mob/user)
 	if(alarm_has_access(user))
 		return STATUS_INTERACTIVE
 	return STATUS_UPDATE
 
-/datum/topic_state/air_alarm/href_list(var/mob/user)
+/datum/topic_state/air_alarm/href_list(mob/user)
 	var/list/extra_href = list()
 	extra_href["remote_connection"] = 1
 	extra_href["remote_access"] = alarm_has_access(user)
 
 	return extra_href
 
-/datum/topic_state/air_alarm/proc/alarm_has_access(var/mob/user)
+/datum/topic_state/air_alarm/proc/alarm_has_access(mob/user)
 	return user && (isAI(user) || atmos_control.access.allowed(user) || atmos_control.emagged || air_alarm.rcon_setting == RCON_YES || (air_alarm.alarm_area.atmosalm && air_alarm.rcon_setting == RCON_AUTO))

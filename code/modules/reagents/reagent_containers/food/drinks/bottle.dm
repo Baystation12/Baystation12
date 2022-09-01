@@ -24,7 +24,7 @@
 	return ..()
 
 
-/obj/item/reagent_containers/food/drinks/bottle/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
+/obj/item/reagent_containers/food/drinks/bottle/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	..()
 	if (can_shatter && TT.thrower)
 		if (TT.speed > throw_speed || smash_check(TT.dist_travelled))

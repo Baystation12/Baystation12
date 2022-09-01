@@ -14,7 +14,7 @@ var/global/repository/cameras/camera_repository = new()
 	networks = list()
 	..()
 
-/repository/cameras/proc/cameras_in_network(var/network)
+/repository/cameras/proc/cameras_in_network(network)
 	setup_cache()
 	var/list/network_list = networks[network]
 	return network_list

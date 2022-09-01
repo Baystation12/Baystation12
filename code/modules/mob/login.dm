@@ -43,12 +43,12 @@
 			params["name"] = real_name || name
 			world.Export("[config.login_export_addr]?[list2params(params)]", null, 1)
 
-/mob/proc/maybe_send_staffwarns(var/action)
+/mob/proc/maybe_send_staffwarns(action)
 	if(client?.staffwarn)
 		for(var/client/C as anything in GLOB.admins)
 			send_staffwarn(C, action)
 
-/mob/proc/send_staffwarn(var/client/C, var/action, var/noise = 1)
+/mob/proc/send_staffwarn(client/C, action, noise = 1)
 	if(check_rights((R_ADMIN|R_MOD),0,C))
 		to_chat(C,"<span class='staffwarn'>StaffWarn: [client.ckey] [action]</span><br><span class='notice'>[client.staffwarn]</span>")
 		if(noise && C.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == GLOB.PREF_HEAR)

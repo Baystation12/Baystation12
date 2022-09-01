@@ -246,7 +246,7 @@
 		unit.ai_status_image = image('icons/misc/buildmode.dmi', unit, "ai_1")
 		user.add_client_image(unit.ai_status_image)
 
-/proc/build_drag(var/client/user, buildmode, var/atom/fromatom, var/atom/toatom, var/atom/fromloc, var/atom/toloc, var/fromcontrol, var/tocontrol, params)
+/proc/build_drag(client/user, buildmode, atom/fromatom, atom/toatom, atom/fromloc, atom/toloc, fromcontrol, tocontrol, params)
 	if (!istype(buildmode, /datum/build_mode/ai))
 		return
 

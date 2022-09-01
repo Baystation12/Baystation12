@@ -6,7 +6,7 @@ var/global/repository/uplink_purchases/uplink_purchase_repository = new()
 /repository/uplink_purchases/New()
 	purchases_by_mind = list()
 
-/repository/uplink_purchases/proc/add_entry(var/datum/mind/m, var/item, var/cost)
+/repository/uplink_purchases/proc/add_entry(datum/mind/m, item, cost)
 	var/uplink_purchase_entry/upe = purchases_by_mind[m]
 	if(!upe)
 		upe = new()
@@ -38,6 +38,6 @@ var/global/repository/uplink_purchases/uplink_purchase_repository = new()
 /uplink_purchase_entry/New()
 	purchased_items = new()
 
-/uplink_purchase_entry/proc/add_entry(var/item, var/cost)
+/uplink_purchase_entry/proc/add_entry(item, cost)
 	total_cost += cost
 	purchased_items[item] = purchased_items[item] + 1

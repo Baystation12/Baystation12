@@ -6,14 +6,14 @@
 			return disrupted_by
 	return FALSE
 
-/atom/proc/do_psionics_check(var/stress, var/atom/source)
+/atom/proc/do_psionics_check(stress, atom/source)
 	var/turf/T = get_turf(src)
 	if(istype(T) && T != src)
 		return T.do_psionics_check(stress, source)
 	withstand_psi_stress(stress, source)
 	. = disrupts_psionics()
 
-/atom/proc/withstand_psi_stress(var/stress, var/atom/source)
+/atom/proc/withstand_psi_stress(stress, atom/source)
 	. = max(stress, 0)
 	if(.)
 		for(var/thing in contents)

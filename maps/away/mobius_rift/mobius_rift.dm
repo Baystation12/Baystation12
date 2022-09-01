@@ -25,7 +25,7 @@
 	var/x_shift = 0
 	var/y_shift = 0
 
-/obj/effect/step_trigger/mobius_rift/seamless_portal/Initialize(var/mapload, var/towards)
+/obj/effect/step_trigger/mobius_rift/seamless_portal/Initialize(mapload, towards)
 	. = ..()
 	if (towards == NORTH)
 		y_shift = 1
@@ -36,10 +36,10 @@
 	if (towards == WEST)
 		x_shift = -1
 
-/obj/effect/step_trigger/mobius_rift/seamless_portal/proc/set_destination(var/D)
+/obj/effect/step_trigger/mobius_rift/seamless_portal/proc/set_destination(D)
 	dest = D
 
-/obj/effect/step_trigger/mobius_rift/seamless_portal/Trigger(var/atom/movable/AM)
+/obj/effect/step_trigger/mobius_rift/seamless_portal/Trigger(atom/movable/AM)
 	if(!istype(AM))
 		return
 	//moving player one tile past portal to avoid portal spamming
@@ -88,7 +88,7 @@
 /obj/effect/mobius_rift/chamber
 	var/list/portals = list()
 
-/obj/effect/mobius_rift/chamber/Initialize(var/mapload, var/grid_size)//NORTH, SOUTH, EAST, WEST
+/obj/effect/mobius_rift/chamber/Initialize(mapload, grid_size)//NORTH, SOUTH, EAST, WEST
 	. = ..()
 	var/turf/T
 	T = locate(src.x, src.y + round(grid_size/2), src.z)
@@ -104,10 +104,10 @@
 	var/W = new /obj/effect/step_trigger/mobius_rift/seamless_portal(T, WEST)
 	portals["WEST"] = W
 
-/obj/effect/mobius_rift/chamber/proc/set_portals(var/list/destinations)
+/obj/effect/mobius_rift/chamber/proc/set_portals(list/destinations)
 	for (var/iter = 1 to portals.len)
 		var/obj/effect/step_trigger/mobius_rift/seamless_portal/P = portals[portals[iter]]
 		P.set_destination(destinations[iter])
 
-/obj/effect/mobius_rift/chamber/proc/get_portal(var/towards)
+/obj/effect/mobius_rift/chamber/proc/get_portal(towards)
 	return portals[towards]

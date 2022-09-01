@@ -54,7 +54,7 @@
 		SKILL_ELECTRICAL   = SKILL_EXPERT
 	)
 
-/obj/item/robot_module/drone/finalize_equipment(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/drone/finalize_equipment(mob/living/silicon/robot/R)
 	. = ..()
 	if(istype(R))
 		R.internals = locate(/obj/item/tank/jetpack/carbondioxide) in equipment
@@ -106,7 +106,7 @@
 	var/obj/item/stack/material/cyborg/plastic/P = locate() in equipment
 	P.synths = list(plastic)
 
-/obj/item/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/drone/respawn_consumable(mob/living/silicon/robot/R, amount)
 	..()
 	var/obj/item/reagent_containers/spray/cleaner/drone/SC = locate() in equipment
 	SC.reagents.add_reagent(/datum/reagent/space_cleaner, 8 * amount)
@@ -119,7 +119,7 @@
 	equipment += /obj/item/rcd/borg
 	. = ..()
 
-/obj/item/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/drone/respawn_consumable(mob/living/silicon/robot/R, amount)
 	var/obj/item/device/lightreplacer/LR = locate() in equipment
 	LR.Charge(R, amount)
 	..()

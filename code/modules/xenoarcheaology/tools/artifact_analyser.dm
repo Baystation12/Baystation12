@@ -27,7 +27,7 @@
 /obj/machinery/artifact_analyser/DefaultTopicState()
 	return GLOB.physical_state
 
-/obj/machinery/artifact_analyser/interface_interact(var/mob/user)
+/obj/machinery/artifact_analyser/interface_interact(mob/user)
 	interact(user)
 	return TRUE
 
@@ -128,7 +128,7 @@
 		interact(user)
 
 //hardcoded responses, oh well
-/obj/machinery/artifact_analyser/proc/get_scan_info(var/obj/scanned_obj)
+/obj/machinery/artifact_analyser/proc/get_scan_info(obj/scanned_obj)
 	switch(scanned_obj.type)
 		if(/obj/machinery/auto_cloner)
 			return "Automated cloning pod - appears to rely on an artificial ecosystem formed by semi-organic nanomachines and the contained liquid.<br>The liquid resembles protoplasmic residue supportive of unicellular organism developmental conditions.<br>The structure is composed of a titanium alloy."

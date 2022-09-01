@@ -14,7 +14,7 @@ PROCESSING_SUBSYSTEM_DEF(psi)
 	var/list/armour_faculty_by_type = list()
 	var/list/faculties_by_intent  = list()
 
-/datum/controller/subsystem/processing/psi/proc/get_faculty(var/faculty)
+/datum/controller/subsystem/processing/psi/proc/get_faculty(faculty)
 	return faculties_by_name[faculty] || faculties_by_id[faculty]
 
 /datum/controller/subsystem/processing/psi/Initialize(start_uptime)

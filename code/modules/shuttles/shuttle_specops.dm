@@ -22,12 +22,12 @@
 	announcer = new /obj/item/device/radio/intercom(null)//We need a fake AI to announce some stuff below. Otherwise it will be wonky.
 	announcer.config(list("Response Team" = 0))
 
-/datum/shuttle/autodock/ferry/specops/proc/radio_announce(var/message)
+/datum/shuttle/autodock/ferry/specops/proc/radio_announce(message)
 	if(announcer)
 		announcer.autosay(message, "A.L.I.C.E.", "Response Team")
 
 
-/datum/shuttle/autodock/ferry/specops/launch(var/user)
+/datum/shuttle/autodock/ferry/specops/launch(user)
 	if (!can_launch())
 		return
 

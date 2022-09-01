@@ -18,7 +18,7 @@ GLOBAL_DATUM_INIT(see_invisible_set_event, /decl/observ/see_invisible_set, new)
 * See Invisible Set Handling *
 *****************************/
 
-/mob/proc/set_see_invisible(var/new_see_invisible)
+/mob/proc/set_see_invisible(new_see_invisible)
 	var/old_see_invisible = see_invisible
 	if(old_see_invisible != new_see_invisible)
 		see_invisible = new_see_invisible

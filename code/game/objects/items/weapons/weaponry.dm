@@ -179,7 +179,7 @@
 			visible_message("<span class='danger'>\The [src] is torn apart!</span>")
 		qdel(src)
 
-/obj/effect/energy_net/bullet_act(var/obj/item/projectile/Proj)
+/obj/effect/energy_net/bullet_act(obj/item/projectile/Proj)
 	health -= Proj.get_structure_damage()
 	healthcheck()
 	return 0
@@ -188,7 +188,7 @@
 	health = 0
 	healthcheck()
 
-/obj/effect/energy_net/attack_hand(var/mob/user)
+/obj/effect/energy_net/attack_hand(mob/user)
 
 	var/mob/living/carbon/human/H = user
 	if(istype(H))

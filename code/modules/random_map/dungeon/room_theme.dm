@@ -12,14 +12,14 @@
 	var/layout_chance = 50//chance of having a lyout period
 	var/list/room_layouts = list()
 
-/datum/room_theme/New(var/x,var/y,var/z)
+/datum/room_theme/New(x,y,z)
 	xorigin = x
 	yorigin = y
 	zorigin = z
 	if(!lock_data && lock_complexity_max > 0)
 		lock_data = generateRandomString(rand(lock_complexity_min,lock_complexity_max))
 
-/datum/room_theme/proc/apply_room_theme(var/x,var/y,var/value)
+/datum/room_theme/proc/apply_room_theme(x,y,value)
 	var/turf/T = locate(x,y,zorigin)
 	if(!T)
 		return 0
@@ -39,7 +39,7 @@
 			path = floor_type
 	T.ChangeTurf(path)
 
-/datum/room_theme/proc/apply_room_door(var/x,var/y)
+/datum/room_theme/proc/apply_room_door(x,y)
 	if(!door_type)
 		return 0
 	var/turf/T = locate(xorigin+x-1,yorigin+y-1,zorigin)

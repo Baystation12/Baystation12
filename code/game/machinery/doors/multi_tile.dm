@@ -47,7 +47,7 @@
 	else
 		set_dir(SOUTH)
 
-/obj/machinery/door/airlock/multi_tile/update_connections(var/propagate = 0)
+/obj/machinery/door/airlock/multi_tile/update_connections(propagate = 0)
 	var/dirs = 0
 
 	for(var/direction in GLOB.cardinal)

@@ -124,7 +124,7 @@
 		log_debug("Invalid var type in [type] emag creation - [emag]")
 		emag = null
 
-/obj/item/robot_module/proc/Reset(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/Reset(mob/living/silicon/robot/R)
 	remove_languages(R)
 	remove_subsystems(R)
 	remove_status_flags(R)
@@ -155,7 +155,7 @@
 			S.emp_act(severity)
 	..()
 
-/obj/item/robot_module/proc/respawn_consumable(var/mob/living/silicon/robot/R, var/rate)
+/obj/item/robot_module/proc/respawn_consumable(mob/living/silicon/robot/R, rate)
 	var/obj/item/device/flash/F = locate() in equipment
 	if(F)
 		if(F.broken)
@@ -169,7 +169,7 @@
 	for(var/datum/matter_synth/T in synths)
 		T.add_charge(T.recharge_rate * rate)
 
-/obj/item/robot_module/proc/add_languages(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/add_languages(mob/living/silicon/robot/R)
 	// Stores the languages as they were before receiving the module, and whether they could be synthezized.
 	for(var/datum/language/language_datum in R.languages)
 		original_languages[language_datum] = (language_datum in R.speech_synthesizer_langs)
@@ -177,7 +177,7 @@
 	for(var/language in languages)
 		R.add_language(language, languages[language])
 
-/obj/item/robot_module/proc/remove_languages(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/remove_languages(mob/living/silicon/robot/R)
 	// Clear all added languages, whether or not we originally had them.
 	for(var/language in languages)
 		R.remove_language(language)
@@ -188,32 +188,32 @@
 		R.add_language(language_datum.name, original_languages[original_language])
 	original_languages.Cut()
 
-/obj/item/robot_module/proc/add_subsystems(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/add_subsystems(mob/living/silicon/robot/R)
 	for(var/subsystem_type in subsystems)
 		R.init_subsystem(subsystem_type)
 
-/obj/item/robot_module/proc/remove_subsystems(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/remove_subsystems(mob/living/silicon/robot/R)
 	for(var/subsystem_type in subsystems)
 		R.remove_subsystem(subsystem_type)
 
-/obj/item/robot_module/proc/apply_status_flags(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/apply_status_flags(mob/living/silicon/robot/R)
 	if(!can_be_pushed)
 		R.status_flags &= ~CANPUSH
 
-/obj/item/robot_module/proc/remove_status_flags(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/remove_status_flags(mob/living/silicon/robot/R)
 	if(!can_be_pushed)
 		R.status_flags |= CANPUSH
 
 /obj/item/robot_module/proc/handle_emagged()
 	return
 
-/obj/item/robot_module/proc/grant_skills(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/grant_skills(mob/living/silicon/robot/R)
 	reset_skills(R) // for safety
 	var/list/skill_mod = list()
 	for(var/skill_type in skills)
 		skill_mod[skill_type] = skills[skill_type] - SKILL_MIN // the buff is additive, so normalize accordingly
 	R.buff_skill(skill_mod, buff_type = /datum/skill_buff/robot)
 
-/obj/item/robot_module/proc/reset_skills(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/reset_skills(mob/living/silicon/robot/R)
 	for(var/datum/skill_buff/buff in R.fetch_buffs_of_type(/datum/skill_buff/robot))
 		buff.remove()

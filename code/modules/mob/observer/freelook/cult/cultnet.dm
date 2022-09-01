@@ -2,7 +2,7 @@
 	valid_source_types = list(/mob/living, /mob/observer/eye/cult)
 	chunk_type = /datum/chunk/cultnet
 
-/datum/chunk/cultnet/acquire_visible_turfs(var/list/visible)
+/datum/chunk/cultnet/acquire_visible_turfs(list/visible)
 	for(var/source in sources)
 		if(istype(source, /mob/living))
 			var/mob/living/L = source

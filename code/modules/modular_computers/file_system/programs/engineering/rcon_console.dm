@@ -23,7 +23,7 @@
 	var/hide_SMES_details = 0
 	var/hide_breakers = 0
 
-/datum/nano_module/rcon/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/rcon/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1, datum/topic_state/state = GLOB.default_state)
 	FindDevices() // Update our devices list
 	var/list/data = host.initial_data()
 
@@ -111,7 +111,7 @@
 // Proc: GetSMESByTag()
 // Parameters: 1 (tag - RCON tag of SMES we want to look up)
 // Description: Looks up and returns SMES which has matching RCON tag
-/datum/nano_module/rcon/proc/GetSMESByTag(var/tag)
+/datum/nano_module/rcon/proc/GetSMESByTag(tag)
 	if(!tag)
 		return
 

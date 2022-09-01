@@ -62,7 +62,7 @@
 
 
 //apart of reskins that have two sprites, touching may result in frustration and breaks
-/obj/item/gun/projectile/pistol/sec/detective/attack_hand(var/mob/living/user)
+/obj/item/gun/projectile/pistol/sec/detective/attack_hand(mob/living/user)
 	if(!unique_reskin && loc == user)
 		reskin_gun(user)
 		return

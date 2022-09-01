@@ -1,4 +1,4 @@
-/mob/living/carbon/human/proc/get_unarmed_attack(var/mob/target, var/hit_zone = null)
+/mob/living/carbon/human/proc/get_unarmed_attack(mob/target, hit_zone = null)
 	if(!hit_zone)
 		hit_zone = zone_sel.selecting
 
@@ -303,7 +303,7 @@
 	If you are applying pressure to another and attempt to apply pressure to yourself, you'll have to switch to an empty hand which will also stop do_after()
 	Changing targeted zones should also stop do_after(), preventing you from applying pressure to more than one body part at once.
 */
-/mob/living/carbon/human/proc/apply_pressure(mob/living/user, var/target_zone)
+/mob/living/carbon/human/proc/apply_pressure(mob/living/user, target_zone)
 	var/obj/item/organ/external/organ = get_organ(target_zone)
 	if(!organ || !(organ.status & ORGAN_BLEEDING) || BP_IS_ROBOTIC(organ))
 		return 0

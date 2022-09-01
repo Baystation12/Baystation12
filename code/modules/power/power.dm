@@ -34,7 +34,7 @@
 	return 1 //doesn't require an external power source
 
 // common helper procs for all power machines
-/obj/machinery/power/drain_power(var/drain_check, var/surge, var/amount = 0)
+/obj/machinery/power/drain_power(drain_check, surge, amount = 0)
 	if(drain_check)
 		return 1
 
@@ -42,13 +42,13 @@
 		powernet.trigger_warning()
 		return powernet.draw_power(amount)
 
-/obj/machinery/power/proc/add_avail(var/amount)
+/obj/machinery/power/proc/add_avail(amount)
 	if(powernet)
 		powernet.newavail += amount
 		return 1
 	return 0
 
-/obj/machinery/power/proc/draw_power(var/amount)
+/obj/machinery/power/proc/draw_power(amount)
 	if(powernet)
 		return powernet.draw_power(amount)
 	return 0
@@ -164,7 +164,7 @@
 // returns a list of all power-related objects (nodes, cable, junctions) in turf,
 // excluding source, that match the direction d
 // if unmarked==1, only return those with no powernet
-/proc/power_list(var/turf/T, var/source, var/d, var/unmarked=0, var/cable_only = 0)
+/proc/power_list(turf/T, source, d, unmarked=0, cable_only = 0)
 	. = list()
 
 	var/reverse = d ? GLOB.reverse_dir[d] : 0
@@ -188,7 +188,7 @@
 	return .
 
 //remove the old powernet and replace it with a new one throughout the network.
-/proc/propagate_network(var/obj/O, var/datum/powernet/PN)
+/proc/propagate_network(obj/O, datum/powernet/PN)
 	//to_world_log("propagating new network")
 	var/list/worklist = list()
 	var/list/found_machines = list()
@@ -221,7 +221,7 @@
 
 
 //Merge two powernets, the bigger (in cable length term) absorbing the other
-/proc/merge_powernets(var/datum/powernet/net1, var/datum/powernet/net2)
+/proc/merge_powernets(datum/powernet/net1, datum/powernet/net2)
 	if(!net1 || !net2) //if one of the powernet doesn't exist, return
 		return
 
@@ -251,7 +251,7 @@
 //power_source is a source of electricity, can be powercell, area, apc, cable, powernet or null
 //source is an object caused electrocuting (airlock, grille, etc)
 //No animations will be performed by this proc.
-/proc/electrocute_mob(mob/living/carbon/M as mob, var/power_source, var/obj/source, var/siemens_coeff = 1.0)
+/proc/electrocute_mob(mob/living/carbon/M as mob, power_source, obj/source, siemens_coeff = 1.0)
 	var/area/source_area
 	if(istype(power_source,/area))
 		source_area = power_source

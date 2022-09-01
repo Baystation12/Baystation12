@@ -123,12 +123,12 @@
 			new_overlays += GLOB.hardpoint_bar_cache[i]
 	overlays = new_overlays
 
-/obj/screen/exosuit/hardpoint/Initialize(mapload, var/newtag)
+/obj/screen/exosuit/hardpoint/Initialize(mapload, newtag)
 	. = ..()
 	hardpoint_tag = newtag
 	name = "hardpoint ([hardpoint_tag])"
 
-/obj/screen/exosuit/hardpoint/Click(var/location, var/control, var/params)
+/obj/screen/exosuit/hardpoint/Click(location, control, params)
 
 	if(!(..()))
 		return

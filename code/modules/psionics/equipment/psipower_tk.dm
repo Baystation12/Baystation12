@@ -14,7 +14,7 @@
 		return
 	. = ..()
 
-/obj/item/psychic_power/telekinesis/proc/set_focus(var/atom/movable/_focus)
+/obj/item/psychic_power/telekinesis/proc/set_focus(atom/movable/_focus)
 
 	if(!_focus.simulated || !istype(_focus.loc, /turf))
 		return FALSE
@@ -45,12 +45,12 @@
 	overlays += I
 	return TRUE
 
-/obj/item/psychic_power/telekinesis/attack_self(var/mob/user)
+/obj/item/psychic_power/telekinesis/attack_self(mob/user)
 	user.visible_message(SPAN_NOTICE("\The [user] makes a strange gesture."))
 	sparkle()
 	return focus.do_simple_ranged_interaction(user)
 
-/obj/item/psychic_power/telekinesis/afterattack(var/atom/target, var/mob/living/user, var/proximity)
+/obj/item/psychic_power/telekinesis/afterattack(atom/target, mob/living/user, proximity)
 
 	if(!target || !user || (isobj(target) && !isturf(target.loc)) || !user.psi || !user.psi.can_use() || !user.psi.spend_power(8))
 		return

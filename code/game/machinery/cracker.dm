@@ -30,7 +30,7 @@
 	update_icon()
 	return TRUE
 
-/obj/machinery/portable_atmospherics/cracker/attackby(var/obj/item/thing, var/mob/user)
+/obj/machinery/portable_atmospherics/cracker/attackby(obj/item/thing, mob/user)
 	// remove deuterium as a reagent
 	if(thing.is_open_container() && thing.reagents)
 		if(!reagent_buffer[MATERIAL_DEUTERIUM] || reagent_buffer[MATERIAL_DEUTERIUM] <= 0)

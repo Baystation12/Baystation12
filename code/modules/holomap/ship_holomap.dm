@@ -78,7 +78,7 @@
 
 	update_icon()
 
-/obj/machinery/ship_map/attack_hand(var/mob/user)
+/obj/machinery/ship_map/attack_hand(mob/user)
 	if(watching_mob && (watching_mob != user))
 		to_chat(user, SPAN_WARNING("Someone else is currently watching the holomap."))
 		return
@@ -88,7 +88,7 @@
 	startWatching(user)
 
 // Let people bump up against it to watch
-/obj/machinery/ship_map/Bumped(var/atom/movable/AM)
+/obj/machinery/ship_map/Bumped(atom/movable/AM)
 	if(!watching_mob && isliving(AM) && AM.loc == loc)
 		startWatching(AM)
 
@@ -101,7 +101,7 @@
 	else
 		return TRUE
 
-/obj/machinery/ship_map/proc/startWatching(var/mob/user)
+/obj/machinery/ship_map/proc/startWatching(mob/user)
 	if(isliving(user) && anchored && !(stat & (NOPOWER|BROKEN)))
 		if(user.client)
 			holomap_datum.station_map.loc = GLOB.global_hud.holomap  // Put the image on the holomap hud

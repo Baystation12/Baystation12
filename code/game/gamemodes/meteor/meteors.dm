@@ -67,11 +67,11 @@ var/global/list/meteors_cataclysm = list(\
 //Meteor spawning global procs
 ///////////////////////////////
 
-/proc/spawn_meteors(var/number = 10, var/list/meteortypes, var/startSide, var/zlevel)
+/proc/spawn_meteors(number = 10, list/meteortypes, startSide, zlevel)
 	for(var/i = 0; i < number; i++)
 		spawn_meteor(meteortypes, startSide, zlevel)
 
-/proc/spawn_meteor(var/list/meteortypes, var/startSide, var/zlevel)
+/proc/spawn_meteor(list/meteortypes, startSide, zlevel)
 	var/turf/pickedstart = spaceDebrisStartLoc(startSide, zlevel)
 	var/turf/pickedgoal = spaceDebrisFinishLoc(startSide, zlevel)
 
@@ -183,7 +183,7 @@ var/global/list/meteors_cataclysm = list(\
 /obj/effect/meteor/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return istype(mover, /obj/effect/meteor) ? 1 : ..()
 
-/obj/effect/meteor/proc/ram_turf(var/turf/T)
+/obj/effect/meteor/proc/ram_turf(turf/T)
 	//first bust whatever is in the turf
 	for(var/atom/A in T)
 		if(A != src && !A.CanPass(src, src.loc, 0.5, 0)) //only ram stuff that would actually block us

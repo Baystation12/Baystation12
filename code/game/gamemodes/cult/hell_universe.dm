@@ -13,7 +13,7 @@ In short:
 	name = "Hell Rising"
 	desc = "OH FUCK OH FUCK OH FUCK"
 
-/datum/universal_state/hell/OnShuttleCall(var/mob/user)
+/datum/universal_state/hell/OnShuttleCall(mob/user)
 	return 1
 	/*
 	if(user)

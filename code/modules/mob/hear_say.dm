@@ -111,14 +111,14 @@
 	on_hear_say({"<span class="game say">[display_controls]<span class="name">[display_name]</span>[alt_name] [display_message]</span>"})
 
 
-/mob/proc/on_hear_say(var/message)
+/mob/proc/on_hear_say(message)
 	to_chat(src, message)
 
-/mob/living/silicon/on_hear_say(var/message)
+/mob/living/silicon/on_hear_say(message)
 	var/time = say_timestamp()
 	to_chat(src, "[time] [message]")
 
-/mob/proc/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0, var/vname ="")
+/mob/proc/hear_radio(message, verb="says", datum/language/language=null, part_a, part_b, part_c, mob/speaker = null, hard_to_hear = 0, vname ="")
 
 	if(!client)
 		return
@@ -266,7 +266,7 @@
 	var/time = say_timestamp()
 	to_chat(src, "[time][part_a][track][part_b][formatted][part_c]")
 
-/mob/proc/hear_signlang(var/message, var/verb = "gestures", var/datum/language/language, var/mob/speaker = null)
+/mob/proc/hear_signlang(message, verb = "gestures", datum/language/language, mob/speaker = null)
 	if(!client)
 		return
 
@@ -301,7 +301,7 @@
 			M.show_message(message)
 	src.show_message(message)
 
-/mob/proc/hear_sleep(var/message)
+/mob/proc/hear_sleep(message)
 	if (is_deaf())
 		return
 	var/heard = ""

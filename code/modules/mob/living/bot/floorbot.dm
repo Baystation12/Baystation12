@@ -58,7 +58,7 @@
 		if(2)
 			. += "ERROROROROROR-----"
 
-/mob/living/bot/floorbot/ProcessCommand(var/mob/user, var/command, var/href_list)
+/mob/living/bot/floorbot/ProcessCommand(mob/user, command, href_list)
 	..()
 	if(CanAccessPanel(user))
 		switch(command)
@@ -75,7 +75,7 @@
 				if(emagged < 2)
 					emagged = !emagged
 
-/mob/living/bot/floorbot/emag_act(var/remaining_charges, var/mob/user)
+/mob/living/bot/floorbot/emag_act(remaining_charges, mob/user)
 	. = ..()
 	if(!emagged)
 		emagged = TRUE
@@ -108,7 +108,7 @@
 				target = S
 				return
 
-/mob/living/bot/floorbot/confirmTarget(var/atom/A) // The fact that we do some checks twice may seem confusing but remember that the bot's settings may be toggled while it's moving and we want them to stop in that case
+/mob/living/bot/floorbot/confirmTarget(atom/A) // The fact that we do some checks twice may seem confusing but remember that the bot's settings may be toggled while it's moving and we want them to stop in that case
 	anchored = FALSE
 	if(!..())
 		return 0
@@ -128,7 +128,7 @@
 		else
 			return (amount && (T.broken || T.burnt || (improvefloors && !T.flooring)))
 
-/mob/living/bot/floorbot/UnarmedAttack(var/atom/A, var/proximity)
+/mob/living/bot/floorbot/UnarmedAttack(atom/A, proximity)
 	if(!..())
 		return
 
@@ -238,7 +238,7 @@
 
 	qdel(src)
 
-/mob/living/bot/floorbot/proc/addTiles(var/am)
+/mob/living/bot/floorbot/proc/addTiles(am)
 	amount += am
 	if(amount < 0)
 		amount = 0

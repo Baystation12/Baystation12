@@ -29,7 +29,7 @@
 			wall_type = select_subpath(wall_type) || wall_type
 			to_chat(user, SPAN_NOTICE("Wall type set to [wall_type]."))
 
-/datum/build_mode/room_builder/OnClick(var/atom/A, var/list/parameters)
+/datum/build_mode/room_builder/OnClick(atom/A, list/parameters)
 	if(parameters["left"])
 		coordinate_A = get_turf(A)
 		to_chat(user, SPAN_NOTICE("Defined [coordinate_A] ([coordinate_A.type]) as point A."))

@@ -57,7 +57,7 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 	if(!minerals_rich)   minerals_rich =   GLOB.weighted_minerals_rich
 	..()
 
-/datum/random_map/automata/cave_system/get_appropriate_path(var/value)
+/datum/random_map/automata/cave_system/get_appropriate_path(value)
 	switch(value)
 		if(DOOR_CHAR, EMPTY_CHAR)
 			return mineral_turf
@@ -66,7 +66,7 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 		if(WALL_CHAR)
 			return wall_type
 
-/datum/random_map/automata/cave_system/get_map_char(var/value)
+/datum/random_map/automata/cave_system/get_map_char(value)
 	switch(value)
 		if(DOOR_CHAR)
 			return "x"

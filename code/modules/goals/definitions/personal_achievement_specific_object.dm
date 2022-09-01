@@ -12,7 +12,7 @@
 	blacklisted_objects = null
 	..()
 
-/datum/goal/achievement/specific_object/update_progress(var/progress)
+/datum/goal/achievement/specific_object/update_progress(progress)
 	if(!success)
 		if(ispath(progress))
 			if(ispath(progress, object_path) || ispath(object_path, progress))

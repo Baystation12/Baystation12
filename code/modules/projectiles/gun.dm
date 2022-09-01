@@ -137,7 +137,7 @@
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.
 //Otherwise, if you want handle_click_empty() to be called, check in consume_next_projectile() and return null there.
-/obj/item/gun/proc/special_check(var/mob/user)
+/obj/item/gun/proc/special_check(mob/user)
 
 	if(!istype(user, /mob/living))
 		return 0
@@ -210,7 +210,7 @@
 	else
 		return ..() //Pistolwhippin'
 
-/obj/item/gun/dropped(var/mob/living/user)
+/obj/item/gun/dropped(mob/living/user)
 	check_accidents(user)
 	update_icon()
 	return ..()
@@ -279,7 +279,7 @@
 	return null
 
 //used by aiming code
-/obj/item/gun/proc/can_hit(atom/target as mob, var/mob/living/user as mob)
+/obj/item/gun/proc/can_hit(atom/target as mob, mob/living/user as mob)
 	if(!special_check(user))
 		return 2
 	//just assume we can shoot through glass and stuff. No big deal, the player can just choose to not target someone
@@ -298,7 +298,7 @@
 	user.visible_message(SPAN_WARNING("[user] squeezes the trigger of \the [src] but it doesn't move!"), SPAN_WARNING("You squeeze the trigger but it doesn't move!"), range = 3)
 
 //called after successfully firing
-/obj/item/gun/proc/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
+/obj/item/gun/proc/handle_post_fire(mob/user, atom/target, pointblank=0, reflex=0)
 	if(fire_anim)
 		flick(fire_anim, src)
 
@@ -376,7 +376,7 @@
 			max_mult = max(max_mult, G.point_blank_mult())
 	P.damage *= max_mult
 
-/obj/item/gun/proc/process_accuracy(obj/projectile, mob/living/user, atom/target, var/burst, var/held_twohanded)
+/obj/item/gun/proc/process_accuracy(obj/projectile, mob/living/user, atom/target, burst, held_twohanded)
 	var/obj/item/projectile/P = projectile
 	if(!istype(P))
 		return //default behaviour only applies to true projectiles
@@ -418,7 +418,7 @@
 	P.dispersion = disp_mod
 
 //does the actual launching of the projectile
-/obj/item/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null)
+/obj/item/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, target_zone, params=null)
 	var/obj/item/projectile/P = projectile
 	if(!istype(P))
 		return 0 //default behaviour only applies to true projectiles
@@ -445,7 +445,7 @@
 
 	return launched
 
-/obj/item/gun/proc/play_fire_sound(var/mob/user, var/obj/item/projectile/P)
+/obj/item/gun/proc/play_fire_sound(mob/user, obj/item/projectile/P)
 	var/shot_sound = (istype(P) && P.fire_sound)? P.fire_sound : fire_sound
 	if(silenced)
 		playsound(user, shot_sound, 10, 1)
@@ -524,7 +524,7 @@
 
 	toggle_scope(usr, scope_zoom)
 
-/obj/item/gun/proc/toggle_scope(mob/user, var/zoom_amount=2.0)
+/obj/item/gun/proc/toggle_scope(mob/user, zoom_amount=2.0)
 	//looking through a scope limits your periphereal vision
 	//still, increase the view size by a tiny amount so that sniping isn't too restricted to NSEW
 	var/zoom_offset = round(world.view * zoom_amount)
@@ -588,7 +588,7 @@
 	if(new_mode)
 		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
 
-/obj/item/gun/proc/toggle_safety(var/mob/user)
+/obj/item/gun/proc/toggle_safety(mob/user)
 	if (user?.is_physically_disabled())
 		return
 
@@ -606,7 +606,7 @@
 	if(usr == loc)
 		toggle_safety(usr)
 
-/obj/item/gun/CtrlClick(var/mob/user)
+/obj/item/gun/CtrlClick(mob/user)
 	if(loc == user)
 		toggle_safety(user)
 		return TRUE

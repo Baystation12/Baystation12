@@ -13,17 +13,17 @@
 	hud_state = "wiz_charge"
 	cast_sound = 'sound/magic/charge.ogg'
 
-/spell/aoe_turf/charge/cast(var/list/targets, mob/user)
+/spell/aoe_turf/charge/cast(list/targets, mob/user)
 	for(var/turf/T in targets)
 		depth_cast(T)
 
-/spell/aoe_turf/charge/proc/depth_cast(var/list/targets)
+/spell/aoe_turf/charge/proc/depth_cast(list/targets)
 	for(var/atom/A in targets)
 		if(A.contents.len)
 			depth_cast(A.contents)
 		cast_charge(A)
 
-/spell/aoe_turf/charge/proc/mob_charge(var/mob/living/M)
+/spell/aoe_turf/charge/proc/mob_charge(mob/living/M)
 	if(!M.mind)
 		return
 	if(M.mind.learned_spells.len != 0)
@@ -35,7 +35,7 @@
 		to_chat(M, "<span class='notice'>You feel very strange for a moment, but then it passes.</span>")
 	return M
 
-/spell/aoe_turf/charge/proc/cast_charge(var/atom/target)
+/spell/aoe_turf/charge/proc/cast_charge(atom/target)
 	var/atom/charged_item
 
 	if(istype(target, /mob/living))

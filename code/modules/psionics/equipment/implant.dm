@@ -36,7 +36,7 @@
 		to_chat(M, SPAN_NOTICE("You feel the chilly shackles around your psionic faculties fade away."))
 	. = ..()
 
-/obj/item/implant/psi_control/proc/update_functionality(var/silent)
+/obj/item/implant/psi_control/proc/update_functionality(silent)
 	var/mob/living/M = imp_in
 	if(get_psi_mode() == PSI_IMPLANT_DISABLED || malfunction)
 		if(implanted && !silent && istype(M) && M.psi)
@@ -60,7 +60,7 @@
 		return security_state.current_security_level.psionic_control_level
 	return psi_mode
 
-/obj/item/implant/psi_control/withstand_psi_stress(var/stress, var/atom/source)
+/obj/item/implant/psi_control/withstand_psi_stress(stress, atom/source)
 
 	var/use_psi_mode = get_psi_mode()
 

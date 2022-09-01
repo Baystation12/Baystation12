@@ -85,7 +85,7 @@
 
 
 // Handles all necessary power checks: Area power, inteliCard and Malf AI APU power and manual override.
-/mob/living/silicon/ai/proc/has_power(var/respect_override = 1)
+/mob/living/silicon/ai/proc/has_power(respect_override = 1)
 	if(psupply && psupply.powered())
 		return 1
 	if(istype(src.loc,/obj/item))
@@ -97,7 +97,7 @@
 	return 0
 
 // Resets passed APC so the AI may function again.
-/mob/living/silicon/ai/proc/reset_apc(var/obj/machinery/power/apc/A)
+/mob/living/silicon/ai/proc/reset_apc(obj/machinery/power/apc/A)
 	if(!istype(A))
 		return
 
@@ -197,7 +197,7 @@
 	var/mob/living/silicon/ai/powered_ai = null
 	invisibility = 100
 
-/obj/machinery/ai_powersupply/New(var/mob/living/silicon/ai/ai=null)
+/obj/machinery/ai_powersupply/New(mob/living/silicon/ai/ai=null)
 	powered_ai = ai
 	powered_ai.psupply = src
 	..()
@@ -216,5 +216,5 @@
 	// Normal power usage.
 	return 2
 
-/obj/machinery/ai_powersupply/powered(var/chan = -1)
+/obj/machinery/ai_powersupply/powered(chan = -1)
 	return ..(chan, get_area(powered_ai))

@@ -301,7 +301,7 @@
 /datum/node/test
 	var/name
 
-/datum/node/test/New(var/name)
+/datum/node/test/New(name)
 	..()
 	src.name = name
 
@@ -313,12 +313,12 @@
 	var/on_split_was_called
 	var/issues
 
-/datum/graph/testing/New(var/node, var/edges, var/name)
+/datum/graph/testing/New(node, edges, name)
 	..()
 	src.name = name || "Graph"
 	issues = list()
 
-/datum/graph/testing/OnSplit(var/list/subgraphs)
+/datum/graph/testing/OnSplit(list/subgraphs)
 	if(length(split_expectations) != subgraphs.len)
 		issues += "Expected number of subgrapghs is [subgraphs.len], was [length(split_expectations)]"
 	else if(length(split_expectations))
@@ -356,12 +356,12 @@
 	var/list/expected_nodes
 	var/list/expected_edges
 
-/datum/graph_expectation/New(var/expected_nodes, var/expected_edges)
+/datum/graph_expectation/New(expected_nodes, expected_edges)
 	..()
 	src.expected_nodes = expected_nodes || list()
 	src.expected_edges = expected_edges || list()
 
-/datum/graph_expectation/proc/CheckExpectations(var/datum/graph/graph)
+/datum/graph_expectation/proc/CheckExpectations(datum/graph/graph)
 	. = list()
 	if(length(expected_nodes ^ (graph.nodes || list())))
 		. += "Expected the following nodes [log_info_line(expected_nodes)], was [log_info_line(graph.nodes)]"
@@ -378,7 +378,7 @@
 		if(length(expected_connections ^ actual_connections))
 			. += "[log_info_line(node)]: Expected the following connections [log_info_line(expected_connections)], was [log_info_line(actual_connections)]"
 
-/datum/graph_expectation/deleted/CheckExpectations(var/datum/graph/graph)
+/datum/graph_expectation/deleted/CheckExpectations(datum/graph/graph)
 	. = ..()
 	if(!QDELETED(graph))
 		. += "Expected graph to be deleted, was not"

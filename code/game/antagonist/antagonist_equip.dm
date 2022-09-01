@@ -1,8 +1,8 @@
-/datum/antagonist/proc/equip(var/mob/living/carbon/human/player)
+/datum/antagonist/proc/equip(mob/living/carbon/human/player)
 
 	if(!istype(player))
 		return 0
-	
+
 	if (required_language)
 		player.add_language(required_language)
 		player.set_default_language(all_languages[required_language])
@@ -16,12 +16,12 @@
 		player.species.equip_survival_gear(player)
 	return 1
 
-/datum/antagonist/proc/unequip(var/mob/living/carbon/human/player)
+/datum/antagonist/proc/unequip(mob/living/carbon/human/player)
 	if(!istype(player))
 		return 0
 	return 1
 
-/datum/antagonist/proc/equip_rig(var/rig_type, var/mob/living/carbon/human/player)
+/datum/antagonist/proc/equip_rig(rig_type, mob/living/carbon/human/player)
 	set waitfor = 0
 	if(istype(player) && ispath(rig_type))
 		var/obj/item/rig/rig = new rig_type(player)
@@ -34,7 +34,7 @@
 			rig.seal_delay = initial(rig.seal_delay)
 			if(rig.air_supply)
 				player.set_internals(rig.air_supply)
-		return rig 
+		return rig
 
 //Some modes allow swapping to a vox from their initial mobs. Equip them here.
 /datum/antagonist/proc/equip_vox(mob/living/carbon/human/vox, mob/living/carbon/human/old)

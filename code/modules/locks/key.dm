@@ -6,12 +6,12 @@
 	w_class = 1
 	var/key_data = ""
 
-/obj/item/key/New(var/newloc,var/data)
+/obj/item/key/New(newloc,data)
 	if(data)
 		key_data = data
 	..(newloc)
 
-/obj/item/key/proc/get_data(var/mob/user)
+/obj/item/key/proc/get_data(mob/user)
 	return key_data
 
 /obj/item/key/soap
@@ -19,7 +19,7 @@
 	desc = "a fragile key made using a bar of soap."
 	var/uses = 0
 
-/obj/item/key/soap/get_data(var/mob/user)
+/obj/item/key/soap/get_data(mob/user)
 	uses--
 	if(uses == 1)
 		to_chat(user, "<span class='warning'>\The [src] is going to break soon!</span>")

@@ -15,11 +15,11 @@
 	var/obj/special_assembly = null
 
 
-/obj/item/device/assembly_holder/proc/attach(var/obj/item/device/D, var/obj/item/device/D2, var/mob/user)
+/obj/item/device/assembly_holder/proc/attach(obj/item/device/D, obj/item/device/D2, mob/user)
 	return
 
 
-/obj/item/device/assembly_holder/proc/process_activation(var/obj/item/device/D)
+/obj/item/device/assembly_holder/proc/process_activation(obj/item/device/D)
 	return
 
 
@@ -31,7 +31,7 @@
 	return 1
 
 
-/obj/item/device/assembly_holder/attach(var/obj/item/device/assembly/D, var/obj/item/device/assembly/D2, var/mob/user)
+/obj/item/device/assembly_holder/attach(obj/item/device/assembly/D, obj/item/device/assembly/D2, mob/user)
 	if((!D)||(!D2))
 		return 0
 	if((!istype(D))||(!istype(D2)))
@@ -158,7 +158,7 @@
 			qdel(src)
 
 
-/obj/item/device/assembly_holder/process_activation(var/obj/D, var/normal = 1, var/special = 1)
+/obj/item/device/assembly_holder/process_activation(obj/D, normal = 1, special = 1)
 	if(!D)
 		return 0
 	if(!secured)

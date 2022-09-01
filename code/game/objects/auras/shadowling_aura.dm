@@ -2,7 +2,7 @@
 	name = "Shadowling Aura"
 	var/added_mutation = FALSE
 
-/obj/aura/shadowling_aura/added_to(var/mob/living/L)
+/obj/aura/shadowling_aura/added_to(mob/living/L)
 	..()
 	if(!(MUTATION_SPACERES in L.mutations))
 		L.mutations += MUTATION_SPACERES
@@ -14,7 +14,7 @@
 		user.mutations -= MUTATION_SPACERES
 	..()
 
-/obj/aura/shadowling_aura/bullet_act(var/obj/item/projectile/P)
+/obj/aura/shadowling_aura/bullet_act(obj/item/projectile/P)
 	if(P.damage_flags() & DAMAGE_FLAG_LASER)
 		P.damage *= 2
 	if(P.agony)

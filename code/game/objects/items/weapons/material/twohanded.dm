@@ -122,7 +122,7 @@
 	worth_multiplier = 7
 	base_parry_chance = 30
 
-/obj/item/material/twohanded/spear/shatter(var/consumed)
+/obj/item/material/twohanded/spear/shatter(consumed)
 	if(!consumed)
 		new /obj/item/stack/material/rods(get_turf(src), 1)
 		new /obj/item/stack/cable_coil(get_turf(src), 3)
@@ -148,17 +148,17 @@
 	base_parry_chance = 30
 
 //Predefined materials go here.
-/obj/item/material/twohanded/baseballbat/metal/New(var/newloc)
+/obj/item/material/twohanded/baseballbat/metal/New(newloc)
 	..(newloc,MATERIAL_ALUMINIUM)
 
-/obj/item/material/twohanded/baseballbat/uranium/New(var/newloc)
+/obj/item/material/twohanded/baseballbat/uranium/New(newloc)
 	..(newloc,MATERIAL_URANIUM)
 
-/obj/item/material/twohanded/baseballbat/gold/New(var/newloc)
+/obj/item/material/twohanded/baseballbat/gold/New(newloc)
 	..(newloc,MATERIAL_GOLD)
 
-/obj/item/material/twohanded/baseballbat/platinum/New(var/newloc)
+/obj/item/material/twohanded/baseballbat/platinum/New(newloc)
 	..(newloc,MATERIAL_PLATINUM)
 
-/obj/item/material/twohanded/baseballbat/diamond/New(var/newloc)
+/obj/item/material/twohanded/baseballbat/diamond/New(newloc)
 	..(newloc,MATERIAL_DIAMOND)

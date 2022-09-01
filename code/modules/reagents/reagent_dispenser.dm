@@ -71,7 +71,7 @@
 		else
 	return
 
-/obj/structure/reagent_dispensers/AltClick(var/mob/user)
+/obj/structure/reagent_dispensers/AltClick(mob/user)
 	if(possible_transfer_amounts)
 		set_amount_per_transfer_from_this()
 	else
@@ -224,7 +224,7 @@
 	return ..()
 
 
-/obj/structure/reagent_dispensers/fueltank/bullet_act(var/obj/item/projectile/Proj)
+/obj/structure/reagent_dispensers/fueltank/bullet_act(obj/item/projectile/Proj)
 	if(Proj.get_structure_damage())
 		if(istype(Proj.firer))
 			var/turf/turf = get_turf(src)
@@ -285,7 +285,7 @@
 	var/cups = 12
 	var/cup_type = /obj/item/reagent_containers/food/drinks/sillycup
 
-/obj/structure/reagent_dispensers/water_cooler/attack_hand(var/mob/user)
+/obj/structure/reagent_dispensers/water_cooler/attack_hand(mob/user)
 	if(cups > 0)
 		var/visible_messages = DispenserMessages(user)
 		visible_message(visible_messages[1], visible_messages[2])
@@ -295,10 +295,10 @@
 	else
 		to_chat(user, RejectionMessage(user))
 
-/obj/structure/reagent_dispensers/water_cooler/proc/DispenserMessages(var/mob/user)
+/obj/structure/reagent_dispensers/water_cooler/proc/DispenserMessages(mob/user)
 	return list("\The [user] grabs a paper cup from \the [src].", "You grab a paper cup from \the [src]'s cup compartment.")
 
-/obj/structure/reagent_dispensers/water_cooler/proc/RejectionMessage(var/mob/user)
+/obj/structure/reagent_dispensers/water_cooler/proc/RejectionMessage(mob/user)
 	return "The [src]'s cup dispenser is empty."
 
 /obj/structure/reagent_dispensers/water_cooler/attackby(obj/item/W as obj, mob/user as mob)

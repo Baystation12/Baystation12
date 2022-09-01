@@ -85,7 +85,7 @@
 	update_icon()
 	SetName(initial(name))
 
-/obj/machinery/bodyscanner/state_transition(var/decl/machine_construction/default/new_state)
+/obj/machinery/bodyscanner/state_transition(decl/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state))
 		updateUsrDialog()

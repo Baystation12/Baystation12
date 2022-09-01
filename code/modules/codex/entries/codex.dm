@@ -20,9 +20,9 @@
 /datum/codex_entry/nexus
 	display_name = "Nexus"
 	associated_strings = list("nexus")
-	mechanics_text = "The place to start with <span codexlink='codex'>The Codex</span><br>" 
+	mechanics_text = "The place to start with <span codexlink='codex'>The Codex</span><br>"
 
-/datum/codex_entry/nexus/get_text(var/mob/presenting_to)
+/datum/codex_entry/nexus/get_text(mob/presenting_to)
 	var/list/dat = list(get_header(presenting_to))
 	dat += "[mechanics_text]"
 	dat += "<h3>Categories</h3>"

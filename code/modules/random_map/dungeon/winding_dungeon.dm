@@ -60,17 +60,17 @@
 	limit_x = 50
 	limit_y = 50
 
-/datum/random_map/winding_dungeon/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/list/variable_list)
+/datum/random_map/winding_dungeon/New(seed, tx, ty, tz, tlx, tly, do_not_apply, do_not_announce, list/variable_list)
 	for(var/variable in variable_list)
 		if(variable in src.vars)
 			src.vars[variable] = variable_list[variable]
 	..()
 
-/datum/random_map/winding_dungeon/proc/logging(var/text)
+/datum/random_map/winding_dungeon/proc/logging(text)
 	if(log)
 		log_world(text)
 
-/datum/random_map/winding_dungeon/proc/get_appropriate_list(var/list/common, var/list/uncommon, var/list/rare, var/x, var/y)
+/datum/random_map/winding_dungeon/proc/get_appropriate_list(list/common, list/uncommon, list/rare, x, y)
 	var/distance = sqrt((x - round(first_room_x+first_room_width/2)) ** 2 + (y - round(first_room_y+first_room_height/2)) ** 2)
 	if(prob(distance))
 		if(prob(distance/100) && rare && rare.len)
@@ -141,7 +141,7 @@
 
 	monster_available = null //Get rid of all the references
 
-/datum/random_map/winding_dungeon/apply_to_turf(var/x, var/y)
+/datum/random_map/winding_dungeon/apply_to_turf(x, y)
 	. = ..()
 	var/turf/T = locate((origin_x-1)+x,(origin_y-1)+y,origin_z)
 	if(T && !T.density)
@@ -281,7 +281,7 @@
 	logging("Map completed. Loops: [sanity], [currentFeatures] out of [num_of_features] created.")
 	open_positions.Cut()
 
-/datum/random_map/winding_dungeon/proc/carve_area(var/truex,var/truey,var/width,var/height,var/char, var/wall_char)
+/datum/random_map/winding_dungeon/proc/carve_area(truex,truey,width,height,char, wall_char)
 	for(var/mode = 0, mode <= 1, mode++)
 		for(var/ytemp = truey, ytemp < truey + height, ytemp++)
 			if(!mode && (ytemp < 0 || ytemp > limit_y))
@@ -305,7 +305,7 @@
 						map[get_map_cell(xtemp,ytemp)] = char
 	return 1
 
-/datum/random_map/winding_dungeon/proc/create_room_features(var/rox,var/roy,var/width,var/height)
+/datum/random_map/winding_dungeon/proc/create_room_features(rox,roy,width,height)
 	var/list/room_list = get_appropriate_list(room_theme_common, room_theme_uncommon, room_theme_rare, round(rox+width/2), round(roy+height/2))
 	var/theme_type = pickweight(room_list)
 	if(!theme_type)
@@ -317,11 +317,11 @@
 	rooms += R
 	return 1
 
-/datum/random_map/winding_dungeon/proc/add_loot(var/xorigin,var/yorigin,var/zorigin,var/type)
+/datum/random_map/winding_dungeon/proc/add_loot(xorigin,yorigin,zorigin,type)
 	var/datum/room/room = pick(rooms)
 	return room.add_loot(type)
 
-/datum/random_map/winding_dungeon/get_appropriate_path(var/value)
+/datum/random_map/winding_dungeon/get_appropriate_path(value)
 	switch(value)
 		if(WALL_CHAR)
 			return wall_type
@@ -332,7 +332,7 @@
 		else
 			return floor_type
 
-/datum/random_map/winding_dungeon/get_map_char(var/value)
+/datum/random_map/winding_dungeon/get_map_char(value)
 	. = ..(value)
 	switch(value)
 		if(BORDER_CHAR)

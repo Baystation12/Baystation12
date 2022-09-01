@@ -445,7 +445,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 
 
 
-/datum/changeling/proc/purchasePower(var/datum/mind/M, var/Pname, var/remake_verbs = 1)
+/datum/changeling/proc/purchasePower(datum/mind/M, Pname, remake_verbs = 1)
 	if(!M || !M.changeling)
 		return
 
@@ -481,4 +481,3 @@ var/global/list/datum/power/changeling/powerinstances = list()
 		call(M.current, Thepower.verbpath)()
 	else if(remake_verbs)
 		M.current.make_changeling()
-

@@ -15,7 +15,7 @@
 	var/sun_angle = 0		// sun angle as set by sun datum
 	var/obj/machinery/power/solar_control/control = null
 
-/obj/machinery/power/tracker/New(var/turf/loc, var/obj/item/solar_assembly/S)
+/obj/machinery/power/tracker/New(turf/loc, obj/item/solar_assembly/S)
 	..(loc)
 	Make(S)
 	connect_to_network()
@@ -25,7 +25,7 @@
 	..()
 
 //set the control of the tracker to a given computer if closer than SOLAR_MAX_DIST
-/obj/machinery/power/tracker/proc/set_control(var/obj/machinery/power/solar_control/SC)
+/obj/machinery/power/tracker/proc/set_control(obj/machinery/power/solar_control/SC)
 	if(SC && (get_dist(src, SC) > SOLAR_MAX_DIST))
 		return 0
 	control = SC
@@ -37,7 +37,7 @@
 		control.connected_tracker = null
 	control = null
 
-/obj/machinery/power/tracker/proc/Make(var/obj/item/solar_assembly/S)
+/obj/machinery/power/tracker/proc/Make(obj/item/solar_assembly/S)
 	if(!S)
 		S = new /obj/item/solar_assembly(src)
 		S.glass_type = /obj/item/stack/material/glass
@@ -47,7 +47,7 @@
 	update_icon()
 
 //updates the tracker icon and the facing angle for the control computer
-/obj/machinery/power/tracker/proc/set_angle(var/angle)
+/obj/machinery/power/tracker/proc/set_angle(angle)
 	sun_angle = angle
 
 	//set icon dir to show sun illumination
@@ -56,7 +56,7 @@
 	if(powernet && (powernet == control.powernet)) //update if we're still in the same powernet
 		control.cdir = angle
 
-/obj/machinery/power/tracker/attackby(var/obj/item/W, var/mob/user)
+/obj/machinery/power/tracker/attackby(obj/item/W, mob/user)
 
 	if(isCrowbar(W))
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)

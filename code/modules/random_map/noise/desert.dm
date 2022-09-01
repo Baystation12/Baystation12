@@ -6,10 +6,10 @@
 	descriptor = "desert (replacement)"
 	target_turf_type = /turf/space
 
-/datum/random_map/noise/desert/get_map_char(var/value)
+/datum/random_map/noise/desert/get_map_char(value)
 	return "<font color='#[value][value][value][value][value][value]'>[pick(list(",",".","'","`"))]</font>"
 
-/datum/random_map/noise/desert/get_appropriate_path(var/value)
+/datum/random_map/noise/desert/get_appropriate_path(value)
 	var/val = min(9,max(0,round((value/cell_range)*10)))
 	if(isnull(val)) val = 0
 	switch(val)
@@ -18,7 +18,7 @@
 		else
 			return /turf/simulated/floor/beach/sand/desert
 
-/datum/random_map/noise/desert/get_additional_spawns(var/value, var/turf/T)
+/datum/random_map/noise/desert/get_additional_spawns(value, turf/T)
 	var/val = min(9,max(0,round((value/cell_range)*10)))
 	if(isnull(val)) val = 0
 	switch(val)

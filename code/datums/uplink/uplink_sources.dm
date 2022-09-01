@@ -95,7 +95,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	var/obj/item/stack/telecrystal/TC = new(M, amount)
 	put_on_mob(M, TC, "[amount] telecrystal\s")
 
-/decl/uplink_source/proc/find_in_mob(var/mob/M, var/type)
+/decl/uplink_source/proc/find_in_mob(mob/M, type)
 	for(var/item in M.get_equipped_items(TRUE))
 		if(!istype(item, type))
 			continue

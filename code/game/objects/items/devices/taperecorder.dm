@@ -101,7 +101,7 @@
 	if(distance <= 1 && maintenance)
 		to_chat(user, "<span class='notice'>The wires are exposed.</span>")
 
-/obj/item/device/taperecorder/hear_talk(mob/living/M as mob, msg, var/verb="says", datum/language/speaking=null)
+/obj/item/device/taperecorder/hear_talk(mob/living/M as mob, msg, verb="says", datum/language/speaking=null)
 	if(mytape && recording)
 
 		if(speaking)
@@ -112,7 +112,7 @@
 			mytape.record_speech("[M.name] [verb], \"[msg]\"")
 
 
-/obj/item/device/taperecorder/see_emote(mob/M as mob, text, var/emote_type)
+/obj/item/device/taperecorder/see_emote(mob/M as mob, text, emote_type)
 	if(emote_type != AUDIBLE_MESSAGE) //only hearable emotes
 		return
 	if(mytape && recording)
@@ -130,7 +130,7 @@
 	if(mytape && recording)
 		mytape.record_noise("[strip_html_properly(recordedtext)]")
 
-/obj/item/device/taperecorder/emag_act(var/remaining_charges, var/mob/user)
+/obj/item/device/taperecorder/emag_act(remaining_charges, mob/user)
 	if(!emagged)
 		emagged = TRUE
 		recording = 0
@@ -502,7 +502,7 @@
 		update_icon()
 		qdel(other)
 
-/obj/item/device/tape/OnTopic(var/mob/user, var/list/href_list)
+/obj/item/device/tape/OnTopic(mob/user, list/href_list)
 	if(href_list["cut_after"])
 		var/index = text2num(href_list["cut_after"])
 		if(index >= timestamp.len)
@@ -514,7 +514,7 @@
 		return TOPIC_REFRESH
 
 //Spawns new loose tape item, with data starting from [index] entry
-/obj/item/device/tape/proc/get_loose_tape(var/mob/user, var/index)
+/obj/item/device/tape/proc/get_loose_tape(mob/user, index)
 	var/obj/item/device/tape/loose/newtape = new()
 	newtape.timestamp = timestamp.Copy(index+1)
 	newtape.storedinfo = storedinfo.Copy(index+1)

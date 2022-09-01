@@ -121,7 +121,7 @@
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
 
 
-/obj/machinery/atmospherics/unary/vent_pump/on_update_icon(var/safety = 0)
+/obj/machinery/atmospherics/unary/vent_pump/on_update_icon(safety = 0)
 	if(!check_icon_cache())
 		return
 	if (!node)
@@ -309,7 +309,7 @@
 	if(welded)
 		to_chat(user, "It seems welded shut.")
 
-/obj/machinery/atmospherics/unary/vent_pump/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWrench(W))
 		if (!(stat & NOPOWER) && use_power)
 			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>")

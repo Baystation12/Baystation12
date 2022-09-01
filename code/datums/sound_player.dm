@@ -23,11 +23,11 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 
 
 //This can be called if either we're doing whole sound setup ourselves or it will be as part of from-file sound setup
-/decl/sound_player/proc/PlaySoundDatum(var/atom/source, var/sound_id, var/sound/sound, var/range, var/prefer_mute)
+/decl/sound_player/proc/PlaySoundDatum(atom/source, sound_id, sound/sound, range, prefer_mute)
 	var/token_type = isnum(sound.environment) ? /datum/sound_token : /datum/sound_token/static_environment
 	return new token_type(source, sound_id, sound, range, prefer_mute)
 
-/decl/sound_player/proc/PlayLoopingSound(var/atom/source, var/sound_id, var/sound, var/volume, var/range, var/falloff = 1, var/echo, var/frequency, var/prefer_mute)
+/decl/sound_player/proc/PlayLoopingSound(atom/source, sound_id, sound, volume, range, falloff = 1, echo, frequency, prefer_mute)
 	var/sound/S = istype(sound, /sound) ? sound : new(sound)
 	S.environment = 0 // Ensures a 3D effect even if x/y offset happens to be 0 the first time it's played
 	S.volume  = volume
@@ -38,7 +38,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 
 	return PlaySoundDatum(source, sound_id, S, range, prefer_mute)
 
-/decl/sound_player/proc/PrivStopSound(var/datum/sound_token/sound_token)
+/decl/sound_player/proc/PrivStopSound(datum/sound_token/sound_token)
 	var/channel = sound_token.sound.channel
 	var/sound_id = sound_token.sound_id
 
@@ -53,7 +53,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	taken_channels -= sound_id
 	sound_tokens_by_sound_id -= sound_id
 
-/decl/sound_player/proc/PrivGetChannel(var/datum/sound_token/sound_token)
+/decl/sound_player/proc/PrivGetChannel(datum/sound_token/sound_token)
 	var/sound_id = sound_token.sound_id
 
 	. = taken_channels[sound_id] // Does this sound_id already have an assigned channel?
@@ -88,7 +88,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	var/datum/proximity_trigger/square/proxy_listener
 	var/list/can_be_heard_from
 
-/datum/sound_token/New(var/atom/source, var/sound_id, var/sound/sound, var/range = 4, var/prefer_mute = FALSE)
+/datum/sound_token/New(atom/source, sound_id, sound/sound, range = 4, prefer_mute = FALSE)
 	..()
 	if(!istype(source))
 		CRASH("Invalid sound source: [log_info_line(source)]")
@@ -126,7 +126,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	Stop()
 	. = ..()
 
-/datum/sound_token/proc/SetVolume(var/new_volume)
+/datum/sound_token/proc/SetVolume(new_volume)
 	new_volume = clamp(new_volume, 0, 100)
 	if(sound.volume == new_volume)
 		return
@@ -163,7 +163,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 
 	GLOB.sound_player.PrivStopSound(src)
 
-/datum/sound_token/proc/PrivLocateListeners(var/list/prior_turfs, var/list/current_turfs)
+/datum/sound_token/proc/PrivLocateListeners(list/prior_turfs, list/current_turfs)
 	if(status & SOUND_STOPPED)
 		return
 
@@ -181,7 +181,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	for(var/listener in current_listeners)
 		PrivUpdateListenerLoc(listener)
 
-/datum/sound_token/proc/PrivUpdateStatus(var/new_status)
+/datum/sound_token/proc/PrivUpdateStatus(new_status)
 	// Once stopped, always stopped. Go ask the player to play the sound again.
 	if(status & SOUND_STOPPED)
 		return
@@ -190,7 +190,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	status = new_status
 	PrivUpdateListeners()
 
-/datum/sound_token/proc/PrivAddListener(var/atom/listener)
+/datum/sound_token/proc/PrivAddListener(atom/listener)
 	if(isvirtualmob(listener))
 		var/mob/observer/virtual/v = listener
 		if(!(v.abilities & VIRTUAL_ABILITY_HEAR))
@@ -206,14 +206,14 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 
 	PrivUpdateListenerLoc(listener, FALSE)
 
-/datum/sound_token/proc/PrivRemoveListener(var/atom/listener, var/sound/null_sound)
+/datum/sound_token/proc/PrivRemoveListener(atom/listener, sound/null_sound)
 	null_sound = null_sound || new(channel = sound.channel)
 	sound_to(listener, null_sound)
 	GLOB.moved_event.unregister(listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
 	GLOB.destroyed_event.unregister(listener, src, /datum/sound_token/proc/PrivRemoveListener)
 	listeners -= listener
 
-/datum/sound_token/proc/PrivUpdateListenerLoc(var/atom/listener, var/update_sound = TRUE)
+/datum/sound_token/proc/PrivUpdateListenerLoc(atom/listener, update_sound = TRUE)
 	var/turf/source_turf = get_turf(source)
 	var/turf/listener_turf = get_turf(listener)
 
@@ -242,18 +242,18 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	for(var/listener in listeners)
 		PrivUpdateListener(listener)
 
-/datum/sound_token/proc/PrivUpdateListener(var/listener, var/update_sound = TRUE)
+/datum/sound_token/proc/PrivUpdateListener(listener, update_sound = TRUE)
 	sound.environment = PrivGetEnvironment(listener)
 	sound.status = status|listener_status[listener]
 	if(update_sound)
 		sound.status |= SOUND_UPDATE
 	sound_to(listener, sound)
 
-/datum/sound_token/proc/PrivGetEnvironment(var/listener)
+/datum/sound_token/proc/PrivGetEnvironment(listener)
 	var/area/A = get_area(listener)
 	return A && PrivIsValidEnvironment(A.sound_env) ? A.sound_env : sound.environment
 
-/datum/sound_token/proc/PrivIsValidEnvironment(var/environment)
+/datum/sound_token/proc/PrivIsValidEnvironment(environment)
 	if(islist(environment) && length(environment) != 23)
 		return FALSE
 	if(!isnum(environment) || environment < 0 || environment > 25)

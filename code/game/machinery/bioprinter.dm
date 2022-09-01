@@ -23,7 +23,7 @@
 	// These should be subtypes of /obj/item/organ
 	var/list/products = list()
 
-/obj/machinery/organ_printer/state_transition(var/decl/machine_construction/default/new_state)
+/obj/machinery/organ_printer/state_transition(decl/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state))
 		updateUsrDialog()
@@ -56,7 +56,7 @@
 		return SPAN_NOTICE("You must wait for \the [src] to finish printing first!")
 	return ..()
 
-/obj/machinery/organ_printer/physical_attack_hand(mob/user, var/choice = null)
+/obj/machinery/organ_printer/physical_attack_hand(mob/user, choice = null)
 	if(printing)
 		return
 
@@ -86,13 +86,13 @@
 
 	print_organ(choice)
 
-/obj/machinery/organ_printer/proc/can_print(var/choice)
+/obj/machinery/organ_printer/proc/can_print(choice)
 	if(stored_matter < products[choice][2])
 		visible_message(SPAN_NOTICE("\The [src] displays a warning: 'Not enough matter. [stored_matter] stored and [products[choice][2]] needed.'"))
 		return 0
 	return 1
 
-/obj/machinery/organ_printer/proc/print_organ(var/choice)
+/obj/machinery/organ_printer/proc/print_organ(choice)
 	var/new_organ = products[choice][1]
 	var/obj/item/organ/O = new new_organ(get_turf(src))
 	O.status |= ORGAN_CUT_AWAY
@@ -139,7 +139,7 @@
 		new /obj/item/stack/material/steel(get_turf(src), Floor(stored_matter/matter_amount_per_sheet))
 	return ..()
 
-/obj/machinery/organ_printer/robot/print_organ(var/choice)
+/obj/machinery/organ_printer/robot/print_organ(choice)
 	var/obj/item/organ/O = ..()
 	O.robotize()
 	O.status |= ORGAN_CUT_AWAY  // robotize() resets status to 0
@@ -147,7 +147,7 @@
 	playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 	return O
 
-/obj/machinery/organ_printer/robot/attackby(var/obj/item/W, var/mob/user)
+/obj/machinery/organ_printer/robot/attackby(obj/item/W, mob/user)
 	var/add_matter = 0
 	var/object_name = "[W]"
 
@@ -213,7 +213,7 @@
 			new /obj/item/reagent_containers/food/snacks/meat(T)
 	return ..()
 
-/obj/machinery/organ_printer/flesh/print_organ(var/choice)
+/obj/machinery/organ_printer/flesh/print_organ(choice)
 	var/obj/item/organ/O
 	var/new_organ
 	if(loaded_species.has_organ[choice])
@@ -287,12 +287,12 @@
 		if(check_printable(organ))
 			.[initial(O.organ_tag)] = list(O, get_organ_cost(O))
 
-/obj/machinery/organ_printer/flesh/proc/get_organ_cost(var/obj/item/organ/O)
+/obj/machinery/organ_printer/flesh/proc/get_organ_cost(obj/item/organ/O)
 	. = initial(O.print_cost)
 	if(!.)
 		. = round(0.75 * initial(O.max_damage))
 
-/obj/machinery/organ_printer/flesh/proc/check_printable(var/organtype)
+/obj/machinery/organ_printer/flesh/proc/check_printable(organtype)
 	var/obj/item/organ/O = organtype
 	if(!initial(O.can_be_printed))
 		return FALSE

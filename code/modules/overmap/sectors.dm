@@ -102,7 +102,7 @@
 	else
 		generic_waypoints -= landmark
 
-/obj/effect/overmap/visitable/proc/get_waypoints(var/shuttle_name)
+/obj/effect/overmap/visitable/proc/get_waypoints(shuttle_name)
 	. = list()
 	for(var/obj/effect/overmap/visitable/contained in src)
 		. += contained.get_waypoints(shuttle_name)

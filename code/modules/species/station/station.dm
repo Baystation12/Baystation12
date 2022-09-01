@@ -56,10 +56,10 @@
 		/decl/emote/exertion/synthetic/creak
 	)
 
-/datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
+/datum/species/human/get_bodytype(mob/living/carbon/human/H)
 	return SPECIES_HUMAN
 
-/datum/species/human/handle_npc(var/mob/living/carbon/human/H)
+/datum/species/human/handle_npc(mob/living/carbon/human/H)
 	if(H.stat != CONSCIOUS)
 		return
 
@@ -103,7 +103,7 @@
 				var/obj/item/organ/external/parent = H.get_organ(I.parent_organ)
 				H.custom_emote("clutches [T.his] [parent.name]!")
 
-/datum/species/human/get_ssd(var/mob/living/carbon/human/H)
+/datum/species/human/get_ssd(mob/living/carbon/human/H)
 	if (H.ai_holder)
 		return
 
@@ -256,7 +256,7 @@
 	else
 		M.vomit(1, 1, rand(5 SECONDS, 15 SECONDS))
 
-/datum/species/skrell/get_sex(var/mob/living/carbon/human/H)
+/datum/species/skrell/get_sex(mob/living/carbon/human/H)
 	return istype(H) && (H.descriptors["headtail length"] == 1 ? MALE : FEMALE)
 
 /datum/species/skrell/check_background()
@@ -379,7 +379,7 @@
 		death()
 
 #define DIONA_LIMB_DEATH_COUNT 9
-/datum/species/diona/handle_death_check(var/mob/living/carbon/human/H)
+/datum/species/diona/handle_death_check(mob/living/carbon/human/H)
 	var/lost_limb_count = has_limbs.len - H.organs.len
 	if(lost_limb_count >= DIONA_LIMB_DEATH_COUNT)
 		return TRUE
@@ -390,13 +390,13 @@
 	return (lost_limb_count >= DIONA_LIMB_DEATH_COUNT)
 #undef DIONA_LIMB_DEATH_COUNT
 
-/datum/species/diona/can_understand(var/mob/other)
+/datum/species/diona/can_understand(mob/other)
 	var/mob/living/carbon/alien/diona/D = other
 	if(istype(D))
 		return 1
 	return 0
 
-/datum/species/diona/equip_survival_gear(var/mob/living/carbon/human/H)
+/datum/species/diona/equip_survival_gear(mob/living/carbon/human/H)
 	if(istype(H.get_equipped_item(slot_back), /obj/item/storage/backpack))
 		H.equip_to_slot_or_del(new /obj/item/device/flashlight/flare(H.back), slot_in_backpack)
 	else
@@ -410,12 +410,12 @@
 
 // Dionaea spawned by hand or by joining will not have any
 // nymphs passed to them. This should take care of that.
-/datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
+/datum/species/diona/handle_post_spawn(mob/living/carbon/human/H)
 	H.gender = NEUTER
 	. = ..()
 	addtimer(CALLBACK(src, .proc/fill_with_nymphs, H), 0)
 
-/datum/species/diona/proc/fill_with_nymphs(var/mob/living/carbon/human/H)
+/datum/species/diona/proc/fill_with_nymphs(mob/living/carbon/human/H)
 
 	if(!H || H.species.name != name) return
 
@@ -428,7 +428,7 @@
 		new /mob/living/carbon/alien/diona/sterile(H)
 		nymph_count++
 
-/datum/species/diona/handle_death(var/mob/living/carbon/human/H)
+/datum/species/diona/handle_death(mob/living/carbon/human/H)
 
 	if(H.isSynthetic())
 		var/mob/living/carbon/alien/diona/S = new(get_turf(H))
@@ -443,7 +443,7 @@
 /datum/species/diona/get_blood_name()
 	return "sap"
 
-/datum/species/diona/handle_environment_special(var/mob/living/carbon/human/H)
+/datum/species/diona/handle_environment_special(mob/living/carbon/human/H)
 	if(H.InStasis() || H.stat == DEAD)
 		return
 

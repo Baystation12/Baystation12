@@ -101,7 +101,7 @@
 				dump_everything()
 				qdel(src)
 
-/obj/machinery/suit_storage_unit/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/suit_storage_unit/attackby(obj/item/I, mob/user)
 	if(isScrewdriver(I))
 		if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			panelopen = !panelopen
@@ -157,11 +157,11 @@
 	update_icon()
 	SSnano.update_uis(src)
 
-/obj/machinery/suit_storage_unit/interface_interact(var/mob/user)
+/obj/machinery/suit_storage_unit/interface_interact(mob/user)
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/suit_storage_unit/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/suit_storage_unit/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/list/data = list()
 
 	data["panelopen"] = panelopen
@@ -182,12 +182,12 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/machinery/suit_storage_unit/CanUseTopic(var/mob/user)
+/obj/machinery/suit_storage_unit/CanUseTopic(mob/user)
 	if(!user.IsAdvancedToolUser())
 		return STATUS_CLOSE
 	return ..()
 
-/obj/machinery/suit_storage_unit/OnTopic(var/user, var/list/href_list, var/datum/topic_state/state)
+/obj/machinery/suit_storage_unit/OnTopic(user, list/href_list, datum/topic_state/state)
 	if(href_list["toggleUV"])
 		toggleUV(user)
 		return TOPIC_REFRESH
@@ -258,21 +258,21 @@
 	if(occupant)
 		eject_occupant(occupant)
 
-/obj/machinery/suit_storage_unit/proc/toggleUV(var/mob/user)
+/obj/machinery/suit_storage_unit/proc/toggleUV(mob/user)
 	if(!panelopen)
 		return
 	else
 		issuperUV = !issuperUV
 		to_chat(user, issuperUV ? SPAN_WARNING("You crank the dial all the way up to \"15nm\".") : SPAN_NOTICE("You slide the dial back towards \"185nm\"."))
 
-/obj/machinery/suit_storage_unit/proc/togglesafeties(var/mob/user)
+/obj/machinery/suit_storage_unit/proc/togglesafeties(mob/user)
 	if(!panelopen)
 		return
 	else
 		safetieson = !safetieson
 		to_chat(user, SPAN_NOTICE("You push the button. The coloured LED next to it [safetieson ? "turns green" : "turns red"]."))
 
-/obj/machinery/suit_storage_unit/proc/toggle_open(var/mob/user)
+/obj/machinery/suit_storage_unit/proc/toggle_open(mob/user)
 	if(!is_powered())
 		to_chat(user, SPAN_NOTICE("The unit is offline."))
 		return
@@ -285,7 +285,7 @@
 	isopen = !isopen
 	playsound(src, 'sound/machines/suitstorage_cycledoor.ogg', 50, 0)
 
-/obj/machinery/suit_storage_unit/proc/toggle_lock(var/mob/user)
+/obj/machinery/suit_storage_unit/proc/toggle_lock(mob/user)
 	if(!is_powered())
 		to_chat(user, SPAN_NOTICE("The unit is offline."))
 		return
@@ -300,7 +300,7 @@
 	islocked = !islocked
 	playsound(src, 'sound/machines/suitstorage_lockdoor.ogg', 50, 0)
 
-/obj/machinery/suit_storage_unit/proc/start_UV(var/mob/user)
+/obj/machinery/suit_storage_unit/proc/start_UV(mob/user)
 	if(isUV || isopen)
 		return
 	if(!is_powered())
@@ -373,7 +373,7 @@
 	update_icon()
 	SSnano.update_uis(src)
 
-/obj/machinery/suit_storage_unit/proc/eject_occupant(var/mob/user)
+/obj/machinery/suit_storage_unit/proc/eject_occupant(mob/user)
 	if(islocked)
 		return
 	if(!occupant)

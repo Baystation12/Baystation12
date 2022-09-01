@@ -75,7 +75,7 @@
 		return
 	print_report(user)
 
-/obj/item/device/scanner/OnTopic(var/user, var/list/href_list)
+/obj/item/device/scanner/OnTopic(user, list/href_list)
 	if(href_list["print"])
 		print_report(user)
 		return 1
@@ -85,7 +85,7 @@
 		scan_title = null
 		return 1
 
-/obj/item/device/scanner/proc/print_report(var/mob/living/user)
+/obj/item/device/scanner/proc/print_report(mob/living/user)
 	if(!scan_data)
 		to_chat(user, "There is no scan data to print.")
 		return

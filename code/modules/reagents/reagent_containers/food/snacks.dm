@@ -221,7 +221,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// FOOD END
 ////////////////////////////////////////////////////////////////////////////////
-/obj/item/reagent_containers/food/snacks/attack_animal(var/mob/living/user)
+/obj/item/reagent_containers/food/snacks/attack_animal(mob/living/user)
 	if(!isanimal(user) && !isalien(user))
 		return
 	user.visible_message("<b>[user]</b> nibbles away at \the [src].","You nibble away at \the [src].")
@@ -1351,7 +1351,7 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 10)
 
-/obj/item/reagent_containers/food/snacks/monkeycube/attack_self(var/mob/user)
+/obj/item/reagent_containers/food/snacks/monkeycube/attack_self(mob/user)
 	if(wrapped)
 		Unwrap(user)
 
@@ -1363,7 +1363,7 @@
 		monkey.dropInto(src.loc)
 		qdel(src)
 
-/obj/item/reagent_containers/food/snacks/monkeycube/proc/Unwrap(var/mob/user)
+/obj/item/reagent_containers/food/snacks/monkeycube/proc/Unwrap(mob/user)
 	icon_state = "monkeycube"
 	desc = "Just add water!"
 	to_chat(user, SPAN_NOTICE("You unwrap \the [src]."))
@@ -3180,7 +3180,7 @@
 	sealed = FALSE
 	update_icon()
 
-/obj/item/reagent_containers/food/snacks/canned/attack_self(var/mob/user)
+/obj/item/reagent_containers/food/snacks/canned/attack_self(mob/user)
 	if(sealed)
 		playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
 		to_chat(user, "<span class='notice'>You unseal \the [src] with a crack of metal.</span>")
@@ -3232,7 +3232,7 @@
 	reagents.add_reagent(/datum/reagent/drink/juice/tomato, 12)
 
 
-/obj/item/reagent_containers/food/snacks/canned/tomato/feed_sound(var/mob/user)
+/obj/item/reagent_containers/food/snacks/canned/tomato/feed_sound(mob/user)
 	playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
 
 /obj/item/reagent_containers/food/snacks/canned/spinach

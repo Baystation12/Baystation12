@@ -1,7 +1,7 @@
 /datum/extension/interactive/multitool/circuitboards/shuttle_console
 	expected_type = /obj/item/stock_parts/circuitboard/shuttle_console
 
-/datum/extension/interactive/multitool/circuitboards/shuttle_console/get_interact_window(var/obj/item/device/multitool/M, var/mob/user)
+/datum/extension/interactive/multitool/circuitboards/shuttle_console/get_interact_window(obj/item/device/multitool/M, mob/user)
 	var/obj/item/stock_parts/circuitboard/shuttle_console/board = holder
 	var/dat = list()
 	dat += "<b>Current Selected Shuttle:</b>  [board.shuttle_tag || "NONE"]<br>"
@@ -22,7 +22,7 @@
 			return MT_NOACTION
 		if(!board.is_valid_shuttle(SSshuttle.shuttles[new_name]))
 			to_chat(user, SPAN_WARNING("The current shuttle does not support this console type. Try a different shuttle or circuit board."))
-			return MT_NOACTION		
+			return MT_NOACTION
 		board.shuttle_tag = new_name
 		to_chat(user, SPAN_NOTICE("You set the shuttle name to '[new_name]'"))
 		return MT_REFRESH

@@ -50,7 +50,7 @@
 		A.forceMove(src.loc)
 	update_icon()
 
-/obj/structure/pit/proc/close(var/user)
+/obj/structure/pit/proc/close(user)
 	name = "mound"
 	desc = "Some things are better left buried."
 	open = 0

@@ -56,7 +56,7 @@ var/global/list/all_gps_units = list()
 /obj/item/device/gps/proc/check_visible_to_holder()
 	. = holder && (holder.l_hand == src || holder.r_hand == src)
 
-/obj/item/device/gps/proc/update_holder(var/force_clear = FALSE)
+/obj/item/device/gps/proc/update_holder(force_clear = FALSE)
 
 	if(holder && (force_clear || loc != holder))
 		GLOB.moved_event.unregister(holder, src)
@@ -109,7 +109,7 @@ var/global/list/all_gps_units = list()
 	QDEL_NULL(compass)
 	return ..()
 
-/obj/item/device/gps/proc/can_track(var/obj/item/device/gps/other, var/reachable_z_levels)
+/obj/item/device/gps/proc/can_track(obj/item/device/gps/other, reachable_z_levels)
 	if(!other.tracking || other.emped || other.hide_signal)
 		return FALSE
 
@@ -132,7 +132,7 @@ var/global/list/all_gps_units = list()
 		LAZYDISTINCTADD(reachable_z_levels, adding_sites)
 	return (target.z in reachable_z_levels)
 
-/obj/item/device/gps/proc/update_compass(var/update_compass_icon)
+/obj/item/device/gps/proc/update_compass(update_compass_icon)
 
 	compass.hide_waypoints(FALSE)
 
@@ -153,7 +153,7 @@ var/global/list/all_gps_units = list()
 
 	compass.rebuild_overlay_lists(update_compass_icon)
 
-/obj/item/device/gps/proc/toggle_tracking(var/mob/user, var/silent)
+/obj/item/device/gps/proc/toggle_tracking(mob/user, silent)
 
 	if(emped)
 		if(!silent)
@@ -264,7 +264,7 @@ var/global/list/all_gps_units = list()
 	else
 		.["no_signals"] = TRUE
 
-/obj/item/device/gps/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
+/obj/item/device/gps/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, master_ui = null, datum/topic_state/state = GLOB.default_state)
 
 	var/data = ui_data()
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -274,7 +274,7 @@ var/global/list/all_gps_units = list()
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/item/device/gps/OnTopic(var/mob/user, var/list/href_list)
+/obj/item/device/gps/OnTopic(mob/user, list/href_list)
 
 	if(href_list["toggle_power"])
 		toggle_tracking()

@@ -11,7 +11,7 @@
 	to_chat(user, "<span class='notice'>As soon as both points have been selected, the ladder is created.</span>")
 	to_chat(user, "<span class='notice'>***********************************************************</span>")
 
-/datum/build_mode/ladders/OnClick(var/atom/A, var/list/parameters)
+/datum/build_mode/ladders/OnClick(atom/A, list/parameters)
 	if(parameters["left"])
 		ladder_upper = get_turf(A)
 		to_chat(user, "<span class='notice'>Defined [ladder_upper] ([ladder_upper.type]) as the upper ladder location.</span>")

@@ -5,7 +5,7 @@
 	var/stamina_cost = 10
 	var/reflexive_modifier = 1
 
-/decl/maneuver/proc/can_be_used_by(var/mob/living/user, var/atom/target, var/silent = FALSE)
+/decl/maneuver/proc/can_be_used_by(mob/living/user, atom/target, silent = FALSE)
 	if(!istype(user) || !user.can_do_maneuver(src, silent))
 		return FALSE
 	if(user.buckled)
@@ -34,10 +34,10 @@
 		return FALSE
 	return TRUE
 
-/decl/maneuver/proc/show_initial_message(var/mob/user, var/atom/target)
+/decl/maneuver/proc/show_initial_message(mob/user, atom/target)
 	return
 
-/decl/maneuver/proc/perform(var/mob/living/user, var/atom/target, var/strength, var/reflexively = FALSE)
+/decl/maneuver/proc/perform(mob/living/user, atom/target, strength, reflexively = FALSE)
 	if(can_be_used_by(user, target))
 		var/do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT
 		if(!reflexively)

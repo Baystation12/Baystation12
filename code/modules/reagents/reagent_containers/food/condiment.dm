@@ -31,21 +31,21 @@
 		/datum/reagent/oliveoil = /obj/item/reagent_containers/food/condiment/small/oliveoil
 		)
 
-/obj/item/reagent_containers/food/condiment/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/item/reagent_containers/food/condiment/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/pen) || istype(W, /obj/item/device/flashlight/pen))
 		var/tmp_label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
 		var/datum/extension/labels/L = get_or_create_extension(src, /datum/extension/labels)
 		L.AttachLabel(user, tmp_label)
 		return
 
-/obj/item/reagent_containers/food/condiment/attack_self(var/mob/user as mob)
+/obj/item/reagent_containers/food/condiment/attack_self(mob/user as mob)
 	return
 
-/obj/item/reagent_containers/food/condiment/attack(var/mob/M as mob, var/mob/user as mob, var/def_zone)
+/obj/item/reagent_containers/food/condiment/attack(mob/M as mob, mob/user as mob, def_zone)
 	if(standard_feed_mob(user, M))
 		return
 
-/obj/item/reagent_containers/food/condiment/afterattack(var/obj/target, var/mob/user, var/proximity)
+/obj/item/reagent_containers/food/condiment/afterattack(obj/target, mob/user, proximity)
 	if(!proximity)
 		return
 
@@ -68,10 +68,10 @@
 	else
 		..()
 
-/obj/item/reagent_containers/food/condiment/feed_sound(var/mob/user)
+/obj/item/reagent_containers/food/condiment/feed_sound(mob/user)
 	playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
 
-/obj/item/reagent_containers/food/condiment/self_feed_message(var/mob/user)
+/obj/item/reagent_containers/food/condiment/self_feed_message(mob/user)
 	to_chat(user, "<span class='notice'>You swallow some of contents of \the [src].</span>")
 
 /obj/item/reagent_containers/food/condiment/Initialize()

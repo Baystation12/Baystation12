@@ -2,7 +2,7 @@
 	var/datum/nano_module/appearance_changer/changer = new(src, flags, species)
 	changer.ui_interact(user, state = state)
 
-/mob/living/carbon/human/proc/change_species(var/new_species)
+/mob/living/carbon/human/proc/change_species(new_species)
 	if(!new_species)
 		return
 
@@ -20,7 +20,7 @@
 	reset_hair()
 	return 1
 
-/mob/living/carbon/human/proc/change_gender(var/gender)
+/mob/living/carbon/human/proc/change_gender(gender)
 	if(src.gender == gender)
 		return
 
@@ -81,7 +81,7 @@
 
 	update_hair()
 
-/mob/living/carbon/human/proc/change_eye_color(var/red, var/green, var/blue)
+/mob/living/carbon/human/proc/change_eye_color(red, green, blue)
 	var/new_eye_color = rgb(red, green, blue)
 	if (eye_color == new_eye_color)
 		return
@@ -90,7 +90,7 @@
 	update_body()
 	return 1
 
-/mob/living/carbon/human/proc/change_hair_color(var/red, var/green, var/blue)
+/mob/living/carbon/human/proc/change_hair_color(red, green, blue)
 	var/new_head_hair_color = rgb(red, green, blue)
 	if (head_hair_color == new_head_hair_color)
 		return
@@ -100,7 +100,7 @@
 	update_hair()
 	return 1
 
-/mob/living/carbon/human/proc/change_facial_hair_color(var/red, var/green, var/blue)
+/mob/living/carbon/human/proc/change_facial_hair_color(red, green, blue)
 	var/new_facial_hair_color = rgb(red, green, blue)
 	if (facial_hair_color == new_facial_hair_color)
 		return
@@ -108,7 +108,7 @@
 	update_hair()
 	return 1
 
-/mob/living/carbon/human/proc/change_skin_color(var/red, var/green, var/blue)
+/mob/living/carbon/human/proc/change_skin_color(red, green, blue)
 	if (!(species.appearance_flags & HAS_SKIN_COLOR))
 		return
 	var/new_skin_color = rgb(red, green, blue)
@@ -119,7 +119,7 @@
 	update_body()
 	return 1
 
-/mob/living/carbon/human/proc/change_skin_tone(var/new_skin_tone)
+/mob/living/carbon/human/proc/change_skin_tone(new_skin_tone)
 	if(skin_tone == new_skin_tone || !(species.appearance_flags & HAS_A_SKIN_TONE))
 		return
 	skin_tone = new_skin_tone
@@ -149,7 +149,7 @@
 			result[lang_key] = all_languages[lang_key]
 	return result
 
-/mob/living/carbon/human/proc/generate_valid_species(var/check_whitelist = 1, var/list/whitelist = list(), var/list/blacklist = list())
+/mob/living/carbon/human/proc/generate_valid_species(check_whitelist = 1, list/whitelist = list(), list/blacklist = list())
 	var/list/valid_species = new()
 	for(var/current_species_name in all_species)
 		var/datum/species/current_species = all_species[current_species_name]
@@ -168,7 +168,7 @@
 
 	return valid_species
 
-/mob/living/carbon/human/proc/generate_valid_hairstyles(var/check_gender = 1)
+/mob/living/carbon/human/proc/generate_valid_hairstyles(check_gender = 1)
 	. = list()
 	var/list/hair_styles = species.get_hair_styles()
 	for(var/hair_style in hair_styles)

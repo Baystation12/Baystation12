@@ -38,7 +38,7 @@ var/global/bomb_set
 	auth = null
 	return ..()
 
-/obj/machinery/nuclearbomb/Process(var/wait)
+/obj/machinery/nuclearbomb/Process(wait)
 	if(timing)
 		timeleft = max(timeleft - (wait / 10), 0)
 		playsound(loc, 'sound/items/timer.ogg', 50)
@@ -164,7 +164,7 @@ var/global/bomb_set
 		ui_interact(user)
 		return TRUE
 
-/obj/machinery/nuclearbomb/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/nuclearbomb/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/data[0]
 	data["hacking"] = 0
 	data["auth"] = is_auth(user)
@@ -214,7 +214,7 @@ var/global/bomb_set
 		deployable = 1
 	return
 
-/obj/machinery/nuclearbomb/proc/is_auth(var/mob/user)
+/obj/machinery/nuclearbomb/proc/is_auth(mob/user)
 	if(auth)
 		return 1
 	if(user.can_admin_interact())

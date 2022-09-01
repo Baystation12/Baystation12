@@ -14,7 +14,7 @@
 			else
 				map[current_cell] = FLOOR_CHAR
 
-/datum/random_map/building/handle_post_overlay_on(var/datum/random_map/target_map, var/tx, var/ty)
+/datum/random_map/building/handle_post_overlay_on(datum/random_map/target_map, tx, ty)
 	var/list/possible_doors
 	for(var/x = 1, x <= limit_x, x++)
 		for(var/y = 1, y <= limit_y, y++)

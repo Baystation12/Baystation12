@@ -32,7 +32,7 @@
 		)
 	var/shackle = 0
 
-/obj/item/organ/internal/posibrain/New(var/mob/living/carbon/H)
+/obj/item/organ/internal/posibrain/New(mob/living/carbon/H)
 	..()
 	if(!brainmob && H)
 		init(H)
@@ -42,7 +42,7 @@
 	if (!is_processing)
 		START_PROCESSING(SSobj, src)
 
-/obj/item/organ/internal/posibrain/proc/init(var/mob/living/carbon/H)
+/obj/item/organ/internal/posibrain/proc/init(mob/living/carbon/H)
 	brainmob = new(src)
 
 	if(istype(H))
@@ -112,7 +112,7 @@
 			if (sneaky)
 				brainmob.real_name = sneaky
 				brainmob.SetName(brainmob.real_name)
-				UpdateNames() 
+				UpdateNames()
 		else
 			to_chat(brainmob, SPAN_NOTICE("You're safe! Your brain didn't manage to replace you. This time."))
 	else
@@ -190,7 +190,7 @@
 	src.brainmob.SetName("[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[random_id(type,100,999)]")
 	src.brainmob.real_name = src.brainmob.name
 
-/obj/item/organ/internal/posibrain/proc/shackle(var/given_lawset)
+/obj/item/organ/internal/posibrain/proc/shackle(given_lawset)
 	if(given_lawset)
 		brainmob.laws = given_lawset
 	shackle = 1
@@ -213,7 +213,7 @@
 	if(shackle)
 		overlays |= image('icons/obj/assemblies.dmi', "posibrain-shackles")
 
-/obj/item/organ/internal/posibrain/proc/transfer_identity(var/mob/living/carbon/H)
+/obj/item/organ/internal/posibrain/proc/transfer_identity(mob/living/carbon/H)
 	if(H && H.mind)
 		brainmob.set_stat(CONSCIOUS)
 		H.mind.transfer_to(brainmob)
@@ -268,7 +268,7 @@
 					S.start()
 
 
-/obj/item/organ/internal/posibrain/removed(var/mob/living/user)
+/obj/item/organ/internal/posibrain/removed(mob/living/user)
 	if(!istype(owner))
 		return ..()
 	UpdateNames()
@@ -286,7 +286,7 @@
 		return
 	SetName("\the [initial(name)]")
 
-/obj/item/organ/internal/posibrain/replaced(var/mob/living/target)
+/obj/item/organ/internal/posibrain/replaced(mob/living/target)
 
 	if(!..()) return 0
 
@@ -330,4 +330,3 @@
 
 
 	brainmob.open_subsystem(/datum/nano_module/law_manager, usr)
-	

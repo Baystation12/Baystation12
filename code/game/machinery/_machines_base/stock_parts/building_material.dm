@@ -11,7 +11,7 @@
 	QDEL_NULL_LIST(materials)
 	. = ..()
 
-/obj/item/stock_parts/building_material/proc/number_of_type(var/type)
+/obj/item/stock_parts/building_material/proc/number_of_type(type)
 	. = 0
 	for(var/obj/item/thing in materials)
 		if(istype(thing, type))
@@ -21,7 +21,7 @@
 			else
 				.++
 
-/obj/item/stock_parts/building_material/proc/add_material(var/obj/item/new_material)
+/obj/item/stock_parts/building_material/proc/add_material(obj/item/new_material)
 	if(istype(new_material, /obj/item/stack))
 		var/obj/item/stack/stack = new_material
 		for(var/obj/item/stack/old_stack in materials)
@@ -50,7 +50,7 @@
 			item.dropInto(loc)
 			return item
 
-/obj/item/stock_parts/building_material/on_uninstall(var/obj/machinery/machine)
+/obj/item/stock_parts/building_material/on_uninstall(obj/machinery/machine)
 	for(var/obj/item/I in materials)
 		I.dropInto(loc)
 	materials = null

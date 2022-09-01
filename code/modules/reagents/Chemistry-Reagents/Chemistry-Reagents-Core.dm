@@ -29,13 +29,13 @@
 	heating_point = 318
 	heating_message = "coagulates and clumps together."
 
-/datum/reagent/blood/initialize_data(var/newdata)
+/datum/reagent/blood/initialize_data(newdata)
 	..()
 	if(data && data["blood_colour"])
 		color = data["blood_colour"]
 	return
 
-/datum/reagent/blood/proc/sync_to(var/mob/living/carbon/C)
+/datum/reagent/blood/proc/sync_to(mob/living/carbon/C)
 	data = C.get_blood_data()
 	color = data["blood_colour"]
 
@@ -43,7 +43,7 @@
 	var/t = data.Copy()
 	return t
 
-/datum/reagent/blood/touch_turf(var/turf/simulated/T)
+/datum/reagent/blood/touch_turf(turf/simulated/T)
 	if(!istype(T) || volume < 3)
 		return
 	var/weakref/W = data["donor"]
@@ -58,20 +58,20 @@
 		if(B)
 			B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
 
-/datum/reagent/blood/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/blood/affect_ingest(mob/living/carbon/M, alien, removed)
 
 	if(M.chem_doses[type] > 5)
 		M.adjustToxLoss(removed)
 	if(M.chem_doses[type] > 15)
 		M.adjustToxLoss(removed)
 
-/datum/reagent/blood/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/blood/affect_touch(mob/living/carbon/M, alien, removed)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.isSynthetic())
 			return
 
-/datum/reagent/blood/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/blood/affect_blood(mob/living/carbon/M, alien, removed)
 	M.inject_blood(src, volume)
 	remove_self(volume)
 
@@ -94,20 +94,20 @@
 	heating_point = T100C
 	value = 0
 
-/datum/reagent/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/water/affect_blood(mob/living/carbon/M, alien, removed)
 	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
 		return
 	M.adjustToxLoss(2 * removed)
 
-/datum/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/water/affect_ingest(mob/living/carbon/M, alien, removed)
 	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
 		return
 	M.adjustToxLoss(2 * removed)
 
-/datum/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/water/affect_ingest(mob/living/carbon/M, alien, removed)
 	M.adjust_hydration(removed * 10)
 
-/datum/reagent/water/touch_turf(var/turf/simulated/T)
+/datum/reagent/water/touch_turf(turf/simulated/T)
 	if(!istype(T))
 		return
 
@@ -132,7 +132,7 @@
 		var/turf/simulated/S = T
 		S.wet_floor(8, TRUE)
 
-/datum/reagent/water/touch_obj(var/obj/O)
+/datum/reagent/water/touch_obj(obj/O)
 	if(istype(O, /obj/item/reagent_containers/food/snacks/monkeycube))
 		var/obj/item/reagent_containers/food/snacks/monkeycube/cube = O
 		if(!cube.wrapped)
@@ -143,7 +143,7 @@
 		if(TF.fire_power <= 0)
 			qdel(TF)
 
-/datum/reagent/water/touch_mob(var/mob/living/L, var/amount)
+/datum/reagent/water/touch_mob(mob/living/L, amount)
 	var/mob/living/carbon/human/H = L
 	if(istype(H))
 		var/obj/item/clothing/mask/smokable/S = H.wear_mask
@@ -162,7 +162,7 @@
 			L.adjust_fire_stacks(-(amount / 10))
 			remove_self(amount)
 
-/datum/reagent/water/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/water/affect_touch(mob/living/carbon/M, alien, removed)
 	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
 		return
 	M.adjustToxLoss(10 * removed)	// Babies have 150 health, adults have 200; So, 15 units and 20
@@ -217,15 +217,15 @@
 	value = 6.8
 	accelerant_quality = 10
 
-/datum/reagent/fuel/touch_turf(var/turf/T)
+/datum/reagent/fuel/touch_turf(turf/T)
 	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
 	remove_self(volume)
 	return
 
-/datum/reagent/fuel/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/fuel/affect_blood(mob/living/carbon/M, alien, removed)
 	M.adjustToxLoss(2 * removed)
 
-/datum/reagent/fuel/touch_mob(var/mob/living/L, var/amount)
+/datum/reagent/fuel/touch_mob(mob/living/L, amount)
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 10) // Splashing people with welding fuel to make them easy to ignite!
 

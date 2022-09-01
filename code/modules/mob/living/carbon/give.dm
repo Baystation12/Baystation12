@@ -1,4 +1,4 @@
-/mob/living/carbon/human/verb/give(var/mob/living/target in view(1)-usr)
+/mob/living/carbon/human/verb/give(mob/living/target in view(1)-usr)
 	set category = "IC"
 	set name = "Give"
 

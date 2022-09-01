@@ -74,7 +74,7 @@
 		return
 	return 0
 
-/obj/item/reagent_containers/glass/standard_feed_mob(var/mob/user, var/mob/target)
+/obj/item/reagent_containers/glass/standard_feed_mob(mob/user, mob/target)
 	if(!is_open_container())
 		to_chat(user, "<span class='notice'>You need to open \the [src] first.</span>")
 		return 1
@@ -82,7 +82,7 @@
 		return 1
 	return ..()
 
-/obj/item/reagent_containers/glass/self_feed_message(var/mob/user)
+/obj/item/reagent_containers/glass/self_feed_message(mob/user)
 	to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
 	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
 		for(var/datum/reagent/R in reagents.reagent_list)
@@ -299,7 +299,7 @@
 	matter = list(MATERIAL_WOOD = 280)
 	volume = 200
 
-/obj/item/reagent_containers/glass/bucket/attackby(var/obj/D, mob/user as mob)
+/obj/item/reagent_containers/glass/bucket/attackby(obj/D, mob/user as mob)
 	if(istype(D, /obj/item/mop))
 		if(reagents.total_volume < 1)
 			to_chat(user, "<span class='warning'>\The [src] is empty!</span>")

@@ -47,7 +47,7 @@
 
 		add_underlay(T, node3, dir)
 
-/obj/machinery/atmospherics/tvalve/hide(var/i)
+/obj/machinery/atmospherics/tvalve/hide(i)
 	update_underlays()
 
 /obj/machinery/atmospherics/tvalve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
@@ -183,7 +183,7 @@
 
 	init_nodes(node1_dir, node2_dir, node3_dir)
 
-/obj/machinery/atmospherics/tvalve/proc/init_nodes(var/node1_dir, var/node2_dir, var/node3_dir)
+/obj/machinery/atmospherics/tvalve/proc/init_nodes(node1_dir, node2_dir, node3_dir)
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
 		if(target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
@@ -264,7 +264,7 @@
 
 	return null
 
-/obj/machinery/atmospherics/tvalve/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/tvalve/attackby(obj/item/W as obj, mob/user as mob)
 	if(!isWrench(W))
 		return ..()
 	var/datum/gas_mixture/int_air = return_air()

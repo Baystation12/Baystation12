@@ -117,7 +117,7 @@
 				to_chat(user, "You repair some dents on \the [src].")
 
 
-/obj/item/airlock_brace/proc/take_damage(var/amount)
+/obj/item/airlock_brace/proc/take_damage(amount)
 	cur_health = clamp(cur_health - amount, 0, max_health)
 	if(!cur_health)
 		if(airlock)
@@ -126,7 +126,7 @@
 		qdel(src)
 
 
-/obj/item/airlock_brace/proc/unlock_brace(var/mob/user)
+/obj/item/airlock_brace/proc/unlock_brace(mob/user)
 	if(!airlock)
 		return
 	if(user)

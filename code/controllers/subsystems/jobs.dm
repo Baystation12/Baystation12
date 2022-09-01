@@ -108,7 +108,7 @@ SUBSYSTEM_DEF(jobs)
 	spawn_empty_ai()
 
 
-/datum/controller/subsystem/jobs/proc/guest_jobbans(var/job)
+/datum/controller/subsystem/jobs/proc/guest_jobbans(job)
 	for(var/dept in list(COM, MSC, SEC))
 		if(job in titles_by_department(dept))
 			return TRUE
@@ -124,14 +124,14 @@ SUBSYSTEM_DEF(jobs)
 		job.current_positions = 0
 	unassigned_roundstart = list()
 
-/datum/controller/subsystem/jobs/proc/get_by_title(var/rank)
+/datum/controller/subsystem/jobs/proc/get_by_title(rank)
 	return titles_to_datums[rank]
 
-/datum/controller/subsystem/jobs/proc/get_by_path(var/path)
+/datum/controller/subsystem/jobs/proc/get_by_path(path)
 	RETURN_TYPE(/datum/job)
 	return types_to_datums[path]
 
-/datum/controller/subsystem/jobs/proc/check_general_join_blockers(var/mob/new_player/joining, var/datum/job/job)
+/datum/controller/subsystem/jobs/proc/check_general_join_blockers(mob/new_player/joining, datum/job/job)
 	if(!istype(joining) || !joining.client || !joining.client.prefs)
 		return FALSE
 	if(!istype(job))
@@ -148,7 +148,7 @@ SUBSYSTEM_DEF(jobs)
 		return FALSE
 	return TRUE
 
-/datum/controller/subsystem/jobs/proc/check_latejoin_blockers(var/mob/new_player/joining, var/datum/job/job)
+/datum/controller/subsystem/jobs/proc/check_latejoin_blockers(mob/new_player/joining, datum/job/job)
 	if(!check_general_join_blockers(joining, job))
 		return FALSE
 	if(job.minimum_character_age && (joining.client.prefs.age < job.minimum_character_age))
@@ -162,7 +162,7 @@ SUBSYSTEM_DEF(jobs)
 		return FALSE
 	return TRUE
 
-/datum/controller/subsystem/jobs/proc/check_unsafe_spawn(var/mob/living/spawner, var/turf/spawn_turf)
+/datum/controller/subsystem/jobs/proc/check_unsafe_spawn(mob/living/spawner, turf/spawn_turf)
 	var/radlevel = SSradiation.get_rads_at_turf(spawn_turf)
 	var/airstatus = IsTurfAtmosUnsafe(spawn_turf)
 	if(airstatus || radlevel > 0)
@@ -176,7 +176,7 @@ SUBSYSTEM_DEF(jobs)
 			log_and_message_admins("User [spawner] spawned at spawn point with dangerous atmosphere.")
 	return TRUE
 
-/datum/controller/subsystem/jobs/proc/assign_role(var/mob/new_player/player, var/rank, var/latejoin = 0, var/datum/game_mode/mode = SSticker.mode)
+/datum/controller/subsystem/jobs/proc/assign_role(mob/new_player/player, rank, latejoin = 0, datum/game_mode/mode = SSticker.mode)
 	if(player && player.mind && rank)
 		var/datum/job/job = get_by_title(rank)
 		if(!job)
@@ -217,7 +217,7 @@ SUBSYSTEM_DEF(jobs)
 			candidates += player
 	return candidates
 
-/datum/controller/subsystem/jobs/proc/give_random_job(var/mob/new_player/player, var/datum/game_mode/mode = SSticker.mode)
+/datum/controller/subsystem/jobs/proc/give_random_job(mob/new_player/player, datum/game_mode/mode = SSticker.mode)
 	for(var/datum/job/job in shuffle(primary_job_datums))
 		if(!job)
 			continue
@@ -241,7 +241,7 @@ SUBSYSTEM_DEF(jobs)
 			break
 
 ///This proc is called before the level loop of divide_occupations() and will try to select a head, ignoring ALL non-head preferences for every level until it locates a head or runs out of levels to check
-/datum/controller/subsystem/jobs/proc/fill_head_position(var/datum/game_mode/mode)
+/datum/controller/subsystem/jobs/proc/fill_head_position(datum/game_mode/mode)
 	for(var/level = 1 to 3)
 		for(var/command_position in titles_by_department(COM))
 			var/datum/job/job = get_by_title(command_position)
@@ -276,7 +276,7 @@ SUBSYSTEM_DEF(jobs)
 	return 0
 
 ///This proc is called at the start of the level loop of divide_occupations() and will cause head jobs to be checked before any other jobs of the same level
-/datum/controller/subsystem/jobs/proc/CheckHeadPositions(var/level, var/datum/game_mode/mode)
+/datum/controller/subsystem/jobs/proc/CheckHeadPositions(level, datum/game_mode/mode)
 	for(var/command_position in titles_by_department(COM))
 		var/datum/job/job = get_by_title(command_position)
 		if(!job)	continue
@@ -359,7 +359,7 @@ SUBSYSTEM_DEF(jobs)
 			unassigned_roundstart -= player
 	return TRUE
 
-/datum/controller/subsystem/jobs/proc/attempt_role_assignment(var/mob/new_player/player, var/datum/job/job, var/level, var/datum/game_mode/mode)
+/datum/controller/subsystem/jobs/proc/attempt_role_assignment(mob/new_player/player, datum/job/job, level, datum/game_mode/mode)
 	if(!jobban_isbanned(player, job.title) && \
 	 job.player_old_enough(player.client) && \
 	 player.client.prefs.CorrectLevel(job, level) && \
@@ -368,7 +368,7 @@ SUBSYSTEM_DEF(jobs)
 		return TRUE
 	return FALSE
 
-/datum/controller/subsystem/jobs/proc/equip_custom_loadout(var/mob/living/carbon/human/H, var/datum/job/job)
+/datum/controller/subsystem/jobs/proc/equip_custom_loadout(mob/living/carbon/human/H, datum/job/job)
 
 	if(!H || !H.client)
 		return
@@ -429,7 +429,7 @@ SUBSYSTEM_DEF(jobs)
 
 	return spawn_in_storage
 
-/datum/controller/subsystem/jobs/proc/equip_rank(var/mob/living/carbon/human/H, var/rank, var/joined_late = 0)
+/datum/controller/subsystem/jobs/proc/equip_rank(mob/living/carbon/human/H, rank, joined_late = 0)
 	if(!H)
 		return
 
@@ -555,7 +555,7 @@ SUBSYSTEM_DEF(jobs)
 
 	return H
 
-/datum/controller/subsystem/jobs/proc/titles_by_department(var/dept)
+/datum/controller/subsystem/jobs/proc/titles_by_department(dept)
 	return positions_by_department["[dept]"] || list()
 
 /datum/controller/subsystem/jobs/proc/spawn_empty_ai()

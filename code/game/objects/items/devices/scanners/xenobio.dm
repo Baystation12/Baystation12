@@ -27,7 +27,7 @@
 	scan_data = xenobio_scan_results(O)
 	user.show_message(SPAN_NOTICE(scan_data))
 
-/proc/list_gases(var/gases)
+/proc/list_gases(gases)
 	. = list()
 	for(var/g in gases)
 		. += "[gas_data.name[g]] ([gases[g]]%)"

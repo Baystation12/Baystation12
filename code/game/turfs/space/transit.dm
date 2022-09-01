@@ -6,7 +6,7 @@
 	return
 
 //generates a list used to randomize transit animations so they aren't in lockstep
-/turf/space/transit/proc/get_cross_shift_list(var/size)
+/turf/space/transit/proc/get_cross_shift_list(size)
 	var/list/result = list()
 
 	result += rand(0, 14)

@@ -12,14 +12,14 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	w_class = ITEM_SIZE_HUGE
-	
+
 	machine_name = "body scanner display"
 	machine_desc = "Receives body scans from a linked body scanner and allows them to be viewed remotely."
-	
+
 	var/list/bodyscans = list()
 	var/selected = 0
 
-/obj/machinery/body_scan_display/proc/add_new_scan(var/list/scan)
+/obj/machinery/body_scan_display/proc/add_new_scan(list/scan)
 	bodyscans += list(scan.Copy())
 	updateUsrDialog()
 
@@ -45,7 +45,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/body_scan_display/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open=1)
+/obj/machinery/body_scan_display/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open=1)
 	var/list/data = list()
 	data["scans"] = bodyscans
 	data["selected"] = selected

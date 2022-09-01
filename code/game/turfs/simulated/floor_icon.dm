@@ -1,6 +1,6 @@
 var/global/list/flooring_cache = list()
 
-/turf/simulated/floor/on_update_icon(var/update_neighbors)
+/turf/simulated/floor/on_update_icon(update_neighbors)
 
 	update_flood_overlay()
 
@@ -92,7 +92,7 @@ var/global/list/flooring_cache = list()
 			F.queue_ao(FALSE)
 			F.update_icon()
 
-/turf/simulated/floor/proc/get_flooring_overlay(var/cache_key, var/icon_base, var/icon_dir = 0, var/external = FALSE)
+/turf/simulated/floor/proc/get_flooring_overlay(cache_key, icon_base, icon_dir = 0, external = FALSE)
 	if(!flooring_cache[cache_key])
 		var/image/I = image(icon = flooring.icon, icon_state = icon_base, dir = icon_dir)
 		I.turf_decal_layerise()
@@ -113,7 +113,7 @@ var/global/list/flooring_cache = list()
 		flooring_cache[cache_key] = I
 	return flooring_cache[cache_key]
 
-/turf/simulated/floor/proc/get_damage_overlay(var/cache_key, var/blend)
+/turf/simulated/floor/proc/get_damage_overlay(cache_key, blend)
 	if(!flooring_cache[cache_key])
 		var/image/I = image(icon = 'icons/turf/flooring/damage.dmi', icon_state = cache_key)
 		if(blend)
@@ -122,7 +122,7 @@ var/global/list/flooring_cache = list()
 		flooring_cache[cache_key] = I
 	return flooring_cache[cache_key]
 
-/decl/flooring/proc/test_link(var/turf/origin, var/turf/T)
+/decl/flooring/proc/test_link(turf/origin, turf/T)
 	var/is_linked = FALSE
 	//is_wall is true for wall turfs and for floors containing a low wall
 	if(T.is_wall())
@@ -168,5 +168,5 @@ var/global/list/flooring_cache = list()
 						break
 	return is_linked
 
-/decl/flooring/proc/symmetric_test_link(var/turf/A, var/turf/B)
+/decl/flooring/proc/symmetric_test_link(turf/A, turf/B)
 	return test_link(A, B) && test_link(B,A)

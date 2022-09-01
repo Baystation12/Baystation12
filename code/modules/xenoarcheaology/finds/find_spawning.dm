@@ -1,4 +1,4 @@
-/proc/get_archeological_find_by_findtype(var/find_type)
+/proc/get_archeological_find_by_findtype(find_type)
 	for(var/T in typesof(/obj/item/archaeological_find))
 		var/obj/item/archaeological_find/F = T
 		if(find_type == initial(F.find_type))

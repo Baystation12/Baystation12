@@ -50,7 +50,7 @@
 /obj/machinery/atmospherics/valve/shutoff/physical_attack_hand(mob/user)
 	return FALSE
 
-/obj/machinery/atmospherics/valve/shutoff/hide(var/do_hide)
+/obj/machinery/atmospherics/valve/shutoff/hide(do_hide)
 	if(istype(loc, /turf/simulated))
 		set_invisibility(do_hide ? 101 : 0)
 	update_underlays()

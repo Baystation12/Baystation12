@@ -18,7 +18,7 @@
 	for(var/R in filling)
 		reagents.add_reagent(R, filling[R])
 
-/obj/item/clothing/mask/chewable/equipped(var/mob/living/user, var/slot)
+/obj/item/clothing/mask/chewable/equipped(mob/living/user, slot)
 	..()
 	if(slot == slot_wear_mask)
 		if(user.check_has_mouth())
@@ -67,7 +67,7 @@
 	desc = "A disgusting spitwad."
 	icon_state = "spit-chew"
 
-/obj/item/clothing/mask/chewable/proc/extinguish(var/mob/user, var/no_message)
+/obj/item/clothing/mask/chewable/proc/extinguish(mob/user, no_message)
 	STOP_PROCESSING(SSobj, src)
 	if (type_butt)
 		var/obj/item/butt = new type_butt(get_turf(src))

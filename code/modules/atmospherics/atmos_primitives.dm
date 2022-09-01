@@ -15,7 +15,7 @@
 
 /obj/machinery/atmospherics/var/debug = 0
 
-/client/proc/atmos_toggle_debug(var/obj/machinery/atmospherics/M in world)
+/client/proc/atmos_toggle_debug(obj/machinery/atmospherics/M in world)
 	set name = "Toggle Debug Messages"
 	set category = "Debug"
 	M.debug = !M.debug
@@ -25,7 +25,7 @@
 //Moves gas from one gas_mixture to another and returns the amount of power needed (assuming 1 second), or -1 if no gas was pumped.
 //transfer_moles - Limits the amount of moles to transfer. The actual amount of gas moved may also be limited by available_power, if given.
 //available_power - the maximum amount of power that may be used when moving gas. If null then the transfer is not limited by power.
-/proc/pump_gas(var/obj/machinery/M, var/datum/gas_mixture/source, var/datum/gas_mixture/sink, var/transfer_moles = null, var/available_power = null)
+/proc/pump_gas(obj/machinery/M, datum/gas_mixture/source, datum/gas_mixture/sink, transfer_moles = null, available_power = null)
 	if (source.total_moles < MINIMUM_MOLES_TO_PUMP) //if we can't transfer enough gas just stop to avoid further processing
 		return -1
 
@@ -68,7 +68,7 @@
 	return power_draw
 
 //Gas 'pumping' proc for the case where the gas flow is passive and driven entirely by pressure differences (but still one-way).
-/proc/pump_gas_passive(var/obj/machinery/M, var/datum/gas_mixture/source, var/datum/gas_mixture/sink, var/transfer_moles = null)
+/proc/pump_gas_passive(obj/machinery/M, datum/gas_mixture/source, datum/gas_mixture/sink, transfer_moles = null)
 	if (source.total_moles < MINIMUM_MOLES_TO_PUMP) //if we can't transfer enough gas just stop to avoid further processing
 		return -1
 
@@ -106,7 +106,7 @@
 //filtering - A list of gasids to be scrubbed from source
 //total_transfer_moles - Limits the amount of moles to scrub. The actual amount of gas scrubbed may also be limited by available_power, if given.
 //available_power - the maximum amount of power that may be used when scrubbing gas. If null then the scrubbing is not limited by power.
-/proc/scrub_gas(var/obj/machinery/M, var/list/filtering, var/datum/gas_mixture/source, var/datum/gas_mixture/sink, var/total_transfer_moles = null, var/available_power = null)
+/proc/scrub_gas(obj/machinery/M, list/filtering, datum/gas_mixture/source, datum/gas_mixture/sink, total_transfer_moles = null, available_power = null)
 	if (source.total_moles < MINIMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
@@ -177,7 +177,7 @@
 //filtering - A list of gasids to be filtered. These gasses get moved to sink_filtered, while the other gasses get moved to sink_clean.
 //total_transfer_moles - Limits the amount of moles to input. The actual amount of gas filtered may also be limited by available_power, if given.
 //available_power - the maximum amount of power that may be used when filtering gas. If null then the filtering is not limited by power.
-/proc/filter_gas(var/obj/machinery/M, var/list/filtering, var/datum/gas_mixture/source, var/datum/gas_mixture/sink_filtered, var/datum/gas_mixture/sink_clean, var/total_transfer_moles = null, var/available_power = null)
+/proc/filter_gas(obj/machinery/M, list/filtering, datum/gas_mixture/source, datum/gas_mixture/sink_filtered, datum/gas_mixture/sink_clean, total_transfer_moles = null, available_power = null)
 	if (source.total_moles < MINIMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
@@ -249,7 +249,7 @@
 //For omni devices. Instead filtering is an associative list mapping gasids to gas mixtures.
 //I don't like the copypasta, but I decided to keep both versions of gas filtering as filter_gas is slightly faster (doesn't create as many temporary lists, doesn't call update_values() as much)
 //filter_gas can be removed and replaced with this proc if need be.
-/proc/filter_gas_multi(var/obj/machinery/M, var/list/filtering, var/datum/gas_mixture/source, var/datum/gas_mixture/sink_clean, var/total_transfer_moles = null, var/available_power = null)
+/proc/filter_gas_multi(obj/machinery/M, list/filtering, datum/gas_mixture/source, datum/gas_mixture/sink_clean, total_transfer_moles = null, available_power = null)
 	if (source.total_moles < MINIMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
@@ -326,7 +326,7 @@
 
 //Similar deal as the other atmos process procs.
 //mix_sources maps input gas mixtures to mix ratios. The mix ratios MUST add up to 1.
-/proc/mix_gas(var/obj/machinery/M, var/list/mix_sources, var/datum/gas_mixture/sink, var/total_transfer_moles = null, var/available_power = null)
+/proc/mix_gas(obj/machinery/M, list/mix_sources, datum/gas_mixture/sink, total_transfer_moles = null, available_power = null)
 	if (!mix_sources.len)
 		return -1
 
@@ -411,7 +411,7 @@
 	return specific_power
 
 //Calculates the amount of power needed to move one mole of a certain gas from source to sink.
-/proc/calculate_specific_power_gas(var/gasid, datum/gas_mixture/source, datum/gas_mixture/sink)
+/proc/calculate_specific_power_gas(gasid, datum/gas_mixture/source, datum/gas_mixture/sink)
 	//Calculate the amount of energy required
 	var/air_temperature = (sink.temperature > 0)? sink.temperature : source.temperature
 	var/specific_entropy = sink.specific_entropy_gas(gasid) - source.specific_entropy_gas(gasid) //sink is gaining moles, source is loosing
@@ -426,7 +426,7 @@
 //Calculates the APPROXIMATE amount of moles that would need to be transferred to change the pressure of sink by pressure_delta
 //If set, sink_volume_mod adjusts the effective output volume used in the calculation. This is useful when the output gas_mixture is
 //part of a pipenetwork, and so it's volume isn't representative of the actual volume since the gas will be shared across the pipenetwork when it processes.
-/proc/calculate_transfer_moles(datum/gas_mixture/source, datum/gas_mixture/sink, var/pressure_delta, var/sink_volume_mod=0)
+/proc/calculate_transfer_moles(datum/gas_mixture/source, datum/gas_mixture/sink, pressure_delta, sink_volume_mod=0)
 	if(source.temperature == 0 || source.total_moles == 0) return 0
 
 	var/output_volume = (sink.volume * sink.group_multiplier) + sink_volume_mod
@@ -461,7 +461,7 @@
 // - Has between 17% and 30% oxygen
 // - Has temperature between -10C and 50C
 // - Has no or only minimal phoron or N2O
-/proc/get_atmosphere_issues(datum/gas_mixture/atmosphere, var/returntext = 0)
+/proc/get_atmosphere_issues(datum/gas_mixture/atmosphere, returntext = 0)
 	var/list/status = list()
 	if(!atmosphere)
 		status.Add("No atmosphere present.")

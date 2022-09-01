@@ -81,7 +81,7 @@
 // Proc: ability_prechecks()
 // Parameters 2 - (user - User which used this ability check_price - If different than 0 checks for ability CPU price too. Does NOT use the CPU time!)
 // Description: This is pre-check proc used to determine if the AI can use the ability.
-/proc/ability_prechecks(var/mob/living/silicon/ai/user = null, var/check_price = 0, var/override = 0)
+/proc/ability_prechecks(mob/living/silicon/ai/user = null, check_price = 0, override = 0)
 	if(!user)
 		return 0
 	if(!istype(user))
@@ -110,7 +110,7 @@
 // Proc: ability_pay()
 // Parameters 2 - (user - User from which we deduct CPU from, price - Amount of CPU power to use)
 // Description: Uses up certain amount of CPU power. Returns 1 on success, 0 on failure.
-/proc/ability_pay(var/mob/living/silicon/ai/user = null, var/price = 0)
+/proc/ability_pay(mob/living/silicon/ai/user = null, price = 0)
 	if(!user)
 		return 0
 	if(user.APU_power)
@@ -131,7 +131,7 @@
 // Proc: announce_hack_failure()
 // Parameters 2 - (user - hacking user, text - Used in alert text creation)
 // Description: Sends a hack failure message
-/proc/announce_hack_failure(var/mob/living/silicon/ai/user = null, var/text)
+/proc/announce_hack_failure(mob/living/silicon/ai/user = null, text)
 	if(!user || !text)
 		return 0
 	var/fulltext = ""
@@ -152,7 +152,7 @@
 // Proc: get_unhacked_apcs()
 // Parameters: None
 // Description: Returns a list of all unhacked APCs. APCs on station Zs are on top of the list.
-/proc/get_unhacked_apcs(var/mob/living/silicon/ai/user)
+/proc/get_unhacked_apcs(mob/living/silicon/ai/user)
 	var/list/station_apcs = list()
 	var/list/offstation_apcs = list()
 
@@ -170,7 +170,7 @@
 
 
 // Helper procs which return lists of relevant mobs.
-/proc/get_unlinked_cyborgs(var/mob/living/silicon/ai/A)
+/proc/get_unlinked_cyborgs(mob/living/silicon/ai/A)
 	if(!A || !istype(A))
 		return
 
@@ -183,12 +183,12 @@
 		L.Add(RB)
 	return L
 
-/proc/get_linked_cyborgs(var/mob/living/silicon/ai/A)
+/proc/get_linked_cyborgs(mob/living/silicon/ai/A)
 	if(!A || !istype(A))
 		return
 	return A.connected_robots
 
-/proc/get_other_ais(var/mob/living/silicon/ai/A)
+/proc/get_other_ais(mob/living/silicon/ai/A)
 	if(!A || !istype(A))
 		return
 
@@ -199,7 +199,7 @@
 		L.Add(AT)
 	return L
 
-/proc/log_ability_use(var/mob/living/silicon/ai/A, var/ability_name, var/atom/target = null, var/notify_admins = 1)
+/proc/log_ability_use(mob/living/silicon/ai/A, ability_name, atom/target = null, notify_admins = 1)
 	var/message
 	if(target)
 		message = text("used malf ability/function: [ability_name] on [target] ([target.x], [target.y], [target.z])")

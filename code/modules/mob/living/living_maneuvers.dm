@@ -2,7 +2,7 @@
 	var/decl/maneuver/prepared_maneuver
 	var/list/available_maneuvers = list()
 
-/mob/living/begin_falling(var/lastloc, var/below)
+/mob/living/begin_falling(lastloc, below)
 	if(throwing)
 		return
 	if(!can_fall(location_override = lastloc) && prepared_maneuver && prepared_maneuver.can_be_used_by(src, silent = TRUE))
@@ -19,7 +19,7 @@
 		return
 	. = ..()
 
-/mob/living/proc/reflexive_maneuver_callback(var/turf/origin, var/turf/check)
+/mob/living/proc/reflexive_maneuver_callback(turf/origin, turf/check)
 	if(prepared_maneuver)
 		if(origin)
 			forceMove(get_turf(origin))
@@ -46,15 +46,15 @@
 		prepared_maneuver = null
 		to_chat(src, SPAN_NOTICE("You are no longer preparing to perform a maneuver."))
 
-/mob/living/proc/perform_maneuver(var/maneuver, var/atom/target)
+/mob/living/proc/perform_maneuver(maneuver, atom/target)
 	var/decl/maneuver/performing_maneuver = ispath(maneuver) ? decls_repository.get_decl(maneuver) : maneuver
 	if(istype(performing_maneuver))
 		. = performing_maneuver.perform(src, target, get_acrobatics_multiplier(performing_maneuver))
 
-/mob/living/proc/get_acrobatics_multiplier(var/decl/maneuver/attempting_maneuver)
+/mob/living/proc/get_acrobatics_multiplier(decl/maneuver/attempting_maneuver)
 	return 1
 
-/mob/living/proc/can_do_maneuver(var/decl/maneuver/maneuver, var/silent = FALSE)
+/mob/living/proc/can_do_maneuver(decl/maneuver/maneuver, silent = FALSE)
 	. = ((istype(maneuver) ? maneuver.type : maneuver) in available_maneuvers)
 
 /mob/living/proc/get_jump_distance()

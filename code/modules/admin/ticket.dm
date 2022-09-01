@@ -11,7 +11,7 @@ var/global/list/ticket_panels = list()
 	var/opened_time
 	var/timeout = FALSE
 
-/datum/ticket/New(var/datum/client_lite/owner)
+/datum/ticket/New(datum/client_lite/owner)
 	src.owner = owner
 	tickets |= src
 	id = tickets.len
@@ -36,7 +36,7 @@ var/global/list/ticket_panels = list()
 			to_chat(client_by_ckey(C.ckey), SPAN_NOTICE(SPAN_BOLD("Your ticket with [client_by_ckey(owner.ckey)] has timed out and auto-closed.")))
 		close(assigned_admins[1])
 
-/datum/ticket/proc/close(var/datum/client_lite/closed_by)
+/datum/ticket/proc/close(datum/client_lite/closed_by)
 	if(status == TICKET_CLOSED)
 		return
 
@@ -65,7 +65,7 @@ var/global/list/ticket_panels = list()
 
 	return 1
 
-/datum/ticket/proc/take(var/datum/client_lite/assigned_admin)
+/datum/ticket/proc/take(datum/client_lite/assigned_admin)
 	if(status == TICKET_CLOSED)
 		return
 
@@ -99,7 +99,7 @@ var/global/list/ticket_panels = list()
 	for(var/datum/client_lite/assigned_admin in assigned_admins)
 		. |= assigned_admin.key
 
-/proc/get_open_ticket_by_client(var/datum/client_lite/owner)
+/proc/get_open_ticket_by_client(datum/client_lite/owner)
 	for(var/datum/ticket/ticket in tickets)
 		if(ticket.owner.ckey == owner.ckey && (ticket.status == TICKET_OPEN || ticket.status == TICKET_ASSIGNED))
 			return ticket // there should only be one open ticket by a client at a time, so no need to keep looking
@@ -122,7 +122,7 @@ var/global/list/ticket_panels = list()
 	var/msg
 	var/time_stamp
 
-/datum/ticket_msg/New(var/msg_from, var/msg_to, var/msg)
+/datum/ticket_msg/New(msg_from, msg_to, msg)
 	src.msg_from = msg_from
 	src.msg_to = msg_to
 	src.msg = msg

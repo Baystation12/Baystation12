@@ -79,7 +79,7 @@
 
 
 //Checks if a given slot can be accessed at this time, either to equip or unequip I
-/mob/proc/slot_is_accessible(var/slot, var/obj/item/I, mob/user=null)
+/mob/proc/slot_is_accessible(slot, obj/item/I, mob/user=null)
 	return 1
 
 
@@ -118,29 +118,29 @@
 	else		return l_hand
 
 //Puts the item into your l_hand if possible and calls all necessary triggers/updates. returns 1 on success.
-/mob/proc/put_in_l_hand(var/obj/item/W)
+/mob/proc/put_in_l_hand(obj/item/W)
 	if(lying || !istype(W))
 		return 0
 	return 1
 
 //Puts the item into your r_hand if possible and calls all necessary triggers/updates. returns 1 on success.
-/mob/proc/put_in_r_hand(var/obj/item/W)
+/mob/proc/put_in_r_hand(obj/item/W)
 	if(lying || !istype(W))
 		return 0
 	return 1
 
 //Puts the item into our active hand if possible. returns 1 on success.
-/mob/proc/put_in_active_hand(var/obj/item/W)
+/mob/proc/put_in_active_hand(obj/item/W)
 	return 0 // Moved to human procs because only they need to use hands.
 
 //Puts the item into our inactive hand if possible. returns 1 on success.
-/mob/proc/put_in_inactive_hand(var/obj/item/W)
+/mob/proc/put_in_inactive_hand(obj/item/W)
 	return 0 // As above.
 
 //Puts the item our active hand if possible. Failing that it tries our inactive hand. Returns 1 on success.
 //If both fail it drops it on the floor and returns 0.
 //This is probably the main one you need to know :)
-/mob/proc/put_in_hands(var/obj/item/W)
+/mob/proc/put_in_hands(obj/item/W)
 	if(!W)
 		return 0
 	drop_from_inventory(W)
@@ -148,7 +148,7 @@
 
 // Removes an item from inventory and places it in the target atom.
 // If canremove or other conditions need to be checked then use unEquip instead.
-/mob/proc/drop_from_inventory(var/obj/item/W, var/atom/target = null)
+/mob/proc/drop_from_inventory(obj/item/W, atom/target = null)
 	if(W)
 		remove_from_mob(W, target)
 		if(!(W && W.loc)) return 1 // self destroying objects (tk, grabs)
@@ -232,7 +232,7 @@
 	return slot
 
 //This differs from remove_from_mob() in that it checks if the item can be unequipped first. Use drop_from_inventory if you don't want to check.
-/mob/proc/unEquip(obj/item/I, var/atom/target)
+/mob/proc/unEquip(obj/item/I, atom/target)
 	if(!canUnEquip(I))
 		return
 	drop_from_inventory(I, target)
@@ -245,7 +245,7 @@
 	return 1
 
 //Attemps to remove an object on a mob.
-/mob/proc/remove_from_mob(var/obj/O, var/atom/target)
+/mob/proc/remove_from_mob(obj/O, atom/target)
 	if(!O) // Nothing to remove, so we succeed.
 		return 1
 	src.u_equip(O)
@@ -264,7 +264,7 @@
 
 
 //Returns the item equipped to the specified slot, if any.
-/mob/proc/get_equipped_item(var/slot)
+/mob/proc/get_equipped_item(slot)
 	switch(slot)
 		if(slot_l_hand) return l_hand
 		if(slot_r_hand) return r_hand
@@ -272,7 +272,7 @@
 		if(slot_wear_mask) return wear_mask
 	return null
 
-/mob/proc/get_equipped_items(var/include_carried = 0)
+/mob/proc/get_equipped_items(include_carried = 0)
 	. = list()
 	if(back)      . += back
 	if(wear_mask) . += wear_mask
@@ -281,7 +281,7 @@
 		if(l_hand) . += l_hand
 		if(r_hand) . += r_hand
 
-/mob/proc/delete_inventory(var/include_carried = FALSE)
+/mob/proc/delete_inventory(include_carried = FALSE)
 	for(var/entry in get_equipped_items(include_carried))
 		drop_from_inventory(entry)
 		qdel(entry)
@@ -294,14 +294,14 @@
 		. |= I.body_parts_covered
 
 // Returns the first item which covers any given body part
-/mob/proc/get_covering_equipped_item(var/body_parts)
+/mob/proc/get_covering_equipped_item(body_parts)
 	for(var/entry in get_equipped_items())
 		var/obj/item/I = entry
 		if(I.body_parts_covered & body_parts)
 			return I
 
 // Returns all items which covers any given body part
-/mob/proc/get_covering_equipped_items(var/body_parts)
+/mob/proc/get_covering_equipped_items(body_parts)
 	. = list()
 	for(var/entry in get_equipped_items())
 		var/obj/item/I = entry

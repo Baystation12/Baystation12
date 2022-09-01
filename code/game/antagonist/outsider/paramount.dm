@@ -16,7 +16,7 @@ GLOBAL_DATUM_INIT(paramounts, /datum/antagonist/paramount, new)
 	id_type = /obj/item/card/id/syndicate
 	faction = "paramount"
 
-/datum/antagonist/paramount/equip(var/mob/living/carbon/human/player)
+/datum/antagonist/paramount/equip(mob/living/carbon/human/player)
 
 	if(!..())
 		return 0
@@ -38,7 +38,7 @@ GLOBAL_DATUM_INIT(paramounts, /datum/antagonist/paramount, new)
 	//player.internal_organs_by_name["frontal lobe"] = new /obj/item/organ/internal/corona_pollentia(player) //TODO
 	return 1
 
-/datum/antagonist/paramount/create_objectives(var/datum/mind/player)
+/datum/antagonist/paramount/create_objectives(datum/mind/player)
 
 	if(!..())
 		return

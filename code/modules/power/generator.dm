@@ -181,7 +181,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/power/generator/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/power/generator/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	// this is the data which will be sent to the ui
 	var/vertical = 0
 	if (dir == NORTH || dir == SOUTH)

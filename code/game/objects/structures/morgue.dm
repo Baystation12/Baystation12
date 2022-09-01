@@ -87,7 +87,7 @@
 	update()
 	return
 
-/obj/structure/morgue/attack_robot(var/mob/user)
+/obj/structure/morgue/attack_robot(mob/user)
 	if(Adjacent(user))
 		return attack_hand(user)
 	else return ..()

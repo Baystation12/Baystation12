@@ -90,7 +90,7 @@
 	ui_interact(user)
 	return
 
-/obj/structure/janitorialcart/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/structure/janitorialcart/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/data[0]
 	data["name"] = capitalize(name)
 	data["bag"] = mybag ? capitalize(mybag.name) : null
@@ -274,7 +274,7 @@
 				buckled_mob.pixel_y = 7
 
 
-/obj/structure/bed/chair/janicart/bullet_act(var/obj/item/projectile/Proj)
+/obj/structure/bed/chair/janicart/bullet_act(obj/item/projectile/Proj)
 	if(buckled_mob)
 		if(prob(85))
 			return buckled_mob.bullet_act(Proj)

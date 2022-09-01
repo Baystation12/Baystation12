@@ -1,7 +1,7 @@
 /datum/extension/interactive/multitool/circuitboards/buildtype_select
 	expected_type = /obj/item/stock_parts/circuitboard
 
-/datum/extension/interactive/multitool/circuitboards/buildtype_select/get_interact_window(var/obj/item/device/multitool/M, var/mob/user)
+/datum/extension/interactive/multitool/circuitboards/buildtype_select/get_interact_window(obj/item/device/multitool/M, mob/user)
 	var/obj/item/stock_parts/circuitboard/board = holder
 	var/dat = list()
 	dat += "<b>Select Built Machine:</b><br>"

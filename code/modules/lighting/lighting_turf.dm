@@ -67,7 +67,7 @@
 				C.active = TRUE
 
 // Used to get a scaled lumcount.
-/turf/proc/get_lumcount(var/minlum = 0, var/maxlum = 1)
+/turf/proc/get_lumcount(minlum = 0, maxlum = 1)
 	if(!lighting_overlay)
 		var/area/A = loc
 		if(A.dynamic_lighting && dynamic_lighting)
@@ -85,12 +85,12 @@
 	return CLAMP01(totallums)
 
 // If an opaque movable atom moves around we need to potentially update visibility.
-/turf/Entered(var/atom/movable/AM, var/atom/OldLoc)
+/turf/Entered(atom/movable/AM, atom/OldLoc)
 	. = ..()
 	if(AM?.opacity)
 		RecalculateOpacity()
 
-/turf/Exited(var/atom/movable/AM, var/atom/newloc)
+/turf/Exited(atom/movable/AM, atom/newloc)
 	. = ..()
 	if(AM?.opacity)
 		RecalculateOpacity()

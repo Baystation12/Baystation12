@@ -28,7 +28,7 @@ var/global/solar_gen_rate = 1500
 /obj/machinery/power/solar/drain_power()
 	return -1
 
-/obj/machinery/power/solar/New(var/turf/loc, var/obj/item/solar_assembly/S)
+/obj/machinery/power/solar/New(turf/loc, obj/item/solar_assembly/S)
 	..(loc)
 	Make(S)
 	connect_to_network()
@@ -38,7 +38,7 @@ var/global/solar_gen_rate = 1500
 	..()
 
 //set the control of the panel to a given computer if closer than SOLAR_MAX_DIST
-/obj/machinery/power/solar/proc/set_control(var/obj/machinery/power/solar_control/SC)
+/obj/machinery/power/solar/proc/set_control(obj/machinery/power/solar_control/SC)
 	if(SC && (get_dist(src, SC) > SOLAR_MAX_DIST))
 		return 0
 	control = SC
@@ -50,7 +50,7 @@ var/global/solar_gen_rate = 1500
 		control.connected_panels.Remove(src)
 	control = null
 
-/obj/machinery/power/solar/proc/Make(var/obj/item/solar_assembly/S)
+/obj/machinery/power/solar/proc/Make(obj/item/solar_assembly/S)
 	if(!S)
 		S = new /obj/item/solar_assembly(src)
 		S.glass_type = /obj/item/stack/material/glass
@@ -162,7 +162,7 @@ var/global/solar_gen_rate = 1500
 	return
 
 
-/obj/machinery/power/solar/fake/New(var/turf/loc, var/obj/item/solar_assembly/S)
+/obj/machinery/power/solar/fake/New(turf/loc, obj/item/solar_assembly/S)
 	..(loc, S, 0)
 
 /obj/machinery/power/solar/fake/Process()
@@ -215,7 +215,7 @@ var/global/solar_gen_rate = 1500
 	var/tracker = 0
 	var/glass_type = null
 
-/obj/item/solar_assembly/attack_hand(var/mob/user)
+/obj/item/solar_assembly/attack_hand(mob/user)
 	if(!anchored && isturf(loc)) // You can't pick it up
 		..()
 
@@ -227,7 +227,7 @@ var/global/solar_gen_rate = 1500
 		glass_type = null
 
 
-/obj/item/solar_assembly/attackby(var/obj/item/W, var/mob/user)
+/obj/item/solar_assembly/attackby(obj/item/W, mob/user)
 
 	if(!anchored && isturf(loc))
 		if(isWrench(W))
@@ -468,7 +468,7 @@ var/global/solar_gen_rate = 1500
 	return 1
 
 //rotates the panel to the passed angle
-/obj/machinery/power/solar_control/proc/set_panels(var/cdir)
+/obj/machinery/power/solar_control/proc/set_panels(cdir)
 	for(var/obj/machinery/power/solar/S in connected_panels)
 		S.adir = cdir //instantly rotates the panel
 		S.occlusion()//and
@@ -507,7 +507,7 @@ var/global/solar_gen_rate = 1500
 	name = "paper- 'Going green! Setup your own solar array instructions.'"
 	info = "<h1>Welcome</h1><p>At greencorps we love the environment, and space. With this package you are able to help mother nature and produce energy without any usage of fossil fuel or phoron! Singularity energy is dangerous while solar energy is safe, which is why it's better. Now here is how you setup your own solar array.</p><p>You can make a solar panel by wrenching the solar assembly onto a cable node. Adding a glass panel, reinforced or regular glass will do, will finish the construction of your solar panel. It is that easy!</p><p>Now after setting up 19 more of these solar panels you will want to create a solar tracker to keep track of our mother nature's gift, the sun. These are the same steps as before except you insert the tracker equipment circuit into the assembly before performing the final step of adding the glass. You now have a tracker! Now the last step is to add a computer to calculate the sun's movements and to send commands to the solar panels to change direction with the sun. Setting up the solar computer is the same as setting up any computer, so you should have no trouble in doing that. You do need to put a wire node under the computer, and the wire needs to be connected to the tracker.</p><p>Congratulations, you should have a working solar array. If you are having trouble, here are some tips. Make sure all solar equipment are on a cable node, even the computer. You can always deconstruct your creations if you make a mistake.</p><p>That's all to it, be safe, be green!</p>"
 
-/proc/rate_control(var/S, var/V, var/C, var/Min=1, var/Max=5, var/Limit=null) //How not to name vars
+/proc/rate_control(S, V, C, Min=1, Max=5, Limit=null) //How not to name vars
 	var/href = "<A href='?src=\ref[S];rate control=1;[V]"
 	var/rate = "[href]=-[Max]'>-</A>[href]=-[Min]'>-</A> [(C?C : 0)] [href]=[Min]'>+</A>[href]=[Max]'>+</A>"
 	if(Limit) return "[href]=-[Limit]'>-</A>"+rate+"[href]=[Limit]'>+</A>"

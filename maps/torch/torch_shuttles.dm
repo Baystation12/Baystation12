@@ -61,7 +61,7 @@ TORCH_ESCAPE_POD(17)
 	logging_access = access_petrov_helm
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling
 
-/datum/shuttle/autodock/ferry/petrov/New(_name, var/obj/effect/shuttle_landmark/initial_location)
+/datum/shuttle/autodock/ferry/petrov/New(_name, obj/effect/shuttle_landmark/initial_location)
 	shuttle_area = subtypesof(/area/shuttle/petrov)
 	..()
 

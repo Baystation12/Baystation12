@@ -9,7 +9,7 @@
 	var/list/area_coherency_test_exempt_areas = list()
 	var/list/area_coherency_test_subarea_count = list()
 
-/datum/map_template/New(var/list/paths = null, var/rename = null)
+/datum/map_template/New(list/paths = null, rename = null)
 	..()
 	GLOB.using_map.area_usage_test_exempted_areas |= area_usage_test_exempted_areas
 	GLOB.using_map.area_usage_test_exempted_root_areas |= area_usage_test_exempted_root_areas

@@ -129,13 +129,13 @@
 			set_pin_data(IC_OUTPUT, 2, weakref(src))
 			push_data()
 
-/obj/item/integrated_circuit/reagent/injector/proc/target_nearby(var/weakref/target)
+/obj/item/integrated_circuit/reagent/injector/proc/target_nearby(weakref/target)
 	var/mob/living/L = target.resolve()
 	if(!L || get_dist(src,L) > 1)
 		return
 	return L
 
-/obj/item/integrated_circuit/reagent/injector/proc/inject_after(var/weakref/target)
+/obj/item/integrated_circuit/reagent/injector/proc/inject_after(weakref/target)
 	busy = FALSE
 	var/mob/living/L = target_nearby(target)
 	if(!L)
@@ -148,7 +148,7 @@
 	reagents.trans_to_mob(L, transfer_amount, CHEM_BLOOD)
 	activate_pin(2)
 
-/obj/item/integrated_circuit/reagent/injector/proc/draw_after(var/weakref/target, var/amount)
+/obj/item/integrated_circuit/reagent/injector/proc/draw_after(weakref/target, amount)
 	busy = FALSE
 	var/mob/living/carbon/C = target_nearby(target)
 	if(!C)

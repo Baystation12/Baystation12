@@ -82,7 +82,7 @@
 	else
 		..()
 
-/obj/machinery/reagent_temperature/interface_interact(var/mob/user)
+/obj/machinery/reagent_temperature/interface_interact(mob/user)
 	interact(user)
 	return TRUE
 
@@ -100,7 +100,7 @@
 		return TRUE // Don't kill this processing loop unless we're not powered.
 	. = ..()
 
-/obj/machinery/reagent_temperature/attackby(var/obj/item/thing, var/mob/user)
+/obj/machinery/reagent_temperature/attackby(obj/item/thing, mob/user)
 	if(isWrench(thing))
 		if(use_power == POWER_USE_ACTIVE)
 			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
@@ -149,7 +149,7 @@
 
 	overlays = adding_overlays
 
-/obj/machinery/reagent_temperature/interact(var/mob/user)
+/obj/machinery/reagent_temperature/interact(mob/user)
 
 	var/dat = list()
 	dat += "<table>"
@@ -177,7 +177,7 @@
 	popup.set_content(jointext(dat, null))
 	popup.open()
 
-/obj/machinery/reagent_temperature/CanUseTopic(var/mob/user, var/state, var/href_list)
+/obj/machinery/reagent_temperature/CanUseTopic(mob/user, state, href_list)
 	if(href_list && href_list["remove_container"])
 		. = ..(user, GLOB.physical_state, href_list)
 		if(. == STATUS_CLOSE)
@@ -196,7 +196,7 @@
 
 	return TOPIC_REFRESH
 
-/obj/machinery/reagent_temperature/OnTopic(var/mob/user, var/href_list)
+/obj/machinery/reagent_temperature/OnTopic(mob/user, href_list)
 
 	if(href_list["adjust_temperature"])
 		target_temperature = clamp(target_temperature + text2num(href_list["adjust_temperature"]), min_temperature, max_temperature)

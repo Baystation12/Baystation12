@@ -18,7 +18,7 @@
 
 	level = 1
 
-/obj/machinery/atmospherics/pipe/zpipe/hide(var/i)
+/obj/machinery/atmospherics/pipe/zpipe/hide(i)
 	if(istype(loc, /turf/simulated))
 		set_invisibility(i ? 101 : 0)
 	update_icon()

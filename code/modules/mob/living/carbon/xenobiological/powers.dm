@@ -1,4 +1,4 @@
-/mob/living/carbon/slime/proc/Wrap(var/mob/living/M) // This is a proc for the clicks
+/mob/living/carbon/slime/proc/Wrap(mob/living/M) // This is a proc for the clicks
 	if (Victim == M || src == M)
 		Feedstop()
 		return
@@ -39,7 +39,7 @@
 			return "\The [other] is already feeding on this subject..."
 
 
-/mob/living/carbon/slime/proc/Feedon(var/mob/living/M)
+/mob/living/carbon/slime/proc/Feedon(mob/living/M)
 	set waitfor = 0
 	Victim = M
 	forceMove(M.loc)

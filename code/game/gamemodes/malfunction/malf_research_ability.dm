@@ -7,12 +7,12 @@
 	var/datum/malf_research_ability/next = null			// Next research (if applicable).
 
 
-/datum/malf_research_ability/proc/process(var/time = 0)
+/datum/malf_research_ability/proc/process(time = 0)
 	invested += time
 	if(invested >= price)
 		unlocked = 1
 
-/datum/malf_research_ability/proc/research_finished(var/mob/living/silicon/ai/user)
+/datum/malf_research_ability/proc/research_finished(mob/living/silicon/ai/user)
 	if(!user)
 		return
 	if(ability)

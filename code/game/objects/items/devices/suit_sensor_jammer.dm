@@ -38,7 +38,7 @@
 	suit_sensor_jammer_methods_by_type = null
 	disable()
 
-/obj/item/device/suit_sensor_jammer/attack_self(var/mob/user)
+/obj/item/device/suit_sensor_jammer/attack_self(mob/user)
 	ui_interact(user)
 
 /obj/item/device/suit_sensor_jammer/get_cell()
@@ -85,7 +85,7 @@
 		if(active)
 			overlays += "active"
 
-/obj/item/device/suit_sensor_jammer/emp_act(var/severity)
+/obj/item/device/suit_sensor_jammer/emp_act(severity)
 	..()
 	if(bcell)
 		bcell.emp_act(severity)
@@ -119,7 +119,7 @@
 		return STATUS_CLOSE
 	return ..()
 
-/obj/item/device/suit_sensor_jammer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/item/device/suit_sensor_jammer/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/list/methods = new
 	for(var/suit_sensor_jammer_method/ssjm in suit_sensor_jammer_methods)
 		methods[++methods.len] = list("name" = ssjm.name, "cost" = ssjm.energy_cost, "ref" = "\ref[ssjm]")
@@ -143,7 +143,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/item/device/suit_sensor_jammer/OnTopic(var/mob/user, var/list/href_list, state)
+/obj/item/device/suit_sensor_jammer/OnTopic(mob/user, list/href_list, state)
 	if (href_list["enable_jammer"])
 		enable()
 		return TOPIC_REFRESH
@@ -164,7 +164,7 @@
 			set_method(method)
 			return TOPIC_REFRESH
 
-/obj/item/device/suit_sensor_jammer/Process(var/wait)
+/obj/item/device/suit_sensor_jammer/Process(wait)
 	if(bcell)
 		// With a range of 2 and jammer cost of 3 the default (high capacity) cell will last for almost 14 minutes, give or take
 		// 10000 / (2^2 * 3 / 10) ~= 8333 ticks ~= 13.8 minutes
@@ -193,11 +193,11 @@
 	update_icon()
 	return TRUE
 
-/obj/item/device/suit_sensor_jammer/proc/set_range(var/new_range)
+/obj/item/device/suit_sensor_jammer/proc/set_range(new_range)
 	range = clamp(new_range, 0, JAMMER_MAX_RANGE) // 0 range still covers the current turf
 	return range != new_range
 
-/obj/item/device/suit_sensor_jammer/proc/set_method(var/suit_sensor_jammer_method/sjm)
+/obj/item/device/suit_sensor_jammer/proc/set_method(suit_sensor_jammer_method/sjm)
 	if(sjm == jammer_method)
 		return
 	if(active)
@@ -205,7 +205,7 @@
 		sjm.enable()
 	jammer_method = sjm
 
-/obj/item/device/suit_sensor_jammer/proc/may_process_crew_data(var/mob/living/carbon/human/H, var/obj/item/clothing/under/C, var/turf/pos)
+/obj/item/device/suit_sensor_jammer/proc/may_process_crew_data(mob/living/carbon/human/H, obj/item/clothing/under/C, turf/pos)
 	if(!pos)
 		return FALSE
 	var/turf/T = get_turf(src)

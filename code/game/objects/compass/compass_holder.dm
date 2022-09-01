@@ -63,7 +63,7 @@ var/global/list/angle_step_to_dir = list(
 
 	rebuild_overlay_lists(TRUE)
 
-/obj/compass_holder/proc/get_string_from_angle(var/angle)
+/obj/compass_holder/proc/get_string_from_angle(angle)
 	return global.angle_step_to_dir[clamp(round(angle/45)+1, 1, length(global.angle_step_to_dir))]
 
 /obj/compass_holder/Destroy()
@@ -86,11 +86,11 @@ var/global/list/angle_step_to_dir = list(
 /obj/compass_holder/on_update_icon()
 	overlays = (compass_static_labels | compass_waypoint_markers)
 
-/obj/compass_holder/proc/clear_waypoint(var/id)
+/obj/compass_holder/proc/clear_waypoint(id)
 	LAZYREMOVE(compass_waypoints, id)
 	rebuild_overlay_lists(TRUE)
 
-/obj/compass_holder/proc/set_waypoint(var/id, var/label, var/heading_x, var/heading_y, var/heading_z, var/label_color)
+/obj/compass_holder/proc/set_waypoint(id, label, heading_x, heading_y, heading_z, label_color)
 	var/datum/compass_waypoint/wp = LAZYACCESS(compass_waypoints, id)
 	if(!wp)
 		wp = new /datum/compass_waypoint()
@@ -98,19 +98,19 @@ var/global/list/angle_step_to_dir = list(
 	LAZYSET(compass_waypoints, id, wp)
 	rebuild_overlay_lists(TRUE)
 
-/obj/compass_holder/proc/recalculate_heading(var/rebuild_icon = TRUE)
+/obj/compass_holder/proc/recalculate_heading(rebuild_icon = TRUE)
 	if(rebuild_icon)
 		update_icon()
 
-/obj/compass_holder/proc/show_waypoint(var/id)
+/obj/compass_holder/proc/show_waypoint(id)
 	var/datum/compass_waypoint/wp = compass_waypoints[id]
 	wp.hidden = FALSE
 
-/obj/compass_holder/proc/hide_waypoint(var/id)
+/obj/compass_holder/proc/hide_waypoint(id)
 	var/datum/compass_waypoint/wp = compass_waypoints[id]
 	wp.hidden = TRUE
 
-/obj/compass_holder/proc/hide_waypoints(var/rebuild_overlays = FALSE)
+/obj/compass_holder/proc/hide_waypoints(rebuild_overlays = FALSE)
 	for(var/id in compass_waypoints)
 		hide_waypoint(id)
 	if(rebuild_overlays)
@@ -119,7 +119,7 @@ var/global/list/angle_step_to_dir = list(
 /obj/compass_holder/proc/get_compass_origin()
 	return get_turf(src)
 
-/obj/compass_holder/proc/rebuild_overlay_lists(var/update_icon = FALSE)
+/obj/compass_holder/proc/rebuild_overlay_lists(update_icon = FALSE)
 	compass_waypoint_markers = null
 	var/turf/T = get_compass_origin()
 	if(istype(T))
@@ -132,5 +132,5 @@ var/global/list/angle_step_to_dir = list(
 	if(update_icon)
 		update_icon()
 
-/obj/compass_holder/proc/should_show(var/datum/compass_waypoint/wp)
+/obj/compass_holder/proc/should_show(datum/compass_waypoint/wp)
 	return wp && !wp.hidden

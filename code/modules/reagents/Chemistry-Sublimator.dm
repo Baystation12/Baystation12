@@ -1,4 +1,4 @@
-/proc/create_gas_data_for_reagent(var/datum/reagent/reagent)
+/proc/create_gas_data_for_reagent(datum/reagent/reagent)
 
 	var/kill_later
 	if(ispath(reagent))
@@ -94,13 +94,13 @@
 	else
 		to_chat(user, "<span class='warning'>\The [src] has no reagent container loaded.</span>")
 
-/obj/machinery/portable_atmospherics/reagent_sublimator/physical_attack_hand(var/mob/user)
+/obj/machinery/portable_atmospherics/reagent_sublimator/physical_attack_hand(mob/user)
 	update_use_power(use_power == POWER_USE_ACTIVE ? POWER_USE_IDLE : POWER_USE_ACTIVE)
 	user.visible_message("<span class='notice'>\The [user] switches \the [src] [use_power == POWER_USE_ACTIVE ? "on" : "off"].</span>")
 	update_icon()
 	return TRUE
 
-/obj/machinery/portable_atmospherics/reagent_sublimator/attackby(var/obj/item/thing, var/mob/user)
+/obj/machinery/portable_atmospherics/reagent_sublimator/attackby(obj/item/thing, mob/user)
 	if(istype(thing, /obj/item/tank))
 		to_chat(user, "<span class='warning'>\The [src] has no socket for a gas tank.</span>")
 	else if(istype(thing, /obj/item/reagent_containers))
@@ -171,7 +171,7 @@
 	if(reagent_whitelist)
 		to_chat(user, "\The [src]'s safety light is on.")
 
-/obj/machinery/portable_atmospherics/reagent_sublimator/emag_act(var/remaining_charges, var/mob/user)
+/obj/machinery/portable_atmospherics/reagent_sublimator/emag_act(remaining_charges, mob/user)
 	if(!emagged && length(reagent_whitelist))
 		emagged = TRUE
 		reagent_whitelist.Cut()

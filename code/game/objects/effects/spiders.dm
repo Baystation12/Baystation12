@@ -20,7 +20,7 @@
 				qdel(src)
 	return
 
-/obj/effect/spider/attackby(var/obj/item/W, var/mob/user)
+/obj/effect/spider/attackby(obj/item/W, mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
 	if(W.attack_verb.len)
@@ -43,7 +43,7 @@
 	health -= damage
 	healthcheck()
 
-/obj/effect/spider/bullet_act(var/obj/item/projectile/Proj)
+/obj/effect/spider/bullet_act(obj/item/projectile/Proj)
 	..()
 	health -= Proj.get_structure_damage()
 	healthcheck()
@@ -157,7 +157,7 @@
 /obj/effect/spider/spiderling/frost
 	castes = list(/mob/living/simple_animal/hostile/giant_spider/frost = 1)
 
-/obj/effect/spider/spiderling/Initialize(var/mapload, var/atom/parent)
+/obj/effect/spider/spiderling/Initialize(mapload, atom/parent)
 	greater_form = pickweight(castes)
 	pixel_x = rand(-shift_range, shift_range)
 	pixel_y = rand(-shift_range, shift_range)
@@ -189,12 +189,12 @@
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/effect/spider/spiderling/attackby(var/obj/item/W, var/mob/user)
+/obj/effect/spider/spiderling/attackby(obj/item/W, mob/user)
 	..()
 	if(health > 0)
 		disturbed()
 
-/obj/effect/spider/spiderling/Crossed(var/mob/living/L)
+/obj/effect/spider/spiderling/Crossed(mob/living/L)
 	if(dormant && istype(L) && L.mob_size > MOB_TINY)
 		disturbed()
 
@@ -227,7 +227,7 @@
 		entry_vent = null
 		return TRUE
 
-/obj/effect/spider/spiderling/proc/start_vent_moving(obj/machinery/atmospherics/unary/vent_pump/exit_vent, var/travel_time)
+/obj/effect/spider/spiderling/proc/start_vent_moving(obj/machinery/atmospherics/unary/vent_pump/exit_vent, travel_time)
 	if(check_vent(exit_vent))
 		return
 	if(prob(50))

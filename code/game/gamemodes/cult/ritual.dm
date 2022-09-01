@@ -36,7 +36,7 @@
 		to_chat(M, SPAN_NOTICE("\The [src] seems full of illegible scribbles. Is this a joke?"))
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 
-/obj/item/book/tome/afterattack(var/atom/A, var/mob/user, var/proximity)
+/obj/item/book/tome/afterattack(atom/A, mob/user, proximity)
 	if(!proximity || !iscultist(user))
 		return
 	if(A.reagents && A.reagents.has_reagent(/datum/reagent/water/holywater))
@@ -45,7 +45,7 @@
 		A.reagents.del_reagent(/datum/reagent/water/holywater)
 		A.reagents.add_reagent(/datum/reagent/water, holy2water)
 
-/mob/proc/make_rune(var/rune, var/cost = 5, var/tome_required = 0)
+/mob/proc/make_rune(rune, cost = 5, tome_required = 0)
 	var/has_tome = 0
 	var/has_robes = 0
 	var/cult_ground = 0
@@ -114,16 +114,16 @@
 		return 1
 	return 0
 
-/mob/living/carbon/human/make_rune(var/rune, var/cost, var/tome_required)
+/mob/living/carbon/human/make_rune(rune, cost, tome_required)
 	if(should_have_organ(BP_HEART) && vessel && !vessel.has_reagent(/datum/reagent/blood, species.blood_volume * 0.7))
 		to_chat(src, "<span class='danger'>You are too weak to draw runes.</span>")
 		return
 	..()
 
-/mob/proc/remove_blood_simple(var/blood)
+/mob/proc/remove_blood_simple(blood)
 	return
 
-/mob/living/carbon/human/remove_blood_simple(var/blood)
+/mob/living/carbon/human/remove_blood_simple(blood)
 	if(should_have_organ(BP_HEART))
 		vessel.remove_reagent(/datum/reagent/blood, blood)
 

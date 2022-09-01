@@ -1,11 +1,11 @@
 /datum/ship_engine/ion
 	name = "ion thruster"
 	var/obj/machinery/ion_engine/thruster
-	
-/datum/ship_engine/ion/New(var/obj/machinery/_holder)
+
+/datum/ship_engine/ion/New(obj/machinery/_holder)
 	..()
 	thruster = _holder
-	
+
 /datum/ship_engine/ion/Destroy()
 	thruster = null
 	. = ..()
@@ -19,7 +19,7 @@
 /datum/ship_engine/ion/burn()
 	return thruster.burn()
 
-/datum/ship_engine/ion/set_thrust_limit(var/new_limit)
+/datum/ship_engine/ion/set_thrust_limit(new_limit)
 	thruster.thrust_limit = new_limit
 
 /datum/ship_engine/ion/get_thrust_limit()
@@ -48,7 +48,7 @@
 	var/on = 1
 	var/burn_cost = 750
 	var/generated_thrust = 2.5
-	
+
 /obj/machinery/ion_engine/Initialize()
 	. = ..()
 	controller = new(src)
@@ -56,24 +56,24 @@
 /obj/machinery/ion_engine/Destroy()
 	QDEL_NULL(controller)
 	. = ..()
-	
+
 /obj/machinery/ion_engine/proc/get_status()
 	. = list()
 	.+= "Location: [get_area(src)]."
 	if(!powered())
 		.+= "Insufficient power to operate."
-	
+
 	. = jointext(.,"<br>")
-	
+
 /obj/machinery/ion_engine/proc/burn()
 	if(!on && !powered())
 		return 0
 	use_power_oneoff(burn_cost)
 	. = thrust_limit * generated_thrust
-	
+
 /obj/machinery/ion_engine/proc/get_thrust()
 	return thrust_limit * generated_thrust * on
-	
+
 /obj/item/stock_parts/circuitboard/engine/ion
 	name = T_BOARD("ion propulsion device")
 	board_type = "machine"

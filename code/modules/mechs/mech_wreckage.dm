@@ -8,7 +8,7 @@
 	icon = 'icons/mecha/mech_part_items.dmi'
 	var/prepared
 
-/obj/structure/mech_wreckage/New(var/newloc, var/mob/living/exosuit/exosuit, var/gibbed)
+/obj/structure/mech_wreckage/New(newloc, mob/living/exosuit/exosuit, gibbed)
 	if(exosuit)
 		name = "wreckage of \the [exosuit.name]"
 		if(!gibbed)
@@ -29,10 +29,10 @@
 
 	..()
 
-/obj/structure/mech_wreckage/powerloader/New(var/newloc)
+/obj/structure/mech_wreckage/powerloader/New(newloc)
 	..(newloc, new /mob/living/exosuit/premade/powerloader(newloc), FALSE)
 
-/obj/structure/mech_wreckage/attack_hand(var/mob/user)
+/obj/structure/mech_wreckage/attack_hand(mob/user)
 	if(contents.len)
 		var/obj/item/thing = pick(contents)
 		if(istype(thing))
@@ -42,7 +42,7 @@
 			return
 	return ..()
 
-/obj/structure/mech_wreckage/attackby(var/obj/item/W, var/mob/user)
+/obj/structure/mech_wreckage/attackby(obj/item/W, mob/user)
 
 	var/cutting
 	if(isWelder(W))

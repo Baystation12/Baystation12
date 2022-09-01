@@ -16,7 +16,7 @@
 	var/timer_id
 
 // This is not great.
-/turf/simulated/proc/wet_floor(var/wet_val = 1, var/overwrite = FALSE)
+/turf/simulated/proc/wet_floor(wet_val = 1, overwrite = FALSE)
 	if(wet_val < wet && !overwrite)
 		return
 
@@ -27,7 +27,7 @@
 
 	timer_id = addtimer(CALLBACK(src,/turf/simulated/proc/unwet_floor),8 SECONDS, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_NO_HASH_WAIT|TIMER_OVERRIDE)
 
-/turf/simulated/proc/unwet_floor(var/check_very_wet = TRUE)
+/turf/simulated/proc/unwet_floor(check_very_wet = TRUE)
 	if(check_very_wet && wet >= 2)
 		wet--
 		timer_id = addtimer(CALLBACK(src,/turf/simulated/proc/unwet_floor), 8 SECONDS, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_NO_HASH_WAIT|TIMER_OVERRIDE)
@@ -49,7 +49,7 @@
 		holy = 1
 	levelupdate()
 
-/turf/simulated/proc/AddTracks(var/typepath,var/bloodDNA,var/comingdir,var/goingdir,var/bloodcolor=COLOR_BLOOD_HUMAN)
+/turf/simulated/proc/AddTracks(typepath,bloodDNA,comingdir,goingdir,bloodcolor=COLOR_BLOOD_HUMAN)
 	var/obj/effect/decal/cleanable/blood/tracks/tracks = locate(typepath) in src
 	if(!tracks)
 		tracks = new typepath(src)
@@ -159,10 +159,10 @@
 	else if( istype(M, /mob/living/silicon/robot ))
 		new /obj/effect/decal/cleanable/blood/oil(src)
 
-/turf/simulated/proc/can_build_cable(var/mob/user)
+/turf/simulated/proc/can_build_cable(mob/user)
 	return 0
 
-/turf/simulated/attackby(var/obj/item/thing, var/mob/user)
+/turf/simulated/attackby(obj/item/thing, mob/user)
 	if(isCoil(thing) && can_build_cable(user))
 		var/obj/item/stack/cable_coil/coil = thing
 		coil.turf_place(src, user)

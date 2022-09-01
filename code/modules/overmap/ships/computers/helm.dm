@@ -79,7 +79,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 		return
 
-/obj/machinery/computer/ship/helm/relaymove(var/mob/user, direction)
+/obj/machinery/computer/ship/helm/relaymove(mob/user, direction)
 	if(viewing_overmap(user) && linked)
 		if(prob(user.skill_fail_chance(SKILL_PILOT, 50, linked.skill_needed, factor = 1)))
 			direction = turn(direction,pick(90,-90))
@@ -87,7 +87,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		set_operator(user)
 		return 1
 
-/obj/machinery/computer/ship/helm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/computer/ship/helm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/data[0]
 
 	if(!linked)
@@ -146,7 +146,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 			ui.open()
 			ui.set_auto_update(1)
 
-/obj/machinery/computer/ship/helm/OnTopic(var/mob/user, var/list/href_list, state)
+/obj/machinery/computer/ship/helm/OnTopic(mob/user, list/href_list, state)
 	if(..())
 		return TOPIC_HANDLED
 
@@ -331,7 +331,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	machine_name = "navigation console"
 	machine_desc = "Used to view a sensor-assisted readout of the current sector and its surrounding areas."
 
-/obj/machinery/computer/ship/navigation/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/computer/ship/navigation/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	if(!linked)
 		display_reconnect_dialog(user, "Navigation")
 		return
@@ -366,7 +366,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/computer/ship/navigation/OnTopic(var/mob/user, var/list/href_list)
+/obj/machinery/computer/ship/navigation/OnTopic(mob/user, list/href_list)
 	if(..())
 		return TOPIC_HANDLED
 

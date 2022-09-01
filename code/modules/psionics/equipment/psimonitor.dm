@@ -16,7 +16,7 @@
 	SSpsi.psi_monitors += src
 	..()
 
-/obj/machinery/psi_monitor/emag_act(var/remaining_charges, var/mob/user)
+/obj/machinery/psi_monitor/emag_act(remaining_charges, mob/user)
 	if(!emagged)
 		emagged = TRUE
 		remaining_charges--
@@ -65,11 +65,11 @@
 		if(. && usr)
 			interact(usr)
 
-/obj/machinery/psi_monitor/interface_interact(var/mob/user)
+/obj/machinery/psi_monitor/interface_interact(mob/user)
 	interact(user)
 	return TRUE
 
-/obj/machinery/psi_monitor/interact(var/mob/user)
+/obj/machinery/psi_monitor/interact(mob/user)
 
 	var/list/dat = list()
 	dat += "<h1>Psi Dampener Monitor</h1>"
@@ -110,8 +110,8 @@
 	popup.open()
 
 
-/obj/machinery/psi_monitor/proc/report_failure(var/obj/item/implant/psi_control/implant)
+/obj/machinery/psi_monitor/proc/report_failure(obj/item/implant/psi_control/implant)
 	psi_violations += "<font color='#FF0000'>Critical system failure - [implant.imp_in.name].</font>"
 
-/obj/machinery/psi_monitor/proc/report_violation(var/obj/item/implant/psi_control/implant, var/stress)
+/obj/machinery/psi_monitor/proc/report_violation(obj/item/implant/psi_control/implant, stress)
 	psi_violations += "Sigma [round(stress/10)] event - [implant.imp_in.name]."

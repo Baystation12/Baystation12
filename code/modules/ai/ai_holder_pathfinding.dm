@@ -39,7 +39,7 @@
 	ai_log("calculate_path() : Exiting.", AI_LOG_DEBUG)
 
 ///A* now, try to a path to a target
-/datum/ai_holder/proc/get_path(turf/target,var/get_to = 1, max_distance = world.view*6)
+/datum/ai_holder/proc/get_path(turf/target,get_to = 1, max_distance = world.view*6)
 	ai_log("get_path() : Entering.",AI_LOG_DEBUG)
 	forget_path()
 	var/list/new_path = AStar(get_turf(holder.loc), target, astar_adjacent_proc, /turf/proc/Distance, min_target_dist = get_to, max_node_depth = max_distance, id = holder.IGetID(), exclude = obstacles)

@@ -27,12 +27,12 @@
 	grab_action = "jointlock"
 	harm_action = "dislocate"
 
-/datum/grab/normal/on_hit_help(var/obj/item/grab/normal/G)
+/datum/grab/normal/on_hit_help(obj/item/grab/normal/G)
 	var/obj/item/organ/external/O = G.get_targeted_organ()
 	if(O)
 		return O.inspect(G.assailant)
 
-/datum/grab/normal/on_hit_disarm(var/obj/item/grab/G)
+/datum/grab/normal/on_hit_disarm(obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
 
@@ -56,7 +56,7 @@
 		return 0
 
 
-/datum/grab/normal/on_hit_grab(var/obj/item/grab/G)
+/datum/grab/normal/on_hit_grab(obj/item/grab/G)
 	var/obj/item/organ/external/O = G.get_targeted_organ()
 	var/mob/living/carbon/human/assailant = G.assailant
 	var/mob/living/carbon/human/affecting = G.affecting
@@ -91,7 +91,7 @@
 		return 0
 
 
-/datum/grab/normal/on_hit_harm(var/obj/item/grab/G)
+/datum/grab/normal/on_hit_harm(obj/item/grab/G)
 	var/obj/item/organ/external/O = G.get_targeted_organ()
 	var/mob/living/carbon/human/assailant = G.assailant
 	var/mob/living/carbon/human/affecting = G.affecting
@@ -134,7 +134,7 @@
 		to_chat(assailant, "<span class='warning'>You can't dislocate [affecting]'s [O.joint]!</span>")
 		return 0
 
-/datum/grab/normal/resolve_openhand_attack(var/obj/item/grab/G)
+/datum/grab/normal/resolve_openhand_attack(obj/item/grab/G)
 	if(G.assailant.a_intent != I_HELP)
 		if(G.assailant.zone_sel.selecting == BP_HEAD)
 			if(headbutt(G))
@@ -146,7 +146,7 @@
 				return TRUE
 	return 0
 
-/datum/grab/normal/proc/attack_eye(var/obj/item/grab/G)
+/datum/grab/normal/proc/attack_eye(obj/item/grab/G)
 	var/mob/living/carbon/human/attacker = G.assailant
 	var/mob/living/carbon/human/target = G.affecting
 
@@ -167,7 +167,7 @@
 	attack.handle_eye_attack(attacker, target)
 	return TRUE
 
-/datum/grab/normal/proc/headbutt(var/obj/item/grab/G)
+/datum/grab/normal/proc/headbutt(obj/item/grab/G)
 	var/mob/living/carbon/human/attacker = G.assailant
 	var/mob/living/carbon/human/target = G.affecting
 
@@ -203,7 +203,7 @@
 	return TRUE
 
 // Handles special targeting like eyes and mouth being covered.
-/datum/grab/normal/special_target_effect(var/obj/item/grab/G)
+/datum/grab/normal/special_target_effect(obj/item/grab/G)
 	if(G.special_target_functional)
 		switch(G.target_zone)
 			if(BP_MOUTH)
@@ -214,7 +214,7 @@
 					G.affecting.eye_blind = 2
 
 // Handles when they change targeted areas and something is supposed to happen.
-/datum/grab/normal/special_target_change(var/obj/item/grab/G, old_zone, new_zone)
+/datum/grab/normal/special_target_change(obj/item/grab/G, old_zone, new_zone)
 	if(old_zone != BP_HEAD && old_zone != BP_CHEST)
 		return
 	switch(new_zone)
@@ -224,7 +224,7 @@
 			G.assailant.visible_message("<span class='warning'>\The [G.assailant] covers [G.affecting]'s eyes!</span>")
 
 
-/datum/grab/normal/check_special_target(var/obj/item/grab/G)
+/datum/grab/normal/check_special_target(obj/item/grab/G)
 	switch(G.target_zone)
 		if(BP_MOUTH)
 			if(!G.affecting.check_has_mouth())
@@ -236,14 +236,14 @@
 				return 0
 	return TRUE
 
-/datum/grab/normal/resolve_item_attack(var/obj/item/grab/G, var/mob/living/carbon/human/user, var/obj/item/I)
+/datum/grab/normal/resolve_item_attack(obj/item/grab/G, mob/living/carbon/human/user, obj/item/I)
 	switch(G.assailant.zone_sel.selecting)
 		if(BP_HEAD, BP_MOUTH)
 			return attack_throat(G, I, user)
 		else
 			return attack_tendons(G, I, user, G.assailant.zone_sel.selecting)
 
-/datum/grab/normal/proc/attack_throat(var/obj/item/grab/G, var/obj/item/W, var/mob/living/carbon/human/user)
+/datum/grab/normal/proc/attack_throat(obj/item/grab/G, obj/item/W, mob/living/carbon/human/user)
 	var/mob/living/carbon/human/affecting = G.affecting
 
 	if(user.a_intent != I_HURT)
@@ -286,7 +286,7 @@
 	admin_attack_log(user, affecting, "Knifed their victim", "Was knifed", "knifed")
 	return TRUE
 
-/datum/grab/normal/proc/attack_tendons(var/obj/item/grab/G, var/obj/item/W, var/mob/living/carbon/human/user, var/target_zone)
+/datum/grab/normal/proc/attack_tendons(obj/item/grab/G, obj/item/W, mob/living/carbon/human/user, target_zone)
 	var/mob/living/carbon/human/affecting = G.affecting
 
 	if(!user.skill_check(SKILL_COMBAT, SKILL_ADEPT))

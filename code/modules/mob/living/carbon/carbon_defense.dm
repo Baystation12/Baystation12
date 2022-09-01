@@ -1,5 +1,5 @@
 
-/mob/living/carbon/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
+/mob/living/carbon/standard_weapon_hit_effects(obj/item/I, mob/living/user, effective_force, hit_zone)
 	if(!effective_force)
 		return 0
 

@@ -94,7 +94,7 @@
 /obj/item/implant/explosive/hear_talk(mob/M as mob, msg)
 	hear(msg)
 
-/obj/item/implant/explosive/hear(var/msg)
+/obj/item/implant/explosive/hear(msg)
 	if(!phrase)
 		return
 	if(findtext(sanitize_phrase(msg),phrase))

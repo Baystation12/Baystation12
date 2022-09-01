@@ -33,7 +33,7 @@
 	return TRUE
 
 // The hacked variant has access to all commonly used networks.
-/datum/nano_module/camera_monitor/hacked/modify_networks_list(var/list/networks)
+/datum/nano_module/camera_monitor/hacked/modify_networks_list(list/networks)
 	networks.Add(list(list("tag" = NETWORK_MERCENARY, "has_access" = 1)))
 	networks.Add(list(list("tag" = NETWORK_ERT, "has_access" = 1)))
 	networks.Add(list(list("tag" = NETWORK_CRESCENT, "has_access" = 1)))

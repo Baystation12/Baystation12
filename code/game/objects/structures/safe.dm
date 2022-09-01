@@ -174,7 +174,7 @@ FLOOR SAFES
 		hide(1)
 	update_icon()
 
-/obj/structure/safe/floor/hide(var/intact)
+/obj/structure/safe/floor/hide(intact)
 	set_invisibility(intact ? 101 : 0)
 
 /obj/structure/safe/floor/hides_under_flooring()

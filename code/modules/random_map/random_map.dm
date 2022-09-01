@@ -34,7 +34,7 @@ var/global/list/map_count = list()
 	// Test to see if rand_seed() can be used reliably.
 	var/priority_process
 
-/datum/random_map/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0, var/used_area)
+/datum/random_map/New(seed, tx, ty, tz, tlx, tly, do_not_apply, do_not_announce, never_be_priority = 0, used_area)
 
 	// Store this for debugging.
 	if(!map_count[descriptor])
@@ -76,14 +76,14 @@ var/global/list/map_count = list()
 			return
 	if(!do_not_announce) admin_notice("<span class='danger'>[capitalize(name)] failed to generate ([round(0.1*(world.timeofday-start_time),0.1)] seconds): could not produce sane map.</span>", R_DEBUG)
 
-/datum/random_map/proc/get_map_cell(var/x,var/y)
+/datum/random_map/proc/get_map_cell(x,y)
 	if(!map)
 		set_map_size()
 	. = ((y-1)*limit_x)+x
 	if((. < 1) || (. > map.len))
 		return null
 
-/datum/random_map/proc/get_map_char(var/value)
+/datum/random_map/proc/get_map_char(value)
 	switch(value)
 		if(WALL_CHAR)
 			return "#"
@@ -151,7 +151,7 @@ var/global/list/map_count = list()
 /datum/random_map/proc/check_map_sanity()
 	return 1
 
-/datum/random_map/proc/set_origins(var/tx, var/ty, var/tz)
+/datum/random_map/proc/set_origins(tx, ty, tz)
 	origin_x = tx ? tx : 1
 	origin_y = ty ? ty : 1
 	origin_z = tz ? tz : 1
@@ -167,7 +167,7 @@ var/global/list/map_count = list()
 				CHECK_TICK
 			apply_to_turf(x,y)
 
-/datum/random_map/proc/apply_to_turf(var/x,var/y)
+/datum/random_map/proc/apply_to_turf(x,y)
 	var/current_cell = get_map_cell(x,y)
 	if(!current_cell)
 		return 0
@@ -185,21 +185,21 @@ var/global/list/map_count = list()
 /datum/random_map/proc/get_spawn_dir()
 	return 0
 
-/datum/random_map/proc/get_appropriate_path(var/value)
+/datum/random_map/proc/get_appropriate_path(value)
 	switch(value)
 		if(FLOOR_CHAR)
 			return floor_type
 		if(WALL_CHAR)
 			return wall_type
 
-/datum/random_map/proc/get_additional_spawns(var/value, var/turf/T)
+/datum/random_map/proc/get_additional_spawns(value, turf/T)
 	if(value == DOOR_CHAR)
 		new /obj/machinery/door/airlock(T)
 
 /datum/random_map/proc/cleanup()
 	return
 
-/datum/random_map/proc/overlay_with(var/datum/random_map/target_map, var/tx, var/ty)
+/datum/random_map/proc/overlay_with(datum/random_map/target_map, tx, ty)
 	if(!map.len || !istype(target_map))
 		return
 	tx-- // Update origin so that x/y index
@@ -217,5 +217,5 @@ var/global/list/map_count = list()
 	handle_post_overlay_on(target_map,tx,ty)
 
 
-/datum/random_map/proc/handle_post_overlay_on(var/datum/random_map/target_map, var/tx, var/ty)
+/datum/random_map/proc/handle_post_overlay_on(datum/random_map/target_map, tx, ty)
 	return

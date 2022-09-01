@@ -10,7 +10,7 @@
 	if(show_extended_information)
 		show_info(user)
 
-/obj/machinery/power/debug_items/proc/show_info(var/mob/user)
+/obj/machinery/power/debug_items/proc/show_info(mob/user)
 	if(!powernet)
 		to_chat(user, "This device is not connected to a powernet")
 		return
@@ -32,7 +32,7 @@
 /obj/machinery/power/debug_items/infinite_generator/Process()
 	add_avail(power_generation_rate)
 
-/obj/machinery/power/debug_items/infinite_generator/show_info(var/mob/user)
+/obj/machinery/power/debug_items/infinite_generator/show_info(mob/user)
 	..()
 	to_chat(user, "Generator is providing [num2text(power_generation_rate, 20)] W")
 
@@ -47,7 +47,7 @@
 /obj/machinery/power/debug_items/infinite_cable_powersink/Process()
 	last_used = draw_power(power_usage_rate)
 
-/obj/machinery/power/debug_items/infinite_cable_powersink/show_info(var/mob/user)
+/obj/machinery/power/debug_items/infinite_cable_powersink/show_info(mob/user)
 	..()
 	to_chat(user, "Power sink is demanding [num2text(power_usage_rate, 20)] W")
 	to_chat(user, "[num2text(last_used, 20)] W was actually used last tick")
@@ -59,7 +59,7 @@
 	use_power = POWER_USE_ACTIVE
 	active_power_usage = 0
 
-/obj/machinery/power/debug_items/infinite_apc_powersink/show_info(var/mob/user)
+/obj/machinery/power/debug_items/infinite_apc_powersink/show_info(mob/user)
 	..()
 	to_chat(user, "Dummy load is using [num2text(active_power_usage, 20)] W")
 	to_chat(user, "Powered: [powered() ? "YES" : "NO"]")

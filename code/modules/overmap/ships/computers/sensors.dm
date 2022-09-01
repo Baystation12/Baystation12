@@ -28,7 +28,7 @@
 			sensors = S
 			break
 
-/obj/machinery/computer/ship/sensors/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/computer/ship/sensors/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	if(!linked)
 		display_reconnect_dialog(user, "sensors")
 		return
@@ -77,7 +77,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/computer/ship/sensors/OnTopic(var/mob/user, var/list/href_list, state)
+/obj/machinery/computer/ship/sensors/OnTopic(mob/user, list/href_list, state)
 	if(..())
 		return TOPIC_HANDLED
 
@@ -182,7 +182,7 @@
 	else if(health < max_health * 0.75)
 		to_chat(user, "\The [src] shows signs of damage!")
 
-/obj/machinery/shipsensors/bullet_act(var/obj/item/projectile/Proj)
+/obj/machinery/shipsensors/bullet_act(obj/item/projectile/Proj)
 	take_damage(Proj.get_structure_damage())
 	..()
 

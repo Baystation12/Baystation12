@@ -202,7 +202,7 @@
 	siemens_coefficient = 1.5
 	item_icons = list()
 
-/obj/item/clothing/head/kitty/on_update_icon(var/mob/living/carbon/human/user)
+/obj/item/clothing/head/kitty/on_update_icon(mob/living/carbon/human/user)
 	if(!istype(user)) return
 	var/icon/ears = new/icon("icon" = 'icons/mob/onmob/onmob_head.dmi', "icon_state" = "kitty")
 	ears.Blend(user.head_hair_color, ICON_ADD)

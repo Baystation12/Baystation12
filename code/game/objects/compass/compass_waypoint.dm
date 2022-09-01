@@ -7,7 +7,7 @@
 	var/hidden = FALSE
 	var/image/compass_marker/compass_overlay
 
-/datum/compass_waypoint/proc/set_values(var/_name, var/_x, var/_y, var/_z, var/_color)
+/datum/compass_waypoint/proc/set_values(_name, _x, _y, _z, _color)
 	name = _name
 	x = _x
 	y = _y
@@ -21,7 +21,7 @@
 	compass_overlay.layer = HUD_BASE_LAYER
 	compass_overlay.plane = HUD_PLANE
 
-/datum/compass_waypoint/proc/recalculate_heading(var/cx, var/cy, var/translate_val)
+/datum/compass_waypoint/proc/recalculate_heading(cx, cy, translate_val)
 	var/matrix/M = matrix()
 	if(name)
 		translate_val -= 4

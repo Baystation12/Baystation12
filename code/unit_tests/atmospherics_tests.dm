@@ -25,7 +25,7 @@
 		gas_mixes[mix_name] = gas_mix
 	return gas_mixes
 
-/datum/unit_test/atmos_machinery/proc/gas_amount_changes(var/list/before_gas_mixes, var/list/after_gas_mixes)
+/datum/unit_test/atmos_machinery/proc/gas_amount_changes(list/before_gas_mixes, list/after_gas_mixes)
 	var/list/result = list()
 	for(var/mix_name in before_gas_mixes & after_gas_mixes)
 		var/change = list()
@@ -41,7 +41,7 @@
 
 	return result
 
-/datum/unit_test/atmos_machinery/proc/check_moles_conserved(var/case_name, var/list/before_gas_mixes, var/list/after_gas_mixes)
+/datum/unit_test/atmos_machinery/proc/check_moles_conserved(case_name, list/before_gas_mixes, list/after_gas_mixes)
 	var/failed = FALSE
 	for(var/gasid in gas_data.gases)
 		var/before = 0

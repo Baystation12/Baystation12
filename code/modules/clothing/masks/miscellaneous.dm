@@ -159,7 +159,7 @@
 		eye = null
 	..()
 
-/obj/item/clothing/mask/ai/attack_self(var/mob/user)
+/obj/item/clothing/mask/ai/attack_self(mob/user)
 	if(user.incapacitated())
 		return
 	active = !active
@@ -169,15 +169,15 @@
 	else
 		disengage_mask(user)
 
-/obj/item/clothing/mask/ai/equipped(var/mob/user, var/slot)
+/obj/item/clothing/mask/ai/equipped(mob/user, slot)
 	..(user, slot)
 	engage_mask(user)
 
-/obj/item/clothing/mask/ai/dropped(var/mob/user)
+/obj/item/clothing/mask/ai/dropped(mob/user)
 	..()
 	disengage_mask(user)
 
-/obj/item/clothing/mask/ai/proc/engage_mask(var/mob/user)
+/obj/item/clothing/mask/ai/proc/engage_mask(mob/user)
 	if(!active)
 		return
 	if(user.get_equipped_item(slot_wear_mask) != src)
@@ -186,7 +186,7 @@
 	eye.possess(user)
 	to_chat(eye.owner, "<span class='notice'>You feel disorented for a moment as your mind connects to the camera network.</span>")
 
-/obj/item/clothing/mask/ai/proc/disengage_mask(var/mob/user)
+/obj/item/clothing/mask/ai/proc/disengage_mask(mob/user)
 	if(user == eye.owner)
 		to_chat(eye.owner, "<span class='notice'>You feel disorented for a moment as your mind disconnects from the camera network.</span>")
 		eye.release(eye.owner)
@@ -276,7 +276,7 @@
 	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL | ITEM_FLAG_WASHER_ALLOWED
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/clothing/mask/bandana/equipped(var/mob/user, var/slot)
+/obj/item/clothing/mask/bandana/equipped(mob/user, slot)
 	switch(slot)
 		if(slot_wear_mask) //Mask is the default for all the settings
 			flags_inv = initial(flags_inv)

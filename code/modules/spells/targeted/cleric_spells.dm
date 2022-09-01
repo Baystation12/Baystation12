@@ -168,7 +168,7 @@
 	hud_state = "trance"
 	var/obj/effect/effect
 
-/spell/targeted/heal_target/trance/cast(var/list/targets, var/mob/user)
+/spell/targeted/heal_target/trance/cast(list/targets, mob/user)
 	for(var/t in targets)
 		var/mob/living/L = t
 		var/turf/T = get_turf(L)
@@ -222,7 +222,7 @@
 	range = 1
 	hud_state = "heal_revoke"
 
-/spell/targeted/revoke/cast(var/list/targets, var/mob/living/user)
+/spell/targeted/revoke/cast(list/targets, mob/living/user)
 	if(alert(user, "Are you sure?", "Alert", "Yes", "No") == "Yes" && alert(user, "Are you ABSOLUTELY SURE?", "Alert", "Absolutely!", "No") == "Absolutely!")
 		var/should_wait = 1
 		for(var/t in targets)
@@ -237,7 +237,7 @@
 			revoke_spells()
 
 
-/spell/targeted/revoke/proc/check_for_revoke(var/list/targets)
+/spell/targeted/revoke/proc/check_for_revoke(list/targets)
 	for(var/t in targets)
 		var/mob/M = t
 		if(M.client)

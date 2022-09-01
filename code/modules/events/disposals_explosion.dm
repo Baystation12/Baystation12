@@ -10,13 +10,13 @@
 	var/obj/structure/disposalpipe/segment/bursting_pipe = null
 
 // Predicates for the pick_area and pick_area_turf proc
-/proc/area_has_disposals_pipe(var/area/A)
+/proc/area_has_disposals_pipe(area/A)
 	for(var/turf/T in A)
 		if(has_disposals_pipe(T))
 			return TRUE
 	return FALSE
 
-/proc/has_disposals_pipe(var/turf/T)
+/proc/has_disposals_pipe(turf/T)
 	for(var/atom/A in T)
 		if(istype(A, /obj/structure/disposalpipe/segment))
 			return TRUE

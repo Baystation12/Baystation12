@@ -4,7 +4,7 @@
 /datum/admin_secret_item/admin_secret/show_signalers/name()
 	return "Show Last [length(GLOB.lastsignalers)] Signaler\s"
 
-/datum/admin_secret_item/admin_secret/show_signalers/execute(var/mob/user)
+/datum/admin_secret_item/admin_secret/show_signalers/execute(mob/user)
 	. = ..()
 	if(!.)
 		return

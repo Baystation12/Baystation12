@@ -56,7 +56,7 @@
 			if (prob(25))
 				src.set_density(0)
 
-/obj/machinery/optable/attackby(var/obj/item/O, var/mob/user)
+/obj/machinery/optable/attackby(obj/item/O, mob/user)
 	if (istype(O, /obj/item/grab))
 		var/obj/item/grab/G = O
 		if(iscarbon(G.affecting) && check_table(G.affecting))
@@ -65,12 +65,12 @@
 			return
 	return ..()
 
-/obj/machinery/optable/state_transition(var/decl/machine_construction/default/new_state)
+/obj/machinery/optable/state_transition(decl/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state))
 		updateUsrDialog()
 
-/obj/machinery/optable/physical_attack_hand(var/mob/user)
+/obj/machinery/optable/physical_attack_hand(mob/user)
 	if(MUTATION_HULK in user.mutations)
 		visible_message("<span class='danger'>\The [usr] destroys \the [src]!</span>")
 		src.set_density(0)

@@ -10,7 +10,7 @@
 	color = "#664330"
 	value = 0.1
 
-/datum/reagent/nutriment/mix_data(var/list/newdata, var/newamount)
+/datum/reagent/nutriment/mix_data(list/newdata, newamount)
 
 	if(!islist(newdata) || !newdata.len)
 		return
@@ -33,13 +33,13 @@
 		if(data[taste]/totalFlavor < 0.1)
 			data -= taste
 
-/datum/reagent/nutriment/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/nutriment/affect_blood(mob/living/carbon/M, alien, removed)
 	if(!injectable)
 		M.adjustToxLoss(0.2 * removed)
 		return
 	affect_ingest(M, alien, removed)
 
-/datum/reagent/nutriment/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/nutriment/affect_ingest(mob/living/carbon/M, alien, removed)
 	if (alien == IS_SKRELL && protein_amount > 0)
 		var/datum/species/skrell/S = M.species
 		S.handle_protein(M, src)
@@ -48,7 +48,7 @@
 	adjust_nutrition(M, alien, removed)
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
 
-/datum/reagent/nutriment/proc/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/nutriment/proc/adjust_nutrition(mob/living/carbon/M, alien, removed)
 	var/nut_removed = removed
 	var/hyd_removed = removed
 	if(alien == IS_UNATHI)
@@ -71,7 +71,7 @@
 	color = "#440000"
 	protein_amount = 1
 
-/datum/reagent/nutriment/protein/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/nutriment/protein/adjust_nutrition(mob/living/carbon/M, alien, removed)
 	switch(alien)
 		if(IS_UNATHI) removed *= 2.25
 		if(IS_SKRELL) return
@@ -97,7 +97,7 @@
 	nutriment_factor = 10
 	color = "#ffff00"
 
-/datum/reagent/nutriment/honey/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed)
+/datum/reagent/nutriment/honey/affect_ingest(mob/living/carbon/human/M, alien, removed)
 	..()
 
 	if(alien == IS_UNATHI)
@@ -112,7 +112,7 @@
 	nutriment_factor = 1
 	color = "#ffffff"
 
-/datum/reagent/nutriment/flour/touch_turf(var/turf/simulated/T)
+/datum/reagent/nutriment/flour/touch_turf(turf/simulated/T)
 	if(istype(T))
 		new /obj/effect/decal/cleanable/flour(T)
 		if(T.wet > 1)
@@ -129,7 +129,7 @@
 	color = "#ffd592"
 	protein_amount = 0.4
 
-/datum/reagent/nutriment/batter/touch_turf(var/turf/simulated/T)
+/datum/reagent/nutriment/batter/touch_turf(turf/simulated/T)
 	if(!istype(T, /turf/space))
 		new /obj/effect/decal/cleanable/pie_smudge(T)
 		if(T.wet > 1)
@@ -275,7 +275,7 @@
 	nutriment_factor = 20
 	color = "#302000"
 
-/datum/reagent/nutriment/cornoil/touch_turf(var/turf/simulated/T)
+/datum/reagent/nutriment/cornoil/touch_turf(turf/simulated/T)
 	if(!istype(T))
 		return
 
@@ -313,7 +313,7 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 0.11
 
-/datum/reagent/lipozine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/lipozine/affect_blood(mob/living/carbon/M, alien, removed)
 	M.adjust_nutrition(-10)
 
 /* Non-food stuff like condiments */
@@ -354,7 +354,7 @@
 	color = "#07aab2"
 	value = 0.2
 
-/datum/reagent/frostoil/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/frostoil/affect_blood(mob/living/carbon/M, alien, removed)
 	if(alien == IS_DIONA)
 		return
 	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
@@ -377,12 +377,12 @@
 	var/slime_temp_adj = 10
 	value = 0.2
 
-/datum/reagent/capsaicin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/capsaicin/affect_blood(mob/living/carbon/M, alien, removed)
 	if(alien == IS_DIONA)
 		return
 	M.adjustToxLoss(0.5 * removed)
 
-/datum/reagent/capsaicin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/capsaicin/affect_ingest(mob/living/carbon/M, alien, removed)
 	if(alien == IS_DIONA || alien == IS_UNATHI)
 		return
 	if(ishuman(M))
@@ -414,7 +414,7 @@
 	discomfort_message = "<span class='danger'>You feel like your insides are burning!</span>"
 	slime_temp_adj = 15
 
-/datum/reagent/capsaicin/condensed/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/capsaicin/condensed/affect_touch(mob/living/carbon/M, alien, removed)
 	var/eyes_covered = 0
 	var/mouth_covered = 0
 	var/partial_mouth_covered = 0
@@ -476,7 +476,7 @@
 			M.custom_emote(2, "[pick("coughs!","coughs hysterically!","splutters!")]")
 			M.Stun(3)
 
-/datum/reagent/capsaicin/condensed/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/capsaicin/condensed/affect_ingest(mob/living/carbon/M, alien, removed)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!H.can_feel_pain())

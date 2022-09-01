@@ -6,7 +6,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	var/obj/tank
 
-/obj/item/farmbot_arm_assembly/Initialize(var/ml, var/theTank)
+/obj/item/farmbot_arm_assembly/Initialize(ml, theTank)
 	. = ..()
 	if(!theTank)
 		theTank = new /obj/structure/reagent_dispensers/watertank

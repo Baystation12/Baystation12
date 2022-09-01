@@ -6,7 +6,7 @@
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
 
-/obj/item/mech_equipment/mounted_system/taser/MouseDragInteraction(src_object, over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
+/obj/item/mech_equipment/mounted_system/taser/MouseDragInteraction(src_object, over_object, src_location, over_location, src_control, over_control, params, mob/user)
 	. = ..()
 
 	if(over_object)
@@ -71,7 +71,7 @@
 	restricted_hardpoints = list(HARDPOINT_BACK)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
 
-/obj/item/mech_equipment/shields/installed(var/mob/living/exosuit/_owner)
+/obj/item/mech_equipment/shields/installed(mob/living/exosuit/_owner)
 	. = ..()
 	aura = new(owner, src)
 
@@ -79,12 +79,12 @@
 	QDEL_NULL(aura)
 	. = ..()
 
-/obj/item/mech_equipment/shields/attack_self(var/mob/user)
+/obj/item/mech_equipment/shields/attack_self(mob/user)
 	. = ..()
 	if(.)
 		toggle()
 
-/obj/item/mech_equipment/shields/proc/stop_damage(var/damage)
+/obj/item/mech_equipment/shields/proc/stop_damage(damage)
 	var/difference = damage - charge
 	charge = clamp(charge - damage, 0, max_charge)
 
@@ -156,17 +156,17 @@
 	pixel_y = 4
 	mouse_opacity = 0
 
-/obj/aura/mechshield/Initialize(var/maploading, var/obj/item/mech_equipment/shields/holder)
+/obj/aura/mechshield/Initialize(maploading, obj/item/mech_equipment/shields/holder)
 	. = ..()
 	shields = holder
 
-/obj/aura/mechshield/added_to(var/mob/living/target)
+/obj/aura/mechshield/added_to(mob/living/target)
 	. = ..()
 	target.vis_contents += src
 	set_dir()
 	GLOB.dir_set_event.register(user, src, /obj/aura/mechshield/proc/update_dir)
 
-/obj/aura/mechshield/proc/update_dir(var/user, var/old_dir, var/dir)
+/obj/aura/mechshield/proc/update_dir(user, old_dir, dir)
 	set_dir(dir)
 
 /obj/aura/mechshield/set_dir(new_dir)
@@ -200,7 +200,7 @@
 	else
 		icon_state = "shield_null"
 
-/obj/aura/mechshield/bullet_act(var/obj/item/projectile/P, var/def_zone)
+/obj/aura/mechshield/bullet_act(obj/item/projectile/P, def_zone)
 	if(!active)
 		return
 	if(shields)
@@ -219,7 +219,7 @@
 			spark_system.start()
 			playsound(loc, "sparks", 25, 1)
 
-/obj/aura/mechshield/hitby(atom/movable/M, var/datum/thrownthing/TT)
+/obj/aura/mechshield/hitby(atom/movable/M, datum/thrownthing/TT)
 	. = ..()
 	if(!active)
 		return

@@ -23,7 +23,7 @@
 	color = new_colour
 	return color != last_colour
 
-/obj/item/mech_component/emp_act(var/severity)
+/obj/item/mech_component/emp_act(severity)
 	take_burn_damage(rand((10 - (severity*3)),15-(severity*4)))
 	for(var/obj/item/thing in contents)
 		thing.emp_act(severity)
@@ -40,13 +40,13 @@
 /obj/item/mech_component/set_dir()
 	..(SOUTH)
 
-/obj/item/mech_component/proc/show_missing_parts(var/mob/user)
+/obj/item/mech_component/proc/show_missing_parts(mob/user)
 	return
 
 /obj/item/mech_component/proc/prebuild()
 	return
 
-/obj/item/mech_component/proc/install_component(var/obj/item/thing, var/mob/user)
+/obj/item/mech_component/proc/install_component(obj/item/thing, mob/user)
 	if(user.unEquip(thing, src))
 		user.visible_message(SPAN_NOTICE("\The [user] installs \the [thing] in \the [src]."))
 		return 1
@@ -65,25 +65,25 @@
 /obj/item/mech_component/proc/ready_to_install()
 	return 1
 
-/obj/item/mech_component/proc/repair_brute_damage(var/amt)
+/obj/item/mech_component/proc/repair_brute_damage(amt)
 	take_brute_damage(-amt)
 
-/obj/item/mech_component/proc/repair_burn_damage(var/amt)
+/obj/item/mech_component/proc/repair_burn_damage(amt)
 	take_burn_damage(-amt)
 
-/obj/item/mech_component/proc/take_brute_damage(var/amt)
+/obj/item/mech_component/proc/take_brute_damage(amt)
 	brute_damage = max(0, brute_damage + amt)
 	update_health()
 	if(total_damage == max_damage)
 		take_component_damage(amt,0)
 
-/obj/item/mech_component/proc/take_burn_damage(var/amt)
+/obj/item/mech_component/proc/take_burn_damage(amt)
 	burn_damage = max(0, burn_damage + amt)
 	update_health()
 	if(total_damage == max_damage)
 		take_component_damage(0,amt)
 
-/obj/item/mech_component/proc/take_component_damage(var/brute, var/burn)
+/obj/item/mech_component/proc/take_component_damage(brute, burn)
 	var/list/damageable_components = list()
 	for(var/obj/item/robot_parts/robot_component/RC in contents)
 		damageable_components += RC
@@ -93,7 +93,7 @@
 		qdel(RC)
 		update_components()
 
-/obj/item/mech_component/attackby(var/obj/item/thing, var/mob/user)
+/obj/item/mech_component/attackby(obj/item/thing, mob/user)
 	if(isScrewdriver(thing))
 		if(contents.len)
 			//Filter non movables
@@ -129,7 +129,7 @@
 /obj/item/mech_component/proc/update_components()
 	return
 
-/obj/item/mech_component/proc/repair_brute_generic(var/obj/item/weldingtool/WT, var/mob/user)
+/obj/item/mech_component/proc/repair_brute_generic(obj/item/weldingtool/WT, mob/user)
 	if(!istype(WT))
 		return
 	if(!brute_damage)
@@ -149,7 +149,7 @@
 			to_chat(user, SPAN_NOTICE("You mend the damage to \the [src]."))
 			playsound(user.loc, 'sound/items/Welder.ogg', 25, 1)
 
-/obj/item/mech_component/proc/repair_burn_generic(var/obj/item/stack/cable_coil/CC, var/mob/user)
+/obj/item/mech_component/proc/repair_burn_generic(obj/item/stack/cable_coil/CC, mob/user)
 	if(!istype(CC))
 		return
 	if(!burn_damage)
@@ -184,6 +184,6 @@
 			return FONT_COLORED(COLOR_RED, "almost destroyed")
 	return FONT_COLORED(COLOR_RED, "destroyed")
 
-/obj/item/mech_component/proc/return_diagnostics(var/mob/user)
+/obj/item/mech_component/proc/return_diagnostics(mob/user)
 	to_chat(user, SPAN_NOTICE("[capitalize(src.name)]:"))
 	to_chat(user, SPAN_NOTICE(" - Integrity: <b>[round((((max_damage - total_damage) / max_damage)) * 100)]%</b>" ))

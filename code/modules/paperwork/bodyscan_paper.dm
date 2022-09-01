@@ -6,6 +6,6 @@
 	set_content(display_medical_data(metadata, user.get_skill_value(SKILL_MEDICAL), TRUE))
 	. = ..()
 
-/obj/item/paper/bodyscan/show_info(var/mob/user)
+/obj/item/paper/bodyscan/show_info(mob/user)
 	set_content(display_medical_data(metadata, user.get_skill_value(SKILL_MEDICAL), TRUE))
 	. = ..()

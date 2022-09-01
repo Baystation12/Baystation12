@@ -96,7 +96,7 @@ var/global/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
 					SKILL_WEAPONS = SKILL_ADEPT,
 					SKILL_MEDICAL = SKILL_BASIC)
 
-/datum/job/submap/skrellscoutship_crew/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
+/datum/job/submap/skrellscoutship_crew/equip(mob/living/carbon/human/H, alt_title, datum/mil_branch/branch, datum/mil_rank/grade)
 	. = ..(H, alt_title, branch, grade)	//passing through arguments
 	//Limited to subcastes that make sense on the vessel. No need for ground-forces on such a ship.
 	var/skrellscoutcastes = list(

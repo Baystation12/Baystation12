@@ -300,7 +300,7 @@
 	var/tool_mode
 	var/list/tool_modes = list("wrench", "wirecutters", "crowbar", "screwdriver")
 
-/obj/item/clustertool/attack_self(var/mob/user)
+/obj/item/clustertool/attack_self(mob/user)
 	var/new_index = _list_find(tool_modes, tool_mode) + 1
 	if(new_index > tool_modes.len)
 		new_index = 1

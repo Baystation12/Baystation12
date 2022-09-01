@@ -1,25 +1,25 @@
-/atom/proc/is_flooded(var/lying_mob, var/absolute)
+/atom/proc/is_flooded(lying_mob, absolute)
 	return
 
-/atom/proc/water_act(var/depth)
+/atom/proc/water_act(depth)
 	clean_blood()
 
 /atom/proc/return_fluid()
 	return null
 
-/atom/proc/check_fluid_depth(var/min)
+/atom/proc/check_fluid_depth(min)
 	return 0
 
 /atom/proc/get_fluid_depth()
 	return 0
 
-/atom/proc/CanFluidPass(var/coming_from)
+/atom/proc/CanFluidPass(coming_from)
 	return TRUE
 
-/atom/movable/proc/is_fluid_pushable(var/amt)
+/atom/movable/proc/is_fluid_pushable(amt)
 	return simulated && !anchored
 
-/atom/movable/is_flooded(var/lying_mob, var/absolute)
+/atom/movable/is_flooded(lying_mob, absolute)
 	var/turf/T = get_turf(src)
 	return T.is_flooded(lying_mob)
 
@@ -45,6 +45,6 @@
 	if(istype(T))
 		T.fluid_update()
 
-/atom/movable/update_nearby_tiles(var/need_rebuild)
+/atom/movable/update_nearby_tiles(need_rebuild)
 	UNLINT(. = ..(need_rebuild))
 	fluid_update()

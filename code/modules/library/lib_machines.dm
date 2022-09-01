@@ -16,16 +16,16 @@
 	density = TRUE
 	var/obj/item/book/cache		// Last scanned book
 
-/obj/machinery/libraryscanner/attackby(var/obj/O as obj, var/mob/user as mob)
+/obj/machinery/libraryscanner/attackby(obj/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/book))
 		if(!user.unEquip(O, src))
 			return
 
-/obj/machinery/libraryscanner/interface_interact(var/mob/user)
+/obj/machinery/libraryscanner/interface_interact(mob/user)
 	interact(user)
 	return TRUE
 
-/obj/machinery/libraryscanner/interact(var/mob/user)
+/obj/machinery/libraryscanner/interact(mob/user)
 	usr.set_machine(src)
 	var/dat = "<HEAD><TITLE>Scanner Control Interface</TITLE></HEAD><BODY>\n" // <META HTTP-EQUIV='Refresh' CONTENT='10'>
 	if(cache)
@@ -68,7 +68,7 @@
 	anchored = TRUE
 	density = TRUE
 
-/obj/machinery/bookbinder/attackby(var/obj/O as obj, var/mob/user as mob)
+/obj/machinery/bookbinder/attackby(obj/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/paper))
 		if(!user.unEquip(O, src))
 			return

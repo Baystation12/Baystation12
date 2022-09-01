@@ -10,7 +10,7 @@
 	var/obj/screen/storage/stored_end
 	var/obj/screen/close/closer
 
-/datum/storage_ui/default/New(var/storage)
+/datum/storage_ui/default/New(storage)
 	..()
 	boxes = new /obj/screen/storage(  )
 	boxes.SetName("storage")
@@ -65,33 +65,33 @@
 	QDEL_NULL(closer)
 	. = ..()
 
-/datum/storage_ui/default/on_open(var/mob/user)
+/datum/storage_ui/default/on_open(mob/user)
 	if (user.s_active)
 		user.s_active.close(user)
 
-/datum/storage_ui/default/after_close(var/mob/user)
+/datum/storage_ui/default/after_close(mob/user)
 	user.s_active = null
 
-/datum/storage_ui/default/on_insertion(var/mob/user)
+/datum/storage_ui/default/on_insertion(mob/user)
 	if(user.s_active)
 		user.s_active.show_to(user)
 
-/datum/storage_ui/default/on_pre_remove(var/mob/user, var/obj/item/W)
+/datum/storage_ui/default/on_pre_remove(mob/user, obj/item/W)
 	for(var/mob/M in range(1, storage.loc))
 		if (M.s_active == storage)
 			if (M.client)
 				M.client.screen -= W
 
-/datum/storage_ui/default/on_post_remove(var/mob/user)
+/datum/storage_ui/default/on_post_remove(mob/user)
 	if(user?.s_active)
 		user.s_active.show_to(user)
 
-/datum/storage_ui/default/on_hand_attack(var/mob/user)
+/datum/storage_ui/default/on_hand_attack(mob/user)
 	for(var/mob/M in range(1))
 		if (M.s_active == storage)
 			storage.close(M)
 
-/datum/storage_ui/default/show_to(var/mob/user)
+/datum/storage_ui/default/show_to(mob/user)
 	if(!user.client) return
 	if(user.s_active != storage)
 		for(var/obj/item/I in storage)
@@ -116,7 +116,7 @@
 	is_seeing |= user
 	user.s_active = storage
 
-/datum/storage_ui/default/hide_from(var/mob/user)
+/datum/storage_ui/default/hide_from(mob/user)
 	is_seeing -= user
 	if(!user.client)
 		return
@@ -177,7 +177,7 @@
 	arrange_item_slots(row_num, col_count)
 
 //This proc draws out the inventory and places the items on it. It uses the standard position.
-/datum/storage_ui/default/proc/arrange_item_slots(var/rows, var/cols)
+/datum/storage_ui/default/proc/arrange_item_slots(rows, cols)
 	var/cx = 4
 	var/cy = 2+rows
 	boxes.screen_loc = "4:16,2:16 to [4+cols]:16,[2+rows]:16"
@@ -232,7 +232,7 @@
 
 // Sets up numbered display to show the stack size of each stored mineral
 // NOTE: numbered display is turned off currently because it's broken
-/datum/storage_ui/default/sheetsnatcher/prepare_ui(var/mob/user)
+/datum/storage_ui/default/sheetsnatcher/prepare_ui(mob/user)
 	var/adjusted_contents = storage.contents.len
 
 	var/row_num = 0

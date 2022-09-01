@@ -10,7 +10,7 @@
 	space_chance = 40
 	category = /datum/language/human
 
-/datum/language/human/get_spoken_verb(var/msg_end)
+/datum/language/human/get_spoken_verb(msg_end)
 	switch(msg_end)
 		if("!")
 			return pick("exclaims","shouts","yells")
@@ -18,7 +18,7 @@
 			return ask_verb
 	return speech_verb
 
-/datum/language/human/get_random_name(var/gender)
+/datum/language/human/get_random_name(gender)
 	if (prob(80))
 		if(gender==FEMALE)
 			return capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))

@@ -41,7 +41,7 @@ default behaviour is:
  - passive mob checks to see if its mob_bump_flag is in the non-passive's mob_bump_flags
  - if si, the proc returns
 */
-/mob/living/proc/can_move_mob(var/mob/living/swapped, swapping = 0, passive = 0)
+/mob/living/proc/can_move_mob(mob/living/swapped, swapping = 0, passive = 0)
 	if(!swapped)
 		return 1
 	if(!passive)
@@ -166,7 +166,7 @@ default behaviour is:
 					AM.set_dir(saved_dir)
 				now_pushing = 0
 
-/proc/swap_density_check(var/mob/swapper, var/mob/swapee)
+/proc/swap_density_check(mob/swapper, mob/swapee)
 	var/turf/T = get_turf(swapper)
 	if(T?.density)
 		return 1
@@ -176,7 +176,7 @@ default behaviour is:
 		if(!A.CanPass(swapee, T, 1))
 			return 1
 
-/mob/living/proc/can_swap_with(var/mob/living/tmob)
+/mob/living/proc/can_swap_with(mob/living/tmob)
 	if(!tmob) return
 	if(tmob.buckled || buckled || tmob.anchored)
 		return 0
@@ -218,7 +218,7 @@ default behaviour is:
 
 //This proc is used for mobs which are affected by pressure to calculate the amount of pressure that actually
 //affects them once clothing is factored in. ~Errorage
-/mob/living/proc/calculate_affecting_pressure(var/pressure)
+/mob/living/proc/calculate_affecting_pressure(pressure)
 	return
 
 
@@ -250,7 +250,7 @@ default behaviour is:
 /mob/living/proc/getBruteLoss()
 	return maxHealth - health
 
-/mob/living/proc/adjustBruteLoss(var/amount)
+/mob/living/proc/adjustBruteLoss(amount)
 	if (status_flags & GODMODE)
 		return
 	health = clamp(health - amount, 0, maxHealth)
@@ -258,61 +258,61 @@ default behaviour is:
 /mob/living/proc/getOxyLoss()
 	return 0
 
-/mob/living/proc/adjustOxyLoss(var/amount)
+/mob/living/proc/adjustOxyLoss(amount)
 	return
 
-/mob/living/proc/setOxyLoss(var/amount)
+/mob/living/proc/setOxyLoss(amount)
 	return
 
 /mob/living/proc/getToxLoss()
 	return 0
 
-/mob/living/proc/adjustToxLoss(var/amount)
+/mob/living/proc/adjustToxLoss(amount)
 	adjustBruteLoss(amount * 0.5)
 
-/mob/living/proc/setToxLoss(var/amount)
+/mob/living/proc/setToxLoss(amount)
 	adjustBruteLoss((amount * 0.5)-getBruteLoss())
 
 /mob/living/proc/getFireLoss()
 	return
 
-/mob/living/proc/adjustFireLoss(var/amount)
+/mob/living/proc/adjustFireLoss(amount)
 	adjustBruteLoss(amount * 0.5)
 
-/mob/living/proc/setFireLoss(var/amount)
+/mob/living/proc/setFireLoss(amount)
 	adjustBruteLoss((amount * 0.5)-getBruteLoss())
 
 /mob/living/proc/getHalLoss()
 	return 0
 
-/mob/living/proc/adjustHalLoss(var/amount)
+/mob/living/proc/adjustHalLoss(amount)
 	adjustBruteLoss(amount * 0.5)
 
-/mob/living/proc/setHalLoss(var/amount)
+/mob/living/proc/setHalLoss(amount)
 	adjustBruteLoss((amount * 0.5)-getBruteLoss())
 
 /mob/living/proc/getBrainLoss()
 	return 0
 
-/mob/living/proc/adjustBrainLoss(var/amount)
+/mob/living/proc/adjustBrainLoss(amount)
 	return
 
-/mob/living/proc/setBrainLoss(var/amount)
+/mob/living/proc/setBrainLoss(amount)
 	return
 
 /mob/living/proc/getCloneLoss()
 	return 0
 
-/mob/living/proc/setCloneLoss(var/amount)
+/mob/living/proc/setCloneLoss(amount)
 	return
 
-/mob/living/proc/adjustCloneLoss(var/amount)
+/mob/living/proc/adjustCloneLoss(amount)
 	return
 
 /mob/living/proc/getMaxHealth()
 	return maxHealth
 
-/mob/living/proc/setMaxHealth(var/newMaxHealth)
+/mob/living/proc/setMaxHealth(newMaxHealth)
 	maxHealth = newMaxHealth
 
 // ++++ROCKDTBEN++++ MOB PROCS //END
@@ -321,7 +321,7 @@ default behaviour is:
 	return
 
 //Recursive function to find everything a mob is holding.
-/mob/living/get_contents(var/obj/item/storage/Storage = null)
+/mob/living/get_contents(obj/item/storage/Storage = null)
 	var/list/L = list()
 
 	if(Storage) //If it called itself
@@ -367,7 +367,7 @@ default behaviour is:
 			return 1
 	return 0
 
-/mob/living/proc/can_inject(var/mob/user, var/target_zone)
+/mob/living/proc/can_inject(mob/user, target_zone)
 	return 1
 
 /mob/living/proc/get_organ_target()
@@ -380,7 +380,7 @@ default behaviour is:
 
 
 // heal ONE external organ, organ gets randomly selected from damaged ones.
-/mob/living/proc/heal_organ_damage(var/brute, var/burn, var/affect_robo = 0)
+/mob/living/proc/heal_organ_damage(brute, burn, affect_robo = 0)
 	adjustBruteLoss(-brute)
 	adjustFireLoss(-burn)
 	src.updatehealth()
@@ -394,13 +394,13 @@ default behaviour is:
 	updatehealth()
 
 // heal MANY external organs, in random order
-/mob/living/proc/heal_overall_damage(var/brute, var/burn)
+/mob/living/proc/heal_overall_damage(brute, burn)
 	adjustBruteLoss(-brute)
 	adjustFireLoss(-burn)
 	src.updatehealth()
 
 // damage MANY external organs, in random order
-/mob/living/proc/take_overall_damage(var/brute, var/burn, var/used_weapon = null)
+/mob/living/proc/take_overall_damage(brute, burn, used_weapon = null)
 	if(status_flags & GODMODE)	return 0	//godmode
 	adjustBruteLoss(brute)
 	adjustFireLoss(burn)
@@ -479,7 +479,7 @@ default behaviour is:
 	reload_fullscreen()
 	return
 
-/mob/living/proc/basic_revival(var/repair_brain = TRUE)
+/mob/living/proc/basic_revival(repair_brain = TRUE)
 
 	if(repair_brain && getBrainLoss() > 50)
 		repair_brain = FALSE
@@ -499,7 +499,7 @@ default behaviour is:
 	failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
 	reload_fullscreen()
 
-/mob/living/carbon/basic_revival(var/repair_brain = TRUE)
+/mob/living/carbon/basic_revival(repair_brain = TRUE)
 	if(repair_brain && should_have_organ(BP_BRAIN))
 		repair_brain = FALSE
 		var/obj/item/organ/internal/brain/brain = internal_organs_by_name[BP_BRAIN]
@@ -726,7 +726,7 @@ default behaviour is:
 /mob/living/proc/has_eyes()
 	return 1
 
-/mob/living/proc/slip(var/slipped_on,stun_duration=8)
+/mob/living/proc/slip(slipped_on,stun_duration=8)
 	return 0
 
 /mob/living/carbon/human/canUnEquip(obj/item/I)
@@ -739,7 +739,7 @@ default behaviour is:
 	return 1
 
 //Organs should not be removed via inventory procs.
-/mob/living/carbon/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
+/mob/living/carbon/drop_from_inventory(obj/item/W, atom/Target = null)
 	if(W in internal_organs)
 		return
 	if(W in organs)
@@ -747,21 +747,21 @@ default behaviour is:
 	. = ..()
 
 //damage/heal the mob ears and adjust the deaf amount
-/mob/living/adjustEarDamage(var/damage, var/deaf)
+/mob/living/adjustEarDamage(damage, deaf)
 	ear_damage = max(0, ear_damage + damage)
 	ear_deaf = max(0, ear_deaf + deaf)
 
 //pass a negative argument to skip one of the variable
-/mob/living/setEarDamage(var/damage = null, var/deaf = null)
+/mob/living/setEarDamage(damage = null, deaf = null)
 	if(!isnull(damage))
 		ear_damage = damage
 	if(!isnull(deaf))
 		ear_deaf = deaf
 
-/mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)
+/mob/proc/can_be_possessed_by(mob/observer/ghost/possessor)
 	return istype(possessor) && possessor.client
 
-/mob/living/can_be_possessed_by(var/mob/observer/ghost/possessor)
+/mob/living/can_be_possessed_by(mob/observer/ghost/possessor)
 	if(!..())
 		return 0
 	if(!possession_candidate)
@@ -774,7 +774,7 @@ default behaviour is:
 		return 0
 	return 1
 
-/mob/living/proc/do_possession(var/mob/observer/ghost/possessor)
+/mob/living/proc/do_possession(mob/observer/ghost/possessor)
 
 	if(!(istype(possessor) && possessor.ckey))
 		return 0
@@ -813,12 +813,12 @@ default behaviour is:
 	if(auras)
 		overlays |= auras
 
-/mob/living/proc/add_aura(var/obj/aura/aura)
+/mob/living/proc/add_aura(obj/aura/aura)
 	LAZYDISTINCTADD(auras,aura)
 	update_icons()
 	return 1
 
-/mob/living/proc/remove_aura(var/obj/aura/aura)
+/mob/living/proc/remove_aura(obj/aura/aura)
 	LAZYREMOVE(auras,aura)
 	update_icons()
 	return 1
@@ -873,7 +873,7 @@ default behaviour is:
 	T.show_bubbles()
 	return TRUE // Presumably chemical smoke can't be breathed while you're underwater.
 
-/mob/living/water_act(var/depth)
+/mob/living/water_act(depth)
 	..()
 	wash_mob(src)
 	for(var/thing in get_equipped_items(TRUE))

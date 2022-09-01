@@ -23,7 +23,7 @@
  * Interface lock can be pulsed to toggle whether or not the interface can be accessed.
  */
 
-/datum/wires/rig/UpdateCut(var/index, var/mended)
+/datum/wires/rig/UpdateCut(index, mended)
 
 	var/obj/item/rig/rig = holder
 	switch(index)
@@ -34,7 +34,7 @@
 			rig.electrified = mended ? 0 : -1
 			rig.shock(usr,100)
 
-/datum/wires/rig/UpdatePulsed(var/index)
+/datum/wires/rig/UpdatePulsed(index)
 
 	var/obj/item/rig/rig = holder
 	switch(index)
@@ -59,7 +59,7 @@
 				rig.electrified = 30
 			rig.shock(usr,100)
 
-/datum/wires/rig/CanUse(var/mob/living/L)
+/datum/wires/rig/CanUse(mob/living/L)
 	var/obj/item/rig/rig = holder
 	if(rig.p_open)
 		return 1

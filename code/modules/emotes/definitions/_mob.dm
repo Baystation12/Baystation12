@@ -1,7 +1,7 @@
 /mob/var/list/default_emotes = list()
 /mob/var/list/usable_emotes = list()
 
-/mob/proc/update_emotes(var/skip_sort)
+/mob/proc/update_emotes(skip_sort)
 	usable_emotes.Cut()
 	for(var/emote in default_emotes)
 		var/decl/emote/emote_datum = decls_repository.get_decl(emote)

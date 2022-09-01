@@ -6,7 +6,7 @@
 	var/page = 1
 
 
-/datum/nano_module/song_editor/New(var/host, var/topic_manager, datum/synthesized_song/song)
+/datum/nano_module/song_editor/New(host, topic_manager, datum/synthesized_song/song)
 	..()
 	src.host = host
 	src.song = song
@@ -25,7 +25,7 @@
 		max(min(1 + GLOB.musical_config.song_editor_lines_per_page * (page_num-1), src.song.lines.len), 1),
 		min(GLOB.musical_config.song_editor_lines_per_page * page_num, src.song.lines.len))
 
-/datum/nano_module/song_editor/ui_interact(mob/user, ui_key = "song_editor", var/datum/nanoui/ui = null, var/force_open = 0)
+/datum/nano_module/song_editor/ui_interact(mob/user, ui_key = "song_editor", datum/nanoui/ui = null, force_open = 0)
 	var/list/data = list()
 
 	var/current_page = src.current_page()

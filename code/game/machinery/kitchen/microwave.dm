@@ -54,7 +54,7 @@
 *   Item Adding
 ********************/
 
-/obj/machinery/microwave/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/microwave/attackby(obj/item/O as obj, mob/user as mob)
 	if(broken > 0)
 		// Start repairs by using a screwdriver
 		if(broken == 2 && isScrewdriver(O))
@@ -366,7 +366,7 @@
 		return
 
 // Behold: the worst proc name in the codebase.
-/obj/machinery/microwave/proc/wzhzhzh(var/seconds)
+/obj/machinery/microwave/proc/wzhzhzh(seconds)
 	for (var/i = 1 to seconds)
 		if (stat & (NOPOWER|BROKEN))
 			return FALSE

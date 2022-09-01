@@ -44,7 +44,7 @@ SUBSYSTEM_DEF(webhooks)
 			else
 				to_world_log("Failed to set up webhook [wid].")
 
-/datum/controller/subsystem/webhooks/proc/send(var/wid, var/wdata)
+/datum/controller/subsystem/webhooks/proc/send(wid, wdata)
 	var/decl/webhook/webhook = webhook_decls[wid]
 	if(webhook)
 		if(webhook.send(wdata))

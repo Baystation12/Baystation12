@@ -12,7 +12,7 @@
 	var/display_color = null   // Display color for vending machine listing
 	var/category = CAT_NORMAL  // CAT_HIDDEN for contraband, CAT_COIN for premium
 
-/datum/stored_items/vending_products/New(var/atom/storing_object, var/path, var/name = null, var/amount = 0, var/price = 0, var/color = null, var/category = CAT_NORMAL)
+/datum/stored_items/vending_products/New(atom/storing_object, path, name = null, amount = 0, price = 0, color = null, category = CAT_NORMAL)
 	..()
 	src.price = price
 	src.display_color = color

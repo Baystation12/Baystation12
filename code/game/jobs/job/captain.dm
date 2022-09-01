@@ -18,7 +18,7 @@ var/global/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	ideal_character_age = 70 // Old geezer captains ftw
 	outfit_type = /decl/hierarchy/outfit/job/captain
 
-/datum/job/captain/equip(var/mob/living/carbon/human/H)
+/datum/job/captain/equip(mob/living/carbon/human/H)
 	. = ..()
 	if(.)
 		H.implant_loyalty(src)

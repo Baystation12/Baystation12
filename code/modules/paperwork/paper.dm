@@ -92,7 +92,7 @@
 	else
 		icon_state = "paper"
 
-/obj/item/paper/proc/update_space(var/new_text)
+/obj/item/paper/proc/update_space(new_text)
 	if(new_text)
 		free_space -= length(strip_html_properly(new_text))
 
@@ -218,7 +218,7 @@
 		return
 	user.examinate(src)
 
-/obj/item/paper/attack_ai(var/mob/living/silicon/ai/user)
+/obj/item/paper/attack_ai(mob/living/silicon/ai/user)
 	show_content(user)
 
 /obj/item/paper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
@@ -243,7 +243,7 @@
 					H.makeup_style = null
 					H.update_body()
 
-/obj/item/paper/proc/addtofield(var/id, var/text, var/links = 0)
+/obj/item/paper/proc/addtofield(id, text, links = 0)
 	var/locid = 0
 	var/laststart = 1
 	var/textindex = 1
@@ -296,7 +296,7 @@
 	updateinfolinks()
 	update_icon()
 
-/obj/item/paper/proc/get_signature(var/obj/item/pen/P, mob/user as mob)
+/obj/item/paper/proc/get_signature(obj/item/pen/P, mob/user as mob)
 	if(P && istype(P, /obj/item/pen))
 		return P.get_signature(user)
 	return (user && user.real_name) ? user.real_name : "Anonymous"
@@ -548,7 +548,7 @@
 /obj/item/paper/proc/can_bundle()
 	return TRUE
 
-/obj/item/paper/proc/show_info(var/mob/user)
+/obj/item/paper/proc/show_info(mob/user)
 	return info
 
 

@@ -6,11 +6,11 @@
 	machine_desc = "Used to configure and operate a linked ore processor, and capable of processing minerals in a variety of fashions."
 	var/obj/machinery/mineral/connected
 
-/obj/machinery/computer/mining/interface_interact(var/mob/user)
+/obj/machinery/computer/mining/interface_interact(mob/user)
 	interact(user)
 	return TRUE
 
-/obj/machinery/computer/mining/interact(var/mob/user)
+/obj/machinery/computer/mining/interact(mob/user)
 	var/datum/browser/popup = new(user, "mining-[name]", "[src] Control Panel")
 	popup.set_content(jointext(connected.get_console_data(), "<br>"))
 	popup.open()
@@ -19,7 +19,7 @@
 	if(!connected)
 		to_chat(user, "<span class='warning'>\The [src] is not connected to a processing machine. <a href='?src=\ref[src];scan_for_machine=1'>Scan</a></span>")
 		return STATUS_CLOSE
-	. = ..()	
+	. = ..()
 
 /obj/machinery/computer/mining/Topic(href, href_list)
 	if((. = ..()))

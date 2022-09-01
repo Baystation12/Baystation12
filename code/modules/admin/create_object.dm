@@ -1,6 +1,6 @@
 var/global/create_object_html = null
 
-/datum/admins/proc/create_object(var/mob/user)
+/datum/admins/proc/create_object(mob/user)
 	if (!create_object_html)
 		var/objectjs = null
 		objectjs = jointext(typesof(/obj), ";")

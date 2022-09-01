@@ -5,7 +5,7 @@ var/global/list/ship_engines = list()
 	var/name = "ship engine"
 	var/obj/machinery/holder	//actual engine object
 
-/datum/ship_engine/New(var/obj/machinery/_holder)
+/datum/ship_engine/New(obj/machinery/_holder)
 	..()
 	holder = _holder
 	ship_engines += src
@@ -25,7 +25,7 @@ var/global/list/ship_engines = list()
 	return 1
 
 //Sets thrust limiter, a number between 0 and 1
-/datum/ship_engine/proc/set_thrust_limit(var/new_limit)
+/datum/ship_engine/proc/set_thrust_limit(new_limit)
 	return 1
 
 /datum/ship_engine/proc/get_thrust_limit()

@@ -31,7 +31,7 @@
 	. = ..()
 	unregister_monitor()
 
-/obj/machinery/computer/station_alert/proc/register_monitor(var/datum/nano_module/alarm_monitor/monitor)
+/obj/machinery/computer/station_alert/proc/register_monitor(datum/nano_module/alarm_monitor/monitor)
 	if(monitor.host != src)
 		return
 

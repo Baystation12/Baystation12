@@ -29,7 +29,7 @@
 		return
 	return
 
-/obj/effect/portal/New(var/start, var/end, var/delete_after = 300, var/failure_rate)
+/obj/effect/portal/New(start, end, delete_after = 300, failure_rate)
 	..()
 	if(failure_rate)
 		failchance = failure_rate

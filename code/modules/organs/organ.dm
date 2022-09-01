@@ -40,7 +40,7 @@ var/global/list/organ_cache = list()
 /obj/item/organ/proc/refresh_action_button()
 	return action
 
-/obj/item/organ/attack_self(var/mob/user)
+/obj/item/organ/attack_self(mob/user)
 	return (owner && loc == owner && owner == user)
 
 /obj/item/organ/proc/update_health()
@@ -50,7 +50,7 @@ var/global/list/organ_cache = list()
 	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN))
 
 //Second argument may be a dna datum; if null will be set to holder's dna.
-/obj/item/organ/New(var/mob/living/carbon/holder, var/datum/dna/given_dna)
+/obj/item/organ/New(mob/living/carbon/holder, datum/dna/given_dna)
 	..(holder)
 	if(!istype(given_dna))
 		given_dna = null
@@ -78,7 +78,7 @@ var/global/list/organ_cache = list()
 
 	update_icon()
 
-/obj/item/organ/proc/set_dna(var/datum/dna/new_dna)
+/obj/item/organ/proc/set_dna(datum/dna/new_dna)
 	if(new_dna)
 		dna = new_dna.Clone()
 		if(!blood_DNA)
@@ -214,7 +214,7 @@ var/global/list/organ_cache = list()
 /obj/item/organ/proc/remove_rejuv()
 	qdel(src)
 
-/obj/item/organ/proc/rejuvenate(var/ignore_prosthetic_prefs)
+/obj/item/organ/proc/rejuvenate(ignore_prosthetic_prefs)
 	damage = 0
 	status = initial(status)
 	if(!ignore_prosthetic_prefs && owner && owner.client && owner.client.prefs && owner.client.prefs.real_name == owner.real_name)
@@ -245,7 +245,7 @@ var/global/list/organ_cache = list()
 		germ_level -= 2
 	germ_level = max(0, germ_level)
 
-/obj/item/organ/proc/take_general_damage(var/amount, var/silent = FALSE)
+/obj/item/organ/proc/take_general_damage(amount, silent = FALSE)
 	CRASH("Not Implemented")
 
 /obj/item/organ/proc/heal_damage(amount)
@@ -266,7 +266,7 @@ var/global/list/organ_cache = list()
  *
  *  Also, Observer Pattern Implementation: Dismembered Handling occurs here.
  */
-/obj/item/organ/proc/removed(var/mob/living/user, var/drop_organ=1)
+/obj/item/organ/proc/removed(mob/living/user, drop_organ=1)
 
 	if(!istype(owner))
 		return
@@ -291,7 +291,7 @@ var/global/list/organ_cache = list()
 
 	owner = null
 
-/obj/item/organ/proc/replaced(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
+/obj/item/organ/proc/replaced(mob/living/carbon/human/target, obj/item/organ/external/affected)
 	owner = target
 	action_button_name = initial(action_button_name)
 	forceMove(owner) //just in case
@@ -299,7 +299,7 @@ var/global/list/organ_cache = list()
 		set_dna(owner.dna)
 	return 1
 
-/obj/item/organ/attack(var/mob/target, var/mob/user)
+/obj/item/organ/attack(mob/target, mob/user)
 
 	if(status & ORGAN_ROBOTIC || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
 		return ..()
@@ -328,7 +328,7 @@ var/global/list/organ_cache = list()
 /obj/item/organ/proc/can_recover()
 	return (max_damage > 0) && !(status & ORGAN_DEAD) || death_time >= world.time - ORGAN_RECOVERY_THRESHOLD
 
-/obj/item/organ/proc/get_scan_results(var/tag = FALSE)
+/obj/item/organ/proc/get_scan_results(tag = FALSE)
 	. = list()
 	if(BP_IS_CRYSTAL(src))
 		. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_CRYSTAL]'>Crystalline</span>" : "Crystalline"

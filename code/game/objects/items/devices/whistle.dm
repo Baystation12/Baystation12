@@ -42,7 +42,7 @@
 	spawn(20)
 		spamcheck = 0
 
-/obj/item/device/hailer/emag_act(var/remaining_charges, var/mob/user)
+/obj/item/device/hailer/emag_act(remaining_charges, mob/user)
 	if(isnull(insults))
 		to_chat(user, "<span class='danger'>You overload \the [src]'s voice synthesizer.</span>")
 		insults = rand(1, 3)//to prevent dickflooding

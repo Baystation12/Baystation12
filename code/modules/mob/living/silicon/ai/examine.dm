@@ -35,9 +35,9 @@
 	user.showLaws(src)
 	return
 
-/mob/proc/showLaws(var/mob/living/silicon/S)
+/mob/proc/showLaws(mob/living/silicon/S)
 	return
 
-/mob/observer/ghost/showLaws(var/mob/living/silicon/S)
+/mob/observer/ghost/showLaws(mob/living/silicon/S)
 	if(antagHUD || isadmin(src))
 		S.laws.show_laws(src)

@@ -13,7 +13,7 @@ GLOBAL_DATUM_INIT(view_state, /datum/topic_state/view, new)
 		return shared_nano_interaction(src_object)
 	return STATUS_CLOSE
 
-/mob/observer/ghost/view_can_use_topic(var/src_object)
+/mob/observer/ghost/view_can_use_topic(src_object)
 	if(can_admin_interact())
 		return STATUS_INTERACTIVE
 	return ..()

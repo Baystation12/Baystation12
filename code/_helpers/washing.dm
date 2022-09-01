@@ -1,4 +1,4 @@
-/proc/wash_mob(var/mob/living/washing)
+/proc/wash_mob(mob/living/washing)
 
 	if(!istype(washing))
 		return

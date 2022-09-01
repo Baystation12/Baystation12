@@ -8,7 +8,7 @@ var/global/list/cached_space = list()
 	invisibility = 101
 	known = FALSE
 
-/obj/effect/overmap/visitable/sector/temporary/New(var/nx, var/ny, var/nz)
+/obj/effect/overmap/visitable/sector/temporary/New(nx, ny, nz)
 	map_z += nz
 	testing("Temporary sector at zlevel [nz] was created.")
 	register(nx, ny)
@@ -18,7 +18,7 @@ var/global/list/cached_space = list()
 	testing("Temporary sector at [x],[y] was deleted. zlevel [map_z[1]] is no longer accessible.")
 	return ..()
 
-/obj/effect/overmap/visitable/sector/temporary/proc/register(var/nx, var/ny)
+/obj/effect/overmap/visitable/sector/temporary/proc/register(nx, ny)
 	forceMove(locate(nx, ny, GLOB.using_map.overmap_z))
 	map_sectors["[map_z[1]]"] = src
 	testing("Temporary sector at zlevel [map_z[1]] moved to coordinates [x],[y]")
@@ -31,7 +31,7 @@ var/global/list/cached_space = list()
 	src.forceMove(null)
 	cached_space += src
 
-/obj/effect/overmap/visitable/sector/temporary/proc/can_die(var/mob/observer)
+/obj/effect/overmap/visitable/sector/temporary/proc/can_die(mob/observer)
 	testing("Checking if sector at [map_z[1]] can die.")
 	for(var/mob/M in GLOB.player_list)
 		if(M != observer && (M.z in map_z))
@@ -67,7 +67,7 @@ var/global/list/cached_space = list()
 /mob/living/carbon/human/lost_in_space()
 	return isnull(client) && !last_ckey && stat == DEAD
 
-/proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
+/proc/overmap_spacetravel(turf/space/T, atom/movable/A)
 	if (!T || !A)
 		return
 

@@ -27,7 +27,7 @@
 /datum/build_mode/turret/Configurate()
 	ui_interact(user)
 
-/datum/build_mode/turret/ui_interact(mob/user, ui_key = "turret_editor", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
+/datum/build_mode/turret/ui_interact(mob/user, ui_key = "turret_editor", datum/nanoui/ui = null, force_open = 1, master_ui = null, datum/topic_state/state = GLOB.default_state)
 	. = ..()
 
 	var/data[0]

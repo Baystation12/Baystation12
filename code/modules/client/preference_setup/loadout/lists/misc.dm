@@ -6,7 +6,7 @@
 	display_name = "union membership"
 	path = /obj/item/card/union
 
-/datum/gear/union_card/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
+/datum/gear/union_card/spawn_on_mob(mob/living/carbon/human/H, metadata)
 	. = ..()
 	if(.)
 		var/obj/item/card/union/card = .

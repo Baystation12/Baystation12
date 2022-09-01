@@ -1,4 +1,4 @@
-/turf/simulated/floor/attackby(var/obj/item/C, var/mob/user)
+/turf/simulated/floor/attackby(obj/item/C, mob/user)
 
 	var/area/A = get_area(src)
 	if (!A.can_modify_area())
@@ -197,7 +197,7 @@
 	update_icon()
 	return 1
 
-/turf/simulated/floor/can_build_cable(var/mob/user)
+/turf/simulated/floor/can_build_cable(mob/user)
 	if(!is_plating() || flooring)
 		to_chat(user, "<span class='warning'>Remove the tiling first.</span>")
 		return 0

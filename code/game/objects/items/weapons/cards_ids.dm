@@ -32,7 +32,7 @@
 	else
 		to_chat(user, "It has a blank space for a signature.")
 
-/obj/item/card/union/attackby(var/obj/item/thing, var/mob/user)
+/obj/item/card/union/attackby(obj/item/thing, mob/user)
 	if(istype(thing, /obj/item/pen))
 		if(signed_by)
 			to_chat(user, SPAN_WARNING("\The [src] has already been signed."))
@@ -194,11 +194,11 @@ var/global/const/NO_EMAG_ACT = -50
 	for(var/detail in extra_details)
 		overlays += overlay_image(icon, detail, flags=RESET_COLOR)
 
-/obj/item/card/id/CanUseTopic(var/user)
+/obj/item/card/id/CanUseTopic(user)
 	if(user in view(get_turf(src)))
 		return STATUS_INTERACTIVE
 
-/obj/item/card/id/OnTopic(var/mob/user, var/list/href_list)
+/obj/item/card/id/OnTopic(mob/user, list/href_list)
 	if(href_list["look_at_id"])
 		if(istype(user))
 			user.examinate(src)
@@ -232,11 +232,11 @@ var/global/const/NO_EMAG_ACT = -50
 	if(assignment)
 		. += ", [assignment]"
 
-/obj/item/card/id/proc/set_id_photo(var/mob/M)
+/obj/item/card/id/proc/set_id_photo(mob/M)
 	front = getFlatIcon(M, SOUTH, always_use_defdir = 1)
 	side = getFlatIcon(M, WEST, always_use_defdir = 1)
 
-/mob/proc/set_id_info(var/obj/item/card/id/id_card)
+/mob/proc/set_id_info(obj/item/card/id/id_card)
 	id_card.age = 0
 
 	id_card.formal_name_prefix = initial(id_card.formal_name_prefix)
@@ -262,7 +262,7 @@ var/global/const/NO_EMAG_ACT = -50
 		id_card.dna_hash		= dna.unique_enzymes
 		id_card.fingerprint_hash= md5(dna.uni_identity)
 
-/mob/living/carbon/human/set_id_info(var/obj/item/card/id/id_card)
+/mob/living/carbon/human/set_id_info(obj/item/card/id/id_card)
 	..()
 	id_card.age = age
 	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
@@ -318,7 +318,7 @@ var/global/const/NO_EMAG_ACT = -50
 	handled_type = /obj/item/card/id
 	handled_vars = list("military_branch")
 
-/decl/vv_set_handler/id_card_military_branch/handle_set_var(var/obj/item/card/id/id, variable, var_value, client)
+/decl/vv_set_handler/id_card_military_branch/handle_set_var(obj/item/card/id/id, variable, var_value, client)
 	if(!var_value)
 		id.military_branch = null
 		id.military_rank = null
@@ -344,7 +344,7 @@ var/global/const/NO_EMAG_ACT = -50
 	handled_type = /obj/item/card/id
 	handled_vars = list("military_rank")
 
-/decl/vv_set_handler/id_card_military_rank/handle_set_var(var/obj/item/card/id/id, variable, var_value, client)
+/decl/vv_set_handler/id_card_military_rank/handle_set_var(obj/item/card/id/id, variable, var_value, client)
 	if(!var_value)
 		id.military_rank = null
 		return
@@ -462,7 +462,7 @@ var/global/const/NO_EMAG_ACT = -50
 		else
 			to_chat(user, SPAN_NOTICE("This is the real deal, stamped by [GLOB.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe it implicitly."))
 
-/obj/item/card/id/foundation/attack_self(var/mob/living/user)
+/obj/item/card/id/foundation/attack_self(mob/living/user)
 	. = ..()
 	if(istype(user))
 		for(var/mob/M in viewers(world.view, get_turf(user))-user)

@@ -31,7 +31,7 @@
 	else
 		icon_state = "[initial(icon_state)]"
 
-/obj/item/gun/projectile/heavysniper/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
+/obj/item/gun/projectile/heavysniper/handle_post_fire(mob/user, atom/target, pointblank=0, reflex=0)
 	..()
 	if(user && user.skill_check(SKILL_WEAPONS, SKILL_PROF))
 		to_chat(user, "<span class='notice'>You work the bolt open with a reflexive motion, ejecting [chambered]!</span>")
@@ -67,12 +67,12 @@
 		return 0
 	return ..()
 
-/obj/item/gun/projectile/heavysniper/load_ammo(var/obj/item/A, mob/user)
+/obj/item/gun/projectile/heavysniper/load_ammo(obj/item/A, mob/user)
 	if(!bolt_open)
 		return
 	..()
 
-/obj/item/gun/projectile/heavysniper/unload_ammo(mob/user, var/allow_dump=1)
+/obj/item/gun/projectile/heavysniper/unload_ammo(mob/user, allow_dump=1)
 	if(!bolt_open)
 		return
 	..()
@@ -154,4 +154,3 @@
 	firemodes = list(
 		list(mode_name="semi auto",       burst=1, fire_delay=2,    move_delay=null, one_hand_penalty=8, burst_accuracy=null, dispersion=null)
 		)
-

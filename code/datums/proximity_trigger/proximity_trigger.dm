@@ -38,7 +38,7 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 /datum/proximity_trigger/square
 	turf_selection = /decl/turf_selection/square
 
-/datum/proximity_trigger/New(var/holder, var/on_turf_entered, var/on_turfs_changed, var/range = 2, var/proximity_flags = 0, var/proc_owner)
+/datum/proximity_trigger/New(holder, on_turf_entered, on_turfs_changed, range = 2, proximity_flags = 0, proc_owner)
 	..()
 
 	if(!ispath(turf_selection, /decl/turf_selection))
@@ -66,7 +66,7 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 /datum/proximity_trigger/proc/is_active()
 	return turfs_in_range.len
 
-/datum/proximity_trigger/proc/set_range(var/new_range)
+/datum/proximity_trigger/proc/set_range(new_range)
 	if(range_ == new_range)
 		return
 	range_ = new_range
@@ -119,7 +119,7 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 
 	seen_turfs_ = new_seen_turfs_
 
-/datum/proximity_trigger/proc/on_holder_moved(var/holder, var/old_loc, var/new_loc)
+/datum/proximity_trigger/proc/on_holder_moved(holder, old_loc, new_loc)
 	var/old_turf = get_turf(old_loc)
 	var/new_turf = get_turf(new_loc)
 	if(old_turf == new_turf)
@@ -127,7 +127,7 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	call(proc_owner, on_turf_entered)(holder)
 	register_turfs()
 
-/datum/proximity_trigger/proc/on_turf_entered(var/turf/T, var/atom/enterer)
+/datum/proximity_trigger/proc/on_turf_entered(turf/T, atom/enterer)
 	if(enterer == holder) // We have an explicit call for holder, in case it moved somewhere we're not listening to.
 		return
 	if(enterer.opacity)
@@ -166,10 +166,10 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	var/datum/proximity_trigger/a = new proxy_type(src, /obj/item/proxy_debug/proc/turf_entered, /obj/item/proxy_debug/proc/update_turfs)
 	a.register_turfs()
 
-/obj/item/proxy_debug/proc/turf_entered(var/atom/A)
+/obj/item/proxy_debug/proc/turf_entered(atom/A)
 	visible_message("[A] entered my range!")
 
-/obj/item/proxy_debug/proc/update_turfs(var/list/old_turfs, var/list/new_turfs)
+/obj/item/proxy_debug/proc/update_turfs(list/old_turfs, list/new_turfs)
 	for(var/turf/T in old_turfs)
 		T.overlays -= overlay
 	for(var/turf/T in new_turfs)

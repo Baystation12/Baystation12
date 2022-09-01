@@ -35,16 +35,16 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 		if((. = .(candidate)))
 			return
 
-/obj/machinery/computer/ship/proc/display_reconnect_dialog(var/mob/user, var/flavor)
+/obj/machinery/computer/ship/proc/display_reconnect_dialog(mob/user, flavor)
 	var/datum/browser/popup = new (user, "[src]", "[src]")
 	popup.set_content("<center><strong><font color = 'red'>Error</strong></font><br>Unable to connect to [flavor].<br><a href='?src=\ref[src];sync=1'>Reconnect</a></center>")
 	popup.open()
 
-/obj/machinery/computer/ship/interface_interact(var/mob/user)
+/obj/machinery/computer/ship/interface_interact(mob/user)
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/computer/ship/OnTopic(var/mob/user, var/list/href_list)
+/obj/machinery/computer/ship/OnTopic(mob/user, list/href_list)
 	if(..())
 		return TOPIC_HANDLED
 	if(href_list["sync"])
@@ -61,7 +61,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 /obj/machinery/computer/ship/on_user_login(mob/M)
 	unlook(M)
 
-/obj/machinery/computer/ship/proc/look(var/mob/user)
+/obj/machinery/computer/ship/proc/look(mob/user)
 	if(linked)
 		user.reset_view(linked)
 	if(user.client)
@@ -71,7 +71,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 		GLOB.stat_set_event.register(user, src, /obj/machinery/computer/ship/proc/unlook)
 	LAZYDISTINCTADD(viewers, weakref(user))
 
-/obj/machinery/computer/ship/proc/unlook(var/mob/user)
+/obj/machinery/computer/ship/proc/unlook(mob/user)
 	user.reset_view(null, FALSE)
 	if(user.client)
 		user.client.view = world.view
@@ -91,7 +91,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	if(viewing_overmap(user))
 		look(user)
 
-/obj/machinery/computer/ship/check_eye(var/mob/user)
+/obj/machinery/computer/ship/check_eye(mob/user)
 	if (!get_dist(user, src) > 1 || user.blinded || !linked )
 		unlook(user)
 		return -1

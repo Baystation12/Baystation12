@@ -8,7 +8,7 @@
 	var/obj/machinery/power/terminal/terminal
 	var/terminal_dir = 0
 
-/obj/item/stock_parts/power/terminal/on_uninstall(var/obj/machinery/machine)
+/obj/item/stock_parts/power/terminal/on_uninstall(obj/machinery/machine)
 	if(status & PART_STAT_ACTIVE)
 		machine.update_power_channel(cached_channel)
 		unset_status(machine, PART_STAT_ACTIVE)
@@ -19,7 +19,7 @@
 	qdel(terminal)
 	. = ..()
 
-/obj/item/stock_parts/power/terminal/machine_process(var/obj/machinery/machine)
+/obj/item/stock_parts/power/terminal/machine_process(obj/machinery/machine)
 
 	if(!terminal) //Terminal is gone, give up
 		if(status & PART_STAT_ACTIVE)
@@ -48,27 +48,27 @@
 				machine.power_change()
 
 //Is willing to provide power if the wired contribution is nonnegligible and there is enough total local power to run the machine.
-/obj/item/stock_parts/power/terminal/can_provide_power(var/obj/machinery/machine)
+/obj/item/stock_parts/power/terminal/can_provide_power(obj/machinery/machine)
 	if(terminal && terminal.surplus() && machine.can_use_power_oneoff(machine.get_power_usage(), LOCAL) <= 0)
 		set_status(machine, PART_STAT_ACTIVE)
 		machine.update_power_channel(LOCAL)
 		return TRUE
 	return FALSE
 
-/obj/item/stock_parts/power/terminal/can_use_power_oneoff(var/obj/machinery/machine, var/amount, var/channel)
+/obj/item/stock_parts/power/terminal/can_use_power_oneoff(obj/machinery/machine, amount, channel)
 	. = 0
 	if(terminal && channel == LOCAL)
 		return min(terminal.surplus(), amount)
 
-/obj/item/stock_parts/power/terminal/use_power_oneoff(var/obj/machinery/machine, var/amount, var/channel)
+/obj/item/stock_parts/power/terminal/use_power_oneoff(obj/machinery/machine, amount, channel)
 	. = 0
 	if(terminal && channel == LOCAL)
 		return terminal.draw_power(amount)
 
-/obj/item/stock_parts/power/terminal/not_needed(var/obj/machinery/machine)
+/obj/item/stock_parts/power/terminal/not_needed(obj/machinery/machine)
 	unset_status(machine, PART_STAT_ACTIVE)
 
-/obj/item/stock_parts/power/terminal/proc/set_terminal(var/obj/machinery/machine, var/obj/machinery/power/new_terminal)
+/obj/item/stock_parts/power/terminal/proc/set_terminal(obj/machinery/machine, obj/machinery/power/new_terminal)
 	if(terminal)
 		unset_terminal(machine, terminal)
 	terminal = new_terminal
@@ -79,7 +79,7 @@
 	set_status(machine, PART_STAT_CONNECTED)
 	start_processing(machine)
 
-/obj/item/stock_parts/power/terminal/proc/machine_moved(var/obj/machinery/machine, var/turf/old_loc, var/turf/new_loc)
+/obj/item/stock_parts/power/terminal/proc/machine_moved(obj/machinery/machine, turf/old_loc, turf/new_loc)
 	if(!terminal)
 		GLOB.moved_event.unregister(machine, src, .proc/machine_moved)
 		return
@@ -88,7 +88,7 @@
 	machine.visible_message(SPAN_WARNING("The terminal is ripped out of \the [machine]!"))
 	qdel(terminal) // will handle everything via the destroyed event
 
-/obj/item/stock_parts/power/terminal/proc/make_terminal(var/obj/machinery/machine)
+/obj/item/stock_parts/power/terminal/proc/make_terminal(obj/machinery/machine)
 	if(!machine)
 		return
 	var/obj/machinery/power/terminal/new_terminal = new (get_step(machine, terminal_dir))
@@ -96,7 +96,7 @@
 	new_terminal.connect_to_network()
 	set_terminal(machine, new_terminal)
 
-/obj/item/stock_parts/power/terminal/proc/unset_terminal(var/obj/machinery/power/old_terminal, var/obj/machinery/machine)
+/obj/item/stock_parts/power/terminal/proc/unset_terminal(obj/machinery/power/old_terminal, obj/machinery/machine)
 	remove_extension(src, /datum/extension/event_registration/shuttle_stationary)
 	GLOB.destroyed_event.unregister(old_terminal, src)
 	if(!machine && istype(loc, /obj/machinery))
@@ -106,7 +106,7 @@
 	terminal = null
 	stop_processing(machine)
 
-/obj/item/stock_parts/power/terminal/proc/blocking_terminal_at_loc(var/obj/machinery/machine, var/turf/T, var/mob/user)
+/obj/item/stock_parts/power/terminal/proc/blocking_terminal_at_loc(obj/machinery/machine, turf/T, mob/user)
 	. = FALSE
 	var/check_dir = terminal_dir ? GLOB.reverse_dir[terminal_dir] : machine.dir
 	for(var/obj/machinery/power/terminal/term in T)
@@ -183,7 +183,7 @@
 /decl/stock_part_preset/terminal_setup
 	expected_part_type = /obj/item/stock_parts/power/terminal
 
-/decl/stock_part_preset/terminal_setup/apply(obj/machinery/machine, var/obj/item/stock_parts/power/terminal/part)
+/decl/stock_part_preset/terminal_setup/apply(obj/machinery/machine, obj/item/stock_parts/power/terminal/part)
 	var/obj/machinery/power/terminal/term = locate() in machine.loc
 	if(istype(term) && !term.master)
 		part.set_terminal(machine, term)

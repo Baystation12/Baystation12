@@ -99,7 +99,7 @@
 		pass("All /datum/gear_tweak/path definitions had unique names.")
 	return  1
 
-/proc/type_has_valid_icon_state(var/atom/type)
+/proc/type_has_valid_icon_state(atom/type)
 	var/atom/A = type
 	return (initial(A.icon_state) in icon_states(initial(A.icon)))
 

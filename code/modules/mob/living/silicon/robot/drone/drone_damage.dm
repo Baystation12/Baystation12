@@ -3,11 +3,11 @@
 	var/fireloss = 0
 	var/bruteloss = 0
 
-/mob/living/silicon/robot/drone/take_overall_damage(var/brute = 0, var/burn = 0, var/sharp = FALSE, var/used_weapon = null)
+/mob/living/silicon/robot/drone/take_overall_damage(brute = 0, burn = 0, sharp = FALSE, used_weapon = null)
 	bruteloss += brute
 	fireloss += burn
 
-/mob/living/silicon/robot/drone/heal_overall_damage(var/brute, var/burn)
+/mob/living/silicon/robot/drone/heal_overall_damage(brute, burn)
 
 	bruteloss -= brute
 	fireloss -= burn
@@ -18,7 +18,7 @@
 /mob/living/silicon/robot/drone/take_organ_damage(brute = 0, burn = 0, flags = 0)
 	take_overall_damage(brute, burn)
 
-/mob/living/silicon/robot/drone/heal_organ_damage(var/brute, var/burn)
+/mob/living/silicon/robot/drone/heal_organ_damage(brute, burn)
 	heal_overall_damage(brute,burn)
 
 /mob/living/silicon/robot/drone/getFireLoss()

@@ -15,12 +15,12 @@
 	var/tmp/image/eyes_overlay
 	var/tmp/datum/gestalt_vote/current_vote
 
-/obj/structure/diona_gestalt/mob_breakout(var/mob/living/escapee)
+/obj/structure/diona_gestalt/mob_breakout(mob/living/escapee)
 	. = ..()
 	shed_atom(escapee)
 	return TRUE
 
-/obj/structure/diona_gestalt/Initialize(var/mapload)
+/obj/structure/diona_gestalt/Initialize(mapload)
 	eyes_overlay = image(icon = icon, icon_state = "eyes_gestalt")
 	eyes_overlay.layer = EYE_GLOW_LAYER
 	eyes_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE

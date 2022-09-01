@@ -117,7 +117,7 @@
 		if(H)
 			H.color = COLOR_WHITE
 
-/mob/living/exosuit/setClickCooldown(var/timeout)
+/mob/living/exosuit/setClickCooldown(timeout)
 	. = ..()
 	for(var/hardpoint in hardpoint_hud_elements)
 		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]

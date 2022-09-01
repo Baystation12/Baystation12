@@ -20,7 +20,7 @@
 	..()
 	update_icon()
 
-/obj/item/device/oxycandle/afterattack(var/obj/O, var/mob/user, var/proximity)
+/obj/item/device/oxycandle/afterattack(obj/O, mob/user, proximity)
 	if(proximity && istype(O) && on)
 		O.HandleObjectHeating(src, user, 500)
 	..()

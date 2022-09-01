@@ -41,7 +41,7 @@
 	..()
 	crew_announcement.newscast = 1
 
-/datum/nano_module/program/comm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/comm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 
 	var/list/data = host.initial_data()
 	var/authenticated = check_access(user, admin_access)
@@ -108,7 +108,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/datum/nano_module/program/comm/proc/is_authenticated(authenticated, var/mob/user)
+/datum/nano_module/program/comm/proc/is_authenticated(authenticated, mob/user)
 	if(program)
 		return program.can_run(user)
 	return TRUE
@@ -275,7 +275,7 @@ var/global/last_message_id = 0
 	last_message_id = last_message_id + 1
 	return last_message_id
 
-/proc/post_comm_message(var/message_title, var/message_text)
+/proc/post_comm_message(message_title, message_text)
 	var/list/message = list()
 	message["id"] = get_comm_message_id()
 	message["title"] = message_title
@@ -292,13 +292,13 @@ var/global/last_message_id = 0
 	messages = list()
 	comm_message_listeners.Add(src)
 
-/datum/comm_message_listener/proc/Add(var/list/message)
+/datum/comm_message_listener/proc/Add(list/message)
 	messages[++messages.len] = message
 
-/datum/comm_message_listener/proc/Remove(var/list/message)
+/datum/comm_message_listener/proc/Remove(list/message)
 	messages -= list(message)
 
-/proc/post_status(var/command, var/data1, var/data2)
+/proc/post_status(command, data1, data2)
 
 	var/datum/radio_frequency/frequency = radio_controller.return_frequency(1435)
 
@@ -319,7 +319,7 @@ var/global/last_message_id = 0
 			status_signal.data["toggle_alert_border"] = TRUE
 	frequency.post_signal(signal = status_signal)
 
-/proc/cancel_call_proc(var/mob/user)
+/proc/cancel_call_proc(mob/user)
 	if (!evacuation_controller)
 		return
 
@@ -335,7 +335,7 @@ var/global/last_message_id = 0
 			return 1
 	return 0
 
-/proc/call_shuttle_proc(var/mob/user, var/emergency)
+/proc/call_shuttle_proc(mob/user, emergency)
 	if (!evacuation_controller)
 		return
 

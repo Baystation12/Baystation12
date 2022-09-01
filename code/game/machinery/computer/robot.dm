@@ -13,7 +13,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/computer/robotics/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/computer/robotics/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/data[0]
 	data["robots"] = get_cyborgs(user)
 	data["is_ai"] = issilicon(user)
@@ -31,7 +31,7 @@
 		return STATUS_CLOSE
 	return ..()
 
-/obj/machinery/computer/robotics/OnTopic(var/mob/user, href_list)
+/obj/machinery/computer/robotics/OnTopic(mob/user, href_list)
 	// Locks or unlocks the cyborg
 	if (href_list["lockdown"])
 		var/mob/living/silicon/robot/target = get_cyborg_by_name(href_list["lockdown"])
@@ -107,7 +107,7 @@
 // Proc: get_cyborgs()
 // Parameters: 1 (operator - mob which is operating the console.)
 // Description: Returns NanoUI-friendly list of accessible cyborgs.
-/obj/machinery/computer/robotics/proc/get_cyborgs(var/mob/operator)
+/obj/machinery/computer/robotics/proc/get_cyborgs(mob/operator)
 	var/list/robots = list()
 
 	for(var/mob/living/silicon/robot/R in GLOB.silicon_mobs)
@@ -156,7 +156,7 @@
 // Proc: get_cyborg_by_name()
 // Parameters: 1 (name - Cyborg we are trying to find)
 // Description: Helper proc for finding cyborg by name
-/obj/machinery/computer/robotics/proc/get_cyborg_by_name(var/name)
+/obj/machinery/computer/robotics/proc/get_cyborg_by_name(name)
 	if (!name)
 		return
 	for(var/mob/living/silicon/robot/R in GLOB.silicon_mobs)

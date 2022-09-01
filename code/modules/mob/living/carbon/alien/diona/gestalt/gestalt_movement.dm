@@ -1,8 +1,8 @@
-/obj/structure/diona_gestalt/relaymove(var/mob/user, var/direction)
+/obj/structure/diona_gestalt/relaymove(mob/user, direction)
 	if(nymphs[user]) step(src, direction) // ANARCHY! DEMOCRACY! ANARCHY! DEMOCRACY!
 
 // Naaaa na na na na naa naa https://www.youtube.com/watch?v=iMH49ieL4es
-/obj/structure/diona_gestalt/Bump(var/atom/movable/AM, var/yes) // what a useful argname, thanks oldcoders
+/obj/structure/diona_gestalt/Bump(atom/movable/AM, yes) // what a useful argname, thanks oldcoders
 	. = ..()
 	if(AM && can_roll_up_atom(AM) && AM.Adjacent(src))
 		var/turf/stepping = AM.loc
@@ -22,7 +22,7 @@
 		visible_message("<span class='notice'>The nascent gestalts combine together!</span>") // Combine!
 		step_towards(src, gestalt_loc)
 
-/obj/structure/diona_gestalt/Bumped(var/atom/A)
+/obj/structure/diona_gestalt/Bumped(atom/A)
 	. = ..()
 	if(istype(A, /mob/living/carbon/alien/diona) && A.Adjacent(src)) // Combine...
 		roll_up_atom(A)
@@ -34,7 +34,7 @@
 			if(can_roll_up_atom(AM))
 				roll_up_atom(AM)
 
-/obj/structure/diona_gestalt/proc/can_roll_up_atom(var/atom/movable/thing)
+/obj/structure/diona_gestalt/proc/can_roll_up_atom(atom/movable/thing)
 	if(!istype(thing) || thing.anchored || !thing.simulated)
 		return FALSE
 	if(valid_things_to_roll_up[thing.type])

@@ -37,7 +37,7 @@
 /datum/map/proc/grid_restored_announcement()
 	command_announcement.Announce(replacetext(grid_restored_message, "%STATION_NAME%", station_name()), "Power Systems Nominal", new_sound = grid_restored_sound)
 
-/datum/map/proc/level_x_biohazard_announcement(var/bio_level)
+/datum/map/proc/level_x_biohazard_announcement(bio_level)
 	if(!isnum(bio_level))
 		CRASH("Expected a number, was: [log_info_line(bio_level)]")
 	if(bio_level < 1 || bio_level > 9)
@@ -45,7 +45,7 @@
 
 	command_announcement.Announce("Confirmed outbreak of level [bio_level] biohazard aboard the [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert", new_sound = level_x_biohazard_sound(bio_level))
 
-/datum/map/proc/level_x_biohazard_sound(var/bio_level)
+/datum/map/proc/level_x_biohazard_sound(bio_level)
 	return
 
 /datum/map/proc/radiation_detected_announcement()

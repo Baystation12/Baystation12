@@ -27,12 +27,12 @@
 		TAG_CULTURE = CULTURE_STARLIGHT
 	)
 
-/datum/species/starlight/handle_death_check(var/mob/living/carbon/human/H)
+/datum/species/starlight/handle_death_check(mob/living/carbon/human/H)
 	if(H.health == 0)
 		return TRUE
 	return FALSE
 
-/datum/species/starlight/handle_death(var/mob/living/carbon/human/H)
+/datum/species/starlight/handle_death(mob/living/carbon/human/H)
 	addtimer(CALLBACK(H,/mob/proc/dust),0)
 
 /datum/species/starlight/starborn
@@ -80,7 +80,7 @@
 		/obj/aura/starborn
 		)
 
-/datum/species/starlight/starborn/handle_death(var/mob/living/carbon/human/H)
+/datum/species/starlight/starborn/handle_death(mob/living/carbon/human/H)
 	..()
 	var/turf/T = get_turf(H)
 	new/obj/effect/decal/cleanable/liquid_fuel(T, 20, TRUE)
@@ -110,6 +110,6 @@
 
 	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/blueforged)
 
-/datum/species/starlight/blueforged/handle_death(var/mob/living/carbon/human/H)
+/datum/species/starlight/blueforged/handle_death(mob/living/carbon/human/H)
 	..()
 	new /obj/effect/temporary(get_turf(H),11, 'icons/mob/mob.dmi', "liquify")

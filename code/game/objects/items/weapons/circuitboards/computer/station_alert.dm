@@ -8,7 +8,7 @@
 	set_extension(src, /datum/extension/interactive/multitool/circuitboards/stationalert)
 	..()
 
-/obj/item/stock_parts/circuitboard/stationalert/construct(var/obj/machinery/computer/station_alert/SA)
+/obj/item/stock_parts/circuitboard/stationalert/construct(obj/machinery/computer/station_alert/SA)
 	if(..(SA))
 		SA.unregister_monitor()
 
@@ -20,7 +20,7 @@
 		SA.register_monitor(monitor)
 		return 1
 
-/obj/item/stock_parts/circuitboard/stationalert/deconstruct(var/obj/machinery/computer/station_alert/SA)
+/obj/item/stock_parts/circuitboard/stationalert/deconstruct(obj/machinery/computer/station_alert/SA)
 	if(..(SA))
 		alarm_handlers.Cut()
 		if(SA.alarm_monitor)

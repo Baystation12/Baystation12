@@ -76,16 +76,16 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 	..()
 	prometheans = src
 
-/datum/species/shapeshifter/promethean/hug(var/mob/living/carbon/human/H,var/mob/living/target)
+/datum/species/shapeshifter/promethean/hug(mob/living/carbon/human/H,mob/living/target)
 	var/datum/gender/G = gender_datums[target.gender]
 	H.visible_message("<span class='notice'>\The [H] glomps [target] to make [G.him] feel better!</span>", \
 					"<span class='notice'>You glomps [target] to make [G.him] feel better!</span>")
 	H.apply_stored_shock_to(target)
 
-/datum/species/shapeshifter/promethean/handle_death(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/promethean/handle_death(mob/living/carbon/human/H)
 	addtimer(CALLBACK(H, /mob/proc/gib),0)
 
-/datum/species/shapeshifter/promethean/handle_environment_special(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/promethean/handle_environment_special(mob/living/carbon/human/H)
 
 	var/turf/T = H.loc
 	if(istype(T))
@@ -131,17 +131,17 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 		H.adjustToxLoss(-heal_rate)
 		return 1
 
-/datum/species/shapeshifter/promethean/get_blood_colour(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/promethean/get_blood_colour(mob/living/carbon/human/H)
 	if (H)
 		return H.skin_color
 	return ..()
 
-/datum/species/shapeshifter/promethean/get_flesh_colour(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/promethean/get_flesh_colour(mob/living/carbon/human/H)
 	if (H)
 		return H.skin_color
 	return ..()
 
-/datum/species/shapeshifter/promethean/get_additional_examine_text(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/promethean/get_additional_examine_text(mob/living/carbon/human/H)
 
 	if(!stored_shock_by_ref["\ref[H]"])
 		return

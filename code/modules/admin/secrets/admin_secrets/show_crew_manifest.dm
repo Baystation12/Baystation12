@@ -1,7 +1,7 @@
 /datum/admin_secret_item/admin_secret/show_crew_manifest
 	name = "Show Crew Manifest"
 
-/datum/admin_secret_item/admin_secret/show_crew_manifest/execute(var/mob/user)
+/datum/admin_secret_item/admin_secret/show_crew_manifest/execute(mob/user)
 	. = ..()
 	if(!.)
 		return

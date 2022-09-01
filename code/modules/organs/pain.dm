@@ -1,4 +1,4 @@
-/mob/proc/flash_pain(var/target)
+/mob/proc/flash_pain(target)
 	if(pain)
 		animate(pain, alpha = target, time = 15, easing = ELASTIC_EASING)
 		animate(pain, alpha = 0, time = 20)
@@ -9,7 +9,7 @@
 // message is the custom message to be displayed
 // power decides how much painkillers will stop the message
 // force means it ignores anti-spam timer
-/mob/living/carbon/proc/custom_pain(var/message, var/power, var/force, var/obj/item/organ/external/affecting, var/nohalloss)
+/mob/living/carbon/proc/custom_pain(message, power, force, obj/item/organ/external/affecting, nohalloss)
 	if(!message || stat || !can_feel_pain() || chem_effects[CE_PAINKILLER] > power)
 		return 0
 

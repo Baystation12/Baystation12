@@ -71,7 +71,7 @@ var/global/list/image/fluidtrack_cache=list()
 	* @param goingdir Direction tracks are going to (or 0).
 	* @param bloodcolor Color of the blood when wet.
 	*/
-/obj/effect/decal/cleanable/blood/tracks/proc/AddTracks(var/list/DNA, var/comingdir, var/goingdir, var/bloodcolor=COLOR_BLOOD_HUMAN)
+/obj/effect/decal/cleanable/blood/tracks/proc/AddTracks(list/DNA, comingdir, goingdir, bloodcolor=COLOR_BLOOD_HUMAN)
 	var/updated=0
 	// Shift our goingdir 4 spaces to the left so it's in the GOING bitblock.
 	var/realgoing = SHIFTL(goingdir, 4)
@@ -164,7 +164,7 @@ var/global/list/image/fluidtrack_cache=list()
 	coming_state = "human2"
 	going_state = "human1"
 
-/obj/effect/decal/cleanable/blood/tracks/footprints/reversed/AddTracks(var/list/DNA, var/comingdir, var/goingdir, var/bloodcolor=COLOR_BLOOD_HUMAN)
+/obj/effect/decal/cleanable/blood/tracks/footprints/reversed/AddTracks(list/DNA, comingdir, goingdir, bloodcolor=COLOR_BLOOD_HUMAN)
 	comingdir = reverse_direction(comingdir)
 	goingdir = reverse_direction(goingdir)
 	..(DNA, comingdir, goingdir, bloodcolor)

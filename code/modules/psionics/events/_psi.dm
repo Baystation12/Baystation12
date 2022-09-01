@@ -20,5 +20,5 @@
 	for(var/thing in SSpsi.processing)
 		apply_psi_effect(thing)
 
-/datum/event/psi/proc/apply_psi_effect(var/datum/psi_complexus/psi)
+/datum/event/psi/proc/apply_psi_effect(datum/psi_complexus/psi)
 	return

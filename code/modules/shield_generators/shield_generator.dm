@@ -225,7 +225,7 @@
 		for(var/obj/effect/shield/S in field_segments)
 			S.fail(1)
 
-/obj/machinery/power/shield_generator/proc/set_idle(var/new_state)
+/obj/machinery/power/shield_generator/proc/set_idle(new_state)
 	if(new_state)
 		if(running == SHIELD_IDLE)
 			return
@@ -238,7 +238,7 @@
 		running = SHIELD_SPINNING_UP
 		spinup_counter = round(spinup_delay / idle_multiplier)
 
-/obj/machinery/power/shield_generator/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/power/shield_generator/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/data[0]
 
 	data["running"] = running
@@ -272,11 +272,11 @@
 		ui.set_auto_update(1)
 
 
-/obj/machinery/power/shield_generator/interface_interact(var/mob/user)
+/obj/machinery/power/shield_generator/interface_interact(mob/user)
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/power/shield_generator/CanUseTopic(var/mob/user)
+/obj/machinery/power/shield_generator/CanUseTopic(mob/user)
 	if (panel_open)
 		return STATUS_CLOSE
 	if(issilicon(user) && !Adjacent(user) && ai_control_disabled)
@@ -370,7 +370,7 @@
 
 
 // Takes specific amount of damage
-/obj/machinery/power/shield_generator/proc/take_damage(var/damage, var/shield_damtype)
+/obj/machinery/power/shield_generator/proc/take_damage(damage, shield_damtype)
 	var/energy_to_use = damage * ENERGY_PER_HP
 	if(check_flag(MODEFLAG_MODULATE))
 		mitigation_em -= MITIGATION_HIT_LOSS
@@ -410,11 +410,11 @@
 
 
 // Checks whether specific flags are enabled
-/obj/machinery/power/shield_generator/proc/check_flag(var/flag)
+/obj/machinery/power/shield_generator/proc/check_flag(flag)
 	return (shield_modes & flag)
 
 
-/obj/machinery/power/shield_generator/proc/toggle_flag(var/flag)
+/obj/machinery/power/shield_generator/proc/toggle_flag(flag)
 	shield_modes ^= flag
 	update_upkeep_multiplier()
 	for(var/obj/effect/shield/S in field_segments)

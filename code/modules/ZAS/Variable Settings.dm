@@ -191,7 +191,7 @@ var/global/vs_control/vsc = new
 	for(var/V in plc.settings)
 		plc.Randomize(V)
 
-/vs_control/proc/SetDefault(var/mob/user)
+/vs_control/proc/SetDefault(mob/user)
 	var/list/setting_choices = list("Phoron - Standard", "Phoron - Low Hazard", "Phoron - High Hazard", "Phoron - Oh Shit!",\
 	"ZAS - Normal", "ZAS - Forgiving", "ZAS - Dangerous", "ZAS - Hellish", "ZAS/Phoron - Initial")
 	var/def = input(user, "Which of these presets should be used?") as null|anything in setting_choices

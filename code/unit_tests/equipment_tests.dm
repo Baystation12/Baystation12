@@ -80,7 +80,7 @@
 
 	return 1
 
-/proc/test_storage_capacity(obj/item/storage/S, var/bad_msg)
+/proc/test_storage_capacity(obj/item/storage/S, bad_msg)
 	var/bad_tests = 0
 
 	if(!isnull(S.storage_slots) && S.contents.len > S.storage_slots)
@@ -105,4 +105,3 @@
 
 #undef SUCCESS
 #undef FAILURE
-

@@ -12,7 +12,7 @@
 		playsound(src.loc, legs.mech_step_sound, 40, 1)
 
 /mob/living/exosuit/can_ztravel()
-	if(Allow_Spacemove()) //Handle here 
+	if(Allow_Spacemove()) //Handle here
 		return TRUE
 
 /mob/living/exosuit/Allow_Spacemove(check_drift)
@@ -36,14 +36,14 @@
 		return ..(dir)
 	return ..(ndir)
 
-/mob/living/exosuit/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = src.loc)
+/mob/living/exosuit/can_fall(anchor_bypass = FALSE, turf/location_override = src.loc)
 	//mechs are always anchored, so falling should always ignore it
 	if(..(TRUE, location_override))
 		return !(can_overcome_gravity())
 
 /mob/living/exosuit/can_float()
 	return FALSE //Nope
-	
+
 /datum/movement_handler/mob/delay/exosuit
 	expected_host_type = /mob/living/exosuit
 
@@ -71,7 +71,7 @@
 /datum/movement_handler/mob/exosuit
 	expected_host_type = /mob/living/exosuit
 
-/datum/movement_handler/mob/exosuit/MayMove(var/mob/mover, var/is_external)
+/datum/movement_handler/mob/exosuit/MayMove(mob/mover, is_external)
 	var/mob/living/exosuit/exosuit = host
 	if((!(mover in exosuit.pilots) && mover != exosuit) || exosuit.incapacitated() || mover.incapacitated())
 		return MOVEMENT_STOP
@@ -95,7 +95,7 @@
 
 	return MOVEMENT_PROCEED
 
-/datum/movement_handler/mob/exosuit/DoMove(var/direction, var/mob/mover, var/is_external)
+/datum/movement_handler/mob/exosuit/DoMove(direction, mob/mover, is_external)
 	var/mob/living/exosuit/exosuit = host
 	var/moving_dir = direction
 
@@ -129,7 +129,7 @@
 	expected_host_type = /mob/living/exosuit
 
 // Space movement
-/datum/movement_handler/mob/space/exosuit/DoMove(var/direction, var/mob/mover)
+/datum/movement_handler/mob/space/exosuit/DoMove(direction, mob/mover)
 
 	if(!mob.check_solid_ground())
 		mob.anchored = FALSE
@@ -140,11 +140,11 @@
 			return MOVEMENT_HANDLED
 		else
 			mob.inertia_dir = 0 //If not then we can reset inertia and move
-	else 
+	else
 		mob.anchored = TRUE
 		mob.inertia_dir = 0 //Reset inertia values as we are not going to be treated as floating
 
-/datum/movement_handler/mob/space/exosuit/MayMove(var/mob/mover, var/is_external)
+/datum/movement_handler/mob/space/exosuit/MayMove(mob/mover, is_external)
 	if((mover != host) && is_external)
 		return MOVEMENT_PROCEED
 
@@ -162,7 +162,7 @@
 /mob/living/exosuit/fall_damage()
 	return 175 //Exosuits are big and heavy
 
-/mob/living/exosuit/handle_fall_effect(var/turf/landing)
+/mob/living/exosuit/handle_fall_effect(turf/landing)
 	// Return here if for any reason you shouldn´t take damage
 	..()
 	if(legs)

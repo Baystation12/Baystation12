@@ -78,7 +78,7 @@
 				carrying -= chosen_obj
 	. = ..()
 
-/obj/item/mech_equipment/clamp/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
+/obj/item/mech_equipment/clamp/afterattack(atom/target, mob/living/user, inrange, params)
 	. = ..()
 
 	if(.)
@@ -183,7 +183,7 @@
 				to_chat(user, "You push [target] out of the way.")
 				owner.visible_message("[owner] pushes [target] out of the way.")
 
-/obj/item/mech_equipment/clamp/attack_self(var/mob/user)
+/obj/item/mech_equipment/clamp/attack_self(mob/user)
 	. = ..()
 	if(.)
 		drop_carrying(user, TRUE)
@@ -194,7 +194,7 @@
 	else
 		..()
 
-/obj/item/mech_equipment/clamp/proc/drop_carrying(var/mob/user, var/choose_object)
+/obj/item/mech_equipment/clamp/proc/drop_carrying(mob/user, choose_object)
 	if(!length(carrying))
 		to_chat(user, SPAN_WARNING("You are not carrying anything in \the [src]."))
 		return
@@ -283,7 +283,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/mech_equipment/light/attack_self(var/mob/user)
+/obj/item/mech_equipment/light/attack_self(mob/user)
 	. = ..()
 	if(.)
 		toggle()
@@ -381,7 +381,7 @@
 		QDEL_NULL(beam)
 	passive_power_use = 0
 
-/obj/item/mech_equipment/catapult/attack_self(var/mob/user)
+/obj/item/mech_equipment/catapult/attack_self(mob/user)
 	. = ..()
 	if(.)
 		if(!locked)
@@ -391,7 +391,7 @@
 		else
 			to_chat(user, SPAN_NOTICE("You cannot change the mode \the [src] while it is locked on to a target."))
 
-/obj/item/mech_equipment/catapult/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
+/obj/item/mech_equipment/catapult/afterattack(atom/target, mob/living/user, inrange, params)
 	. = ..()
 	if(.)
 		switch(mode)
@@ -518,7 +518,7 @@
 	if (ispath(drill_head))
 		drill_head = new drill_head(src)
 
-/obj/item/mech_equipment/drill/attack_self(var/mob/user)
+/obj/item/mech_equipment/drill/attack_self(mob/user)
 	. = ..()
 	if(.)
 		if(drill_head)

@@ -48,7 +48,7 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 		/obj/item/gun/projectile/pistol/magnum_pistol
 		)
 
-/datum/antagonist/renegade/create_objectives(var/datum/mind/player)
+/datum/antagonist/renegade/create_objectives(datum/mind/player)
 
 	if(!..())
 		return
@@ -57,7 +57,7 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 	survive.owner = player
 	player.objectives |= survive
 
-/datum/antagonist/renegade/equip(var/mob/living/carbon/human/player)
+/datum/antagonist/renegade/equip(mob/living/carbon/human/player)
 
 	if(!..())
 		return

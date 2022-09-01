@@ -116,7 +116,7 @@
 	var/obj/item/stack/material/cyborg/plasteel/PL = locate() in equipment
 	PL.synths = list(plasteel)
 
-/obj/item/robot_module/engineering/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/engineering/respawn_consumable(mob/living/silicon/robot/R, amount)
 	var/obj/item/device/lightreplacer/LR = locate() in equipment
 	LR.Charge(R, amount)
 	..()

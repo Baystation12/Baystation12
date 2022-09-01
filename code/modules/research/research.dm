@@ -65,7 +65,7 @@ research holder datum.
 
 //Checks to see if design has all the required pre-reqs.
 //Input: datum/design; Output: 0/1 (false/true)
-/datum/research/proc/DesignHasReqs(var/datum/design/D)
+/datum/research/proc/DesignHasReqs(datum/design/D)
 	if(D.req_tech.len == 0)
 		return 1
 
@@ -82,7 +82,7 @@ research holder datum.
 
 //Adds a tech to known_tech list. Checks to make sure there aren't duplicates and updates existing tech's levels if needed.
 //Input: datum/tech; Output: Null
-/datum/research/proc/AddTech2Known(var/datum/tech/T)
+/datum/research/proc/AddTech2Known(datum/tech/T)
 	for(var/datum/tech/known in known_tech)
 		if(T.id == known.id)
 			if(T.level > known.level)
@@ -90,7 +90,7 @@ research holder datum.
 			return
 	return
 
-/datum/research/proc/AddDesign2Known(var/datum/design/D)
+/datum/research/proc/AddDesign2Known(datum/design/D)
 	if(!known_designs.len) // Special case
 		known_designs.Add(D)
 		return
@@ -116,7 +116,7 @@ research holder datum.
 
 //Refreshes the levels of a given tech.
 //Input: Tech's ID and Level; Output: null
-/datum/research/proc/UpdateTech(var/ID, var/level)
+/datum/research/proc/UpdateTech(ID, level)
 	// If a "brain expansion" event is active, we gain 1 extra level
 	for(var/datum/event/E in SSevent.active_events)
 		if(istype(E, /datum/event/brain_expansion))
@@ -129,7 +129,7 @@ research holder datum.
 	return
 
 // A simple helper proc to find the name of a tech with a given ID.
-/proc/CallTechName(var/ID)
+/proc/CallTechName(ID)
 	for(var/T in subtypesof(/datum/tech))
 		var/datum/tech/check_tech = T
 		if(initial(check_tech.id) == ID)

@@ -17,11 +17,11 @@
 	toggle_on_message = "\The [src] boots up to life, flashing with information."
 	toggle_off_message = "\The [src] powers down with a beep."
 
-/obj/item/clothing/glasses/proc/process_hud(var/mob/M)
+/obj/item/clothing/glasses/proc/process_hud(mob/M)
 	if(hud)
 		hud.process_hud(M)
 
-/obj/item/clothing/glasses/hud/process_hud(var/mob/M)
+/obj/item/clothing/glasses/hud/process_hud(mob/M)
 	return
 
 /obj/item/clothing/glasses/hud/health
@@ -33,7 +33,7 @@
 	body_parts_covered = 0
 	req_access = list(access_medical)
 
-/obj/item/clothing/glasses/hud/health/process_hud(var/mob/M)
+/obj/item/clothing/glasses/hud/health/process_hud(mob/M)
 	process_med_hud(M, 1)
 
 /obj/item/clothing/glasses/hud/health/prescription
@@ -85,7 +85,7 @@
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 
 
-/obj/item/clothing/glasses/hud/security/process_hud(var/mob/M)
+/obj/item/clothing/glasses/hud/security/process_hud(mob/M)
 	process_sec_hud(M, 1)
 
 /obj/item/clothing/glasses/hud/security/prot
@@ -138,7 +138,7 @@
 	desc = "A janitor HUD integrated with a set of prescription glasses."
 	prescription = 5
 
-/obj/item/clothing/glasses/hud/janitor/process_hud(var/mob/M)
+/obj/item/clothing/glasses/hud/janitor/process_hud(mob/M)
 	process_jani_hud(M)
 
 /obj/item/clothing/glasses/hud/science

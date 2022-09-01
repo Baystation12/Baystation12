@@ -113,7 +113,7 @@
 	if ((. = ..()))
 		return
 
-/mob/living/simple_animal/construct/armoured/bullet_act(var/obj/item/projectile/P)
+/mob/living/simple_animal/construct/armoured/bullet_act(obj/item/projectile/P)
 	if (status_flags & GODMODE)
 		return PROJECTILE_FORCE_MISS
 	if(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam))

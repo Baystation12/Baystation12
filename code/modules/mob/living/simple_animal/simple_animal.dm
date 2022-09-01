@@ -212,7 +212,7 @@
 	..()
 	updatehealth()
 
-/mob/living/simple_animal/say(var/message)
+/mob/living/simple_animal/say(message)
 	var/verb = "says"
 	if(speak_emote.len)
 		verb = pick(speak_emote)
@@ -221,15 +221,15 @@
 
 	..(message, null, verb)
 
-/mob/living/simple_animal/get_speech_ending(verb, var/ending)
+/mob/living/simple_animal/get_speech_ending(verb, ending)
 	return verb
 
-/mob/living/simple_animal/put_in_hands(var/obj/item/W) // No hands.
+/mob/living/simple_animal/put_in_hands(obj/item/W) // No hands.
 	W.forceMove(get_turf(src))
 	return 1
 
 // Harvest an animal's delicious byproducts
-/mob/living/simple_animal/proc/harvest(var/mob/user, var/skill_level)
+/mob/living/simple_animal/proc/harvest(mob/user, skill_level)
 	var/actual_meat_amount = round(max(1,(meat_amount / 2) + skill_level / 2))
 	user.visible_message("<span class='danger'>\The [user] chops up \the [src]!</span>")
 	if(meat_type && actual_meat_amount > 0 && (stat == DEAD))
@@ -242,12 +242,12 @@
 				splat.update_icon()
 			qdel(src)
 
-/mob/living/simple_animal/proc/subtract_meat(var/mob/user)
+/mob/living/simple_animal/proc/subtract_meat(mob/user)
 	meat_amount--
 	if(meat_amount <= 0)
 		to_chat(user, SPAN_NOTICE("\The [src] carcass is ruined beyond use."))
 
-/mob/living/simple_animal/bullet_impact_visuals(var/obj/item/projectile/P, var/def_zone)
+/mob/living/simple_animal/bullet_impact_visuals(obj/item/projectile/P, def_zone)
 	..()
 	switch(get_bullet_impact_effect_type(def_zone))
 		if(BULLET_IMPACT_MEAT)
@@ -284,7 +284,7 @@
 /mob/living/simple_animal/is_burnable()
 	return heat_damage_per_tick
 
-/mob/living/simple_animal/proc/adjustBleedTicks(var/amount)
+/mob/living/simple_animal/proc/adjustBleedTicks(amount)
 	if(!can_bleed)
 		return
 
@@ -350,7 +350,7 @@
 /mob/living/simple_animal/get_inventory_slot(obj/item/I)
 	return -1
 
-/mob/living/simple_animal/proc/pry_door(var/mob/user, var/delay, var/obj/machinery/door/pesky_door)
+/mob/living/simple_animal/proc/pry_door(mob/user, delay, obj/machinery/door/pesky_door)
 	set waitfor = FALSE
 	visible_message(SPAN_WARNING("\The [user] begins [pry_desc] at \the [pesky_door]!"))
 	set_AI_busy(TRUE)

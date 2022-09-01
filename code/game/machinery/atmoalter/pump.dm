@@ -106,7 +106,7 @@
 
 	src.updateDialog()
 
-/obj/machinery/portable_atmospherics/powered/pump/interface_interact(var/mob/user)
+/obj/machinery/portable_atmospherics/powered/pump/interface_interact(mob/user)
 	ui_interact(user)
 	return TRUE
 

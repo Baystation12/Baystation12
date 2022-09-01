@@ -37,7 +37,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 	..()
 	set_spellbook(spellbook_type)
 
-/obj/item/spellbook/proc/set_spellbook(var/type)
+/obj/item/spellbook/proc/set_spellbook(type)
 	if(spellbook)
 		qdel(spellbook)
 	spellbook = new type()
@@ -59,7 +59,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 		to_chat(user, "You notice the apprentice-proof lock is on. Luckily you are beyond such things.")
 	interact(user)
 
-/obj/item/spellbook/proc/make_sacrifice(obj/item/I as obj, mob/user as mob, var/reagent)
+/obj/item/spellbook/proc/make_sacrifice(obj/item/I as obj, mob/user as mob, reagent)
 	if(has_sacrificed)
 		to_chat(user, SPAN_WARNING("\The [src] is already sated! Wait for a return on your investment before you sacrifice more to it."))
 		return
@@ -153,7 +153,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 			dat += "<center><A href='byond://?src=\ref[src];lock=1'>[spellbook.book_flags & LOCKED ? "Unlock" : "Lock"] the spellbook.</a></center>"
 	show_browser(user, dat,"window=spellbook")
 
-/obj/item/spellbook/CanUseTopic(var/mob/living/carbon/human/H)
+/obj/item/spellbook/CanUseTopic(mob/living/carbon/human/H)
 	if(!istype(H))
 		return STATUS_CLOSE
 
@@ -162,7 +162,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 
 	return ..()
 
-/obj/item/spellbook/OnTopic(var/mob/living/carbon/human/user, href_list)
+/obj/item/spellbook/OnTopic(mob/living/carbon/human/user, href_list)
 	if(href_list["lock"] && !(spellbook.book_flags & NO_LOCKING))
 		if(spellbook.book_flags & LOCKED)
 			spellbook.book_flags &= ~LOCKED
@@ -258,7 +258,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 	. = ..()
 
 
-/obj/item/spellbook/proc/add_spell(var/mob/user, var/spell_path)
+/obj/item/spellbook/proc/add_spell(mob/user, spell_path)
 	for(var/spell/S in user.mind.learned_spells)
 		if(istype(S,spell_path))
 			if(!S.can_improve())

@@ -1,10 +1,10 @@
-/proc/get_footstep(var/footstep_type, var/mob/caller)
+/proc/get_footstep(footstep_type, mob/caller)
 	. = caller && caller.get_footstep(footstep_type)
 	if(!.)
 		var/decl/footsteps/FS = decls_repository.get_decl(footstep_type)
 		. = pick(FS.footstep_sounds)
 
-/turf/simulated/proc/get_footstep_sound(var/mob/caller)
+/turf/simulated/proc/get_footstep_sound(mob/caller)
 	for(var/obj/structure/S in contents)
 		if(S.footstep_type)
 			return get_footstep(S.footstep_type, caller)
@@ -18,7 +18,7 @@
 	if(is_plating())
 		return get_footstep(/decl/footsteps/plating, caller)
 
-/turf/simulated/floor/get_footstep_sound(var/mob/caller)
+/turf/simulated/floor/get_footstep_sound(mob/caller)
 	. = ..()
 	if(!.)
 		if(!flooring || !flooring.footstep_type)
@@ -26,7 +26,7 @@
 		else
 			return get_footstep(flooring.footstep_type, caller)
 
-/turf/simulated/Entered(var/mob/living/carbon/human/H)
+/turf/simulated/Entered(mob/living/carbon/human/H)
 	..()
 	if(istype(H))
 		H.handle_footsteps()
@@ -41,7 +41,7 @@
 
 	if(!has_organ(BP_L_FOOT) && !has_organ(BP_R_FOOT))
 		return //no feet no footsteps
-	
+
 	return TRUE
 
 /mob/living/carbon/human/proc/handle_footsteps()
@@ -51,7 +51,7 @@
 	 //every other turf makes a sound
 	if((step_count % 2) && MOVING_QUICKLY(src))
 		return
-	
+
 	// don't need to step as often when you hop around
 	if((step_count % 3) && !has_gravity(src))
 		return

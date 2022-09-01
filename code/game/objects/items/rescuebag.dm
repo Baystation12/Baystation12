@@ -29,7 +29,7 @@
 		airtank = null
 	qdel(src)
 
-/obj/item/bodybag/rescue/attackby(obj/item/W, mob/user, var/click_params)
+/obj/item/bodybag/rescue/attackby(obj/item/W, mob/user, click_params)
 	if(istype(W,/obj/item/tank))
 		if(airtank)
 			to_chat(user, "\The [src] already has an air tank installed.")
@@ -86,7 +86,7 @@
 	if(airtank)
 		overlays += image(icon, "tank")
 
-/obj/structure/closet/body_bag/rescue/attackby(obj/item/W, mob/user, var/click_params)
+/obj/structure/closet/body_bag/rescue/attackby(obj/item/W, mob/user, click_params)
 	if(istype(W,/obj/item/tank))
 		if(airtank)
 			to_chat(user, "\The [src] already has an air tank installed.")
@@ -103,7 +103,7 @@
 	else
 		..()
 
-/obj/structure/closet/body_bag/rescue/fold(var/user)
+/obj/structure/closet/body_bag/rescue/fold(user)
 	var/obj/item/tank/my_tank = airtank
 	airtank = null // Apparently this is required to avoid breaking my_tank checks further down after the parent proc runs qdel(src)
 	var/obj/item/bodybag/rescue/folded = ..()

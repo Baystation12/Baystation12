@@ -1,5 +1,5 @@
 // The following procs are used to grab players for mobs produced by a seed (mostly for dionaea).
-/datum/seed/proc/handle_living_product(var/mob/living/host)
+/datum/seed/proc/handle_living_product(mob/living/host)
 	if(!host || !istype(host)) return
 
 	var/datum/ghosttrap/plant/P = get_ghost_trap("living plant")

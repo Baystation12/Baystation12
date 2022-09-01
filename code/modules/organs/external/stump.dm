@@ -3,7 +3,7 @@
 	icon_name = ""
 	dislocated = -1
 
-/obj/item/organ/external/stump/New(var/mob/living/carbon/holder, var/internal, var/obj/item/organ/external/limb)
+/obj/item/organ/external/stump/New(mob/living/carbon/holder, internal, obj/item/organ/external/limb)
 	if(istype(limb))
 		SetName("stump of \a [limb.name]")
 		organ_tag = limb.organ_tag

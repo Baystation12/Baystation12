@@ -15,7 +15,7 @@
 
 	hud_state = "wiz_boilblood"
 
-/spell/targeted/blood_boil/cast(var/list/targets, var/mob/user)
+/spell/targeted/blood_boil/cast(list/targets, mob/user)
 	var/mob/living/carbon/human/H = targets[1]
 	H.bodytemperature += 40
 	if(prob(10))

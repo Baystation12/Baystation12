@@ -6,7 +6,7 @@
 	var/multiplier = 1						// Robot may be upgraded with better matter bin to multiply capacity of it's synthetisers
 	var/energy
 
-/datum/matter_synth/New(var/store = 0)
+/datum/matter_synth/New(store = 0)
 	if(store)
 		max_energy = store
 	energy = max_energy_multiplied
@@ -16,19 +16,19 @@
 /datum/matter_synth/proc/get_charge()
 	return energy
 
-/datum/matter_synth/proc/use_charge(var/amount)
+/datum/matter_synth/proc/use_charge(amount)
 	if (energy >= amount)
 		energy -= amount
 		return 1
 	return 0
 
-/datum/matter_synth/proc/add_charge(var/amount)
+/datum/matter_synth/proc/add_charge(amount)
 	energy = min(energy + amount, max_energy_multiplied)
 
-/datum/matter_synth/proc/emp_act(var/severity)
+/datum/matter_synth/proc/emp_act(severity)
 	use_charge(max_energy_multiplied * 0.1 / severity)
 
-/datum/matter_synth/proc/set_multiplier(var/new_multiplier)
+/datum/matter_synth/proc/set_multiplier(new_multiplier)
 	multiplier = new_multiplier
 	max_energy_multiplied = max_energy * multiplier
 	energy = min(max_energy_multiplied, energy)

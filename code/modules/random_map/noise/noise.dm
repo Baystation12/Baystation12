@@ -48,15 +48,15 @@
 	// Begin recursion.
 	subdivide(1,1,1,(limit_y-1))
 
-/datum/random_map/noise/get_map_char(var/value)
+/datum/random_map/noise/get_map_char(value)
 	var/val = min(9,max(0,round((value/cell_range)*10)))
 	if(isnull(val)) val = 0
 	return "[val]"
 
-/datum/random_map/noise/proc/noise2value(var/value)
+/datum/random_map/noise/proc/noise2value(value)
 	return min(9,max(0,round((value/cell_range)*10)))
 
-/datum/random_map/noise/proc/subdivide(var/iteration,var/x,var/y,var/input_size)
+/datum/random_map/noise/proc/subdivide(iteration,x,y,input_size)
 
 	var/isize = input_size
 	var/hsize = round(input_size/2)

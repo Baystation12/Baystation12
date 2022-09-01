@@ -167,7 +167,7 @@
 
 	..()
 
-/obj/machinery/suit_cycler/emag_act(var/remaining_charges, var/mob/user)
+/obj/machinery/suit_cycler/emag_act(remaining_charges, mob/user)
 	if(emagged)
 		to_chat(user, "<span class='danger'>The cycler has already been subverted.</span>")
 		return

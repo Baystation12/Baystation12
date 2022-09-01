@@ -64,7 +64,7 @@
 
 var/global/default_mobloc = null
 
-/proc/create_test_mob_with_mind(var/turf/mobloc = null, var/mobtype = /mob/living/carbon/human)
+/proc/create_test_mob_with_mind(turf/mobloc = null, mobtype = /mob/living/carbon/human)
 	var/list/test_result = list("result" = FAILURE, "msg"    = "", "mobref" = null)
 
 	if(isnull(mobloc))
@@ -95,7 +95,7 @@ var/global/default_mobloc = null
 //Generic Check
 // TODO: Need to make sure I didn't just recreate the wheel here.
 
-/proc/damage_check(var/mob/living/M, var/damage_type)
+/proc/damage_check(mob/living/M, damage_type)
 	var/loss = null
 
 	switch(damage_type)

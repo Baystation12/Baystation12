@@ -15,7 +15,7 @@
 /spell/acid_spray/choose_targets()
 	return list(holder)
 
-/spell/acid_spray/cast(var/list/targets, var/mob/user)
+/spell/acid_spray/cast(list/targets, mob/user)
 	var/atom/target = targets[1]
 	var/angle = dir2angle(target.dir)
 	for(var/mod in list(315, 0, 45))

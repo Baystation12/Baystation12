@@ -261,7 +261,7 @@
 	onclose(user, "server_control")
 	return
 
-/obj/machinery/computer/rdservercontrol/emag_act(var/remaining_charges, var/mob/user)
+/obj/machinery/computer/rdservercontrol/emag_act(remaining_charges, mob/user)
 	if(!emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = TRUE

@@ -23,7 +23,7 @@
 	return T
 
 
-/mob/living/silicon/ai/proc/ai_camera_list(var/camera in get_camera_list())
+/mob/living/silicon/ai/proc/ai_camera_list(camera in get_camera_list())
 	set category = "Silicon Commands"
 	set name = "Show Camera List"
 
@@ -126,7 +126,7 @@
 	src.track = TB
 	return targets
 
-/mob/living/silicon/ai/proc/ai_camera_track(var/target_name in trackable_mobs())
+/mob/living/silicon/ai/proc/ai_camera_track(target_name in trackable_mobs())
 	set category = "Silicon Commands"
 	set name = "Follow With Camera"
 	set desc = "Select who you would like to track."
@@ -141,7 +141,7 @@
 	src.track = null
 	ai_actual_track(target)
 
-/mob/living/silicon/ai/proc/ai_cancel_tracking(var/forced = 0)
+/mob/living/silicon/ai/proc/ai_cancel_tracking(forced = 0)
 	if(!cameraFollow)
 		return
 
@@ -180,7 +180,7 @@
 	view_core()
 
 
-/obj/machinery/camera/attack_ai(var/mob/living/silicon/ai/user as mob)
+/obj/machinery/camera/attack_ai(mob/living/silicon/ai/user as mob)
 	if (!istype(user))
 		return
 	if (!src.can_use())
@@ -188,7 +188,7 @@
 	user.eyeobj.setLoc(get_turf(src))
 
 
-/mob/living/silicon/ai/attack_ai(var/mob/user as mob)
+/mob/living/silicon/ai/attack_ai(mob/user as mob)
 	ai_camera_list()
 
 /proc/camera_sort(list/L)

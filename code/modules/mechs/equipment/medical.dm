@@ -24,17 +24,17 @@
 	. = ..()
 	sleeper.go_out()
 
-/obj/item/mech_equipment/sleeper/attack_self(var/mob/user)
+/obj/item/mech_equipment/sleeper/attack_self(mob/user)
 	. = ..()
 	if(.)
 		sleeper.ui_interact(user)
 
-/obj/item/mech_equipment/sleeper/attackby(var/obj/item/I, var/mob/user)
+/obj/item/mech_equipment/sleeper/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/reagent_containers/glass))
 		sleeper.attackby(I, user)
 	else return ..()
 
-/obj/item/mech_equipment/sleeper/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
+/obj/item/mech_equipment/sleeper/afterattack(atom/target, mob/living/user, inrange, params)
 	. = ..()
 	if(.)
 		if(ishuman(target) && !sleeper.occupant)
@@ -57,7 +57,7 @@
 	interact_offline = TRUE
 	stat_immune = NOPOWER
 
-/obj/machinery/sleeper/mounted/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.mech_state)
+/obj/machinery/sleeper/mounted/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.mech_state)
 	. = ..()
 
 /obj/machinery/sleeper/mounted/nano_host()
@@ -67,7 +67,7 @@
 	return null
 
 //You cannot modify these, it'd probably end with something in nullspace. In any case basic meds are plenty for an ambulance
-/obj/machinery/sleeper/mounted/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/sleeper/mounted/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/reagent_containers/glass))
 		if(!user.unEquip(I, src))
 			return

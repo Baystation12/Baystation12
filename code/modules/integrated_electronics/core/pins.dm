@@ -47,14 +47,14 @@ D [1]/  ||
 	holder = null
 	return ..()
 
-/datum/integrated_io/proc/data_as_type(var/as_type)
+/datum/integrated_io/proc/data_as_type(as_type)
 	if(!isweakref(data))
 		return
 	var/weakref/w = data
 	var/output = w.resolve()
 	return istype(output, as_type) ? output : null
 
-/datum/integrated_io/proc/display_data(var/input)
+/datum/integrated_io/proc/display_data(input)
 	if(isnull(input))
 		return "(null)" // Empty data means nothing to show.
 
@@ -164,7 +164,7 @@ D [1]/  ||
 	linked.Remove(pin)
 
 
-/datum/integrated_io/proc/ask_for_data_type(mob/user, var/default, var/list/allowed_data_types = list("string","number","null"))
+/datum/integrated_io/proc/ask_for_data_type(mob/user, default, list/allowed_data_types = list("string","number","null"))
 	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in allowed_data_types
 	if(!holder.check_interactivity(user))
 		return

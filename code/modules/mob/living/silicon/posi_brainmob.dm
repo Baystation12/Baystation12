@@ -53,7 +53,7 @@
 		src.laws_sanity_check()
 		src.laws.show_laws(M)
 
-/mob/living/silicon/sil_brainmob/open_subsystem(var/subsystem_type, var/mob/given = src)
+/mob/living/silicon/sil_brainmob/open_subsystem(subsystem_type, mob/given = src)
 	update_owner_channels()
 	return ..(subsystem_type, given)
 
@@ -80,7 +80,7 @@
 	owner_channels = new_channels
 	return 1
 
-/mob/living/silicon/sil_brainmob/statelaw(var/law, var/mob/living/L = src)
+/mob/living/silicon/sil_brainmob/statelaw(law, mob/living/L = src)
 	if(container && container.owner)
 		L = container.owner
 	return ..(law, L)
@@ -95,7 +95,7 @@
 /mob/living/silicon/sil_brainmob/law_channels()
 	return law_channels
 
-/mob/living/silicon/sil_brainmob/statelaws(var/datum/ai_laws/laws)
+/mob/living/silicon/sil_brainmob/statelaws(datum/ai_laws/laws)
 	update_law_channels()
 	if(isnull(law_channels[lawchannel]))
 		to_chat(src, "<span class='danger'>[lawchannel]: Unable to state laws. Communication method unavailable.</span>")

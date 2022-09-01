@@ -39,7 +39,7 @@
 		for(var/entry in GLOB.default_uplink_source_priority)
 			pref.uplink_sources += decls_repository.get_decl(entry)
 
-/datum/category_item/player_setup_item/antagonism/basic/content(var/mob/user)
+/datum/category_item/player_setup_item/antagonism/basic/content(mob/user)
 	. +="<b>Antag Setup:</b><br>"
 	. +="Uplink Source Priority: <a href='?src=\ref[src];add_source=1'>Add</a><br>"
 	for(var/entry in pref.uplink_sources)
@@ -56,7 +56,7 @@
 	else
 		. +="<a href='?src=\ref[src];exploitable_record=1'>[TextPreview(pref.exploit_record,40)]</a><br>"
 
-/datum/category_item/player_setup_item/antagonism/basic/OnTopic(var/href,var/list/href_list, var/mob/user)
+/datum/category_item/player_setup_item/antagonism/basic/OnTopic(href,list/href_list, mob/user)
 	if(href_list["add_source"])
 		var/source_selection = input(user, "Select Uplink Source to Add", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in (list_values(uplink_sources_by_name) - pref.uplink_sources)
 		if(source_selection && CanUseTopic(user))

@@ -83,7 +83,7 @@
 		desc = "It currently contains some matter."
 		update_icon()
 
-/obj/item/implanter/compressed/attack_self(var/mob/user)
+/obj/item/implanter/compressed/attack_self(mob/user)
 	if(!imp || safe == 2)
 		return ..()
 

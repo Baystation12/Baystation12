@@ -19,7 +19,7 @@
 	drops_debris = 0
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 
-/obj/item/material/shard/set_material(var/new_material)
+/obj/item/material/shard/set_material(new_material)
 	..(new_material)
 	if(!istype(material))
 		return

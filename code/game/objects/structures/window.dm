@@ -43,7 +43,7 @@
 	if (reinf_material)
 		. = "[reinf_material.display_name]-reinforced [.]"
 
-/obj/structure/window/Initialize(mapload, start_dir=null, constructed=0, var/new_material, var/new_reinf_material)
+/obj/structure/window/Initialize(mapload, start_dir=null, constructed=0, new_material, new_reinf_material)
 	. = ..()
 	if(!new_material)
 		new_material = init_material
@@ -150,7 +150,7 @@
 	paint_color = color
 	update_icon()
 
-/obj/structure/window/CanFluidPass(var/coming_from)
+/obj/structure/window/CanFluidPass(coming_from)
 	return (!is_fulltile() && coming_from != dir)
 
 /obj/structure/window/post_health_change(health_mod, damage_type)
@@ -178,7 +178,7 @@
 /obj/structure/window/on_death()
 	shatter()
 
-/obj/structure/window/proc/shatter(var/display_message = 1)
+/obj/structure/window/proc/shatter(display_message = 1)
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
 		visible_message("<span class='warning'>\The [src] shatters!</span>")
@@ -214,7 +214,7 @@
 		return 0
 	return 1
 
-/obj/structure/window/hitby(atom/movable/AM, var/datum/thrownthing/TT)
+/obj/structure/window/hitby(atom/movable/AM, datum/thrownthing/TT)
 	..()
 	visible_message("<span class='danger'>[src] was hit by [AM].</span>")
 	var/tforce = 0
@@ -260,7 +260,7 @@
 							"You hear a knocking sound.")
 	return
 
-/obj/structure/window/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
+/obj/structure/window/attack_generic(mob/user, damage, attack_verb, environment_smash)
 	if(environment_smash >= 1)
 		damage = max(damage, 10)
 
@@ -277,7 +277,7 @@
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	return 1
 
-/obj/structure/window/do_simple_ranged_interaction(var/mob/user)
+/obj/structure/window/do_simple_ranged_interaction(mob/user)
 	visible_message(SPAN_NOTICE("Something knocks on \the [src]."))
 	playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
 	return TRUE
@@ -446,7 +446,7 @@
 
 	..()
 
-/obj/structure/window/grab_attack(var/obj/item/grab/G)
+/obj/structure/window/grab_attack(obj/item/grab/G)
 	if (G.assailant.a_intent != I_HURT)
 		return TRUE
 	if (!G.force_danger())
@@ -524,7 +524,7 @@
 		return 1
 	return 0
 
-/obj/structure/window/proc/set_anchored(var/new_anchored)
+/obj/structure/window/proc/set_anchored(new_anchored)
 	if(anchored == new_anchored)
 		return
 	anchored = new_anchored
@@ -541,7 +541,7 @@
 /obj/structure/window/can_visually_connect()
 	return ..() && is_fulltile()
 
-/obj/structure/window/can_visually_connect_to(var/obj/structure/S)
+/obj/structure/window/can_visually_connect_to(obj/structure/S)
 	return istype(S, /obj/structure/window)
 
 //merges adjacent full-tile windows into one (blatant ripoff from game/smoothwall.dm)
@@ -693,7 +693,7 @@
 	if(locate(/obj/structure/wall_frame) in loc)
 		return TRUE
 
-/obj/structure/window/proc/can_install_here(var/mob/user)
+/obj/structure/window/proc/can_install_here(mob/user)
 	//only care about full tile. Border can be installed anywhere
 	if(!anchored && is_fulltile())
 		for(var/obj/O in loc)

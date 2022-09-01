@@ -1,5 +1,5 @@
 
-/proc/power_failure(var/announce = 1, var/severity = 2, var/list/affected_z_levels)
+/proc/power_failure(announce = 1, severity = 2, list/affected_z_levels)
 	if(announce)
 		GLOB.using_map.grid_check_announcement()
 
@@ -11,7 +11,7 @@
 		if(!C.is_critical && (!affected_z_levels || (C.z in affected_z_levels)))
 			C.energy_fail(rand(30 * severity,60 * severity))
 
-/proc/power_restore(var/announce = 1)
+/proc/power_restore(announce = 1)
 	if(announce)
 		GLOB.using_map.grid_restored_announcement()
 	for(var/obj/machinery/power/apc/C in SSmachines.machinery)
@@ -25,7 +25,7 @@
 		S.update_icon()
 		S.power_change()
 
-/proc/power_restore_quick(var/announce = 1)
+/proc/power_restore_quick(announce = 1)
 
 	if(announce)
 		command_announcement.Announce("All SMESs on the [station_name()] have been recharged. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = GLOB.using_map.grid_restored_sound)

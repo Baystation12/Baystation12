@@ -44,7 +44,7 @@
 // Proc:		process()
 // Parameters: 	None
 // Description: Processes CPU gain and research progress based on "realtime" calculation.
-/datum/malf_research/proc/process(var/idle = 0)
+/datum/malf_research/proc/process(idle = 0)
 	if(idle)		// No power or running on APU. Do nothing.
 		last_tick = world.time
 		return

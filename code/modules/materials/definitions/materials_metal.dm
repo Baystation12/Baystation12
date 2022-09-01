@@ -375,7 +375,7 @@
 	melting_point = rand(400,10000)
 	..()
 
-/material/aliumium/place_dismantled_girder(var/turf/target, var/material/reinf_material)
+/material/aliumium/place_dismantled_girder(turf/target, material/reinf_material)
 	return
 
 /material/hematite

@@ -60,12 +60,12 @@
 	else
 		icon_state = "extinguisher_empty"
 
-/obj/structure/extinguisher_cabinet/AltClick(var/mob/user)
+/obj/structure/extinguisher_cabinet/AltClick(mob/user)
 	if(CanPhysicallyInteract(user))
 		opened = !opened
 		update_icon()
 
-/obj/structure/extinguisher_cabinet/do_simple_ranged_interaction(var/mob/user)
+/obj/structure/extinguisher_cabinet/do_simple_ranged_interaction(mob/user)
 	if(has_extinguisher)
 		has_extinguisher.dropInto(loc)
 		has_extinguisher = null

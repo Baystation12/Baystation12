@@ -134,7 +134,7 @@
 	if(world.time - last_bloodcall >= bloodcall_interval && (M in view(7, src)))
 		bloodcall(M)
 
-/obj/item/vampiric/proc/bloodcall(var/mob/living/carbon/human/M)
+/obj/item/vampiric/proc/bloodcall(mob/living/carbon/human/M)
 	last_bloodcall = world.time
 	if(istype(M))
 		playsound(src.loc, pick('sound/hallucinations/wail.ogg','sound/hallucinations/veryfar_noise.ogg','sound/hallucinations/far_noise.ogg'), 50, 1, -3)
@@ -221,5 +221,5 @@
 	else
 		STOP_PROCESSING(SSobj, src)
 
-/obj/effect/shadow_wight/Bump(var/atom/obstacle)
+/obj/effect/shadow_wight/Bump(atom/obstacle)
 	to_chat(obstacle, "<span class='warning'>You feel a chill run down your spine!</span>")

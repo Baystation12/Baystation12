@@ -73,7 +73,7 @@
 	popup.set_content(jointext(dat, "<br>"))
 	popup.open()
 
-/obj/item/blueprints/proc/get_area_type(var/area/A = get_area(src))
+/obj/item/blueprints/proc/get_area_type(area/A = get_area(src))
 	if(istype(A, /area/space))
 		return AREA_SPACE
 
@@ -140,7 +140,7 @@
 	qdel(A)
 	interact()
 
-/obj/item/blueprints/proc/set_area_machinery_title(var/area/A,var/title,var/oldtitle)
+/obj/item/blueprints/proc/set_area_machinery_title(area/A,title,oldtitle)
 	if (!oldtitle) // or replacetext goes to infinite loop
 		return
 
@@ -156,7 +156,7 @@
 		M.SetName(replacetext(M.name,oldtitle,title))
 	//TODO: much much more. Unnamed airlocks, cameras, etc.
 
-/obj/item/blueprints/proc/check_tile_is_border(var/turf/T2,var/dir)
+/obj/item/blueprints/proc/check_tile_is_border(turf/T2,dir)
 	if (istype(T2, /turf/space))
 		return BORDER_SPACE //omg hull breach we all going to die here
 	if (istype(T2, /turf/simulated/shuttle))
@@ -181,7 +181,7 @@
 
 	return BORDER_NONE
 
-/obj/item/blueprints/proc/detect_room(var/turf/first)
+/obj/item/blueprints/proc/detect_room(turf/first)
 	var/list/turf/found = new
 	var/list/turf/pending = list(first)
 	while(pending.len)
@@ -228,12 +228,12 @@
 /obj/item/blueprints/outpost/get_header()
 	return "<h2>Exoplanetary outpost blueprints</h2><small>Property of [GLOB.using_map.company_name].</small><hr>"
 
-/obj/item/blueprints/outpost/check_tile_is_border(var/turf/T2,var/dir)
+/obj/item/blueprints/outpost/check_tile_is_border(turf/T2,dir)
 	if (istype(T2, /turf/simulated/floor/exoplanet))
 		return BORDER_SPACE
 	. = ..()
 
-/obj/item/blueprints/outpost/get_area_type(var/area/A = get_area(src))
+/obj/item/blueprints/outpost/get_area_type(area/A = get_area(src))
 	if(istype(A, /area/exoplanet))
 		return AREA_SPACE
 	var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]

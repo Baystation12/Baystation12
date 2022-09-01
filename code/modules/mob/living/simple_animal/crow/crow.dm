@@ -48,7 +48,7 @@
 /mob/living/simple_animal/crow/GetIdCard()
 	return access_card
 
-/mob/living/simple_animal/crow/show_inv(var/mob/user)
+/mob/living/simple_animal/crow/show_inv(mob/user)
 	if(user.incapacitated())
 		return
 	var/list/dat = list()

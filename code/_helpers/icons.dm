@@ -827,7 +827,7 @@ The _flatIcons list is a cache for generated icon files.
 #define HOLOPAD_SHORT_RANGE 1 //For determining the color of holopads based on whether they're short or long range.
 #define HOLOPAD_LONG_RANGE 2
 
-/proc/getHologramIcon(icon/A, safety=1, noDecolor=FALSE, var/hologram_color=HOLOPAD_SHORT_RANGE)//If safety is on, a new icon is not created.
+/proc/getHologramIcon(icon/A, safety=1, noDecolor=FALSE, hologram_color=HOLOPAD_SHORT_RANGE)//If safety is on, a new icon is not created.
 	var/icon/flat_icon = safety ? A : new(A)//Has to be a new icon to not constantly change the same icon.
 	if (noDecolor == FALSE)
 		if(hologram_color == HOLOPAD_LONG_RANGE)
@@ -847,7 +847,7 @@ The _flatIcons list is a cache for generated icon files.
 		composite.Blend(icon(I.icon, I.icon_state, I.dir, 1), ICON_OVERLAY)
 	return composite
 
-/proc/adjust_brightness(var/color, var/value)
+/proc/adjust_brightness(color, value)
 	if (!color) return "#ffffff"
 	if (!value) return color
 
@@ -857,7 +857,7 @@ The _flatIcons list is a cache for generated icon files.
 	RGB[3] = clamp(RGB[3]+value,0,255)
 	return rgb(RGB[1],RGB[2],RGB[3])
 
-/proc/sort_atoms_by_layer(var/list/atoms)
+/proc/sort_atoms_by_layer(list/atoms)
 	// Comb sort icons based on levels
 	var/list/result = atoms.Copy()
 	var/gap = result.len
@@ -881,7 +881,7 @@ arguments tx, ty, tz are target coordinates (requred), range defines render dist
 cap_mode is capturing mode (optional), user is capturing mob (requred only wehen cap_mode = CAPTURE_MODE_REGULAR),
 lighting determines lighting capturing (optional), suppress_errors suppreses errors and continues to capture (optional).
 */
-/proc/generate_image(var/tx as num, var/ty as num, var/tz as num, var/range as num, var/cap_mode = CAPTURE_MODE_PARTIAL, var/mob/living/user, var/lighting = 1, var/suppress_errors = 1)
+/proc/generate_image(tx as num, ty as num, tz as num, range as num, cap_mode = CAPTURE_MODE_PARTIAL, mob/living/user, lighting = 1, suppress_errors = 1)
 	var/list/turfstocapture = list()
 	//Lines below determine what tiles will be rendered
 	for(var/xoff = 0 to range)

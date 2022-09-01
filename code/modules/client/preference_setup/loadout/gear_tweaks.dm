@@ -1,19 +1,19 @@
-/datum/gear_tweak/proc/get_contents(var/metadata)
+/datum/gear_tweak/proc/get_contents(metadata)
 	return
 
-/datum/gear_tweak/proc/get_metadata(var/user, var/metadata, title)
+/datum/gear_tweak/proc/get_metadata(user, metadata, title)
 	return
 
 /datum/gear_tweak/proc/get_default()
 	return
 
-/datum/gear_tweak/proc/tweak_gear_data(var/metadata, var/datum/gear_data)
+/datum/gear_tweak/proc/tweak_gear_data(metadata, datum/gear_data)
 	return
 
-/datum/gear_tweak/proc/tweak_item(var/user, var/obj/item/I, var/metadata)
+/datum/gear_tweak/proc/tweak_item(user, obj/item/I, metadata)
 	return
 
-/datum/gear_tweak/proc/tweak_description(var/description, var/metadata)
+/datum/gear_tweak/proc/tweak_description(description, metadata)
 	return description
 
 /*

@@ -36,7 +36,7 @@
 	else
 		to_chat(user, "The disk is locked, you cannot see its contents.")
 
-/obj/item/disk/secret_project/emag_act(var/remaining_charges, var/mob/user)
+/obj/item/disk/secret_project/emag_act(remaining_charges, mob/user)
 	to_chat(user, "<span class='warning'>The cryptographic lock on this disk is far too complex. \
 	Your sequencer can't break the code.</span>")
 	return 0

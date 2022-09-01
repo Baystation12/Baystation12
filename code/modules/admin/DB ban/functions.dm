@@ -1,9 +1,9 @@
-/datum/admins/proc/DB_staffwarn_record(var/ckey, var/reason)
+/datum/admins/proc/DB_staffwarn_record(ckey, reason)
 	if(!check_rights((R_ADMIN|R_MOD), 0)) return
 	if(!istext(reason)) return
 	_DB_staffwarn_record(ckey, reason)
 
-/proc/_DB_staffwarn_record(var/ckey, var/reason)
+/proc/_DB_staffwarn_record(ckey, reason)
 	if(usr && !check_rights((R_ADMIN|R_MOD), 0))
 		return
 	var/dbreason = sql_sanitize_text(reason)
@@ -26,7 +26,7 @@
 	query.Execute()
 	to_chat(usr,"<span class='notice'>StaffWarn saved to DB</span>")
 
-/datum/admins/proc/DB_staffwarn_remove(var/ckey)
+/datum/admins/proc/DB_staffwarn_remove(ckey)
 	if(!check_rights((R_ADMIN|R_MOD), 0)) return
 	var/dbckey = sql_sanitize_text(ckey)
 
@@ -43,13 +43,13 @@
 	to_chat(usr,"<span class='notice'>StaffWarn removed from DB</span>")
 	return 1
 
-/datum/admins/proc/DB_ban_record(var/bantype, var/mob/banned_mob, var/duration = -1, var/reason, var/job = "", var/rounds = 0, var/banckey = null, var/banip = null, var/bancid = null)
+/datum/admins/proc/DB_ban_record(bantype, mob/banned_mob, duration = -1, reason, job = "", rounds = 0, banckey = null, banip = null, bancid = null)
 	if(!src || !src.owner)
 		return
 	_DB_ban_record(src.owner.ckey, src.owner.computer_id, src.owner.address, bantype, banned_mob, duration, reason, job, rounds, banckey, banip, bancid)
 
 //Either pass the mob you wish to ban in the 'banned_mob' attribute, or the banckey, banip and bancid variables. If both are passed, the mob takes priority! If a mob is not passed, banckey is the minimum that needs to be passed! banip and bancid are optional.
-/proc/_DB_ban_record(var/a_ckey, var/a_computerid, var/a_ip, var/bantype, var/mob/banned_mob, var/duration = -1, var/reason, var/job = "", var/rounds = 0, var/banckey = null, var/banip = null, var/bancid = null)
+/proc/_DB_ban_record(a_ckey, a_computerid, a_ip, bantype, mob/banned_mob, duration = -1, reason, job = "", rounds = 0, banckey = null, banip = null, bancid = null)
 
 	if(usr)
 		if(!check_rights(R_MOD,0) && !check_rights(R_BAN))	return
@@ -130,7 +130,7 @@
 
 
 
-/datum/admins/proc/DB_ban_unban(var/ckey, var/bantype, var/job = "")
+/datum/admins/proc/DB_ban_unban(ckey, bantype, job = "")
 
 	if(!check_rights(R_BAN))	return
 
@@ -194,7 +194,7 @@
 
 	DB_ban_unban_by_id(ban_id)
 
-/datum/admins/proc/DB_ban_edit(var/banid = null, var/param = null)
+/datum/admins/proc/DB_ban_edit(banid = null, param = null)
 
 	if(!check_rights(R_BAN))	return
 
@@ -254,7 +254,7 @@
 			to_chat(usr, "Cancelled")
 			return
 
-/datum/admins/proc/DB_ban_unban_by_id(var/id)
+/datum/admins/proc/DB_ban_unban_by_id(id)
 
 	if(!check_rights(R_BAN))	return
 
@@ -306,7 +306,7 @@
 	holder.DB_ban_panel()
 
 
-/datum/admins/proc/DB_ban_panel(var/playerckey = null, var/adminckey = null, var/playerip = null, var/playercid = null, var/dbbantype = null, var/match = null)
+/datum/admins/proc/DB_ban_panel(playerckey = null, adminckey = null, playerip = null, playercid = null, dbbantype = null, match = null)
 	if(!usr.client)
 		return
 

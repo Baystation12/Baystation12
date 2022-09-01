@@ -46,7 +46,7 @@
 		now off.</span>")
 		accepting_refs = FALSE
 
-/obj/item/device/integrated_electronics/debugger/proc/write_data(var/datum/integrated_io/io, mob/user)
+/obj/item/device/integrated_electronics/debugger/proc/write_data(datum/integrated_io/io, mob/user)
 	if(io.io_type == DATA_CHANNEL)
 		io.write_data_to_pin(data_to_write)
 		var/data_to_show = data_to_write

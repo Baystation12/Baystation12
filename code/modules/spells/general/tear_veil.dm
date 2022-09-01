@@ -24,7 +24,7 @@
 	hole.density = FALSE
 	return list(hole)
 
-/spell/tear_veil/cast(var/list/targets, var/mob/holder, var/channel_count)
+/spell/tear_veil/cast(list/targets, mob/holder, channel_count)
 	if(channel_count == 1)
 		return
 	var/type = pick(possible_spawns)
@@ -32,6 +32,6 @@
 	L.faction = holder.faction
 	L.visible_message("<span class='warning'>\A [L] escapes from the portal!</span>")
 
-/spell/tear_veil/after_spell(var/list/targets)
+/spell/tear_veil/after_spell(list/targets)
 	qdel(targets[1])
 	return

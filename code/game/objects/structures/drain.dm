@@ -11,7 +11,7 @@
 	can_drain = 1
 	var/welded
 
-/obj/structure/hygiene/drain/attackby(var/obj/item/thing, var/mob/user)
+/obj/structure/hygiene/drain/attackby(obj/item/thing, mob/user)
 	..()
 	if(isWelder(thing))
 		var/obj/item/weldingtool/WT = thing
@@ -51,7 +51,7 @@
 	icon_state = "drain"
 	var/constructed_type = /obj/structure/hygiene/drain
 
-/obj/item/drain/attackby(var/obj/item/thing, var/mob/user)
+/obj/item/drain/attackby(obj/item/thing, mob/user)
 	if(isWrench(thing))
 		new constructed_type(src.loc)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)

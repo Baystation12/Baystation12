@@ -13,7 +13,7 @@ var/global/const/NETWORK_THIRD_DECK  = "Third Deck"
 var/global/const/NETWORK_FIFTH_DECK  = "Fifth Deck"
 var/global/const/NETWORK_PETROV  = "Petrov"
 
-/datum/map/torch/get_network_access(var/network)
+/datum/map/torch/get_network_access(network)
 	switch(network)
 		if(NETWORK_AQUILA)
 			return access_aquila
@@ -187,7 +187,7 @@ var/global/const/NETWORK_COMMAND = "Command"
 var/global/const/NETWORK_ENGINE  = "Engine"
 var/global/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
 
-/datum/map/proc/get_shared_network_access(var/network)
+/datum/map/proc/get_shared_network_access(network)
 	switch(network)
 		if(NETWORK_COMMAND)
 			return access_heads

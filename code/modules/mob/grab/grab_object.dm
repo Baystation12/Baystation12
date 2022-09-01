@@ -76,7 +76,7 @@
 
 	current_grab.hit_with_grab(src)
 
-/obj/item/grab/resolve_attackby(atom/A, mob/user, var/click_params)
+/obj/item/grab/resolve_attackby(atom/A, mob/user, click_params)
 	if (QDELETED(src) || !assailant)
 		return TRUE
 	assailant.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -199,7 +199,7 @@
 /obj/item/grab/proc/get_targeted_organ()
 	return (affecting?.get_organ(target_zone))
 
-/obj/item/grab/proc/resolve_item_attack(var/mob/living/M, var/obj/item/I, var/target_zone)
+/obj/item/grab/proc/resolve_item_attack(mob/living/M, obj/item/I, target_zone)
 	if((M && ishuman(M)) && I)
 		return current_grab.resolve_item_attack(src, M, I, target_zone)
 	else
@@ -224,7 +224,7 @@
 		if(prob(50))
 			C.ironed_state = WRINKLES_WRINKLY
 
-/obj/item/grab/proc/upgrade(var/bypass_cooldown = FALSE)
+/obj/item/grab/proc/upgrade(bypass_cooldown = FALSE)
 	if(!check_upgrade_cooldown() && !bypass_cooldown)
 		to_chat(assailant, "<span class='danger'>It's too soon to upgrade.</span>")
 		return
@@ -265,7 +265,7 @@
 /obj/item/grab/proc/handle_resist()
 	current_grab.handle_resist(src)
 
-/obj/item/grab/proc/adjust_position(var/force = 0)
+/obj/item/grab/proc/adjust_position(force = 0)
 	if(force)	affecting.forceMove(assailant.loc)
 
 	if(!assailant || !affecting || !assailant.Adjacent(affecting))

@@ -14,11 +14,11 @@
 	qdel(cell)
 	. = ..()
 
-/obj/item/stock_parts/power/battery/on_install(var/obj/machinery/machine)
+/obj/item/stock_parts/power/battery/on_install(obj/machinery/machine)
 	..()
 	start_processing(machine)
 
-/obj/item/stock_parts/power/battery/on_uninstall(var/obj/machinery/machine)
+/obj/item/stock_parts/power/battery/on_uninstall(obj/machinery/machine)
 	if(status & PART_STAT_ACTIVE)
 		machine.update_power_channel(cached_channel)
 		unset_status(machine, PART_STAT_ACTIVE)
@@ -28,7 +28,7 @@
 	..()
 
 // None of these helpers actually change the cell's loc. They only manage internal references and state.
-/obj/item/stock_parts/power/battery/proc/add_cell(var/obj/machinery/machine, var/obj/item/cell/new_cell)
+/obj/item/stock_parts/power/battery/proc/add_cell(obj/machinery/machine, obj/item/cell/new_cell)
 	if(cell)
 		return
 	cell = new_cell
@@ -67,7 +67,7 @@
 	if(machine)
 		machine.update_icon()
 
-/obj/item/stock_parts/power/battery/machine_process(var/obj/machinery/machine)
+/obj/item/stock_parts/power/battery/machine_process(obj/machinery/machine)
 	last_cell_charge = cell && cell.charge
 
 	if(status & PART_STAT_ACTIVE)
@@ -98,31 +98,31 @@
 	var/give = cell.give(charge_rate) / CELLRATE
 	A.use_power_oneoff(give, charge_channel)
 
-/obj/item/stock_parts/power/battery/can_provide_power(var/obj/machinery/machine)
+/obj/item/stock_parts/power/battery/can_provide_power(obj/machinery/machine)
 	if(cell && cell.check_charge(CELLRATE * machine.get_power_usage()))
 		machine.update_power_channel(LOCAL)
 		set_status(machine, PART_STAT_ACTIVE)
 		return TRUE
 	return FALSE
 
-/obj/item/stock_parts/power/battery/can_use_power_oneoff(var/obj/machinery/machine, var/amount, var/channel)
+/obj/item/stock_parts/power/battery/can_use_power_oneoff(obj/machinery/machine, amount, channel)
 	. = 0
 	if(cell && channel == LOCAL)
 		return min(cell.charge / CELLRATE, amount)
 
-/obj/item/stock_parts/power/battery/use_power_oneoff(var/obj/machinery/machine, var/amount, var/channel)
+/obj/item/stock_parts/power/battery/use_power_oneoff(obj/machinery/machine, amount, channel)
 	. = 0
 	if(cell && channel == LOCAL)
 		. = cell.use(amount * CELLRATE) / CELLRATE
 		charge_wait_counter = initial(charge_wait_counter) // If we are providing power, we wait to start charging.
 
-/obj/item/stock_parts/power/battery/not_needed(var/obj/machinery/machine)
+/obj/item/stock_parts/power/battery/not_needed(obj/machinery/machine)
 	if(status & PART_STAT_ACTIVE)
 		unset_status(machine, PART_STAT_ACTIVE)
 		charge_wait_counter = initial(charge_wait_counter)
 
 // Find a cell from the machine building materials if possible.
-/obj/item/stock_parts/power/battery/on_refresh(var/obj/machinery/machine)
+/obj/item/stock_parts/power/battery/on_refresh(obj/machinery/machine)
 	if(machine && !cell)
 		var/obj/item/stock_parts/building_material/mat = machine.get_component_of_type(/obj/item/stock_parts/building_material)
 		var/obj/item/cell/cell = mat && mat.remove_material(/obj/item/cell, 1)

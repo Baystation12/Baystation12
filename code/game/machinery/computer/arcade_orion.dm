@@ -69,7 +69,7 @@
 	var/port = 0
 	var/view = 0
 
-/obj/machinery/computer/arcade/orion_trail/proc/newgame(var/emag = 0)
+/obj/machinery/computer/arcade/orion_trail/proc/newgame(emag = 0)
 	SetName("orion trail[emag ? ": Realism Edition" : ""]")
 	supplies = list("1" = 1, "2" = 1, "3" = 1, "4" = 60, "5" = 20, "6" = 5000)
 	emagged = emag
@@ -276,7 +276,7 @@
 		event = ORION_TRAIL_SPACEPORT_RAIDED
 		return TOPIC_REFRESH
 
-/obj/machinery/computer/arcade/orion_trail/proc/change_resource(var/specific = null, var/add = 1)
+/obj/machinery/computer/arcade/orion_trail/proc/change_resource(specific = null, add = 1)
 	if(!specific)
 		specific = rand(1,6)
 	var/cost = (specific < 4 ? rand(1,5) : rand(5,100)) * add
@@ -288,7 +288,7 @@
 	supplies["[specific]"] += cost
 	event_info += "You've [add > 0 ? "gained" : "lost"] [abs(cost)] [supply_name["[specific]"]]<BR>"
 
-/obj/machinery/computer/arcade/orion_trail/proc/remove_settler(var/specific = null, var/desc = null)
+/obj/machinery/computer/arcade/orion_trail/proc/remove_settler(specific = null, desc = null)
 	if(!settlers.len)
 		return
 	if(!specific)
@@ -299,7 +299,7 @@
 	if(num_traitors > 0 && prob(100/max(1,settlers.len-1)))
 		num_traitors--
 
-/obj/machinery/computer/arcade/orion_trail/proc/generate_event(var/specific = null)
+/obj/machinery/computer/arcade/orion_trail/proc/generate_event(specific = null)
 	if(!specific)
 		if(prob(20*num_traitors))
 			specific = ORION_TRAIL_MUTINY_ATTACK
@@ -397,7 +397,7 @@
 		emag_effect(specific)
 	event = specific
 
-/obj/machinery/computer/arcade/orion_trail/proc/emag_effect(var/event)
+/obj/machinery/computer/arcade/orion_trail/proc/emag_effect(event)
 	switch(event)
 		if(ORION_TRAIL_RAIDERS)
 			if(istype(usr,/mob/living/carbon))

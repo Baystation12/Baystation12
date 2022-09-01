@@ -14,7 +14,7 @@
 /datum/artifact_effect/dnaswitch/proc/get_feeling()
 	return pick(" feel a little different"," feel very strange","r stomach churns","r skin feels loose"," feel a stabbing pain in your head"," feel a tingling sensation in your chest","r entire body vibrates")
 
-/datum/artifact_effect/dnaswitch/DoEffectTouch(var/mob/toucher)
+/datum/artifact_effect/dnaswitch/DoEffectTouch(mob/toucher)
 	var/weakness = GetAnomalySusceptibility(toucher)
 	if(ishuman(toucher) && prob(weakness * 100))
 		to_chat(toucher, "<span class='alium'>You[get_feeling()].</span>")

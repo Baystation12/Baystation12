@@ -14,7 +14,7 @@
 	command_announcement.Announce("A solar storm has been detected approaching the [location_name()]. Please halt all EVA activites immediately and return inside.", "[location_name()] Sensor Array", zlevels = affecting_z)
 	adjust_solar_output(1.5)
 
-/datum/event/solar_storm/proc/adjust_solar_output(var/mult = 1)
+/datum/event/solar_storm/proc/adjust_solar_output(mult = 1)
 	if(isnull(base_solar_gen_rate)) base_solar_gen_rate = solar_gen_rate
 	solar_gen_rate = mult * base_solar_gen_rate
 

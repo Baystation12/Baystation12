@@ -1,4 +1,4 @@
-/atom/proc/Value(var/base)
+/atom/proc/Value(base)
 	return base
 
 /obj/Value()
@@ -18,7 +18,7 @@
 /obj/structure/bed/Value()
 	return ..() * material.value
 
-/obj/item/slime_extract/Value(var/base)
+/obj/item/slime_extract/Value(base)
 	return base * Uses
 
 /obj/item/ammo_casing/Value()
@@ -37,7 +37,7 @@
 /datum/reagent/proc/Value()
 	return value
 
-/obj/item/stack/Value(var/base)
+/obj/item/stack/Value(base)
 	return base * amount
 
 /obj/item/stack/material/Value()
@@ -54,7 +54,7 @@
 /obj/item/spacecash/Value()
 	return worth
 
-/mob/living/carbon/human/Value(var/base)
+/mob/living/carbon/human/Value(base)
 	. = ..()
 	if(species)
 		. *= species.rarity_value

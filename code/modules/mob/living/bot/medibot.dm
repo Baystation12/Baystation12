@@ -42,7 +42,7 @@
 				last_newpatient_speak = world.time
 			break
 
-/mob/living/bot/medbot/UnarmedAttack(var/mob/living/carbon/human/H, var/proximity)
+/mob/living/bot/medbot/UnarmedAttack(mob/living/carbon/human/H, proximity)
 	if(!..())
 		return
 
@@ -93,7 +93,7 @@
 	else
 		icon_state = "medibot[on]"
 
-/mob/living/bot/medbot/attackby(var/obj/item/O, var/mob/user)
+/mob/living/bot/medbot/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/reagent_containers/glass))
 		if(locked)
 			to_chat(user, "<span class='notice'>You cannot insert a beaker because the panel is locked.</span>")
@@ -149,7 +149,7 @@
 		if(2)
 			. += "ERROROROROROR-----"
 
-/mob/living/bot/medbot/ProcessCommand(var/mob/user, var/command, var/href_list)
+/mob/living/bot/medbot/ProcessCommand(mob/user, command, href_list)
 	..()
 	if(CanAccessPanel(user))
 		switch(command)
@@ -184,7 +184,7 @@
 				if(emagged < 2)
 					emagged = !emagged
 
-/mob/living/bot/medbot/emag_act(var/remaining_uses, var/mob/user)
+/mob/living/bot/medbot/emag_act(remaining_uses, mob/user)
 	. = ..()
 	if(!emagged)
 		if(user)
@@ -220,7 +220,7 @@
 	qdel(src)
 	return
 
-/mob/living/bot/medbot/confirmTarget(var/mob/living/carbon/human/H)
+/mob/living/bot/medbot/confirmTarget(mob/living/carbon/human/H)
 	if(!..())
 		return 0
 

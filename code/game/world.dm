@@ -459,7 +459,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 			return "Database connection failed or not set up"
 
 
-/world/Reboot(var/reason)
+/world/Reboot(reason)
 	/*spawn(0)
 		sound_to(world, sound(pick('sound/AI/newroundsexy.ogg','sound/misc/apcdestroyed.ogg','sound/misc/bangindonk.ogg')))// random end sounds!! - LastyBatsy
 
@@ -498,7 +498,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 			SSticker.master_mode = Lines[1]
 			log_misc("Saved mode is '[SSticker.master_mode]'")
 
-/world/proc/save_mode(var/the_mode)
+/world/proc/save_mode(the_mode)
 	var/F = file("data/mode.txt")
 	fdel(F)
 	to_file(F, the_mode)

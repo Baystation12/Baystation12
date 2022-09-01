@@ -16,21 +16,21 @@ GLOBAL_DATUM_INIT(changelings, /datum/antagonist/changeling, new)
 /datum/antagonist/changeling/get_welcome_text(mob/recipient)
 	return replacetext(welcome_text, "%LANGUAGE_PREFIX%", recipient?.get_prefix_key(/decl/prefix/language) || ",")
 
-/datum/antagonist/changeling/get_special_objective_text(var/datum/mind/player)
+/datum/antagonist/changeling/get_special_objective_text(datum/mind/player)
 	return "<br><b>Changeling ID:</b> [player.changeling.changelingID].<br><b>Genomes Absorbed:</b> [player.changeling.absorbedcount]"
 
-/datum/antagonist/changeling/update_antag_mob(var/datum/mind/player)
+/datum/antagonist/changeling/update_antag_mob(datum/mind/player)
 	..()
 	player.current.make_changeling()
 
-/datum/antagonist/changeling/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
+/datum/antagonist/changeling/remove_antagonist(datum/mind/player, show_message, implanted)
 	. = ..()
 	if(. && player && player.current)
 		player.current.remove_changeling_powers()
 		player.current.verbs -= /datum/changeling/proc/EvolutionMenu
 		QDEL_NULL(player.changeling)
 
-/datum/antagonist/changeling/create_objectives(var/datum/mind/changeling)
+/datum/antagonist/changeling/create_objectives(datum/mind/changeling)
 	if(!..())
 		return
 
@@ -67,7 +67,7 @@ GLOBAL_DATUM_INIT(changelings, /datum/antagonist/changeling, new)
 				changeling.objectives += survive_objective
 	return
 
-/datum/antagonist/changeling/can_become_antag(var/datum/mind/player, var/ignore_role)
+/datum/antagonist/changeling/can_become_antag(datum/mind/player, ignore_role)
 	if(..())
 		if(player.current)
 			if(ishuman(player.current))

@@ -10,7 +10,7 @@
 	var/name
 
 
-/decl/ai_holo/proc/may_be_used_by_ai(var/mob/living/silicon/ai/AI)
+/decl/ai_holo/proc/may_be_used_by_ai(mob/living/silicon/ai/AI)
 	return !requires_malf || AI.is_malf_or_traitor()
 
 /decl/ai_holo/New()

@@ -92,7 +92,7 @@
 	PL.synths = list(plasteel)
 	. = ..()
 
-/obj/item/robot_module/flying/repair/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/flying/repair/respawn_consumable(mob/living/silicon/robot/R, amount)
 	var/obj/item/device/lightreplacer/LR = locate() in equipment
 	if(LR)
 		LR.Charge(R, amount)

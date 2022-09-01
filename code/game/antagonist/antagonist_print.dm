@@ -30,10 +30,10 @@
 	to_world(jointext(text,null))
 
 
-/datum/antagonist/proc/print_objective(var/datum/objective/O, var/num)
+/datum/antagonist/proc/print_objective(datum/objective/O, num)
 	return "<br><b>Objective [num]:</b> [O.explanation_text] "
 
-/datum/antagonist/proc/print_player(var/datum/mind/ply)
+/datum/antagonist/proc/print_player(datum/mind/ply)
 	var/role = ply.assigned_role ? "\improper[ply.assigned_role]" : (ply.special_role ? "\improper[ply.special_role]" : "unknown role")
 	var/text = "<br><b>[ply.name]</b> [(ply.current?.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW) ? "(<b>[ply.key]</b>)" : ""] as \a <b>[role]</b> ("
 	if(ply.current)

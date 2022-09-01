@@ -2,7 +2,7 @@
 	if(!leader && current_antagonists.len && (flags & ANTAG_HAS_LEADER))
 		leader = current_antagonists[1]
 
-/datum/antagonist/proc/update_antag_mob(var/datum/mind/player, var/preserve_appearance)
+/datum/antagonist/proc/update_antag_mob(datum/mind/player, preserve_appearance)
 
 	// Get the mob.
 	if((flags & ANTAG_OVERRIDE_MOB) && (!player.current || (mob_path && !istype(player.current, mob_path))))
@@ -18,18 +18,18 @@
 				H.change_appearance(APPEARANCE_COMMON, TRUE, state = GLOB.z_state)
 	return player.current
 
-/datum/antagonist/proc/update_access(var/mob/living/player)
+/datum/antagonist/proc/update_access(mob/living/player)
 	for(var/obj/item/card/id/id in player.contents)
 		player.set_id_info(id)
 
-/datum/antagonist/proc/clear_indicators(var/datum/mind/recipient)
+/datum/antagonist/proc/clear_indicators(datum/mind/recipient)
 	if(!recipient.current || !recipient.current.client)
 		return
 	for(var/image/I in recipient.current.client.images)
 		if(I.icon_state == antag_indicator || (faction_indicator && I.icon_state == faction_indicator))
 			qdel(I)
 
-/datum/antagonist/proc/get_indicator(var/datum/mind/recipient, var/datum/mind/other)
+/datum/antagonist/proc/get_indicator(datum/mind/recipient, datum/mind/other)
 	if(!antag_indicator || !other.current || !recipient.current)
 		return
 	var/indicator = (faction_indicator && (other in faction_members)) ? faction_indicator : antag_indicator
@@ -51,7 +51,7 @@
 			if(antag.current && antag.current.client)
 				antag.current.client.images |= get_indicator(antag, other_antag)
 
-/datum/antagonist/proc/update_icons_added(var/datum/mind/player)
+/datum/antagonist/proc/update_icons_added(datum/mind/player)
 	if(!antag_indicator || !player.current)
 		return
 	spawn(0)
@@ -67,7 +67,7 @@
 			if(player.current.client)
 				player.current.client.images |= get_indicator(player, antag)
 
-/datum/antagonist/proc/update_icons_removed(var/datum/mind/player)
+/datum/antagonist/proc/update_icons_removed(datum/mind/player)
 	if(!antag_indicator || !player.current)
 		return
 	spawn(0)

@@ -24,13 +24,13 @@
 		floor.doors -= src
 	return ..()
 
-/obj/machinery/door/airlock/lift/bumpopen(var/mob/user)
+/obj/machinery/door/airlock/lift/bumpopen(mob/user)
 	return // No accidental sprinting into open elevator shafts.
 
 /obj/machinery/door/airlock/lift/allowed(mob/M)
 	return FALSE //only the lift machinery is allowed to operate this door
 
-/obj/machinery/door/airlock/lift/close(var/forced=0)
+/obj/machinery/door/airlock/lift/close(forced=0)
 	for(var/turf/turf in locs)
 		for(var/mob/living/LM in turf)
 			if(LM.mob_size <= MOB_TINY)

@@ -44,7 +44,7 @@
 	return 1
 
 
-/mob/living/simple_animal/proc/handle_atmos(var/atmos_suitable = 1)
+/mob/living/simple_animal/proc/handle_atmos(atmos_suitable = 1)
 	//Atmos
 
 	if(!loc)
@@ -93,10 +93,10 @@
 /mob/living/simple_animal/gib()
 	..(icon_gib,1)
 
-/mob/living/simple_animal/proc/visible_emote(var/act_desc)
+/mob/living/simple_animal/proc/visible_emote(act_desc)
 	custom_emote(1, act_desc)
 
-/mob/living/simple_animal/proc/audible_emote(var/act_desc)
+/mob/living/simple_animal/proc/audible_emote(act_desc)
 	custom_emote(2, act_desc)
 
 /mob/living/simple_animal/proc/handle_special()

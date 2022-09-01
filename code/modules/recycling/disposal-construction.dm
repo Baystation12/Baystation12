@@ -17,7 +17,7 @@
 	var/constructed_path = /obj/structure/disposalpipe
 	var/built_icon_state
 
-/obj/structure/disposalconstruct/New(loc, var/P = null)
+/obj/structure/disposalconstruct/New(loc, P = null)
 	. = ..()
 	if(P)
 		if(istype(P, /obj/structure/disposalpipe))//Unfortunately a necessary evil since some things are machines and other things are structures
@@ -66,7 +66,7 @@
 
 // hide called by levelupdate if turf intact status changes
 // change visibility status and force update of icon
-/obj/structure/disposalconstruct/hide(var/intact)
+/obj/structure/disposalconstruct/hide(intact)
 	set_invisibility((intact && level==1) ? 101: 0)	// hide if floor is intact
 	update()
 
@@ -99,7 +99,7 @@
 	else
 		icon_state = built_icon_state
 
-/obj/structure/disposalconstruct/proc/flip_dirs(var/flipvalue)
+/obj/structure/disposalconstruct/proc/flip_dirs(flipvalue)
 	. = dir
 	if(flipvalue & DISPOSAL_FLIP_FLIP)
 		. |= turn(dir,180)
@@ -121,7 +121,7 @@
 // attackby item
 // wrench: (un)anchor
 // weldingtool: convert to real pipe
-/obj/structure/disposalconstruct/attackby(var/obj/item/I, var/mob/user)
+/obj/structure/disposalconstruct/attackby(obj/item/I, mob/user)
 	var/turf/T = loc
 	if(!istype(T))
 		return

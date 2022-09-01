@@ -142,7 +142,7 @@
 		need_player_check = 1
 		update_icon()
 
-/obj/machinery/mining/drill/proc/set_active(var/new_active)
+/obj/machinery/mining/drill/proc/set_active(new_active)
 	if(active != new_active)
 		active = new_active
 		update_use_power(active ? POWER_USE_ACTIVE : POWER_USE_OFF)
@@ -216,7 +216,7 @@
 
 	update_icon()
 
-/obj/machinery/mining/drill/proc/system_error(var/error)
+/obj/machinery/mining/drill/proc/system_error(error)
 
 	if(error)
 		src.visible_message("<span class='notice'>\The [src] flashes a '[error]' warning.</span>")

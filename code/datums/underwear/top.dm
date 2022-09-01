@@ -7,7 +7,7 @@
 	always_last = TRUE
 	underwear_type = null
 
-/datum/category_item/underwear/top/none/is_default(var/gender)
+/datum/category_item/underwear/top/none/is_default(gender)
 	return gender != FEMALE
 
 /datum/category_item/underwear/top/bra
@@ -16,7 +16,7 @@
 	icon_state = "bra"
 	has_color = TRUE
 
-/datum/category_item/underwear/top/bra/is_default(var/gender)
+/datum/category_item/underwear/top/bra/is_default(gender)
 	return gender == FEMALE
 
 /datum/category_item/underwear/top/sports_bra

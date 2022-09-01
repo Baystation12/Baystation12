@@ -7,7 +7,7 @@
 	var/datum/remote_target
 	var/datum/topic_state/remoter_state
 
-/datum/topic_state/remote/New(var/remoter, var/remote_target, var/datum/topic_state/remoter_state = GLOB.default_state)
+/datum/topic_state/remote/New(remoter, remote_target, datum/topic_state/remoter_state = GLOB.default_state)
 	src.remoter = remoter
 	src.remote_target = remote_target
 	src.remoter_state = remoter_state
@@ -22,7 +22,7 @@
 	remote_target = null
 	return ..()
 
-/datum/topic_state/remote/can_use_topic(var/datum/src_object, var/mob/user)
+/datum/topic_state/remote/can_use_topic(datum/src_object, mob/user)
 	if(!(remoter && remoter_state))	// The remoter is gone, let us leave
 		return STATUS_CLOSE
 

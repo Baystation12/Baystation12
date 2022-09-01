@@ -43,13 +43,13 @@
 	var/list/blacklisted_species = RESTRICTED_SPECIES
 	var/list/whitelisted_species = UNRESTRICTED_SPECIES
 
-/datum/job/submap/New(var/datum/submap/_owner, var/abstract_job = FALSE)
+/datum/job/submap/New(datum/submap/_owner, abstract_job = FALSE)
 	if(!abstract_job)
 		spawnpoints = list()
 		owner = _owner
 		..()
 
-/datum/job/submap/is_species_allowed(var/datum/species/S)
+/datum/job/submap/is_species_allowed(datum/species/S)
 	if(LAZYLEN(whitelisted_species) && !(S.name in whitelisted_species))
 		return FALSE
 	if(S.name in blacklisted_species)
@@ -61,7 +61,7 @@
 			return FALSE
 	return TRUE
 
-/datum/job/submap/is_restricted(var/datum/preferences/prefs, var/feedback)
+/datum/job/submap/is_restricted(datum/preferences/prefs, feedback)
 	var/datum/species/S = all_species[prefs.species]
 	if(LAZYACCESS(minimum_character_age, S.get_bodytype()) && (prefs.age < minimum_character_age[S.get_bodytype()]))
 		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age[S.get_bodytype()]].</span>")
@@ -81,5 +81,5 @@
 			return TRUE
 	return FALSE
 
-/datum/job/submap/check_is_active(var/mob/M)
+/datum/job/submap/check_is_active(mob/M)
 	. = (..() && M.faction == owner.name)

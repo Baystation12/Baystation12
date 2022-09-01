@@ -95,7 +95,7 @@
 	desc = "this contract grants you a boon for signing it."
 	var/path
 
-/obj/item/contract/boon/New(var/newloc, var/new_path)
+/obj/item/contract/boon/New(newloc, new_path)
 	..(newloc)
 	if(new_path)
 		path = new_path
@@ -152,4 +152,3 @@
 /obj/item/contract/boon/wizard/charge
 	path = /spell/aoe_turf/charge
 	desc = "This contract is made of 100% post-consumer wizard."
-

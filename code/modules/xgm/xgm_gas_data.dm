@@ -93,7 +93,7 @@ var/global/datum/xgm_gas_data/gas_data
 	mouse_opacity = 0
 	var/gas_id
 
-/obj/effect/gas_overlay/proc/update_alpha_animation(var/new_alpha)
+/obj/effect/gas_overlay/proc/update_alpha_animation(new_alpha)
 	animate(src, alpha = new_alpha)
 	alpha = new_alpha
 	animate(src, alpha = 0.8 * new_alpha, time = 10, easing = SINE_EASING | EASE_OUT, loop = -1)

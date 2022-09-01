@@ -6,7 +6,7 @@
 	var/obj/item/holosign_creator/projector
 	icon_state = "holosign"
 
-/obj/structure/holosign/Initialize(var/maploading, var/source_projector)
+/obj/structure/holosign/Initialize(maploading, source_projector)
 	if(source_projector)
 		projector = source_projector
 		projector.signs += src

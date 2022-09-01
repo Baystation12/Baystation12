@@ -8,14 +8,14 @@
 	opacity = FALSE
 	var/next_use
 
-/obj/structure/adherent_pylon/attack_ai(var/mob/living/user)
+/obj/structure/adherent_pylon/attack_ai(mob/living/user)
 	if(Adjacent(user))
 		attack_hand(user)
 
-/obj/structure/adherent_pylon/attack_hand(var/mob/living/user)
+/obj/structure/adherent_pylon/attack_hand(mob/living/user)
 	charge_user(user)
 
-/obj/structure/adherent_pylon/proc/charge_user(var/mob/living/user)
+/obj/structure/adherent_pylon/proc/charge_user(mob/living/user)
 	if(next_use > world.time) return
 	next_use = world.time + 10
 	var/mob/living/carbon/human/H = user

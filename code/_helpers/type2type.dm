@@ -56,7 +56,7 @@
 		if ("SOUTHWEST") return 10
 
 // Converts an angle (degrees) into an ss13 direction
-/proc/angle2dir(var/degree)
+/proc/angle2dir(degree)
 	degree = (degree + 22.5) % 360 // 22.5 = 45 / 2
 	if (degree < 45)  return NORTH
 	if (degree < 90)  return NORTHEAST
@@ -68,7 +68,7 @@
 	return NORTH|WEST
 
 // Returns the north-zero clockwise angle in degrees, given a direction
-/proc/dir2angle(var/D)
+/proc/dir2angle(D)
 	switch (D)
 		if (NORTH)     return 0
 		if (SOUTH)     return 180
@@ -80,7 +80,7 @@
 		if (SOUTHWEST) return 225
 
 // Returns the angle in english
-/proc/angle2text(var/degree)
+/proc/angle2text(degree)
 	return dir2text(angle2dir(degree))
 
 // Converts a blend_mode constant to one acceptable to icon.Blend()
@@ -181,14 +181,14 @@
 /proc/isLeap(y)
 	return ((y) % 4 == 0 && ((y) % 100 != 0 || (y) % 400 == 0))
 
-/proc/atomtypes2nameassoclist(var/list/atom_types)
+/proc/atomtypes2nameassoclist(list/atom_types)
 	. = list()
 	for(var/atom_type in atom_types)
 		var/atom/A = atom_type
 		.[initial(A.name)] = atom_type
 	. = sortAssoc(.)
 
-/proc/atomtype2nameassoclist(var/atom_type)
+/proc/atomtype2nameassoclist(atom_type)
 	return atomtypes2nameassoclist(typesof(atom_type))
 
 //Splits the text of a file at seperator and returns them in a list.

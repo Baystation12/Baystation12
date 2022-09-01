@@ -7,7 +7,7 @@
 	density = TRUE
 	var/active = 1
 
-/obj/machinery/acting/wardrobe/attack_hand(var/mob/user as mob)
+/obj/machinery/acting/wardrobe/attack_hand(mob/user as mob)
 	user.show_message("You push a button and watch patiently as the machine begins to hum.")
 	if(active)
 		active = 0
@@ -24,7 +24,7 @@
 	anchored = TRUE
 	density = TRUE
 
-/obj/machinery/acting/changer/attack_hand(var/mob/user as mob)
+/obj/machinery/acting/changer/attack_hand(mob/user as mob)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		H.change_appearance(APPEARANCE_COMMON, TRUE, state = GLOB.z_state)

@@ -14,7 +14,7 @@
 		duration_of_stay -= 5
 	return --duration_of_stay > 0
 
-/datum/trader/ship/bribe_to_stay_longer(var/amt)
+/datum/trader/ship/bribe_to_stay_longer(amt)
 	if(prob(-disposition))
 		return ..()
 

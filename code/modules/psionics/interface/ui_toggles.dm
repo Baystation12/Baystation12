@@ -26,7 +26,7 @@
 	icon_state = "arrow_left"
 	var/obj/screen/psi/hub/controller
 
-/obj/screen/psi/toggle_psi_menu/New(var/mob/living/_owner, var/obj/screen/psi/hub/_controller)
+/obj/screen/psi/toggle_psi_menu/New(mob/living/_owner, obj/screen/psi/hub/_controller)
 	controller = _controller
 	..(_owner)
 

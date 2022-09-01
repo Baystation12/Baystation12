@@ -120,7 +120,7 @@
 	)
 	..()
 
-/datum/species/adherent/can_overcome_gravity(var/mob/living/carbon/human/H)
+/datum/species/adherent/can_overcome_gravity(mob/living/carbon/human/H)
 	. = FALSE
 	if(H && H.stat == CONSCIOUS)
 		for(var/obj/item/organ/internal/powered/float/float in H.internal_organs)
@@ -128,16 +128,16 @@
 				. = TRUE
 				break
 
-/datum/species/adherent/can_fall(var/mob/living/carbon/human/H)
+/datum/species/adherent/can_fall(mob/living/carbon/human/H)
 	. = !can_overcome_gravity(H)
 
-/datum/species/adherent/can_float(var/mob/living/carbon/human/H)
+/datum/species/adherent/can_float(mob/living/carbon/human/H)
 	return FALSE
 
-/datum/species/adherent/get_slowdown(var/mob/living/carbon/human/H)
+/datum/species/adherent/get_slowdown(mob/living/carbon/human/H)
 	return slowdown
 
-/datum/species/adherent/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
+/datum/species/adherent/handle_fall_special(mob/living/carbon/human/H, turf/landing)
 	var/float_is_usable = FALSE
 	if(H && H.stat == CONSCIOUS)
 		for(var/obj/item/organ/internal/powered/float/float in H.internal_organs)
@@ -162,7 +162,7 @@
 		if(2000 to 8000) . =  4
 		else             . =  8
 
-/datum/species/adherent/get_additional_examine_text(var/mob/living/carbon/human/H)
+/datum/species/adherent/get_additional_examine_text(mob/living/carbon/human/H)
 	if(can_overcome_gravity(H)) return "\nThey are floating on a cloud of shimmering distortion."
 
 /datum/hud_data/adherent
@@ -175,5 +175,5 @@
 		"belt" =  list("loc" = ui_belt,      "name" = "Belt",     "slot" = slot_belt,    "state" = "belt")
 	)
 
-/datum/species/adherent/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
+/datum/species/adherent/post_organ_rejuvenate(obj/item/organ/org, mob/living/carbon/human/H)
 	org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL|ORGAN_ROBOTIC)

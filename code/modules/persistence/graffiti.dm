@@ -13,7 +13,7 @@
 	var/graffiti_age = 0
 	var/author = "unknown"
 
-/obj/effect/decal/writing/New(var/newloc, var/_age, var/_message, var/_author)
+/obj/effect/decal/writing/New(newloc, _age, _message, _author)
 	..(newloc)
 	if(!isnull(_age))
 		graffiti_age = _age
@@ -38,7 +38,7 @@
 	. = ..(user)
 	to_chat(user,  "It reads \"[message]\".")
 
-/obj/effect/decal/writing/attackby(var/obj/item/thing, var/mob/user)
+/obj/effect/decal/writing/attackby(obj/item/thing, mob/user)
 	if(isWelder(thing))
 		var/obj/item/weldingtool/welder = thing
 		if(welder.isOn() && welder.remove_fuel(0,user) && do_after(user, 0.5 SECONDS, src, DO_PUBLIC_UNIQUE) && !QDELETED(src))

@@ -46,7 +46,7 @@
 
 // Updates what the eye can see. It is recommended you use this when the eye moves or its location is set.
 
-/datum/visualnet/proc/update_eye_chunks(mob/observer/eye/eye, var/full_update = FALSE)
+/datum/visualnet/proc/update_eye_chunks(mob/observer/eye/eye, full_update = FALSE)
 	. = list()
 	var/turf/T = get_turf(eye)
 	if(T)
@@ -81,7 +81,7 @@
 
 // Updates the chunks that the turf is located in. Use this when obstacles are destroyed or	when doors open.
 
-/datum/visualnet/proc/update_visibility(atom/A, var/opacity_check = TRUE)
+/datum/visualnet/proc/update_visibility(atom/A, opacity_check = TRUE)
 	if((GAME_STATE < RUNLEVEL_GAME) || (opacity_check && !A.opacity))
 		return
 	major_chunk_change(A)
@@ -90,12 +90,12 @@
 	update_visibility(A, FALSE)
 
 // Will check if an atom is on a viewable turf. Returns 1 if it is, otherwise returns 0.
-/datum/visualnet/proc/is_visible(var/atom/target)
+/datum/visualnet/proc/is_visible(atom/target)
 	// 0xf = 15
 	var/turf/position = get_turf(target)
 	return position && is_turf_visible(position)
 
-/datum/visualnet/proc/is_turf_visible(var/turf/position)
+/datum/visualnet/proc/is_turf_visible(turf/position)
 	if(!position)
 		return FALSE
 	var/datum/chunk/chunk = get_chunk(position.x, position.y, position.z)
@@ -108,10 +108,10 @@
 
 // Never access this proc directly!!!!
 // This will update the chunk and all the surrounding chunks.
-/datum/visualnet/proc/major_chunk_change(var/atom/source)
+/datum/visualnet/proc/major_chunk_change(atom/source)
 	for_all_chunks_in_range(source, /datum/chunk/proc/visibility_changed, list())
 
-/datum/visualnet/proc/add_source(var/atom/source, var/update_visibility = TRUE, var/opacity_check = FALSE)
+/datum/visualnet/proc/add_source(atom/source, update_visibility = TRUE, opacity_check = FALSE)
 	if(!(source && is_type_in_list(source, valid_source_types)))
 		log_visualnet("Was given an unhandled source", source)
 		return FALSE
@@ -125,7 +125,7 @@
 		update_visibility(source, opacity_check)
 	return TRUE
 
-/datum/visualnet/proc/remove_source(var/atom/source, var/update_visibility = TRUE, var/opacity_check = FALSE)
+/datum/visualnet/proc/remove_source(atom/source, update_visibility = TRUE, opacity_check = FALSE)
 	if(!sources.Remove(source))
 		return FALSE
 
@@ -136,7 +136,7 @@
 		update_visibility(source, opacity_check)
 	return TRUE
 
-/datum/visualnet/proc/source_moved(var/atom/movable/source, var/old_loc, var/new_loc)
+/datum/visualnet/proc/source_moved(atom/movable/source, old_loc, new_loc)
 	var/turf/old_turf = get_turf(old_loc)
 	var/turf/new_turf = get_turf(new_loc)
 
@@ -150,7 +150,7 @@
 	if(new_turf)
 		for_all_chunks_in_range(source, /datum/chunk/proc/add_source, list(source), new_turf)
 
-/datum/visualnet/proc/for_all_chunks_in_range(var/atom/source, var/proc_call, var/list/proc_args, var/turf/T)
+/datum/visualnet/proc/for_all_chunks_in_range(atom/source, proc_call, list/proc_args, turf/T)
 	T = T ? T : get_turf(source)
 	if(!T)
 		return
