@@ -125,8 +125,20 @@
 
 	return JOINTEXT(text)
 
+
+/datum/vote/proc/mob_can_vote(mob/voter)
+	if (check_rights(R_MOD, FALSE, voter))
+		return TRUE
+	if (config.vote_no_dead)
+		if (voter.stat == DEAD)
+			return FALSE
+		if (isghost(voter))
+			return FALSE
+	return TRUE
+
+
 /datum/vote/proc/submit_vote(mob/voter, vote)
-	if(mob_not_participating(voter))
+	if(!mob_can_vote(voter))
 		return
 
 	var/ckey = voter.ckey
@@ -149,14 +161,6 @@
 		if(votes[ckey][1] == vote)
 			choices[choice] += 1
 
-// Checks if the mob is participating in the round sufficiently to vote, as per config settings.
-/datum/vote/proc/mob_not_participating(mob/voter)
-	if (check_rights(EMPTY_BITFIELD, FALSE, voter))
-		return FALSE
-	if (config.vote_no_dead && voter.stat == DEAD)
-		return TRUE
-	return FALSE
-
 
 //null = no toggle set. This is for UI purposes; a text return will give a link (toggle; currently "return") in the vote panel.
 /datum/vote/proc/check_toggle()
@@ -177,7 +181,7 @@
 
 /datum/vote/proc/interface(mob/user)
 	. = list()
-	if(mob_not_participating(user))
+	if(!mob_can_vote(user))
 		. += "<h2>You can't participate in this vote unless you're participating in the round.</h2><br>"
 		return
 	if(question)
