@@ -171,7 +171,7 @@
 
 
 /obj/item/rcd/mounted/useResource(amount, mob/user)
-	var/cost = amount*35 // About 9 deconstructions of walls on a good cell, less if it involves airlocks.
+	var/cost = amount*20 // About 5 deconstructions of walls on a standard cell (1k), less if it involves airlocks.
 	var/obj/item/cell/cell
 	if(istype(loc,/obj/item/rig_module))
 		var/obj/item/rig_module/module = loc
