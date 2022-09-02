@@ -800,6 +800,10 @@
 	desc = "A farwa plush doll. It's soft and comforting!"
 	icon_state = "farwaplushie"
 
+/obj/item/toy/plushie/thoom
+	name = "th'oom plush"
+	desc = "A plush Th'oom with big, button eyes. It smells like mushrooms."
+	icon_state = "thoomplushie"
 
 //Toy cult sword
 /obj/item/toy/cultsword
