@@ -1,0 +1,3125 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"al" = (
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -23;
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"aq" = (
+/obj/effect/paint/iccgn,
+/turf/simulated/wall/titanium,
+/area/map_template/sfv_arbiter)
+"au" = (
+/obj/structure/extinguisher_cabinet{
+	pixel_y = 32
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/corner/grey{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"aR" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"by" = (
+/obj/structure/table/standard,
+/obj/item/storage/firstaid/adv,
+/obj/item/storage/firstaid/adv,
+/obj/item/storage/firstaid/adv,
+/obj/item/storage/firstaid/adv,
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"bM" = (
+/obj/structure/table/standard,
+/obj/item/defibrillator/loaded{
+	pixel_y = 7
+	},
+/obj/item/roller{
+	pixel_x = 6
+	},
+/obj/item/roller{
+	pixel_x = -8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"cv" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"cx" = (
+/obj/structure/catwalk,
+/obj/effect/floor_decal/industrial/warning/corner,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"cQ" = (
+/obj/structure/bed/chair/shuttle/black{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/red{
+	dir = 9;
+	icon_state = "corner_white"
+	},
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"da" = (
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "rescuebridge";
+	name = "Cockpit Blast Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	color = "#4c535b"
+	},
+/obj/effect/paint/iccgn,
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"dd" = (
+/obj/effect/floor_decal/industrial/warning/corner,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"df" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"dn" = (
+/obj/structure/table/standard,
+/obj/item/storage/belt/medical/emt,
+/obj/item/storage/belt/medical/emt,
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"dv" = (
+/obj/structure/closet/secure_closet/chemical,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 2;
+	level = 2
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"dR" = (
+/obj/structure/bed/chair/shuttle/black{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/grey/mono,
+/obj/item/clothing/head/helmet,
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_x = 32
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"et" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/floor_decal/corner/red,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"eQ" = (
+/obj/machinery/recharger/wallcharger{
+	dir = 1;
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"fu" = (
+/obj/structure/sign/warning/docking_area,
+/obj/effect/paint/iccgn,
+/turf/simulated/wall/titanium,
+/area/map_template/sfv_arbiter)
+"fO" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/obj/structure/table/glass,
+/obj/item/reagent_containers/glass/beaker/cryoxadone{
+	pixel_x = 0;
+	pixel_y = 0
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"gS" = (
+/obj/machinery/access_button/airlock_exterior{
+	frequency = 1380;
+	master_tag = "sfv_arbiter_shuttle";
+	pixel_x = 8;
+	pixel_y = 24
+	},
+/turf/template_noop,
+/area/template_noop)
+"hz" = (
+/obj/machinery/atmospherics/unary/tank{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/outline/blue,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/sfv_arbiter)
+"ip" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/item/paper_bin{
+	pixel_x = -5
+	},
+/obj/item/pen,
+/obj/effect/floor_decal/corner/red/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"it" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "stripe"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"iD" = (
+/obj/structure/catwalk,
+/obj/item/stack/material/phoron/fifty,
+/obj/structure/closet/crate/radiation,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "stripe"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"jE" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/atmospherics/unary/cryo_cell,
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"jM" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 4;
+	icon_state = "corner_white"
+	},
+/obj/structure/bed/chair/shuttle/black{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/red{
+	dir = 9;
+	icon_state = "corner_white"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"kc" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/structure/table/rack{
+	dir = 4
+	},
+/obj/item/clothing/suit/storage/solgov/dress/fleet,
+/obj/item/clothing/suit/storage/solgov/dress/fleet,
+/obj/item/clothing/suit/storage/solgov/dress/fleet/command,
+/obj/item/clothing/suit/storage/solgov/dress/fleet/command,
+/obj/item/clothing/suit/storage/solgov/dress/fleet/flag,
+/obj/item/clothing/suit/storage/solgov/dress/fleet/flag,
+/obj/item/clothing/suit/storage/solgov/dress/fleet/officer,
+/obj/item/clothing/suit/storage/solgov/dress/fleet/officer,
+/obj/item/clothing/suit/storage/solgov/dress/fleet/snco,
+/obj/item/clothing/suit/storage/solgov/dress/fleet/snco,
+/obj/item/clothing/suit/storage/solgov/service/fleet,
+/obj/item/clothing/suit/storage/solgov/service/fleet,
+/obj/item/clothing/suit/storage/solgov/service/fleet/command,
+/obj/item/clothing/suit/storage/solgov/service/fleet/command,
+/obj/item/clothing/suit/storage/solgov/service/fleet/flag,
+/obj/item/clothing/suit/storage/solgov/service/fleet/flag,
+/obj/item/clothing/suit/storage/solgov/service/fleet/officer,
+/obj/item/clothing/suit/storage/solgov/service/fleet/officer,
+/obj/item/clothing/suit/storage/solgov/service/fleet/snco,
+/obj/item/clothing/suit/storage/solgov/service/fleet/snco,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"kF" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"kL" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"kU" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	id_tag = "sfv_arbiter_shuttle_pump_out_internal";
+	dir = 4
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	dir = 4;
+	display_name = "Primary Airlock";
+	frequency = 1380;
+	id_tag = "sfv_arbiter_shuttle";
+	pixel_x = -24;
+	pixel_y = 32;
+	req_access = list("ACCESS_CENT_GENERAL");
+	tag_exterior_sensor = "sfv_arbiter_shuttle_exterior_sensor"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/sfv_arbiter)
+"ld" = (
+/obj/machinery/shipsensors,
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"ll" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/item/tank/jetpack/oxygen,
+/obj/item/tank/jetpack/oxygen,
+/obj/item/tank/jetpack/oxygen,
+/obj/item/tank/jetpack/oxygen,
+/obj/item/tank/jetpack/oxygen,
+/obj/item/tank/jetpack/oxygen,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"lu" = (
+/obj/machinery/access_button/airlock_interior{
+	frequency = 1380;
+	master_tag = "sfv_arbiter_shuttle";
+	pixel_x = -24;
+	pixel_y = -24
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"lA" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"lE" = (
+/turf/simulated/wall/titanium,
+/area/map_template/sfv_arbiter)
+"lO" = (
+/obj/machinery/portable_atmospherics/canister/oxygen{
+	maximum_pressure = 15000.00;
+	start_pressure = 12000.00
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"nx" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/sfv_arbiter)
+"nG" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/structure/extinguisher_cabinet{
+	pixel_x = 32
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"nQ" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"nU" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 9;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"oa" = (
+/obj/structure/closet/radiation,
+/obj/effect/floor_decal/corner/yellow{
+	dir = 1
+	},
+/obj/item/device/radio/headset/sfv_arbiter,
+/obj/item/device/radio/headset/sfv_arbiter,
+/obj/item/device/radio/headset/sfv_arbiter,
+/obj/item/device/radio/headset/sfv_arbiter,
+/obj/item/device/radio/headset/sfv_arbiter,
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"od" = (
+/obj/effect/floor_decal/corner/grey{
+	dir = 5
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"ow" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/device/binoculars,
+/obj/item/device/binoculars,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"oP" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/cyan,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/sfv_arbiter)
+"pa" = (
+/obj/structure/table/rack,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"pd" = (
+/obj/structure/table/rack,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"qk" = (
+/obj/structure/table/rack,
+/obj/machinery/light,
+/obj/item/storage/box/ammo/shotgunammo,
+/obj/item/storage/box/ammo/shotgunammo,
+/obj/item/storage/box/ammo/shotgunammo,
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"qn" = (
+/obj/machinery/bodyscanner{
+	dir = 4;
+	icon_state = "body_scanner_0"
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"qq" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/button/blast_door{
+	icon_state = "doorctrl0";
+	id_tag = "rescuebridge";
+	name = "Window Shutters Control";
+	pixel_x = 4
+	},
+/obj/effect/floor_decal/corner/blue/mono,
+/obj/item/device/radio/headset/sfv_arbiter,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"qt" = (
+/obj/effect/paint/black,
+/obj/machinery/vending/medical/torch,
+/turf/simulated/wall/titanium,
+/area/map_template/sfv_arbiter)
+"qv" = (
+/obj/machinery/airlock_sensor/airlock_exterior{
+	id_tag = "rescue_shuttle_sensor_external";
+	pixel_y = -21
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	icon_state = "map_vent_in";
+	pump_direction = 0
+	},
+/turf/simulated/floor/airless,
+/area/map_template/sfv_arbiter)
+"qy" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"qB" = (
+/obj/structure/bed/chair/shuttle/black{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/red/three_quarters,
+/obj/machinery/flasher{
+	id_tag = "rescueflash";
+	pixel_y = -25
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"qP" = (
+/obj/structure/bed/chair/shuttle/black{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/grey/mono,
+/obj/item/clothing/head/helmet,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"sH" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"sN" = (
+/obj/effect/floor_decal/corner/b_green/mono,
+/obj/structure/table/rack,
+/obj/machinery/door/window/eastleft{
+	req_access = list("ACCESS_SYNDICATE");
+	autoset_access = 0
+	},
+/obj/item/rig/ert/fleet,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"sS" = (
+/obj/machinery/airlock_sensor{
+	pixel_y = 24;
+	id_tag = s;
+	frequency = 1380
+	},
+/turf/template_noop,
+/area/template_noop)
+"tc" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"tP" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/corner/yellow/full,
+/obj/machinery/door/airlock/centcom{
+	name = "Armory";
+	opacity = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"ue" = (
+/obj/effect/floor_decal/corner/b_green/three_quarters{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"ut" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "rescuebridge";
+	name = "Cockpit Blast Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/structure/cable/cyan{
+	d2 = 2;
+	dir = 1;
+	icon_state = "0-2"
+	},
+/obj/effect/paint/iccgn,
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"uR" = (
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "rescuebridge";
+	name = "Cockpit Blast Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	color = "#4c535b"
+	},
+/obj/effect/paint/iccgn,
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"uY" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	icon_state = "map_vent_in";
+	pump_direction = 0;
+	dir = 1
+	},
+/turf/simulated/floor/airless,
+/area/map_template/sfv_arbiter)
+"vc" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/sfv_arbiter)
+"vu" = (
+/obj/structure/table/rack{
+	pixel_x = -1;
+	pixel_y = 32
+	},
+/obj/effect/floor_decal/corner/b_green/three_quarters{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"vK" = (
+/obj/effect/floor_decal/corner/b_green/mono,
+/obj/structure/table/rack,
+/obj/machinery/door/window/eastleft{
+	req_access = list("ACCESS_SYNDICATE");
+	autoset_access = 0
+	},
+/obj/item/rig/ert/fleet,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"vS" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/effect/paint/black,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "ert_brig";
+	name = "Holding Blast Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"vT" = (
+/obj/structure/closet/secure_closet/guncabinet{
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/item/gun/projectile/automatic/merc_smg,
+/obj/item/gun/projectile/automatic/merc_smg,
+/obj/item/gun/projectile/automatic/merc_smg,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/sfv_arbiter)
+"vY" = (
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "rescuebridge";
+	name = "Cockpit Blast Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/cyan,
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	color = "#4c535b"
+	},
+/obj/effect/paint/iccgn,
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"wW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/corner/yellow{
+	dir = 5;
+	icon_state = "corner_white"
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"xv" = (
+/obj/structure/table/standard,
+/obj/structure/closet/medical_wall{
+	pixel_y = -32
+	},
+/obj/random/medical,
+/obj/random/medical,
+/obj/item/clothing/mask/breath/medical,
+/obj/item/tank/anesthetic,
+/obj/item/clothing/mask/surgical,
+/obj/item/clothing/gloves/latex,
+/obj/item/reagent_containers/glass/bottle/stoxin,
+/obj/item/reagent_containers/glass/bottle/stoxin,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/bodybag/cryobag,
+/obj/item/bodybag/cryobag,
+/obj/effect/floor_decal/corner/white/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/sfv_arbiter)
+"xB" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "rescuebridge";
+	name = "Cockpit Blast Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/effect/paint/iccgn,
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"xW" = (
+/obj/effect/floor_decal/corner/blue/mono,
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/obj/machinery/turretid/lethal{
+	ailock = 1;
+	check_arrest = 0;
+	check_records = 0;
+	enabled = 0;
+	pixel_x = -4;
+	pixel_y = 28;
+	req_access = list("ACCESS_CENT_GENERAL")
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"xX" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"yb" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/paint/black,
+/obj/effect/overmap/visitable/ship/landable/sfv_arbiter,
+/turf/simulated/wall/titanium,
+/area/map_template/sfv_arbiter)
+"yf" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"zx" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/structure/extinguisher_cabinet{
+	pixel_y = -32
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"zZ" = (
+/obj/machinery/computer/ship/sensors,
+/obj/effect/floor_decal/corner/blue/mono,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"Ac" = (
+/obj/structure/table/rack,
+/obj/item/storage/box/flashbangs,
+/obj/item/storage/box/teargas,
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"AK" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/b_green/mono,
+/obj/structure/table/rack,
+/obj/machinery/door/window/eastleft{
+	req_access = list("ACCESS_SYNDICATE");
+	autoset_access = 0
+	},
+/obj/item/rig/ert/fleet,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Bb" = (
+/obj/machinery/computer/ship/engines,
+/obj/effect/floor_decal/corner/blue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"Bd" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Bq" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"BE" = (
+/obj/effect/floor_decal/corner/red/three_quarters{
+	dir = 4
+	},
+/obj/structure/bed/chair/shuttle/black{
+	dir = 8
+	},
+/obj/machinery/flasher{
+	id_tag = "rescueflash";
+	pixel_y = -25
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"BS" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1380;
+	id_tag = "sfv_arbiter_shuttle_inner"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/sfv_arbiter)
+"Cc" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Ci" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Cj" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/air/airlock{
+	start_pressure = 1900
+	},
+/obj/effect/floor_decal/industrial/outline,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/sfv_arbiter)
+"CT" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 8;
+	icon_state = "warningcorner"
+	},
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/sfv_arbiter)
+"Dk" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/machinery/body_scanconsole{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"Dx" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"DI" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/door/blast/regular/escape_pod{
+	id_tag = "rescuedock";
+	name = "External Blast Shield"
+	},
+/obj/effect/paint/iccgn,
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"DK" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"DL" = (
+/obj/structure/bed/chair/shuttle/black{
+	dir = 1
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"DU" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/item/device/radio/intercom/hailing{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Eh" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/sfv_arbiter)
+"Ei" = (
+/obj/effect/floor_decal/corner/b_green/three_quarters,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Ek" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/effect/floor_decal/corner/b_green/three_quarters{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Ew" = (
+/obj/structure/closet/secure_closet/guncabinet{
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/item/gun/energy/xray/pistol,
+/obj/item/gun/energy/xray/pistol,
+/obj/item/gun/energy/ionrifle,
+/obj/item/gun/projectile/pistol/military/alt,
+/obj/item/gun/projectile/pistol/military/alt,
+/obj/item/gun/projectile/pistol/military/alt,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/sfv_arbiter)
+"EP" = (
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "rescuebridge";
+	name = "Cockpit Blast Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/cyan{
+	d2 = 2;
+	dir = 1;
+	icon_state = "0-2"
+	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	color = "#4c535b"
+	},
+/obj/effect/paint/iccgn,
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"EQ" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "sfv_arbiter_shuttle_pump"
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/airlock_sensor{
+	pixel_y = 24;
+	id_tag = "sfv_arbiter_shuttle_sensor";
+	frequency = 1380
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/sfv_arbiter)
+"EU" = (
+/obj/structure/bed/chair/shuttle/black{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/grey/mono,
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/obj/item/clothing/head/helmet,
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_x = -32
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"EW" = (
+/obj/machinery/vitals_monitor,
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"EY" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/power/shield_generator,
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/sfv_arbiter)
+"FJ" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Gp" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"GR" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Hn" = (
+/obj/structure/window/reinforced/crescent{
+	dir = 8
+	},
+/obj/effect/paint/red,
+/turf/simulated/wall/r_titanium,
+/area/map_template/sfv_arbiter)
+"HJ" = (
+/obj/effect/floor_decal/corner/yellow{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"HQ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/sfv_arbiter)
+"HR" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5;
+	icon_state = "intact"
+	},
+/obj/effect/shuttle_landmark/sfv_arbiter/start,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/sfv_arbiter)
+"HT" = (
+/obj/structure/catwalk,
+/obj/structure/fireaxecabinet{
+	pixel_x = 32
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"HX" = (
+/obj/structure/table/rack,
+/obj/item/storage/toolbox/mechanical,
+/obj/item/storage/belt/utility/full,
+/obj/item/clothing/gloves/insulated,
+/obj/item/clothing/gloves/insulated,
+/obj/item/clothing/glasses/welding,
+/obj/item/clothing/glasses/welding,
+/obj/item/clothing/glasses/meson,
+/obj/item/clothing/glasses/meson,
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"Io" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Is" = (
+/obj/effect/floor_decal/corner/b_green/full,
+/obj/machinery/door/airlock/centcom{
+	name = "EVA";
+	opacity = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Iv" = (
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/plasteel/fifty,
+/obj/structure/closet/crate,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"IH" = (
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/sfv_arbiter)
+"IS" = (
+/obj/effect/paint/red,
+/turf/simulated/wall/r_titanium,
+/area/map_template/sfv_arbiter)
+"IU" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Jg" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "rescuebridge";
+	name = "Cockpit Blast Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/effect/paint/iccgn,
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"Jh" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular/escape_pod{
+	id_tag = "rescuedock";
+	name = "External Blast Shield"
+	},
+/obj/effect/paint/iccgn,
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"Jz" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/fabricator/hacked,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"JO" = (
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"Kq" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/obj/structure/table/rack,
+/obj/item/storage/box/handcuffs,
+/obj/item/storage/box/handcuffs,
+/obj/item/device/flash/advanced,
+/obj/item/device/flash/advanced,
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"Kt" = (
+/obj/effect/paint/black,
+/obj/structure/sign/warning/secure_area/armory,
+/turf/simulated/wall/titanium,
+/area/map_template/sfv_arbiter)
+"Kz" = (
+/obj/structure/catwalk,
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/power/debug_items/infinite_generator,
+/obj/structure/window/phoronreinforced,
+/obj/structure/window/phoronreinforced{
+	dir = 8
+	},
+/obj/structure/window/phoronreinforced{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"KK" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/door/blast/regular/escape_pod{
+	id_tag = "rescuedock";
+	name = "External Blast Shield"
+	},
+/obj/effect/paint/iccgn,
+/obj/effect/paint/iccgn,
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"KO" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "sfv_arbiter_shuttle_pump"
+	},
+/obj/machinery/access_button{
+	command = "cycle_interior";
+	frequency = 1331;
+	master_tag = "rescue_shuttle";
+	name = "interior access button";
+	pixel_x = 24;
+	req_access = list("ACCESS_CENT_SPECOPS")
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/sfv_arbiter)
+"Ll" = (
+/obj/machinery/computer/ship/helm{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/corner/blue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"Lr" = (
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/wall/r_titanium,
+/area/map_template/sfv_arbiter)
+"Ls" = (
+/obj/structure/bed/chair/shuttle/black{
+	dir = 8
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"LG" = (
+/obj/machinery/hologram/holopad/longrange,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"LO" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/effect/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"LU" = (
+/obj/structure/table/rack,
+/obj/effect/floor_decal/corner/b_green/mono,
+/obj/item/clothing/accessory/solgov/department/command/fleet,
+/obj/item/clothing/accessory/solgov/department/command/fleet,
+/obj/item/clothing/accessory/solgov/department/engineering/fleet,
+/obj/item/clothing/accessory/solgov/department/engineering/fleet,
+/obj/item/clothing/accessory/solgov/department/exploration/fleet,
+/obj/item/clothing/accessory/solgov/department/exploration/fleet,
+/obj/item/clothing/accessory/solgov/department/medical/fleet,
+/obj/item/clothing/accessory/solgov/department/medical/fleet,
+/obj/item/clothing/accessory/solgov/department/security/fleet,
+/obj/item/clothing/accessory/solgov/department/security/fleet,
+/obj/item/clothing/accessory/solgov/department/service/fleet,
+/obj/item/clothing/accessory/solgov/department/service/fleet,
+/obj/item/clothing/accessory/solgov/department/supply/fleet,
+/obj/item/clothing/accessory/solgov/department/supply/fleet,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"LZ" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Mi" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/telecomms/allinone/sfv_arbiter,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/sfv_arbiter)
+"Mo" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/b_green{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Mw" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/corner/red{
+	dir = 10
+	},
+/obj/effect/floor_decal/corner/b_green{
+	dir = 5;
+	icon_state = "corner_white"
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Mx" = (
+/obj/effect/paint/black,
+/obj/structure/sign/warning/high_voltage{
+	dir = 8;
+	icon_state = "shock"
+	},
+/turf/simulated/wall/titanium,
+/area/map_template/sfv_arbiter)
+"Ne" = (
+/obj/effect/floor_decal/corner/b_green{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Nf" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/button/blast_door{
+	icon_state = "doorctrl0";
+	id_tag = "rescuebridge";
+	name = "Window Shutters Control";
+	pixel_x = -4;
+	pixel_y = 4
+	},
+/obj/effect/floor_decal/corner/blue/mono,
+/obj/item/device/radio/headset/sfv_arbiter,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"Nh" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Nm" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "ert_brig";
+	pixel_y = 23
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Nn" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Nw" = (
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"Ny" = (
+/obj/machinery/recharger/wallcharger{
+	dir = 1;
+	pixel_y = -24
+	},
+/obj/structure/table/rack,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"NO" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/door/blast/regular/escape_pod{
+	id_tag = "rescuedock";
+	name = "External Blast Shield"
+	},
+/obj/effect/paint/iccgn,
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"NV" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/structure/table/steel_reinforced,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Oe" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/structure/table/steel_reinforced,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Og" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/paint/black,
+/turf/simulated/wall/titanium,
+/area/map_template/sfv_arbiter)
+"Oo" = (
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/wall/r_titanium,
+/area/map_template/sfv_arbiter)
+"Ov" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/door/airlock/centcom{
+	name = "Shields & Power";
+	opacity = 1
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"OJ" = (
+/obj/machinery/porta_turret{
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"Pj" = (
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Pp" = (
+/obj/effect/landmark/map_data,
+/obj/effect/overmap/visitable/sector/sfv_arbiter_space,
+/turf/template_noop,
+/area/template_noop)
+"Pr" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/obj/item/device/radio/intercom/specops{
+	dir = 8;
+	pixel_x = 22;
+	pixel_y = 0
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Pw" = (
+/obj/effect/floor_decal/corner/red/full,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "ert_brig";
+	name = "Holding Blast Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/airlock/centcom{
+	name = "Holding Area";
+	opacity = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"PE" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/corner/white/full,
+/obj/machinery/door/airlock/centcom{
+	name = "Medical";
+	opacity = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"Qh" = (
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/wall/r_titanium,
+/area/map_template/sfv_arbiter)
+"Qy" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/effect/paint/black,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "ert_brig";
+	name = "Holding Blast Shutters";
+	opacity = 0
+	},
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"QD" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/effect/paint/black,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "ert_brig";
+	name = "Holding Blast Shutters";
+	opacity = 0
+	},
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"QF" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/door/blast/regular/escape_pod{
+	id_tag = "rescuedock";
+	name = "External Blast Shield"
+	},
+/obj/effect/paint/iccgn,
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"QG" = (
+/obj/structure/catwalk,
+/obj/structure/closet/crate/bin{
+	name = "inflatables storage"
+	},
+/obj/item/inflatable_dispenser,
+/obj/item/inflatable_dispenser,
+/obj/item/inflatable_dispenser,
+/obj/item/grenade/chem_grenade/metalfoam,
+/obj/item/grenade/chem_grenade/metalfoam,
+/obj/item/grenade/chem_grenade/metalfoam,
+/obj/item/grenade/chem_grenade/metalfoam,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"QQ" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "stripe"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"QS" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"QT" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"RA" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	id_tag = "sfv_arbiter_shuttle_pump_out_internal";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/sfv_arbiter)
+"RK" = (
+/obj/effect/floor_decal/corner/blue/mono,
+/obj/machinery/light/spot,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"RM" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 8;
+	icon_state = "corner_white"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"RQ" = (
+/obj/structure/bed/chair/shuttle/black,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Sf" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"So" = (
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/black,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "ert_brig";
+	name = "Holding Blast Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"Sp" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Sw" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Sy" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 1;
+	icon_state = "corner_white"
+	},
+/obj/effect/floor_decal/corner/red{
+	dir = 6
+	},
+/obj/structure/bed/chair/shuttle/black{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"SH" = (
+/obj/machinery/optable,
+/obj/machinery/body_scan_display{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"SK" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Td" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 8;
+	icon_state = "warningcorner"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Tw" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1380;
+	id_tag = "sfv_arbiter_shuttle_outer"
+	},
+/obj/machinery/door/blast/regular/escape_pod{
+	id_tag = "rescuedock";
+	name = "External Blast Shield"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/sfv_arbiter)
+"TA" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning/corner,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"TZ" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/corner/grey{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Ue" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/floor_decal/corner/yellow{
+	dir = 10;
+	icon_state = "corner_white"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Um" = (
+/obj/effect/floor_decal/corner/yellow,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Uv" = (
+/obj/structure/iv_drip,
+/obj/structure/closet/secure_closet/medical_wall{
+	name = "IV Equipment Cabinet";
+	pixel_x = 0;
+	pixel_y = 32
+	},
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag,
+/obj/effect/floor_decal/corner/white/mono,
+/obj/item/reagent_containers/ivbag/blood/OPlus,
+/obj/item/reagent_containers/ivbag/blood/OPlus,
+/obj/item/reagent_containers/ivbag/blood/OPlus,
+/obj/item/reagent_containers/ivbag/blood/OPlus,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/sfv_arbiter)
+"UF" = (
+/obj/effect/paint/red,
+/obj/structure/window/reinforced/crescent{
+	dir = 8
+	},
+/turf/simulated/wall/r_titanium,
+/area/map_template/sfv_arbiter)
+"UJ" = (
+/obj/machinery/computer/prisoner{
+	dir = 1;
+	name = "Implant Management"
+	},
+/obj/effect/floor_decal/corner/blue/mono,
+/obj/item/device/radio,
+/obj/machinery/power/apc/hyper{
+	dir = 8;
+	name = "SFV Rook APC";
+	pixel_x = -24;
+	req_access = list()
+	},
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"UL" = (
+/obj/machinery/computer/modular/preset/medical{
+	dir = 1;
+	icon_state = "console"
+	},
+/obj/effect/floor_decal/corner/blue/mono,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "ert_brig";
+	pixel_x = 27;
+	pixel_y = 8
+	},
+/obj/machinery/button/flasher{
+	id_tag = "rescueflash";
+	name = "Flasher";
+	pixel_x = 27;
+	pixel_y = -2
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"UO" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"UR" = (
+/obj/structure/table/steel_reinforced,
+/obj/effect/floor_decal/corner/blue/mono,
+/obj/item/device/radio{
+	pixel_x = 7
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"Vv" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/black,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "ert_brig";
+	name = "Holding Blast Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/cyan{
+	d2 = 2;
+	dir = 1;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"Vz" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"VG" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"VJ" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 6
+	},
+/obj/structure/bed/chair/shuttle/black{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"VM" = (
+/obj/machinery/ion_engine{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/sfv_arbiter)
+"VT" = (
+/obj/effect/floor_decal/corner/grey{
+	dir = 5
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"VU" = (
+/obj/effect/floor_decal/industrial/warning/corner,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"VW" = (
+/obj/machinery/atmospherics/unary/tank/air{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/blue,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/sfv_arbiter)
+"Wm" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "rescuebridge";
+	name = "Cockpit Blast Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/effect/paint/iccgn,
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"Wx" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "sfv_arbiter_shuttle_pump"
+	},
+/obj/machinery/button/blast_door{
+	icon_state = "doorctrl0";
+	id_tag = "rescuedock";
+	name = "Window Shutters Control";
+	pixel_x = 24;
+	pixel_y = -4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/sfv_arbiter)
+"WE" = (
+/obj/structure/table/rack{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 4;
+	icon_state = "bulb1"
+	},
+/obj/item/clothing/accessory/solgov/fleet_patch/fifth,
+/obj/item/clothing/accessory/solgov/fleet_patch/fifth,
+/obj/item/clothing/accessory/solgov/fleet_patch/fifth,
+/obj/item/clothing/accessory/solgov/fleet_patch/fifth,
+/obj/item/clothing/accessory/solgov/fleet_patch/fifth,
+/obj/item/clothing/head/beret/solgov/fleet/branch/fifth,
+/obj/item/clothing/head/beret/solgov/fleet/branch/fifth,
+/obj/item/clothing/head/beret/solgov/fleet/branch/fifth,
+/obj/item/clothing/head/beret/solgov/fleet/branch/fifth,
+/obj/item/clothing/head/beret/solgov/fleet/branch/fifth,
+/obj/item/clothing/head/beret/solgov/fleet/branch/fifth,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/sfv_arbiter)
+"WL" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"WU" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/corner/red{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"WV" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/titanium,
+/area/map_template/sfv_arbiter)
+"WW" = (
+/obj/effect/floor_decal/corner/grey{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Xa" = (
+/obj/structure/catwalk,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/sfv_arbiter)
+"Xd" = (
+/obj/effect/floor_decal/corner/grey{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Xl" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Xs" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"Xz" = (
+/obj/structure/closet/secure_closet/guncabinet{
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/item/gun/projectile/shotgun/pump/combat,
+/obj/item/gun/projectile/shotgun/pump/combat,
+/obj/item/gun/launcher/grenade,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/sfv_arbiter)
+"XC" = (
+/obj/structure/table/standard,
+/obj/item/reagent_containers/spray/cleaner{
+	pixel_x = -6;
+	pixel_y = 8
+	},
+/obj/item/reagent_containers/spray/sterilizine{
+	pixel_x = 2;
+	pixel_y = 8
+	},
+/obj/item/reagent_containers/syringe/antiviral,
+/obj/effect/floor_decal/corner/white/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/sfv_arbiter)
+"XH" = (
+/turf/template_noop,
+/area/template_noop)
+"XJ" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable/cyan{
+	d2 = 2;
+	dir = 1;
+	icon_state = "0-2"
+	},
+/obj/effect/paint/iccgn,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"XO" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/red/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"XP" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"XS" = (
+/obj/effect/floor_decal/corner/blue/mono,
+/obj/machinery/computer/shuttle_control/explore/sfv_arbiter_shuttle{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"XU" = (
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 5;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"Yb" = (
+/obj/effect/floor_decal/corner/grey/three_quarters,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Yl" = (
+/obj/effect/floor_decal/corner/grey/three_quarters{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Yn" = (
+/obj/structure/bed/chair/shuttle/black{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/grey/mono,
+/obj/item/clothing/head/helmet,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"YA" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"YB" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/machinery/light,
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"YH" = (
+/obj/machinery/sleeper{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/sfv_arbiter)
+"YL" = (
+/obj/structure/table/standard,
+/obj/item/storage/firstaid/surgery{
+	pixel_y = 9
+	},
+/obj/item/stack/medical/advanced/bruise_pack{
+	pixel_x = 7;
+	pixel_y = -4
+	},
+/turf/simulated/floor/tiled/white/airless,
+/area/map_template/sfv_arbiter)
+"YN" = (
+/obj/effect/floor_decal/corner/grey/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"YR" = (
+/obj/effect/floor_decal/corner/grey/mono,
+/obj/structure/reagent_dispensers/water_cooler{
+	dir = 8;
+	icon_state = "water_cooler"
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"YT" = (
+/obj/effect/floor_decal/corner/white{
+	dir = 4;
+	icon_state = "corner_white"
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"YX" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	icon_state = "warningcorner";
+	dir = 2
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Zf" = (
+/obj/machinery/button/blast_door{
+	icon_state = "doorctrl0";
+	id_tag = "rescuedock";
+	name = "Window Shutters Control";
+	pixel_x = -24;
+	pixel_y = -4
+	},
+/obj/effect/floor_decal/corner/grey/mono,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/table/steel_reinforced,
+/obj/item/flame/lighter/zippo/gunmetal{
+	pixel_x = 5
+	},
+/obj/item/storage/fancy/cigarettes,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/sfv_arbiter)
+"Zj" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/corner/white{
+	dir = 5
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Zk" = (
+/obj/effect/floor_decal/corner/white{
+	dir = 1;
+	icon_state = "corner_white"
+	},
+/obj/structure/sign/warning/nosmoking_1{
+	pixel_y = 23
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Zq" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/corner/blue/full,
+/obj/machinery/door/airlock/centcom{
+	name = "Bridge";
+	opacity = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"Zu" = (
+/obj/effect/paint/black,
+/obj/effect/paint/iccgn,
+/turf/simulated/wall/titanium,
+/area/map_template/sfv_arbiter)
+"Zv" = (
+/obj/effect/floor_decal/corner/yellow{
+	dir = 4
+	},
+/obj/structure/table/rack,
+/obj/item/storage/firstaid/stab,
+/obj/item/storage/firstaid/stab,
+/obj/item/storage/firstaid/combat,
+/obj/item/storage/firstaid/combat,
+/obj/item/clothing/glasses/hud/health/goggle,
+/obj/item/clothing/glasses/hud/health/goggle,
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"Zw" = (
+/obj/machinery/recharge_station,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/sfv_arbiter)
+"ZK" = (
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+"ZT" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/sfv_arbiter)
+
+(1,1,1) = {"
+XH
+XH
+XH
+XH
+OJ
+aq
+uR
+vY
+da
+vY
+EP
+aq
+OJ
+XH
+XH
+XH
+XH
+"}
+(2,1,1) = {"
+XH
+XH
+XH
+XH
+aq
+aq
+xW
+XS
+Ll
+Nf
+RK
+aq
+aq
+XH
+XH
+XH
+XH
+"}
+(3,1,1) = {"
+XH
+XH
+XH
+XH
+xB
+qq
+DK
+Pj
+Ls
+Pj
+RM
+UJ
+xB
+XH
+XH
+XH
+XH
+"}
+(4,1,1) = {"
+XH
+XH
+XH
+XH
+Jg
+zZ
+DL
+Io
+LG
+Io
+RQ
+UL
+ut
+XH
+XH
+XH
+XH
+"}
+(5,1,1) = {"
+XH
+XH
+XH
+ld
+Wm
+Bb
+DU
+nG
+LZ
+Pr
+Sf
+UR
+Wm
+XH
+XH
+XH
+XH
+"}
+(6,1,1) = {"
+XH
+XH
+OJ
+aq
+aq
+WV
+WV
+WV
+Zq
+WV
+So
+Vv
+aq
+aq
+OJ
+XH
+XH
+"}
+(7,1,1) = {"
+XH
+XH
+aq
+aq
+sN
+AK
+vK
+WV
+Mo
+vS
+jM
+cQ
+qB
+aq
+aq
+XH
+XH
+"}
+(8,1,1) = {"
+XH
+XH
+aq
+ll
+vu
+GR
+Ei
+Is
+Mw
+Pw
+Sp
+Vz
+WU
+ip
+aq
+XH
+XH
+"}
+(9,1,1) = {"
+XH
+XH
+aq
+lO
+ue
+Bd
+Ek
+WV
+Ne
+Qy
+Sw
+VG
+et
+XO
+aq
+XH
+XH
+"}
+(10,1,1) = {"
+XH
+XH
+aq
+aq
+LU
+WE
+kc
+WV
+Nm
+QD
+Sy
+VJ
+BE
+WV
+aq
+sS
+XH
+"}
+(11,1,1) = {"
+XH
+aq
+Zu
+WV
+WV
+WV
+WV
+WV
+Nn
+WV
+WV
+WV
+WV
+WV
+aq
+aq
+gS
+"}
+(12,1,1) = {"
+XH
+DI
+Zf
+EU
+qP
+qP
+VT
+IU
+SK
+al
+ow
+WV
+RA
+RA
+kU
+fu
+XH
+"}
+(13,1,1) = {"
+XH
+QF
+WW
+WW
+Yb
+YN
+od
+VU
+XP
+Dx
+YX
+XJ
+vc
+vc
+Eh
+Jh
+XH
+"}
+(14,1,1) = {"
+Pp
+KK
+Xd
+Xd
+Yl
+YN
+TZ
+FJ
+yb
+it
+LO
+BS
+nx
+nx
+HR
+Tw
+XH
+"}
+(15,1,1) = {"
+XH
+NO
+Yn
+dR
+Yn
+YR
+TZ
+Nh
+NV
+QS
+Td
+WV
+EQ
+Wx
+KO
+fu
+XH
+"}
+(16,1,1) = {"
+XH
+aq
+WV
+WV
+WV
+WV
+au
+TA
+Oe
+QT
+lu
+WV
+aq
+aq
+aq
+aq
+XH
+"}
+(17,1,1) = {"
+OJ
+aq
+WL
+XU
+fO
+qt
+YT
+FJ
+Og
+QQ
+Um
+Kt
+Zv
+HX
+Kq
+aq
+OJ
+"}
+(18,1,1) = {"
+aq
+lE
+jE
+nU
+tc
+PE
+Zj
+Ci
+kF
+Bq
+Ue
+tP
+wW
+nQ
+zx
+aq
+aq
+"}
+(19,1,1) = {"
+aq
+by
+kL
+JO
+Dk
+WV
+Zk
+GR
+qy
+Xl
+HJ
+Kt
+oa
+YA
+ZT
+qk
+aq
+"}
+(20,1,1) = {"
+aq
+bM
+kL
+JO
+qn
+WV
+Zw
+dd
+UO
+Cc
+Jz
+WV
+Iv
+YA
+ZK
+pa
+aq
+"}
+(21,1,1) = {"
+aq
+dn
+kL
+JO
+WV
+WV
+WV
+Mx
+Ov
+WV
+WV
+WV
+WV
+YA
+ZK
+Ac
+aq
+"}
+(22,1,1) = {"
+aq
+dv
+Xs
+YB
+WV
+Cj
+Gp
+CT
+HQ
+IH
+Nw
+VW
+WV
+YA
+ZK
+pd
+aq
+"}
+(23,1,1) = {"
+aq
+EW
+JO
+YH
+WV
+EY
+Xa
+cx
+lA
+aR
+cv
+oP
+WV
+yf
+df
+Ny
+aq
+"}
+(24,1,1) = {"
+aq
+SH
+JO
+YL
+WV
+Mi
+HT
+sH
+Kz
+iD
+QG
+hz
+WV
+xX
+ZK
+eQ
+aq
+"}
+(25,1,1) = {"
+IS
+Uv
+XC
+xv
+IS
+IS
+Oo
+Hn
+Hn
+Hn
+Oo
+IS
+IS
+Xz
+vT
+Ew
+IS
+"}
+(26,1,1) = {"
+IS
+UF
+UF
+UF
+IS
+qv
+Lr
+VM
+VM
+VM
+Qh
+uY
+IS
+UF
+Hn
+Hn
+IS
+"}
+(27,1,1) = {"
+IS
+VM
+VM
+VM
+IS
+XH
+OJ
+XH
+XH
+XH
+OJ
+XH
+IS
+VM
+VM
+VM
+IS
+"}
