@@ -1,0 +1,5 @@
+author: Mucker, Jux
+delete-after: true
+changes:
+  - tweak: The ICGNV Hound can now dock to the Torch.
+  - rscadd: Added a new event shuttle based on the Aquila.
