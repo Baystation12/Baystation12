@@ -2243,9 +2243,7 @@
 	dir = 4
 	},
 /obj/structure/table/woodentable/walnut,
-/obj/item/toy/plushie/kitten{
-	pixel_y = 7
-	},
+/obj/item/toy/plushie/thoom,
 /turf/simulated/floor/carpet/purple,
 /area/ship/skrellscoutship/crew/rec)
 "hc" = (
