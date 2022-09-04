@@ -159,6 +159,15 @@
 	suit_type = "medical command hardsuit"
 	desc = "A specialized hardsuit rig control module issued to ranking medical officers of the Expeditionary Corps and their peers."
 	icon_state = "command_med_rig"
+	armor = list(
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_SHIELDED
+		)
 
 	chest_type = /obj/item/clothing/suit/space/rig/command/medical
 	helm_type = /obj/item/clothing/head/helmet/space/rig/command/medical
@@ -205,7 +214,7 @@
 	icon_state = "command_sec_rig"
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_PISTOL,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
 		laser = ARMOR_LASER_SMALL,
 		energy = ARMOR_ENERGY_SMALL,
 		bomb = ARMOR_BOMB_PADDED,
