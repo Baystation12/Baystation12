@@ -2183,10 +2183,10 @@
 /obj/item/reagent_containers/ivbag/blood/OMinus,
 /obj/item/reagent_containers/ivbag/blood/OMinus,
 /obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/OMinus/skrell,
+/obj/item/reagent_containers/ivbag/blood/OMinus/skrell,
+/obj/item/reagent_containers/ivbag/blood/OMinus/unathi,
+/obj/item/reagent_containers/ivbag/blood/OMinus/unathi,
 /obj/structure/closet/secure_closet/medical_wall{
 	name = "IV Equipment Cabinet";
 	pixel_y = 32

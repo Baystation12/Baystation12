@@ -117,3 +117,9 @@
 
 /obj/item/reagent_containers/ivbag/blood/OMinus
 	blood_type = "O-"
+
+/obj/item/reagent_containers/ivbag/blood/OMinus/skrell
+	blood_species = SPECIES_SKRELL
+
+/obj/item/reagent_containers/ivbag/blood/OMinus/unathi
+	blood_species = SPECIES_UNATHI
