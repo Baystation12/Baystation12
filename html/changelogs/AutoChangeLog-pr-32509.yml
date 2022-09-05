@@ -1,7 +1,0 @@
-author: Sbotkin
-delete-after: true
-changes:
-  - tweak: COS' RIG now offers better protection against ballistics, as intended.
-  - tweak: CMO's RIG now offers better protection against radiation, on par with the
-      rescue RIG.
-  - tweak: RIG mounted RCD now consumes 43% less energy!
