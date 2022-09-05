@@ -1,0 +1,5 @@
+author: SealCure
+delete-after: true
+changes:
+  - maptweak: Makes the mining station hall less thick and stops the airlock sucking
+      all the power when cycling.
