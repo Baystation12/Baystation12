@@ -11,12 +11,12 @@
 	SelfMove(DOWN)
 
 /mob/proc/move_up()
-	SelfMove(UP)
+	return SelfMove(UP)
 
 /mob/living/carbon/human/move_up()
 	var/turf/old_loc = loc
-	..()
-	if(loc != old_loc)
+	. = ..()
+	if(. || loc != old_loc)
 		return
 
 	var/turf/simulated/open/O = GetAbove(src)
