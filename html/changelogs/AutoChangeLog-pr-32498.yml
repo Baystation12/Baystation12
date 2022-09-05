@@ -1,0 +1,9 @@
+author: Spookerton
+delete-after: true
+changes:
+  - bugfix: You can't put serving bowls or sandwiches in serving bowls or sandwiches.
+  - bugfix: Serving bowls put themselves in the correct hand if started in hands,
+      or remain where they are otherwise.
+  - bugfix: Serving bowls don't offer the rename verb when they cannot be renamed.
+  - tweak: Renaming a serving bowl no longer adds "bowl" to the end.
+  - tweak: Serving bowl custom names can be slightly longer, at 32 instead of 26 symbols.
