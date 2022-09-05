@@ -2,6 +2,7 @@
   "recommendations": [
     "gbasood.byond-dm-language-support",
     "platymuus.dm-langclient",
+    "rome.rome",
     "eamodio.gitlens"
   ]
 }
