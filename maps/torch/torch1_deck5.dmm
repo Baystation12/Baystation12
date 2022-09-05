@@ -4901,13 +4901,14 @@
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "lh" = (
-/obj/structure/ladder/up,
-/obj/effect/floor_decal/corner/brown{
-	dir = 9
-	},
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/effect/floor_decal/corner/purple{
+	dir = 9
+	},
+/obj/structure/closet/emcloset,
+/obj/structure/railing/mapped,
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fifthdeck/aft)
 "li" = (
@@ -5015,19 +5016,16 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/pilot)
 "lu" = (
-/obj/effect/floor_decal/corner/brown/half{
-	dir = 4
+/obj/effect/floor_decal/corner/purple{
+	dir = 6
 	},
-/obj/machinery/light{
-	dir = 4
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/hologram/holopad,
+/obj/item/device/radio/intercom{
+	dir = 8;
+	pixel_x = 20
 	},
-/obj/machinery/vending/snack{
-	dir = 8
-	},
-/obj/machinery/rotating_alarm/security_alarm{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/monotile,
+/turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fifthdeck/aft)
 "lv" = (
 /obj/machinery/door/firedoor,
@@ -6729,44 +6727,44 @@
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "oQ" = (
-/obj/effect/floor_decal/corner/brown/half{
-	dir = 4
-	},
 /obj/structure/sign/deck/fifth{
 	dir = 8;
 	pixel_x = 40
 	},
-/obj/machinery/vending/cigarette{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/hallway/primary/fifthdeck/aft)
-"oR" = (
-/obj/effect/floor_decal/corner/brown/half{
-	dir = 4
+/obj/effect/floor_decal/corner/purple{
+	dir = 6
 	},
 /obj/machinery/vending/cola{
-	dir = 8
+	dir = 4
 	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/hallway/primary/fifthdeck/aft)
+"oR" = (
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 21
 	},
-/turf/simulated/floor/tiled/monotile,
+/obj/effect/floor_decal/corner/purple{
+	dir = 6
+	},
+/obj/machinery/vending/snack{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fifthdeck/aft)
 "oS" = (
-/obj/effect/floor_decal/corner/brown/half{
-	dir = 4
-	},
 /obj/machinery/disposal,
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/light{
 	dir = 4
 	},
 /obj/structure/disposalpipe/trunk{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/monotile,
+/obj/effect/floor_decal/corner/purple{
+	dir = 6
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fifthdeck/aft)
 "oU" = (
 /obj/effect/floor_decal/corner/mauve{
@@ -9323,38 +9321,26 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
 "ur" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
-/area/hallway/primary/fifthdeck/aft)
-"us" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/fifthdeck/aft)
+"ut" = (
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
-/area/hallway/primary/fifthdeck/aft)
-"ut" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/hologram/holopad,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
 "uu" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -10239,13 +10225,12 @@
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/cockpit)
 "xl" = (
-/obj/structure/ladder/up,
-/obj/effect/floor_decal/corner/brown{
-	dir = 9
-	},
 /obj/structure/sign/deck/fifth{
 	dir = 4;
 	pixel_x = -32
+	},
+/obj/effect/floor_decal/corner/purple{
+	dir = 9
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fifthdeck/aft)
@@ -15962,16 +15947,15 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/analysis)
 "TL" = (
-/obj/structure/ladder/up,
-/obj/effect/floor_decal/corner/brown{
-	dir = 9
-	},
-/obj/machinery/light{
-	dir = 8
-	},
 /obj/machinery/camera/network/fifth_deck{
 	c_tag = "Fifth Deck Hallway - Ladders";
 	dir = 1
+	},
+/obj/effect/floor_decal/corner/purple{
+	dir = 9
+	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fifthdeck/aft)
@@ -16237,6 +16221,14 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/hallwaya)
+"UU" = (
+/obj/structure/ladder/up,
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/fifthdeck/aft)
 "UX" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/white,
@@ -16328,14 +16320,14 @@
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/cell3)
 "Vz" = (
-/obj/structure/ladder/up,
-/obj/effect/floor_decal/corner/brown{
-	dir = 9
-	},
 /obj/machinery/alarm{
 	dir = 4;
 	pixel_x = -24
 	},
+/obj/effect/floor_decal/corner/purple{
+	dir = 9
+	},
+/obj/structure/stairs/north,
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fifthdeck/aft)
 "VA" = (
@@ -38802,9 +38794,9 @@ qv
 yW
 qE
 Pv
-UO
 uu
-UO
+UU
+UU
 UO
 Em
 ja
@@ -39005,7 +38997,7 @@ nl
 up
 uq
 ur
-us
+ut
 ut
 JL
 iL
@@ -39206,8 +39198,8 @@ qz
 um
 Xz
 hF
-UO
 xg
+UO
 UO
 aS
 Em
