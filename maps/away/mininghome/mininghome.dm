@@ -92,6 +92,14 @@
 	name = "\improper Solars"
 	icon_state = "eva"
 
+/area/map_template/mininghome_processing
+	name = "\improper Ore Processing"
+	icon_state = "mining_production"
+
+/area/map_template/mininghome_eva
+	name = "\improper Airlock"
+	icon_state = "mining_eva"
+
 // Torch only items off torch
 
 /obj/item/mininghome_passport_iccg

@@ -118,8 +118,13 @@
 	dir = 4
 	},
 /obj/machinery/light/small,
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_eva)
 "aD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -292,6 +297,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
 /turf/simulated/floor/steel_dirty,
 /area/map_template/mininghome_hall)
 "cg" = (
@@ -346,7 +356,7 @@
 "cy" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/plating,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "cD" = (
 /obj/structure/closet/crate/trashcart,
 /turf/simulated/floor/steel_dirty,
@@ -425,7 +435,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_eva)
 "dq" = (
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
@@ -436,7 +446,7 @@
 	output_turf = 8
 	},
 /turf/simulated/floor/plating,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "dQ" = (
 /obj/structure/cable/yellow{
 	d1 = 2;
@@ -451,7 +461,7 @@
 	},
 /obj/machinery/computer/modular/preset/civilian,
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "dT" = (
 /obj/effect/floor_decal/corner/brown/half{
 	dir = 4
@@ -762,6 +772,10 @@
 	},
 /turf/simulated/floor/steel_dirty,
 /area/map_template/mininghome_lockers)
+"gn" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/map_template/mininghome_processing)
 "gq" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1;
@@ -855,6 +869,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/steel_dirty,
 /area/map_template/mininghome_hall)
@@ -1215,7 +1234,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "jN" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -1293,6 +1312,11 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/floordetail/pryhole,
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/steel_dirty,
 /area/map_template/mininghome_hall)
 "kE" = (
@@ -1368,7 +1392,7 @@
 	pixel_y = -25
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_eva)
 "lq" = (
 /obj/structure/table/steel,
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -1519,7 +1543,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "mZ" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -1537,7 +1561,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "nu" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1637,6 +1661,11 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/steel_dirty,
 /area/map_template/mininghome_hall)
 "nW" = (
@@ -1683,7 +1712,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "oF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -1701,8 +1730,13 @@
 "oJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "oR" = (
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -1903,7 +1937,7 @@
 	id = "mininghome_internal"
 	},
 /turf/simulated/floor/plating,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "ri" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -2001,8 +2035,13 @@
 	name = "Primary Airlock"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_eva)
 "sk" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -2102,8 +2141,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "tg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
@@ -2178,6 +2222,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/steel_dirty,
 /area/map_template/mininghome_hall)
 "tH" = (
@@ -2185,7 +2234,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "tP" = (
 /obj/machinery/vending/fitness,
 /obj/effect/floor_decal/corner/brown/half{
@@ -2231,7 +2280,7 @@
 	pixel_y = -22
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "ud" = (
 /obj/machinery/light{
 	dir = 4
@@ -2277,7 +2326,7 @@
 "uU" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "uY" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2376,11 +2425,16 @@
 /obj/effect/floor_decal/corner/brown/half,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/steel_dirty,
 /area/map_template/mininghome_hall)
 "vK" = (
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "vO" = (
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -2412,6 +2466,11 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/steel_dirty,
 /area/map_template/mininghome_hall)
 "wd" = (
@@ -2460,8 +2519,17 @@
 	dir = 1
 	},
 /obj/structure/table/steel,
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_y = 24
+	},
+/obj/structure/cable/yellow{
+	d2 = 2;
+	icon_state = "0-2"
+	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "wz" = (
 /obj/machinery/door/airlock/civilian,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2615,6 +2683,10 @@
 /obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/map_template/mininghome_power)
+"yj" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/map_template/mininghome_eva)
 "ym" = (
 /obj/effect/floor_decal/corner/red{
 	dir = 1
@@ -2630,7 +2702,7 @@
 	pixel_y = 23
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "yt" = (
 /obj/machinery/power/apc{
 	name = "south bump";
@@ -2751,7 +2823,7 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/plating,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "zk" = (
 /obj/effect/floor_decal/corner/brown/half{
 	dir = 8
@@ -2828,7 +2900,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_eva)
 "zJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
@@ -2940,7 +3012,7 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "AG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -2979,7 +3051,7 @@
 	name = "mining conveyor"
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "AY" = (
 /obj/machinery/door/airlock/mining,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3119,11 +3191,11 @@
 	},
 /obj/machinery/light,
 /turf/simulated/floor/plating,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "BN" = (
 /obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "BT" = (
 /obj/effect/floor_decal/corner/brown/half{
 	dir = 4
@@ -3276,7 +3348,7 @@
 	},
 /obj/machinery/recharger,
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "DE" = (
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
@@ -3334,7 +3406,7 @@
 "DZ" = (
 /obj/machinery/computer/mining,
 /turf/simulated/wall/r_titanium,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "Ea" = (
 /obj/machinery/door/airlock/civilian,
 /obj/machinery/door/firedoor,
@@ -3351,17 +3423,17 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "Et" = (
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "EH" = (
 /obj/structure/ore_box,
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "EJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9
@@ -3401,8 +3473,13 @@
 /area/map_template/mininghome_hall)
 "Fa" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "Ff" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -3521,23 +3598,48 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/mininghome_mess)
+"FW" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden,
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/mininghome_eva)
 "Gb" = (
 /obj/structure/grille,
 /turf/simulated/floor/asteroid,
 /area/space)
+"Gc" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "mininghome_primary_pump"
+	},
+/obj/structure/cable/yellow{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/power/apc/hyper{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24;
+	req_access = list()
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/mininghome_eva)
 "Gi" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "Gl" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/mininghome_power)
 "Gt" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/steel_dirty,
-/area/map_template/mininghome_hall)
+/obj/machinery/light/spot,
+/turf/simulated/floor/asteroid,
+/area/map_template/mininghome_eva)
 "Gw" = (
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/corner/brown/half{
@@ -3598,7 +3700,7 @@
 "Ha" = (
 /obj/structure/closet/crate/plastic,
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "Hf" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/firedoor,
@@ -3633,7 +3735,7 @@
 	id_tag = "mininghome_primary_pump"
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_eva)
 "Hz" = (
 /obj/effect/floor_decal/asteroid,
 /turf/simulated/floor/asteroid,
@@ -3796,6 +3898,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/steel_dirty,
 /area/map_template/mininghome_hall)
 "Jd" = (
@@ -3907,7 +4014,7 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "KJ" = (
 /obj/machinery/door/airlock/multi_tile/glass/mining,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -4076,7 +4183,7 @@
 	id_tag = "mininghome_primary_pump"
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_eva)
 "LO" = (
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -4213,6 +4320,11 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
 	},
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/steel_dirty,
 /area/map_template/mininghome_hall)
 "Mx" = (
@@ -4239,6 +4351,11 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/steel_dirty,
 /area/map_template/mininghome_hall)
 "MI" = (
@@ -4373,7 +4490,7 @@
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_eva)
 "NV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -4401,7 +4518,7 @@
 "NY" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden,
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_eva)
 "Oc" = (
 /obj/machinery/atmospherics/unary/tank/air,
 /turf/simulated/floor/tiled/techfloor,
@@ -4418,6 +4535,11 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
 	},
 /turf/simulated/floor/steel_dirty,
 /area/map_template/mininghome_hall)
@@ -4513,7 +4635,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "OQ" = (
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -4547,7 +4669,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "Pg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -4621,7 +4743,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "PU" = (
 /obj/effect/floor_decal/corner/brown/half{
 	dir = 4
@@ -4648,7 +4770,7 @@
 	id_tag = "mininghome_primary_pump"
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_eva)
 "Qc" = (
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -4741,8 +4863,13 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
 	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "QA" = (
 /obj/structure/cable/yellow,
 /obj/machinery/power/apc/hyper{
@@ -4772,7 +4899,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "QK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
@@ -4799,7 +4926,7 @@
 	id_tag = "mininghome_primary_pump"
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_eva)
 "QU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -4875,7 +5002,7 @@
 	name = "Primary Airlock"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_eva)
 "Rs" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
@@ -4883,8 +5010,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "Ru" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
@@ -4959,7 +5091,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "RW" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -5084,7 +5216,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "SV" = (
 /obj/structure/plasticflaps,
 /obj/machinery/conveyor{
@@ -5092,7 +5224,7 @@
 	id = "mininghome_internal"
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "SX" = (
 /obj/machinery/door/airlock/civilian,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -5187,7 +5319,7 @@
 	id_tag = "mininghome_primary_pump"
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_eva)
 "Ub" = (
 /obj/effect/floor_decal/corner/brown/half,
 /turf/simulated/floor/steel_dirty,
@@ -5291,7 +5423,7 @@
 	},
 /obj/structure/dispenser/oxygen,
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "Vc" = (
 /obj/machinery/alarm{
 	dir = 1;
@@ -5354,7 +5486,7 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "VB" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
@@ -5515,14 +5647,19 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/firedoor,
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "WQ" = (
 /obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "WR" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/yellow{
@@ -5802,8 +5939,13 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/mininghome_hall)
+/area/map_template/mininghome_processing)
 "YQ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
@@ -18884,12 +19026,12 @@ VZ
 VZ
 VZ
 VZ
-DE
-DE
-DE
-DE
-DE
-DE
+yj
+yj
+yj
+yj
+yj
+yj
 Lb
 VO
 uT
@@ -19086,12 +19228,12 @@ VZ
 VZ
 VZ
 VZ
-DE
+yj
 PY
 LL
 PY
 PY
-DE
+yj
 cN
 hb
 sE
@@ -19287,13 +19429,13 @@ VZ
 VZ
 VZ
 VZ
-tU
-DE
+Gt
+yj
 NU
 dm
 dm
 lj
-DE
+yj
 qS
 wd
 wd
@@ -19494,13 +19636,13 @@ Rl
 zI
 NY
 NY
-NY
+FW
 sb
 gJ
-Gt
-Gt
-Gt
-Gt
+TL
+TL
+TL
+TL
 cf
 DH
 DE
@@ -19691,13 +19833,13 @@ VZ
 VZ
 VZ
 VZ
-tU
-DE
+Gt
+yj
 NU
 dm
 dm
 aB
-DE
+yj
 fK
 la
 Mq
@@ -19894,18 +20036,18 @@ VZ
 VZ
 VZ
 VZ
-DE
+yj
 QS
 TX
 Ht
-QS
-DE
+Gc
+yj
 WB
 bA
 bA
 wi
 Vz
-Db
+cZ
 mv
 DE
 VZ
@@ -20096,18 +20238,18 @@ VZ
 VZ
 VZ
 VZ
-DE
-DE
-DE
-DE
-DE
-DE
+yj
+yj
+yj
+yj
+yj
+yj
 GX
 rb
 hw
 Aa
 Vz
-Db
+cZ
 ae
 DE
 VZ
@@ -20303,7 +20445,7 @@ VZ
 VZ
 VZ
 VZ
-DE
+yj
 DE
 DE
 DE
@@ -20915,7 +21057,7 @@ VZ
 eh
 MQ
 hU
-Db
+cZ
 lb
 Hf
 eh
@@ -21117,7 +21259,7 @@ eh
 eh
 Hf
 hU
-Db
+cZ
 lb
 Hf
 eh
@@ -21319,7 +21461,7 @@ eh
 eh
 Hf
 gZ
-Db
+cZ
 lb
 Hf
 eh
@@ -21521,7 +21663,7 @@ eh
 eh
 Hf
 hU
-Db
+cZ
 lb
 Hf
 eh
@@ -21723,7 +21865,7 @@ eh
 eh
 Hf
 hU
-Db
+cZ
 lb
 Hf
 eh
@@ -21925,7 +22067,7 @@ eh
 eh
 Hf
 hU
-Db
+cZ
 lb
 Hf
 eh
@@ -22329,7 +22471,7 @@ eh
 eh
 Hf
 hU
-Db
+cZ
 lb
 Hf
 eh
@@ -22531,7 +22673,7 @@ eh
 eh
 Hf
 hU
-Db
+cZ
 yN
 Hf
 eh
@@ -22733,7 +22875,7 @@ eh
 eh
 Hf
 hU
-Db
+cZ
 lb
 Hf
 eh
@@ -22935,7 +23077,7 @@ eh
 eh
 Hf
 hU
-Db
+cZ
 lb
 Hf
 eh
@@ -23137,7 +23279,7 @@ eh
 eh
 Hf
 hU
-Db
+cZ
 lb
 Hf
 eh
@@ -23541,7 +23683,7 @@ VZ
 VZ
 DE
 hU
-Db
+cZ
 lb
 DE
 VZ
@@ -23550,11 +23692,11 @@ VZ
 VZ
 VZ
 VZ
-DE
-DE
-DE
-DE
-DE
+gn
+gn
+gn
+gn
+gn
 VZ
 VZ
 VZ
@@ -23743,7 +23885,7 @@ VZ
 VZ
 DE
 hU
-Db
+cZ
 EY
 DE
 VZ
@@ -23752,11 +23894,11 @@ VZ
 VZ
 VZ
 VZ
-DE
+gn
 EH
 WQ
 vK
-DE
+gn
 VZ
 VZ
 fv
@@ -23954,11 +24096,11 @@ VZ
 VZ
 VZ
 VZ
-DE
+gn
 vK
 vK
 EH
-DE
+gn
 VZ
 VZ
 VZ
@@ -24147,7 +24289,7 @@ VZ
 VZ
 DE
 oR
-Db
+cZ
 xL
 WY
 WY
@@ -24159,10 +24301,10 @@ WY
 WY
 tH
 tH
-DE
-DE
-DE
-DE
+gn
+gn
+gn
+gn
 VZ
 VZ
 fv
@@ -24349,7 +24491,7 @@ VZ
 VZ
 DE
 Qq
-Db
+cZ
 lb
 WY
 ik
@@ -24364,7 +24506,7 @@ uU
 SV
 zg
 cy
-DE
+gn
 VZ
 VZ
 fv
@@ -24566,7 +24708,7 @@ vK
 DZ
 BN
 BH
-DE
+gn
 fv
 VZ
 VZ
@@ -24768,7 +24910,7 @@ vK
 vK
 BN
 rd
-DE
+gn
 VZ
 VZ
 fv
@@ -24970,7 +25112,7 @@ vK
 AX
 DZ
 dO
-DE
+gn
 VZ
 fv
 VZ
@@ -25172,7 +25314,7 @@ vK
 vK
 BN
 cy
-DE
+gn
 VZ
 VZ
 VZ
@@ -25374,7 +25516,7 @@ vK
 vK
 BN
 BH
-DE
+gn
 VZ
 VZ
 fv
@@ -25570,13 +25712,13 @@ py
 LH
 LH
 ZO
-DE
+gn
 yo
 vK
 vK
 BN
 rd
-DE
+gn
 VZ
 VZ
 VZ
@@ -25778,7 +25920,7 @@ oJ
 Rs
 BN
 KH
-DE
+gn
 VZ
 VZ
 VZ
@@ -25974,13 +26116,13 @@ ay
 wd
 cZ
 lb
-DE
+gn
 Et
 vK
 tb
 vK
 jL
-DE
+gn
 VZ
 VZ
 VZ
@@ -26176,13 +26318,13 @@ jf
 pb
 ri
 EK
-DE
+gn
 wy
 Fa
 Qz
 Gi
 tX
-DE
+gn
 fv
 fv
 fv
@@ -26384,7 +26526,7 @@ Pc
 OP
 Pc
 QF
-DE
+gn
 fv
 VZ
 VZ
@@ -26586,7 +26728,7 @@ Av
 Ed
 vK
 SU
-DE
+gn
 VZ
 VZ
 fv
@@ -26788,7 +26930,7 @@ PS
 RU
 vK
 UU
-DE
+gn
 VZ
 fv
 fv
@@ -26985,12 +27127,12 @@ Jn
 VY
 Ub
 Lg
-DE
-DE
-DE
-DE
-DE
-DE
+gn
+gn
+gn
+gn
+gn
+gn
 fv
 fv
 VZ
