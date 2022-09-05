@@ -351,10 +351,6 @@
 	if(my_mob.client)
 		toggle_open(2) //forces the icons to refresh on screen
 
-/mob/Life()
-	UNLINT(..())
-	if(ability_master)
-		ability_master.update_spells(0)
 
 /obj/screen/movable/ability_master/proc/update_spells(forced = 0)
 	for(var/obj/screen/ability/spell/spell in spell_objects)

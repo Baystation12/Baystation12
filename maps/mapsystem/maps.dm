@@ -1,6 +1,5 @@
 #define DEFAULT_GAME_YEAR_OFFSET 288
 
-GLOBAL_DATUM_INIT(using_map, /datum/map, new using_map_DATUM)
 GLOBAL_LIST_EMPTY(all_maps)
 
 var/global/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable

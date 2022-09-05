@@ -44,7 +44,3 @@
 	var/turf/T = get_turf(src)
 	if(istype(T))
 		T.fluid_update()
-
-/atom/movable/update_nearby_tiles(need_rebuild)
-	UNLINT(. = ..(need_rebuild))
-	fluid_update()

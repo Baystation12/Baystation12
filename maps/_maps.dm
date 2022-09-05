@@ -1,8 +1,19 @@
 #include "_map_include.dm"
 
+#include "mapsystem\map_preferences.dm"
+#include "mapsystem\map_ranks.dm"
+#include "mapsystem\maps.dm"
+#include "mapsystem\maps_announcements.dm"
+#include "mapsystem\maps_areas.dm"
+#include "mapsystem\maps_jobs.dm"
+#include "mapsystem\maps_unit_testing.dm"
+#include "unit_tests\unit_testing.dm"
+
 #include "example\example_define.dm" // Always included because tests. May be fixable later.
 
 #include "using.dm"
+
+GLOBAL_DATUM_INIT(using_map, /datum/map, new using_map_DATUM)
 
 #include "antag_spawn\antag_spawn_bases.dm"
 #include "antag_spawn\ert\ert.dm"
@@ -37,12 +48,3 @@
 #include "random_ruins\exoplanet_ruins\tar_anomaly\tar_anomaly.dm"
 #include "random_ruins\exoplanet_ruins\trash_heap\trash_heap.dm"
 #include "random_ruins\space_ruins\space_ruins.dm"
-
-#include "~mapsystem\map_preferences.dm"
-#include "~mapsystem\map_ranks.dm"
-#include "~mapsystem\maps.dm"
-#include "~mapsystem\maps_announcements.dm"
-#include "~mapsystem\maps_areas.dm"
-#include "~mapsystem\maps_jobs.dm"
-#include "~mapsystem\maps_unit_testing.dm"
-#include "~unit_tests\unit_testing.dm"

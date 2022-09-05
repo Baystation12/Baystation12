@@ -284,17 +284,20 @@
 /obj/item/proc/moved(mob/user as mob, old_loc as turf)
 	return
 
-// apparently called whenever an item is removed from a slot, container, or anything else.
+
+/// Called whenever an item is removed from a slot, container, or anything else.
 /obj/item/proc/dropped(mob/user as mob)
 	if(randpixel)
 		pixel_z = randpixel //an idea borrowed from some of the older pixel_y randomizations. Intended to make items appear to drop at a character
-
 	update_twohanding()
 	if(user)
 		if(user.l_hand)
 			user.l_hand.update_twohanding()
 		if(user.r_hand)
 			user.r_hand.update_twohanding()
+	GLOB.mob_unequipped_event.raise_event(user, src)
+	GLOB.item_unequipped_event.raise_event(src, user)
+
 
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
@@ -312,17 +315,19 @@
 /obj/item/proc/on_found(mob/finder as mob)
 	return
 
-// called after an item is placed in an equipment slot
-// user is mob that equipped it
-// slot uses the slot_X defines found in setup.dm
-// for items that can be placed in multiple slots
-// note this isn't called during the initial dressing of a player
+
+/*
+called after an item is placed in an equipment slot
+user is mob that equipped it
+slot uses the slot_X defines found in setup.dm
+for items that can be placed in multiple slots
+note this isn't called during the initial dressing of a player
+*/
 /obj/item/proc/equipped(mob/user, slot)
 	hud_layerise()
 	if(user.client)	user.client.screen |= src
-	if(user.pulling == src) user.stop_pulling()
-
-	//Update two-handing status
+	if(user.pulling == src)
+		user.stop_pulling()
 	var/mob/M = loc
 	if(!istype(M))
 		return
@@ -330,6 +335,9 @@
 		M.l_hand.update_twohanding()
 	if(M.r_hand)
 		M.r_hand.update_twohanding()
+	GLOB.mob_equipped_event.raise_event(user, src, slot)
+	GLOB.item_equipped_event.raise_event(src, user, slot)
+
 
 /obj/item/proc/equipped_robot(mob/user)
 	return

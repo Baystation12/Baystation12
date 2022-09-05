@@ -10,3 +10,40 @@ engine = "auxtools"
 [code_standards]
 disallow_relative_type_definitions = true
 disallow_relative_proc_definitions = true
+
+[diagnostics]
+disabled_directive = "error"
+sets_directive_twice = "error"
+invalid_lint_directive_value = "error"
+invalid_set_value = "error"
+unknown_linter_setting = "error"
+override_missing_keyword_arg = "error"
+must_not_override = "error"
+must_call_parent = "error"
+final_var = "error"
+private_proc = "error"
+protected_proc = "error"
+private_var = "error"
+protected_var = "error"
+must_be_pure = "error"
+must_not_sleep = "error"
+redefined_proc = "off"
+ambiguous_in_lhs = "error"
+ambiguous_not_bitwise = "error"
+no_typehint_implicit_new = "error"
+field_access_static_type = "error"
+proc_call_static_type = "error"
+proc_has_no_parent = "error"
+no_operator_overload = "error"
+unreachable_code = "error"
+control_condition_static = "error"
+if_condition_determinate = "error"
+loop_condition_determinate = "error"
+
+integer_precision_loss = "error"
+
+duplicate_include = "error"
+macro_redefined = "error"
+macro_undefined_no_definition = "error"
+
+override_precedes_definition = "error"

@@ -138,15 +138,19 @@
 /atom/proc/emp_act(severity)
 	return
 
+
 /atom/proc/set_density(new_density)
-	if(density != new_density)
-		density = !!new_density
+	var/changed = density != new_density
+	if(changed)
+		density = !density
 		if (isturf(loc))
 			var/turf/T = loc
 			if (density)
 				T.has_dense_atom = TRUE
 			else
 				T.has_dense_atom = null
+		GLOB.density_set_event.raise_event(src, !density, density)
+
 
 /atom/proc/bullet_act(obj/item/projectile/P, def_zone)
 	P.on_hit(src, 0, def_zone)
@@ -209,12 +213,14 @@
 /atom/proc/relaymove()
 	return
 
-//called to set the atom's dir and used to add behaviour to dir-changes
+
+/// Called to set the atom's dir and used to add behaviour to dir-changes
 /atom/proc/set_dir(new_dir)
 	var/old_dir = dir
 	if(new_dir == old_dir)
 		return FALSE
 	dir = new_dir
+	GLOB.dir_set_event.raise_event(src, old_dir, dir)
 	return TRUE
 
 /atom/proc/set_icon_state(new_icon_state)
