@@ -1,0 +1,15 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Using a cult talisman on a mob carrying a null rod now also deletes the
+      talisman alongside the pre-existing behaviour of blocking the effects.
+  - tweak: Cult Talismans can now only be invoked on certain types of atoms, depending
+      on their effect. EMP talismans can be used on mobs or machinery, while stun
+      talismans can only be used on carbon or silicon mobs. This also prevents accidentally
+      burning a talisman on a turfor object when trying to click a moving target.
+  - rscadd: Cult Talismans can now be examined to see the type of talisman and their
+      effects, if you're a cultist.
+  - rscadd: Cult talismans now have codex entries.
+  - rscadd: Cult talismans now have a sound effect that plays when used. Stun talismans
+      make the flash sound effect, EMP talismans make the EMP sound effect.
+  - admin: All cult talismans now properly generate attack logs when used.
