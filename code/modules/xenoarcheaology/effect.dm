@@ -133,48 +133,45 @@
 	toggled = FALSE
 	ToggleActivate(TRUE)
 
-//returns 0..1, with 1 being no protection and 0 being fully protected
-/proc/GetAnomalySusceptibility(mob/living/carbon/human/H)
-	if(!istype(H))
+
+/// A value denoting how much this item should protect against the effects of anomalies when worn.
+/obj/item/var/anomaly_protection = 0
+
+/obj/item/rig/hazmat/anomaly_protection = 1
+
+/obj/item/clothing/suit/bio_suit/anomaly/anomaly_protection = 0.7
+
+/obj/item/clothing/suit/space/void/excavation/anomaly_protection = 0.6
+
+/obj/item/clothing/head/bio_hood/anomaly/anomaly_protection = 0.3
+
+/obj/item/clothing/head/helmet/space/void/excavation/anomaly_protection = 0.2
+
+/obj/item/clothing/gloves/latex/anomaly_protection = 0.1
+
+/obj/item/clothing/glasses/science/anomaly_protection = 0.1
+
+
+/// returns 0..1, with 1 being no protection and 0 being fully protected
+/proc/GetAnomalySusceptibility(mob/living/carbon/human/human)
+	if (!istype(human))
 		return 1
+	var/susceptibility = 1
+	var/list/items = list(human.w_uniform, human.wear_suit, human.head, human.gloves, human.shoes, human.glasses)
+	if (istype(human.back, /obj/item/rig))
+		var/obj/item/rig/rig = human.back
+		if (!rig.offline && rig.suit_is_deployed())
+			items += rig
+	for (var/obj/item/item in items)
+		susceptibility -= item.anomaly_protection
+	return clamp(susceptibility, 0, 1)
 
-	var/protected = 0
 
-	//anomaly suits give best protection, but excavation suits are almost as good
-	if(istype(H.back,/obj/item/rig/hazmat) || istype(H.back, /obj/item/rig/hazard))
-		var/obj/item/rig/rig = H.back
-		if(rig.suit_is_deployed() && !rig.offline)
-			protected += 1
-
-	if(istype(H.wear_suit,/obj/item/clothing/suit/bio_suit/anomaly))
-		protected += 0.7
-	else if(istype(H.wear_suit,/obj/item/clothing/suit/space/void/excavation))
-		protected += 0.6
-
-	if(istype(H.head,/obj/item/clothing/head/bio_hood/anomaly))
-		protected += 0.3
-	else if(istype(H.head,/obj/item/clothing/head/helmet/space/void/excavation))
-		protected += 0.2
-
-	//latex gloves and science goggles also give a bit of bonus protection
-	if(istype(H.gloves,/obj/item/clothing/gloves/latex))
-		protected += 0.1
-
-	if(istype(H.glasses,/obj/item/clothing/glasses/science))
-		protected += 0.1
-
-	return 1 - protected
-
-//Destruction/Damaged procs
-
-/**
- * When an artifact is destroyed, this will be run before it is
- */
+/// When an artifact is destroyed, this will be run first.
 /datum/artifact_effect/proc/destroyed_effect()
 	return
 
-/**
- * Called by the artifact the effect is attached too whenever it takes damage
- */
+
+/// Called by the artifact the effect is attached to whenever it takes damage
 /datum/artifact_effect/proc/holder_damaged()
 	return
