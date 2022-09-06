@@ -1,4 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - bugfix: Ghosts can't vote on transfers when prevented in config.
