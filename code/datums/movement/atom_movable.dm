@@ -18,8 +18,8 @@
 
 // Movement delay
 /datum/movement_handler/delay
-	var/delay = 1
-	var/next_move
+	VAR_PROTECTED/delay = 1
+	VAR_PROTECTED/next_move
 
 /datum/movement_handler/delay/New(host, delay)
 	..()

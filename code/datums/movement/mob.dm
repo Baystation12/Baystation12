@@ -1,7 +1,7 @@
 // Movement relayed to self handling
 /datum/movement_handler/mob/relayed_movement
-	var/prevent_host_move = FALSE
-	var/list/allowed_movers
+	VAR_PROTECTED/prevent_host_move = FALSE
+	VAR_PROTECTED/list/allowed_movers
 
 /datum/movement_handler/mob/relayed_movement/MayMove(mob/mover, is_external)
 	if(is_external)
@@ -126,7 +126,7 @@
 
 // Movement delay
 /datum/movement_handler/mob/delay
-	var/next_move
+	VAR_PROTECTED/next_move
 
 /datum/movement_handler/mob/delay/DoMove(direction, mover, is_external)
 	if(is_external)
