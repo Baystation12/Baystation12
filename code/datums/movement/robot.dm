@@ -3,7 +3,7 @@
 *********/
 /datum/movement_handler/robot
 	expected_host_type = /mob/living/silicon/robot
-	var/mob/living/silicon/robot/robot
+	VAR_PROTECTED/mob/living/silicon/robot/robot
 
 /datum/movement_handler/robot/New(host)
 	..()

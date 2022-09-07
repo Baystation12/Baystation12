@@ -117,8 +117,8 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 #undef REMOVE_AND_QDEL
 
 /datum/movement_handler
-	var/expected_host_type = /atom/movable
-	var/atom/movable/host
+	VAR_PROTECTED/expected_host_type = /atom/movable
+	VAR_PROTECTED/atom/movable/host
 
 /datum/movement_handler/New(atom/movable/host)
 	if(!istype(host, expected_host_type))
@@ -141,7 +141,7 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 *******/
 /datum/movement_handler/mob
 	expected_host_type = /mob
-	var/mob/mob
+	VAR_PROTECTED/mob/mob
 
 /datum/movement_handler/mob/New(host)
 	..()
