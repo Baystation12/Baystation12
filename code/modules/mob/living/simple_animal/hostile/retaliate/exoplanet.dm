@@ -27,7 +27,7 @@
 	if (hunger > 500)
 		ai_holder.hostile = TRUE
 
-/mob/living/simple_animal/proc/name_species(newname as text)
+/mob/living/simple_animal/proc/name_species(newname)
 	set name = "Name Alien Species"
 	set category = "IC"
 	set src in view()

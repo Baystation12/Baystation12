@@ -229,7 +229,7 @@ var/global/list/tank_gauge_cache = list()
 			else
 				to_chat(user, "<span class='notice'>The emergency pressure relief valve has already been welded.</span>")
 
-/obj/item/tank/attack_self(mob/user as mob)
+/obj/item/tank/attack_self(mob/user)
 	add_fingerprint(user)
 	if (!air_contents)
 		return
@@ -624,7 +624,7 @@ var/global/list/tank_gauge_cache = list()
 /obj/item/device/tankassemblyproxy/on_update_icon()
 	tank.update_icon()
 
-/obj/item/device/tankassemblyproxy/HasProximity(atom/movable/AM as mob|obj)
+/obj/item/device/tankassemblyproxy/HasProximity(atom/movable/AM)
 	if(assembly)
 		assembly.HasProximity(AM)
 

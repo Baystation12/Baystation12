@@ -73,7 +73,7 @@
 	DROP_NULL(helmet)
 	return ..()
 
-/obj/machinery/suit_cycler/attackby(obj/item/I as obj, mob/user as mob)
+/obj/machinery/suit_cycler/attackby(obj/item/I, mob/user)
 
 	if(electrified != 0)
 		if(shock(user, 100))
@@ -358,7 +358,7 @@
 
 	eject_occupant(usr)
 
-/obj/machinery/suit_cycler/proc/eject_occupant(mob/user as mob)
+/obj/machinery/suit_cycler/proc/eject_occupant(mob/user)
 
 	if(locked || active)
 		to_chat(user, "<span class='warning'>The cycler is locked.</span>")

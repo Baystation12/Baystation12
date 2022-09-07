@@ -58,7 +58,7 @@
 /obj/machinery/atmospherics/unary/tank/return_air()
 	return air_contents
 
-/obj/machinery/atmospherics/unary/tank/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/atmospherics/unary/tank/attackby(obj/item/W, mob/user)
 	if(isWrench(W))
 		if (air_contents.return_pressure() > 2*ONE_ATMOSPHERE)
 			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")

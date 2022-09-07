@@ -237,7 +237,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/power/smes/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/power/smes/attackby(obj/item/W, mob/user)
 	if(component_attackby(W, user))
 		return TRUE
 

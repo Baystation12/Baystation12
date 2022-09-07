@@ -26,7 +26,7 @@
 	update_icon()
 	. = ..()
 
-/obj/structure/bookcase/attackby(obj/O as obj, mob/user as mob)
+/obj/structure/bookcase/attackby(obj/O, mob/user)
 	if(istype(O, /obj/item/book))
 		if(!user.unEquip(O, src))
 			return
@@ -51,7 +51,7 @@
 		..()
 	return
 
-/obj/structure/bookcase/attack_hand(mob/user as mob)
+/obj/structure/bookcase/attack_hand(mob/user)
 	if(contents.len)
 		var/obj/item/book/choice = input("Which book would you like to remove from the shelf?") as null|obj in contents
 		if(choice)
@@ -149,7 +149,7 @@
 	var/carved = 0	 // Has the book been hollowed out for use as a secret storage item?
 	var/obj/item/store	//What's in the book?
 
-/obj/item/book/attack_self(mob/user as mob)
+/obj/item/book/attack_self(mob/user)
 	if(carved)
 		if(store)
 			to_chat(user, "<span class='notice'>[store] falls out of [title]!</span>")
@@ -166,7 +166,7 @@
 	else
 		to_chat(user, "This book is completely blank!")
 
-/obj/item/book/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/book/attackby(obj/item/W, mob/user)
 	if(carved == 1)
 		if(!store)
 			if(W.w_class < ITEM_SIZE_NORMAL)
@@ -221,7 +221,7 @@
 	else
 		..()
 
-/obj/item/book/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/book/attack(mob/living/carbon/M, mob/living/carbon/user)
 	if(user.zone_sel.selecting == BP_EYES)
 		user.visible_message("<span class='notice'>You open up the book and show it to [M]. </span>", \
 			"<span class='notice'> [user] opens up a book and shows it to [M]. </span>")

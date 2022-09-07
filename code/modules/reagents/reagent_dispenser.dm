@@ -12,7 +12,7 @@
 	var/amount_per_transfer_from_this = 10
 	var/possible_transfer_amounts = "10;25;50;100;500"
 
-/obj/structure/reagent_dispensers/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/reagent_dispensers/attackby(obj/item/W, mob/user)
 	return
 
 /obj/structure/reagent_dispensers/New()
@@ -180,7 +180,7 @@
 			rig = null
 			overlays.Cut()
 
-/obj/structure/reagent_dispensers/fueltank/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/reagent_dispensers/fueltank/attackby(obj/item/W, mob/user)
 	src.add_fingerprint(user)
 	if (istype(W,/obj/item/wrench))
 		user.visible_message("\The [user] wrenches \the [src]'s faucet [modded ? "closed" : "open"].", \
@@ -301,7 +301,7 @@
 /obj/structure/reagent_dispensers/water_cooler/proc/RejectionMessage(mob/user)
 	return "The [src]'s cup dispenser is empty."
 
-/obj/structure/reagent_dispensers/water_cooler/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/reagent_dispensers/water_cooler/attackby(obj/item/W, mob/user)
 	if (istype(W,/obj/item/wrench))
 		src.add_fingerprint(user)
 		if(anchored)

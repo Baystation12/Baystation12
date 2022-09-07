@@ -88,7 +88,7 @@
 
 	return 1
 
-/obj/machinery/atmospherics/unary/cryo_cell/relaymove(mob/user as mob)
+/obj/machinery/atmospherics/unary/cryo_cell/relaymove(mob/user)
 	// note that relaymove will also be called for mobs outside the cell with UI open
 	if(src.occupant == user && !user.stat)
 		go_out()
@@ -197,7 +197,7 @@
 	if(istype(new_state))
 		updateUsrDialog()
 
-/obj/machinery/atmospherics/unary/cryo_cell/attackby(obj/G, mob/user as mob)
+/obj/machinery/atmospherics/unary/cryo_cell/attackby(obj/G, mob/user)
 	if(component_attackby(G, user))
 		return TRUE
 	if(istype(G, /obj/item/reagent_containers/glass))
@@ -297,7 +297,7 @@
 		on = !on
 		update_icon()
 
-/obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/M as mob)
+/obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/M)
 	if (stat & (NOPOWER|BROKEN))
 		to_chat(usr, "<span class='warning'>The cryo cell is not functioning.</span>")
 		return
@@ -394,7 +394,7 @@
 /datum/data/function/proc/reset()
 	return
 
-/datum/data/function/proc/r_input(href, href_list, mob/user as mob)
+/datum/data/function/proc/r_input(href, href_list, mob/user)
 	return
 
 /datum/data/function/proc/display()

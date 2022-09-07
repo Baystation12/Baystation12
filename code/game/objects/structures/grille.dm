@@ -84,7 +84,7 @@
 /obj/structure/grille/Bumped(atom/user)
 	if(ismob(user)) shock(user, 70)
 
-/obj/structure/grille/attack_hand(mob/user as mob)
+/obj/structure/grille/attack_hand(mob/user)
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
@@ -151,7 +151,7 @@
 
 	damage_health(damage, Proj.damage_type)
 
-/obj/structure/grille/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/grille/attackby(obj/item/W, mob/user)
 	if (user.a_intent == I_HURT)
 		if (!(W.obj_flags & OBJ_FLAG_CONDUCTIBLE) || !shock(user, 70))
 			..()
@@ -209,7 +209,7 @@
 // shock user with probability prb (if all connections & power are working)
 // returns 1 if shocked, 0 otherwise
 
-/obj/structure/grille/proc/shock(mob/user as mob, prb)
+/obj/structure/grille/proc/shock(mob/user, prb)
 	if(!anchored || is_broken())		// anchored/destroyed grilles are never connected
 		return 0
 	if(material && !material.conductive)

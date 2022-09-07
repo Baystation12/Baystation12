@@ -74,7 +74,7 @@
 					break
 	return .
 
-/datum/recipe/proc/check_items(obj/container as obj)
+/datum/recipe/proc/check_items(obj/container)
 	. = 1
 	if (items && items.len)
 		var/list/checklist = list()
@@ -96,7 +96,7 @@
 	return .
 
 //general version
-/datum/recipe/proc/make(obj/container as obj)
+/datum/recipe/proc/make(obj/container)
 	var/obj/result_obj = new result(container)
 	for (var/obj/O in (container.InsertedContents()-result_obj))
 		O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
@@ -105,7 +105,7 @@
 	return result_obj
 
 // food-related
-/datum/recipe/proc/make_food(obj/container as obj)
+/datum/recipe/proc/make_food(obj/container)
 	if(!result)
 		log_error("<span class='danger'>Recipe [type] is defined without a result, please bug this.</span>")
 		return

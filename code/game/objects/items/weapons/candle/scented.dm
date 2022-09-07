@@ -14,7 +14,7 @@
 	. = ..()
 	get_scent()
 
-/obj/item/flame/candle/scented/attack_self(mob/user as mob)
+/obj/item/flame/candle/scented/attack_self(mob/user)
 	..()
 	if(!lit)
 		remove_extension(src, /datum/extension/scent)

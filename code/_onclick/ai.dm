@@ -92,7 +92,7 @@
  * **Parameters**:
  * - `user` - The mob clicking on the atom.
  */
-/atom/proc/attack_ai(mob/user as mob)
+/atom/proc/attack_ai(mob/user)
 	return
 
 /*

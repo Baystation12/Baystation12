@@ -29,7 +29,7 @@
 		src.pixel_y = rand(0, 16)
 	. = ..()
 
-/obj/item/screwdriver/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/screwdriver/attack(mob/living/carbon/M, mob/living/carbon/user)
 	if(!istype(M) || user.a_intent == "help")
 		return ..()
 	if(user.zone_sel.selecting != BP_EYES && user.zone_sel.selecting != BP_HEAD)

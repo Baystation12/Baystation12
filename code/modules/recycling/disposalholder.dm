@@ -131,7 +131,7 @@
 		partialTag = new_tag
 
 // called when player tries to move while in a pipe
-/obj/structure/disposalholder/relaymove(mob/user as mob)
+/obj/structure/disposalholder/relaymove(mob/user)
 	if(!istype(user,/mob/living))
 		return
 

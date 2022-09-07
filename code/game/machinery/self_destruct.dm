@@ -9,7 +9,7 @@
 	var/armed = 0
 	var/damaged = 0
 
-/obj/machinery/self_destruct/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/self_destruct/attackby(obj/item/W, mob/user)
 	if(isWelder(W))
 		if(damaged)
 			user.visible_message("[user] begins to repair [src].", "You begin repairing [src].")

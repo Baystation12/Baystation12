@@ -29,7 +29,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	title = "[GLOB.using_map.boss_name] Update"
 	announcement_type = "[GLOB.using_map.boss_name] Update"
 
-/datum/announcement/proc/Announce(message as text, new_title = "", new_sound = null, do_newscast = newscast, msg_sanitized = 0, zlevels = GLOB.using_map.contact_levels)
+/datum/announcement/proc/Announce(message, new_title = "", new_sound = null, do_newscast = newscast, msg_sanitized = 0, zlevels = GLOB.using_map.contact_levels)
 	if(!message)
 		return
 	var/message_title = new_title ? new_title : title
@@ -53,23 +53,23 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 		log_say("[key_name(usr)] has made \a [announcement_type]: [message_title] - [message] - [announcer]")
 		message_admins("[key_name_admin(usr)] has made \a [announcement_type].", 1)
 
-/datum/announcement/proc/FormMessage(message as text, message_title as text)
+/datum/announcement/proc/FormMessage(message, message_title)
 	. = "<h2 class='alert'>[message_title]</h2>"
 	. += "<br><span class='alert'>[message]</span>"
 	if (announcer)
 		. += "<br><span class='alert'> -[html_encode(announcer)]</span>"
 
-/datum/announcement/minor/FormMessage(message as text, message_title as text)
+/datum/announcement/minor/FormMessage(message, message_title)
 	. = "<b>[message]</b>"
 
-/datum/announcement/priority/FormMessage(message as text, message_title as text)
+/datum/announcement/priority/FormMessage(message, message_title)
 	. = "<h1 class='alert'>[message_title]</h1>"
 	. += "<br><span class='alert'>[message]</span>"
 	if(announcer)
 		. += "<br><span class='alert'> -[html_encode(announcer)]</span>"
 	. += "<br>"
 
-/datum/announcement/priority/command/FormMessage(message as text, message_title as text)
+/datum/announcement/priority/command/FormMessage(message, message_title)
 	. = "<h1 class='alert'>[GLOB.using_map.boss_name] Update</h1>"
 	if (message_title)
 		. += "<br><h2 class='alert'>[message_title]</h2>"
@@ -77,7 +77,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	. += "<br><span class='alert'>[message]</span><br>"
 	. += "<br>"
 
-/datum/announcement/priority/security/FormMessage(message as text, message_title as text)
+/datum/announcement/priority/security/FormMessage(message, message_title)
 	. = "<font size=4 color='red'>[message_title]</font>"
 	. += "<br><font color='red'>[message]</font>"
 

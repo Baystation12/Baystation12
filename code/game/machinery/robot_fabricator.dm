@@ -10,7 +10,7 @@
 	idle_power_usage = 40
 	active_power_usage = 10000
 
-/obj/machinery/robotic_fabricator/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/robotic_fabricator/attackby(obj/item/O, mob/user)
 	if (istype(O, /obj/item/stack/material) && O.get_material_name() == MATERIAL_STEEL)
 		var/obj/item/stack/M = O
 		if (src.metal_amount < 150000.0)

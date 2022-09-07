@@ -64,7 +64,7 @@
 	else if(ishuman(over_object))
 		hook_up(over_object, usr)
 
-/obj/structure/iv_drip/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/iv_drip/attackby(obj/item/W, mob/user)
 	if (istype(W, /obj/item/reagent_containers/ivbag))
 		if(!isnull(src.beaker))
 			to_chat(user, "There is already a reagent container loaded!")
@@ -121,7 +121,7 @@
 		if(attached.take_blood(beaker,amount))
 			queue_icon_update()
 
-/obj/structure/iv_drip/attack_hand(mob/user as mob)
+/obj/structure/iv_drip/attack_hand(mob/user)
 	if(attached)
 		drip_detach(user)
 	else if(beaker)

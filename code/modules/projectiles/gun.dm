@@ -279,7 +279,7 @@
 	return null
 
 //used by aiming code
-/obj/item/gun/proc/can_hit(atom/target as mob, mob/living/user as mob)
+/obj/item/gun/proc/can_hit(atom/target, mob/living/user)
 	if(!special_check(user))
 		return 2
 	//just assume we can shoot through glass and stuff. No big deal, the player can just choose to not target someone

@@ -203,7 +203,7 @@
 			return SPAN_WARNING("You cannot take this [src] apart, it too exerted due to internal pressure.")
 	return ..()
 
-/obj/machinery/atmospherics/unary/vent_scrubber/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/atmospherics/unary/vent_scrubber/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/weldingtool))
 
 		var/obj/item/weldingtool/WT = W

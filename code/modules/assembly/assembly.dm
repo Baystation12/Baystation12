@@ -44,7 +44,7 @@
 /obj/item/device/assembly/proc/holder_movement()							//Called when the holder is moved
 	return
 
-/obj/item/device/assembly/interact(mob/user as mob)					//Called when attack_self is called
+/obj/item/device/assembly/interact(mob/user)					//Called when attack_self is called
 	return
 
 
@@ -96,7 +96,7 @@
 	return 0
 
 
-/obj/item/device/assembly/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/device/assembly/attackby(obj/item/W, mob/user)
 	if(isassembly(W))
 		var/obj/item/device/assembly/A = W
 		if((!A.secured) && (!secured))
@@ -125,13 +125,13 @@
 			to_chat(user, "\The [src] can be attached!")
 
 
-/obj/item/device/assembly/attack_self(mob/user as mob)
+/obj/item/device/assembly/attack_self(mob/user)
 	if(!user)	return 0
 	user.set_machine(src)
 	interact(user)
 	return 1
 
-/obj/item/device/assembly/interact(mob/user as mob)
+/obj/item/device/assembly/interact(mob/user)
 	return //HTML MENU FOR WIRES GOES HERE
 
 /obj/item/device/assembly/nano_host()

@@ -181,7 +181,7 @@
 			friends -= weakref(user)
 
 
-/mob/living/simple_animal/hostile/commanded/attack_hand(mob/living/carbon/human/M as mob)
+/mob/living/simple_animal/hostile/commanded/attack_hand(mob/living/carbon/human/M)
 	..()
 	if(M.a_intent == I_HURT && retribution) //assume he wants to hurt us.
 		target_mob = M

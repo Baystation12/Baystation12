@@ -70,7 +70,7 @@
 	popup.set_content(get_console_data(GLOB.all_pipe_datums_by_category, TRUE))
 	popup.open()
 
-/obj/machinery/pipedispenser/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/pipedispenser/attackby(obj/item/W, mob/user)
 	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/machine_chassis))
 		if(!user.unEquip(W))
 			return
@@ -116,7 +116,7 @@
 	machine_desc = "Similar to a normal pipe dispenser, but calibrated for the heavy, dense metal tubes used in disposals networks."
 
 //Allow you to drag-drop disposal pipes into it
-/obj/machinery/pipedispenser/disposal/MouseDrop_T(obj/structure/disposalconstruct/pipe as obj, mob/user as mob)
+/obj/machinery/pipedispenser/disposal/MouseDrop_T(obj/structure/disposalconstruct/pipe, mob/user)
 	if(!CanPhysicallyInteract(user))
 		return
 

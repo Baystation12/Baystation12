@@ -26,7 +26,7 @@
 	else if (contents.len >= max_butts/2)
 		overlays |= image('icons/obj/objects.dmi',"ashtray_half")
 
-/obj/item/material/ashtray/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/material/ashtray/attackby(obj/item/W, mob/user)
 	if (health_dead)
 		return
 

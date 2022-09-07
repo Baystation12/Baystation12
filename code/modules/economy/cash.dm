@@ -17,7 +17,7 @@
 	var/worth = 0
 	var/static/denominations = list(1000,500,200,100,50,20,10,1)
 
-/obj/item/spacecash/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/spacecash/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/spacecash))
 		if(istype(W, /obj/item/spacecash/ewallet)) return 0
 
@@ -94,7 +94,7 @@
 	else
 		w_class = ITEM_SIZE_SMALL
 
-/obj/item/spacecash/bundle/attack_hand(mob/user as mob)
+/obj/item/spacecash/bundle/attack_hand(mob/user)
 	if (user.get_inactive_hand() == src)
 		var/amount = input(usr, "How many [GLOB.using_map.local_currency_name] do you want to take? (0 to [src.worth])", "Take Money", 20) as num
 		amount = round(clamp(amount, 0, src.worth))

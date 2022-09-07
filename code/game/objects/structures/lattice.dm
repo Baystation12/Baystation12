@@ -60,7 +60,7 @@
 			qdel(C)
 	qdel(src)
 
-/obj/structure/lattice/attackby(obj/item/C as obj, mob/user as mob)
+/obj/structure/lattice/attackby(obj/item/C, mob/user)
 
 	if (istype(C, /obj/item/stack/tile/floor))
 		var/turf/T = get_turf(src)

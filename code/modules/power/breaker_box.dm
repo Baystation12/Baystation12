@@ -84,7 +84,7 @@
 	busy = 0
 	return TRUE
 
-/obj/machinery/power/breakerbox/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/power/breakerbox/attackby(obj/item/W, mob/user)
 	if(isMultitool(W))
 		var/newtag = input(user, "Enter new RCON tag. Use \"NO_TAG\" to disable RCON or leave empty to cancel.", "SMES RCON system") as text
 		if(newtag)

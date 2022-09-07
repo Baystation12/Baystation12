@@ -667,7 +667,7 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 	//STINGS//	//They get a pretty header because there's just so fucking many of them ;_;
 	//////////
 
-/mob/proc/sting_can_reach(mob/M as mob, sting_range = 1)
+/mob/proc/sting_can_reach(mob/M, sting_range = 1)
 	if(M.loc == src.loc)
 		return 1 //target and source are in the same thing
 	if(!isturf(src.loc) || !isturf(M.loc))

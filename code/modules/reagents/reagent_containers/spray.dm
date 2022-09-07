@@ -23,7 +23,7 @@
 	..()
 	src.verbs -= /obj/item/reagent_containers/verb/set_amount_per_transfer_from_this
 
-/obj/item/reagent_containers/spray/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
+/obj/item/reagent_containers/spray/afterattack(atom/A, mob/user, proximity)
 	if(istype(A, /obj/item/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) || istype(A, /obj/item/reagent_containers) || istype(A, /obj/structure/hygiene/sink) || istype(A, /obj/structure/janitorialcart))
 		return
 
@@ -43,7 +43,7 @@
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	return
 
-/obj/item/reagent_containers/spray/proc/Spray_at(atom/A as mob|obj, mob/user as mob, proximity)
+/obj/item/reagent_containers/spray/proc/Spray_at(atom/A, mob/user, proximity)
 	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -6)
 	if (reagents.should_admin_log())
 		var/contained = reagents.get_reagents()
@@ -143,7 +143,7 @@
 	safety = !safety
 	to_chat(usr, "<span class = 'notice'>You switch the safety [safety ? "on" : "off"].</span>")
 
-/obj/item/reagent_containers/spray/pepper/Spray_at(atom/A as mob|obj)
+/obj/item/reagent_containers/spray/pepper/Spray_at(atom/A)
 	if(safety)
 		to_chat(usr, "<span class = 'warning'>The safety is on!</span>")
 		return
@@ -176,7 +176,7 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
 	step_delay = 8
 
-/obj/item/reagent_containers/spray/chemsprayer/Spray_at(atom/A as mob|obj)
+/obj/item/reagent_containers/spray/chemsprayer/Spray_at(atom/A)
 	var/direction = get_dir(src, A)
 	var/turf/T = get_turf(A)
 	var/turf/T1 = get_step(T,turn(direction, 90))
@@ -208,7 +208,7 @@
 	..()
 	reagents.add_reagent(/datum/reagent/toxin/plantbgone, 100)
 
-/obj/item/reagent_containers/spray/plantbgone/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
+/obj/item/reagent_containers/spray/plantbgone/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return
 
 	if(istype(A, /obj/effect/blob)) // blob damage in blob code

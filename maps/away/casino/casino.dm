@@ -93,7 +93,7 @@
 	anchored = TRUE
 	var/busy=0
 
-/obj/structure/casino/roulette/attack_hand(mob/user as mob)
+/obj/structure/casino/roulette/attack_hand(mob/user)
 	if (busy)
 		to_chat(user,"<span class='notice'>You cannot spin now! \The [src] is already spinning.</span> ")
 		return

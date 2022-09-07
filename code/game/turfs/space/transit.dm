@@ -2,7 +2,7 @@
 	var/pushdirection // push things that get caught in the transit tile this direction
 
 //Overwrite because we dont want people building rods in space.
-/turf/space/transit/attackby(obj/O as obj, mob/user as mob)
+/turf/space/transit/attackby(obj/O, mob/user)
 	return
 
 //generates a list used to randomize transit animations so they aren't in lockstep

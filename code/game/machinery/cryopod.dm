@@ -473,7 +473,7 @@
 	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
 	attempt_enter(target, user)
 
-/obj/machinery/cryopod/attackby(obj/item/G as obj, mob/user as mob)
+/obj/machinery/cryopod/attackby(obj/item/G, mob/user)
 
 	if(istype(G, /obj/item/grab))
 		var/obj/item/grab/grab = G
@@ -604,7 +604,7 @@
 	else
 		to_chat(user, "<span class='notice'>The glass is already open.</span>")
 
-/obj/structure/broken_cryo/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/broken_cryo/attackby(obj/item/W, mob/user)
 	if (busy)
 		to_chat(user, "<span class='notice'>Someone else is attempting to open this.</span>")
 		return

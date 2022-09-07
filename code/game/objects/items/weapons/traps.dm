@@ -17,7 +17,7 @@
 /obj/item/beartrap/proc/can_use(mob/user)
 	return (user.IsAdvancedToolUser() && !issilicon(user) && !user.stat && !user.restrained())
 
-/obj/item/beartrap/user_unbuckle_mob(mob/user as mob)
+/obj/item/beartrap/user_unbuckle_mob(mob/user)
 	if(buckled_mob && can_use(user))
 		user.visible_message(
 			"<span class='notice'>\The [user] begins freeing \the [buckled_mob] from \the [src].</span>",
@@ -29,7 +29,7 @@
 			unbuckle_mob()
 			anchored = FALSE
 
-/obj/item/beartrap/attack_self(mob/user as mob)
+/obj/item/beartrap/attack_self(mob/user)
 	..()
 	if(!deployed && can_use(user))
 		user.visible_message(
@@ -49,7 +49,7 @@
 			update_icon()
 			anchored = TRUE
 
-/obj/item/beartrap/attack_hand(mob/user as mob)
+/obj/item/beartrap/attack_hand(mob/user)
 	if(buckled_mob)
 		user_unbuckle_mob(user)
 	else if(deployed && can_use(user))
@@ -86,7 +86,7 @@
 	to_chat(L, "<span class='danger'>The steel jaws of \the [src] bite into you, trapping you in place!</span>")
 	deployed = 0
 
-/obj/item/beartrap/Crossed(AM as mob|obj)
+/obj/item/beartrap/Crossed(AM)
 	if(deployed && isliving(AM))
 		var/mob/living/L = AM
 		if(!MOVING_DELIBERATELY(L))

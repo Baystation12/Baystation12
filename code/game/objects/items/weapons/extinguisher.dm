@@ -55,7 +55,7 @@
 	if(distance <= 0)
 		to_chat(user, text("[icon2html(src, viewers(get_turf(src)))] [] contains [] units of water left!", src, src.reagents.total_volume))
 
-/obj/item/extinguisher/attack_self(mob/user as mob)
+/obj/item/extinguisher/attack_self(mob/user)
 	safety = !safety
 	src.icon_state = "[sprite_name][!safety]"
 	src.desc = "The safety is [safety ? "on" : "off"]."

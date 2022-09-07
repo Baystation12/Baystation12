@@ -55,7 +55,7 @@
 	else
 		return 1
 
-/obj/structure/windoor_assembly/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
+/obj/structure/windoor_assembly/CheckExit(atom/movable/mover, turf/target)
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return 1
 	if(get_dir(loc, target) == dir)
@@ -64,7 +64,7 @@
 		return 1
 
 
-/obj/structure/windoor_assembly/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/windoor_assembly/attackby(obj/item/W, mob/user)
 	//I really should have spread this out across more states but thin little windoors are hard to sprite.
 	switch(state)
 		if("01")

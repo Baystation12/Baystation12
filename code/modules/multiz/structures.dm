@@ -223,7 +223,7 @@
 			above.ChangeTurf(/turf/simulated/open)
 	. = ..()
 
-/obj/structure/stairs/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
+/obj/structure/stairs/CheckExit(atom/movable/mover, turf/target)
 	if(get_dir(loc, target) == dir && upperStep(mover.loc))
 		return FALSE
 	return ..()

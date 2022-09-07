@@ -46,7 +46,7 @@
 	else
 		src.overlays += image('icons/obj/kitchen.dmi', "gridle")
 
-/obj/machinery/gibber/relaymove(mob/user as mob)
+/obj/machinery/gibber/relaymove(mob/user)
 	src.go_out()
 	return
 
@@ -155,7 +155,7 @@
 	update_icon()
 	return
 
-/obj/machinery/gibber/proc/startgibbing(mob/user as mob)
+/obj/machinery/gibber/proc/startgibbing(mob/user)
 	if(src.operating)
 		return
 	if(!src.occupant)

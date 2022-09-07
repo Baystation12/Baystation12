@@ -102,7 +102,7 @@
 		success = FALSE
 	return success && ..()
 
-/obj/item/robot_parts/chest/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/robot_parts/chest/attackby(obj/item/W, mob/user)
 	..()
 	if(istype(W, /obj/item/cell))
 		if(src.cell)
@@ -182,7 +182,7 @@
 			continue
 		. += N
 
-/obj/item/robot_parts/head/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/robot_parts/head/attackby(obj/item/W, mob/user)
 	..()
 	if(istype(W, /obj/item/device/flash))
 		if(istype(user,/mob/living/silicon/robot))
@@ -195,7 +195,7 @@
 		else
 			add_flashes(W,user)
 
-/obj/item/robot_parts/head/proc/add_flashes(obj/item/W as obj, mob/user as mob) //Made into a seperate proc to avoid copypasta
+/obj/item/robot_parts/head/proc/add_flashes(obj/item/W, mob/user) //Made into a seperate proc to avoid copypasta
 	if(src.flash1 && src.flash2)
 		to_chat(user, "<span class='notice'>You have already inserted the eyes!</span>")
 		return

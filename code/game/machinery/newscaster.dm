@@ -756,7 +756,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 	is_synth = synth
 	photo = p
 
-/obj/machinery/newscaster/proc/AttachPhoto(mob/user as mob)
+/obj/machinery/newscaster/proc/AttachPhoto(mob/user)
 	if(photo_data)
 		qdel(photo_data)
 		photo_data = null
@@ -907,7 +907,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 			src.attack_self(src.loc)
 
 
-/obj/item/newspaper/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/newspaper/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/pen))
 		if(src.scribble_page == src.curr_page)
 			to_chat(user, "<FONT COLOR='blue'>There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?</FONT>")
@@ -927,7 +927,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 ////////////////////////////////////helper procs
 
 
-/obj/machinery/newscaster/proc/scan_user(mob/living/user as mob)
+/obj/machinery/newscaster/proc/scan_user(mob/living/user)
 	if(istype(user,/mob/living/carbon/human))                       //User is a human
 		var/mob/living/carbon/human/human_user = user
 		var/obj/item/card/id/id = human_user.GetIdCard()

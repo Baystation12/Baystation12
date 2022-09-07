@@ -11,11 +11,11 @@
 	QDEL_NULL(pockets)
 	. = ..()
 
-/obj/item/clothing/suit/storage/attack_hand(mob/user as mob)
+/obj/item/clothing/suit/storage/attack_hand(mob/user)
 	if (pockets.handle_attack_hand(user))
 		..(user)
 
-/obj/item/clothing/suit/storage/MouseDrop(obj/over_object as obj)
+/obj/item/clothing/suit/storage/MouseDrop(obj/over_object)
 	if (pockets.handle_mousedrop(usr, over_object))
 		..(over_object)
 

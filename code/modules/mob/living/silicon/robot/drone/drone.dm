@@ -152,7 +152,7 @@ var/global/list/mob_hat_cache = list()
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
 
 //Redefining some robot procs...
-/mob/living/silicon/robot/drone/fully_replace_character_name(pickedName as text)
+/mob/living/silicon/robot/drone/fully_replace_character_name(pickedName)
 	// Would prefer to call the grandparent proc but this isn't possible, so..
 	real_name = pickedName
 	SetName(real_name)

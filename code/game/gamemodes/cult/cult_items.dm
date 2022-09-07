@@ -40,7 +40,7 @@
 
 	return 1
 
-/obj/item/melee/cultblade/pickup(mob/living/user as mob)
+/obj/item/melee/cultblade/pickup(mob/living/user)
 	if(!iscultist(user))
 		to_chat(user, "<span class='warning'>An overwhelming feeling of dread comes over you as you pick up the cultist's sword. It would be wise to be rid of this blade quickly.</span>")
 		user.make_dizzy(120)

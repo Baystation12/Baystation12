@@ -74,7 +74,7 @@
 	interact(user)
 	return TRUE
 
-/obj/machinery/icecream_vat/interact(mob/user as mob)
+/obj/machinery/icecream_vat/interact(mob/user)
 	user.set_machine(src)
 	var/dat
 	dat += "<b>ICECREAM</b><br><div class='statusDisplay'>"
@@ -99,7 +99,7 @@
 	popup.set_content(dat)
 	popup.open()
 
-/obj/machinery/icecream_vat/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/icecream_vat/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/reagent_containers/food/snacks/icecream))
 		var/obj/item/reagent_containers/food/snacks/icecream/I = O
 		if(!I.ice_creamed)

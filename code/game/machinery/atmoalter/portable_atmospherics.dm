@@ -103,7 +103,7 @@
 	if (network)
 		network.update = 1
 
-/obj/machinery/portable_atmospherics/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/portable_atmospherics/attackby(obj/item/W, mob/user)
 	if ((istype(W, /obj/item/tank) && !( src.destroyed )))
 		if (src.holding)
 			return

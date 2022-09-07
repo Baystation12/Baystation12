@@ -13,10 +13,10 @@
 	var/label_x
 	var/tag_x
 
-/obj/structure/bigDelivery/attack_robot(mob/user as mob)
+/obj/structure/bigDelivery/attack_robot(mob/user)
 	unwrap(user)
 
-/obj/structure/bigDelivery/attack_hand(mob/user as mob)
+/obj/structure/bigDelivery/attack_hand(mob/user)
 	unwrap(user)
 
 /obj/structure/bigDelivery/proc/unwrap(mob/user)
@@ -24,7 +24,7 @@
 		// Destroy will drop our wrapped object on the turf, so let it.
 		qdel(src)
 
-/obj/structure/bigDelivery/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/bigDelivery/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/device/destTagger))
 		var/obj/item/device/destTagger/O = W
 		if(O.currTag)
@@ -143,13 +143,13 @@
 
 	qdel(src)
 
-/obj/item/smallDelivery/attack_robot(mob/user as mob)
+/obj/item/smallDelivery/attack_robot(mob/user)
 	unwrap(user)
 
-/obj/item/smallDelivery/attack_self(mob/user as mob)
+/obj/item/smallDelivery/attack_self(mob/user)
 	unwrap(user)
 
-/obj/item/smallDelivery/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/smallDelivery/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/device/destTagger))
 		var/obj/item/device/destTagger/O = W
 		if(O.currTag)
@@ -254,7 +254,7 @@
 	throw_speed = 4
 	throw_range = 5
 
-/obj/item/stack/package_wrap/afterattack(obj/target as obj, mob/user as mob, proximity)
+/obj/item/stack/package_wrap/afterattack(obj/target, mob/user, proximity)
 	if(!proximity) return
 	if(!istype(target))	//this really shouldn't be necessary (but it is).	-Pete
 		return
@@ -345,7 +345,7 @@
 	slot_flags = SLOT_BELT
 	matter = list(MATERIAL_STEEL = 100, MATERIAL_GLASS = 34)
 
-/obj/item/device/destTagger/proc/openwindow(mob/user as mob)
+/obj/item/device/destTagger/proc/openwindow(mob/user)
 	var/dat = "<tt><center><h1><b>TagMaster 2.3</b></h1></center>"
 
 	dat += "<table style='width:100%; padding:4px;'><tr>"
@@ -360,7 +360,7 @@
 	show_browser(user, dat, "window=destTagScreen;size=450x375")
 	onclose(user, "destTagScreen")
 
-/obj/item/device/destTagger/attack_self(mob/user as mob)
+/obj/item/device/destTagger/attack_self(mob/user)
 	openwindow(user)
 
 /obj/item/device/destTagger/OnTopic(user, href_list, state)

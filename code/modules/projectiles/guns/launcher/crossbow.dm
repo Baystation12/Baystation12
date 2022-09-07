@@ -81,7 +81,7 @@
 	update_icon()
 	..()
 
-/obj/item/gun/launcher/crossbow/attack_self(mob/living/user as mob)
+/obj/item/gun/launcher/crossbow/attack_self(mob/living/user)
 	if(tension)
 		if(bolt)
 			user.visible_message("[user] relaxes the tension on [src]'s string and removes [bolt].","You relax the tension on [src]'s string and remove [bolt].")
@@ -96,7 +96,7 @@
 	else
 		draw(user)
 
-/obj/item/gun/launcher/crossbow/proc/draw(mob/user as mob)
+/obj/item/gun/launcher/crossbow/proc/draw(mob/user)
 
 	if(!bolt)
 		to_chat(user, "You don't have anything nocked to [src].")
@@ -130,7 +130,7 @@
 
 		user.visible_message("[usr] draws back the string of [src]!","<span class='notice'>You continue drawing back the string of [src]!</span>")
 
-/obj/item/gun/launcher/crossbow/proc/increase_tension(mob/user as mob)
+/obj/item/gun/launcher/crossbow/proc/increase_tension(mob/user)
 
 	if(!bolt || !tension || current_user != user) //Arrow has been fired, bow has been relaxed or user has changed.
 		return
@@ -235,7 +235,7 @@
 		flick("[icon_state]-empty", src)
 
 
-/obj/item/gun/launcher/crossbow/rapidcrossbowdevice/attack_self(mob/living/user as mob)
+/obj/item/gun/launcher/crossbow/rapidcrossbowdevice/attack_self(mob/living/user)
 	if(tension)
 		user.visible_message("[user] relaxes the tension on [src]'s string.","You relax the tension on [src]'s string.")
 		tension = 0

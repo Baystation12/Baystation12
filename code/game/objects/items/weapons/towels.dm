@@ -10,7 +10,7 @@
 	hitsound = 'sound/weapons/towelwhip.ogg'
 	desc = "A soft cotton towel."
 
-/obj/item/towel/attack_self(mob/living/user as mob)
+/obj/item/towel/attack_self(mob/living/user)
 	user.visible_message("<span class='notice'>[user] uses [src] to towel themselves off.</span>")
 	playsound(user, 'sound/weapons/towelwipe.ogg', 25, 1)
 

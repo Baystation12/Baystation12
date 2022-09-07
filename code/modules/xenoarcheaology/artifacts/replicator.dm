@@ -123,7 +123,7 @@
 
 	show_browser(user, dat, "window=alien_replicator")
 
-/obj/machinery/replicator/attackby(obj/item/W as obj, mob/living/user as mob)
+/obj/machinery/replicator/attackby(obj/item/W, mob/living/user)
 	if(!user.unEquip(W, src))
 		return
 	stored_materials.Add(W)

@@ -72,7 +72,7 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "cleaved", "sundered")
 
-/obj/item/excalibur/pickup(mob/living/user as mob)
+/obj/item/excalibur/pickup(mob/living/user)
 	if(user.mind)
 		if(!GLOB.wizards.is_antagonist(user.mind) || user.mind.special_role != ANTAG_SERVANT)
 			START_PROCESSING(SSobj, src)

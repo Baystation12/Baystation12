@@ -36,7 +36,7 @@
 		var/mob/living/M = src.loc
 		M.say(pick(heard_talk))
 
-/obj/item/clothing/mask/gas/poltergeist/hear_talk(mob/M as mob, text)
+/obj/item/clothing/mask/gas/poltergeist/hear_talk(mob/M, text)
 	..()
 	if(heard_talk.len > max_stored_messages)
 		heard_talk.Remove(pick(heard_talk))
@@ -129,7 +129,7 @@
 		else if(get_dist(W, src) > 10)
 			shadow_wights.Remove(wight_check_index)
 
-/obj/item/vampiric/hear_talk(mob/M as mob, text)
+/obj/item/vampiric/hear_talk(mob/M, text)
 	..()
 	if(world.time - last_bloodcall >= bloodcall_interval && (M in view(7, src)))
 		bloodcall(M)

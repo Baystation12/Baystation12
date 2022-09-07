@@ -148,7 +148,7 @@
 		M.update_inv_r_hand(1)
 
 
-/obj/item/clothing/mask/smokable/ecig/attackby(obj/item/I, mob/user as mob)
+/obj/item/clothing/mask/smokable/ecig/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/reagent_containers/ecig_cartridge))
 		if (ec_cartridge)//can't add second one
 			to_chat(user, "<span class='notice'>A cartridge has already been installed.</span> ")
@@ -176,7 +176,7 @@
 			to_chat(user, "<span class='notice'>\The [src] already has a battery installed.</span>")
 
 
-/obj/item/clothing/mask/smokable/ecig/attack_self(mob/user as mob)
+/obj/item/clothing/mask/smokable/ecig/attack_self(mob/user)
 	if (active)
 		Deactivate()
 		to_chat(user, "<span class='notice'>You turn off \the [src].</span> ")
@@ -199,7 +199,7 @@
 		else
 			to_chat(user, "<span class='warning'>\The [src] does not have a battery installed.</span>")
 
-/obj/item/clothing/mask/smokable/ecig/attack_hand(mob/user as mob)//eject cartridge
+/obj/item/clothing/mask/smokable/ecig/attack_hand(mob/user)//eject cartridge
 	if(user.get_inactive_hand() == src)//if being hold
 		if (ec_cartridge)
 			active=0

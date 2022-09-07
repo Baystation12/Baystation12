@@ -3,7 +3,7 @@
 	shuttle_tag = "Special Operations"
 	req_access = list(access_cent_specops)
 
-/obj/machinery/computer/shuttle_control/specops/attack_ai(user as mob)
+/obj/machinery/computer/shuttle_control/specops/attack_ai(user)
 	to_chat(user, "<span class='warning'>Access Denied.</span>")
 	return 1
 

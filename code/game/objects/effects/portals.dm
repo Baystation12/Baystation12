@@ -11,19 +11,19 @@
 	var/dangerous = 0
 	var/failchance = 0
 
-/obj/effect/portal/Bumped(mob/M as mob|obj)
+/obj/effect/portal/Bumped(mob/M)
 	spawn(0)
 		src.teleport(M)
 		return
 	return
 
-/obj/effect/portal/Crossed(AM as mob|obj)
+/obj/effect/portal/Crossed(AM)
 	spawn(0)
 		src.teleport(AM)
 		return
 	return
 
-/obj/effect/portal/attack_hand(mob/user as mob)
+/obj/effect/portal/attack_hand(mob/user)
 	spawn(0)
 		src.teleport(user)
 		return
@@ -47,7 +47,7 @@
 	target = null
 	. = ..()
 
-/obj/effect/portal/proc/teleport(atom/movable/M as mob|obj)
+/obj/effect/portal/proc/teleport(atom/movable/M)
 	if(istype(M, /obj/effect)) //sparks don't teleport
 		return
 	if (icon_state == "portal1")

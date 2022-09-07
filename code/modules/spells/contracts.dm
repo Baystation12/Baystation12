@@ -7,7 +7,7 @@
 	var/contract_master = null
 	var/list/contract_spells = list(/spell/contract/reward,/spell/contract/punish,/spell/contract/return_master)
 
-/obj/item/contract/attack_self(mob/user as mob)
+/obj/item/contract/attack_self(mob/user)
 	if(contract_master == null)
 		to_chat(user, "<span class='notice'>You bind the contract to your soul, making you the recipient of whatever poor fool's soul that decides to contract with you.</span>")
 		contract_master = user
@@ -32,7 +32,7 @@
 		log_and_message_admins("signed their soul over to \the [contract_master] using \the [src].", user)
 		qdel(src)
 
-/obj/item/contract/proc/contract_effect(mob/user as mob)
+/obj/item/contract/proc/contract_effect(mob/user)
 	to_chat(user, "<span class='warning'>You've signed your soul over to \the [contract_master] and with that your unbreakable vow of servitude begins.</span>")
 	return 1
 
@@ -41,7 +41,7 @@
 	desc = "a wizarding school contract for those who want to sign their soul for a piece of the magic pie."
 	color = "#993300"
 
-/obj/item/contract/apprentice/contract_effect(mob/user as mob)
+/obj/item/contract/apprentice/contract_effect(mob/user)
 	if(user.mind.special_role == ANTAG_APPRENTICE)
 		to_chat(user, "<span class='warning'>You are already a wizarding apprentice!</span>")
 		return 0
@@ -62,7 +62,7 @@
 	desc = "This contract is almost see-through..."
 	color = "#339900"
 
-/obj/item/contract/wizard/xray/contract_effect(mob/user as mob)
+/obj/item/contract/wizard/xray/contract_effect(mob/user)
 	..()
 	if (!(MUTATION_XRAY in user.mutations))
 		user.mutations.Add(MUTATION_XRAY)
@@ -78,7 +78,7 @@
 	desc = "The edges of the contract grow blurry when you look away from them. To be fair, actually reading it gives you a headache."
 	color = "#fcc605"
 
-/obj/item/contract/wizard/telepathy/contract_effect(mob/user as mob)
+/obj/item/contract/wizard/telepathy/contract_effect(mob/user)
 	..()
 	if (!ishuman(user))
 		return 0
@@ -108,7 +108,7 @@
 		item_name = initial(S.name)
 	name = "[item_name] contract"
 
-/obj/item/contract/boon/contract_effect(mob/user as mob)
+/obj/item/contract/boon/contract_effect(mob/user)
 	..()
 	if(user.mind.special_role == ANTAG_SERVANT)
 		to_chat(user, "<span class='warning'>As a servant you find yourself unable to use this contract.</span>")

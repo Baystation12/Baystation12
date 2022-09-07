@@ -42,7 +42,7 @@
 	startswith = list(/obj/item/spacecash/bundle/c1000 = 1)
 
 //HUMAN
-/obj/item/storage/bag/cash/infinite/remove_from_storage(obj/item/W as obj, atom/new_location)
+/obj/item/storage/bag/cash/infinite/remove_from_storage(obj/item/W, atom/new_location)
 	. = ..()
 	if(.)
 		if(istype(W,/obj/item/spacecash)) //only matters if its spacecash.
@@ -167,20 +167,20 @@
 	if(istype(owner,/mob))
 		contract_master = owner
 
-/obj/item/contract/apprentice/skrell/attack_self(mob/user as mob)
+/obj/item/contract/apprentice/skrell/attack_self(mob/user)
 	if(!linked)
 		to_chat(user, "<span class='warning'>This contract requires a link to a spellbook.</span>")
 		return
 	..()
 
-/obj/item/contract/apprentice/skrell/afterattack(atom/A, mob/user as mob, proximity)
+/obj/item/contract/apprentice/skrell/afterattack(atom/A, mob/user, proximity)
 	if(!linked && istype(A,/obj/item/spellbook))
 		linked = A
 		to_chat(user, "<span class='notice'>You've linked \the [A] to \the [src]</span>")
 		return
 	..()
 
-/obj/item/contract/apprentice/skrell/contract_effect(mob/user as mob)
+/obj/item/contract/apprentice/skrell/contract_effect(mob/user)
 	. = ..()
 	if(.)
 		linked.uses += 0.5

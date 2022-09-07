@@ -10,7 +10,7 @@
 /turf/simulated/floor/holofloor/get_lumcount(minlum = 0, maxlum = 1)
 	return 0.8
 
-/turf/simulated/floor/holofloor/attackby(obj/item/W as obj, mob/user as mob)
+/turf/simulated/floor/holofloor/attackby(obj/item/W, mob/user)
 	return
 	// HOLOFLOOR DOES NOT GIVE A FUCK
 
@@ -154,7 +154,7 @@
 /obj/structure/window/reinforced/holowindow/Destroy()
 	..()
 
-/obj/structure/window/reinforced/holowindow/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/window/reinforced/holowindow/attackby(obj/item/W, mob/user)
 
 	if(!istype(W) || W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
 
@@ -181,7 +181,7 @@
 /obj/machinery/door/window/holowindoor/Destroy()
 	..()
 
-/obj/machinery/door/window/holowindoor/attackby(obj/item/I as obj, mob/user as mob)
+/obj/machinery/door/window/holowindoor/attackby(obj/item/I, mob/user)
 
 	if (src.operating == 1)
 		return
@@ -214,7 +214,7 @@
 /obj/structure/bed/chair/holochair/Destroy()
 	..()
 
-/obj/structure/bed/chair/holochair/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/bed/chair/holochair/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/wrench))
 		to_chat(user, ("<span class='notice'>It's a holochair, you can't dismantle it!</span>"))
 	return
@@ -258,7 +258,7 @@
 /obj/item/holo/esword/New()
 	item_color = pick("red","blue","green","purple")
 
-/obj/item/holo/esword/attack_self(mob/living/user as mob)
+/obj/item/holo/esword/attack_self(mob/living/user)
 	active = !active
 	if (active)
 		force = 30
@@ -363,7 +363,7 @@
 	active_power_usage = 6
 	power_channel = ENVIRON
 
-/obj/machinery/readybutton/attack_ai(mob/user as mob)
+/obj/machinery/readybutton/attack_ai(mob/user)
 	to_chat(user, "The AI is not to interact with these devices!")
 	return
 
@@ -371,7 +371,7 @@
 	..()
 
 
-/obj/machinery/readybutton/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/readybutton/attackby(obj/item/W, mob/user)
 	to_chat(user, "The device is a solid button, there's nothing you can do with it!")
 
 /obj/machinery/readybutton/physical_attack_hand(mob/user)

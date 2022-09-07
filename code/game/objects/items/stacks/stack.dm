@@ -54,10 +54,10 @@
 		else
 			to_chat(user, "There is enough charge for [get_amount()].")
 
-/obj/item/stack/attack_self(mob/user as mob)
+/obj/item/stack/attack_self(mob/user)
 	list_recipes(user)
 
-/obj/item/stack/proc/list_recipes(mob/user as mob, recipes_sublist)
+/obj/item/stack/proc/list_recipes(mob/user, recipes_sublist)
 	if (!recipes)
 		return
 	if (!src || get_amount() <= 0)
@@ -312,7 +312,7 @@
 	if (amount < max_amount)
 		. = Ceil(. * amount / max_amount)
 
-/obj/item/stack/attack_hand(mob/user as mob)
+/obj/item/stack/attack_hand(mob/user)
 	if (user.get_inactive_hand() == src)
 		var/N = input("How many stacks of [src] would you like to split off?", "Split stacks", 1) as num|null
 		if(N)
@@ -328,7 +328,7 @@
 		..()
 	return
 
-/obj/item/stack/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/stack/attackby(obj/item/W, mob/user)
 	if (istype(W, /obj/item/stack))
 		var/obj/item/stack/S = W
 		src.transfer_to(S)

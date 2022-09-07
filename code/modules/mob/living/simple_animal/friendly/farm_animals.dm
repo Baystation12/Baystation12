@@ -77,7 +77,7 @@
 				var/step = get_step_to(src, food, 0)
 				Move(step)
 
-/mob/living/simple_animal/hostile/retaliate/goat/attackby(obj/item/O as obj, mob/user as mob)
+/mob/living/simple_animal/hostile/retaliate/goat/attackby(obj/item/O, mob/user)
 	var/obj/item/reagent_containers/glass/G = O
 	if(stat == CONSCIOUS && istype(G) && G.is_open_container())
 		user.visible_message("<span class='notice'>[user] milks [src] using \the [O].</span>")
@@ -120,7 +120,7 @@
 	udder = new(50, src)
 	..()
 
-/mob/living/simple_animal/passive/cow/attackby(obj/item/O as obj, mob/user as mob)
+/mob/living/simple_animal/passive/cow/attackby(obj/item/O, mob/user)
 	var/obj/item/reagent_containers/glass/G = O
 	if(stat == CONSCIOUS && istype(G) && G.is_open_container())
 		user.visible_message("<span class='notice'>[user] milks [src] using \the [O].</span>")
@@ -139,7 +139,7 @@
 	if(udder && prob(5))
 		udder.add_reagent(/datum/reagent/drink/milk, rand(5, 10))
 
-/mob/living/simple_animal/passive/cow/attack_hand(mob/living/carbon/M as mob)
+/mob/living/simple_animal/passive/cow/attack_hand(mob/living/carbon/M)
 	if(!stat && M.a_intent == I_DISARM && icon_state != icon_dead)
 		M.visible_message("<span class='warning'>[M] tips over [src].</span>","<span class='notice'>You tip over [src].</span>")
 		Weaken(30)
@@ -243,7 +243,7 @@ var/global/chicken_count = 0
 	..(gibbed, deathmessage, show_dead_message)
 	chicken_count -= 1
 
-/mob/living/simple_animal/passive/chicken/attackby(obj/item/O as obj, mob/user as mob)
+/mob/living/simple_animal/passive/chicken/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/reagent_containers/food/snacks/grown)) //feedin' dem chickens
 		var/obj/item/reagent_containers/food/snacks/grown/G = O
 		if(G.seed && G.seed.kitchen_tag == "wheat")

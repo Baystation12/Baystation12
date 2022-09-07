@@ -69,7 +69,7 @@ var/global/list/ai_status_emotions = list(
 
 	var/emotion = "Neutral"
 
-/obj/machinery/ai_status_display/attack_ai/(mob/user as mob)
+/obj/machinery/ai_status_display/attack_ai/(mob/user)
 	var/list/ai_emotions = get_ai_emotions(user.ckey)
 	var/emote = input("Please, select a status!", "AI Status", null, null) in ai_emotions
 	src.emotion = emote

@@ -32,7 +32,7 @@
 	var/contains_body = 0
 	var/has_label = FALSE
 
-/obj/structure/closet/body_bag/attackby(obj/item/W, mob/user as mob)
+/obj/structure/closet/body_bag/attackby(obj/item/W, mob/user)
 	if (istype(W, /obj/item/pen))
 		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
 		if (user.get_active_hand() != W)

@@ -69,7 +69,7 @@
 	var/drying_threshold_temperature = 500 //Kelvin to start drying
 
 //Step one - dehairing.
-/obj/item/stack/animalhide/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/stack/animalhide/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/material/knife) || isHatchet(W))
 
 		//visible message on mobs is defined as visible_message(var/message, var/self_message, var/blind_message)

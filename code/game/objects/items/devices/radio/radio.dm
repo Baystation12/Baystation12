@@ -92,7 +92,7 @@
 		STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/device/radio/attack_self(mob/user as mob)
+/obj/item/device/radio/attack_self(mob/user)
 	user.set_machine(src)
 	interact(user)
 
@@ -297,7 +297,7 @@
 	qdel(A)
 
 // Interprets the message mode when talking into a radio, possibly returning a connection datum
-/obj/item/device/radio/proc/handle_message_mode(mob/living/M as mob, message, message_mode)
+/obj/item/device/radio/proc/handle_message_mode(mob/living/M, message, message_mode)
 	// If a channel isn't specified, send to common.
 	if(!message_mode || message_mode == "headset")
 		return radio_connection
@@ -538,7 +538,7 @@
 					  "[connection.frequency]", channel_color_presets["Menacing Maroon"])
 
 
-/obj/item/device/radio/hear_talk(mob/M as mob, msg, verb = "says", datum/language/speaking = null)
+/obj/item/device/radio/hear_talk(mob/M, msg, verb = "says", datum/language/speaking = null)
 
 	if (broadcasting)
 		if(get_dist(src, M) <= canhear_range)
@@ -596,7 +596,7 @@
 		if (power_usage && cell)
 			to_chat(user, "<span class='notice'>\The [src] charge meter reads [round(cell.percent(), 0.1)]%.</span>")
 
-/obj/item/device/radio/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/device/radio/attackby(obj/item/W, mob/user)
 	..()
 	user.set_machine(src)
 	if(isScrewdriver(W))
@@ -677,7 +677,7 @@
 		var/datum/robot_component/C = R.components["radio"]
 		R.cell_use_power(C.active_usage)
 
-/obj/item/device/radio/borg/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/device/radio/borg/attackby(obj/item/W, mob/user)
 //	..()
 	user.set_machine(src)
 	if (!( isScrewdriver(W) || (istype(W, /obj/item/device/encryptionkey/ ))))
@@ -770,7 +770,7 @@
 	if(.)
 		SSnano.update_uis(src)
 
-/obj/item/device/radio/borg/interact(mob/user as mob)
+/obj/item/device/radio/borg/interact(mob/user)
 	if(!on)
 		return
 

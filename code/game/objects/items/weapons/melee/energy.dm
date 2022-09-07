@@ -60,7 +60,7 @@
 		to_chat(user, "<span class='notice'>\The [src] deactivates!</span>")
 	set_light(0)
 
-/obj/item/melee/energy/attack_self(mob/living/user as mob)
+/obj/item/melee/energy/attack_self(mob/living/user)
 	if(active)
 		if((MUTATION_CLUMSY in user.mutations) && prob(50))
 			user.visible_message("<span class='danger'>\The [user] accidentally cuts \himself with \the [src].</span>",\
@@ -233,7 +233,7 @@
 /obj/item/melee/energy/blade/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER
 
-/obj/item/melee/energy/blade/attack_self(mob/user as mob)
+/obj/item/melee/energy/blade/attack_self(mob/user)
 	user.drop_from_inventory(src)
 
 /obj/item/melee/energy/blade/dropped()

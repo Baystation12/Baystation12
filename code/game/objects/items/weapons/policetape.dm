@@ -171,7 +171,7 @@ var/global/list/tape_roll_applications = list()
 	update_icon()
 	return ..()
 
-/obj/item/taperoll/attack_self(mob/user as mob)
+/obj/item/taperoll/attack_self(mob/user)
 	if(!start)
 		start = get_turf(src)
 		to_chat(usr, "<span class='notice'>You place the first end of \the [src].</span>")
@@ -286,7 +286,7 @@ var/global/list/tape_roll_applications = list()
 		to_chat(usr, "<span class='notice'>You finish placing \the [src].</span>")
 		return
 
-/obj/item/taperoll/afterattack(atom/A, mob/user as mob, proximity)
+/obj/item/taperoll/afterattack(atom/A, mob/user, proximity)
 	if(!proximity)
 		return
 
@@ -332,10 +332,10 @@ var/global/list/tape_roll_applications = list()
 			crumple()
 	return ..(mover)
 
-/obj/item/tape/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/tape/attackby(obj/item/W, mob/user)
 	breaktape(user)
 
-/obj/item/tape/attack_hand(mob/user as mob)
+/obj/item/tape/attack_hand(mob/user)
 	if (user.a_intent == I_HELP && src.allowed(user))
 		user.show_viewers("<span class='notice'>\The [user] lifts \the [src], allowing passage.</span>")
 		for(var/obj/item/tape/T in gettapeline())

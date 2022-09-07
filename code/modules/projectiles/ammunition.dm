@@ -58,7 +58,7 @@
 	if(A)
 		LAZYDISTINCTADD(A.gunshot_residue, caliber)
 
-/obj/item/ammo_casing/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/ammo_casing/attackby(obj/item/W, mob/user)
 	if(isScrewdriver(W))
 		if(!BB)
 			to_chat(user, "<span class='notice'>There is no bullet in the casing to inscribe anything into.</span>")
@@ -136,7 +136,7 @@
 		SetName("[name] ([english_list(labels, and_text = ", ")])")
 	update_icon()
 
-/obj/item/ammo_magazine/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/ammo_magazine/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/ammo_casing))
 		var/obj/item/ammo_casing/C = W
 		if(C.caliber != caliber)

@@ -161,7 +161,7 @@
 
 /obj/item/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
 
-/obj/item/gripper/no_use/attack_self(mob/user as mob)
+/obj/item/gripper/no_use/attack_self(mob/user)
 	return
 
 /obj/item/gripper/no_use/loader //This is used to disallow building with metal.
@@ -178,7 +178,7 @@
 	if(wrapped)
 		to_chat(user, "It is holding \a [wrapped].")
 
-/obj/item/gripper/attack_self(mob/user as mob)
+/obj/item/gripper/attack_self(mob/user)
 	if(wrapped)
 		return wrapped.attack_self(user)
 	return ..()
@@ -203,7 +203,7 @@
 	wrapped = null
 	//on_update_icon()
 
-/obj/item/gripper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/gripper/attack(mob/living/carbon/M, mob/living/carbon/user)
 	// Don't fall through and smack people with gripper, instead just no-op
 	return 0
 
@@ -319,10 +319,10 @@
 	var/datum/matter_synth/wood = null
 	var/datum/matter_synth/plastic = null
 
-/obj/item/matter_decompiler/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/matter_decompiler/attack(mob/living/carbon/M, mob/living/carbon/user)
 	return
 
-/obj/item/matter_decompiler/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, proximity, params)
+/obj/item/matter_decompiler/afterattack(atom/target, mob/living/user, proximity, params)
 
 	if(!proximity) return //Not adjacent.
 

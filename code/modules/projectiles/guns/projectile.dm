@@ -251,17 +251,17 @@
 		to_chat(user, "<span class='warning'>[src] is empty.</span>")
 	update_icon()
 
-/obj/item/gun/projectile/attackby(obj/item/A as obj, mob/user as mob)
+/obj/item/gun/projectile/attackby(obj/item/A, mob/user)
 	if(!load_ammo(A, user))
 		return ..()
 
-/obj/item/gun/projectile/attack_self(mob/user as mob)
+/obj/item/gun/projectile/attack_self(mob/user)
 	if(firemodes.len > 1)
 		..()
 	else
 		unload_ammo(user)
 
-/obj/item/gun/projectile/attack_hand(mob/user as mob)
+/obj/item/gun/projectile/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src)
 		unload_ammo(user, allow_dump=0)
 	else

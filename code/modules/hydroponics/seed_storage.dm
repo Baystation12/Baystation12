@@ -143,7 +143,7 @@
 	interact(user)
 	return TRUE
 
-/obj/machinery/seed_storage/interact(mob/user as mob)
+/obj/machinery/seed_storage/interact(mob/user)
 	user.set_machine(src)
 
 	var/dat = "<center><h1>Seed storage contents</h1></center>"
@@ -283,7 +283,7 @@
 			break
 	updateUsrDialog()
 
-/obj/machinery/seed_storage/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/seed_storage/attackby(obj/item/O, mob/user)
 	if (istype(O, /obj/item/seeds))
 		add(O)
 		user.visible_message("[user] puts \the [O.name] into \the [src].", "You put \the [O] into \the [src].")

@@ -155,14 +155,14 @@
 	atom_flags |= ATOM_FLAG_NO_REACT|ATOM_FLAG_OPEN_CONTAINER
 	create_reagents(5 * max_storage_space)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
 
-/obj/item/storage/fancy/cigarettes/remove_from_storage(obj/item/W as obj, atom/new_location)
+/obj/item/storage/fancy/cigarettes/remove_from_storage(obj/item/W, atom/new_location)
 	// Don't try to transfer reagents to lighters
 	if(istype(W, /obj/item/clothing/mask/smokable/cigarette))
 		var/obj/item/clothing/mask/smokable/cigarette/C = W
 		reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
 	..()
 
-/obj/item/storage/fancy/cigarettes/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/storage/fancy/cigarettes/attack(mob/living/carbon/M, mob/living/carbon/user)
 	if(!istype(M, /mob))
 		return
 
@@ -304,7 +304,7 @@
 	atom_flags |= ATOM_FLAG_NO_REACT
 	create_reagents(10 * storage_slots)
 
-/obj/item/storage/fancy/cigar/remove_from_storage(obj/item/W as obj, atom/new_location)
+/obj/item/storage/fancy/cigar/remove_from_storage(obj/item/W, atom/new_location)
 	var/obj/item/clothing/mask/smokable/cigarette/cigar/C = W
 	if(!istype(C)) return
 	reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
@@ -360,6 +360,6 @@
 		overlays += image(icon, src, "ledb")
 	return
 
-/obj/item/storage/lockbox/vials/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/lockbox/vials/attackby(obj/item/W, mob/user)
 	. = ..()
 	update_icon()

@@ -95,7 +95,7 @@
 	else
 		to_chat(user, "The indicator shows that the cell is missing.")
 
-/obj/machinery/recharge_station/relaymove(mob/user as mob)
+/obj/machinery/recharge_station/relaymove(mob/user)
 	if(user.stat)
 		return
 	go_out()

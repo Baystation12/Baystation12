@@ -67,7 +67,7 @@ Buildable meters
 		if(PIPE_ROTATE_ONEDIR)
 			set_dir(2)
 
-/obj/item/pipe/attack_self(mob/user as mob)
+/obj/item/pipe/attack_self(mob/user)
 	return rotate(user)
 
 /obj/item/pipe/proc/build_unary(obj/machinery/atmospherics/unary/P, pipefailtext)
@@ -132,7 +132,7 @@ Buildable meters
 		P.node4.build_network()
 	return 0
 
-/obj/item/pipe/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/pipe/attackby(obj/item/W, mob/user)
 	if(!isWrench(W))
 		return ..()
 	if (!isturf(loc))

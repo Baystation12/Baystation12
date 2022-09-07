@@ -46,7 +46,7 @@
 	else if (health < 90)
 		to_chat(user, "Few ribbons of \the [src] are cut away.")
 
-/obj/structure/net/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/net/attackby(obj/item/W, mob/user)
 	if (istype(W, /obj/item/material)) //sharp objects can cut thorugh
 		var/obj/item/material/SH = W
 		if (!(SH.sharp) || (SH.sharp && SH.force < 10))//is not sharp enough or at all

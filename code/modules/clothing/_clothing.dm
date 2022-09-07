@@ -68,7 +68,7 @@
 
 
 //BS12: Species-restricted clothing check.
-/obj/item/clothing/mob_can_equip(M as mob, slot, disable_warning = 0)
+/obj/item/clothing/mob_can_equip(M, slot, disable_warning = 0)
 
 	//if we can't equip the item anyway, don't bother with species_restricted (cuts down on spam)
 	if (!..())
@@ -939,7 +939,7 @@ BLIND     // can't see anything
 		if(SUIT_SENSOR_TRACKING)
 			to_chat(user, "Its vital tracker and tracking beacon appear to be enabled.")
 
-/obj/item/clothing/under/proc/set_sensors(mob/user as mob)
+/obj/item/clothing/under/proc/set_sensors(mob/user)
 	var/mob/M = user
 	if (isobserver(M)) return
 	if (user.incapacitated()) return

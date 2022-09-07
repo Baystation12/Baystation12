@@ -158,7 +158,7 @@
 /obj/item/device/depth_scanner/attack_self(mob/living/user)
 	interact(user)
 
-/obj/item/device/depth_scanner/interact(mob/user as mob)
+/obj/item/device/depth_scanner/interact(mob/user)
 	user.set_machine(src)
 	var/dat = "<b>Coordinates with positive matches</b><br>"
 
@@ -240,7 +240,7 @@
 				cur_dist = check_dist
 				. = weakref(R)
 
-/obj/item/pinpointer/radio/attack_self(mob/user as mob)
+/obj/item/pinpointer/radio/attack_self(mob/user)
 	interact(user)
 
 /obj/item/pinpointer/radio/interact(mob/user)

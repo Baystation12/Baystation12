@@ -169,7 +169,7 @@
 	user.update_action_buttons()
 
 //In case they somehow come off while enabled.
-/obj/item/clothing/shoes/magboots/vox/dropped(mob/user as mob)
+/obj/item/clothing/shoes/magboots/vox/dropped(mob/user)
 	..()
 	if(src.magpulse)
 		user.visible_message("The [src] go limp as they are removed from [usr]'s feet.", "The [src] go limp as they are removed from your feet.")

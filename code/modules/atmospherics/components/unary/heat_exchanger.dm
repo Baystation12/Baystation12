@@ -68,7 +68,7 @@
 	return 1
 
 
-/obj/machinery/atmospherics/unary/heat_exchanger/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/atmospherics/unary/heat_exchanger/attackby(obj/item/W, mob/user)
 	if(!isWrench(W))
 		return ..()
 	var/turf/T = src.loc

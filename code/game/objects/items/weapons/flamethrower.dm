@@ -76,7 +76,7 @@
 	else
 		return ..()
 
-/obj/item/flamethrower/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/flamethrower/attackby(obj/item/W, mob/user)
 	if(user.stat || user.restrained() || user.lying)	return
 	if(isWrench(W) && !status && !complete)//Taking this apart
 		if(weldtool)
@@ -121,7 +121,7 @@
 	return
 
 
-/obj/item/flamethrower/attack_self(mob/user as mob)
+/obj/item/flamethrower/attack_self(mob/user)
 	toggle_igniter(user)
 
 /obj/item/flamethrower/proc/toggle_igniter(mob/user)

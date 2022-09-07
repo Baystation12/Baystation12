@@ -47,7 +47,7 @@
 	else
 		to_chat(user, (distance <= 1 ? "It has [get_fuel()] [welding_resource] remaining. " : "") + "[tank] is attached.")
 
-/obj/item/weldingtool/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/weldingtool/attackby(obj/item/W, mob/user)
 	if(welding)
 		to_chat(user, SPAN_DANGER("Stop welding first!"))
 		return
@@ -90,7 +90,7 @@
 	..()
 
 
-/obj/item/weldingtool/attack_hand(mob/user as mob)
+/obj/item/weldingtool/attack_hand(mob/user)
 	if (tank && user.get_inactive_hand() == src)
 		if (!welding)
 			user.visible_message("[user] removes \the [tank] from \the [src].", "You remove \the [tank] from \the [src].")
@@ -142,7 +142,7 @@
 			location.hotspot_expose(700, 50, 1)
 	return
 
-/obj/item/weldingtool/attack_self(mob/user as mob)
+/obj/item/weldingtool/attack_self(mob/user)
 	setWelding(!welding, usr)
 	return
 
@@ -317,7 +317,7 @@
 	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
 	. = ..()
 
-/obj/item/welder_tank/afterattack(obj/O as obj, mob/user as mob, proximity)
+/obj/item/welder_tank/afterattack(obj/O, mob/user, proximity)
 	if (!proximity)
 		return
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src, O) <= 1)

@@ -27,11 +27,11 @@
 
 	..()
 
-/mob/living/carbon/alien/u_equip(obj/item/W as obj)
+/mob/living/carbon/alien/u_equip(obj/item/W)
 	return
 
 /mob/living/carbon/alien/restrained()
 	return 0
 
-/mob/living/carbon/alien/show_inv(mob/user as mob)
+/mob/living/carbon/alien/show_inv(mob/user)
 	return //Consider adding cuffs and hats to this, for the sake of fun.

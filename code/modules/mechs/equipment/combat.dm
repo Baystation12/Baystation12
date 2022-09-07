@@ -574,7 +574,7 @@
 	if(owner && holding)
 		update_icon()
 
-/obj/item/mech_equipment/mounted_system/flamethrower/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/mech_equipment/mounted_system/flamethrower/attackby(obj/item/W, mob/user)
 	if(!CanPhysicallyInteract(user))	return
 
 	var/obj/item/flamethrower/full/mech/FM = holding

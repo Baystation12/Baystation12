@@ -15,7 +15,7 @@
 	var/icon_state_idle = "recharger0" //also when unpowered
 	var/portable = 1
 
-/obj/machinery/recharger/attackby(obj/item/G as obj, mob/user as mob)
+/obj/machinery/recharger/attackby(obj/item/G, mob/user)
 	var/allowed = 0
 	for (var/allowed_type in allowed_devices)
 		if (istype(G, allowed_type)) allowed = 1

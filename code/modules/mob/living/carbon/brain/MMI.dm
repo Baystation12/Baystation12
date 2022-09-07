@@ -44,7 +44,7 @@
 	var/mob/living/carbon/brain/brainmob = null//The current occupant.
 	var/obj/item/organ/internal/brain/brainobj = null	//The current brain organ.
 
-/obj/item/device/mmi/attackby(obj/item/O as obj, mob/user as mob)
+/obj/item/device/mmi/attackby(obj/item/O, mob/user)
 	if(istype(O,/obj/item/organ/internal/brain) && !brainmob) //Time to stick a brain in it --NEO
 
 		var/obj/item/organ/internal/brain/B = O
@@ -87,7 +87,7 @@
 	..()
 
 	//TODO: ORGAN REMOVAL UPDATE. Make the brain remain in the MMI so it doesn't lose organ data.
-/obj/item/device/mmi/attack_self(mob/user as mob)
+/obj/item/device/mmi/attack_self(mob/user)
 	if(!brainmob)
 		to_chat(user, "<span class='warning'>You upend the MMI, but there's nothing in it.</span>")
 	else if(locked)
@@ -110,7 +110,7 @@
 		update_icon()
 		SetName(initial(name))
 
-/obj/item/device/mmi/proc/transfer_identity(mob/living/carbon/human/H)//Same deal as the regular brain proc. Used for human-->robot people.
+/obj/item/device/mmi/proc/transfer_identity(mob/living/carbon/human/H)//Same deal
 	brainmob = new(src)
 	brainmob.SetName(H.real_name)
 	brainmob.real_name = H.real_name

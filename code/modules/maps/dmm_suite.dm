@@ -293,7 +293,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 		/obj/structure,
 	)
 
-/dmm_suite/proc/parse_grid(model as text, model_key as text, xcrd as num,ycrd as num,zcrd as num, no_changeturf as num, clear_contents as num, initialized_areas_by_type)
+/dmm_suite/proc/parse_grid(model, model_key, xcrd,ycrd,zcrd, no_changeturf, clear_contents, initialized_areas_by_type)
 	/*Method parse_grid()
 	- Accepts a text string containing a comma separated list of type paths of the
 		same construction as those contained in a .dmm file, and instantiates them.
@@ -483,7 +483,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 
 //find the position of the next delimiter,skipping whatever is comprised between opening_escape and closing_escape
 //returns 0 if reached the last delimiter
-/dmm_suite/proc/find_next_delimiter_position(text as text,initial_position as num, delimiter=",",opening_escape="\"",closing_escape="\"")
+/dmm_suite/proc/find_next_delimiter_position(text,initial_position, delimiter=",",opening_escape="\"",closing_escape="\"")
 	var/position = initial_position
 	var/next_delimiter = findtext(text,delimiter,position,0)
 	var/next_opening = findtext(text,opening_escape,position,0)
@@ -495,7 +495,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 
 	return next_delimiter
 
-/dmm_suite/proc/readlistitem(text as text)
+/dmm_suite/proc/readlistitem(text)
 	//Check for string
 	if(findtext(text,"\"",1,2))
 		. = copytext(text,2,findtext(text,"\"",3,0))
@@ -522,7 +522,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 
 //build a list from variables in text form (e.g {var1="derp"; var2; var3=7} => list(var1="derp", var2, var3=7))
 //return the filled list
-/dmm_suite/proc/readlist(text as text, delimiter=",")
+/dmm_suite/proc/readlist(text, delimiter=",")
 	var/list/to_return = list()
 
 	var/position

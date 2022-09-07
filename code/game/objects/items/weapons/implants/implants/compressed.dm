@@ -49,7 +49,7 @@
 		icon_state = "cimplanter0"
 	return
 
-/obj/item/implanter/compressed/attack(mob/M as mob, mob/user as mob)
+/obj/item/implanter/compressed/attack(mob/M, mob/user)
 	var/obj/item/implant/compressed/c = imp
 	if (!c)	return
 	if (c.scanned == null)
@@ -57,7 +57,7 @@
 		return
 	..()
 
-/obj/item/implanter/compressed/afterattack(obj/item/A, mob/user as mob, proximity)
+/obj/item/implanter/compressed/afterattack(obj/item/A, mob/user, proximity)
 	if(!proximity)
 		return
 	if(istype(A) && imp)

@@ -133,7 +133,7 @@ var/global/list/holder_mob_icon_cache = list()
 	origin_tech = list(TECH_BIO = 3, TECH_ENGINEERING = 4)
 	item_state = "poppy"
 
-/obj/item/holder/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/holder/attackby(obj/item/W, mob/user)
 	for(var/mob/M in src.contents)
 		M.attackby(W,user)
 

@@ -15,10 +15,10 @@
 	icon_state = "uglyminearmed"
 
 
-/obj/effect/mine/Crossed(AM as mob|obj)
+/obj/effect/mine/Crossed(AM)
 	Bumped(AM)
 
-/obj/effect/mine/Bumped(mob/M as mob|obj)
+/obj/effect/mine/Bumped(mob/M)
 
 	if(triggered) return
 

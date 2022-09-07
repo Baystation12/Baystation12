@@ -309,7 +309,7 @@
 	if(welded)
 		to_chat(user, "It seems welded shut.")
 
-/obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W, mob/user)
 	if(isWrench(W))
 		if (!(stat & NOPOWER) && use_power)
 			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>")

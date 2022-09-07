@@ -190,7 +190,7 @@
 	As far as I can tell the proc exists so that mobs with different inventory slots can override
 	the search through all the slots, without having to duplicate the rest of the item dropping.
 */
-/mob/proc/u_equip(obj/W as obj)
+/mob/proc/u_equip(obj/W)
 	if (W == r_hand)
 		r_hand = null
 		update_inv_r_hand(0)

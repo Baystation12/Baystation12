@@ -127,14 +127,14 @@
 	if(Adjacent(user))
 		attack_hand(user)
 
-/turf/attackby(obj/item/W as obj, mob/user as mob)
+/turf/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/storage))
 		var/obj/item/storage/S = W
 		if(S.use_to_pickup && S.collection_mode)
 			S.gather_all(src, user)
 	return ..()
 
-/turf/Enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
+/turf/Enter(atom/movable/mover, atom/forget)
 
 	..()
 
@@ -305,7 +305,7 @@ var/global/const/enterloopsanity = 100
 		decals = null
 
 // Called when turf is hit by a thrown object
-/turf/hitby(atom/movable/AM as mob|obj, datum/thrownthing/TT)
+/turf/hitby(atom/movable/AM, datum/thrownthing/TT)
 	if(src.density)
 		if(isliving(AM))
 			var/mob/living/M = AM

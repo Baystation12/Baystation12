@@ -24,7 +24,7 @@
 /obj/structure/barricade/get_material()
 	return material
 
-/obj/structure/barricade/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/barricade/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/stack/material/rods) && !spiky)
 		var/obj/item/stack/material/rods/R = W
 		if(R.get_amount() < 5)

@@ -15,7 +15,7 @@
 	var/last_process_worldtime = 0
 	var/report_num = 0
 
-/obj/machinery/dnaforensics/attackby(obj/item/W, mob/user as mob)
+/obj/machinery/dnaforensics/attackby(obj/item/W, mob/user)
 
 	if(bloodsamp)
 		to_chat(user, "<span class='warning'>There is already a sample in the machine.</span>")

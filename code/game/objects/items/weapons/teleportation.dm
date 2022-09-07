@@ -24,7 +24,7 @@
 	origin_tech = list(TECH_MAGNET = 1)
 	matter = list(MATERIAL_ALUMINIUM = 400)
 
-/obj/item/locator/attack_self(mob/user as mob)
+/obj/item/locator/attack_self(mob/user)
 	user.set_machine(src)
 	var/dat
 	if (src.temp)

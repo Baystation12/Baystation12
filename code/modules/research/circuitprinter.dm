@@ -96,7 +96,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
 	return ..()
 
-/obj/machinery/r_n_d/circuit_imprinter/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/r_n_d/circuit_imprinter/attackby(obj/item/O, mob/user)
 	if(busy)
 		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
 		return 1

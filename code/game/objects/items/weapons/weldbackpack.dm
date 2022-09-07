@@ -17,7 +17,7 @@
 
 	. = ..()
 
-/obj/item/storage/backpack/weldpack/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/backpack/weldpack/attackby(obj/item/W, mob/user)
 	if(isWelder(W))
 		var/obj/item/weldingtool/T = W
 		if(T.welding & prob(50))
@@ -44,7 +44,7 @@
 		return
 	..()
 
-/obj/item/storage/backpack/weldpack/afterattack(obj/O as obj, mob/user as mob, proximity)
+/obj/item/storage/backpack/weldpack/afterattack(obj/O, mob/user, proximity)
 	if(!proximity) // this replaces and improves the get_dist(src,O) <= 1 checks used previously
 		return
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && src.reagents.total_volume < max_fuel)

@@ -104,7 +104,7 @@
 				for(var/datum/reagent/R in B.reagents.reagent_list)
 					to_chat(user, "<span class='notice'>[R.volume] units of [R.name]</span>")
 
-/obj/item/gun/projectile/dartgun/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/gun/projectile/dartgun/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/reagent_containers/glass))
 		add_beaker(I, user)
 		return 1

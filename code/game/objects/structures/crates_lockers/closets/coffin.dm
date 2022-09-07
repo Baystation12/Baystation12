@@ -27,7 +27,7 @@
 	else
 		..()
 
-/obj/structure/closet/coffin/toggle(mob/user as mob)
+/obj/structure/closet/coffin/toggle(mob/user)
 	if(!(opened ? close() : open()))
 		to_chat(user, SPAN_NOTICE("It won't budge!"))
 

@@ -127,7 +127,7 @@
 /obj/item/projectile/proc/check_penetrate(atom/A)
 	return 1
 
-/obj/item/projectile/proc/check_fire(atom/target as mob, mob/living/user as mob)  //Checks if you can hit them or not.
+/obj/item/projectile/proc/check_fire(atom/target, mob/living/user)  //Checks if you can hit them or not.
 	check_trajectory(target, user, pass_flags, item_flags, obj_flags)
 
 //sets the click point of the projectile using mouse input params
@@ -270,7 +270,7 @@
 
 	return 1
 
-/obj/item/projectile/Bump(atom/A as mob|obj|turf|area, forced=0)
+/obj/item/projectile/Bump(atom/A, forced=0)
 	if(A == src)
 		return 0 //no
 
@@ -449,7 +449,7 @@
 	var/result = 0 //To pass the message back to the gun.
 	var/atom/hit_thing
 
-/obj/item/projectile/test/Bump(atom/A as mob|obj|turf|area, forced=0)
+/obj/item/projectile/test/Bump(atom/A, forced=0)
 	if(A == firer)
 		forceMove(A.loc)
 		return //cannot shoot yourself

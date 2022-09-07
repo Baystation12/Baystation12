@@ -18,7 +18,7 @@
 	if(!icon_state)
 		icon_state = "pill[rand(1, 5)]" //preset pills only use colour changing or unique icons
 
-/obj/item/reagent_containers/pill/attack(mob/M as mob, mob/user as mob, def_zone)
+/obj/item/reagent_containers/pill/attack(mob/M, mob/user, def_zone)
 		//TODO: replace with standard_feed_mob() call.
 
 	if(M == user)

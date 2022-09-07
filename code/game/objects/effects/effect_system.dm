@@ -187,7 +187,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	. = ..()
 	addtimer(CALLBACK(src, .proc/fade_out), time_to_live)
 
-/obj/effect/effect/smoke/Crossed(mob/living/carbon/M as mob )
+/obj/effect/effect/smoke/Crossed(mob/living/carbon/M)
 	..()
 	if(istype(M))
 		affect(M)
@@ -285,7 +285,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	for(var/mob/living/carbon/M in get_turf(src))
 		affect(M)
 
-/obj/effect/effect/smoke/sleepy/affect(mob/living/carbon/M as mob )
+/obj/effect/effect/smoke/sleepy/affect(mob/living/carbon/M)
 	if (!..())
 		return 0
 

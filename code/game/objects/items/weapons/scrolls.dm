@@ -10,7 +10,7 @@
 	throw_range = 20
 	origin_tech = list(TECH_BLUESPACE = 4)
 
-/obj/item/teleportation_scroll/attack_self(mob/user as mob)
+/obj/item/teleportation_scroll/attack_self(mob/user)
 	if((user.mind && !GLOB.wizards.is_antagonist(user.mind)))
 		to_chat(usr, "<span class='warning'>You stare at the scroll but cannot make sense of the markings!</span>")
 		return

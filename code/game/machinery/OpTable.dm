@@ -132,7 +132,7 @@
 /obj/machinery/optable/Process()
 	check_victim()
 
-/obj/machinery/optable/proc/take_victim(mob/living/carbon/C, mob/living/carbon/user as mob)
+/obj/machinery/optable/proc/take_victim(mob/living/carbon/C, mob/living/carbon/user)
 	if (C == user)
 		user.visible_message("[user] climbs on \the [src].","You climb on \the [src].")
 	else
@@ -167,7 +167,7 @@
 
 	take_victim(usr,usr)
 
-/obj/machinery/optable/proc/check_table(mob/living/carbon/patient as mob)
+/obj/machinery/optable/proc/check_table(mob/living/carbon/patient)
 	check_victim()
 	if(src.victim && get_turf(victim) == get_turf(src) && victim.lying)
 		to_chat(usr, "<span class='warning'>\The [src] is already occupied!</span>")

@@ -35,7 +35,7 @@ FLOOR SAFES
 	tumbler_2_pos = rand(0, 72)
 	tumbler_2_open = rand(0, 72)
 
-/obj/structure/safe/proc/check_unlocked(mob/user as mob, canhear)
+/obj/structure/safe/proc/check_unlocked(mob/user, canhear)
 	if(user && canhear)
 		if(tumbler_1_pos == tumbler_1_open)
 			to_chat(user, "<span class='notice'>You hear a [pick("tonk", "krunk", "plunk")] from [src].</span>")
@@ -68,7 +68,7 @@ FLOOR SAFES
 		icon_state = initial(icon_state)
 
 
-/obj/structure/safe/attack_hand(mob/user as mob)
+/obj/structure/safe/attack_hand(mob/user)
 	user.set_machine(src)
 	var/dat = "<center>"
 	dat += "<a href='?src=\ref[src];open=1'>[open ? "Close" : "Open"] [src]</a> | <a href='?src=\ref[src];decrement=1'>-</a> [dial * 5] <a href='?src=\ref[src];increment=1'>+</a>"
@@ -138,7 +138,7 @@ FLOOR SAFES
 				updateUsrDialog()
 
 
-/obj/structure/safe/attackby(obj/item/I as obj, mob/user as mob)
+/obj/structure/safe/attackby(obj/item/I, mob/user)
 	if(open)
 		if(I.w_class + space <= maxspace)
 			if(!user.unEquip(I, src))

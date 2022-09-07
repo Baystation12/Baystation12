@@ -84,7 +84,7 @@
 	..()
 	to_chat(user, "<span class='notice'> You don't see how you could turn off \the [src]. You can try to stick something in rotating hands.</span>")
 
-/obj/structure/magshield/maggen/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/magshield/maggen/attackby(obj/item/W, mob/user)
 	if (being_stopped)
 		to_chat(user, "<span class='notice'> Somebody is already interacting with \the [src].</span>")
 		return

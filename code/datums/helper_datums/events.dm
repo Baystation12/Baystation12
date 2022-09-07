@@ -2,7 +2,7 @@
 	var/list/events = list()
 
 
-/datum/events/proc/addEventType(event_type as text)
+/datum/events/proc/addEventType(event_type)
 	if (!(event_type in events) || !islist(events[event_type]))
 		events[event_type] = list()
 		return TRUE
@@ -10,7 +10,7 @@
 
 // Arguments: event_type as text, proc_holder as datum, proc_name as text
 // Returns: New event, null on error.
-/datum/events/proc/addEvent(event_type as text, proc_holder, proc_name as text)
+/datum/events/proc/addEvent(event_type, proc_holder, proc_name)
 	if (!event_type || !proc_holder || !proc_name)
 		return
 	addEventType(event_type)

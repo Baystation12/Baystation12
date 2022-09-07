@@ -63,7 +63,7 @@
 	holstered = null
 	atom_holder.SetName(initial(atom_holder.name))
 
-/datum/extension/holster/proc/unholster(mob/user as mob, avoid_intent = FALSE)
+/datum/extension/holster/proc/unholster(mob/user, avoid_intent = FALSE)
 	if(!holstered)
 		return 0
 	if(user.get_active_hand() && user.get_inactive_hand())

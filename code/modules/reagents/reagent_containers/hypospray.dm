@@ -181,7 +181,7 @@
 	update_icon()
 	return
 
-/obj/item/reagent_containers/hypospray/autoinjector/attack(mob/M as mob, mob/user as mob)
+/obj/item/reagent_containers/hypospray/autoinjector/attack(mob/M, mob/user)
 	..()
 	update_icon()
 

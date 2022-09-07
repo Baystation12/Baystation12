@@ -67,7 +67,7 @@
 		to_chat(user, "[icon2html(src, user)] <span class='warning'>[src] beeps: \"[response]\"</span>")
 		return 1
 
-/obj/machinery/atm/attackby(obj/item/I as obj, mob/user as mob)
+/obj/machinery/atm/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/card/id))
 		if(emagged > 0)
 			//prevent inserting id into an emagged ATM
@@ -423,14 +423,14 @@
 
 	interact(usr)
 
-/obj/machinery/atm/proc/scan_user(mob/living/carbon/human/human_user as mob)
+/obj/machinery/atm/proc/scan_user(mob/living/carbon/human/human_user)
 	if(!authenticated_account)
 		var/obj/item/card/id/I = human_user.GetIdCard()
 		if(istype(I))
 			return I
 
 // put the currently held id on the ground or in the hand of the user
-/obj/machinery/atm/proc/release_held_id(mob/living/carbon/human/human_user as mob)
+/obj/machinery/atm/proc/release_held_id(mob/living/carbon/human/human_user)
 	if(!held_card)
 		return
 
@@ -443,7 +443,7 @@
 	held_card = null
 
 
-/obj/machinery/atm/proc/spawn_ewallet(sum, loc, mob/living/carbon/human/human_user as mob)
+/obj/machinery/atm/proc/spawn_ewallet(sum, loc, mob/living/carbon/human/human_user)
 	var/obj/item/spacecash/ewallet/E = new /obj/item/spacecash/ewallet(loc)
 	if(ishuman(human_user) && !human_user.get_active_hand())
 		human_user.put_in_hands(E)

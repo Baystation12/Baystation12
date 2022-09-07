@@ -206,7 +206,7 @@
 	SetName(n_name)
 	add_fingerprint(usr)
 
-/obj/item/paper/attack_self(mob/living/user as mob)
+/obj/item/paper/attack_self(mob/living/user)
 	if(user.a_intent == I_HURT)
 		if(icon_state == "scrap")
 			user.show_message("<span class='warning'>\The [src] is already crumpled.</span>")
@@ -221,7 +221,7 @@
 /obj/item/paper/attack_ai(mob/living/silicon/ai/user)
 	show_content(user)
 
-/obj/item/paper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/paper/attack(mob/living/carbon/M, mob/living/carbon/user)
 	if(user.zone_sel.selecting == BP_EYES)
 		user.visible_message("<span class='notice'>You show the paper to [M]. </span>", \
 			"<span class='notice'> [user] holds up a paper and shows it to [M]. </span>")
@@ -296,7 +296,7 @@
 	updateinfolinks()
 	update_icon()
 
-/obj/item/paper/proc/get_signature(obj/item/pen/P, mob/user as mob)
+/obj/item/paper/proc/get_signature(obj/item/pen/P, mob/user)
 	if(P && istype(P, /obj/item/pen))
 		return P.get_signature(user)
 	return (user && user.real_name) ? user.real_name : "Anonymous"
@@ -444,7 +444,7 @@
 		update_icon()
 
 
-/obj/item/paper/attackby(obj/item/P as obj, mob/user as mob)
+/obj/item/paper/attackby(obj/item/P, mob/user)
 	..()
 	var/clown = 0
 	if(user.mind && (user.mind.assigned_role == "Clown"))

@@ -240,7 +240,7 @@
 				to_chat(user, "<span class='danger'>\The [src] has fallen to bits.</span>")
 			qdel(src)
 
-/obj/item/reagent_containers/food/snacks/grown/attack_self(mob/user as mob)
+/obj/item/reagent_containers/food/snacks/grown/attack_self(mob/user)
 
 	if(!seed)
 		return

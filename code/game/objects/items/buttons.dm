@@ -37,7 +37,7 @@ GLOBAL_LIST_INIT(possible_switch_offsets, list(
 			"Offset Upper" = list(-32,7))))
 
 
-/obj/item/frame/light_switch/proc/position_with_direction(obj/item/frame/light_switch/S as obj, mob/user as mob)
+/obj/item/frame/light_switch/proc/position_with_direction(obj/item/frame/light_switch/S, mob/user)
 	for(var/i = 5; i >= 0; i -= 1)
 		var/direction_choice = input(user, "In which direction?", "Select direction.") as null|anything in GLOB.possible_switch_offsets
 		if(!direction_choice || user.incapacitated() || !user.Adjacent(src))
@@ -58,7 +58,7 @@ GLOBAL_LIST_INIT(possible_switch_offsets, list(
 			break
 	return 1
 
-/obj/item/frame/light_switch/attackby(obj/item/tool as obj, mob/user as mob)	//construction
+/obj/item/frame/light_switch/attackby(obj/item/tool, mob/user)	//construction
 	if(isWrench(tool))
 		new /obj/item/stack/material/steel( get_turf(src.loc), 1 )
 		qdel(src)
@@ -71,7 +71,7 @@ GLOBAL_LIST_INIT(possible_switch_offsets, list(
 			qdel(S)
 	else ..()
 
-/obj/item/frame/light_switch/windowtint/attackby(obj/item/tool as obj, mob/user as mob)
+/obj/item/frame/light_switch/windowtint/attackby(obj/item/tool, mob/user)
 	if(isWrench(tool))
 		new /obj/item/stack/material/steel( get_turf(src.loc), 1 )
 		qdel(src)

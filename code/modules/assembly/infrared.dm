@@ -57,7 +57,7 @@
 		holder.update_icon()
 	update_beams()
 
-/obj/item/device/assembly/infra/interact(mob/user as mob)//TODO: change this this to the wire control panel
+/obj/item/device/assembly/infra/interact(mob/user)//TODO: change this this to the wire control panel
 	if(!secured)
 		return
 	if(!CanInteract(user, GLOB.physical_state))

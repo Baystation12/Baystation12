@@ -54,7 +54,7 @@
 *   Item Adding
 ********************/
 
-/obj/machinery/microwave/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/microwave/attackby(obj/item/O, mob/user)
 	if(broken > 0)
 		// Start repairs by using a screwdriver
 		if(broken == 2 && isScrewdriver(O))
@@ -240,7 +240,7 @@
 /obj/machinery/microwave/InsertedContents()
 	return ingredients
 
-/obj/machinery/microwave/interact(mob/user as mob) // The microwave Menu
+/obj/machinery/microwave/interact(mob/user) // The microwave Menu
 	user.set_machine(src)
 	var/dat = list()
 	if(broken > 0)

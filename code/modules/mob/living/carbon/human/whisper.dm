@@ -1,5 +1,5 @@
 //Lallander was here
-/mob/living/carbon/human/whisper(message as text)
+/mob/living/carbon/human/whisper(message)
 	message = sanitize(message, encode = 0)
 
 	if (src.client)

@@ -106,7 +106,7 @@
 
 	..()
 
-/turf/simulated/wall/hitby(AM as mob|obj, datum/thrownthing/TT)
+/turf/simulated/wall/hitby(AM, datum/thrownthing/TT)
 	if(!ismob(AM))
 		var/obj/O = AM
 		var/tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
@@ -226,7 +226,7 @@
 		return 0
 	return 1
 
-/turf/simulated/wall/proc/thermitemelt(mob/user as mob)
+/turf/simulated/wall/proc/thermitemelt(mob/user)
 	if(!can_melt())
 		return
 	var/obj/effect/overlay/O = new/obj/effect/overlay( src )

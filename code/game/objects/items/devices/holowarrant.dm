@@ -36,7 +36,7 @@
 	. |= active.fields["access"]
 
 //hit yourself with it
-/obj/item/device/holowarrant/attack_self(mob/living/user as mob)
+/obj/item/device/holowarrant/attack_self(mob/living/user)
 	active = null
 	var/list/warrants = list()
 	for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
@@ -70,7 +70,7 @@
 	..()
 
 //hit other people with it
-/obj/item/device/holowarrant/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/device/holowarrant/attack(mob/living/carbon/M, mob/living/carbon/user)
 	user.visible_message("<span class='notice'>[user] holds up a warrant projector and shows the contents to [M].</span>", \
 			"<span class='notice'>You show the warrant to [M].</span>")
 	M.examinate(src)

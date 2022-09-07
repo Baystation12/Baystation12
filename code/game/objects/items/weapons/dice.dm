@@ -60,7 +60,7 @@
 		comment = "Ouch, bad luck."
 	return list(result, comment)
 
-/obj/item/dice/attack_self(mob/user as mob)
+/obj/item/dice/attack_self(mob/user)
 	var/list/roll_result = roll_die()
 	var/result = roll_result[1]
 	var/comment = roll_result[2]

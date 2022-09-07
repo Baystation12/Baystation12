@@ -116,7 +116,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 
 		recruitWindow(usr, href_list["allow_submit"] != "0")
 
-/datum/paiController/proc/recruitWindow(mob/M as mob, allowSubmit = 1)
+/datum/paiController/proc/recruitWindow(mob/M, allowSubmit = 1)
 	var/datum/paiCandidate/candidate
 	for(var/datum/paiCandidate/c in pai_candidates)
 		if(!istype(c) || !istype(M))

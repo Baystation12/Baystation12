@@ -48,11 +48,11 @@
 	qdel(src)
 
 
-/obj/item/reagent_containers/food/snacks/attack_self(mob/user as mob)
+/obj/item/reagent_containers/food/snacks/attack_self(mob/user)
 	return
 
 
-/obj/item/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob, def_zone)
+/obj/item/reagent_containers/food/snacks/attack(mob/M, mob/user, def_zone)
 	if(!reagents || !reagents.total_volume)
 		to_chat(user, "<span class='danger'>None of [src] left!</span>")
 		qdel(src)
@@ -134,7 +134,7 @@
 	else
 		to_chat(user, "<span class='notice'>\The [src] was bitten multiple times!</span>")
 
-/obj/item/reagent_containers/food/snacks/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/storage))
 		..()// -> item/attackby()
 		return
@@ -292,7 +292,7 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein/egg, 3)
 
-/obj/item/reagent_containers/food/snacks/egg/afterattack(obj/O as obj, mob/user as mob, proximity)
+/obj/item/reagent_containers/food/snacks/egg/afterattack(obj/O, mob/user, proximity)
 	if(istype(O,/obj/machinery/microwave))
 		return ..()
 	if(!(proximity && O.is_open_container()))
@@ -310,7 +310,7 @@
 	..()
 	qdel(src)
 
-/obj/item/reagent_containers/food/snacks/egg/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/egg/attackby(obj/item/W, mob/user)
 	if(istype( W, /obj/item/pen/crayon ))
 		var/obj/item/pen/crayon/C = W
 		var/clr = C.colourName
@@ -2719,7 +2719,7 @@
 
 	icon_state = "pizzabox[boxes.len+1]"
 
-/obj/item/pizzabox/attack_hand( mob/user as mob )
+/obj/item/pizzabox/attack_hand( mob/user)
 
 	if( open && pizza )
 		user.put_in_hands( pizza )
@@ -2744,7 +2744,7 @@
 		return
 	..()
 
-/obj/item/pizzabox/attack_self( mob/user as mob )
+/obj/item/pizzabox/attack_self( mob/user)
 
 	if( boxes.len > 0 )
 		return
@@ -2756,7 +2756,7 @@
 
 	update_icon()
 
-/obj/item/pizzabox/attackby( obj/item/I as obj, mob/user as mob )
+/obj/item/pizzabox/attackby( obj/item/I, mob/user)
 	if( istype(I, /obj/item/pizzabox) )
 		var/obj/item/pizzabox/box = I
 
@@ -2879,7 +2879,7 @@
 //	reagents.add_reagent(/datum/reagent/nutriment/protein, 1)
 
 // Dough + rolling pin = flat dough
-/obj/item/reagent_containers/food/snacks/dough/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/dough/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/material/kitchen/rollingpin))
 		new /obj/item/reagent_containers/food/snacks/sliceable/flatdough(src)
 		to_chat(user, "You flatten the dough.")
@@ -2927,7 +2927,7 @@
 
 //Items you can craft together. Like bomb making, but with food and less screwdrivers.
 
-/obj/item/reagent_containers/food/snacks/bun/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/bun/attackby(obj/item/W, mob/user)
 	// bun + meatball = burger
 	if(istype(W,/obj/item/reagent_containers/food/snacks/meatball))
 		new /obj/item/reagent_containers/food/snacks/plainburger(src)
@@ -2950,7 +2950,7 @@
 		qdel(src)
 
 // burger + cheese wedge = cheeseburger
-/obj/item/reagent_containers/food/snacks/plainburger/attackby(obj/item/reagent_containers/food/snacks/cheesewedge/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/plainburger/attackby(obj/item/reagent_containers/food/snacks/cheesewedge/W, mob/user)
 	if(istype(W))// && !istype(src,/obj/item/reagent_containers/food/snacks/cheesewedge))
 		new /obj/item/reagent_containers/food/snacks/cheeseburger(src)
 		to_chat(user, "You make a cheeseburger.")
@@ -2961,7 +2961,7 @@
 		..()
 
 // Hamburger + cheese wedge = cheeseburger
-/obj/item/reagent_containers/food/snacks/hamburger/attackby(obj/item/reagent_containers/food/snacks/cheesewedge/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/hamburger/attackby(obj/item/reagent_containers/food/snacks/cheesewedge/W, mob/user)
 	if(istype(W))// && !istype(src,/obj/item/reagent_containers/food/snacks/cheesewedge))
 		new /obj/item/reagent_containers/food/snacks/cheeseburger(src)
 		to_chat(user, "You make a cheeseburger.")
@@ -2972,7 +2972,7 @@
 		..()
 
 // Human burger + cheese wedge = cheeseburger
-/obj/item/reagent_containers/food/snacks/human/burger/attackby(obj/item/reagent_containers/food/snacks/cheesewedge/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/human/burger/attackby(obj/item/reagent_containers/food/snacks/cheesewedge/W, mob/user)
 	if(istype(W))
 		new /obj/item/reagent_containers/food/snacks/cheeseburger(src)
 		to_chat(user, "You make a cheeseburger.")
@@ -2983,7 +2983,7 @@
 		..()
 
 // Spaghetti + meatball = spaghetti with meatball(s)
-/obj/item/reagent_containers/food/snacks/boiledspagetti/attackby(obj/item/reagent_containers/food/snacks/meatball/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/boiledspagetti/attackby(obj/item/reagent_containers/food/snacks/meatball/W, mob/user)
 	if(istype(W))
 		new /obj/item/reagent_containers/food/snacks/meatballspagetti(src)
 		to_chat(user, "You add some meatballs to the spaghetti.")
@@ -2994,7 +2994,7 @@
 		..()
 
 // Spaghetti with meatballs + meatball = spaghetti with more meatball(s)
-/obj/item/reagent_containers/food/snacks/meatballspagetti/attackby(obj/item/reagent_containers/food/snacks/meatball/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/meatballspagetti/attackby(obj/item/reagent_containers/food/snacks/meatball/W, mob/user)
 	if(istype(W))
 		new /obj/item/reagent_containers/food/snacks/spesslaw(src)
 		to_chat(user, "You add some more meatballs to the spaghetti.")
@@ -3139,7 +3139,7 @@
 	nutriment_amt = 3
 
 // potato + knife = raw sticks
-/obj/item/reagent_containers/food/snacks/grown/potato/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/grown/potato/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/material/knife))
 		new /obj/item/reagent_containers/food/snacks/rawsticks(src)
 		to_chat(user, "You cut the potato.")

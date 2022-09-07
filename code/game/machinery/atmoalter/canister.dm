@@ -225,7 +225,7 @@
 		healthcheck()
 	..()
 
-/obj/machinery/portable_atmospherics/canister/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/portable_atmospherics/canister/attackby(obj/item/W, mob/user)
 	if(!isWrench(W) && !istype(W, /obj/item/tank) && !istype(W, /obj/item/device/scanner/gas) && !istype(W, /obj/item/modular_computer/pda))
 		visible_message("<span class='warning'>\The [user] hits \the [src] with \a [W]!</span>")
 		src.health -= W.force

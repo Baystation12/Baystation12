@@ -230,7 +230,7 @@ else if(##equipment_var) {\
 	src.tank = null
 	playsound(loc, 'sound/effects/spray3.ogg', 50)
 
-/obj/item/clothing/suit/space/void/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/clothing/suit/space/void/attackby(obj/item/W, mob/user)
 
 	if(!istype(user,/mob/living)) return
 
@@ -308,7 +308,7 @@ else if(##equipment_var) {\
 
 	..()
 
-/obj/item/clothing/suit/space/void/attack_hand(mob/user as mob)
+/obj/item/clothing/suit/space/void/attack_hand(mob/user)
 	if (loc == user)
 		return
 	return ..()

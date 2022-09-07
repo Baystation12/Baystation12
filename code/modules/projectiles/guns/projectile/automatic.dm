@@ -289,13 +289,13 @@
 	to_chat(user, "<span class='notice'>You [cover_open ? "open" : "close"] [src]'s cover.</span>")
 	update_icon()
 
-/obj/item/gun/projectile/automatic/l6_saw/attack_self(mob/user as mob)
+/obj/item/gun/projectile/automatic/l6_saw/attack_self(mob/user)
 	if(cover_open)
 		toggle_cover(user) //close the cover
 	else
 		return ..() //once closed, behave like normal
 
-/obj/item/gun/projectile/automatic/l6_saw/attack_hand(mob/user as mob)
+/obj/item/gun/projectile/automatic/l6_saw/attack_hand(mob/user)
 	if(!cover_open && user.get_inactive_hand() == src)
 		toggle_cover(user) //open the cover
 	else

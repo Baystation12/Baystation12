@@ -30,7 +30,7 @@
 	..()
 	return
 
-/obj/item/implant/freedom/trigger(emote, mob/living/carbon/source as mob)
+/obj/item/implant/freedom/trigger(emote, mob/living/carbon/source)
 	if (emote == activation_emote)
 		activate()
 

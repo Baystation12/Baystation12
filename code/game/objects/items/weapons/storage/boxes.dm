@@ -47,7 +47,7 @@
 	startswith = list(/obj/item/card/union = 14)
 
 // BubbleWrap - A box can be folded up to make card
-/obj/item/storage/box/attack_self(mob/user as mob)
+/obj/item/storage/box/attack_self(mob/user)
 	if(..()) return
 
 	//try to fold it.
@@ -366,7 +366,7 @@
 	can_hold = list(/obj/item/flame/match)
 	startswith = list(/obj/item/flame/match = 10)
 
-/obj/item/storage/box/matches/attackby(obj/item/flame/match/W as obj, mob/user as mob)
+/obj/item/storage/box/matches/attackby(obj/item/flame/match/W, mob/user)
 	if(istype(W) && !W.lit && !W.burnt)
 		W.lit = 1
 		W.damtype = INJURY_TYPE_BURN

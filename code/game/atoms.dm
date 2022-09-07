@@ -99,7 +99,7 @@
 
 //return flags that should be added to the viewer's sight var.
 //Otherwise return a negative number to indicate that the view should be cancelled.
-/atom/proc/check_eye(user as mob)
+/atom/proc/check_eye(user)
 	if (istype(user, /mob/living/silicon/ai)) // WHYYYY
 		return 0
 	return -1
@@ -117,7 +117,7 @@
 /atom/proc/on_color_transfer_reagent_change()
 	return
 
-/atom/proc/Bumped(AM as mob|obj)
+/atom/proc/Bumped(AM)
 	return
 
 // Convenience proc to see if a container is open for chemistry handling
@@ -132,7 +132,7 @@
 
 // If you want to use this, the atom must have the PROXMOVE flag, and the moving
 // atom must also have the PROXMOVE flag currently to help with lag. ~ ComicIronic
-/atom/proc/HasProximity(atom/movable/AM as mob|obj)
+/atom/proc/HasProximity(atom/movable/AM)
 	return
 
 /atom/proc/emp_act(severity)
@@ -156,7 +156,7 @@
 	P.on_hit(src, 0, def_zone)
 	. = 0
 
-/atom/proc/in_contents_of(container)//can take class or object instance as argument
+/atom/proc/in_contents_of(container)//can take class or object instance
 	if(ispath(container))
 		if(istype(src.loc, container))
 			return 1
@@ -262,7 +262,7 @@
 		M.apply_damage(TT.speed * 5, DAMAGE_BRUTE)
 
 //returns 1 if made bloody, returns 0 otherwise
-/atom/proc/add_blood(mob/living/carbon/human/M as mob)
+/atom/proc/add_blood(mob/living/carbon/human/M)
 	if(atom_flags & ATOM_FLAG_NO_BLOOD)
 		return 0
 

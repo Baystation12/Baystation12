@@ -45,7 +45,7 @@
 		return list()
 	return ..()
 
-/obj/machinery/smartfridge/proc/accept_check(obj/item/O as obj)
+/obj/machinery/smartfridge/proc/accept_check(obj/item/O)
 	if(istype(O,/obj/item/reagent_containers/food/snacks/grown) || istype(O,/obj/item/seeds))
 		return 1
 	return 0
@@ -54,7 +54,7 @@
 	name = "\improper MegaSeed Servitor"
 	desc = "When you need seeds fast!"
 
-/obj/machinery/smartfridge/seeds/accept_check(obj/item/O as obj)
+/obj/machinery/smartfridge/seeds/accept_check(obj/item/O)
 	if(istype(O,/obj/item/seeds))
 		return 1
 	return 0
@@ -65,7 +65,7 @@
 	icon_contents = "slime"
 	req_access = list(access_research)
 
-/obj/machinery/smartfridge/secure/extract/accept_check(obj/item/O as obj)
+/obj/machinery/smartfridge/secure/extract/accept_check(obj/item/O)
 	if(istype(O,/obj/item/slime_extract))
 		return 1
 	return 0
@@ -76,7 +76,7 @@
 	icon_contents = "chem"
 	req_access = list(list(access_medical,access_chemistry))
 
-/obj/machinery/smartfridge/secure/medbay/accept_check(obj/item/O as obj)
+/obj/machinery/smartfridge/secure/medbay/accept_check(obj/item/O)
 	if(istype(O,/obj/item/reagent_containers/glass))
 		return 1
 	if(istype(O,/obj/item/storage/pill_bottle))
@@ -91,7 +91,7 @@
 	req_access = list(access_virology)
 	icon_contents = "chem"
 
-/obj/machinery/smartfridge/secure/virology/accept_check(obj/item/O as obj)
+/obj/machinery/smartfridge/secure/virology/accept_check(obj/item/O)
 	if(istype(O,/obj/item/reagent_containers/glass/beaker/vial))
 		return 1
 	return 0
@@ -101,7 +101,7 @@
 	desc = "A refrigerated storage unit for medicine and chemical storage."
 	icon_contents = "chem"
 
-/obj/machinery/smartfridge/chemistry/accept_check(obj/item/O as obj)
+/obj/machinery/smartfridge/chemistry/accept_check(obj/item/O)
 	if(istype(O,/obj/item/storage/pill_bottle) || istype(O,/obj/item/reagent_containers))
 		return 1
 	return 0
@@ -118,7 +118,7 @@
 	icon_base = "fridge_dark"
 	icon_contents = "drink"
 
-/obj/machinery/smartfridge/drinks/accept_check(obj/item/O as obj)
+/obj/machinery/smartfridge/drinks/accept_check(obj/item/O)
 	if(istype(O,/obj/item/reagent_containers/glass) || istype(O,/obj/item/reagent_containers/food/drinks) || istype(O,/obj/item/reagent_containers/food/condiment))
 		return 1
 
@@ -129,7 +129,7 @@
 	icon_state = "fridge_food"
 	icon_contents = "food"
 
-/obj/machinery/smartfridge/foods/accept_check(obj/item/O as obj)
+/obj/machinery/smartfridge/foods/accept_check(obj/item/O)
 	if(istype(O,/obj/item/reagent_containers/food/snacks) || istype(O,/obj/item/material/kitchen/utensil))
 		return 1
 
@@ -138,7 +138,7 @@
 	desc = "A machine for drying plants."
 	icon_state = "drying_rack"
 
-/obj/machinery/smartfridge/drying_rack/accept_check(obj/item/O as obj)
+/obj/machinery/smartfridge/drying_rack/accept_check(obj/item/O)
 	if(istype(O, /obj/item/reagent_containers/food/snacks))
 		var/obj/item/reagent_containers/food/snacks/S = O
 		return S.dried_type
@@ -258,7 +258,7 @@
 *   Item Adding
 ********************/
 
-/obj/machinery/smartfridge/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/smartfridge/attackby(obj/item/O, mob/user)
 	if(isScrewdriver(O))
 		panel_open = !panel_open
 		user.visible_message("[user] [panel_open ? "opens" : "closes"] the maintenance panel of \the [src].", "You [panel_open ? "open" : "close"] the maintenance panel of \the [src].")

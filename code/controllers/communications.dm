@@ -313,7 +313,7 @@ var/global/datum/controller/radio/radio_controller
 /datum/controller/radio
 	var/list/datum/radio_frequency/frequencies = list()
 
-/datum/controller/radio/proc/add_object(obj/device as obj, new_frequency as num, object_filter = null as text|null)
+/datum/controller/radio/proc/add_object(obj/device, new_frequency, object_filter = null)
 	var/f_text = num2text(new_frequency)
 	var/datum/radio_frequency/frequency = frequencies[f_text]
 
@@ -338,7 +338,7 @@ var/global/datum/controller/radio/radio_controller
 
 	return 1
 
-/datum/controller/radio/proc/return_frequency(new_frequency as num)
+/datum/controller/radio/proc/return_frequency(new_frequency)
 	var/f_text = num2text(new_frequency)
 	var/datum/radio_frequency/frequency = frequencies[f_text]
 
@@ -353,7 +353,7 @@ var/global/datum/controller/radio/radio_controller
 	var/frequency as num
 	var/list/list/obj/devices = list()
 
-/datum/radio_frequency/proc/post_signal(obj/source as obj|null, datum/signal/signal, radio_filter = null as text|null, range = null as num|null)
+/datum/radio_frequency/proc/post_signal(obj/source, datum/signal/signal, radio_filter = null, range = null)
 	var/turf/start_point
 	if(range)
 		start_point = get_turf(source)
@@ -387,7 +387,7 @@ var/global/datum/controller/radio/radio_controller
 
 		device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
 
-/datum/radio_frequency/proc/add_listener(obj/device as obj, radio_filter as text|null)
+/datum/radio_frequency/proc/add_listener(obj/device, radio_filter)
 	if (!radio_filter)
 		radio_filter = RADIO_DEFAULT
 	var/list/obj/devices_line = devices[radio_filter]

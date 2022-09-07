@@ -25,7 +25,7 @@
 	. = ..()
 	update_icon()
 
-/obj/machinery/button/attackby(obj/item/W, mob/user as mob)
+/obj/machinery/button/attackby(obj/item/W, mob/user)
 	return attack_hand(user)
 
 /obj/machinery/button/interface_interact(user)

@@ -113,7 +113,7 @@
 
 
 //default attack_hand behaviour
-/obj/item/clothing/accessory/attack_hand(mob/user as mob)
+/obj/item/clothing/accessory/attack_hand(mob/user)
 	if(parent)
 		return	//we aren't an object on the ground so don't call parent
 	..()
@@ -134,11 +134,11 @@
 	..()
 
 
-/obj/item/clothing/accessory/toggleable/on_attached(obj/item/clothing/under/S, mob/user as mob)
+/obj/item/clothing/accessory/toggleable/on_attached(obj/item/clothing/under/S, mob/user)
 	..()
 	parent.verbs += /obj/item/clothing/accessory/toggleable/verb/toggle
 
-/obj/item/clothing/accessory/toggleable/on_removed(mob/user as mob)
+/obj/item/clothing/accessory/toggleable/on_removed(mob/user)
 	if(parent)
 		parent.verbs -= /obj/item/clothing/accessory/toggleable/verb/toggle
 	..()

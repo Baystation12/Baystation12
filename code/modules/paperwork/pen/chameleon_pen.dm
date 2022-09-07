@@ -1,7 +1,7 @@
 /obj/item/pen/chameleon
 	var/signature = ""
 
-/obj/item/pen/chameleon/attack_self(mob/user as mob)
+/obj/item/pen/chameleon/attack_self(mob/user)
 	/*
 	// Limit signatures to official crew members
 	var/personnel_list[] = list()

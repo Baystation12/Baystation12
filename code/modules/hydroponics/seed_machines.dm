@@ -8,7 +8,7 @@
 	var/list/genes = list()
 	var/genesource = "unknown"
 
-/obj/item/disk/botany/attack_self(mob/user as mob)
+/obj/item/disk/botany/attack_self(mob/user)
 	if(genes.len)
 		var/choice = alert(user, "Are you sure you want to wipe the disk?", "Xenobotany Data", "No", "Yes")
 		if(src && user && genes && choice && choice == "Yes" && user.Adjacent(get_turf(src)))
@@ -65,7 +65,7 @@
 			visible_message("[icon2html(src, viewers(get_turf(src)))] [src] beeps and spits out [loaded_disk].")
 			loaded_disk = null
 
-/obj/machinery/botany/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/botany/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/seeds))
 		if(seed)
 			to_chat(user, "There is already a seed loaded.")

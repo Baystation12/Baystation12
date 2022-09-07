@@ -25,7 +25,7 @@
 	create_reagents(5)
 	return
 
-/obj/item/material/kitchen/utensil/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/material/kitchen/utensil/attack(mob/living/carbon/M, mob/living/carbon/user)
 	if(!istype(M))
 		return ..()
 

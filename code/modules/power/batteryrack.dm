@@ -237,7 +237,7 @@
 		internal_cells -= C
 	return ..()
 
-/obj/machinery/power/smes/batteryrack/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/power/smes/batteryrack/attackby(obj/item/W, mob/user)
 	if(..())
 		return TRUE
 	if(istype(W, /obj/item/cell)) // ID Card, try to insert it.

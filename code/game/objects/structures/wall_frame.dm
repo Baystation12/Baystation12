@@ -150,7 +150,7 @@
 			paint_color = adjust_brightness(paint_color, bleach_factor)
 		update_icon()
 
-/obj/structure/wall_frame/hitby(AM as mob|obj, datum/thrownthing/TT)
+/obj/structure/wall_frame/hitby(AM, datum/thrownthing/TT)
 	..()
 	var/tforce = 0
 	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm

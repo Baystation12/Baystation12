@@ -15,7 +15,7 @@
 	var/list/pages = list()  // Ordered list of pages as they are to be displayed. Can be different order than src.contents.
 
 
-/obj/item/paper_bundle/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/paper_bundle/attackby(obj/item/W, mob/user)
 	..()
 	if(!istype(W))
 		return
@@ -102,7 +102,7 @@
 	else
 		to_chat(user, "<span class='notice'>It is too far away.</span>")
 
-/obj/item/paper_bundle/proc/show_content(mob/user as mob)
+/obj/item/paper_bundle/proc/show_content(mob/user)
 	var/dat
 	var/obj/item/W = pages[page]
 
@@ -133,7 +133,7 @@
 		send_rsc(user, P.img, "tmp_photo.png")
 		show_browser(user, JOINTEXT(dat), "window=[name]")
 
-/obj/item/paper_bundle/attack_self(mob/user as mob)
+/obj/item/paper_bundle/attack_self(mob/user)
 	src.show_content(user)
 	add_fingerprint(user)
 	update_icon()

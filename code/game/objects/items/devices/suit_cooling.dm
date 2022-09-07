@@ -109,7 +109,7 @@
 		turn_on()
 	to_chat(user, "<span class='notice'>You switch \the [src] [on ? "on" : "off"].</span>")
 
-/obj/item/device/suit_cooling_unit/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/device/suit_cooling_unit/attackby(obj/item/W, mob/user)
 	if(isScrewdriver(W))
 		if(cover_open)
 			cover_open = 0

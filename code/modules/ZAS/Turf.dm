@@ -254,7 +254,7 @@
 
 	return GM
 
-/turf/remove_air(amount as num)
+/turf/remove_air(amount)
 	var/datum/gas_mixture/GM = return_air()
 	return GM.remove(amount)
 

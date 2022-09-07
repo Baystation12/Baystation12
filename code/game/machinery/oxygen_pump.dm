@@ -98,7 +98,7 @@
 	breather = null
 	update_use_power(POWER_USE_IDLE)
 
-/obj/machinery/oxygen_pump/proc/can_apply_to_target(mob/living/carbon/human/target, mob/user as mob)
+/obj/machinery/oxygen_pump/proc/can_apply_to_target(mob/living/carbon/human/target, mob/user)
 	if(!user)
 		user = target
 	// Check target validity
@@ -133,7 +133,7 @@
 		return
 	return 1
 
-/obj/machinery/oxygen_pump/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/oxygen_pump/attackby(obj/item/W, mob/user)
 	if(isScrewdriver(W))
 		stat ^= MAINT
 		user.visible_message("<span class='notice'>\The [user] [stat & MAINT ? "opens" : "closes"] \the [src].</span>", "<span class='notice'>You [stat & MAINT ? "open" : "close"] \the [src].</span>")

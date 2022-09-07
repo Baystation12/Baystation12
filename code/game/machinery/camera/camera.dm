@@ -148,7 +148,7 @@
 
 	..() //and give it the regular chance of being deleted outright
 
-/obj/machinery/camera/hitby(AM as mob|obj)
+/obj/machinery/camera/hitby(AM)
 	..()
 	if (istype(AM, /obj))
 		var/obj/O = AM
@@ -172,7 +172,7 @@
 		destroy()
 		return TRUE
 
-/obj/machinery/camera/attackby(obj/item/W as obj, mob/living/user as mob)
+/obj/machinery/camera/attackby(obj/item/W, mob/living/user)
 	update_coverage()
 	var/datum/wires/camera/camera_wires = wires
 	// DECONSTRUCTION
@@ -235,7 +235,7 @@
 	else
 		..()
 
-/obj/machinery/camera/proc/deactivate(user as mob, choice = 1)
+/obj/machinery/camera/proc/deactivate(user, choice = 1)
 	// The only way for AI to reactivate cameras are malf abilities, this gives them different messages.
 	if(istype(user, /mob/living/silicon/ai))
 		user = null

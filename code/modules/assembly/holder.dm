@@ -67,7 +67,7 @@
 		master.update_icon()
 
 
-/obj/item/device/assembly_holder/HasProximity(atom/movable/AM as mob|obj)
+/obj/item/device/assembly_holder/HasProximity(atom/movable/AM)
 	if(a_left)
 		a_left.HasProximity(AM)
 	if(a_right)
@@ -76,7 +76,7 @@
 		special_assembly.HasProximity(AM)
 
 
-/obj/item/device/assembly_holder/Crossed(atom/movable/AM as mob|obj)
+/obj/item/device/assembly_holder/Crossed(atom/movable/AM)
 	if(a_left)
 		a_left.Crossed(AM)
 	if(a_right)
@@ -85,7 +85,7 @@
 		special_assembly.Crossed(AM)
 
 
-/obj/item/device/assembly_holder/on_found(mob/finder as mob)
+/obj/item/device/assembly_holder/on_found(mob/finder)
 	if(a_left)
 		a_left.on_found(finder)
 	if(a_right)
@@ -112,7 +112,7 @@
 	return
 
 
-/obj/item/device/assembly_holder/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/device/assembly_holder/attackby(obj/item/W, mob/user)
 	if(isScrewdriver(W))
 		if(!a_left || !a_right)
 			to_chat(user, "<span class='warning'>BUG:Assembly part missing, please report this!</span>")
@@ -129,7 +129,7 @@
 	..()
 
 
-/obj/item/device/assembly_holder/attack_self(mob/user as mob)
+/obj/item/device/assembly_holder/attack_self(mob/user)
 	add_fingerprint(user)
 	if(secured)
 		if(!a_left || !a_right)
@@ -183,7 +183,7 @@
 	return ..()
 
 
-/obj/item/device/assembly_holder/hear_talk(mob/living/M as mob, msg, verb, datum/language/speaking)
+/obj/item/device/assembly_holder/hear_talk(mob/living/M, msg, verb, datum/language/speaking)
 	if(a_right)
 		a_right.hear_talk(M,msg,verb,speaking)
 	if(a_left)

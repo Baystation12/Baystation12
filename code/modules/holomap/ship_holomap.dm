@@ -95,7 +95,7 @@
 // In order to actually get Bumped() we need to block movement.  We're (visually) on a wall, so people
 // couldn't really walk into us anyway.  But in reality we are on the turf in front of the wall, so bumping
 // against where we seem is actually trying to *exit* our real loc
-/obj/machinery/ship_map/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
+/obj/machinery/ship_map/CheckExit(atom/movable/mover, turf/target)
 	if(get_dir(target, loc) == dir) // Opposite of "normal" since we are visually in the next turf over
 		return FALSE
 	else

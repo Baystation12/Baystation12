@@ -103,7 +103,7 @@
 /obj/structure/closet/statue/on_update_icon()
 	return
 
-/obj/structure/closet/statue/proc/shatter(mob/user as mob)
+/obj/structure/closet/statue/proc/shatter(mob/user)
 	if (user)
 		user.dust()
 	dump_contents()

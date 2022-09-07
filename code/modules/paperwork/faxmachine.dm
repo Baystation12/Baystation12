@@ -39,7 +39,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	if (department && !(("[department]" in GLOB.alldepartments) || ("[department]" in GLOB.admin_departments)))
 		GLOB.alldepartments |= department
 
-/obj/machinery/photocopier/faxmachine/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/photocopier/faxmachine/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/paper))
 		var/obj/item/paper/P = O
 		if(!P.readable)

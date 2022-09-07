@@ -57,7 +57,7 @@
 		front_id = null
 	. = ..()
 
-/obj/item/storage/wallet/remove_from_storage(obj/item/W as obj, atom/new_location)
+/obj/item/storage/wallet/remove_from_storage(obj/item/W, atom/new_location)
 	. = ..(W, new_location)
 	if(.)
 		if(W == front_id)
@@ -65,7 +65,7 @@
 			SetName(initial(name))
 			update_icon()
 
-/obj/item/storage/wallet/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
+/obj/item/storage/wallet/handle_item_insertion(obj/item/W, prevent_warning = 0)
 	. = ..(W, prevent_warning)
 	if(.)
 		if(!front_id && istype(W, /obj/item/card/id))

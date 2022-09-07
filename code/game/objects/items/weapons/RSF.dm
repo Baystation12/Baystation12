@@ -21,7 +21,7 @@ RSF
 	if(distance <= 0)
 		to_chat(user, "It currently holds [stored_matter]/30 fabrication-units.")
 
-/obj/item/rsf/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/rsf/attackby(obj/item/W, mob/user)
 	..()
 	if (istype(W, /obj/item/rcd_ammo))
 
@@ -36,7 +36,7 @@ RSF
 		to_chat(user, "The RSF now holds [stored_matter]/30 fabrication-units.")
 		return
 
-/obj/item/rsf/attack_self(mob/user as mob)
+/obj/item/rsf/attack_self(mob/user)
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 	if (mode == 1)
 		mode = 2
@@ -59,7 +59,7 @@ RSF
 		to_chat(user, "Changed dispensing mode to 'Cigarette'")
 		return
 
-/obj/item/rsf/afterattack(atom/A, mob/user as mob, proximity)
+/obj/item/rsf/afterattack(atom/A, mob/user, proximity)
 
 	if(!proximity) return
 

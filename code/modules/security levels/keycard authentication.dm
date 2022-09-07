@@ -19,11 +19,11 @@
 	active_power_usage = 6
 	power_channel = ENVIRON
 
-/obj/machinery/keycard_auth/attack_ai(mob/user as mob)
+/obj/machinery/keycard_auth/attack_ai(mob/user)
 	to_chat(user, "<span class='warning'>A firewall prevents you from interfacing with this device!</span>")
 	return
 
-/obj/machinery/keycard_auth/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/keycard_auth/attackby(obj/item/W, mob/user)
 	if(stat & (NOPOWER|BROKEN))
 		to_chat(user, "This device is not powered.")
 		return

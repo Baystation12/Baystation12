@@ -163,7 +163,7 @@
 
 	playsound(loc, spawn_sound, 75, pitch_toggle)
 
-/mob/living/silicon/robot/fully_replace_character_name(pickedName as text)
+/mob/living/silicon/robot/fully_replace_character_name(pickedName)
 	custom_name = pickedName
 	updatename()
 
@@ -288,7 +288,7 @@
 /mob/living/silicon/robot/get_cell()
 	return cell
 
-/mob/living/silicon/robot/proc/updatename(prefix as text)
+/mob/living/silicon/robot/proc/updatename(prefix)
 	if(prefix)
 		modtype = prefix
 
@@ -461,7 +461,7 @@
 	if(prob(75) && Proj.damage > 0) spark_system.start()
 	return 2
 
-/mob/living/silicon/robot/attackby(obj/item/W as obj, mob/user as mob)
+/mob/living/silicon/robot/attackby(obj/item/W, mob/user)
 
 	if(istype(W, /obj/item/inducer)) return // inducer.dm afterattack handles this
 	if (istype(W, /obj/item/handcuffs)) // fuck i don't even know why isrobot() in handcuff code isn't working so this will have to do

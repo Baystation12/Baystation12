@@ -264,7 +264,7 @@
 
 	return null
 
-/obj/machinery/atmospherics/tvalve/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/atmospherics/tvalve/attackby(obj/item/W, mob/user)
 	if(!isWrench(W))
 		return ..()
 	var/datum/gas_mixture/int_air = return_air()

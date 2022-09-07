@@ -312,7 +312,7 @@ meteor_act
 	return 1
 
 //this proc handles being hit by a thrown atom
-/mob/living/carbon/human/hitby(atom/movable/AM as mob|obj, datum/thrownthing/TT)
+/mob/living/carbon/human/hitby(atom/movable/AM, datum/thrownthing/TT)
 
 	if(isobj(AM))
 		var/obj/O = AM

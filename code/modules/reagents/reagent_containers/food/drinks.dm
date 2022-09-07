@@ -20,7 +20,7 @@
 /obj/item/reagent_containers/food/drinks/on_color_transfer_reagent_change()
 	return
 
-/obj/item/reagent_containers/food/drinks/attack_self(mob/user as mob)
+/obj/item/reagent_containers/food/drinks/attack_self(mob/user)
 	if(!is_open_container())
 		open(user)
 
@@ -29,7 +29,7 @@
 	to_chat(user, "<span class='notice'>You open \the [src] with an audible pop!</span>")
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
-/obj/item/reagent_containers/food/drinks/attack(mob/M as mob, mob/user as mob, def_zone)
+/obj/item/reagent_containers/food/drinks/attack(mob/M, mob/user, def_zone)
 	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
 		return ..()
 

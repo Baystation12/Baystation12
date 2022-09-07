@@ -132,7 +132,7 @@
 /obj/structure/hygiene/toilet/on_update_icon()
 	icon_state = "toilet[open][cistern]"
 
-/obj/structure/hygiene/toilet/attackby(obj/item/I as obj, mob/living/user)
+/obj/structure/hygiene/toilet/attackby(obj/item/I, mob/living/user)
 	if(isCrowbar(I))
 		to_chat(user, "<span class='notice'>You start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"].</span>")
 		playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
@@ -238,7 +238,7 @@
 		for (var/atom/movable/G in src.loc)
 			G.clean_blood()
 
-/obj/structure/hygiene/shower/attackby(obj/item/I as obj, mob/user)
+/obj/structure/hygiene/shower/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/device/scanner/gas))
 		to_chat(user, "<span class='notice'>The water temperature seems to be [watertemp].</span>")
 		return
@@ -394,7 +394,7 @@
 		"<span class='notice'>You wash your hands using \the [src].</span>")
 
 
-/obj/structure/hygiene/sink/attackby(obj/item/O as obj, mob/living/user)
+/obj/structure/hygiene/sink/attackby(obj/item/O, mob/living/user)
 
 	if(isplunger(O) && clogged > 0)
 		return ..()
@@ -470,7 +470,7 @@
 	..()
 	icon_state = "puddle"
 
-/obj/structure/hygiene/sink/puddle/attackby(obj/item/O as obj, mob/user)
+/obj/structure/hygiene/sink/puddle/attackby(obj/item/O, mob/user)
 	icon_state = "puddle-splash"
 	..()
 	icon_state = "puddle"

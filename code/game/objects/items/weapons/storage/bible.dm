@@ -77,7 +77,7 @@
 				to_chat(M, "Nothing happened.")
 		..()
 
-/obj/item/storage/bible/afterattack(atom/A, mob/user as mob, proximity)
+/obj/item/storage/bible/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return
 	if(user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))
 		if(A.reagents && A.reagents.has_reagent(/datum/reagent/water)) //blesses all the water in the holder
@@ -86,7 +86,7 @@
 			A.reagents.del_reagent(/datum/reagent/water)
 			A.reagents.add_reagent(/datum/reagent/water/holywater,water2holy)
 
-/obj/item/storage/bible/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/bible/attackby(obj/item/W, mob/user)
 	if (src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 1, -5)
 	return ..()

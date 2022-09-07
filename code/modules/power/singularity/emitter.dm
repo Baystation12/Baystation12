@@ -82,7 +82,7 @@
 	activate(user)
 	return TRUE
 
-/obj/machinery/power/emitter/proc/activate(mob/user as mob)
+/obj/machinery/power/emitter/proc/activate(mob/user)
 	if (!istype(user))
 		user = null // safety, as the proc is publicly available.
 

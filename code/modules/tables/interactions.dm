@@ -47,7 +47,7 @@
 	if (health_dead)
 		return PROJECTILE_CONTINUE
 
-/obj/structure/table/CheckExit(atom/movable/O as mob|obj, target as turf)
+/obj/structure/table/CheckExit(atom/movable/O, target)
 	if(istype(O) && O.checkpass(PASS_FLAG_TABLE))
 		return 1
 	if (flipped==1)

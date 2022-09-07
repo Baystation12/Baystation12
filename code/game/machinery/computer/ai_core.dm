@@ -19,7 +19,7 @@ var/global/list/empty_playable_ai_cores = list()
 		return 1
 	. = ..()
 
-/obj/structure/AIcore/attackby(obj/item/P as obj, mob/user as mob)
+/obj/structure/AIcore/attackby(obj/item/P, mob/user)
 	if(!authorized)
 		if(access_ai_upload in P.GetAccess())
 			to_chat(user, "<span class='notice'>You swipe [P] at [src] and authorize it to connect into the systems of [GLOB.using_map.full_name].</span>")

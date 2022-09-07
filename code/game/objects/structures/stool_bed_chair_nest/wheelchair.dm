@@ -20,7 +20,7 @@
 	if(buckled_mob)
 		buckled_mob.set_dir(dir)
 
-/obj/structure/bed/chair/wheelchair/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/bed/chair/wheelchair/attackby(obj/item/W, mob/user)
 	if(isWrench(W) || istype(W,/obj/item/stack) || isWirecutter(W))
 		return
 	..()
@@ -106,7 +106,7 @@
 			if (occupant && (src.loc != occupant.loc))
 				src.forceMove(occupant.loc) // Failsafe to make sure the wheelchair stays beneath the occupant after driving
 
-/obj/structure/bed/chair/wheelchair/attack_hand(mob/living/user as mob)
+/obj/structure/bed/chair/wheelchair/attack_hand(mob/living/user)
 	if (pulling)
 		MouseDrop(usr)
 	else
@@ -181,7 +181,7 @@
 		B.set_dir(newdir)
 	bloodiness--
 
-/obj/structure/bed/chair/wheelchair/buckle_mob(mob/M as mob, mob/user as mob)
+/obj/structure/bed/chair/wheelchair/buckle_mob(mob/M, mob/user)
 	if(M == pulling)
 		pulling = null
 		usr.pulledby = null

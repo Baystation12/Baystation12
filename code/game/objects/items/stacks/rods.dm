@@ -40,7 +40,7 @@
 	throwforce = round(0.25*material.get_edge_damage())
 	force = round(0.5*material.get_blunt_damage())
 
-/obj/item/stack/material/rods/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/stack/material/rods/attackby(obj/item/W, mob/user)
 	if(isWelder(W))
 		var/obj/item/weldingtool/WT = W
 
@@ -62,7 +62,7 @@
 		return
 	..()
 
-/obj/item/stack/material/rods/attack_self(mob/user as mob)
+/obj/item/stack/material/rods/attack_self(mob/user)
 	src.add_fingerprint(user)
 
 	if(!istype(user.loc,/turf)) return 0

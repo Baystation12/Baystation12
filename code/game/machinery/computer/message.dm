@@ -24,7 +24,7 @@
 	var/message = "<span class='notice'>System bootup complete. Please select an option.</span>"	// The message that shows on the main menu.
 	var/auth = 0 // Are they authenticated?
 
-/obj/machinery/computer/message_monitor/attackby(obj/item/O as obj, mob/living/user as mob)
+/obj/machinery/computer/message_monitor/attackby(obj/item/O, mob/living/user)
 	if(stat & (NOPOWER|BROKEN))
 		..()
 		return
@@ -193,7 +193,7 @@
 	popup.open()
 	return
 
-/obj/machinery/computer/message_monitor/proc/BruteForce(mob/user as mob)
+/obj/machinery/computer/message_monitor/proc/BruteForce(mob/user)
 	if(isnull(linkedServer))
 		to_chat(user, "<span class='warning'>Could not complete brute-force: Linked Server Disconnected!</span>")
 	else

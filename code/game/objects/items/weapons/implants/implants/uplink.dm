@@ -18,7 +18,7 @@
 	hidden_uplink.uplink_owner = source.mind
 	return TRUE
 
-/obj/item/implant/uplink/trigger(emote, mob/source as mob)
+/obj/item/implant/uplink/trigger(emote, mob/source)
 	if(hidden_uplink && usr == source && !malfunction) // Let's not have another people activate our uplink
 		hidden_uplink.check_trigger(source, emote, activation_emote)
 

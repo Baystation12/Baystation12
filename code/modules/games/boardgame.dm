@@ -16,17 +16,17 @@
 	else
 		..()
 
-/obj/item/board/attack_hand(mob/living/carbon/human/M as mob)
+/obj/item/board/attack_hand(mob/living/carbon/human/M)
 	if(M.machine == src)
 		return ..()
 	else
 		M.examinate(src)
 
-/obj/item/board/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/board/attackby(obj/item/I, mob/user)
 	if(!addPiece(I,user))
 		..()
 
-/obj/item/board/proc/addPiece(obj/item/I as obj, mob/user as mob, tile = 0)
+/obj/item/board/proc/addPiece(obj/item/I, mob/user, tile = 0)
 	if(I.w_class != ITEM_SIZE_TINY) //only small stuff
 		user.show_message("<span class='warning'>\The [I] is too big to be used as a board piece.</span>")
 		return 0
@@ -60,7 +60,7 @@
 	return 1
 
 
-/obj/item/board/interact(mob/user as mob)
+/obj/item/board/interact(mob/user)
 	if(user.is_physically_disabled() || (!isAI(user) && !user.Adjacent(src))) //can't see if you arent conscious. If you are not an AI you can't see it unless you are next to it, either.
 		close_browser(user, "window=boardgame")
 		user.unset_machine()

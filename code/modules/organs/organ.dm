@@ -208,7 +208,7 @@ var/global/list/organ_cache = list()
 						germ_level += rand(3,5)
 						owner.reagents.add_reagent(/datum/reagent/toxin, rand(1,2))
 
-/obj/item/organ/proc/receive_chem(chemical as obj)
+/obj/item/organ/proc/receive_chem(chemical)
 	return 0
 
 /obj/item/organ/proc/remove_rejuv()

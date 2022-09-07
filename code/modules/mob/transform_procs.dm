@@ -144,7 +144,7 @@
 	qdel(src) // Queues us for a hard delete
 	return O
 
-/mob/living/carbon/human/proc/slimeize(adult as num, reproduce as num)
+/mob/living/carbon/human/proc/slimeize(adult, reproduce)
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	for(var/obj/item/W in src)

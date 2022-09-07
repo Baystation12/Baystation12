@@ -51,7 +51,7 @@
  * **Parameters**:
  * - `user` - The mob clicking on the atom.
  */
-/atom/proc/attack_ghost(mob/observer/ghost/user as mob)
+/atom/proc/attack_ghost(mob/observer/ghost/user)
 	if(!istype(user))
 		return
 	if(user.client && user.client.inquisitive_ghost)
@@ -59,6 +59,6 @@
 	return
 
 
-/obj/effect/portal/attack_ghost(mob/user as mob)
+/obj/effect/portal/attack_ghost(mob/user)
 	if(target)
 		user.forceMove(get_turf(target))

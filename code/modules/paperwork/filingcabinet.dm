@@ -46,7 +46,7 @@
 			I.forceMove(src)
 	. = ..()
 
-/obj/structure/filingcabinet/attackby(obj/item/P as obj, mob/user as mob)
+/obj/structure/filingcabinet/attackby(obj/item/P, mob/user)
 	if(is_type_in_list(P, can_hold))
 		if(!user.unEquip(P, src))
 			return
@@ -57,7 +57,7 @@
 	else
 		..()
 
-/obj/structure/filingcabinet/attack_hand(mob/user as mob)
+/obj/structure/filingcabinet/attack_hand(mob/user)
 	if(contents.len <= 0)
 		to_chat(user, "<span class='notice'>\The [src] is empty.</span>")
 		return

@@ -113,7 +113,7 @@
 
 	return bling
 
-/obj/item/gun/launcher/money/attack_self(mob/user as mob)
+/obj/item/gun/launcher/money/attack_self(mob/user)
 	var/disp_amount = min(input(user, "How many [GLOB.using_map.local_currency_name_singular] do you want to dispense at a time? (0 to [src.receptacle_value])", "Money Cannon Settings", 20) as num, receptacle_value)
 
 	if (disp_amount < 1)
@@ -123,13 +123,13 @@
 	src.dispensing = disp_amount
 	to_chat(user, "<span class='notice'>You set [src] to dispense [dispensing] [GLOB.using_map.local_currency_name_singular] at a time.</span>")
 
-/obj/item/gun/launcher/money/attack_hand(mob/user as mob)
+/obj/item/gun/launcher/money/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src)
 		unload_receptacle(user)
 	else
 		return ..()
 
-/obj/item/gun/launcher/money/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/gun/launcher/money/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/spacecash))
 		var/obj/item/spacecash/bling = W
 		if(bling.worth < 1)

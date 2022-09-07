@@ -207,7 +207,7 @@
 	else
 		return 1
 
-/obj/structure/window/CheckExit(atom/movable/O as mob|obj, target as turf)
+/obj/structure/window/CheckExit(atom/movable/O, target)
 	if(istype(O) && O.checkpass(PASS_FLAG_GLASS))
 		return 1
 	if(get_dir(O.loc, target) == dir)
@@ -229,7 +229,7 @@
 	damage_health(tforce, DAMAGE_BRUTE)
 	deanchor(AM)
 
-/obj/structure/window/attack_hand(mob/user as mob)
+/obj/structure/window/attack_hand(mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(MUTATION_HULK in user.mutations)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
@@ -282,7 +282,7 @@
 	playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
 	return TRUE
 
-/obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/window/attackby(obj/item/W, mob/user)
 	if(!istype(W)) return//I really wish I did not need this
 
 	if(W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
@@ -715,7 +715,7 @@
 		/obj/item/stock_parts/power/apc
 	)
 
-/obj/machinery/button/windowtint/attackby(obj/item/device/W as obj, mob/user as mob)
+/obj/machinery/button/windowtint/attackby(obj/item/device/W, mob/user)
 	if(isMultitool(W))
 		var/t = sanitizeSafe(input(user, "Enter the ID for the button.", src.name, id), MAX_NAME_LEN)
 		if(user.incapacitated() && !user.Adjacent(src))

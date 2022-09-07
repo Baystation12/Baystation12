@@ -56,7 +56,7 @@
 				qdel(src)
 				return
 
-/obj/machinery/chem_master/attackby(obj/item/B as obj, mob/user as mob)
+/obj/machinery/chem_master/attackby(obj/item/B, mob/user)
 
 	if(istype(B, /obj/item/reagent_containers/glass))
 

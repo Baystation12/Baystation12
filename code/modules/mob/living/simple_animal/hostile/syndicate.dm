@@ -45,7 +45,7 @@
 	weapon2 = /obj/item/shield/energy
 	status_flags = 0
 
-/mob/living/simple_animal/hostile/syndicate/melee/attackby(obj/item/O as obj, mob/user as mob)
+/mob/living/simple_animal/hostile/syndicate/melee/attackby(obj/item/O, mob/user)
 	if(O.force)
 		if(prob(80))
 			var/damage = O.force

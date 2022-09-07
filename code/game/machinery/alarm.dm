@@ -808,7 +808,7 @@
 			apply_mode()
 			return TOPIC_REFRESH
 
-/obj/machinery/alarm/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/alarm/attackby(obj/item/W, mob/user)
 	switch(buildstage)
 		if(2)
 			if(isScrewdriver(W))  // Opening that Air Alarm up.
@@ -988,7 +988,7 @@ FIRE ALARM
 		alarm(rand(30/severity, 60/severity))
 	..()
 
-/obj/machinery/firealarm/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/firealarm/attackby(obj/item/W, mob/user)
 	if(isScrewdriver(W) && buildstage == 2)
 		wiresexposed = !wiresexposed
 		update_icon()

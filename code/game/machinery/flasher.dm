@@ -33,7 +33,7 @@
 //		src.sd_SetLuminosity(0)
 
 //Don't want to render prison breaks impossible
-/obj/machinery/flasher/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/flasher/attackby(obj/item/W, mob/user)
 	if(isWirecutter(W))
 		add_fingerprint(user, 0, W)
 		src.disable = !src.disable
@@ -110,7 +110,7 @@
 	base_state = "pflash"
 	density = TRUE
 
-/obj/machinery/flasher/portable/HasProximity(atom/movable/AM as mob|obj)
+/obj/machinery/flasher/portable/HasProximity(atom/movable/AM)
 	if(!anchored || disable || last_flash && world.time < last_flash + 150)
 		return
 
@@ -122,7 +122,7 @@
 	if(isanimal(AM))
 		flash()
 
-/obj/machinery/flasher/portable/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/flasher/portable/attackby(obj/item/W, mob/user)
 	if(isWrench(W))
 		add_fingerprint(user)
 		src.anchored = !src.anchored

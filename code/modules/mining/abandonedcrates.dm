@@ -138,7 +138,7 @@
 		if(100)
 			new/obj/item/clothing/head/bearpelt(src)
 
-/obj/structure/closet/crate/secure/loot/togglelock(mob/user as mob)
+/obj/structure/closet/crate/secure/loot/togglelock(mob/user)
 	if(!locked)
 		return
 
@@ -179,7 +179,7 @@
 		if(guesschar != code[i])
 			. = 0
 
-/obj/structure/closet/crate/secure/loot/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/closet/crate/secure/loot/attackby(obj/item/W, mob/user)
 	if(locked)
 		if (istype(W, /obj/item/device/multitool)) // Greetings Urist McProfessor, how about a nice game of cows and bulls?
 			to_chat(user, "<span class='notice'>DECA-CODE LOCK ANALYSIS:</span>")

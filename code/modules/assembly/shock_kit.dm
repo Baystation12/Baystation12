@@ -14,7 +14,7 @@
 	..()
 	return
 
-/obj/item/assembly/shock_kit/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/assembly/shock_kit/attackby(obj/item/W, mob/user)
 	if(isWrench(W) && !status)
 		part1.dropInto(loc)
 		part2.dropInto(loc)
@@ -30,7 +30,7 @@
 	add_fingerprint(user)
 	return
 
-/obj/item/assembly/shock_kit/attack_self(mob/user as mob)
+/obj/item/assembly/shock_kit/attack_self(mob/user)
 	part1.attack_self(user, status)
 	part2.attack_self(user, status)
 	add_fingerprint(user)

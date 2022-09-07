@@ -49,7 +49,7 @@
 	. = ..()
 	to_chat(user,"Its outlet port is to the [dir2text(dir)]")
 
-/obj/machinery/atmospherics/binary/oxyregenerator/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/atmospherics/binary/oxyregenerator/attackby(obj/item/O, mob/user)
 	if(component_attackby(O, user))
 		return TRUE
 	if(isWrench(O))

@@ -61,7 +61,7 @@
 	. = ..()
 	STOP_PROCESSING(SSobj, src)
 
-/obj/item/implant/death_alarm/implanted(mob/source as mob)
+/obj/item/implant/death_alarm/implanted(mob/source)
 	mobname = source.real_name
 	START_PROCESSING(SSobj, src)
 	return TRUE

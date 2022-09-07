@@ -72,7 +72,7 @@
 	update_nearby_tiles()
 	return ..()
 
-/obj/machinery/door/window/Bumped(atom/movable/AM as mob|obj)
+/obj/machinery/door/window/Bumped(atom/movable/AM)
 	if (!( ismob(AM) ))
 		var/mob/living/bot/bot = AM
 		if(istype(bot))
@@ -102,7 +102,7 @@
 	else
 		return 1
 
-/obj/machinery/door/window/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
+/obj/machinery/door/window/CheckExit(atom/movable/mover, turf/target)
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return 1
 	if(get_dir(loc, target) == dir)
@@ -189,7 +189,7 @@
 /obj/machinery/door/window/CanFluidPass(coming_from)
 	return !density || ((dir in GLOB.cardinal) && coming_from != dir)
 
-/obj/machinery/door/window/attackby(obj/item/I as obj, mob/user as mob)
+/obj/machinery/door/window/attackby(obj/item/I, mob/user)
 
 	//If it's in the process of opening/closing, ignore the click
 	if (src.operating == 1)

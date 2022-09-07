@@ -22,7 +22,7 @@
 		desc = initial(desc)
 		desc += " It's made of [material.use_name]."
 
-/obj/item/material/clipboard/MouseDrop(obj/over_object as obj) //Quick clipboard fix. -Agouri
+/obj/item/material/clipboard/MouseDrop(obj/over_object) //Quick clipboard fix. -Agouri
 	if(ishuman(usr))
 		var/mob/M = usr
 		if(!(istype(over_object, /obj/screen) ))
@@ -50,7 +50,7 @@
 	overlays += overlay_image(icon, "clipboard_over", flags=RESET_COLOR)
 	return
 
-/obj/item/material/clipboard/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/material/clipboard/attackby(obj/item/W, mob/user)
 
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo))
 		if(!user.unEquip(W, src))
@@ -66,7 +66,7 @@
 
 	return
 
-/obj/item/material/clipboard/attack_self(mob/user as mob)
+/obj/item/material/clipboard/attack_self(mob/user)
 	var/dat = "<title>Clipboard</title>"
 	if(haspen)
 		dat += "<A href='?src=\ref[src];pen=1'>Remove Pen</A><BR><HR>"

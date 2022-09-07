@@ -46,7 +46,7 @@
 		loaded -= chambered
 		chambered = null
 
-/obj/item/gun/projectile/heavysniper/attack_self(mob/user as mob)
+/obj/item/gun/projectile/heavysniper/attack_self(mob/user)
 	bolt_open = !bolt_open
 	if(bolt_open)
 		if(chambered)

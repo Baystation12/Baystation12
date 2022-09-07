@@ -23,7 +23,7 @@
 				4 = Screwdriver panel closed and is fully built (you cannot attach upgrades)
 	*/
 
-/obj/item/camera_assembly/attackby(obj/item/W as obj, mob/living/user as mob)
+/obj/item/camera_assembly/attackby(obj/item/W, mob/living/user)
 
 	switch(state)
 
@@ -148,7 +148,7 @@
 	else
 		icon_state = "cameracase"
 
-/obj/item/camera_assembly/attack_hand(mob/user as mob)
+/obj/item/camera_assembly/attack_hand(mob/user)
 	if(!anchored)
 		..()
 

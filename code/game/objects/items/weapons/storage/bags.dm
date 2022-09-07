@@ -7,11 +7,11 @@
 	use_to_pickup = 1
 	slot_flags = SLOT_BELT
 
-/obj/item/storage/bag/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
+/obj/item/storage/bag/handle_item_insertion(obj/item/W, prevent_warning = 0)
 	. = ..()
 	if(.) update_w_class()
 
-/obj/item/storage/bag/remove_from_storage(obj/item/W as obj, atom/new_location)
+/obj/item/storage/bag/remove_from_storage(obj/item/W, atom/new_location)
 	. = ..()
 	if(.) update_w_class()
 
@@ -68,7 +68,7 @@
 	desc = "The latest and greatest in custodial convenience, a trashbag that is capable of holding vast quantities of garbage."
 	icon_state = "bluetrashbag"
 
-/obj/item/storage/bag/trash/bluespace/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/bag/trash/bluespace/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/storage/backpack/holding) || istype(W, /obj/item/storage/bag/trash/bluespace))
 		to_chat(user, "<span class='warning'>The Bluespace interfaces of the two devices conflict and malfunction.</span>")
 		qdel(W)

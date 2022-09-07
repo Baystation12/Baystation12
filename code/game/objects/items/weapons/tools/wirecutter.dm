@@ -29,7 +29,7 @@
 		overlays += overlay_image(icon, "[hardware_icon]", flags=RESET_COLOR)
 	. = ..()
 
-/obj/item/wirecutters/attack(mob/living/carbon/C as mob, mob/user as mob)
+/obj/item/wirecutters/attack(mob/living/carbon/C, mob/user)
 	if(istype(C) && user.a_intent == I_HELP && (C.handcuffed) && (istype(C.handcuffed, /obj/item/handcuffs/cable)))
 		usr.visible_message("\The [usr] cuts \the [C]'s restraints with \the [src]!",\
 		"You cut \the [C]'s restraints with \the [src]!",\

@@ -33,7 +33,7 @@
 	else
 		..()
 
-/obj/item/plastique/attack_self(mob/user as mob)
+/obj/item/plastique/attack_self(mob/user)
 	var/newtime = input(usr, "Please set the timer.", "Timer", 10) as num
 	if(user.get_active_hand() == src)
 		newtime = clamp(newtime, 10, 60000)
@@ -98,5 +98,5 @@
 		T--
 	explode(get_turf(target))
 
-/obj/item/plastique/attack(mob/M as mob, mob/user as mob, def_zone)
+/obj/item/plastique/attack(mob/M, mob/user, def_zone)
 	return

@@ -272,12 +272,12 @@ var/global/list/ai_verbs_default = list(
 			custom_icons += selected_sprite
 	update_icon()
 
-/mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in view())
+/mob/living/silicon/ai/pointed(atom/A))
 	set popup_menu = 0
 	set src = usr.contents
 	return 0
 
-/mob/living/silicon/ai/fully_replace_character_name(pickedName as text)
+/mob/living/silicon/ai/fully_replace_character_name(pickedName)
 	..()
 	announcement.announcer = pickedName
 	if(eyeobj)
@@ -386,7 +386,7 @@ var/global/list/ai_verbs_default = list(
 		emergency_message_cooldown = 0
 
 
-/mob/living/silicon/ai/check_eye(mob/user as mob)
+/mob/living/silicon/ai/check_eye(mob/user)
 	if (!camera)
 		return -1
 	return 0
@@ -612,7 +612,7 @@ var/global/list/ai_verbs_default = list(
 		camera_light_on = world.timeofday + 1 * 20 // Update the light every 2 seconds.
 
 
-/mob/living/silicon/ai/attackby(obj/item/W as obj, mob/user as mob)
+/mob/living/silicon/ai/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/aicard))
 
 		var/obj/item/aicard/card = W

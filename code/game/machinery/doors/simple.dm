@@ -113,7 +113,7 @@
 	material.place_dismantled_product(get_turf(src))
 	qdel(src)
 
-/obj/machinery/door/unpowered/simple/attack_ai(mob/user as mob) //those aren't machinery, they're just big fucking slabs of a mineral
+/obj/machinery/door/unpowered/simple/attack_ai(mob/user) //those aren't machinery, they're just big fucking slabs of a mineral
 	if(isAI(user)) //so the AI can't open it
 		return
 	else if(isrobot(user)) //but cyborgs can
@@ -134,7 +134,7 @@
 				take_damage(150)
 
 
-/obj/machinery/door/unpowered/simple/attackby(obj/item/I as obj, mob/user as mob)
+/obj/machinery/door/unpowered/simple/attackby(obj/item/I, mob/user)
 	src.add_fingerprint(user, 0, I)
 	if(istype(I, /obj/item/key) && lock)
 		var/obj/item/key/K = I

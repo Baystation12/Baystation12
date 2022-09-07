@@ -38,7 +38,7 @@
 
 	return
 
-/mob/living/silicon/ai/proc/ai_store_location(loc as text)
+/mob/living/silicon/ai/proc/ai_store_location(loc)
 	set category = "Silicon Commands"
 	set name = "Store Camera Location"
 	set desc = "Stores your current camera location by the given name."
@@ -180,7 +180,7 @@
 	view_core()
 
 
-/obj/machinery/camera/attack_ai(mob/living/silicon/ai/user as mob)
+/obj/machinery/camera/attack_ai(mob/living/silicon/ai/user)
 	if (!istype(user))
 		return
 	if (!src.can_use())
@@ -188,7 +188,7 @@
 	user.eyeobj.setLoc(get_turf(src))
 
 
-/mob/living/silicon/ai/attack_ai(mob/user as mob)
+/mob/living/silicon/ai/attack_ai(mob/user)
 	ai_camera_list()
 
 /proc/camera_sort(list/L)

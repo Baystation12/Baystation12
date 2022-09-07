@@ -9,7 +9,7 @@
 	var/list/authorized = list(  )
 
 
-/obj/machinery/computer/shuttle/attackby(obj/item/card/W as obj, mob/user as mob)
+/obj/machinery/computer/shuttle/attackby(obj/item/card/W, mob/user)
 	if(stat & (BROKEN|NOPOWER))	return
 
 	var/datum/evacuation_controller/shuttle/evac_control = evacuation_controller

@@ -29,7 +29,7 @@
 	colour = pick("red","purple","jade","black")
 	name = "[colour] lipstick"
 
-/obj/item/lipstick/attack_self(mob/user as mob)
+/obj/item/lipstick/attack_self(mob/user)
 	to_chat(user, "<span class='notice'>You twist \the [src] [open ? "closed" : "open"].</span>")
 	open = !open
 	if(open)
@@ -37,7 +37,7 @@
 	else
 		icon_state = initial(icon_state)
 
-/obj/item/lipstick/attack(atom/A, mob/user as mob, target_zone)
+/obj/item/lipstick/attack(atom/A, mob/user, target_zone)
 	if(!open)	return
 
 	if(ishuman(A))

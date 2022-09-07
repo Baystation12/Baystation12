@@ -86,7 +86,7 @@
 /mob/living/carbon/proc/clear_coughedtime()
 	coughedtime = 0
 
-/mob/living/carbon/attack_hand(mob/M as mob)
+/mob/living/carbon/attack_hand(mob/M)
 	if(!istype(M, /mob/living/carbon)) return
 	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -348,7 +348,7 @@
 		return 1
 	return
 
-/mob/living/carbon/u_equip(obj/item/W as obj)
+/mob/living/carbon/u_equip(obj/item/W)
 	if(!W)	return 0
 
 	else if (W == handcuffed)
@@ -412,7 +412,7 @@
 				break
 	return result
 
-/mob/living/carbon/show_inv(mob/user as mob)
+/mob/living/carbon/show_inv(mob/user)
 	user.set_machine(src)
 	var/dat = {"
 	<B><HR><FONT size=3>[name]</FONT></B>

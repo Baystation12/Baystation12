@@ -44,10 +44,10 @@
 	create_reagents(10)
 	..()
 
-/obj/item/toy/water_balloon/attack(mob/living/carbon/human/M as mob, mob/user as mob)
+/obj/item/toy/water_balloon/attack(mob/living/carbon/human/M, mob/user)
 	return
 
-/obj/item/toy/water_balloon/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
+/obj/item/toy/water_balloon/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return
 	if (istype(A, /obj/structure/reagent_dispensers/watertank) && get_dist(src,A) <= 1)
 		A.reagents.trans_to_obj(src, 10)
@@ -56,7 +56,7 @@
 		src.update_icon()
 	return
 
-/obj/item/toy/water_balloon/attackby(obj/O as obj, mob/user as mob)
+/obj/item/toy/water_balloon/attackby(obj/O, mob/user)
 	if(istype(O, /obj/item/reagent_containers/glass))
 		if(O.reagents)
 			if(O.reagents.total_volume < 1)
@@ -152,7 +152,7 @@
 	attack_verb = list("attacked", "struck", "hit")
 	var/bullets = 5
 
-/obj/item/toy/crossbow/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/toy/crossbow/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/toy/ammo/crossbow))
 		if(bullets <= 4)
 			if(!user.unEquip(I))
@@ -164,7 +164,7 @@
 			to_chat(usr, "<span class='warning'>It's already fully loaded.</span>")
 
 
-/obj/item/toy/crossbow/afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
+/obj/item/toy/crossbow/afterattack(atom/target, mob/user, flag)
 	if(!isturf(target.loc) || target == user) return
 	if(flag) return
 
@@ -212,7 +212,7 @@
 			O.show_message(text("<span class='warning'>\The [] realized they were out of ammo and starting scrounging for some!</span>", user), 1)
 
 
-/obj/item/toy/crossbow/attack(mob/M as mob, mob/user as mob)
+/obj/item/toy/crossbow/attack(mob/M, mob/user)
 	src.add_fingerprint(user)
 
 // ******* Check
@@ -268,7 +268,7 @@
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "struck", "hit")
 
-/obj/item/toy/sword/attack_self(mob/user as mob)
+/obj/item/toy/sword/attack_self(mob/user)
 	src.active = !( src.active )
 	if (src.active)
 		to_chat(user, "<span class='notice'>You extend the plastic blade with a quick flick of your wrist.</span>")
@@ -321,7 +321,7 @@
 	playsound(src, 'sound/effects/snap.ogg', 50, 1)
 	qdel(src)
 
-/obj/item/toy/snappop/Crossed(H as mob|obj)
+/obj/item/toy/snappop/Crossed(H)
 	if((ishuman(H))) //i guess carp and shit shouldn't set them off
 		var/mob/living/carbon/M = H
 		if(!MOVING_DELIBERATELY(M))
@@ -348,7 +348,7 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 
-/obj/item/toy/bosunwhistle/attack_self(mob/user as mob)
+/obj/item/toy/bosunwhistle/attack_self(mob/user)
 	if(cooldown < world.time - 35)
 		to_chat(user, "<span class='notice'>You blow on [src], creating an ear-splitting noise!</span>")
 		playsound(user, 'sound/misc/boatswain.ogg', 20, 1)
@@ -364,13 +364,13 @@
 	w_class = ITEM_SIZE_TINY
 
 //all credit to skasi for toy mech fun ideas
-/obj/item/toy/prize/attack_self(mob/user as mob)
+/obj/item/toy/prize/attack_self(mob/user)
 	if(cooldown < world.time - 8)
 		to_chat(user, "<span class='notice'>You play with [src].</span>")
 		playsound(user, 'sound/mecha/mechstep01.ogg', 20, 1)
 		cooldown = world.time
 
-/obj/item/toy/prize/attack_hand(mob/user as mob)
+/obj/item/toy/prize/attack_hand(mob/user)
 	if(loc == user)
 		if(cooldown < world.time - 8)
 			to_chat(user, "<span class='notice'>You play with [src].</span>")
@@ -842,7 +842,7 @@
 	set_light(0.6, 0.5, 2, 2, "#ff0000")
 	return ..()
 
-/obj/item/marshalling_wand/attack_self(mob/living/user as mob)
+/obj/item/marshalling_wand/attack_self(mob/living/user)
 	playsound(src.loc, 'sound/effects/rustle1.ogg', 100, 1)
 	if (user.a_intent == I_HELP)
 		user.visible_message("<span class='notice'>[user] beckons with \the [src], signalling forward motion.</span>",
@@ -874,7 +874,7 @@
 	icon_state= "ringbell"
 	anchored = TRUE
 
-/obj/item/toy/ringbell/attack_hand(mob/user as mob)
+/obj/item/toy/ringbell/attack_hand(mob/user)
 	if (user.a_intent == I_HELP)
 		user.visible_message("<span class='notice'>[user] rings \the [src], signalling the beginning of the contest.</span>")
 		playsound(user.loc, 'sound/items/oneding.ogg', 60)

@@ -163,7 +163,7 @@
 	return !density
 
 
-/obj/machinery/door/proc/bumpopen(mob/user as mob)
+/obj/machinery/door/proc/bumpopen(mob/user)
 	if(operating)	return
 	if(user.last_airflow > world.time - vsc.airflow_delay) //Fakkit
 		return
@@ -199,7 +199,7 @@
 
 
 
-/obj/machinery/door/hitby(AM as mob|obj, datum/thrownthing/TT)
+/obj/machinery/door/hitby(AM, datum/thrownthing/TT)
 
 	..()
 	visible_message("<span class='danger'>[src.name] was hit by [AM].</span>")
@@ -217,7 +217,7 @@
 	if(CanInteract(user, DefaultTopicState()))
 		return attackby(user = user)
 
-/obj/machinery/door/attackby(obj/item/I as obj, mob/user as mob)
+/obj/machinery/door/attackby(obj/item/I, mob/user)
 	src.add_fingerprint(user, 0, I)
 
 	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())

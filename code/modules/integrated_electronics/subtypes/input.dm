@@ -878,7 +878,7 @@
 	GLOB.listening_objects -= src
 	. = ..()
 
-/obj/item/integrated_circuit/input/microphone/hear_talk(mob/living/M as mob, text, verb, datum/language/speaking)
+/obj/item/integrated_circuit/input/microphone/hear_talk(mob/living/M, text, verb, datum/language/speaking)
 	var/translated = FALSE
 	if(M && text && speaking)
 		if(!(speaking.flags & invalid_flags))

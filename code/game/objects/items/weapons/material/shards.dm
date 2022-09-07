@@ -47,7 +47,7 @@
 		color = "#ffffff"
 		alpha = 255
 
-/obj/item/material/shard/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/material/shard/attackby(obj/item/W, mob/user)
 	if(isWelder(W) && material.shard_can_repair)
 		var/obj/item/weldingtool/WT = W
 		if(WT.remove_fuel(0, user))
@@ -56,7 +56,7 @@
 			return
 	return ..()
 
-/obj/item/material/shard/Crossed(AM as mob|obj)
+/obj/item/material/shard/Crossed(AM)
 	..()
 	if(isliving(AM))
 		var/mob/M = AM

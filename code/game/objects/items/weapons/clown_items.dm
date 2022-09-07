@@ -7,7 +7,7 @@
 /*
  * Banana Peals
  */
-/obj/item/bananapeel/Crossed(AM as mob|obj)
+/obj/item/bananapeel/Crossed(AM)
 	if (istype(AM, /mob/living))
 		var/mob/living/M = AM
 		M.slip("the [src.name]",4)
@@ -28,7 +28,7 @@
 	var/spam_flag = 0
 	var/audio_files = list("sound/items/bikehorn.ogg")
 
-/obj/item/bikehorn/attack_self(mob/user as mob)
+/obj/item/bikehorn/attack_self(mob/user)
 	if (spam_flag == 0)
 		spam_flag = 1
 		playsound(src.loc, pick(src.audio_files), 50, 1)

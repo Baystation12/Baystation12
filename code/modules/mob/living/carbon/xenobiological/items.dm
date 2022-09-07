@@ -13,7 +13,7 @@
 	var/enhanced = 0 //has it been enhanced before?
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
-/obj/item/slime_extract/attackby(obj/item/O as obj, mob/user as mob)
+/obj/item/slime_extract/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/slimesteroid2))
 		if(enhanced == 1)
 			to_chat(user, "<span class='warning'> This extract has already been enhanced!</span>")
@@ -132,7 +132,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle19"
 
-/obj/item/slimepotion/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
+/obj/item/slimepotion/attack(mob/living/carbon/slime/M, mob/user)
 	if(!istype(M, /mob/living/carbon/slime))//If target is not a slime.
 		to_chat(user, "<span class='warning'> The potion only works on baby slimes!</span>")
 		return ..()
@@ -166,7 +166,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle19"
 
-/obj/item/slimepotion2/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
+/obj/item/slimepotion2/attack(mob/living/carbon/slime/M, mob/user)
 	if(!istype(M, /mob/living/carbon/slime))
 		to_chat(user, "<span class='warning'> The potion only works on slimes!</span>")
 		return ..()
@@ -198,7 +198,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle16"
 
-/obj/item/slimesteroid/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
+/obj/item/slimesteroid/attack(mob/living/carbon/slime/M, mob/user)
 	if(!istype(M, /mob/living/carbon/slime))//If target is not a slime.
 		to_chat(user, "<span class='warning'> The steroid only works on baby slimes!</span>")
 		return ..()
@@ -289,7 +289,7 @@
 	else
 		icon_state = "golem"
 
-/obj/effect/golemrune/attack_hand(mob/living/user as mob)
+/obj/effect/golemrune/attack_hand(mob/living/user)
 	var/mob/observer/ghost/ghost
 	for(var/mob/observer/ghost/O in src.loc)
 		if(!O.client)

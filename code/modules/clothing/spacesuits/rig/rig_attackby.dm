@@ -1,4 +1,4 @@
-/obj/item/rig/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/rig/attackby(obj/item/W, mob/user)
 
 	if(!istype(user,/mob/living)) return 0
 

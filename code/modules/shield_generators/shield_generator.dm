@@ -210,7 +210,7 @@
 		return SPAN_NOTICE("Wait until \the [src] cools down from emergency shutdown first!")
 	return ..()
 
-/obj/machinery/power/shield_generator/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/power/shield_generator/attackby(obj/item/O, mob/user)
 	if(panel_open && (isMultitool(O) || isWirecutter(O)))
 		attack_hand(user)
 		return TRUE

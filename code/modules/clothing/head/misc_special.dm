@@ -135,7 +135,7 @@
 	if (istype(location, /turf))
 		location.hotspot_expose(700, 1)
 
-/obj/item/clothing/head/cakehat/attack_self(mob/user as mob)
+/obj/item/clothing/head/cakehat/attack_self(mob/user)
 	src.onfire = !( src.onfire )
 	if (src.onfire)
 		src.force = 3
@@ -163,7 +163,7 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/head/ushanka/attack_self(mob/user as mob)
+/obj/item/clothing/head/ushanka/attack_self(mob/user)
 	if(icon_state == initial(icon_state))
 		icon_state = icon_state_up
 		to_chat(user, "You raise the ear flaps on the ushanka.")

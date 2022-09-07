@@ -1,4 +1,4 @@
-/obj/item/reagent_containers/food/snacks/slice/bread/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/slice/bread/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/material/shard) || istype(W,/obj/item/reagent_containers/food/snacks))
 		if (is_path_in_list(W.type, list(/obj/item/reagent_containers/food/snacks/custombowl, /obj/item/reagent_containers/food/snacks/csandwich)))
 			return
@@ -101,7 +101,7 @@
 	var/obj/item/O = pick(contents)
 	to_chat(user, SPAN_ITALIC("You think you can see [O.name] in there."))
 
-/obj/item/reagent_containers/food/snacks/csandwich/attack(mob/M as mob, mob/user as mob, def_zone)
+/obj/item/reagent_containers/food/snacks/csandwich/attack(mob/M, mob/user, def_zone)
 
 	var/obj/item/shard
 	for(var/obj/item/O in contents)

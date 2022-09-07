@@ -205,7 +205,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	return
 
 // attempt to move while inside
-/obj/machinery/disposal/relaymove(mob/user as mob)
+/obj/machinery/disposal/relaymove(mob/user)
 	if (user.incapacitated() || src.flushing)
 		return
 	if (user.loc == src)

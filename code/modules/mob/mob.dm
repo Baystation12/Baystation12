@@ -303,7 +303,7 @@
 	return
 
 
-/mob/proc/show_inv(mob/user as mob)
+/mob/proc/show_inv(mob/user)
 	return
 
 
@@ -525,7 +525,7 @@
 			return 1
 	return 0
 
-/mob/MouseDrop(mob/M as mob)
+/mob/MouseDrop(mob/M)
 	..()
 	if(M != usr) return
 	if(usr == src) return

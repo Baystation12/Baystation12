@@ -119,7 +119,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	if (client.statpanel == "Status")
 		show_silenced()
 
-/mob/living/silicon/pai/check_eye(mob/user as mob)
+/mob/living/silicon/pai/check_eye(mob/user)
 	if (!current)
 		return -1
 	return 0
@@ -280,7 +280,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 		if(stat != 2) fold()
 	return
 
-/mob/living/silicon/pai/attack_hand(mob/user as mob)
+/mob/living/silicon/pai/attack_hand(mob/user)
 	visible_message(SPAN_DANGER("[user] boops [src] on the head."))
 	fold()
 

@@ -39,7 +39,7 @@ var/global/photo_count = 0
 /obj/item/photo/New()
 	id = photo_count++
 
-/obj/item/photo/attack_self(mob/user as mob)
+/obj/item/photo/attack_self(mob/user)
 	user.examinate(src)
 
 /obj/item/photo/on_update_icon()
@@ -57,7 +57,7 @@ var/global/photo_count = 0
 	tiny.pixel_x = -32*(photo_size-1)/2 - 3
 	tiny.pixel_y = -32*(photo_size-1)/2 + 3
 
-/obj/item/photo/attackby(obj/item/P as obj, mob/user as mob)
+/obj/item/photo/attackby(obj/item/P, mob/user)
 	if(istype(P, /obj/item/pen))
 		var/txt = sanitize(input(user, "What would you like to write on the back?", "Photo Writing", null)  as text, 128)
 		if(loc == user && user.stat == 0)
@@ -74,7 +74,7 @@ var/global/photo_count = 0
 	else
 		to_chat(user, "<span class='notice'>It is too far away.</span>")
 
-/obj/item/photo/proc/show(mob/user as mob)
+/obj/item/photo/proc/show(mob/user)
 	send_rsc(user, img, "tmp_photo_[id].png")
 	var/output = "<html><head><title>[name]</title></head>"
 	output += "<body style='overflow:hidden;margin:0;text-align:center'>"
@@ -111,7 +111,7 @@ var/global/photo_count = 0
 	storage_slots = DEFAULT_BOX_STORAGE //yes, that's storage_slots. Photos are w_class 1 so this has as many slots equal to the number of photos you could put in a box
 	can_hold = list(/obj/item/photo)
 
-/obj/item/storage/photo_album/MouseDrop(obj/over_object as obj)
+/obj/item/storage/photo_album/MouseDrop(obj/over_object)
 
 	if((istype(usr, /mob/living/carbon/human)))
 		var/mob/M = usr
@@ -173,16 +173,16 @@ var/global/photo_count = 0
 		size = nsize
 		to_chat(usr, "<span class='notice'>Camera will now take [size]x[size] photos.</span>")
 
-/obj/item/device/camera/attack(mob/living/carbon/human/M as mob, mob/user as mob)
+/obj/item/device/camera/attack(mob/living/carbon/human/M, mob/user)
 	return
 
-/obj/item/device/camera/attack_self(mob/user as mob)
+/obj/item/device/camera/attack_self(mob/user)
 	on = !on
 	update_icon()
 	to_chat(user, "You switch the camera [on ? "on" : "off"].")
 	return
 
-/obj/item/device/camera/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/device/camera/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/device/camera_film))
 		if(pictures_left)
 			to_chat(user, "<span class='notice'>[src] still has some film in it!</span>")
@@ -194,7 +194,7 @@ var/global/photo_count = 0
 	..()
 
 
-/obj/item/device/camera/proc/get_mobs(turf/the_turf as turf)
+/obj/item/device/camera/proc/get_mobs(turf/the_turf)
 	var/mob_detail
 	for(var/mob/living/carbon/A in the_turf)
 		if(A.invisibility) continue
@@ -213,7 +213,7 @@ var/global/photo_count = 0
 			mob_detail += "You can also see [A] on the photo[(A.health / A.maxHealth)< 0.75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]."
 	return mob_detail
 
-/obj/item/device/camera/afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
+/obj/item/device/camera/afterattack(atom/target, mob/user, flag)
 	if(!on || !pictures_left || ismob(target.loc)) return
 	captureimage(target, user, flag)
 

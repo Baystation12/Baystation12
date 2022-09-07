@@ -64,7 +64,7 @@
 	for(var/atom/movable/AM in contents)
 		underlays += AM.appearance
 
-/obj/structure/displaycase/attack_hand(mob/user as mob)
+/obj/structure/displaycase/attack_hand(mob/user)
 	add_fingerprint(user)
 	if(!health_dead)
 		to_chat(usr, text("<span class='warning'>You kick the display case.</span>"))

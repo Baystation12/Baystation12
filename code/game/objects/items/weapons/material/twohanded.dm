@@ -85,7 +85,7 @@
 	worth_multiplier = 31
 	base_parry_chance = 15
 
-/obj/item/material/twohanded/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
+/obj/item/material/twohanded/fireaxe/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return
 	..()
 	if(A && wielded)

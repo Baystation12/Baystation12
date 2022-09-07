@@ -103,7 +103,7 @@
 				to_chat(user, SPAN_NOTICE("[transferred] units injected. [R.total_volume] units remaining in \the [container]."))
 	return
 
-/obj/item/reagent_containers/borghypo/attack_self(mob/user as mob)
+/obj/item/reagent_containers/borghypo/attack_self(mob/user)
 	ui_interact(user)
 
 /obj/item/reagent_containers/borghypo/examine(mob/user, distance)

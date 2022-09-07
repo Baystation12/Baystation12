@@ -462,7 +462,7 @@
 		damage += proj_damage * config_bullet_energy
 	return 0
 
-/obj/machinery/power/supermatter/attack_robot(mob/user as mob)
+/obj/machinery/power/supermatter/attack_robot(mob/user)
 	if(Adjacent(user))
 		return attack_hand(user)
 	else
@@ -475,7 +475,7 @@
 /obj/machinery/power/supermatter/attack_ghost(mob/user)
 	ui_interact(user)
 
-/obj/machinery/power/supermatter/attack_hand(mob/user as mob)
+/obj/machinery/power/supermatter/attack_hand(mob/user)
 	user.visible_message(
 		SPAN_WARNING("\The [user] reaches out and touches \the [src], inducing a resonance. For a brief instant, \his body glows brilliantly, then flashes into ash."),
 		SPAN_DANGER(FONT_LARGE("You reach out and touch \the [src]. Instantly, you feel a curious sensation as your body turns into new and exciting forms of plasma. That was not a wise decision.")),
@@ -511,7 +511,7 @@
 		ui.set_auto_update(1)
 
 
-/obj/machinery/power/supermatter/attackby(obj/item/W as obj, mob/living/user as mob)
+/obj/machinery/power/supermatter/attackby(obj/item/W, mob/living/user)
 	if(istype(W, /obj/item/tape_roll))
 		to_chat(user, SPAN_NOTICE("You repair some of the damage to \the [src] with \the [W]."))
 		damage = max(damage - 10, 0)
@@ -529,7 +529,7 @@
 	user.apply_damage(150, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 
 
-/obj/machinery/power/supermatter/Bumped(atom/AM as mob|obj)
+/obj/machinery/power/supermatter/Bumped(atom/AM)
 	if(istype(AM, /obj/effect))
 		return
 	if(istype(AM, /mob/living))

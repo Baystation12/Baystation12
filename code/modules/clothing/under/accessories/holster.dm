@@ -16,7 +16,7 @@
 	set_extension(src, /datum/extension/holster, container, sound_in, sound_out, can_holster)
 
 
-/obj/item/clothing/accessory/storage/holster/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/clothing/accessory/storage/holster/attackby(obj/item/W, mob/user)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	if (H.holster(W, user))
 		return
@@ -24,7 +24,7 @@
 		. = ..(W, user)
 
 
-/obj/item/clothing/accessory/storage/holster/attack_hand(mob/user as mob)
+/obj/item/clothing/accessory/storage/holster/attack_hand(mob/user)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	if (H.unholster(user))
 		return
@@ -37,12 +37,12 @@
 	H.examine_holster(user)
 
 
-/obj/item/clothing/accessory/storage/holster/on_attached(obj/item/clothing/under/S, mob/user as mob)
+/obj/item/clothing/accessory/storage/holster/on_attached(obj/item/clothing/under/S, mob/user)
 	..()
 	parent.verbs += /atom/proc/holster_verb
 
 
-/obj/item/clothing/accessory/storage/holster/on_removed(mob/user as mob)
+/obj/item/clothing/accessory/storage/holster/on_removed(mob/user)
 	if (parent)
 		var/remove_verb = TRUE
 		if (has_extension(parent, /datum/extension/holster))

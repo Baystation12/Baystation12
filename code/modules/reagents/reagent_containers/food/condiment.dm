@@ -31,17 +31,17 @@
 		/datum/reagent/oliveoil = /obj/item/reagent_containers/food/condiment/small/oliveoil
 		)
 
-/obj/item/reagent_containers/food/condiment/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/condiment/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/pen) || istype(W, /obj/item/device/flashlight/pen))
 		var/tmp_label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
 		var/datum/extension/labels/L = get_or_create_extension(src, /datum/extension/labels)
 		L.AttachLabel(user, tmp_label)
 		return
 
-/obj/item/reagent_containers/food/condiment/attack_self(mob/user as mob)
+/obj/item/reagent_containers/food/condiment/attack_self(mob/user)
 	return
 
-/obj/item/reagent_containers/food/condiment/attack(mob/M as mob, mob/user as mob, def_zone)
+/obj/item/reagent_containers/food/condiment/attack(mob/M, mob/user, def_zone)
 	if(standard_feed_mob(user, M))
 		return
 

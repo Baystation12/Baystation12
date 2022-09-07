@@ -31,7 +31,7 @@
 		overlays += "folder_paper"
 	return
 
-/obj/item/folder/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/folder/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo) || istype(W, /obj/item/paper_bundle))
 		if(!user.unEquip(W, src))
 			return
@@ -43,7 +43,7 @@
 			SetName("folder[(n_name ? text("- '[n_name]'") : null)]")
 	return
 
-/obj/item/folder/attack_self(mob/user as mob)
+/obj/item/folder/attack_self(mob/user)
 	var/dat = "<title>[name]</title>"
 	for(var/obj/item/paper/P in src)
 		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> <A href='?src=\ref[src];rename=\ref[P]'>Rename</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
@@ -131,14 +131,14 @@
 		update_icon()
 		return 1
 
-/obj/item/folder/envelope/attack_self(mob/user as mob)
+/obj/item/folder/envelope/attack_self(mob/user)
 	if(sealed)
 		sealcheck(user)
 		return
 	else
 		..()
 
-/obj/item/folder/envelope/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/folder/envelope/attackby(obj/item/W, mob/user)
 	if(sealed)
 		sealcheck(user)
 		return

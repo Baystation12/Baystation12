@@ -34,7 +34,7 @@
 	user.visible_message("<span class='notice'>[user] has [!on?"de":""]activated \the [src].</span>", "<span class='notice'>You [!on?"de":""]activate \the [src].</span>")
 	return TRUE
 
-/obj/machinery/floorlayer/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/floorlayer/attackby(obj/item/W, mob/user)
 
 	if(isWrench(W))
 		var/m = input("Choose work mode", "Mode") as null|anything in mode

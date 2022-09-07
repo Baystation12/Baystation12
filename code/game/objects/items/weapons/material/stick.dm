@@ -12,12 +12,12 @@
 	attack_verb = list("poked", "jabbed")
 
 
-/obj/item/material/stick/attack_self(mob/user as mob)
+/obj/item/material/stick/attack_self(mob/user)
 	user.visible_message("<span class='warning'>\The [user] snaps [src].</span>", "<span class='warning'>You snap [src].</span>")
 	shatter(0)
 
 
-/obj/item/material/stick/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/material/stick/attackby(obj/item/W, mob/user)
 	if(W.sharp && W.edge && !sharp)
 		user.visible_message("<span class='warning'>[user] sharpens [src] with [W].</span>", "<span class='warning'>You sharpen [src] using [W].</span>")
 		sharp = TRUE

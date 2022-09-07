@@ -155,7 +155,7 @@
 /obj/machinery/mining/drill/components_are_accessible(path)
 	return !active && ..()
 
-/obj/machinery/mining/drill/physical_attack_hand(mob/user as mob)
+/obj/machinery/mining/drill/physical_attack_hand(mob/user)
 	check_supports()
 	if(need_player_check)
 		if(can_use_power_oneoff(10 KILOWATTS))
@@ -268,7 +268,7 @@
 		return SPAN_NOTICE("You can't work with the brace of a running drill!")
 	return ..()
 
-/obj/machinery/mining/brace/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/mining/brace/attackby(obj/item/W, mob/user)
 	if(connected && connected.active)
 		to_chat(user, "<span class='notice'>You can't work with the brace of a running drill!</span>")
 		return TRUE

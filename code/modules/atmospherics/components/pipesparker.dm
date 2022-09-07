@@ -75,7 +75,7 @@
 	)
 	ignite()
 
-/obj/machinery/atmospherics/pipe/cap/sparker/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/atmospherics/pipe/cap/sparker/attackby(obj/item/W, mob/user)
 	if (isScrewdriver(W) && !signaler)
 		add_fingerprint(user)
 		disabled = !disabled

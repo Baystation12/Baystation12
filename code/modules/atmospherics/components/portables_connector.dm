@@ -130,7 +130,7 @@
 	return null
 
 
-/obj/machinery/atmospherics/portables_connector/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/atmospherics/portables_connector/attackby(obj/item/W, mob/user)
 	if(!isWrench(W))
 		return ..()
 	if (connected_device)

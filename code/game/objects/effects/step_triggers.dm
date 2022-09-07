@@ -9,7 +9,7 @@
 /obj/effect/step_trigger/proc/Trigger(atom/movable/A)
 	return 0
 
-/obj/effect/step_trigger/Crossed(H as mob|obj)
+/obj/effect/step_trigger/Crossed(H)
 	..()
 	if(!H)
 		return

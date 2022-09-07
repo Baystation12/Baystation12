@@ -98,7 +98,7 @@
 /obj/proc/hides_under_flooring()
 	return level == 1
 
-/obj/proc/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
+/obj/proc/hear_talk(mob/M, text, verb, datum/language/speaking)
 	if(talking_atom)
 		talking_atom.catchMessage(text, M)
 /*
@@ -109,7 +109,7 @@
 		*/
 	return
 
-/obj/proc/see_emote(mob/M as mob, text, emote_type)
+/obj/proc/see_emote(mob/M, text, emote_type)
 	return
 
 /obj/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)

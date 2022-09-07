@@ -23,7 +23,7 @@
 	return
 
 //mob verbs are faster than object verbs. See above.
-/mob/living/pointed(atom/A as mob|obj|turf in view())
+/mob/living/pointed(atom/A))
 	if(incapacitated())
 		return 0
 	if(src.status_flags & FAKEDEATH)
