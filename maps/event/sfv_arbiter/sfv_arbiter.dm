@@ -37,4 +37,4 @@
 	name = "\improper SFV Arbiter"
 	icon_state = "yellow"
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-	req_access = list(access_cent_general)
+	req_access = list(access_syndicate)

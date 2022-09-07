@@ -287,6 +287,12 @@
 /obj/item/clothing/suit/storage/solgov/service/fleet/officer,
 /obj/item/clothing/suit/storage/solgov/service/fleet/snco,
 /obj/item/clothing/suit/storage/solgov/service/fleet/snco,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "kF" = (
