@@ -13,7 +13,7 @@
 		ai_holder.hostile = FALSE
 	else
 		for(var/mob/living/simple_animal/S in range(src,1))
-			if(S.stat == DEAD)
+			if(S.stat == DEAD && S != src)
 				visible_message("[src] consumes \the body of [S]!")
 				var/turf/T = get_turf(S)
 				var/obj/item/remains/xeno/X = new(T)
