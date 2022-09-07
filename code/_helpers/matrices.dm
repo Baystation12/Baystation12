@@ -97,7 +97,7 @@ var/global/list/delta_index = list(
 	return list(mult,0,0, 0,mult,0, 0,0,mult, add,add,add)
 
 //Exxagerates or removes colors
-/proc/color_saturation(value as num)
+/proc/color_saturation(value)
 	if(value == 0)
 		return color_identity()
 	value = clamp(value, -100, 100)

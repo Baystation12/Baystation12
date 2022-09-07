@@ -904,7 +904,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	return TRUE
 
 
-/proc/is_hot(obj/item/W as obj)
+/proc/is_hot(obj/item/W)
 	switch(W.type)
 		if(/obj/item/weldingtool)
 			var/obj/item/weldingtool/WT = W
@@ -940,14 +940,14 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			return 0
 
 //Whether or not the given item counts as sharp in terms of dealing damage
-/proc/is_sharp(obj/O as obj)
+/proc/is_sharp(obj/O)
 	if (!O) return 0
 	if (O.sharp) return 1
 	if (O.edge) return 1
 	return 0
 
 //Whether or not the given item counts as cutting with an edge in terms of removing limbs
-/proc/has_edge(obj/O as obj)
+/proc/has_edge(obj/O)
 	if (!O) return 0
 	if (O.edge) return 1
 	return 0

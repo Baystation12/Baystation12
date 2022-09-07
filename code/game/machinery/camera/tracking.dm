@@ -5,7 +5,7 @@
 /mob/living/silicon/ai/var/max_locations = 10
 /mob/living/silicon/ai/var/stored_locations[0]
 
-/proc/InvalidPlayerTurf(turf/T as turf)
+/proc/InvalidPlayerTurf(turf/T)
 	return !(T && (T.z in GLOB.using_map.player_levels))
 
 /mob/living/silicon/ai/proc/get_camera_list()

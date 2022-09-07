@@ -152,7 +152,7 @@ var/global/savefile/Banlist
 
 	return 1
 
-/proc/GetExp(minutes as num)
+/proc/GetExp(minutes)
 	UpdateTime()
 	var/exp = minutes - CMinutes
 	if (exp <= 0)

@@ -74,7 +74,7 @@
 
 	del(info) // savefile, so NOT qdel
 
-/proc/show_player_info_irc(key as text)
+/proc/show_player_info_irc(key)
 	var/dat = "          Info on [key]\n"
 	var/target = ckey(key)
 	var/savefile/info = new("data/player_saves/[copytext_char(target, 1, 2)]/[target]/info.sav")
