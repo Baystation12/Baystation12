@@ -38,7 +38,7 @@
 	"}
 	// sort mobs
 	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
-		var/name = CR.get_formal_name()
+		var/name = CR.get_name()
 		var/rank = CR.get_job()
 		mil_ranks[name] = ""
 

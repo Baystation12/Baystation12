@@ -94,12 +94,6 @@
 	if(default_language)          . |= default_language
 	if(LAZYLEN(additional_langs)) . |= additional_langs
 
-/decl/cultural_info/proc/get_formal_name_suffix()
-	return
-
-/decl/cultural_info/proc/get_formal_name_prefix()
-	return
-
 /decl/cultural_info/proc/get_qualifications()
 	return qualifications
 

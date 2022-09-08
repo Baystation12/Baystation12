@@ -32,21 +32,8 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		photo_side = getFlatIcon(dummy, WEST, always_use_defdir = 1)
 		qdel(dummy)
 
-	// Add honorifics, etc.
-	var/formal_name = "Unset"
-	if(H)
-		formal_name = H.real_name
-		if(H.client && H.client.prefs)
-			for(var/culturetag in H.client.prefs.cultural_info)
-				var/decl/cultural_info/culture = SSculture.get_culture(H.client.prefs.cultural_info[culturetag])
-				if(H.char_rank && H.char_rank.name_short)
-					formal_name = "[formal_name][culture.get_formal_name_suffix()]"
-				else
-					formal_name = "[culture.get_formal_name_prefix()][formal_name][culture.get_formal_name_suffix()]"
-
 	// Generic record
 	set_name(H ? H.real_name : "Unset")
-	set_formal_name(formal_name)
 	set_job(H ? GetAssignment(H) : "Unset")
 	var/gender_term = "Unset"
 	if(H)
@@ -195,7 +182,6 @@ KEY.set_access(ACCESS, ACCESS_EDIT || ACCESS || access_bridge)}
 
 // GENERIC RECORDS
 FIELD_SHORT("Name", name, null, access_change_ids)
-FIELD_SHORT("Formal Name", formal_name, null, access_change_ids)
 FIELD_SHORT("Job", job, null, access_change_ids)
 FIELD_LIST("Sex", sex, record_genders(), null, access_change_ids)
 FIELD_NUM("Age", age, null, access_change_ids)

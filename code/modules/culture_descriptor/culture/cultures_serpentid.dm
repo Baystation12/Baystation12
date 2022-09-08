@@ -12,9 +12,6 @@
 	var/list/hidden_valid_jobs = list(/datum/job/ai, /datum/job/cyborg)
 	var/title_suffix
 
-/decl/cultural_info/culture/nabber/get_formal_name_suffix()
-	return title_suffix
-
 /decl/cultural_info/culture/nabber/New()
 	..()
 

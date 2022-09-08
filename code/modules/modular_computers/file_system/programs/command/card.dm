@@ -185,8 +185,6 @@
 					var/temp_name = sanitizeName(input("Enter name.", "Name", id_card.registered_name),allow_numbers=TRUE)
 					if(temp_name)
 						id_card.registered_name = temp_name
-						id_card.formal_name_suffix = initial(id_card.formal_name_suffix)
-						id_card.formal_name_prefix = initial(id_card.formal_name_prefix)
 					else
 						computer.show_error(usr, "Invalid name entered!")
 				else if(href_list["account"])
