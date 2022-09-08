@@ -1,4 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Exoplanet animals will no longer eat themselves when they die.
