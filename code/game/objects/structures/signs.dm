@@ -159,14 +159,6 @@
 	name = "\improper MOVING PARTS"
 	icon_state = "movingparts"
 
-/obj/structure/sign/warning/nosmoking_1
-	name = "\improper NO SMOKING"
-	icon_state = "nosmoking"
-
-/obj/structure/sign/warning/nosmoking_2
-	name = "\improper NO SMOKING"
-	icon_state = "nosmoking2"
-
 /obj/structure/sign/warning/nosmoking_burned
 	name = "\improper NO SMOKING"
 	icon_state = "nosmoking2_b"

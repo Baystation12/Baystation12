@@ -8066,13 +8066,6 @@
 /obj/structure/curtain/black,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/chapel/main)
-"rG" = (
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	pixel_x = -32
-	},
-/turf/simulated/floor/tiled/dark,
-/area/command/disperser)
 "rH" = (
 /obj/structure/reagent_dispensers/watertank,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -41978,7 +41971,7 @@ HX
 DM
 DU
 IK
-rG
+Pp
 Pp
 QL
 Qq

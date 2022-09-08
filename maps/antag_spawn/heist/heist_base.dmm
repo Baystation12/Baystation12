@@ -434,10 +434,6 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "bg" = (
-/obj/structure/sign/warning/nosmoking_1{
-	desc = "A warning sign which reads 'NO SMOKING'. Someone has scratched a variety of crude words in gutter across the entire sign.";
-	pixel_y = 32
-	},
 /obj/item/storage/fancy/cigarettes/dromedaryco,
 /turf/unsimulated/floor{
 	icon_state = "plating";

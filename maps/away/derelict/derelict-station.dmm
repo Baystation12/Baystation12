@@ -2559,7 +2559,6 @@
 /area/constructionsite/medical)
 "iD" = (
 /obj/structure/lattice,
-/obj/structure/sign/warning/nosmoking_1,
 /turf/simulated/wall,
 /area/constructionsite/medical)
 "iE" = (

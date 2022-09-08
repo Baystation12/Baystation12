@@ -578,9 +578,6 @@
 	dir = 8;
 	pixel_x = -24
 	},
-/obj/structure/sign/warning/nosmoking_1{
-	pixel_y = 24
-	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
 "abm" = (
@@ -2324,9 +2321,6 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
-	},
-/obj/structure/sign/warning/nosmoking_1{
-	pixel_y = 23
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
@@ -5628,14 +5622,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/engineering/auxpower)
-"alo" = (
-/obj/structure/closet/l3closet/general,
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/structure/sign/warning/nosmoking_1{
-	pixel_y = 24
-	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/medical/foyer/storeroom)
 "alp" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
@@ -6586,10 +6572,6 @@
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 8;
-	pixel_x = 32
-	},
 /obj/machinery/papershredder,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/medpaperworkoffice)
@@ -7253,10 +7235,6 @@
 	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
-	},
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	pixel_x = -37
 	},
 /obj/structure/table/glass,
 /obj/machinery/photocopier/faxmachine{
@@ -14241,9 +14219,6 @@
 	},
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/sign/warning/nosmoking_1{
-	pixel_y = 24
-	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/equipstorage)
 "bmb" = (
@@ -15711,9 +15686,6 @@
 /area/hallway/primary/firstdeck/center)
 "dab" = (
 /obj/structure/table/standard,
-/obj/structure/sign/warning/nosmoking_1{
-	pixel_y = 24
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/morgue/autopsy)
 "daB" = (
@@ -15756,10 +15728,6 @@
 	req_access = newlist()
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 8;
-	pixel_x = 32
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/medical)
 "ddP" = (
@@ -22640,10 +22608,6 @@
 /obj/machinery/hologram/holopad,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/nuke_storage)
-"mUm" = (
-/obj/structure/sign/warning/nosmoking_1,
-/turf/simulated/wall/prepainted,
-/area/rnd/entry)
 "mVb" = (
 /obj/machinery/nuclearbomb/station{
 	name = "ship self-destruct terminal"
@@ -23843,9 +23807,6 @@
 /obj/structure/closet/secure_closet/medical_torchsenior,
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/sign/warning/nosmoking_1{
-	pixel_y = 24
-	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/locker)
 "owb" = (
@@ -25626,9 +25587,6 @@
 /obj/structure/iv_drip,
 /obj/machinery/light/spot{
 	dir = 1
-	},
-/obj/structure/sign/warning/nosmoking_1{
-	pixel_y = 24
 	},
 /obj/machinery/rotating_alarm/security_alarm,
 /turf/simulated/floor/tiled/white,
@@ -27548,10 +27506,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
 "sGs" = (
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	pixel_x = -32
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
@@ -52187,7 +52141,7 @@ lkb
 nLb
 nLb
 odb
-mUm
+aBP
 jRb
 dxm
 qtb
@@ -53576,7 +53530,7 @@ acQ
 uXe
 adv
 kZb
-alo
+cXb
 xuW
 cEb
 fmb

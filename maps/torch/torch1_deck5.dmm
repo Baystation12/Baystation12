@@ -3065,10 +3065,6 @@
 /area/maintenance/fifthdeck/aftstarboard)
 "hc" = (
 /obj/machinery/portable_atmospherics/canister/sleeping_agent,
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	pixel_x = -32
-	},
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -3116,10 +3112,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/fuel)
 "hf" = (
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 8;
-	pixel_x = 32
-	},
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 8;
@@ -3330,10 +3322,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "hP" = (
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	pixel_x = -32
-	},
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 4;
@@ -8682,10 +8670,6 @@
 /area/rnd/canister)
 "sZ" = (
 /obj/machinery/portable_atmospherics/canister/empty,
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 8;
-	pixel_x = 32
-	},
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -11740,10 +11724,6 @@
 	dir = 4;
 	pixel_x = -32
 	},
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 1;
-	pixel_y = -32
-	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -12530,10 +12510,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/shuttle/petrov/hallwaya)
 "Gl" = (
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 1;
-	pixel_y = -32
-	},
 /obj/machinery/atmospherics/binary/pump/high_power{
 	dir = 1;
 	name = "CO2 to Hangar"
@@ -15553,10 +15529,6 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	pixel_x = -32
-	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/toxins)
 "Sr" = (
@@ -16683,10 +16655,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/petrov/rnd)
 "Xd" = (
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 8;
-	pixel_x = 32
-	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},

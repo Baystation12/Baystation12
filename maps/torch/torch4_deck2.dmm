@@ -2614,10 +2614,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftstarboard)
 "fa" = (
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 8;
-	pixel_x = 32
-	},
 /obj/structure/table/steel,
 /obj/machinery/cell_charger,
 /obj/random/powercell,
@@ -5605,10 +5601,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engineering_bay)
 "mI" = (
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	pixel_x = -32
-	},
 /obj/effect/floor_decal/corner/yellow/half{
 	dir = 8
 	},
@@ -8004,10 +7996,6 @@
 /obj/machinery/atmospherics/pipe/simple/visible/green,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	pixel_x = -32
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/engine_room)
 "tc" = (
@@ -9172,10 +9160,6 @@
 "wA" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/reagent_dispensers/fueltank,
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	pixel_x = -32
-	},
 /turf/simulated/floor/tiled,
 /area/engineering/engineering_bay)
 "wB" = (
@@ -9936,10 +9920,6 @@
 /obj/structure/cable/green{
 	d2 = 2;
 	icon_state = "0-2"
-	},
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 8;
-	pixel_x = 32
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/incinerator)
@@ -14885,10 +14865,6 @@
 	name = "plastic table frame"
 	},
 /obj/random/single/playing_cards,
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	pixel_x = -32
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/disposal)
 "NW" = (
@@ -17002,10 +16978,6 @@
 /obj/random/junk,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/foreport)
-"UU" = (
-/obj/structure/sign/warning/nosmoking_1,
-/turf/simulated/wall/r_wall/prepainted,
-/area/engineering/atmos)
 "UY" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
@@ -17311,10 +17283,6 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
-	},
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	pixel_x = -32
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -18361,19 +18329,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/engineering/storage)
-"ZC" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	pixel_x = -32
-	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/maintenance/seconddeck/foreport)
 "ZF" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -33515,7 +33470,7 @@ rF
 qv
 xp
 yh
-ZC
+sv
 zK
 QX
 sv
@@ -41789,7 +41744,7 @@ qV
 IB
 qV
 qV
-UU
+sZ
 tM
 wQ
 DK

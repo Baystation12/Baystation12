@@ -2553,9 +2553,6 @@
 	dir = 1;
 	icon_state = "corner_white"
 	},
-/obj/structure/sign/warning/nosmoking_1{
-	pixel_y = 23
-	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Zq" = (

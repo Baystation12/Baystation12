@@ -3665,12 +3665,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab2/medical)
-"tv" = (
-/obj/structure/sign/warning/nosmoking_1{
-	pixel_y = 32
-	},
-/turf/simulated/floor/tiled/white,
-/area/map_template/oldlab2/hall)
 "ty" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -7117,9 +7111,6 @@
 /obj/structure/table/standard,
 /obj/random/medical/lite,
 /obj/item/storage/belt/medical,
-/obj/structure/sign/warning/nosmoking_1{
-	pixel_y = 32
-	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab2/medical)
 "Lp" = (
@@ -7305,15 +7296,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab2/mess)
-"Mp" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/structure/sign/warning/nosmoking_1{
-	pixel_y = 32
-	},
-/turf/simulated/floor/tiled/white,
-/area/map_template/oldlab2/chem)
 "Mq" = (
 /obj/machinery/door/blast/regular{
 	icon_state = "pdoor0";
@@ -9981,7 +9963,7 @@ ew
 Ua
 zk
 eT
-Mp
+NY
 Pv
 NY
 NY
@@ -10445,7 +10427,7 @@ Qr
 yw
 Yo
 nx
-tv
+iH
 Pk
 iH
 eT

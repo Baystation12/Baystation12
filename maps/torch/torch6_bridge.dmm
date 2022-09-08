@@ -1366,11 +1366,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 1;
-	pixel_x = 2;
-	pixel_y = -34
-	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
 	},
@@ -2504,10 +2499,6 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
-	},
-/obj/structure/sign/warning/nosmoking_1{
-	pixel_x = 2;
-	pixel_y = 24
 	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
@@ -7685,10 +7676,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sea)
 "to" = (
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	pixel_x = -37
-	},
 /obj/effect/floor_decal/techfloor{
 	dir = 8
 	},
@@ -7755,10 +7742,6 @@
 	dir = 8
 	},
 /obj/random/drinkbottle,
-/obj/structure/sign/warning/nosmoking_1{
-	desc = "A warning sign which reads 'NO SMOKING'. Someone has scratched a variety of crude words in gutter across the entire sign.";
-	pixel_y = 26
-	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/sgr)
 "tz" = (
@@ -8266,10 +8249,6 @@
 /obj/item/reagent_containers/food/drinks/glass2/square,
 /obj/effect/floor_decal/corner/blue/three_quarters{
 	dir = 8
-	},
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	pixel_x = -37
 	},
 /obj/structure/sign/double/solgovflag/left{
 	pixel_y = 32
@@ -9888,10 +9867,6 @@
 /obj/random/coin,
 /obj/random/firstaid,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/structure/sign/warning/nosmoking_1{
-	pixel_x = 2;
-	pixel_y = 24
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "zF" = (
@@ -13171,10 +13146,6 @@
 	icon_state = "1-2"
 	},
 /obj/structure/closet/secure_closet/guncabinet/sidearm/combined,
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	pixel_x = -37
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "NM" = (
