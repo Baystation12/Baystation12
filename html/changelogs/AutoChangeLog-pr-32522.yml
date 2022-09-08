@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - admin: The SFV Arbiter now uses access_syndicate instead of centcom.
+  - admin: Added some agent IDs to the SFV Arbiter.
