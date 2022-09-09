@@ -74,7 +74,7 @@
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/carbon/affect_ingest(mob/living/carbon/M, alien, removed)
-	if(alien == IS_DIONA)
+	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
 		return
 	var/datum/reagents/ingested = M.get_ingested_reagents()
 	if(ingested && ingested.reagent_list.len > 1) // Need to have at least 2 reagents - cabon and something to remove
@@ -134,10 +134,8 @@
 /datum/reagent/ethanol/affect_ingest(mob/living/carbon/M, alien, removed)
 	M.adjust_nutrition(nutriment_factor * removed)
 	M.adjust_hydration(hydration_factor * removed)
-	var/strength_mod = 1
-	if(alien == IS_SKRELL)
-		strength_mod *= 5
-	if(alien == IS_DIONA)
+	var/strength_mod = (M.GetTraitLevel(/decl/trait/malus/ethanol) * 2.5) || 1
+	if(M.GetTraitLevel(/decl/trait/metabolically_inert))
 		strength_mod = 0
 
 	M.add_chemical_effect(CE_ALCOHOL, 1)
@@ -222,7 +220,7 @@
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/iron/affect_ingest(mob/living/carbon/M, alien, removed)
-	if(alien != IS_DIONA)
+	if(!M.HasTrait(/decl/trait/metabolically_inert))
 		M.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
 
 /datum/reagent/lithium
@@ -426,6 +424,7 @@
 	reagent_state = SOLID
 	color = "#ffffff"
 	scannable = 1
+	sugar_amount = 1
 
 	glass_name = "sugar"
 	glass_desc = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
@@ -433,11 +432,8 @@
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/sugar/affect_blood(mob/living/carbon/human/M, alien, removed)
+	handle_sugar(M, src)
 	M.adjust_nutrition(removed * 3)
-
-	if(alien == IS_UNATHI)
-		var/datum/species/unathi/S = M.species
-		S.handle_sugar(M,src)
 
 /datum/reagent/sulfur
 	name = "Sulfur"

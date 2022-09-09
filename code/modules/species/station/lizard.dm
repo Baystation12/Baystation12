@@ -154,20 +154,15 @@
 
 	ingest_amount = 20
 
+	traits = list(
+		/decl/trait/boon/filtered_blood = TRAIT_LEVEL_EXISTS,
+		/decl/trait/boon/cast_iron_stomach = TRAIT_LEVEL_EXISTS,
+		/decl/trait/malus/sugar = TRAIT_LEVEL_MAJOR
+	)
+
 /datum/species/unathi/equip_survival_gear(mob/living/carbon/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
-
-/datum/species/unathi/proc/handle_sugar(mob/living/carbon/human/M, datum/reagent/sugar, efficiency = 1)
-	var/effective_dose = efficiency * M.chem_doses[sugar.type]
-	if(effective_dose < 5)
-		return
-	M.druggy = max(M.druggy, 10)
-	M.add_chemical_effect(CE_PULSE, -1)
-	if(effective_dose > 15 && prob(7))
-		M.emote(pick("twitch", "drool"))
-	if(effective_dose > 20 && prob(10))
-		M.SelfMove(pick(GLOB.cardinal))
 
 /datum/species/unathi/get_bodytype(mob/living/carbon/human/H)
 	return SPECIES_UNATHI

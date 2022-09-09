@@ -95,16 +95,15 @@
 	value = 0
 
 /datum/reagent/water/affect_blood(mob/living/carbon/M, alien, removed)
-	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
-		return
-	M.adjustToxLoss(2 * removed)
+	var/malus_level = M.GetTraitLevel(/decl/trait/malus/water)
+	if (malus_level)
+		M.adjustToxLoss(malus_level * removed)
 
 /datum/reagent/water/affect_ingest(mob/living/carbon/M, alien, removed)
-	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
-		return
-	M.adjustToxLoss(2 * removed)
 
-/datum/reagent/water/affect_ingest(mob/living/carbon/M, alien, removed)
+	var/malus_level = M.GetTraitLevel(/decl/trait/malus/water)
+	if (malus_level)
+		M.adjustToxLoss(malus_level * removed)
 	M.adjust_hydration(removed * 10)
 
 /datum/reagent/water/touch_turf(turf/simulated/T)

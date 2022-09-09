@@ -40,9 +40,8 @@
 	affect_ingest(M, alien, removed)
 
 /datum/reagent/nutriment/affect_ingest(mob/living/carbon/M, alien, removed)
-	if (alien == IS_SKRELL && protein_amount > 0)
-		var/datum/species/skrell/S = M.species
-		S.handle_protein(M, src)
+	if (protein_amount)
+		handle_protein(M, src)
 	M.heal_organ_damage(0.5 * removed, 0) //what
 
 	adjust_nutrition(M, alien, removed)
@@ -96,13 +95,7 @@
 	taste_description = "sweetness"
 	nutriment_factor = 10
 	color = "#ffff00"
-
-/datum/reagent/nutriment/honey/affect_ingest(mob/living/carbon/human/M, alien, removed)
-	..()
-
-	if(alien == IS_UNATHI)
-		var/datum/species/unathi/S = M.species
-		S.handle_sugar(M,src)
+	sugar_amount = 1
 
 /datum/reagent/nutriment/flour
 	name = "flour"
@@ -383,7 +376,7 @@
 	M.adjustToxLoss(0.5 * removed)
 
 /datum/reagent/capsaicin/affect_ingest(mob/living/carbon/M, alien, removed)
-	if(alien == IS_DIONA || alien == IS_UNATHI)
+	if(M.HasTrait(/decl/trait/metabolically_inert) || M.HasTrait(/decl/trait/boon/cast_iron_stomach))
 		return
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M

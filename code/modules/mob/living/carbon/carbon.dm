@@ -514,3 +514,6 @@
 		to_chat(src, "<span class='warning'>You are no longer running on internals.</span>")
 	if(internals)
 		internals.icon_state = "internal[!!internal]"
+
+/mob/living/carbon/proc/vomit(timevomit = 1, level = 3, delay = 0)
+	return
