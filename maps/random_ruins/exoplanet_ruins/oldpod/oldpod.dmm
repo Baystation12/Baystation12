@@ -408,7 +408,7 @@
 "wl" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/table/rack,
-/obj/item/crowbar/brace_jack,
+/obj/item/material/twohanded/jack,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "wJ" = (

@@ -20,13 +20,13 @@
 	build_path = /obj/item/airlock_brace
 	sort_string = "VAGAC"
 
-/datum/design/item/tool/brace_jack
+/datum/design/item/tool/jack
 	name = "maintenance jack"
 	desc = "A special maintenance tool that can be used to remove airlock braces."
 	id = "bracejack"
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
 	materials = list(MATERIAL_STEEL = 120)
-	build_path = /obj/item/crowbar/brace_jack
+	build_path = /obj/item/material/twohanded/jack
 	sort_string = "VAGAD"
 
 /datum/design/item/tool/clamp

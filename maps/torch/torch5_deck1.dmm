@@ -15737,7 +15737,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/crowbar/brace_jack,
+/obj/item/material/twohanded/jack,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
 	},

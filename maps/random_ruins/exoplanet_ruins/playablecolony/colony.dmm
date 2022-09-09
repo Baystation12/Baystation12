@@ -2517,7 +2517,7 @@
 /obj/item/storage/toolbox/syndicate,
 /obj/item/tape_roll,
 /obj/item/tape_roll,
-/obj/item/crowbar/brace_jack,
+/obj/item/material/twohanded/jack,
 /obj/item/clothing/head/hardhat/white,
 /obj/item/grenade/chem_grenade/metalfoam,
 /obj/item/grenade/chem_grenade/metalfoam,

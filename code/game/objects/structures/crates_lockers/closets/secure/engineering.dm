@@ -21,7 +21,7 @@
 		/obj/item/device/multitool,
 		/obj/item/device/flash,
 		/obj/item/taperoll/engineering,
-		/obj/item/crowbar/brace_jack
+		/obj/item/material/twohanded/jack
 	)
 
 /obj/structure/closet/secure_closet/engineering_electrical
