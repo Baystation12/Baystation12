@@ -9,7 +9,7 @@
 	adult_whales_per_z = rand(8, 15)
 
 /datum/event/whale_migration/announce()
-	command_announcement.Announce("A migrating pod of spaceborn cetaceans has been detected in the vicinity of the [location_name()]. Please make your way to the nearest window.", "[location_name()] Sensor Array", affecting_z)
+	command_announcement.Announce("Мигрирующая стая космических китообразных была обнаружена в непосредственной близости от [location_name()]. Пожалуйста, закройте ставни иллюминаторов и соблюдайте осторожность при совершение ВКД.", "[location_name()] Sensor Array", affecting_z)
 
 /datum/event/whale_migration/start()
 	spawn_whales()
@@ -40,4 +40,4 @@
 	for(var/mob/whale in total_whales)
 		if(!whale.stat && istype(whale.loc.loc, /area/space))
 			qdel(whale)
-	command_announcement.Announce("The migrating pod of spaceborn cetaceans has continued past the [location_name()].", "[location_name()] Sensor Array", affecting_z)
+	command_announcement.Announce("Мигрирующая стая космических китообразных продолжила движение после выхода из космического пространства [location_name()].", "[location_name()] Sensor Array", affecting_z)

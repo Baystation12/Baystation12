@@ -175,19 +175,19 @@
 			sleep(duration/5)
 			if(!user || user.stat == DEAD)
 				return
-			command_announcement.Announce("Caution, [GLOB.using_map.station_name]. We have detected abnormal behaviour in your network. It seems someone is trying to hack your electronic systems. We will update you when we have more information.", "Network Monitoring")
+			command_announcement.Announce("Внимание, [GLOB.using_map.station_ru]. Мы обнаружили ненормальное поведение в вашей сети. Похоже, кто-то пытается взломать ваши электронные системы. Мы сообщим вам, когда у нас будет больше информации.", "EXO Network Monitoring")
 			sleep(duration/5)
 			if(!user || user.stat == DEAD)
 				return
-			command_announcement.Announce("We started tracing the intruder. Whoever is doing this, they seem to be onboard. We suggest checking all network control terminals. We will keep you updated on the situation.", "Network Monitoring")
+			command_announcement.Announce("Мы начали выслеживать злоумышленника. Кто бы это ни делал, похоже, он на борту. Мы рекомендуем проверить все терминалы управления сетью. Мы будем держать вас в курсе событий.", "EXO Network Monitoring")
 			sleep(duration/5)
 			if(!user || user.stat == DEAD)
 				return
-			command_announcement.Announce("This is highly abnormal and somewhat concerning. The intruder is too fast, he is evading our traces. No man could be this fast...", "Network Monitoring")
+			command_announcement.Announce("Это в высшей степени ненормально и несколько тревожно. Злоумышленник слишком быстро, он ускользает от наших служащих. Подобная скорость может быть обусловлена наличием прямого и полного доступа к управлению системой изнутри.", "EXO Network Monitoring")
 			sleep(duration/5)
 			if(!user || user.stat == DEAD)
 				return
-			command_announcement.Announce("We have traced the intrude#, it seem& t( e yo3r AI s7stem, it &# *#ck@ng th$ sel$ destru$t mechani&m, stop i# bef*@!)$#&&@@  <CONNECTION LOST>", "Network Monitoring")
+			command_announcement.Announce("Мы добрались до нарушителя#, кажется, &t(e ваша система искусственного интеллекта, это &#*# ck@ ng $ само$ уничтоже$t механи&sq*eq, остановите меня# bef*@!)$#&&@@ <СОЕДИНЕНИЕ ПОТЕРЯНО>", "EXO Network Monitoring")
 
 	to_chat(user, "## BEGINNING SYSTEM OVERRIDE.")
 	to_chat(user, "## ESTIMATED DURATION: [round((duration+300)/600)] MINUTES")
@@ -214,7 +214,7 @@
 	to_chat(user, "## PRIMARY FIREWALL BYPASSED. YOU NOW HAVE FULL SYSTEM CONTROL.")
 
 	if(user.hack_can_fail)
-		command_announcement.Announce("Our system administrators just reported that we've been locked out from your control network. Whoever did this now has full access to [GLOB.using_map.station_name]'s systems.", "Network Administration Center")
+		command_announcement.Announce("Наши системные администраторы только что сообщили, что мы были заблокированы от вашей управляющей сети. Тот, кто это сделал, теперь имеет полный доступ к системам [GLOB.using_map.station_ru].", "EXO Network Administration Center")
 	user.hack_can_fail = 0
 	user.system_override = 2
 	user.verbs += new/datum/game_mode/malfunction/verb/ai_destroy_station()

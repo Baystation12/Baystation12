@@ -137,15 +137,15 @@
 	var/fulltext = ""
 	switch(user.hack_fails)
 		if(1)
-			fulltext = "We have detected a hack attempt into your [text]. The intruder failed to access anything of importance, but disconnected before we could complete our traces."
+			fulltext = "Мы обнаружили попытку взлома вашего [text]. Злоумышленнику не удалось получить доступ ни к чему важному, но он отключился прежде, чем мы смогли завершить наши поиски."
 		if(2)
-			fulltext = "We have detected another hack attempt. It was targeting [text]. The intruder almost gained control of the system, so we had to disconnect them. We partially finished our trace and it seems to be originating either from the [station_name()], or its immediate vicinity."
+			fulltext = "Мы обнаружили еще одну попытку взлома. Он был нацелен на [text]. Злоумышленник почти получил контроль над системой, поэтому нам пришлось отключить их. Мы частично завершили нашу трассировку, и, похоже, она исходит либо из [GLOB.using_map.station_ru], либо из объекта в непосредственной близости от него."
 		if(3)
-			fulltext = "Another hack attempt has been detected, this time targeting [text]. We are certain the intruder entered the network via a terminal located somewhere on the [station_name()]."
+			fulltext = "Была обнаружена еще одна попытка взлома, на этот раз нацеленная на [text]. Мы уверены, что злоумышленник проник в сеть через терминал, расположенный где-то на [GLOB.using_map.station_ru]."
 		if(4)
-			fulltext = "We have finished our traces and it seems the recent hack attempts are originating from your AI system [user.name]. We recommend investigation."
+			fulltext = "Мы завершили наши поиски, и, похоже, недавние попытки взлома исходят от вашей системы искусственного интеллекта [user.name]. Мы рекомендуем провести расследование данной ситуации."
 		else
-			fulltext = "Another hack attempt has been detected, targeting [text]. The source still seems to be your AI system [user.name]."
+			fulltext = "Была обнаружена еще одна попытка взлома, нацеленная на [text]. Источником по-прежнему, похоже, является ваша система искусственного интеллекта [user.name]."
 
 	command_announcement.Announce(fulltext)
 

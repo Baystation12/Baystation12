@@ -16,7 +16,7 @@
 				list(/mob/living/simple_animal/hostile/meat/horrorsmall, 98),
 				list(/mob/living/simple_animal/hostile/meat, 10)
 			)
-	arrival_message = "A blood-curdling howl echoes through the air as the planet starts to shake violently. Something has woken up..."
+	arrival_message = "Леденящий кровь вой эхом разносится по воздуху, когда планета начинает сильно трястись. Что-то проснулось..."
 	arrival_sound   = 'sound/ambience/meat_monster_arrival.ogg'
 	limit = 30
 	spawn_near_chance = 30
@@ -38,7 +38,7 @@
 				list(/mob/living/simple_animal/hostile/giant_spider/spitter, 55),
 				list(/mob/living/simple_animal/hostile/giant_spider, 90)
 			)
-	arrival_message = "The ground beneath you shakes and rumbles, and is accompanied by an approaching skittering sound..."
+	arrival_message = "Земля под вами дрожит и грохочет, и это сопровождается приближающимся шуршащим звуком..."
 	arrival_sound   = 'sound/effects/wind/wind_3_1.ogg'
 	limit = 15
 	length = 45
@@ -51,7 +51,7 @@
 				list(/mob/living/simple_animal/hostile/hivebot/strong, 25),
 				list(/mob/living/simple_animal/hostile/hivebot/mega, 2),
 			)
-	arrival_message = "The ground beneath you rumbles as you hear the sounds of machinery from all around you..."
+	arrival_message = "Земля под вами грохочет, когда вы слышите звуки машин со всех сторон..."
 	arrival_sound   = 'sound/effects/wind/wind_3_1.ogg'
 	limit = 25
 	length = 50
@@ -65,7 +65,7 @@
 				list(/mob/living/simple_animal/hostile/giant_spider/spitter, 10),
 				list(/mob/living/simple_animal/hostile/giant_spider, 60)
 			)
-	arrival_message = "You feel uneasy as you hear something skittering about..."
+	arrival_message = "Вы чувствуете себя неловко, когда слышите, как что-то шуршит вокруг..."
 	arrival_sound = 'sound/effects/wind/wind_3_1.ogg'
 	limit = 8
 	length = 40
@@ -76,7 +76,7 @@
 				list(/mob/living/simple_animal/hostile/hivebot, 95),
 				list(/mob/living/simple_animal/hostile/hivebot/range, 15)
 			)
-	arrival_message = "You hear the distant sound of creaking metal joints, what is that?"
+	arrival_message = "Вы слышите отдаленный скрип металлических соединений. Что это?"
 	arrival_sound = 'sound/effects/wind/wind_3_1.ogg'
 	limit = 10
 	length = 50

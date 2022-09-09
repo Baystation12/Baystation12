@@ -45,7 +45,7 @@
 
 /datum/job/nt_pilot
 	title = "Shuttle Pilot"
-	supervisors = "the Pathfinder"
+	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
 	department = "Exploration"
 	department_flag = EXP
 	total_positions = 1
@@ -127,7 +127,7 @@
 	spawn_positions = 1
 	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
 	selection_color = "#68099e"
-	minimum_character_age = list(SPECIES_HUMAN = 19)
+	minimum_character_age = list(SPECIES_HUMAN = 20)
 	ideal_character_age = 25
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/expmed
 	allowed_branches = list(
@@ -174,7 +174,7 @@
 	spawn_positions = 1
 	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
 	selection_color = "#68099e"
-	minimum_character_age = list(SPECIES_HUMAN = 19)
+	minimum_character_age = list(SPECIES_HUMAN = 20)
 	ideal_character_age = 25
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/expeng
 	allowed_branches = list(

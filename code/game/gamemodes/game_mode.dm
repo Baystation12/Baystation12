@@ -247,38 +247,24 @@ var/global/list/additional_antag_types = list()
 		return
 
 	var/list/reasons = list(
-		"political instability",
-		"quantum fluctuations",
-		"hostile raiders",
-		"derelict station debris",
-		"REDACTED",
-		"ancient alien artillery",
-		"solar magnetic storms",
-		"sentient time-travelling killbots",
-		"gravitational anomalies",
-		"wormholes to another dimension",
-		"a telescience mishap",
-		"radiation flares",
-		"supermatter dust",
-		"leaks into a negative reality",
-		"antiparticle clouds",
-		"residual bluespace energy",
-		"suspected criminal operatives",
-		"malfunctioning von Neumann probe swarms",
-		"shadowy interlopers",
-		"a stranded Vox arkship",
-		"haywire IPC constructs",
-		"rogue Unathi exiles",
-		"artifacts of eldritch horror",
-		"a brain slug infestation",
-		"killer bugs that lay eggs in the husks of the living",
-		"a deserted transport carrying xenofauna specimens",
-		"an emissary for the gestalt requesting a security detail",
-		"radical Skrellian transevolutionaries",
-		"classified security operations",
-		"a gargantuan glowing goat"
-		)
-	command_announcement.Announce("The presence of [pick(reasons)] in the region is tying up all available local emergency resources; emergency response teams cannot be called at this time, and post-evacuation recovery efforts will be substantially delayed.","Emergency Transmission")
+		"Проявление квантовой флуктуации",
+		"Ликвидация враждебных банд рейдеров",
+		"Обломки заброшенной станции",
+		"Недавно обнаруженная древняя артиллерия неизвестной расы",
+		"Солнечные магнитные бури",
+		"Множественные гравитационные аномалии",
+		"Появление червоточины в другое измерение",
+		"Гигантская вспышка радиации",
+		"Выполнение операции по ликвидации скрытых групп культа Нар-Си",
+		"Облака античастиц",
+		"Остаточная энергия подпространства",
+		"Операция по уничтожению неисправных роев зондов фон Неймана",
+		"Ликвидация застрявшего корабля неизвестного класса",
+		"Умиротворение группы унати-изгнанников",
+		"Выполнение операции по нейтрализации артефактов сверхъестественного ужаса",
+		"Осуществление специальной операции по контролю за новым видом фауны"
+		)  //PRX
+	command_announcement.Announce("[pick (reasons)] в регионе связывает все доступные местные ресурсы для решения сложившихся чрезвычайных ситуаций. Ожидайте прибытие освободившегося отряда в течение следующих [rand(6,24)] часов.","Fifth Fleet Emergency Transmission")
 
 /datum/game_mode/proc/check_finished()
 	if(evacuation_controller.round_over() || station_was_nuked)

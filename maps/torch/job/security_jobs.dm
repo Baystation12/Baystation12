@@ -54,8 +54,10 @@
 	ideal_character_age = 35
 	skill_points = 14
 	alt_titles = list(
-		"Criminal Investigator"
-	)
+		"Criminal Investigator",
+		"Psionic Sleuth",
+		"Psi-Operative"
+	)  //PRX
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech
 
 	allowed_branches = list(
@@ -96,6 +98,13 @@
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
+
+/datum/job/detective/equip(var/mob/living/carbon/human/H)
+	if(H.mind?.role_alt_title == "Psionic Sleuth")
+		psi_faculties = list("[PSI_ENERGISTICS]" = PSI_RANK_MASTER)
+	if(H.mind?.role_alt_title == "Psi-Operative")
+		psi_faculties = list("[PSI_PSYCHOKINESIS]" = PSI_RANK_MASTER)
+	return ..()
 
 /datum/job/officer
 	title = "Master at Arms"

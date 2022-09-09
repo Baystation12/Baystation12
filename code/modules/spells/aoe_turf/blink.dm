@@ -5,8 +5,8 @@
 	school = "conjuration"
 	charge_max = 20
 	spell_flags = Z2NOCAST | IGNOREDENSE | IGNORESPACE
-	invocation = "none"
-	invocation_type = SpI_NONE
+	invocation = "DISTANTIA."
+	invocation_type = SpI_WHISPER
 	range = 7
 	inner_radius = 1
 

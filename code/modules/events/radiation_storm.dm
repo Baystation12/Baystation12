@@ -19,7 +19,7 @@
 		return res
 
 /datum/event/radiation_storm/announce()
-	command_announcement.Announce("High levels of radiation detected in proximity of the [location_name()]. Please evacuate into one of the shielded maintenance tunnels.", "[location_name()] Sensor Array", new_sound = GLOB.using_map.radiation_detected_sound, zlevels = affecting_z)
+	command_announcement.Announce("Высокие уровни радиации обнаружены в непосредственной близости от [location_name()]. Пожалуйста, эвакуируйтесь в один из экранированных туннелей технического обслуживания.", "[location_name()] Sensor Array", new_sound = GLOB.using_map.radiation_detected_sound, zlevels = affecting_z)
 
 /datum/event/radiation_storm/start()
 	..()
@@ -27,7 +27,7 @@
 
 /datum/event/radiation_storm/tick()
 	if(activeFor == enterBelt)
-		command_announcement.Announce("The [location_name()] has entered the radiation belt. Please remain in a sheltered area until the all clear is given.", "[location_name()] Sensor Array", zlevels = affecting_z)
+		command_announcement.Announce("[location_name()] вошел в радиационный пояс. Пожалуйста, оставайтесь в защищенном месте до тех пор, пока не будет дан сигнал", "[location_name()] Sensor Array", zlevels = affecting_z)
 		if(prob(66))
 			radiate()
 		else
@@ -41,7 +41,7 @@
 		radiate()
 
 	else if(activeFor == leaveBelt)
-		command_announcement.Announce("The [location_name()] has passed the radiation belt. Please allow for up to one minute while radiation levels dissipate, and report to the infirmary if you experience any unusual symptoms. Maintenance will return to normal access parameters shortly.", "[location_name()] Sensor Array", zlevels = affecting_z)
+		command_announcement.Announce("[location_name()] прошел радиационный пояс. Пожалуйста, подождите до одной минуты, пока уровень радиации рассеется, и сообщите в лазарет, если вы испытываете симптомы радиационного отправления. Техническое обслуживание вскоре вернется к нормальным параметрам доступа.", "[location_name()] Sensor Array", zlevels = affecting_z)
 
 /datum/event/radiation_storm/proc/radiate()
 	var/radiation_level = rand(15, 35)

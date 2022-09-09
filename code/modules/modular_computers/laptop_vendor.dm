@@ -1,8 +1,8 @@
 // A vendor machine for modular computer portable devices - Laptops and Tablets
 
 /obj/machinery/lapvend
-	name = "computer vendor"
-	desc = "A vending machine with a built-in microfabricator, capable of dispensing various computers."
+	name = "Automatic Computer vendor"
+	desc = "A EXO prototype vending machine with a built-in microfabricator, capable of dispensing various computers."
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "laptop"
 	layer = BELOW_OBJ_LAYER

@@ -5,8 +5,8 @@
 	school = "transmutation"
 	charge_max = 30 SECONDS
 	spell_flags = Z2NOCAST | NEEDSCLOTHES | INCLUDEUSER
-	invocation = "none"
-	invocation_type = SpI_NONE
+	invocation = "A Saltu in tenebris."
+	invocation_type = SpI_WHISPER
 	range = 0
 	max_targets = 1
 	level_max = list(Sp_TOTAL = 4, Sp_SPEED = 4, Sp_POWER = 3)

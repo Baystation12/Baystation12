@@ -5,5 +5,5 @@
 	allowed_ranks = list(/datum/mil_rank/alien)
 
 /datum/job/submap
-	psi_latency_chance = 1
+	psi_latency_chance = 3
 	give_psionic_implant_on_join = FALSE

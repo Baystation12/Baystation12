@@ -56,7 +56,7 @@ GLOBAL_LIST(end_titles)
 /obj/screen/credit
 	icon_state = "blank"
 	mouse_opacity = 0
-	alpha = 0
+	alpha = 100
 	screen_loc = "1,1"
 	plane = HUD_PLANE
 	layer = HUD_ABOVE_ITEM_LAYER

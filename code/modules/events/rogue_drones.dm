@@ -20,7 +20,7 @@
 			D.disabled = rand(15, 60)
 
 /datum/event/rogue_drone/announce()
-	command_announcement.Announce("Attention: unidentified patrol drones detected within proximity to the [location_name()]", "[location_name()] Sensor Array", zlevels = affecting_z)
+	command_announcement.Announce("Внимание. Неопознанные патрульные беспилотники обнаружены в непосредственной близости от [location_name()]", "[location_name()] Sensor Array", zlevels = affecting_z)
 
 /datum/event/rogue_drone/end()
 	var/num_recovered = 0
@@ -35,6 +35,6 @@
 		num_recovered++
 
 	if(num_recovered > drones_list.len * 0.75)
-		command_announcement.Announce("Be advised: sensors indicate the unidentified drone swarm has left the immediate proximity of the [location_name()].", "[location_name()] Sensor Array", zlevels = affecting_z)
+		command_announcement.Announce("Внимание. Датчики показывают, что неопознанный рой дронов покинул космическое пространство возле [location_name()].", "[location_name()] Sensor Array", zlevels = affecting_z)
 	else
-		command_announcement.Announce("Be advised: sensors indicate the unidentified drone swarm has left the immediate proximity of the [location_name()].", "[location_name()] Sensor Array", zlevels = affecting_z)
+		command_announcement.Announce("Внимание. Датчики показывают, что неопознанный рой дронов покинул космическое пространство возле [location_name()].", "[location_name()] Sensor Array", zlevels = affecting_z)

@@ -11,7 +11,7 @@
 	endWhen = startWhen + rand(30,90) + rand(30,90) //2-6 minute duration
 
 /datum/event/solar_storm/announce()
-	command_announcement.Announce("A solar storm has been detected approaching the [location_name()]. Please halt all EVA activites immediately and return inside.", "[location_name()] Sensor Array", zlevels = affecting_z)
+	command_announcement.Announce("Была обнаружена солнечная буря, приближающаяся к [location_name()]. Пожалуйста, немедленно прекратите все ВКД и вернитесь внутрь.", "[location_name()] Sensor Array", zlevels = affecting_z)
 	adjust_solar_output(1.5)
 
 /datum/event/solar_storm/proc/adjust_solar_output(var/mult = 1)
@@ -20,7 +20,7 @@
 
 
 /datum/event/solar_storm/start()
-	command_announcement.Announce("The solar storm has reached the [location_name()]. Please refrain from EVA and remain inside until it has passed.", "[location_name()] Sensor Array", zlevels = affecting_z)
+	command_announcement.Announce("Солнечная буря достигла [location_name()]. Пожалуйста, воздержитесь от ВКД и оставайтесь внутри, пока она не пройдет.", "[location_name()] Sensor Array", zlevels = affecting_z)
 	adjust_solar_output(5)
 
 
@@ -48,7 +48,7 @@
 
 
 /datum/event/solar_storm/end()
-	command_announcement.Announce("The solar storm has passed the [location_name()]. It is now safe to resume EVA activities. ", "[location_name()] Sensor Array", zlevels = affecting_z)
+	command_announcement.Announce("Солнечная буря прошла [location_name()]. Теперь можно безопасно возобновить ВКД.", "[location_name()] Sensor Array", zlevels = affecting_z)
 	adjust_solar_output()
 
 

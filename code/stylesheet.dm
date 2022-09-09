@@ -42,7 +42,7 @@ em						{font-style: normal;font-weight: bold;}
 .deadsay				{color: #530fad;}
 .radio					{color: #408010;}
 .deptradio				{color: #ff00ff;}	/* when all other department colors fail */
-.newscaster				{color: #750000;}
+.newscaster				{color: #870e0e;}
 
 /* Radio Channels */
 .comradio				{color: #204090;}
