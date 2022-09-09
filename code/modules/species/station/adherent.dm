@@ -54,6 +54,9 @@
 	slowdown = -1
 	hud_type = /datum/hud_data/adherent
 
+	min_height = 200
+	max_height = 300
+
 	available_cultural_info = list(
 		TAG_CULTURE = list(
 			CULTURE_ADHERENT

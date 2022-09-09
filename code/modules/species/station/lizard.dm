@@ -98,6 +98,9 @@
 		/datum/mob_descriptor/build = 2
 		)
 
+	min_height = 168
+	max_height = 260
+
 	available_cultural_info = list(
 		TAG_CULTURE = list(
 			CULTURE_UNATHI_POLAR,

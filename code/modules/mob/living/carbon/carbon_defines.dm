@@ -2,6 +2,9 @@
 	gender = MALE
 	var/datum/species/species //Contains icon generation and language information, set during New().
 
+	/// Integer. The mob's height in centimeters. Generally constrained by `species`. Autoset during `Initialize()` if not already defined.
+	var/height
+
 	var/life_tick = 0      // The amount of life ticks that have processed on this mob.
 	var/obj/item/handcuffed = null //Whether or not the mob is handcuffed
 	//Surgery info

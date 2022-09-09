@@ -2919,6 +2919,7 @@
 #include "code\modules\species\species_attack.dm"
 #include "code\modules\species\species_getters.dm"
 #include "code\modules\species\species_grab.dm"
+#include "code\modules\species\species_height.dm"
 #include "code\modules\species\species_helpers.dm"
 #include "code\modules\species\species_hud.dm"
 #include "code\modules\species\species_random.dm"

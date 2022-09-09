@@ -21,6 +21,9 @@
 		/obj/aura/regenerating/human/unathi/yeosa
 		)
 
+	min_height = 150
+	max_height = 275
+
 	additional_available_cultural_info = list(
 		TAG_CULTURE = list(
 			CULTURE_UNATHI_YEOSA_ABYSS,

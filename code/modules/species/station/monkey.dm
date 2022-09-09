@@ -48,6 +48,9 @@
 		/datum/mob_descriptor/build = -2
 	)
 
+	min_height = 55
+	max_height = 95
+
 	force_cultural_info = list(
 		TAG_CULTURE =   CULTURE_MONKEY,
 		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,

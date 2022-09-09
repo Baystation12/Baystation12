@@ -62,6 +62,9 @@
 	maneuvers = list(/decl/maneuver/leap/grab)
 	standing_jump_range = 5
 
+	min_height = 130
+	max_height = 200
+
 	override_limb_types = list(
 		BP_GROIN = /obj/item/organ/external/groin/vox
 	)

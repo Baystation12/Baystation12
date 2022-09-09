@@ -118,6 +118,9 @@
 		/datum/mob_descriptor/body_length = 0
 		)
 
+	min_height = 270
+	max_height = 300
+
 	available_cultural_info = list(
 		TAG_CULTURE = list(
 			CULTURE_NABBER_CMINUS,
