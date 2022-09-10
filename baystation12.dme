@@ -1737,6 +1737,7 @@
 #include "code\modules\economy\Transactions.dm"
 #include "code\modules\emotes\emote_define.dm"
 #include "code\modules\emotes\emote_mob.dm"
+#include "code\modules\emotes\skrell.dm"
 #include "code\modules\emotes\definitions\_mob.dm"
 #include "code\modules\emotes\definitions\_species.dm"
 #include "code\modules\emotes\definitions\adherent.dm"

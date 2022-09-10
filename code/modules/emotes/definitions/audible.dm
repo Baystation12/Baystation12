@@ -2,11 +2,14 @@
 	key = "burp"
 	emote_message_3p = "USER burps."
 	message_type = AUDIBLE_MESSAGE
-	var/emote_sound
+	var/list/emote_sound
 
 /decl/emote/audible/do_extra(atom/user)
 	if(emote_sound)
-		playsound(user.loc, emote_sound, 50, 0)
+		var/playable = emote_sound
+		if (islist(emote_sound))
+			playable = pick(emote_sound)
+		playsound(user.loc, playable, 50, 0)
 
 /decl/emote/audible/deathgasp_alien
 	key = "deathgasp"
