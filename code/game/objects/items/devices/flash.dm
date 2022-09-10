@@ -65,52 +65,7 @@
 	user.do_attack_animation(M)
 
 	playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
-	var/flashfail = 0
-	var/flash_strength = (rand(str_min,str_max))
-
-	if(iscarbon(M))
-		if(M.stat!=DEAD)
-			var/mob/living/carbon/C = M
-			var/safety = C.eyecheck()
-			if(safety < FLASH_PROTECTION_MODERATE)
-				if(ishuman(M))
-					var/mob/living/carbon/human/H = M
-					flash_strength = round(H.getFlashMod() * flash_strength)
-					if(safety > FLASH_PROTECTION_NONE)
-						flash_strength = (flash_strength / 2)
-				if(flash_strength > 0)
-					M.flash_eyes(FLASH_PROTECTION_MODERATE - safety)
-					M.Stun(flash_strength / 2)
-					M.eye_blurry = max(M.eye_blurry, flash_strength)
-					M.confused = max(M.confused, (flash_strength + 2))
-					if(flash_strength > 3)
-						M.drop_l_hand()
-						M.drop_r_hand()
-					if(flash_strength > 5)
-						M.Weaken(2)
-			else
-				flashfail = 1
-
-	else if(isanimal(M))
-		var/mob/living/simple_animal/SA = M
-		var/safety = SA.eyecheck()
-		if(safety < FLASH_PROTECTION_MAJOR)
-			SA.confused = max(SA.confused, (flash_strength * 0.5))
-			if(safety < FLASH_PROTECTION_MODERATE)
-				SA.flash_eyes(2)
-				SA.eye_blurry = max(SA.eye_blurry, flash_strength)
-				SA.confused = max(SA.confused, (flash_strength))
-		else
-			flashfail = 1
-
-	else if(issilicon(M))
-		if (M.status_flags & CANWEAKEN)
-			M.Weaken(rand(str_min,6))
-		else
-			flashfail = TRUE
-
-	else
-		flashfail = 1
+	var/flashfail = do_flash(M)
 
 	if(isrobot(user))
 		spawn(0)
@@ -134,6 +89,62 @@
 	return 1
 
 
+/**
+ * Handles applying flash effects to the targeted mob.
+ *
+ * **Parameters**:
+ * - `M` - The targeted mob to apply the flash effects to.
+ *
+ * Returns boolean. Whether or not the flash failed.
+ */
+/obj/item/device/flash/proc/do_flash(mob/living/M)
+	var/flash_strength = (rand(str_min,str_max))
+
+	if(iscarbon(M))
+		if(M.stat!=DEAD)
+			var/mob/living/carbon/C = M
+			var/safety = C.eyecheck()
+			if(safety < FLASH_PROTECTION_MODERATE)
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					flash_strength = round(H.getFlashMod() * flash_strength)
+					if(safety > FLASH_PROTECTION_NONE)
+						flash_strength = (flash_strength / 2)
+				if(flash_strength > 0)
+					M.flash_eyes(FLASH_PROTECTION_MODERATE - safety)
+					M.Stun(flash_strength / 2)
+					M.eye_blurry = max(M.eye_blurry, flash_strength)
+					M.confused = max(M.confused, (flash_strength + 2))
+					if(flash_strength > 3)
+						M.drop_l_hand()
+						M.drop_r_hand()
+					if(flash_strength > 5)
+						M.Weaken(2)
+			else
+				return TRUE
+
+	else if(isanimal(M))
+		var/mob/living/simple_animal/SA = M
+		var/safety = SA.eyecheck()
+		if(safety < FLASH_PROTECTION_MAJOR)
+			SA.confused = max(SA.confused, (flash_strength * 0.5))
+			if(safety < FLASH_PROTECTION_MODERATE)
+				SA.flash_eyes(2)
+				SA.eye_blurry = max(SA.eye_blurry, flash_strength)
+				SA.confused = max(SA.confused, (flash_strength))
+		else
+			return TRUE
+
+	else if(issilicon(M))
+		if (M.status_flags & CANWEAKEN)
+			M.Weaken(rand(str_min,6))
+		else
+			return TRUE
+
+	else
+		return TRUE
+
+	return FALSE
 
 
 /obj/item/device/flash/attack_self(mob/living/carbon/user as mob, flag = 0, emp = 0)
