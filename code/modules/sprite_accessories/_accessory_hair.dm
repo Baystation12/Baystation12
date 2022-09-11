@@ -427,6 +427,11 @@
 	icon_state = "hair_halfshaved"
 	flags = HAIR_TIEABLE
 
+/datum/sprite_accessory/hair/softmohawk
+	name = "Soft Mohawk"
+	icon_state = "hair_softmohawk"
+	flags = HAIR_TIEABLE
+
 /datum/sprite_accessory/hair/halfshavedemo
 	name = "Half-Shaved Emo"
 	icon_state = "hair_halfshavedemo"
