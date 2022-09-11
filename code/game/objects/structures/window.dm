@@ -769,7 +769,23 @@
 /obj/structure/window/reinforced/crescent/shatter()
 	return
 
-/proc/place_window(mob/user, loc, dir_to_set, obj/item/stack/material/ST)
+/proc/place_window(mob/user, loc, obj/item/stack/material/ST)
+	var/window_type = input(user, "Which type of window to place?", "Window Placement") as null | anything in list("Full Size", "Directional")
+	if (isnull(window_type))
+		return
+	var/dir_to_set
+	switch (window_type)
+		if ("Full Size")
+			dir_to_set = 5
+		if ("Directional")
+			if(loc == user.loc)
+				dir_to_set = user.dir
+			else
+				dir_to_set = get_dir(loc, user)
+				if(dir_to_set & (dir_to_set - 1)) //Only works for cardinal direcitons, diagonals aren't supposed to work like this.
+					to_chat(user, SPAN_WARNING("You can't reach from this angle."))
+					return
+
 	var/required_amount = (dir_to_set & (dir_to_set - 1)) ? 4 : 1
 	if (!ST.can_use(required_amount))
 		to_chat(user, "<span class='notice'>You do not have enough sheets.</span>")

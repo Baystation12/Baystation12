@@ -180,16 +180,7 @@
 		if(ST.material.opacity > 0.7)
 			return 0
 
-		var/dir_to_set = 5
-		if(!is_on_frame())
-			if(loc == user.loc)
-				dir_to_set = user.dir
-			else
-				dir_to_set = get_dir(loc, user)
-				if(dir_to_set & (dir_to_set - 1)) //Only works for cardinal direcitons, diagonals aren't supposed to work like this.
-					to_chat(user, "<span class='notice'>You can't reach.</span>")
-					return
-		place_window(user, loc, dir_to_set, ST)
+		place_window(user, loc, ST)
 		return
 
 	if (!(W.obj_flags & OBJ_FLAG_CONDUCTIBLE) || !shock(user, 70))
