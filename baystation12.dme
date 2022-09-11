@@ -3263,6 +3263,7 @@
 #include "proxima\code\modules\silicon\ai\procs.dm"
 #include "proxima\code\modules\sprite_accessories\accessory_hair.dm"
 #include "proxima\code\modules\sprite_accessories\accessory_human.dm"
+#include "proxima\code\modules\sprite_accessories\accessory_skrell.dm"
 #include "proxima\code\modules\TGSIntegration\TGSChatCommands.dm"
 #include "proxima\code\modules\TGSIntegration\TGSChatHelpers.dm"
 #include "proxima\code\modules\TGSIntegration\TGSChatHooks.dm"
