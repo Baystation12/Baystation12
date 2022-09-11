@@ -51,8 +51,8 @@
 		if(VERM_SPIDERS)
 			spawn_types = list(/obj/effect/spider/spiderling)
 			max_number = 4
-			vermstring1 = "пауки"
-			vermstring2 = "паучат гигантского паука"
+			vermstring1 = "гигантские пауки"
+			vermstring2 = "потомство гигантского паука"
 
 	spawn(0)
 		var/num = 0

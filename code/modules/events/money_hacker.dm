@@ -18,7 +18,7 @@ var/global/account_hack_attempted = 0
 	var/obj/machinery/message_server/MS = get_message_server()
 	if(MS)
 		// Hide the account number for now since it's all you need to access a standard-security account. Change when that's no longer the case.
-		var/message = "Обнаружен взлом методом перебора (выполняется с момента [stationtime2text()]). Целью атаки является: Финансовый счет #[affected_account.account_number], \
+		var/message = "Зафиксирована атака на финансовую систему с помощью метода полного перебора, выполняемая с момента [stationtime2text()]. Целью атаки является: Финансовый счет #[affected_account.account_number], \
 		без вмешательства эта атака будет успешной примерно через 10 минут. Необходимое вмешательство: временная приостановка работы затронутых учетных записей до тех пор, пока атака не прекратится. \
 		Уведомления будут отправляться по мере появления обновлений."
 		var/my_department = "[location_name()] Firewall Subroutines"
