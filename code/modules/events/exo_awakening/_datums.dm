@@ -25,18 +25,18 @@
 	mobs = list(
 				list(/mob/living/simple_animal/hostile/giant_spider/lurker, 40),
 				list(/mob/living/simple_animal/hostile/giant_spider/tunneler, 45),
-				list(/mob/living/simple_animal/hostile/giant_spider/pepper, 25),
-				list(/mob/living/simple_animal/hostile/giant_spider/webslinger, 20),
-				list(/mob/living/simple_animal/hostile/giant_spider/electric, 20),
-				list(/mob/living/simple_animal/hostile/giant_spider/thermic, 15),
-				list(/mob/living/simple_animal/hostile/giant_spider/frost, 15),
+				list(/mob/living/simple_animal/hostile/giant_spider/pepper, 30),
+				list(/mob/living/simple_animal/hostile/giant_spider/webslinger, 30),
+				list(/mob/living/simple_animal/hostile/giant_spider/electric, 35),
+				list(/mob/living/simple_animal/hostile/giant_spider/thermic, 25),
+				list(/mob/living/simple_animal/hostile/giant_spider/frost, 25),
 				list(/mob/living/simple_animal/hostile/giant_spider/carrier, 20),
-				list(/mob/living/simple_animal/hostile/giant_spider/phorogenic, 5),
+				list(/mob/living/simple_animal/hostile/giant_spider/phorogenic, 10),
 				list(/mob/living/simple_animal/hostile/giant_spider/guard, 85),
-				list(/mob/living/simple_animal/hostile/giant_spider/hunter, 75),
+				list(/mob/living/simple_animal/hostile/giant_spider/hunter, 65),
 				list(/mob/living/simple_animal/hostile/giant_spider/nurse, 60),
 				list(/mob/living/simple_animal/hostile/giant_spider/spitter, 55),
-				list(/mob/living/simple_animal/hostile/giant_spider, 90)
+				list(/mob/living/simple_animal/hostile/giant_spider, 65)
 			)
 	arrival_message = "The ground beneath you shakes and rumbles, and is accompanied by an approaching skittering sound..."
 	arrival_sound   = 'sound/effects/wind/wind_3_1.ogg'
