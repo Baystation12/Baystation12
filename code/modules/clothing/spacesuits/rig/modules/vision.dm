@@ -56,6 +56,10 @@
 	activate_string = "Enable Visor"
 	deactivate_string = "Disable Visor"
 
+	banned_modules = list(
+		/obj/item/rig_module/vision
+	)
+
 	var/datum/rig_vision/vision
 	var/list/vision_modes = list(
 		/datum/rig_vision/nvg,
