@@ -73,40 +73,18 @@
 
 		// Check if this is a hardsuit upgrade or a modification.
 		else if(istype(W,/obj/item/rig_module))
-
-			if(istype(src.loc,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = src.loc
-				if(H.back == src)
-					to_chat(user, "<span class='danger'>You can't install a hardsuit module while the suit is being worn.</span>")
-					return 1
-
-			if(is_type_in_list(W,banned_modules))
-				to_chat(user, SPAN_DANGER("\The [src] cannot mount this type of module."))
-				return 1
-
 			var/obj/item/rig_module/mod = W
-
-			if(!installed_modules) installed_modules = list()
-			if(installed_modules.len)
-				for(var/obj/item/rig_module/installed_mod in installed_modules)
-					if(is_type_in_list(installed_mod,mod.banned_modules))
-						to_chat(user, SPAN_DANGER("\The [installed_mod] is incompatible with this module."))
-						return 1
-					if(installed_mod.banned_modules.len)
-						if(is_type_in_list(W,installed_mod.banned_modules))
-							to_chat(user, SPAN_DANGER("\The [installed_mod] is incompatible with this module."))
-							return 1
-					if(!installed_mod.redundant && installed_mod.type == W.type)
-						to_chat(user, "The hardsuit already has a module of that class installed.")
-						return 1
+			if (!mod.can_install(src, user))
+				return TRUE
 
 			to_chat(user, "You begin installing \the [mod] into \the [src].")
 			if(!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 				return
-			if(!user || !W)
+			if(!user || !W || !mod.can_install(src, user))
 				return
 			if(!user.unEquip(mod)) return
 			to_chat(user, "You install \the [mod] into \the [src].")
+			LAZYADD(installed_modules, mod)
 			installed_modules |= mod
 			mod.forceMove(src)
 			mod.installed(src)

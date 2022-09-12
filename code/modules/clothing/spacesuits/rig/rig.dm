@@ -187,6 +187,10 @@
 	if(initial_modules && initial_modules.len)
 		for(var/path in initial_modules)
 			var/obj/item/rig_module/module = new path(src)
+			if (!module.can_install(src))
+				crash_with("\A [module] ([module.type]) failed to initialize within \a [src].")
+				qdel(module)
+				continue
 			installed_modules += module
 			module.installed(src)
 

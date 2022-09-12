@@ -145,6 +145,38 @@
 	holder = new_holder
 	return
 
+/**
+ * Whether or not the module can be installed in the given rig.
+ *
+ * **Parameters**:
+ * - `new_holder` - The rig the module is attempting to be installed to.
+ * - `user` - The user attempting to install the module. Used for feedback messages. Omit for silent checks.
+ *
+ * Returns boolean.
+ */
+/obj/item/rig_module/proc/can_install(obj/item/rig/rig, mob/user = null)
+	if (is_type_in_list(src, rig.banned_modules))
+		if (user)
+			to_chat(user, SPAN_WARNING("\The [rig] cannot mount this type of module."))
+		return FALSE
+
+	if (LAZYLEN(rig.installed_modules))
+		for (var/obj/item/rig_module/installed_module as anything in rig.installed_modules)
+			if (!installed_module.redundant && installed_module.type == type)
+				if (user)
+					to_chat(user, SPAN_WARNING("\The [rig] already has \a [installed_module] installed."))
+				return FALSE
+			if (LAZYLEN(banned_modules) && is_type_in_list(installed_module, banned_modules))
+				if (user)
+					to_chat(user, SPAN_WARNING("\The [installed_module] already installed in \the [rig] is not compatible with \the [src]."))
+				return FALSE
+			if (LAZYLEN(installed_module.banned_modules) && is_type_in_list(src, installed_module.banned_modules))
+				if (user)
+					to_chat(user, SPAN_WARNING("\The [installed_module] already installed in \the [rig] is not compatible with \the [src]."))
+				return FALSE
+
+	return TRUE
+
 /obj/item/rig_module/proc/check(charge = 50)
 
 	if(damage >= 2)
