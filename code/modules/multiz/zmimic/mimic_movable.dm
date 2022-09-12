@@ -82,12 +82,7 @@
 	icon_state = "dark"
 	plane = OPENTURF_MAX_PLANE
 	layer = MIMICED_LIGHTING_LAYER
-	blend_mode = BLEND_MULTIPLY
-	color = list(
-		SHADOWER_DARKENING_FACTOR, 0, 0,
-		0, SHADOWER_DARKENING_FACTOR, 0,
-		0, 0, SHADOWER_DARKENING_FACTOR
-	)
+	color = "#0000004b"
 
 /atom/movable/openspace/multiplier/Destroy()
 	var/turf/myturf = loc
