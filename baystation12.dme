@@ -714,6 +714,7 @@
 #include "code\game\machinery\_machines_base\machinery_power.dm"
 #include "code\game\machinery\_machines_base\machinery_public_vars.dm"
 #include "code\game\machinery\_machines_base\machinery_public_vars_common.dm"
+#include "code\game\machinery\_machines_base\machinery_stat.dm"
 #include "code\game\machinery\_machines_base\machine_construction\_construction.dm"
 #include "code\game\machinery\_machines_base\machine_construction\computer.dm"
 #include "code\game\machinery\_machines_base\machine_construction\default.dm"
