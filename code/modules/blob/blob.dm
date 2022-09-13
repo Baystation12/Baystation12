@@ -134,7 +134,7 @@
 			visible_message(SPAN_DANGER("A tendril flies out from \the [src] and smashes into \the [A]!"))
 			if (!sound_played)
 				playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
-			A.damage_health(damage, damage_type)
+			A.damage_health(damage, damage_type, skip_can_damage_check = TRUE)
 		if (A.density)
 			density_check = TRUE
 

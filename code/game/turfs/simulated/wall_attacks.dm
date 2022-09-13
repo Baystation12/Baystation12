@@ -418,5 +418,5 @@
 			SPAN_WARNING("You attack \the [src] with \the [W]!"),
 			SPAN_WARNING("You hear the sound of something hitting a wall.")
 		)
-		damage_health(W.force, W.damtype)
+		damage_health(W.force, W.damtype, skip_can_damage_check = TRUE)
 		return

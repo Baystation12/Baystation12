@@ -148,11 +148,11 @@
 /**
  * Restore's the atom's health by the given value. Returns `TRUE` if the restoration resulted in a death state change.
  */
-/atom/proc/restore_health(damage, damage_type = null, skip_death_state_change = FALSE)
+/atom/proc/restore_health(damage, damage_type = null, skip_death_state_change = FALSE, skip_can_restore_check = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
 	if (!health_max)
 		return
-	if (!can_restore_health(damage, damage_type))
+	if (!skip_can_restore_check && !can_restore_health(damage, damage_type))
 		return FALSE
 	return mod_health(damage, damage_type, skip_death_state_change)
 
@@ -162,12 +162,13 @@
  * - `damage_type` should be one of the `DAMAGE_*` damage types, or `null`. Defining a damage type is preferable over not.
  * - `damage_flags` is a bitfield of `DAMAGE_FLAG_*` values.
  * - `severity` should be a passthrough of `severity` from `ex_act()` and `emp_act()` for `DAMAGE_EXPLODE` and `DAMAGE_EMP` types respectively.
+ * - `skip_can_damage_check` (boolean) - If `TRUE` skips checking `can_damage_health()`. Intended for cases where this was already checked.
  */
-/atom/proc/damage_health(damage, damage_type, damage_flags = EMPTY_BITFIELD, severity)
+/atom/proc/damage_health(damage, damage_type, damage_flags = EMPTY_BITFIELD, severity, skip_can_damage_check = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
 	if (!health_max)
 		return
-	if (!can_damage_health(damage, damage_type))
+	if (!skip_can_damage_check && !can_damage_health(damage, damage_type))
 		return FALSE
 
 	// Apply resistance/weakness modifiers
@@ -324,7 +325,7 @@
 			damage = round(health_max * (rand(50, 100) / 100)) // Effective range of 50% to 100%.
 		if (EX_ACT_LIGHT)
 			damage = round(health_max * (rand(10, 50) / 100)) // Effective range of 10% to 50%.
-	if (damage && can_damage_health(damage, DAMAGE_EXPLODE))
+	if (damage)
 		damage_health(damage, DAMAGE_EXPLODE, damage_flags, severity)
 
 
@@ -344,7 +345,7 @@
 		if (!can_damage_health(damage, P.damage_type))
 			return
 		playsound(damage_hitsound, src, 75)
-		damage_health(damage, P.damage_type)
+		damage_health(damage, P.damage_type, skip_can_damage_check = TRUE)
 		return 0
 
 
@@ -375,4 +376,4 @@
 			SPAN_DANGER("\The [user] hits \the [src] with \a [W]!"),
 			SPAN_DANGER("You hit \the [src] with \the [W]!")
 		)
-		damage_health(W.force, W.damtype)
+		damage_health(W.force, W.damtype, skip_can_damage_check = TRUE)
