@@ -225,7 +225,8 @@
 "aX" = (
 /obj/machinery/r_n_d/circuit_imprinter{
 	icon_state = "circuit_imprinter_t";
-	stat = 1
+	stat = 1;
+	reason_broken = 1
 	},
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /turf/simulated/floor/tiled/white,
@@ -233,7 +234,8 @@
 "aY" = (
 /obj/machinery/r_n_d/protolathe{
 	icon_state = "protolathe_t";
-	stat = 1
+	stat = 1;
+	reason_broken = 1
 	},
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /turf/simulated/floor/tiled/white,
@@ -1055,7 +1057,8 @@
 "dN" = (
 /obj/machinery/vending/snack{
 	icon_state = "snack-broken";
-	stat = 1
+	stat = 1;
+	reason_broken = 1
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
@@ -1663,7 +1666,8 @@
 /obj/machinery/requests_console{
 	icon_state = "req_comp_rewired";
 	pixel_y = -32;
-	stat = 1
+	stat = 1;
+	reason_broken = 1
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
@@ -2133,12 +2137,14 @@
 /obj/machinery/newscaster{
 	icon_state = "newscaster_off";
 	pixel_x = -30;
-	stat = 1
+	stat = 1;
+	reason_broken = 1
 	},
 /obj/machinery/newscaster{
 	icon_state = "crack3";
 	pixel_x = -30;
-	stat = 1
+	stat = 1;
+	reason_broken = 1
 	},
 /obj/structure/cable/orange{
 	d1 = 1;
