@@ -13,7 +13,7 @@
 		uninstall_component(null, H)
 		H.forceMove(newloc)
 		if(prob(25))
-			H.take_damage(rand(10,30))
+			H.damage_health(rand(10,30))
 	qdel(src)
 
 /obj/item/modular_computer/proc/take_damage(amount, component_probability, damage_casing = 1, randomize = 1)
@@ -31,7 +31,7 @@
 	if(component_probability)
 		for(var/obj/item/stock_parts/computer/H in get_all_components())
 			if(prob(component_probability))
-				H.take_damage(round(amount / 2))
+				H.damage_health(round(amount / 2))
 
 	if(damage >= max_damage)
 		break_apart()

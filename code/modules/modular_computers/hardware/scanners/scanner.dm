@@ -59,21 +59,21 @@
 	// Nanopaste. Repair all damage if present for a single unit.
 	var/obj/item/stack/S = W
 	if (istype(S, /obj/item/stack/nanopaste))
-		if (!damage)
+		if (!health_damaged())
 			to_chat(user, "\The [src] doesn't seem to require repairs.")
 			return TRUE
 		if (S.use(1))
 			to_chat(user, "You apply a bit of \the [W] to \the [src]. It immediately repairs all damage.")
-			damage = 0
+			revive_health()
 		return TRUE
 	// Cable coil. Works as repair method, but will probably require multiple applications and more cable.
 	if (isCoil(S))
-		if (!damage)
+		if (!health_damaged())
 			to_chat(user, "\The [src] doesn't seem to require repairs.")
 			return TRUE
 		if (S.use(1))
 			to_chat(user, "You patch up \the [src] with a bit of \the [W].")
-			take_damage(-10)
+			restore_health(10)
 		return TRUE
 	return ..()
 
