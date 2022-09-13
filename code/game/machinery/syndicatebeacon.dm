@@ -88,7 +88,6 @@
 	anchored = FALSE
 	density = TRUE
 	layer = BASE_ABOVE_OBJ_LAYER //so people can't hide it and it's REALLY OBVIOUS
-	stat = 0
 
 	var/active = 0
 	var/icontype = "beacon"

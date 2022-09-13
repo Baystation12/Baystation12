@@ -29,7 +29,6 @@
 
 	anchored = FALSE
 	density = TRUE
-	stat = 0
 
 	var/target_drop_time
 	var/drop_delay = 450
