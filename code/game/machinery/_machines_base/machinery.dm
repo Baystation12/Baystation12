@@ -239,10 +239,6 @@ Class Procs:
 		stat ^= NOINPUT
 		return TRUE
 
-/// Checks whether or not the machine `M` can be operated by `user`.
-/proc/is_operable(obj/machinery/M, mob/user)
-	return istype(M) && M.operable()
-
 /// Checks whether or not the machine's stat variable has the `BROKEN` flag, or any of the provided `additional_flags`. Returns `TRUE` if any of the flags match.
 /obj/machinery/proc/is_broken(additional_flags = EMPTY_BITFIELD)
 	return (stat & (BROKEN|additional_flags))
