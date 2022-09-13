@@ -1761,7 +1761,6 @@
 "fA" = (
 /obj/machinery/r_n_d/protolathe{
 	icon_state = "protolathe_t";
-	stat = 1;
 	reason_broken = 1
 	},
 /turf/simulated/floor/airless,

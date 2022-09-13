@@ -20,12 +20,10 @@
  * Returns boolean - Whether or not the state was changed.
  */
 /obj/machinery/proc/set_broken(new_state, cause = MACHINE_BROKEN_GENERIC)
-	if(stat_immune & MACHINE_STAT_BROKEN)
-		return FALSE
 	if(!new_state == !(reason_broken & cause))
 		return FALSE
 	reason_broken ^= cause
-	return set_stat(MACHINE_STAT_BROKEN, !!reason_broken)
+	return TRUE
 
 
 /**
@@ -62,12 +60,12 @@
 
 
 /**
- * Whether or not the machine is considered 'broken'. By default this translates directly to `stat_check(MACHINE_STAT_BROKEN)`.
+ * Whether or not the machine is considered 'broken'. By default this translates directly to `!!reason_broken`.
  *
  * Returns boolean.
  */
-/obj/machinery/proc/is_broken(additional_flags = EMPTY_BITFIELD)
-	return !!GET_FLAGS(stat, MACHINE_STAT_BROKEN | additional_flags)
+/obj/machinery/proc/is_broken()
+	return !!reason_broken
 
 
 /**
@@ -86,4 +84,4 @@
 
 /// Checks whether or not the machine's state variable has the `MACHINE_STAT_BROKEN` or `MACHINE_STAT_NOPOWER` flags, or any of the provided `additional_flags`. Returns `TRUE` if any of the flags match.
 /obj/machinery/proc/inoperable(additional_flags = EMPTY_BITFIELD)
-	return !!GET_FLAGS(stat, MACHINE_STAT_NOPOWER | MACHINE_STAT_BROKEN | additional_flags)
+	return (GET_FLAGS(stat, MACHINE_STAT_NOPOWER | additional_flags) || reason_broken)

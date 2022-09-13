@@ -82,7 +82,7 @@
 	return
 
 /obj/machinery/door/unpowered/simple/inoperable()
-	return !!GET_FLAGS(stat, MACHINE_STAT_BROKEN)
+	return !!reason_broken
 
 /obj/machinery/door/unpowered/simple/close(forced = 0)
 	if(!can_close(forced))

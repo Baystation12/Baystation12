@@ -16,8 +16,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	stat = MACHINE_STAT_BROKEN         // Should be removed if the terminals initialize fully.
-	reason_broken = MACHINE_BROKEN_GENERIC
+	reason_broken = MACHINE_BROKEN_GENERIC // Should be removed if the terminals initialize fully.
 
 	machine_name = "superconductive magnetic energy storage"
 	machine_desc = "The SMES is effectively a giant battery. It stores vast quantities of power for later use, and can be remotely controlled using the RCON system."
