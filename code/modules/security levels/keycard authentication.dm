@@ -24,7 +24,7 @@
 	return
 
 /obj/machinery/keycard_auth/attackby(obj/item/W as obj, mob/user as mob)
-	if(stat & (NOPOWER|BROKEN))
+	if(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))
 		to_chat(user, "This device is not powered.")
 		return
 	if(istype(W,/obj/item/card/id))
@@ -43,7 +43,7 @@
 
 //icon_state gets set everwhere besides here, that needs to be fixed sometime
 /obj/machinery/keycard_auth/on_update_icon()
-	if(stat &NOPOWER)
+	if(stat &MACHINE_STAT_NOPOWER)
 		icon_state = "auth_off"
 
 /obj/machinery/keycard_auth/interface_interact(mob/user)
@@ -134,7 +134,7 @@
 	reset()
 
 /obj/machinery/keycard_auth/proc/receive_request(obj/machinery/keycard_auth/source)
-	if(stat & (BROKEN|NOPOWER))
+	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
 		return
 	event_source = source
 	busy = 1

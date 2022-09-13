@@ -22,12 +22,12 @@
 #define TOTAL   5 // For total power used only.
 
 // Bitflags for machine stat variable.
-#define BROKEN      FLAG(0)
-#define NOPOWER     FLAG(1)
-#define MAINT       FLAG(2)  // Under maintenance.
-#define EMPED       FLAG(3)  // Temporary broken by EMP pulse.
-#define NOSCREEN    FLAG(4)  // No UI shown via direct interaction
-#define NOINPUT     FLAG(5)  // No input taken from direct interaction
+#define MACHINE_STAT_BROKEN      FLAG(0)
+#define MACHINE_STAT_NOPOWER     FLAG(1)
+#define MACHINE_STAT_MAINT       FLAG(2)  // Under maintenance.
+#define MACHINE_STAT_EMPED       FLAG(3)  // Temporary broken by EMP pulse.
+#define MACHINE_STAT_NOSCREEN    FLAG(4)  // No UI shown via direct interaction
+#define MACHINE_STAT_NOINPUT     FLAG(5)  // No input taken from direct interaction
 
 #define MACHINE_BROKEN_GENERIC  FLAG(0)  // Standard legacy brokenness, used on a case-by-case basis
 #define MACHINE_BROKEN_NO_PARTS FLAG(1)  // Missing required parts

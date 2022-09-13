@@ -30,10 +30,10 @@
 
 // Updates icon of this computer according to current status.
 /obj/machinery/computer/power_monitor/on_update_icon()
-	if(stat & BROKEN)
+	if(stat & MACHINE_STAT_BROKEN)
 		icon_state = "powerb"
 		return
-	if(stat & NOPOWER)
+	if(stat & MACHINE_STAT_NOPOWER)
 		icon_state = "power0"
 		return
 	if(alerting)

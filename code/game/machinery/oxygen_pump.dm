@@ -56,7 +56,7 @@
 
 
 /obj/machinery/oxygen_pump/physical_attack_hand(mob/user)
-	if((stat & MAINT) && tank)
+	if((stat & MACHINE_STAT_MAINT) && tank)
 		user.visible_message("<span class='notice'>\The [user] removes \the [tank] from \the [src].</span>", "<span class='notice'>You remove \the [tank] from \the [src].</span>")
 		user.put_in_hands(tank)
 		src.add_fingerprint(user)
@@ -117,7 +117,7 @@
 	if(!tank)
 		to_chat(user, "<span class='warning'>There is no tank in \the [src].</span>")
 		return
-	if(stat & MAINT)
+	if(stat & MACHINE_STAT_MAINT)
 		to_chat(user, "<span class='warning'>Please close \the maintenance hatch first.</span>")
 		return
 	if(!Adjacent(target))
@@ -135,14 +135,14 @@
 
 /obj/machinery/oxygen_pump/attackby(obj/item/W as obj, mob/user as mob)
 	if(isScrewdriver(W))
-		stat ^= MAINT
-		user.visible_message("<span class='notice'>\The [user] [stat & MAINT ? "opens" : "closes"] \the [src].</span>", "<span class='notice'>You [stat & MAINT ? "open" : "close"] \the [src].</span>")
-		if(stat & MAINT)
+		stat ^= MACHINE_STAT_MAINT
+		user.visible_message("<span class='notice'>\The [user] [stat & MACHINE_STAT_MAINT ? "opens" : "closes"] \the [src].</span>", "<span class='notice'>You [stat & MACHINE_STAT_MAINT ? "open" : "close"] \the [src].</span>")
+		if(stat & MACHINE_STAT_MAINT)
 			icon_state = icon_state_open
 		if(!stat)
 			icon_state = icon_state_closed
 		//TO-DO: Open icon
-	if(istype(W, /obj/item/tank) && (stat & MAINT))
+	if(istype(W, /obj/item/tank) && (stat & MACHINE_STAT_MAINT))
 		if(tank)
 			to_chat(user, "<span class='warning'>\The [src] already has a tank installed!</span>")
 		else

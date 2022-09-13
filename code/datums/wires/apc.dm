@@ -21,7 +21,7 @@
 
 /datum/wires/apc/CanUse(mob/living/L)
 	var/obj/machinery/power/apc/A = holder
-	if(A.wiresexposed && !(A.stat & BROKEN))
+	if(A.wiresexposed && !(A.stat & MACHINE_STAT_BROKEN))
 		return 1
 	return 0
 

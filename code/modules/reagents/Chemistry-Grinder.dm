@@ -64,7 +64,7 @@
 	if (grinding)
 		return
 	power_change()
-	if (stat & (NOPOWER|BROKEN))
+	if (stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))
 		return
 	if (!container?.reagents || container.reagents.total_volume >= container.reagents.maximum_volume)
 		return

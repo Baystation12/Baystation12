@@ -295,7 +295,7 @@
 			return SPAN_WARNING("\The [src]'s safety circuit is preventing modifications while it's charged!")
 		if(output_attempt || input_attempt)
 			return SPAN_WARNING("Turn \the [src] off first!")
-		if(!(stat & BROKEN))
+		if(!(stat & MACHINE_STAT_BROKEN))
 			return SPAN_WARNING("You have to disassemble the terminal[num_terminals > 1 ? "s" : ""] first!")
 		if(user)
 			if(!do_after(user, 5 SECONDS * number_of_components(/obj/item/stock_parts/smes_coil), src, DO_REPAIR_CONSTRUCT) && isCrowbar(user.get_active_hand()))

@@ -29,9 +29,9 @@
 	var/dev_aislot = 0						// 0: None, 1: Standard
 
 /obj/machinery/lapvend/on_update_icon()
-	if(stat & BROKEN)
+	if(stat & MACHINE_STAT_BROKEN)
 		icon_state = "[initial(icon_state)]-broken"
-	else if(!(stat & NOPOWER))
+	else if(!(stat & MACHINE_STAT_NOPOWER))
 		icon_state = initial(icon_state)
 	else
 		icon_state = "[initial(icon_state)]-off"
@@ -241,7 +241,7 @@
 	return TRUE
 
 /obj/machinery/lapvend/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	if(stat & (BROKEN | NOPOWER | MAINT))
+	if(stat & (MACHINE_STAT_BROKEN | MACHINE_STAT_NOPOWER | MACHINE_STAT_MAINT))
 		if(ui)
 			ui.close()
 		return 0

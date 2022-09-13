@@ -47,7 +47,7 @@
 	if (!node)
 		update_use_power(POWER_USE_OFF)
 
-	if(stat & NOPOWER)
+	if(stat & MACHINE_STAT_NOPOWER)
 		icon_state = "off"
 	else
 		icon_state = "[use_power ? "on" : "off"]"
@@ -108,7 +108,7 @@
 	last_power_draw = 0
 	last_flow_rate = 0
 
-	if((stat & (NOPOWER|BROKEN)) || !use_power)
+	if((stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)) || !use_power)
 		return
 
 	var/power_draw = -1
@@ -130,7 +130,7 @@
 /obj/machinery/atmospherics/unary/outlet_injector/proc/inject()
 	set waitfor = 0
 
-	if(injecting || (stat & NOPOWER))
+	if(injecting || (stat & MACHINE_STAT_NOPOWER))
 		return 0
 
 	var/datum/gas_mixture/environment = loc.return_air()

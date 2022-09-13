@@ -98,7 +98,7 @@
 			overlays += icon_keyboard ? "[icon_keyboard]_off" : "keyboard"
 		return
 
-	if(stat & NOPOWER)
+	if(stat & MACHINE_STAT_NOPOWER)
 		set_light(0)
 		if(icon_keyboard)
 			overlays += image(icon,"[icon_keyboard]_off", overlay_layer)
@@ -106,7 +106,7 @@
 	else
 		set_light(light_max_bright_on, light_inner_range_on, light_outer_range_on, 2, light_color)
 
-	if(stat & BROKEN)
+	if(stat & MACHINE_STAT_BROKEN)
 		overlays += image(icon,"[icon_state]_broken", overlay_layer)
 	else
 		overlays += get_screen_overlay()
@@ -126,7 +126,7 @@
 	return text
 
 /obj/machinery/computer/dismantle(mob/user)
-	if(stat & BROKEN)
+	if(stat & MACHINE_STAT_BROKEN)
 		to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
 		for(var/obj/item/stock_parts/console_screen/screen in component_parts)
 			qdel(screen)

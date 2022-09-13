@@ -81,7 +81,7 @@
 	printing = 0
 	update_icon()
 
-	if(!choice || !src || (stat & (BROKEN|NOPOWER)))
+	if(!choice || !src || (stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER)))
 		return TRUE
 
 	print_organ(choice)

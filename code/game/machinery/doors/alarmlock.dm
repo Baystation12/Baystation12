@@ -27,7 +27,7 @@
 
 /obj/machinery/door/airlock/alarmlock/receive_signal(datum/signal/signal)
 	..()
-	if(stat & (NOPOWER|BROKEN))
+	if(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))
 		return
 
 	var/alarm_area = signal.data["zone"]

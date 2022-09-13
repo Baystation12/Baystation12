@@ -12,7 +12,7 @@
 	var/mob/living/last_assayed
 
 /obj/machinery/psi_meter/on_update_icon()
-	if(use_power && !(stat & (NOPOWER|BROKEN)))
+	if(use_power && !(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)))
 		icon_state = "meter_on"
 	else
 		icon_state = "meter_off"

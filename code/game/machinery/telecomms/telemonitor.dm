@@ -22,7 +22,7 @@
 	var/temp = ""				// temporary feedback messages
 
 /obj/machinery/computer/telecomms/monitor/attack_hand(mob/user as mob)
-	if(stat & (BROKEN|NOPOWER))
+	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
 		return
 	user.set_machine(src)
 	var/list/dat = list()

@@ -16,13 +16,13 @@
 
 
 /obj/machinery/status_light/on_update_icon()
-	if(stat & (NOPOWER|BROKEN))
+	if(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))
 		icon_state = "doortimer-b"
 		return
 	icon_state = "doortimer[alert]"
 
 /obj/machinery/status_light/receive_signal(datum/signal/signal)
-	if(stat & (NOPOWER|BROKEN))
+	if(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))
 		return
 
 	if(!signal.data["tag"] || (signal.data["tag"] != id_tag) || !signal.data["temperature"])

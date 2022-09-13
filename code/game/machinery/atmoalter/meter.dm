@@ -54,7 +54,7 @@
 		icon_state = "meterX"
 		return 0
 
-	if(stat & (BROKEN|NOPOWER))
+	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
 		icon_state = "meter0"
 		return 0
 
@@ -85,7 +85,7 @@
 	if(distance > 3 && !(istype(user, /mob/living/silicon/ai) || isghost(user)))
 		to_chat(user, "<span class='warning'>You are too far away to read it.</span>")
 
-	else if(stat & (NOPOWER|BROKEN))
+	else if(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))
 		to_chat(user, "<span class='warning'>The display is off.</span>")
 
 	else if(src.target)

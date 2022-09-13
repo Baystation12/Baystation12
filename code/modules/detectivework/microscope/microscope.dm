@@ -138,7 +138,7 @@
 
 /obj/machinery/microscope/on_update_icon()
 	icon_state = "microscope"
-	if(stat & NOPOWER)
+	if(stat & MACHINE_STAT_NOPOWER)
 		icon_state += "_unpowered"
 	if(sample)
 		icon_state += "_slide"

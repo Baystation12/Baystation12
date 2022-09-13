@@ -23,7 +23,7 @@
 	FindScanner()
 
 /obj/machinery/body_scanconsole/on_update_icon()
-	if(stat & (BROKEN | NOPOWER))
+	if(stat & (MACHINE_STAT_BROKEN | MACHINE_STAT_NOPOWER))
 		icon_state = "body_scannerconsole-p"
 	else
 		icon_state = initial(icon_state)
@@ -56,7 +56,7 @@
 	return !!connected_displays.len
 
 /obj/machinery/body_scanconsole/attack_hand(mob/user)
-	if(!connected || (connected.stat & (NOPOWER|BROKEN)))
+	if(!connected || (connected.stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)))
 		to_chat(user, SPAN_WARNING("This console is not connected to a functioning body scanner."))
 		return TRUE
 	return ..()

@@ -32,7 +32,7 @@
 	var/surplus = terminal.surplus()
 	var/usage = machine.get_power_usage()
 
-	if((machine.stat & NOPOWER) && surplus > usage)
+	if((machine.stat & MACHINE_STAT_NOPOWER) && surplus > usage)
 		machine.power_change()
 		return // This suggests that we should be powering the machine instead, so let's try that
 

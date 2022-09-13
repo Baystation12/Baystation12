@@ -18,7 +18,7 @@
 	. = ..()
 
 /obj/machinery/computer/modular/Process()
-	if(stat & NOPOWER)
+	if(stat & MACHINE_STAT_NOPOWER)
 		return
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
@@ -26,7 +26,7 @@
 
 /obj/machinery/computer/modular/power_change()
 	. = ..()
-	if(. && (stat & NOPOWER))
+	if(. && (stat & MACHINE_STAT_NOPOWER))
 		var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 		if(os)
 			os.event_powerfailure()

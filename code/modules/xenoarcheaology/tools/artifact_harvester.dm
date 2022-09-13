@@ -37,7 +37,7 @@
 	interact(user)
 
 /obj/machinery/artifact_harvester/interact(mob/user as mob)
-	if(stat & (NOPOWER|BROKEN))
+	if(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))
 		return
 	user.set_machine(src)
 	var/dat = "<B>Artifact Power Harvester</B><BR>"
@@ -69,7 +69,7 @@
 	popup.open()
 
 /obj/machinery/artifact_harvester/Process()
-	if(stat & (NOPOWER|BROKEN))
+	if(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))
 		return
 
 	updateDialog()

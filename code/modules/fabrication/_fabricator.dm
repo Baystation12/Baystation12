@@ -91,7 +91,7 @@
 	return ..()
 
 /obj/machinery/fabricator/proc/is_functioning()
-	. = use_power != POWER_USE_OFF && !(stat & NOPOWER) && !(stat & BROKEN) && !(fab_status_flags & FAB_DISABLED)
+	. = use_power != POWER_USE_OFF && !(stat & MACHINE_STAT_NOPOWER) && !(stat & MACHINE_STAT_BROKEN) && !(fab_status_flags & FAB_DISABLED)
 
 /obj/machinery/fabricator/Process(wait)
 	..()
@@ -100,7 +100,7 @@
 
 /obj/machinery/fabricator/on_update_icon()
 	overlays.Cut()
-	if(stat & NOPOWER)
+	if(stat & MACHINE_STAT_NOPOWER)
 		icon_state = "[base_icon_state]_d"
 	else if(currently_building)
 		icon_state = "[base_icon_state]_p"

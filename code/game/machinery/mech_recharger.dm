@@ -57,7 +57,7 @@
 		stop_charging()
 		return
 
-	if(stat & (BROKEN|NOPOWER))
+	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
 		charging.show_message(SPAN_WARNING("Internal system Error - Charging aborted."))
 		stop_charging()
 		return
@@ -95,7 +95,7 @@
 	return charging && (charging.health == charging.maxHealth)
 
 /obj/machinery/mech_recharger/proc/start_charging(mob/living/exosuit/M)
-	if(stat & (NOPOWER | BROKEN))
+	if(stat & (MACHINE_STAT_NOPOWER | MACHINE_STAT_BROKEN))
 		M.show_message(SPAN_WARNING("Power port not responding. Terminating."))
 		return
 	if(M.get_cell(TRUE))

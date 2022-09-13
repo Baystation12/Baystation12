@@ -141,7 +141,7 @@
 
 	if (istype(the_target, /obj/machinery/porta_turret))
 		var/obj/machinery/porta_turret/P = the_target
-		if (P.stat & BROKEN)
+		if (P.stat & MACHINE_STAT_BROKEN)
 			return FALSE // Already dead.
 		if (!(P.assess_living(holder)))
 			return FALSE // Don't shoot allied turrets.

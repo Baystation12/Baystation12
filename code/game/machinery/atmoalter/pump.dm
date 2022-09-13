@@ -33,7 +33,7 @@
 /obj/machinery/portable_atmospherics/powered/pump/on_update_icon()
 	overlays.Cut()
 
-	if((use_power == POWER_USE_ACTIVE) && !(stat & NOPOWER))
+	if((use_power == POWER_USE_ACTIVE) && !(stat & MACHINE_STAT_NOPOWER))
 		icon_state = "psiphon:1"
 	else
 		icon_state = "psiphon:0"
@@ -45,7 +45,7 @@
 		overlays += "siphon-connector"
 
 /obj/machinery/portable_atmospherics/powered/pump/emp_act(severity)
-	if(stat & (BROKEN|NOPOWER))
+	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
 		..(severity)
 		return
 
@@ -64,7 +64,7 @@
 	..()
 	var/power_draw = -1
 
-	if((use_power == POWER_USE_ACTIVE) && !(stat & NOPOWER))
+	if((use_power == POWER_USE_ACTIVE) && !(stat & MACHINE_STAT_NOPOWER))
 		var/datum/gas_mixture/environment
 		if(holding)
 			environment = holding.air_contents

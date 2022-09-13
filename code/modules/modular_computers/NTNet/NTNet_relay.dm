@@ -31,7 +31,7 @@
 
 // TODO: Implement more logic here. For now it's only a placeholder.
 /obj/machinery/ntnet_relay/operable()
-	if(!..(EMPED))
+	if(!..(MACHINE_STAT_EMPED))
 		return FALSE
 	if(dos_failure)
 		return FALSE

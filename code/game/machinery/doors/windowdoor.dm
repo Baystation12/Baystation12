@@ -10,7 +10,7 @@
 	health = 150
 	visible = 0.0
 	use_power = POWER_USE_OFF
-	stat_immune = NOSCREEN | NOINPUT | NOPOWER
+	stat_immune = MACHINE_STAT_NOSCREEN | MACHINE_STAT_NOINPUT | MACHINE_STAT_NOPOWER
 	uncreated_component_parts = null
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
 	opacity = 0

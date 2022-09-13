@@ -25,7 +25,7 @@
 	var/auth = 0 // Are they authenticated?
 
 /obj/machinery/computer/message_monitor/attackby(obj/item/O as obj, mob/living/user as mob)
-	if(stat & (NOPOWER|BROKEN))
+	if(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))
 		..()
 		return
 	if(!istype(user))
@@ -94,8 +94,8 @@
 
 	if(hacking || emag)
 		screen = 2
-	else if(!auth || !linkedServer || (linkedServer.stat & (NOPOWER|BROKEN)))
-		if(!linkedServer || (linkedServer.stat & (NOPOWER|BROKEN))) message = noserver
+	else if(!auth || !linkedServer || (linkedServer.stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)))
+		if(!linkedServer || (linkedServer.stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))) message = noserver
 		screen = 0
 
 	switch(screen)
@@ -105,7 +105,7 @@
 			var/i = 0
 			dat += "<dd><A href='?src=\ref[src];find=1'>&#09;[++i]. Link To A Server</a></dd>"
 			if(auth)
-				if(!linkedServer || (linkedServer.stat & (NOPOWER|BROKEN)))
+				if(!linkedServer || (linkedServer.stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)))
 					dat += "<dd><A>&#09;ERROR: Server not found!</A><br></dd>"
 				else
 					dat += "<dd><A href='?src=\ref[src];viewr=1'>&#09;[++i]. View Request Console Logs </a></br></dd>"
@@ -240,7 +240,7 @@
 
 	//Clears the request console logs - KEY REQUIRED
 	if (href_list["clearr"])
-		if(!linkedServer || (src.linkedServer.stat & (NOPOWER|BROKEN)))
+		if(!linkedServer || (src.linkedServer.stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)))
 			message = noserver
 		else
 			if(auth)
@@ -248,7 +248,7 @@
 				message = "<span class='notice'>NOTICE: Logs cleared.</span>"
 	//Change the password - KEY REQUIRED
 	if (href_list["pass"])
-		if(!linkedServer || (src.linkedServer.stat & (NOPOWER|BROKEN)))
+		if(!linkedServer || (src.linkedServer.stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)))
 			message = noserver
 		else
 			if(auth)
@@ -281,7 +281,7 @@
 	if (href_list["deleter"])
 		//Are they on the view logs screen?
 		if(screen == 4)
-			if(!linkedServer || (src.linkedServer.stat & (NOPOWER|BROKEN)))
+			if(!linkedServer || (src.linkedServer.stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)))
 				message = noserver
 			else //if(istype(href_list["delete"], /datum/data_pda_msg))
 				src.linkedServer.rc_msgs -= locate(href_list["deleter"])
@@ -289,7 +289,7 @@
 
 	//Request Console Logs - KEY REQUIRED
 	if(href_list["viewr"])
-		if(src.linkedServer == null || (src.linkedServer.stat & (NOPOWER|BROKEN)))
+		if(src.linkedServer == null || (src.linkedServer.stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)))
 			message = noserver
 		else
 			if(auth)

@@ -49,7 +49,7 @@
 
 
 /obj/machinery/sleeper/Process()
-	if(stat & (NOPOWER|BROKEN))
+	if(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))
 		return
 
 	if(filtering > 0)
@@ -81,7 +81,7 @@
 /obj/machinery/sleeper/on_update_icon()
 	if(!occupant)
 		icon_state = "sleeper_0"
-	else if(stat & (BROKEN|NOPOWER))
+	else if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
 		icon_state = "sleeper_1"
 	else
 		icon_state = "sleeper_2"
@@ -96,7 +96,7 @@
 /obj/machinery/sleeper/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.outside_state)
 	var/data[0]
 
-	data["power"] = stat & (NOPOWER|BROKEN) ? 0 : 1
+	data["power"] = stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN) ? 0 : 1
 
 	var/list/reagents = list()
 	for(var/T in available_chemicals)
@@ -204,7 +204,7 @@
 	if(filtering)
 		toggle_filter()
 
-	if(stat & (BROKEN|NOPOWER))
+	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
 		..(severity)
 		return
 
@@ -228,7 +228,7 @@
 /obj/machinery/sleeper/proc/go_in(mob/M, mob/user)
 	if(!M)
 		return
-	if(stat & (BROKEN|NOPOWER))
+	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
 		return
 	if(occupant)
 		to_chat(user, "<span class='warning'>\The [src] is already occupied.</span>")
@@ -289,7 +289,7 @@
 		toggle_pump()
 
 /obj/machinery/sleeper/proc/inject_chemical(mob/living/user, chemical_name, amount)
-	if(stat & (BROKEN|NOPOWER))
+	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
 		return
 
 	var/chemical_type = available_chemicals[chemical_name]

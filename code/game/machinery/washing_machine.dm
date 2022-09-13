@@ -58,7 +58,7 @@
 		to_chat(usr, "You must first close the machine.")
 		return
 
-	if(stat & NOPOWER)
+	if(stat & MACHINE_STAT_NOPOWER)
 		to_chat(usr, SPAN_WARNING("\The [src] is unpowered."))
 		return
 

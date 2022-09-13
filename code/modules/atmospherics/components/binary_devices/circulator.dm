@@ -30,7 +30,7 @@
 
 /obj/machinery/atmospherics/binary/circulator/proc/return_transfer_air()
 	var/datum/gas_mixture/removed
-	if(anchored && !(stat&BROKEN) && network1)
+	if(anchored && !(stat&MACHINE_STAT_BROKEN) && network1)
 		var/input_starting_pressure = air1.return_pressure()
 		var/output_starting_pressure = air2.return_pressure()
 		last_pressure_delta = max(input_starting_pressure - output_starting_pressure - 5, 0)
@@ -76,7 +76,7 @@
 /obj/machinery/atmospherics/binary/circulator/on_update_icon()
 	icon_state = anchored ? "circ-assembled" : "circ-unassembled"
 	overlays.Cut()
-	if (stat & (BROKEN|NOPOWER) || !anchored)
+	if (stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER) || !anchored)
 		return 1
 	if (last_pressure_delta > 0 && recent_moles_transferred > 0)
 		if (temperature_overlay)

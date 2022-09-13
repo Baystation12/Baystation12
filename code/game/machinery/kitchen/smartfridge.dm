@@ -209,7 +209,7 @@
 
 
 /obj/machinery/smartfridge/Process()
-	if(stat & (BROKEN|NOPOWER))
+	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
 		return
 	if(src.seconds_electrified > 0)
 		src.seconds_electrified--
@@ -218,7 +218,7 @@
 
 /obj/machinery/smartfridge/on_update_icon()
 	overlays.Cut()
-	if(stat & (BROKEN|NOPOWER))
+	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
 		icon_state = "[icon_base]-off"
 	else
 		icon_state = icon_base
@@ -271,7 +271,7 @@
 			attack_hand(user)
 		return
 
-	if(stat & NOPOWER)
+	if(stat & MACHINE_STAT_NOPOWER)
 		to_chat(user, "<span class='notice'>\The [src] is unpowered and useless.</span>")
 		return
 

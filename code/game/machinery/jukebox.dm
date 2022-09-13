@@ -28,8 +28,8 @@
 
 /obj/machinery/jukebox/on_update_icon()
 	overlays.Cut()
-	if (!anchored || stat & (NOPOWER|BROKEN))
-		icon_state = "[initial(icon_state)]-[stat & BROKEN ? "broken" : "nopower"]"
+	if (!anchored || stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))
+		icon_state = "[initial(icon_state)]-[stat & MACHINE_STAT_BROKEN ? "broken" : "nopower"]"
 		return
 	icon_state = initial(icon_state)
 	if (!jukebox?.playing)
@@ -43,7 +43,7 @@
 
 /obj/machinery/jukebox/power_change()
 	. = ..()
-	if (stat & (NOPOWER|BROKEN) && jukebox?.playing)
+	if (stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN) && jukebox?.playing)
 		jukebox.Stop()
 
 

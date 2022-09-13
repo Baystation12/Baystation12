@@ -40,7 +40,7 @@
 
 /obj/machinery/camera/examine(mob/user)
 	. = ..()
-	if(stat & BROKEN)
+	if(stat & MACHINE_STAT_BROKEN)
 		to_chat(user, "<span class='warning'>It is completely demolished.</span>")
 
 /obj/machinery/camera/malf_upgrade(mob/living/silicon/ai/user)
@@ -114,8 +114,8 @@
 	return ..()
 
 /obj/machinery/camera/Process()
-	if((stat & EMPED) && world.time >= affected_by_emp_until)
-		stat &= ~EMPED
+	if((stat & MACHINE_STAT_EMPED) && world.time >= affected_by_emp_until)
+		stat &= ~MACHINE_STAT_EMPED
 		cancelCameraAlarm()
 		update_icon()
 		update_coverage()
@@ -127,7 +127,7 @@
 			if (!affected_by_emp_until || (world.time < affected_by_emp_until))
 				affected_by_emp_until = max(affected_by_emp_until, world.time + (90 SECONDS / severity))
 			else
-				stat |= EMPED
+				stat |= MACHINE_STAT_EMPED
 				set_light(0)
 				triggerCameraAlarm()
 				update_icon()
@@ -187,7 +187,7 @@
 	else if((isWirecutter(W) || isMultitool(W)) && panel_open)
 		return wires.Interact(user)
 
-	else if(isWelder(W) && (camera_wires.CanDeconstruct() || (stat & BROKEN)))
+	else if(isWelder(W) && (camera_wires.CanDeconstruct() || (stat & MACHINE_STAT_BROKEN)))
 		if(weld(W, user))
 			if(assembly)
 				assembly.dropInto(loc)
@@ -196,7 +196,7 @@
 				assembly.camera_network = english_list(network, "Exodus", ",", ",")
 				assembly.update_icon()
 				assembly.dir = src.dir
-				if(stat & BROKEN)
+				if(stat & MACHINE_STAT_BROKEN)
 					assembly.state = 2
 					to_chat(user, "<span class='notice'>You repaired \the [src] frame.</span>")
 					cancelCameraAlarm()
@@ -304,9 +304,9 @@
 		else if(dir == EAST)
 			pixel_x = -10
 
-	if (!status || (stat & BROKEN))
+	if (!status || (stat & MACHINE_STAT_BROKEN))
 		icon_state = "[initial(icon_state)]1"
-	else if (stat & EMPED)
+	else if (stat & MACHINE_STAT_EMPED)
 		icon_state = "[initial(icon_state)]emp"
 	else
 		icon_state = initial(icon_state)
@@ -326,7 +326,7 @@
 /obj/machinery/camera/proc/can_use()
 	if(!status)
 		return 0
-	if(stat & (EMPED|BROKEN))
+	if(stat & (MACHINE_STAT_EMPED|MACHINE_STAT_BROKEN))
 		return 0
 	return 1
 

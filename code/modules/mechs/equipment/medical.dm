@@ -55,7 +55,7 @@
 	synth_modifier = 0
 	stasis_power = 0
 	interact_offline = TRUE
-	stat_immune = NOPOWER
+	stat_immune = MACHINE_STAT_NOPOWER
 
 /obj/machinery/sleeper/mounted/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.mech_state)
 	. = ..()

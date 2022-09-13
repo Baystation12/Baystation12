@@ -12,12 +12,12 @@
 	layer = STRUCTURE_LAYER // Layer under items
 	init_flags = INIT_MACHINERY_PROCESS_SELF
 
-	/// Bitflag. Machine's base status. Can include `BROKEN`, `NOPOWER`, etc.
+	/// Bitflag. Machine's base status. Can include `MACHINE_STAT_BROKEN`, `MACHINE_STAT_NOPOWER`, etc.
 	var/stat = EMPTY_BITFIELD
 	/// Bitflag. Reason the machine is 'broken'. Can be any combination of `MACHINE_BROKEN_*`. Do not modify directly - Use `set_broken()` instead.
 	var/reason_broken = EMPTY_BITFIELD
 	/// Bitflag. The machine will never set stat to these flags.
-	var/stat_immune = NOSCREEN | NOINPUT
+	var/stat_immune = MACHINE_STAT_NOSCREEN | MACHINE_STAT_NOINPUT
 	/// Boolean. Whether or not the machine has been emagged.
 	var/emagged = FALSE
 	/// Boolean. Whether or not the machine has been upgrade by a malfunctioning AI.
@@ -139,56 +139,56 @@
 			if (prob(25))
 				qdel(src)
 
-/// Toggles the `BROKEN` flag on the machine's `stat` variable. Includes immunity and other checks. `cause` can be any of `MACHINE_BROKEN_*`.
+/// Toggles the `MACHINE_STAT_BROKEN` flag on the machine's `stat` variable. Includes immunity and other checks. `cause` can be any of `MACHINE_BROKEN_*`.
 /obj/machinery/proc/set_broken(new_state, cause = MACHINE_BROKEN_GENERIC)
-	if(stat_immune & BROKEN)
+	if(stat_immune & MACHINE_STAT_BROKEN)
 		return FALSE
 	if(!new_state == !(reason_broken & cause))
 		return FALSE
 	reason_broken ^= cause
 
-	if(!reason_broken != !(stat & BROKEN))
-		stat ^= BROKEN
+	if(!reason_broken != !(stat & MACHINE_STAT_BROKEN))
+		stat ^= MACHINE_STAT_BROKEN
 		queue_icon_update()
 		return TRUE
 
-/// Toggles the `NOSCREEN` flag on the machine's `stat` variable. Includes immunity checks.
+/// Toggles the `MACHINE_STAT_NOSCREEN` flag on the machine's `stat` variable. Includes immunity checks.
 /obj/machinery/proc/set_noscreen(new_state)
-	if(stat_immune & NOSCREEN)
+	if(stat_immune & MACHINE_STAT_NOSCREEN)
 		return FALSE
-	if(!new_state != !(stat & NOSCREEN))// new state is different from old
-		stat ^= NOSCREEN                // so flip it
+	if(!new_state != !(stat & MACHINE_STAT_NOSCREEN))// new state is different from old
+		stat ^= MACHINE_STAT_NOSCREEN                // so flip it
 		return TRUE
 
-/// Toggles the `NOINPUT` flag on the machine's `stat` variable. Includes immunity checks.
+/// Toggles the `MACHINE_STAT_NOINPUT` flag on the machine's `stat` variable. Includes immunity checks.
 /obj/machinery/proc/set_noinput(new_state)
-	if(stat_immune & NOINPUT)
+	if(stat_immune & MACHINE_STAT_NOINPUT)
 		return FALSE
-	if(!new_state != !(stat & NOINPUT))
-		stat ^= NOINPUT
+	if(!new_state != !(stat & MACHINE_STAT_NOINPUT))
+		stat ^= MACHINE_STAT_NOINPUT
 		return TRUE
 
-/// Checks whether or not the machine's stat variable has the `BROKEN` flag, or any of the provided `additional_flags`. Returns `TRUE` if any of the flags match.
+/// Checks whether or not the machine's stat variable has the `MACHINE_STAT_BROKEN` flag, or any of the provided `additional_flags`. Returns `TRUE` if any of the flags match.
 /obj/machinery/proc/is_broken(additional_flags = EMPTY_BITFIELD)
-	return (stat & (BROKEN|additional_flags))
+	return (stat & (MACHINE_STAT_BROKEN|additional_flags))
 
-/// Checks whether or not the machine's stat variable has the `NOPOWER` flag, or any of the provided `additional_flags`. Returns `FALSE` if any of the flags match.
+/// Checks whether or not the machine's stat variable has the `MACHINE_STAT_NOPOWER` flag, or any of the provided `additional_flags`. Returns `FALSE` if any of the flags match.
 /obj/machinery/proc/is_powered(additional_flags = EMPTY_BITFIELD)
-	return !(stat & (NOPOWER|additional_flags))
+	return !(stat & (MACHINE_STAT_NOPOWER|additional_flags))
 
 /// Inverse of `inoperable()`.
 /obj/machinery/proc/operable(additional_flags = EMPTY_BITFIELD)
 	return !inoperable(additional_flags)
 
-/// Checks whether or not the machine's state variable has the `BROKEN` or `NOPOWER` flags, or any of the provided `additional_flags`. Returns `TRUE` if any of the flags match.
+/// Checks whether or not the machine's state variable has the `MACHINE_STAT_BROKEN` or `MACHINE_STAT_NOPOWER` flags, or any of the provided `additional_flags`. Returns `TRUE` if any of the flags match.
 /obj/machinery/proc/inoperable(additional_flags = EMPTY_BITFIELD)
-	return (stat & (NOPOWER|BROKEN|additional_flags))
+	return (stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN|additional_flags))
 
 /obj/machinery/CanUseTopic(mob/user)
-	if(stat & BROKEN)
+	if(stat & MACHINE_STAT_BROKEN)
 		return STATUS_CLOSE
 
-	if(!interact_offline && (stat & NOPOWER))
+	if(!interact_offline && (stat & MACHINE_STAT_NOPOWER))
 		return STATUS_CLOSE
 
 	if(user.direct_machine_interface(src))
@@ -200,10 +200,10 @@
 
 		return ..()
 
-	if(stat & NOSCREEN)
+	if(stat & MACHINE_STAT_NOSCREEN)
 		return STATUS_CLOSE
 
-	if(stat & NOINPUT)
+	if(stat & MACHINE_STAT_NOINPUT)
 		return min(..(), STATUS_UPDATE)
 	return ..()
 
@@ -218,7 +218,7 @@
 	return TRUE
 
 /obj/machinery/CanUseTopicPhysical(mob/user)
-	if(stat & BROKEN)
+	if(stat & MACHINE_STAT_BROKEN)
 		return STATUS_CLOSE
 
 	return GLOB.physical_state.can_use_topic(nano_host(), user)
@@ -405,11 +405,11 @@
 		to_chat(user, SPAN_NOTICE("The service panel is open."))
 	if(component_parts && hasHUD(user, HUD_SCIENCE))
 		display_parts(user)
-	if(stat & NOSCREEN)
+	if(stat & MACHINE_STAT_NOSCREEN)
 		to_chat(user, SPAN_WARNING("It is missing a screen, making it hard to interact with."))
-	else if(stat & NOINPUT)
+	else if(stat & MACHINE_STAT_NOINPUT)
 		to_chat(user, SPAN_WARNING("It is missing any input device."))
-	else if((stat & NOPOWER) && !interact_offline)
+	else if((stat & MACHINE_STAT_NOPOWER) && !interact_offline)
 		to_chat(user, SPAN_WARNING("It is not receiving power."))
 	if(construct_state && construct_state.mechanics_info())
 		to_chat(user, SPAN_NOTICE("It can be <a href='?src=\ref[src];mechanics_text=1'>manipulated</a> using tools."))
@@ -477,7 +477,7 @@
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/water_act(depth)
 	..()
-	if(!(stat & (NOPOWER|BROKEN)) && !waterproof && (depth > FLUID_DEEP))
+	if(!(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)) && !waterproof && (depth > FLUID_DEEP))
 		ex_act(EX_ACT_LIGHT)
 
 /obj/machinery/Move()

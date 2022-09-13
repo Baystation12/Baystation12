@@ -21,7 +21,7 @@
 	var/working_sound
 
 /obj/machinery/power/port_gen/proc/IsBroken()
-	return (stat & (BROKEN|EMPED))
+	return (stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_EMPED))
 
 /obj/machinery/power/port_gen/proc/HasFuel() //Placeholder for fuel check.
 	return 1
@@ -88,20 +88,20 @@
 	var/duration
 	switch(severity)
 		if(EMP_ACT_HEAVY)
-			stat &= BROKEN
+			stat &= MACHINE_STAT_BROKEN
 			if(prob(75)) explode()
 			else duration = 10 MINUTES
 		if(EMP_ACT_LIGHT)
-			if(prob(25)) stat &= BROKEN
+			if(prob(25)) stat &= MACHINE_STAT_BROKEN
 			if(prob(10)) explode()
 			else duration = 30 SECONDS
 
 	if(duration)
-		stat |= EMPED
+		stat |= MACHINE_STAT_EMPED
 		addtimer(CALLBACK(src, .proc/resolve_emp_timer), duration)
 
 /obj/machinery/power/port_gen/proc/resolve_emp_timer()
-	stat &= ~EMPED
+	stat &= ~MACHINE_STAT_EMPED
 
 /obj/machinery/power/port_gen/proc/explode()
 	explosion(src.loc, -1, 3, 5, -1)
