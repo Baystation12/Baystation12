@@ -44,7 +44,7 @@
 /obj/machinery/vitals_monitor/examine(mob/user)
 	. = ..()
 	if(victim)
-		if(stat & MACHINE_STAT_NOPOWER)
+		if(!is_powered())
 			to_chat(user, SPAN_NOTICE("It's unpowered."))
 			return
 		to_chat(user, SPAN_NOTICE("Vitals of [victim]:"))
@@ -127,7 +127,7 @@
 
 /obj/machinery/vitals_monitor/on_update_icon()
 	overlays.Cut()
-	if(stat & MACHINE_STAT_NOPOWER)
+	if(!is_powered())
 		return
 	overlays += image(icon, icon_state = "screen")
 

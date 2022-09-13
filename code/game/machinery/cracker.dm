@@ -46,13 +46,13 @@
 
 /obj/machinery/portable_atmospherics/cracker/power_change()
 	. = ..()
-	if(. && (stat & MACHINE_STAT_NOPOWER))
+	if(. && !is_powered())
 		update_use_power(POWER_USE_IDLE)
 		update_icon()
 
 /obj/machinery/portable_atmospherics/cracker/set_broken(new_state)
 	. = ..()
-	if(. && (stat & MACHINE_STAT_BROKEN))
+	if(. && is_broken())
 		update_use_power(POWER_USE_IDLE)
 		update_icon()
 

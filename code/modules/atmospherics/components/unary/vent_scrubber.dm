@@ -144,7 +144,7 @@
 	if (!node)
 		update_use_power(POWER_USE_OFF)
 	//broadcast_status()
-	if(!use_power || (stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)))
+	if(!use_power || (inoperable()))
 		return 0
 	if(welded)
 		return 0
@@ -192,7 +192,7 @@
 
 /obj/machinery/atmospherics/unary/vent_scrubber/cannot_transition_to(state_path, mob/user)
 	if(state_path == /decl/machine_construction/default/deconstructed)
-		if (!(stat & MACHINE_STAT_NOPOWER) && use_power)
+		if (is_powered() && use_power)
 			return SPAN_WARNING("You cannot take this [src] apart, turn it off first.")
 		var/turf/T = get_turf(src)
 		if (node && node.level==1 && isturf(T) && !T.is_plating())

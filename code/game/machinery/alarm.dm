@@ -181,7 +181,7 @@
 	return ..()
 
 /obj/machinery/alarm/Process()
-	if((stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)) || shorted || buildstage != 2)
+	if(inoperable() || shorted || buildstage != 2)
 		return
 
 	var/turf/simulated/location = loc
@@ -336,7 +336,7 @@
 		icon_state = "alarmx"
 		set_light(0)
 		return
-	if((stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)) || shorted)
+	if(inoperable() || shorted)
 		icon_state = "alarmp"
 		set_light(0)
 		return
@@ -827,7 +827,7 @@
 				return
 
 			if (istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer))// trying to unlock the interface with an ID card
-				if(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))
+				if(inoperable())
 					to_chat(user, "It does nothing")
 					return
 				else
@@ -955,10 +955,10 @@ FIRE ALARM
 		set_light(0)
 		return
 
-	if(stat & MACHINE_STAT_BROKEN)
+	if(is_broken())
 		overlays += get_cached_overlay("broken")
 		set_light(0)
-	else if(stat & MACHINE_STAT_NOPOWER)
+	else if(!is_powered())
 		overlays += get_cached_overlay("unpowered")
 		set_light(0)
 	else
@@ -1047,7 +1047,7 @@ FIRE ALARM
 	return
 
 /obj/machinery/firealarm/Process()//Note: this processing was mostly phased out due to other code, and only runs when needed
-	if(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))
+	if(inoperable())
 		return
 
 	if(src.timing)

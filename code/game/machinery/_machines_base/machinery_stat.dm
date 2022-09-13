@@ -64,9 +64,6 @@
 /**
  * Whether or not the machine is considered 'broken'. By default this translates directly to `stat_check(MACHINE_STAT_BROKEN)`.
  *
- * **Parameters**:
- * `additional_flags` (bitflag - Any of `MACHINE_STAT_*`) - Any additional stat flags to also check.
- *
  * Returns boolean.
  */
 /obj/machinery/proc/is_broken(additional_flags = EMPTY_BITFIELD)
@@ -76,9 +73,6 @@
 /**
  * Whether or not the machine is considered 'powered'. By default this translates directly to `!stat_check(MACHINE_STAT_NOPOWER)`.
  *
- * **Parameters**:
- * `additional_flags` (bitflag - Any of `MACHINE_STAT_*`) - Any additional stat flags to also check.
- *
  * Returns boolean.
  */
 /obj/machinery/proc/is_powered(additional_flags = EMPTY_BITFIELD)
@@ -86,8 +80,8 @@
 
 
 /// Inverse of `inoperable()`.
-/obj/machinery/proc/operable(additional_flags = EMPTY_BITFIELD)
-	return !inoperable(additional_flags)
+/obj/machinery/proc/operable()
+	return !inoperable()
 
 
 /// Checks whether or not the machine's state variable has the `MACHINE_STAT_BROKEN` or `MACHINE_STAT_NOPOWER` flags, or any of the provided `additional_flags`. Returns `TRUE` if any of the flags match.

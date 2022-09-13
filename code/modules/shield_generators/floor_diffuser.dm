@@ -37,7 +37,7 @@
 	if(alarm)
 		icon_state = "fdiffuser_emergency"
 		return
-	if((stat & (MACHINE_STAT_NOPOWER | MACHINE_STAT_BROKEN)) || !enabled)
+	if(inoperable() || !enabled)
 		icon_state = "fdiffuser_off"
 	else
 		icon_state = "fdiffuser_on"

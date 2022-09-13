@@ -180,7 +180,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 		return TOPIC_REFRESH
 
 /obj/machinery/photocopier/faxmachine/proc/sendfax(destination)
-	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
+	if(inoperable())
 		return
 
 	use_power_oneoff(200)
@@ -228,7 +228,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	return
 
 /obj/machinery/photocopier/faxmachine/proc/send_admin_fax(mob/sender, destination)
-	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
+	if(inoperable())
 		return
 
 	use_power_oneoff(200)

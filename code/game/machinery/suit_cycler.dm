@@ -314,7 +314,7 @@
 	if(!active)
 		return
 
-	if(active && stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
+	if(active && inoperable())
 		active = 0
 		irradiating = 0
 		electrified = 0

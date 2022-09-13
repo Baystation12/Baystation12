@@ -33,7 +33,7 @@
 	spark_system.attach(src)
 
 /obj/machinery/atm/Process()
-	if(stat & MACHINE_STAT_NOPOWER)
+	if(!is_powered())
 		return
 
 	if(ticks_left_timeout > 0)
@@ -73,7 +73,7 @@
 			//prevent inserting id into an emagged ATM
 			to_chat(user, "[icon2html(src, user)] <span class='warning'>CARD READER ERROR. This system has been compromised!</span>")
 			return
-		if(stat & MACHINE_STAT_NOPOWER)
+		if(!is_powered())
 			to_chat(user, "You try to insert your card into [src], but nothing happens.")
 			return
 

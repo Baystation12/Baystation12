@@ -38,7 +38,7 @@
 
 /datum/extension/interactive/ntos/console/host_status()
 	var/obj/machinery/M = holder
-	return !(M.stat & MACHINE_STAT_NOPOWER)
+	return M.is_powered()
 
 /datum/extension/interactive/ntos/console/extension_act(href, href_list, user)
 	. = ..()

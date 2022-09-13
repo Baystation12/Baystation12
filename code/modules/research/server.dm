@@ -69,7 +69,7 @@
 	if(!use_power)
 		return
 
-	if(!(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))) //Blatently stolen from telecoms
+	if(operable()) //Blatently stolen from telecoms
 		var/turf/simulated/L = loc
 		if(istype(L))
 			var/datum/gas_mixture/env = L.return_air()

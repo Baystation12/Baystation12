@@ -488,7 +488,7 @@
 	SSnano.update_uis(src)
 
 /obj/machinery/vending/Process()
-	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
+	if(inoperable())
 		return
 
 	if(!src.active)
@@ -509,7 +509,7 @@
 	return
 
 /obj/machinery/vending/proc/speak(message)
-	if(stat & MACHINE_STAT_NOPOWER)
+	if(!is_powered())
 		return
 
 	if (!message)
@@ -524,9 +524,9 @@
 
 /obj/machinery/vending/on_update_icon()
 	overlays.Cut()
-	if(stat & MACHINE_STAT_BROKEN)
+	if(is_broken())
 		icon_state = "[initial(icon_state)]-broken"
-	else if( !(stat & MACHINE_STAT_NOPOWER) )
+	else if( is_powered() )
 		icon_state = initial(icon_state)
 	else
 		spawn(rand(0, 15))
@@ -711,9 +711,9 @@
 
 /obj/machinery/vending/coffee/on_update_icon()
 	..()
-	if(stat & MACHINE_STAT_BROKEN && prob(20))
+	if(is_broken() && prob(20))
 		icon_state = "[initial(icon_state)]-hellfire"
-	else if(!(stat & MACHINE_STAT_NOPOWER))
+	else if(is_powered())
 		overlays += image(icon, "[initial(icon_state)]-screen")
 
 
@@ -817,7 +817,7 @@
 
 /obj/machinery/vending/fitness/on_update_icon()
 	..()
-	if(!(stat & MACHINE_STAT_NOPOWER))
+	if(is_powered())
 		overlays += image(icon, "[initial(icon_state)]-overlay")
 
 /obj/machinery/vending/cigarette
@@ -1261,7 +1261,7 @@
 
 /obj/machinery/vending/props/on_update_icon()
 	..()
-	if(!(stat & MACHINE_STAT_NOPOWER))
+	if(is_powered())
 		overlays += image(icon, "[initial(icon_state)]-overlay")
 
 //FOR ACTORS GUILD - Containers
@@ -1370,7 +1370,7 @@
 
 /obj/machinery/vending/snix/on_update_icon()
 	..()
-	if(!(stat & MACHINE_STAT_NOPOWER))
+	if(is_powered())
 		overlays += image(icon, "[initial(icon_state)]-fan")
 
 /obj/machinery/vending/sol
@@ -1429,7 +1429,7 @@
 
 /obj/machinery/vending/weeb/on_update_icon()
 	..()
-	if(!(stat & MACHINE_STAT_NOPOWER))
+	if(is_powered())
 		overlays += image(icon, "[initial(icon_state)]-fan")
 
 /obj/machinery/vending/hotfood
@@ -1451,7 +1451,7 @@
 
 /obj/machinery/vending/hotfood/on_update_icon()
 	..()
-	if(!(stat & MACHINE_STAT_NOPOWER))
+	if(is_powered())
 		overlays += image(icon, "[initial(icon_state)]-heater")
 
 

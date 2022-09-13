@@ -187,13 +187,13 @@
 /obj/machinery/shieldgen/power_change()
 	. = ..()
 	if(!. || !active) return
-	if (stat & MACHINE_STAT_NOPOWER)
+	if (!is_powered())
 		collapse_shields()
 	else
 		create_shields()
 
 /obj/machinery/shieldgen/Process()
-	if (!active || (stat & MACHINE_STAT_NOPOWER))
+	if (!active || (!is_powered()))
 		return
 
 	if(malfunction)
@@ -333,7 +333,7 @@
 
 
 /obj/machinery/shieldgen/on_update_icon()
-	if(active && !(stat & MACHINE_STAT_NOPOWER))
+	if(active && is_powered())
 		src.icon_state = malfunction ? "shieldonbr":"shieldon"
 	else
 		src.icon_state = malfunction ? "shieldoffbr":"shieldoff"

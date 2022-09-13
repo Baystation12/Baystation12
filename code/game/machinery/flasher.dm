@@ -25,7 +25,7 @@
 
 
 /obj/machinery/flasher/on_update_icon()
-	if ( !(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER)) )
+	if (operable())
 		icon_state = "[base_state]1"
 //		src.sd_SetLuminosity(2)
 	else
@@ -94,10 +94,7 @@
 	victim.Weaken(3)
 
 /obj/machinery/flasher/emp_act(severity)
-	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
-		..(severity)
-		return
-	if(prob(75/severity))
+	if (operable() && prob(75 / severity))
 		flash()
 	..(severity)
 

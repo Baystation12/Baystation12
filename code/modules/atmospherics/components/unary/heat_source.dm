@@ -64,7 +64,7 @@
 /obj/machinery/atmospherics/unary/heater/Process()
 	..()
 
-	if(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN) || !use_power)
+	if(inoperable() || !use_power)
 		heating = 0
 		update_icon()
 		return

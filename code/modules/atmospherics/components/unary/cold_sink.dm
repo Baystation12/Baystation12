@@ -114,7 +114,7 @@
 /obj/machinery/atmospherics/unary/freezer/Process()
 	..()
 
-	if(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN) || !use_power)
+	if(inoperable() || !use_power)
 		cooling = 0
 		update_icon()
 		return

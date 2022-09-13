@@ -10,7 +10,7 @@
 
 
 /obj/machinery/computer/shuttle/attackby(obj/item/card/W as obj, mob/user as mob)
-	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))	return
+	if(inoperable())	return
 
 	var/datum/evacuation_controller/shuttle/evac_control = evacuation_controller
 	if(!istype(evac_control))

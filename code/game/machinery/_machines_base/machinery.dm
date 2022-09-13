@@ -134,10 +134,10 @@
 				qdel(src)
 
 /obj/machinery/CanUseTopic(mob/user)
-	if(stat & MACHINE_STAT_BROKEN)
+	if(is_broken())
 		return STATUS_CLOSE
 
-	if(!interact_offline && (stat & MACHINE_STAT_NOPOWER))
+	if(!interact_offline && (!is_powered()))
 		return STATUS_CLOSE
 
 	if(user.direct_machine_interface(src))
@@ -149,10 +149,10 @@
 
 		return ..()
 
-	if(stat & MACHINE_STAT_NOSCREEN)
+	if(GET_FLAGS(stat, MACHINE_STAT_NOSCREEN))
 		return STATUS_CLOSE
 
-	if(stat & MACHINE_STAT_NOINPUT)
+	if(GET_FLAGS(stat, MACHINE_STAT_NOINPUT))
 		return min(..(), STATUS_UPDATE)
 	return ..()
 
@@ -167,7 +167,7 @@
 	return TRUE
 
 /obj/machinery/CanUseTopicPhysical(mob/user)
-	if(stat & MACHINE_STAT_BROKEN)
+	if(is_broken())
 		return STATUS_CLOSE
 
 	return GLOB.physical_state.can_use_topic(nano_host(), user)
@@ -354,11 +354,11 @@
 		to_chat(user, SPAN_NOTICE("The service panel is open."))
 	if(component_parts && hasHUD(user, HUD_SCIENCE))
 		display_parts(user)
-	if(stat & MACHINE_STAT_NOSCREEN)
+	if(GET_FLAGS(stat, MACHINE_STAT_NOSCREEN))
 		to_chat(user, SPAN_WARNING("It is missing a screen, making it hard to interact with."))
-	else if(stat & MACHINE_STAT_NOINPUT)
+	else if(GET_FLAGS(stat, MACHINE_STAT_NOINPUT))
 		to_chat(user, SPAN_WARNING("It is missing any input device."))
-	else if((stat & MACHINE_STAT_NOPOWER) && !interact_offline)
+	else if((!is_powered()) && !interact_offline)
 		to_chat(user, SPAN_WARNING("It is not receiving power."))
 	if(construct_state && construct_state.mechanics_info())
 		to_chat(user, SPAN_NOTICE("It can be <a href='?src=\ref[src];mechanics_text=1'>manipulated</a> using tools."))
@@ -426,7 +426,7 @@
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/water_act(depth)
 	..()
-	if(!(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)) && !waterproof && (depth > FLUID_DEEP))
+	if(operable() && !waterproof && (depth > FLUID_DEEP))
 		ex_act(EX_ACT_LIGHT)
 
 /obj/machinery/Move()

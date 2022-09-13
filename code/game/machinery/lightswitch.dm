@@ -34,7 +34,7 @@
 		overlay.layer = ABOVE_LIGHTING_LAYER
 
 	overlays.Cut()
-	if(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))
+	if(inoperable())
 		icon_state = "light-p"
 		set_light(0)
 	else
@@ -82,7 +82,7 @@
 		sync_state()
 
 /obj/machinery/light_switch/emp_act(severity)
-	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
+	if(inoperable())
 		..(severity)
 		return
 	power_change()

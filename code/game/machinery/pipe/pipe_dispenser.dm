@@ -90,7 +90,7 @@
 						"<span class='notice'>You have unfastened \the [src]. Now it can be pulled somewhere else.</span>", \
 						"You hear ratchet.")
 					anchored = FALSE
-					stat |= MACHINE_STAT_MAINT
+					set_stat(MACHINE_STAT_MAINT, TRUE)
 					update_use_power(POWER_USE_OFF)
 					if(user.machine==src)
 						close_browser(user, "window=pipedispenser")
@@ -103,7 +103,7 @@
 						"<span class='notice'>You have fastened \the [src]. Now it can dispense pipes.</span>", \
 						"You hear ratchet.")
 					anchored = TRUE
-					stat &= ~MACHINE_STAT_MAINT
+					set_stat(MACHINE_STAT_MAINT, FALSE)
 					update_use_power(POWER_USE_IDLE)
 			return
 	return ..()

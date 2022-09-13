@@ -85,7 +85,7 @@
 
 	//Check all the alarms before lowering atmosalm. Raising is perfectly fine.
 	for (var/obj/machinery/alarm/AA in src)
-		if (!(AA.stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)) && !AA.shorted && AA.report_danger_level)
+		if (AA.operable() && !AA.shorted && AA.report_danger_level)
 			danger_level = max(danger_level, AA.danger_level)
 
 	if(danger_level != atmosalm)

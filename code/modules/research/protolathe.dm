@@ -26,7 +26,7 @@
 
 /obj/machinery/r_n_d/protolathe/Process()
 	..()
-	if(stat & (MACHINE_STAT_BROKEN | MACHINE_STAT_NOPOWER))
+	if(inoperable())
 		update_icon()
 		return
 	if(queue.len == 0)
@@ -110,7 +110,7 @@
 	if(!istype(O, /obj/item/stack/material))
 		to_chat(user, "<span class='notice'>You cannot insert this item into \the [src]!</span>")
 		return 0
-	if(stat & (MACHINE_STAT_BROKEN | MACHINE_STAT_NOPOWER))
+	if(inoperable())
 		return 1
 
 	if(TotalMaterials() + SHEET_MATERIAL_AMOUNT > max_material_storage)

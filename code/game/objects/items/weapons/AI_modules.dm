@@ -25,10 +25,10 @@ AI MODULES
 	if(!istype(comp))
 		return
 
-	if(comp.stat & MACHINE_STAT_BROKEN)
+	if(comp.is_broken())
 		to_chat(user, "\The [comp] is broken!")
 		return
-	if(comp.stat & MACHINE_STAT_NOPOWER)
+	if(!comp.is_powered())
 		to_chat(user, "\The [comp] has no power!")
 		return
 	if(!comp.current)

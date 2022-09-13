@@ -151,7 +151,7 @@
 
 /obj/machinery/portable_atmospherics/powered/power_change()
 	. = ..()
-	if(. && (stat & MACHINE_STAT_NOPOWER))
+	if(. && (!is_powered()))
 		update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/portable_atmospherics/powered/components_are_accessible(path)

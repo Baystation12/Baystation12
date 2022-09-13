@@ -106,7 +106,7 @@
 
 /obj/machinery/atmospherics/binary/oxyregenerator/Process(delay)
 	..()
-	if((stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)) || !use_power)
+	if((inoperable()) || !use_power)
 		return
 
 	var/power_draw = -1
@@ -162,7 +162,7 @@
 			phase = "filling"
 
 /obj/machinery/atmospherics/binary/oxyregenerator/on_update_icon()
-	if(stat & MACHINE_STAT_NOPOWER)
+	if(!is_powered())
 		icon_state = "off"
 	else
 		icon_state = "[use_power ? "on" : "off"]"

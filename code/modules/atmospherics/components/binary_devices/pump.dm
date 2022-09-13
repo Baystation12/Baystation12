@@ -91,7 +91,7 @@ Thus, the two variables affect pump operation are set in New():
 	last_power_draw = 0
 	last_flow_rate = 0
 
-	if((stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)) || !use_power)
+	if((inoperable()) || !use_power)
 		return
 
 	var/power_draw = -1
@@ -121,7 +121,7 @@ Thus, the two variables affect pump operation are set in New():
 		return air2
 
 /obj/machinery/atmospherics/binary/pump/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
+	if(inoperable())
 		return
 
 	// this is the data which will be sent to the ui
@@ -174,7 +174,7 @@ Thus, the two variables affect pump operation are set in New():
 
 /obj/machinery/atmospherics/binary/pump/cannot_transition_to(state_path, mob/user)
 	if(state_path == /decl/machine_construction/default/deconstructed)
-		if (!(stat & MACHINE_STAT_NOPOWER) && use_power)
+		if (is_powered() && use_power)
 			return SPAN_WARNING("You cannot take this [src] apart, turn it off first.")
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()

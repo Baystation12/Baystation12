@@ -106,14 +106,14 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 	..()
 
 	if (use_power && !stat)
-		stat |= MACHINE_STAT_EMPED
+		set_stat(MACHINE_STAT_EMPED, TRUE)
 		disconnect_computers()
 		var/emp_time = rand(15 SECONDS, 30 SECONDS) / severity
 		addtimer(CALLBACK(src, .proc/emp_act_end), emp_time, TIMER_UNIQUE | TIMER_OVERRIDE)
 
 
 /obj/machinery/tele_beacon/proc/emp_act_end()
-	stat &= ~MACHINE_STAT_EMPED
+	set_stat(MACHINE_STAT_EMPED, FALSE)
 	update_icon()
 
 
@@ -145,7 +145,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 		disconnect_computers()
 
 
-/obj/machinery/tele_beacon/is_powered(additional_flags)
+/obj/machinery/tele_beacon/is_powered()
 	. = ..()
 	if (!.)
 		return
@@ -239,7 +239,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 	if (!anchored)
 		return FALSE
 
-	if (inoperable(MACHINE_STAT_EMPED))
+	if (inoperable() || GET_FLAGS(stat, MACHINE_STAT_EMPED))
 		return FALSE
 
 	var/turf/T = get_turf(src)

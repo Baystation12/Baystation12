@@ -66,7 +66,7 @@
 	if(!starter)
 		return
 	overlays.Cut()
-	if(stat & MACHINE_STAT_BROKEN)
+	if(is_broken())
 		return
 	rpm = 0.9* rpm + 0.1 * rpmtarget
 	var/datum/gas_mixture/environment = inturf.return_air()
@@ -78,7 +78,7 @@
 	rpm = max(0, rpm - (rpm*rpm)/COMPFRICTION)
 
 
-	if(starter && !(stat & MACHINE_STAT_NOPOWER))
+	if(starter && is_powered())
 		use_power_oneoff(2800)
 		if(rpm<1000)
 			rpmtarget = 1000
@@ -123,7 +123,7 @@
 	if(!compressor.starter)
 		return
 	overlays.Cut()
-	if(stat & MACHINE_STAT_BROKEN)
+	if(is_broken())
 		return
 	lastgen = ((compressor.rpm / TURBGENQ)**TURBGENG) *TURBGENQ
 
@@ -150,7 +150,7 @@
 
 /obj/machinery/power/turbine/interact(mob/user)
 
-	if ( (get_dist(src, user) > 1 ) || (stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)) && (!istype(user, /mob/living/silicon/ai)) )
+	if ( (get_dist(src, user) > 1 ) || (inoperable()) && (!istype(user, /mob/living/silicon/ai)) )
 		user.machine = null
 		close_browser(user, "window=turbine")
 		return

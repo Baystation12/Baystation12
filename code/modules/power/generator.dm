@@ -67,7 +67,7 @@
 		circ1.temperature_overlay = null
 	if (circ2)
 		circ2.temperature_overlay = null
-	if (stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))
+	if (inoperable())
 		return 1
 	else
 		if (lastgenlev != 0)
@@ -83,7 +83,7 @@
 		return 1
 
 /obj/machinery/power/generator/Process()
-	if(!circ1 || !circ2 || !anchored || stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
+	if(!circ1 || !circ2 || !anchored || inoperable())
 		stored_energy = 0
 		return
 

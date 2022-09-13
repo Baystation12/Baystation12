@@ -121,7 +121,7 @@
 	if(. == PROCESS_KILL)
 		return
 
-	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
+	if(inoperable())
 		if(use_power)
 			update_use_power(POWER_USE_OFF)
 			update_icon()

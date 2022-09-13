@@ -179,7 +179,7 @@
 	. = ..()
 	if (!.)
 		return
-	if (stat & MACHINE_STAT_NOPOWER)
+	if (!is_powered())
 		clear_target()
 
 

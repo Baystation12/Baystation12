@@ -31,7 +31,7 @@
 	update_icon()
 
 /obj/machinery/recharge_station/Process()
-	if(stat & (MACHINE_STAT_BROKEN | MACHINE_STAT_NOPOWER))
+	if(inoperable())
 		return
 
 	//First, recharge/repair/etc the occupant
@@ -151,12 +151,12 @@
 
 /obj/machinery/recharge_station/on_update_icon()
 	..()
-	if(stat & MACHINE_STAT_BROKEN)
+	if(is_broken())
 		icon_state = "borgcharger0"
 		return
 
 	if(occupant)
-		if(stat & MACHINE_STAT_NOPOWER)
+		if(!is_powered())
 			icon_state = "borgcharger2"
 		else
 			icon_state = "borgcharger1"

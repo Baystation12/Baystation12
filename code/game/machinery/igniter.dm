@@ -36,7 +36,7 @@
 	return TRUE
 
 /obj/machinery/igniter/Process()
-	if(!(stat & MACHINE_STAT_NOPOWER))
+	if(is_powered())
 		var/turf/location = src.loc
 		if (isturf(location))
 			location.hotspot_expose(1000,500,1)
@@ -142,7 +142,7 @@
 	return 1
 
 /obj/machinery/sparker/emp_act(severity)
-	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
+	if(inoperable())
 		..(severity)
 		return
 	ignite()

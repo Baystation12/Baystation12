@@ -33,7 +33,7 @@
 	dat += "<BR><BR><B>Request drone presence in area:</B> <A href='?src=\ref[src];setarea=1'>[drone_call_area]</A> (<A href='?src=\ref[src];ping=1'>Send ping</A>)"
 
 	dat += "<BR><BR><B>Drone fabricator</B>: "
-	dat += "[dronefab ? "<A href='?src=\ref[src];toggle_fab=1'>[(dronefab.produce_drones && !(dronefab.stat & MACHINE_STAT_NOPOWER)) ? "ACTIVE" : "INACTIVE"]</A>" : "<font color='red'><b>FABRICATOR NOT DETECTED.</b></font> (<A href='?src=\ref[src];search_fab=1'>search</a>)"]"
+	dat += "[dronefab ? "<A href='?src=\ref[src];toggle_fab=1'>[(dronefab.produce_drones && dronefab.is_powered()) ? "ACTIVE" : "INACTIVE"]</A>" : "<font color='red'><b>FABRICATOR NOT DETECTED.</b></font> (<A href='?src=\ref[src];search_fab=1'>search</a>)"]"
 	show_browser(user, dat, "window=computer;size=400x500")
 	onclose(user, "computer")
 	return
@@ -92,7 +92,7 @@
 
 		for(var/obj/machinery/drone_fabricator/fab in oview(3,src))
 
-			if(fab.stat & MACHINE_STAT_NOPOWER)
+			if(!fab.is_powered())
 				continue
 
 			dronefab = fab

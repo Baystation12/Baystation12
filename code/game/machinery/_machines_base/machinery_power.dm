@@ -37,11 +37,11 @@ This is /obj/machinery level code to properly manage power usage from the area.
 	if(stat_immune & MACHINE_STAT_NOPOWER)
 		return FALSE
 	var/oldstat = stat
-	stat |= MACHINE_STAT_NOPOWER
+	set_stat(MACHINE_STAT_NOPOWER, TRUE)
 	for(var/thing in power_components)
 		var/obj/item/stock_parts/power/power = thing
-		if((stat & MACHINE_STAT_NOPOWER) && power.can_provide_power(src))
-			stat &= ~MACHINE_STAT_NOPOWER
+		if((!is_powered()) && power.can_provide_power(src))
+			set_stat(MACHINE_STAT_NOPOWER, FALSE)
 		else
 			power.not_needed(src)
 

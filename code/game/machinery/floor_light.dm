@@ -43,7 +43,7 @@ var/global/list/floor_light_cache = list()
 			update_use_power(POWER_USE_OFF)
 			queue_icon_update()
 		visible_message("<span class='notice'>\The [user] has [anchored ? "attached" : "detached"] \the [src].</span>")
-	else if(isWelder(W) && (damaged || (stat & MACHINE_STAT_BROKEN)))
+	else if(isWelder(W) && (damaged || is_broken()))
 		var/obj/item/weldingtool/WT = W
 		if(!WT.remove_fuel(0, user))
 			to_chat(user, "<span class='warning'>\The [src] must be on to complete this task.</span>")
@@ -68,7 +68,7 @@ var/global/list/floor_light_cache = list()
 
 /obj/machinery/floor_light/physical_attack_hand(mob/user)
 	if(user.a_intent == I_HURT && !issmall(user))
-		if(!isnull(damaged) && !(stat & MACHINE_STAT_BROKEN))
+		if(!isnull(damaged) && !is_broken())
 			visible_message("<span class='danger'>\The [user] smashes \the [src]!</span>")
 			playsound(src, "shatter", 70, 1)
 			set_broken(TRUE)
@@ -94,7 +94,7 @@ var/global/list/floor_light_cache = list()
 
 /obj/machinery/floor_light/set_broken(new_state)
 	. = ..()
-	if(. && (stat & MACHINE_STAT_BROKEN))
+	if(. && is_broken())
 		update_use_power(POWER_USE_OFF)
 
 
@@ -104,7 +104,7 @@ var/global/list/floor_light_cache = list()
 
 
 /obj/machinery/floor_light/proc/update_brightness()
-	if((use_power == POWER_USE_ACTIVE) && !(stat & (MACHINE_STAT_NOPOWER | MACHINE_STAT_BROKEN)))
+	if((use_power == POWER_USE_ACTIVE) && operable())
 		if(light_outer_range != default_light_outer_range || light_max_bright != default_light_max_bright || light_color != default_light_colour)
 			set_light(default_light_max_bright, default_light_inner_range, default_light_outer_range, l_color = default_light_colour)
 			change_power_consumption((light_outer_range + light_max_bright) * 20, POWER_USE_ACTIVE)
@@ -114,7 +114,7 @@ var/global/list/floor_light_cache = list()
 
 /obj/machinery/floor_light/on_update_icon()
 	overlays.Cut()
-	if((use_power == POWER_USE_ACTIVE) && !(stat & (MACHINE_STAT_NOPOWER | MACHINE_STAT_BROKEN)))
+	if((use_power == POWER_USE_ACTIVE) && operable())
 		if(isnull(damaged))
 			var/cache_key = "floorlight-[default_light_colour]"
 			if(!floor_light_cache[cache_key])

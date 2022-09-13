@@ -58,7 +58,7 @@
 		system_error("system configuration error")
 		return
 
-	if(stat & MACHINE_STAT_NOPOWER)
+	if(!is_powered())
 		system_error("insufficient charge")
 		return
 
@@ -167,7 +167,7 @@
 		update_icon()
 		return TRUE
 	if(supported && !panel_open)
-		if(!(stat & MACHINE_STAT_NOPOWER))
+		if(is_powered())
 			set_active(!active)
 			if(active)
 				visible_message("<span class='notice'>\The [src] lurches downwards, grinding noisily.</span>")

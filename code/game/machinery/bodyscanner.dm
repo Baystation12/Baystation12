@@ -132,7 +132,7 @@
 /obj/machinery/bodyscanner/on_update_icon()
 	if(!occupant)
 		icon_state = "body_scanner_0"
-	else if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
+	else if(inoperable())
 		icon_state = "body_scanner_1"
 	else
 		icon_state = "body_scanner_2"

@@ -31,7 +31,7 @@
 
 
 /obj/machinery/portable_atmospherics/powered/scrubber/emp_act(severity)
-	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
+	if(inoperable())
 		..(severity)
 		return
 
@@ -43,7 +43,7 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/on_update_icon()
 	overlays.Cut()
 
-	if((use_power == POWER_USE_ACTIVE) && !(stat & (MACHINE_STAT_NOPOWER | MACHINE_STAT_BROKEN)))
+	if((use_power == POWER_USE_ACTIVE) && operable())
 		icon_state = "pscrubber:1"
 	else
 		icon_state = "pscrubber:0"
@@ -62,7 +62,7 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/proc/process_scrubber()
 	var/power_draw = -1
 
-	if((use_power == POWER_USE_ACTIVE) && !(stat & MACHINE_STAT_NOPOWER))
+	if((use_power == POWER_USE_ACTIVE) && is_powered())
 		var/datum/gas_mixture/environment
 		if(holding)
 			environment = holding.air_contents
@@ -185,7 +185,7 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/on_update_icon()
 	overlays.Cut()
 
-	if((use_power == POWER_USE_ACTIVE) && !(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN)))
+	if((use_power == POWER_USE_ACTIVE) && operable())
 		icon_state = "scrubber:1"
 	else
 		icon_state = "scrubber:0"

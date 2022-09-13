@@ -166,7 +166,7 @@
 	update_underlays()
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/can_pump()
-	if(stat & (MACHINE_STAT_NOPOWER|MACHINE_STAT_BROKEN))
+	if(inoperable())
 		return 0
 	if(!use_power)
 		return 0
@@ -311,7 +311,7 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWrench(W))
-		if (!(stat & MACHINE_STAT_NOPOWER) && use_power)
+		if (is_powered() && use_power)
 			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>")
 			return 1
 		var/turf/T = src.loc

@@ -18,9 +18,9 @@
 	var/static/list/issued_items = list()
 
 /obj/machinery/uniform_vendor/on_update_icon()
-	if(stat & MACHINE_STAT_BROKEN)
+	if(is_broken())
 		icon_state = "[initial(icon_state)]-broken"
-	else if(!(stat & MACHINE_STAT_NOPOWER))
+	else if(is_powered())
 		icon_state = initial(icon_state)
 	else
 		icon_state = "[initial(icon_state)]-off"

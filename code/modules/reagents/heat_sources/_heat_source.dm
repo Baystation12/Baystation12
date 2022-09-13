@@ -64,7 +64,7 @@
 	..()
 	if(temperature != last_temperature)
 		queue_icon_update()
-	if(((stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER)) || !anchored) && use_power >= POWER_USE_ACTIVE)
+	if(((inoperable()) || !anchored) && use_power >= POWER_USE_ACTIVE)
 		update_use_power(POWER_USE_IDLE)
 		queue_icon_update()
 
@@ -187,7 +187,7 @@
 
 /obj/machinery/reagent_temperature/proc/ToggleUsePower()
 
-	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
+	if(inoperable())
 		return TOPIC_HANDLED
 
 	update_use_power(use_power <= POWER_USE_IDLE ? POWER_USE_ACTIVE : POWER_USE_IDLE)

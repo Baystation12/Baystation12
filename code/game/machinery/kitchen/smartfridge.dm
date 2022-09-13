@@ -167,7 +167,7 @@
 		icon_state = "drying_rack"
 	if(contents.len)
 		icon_state = "drying_rack-plant"
-		if(!inoperable())
+		if(operable())
 			icon_state = "drying_rack-close"
 
 /obj/machinery/smartfridge/drying_rack/proc/dry()
@@ -209,7 +209,7 @@
 
 
 /obj/machinery/smartfridge/Process()
-	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
+	if(inoperable())
 		return
 	if(src.seconds_electrified > 0)
 		src.seconds_electrified--
@@ -218,7 +218,7 @@
 
 /obj/machinery/smartfridge/on_update_icon()
 	overlays.Cut()
-	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
+	if(inoperable())
 		icon_state = "[icon_base]-off"
 	else
 		icon_state = icon_base
@@ -271,7 +271,7 @@
 			attack_hand(user)
 		return
 
-	if(stat & MACHINE_STAT_NOPOWER)
+	if(!is_powered())
 		to_chat(user, "<span class='notice'>\The [src] is unpowered and useless.</span>")
 		return
 

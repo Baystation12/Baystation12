@@ -211,7 +211,7 @@
 		if(!istype(usr.get_active_hand(), /obj/item/device/multitool))
 			return
 
-	if(stat & (MACHINE_STAT_BROKEN|MACHINE_STAT_NOPOWER))
+	if(inoperable())
 		return
 
 	var/obj/item/device/multitool/P = get_multitool(usr)
