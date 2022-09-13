@@ -255,8 +255,8 @@
 
 /// Refreshes the machines parts-related `stat` flags, and calls `on_refresh()` on each component.
 /obj/machinery/proc/RefreshParts()
-	set_noinput(TRUE)
-	set_noscreen(TRUE)
+	set_stat(MACHINE_STAT_NOINPUT, TRUE)
+	set_stat(MACHINE_STAT_NOSCREEN, TRUE)
 	for(var/thing in component_parts)
 		var/obj/item/stock_parts/part = thing
 		part.on_refresh(src)
