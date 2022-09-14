@@ -1,0 +1,5 @@
+author: SealCure
+delete-after: true
+changes:
+  - rscadd: Adds a Th'oom variant of the explosive plushie. Hug your nearest one today!
+  - tweak: Makes exploding plushies say a themed message upon triggering.
