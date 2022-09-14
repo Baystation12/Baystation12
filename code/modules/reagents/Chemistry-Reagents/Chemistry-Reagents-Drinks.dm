@@ -236,7 +236,32 @@
 	glass_name = "lettuce juice"
 	glass_desc = "This is just lettuce water. Fresh but boring."
 
-// Everything else
+
+/datum/reagent/drink/thoom
+	name = "Th'oom Juice"
+	description = "A thick off-white fluid expressed from the juice glands of the Skrellian Th'oom."
+	taste_description = "thick, sweet, and savory ... milk?"
+	color = "#baeece"
+	glass_name = "th'oom juice"
+	glass_desc = "sweet and savory goodness!"
+	sugar_amount = 50
+	nutrition = 4
+	hydration = 3
+
+
+/datum/reagent/drink/thoom/affect_ingest(mob/living/carbon/carbon, alien, removed)
+	..()
+	if (alien == IS_DIONA)
+		return
+	holder.remove_reagent(/datum/reagent/capsaicin, 3 * removed)
+	if (alien == IS_SKRELL)
+		carbon.heal_organ_damage(1 * removed, 0)
+		carbon.add_chemical_effect(CE_PULSE, 1)
+		carbon.add_chemical_effect(CE_STIMULANT, 2)
+	else if (alien != IS_UNATHI)
+		carbon.heal_organ_damage(0.3 * removed, 0)
+
+
 
 /datum/reagent/drink/milk
 	name = "Milk"

@@ -145,6 +145,21 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/milk, 50)
 
+
+/obj/item/reagent_containers/food/drinks/bottle/thoom
+	name = "th'oom juice carton"
+	desc = "It's th'oom juice. Strangely sweet and savory!"
+	icon_state = "thoom"
+	item_state = "carton"
+	center_of_mass = "x=16;y=8"
+	can_shatter = FALSE
+
+
+/obj/item/reagent_containers/food/drinks/bottle/thoom/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/thoom, 50)
+
+
 /obj/item/reagent_containers/food/drinks/soymilk
 	name = "soymilk carton"
 	desc = "It's soy milk. White and nutritious goodness!"
