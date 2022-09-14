@@ -45,6 +45,7 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "kittenplushie"
 	var/phrase
+	var/last_words = "Meow"
 
 /obj/item/plushbomb/Initialize()
 	. = ..()
@@ -73,7 +74,7 @@
 		return
 	if (findtext(sanitize_phrase(msg), phrase))
 		addtimer(CALLBACK(src, .proc/activate), 5 SECONDS)
-		visible_message(SPAN_DANGER("\The [src] begins to beep ominously!"))
+		audible_message(SPAN_DANGER("\The [src] begins to beep ominously, letting out a loud '[last_words]'!"))
 		playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 
 /obj/item/plushbomb/proc/sanitize_phrase(phrase)
@@ -92,13 +93,22 @@
 	name = "diona nymph plush"
 	desc = "A plushie of an adorable diona nymph! While its level of self-awareness is still being debated, its level of cuteness is not."
 	icon_state = "nymphplushie"
+	last_words = "Chirp"
 
 /obj/item/plushbomb/spider
 	name = "spider plush"
 	desc = "A plushie of a fuzzy spider! It has eight legs - all the better to hug you with."
 	icon_state = "spiderplushie"
+	last_words = "Chitter"
 
 /obj/item/plushbomb/carp
 	name = "plush carp"
 	desc = "A plushie of an elated carp! Straight from the wilds of the Nyx frontier, now right here in your hands."
 	icon_state = "carpplushie"
+	last_words = "Gnash"
+
+/obj/item/plushbomb/thoom
+	name = "th'oom plush"
+	desc = "A plush Th'oom with big, button eyes. It smells like mushrooms."
+	icon_state = "thoomplushie"
+	last_words = "Q'moo"
