@@ -6,3 +6,4 @@
 #include "misc.dm"
 #include "outfits.dm"
 #include "tweaks.dm"
+#include "weapons.dm"

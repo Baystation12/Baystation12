@@ -168,12 +168,6 @@
 	item_cost = 52
 	path = /obj/item/gun/projectile/pistol/magnum_pistol
 
-/datum/uplink_item/item/visible_weapons/sigsauer
-	name = "Standard Military Pistol"
-	desc = "A regularly used and reliable weapon that is standard issue in the Navy."
-	item_cost = 40
-	path = /obj/item/gun/projectile/pistol/military/alt
-
 /datum/uplink_item/item/visible_weapons/detective_revolver
 	name = "Small Revolver"
 	desc = "A pocket-sized holdout revolver. Easily concealable.."

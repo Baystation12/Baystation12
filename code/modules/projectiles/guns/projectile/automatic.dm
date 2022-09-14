@@ -53,12 +53,11 @@
 
 	if(!ammo_magazine || !LAZYLEN(ammo_magazine.stored_ammo))
 		icon_state = "mpistolen-empty"
-		overlays += image(icon, "ammo_bad")
+		overlays += image(icon, "[initial(icon_state)]-ammo0")
 	else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
-		overlays += image(icon, "ammo_warn")
-		return
+		overlays += image(icon, "[initial(icon_state)]-ammo1")
 	else
-		overlays += image(icon, "ammo_ok")
+		overlays += image(icon, "[initial(icon_state)]-ammo2")
 
 /obj/item/gun/projectile/automatic/merc_smg
 	name = "submachine gun"
