@@ -85,6 +85,15 @@
 	containername = "milk crate"
 	cost = 15
 
+
+/decl/hierarchy/supply_pack/galley/thoom
+	name = "Perishables - Th'oom Juice"
+	contains = list(/obj/item/reagent_containers/food/drinks/bottle/thoom = 2)
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "th'oom juice crate"
+	cost = 10
+
+
 /decl/hierarchy/supply_pack/galley/pizza
 	num_contained = 5
 	name = "Emergency - Surprise pack of five pizzas"

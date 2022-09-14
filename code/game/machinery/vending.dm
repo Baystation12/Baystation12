@@ -638,10 +638,12 @@
 					/obj/item/reagent_containers/food/drinks/bottle/cream = 5,
 					/obj/item/reagent_containers/food/drinks/cans/sodawater = 15,
 					/obj/item/reagent_containers/food/drinks/bottle/grenadine = 5,
+					/obj/item/reagent_containers/food/drinks/bottle/thoom = 2,
 					/obj/item/reagent_containers/food/condiment/mint = 2,
 					/obj/item/reagent_containers/food/drinks/ice = 10,
 					/obj/item/glass_extra/stick = 15,
-					/obj/item/glass_extra/straw = 15)
+					/obj/item/glass_extra/straw = 15
+					)
 	contraband = list(/obj/item/reagent_containers/food/drinks/bottle/premiumwine = 5,
 					/obj/item/reagent_containers/food/drinks/bottle/premiumvodka = 5,
 					/obj/item/reagent_containers/food/drinks/bottle/patron = 5,

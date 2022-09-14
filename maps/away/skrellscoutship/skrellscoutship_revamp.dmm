@@ -2210,6 +2210,11 @@
 	pixel_y = 14
 	},
 /obj/structure/table/standard,
+/obj/item/reagent_containers/food/drinks/bottle/thoom{
+	pixel_x = 4;
+	pixel_y = 8
+	},
+/obj/item/reagent_containers/food/drinks/bottle/thoom,
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/rec)
 "gX" = (
