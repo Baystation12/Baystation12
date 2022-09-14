@@ -18,25 +18,26 @@
 				TRADER_INSULT_BAD        = "If I had my gun I'd shoot you!"
 				)
 
-	possible_trading_items = list(/obj/item/gun/projectile/pistol/holdout    = TRADER_ALL,
-								/obj/item/gun/projectile/pistol/military/alt    = TRADER_ALL,
-								/obj/item/gun/projectile/pistol/magnum_pistol= TRADER_ALL,
-								/obj/item/gun/projectile/pistol/sec         = TRADER_ALL,
-								/obj/item/gun/projectile/heavysniper/boltaction	= TRADER_ALL,
-								/obj/item/gun/projectile/pistol/sec/MK      = TRADER_BLACKLIST,
-								/obj/item/gun/projectile/shotgun/pump= TRADER_SUBTYPES_ONLY,
-								/obj/item/ammo_magazine                     = TRADER_SUBTYPES_ONLY,
-								/obj/item/ammo_magazine/pistol/empty         = TRADER_BLACKLIST,
-								/obj/item/ammo_magazine/mil_rifle/empty          = TRADER_BLACKLIST,
-								/obj/item/ammo_magazine/gyrojet/empty           = TRADER_BLACKLIST,
-								/obj/item/ammo_magazine/pistol/small/empty         = TRADER_BLACKLIST,
-								/obj/item/ammo_magazine/pistol/empty         = TRADER_BLACKLIST,
-								/obj/item/ammo_magazine/box/pistol/empty       = TRADER_BLACKLIST,
-								/obj/item/ammo_magazine/box/machinegun/empty      = TRADER_BLACKLIST,
-								/obj/item/ammo_magazine/machine_pistol/empty        = TRADER_BLACKLIST,
-								/obj/item/ammo_magazine/smg_top/empty        = TRADER_BLACKLIST,
-								/obj/item/ammo_magazine/magnum/empty           = TRADER_BLACKLIST,
-								/obj/item/clothing/accessory/storage/holster        = TRADER_ALL)
+	possible_trading_items = list(
+		/obj/item/gun/projectile/pistol/holdout = TRADER_ALL,
+		/obj/item/gun/projectile/pistol/magnum_pistol = TRADER_ALL,
+		/obj/item/gun/projectile/pistol/sec = TRADER_ALL,
+		/obj/item/gun/projectile/heavysniper/boltaction	= TRADER_ALL,
+		/obj/item/gun/projectile/pistol/sec/MK = TRADER_BLACKLIST,
+		/obj/item/gun/projectile/shotgun/pump = TRADER_SUBTYPES_ONLY,
+		/obj/item/ammo_magazine = TRADER_SUBTYPES_ONLY,
+		/obj/item/ammo_magazine/pistol/empty = TRADER_BLACKLIST,
+		/obj/item/ammo_magazine/mil_rifle/empty = TRADER_BLACKLIST,
+		/obj/item/ammo_magazine/gyrojet/empty = TRADER_BLACKLIST,
+		/obj/item/ammo_magazine/pistol/small/empty = TRADER_BLACKLIST,
+		/obj/item/ammo_magazine/pistol/empty = TRADER_BLACKLIST,
+		/obj/item/ammo_magazine/box/pistol/empty = TRADER_BLACKLIST,
+		/obj/item/ammo_magazine/box/machinegun/empty = TRADER_BLACKLIST,
+		/obj/item/ammo_magazine/machine_pistol/empty = TRADER_BLACKLIST,
+		/obj/item/ammo_magazine/smg_top/empty = TRADER_BLACKLIST,
+		/obj/item/ammo_magazine/magnum/empty = TRADER_BLACKLIST,
+		/obj/item/clothing/accessory/storage/holster = TRADER_ALL
+	)
 
 /datum/trader/ship/egunshop
 	name = "Energy Gun Shop Employee"

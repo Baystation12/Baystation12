@@ -804,15 +804,24 @@
 /obj/structure/closet/walllocker{
 	pixel_x = -32
 	},
-/obj/item/gun/projectile/pistol/military/alt,
-/obj/item/gun/projectile/pistol/military/alt,
-/obj/item/gun/projectile/pistol/military/alt,
+/obj/item/gun/projectile/pistol/optimus,
+/obj/item/gun/projectile/pistol/optimus,
+/obj/item/gun/projectile/pistol/optimus,
+/obj/item/gun/projectile/pistol/bobcat,
+/obj/item/gun/projectile/pistol/bobcat,
+/obj/item/gun/projectile/pistol/bobcat,
 /obj/item/ammo_magazine/pistol/double,
 /obj/item/ammo_magazine/pistol/double,
 /obj/item/ammo_magazine/pistol/double,
 /obj/item/ammo_magazine/pistol/double,
 /obj/item/ammo_magazine/pistol/double,
 /obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
 "MN" = (

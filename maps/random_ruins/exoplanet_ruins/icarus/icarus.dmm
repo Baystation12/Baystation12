@@ -672,7 +672,7 @@
 "sM" = (
 /obj/structure/table/glass,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/gun/projectile/pistol/military/icarus,
+/obj/item/gun/projectile/pistol/m22f/icarus,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icarus/bridge)
 "sO" = (

@@ -14,7 +14,6 @@
 				/obj/item/gun/energy/plasmacutter,
 				/obj/item/gun/energy/incendiary_laser,
 				/obj/item/gun/projectile/automatic/machine_pistol,
-				/obj/item/gun/projectile/pistol/military/alt,
 				/obj/item/gun/projectile/pistol/holdout,
 				/obj/item/gun/projectile/revolver,
 				/obj/item/gun/projectile/revolver/medium,

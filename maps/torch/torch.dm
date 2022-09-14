@@ -1,5 +1,8 @@
 #if !defined(using_map_DATUM)
 
+	#include "../../packs/faction_iccgn/_pack.dm"
+	#include "../../packs/event_2022jul30/_pack.dm"
+
 	#include "torch_announcements.dm"
 	#include "torch_antagonism.dm"
 	#include "torch_areas.dm"
@@ -43,11 +46,14 @@
 	#include "datums/supplypacks/science.dm"
 	#include "datums/department_exploration.dm"
 
-	#include "game/antagonist/outsider/deathsquad.dm"
-	#include "game/antagonist/outsider/ert.dm"
-	#include "game/antagonist/outsider/foundation.dm"
-	#include "game/antagonist/outsider/mercenary.dm"
-	#include "game/antagonist/outsider/raider.dm"
+	#include "datums/uplink.dm"
+
+	#include "datums/antags/deathsquad.dm"
+	#include "datums/antags/ert.dm"
+	#include "datums/antags/foundation.dm"
+	#include "datums/antags/mercenary.dm"
+	#include "datums/antags/raider.dm"
+	#include "datums/antags/renegade.dm"
 
 	#include "items/cards_ids.dm"
 	#include "items/encryption_keys.dm"
@@ -63,8 +69,7 @@
 	#include "items/mecha.dm"
 	#include "items/memos.dm"
 
-	#include "../../packs/faction_iccgn/_pack.dm"
-	#include "../../packs/event_2022jul30/_pack.dm"
+	#include "spawners.dm"
 
 	#include "items/clothing/ec_skillbadges.dm"
 	#include "items/clothing/solgov-accessory.dm"
@@ -75,7 +80,8 @@
 	#include "items/clothing/solgov-suit.dm"
 	#include "items/clothing/solgov-under.dm"
 
-	#include "items/weapon/storage/wallets.dm"
+	#include "items/wallets.dm"
+	#include "items/weapons.dm"
 
 	#include "job/torch_access.dm"
 	#include "job/torch_jobs.dm"

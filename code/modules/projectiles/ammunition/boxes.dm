@@ -177,7 +177,7 @@
 	caliber = CALIBER_PISTOL
 	matter = list(MATERIAL_STEEL = 750)
 	ammo_type = /obj/item/ammo_casing/pistol
-	max_ammo = 10
+	max_ammo = 8
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/pistol/empty

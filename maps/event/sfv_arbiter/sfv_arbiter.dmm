@@ -1080,9 +1080,9 @@
 /obj/item/gun/energy/xray/pistol,
 /obj/item/gun/energy/xray/pistol,
 /obj/item/gun/energy/ionrifle,
-/obj/item/gun/projectile/pistol/military/alt,
-/obj/item/gun/projectile/pistol/military/alt,
-/obj/item/gun/projectile/pistol/military/alt,
+/obj/item/gun/projectile/pistol/m22f,
+/obj/item/gun/projectile/pistol/m22f,
+/obj/item/gun/projectile/pistol/m22f,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/sfv_arbiter)

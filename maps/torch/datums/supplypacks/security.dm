@@ -57,8 +57,13 @@
 
 /decl/hierarchy/supply_pack/security/pistol
 	name = "Weapons - Ballistic sidearms"
-	contains = list(/obj/item/gun/projectile/pistol/military = 4)
-	cost = 40
+	contains = list(
+		/obj/item/gun/projectile/pistol/m22f = 2,
+		/obj/item/gun/projectile/pistol/m19 = 2,
+		/obj/item/ammo_magazine/pistol/double = 2,
+		/obj/item/ammo_magazine/pistol = 2
+	)
+	cost = 50
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "ballistic sidearms crate"
 	access = access_armory
