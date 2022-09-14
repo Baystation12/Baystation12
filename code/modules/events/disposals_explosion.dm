@@ -55,7 +55,7 @@
 	bursting_pipe.set_health(rand(2, 4))
 
 /datum/event/disposals_explosion/announce()
-	command_announcement.Announce("Показания давления указывают на неминуемый взрыв в \the [get_area(bursting_pipe)] системы утилизации отходов. Секции трубопровода могут быть повреждены.", "[location_name()] Atmospheric Monitoring System", zlevels = affecting_z)
+	command_announcement.Announce("Показания давления указывают на неминуемый взрыв в отсеке [get_area(bursting_pipe)] системы утилизации отходов. Секции трубопровода могут быть повреждены.", "[location_name()] Atmospheric Monitoring System", zlevels = affecting_z)
 
 /datum/event/disposals_explosion/tick()
 	if(isnull(bursting_pipe))

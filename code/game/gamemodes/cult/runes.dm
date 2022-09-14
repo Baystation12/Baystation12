@@ -767,7 +767,7 @@
 	log_and_message_admins_many(cultists, "started summoning Nar-sie.")
 
 	var/area/A = get_area(src)
-	command_announcement.Announce("Высокие уровни помех в подпространстве обнаружены на \the [A]. Подозревается образование червоточины. Немедленно расследуйте данное происшествие.")
+	command_announcement.Announce("Высокие уровни помех в подпространстве обнаружены в отсеке [A]. Подозревается образование червоточины. Немедленно расследуйте данное происшествие.")
 	while(cultists.len > 4 || the_end_comes)
 		cultists = get_cultists()
 		if(cultists.len > 8)

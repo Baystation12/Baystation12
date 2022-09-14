@@ -8,7 +8,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	var/log = 0
 	var/sound
 	var/newscast = 0
-	var/channel_name = "Announcements"
+	var/channel_name = "Announcement System Records"
 	var/announcement_type = "Announcement"
 
 /datum/announcement/priority

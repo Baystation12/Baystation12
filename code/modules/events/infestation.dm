@@ -58,7 +58,7 @@
 		var/num = 0
 		for(var/i = 1 to severity)
 			num += rand(2,max_number)
-		log_and_message_admins("Нашествие паразитов породило ([vermstring2] x[num]) в \the [location]", location = pick_area_turf(location))
+		log_and_message_admins("Нашествие паразитов породило ([vermstring2] x[num]) в отсеке [location]", location = pick_area_turf(location))
 		while(vermin_turfs.len && num > 0)
 			var/turf/simulated/floor/T = pick(vermin_turfs)
 			vermin_turfs.Remove(T)
@@ -70,7 +70,7 @@
 				S.amount_grown = -1
 
 /datum/event/infestation/announce()
-	command_announcement.Announce("Биосканеры показывают, что [vermstring1] размножались в \the [location]. Дальнейшее заражение вероятно, если его не остановить.", "[location_name()] Biologic Sensor Network", zlevels = affecting_z)
+	command_announcement.Announce("Биосканеры показывают, что [vermstring1] размножались в отсеке [location]. Дальнейшее заражение вероятно, если его не остановить.", "[location_name()] Biologic Sensor Network", zlevels = affecting_z)
 
 /datum/event/infestation/proc/set_location_get_infestation_turfs()
 	location = pick_area(list(/proc/is_not_space_area, /proc/is_station_area))
