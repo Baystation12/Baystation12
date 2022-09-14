@@ -21854,13 +21854,13 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/storage)
 "lVb" = (
+/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/security{
 	id_tag = "detdoor";
 	name = "Forensic Lab";
 	secured_wires = 1
 	},
-/obj/machinery/door/firedoor,
-/turf/simulated/wall/prepainted,
+/turf/simulated/floor/tiled/steel_ridged,
 /area/security/evidence)
 "lVZ" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
