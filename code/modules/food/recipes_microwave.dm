@@ -1511,14 +1511,14 @@
 	result = /obj/item/reagent_containers/food/snacks/chilied_eggs
 
 
-/datum/recipe/hatchling_suprise
+/datum/recipe/hatchling_surprise
 	items = list(
 		/obj/item/reagent_containers/food/snacks/bacon,
 		/obj/item/reagent_containers/food/snacks/bacon,
 		/obj/item/reagent_containers/food/snacks/bacon,
 		/obj/item/reagent_containers/food/snacks/friedegg
 	)
-	result = /obj/item/reagent_containers/food/snacks/hatchling_suprise
+	result = /obj/item/reagent_containers/food/snacks/hatchling_surprise
 
 
 /datum/recipe/red_sun_special
