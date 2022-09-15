@@ -1,8 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - rscadd: Added edited versions of the older service pistols back as the M19 (Sol)
-      and Bobcat (GCN).
-  - tweak: All service pistols are available in uplinks, not just the Optimus.
-  - tweak: Renamed the P20 to the M22F.
-  - tweak: Non-double pistol magazines have 8 rounds instead of 10.
