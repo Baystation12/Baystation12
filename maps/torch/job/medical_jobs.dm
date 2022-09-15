@@ -154,7 +154,8 @@
 	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 20
 	alt_titles = list(
-		"Corpsman Trainee")
+		"Corpsman Trainee",
+		"Paramedic Trainee")  //PRX
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/doctor
 	allowed_branches = list(
@@ -206,7 +207,8 @@
 	ideal_character_age = 30
 	minimal_player_age = 7
 	alt_titles = list(
-		"Chemist"
+		"Chemist",
+		"Chemical Laboratory Technician"
 	)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
 	allowed_branches = list(

@@ -115,7 +115,7 @@ GLOBAL_LIST_EMPTY(skills)
 	desc = "Allows you to operate exosuits well."
 	levels = list("Untrained" = "You are unfamiliar with exosuit controls, and if you attempt to use them you are liable to make mistakes.",
 		"Trained" = "You are proficient in exosuit operation and safety, and can use them without penalties.")
-	prerequisites = list(SKILL_EVA = SKILL_ADEPT)
+	prerequisites = list(SKILL_EVA = SKILL_BASIC)
 	default_max = SKILL_BASIC
 	difficulty = SKILL_AVERAGE
 

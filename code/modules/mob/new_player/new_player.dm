@@ -307,12 +307,12 @@
 	header += "Round Duration: [roundduration2text()]<br>"
 
 	if(evacuation_controller.has_evacuated())
-		header += "<font color='red'><b>[station_name()] была эвакуирована.</b></font><br>"
+		header += "<font color='red'><b>Персонал [GLOB.using_map.station_ru] был эвакуирован.</b></font><br>"
 	else if(evacuation_controller.is_evacuating())
 		if(evacuation_controller.emergency_evacuation) // Emergency shuttle is past the point of no recall
-			header += "<font color='red'>[station_name()] в текущий момент эвакуируется.</font><br>"
+			header += "<font color='red'>[GLOB.using_map.station_ru] выполняет процедуру эвакуации прямо сейчас.</font><br>"
 		else                                           // Crew transfer initiated
-			header += "<font color='red'>[station_name()] в текущий момент перемещается в следующий сектор.</font><br>"
+			header += "<font color='red'>[GLOB.using_map.station_ru] выполняет процедуру перемещения в следующую систему по маршруту.</font><br>"
 
 	var/list/dat = list()
 	dat += "Выберите одну из доступных ролей:<br>"

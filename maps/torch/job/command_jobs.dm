@@ -394,7 +394,7 @@
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
 	skill_points = 20
 
-	alt_titles = list("Adjutant")
+	alt_titles = list("Adjutant","Helmsman","Coordination Officer","Command Secretary") //PRX
 
 	access = list(
 		access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage,

@@ -366,7 +366,7 @@
 
 	var/show_log = alert(src, "Show ion message?", "Message", "Yes", "No")
 	if(show_log == "Yes")
-		command_announcement.Announce("Ion storm detected near the [station_name()]. Please check all AI-controlled equipment for errors.", "Anomaly Alert", new_sound = 'sound/AI/ionstorm.ogg')
+		command_announcement.Announce("Ионная буря обнаружена вблизи [GLOB.using_map.station_name]. Пожалуйста, проверьте все оборудование, управляемое искусственным интеллектом, на наличие ошибок.", "Anomaly Alert", new_sound = 'sound/AI/ionstorm.ogg')
 
 	IonStorm(0)
 
@@ -522,7 +522,7 @@ Ccomp's first proc.
 
 	var/show_log = alert(src, "Show ion message?", "Message", "Yes", "No")
 	if(show_log == "Yes")
-		command_announcement.Announce("Ion storm detected near the [station_name()]. Please check all AI-controlled equipment for errors.", "Anomaly Alert", new_sound = 'sound/AI/ionstorm.ogg')
+		command_announcement.Announce("Ионная буря обнаружена вблизи [GLOB.using_map.station_name]. Пожалуйста, проверьте все оборудование, управляемое искусственным интеллектом, на наличие ошибок.", "Anomaly Alert", new_sound = 'sound/AI/ionstorm.ogg')
 
 /client/proc/cmd_admin_rejuvenate(mob/living/M as mob in SSmobs.mob_list)
 	set category = "Special Verbs"
@@ -562,7 +562,7 @@ Ccomp's first proc.
 		if("Yes")
 			command_announcement.Announce(input, customname, new_sound = GLOB.using_map.command_report_sound, msg_sanitized = 1);
 		if("No")
-			minor_announcement.Announce(message = "New [GLOB.using_map.company_name] Update available at all communication consoles.")
+			minor_announcement.Announce(message = "Новое объявление от [GLOB.using_map.company_name_ru] доступно на всех консолях связи.")
 
 	log_admin("[key_name(src)] has created a command report: [input]")
 	message_admins("[key_name_admin(src)] has created a command report", 1)

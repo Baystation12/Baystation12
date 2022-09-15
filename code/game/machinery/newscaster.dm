@@ -62,7 +62,7 @@
 	var/list/z_levels = list()
 
 /datum/feed_network/New()
-	CreateFeedChannel("Announcements", "SS13", 1, 1, "New Announcement Available")
+	CreateFeedChannel("Announcement System Records", "EXO Announcement System", 1, 1, "Доступно новое объявление!")
 
 /datum/feed_network/proc/CreateFeedChannel(channel_name, author, locked, adminChannel = 0, announcement_message)
 	var/datum/feed_channel/newChannel = new /datum/feed_channel
@@ -73,7 +73,7 @@
 	if(announcement_message)
 		newChannel.announcement = announcement_message
 	else
-		newChannel.announcement = "Breaking news from [channel_name]!"
+		newChannel.announcement = "Последние новости из [channel_name]!"
 	network_channels += newChannel
 
 /datum/feed_network/proc/SubmitArticle(msg, author, channel_name, obj/item/photo/photo, adminMessage = 0, message_type = "")
@@ -113,7 +113,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 
 
 /obj/machinery/newscaster
-	name = "newscaster"
+	name = "Newscaster"
 	desc = "A standard newsfeed handler. All the news you absolutely have no use for, in one place!"
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "newscaster_normal"
@@ -958,7 +958,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 	var/turf/T = get_turf(src)                      //Who the fuck uses spawn(600) anyway, jesus christ
 	if(news_call)
 		for(var/mob/O in hearers(world.view-1, T))
-			O.show_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"[news_call]\"</span>",2)
+			O.show_message("<span class='newscaster'><EM>[src.name]</EM> монотонно произносит, \"[news_call]\"</span>",2)
 		src.alert = 1
 		src.update_icon()
 		spawn(300)
@@ -967,6 +967,6 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 75, 1)
 	else
 		for(var/mob/O in hearers(world.view-1, T))
-			O.show_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"Attention! Wanted issue distributed!\"</span>",2)
+			O.show_message("<span class='newscaster'><EM>[src.name]</EM> монотонно произносит, \"Внимание. Обнаружена новая публикация.\"</span>",2)
 		playsound(src.loc, 'sound/machines/warning-buzzer.ogg', 75, 1)
 	return

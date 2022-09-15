@@ -11,7 +11,7 @@
 	accessible_z_levels = list("1"=1,"2"=3,"3"=1,"4"=1,"5"=1,"6"=1,"9"=30)
 	overmap_size = 35
 	overmap_event_areas = 34
-	usable_email_tlds = list("torch.ec.scg", "torch.fleet.mil", "army.mil", "freemail.net", "torch.scg")
+	usable_email_tlds = list("torch.ec.scg", "torch.fleet.mil", "army.mil", "freemail.net", "torch.scg", "torch.exo.cot")
 
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
 	default_spawn = "Cryogenic Storage"
@@ -20,9 +20,12 @@
 	station_short = "\improper Torch"
 	dock_name     = "TBD"
 	boss_name     = "Expeditionary Command"
+	boss_name_ru  = "Экспедиционное Командование" //PRX
 	boss_short    = "Command"
 	company_name  = "Sol Central Government"
 	company_short = "SolGov"
+	company_name_ru = "Центрального Правительства Солнечной Системы" //PRX
+	station_ru = "\improper ГЭК Факел" //PRX
 
 	map_admin_faxes = list(
 		"Expeditionary Corps Command",

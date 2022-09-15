@@ -232,7 +232,7 @@
 	if (public_announce)
 		command_announcement.Announce(message, title, GLOB.using_map.command_report_sound, msg_sanitized = TRUE, zlevels = z_levels)
 	else
-		minor_announcement.Announce("New [GLOB.using_map.company_name] Update available at all communication consoles.", zlevels = z_levels)
+		minor_announcement.Announce("Новое объявление от [GLOB.using_map.company_name_ru] доступно на всех консолях связи.", zlevels = z_levels)
 	. = ..()
 
 

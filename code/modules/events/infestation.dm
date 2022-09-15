@@ -18,7 +18,8 @@
 	endWhen = 11
 	var/area/location
 	var/vermin
-	var/vermstring
+	var/vermstring1
+	var/vermstring2
 
 /datum/event/infestation/start()
 	var/list/vermin_turfs
@@ -40,21 +41,24 @@
 		if(VERM_MICE)
 			spawn_types = list(/mob/living/simple_animal/passive/mouse) // The base mouse type selects a random color for us
 			max_number = 12
-			vermstring = "mice"
+			vermstring1 = "мыши"
+			vermstring2 = "мышей"
 		if(VERM_LIZARDS)
 			spawn_types = list(/mob/living/simple_animal/passive/lizard)
-			max_number = 6
-			vermstring = "lizards"
+			max_number = 8
+			vermstring1 = "ящерицы"
+			vermstring2 = "ящериц"
 		if(VERM_SPIDERS)
 			spawn_types = list(/obj/effect/spider/spiderling)
-			max_number = 3
-			vermstring = "spiders"
+			max_number = 4
+			vermstring1 = "гигантские пауки"
+			vermstring2 = "потомство гигантского паука"
 
 	spawn(0)
 		var/num = 0
 		for(var/i = 1 to severity)
 			num += rand(2,max_number)
-		log_and_message_admins("Vermin infestation spawned ([vermstring] x[num]) in \the [location]", location = pick_area_turf(location))
+		log_and_message_admins("Нашествие паразитов породило ([vermstring2] x[num]) в отсеке [location]", location = pick_area_turf(location))
 		while(vermin_turfs.len && num > 0)
 			var/turf/simulated/floor/T = pick(vermin_turfs)
 			vermin_turfs.Remove(T)
@@ -66,7 +70,7 @@
 				S.amount_grown = -1
 
 /datum/event/infestation/announce()
-	command_announcement.Announce("Bioscans indicate that [vermstring] have been breeding in \the [location]. Further infestation is likely if left unchecked.", "[location_name()] Biologic Sensor Network", zlevels = affecting_z)
+	command_announcement.Announce("Биосканеры показывают, что [vermstring1] размножались в отсеке [location]. Дальнейшее заражение вероятно, если его не остановить.", "[location_name()] Biologic Sensor Network", zlevels = affecting_z)
 
 /datum/event/infestation/proc/set_location_get_infestation_turfs()
 	location = pick_area(list(/proc/is_not_space_area, /proc/is_station_area))

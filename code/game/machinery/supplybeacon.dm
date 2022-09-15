@@ -114,6 +114,6 @@
 		var/drop_x = src.x-2
 		var/drop_y = src.y-2
 		var/drop_z = src.z
-		command_announcement.Announce("Nyx Rapid Fabrication priority supply request #[rand(1000,9999)]-[rand(100,999)] recieved. Shipment dispatched via ballistic supply pod for immediate delivery. Have a nice day.", "Thank You For Your Patronage")
+		command_announcement.Announce("Приоритетный запрос на поставку Nyx Rapid Fabrication #[rand(1000,9999)]-[rand(100,999)] получен. Груз отправлен через баллистическую капсулу снабжения для немедленной доставки. Хорошего дня.", "Thank You For Your Patronage")
 		spawn(rand(100,300))
 			new /datum/random_map/droppod/supply(null, drop_x, drop_y, drop_z, supplied_drop = drop_type) // Splat.

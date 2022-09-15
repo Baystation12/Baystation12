@@ -9,7 +9,7 @@ var/global/can_call_ert
 /client/proc/response_team()
 	set name = "Dispatch Emergency Response Team"
 	set category = "Special Verbs"
-	set desc = "Send an emergency response team"
+	set desc = "Send an ERT"
 
 	if(!holder)
 		to_chat(usr, "<span class='danger'>Only administrators may use this command.</span>")
@@ -18,9 +18,9 @@ var/global/can_call_ert
 		to_chat(usr, "<span class='danger'>The game hasn't started yet!</span>")
 		return
 	if(send_emergency_team)
-		to_chat(usr, "<span class='danger'>[GLOB.using_map.boss_name] has already dispatched an emergency response team!</span>")
+		to_chat(usr, "<span class='danger'>[GLOB.using_map.boss_name] has already dispatched an ERT!</span>")
 		return
-	if(alert("Do you want to dispatch an Emergency Response Team?",,"Yes","No") != "Yes")
+	if(alert("Do you want to dispatch an ERT?",,"Yes","No") != "Yes")
 		return
 
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
@@ -30,40 +30,40 @@ var/global/can_call_ert
 				return
 
 	var/reason = input("What is the reason for dispatching this Emergency Response Team?", "Dispatching Emergency Response Team")
-		
+
 	if(!reason && alert("You did not input a reason. Continue anyway?",,"Yes", "No") != "Yes")
 		return
-	
+
 	if(send_emergency_team)
 		to_chat(usr, SPAN_DANGER("Looks like someone beat you to it!"))
 		return
-	
+
 	if(reason)
 		message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team for the reason: [reason]", 1)
 	else
 		message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team.", 1)
-		
+
 	log_admin("[key_name(usr)] used Dispatch Response Team.")
 	trigger_armed_response_team(1, reason)
 
 /client/verb/JoinResponseTeam()
 
-	set name = "Join Response Team"
+	set name = "Join ERT"
 	set category = "IC"
 
 	if(!MayRespawn(1))
-		to_chat(usr, "<span class='warning'>You cannot join the response team at this time.</span>")
+		to_chat(usr, "<span class='warning'>You cannot join the ERT at this time.</span>")
 		return
 
 	if(isghost(usr) || isnewplayer(usr))
 		if(!send_emergency_team)
-			to_chat(usr, "No emergency response team is currently being sent.")
+			to_chat(usr, "No ERT is currently being sent.")
 			return
 		if(jobban_isbanned(usr, MODE_ERT) || jobban_isbanned(usr, "Security Officer"))
-			to_chat(usr, "<span class='danger'>You are jobbanned from the emergency reponse team!</span>")
+			to_chat(usr, "<span class='danger'>You are jobbanned from the ERT!</span>")
 			return
 		if(GLOB.ert.current_antagonists.len >= GLOB.ert.hard_cap)
-			to_chat(usr, "The emergency response team is already full!")
+			to_chat(usr, "The ERT is already full!")
 			return
 		GLOB.ert.create_default(usr)
 	else
@@ -118,11 +118,11 @@ var/global/can_call_ert
 
 	// there's only a certain chance a team will be sent
 	if(!prob(send_team_chance))
-		command_announcement.Announce("It would appear that an emergency response team was requested for [station_name()]. Unfortunately, we were unable to send one at this time.", "[GLOB.using_map.boss_name]")
+		command_announcement.Announce("Зафиксирован сигнал запроса на отправление отряда быстрого реагирования со стороны [GLOB.using_map.station_name]. К сожалению, в настоящее время мы не смогли отправить ни однин из них.", "Fifth Fleet SCG")
 		can_call_ert = 0 // Only one call per round, ladies.
 		return
 
-	command_announcement.Announce("It would appear that an emergency response team was requested for [station_name()]. We will prepare and send one as soon as possible.", "[GLOB.using_map.boss_name]")
+	command_announcement.Announce("Обнаружен действующий запрос от [GLOB.using_map.station_name] на вызов отряда быстрого реагирования. Мы подготовим и отправим его как можно скорее.", "Fifth Fleet SCG")
 	evacuation_controller.add_can_call_predicate(new/datum/evacuation_predicate/ert())
 
 	GLOB.ert.reason = reason //Set it even if it's blank to clear a reason from a previous ERT

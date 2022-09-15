@@ -13,7 +13,7 @@
 	var/grid_restored_message = "Station power to the %STATION_NAME% will be restored at this time. We apologize for the inconvenience."
 	var/grid_restored_sound
 
-	var/meteor_detected_message = "Meteors have been detected on a collision course with the %STATION_NAME%."
+	var/meteor_detected_message = "Метеоры были обнаружены на курсе столкновения с %STATION_NAME%." //PRX
 	var/meteor_detected_sound
 
 	var/radiation_detected_message = "High levels of radiation has been detected in proximity of the %STATION_NAME%. Please report to the medical bay if any strange symptoms occur."
@@ -39,7 +39,7 @@
 	command_announcement.Announce(replacetext_char(grid_check_message, "%STATION_NAME%", station_name()), "Automated Grid Check", new_sound = grid_check_sound)
 
 /datum/map/proc/grid_restored_announcement()
-	command_announcement.Announce(replacetext_char(grid_restored_message, "%STATION_NAME%", station_name()), "Power Systems Nominal", new_sound = grid_restored_sound)
+	command_announcement.Announce(replacetext_char(grid_restored_message, "%STATION_NAME%", station_name()), "EXO Power Systems", new_sound = grid_restored_sound)
 
 /datum/map/proc/level_x_biohazard_announcement(var/bio_level)
 	if(!isnum(bio_level))
@@ -47,19 +47,19 @@
 	if(bio_level < 1 || bio_level > 9)
 		CRASH("Expected a number between 1 and 9, was: [log_info_line(bio_level)]")
 
-	command_announcement.Announce("Подтверждено наличие объекта [bio_level] уровня биологической опасности на борту [station_name()]. Весь экипаж должен ликвидировать угрозу.", "Биологическая Угроза", new_sound = level_x_biohazard_sound(bio_level))
+	command_announcement.Announce("Подтверждено наличие объекта [bio_level] уровня биологической опасности на борту [station_name()]. Уполномоченный экипаж обязан предпринять меры по ликвидации угрозы.", "EXO Internal Security System", new_sound = level_x_biohazard_sound(bio_level))
 
 /datum/map/proc/level_x_biohazard_sound(var/bio_level)
 	return
 
 /datum/map/proc/radiation_detected_announcement()
-	command_announcement.Announce(replacetext_char(radiation_detected_message, "%STATION_NAME%", station_name()), "Неизвестная Аномалия", new_sound = radiation_detected_sound)
+	command_announcement.Announce(replacetext_char(radiation_detected_message, "%STATION_NAME%", station_name()), "EXO Internal Security System", new_sound = radiation_detected_sound)
 
 /datum/map/proc/space_time_anomaly_detected_annoncement()
-	command_announcement.Announce("Space-time anomalies have been detected on the [station_name()]. Internals and voidsuits recommended.", "Anomaly Alert", new_sound = space_time_anomaly_sound)
+	command_announcement.Announce("Пространственно-временные аномалии были обнаружены на [station_name()]. Рекомендуется использовать устройства для защиты от агрессивной среды с пониженным давлением.", "Anomaly Alert", new_sound = space_time_anomaly_sound)
 
 /datum/map/proc/unidentified_lifesigns_announcement()
-	command_announcement.Announce(replacetext_char(unidentified_lifesigns_message, "%STATION_NAME%", station_name()), "Неизвестная Форма Жизни", new_sound = unidentified_lifesigns_sound)
+	command_announcement.Announce(replacetext_char(unidentified_lifesigns_message, "%STATION_NAME%", station_name()), "EXO Internal Security System", new_sound = unidentified_lifesigns_sound)
 
 /datum/map/proc/unknown_biological_entities_announcement()
-	command_announcement.Announce(replacetext_char(unknown_biological_entities_message, "%STATION_NAME%", station_name()), "Неизвестная Форма Жизни", new_sound = command_report_sound)
+	command_announcement.Announce(replacetext_char(unknown_biological_entities_message, "%STATION_NAME%", station_name()), "EXO Internal Security System", new_sound = command_report_sound)
