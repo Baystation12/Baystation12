@@ -207,7 +207,7 @@
 	skill_points = 20
 
 	access = list(
-		access_robotics, access_engine, access_solgov_crew, access_network, access_radio_eng
+		access_robotics, access_engine, access_solgov_crew, access_network, access_radio_eng, access_ai_upload
 	)
 
 /datum/job/roboticist/get_description_blurb()
