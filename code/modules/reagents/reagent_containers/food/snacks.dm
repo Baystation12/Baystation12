@@ -3717,14 +3717,14 @@
 	reagents.add_reagent(/datum/reagent/nutriment/protein/egg, 3)
 
 
-/obj/item/reagent_containers/food/snacks/hatchling_suprise
-	name = "hatchling suprise"
+/obj/item/reagent_containers/food/snacks/hatchling_surprise
+	name = "hatchling surprise"
 	desc = "A poached egg on top of several fried strips of meat, favoured by Unathi young and old alike. The real surprise is if you can feed it to your hatchling without losing a finger or two."
-	icon_state = "hatchling-suprise"
+	icon_state = "hatchling-surprise"
 	trash = /obj/item/trash/snack_bowl
 	bitesize = 5
 
-/obj/item/reagent_containers/food/snacks/hatchling_suprise/Initialize()
+/obj/item/reagent_containers/food/snacks/hatchling_surprise/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
 	reagents.add_reagent(/datum/reagent/nutriment/protein/egg, 3)
