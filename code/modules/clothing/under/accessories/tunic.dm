@@ -19,7 +19,7 @@
 /obj/item/clothing/accessory/tunic/zeng
 	name = "\improper Zeng-Hu tunic"
 	desc = "A fashionable tunic that Zeng-Hu provides to their lab workers."
-	icon_state = "tunic_heph"
+	icon_state = "tunic_zeng"
 
 
 /obj/item/clothing/accessory/tunic/exec
