@@ -75,7 +75,8 @@
 		/datum/mil_rank/army/e3,
 		/datum/mil_rank/army/e4_alt,
 		/datum/mil_rank/army/e5,
-		/datum/mil_rank/civ/contractor
+		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/civ
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_BASIC,
@@ -120,6 +121,7 @@
 		)
 	allowed_ranks = list(
 		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/ec/e3
 	)
 

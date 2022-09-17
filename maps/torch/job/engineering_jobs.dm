@@ -82,7 +82,8 @@
 		/datum/mil_rank/army/e3,
 		/datum/mil_rank/army/e4_alt,
 		/datum/mil_rank/army/e5,
-		/datum/mil_rank/civ/contractor
+		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/civ
 	)
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
 	                    SKILL_EVA          = SKILL_BASIC,
@@ -199,7 +200,9 @@
 		/datum/mil_rank/army/e4_alt,
 		/datum/mil_rank/army/e5,
 		/datum/mil_rank/ec/e5,
-		/datum/mil_rank/civ/contractor
+		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/civ
+
 	)
 	min_skill = list(   SKILL_COMPUTER		= SKILL_ADEPT,
 	                    SKILL_DEVICES		= SKILL_ADEPT,
