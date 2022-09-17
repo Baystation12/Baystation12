@@ -72,7 +72,8 @@
 		var/obj/item/stack/material/ST = W
 		if(ST.material.opacity > 0.7)
 			return 0
-		place_window(user, loc, SOUTHWEST, ST)
+
+		place_window(user, loc, ST)
 		return
 
 	if(isWrench(W))
