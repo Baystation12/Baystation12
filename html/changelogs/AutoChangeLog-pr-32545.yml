@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Hardsuit rigs no longer allow installing multiple types of vision modules
+      at a time, resulting in a broken state with said modules.
