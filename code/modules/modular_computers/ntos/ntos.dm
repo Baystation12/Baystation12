@@ -85,10 +85,10 @@
 		if(hard_drive)
 			if(prob(10))
 				hard_drive.visible_message("<span class='warning'>[src] emits some ominous clicks.</span>")
-				hard_drive.take_damage(hard_drive.damage_malfunction)
+				hard_drive.set_damage_malfunction()
 			else if(prob(5))
 				hard_drive.visible_message("<span class='warning'>[src] emits some ominous clicks.</span>")
-				hard_drive.take_damage(hard_drive.damage_failure)
+				hard_drive.set_damage_failure()
 	update_host_icon()
 
 /// Handles all setup when the system is booted up.
