@@ -1,5 +1,5 @@
 /datum/sprite_accessory/marking/human
-	species_allowed = list(SPECIES_HUMAN)
+	species_allowed = list(SPECIES_HUMAN, SPECIES_SHELL)
 	icon = 'icons/mob/human_races/species/human/bodymods.dmi'
 
 
@@ -86,4 +86,3 @@
 /datum/sprite_accessory/marking/human/horns/frills_short
 	icon_state = "horns_frills_short"
 	name = "Horn Biomods (Short Frills)"
-
