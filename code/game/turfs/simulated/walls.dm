@@ -111,8 +111,7 @@
 		var/obj/O = AM
 		var/tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 		playsound(src, hitsound, tforce >= 15? 60 : 25, TRUE)
-		if (can_damage_health(tforce, O.damtype))
-			damage_health(tforce, O.damtype)
+		damage_health(tforce, O.damtype)
 	..()
 
 /turf/simulated/wall/proc/clear_plants()

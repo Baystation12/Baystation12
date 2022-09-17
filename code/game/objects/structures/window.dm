@@ -272,7 +272,7 @@
 	if(can_damage_health(damage, DAMAGE_BRUTE))
 		visible_message("<span class='danger'>[user] [attack_verb] into [src]!</span>")
 		playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
-		damage_health(damage, DAMAGE_BRUTE)
+		damage_health(damage, DAMAGE_BRUTE, skip_can_damage_check = TRUE)
 	else
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	return 1
@@ -475,7 +475,7 @@
 			SPAN_WARNING("You hear the sound of something hitting a window.")
 		)
 		playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
-		damage_health(damage, damage_type)
+		damage_health(damage, damage_type, skip_can_damage_check = TRUE)
 		deanchor(user)
 	else
 		var/weapon_text = weapon ? " with \the [weapon]" : null
