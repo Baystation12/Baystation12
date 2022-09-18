@@ -176,12 +176,19 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
 	step_delay = 8
 
-/obj/item/reagent_containers/spray/chemsprayer/Spray_at(atom/A as mob|obj)
+/obj/item/reagent_containers/spray/chemsprayer/Spray_at(atom/A, mob/user, proximity)
 	var/direction = get_dir(src, A)
 	var/turf/T = get_turf(A)
 	var/turf/T1 = get_step(T,turn(direction, 90))
 	var/turf/T2 = get_step(T,turn(direction, -90))
 	var/list/the_targets = list(T, T1, T2)
+
+	if (reagents.should_admin_log())
+		var/contained = reagents.get_reagents()
+		if (istype(A, /mob))
+			admin_attack_log(user, A, "Used \the [src] containing [contained] to spray the victim", "Was sprayed by \the [src] containing [contained]", "used \the [src] containing [contained] to spray")
+		else
+			admin_attacker_log(user, "Used \the [name] containing [contained] to spray \the [A]")
 
 	for(var/a = 1 to 3)
 		spawn(0)
