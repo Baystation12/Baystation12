@@ -41,6 +41,20 @@
 	else
 		return
 
+/client/proc/awake_synth()
+	set category = "Admin"
+	set name = "Awake Synth"
+
+	var/datum/job/synthetic/synth = SSjobs.get_by_path(/datum/job/synthetic)
+	var/success
+	if(synth.total_positions == 0)
+		priority_announcement.Announce("Получен сигнал от неизвестного источника с командой на пробуждение экспериментальной синтетической единицей ЭКСО из общего хранилища.", "Attention!")
+		synth.total_positions = 1
+		success = 1
+		return success
+	else
+		return
+
 /datum/map/torch/roundend_player_status()
 	for(var/mob/Player in GLOB.player_list)
 		if(Player.mind && !isnewplayer(Player))

@@ -73,6 +73,7 @@
 		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/fleet/e5,
 		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/sol/agent,
 		/datum/mil_rank/sol/duty_agent,
 		/datum/mil_rank/sol/senior_agent,

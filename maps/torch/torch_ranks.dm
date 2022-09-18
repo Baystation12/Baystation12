@@ -730,8 +730,8 @@
 	name_short = "Civ"
 
 /datum/mil_rank/civ/contractor
-	name = "Contractor"
-	name_short = "Civ"
+	name = "Corporative Contractor"
+	name_short = "Cont"
 
 /datum/mil_rank/civ/synthetic
 	name = "Synthetic"
@@ -740,11 +740,7 @@
 /datum/mil_rank/civ/exo_synth
 	name = "EXO Synthetic"
 	name_short = "Synth"
-	accessory = list(/obj/item/clothing/accessory/badge/solgov/synthetic)
-
-/datum/mil_rank/civ/exo_synth
-	name = "EXO Synthetic"
-	accessory = list(/obj/item/clothing/accessory/badge/solgov/synthetic)
+	accessory = list(/obj/item/clothing/accessory/badge/solgov/synthetic)\
 
 /*
  *  SolGov Employees
