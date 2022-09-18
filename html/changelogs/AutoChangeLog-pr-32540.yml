@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - rscadd: Placing windows by clicking on grilles or low walls with sheets now prompts
-      the user for which type of window to build (Full-tile or directional).
