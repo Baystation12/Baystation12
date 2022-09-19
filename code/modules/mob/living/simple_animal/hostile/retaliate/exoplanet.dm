@@ -168,6 +168,8 @@
 
 	ai_holder = /datum/ai_holder/simple_animal/retaliate/royalcrab
 	say_list = /datum/say_list/royalcrab
+	meat_type = /obj/item/reagent_containers/food/snacks/shellfish/crab
+	meat_amount = 3
 
 /mob/living/simple_animal/hostile/retaliate/beast/charbaby
 	name = "charbaby"

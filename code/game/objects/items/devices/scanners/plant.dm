@@ -76,12 +76,12 @@
 	dat += "<h2>Other Data</h2>"
 
 	if(grown_seed.get_trait(TRAIT_HARVEST_REPEAT))
-		dat += "This plant can be harvested repeatedly.<br>"
+		dat += "This species can be harvested repeatedly.<br>"
 
 	if(grown_seed.get_trait(TRAIT_IMMUTABLE) == -1)
-		dat += "This plant is highly mutable.<br>"
+		dat += "This species is highly mutable.<br>"
 	else if(grown_seed.get_trait(TRAIT_IMMUTABLE) > 0)
-		dat += "This plant does not possess genetics that are alterable.<br>"
+		dat += "This species does not possess genetics that are alterable.<br>"
 
 	if(grown_seed.get_trait(TRAIT_REQUIRES_NUTRIENTS))
 		if(grown_seed.get_trait(TRAIT_NUTRIENT_CONSUMPTION) < 0.05)

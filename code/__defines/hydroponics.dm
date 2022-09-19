@@ -67,6 +67,7 @@
 #define SEED_NOUN_NODES           "nodes"
 #define SEED_NOUN_CUTTINGS        "cuttings"
 #define SEED_NOUN_SEEDS           "seeds"
+#define SEED_NOUN_EGGS            "eggs"
 
 #define GROWTH_WORMS      		  "worms"
 #define GROWTH_VINES      		  "vines"

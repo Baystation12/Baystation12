@@ -3701,6 +3701,47 @@
 		src.SetName("frosted jelly donut")
 	reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 2)
 
+
+/obj/item/reagent_containers/food/snacks/clam_chowder
+	name = "clam chowder"
+	desc = "A delicious creamy chowder made with clam and potatoes."
+	icon_state = "clam-chowder"
+	trash = /obj/item/trash/snack_bowl
+	nutriment_desc = list("clams" = 5)
+	nutriment_amt = 5
+	bitesize = 5
+	eat_sound = 'sound/items/drink.ogg'
+/obj/item/reagent_containers/food/snacks/clam_chowder/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/drink/milk/cream, 5)
+
+
+/obj/item/reagent_containers/food/snacks/bisque
+	name = "bisque"
+	desc = "A creamy soup garnished with lumps of crab meat. Bon appétit!"
+	icon_state = "bisque"
+	trash = /obj/item/trash/snack_bowl
+	nutriment_desc = list("crab" = 5)
+	nutriment_amt = 5
+	bitesize = 5
+	eat_sound = 'sound/items/drink.ogg'
+/obj/item/reagent_containers/food/snacks/bisque/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/drink/milk/cream, 5)
+
+
+/obj/item/reagent_containers/food/snacks/stuffed_clam
+	name = "stuffed clam"
+	desc = "A clam minced with breadcrumbs and baked in the shell."
+	icon_state = "stuffed-clam"
+	trash = /obj/item/shell/clam
+	bitesize = 2
+/obj/item/reagent_containers/food/snacks/stuffed_clam/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/sodiumchloride, 1)
+	reagents.add_reagent(/datum/reagent/blackpepper, 1)
+
+
 //unathi food
 
 /obj/item/reagent_containers/food/snacks/chilied_eggs
