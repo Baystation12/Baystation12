@@ -15,12 +15,6 @@ medals
 
 //medals ranked from least to greatest
 
-//Universal medals
-/obj/item/clothing/accessory/medal/solgov/medical
-	name = "\improper Combat Medical Award"
-	desc = "An electrum heart medal with a Staff of Hermes and sanguine cross, awarded by the SCG to individuals who have served as medical personnel in an active combat zone."
-	icon_state = "medal_medical"
-
 //Military medals
 /obj/item/clothing/accessory/medal/solgov/mil/bronze_heart
 	name = "\improper Bronze Heart medal"
@@ -36,6 +30,11 @@ medals
 	name = "\improper Iron Star medal"
 	desc = "An iron star awarded by the SCG to members of the SCG Defense Forces who have performed acts of 'meritorious achievements or service.'"
 	icon_state = "medal_iron_star"
+
+/obj/item/clothing/accessory/medal/solgov/mil/medical
+	name = "\improper Combat Medical Award"
+	desc = "An electrum heart medal with a Staff of Hermes and sanguine cross, awarded by the SCG to individuals who have served as medical personnel in an active combat zone."
+	icon_state = "medal_medical"
 
 /obj/item/clothing/accessory/medal/solgov/mil/armed_forces
 	name = "\improper Armed Forces Medal"
