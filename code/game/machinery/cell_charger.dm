@@ -29,7 +29,7 @@
 			to_chat(user, "Current charge: [charging.charge]")
 
 /obj/machinery/cell_charger/attackby(obj/item/W, mob/user)
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		return
 
 	if(istype(W, /obj/item/cell) && anchored)

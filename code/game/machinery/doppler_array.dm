@@ -40,7 +40,7 @@ var/global/list/doppler_arrays = list()
 		O.show_message("<span class='game say'><span class='name'>[src]</span> states coldly, \"[message]\"</span>",2)
 
 /obj/machinery/doppler_array/on_update_icon()
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		icon_state = "[initial(icon_state)]-broken"
 	else if(is_powered())
 		icon_state = initial(icon_state)

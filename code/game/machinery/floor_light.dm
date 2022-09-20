@@ -43,7 +43,7 @@ var/global/list/floor_light_cache = list()
 			update_use_power(POWER_USE_OFF)
 			queue_icon_update()
 		visible_message("<span class='notice'>\The [user] has [anchored ? "attached" : "detached"] \the [src].</span>")
-	else if(isWelder(W) && (damaged || is_broken()))
+	else if(isWelder(W) && (damaged || MACHINE_IS_BROKEN(src)))
 		var/obj/item/weldingtool/WT = W
 		if(!WT.remove_fuel(0, user))
 			to_chat(user, "<span class='warning'>\The [src] must be on to complete this task.</span>")
@@ -68,7 +68,7 @@ var/global/list/floor_light_cache = list()
 
 /obj/machinery/floor_light/physical_attack_hand(mob/user)
 	if(user.a_intent == I_HURT && !issmall(user))
-		if(!isnull(damaged) && !is_broken())
+		if(!isnull(damaged) && !MACHINE_IS_BROKEN(src))
 			visible_message("<span class='danger'>\The [user] smashes \the [src]!</span>")
 			playsound(src, "shatter", 70, 1)
 			set_broken(TRUE)
@@ -94,7 +94,7 @@ var/global/list/floor_light_cache = list()
 
 /obj/machinery/floor_light/set_broken(new_state)
 	. = ..()
-	if(. && is_broken())
+	if(. && MACHINE_IS_BROKEN(src))
 		update_use_power(POWER_USE_OFF)
 
 

@@ -164,7 +164,7 @@ var/global/list/turret_icons
 	underlays.Cut()
 	underlays += turret_icons["open"]
 
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		icon_state = "destroyed_target_prism"
 	else if(raised || raising)
 		if(powered() && enabled)
@@ -274,7 +274,7 @@ var/global/list/turret_icons
 
 
 /obj/machinery/porta_turret/attackby(obj/item/I, mob/user)
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		if(isCrowbar(I))
 			//If the turret is destroyed, you can remove it with a crowbar to
 			//try and salvage its components
@@ -534,7 +534,7 @@ var/global/list/turret_icons
 		return
 	if(raising || raised)
 		return
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		return
 	set_raised_raising(raised, 1)
 	update_icon()
@@ -555,7 +555,7 @@ var/global/list/turret_icons
 		return
 	if(raising || !raised)
 		return
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		return
 	set_raised_raising(raised, 1)
 	update_icon()

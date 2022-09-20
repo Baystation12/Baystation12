@@ -524,7 +524,7 @@
 
 /obj/machinery/vending/on_update_icon()
 	overlays.Cut()
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		icon_state = "[initial(icon_state)]-broken"
 	else if( is_powered() )
 		icon_state = initial(icon_state)
@@ -711,7 +711,7 @@
 
 /obj/machinery/vending/coffee/on_update_icon()
 	..()
-	if(is_broken() && prob(20))
+	if(MACHINE_IS_BROKEN(src) && prob(20))
 		icon_state = "[initial(icon_state)]-hellfire"
 	else if(is_powered())
 		overlays += image(icon, "[initial(icon_state)]-screen")

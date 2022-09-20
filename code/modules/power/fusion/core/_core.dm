@@ -33,7 +33,7 @@
 		fusion.set_tag(null, initial_id_tag)
 
 /obj/machinery/power/fusion_core/Process()
-	if((is_broken()) || !powernet || !owned_field)
+	if(MACHINE_IS_BROKEN(src) || !powernet || !owned_field)
 		Shutdown()
 
 /obj/machinery/power/fusion_core/Topic(href, href_list)
@@ -123,7 +123,7 @@
 	return TRUE
 
 /obj/machinery/power/fusion_core/proc/check_core_status()
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		return FALSE
 	if(idle_power_usage > avail())
 		return FALSE

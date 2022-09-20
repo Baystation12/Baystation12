@@ -37,7 +37,7 @@ var/global/list/rad_collectors = list()
 	. = ..()
 
 /obj/machinery/power/rad_collector/Process()
-	if((is_broken()) || melted)
+	if(MACHINE_IS_BROKEN(src) || melted)
 		return
 	var/turf/T = get_turf(src)
 	if(T)
@@ -78,7 +78,7 @@ var/global/list/rad_collectors = list()
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	. = TRUE
-	if((is_broken()) || melted)
+	if(MACHINE_IS_BROKEN(src) || melted)
 		to_chat(user, "<span class='warning'>The [src] is completely destroyed!</span>")
 	if(!src.locked)
 		toggle_power()
@@ -118,7 +118,7 @@ var/global/list/rad_collectors = list()
 		user.visible_message("[user.name] [anchored? "secures":"unsecures"] the [src.name].", \
 			"You [anchored? "secure":"undo"] the external bolts.", \
 			"You hear a ratchet")
-		if(anchored && !(is_broken()))
+		if(anchored && !MACHINE_IS_BROKEN(src))
 			connect_to_network()
 		else
 			disconnect_from_network()
@@ -138,7 +138,7 @@ var/global/list/rad_collectors = list()
 
 /obj/machinery/power/rad_collector/examine(mob/user, distance)
 	. = ..()
-	if (distance <= 3 && !(is_broken()))
+	if (distance <= 3 && !MACHINE_IS_BROKEN(src))
 		to_chat(user, "The meter indicates that \the [src] is collecting [last_power] W.")
 		return 1
 

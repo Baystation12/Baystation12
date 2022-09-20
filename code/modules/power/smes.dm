@@ -97,7 +97,7 @@
 
 /obj/machinery/power/smes/on_update_icon()
 	overlays.Cut()
-	if(is_broken())	return
+	if(MACHINE_IS_BROKEN(src))	return
 
 	overlays += image(overlay_icon, "smes-op[outputting]")
 
@@ -161,7 +161,7 @@
 		set_broken(!num_terminals)
 
 /obj/machinery/power/smes/Process()
-	if(is_broken())	return
+	if(MACHINE_IS_BROKEN(src))	return
 	if(failure_timer)	// Disabled by gridcheck.
 		failure_timer--
 		return
@@ -205,7 +205,7 @@
 // called after all power processes are finished
 // restores charge level to smes if there was excess this ptick
 /obj/machinery/power/smes/proc/restore(percent_load)
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		return
 
 	if(!outputting)

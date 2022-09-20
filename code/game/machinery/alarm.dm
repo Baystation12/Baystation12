@@ -955,7 +955,7 @@ FIRE ALARM
 		set_light(0)
 		return
 
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		overlays += get_cached_overlay("broken")
 		set_light(0)
 	else if(!is_powered())

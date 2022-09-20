@@ -60,15 +60,6 @@
 
 
 /**
- * Whether or not the machine is considered 'broken'. By default this translates directly to `!!reason_broken`.
- *
- * Returns boolean.
- */
-/obj/machinery/proc/is_broken()
-	return !!reason_broken
-
-
-/**
  * Whether or not the machine is considered 'powered'. By default this translates directly to `!stat_check(MACHINE_STAT_NOPOWER)`.
  *
  * Returns boolean.

@@ -86,7 +86,7 @@
 	return ..()
 
 /obj/machinery/turretid/attackby(obj/item/W, mob/user)
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		return
 
 	if(istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))

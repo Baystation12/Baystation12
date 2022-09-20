@@ -48,7 +48,7 @@
 	update_icon()
 
 /obj/machinery/conveyor/on_update_icon()
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		icon_state = "conveyor-broken"
 		operating = 0
 		return
@@ -97,7 +97,7 @@
 // attack with item, place item on conveyor
 /obj/machinery/conveyor/attackby(obj/item/I, mob/user)
 	if(isCrowbar(I))
-		if(!(is_broken()))
+		if(!MACHINE_IS_BROKEN(src))
 			var/obj/item/conveyor_construct/C = new/obj/item/conveyor_construct(src.loc)
 			C.id = id
 			transfer_fingerprints_to(C)

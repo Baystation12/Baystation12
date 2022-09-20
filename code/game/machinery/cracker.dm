@@ -52,7 +52,7 @@
 
 /obj/machinery/portable_atmospherics/cracker/set_broken(new_state)
 	. = ..()
-	if(. && is_broken())
+	if(. && MACHINE_IS_BROKEN(src))
 		update_use_power(POWER_USE_IDLE)
 		update_icon()
 

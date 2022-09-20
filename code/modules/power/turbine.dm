@@ -66,7 +66,7 @@
 	if(!starter)
 		return
 	overlays.Cut()
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		return
 	rpm = 0.9* rpm + 0.1 * rpmtarget
 	var/datum/gas_mixture/environment = inturf.return_air()
@@ -123,7 +123,7 @@
 	if(!compressor.starter)
 		return
 	overlays.Cut()
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		return
 	lastgen = ((compressor.rpm / TURBGENQ)**TURBGENG) *TURBGENQ
 

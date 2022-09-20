@@ -114,7 +114,7 @@
 		.+= "<span class='average'>Insufficient power to operate.</span>"
 	if(!check_fuel())
 		.+= "<span class='average'>Insufficient fuel for a burn.</span>"
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		.+= "<span class='average'>Inoperable engine configuration.</span>"
 	if(blockage)
 		.+= "<span class='average'>Obstruction of airflow detected.</span>"

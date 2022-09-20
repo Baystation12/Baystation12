@@ -21,7 +21,7 @@
 	var/working_sound
 
 /obj/machinery/power/port_gen/proc/IsBroken()
-	return (is_broken() || GET_FLAGS(stat, MACHINE_STAT_EMPED))
+	return (MACHINE_IS_BROKEN(src) || GET_FLAGS(stat, MACHINE_STAT_EMPED))
 
 /obj/machinery/power/port_gen/proc/HasFuel() //Placeholder for fuel check.
 	return 1

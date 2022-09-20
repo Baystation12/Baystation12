@@ -134,7 +134,7 @@
 				qdel(src)
 
 /obj/machinery/CanUseTopic(mob/user)
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		return STATUS_CLOSE
 
 	if(!interact_offline && (!is_powered()))
@@ -167,7 +167,7 @@
 	return TRUE
 
 /obj/machinery/CanUseTopicPhysical(mob/user)
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		return STATUS_CLOSE
 
 	return GLOB.physical_state.can_use_topic(nano_host(), user)

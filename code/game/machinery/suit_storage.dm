@@ -72,7 +72,7 @@
 		else
 			overlays += ("uv")
 	else if(isopen)
-		if(is_broken())
+		if(MACHINE_IS_BROKEN(src))
 			overlays += ("broken")
 		else
 			overlays += ("open")

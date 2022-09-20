@@ -29,7 +29,7 @@
 /obj/machinery/jukebox/on_update_icon()
 	overlays.Cut()
 	if (!anchored || inoperable())
-		icon_state = "[initial(icon_state)]-[is_broken() ? "broken" : "nopower"]"
+		icon_state = "[initial(icon_state)]-[MACHINE_IS_BROKEN(src) ? "broken" : "nopower"]"
 		return
 	icon_state = initial(icon_state)
 	if (!jukebox?.playing)

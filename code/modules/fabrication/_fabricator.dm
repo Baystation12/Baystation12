@@ -91,7 +91,7 @@
 	return ..()
 
 /obj/machinery/fabricator/proc/is_functioning()
-	. = use_power != POWER_USE_OFF && is_powered() && !(is_broken()) && !(fab_status_flags & FAB_DISABLED)
+	. = use_power != POWER_USE_OFF && is_powered() && !MACHINE_IS_BROKEN(src) && !(fab_status_flags & FAB_DISABLED)
 
 /obj/machinery/fabricator/Process(wait)
 	..()

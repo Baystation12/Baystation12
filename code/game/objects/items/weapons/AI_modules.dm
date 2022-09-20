@@ -25,7 +25,7 @@ AI MODULES
 	if(!istype(comp))
 		return
 
-	if(comp.is_broken())
+	if(MACHINE_IS_BROKEN(comp))
 		to_chat(user, "\The [comp] is broken!")
 		return
 	if(!comp.is_powered())

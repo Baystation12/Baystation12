@@ -151,7 +151,7 @@
 
 /obj/machinery/recharge_station/on_update_icon()
 	..()
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		icon_state = "borgcharger0"
 		return
 

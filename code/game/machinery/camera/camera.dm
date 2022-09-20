@@ -40,7 +40,7 @@
 
 /obj/machinery/camera/examine(mob/user)
 	. = ..()
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		to_chat(user, "<span class='warning'>It is completely demolished.</span>")
 
 /obj/machinery/camera/malf_upgrade(mob/living/silicon/ai/user)
@@ -187,7 +187,7 @@
 	else if((isWirecutter(W) || isMultitool(W)) && panel_open)
 		return wires.Interact(user)
 
-	else if(isWelder(W) && (camera_wires.CanDeconstruct() || (is_broken())))
+	else if(isWelder(W) && (camera_wires.CanDeconstruct() || (MACHINE_IS_BROKEN(src))))
 		if(weld(W, user))
 			if(assembly)
 				assembly.dropInto(loc)
@@ -196,7 +196,7 @@
 				assembly.camera_network = english_list(network, "Exodus", ",", ",")
 				assembly.update_icon()
 				assembly.dir = src.dir
-				if(is_broken())
+				if(MACHINE_IS_BROKEN(src))
 					assembly.state = 2
 					to_chat(user, "<span class='notice'>You repaired \the [src] frame.</span>")
 					cancelCameraAlarm()
@@ -304,7 +304,7 @@
 		else if(dir == EAST)
 			pixel_x = -10
 
-	if (!status || (is_broken()))
+	if (!status || (MACHINE_IS_BROKEN(src)))
 		icon_state = "[initial(icon_state)]1"
 	else if (GET_FLAGS(stat, MACHINE_STAT_EMPED))
 		icon_state = "[initial(icon_state)]emp"
@@ -326,7 +326,7 @@
 /obj/machinery/camera/proc/can_use()
 	if(!status)
 		return 0
-	if(is_broken() || GET_FLAGS(stat, MACHINE_STAT_EMPED))
+	if(MACHINE_IS_BROKEN(src) || GET_FLAGS(stat, MACHINE_STAT_EMPED))
 		return 0
 	return 1
 

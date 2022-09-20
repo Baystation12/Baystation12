@@ -214,7 +214,7 @@
 	if(!is_powered())
 		icon_state = "frame"
 		return
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		set_picture("ai_bsod")
 		return
 	if(src.timing)

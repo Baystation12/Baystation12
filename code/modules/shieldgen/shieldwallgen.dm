@@ -119,7 +119,7 @@
 /obj/machinery/shieldwallgen/Process()
 	..()
 	power = 0
-	if(!(is_broken()))
+	if(!MACHINE_IS_BROKEN(src))
 		power()
 	if(power)
 		storedpower -= active_power_usage //the generator post itself uses some power

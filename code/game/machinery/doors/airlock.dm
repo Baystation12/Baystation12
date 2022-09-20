@@ -716,7 +716,7 @@ About the new airlock wires panel:
 					lights_overlay = lights_file
 					set_light(0.25, 0.1, 1, 2, COLOR_LIME)
 
-		if(is_broken())
+		if(MACHINE_IS_BROKEN(src))
 			damage_overlay = sparks_broken_file
 		else if(health < maxhealth * 3/4)
 			damage_overlay = sparks_damaged_file
@@ -1051,7 +1051,7 @@ About the new airlock wires panel:
 	if(istype(C, /obj/item/taperoll))
 		return
 
-	if (!repairing && (is_broken()) && src.locked) //bolted and broken
+	if (!repairing && MACHINE_IS_BROKEN(src) && src.locked) //bolted and broken
 		if (!cut_bolts(C,user))
 			..()
 		return
@@ -1075,7 +1075,7 @@ About the new airlock wires panel:
 			return
 	else if(isScrewdriver(C))
 		if (src.p_open)
-			if (is_broken())
+			if (MACHINE_IS_BROKEN(src))
 				to_chat(user, "<span class='warning'>The panel is broken, and cannot be closed.</span>")
 			else
 				src.p_open = 0
@@ -1116,7 +1116,7 @@ About the new airlock wires panel:
 				spawn(0)	close(1)
 
 			//if door is unbroken, hit with fire axe using harm intent
-	else if (istype(C, /obj/item/material/twohanded/fireaxe) && !(is_broken()) && user.a_intent == I_HURT)
+	else if (istype(C, /obj/item/material/twohanded/fireaxe) && !MACHINE_IS_BROKEN(src) && user.a_intent == I_HURT)
 		var/obj/item/material/twohanded/fireaxe/F = C
 		if (F.wielded)
 			playsound(src, 'sound/weapons/smash.ogg', 100, 1)
@@ -1192,7 +1192,7 @@ About the new airlock wires panel:
 	da.created_name = src.name
 	da.update_state()
 
-	if(operating == -1 || (is_broken()))
+	if(operating == -1 || MACHINE_IS_BROKEN(src))
 		new /obj/item/stock_parts/circuitboard/broken(src.loc)
 		operating = 0
 	else

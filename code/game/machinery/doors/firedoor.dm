@@ -146,7 +146,7 @@
 
 /obj/machinery/door/firedoor/attack_generic(mob/user, damage)
 	playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
-	if(is_broken())
+	if(MACHINE_IS_BROKEN(src))
 		qdel(src)
 	..()
 
@@ -312,7 +312,7 @@
 	return ..()
 
 /obj/machinery/door/firedoor/deconstruct(mob/user, moved = FALSE)
-	if (is_broken())
+	if (MACHINE_IS_BROKEN(src))
 		new /obj/item/stock_parts/circuitboard/broken(loc)
 	else
 		new/obj/item/airalarm_electronics(loc)
