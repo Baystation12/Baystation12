@@ -1,0 +1,4 @@
+author: CrimsonShrike
+delete-after: true
+changes:
+  - bugfix: Fires can now be put out by flowing water.
