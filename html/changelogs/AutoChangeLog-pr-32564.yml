@@ -1,5 +1,0 @@
-author: Sweedle
-delete-after: true
-changes:
-  - rscadd: Medical medal is now selectable again, in the SolGov military award selection
-      accessory.
