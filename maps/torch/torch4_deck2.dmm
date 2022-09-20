@@ -4692,6 +4692,10 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/engineering/engine_smes)
+"kq" = (
+/obj/structure/decorative/ed209,
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/central)
 "kr" = (
 /obj/machinery/camera/network/engine{
 	c_tag = "Engine - Entrance";
@@ -36727,7 +36731,7 @@ eJ
 ft
 ic
 bf
-bK
+kq
 bK
 ei
 XP
