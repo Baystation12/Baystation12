@@ -199,7 +199,6 @@ function run_code_tests {
     pip install --user PyYaml -q
     pip install --user beautifulsoup4 -q
     shopt -s globstar
-    run_test "check unit tests contains all maps" "scripts/validateTestingContainsAllMaps.sh"
     run_test_fail "maps contain no step_[xy]" "grep 'step_[xy]' maps/**/*.dmm"
     run_test_fail "maps contain no layer adjustments" "grep 'layer = ' maps/**/*.dmm"
     run_test_fail "maps contain no plane adjustments" "grep 'plane = ' maps/**/*.dmm"
