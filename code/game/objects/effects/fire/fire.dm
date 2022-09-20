@@ -36,6 +36,8 @@
 
 	light_color = COLOR_ORANGE
 
+	waterproof = FALSE
+
 ///All the subtypes are for adminbussery and or mapping
 /obj/effect/turf_fire/magical
 	interact_with_atmos = FALSE
@@ -167,7 +169,7 @@
 	return
 
 /obj/effect/turf_fire/water_act(depth)
-	if (prob(depth))
+	if (prob(depth*depth))
 		qdel(src)
 		return
 
