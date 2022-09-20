@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: Chem sprayers now properly generate attack logs when spraying relevant
-      chemicals.
