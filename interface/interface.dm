@@ -8,6 +8,7 @@
 			return
 	send_link(src, url)
 
+/////
 
 /client/verb/link_wiki()
 	set name = "link wiki"

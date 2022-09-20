@@ -5,19 +5,31 @@ permissions:
 
 on:
   push:
-    branches:
-      - dev
+    branches: [ "dev" ]
   pull_request:
-    branches:
-      - dev
+    branches: [ "dev" ]
 env:
   BYOND_MAJOR: "514"
   BYOND_MINOR: "1585"
   SPACEMAN_DMM_VERSION: suite-1.7.2
 
 jobs:
+  PreFlight:
+    runs-on: ubuntu-latest
+    steps:
+      - id: changes
+        uses: dorny/paths-filter@b2feaf19c27470162a626bd6fa8438ae5b263721
+        with:
+          filters: |
+            dm:
+              - '*.dm'
+              - '*.dmm'
+              - '*.dmf'
+              - '*.dme'
   DreamChecker:
     runs-on: ubuntu-latest
+    needs: PreFlight
+    if: needs.PreFlight.outputs.dm == 'true'
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - name: Setup Cache
@@ -42,6 +54,8 @@ jobs:
           ./send.sh failure $WEBHOOK_URL
   Code:
     runs-on: ubuntu-latest
+    needs: PreFlight
+    if: needs.PreFlight.outputs.dm == 'true'
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - name: Setup Cache
@@ -66,11 +80,10 @@ jobs:
           wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
           chmod +x send.sh
           ./send.sh failure $WEBHOOK_URL
-  Maps:
+  ExampleMap:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        map_path: [example, torch, away_sites_testing]
+    needs: PreFlight
+    if: needs.PreFlight.outputs.dm == 'true'
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - name: Setup Cache
@@ -81,7 +94,61 @@ jobs:
       - name: Run Tests
         env:
           TEST: MAP
-          MAP_PATH: ${{ matrix.map_path }}
+          MAP_PATH: example
+        run: test/run-test.sh
+      - name: Run Failure Webhook
+        env:
+          JOB_STATUS: ${{ job.status }}
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          HOOK_OS_NAME: ${{ runner.os }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+        if: ${{ failure() }}
+        run: |
+          wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
+          chmod +x send.sh
+          ./send.sh failure $WEBHOOK_URL
+  TorchMap:
+    runs-on: ubuntu-latest
+    needs: PreFlight
+    if: needs.PreFlight.outputs.dm == 'true'
+    steps:
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - name: Setup Cache
+        uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77
+        with:
+          path: $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
+          key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
+      - name: Run Tests
+        env:
+          TEST: MAP
+          MAP_PATH: torch
+        run: test/run-test.sh
+      - name: Run Failure Webhook
+        env:
+          JOB_STATUS: ${{ job.status }}
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          HOOK_OS_NAME: ${{ runner.os }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+        if: ${{ failure() }}
+        run: |
+          wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
+          chmod +x send.sh
+          ./send.sh failure $WEBHOOK_URL
+  AwaySites:
+    runs-on: ubuntu-latest
+    needs: PreFlight
+    if: needs.PreFlight.outputs.dm == 'true'
+    steps:
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - name: Setup Cache
+        uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77
+        with:
+          path: $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
+          key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
+      - name: Run Tests
+        env:
+          TEST: MAP
+          MAP_PATH: away_sites_testing
         run: test/run-test.sh
       - name: Run Failure Webhook
         env:
