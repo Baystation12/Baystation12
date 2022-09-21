@@ -111,9 +111,9 @@
 	desc = "A passport from Saffar, within Sol Central Government space."
 
 /obj/item/passport/south_gaia
-	name = "\improper Southern Gaia passport"
+	name = "\improper Gaian Administrative Area passport"
 	icon_state = "passport_scg2"
-	desc = "A passport from the southern part of Gaia, under control of the Sol Central Government."
+	desc = "A passport from the southern part of Gaia, under military occupation of the Sol Central Government."
 
 /obj/item/passport/iccg
 	name = "\improper ICCG passport"
@@ -121,9 +121,14 @@
 	desc = "A passport from the Independent Colonial Confederation of Gilgamesh."
 
 /obj/item/passport/north_gaia
-	name = "\improper Northern Gaia passport"
+	name = "\improper Protectorate of Gaia passport"
 	icon_state = "passport_iccg2"
-	desc = "A passport from the northern part of Gaia, under control of the Independent Colonial Confederation of Gilgamesh."
+	desc = "A passport from the northern part of Gaia, under the control of the GCC supervised Protectorate of Gaia."
+
+/obj/item/passport/old_gaia
+	name = "\improper Republic of Gaia passport"
+	icon_state = "passport"
+	desc = "A passport from the Republic of Gaia. Issued before it's de-facto dissolusion in 2292, it is today backed by the International City of New Venice."
 
 /obj/item/passport/terra
 	name = "\improper Terra passport"
