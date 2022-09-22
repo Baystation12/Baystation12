@@ -54,6 +54,7 @@
 	desc = "A shield adept at blocking blunt objects from connecting with the torso of the shield wielder."
 	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "riot"
+	item_state = "riotshield"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
 	force = 5.0
@@ -94,6 +95,7 @@
 	name = "plasteel combat shield"
 	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "metal"
+	item_state = "metalshield"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
 	force = 6.0
@@ -110,6 +112,7 @@
 	desc = "A wooden buckler used to block sharp things from entering your body back in the day. Not very good at stopping projectiles, but still better than nothing."
 	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "buckler"
+	item_state = "buckler"
 	slot_flags = SLOT_BACK
 	force = 8
 	throwforce = 8
