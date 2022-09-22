@@ -800,10 +800,60 @@
 	desc = "A farwa plush doll. It's soft and comforting!"
 	icon_state = "farwaplushie"
 
+
 /obj/item/toy/plushie/thoom
 	name = "th'oom plush"
 	desc = "A plush Th'oom with big, button eyes. It smells like mushrooms."
 	icon_state = "thoomplushie"
+
+
+/obj/item/toy/plushie/carp_gold
+	name = "carp plush"
+	desc = "A plush golden space carp. Less threatening than the real thing."
+	icon_state = "carp-gold"
+
+
+/obj/item/toy/plushie/carp_purple
+	name = "carp plush"
+	desc = "A plush purple space carp. Less threatening than the real thing."
+	icon_state = "carp-purple"
+
+
+/obj/item/toy/plushie/carp_pink
+	name = "carp plush"
+	desc = "A plush pink space carp. Less threatening than the real thing."
+	icon_state = "carp-pink"
+
+
+/obj/item/toy/plushie/corgi
+	name = "corgi plush"
+	desc = "A plush corgi. Being tiny makes it cuter."
+	icon_state = "corgi"
+
+
+/obj/item/toy/plushie/corgi_bow
+	name = "corgi plush"
+	desc = "A plush corgi with a little bow on its head. Being tiny makes it cuter."
+	icon_state = "corgi-bow"
+
+
+/obj/item/toy/plushie/deer
+	name = "deer plush"
+	desc = "A plush deer. Somehow still majestic."
+	icon_state = "deer"
+
+
+/obj/item/toy/plushie/squid_blue
+	name = "squid plush"
+	desc = "A plush blue squid. Tentacular."
+	icon_state = "squid-blue"
+
+
+/obj/item/toy/plushie/squid_orange
+	name = "squid plush"
+	desc = "A plush orange squid. Tentacular."
+	icon_state = "squid-orange"
+
 
 //Toy cult sword
 /obj/item/toy/cultsword

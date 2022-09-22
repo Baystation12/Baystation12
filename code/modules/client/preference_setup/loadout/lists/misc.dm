@@ -111,6 +111,14 @@
 	plushes["lizard plush"] = /obj/item/toy/plushie/lizard
 	plushes["spider plush"] = /obj/item/toy/plushie/spider
 	plushes["farwa plush"] = /obj/item/toy/plushie/farwa
+	plushes["golden carp plush"] = /obj/item/toy/plushie/carp_gold
+	plushes["purple carp plush"] = /obj/item/toy/plushie/carp_purple
+	plushes["pink carp plush"] = /obj/item/toy/plushie/carp_pink
+	plushes["corgi plush"] = /obj/item/toy/plushie/corgi
+	plushes["corgi plush with bow"] = /obj/item/toy/plushie/corgi_bow
+	plushes["deer plush"] = /obj/item/toy/plushie/deer
+	plushes["blue squid plush"] = /obj/item/toy/plushie/squid_blue
+	plushes["orange squid plush"] = /obj/item/toy/plushie/squid_orange
 	gear_tweaks += new /datum/gear_tweak/path(plushes)
 
 /datum/gear/workvisa
