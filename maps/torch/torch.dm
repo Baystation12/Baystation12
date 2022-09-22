@@ -132,6 +132,7 @@
 	#include "structures/closets/services.dm"
 	#include "structures/closets/supply.dm"
 	#include "structures/closets/exploration.dm"
+	#include "structures/memorabilia.dm"
 
 	#include "loadout/_defines.dm"
 	#include "loadout/loadout_accessories.dm"
@@ -177,6 +178,7 @@
 
 	#include "../event/iccgn_ship/icgnv_hound.dm"
 	#include "../event/sfv_arbiter/sfv_arbiter.dm"
+	#include "../event/placeholders/placeholders.dm"
 
 
 	#define using_map_DATUM /datum/map/torch
