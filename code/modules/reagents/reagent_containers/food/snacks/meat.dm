@@ -46,3 +46,7 @@
 /obj/item/reagent_containers/food/snacks/meat/chicken/game
 	name = "game bird piece"
 	desc = "Fresh game meat, harvested from some wild bird."
+
+/obj/item/reagent_containers/food/snacks/meat/thoom
+	name = "reptile steak"
+	desc = "The most expensive steak you've ever laid eyes on."
