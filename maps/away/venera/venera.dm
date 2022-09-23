@@ -136,7 +136,7 @@
 	icon_state = "abomination"
 	icon_living = "abomination"
 	icon_dead = "abomination_dead"
-	speak_emote = list("twitches.")
+	speak_emote = list("трясётся")
 	turns_per_move = 5
 	see_in_dark = 20
 	response_help  = "pets"

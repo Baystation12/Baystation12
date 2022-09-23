@@ -7,7 +7,7 @@
 /datum/uplink_item/item/tools/personal_shield
 	name = "Personal Shield"
 	desc = "A very expensive device that uses energy to block bullets and lasers from tearing you a new hole."
-	item_cost = 60
+	item_cost = 55
 	path = /obj/item/device/personal_shield
 
 /datum/uplink_item/item/tools/toolbox
@@ -20,7 +20,7 @@
 /datum/uplink_item/item/tools/ductape
 	name = "Duct Tape"
 	desc = "A roll of duct tape."
-	item_cost = 2
+	item_cost = 1
 	path = /obj/item/tape_roll
 
 /datum/uplink_item/item/tools/money
@@ -40,7 +40,7 @@
 /datum/uplink_item/item/tools/plastique
 	name = "C-4"
 	desc = "Set this on a wall to put a hole exactly where you need it."
-	item_cost = 16
+	item_cost = 14
 	path = /obj/item/plastique
 
 /* //proxima //commented for now
@@ -76,7 +76,7 @@
 	desc = "This headset encryption key will allow you to both listen and speak on the binary channel that \
 	synthetics and AI have access to. Remember, non-synths don't normally have access to this channel, so talking in it will raise suspicion. \
 	Use a screwdriver on your headset to exchange keys."
-	item_cost = 20
+	item_cost = 22
 	path = /obj/item/device/encryptionkey/binary
 
 /datum/uplink_item/item/tools/emag
@@ -90,7 +90,7 @@
 
 /datum/uplink_item/item/tools/hacking_tool
 	name = "Door Hacking Tool"
-	item_cost = 24
+	item_cost = 22
 	path = /obj/item/device/multitool/hacktool
 	desc = "Appears and functions as a standard multitool until a screwdriver is used to toggle it. \
 			While in hacking mode, this device will grant full access to any airlock in 20 to 40 seconds. \
@@ -122,14 +122,14 @@
 	desc = "A device, that when bolted down to an exposed wire, spikes the surrounding electrical systems, \
 	draining power at an alarming rate. Use with caution, as this will be extremely noticable to anyone \
 	monitoring the power systems."
-	item_cost = 40
+	item_cost = 35
 	path = /obj/item/device/powersink
 
 /datum/uplink_item/item/tools/ai_module
 	name = "Hacked AI Upload Module"
 	desc = "A module that can be used anonymously add a singular, top level law to an active AI. \
 	All you need to do is write in the law and insert it into any available AI Upload Console."
-	item_cost = 52
+	item_cost = 55
 	path = /obj/item/aiModule/syndicate
 
 /datum/uplink_item/item/tools/supply_beacon
@@ -137,13 +137,13 @@
 	desc = "Wrench this large beacon onto an exposed power cable, in order to activate it. This will call in a \
 	drop pod to the target location, containing a random assortment of (possibly useful) items. \
 	The ship's computer system will announce when this pod is enroute."
-	item_cost = 52
+	item_cost = 45
 	path = /obj/item/supply_beacon
 
 /datum/uplink_item/item/tools/camera_mask
 	name = "Camera MIU"
 	desc = "Wearing this mask allows you to remotely view any cameras you currently have access to. Take the mask off to stop viewing."
-	item_cost = 60
+	item_cost = 40
 	antag_costs = list(MODE_MERCENARY = 30)
 	path = /obj/item/clothing/mask/ai
 
@@ -155,7 +155,7 @@
 
 /datum/uplink_item/item/tools/ttv
 	name = "Binary Gas Bomb"
-	item_cost = 30
+	item_cost = 40
 	path = /obj/effect/spawner/newbomb/traitor
 	desc = "A remote-activated phoron-oxygen bomb assembly with an included signaler. \
 			A flashing disclaimer begins with the warning 'SOME DISASSEMBLY/REASSEMBLY REQUIRED.'"

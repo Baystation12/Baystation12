@@ -19,24 +19,24 @@
 /datum/uplink_item/item/hardsuit_modules/maneuvering_jets
 	name = "\improper Maneuvering Jets"
 	desc = "A module capable of giving your suit an active thrust system, so that you can maneuver in zero gravity."
-	item_cost = 32
+	item_cost = 24
 	path = /obj/item/rig_module/maneuvering_jets
 
 /datum/uplink_item/item/hardsuit_modules/egun
 	name = "\improper Mounted Energy Gun"
 	desc = "A module that drains your power reserves in order to fire an arm mounted energy gun."
-	item_cost = 48
+	item_cost = 44
 	path = /obj/item/rig_module/mounted/egun
 
 /datum/uplink_item/item/hardsuit_modules/power_sink
 	name = "\improper Power Sink"
 	desc = "A module capable of recharging your suit's power reserves, by tapping into an exposed, live wire."
-	item_cost = 48
+	item_cost = 44
 	path = /obj/item/rig_module/power_sink
 
 /datum/uplink_item/item/hardsuit_modules/laser_canon
 	name = "\improper Mounted Laser Cannon"
 	desc = "A module capable of draining your suit's power reserves in order to fire a shoulder mounted laser cannon."
-	item_cost = 64
+	item_cost = 60
 	path = /obj/item/rig_module/mounted/lcannon
 	antag_roles = list(MODE_MERCENARY)

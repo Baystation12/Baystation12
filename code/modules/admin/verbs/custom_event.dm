@@ -1,7 +1,7 @@
 // verb for admins to set custom event
 /client/proc/cmd_admin_change_custom_event()
 	set category = "Fun"
-	set name = "Change Event"
+	set name = "Change Notification"
 
 	if(!holder)
 		to_chat(src, "Only administrators may use this command.")
@@ -19,7 +19,7 @@
 
 	config.event = input
 
-	to_world("<h1 class='alert'>Event</h1>")
+	to_world("<h1 class='alert'>Notification</h1>")
 	to_world("<h2 class='alert'>An event is starting. OOC Info:</h2>")
 	to_world("<span class='alert'>[config.event]</span>")
 	to_world("<br>")

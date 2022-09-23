@@ -10,8 +10,8 @@
 
 /decl/psionic_power/energistics/disrupt
 	name =            "Disrupt"
-	cost =            10
-	cooldown =        100
+	cost =            50
+	cooldown =        120
 	use_melee =       TRUE
 	min_rank =        PSI_RANK_MASTER
 	use_description = "Target the head, eyes or mouth while on harm intent to use a melee attack that causes a localized electromagnetic pulse."

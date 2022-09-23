@@ -339,6 +339,9 @@
 /decl/emote/visible/salute
 	emote_sound = 'sound/effects/salute.ogg'
 
+/decl/emote/visible/rsalute
+	emote_sound = 'sound/effects/salute.ogg'
+
 /decl/emote/visible/adjust
 	key = "adjust"
 	check_restraints = TRUE

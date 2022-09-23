@@ -7,7 +7,7 @@
 /datum/uplink_item/item/services/fake_ion_storm
 	name = "Ion Storm Announcement"
 	desc = "A single-use device, that when activated, fakes an announcement, so people think all their electronic readings are wrong."
-	item_cost = 8
+	item_cost = 10
 	path = /obj/item/device/uplink_service/fake_ion_storm
 
 /datum/uplink_item/item/services/suit_sensor_garble

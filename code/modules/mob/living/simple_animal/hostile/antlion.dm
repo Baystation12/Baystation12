@@ -6,7 +6,7 @@
 	icon_living = "antlion"
 	icon_dead = "antlion_dead"
 	mob_size = MOB_MEDIUM
-	speak_emote = list("clicks")
+	speak_emote = list("щёлкает")
 	response_harm   = "strikes"
 	faction = "antlions"
 	bleed_colour = COLOR_SKY_BLUE
