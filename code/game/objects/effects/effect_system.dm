@@ -261,7 +261,6 @@ would spawn and follow the beaker, even if it is carried or thrown.
 /obj/effect/effect/smoke/bad/affect(mob/living/carbon/M)
 	if (!..())
 		return 0
-	M.unequip_item()
 	M.adjustOxyLoss(1)
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
@@ -289,7 +288,6 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	if (!..())
 		return 0
 
-	M.unequip_item()
 	M:sleeping += 1
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
