@@ -1,6 +1,0 @@
-author: SomeAngryMiner
-delete-after: true
-changes:
-  - rscadd: Energy shields, riot shields, and combat shields have received a resprite.
-  - rscadd: same shields now also have a worn on-back state.
-  - rscadd: fixes unathi using the old bombsuit and firesuit sprites
