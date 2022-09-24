@@ -44,12 +44,11 @@
 /obj/machinery/fusion_fuel_injector/attackby(obj/item/W, mob/user)
 
 	if(isMultitool(W))
-		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
-		lanm.set_tag(null, initial_id_tag)
+		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
+		fusion.get_new_tag(user)
 		return
 
 	if(istype(W, /obj/item/fuel_assembly))
-
 		if(injecting)
 			to_chat(user, "<span class='warning'>Shut \the [src] off before playing with the fuel rod!</span>")
 			return
@@ -65,12 +64,12 @@
 		cur_assembly = W
 		return
 
-	if(isWrench(W))
+	if(isWelder(W))
 		if(injecting)
 			to_chat(user, "<span class='warning'>Shut \the [src] off first!</span>")
 			return
 		anchored = !anchored
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+		playsound(src.loc, 'sound/items/Welder.ogg', 75, 1)
 		if(anchored)
 			user.visible_message("\The [user] secures \the [src] to the floor.")
 		else

@@ -159,6 +159,8 @@
 			if(sheets_to_take > 0)
 				add_matter = min(max_stored_matter - stored_matter, sheets_to_take*matter_amount_per_sheet)
 				S.use(sheets_to_take)
+		else
+			to_chat(user, SPAN_WARNING("\The [src] is too full."))
 
 	else if(istype(W,/obj/item/organ))
 		var/obj/item/organ/O = W
@@ -166,10 +168,13 @@
 			if(!BP_IS_ROBOTIC(O))
 				to_chat(user, SPAN_WARNING("\The [src] only accepts robotic organs."))
 				return
-			var/recycle_worth = Floor(products[O.organ_tag][2] * 0.5)
-			if((max_stored_matter-stored_matter) >= recycle_worth)
-				add_matter = recycle_worth
-				qdel(O)
+			if(max_stored_matter == stored_matter)
+				to_chat(user, SPAN_WARNING("\The [src] is too full."))
+			else
+				var/recycle_worth = Floor(products[O.organ_tag][2] * 0.5)
+				if((max_stored_matter-stored_matter) >= recycle_worth)
+					add_matter = recycle_worth
+					qdel(O)
 		else
 			to_chat(user, SPAN_WARNING("\The [src] does not know how to recycle \the [O]."))
 			return
@@ -178,9 +183,7 @@
 
 	if(add_matter)
 		to_chat(user, SPAN_INFO("\The [src] processes \the [object_name]. Levels of stored matter now: [stored_matter]"))
-	else
-		to_chat(user, SPAN_WARNING("\The [src] is too full."))
-
+		return
 	return ..()
 // END ROBOT ORGAN PRINTER
 
