@@ -1,0 +1,12 @@
+author: Rootoo807
+delete-after: true
+changes:
+  - rscadd: Adds aquaculture. Seed vendors now contain 5 packets each of clam, oyster,
+      mussel, shrimp, and crab eggs, which can be planted in hydroponics trays. Additional
+      eggs can be purchased from Supply. Shellfish need to be cracked with a knife
+      before eating or cooking, except crabs, which are butchered as normal.
+  - rscadd: 3 new aquaculture-based cooking recipes added.
+  - tweak: Hydroponics satchels and SmartFridges can hold shellfish.
+  - tweak: Butchering crab simplemobs yields crab legs (including exoplant crabs).
+  - tweak: Seed display names standardized, minor fixes to hydroponics readout and
+      examine text.
