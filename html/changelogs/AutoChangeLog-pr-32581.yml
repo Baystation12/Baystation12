@@ -1,0 +1,8 @@
+author: SomeAngryMiner
+delete-after: true
+changes:
+  - rscadd: RUST injectors can now have their parts removed and linked to the fusion
+      network again. Anchoring and unanchoring now requires welding.
+  - rscadd: mechanical organ printers will no longer display "The prosthetic organ
+      printer is too full." at every interaction, and will only do it when its actually
+      full.
