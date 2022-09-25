@@ -44,7 +44,7 @@ var/global/explosion_in_progress = 0
 		if(!T) continue
 
 		//Wow severity looks confusing to calculate... Fret not, I didn't leave you with any additional instructions or help. (just kidding, see the line under the calculation)
-		var/severity = explosion_turfs[T] - T.get_explosion_resistance() // effective power on tile, factoring in the tile's explosion resistance
+		var/severity = explosion_turfs[T] // effective power on tile
 		severity /= max(3, power / 3) // One third the total explosion power - One third because there are three power levels and I want each one to take up a third of the crater
 		severity = clamp(severity, 1, 3) // Sanity
 		severity = 4 - severity // Invert the value to accomodate lower numbers being a higher severity. Removing this inversion would require a lot of refactoring of math in `ex_act()` handlers.
