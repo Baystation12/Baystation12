@@ -35,7 +35,8 @@ var/global/explosion_in_progress = 0
 			else
 				adj_power *= 0.45
 
-		T.explosion_spread(adj_power, direction)
+		if (adj_power > 0)
+			T.explosion_spread(adj_power, direction)
 
 	//This step applies the ex_act effects for the explosion, as planned in the previous step.
 	for(var/spot in explosion_turfs)
@@ -71,8 +72,6 @@ var/global/explosion_in_progress = 0
 //Code-wise, a safe value for power is something up to ~25 or ~30.. This does quite a bit of damage to the station.
 //direction is the direction that the spread took to come to this tile. So it is pointing in the main blast direction - meaning where this tile should spread most of it's force.
 /turf/proc/explosion_spread(power, direction)
-	if(power <= 0)
-		return
 
 	if(explosion_turfs[src] >= power)
 		return //The turf already sustained and spread a power greated than what we are dealing with. No point spreading again.
@@ -89,6 +88,8 @@ var/global/explosion_in_progress = 0
 		M.color = "#ffcc00"
 */
 	var/spread_power = power - src.get_explosion_resistance() //This is the amount of power that will be spread to the tile in the direction of the blast
+	if (spread_power <= 0)
+		return
 
 	var/turf/T = get_step(src, direction)
 	if(T)
