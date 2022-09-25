@@ -64,7 +64,7 @@
 
 /obj/machinery/door/blast/examine(mob/user)
 	. = ..()
-	if((stat & BROKEN))
+	if(MACHINE_IS_BROKEN(src))
 		to_chat(user, "It's broken.")
 
 // Proc: Bumped()
@@ -81,12 +81,12 @@
 // Description: Updates icon of this object. Uses icon state variables.
 /obj/machinery/door/blast/on_update_icon()
 	if(density)
-		if(stat & BROKEN)
+		if(MACHINE_IS_BROKEN(src))
 			icon_state = icon_state_closed_broken
 		else
 			icon_state = icon_state_closed
 	else
-		if(stat & BROKEN)
+		if(MACHINE_IS_BROKEN(src))
 			icon_state = icon_state_open_broken
 		else
 			icon_state = icon_state_open
@@ -142,7 +142,7 @@
 /obj/machinery/door/blast/attackby(obj/item/C as obj, mob/user as mob)
 	add_fingerprint(user, 0, C)
 	if(isCrowbar(C) || (istype(C, /obj/item/material/twohanded/fireaxe) && C:wielded == 1))
-		if(((stat & NOPOWER) || (stat & BROKEN)) && !( operating ))
+		if(((!is_powered()) || MACHINE_IS_BROKEN(src)) && !( operating ))
 			to_chat(user, "<span class='notice'>You begin prying at \the [src]...</span>")
 			if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
 				force_toggle()
@@ -175,7 +175,7 @@
 // Parameters: None
 // Description: Opens the door. Does necessary checks. Automatically closes if autoclose is true
 /obj/machinery/door/blast/open()
-	if (operating || (stat & BROKEN || stat & NOPOWER))
+	if (operating || (MACHINE_IS_BROKEN(src) || !is_powered()))
 		return
 	force_open()
 	if(autoclose)
@@ -187,12 +187,12 @@
 // Parameters: None
 // Description: Closes the door. Does necessary checks.
 /obj/machinery/door/blast/close()
-	if (operating || (stat & BROKEN || stat & NOPOWER))
+	if (operating || (MACHINE_IS_BROKEN(src) || !is_powered()))
 		return
 	force_close()
 
 /obj/machinery/door/blast/toggle()
-	if (operating || (stat & BROKEN || stat & NOPOWER))
+	if (operating || (MACHINE_IS_BROKEN(src) || !is_powered()))
 		return
 	force_toggle()
 
@@ -303,6 +303,6 @@
 	begins_closed = FALSE
 
 /obj/machinery/door/blast/shutters/attack_generic(mob/user, damage)
-	if(stat & BROKEN)
+	if(MACHINE_IS_BROKEN(src))
 		qdel(src)
 	..()

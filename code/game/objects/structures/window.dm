@@ -743,7 +743,7 @@
 
 /obj/machinery/button/windowtint/power_change()
 	. = ..()
-	if(active && (stat & NOPOWER))
+	if(active && (!is_powered()))
 		activate()
 
 /obj/machinery/button/windowtint/on_update_icon()

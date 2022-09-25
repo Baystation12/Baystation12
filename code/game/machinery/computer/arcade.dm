@@ -54,7 +54,7 @@
 	new prizeselect(get_turf(src))
 
 /obj/machinery/computer/arcade/emp_act(severity)
-	if(stat & (NOPOWER|BROKEN))
+	if(inoperable())
 		..(severity)
 		return
 	var/empprize = null

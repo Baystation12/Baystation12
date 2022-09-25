@@ -84,13 +84,13 @@ var/global/solar_gen_rate = 1500
 
 /obj/machinery/power/solar/proc/healthcheck()
 	if (src.health <= 0)
-		if(!(stat & BROKEN))
+		if(!MACHINE_IS_BROKEN(src))
 			set_broken(TRUE)
 
 /obj/machinery/power/solar/on_update_icon()
 	..()
 	overlays.Cut()
-	if(stat & BROKEN)
+	if(MACHINE_IS_BROKEN(src))
 		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel-b", layer = ABOVE_HUMAN_LAYER)
 	else
 		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel", layer = ABOVE_HUMAN_LAYER)
@@ -114,7 +114,7 @@ var/global/solar_gen_rate = 1500
 	//isn't the power received from the incoming light proportional to cos(p_angle) (Lambert's cosine law) rather than cos(p_angle)^2 ?
 
 /obj/machinery/power/solar/Process()
-	if(stat & BROKEN)
+	if(MACHINE_IS_BROKEN(src))
 		return
 	if(!control) //if there's no sun or the panel is not linked to a solar control computer, no need to proceed
 		return
@@ -341,7 +341,7 @@ var/global/solar_gen_rate = 1500
 
 //called by the sun controller, update the facing angle (either manually or via tracking) and rotates the panels accordingly
 /obj/machinery/power/solar_control/proc/update()
-	if(stat & (NOPOWER | BROKEN))
+	if(inoperable())
 		return
 
 	switch(track)
@@ -361,11 +361,11 @@ var/global/solar_gen_rate = 1500
 	set_panels(cdir)
 
 /obj/machinery/power/solar_control/on_update_icon()
-	if(stat & BROKEN)
+	if(MACHINE_IS_BROKEN(src))
 		icon_state = "broken"
 		overlays.Cut()
 		return
-	if(stat & NOPOWER)
+	if(!is_powered())
 		icon_state = "c_unpowered"
 		overlays.Cut()
 		return
@@ -411,7 +411,7 @@ var/global/solar_gen_rate = 1500
 	lastgen = gen
 	gen = 0
 
-	if(stat & (NOPOWER | BROKEN))
+	if(inoperable())
 		return
 
 	if(connected_tracker) //NOTE : handled here so that we don't add trackers to the processing list

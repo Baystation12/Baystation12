@@ -35,7 +35,7 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/shieldwallgen/on_update_icon()
-//	if(stat & BROKEN) -TODO: Broken icon
+//	if(is_broken()) -TODO: Broken icon
 	if(!active)
 		icon_state = "Shield_Gen"
 	else
@@ -119,7 +119,7 @@
 /obj/machinery/shieldwallgen/Process()
 	..()
 	power = 0
-	if(!(stat & BROKEN))
+	if(!MACHINE_IS_BROKEN(src))
 		power()
 	if(power)
 		storedpower -= active_power_usage //the generator post itself uses some power

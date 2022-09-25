@@ -164,7 +164,7 @@ var/global/list/turret_icons
 	underlays.Cut()
 	underlays += turret_icons["open"]
 
-	if(stat & BROKEN)
+	if(MACHINE_IS_BROKEN(src))
 		icon_state = "destroyed_target_prism"
 	else if(raised || raising)
 		if(powered() && enabled)
@@ -265,16 +265,16 @@ var/global/list/turret_icons
 
 /obj/machinery/porta_turret/power_change()
 	if(powered())
-		stat &= ~NOPOWER
+		set_stat(MACHINE_STAT_NOPOWER, FALSE)
 		queue_icon_update()
 	else
 		spawn(rand(0, 15))
-			stat |= NOPOWER
+			set_stat(MACHINE_STAT_NOPOWER, TRUE)
 			queue_icon_update()
 
 
 /obj/machinery/porta_turret/attackby(obj/item/I, mob/user)
-	if(stat & BROKEN)
+	if(MACHINE_IS_BROKEN(src))
 		if(isCrowbar(I))
 			//If the turret is destroyed, you can remove it with a crowbar to
 			//try and salvage its components
@@ -430,7 +430,7 @@ var/global/list/turret_icons
 	atom_flags |= ATOM_FLAG_CLIMBABLE // they're now climbable
 
 /obj/machinery/porta_turret/Process()
-	if(stat & (NOPOWER|BROKEN))
+	if(inoperable())
 		//if the turret has no power or is broken, make the turret pop down if it hasn't already
 		popDown()
 		return
@@ -534,7 +534,7 @@ var/global/list/turret_icons
 		return
 	if(raising || raised)
 		return
-	if(stat & BROKEN)
+	if(MACHINE_IS_BROKEN(src))
 		return
 	set_raised_raising(raised, 1)
 	update_icon()
@@ -555,7 +555,7 @@ var/global/list/turret_icons
 		return
 	if(raising || !raised)
 		return
-	if(stat & BROKEN)
+	if(MACHINE_IS_BROKEN(src))
 		return
 	set_raised_raising(raised, 1)
 	update_icon()

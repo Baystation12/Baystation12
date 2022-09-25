@@ -308,7 +308,7 @@
 ************************************/
 
 /obj/machinery/microwave/proc/cook()
-	if(stat & (NOPOWER|BROKEN))
+	if(inoperable())
 		return
 	start()
 	if (reagents.total_volume == 0 && !LAZYLEN(ingredients)) //dry run
@@ -368,7 +368,7 @@
 // Behold: the worst proc name in the codebase.
 /obj/machinery/microwave/proc/wzhzhzh(seconds)
 	for (var/i = 1 to seconds)
-		if (stat & (NOPOWER|BROKEN))
+		if (inoperable())
 			return FALSE
 		use_power_oneoff(500 / power_efficiency)
 		sleep(10 / speed_multiplier)

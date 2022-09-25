@@ -68,7 +68,7 @@
 					connection_failures = 0
 					continue
 				// The APC is damaged
-				if(theAPC.stat & BROKEN)
+				if(MACHINE_IS_BROKEN(theAPC))
 					to_chat(src, "<span class='danger'>APC internal diagnostics reports hardware failure. Unable to reset. Aborting power restoration sequence.</span>")
 					aiRestorePowerRoutine = AI_RESTOREPOWER_FAILED
 					continue

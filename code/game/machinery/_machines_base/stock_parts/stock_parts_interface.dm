@@ -9,7 +9,7 @@
 
 /obj/item/stock_parts/console_screen/on_refresh(obj/machinery/machine)
 	..()
-	machine.set_noscreen(FALSE)
+	machine.set_stat(MACHINE_STAT_NOSCREEN, FALSE)
 
 /obj/item/stock_parts/keyboard
 	name = "input controller"
@@ -22,4 +22,4 @@
 
 /obj/item/stock_parts/keyboard/on_refresh(obj/machinery/machine)
 	..()
-	machine.set_noinput(FALSE)
+	machine.set_stat(MACHINE_STAT_NOINPUT, FALSE)

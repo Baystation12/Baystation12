@@ -37,7 +37,7 @@
 	overlays.Cut()
 	if (dirty)
 		src.overlays += image('icons/obj/kitchen.dmi', "grbloody")
-	if(stat & (NOPOWER|BROKEN))
+	if(inoperable())
 		return
 	if (!occupant)
 		src.overlays += image('icons/obj/kitchen.dmi', "grjam")

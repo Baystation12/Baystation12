@@ -54,7 +54,7 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 	var/datum/announcement/announcement = new
 
 /obj/machinery/requests_console/on_update_icon()
-	if(stat & NOPOWER)
+	if(!is_powered())
 		if(icon_state != "req_comp_off")
 			icon_state = "req_comp_off"
 	else
@@ -212,7 +212,7 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 		else
 			to_chat(user, "You can't do much with that.") */
 	if (istype(O, /obj/item/card/id))
-		if(inoperable(MAINT)) return
+		if(inoperable() || GET_FLAGS(stat, MACHINE_STAT_MAINT)) return
 		if(screen == RCS_MESSAUTH)
 			var/obj/item/card/id/T = O
 			msgVerified = text("<font color='green'><b>Verified by [T.registered_name] ([T.assignment])</b></font>")
@@ -227,7 +227,7 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 				to_chat(user, "<span class='warning'>You are not authorized to send announcements.</span>")
 			SSnano.update_uis(src)
 	if (istype(O, /obj/item/stamp))
-		if(inoperable(MAINT)) return
+		if(inoperable() || GET_FLAGS(stat, MACHINE_STAT_MAINT)) return
 		if(screen == RCS_MESSAUTH)
 			var/obj/item/stamp/T = O
 			msgStamped = text("<font color='blue'><b>Stamped with the [T.name]</b></font>")

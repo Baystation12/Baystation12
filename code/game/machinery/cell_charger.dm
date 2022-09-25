@@ -12,7 +12,7 @@
 
 /obj/machinery/cell_charger/on_update_icon()
 	icon_state = "ccharger[charging ? 1 : 0]"
-	if(charging && !(stat & (BROKEN|NOPOWER)) )
+	if(charging && operable())
 		var/newlevel = 	round(charging.percent() * 4.0 / 99)
 		if(chargelevel != newlevel)
 			overlays.Cut()
@@ -29,7 +29,7 @@
 			to_chat(user, "Current charge: [charging.charge]")
 
 /obj/machinery/cell_charger/attackby(obj/item/W, mob/user)
-	if(stat & BROKEN)
+	if(MACHINE_IS_BROKEN(src))
 		return
 
 	if(istype(W, /obj/item/cell) && anchored)
@@ -73,7 +73,7 @@
 		return TRUE
 
 /obj/machinery/cell_charger/emp_act(severity)
-	if(stat & (BROKEN|NOPOWER))
+	if(inoperable())
 		return
 	if(charging)
 		charging.emp_act(severity)
@@ -81,7 +81,7 @@
 
 /obj/machinery/cell_charger/proc/set_power()
 	queue_icon_update()
-	if((stat & (BROKEN|NOPOWER)) || !anchored)
+	if(inoperable() || !anchored)
 		update_use_power(POWER_USE_OFF)
 		return
 	if (charging && !charging.fully_charged())

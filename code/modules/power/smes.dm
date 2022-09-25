@@ -16,8 +16,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	stat = BROKEN         // Should be removed if the terminals initialize fully.
-	reason_broken = MACHINE_BROKEN_GENERIC
+	reason_broken = MACHINE_BROKEN_GENERIC // Should be removed if the terminals initialize fully.
 
 	machine_name = "superconductive magnetic energy storage"
 	machine_desc = "The SMES is effectively a giant battery. It stores vast quantities of power for later use, and can be remotely controlled using the RCON system."
@@ -98,7 +97,7 @@
 
 /obj/machinery/power/smes/on_update_icon()
 	overlays.Cut()
-	if(stat & BROKEN)	return
+	if(MACHINE_IS_BROKEN(src))	return
 
 	overlays += image(overlay_icon, "smes-op[outputting]")
 
@@ -162,7 +161,7 @@
 		set_broken(!num_terminals)
 
 /obj/machinery/power/smes/Process()
-	if(stat & BROKEN)	return
+	if(MACHINE_IS_BROKEN(src))	return
 	if(failure_timer)	// Disabled by gridcheck.
 		failure_timer--
 		return
@@ -206,7 +205,7 @@
 // called after all power processes are finished
 // restores charge level to smes if there was excess this ptick
 /obj/machinery/power/smes/proc/restore(percent_load)
-	if(stat & BROKEN)
+	if(MACHINE_IS_BROKEN(src))
 		return
 
 	if(!outputting)

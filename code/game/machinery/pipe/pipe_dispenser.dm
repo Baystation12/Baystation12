@@ -4,7 +4,7 @@
 	icon_state = "pipe_d"
 	density = TRUE
 	anchored = FALSE
-	stat_immune = NOSCREEN//Doesn't need screen, just input for the parts wanted
+	stat_immune = MACHINE_STAT_NOSCREEN//Doesn't need screen, just input for the parts wanted
 
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
@@ -90,7 +90,7 @@
 						"<span class='notice'>You have unfastened \the [src]. Now it can be pulled somewhere else.</span>", \
 						"You hear ratchet.")
 					anchored = FALSE
-					stat |= MAINT
+					set_stat(MACHINE_STAT_MAINT, TRUE)
 					update_use_power(POWER_USE_OFF)
 					if(user.machine==src)
 						close_browser(user, "window=pipedispenser")
@@ -103,7 +103,7 @@
 						"<span class='notice'>You have fastened \the [src]. Now it can dispense pipes.</span>", \
 						"You hear ratchet.")
 					anchored = TRUE
-					stat &= ~MAINT
+					set_stat(MACHINE_STAT_MAINT, FALSE)
 					update_use_power(POWER_USE_IDLE)
 			return
 	return ..()

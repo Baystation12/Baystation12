@@ -183,7 +183,7 @@
 
 /obj/machinery/pointdefense/Process()
 	..()
-	if(stat & (NOPOWER|BROKEN))
+	if(inoperable())
 		return
 	if(!active)
 		return

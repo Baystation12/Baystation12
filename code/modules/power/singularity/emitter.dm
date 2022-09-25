@@ -141,7 +141,7 @@
 	return
 
 /obj/machinery/power/emitter/Process()
-	if (stat & (BROKEN))
+	if (MACHINE_IS_BROKEN(src))
 		return
 	if (state != EMITTER_WELDED || (!powernet && active_power_usage))
 		active = FALSE

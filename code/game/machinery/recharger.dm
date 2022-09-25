@@ -58,7 +58,7 @@
 		return TRUE
 
 /obj/machinery/recharger/Process()
-	if(stat & (NOPOWER|BROKEN) || !anchored)
+	if(inoperable() || !anchored)
 		update_use_power(POWER_USE_OFF)
 		icon_state = icon_state_idle
 		return
@@ -78,7 +78,7 @@
 				update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/recharger/emp_act(severity)
-	if(stat & (NOPOWER|BROKEN) || !anchored)
+	if(inoperable() || !anchored)
 		..(severity)
 		return
 	if(charging)

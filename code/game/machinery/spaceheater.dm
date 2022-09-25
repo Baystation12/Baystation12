@@ -49,7 +49,7 @@
 		to_chat(user, "The charge meter reads [cell ? round(cell.percent(),1) : 0]%")
 
 /obj/machinery/space_heater/emp_act(severity)
-	if(stat & (BROKEN|NOPOWER))
+	if(inoperable())
 		..(severity)
 		return
 	if(cell)

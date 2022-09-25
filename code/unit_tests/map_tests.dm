@@ -86,7 +86,7 @@
 		var/obj/machinery/alarm/alarm = locate() in A // Only test areas with functional alarms
 		if(!alarm)
 			continue
-		if(alarm.stat & (NOPOWER | BROKEN))
+		if(alarm.inoperable())
 			continue
 
 		for(var/tag in A.air_vent_names) // The point of this test is that while the names list is registered at init, the info is transmitted by radio.

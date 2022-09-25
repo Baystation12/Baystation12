@@ -36,7 +36,7 @@
 		return
 
 /obj/machinery/dnaforensics/ui_interact(mob/user, ui_key = "main",datum/nanoui/ui = null)
-	if(stat & (NOPOWER)) return
+	if(!is_powered()) return
 	if(user.stat || user.restrained()) return
 	var/list/data = list()
 	data["scan_progress"] = round(scanner_progress)
@@ -56,7 +56,7 @@
 
 	if(..()) return 1
 
-	if(stat & (NOPOWER))
+	if(!is_powered())
 		return 0 // don't update UIs attached to this object
 
 	if(href_list["scanItem"])
@@ -145,7 +145,7 @@
 
 /obj/machinery/dnaforensics/on_update_icon()
 	..()
-	if(!(stat & NOPOWER) && scanning)
+	if(is_powered() && scanning)
 		icon_state = "dnaworking"
 	else if(closed)
 		icon_state = "dnaclosed"

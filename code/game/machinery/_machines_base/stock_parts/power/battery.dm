@@ -83,7 +83,7 @@
 				machine.power_change()
 		return // We don't recharge if discharging
 
-	if((machine.stat & NOPOWER) && cell && cell.fully_charged())
+	if((!machine.is_powered()) && cell && cell.fully_charged())
 		machine.power_change()
 		return // This suggests that we should be powering the machine instead, so let's try that
 
@@ -144,7 +144,7 @@
 		if(cell)
 			to_chat(user, "There is a power cell already installed.")
 			return TRUE
-		if(istype(machine) && (machine.stat & MAINT))
+		if(istype(machine) && (GET_FLAGS(machine.stat, MACHINE_STAT_MAINT)))
 			to_chat(user, "<span class='warning'>There is no connector for your power cell.</span>")
 			return TRUE
 		if(I.w_class != ITEM_SIZE_NORMAL)

@@ -174,16 +174,16 @@
 						return
 				else
 					A.visible_message(SPAN_DANGER("\The [user] pries the fingers of \a [src] in, beginning to force \the [A]!"))
-					if ((A.is_broken(NOPOWER) || do_after(user, 10 SECONDS, A, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)) && !(A.operating || A.welded || A.locked))
+					if ((MACHINE_IS_BROKEN(A) || !A.is_powered() || do_after(user, 10 SECONDS, A, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)) && !(A.operating || A.welded || A.locked))
 						playsound(A, 'sound/machines/airlock_creaking.ogg', 100, 1)
 						if (A.density)
 							addtimer(CALLBACK(A, /obj/machinery/door/airlock/.proc/open, TRUE), 0)
-							if(!A.is_broken(NOPOWER))
+							if(!MACHINE_IS_BROKEN(A) && A.is_powered())
 								A.set_broken(TRUE)
 							A.visible_message(SPAN_DANGER("\The [user] forces \the [A] open with \a [src]!"))
 						else
 							addtimer(CALLBACK(A, /obj/machinery/door/airlock/.proc/close, TRUE), 0)
-							if (!A.is_broken(NOPOWER))
+							if (!MACHINE_IS_BROKEN(A) && A.is_powered())
 								A.set_broken(TRUE)
 							A.visible_message(SPAN_DANGER("\The [user] forces \the [A] closed with \a [src]!"))
 			if (A.locked)

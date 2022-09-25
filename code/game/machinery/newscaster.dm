@@ -192,7 +192,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 /obj/machinery/newscaster/on_update_icon()
 	if(inoperable())
 		icon_state = "newscaster_off"
-		if(stat & BROKEN) //If the thing is smashed, add crack overlay on top of the unpowered sprite.
+		if(MACHINE_IS_BROKEN(src)) //If the thing is smashed, add crack overlay on top of the unpowered sprite.
 			overlays.Cut()
 			overlays += image(src.icon, "crack3")
 		return
@@ -733,7 +733,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if (I.force < 15)
 			visible_message(SPAN_WARNING("\The [user] uselessly bops \the [src] with \an [I]."))
-		else if (stat & BROKEN)
+		else if (MACHINE_IS_BROKEN(src))
 			visible_message(SPAN_WARNING("\The [user] further abuses the shattered [name]."))
 			playsound(src, 'sound/effects/hit_on_shattered_glass.ogg', 100, 1)
 		else if (++hitstaken < 3)

@@ -314,7 +314,7 @@
 	if(!active)
 		return
 
-	if(active && stat & (BROKEN|NOPOWER))
+	if(active && inoperable())
 		active = 0
 		irradiating = 0
 		electrified = 0

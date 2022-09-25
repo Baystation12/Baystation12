@@ -94,7 +94,7 @@
 			harvesting.Cut()
 
 /obj/machinery/kinetic_harvester/on_update_icon()
-	if(stat & (BROKEN|NOPOWER))
+	if(inoperable())
 		icon_state = "broken"
 	else if(use_power >= POWER_USE_ACTIVE)
 		icon_state = "on"

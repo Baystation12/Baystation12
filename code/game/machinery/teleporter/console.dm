@@ -179,7 +179,7 @@
 	. = ..()
 	if (!.)
 		return
-	if (stat & NOPOWER)
+	if (!is_powered())
 		clear_target()
 
 

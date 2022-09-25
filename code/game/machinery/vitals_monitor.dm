@@ -11,7 +11,7 @@
 	power_channel = EQUIP
 	idle_power_usage = 10
 	active_power_usage = 100
-	stat_immune = NOINPUT
+	stat_immune = MACHINE_STAT_NOINPUT
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/default/panel_closed
 
@@ -44,7 +44,7 @@
 /obj/machinery/vitals_monitor/examine(mob/user)
 	. = ..()
 	if(victim)
-		if(stat & NOPOWER)
+		if(!is_powered())
 			to_chat(user, SPAN_NOTICE("It's unpowered."))
 			return
 		to_chat(user, SPAN_NOTICE("Vitals of [victim]:"))
@@ -127,7 +127,7 @@
 
 /obj/machinery/vitals_monitor/on_update_icon()
 	overlays.Cut()
-	if(stat & NOPOWER)
+	if(!is_powered())
 		return
 	overlays += image(icon, icon_state = "screen")
 

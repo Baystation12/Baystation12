@@ -1,77 +1,6 @@
 /*
-Overview:
-   Used to create objects that need a per step proc call.  Default definition of 'New()'
-   stores a reference to src machine in global 'machines list'.  Default definition
-   of 'Destroy' removes reference to src machine in global 'machines list'.
-
-Class Variables:
-   use_power (num)
-	  current state of auto power use.
-	  Possible Values:
-		 0 -- no auto power use
-		 1 -- machine is using power at its idle power level
-		 2 -- machine is using power at its active power level
-
-   active_power_usage (num)
-	  Value for the amount of power to use when in active power mode
-
-   idle_power_usage (num)
-	  Value for the amount of power to use when in idle power mode
-
-   power_channel (num)
-	  What channel to draw from when drawing power for power mode
-	  Possible Values:
-		 EQUIP:1 -- Equipment Channel
-		 LIGHT:2 -- Lighting Channel
-		 ENVIRON:3 -- Environment Channel
-
-   component_parts (list)
-	  A list of component parts of machine used by frame based machines.
-
-   panel_open (num)
-	  Whether the panel is open
-
-   uid (num)
-	  Unique id of machine across all machines.
-
-   gl_uid (global num)
-	  Next uid value in sequence
-
-   stat (bitflag)
-	  Machine status bit flags.
-	  Possible bit flags:
-		 BROKEN:1 -- Machine is broken
-		 NOPOWER:2 -- No power is being supplied to machine.
-		 MAINT:8 -- machine is currently under going maintenance.
-		 EMPED:16 -- temporary broken by EMP pulse
-
-Class Procs:
-   New()					 'game/machinery/machine.dm'
-
-   Destroy()					 'game/machinery/machine.dm'
-
-   powered(chan = EQUIP)		 'modules/power/power_usage.dm'
-	  Checks to see if area that contains the object has power available for power
-	  channel given in 'chan'.
-
-   use_power_oneoff(amount, chan=power_channel)   'modules/power/power_usage.dm'
-	  Deducts 'amount' from the power channel 'chan' of the area that contains the object.
-	  This is not a continuous draw, but rather will be cleared after one APC update.
-
-   power_change()			   'modules/power/power_usage.dm'
-	  Called by the area that contains the object when ever that area under goes a
-	  power state change (area runs out of power, or area channel is turned off).
-
-   RefreshParts()			   'game/machinery/machine.dm'
-	  Called to refresh the variables in the machine that are contributed to by parts
-	  contained in the component_parts list. (example: glass and material amounts for
-	  the autolathe)
-
-	  Default definition does nothing.
-
-   Process()				  'game/machinery/machine.dm'
-	  Called by the 'master_controller' once per game tick for each machine that is listed in the 'machines' list.
-
+	Overview:
+	Used to create objects that need a per step proc call.  Default definition of 'Initialize()' stores a reference to src machine in global 'machines list'.  Default definition of 'Destroy' removes reference to src machine in global 'machines list'.
 
 	Compiled by Aygar
 */
@@ -83,12 +12,6 @@ Class Procs:
 	layer = STRUCTURE_LAYER // Layer under items
 	init_flags = INIT_MACHINERY_PROCESS_SELF
 
-	/// Bitflag. Machine's base status. Can include `BROKEN`, `NOPOWER`, etc.
-	var/stat = EMPTY_BITFIELD
-	/// Bitflag. Reason the machine is 'broken'. Can be any combination of `MACHINE_BROKEN_*`. Do not modify directly - Use `set_broken()` instead.
-	var/reason_broken = EMPTY_BITFIELD
-	/// Bitflag. The machine will never set stat to these flags.
-	var/stat_immune = NOSCREEN | NOINPUT
 	/// Boolean. Whether or not the machine has been emagged.
 	var/emagged = FALSE
 	/// Boolean. Whether or not the machine has been upgrade by a malfunctioning AI.
@@ -210,60 +133,11 @@ Class Procs:
 			if (prob(25))
 				qdel(src)
 
-/// Toggles the `BROKEN` flag on the machine's `stat` variable. Includes immunity and other checks. `cause` can be any of `MACHINE_BROKEN_*`.
-/obj/machinery/proc/set_broken(new_state, cause = MACHINE_BROKEN_GENERIC)
-	if(stat_immune & BROKEN)
-		return FALSE
-	if(!new_state == !(reason_broken & cause))
-		return FALSE
-	reason_broken ^= cause
-
-	if(!reason_broken != !(stat & BROKEN))
-		stat ^= BROKEN
-		queue_icon_update()
-		return TRUE
-
-/// Toggles the `NOSCREEN` flag on the machine's `stat` variable. Includes immunity checks.
-/obj/machinery/proc/set_noscreen(new_state)
-	if(stat_immune & NOSCREEN)
-		return FALSE
-	if(!new_state != !(stat & NOSCREEN))// new state is different from old
-		stat ^= NOSCREEN                // so flip it
-		return TRUE
-
-/// Toggles the `NOINPUT` flag on the machine's `stat` variable. Includes immunity checks.
-/obj/machinery/proc/set_noinput(new_state)
-	if(stat_immune & NOINPUT)
-		return FALSE
-	if(!new_state != !(stat & NOINPUT))
-		stat ^= NOINPUT
-		return TRUE
-
-/// Checks whether or not the machine `M` can be operated by `user`.
-/proc/is_operable(obj/machinery/M, mob/user)
-	return istype(M) && M.operable()
-
-/// Checks whether or not the machine's stat variable has the `BROKEN` flag, or any of the provided `additional_flags`. Returns `TRUE` if any of the flags match.
-/obj/machinery/proc/is_broken(additional_flags = EMPTY_BITFIELD)
-	return (stat & (BROKEN|additional_flags))
-
-/// Checks whether or not the machine's stat variable has the `NOPOWER` flag, or any of the provided `additional_flags`. Returns `FALSE` if any of the flags match.
-/obj/machinery/proc/is_powered(additional_flags = EMPTY_BITFIELD)
-	return !(stat & (NOPOWER|additional_flags))
-
-/// Inverse of `inoperable()`.
-/obj/machinery/proc/operable(additional_flags = EMPTY_BITFIELD)
-	return !inoperable(additional_flags)
-
-/// Checks whether or not the machine's state variable has the `BROKEN` or `NOPOWER` flags, or any of the provided `additional_flags`. Returns `TRUE` if any of the flags match.
-/obj/machinery/proc/inoperable(additional_flags = EMPTY_BITFIELD)
-	return (stat & (NOPOWER|BROKEN|additional_flags))
-
 /obj/machinery/CanUseTopic(mob/user)
-	if(stat & BROKEN)
+	if(MACHINE_IS_BROKEN(src))
 		return STATUS_CLOSE
 
-	if(!interact_offline && (stat & NOPOWER))
+	if(!interact_offline && (!is_powered()))
 		return STATUS_CLOSE
 
 	if(user.direct_machine_interface(src))
@@ -275,10 +149,10 @@ Class Procs:
 
 		return ..()
 
-	if(stat & NOSCREEN)
+	if(GET_FLAGS(stat, MACHINE_STAT_NOSCREEN))
 		return STATUS_CLOSE
 
-	if(stat & NOINPUT)
+	if(GET_FLAGS(stat, MACHINE_STAT_NOINPUT))
 		return min(..(), STATUS_UPDATE)
 	return ..()
 
@@ -293,7 +167,7 @@ Class Procs:
 	return TRUE
 
 /obj/machinery/CanUseTopicPhysical(mob/user)
-	if(stat & BROKEN)
+	if(MACHINE_IS_BROKEN(src))
 		return STATUS_CLOSE
 
 	return GLOB.physical_state.can_use_topic(nano_host(), user)
@@ -381,8 +255,8 @@ Class Procs:
 
 /// Refreshes the machines parts-related `stat` flags, and calls `on_refresh()` on each component.
 /obj/machinery/proc/RefreshParts()
-	set_noinput(TRUE)
-	set_noscreen(TRUE)
+	set_stat(MACHINE_STAT_NOINPUT, TRUE)
+	set_stat(MACHINE_STAT_NOSCREEN, TRUE)
 	for(var/thing in component_parts)
 		var/obj/item/stock_parts/part = thing
 		part.on_refresh(src)
@@ -480,11 +354,11 @@ Class Procs:
 		to_chat(user, SPAN_NOTICE("The service panel is open."))
 	if(component_parts && hasHUD(user, HUD_SCIENCE))
 		display_parts(user)
-	if(stat & NOSCREEN)
+	if(GET_FLAGS(stat, MACHINE_STAT_NOSCREEN))
 		to_chat(user, SPAN_WARNING("It is missing a screen, making it hard to interact with."))
-	else if(stat & NOINPUT)
+	else if(GET_FLAGS(stat, MACHINE_STAT_NOINPUT))
 		to_chat(user, SPAN_WARNING("It is missing any input device."))
-	else if((stat & NOPOWER) && !interact_offline)
+	else if((!is_powered()) && !interact_offline)
 		to_chat(user, SPAN_WARNING("It is not receiving power."))
 	if(construct_state && construct_state.mechanics_info())
 		to_chat(user, SPAN_NOTICE("It can be <a href='?src=\ref[src];mechanics_text=1'>manipulated</a> using tools."))
@@ -552,7 +426,7 @@ Class Procs:
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/water_act(depth)
 	..()
-	if(!(stat & (NOPOWER|BROKEN)) && !waterproof && (depth > FLUID_DEEP))
+	if(operable() && !waterproof && (depth > FLUID_DEEP))
 		ex_act(EX_ACT_LIGHT)
 
 /obj/machinery/Move()

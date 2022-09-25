@@ -8,7 +8,7 @@
 
 /obj/machinery/Value()
 	. = ..()
-	if(stat & BROKEN)
+	if(MACHINE_IS_BROKEN(src))
 		. *= 0.5
 	. = round(.)
 

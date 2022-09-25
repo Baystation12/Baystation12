@@ -137,7 +137,7 @@
 	var/autoname = 1
 
 /obj/machinery/power/apc/updateDialog()
-	if (stat & (BROKEN|MAINT))
+	if (MACHINE_IS_BROKEN(src) || GET_FLAGS(stat, MACHINE_STAT_MAINT))
 		return
 	..()
 
@@ -185,7 +185,7 @@
 	else
 		opened = 1
 		operating = 0
-		stat |= MAINT
+		set_stat(MACHINE_STAT_MAINT, TRUE)
 		queue_icon_update()
 
 	if(operating)
@@ -234,7 +234,7 @@
 /obj/machinery/power/apc/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		if(stat & BROKEN)
+		if(MACHINE_IS_BROKEN(src))
 			to_chat(user, "Looks broken.")
 			return
 		var/terminal = terminal()
@@ -249,7 +249,7 @@
 				to_chat(user, "There is no electronics nor connected wires.")
 
 		else
-			if (stat & MAINT)
+			if (GET_FLAGS(stat, MACHINE_STAT_MAINT))
 				to_chat(user, "The cover is closed. Something wrong with it: it doesn't work.")
 			else if (hacker && !hacker.hacked_apcs_hidden)
 				to_chat(user, "The cover is locked.")
@@ -339,7 +339,7 @@
 	if(update & 2)
 		if(overlays.len)
 			overlays.Cut()
-		if(!(stat & (BROKEN|MAINT)) && update_state & UPDATE_ALLGOOD)
+		if(!MACHINE_IS_BROKEN(src) && !GET_FLAGS(stat, MACHINE_STAT_MAINT) && update_state & UPDATE_ALLGOOD)
 			overlays += status_overlays_lock[locked+1]
 			overlays += status_overlays_charging[charging+1]
 			if(operating)
@@ -352,7 +352,7 @@
 			set_light(0)
 		else if(update_state & UPDATE_BLUESCREEN)
 			set_light(0.8, 0.1, 1, 2, "#00ecff")
-		else if(!(stat & (BROKEN|MAINT)) && update_state & UPDATE_ALLGOOD)
+		else if(!MACHINE_IS_BROKEN(src) && !GET_FLAGS(stat, MACHINE_STAT_MAINT) && update_state & UPDATE_ALLGOOD)
 			var/color
 			switch(charging)
 				if(0)
@@ -375,9 +375,9 @@
 	update_overlay = 0
 	if(get_cell())
 		update_state |= UPDATE_CELL_IN
-	if(stat & BROKEN)
+	if(MACHINE_IS_BROKEN(src))
 		update_state |= UPDATE_BROKE
-	if(stat & MAINT)
+	if(GET_FLAGS(stat, MACHINE_STAT_MAINT))
 		update_state |= UPDATE_MAINT
 	if(opened)
 		if(opened==1)
@@ -444,7 +444,7 @@
 
 				if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT) && opened && (has_electronics == 1) && !terminal()) // redo all checks.
 					has_electronics = 0
-					if ((stat & BROKEN))
+					if (MACHINE_IS_BROKEN(src))
 						user.visible_message(\
 							SPAN_WARNING("\The [user] has broken the power control board inside \the [src]!"),\
 							SPAN_NOTICE("You break the charred power control board and remove the remains."),\
@@ -462,10 +462,10 @@
 				update_icon()
 				return TRUE
 
-		if((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden))
+		if(MACHINE_IS_BROKEN(src) || (hacker && !hacker.hacked_apcs_hidden))
 			to_chat(user, SPAN_WARNING("The cover appears broken or stuck."))
 			return TRUE
-		if(coverlocked && !(stat & MAINT))
+		if(coverlocked && !(GET_FLAGS(stat, MACHINE_STAT_MAINT)))
 			to_chat(user, SPAN_WARNING("The cover is locked and cannot be opened."))
 			return TRUE
 		opened = 1
@@ -485,13 +485,13 @@
 						to_chat(user, SPAN_WARNING("You must attach a wire connection first!"))
 						return TRUE
 					has_electronics = 2
-					stat &= ~MAINT
+					set_stat(MACHINE_STAT_MAINT, FALSE)
 					playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 					to_chat(user, "You screw the circuit electronics into place.")
 					update_icon()
 				if(2)
 					has_electronics = 1
-					stat |= MAINT
+					set_stat(MACHINE_STAT_MAINT, TRUE)
 					playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 					to_chat(user, "You unfasten the electronics.")
 					update_icon()
@@ -512,7 +512,7 @@
 			to_chat(user, "You must close the cover to swipe an ID card.")
 		else if(wiresexposed)
 			to_chat(user, "You must close the panel")
-		else if(stat & (BROKEN|MAINT))
+		else if(MACHINE_IS_BROKEN(src) || GET_FLAGS(stat, MACHINE_STAT_MAINT))
 			to_chat(user, "Nothing happens.")
 		else if(hacker && !hacker.hacked_apcs_hidden)
 			to_chat(user, "<span class='warning'>Access denied.</span>")
@@ -527,7 +527,7 @@
 
 	// Inserting board.
 	if(istype(W, /obj/item/module/power_control))
-		if(stat & BROKEN)
+		if(MACHINE_IS_BROKEN(src))
 			to_chat(user, SPAN_WARNING("You cannot put the board inside, the frame is damaged."))
 			return TRUE
 		if(!opened)
@@ -539,7 +539,7 @@
 		user.visible_message(SPAN_WARNING("\The [user] inserts the power control board into \the [src]."), \
 							"You start to insert the power control board into the frame...")
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		if(do_after(user, 1 SECOND, src, DO_REPAIR_CONSTRUCT) && has_electronics == 0 && opened && !(stat & BROKEN))
+		if(do_after(user, 1 SECOND, src, DO_REPAIR_CONSTRUCT) && has_electronics == 0 && opened && !MACHINE_IS_BROKEN(src))
 			has_electronics = 1
 			reboot() //completely new electronics
 			to_chat(user, SPAN_NOTICE("You place the power control board inside the frame."))
@@ -567,7 +567,7 @@
 		if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT) && opened && has_electronics == 0 && !terminal())
 			if(!WT.remove_fuel(3, user))
 				return TRUE
-			if (emagged || (stat & BROKEN) || opened==2)
+			if (emagged || MACHINE_IS_BROKEN(src) || opened==2)
 				new /obj/item/stack/material/steel(loc)
 				user.visible_message(\
 					SPAN_WARNING("\The [src] has been cut apart by \the [user] with \the [WT]."),\
@@ -598,14 +598,14 @@
 			update_icon()
 			return TRUE
 
-		if((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden))
+		if(MACHINE_IS_BROKEN(src) || (hacker && !hacker.hacked_apcs_hidden))
 			if (has_electronics)
 				to_chat(user, "<span class='warning'>You cannot repair this APC until you remove the electronics still inside.</span>")
 				return TRUE
 
 			user.visible_message("<span class='warning'>[user.name] replaces the damaged APC frame with a new one.</span>",\
 								"You begin to replace the damaged APC frame...")
-			if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT) && opened && !has_electronics && ((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden)))
+			if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT) && opened && !has_electronics && (MACHINE_IS_BROKEN(src) || (hacker && !hacker.hacked_apcs_hidden)))
 				user.visible_message(\
 					"<span class='notice'>[user.name] has replaced the damaged APC frame with new one.</span>",\
 					"You replace the damaged APC frame with new one.")
@@ -622,7 +622,7 @@
 	if((. = ..())) // Further interactions are low priority attack stuff.
 		return
 
-	if (((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden)) \
+	if ((MACHINE_IS_BROKEN(src) || (hacker && !hacker.hacked_apcs_hidden)) \
 			&& !opened \
 			&& W.force >= 5 \
 			&& W.w_class >= 3.0 \
@@ -664,7 +664,7 @@
 			to_chat(user, "You must close the cover to swipe an ID card.")
 		else if(wiresexposed)
 			to_chat(user, "You must close the panel first")
-		else if(stat & (BROKEN|MAINT))
+		else if(MACHINE_IS_BROKEN(src) || GET_FLAGS(stat, MACHINE_STAT_MAINT))
 			to_chat(user, "Nothing happens.")
 		else
 			flick("apc-spark", src)
@@ -881,7 +881,7 @@
 
 	else if (href_list["toggleaccess"])
 		if(istype(usr, /mob/living/silicon))
-			if(emagged || (stat & (BROKEN|MAINT)))
+			if(emagged || MACHINE_IS_BROKEN(src) || GET_FLAGS(stat, MACHINE_STAT_MAINT))
 				to_chat(usr, "The APC does not respond to the command.")
 			else
 				locked = !locked
@@ -914,7 +914,7 @@
 	if(!area.requires_power)
 		return PROCESS_KILL
 
-	if(stat & (BROKEN|MAINT))
+	if(MACHINE_IS_BROKEN(src) || GET_FLAGS(stat, MACHINE_STAT_MAINT))
 		return
 
 	if(failure_timer)
@@ -964,7 +964,7 @@
 		if(cell.fully_charged())
 			charging = 2
 
-		if(stat & NOPOWER)
+		if(!is_powered())
 			power_change() // We are the ones responsible for triggering listeners once power returns, so we run this to detect possible changes.
 
 	// Set channels depending on how much charge we have left
@@ -987,7 +987,7 @@
 	var/obj/item/cell/cell = get_cell()
 	var/percent = cell && cell.percent()
 
-	if(!cell || shorted || (stat & NOPOWER) || !operating)
+	if(!cell || shorted || (!is_powered()) || !operating)
 		if(autoflag != 0)
 			equipment = autoset(equipment, 0)
 			lighting = autoset(lighting, 0)
@@ -1083,7 +1083,7 @@
 					C.ex_act(EX_ACT_LIGHT)
 
 /obj/machinery/power/apc/set_broken(new_state)
-	if(!new_state || (stat & BROKEN))
+	if(!new_state || MACHINE_IS_BROKEN(src))
 		return ..()
 	visible_message("<span class='notice'>[src]'s screen flickers with warnings briefly!</span>")
 	GLOB.power_alarm.triggerAlarm(loc, src)

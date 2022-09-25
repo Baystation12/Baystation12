@@ -24,7 +24,7 @@
 	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/driver = 1)
 
 /obj/machinery/mass_driver/proc/drive(amount)
-	if(stat & (BROKEN|NOPOWER))
+	if(inoperable())
 		return
 	use_power_oneoff(500)
 	var/O_limit
@@ -43,7 +43,7 @@
 	return
 
 /obj/machinery/mass_driver/emp_act(severity)
-	if(stat & (BROKEN|NOPOWER))
+	if(inoperable())
 		return
 	drive()
 	..(severity)

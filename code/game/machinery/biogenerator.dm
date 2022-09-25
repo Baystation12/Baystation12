@@ -188,7 +188,7 @@
 /obj/machinery/biogenerator/proc/activate()
 	if (usr.stat)
 		return
-	if (stat) //NOPOWER etc
+	if (stat) //MACHINE_STAT_NOPOWER etc
 		return
 
 	var/S = 0

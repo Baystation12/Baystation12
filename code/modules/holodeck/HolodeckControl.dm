@@ -179,7 +179,7 @@
 
 /obj/machinery/computer/HolodeckControl/power_change()
 	. = ..()
-	if (. && active && (stat & NOPOWER))
+	if (. && active && (!is_powered()))
 		emergencyShutdown()
 
 /obj/machinery/computer/HolodeckControl/Process()

@@ -15,7 +15,7 @@
 /obj/machinery/suspension_gen/Process()
 	if(suspension_field)
 		updateDialog()
-		if(stat & NOPOWER)
+		if(!is_powered())
 			deactivate()
 			return
 

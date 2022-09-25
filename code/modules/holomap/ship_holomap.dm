@@ -102,7 +102,7 @@
 		return TRUE
 
 /obj/machinery/ship_map/proc/startWatching(mob/user)
-	if(isliving(user) && anchored && !(stat & (NOPOWER|BROKEN)))
+	if(isliving(user) && anchored && operable())
 		if(user.client)
 			holomap_datum.station_map.loc = GLOB.global_hud.holomap  // Put the image on the holomap hud
 			holomap_datum.station_map.alpha = 0 // Set to transparent so we can fade in
@@ -124,7 +124,7 @@
 			START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
 /obj/machinery/ship_map/Process()
-	if((stat & (NOPOWER|BROKEN)))
+	if((inoperable()))
 		stopWatching()
 		return PROCESS_KILL
 
@@ -152,10 +152,10 @@
 /obj/machinery/ship_map/on_update_icon()
 	. = ..()
 	overlays.Cut()
-	if(stat & BROKEN)
+	if(MACHINE_IS_BROKEN(src))
 		icon_state = "station_mapb"
 		set_light(0)
-	else if((stat & NOPOWER) || !anchored)
+	else if((!is_powered()) || !anchored)
 		icon_state = "station_map0"
 		set_light(0)
 	else

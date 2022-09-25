@@ -47,7 +47,7 @@ var/global/list/minor_air_alarms = list()
 		ui.set_auto_update(1)
 
 /obj/machinery/computer/atmos_alert/on_update_icon()
-	if(!(stat & (NOPOWER|BROKEN)))
+	if(operable())
 		if(GLOB.atmosphere_alarm.has_major_alarms(get_z(src)))
 			icon_screen = "alert:2"
 		else if (GLOB.atmosphere_alarm.has_minor_alarms(get_z(src)))

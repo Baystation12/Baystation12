@@ -36,7 +36,7 @@
 
 /obj/machinery/fusion_fuel_injector/Process()
 	if(injecting)
-		if(stat & (BROKEN|NOPOWER))
+		if(inoperable())
 			StopInjecting()
 		else
 			Inject()

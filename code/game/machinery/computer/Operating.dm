@@ -24,7 +24,7 @@
 	return TRUE
 
 /obj/machinery/computer/operating/interact(mob/user)
-	if ( (get_dist(src, user) > 1 ) || (stat & (BROKEN|NOPOWER)) )
+	if ( (get_dist(src, user) > 1 ) || (inoperable()) )
 		if (!istype(user, /mob/living/silicon))
 			user.unset_machine()
 			close_browser(user, "window=op")
@@ -51,5 +51,5 @@
 	onclose(user, "op")
 
 /obj/machinery/computer/operating/Process()
-	if(!inoperable())
+	if(operable())
 		updateDialog()

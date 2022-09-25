@@ -58,7 +58,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 // attack by item places it in to disposal
 /obj/machinery/disposal/attackby(obj/item/I, mob/user)
-	if(stat & BROKEN || !I || !user)
+	if(MACHINE_IS_BROKEN(src) || !I || !user)
 		return
 
 	add_fingerprint(user, 0, I)
@@ -145,7 +145,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if(AM == user)
 		incapacitation_flags &= ~INCAPACITATION_RESTRAINED
 
-	if(stat & BROKEN || !CanMouseDrop(AM, user, incapacitation_flags) || AM.anchored || !isturf(user.loc))
+	if(MACHINE_IS_BROKEN(src) || !CanMouseDrop(AM, user, incapacitation_flags) || AM.anchored || !isturf(user.loc))
 		return
 
 	// Animals can only put themself in
@@ -179,7 +179,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		return
 
 	// Repeat checks
-	if(stat & BROKEN || user.incapacitated(incapacitation_flags))
+	if(MACHINE_IS_BROKEN(src) || user.incapacitated(incapacitation_flags))
 		return
 	if(!AM || old_loc != AM.loc || AM.anchored)
 		return
@@ -241,7 +241,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 /obj/machinery/disposal/interact(mob/user)
 
 	src.add_fingerprint(user)
-	if(stat & BROKEN)
+	if(MACHINE_IS_BROKEN(src))
 		user.unset_machine()
 		return
 
@@ -344,7 +344,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 // update the icon & overlays to reflect mode & status
 /obj/machinery/disposal/on_update_icon()
 	overlays.Cut()
-	if(stat & BROKEN)
+	if(MACHINE_IS_BROKEN(src))
 		mode = 0
 		flush = 0
 		return
@@ -354,7 +354,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-handle")
 
 	// only handle is shown if no power
-	if(stat & NOPOWER || mode == -1)
+	if(!is_powered() || mode == -1)
 		return
 
 	// 	check for items/vomit in disposal - occupied light
@@ -370,7 +370,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 // timed process
 // charge the gas reservoir and perform flush if ready
 /obj/machinery/disposal/Process()
-	if(!air_contents || (stat & BROKEN))			// nothing can happen if broken
+	if(!air_contents || MACHINE_IS_BROKEN(src))			// nothing can happen if broken
 		update_use_power(POWER_USE_OFF)
 		return
 
@@ -396,7 +396,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		src.pressurize() //otherwise charge
 
 /obj/machinery/disposal/proc/pressurize()
-	if(stat & NOPOWER)			// won't charge if no power
+	if(!is_powered())			// won't charge if no power
 		update_use_power(POWER_USE_OFF)
 		return
 

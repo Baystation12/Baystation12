@@ -75,7 +75,7 @@ var/global/list/ai_status_emotions = list(
 	src.emotion = emote
 
 /obj/machinery/ai_status_display/on_update_icon()
-	if(stat & (NOPOWER|BROKEN))
+	if(inoperable())
 		overlays.Cut()
 		return
 
