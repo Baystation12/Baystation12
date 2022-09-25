@@ -20,6 +20,7 @@
 	)
 	density = FALSE
 
+	meat_type = /obj/item/reagent_containers/food/snacks/shellfish/crab
 	meat_amount =   3
 	skin_material = MATERIAL_SKIN_CHITIN
 	skin_amount =   10

@@ -46,7 +46,7 @@
 	return ..()
 
 /obj/machinery/smartfridge/proc/accept_check(obj/item/O as obj)
-	if(istype(O,/obj/item/reagent_containers/food/snacks/grown) || istype(O,/obj/item/seeds))
+	if(istype(O,/obj/item/reagent_containers/food/snacks/grown) || istype(O,/obj/item/seeds) || istype(O,/obj/item/shellfish))
 		return 1
 	return 0
 

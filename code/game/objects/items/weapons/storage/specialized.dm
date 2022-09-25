@@ -47,7 +47,8 @@
 	w_class = ITEM_SIZE_NORMAL
 	can_hold = list(
 		/obj/item/reagent_containers/food/snacks/grown,
-		/obj/item/seeds
+		/obj/item/seeds,
+		/obj/item/shellfish
 	)
 	allow_quick_gather = TRUE
 	allow_quick_empty = TRUE

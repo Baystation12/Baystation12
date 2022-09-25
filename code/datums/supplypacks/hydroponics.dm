@@ -122,3 +122,16 @@
 	containertype = /obj/structure/closet/crate/large/hydroponics
 	containername = "potted plant crate"
 	supply_method = /decl/supply_method/randomized
+
+/decl/hierarchy/supply_pack/hydroponics/aquaculture
+	name = "Samples - Aquaculture"
+	contains = list(
+					/obj/item/seeds/clam = 5,
+					/obj/item/seeds/mussel = 5,
+					/obj/item/seeds/oyster = 5,
+					/obj/item/seeds/shrimp = 5,
+					/obj/item/seeds/crab = 5
+				)
+	cost = 50
+	containername = "aquaculture crate"
+	access = access_hydroponics

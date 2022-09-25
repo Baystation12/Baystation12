@@ -141,7 +141,7 @@
 	return ..()
 
 /obj/machinery/portable_atmospherics/hydroponics/attack_ghost(mob/observer/ghost/user)
-	if(!(harvest && seed && seed.has_mob_product))
+	if(!(harvest && seed && seed.product_type))
 		return
 
 	if(!user.can_admin_interact())
@@ -408,7 +408,7 @@
 	weedlevel = 0
 
 	update_icon()
-	visible_message("<span class='danger'>The </span><span class='notice'>[previous_plant]</span><span class='danger'> has suddenly mutated into </span><span class='notice'>[seed.display_name]!</span>")
+	visible_message("<span class='danger'>The </span><span class='notice'>[previous_plant]</span><span class='danger'> has suddenly mutated into \a </span><span class='notice'>[seed.display_name]!</span>")
 
 	return
 
@@ -493,6 +493,10 @@
 			if(!S.can_be_inserted(G, user))
 				return
 			S.handle_item_insertion(G, 1)
+		for (var/obj/item/shellfish/G in locate(user.x,user.y,user.z))
+			if(!S.can_be_inserted(G, user))
+				return
+			S.handle_item_insertion(G, 1)
 
 	else if ( istype(O, /obj/item/plantspray) )
 
@@ -571,7 +575,7 @@
 		to_chat(user, "\The [src] is empty.")
 		return
 
-	to_chat(user, "<span class='notice'>\An [seed.display_name] plant is growing here.</span>")
+	to_chat(user, "<span class='notice'>\An [seed.display_name] is growing here.</span>")
 
 	if(user.skill_check(SKILL_BOTANY, SKILL_BASIC))
 		if(weedlevel >= 5)
@@ -580,9 +584,9 @@
 			to_chat(user, "\The [src] is <span class='danger'>infested with tiny worms</span>!")
 
 		if(dead)
-			to_chat(user, "<span class='danger'>The [seed.display_name] plant is dead.</span>")
+			to_chat(user, "<span class='danger'>The [seed.display_name] is dead.</span>")
 		else if(health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
-			to_chat(user, "The [seed.display_name] plant looks <span class='danger'>unhealthy</span>.")
+			to_chat(user, "The [seed.display_name] looks <span class='danger'>unhealthy</span>.")
 
 	if(mechanical && Adjacent(user))
 		var/turf/T = loc

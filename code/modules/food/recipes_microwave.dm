@@ -1584,3 +1584,39 @@
 		"aghrassh" = 1
 	)
 	result = /obj/item/reagent_containers/food/snacks/aghrassh_cake
+
+
+/datum/recipe/clam_chowder
+	reagents = list(
+		/datum/reagent/drink/milk/cream = 10
+	)
+	items = list(
+		/obj/item/reagent_containers/food/snacks/shellfish/clam
+	)
+	fruit = list(
+		"potato" = 1
+	)
+	result = /obj/item/reagent_containers/food/snacks/clam_chowder
+
+
+/datum/recipe/bisque
+	reagents = list(
+		/datum/reagent/drink/milk/cream = 10
+	)
+	items = list(
+		/obj/item/reagent_containers/food/snacks/shellfish/crab,
+		/obj/item/reagent_containers/food/snacks/shellfish/crab
+	)
+	result = /obj/item/reagent_containers/food/snacks/bisque
+
+
+/datum/recipe/stuffed_clam
+	reagents = list(
+		/datum/reagent/sodiumchloride = 1,
+		/datum/reagent/blackpepper = 1
+	)
+	items = list(
+		/obj/item/reagent_containers/food/snacks/shellfish/clam,
+		/obj/item/reagent_containers/food/snacks/slice/bread
+	)
+	result = /obj/item/reagent_containers/food/snacks/stuffed_clam
