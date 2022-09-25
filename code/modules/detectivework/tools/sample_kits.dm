@@ -18,10 +18,13 @@
 	if(distance <= 1 && object)
 		to_chat(user, "The label says: '[object]'")
 
-/obj/item/sample/print/New(newloc, atom/supplied)
-	..(newloc, supplied)
+/obj/item/sample/print/on_update_icon()
 	if(evidence && evidence.len)
 		icon_state = "fingerprint1"
+
+/obj/item/sample/print/New(newloc, atom/supplied)
+	..(newloc, supplied)
+	update_icon()
 
 /obj/item/sample/proc/copy_evidence(atom/supplied)
 	if(supplied.suit_fibers && supplied.suit_fibers.len)
@@ -48,6 +51,7 @@
 	SetName("[initial(name)] (combined)")
 	object = supplied.object + ", " + object
 	to_chat(user, "<span class='notice'>You overlay \the [src] and \the [supplied], combining the print records.</span>")
+	update_icon()
 	return 1
 
 /obj/item/sample/resolve_attackby(atom/A, mob/user, click_params)
@@ -87,7 +91,7 @@
 	var/fullprint = H.get_full_print()
 	evidence[fullprint] = fullprint
 	SetName("[initial(name)] (\the [H])")
-	icon_state = "fingerprint1"
+	update_icon()
 
 /obj/item/sample/print/attack(mob/living/M, mob/user)
 
@@ -124,7 +128,7 @@
 		evidence[fullprint] = fullprint
 		copy_evidence(src)
 		SetName("[initial(name)] (\the [H])")
-		icon_state = "fingerprint1"
+		update_icon()
 		return 1
 	return 0
 

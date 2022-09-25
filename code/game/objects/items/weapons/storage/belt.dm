@@ -399,10 +399,11 @@
 		/obj/item/sample/fibers,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape,
-		/obj/item/clothing/gloves/latex,
-		/obj/item/clothing/gloves/forensic,
+		/obj/item/clothing/gloves,
 		/obj/item/folder,
 		/obj/item/paper,
+		/obj/item/photo,
+		/obj/item/paper_bundle,
 		/obj/item/forensics/sample_kit,
 		/obj/item/device/camera,
 		/obj/item/device/taperecorder,
@@ -410,7 +411,8 @@
 		/obj/item/storage/csi_markers,
 		/obj/item/device/scanner,
 		/obj/item/clothing/head/beret,
-		/obj/item/material/knife/folding
+		/obj/item/material/knife/folding,
+		/obj/item/modular_computer/tablet
 		)
 
 /obj/item/storage/belt/forensic
@@ -428,10 +430,11 @@
 		/obj/item/sample/fibers,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape,
-		/obj/item/clothing/gloves/latex,
-		/obj/item/clothing/gloves/forensic,
+		/obj/item/clothing/gloves,
 		/obj/item/folder,
 		/obj/item/paper,
+		/obj/item/photo,
+		/obj/item/paper_bundle,
 		/obj/item/forensics/sample_kit,
 		/obj/item/device/camera,
 		/obj/item/device/taperecorder,
@@ -439,7 +442,8 @@
 		/obj/item/storage/csi_markers,
 		/obj/item/device/scanner,
 		/obj/item/clothing/head/beret,
-		/obj/item/material/knife/folding
+		/obj/item/material/knife/folding,
+		/obj/item/modular_computer/tablet
 		)
 
 /obj/item/storage/belt/holster/machete

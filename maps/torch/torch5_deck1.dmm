@@ -17385,6 +17385,7 @@
 /obj/item/device/radio/intercom/department/security{
 	pixel_y = 23
 	},
+/obj/item/book/manual/solgov_law,
 /turf/simulated/floor/tiled/monotile,
 /area/security/detectives_office)
 "fVb" = (
@@ -21940,7 +21941,8 @@
 /area/security/storage)
 "mgb" = (
 /obj/structure/table/steel,
-/obj/item/book/manual/solgov_law,
+/obj/item/material/ashtray/bronze,
+/obj/item/storage/fancy/cigarettes/professionals,
 /turf/simulated/floor/tiled,
 /area/security/detectives_office)
 "mhb" = (
@@ -26235,6 +26237,12 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
+"rsl" = (
+/obj/structure/disposalpipe/segment,
+/obj/machinery/hologram/holopad,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled,
+/area/security/detectives_office)
 "rsu" = (
 /obj/effect/floor_decal/corner/red{
 	dir = 8
@@ -28834,7 +28842,8 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/security{
-	name = "Evidence Storage"
+	name = "Evidence Storage";
+	secured_wires = 1
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/evidence)
@@ -38637,7 +38646,7 @@ adK
 qWE
 pVv
 nOO
-nOO
+rsl
 yeI
 mgb
 iVM

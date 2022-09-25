@@ -55,6 +55,9 @@
 			else if (istype(copyitem, /obj/item/paper_bundle))
 				var/obj/item/paper_bundle/B = bundlecopy(copyitem)
 				sleep(15*B.pages.len)
+			else if (istype(copyitem, /obj/item/sample/print))
+				fpcopy(copyitem)
+				sleep(15)
 			else
 				to_chat(user, "<span class='warning'>\The [copyitem] can't be copied by \the [src].</span>")
 				break
@@ -105,7 +108,7 @@
 		copyitem = null
 
 /obj/machinery/photocopier/attackby(obj/item/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/paper) || istype(O, /obj/item/photo) || istype(O, /obj/item/paper_bundle))
+	if(istype(O, /obj/item/paper) || istype(O, /obj/item/photo) || istype(O, /obj/item/paper_bundle) || istype(O, /obj/item/sample/print))
 		if(!copyitem)
 			if(!user.unEquip(O, src))
 				return
@@ -229,6 +232,19 @@
 	p.update_icon()
 	p.icon_state = "paper_words"
 	p.SetName(bundle.name)
+	return p
+
+/obj/machinery/photocopier/proc/fpcopy(obj/item/sample/print/fpcard, need_toner = TRUE)
+	var/obj/item/sample/print/p = new /obj/item/sample/print (src)
+	p.dropInto(loc)
+	p.SetName(fpcard.name)
+	p.evidence = fpcard.evidence
+	p.object = fpcard.object
+	if(need_toner)
+		toner--
+	if(toner < 1)
+		visible_message(SPAN_NOTICE("A red light on \the [src] flashes, indicating that it is out of toner."))
+	p.update_icon()
 	return p
 
 /obj/item/device/toner
