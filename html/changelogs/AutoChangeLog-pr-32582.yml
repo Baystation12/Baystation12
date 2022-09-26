@@ -1,6 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - rscdel: Smoke effects no longer make mobs drop things solely from the smoke effect
-      itself. Mobs may still drop things due to other effects such as sleepiness from
-      sleep smoke or any chemical effects carried by the smoke.
