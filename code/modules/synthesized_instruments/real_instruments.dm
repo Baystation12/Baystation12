@@ -31,7 +31,13 @@
 		if ("play")
 			src.player.song.playing = value
 			if (src.player.song.playing)
+				GLOB.instrument_synchronizer.raise_event(player.actual_instrument)
 				src.player.song.play_song(usr)
+		if ("wait")
+			if(value)
+				src.player.wait = weakref(usr)
+			else
+				src.player.wait = null
 		if ("newsong")
 			src.player.song.lines.Cut()
 			src.player.song.tempo = src.player.song.sanitize_tempo(5) // default 120 BPM
@@ -151,6 +157,7 @@
 		"playback" = list(
 			"playing" = src.player.song.playing,
 			"autorepeat" = src.player.song.autorepeat,
+			"wait" = src.player.wait != null
 		),
 		"basic_options" = list(
 			"cur_instrument" = src.player.song.instrument_data.name,
