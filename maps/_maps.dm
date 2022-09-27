@@ -1,5 +1,3 @@
-#include "_map_include.dm"
-
 #include "mapsystem\map_preferences.dm"
 #include "mapsystem\map_ranks.dm"
 #include "mapsystem\maps.dm"
@@ -8,6 +6,8 @@
 #include "mapsystem\maps_jobs.dm"
 #include "mapsystem\maps_unit_testing.dm"
 #include "unit_tests\unit_testing.dm"
+
+#include "_map_include.dm"
 
 #include "example\example_define.dm" // Always included because tests. May be fixable later.
 
