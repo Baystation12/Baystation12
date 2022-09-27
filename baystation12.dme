@@ -10,6 +10,7 @@
 #define DEBUG
 // END_PREFERENCES
 // BEGIN_INCLUDE
+#include "code\__spaceman_dmm.dm"
 #include "code\_macros.dm"
 #include "code\_version.dm"
 #include "code\hub.dm"
@@ -70,7 +71,6 @@
 #include "code\__defines\shields.dm"
 #include "code\__defines\shuttle.dm"
 #include "code\__defines\skills.dm"
-#include "code\__defines\spaceman_dmm.dm"
 #include "code\__defines\species.dm"
 #include "code\__defines\subsystem-priority.dm"
 #include "code\__defines\subsystems.dm"
