@@ -24,8 +24,4 @@
 
 	#define using_map_DATUM /datum/map/away_sites_testing
 
-#elif !defined(MAP_OVERRIDE)
-
-	#warn A map has already been included, ignoring Away Sites Testing
-
 #endif
