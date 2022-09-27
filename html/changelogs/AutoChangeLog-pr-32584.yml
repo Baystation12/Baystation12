@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Seed storage UI now automatically sorts the list of seeds the machine contains.
