@@ -54,7 +54,7 @@
 	desc = "A shield adept at blocking blunt objects from connecting with the torso of the shield wielder."
 	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "riot"
-	item_state = "riotshield"
+	item_state = "riot"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
 	force = 5.0
@@ -95,7 +95,7 @@
 	name = "plasteel combat shield"
 	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "metal"
-	item_state = "metalshield"
+	item_state = "metal"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
 	force = 6.0
