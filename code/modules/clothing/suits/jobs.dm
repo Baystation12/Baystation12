@@ -188,7 +188,7 @@
 	icon_state = "hazard_b"
 
 /obj/item/clothing/suit/storage/hazardvest/white
-	name = "white hazard vest"
+	name = "medical hazard vest"
 	desc = "A high-visibility vest used in work zones. This one has a blue cross!"
 	icon_state = "hazard_w"
 
@@ -197,6 +197,20 @@
 	desc = "A high-visibility vest used in work zones. This one is green!"
 	icon_state = "hazard_g"
 
+/obj/item/clothing/suit/storage/hazardvest/yellow
+	name = "yellow hazard vest"
+	desc = "A high-visibility vest used in work zones. This one is yellow!"
+	icon_state = "hazard_y"
+
+/obj/item/clothing/suit/storage/hazardvest/red
+	name = "red hazard vest"
+	desc = "A high-visibility vest used in work zones. This one is red!"
+	icon_state = "hazard_r"
+
+/obj/item/clothing/suit/storage/hazardvest/purple
+	name = "purple hazard vest"
+	desc = "A high-visibility vest used in work zones. This one is purple!"
+	icon_state = "hazard_p"
 
 /obj/item/clothing/suit/storage/toggle/highvis
 	name = "high visibility jacket"
