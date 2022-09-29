@@ -1,0 +1,5 @@
+author: CrimsonShrike
+delete-after: true
+changes:
+  - rscadd: Instruments can now "Wait". This will make it so they will start playing
+      when a nearby instrument starts playing.
