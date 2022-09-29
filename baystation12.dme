@@ -347,6 +347,7 @@
 #include "code\datums\observation\exited.dm"
 #include "code\datums\observation\hands_swapped.dm"
 #include "code\datums\observation\helpers.dm"
+#include "code\datums\observation\instruments.dm"
 #include "code\datums\observation\life.dm"
 #include "code\datums\observation\logged_in.dm"
 #include "code\datums\observation\logged_out.dm"

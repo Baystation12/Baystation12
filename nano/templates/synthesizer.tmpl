@@ -25,6 +25,16 @@
 	</div>
 </div>
 
+<div class="item">
+	<div class="itemLabel">
+		Wait:
+	</div>
+	<div class="itemContent">
+		{{:helper.link('On', null, {'target': 'wait', 'value': 1}, data.playback.wait ? 'selected' : null)}}
+		{{:helper.link('Off', null, {'target': 'wait', 'value': 0}, !data.playback.wait ? 'selected' : null)}}
+	</div>
+</div>
+
 {{/if}}
 
 <h3>Basic options</h3>
