@@ -1,9 +1,0 @@
-author: SingingSpock
-delete-after: true
-changes:
-  - bugfix: EC and Fleet counselors will no longer spawn with a contractor ID
-  - tweak: Operant registration card is now normally a normal card rather than an
-      ID card
-  - tweak: Operant card no longer part of loadout for Counselor, instead it's a loadout
-      item restricted to counselors
-  - rscadd: Operant card now shows your basic level of psionic talent.
