@@ -7,6 +7,9 @@
 
 /obj/item/storage/box/evidence
 	name = "evidence bag box"
+	desc = "Sterilized equipment within. Do not contaminate."
+	icon = 'icons/obj/forensics.dmi'
+	icon_state = "dnakit"
 	desc = "A box claiming to contain evidence bags."
 	startswith = list(/obj/item/evidencebag = 7)
 

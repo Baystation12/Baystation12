@@ -272,6 +272,7 @@
 	allowed_roles = ARMORED_ROLES
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
+		/datum/mil_branch/solgov,
 		/datum/mil_branch/civilian
 	)
 
