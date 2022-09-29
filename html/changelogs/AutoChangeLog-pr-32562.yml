@@ -1,0 +1,7 @@
+author: Sbotkin
+delete-after: true
+changes:
+  - rscadd: Fingerprint cards can be copied using a photocopier now.
+  - tweak: SFP agents allowed to pick UBAC shirts in the loadout.
+  - tweak: Forensics belts and the crime kit can hold more stuff now.
+  - maptweak: Adds a holopad to the investigations office.
