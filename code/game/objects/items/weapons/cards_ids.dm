@@ -44,6 +44,56 @@
 		return
 	..()
 
+/obj/item/card/operant_card
+	name = "operant registration card"
+	icon_state = "warrantcard_civ"
+	desc = "A registration card in a faux-leather case. It marks the named individual as a registered, law-abiding psionic."
+	w_class = ITEM_SIZE_SMALL
+	attack_verb = list("whipped")
+	hitsound = 'sound/weapons/towelwhip.ogg'
+	var/info
+	var/potential
+	var/use_rating
+
+
+/obj/item/card/operant_card/proc/set_info(mob/living/carbon/human/human)
+	if(!istype(human))
+		return
+	switch(human.psi?.rating)
+		if(0)
+			use_rating = "[human.psi.rating]-Lambda"
+		if(1)
+			use_rating = "[human.psi.rating]-Epsilon"
+		if(2)
+			use_rating = "[human.psi.rating]-Gamma"
+		if(3)
+			use_rating = "[human.psi.rating]-Delta"
+		if(4)
+			use_rating = "[human.psi.rating]-Beta"
+		if(5)
+			use_rating = "[human.psi.rating]-Alpha"
+		if (6 to INFINITY)
+			use_rating = "[human.psi.rating]-Omega"
+		else
+			use_rating = "Non-Psionic"
+
+	potential = "This individual has an overall psi rating of [use_rating]."
+	info = {"\
+		Name: [human.real_name]\n\
+		Species: [human.get_species()]\n\
+		Fingerprint: [human.dna?.uni_identity ? md5(human.dna.uni_identity) : "N/A"]\n\
+		Assessed Potential: [potential]\
+	"}
+
+
+/obj/item/card/operant_card/attack_self(mob/living/user)
+	user.visible_message(
+		SPAN_ITALIC("\The [user] examines \a [src]."),
+		SPAN_ITALIC("You examine \the [src]."),
+		3
+	)
+	to_chat(user, info || SPAN_WARNING("\The [src] is completely blank!"))
+
 /obj/item/card/data
 	name = "data card"
 	desc = "A plastic magstripe card for simple and speedy data storage and transfer. This one has a stripe running down the middle."

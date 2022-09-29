@@ -131,12 +131,19 @@
 	description = "A travel visa issued by the Sol Central Government for the purpose of recreation."
 	path = /obj/item/paper/travelvisa
 
+
 /datum/gear/passport
 	display_name = "passports selection"
 	description = "A selection of passports."
 	path = /obj/item/passport
 	flags = GEAR_HAS_SUBTYPE_SELECTION
 	custom_setup_proc = /obj/item/passport/proc/set_info
+
+/datum/gear/foundation_civilian
+	display_name = "operant registration card"
+	description = "A registration card in a faux-leather case. It marks the named individual as a registered, law-abiding psionic."
+	path = /obj/item/card/operant_card
+	custom_setup_proc = /obj/item/card/operant_card/proc/set_info
 
 /datum/gear/mirror
 	display_name = "handheld mirror"

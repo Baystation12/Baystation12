@@ -263,6 +263,9 @@
 /datum/gear/accessory/ftu_pin
 	allowed_branches = CIVILIAN_BRANCHES
 
+/datum/gear/foundation_civilian
+	allowed_roles = list(/datum/job/psychiatrist)
+
 /*********************
  tactical accessories
 *********************/

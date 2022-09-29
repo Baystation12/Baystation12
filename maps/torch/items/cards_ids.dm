@@ -55,6 +55,9 @@
 	job_access_type = /datum/job/chemist
 	detail_color = COLOR_PALE_BLUE_GRAY
 
+/obj/item/card/id/torch/crew/medical/counselor
+	job_access_type = /datum/job/psychiatrist
+
 /obj/item/card/id/torch/contractor/medical/counselor
 	job_access_type = /datum/job/psychiatrist
 
