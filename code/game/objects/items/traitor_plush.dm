@@ -102,10 +102,45 @@
 	last_words = "Chitter"
 
 /obj/item/plushbomb/carp
-	name = "plush carp"
-	desc = "A plushie of an elated carp! Straight from the wilds of the Nyx frontier, now right here in your hands."
-	icon_state = "carpplushie"
+	name = "carp plush"
+	desc = "A plush purple space carp. Less threatening than the real thing."
+	icon_state = "carp-purple"
 	last_words = "Gnash"
+
+/obj/item/plushbomb/carp/gold
+	desc = "A plush golden space carp. Less threatening than the real thing."
+	icon_state = "carp-gold"
+
+/obj/item/plushbomb/carp/pink
+	desc = "A plush pink space carp. Less threatening than the real thing."
+	icon_state = "carp-pink"
+
+/obj/item/plushbomb/corgi
+	name = "corgi plush"
+	desc = "A plush corgi. Being tiny makes it cuter."
+	icon_state = "corgi"
+	last_words = "Bark"
+
+/obj/item/plushbomb/corgi/bow
+	desc = "A plush corgi with a little bow on its head. Being tiny makes it cuter."
+	icon_state = "corgi-bow"
+
+/obj/item/plushbomb/deer
+	name = "deer plush"
+	desc = "A plush deer. Somehow still majestic."
+	icon_state = "deer"
+	last_words = "Bleat"
+
+/obj/item/plushbomb/squid
+	name = "squid plush"
+	desc = "A plush blue squid. Tentacular."
+	icon_state = "squid-blue"
+	last_words = "Squish"
+
+/obj/item/plushbomb/squid/orange
+	name = "squid plush"
+	desc = "A plush orange squid. Tentacular."
+	icon_state = "squid-orange"
 
 /obj/item/plushbomb/thoom
 	name = "th'oom plush"
