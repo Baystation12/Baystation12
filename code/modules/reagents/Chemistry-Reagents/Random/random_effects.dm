@@ -33,7 +33,7 @@
 
 /decl/random_chem_effect/proc/on_property_recompute(datum/reagent/random/reagent, value)
 
-/decl/random_chem_effect/proc/affect_blood(mob/living/carbon/M, alien, removed, value)
+/decl/random_chem_effect/proc/affect_blood(mob/living/carbon/M, removed, value)
 
 /decl/random_chem_effect/proc/distillation_act(datum/reagent/random/reagent, datum/reagents/reagents)
 
@@ -187,8 +187,8 @@
 
 /decl/random_chem_effect/random_properties/cooling_act(datum/reagent/random/reagent, datum/reagents/reagents)
 
-/decl/random_chem_effect/random_properties/affect_blood(mob/living/carbon/M, alien, removed, value)
-	if(chem_effect_define && alien != IS_DIONA) // screw diona
+/decl/random_chem_effect/random_properties/affect_blood(mob/living/carbon/M, removed, value)
+	if(chem_effect_define && !IS_METABOLICALLY_INERT(M)) // screw diona
 		M.add_chemical_effect(chem_effect_define, value)
 
 /decl/random_chem_effect/random_properties/get_interactions(datum/reagent/random/reagent, sci_skill, chem_skill)
@@ -346,8 +346,8 @@
 	mode = RANDOM_CHEM_EFFECT_INT
 	desc = "acute toxicity"
 
-/decl/random_chem_effect/random_properties/heal_brute/affect_blood(mob/living/carbon/M, alien, removed, value)
-	if(alien != IS_DIONA)
+/decl/random_chem_effect/random_properties/heal_brute/affect_blood(mob/living/carbon/M, removed, value)
+	if (!IS_METABOLICALLY_INERT(M))
 		M.adjustToxLoss(value * removed)
 
 /decl/random_chem_effect/random_properties/heal_brute
@@ -355,8 +355,8 @@
 	maximum = 10
 	desc = "tissue repair"
 
-/decl/random_chem_effect/random_properties/heal_brute/affect_blood(mob/living/carbon/M, alien, removed, value)
-	if(alien != IS_DIONA)
+/decl/random_chem_effect/random_properties/heal_brute/affect_blood(mob/living/carbon/M, removed, value)
+	if (!IS_METABOLICALLY_INERT(M))
 		M.heal_organ_damage(removed * value, 0)
 
 /decl/random_chem_effect/random_properties/heal_burns
@@ -364,8 +364,8 @@
 	maximum = 10
 	desc = "burn repair"
 
-/decl/random_chem_effect/random_properties/heal_brute/affect_blood(mob/living/carbon/M, alien, removed, value)
-	if(alien != IS_DIONA)
+/decl/random_chem_effect/random_properties/heal_brute/affect_blood(mob/living/carbon/M, removed, value)
+	if (!IS_METABOLICALLY_INERT(M))
 		M.heal_organ_damage(0, removed * value)
 
 #undef RANDOM_CHEM_EFFECT_TRUE

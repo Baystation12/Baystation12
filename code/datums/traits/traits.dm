@@ -1,5 +1,3 @@
-/mob/living/var/list/traits
-
 /mob/living/proc/HasTrait(trait_type)
 	SHOULD_NOT_OVERRIDE(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
@@ -28,6 +26,12 @@
 	var/decl/trait/T = decls_repository.get_decl(trait_type)
 	if(!T.Validate(trait_level))
 		return FALSE
+
+	if (!LAZYISIN(traits, trait_type))
+		for (var/existing_trait_types in traits)
+			var/decl/trait/ET = decls_repository.get_decl(existing_trait_types)
+			if (trait_type in ET.incompatible_traits)
+				return FALSE
 
 	LAZYSET(traits, trait_type, trait_level)
 	return TRUE
@@ -61,6 +65,8 @@
 	var/description
 	/// Should either only contain TRAIT_LEVEL_EXISTS or a set of the other TRAIT_LEVEL_* levels
 	var/list/levels = list(TRAIT_LEVEL_EXISTS)
+	/// These trait types may not co-exist on the same mob/species
+	var/list/incompatible_traits
 	abstract_type = /decl/trait
 
 /decl/trait/New()

@@ -289,7 +289,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	heating_point = null
 	should_admin_log = TRUE
 
-/datum/reagent/zombie/affect_blood(mob/living/carbon/M, alien, removed)
+/datum/reagent/zombie/affect_blood(mob/living/carbon/M, removed)
 	if (!ishuman(M))
 		return
 	var/mob/living/carbon/human/H = M
@@ -336,8 +336,8 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 	M.reagents.add_reagent(/datum/reagent/zombie, Frand(0.1, 1))
 
-/datum/reagent/zombie/affect_touch(mob/living/carbon/M, alien, removed)
-	affect_blood(M, alien, removed * 0.5)
+/datum/reagent/zombie/affect_touch(mob/living/carbon/M, removed)
+	affect_blood(M, removed * 0.5)
 
 
 //// Zombie Procs

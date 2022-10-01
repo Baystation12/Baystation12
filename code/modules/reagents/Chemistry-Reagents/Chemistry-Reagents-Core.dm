@@ -58,20 +58,20 @@
 		if(B)
 			B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
 
-/datum/reagent/blood/affect_ingest(mob/living/carbon/M, alien, removed)
+/datum/reagent/blood/affect_ingest(mob/living/carbon/M, removed)
 
 	if(M.chem_doses[type] > 5)
 		M.adjustToxLoss(removed)
 	if(M.chem_doses[type] > 15)
 		M.adjustToxLoss(removed)
 
-/datum/reagent/blood/affect_touch(mob/living/carbon/M, alien, removed)
+/datum/reagent/blood/affect_touch(mob/living/carbon/M, removed)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.isSynthetic())
 			return
 
-/datum/reagent/blood/affect_blood(mob/living/carbon/M, alien, removed)
+/datum/reagent/blood/affect_blood(mob/living/carbon/M, removed)
 	M.inject_blood(src, volume)
 	remove_self(volume)
 
@@ -94,12 +94,12 @@
 	heating_point = T100C
 	value = 0
 
-/datum/reagent/water/affect_blood(mob/living/carbon/M, alien, removed)
+/datum/reagent/water/affect_blood(mob/living/carbon/M, removed)
 	var/malus_level = M.GetTraitLevel(/decl/trait/malus/water)
 	if (malus_level)
 		M.adjustToxLoss(malus_level * removed)
 
-/datum/reagent/water/affect_ingest(mob/living/carbon/M, alien, removed)
+/datum/reagent/water/affect_ingest(mob/living/carbon/M, removed)
 
 	var/malus_level = M.GetTraitLevel(/decl/trait/malus/water)
 	if (malus_level)
@@ -161,10 +161,12 @@
 			L.adjust_fire_stacks(-(amount / 10))
 			remove_self(amount)
 
-/datum/reagent/water/affect_touch(mob/living/carbon/M, alien, removed)
-	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
+/datum/reagent/water/affect_touch(mob/living/carbon/M, removed)
+	var/trait_level = GET_TRAIT_LEVEL(M, /decl/trait/malus/water)
+	if (!trait_level)
 		return
-	M.adjustToxLoss(10 * removed)	// Babies have 150 health, adults have 200; So, 15 units and 20
+
+	M.adjustToxLoss(trait_level * 5 * removed)
 	var/mob/living/carbon/slime/S = M
 	if(!S.client && istype(S))
 		if(S.Target) // Like cats
@@ -221,7 +223,7 @@
 	remove_self(volume)
 	return
 
-/datum/reagent/fuel/affect_blood(mob/living/carbon/M, alien, removed)
+/datum/reagent/fuel/affect_blood(mob/living/carbon/M, removed)
 	M.adjustToxLoss(2 * removed)
 
 /datum/reagent/fuel/touch_mob(mob/living/L, amount)

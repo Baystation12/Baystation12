@@ -1,3 +1,4 @@
+/// Boons generally only come with positive aspects
 /decl/trait/boon
 	abstract_type = /decl/trait/boon
 

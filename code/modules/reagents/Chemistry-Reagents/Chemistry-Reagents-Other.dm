@@ -107,10 +107,10 @@
 	glass_name = "liquid gold"
 	glass_desc = "It's magic. We don't have to explain it."
 
-/datum/reagent/adminordrazine/affect_touch(mob/living/carbon/M, alien, removed)
-	affect_blood(M, alien, removed)
+/datum/reagent/adminordrazine/affect_touch(mob/living/carbon/M, removed)
+	affect_blood(M, removed)
 
-/datum/reagent/adminordrazine/affect_blood(mob/living/carbon/M, alien, removed)
+/datum/reagent/adminordrazine/affect_blood(mob/living/carbon/M, removed)
 	M.rejuvenate()
 
 /datum/reagent/gold
@@ -137,10 +137,10 @@
 	color = "#b8b8c0"
 	value = 9
 
-/datum/reagent/uranium/affect_touch(mob/living/carbon/M, alien, removed)
-	affect_ingest(M, alien, removed)
+/datum/reagent/uranium/affect_touch(mob/living/carbon/M, removed)
+	affect_ingest(M, removed)
 
-/datum/reagent/uranium/affect_blood(mob/living/carbon/M, alien, removed)
+/datum/reagent/uranium/affect_blood(mob/living/carbon/M, removed)
 	M.apply_damage(5 * removed, DAMAGE_RADIATION, armor_pen = 100)
 
 /datum/reagent/uranium/touch_turf(turf/T)
@@ -159,7 +159,7 @@
 	glass_name = "holy water"
 	glass_desc = "An ashen-obsidian-water mix, this solution will alter certain sections of the brain's rationality."
 
-/datum/reagent/water/holywater/affect_ingest(mob/living/carbon/M, alien, removed)
+/datum/reagent/water/holywater/affect_ingest(mob/living/carbon/M, removed)
 	..()
 	if(ishuman(M)) // Any location
 		if(iscultist(M))
@@ -219,7 +219,7 @@
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 5)
 
-/datum/reagent/thermite/affect_blood(mob/living/carbon/M, alien, removed)
+/datum/reagent/thermite/affect_blood(mob/living/carbon/M, removed)
 	M.adjustFireLoss(3 * removed)
 
 /datum/reagent/napalm
@@ -268,7 +268,7 @@
 		for(var/mob/living/carbon/slime/M in T)
 			M.adjustToxLoss(rand(5, 10))
 
-/datum/reagent/space_cleaner/affect_touch(mob/living/carbon/M, alien, removed)
+/datum/reagent/space_cleaner/affect_touch(mob/living/carbon/M, removed)
 	if(M.r_hand)
 		M.r_hand.clean_blood()
 	if(M.l_hand)
@@ -322,7 +322,7 @@
 	color = "#808080"
 	value = 9
 
-/datum/reagent/nitroglycerin/affect_blood(mob/living/carbon/M, alien, removed)
+/datum/reagent/nitroglycerin/affect_blood(mob/living/carbon/M, removed)
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
 
@@ -407,8 +407,8 @@
 	color = COLOR_GRAY80
 	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
 
-/datum/reagent/helium/affect_blood(mob/living/carbon/M, alien, removed)
-	if(alien == IS_DIONA)
+/datum/reagent/helium/affect_blood(mob/living/carbon/M, removed)
+	if (IS_METABOLICALLY_INERT(M))
 		return
 	..()
 	M.add_chemical_effect(CE_SQUEAKY, 1)
@@ -421,8 +421,8 @@
 	reagent_state = LIQUID
 	color = COLOR_GRAY80
 
-/datum/reagent/oxygen/affect_blood(mob/living/carbon/M, alien, removed)
-	if(alien == IS_VOX)
+/datum/reagent/oxygen/affect_blood(mob/living/carbon/M, removed)
+	if (GAS_OXYGEN in M.species.poison_types)
 		M.adjustToxLoss(removed * 6)
 
 /datum/reagent/carbon_monoxide
@@ -433,8 +433,8 @@
 	color = COLOR_GRAY80
 	metabolism = 0.05 // As with helium.
 
-/datum/reagent/carbon_monoxide/affect_blood(mob/living/carbon/human/M, alien, removed)
-	if(!istype(M) || alien == IS_DIONA)
+/datum/reagent/carbon_monoxide/affect_blood(mob/living/carbon/human/M, removed)
+	if(!istype(M) || IS_METABOLICALLY_INERT(M))
 		return
 	var/warning_message
 	var/warning_prob = 10
@@ -479,8 +479,8 @@
 	color = "#33270b"
 	overdose = REAGENTS_OVERDOSE
 
-/datum/reagent/capilliumate/affect_touch(mob/living/carbon/human/M, alien, removed)
-	if (!alien)
+/datum/reagent/capilliumate/affect_touch(mob/living/carbon/human/M, removed)
+	if (!(M.species.appearance_flags & HAS_STATIC_HAIR))
 		var/datum/sprite_accessory/hair/newhair = /datum/sprite_accessory/hair/longest
 		var/datum/sprite_accessory/facial_hair/newbeard = /datum/sprite_accessory/facial_hair/vlongbeard
 		M.change_hair(initial(newhair.name))
@@ -491,8 +491,8 @@
 		)
 	remove_self(volume)
 
-/datum/reagent/capilliumate/affect_blood(mob/living/carbon/M, alien, removed)
-	if (alien == IS_DIONA)
+/datum/reagent/capilliumate/affect_blood(mob/living/carbon/M, removed)
+	if (IS_METABOLICALLY_INERT(M))
 		return
 	if (prob(10))
 		to_chat(M, SPAN_WARNING("Your tongue feels... fuzzy."))
@@ -524,7 +524,7 @@
 			)
 	remove_self(volume)
 
-/datum/reagent/colored_hair_dye/affect_touch(mob/living/carbon/human/H, alien, removed)
+/datum/reagent/colored_hair_dye/affect_touch(mob/living/carbon/human/H, removed)
 	var/list/dye_args = list(H) + GetHexColors(color)
 	apply_dye_color(arglist(dye_args))
 
@@ -576,5 +576,5 @@
 	name = "Chaotic Hair Dye"
 	description = "This hair dye can be any color! Only one way to find out what kind!"
 
-/datum/reagent/colored_hair_dye/chaos/affect_touch(mob/living/carbon/human/H, alien, removed)
+/datum/reagent/colored_hair_dye/chaos/affect_touch(mob/living/carbon/human/H, removed)
 	apply_dye_color(H, Frand(1, 254), Frand(1, 254), Frand(1, 254))

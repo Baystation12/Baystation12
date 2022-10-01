@@ -19,7 +19,6 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 	flesh_color = "#05fffb"
 
 	hunger_factor =    DEFAULT_HUNGER_FACTOR //todo
-	reagent_tag =      IS_SLIME
 	bump_flag =        SLIME
 	swap_flags =       MONKEY|SLIME|SIMPLE_ANIMAL
 	push_flags =       MONKEY|SLIME|SIMPLE_ANIMAL

@@ -69,9 +69,9 @@
 
 	taste_description = "beer"
 
-/datum/reagent/ethanol/beer/affect_ingest(mob/living/carbon/M, alien, removed)
+/datum/reagent/ethanol/beer/affect_ingest(mob/living/carbon/M, removed)
 	..()
-	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
+	if (METABOLIC_INERTNESS(M) > TRAIT_LEVEL_MINOR)
 		return
 	M.jitteriness = max(M.jitteriness - 3, 0)
 
@@ -157,9 +157,9 @@
 	glass_name = "rum"
 	glass_desc = "Now you want to Pray for a pirate suit, don't you?"
 
-/datum/reagent/ethanol/deadrum/affect_ingest(mob/living/carbon/M, alien, removed)
+/datum/reagent/ethanol/deadrum/affect_ingest(mob/living/carbon/M, removed)
 	..()
-	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
+	if (METABOLIC_INERTNESS(M) > TRAIT_LEVEL_MINOR)
 		return
 	M.dizziness +=5
 
@@ -188,8 +188,8 @@
 /datum/reagent/ethanol/coffee
 	overdose = 45
 
-/datum/reagent/ethanol/coffee/affect_ingest(mob/living/carbon/M, alien, removed)
-	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
+/datum/reagent/ethanol/coffee/affect_ingest(mob/living/carbon/M, removed)
+	if (METABOLIC_INERTNESS(M) > TRAIT_LEVEL_MINOR)
 		return
 	..()
 	M.dizziness = max(0, M.dizziness - 5)
@@ -198,8 +198,8 @@
 	if(M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
 
-/datum/reagent/ethanol/coffee/overdose(mob/living/carbon/M, alien)
-	if(alien == IS_DIONA)
+/datum/reagent/ethanol/coffee/overdose(mob/living/carbon/M)
+	if (IS_METABOLICALLY_INERT(M))
 		return
 	M.make_jittery(5)
 
@@ -307,9 +307,9 @@
 	glass_name = "Thirteen Loko"
 	glass_desc = "This is a glass of Thirteen Loko, it appears to be of the highest quality. The drink, not the glass."
 
-/datum/reagent/ethanol/thirteenloko/affect_ingest(mob/living/carbon/M, alien, removed)
+/datum/reagent/ethanol/thirteenloko/affect_ingest(mob/living/carbon/M, removed)
 	..()
-	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
+	if (METABOLIC_INERTNESS(M) > TRAIT_LEVEL_MINOR)
 		return
 	M.drowsyness = max(0, M.drowsyness - 7)
 	if (M.bodytemperature > 310)
@@ -555,7 +555,7 @@
 	glass_name = "Beepsky Smash"
 	glass_desc = "Heavy, hot and strong. Just like the Iron fist of the LAW."
 
-/datum/reagent/ethanol/beepsky_smash/affect_ingest(mob/living/carbon/M, alien, removed)
+/datum/reagent/ethanol/beepsky_smash/affect_ingest(mob/living/carbon/M, removed)
 	..()
 	M.Stun(2)
 
@@ -569,9 +569,9 @@
 	glass_name = "Drifter"
 	glass_desc = "A heavy duty nightcap. The taste might wake you up, though."
 
-/datum/reagent/ethanol/drifter/affect_ingest(mob/living/carbon/M, alien, removed)
+/datum/reagent/ethanol/drifter/affect_ingest(mob/living/carbon/M, removed)
 	. = ..()
-	if(M.GetTraitLevel(/decl/trait/metabolically_inert) > TRAIT_LEVEL_MINOR)
+	if (METABOLIC_INERTNESS(M) > TRAIT_LEVEL_MINOR)
 		return
 	var/sleep_chance = M.GetTraitLevel(/decl/trait/malus/ethanol) || 1
 	if (prob(sleep_chance))
@@ -1111,7 +1111,7 @@
 	glass_icon = DRINK_ICON_NOISY
 	glass_special = list("neuroright")
 
-/datum/reagent/ethanol/neurotoxin/affect_ingest(mob/living/carbon/M, alien, removed)
+/datum/reagent/ethanol/neurotoxin/affect_ingest(mob/living/carbon/M, removed)
 	..()
 	M.Weaken(3)
 	M.add_chemical_effect(CE_PULSE, -1)
@@ -1158,7 +1158,7 @@
 	glass_name = "???"
 	glass_desc = "A black ichor with an oily purple sheer on top. Are you sure you should drink this?"
 
-/datum/reagent/ethanol/pwine/affect_ingest(mob/living/carbon/M, alien, removed)
+/datum/reagent/ethanol/pwine/affect_ingest(mob/living/carbon/M, removed)
 	..()
 	if(M.chem_doses[type] > 30)
 		M.adjustToxLoss(2 * removed)
@@ -1521,7 +1521,7 @@
 	glass_name = "qokk'loa"
 	glass_desc = "An unrefined hallucigenic substance, potent to humans and harmless to Skrell."
 
-/datum/reagent/ethanol/alien/qokkloa/affect_ingest(mob/living/carbon/M, alien, removed)
+/datum/reagent/ethanol/alien/qokkloa/affect_ingest(mob/living/carbon/M, removed)
 	..()
 	if(M.HasTrait(/decl/trait/boon/clear_mind))
 		return

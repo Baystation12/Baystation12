@@ -33,24 +33,24 @@
 		if(data[taste]/totalFlavor < 0.1)
 			data -= taste
 
-/datum/reagent/nutriment/affect_blood(mob/living/carbon/M, alien, removed)
+/datum/reagent/nutriment/affect_blood(mob/living/carbon/M, removed)
 	if(!injectable)
 		M.adjustToxLoss(0.2 * removed)
 		return
-	affect_ingest(M, alien, removed)
+	affect_ingest(M, removed)
 
-/datum/reagent/nutriment/affect_ingest(mob/living/carbon/M, alien, removed)
+/datum/reagent/nutriment/affect_ingest(mob/living/carbon/M, removed)
 	if (protein_amount)
 		handle_protein(M, src)
 	M.heal_organ_damage(0.5 * removed, 0) //what
 
-	adjust_nutrition(M, alien, removed)
+	adjust_nutrition(M, removed)
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
 
-/datum/reagent/nutriment/proc/adjust_nutrition(mob/living/carbon/M, alien, removed)
+/datum/reagent/nutriment/proc/adjust_nutrition(mob/living/carbon/M, removed)
 	var/nut_removed = removed
 	var/hyd_removed = removed
-	if(alien == IS_UNATHI)
+	if (HAS_TRAIT(M, /decl/trait/boon/cast_iron_stomach))
 		removed *= 0.1 // Unathi get most of their nutrition from meat.
 	if(nutriment_factor)
 		M.adjust_nutrition(nutriment_factor * nut_removed) // For hunger and fatness
@@ -70,10 +70,11 @@
 	color = "#440000"
 	protein_amount = 1
 
-/datum/reagent/nutriment/protein/adjust_nutrition(mob/living/carbon/M, alien, removed)
-	switch(alien)
-		if(IS_UNATHI) removed *= 2.25
-		if(IS_SKRELL) return
+/datum/reagent/nutriment/protein/adjust_nutrition(mob/living/carbon/M, removed)
+	if (HAS_TRAIT(M, /decl/trait/malus/animal_protein))
+		return
+	if (HAS_TRAIT(M, /decl/trait/boon/cast_iron_stomach))
+		removed *= 2.25
 	M.adjust_nutrition(nutriment_factor * removed)
 
 /datum/reagent/nutriment/protein/egg // Also bad for skrell.
@@ -306,7 +307,7 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 0.11
 
-/datum/reagent/lipozine/affect_blood(mob/living/carbon/M, alien, removed)
+/datum/reagent/lipozine/affect_blood(mob/living/carbon/M, removed)
 	M.adjust_nutrition(-10)
 
 /* Non-food stuff like condiments */
@@ -347,8 +348,8 @@
 	color = "#07aab2"
 	value = 0.2
 
-/datum/reagent/frostoil/affect_blood(mob/living/carbon/M, alien, removed)
-	if(alien == IS_DIONA)
+/datum/reagent/frostoil/affect_blood(mob/living/carbon/M, removed)
+	if (IS_METABOLICALLY_INERT(M))
 		return
 	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
 	if(prob(1))
@@ -370,13 +371,13 @@
 	var/slime_temp_adj = 10
 	value = 0.2
 
-/datum/reagent/capsaicin/affect_blood(mob/living/carbon/M, alien, removed)
-	if(alien == IS_DIONA)
+/datum/reagent/capsaicin/affect_blood(mob/living/carbon/M, removed)
+	if (IS_METABOLICALLY_INERT(M))
 		return
 	M.adjustToxLoss(0.5 * removed)
 
-/datum/reagent/capsaicin/affect_ingest(mob/living/carbon/M, alien, removed)
-	if(M.HasTrait(/decl/trait/metabolically_inert) || M.HasTrait(/decl/trait/boon/cast_iron_stomach))
+/datum/reagent/capsaicin/affect_ingest(mob/living/carbon/M, removed)
+	if(IS_METABOLICALLY_INERT(M) || M.HasTrait(/decl/trait/boon/cast_iron_stomach))
 		return
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -407,7 +408,7 @@
 	discomfort_message = "<span class='danger'>You feel like your insides are burning!</span>"
 	slime_temp_adj = 15
 
-/datum/reagent/capsaicin/condensed/affect_touch(mob/living/carbon/M, alien, removed)
+/datum/reagent/capsaicin/condensed/affect_touch(mob/living/carbon/M, removed)
 	var/eyes_covered = 0
 	var/mouth_covered = 0
 	var/partial_mouth_covered = 0
@@ -417,10 +418,8 @@
 	var/obj/item/face_protection = null
 	var/obj/item/partial_face_protection = null
 
-	var/effective_strength = 5
-
-	if(alien == IS_SKRELL)	//Larger eyes means bigger targets.
-		effective_strength = 8
+	var/permeability = GET_TRAIT_LEVEL(M, /decl/trait/general/permeable_skin)
+	var/effective_strength = 5 + (3 * permeability)
 
 	var/list/protection
 	if(istype(M, /mob/living/carbon/human))
@@ -469,7 +468,7 @@
 			M.custom_emote(2, "[pick("coughs!","coughs hysterically!","splutters!")]")
 			M.Stun(3)
 
-/datum/reagent/capsaicin/condensed/affect_ingest(mob/living/carbon/M, alien, removed)
+/datum/reagent/capsaicin/condensed/affect_ingest(mob/living/carbon/M, removed)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!H.can_feel_pain())

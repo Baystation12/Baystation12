@@ -151,7 +151,7 @@
 	darksight_tint = DARKTINT_MODERATE
 
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
-	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_STATIC_HAIR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8cd7a3"
 	blood_color = "#1d2cbf"
@@ -168,8 +168,6 @@
 
 	cold_discomfort_level = 292 //Higher than perhaps it should be, to avoid big speed reduction at normal room temp
 	heat_discomfort_level = 368
-
-	reagent_tag = IS_SKRELL
 
 	descriptors = list(
 		/datum/mob_descriptor/height = 1,
@@ -253,9 +251,10 @@
 	ingest_amount = 15
 
 	traits = list(
-		/decl/trait/boon/clear_mind = TRAIT_LEVEL_EXISTS,
+		/decl/trait/boon/clear_mind = TRAIT_LEVEL_MINOR,
 		/decl/trait/malus/animal_protein = TRAIT_LEVEL_MAJOR,
-		/decl/trait/malus/ethanol = TRAIT_LEVEL_MODERATE
+		/decl/trait/malus/ethanol = TRAIT_LEVEL_MODERATE,
+		/decl/trait/general/permeable_skin = TRAIT_LEVEL_MINOR
 	)
 
 /datum/species/skrell/get_sex(mob/living/carbon/human/H)
@@ -356,7 +355,6 @@
 	blood_color = "#004400"
 	flesh_color = "#907e4a"
 
-	reagent_tag = IS_DIONA
 	genders = list(PLURAL)
 
 	available_cultural_info = list(
@@ -367,8 +365,9 @@
 	)
 
 	traits = list(
-		/decl/trait/metabolically_inert = TRAIT_LEVEL_MODERATE,
-		/decl/trait/boon/clear_mind = TRAIT_LEVEL_EXISTS
+		/decl/trait/boon/clear_mind = TRAIT_LEVEL_MAJOR,
+		/decl/trait/general/metabolically_inert = TRAIT_LEVEL_MODERATE,
+		/decl/trait/general/nonpermeable_skin = TRAIT_LEVEL_EXISTS
 	)
 
 /proc/spawn_diona_nymph(turf/target)
