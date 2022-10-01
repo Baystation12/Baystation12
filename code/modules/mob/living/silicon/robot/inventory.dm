@@ -5,6 +5,63 @@
 /mob/living/silicon/robot/get_active_hand()
 	return module_active
 
+
+/mob/living/silicon/robot/IsHolding(obj/item/item)
+	if (istype(item))
+		if (QDELING(item))
+			crash_with("Invalid instance supplied: The passed item has been QDEL'd.")
+			return
+		if (module_state_1 == item || module_state_2 == item || module_state_3 == item)
+			return item
+		return
+
+	if (ispath(item, /obj/item))
+		if (istype(module_state_1, item))
+			return module_state_1
+		if (istype(module_state_2, item))
+			return module_state_2
+		if (istype(module_state_3, item))
+			return module_state_3
+		return
+
+	crash_with("Invalid instance or path supplied: Not a valid subtype of `/obj/item` or was `null`.")
+
+
+/mob/living/silicon/robot/HandsEmpty()
+	return module_state_1 == null && module_state_2 == null && module_state_3 == null
+
+
+/mob/living/silicon/robot/HasFreeHand()
+	return module_state_1 == null || module_state_2 == null || module_state_3 == null
+
+
+/mob/living/silicon/robot/GetAllHeld(item_path)
+	. = list()
+
+	if (HandsEmpty())
+		return
+
+	if (!item_path)
+		if (module_state_1)
+			. += module_state_1
+		if (module_state_2)
+			. += module_state_2
+		if (module_state_3)
+			. += module_state_3
+		return
+
+	if (ispath(item_path, /obj/item))
+		if (istype(module_state_1, item_path))
+			. += module_state_1
+		if (istype(module_state_2, item_path))
+			. += module_state_2
+		if (istype(module_state_3, item_path))
+			. += module_state_3
+		return
+
+	crash_with("Invalid path supplied: Not a valid subtype of `/obj/item`.")
+
+
 /*-------TODOOOOOOOOOO--------*/
 
 //Verbs used by hotkeys.
