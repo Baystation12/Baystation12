@@ -141,7 +141,7 @@
 	if(!can_feel_pain())
 		return
 	var/crutches = 0
-	for(var/obj/item/cane/C in list(l_hand, r_hand))
+	for (var/obj/item/cane/C as anything in GetAllHeld(/obj/item/cane))
 		if(istype(C))
 			crutches++
 	for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))

@@ -68,7 +68,7 @@
 		return PROCESS_KILL
 
 	var/mob/M = loc
-	if(M.l_hand != src && M.r_hand != src)
+	if (!M.IsHolding(src))
 		return
 
 	if(!reagents.total_volume)

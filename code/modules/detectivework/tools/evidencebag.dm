@@ -15,7 +15,7 @@
 
 	var/mob/living/carbon/human/user = usr
 
-	if (!(user.l_hand == src || user.r_hand == src))
+	if (!user.IsHolding(src))
 		return //bag must be in your hands to use
 
 	if (isturf(I.loc))

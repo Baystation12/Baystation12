@@ -66,7 +66,7 @@
 /datum/extension/holster/proc/unholster(mob/user as mob, avoid_intent = FALSE)
 	if(!holstered)
 		return 0
-	if(user.get_active_hand() && user.get_inactive_hand())
+	if (!user.HasFreeHand())
 		to_chat(user, "<span class='warning'>You need an empty hand to draw \the [holstered]!</span>")
 		return 0
 	var/using_intent_preference = user.client ? user.client.get_preference_value(/datum/client_preference/holster_on_intent) == GLOB.PREF_YES : FALSE

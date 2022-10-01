@@ -117,17 +117,11 @@ var/global/list/mining_floors = list()
 
 /turf/simulated/mineral/Bumped(AM)
 	. = ..()
-	if(istype(AM,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = AM
-		if((istype(H.l_hand,/obj/item/pickaxe)) && (!H.hand))
-			attackby(H.l_hand,H)
-		else if((istype(H.r_hand,/obj/item/pickaxe)) && H.hand)
-			attackby(H.r_hand,H)
-
-	else if(istype(AM,/mob/living/silicon/robot))
-		var/mob/living/silicon/robot/R = AM
-		if(istype(R.module_active,/obj/item/pickaxe))
-			attackby(R.module_active,R)
+	if (ismob(AM))
+		var/mob/mob = AM
+		var/obj/item/pickaxe/pickaxe = mob.IsHolding(/obj/item/pickaxe)
+		if (pickaxe)
+			attackby(pickaxe, mob)
 
 /turf/simulated/mineral/proc/MineralSpread()
 	if(istype(mineral) && mineral.ore_spread_chance > 0)

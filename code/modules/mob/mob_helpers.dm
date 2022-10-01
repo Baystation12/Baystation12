@@ -315,10 +315,15 @@ var/global/list/organ_rel_size = list(
 
 
 /mob/proc/abiotic(full_body = FALSE)
-	if(full_body && ((src.l_hand && src.l_hand.simulated) || (src.r_hand && src.r_hand.simulated) || (src.back || src.wear_mask)))
+	var/holding_simulated_item = FALSE
+	for (var/obj/item/item as anything in GetAllHeld())
+		if (item.simulated)
+			holding_simulated_item = TRUE
+
+	if(full_body && (holding_simulated_item || (src.back || src.wear_mask)))
 		return TRUE
 
-	if((src.l_hand && src.l_hand.simulated) || (src.r_hand && src.r_hand.simulated))
+	if (holding_simulated_item)
 		return TRUE
 
 	return FALSE
@@ -490,11 +495,8 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		threatcount += 4
 
 	if(auth_weapons && !access_obj.allowed(src))
-		if(istype(l_hand, /obj/item/gun) || istype(l_hand, /obj/item/melee))
-			threatcount += 4
-
-		if(istype(r_hand, /obj/item/gun) || istype(r_hand, /obj/item/melee))
-			threatcount += 4
+		var/list/weapons = GetAllHeld(/obj/item/melee)
+		threatcount += 4 * weapons.len
 
 		if(istype(belt, /obj/item/gun) || istype(belt, /obj/item/melee))
 			threatcount += 2
@@ -542,12 +544,6 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 
 /mob/living/silicon/ai/get_multitool()
 	return ..(aiMulti)
-
-/proc/get_both_hands(mob/living/carbon/M)
-	if(!istype(M))
-		return
-	var/list/hands = list(M.l_hand, M.r_hand)
-	return hands
 
 /mob/proc/refresh_client_images()
 	if(client)

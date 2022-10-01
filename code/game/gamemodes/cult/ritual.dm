@@ -46,12 +46,11 @@
 		A.reagents.add_reagent(/datum/reagent/water, holy2water)
 
 /mob/proc/make_rune(rune, cost = 5, tome_required = 0)
-	var/has_tome = 0
+	var/has_tome = !!IsHolding(/obj/item/book/tome)
 	var/has_robes = 0
 	var/cult_ground = 0
-	if(istype(get_active_hand(), /obj/item/book/tome) || istype(get_inactive_hand(), /obj/item/book/tome))
-		has_tome = 1
-	else if(tome_required && mob_needs_tome())
+
+	if(!has_tome && tome_required && mob_needs_tome())
 		to_chat(src, "<span class='warning'>This rune is too complex to draw by memory, you need to have a tome in your hand to draw it.</span>")
 		return
 	if(istype(get_equipped_item(slot_head), /obj/item/clothing/head/culthood) && istype(get_equipped_item(slot_wear_suit), /obj/item/clothing/suit/cultrobes) && istype(get_equipped_item(slot_shoes), /obj/item/clothing/shoes/cult))

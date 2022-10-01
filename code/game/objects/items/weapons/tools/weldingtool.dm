@@ -175,7 +175,7 @@
 	//consider ourselves in a mob if we are in the mob's contents and not in their hands
 	if(isliving(src.loc))
 		var/mob/living/L = src.loc
-		if(!(L.l_hand == src || L.r_hand == src))
+		if (!L.IsHolding(src))
 			in_mob = L
 
 	if(in_mob)

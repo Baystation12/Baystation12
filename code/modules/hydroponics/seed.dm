@@ -215,7 +215,7 @@
 				continue
 			var/body_coverage = HEAD|FACE|EYES|UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 			for(var/obj/item/clothing/clothes in M)
-				if(M.l_hand == clothes || M.r_hand == clothes)
+				if (M.IsHolding(clothes))
 					continue
 				body_coverage &= ~(clothes.body_parts_covered)
 			if(!body_coverage)

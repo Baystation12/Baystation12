@@ -239,7 +239,7 @@
 	return ismob(user)
 
 /decl/emote/visible/signal/get_emote_message_3p(mob/user, atom/target, extra_params)
-	if(istype(user) && !(user.r_hand && user.l_hand))
+	if (istype(user) && user.HasFreeHand())
 		var/t1 = round(text2num(extra_params))
 		if(isnum(t1) && t1 <= 5)
 			return "USER raises [t1] finger\s."

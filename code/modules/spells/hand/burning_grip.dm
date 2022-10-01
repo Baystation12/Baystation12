@@ -15,7 +15,7 @@
 /spell/hand/burning_grip/valid_target(mob/living/L, mob/user)
 	if(!..())
 		return 0
-	if(!L.l_hand && !L.r_hand)
+	if (L.HandsEmpty())
 		return 0
 	return 1
 

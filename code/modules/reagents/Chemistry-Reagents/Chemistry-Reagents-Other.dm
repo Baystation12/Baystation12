@@ -269,10 +269,8 @@
 			M.adjustToxLoss(rand(5, 10))
 
 /datum/reagent/space_cleaner/affect_touch(mob/living/carbon/M, removed)
-	if(M.r_hand)
-		M.r_hand.clean_blood()
-	if(M.l_hand)
-		M.l_hand.clean_blood()
+	for (var/obj/item/item as anything in M.GetAllHeld())
+		item.clean_blood()
 	if(M.wear_mask)
 		if(M.wear_mask.clean_blood())
 			M.update_inv_wear_mask(0)

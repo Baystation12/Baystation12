@@ -54,7 +54,7 @@ var/global/list/all_gps_units = list()
 	return T ? "[T.x]:[T.y]:[T.z]" : "N/A"
 
 /obj/item/device/gps/proc/check_visible_to_holder()
-	. = holder && (holder.l_hand == src || holder.r_hand == src)
+	. = !!holder?.IsHolding(src)
 
 /obj/item/device/gps/proc/update_holder(force_clear = FALSE)
 

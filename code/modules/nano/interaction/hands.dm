@@ -12,7 +12,7 @@ GLOBAL_DATUM_INIT(hands_state, /datum/topic_state/hands, new)
 	return STATUS_CLOSE
 
 /mob/living/hands_can_use_topic(src_object)
-	if(src_object in get_both_hands(src))
+	if (IsHolding(src_object))
 		return STATUS_INTERACTIVE
 	return STATUS_CLOSE
 

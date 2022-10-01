@@ -25,7 +25,7 @@
 
 		if (ishuman(loc))
 			var/mob/living/carbon/human/H = loc
-			if (src != H.l_hand && src != H.r_hand)
+			if (!H.IsHolding(src))
 				for (var/obj/item/clothing/C in H.get_equipped_items())
 					if ((C != src) && (C.get_bulky_coverage() & bulky))
 						if (user)

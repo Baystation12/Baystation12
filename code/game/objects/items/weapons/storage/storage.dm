@@ -361,7 +361,7 @@
 	if ((!ishuman(usr) && (loc != usr)) || usr.stat || usr.restrained())
 		return
 
-	if ((src == usr.l_hand && usr.r_hand == null) || (src == usr.r_hand && usr.l_hand == null))
+	if (usr.IsHolding(src) && usr.HasFreeHand())
 		if (contents.len == 0)
 			to_chat(usr, SPAN_WARNING("\The [src] is already empty."))
 			return
