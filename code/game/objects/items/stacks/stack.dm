@@ -297,7 +297,7 @@
 		if(isstack(user.r_hand))
 			stacks += user.r_hand
 	for (var/obj/item/stack/item in user.loc)
-		stacks += item
+		stacks |= item
 	for (var/obj/item/stack/item in stacks)
 		if (item==src)
 			continue
