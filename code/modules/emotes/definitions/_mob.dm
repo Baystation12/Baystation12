@@ -100,6 +100,7 @@
 	/decl/emote/audible/cough,
 	/decl/emote/audible/cry,
 	/decl/emote/audible/sigh,
+	/decl/emote/audible/slowclap,
 	/decl/emote/audible/laugh,
 	/decl/emote/audible/mumble,
 	/decl/emote/audible/grumble,
