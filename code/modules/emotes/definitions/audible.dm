@@ -114,6 +114,11 @@
 	key = "sigh"
 	emote_message_3p = "USER sighs."
 
+/decl/emote/audible/slowclap
+	key = "slowclap"
+	emote_message_3p_target = "USER slowly claps at TARGET."
+	emote_message_3p = "USER slowly claps."
+
 /decl/emote/audible/laugh
 	key = "laugh"
 	emote_message_3p_target = "USER laughs at TARGET."
