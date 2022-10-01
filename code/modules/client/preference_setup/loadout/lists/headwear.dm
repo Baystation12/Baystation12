@@ -184,3 +184,9 @@
 	options += /obj/item/clothing/head/beret/pcrc
 	options += /obj/item/clothing/head/beret/saare
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(options)
+
+/datum/gear/head/deckcrew
+	display_name = "deck crew helmet"
+	path = /obj/item/clothing/head/deckcrew
+	flags = GEAR_HAS_TYPE_SELECTION
+	description = "A helmet with ear protection and a visor, used in hangars on many ships."

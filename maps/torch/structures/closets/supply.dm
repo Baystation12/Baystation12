@@ -44,7 +44,8 @@
 		/obj/item/storage/belt/general,
 		/obj/item/stamp/cargo,
 		/obj/item/stamp/denied,
-		/obj/item/storage/backpack/dufflebag
+		/obj/item/storage/backpack/dufflebag,
+		/obj/item/clothing/head/deckcrew
 	)
 
 /obj/structure/closet/secure_closet/deckofficer
@@ -72,7 +73,8 @@
 		/obj/item/clothing/suit/armor/pcarrier/light/sol,
 		/obj/item/device/binoculars,
 		/obj/item/storage/belt/general,
-		/obj/item/storage/backpack/dufflebag
+		/obj/item/storage/backpack/dufflebag,
+		/obj/item/clothing/head/deckcrew/blue
 	)
 
 /obj/structure/closet/secure_closet/prospector

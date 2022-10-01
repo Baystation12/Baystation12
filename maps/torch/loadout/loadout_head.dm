@@ -135,3 +135,6 @@
 
 /datum/gear/head/corporateberet
 	allowed_branches = CIVILIAN_BRANCHES
+
+/datum/gear/head/deckcrew
+	allowed_roles = SUPPLY_ROLES
