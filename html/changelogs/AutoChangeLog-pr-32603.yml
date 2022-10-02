@@ -1,0 +1,6 @@
+author: Spookerton
+delete-after: true
+changes:
+  - tweak: Accidental bonus- enabled slide movement for everything.
+  - tweak: Typing indicators are aware of the input bar.
+  - tweak: Typing indicators appear at appropriate heights for serpentids.
