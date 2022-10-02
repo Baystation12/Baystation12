@@ -34,7 +34,7 @@
 	active_throwforce = 15
 	force = 5
 	throwforce = 2
-	w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_MAGNET = 3)
 	active_attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	hitsound = 'sound/weapons/blade1.ogg'
@@ -64,6 +64,7 @@
 	origin_tech = list(TECH_MAGNET = 3)
 	active_attack_verb = list("attacked", "slash", "cleaved", "torn", "cut")
 	hitsound = 'sound/weapons/blade1.ogg'
+	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
 	base_parry_chance = 0
 
