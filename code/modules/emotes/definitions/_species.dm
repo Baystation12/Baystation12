@@ -1,6 +1,3 @@
-/datum/species
-	var/list/default_emotes = list()
-
 /mob/living/carbon/update_emotes()
 	. = ..(skip_sort=1)
 	if(species)
