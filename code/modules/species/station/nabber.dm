@@ -38,6 +38,8 @@
 	preview_icon = 'icons/mob/human_races/species/nabber/preview.dmi'
 	blood_mask = 'icons/mob/human_races/species/nabber/blood_mask.dmi'
 
+	icon_height = 40
+
 	limb_blend = ICON_MULTIPLY
 
 	darksight_range = 8

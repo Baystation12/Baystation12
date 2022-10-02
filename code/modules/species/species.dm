@@ -20,6 +20,12 @@
 	var/husk_icon =    'icons/mob/human_races/species/default_husk.dmi'
 	var/bandages_icon
 
+	/// The width of this species' icons.
+	var/icon_width = 32
+
+	/// The height of this species' icons.
+	var/icon_height = 32
+
 	// Damage overlay and masks.
 	var/damage_overlays = 'icons/mob/human_races/species/human/damage_overlay.dmi'
 	var/damage_mask =     'icons/mob/human_races/species/human/damage_mask.dmi'
@@ -250,6 +256,8 @@
 	var/list/additional_available_cultural_info = list()
 	var/max_players
 
+	var/list/default_emotes = list()
+
 	// Order matters, higher pain level should be higher up
 	var/list/pain_emotes_with_pain_level = list(
 		list(/decl/emote/audible/scream, /decl/emote/audible/whimper, /decl/emote/audible/moan, /decl/emote/audible/cry) = 70,
@@ -452,6 +460,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	return
 
 /datum/species/proc/handle_post_spawn(mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
+	H.icon_width = icon_width
+	H.icon_height = icon_height
 	add_inherent_verbs(H)
 	add_base_auras(H)
 	H.mob_bump_flag = bump_flag

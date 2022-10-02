@@ -174,8 +174,7 @@ var/global/list/_client_preferences_by_type
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/show_typing_indicator/changed(mob/preference_mob, new_value)
-	if(new_value == GLOB.PREF_HIDE)
-		preference_mob.remove_typing_indicator()
+	SStyping.UpdatePreference(preference_mob.client, new_value == GLOB.PREF_SHOW)
 
 /datum/client_preference/show_ooc
 	description = "OOC chat"

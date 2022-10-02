@@ -3,6 +3,8 @@
 
 	glide_size = 6
 
+	animate_movement = SLIDE_STEPS
+
 	var/waterproof = TRUE
 	var/movable_flags
 
@@ -19,6 +21,12 @@
 	var/mob/pulledby = null
 	var/item_state = null // Used to specify the item state for the on-mob overlays.
 	var/does_spin = TRUE // Does the atom spin when thrown (of course it does :P)
+
+	/// The icon width this movable expects to have by default.
+	var/icon_width = 32
+
+	/// The icon height this movable expects to have by default.
+	var/icon_height = 32
 
 
 /atom/movable/Initialize()
