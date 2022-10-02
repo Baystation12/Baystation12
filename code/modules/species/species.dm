@@ -120,7 +120,6 @@
 	var/limbs_are_nonsolid
 	var/spawns_with_stack = 0
 	// Environment tolerance/life processes vars.
-	var/reagent_tag                                             // Used for metabolizing reagents.
 	var/breath_pressure = 16                                    // Minimum partial pressure safe for breathing, kPa
 	var/breath_type = GAS_OXYGEN                                  // Non-oxygen gas breathed, if any.
 	var/poison_types = list(GAS_PHORON = TRUE, GAS_CHLORINE = TRUE) // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
@@ -278,7 +277,7 @@
 	/// When being fed a reagent item, the amount this species eats per bite on help intent.
 	var/ingest_amount = 10
 
-	/// An associative list of /decl/traits and trait level - See individual traits for valid levels
+	/// An associative list of /decl/trait and trait level - See individual traits for valid levels
 	var/list/traits = list()
 /*
 These are all the things that can be adjusted for equipping stuff and

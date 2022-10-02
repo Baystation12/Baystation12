@@ -58,7 +58,6 @@
 	blood_color = "#2299fc"
 	flesh_color = "#808d11"
 
-	reagent_tag = IS_VOX
 	maneuvers = list(/decl/maneuver/leap/grab)
 	standing_jump_range = 5
 
@@ -122,6 +121,8 @@
 	)
 
 	ingest_amount = 20
+
+	traits = list(/decl/trait/general/nonpermeable_skin = TRAIT_LEVEL_EXISTS)
 
 /datum/species/vox/equip_survival_gear(mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vox(H), slot_wear_mask)

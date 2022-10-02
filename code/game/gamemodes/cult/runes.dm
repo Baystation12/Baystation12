@@ -572,7 +572,7 @@
 	color = "#0050a1"
 	metabolism = REM * 0.1
 
-/datum/reagent/hell_water/affect_ingest(mob/living/carbon/M, alien, removed)
+/datum/reagent/hell_water/affect_ingest(mob/living/carbon/M, removed)
 	if(iscultist(M))
 		M.AdjustParalysis(-1)
 		M.AdjustStunned(-1)

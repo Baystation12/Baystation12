@@ -53,7 +53,6 @@
 
 	flesh_color = "#34af10"
 
-	reagent_tag = IS_UNATHI
 	base_color = "#066000"
 	blood_color = "#f24b2e"
 	organs_icon = 'icons/mob/human_races/species/unathi/organs.dmi'

@@ -28,7 +28,7 @@
 	color = "#13bc5e"
 	should_admin_log = TRUE
 
-/datum/reagent/crystal/affect_blood(mob/living/carbon/M, alien, removed)
+/datum/reagent/crystal/affect_blood(mob/living/carbon/M, removed)
 	var/result_mat = (M.psi || (M.mind && GLOB.wizards.is_antagonist(M.mind))) ? MATERIAL_NULLGLASS : MATERIAL_CRYSTAL
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M

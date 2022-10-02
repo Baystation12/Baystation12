@@ -1,3 +1,4 @@
+/// Maluses generally only come with negative aspects
 /decl/trait/malus
 	abstract_type = /decl/trait/malus
 
