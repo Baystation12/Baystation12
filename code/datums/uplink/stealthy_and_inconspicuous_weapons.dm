@@ -61,3 +61,9 @@
 	var/plushtype = pick(typesof(path))
 	var/obj/item/I = new plushtype(loc)
 	return I
+
+/datum/uplink_item/item/stealthy_weapons/guncane
+	name = "Concealed Cane Gun"
+	desc = "A cane used by true gentlemen, especially ones with a penchant for loud weaponry!"
+	item_cost = 25
+	path = /obj/item/gun/projectile/shotgun/cane
