@@ -1,4 +1,0 @@
-author: SomeAngryMiner
-delete-after: true
-changes:
-  - rscadd: Fixes invisible shields either on back, or inhands.
