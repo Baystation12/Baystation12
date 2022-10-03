@@ -22,19 +22,19 @@
 
 
 // Species appearance flags
-#define HAS_SKIN_TONE_NORMAL     FLAG(0)  // Skin tone selectable in chargen for baseline humans (0-220)
-#define HAS_SKIN_COLOR           FLAG(1)  // Skin colour selectable in chargen. (RGB)
-#define HAS_LIPS                 FLAG(2)  // Lips are drawn onto the mob icon. (lipstick)
-#define HAS_UNDERWEAR            FLAG(3)  // Underwear is drawn onto the mob icon.
-#define HAS_EYE_COLOR            FLAG(4)  // Eye colour selectable in chargen. (RGB)
-#define HAS_HAIR_COLOR           FLAG(5)  // Hair colour selectable in chargen. (RGB)
-#define RADIATION_GLOWS          FLAG(6)  // Radiation causes this character to glow.
-#define HAS_SKIN_TONE_GRAV       FLAG(7)  // Skin tone selectable in chargen for grav-adapted humans (0-100)
-#define HAS_SKIN_TONE_SPCR       FLAG(8)  // Skin tone selectable in chargen for spacer humans (0-165)
-#define HAS_SKIN_TONE_TRITON     FLAG(9)  // Skin tone selectable in chargen for tritonian humans
-#define HAS_BASE_SKIN_COLOURS    FLAG(10) // Has multiple base skin sprites to go off of
-#define HAS_STATIC_HAIR          FLAG(11) // Once selected in chargen, hair won't change through most means (such as being affected by chemicals)
-#define HAS_A_SKIN_TONE (HAS_SKIN_TONE_NORMAL | HAS_SKIN_TONE_GRAV | HAS_SKIN_TONE_SPCR | HAS_SKIN_TONE_TRITON) // Species has a numeric skintone
+#define SPECIES_APPEARANCE_HAS_SKIN_TONE_NORMAL     FLAG(0)  // Skin tone selectable in chargen for baseline humans (0-220)
+#define SPECIES_APPEARANCE_HAS_SKIN_COLOR           FLAG(1)  // Skin colour selectable in chargen. (RGB)
+#define SPECIES_APPEARANCE_HAS_LIPS                 FLAG(2)  // Lips are drawn onto the mob icon. (lipstick)
+#define SPECIES_APPEARANCE_HAS_UNDERWEAR            FLAG(3)  // Underwear is drawn onto the mob icon.
+#define SPECIES_APPEARANCE_HAS_EYE_COLOR            FLAG(4)  // Eye colour selectable in chargen. (RGB)
+#define SPECIES_APPEARANCE_HAS_HAIR_COLOR           FLAG(5)  // Hair colour selectable in chargen. (RGB)
+#define SPECIES_APPEARANCE_RADIATION_GLOWS          FLAG(6)  // Radiation causes this character to glow.
+#define SPECIES_APPEARANCE_HAS_SKIN_TONE_GRAV       FLAG(7)  // Skin tone selectable in chargen for grav-adapted humans (0-100)
+#define SPECIES_APPEARANCE_HAS_SKIN_TONE_SPCR       FLAG(8)  // Skin tone selectable in chargen for spacer humans (0-165)
+#define SPECIES_APPEARANCE_HAS_SKIN_TONE_TRITON     FLAG(9)  // Skin tone selectable in chargen for tritonian humans
+#define SPECIES_APPEARANCE_HAS_BASE_SKIN_COLOURS    FLAG(10) // Has multiple base skin sprites to go off of
+#define SPECIES_APPEARANCE_HAS_STATIC_HAIR          FLAG(11) // Once selected in chargen, hair won't change through most means (such as being affected by chemicals)
+#define SPECIES_APPEARANCE_HAS_A_SKIN_TONE (SPECIES_APPEARANCE_HAS_SKIN_TONE_NORMAL | SPECIES_APPEARANCE_HAS_SKIN_TONE_GRAV | SPECIES_APPEARANCE_HAS_SKIN_TONE_SPCR | SPECIES_APPEARANCE_HAS_SKIN_TONE_TRITON) // Species has a numeric skintone
 
 
 // Skin Defines

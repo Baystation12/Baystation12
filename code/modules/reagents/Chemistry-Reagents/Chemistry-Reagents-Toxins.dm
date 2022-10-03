@@ -1108,7 +1108,7 @@
 	heating_point = null
 
 /datum/reagent/toxin/hair_remover/affect_touch(mob/living/carbon/human/M, removed)
-	if (!(M.species.appearance_flags & HAS_STATIC_HAIR))
+	if (!(M.species.appearance_flags & SPECIES_APPEARANCE_HAS_STATIC_HAIR))
 		return
 	M.species.set_default_hair(M)
 	to_chat(M, "<span class='warning'>You feel a chill and your skin feels lighter..</span>")

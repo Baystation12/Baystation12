@@ -227,10 +227,10 @@
 	radiation = clamp(radiation,0,500)
 
 	if(!radiation)
-		if(species.appearance_flags & RADIATION_GLOWS)
+		if(species.appearance_flags & SPECIES_APPEARANCE_RADIATION_GLOWS)
 			set_light(0)
 	else
-		if(species.appearance_flags & RADIATION_GLOWS)
+		if(species.appearance_flags & SPECIES_APPEARANCE_RADIATION_GLOWS)
 			set_light(0.3, 0.1, max(1,min(20,radiation/20)), 2, species.get_flesh_colour(src))
 		// END DOGSHIT SNOWFLAKE
 

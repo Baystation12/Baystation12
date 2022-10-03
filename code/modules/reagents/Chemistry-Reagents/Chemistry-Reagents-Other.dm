@@ -480,7 +480,7 @@
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/capilliumate/affect_touch(mob/living/carbon/human/M, removed)
-	if (!(M.species.appearance_flags & HAS_STATIC_HAIR))
+	if (!(M.species.appearance_flags & SPECIES_APPEARANCE_HAS_STATIC_HAIR))
 		var/datum/sprite_accessory/hair/newhair = /datum/sprite_accessory/hair/longest
 		var/datum/sprite_accessory/facial_hair/newbeard = /datum/sprite_accessory/facial_hair/vlongbeard
 		M.change_hair(initial(newhair.name))
@@ -513,7 +513,7 @@
 	taste_description = "bad choices"
 
 /datum/reagent/colored_hair_dye/proc/apply_dye_color(mob/living/carbon/human/H, red, green, blue)
-	if (H.head_hair_style && H.species.appearance_flags & HAS_HAIR_COLOR)
+	if (H.head_hair_style && H.species.appearance_flags & SPECIES_APPEARANCE_HAS_HAIR_COLOR)
 		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[H.head_hair_style]
 		if (~hair_style.flags & HAIR_BALD)
 			H.change_hair_color(red, green, blue)

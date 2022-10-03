@@ -19,7 +19,7 @@
 	}\
 }
 
-SETUP_RANDOM_COLOR_GETTER(skin_color, skin_colors, HAS_SKIN_COLOR, list(
+SETUP_RANDOM_COLOR_GETTER(skin_color, skin_colors, SPECIES_APPEARANCE_HAS_SKIN_COLOR, list(
 	/decl/color_generator/black,
 	/decl/color_generator/grey,
 	/decl/color_generator/brown,
@@ -30,7 +30,7 @@ SETUP_RANDOM_COLOR_GETTER(skin_color, skin_colors, HAS_SKIN_COLOR, list(
 	/decl/color_generator/white))
 SETUP_RANDOM_COLOR_SETTER(skin_color, change_skin_color)
 
-SETUP_RANDOM_COLOR_GETTER(hair_color, hair_colors, HAS_HAIR_COLOR, list(
+SETUP_RANDOM_COLOR_GETTER(hair_color, hair_colors, SPECIES_APPEARANCE_HAS_HAIR_COLOR, list(
 	/decl/color_generator/black,
 	/decl/color_generator/blonde,
 	/decl/color_generator/chestnut,
@@ -41,7 +41,7 @@ SETUP_RANDOM_COLOR_GETTER(hair_color, hair_colors, HAS_HAIR_COLOR, list(
 	/decl/color_generator/punk))
 SETUP_RANDOM_COLOR_SETTER(hair_color, change_hair_color)
 
-SETUP_RANDOM_COLOR_GETTER(eye_color, eye_colors, HAS_EYE_COLOR, list(
+SETUP_RANDOM_COLOR_GETTER(eye_color, eye_colors, SPECIES_APPEARANCE_HAS_EYE_COLOR, list(
 	/decl/color_generator/black,
 	/decl/color_generator/grey,
 	/decl/color_generator/brown,

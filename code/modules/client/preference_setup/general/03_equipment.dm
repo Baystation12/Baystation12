@@ -54,7 +54,7 @@
 					break
 
 	var/datum/species/mob_species = all_species[pref.species]
-	if(!(mob_species && mob_species.appearance_flags & HAS_UNDERWEAR))
+	if(!(mob_species && mob_species.appearance_flags & SPECIES_APPEARANCE_HAS_UNDERWEAR))
 		pref.all_underwear.Cut()
 
 	if(!istype(pref.all_underwear_metadata))
