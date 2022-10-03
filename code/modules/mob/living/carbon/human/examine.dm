@@ -355,9 +355,8 @@
 
 		return ((istype(G) && ((G.hud_type & hudtype) || (G.hud && (G.hud.hud_type & hudtype)))) && G.check_access(ID)) || AUG?.active && AUG.check_access(ID)
 	else if(istype(M, /mob/living/silicon/robot))
-		var/mob/living/silicon/robot/R = M
-		for(var/obj/item/borg/sight/sight in list(R.module_state_1, R.module_state_2, R.module_state_3))
-			if(istype(sight) && (sight.hud_type & hudtype))
+		for (var/obj/item/borg/sight/sight as anything in M.GetAllHeld(/obj/item/borg/sight))
+			if (sight.hud_type & hudtype)
 				return TRUE
 	return FALSE
 

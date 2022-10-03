@@ -547,12 +547,5 @@ var/global/list/mining_floors = list()
 	..()
 	if(istype(M,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = M
-		if(R.module)
-			if(istype(R.module_state_1,/obj/item/storage/ore))
-				attackby(R.module_state_1,R)
-			else if(istype(R.module_state_2,/obj/item/storage/ore))
-				attackby(R.module_state_2,R)
-			else if(istype(R.module_state_3,/obj/item/storage/ore))
-				attackby(R.module_state_3,R)
-			else
-				return
+		for (var/obj/item/item as anything in R.GetAllHeld(/obj/item/storage/ore))
+			attackby(item, R)
