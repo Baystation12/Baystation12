@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Amputated limbs should no longer be able to gib mobs that are hit by them.
