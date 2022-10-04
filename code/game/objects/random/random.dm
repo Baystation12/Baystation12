@@ -568,14 +568,32 @@
 /obj/random/soap
 	name = "Random Cleaning Supplies"
 	desc = "This is a random bar of soap. Soap! SOAP?! SOAP!!!"
-	icon = 'icons/obj/items.dmi'
-	icon_state = "soaprandom"
+	icon = 'icons/obj/soap.dmi'
+	icon_state = "soap"
 
 /obj/random/soap/spawn_choices()
-	return list(/obj/item/soap = 12,
-				/obj/item/reagent_containers/glass/rag = 2,
-				/obj/item/reagent_containers/spray/cleaner = 2,
-				/obj/item/grenade/chem_grenade/cleaner = 1)
+	return list(/obj/item/soap/random,
+				/obj/item/soap/space_soap,
+				/obj/item/soap/space_soap,
+				/obj/item/soap/water_soap,
+				/obj/item/soap/fire_soap,
+				/obj/item/soap/rainbow_soap,
+				/obj/item/soap/diamond_soap,
+				/obj/item/soap/uranium_soap,
+				/obj/item/soap/silver_soap,
+				/obj/item/soap/brown_soap,
+				/obj/item/soap/white_soap,
+				/obj/item/soap/grey_soap,
+				/obj/item/soap/pink_soap,
+				/obj/item/soap/purple_soap,
+				/obj/item/soap/blue_soap,
+				/obj/item/soap/cyan_soap,
+				/obj/item/soap/green_soap,
+				/obj/item/soap/yellow_soap,
+				/obj/item/soap/orange_soap,
+				/obj/item/soap/red_soap,
+				/obj/item/soap/golden_soap,
+)
 
 /obj/random/obstruction //Large objects to block things off in maintenance
 	name = "random obstruction"
