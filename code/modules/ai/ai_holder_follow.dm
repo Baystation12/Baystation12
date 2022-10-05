@@ -15,6 +15,11 @@
 		ai_log("walk_to_leader() : Exiting.", AI_LOG_TRACE)
 		return
 
+	if (no_move)
+		ai_log("walk_to_leader() : No movement allowed.", AI_LOG_INFO)
+		ai_log("walk_to_leader() : Exiting.", AI_LOG_DEBUG)
+		return
+
 	// Did we time out?
 	if (follow_until_time && world.time > follow_until_time)
 		ai_log("walk_to_leader() : Follow timed out, losing leader.", AI_LOG_INFO)

@@ -186,6 +186,10 @@
 		lose_target()
 		return
 
+	if (no_move)
+		ai_log("walk_to_target() : No movement allowed.", AI_LOG_INFO)
+		return
+
 	// Find out where we're going.
 	var/get_to = closest_distance(target)
 	var/distance = get_dist(holder, target)

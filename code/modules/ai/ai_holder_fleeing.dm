@@ -10,6 +10,8 @@
 
 
 /datum/ai_holder/proc/should_flee(force = FALSE)
+	if (no_move)
+		return FALSE
 	if (force)
 		return TRUE
 
@@ -35,6 +37,11 @@
 		ai_log("flee_from_target() : Lost target to flee from.", AI_LOG_INFO)
 		lose_target()
 		set_stance(STANCE_IDLE)
+		ai_log("flee_from_target() : Exiting.", AI_LOG_DEBUG)
+		return
+
+	if (no_move)
+		ai_log("flee_from_target() : No movement allowed.", AI_LOG_INFO)
 		ai_log("flee_from_target() : Exiting.", AI_LOG_DEBUG)
 		return
 

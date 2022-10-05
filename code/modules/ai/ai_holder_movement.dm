@@ -2,6 +2,8 @@
 	// General.
 	var/turf/destination = null			// The targeted tile the mob wants to walk to.
 	var/min_distance_to_destination = 1	// Holds how close the mob should go to destination until they're done.
+	/// Boolean. If set, blocks all movement.
+	var/no_move = FALSE
 
 	// Home.
 	var/turf/home_turf = null			// The mob's 'home' turf. It will try to stay near it if told to do so. This is the turf the AI was initialized on by default.
@@ -27,6 +29,11 @@
 		ai_log("walk_to_destination() : Exiting.", AI_LOG_TRACE)
 		return
 
+	if (no_move)
+		ai_log("walk_to_destination() : No movement allowed.", AI_LOG_INFO)
+		ai_log("walk_to_destination() : Exiting.", AI_LOG_TRACE)
+		return
+
 	var/get_to = min_distance_to_destination
 	var/distance = get_dist(holder, destination)
 	ai_log("walk_to_destination() : get_to is [get_to].", AI_LOG_TRACE)
@@ -45,7 +52,7 @@
 /datum/ai_holder/proc/should_go_home()
 	if (stance != STANCE_IDLE)
 		return FALSE
-	if (!returns_home || !home_turf)
+	if (!returns_home || !home_turf || no_move)
 		return FALSE
 	if (get_dist(holder, home_turf) > max_home_distance)
 		if (!home_low_priority)
@@ -137,7 +144,7 @@
 	return MOVEMENT_ON_COOLDOWN
 
 /datum/ai_holder/proc/should_wander()
-	return (stance == STANCE_IDLE) && wander && !leader
+	return (stance == STANCE_IDLE) && wander && !leader && !no_move
 
 /// Wanders randomly in cardinal directions.
 /datum/ai_holder/proc/handle_wander_movement()

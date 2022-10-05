@@ -75,7 +75,7 @@
 			// Attack whoever's on the tile. Even if it's an ally.
 			ai_log("dangerous_wander() : Going to confuse-attack [L].", AI_LOG_TRACE)
 			melee_attack(L)
-		else
+		else if (!no_move)
 			// Move to the tile. Even if it's unsafe.
 			ai_log("dangerous_wander() : Going to confuse-walk to [T] ([T.x],[T.y],[T.z]).", AI_LOG_TRACE)
 			holder.IMove(T, safety = FALSE)
