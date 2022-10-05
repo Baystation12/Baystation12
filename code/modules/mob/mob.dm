@@ -574,6 +574,10 @@
 			to_chat(src, "<span class='warning'>It won't budge!</span>")
 			return
 
+		if (M.mob_flags & MOB_FLAG_NO_PULL)
+			to_chat(src, SPAN_WARNING("It won't budge!"))
+			return
+
 		if((mob_size < M.mob_size) && (can_pull_mobs != MOB_PULL_LARGER))
 			to_chat(src, "<span class='warning'>It won't budge!</span>")
 			return
