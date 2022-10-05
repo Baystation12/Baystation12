@@ -19,6 +19,7 @@
 		/obj/item/device/flashlight/slime,
 		/obj/item/seeds,
 		/obj/item/material/coin,
+		/obj/item/challenge_coin,
 		/obj/item/dice,
 		/obj/item/disk,
 		/obj/item/implant,
