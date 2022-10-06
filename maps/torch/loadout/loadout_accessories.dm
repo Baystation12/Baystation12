@@ -206,6 +206,7 @@
 	display_name = "blood patch selection"
 	path = /obj/item/clothing/accessory/armor_tag
 	allowed_roles = ARMORED_ROLES
+	cost = 0
 
 /datum/gear/tactical/bloodpatch/New()
 	..()

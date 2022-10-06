@@ -3234,6 +3234,7 @@
 /obj/item/modular_computer/telescreen/preset/medical{
 	pixel_y = 32
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/staging)
 "afI" = (
@@ -26772,6 +26773,7 @@
 /obj/item/roller,
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/structure/table/reinforced,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/staging)
 "rQb" = (

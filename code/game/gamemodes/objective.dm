@@ -235,7 +235,8 @@ var/global/list/all_objectives = list()
 		"the brig chief rubber stamp" = /obj/item/stamp/brig,
 		"the deck chief rubber stamp" = /obj/item/stamp/deckoff,
 		"the pathfinder rubber stamp" = /obj/item/stamp/path,
-		"an ablative armor vest" = /obj/item/clothing/suit/armor/laserproof
+		"an ablative armor vest" = /obj/item/clothing/suit/armor/laserproof,
+		"an RCD" = /obj/item/rcd
 	)
 
 	var/static/possible_items_special[] = list(
