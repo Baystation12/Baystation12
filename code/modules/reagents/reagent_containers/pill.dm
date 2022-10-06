@@ -396,6 +396,25 @@
 	reagents.add_reagent(/datum/reagent/nutriment/mint, 1) //mint is used as a catalyst in all reactions as of writing
 	color = reagents.get_color()
 
+/obj/item/reagent_containers/pill/random
+
+/obj/item/reagent_containers/pill/random/New()
+	..()
+	var/list/all_reagents = subtypesof(/datum/reagent)
+	var/list/selected_reagents = list()
+	var/list/blacklisted_reagents = list(
+		/datum/reagent/adminordrazine,
+		/datum/reagent/toxin/zombiepowder,
+		/datum/reagent/nanites
+	)
+	blacklisted_reagents += subtypesof(/datum/reagent/ethanol)
+	all_reagents -= blacklisted_reagents
+	selected_reagents += pick_n_take(all_reagents)
+
+	for (var/selected_reagent in selected_reagents)
+		reagents.add_reagent(selected_reagent, 30)
+
+
 // Chopping up pills
 
 /obj/item/reagent_containers/pill/attackby(obj/item/W, mob/user)

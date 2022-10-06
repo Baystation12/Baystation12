@@ -51,3 +51,9 @@
 	desc = "Contains most medicines you need to recover from injuries and illnesses, all in a convenient pill form. Splints for broken bones also included!"
 	item_cost = 48
 	path = /obj/item/storage/firstaid/combat
+
+/datum/uplink_item/item/medical/randompill
+	name = "Random Pill"
+	desc = "A pill containing (almost) any possible chemical. Why not roll the dice?"
+	item_cost = 5
+	path = /obj/item/reagent_containers/pill/random
