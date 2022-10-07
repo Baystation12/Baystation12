@@ -2,7 +2,7 @@
 	name = "cortical borer"
 	real_name = "cortical borer"
 	desc = "A small, quivering sluglike creature."
-	speak_emote = list("chirrups")
+	speak_emote = list("стрекочет")
 	// emote_hear = list("chirrups")
 	response_help  = "pokes"
 	response_disarm = "prods"

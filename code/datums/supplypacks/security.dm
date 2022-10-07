@@ -10,10 +10,23 @@
 	containername = "special ops crate"
 	hidden = 1
 
+/decl/hierarchy/supply_pack/security/militia
+	name = "Kit - Militia"
+	contains = list(/obj/item/clothing/suit/armor/pcarrier/light/militia = 2,
+					/obj/item/clothing/head/helmet = 2,
+					/obj/item/clothing/under/bdu/black = 2,
+					/obj/item/clothing/accessory/armband/bluegold = 2,
+					/obj/item/clothing/gloves/thick = 2,
+					/obj/item/clothing/mask/gas = 2)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "militia equipment crate"
+	access = access_security
+
 /decl/hierarchy/supply_pack/security/lightarmor
 	name = "Armor - Light"
 	contains = list(/obj/item/clothing/suit/armor/pcarrier/light = 4,
-					/obj/item/clothing/head/helmet =4)
+					/obj/item/clothing/head/helmet = 4)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure
 	containername = "light armor crate"
@@ -22,7 +35,7 @@
 /decl/hierarchy/supply_pack/security/armor
 	name = "Armor - Unmarked"
 	contains = list(/obj/item/clothing/suit/armor/pcarrier/medium = 3,
-					/obj/item/clothing/head/helmet =3)
+					/obj/item/clothing/head/helmet = 3)
 	cost = 25
 	containertype = /obj/structure/closet/crate/secure
 	containername = "unmarked armor crate"

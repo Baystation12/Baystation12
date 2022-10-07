@@ -7,7 +7,7 @@
 	data["category"] =   show_category
 	data["functional"] = is_functioning()
 
-	if(is_functioning())	
+	if(is_functioning())
 
 		var/current_storage =  list()
 		data["material_storage"] =  current_storage
@@ -79,7 +79,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "fabricator.tmpl", "[capitalize(name)]", 480, 410, state = GLOB.physical_state)
+		ui = new(user, src, ui_key, "fabricator.tmpl", "[capitalize(name)]", 780, 580, state = GLOB.physical_state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)

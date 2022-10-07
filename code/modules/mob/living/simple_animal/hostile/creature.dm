@@ -2,7 +2,7 @@
 	name = "creature"
 	desc = "A sanity-destroying otherthing."
 	icon = 'icons/mob/simple_animal/critter.dmi'
-	speak_emote = list("gibbers")
+	speak_emote = list("невнятно бормочет")
 	icon_state = "otherthing"
 	icon_living = "otherthing"
 	icon_dead = "otherthing-dead"

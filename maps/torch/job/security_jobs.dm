@@ -102,9 +102,9 @@
 
 /datum/job/detective/equip(var/mob/living/carbon/human/H)
 	if(H.mind?.role_alt_title == "Psionic Sleuth")
-		psi_faculties = list("[PSI_ENERGISTICS]" = PSI_RANK_MASTER)
-	if(H.mind?.role_alt_title == "Psi-Operative")
 		psi_faculties = list("[PSI_PSYCHOKINESIS]" = PSI_RANK_MASTER)
+	if(H.mind?.role_alt_title == "Psi-Operative")
+		psi_faculties = list("[PSI_ENERGISTICS]" = PSI_RANK_MASTER)
 	return ..()
 
 /datum/job/officer

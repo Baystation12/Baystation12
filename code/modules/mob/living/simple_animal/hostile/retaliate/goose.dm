@@ -5,7 +5,7 @@
 	icon_state = "goose"
 	icon_living = "goose"
 	icon_dead = "goose_dead"
-	speak_emote = list("honks")
+	speak_emote = list("гудит")
 	response_help =  "pets"
 	response_disarm = "gently pushes aside"
 	response_harm = "strikes"

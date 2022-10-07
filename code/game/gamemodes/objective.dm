@@ -81,7 +81,7 @@ var/global/list/all_objectives = list()
 /datum/objective/anti_revolution/brig/find_target()
 	..()
 	if(target && target.current)
-		explanation_text = "Brig [target.current.real_name], the [target.assigned_role] for 20 minutes to set an example."
+		explanation_text = "Brig [target.current.real_name], the [target.assigned_role] for 10 minutes to set an example."
 	else
 		explanation_text = "Free Objective"
 	return target
@@ -89,7 +89,7 @@ var/global/list/all_objectives = list()
 /datum/objective/anti_revolution/brig/find_target_by_role(role, role_type = 0)
 	..(role, role_type)
 	if(target && target.current)
-		explanation_text = "Brig [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] for 20 minutes to set an example."
+		explanation_text = "Brig [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] for 10 minutes to set an example."
 	else
 		explanation_text = "Free Objective"
 	return target
@@ -99,7 +99,7 @@ var/global/list/all_objectives = list()
 /datum/objective/anti_revolution/demote/find_target()
 	..()
 	if(target && target.current)
-		explanation_text = "[target.current.real_name], the [target.assigned_role]  has been classified as harmful to [GLOB.using_map.company_name]'s goals. Demote \him[target.current] to assistant."
+		explanation_text = "[target.current.real_name], the [target.assigned_role]  has been classified as harmful to [GLOB.using_map.company_name]'s goals. Demote \him[target.current] to passenger or crewman."
 	else
 		explanation_text = "Free Objective"
 	return target
@@ -219,26 +219,24 @@ var/global/list/all_objectives = list()
 	var/target_name
 
 	var/static/possible_items[] = list(
-		"the captain's antique laser gun" = /obj/item/gun/energy/captain,
 		"a bluespace rift generator" = /obj/item/integrated_circuit/manipulation/bluespace_rift,
-		"an RCD" = /obj/item/rcd,
-		"a jetpack" = /obj/item/tank/jetpack,
-		"a captain's jumpsuit" = /obj/item/clothing/under/rank/captain,
 		"a functional AI" = /obj/item/aicard,
-		"a pair of magboots" = /obj/item/clothing/shoes/magboots,
 		"the [station_name()] blueprints" = /obj/item/blueprints,
-		"a nasa voidsuit" = /obj/item/clothing/suit/space/void,
 		"28 moles of phoron (full tank)" = /obj/item/tank,
 		"a sample of slime extract" = /obj/item/slime_extract,
 		"a piece of corgi meat" = /obj/item/reagent_containers/food/snacks/meat/corgi,
-		"a chief science officer's jumpsuit" = /obj/item/clothing/under/rank/research_director,
-		"a chief engineer's jumpsuit" = /obj/item/clothing/under/rank/chief_engineer,
-		"a chief medical officer's jumpsuit" = /obj/item/clothing/under/rank/chief_medical_officer,
-		"a head of security's jumpsuit" = /obj/item/clothing/under/rank/head_of_security,
-		"a head of personnel's jumpsuit" = /obj/item/clothing/under/rank/head_of_personnel,
-		"the hypospray" = /obj/item/reagent_containers/hypospray,
-		"the captain's pinpointer" = /obj/item/pinpointer,
+		"a hypospray" = /obj/item/reagent_containers/hypospray,
+		"the EC captain (06) rank insignia" = /obj/item/clothing/accessory/solgov/rank/ec/officer/o6,
+		"the SEA bowman headset" = /obj/item/device/radio/headset/sea/alt,
+		"the commanding officer rubber stamp" = /obj/item/stamp/co,
+		"the executive officer rubber stamp" = /obj/item/stamp/xo,
+		"the senior enlisted advisor rubber stamp" = /obj/item/stamp/sea,
+		"the chief of security rubber stamp" = /obj/item/stamp/cos,
+		"the brig chief rubber stamp" = /obj/item/stamp/brig,
+		"the deck chief rubber stamp" = /obj/item/stamp/deckoff,
+		"the pathfinder rubber stamp" = /obj/item/stamp/path,
 		"an ablative armor vest" = /obj/item/clothing/suit/armor/laserproof,
+		"an RCD" = /obj/item/rcd
 	)
 
 	var/static/possible_items_special[] = list(

@@ -18,7 +18,7 @@
 	mob_size = MOB_SMALL
 	density = FALSE
 
-	speak_emote = list("caws")
+	speak_emote = list("каркает")
 
 	natural_weapon = /obj/item/natural_weapon/crow_claws
 
@@ -145,7 +145,7 @@
 /mob/living/simple_animal/crow/cyber
 	name = "cybercrow"
 	desc = "A large cybercrow. k4w k4w."
-	speak_emote = list("beeps")
+	speak_emote = list("пиликает")
 
 /mob/living/simple_animal/crow/cyber/on_update_icon()
 	..()

@@ -58,9 +58,9 @@ SUBSYSTEM_DEF(goals)
 	. = list()
 	for(var/thing in departments)
 		var/datum/department/dept = departments[thing]
-		. += "<b>[dept.name] had the following shift goals:</b>"
+		. += "<b>[dept.name] имел следующие цели смены:</b>"
 		. += dept.summarize_goals(show_success = TRUE)
 	if(LAZYLEN(.))
 		. = "<br>[jointext(., "<br>")]"
 	else
-		. = "<br><b>There were no departmental goals this round.</b>"
+		. = "<br><b>В этом раунде не было никаких ведомственных целей.</b>"

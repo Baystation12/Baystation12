@@ -41,13 +41,13 @@
 	cold_damage_per_tick = 20
 	minbodytemp = 175 // So they can all survive Sif without having to be classed under /sif subtype.
 
-	speak_emote = list("chitters")
+	speak_emote = list("щёлкает жвалами", "трёт лапки о друг друга")
 
 	say_list_type = /datum/say_list/spider
 	ai_holder = /datum/ai_holder/simple_animal/melee
 
 	var/poison_type = /datum/reagent/toxin/venom	// The reagent that gets injected when it attacks.
-	var/poison_chance = 20			// Chance for injection to occur.
+	var/poison_chance = 25			// Chance for injection to occur.
 	var/poison_per_bite = 5			// Amount added per injection.
 
 	var/image/eye_layer

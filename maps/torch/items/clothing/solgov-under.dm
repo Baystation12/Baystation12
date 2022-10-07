@@ -49,7 +49,8 @@
 		)
 	armor = list(
 		melee = ARMOR_MELEE_MINOR,
-		energy = ARMOR_ENERGY_MINOR
+		energy = ARMOR_ENERGY_MINOR,
+		bio = ARMOR_BIO_MINOR
 		)
 
 /obj/item/clothing/under/solgov/utility/expeditionary
@@ -60,6 +61,36 @@
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
 		)
+
+/obj/item/clothing/under/solgov/utility/expeditionary/renew
+	name = "field expeditionary uniform"
+	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has silver trim."
+	icon_state = "blackutility_new_crew"
+	worn_state = "blackutility_new_crew"
+
+/obj/item/clothing/under/solgov/utility/expeditionary/renew/command
+	accessories = list(/obj/item/clothing/accessory/solgov/department/command)
+
+/obj/item/clothing/under/solgov/utility/expeditionary/renew/engineering
+	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering)
+
+/obj/item/clothing/under/solgov/utility/expeditionary/renew/security
+	accessories = list(/obj/item/clothing/accessory/solgov/department/security)
+
+/obj/item/clothing/under/solgov/utility/expeditionary/renew/medical
+	accessories = list(/obj/item/clothing/accessory/solgov/department/medical)
+
+/obj/item/clothing/under/solgov/utility/expeditionary/renew/supply
+	accessories = list(/obj/item/clothing/accessory/solgov/department/supply)
+
+/obj/item/clothing/under/solgov/utility/expeditionary/renew/service
+	accessories = list(/obj/item/clothing/accessory/solgov/department/service)
+
+/obj/item/clothing/under/solgov/utility/expeditionary/renew/exploration
+	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration)
+
+/obj/item/clothing/under/solgov/utility/expeditionary/renew/research
+	accessories = list(/obj/item/clothing/accessory/solgov/department/research)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/command
 	accessories = list(/obj/item/clothing/accessory/solgov/department/command)
@@ -90,6 +121,36 @@
 	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has gold trim."
 	icon_state = "blackutility_com"
 	worn_state = "blackutility_com"
+
+/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew
+	name = "field expeditionary officer's uniform"
+	desc = "The combat utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has gold trim."
+	icon_state = "blackutility_new_com"
+	worn_state = "blackutility_new_com"
+
+/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew/command
+	accessories = list(/obj/item/clothing/accessory/solgov/department/command)
+
+/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew/engineering
+	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering)
+
+/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew/security
+	accessories = list(/obj/item/clothing/accessory/solgov/department/security)
+
+/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew/medical
+	accessories = list(/obj/item/clothing/accessory/solgov/department/medical)
+
+/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew/supply
+	accessories = list(/obj/item/clothing/accessory/solgov/department/supply)
+
+/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew/service
+	accessories = list(/obj/item/clothing/accessory/solgov/department/service)
+
+/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew/exploration
+	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration)
+
+/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew/research
+	accessories = list(/obj/item/clothing/accessory/solgov/department/research)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
 	accessories = list(/obj/item/clothing/accessory/solgov/department/command)

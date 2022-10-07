@@ -9,7 +9,7 @@
 	maxHealth = 50
 	health = 50
 	universal_speak = TRUE
-	speak_emote = list("hisses")
+	speak_emote = list("шипит")
 	response_help  = "puts their hand through"
 	response_disarm = "flails at"
 	response_harm   = "punches"

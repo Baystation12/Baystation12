@@ -6,7 +6,7 @@
 	item_state = "cat2"
 	icon_living = "cat2"
 	icon_dead = "cat2_dead"
-	speak_emote = list("purrs", "meows")
+	speak_emote = list("мурлычет", "мяукает")
 	turns_per_move = 5
 	see_in_dark = 6
 	response_help  = "pets"

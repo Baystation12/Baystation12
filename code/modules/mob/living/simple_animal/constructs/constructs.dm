@@ -2,7 +2,7 @@
 	name = "Construct"
 	real_name = "Construct"
 	desc = ""
-	speak_emote = list("hisses")
+	speak_emote = list("шипит")
 	response_help  = "thinks better of touching"
 	response_disarm = "flailed at"
 	response_harm   = "punched"
@@ -89,7 +89,7 @@
 	icon_living = "behemoth"
 	maxHealth = 250
 	health = 250
-	speak_emote = list("rumbles")
+	speak_emote = list("грохочет")
 	response_harm   = "harmlessly punches"
 	harm_intent_damage = 0
 	natural_weapon = /obj/item/natural_weapon/juggernaut
@@ -224,7 +224,7 @@
 	icon_living = "behemoth"
 	maxHealth = 750
 	health = 750
-	speak_emote = list("rumbles")
+	speak_emote = list("грохочет")
 	response_harm   = "harmlessly punched"
 	harm_intent_damage = 0
 	natural_weapon = /obj/item/natural_weapon/juggernaut/behemoth

@@ -1,94 +1,143 @@
 {{if data.functional}}
-	<table width = '100%'>
-		<tr>
-			<td colspan = 2>
-				<table width = '85%' style = 'border:1px solid #333333;'>
-					<tr>
-						<th><b>Resource</b></th>
-						<th><b>Storage</b></th>
-						<th><b>Options</b></th>
-					</tr>
-					{{for data.material_storage}}
-					<tr>
-						<td align = 'center' style = 'border:1px solid #777777;'>{{:value.name}}</td>
-						<td align = 'center' style = 'border:1px solid #777777;'>{{:value.stored}}/{{:value.max}}</td>
-						<td align = 'center' style = 'border:1px solid #777777;'>{{:helper.link(value.eject_label, null, {'eject_mat' : value.eject_key})}}</td>
-					</tr>
-					{{/for}}
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td width = '50%' style = 'vertical-align: top;'>
-				<table width = '100%' style = 'border:1px solid #333333;'>
-					<tr>
-						<th><b>Current Build</b></th>
-						<th><b>Units</b></th>
-						<th><b>Progress</b></th>
-					</tr>
-					<tr>
-						<td align = 'center' style = 'border:1px solid #777777;'>{{:data.current_build.name}}</td>
-						<td align = 'center' style = 'border:1px solid #777777;'>{{:data.current_build.multiplier}}</td>
-						<td align = 'center' style = 'border:1px solid #777777;'>{{:data.current_build.progress}}</td>
-					</tr>
-				</table>
-			</td>
-			<td width = '50%'>
-				<table width = '85%' style = 'border:1px solid #333333;'>
-					<tr>
-						<th><b>Pending</b></th>
-						<th><b>Units</b></th>
-						<th><b>Options</b></th>
-					</tr>
-					{{for data.build_queue}}
-					<tr>
-						<td align = 'center' style = 'border:1px solid #777777;'>{{:value.name}}</td>
-						<td align = 'center' style = 'border:1px solid #777777;'>{{:value.multiplier}}</td>
-						{{if value.reference}}
-							<td align = 'center' style = 'border:1px solid #777777;'>{{:helper.link('Cancel', null, {'cancel' : value.reference})}}</td>
-						{{else}}
-							<td align = 'center' style = 'border:1px solid #777777;'>-</td>
-						{{/if}}
-					</tr>
-					{{/for}}
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td><b>Selected Category</b></td><td> {{:helper.link(data.category, null, {'change_category' : 1})}}</td>
-		</tr>
-		<tr>
-			<td colspan = 2>
-				<table width = '100%' style = 'border:1px solid #333333;'>
-					<tr>
-						<th><b>Design</b></th>
-						<th><b>Cost</b></th>
-						<th><b>Options</b></th>
-					</tr>
-					{{for data.build_options}}
-					<tr>
-						{{if value.illegal}}
-							<td align = 'center' style = 'border:1px solid #999999;'><span class = 'bad'>{{:value.name}}</span></td>
-						{{else}}
-							<td align = 'center' style = 'border:1px solid #999999;'>{{:value.name}}</td>
-						{{/if}}
-						<td align = 'center' style = 'border:1px solid #777777;'>{{:value.cost}}</td>
-						<td align = 'center' style = 'border:1px solid #999999;'>
-						{{if !value.unavailable}}
-							{{:helper.link('Queue', null, {'make' : value.reference, 'multiplier' : 1})}}
-                            {{for value.multiplier :multValue:multIndex}}
-                                {{:helper.link(multValue.label, null, {'make' : value.reference, 'multiplier' : multValue.multiplier})}}
-                            {{/for}}
-						{{else}}
-							Insufficient resources.
-						{{/if}}
-						</td>
-					</tr>
-					{{/for}}
-				</table>
-			</td>
-		</tr>
-	</table>
+<table>
+  <tr>
+  <td>
+    {{if data.color_selectable}}
+    <div><font color="{{:data.color}}">Color</font></div>
+    {{:helper.link('(Set)', null, {'color_select' : 1})}}
+    {{/if}}
+    {{if data.network}}
+    <div>Connected to local network.</div>
+    <div>{{:helper.link(data.network, null, { 'settings': 1 }, null)}}</div>
+    {{/if}}
+	</td>
+  </tr>
+  <tr>
+    <td style="vertical-align: left">
+      <table width="100%">
+        <tr>
+          <td colspan="2">
+            <table width="375px" style="border: 1px solid #333333">
+              <tr>
+                <th><b>Resource</b></th>
+                <th><b>Storage</b></th>
+                <th><b>Options</b></th>
+              </tr>
+              {{for data.material_storage}}
+              <tr>
+                <td align="center" style="border: 1px solid #777777">
+                  {{:value.name}}
+                </td>
+                <td align="center" style="border: 1px solid #777777">
+                  {{:value.stored}}/{{:value.max}}
+                </td>
+                <td align="center" style="border: 1px solid #777777">
+					<div style="width: 50px">{{:helper.link(value.eject_label, null, {'eject_mat' : value.eject_key})}}</div>
+                </td>
+              </tr>
+              {{/for}}
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center">
+            <div class="item">
+              <div class="itemLabel">Category</div>
+              <div class="itemContent">
+                {{:helper.link(data.category, null, {'change_category' : 1})}}
+			</div>
+            </div>
+
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <table width="500px" style="border: 1px solid #333333">
+              <tr>
+                <th><b>Design</b></th>
+                <th><b>Cost</b></th>
+                <th><b>Options</b></th>
+              </tr>
+              {{for data.build_options}}
+              <tr>
+                {{if value.illegal}}
+                <td align="center" style="border: 1px solid #999999">
+                  <span class="bad">{{:value.name}}</span>
+                </td>
+                {{else}}
+                <td align="center" style="border: 1px solid #999999">
+                  {{:value.name}}
+                </td>
+                {{/if}}
+                <td align="center" style="border: 1px solid #777777">
+                  {{:value.cost}}
+                </td>
+                <td align="center" style="border: 1px solid #999999;">
+                  {{if !value.unavailable}}
+                  <div style="width: 50px">{{:helper.link('Queue', null, {'make' : value.reference, 'multiplier' : 1})}}</div>
+                  {{else}}
+                  Insufficient resources.
+                  {{/if}}
+                </td>
+              </tr>
+              {{/for}}
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td style="vertical-align: top">
+      <table width="100%" style="border: 1px solid #333333">
+        <tr>
+          <th><b>Current Build</b></th>
+          <th><b>Units</b></th>
+          <th><b>Progress</b></th>
+        </tr>
+        <tr>
+          <td align="center" style="border: 1px solid #777777">
+            {{:data.current_build.name}}
+          </td>
+          <td align="center" style="border: 1px solid #777777">
+            {{:data.current_build.multiplier}}
+          </td>
+          <td align="center" style="border: 1px solid #777777">
+            {{:data.current_build.progress}}
+          </td>
+        </tr>
+      </table>
+      <table width="100%" style="border: 1px solid #333333">
+        <tr>
+          <th><b>Pending</b></th>
+          <th><b>Units</b></th>
+          <th><b>Options</b></th>
+        </tr>
+        {{for data.build_queue}}
+        <tr>
+          <td align="center" style="border: 1px solid #777777">
+            {{:value.name}}
+          </td>
+          <td align="center" style="border: 1px solid #777777">
+            {{:value.multiplier}}
+          </td>
+          {{if value.reference}}
+          <td align="center" style="border: 1px solid #777777">
+            {{:helper.link('Cancel', null, {'cancel' : value.reference})}}
+          </td>
+          {{else}}
+          <td align="center" style="border: 1px solid #777777">-</td>
+          {{/if}}
+        </tr>
+        {{/for}}
+      </table>
+    </td>
+  </tr>
+</table>
 {{else}}
-	<p><blink><font color = 'red'>FABRICATOR OFFLINE. CONTACT SYSTEM ADMINISTRATOR.</font></blink></p>
+<p>
+  <blink
+    ><font color="red"
+      >FABRICATOR OFFLINE. CONTACT SYSTEM ADMINISTRATOR.</font
+    ></blink
+  >
+</p>
 {{/if}}

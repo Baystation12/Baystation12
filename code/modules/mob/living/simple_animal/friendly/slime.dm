@@ -5,7 +5,7 @@
 	icon_state = "grey baby slime"
 	icon_living = "grey baby slime"
 	icon_dead = "grey baby slime dead"
-	speak_emote = list("chirps")
+	speak_emote = list("щебечет")
 	health = 100
 	maxHealth = 100
 	response_help  = "pets"

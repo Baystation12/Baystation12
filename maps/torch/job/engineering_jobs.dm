@@ -206,7 +206,7 @@
 	)
 	min_skill = list(   SKILL_COMPUTER		= SKILL_ADEPT,
 	                    SKILL_DEVICES		= SKILL_ADEPT,
-	                    SKILL_EVA           = SKILL_ADEPT,
+	                    SKILL_EVA           = SKILL_BASIC,
 	                    SKILL_ANATOMY       = SKILL_ADEPT,
 						SKILL_CONSTRUCTION  = SKILL_BASIC,
 						SKILL_ELECTRICAL    = SKILL_BASIC,

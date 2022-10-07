@@ -107,10 +107,9 @@
 	allowed_skills = list(
 		SKILL_PILOT = SKILL_ADEPT
 	)
-	allowed_branches = list(
-		/datum/mil_branch/fleet,
-		/datum/mil_branch/expeditionary_corps
-	)
+	//PRX-START
+	// allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/expeditionary_corps)
+	//PRX-END
 
 /datum/gear/accessory/fleetpatch
 	display_name = "fleet patch"
@@ -206,6 +205,7 @@
 	display_name = "blood patch selection"
 	path = /obj/item/clothing/accessory/armor_tag
 	allowed_roles = ARMORED_ROLES
+	cost = 0
 
 /datum/gear/tactical/bloodpatch/New()
 	..()

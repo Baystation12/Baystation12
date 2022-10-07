@@ -35,7 +35,7 @@
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SMALL
 
-	speak_emote = list("squawks","says","yells")
+	speak_emote = list("пронзительно кричит","говорит","кричит")
 
 	natural_weapon = /obj/item/natural_weapon/beak
 	turns_per_move = 5
