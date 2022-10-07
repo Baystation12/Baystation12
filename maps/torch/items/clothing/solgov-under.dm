@@ -63,7 +63,7 @@
 		)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/renew
-	name = "combat expeditionary uniform"
+	name = "field expeditionary uniform"
 	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has silver trim."
 	icon_state = "blackutility_new_crew"
 	worn_state = "blackutility_new_crew"
@@ -123,7 +123,7 @@
 	worn_state = "blackutility_com"
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/renew
-	name = "combat expeditionary officer's uniform"
+	name = "field expeditionary officer's uniform"
 	desc = "The combat utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has gold trim."
 	icon_state = "blackutility_new_com"
 	worn_state = "blackutility_new_com"
