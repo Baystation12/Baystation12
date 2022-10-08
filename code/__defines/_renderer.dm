@@ -134,7 +134,6 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 	plane = BLACKNESS_PLANE
 	appearance_flags = PLANE_MASTER | NO_CLIENT_COLOR
 	blend_mode = BLEND_MULTIPLY
-	color = list(null, null, null, "#0000", "#000f")
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 /atom/movable/renderer/space
