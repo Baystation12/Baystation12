@@ -522,8 +522,8 @@ var/global/default_mobloc = null
 	for(var/species_name in all_species)
 		var/datum/species/S = all_species[species_name]
 		if(S.base_skin_colours)
-			if(!(S.appearance_flags & HAS_BASE_SKIN_COLOURS))
-				log_unit_test("[S.name] has a skin colour list but no HAS_BASE_SKIN_COLOURS flag.")
+			if(!(S.appearance_flags & SPECIES_APPEARANCE_HAS_BASE_SKIN_COLOURS))
+				log_unit_test("[S.name] has a skin colour list but no SPECIES_APPEARANCE_HAS_BASE_SKIN_COLOURS flag.")
 				failcount++
 				continue
 			if(!(S.base_skin_colours.len >= 2))
@@ -549,8 +549,8 @@ var/global/default_mobloc = null
 				failcount++
 				continue
 
-		else if(S.appearance_flags & HAS_BASE_SKIN_COLOURS)
-			log_unit_test("[S.name] has a HAS_BASE_SKIN_COLOURS flag but no skin colour list.")
+		else if(S.appearance_flags & SPECIES_APPEARANCE_HAS_BASE_SKIN_COLOURS)
+			log_unit_test("[S.name] has a SPECIES_APPEARANCE_HAS_BASE_SKIN_COLOURS flag but no skin colour list.")
 			failcount++
 			continue
 

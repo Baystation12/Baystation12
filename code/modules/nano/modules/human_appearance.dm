@@ -54,7 +54,7 @@
 		generate_data()
 		return TRUE
 
-	if (href_list["skin_tone"] && (flags & APPEARANCE_SKIN) && (owner.species.appearance_flags & HAS_A_SKIN_TONE))
+	if (href_list["skin_tone"] && (flags & APPEARANCE_SKIN) && (owner.species.appearance_flags & SPECIES_APPEARANCE_HAS_A_SKIN_TONE))
 		var/high = owner.species.max_skin_tone()
 		var/data = input(usr, "Skin Tone:\n1 (pale) ~ [high] (dark)", "Skin Tone", 35 - owner.skin_tone) as null | num
 		if (isnull(data) || !can_still_topic(state))
@@ -62,7 +62,7 @@
 		data = 35 - max(min(round(data), high), 1)
 		return owner.change_skin_tone(data)
 
-	if (href_list["skin_color"] && (flags & APPEARANCE_SKIN) && (owner.species.appearance_flags & HAS_SKIN_COLOR))
+	if (href_list["skin_color"] && (flags & APPEARANCE_SKIN) && (owner.species.appearance_flags & SPECIES_APPEARANCE_HAS_SKIN_COLOR))
 		var/color = owner.skin_color
 		var/data = input(usr, "Skin Color:", "Skin Color", color) as null | color
 		if (isnull(data) || !can_still_topic(state))
@@ -147,8 +147,8 @@
 	data["specimen"] = owner.species.name
 	data["gender"] = owner.gender
 
-	data["change_skin_tone"] = (flags & APPEARANCE_SKIN) && (owner.species.appearance_flags & HAS_A_SKIN_TONE)
-	data["change_skin_color"] = (flags & APPEARANCE_SKIN) && (owner.species.appearance_flags & HAS_SKIN_COLOR)
+	data["change_skin_tone"] = (flags & APPEARANCE_SKIN) && (owner.species.appearance_flags & SPECIES_APPEARANCE_HAS_A_SKIN_TONE)
+	data["change_skin_color"] = (flags & APPEARANCE_SKIN) && (owner.species.appearance_flags & SPECIES_APPEARANCE_HAS_SKIN_COLOR)
 	data["change_eye_color"] = !!(flags & APPEARANCE_EYES)
 	data["change_hair_color"] = !!(flags & APPEARANCE_HEAD_COLOR)
 	data["change_facial_hair_color"] = !!(flags & APPEARANCE_FACE_COLOR)

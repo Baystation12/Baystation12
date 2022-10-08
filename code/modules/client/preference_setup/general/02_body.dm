@@ -143,14 +143,14 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			var/description = descriptor.get_standalone_value_descriptor(pref.body_descriptors[entry])
 			. += "<br />[VBTN("change_descriptor", entry, capitalize(descriptor.chargen_label))] - [description]"
 
-	if (has_flag(mob_species, HAS_EYE_COLOR))
+	if (HasAppearanceFlag(mob_species, SPECIES_APPEARANCE_HAS_EYE_COLOR))
 		var/color = pref.eye_color
 		. += "[TBTN("eye_color", "Color", "<br />Eyes")] [COLOR_PREVIEW(color)]"
 
 	var/has_head_hair = length(mob_species.get_hair_styles())
 	if (has_head_hair > 1)
 		. += "<br />Hair "
-		if (has_flag(mob_species, HAS_HAIR_COLOR))
+		if (HasAppearanceFlag(mob_species, SPECIES_APPEARANCE_HAS_HAIR_COLOR))
 			var/color = pref.head_hair_color
 			. += "[BTN("hair_color", "Color")] [COLOR_PREVIEW(color)] "
 		. += "[BTN("hair_style=1;dec", "<")][BTN("hair_style=1;inc", ">")][BTN("hair_style", pref.head_hair_style)]"
@@ -158,17 +158,17 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	var/has_facial_hair = length(mob_species.get_facial_hair_styles(pref.gender))
 	if (has_facial_hair > 1)
 		. += "<br />Facial Hair "
-		if (has_flag(mob_species, HAS_HAIR_COLOR))
+		if (HasAppearanceFlag(mob_species, SPECIES_APPEARANCE_HAS_HAIR_COLOR))
 			var/color = pref.facial_hair_color
 			. += "[BTN("facial_color", "Color")] [COLOR_PREVIEW(color)] "
 		. += "[BTN("facial_style=1;dec", "<")][BTN("facial_style=1;inc", ">")][BTN("facial_style", pref.facial_hair_style)]"
 
-	if (has_flag(mob_species, HAS_BASE_SKIN_COLOURS))
+	if (HasAppearanceFlag(mob_species, SPECIES_APPEARANCE_HAS_BASE_SKIN_COLOURS))
 		. += TBTN("base_skin", pref.base_skin, "<br />Base Skin")
-	if (has_flag(mob_species, HAS_SKIN_COLOR))
+	if (HasAppearanceFlag(mob_species, SPECIES_APPEARANCE_HAS_SKIN_COLOR))
 		var/color = pref.skin_color
 		. += "[TBTN("skin_color", "Color", "<br />Skin Color")] [COLOR_PREVIEW(color)]"
-	else if (has_flag(mob_species, HAS_A_SKIN_TONE))
+	else if (HasAppearanceFlag(mob_species, SPECIES_APPEARANCE_HAS_A_SKIN_TONE))
 		. += "[TBTN("skin_tone", "[-pref.skin_tone + 35]/[mob_species.max_skin_tone()]", "<br />Skin Tone")]"
 
 	. += "<br />[BTN("marking_style", "+ Body Marking")]"
@@ -227,7 +227,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	. = jointext(., null)
 
 
-/datum/category_item/player_setup_item/physical/body/proc/has_flag(datum/species/mob_species, flag)
+/datum/category_item/player_setup_item/physical/body/proc/HasAppearanceFlag(datum/species/mob_species, flag)
 	return mob_species && (mob_species.appearance_flags & flag)
 
 /datum/category_item/player_setup_item/physical/body/OnTopic(href,list/href_list, mob/user)
@@ -320,16 +320,16 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 			sanitize_organs()
 
-			if(!has_flag(all_species[pref.species], HAS_UNDERWEAR))
+			if(!HasAppearanceFlag(all_species[pref.species], SPECIES_APPEARANCE_HAS_UNDERWEAR))
 				pref.all_underwear.Cut()
 
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["hair_color"])
-		if(!has_flag(mob_species, HAS_HAIR_COLOR))
+		if(!HasAppearanceFlag(mob_species, SPECIES_APPEARANCE_HAS_HAIR_COLOR))
 			return TOPIC_NOACTION
 		var/new_hair = input(user, "Choose your character's hair colour:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.head_hair_color) as color|null
-		if(new_hair && has_flag(all_species[pref.species], HAS_HAIR_COLOR) && CanUseTopic(user))
+		if(new_hair && HasAppearanceFlag(all_species[pref.species], SPECIES_APPEARANCE_HAS_HAIR_COLOR) && CanUseTopic(user))
 			pref.head_hair_color = new_hair
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
@@ -353,23 +353,23 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["facial_color"])
-		if(!has_flag(mob_species, HAS_HAIR_COLOR))
+		if(!HasAppearanceFlag(mob_species, SPECIES_APPEARANCE_HAS_HAIR_COLOR))
 			return TOPIC_NOACTION
 		var/new_facial = input(user, "Choose your character's facial-hair colour:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.facial_hair_color) as color|null
-		if(new_facial && has_flag(all_species[pref.species], HAS_HAIR_COLOR) && CanUseTopic(user))
+		if(new_facial && HasAppearanceFlag(all_species[pref.species], SPECIES_APPEARANCE_HAS_HAIR_COLOR) && CanUseTopic(user))
 			pref.facial_hair_color = new_facial
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["eye_color"])
-		if(!has_flag(mob_species, HAS_EYE_COLOR))
+		if(!HasAppearanceFlag(mob_species, SPECIES_APPEARANCE_HAS_EYE_COLOR))
 			return TOPIC_NOACTION
 		var/new_eyes = input(user, "Choose your character's eye colour:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.eye_color) as color|null
-		if(new_eyes && has_flag(all_species[pref.species], HAS_EYE_COLOR) && CanUseTopic(user))
+		if(new_eyes && HasAppearanceFlag(all_species[pref.species], SPECIES_APPEARANCE_HAS_EYE_COLOR) && CanUseTopic(user))
 			pref.eye_color = new_eyes
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["base_skin"])
-		if(!has_flag(mob_species, HAS_BASE_SKIN_COLOURS))
+		if(!HasAppearanceFlag(mob_species, SPECIES_APPEARANCE_HAS_BASE_SKIN_COLOURS))
 			return TOPIC_NOACTION
 		var/new_s_base = input(user, "Choose your character's base colour:", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in mob_species.base_skin_colours
 		if(new_s_base && CanUseTopic(user))
@@ -377,19 +377,19 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["skin_tone"])
-		if(!has_flag(mob_species, HAS_A_SKIN_TONE))
+		if(!HasAppearanceFlag(mob_species, SPECIES_APPEARANCE_HAS_A_SKIN_TONE))
 			return TOPIC_NOACTION
 		var/new_s_tone = input(user, "Choose your character's skin-tone. Lower numbers are lighter, higher are darker. Range: 1 to [mob_species.max_skin_tone()]", CHARACTER_PREFERENCE_INPUT_TITLE, (-pref.skin_tone) + 35) as num|null
 		mob_species = all_species[pref.species]
-		if(new_s_tone && has_flag(mob_species, HAS_A_SKIN_TONE) && CanUseTopic(user))
+		if(new_s_tone && HasAppearanceFlag(mob_species, SPECIES_APPEARANCE_HAS_A_SKIN_TONE) && CanUseTopic(user))
 			pref.skin_tone = 35 - max(min(round(new_s_tone), mob_species.max_skin_tone()), 1)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["skin_color"])
-		if(!has_flag(mob_species, HAS_SKIN_COLOR))
+		if(!HasAppearanceFlag(mob_species, SPECIES_APPEARANCE_HAS_SKIN_COLOR))
 			return TOPIC_NOACTION
 		var/new_skin = input(user, "Choose your character's skin colour: ", CHARACTER_PREFERENCE_INPUT_TITLE, pref.skin_color) as color|null
-		if(new_skin && has_flag(all_species[pref.species], HAS_SKIN_COLOR) && CanUseTopic(user))
+		if(new_skin && HasAppearanceFlag(all_species[pref.species], SPECIES_APPEARANCE_HAS_SKIN_COLOR) && CanUseTopic(user))
 			pref.skin_color = new_skin
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 

@@ -15,7 +15,7 @@
 /obj/item/underwear/proc/CanEquipUnderwear(mob/user, mob/living/carbon/human/H)
 	if(!CanAdjustUnderwear(user, H, "put on"))
 		return FALSE
-	if(!(H.species && (H.species.appearance_flags & HAS_UNDERWEAR)))
+	if(!(H.species && (H.species.appearance_flags & SPECIES_APPEARANCE_HAS_UNDERWEAR)))
 		to_chat(user, "<span class='warning'>\The [H]'s species cannot wear underwear of this nature.</span>")
 		return FALSE
 	if(is_path_in_list(type, H.worn_underwear))

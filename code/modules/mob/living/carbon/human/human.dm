@@ -1189,7 +1189,7 @@
 			var/datum/mob_descriptor/descriptor = species.descriptors[desctype]
 			descriptors[desctype] = descriptor.default_value
 
-	if(!(species.appearance_flags & HAS_UNDERWEAR))
+	if(!(species.appearance_flags & SPECIES_APPEARANCE_HAS_UNDERWEAR))
 		QDEL_NULL_LIST(worn_underwear)
 
 	available_maneuvers = species.maneuvers.Copy()
