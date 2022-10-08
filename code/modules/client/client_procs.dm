@@ -123,24 +123,24 @@
 	var/bad_version = config.minimum_byond_version && byond_version < config.minimum_byond_version
 	var/bad_build = config.minimum_byond_build && byond_build < config.minimum_byond_build
 	if (bad_build || bad_version)
-		to_chat(src, "You are attempting to connect with a out of date version of BYOND. Please update to the latest version at http://www.byond.com/ before trying again.")
+		legacy_chat(src, "You are attempting to connect with a out of date version of BYOND. Please update to the latest version at http://www.byond.com/ before trying again.")
 		qdel(src)
 		return
 
 	if("[byond_version].[byond_build]" in config.forbidden_versions)
 		_DB_staffwarn_record(ckey, "Tried to connect with broken and possibly exploitable BYOND build.")
-		to_chat(src, "You are attempting to connect with a broken and possibly exploitable BYOND build. Please update to the latest version at http://www.byond.com/ before trying again.")
+		legacy_chat(src, "You are attempting to connect with a broken and possibly exploitable BYOND build. Please update to the latest version at http://www.byond.com/ before trying again.")
 		qdel(src)
 		return
 
 	if(!config.guests_allowed && IsGuestKey(key))
-		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
+		legacy_chat(src, "This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.")
 		qdel(src)
 		return
 
 	if(config.player_limit != 0)
 		if((GLOB.clients.len >= config.player_limit) && !(ckey in admin_datums))
-			alert(src,"This server is currently full and not accepting new connections.","Server Full","OK")
+			legacy_chat(src, "This server is currently full and not accepting new connections.")
 			log_admin("[ckey] tried to join and was turned away due to the server being full (player_limit=[config.player_limit])")
 			qdel(src)
 			return
