@@ -125,6 +125,8 @@ SUBSYSTEM_DEF(typing)
 
 /// Updates client|ckey's verb typing state to new_state.
 /datum/controller/subsystem/typing/proc/UpdateVerbState(client/client, state)
+	if (!isliving(client?.mob))
+		return
 	var/list/entry = GetEntry(client)
 	entry[INDEX_VERB_STATE] = state
 	UpdateIndicator(client, entry)
