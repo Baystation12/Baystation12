@@ -145,10 +145,16 @@
 			qdel(src)
 			return
 
+	var/join_notification = "has joined the game."
 	for (var/datum/ticket/T in tickets)
 		if (T.status == TICKET_OPEN && T.owner.ckey == ckey)
-			message_staff("[key_name_admin(src)] has joined the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admin_ckeys())]" : SPAN_DANGER("Unassigned.")]")
+			join_notification = "has joined the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admin_ckeys())]" : SPAN_DANGER("Unassigned.")]"
 			break
+	join_notification = "[key_name_admin(src)] [join_notification]"
+	join_notification = "<span class=\"log_message\"><span class=\"prefix\">JOIN LOG:</span> <span class=\"message\">[join_notification]</span></span>"
+	for (var/client/C as anything in GLOB.admins)
+		if (C && C.holder && C.get_preference_value(/datum/client_preference/staff/show_join_logs) == GLOB.PREF_SHOW)
+			to_chat(C, join_notification)
 
 	// Change the way they should download resources.
 	if(config.resource_urls && config.resource_urls.len)
