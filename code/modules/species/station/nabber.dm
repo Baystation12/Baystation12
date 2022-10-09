@@ -334,8 +334,8 @@
 	if(grabber == target)
 		return ..()
 
-	grabber.unEquip(grabber.l_hand)
-	grabber.unEquip(grabber.r_hand)
+	for (var/obj/item/item as anything in grabber.GetAllHeld())
+		grabber.unEquip(item)
 	to_chat(grabber, "<span class='warning'>You drop everything as you spring out to nab \the [target]!.</span>")
 	playsound(grabber.loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
 
@@ -366,8 +366,8 @@
 	to_chat(H, "<span class='notice'>You begin to adjust the fluids in your arms, dropping everything and getting ready to swap which set you're using.</span>")
 	var/hidden = H.is_cloaked()
 	if(!hidden) H.visible_message("<span class='warning'>\The [H] shifts [T.his] arms.</span>")
-	H.unEquip(H.l_hand)
-	H.unEquip(H.r_hand)
+	for (var/obj/item/item as anything in H.GetAllHeld())
+		H.unEquip(item)
 	if(do_after(H, 3 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT))
 		arm_swap(H)
 	else
@@ -375,8 +375,8 @@
 	return TRUE
 
 /datum/species/nabber/proc/arm_swap(mob/living/carbon/human/H, forced)
-	H.unEquip(H.l_hand)
-	H.unEquip(H.r_hand)
+	for (var/obj/item/item as anything in H.GetAllHeld())
+		H.unEquip(item)
 	var/hidden = H.is_cloaked()
 	var/datum/gender/T = gender_datums[H.get_gender()]
 	H.pulling_punches = !H.pulling_punches

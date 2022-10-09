@@ -220,7 +220,7 @@
 /obj/structure/bed/chair/janicart/relaymove(mob/user, direction)
 	if(user.stat || user.stunned || user.weakened || user.paralysis)
 		unbuckle_mob()
-	if(istype(user.l_hand, /obj/item/key) || istype(user.r_hand, /obj/item/key))
+	if (user.IsHolding(/obj/item/key))
 		step(src, direction)
 		update_mob()
 	else

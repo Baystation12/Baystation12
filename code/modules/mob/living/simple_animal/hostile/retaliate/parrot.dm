@@ -538,8 +538,9 @@
 
 		if(iscarbon(AM))
 			var/mob/living/carbon/C = AM
-			if((C.l_hand && can_pick_up(C.l_hand)) || (C.r_hand && can_pick_up(C.r_hand)))
-				return C
+			for (var/obj/item as anything in C.GetAllHeld())
+				if (can_pick_up(item))
+					return C
 	return null
 
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/search_for_perch()
@@ -565,8 +566,9 @@
 
 		if(iscarbon(AM))
 			var/mob/living/carbon/C = AM
-			if((C.l_hand && can_pick_up(C.l_hand)) || (C.r_hand && can_pick_up(C.r_hand)))
-				return C
+			for (var/obj/item as anything in C.GetAllHeld())
+				if (can_pick_up(item))
+					return C
 	return null
 
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/give_up()
@@ -621,11 +623,10 @@
 	var/obj/item/stolen_item = null
 
 	for(var/mob/living/carbon/C in view(1,src))
-		if(C.l_hand && can_pick_up(C.l_hand))
-			stolen_item = C.l_hand
-
-		if(C.r_hand && can_pick_up(C.r_hand))
-			stolen_item = C.r_hand
+		for (var/obj/item as anything in C.GetAllHeld())
+			if (can_pick_up(item))
+				stolen_item = item
+				break
 
 		if(stolen_item && C.unEquip(stolen_item, src))
 			held_item = stolen_item

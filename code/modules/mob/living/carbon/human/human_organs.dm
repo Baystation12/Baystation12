@@ -150,7 +150,7 @@
 		Weaken(3) //can't emote while weakened, apparently.
 
 /mob/living/carbon/human/proc/handle_grasp()
-	if(!l_hand && !r_hand)
+	if (HandsEmpty())
 		return
 
 	// You should not be able to pick anything up, but stranger things have happened.
@@ -171,7 +171,7 @@
 				break
 
 	// Check again...
-	if(!l_hand && !r_hand)
+	if (HandsEmpty())
 		return
 
 	for (var/obj/item/organ/external/E in organs)

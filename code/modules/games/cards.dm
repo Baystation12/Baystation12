@@ -113,12 +113,8 @@
 		to_chat(usr, "There are no cards in the deck.")
 		return
 
-	var/obj/item/hand/H
-	if(user.l_hand && istype(user.l_hand,/obj/item/hand))
-		H = user.l_hand
-	else if(user.r_hand && istype(user.r_hand,/obj/item/hand))
-		H = user.r_hand
-	else
+	var/obj/item/hand/H = user.IsHolding(/obj/item/hand)
+	if (!H)
 		H = new(get_turf(src))
 		user.put_in_hands(H)
 

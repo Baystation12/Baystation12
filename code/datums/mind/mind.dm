@@ -422,7 +422,7 @@
 				var/mob/living/silicon/robot/R = current
 				if (istype(R))
 					R.emagged = FALSE
-					if (R.activated(R.module.emag))
+					if (R.IsHolding(R.module.emag))
 						R.module_active = null
 					if(R.module_state_1 == R.module.emag)
 						R.module_state_1 = null
@@ -441,7 +441,7 @@
 					for (var/mob/living/silicon/robot/R in ai.connected_robots)
 						R.emagged = FALSE
 						if (R.module)
-							if (R.activated(R.module.emag))
+							if (R.IsHolding(R.module.emag))
 								R.module_active = null
 							if(R.module_state_1 == R.module.emag)
 								R.module_state_1 = null

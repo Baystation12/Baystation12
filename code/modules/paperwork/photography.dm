@@ -199,13 +199,9 @@ var/global/photo_count = 0
 	for(var/mob/living/carbon/A in the_turf)
 		if(A.invisibility) continue
 		var/holding = null
-		if(A.l_hand || A.r_hand)
-			if(A.l_hand) holding = "They are holding \a [A.l_hand]"
-			if(A.r_hand)
-				if(holding)
-					holding += " and \a [A.r_hand]"
-				else
-					holding = "They are holding \a [A.r_hand]"
+		var/list/held_items = A.GetAllHeld()
+		if (held_items.len)
+			holding = "They are holding [english_list(A.GetAllHeld())]"
 
 		if(!mob_detail)
 			mob_detail = "You can see [A] on the photo[(A.health / A.maxHealth) < 0.75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]. "

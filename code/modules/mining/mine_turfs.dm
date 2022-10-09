@@ -117,17 +117,11 @@ var/global/list/mining_floors = list()
 
 /turf/simulated/mineral/Bumped(AM)
 	. = ..()
-	if(istype(AM,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = AM
-		if((istype(H.l_hand,/obj/item/pickaxe)) && (!H.hand))
-			attackby(H.l_hand,H)
-		else if((istype(H.r_hand,/obj/item/pickaxe)) && H.hand)
-			attackby(H.r_hand,H)
-
-	else if(istype(AM,/mob/living/silicon/robot))
-		var/mob/living/silicon/robot/R = AM
-		if(istype(R.module_active,/obj/item/pickaxe))
-			attackby(R.module_active,R)
+	if (ismob(AM))
+		var/mob/mob = AM
+		var/obj/item/pickaxe/pickaxe = mob.IsHolding(/obj/item/pickaxe)
+		if (pickaxe)
+			attackby(pickaxe, mob)
 
 /turf/simulated/mineral/proc/MineralSpread()
 	if(istype(mineral) && mineral.ore_spread_chance > 0)
@@ -553,12 +547,5 @@ var/global/list/mining_floors = list()
 	..()
 	if(istype(M,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = M
-		if(R.module)
-			if(istype(R.module_state_1,/obj/item/storage/ore))
-				attackby(R.module_state_1,R)
-			else if(istype(R.module_state_2,/obj/item/storage/ore))
-				attackby(R.module_state_2,R)
-			else if(istype(R.module_state_3,/obj/item/storage/ore))
-				attackby(R.module_state_3,R)
-			else
-				return
+		for (var/obj/item/item as anything in R.GetAllHeld(/obj/item/storage/ore))
+			attackby(item, R)

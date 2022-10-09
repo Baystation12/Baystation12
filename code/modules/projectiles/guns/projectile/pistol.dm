@@ -124,7 +124,7 @@
 /obj/item/gun/projectile/pistol/holdout/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src)
 		if(silenced)
-			if(user.l_hand != src && user.r_hand != src)
+			if (!user.IsHolding(src))
 				..()
 				return
 			if (silencer)
@@ -139,7 +139,7 @@
 
 /obj/item/gun/projectile/pistol/holdout/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/silencer))
-		if(user.l_hand != src && user.r_hand != src)	//if we're not in his hands
+		if (!user.IsHolding())
 			to_chat(user, SPAN_WARNING("You'll need \the [src] in your hands to do that."))
 			return
 		if (silenced)

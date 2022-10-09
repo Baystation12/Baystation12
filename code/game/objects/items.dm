@@ -291,10 +291,8 @@
 		pixel_z = randpixel //an idea borrowed from some of the older pixel_y randomizations. Intended to make items appear to drop at a character
 	update_twohanding()
 	if(user)
-		if(user.l_hand)
-			user.l_hand.update_twohanding()
-		if(user.r_hand)
-			user.r_hand.update_twohanding()
+		for (var/obj/item/item as anything in user.GetAllHeld())
+			item.update_twohanding()
 	GLOB.mob_unequipped_event.raise_event(user, src)
 	GLOB.item_unequipped_event.raise_event(src, user)
 
@@ -331,10 +329,8 @@ note this isn't called during the initial dressing of a player
 	var/mob/M = loc
 	if(!istype(M))
 		return
-	if(M.l_hand)
-		M.l_hand.update_twohanding()
-	if(M.r_hand)
-		M.r_hand.update_twohanding()
+	for (var/obj/item/item as anything in M.GetAllHeld())
+		item.update_twohanding()
 	GLOB.mob_equipped_event.raise_event(user, src, slot)
 	GLOB.item_equipped_event.raise_event(src, user, slot)
 
@@ -501,11 +497,8 @@ var/global/list/slot_flags_enumeration = list(
 	if(src.anchored) //Object isn't anchored
 		to_chat(usr, "<span class='warning'>You can't pick that up!</span>")
 		return
-	if(!usr.hand && usr.r_hand) //Right hand is not full
-		to_chat(usr, "<span class='warning'>Your right hand is full.</span>")
-		return
-	if(usr.hand && usr.l_hand) //Left hand is not full
-		to_chat(usr, "<span class='warning'>Your left hand is full.</span>")
+	if (!usr.HasFreeHand())
+		to_chat(usr, SPAN_WARNING("Your hands are full."))
 		return
 	if(!istype(src.loc, /turf)) //Object is on a turf
 		to_chat(usr, "<span class='warning'>You can't pick that up!</span>")

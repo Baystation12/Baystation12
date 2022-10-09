@@ -163,7 +163,7 @@
 	target_stack.use(1)
 	to_chat(user, "<span class='notice'>You attach wire to the [name].</span>")
 	var/obj/item/product = new wire_product(get_turf(user))
-	if(!(user.l_hand && user.r_hand))
+	if (user.HasFreeHand())
 		user.put_in_hands(product)
 
 // Make sure we have a display name and shard icon even if they aren't explicitly set.

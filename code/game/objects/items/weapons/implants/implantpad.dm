@@ -16,7 +16,7 @@
 		icon_state = "implantpad-0"
 
 /obj/item/implantpad/attack_hand(mob/user)
-	if ((imp && (user.l_hand == src || user.r_hand == src)))
+	if (imp && user.IsHolding(src))
 		user.put_in_active_hand(imp)
 		imp.add_fingerprint(user)
 		add_fingerprint(user)

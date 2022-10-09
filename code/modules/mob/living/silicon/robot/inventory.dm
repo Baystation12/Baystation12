@@ -5,6 +5,63 @@
 /mob/living/silicon/robot/get_active_hand()
 	return module_active
 
+
+/mob/living/silicon/robot/IsHolding(obj/item/item)
+	if (istype(item))
+		if (QDELING(item))
+			crash_with("Invalid instance supplied: The passed item has been QDEL'd.")
+			return
+		if (module_state_1 == item || module_state_2 == item || module_state_3 == item)
+			return item
+		return
+
+	if (ispath(item, /obj/item))
+		if (istype(module_state_1, item))
+			return module_state_1
+		if (istype(module_state_2, item))
+			return module_state_2
+		if (istype(module_state_3, item))
+			return module_state_3
+		return
+
+	crash_with("Invalid instance or path supplied: Not a valid subtype of `/obj/item` or was `null`.")
+
+
+/mob/living/silicon/robot/HandsEmpty()
+	return module_state_1 == null && module_state_2 == null && module_state_3 == null
+
+
+/mob/living/silicon/robot/HasFreeHand()
+	return module_state_1 == null || module_state_2 == null || module_state_3 == null
+
+
+/mob/living/silicon/robot/GetAllHeld(item_path)
+	. = list()
+
+	if (HandsEmpty())
+		return
+
+	if (!item_path)
+		if (module_state_1)
+			. += module_state_1
+		if (module_state_2)
+			. += module_state_2
+		if (module_state_3)
+			. += module_state_3
+		return
+
+	if (ispath(item_path, /obj/item))
+		if (istype(module_state_1, item_path))
+			. += module_state_1
+		if (istype(module_state_2, item_path))
+			. += module_state_2
+		if (istype(module_state_3, item_path))
+			. += module_state_3
+		return
+
+	crash_with("Invalid path supplied: Not a valid subtype of `/obj/item`.")
+
+
 /*-------TODOOOOOOOOOO--------*/
 
 //Verbs used by hotkeys.
@@ -91,16 +148,6 @@
 		inv3.icon_state = "inv3"
 	update_icon()
 	hud_used.update_robot_modules_display()
-
-/mob/living/silicon/robot/proc/activated(obj/item/O)
-	if(module_state_1 == O)
-		return 1
-	else if(module_state_2 == O)
-		return 1
-	else if(module_state_3 == O)
-		return 1
-	else
-		return 0
 
 //Helper procs for cyborg modules on the UI.
 //These are hackish but they help clean up code elsewhere.
@@ -220,8 +267,11 @@
 /mob/living/silicon/robot/proc/activate_module(obj/item/O)
 	if(!(locate(O) in module.equipment) && O != src.module.emag)
 		return
-	if(activated(O))
+	if (IsHolding(O))
 		to_chat(src, "<span class='notice'>Already activated</span>")
+		return
+	if (!HasFreeHand())
+		to_chat(src, SPAN_NOTICE("You need to disable a module first!"))
 		return
 	if(!module_state_1)
 		module_state_1 = O
@@ -244,9 +294,6 @@
 		O.forceMove(src)
 		if(istype(module_state_3,/obj/item/borg/sight))
 			sight_mode |= module_state_3:sight_mode
-	else
-		to_chat(src, "<span class='notice'>You need to disable a module first!</span>")
-		return
 	GLOB.module_activated_event.raise_event(src, O)
 
 /mob/living/silicon/put_in_hands(obj/item/W) // No hands.

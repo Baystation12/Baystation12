@@ -292,10 +292,8 @@
 /obj/item/stack/proc/add_to_stacks(mob/user, check_hands)
 	var/list/stacks = list()
 	if(check_hands)
-		if(isstack(user.l_hand))
-			stacks += user.l_hand
-		if(isstack(user.r_hand))
-			stacks += user.r_hand
+		for (var/obj/item/stack/stack as anything in user.GetAllHeld(/obj/item/stack))
+			stacks += stack
 	for (var/obj/item/stack/item in user.loc)
 		stacks |= item
 	for (var/obj/item/stack/item in stacks)

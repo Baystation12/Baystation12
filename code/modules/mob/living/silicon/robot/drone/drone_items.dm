@@ -461,11 +461,11 @@
 		if (!O)
 			window += "<br><b>Depleted Resource</b>"
 		else
-			window += "<br>[O]: [activated(O) ? "<b>Activated</b>" : "<a href='?src=\ref[src];act=\ref[O]'>Activate</a>"]"
+			window += "<br>[O]: [IsHolding(O) ? "<b>Activated</b>" : "<a href='?src=\ref[src];act=\ref[O]'>Activate</a>"]"
 	if (emagged)
 		if (!module.emag)
 			window += "<br><b>Depleted Resource</b>"
 		else
-			window += "<br>[module.emag]: [activated(module.emag) ? "<b>Activated</b>" : "<a href='?src=\ref[src];act=\ref[module.emag]'>Activate</a>"]"
+			window += "<br>[module.emag]: [IsHolding(module.emag) ? "<b>Activated</b>" : "<a href='?src=\ref[src];act=\ref[module.emag]'>Activate</a>"]"
 	window = strip_improper("<head><title>Drone modules</title></head><tt>[JOINTEXT(window)]</tt>")
 	show_browser(src, window, "window=robotmod")

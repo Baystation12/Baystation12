@@ -146,6 +146,77 @@
 	drop_from_inventory(W)
 	return 0
 
+
+/**
+ * Checks if a given item or path is in any of the mob's hands or other holding slots.
+ *
+ * **Parameters**:
+ * - `item` - The item to check for. Either a reference or a path. If a path, will check for any instance of path or its subtypes.
+ *
+ * Returns instance of `/obj/item` or `null`. the item found in the mob's hands.
+ */
+/mob/proc/IsHolding(obj/item/item)
+	if (istype(item))
+		if (QDELING(item))
+			crash_with("Invalid instance supplied: The passed item has been QDEL'd.")
+			return
+		if (l_hand == item || r_hand == item)
+			return item
+		return
+
+	if (ispath(item, /obj/item))
+		if (istype(l_hand, item))
+			return l_hand
+		if (istype(r_hand, item))
+			return r_hand
+		return
+
+	crash_with("Invalid instance or path supplied: Not a valid subtype of `/obj/item` or was `null`.")
+
+
+/**
+ * Fetches all held items of the given path.
+ *
+ * If not passed any parameters, will simply fetch all held items.
+ *
+ * **Parameters**:
+ * - `item_path` (path) - Path to the item type to fetch. Must be a type of `/obj/item`.
+ *
+ * Returns list of found instances, or null.
+ */
+/mob/proc/GetAllHeld(item_path)
+	. = list()
+
+	if (HandsEmpty())
+		return null
+
+	if (!item_path)
+		if (l_hand)
+			. += l_hand
+		if (r_hand)
+			. += r_hand
+		return
+
+	if (ispath(item_path, /obj/item))
+		if (istype(l_hand, item_path))
+			. += l_hand
+		if (istype(r_hand, item_path))
+			. += r_hand
+		return
+
+	crash_with("Invalid path supplied: Not a valid subtype of `/obj/item`.")
+
+
+/// Whether or not the mob's hands or other holding slots are empty. Returns boolean.
+/mob/proc/HandsEmpty()
+	return l_hand == null && r_hand == null
+
+
+/// Whether or not the mob has any free hands/holding slots.
+/mob/proc/HasFreeHand()
+	return l_hand == null || r_hand == null
+
+
 // Removes an item from inventory and places it in the target atom.
 // If canremove or other conditions need to be checked then use unEquip instead.
 /mob/proc/drop_from_inventory(obj/item/W, atom/target = null)

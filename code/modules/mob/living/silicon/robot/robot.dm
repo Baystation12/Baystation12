@@ -756,12 +756,12 @@
 	for (var/obj in module.equipment)
 		if (!obj)
 			dat += text("<B>Resource depleted</B><BR>")
-		else if(activated(obj))
+		else if (IsHolding(obj))
 			dat += text("[obj]: <B>Activated</B><BR>")
 		else
 			dat += text("[obj]: <A HREF=?src=\ref[src];act=\ref[obj]>Activate</A><BR>")
 	if (emagged)
-		if(activated(module.emag))
+		if (IsHolding(module.emag))
 			dat += text("[module.emag]: <B>Activated</B><BR>")
 		else
 			dat += text("[module.emag]: <A HREF=?src=\ref[src];act=\ref[module.emag]>Activate</A><BR>")
@@ -794,9 +794,13 @@
 			if(!((O in module.equipment) || (O == src.module.emag)))
 				return TOPIC_HANDLED
 
-			if(activated(O))
+			if (IsHolding(O))
 				to_chat(src, "Already activated")
 				return TOPIC_HANDLED
+			if (!HasFreeHand())
+				to_chat(src, "You need to disable a module first!")
+				return TOPIC_HANDLED
+
 			if(!module_state_1)
 				module_state_1 = O
 				O.hud_layerise()
@@ -818,25 +822,19 @@
 				O.equipped_robot()
 				if(istype(module_state_3,/obj/item/borg/sight))
 					sight_mode |= module_state_3:sight_mode
-			else
-				to_chat(src, "You need to disable a module first!")
 			installed_modules()
 			return TOPIC_HANDLED
 
 		if (href_list["deact"])
 			var/obj/item/O = locate(href_list["deact"])
-			if(activated(O))
+			if (IsHolding(O))
 				if(module_state_1 == O)
 					module_state_1 = null
-					O.forceMove(null)
 				else if(module_state_2 == O)
 					module_state_2 = null
-					O.forceMove(null)
 				else if(module_state_3 == O)
 					module_state_3 = null
-					O.forceMove(null)
-				else
-					to_chat(src, "Module isn't activated.")
+				O.forceMove(null)
 			else
 				to_chat(src, "Module isn't activated")
 			installed_modules()

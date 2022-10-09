@@ -6,7 +6,7 @@
 /mob/living/carbon/alien/diona/MouseDrop(atom/over_object)
 	var/mob/living/carbon/H = over_object
 
-	if(istype(H) && Adjacent(H) && (usr == H) && (H.a_intent == "grab") && hat && !(H.l_hand && H.r_hand))
+	if(istype(H) && Adjacent(H) && (usr == H) && (H.a_intent == "grab") && hat && H.HasFreeHand())
 		H.put_in_hands(hat)
 		H.visible_message("<span class='danger'>\The [H] removes \the [src]'s [hat].</span>")
 		hat = null

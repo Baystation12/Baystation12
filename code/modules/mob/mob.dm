@@ -316,7 +316,7 @@
 		return 1
 	face_atom(A)
 	if(!isghost(src))
-		if(A.loc != src || A == l_hand || A == r_hand)
+		if(A.loc != src || IsHolding(A))
 			for(var/mob/M in viewers(4, src))
 				if(M == src)
 					continue
@@ -382,17 +382,15 @@
 
 //Gets the mob grab conga line.
 /mob/proc/ret_grab(list/L)
-	if (!istype(l_hand, /obj/item/grab) && !istype(r_hand, /obj/item/grab))
+	if (!IsHolding(/obj/item/grab))
 		return L
 	if (!L)
 		L = list(src)
-	for(var/A in list(l_hand,r_hand))
-		if (istype(A, /obj/item/grab))
-			var/obj/item/grab/G = A
-			if (!(G.affecting in L))
-				L += G.affecting
-				if (G.affecting)
-					G.affecting.ret_grab(L)
+	for (var/obj/item/grab/grab as anything in GetAllHeld(/obj/item/grab))
+		if (!(grab.affecting in L))
+			L += grab.affecting
+			if (grab.affecting)
+				grab.affecting.ret_grab(L)
 	return L
 
 /mob/verb/mode()
@@ -761,8 +759,8 @@
 
 	if(lying)
 		set_density(0)
-		if(l_hand) unEquip(l_hand)
-		if(r_hand) unEquip(r_hand)
+		for (var/obj/item/item as anything in GetAllHeld())
+			unEquip(item)
 	else
 		set_density(initial(density))
 	reset_layer()
@@ -999,7 +997,7 @@
 		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s body.</b></span>","<span class='warning'><b>[usr] rips [selection] out of your body.</b></span>")
 	remove_implant(selection)
 	selection.forceMove(get_turf(src))
-	if(!(U.l_hand && U.r_hand))
+	if (U.HasFreeHand())
 		U.put_in_hands(selection)
 	if(ishuman(U))
 		var/mob/living/carbon/human/human_user = U

@@ -196,7 +196,7 @@
 		var/obj/item/I = pick(removable_objects)
 		I.forceMove(get_turf(user)) //just in case something was embedded that is not an item
 		if(istype(I))
-			if(!(user.l_hand && user.r_hand))
+			if (user.HasFreeHand())
 				user.put_in_hands(I)
 		user.visible_message("<span class='danger'>\The [user] rips \the [I] out of \the [src]!</span>")
 		return //no eating the limb until everything's been removed
@@ -249,7 +249,7 @@
 
 					removing.forceMove(get_turf(user))
 
-					if(!(user.l_hand && user.r_hand))
+					if (user.HasFreeHand())
 						user.put_in_hands(removing)
 					user.visible_message("<span class='danger'><b>[user]</b> extracts [removing] from [src] with [W]!</span>")
 				else

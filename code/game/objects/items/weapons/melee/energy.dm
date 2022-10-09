@@ -241,7 +241,7 @@
 	QDEL_IN(src, 0)
 
 /obj/item/melee/energy/blade/Process()
-	if(!creator || loc != creator || (creator.l_hand != src && creator.r_hand != src))
+	if (!creator || loc != creator || !creator.IsHolding(src))
 		// Tidy up a bit.
 		if(istype(loc,/mob/living))
 			var/mob/living/carbon/human/host = loc

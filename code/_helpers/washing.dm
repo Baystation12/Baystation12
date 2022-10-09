@@ -16,10 +16,8 @@
 		return
 
 	var/mob/living/carbon/M = washing
-	if(M.r_hand)
-		M.r_hand.clean_blood()
-	if(M.l_hand)
-		M.l_hand.clean_blood()
+	for (var/obj/item/item as anything in M.GetAllHeld())
+		item.clean_blood()
 	if(M.back && M.back.clean_blood())
 		M.update_inv_back(0)
 

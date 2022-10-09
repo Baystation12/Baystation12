@@ -107,10 +107,10 @@
 
 /spell/moghes_blessing/choose_targets(mob/user = usr)
 	var/list/hands = list()
-	for(var/obj/item/I in list(user.l_hand, user.r_hand))
+	for (var/obj/item/item as anything in user.GetAllHeld())
 		//make sure it's not already blessed
-		if(istype(I) && !has_extension(I, /datum/extension/moghes_blessing))
-			hands += I
+		if (!has_extension(item, /datum/extension/moghes_blessing))
+			hands += item
 	return hands
 
 /spell/moghes_blessing/cast(list/targets, mob/user)
