@@ -288,7 +288,7 @@
 			sound_to(living, sound(null, channel = GLOB.ambience_channel_forced))
 
 	var/time = world.time
-	if (ambience && time > client.next_ambience_time)
+	if (ambience?.len && time > client.next_ambience_time)
 		var/sound = sound(pick(ambience), repeat = FALSE, wait = 0, volume = 15, channel = GLOB.ambience_channel_common)
 		living.playsound_local(turf, sound)
 		client.next_ambience_time = time + rand(3, 5) MINUTES
