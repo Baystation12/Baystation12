@@ -22,7 +22,7 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/template_noop)
 "af" = (
-/obj/structure/anomaly_container,
+/obj/machinery/anomaly_container,
 /obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)

@@ -78,14 +78,21 @@
 			effect.DoEffectTouch(arglist(args.Copy(2)))
 
 /obj/machinery/artifact/Process()
-	var/turf/T = loc
-	if(!istype(T)) 	// We're inside a container or on null turf, either way stop processing effects
-		return
+	if (!isturf(loc)) // We're not on a valid turf, check for the special conditions of an anomaly container
+		if (istype(loc, /obj/machinery/anomaly_container))
+			var/obj/machinery/anomaly_container/container = loc
+			if (container.contained == src && !container.broken)
+				// We're inside an anomaly container, we're the contained anomaly, and the container is not broken.
+				return
+		else
+			// We're not inside an anomaly container nor a turf
+			return
+	// We're on a turf or inside a broken or invalid anomaly container
 
 	if(pulledby)
 		check_triggers(/datum/artifact_trigger/proc/on_touch, pulledby)
 
-	var/datum/gas_mixture/enivonment = T.return_air()
+	var/datum/gas_mixture/enivonment = loc.return_air()
 	if(enivonment.return_pressure() >= SOUND_MINIMUM_PRESSURE)
 		check_triggers(/datum/artifact_trigger/proc/on_gas_exposure, enivonment)
 

@@ -128,3 +128,18 @@
 		/obj/item/stock_parts/power/battery/buildable/stock = 1,
 		/obj/item/cell/high = 1
 	)
+
+/obj/item/stock_parts/circuitboard/anomaly_container
+	name = T_BOARD("anomaly container")
+	build_path = /obj/machinery/anomaly_container
+	board_type = "machine"
+	origin_tech = list(TECH_BLUESPACE = 3, TECH_ENGINEERING = 4, TECH_MAGNET = 4)
+	req_components = list(
+		/obj/item/stock_parts/matter_bin = 3,
+		/obj/item/stock_parts/manipulator = 1,
+		/obj/item/stock_parts/micro_laser = 1)
+	additional_spawn_components = list(
+		/obj/item/stock_parts/keyboard = 1,
+		/obj/item/stock_parts/power/battery/buildable/stock = 1,
+		/obj/item/cell/high = 1
+	)

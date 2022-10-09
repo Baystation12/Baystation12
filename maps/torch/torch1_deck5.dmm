@@ -3518,7 +3518,7 @@
 /area/quartermaster/expedition/storage)
 "ix" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/anomaly_container,
+/obj/machinery/anomaly_container,
 /obj/item/device/radio/intercom{
 	dir = 4;
 	pixel_x = -21
@@ -5044,7 +5044,7 @@
 /area/quartermaster/hangar)
 "lx" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/anomaly_container,
+/obj/machinery/anomaly_container,
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/expedition/storage)

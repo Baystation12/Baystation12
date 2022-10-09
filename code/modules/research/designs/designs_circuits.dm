@@ -275,6 +275,13 @@
 	build_path = /obj/item/stock_parts/circuitboard/suspension_gen
 	sort_string = "HABAK"
 
+/datum/design/circuit/anomaly_container
+	name = "anomaly container"
+	id = "anomaly_container"
+	req_tech = list(TECH_BLUESPACE = 3, TECH_ENGINEERING = 4, TECH_MAGNET = 4)
+	build_path = /obj/item/stock_parts/circuitboard/anomaly_container
+	sort_string = "HABAL"
+
 /datum/design/circuit/rdservercontrol
 	name = "R&D server control console"
 	id = "rdservercontrol"
