@@ -114,6 +114,10 @@
 	id_types = list(/obj/item/card/id/torch/crew/sea)
 	pda_type = /obj/item/modular_computer/pda/heads
 
+/decl/hierarchy/outfit/job/torch/crew/command/sea/New()
+	..()
+	BACKPACK_OVERRIDE_COMMAND
+
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
 	name = OUTFIT_JOB_NAME("Bridge Officer")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
@@ -121,6 +125,10 @@
 	id_types = list(/obj/item/card/id/torch/crew/bridgeofficer)
 	pda_type = /obj/item/modular_computer/pda/heads
 	l_ear = /obj/item/device/radio/headset/bridgeofficer
+
+/decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/New()
+	..()
+	BACKPACK_OVERRIDE_COMMAND
 
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet
 	name = OUTFIT_JOB_NAME("Bridge Officer - Fleet")
