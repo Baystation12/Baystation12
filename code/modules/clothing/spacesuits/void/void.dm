@@ -120,6 +120,8 @@ else if(##equipment_var) {\
 	..()
 
 	var/mob/living/carbon/human/H = M
+	//Obviously, if a mob can put something on their head they *should* have a head
+	var/obj/item/organ/external/mobHead = H.get_organ(BP_HEAD)
 
 	if(!istype(H)) return
 
@@ -136,6 +138,7 @@ else if(##equipment_var) {\
 		else if (H.equip_to_slot_if_possible(helmet, slot_head))
 			to_chat(M, "Your suit's helmet deploys with a hiss.")
 			playsound(loc, helmet_deploy_sound, 30)
+			mobHead.limb_flags -= ORGAN_FLAG_CAN_AMPUTATE
 			helmet.canremove = 0
 
 	if(tank)
@@ -150,13 +153,16 @@ else if(##equipment_var) {\
 	..()
 
 	var/mob/living/carbon/human/H
+	var/obj/item/organ/external/mobHead
 
 	if(helmet)
 		helmet.canremove = 1
 		H = helmet.loc
+		mobHead = H.get_organ(BP_HEAD)
 		if(istype(H))
 			if(helmet && H.head == helmet)
 				H.drop_from_inventory(helmet, src)
+				mobHead.limb_flags += ORGAN_FLAG_CAN_AMPUTATE
 
 	if(boots)
 		boots.canremove = 1
@@ -182,6 +188,7 @@ else if(##equipment_var) {\
 		return
 
 	var/mob/living/carbon/human/H = usr
+	var/obj/item/organ/external/mobHead = H.get_organ(BP_HEAD)
 
 	if(!istype(H)) return
 	if(H.incapacitated()) return
@@ -189,6 +196,7 @@ else if(##equipment_var) {\
 
 	if(H.head == helmet)
 		to_chat(H, "<span class='notice'>You retract your suit helmet.</span>")
+		mobHead.limb_flags += ORGAN_FLAG_CAN_AMPUTATE
 		helmet.canremove = 1
 		playsound(loc, helmet_retract_sound, 30)
 		H.drop_from_inventory(helmet, src)
@@ -196,8 +204,9 @@ else if(##equipment_var) {\
 		if(H.head)
 			to_chat(H, "<span class='danger'>You cannot deploy your helmet while wearing \the [H.head].</span>")
 			return
-		if(H.equip_to_slot_if_possible(helmet, slot_head))
+		else if(H.equip_to_slot_if_possible(helmet, slot_head))
 			helmet.pickup(H)
+			mobHead.limb_flags -= ORGAN_FLAG_CAN_AMPUTATE
 			helmet.canremove = 0
 			playsound(loc, helmet_deploy_sound, 30)
 			to_chat(H, "<span class='info'>You deploy your suit helmet, sealing you off from the world.</span>")
