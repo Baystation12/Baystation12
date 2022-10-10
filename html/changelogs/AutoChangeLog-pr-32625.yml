@@ -1,7 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: Client join and disconnect logs can now appear to staff that enable the
-      new Show Join Logs preference.
-  - bugfix: Various on-connect messages now wait for goon chat to load, allowing users
-      with goon chat enabled to see said on-connect messages.

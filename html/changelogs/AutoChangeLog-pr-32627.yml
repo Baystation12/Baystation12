@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Fire extinguishers now properly put out fires on tiles that have no atmosphere
-      or no temperature.
