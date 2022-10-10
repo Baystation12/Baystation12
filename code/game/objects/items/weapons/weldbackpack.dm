@@ -20,28 +20,45 @@
 /obj/item/storage/backpack/weldpack/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWelder(W))
 		var/obj/item/weldingtool/T = W
-		if(T.welding & prob(50))
-			log_and_message_admins("triggered a fueltank explosion.", user)
-			to_chat(user, "<span class='danger'>That was stupid of you.</span>")
-			explosion(get_turf(src),-1,1,3)
-			if(src)
-				qdel(src)
+		if (!T.tank)
+			to_chat(user, SPAN_WARNING("\The [T] has no tank attached!"))
 			return
-		else
-			if(T.welding)
-				to_chat(user, "<span class='danger'>That was close!</span>")
-			if(!T.tank)
-				to_chat(user, "\The [T] has no tank attached!")
-			src.reagents.trans_to_obj(T.tank, T.tank.max_fuel)
-			to_chat(user, "<span class='notice'>You refuel \the [W].</span>")
-			playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
+		if (!T.tank.can_refuel)
+			to_chat(user, SPAN_WARNING("\The [T]'s [T.tank.name] does not have a refuelling port."))
 			return
+		if (T.welding)
+			if (user.a_intent == I_HURT)
+				user.visible_message(
+					SPAN_DANGER("\The [user] holds \a [T] up to \a [src], causing an explosion!"),
+					SPAN_DANGER("You hold \the [T] up to \the [src], causing an explosion!")
+				)
+				log_and_message_admins("triggered a fueltank explosion.", user)
+				explosion(get_turf(src), -1, 1, 3)
+				if (!QDELETED(src))
+					qdel(src)
+				return
+			else
+				to_chat(user, SPAN_WARNING("You need to turn \the [T] off before you can refuel it. Or use harm intent if you're suicidal."))
+				return
+		if (!reagents.trans_to_obj(T.tank, T.tank.max_fuel))
+			to_chat(user, SPAN_WARNING("\The [T]'s [T.tank.name] is already full."))
+			return
+		to_chat(user, SPAN_NOTICE("You refill \the [T] with \the [src]."))
+		playsound(src, 'sound/effects/refill.ogg', 50, 1, -6)
+		return
+
 	else if(istype(W, /obj/item/welder_tank))
 		var/obj/item/welder_tank/tank = W
-		src.reagents.trans_to_obj(tank, tank.max_fuel)
-		to_chat(user, "<span class='notice'>You refuel \the [W].</span>")
-		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
+		if (!tank.can_refuel)
+			to_chat(user, SPAN_WARNING("\The [tank] does not have a refuelling port."))
+			return
+		if (!reagents.trans_to_obj(tank, tank.max_fuel))
+			to_chat(user, SPAN_WARNING("\The [tank] is already full."))
+			return
+		to_chat(user, SPAN_NOTICE("You refuel \the [tank] with \the [src]."))
+		playsound(loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
+
 	..()
 
 /obj/item/storage/backpack/weldpack/afterattack(obj/O as obj, mob/user as mob, proximity)
