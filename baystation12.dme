@@ -1494,6 +1494,7 @@
 #include "code\modules\client\preference_setup\loadout\lists\gloves.dm"
 #include "code\modules\client\preference_setup\loadout\lists\headwear.dm"
 #include "code\modules\client\preference_setup\loadout\lists\misc.dm"
+#include "code\modules\client\preference_setup\loadout\lists\pet.dm"
 #include "code\modules\client\preference_setup\loadout\lists\storage.dm"
 #include "code\modules\client\preference_setup\loadout\lists\suits.dm"
 #include "code\modules\client\preference_setup\loadout\lists\tactical.dm"

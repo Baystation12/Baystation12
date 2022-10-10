@@ -37,7 +37,7 @@
 		if(!resting && !buckled)
 			for(var/mob/living/simple_animal/passive/mouse/M in loc)
 				if(!M.stat)
-					M.splat()
+					M.death()
 					visible_emote(pick("bites \the [M]!","toys with \the [M].","chomps on \the [M]!"))
 					movement_target = null
 					set_AI_busy(FALSE)
