@@ -283,6 +283,51 @@
 	work_type = /turf/simulated/wall
 
 /*
+	Low wall construction
+*/
+
+/decl/hierarchy/rcd_mode/wall_frame
+	name = "Low Walls"
+
+/decl/hierarchy/rcd_mode/wall_frame/steel
+	cost = 1
+	delay = 2 SECONDS
+	handles_type = /turf/simulated/floor
+	work_type = /obj/structure/wall_frame
+
+/decl/hierarchy/rcd_mode/wall_frame/steel/can_handle_work(rcd, turf/target)
+	return ..() && !target.contains_dense_objects() && !(locate(/obj/structure/wall_frame) in target)
+
+
+/*
+	Machine and Computer frame construction
+*/
+
+/decl/hierarchy/rcd_mode/machine_frame
+	name = "Machine frames"
+
+/decl/hierarchy/rcd_mode/machine_frame/basic
+	cost = 1
+	delay = 2 SECONDS
+	handles_type = /turf/simulated/floor
+	work_type = /obj/machinery/constructable_frame/machine_frame/deconstruct
+
+/decl/hierarchy/rcd_mode/machine_frame/basic/can_handle_work(rcd, turf/target)
+	return ..() && !target.contains_dense_objects() && !(locate(/obj/machinery) in target)
+
+/decl/hierarchy/rcd_mode/computer_frame
+	name = "Computer frames"
+
+/decl/hierarchy/rcd_mode/computer_frame/basic
+	cost = 1
+	delay = 2 SECONDS
+	handles_type = /turf/simulated/floor
+	work_type = /obj/machinery/constructable_frame/computerframe/deconstruct
+
+/decl/hierarchy/rcd_mode/computer_frame/basic/can_handle_work(rcd, turf/target)
+	return ..() && !target.contains_dense_objects() && !(locate(/obj/machinery) in target)
+
+/*
 	Deconstruction
 */
 /decl/hierarchy/rcd_mode/deconstruction
@@ -295,6 +340,16 @@
 	cost = 30
 	delay = 5 SECONDS
 	handles_type = /obj/machinery/door/airlock
+
+/decl/hierarchy/rcd_mode/deconstruction/airlock_assembly
+	cost = 4
+	delay = 2 SECONDS
+	handles_type = /obj/structure/door_assembly
+
+/decl/hierarchy/rcd_mode/deconstruction/firedoor_assembly
+	cost = 4
+	delay = 2 SECONDS
+	handles_type = /obj/structure/firedoor_assembly
 
 /decl/hierarchy/rcd_mode/deconstruction/floor
 	cost = 9
