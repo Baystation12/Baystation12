@@ -464,7 +464,7 @@
 /obj/effect/floor_decal/corner/research{
 	dir = 6
 	},
-/obj/structure/anomaly_container,
+/obj/machinery/anomaly_container,
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab2/test1)
 "cS" = (
@@ -3049,7 +3049,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/obj/structure/anomaly_container,
+/obj/machinery/anomaly_container,
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab2/test1)
 "qS" = (
@@ -4097,7 +4097,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/oldlab2/fixedsecurity)
 "vA" = (
-/obj/structure/anomaly_container,
+/obj/machinery/anomaly_container,
 /obj/machinery/light,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 1;
@@ -7270,7 +7270,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab2/mess)
 "Mh" = (
-/obj/structure/anomaly_container,
+/obj/machinery/anomaly_container,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 1;
 	id_tag = "oldlab_pump"

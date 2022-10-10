@@ -808,7 +808,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/scavver/calypso)
 "na" = (
-/obj/structure/anomaly_container,
+/obj/machinery/anomaly_container,
 /turf/simulated/floor/airless,
 /area/scavver/calypso)
 "nb" = (

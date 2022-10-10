@@ -2395,7 +2395,7 @@
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/crew/labs)
 "hs" = (
-/obj/structure/anomaly_container,
+/obj/machinery/anomaly_container,
 /obj/effect/floor_decal/industrial/hatch/red,
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/crew/labs)
