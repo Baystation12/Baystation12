@@ -84,11 +84,10 @@ GLOBAL_LIST(end_titles)
 	parent.screen += src
 
 /obj/screen/credit/Destroy()
-	var/client/P = parent
 	if(parent)
-		P.screen -= src
-	LAZYREMOVE(P.credits, src)
-	parent = null
+		parent.screen -= src
+		LAZYREMOVE(parent.credits, src)
+		parent = null
 	return ..()
 
 /proc/generate_titles()
