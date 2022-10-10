@@ -1,0 +1,9 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Unrefillable welding tool tanks can no longer be refueled using a weldpack.
+  - tweak: Welding packs now inform you if the tool you are attempting to refill is
+      already full
+  - tweak: Weldpacks no longer have a 50% chance of exploding when you use a lit torch
+      on them. Instead, they will only explode if you're on harm intent. Otherwise,
+      it tells you no and does nothing.
