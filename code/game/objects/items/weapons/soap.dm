@@ -1,6 +1,6 @@
 /obj/item/soap
 	name = "soap"
-	desc = "A cheap bar of soap. Doesn't smell."
+	desc = "A cheap bar of soap. Smells of lye."
 	gender = PLURAL
 	icon = 'icons/obj/soap.dmi'
 	icon_state = "soap"
@@ -14,25 +14,100 @@
 	var/list/valid_colors = list(COLOR_GREEN_GRAY, COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_BROWN, COLOR_PALE_PINK, COLOR_PALE_BTL_GREEN, COLOR_OFF_WHITE, COLOR_GRAY40, COLOR_GOLD)
 	var/list/valid_scents = list("fresh air", "cinnamon", "mint", "cocoa", "lavender", "an ocean breeze", "a summer garden", "vanilla", "cheap perfume")
 	var/list/scent_intensity = list("faintly", "strongly", "overbearingly")
-	var/list/valid_shapes = list("oval", "circular", "rectangular", "square")
 	var/decal_name
-	var/list/decals = list("diamond", "heart", "circle", "triangle", "")
+	var/list/decals = list("diamond", "heart", "circle")
 
 /obj/item/soap/New()
 	..()
 	create_reagents(30)
 	wet()
+/obj/item/soap/random
+	icon_state = "soap"
 
-/obj/item/soap/Initialize()
+/obj/item/soap/random/Initialize()
 	. = ..()
-	var/shape = pick(valid_shapes)
 	var/scent = pick(valid_scents)
 	var/smelly = pick(scent_intensity)
-	icon_state = "soap-[shape]"
 	color = pick(valid_colors)
 	decal_name = pick(decals)
-	desc = "\A [shape] bar of soap. It smells [smelly] of [scent]."
+	desc = "A bar of soap. It smells [smelly] of [scent]."
 	update_icon()
+
+/obj/item/soap/space_soap
+	desc = "Smells like hot metal and walnuts."
+	icon_state = "space_soap"
+
+/obj/item/soap/water_soap
+	desc = "Smells like chlorine."
+	icon_state = "water_soap"
+
+/obj/item/soap/fire_soap
+	desc = "Smells like a campfire."
+	icon_state = "fire_soap"
+
+/obj/item/soap/rainbow_soap
+	desc = "Smells sickly sweet."
+	icon_state = "rainbow_soap"
+
+/obj/item/soap/diamond_soap
+	desc = "Smells like saffron and vanilla."
+	icon_state = "diamond_soap"
+
+/obj/item/soap/uranium_soap
+	desc = "Smells not great... Not terrible."
+	icon_state = "uranium_soap"
+
+/obj/item/soap/silver_soap
+	desc = "Smells like birch and amaranth."
+	icon_state = "silver_soap"
+
+/obj/item/soap/brown_soap
+	desc = "Smells like cinnamon and cognac."
+	icon_state = "brown_soap"
+
+/obj/item/soap/white_soap
+	desc = "Smells like nutmeg and oats."
+	icon_state = "white_soap"
+
+/obj/item/soap/grey_soap
+	desc = "Smells like bergamot and lilies."
+	icon_state = "grey_soap"
+
+/obj/item/soap/pink_soap
+	desc = "Smells like bubblegum."
+	icon_state = "pink_soap"
+
+/obj/item/soap/purple_soap
+	desc = "Smells like lavender."
+	icon_state = "purple_soap"
+
+/obj/item/soap/blue_soap
+	desc = "Smells like cardamom."
+	icon_state = "blue_soap"
+
+/obj/item/soap/cyan_soap
+	desc = "Smells like bluebells and peaches."
+	icon_state = "cyan_soap"
+
+/obj/item/soap/green_soap
+	desc = "Smells like a freshly mowed lawn."
+	icon_state = "green_soap"
+
+/obj/item/soap/yellow_soap
+	desc = "Smells like citron and ginger."
+	icon_state = "yellow_soap"
+
+/obj/item/soap/orange_soap
+	desc = "Smells like oranges and dark chocolate."
+	icon_state = "orange_soap"
+
+/obj/item/soap/red_soap
+	desc = "Smells like cherries."
+	icon_state = "red_soap"
+
+/obj/item/soap/golden_soap
+	desc = "Smells like honey."
+	icon_state = "golden_soap"
 
 /obj/item/soap/proc/wet()
 	reagents.add_reagent(/datum/reagent/space_cleaner, 15)
