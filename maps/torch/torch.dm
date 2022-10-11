@@ -56,6 +56,7 @@
 	#include "datums/antags/renegade.dm"
 
 	#include "items/cards_ids.dm"
+	#include "items/coins.dm"
 	#include "items/encryption_keys.dm"
 	#include "items/headsets.dm"
 	#include "items/items.dm"

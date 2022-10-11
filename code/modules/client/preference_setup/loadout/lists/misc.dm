@@ -272,20 +272,3 @@
 	crosstype["cross, silver"] = /obj/item/material/cross/silver
 	crosstype["cross, gold"] = /obj/item/material/cross/gold
 	gear_tweaks += new/datum/gear_tweak/path(crosstype)
-
-/datum/gear/coin
-	display_name = "coin"
-	path = /obj/item/material/coin
-	cost = 2
-
-/datum/gear/coin/New()
-	..()
-	var/cointype = list()
-	cointype["coin, gold"] = /obj/item/material/coin/gold
-	cointype["coin, silver"] = /obj/item/material/coin/silver
-	cointype["coin, iron"] = /obj/item/material/coin/iron
-	cointype["coin, diamond"] = /obj/item/material/coin/diamond
-	cointype["coin, uranium"] = /obj/item/material/coin/uranium
-	cointype["coin, phoron"] = /obj/item/material/coin/phoron
-	cointype["coin, platinum"] = /obj/item/material/coin/platinum
-	gear_tweaks += new/datum/gear_tweak/path(cointype)

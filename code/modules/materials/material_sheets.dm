@@ -247,6 +247,16 @@
 /obj/item/stack/material/silver/ten
 	amount = 10
 
+/obj/item/stack/material/electrum
+	name = "electrum"
+	icon_state = "ingot"
+	plural_icon_state = "ingot-mult"
+	max_icon_state = "ingot-max"
+	default_type = MATERIAL_ELECTRUM
+
+/obj/item/stack/material/electrum/ten
+	amount = 10
+
 //Valuable resource, cargo can sell it.
 /obj/item/stack/material/platinum
 	name = "platinum"

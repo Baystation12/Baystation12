@@ -53,6 +53,3 @@
 #define CIVILIAN_BRANCHES list(/datum/mil_branch/civilian, /datum/mil_branch/solgov)
 
 #define SOLGOV_BRANCHES list(/datum/mil_branch/expeditionary_corps, /datum/mil_branch/fleet, /datum/mil_branch/solgov)
-
-//For all roles that are NOT solgov military
-#define SOLGOV_MILITARY_RESTRICTED list(/datum/mil_branch/solgov, /datum/mil_branch/civilian, /datum/mil_branch/iccgn, /datum/mil_branch/alien, /datum/mil_branch/skrell_fleet)

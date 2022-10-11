@@ -2438,7 +2438,7 @@
 /area/magshield/west)
 "gt" = (
 /obj/structure/closet,
-/obj/item/storage/wallet/leather,
+/obj/item/storage/wallet,
 /obj/random/clothing,
 /obj/random/smokes,
 /turf/simulated/floor/carpet/blue,

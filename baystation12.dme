@@ -1498,6 +1498,7 @@
 #include "code\modules\client\preference_setup\loadout\lists\storage.dm"
 #include "code\modules\client\preference_setup\loadout\lists\suits.dm"
 #include "code\modules\client\preference_setup\loadout\lists\tactical.dm"
+#include "code\modules\client\preference_setup\loadout\lists\trinkets.dm"
 #include "code\modules\client\preference_setup\loadout\lists\uniforms.dm"
 #include "code\modules\client\preference_setup\loadout\lists\utility.dm"
 #include "code\modules\client\preference_setup\loadout\lists\xenowear.dm"
