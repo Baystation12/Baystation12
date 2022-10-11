@@ -1,0 +1,5 @@
+author: SomeAngryMiner
+delete-after: true
+changes:
+  - tweak: RCDs can now print low walls, wired computer frames and wired machine frames.
+  - tweak: RCDs can now deconstruct firelock assemblies and airlock assemblies.
