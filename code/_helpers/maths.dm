@@ -194,3 +194,21 @@
 /// Returns the angle of the matrix according to atan2 on the b, a parts
 /matrix/proc/get_angle()
 	return Atan2(b, a)
+
+
+/// Roll a Y sided die X times, producing either a sum result or list of rolls.
+/proc/xdy(x, y, as_list)
+	var/result = 0
+	if (as_list)
+		result = list()
+	x = max(1, round(x))
+	y = max(1, round(y))
+	for (var/i = 1 to x)
+		result += rand(1, y)
+	return result
+
+
+/// Generate a random number from min to max on a sigma^2 = 1 gaussian distribution.
+/proc/grand(min = 0, max = 1)
+	var/static/generator/gauss = generator("num", 0, 1, NORMAL_RAND)
+	return min + gauss.Rand() * (max - min)
