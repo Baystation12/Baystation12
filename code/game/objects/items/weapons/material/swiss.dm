@@ -38,7 +38,7 @@
 		else
 			choice = SWISSKNF_CLOSED
 			open = FALSE
-	
+
 	if(!choice || !CanPhysicallyInteract(user))
 		return
 	if(choice == SWISSKNF_CLOSED)
@@ -51,7 +51,7 @@
 			playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
 		else
 			user.visible_message("<span class='notice'>\The [user] opens the [lowertext(choice)].</span>")
-			
+
 	active_tool = choice
 	update_force()
 	update_icon()
@@ -109,7 +109,7 @@
 		update_force()
 		return
 	if(istype(target, /obj/item))
-		if(target.w_class <= ITEM_SIZE_NORMAL)
+		if(target.w_class <= ITEM_SIZE_HUGE)
 			can_use_tools = TRUE
 			. = ..()
 			can_use_tools = FALSE

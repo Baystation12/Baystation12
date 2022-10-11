@@ -5,6 +5,7 @@
 	icon_state = "id_mod"
 	item_state = "electronic"
 	origin_tech = list(TECH_DATA = 2)
+	matter = list(MATERIAL_PLASTIC = 1000, MATERIAL_ALUMINIUM = 1000)
 	density = FALSE
 	anchored = FALSE
 	w_class = ITEM_SIZE_SMALL

@@ -95,19 +95,12 @@
 	build_path = /obj/item/stock_parts/circuitboard/body_scanconsole/display
 	sort_string = "FACAJ"
 
-/datum/design/circuit/bioprinter
-	name = "bioprinter"
-	id = "bioprinter"
-	req_tech = list(TECH_ENGINEERING = 1, TECH_BIO = 3, TECH_DATA = 3)
-	build_path = /obj/item/stock_parts/circuitboard/bioprinter
-	sort_string = "FAGAK"
-
 /datum/design/circuit/roboprinter
 	name = "prosthetic organ fabricator"
 	id = "roboprinter"
 	req_tech = list(TECH_ENGINEERING = 2, TECH_DATA = 3)
 	build_path = /obj/item/stock_parts/circuitboard/roboprinter
-	sort_string = "FAGAM"
+	sort_string = "FAGAK"
 
 /datum/design/circuit/teleconsole
 	name = "teleporter control console"

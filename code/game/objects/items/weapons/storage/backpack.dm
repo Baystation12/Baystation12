@@ -66,7 +66,6 @@
 		slot_l_hand_str = "holdingpack",
 		slot_r_hand_str = "holdingpack"
 	)
-	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 56
 
 /obj/item/storage/backpack/holding/New()
@@ -85,11 +84,6 @@
 	if(istype(W, /obj/item/storage/backpack/holding))
 		return 1
 	return ..()
-
-/obj/item/storage/backpack/holding/duffle
-	name = "dufflebag of holding"
-	icon_state = "holdingduffle"
-	item_state_slots = list(slot_l_hand_str = "duffle", slot_r_hand_str = "duffle")
 
 /obj/item/storage/backpack/santabag
 	name = "\improper Santa's gift bag"
