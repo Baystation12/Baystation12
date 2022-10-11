@@ -132,7 +132,7 @@
 	if(points >= no_more_fail)
 		return 0
 	else
-		return fail_chance * 2 ** (factor*(SKILL_MIN - points))
+		return round(fail_chance * 2 ** (factor*(SKILL_MIN - points)))
 
 // Simple prob using above
 /mob/proc/skill_fail_prob(skill_path, fail_chance, no_more_fail = SKILL_MAX, factor = 1)
