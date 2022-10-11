@@ -34,7 +34,37 @@
 
 /obj/item/gun/projectile/shotgun/pump/attack_self(mob/living/user as mob)
 	if(world.time >= recentpump + 10)
-		pump(user)
+		if(!is_held_twohanded(user))
+			var/fail_chance = user.skill_fail_chance(SKILL_WEAPONS, 90, SKILL_EXPERT, 0.25)
+			var/drop_chance = user.skill_fail_chance(SKILL_WEAPONS, 50, SKILL_EXPERT, 0.5)
+
+			if (!fail_chance)
+				user.visible_message(
+					SPAN_NOTICE("\The [user] racks \the [src] with one hand."),
+					SPAN_NOTICE("You manage to rack \the [src] with one hand.")
+				)
+				pump(user)
+			else if (prob(fail_chance))
+				if (prob(drop_chance) && user.unEquip(src, user.loc))
+					user.visible_message(
+						SPAN_WARNING("\The [user] attempts to rack \the [src], but it falls out of their hands!"),
+						SPAN_WARNING("You attempt to rack \the [src], but it falls out of your hands!")
+					)
+				else
+					user.visible_message(
+						SPAN_WARNING("\The [user] fails to rack \the [src]!"),
+						SPAN_WARNING("You fail to rack \the [src]!")
+					)
+			else
+				user.visible_message(
+					SPAN_NOTICE("\The [user] manages to akwardly rack \the [src] with one hand."),
+					SPAN_NOTICE("You manage to awkwardly rack \the [src] with one hand.")
+				)
+				pump(user)
+
+		else
+			pump(user)
+
 		recentpump = world.time
 
 /obj/item/gun/projectile/shotgun/pump/proc/pump(mob/M as mob)
