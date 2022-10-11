@@ -79,11 +79,29 @@
 	cost = 10
 	containername = "blood pack crate"
 
-/decl/hierarchy/supply_pack/medical/blood
+/decl/hierarchy/supply_pack/medical/nanoblood
 	name = "Refills - Nanoblood"
 	contains = list(/obj/item/reagent_containers/ivbag/nanoblood = 4)
-	cost = 15
+	cost = 30
 	containername = "nanoblood crate"
+
+/decl/hierarchy/supply_pack/medical/humanblood
+	name = "Refills - Human O- Blood"
+	contains = list(/obj/item/reagent_containers/ivbag/blood/OMinus = 4)
+	cost = 15
+	containername = "human O- blood crate"
+
+/decl/hierarchy/supply_pack/medical/skrellblood
+	name = "Refills - Skrell O- Blood"
+	contains = list(/obj/item/reagent_containers/ivbag/blood/OMinus/skrell = 4)
+	cost = 20
+	containername = "skrell blood crate"
+
+/decl/hierarchy/supply_pack/medical/unathiblood
+	name = "Refills - Unathi O- Blood"
+	contains = list(/obj/item/reagent_containers/ivbag/blood/OMinus/unathi = 4)
+	cost = 20
+	containername = "unathi blood crate"
 
 /decl/hierarchy/supply_pack/medical/bodybag
 	name = "Equipment - Body bags"

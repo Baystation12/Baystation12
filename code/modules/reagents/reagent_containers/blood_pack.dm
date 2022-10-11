@@ -84,12 +84,21 @@
 /obj/item/reagent_containers/ivbag/blood
 	name = "blood pack"
 	var/blood_type = null
+	var/blood_species = SPECIES_HUMAN
 
 /obj/item/reagent_containers/ivbag/blood/New()
 	..()
 	if(blood_type)
-		name = "blood pack [blood_type]"
-		reagents.add_reagent(/datum/reagent/blood, volume, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null))
+		var/datum/species/species = all_species[blood_species]
+		name = "blood pack [blood_type] ([blood_species])"
+		reagents.add_reagent(/datum/reagent/blood, volume, list(
+			"donor" = null,
+			"blood_DNA" = null,
+			"blood_type" = blood_type,
+			"trace_chem" = null,
+			"blood_species" = blood_species,
+			"blood_colour" = species.blood_color
+		))
 
 /obj/item/reagent_containers/ivbag/blood/APlus
 	blood_type = "A+"
@@ -108,3 +117,9 @@
 
 /obj/item/reagent_containers/ivbag/blood/OMinus
 	blood_type = "O-"
+
+/obj/item/reagent_containers/ivbag/blood/OMinus/skrell
+	blood_species = SPECIES_SKRELL
+
+/obj/item/reagent_containers/ivbag/blood/OMinus/unathi
+	blood_species = SPECIES_UNATHI
