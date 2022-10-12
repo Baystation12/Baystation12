@@ -394,33 +394,29 @@
 	desc = "A helmet with ear protection and a visor, used in hangars on many ships."
 	icon_state = "deckcrew"
 	flags_inv = BLOCKHEADHAIR
+	volume_multiplier = 0.1
 
 /obj/item/clothing/head/deckcrew/green
 	name = "green deck crew helmet"
 	desc = "A helmet with ear protection and a visor, used by support staff in Fleet hangars."
 	icon_state = "deckcrew_g"
-	flags_inv = BLOCKHEADHAIR
 
 /obj/item/clothing/head/deckcrew/blue
 	name = "blue deck crew helmet"
 	desc = "A helmet with ear protection and a visor, used by tug operators in Fleet hangars."
 	icon_state = "deckcrew_b"
-	flags_inv = BLOCKHEADHAIR
 
 /obj/item/clothing/head/deckcrew/yellow
 	name = "yellow deck crew helmet"
 	desc = "A helmet with ear protection and a visor, used by traffic control in Fleet hangars."
 	icon_state = "deckcrew_y"
-	flags_inv = BLOCKHEADHAIR
 
 /obj/item/clothing/head/deckcrew/purple
 	name = "purple deck crew helmet"
 	desc = "A helmet with ear protection and a visor, used by fueling personnel in Fleet hangars."
 	icon_state = "deckcrew_p"
-	flags_inv = BLOCKHEADHAIR
 
 /obj/item/clothing/head/deckcrew/red
 	name = "red deck crew helmet"
 	desc = "A helmet with ear protection and a visor, used by munitions handlers in Fleet hangars."
 	icon_state = "deckcrew_r"
-	flags_inv = BLOCKHEADHAIR
