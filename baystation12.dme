@@ -2281,6 +2281,7 @@
 #include "code\modules\mob\living\simple_animal\hostile\mimic.dm"
 #include "code\modules\mob\living\simple_animal\hostile\pirate.dm"
 #include "code\modules\mob\living\simple_animal\hostile\russian.dm"
+#include "code\modules\mob\living\simple_animal\hostile\skeleton.dm"
 #include "code\modules\mob\living\simple_animal\hostile\space_carp.dm"
 #include "code\modules\mob\living\simple_animal\hostile\space_pike.dm"
 #include "code\modules\mob\living\simple_animal\hostile\space_shark.dm"
