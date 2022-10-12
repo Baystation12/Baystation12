@@ -1,5 +1,0 @@
-author: ComradeCheekiBreeki
-delete-after: true
-changes:
-  - rscadd: There are now possible negative consequences when trying to rack pump
-      shotguns one-handed, which are dependent on the user's skillset.
