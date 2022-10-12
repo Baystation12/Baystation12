@@ -218,7 +218,7 @@
 
 /obj/item/storage/box/freezer
 	name = "portable freezer"
-	desc = "This nifty shock-resistant device will keep your 'groceries' nice and non-spoiled."
+	desc = "This nifty shock-resistant, self-refrigerating device will keep your 'groceries' nice and non-spoiled."
 	icon = 'icons/obj/medical.dmi'
 	icon_state = "freezer"
 	item_state = "medicalpack"
@@ -230,8 +230,7 @@
 	temperature = -16 CELSIUS
 	can_hold = list(
 		/obj/item/organ,
-		/obj/item/reagent_containers/food,
-		/obj/item/reagent_containers/glass
+		/obj/item/reagent_containers
 	)
 
 
