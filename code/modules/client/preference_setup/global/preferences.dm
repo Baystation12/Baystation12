@@ -322,11 +322,6 @@ var/global/list/_client_preferences_by_type
 	key = "CHAT_RLOOC"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
-/datum/client_preference/staff/show_join_logs
-	description = "Join Logs"
-	key = "CHAT_JOINLOGS"
-	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
-
 /********************
 * Admin Preferences *
 ********************/

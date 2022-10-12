@@ -123,44 +123,42 @@
 	var/bad_version = config.minimum_byond_version && byond_version < config.minimum_byond_version
 	var/bad_build = config.minimum_byond_build && byond_build < config.minimum_byond_build
 	if (bad_build || bad_version)
-		legacy_chat(src, "You are attempting to connect with a out of date version of BYOND. Please update to the latest version at http://www.byond.com/ before trying again.")
+		to_chat(src, "You are attempting to connect with a out of date version of BYOND. Please update to the latest version at http://www.byond.com/ before trying again.")
 		qdel(src)
 		return
 
 	if("[byond_version].[byond_build]" in config.forbidden_versions)
 		_DB_staffwarn_record(ckey, "Tried to connect with broken and possibly exploitable BYOND build.")
-		legacy_chat(src, "You are attempting to connect with a broken and possibly exploitable BYOND build. Please update to the latest version at http://www.byond.com/ before trying again.")
+		to_chat(src, "You are attempting to connect with a broken and possibly exploitable BYOND build. Please update to the latest version at http://www.byond.com/ before trying again.")
 		qdel(src)
 		return
 
 	if(!config.guests_allowed && IsGuestKey(key))
-		legacy_chat(src, "This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.")
+		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
 		qdel(src)
 		return
 
 	if(config.player_limit != 0)
 		if((GLOB.clients.len >= config.player_limit) && !(ckey in admin_datums))
-			legacy_chat(src, "This server is currently full and not accepting new connections.")
+			alert(src,"This server is currently full and not accepting new connections.","Server Full","OK")
 			log_admin("[ckey] tried to join and was turned away due to the server being full (player_limit=[config.player_limit])")
 			qdel(src)
 			return
 
-	var/join_notification = "has joined the game."
 	for (var/datum/ticket/T in tickets)
 		if (T.status == TICKET_OPEN && T.owner.ckey == ckey)
-			join_notification = "has joined the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admin_ckeys())]" : SPAN_DANGER("Unassigned.")]"
+			message_staff("[key_name_admin(src)] has joined the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admin_ckeys())]" : SPAN_DANGER("Unassigned.")]")
 			break
-	join_notification = "[key_name_admin(src)] [join_notification]"
-	join_notification = "<span class=\"log_message\"><span class=\"prefix\">JOIN LOG:</span> <span class=\"message\">[join_notification]</span></span>"
-	for (var/client/C as anything in GLOB.admins)
-		if (C && C.holder && C.get_preference_value(/datum/client_preference/staff/show_join_logs) == GLOB.PREF_SHOW)
-			to_chat(C, join_notification)
 
 	// Change the way they should download resources.
 	if(config.resource_urls && config.resource_urls.len)
 		src.preload_rsc = pick(config.resource_urls)
 	else src.preload_rsc = 1 // If config.resource_urls is not set, preload like normal.
 
+	if(byond_version < DM_VERSION)
+		to_chat(src, "<span class='warning'>You are running an older version of BYOND than the server and may experience issues.</span>")
+		to_chat(src, "<span class='warning'>It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/.</span>")
+	to_chat(src, "<span class='warning'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</span>")
 	GLOB.clients += src
 	GLOB.ckey_directory[ckey] = src
 
@@ -182,8 +180,15 @@
 
 	GLOB.using_map.map_info(src)
 
+	if (config.event)
+		to_chat(src, "<h1 class='alert'>Event</h1>")
+		to_chat(src, "<h2 class='alert'>An event is taking place. OOC Info:</h2>")
+		to_chat(src, "<span class='alert'>[config.event]</span>")
+		to_chat(src, "<br>")
+
 	if(holder)
 		add_admin_verbs()
+		admin_memo_show()
 
 	// Forcibly enable hardware-accelerated graphics, as we need them for the lighting overlays.
 	// (but turn them off first, since sometimes BYOND doesn't turn them on properly otherwise)
@@ -196,6 +201,15 @@
 	log_client_to_db()
 
 	send_resources()
+
+	if (GLOB.changelog_hash && prefs.lastchangelog != GLOB.changelog_hash) //bolds the changelog button on the interface so we know there are updates.
+		to_chat(src, "<span class='info'>You have unread updates in the changelog.</span>")
+		winset(src, "rpane.changelog", "background-color=#eaeaea;font-style=bold")
+		if(config.aggressive_changelog)
+			src.changes()
+
+	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
+		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
 
 	if(holder)
 		src.control_freak = 0 //Devs need 0 for profiler access
