@@ -95,7 +95,6 @@
 	opacity = 0
 	mouse_opacity = 1
 	anchored = TRUE
-	can_buckle = 0 //no manual buckling or unbuckling
 
 	var/health = 25
 	var/countdown = 15

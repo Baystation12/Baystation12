@@ -1903,7 +1903,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "dP" = (
-/obj/item/roller,
+/obj/item/roller_bed,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "dQ" = (
@@ -2074,7 +2074,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "eg" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/structure/closet/medical_wall{
 	name = "pill cabinet";
 	pixel_x = 26
@@ -2476,8 +2476,8 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/crew/kitchen)
 "eG" = (

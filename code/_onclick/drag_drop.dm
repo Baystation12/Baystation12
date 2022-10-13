@@ -26,12 +26,12 @@
 	return TRUE
 
 /atom/MouseDrop(atom/over)
-	if(!usr || !over) return
-	if(!Adjacent(usr) || !over.Adjacent(usr)) return // should stop you from dragging through windows
-
+	if (!usr || !over)
+		return
+	if (!Adjacent(usr) || !over.Adjacent(usr))
+		return
 	spawn(0)
-		over.MouseDrop_T(src,usr)
-	return
+		over.MouseDrop_T(src, usr)
 
 
 /**
@@ -45,4 +45,9 @@
 	// Mitigation for some user's mouses click+dragging for a split second when clicking on moving sprites.
 	if (src == dropping && user.canClick())
 		user.ClickOn(src)
-	return
+		return TRUE
+	var/mob/living/living = user
+	if (istype(living) && can_climb(living) && dropped == user)
+		do_climb(dropped)
+		return TRUE
+	return FALSE

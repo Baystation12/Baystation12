@@ -3554,8 +3554,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bridge)
 "it" = (
-/obj/structure/bed/roller/ironingboard,
-/obj/item/ironingiron,
+/obj/random/ironing_board_structure,
+/obj/item/ironing_iron,
 /obj/machinery/alarm{
 	dir = 8;
 	pixel_x = 25;
@@ -3859,8 +3859,8 @@
 /turf/simulated/floor/tiled/white,
 /area/miningstation/bathroom)
 "iU" = (
-/obj/structure/bed/roller/ironingboard,
-/obj/item/ironingiron,
+/obj/random/ironing_board_structure,
+/obj/item/ironing_iron,
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 21
@@ -4246,7 +4246,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "jP" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
@@ -5599,7 +5599,7 @@
 /turf/simulated/floor/tiled/white,
 /area/miningstation/physician1)
 "nc" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
 	},
@@ -5621,7 +5621,7 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "nf" = (

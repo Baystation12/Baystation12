@@ -2936,7 +2936,7 @@
 /obj/effect/floor_decal/spline/plain/blue{
 	dir = 9
 	},
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "afe" = (
@@ -3205,7 +3205,7 @@
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "afB" = (
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /obj/effect/floor_decal/spline/plain/blue{
 	dir = 5
 	},
@@ -3559,7 +3559,7 @@
 /area/medical/staging)
 "agj" = (
 /obj/effect/floor_decal/corner/paleblue/mono,
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/staging)
 "agl" = (
@@ -9725,7 +9725,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/foreport)
@@ -12743,7 +12743,7 @@
 	dir = 1;
 	icon_state = "pipe-c"
 	},
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 4;
@@ -14146,7 +14146,7 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/light{
 	dir = 1
@@ -16978,7 +16978,7 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/recharger/wallcharger{
 	pixel_y = 24
@@ -17392,7 +17392,7 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/noticeboard{
 	pixel_y = 32
@@ -17534,7 +17534,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/center)
 "ghb" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/effect/floor_decal/floordetail/edgedrain{
 	dir = 8
 	},
@@ -19721,7 +19721,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "jiq" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/effect/floor_decal/floordetail/edgedrain{
 	dir = 8
 	},
@@ -25665,7 +25665,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/machinery/light/spot{
 	dir = 1
 	},
@@ -26742,13 +26742,13 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "rPz" = (
-/obj/item/roller{
+/obj/item/roller_bed{
 	pixel_y = 8
 	},
-/obj/item/roller{
+/obj/item/roller_bed{
 	pixel_y = 16
 	},
-/obj/item/roller,
+/obj/item/roller_bed,
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/structure/table/reinforced,
 /turf/simulated/floor/tiled/white/monotile,
@@ -28691,8 +28691,8 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/item/roller/ironingboard,
-/obj/item/ironingiron,
+/obj/random/ironing_board_item,
+/obj/item/ironing_iron,
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 26
@@ -28763,7 +28763,7 @@
 /obj/effect/floor_decal/spline/plain/blue{
 	dir = 4
 	},
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /obj/item/device/radio/intercom/department/medbay{
 	dir = 4;
 	pixel_x = -24
@@ -29695,7 +29695,7 @@
 /obj/structure/closet/medical_wall{
 	pixel_y = 32
 	},
-/obj/item/roller{
+/obj/item/roller_bed{
 	pixel_y = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,

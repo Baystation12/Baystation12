@@ -79,8 +79,8 @@
 /area/map_template/ninja_dojo/dojo)
 "an" = (
 /obj/structure/table/glass,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
 /obj/structure/window/reinforced/crescent{
 	dir = 4
 	},
@@ -256,7 +256,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "aI" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/structure/window/reinforced/crescent,
 /turf/unsimulated/floor{
 	icon_state = "white"

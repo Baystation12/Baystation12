@@ -5,7 +5,7 @@
 	color = "#666666"
 	base_icon = "chair"
 	buckle_dir = 0
-	buckle_lying = 0 //force people to sit up in chairs when buckled
+	buckle_stance = BUCKLE_FORCE_STAND
 	obj_flags = OBJ_FLAG_ROTATABLE
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
 	buckle_movable = TRUE
@@ -300,7 +300,7 @@
 	desc = "A comfortable, secure seat. It has a sturdy-looking buckling system for smoother flights."
 	base_icon = "shuttle_chair"
 	icon_state = "shuttle_chair_preview"
-	buckling_sound = 'sound/effects/metal_close.ogg'
+	buckle_sound = 'sound/effects/metal_close.ogg'
 	buckle_movable = FALSE
 
 /obj/structure/bed/chair/shuttle/post_buckle_mob()

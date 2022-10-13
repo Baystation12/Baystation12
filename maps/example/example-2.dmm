@@ -45,10 +45,10 @@
 /area/medical/surgery)
 "hK" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/structure/iv_drip,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/structure/iv_stand,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "hO" = (

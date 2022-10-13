@@ -30,7 +30,6 @@
 		/obj/item/grenade/chem_grenade,
 		/mob/living/bot/medbot,
 		/obj/item/storage/secure/safe,
-		/obj/structure/iv_drip,
 		/obj/machinery/disposal,
 		/mob/living/simple_animal/passive/cow,
 		/mob/living/simple_animal/hostile/retaliate/goat,

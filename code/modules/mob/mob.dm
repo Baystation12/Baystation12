@@ -754,10 +754,10 @@
 	else if(buckled)
 		anchored = TRUE
 		if(istype(buckled))
-			if(buckled.buckle_lying == -1)
+			if (isnull(buckled.buckle_stance))
 				lying = incapacitated(INCAPACITATION_KNOCKDOWN)
 			else
-				lying = buckled.buckle_lying
+				lying = buckled.buckle_stance
 			if(buckled.buckle_movable)
 				anchored = FALSE
 	else

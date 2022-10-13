@@ -2553,7 +2553,7 @@
 /turf/simulated/floor/shuttle/white,
 /area/shuttle/administration/centcom)
 "auF" = (
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /turf/simulated/floor/shuttle/white,
 /area/shuttle/administration/centcom)
 "auG" = (
@@ -3560,7 +3560,7 @@
 	},
 /area/centcom/test)
 "axB" = (
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
@@ -4954,15 +4954,15 @@
 /area/centcom/specops)
 "aCk" = (
 /obj/structure/table/reinforced,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/roller,
-/obj/item/roller,
-/obj/item/roller,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/roller_bed,
+/obj/item/roller_bed,
+/obj/item/roller_bed,
 /obj/item/defibrillator/loaded,
 /turf/unsimulated/floor{
 	dir = 1;
@@ -4970,7 +4970,7 @@
 	},
 /area/centcom/specops)
 "aCl" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -6232,7 +6232,7 @@
 	},
 /area/centcom/holding)
 "aHO" = (
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
@@ -6744,26 +6744,26 @@
 	},
 /area/centcom/holding)
 "aJy" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
 /area/centcom/holding)
 "aJz" = (
 /obj/structure/table/standard,
-/obj/item/reagent_containers/ivbag/blood/OPlus{
+/obj/item/reagent_containers/ivbag/blood/human/opos{
 	pixel_x = 4;
 	pixel_y = 2
 	},
-/obj/item/reagent_containers/ivbag/blood/OPlus{
+/obj/item/reagent_containers/ivbag/blood/human/opos{
 	pixel_x = 4;
 	pixel_y = 2
 	},
-/obj/item/reagent_containers/ivbag/blood/OMinus{
+/obj/item/reagent_containers/ivbag/blood/human/oneg{
 	pixel_x = -5;
 	pixel_y = -1
 	},
-/obj/item/reagent_containers/ivbag/blood/OMinus{
+/obj/item/reagent_containers/ivbag/blood/human/oneg{
 	pixel_x = -5;
 	pixel_y = -1
 	},
@@ -8026,7 +8026,7 @@
 /obj/machinery/computer/cryopod{
 	pixel_y = 32
 	},
-/obj/item/roller,
+/obj/item/roller_bed,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/white,
 /area/merchant_station)

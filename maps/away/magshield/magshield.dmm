@@ -1343,7 +1343,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "dr" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "ds" = (
@@ -3209,7 +3209,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "iE" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "iF" = (
@@ -3705,7 +3705,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/south)
 "kd" = (
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /turf/simulated/floor/airless,
 /area/space)
 "ke" = (
