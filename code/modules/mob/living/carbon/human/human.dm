@@ -1816,7 +1816,7 @@
 
 /mob/living/carbon/human/get_sound_volume_multiplier()
 	. = ..()
-	for(var/obj/item/clothing/ears/C in list(l_ear, r_ear))
+	for(var/obj/item/clothing/C in list(head, l_ear, r_ear))
 		. = min(., C.volume_multiplier)
 
 /mob/living/carbon/human/handle_pull_damage(mob/living/puller)

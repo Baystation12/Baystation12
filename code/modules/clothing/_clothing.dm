@@ -14,6 +14,7 @@
 	var/visible_name = "Unknown"
 	var/ironed_state = WRINKLES_DEFAULT
 	var/smell_state = SMELL_DEFAULT
+	var/volume_multiplier = 1
 
 	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
 
@@ -202,7 +203,6 @@
 	w_class = ITEM_SIZE_TINY
 	throwforce = 2
 	slot_flags = SLOT_EARS
-	var/volume_multiplier = 1
 
 /obj/item/clothing/ears/update_clothing_icon()
 	if (ismob(src.loc))
