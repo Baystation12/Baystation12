@@ -1,0 +1,12 @@
+author: SomeAngryMiner
+delete-after: true
+changes:
+  - rscadd: Resprites medical tools.
+  - rscadd: Resprites Organ Freezers.
+  - rscadd: 'Organ Freezers can now hold any reagent container: from beakers, bottles,
+      pills, or simply food and glasses.'
+  - rscadd: IV bags can be recycled, now.
+  - rscadd: Renames Fix-O-Vein to vascular recoupler.
+  - rscadd: Resprites IV stands.
+  - rscadd: Resprites IV bags.
+  - rscadd: Resprites nanopaste
