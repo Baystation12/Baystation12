@@ -61,6 +61,7 @@
 		/obj/item/clothing/shoes/galoshes,
 		/obj/item/storage/box/detergent,
 		/obj/item/soap,
+		/obj/item/reagent_containers/glass/rag,
 		/obj/item/storage/belt/janitor,
 		/obj/item/clothing/glasses/hud/janitor
 	)
