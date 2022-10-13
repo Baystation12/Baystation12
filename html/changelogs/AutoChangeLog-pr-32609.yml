@@ -1,0 +1,4 @@
+author: Gy1ta23
+delete-after: true
+changes:
+  - rscadd: helmets can do volume multipliers, deck crew helmets now muffle sound
