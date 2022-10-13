@@ -204,9 +204,11 @@ if (!(datum.process_flags & AI_FASTPROCESSING)) { \
 		return
 
 	ai_log("set_stance() : Setting stance from [stance] to [new_stance].", AI_LOG_INFO)
+	var/old_stance = stance
 	stance = new_stance
 	if (stance_coloring) // For debugging or really weird mobs.
 		stance_color()
+	holder.handle_stance_update(old_stance, stance)
 	// update_stance_hud()
 
 	if (new_stance in fastprocess_stances) //Becoming fast
@@ -215,6 +217,16 @@ if (!(datum.process_flags & AI_FASTPROCESSING)) { \
 		manage_processing(AI_NO_PROCESS) //Becoming off
 	else
 		manage_processing(AI_PROCESSING) //Becoming slow
+
+/**
+ * For handling updates to the ai_holder's stance. Called during `set_stance()` immediately after the change to stance.
+ *
+ * **Parameters**:
+ * - `old_stance` Int (One of `STANCE_*`). The AI's stance prior to changing.
+ * - `new_stance` Int (One of `STANCE_*`). The AI's new stance.
+ */
+/mob/living/proc/handle_stance_update(old_stance, new_stance)
+	return
 
 /// This is called every half a second.
 /datum/ai_holder/proc/handle_stance_tactical()
