@@ -87,7 +87,7 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 	for(var/mh in movement_handlers)
 		var/datum/movement_handler/movement_handler = mh
 		if(movement_handler.MayMove(mover, is_external) & MOVEMENT_STOP)
-			return MOVEMENT_HANDLED
+			return MOVEMENT_STOP
 
 		. = movement_handler.DoMove(direction, mover, is_external)
 		if(. & MOVEMENT_REMOVE)
@@ -130,6 +130,7 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 	. = ..()
 
 /datum/movement_handler/proc/DoMove(var/direction, var/mob/mover, var/is_external)
+	set waitfor = FALSE
 	return
 
 // Asks the handlers if the mob may move, ignoring destination, if attempting a DoMove()

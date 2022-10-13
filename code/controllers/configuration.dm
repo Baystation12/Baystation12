@@ -114,7 +114,7 @@
 	/// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
 	var/static/continous_rounds = FALSE
 
-	var/static/fps = 30
+	var/static/fps = 60
 
 	var/static/list/resource_urls
 

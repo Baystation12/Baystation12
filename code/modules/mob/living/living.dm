@@ -568,7 +568,7 @@ default behaviour is:
 		return
 
 	if (!isliving(pulling))
-		step(pulling, get_dir(pulling.loc, old_loc))
+		step_glide(pulling, get_dir(pulling.loc, old_loc), glide_size)
 	else
 		var/mob/living/M = pulling
 		if(M.grabbed_by.len)
