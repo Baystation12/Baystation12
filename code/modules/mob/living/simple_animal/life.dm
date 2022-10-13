@@ -90,8 +90,8 @@
 	if(purge)
 		purge -= 1
 
-/mob/living/simple_animal/gib()
-	..(icon_gib,1)
+/mob/living/simple_animal/gib(anim = icon_gib, do_gibs = TRUE)
+	..()
 
 /mob/living/simple_animal/proc/visible_emote(act_desc)
 	custom_emote(1, act_desc)
