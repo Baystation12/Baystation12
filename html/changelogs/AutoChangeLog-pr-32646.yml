@@ -1,0 +1,18 @@
+author: SomeAngryMiner
+delete-after: true
+changes:
+  - tweak: Chemical heaters (and coolers), and point defense batteries can be modified
+      and moved once again.
+  - tweak: Circuit boards and robot components (including broken ones) can be recycled
+      at autolathes, protolathes or grinders, like most other pieces.
+  - rscdel: Removed Dufflebag of holding.
+  - tweak: Bags of holding can hold the same item sizes as normal backpacks now.
+  - tweak: Swiss knives can now use their tools with most items, with the exception
+      of the biggest ones (anything bigger than a voidsuit)
+  - tweak: bioprinter boards can't be printed on RnD anymore.
+  - tweak: 'Organ freezer designs are no longer considered weapons, on the protolathe:
+      Moved to the medical tab.'
+  - tweak: Nullglass sheets are no longer invisible. Reflavored to gems, hidden from
+      codex and added a new sprite for the tiles.
+  - tweak: Crystallizing agent no longer has a 25% chance of exploding your head;
+      Instead, it now also affects cybernetics and internal organs.
