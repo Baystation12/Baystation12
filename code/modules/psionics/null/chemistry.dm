@@ -33,7 +33,7 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/external/E in shuffle(H.organs.Copy()))
-			if(E.is_stump() || BP_IS_ROBOTIC(E))
+			if(E.is_stump())
 				continue
 
 			if(BP_IS_CRYSTAL(E))
@@ -45,14 +45,14 @@
 				if(BP_IS_BRITTLE(E))
 					E.status &= ~ORGAN_BRITTLE
 					break
-			else if(E.organ_tag != BP_CHEST && E.organ_tag != BP_GROIN && prob(15))
+			else if(prob(15))
 				to_chat(H, SPAN_DANGER("Your [E.name] is being lacerated from within!"))
 				if(E.can_feel_pain())
 					H.emote("scream")
 				if(prob(25))
-					for(var/i = 1 to rand(3,5))
+					for(var/i = 1 to rand(1,3))
 						new /obj/item/material/shard(get_turf(E), result_mat)
-					E.droplimb(0, DROPLIMB_BLUNT)
+					E.take_external_damage(rand(50,70), 0)
 				else
 					E.take_external_damage(rand(20,30), 0)
 					E.status |= ORGAN_CRYSTAL
@@ -60,12 +60,28 @@
 				break
 
 		for(var/obj/item/organ/internal/I in shuffle(H.internal_organs.Copy()))
-			if(BP_IS_ROBOTIC(I) || !BP_IS_CRYSTAL(I) || I.damage <= 0 || I.organ_tag == BP_BRAIN)
+			if(I.organ_tag == BP_BRAIN)
 				continue
-			if(prob(35))
-				to_chat(M, SPAN_NOTICE("You feel a deep, sharp tugging sensation as your [I.name] is mended."))
-			I.heal_damage(rand(1,3))
-			break
+
+			if(BP_IS_CRYSTAL(I))
+				if(prob(35))
+					to_chat(M, SPAN_NOTICE("You feel a deep, sharp tugging sensation as your [I.name] is mended."))
+				I.heal_damage(rand(1,3))
+				break
+				if(BP_IS_BRITTLE(I))
+					I.status &= ~ORGAN_BRITTLE
+					break
+			else if(prob(15))
+				to_chat(H, SPAN_DANGER("You feel visceral, sharp twisting within your body!"))
+				if(I.can_feel_pain())
+					H.emote("scream")
+				if(prob(25))
+					I.take_internal_damage(rand(10,15), 0)
+				else
+					I.take_internal_damage(rand(5,10), 0)
+					I.status |= ORGAN_CRYSTAL
+					I.status |= ORGAN_BRITTLE
+				break
 	else
 		to_chat(M, SPAN_DANGER("Your flesh is being lacerated from within!"))
 		M.adjustBruteLoss(rand(3,6))

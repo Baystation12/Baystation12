@@ -24,14 +24,6 @@
 	build_path = /obj/item/storage/backpack/chameleon/sydie_kit
 	sort_string = "VASBA"
 
-/datum/design/item/weapon/storage/box/freezer
-	name = "Portable Freezer"
-	desc = "This nifty shock-resistant device will keep your 'groceries' nice and non-spoiled."
-	id = "freezer"
-	req_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2)
-	materials = list(MATERIAL_PLASTIC = 350)
-	build_path = /obj/item/storage/box/freezer
-
 /datum/design/item/advmop
 	name = "Advanced Mop"
 	desc = "An upgraded mop with a large internal capacity for holding water or other cleaning chemicals."

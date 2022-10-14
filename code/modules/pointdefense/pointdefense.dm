@@ -132,6 +132,8 @@
 	if(isMultitool(thing))
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.get_new_tag(user)
+		return TRUE
+	return ..()
 
 //Guns cannot shoot through hull or generally dense turfs.
 /obj/machinery/pointdefense/proc/space_los(meteor)

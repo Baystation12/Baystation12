@@ -108,7 +108,7 @@
 			anchored = !anchored
 			visible_message(SPAN_NOTICE("\The [user] [anchored ? "secured" : "unsecured"] \the [src]."))
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-		return
+		return TRUE
 
 	if(thing.reagents)
 		for(var/checktype in permitted_types)
@@ -120,8 +120,9 @@
 					container = thing
 					visible_message(SPAN_NOTICE("\The [user] places \the [container] on \the [src]."))
 					update_icon()
-				return
+				return TRUE
 		to_chat(user, SPAN_WARNING("\The [src] cannot accept \the [thing]."))
+	return ..()
 
 /obj/machinery/reagent_temperature/on_update_icon()
 
