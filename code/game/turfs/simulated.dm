@@ -165,7 +165,7 @@
 /turf/simulated/attackby(obj/item/thing, mob/user)
 	if(isCoil(thing) && can_build_cable(user))
 		var/obj/item/stack/cable_coil/coil = thing
-		coil.turf_place(src, user)
+		coil.PlaceCableOnTurf(src, user)
 		return
 	return ..()
 

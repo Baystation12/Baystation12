@@ -103,7 +103,7 @@
 		if(get_dist(src, user) > 1)
 			return
 
-		coil.turf_place(T, user)
+		coil.PlaceCableOnTurf(T, user)
 		return TRUE
 
 ///////////////////////////////////////////

@@ -21,7 +21,7 @@
 	var/next_flip = 0
 
 	/// The color of wire used on this coin, if any.
-	var/string_colour
+	var/string_color
 
 
 /obj/item/material/coin/Initialize()
@@ -32,10 +32,10 @@
 
 /obj/item/material/coin/on_update_icon()
 	..()
-	if (!isnull(string_colour))
+	if (!isnull(string_color))
 		var/image/image = image(icon = icon, icon_state = "coin_string_overlay")
 		image.appearance_flags |= RESET_COLOR
-		image.color = string_colour
+		image.color = string_color
 		overlays += image
 	else
 		overlays.Cut()
@@ -83,26 +83,27 @@
 
 
 /obj/item/material/coin/attackby(obj/item/item, mob/living/user)
-	if (isCoil(item) && isnull(string_colour))
+	if (isCoil(item) && isnull(string_color))
 		var/obj/item/stack/cable_coil/coil = item
 		if (!coil.use(1))
+			to_chat(user, SPAN_WARNING("Your cable coil is a bug. Your action fails."))
 			return TRUE
 		user.visible_message(
 			SPAN_ITALIC("\The [user] attaches some wire to \a [src]."),
 			SPAN_ITALIC("You attach some wire to \the [src]."),
 			range = 5
 		)
-		string_colour = coil.color
+		string_color = coil.color
 		update_icon()
 		return TRUE
-	if (isWirecutter(item) && !isnull(string_colour))
-		new /obj/item/stack/cable_coil/single (get_turf(user))
+	if (isWirecutter(item) && !isnull(string_color))
+		new /obj/item/stack/cable_coil (get_turf(user), 1, string_color)
 		user.visible_message(
 			SPAN_ITALIC("\The [user] removes a wire from \a [src]."),
 			SPAN_ITALIC("You remove the wire from \the [src]."),
 			range = 5
 		)
-		string_colour = null
+		string_color = null
 		update_icon()
 		return TRUE
 	..()
@@ -125,7 +126,7 @@
 	var/turf/turf = usr.loc
 	if (!isturf(turf))
 		return
-	if (usr.l_hand != src && usr.r_hand != src)
+	if (!usr.IsHolding(src))
 		to_chat(usr, SPAN_WARNING("You must hold \the [src] in your hands."))
 		return
 	if (!usr.unEquip(src, turf))
@@ -144,13 +145,13 @@
 
 
 /obj/item/material/coin/challenge/on_update_icon()
-	if (!isnull(string_colour))
-		var/image/image = image(icon = icon, icon_state = "coin_string_overlay")
-		image.appearance_flags |= RESET_COLOR
-		image.color = string_colour
-		overlays += image
-	else
-		overlays.Cut()
+	overlays.Cut()
+	if (isnull(string_color))
+		return
+	var/image/image = image(icon = icon, icon_state = "coin_string_overlay")
+	image.appearance_flags |= RESET_COLOR
+	image.color = string_color
+	overlays += image
 
 
 

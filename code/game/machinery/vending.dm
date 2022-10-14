@@ -429,7 +429,7 @@
 		if(!coin)
 			to_chat(user, "<span class='notice'>You need to insert a coin to get this item.</span>")
 			return
-		if(!isnull(coin.string_colour))
+		if(!isnull(coin.string_color))
 			if(prob(50))
 				to_chat(user, "<span class='notice'>You successfully pull the coin out before \the [src] could swallow it.</span>")
 			else
