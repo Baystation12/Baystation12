@@ -85,7 +85,6 @@
 	filling_color = "#f6db93"
 	bitesize = 4
 	center_of_mass = "x=16;y=16"
-	trash = /obj/item/shell
 
 
 /obj/item/reagent_containers/food/snacks/shellfish/clam
