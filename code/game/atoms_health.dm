@@ -344,7 +344,7 @@
 			damage = P.get_structure_damage()
 		if (!can_damage_health(damage, P.damage_type))
 			return
-		playsound(damage_hitsound, src, 75)
+		playsound(src, damage_hitsound, 75)
 		damage_health(damage, P.damage_type, skip_can_damage_check = TRUE)
 		return 0
 
@@ -365,13 +365,13 @@
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 		if (!can_damage_health(W.force, W.damtype))
-			playsound(damage_hitsound, src, 50)
+			playsound(src, damage_hitsound, 50)
 			user.visible_message(
 				SPAN_WARNING("\The [user] hits \the [src] with \a [W], but it bounces off!"),
 				SPAN_WARNING("You hit \the [src] with \the [W], but it bounces off!")
 			)
 			return
-		playsound(damage_hitsound, src, 75)
+		playsound(src, damage_hitsound, 75)
 		user.visible_message(
 			SPAN_DANGER("\The [user] hits \the [src] with \a [W]!"),
 			SPAN_DANGER("You hit \the [src] with \the [W]!")
