@@ -91,7 +91,7 @@
 	//To lay cable.
 	if(isCoil(C))
 		var/obj/item/stack/cable_coil/coil = C
-		coil.turf_place(src, user)
+		coil.PlaceCableOnTurf(src, user)
 		return
 
 	for(var/atom/movable/M in below)

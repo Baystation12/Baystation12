@@ -92,7 +92,7 @@
 		var/obj/item/stack/cable_coil/coil = C
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
-			coil.turf_place(src, user)
+			coil.PlaceCableOnTurf(src, user)
 			return
 		else
 			to_chat(user, SPAN_WARNING("The cable needs something to be secured to."))

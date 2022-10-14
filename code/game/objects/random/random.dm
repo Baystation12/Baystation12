@@ -472,20 +472,6 @@
 		var/vermin_type = pickweight(locker_vermin)
 		new vermin_type(.)
 
-/obj/random/coin
-	name = "random coin"
-	desc = "This is a random coin."
-	icon = 'icons/obj/coin.dmi'
-	icon_state = "coin1"
-
-/obj/random/coin/spawn_choices()
-	return list(/obj/item/material/coin/gold = 3,
-				/obj/item/material/coin/silver = 4,
-				/obj/item/material/coin/diamond = 2,
-				/obj/item/material/coin/iron = 4,
-				/obj/item/material/coin/uranium = 3,
-				/obj/item/material/coin/platinum = 1,
-				/obj/item/material/coin/phoron = 1)
 
 /obj/random/toy
 	name = "random toy"

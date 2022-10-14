@@ -208,9 +208,7 @@
 	apply_image_decorations = 1
 
 /obj/item/archaeological_find/coin/spawn_item()
-	var/obj/item/material/coin/C = pick(subtypesof(/obj/item/material/coin))
-	C = new C(loc)
-	return C
+	return new_simple_coin (loc)
 
 /obj/item/archaeological_find/trap
 	item_type = "trap"

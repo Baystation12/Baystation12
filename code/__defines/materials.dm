@@ -4,6 +4,7 @@
 #define MATERIAL_GLASS                   "glass"
 #define MATERIAL_GOLD                    "gold"
 #define MATERIAL_SILVER                  "silver"
+#define MATERIAL_ELECTRUM                "electrum"
 #define MATERIAL_DIAMOND                 "diamond"
 #define MATERIAL_PHORON                  "phoron"
 #define MATERIAL_URANIUM                 "uranium"
