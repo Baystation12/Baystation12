@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Atoms with a damage hit sound now properly play that sound when hit.
