@@ -78,8 +78,13 @@
 
 /obj/item/reagent_containers/spray/examine(mob/user, distance)
 	. = ..()
-	if(distance == 0 && loc == user)
-		to_chat(user, "[round(reagents.total_volume)] unit\s left.")
+	if(distance > 0)
+		return
+
+	if(reagents?.reagent_list.len)
+		to_chat(user, SPAN_NOTICE("It contains [round(reagents.total_volume)] units of liquid."))
+	else
+		to_chat(user, SPAN_NOTICE("It is empty."))
 
 /obj/item/reagent_containers/spray/verb/empty()
 

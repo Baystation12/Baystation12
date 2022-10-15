@@ -29,7 +29,8 @@
 		/obj/item/stack/medical/splint,
 		/obj/item/robot_rack/roller,
 		/obj/item/gripper/auto_cpr,
-		/obj/item/gripper/ivbag
+		/obj/item/gripper/ivbag,
+		/obj/item/reagent_containers/spray/cleaner/drone
 	)
 	synths = list(/datum/matter_synth/medicine = 15000)
 	emag = /obj/item/reagent_containers/spray
