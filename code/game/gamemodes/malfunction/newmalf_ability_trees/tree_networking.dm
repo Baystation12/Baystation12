@@ -57,7 +57,7 @@
 			to_chat(user, "You already control this APC!")
 			return
 		else if(A.aidisabled)
-			to_chat(user, "<span class='notice'>Unable to connect to APC. Please verify wire connection and try again.</span>")
+			to_chat(user, SPAN_NOTICE("Unable to connect to APC. Please verify wire connection and try again."))
 			return
 	else
 		return
@@ -77,9 +77,9 @@
 		if(A.hacker == user)
 			to_chat(user, "Hack successful. You now have full control over \the [A].")
 		else
-			to_chat(user, "<span class='notice'>Hack failed. Connection to APC has been lost. Please verify wire connection and try again.</span>")
+			to_chat(user, SPAN_NOTICE("Hack failed. Connection to APC has been lost. Please verify wire connection and try again."))
 	else
-		to_chat(user, "<span class='notice'>Hack failed. Unable to locate APC. Please verify the APC still exists.</span>")
+		to_chat(user, SPAN_NOTICE("Hack failed. Unable to locate APC. Please verify the APC still exists."))
 
 
 /datum/game_mode/malfunction/verb/advanced_encryption_hack()

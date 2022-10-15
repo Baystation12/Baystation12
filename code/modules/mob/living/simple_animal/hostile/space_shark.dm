@@ -50,4 +50,4 @@
 		var/datum/gas_mixture/sharkmaw_phoron = new
 		sharkmaw_phoron.adjust_gas(GAS_PHORON,  10)
 		environment.merge(sharkmaw_phoron)
-		visible_message("<span class='warning'>\The [src]'s body releases some gas from the gills with a quiet fizz!</span>")
+		visible_message(SPAN_WARNING("\The [src]'s body releases some gas from the gills with a quiet fizz!"))

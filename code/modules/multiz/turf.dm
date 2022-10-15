@@ -70,7 +70,7 @@
 			return L.attackby(C, user)
 		var/obj/item/stack/material/rods/R = C
 		if (R.use(1))
-			to_chat(user, "<span class='notice'>You lay down the support lattice.</span>")
+			to_chat(user, SPAN_NOTICE("You lay down the support lattice."))
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			new /obj/structure/lattice(locate(src.x, src.y, src.z), R.material.name)
 		return
@@ -86,7 +86,7 @@
 			ChangeTurf(/turf/simulated/floor/plating, keep_air = TRUE)
 			return
 		else
-			to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")
+			to_chat(user, SPAN_WARNING("The plating is going to need some support."))
 
 	//To lay cable.
 	if(isCoil(C))

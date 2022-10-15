@@ -325,7 +325,7 @@
 /obj/item/reagent_containers/glass/bottle/dye/polychromic/attack_self(mob/living/user)
 	var/datum/reagent/heldDye = reagents.get_reagent(starting_reagent)
 	if (!heldDye)
-		to_chat(user, "<span class='warning'>\The [src] isn't holding any dye!</span>")
+		to_chat(user, SPAN_WARNING("\The [src] isn't holding any dye!"))
 		return
 	var/new_color = input(user, "Choose the dye's new color.", "[name]") as color|null
 	if (!new_color || !Adjacent(user))

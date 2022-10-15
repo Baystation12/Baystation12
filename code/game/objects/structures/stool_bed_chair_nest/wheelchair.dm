@@ -31,7 +31,7 @@
 		if(user==pulling)
 			pulling = null
 			user.pulledby = null
-			to_chat(user, "<span class='warning'>You lost your grip!</span>")
+			to_chat(user, SPAN_WARNING("You lost your grip!"))
 		return
 	if(buckled_mob && pulling && user == buckled_mob)
 		if(pulling.stat || pulling.stunned || pulling.weakened || pulling.paralysis || pulling.lying || pulling.restrained())
@@ -49,10 +49,10 @@
 		if(user==pulling)
 			return
 	if(pulling && (get_dir(src.loc, pulling.loc) == direction))
-		to_chat(user, "<span class='warning'>You cannot go there.</span>")
+		to_chat(user, SPAN_WARNING("You cannot go there."))
 		return
 	if(pulling && buckled_mob && (buckled_mob == user))
-		to_chat(user, "<span class='warning'>You cannot drive while being pushed.</span>")
+		to_chat(user, SPAN_WARNING("You cannot drive while being pushed."))
 		return
 
 	// Let's roll
@@ -100,7 +100,7 @@
 					unbuckle_mob()
 			if (pulling && (get_dist(src, pulling) > 1))
 				pulling.pulledby = null
-				to_chat(pulling, "<span class='warning'>You lost your grip!</span>")
+				to_chat(pulling, SPAN_WARNING("You lost your grip!"))
 				pulling = null
 		else
 			if (occupant && (src.loc != occupant.loc))
@@ -117,7 +117,7 @@
 	if(in_range(src, user))
 		if(!ishuman(user))	return
 		if(user == buckled_mob)
-			to_chat(user, "<span class='warning'>You realize you are unable to push the wheelchair you sit in.</span>")
+			to_chat(user, SPAN_WARNING("You realize you are unable to push the wheelchair you sit in."))
 			return
 		if(!pulling)
 			pulling = user
@@ -162,10 +162,10 @@
 			victim.apply_effect(6, EFFECT_STUTTER, blocked)
 			victim.apply_damage(10, DAMAGE_BRUTE, def_zone)
 		if(pulling)
-			occupant.visible_message("<span class='danger'>[pulling] has thrusted \the [name] into \the [A], throwing \the [occupant] out of it!</span>")
+			occupant.visible_message(SPAN_DANGER("[pulling] has thrusted \the [name] into \the [A], throwing \the [occupant] out of it!"))
 			admin_attack_log(pulling, occupant, "Crashed their victim into \an [A].", "Was crashed into \an [A].", "smashed into \the [A] using")
 		else
-			occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
+			occupant.visible_message(SPAN_DANGER("[occupant] crashed into \the [A]!"))
 
 /obj/structure/bed/chair/wheelchair/proc/create_track()
 	var/obj/effect/decal/cleanable/blood/tracks/B = new(loc)

@@ -24,7 +24,7 @@
 
 /obj/item/flame/lighter/proc/light(mob/user)
 	if(submerged())
-		to_chat(user, "<span class='warning'>You cannot light \the [src] underwater.</span>")
+		to_chat(user, SPAN_WARNING("You cannot light \the [src] underwater."))
 		return
 	lit = 1
 	update_icon()
@@ -34,14 +34,14 @@
 
 /obj/item/flame/lighter/proc/light_effects(mob/living/carbon/user)
 	if(prob(95))
-		user.visible_message("<span class='notice'>After a few attempts, [user] manages to light \the [src].</span>")
+		user.visible_message(SPAN_NOTICE("After a few attempts, [user] manages to light \the [src]."))
 	else
-		to_chat(user, "<span class='warning'>You burn yourself while lighting the lighter.</span>")
+		to_chat(user, SPAN_WARNING("You burn yourself while lighting the lighter."))
 		if (user.l_hand == src)
 			user.apply_damage(2, DAMAGE_BURN, BP_L_HAND)
 		else
 			user.apply_damage(2, DAMAGE_BURN, BP_R_HAND)
-		user.visible_message("<span class='notice'>After a few attempts, [user] manages to light \the [src], burning their finger in the process.</span>")
+		user.visible_message(SPAN_NOTICE("After a few attempts, [user] manages to light \the [src], burning their finger in the process."))
 	playsound(src.loc, "light_bic", 100, 1, -4)
 
 /obj/item/flame/lighter/extinguish(mob/user, no_message)
@@ -50,18 +50,18 @@
 	if(user)
 		shutoff_effects(user)
 	else if(!no_message)
-		visible_message("<span class='notice'>[src] goes out.</span>")
+		visible_message(SPAN_NOTICE("[src] goes out."))
 	set_light(0)
 
 /obj/item/flame/lighter/proc/shutoff_effects(mob/user)
-	user.visible_message("<span class='notice'>[user] quietly shuts off the [src].</span>")
+	user.visible_message(SPAN_NOTICE("[user] quietly shuts off the [src]."))
 
 /obj/item/flame/lighter/attack_self(mob/living/user)
 	if(!lit)
 		if(reagents.has_reagent(/datum/reagent/fuel))
 			light(user)
 		else
-			to_chat(user, "<span class='warning'>\The [src] won't ignite - it must be out of fuel.</span>")
+			to_chat(user, SPAN_WARNING("\The [src] won't ignite - it must be out of fuel."))
 	else
 		extinguish(user)
 
@@ -86,14 +86,14 @@
 			if(M == user)
 				cig.attackby(src, user)
 			else
-				cig.light("<span class='notice'>[user] holds the [name] out for [M], and lights the [cig.name].</span>")
+				cig.light(SPAN_NOTICE("[user] holds the [name] out for [M], and lights the [cig.name]."))
 			return
 	..()
 
 /obj/item/flame/lighter/Process()
 	if(!submerged() && reagents.has_reagent(/datum/reagent/fuel))
 		if(ismob(loc) && prob(10) && reagents.get_reagent_amount(/datum/reagent/fuel) < 1)
-			to_chat(loc, "<span class='warning'>\The [src]'s flame flickers.</span>")
+			to_chat(loc, SPAN_WARNING("\The [src]'s flame flickers."))
 			set_light(0)
 			addtimer(CALLBACK(src, .atom/proc/set_light, 0.6, 0.5, 2), 4)
 		reagents.remove_reagent(/datum/reagent/fuel, 0.05)
@@ -152,18 +152,18 @@
 		item_state = "[bis.base_icon_state]"
 
 /obj/item/flame/lighter/zippo/light_effects(mob/user)
-	user.visible_message("<span class='rose'>Without even breaking stride, [user] flips open and lights [src] in one smooth movement.</span>")
+	user.visible_message(SPAN_CLASS("rose", "Without even breaking stride, [user] flips open and lights [src] in one smooth movement."))
 	playsound(src.loc, 'sound/items/zippo_open.ogg', 100, 1, -4)
 
 /obj/item/flame/lighter/zippo/shutoff_effects(mob/user)
-	user.visible_message("<span class='rose'>You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing.</span>")
+	user.visible_message(SPAN_CLASS("rose", "You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing."))
 	playsound(src.loc, 'sound/items/zippo_close.ogg', 100, 1, -4)
 
 /obj/item/flame/lighter/zippo/afterattack(obj/O, mob/user, proximity)
 	if(!proximity) return
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && !lit)
 		O.reagents.trans_to_obj(src, max_fuel)
-		to_chat(user, "<span class='notice'>You refuel [src] from \the [O]</span>")
+		to_chat(user, SPAN_NOTICE("You refuel [src] from \the [O]"))
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 
 /obj/item/flame/lighter/zippo/black

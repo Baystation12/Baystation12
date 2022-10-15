@@ -17,7 +17,7 @@
 
 /obj/structure/curtain/bullet_act(obj/item/projectile/P, def_zone)
 	if(!P.nodamage)
-		visible_message("<span class='warning'>[P] tears [src] down!</span>")
+		visible_message(SPAN_WARNING("[P] tears [src] down!"))
 		qdel(src)
 	else
 		..(P, def_zone)

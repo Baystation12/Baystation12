@@ -36,7 +36,7 @@
 
 /obj/item/implanter/attackby(obj/item/I, mob/user)
 	if(!imp && istype(I, /obj/item/implant) && user.unEquip(I,src))
-		to_chat(usr, "<span class='notice'>You slide \the [I] into \the [src].</span>")
+		to_chat(usr, SPAN_NOTICE("You slide \the [I] into \the [src]."))
 		imp = I
 		update_icon()
 	else
@@ -46,7 +46,7 @@
 	if (!istype(M, /mob/living/carbon))
 		return
 	if (user && src.imp)
-		M.visible_message("<span class='warning'>[user] is attemping to implant [M].</span>")
+		M.visible_message(SPAN_WARNING("[user] is attemping to implant [M]."))
 
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 		user.do_attack_animation(M)
@@ -56,7 +56,7 @@
 			var/imp_name = imp.name
 
 			if(do_after(user, 5 SECONDS, M, DO_EQUIP) && src.imp?.implant_in_mob(M, target_zone))
-				M.visible_message("<span class='warning'>[M] has been implanted by [user].</span>")
+				M.visible_message(SPAN_WARNING("[M] has been implanted by [user]."))
 				admin_attack_log(user, M, "Implanted using \the [src] ([imp_name])", "Implanted with \the [src] ([imp_name])", "used an implanter, \the [src] ([imp_name]), on")
 
 				src.imp = null

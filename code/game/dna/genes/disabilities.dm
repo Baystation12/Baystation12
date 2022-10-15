@@ -35,7 +35,7 @@
 	if(sdisability)
 		M.set_sdisability(sdisability)
 	if(activation_message)
-		to_chat(M, "<span class='warning'>[activation_message]</span>")
+		to_chat(M, SPAN_WARNING("[activation_message]"))
 	else
 		testing("[name] has no activation message.")
 
@@ -47,7 +47,7 @@
 	if(sdisability)
 		M.unset_sdisability(sdisability)
 	if(deactivation_message)
-		to_chat(M, "<span class='warning'>[deactivation_message]</span>")
+		to_chat(M, SPAN_WARNING("[deactivation_message]"))
 	else
 		testing("[name] has no deactivation message.")
 

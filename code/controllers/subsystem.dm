@@ -172,7 +172,7 @@
 	init_finish = Uptime()
 	. = (Uptime() - start_uptime) / 10
 	var/msg = "Initialized [name] subsystem within [.] second[. == 1 ? "" : "s"]!"
-	to_chat(world, "<span class='boldannounce'>[msg]</span>")
+	to_chat(world, SPAN_CLASS("boldannounce", "[msg]"))
 	log_world(msg)
 
 	init_state = SS_INITSTATE_DONE

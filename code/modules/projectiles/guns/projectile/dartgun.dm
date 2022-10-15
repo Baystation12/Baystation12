@@ -98,11 +98,11 @@
 /obj/item/gun/projectile/dartgun/examine(mob/user)
 	. = ..()
 	if (beakers.len)
-		to_chat(user, "<span class='notice'>\The [src] contains:</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] contains:"))
 		for(var/obj/item/reagent_containers/glass/beaker/B in beakers)
 			if(B.reagents && B.reagents.reagent_list.len)
 				for(var/datum/reagent/R in B.reagents.reagent_list)
-					to_chat(user, "<span class='notice'>[R.volume] units of [R.name]</span>")
+					to_chat(user, SPAN_NOTICE("[R.volume] units of [R.name]"))
 
 /obj/item/gun/projectile/dartgun/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/reagent_containers/glass))
@@ -112,21 +112,21 @@
 
 /obj/item/gun/projectile/dartgun/proc/add_beaker(obj/item/reagent_containers/glass/B, mob/user)
 	if(!istype(B, container_type))
-		to_chat(user, "<span class='warning'>[B] doesn't seem to fit into [src].</span>")
+		to_chat(user, SPAN_WARNING("[B] doesn't seem to fit into [src]."))
 		return
 	if(beakers.len >= max_beakers)
-		to_chat(user, "<span class='warning'>[src] already has [max_beakers] beakers in it - another one isn't going to fit!</span>")
+		to_chat(user, SPAN_WARNING("[src] already has [max_beakers] beakers in it - another one isn't going to fit!"))
 		return
 	if(!user.unEquip(B, src))
 		return
 	beakers |= B
-	user.visible_message("\The [user] inserts \a [B] into [src].", "<span class='notice'>You slot [B] into [src].</span>")
+	user.visible_message("\The [user] inserts \a [B] into [src].", SPAN_NOTICE("You slot [B] into [src]."))
 
 /obj/item/gun/projectile/dartgun/proc/remove_beaker(obj/item/reagent_containers/glass/B, mob/user)
 	mixing -= B
 	beakers -= B
 	user.put_in_hands(B)
-	user.visible_message("\The [user] removes \a [B] from [src].", "<span class='notice'>You remove [B] from [src].</span>")
+	user.visible_message("\The [user] removes \a [B] from [src].", SPAN_NOTICE("You remove [B] from [src]."))
 
 //fills the given dart with reagents
 /obj/item/gun/projectile/dartgun/proc/fill_dart(obj/item/projectile/bullet/chemdart/dart)

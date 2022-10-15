@@ -23,12 +23,12 @@
 		name_regex.Find_char(owner.real_name)
 
 		if(world.time < next_rename)
-			to_chat(owner, "<span class='warning'>[PROTOCOL_ARTICLE] forbids changing your ident again so soon.</span>")
+			to_chat(owner, SPAN_WARNING("[PROTOCOL_ARTICLE] forbids changing your ident again so soon."))
 			return
 
 		var/res = name_regex.match
 		if(isnull(res))
-			to_chat(user, "<span class='warning'>Nonstandard names are not subject to real-time modification under [PROTOCOL_ARTICLE].</span>")
+			to_chat(user, SPAN_WARNING("Nonstandard names are not subject to real-time modification under [PROTOCOL_ARTICLE]."))
 			return
 
 		var/newname = sanitizeSafe(input(user, "Enter a new ident.", "Reset Ident") as text, MAX_NAME_LEN)
@@ -40,7 +40,7 @@
 				if(owner.mind)
 					owner.mind.name = owner.real_name
 				owner.SetName(owner.real_name)
-				to_chat(user, "<span class='notice'>You are now designated <b>[owner.real_name]</b>.</span>")
+				to_chat(user, SPAN_NOTICE("You are now designated <b>[owner.real_name]</b>."))
 
 /obj/item/organ/internal/powered
 	icon = 'icons/mob/human_races/species/adherent/organs.dmi'
@@ -55,7 +55,7 @@
 		var/obj/item/organ/internal/cell/cell = locate() in owner.internal_organs
 		if(active && !(cell && cell.use(maintenance_cost)))
 			active = FALSE
-			to_chat(owner, "<span class='danger'>Your [name] [gender == PLURAL ? "are" : "is"] out of power!</span>")
+			to_chat(owner, SPAN_CLASS("danger", "Your [name] [gender == PLURAL ? "are" : "is"] out of power!"))
 			refresh_action_button()
 
 /obj/item/organ/internal/powered/refresh_action_button()
@@ -69,11 +69,11 @@
 	if(.)
 		sound_to(user, sound('sound/effects/ding2.ogg'))
 		if(is_broken())
-			to_chat(owner, "<span class='warning'>\The [src] [gender == PLURAL ? "are" : "is"] too damaged to function.</span>")
+			to_chat(owner, SPAN_WARNING("\The [src] [gender == PLURAL ? "are" : "is"] too damaged to function."))
 			active = FALSE
 		else
 			active = !active
-			to_chat(owner, "<span class='notice'>You are [active ? "now" : "no longer"] using your [name] to [use_descriptor].</span>")
+			to_chat(owner, SPAN_NOTICE("You are [active ? "now" : "no longer"] using your [name] to [use_descriptor]."))
 		refresh_action_button()
 
 /obj/item/organ/internal/powered/jets

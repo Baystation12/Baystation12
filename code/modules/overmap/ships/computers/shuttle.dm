@@ -45,7 +45,7 @@
 		if(possible_d.len)
 			D = input("Choose shuttle destination", "Shuttle Destination") as null|anything in possible_d
 		else
-			to_chat(usr,"<span class='warning'>No valid landing sites in range.</span>")
+			to_chat(usr,SPAN_WARNING("No valid landing sites in range."))
 		possible_d = shuttle.get_possible_destinations()
 		if(CanInteract(usr, GLOB.default_state) && (D in possible_d))
 			shuttle.set_destination(possible_d[D])

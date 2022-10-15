@@ -31,9 +31,9 @@
 			var/mob/living/carbon/human/H = user
 			if(prob(50))
 				if(prob(75))
-					to_chat(H, "<span class='danger'>[pick(drastic_messages)]</span>")
+					to_chat(H, SPAN_DANGER("[pick(drastic_messages)]"))
 				else
-					to_chat(H, "<span class='warning'>[pick(messages)]</span>")
+					to_chat(H, SPAN_WARNING("[pick(messages)]"))
 
 			if(prob(50))
 				H.dizziness += rand(3,5)
@@ -44,9 +44,9 @@
 		for (var/mob/living/carbon/human/H in range(src.effectrange,T))
 			if(prob(5))
 				if(prob(75))
-					to_chat(H, "<span class='warning'>[pick(messages)]</span>")
+					to_chat(H, SPAN_WARNING("[pick(messages)]"))
 				else
-					to_chat(H, "<span class='danger'>[pick(drastic_messages)]</span>")
+					to_chat(H, SPAN_DANGER("[pick(drastic_messages)]"))
 
 			if(prob(10))
 				H.dizziness += rand(3,5)
@@ -58,9 +58,9 @@
 		for (var/mob/living/carbon/human/H in range(src.effectrange,T))
 			if(prob(50))
 				if(prob(95))
-					to_chat(H, "<span class='danger'>[pick(drastic_messages)]</span>")
+					to_chat(H, SPAN_DANGER("[pick(drastic_messages)]"))
 				else
-					to_chat(H, "<span class='warning'>[pick(messages)]</span>")
+					to_chat(H, SPAN_WARNING("[pick(messages)]"))
 
 			if(prob(50))
 				H.dizziness += rand(3,5)

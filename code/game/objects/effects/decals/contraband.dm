@@ -41,26 +41,26 @@
 		return
 
 	if (!W.is_wall() || !isturf(user.loc))
-		to_chat(user, "<span class='warning'>You can't place this here!</span>")
+		to_chat(user, SPAN_WARNING("You can't place this here!"))
 		return
 
 	var/placement_dir = get_dir(user, W)
 	if (!(placement_dir in GLOB.cardinal))
-		to_chat(user, "<span class='warning'>You must stand directly in front of the wall you wish to place that on.</span>")
+		to_chat(user, SPAN_WARNING("You must stand directly in front of the wall you wish to place that on."))
 		return
 
 	if (ArePostersOnWall(W))
-		to_chat(user, "<span class='notice'>There is already a poster there!</span>")
+		to_chat(user, SPAN_NOTICE("There is already a poster there!"))
 		return
 
-	user.visible_message("<span class='notice'>\The [user] starts placing a poster on \the [W].</span>","<span class='notice'>You start placing the poster on \the [W].</span>")
+	user.visible_message(SPAN_NOTICE("\The [user] starts placing a poster on \the [W]."),SPAN_NOTICE("You start placing the poster on \the [W]."))
 
 	var/obj/structure/sign/poster/P = new (user.loc, placement_dir, poster_type)
 	qdel(src)
 	flick("poster_being_set", P)
 	// Time to place is equal to the time needed to play the flick animation
 	if(do_after(user, 2.8 SECONDS, W, DO_PUBLIC_UNIQUE) && W.is_wall() && !ArePostersOnWall(W, P))
-		user.visible_message("<span class='notice'>\The [user] has placed a poster on \the [W].</span>","<span class='notice'>You have placed the poster on \the [W].</span>")
+		user.visible_message(SPAN_NOTICE("\The [user] has placed a poster on \the [W]."),SPAN_NOTICE("You have placed the poster on \the [W]."))
 	else
 		// We cannot rely on user being on the appropriate turf when placement fails
 		P.roll_and_drop(get_step(W, turn(placement_dir, 180)))
@@ -136,10 +136,10 @@
 	if(isWirecutter(W))
 		playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		if(ruined)
-			to_chat(user, "<span class='notice'>You remove the remnants of the poster.</span>")
+			to_chat(user, SPAN_NOTICE("You remove the remnants of the poster."))
 			qdel(src)
 		else
-			to_chat(user, "<span class='notice'>You carefully remove the poster from the wall.</span>")
+			to_chat(user, SPAN_NOTICE("You carefully remove the poster from the wall."))
 			roll_and_drop(user.loc)
 		return
 
@@ -154,7 +154,7 @@
 		if(ruined || !user.Adjacent(src))
 			return
 
-		visible_message("<span class='warning'>\The [user] rips \the [src] in a single, decisive motion!</span>" )
+		visible_message(SPAN_WARNING("\The [user] rips \the [src] in a single, decisive motion!") )
 		playsound(src.loc, 'sound/items/poster_ripped.ogg', 100, 1)
 		ruined = 1
 		icon_state = "poster_ripped"

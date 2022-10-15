@@ -65,9 +65,9 @@
 	var/result = roll_result[1]
 	var/comment = roll_result[2]
 	icon_state = "[name][result]"
-	user.visible_message("<span class='notice'>[user] has thrown [src]. It lands on [result]. [comment]</span>", \
-						 "<span class='notice'>You throw [src]. It lands on a [result]. [comment]</span>", \
-						 "<span class='notice'>You hear [src] landing on a [result]. [comment]</span>")
+	user.visible_message(SPAN_NOTICE("[user] has thrown [src]. It lands on [result]. [comment]"), \
+						 SPAN_NOTICE("You throw [src]. It lands on a [result]. [comment]"), \
+						 SPAN_NOTICE("You hear [src] landing on a [result]. [comment]"))
 
 /obj/item/dice/throw_impact()
 	..()
@@ -75,4 +75,4 @@
 	var/result = roll_result[1]
 	var/comment = roll_result[2]
 	icon_state = "[name][result]"
-	src.visible_message("<span class='notice'>\The [src] lands on [result]. [comment]</span>")
+	src.visible_message(SPAN_NOTICE("\The [src] lands on [result]. [comment]"))

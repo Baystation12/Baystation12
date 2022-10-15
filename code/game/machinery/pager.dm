@@ -40,9 +40,9 @@
 	acknowledged = 0
 	if(paged)
 		playsound(src, 'sound/machines/ping.ogg', 60)
-		to_chat(user,"<span class='notice'>Page received by [paged] devices.</span>")
+		to_chat(user,SPAN_NOTICE("Page received by [paged] devices."))
 	else
-		to_chat(user,"<span class='warning'>No valid destinations were found for the page.</span>")
+		to_chat(user,SPAN_WARNING("No valid destinations were found for the page."))
 
 /obj/machinery/pager/Topic(href, href_list)
 	if(..())
@@ -51,7 +51,7 @@
 		return
 	if(!acknowledged && href_list["ack"])
 		playsound(src, 'sound/machines/ping.ogg', 60)
-		visible_message("<span class='notice'>Page acknowledged.</span>")
+		visible_message(SPAN_NOTICE("Page acknowledged."))
 		acknowledged = 1
 		var/obj/machinery/message_server/MS = get_message_server(z)
 		if(!MS)

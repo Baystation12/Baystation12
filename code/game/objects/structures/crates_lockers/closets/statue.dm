@@ -107,5 +107,5 @@
 	if (user)
 		user.dust()
 	dump_contents()
-	visible_message("<span class='warning'>[src] shatters!.</span>")
+	visible_message(SPAN_WARNING("[src] shatters!."))
 	qdel(src)

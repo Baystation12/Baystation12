@@ -45,7 +45,7 @@
 	if(!target)
 		return
 
-	to_chat(target, "<span class='info'>You feel great!</span>")
+	to_chat(target, SPAN_INFO("You feel great!"))
 	target.ExtinguishMob()
 
 /spell/contract/punish
@@ -62,6 +62,6 @@
 	if(!target)
 		return
 
-	to_chat(target, "<span class='danger'>You feel punished!</span>")
+	to_chat(target, SPAN_DANGER("You feel punished!"))
 	target.fire_stacks += 15
 	target.IgniteMob()

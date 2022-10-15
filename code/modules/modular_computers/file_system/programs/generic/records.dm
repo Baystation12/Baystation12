@@ -68,7 +68,7 @@
 	if(!F)
 		return
 	if(!F.verify_access_edit(get_record_access(user)))
-		to_chat(user, "<span class='notice'>\The [nano_host()] flashes an \"Access Denied\" warning.</span>")
+		to_chat(user, SPAN_NOTICE("\The [nano_host()] flashes an \"Access Denied\" warning."))
 		return
 	F.ask_value(user)
 

@@ -11,7 +11,7 @@
 		var/datum/goal/ambition = SSgoals.ambitions[P]
 		if(ambition)
 			text += "<br>Their goals for today were..."
-			text += "<br><span class='notice'>[ambition.summarize()]</span>"
+			text += "<br>[SPAN_NOTICE("[ambition.summarize()]")]"
 		if(!global_objectives.len && P.objectives && P.objectives.len)
 			var/num = 1
 			for(var/datum/objective/O in P.objectives)

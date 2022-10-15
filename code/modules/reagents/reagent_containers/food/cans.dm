@@ -29,7 +29,7 @@
 
 /obj/item/reagent_containers/food/drinks/cans/waterbottle/open(mob/user)
 	playsound(loc,'sound/effects/bonebreak1.ogg', rand(10,50), 1)
-	to_chat(user, "<span class='notice'>You twist open \the [src], destroying the safety seal!</span>")
+	to_chat(user, SPAN_NOTICE("You twist open \the [src], destroying the safety seal!"))
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/reagent_containers/food/drinks/cans/space_mountain_wind

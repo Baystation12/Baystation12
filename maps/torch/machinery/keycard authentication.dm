@@ -51,7 +51,7 @@
 			GLOB.using_map.revoke_maint_all_access()
 		if("Emergency Response Team")
 			if(is_ert_blocked())
-				to_chat(usr, "<span class='warning'>All emergency response teams are dispatched and can not be called at this time.</span>")
+				to_chat(usr, SPAN_WARNING("All emergency response teams are dispatched and can not be called at this time."))
 				return
 
 			trigger_armed_response_team(1)
@@ -67,7 +67,7 @@
 			GLOB.using_map.unbolt_saferooms()
 		if("Evacuate")
 			if(!evacuation_controller)
-				to_chat(usr, "<span class='danger'>Unable to initiate evacuation!</span>")
+				to_chat(usr, SPAN_DANGER("Unable to initiate evacuation!"))
 				return
 			for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
 				if(EO.abandon_ship)

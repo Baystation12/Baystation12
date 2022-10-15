@@ -73,7 +73,7 @@
 		var/atom/toplevelholder = holder
 		while(!isnull(toplevelholder.loc) && !istype(toplevelholder.loc, /turf))
 			toplevelholder = toplevelholder.loc
-		toplevelholder.visible_message("<span class='warning'>[icon2html(toplevelholder, viewers(get_turf(toplevelholder)))] [toplevelholder] [display_msg]</span>")
+		toplevelholder.visible_message(SPAN_WARNING("[icon2html(toplevelholder, viewers(get_turf(toplevelholder)))] [toplevelholder] [display_msg]"))
 
 
 /datum/artifact_effect/proc/DoEffectTouch(mob/user)

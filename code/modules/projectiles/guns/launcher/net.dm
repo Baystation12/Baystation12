@@ -46,11 +46,11 @@
 
 /obj/item/gun/launcher/net/proc/unload(mob/user)
 	if(chambered)
-		user.visible_message("\The [user] removes \the [chambered] from \the [src].", "<span class='notice'>You remove \the [chambered] from \the [src].</span>")
+		user.visible_message("\The [user] removes \the [chambered] from \the [src].", SPAN_NOTICE("You remove \the [chambered] from \the [src]."))
 		user.put_in_hands(chambered)
 		chambered = null
 	else
-		to_chat(user, "<span class='warning'>\The [src] is empty.</span>")
+		to_chat(user, SPAN_WARNING("\The [src] is empty."))
 
 /obj/item/gun/launcher/net/attackby(obj/item/I, mob/user)
 	if((istype(I, /obj/item/net_shell)))

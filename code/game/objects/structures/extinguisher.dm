@@ -18,7 +18,7 @@
 	if(istype(O, /obj/item/extinguisher))
 		if(!has_extinguisher && opened && user.unEquip(O, src))
 			has_extinguisher = O
-			to_chat(user, "<span class='notice'>You place [O] in [src].</span>")
+			to_chat(user, SPAN_NOTICE("You place [O] in [src]."))
 			playsound(src.loc, 'sound/effects/extin.ogg', 50, 0)
 		else
 			opened = !opened
@@ -36,11 +36,11 @@
 		if (user.hand)
 			temp = H.organs_by_name[BP_L_HAND]
 		if(temp && !temp.is_usable())
-			to_chat(user, "<span class='notice'>You try to move your [temp.name], but cannot!</span>")
+			to_chat(user, SPAN_NOTICE("You try to move your [temp.name], but cannot!"))
 			return
 	if(has_extinguisher)
 		user.put_in_hands(has_extinguisher)
-		to_chat(user, "<span class='notice'>You take [has_extinguisher] from [src].</span>")
+		to_chat(user, SPAN_NOTICE("You take [has_extinguisher] from [src]."))
 		playsound(src.loc, 'sound/effects/extout.ogg', 50, 0)
 		has_extinguisher = null
 		opened = 1

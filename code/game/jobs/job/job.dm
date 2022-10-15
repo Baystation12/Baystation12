@@ -195,28 +195,28 @@
 
 	if (!is_species_whitelist_allowed(prefs.client, use_species_whitelist))
 		S = all_species[use_species_whitelist]
-		to_chat(feedback, "<span class='boldannounce'>\An [S] species whitelist is required for [title].</span>")
+		to_chat(feedback, SPAN_CLASS("boldannounce", "\An [S] species whitelist is required for [title]."))
 		return TRUE
 
 	if(!isnull(allowed_branches) && (!prefs.branches[title] || !is_branch_allowed(prefs.branches[title])))
-		to_chat(feedback, "<span class='boldannounce'>Wrong branch of service for [title]. Valid branches are: [get_branches()].</span>")
+		to_chat(feedback, SPAN_CLASS("boldannounce", "Wrong branch of service for [title]. Valid branches are: [get_branches()]."))
 		return TRUE
 
 	if(!isnull(allowed_ranks) && (!prefs.ranks[title] || !is_rank_allowed(prefs.branches[title], prefs.ranks[title])))
-		to_chat(feedback, "<span class='boldannounce'>Wrong rank for [title]. Valid ranks in [prefs.branches[title]] are: [get_ranks(prefs.branches[title])].</span>")
+		to_chat(feedback, SPAN_CLASS("boldannounce", "Wrong rank for [title]. Valid ranks in [prefs.branches[title]] are: [get_ranks(prefs.branches[title])]."))
 		return TRUE
 
 	S = all_species[prefs.species]
 	if(!is_species_allowed(S))
-		to_chat(feedback, "<span class='boldannounce'>Restricted species, [S], for [title].</span>")
+		to_chat(feedback, SPAN_CLASS("boldannounce", "Restricted species, [S], for [title]."))
 		return TRUE
 
 	if(LAZYACCESS(minimum_character_age, S.get_bodytype()) && (prefs.age < minimum_character_age[S.get_bodytype()]))
-		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age[S.get_bodytype()]].</span>")
+		to_chat(feedback, SPAN_CLASS("boldannounce", "Not old enough. Minimum character age is [minimum_character_age[S.get_bodytype()]]."))
 		return TRUE
 
 	if(!S.check_background(src, prefs))
-		to_chat(feedback, "<span class='boldannounce'>Incompatible background for [title].</span>")
+		to_chat(feedback, SPAN_CLASS("boldannounce", "Incompatible background for [title]."))
 		return TRUE
 
 	return FALSE
@@ -439,14 +439,14 @@
 	if(spawnpoint)
 		if(!(spawnpoint in GLOB.using_map.allowed_spawns))
 			if(H)
-				to_chat(H, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead. To resolve this error head to your character's setup and choose a different spawn point.</span>")
+				to_chat(H, SPAN_WARNING("Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead. To resolve this error head to your character's setup and choose a different spawn point."))
 			spawnpos = null
 		else
 			spawnpos = spawntypes()[spawnpoint]
 
 	if(spawnpos && !spawnpos.check_job_spawning(title))
 		if(H)
-			to_chat(H, "<span class='warning'>Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job ([title]). Spawning you at another spawn point instead.</span>")
+			to_chat(H, SPAN_WARNING("Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job ([title]). Spawning you at another spawn point instead."))
 		spawnpos = null
 
 	if(!spawnpos)

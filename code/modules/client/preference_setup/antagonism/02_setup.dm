@@ -48,7 +48,7 @@
 		if(US.desc)
 			. += "<font size=1>[US.desc]</font><br>"
 	if(!pref.uplink_sources.len)
-		. += "<span class='warning'>You will not receive an uplink unless you add an uplink source!</span>"
+		. += SPAN_WARNING("You will not receive an uplink unless you add an uplink source!")
 	. +="<br>"
 	. +="Exploitable information:<br>"
 	if(jobban_isbanned(user, "Records"))

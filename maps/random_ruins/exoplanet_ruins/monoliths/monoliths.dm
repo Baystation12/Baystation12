@@ -56,17 +56,17 @@
 				active = 1
 				update_icon()
 				if(prob(70))
-					to_chat(H, "<span class='notice'>As you touch \the [src], you suddenly get a vivid image - [E.get_engravings()]</span>")
+					to_chat(H, SPAN_NOTICE("As you touch \the [src], you suddenly get a vivid image - [E.get_engravings()]"))
 				else
-					to_chat(H, "<span class='warning'>An overwhelming stream of information invades your mind!</span>")
+					to_chat(H, SPAN_WARNING("An overwhelming stream of information invades your mind!"))
 					var/vision = ""
 					for(var/i = 1 to 10)
 						vision += pick(E.actors) + " " + pick("killing","dying","gored","expiring","exploding","mauled","burning","flayed","in agony") + ". "
-					to_chat(H, "<span class='danger'><font size=2>[uppertext(vision)]</font></span>")
+					to_chat(H, SPAN_DANGER("<font size=2>[uppertext(vision)]</font>"))
 					H.Paralyse(2)
 					H.hallucination(20, 100)
 				return
-	to_chat(user, "<span class='notice'>\The [src] is still.</span>")
+	to_chat(user, SPAN_NOTICE("\The [src] is still."))
 	return ..()
 
 /turf/simulated/floor/fixed/alium/ruin

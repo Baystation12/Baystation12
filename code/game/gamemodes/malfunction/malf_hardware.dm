@@ -24,7 +24,7 @@
 /datum/malf_hardware/apu_gen/get_examine_desc()
 	var/msg = "It seems to have some sort of power generator attached to its core."
 	if(owner.hardware_integrity() < 50)
-		msg += "<span class='warning'> It seems to be too damaged to function properly.</span>"
+		msg += SPAN_WARNING(" It seems to be too damaged to function properly.")
 	else if(owner.APU_power)
 		msg += " The generator appears to be active."
 	return msg
@@ -49,7 +49,7 @@
 	driver = /datum/game_mode/malfunction/verb/ai_self_destruct
 
 /datum/malf_hardware/core_bomb/get_examine_desc()
-	return "<span class='warning'>It seems to have grey blocks of unknown substance and some circuitry connected to it's core. [owner.bombing_core ? "A red light is blinking on the circuit." : ""]</span>"
+	return SPAN_WARNING("It seems to have grey blocks of unknown substance and some circuitry connected to it's core. [owner.bombing_core ? "A red light is blinking on the circuit." : ""]")
 
 /datum/malf_hardware/instant_research
 	name = "Quantum Knowledge Databank"

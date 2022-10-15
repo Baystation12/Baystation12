@@ -5,8 +5,8 @@
 	switch(src.stat)
 		if(CONSCIOUS)
 			if(!src.client)	msg += "\nIt appears to be in stand-by mode." //afk
-		if(UNCONSCIOUS)		msg += "\n<span class='warning'>It doesn't seem to be responding.</span>"
-		if(DEAD)			msg += "\n<span class='deadsay'>It looks completely unsalvageable.</span>"
+		if(UNCONSCIOUS)		msg += "\n[SPAN_WARNING("It doesn't seem to be responding.")]"
+		if(DEAD)			msg += "\n[SPAN_CLASS("deadsay", "It looks completely unsalvageable.")]"
 	msg += "\n*---------*"
 
 	if(print_flavor_text()) msg += "\n[print_flavor_text()]\n"

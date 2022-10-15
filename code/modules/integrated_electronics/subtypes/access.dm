@@ -36,7 +36,7 @@
 		return FALSE
 
 	set_pin_data(IC_OUTPUT, 3, passkey)
-	user.visible_message("<span class='notice'>\The [user] swipes \the [I] onto \the [get_object()]'s card reader.</span>")
+	user.visible_message(SPAN_NOTICE("\The [user] swipes \the [I] onto \the [get_object()]'s card reader."))
 	push_data()
 	activate_pin(1)
 	return TRUE
@@ -65,7 +65,7 @@
 	// check if the signature is valid
 	if(!check_data_signature(signature, result))
 		return FALSE
-	
+
 	if(length(result) > 1)
 		result = json_decode(result)
 	else

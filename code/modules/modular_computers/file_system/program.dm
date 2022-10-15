@@ -112,13 +112,13 @@
 	var/obj/item/card/id/I = user.GetIdCard()
 	if(!I)
 		if(loud)
-			to_chat(user, "<span class='notice'>\The [computer] flashes an \"RFID Error - Unable to scan ID\" warning.</span>")
+			to_chat(user, SPAN_NOTICE("\The [computer] flashes an \"RFID Error - Unable to scan ID\" warning."))
 		return FALSE
 
 	if(access_to_check in I.access)
 		return TRUE
 	else if(loud)
-		to_chat(user, "<span class='notice'>\The [computer] flashes an \"Access Denied\" warning.</span>")
+		to_chat(user, SPAN_NOTICE("\The [computer] flashes an \"Access Denied\" warning."))
 
 /// This attempts to retrieve header data for NanoUIs. If implementing completely new device of different type than existing ones, always include the device here in this proc. This proc basically relays the request to whatever is running the program.
 /datum/computer_file/program/proc/get_header_data()

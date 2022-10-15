@@ -16,4 +16,4 @@
 	if(driver && driver.using_scanner)
 		driver.data_buffer = jointext(dat, "\[br\]")
 		SSnano.update_uis(driver.NM)
-	to_chat(user, "<span class = 'notice'>[jointext(dat, "<br>")]</span>")
+	to_chat(user, SPAN_NOTICE("[jointext(dat, "<br>")]"))

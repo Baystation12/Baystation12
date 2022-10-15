@@ -390,7 +390,7 @@
 		M.apply_effect(agony_amount, EFFECT_PAIN, 0)
 		if(prob(5))
 			M.custom_emote(2, "[pick("dry heaves!","coughs!","splutters!")]")
-			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
+			to_chat(M, SPAN_DANGER("You feel like your insides are burning!"))
 	if(istype(M, /mob/living/carbon/slime))
 		M.bodytemperature += rand(0, 15) + slime_temp_adj
 	holder.remove_reagent(/datum/reagent/frostoil, 5)
@@ -444,9 +444,9 @@
 
 	if(eyes_covered)
 		if(!mouth_covered)
-			to_chat(M, "<span class='warning'>Your [eye_protection] protects your eyes from the pepperspray!</span>")
+			to_chat(M, SPAN_WARNING("Your [eye_protection] protects your eyes from the pepperspray!"))
 	else
-		to_chat(M, "<span class='warning'>The pepperspray gets in your eyes!</span>")
+		to_chat(M, SPAN_WARNING("The pepperspray gets in your eyes!"))
 		M.confused += 2
 		if(mouth_covered)
 			M.eye_blurry = max(M.eye_blurry, effective_strength * 3)
@@ -456,12 +456,12 @@
 			M.eye_blind = max(M.eye_blind, effective_strength * 2)
 
 	if(mouth_covered)
-		to_chat(M, "<span class='warning'>Your [face_protection] protects you from the pepperspray!</span>")
+		to_chat(M, SPAN_WARNING("Your [face_protection] protects you from the pepperspray!"))
 	else if(!no_pain)
 		if(partial_mouth_covered)
-			to_chat(M, "<span class='warning'>Your [partial_face_protection] partially protects you from the pepperspray!</span>")
+			to_chat(M, SPAN_WARNING("Your [partial_face_protection] partially protects you from the pepperspray!"))
 			stun_probability *= 0.5
-		to_chat(M, "<span class='danger'>Your face and throat burn!</span>")
+		to_chat(M, SPAN_DANGER("Your face and throat burn!"))
 		if(M.stunned > 0  && !M.lying)
 			M.Weaken(4)
 		if(prob(stun_probability))
@@ -474,11 +474,11 @@
 		if(!H.can_feel_pain())
 			return
 	if(M.chem_doses[type] == metabolism)
-		to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
+		to_chat(M, SPAN_DANGER("You feel like your insides are burning!"))
 	else
 		M.apply_effect(6, EFFECT_PAIN, 0)
 		if(prob(5))
-			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
+			to_chat(M, SPAN_DANGER("You feel like your insides are burning!"))
 			M.custom_emote(2, "[pick("coughs.","gags.","retches.")]")
 			M.Stun(2)
 	if(istype(M, /mob/living/carbon/slime))

@@ -32,7 +32,7 @@
 		return
 	if(isScrewdriver(O) && emag)
 		//Stops people from just unscrewing the monitor and putting it back to get the console working again.
-		to_chat(user, "<span class='warning'>It is too hot to mess with!</span>")
+		to_chat(user, SPAN_WARNING("It is too hot to mess with!"))
 		return
 
 	..()
@@ -56,7 +56,7 @@
 			update_icon()
 			return 1
 		else
-			to_chat(user, "<span class='notice'>A no server error appears on the screen.</span>")
+			to_chat(user, SPAN_NOTICE("A no server error appears on the screen."))
 
 /obj/machinery/computer/message_monitor/on_update_icon()
 	if(emag || hacking)
@@ -112,7 +112,7 @@
 					dat += "<dd><A href='?src=\ref[src];clearr=1'>&#09;[++i]. Clear Request Console Logs</a><br></dd>"
 					dat += "<dd><A href='?src=\ref[src];pass=1'>&#09;[++i]. Set Custom Key</a><br></dd>"
 			else
-				dat += "<br><hr><dd><span class='notice'>Please authenticate with the server in order to show additional options.</span>"
+				dat += "<br><hr><dd>[SPAN_NOTICE("Please authenticate with the server in order to show additional options.")]"
 			if((istype(user, /mob/living/silicon/ai) || istype(user, /mob/living/silicon/robot)) && (user.mind.special_role && user.mind.original == user))
 				//Malf/Traitor AIs can bruteforce into the system to gain the Key.
 				dat += "<dd><A href='?src=\ref[src];hack=1'><i><font color='Red'>*&@#. Bruteforce Key</font></i></font></a></dd>"
@@ -195,10 +195,10 @@
 
 /obj/machinery/computer/message_monitor/proc/BruteForce(mob/user as mob)
 	if(isnull(linkedServer))
-		to_chat(user, "<span class='warning'>Could not complete brute-force: Linked Server Disconnected!</span>")
+		to_chat(user, SPAN_WARNING("Could not complete brute-force: Linked Server Disconnected!"))
 	else
 		var/currentKey = src.linkedServer.decryptkey
-		to_chat(user, "<span class='warning'>Brute-force completed! The key is '[currentKey]'.</span>")
+		to_chat(user, SPAN_WARNING("Brute-force completed! The key is '[currentKey]'."))
 	src.hacking = 0
 	update_icon()
 	src.screen = 0 // Return the screen back to normal
@@ -231,10 +231,10 @@
 	if (href_list["find"])
 		if(message_servers && message_servers.len > 1)
 			src.linkedServer = input(usr,"Please select a server.", "Select a server.", null) as null|anything in message_servers
-			message = "<span class='alert'>NOTICE: Server selected.</span>"
+			message = SPAN_CLASS("alert", "NOTICE: Server selected.")
 		else if(message_servers && message_servers.len > 0)
 			linkedServer = message_servers[1]
-			message =  "<span class='notice'>NOTICE: Only Single Server Detected - Server selected.</span>"
+			message =  SPAN_NOTICE("NOTICE: Only Single Server Detected - Server selected.")
 		else
 			message = noserver
 
@@ -245,7 +245,7 @@
 		else
 			if(auth)
 				src.linkedServer.rc_msgs = list()
-				message = "<span class='notice'>NOTICE: Logs cleared.</span>"
+				message = SPAN_NOTICE("NOTICE: Logs cleared.")
 	//Change the password - KEY REQUIRED
 	if (href_list["pass"])
 		if(!linkedServer || (src.linkedServer.inoperable()))
@@ -257,12 +257,12 @@
 					if(src.linkedServer.decryptkey == dkey)
 						var/newkey = trim(input(usr,"Please enter the new key (3 - 16 characters max):"))
 						if(length(newkey) <= 3)
-							message = "<span class='notice'>NOTICE: Decryption key too short!</span>"
+							message = SPAN_NOTICE("NOTICE: Decryption key too short!")
 						else if(length(newkey) > 16)
-							message = "<span class='notice'>NOTICE: Decryption key too long!</span>"
+							message = SPAN_NOTICE("NOTICE: Decryption key too long!")
 						else if(newkey && newkey != "")
 							src.linkedServer.decryptkey = newkey
-						message = "<span class='notice'>NOTICE: Decryption key set.</span>"
+						message = SPAN_NOTICE("NOTICE: Decryption key set.")
 					else
 						message = incorrectkey
 
@@ -285,7 +285,7 @@
 				message = noserver
 			else //if(istype(href_list["delete"], /datum/data_pda_msg))
 				src.linkedServer.rc_msgs -= locate(href_list["deleter"])
-				message = "<span class='notice'>NOTICE: Log Deleted!</span>"
+				message = SPAN_NOTICE("NOTICE: Log Deleted!")
 
 	//Request Console Logs - KEY REQUIRED
 	if(href_list["viewr"])

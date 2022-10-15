@@ -159,10 +159,10 @@
 			if(holder.hallucination_power > 50)
 				phrases += list("What did you come here for[add]?","Don't touch me[add].","You're not getting out of here[add].", "You are a failure, [pick(names)].","Just kill yourself already, [pick(names)]")
 			message = pick(phrases)
-			to_chat(holder,"<span class='game say'><span class='name'>[display_name]</span> [holder.say_quote(message)], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
+			to_chat(holder,"[SPAN_CLASS("game say", "[SPAN_CLASS("name", display_name)] [holder.say_quote(message)], [SPAN_CLASS("message", "[SPAN_CLASS("body", "\"[message]\"")]")]")]")
 		else
 			to_chat(holder,"<B>[display_name]</B> points at [holder.name]")
-			to_chat(holder,"<span class='game say'><span class='name'>[display_name]</span> says something softly.</span>")
+			to_chat(holder,"[SPAN_CLASS("game say", "[SPAN_CLASS("name", display_name)] says something softly.")]")
 		var/image/speech_bubble = image('icons/mob/talk.dmi',talker,"h[holder.say_test(message)]")
 		spawn(30) qdel(speech_bubble)
 		image_to(holder,speech_bubble)
@@ -172,7 +172,7 @@
 
 //Spiderling skitters
 /datum/hallucination/skitter/start()
-	to_chat(holder,"<span class='notice'>The spiderling skitters[pick(" away"," around","")].</span>")
+	to_chat(holder,SPAN_NOTICE("The spiderling skitters[pick(" away"," around","")]."))
 
 //Spiders in your body
 /datum/hallucination/spiderbabies
@@ -182,7 +182,7 @@
 	if(istype(holder,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = holder
 		var/obj/O = pick(H.organs)
-		to_chat(H,"<span class='warning'>You feel something [pick("moving","squirming","skittering")] inside of your [O.name]!</span>")
+		to_chat(H,SPAN_WARNING("You feel something [pick("moving","squirming","skittering")] inside of your [O.name]!"))
 
 //Seeing stuff
 /datum/hallucination/mirage
@@ -253,7 +253,7 @@
 
 /datum/hallucination/fakeattack/start()
 	for(var/mob/living/M in oview(holder,1))
-		to_chat(holder, "<span class='danger'>[M] has punched [holder]!</span>")
+		to_chat(holder, SPAN_CLASS("danger", "[M] has punched [holder]!"))
 		holder.playsound_local(get_turf(holder),"punch",50)
 
 //Fake injection

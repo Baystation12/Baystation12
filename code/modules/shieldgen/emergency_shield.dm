@@ -23,7 +23,7 @@
 
 /obj/machinery/shield/proc/check_failure()
 	if (src.health <= 0)
-		visible_message("<span class='notice'>\The [src] dissipates!</span>")
+		visible_message(SPAN_NOTICE("\The [src] dissipates!"))
 		qdel(src)
 		return
 
@@ -92,7 +92,7 @@
 
 /obj/machinery/shield/hitby(AM as mob|obj, datum/thrownthing/TT)
 	//Let everyone know we've been hit!
-	visible_message("<span class='notice'><B>\[src] was hit by [AM].</B></span>")
+	visible_message(SPAN_NOTICE("<B>\The [src] was hit by [AM].</B>"))
 
 	//Super realistic, resource-intensive, real-time damage calculations.
 	var/tforce = 0
@@ -263,14 +263,14 @@
 		return TRUE
 
 	if (src.active)
-		user.visible_message("<span class='notice'>[icon2html(src, viewers(get_turf(src)))] [user] deactivated the shield generator.</span>", \
-			"<span class='notice'>[icon2html(src,user)] You deactivate the shield generator.</span>", \
+		user.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [user] deactivated the shield generator."), \
+			SPAN_NOTICE("[icon2html(src,user)] You deactivate the shield generator."), \
 			"You hear heavy droning fade out.")
 		src.shields_down()
 	else
 		if(anchored)
-			user.visible_message("<span class='notice'>[icon2html(src, viewers(get_turf(src)))] [user] activated the shield generator.</span>", \
-				"<span class='notice'>[icon2html(src, user)] You activate the shield generator.</span>", \
+			user.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [user] activated the shield generator."), \
+				SPAN_NOTICE("[icon2html(src, user)] You activate the shield generator."), \
 				"You hear heavy droning.")
 			src.shields_up()
 		else
@@ -287,21 +287,21 @@
 	if(isScrewdriver(W))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		if(is_open)
-			to_chat(user, "<span class='notice'>You close the panel.</span>")
+			to_chat(user, SPAN_NOTICE("You close the panel."))
 			is_open = 0
 		else
-			to_chat(user, "<span class='notice'>You open the panel and expose the wiring.</span>")
+			to_chat(user, SPAN_NOTICE("You open the panel and expose the wiring."))
 			is_open = 1
 
 	else if(isCoil(W) && malfunction && is_open)
 		var/obj/item/stack/cable_coil/coil = W
-		to_chat(user, "<span class='notice'>You begin to replace the wires.</span>")
+		to_chat(user, SPAN_NOTICE("You begin to replace the wires."))
 		//if(do_after(user, min(60, round( ((maxhealth/health)*10)+(malfunction*10) ))) //Take longer to repair heavier damage
 		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if (coil.use(1))
 				health = max_health
 				malfunction = 0
-				to_chat(user, "<span class='notice'>You repair the [src]!</span>")
+				to_chat(user, SPAN_NOTICE("You repair the [src]!"))
 				update_icon()
 
 	else if(istype(W, /obj/item/wrench))
@@ -310,15 +310,15 @@
 			return
 		if(anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-			to_chat(user, "<span class='notice'>'You unsecure the [src] from the floor!</span>")
+			to_chat(user, SPAN_NOTICE("'You unsecure the [src] from the floor!"))
 			if(active)
-				to_chat(user, "<span class='notice'>The [src] shuts off!</span>")
+				to_chat(user, SPAN_NOTICE("The [src] shuts off!"))
 				src.shields_down()
 			anchored = FALSE
 		else
 			if(istype(get_turf(src), /turf/space)) return //No wrenching these in space!
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-			to_chat(user, "<span class='notice'>You secure the [src] to the floor!</span>")
+			to_chat(user, SPAN_NOTICE("You secure the [src] to the floor!"))
 			anchored = TRUE
 
 
@@ -327,7 +327,7 @@
 			src.locked = !src.locked
 			to_chat(user, "The controls are now [src.locked ? "locked." : "unlocked."]")
 		else
-			to_chat(user, "<span class='warning'>Access denied.</span>")
+			to_chat(user, SPAN_WARNING("Access denied."))
 	else
 		..()
 

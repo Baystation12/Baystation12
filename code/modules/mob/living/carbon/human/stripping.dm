@@ -142,17 +142,17 @@
 	if(!l_store)
 		if(equip_to_slot_if_possible(I, slot_l_store, TRYEQUIP_REDRAW | TRYEQUIP_SILENT))
 			return
-	to_chat(user, "<span class='warning'>You are unable to place [I] in [src]'s pockets.</span>")
+	to_chat(user, SPAN_WARNING("You are unable to place [I] in [src]'s pockets."))
 	user.put_in_active_hand(I)
 
 // Modify the current target sensor level.
 /mob/living/carbon/human/proc/toggle_sensors(mob/living/user)
 	var/obj/item/clothing/under/suit = w_uniform
 	if(!suit)
-		to_chat(user, "<span class='warning'>\The [src] is not wearing a suit with sensors.</span>")
+		to_chat(user, SPAN_WARNING("\The [src] is not wearing a suit with sensors."))
 		return
 	if (suit.has_sensor >= 2)
-		to_chat(user, "<span class='warning'>\The [src]'s suit sensor controls are locked.</span>")
+		to_chat(user, SPAN_WARNING("\The [src]'s suit sensor controls are locked."))
 		return
 
 	admin_attack_log(user, src, "Toggled their suit sensors.", "Toggled their suit sensors.", "toggled the suit sensors of")
@@ -161,7 +161,7 @@
 // Set internals on or off.
 /mob/living/carbon/human/proc/toggle_internals(mob/living/user)
 	if(internal)
-		visible_message("<span class='danger'>\The [user] disables \the [src]'s internals!</span>")
+		visible_message(SPAN_DANGER("\The [user] disables \the [src]'s internals!"))
 		internal.add_fingerprint(user)
 		set_internals(null)
 		return
@@ -169,7 +169,7 @@
 		// Check for airtight mask/helmet.
 		if(!(wear_mask && wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
 			if(!(head && head.item_flags & ITEM_FLAG_AIRTIGHT))
-				to_chat(user, "<span class='warning'>\The [src] does not have a suitable mask or helmet.</span>")
+				to_chat(user, SPAN_WARNING("\The [src] does not have a suitable mask or helmet."))
 				return
 
 		// Find an internal source.
@@ -180,7 +180,7 @@
 		else if(istype(belt, /obj/item/tank))
 			set_internals(belt)
 		else
-			to_chat(user, "<span class='warning'>You could not find a suitable tank!</span>")
+			to_chat(user, SPAN_WARNING("You could not find a suitable tank!"))
 			return
-		visible_message("<span class='warning'>\The [src] is now running on internals!</span>")
+		visible_message(SPAN_WARNING("\The [src] is now running on internals!"))
 		internal.add_fingerprint(user)

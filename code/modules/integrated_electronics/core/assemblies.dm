@@ -200,7 +200,7 @@
 	if(battery)
 		HTML += "[round(battery.charge, 0.1)]/[battery.maxcharge] ([round(battery.percent(), 0.1)]%) cell charge. <a href='?src=\ref[src];remove_cell=1'>\[Remove\]</a>"
 	else
-		HTML += "<span class='danger'>No power cell detected!</span>"
+		HTML += SPAN_DANGER("No power cell detected!")
 
 	if(length(assembly_components))
 		HTML += "<br><br>"
@@ -780,8 +780,8 @@
 		return
 	playsound(loc, 'sound/machines/click.ogg', 75, 1)
 	user.visible_message("[user.name] attaches [src] to the wall.",
-		"<span class='notice'>You attach [src] to the wall.</span>",
-		"<span class='italics'>You hear clicking.</span>")
+		SPAN_NOTICE("You attach [src] to the wall."),
+		SPAN_CLASS("italics", "You hear clicking."))
 	if(user.unEquip(src,T))
 		var/rotation = 0
 		switch(ndir)

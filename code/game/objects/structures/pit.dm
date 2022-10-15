@@ -10,28 +10,28 @@
 
 /obj/structure/pit/attackby(obj/item/W, mob/user)
 	if( istype(W,/obj/item/shovel) )
-		visible_message("<span class='notice'>\The [user] starts [open ? "filling" : "digging open"] \the [src]</span>")
+		visible_message(SPAN_NOTICE("\The [user] starts [open ? "filling" : "digging open"] \the [src]"))
 		if( do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) )
-			visible_message("<span class='notice'>\The [user] [open ? "fills" : "digs open"] \the [src]!</span>")
+			visible_message(SPAN_NOTICE("\The [user] [open ? "fills" : "digs open"] \the [src]!"))
 			if(open)
 				close(user)
 			else
 				open()
 		else
-			to_chat(user, "<span class='notice'>You stop shoveling.</span>")
+			to_chat(user, SPAN_NOTICE("You stop shoveling."))
 		return
 	if (!open && istype(W,/obj/item/stack/material/wood))
 		if(locate(/obj/structure/gravemarker) in src.loc)
-			to_chat(user, "<span class='notice'>There's already a grave marker here.</span>")
+			to_chat(user, SPAN_NOTICE("There's already a grave marker here."))
 		else
-			visible_message("<span class='notice'>\The [user] starts making a grave marker on top of \the [src]</span>")
+			visible_message(SPAN_NOTICE("\The [user] starts making a grave marker on top of \the [src]"))
 			if( do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) )
-				visible_message("<span class='notice'>\The [user] finishes the grave marker</span>")
+				visible_message(SPAN_NOTICE("\The [user] finishes the grave marker"))
 				var/obj/item/stack/material/wood/plank = W
 				plank.use(1)
 				new/obj/structure/gravemarker(src.loc)
 			else
-				to_chat(user, "<span class='notice'>You stop making a grave marker.</span>")
+				to_chat(user, SPAN_NOTICE("You stop making a grave marker."))
 		return
 	..()
 
@@ -75,23 +75,23 @@
 		return
 
 	escapee.setClickCooldown(100)
-	to_chat(escapee, "<span class='warning'>You start digging your way out of \the [src] (this will take about [breakout_time] minute\s)</span>")
-	visible_message("<span class='danger'>Something is scratching its way out of \the [src]!</span>")
+	to_chat(escapee, SPAN_WARNING("You start digging your way out of \the [src] (this will take about [breakout_time] minute\s)"))
+	visible_message(SPAN_DANGER("Something is scratching its way out of \the [src]!"))
 
 	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
 		playsound(src.loc, 'sound/weapons/bite.ogg', 100, 1)
 
 		if(!do_after(escapee, 5 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
-			to_chat(escapee, "<span class='warning'>You have stopped digging.</span>")
+			to_chat(escapee, SPAN_WARNING("You have stopped digging."))
 			return
 		if(open)
 			return
 
 		if(i == 6*breakout_time)
-			to_chat(escapee, "<span class='warning'>Halfway there...</span>")
+			to_chat(escapee, SPAN_WARNING("Halfway there..."))
 
-	to_chat(escapee, "<span class='warning'>You successfuly dig yourself out!</span>")
-	visible_message("<span class='danger'>\the [escapee] emerges from \the [src]!</span>")
+	to_chat(escapee, SPAN_WARNING("You successfuly dig yourself out!"))
+	visible_message(SPAN_DANGER("\the [escapee] emerges from \the [src]!"))
 	playsound(src.loc, 'sound/effects/squelch1.ogg', 100, 1)
 	open()
 
@@ -159,9 +159,9 @@
 
 /obj/structure/gravemarker/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/material/hatchet))
-		visible_message("<span class = 'warning'>\The [user] starts hacking away at \the [src] with \the [W].</span>")
+		visible_message(SPAN_WARNING("\The [user] starts hacking away at \the [src] with \the [W]."))
 		if(!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
-			visible_message("<span class = 'warning'>\The [user] hacks \the [src] apart.</span>")
+			visible_message(SPAN_WARNING("\The [user] hacks \the [src] apart."))
 			new /obj/item/stack/material/wood(src)
 			qdel(src)
 	if(istype(W,/obj/item/pen))

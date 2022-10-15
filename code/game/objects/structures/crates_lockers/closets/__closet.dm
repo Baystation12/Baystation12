@@ -218,7 +218,7 @@
 	if(locked)
 		togglelock(user)
 	else if(!(src.opened ? src.close() : src.open()))
-		to_chat(user, "<span class='notice'>It won't budge!</span>")
+		to_chat(user, SPAN_NOTICE("It won't budge!"))
 		update_icon()
 
 /obj/structure/closet/ex_act(severity)
@@ -276,9 +276,9 @@
 			for(var/obj/item/I in LB.contents)
 				LB.remove_from_storage(I, T, 1)
 			LB.finish_bulk_removal()
-			user.visible_message("<span class='notice'>[user] empties \the [LB] into \the [src].</span>", \
-								 "<span class='notice'>You empty \the [LB] into \the [src].</span>", \
-								 "<span class='notice'>You hear rustling of clothes.</span>")
+			user.visible_message(SPAN_NOTICE("[user] empties \the [LB] into \the [src]."), \
+								 SPAN_NOTICE("You empty \the [LB] into \the [src]."), \
+								 SPAN_NOTICE("You hear rustling of clothes."))
 			return
 
 		if(user.unEquip(W, loc))
@@ -289,7 +289,7 @@
 		return
 
 	if (istype(W, /obj/item/melee/energy/blade))
-		if(emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
+		if(emag_act(INFINITY, user, "[SPAN_DANGER("The locker has been sliced open by [user] with \an [W]")]!", SPAN_DANGER("You hear metal being sliced and sparks flying.")))
 			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 			spark_system.set_up(5, 0, src.loc)
 			spark_system.start()
@@ -307,11 +307,15 @@
 			if(!WT.isOn())
 				return
 			else
-				to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
+				to_chat(user, SPAN_NOTICE("You need more welding fuel to complete this task."))
 				return
 		src.welded = !src.welded
 		src.update_icon()
-		user.visible_message("<span class='warning'>\The [src] has been [welded?"welded shut":"unwelded"] by \the [user].</span>", blind_message = "You hear welding.", range = 3)
+		user.visible_message(
+			SPAN_WARNING("\The [src] has been [welded?"welded shut":"unwelded"] by \the [user]."),
+			blind_message = "You hear welding.",
+			range = 3
+		)
 		return
 
 	if (setup & CLOSET_HAS_LOCK)
@@ -322,8 +326,8 @@
 
 /obj/structure/closet/proc/slice_into_parts(obj/W, mob/user)
 	material.place_sheet(src.loc, 2)
-	user.visible_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [W].</span>", \
-						 "<span class='notice'>You have cut \the [src] apart with \the [W].</span>", \
+	user.visible_message(SPAN_NOTICE("\The [src] has been cut apart by [user] with \the [W]."), \
+						 SPAN_NOTICE("You have cut \the [src] apart with \the [W]."), \
 						 "You hear welding.")
 	qdel(src)
 
@@ -348,7 +352,7 @@
 		return
 	step_towards(O, src.loc)
 	if(user != O)
-		user.show_viewers("<span class='danger'>[user] stuffs [O] into [src]!</span>")
+		user.show_viewers(SPAN_DANGER("[user] stuffs [O] into [src]!"))
 	src.add_fingerprint(user)
 	return
 
@@ -361,7 +365,7 @@
 		return
 
 	if(!src.open())
-		to_chat(user, "<span class='notice'>It won't budge!</span>")
+		to_chat(user, SPAN_NOTICE("It won't budge!"))
 
 /obj/structure/closet/attack_hand(mob/user as mob)
 	src.add_fingerprint(user)
@@ -385,7 +389,7 @@
 		src.add_fingerprint(usr)
 		src.toggle(usr)
 	else
-		to_chat(usr, "<span class='warning'>This mob type can't use this verb.</span>")
+		to_chat(usr, SPAN_WARNING("This mob type can't use this verb."))
 
 /obj/structure/closet/on_update_icon()
 	if(opened)
@@ -423,9 +427,9 @@
 	escapee.setClickCooldown(100)
 
 	//okay, so the closet is either welded or locked... resist!!!
-	to_chat(escapee, "<span class='warning'>You lean on the back of \the [src] and start pushing the door open. (this will take about [breakout_time] minutes)</span>")
+	to_chat(escapee, SPAN_WARNING("You lean on the back of \the [src] and start pushing the door open. (this will take about [breakout_time] minutes)"))
 
-	visible_message("<span class='danger'>\The [src] begins to shake violently!</span>")
+	visible_message(SPAN_DANGER("\The [src] begins to shake violently!"))
 
 	breakout = 1 //can't think of a better way to do this right now.
 	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
@@ -443,8 +447,8 @@
 
 	//Well then break it!
 	breakout = 0
-	to_chat(escapee, "<span class='warning'>You successfully break out!</span>")
-	visible_message("<span class='danger'>\The [escapee] successfully broke out of \the [src]!</span>")
+	to_chat(escapee, SPAN_WARNING("You successfully break out!"))
+	visible_message(SPAN_DANGER("\The [escapee] successfully broke out of \the [src]!"))
 	playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
 	break_open()
 	shake_animation()
@@ -478,13 +482,13 @@
 	if(!CanPhysicallyInteract(user))
 		return FALSE
 	if(src.opened)
-		to_chat(user, "<span class='notice'>Close \the [src] first.</span>")
+		to_chat(user, SPAN_NOTICE("Close \the [src] first."))
 		return FALSE
 	if(src.broken)
-		to_chat(user, "<span class='warning'>\The [src] appears to be broken.</span>")
+		to_chat(user, SPAN_WARNING("\The [src] appears to be broken."))
 		return FALSE
 	if(user.loc == src)
-		to_chat(user, "<span class='notice'>You can't reach the lock from inside.</span>")
+		to_chat(user, SPAN_NOTICE("You can't reach the lock from inside."))
 		return FALSE
 
 	add_fingerprint(user)
@@ -498,11 +502,14 @@
 
 	if(CanToggleLock(user, id_card))
 		locked = !locked
-		visible_message("<span class='notice'>\The [src] has been [locked ? null : "un"]locked by \the [user].</span>", range = 3)
+		visible_message(
+			SPAN_NOTICE("\The [src] has been [locked ? null : "un"]locked by \the [user]."),
+			range = 3
+		)
 		update_icon()
 		return TRUE
 	else
-		to_chat(user, "<span class='warning'>Access denied!</span>")
+		to_chat(user, SPAN_WARNING("Access denied!"))
 		return FALSE
 
 /obj/structure/closet/proc/CanToggleLock(mob/user, obj/item/card/id/id_card)
@@ -539,9 +546,9 @@
 		if(visual_feedback)
 			visible_message(visual_feedback, audible_feedback)
 		else if(user && emag_source)
-			visible_message("<span class='warning'>\The [src] has been broken by \the [user] with \an [emag_source]!</span>", "You hear a faint electrical spark.")
+			visible_message(SPAN_WARNING("\The [src] has been broken by \the [user] with \an [emag_source]!"), "You hear a faint electrical spark.")
 		else
-			visible_message("<span class='warning'>\The [src] sparks and breaks open!</span>", "You hear a faint electrical spark.")
+			visible_message(SPAN_WARNING("\The [src] sparks and breaks open!"), "You hear a faint electrical spark.")
 		return 1
 	else
 		. = ..()

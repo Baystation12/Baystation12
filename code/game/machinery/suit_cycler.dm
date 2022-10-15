@@ -92,14 +92,14 @@
 			return
 
 		if(locked)
-			to_chat(user, "<span class='danger'>The suit cycler is locked.</span>")
+			to_chat(user, SPAN_DANGER("The suit cycler is locked."))
 			return
 
 		if(contents.len > 0)
-			to_chat(user, "<span class='danger'>There is no room inside the cycler for [G.affecting.name].</span>")
+			to_chat(user, SPAN_DANGER("There is no room inside the cycler for [G.affecting.name]."))
 			return
 
-		visible_message("<span class='notice'>[user] starts putting [G.affecting.name] into the suit cycler.</span>", range = 3)
+		visible_message(SPAN_NOTICE("[user] starts putting [G.affecting.name] into the suit cycler."), range = 3)
 
 		if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if(!G || !G.affecting) return
@@ -126,11 +126,11 @@
 	else if(istype(I,/obj/item/clothing/head/helmet/space) && !istype(I, /obj/item/clothing/head/helmet/space/rig))
 
 		if(locked)
-			to_chat(user, "<span class='danger'>The suit cycler is locked.</span>")
+			to_chat(user, SPAN_DANGER("The suit cycler is locked."))
 			return
 
 		if(helmet)
-			to_chat(user, "<span class='danger'>The cycler already contains a helmet.</span>")
+			to_chat(user, SPAN_DANGER("The cycler already contains a helmet."))
 			return
 
 		if(I.icon_override == CUSTOM_ITEM_MOB)
@@ -147,11 +147,11 @@
 	else if(istype(I,/obj/item/clothing/suit/space/void))
 
 		if(locked)
-			to_chat(user, "<span class='danger'>The suit cycler is locked.</span>")
+			to_chat(user, SPAN_DANGER("The suit cycler is locked."))
 			return
 
 		if(suit)
-			to_chat(user, "<span class='danger'>The cycler already contains a voidsuit.</span>")
+			to_chat(user, SPAN_DANGER("The cycler already contains a voidsuit."))
 			return
 
 		if(I.icon_override == CUSTOM_ITEM_MOB)
@@ -169,11 +169,11 @@
 
 /obj/machinery/suit_cycler/emag_act(remaining_charges, mob/user)
 	if(emagged)
-		to_chat(user, "<span class='danger'>The cycler has already been subverted.</span>")
+		to_chat(user, SPAN_DANGER("The cycler has already been subverted."))
 		return
 
 	//Clear the access reqs, disable the safeties, and open up all paintjobs.
-	to_chat(user, "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>")
+	to_chat(user, SPAN_DANGER("You run the sequencer across the interface, corrupting the operating protocols."))
 
 	var/additional_modifications = list_values(decls_repository.get_decls(emagged_modifications))
 	available_modifications |= additional_modifications
@@ -284,7 +284,7 @@
 	else if(href_list["begin_decontamination"])
 
 		if(safeties && occupant)
-			to_chat(usr, "<span class='danger'>The cycler has detected an occupant. Please remove the occupant before commencing the decontamination cycle.</span>")
+			to_chat(usr, SPAN_DANGER("The cycler has detected an occupant. Please remove the occupant before commencing the decontamination cycle."))
 			return
 
 		active = 1
@@ -337,7 +337,7 @@
 
 /obj/machinery/suit_cycler/proc/finished_job()
 	var/turf/T = get_turf(src)
-	T.visible_message("[icon2html(src, viewers(get_turf(src)))]<span class='notice'>\The [src] pings loudly.</span>")
+	T.visible_message("[icon2html(src, viewers(get_turf(src)))][SPAN_NOTICE("\The [src] pings loudly.")]")
 	active = 0
 	updateUsrDialog()
 
@@ -361,7 +361,7 @@
 /obj/machinery/suit_cycler/proc/eject_occupant(mob/user as mob)
 
 	if(locked || active)
-		to_chat(user, "<span class='warning'>The cycler is locked.</span>")
+		to_chat(user, SPAN_WARNING("The cycler is locked."))
 		return
 
 	if (!occupant)

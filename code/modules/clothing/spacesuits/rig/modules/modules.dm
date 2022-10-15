@@ -180,27 +180,27 @@
 /obj/item/rig_module/proc/check(charge = 50)
 
 	if(damage >= 2)
-		to_chat(usr, "<span class='warning'>The [interface_name] is damaged beyond use!</span>")
+		to_chat(usr, SPAN_WARNING("The [interface_name] is damaged beyond use!"))
 		return 0
 
 	if(world.time < next_use)
-		to_chat(usr, "<span class='warning'>You cannot use the [interface_name] again so soon.</span>")
+		to_chat(usr, SPAN_WARNING("You cannot use the [interface_name] again so soon."))
 		return 0
 
 	if(!holder || holder.canremove)
-		to_chat(usr, "<span class='warning'>The suit is not initialized.</span>")
+		to_chat(usr, SPAN_WARNING("The suit is not initialized."))
 		return 0
 
 	if(usr.lying || usr.stat || usr.stunned || usr.paralysis || usr.weakened)
-		to_chat(usr, "<span class='warning'>You cannot use the suit in this state.</span>")
+		to_chat(usr, SPAN_WARNING("You cannot use the suit in this state."))
 		return 0
 
 	if(holder.wearer && holder.wearer.lying)
-		to_chat(usr, "<span class='warning'>The suit cannot function while the wearer is prone.</span>")
+		to_chat(usr, SPAN_WARNING("The suit cannot function while the wearer is prone."))
 		return 0
 
 	if(holder.security_check_enabled && !holder.check_suit_access(usr))
-		to_chat(usr, "<span class='danger'>Access denied.</span>")
+		to_chat(usr, SPAN_DANGER("Access denied."))
 		return 0
 
 	if(!holder.check_power_cost(usr, charge, 0, src, (istype(usr,/mob/living/silicon ? 1 : 0) ) ) )

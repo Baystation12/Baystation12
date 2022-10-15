@@ -12,7 +12,7 @@
 
 /obj/item/borg/upgrade/proc/action(mob/living/silicon/robot/R)
 	if(R.stat == DEAD)
-		to_chat(usr, "<span class='warning'>The [src] will not function on a deceased robot.</span>")
+		to_chat(usr, SPAN_WARNING("The [src] will not function on a deceased robot."))
 		return 1
 	return 0
 
@@ -39,7 +39,7 @@
 /obj/item/borg/upgrade/uncertified/action(mob/living/silicon/robot/R)
 	if((. = ..())) return 0
 	if(!new_module)
-		to_chat(usr, "<span class='warning'>[R]'s error lights strobe repeatedly - something seems to be wrong with the chip.</span>")
+		to_chat(usr, SPAN_WARNING("[R]'s error lights strobe repeatedly - something seems to be wrong with the chip."))
 		return 0
 
 	// Suppress the alert so the AI doesn't see a reset message.

@@ -42,8 +42,8 @@
 	if(!mind)
 		return
 	if(!is_special_character(mind))
-		to_chat(src, "<span class='warning'>While you may perhaps have goals, this verb's meant to only be visible \
-		to antagonists.  Please make a bug report!</span>")
+		to_chat(src, SPAN_WARNING("While you may perhaps have goals, this verb's meant to only be visible \
+		to antagonists.  Please make a bug report!"))
 		return
 
 	var/datum/goal/ambition/goal = SSgoals.ambitions[mind]
@@ -54,9 +54,9 @@
 		if(!goal)
 			goal = new /datum/goal/ambition(mind)
 		goal.description = new_goal
-		to_chat(src, "<span class='notice'>You've set your goal to be <b>'[goal.description]'</b>. You can check your goals with the <b>Show Goals</b> verb.</span>")
+		to_chat(src, SPAN_NOTICE("You've set your goal to be <b>'[goal.description]'</b>. You can check your goals with the <b>Show Goals</b> verb."))
 	else
-		to_chat(src, "<span class='notice'>You leave your ambitions behind.</span>")
+		to_chat(src, SPAN_NOTICE("You leave your ambitions behind."))
 		if(goal)
 			qdel(goal)
 	log_and_message_admins("has set their ambitions to now be: [new_goal].")

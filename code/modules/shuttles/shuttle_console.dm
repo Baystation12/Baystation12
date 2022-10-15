@@ -95,7 +95,7 @@
 /obj/machinery/computer/shuttle_control/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/datum/shuttle/autodock/shuttle = SSshuttle.shuttles[shuttle_tag]
 	if (!istype(shuttle))
-		to_chat(user,"<span class='warning'>Unable to establish link with the shuttle.</span>")
+		to_chat(user,SPAN_WARNING("Unable to establish link with the shuttle."))
 		return
 
 	var/list/data = get_ui_data(shuttle)

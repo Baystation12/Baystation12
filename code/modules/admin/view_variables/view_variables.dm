@@ -192,7 +192,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 	else
 		vtext = "[value]"
 
-	return "<span class=value>[vtext]</span>[jointext(extra, null)]"
+	return "[SPAN_CLASS("value", "[vtext]")][jointext(extra, null)]"
 
 /proc/make_view_variables_var_entry(datum/D, varname, value, level=0)
 	var/ecm = null

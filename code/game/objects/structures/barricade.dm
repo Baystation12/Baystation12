@@ -28,12 +28,12 @@
 	if(istype(W, /obj/item/stack/material/rods) && !spiky)
 		var/obj/item/stack/material/rods/R = W
 		if(R.get_amount() < 5)
-			to_chat(user, "<span class='warning'>You need more rods to build a cheval de frise.</span>")
+			to_chat(user, SPAN_WARNING("You need more rods to build a cheval de frise."))
 			return
-		visible_message("<span class='notice'>\The [user] begins to work on \the [src].</span>")
+		visible_message(SPAN_NOTICE("\The [user] begins to work on \the [src]."))
 		if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			if(R.use(5))
-				visible_message("<span class='notice'>\The [user] fastens \the [R] to \the [src].</span>")
+				visible_message(SPAN_NOTICE("\The [user] fastens \the [R] to \the [src]."))
 				var/obj/structure/barricade/spike/CDF = new(loc, material.name, R.material.name)
 				CDF.dir = user.dir
 				qdel(src)
@@ -47,13 +47,13 @@
 			return //hitting things with the wrong type of stack usually doesn't produce messages, and probably doesn't need to.
 		if (get_damage_value())
 			if (D.get_amount() < 1)
-				to_chat(user, "<span class='warning'>You need one sheet of [material.display_name] to repair \the [src].</span>")
+				to_chat(user, SPAN_WARNING("You need one sheet of [material.display_name] to repair \the [src]."))
 				return
-			visible_message("<span class='notice'>[user] begins to repair \the [src].</span>")
+			visible_message(SPAN_NOTICE("[user] begins to repair \the [src]."))
 			if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) && get_damage_value())
 				if (D.use(1))
 					restore_health(get_max_health())
-					visible_message("<span class='notice'>[user] repairs \the [src].</span>")
+					visible_message(SPAN_NOTICE("[user] repairs \the [src]."))
 				return
 		return
 
@@ -66,7 +66,7 @@
 	dismantle()
 
 /obj/structure/barricade/proc/dismantle()
-	visible_message("<span class='danger'>The barricade is smashed apart!</span>")
+	visible_message(SPAN_DANGER("The barricade is smashed apart!"))
 	material.place_dismantled_product(get_turf(src))
 	qdel(src)
 

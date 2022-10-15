@@ -48,7 +48,7 @@
 			if(!eggcount)
 				var/eggs = new egg_type(O, src)
 				O.implants += eggs
-				to_chat(H, "<span class='critical'>\The [src] injects something into your [O.name]!</span>") // Oh god its laying eggs in me!
+				to_chat(H, SPAN_CLASS("critical", "\The [src] injects something into your [O.name]!")) // Oh god its laying eggs in me!
 
 // Webs target in a web if able to.
 /mob/living/simple_animal/hostile/giant_spider/nurse/attack_target(atom/A)

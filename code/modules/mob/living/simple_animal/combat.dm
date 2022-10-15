@@ -72,7 +72,7 @@
 			try_reload()
 			return FALSE
 
-	visible_message("<span class='danger'><b>\The [src]</b> fires at \the [A]!</span>")
+	visible_message(SPAN_DANGER("<b>\The [src]</b> fires at \the [A]!"))
 	shoot(A)
 	if(casingtype)
 		new casingtype(loc)

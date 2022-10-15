@@ -58,7 +58,7 @@
 /obj/item/material/ashtray/throw_impact(atom/hit_atom)
 	if (health_max)
 		if (contents.len)
-			visible_message("<span class='danger'>\The [src] slams into [hit_atom], spilling its contents!</span>")
+			visible_message(SPAN_DANGER("\The [src] slams into [hit_atom], spilling its contents!"))
 			for (var/obj/O in contents)
 				O.dropInto(loc)
 			remove_extension(src, /datum/extension/scent)

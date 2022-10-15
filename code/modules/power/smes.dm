@@ -241,7 +241,7 @@
 		return TRUE
 
 	if (!panel_open)
-		to_chat(user, "<span class='warning'>You need to open the access hatch on \the [src] first!</span>")
+		to_chat(user, SPAN_WARNING("You need to open the access hatch on \the [src] first!"))
 		return TRUE
 
 	if(isWelder(W))
@@ -350,7 +350,7 @@
 	amount = max(0, round(amount))
 	damage += amount
 	if(damage > maxdamage)
-		visible_message("<span class='danger'>\The [src] explodes in large rain of sparks and smoke!</span>")
+		visible_message(SPAN_DANGER("\The [src] explodes in large rain of sparks and smoke!"))
 		// Depending on stored charge percentage cause damage.
 		switch(Percentage())
 			if(75 to INFINITY)
@@ -397,10 +397,10 @@
 	var/damage_percentage = round((damage / maxdamage) * 100)
 	switch(damage_percentage)
 		if(75 to INFINITY)
-			to_chat(user, "<span class='danger'>It's casing is severely damaged, and sparking circuitry may be seen through the holes!</span>")
+			to_chat(user, SPAN_DANGER("It's casing is severely damaged, and sparking circuitry may be seen through the holes!"))
 		if(50 to 74)
-			to_chat(user, "<span class='notice'>It's casing is considerably damaged, and some of the internal circuits appear to be exposed!</span>")
+			to_chat(user, SPAN_NOTICE("It's casing is considerably damaged, and some of the internal circuits appear to be exposed!"))
 		if(25 to 49)
-			to_chat(user, "<span class='notice'>It's casing is quite seriously damaged.</span>")
+			to_chat(user, SPAN_NOTICE("It's casing is quite seriously damaged."))
 		if(0 to 24)
 			to_chat(user, "It's casing has some minor damage.")

@@ -83,10 +83,10 @@
 	. = ..()
 
 	if(distance > 3 && !(istype(user, /mob/living/silicon/ai) || isghost(user)))
-		to_chat(user, "<span class='warning'>You are too far away to read it.</span>")
+		to_chat(user, SPAN_WARNING("You are too far away to read it."))
 
 	else if(inoperable())
-		to_chat(user, "<span class='warning'>The display is off.</span>")
+		to_chat(user, SPAN_WARNING("The display is off."))
 
 	else if(src.target)
 		var/datum/gas_mixture/environment = target.return_air()

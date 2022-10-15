@@ -72,19 +72,19 @@
 		viables.Remove(type)
 		construction[button_desc] = type
 
-	fail_message = "<span class='notice'>[icon2html(src, viewers(get_turf(src)))] a [pick("loud","soft","sinister","eery","triumphant","depressing","cheerful","angry")] \
+	fail_message = SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] a [pick("loud","soft","sinister","eery","triumphant","depressing","cheerful","angry")] \
 		[pick("horn","beep","bing","bleep","blat","honk","hrumph","ding")] sounds and a \
 		[pick("yellow","purple","green","blue","red","orange","white")] \
 		[pick("light","dial","meter","window","protrusion","knob","antenna","swirly thing")] \
 		[pick("swirls","flashes","whirrs","goes schwing","blinks","flickers","strobes","lights up")] on the \
 		[pick("front","side","top","bottom","rear","inside")] of [src]. A [pick("slot","funnel","chute","tube")] opens up in the \
-		[pick("front","side","top","bottom","rear","inside")].</span>"
+		[pick("front","side","top","bottom","rear","inside")].")
 
 /obj/machinery/replicator/Process()
 	if(spawning_types.len && is_powered())
 		spawn_progress_time += world.time - last_process_time
 		if(spawn_progress_time > max_spawn_time)
-			src.visible_message("<span class='notice'>[icon2html(src, viewers(get_turf(src)))] [src] pings!</span>")
+			src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src] pings!"))
 
 			var/obj/source_material = pop(stored_materials)
 			var/spawn_type = pop(spawning_types)
@@ -107,7 +107,7 @@
 				icon_state = "borgcharger0(old)"
 
 		else if(prob(5))
-			src.visible_message("<span class='notice'>[icon2html(src, viewers(get_turf(src)))] [src] [pick("clicks","whizzes","whirrs","whooshes","clanks","clongs","clonks","bangs")].</span>")
+			src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src] [pick("clicks","whizzes","whirrs","whooshes","clanks","clongs","clonks","bangs")]."))
 
 	last_process_time = world.time
 
@@ -127,7 +127,7 @@
 	if(!user.unEquip(W, src))
 		return
 	stored_materials.Add(W)
-	src.visible_message("<span class='notice'>\The [user] inserts \the [W] into \the [src].</span>")
+	src.visible_message(SPAN_NOTICE("\The [user] inserts \the [W] into \the [src]."))
 
 /obj/machinery/replicator/OnTopic(user, href_list)
 	if(href_list["activate"])
@@ -135,9 +135,9 @@
 		if(index > 0 && index <= construction.len)
 			if(stored_materials.len > spawning_types.len)
 				if(spawning_types.len)
-					src.visible_message("<span class='notice'>[icon2html(src, viewers(get_turf(src)))] a [pick("light","dial","display","meter","pad")] on [src]'s front [pick("blinks","flashes")] [pick("red","yellow","blue","orange","purple","green","white")].</span>")
+					src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] a [pick("light","dial","display","meter","pad")] on [src]'s front [pick("blinks","flashes")] [pick("red","yellow","blue","orange","purple","green","white")]."))
 				else
-					src.visible_message("<span class='notice'>[icon2html(src, viewers(get_turf(src)))] [src]'s front compartment slides shut.</span>")
+					src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src]'s front compartment slides shut."))
 
 				spawning_types.Add(construction[construction[index]])
 				spawn_progress_time = 0

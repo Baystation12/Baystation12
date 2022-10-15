@@ -71,9 +71,9 @@
 		. += "[T.colour] [T.is_adult ? "adult" : "baby"] slime"
 		. += "Nutrition:\t[T.nutrition]/[T.get_max_nutrition()]"
 		if(T.nutrition < T.get_starve_nutrition())
-			. += "<span class='alert'>Warning:\tthe slime is starving!</span>"
+			. += SPAN_CLASS("alert", "Warning:\tthe slime is starving!")
 		else if (T.nutrition < T.get_hunger_nutrition())
-			. += "<span class='warning'>Warning:\tthe slime is hungry.</span>"
+			. += SPAN_WARNING("Warning:\tthe slime is hungry.")
 		. += "Electric charge strength:\t[T.powerlevel]"
 		. += "Health:\t[round((T.health * 100) / T.maxHealth)]%"
 

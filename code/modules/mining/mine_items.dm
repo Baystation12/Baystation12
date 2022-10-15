@@ -208,12 +208,12 @@
 	var/turf/T = get_turf(src)
 
 	if(istype(T, /turf/space) || istype(T, /turf/simulated/open))
-		to_chat(user, "<span class='warning'>There's no solid surface to plant \the [singular_name] on.</span>")
+		to_chat(user, SPAN_WARNING("There's no solid surface to plant \the [singular_name] on."))
 		return
 
 	for(var/obj/item/stack/flag/F in T)
 		if(F.upright)
-			to_chat(user, "<span class='warning'>\The [F] is already planted here.</span>")
+			to_chat(user, SPAN_WARNING("\The [F] is already planted here."))
 			return
 
 	if(use(1)) // Don't skip use() checks even if you only need one! Stacks with the amount of 0 are possible, e.g. on synthetics!

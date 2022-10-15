@@ -136,7 +136,7 @@
 		var/obj/item/weldingtool/WT = W
 		if(WT.isOn() && WT.get_fuel() > 2 && use(2))
 			WT.remove_fuel(2, user)
-			to_chat(user,"<span class='notice'>You recover some [reinf_material.use_name] from the [src].</span>")
+			to_chat(user,SPAN_NOTICE("You recover some [reinf_material.use_name] from the [src]."))
 			reinf_material.place_sheet(get_turf(user), 1)
 			return
 	return ..()

@@ -199,9 +199,9 @@
 				break
 
 	if(total_transferred)
-		to_chat(user, "<span class='info'>You transfer [total_transferred] units into the suit reservoir.</span>")
+		to_chat(user, SPAN_INFO("You transfer [total_transferred] units into the suit reservoir."))
 	else
-		to_chat(user, "<span class='danger'>None of the reagents seem suitable.</span>")
+		to_chat(user, SPAN_DANGER("None of the reagents seem suitable."))
 	return 1
 
 /obj/item/rig_module/chem_dispenser/engage(atom/target)
@@ -212,7 +212,7 @@
 	var/mob/living/carbon/human/H = holder.wearer
 
 	if(!charge_selected)
-		to_chat(H, "<span class='danger'>You have not selected a chemical type.</span>")
+		to_chat(H, SPAN_DANGER("You have not selected a chemical type."))
 		return 0
 
 	var/datum/rig_charge/charge = charges[charge_selected]
@@ -222,7 +222,7 @@
 
 	var/chems_to_use = 10
 	if(charge.charges <= 0)
-		to_chat(H, "<span class='danger'>Insufficient chems!</span>")
+		to_chat(H, SPAN_DANGER("Insufficient chems!"))
 		return 0
 	else if(charge.charges < chems_to_use)
 		chems_to_use = charge.charges
@@ -237,8 +237,8 @@
 		target_mob = H
 
 	if(target_mob != H)
-		to_chat(H, "<span class='danger'>You inject [target_mob] with [chems_to_use] unit\s of [charge.display_name].</span>")
-	to_chat(target_mob, "<span class='danger'>You feel a rushing in your veins as [chems_to_use] unit\s of [charge.display_name] [chems_to_use == 1 ? "is" : "are"] injected.</span>")
+		to_chat(H, SPAN_DANGER("You inject [target_mob] with [chems_to_use] unit\s of [charge.display_name]."))
+	to_chat(target_mob, SPAN_CLASS("danger", "You feel a rushing in your veins as [chems_to_use] unit\s of [charge.display_name] [chems_to_use == 1 ? "is" : "are"] injected."))
 	target_mob.reagents.add_reagent(charge.product_type, chems_to_use)
 
 	charge.charges -= chems_to_use
@@ -322,17 +322,17 @@
 		if("Enable")
 			active = 1
 			voice_holder.active = 1
-			to_chat(usr, "<span class='info'>You enable the speech synthesiser.</span>")
+			to_chat(usr, SPAN_INFO("You enable the speech synthesiser."))
 		if("Disable")
 			active = 0
 			voice_holder.active = 0
-			to_chat(usr, "<span class='info'>You disable the speech synthesiser.</span>")
+			to_chat(usr, SPAN_INFO("You disable the speech synthesiser."))
 		if("Set Name")
 			var/raw_choice = sanitize(input(usr, "Please enter a new name.")  as text|null, MAX_NAME_LEN)
 			if(!raw_choice)
 				return 0
 			voice_holder.voice = raw_choice
-			to_chat(usr, "<span class='info'>You are now mimicking <B>[voice_holder.voice]</B>.</span>")
+			to_chat(usr, SPAN_INFO("You are now mimicking <B>[voice_holder.voice]</B>."))
 	return 1
 
 /obj/item/rig_module/maneuvering_jets
@@ -458,10 +458,10 @@
 	if(!target)
 		if(device == stamp)
 			device = deniedstamp
-			to_chat(holder.wearer, "<span class='notice'>Switched to denied stamp.</span>")
+			to_chat(holder.wearer, SPAN_NOTICE("Switched to denied stamp."))
 		else if(device == deniedstamp)
 			device = stamp
-			to_chat(holder.wearer, "<span class='notice'>Switched to rubber stamp.</span>")
+			to_chat(holder.wearer, SPAN_NOTICE("Switched to rubber stamp."))
 		return 1
 
 /obj/item/rig_module/device/decompiler

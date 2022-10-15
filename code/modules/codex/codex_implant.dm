@@ -8,4 +8,4 @@
 
 /obj/item/implant/codex/implanted(mob/source)
 	. = ..(source)
-	to_chat(usr, "<span class='notice'>You feel the brief sensation of having an entire encyclopedia at the tip of your tongue as the codex implant meshes with your nervous system.</span>")
+	to_chat(usr, SPAN_NOTICE("You feel the brief sensation of having an entire encyclopedia at the tip of your tongue as the codex implant meshes with your nervous system."))

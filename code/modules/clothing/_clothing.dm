@@ -93,7 +93,7 @@
 
 			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
 				if(!disable_warning)
-					to_chat(H, "<span class='danger'>Your species cannot wear [src].</span>")
+					to_chat(H, SPAN_DANGER("Your species cannot wear [src]."))
 				return 0
 	return 1
 
@@ -309,12 +309,12 @@ BLIND     // can't see anything
 /obj/item/clothing/gloves/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/wirecutters) || istype(W, /obj/item/scalpel))
 		if (clipped)
-			to_chat(user, "<span class='notice'>\The [src] have already been modified!</span>")
+			to_chat(user, SPAN_NOTICE("\The [src] have already been modified!"))
 			update_icon()
 			return
 
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
-		user.visible_message("<span class='warning'>\The [user] modifies \the [src] with \the [W].</span>","<span class='warning'>You modify \the [src] with \the [W].</span>")
+		user.visible_message(SPAN_WARNING("\The [user] modifies \the [src] with \the [W]."),SPAN_WARNING("You modify \the [src] with \the [W]."))
 
 		cut_fingertops() // apply change, so relevant xenos can wear these
 		return
@@ -470,9 +470,9 @@ BLIND     // can't see anything
 	if(!success)
 		return 0
 	else if(success == 2)
-		to_chat(user, "<span class='warning'>You are already wearing a hat.</span>")
+		to_chat(user, SPAN_WARNING("You are already wearing a hat."))
 	else if(success == 1)
-		to_chat(user, "<span class='notice'>You crawl under \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("You crawl under \the [src]."))
 	return 1
 
 /obj/item/clothing/head/on_update_icon(mob/user)
@@ -543,7 +543,7 @@ BLIND     // can't see anything
 
 	if(!user.incapacitated())
 		if(!pull_mask)
-			to_chat(usr, "<span class ='notice'>You cannot pull down your [src.name].</span>")
+			to_chat(usr, SPAN_NOTICE("You cannot pull down your [src.name]."))
 			return
 		else
 			src.hanging = !src.hanging
@@ -971,7 +971,7 @@ BLIND     // can't see anything
 
 	else if (ismob(src.loc))
 		if(sensor_mode == SUIT_SENSOR_OFF)
-			user.visible_message("<span class='warning'>[user] disables [src.loc]'s remote sensing equipment.</span>", "You disable [src.loc]'s remote sensing equipment.")
+			user.visible_message(SPAN_WARNING("[user] disables [src.loc]'s remote sensing equipment."), "You disable [src.loc]'s remote sensing equipment.")
 		else
 			user.visible_message("[user] adjusts the tracking sensor on [src.loc]'s [src.name].", "You adjust [src.loc]'s sensors.")
 	else
@@ -1003,7 +1003,7 @@ BLIND     // can't see anything
 
 	update_rolldown_status()
 	if(rolled_down == -1)
-		to_chat(usr, "<span class='notice'>You cannot roll down [src]!</span>")
+		to_chat(usr, SPAN_NOTICE("You cannot roll down [src]!"))
 	if((rolled_sleeves == 1) && !(rolled_down))
 		rolled_sleeves = 0
 		return
@@ -1026,21 +1026,21 @@ BLIND     // can't see anything
 
 	update_rollsleeves_status()
 	if(rolled_sleeves == -1)
-		to_chat(usr, "<span class='notice'>You cannot roll up your [src]'s sleeves!</span>")
+		to_chat(usr, SPAN_NOTICE("You cannot roll up your [src]'s sleeves!"))
 		return
 	if(rolled_down == 1)
-		to_chat(usr, "<span class='notice'>You must roll up your [src] first!</span>")
+		to_chat(usr, SPAN_NOTICE("You must roll up your [src] first!"))
 		return
 
 	rolled_sleeves = !rolled_sleeves
 	if(rolled_sleeves)
 		body_parts_covered &= ~(ARMS|HANDS)
 		item_state_slots[slot_w_uniform_str] = worn_state + get_gender_suffix("_r_s")
-		to_chat(usr, "<span class='notice'>You roll up your [src]'s sleeves.</span>")
+		to_chat(usr, SPAN_NOTICE("You roll up your [src]'s sleeves."))
 	else
 		body_parts_covered = initial(body_parts_covered)
 		item_state_slots[slot_w_uniform_str] = worn_state + get_gender_suffix()
-		to_chat(usr, "<span class='notice'>You roll down your [src]'s sleeves.</span>")
+		to_chat(usr, SPAN_NOTICE("You roll down your [src]'s sleeves."))
 	update_clothing_icon()
 
 /obj/item/clothing/under/rank/New()

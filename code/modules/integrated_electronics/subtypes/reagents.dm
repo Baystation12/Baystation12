@@ -143,8 +143,8 @@
 		return
 	var/atom/movable/acting_object = get_object()
 	log_admin("[key_name(L)] was successfully injected with " + reagents.get_reagents() + " by \the [acting_object]")
-	L.visible_message("<span class='warning'>\The [acting_object] injects [L] with its needle!</span>", \
-					"<span class='warning'>\The [acting_object] injects you with its needle!</span>")
+	L.visible_message(SPAN_WARNING("\The [acting_object] injects [L] with its needle!"), \
+					SPAN_WARNING("\The [acting_object] injects you with its needle!"))
 	reagents.trans_to_mob(L, transfer_amount, CHEM_BLOOD)
 	activate_pin(2)
 
@@ -156,8 +156,8 @@
 		return
 	var/atom/movable/acting_object = get_object()
 
-	C.visible_message("<span class='warning'>\The [acting_object] draws blood from \the [C]</span>",
-					"<span class='warning'>\The [acting_object] draws blood from you.</span>"
+	C.visible_message(SPAN_WARNING("\The [acting_object] draws blood from \the [C]"),
+					SPAN_WARNING("\The [acting_object] draws blood from you.")
 					)
 	C.take_blood(src, amount)
 	activate_pin(2)
@@ -193,8 +193,8 @@
 				return
 			//Always log attemped injections for admins
 			log_admin("[key_name(L)] is getting injected with " + reagents.get_reagents() + " by \the [acting_object]")
-			L.visible_message("<span class='danger'>\The [acting_object] is trying to inject [L]!</span>", \
-								"<span class='danger'>\The [acting_object] is trying to inject you!</span>")
+			L.visible_message(SPAN_DANGER("\The [acting_object] is trying to inject [L]!"), \
+								SPAN_DANGER("\The [acting_object] is trying to inject you!"))
 			busy = TRUE
 			addtimer(CALLBACK(src, .proc/inject_after, weakref(L)), injection_delay)
 			return
@@ -223,15 +223,15 @@
 			if(istype(C, /mob/living/carbon/slime) || !C.dna || !injection_status)
 				activate_pin(3)
 				return
-			C.visible_message("<span class='danger'>\The [acting_object] is trying to take a blood sample from [C]!</span>", \
-								"<span class='danger'>\The [acting_object] is trying to take a blood sample from you!</span>")
+			C.visible_message(SPAN_DANGER("\The [acting_object] is trying to take a blood sample from [C]!"), \
+								SPAN_DANGER("\The [acting_object] is trying to take a blood sample from you!"))
 			busy = TRUE
 			addtimer(CALLBACK(src, .proc/draw_after, weakref(C), tramount), injection_delay)
 			return
 
 		else
 			if(!AM.reagents.total_volume)
-				acting_object.visible_message("<span class='notice'>\The [acting_object] tries to draw from [AM], but it is empty!</span>")
+				acting_object.visible_message(SPAN_NOTICE("\The [acting_object] tries to draw from [AM], but it is empty!"))
 				activate_pin(3)
 				return
 

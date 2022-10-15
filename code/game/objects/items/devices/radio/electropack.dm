@@ -14,7 +14,7 @@
 
 /obj/item/device/radio/electropack/attack_hand(mob/user as mob)
 	if(src == user.back)
-		to_chat(user, "<span class='notice'>You need help taking this off!</span>")
+		to_chat(user, SPAN_NOTICE("You need help taking this off!"))
 		return
 	..()
 
@@ -22,7 +22,7 @@
 	..()
 	if(istype(W, /obj/item/clothing/head/helmet))
 		if(!b_stat)
-			to_chat(user, "<span class='notice'>[src] is not ready to be attached!</span>")
+			to_chat(user, SPAN_NOTICE("[src] is not ready to be attached!"))
 			return
 		if(!user.unEquip(W) || !user.unEquip(src))
 			return
@@ -91,7 +91,7 @@
 				sleep(50)
 				if(M)
 					M.moved_recently = 0
-		to_chat(M, "<span class='danger'>You feel a sharp shock!</span>")
+		to_chat(M, SPAN_DANGER("You feel a sharp shock!"))
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(3, 1, M)
 		s.start()

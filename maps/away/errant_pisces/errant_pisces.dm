@@ -50,15 +50,15 @@
 	if (istype(W, /obj/item/material)) //sharp objects can cut thorugh
 		var/obj/item/material/SH = W
 		if (!(SH.sharp) || (SH.sharp && SH.force < 10))//is not sharp enough or at all
-			to_chat(user,"<span class='warning'>You can't cut throught \the [src] with \the [W], it's too dull.</span>")
+			to_chat(user,SPAN_WARNING("You can't cut throught \the [src] with \the [W], it's too dull."))
 			return
-		visible_message("<span class='warning'>[user] starts to cut through \the [src] with \the [W]!</span>")
+		visible_message(SPAN_WARNING("[user] starts to cut through \the [src] with \the [W]!"))
 		while (health > 0)
 			if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
-				visible_message("<span class='warning'>[user] stops cutting through \the [src] with \the [W]!</span>")
+				visible_message(SPAN_WARNING("[user] stops cutting through \the [src] with \the [W]!"))
 				return
 			health -= 20 * (1 + (SH.force-10)/10)//the sharper the faster, every point of force above 10 adds 10 % to damage
-		visible_message("<span class='warning'>[user] cuts through \the [src]!</span>")
+		visible_message(SPAN_WARNING("[user] cuts through \the [src]!"))
 		new /obj/item/stack/net(src.loc)
 		qdel(src)
 
@@ -66,10 +66,10 @@
 	. = PROJECTILE_CONTINUE //few cloth ribbons won't stop bullet or energy ray
 	if (P.damage_type != DAMAGE_BURN)//beams, lasers, fire. Bullets won't make a lot of damage to the few hanging belts.
 		return
-	visible_message("<span class='warning'>\The [P] hits \the [src] and tears it!</span>")
+	visible_message(SPAN_WARNING("\The [P] hits \the [src] and tears it!"))
 	health -= P.damage
 	if (health < 0)
-		visible_message("<span class='warning'>\The [src] is torn apart!</span>")
+		visible_message(SPAN_WARNING("\The [src] is torn apart!"))
 		qdel(src)
 
 /obj/structure/net/update_connections()//maybe this should also be called when any of the walls nearby is removed but no idea how I can make it happen
@@ -145,11 +145,11 @@
 /obj/item/stack/net/attack_self(mob/user)//press while holding to lay one. If there's net already, place wall
 	var/turf/T = get_turf(user)
 	if (locate(/obj/structure/net/net_wall) in T)
-		to_chat(user, "<span class='warning'>Net wall is already placed here!</span>")
+		to_chat(user, SPAN_WARNING("Net wall is already placed here!"))
 		return
 	if (locate(/obj/structure/net) in T)//if there's already layed "floor" net
 		if (!attach_wall_check())
-			to_chat(user, "<span class='warning'>You try to place net wall but it falls on the floor. Try to attach it to something vertical and stable.</span>")
+			to_chat(user, SPAN_WARNING("You try to place net wall but it falls on the floor. Try to attach it to something vertical and stable."))
 			return
 		new /obj/structure/net/net_wall(T)
 		//update_adjacent_nets(1)//since net-wall was added we also update adjacent wall-nets

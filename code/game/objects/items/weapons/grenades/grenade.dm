@@ -17,7 +17,7 @@
 
 /obj/item/grenade/proc/clown_check(mob/living/user)
 	if((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, "<span class='warning'>Huh? How does this thing work?</span>")
+		to_chat(user, SPAN_WARNING("Huh? How does this thing work?"))
 		det_time = fail_det_time
 		activate(user)
 		add_fingerprint(user)
@@ -39,7 +39,7 @@
 /obj/item/grenade/attack_self(mob/living/user)
 	if(!active)
 		if(clown_check(user))
-			to_chat(user, "<span class='warning'>You prime \the [name]! [det_time/10] seconds!</span>")
+			to_chat(user, SPAN_WARNING("You prime \the [name]! [det_time/10] seconds!"))
 			activate(user)
 			add_fingerprint(user)
 			if(iscarbon(user))
@@ -68,16 +68,16 @@
 		switch(det_time)
 			if (1)
 				det_time = 10
-				to_chat(user, "<span class='notice'>You set the [name] for 1 second detonation time.</span>")
+				to_chat(user, SPAN_NOTICE("You set the [name] for 1 second detonation time."))
 			if (10)
 				det_time = 30
-				to_chat(user, "<span class='notice'>You set the [name] for 3 second detonation time.</span>")
+				to_chat(user, SPAN_NOTICE("You set the [name] for 3 second detonation time."))
 			if (30)
 				det_time = 50
-				to_chat(user, "<span class='notice'>You set the [name] for 5 second detonation time.</span>")
+				to_chat(user, SPAN_NOTICE("You set the [name] for 5 second detonation time."))
 			if (50)
 				det_time = 1
-				to_chat(user, "<span class='notice'>You set the [name] for instant detonation.</span>")
+				to_chat(user, SPAN_NOTICE("You set the [name] for instant detonation."))
 		add_fingerprint(user)
 	..()
 

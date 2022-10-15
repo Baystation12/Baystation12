@@ -147,7 +147,7 @@
 
 /mob/living/bot/mulebot/emag_act(remaining_charges, user)
 	locked = !locked
-	to_chat(user, "<span class='notice'>You [locked ? "lock" : "unlock"] the mulebot's controls.</span>")
+	to_chat(user, SPAN_NOTICE("You [locked ? "lock" : "unlock"] the mulebot's controls."))
 	flick("mulebot-emagged", src)
 	playsound(loc, 'sound/effects/sparks1.ogg', 100, 0)
 	return 1
@@ -202,14 +202,14 @@
 
 /mob/living/bot/mulebot/Bump(mob/living/carbon/human/M)
 	if(!safety && istype(M))
-		visible_message("<span class='warning'>[src] knocks over [M]!</span>")
+		visible_message(SPAN_WARNING("[src] knocks over [M]!"))
 		M.Stun(8)
 		M.Weaken(5)
 	..()
 
 /mob/living/bot/mulebot/proc/runOver(mob/living/carbon/human/H)
 	if(istype(H)) // No safety checks - WILL run over lying humans. Stop ERPing in the maint!
-		visible_message("<span class='warning'>[src] drives over [H]!</span>")
+		visible_message(SPAN_WARNING("[src] drives over [H]!"))
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 		var/damage = rand(5, 7)
@@ -229,7 +229,7 @@
 /mob/living/bot/mulebot/explode()
 	unload(pick(0, 1, 2, 4, 8))
 
-	visible_message("<span class='danger'>[src] blows apart!</span>")
+	visible_message(SPAN_DANGER("[src] blows apart!"))
 
 	var/turf/Tsec = get_turf(src)
 	new /obj/item/device/assembly/prox_sensor(Tsec)

@@ -24,7 +24,7 @@
 	qdel(src)
 
 /obj/item/grenade/flashbang/proc/bang(turf/T , mob/living/carbon/M)					// Added a new proc called 'bang' that takes a location and a person to be banged.
-	to_chat(M, "<span class='danger'>BANG</span>")// Called during the loop that bangs people in lockers/containers and when banging
+	to_chat(M, SPAN_DANGER("BANG"))// Called during the loop that bangs people in lockers/containers and when banging
 	playsound(src.loc, 'sound/effects/bang.ogg', 50, 1, 30)		// people in normal view.  Could theroetically be called during other explosions.
 																// -- Polymorph
 
@@ -74,10 +74,10 @@
 
 	//This really should be in mob not every check
 	if (M.ear_damage >= 15)
-		to_chat(M, "<span class='danger'>Your ears start to ring badly!</span>")
+		to_chat(M, SPAN_DANGER("Your ears start to ring badly!"))
 	else
 		if (M.ear_damage >= 5)
-			to_chat(M, "<span class='danger'>Your ears start to ring!</span>")
+			to_chat(M, SPAN_DANGER("Your ears start to ring!"))
 
 
 /obj/item/grenade/flashbang/instant/Initialize()

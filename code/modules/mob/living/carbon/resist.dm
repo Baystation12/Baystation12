@@ -6,14 +6,14 @@
 		Weaken(3)
 		spin(32,2)
 		visible_message(
-			"<span class='danger'>[src] rolls on the floor, trying to put themselves out!</span>",
-			"<span class='notice'>You stop, drop, and roll!</span>"
+			SPAN_DANGER("[src] rolls on the floor, trying to put themselves out!"),
+			SPAN_NOTICE("You stop, drop, and roll!")
 			)
 		sleep(30)
 		if(fire_stacks <= 0)
 			visible_message(
-				"<span class='danger'>[src] has successfully extinguished themselves!</span>",
-				"<span class='notice'>You extinguish yourself.</span>"
+				SPAN_DANGER("[src] has successfully extinguished themselves!"),
+				SPAN_NOTICE("You extinguish yourself.")
 				)
 			ExtinguishMob()
 		return TRUE
@@ -49,8 +49,8 @@
 		breakouttime = max(5, breakouttime * psi_mod)
 
 	visible_message(
-		"<span class='danger'>\The [src] attempts to remove \the [HC]!</span>",
-		"<span class='warning'>You attempt to remove \the [HC] (This will take around [breakouttime / (1 SECOND)] second\s and you need to stand still).</span>", range = 2
+		SPAN_DANGER("\The [src] attempts to remove \the [HC]!"),
+		SPAN_WARNING("You attempt to remove \the [HC] (This will take around [breakouttime / (1 SECOND)] second\s and you need to stand still)."), range = 2
 		)
 
 	var/stages = 4
@@ -92,8 +92,8 @@
 
 /mob/living/carbon/proc/break_handcuffs()
 	visible_message(
-		"<span class='danger'>[src] is trying to break \the [handcuffed]!</span>",
-		"<span class='warning'>You attempt to break your [handcuffed.name]. (This will take around 5 seconds and you need to stand still)</span>"
+		SPAN_DANGER("[src] is trying to break \the [handcuffed]!"),
+		SPAN_WARNING("You attempt to break your [handcuffed.name]. (This will take around 5 seconds and you need to stand still)")
 		)
 
 	if(do_after(src, 5 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
@@ -101,8 +101,8 @@
 			return
 
 		visible_message(
-			"<span class='danger'>[src] manages to break \the [handcuffed]!</span>",
-			"<span class='warning'>You successfully break your [handcuffed.name].</span>"
+			SPAN_DANGER("[src] manages to break \the [handcuffed]!"),
+			SPAN_WARNING("You successfully break your [handcuffed.name].")
 			)
 
 		if(MUTATION_HULK in mutations)
@@ -134,8 +134,8 @@
 			unbuckle_time = max(0, unbuckle_time - ((25 SECONDS) * psi.get_rank(PSI_PSYCHOKINESIS)))
 
 		visible_message(
-			"<span class='danger'>[src] attempts to unbuckle themself!</span>",
-			"<span class='warning'>You attempt to unbuckle yourself. (This will take around [unbuckle_time / (1 SECOND)] second\s and you need to stand still)</span>", range = 2
+			SPAN_DANGER("[src] attempts to unbuckle themself!"),
+			SPAN_WARNING("You attempt to unbuckle yourself. (This will take around [unbuckle_time / (1 SECOND)] second\s and you need to stand still)"), range = 2
 			)
 
 	if(unbuckle_time && buckled)

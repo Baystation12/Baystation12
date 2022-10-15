@@ -124,7 +124,7 @@
 
 		switch(src.a_intent)
 			if (I_HELP) // We just poke the other
-				M.visible_message("<span class='notice'>[src] gently pokes [M]!</span>", "<span class='notice'>[src] gently pokes you!</span>")
+				M.visible_message(SPAN_NOTICE("[src] gently pokes [M]!"), SPAN_NOTICE("[src] gently pokes you!"))
 			if (I_DISARM) // We stun the target, with the intention to feed
 				var/stunprob = 1
 
@@ -142,16 +142,16 @@
 					var/shock_damage = max(0, powerlevel-3) * rand(6,10)
 					M.electrocute_act(shock_damage, src, 1.0, ran_zone())
 				else if(prob(40))
-					M.visible_message("<span class='danger'>[src] has pounced at [M]!</span>", "<span class='danger'>[src] has pounced at you!</span>")
+					M.visible_message(SPAN_DANGER("[src] has pounced at [M]!"), SPAN_DANGER("[src] has pounced at you!"))
 					M.Weaken(power)
 				else
-					M.visible_message("<span class='danger'>[src] has tried to pounce at [M]!</span>", "<span class='danger'>[src] has tried to pounce at you!</span>")
+					M.visible_message(SPAN_DANGER("[src] has tried to pounce at [M]!"), SPAN_DANGER("[src] has tried to pounce at you!"))
 				M.updatehealth()
 			if (I_GRAB) // We feed
 				Wrap(M)
 			if (I_HURT) // Attacking
 				if(iscarbon(M) && prob(15))
-					M.visible_message("<span class='danger'>[src] has pounced at [M]!</span>", "<span class='danger'>[src] has pounced at you!</span>")
+					M.visible_message(SPAN_DANGER("[src] has pounced at [M]!"), SPAN_DANGER("[src] has pounced at you!"))
 					M.Weaken(power)
 				else
 					A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomped")

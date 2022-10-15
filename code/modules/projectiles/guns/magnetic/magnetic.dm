@@ -89,43 +89,43 @@
 
 /obj/item/gun/magnetic/proc/show_ammo(mob/user)
 	if(loaded)
-		to_chat(user, "<span class='notice'>It has \a [loaded] loaded.</span>")
+		to_chat(user, SPAN_NOTICE("It has \a [loaded] loaded."))
 
 /obj/item/gun/magnetic/examine(mob/user)
 	. = ..()
 	if(cell)
-		to_chat(user, "<span class='notice'>The installed [cell.name] has a charge level of [round((cell.charge/cell.maxcharge)*100)]%.</span>")
+		to_chat(user, SPAN_NOTICE("The installed [cell.name] has a charge level of [round((cell.charge/cell.maxcharge)*100)]%."))
 	if(capacitor)
-		to_chat(user, "<span class='notice'>The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%.</span>")
+		to_chat(user, SPAN_NOTICE("The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%."))
 	if(!cell || !capacitor)
-		to_chat(user, "<span class='notice'>The capacitor charge indicator is blinking <font color ='[COLOR_RED]'>red</font>. Maybe you should check the cell or capacitor.</span>")
+		to_chat(user, SPAN_NOTICE("The capacitor charge indicator is blinking <font color ='[COLOR_RED]'>red</font>. Maybe you should check the cell or capacitor."))
 	else
 		if(capacitor.charge < power_cost)
-			to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_ORANGE]'>amber</font>.</span>")
+			to_chat(user, SPAN_NOTICE("The capacitor charge indicator is <font color ='[COLOR_ORANGE]'>amber</font>."))
 		else
-			to_chat(user, "<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_GREEN]'>green</font>.</span>")
+			to_chat(user, SPAN_NOTICE("The capacitor charge indicator is <font color ='[COLOR_GREEN]'>green</font>."))
 
 /obj/item/gun/magnetic/attackby(obj/item/thing, mob/user)
 
 	if(removable_components)
 		if(istype(thing, /obj/item/cell))
 			if(cell)
-				to_chat(user, "<span class='warning'>\The [src] already has \a [cell] installed.</span>")
+				to_chat(user, SPAN_WARNING("\The [src] already has \a [cell] installed."))
 				return
 			if(!user.unEquip(thing, src))
 				return
 			cell = thing
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
-			user.visible_message("<span class='notice'>\The [user] slots \the [cell] into \the [src].</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] slots \the [cell] into \the [src]."))
 			update_icon()
 			return
 
 		if(isScrewdriver(thing))
 			if(!capacitor)
-				to_chat(user, "<span class='warning'>\The [src] has no capacitor installed.</span>")
+				to_chat(user, SPAN_WARNING("\The [src] has no capacitor installed."))
 				return
 			user.put_in_hands(capacitor)
-			user.visible_message("<span class='notice'>\The [user] unscrews \the [capacitor] from \the [src].</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] unscrews \the [capacitor] from \the [src]."))
 			playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 			capacitor = null
 			update_icon()
@@ -133,14 +133,14 @@
 
 		if(istype(thing, /obj/item/stock_parts/capacitor))
 			if(capacitor)
-				to_chat(user, "<span class='warning'>\The [src] already has \a [capacitor] installed.</span>")
+				to_chat(user, SPAN_WARNING("\The [src] already has \a [capacitor] installed."))
 				return
 			if(!user.unEquip(thing, src))
 				return
 			capacitor = thing
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
 			power_per_tick = (power_cost*0.15) * capacitor.rating
-			user.visible_message("<span class='notice'>\The [user] slots \the [capacitor] into \the [src].</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] slots \the [capacitor] into \the [src]."))
 			update_icon()
 			return
 
@@ -151,12 +151,12 @@
 		var/obj/item/stack/ammo = thing
 		if(!istype(ammo))
 			if(loaded)
-				to_chat(user, "<span class='warning'>\The [src] already has \a [loaded] loaded.</span>")
+				to_chat(user, SPAN_WARNING("\The [src] already has \a [loaded] loaded."))
 				return
 			var/obj/item/magnetic_ammo/mag = thing
 			if(istype(mag))
 				if(!(load_type == mag.basetype))
-					to_chat(user, "<span class='warning'>\The [src] doesn't seem to accept \a [mag].</span>")
+					to_chat(user, SPAN_WARNING("\The [src] doesn't seem to accept \a [mag]."))
 					return
 				projectile_type = mag.projectile_type
 			if(!user.unEquip(thing, src))
@@ -174,17 +174,17 @@
 				loaded_ammo.amount += ammo_count
 			if(ammo_count <= 0)
 				// This will also display when someone tries to insert a stack of 0, but that shouldn't ever happen anyway.
-				to_chat(user, "<span class='warning'>\The [src] is already fully loaded.</span>")
+				to_chat(user, SPAN_WARNING("\The [src] is already fully loaded."))
 				return
 			ammo.use(ammo_count)
 		else
 			if(loaded)
-				to_chat(user, "<span class='warning'>\The [src] already has \a [loaded] loaded.</span>")
+				to_chat(user, SPAN_WARNING("\The [src] already has \a [loaded] loaded."))
 				return
 			loaded = new load_type(src, 1)
 			ammo.use(1)
 
-		user.visible_message("<span class='notice'>\The [user] loads \the [src] with \the [loaded].</span>")
+		user.visible_message(SPAN_NOTICE("\The [user] loads \the [src] with \the [loaded]."))
 		playsound(loc, 'sound/weapons/flipblade.ogg', 50, 1)
 		update_icon()
 		return
@@ -203,7 +203,7 @@
 
 		if(removing)
 			user.put_in_hands(removing)
-			user.visible_message("<span class='notice'>\The [user] removes \the [removing] from \the [src].</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] removes \the [removing] from \the [src]."))
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
 			update_icon()
 			return
@@ -227,7 +227,7 @@
 
 	if(gun_unreliable && prob(gun_unreliable))
 		spawn(3) // So that it will still fire - considered modifying Fire() to return a value but burst fire makes that annoying.
-			visible_message("<span class='danger'>\The [src] explodes with the force of the shot!</span>")
+			visible_message(SPAN_DANGER("\The [src] explodes with the force of the shot!"))
 			explosion(get_turf(src), -1, 0, 2)
 			qdel(src)
 

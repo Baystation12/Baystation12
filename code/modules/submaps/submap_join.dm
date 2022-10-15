@@ -44,7 +44,7 @@
 		return
 
 	if(!LAZYLEN(job.spawnpoints))
-		to_chat(joining, "<span class='warning'>There are no available spawn points for that job.</span>")
+		to_chat(joining, SPAN_WARNING("There are no available spawn points for that job."))
 
 	var/turf/spawn_turf = get_turf(pick(job.spawnpoints))
 	if(!SSjobs.check_unsafe_spawn(joining, spawn_turf))

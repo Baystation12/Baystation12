@@ -148,18 +148,18 @@
 			var/obj/item/gun/energy/plasmacutter/cutter = A
 			if(!cutter.slice(user))
 				return ..()
-		to_chat(user, "<span class='notice'>You begin to shorten the barrel of \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("You begin to shorten the barrel of \the [src]."))
 		if(loaded.len)
 			for(var/i in 1 to max_shells)
 				Fire(user, user)	//will this work? //it will. we call it twice, for twice the FUN
-			user.visible_message("<span class='danger'>The shotgun goes off!</span>", "<span class='danger'>The shotgun goes off in your face!</span>")
+			user.visible_message(SPAN_DANGER("The shotgun goes off!"), SPAN_DANGER("The shotgun goes off in your face!"))
 			return
 		if(do_after(user, 3 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))	//SHIT IS STEALTHY EYYYYY
 			user.unEquip(src)
 			var/obj/item/gun/projectile/shotgun/doublebarrel/sawn/empty/buddy = new(loc)
 			transfer_fingerprints_to(buddy)
 			qdel(src)
-			to_chat(user, "<span class='warning'>You shorten the barrel of \the [src]!</span>")
+			to_chat(user, SPAN_WARNING("You shorten the barrel of \the [src]!"))
 	else
 		..()
 

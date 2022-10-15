@@ -87,9 +87,9 @@
 /mob/living/carbon/alien/diona/examine(mob/user)
 	. = ..()
 	if(holding_item)
-		to_chat(user, "<span class='notice'>It is holding [icon2html(holding_item, user)] \a [holding_item].</span>")
+		to_chat(user, SPAN_NOTICE("It is holding [icon2html(holding_item, user)] \a [holding_item]."))
 	if(hat)
-		to_chat(user, "<span class='notice'>It is wearing [icon2html(hat, user)] \a [hat].</span>")
+		to_chat(user, SPAN_NOTICE("It is wearing [icon2html(hat, user)] \a [hat]."))
 
 /mob/living/carbon/alien/diona/IsAdvancedToolUser()
 	return FALSE
@@ -148,6 +148,6 @@
 	for(var/obj/item/W in donor)
 		donor.drop_from_inventory(W)
 
-	donor.visible_message("<span class='warning'>\The [donor] quivers slightly, then splits apart with a wet slithering noise.</span>")
+	donor.visible_message(SPAN_WARNING("\The [donor] quivers slightly, then splits apart with a wet slithering noise."))
 	if (!dying)
 		qdel(donor)

@@ -83,7 +83,7 @@
 		owned_field.ChangeFieldStrength(value)
 
 /obj/machinery/power/fusion_core/physical_attack_hand(mob/user)
-	visible_message("<span class='notice'>\The [user] hugs \the [src] to make it feel better!</span>")
+	visible_message(SPAN_NOTICE("\The [user] hugs \the [src] to make it feel better!"))
 	if(owned_field)
 		Shutdown()
 	return TRUE
@@ -91,7 +91,7 @@
 /obj/machinery/power/fusion_core/attackby(obj/item/W, mob/user)
 
 	if(owned_field)
-		to_chat(user,"<span class='warning'>Shut \the [src] off first!</span>")
+		to_chat(user,SPAN_WARNING("Shut \the [src] off first!"))
 		return
 
 	if(isMultitool(W))

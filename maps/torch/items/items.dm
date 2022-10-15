@@ -98,7 +98,7 @@ Unique items
 	if(++selectedColor > 3)
 		selectedColor = 1
 	colour = colors[selectedColor]
-	to_chat(user, "<span class='notice'>Changed color to '[colour].'</span>")
+	to_chat(user, SPAN_NOTICE("Changed color to '[colour].'"))
 
 /******
 Weapons

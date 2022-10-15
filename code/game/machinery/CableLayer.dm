@@ -20,7 +20,7 @@
 
 /obj/machinery/cablelayer/physical_attack_hand(mob/user)
 	if(!cable && !on)
-		to_chat(user, "<span class='warning'>\The [src] doesn't have any cable loaded.</span>")
+		to_chat(user, SPAN_WARNING("\The [src] doesn't have any cable loaded."))
 		return TRUE
 	on = !on
 	user.visible_message("\The [user] [!on?"dea":"a"]ctivates \the [src].", "You switch [src] [on? "on" : "off"]")
@@ -31,7 +31,7 @@
 
 		var/result = load_cable(O)
 		if(!result)
-			to_chat(user, "<span class='warning'>\The [src]'s cable reel is full.</span>")
+			to_chat(user, SPAN_WARNING("\The [src]'s cable reel is full."))
 		else
 			to_chat(user, "You load [result] lengths of cable into [src].")
 		return
@@ -47,7 +47,7 @@
 				var/obj/item/stack/cable_coil/CC = new (get_turf(src))
 				CC.amount = m
 		else
-			to_chat(usr, "<span class='warning'>There's no more cable on the reel.</span>")
+			to_chat(usr, SPAN_WARNING("There's no more cable on the reel."))
 
 /obj/machinery/cablelayer/examine(mob/user)
 	. = ..()

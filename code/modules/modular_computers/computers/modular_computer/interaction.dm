@@ -21,11 +21,11 @@
 	set src in view(1)
 
 	if(usr.incapacitated() || !istype(usr, /mob/living))
-		to_chat(usr, "<span class='warning'>You can't do that.</span>")
+		to_chat(usr, SPAN_WARNING("You can't do that."))
 		return
 
 	if(!Adjacent(usr))
-		to_chat(usr, "<span class='warning'>You can't reach it.</span>")
+		to_chat(usr, SPAN_WARNING("You can't reach it."))
 		return
 
 	if(enabled)
@@ -48,7 +48,7 @@
 		return
 
 	if(!Adjacent(usr))
-		to_chat(usr, "<span class='warning'>You can't reach it.</span>")
+		to_chat(usr, SPAN_WARNING("You can't reach it."))
 		return
 
 	proc_eject_usb(usr)
@@ -64,15 +64,15 @@
 /obj/item/modular_computer/proc/remove_pen(mob/user)
 
 	if(user.incapacitated() || !istype(user, /mob/living))
-		to_chat(user, "<span class='warning'>You can't do that.</span>")
+		to_chat(user, SPAN_WARNING("You can't do that."))
 		return
 
 	if(!Adjacent(user))
-		to_chat(user, "<span class='warning'>You can't reach it.</span>")
+		to_chat(user, SPAN_WARNING("You can't reach it."))
 		return
 
 	if(istype(stored_pen))
-		to_chat(user, "<span class='notice'>You remove [stored_pen] from [src].</span>")
+		to_chat(user, SPAN_NOTICE("You remove [stored_pen] from [src]."))
 		user.put_in_hands(stored_pen) // Silicons will drop it anyway.
 		stored_pen = null
 		update_verbs()
@@ -126,13 +126,13 @@
 
 	if(istype(W, /obj/item/pen) && stores_pen)
 		if(istype(stored_pen))
-			to_chat(user, "<span class='notice'>There is already a pen in [src].</span>")
+			to_chat(user, SPAN_NOTICE("There is already a pen in [src]."))
 			return
 		if(!user.unEquip(W, src))
 			return
 		stored_pen = W
 		update_verbs()
-		to_chat(user, "<span class='notice'>You insert [W] into [src].</span>")
+		to_chat(user, SPAN_NOTICE("You insert [W] into [src]."))
 		return
 	if(istype(W, /obj/item/paper))
 		var/obj/item/paper/paper = W

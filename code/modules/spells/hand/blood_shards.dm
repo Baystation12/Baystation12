@@ -17,7 +17,7 @@
 	var/obj/item/projectile/blood_shard/B = new(get_turf(user))
 	B.firer = user
 	B.launch(A, BP_CHEST)
-	user.visible_message("<span class='danger'>\The [user] shoots out a deep red shard from their hand!</span>")
+	user.visible_message(SPAN_DANGER("\The [user] shoots out a deep red shard from their hand!"))
 	return ..()
 
 /obj/item/projectile/blood_shard
@@ -32,7 +32,7 @@
 		if(istype(target, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = target
 			H.vessel.remove_reagent(/datum/reagent/blood, 30)
-			H.visible_message("<span class='danger'>Tiny red shards burst from \the [H]'s skin!</span>")
+			H.visible_message(SPAN_DANGER("Tiny red shards burst from \the [H]'s skin!"))
 			fragmentate(get_turf(src), 30, 5, list(/obj/item/projectile/bullet/pellet/blood))
 
 /obj/item/projectile/bullet/pellet/blood

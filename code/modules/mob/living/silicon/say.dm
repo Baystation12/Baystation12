@@ -8,7 +8,7 @@
 	..()
 	if(message_mode)
 		if(!is_component_functioning("radio"))
-			to_chat(src, "<span class='warning'>Your radio isn't functional at this time.</span>")
+			to_chat(src, "[SPAN_WARNING("Your radio isn't functional at this time.")]")
 			return 0
 		if(message_mode == "general")
 			message_mode = null
@@ -20,7 +20,7 @@
 		return holopad_talk(message, verb, speaking)
 	else if(message_mode)
 		if (ai_radio.disabledAi || !has_power() || stat)
-			to_chat(src, "<span class='danger'>System Error - Transceiver Disabled.</span>")
+			to_chat(src, "[SPAN_CLASS("danger", "System Error - Transceiver Disabled.")]")
 			return 0
 		if(message_mode == "general")
 			message_mode = null
@@ -76,9 +76,9 @@
 
 		// AI can hear their own message, this formats it for them.
 		if(speaking)
-			to_chat(src, "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [speaking.format_message(message, verb)]</span></i>")
+			to_chat(src, "<i>[SPAN_CLASS("game say", "Holopad transmitted, [SPAN_CLASS("name", real_name)] [speaking.format_message(message, verb)]")]</i>")
 		else
-			to_chat(src, "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [verb], <span class='message'><span class='body'>\"[message]\"</span></span></span></i>")
+			to_chat(src, "<i>[SPAN_CLASS("game say", "Holopad transmitted, [SPAN_CLASS("name", real_name)] [verb], [SPAN_CLASS("message", "[SPAN_CLASS("body", "\"[message]\"")]")]")]</i>")
 
 		//This is so pAI's and people inside lockers/boxes,etc can hear the AI Holopad, the alternative being recursion through contents.
 		//This is much faster.
@@ -127,8 +127,8 @@
 
 	var/obj/machinery/hologram/holopad/T = src.holo
 	if(T && T.masters[src])
-		var/rendered = "<span class='game say'><span class='name'>[name]</span> <span class='message'>[message]</span></span>"
-		to_chat(src, "<i><span class='game say'>Holopad action relayed, <span class='name'>[real_name]</span> <span class='message'>[message]</span></span></i>")
+		var/rendered = "[SPAN_CLASS("game say", "[SPAN_CLASS("name", name)] [SPAN_CLASS("message", message)]")]"
+		to_chat(src, "<i>[SPAN_CLASS("game say", "Holopad action relayed, [SPAN_CLASS("name", real_name)] [SPAN_CLASS("message", message)]")]</i>")
 
 		for(var/mob/M in viewers(T.loc))
 			M.show_message(rendered, 2)

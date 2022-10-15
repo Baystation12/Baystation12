@@ -66,7 +66,7 @@
 	if ( !found )	// User is too far away
 		return
 	// Now make the cardboard
-	to_chat(user, "<span class='notice'>You fold [src] flat.</span>")
+	to_chat(user, SPAN_NOTICE("You fold [src] flat."))
 	if(ispath(foldable, /obj/item/stack))
 		var/stack_amt = max(2**(w_class - 3), 1)
 		new src.foldable(get_turf(src), stack_amt)
@@ -374,7 +374,7 @@
 		W.icon_state = "match_lit"
 		START_PROCESSING(SSobj, W)
 		playsound(src.loc, 'sound/items/match.ogg', 60, 1, -4)
-		user.visible_message("<span class='notice'>[user] strikes the match on the matchbox.</span>")
+		user.visible_message(SPAN_NOTICE("[user] strikes the match on the matchbox."))
 	W.update_icon()
 	return
 

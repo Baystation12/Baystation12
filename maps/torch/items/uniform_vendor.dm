@@ -46,7 +46,7 @@
 				if(piece)
 					var/obj/item/clothing/C = piece
 					if(piece in selected_outfit)
-						dat += "<span class='linkOn'>[sanitize(initial(C.name))]</span><a href='byond://?src=\ref[src];rem=\ref[piece]'>X</a>"
+						dat += "[SPAN_CLASS("linkOn", "[sanitize(initial(C.name))]")]<a href='byond://?src=\ref[src];rem=\ref[piece]'>X</a>"
 					else if (can_issue(C))
 						dat += "<a href='byond://?src=\ref[src];add=\ref[piece]'>[sanitize(initial(C.name))]</a>"
 					else
@@ -101,12 +101,12 @@
 /obj/machinery/uniform_vendor/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/clothingbag))
 		if(W.contents.len)
-			to_chat(user, "<span class='notice'>You must empty \the [W] before you can put it in \the [src].</span>")
+			to_chat(user, SPAN_NOTICE("You must empty \the [W] before you can put it in \the [src]."))
 			return
-		to_chat(user, "<span class='notice'>You put \the [W] into \the [src]'s recycling slot.</span>")
+		to_chat(user, SPAN_NOTICE("You put \the [W] into \the [src]'s recycling slot."))
 		qdel(W)
 	else if(istype(W, /obj/item/card/id) && !ID && user.unEquip(W, src))
-		to_chat(user, "<span class='notice'>You slide \the [W] into \the [src]!</span>")
+		to_chat(user, SPAN_NOTICE("You slide \the [W] into \the [src]!"))
 		ID = W
 		attack_hand(user)
 	else

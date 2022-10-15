@@ -49,7 +49,7 @@
 		user = usr
 
 	if(!CanPhysicallyInteract(user))
-		to_chat(user, "<span class='warning'>You can't reach it.</span>")
+		to_chat(user, SPAN_WARNING("You can't reach it."))
 		return
 
 	var/obj/item/stock_parts/computer/ai_slot/device = src

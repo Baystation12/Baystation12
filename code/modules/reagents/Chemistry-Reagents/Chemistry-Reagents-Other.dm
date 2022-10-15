@@ -167,7 +167,7 @@
 				GLOB.cult.offer_uncult(M)
 			if(prob(2))
 				var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(M.loc)
-				M.visible_message("<span class='warning'>\The [M] coughs up \the [S]!</span>")
+				M.visible_message(SPAN_WARNING("\The [M] coughs up \the [S]!"))
 
 /datum/reagent/water/holywater/touch_turf(turf/T)
 	if(volume >= 5)
@@ -353,7 +353,7 @@
 		var/removed_heat = clamp(volume * COOLANT_LATENT_HEAT, 0, -environment.get_thermal_energy_change(min_temperature))
 		environment.add_thermal_energy(-removed_heat)
 		if (prob(5) && environment && environment.temperature > T100C)
-			T.visible_message("<span class='warning'>The water sizzles as it lands on \the [T]!</span>")
+			T.visible_message(SPAN_WARNING("The water sizzles as it lands on \the [T]!"))
 
 
 /datum/reagent/ultraglue
@@ -453,7 +453,7 @@
 	else
 		M.co2_alert = 0
 	if(warning_message && prob(warning_prob))
-		to_chat(M, "<span class='warning'>You feel [warning_message].</span>")
+		to_chat(M, SPAN_WARNING("You feel [warning_message]."))
 
 /datum/reagent/dye
 	name = "Dye"

@@ -43,9 +43,9 @@
 		if(!ishuman(G.affecting))
 			return
 		G.affecting.apply_damage(5, DAMAGE_BRUTE, BP_HEAD, used_weapon="Metal Plaque")
-		visible_message("<span class='warning'>[G.assailant] smashes [G.assailant] into \the [src] face-first!</span>")
+		visible_message(SPAN_WARNING("[G.assailant] smashes [G.assailant] into \the [src] face-first!"))
 		playsound(get_turf(src), 'sound/weapons/tablehit1.ogg', 50)
-		to_chat(G.affecting, "<span class='danger'>[directives]</span>")
+		to_chat(G.affecting, SPAN_DANGER("[directives]"))
 		admin_attack_log(user, G.affecting, "educated victim on \the [src].", "Was educated on \the [src].", "used \a [src] to educate")
 		G.force_drop()
 	else
@@ -89,7 +89,7 @@
 	if(istype(D, /obj/item/clothing/accessory/badge/solgov/tags))
 		var/obj/item/clothing/accessory/badge/solgov/tags/T = D
 		if(T.owner_branch in list("Expeditionary Corps", "Fleet"))
-			to_chat(user, "<span class='warning'>You add \the [T.owner_name]'s \the [T] to \the [src].</span>")
+			to_chat(user, SPAN_WARNING("You add \the [T.owner_name]'s \the [T] to \the [src]."))
 			fallen += "[T.owner_rank] [T.owner_name] | [T.owner_branch]"
 			qdel(T)
 

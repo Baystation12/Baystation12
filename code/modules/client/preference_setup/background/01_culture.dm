@@ -72,7 +72,7 @@
 				var/sanitized_value = html_encode(replacetext(V, "+", "PLUS"))
 
 				if (pref.cultural_info[token] == V)
-					. += "<span class='linkOn'>[V]</span> "
+					. += "[SPAN_CLASS("linkOn", "[V]")] "
 				else
 					. += "<a href='?src=\ref[src];set_token_entry_[token]=[sanitized_value]'>[V]</a> "
 			. += "</table>"

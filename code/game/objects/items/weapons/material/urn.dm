@@ -13,14 +13,14 @@
 		return ..()
 	else if(proximity)
 		if(contents.len)
-			to_chat(user, "<span class='warning'>\The [src] is already full!</span>")
+			to_chat(user, SPAN_WARNING("\The [src] is already full!"))
 			return
 		user.visible_message("\The [user] scoops \the [A] into \the [src], securing the lid.", "You scoop \the [A] into \the [src], securing the lid.")
 		A.forceMove(src)
 
 /obj/item/material/urn/attack_self(mob/user)
 	if(!contents.len)
-		to_chat(user, "<span class='warning'>\The [src] is empty!</span>")
+		to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 		return
 	else
 		for(var/obj/effect/decal/cleanable/ash/A in contents)

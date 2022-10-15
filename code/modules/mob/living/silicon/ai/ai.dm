@@ -262,7 +262,7 @@ var/global/list/ai_verbs_default = list(
 			var/dead_icon_state = "[Entry[3]]-ai-crash"
 
 			if(!(alive_icon_state in custom_icon_states))
-				to_chat(src, "<span class='warning'>Custom display entry found but the icon state '[alive_icon_state]' is missing!</span>")
+				to_chat(src, SPAN_WARNING("Custom display entry found but the icon state '[alive_icon_state]' is missing!"))
 				continue
 
 			if(!(dead_icon_state in custom_icon_states))
@@ -370,16 +370,16 @@ var/global/list/ai_verbs_default = list(
 	if(check_unable(AI_CHECK_WIRELESS))
 		return
 	if(!is_relay_online())
-		to_chat(usr, "<span class='warning'>No Emergency Bluespace Relay detected. Unable to transmit message.</span>")
+		to_chat(usr, SPAN_WARNING("No Emergency Bluespace Relay detected. Unable to transmit message."))
 		return
 	if(emergency_message_cooldown)
-		to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
+		to_chat(usr, SPAN_WARNING("Arrays recycling. Please stand by."))
 		return
 	var/input = sanitize(input(usr, "Please choose a message to transmit to [GLOB.using_map.boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", ""))
 	if(!input)
 		return
 	Centcomm_announce(input, usr)
-	to_chat(usr, "<span class='notice'>Message transmitted.</span>")
+	to_chat(usr, SPAN_NOTICE("Message transmitted."))
 	log_say("[key_name(usr)] has made an IA [GLOB.using_map.boss_short] announcement: [input]")
 	emergency_message_cooldown = 1
 	spawn(300)
@@ -426,7 +426,7 @@ var/global/list/ai_verbs_default = list(
 				if(H)
 					H.attack_ai(src) //may as well recycle
 				else
-					to_chat(src, "<span class='notice'>Unable to locate the holopad.</span>")
+					to_chat(src, SPAN_NOTICE("Unable to locate the holopad."))
 			return TOPIC_HANDLED
 
 		if (href_list["track"])
@@ -436,7 +436,7 @@ var/global/list/ai_verbs_default = list(
 			if(!istype(H) || (html_decode(href_list["trackname"]) == H.get_visible_name()) || (html_decode(href_list["trackname"]) == H.get_id_name()))
 				ai_actual_track(target)
 			else
-				to_chat(src, "<span class='warning'>System error. Cannot locate [html_decode(href_list["trackname"])].</span>")
+				to_chat(src, SPAN_WARNING("System error. Cannot locate [html_decode(href_list["trackname"])]."))
 			return TOPIC_HANDLED
 
 	return ..()
@@ -510,7 +510,7 @@ var/global/list/ai_verbs_default = list(
 		if(network in C.network)
 			eyeobj.setLoc(get_turf(C))
 			break
-	to_chat(src, "<span class='notice'>Switched to [network] camera network.</span>")
+	to_chat(src, SPAN_NOTICE("Switched to [network] camera network."))
 //End of code by Mord_Sith
 
 /mob/living/silicon/ai/proc/ai_statuschange()
@@ -620,19 +620,19 @@ var/global/list/ai_verbs_default = list(
 
 	else if(isWrench(W))
 		if(anchored)
-			user.visible_message("<span class='notice'>\The [user] starts to unbolt \the [src] from the plating...</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] starts to unbolt \the [src] from the plating..."))
 			if(!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
-				user.visible_message("<span class='notice'>\The [user] decides not to unbolt \the [src].</span>")
+				user.visible_message(SPAN_NOTICE("\The [user] decides not to unbolt \the [src]."))
 				return
-			user.visible_message("<span class='notice'>\The [user] finishes unfastening \the [src]!</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] finishes unfastening \the [src]!"))
 			anchored = FALSE
 			return
 		else
-			user.visible_message("<span class='notice'>\The [user] starts to bolt \the [src] to the plating...</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] starts to bolt \the [src] to the plating..."))
 			if(!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
-				user.visible_message("<span class='notice'>\The [user] decides not to bolt \the [src].</span>")
+				user.visible_message(SPAN_NOTICE("\The [user] decides not to bolt \the [src]."))
 				return
-			user.visible_message("<span class='notice'>\The [user] finishes fastening down \the [src]!</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] finishes fastening down \the [src]!"))
 			anchored = TRUE
 			return
 	else
@@ -662,26 +662,26 @@ var/global/list/ai_verbs_default = list(
 	set desc = "Toggles hologram movement based on moving with your virtual eye."
 
 	hologram_follow = !hologram_follow
-	to_chat(usr, "<span class='info'>Your hologram will now [hologram_follow ? "follow" : "no longer follow"] you.</span>")
+	to_chat(usr, SPAN_INFO("Your hologram will now [hologram_follow ? "follow" : "no longer follow"] you."))
 
 /mob/living/silicon/ai/proc/check_unable(flags = 0, feedback = 1)
 	if(stat == DEAD)
-		if(feedback) to_chat(src, "<span class='warning'>You are dead!</span>")
+		if(feedback) to_chat(src, SPAN_WARNING("You are dead!"))
 		return 1
 
 	if(!has_power())
-		if(feedback) to_chat(src, "<span class='warning'>You lack power!</span>")
+		if(feedback) to_chat(src, SPAN_WARNING("You lack power!"))
 		return 1
 
 	if(self_shutdown)
-		if(feedback) to_chat(src, "<span class='warning'>You are offline!</span>")
+		if(feedback) to_chat(src, SPAN_WARNING("You are offline!"))
 		return 1
 
 	if((flags & AI_CHECK_WIRELESS) && src.control_disabled)
-		if(feedback) to_chat(src, "<span class='warning'>Wireless control is disabled!</span>")
+		if(feedback) to_chat(src, SPAN_WARNING("Wireless control is disabled!"))
 		return 1
 	if((flags & AI_CHECK_RADIO) && src.ai_radio.disabledAi)
-		if(feedback) to_chat(src, "<span class='warning'>System Error - Transceiver Disabled!</span>")
+		if(feedback) to_chat(src, SPAN_WARNING("System Error - Transceiver Disabled!"))
 		return 1
 	return 0
 
@@ -693,7 +693,7 @@ var/global/list/ai_verbs_default = list(
 	set category = "Silicon Commands"
 
 	multitool_mode = !multitool_mode
-	to_chat(src, "<span class='notice'>Multitool mode: [multitool_mode ? "E" : "Dise"]ngaged</span>")
+	to_chat(src, SPAN_NOTICE("Multitool mode: [multitool_mode ? "E" : "Dise"]ngaged"))
 
 /mob/living/silicon/ai/proc/ai_reset_radio_keys()
 	set name = "Reset Radio Encryption Keys"

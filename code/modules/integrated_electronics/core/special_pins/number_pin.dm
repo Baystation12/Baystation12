@@ -5,7 +5,7 @@
 /datum/integrated_io/number/ask_for_pin_data(mob/user)
 	var/new_data = input("Please type in a number.","[src] number writing") as null|num
 	if(isnum(new_data) && holder.check_interactivity(user) )
-		to_chat(user, "<span class='notice'>You input [new_data] into the pin.</span>")
+		to_chat(user, SPAN_NOTICE("You input [new_data] into the pin."))
 		write_data_to_pin(new_data)
 
 /datum/integrated_io/number/write_data_to_pin(new_data)

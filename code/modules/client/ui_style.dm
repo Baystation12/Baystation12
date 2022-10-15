@@ -21,7 +21,7 @@ var/global/all_ui_styles = list(
 	set desc = "Configure your user interface"
 
 	if(!ishuman(usr))
-		to_chat(usr, "<span class='warning'>You must be human to use this verb.</span>")
+		to_chat(usr, SPAN_WARNING("You must be human to use this verb."))
 		return
 
 	var/UI_style_new = input(usr, "Select a style. White is recommended for customization") as null|anything in all_ui_styles

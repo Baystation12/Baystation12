@@ -129,20 +129,20 @@
 // Placeholders for light tiles and rglass.
 /material/proc/reinforce(mob/user, obj/item/stack/material/used_stack, obj/item/stack/material/target_stack)
 	if(!used_stack.can_use(1))
-		to_chat(user, "<span class='warning'>You need need at least one [used_stack.singular_name] to reinforce [target_stack].</span>")
+		to_chat(user, SPAN_WARNING("You need need at least one [used_stack.singular_name] to reinforce [target_stack]."))
 		return
 
 	var/needed_sheets = 2 * used_stack.matter_multiplier
 	if(!target_stack.can_use(needed_sheets))
-		to_chat(user, "<span class='warning'>You need need at least [needed_sheets] [target_stack.plural_name] for reinforcement with [used_stack].</span>")
+		to_chat(user, SPAN_WARNING("You need need at least [needed_sheets] [target_stack.plural_name] for reinforcement with [used_stack]."))
 		return
 
 	var/material/reinf_mat = used_stack.material
 	if(reinf_mat.integrity <= integrity || reinf_mat.is_brittle())
-		to_chat(user, "<span class='warning'>The [reinf_mat.display_name] is too structurally weak to reinforce the [display_name].</span>")
+		to_chat(user, SPAN_WARNING("The [reinf_mat.display_name] is too structurally weak to reinforce the [display_name]."))
 		return
 
-	to_chat(user, "<span class='notice'>You reinforce the [target_stack] with the [reinf_mat.display_name].</span>")
+	to_chat(user, SPAN_NOTICE("You reinforce the [target_stack] with the [reinf_mat.display_name]."))
 	used_stack.use(1)
 	var/target_loc = target_stack.loc
 	var/obj/item/stack/material/S = target_stack.split(needed_sheets)
@@ -153,15 +153,15 @@
 
 /material/proc/build_wired_product(mob/user, obj/item/stack/used_stack, obj/item/stack/target_stack)
 	if(!wire_product)
-		to_chat(user, "<span class='warning'>You cannot make anything out of \the [target_stack]</span>")
+		to_chat(user, SPAN_WARNING("You cannot make anything out of \the [target_stack]"))
 		return
 	if(!used_stack.can_use(5) || !target_stack.can_use(1))
-		to_chat(user, "<span class='warning'>You need five wires and one sheet of [display_name] to make anything useful.</span>")
+		to_chat(user, SPAN_WARNING("You need five wires and one sheet of [display_name] to make anything useful."))
 		return
 
 	used_stack.use(5)
 	target_stack.use(1)
-	to_chat(user, "<span class='notice'>You attach wire to the [name].</span>")
+	to_chat(user, SPAN_NOTICE("You attach wire to the [name]."))
 	var/obj/item/product = new wire_product(get_turf(user))
 	if (user.HasFreeHand())
 		user.put_in_hands(product)

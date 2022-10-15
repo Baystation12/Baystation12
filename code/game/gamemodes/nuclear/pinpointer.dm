@@ -126,7 +126,7 @@
 		new_mode = "Authentication Disk Locator"
 	if(new_mode)
 		playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)
-		visible_message("<span class='notice'>[new_mode] active.</span>")
+		visible_message(SPAN_NOTICE("[new_mode] active."))
 		target = acquire_target()
 	..()
 

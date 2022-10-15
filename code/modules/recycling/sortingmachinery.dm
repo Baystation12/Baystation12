@@ -29,7 +29,7 @@
 		var/obj/item/device/destTagger/O = W
 		if(O.currTag)
 			if(src.sortTag != O.currTag)
-				to_chat(user, "<span class='notice'>You have labeled the destination as [O.currTag].</span>")
+				to_chat(user, SPAN_NOTICE("You have labeled the destination as [O.currTag]."))
 				if(!src.sortTag)
 					src.sortTag = O.currTag
 					update_icon()
@@ -37,19 +37,19 @@
 					src.sortTag = O.currTag
 				playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
 			else
-				to_chat(user, "<span class='warning'>The package is already labeled for [O.currTag].</span>")
+				to_chat(user, SPAN_WARNING("The package is already labeled for [O.currTag]."))
 		else
-			to_chat(user, "<span class='warning'>You need to set a destination first!</span>")
+			to_chat(user, SPAN_WARNING("You need to set a destination first!"))
 
 	else if(istype(W, /obj/item/pen))
 		switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
 			if("Title")
 				var/str = sanitizeSafe(input(usr,"Label text?","Set label",""), MAX_NAME_LEN)
 				if(!str || !length(str))
-					to_chat(usr, "<span class='warning'> Invalid text.</span>")
+					to_chat(usr, SPAN_WARNING(" Invalid text."))
 					return
 				user.visible_message("\The [user] titles \the [src] with \a [W], marking down: \"[str]\"",\
-				"<span class='notice'>You title \the [src]: \"[str]\"</span>",\
+				SPAN_NOTICE("You title \the [src]: \"[str]\""),\
 				"You hear someone scribbling a note.")
 				SetName("[name] ([str])")
 				if(!examtext && !nameset)
@@ -60,7 +60,7 @@
 			if("Description")
 				var/str = sanitize(input(usr,"Label text?","Set label",""))
 				if(!str || !length(str))
-					to_chat(usr, "<span class='warning'>Invalid text.</span>")
+					to_chat(usr, SPAN_WARNING("Invalid text."))
 					return
 				if(!examtext && !nameset)
 					examtext = str
@@ -68,7 +68,7 @@
 				else
 					examtext = str
 				user.visible_message("\The [user] labels \the [src] with \a [W], scribbling down: \"[examtext]\"",\
-				"<span class='notice'>You label \the [src]: \"[examtext]\"</span>",\
+				SPAN_NOTICE("You label \the [src]: \"[examtext]\""),\
 				"You hear someone scribbling a note.")
 	return
 
@@ -105,9 +105,9 @@
 	. = ..()
 	if(distance <= 4)
 		if(sortTag)
-			to_chat(user, "<span class='notice'>It is labeled \"[sortTag]\"</span>")
+			to_chat(user, SPAN_NOTICE("It is labeled \"[sortTag]\""))
 		if(examtext)
-			to_chat(user, "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>")
+			to_chat(user, SPAN_NOTICE("It has a note attached which reads, \"[examtext]\""))
 
 /obj/structure/bigDelivery/Destroy()
 	if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
@@ -154,7 +154,7 @@
 		var/obj/item/device/destTagger/O = W
 		if(O.currTag)
 			if(src.sortTag != O.currTag)
-				to_chat(user, "<span class='notice'>You have labeled the destination as [O.currTag].</span>")
+				to_chat(user, SPAN_NOTICE("You have labeled the destination as [O.currTag]."))
 				if(!src.sortTag)
 					src.sortTag = O.currTag
 					update_icon()
@@ -162,19 +162,19 @@
 					src.sortTag = O.currTag
 				playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
 			else
-				to_chat(user, "<span class='warning'>The package is already labeled for [O.currTag].</span>")
+				to_chat(user, SPAN_WARNING("The package is already labeled for [O.currTag]."))
 		else
-			to_chat(user, "<span class='warning'>You need to set a destination first!</span>")
+			to_chat(user, SPAN_WARNING("You need to set a destination first!"))
 
 	else if(istype(W, /obj/item/pen))
 		switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
 			if("Title")
 				var/str = sanitizeSafe(input(usr,"Label text?","Set label",""), MAX_NAME_LEN)
 				if(!str || !length(str))
-					to_chat(usr, "<span class='warning'> Invalid text.</span>")
+					to_chat(usr, SPAN_WARNING(" Invalid text."))
 					return
 				user.visible_message("\The [user] titles \the [src] with \a [W], marking down: \"[str]\"",\
-				"<span class='notice'>You title \the [src]: \"[str]\"</span>",\
+				SPAN_NOTICE("You title \the [src]: \"[str]\""),\
 				"You hear someone scribbling a note.")
 				SetName("[name] ([str])")
 				if(!examtext && !nameset)
@@ -186,7 +186,7 @@
 			if("Description")
 				var/str = sanitize(input(usr,"Label text?","Set label",""))
 				if(!str || !length(str))
-					to_chat(usr, "<span class='warning'>Invalid text.</span>")
+					to_chat(usr, SPAN_WARNING("Invalid text."))
 					return
 				if(!examtext && !nameset)
 					examtext = str
@@ -194,7 +194,7 @@
 				else
 					examtext = str
 				user.visible_message("\The [user] labels \the [src] with \a [W], scribbling down: \"[examtext]\"",\
-				"<span class='notice'>You label \the [src]: \"[examtext]\"</span>",\
+				SPAN_NOTICE("You label \the [src]: \"[examtext]\""),\
 				"You hear someone scribbling a note.")
 	return
 
@@ -227,9 +227,9 @@
 	. = ..()
 	if(distance <= 4)
 		if(sortTag)
-			to_chat(user, "<span class='notice'>It is labeled \"[sortTag]\"</span>")
+			to_chat(user, SPAN_NOTICE("It is labeled \"[sortTag]\""))
 		if(examtext)
-			to_chat(user, "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>")
+			to_chat(user, SPAN_NOTICE("It has a note attached which reads, \"[examtext]\""))
 
 /obj/item/stack/package_wrap
 	name = "package wrapper"
@@ -297,11 +297,11 @@
 			src.add_fingerprint(usr)
 			src.use(1)
 			user.visible_message("\The [user] wraps \a [target] with \a [src].",\
-			"<span class='notice'>You wrap \the [target], leaving [src.get_amount()] units of paper on \the [src].</span>",\
+			SPAN_NOTICE("You wrap \the [target], leaving [src.get_amount()] units of paper on \the [src]."),\
 			"You hear someone taping paper around a small object.")
 		else
 			// Should be possible only to see this as a borg?
-			to_chat(user, "<span class='warning'>The synthesizer is out of paper.</span>")
+			to_chat(user, SPAN_WARNING("The synthesizer is out of paper."))
 	else if (istype(target, /obj/structure/closet/crate))
 		var/obj/structure/closet/crate/O = target
 		if (src.get_amount() >= 3 && !O.opened)
@@ -311,10 +311,10 @@
 			O.forceMove(P)
 			src.use(3)
 			user.visible_message("\The [user] wraps \a [target] with \a [src].",\
-			"<span class='notice'>You wrap \the [target], leaving [src.get_amount()] units of paper on \the [src].</span>",\
+			SPAN_NOTICE("You wrap \the [target], leaving [src.get_amount()] units of paper on \the [src]."),\
 			"You hear someone taping paper around a large object.")
 		else if(src.get_amount() < 3)
-			to_chat(user, "<span class='warning'>You need more paper.</span>")
+			to_chat(user, SPAN_WARNING("You need more paper."))
 	else if (istype (target, /obj/structure/closet))
 		var/obj/structure/closet/O = target
 		if (src.get_amount() >= 3 && !O.opened)
@@ -324,12 +324,12 @@
 			O.forceMove(P)
 			src.use(3)
 			user.visible_message("\The [user] wraps \a [target] with \a [src].",\
-			"<span class='notice'>You wrap \the [target], leaving [src.get_amount()] units of paper on \the [src].</span>",\
+			SPAN_NOTICE("You wrap \the [target], leaving [src.get_amount()] units of paper on \the [src]."),\
 			"You hear someone taping paper around a large object.")
 		else if(src.get_amount() < 3)
-			to_chat(user, "<span class='warning'>You need more paper.</span>")
+			to_chat(user, SPAN_WARNING("You need more paper."))
 	else
-		to_chat(user, "<span class='notice'>The object you are trying to wrap is unsuitable for the sorting machinery!</span>")
+		to_chat(user, SPAN_NOTICE("The object you are trying to wrap is unsuitable for the sorting machinery!"))
 
 	return
 
@@ -366,7 +366,7 @@
 /obj/item/device/destTagger/OnTopic(user, href_list, state)
 	if(href_list["nextTag"] && (href_list["nextTag"] in GLOB.tagger_locations))
 		src.currTag = href_list["nextTag"]
-		to_chat(user, "<span class='notice'>You set [src] to <b>[src.currTag]</b>.</span>")
+		to_chat(user, SPAN_NOTICE("You set [src] to <b>[src.currTag]</b>."))
 		playsound(src.loc, 'sound/machines/chime.ogg', 50, 1)
 		. = TOPIC_REFRESH
 	if(href_list["nextTag"] == "CUSTOM")
@@ -374,11 +374,11 @@
 		if(CanUseTopic(user, state))
 			if(dest && lowertext(dest) != "none")
 				src.currTag = dest
-				to_chat(user, "<span class='notice'>You designate a custom location on [src], set to <b>[src.currTag]</b>.</span>")
+				to_chat(user, SPAN_NOTICE("You designate a custom location on [src], set to <b>[src.currTag]</b>."))
 				playsound(src.loc, 'sound/machines/chime.ogg', 50, 1)
 			else
 				src.currTag = 0
-				to_chat(user, "<span class='notice'>You clear [src]'s custom location.</span>")
+				to_chat(user, SPAN_NOTICE("You clear [src]'s custom location."))
 				playsound(src.loc, 'sound/machines/chime.ogg', 50, 1)
 			. = TOPIC_REFRESH
 		else

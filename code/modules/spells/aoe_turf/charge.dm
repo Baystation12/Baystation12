@@ -30,9 +30,9 @@
 		for(var/spell/S in M.mind.learned_spells)
 			if(!istype(S, /spell/aoe_turf/charge))
 				S.charge_counter = S.charge_max
-		to_chat(M, "<span class='notice'>You feel raw magic flowing through you, it feels good!</span>")
+		to_chat(M, SPAN_NOTICE("You feel raw magic flowing through you, it feels good!"))
 	else
-		to_chat(M, "<span class='notice'>You feel very strange for a moment, but then it passes.</span>")
+		to_chat(M, SPAN_NOTICE("You feel very strange for a moment, but then it passes."))
 	return M
 
 /spell/aoe_turf/charge/proc/cast_charge(atom/target)
@@ -59,7 +59,7 @@
 	if(!charged_item)
 		return 0
 	else
-		charged_item.visible_message("<span class='notice'>[charged_item] suddenly sparks with energy!</span>")
+		charged_item.visible_message(SPAN_NOTICE("[charged_item] suddenly sparks with energy!"))
 		return 1
 
 

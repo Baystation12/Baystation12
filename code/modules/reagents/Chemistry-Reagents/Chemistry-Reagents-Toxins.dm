@@ -461,7 +461,7 @@
 		if(locate(/obj/effect/overlay/wallrot) in W)
 			for(var/obj/effect/overlay/wallrot/E in W)
 				qdel(E)
-			W.visible_message("<span class='notice'>The fungi are completely dissolved by the solution!</span>")
+			W.visible_message(SPAN_NOTICE("The fungi are completely dissolved by the solution!"))
 
 /datum/reagent/toxin/plantbgone/touch_obj(obj/O, volume)
 	if(istype(O, /obj/effect/vine))
@@ -584,7 +584,7 @@
 	if (IS_METABOLICALLY_INERT(M))
 		return
 	if(prob(10))
-		to_chat(M, "<span class='danger'>Your insides are burning!</span>")
+		to_chat(M, SPAN_DANGER("Your insides are burning!"))
 		M.adjustToxLoss(rand(100, 300) * removed)
 	else if(prob(40))
 		M.heal_organ_damage(25 * removed, 0)
@@ -1021,13 +1021,13 @@
 			meatchunks += E
 	if(!meatchunks.len)
 		if(prob(10))
-			to_chat(H, "<span class='danger'>Your flesh rapidly mutates!</span>")
+			to_chat(H, SPAN_DANGER("Your flesh rapidly mutates!"))
 			H.set_species(SPECIES_PROMETHEAN)
 			H.shapeshifter_set_colour("#05ff9b")
 			H.verbs -= /mob/living/carbon/human/proc/shapeshifter_select_colour
 		return
 	var/obj/item/organ/external/O = pick(meatchunks)
-	to_chat(H, "<span class='danger'>Your [O.name]'s flesh mutates rapidly!</span>")
+	to_chat(H, SPAN_DANGER("Your [O.name]'s flesh mutates rapidly!"))
 	if(!wrapped_species_by_ref["\ref[H]"])
 		wrapped_species_by_ref["\ref[H]"] = H.species.name
 	meatchunks = list(O) | O.children
@@ -1044,7 +1044,7 @@
 		E.update_icon(1)
 	O.max_damage = 15
 	if(prob(10))
-		to_chat(H, "<span class='danger'>Your slimy [O.name] plops off!</span>")
+		to_chat(H, SPAN_DANGER("Your slimy [O.name] plops off!"))
 		O.droplimb()
 	H.update_body()
 
@@ -1058,7 +1058,7 @@
 /datum/reagent/aslimetoxin/affect_blood(mob/living/carbon/M, removed) // TODO: check if there's similar code anywhere else
 	if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(M))
 		return
-	to_chat(M, "<span class='danger'>Your flesh rapidly mutates!</span>")
+	to_chat(M, SPAN_DANGER("Your flesh rapidly mutates!"))
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(M)
 	M.icon = null
 	M.overlays.Cut()
@@ -1111,7 +1111,7 @@
 	if (!(M.species.appearance_flags & SPECIES_APPEARANCE_HAS_STATIC_HAIR))
 		return
 	M.species.set_default_hair(M)
-	to_chat(M, "<span class='warning'>You feel a chill and your skin feels lighter..</span>")
+	to_chat(M, SPAN_WARNING("You feel a chill and your skin feels lighter.."))
 	remove_self(volume)
 
 /datum/reagent/toxin/bromide
@@ -1156,7 +1156,7 @@
 				for(var/obj/effect/spider/spider in E.implants)
 					if(prob(25))
 						E.implants -= spider
-						M.visible_message("<span class='notice'>The dying form of \a [spider] emerges from inside \the [M]'s [E.name].</span>")
+						M.visible_message(SPAN_NOTICE("The dying form of \a [spider] emerges from inside \the [M]'s [E.name]."))
 						qdel(spider)
 						break
 

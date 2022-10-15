@@ -175,7 +175,7 @@
 		scarring = 1 - 0.3 * scarring ** 2 // Between ~15 and 30 percent loss
 		var/new_max_dam = Floor(scarring * max_damage)
 		if(new_max_dam < max_damage)
-			to_chat(user, "<span class='warning'>Not every part of [src] could be saved, some dead tissue had to be removed, making it more suspectable to damage in the future.</span>")
+			to_chat(user, SPAN_WARNING("Not every part of [src] could be saved, some dead tissue had to be removed, making it more suspectable to damage in the future."))
 			set_max_damage(new_max_dam)
 	heal_damage(damage)
 

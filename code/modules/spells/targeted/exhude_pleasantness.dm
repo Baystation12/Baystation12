@@ -14,6 +14,6 @@
 	for(var/m in targets)
 		var/mob/living/L = m
 		if(L.mind && L.mind.special_role == ANTAG_SERVANT)
-			to_chat(m, "<span class='notice'>\The [user] seems relatively harmless.</span>")
+			to_chat(m, SPAN_NOTICE("\The [user] seems relatively harmless."))
 		else
-			to_chat(m, "<font size='3'><span class='notice'>\The [user] [pick(possible_messages)]</span></font>")
+			to_chat(m, "<font size='3'>[SPAN_NOTICE("\The [user] [pick(possible_messages)]")]</font>")

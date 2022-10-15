@@ -136,7 +136,7 @@
 			overlays.Cut()
 			if(chained)
 				overlays = list("chain_s1")
-			visible_message("<span class='notice'>The singularity has shrunk to a rather pitiful size.</span>")
+			visible_message(SPAN_NOTICE("The singularity has shrunk to a rather pitiful size."))
 		if (STAGE_TWO) //1 to 3 does not check for the turfs if you put the gens right next to a 1x1 then its going to eat them.
 			SetName("gravitational singularity")
 			desc = "A gravitational singularity."
@@ -154,9 +154,9 @@
 			if(chained)
 				overlays = list("chain_s3")
 			if(growing)
-				visible_message("<span class='notice'>The singularity noticeably grows in size.</span>")
+				visible_message(SPAN_NOTICE("The singularity noticeably grows in size."))
 			else
-				visible_message("<span class='notice'>The singularity has shrunk to a less powerful size.</span>")
+				visible_message(SPAN_NOTICE("The singularity has shrunk to a less powerful size."))
 		if (STAGE_THREE)
 			if ((check_turfs_in(1, 2)) && (check_turfs_in(2, 2)) && (check_turfs_in(4, 2)) && (check_turfs_in(8, 2)))
 				SetName("gravitational singularity")
@@ -175,9 +175,9 @@
 				if(chained)
 					overlays = list("chain_s5")
 				if(growing)
-					visible_message("<span class='notice'>The singularity expands to a reasonable size.</span>")
+					visible_message(SPAN_NOTICE("The singularity expands to a reasonable size."))
 				else
-					visible_message("<span class='notice'>The singularity has returned to a safe size.</span>")
+					visible_message(SPAN_NOTICE("The singularity has returned to a safe size."))
 		if(STAGE_FOUR)
 			if ((check_turfs_in(1, 3)) && (check_turfs_in(2, 3)) && (check_turfs_in(4, 3)) && (check_turfs_in(8, 3)))
 				SetName("gravitational singularity")
@@ -196,9 +196,9 @@
 				if(chained)
 					overlays = list("chain_s7")
 				if(growing)
-					visible_message("<span class='warning'>The singularity expands to a dangerous size.</span>")
+					visible_message(SPAN_WARNING("The singularity expands to a dangerous size."))
 				else
-					visible_message("<span class='notice'>Miraculously, the singularity reduces in size, and can be contained.</span>")
+					visible_message(SPAN_NOTICE("Miraculously, the singularity reduces in size, and can be contained."))
 		if(STAGE_FIVE) //This one also lacks a check for gens because it eats everything.
 			SetName("gravitational singularity")
 			desc = "A gravitational singularity."
@@ -214,9 +214,9 @@
 			if(chained)
 				overlays = list("chain_s9")
 			if(growing)
-				visible_message("<span class='danger'><font size='2'>The singularity has grown out of control!</font></span>")
+				visible_message(SPAN_DANGER("<font size='2'>The singularity has grown out of control!</font>"))
 			else
-				visible_message("<span class='warning'>The singularity miraculously reduces in size and loses its supermatter properties.</span>")
+				visible_message(SPAN_WARNING("The singularity miraculously reduces in size and loses its supermatter properties."))
 		if(STAGE_SUPER)//SUPERSINGULO
 			SetName("super gravitational singularity")
 			desc = "A gravitational singularity with the properties of supermatter. <b>It has the power to destroy worlds.</b>"
@@ -231,7 +231,7 @@
 			event_chance = 25 //Events will fire off more often.
 			if(chained)
 				overlays = list("chain_s9")
-			visible_message("<span class='sinister'><font size='3'>You witness the creation of a destructive force that cannot possibly be stopped by human hands.</font></span>")
+			visible_message(SPAN_CLASS("sinister", "<font size='3'>You witness the creation of a destructive force that cannot possibly be stopped by human hands.</font>"))
 
 	if (current_size == allowed_size)
 		investigate_log("<font color='red'>grew to size [current_size].</font>", I_SINGULO)
@@ -424,14 +424,13 @@
 			if (istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
 				if(istype(H.glasses,/obj/item/clothing/glasses/meson) && current_size != 11)
-					to_chat(H, "<span class=\"notice\">You look directly into The [src.name], good thing you had your protective eyewear on!</span>")
+					to_chat(H, SPAN_NOTICE("You look directly into \the [src], good thing you had your protective eyewear on!"))
 					return
 				else
-					to_chat(H, "<span class=\"warning\">You look directly into The [src.name], but your eyewear does absolutely nothing to protect you from it!</span>")
-		to_chat(M, "<span class='danger'>You look directly into The [src.name] and feel [current_size == 11 ? "helpless" : "weak"].</span>")
+					to_chat(H, SPAN_WARNING("You look directly into \the [src], but your eyewear does absolutely nothing to protect you from it!"))
+		to_chat(M, SPAN_DANGER("You look directly into \the [src] and feel [current_size == 11 ? "helpless" : "weak"]."))
 		M.apply_effect(3, EFFECT_STUN)
-		for(var/mob/O in viewers(M, null))
-			O.show_message(text("<span class='danger'>[] stares blankly at The []!</span>", M, src), 1)
+		M.visible_message(SPAN_DANGER("\The [M] stares blankly at \the [src]!"))
 
 /obj/singularity/proc/emp_area()
 	if(current_size != 11)
@@ -442,11 +441,11 @@
 /obj/singularity/proc/smwave()
 	for(var/mob/living/M in view(10, src.loc))
 		if(prob(67))
-			to_chat(M, "<span class=\"warning\">You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
-			to_chat(M, "<span class=\"notice\">Miraculously, it fails to kill you.</span>")
+			to_chat(M, SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat."))
+			to_chat(M, SPAN_NOTICE("Miraculously, it fails to kill you."))
 		else
-			to_chat(M, "<span class=\"danger\">You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
-			to_chat(M, "<span class=\"danger\">You don't even have a moment to react as you are reduced to ashes by the intense radiation.</span>")
+			to_chat(M, SPAN_DANGER("You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat."))
+			to_chat(M, SPAN_DANGER("You don't even have a moment to react as you are reduced to ashes by the intense radiation."))
 			M.dust()
 	SSradiation.radiate(src, rand(energy))
 	return

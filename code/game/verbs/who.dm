@@ -23,11 +23,11 @@
 					if(isghost(C.mob))
 						var/mob/observer/ghost/O = C.mob
 						if(O.started_as_observer)
-							entry += " - <span class=\"who_observing\">Observing</span>"
+							entry += " - [SPAN_CLASS("who_observing", "Observing")]"
 						else
-							entry += " - <span class=\"who_dead\"><b>DEAD</b></span>"
+							entry += " - [SPAN_CLASS("who_dead", "<b>DEAD</b>")]"
 					else
-						entry += " - <span class=\"who_dead\"><b>DEAD</b></span>"
+						entry += " - [SPAN_CLASS("who_dead", "<b>DEAD</b>")]"
 
 			var/age
 			if(isnum(C.player_age))
@@ -36,14 +36,14 @@
 				age = 0
 
 			if(age <= 1)
-				age = "<span class=\"who_new_account\"><b>[age]</b></span>"
+				age = SPAN_CLASS("who_new_account", "<b>[age]</b>")
 			else if(age < 10)
-				age = "<span class=\"who_newish_account\"><b>[age]</b></span>"
+				age = SPAN_CLASS("who_newish_account", "<b>[age]</b>")
 
 			entry += " - [age]"
 
 			if(is_special_character(C.mob))
-				entry += " - <b><span class=\"who_antagonist\">[C.mob.mind.special_role]</span></b>"
+				entry += " - <b>[SPAN_CLASS("who_antagonist", C.mob.mind.special_role)]</b>"
 			if(C.is_afk())
 				entry += " (AFK - [C.inactivity2text()])"
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
@@ -105,6 +105,6 @@
 			msg += line
 
 	if(config.admin_irc)
-		to_chat(src, "<span class='info'>Adminhelps are also sent to IRC. If no admins are available in game try anyway and an admin on IRC may see it and respond.</span>")
+		to_chat(src, SPAN_INFO("Adminhelps are also sent to IRC. If no admins are available in game try anyway and an admin on IRC may see it and respond."))
 	to_chat(src, "<b>Current Staff ([active_staff]/[total_staff]):</b>")
 	to_chat(src, jointext(msg,"\n"))

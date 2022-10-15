@@ -141,7 +141,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	if(prob(20))
 		var/turf/T = get_turf_or_move(loc)
 		for (var/mob/M in viewers(T))
-			M.show_message("<span class='warning'>A shower of sparks spray from [src]'s inner workings.</span>", 3, "<span class='warning'>You hear and smell the ozone hiss of electrical sparks being expelled violently.</span>", 2)
+			M.show_message(SPAN_WARNING("A shower of sparks spray from [src]'s inner workings."), 3, SPAN_WARNING("You hear and smell the ozone hiss of electrical sparks being expelled violently."), 2)
 		return death(0)
 
 	switch(pick(1,2,3))
@@ -194,7 +194,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 				if(card in affecting.implants)
 					affecting.take_external_damage(rand(30,50))
 					affecting.implants -= card
-					H.visible_message("<span class='danger'>\The [src] explodes out of \the [H]'s [affecting.name] in a shower of gore!</span>")
+					H.visible_message(SPAN_DANGER("\The [src] explodes out of \the [H]'s [affecting.name] in a shower of gore!"))
 					break
 		holder.drop_from_inventory(card)
 
@@ -266,7 +266,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	if(card && user.a_intent == I_HELP)
 		var/list/new_access = card.GetAccess()
 		idcard.access = new_access
-		visible_message("<span class='notice'>[user] slides [W] across [src].</span>")
+		visible_message(SPAN_NOTICE("[user] slides [W] across [src]."))
 		to_chat(src, SPAN_NOTICE("Your access has been updated!"))
 		return FALSE // don't continue processing click callstack.
 	if(W.force)

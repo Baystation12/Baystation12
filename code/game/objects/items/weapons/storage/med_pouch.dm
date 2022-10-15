@@ -61,7 +61,7 @@ Single Use Emergency Pouches
 
 /obj/item/storage/med_pouch/open(mob/user)
 	if(!opened)
-		user.visible_message("<span class='notice'>\The [user] tears open [src], breaking the vacuum seal!</span>", "<span class='notice'>You tear open [src], breaking the vacuum seal!</span>")
+		user.visible_message(SPAN_NOTICE("\The [user] tears open [src], breaking the vacuum seal!"), SPAN_NOTICE("You tear open [src], breaking the vacuum seal!"))
 	. = ..()
 
 /obj/item/storage/med_pouch/trauma

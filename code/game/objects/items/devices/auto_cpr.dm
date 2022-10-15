@@ -61,7 +61,7 @@
 		if(!skilled_setup && prob(20))
 			var/obj/item/organ/external/E = H.get_organ(BP_CHEST)
 			E.add_pain(15)
-			to_chat(H, "<span class='danger'>Your [E] is compressed painfully!</span>")
+			to_chat(H, SPAN_DANGER("Your [E] is compressed painfully!"))
 			if(prob(5))
 				E.fracture()
 		else

@@ -54,7 +54,7 @@
 		. += "<tr><td>[prefix_instance.name]</td><td>[pref.prefix_keys_by_type[prefix_instance.type]]</td><td>"
 
 		if(prefix_instance.is_locked)
-			. += "<span class='linkOff'>Change</span>"
+			. += SPAN_CLASS("linkOff", "Change")
 		else
 
 			. += "<a href='?src=\ref[src];change_prefix=\ref[prefix_instance]'>Change</a>"
@@ -62,7 +62,7 @@
 		. += "</td><td>"
 
 		if(prefix_instance.is_locked || current_prefix == prefix_instance.default_key)
-			. += "<span class='linkOff'>Reset</span>"
+			. += SPAN_CLASS("linkOff", "Reset")
 		else
 			. += "<a href='?src=\ref[src];reset_prefix=\ref[prefix_instance]'>Reset</a>"
 		. += "</td></tr>"

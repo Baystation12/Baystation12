@@ -117,7 +117,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	if(check_interactivity(M))
 		if(!input)
 			input = name
-		to_chat(M, "<span class='notice'>The circuit '[name]' is now labeled '[input]'.</span>")
+		to_chat(M, SPAN_NOTICE("The circuit '[name]' is now labeled '[input]'."))
 		displayed_name = input
 
 /obj/item/integrated_circuit/nano_host()
@@ -257,7 +257,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 				pin.handle_wire(linked, held_item, href_list["act"], usr)
 				. = IC_TOPIC_REFRESH
 			else
-				to_chat(usr, "<span class='warning'>You can't do a whole lot without the proper tools.</span>")
+				to_chat(usr, SPAN_WARNING("You can't do a whole lot without the proper tools."))
 				success = FALSE
 			if(success && assembly)
 				assembly.add_allowed_scanner(usr.ckey)
@@ -269,9 +269,9 @@ a creative player the means to solve many problems.  Circuits are held inside an
 				D.afterattack(src, usr, TRUE)
 				. = IC_TOPIC_REFRESH
 			else
-				to_chat(usr, "<span class='warning'>The debugger's 'ref scanner' needs to be on.</span>")
+				to_chat(usr, SPAN_WARNING("The debugger's 'ref scanner' needs to be on."))
 		else
-			to_chat(usr, "<span class='warning'>You need a debugger set to 'ref' mode to do that.</span>")
+			to_chat(usr, SPAN_WARNING("You need a debugger set to 'ref' mode to do that."))
 
 	else if(href_list["refresh"])
 		internal_examine(usr)
@@ -289,9 +289,9 @@ a creative player the means to solve many problems.  Circuits are held inside an
 			disconnect_all()
 			dropInto(loc)
 			playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
-			to_chat(usr, "<span class='notice'>You pop \the [src] out of the case, and slide it out.</span>")
+			to_chat(usr, SPAN_NOTICE("You pop \the [src] out of the case, and slide it out."))
 		else
-			to_chat(usr, "<span class='warning'>You need a screwdriver to remove components.</span>")
+			to_chat(usr, SPAN_WARNING("You need a screwdriver to remove components."))
 		interact_with_assembly(usr)
 		. = IC_TOPIC_REFRESH
 

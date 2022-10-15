@@ -53,11 +53,11 @@
 				return
 			oxytanks.Add(I)
 			oxygentanks++
-			to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
+			to_chat(user, SPAN_NOTICE("You put [I] in [src]."))
 			if(oxygentanks < 5)
 				update_icon()
 		else
-			to_chat(user, "<span class='notice'>[src] is full.</span>")
+			to_chat(user, SPAN_NOTICE("[src] is full."))
 		updateUsrDialog()
 		return
 	if(istype(I, /obj/item/tank/phoron))
@@ -66,19 +66,19 @@
 				return
 			platanks.Add(I)
 			phorontanks++
-			to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
+			to_chat(user, SPAN_NOTICE("You put [I] in [src]."))
 			if(oxygentanks < 6)
 				update_icon()
 		else
-			to_chat(user, "<span class='notice'>[src] is full.</span>")
+			to_chat(user, SPAN_NOTICE("[src] is full."))
 		updateUsrDialog()
 		return
 	if(isWrench(I))
 		if(anchored)
-			to_chat(user, "<span class='notice'>You lean down and unwrench [src].</span>")
+			to_chat(user, SPAN_NOTICE("You lean down and unwrench [src]."))
 			anchored = FALSE
 		else
-			to_chat(user, "<span class='notice'>You wrench [src] into place.</span>")
+			to_chat(user, SPAN_NOTICE("You wrench [src] into place."))
 			anchored = TRUE
 		return
 
@@ -96,7 +96,7 @@
 				else
 					O = new /obj/item/tank/oxygen(loc)
 				O.dropInto(loc)
-				to_chat(usr, "<span class='notice'>You take [O] out of [src].</span>")
+				to_chat(usr, SPAN_NOTICE("You take [O] out of [src]."))
 				oxygentanks--
 				update_icon()
 		if(href_list["phoron"])
@@ -108,7 +108,7 @@
 				else
 					P = new /obj/item/tank/phoron(loc)
 				P.dropInto(loc)
-				to_chat(usr, "<span class='notice'>You take [P] out of [src].</span>")
+				to_chat(usr, SPAN_NOTICE("You take [P] out of [src]."))
 				phorontanks--
 				update_icon()
 		add_fingerprint(usr)

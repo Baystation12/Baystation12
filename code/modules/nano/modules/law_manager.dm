@@ -134,15 +134,15 @@
 		return 1
 
 	if(href_list["notify_laws"])
-		to_chat(owner, "<span class='danger'>Law Notice</span>")
+		to_chat(owner, SPAN_DANGER("Law Notice"))
 		owner.laws.show_laws(owner)
 		if(isAI(owner))
 			var/mob/living/silicon/ai/AI = owner
 			for(var/mob/living/silicon/robot/R in AI.connected_robots)
-				to_chat(R, "<span class='danger'>Law Notice</span>")
+				to_chat(R, SPAN_DANGER("Law Notice"))
 				R.laws.show_laws(R)
 		if(usr != owner)
-			to_chat(usr, "<span class='notice'>Laws displayed.</span>")
+			to_chat(usr, SPAN_NOTICE("Laws displayed."))
 		return 1
 
 	return 0

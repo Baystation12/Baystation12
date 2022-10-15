@@ -57,11 +57,11 @@
 		return
 
 	if(owner.psi.suppressed && owner.psi.stun)
-		to_chat(owner, "<span class='warning'>You are dazed and reeling, and cannot muster enough focus to do that!</span>")
+		to_chat(owner, SPAN_WARNING("You are dazed and reeling, and cannot muster enough focus to do that!"))
 		return
 
 	owner.psi.suppressed = !owner.psi.suppressed
-	to_chat(owner, "<span class='notice'>You are <b>[owner.psi.suppressed ? "now suppressing" : "no longer suppressing"]</b> your psi-power.</span>")
+	to_chat(owner, SPAN_NOTICE("You are <b>[owner.psi.suppressed ? "now suppressing" : "no longer suppressing"]</b> your psi-power."))
 	if(owner.psi.suppressed)
 		owner.psi.cancel()
 		owner.psi.hide_auras()

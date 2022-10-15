@@ -109,7 +109,7 @@
 	var/material = "unknown"
 
 /obj/item/device/depth_scanner/proc/scan_atom(mob/user, atom/A)
-	user.visible_message("<span class='notice'>\The [user] scans \the [A], the air around them humming gently.</span>")
+	user.visible_message(SPAN_NOTICE("\The [user] scans \the [A], the air around them humming gently."))
 
 	if(istype(A, /turf/simulated/mineral))
 		var/turf/simulated/mineral/M = A
@@ -131,7 +131,7 @@
 
 			positive_locations.Add(D)
 
-			to_chat(user, "<span class='notice'>[icon2html(src, user)] [src] pings.</span>")
+			to_chat(user, SPAN_NOTICE("[icon2html(src, user)] [src] pings."))
 			playsound(loc, 'sound/machines/twobeep.ogg', 40)
 
 	else if(istype(A, /obj/structure/boulder))
@@ -150,7 +150,7 @@
 
 			positive_locations.Add(D)
 
-			to_chat(user, "<span class='notice'>[icon2html(src, user)] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>")
+			to_chat(user, SPAN_NOTICE("[icon2html(src, user)] [src] pings [pick("madly","wildly","excitedly","crazily")]!"))
 			playsound(loc, 'sound/machines/triple_beep.ogg', 40)
 
 	updateSelfDialog()

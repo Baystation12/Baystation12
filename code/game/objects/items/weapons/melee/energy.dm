@@ -41,7 +41,7 @@
 	update_icon()
 	if(user)
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] is now energised."))
 	set_light(0.8, 1, 2, 4, lighting_color)
 
 /obj/item/melee/energy/proc/deactivate(mob/living/user)
@@ -57,14 +57,14 @@
 	update_icon()
 	if(user)
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>\The [src] deactivates!</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] deactivates!"))
 	set_light(0)
 
 /obj/item/melee/energy/attack_self(mob/living/user as mob)
 	if(active)
 		if((MUTATION_CLUMSY in user.mutations) && prob(50))
-			user.visible_message("<span class='danger'>\The [user] accidentally cuts \himself with \the [src].</span>",\
-			"<span class='danger'>You accidentally cut yourself with \the [src].</span>")
+			user.visible_message(SPAN_DANGER("\The [user] accidentally cuts \himself with \the [src]."),\
+			SPAN_DANGER("You accidentally cut yourself with \the [src]."))
 			user.take_organ_damage(5,5)
 		deactivate(user)
 	else
@@ -111,7 +111,7 @@
 
 /obj/item/melee/energy/axe/deactivate(mob/living/user)
 	. = ..()
-	to_chat(user, "<span class='notice'>\The [src] is de-energised. It's just a regular axe now.</span>")
+	to_chat(user, SPAN_NOTICE("\The [src] is de-energised. It's just a regular axe now."))
 
 /*
  * Energy Sword

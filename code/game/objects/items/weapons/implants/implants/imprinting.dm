@@ -57,9 +57,9 @@
 /obj/item/implant/imprinting/proc/get_instructions()
 	. = list()
 	if(brainwashing)
-		. += "<span class='danger'>The fog in your head clears, and you remember some important things. You hold following things as deep convictions, almost like synthetics' laws:</span><br>"
+		. += "[SPAN_DANGER("The fog in your head clears, and you remember some important things. You hold following things as deep convictions, almost like synthetics' laws:")]<br>"
 	else
-		. += "<span class='notice'>You hear an annoying voice in the back of your head. The things it keeps reminding you of:</span><br>"
+		. += "[SPAN_NOTICE("You hear an annoying voice in the back of your head. The things it keeps reminding you of:")]<br>"
 	for(var/thing in instructions)
 		. += "- [thing]<br>"
 	. = JOINTEXT(.)
@@ -67,7 +67,7 @@
 /obj/item/implant/imprinting/disable(time)
 	. = ..()
 	if(. && brainwashing)//add deactivate and reactivate messages?
-		to_chat(imp_in,"<span class='warning'>A wave of nausea comes over you.</span><br><span class='good'>You are no longer so sure of those beliefs you've had...</span>")
+		to_chat(imp_in, "[SPAN_WARNING("A wave of nausea comes over you.")]<br>[SPAN_CLASS("good", "You are no longer so sure of those beliefs you've had...")]")
 
 /obj/item/implant/imprinting/restore()
 	. = ..()
@@ -79,20 +79,20 @@
 	if(malfunction || !implanted || imp_in) return
 	var/instruction = pick(instructions)
 	if(brainwashing)
-		instruction = "<span class='warning'>You recall one of your beliefs: \"[instruction]\"</span>"
+		instruction = SPAN_WARNING("You recall one of your beliefs: \"[instruction]\"")
 	else
-		instruction = "<span class='notice'>You remember suddenly: \"[instruction]\"</span>"
+		instruction = SPAN_NOTICE("You remember suddenly: \"[instruction]\"")
 	to_chat(imp_in, instruction)
 	addtimer(CALLBACK(src,.proc/activate),3000,(TIMER_UNIQUE|TIMER_OVERRIDE))
 
 /obj/item/implant/imprinting/removed()
 	if(brainwashing && !malfunction)
-		to_chat(imp_in,"<span class='warning'>A wave of nausea comes over you.</span><br><span class='good'>You are no longer so sure of those beliefs you've had...</span>")
+		to_chat(imp_in, "[SPAN_WARNING("A wave of nausea comes over you.")]<br>[SPAN_CLASS("good", "You are no longer so sure of those beliefs you've had...")]")
 	..()
 
 /obj/item/implant/imprinting/meltdown()
 	if(brainwashing && !malfunction)//if it's already broken don't send the message again
-		to_chat(imp_in,"<span class='warning'>A wave of nausea comes over you.</span><br><span class='good'> You are no longer so sure of those beliefs you've had...</span>")
+		to_chat(imp_in, "[SPAN_WARNING("A wave of nausea comes over you.")]<br>[SPAN_CLASS("good", "You are no longer so sure of those beliefs you've had...")]")
 	. = ..()
 
 /obj/item/implant/imprinting/can_implant(mob/M, mob/user, target_zone)
@@ -100,10 +100,10 @@
 	if(istype(H))
 		var/obj/item/organ/internal/B = H.internal_organs_by_name[BP_BRAIN]
 		if(!B || H.isSynthetic())
-			to_chat(user, "<span class='warning'>\The [M] cannot be imprinted.</span>")
+			to_chat(user, SPAN_WARNING("\The [M] cannot be imprinted."))
 			return FALSE
 		if(!(B.parent_organ == check_zone(target_zone)))
-			to_chat(user, "<span class='warning'>\The [src] must be implanted in [H.get_organ(B.parent_organ)].</span>")
+			to_chat(user, SPAN_WARNING("\The [src] must be implanted in [H.get_organ(B.parent_organ)]."))
 			return FALSE
 	return TRUE
 

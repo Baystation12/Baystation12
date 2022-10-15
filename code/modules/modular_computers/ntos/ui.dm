@@ -96,7 +96,7 @@
 
 		kill_program(P)
 		update_uis()
-		to_chat(usr, "<span class='notice'>Program [P.filename].[P.filetype] with PID [rand(100,999)] has been killed.</span>")
+		to_chat(usr, SPAN_NOTICE("Program [P.filename].[P.filetype] with PID [rand(100,999)] has been killed."))
 		return TOPIC_HANDLED
 
 	if( href_list["PC_runprogram"] )

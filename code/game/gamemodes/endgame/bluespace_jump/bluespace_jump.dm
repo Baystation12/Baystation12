@@ -43,7 +43,7 @@
 /datum/universal_state/bluespace_jump/OnTouchMapEdge(atom/A)
 	if((A.z in affected_levels) && (A in bluespaced))
 		if(ismob(A))
-			to_chat(A,"<span class='warning'>You drift away into the shifting expanse, never to be seen again.</span>")
+			to_chat(A,SPAN_WARNING("You drift away into the shifting expanse, never to be seen again."))
 		qdel(A) //lost in bluespace
 		return FALSE
 	return TRUE
@@ -51,14 +51,14 @@
 /datum/universal_state/bluespace_jump/proc/apply_bluespaced(mob/living/M)
 	bluespaced += M
 	if(M.client)
-		to_chat(M,"<span class='notice'>You feel oddly light, and somewhat disoriented as everything around you shimmers and warps ever so slightly.</span>")
+		to_chat(M,SPAN_NOTICE("You feel oddly light, and somewhat disoriented as everything around you shimmers and warps ever so slightly."))
 		M.overlay_fullscreen("bluespace", /obj/screen/fullscreen/bluespace_overlay)
 	M.confused = 20
 	bluegoasts += new/obj/effect/bluegoast/(get_turf(M),M)
 
 /datum/universal_state/bluespace_jump/proc/clear_bluespaced(mob/living/M)
 	if(M.client)
-		to_chat(M,"<span class='notice'>You feel rooted in material world again.</span>")
+		to_chat(M,SPAN_NOTICE("You feel rooted in material world again."))
 		M.clear_fullscreen("bluespace")
 	M.confused = 0
 	for(var/mob/goast in GLOB.ghost_mobs)
@@ -105,12 +105,12 @@
 	if(nloc == new_loc)
 		reality++
 		if(reality > 5)
-			to_chat(daddy, "<span class='notice'>Yep, it's certainly the other one. Your existance was a glitch, and it's finally being mended...</span>")
+			to_chat(daddy, SPAN_NOTICE("Yep, it's certainly the other one. Your existance was a glitch, and it's finally being mended..."))
 			blueswitch()
 		else if(reality > 3)
-			to_chat(daddy, "<span class='danger'>Something is definitely wrong. Why do you think YOU are the original?</span>")
+			to_chat(daddy, SPAN_DANGER("Something is definitely wrong. Why do you think YOU are the original?"))
 		else
-			to_chat(daddy, "<span class='warning'>You feel a bit less real. Which one of you two was original again?..</span>")
+			to_chat(daddy, SPAN_WARNING("You feel a bit less real. Which one of you two was original again?.."))
 
 /obj/effect/bluegoast/proc/mirror_dir(atom/movable/am, old_dir, new_dir)
 	set_dir(GLOB.reverse_dir[new_dir])

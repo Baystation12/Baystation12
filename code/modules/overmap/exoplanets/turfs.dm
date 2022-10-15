@@ -28,13 +28,13 @@
 
 /turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)
 	if(diggable && istype(C,/obj/item/shovel))
-		visible_message("<span class='notice'>\The [user] starts digging \the [src]</span>")
+		visible_message(SPAN_NOTICE("\The [user] starts digging \the [src]"))
 		if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
-			to_chat(user,"<span class='notice'>You dig a deep pit.</span>")
+			to_chat(user,SPAN_NOTICE("You dig a deep pit."))
 			new /obj/structure/pit(src)
 			diggable = 0
 		else
-			to_chat(user,"<span class='notice'>You stop shoveling.</span>")
+			to_chat(user,SPAN_NOTICE("You stop shoveling."))
 	else if(istype(C, /obj/item/stack/tile))
 		var/obj/item/stack/tile/T = C
 		if(T.use(1))
@@ -98,7 +98,7 @@
 	var/obj/item/reagent_containers/RG = O
 	if (reagent_type && istype(RG) && RG.is_open_container() && RG.reagents)
 		RG.reagents.add_reagent(reagent_type, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
-		user.visible_message("<span class='notice'>[user] fills \the [RG] from \the [src].</span>","<span class='notice'>You fill \the [RG] from \the [src].</span>")
+		user.visible_message(SPAN_NOTICE("[user] fills \the [RG] from \the [src]."),SPAN_NOTICE("You fill \the [RG] from \the [src]."))
 	else
 		return ..()
 

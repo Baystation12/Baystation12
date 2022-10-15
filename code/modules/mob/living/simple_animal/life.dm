@@ -39,7 +39,7 @@
 		else if(prob(50))
 			escape(src, buckled)
 		else if(prob(50))
-			visible_message("<span class='warning'>\The [src] struggles against \the [buckled]!</span>")
+			visible_message(SPAN_WARNING("\The [src] struggles against \the [buckled]!"))
 
 	return 1
 
@@ -84,7 +84,7 @@
 
 /mob/living/simple_animal/proc/escape(mob/living/M, obj/O)
 	O.unbuckle_mob(M)
-	visible_message("<span class='danger'>\The [M] escapes from \the [O]!</span>")
+	visible_message(SPAN_DANGER("\The [M] escapes from \the [O]!"))
 
 /mob/living/simple_animal/proc/handle_supernatural()
 	if(purge)

@@ -356,7 +356,7 @@
 			to_chat(user, "The headset can't hold another key!")
 			return
 		if(user.unEquip(W, target = src))
-			to_chat(user, "<span class='notice'>You put \the [W] into \the [src].</span>")
+			to_chat(user, SPAN_NOTICE("You put \the [W] into \the [src]."))
 			encryption_keys += W
 			recalculateChannels(1)
 

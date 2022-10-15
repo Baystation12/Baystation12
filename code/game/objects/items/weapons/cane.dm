@@ -22,7 +22,7 @@
 
 /obj/item/cane/concealed/attack_self(mob/user)
 	if(concealed_blade)
-		user.visible_message("<span class='warning'>[user] has unsheathed \a [concealed_blade] from [src]!</span>", "You unsheathe \the [concealed_blade] from [src].")
+		user.visible_message(SPAN_WARNING("[user] has unsheathed \a [concealed_blade] from [src]!"), "You unsheathe \the [concealed_blade] from [src].")
 		// Calling drop/put in hands to properly call item drop/pickup procs
 		playsound(user.loc, 'sound/weapons/flipblade.ogg', 50, 1)
 		user.drop_from_inventory(src)
@@ -37,7 +37,7 @@
 
 /obj/item/cane/concealed/attackby(obj/item/material/knife/folding/W, mob/user)
 	if(!src.concealed_blade && istype(W) && user.unEquip(W, src))
-		user.visible_message("<span class='warning'>[user] has sheathed \a [W] into [src]!</span>", "You sheathe \the [W] into [src].")
+		user.visible_message(SPAN_WARNING("[user] has sheathed \a [W] into [src]!"), "You sheathe \the [W] into [src].")
 		src.concealed_blade = W
 		update_icon()
 		user.update_inv_l_hand()

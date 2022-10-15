@@ -27,7 +27,7 @@
 /obj/item/plastique/attackby(obj/item/I, mob/user)
 	if(isScrewdriver(I))
 		open_panel = !open_panel
-		to_chat(user, "<span class='notice'>You [open_panel ? "open" : "close"] the wire panel.</span>")
+		to_chat(user, SPAN_NOTICE("You [open_panel ? "open" : "close"] the wire panel."))
 	else if(isWirecutter(I) || isMultitool(I) || istype(I, /obj/item/device/assembly/signaler ))
 		wires.Interact(user)
 	else
@@ -56,7 +56,7 @@
 
 		if (ismob(target))
 			admin_attack_log(user, target, "Planted \a [src] with a [timer] second fuse.", "Had \a [src] with a [timer] second fuse planted on them.", "planted \a [src] with a [timer] second fuse on")
-			user.visible_message("<span class='danger'>[user.name] finished planting an explosive on [target.name]!</span>")
+			user.visible_message(SPAN_DANGER("[user.name] finished planting an explosive on [target.name]!"))
 			log_game("[key_name(user)] planted [src.name] on [key_name(target)] with [timer] second fuse")
 
 		else

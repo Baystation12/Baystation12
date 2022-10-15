@@ -57,7 +57,7 @@
 	if (old_value == new_value)
 		return
 	A.vars[var_to_edit] = new_value
-	to_chat(user, "<span class='notice'>Changed the value of [var_to_edit] from '[old_value]' to '[new_value]'.</span>")
+	to_chat(user, SPAN_NOTICE("Changed the value of [var_to_edit] from '[old_value]' to '[new_value]'."))
 	Log("[log_info_line(A)] - [var_to_edit] - [old_value] -> [new_value]")
 
 

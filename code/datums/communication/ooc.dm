@@ -14,7 +14,7 @@
 
 	if(!C.holder)
 		if(!config.dooc_allowed && (C.mob.stat == DEAD))
-			to_chat(C, "<span class='danger'>[name] for dead mobs has been turned off.</span>")
+			to_chat(C, SPAN_DANGER("[name] for dead mobs has been turned off."))
 			return FALSE
 
 /decl/communication_channel/ooc/do_communicate(client/C, message)
@@ -37,8 +37,8 @@
 	for(var/client/target in GLOB.clients)
 		if(target.is_key_ignored(C.key)) // If we're ignored by this person, then do nothing.
 			continue
-		var/sent_message = "[create_text_tag("ooc", "OOC:", target)] <EM>[C.key]:</EM> <span class='message linkify'>[message]</span>"
+		var/sent_message = "[create_text_tag("ooc", "OOC:", target)] <EM>[C.key]:</EM> [SPAN_CLASS("message linkify", "[message]")]"
 		if(can_badmin)
-			receive_communication(C, target, "<font color='[ooc_color]'><span class='ooc'>[sent_message]</font></span>")
+			receive_communication(C, target, "<font color='[ooc_color]'>[SPAN_CLASS("ooc", "[sent_message]</font>")]")
 		else
-			receive_communication(C, target, "<span class='ooc'><span class='[ooc_style]'>[sent_message]</span></span>")
+			receive_communication(C, target, SPAN_CLASS("ooc", SPAN_CLASS("[ooc_style]", "[sent_message]")))

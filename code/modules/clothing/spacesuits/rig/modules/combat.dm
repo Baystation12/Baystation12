@@ -56,7 +56,7 @@
 		return 0
 
 	if(!holder.cell.check_charge(use_power_cost * CELLRATE))
-		to_chat(holder.wearer,"<span class='warning'>Not enough stored power.</span>")
+		to_chat(holder.wearer,SPAN_WARNING("Not enough stored power."))
 		return 0
 
 	if(!target)
@@ -117,10 +117,10 @@
 		return 0
 
 	if(accepted_item.charges >= 5)
-		to_chat(user, "<span class='danger'>Another grenade of that type will not fit into the module.</span>")
+		to_chat(user, SPAN_DANGER("Another grenade of that type will not fit into the module."))
 		return 0
 
-	to_chat(user, "<span class='info'><b>You slot \the [input_device] into the suit module.</b></span>")
+	to_chat(user, SPAN_INFO("<b>You slot \the [input_device] into the suit module.</b>"))
 	qdel(input_device)
 	accepted_item.charges++
 	return 1
@@ -136,7 +136,7 @@
 	var/mob/living/carbon/human/H = holder.wearer
 
 	if(!charge_selected)
-		to_chat(H, "<span class='danger'>You have not selected a grenade type.</span>")
+		to_chat(H, SPAN_DANGER("You have not selected a grenade type."))
 		return 0
 
 	var/datum/rig_charge/charge = charges[charge_selected]
@@ -145,12 +145,12 @@
 		return 0
 
 	if(charge.charges <= 0)
-		to_chat(H, "<span class='danger'>Insufficient grenades!</span>")
+		to_chat(H, SPAN_DANGER("Insufficient grenades!"))
 		return 0
 
 	charge.charges--
 	var/obj/item/grenade/new_grenade = new charge.product_type(get_turf(H))
-	H.visible_message("<span class='danger'>[H] launches \a [new_grenade]!</span>")
+	H.visible_message(SPAN_DANGER("[H] launches \a [new_grenade]!"))
 	log_and_message_admins("fired a grenade ([new_grenade.name]) from a rigsuit grenade launcher.")
 	new_grenade.activate(H)
 	new_grenade.throw_at(target,fire_force,fire_distance)
@@ -332,7 +332,7 @@
 	var/mob/living/M = holder.wearer
 
 	if (!M.HasFreeHand())
-		to_chat(M, "<span class='danger'>Your hands are full.</span>")
+		to_chat(M, SPAN_DANGER("Your hands are full."))
 		deactivate()
 		return
 
@@ -383,15 +383,15 @@
 	if(target)
 		var/obj/item/firing = new fabrication_type()
 		firing.dropInto(loc)
-		H.visible_message("<span class='danger'>[H] launches \a [firing]!</span>")
+		H.visible_message(SPAN_DANGER("[H] launches \a [firing]!"))
 		firing.throw_at(target,fire_force,fire_distance)
 	else
 		if (!H.HasFreeHand())
-			to_chat(H, "<span class='danger'>Your hands are full.</span>")
+			to_chat(H, SPAN_DANGER("Your hands are full."))
 		else
 			var/obj/item/new_weapon = new fabrication_type()
 			new_weapon.forceMove(H)
-			to_chat(H, "<span class='info'><b>You quickly fabricate \a [new_weapon].</b></span>")
+			to_chat(H, SPAN_INFO("<b>You quickly fabricate \a [new_weapon].</b>"))
 			H.put_in_hands(new_weapon)
 
 	return 1

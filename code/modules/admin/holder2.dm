@@ -134,14 +134,14 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 	set name = "Stealth Mode"
 
 	if(!holder)
-		to_chat(src, "<span class='warning'>Error: You are not an admin.</span>")
+		to_chat(src, SPAN_WARNING("Error: You are not an admin."))
 		return
 
 	holder.stealthy_ = holder.stealthy_ == STEALTH_OFF ? STEALTH_MANUAL : STEALTH_OFF
 	if(holder.stealthy_)
-		to_chat(src, "<span class='notice'>You are now stealthed.</span>")
+		to_chat(src, SPAN_NOTICE("You are now stealthed."))
 	else
-		to_chat(src, "<span class='notice'>You are no longer stealthed.</span>")
+		to_chat(src, SPAN_NOTICE("You are no longer stealthed."))
 	log_and_message_admins("has turned stealth mode [holder.stealthy_ ? "ON" : "OFF"]")
 
 #undef STEALTH_OFF

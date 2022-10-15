@@ -76,14 +76,14 @@
 			to_chat(user, "[icon2html(A, user)] \A [A] is attached to it.")
 	switch(ironed_state)
 		if(WRINKLES_WRINKLY)
-			to_chat(user, "<span class='bad'>It's wrinkly.</span>")
+			to_chat(user, SPAN_BAD("It's wrinkly."))
 		if(WRINKLES_NONE)
-			to_chat(user, "<span class='notice'>It's completely wrinkle-free!</span>")
+			to_chat(user, SPAN_NOTICE("It's completely wrinkle-free!"))
 	switch(smell_state)
 		if(SMELL_CLEAN)
-			to_chat(user, "<span class='notice'>It smells clean!</span>")
+			to_chat(user, SPAN_NOTICE("It smells clean!"))
 		if(SMELL_STINKY)
-			to_chat(user, "<span class='bad'>It's quite stinky!</span>")
+			to_chat(user, SPAN_BAD("It's quite stinky!"))
 
 
 /obj/item/clothing/proc/update_accessory_slowdown()

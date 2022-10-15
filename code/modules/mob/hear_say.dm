@@ -47,7 +47,7 @@
 			if (speaker == src)
 				to_chat(src, SPAN_WARNING("You cannot hear yourself speak!"))
 			else if (!is_blind())
-				to_chat(src, {"<span class="name">[display_name]</span>[alt_name] says something you cannot hear."})
+				to_chat(src, {"[SPAN_CLASS("name", display_name)][alt_name] says something you cannot hear."})
 			return
 		speech_sound = null
 
@@ -90,7 +90,7 @@
 
 	var/display_verb = verb
 	if (!language)
-		display_message = {"[display_verb], <span class="message"><span class="body">"[display_message]"</span></span>"}
+		display_message = {"[display_verb], [SPAN_CLASS("message", "[SPAN_CLASS("body", display_message)]")]"}
 	else
 		var/hint_preference = get_preference_value(/datum/client_preference/language_display)
 		if (is_ghost)
@@ -108,7 +108,7 @@
 				display_verb = "[verb] ([language.shorthand])"
 		display_message = language.format_message(display_message, display_verb)
 
-	on_hear_say({"<span class="game say">[display_controls]<span class="name">[display_name]</span>[alt_name] [display_message]</span>"})
+	on_hear_say({"[SPAN_CLASS("game say", "[display_controls][SPAN_CLASS("name", display_name)][alt_name] [display_message]")]"})
 
 
 /mob/proc/on_hear_say(message)
@@ -241,7 +241,7 @@
 						nverb = verb
 		formatted = language.format_message_radio(message, nverb)
 	else
-		formatted = "[verb], <span class=\"body\">\"[message]\"</span>"
+		formatted = "[verb], [SPAN_CLASS("body", "\"[message]\"")]"
 	if(sdisabilities & DEAFENED || ear_deaf)
 		var/mob/living/carbon/human/H = src
 		if(istype(H) && H.has_headset_in_ears() && prob(20))
@@ -250,7 +250,7 @@
 		on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
 
 /proc/say_timestamp()
-	return "<span class='say_quote'>\[[stationtime2text()]\]</span>"
+	return "[SPAN_CLASS("say_quote", "\[[stationtime2text()]\]")]>"
 
 /mob/proc/on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
 	to_chat(src, "[part_a][speaker_name][part_b][formatted][part_c]")
@@ -314,9 +314,9 @@
 			heardword = copytext(heardword,2)
 		if(copytext(heardword,-1) in punctuation)
 			heardword = copytext(heardword,1,length(heardword))
-		heard = "<span class = 'game_say'>...You hear something about...[heardword]</span>"
+		heard = SPAN_CLASS("game_say", "...You hear something about...[heardword]")
 
 	else
-		heard = "<span class = 'game_say'>...<i>You almost hear someone talking</i>...</span>"
+		heard = SPAN_CLASS("game_say", "...<i>You almost hear someone talking</i>...")
 
 	to_chat(src, heard)

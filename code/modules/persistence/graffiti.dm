@@ -43,7 +43,7 @@
 		var/obj/item/weldingtool/welder = thing
 		if(welder.isOn() && welder.remove_fuel(0,user) && do_after(user, 0.5 SECONDS, src, DO_PUBLIC_UNIQUE) && !QDELETED(src))
 			playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
-			user.visible_message("<span class='notice'>\The [user] clears away some graffiti.</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] clears away some graffiti."))
 			qdel(src)
 	else if(thing.sharp)
 
@@ -53,12 +53,12 @@
 
 		var/_message = sanitize(input("Enter an additional message to engrave.", "Graffiti") as null|text, trim = TRUE)
 		if(_message && loc && user && !user.incapacitated() && user.Adjacent(loc) && thing.loc == user)
-			user.visible_message("<span class='warning'>\The [user] begins carving something into \the [loc].</span>")
+			user.visible_message(SPAN_WARNING("\The [user] begins carving something into \the [loc]."))
 			if(do_after(user, max(2 SECONDS, length(_message)), src, DO_PUBLIC_UNIQUE) && loc)
-				user.visible_message("<span class='danger'>\The [user] carves some graffiti into \the [loc].</span>")
+				user.visible_message(SPAN_DANGER("\The [user] carves some graffiti into \the [loc]."))
 				message = "[message] [_message]"
 				author = user.ckey
 				if(lowertext(message) == "elbereth")
-					to_chat(user, "<span class='notice'>You feel much safer.</span>")
+					to_chat(user, SPAN_NOTICE("You feel much safer."))
 	else
 		. = ..()

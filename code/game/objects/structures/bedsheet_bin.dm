@@ -21,9 +21,9 @@ LINEN BINS
 
 /obj/item/bedsheet/attackby(obj/item/I, mob/user)
 	if(is_sharp(I))
-		user.visible_message("<span class='notice'>\The [user] begins cutting up \the [src] with \a [I].</span>", "<span class='notice'>You begin cutting up \the [src] with \the [I].</span>")
+		user.visible_message(SPAN_NOTICE("\The [user] begins cutting up \the [src] with \a [I]."), SPAN_NOTICE("You begin cutting up \the [src] with \the [I]."))
 		if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			to_chat(user, "<span class='notice'>You cut \the [src] into pieces!</span>")
+			to_chat(user, SPAN_NOTICE("You cut \the [src] into pieces!"))
 			for(var/i in 1 to rand(2,5))
 				new /obj/item/reagent_containers/glass/rag(get_turf(src))
 			qdel(src)
@@ -131,12 +131,12 @@ LINEN BINS
 			return
 		sheets.Add(I)
 		amount++
-		to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
+		to_chat(user, SPAN_NOTICE("You put [I] in [src]."))
 	else if(amount && !hidden && I.w_class < ITEM_SIZE_HUGE)	//make sure there's sheets to hide it among, make sure nothing else is hidden in there.
 		if(!user.unEquip(I, src))
 			return
 		hidden = I
-		to_chat(user, "<span class='notice'>You hide [I] among the sheets.</span>")
+		to_chat(user, SPAN_NOTICE("You hide [I] among the sheets."))
 
 /obj/structure/bedsheetbin/attack_hand(mob/user)
 	var/obj/item/bedsheet/B = remove_sheet()

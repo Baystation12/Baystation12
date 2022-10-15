@@ -132,9 +132,9 @@
 	. = list()
 	. += "Must have clients: "
 	if(filter_missing_clients)
-		. += "<span class='linkOn'>Yes</span><a href='?src=\ref[src];no=1'>No</a>"
+		. += "[SPAN_CLASS("linkOn", "Yes")]<a href='?src=\ref[src];no=1'>No</a>"
 	else
-		. += "<a href='?src=\ref[src];yes=1'>Yes</a><span class='linkOn'>No</span>"
+		. += "<a href='?src=\ref[src];yes=1'>Yes</a>[SPAN_CLASS("linkOn", "No")]"
 	. = jointext(.,null)
 
 /attack_filter/no_client/OnTopic(href_list)

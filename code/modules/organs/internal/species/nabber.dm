@@ -46,12 +46,12 @@
 	if(.)
 		eyes_shielded = !eyes_shielded
 		if(eyes_shielded)
-			to_chat(owner, "<span class='notice'>Nearly opaque lenses slide down to shield your eyes.</span>")
+			to_chat(owner, SPAN_NOTICE("Nearly opaque lenses slide down to shield your eyes."))
 			innate_flash_protection = FLASH_PROTECTION_MAJOR
 			owner.overlay_fullscreen("eyeshield", /obj/screen/fullscreen/blind)
 			owner.update_icons()
 		else
-			to_chat(owner, "<span class='notice'>Your protective lenses retract out of the way.</span>")
+			to_chat(owner, SPAN_NOTICE("Your protective lenses retract out of the way."))
 			innate_flash_protection = FLASH_PROTECTION_VULNERABLE
 			addtimer(CALLBACK(src, .proc/remove_shield), 1 SECONDS)
 			owner.update_icons()
@@ -148,7 +148,7 @@
 	safe_toxins_max = 10
 
 /obj/item/organ/internal/lungs/insectoid/nabber/rupture()
-	to_chat(owner, "<span class='danger'>You feel air rushing through your trachea!</span>")
+	to_chat(owner, SPAN_DANGER("You feel air rushing through your trachea!"))
 
 /obj/item/organ/internal/lungs/insectoid/nabber/handle_failed_breath()
 	var/mob/living/carbon/human/H = owner
@@ -182,15 +182,15 @@
 		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 			lowblood_tally = 2
 			if(prob(1))
-				to_chat(owner, "<span class='warning'>You're finding it difficult to move.</span>")
+				to_chat(owner, SPAN_WARNING("You're finding it difficult to move."))
 		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
 			lowblood_tally = 4
 			if(prob(1))
-				to_chat(owner, "<span class='warning'>Moving has become very difficult.</span>")
+				to_chat(owner, SPAN_WARNING("Moving has become very difficult."))
 		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
 			lowblood_tally = 6
 			if(prob(15))
-				to_chat(owner, "<span class='warning'>You're almost unable to move!</span>")
+				to_chat(owner, SPAN_WARNING("You're almost unable to move!"))
 				if(!owner.pulling_punches)
 					var/datum/species/nabber/nab = species
 					nab.arm_swap(owner, TRUE)
@@ -200,7 +200,7 @@
 				var/datum/species/nabber/nab = species
 				nab.arm_swap(owner, TRUE)
 			if(prob(10))
-				to_chat(owner, "<span class='warning'>Your body is barely functioning and is starting to shut down.</span>")
+				to_chat(owner, SPAN_WARNING("Your body is barely functioning and is starting to shut down."))
 				owner.Paralyse(1)
 				var/obj/item/organ/internal/I = pick(owner.internal_organs)
 				I.take_internal_damage(5)

@@ -484,7 +484,7 @@
 		if(O.currTag)// Tag set
 			sort_tag = O.currTag
 			playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
-			to_chat(user, "<span class='notice'>Changed tag to '[sort_tag]'.</span>")
+			to_chat(user, SPAN_NOTICE("Changed tag to '[sort_tag]'."))
 			updatename()
 			updatedesc()
 
@@ -558,7 +558,7 @@
 		if(C.id_tag)
 			id_tag = C.id_tag
 			playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
-			user.visible_message("<span class='notice'>\The [user] changes \the [src]'s tag.</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] changes \the [src]'s tag."))
 
 
 /obj/structure/disposalpipe/diversion_junction/nextdir(fromdir, sortTag)
@@ -652,7 +652,7 @@
 		if(O.currTag)// Tag set
 			sort_type = O.currTag
 			playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
-			to_chat(user, "<span class='notice'>Changed filter to '[sort_type]'.</span>")
+			to_chat(user, SPAN_NOTICE("Changed filter to '[sort_type]'."))
 			updatename()
 			updatedesc()
 

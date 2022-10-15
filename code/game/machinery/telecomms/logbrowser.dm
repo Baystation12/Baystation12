@@ -153,7 +153,7 @@
 	if(href_list["delete"])
 
 		if(!src.allowed(usr) && !emagged)
-			to_chat(usr, "<span class='warning'>ACCESS DENIED.</span>")
+			to_chat(usr, SPAN_WARNING("ACCESS DENIED."))
 			return
 
 		if(SelectedServer)
@@ -194,6 +194,6 @@
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = TRUE
 		req_access.Cut()
-		to_chat(user, "<span class='notice'>You you disable the security protocols</span>")
+		to_chat(user, SPAN_NOTICE("You you disable the security protocols"))
 		src.updateUsrDialog()
 		return 1

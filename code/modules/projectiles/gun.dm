@@ -150,7 +150,7 @@
 			toggle_safety()
 			return 1
 	if(MUTATION_HULK in M.mutations)
-		to_chat(M, "<span class='danger'>Your fingers are much too large for the trigger guard!</span>")
+		to_chat(M, SPAN_DANGER("Your fingers are much too large for the trigger guard!"))
 		return 0
 	if((MUTATION_CLUMSY in M.mutations) && prob(40)) //Clumsy handling
 		var/obj/P = consume_next_projectile()
@@ -158,8 +158,8 @@
 			if(process_projectile(P, user, user, pick(BP_L_FOOT, BP_R_FOOT)))
 				handle_post_fire(user, user)
 				user.visible_message(
-					"<span class='danger'>\The [user] shoots \himself in the foot with \the [src]!</span>",
-					"<span class='danger'>You shoot yourself in the foot with \the [src]!</span>"
+					SPAN_DANGER("\The [user] shoots \himself in the foot with \the [src]!"),
+					SPAN_DANGER("You shoot yourself in the foot with \the [src]!")
 					)
 				M.unequip_item()
 		else
@@ -233,7 +233,7 @@
 
 	if(world.time < next_fire_time)
 		if (world.time % 3) //to prevent spam
-			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
+			to_chat(user, SPAN_WARNING("[src] is not ready to fire again!"))
 		return
 
 	last_safety_check = world.time
@@ -289,7 +289,7 @@
 //called if there was no projectile to shoot
 /obj/item/gun/proc/handle_click_empty(mob/user)
 	if (user)
-		user.visible_message("*click click*", "<span class='danger'>*click*</span>")
+		user.visible_message("*click click*", SPAN_DANGER("*click*"))
 	else
 		src.visible_message("*click click*")
 	playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
@@ -325,20 +325,20 @@
 				switch(one_hand_penalty)
 					if(4 to 6)
 						if(prob(50)) //don't need to tell them every single time
-							to_chat(user, "<span class='warning'>Your aim wavers slightly.</span>")
+							to_chat(user, SPAN_WARNING("Your aim wavers slightly."))
 					if(6 to 8)
-						to_chat(user, "<span class='warning'>You have trouble keeping \the [src] on target with just one hand.</span>")
+						to_chat(user, SPAN_WARNING("You have trouble keeping \the [src] on target with just one hand."))
 					if(8 to INFINITY)
-						to_chat(user, "<span class='warning'>You struggle to keep \the [src] on target with just one hand!</span>")
+						to_chat(user, SPAN_WARNING("You struggle to keep \the [src] on target with just one hand!"))
 			else if(!user.can_wield_item(src))
 				switch(one_hand_penalty)
 					if(4 to 6)
 						if(prob(50)) //don't need to tell them every single time
-							to_chat(user, "<span class='warning'>Your aim wavers slightly.</span>")
+							to_chat(user, SPAN_WARNING("Your aim wavers slightly."))
 					if(6 to 8)
-						to_chat(user, "<span class='warning'>You have trouble holding \the [src] steady.</span>")
+						to_chat(user, SPAN_WARNING("You have trouble holding \the [src] steady."))
 					if(8 to INFINITY)
-						to_chat(user, "<span class='warning'>You struggle to hold \the [src] steady!</span>")
+						to_chat(user, SPAN_WARNING("You struggle to hold \the [src] steady!"))
 
 		if(screen_shake)
 			spawn()
@@ -586,7 +586,7 @@
 	if(prob(20) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		new_mode = switch_firemodes(user)
 	if(new_mode)
-		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] is now set to [new_mode.name]."))
 
 /obj/item/gun/proc/toggle_safety(mob/user)
 	if (user?.is_physically_disabled())
@@ -629,7 +629,7 @@
 		turfs += T
 	if(turfs.len)
 		var/turf/shoot_to = pick(turfs)
-		target.visible_message("<span class='danger'>\The [src] goes off during the struggle!</span>")
+		target.visible_message(SPAN_DANGER("\The [src] goes off during the struggle!"))
 		afterattack(shoot_to,target)
 		return 1
 

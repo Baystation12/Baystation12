@@ -42,10 +42,10 @@ var/global/const/NUCLEARBOMB_WIRE_SAFETY		= 4
 			spawn(100)
 				N.safety = !N.safety
 				if(N.safety == 1)
-					N.visible_message("<span class='notice'>\The [N] quiets down.</span>")
+					N.visible_message(SPAN_NOTICE("\The [N] quiets down."))
 					N.secure_device()
 				else
-					N.visible_message("<span class='notice'>\The [N] emits a quiet whirling noise!</span>")
+					N.visible_message(SPAN_NOTICE("\The [N] emits a quiet whirling noise!"))
 
 /datum/wires/nuclearbomb/UpdateCut(index, mended)
 	var/obj/machinery/nuclearbomb/N = holder

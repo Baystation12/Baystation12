@@ -210,7 +210,7 @@
 	var/datum/ghosttrap/G = get_ghost_trap("wizard familiar")
 	for(var/mob/observer/ghost/ghost in GLOB.player_list)
 		if(G.assess_candidate(ghost,null,FALSE))
-			to_chat(ghost,"<span class='notice'><b>A wizard is requesting a Spell-Bound Servant!</b></span> (<a href='?src=\ref[src];master=\ref[user]'>Join</a>)")
+			to_chat(ghost,"[SPAN_NOTICE("<b>A wizard is requesting a Spell-Bound Servant!</b>")] (<a href='?src=\ref[src];master=\ref[user]'>Join</a>)")
 
 /obj/effect/cleanable/spellbound/CanUseTopic(mob)
 	if(isliving(mob))
@@ -240,7 +240,7 @@
 
 /obj/item/summoning_stone/attack_self(mob/user)
 	if(user.z in GLOB.using_map.admin_levels)
-		to_chat(user, "<span class='warning'>You cannot use \the [src] here.</span>")
+		to_chat(user, SPAN_WARNING("You cannot use \the [src] here."))
 		return
 	user.set_machine(src)
 	interact(user)
@@ -272,7 +272,7 @@
 				if(T.density)
 					turfs -= T
 			if(turfs.len)
-				src.visible_message("<span class='notice'>\The [src] vanishes!</span>")
+				src.visible_message(SPAN_NOTICE("\The [src] vanishes!"))
 				src.forceMove(pick(turfs))
 	show_browser(user, null, "window=summoning")
 	qdel(src)

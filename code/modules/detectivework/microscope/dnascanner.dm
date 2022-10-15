@@ -18,11 +18,11 @@
 /obj/machinery/dnaforensics/attackby(obj/item/W, mob/user as mob)
 
 	if(bloodsamp)
-		to_chat(user, "<span class='warning'>There is already a sample in the machine.</span>")
+		to_chat(user, SPAN_WARNING("There is already a sample in the machine."))
 		return
 
 	if(closed)
-		to_chat(user, "<span class='warning'>Open the cover before inserting the sample.</span>")
+		to_chat(user, SPAN_WARNING("Open the cover before inserting the sample."))
 		return
 
 	var/obj/item/forensics/swab/swab = W
@@ -30,9 +30,9 @@
 		if(!user.unEquip(W, src))
 			return
 		src.bloodsamp = swab
-		to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("You insert \the [W] into \the [src]."))
 	else
-		to_chat(user, "<span class='warning'>\The [src] only accepts used swabs.</span>")
+		to_chat(user, SPAN_WARNING("\The [src] only accepts used swabs."))
 		return
 
 /obj/machinery/dnaforensics/ui_interact(mob/user, ui_key = "main",datum/nanoui/ui = null)
@@ -67,12 +67,12 @@
 				if(closed == 1)
 					scanner_progress = 0
 					scanning = 1
-					to_chat(usr, "<span class='notice'>Scan initiated.</span>")
+					to_chat(usr, SPAN_NOTICE("Scan initiated."))
 					update_icon()
 				else
-					to_chat(usr, "<span class='notice'>Please close sample lid before initiating scan.</span>")
+					to_chat(usr, SPAN_NOTICE("Please close sample lid before initiating scan."))
 			else
-				to_chat(usr, "<span class='warning'>Insert an item to scan.</span>")
+				to_chat(usr, SPAN_WARNING("Insert an item to scan."))
 
 	if(href_list["ejectItem"])
 		if(bloodsamp)
@@ -99,7 +99,7 @@
 	last_process_worldtime = world.time
 
 /obj/machinery/dnaforensics/proc/complete_scan()
-	src.visible_message("<span class='notice'>[icon2html(src, viewers(get_turf(src)))] makes an insistent chime.</span>", 2)
+	src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] makes an insistent chime."), 2)
 	update_icon()
 	if(bloodsamp)
 		var/obj/item/paper/P = new(src)
@@ -111,9 +111,9 @@
 		if(bloodsamp.dna != null || bloodsamp.trace_dna != null)
 			data = "Spectometric analysis on provided sample has determined the presence of DNA.<br><br>"
 			for(var/blood in bloodsamp.dna)
-				data += "<span class='notice'>Blood type: [bloodsamp.dna[blood]]<br>DNA: [blood]</span><br><br>"
+				data += "[SPAN_NOTICE("Blood type: [bloodsamp.dna[blood]]<br>DNA: [blood]")]<br><br>"
 			for(var/trace in bloodsamp.trace_dna)
-				data += "<span class='notice'>Trace DNA: [trace]</span><br><br>"
+				data += "[SPAN_NOTICE("Trace DNA: [trace]")]<br><br>"
 		else
 			data += "No DNA found.<br>"
 		P.info = "<b>[src] analysis report #[report_num]</b><br>"
@@ -137,7 +137,7 @@
 		return
 
 	if(scanning)
-		to_chat(usr, "<span class='warning'>You can't do that while [src] is scanning!</span>")
+		to_chat(usr, SPAN_WARNING("You can't do that while [src] is scanning!"))
 		return
 
 	closed = !closed

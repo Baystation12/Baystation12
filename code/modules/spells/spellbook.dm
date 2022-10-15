@@ -53,7 +53,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 			to_chat(user, "You can't make heads or tails of this book.")
 			return
 		if (spellbook.book_flags & LOCKED)
-			to_chat(user, "<span class='warning'>Drat! This spellbook's apprentice-proof lock is on!</span>")
+			to_chat(user, SPAN_WARNING("Drat! This spellbook's apprentice-proof lock is on!"))
 			return
 	else if (spellbook.book_flags & LOCKED)
 		to_chat(user, "You notice the apprentice-proof lock is on. Luckily you are beyond such things.")
@@ -70,10 +70,10 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 		if(istype(I,/obj/item/stack))
 			var/obj/item/stack/S = I
 			if(S.amount < S.max_amount)
-				to_chat(usr, "<span class='warning'>You must sacrifice [S.max_amount] stacks of [S]!</span>")
+				to_chat(usr, SPAN_WARNING("You must sacrifice [S.max_amount] stacks of [S]!"))
 				return
 		qdel(I)
-	to_chat(user, "<span class='notice'>Your sacrifice was accepted!</span>")
+	to_chat(user, SPAN_NOTICE("Your sacrifice was accepted!"))
 	has_sacrificed = 1
 	investing_time = max(investing_time - 6000,1) //subtract 10 minutes. Make sure it doesn't act funky at the beginning of the game.
 
@@ -191,7 +191,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 		if(!path)
 			return TOPIC_HANDLED
 		if(uses < spellbook.spells[path])
-			to_chat(user, "<span class='notice'>You do not have enough spell slots to purchase this.</span>")
+			to_chat(user, SPAN_NOTICE("You do not have enough spell slots to purchase this."))
 			return TOPIC_HANDLED
 		if(ispath(path,/datum/spellbook))
 			src.set_spellbook(path)
@@ -227,7 +227,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 			user.spellremove()
 			temp = "All spells and investments have been removed. You may now memorize a new set of spells."
 		else
-			to_chat(user, "<span class='warning'>You must be in the wizard academy to re-memorize your spells.</span>")
+			to_chat(user, SPAN_WARNING("You must be in the wizard academy to re-memorize your spells."))
 		. = TOPIC_REFRESH
 
 	src.interact(user)

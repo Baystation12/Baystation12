@@ -41,7 +41,7 @@ MRE Stuff
 
 /obj/item/storage/mre/open(mob/user)
 	if(!opened)
-		to_chat(usr, "<span class='notice'>You tear open the bag, breaking the vacuum seal.</span>")
+		to_chat(usr, SPAN_NOTICE("You tear open the bag, breaking the vacuum seal."))
 	. = ..()
 
 /obj/item/storage/mre/menu2
@@ -205,7 +205,7 @@ MRE Stuff
 
 /obj/item/storage/mrebag/open(mob/user)
 	if(!opened)
-		to_chat(usr, "<span class='notice'>The pouch heats up as you break the vaccum seal.</span>")
+		to_chat(usr, SPAN_NOTICE("The pouch heats up as you break the vaccum seal."))
 	. = ..()
 
 /obj/item/storage/mrebag/menu2

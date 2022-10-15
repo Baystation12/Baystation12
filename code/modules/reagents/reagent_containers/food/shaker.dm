@@ -10,7 +10,7 @@
 
 /obj/item/reagent_containers/food/drinks/shaker/attack_self(mob/user as mob)
 	if(user.skill_check(SKILL_COOKING, SKILL_PROF))
-		user.visible_message("<span class='rose'>\The [user] shakes \the [src] briskly in one hand, with supreme confidence and competence.</span>", "<span class='rose'>You shake \the [src] briskly with one hand.</span>")
+		user.visible_message(SPAN_CLASS("rose", "\The [user] shakes \the [src] briskly in one hand, with supreme confidence and competence."), SPAN_CLASS("rose", "You shake \the [src] briskly with one hand."))
 		mix()
 		return
 	if(user.skill_check(SKILL_COOKING, SKILL_ADEPT))

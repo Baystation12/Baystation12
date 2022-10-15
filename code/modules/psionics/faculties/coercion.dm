@@ -102,7 +102,7 @@
 		return FALSE
 	. = ..()
 	if(.)
-		user.visible_message("<span class='danger'>\The [target] has been struck by \the [user]!</span>")
+		user.visible_message(SPAN_DANGER("\The [target] has been struck by \the [user]!"))
 		playsound(user.loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 		target.stun_effect_act(0, 60, user.zone_sel.selecting)
 		return TRUE
@@ -126,8 +126,8 @@
 	. = ..()
 
 	if(.)
-		to_chat(user, "<span class='danger'>You lash out, stabbing into \the [target] with a lance of psi-power.</span>")
-		to_chat(target, "<span class='danger'>The muscles in your arms cramp horrendously!</span>")
+		to_chat(user, SPAN_DANGER("You lash out, stabbing into \the [target] with a lance of psi-power."))
+		to_chat(target, SPAN_DANGER("The muscles in your arms cramp horrendously!"))
 		if(prob(75))
 			target.emote("scream")
 		for (var/obj/item/item as anything in target.GetAllHeld())
@@ -149,22 +149,22 @@
 	. = ..()
 	if(.)
 		if(target.stat == DEAD || (target.status_flags & FAKEDEATH))
-			to_chat(user, "<span class='warning'>\The [target] is dead!</span>")
+			to_chat(user, SPAN_WARNING("\The [target] is dead!"))
 			return TRUE
 		if(!target.mind || !target.key)
-			to_chat(user, "<span class='warning'>\The [target] is mindless!</span>")
+			to_chat(user, SPAN_WARNING("\The [target] is mindless!"))
 			return TRUE
 		if(GLOB.thralls.is_antagonist(target.mind))
-			to_chat(user, "<span class='warning'>\The [target] is already in thrall to someone!</span>")
+			to_chat(user, SPAN_WARNING("\The [target] is already in thrall to someone!"))
 			return TRUE
-		user.visible_message("<span class='danger'><i>\The [user] seizes the head of \the [target] in both hands...</i></span>")
-		to_chat(user, "<span class='warning'>You plunge your mentality into that of \the [target]...</span>")
-		to_chat(target, "<span class='danger'>Your mind is invaded by the presence of \the [user]! They are trying to make you a slave!</span>")
+		user.visible_message(SPAN_DANGER("<i>\The [user] seizes the head of \the [target] in both hands...</i>"))
+		to_chat(user, SPAN_WARNING("You plunge your mentality into that of \the [target]..."))
+		to_chat(target, SPAN_DANGER("Your mind is invaded by the presence of \the [user]! They are trying to make you a slave!"))
 		if(!do_after(user, (target.stat == CONSCIOUS ? 8 : 4) SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT))
 			user.psi.backblast(rand(10,25))
 			return TRUE
-		to_chat(user, "<span class='danger'>You sear through \the [target]'s neurons, reshaping as you see fit and leaving them subservient to your will!</span>")
-		to_chat(target, "<span class='danger'>Your defenses have eroded away and \the [user] has made you their mindslave.</span>")
+		to_chat(user, SPAN_DANGER("You sear through \the [target]'s neurons, reshaping as you see fit and leaving them subservient to your will!"))
+		to_chat(target, SPAN_DANGER("Your defenses have eroded away and \the [user] has made you their mindslave."))
 		GLOB.thralls.add_antagonist(target.mind, new_controller = user)
 		return TRUE
 

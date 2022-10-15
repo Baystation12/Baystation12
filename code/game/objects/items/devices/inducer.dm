@@ -45,10 +45,10 @@
 /obj/item/inducer/proc/CannotUse(mob/user)
 	var/obj/item/cell/my_cell = get_cell()
 	if(!istype(my_cell))
-		to_chat(user, "<span class='warning'>\The [src] doesn't have a power cell installed!</span>")
+		to_chat(user, SPAN_WARNING("\The [src] doesn't have a power cell installed!"))
 		return TRUE
 	if(my_cell.percent() <= 0)
-		to_chat(user, "<span class='warning'>\The [src]'s battery is dead!</span>")
+		to_chat(user, SPAN_WARNING("\The [src]'s battery is dead!"))
 		return TRUE
 	return FALSE
 
@@ -56,22 +56,22 @@
 /obj/item/inducer/attackby(obj/item/W, mob/user)
 	if(isScrewdriver(W))
 		opened = !opened
-		to_chat(user, "<span class='notice'>You [opened ? "open" : "close"] the battery compartment.</span>")
+		to_chat(user, SPAN_NOTICE("You [opened ? "open" : "close"] the battery compartment."))
 		update_icon()
 	if(istype(W, /obj/item/cell))
 		if (istype(W, /obj/item/cell/device))
-			to_chat(user, "<span class='warning'>\The [src] only takes full-size power cells.</span>")
+			to_chat(user, SPAN_WARNING("\The [src] only takes full-size power cells."))
 			return
 		if(opened)
 			if(!cell)
 				if(!user.unEquip(W, src))
 					return
-				to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
+				to_chat(user, SPAN_NOTICE("You insert \the [W] into \the [src]."))
 				cell = W
 				update_icon()
 				return
 			else
-				to_chat(user, "<span class='notice'>\The [src] already has \a [cell] installed!</span>")
+				to_chat(user, SPAN_NOTICE("\The [src] already has \a [cell] installed!"))
 				return
 	if(CannotUse(user) || recharge(W, user))
 		return
@@ -142,7 +142,7 @@
 
 /obj/item/inducer/attack_self(mob/user)
 	if(opened && cell)
-		user.visible_message("\The [user] removes \the [cell] from \the [src]!","<span class='notice'>You remove \the [cell].</span>")
+		user.visible_message("\The [user] removes \the [cell] from \the [src]!",SPAN_NOTICE("You remove \the [cell]."))
 		cell.update_icon()
 		user.put_in_hands(cell)
 		cell = null
@@ -153,11 +153,11 @@
 	. = ..()
 	var/obj/item/cell/MyC = get_cell()
 	if(MyC)
-		to_chat(M, "<span class='notice'>Its display shows: [MyC.percent()]%.</span>")
+		to_chat(M, SPAN_NOTICE("Its display shows: [MyC.percent()]%."))
 	else
-		to_chat(M,"<span class='notice'>Its display is dark.</span>")
+		to_chat(M,SPAN_NOTICE("Its display is dark."))
 	if(opened)
-		to_chat(M,"<span class='notice'>Its battery compartment is open.</span>")
+		to_chat(M,SPAN_NOTICE("Its battery compartment is open."))
 
 /obj/item/inducer/on_update_icon()
 	overlays.Cut()
@@ -199,7 +199,7 @@
 		failsafe = 0.2
 	update_icon()
 	if(user)
-		to_chat(user, "<span class='notice'>You switch your battery output failsafe [safety() ? "on" : "off"	].</span>")
+		to_chat(user, SPAN_NOTICE("You switch your battery output failsafe [safety() ? "on" : "off"	]."))
 
 /obj/item/inducer/borg/get_cell()
 	return loc ? loc.get_cell() : null

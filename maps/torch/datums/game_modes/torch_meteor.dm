@@ -39,17 +39,17 @@
 
 	to_world("<h3>Damage report</h3>")
 	if(eng_status)
-		to_world("<span class='good'>At least [eng_status] thrusters remained operational.</span>")
+		to_world(SPAN_GOOD("At least [eng_status] thrusters remained operational."))
 	else
-		to_world("<span class='bad'>All propulsion was lost, leaving \the [GLOB.using_map.full_name] drifting.</span>")
+		to_world(SPAN_BAD("All propulsion was lost, leaving \the [GLOB.using_map.full_name] drifting."))
 	if(nav_status)
-		to_world("<span class='good'>Navigation and helm remained operational.</span>")
+		to_world(SPAN_GOOD("Navigation and helm remained operational."))
 	else
-		to_world("<span class='bad'>The navigation systems were lost on [GLOB.using_map.full_name].</span>")
+		to_world(SPAN_BAD("The navigation systems were lost on [GLOB.using_map.full_name]."))
 	if(bsd_status)
-		to_world("<span class='good'>Bluespace drive stayed powered.</span>")
+		to_world(SPAN_GOOD("Bluespace drive stayed powered."))
 	else
-		to_world("<span class='bad'>Bluespace drive lost power during the jump, causing dangerous anomalies in the local time-space.</span>")
+		to_world(SPAN_BAD("Bluespace drive lost power during the jump, causing dangerous anomalies in the local time-space."))
 
 
 //Bluespace jump but ignoring cooldowns and done at roundstart basically

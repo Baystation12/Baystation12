@@ -50,13 +50,13 @@
 	if(burn_power > 5)
 		user.fire_stacks += 15
 		user.IgniteMob()
-		user.visible_message("<span class='danger'>\The [user] bursts into flames!</span>")
+		user.visible_message(SPAN_DANGER("\The [user] bursts into flames!"))
 		user.drop_from_inventory(src)
 	else
 		if(burn_power == 5)
-			to_chat(user, "<span class='danger'>You begin to lose control of \the [src]'s flames as they rapidly move up your arm...</span>")
+			to_chat(user, SPAN_DANGER("You begin to lose control of \the [src]'s flames as they rapidly move up your arm..."))
 		else
-			to_chat(user, "<span class='warning'>You feel \the [src] grow hotter and hotter!</span>")
+			to_chat(user, SPAN_WARNING("You feel \the [src] grow hotter and hotter!"))
 
 /obj/item/flame/hands/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER

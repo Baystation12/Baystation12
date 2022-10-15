@@ -34,10 +34,10 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	if(!hand_spell.valid_target(A,user))
 		return
 	if(world.time < next_spell_time)
-		to_chat(user, "<span class='warning'>The spell isn't ready yet!</span>")
+		to_chat(user, SPAN_WARNING("The spell isn't ready yet!"))
 		return
 	if(user.a_intent == I_HELP)
-		to_chat(user, "<span class='notice'>You decide against casting this spell as your intent is set to help.</span>")
+		to_chat(user, SPAN_NOTICE("You decide against casting this spell as your intent is set to help."))
 		return
 
 	if(hand_spell.show_message)

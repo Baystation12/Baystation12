@@ -99,7 +99,7 @@
 
 	if(choice == "Input")
 		set_input(dchoice ? _dirs[dchoice] : null)
-		to_chat(user, "<span class='notice'>You [input_turf ? "configure" : "disable"] \the [src]'s input system.</span>")
+		to_chat(user, SPAN_NOTICE("You [input_turf ? "configure" : "disable"] \the [src]'s input system."))
 	else
 		set_output(dchoice ? _dirs[dchoice] : null)
-		to_chat(user, "<span class='notice'>You [output_turf ? "configure" : "disable"] \the [src]'s output system.</span>")
+		to_chat(user, SPAN_NOTICE("You [output_turf ? "configure" : "disable"] \the [src]'s output system."))

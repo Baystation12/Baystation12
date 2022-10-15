@@ -11,7 +11,7 @@
 
 	establish_db_connection()
 	if(!dbcon.IsConnected())
-		to_chat(usr,"<span class='error'>Failed adding StaffWarn: db error</span>")
+		to_chat(usr,SPAN_CLASS("error", "Failed adding StaffWarn: db error"))
 		return
 
 	var/DBQuery/query = dbcon.NewQuery("SELECT id FROM erro_player WHERE ckey = '[dbckey]'")
@@ -24,7 +24,7 @@
 		return
 	query = dbcon.NewQuery("UPDATE erro_player SET staffwarn='[dbreason]' WHERE id=[playerid]")
 	query.Execute()
-	to_chat(usr,"<span class='notice'>StaffWarn saved to DB</span>")
+	to_chat(usr,SPAN_NOTICE("StaffWarn saved to DB"))
 
 /datum/admins/proc/DB_staffwarn_remove(ckey)
 	if(!check_rights((R_ADMIN|R_MOD), 0)) return
@@ -32,15 +32,15 @@
 
 	establish_db_connection()
 	if(!dbcon.IsConnected())
-		to_chat(usr,"<span class='error'>Failed removing StaffWarn: db error</span>")
+		to_chat(usr,SPAN_CLASS("error", "Failed removing StaffWarn: db error"))
 		return 0
 
 	var/DBQuery/query = dbcon.NewQuery("UPDATE erro_player SET staffwarn=NULL WHERE ckey='[dbckey]'")
 	query.Execute()
 	if(query.RowsAffected() != 1)
-		to_chat(usr,"<span class='error'>StaffWarn unable to be removed from DB</span>")
+		to_chat(usr,SPAN_CLASS("error", "StaffWarn unable to be removed from DB"))
 		return 0
-	to_chat(usr,"<span class='notice'>StaffWarn removed from DB</span>")
+	to_chat(usr,SPAN_NOTICE("StaffWarn removed from DB"))
 	return 1
 
 /datum/admins/proc/DB_ban_record(bantype, mob/banned_mob, duration = -1, reason, job = "", rounds = 0, banckey = null, banip = null, bancid = null)
@@ -123,7 +123,7 @@
 	query_insert.Execute()
 	var/setter = a_ckey
 	if(usr)
-		to_chat(usr, "<span class='notice'>Ban saved to database.</span>")
+		to_chat(usr, SPAN_NOTICE("Ban saved to database."))
 		setter = key_name_admin(usr)
 	message_admins("[setter] has added a [bantype_str] for [ckey] [(job)?"([job])":""] [(duration > 0)?"([time_to_readable(duration MINUTES)])":""] with the reason: \"[reason]\" to the ban database.",1)
 	return 1
@@ -179,17 +179,17 @@
 		ban_number++;
 
 	if(ban_number == 0)
-		to_chat(usr, "<span class='warning'>Database update failed due to no bans fitting the search criteria. If this is not a legacy ban you should contact the database admin.</span>")
+		to_chat(usr, SPAN_WARNING("Database update failed due to no bans fitting the search criteria. If this is not a legacy ban you should contact the database admin."))
 		return
 
 	if(ban_number > 1)
-		to_chat(usr, "<span class='warning'>Database update failed due to multiple bans fitting the search criteria. Note down the ckey, job and current time and contact the database admin.</span>")
+		to_chat(usr, SPAN_WARNING("Database update failed due to multiple bans fitting the search criteria. Note down the ckey, job and current time and contact the database admin."))
 		return
 
 	if(istext(ban_id))
 		ban_id = text2num(ban_id)
 	if(!isnum(ban_id))
-		to_chat(usr, "<span class='warning'>Database update failed due to a ban ID mismatch. Contact the database admin.</span>")
+		to_chat(usr, SPAN_WARNING("Database update failed due to a ban ID mismatch. Contact the database admin."))
 		return
 
 	DB_ban_unban_by_id(ban_id)
@@ -274,11 +274,11 @@
 		ban_number++;
 
 	if(ban_number == 0)
-		to_chat(usr, "<span class='warning'>Database update failed due to a ban id not being present in the database.</span>")
+		to_chat(usr, SPAN_WARNING("Database update failed due to a ban id not being present in the database."))
 		return
 
 	if(ban_number > 1)
-		to_chat(usr, "<span class='warning'>Database update failed due to multiple bans having the same ID. Contact the database admin.</span>")
+		to_chat(usr, SPAN_WARNING("Database update failed due to multiple bans having the same ID. Contact the database admin."))
 		return
 
 	if(!src.owner || !istype(src.owner, /client))
@@ -314,7 +314,7 @@
 
 	establish_db_connection()
 	if(!dbcon.IsConnected())
-		to_chat(usr, "<span class='warning'>Failed to establish database connection</span>")
+		to_chat(usr, SPAN_WARNING("Failed to establish database connection"))
 		return
 
 	var/output = "<div align='center'><table width='90%'><tr>"

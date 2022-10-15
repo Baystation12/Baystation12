@@ -20,10 +20,10 @@
 		return		// don't set a label
 
 	if(!labels_left)
-		to_chat(user, "<span class='notice'>No labels left.</span>")
+		to_chat(user, SPAN_NOTICE("No labels left."))
 		return
 	if(!label || !length(label))
-		to_chat(user, "<span class='notice'>No label text set.</span>")
+		to_chat(user, SPAN_NOTICE("No label text set."))
 		return
 	if(has_extension(A, /datum/extension/labels))
 		var/datum/extension/labels/L = get_extension(A, /datum/extension/labels)
@@ -32,14 +32,14 @@
 	A.attach_label(user, src, label)
 
 /atom/proc/attach_label(user, atom/labeler, label_text)
-	to_chat(user, "<span class='notice'>The label refuses to stick to [name].</span>")
+	to_chat(user, SPAN_NOTICE("The label refuses to stick to [name]."))
 
 /mob/observer/attach_label(user, atom/labeler, label_text)
-	to_chat(user, "<span class='notice'>\The [labeler] passes through \the [src].</span>")
+	to_chat(user, SPAN_NOTICE("\The [labeler] passes through \the [src]."))
 
 /obj/machinery/portable_atmospherics/hydroponics/attach_label(user)
 	if(!mechanical)
-		to_chat(user, "<span class='notice'>How are you going to label that?</span>")
+		to_chat(user, SPAN_NOTICE("How are you going to label that?"))
 		return
 	..()
 	update_icon()
@@ -54,13 +54,13 @@
 	mode = !mode
 	icon_state = "labeler[mode]"
 	if(mode)
-		to_chat(user, "<span class='notice'>You turn on \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("You turn on \the [src]."))
 		//Now let them chose the text.
 		var/str = sanitizeSafe(input(user,"Label text?","Set label",""), MAX_LNAME_LEN)
 		if(!str || !length(str))
-			to_chat(user, "<span class='notice'>Invalid text.</span>")
+			to_chat(user, SPAN_NOTICE("Invalid text."))
 			return
 		label = str
-		to_chat(user, "<span class='notice'>You set the text to '[str]'.</span>")
+		to_chat(user, SPAN_NOTICE("You set the text to '[str]'."))
 	else
-		to_chat(user, "<span class='notice'>You turn off \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("You turn off \the [src]."))

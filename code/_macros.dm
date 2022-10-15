@@ -164,33 +164,33 @@ var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define SPAN_CLASS(class, X) "<span class='[class]'>[X]</span>"
 
-#define SPAN_ITALIC(X) "<span class='italic'>[X]</span>"
+#define SPAN_ITALIC(X) SPAN_CLASS("italic", "[X]")
 
-#define SPAN_BOLD(X) "<span class='bold'>[X]</span>"
+#define SPAN_BOLD(X) SPAN_CLASS("bold", "[X]")
 
-#define SPAN_NOTICE(X) "<span class='notice'>[X]</span>"
+#define SPAN_NOTICE(X) SPAN_CLASS("notice", "[X]")
 
-#define SPAN_WARNING(X) "<span class='warning'>[X]</span>"
+#define SPAN_WARNING(X) SPAN_CLASS("warning", "[X]")
 
-#define SPAN_GOOD(X) "<span class='good'>[X]</span>"
+#define SPAN_GOOD(X) SPAN_CLASS("good", "[X]")
 
-#define SPAN_BAD(X) "<span class='bad'>[X]</span>"
+#define SPAN_BAD(X) SPAN_CLASS("bad", "[X]")
 
-#define SPAN_DANGER(X) "<span class='danger'>[X]</span>"
+#define SPAN_DANGER(X) SPAN_CLASS("danger", "[X]")
 
-#define SPAN_OCCULT(X) "<span class='cult'>[X]</span>"
+#define SPAN_OCCULT(X) SPAN_CLASS("cult", "[X]")
 
-#define SPAN_MFAUNA(X) "<span class='mfauna'>[X]</span>"
+#define SPAN_MFAUNA(X) SPAN_CLASS("mfauna", "[X]")
 
-#define SPAN_SUBTLE(X) "<span class='subtle'>[X]</span>"
+#define SPAN_SUBTLE(X) SPAN_CLASS("subtle", "[X]")
 
-#define SPAN_INFO(X) "<span class='info'>[X]</span>"
+#define SPAN_INFO(X) SPAN_CLASS("info", "[X]")
 
 #define STYLE_SMALLFONTS(X, S, C1) "<span style=\"font-family: 'Small Fonts'; color: [C1]; font-size: [S]px\">[X]</span>"
 
 #define STYLE_SMALLFONTS_OUTLINE(X, S, C1, C2) "<span style=\"font-family: 'Small Fonts'; color: [C1]; -dm-text-outline: 1 [C2]; font-size: [S]px\">[X]</span>"
 
-#define SPAN_DEBUG(X) "<span class='debug'>[X]</span>"
+#define SPAN_DEBUG(X) SPAN_CLASS("debug", "[X]")
 
 #define SPAN_STYLE(style, X) "<span style=\"[style]\">[X]</span>"
 

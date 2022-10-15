@@ -111,7 +111,7 @@
 	var/check_dir = terminal_dir ? GLOB.reverse_dir[terminal_dir] : machine.dir
 	for(var/obj/machinery/power/terminal/term in T)
 		if(T.dir == check_dir)
-			to_chat(user, "<span class='notice'>There is already a terminal here.</span>")
+			to_chat(user, SPAN_NOTICE("There is already a terminal here."))
 			return TRUE
 
 /obj/item/stock_parts/power/terminal/attackby(obj/item/I, mob/user)
@@ -128,13 +128,13 @@
 			return FALSE
 
 		if(istype(T) && !T.is_plating())
-			to_chat(user, "<span class='warning'>You must remove the floor plating in front of \the [machine] first.</span>")
+			to_chat(user, SPAN_WARNING("You must remove the floor plating in front of \the [machine] first."))
 			return TRUE
 		var/obj/item/stack/cable_coil/C = I
 		if(!C.can_use(10))
-			to_chat(user, "<span class='warning'>You need ten lengths of cable for \the [machine].</span>")
+			to_chat(user, SPAN_WARNING("You need ten lengths of cable for \the [machine]."))
 			return TRUE
-		user.visible_message("<span class='warning'>\The [user] adds cables to the \the [machine].</span>", \
+		user.visible_message(SPAN_WARNING("\The [user] adds cables to the \the [machine]."), \
 							"You start adding cables to \the [machine] frame...")
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		if(do_after(user, 2 SECONDS, machine, DO_REPAIR_CONSTRUCT))
@@ -148,7 +148,7 @@
 						return TRUE
 				C.use(10)
 				user.visible_message(\
-					"<span class='warning'>\The [user] has added cables to the \the [machine]!</span>",\
+					SPAN_WARNING("\The [user] has added cables to the \the [machine]!"),\
 					"You add cables to the \the [machine].")
 				make_terminal(machine)
 		return TRUE
@@ -158,9 +158,9 @@
 		if(terminal_dir && user.loc != T)
 			return FALSE // Wrong terminal handler.
 		if(istype(T) && !T.is_plating())
-			to_chat(user, "<span class='warning'>You must remove the floor plating in front of \the [machine] first.</span>")
+			to_chat(user, SPAN_WARNING("You must remove the floor plating in front of \the [machine] first."))
 			return TRUE
-		user.visible_message("<span class='warning'>\The [user] dismantles the power terminal from \the [machine].</span>", \
+		user.visible_message(SPAN_WARNING("\The [user] dismantles the power terminal from \the [machine]."), \
 							"You begin to cut the cables...")
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		if(do_after(user, 5 SECONDS, machine, DO_REPAIR_CONSTRUCT))
@@ -172,7 +172,7 @@
 					if(user.stunned)
 						return TRUE
 				new /obj/item/stack/cable_coil(T, 10)
-				to_chat(user, "<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
+				to_chat(user, SPAN_NOTICE("You cut the cables and dismantle the power terminal."))
 				qdel(terminal)
 		return TRUE
 
