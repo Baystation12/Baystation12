@@ -1,0 +1,7 @@
+author: Ninetailed
+delete-after: true
+changes:
+  - rscadd: Surgeon, Crisis, and Emergency modules now have space cleaner
+  - rscadd: Surgeon module now has sterilizine
+  - tweak: Examining spray bottles now shows a message more like the ones beakers
+      have.
