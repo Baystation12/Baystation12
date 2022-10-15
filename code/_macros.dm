@@ -162,6 +162,8 @@ var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define JOINTEXT(X) jointext(X, null)
 
+#define SPAN_CLASS(class, X) "<span class='[class]'>[X]</span>"
+
 #define SPAN_ITALIC(X) "<span class='italic'>[X]</span>"
 
 #define SPAN_BOLD(X) "<span class='bold'>[X]</span>"
