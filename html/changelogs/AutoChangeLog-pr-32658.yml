@@ -1,0 +1,7 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - tweak: 'Ports sprites for fire extinguishers, wall safes, drills, shield gens,
+      plasma cutter and more. See #32658 for origins.'
+  - tweak: Ports in new corgi sprites. https://github.com/Aurorastation/Aurora.3/pull/14870
+      for origins.
