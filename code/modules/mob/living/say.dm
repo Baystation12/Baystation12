@@ -117,7 +117,7 @@ var/global/list/channel_to_radio_key = new
 		verb = pick("stammers","stutters")
 		. = 1
 	else if(has_chem_effect(CE_SQUEAKY, 1))
-		message = "<font face = 'Comic Sans MS'>[message]</font>"
+		message = "<span style='font-family: Comic Sans MS'>[message]</span>"
 		verb = "squeaks"
 		. = 1
 

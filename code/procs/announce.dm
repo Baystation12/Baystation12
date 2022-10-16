@@ -78,8 +78,8 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	. += "<br>"
 
 /datum/announcement/priority/security/FormMessage(message as text, message_title as text)
-	. = "<font size=4 color='red'>[message_title]</font>"
-	. += "<br><font color='red'>[message]</font>"
+	. = FONT_HUGE(SPAN_COLOR("red", message_title))
+	. += "<br>[SPAN_COLOR("red", message)]"
 
 
 /datum/announcement/proc/NewsCast(message, list/zlevels)

@@ -39,6 +39,6 @@
 			continue
 		var/sent_message = "[create_text_tag("ooc", "OOC:", target)] <EM>[C.key]:</EM> [SPAN_CLASS("message linkify", "[message]")]"
 		if(can_badmin)
-			receive_communication(C, target, "<font color='[ooc_color]'>[SPAN_CLASS("ooc", "[sent_message]</font>")]")
+			receive_communication(C, target, SPAN_COLOR(ooc_color, SPAN_CLASS("ooc", sent_message)))
 		else
-			receive_communication(C, target, SPAN_CLASS("ooc", SPAN_CLASS("[ooc_style]", "[sent_message]")))
+			receive_communication(C, target, SPAN_CLASS("ooc", SPAN_CLASS(ooc_style, sent_message)))

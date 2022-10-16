@@ -334,5 +334,5 @@
 		text_output += "\an [name]"
 	else
 		text_output += "\an ["\improper[name]"] labeled '[displayed_name]'"
-	text_output += " which is currently [get_pin_data(IC_INPUT, 1) ? "lit <font color=[led_color]>*</font>" : "unlit"]."
+	text_output += " which is currently [get_pin_data(IC_INPUT, 1) ? "lit [SPAN_COLOR(led_color, "*")]" : "unlit"]."
 	to_chat(user, text_output)

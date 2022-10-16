@@ -38,7 +38,7 @@
 		reconnect_scanner()
 
 	if(!owned_scanner)
-		dat += "<b><font color=red>Unable to locate analysis pad.</font></b><br>"
+		dat += "<b>[SPAN_COLOR("red", "Unable to locate analysis pad.")]</b><br>"
 	else if(scan_in_progress)
 		dat += "Please wait. Analysis in progress.<br>"
 		dat += "<a href='?src=\ref[src];halt_scan=1'>Halt scanning.</a><br>"

@@ -288,13 +288,13 @@
 		var/playedmessage = mytape.storedinfo[i]
 		if (findtextEx(playedmessage,"*",1,2)) //remove marker for action sounds
 			playedmessage = copytext(playedmessage,2)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: [playedmessage]</font>")
+		T.audible_message(SPAN_COLOR("maroon", "<B>Tape Recorder</B>: [playedmessage]"))
 
 		if(mytape.storedinfo.len < i+1)
 			playsleepseconds = 1
 			sleep(10)
 			T = get_turf(src)
-			T.audible_message("<font color=Maroon><B>Tape Recorder</B>: End of recording.</font>")
+			T.audible_message(SPAN_COLOR("maroon", "<B>Tape Recorder</B>: End of recording."))
 			playsound(src, 'sound/machines/click.ogg', 10, 1)
 			break
 		else
@@ -303,7 +303,7 @@
 		if(playsleepseconds > 14)
 			sleep(10)
 			T = get_turf(src)
-			T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Skipping [playsleepseconds] seconds of silence</font>")
+			T.audible_message(SPAN_COLOR("Maroon", "<B>Tape Recorder</B>: Skipping [playsleepseconds] seconds of silence"))
 			playsleepseconds = 1
 		sleep(10 * playsleepseconds)
 
@@ -313,19 +313,19 @@
 
 	if(emagged)
 		var/turf/T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: This tape recorder will self-destruct in... Five.</font>")
+		T.audible_message(SPAN_COLOR("Maroon", "<B>Tape Recorder</B>: This tape recorder will self-destruct in... Five."))
 		sleep(10)
 		T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Four.</font>")
+		T.audible_message(SPAN_COLOR("Maroon", "<B>Tape Recorder</B>: Four."))
 		sleep(10)
 		T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Three.</font>")
+		T.audible_message(SPAN_COLOR("Maroon", "<B>Tape Recorder</B>: Three."))
 		sleep(10)
 		T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Two.</font>")
+		T.audible_message(SPAN_COLOR("Maroon", "<B>Tape Recorder</B>: Two."))
 		sleep(10)
 		T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: One.</font>")
+		T.audible_message(SPAN_COLOR("Maroon", "<B>Tape Recorder</B>: One."))
 		sleep(10)
 		explode()
 

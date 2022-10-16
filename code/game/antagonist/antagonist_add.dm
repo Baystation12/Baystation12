@@ -59,7 +59,7 @@
 	// Handle only adding a mind and not bothering with gear etc.
 	if(nonstandard_role_type)
 		faction_members |= player
-		to_chat(player.current, SPAN_DANGER("<font size=3>You are \a [nonstandard_role_type]!</font>"))
+		to_chat(player.current, SPAN_DANGER(FONT_LARGE("You are \a [nonstandard_role_type]!")))
 		player.special_role = nonstandard_role_type
 		if(nonstandard_role_msg)
 			to_chat(player.current, SPAN_NOTICE("[nonstandard_role_msg]"))
@@ -75,7 +75,7 @@
 		if (faction && player.current.faction == faction)
 			player.current.faction = MOB_FACTION_NEUTRAL
 	if(player in current_antagonists)
-		to_chat(player.current, SPAN_DANGER("<font size = 3>You are no longer a [role_text]!</font>"))
+		to_chat(player.current, SPAN_DANGER(FONT_LARGE("You are no longer a [role_text]!")))
 		current_antagonists -= player
 		faction_members -= player
 		player.special_role = null

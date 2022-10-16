@@ -61,7 +61,7 @@
 			else
 				dat += "No battery inserted.<BR>"
 	else
-		dat += "<B><font color=red>Unable to locate analysis pad.</font><BR></b>"
+		dat += "<B>[SPAN_COLOR("red", "Unable to locate analysis pad.")]<BR></b>"
 	dat += "<A href='?src=\ref[src];close=1'>Close</a><BR>"
 	dat += "<HR>"
 	var/datum/browser/popup = new(user, "artifact_harvester", "Artifact Power Harvester", 450, 500)

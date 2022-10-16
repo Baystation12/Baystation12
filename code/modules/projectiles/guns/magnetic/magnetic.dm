@@ -98,12 +98,12 @@
 	if(capacitor)
 		to_chat(user, SPAN_NOTICE("The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%."))
 	if(!cell || !capacitor)
-		to_chat(user, SPAN_NOTICE("The capacitor charge indicator is blinking <font color ='[COLOR_RED]'>red</font>. Maybe you should check the cell or capacitor."))
+		to_chat(user, SPAN_NOTICE("The capacitor charge indicator is blinking [SPAN_COLOR("[COLOR_RED]", "red")]. Maybe you should check the cell or capacitor."))
 	else
 		if(capacitor.charge < power_cost)
-			to_chat(user, SPAN_NOTICE("The capacitor charge indicator is <font color ='[COLOR_ORANGE]'>amber</font>."))
+			to_chat(user, SPAN_NOTICE("The capacitor charge indicator is [SPAN_COLOR("[COLOR_ORANGE]", "amber")]."))
 		else
-			to_chat(user, SPAN_NOTICE("The capacitor charge indicator is <font color ='[COLOR_GREEN]'>green</font>."))
+			to_chat(user, SPAN_NOTICE("The capacitor charge indicator is [SPAN_COLOR("[COLOR_GREEN]", "green")]."))
 
 /obj/item/gun/magnetic/attackby(obj/item/thing, mob/user)
 

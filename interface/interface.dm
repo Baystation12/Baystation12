@@ -53,16 +53,13 @@
 	set name = "Hotkeys Help"
 	set category = "OOC"
 
-	var/admin = {"<font color='purple'>
-Admin:
+	var/admin = SPAN_COLOR("purple", {"Admin:
 \tF5 = Aghost (admin-ghost)
 \tF6 = player-panel-new
 \tF7 = admin-pm
-\tF8 = Invisimin
-</font>"}
+\tF8 = Invisimin"})
 
-	var/hotkey_mode = {"<font color='purple'>
-Hotkey-Mode: (hotkey-mode must be on)
+	var/hotkey_mode = SPAN_COLOR("purple", {"Hotkey-Mode: (hotkey-mode must be on)
 \tTAB = toggle hotkey-mode
 \ta = left
 \ts = down
@@ -83,11 +80,9 @@ Hotkey-Mode: (hotkey-mode must be on)
 \t1 = help-intent
 \t2 = disarm-intent
 \t3 = grab-intent
-\t4 = harm-intent
-</font>"}
+\t4 = harm-intent"})
 
-	var/other = {"<font color='purple'>
-Any-Mode: (hotkey doesn't need to be on)
+	var/other = SPAN_COLOR("purple", {"Any-Mode: (hotkey doesn't need to be on)
 \tCtrl+a = left
 \tCtrl+s = down
 \tCtrl+d = right
@@ -116,11 +111,9 @@ Any-Mode: (hotkey doesn't need to be on)
 \tCtrl + Click = drag
 \tShift + Click = examine
 \tAlt + Click = show entities on turf
-\tCtrl + Alt + Click = interact with certain items
-</font>"}
+\tCtrl + Alt + Click = interact with certain items"})
 
-	var/robot_hotkey_mode = {"<font color='purple'>
-Hotkey-Mode: (hotkey-mode must be on)
+	var/robot_hotkey_mode = SPAN_COLOR("purple", {"Hotkey-Mode: (hotkey-mode must be on)
 \tTAB = toggle hotkey-mode
 \ta = left
 \ts = down
@@ -136,11 +129,9 @@ Hotkey-Mode: (hotkey-mode must be on)
 \t2 = activate module 2
 \t3 = activate module 3
 \t4 = toggle intents
-\t5 = emote
-</font>"}
+\t5 = emote"})
 
-	var/robot_other = {"<font color='purple'>
-Any-Mode: (hotkey doesn't need to be on)
+	var/robot_other = SPAN_COLOR("purple", {"Any-Mode: (hotkey doesn't need to be on)
 \tCtrl+a = left
 \tCtrl+s = down
 \tCtrl+d = right
@@ -165,8 +156,7 @@ Any-Mode: (hotkey doesn't need to be on)
 \tCtrl + Click = drag or bolt doors
 \tShift + Click = examine or open doors
 \tAlt + Click = show entities on turf
-\tCtrl + Alt + Click = electrify doors
-</font>"}
+\tCtrl + Alt + Click = electrify doors"})
 
 	if(isrobot(src.mob))
 		to_chat(src, robot_hotkey_mode)

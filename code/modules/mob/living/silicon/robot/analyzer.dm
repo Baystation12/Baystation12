@@ -43,8 +43,8 @@
 			var/BU = M.getFireLoss() > 50 	? 	"<b>[M.getFireLoss()]</b>" 		: M.getFireLoss()
 			var/BR = M.getBruteLoss() > 50 	? 	"<b>[M.getBruteLoss()]</b>" 	: M.getBruteLoss()
 			user.show_message(SPAN_NOTICE("Analyzing Results for [M]:\n\t Overall Status: [M.stat > 1 ? "fully disabled" : "[M.health - M.getHalLoss()]% functional"]"))
-			user.show_message("\t Key: <font color='#ffa500'>Electronics</font>/<font color='red'>Brute</font>", 1)
-			user.show_message("\t Damage Specifics: <font color='#ffa500'>[BU]</font> - <font color='red'>[BR]</font>")
+			user.show_message("\t Key: [SPAN_COLOR("#ffa500", "Electronics")]/[SPAN_COLOR("red", "Brute")]", 1)
+			user.show_message("\t Damage Specifics: [SPAN_COLOR("#ffa500", BU)] - [SPAN_COLOR("red", BR)]")
 			if(M.stat == DEAD)
 				user.show_message(SPAN_NOTICE("Time of Failure: [time2text(worldtime2stationtime(M.timeofdeath))]"))
 			var/mob/living/silicon/robot/H = M
@@ -53,11 +53,11 @@
 			if(length(damaged)>0)
 				for(var/datum/robot_component/org in damaged)
 					var/message = "\t [capitalize(org.name)]: "
-					message += (org.installed == -1) ? FONT_COLORED("red", "<b>DESTROYED</b> ") : ""
-					message += (org.electronics_damage > 0) ? FONT_COLORED("#ffa500", org.electronics_damage) : 0
-					message += (org.brute_damage > 0) ? FONT_COLORED("red", org.brute_damage) : 0
-					message += org.toggled ? "Toggled ON" : FONT_COLORED("red", "Toggled OFF")
-					message += org.powered ? "Power ON" : FONT_COLORED("red", "Power OFF")
+					message += (org.installed == -1) ? SPAN_COLOR("red", "<b>DESTROYED</b> ") : ""
+					message += (org.electronics_damage > 0) ? SPAN_COLOR("#ffa500", org.electronics_damage) : 0
+					message += (org.brute_damage > 0) ? SPAN_COLOR("red", org.brute_damage) : 0
+					message += org.toggled ? "Toggled ON" : SPAN_COLOR("red", "Toggled OFF")
+					message += org.powered ? "Power ON" : SPAN_COLOR("red", "Power OFF")
 					user.show_message(SPAN_NOTICE(message), VISIBLE_MESSAGE)
 			else
 				user.show_message(SPAN_NOTICE("\t Components are OK."),1)
@@ -69,7 +69,7 @@
 
 			var/mob/living/carbon/human/H = M
 			to_chat(user, SPAN_NOTICE("Analyzing Results for \the [H]:"))
-			to_chat(user, "Key: <font color='#ffa500'>Electronics</font>/<font color='red'>Brute</font>")
+			to_chat(user, "Key: [SPAN_COLOR("#ffa500", "Electronics")]/[SPAN_COLOR("red", "Brute")]")
 			var/obj/item/organ/internal/cell/C = H.internal_organs_by_name[BP_CELL]
 			if(C)
 				to_chat(user, SPAN_NOTICE("Cell charge: [C.percent()] %"))
@@ -81,9 +81,9 @@
 			to_chat(user, SPAN_NOTICE("Internal brain activity:"))
 			var/obj/item/organ/internal/B = H.internal_organs_by_name[BP_BRAIN]
 			if(B)
-				to_chat(user, "[B.name]: <font color='red'>[(B.status & ORGAN_DEAD) ? "NO ACTIVITY DETECTED - DAMAGED PAST POINT OF NO RETURN" : B.damage]</font>")
+				to_chat(user, "[B.name]: [SPAN_COLOR("red", (B.status & ORGAN_DEAD) ? "NO ACTIVITY DETECTED - DAMAGED PAST POINT OF NO RETURN" : B.damage)]")
 			else
-				to_chat(user, "<font color='red'>ERROR - Brain not present</font>")
+				to_chat(user, SPAN_COLOR("red", "ERROR - Brain not present"))
 
 			to_chat(user, "<hr>")
 
@@ -94,7 +94,7 @@
 				if(!BP_IS_ROBOTIC(E))
 					continue
 				organ_found = 1
-				to_chat(user, "[E.name]: <font color='red'>[E.brute_dam]</font> <font color='#ffa500'>[E.burn_dam]</font><font color='red'>[(E.status & ORGAN_BROKEN) ? "- INTERNAL STRUCTURE FRACTURED" : ""]</font>")
+				to_chat(user, "[E.name]: [SPAN_COLOR("red", E.brute_dam)] [SPAN_COLOR("#ffa500", E.burn_dam)][SPAN_COLOR("red", (E.status & ORGAN_BROKEN) ? "- INTERNAL STRUCTURE FRACTURED" : "")]")
 			if(!organ_found)
 				to_chat(user, "No prosthetics located.")
 
@@ -106,7 +106,7 @@
 				if(!BP_IS_ROBOTIC(O))
 					continue
 				organ_found = 1
-				to_chat(user, "[O.name]: <font color='red'>[(O.status & ORGAN_DEAD) ? "DESTROYED" : O.damage]</font>")
+				to_chat(user, "[O.name]: [SPAN_COLOR("red", "[(O.status & ORGAN_DEAD) ? "DESTROYED" : O.damage]")]")
 			if(!organ_found)
 				to_chat(user, "No prosthetics located.")
 

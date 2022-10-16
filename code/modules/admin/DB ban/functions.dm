@@ -20,7 +20,7 @@
 	if(query.NextRow())
 		playerid = query.item[1]
 	if(playerid == -1)
-		to_chat(usr,"<font color='red'>You've attempted to set staffwarn on [ckey], but they haven't been seen yet. Staffwarn can only be set on existing players.</font>")
+		to_chat(usr,SPAN_COLOR("red", "You've attempted to set staffwarn on [ckey], but they haven't been seen yet. Staffwarn can only be set on existing players."))
 		return
 	query = dbcon.NewQuery("UPDATE erro_player SET staffwarn='[dbreason]' WHERE id=[playerid]")
 	query.Execute()
@@ -480,13 +480,13 @@
 				var/typedesc =""
 				switch(bantype)
 					if("PERMABAN")
-						typedesc = "<font color='red'><b>PERMABAN</b></font>"
+						typedesc = SPAN_COLOR("red", "<b>PERMABAN</b>")
 					if("TEMPBAN")
-						typedesc = "<b>TEMPBAN</b><br><font size='2'>([time_to_readable(text2num(duration) MINUTES)]) [(unbanned || auto) ? "" : "(<a href=\"byond://?src=\ref[src];dbbanedit=duration;dbbanid=[banid]\">Edit</a>)"]<br>Expires [expiration]</font>"
+						typedesc = "<b>TEMPBAN</b><br>[FONT_NORMAL("([time_to_readable(text2num(duration) MINUTES)]) [(unbanned || auto) ? "" : "(<a href=\"byond://?src=\ref[src];dbbanedit=duration;dbbanid=[banid]\">Edit</a>)"]<br>Expires [expiration]")]"
 					if("JOB_PERMABAN")
-						typedesc = "<b>JOBBAN</b><br><font size='2'>([job])</font>"
+						typedesc = "<b>JOBBAN</b><br>[FONT_NORMAL("([job])")]"
 					if("JOB_TEMPBAN")
-						typedesc = "<b>TEMP JOBBAN</b><br><font size='2'>([job])<br>([time_to_readable(text2num(duration) MINUTES)]<br>Expires [expiration]</font>"
+						typedesc = "<b>TEMP JOBBAN</b><br>[FONT_NORMAL("([job])<br>([time_to_readable(text2num(duration) MINUTES)]<br>Expires [expiration]")]"
 
 				output += "<tr bgcolor='[dcolor]'>"
 				output += "<td align='center'>[typedesc]</td>"
@@ -507,7 +507,7 @@
 					output += "<td align='center' colspan='5'><b>EDITS</b></td>"
 					output += "</tr>"
 					output += "<tr bgcolor='[lcolor]'>"
-					output += "<td align='center' colspan='5'><font size='2'>[edits]</font></td>"
+					output += "<td align='center' colspan='5'>[FONT_NORMAL(edits)]</td>"
 					output += "</tr>"
 				if(unbanned)
 					output += "<tr bgcolor='[dcolor]'>"

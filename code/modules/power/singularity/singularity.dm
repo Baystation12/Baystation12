@@ -98,7 +98,7 @@
 	if (!count)
 		message_admins("A singulo has been created without containment fields active ([x], [y], [z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>).")
 
-	investigate_log("was created. [count ? "" : "<font color='red'>No containment fields were active.</font>"]", I_SINGULO)
+	investigate_log("was created. [count ? "" : SPAN_COLOR("red", "No containment fields were active.")]", I_SINGULO)
 
 /obj/singularity/proc/dissipate()
 	if (!dissipate)
@@ -214,7 +214,7 @@
 			if(chained)
 				overlays = list("chain_s9")
 			if(growing)
-				visible_message(SPAN_DANGER("<font size='2'>The singularity has grown out of control!</font>"))
+				visible_message(SPAN_DANGER(FONT_NORMAL("The singularity has grown out of control!")))
 			else
 				visible_message(SPAN_WARNING("The singularity miraculously reduces in size and loses its supermatter properties."))
 		if(STAGE_SUPER)//SUPERSINGULO
@@ -231,10 +231,10 @@
 			event_chance = 25 //Events will fire off more often.
 			if(chained)
 				overlays = list("chain_s9")
-			visible_message(SPAN_CLASS("sinister", "<font size='3'>You witness the creation of a destructive force that cannot possibly be stopped by human hands.</font>"))
+			visible_message(SPAN_CLASS("sinister", FONT_LARGE("You witness the creation of a destructive force that cannot possibly be stopped by human hands.")))
 
 	if (current_size == allowed_size)
-		investigate_log("<font color='red'>grew to size [current_size].</font>", I_SINGULO)
+		investigate_log(SPAN_COLOR("red", "grew to size [current_size]."), I_SINGULO)
 		return 1
 	else if (current_size < (--temp_allowed_size) && current_size != STAGE_SUPER)
 		expand(temp_allowed_size)

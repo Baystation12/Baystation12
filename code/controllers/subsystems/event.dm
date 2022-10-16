@@ -111,7 +111,7 @@ SUBSYSTEM_DEF(event)
 	if(!report_at_round_end)
 		return
 
-	to_world("<br><br><br><font size=3><b>Random Events This Round:</b></font>")
+	to_world("<br><br><br>[FONT_LARGE("<b>Random Events This Round:</b>")]")
 	for(var/datum/event/E in active_events|finished_events)
 		var/datum/event_meta/EM = E.event_meta
 		if(EM.name == "Nothing")

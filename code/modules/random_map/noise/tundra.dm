@@ -11,25 +11,25 @@
 	if(isnull(val)) val = 0
 	switch(val)
 		if(0)
-			return "<font color='#000099'>~</font>"
+			return SPAN_COLOR("#000099", "~")
 		if(1)
-			return "<font color='#0000bb'>~</font>"
+			return SPAN_COLOR("#0000bb", "~")
 		if(2)
-			return "<font color='#0000dd'>~</font>"
+			return SPAN_COLOR("#0000dd", "~")
 		if(3)
-			return "<font color='#66aa00'>[pick(list(".",","))]</font>"
+			return SPAN_COLOR("#66aa00", pick(list(".",",")))
 		if(4)
-			return "<font color='#77cc00'>[pick(list(".",","))]</font>"
+			return SPAN_COLOR("#77cc00", pick(list(".",",")))
 		if(5)
-			return "<font color='#88dd00'>[pick(list(".",","))]</font>"
+			return SPAN_COLOR("#88dd00", pick(list(".",",")))
 		if(6)
-			return "<font color='#99ee00'>[pick(list(".",","))]</font>"
+			return SPAN_COLOR("#99ee00", pick(list(".",",")))
 		if(7)
-			return "<font color='#00bb00'>[pick(list("T","t"))]</font>"
+			return SPAN_COLOR("#00bb00", pick(list("T","t")))
 		if(8)
-			return "<font color='#00dd00'>[pick(list("T","t"))]</font>"
+			return SPAN_COLOR("#00dd00", pick(list("T","t")))
 		if(9)
-			return "<font color='#00ff00'>[pick(list("T","t"))]</font>"
+			return SPAN_COLOR("#00ff00", pick(list("T","t")))
 
 /datum/random_map/noise/tundra/get_appropriate_path(value)
 	var/val = min(9,max(0,round((value/cell_range)*10)))

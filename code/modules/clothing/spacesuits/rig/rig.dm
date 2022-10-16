@@ -164,7 +164,7 @@
 		to_chat(user, "The access panel is [locked? "locked" : "unlocked"].")
 		to_chat(user, "The maintenance panel is [open ? "open" : "closed"].")
 		to_chat(user, "The wire panel is [p_open ? "open" : "closed"].")
-		to_chat(user, "Hardsuit systems are [offline ? "<font color='red'>offline</font>" : "<font color='green'>online</font>"].")
+		to_chat(user, "Hardsuit systems are [offline ? SPAN_COLOR("red", "offline") : SPAN_COLOR("green", "online")].")
 
 		if(open)
 			to_chat(user, "It's equipped with [english_list(installed_modules)].")

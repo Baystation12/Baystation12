@@ -158,15 +158,12 @@
 
 	c.color = COLOR_WHITE
 
-	if(toner > 10)	//lots of toner, make it dark
-		c.info = "<font color = #101010>"
-	else			//no toner? shitty copies for you!
-		c.info = "<font color = #808080>"
+	c.info = "<span style='color: [toner > 10 ? "#101010" : "#808080"]'>"
 	var/copied = copy.info
-	copied = replacetext(copied, "<font face=\"[c.deffont]\" color=", "<font face=\"[c.deffont]\" nocolor=")	//state of the art techniques in action
-	copied = replacetext(copied, "<font face=\"[c.crayonfont]\" color=", "<font face=\"[c.crayonfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
+	copied = replacetext(copied, "<span style='font-family: [c.deffont]; color:", "<span style='font-family: [c.deffont]; nocolor:")	//state of the art techniques in action
+	copied = replacetext(copied, "<span style='font-family: [c.crayonfont]; color:", "<span style='font-family: [c.crayonfont]; nocolor:")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
 	c.info += copied
-	c.info += "</font>"//</font>
+	c.info += "</span>"
 	c.SetName(copy.name) // -- Doohl
 	c.fields = copy.fields
 	c.stamps = copy.stamps

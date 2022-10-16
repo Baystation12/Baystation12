@@ -443,7 +443,7 @@
 			else
 				src.visible_message("Something slams into the floor around \the [src] - luckily, it didn't get through!", "You hear something crack.")
 		if(ORION_TRAIL_GAMEOVER)
-			to_chat(usr, SPAN_DANGER("<font size=3>You're never going to make it to Orion...</font>"))
+			to_chat(usr, SPAN_DANGER(FONT_LARGE("You're never going to make it to Orion...")))
 			var/mob/living/M = usr
 			M.visible_message("\The [M] starts rapidly deteriorating.")
 			close_browser(M, "window=arcade")

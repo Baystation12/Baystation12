@@ -205,13 +205,13 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		var/datum/integrated_io/io = activators[i]
 		var/words = list()
 
-		words += "<b><a href='?src=\ref[src];act=wire;pin=\ref[io]'><font color='FF0000'>[io]</font></a> "
-		words += "<a href='?src=\ref[src];act=data;pin=\ref[io]'><font color='FF0000'>[io.data?"\<PULSE OUT\>":"\<PULSE IN\>"]</font></a></b><br>"
+		words += "<b><a href='?src=\ref[src];act=wire;pin=\ref[io]'>[SPAN_COLOR("#ff0000", io)]</a> "
+		words += "<a href='?src=\ref[src];act=data;pin=\ref[io]'>[SPAN_COLOR("#ff0000", io.data ? "\<PULSE OUT\>" : "\<PULSE IN\>")]</a></b><br>"
 		if(io.linked.len)
 			for(var/k in 1 to io.linked.len)
 				var/datum/integrated_io/linked = io.linked[k]
-				words += "<a href='?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'><font color='FF0000'>[linked]</font></a> \
-				@ <a href='?src=\ref[linked.holder]'><font color='FF0000'>[linked.holder.displayed_name]</font></a><br>"
+				words += "<a href='?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'>[SPAN_COLOR("#ff0000", linked)]</a> \
+				@ <a href='?src=\ref[linked.holder]'>[SPAN_COLOR("#ff0000", linked.holder.displayed_name)]</a><br>"
 
 		HTML += "<tr>"
 		HTML += "<td colspan='3' align='center'>[jointext(words, null)]</td>"
@@ -220,15 +220,15 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	HTML += "</table>"
 	HTML += "</div>"
 
-	HTML += "<br><font color='0000AA'>Complexity: [complexity]</font>"
-	HTML += "<br><font color='0000AA'>Cooldown per use: [cooldown_per_use/10] sec</font>"
+	HTML += "<br>[SPAN_COLOR("#0000aa", "Complexity: [complexity]")]"
+	HTML += "<br>[SPAN_COLOR("#0000aa", "Cooldown per use: [cooldown_per_use/10] sec")]"
 	if(ext_cooldown)
-		HTML += "<br><font color='0000AA'>External manipulation cooldown: [ext_cooldown/10] sec</font>"
+		HTML += "<br>[SPAN_COLOR("#0000aa", "External manipulation cooldown: [ext_cooldown/10] sec")]"
 	if(power_draw_idle)
-		HTML += "<br><font color='0000AA'>Power Draw: [power_draw_idle] W (Idle)</font>"
+		HTML += "<br>[SPAN_COLOR("#0000aa", "Power Draw: [power_draw_idle] W (Idle)")]"
 	if(power_draw_per_use)
-		HTML += "<br><font color='0000AA'>Power Draw: [power_draw_per_use] W (Active)</font>" // Borgcode says that powercells' checked_use() takes joules as input.
-	HTML += "<br><font color='0000AA'>[extended_desc]</font>"
+		HTML += "<br>[SPAN_COLOR("#0000aa", "Power Draw: [power_draw_per_use] W (Active)")]" // Borgcode says that powercells' checked_use() takes joules as input.
+	HTML += "<br>[SPAN_COLOR("#0000aa", extended_desc)]"
 
 	HTML += "</body></html>"
 	var/HTML_merged = jointext(HTML, null)

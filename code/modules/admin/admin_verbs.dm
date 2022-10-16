@@ -389,7 +389,7 @@ var/global/list/admin_verbs_mod = list(
 		ghost.reenter_corpse()
 
 	else if(istype(mob,/mob/new_player))
-		to_chat(src, "<font color='red'>Error: Aghost: Can't admin-ghost whilst in the lobby. Join or Observe first.</font>")
+		to_chat(src, SPAN_COLOR("red", "Error: Aghost: Can't admin-ghost whilst in the lobby. Join or Observe first."))
 	else
 		//ghostize
 		var/mob/body = mob
@@ -397,7 +397,7 @@ var/global/list/admin_verbs_mod = list(
 		sound_to(usr, sound(null))
 
 		if (!ghost)
-			to_chat(src, FONT_COLORED("red", "You are already admin-ghosted."))
+			to_chat(src, SPAN_COLOR("red", "You are already admin-ghosted."))
 			return
 		ghost.admin_ghosted = 1
 		if(body)
@@ -489,7 +489,7 @@ var/global/list/admin_verbs_mod = list(
 	if(!warned_ckey || !istext(warned_ckey))
 		return
 	if(warned_ckey in admin_datums)
-		to_chat(usr, "<font color='red'>Error: warn(): You can't warn admins.</font>")
+		to_chat(usr, SPAN_COLOR("red", "Error: warn(): You can't warn admins."))
 		return
 	var/datum/preferences/D
 	var/client/C = GLOB.ckey_directory[warned_ckey]
@@ -498,7 +498,7 @@ var/global/list/admin_verbs_mod = list(
 	else
 		D = SScharacter_setup.preferences_datums[warned_ckey]
 	if(!D)
-		to_chat(src, "<font color='red'>Error: warn(): No such ckey found.</font>")
+		to_chat(src, SPAN_COLOR("red", "Error: warn(): No such ckey found."))
 		return
 	++D.warns
 	if (config.warn_autoban_threshold && D.warns >= config.warn_autoban_threshold)
@@ -506,14 +506,14 @@ var/global/list/admin_verbs_mod = list(
 		ban_unban_log_save("[ckey] warned [warned_ckey], resulting in a [mins_readable] autoban.")
 		if(C)
 			message_admins("[key_name_admin(src)] has warned [key_name_admin(C)] resulting in a [mins_readable] ban.")
-			to_chat(C, "<font color='red'><BIG><B>You have been autobanned due to a warning by [ckey].</B></BIG><br>This is a temporary ban, it will be removed in [mins_readable].</font>")
+			to_chat(C, SPAN_COLOR("red", "<BIG><B>You have been autobanned due to a warning by [ckey].</B></BIG><br>This is a temporary ban, it will be removed in [mins_readable]."))
 			qdel(C)
 		else
 			message_admins("[key_name_admin(src)] has warned [warned_ckey] resulting in a [mins_readable] ban.")
 		AddBan(warned_ckey, D.last_id, "Autobanning due to too many formal warnings", ckey, 1, config.warn_autoban_duration)
 	else
 		if(C)
-			to_chat(C, "<font color='red'><BIG><B>You have been formally warned by an administrator.</B></BIG><br>Further warnings will result in an autoban.</font>")
+			to_chat(C, SPAN_COLOR("red", "<BIG><B>You have been formally warned by an administrator.</B></BIG><br>Further warnings will result in an autoban."))
 			message_admins("[key_name_admin(src)] has warned [key_name_admin(C)]. They have [config.warn_autoban_threshold - D.warns] strikes remaining.")
 		else
 			message_admins("[key_name_admin(src)] has warned [warned_ckey] (DC). They have [config.warn_autoban_threshold - D.warns] strikes remaining.")
@@ -873,7 +873,7 @@ var/global/list/admin_verbs_mod = list(
 	set name = "Man Up"
 	set desc = "Tells mob to man up and deal with it."
 
-	to_chat(T, SPAN_NOTICE("<b><font size=3>Man up and deal with it.</font></b>"))
+	to_chat(T, SPAN_NOTICE("<b>[FONT_LARGE("Man up and deal with it.")]</b>"))
 	to_chat(T, SPAN_NOTICE("Move on."))
 
 	log_and_message_admins("told [key_name(T)] to man up and deal with it.")
@@ -884,7 +884,7 @@ var/global/list/admin_verbs_mod = list(
 	set desc = "Tells everyone to man up and deal with it."
 
 	for (var/mob/T as mob in SSmobs.mob_list)
-		to_chat(T, "<br><center>[SPAN_NOTICE("<b><font size=4>Man up.<br> Deal with it.</font></b><br>Move on.")]</center><br>")
+		to_chat(T, "<br><center>[SPAN_NOTICE("<b>[FONT_HUGE("Man up.<br> Deal with it.")]</b><br>Move on.")]</center><br>")
 		sound_to(T, 'sound/voice/ManUp1.ogg')
 
 	log_and_message_admins("told everyone to man up and deal with it.")

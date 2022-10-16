@@ -16,4 +16,4 @@
 		if(L.mind && L.mind.special_role == ANTAG_SERVANT)
 			to_chat(m, SPAN_NOTICE("\The [user] seems relatively harmless."))
 		else
-			to_chat(m, "<font size='3'>[SPAN_NOTICE("\The [user] [pick(possible_messages)]")]</font>")
+			to_chat(m, FONT_LARGE(SPAN_NOTICE("\The [user] [pick(possible_messages)]")))

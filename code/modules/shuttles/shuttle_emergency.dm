@@ -210,7 +210,7 @@
 			auth_list[i++] = list("auth_name"="", "auth_hash"=null)
 	else
 		for (var/i = 1; i <= req_authorizations; i++)
-			auth_list[i] = list("auth_name"="<font color=\"red\">ERROR</font>", "auth_hash"=null)
+			auth_list[i] = list("auth_name"="[SPAN_COLOR("red", "ERROR")]", "auth_hash"=null)
 
 	var/has_auth = has_authorization()
 

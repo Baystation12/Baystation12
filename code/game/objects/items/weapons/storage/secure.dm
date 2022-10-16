@@ -63,9 +63,9 @@
 	if ((l_set == 0) && (!emagged) && (!l_setshort))
 		dat += text("<p>\n<b>5-DIGIT PASSCODE NOT SET.<br>ENTER NEW PASSCODE.</b>")
 	if (emagged)
-		dat += text("<p>\n<font color=red><b>LOCKING SYSTEM ERROR - 1701</b></font>")
+		dat += text("<p>\n[SPAN_COLOR("red", "<b>LOCKING SYSTEM ERROR - 1701</b>")]")
 	if (l_setshort)
-		dat += text("<p>\n<font color=red><b>ALERT: MEMORY SYSTEM ERROR - 6040 201</b></font>")
+		dat += text("<p>\n[SPAN_COLOR("red", "<b>ALERT: MEMORY SYSTEM ERROR - 6040 201</b>")]")
 	message = text("[]", src.code)
 	if (!locked)
 		message = "*****"

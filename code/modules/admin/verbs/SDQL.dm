@@ -415,7 +415,7 @@
 
 		else if(char == "'")
 			if(word != "")
-				to_chat(usr, SPAN_WARNING("SDQL: You have an error in your SDQL syntax, unexpected ' in query: \"<font color=gray>[query_text]</font>\" following \"<font color=gray>[word]</font>\". Please check your syntax, and try again."))
+				to_chat(usr, SPAN_WARNING("SDQL: You have an error in your SDQL syntax, unexpected ' in query: \"[SPAN_COLOR("gray", query_text)]\" following \"[SPAN_COLOR("gray", word)]\". Please check your syntax, and try again."))
 				return null
 
 			word = "'"
@@ -435,7 +435,7 @@
 					word += char
 
 			if(i > len)
-				to_chat(usr, SPAN_WARNING("SDQL: You have an error in your SDQL syntax, unmatched ' in query: \"<font color=gray>[query_text]</font>\". Please check your syntax, and try again."))
+				to_chat(usr, SPAN_WARNING("SDQL: You have an error in your SDQL syntax, unmatched ' in query: \"[SPAN_COLOR("gray", query_text)]\". Please check your syntax, and try again."))
 				return null
 
 			query_list += "[word]'"
@@ -443,7 +443,7 @@
 
 		else if(char == "\"")
 			if(word != "")
-				to_chat(usr, SPAN_WARNING("SDQL: You have an error in your SDQL syntax, unexpected \" in query: \"<font color=gray>[query_text]</font>\" following \"<font color=gray>[word]</font>\". Please check your syntax, and try again."))
+				to_chat(usr, SPAN_WARNING("SDQL: You have an error in your SDQL syntax, unexpected \" in query: \"[SPAN_COLOR("gray", query_text)]\" following \"[SPAN_COLOR("gray", word)]\". Please check your syntax, and try again."))
 				return null
 
 			word = "\""
@@ -463,7 +463,7 @@
 					word += char
 
 			if(i > len)
-				to_chat(usr, SPAN_WARNING("SDQL: You have an error in your SDQL syntax, unmatched \" in query: \"<font color=gray>[query_text]</font>\". Please check your syntax, and try again."))
+				to_chat(usr, SPAN_WARNING("SDQL: You have an error in your SDQL syntax, unmatched \" in query: \"[SPAN_COLOR("gray", "[query_text]")]\". Please check your syntax, and try again."))
 				return null
 
 			query_list += "[word]\""

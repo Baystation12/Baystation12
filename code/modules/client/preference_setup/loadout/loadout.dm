@@ -127,10 +127,10 @@ var/global/list/gear_datums = list()
 		fcolor = "#e67300"
 	. += "<table align = 'center' width = 100%>"
 	. += "<tr><td colspan=3><center>"
-	. += "<a href='?src=\ref[src];prev_slot=1'>\<=</a><b><font color = '[fcolor]'>\[[pref.gear_slot]\]</font> </b><a href='?src=\ref[src];next_slot=1'>=\></a>"
+	. += "<a href='?src=\ref[src];prev_slot=1'>\<=</a><b>[SPAN_COLOR(fcolor, "\[[pref.gear_slot]\]")] </b><a href='?src=\ref[src];next_slot=1'>=\></a>"
 
 	if(config.max_gear_cost < INFINITY)
-		. += "<b><font color = '[fcolor]'>[total_cost]/[config.max_gear_cost]</font> loadout points spent.</b>"
+		. += "<b>[SPAN_COLOR(fcolor, "[total_cost]/[config.max_gear_cost]")] loadout points spent.</b>"
 
 	. += "<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>"
 	. += "<a href='?src=\ref[src];toggle_hiding=1'>[hide_unavailable_gear ? "Show all" : "Hide unavailable"]</a></center></td></tr>"
@@ -155,7 +155,7 @@ var/global/list/gear_datums = list()
 			. += " [SPAN_CLASS("linkOn", "[category] - [category_cost]")] "
 		else
 			if(category_cost)
-				. += " <a href='?src=\ref[src];select_category=[category]'><font color = '#e67300'>[category] - [category_cost]</font></a> "
+				. += " <a href='?src=\ref[src];select_category=[category]'>[SPAN_COLOR("#e67300", "[category] - [category_cost]")]</a> "
 			else
 				. += " <a href='?src=\ref[src];select_category=[category]'>[category] - 0</a> "
 
@@ -178,7 +178,7 @@ var/global/list/gear_datums = list()
 		var/ticked = (G.display_name in pref.gear_list[pref.gear_slot])
 		entry += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=\ref[G]'>[G.display_name]</a></td>"
 		entry += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
-		entry += "<td><font size=2>[G.get_description(get_gear_metadata(G,1))]</font>"
+		entry += "<td>[FONT_NORMAL(G.get_description(get_gear_metadata(G,1)))]"
 		var/allowed = 1
 		if(allowed && G.allowed_roles)
 			var/good_job = 0
@@ -187,10 +187,10 @@ var/global/list/gear_datums = list()
 			var/list/jobchecks = list()
 			for(var/datum/job/J in jobs)
 				if(J.type in G.allowed_roles)
-					jobchecks += "<font color=55cc55>[J.title]</font>"
+					jobchecks += SPAN_COLOR("#55cc55", J.title)
 					good_job = 1
 				else
-					jobchecks += "<font color=cc5555>[J.title]</font>"
+					jobchecks += SPAN_COLOR("#cc5555", J.title)
 					bad_job = 1
 			allowed = good_job || !bad_job
 			entry += "[english_list(jobchecks)]</i>"
@@ -207,10 +207,10 @@ var/global/list/gear_datums = list()
 				for(var/branch in branches)
 					var/datum/mil_branch/player_branch = GLOB.mil_branches.get_branch(branch)
 					if(player_branch.type in G.allowed_branches)
-						branch_checks += "<font color=55cc55>[player_branch.name]</font>"
+						branch_checks += SPAN_COLOR("#55cc55", player_branch.name)
 						good_branch = 1
 					else
-						branch_checks += "<font color=cc5555>[player_branch.name]</font>"
+						branch_checks += SPAN_COLOR("#cc5555", player_branch.name)
 				allowed = good_branch
 
 				entry += "[english_list(branch_checks)]</i>"
@@ -230,9 +230,9 @@ var/global/list/gear_datums = list()
 				var/skill_entry
 				skill_entry += "[S.levels[skills_required[R]]]"
 				if(allowed)
-					skill_entry = "<font color=55cc55>[skill_entry] [R]</font>"
+					skill_entry = SPAN_COLOR("#55cc55", "[skill_entry] [R]")
 				else
-					skill_entry = "<font color=cc5555>[skill_entry] [R]</font>"
+					skill_entry = SPAN_COLOR("#cc5555", "[skill_entry] [R]")
 				skill_checks += skill_entry
 
 			entry += "[english_list(skill_checks)]</i>"

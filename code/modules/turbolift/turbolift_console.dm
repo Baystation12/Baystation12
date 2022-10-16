@@ -114,8 +114,7 @@
 	for(var/i in lift.floors.len to 1 step -1)
 		var/datum/turbolift_floor/floor = lift.floors[i]
 		var/label = floor.label? floor.label : "Level #[i]"
-		dat += "<font color = '[(floor in lift.queued_floors) ? COLOR_YELLOW : COLOR_WHITE]'>"
-		dat += "<a href='?src=\ref[src];move_to_floor=["\ref[floor]"]'>[label]</a>: [floor.name]</font><br>"
+		dat += "[SPAN_COLOR((floor in lift.queued_floors) ? COLOR_YELLOW : COLOR_WHITE, "<a href='?src=\ref[src];move_to_floor=["\ref[floor]"]'>[label]</a>: [floor.name]")]<br>"
 
 	dat += "<hr>"
 	if(lift.doors_are_open())

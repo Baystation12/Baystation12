@@ -36,7 +36,7 @@
 			to_chat(B.host_brain, SPAN_WARNING("You feel a strange sensation as a foreign influence prods your mind."))
 			to_chat(src, SPAN_DANGER("It doesn't seem to be as effective as you hoped."))
 		else
-			to_chat(B.host_brain, SPAN_DANGER("<FONT size=3>Horrific, burning agony lances through you, ripping a soundless scream from your trapped mind!</FONT>"))
+			to_chat(B.host_brain, SPAN_DANGER(FONT_LARGE("Horrific, burning agony lances through you, ripping a soundless scream from your trapped mind!")))
 
 /mob/living/carbon/proc/spawn_larvae()
 	set category = "Abilities"

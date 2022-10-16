@@ -10,7 +10,7 @@
 	<b>Implant Specifications:</b><BR>
 	<b>Name:</b> Cybersun Industries Adrenalin Implant<BR>
 	<b>Life:</b> Five days.<BR>
-	<b>Important Notes:</b> <font color='red'>Illegal</font><BR>
+	<b>Important Notes:</b> <span stye='color: red'>Illegal</span><BR>
 	<HR>
 	<b>Implant Details:</b> Subjects injected with implant can activate a massive injection of adrenalin.<BR>
 	<b>Function:</b> Contains nanobots to stimulate body to mass-produce Adrenalin.<BR>

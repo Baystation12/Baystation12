@@ -4,7 +4,7 @@
 		return 0
 
 	var/text = list()
-	text += "<br><br><font size = 2><b>The [current_antagonists.len == 1 ? "[role_text] was" : "[role_text_plural] were"]:</b></font>"
+	text += "<br><br>[FONT_NORMAL("<b>The [current_antagonists.len == 1 ? "[role_text] was" : "[role_text_plural] were"]:</b>")]"
 	for(var/datum/mind/P in current_antagonists)
 		text += print_player(P)
 		text += get_special_objective_text(P)
@@ -19,7 +19,7 @@
 				num++
 
 	if(global_objectives && global_objectives.len)
-		text += "<BR><FONT size = 2>Their objectives were:</FONT>"
+		text += "<BR>[FONT_NORMAL("Their objectives were:")]"
 		var/num = 1
 		for(var/datum/objective/O in global_objectives)
 			text += print_objective(O, num)

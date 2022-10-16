@@ -102,13 +102,13 @@
 			if(0)
 				damage_desc = "Unknown"
 			if(1 to 5)
-				damage_desc = "<font color='green'>negligible</font>"
+				damage_desc = SPAN_COLOR("green", "negligible")
 			if(5 to 15)
-				damage_desc = "<font color='green'>light</font>"
+				damage_desc = SPAN_COLOR("green", "light")
 			if(15 to 30)
-				damage_desc = "<font color='orange'>moderate</font>"
+				damage_desc = SPAN_COLOR("orange", "moderate")
 			if(30 to 1000)
-				damage_desc = "<font color='red'>severe</font>"
+				damage_desc = SPAN_COLOR("red", "severe")
 
 		if(!total_score) total_score = D.organs_scanned.len
 

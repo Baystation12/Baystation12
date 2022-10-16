@@ -32,7 +32,7 @@
 		if(can_reroll)  . += " (<a href='?src=\ref[owner];reroll_goal=\ref[src];reroll_goal_caller=\ref[caller]'>Reroll</a>)"
 
 /datum/goal/proc/get_success_string()
-	return check_success() ? " <b><font color='green'>Success!</font></b>" : " <b><font color='red'>Failure.</font></b>"
+	return check_success() ? " <b>[SPAN_COLOR("green", "Success!")]</b>" : " <b>[SPAN_COLOR("red", "Failure.")]</b>"
 
 /datum/goal/proc/get_summary_value()
 	return
@@ -53,7 +53,7 @@
 	if(completion_message && check_success())
 		if(istype(owner, /datum/mind))
 			var/datum/mind/mind = owner
-			to_chat(mind.current, "<font color='green'><b>[completion_message]</b></font>")
+			to_chat(mind.current, SPAN_COLOR("green", "<b>[completion_message]</b>"))
 
 /datum/goal/proc/on_failure()
 	if(failure_message && !check_success() && istype(owner, /datum/mind))

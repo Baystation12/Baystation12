@@ -62,7 +62,7 @@
 					var/vision = ""
 					for(var/i = 1 to 10)
 						vision += pick(E.actors) + " " + pick("killing","dying","gored","expiring","exploding","mauled","burning","flayed","in agony") + ". "
-					to_chat(H, SPAN_DANGER("<font size=2>[uppertext(vision)]</font>"))
+					to_chat(H, SPAN_DANGER(FONT_NORMAL(uppertext(vision))))
 					H.Paralyse(2)
 					H.hallucination(20, 100)
 				return

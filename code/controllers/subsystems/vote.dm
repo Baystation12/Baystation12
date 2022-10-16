@@ -102,7 +102,7 @@ SUBSYSTEM_DEF(vote)
 			if(vote_datum.can_run(C.mob))
 				. += "[capitalize(vote_datum.name)]"
 			else
-				. += "<font color='grey'>[capitalize(vote_datum.name)] (Disallowed)</font>"
+				. += SPAN_COLOR("grey", "[capitalize(vote_datum.name)] (Disallowed)")
 			. += "</a>"
 			var/toggle = vote_datum.check_toggle()
 			if(admin && toggle)

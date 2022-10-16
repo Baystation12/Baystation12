@@ -86,7 +86,7 @@
 	. += "<style>.Points,a.Points{background: #cc5555;}</style>"
 	. += "<style>a.Points:hover{background: #55cc55;}</style>"
 	. += "<tt><center>"
-	. += "<font size=3><b>Select and configure your occupation preferences. Unavailable occupations are crossed out.</b></font>"
+	. += FONT_LARGE("<b>Select and configure your occupation preferences. Unavailable occupations are crossed out.</b>")
 	. += "<br>"
 
 	// Display everything.
@@ -96,9 +96,9 @@
 		if(isnull(pref.hiding_maps[job_map]))
 			pref.hiding_maps[job_map] = map_data["default_to_hidden"]
 
-		. += "<hr><table width = '100%''><tr>"
-		. += "<td width = '50%' align = 'right'><font size = 3><b>[capitalize(job_map)]</b></td>"
-		. += "<td width = '50%' align = 'left''><a href='?src=\ref[src];toggle_map=[job_map]'>[pref.hiding_maps[job_map] ? "Show" : "Hide"]</a></font></td>"
+		. += "<hr><table width = '100%' style='font-size: 3'><tr>"
+		. += "<td width = '50%' align = 'right'><b>[capitalize(job_map)]</b></td>"
+		. += "<td width = '50%' align = 'left''><a href='?src=\ref[src];toggle_map=[job_map]'>[pref.hiding_maps[job_map] ? "Show" : "Hide"]</a></td>"
 		. += "</tr></table>"
 
 		if(!pref.hiding_maps[job_map])
@@ -203,7 +203,7 @@
 					. += "<del>[title_link]</del>[help_link][skill_link]<td>[bad_message]</td></tr>"
 					continue
 				else if((GLOB.using_map.default_assistant_title in pref.job_low) && (title != GLOB.using_map.default_assistant_title))
-					. += "<font color=grey>[title_link]</font>[help_link][skill_link]<td></td></tr>"
+					. += "[SPAN_COLOR("grey", title_link)][help_link][skill_link]<td></td></tr>"
 					continue
 				else
 					. += "[title_link][help_link][skill_link]"
@@ -213,25 +213,25 @@
 					var/yes_link = "Yes"
 					var/no_link = "No"
 					if(title in pref.job_low)
-						yes_link = "<font color='#55cc55'>[yes_link]</font>"
-						no_link = "<font color='black'>[no_link]</font>"
+						yes_link = SPAN_COLOR("#55cc55", yes_link)
+						no_link = SPAN_COLOR("black", no_link)
 					else
-						yes_link = "<font color='black'>[yes_link]</font>"
-						no_link = "<font color='#55cc55'>[no_link]</font>"
+						yes_link = SPAN_COLOR("black", yes_link)
+						no_link = SPAN_COLOR("#55cc55", no_link)
 					. += "<a href='?src=\ref[src];set_job=[title];set_level=[JOB_LEVEL_LOW]'>[yes_link]</a><a href='?src=\ref[src];set_job=[title];set_level=[JOB_LEVEL_NEVER]'>[no_link]</a>"
 				else if(!job.available_by_default)
-					. += "<font color = '#cccccc'>Not available at roundstart.</font>"
+					. += SPAN_COLOR("#cccccc", "Not available at roundstart.")
 				else
 					var/level_link
 					switch(current_level)
 						if(JOB_LEVEL_LOW)
-							level_link = "<font color='#cc5555'>Low</font>"
+							level_link = SPAN_COLOR("#cc5555", "Low")
 						if(JOB_LEVEL_MEDIUM)
-							level_link = "<font color='#eecc22'>Medium</font>"
+							level_link = SPAN_COLOR("#eecc22", "Medium")
 						if(JOB_LEVEL_HIGH)
-							level_link = "<font color='#55cc55'>High</font>"
+							level_link = SPAN_COLOR("#55cc55", "High")
 						else
-							level_link = "<font color=black>Never</font>"
+							level_link = SPAN_COLOR("black", "Never")
 					. += "<a href='?src=\ref[src];set_job=[title];inc_level=-1'>[level_link]</a>"
 				. += "</td></tr>"
 			. += "</td></tr></table>"

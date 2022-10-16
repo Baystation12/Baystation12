@@ -282,7 +282,7 @@ var/global/list/empty_playable_ai_cores = list()
 
 	if(D in empty_playable_ai_cores)
 		empty_playable_ai_cores -= D
-		to_chat(src, "\The [id] is now <font color=\"#ff0000\">not available</font> for latejoining AIs.")
+		to_chat(src, "\The [id] is now [SPAN_COLOR("#ff0000", "not available")] for latejoining AIs.")
 	else
 		empty_playable_ai_cores += D
-		to_chat(src, "\The [id] is now <font color=\"#008000\">available</font> for latejoining AIs.")
+		to_chat(src, "\The [id] is now [SPAN_COLOR("#008000", "available")] for latejoining AIs.")

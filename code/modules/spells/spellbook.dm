@@ -102,7 +102,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 		dat = "[temp]<br><a href='byond://?src=\ref[src];temp=1'>Return</a>"
 	else
 		dat = "<center><h3>[spellbook.title]</h3><i>[spellbook.title_desc]</i><br>You have [uses] spell slot[uses > 1 ? "s" : ""] left.</center><br>"
-		dat += "<center><font color='#ff33cc'>Requires Wizard Garb</font><br><font color='#ff6600'>Selectable Target</font><br><font color='#33cc33'>Spell Charge Type: Recharge, Sacrifice, Charges</font></center><br>"
+		dat += "<center>[SPAN_COLOR("#ff33cc", "Requires Wizard Garb")]<br>[SPAN_COLOR("#ff6600", "Selectable Target")]<br>[SPAN_COLOR("#33cc33", "Spell Charge Type: Recharge, Sacrifice, Charges")]</center><br>"
 		dat += "<center><b>To use a contract, first bind it to your soul, then give it to someone to sign. This will bind their soul to you.</b></center><br>"
 		for(var/i in 1 to spellbook.spells.len)
 			var/name = "" //name of target
@@ -112,7 +112,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 				var/datum/spellbook/S = spellbook.spells[i]
 				name = initial(S.name)
 				desc = initial(S.book_desc)
-				info = "<font color='#ff33cc'>[initial(S.max_uses)] Spell Slots</font>"
+				info = SPAN_COLOR("#ff33cc", "[initial(S.max_uses)] Spell Slots")
 			else if(ispath(spellbook.spells[i],/obj))
 				var/obj/O = spellbook.spells[i]
 				name = "Artefact: [capitalize(initial(O.name))]" //because 99.99% of objects don't have capitals in them and it makes it look weird.
@@ -123,7 +123,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 				desc = initial(S.desc)
 				var/testing = initial(S.spell_flags)
 				if(testing & NEEDSCLOTHES)
-					info = "<font color='#ff33cc'>W</font>"
+					info = SPAN_COLOR("#ff33cc", "W")
 				var/type = ""
 				switch(initial(S.charge_type))
 					if(Sp_RECHARGE)
@@ -132,7 +132,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 						type = "S"
 					if(Sp_CHARGES)
 						type = "C"
-				info += "<font color='#33cc33'>[type]</font>"
+				info += SPAN_COLOR("#33cc33", type)
 			dat += "<A href='byond://?src=\ref[src];path=\ref[spellbook.spells[i]]'>[name]</a>"
 			if(length(info))
 				dat += " ([info])"

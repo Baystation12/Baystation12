@@ -104,7 +104,7 @@
 /obj/item/paper/miner_note_1
 	name = "Invoice"
 	info = {"
-			<center><b><font color='red'>Grayson Industries</font></b></center>
+			<center><b><span style='color: red'>Grayson Industries</span></b></center>
 			<center><b><small>Supply department</small></b></center>
 			<i>A new supply of mechs have arrived today. We'll need to have them signed off and inventoried by the end of the night. Grayson doesn't like it when we daddle like that. Remind Lenny that he needs to do it, damn bastard is probably drunk but he can get it done if you push him hard enough.</i>
 			"}
@@ -112,7 +112,7 @@
 /obj/item/paper/miner_note_2
 	name = "Headquarters Invoice"
 	info = {"
-			<center><b><font color='red'>Grayson Industries</font></b></center>
+			<center><b><span style='color: red'>Grayson Industries</span></b></center>
 			<center><b><small>Headquarters, Financial Department</small></b></center>
 			<i>Quarterly income from this station has been well above projections. Well done. As a rewward, Grayson industries has awarded everyone on the station a raise of 1500 thaler. Enjoy the money, your men have earned it.area
 			Jason Mowry, Grayson Financial.</i>
@@ -127,7 +127,7 @@
 /obj/item/paper/miner_note_4
 	name = "Report"
 	info = {"
-			<center><b><font color='red'>Grayson Industries</font></b></center>
+			<center><b><span style='color: red'>Grayson Industries</span></b></center>
 			<center><b><small>Report</small></b></center>
 			<i>We found something in one of the nearby asteroids... seems like it's some sort of artifact. This seems like something NT or maybe the FTU would be interested in. We brought it aboard and are contacting headquarters to see what we should do with it. Some of the guys say that they found some wierd markings near it.</i>
 			"}
@@ -135,7 +135,7 @@
 /obj/item/paper/miner_note_5
 	name = "Invoice"
 	info = {"
-			<center><b><font color='red'>Grayson Industries</font></b></center>
+			<center><b><span style='color: red'>Grayson Industries</span></b></center>
 			<center><b><small>Internal department memo</small></b></center>
 			<i>A group of scientists are on their way here to investigate the artifact. I know you're all worried about it, but we'll be fine as long as we stay strong. Remember, our cycle is only a few months out, and then we'll be home. </i>
 			"}

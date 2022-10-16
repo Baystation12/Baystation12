@@ -45,7 +45,7 @@
 		else
 			factor = 1.4
 	choices[CHOICE_TRANSFER] = round(choices[CHOICE_TRANSFER] * factor)
-	to_world("<font color='purple'>Crew Transfer Factor: [factor]</font>")
+	to_world(SPAN_COLOR("purple", "Crew Transfer Factor: [factor]"))
 
 /datum/vote/transfer/report_result()
 	if(..())

@@ -164,6 +164,8 @@ var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define SPAN_CLASS(class, X) "<span class='[class]'>[X]</span>"
 
+#define SPAN_STYLE(style, X) "<span style=\"[style]\">[X]</span>"
+
 #define SPAN_ITALIC(X) SPAN_CLASS("italic", "[X]")
 
 #define SPAN_BOLD(X) SPAN_CLASS("bold", "[X]")
@@ -186,25 +188,25 @@ var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define SPAN_INFO(X) SPAN_CLASS("info", "[X]")
 
-#define STYLE_SMALLFONTS(X, S, C1) "<span style=\"font-family: 'Small Fonts'; color: [C1]; font-size: [S]px\">[X]</span>"
+#define STYLE_SMALLFONTS(X, S, C1) SPAN_STYLE("font-family: 'Small Fonts'; color: [C1]; font-size: [S]px", "[X]")
 
-#define STYLE_SMALLFONTS_OUTLINE(X, S, C1, C2) "<span style=\"font-family: 'Small Fonts'; color: [C1]; -dm-text-outline: 1 [C2]; font-size: [S]px\">[X]</span>"
+#define STYLE_SMALLFONTS_OUTLINE(X, S, C1, C2) SPAN_STYLE("font-family: 'Small Fonts'; color: [C1]; -dm-text-outline: 1 [C2]; font-size: [S]px", "[X]")
 
 #define SPAN_DEBUG(X) SPAN_CLASS("debug", "[X]")
 
-#define SPAN_STYLE(style, X) "<span style=\"[style]\">[X]</span>"
+#define SPAN_COLOR(color, text) SPAN_STYLE("color: [color]", "[text]")
 
-#define FONT_COLORED(color, text) "<font color='[color]'>[text]</font>"
+#define SPAN_SIZE(size, text) SPAN_STYLE("font-size: [size]", "[text]")
 
-#define FONT_SMALL(X) "<font size='1'>[X]</font>"
+#define FONT_SMALL(X) SPAN_SIZE(1, "[X]")
 
-#define FONT_NORMAL(X) "<font size='2'>[X]</font>"
+#define FONT_NORMAL(X) SPAN_SIZE(2, "[X]")
 
-#define FONT_LARGE(X) "<font size='3'>[X]</font>"
+#define FONT_LARGE(X) SPAN_SIZE(3, "[X]")
 
-#define FONT_HUGE(X) "<font size='4'>[X]</font>"
+#define FONT_HUGE(X) SPAN_SIZE(4, "[X]")
 
-#define FONT_GIANT(X) "<font size='5'>[X]</font>"
+#define FONT_GIANT(X) SPAN_SIZE(5, "[X]")
 
 #define crash_with(X) crash_at(X, __FILE__, __LINE__)
 

@@ -144,7 +144,7 @@
 
 	if (src.loc)
 		for (var/mob/M in hearers(src.loc.loc))
-			to_chat(M, "<FONT size=[max(0, 5 - get_dist(src, M))]>CLONG, clong!</FONT>")
+			to_chat(M, SPAN_SIZE(max(0, 5 - get_dist(src, M)), "CLONG, clong!"))
 
 	playsound(src.loc, 'sound/effects/clang.ogg', 50, 0, 0)
 

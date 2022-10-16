@@ -11,14 +11,14 @@
 		for(var/client/C in GLOB.clients)
 			var/entry = "\t[C.key]"
 			if(!C.mob) //If mob is null, print error and skip rest of info for client.
-				entry += " - <font color='red'><i>HAS NO MOB</i></font>"
+				entry += " - [SPAN_COLOR("red", "<i>HAS NO MOB</i>")]"
 				Lines += entry
 				continue
 
 			entry += " - Playing as [C.mob.real_name]"
 			switch(C.mob.stat)
 				if(UNCONSCIOUS)
-					entry += " - <font color='darkgray'><b>Unconscious</b></font>"
+					entry += " - [SPAN_COLOR("darkgray", "<b>Unconscious</b>")]"
 				if(DEAD)
 					if(isghost(C.mob))
 						var/mob/observer/ghost/O = C.mob
@@ -91,13 +91,13 @@
 			if(C.is_stealthed())
 				line += " (Stealthed)"
 			if(C.get_preference_value(/datum/client_preference/show_ooc) == GLOB.PREF_HIDE)
-				line += " <font color='#002eb8'><b><s>(OOC)</s></b></font>"
+				line += " [SPAN_COLOR("#002eb8", "<b><s>(OOC)</s></b>")]"
 			if(C.get_preference_value(/datum/client_preference/show_looc) == GLOB.PREF_HIDE)
-				line += " <font color='#3a7496'><b><s>(LOOC)</s></b></font>"
+				line += " [SPAN_COLOR("#3a7496", "<b><s>(LOOC)</s></b>")]"
 			if(C.get_preference_value(/datum/client_preference/show_aooc) == GLOB.PREF_HIDE)
-				line += " <font color='#960018'><b><s>(AOOC)</s></b></font>"
+				line += " [SPAN_COLOR("#960018", "<b><s>(AOOC)</s></b>")]"
 			if(C.get_preference_value(/datum/client_preference/show_dsay) == GLOB.PREF_HIDE)
-				line += " <font color='#530fad'><b><s>(DSAY)</s></b></font>"
+				line += " [SPAN_COLOR("#530fad", "<b><s>(DSAY)</s></b>")]"
 		line = jointext(line,null)
 		if(check_rights(R_ADMIN,0,C))
 			msg.Insert(1, line)

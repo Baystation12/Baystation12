@@ -772,7 +772,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<A href='?src=\ref[src];protolathe_show_tech=1'>Show Recipe Tech Levels: [protolathe_show_tech ? "YES" : "NO"]</A>"
 			dat += "<A href='?src=\ref[src];protolathe_search=1'>Search</A>"
 			dat += "<A href='?src=\ref[src];protolathe_reset_search=1'>Reset Search</A><BR>"
-			dat += "[FONT_COLORED(COLOR_GREEN, "Green")] = Tech level higher than current<HR>"
+			dat += "[SPAN_COLOR(COLOR_GREEN, "Green")] = Tech level higher than current<HR>"
 			dat += "<B>Material Amount:</B> [linked_lathe.TotalMaterials()] cm<sup>3</sup> (MAX: [linked_lathe.max_material_storage])<BR>"
 			dat += "<B>Chemical Volume:</B> [linked_lathe.reagents.total_volume] (MAX: [linked_lathe.reagents.maximum_volume])<HR>"
 			dat += "<UL>"
@@ -813,7 +813,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 						for (var/datum/tech/F in files.known_tech)
 							if (F.name == CallTechName(T))
 								if (F.level <= origin_tech[T])
-									dat += FONT_COLORED(COLOR_GREEN, " [F.name] = [origin_tech[T]] ")
+									dat += SPAN_COLOR(COLOR_GREEN, " [F.name] = [origin_tech[T]] ")
 								else
 									dat += " [F.name] = [origin_tech[T]] "
 								break
@@ -883,7 +883,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<A href='?src=\ref[src];imprinter_show_tech=1'>Show Recipe Tech Levels: [imprinter_show_tech ? "YES" : "NO"]</A>"
 			dat += "<A href='?src=\ref[src];imprinter_search=1'>Search</A>"
 			dat += "<A href='?src=\ref[src];imprinter_reset_search=1'>Reset Search</A><BR>"
-			dat += "[FONT_COLORED(COLOR_GREEN, "Green")] = Tech level higher than current<HR>"
+			dat += "[SPAN_COLOR(COLOR_GREEN, "Green")] = Tech level higher than current<HR>"
 			dat += "Material Amount: [linked_imprinter.TotalMaterials()] cm<sup>3</sup><BR>"
 			dat += "Chemical Volume: [linked_imprinter.reagents.total_volume]<HR>"
 			dat += "<UL>"
@@ -922,7 +922,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 						for (var/datum/tech/F in files.known_tech)
 							if (F.name == CallTechName(T))
 								if (F.level <= origin_tech[T] )
-									dat += FONT_COLORED(COLOR_GREEN, " [F.name] = [origin_tech[T]] ")
+									dat += SPAN_COLOR(COLOR_GREEN, " [F.name] = [origin_tech[T]] ")
 								else
 									dat += " [F.name] = [origin_tech[T]] "
 								break

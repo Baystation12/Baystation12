@@ -283,8 +283,8 @@
 	info_links = info
 	var/i = 0
 	for(i=1,i<=fields,i++)
-		addtofield(i, "<font face=\"[deffont]\"><A href='?src=\ref[src];write=[i]'>write</A></font>", 1)
-	info_links = info_links + "<font face=\"[deffont]\"><A href='?src=\ref[src];write=end'>write</A></font>"
+		addtofield(i, "<span style='font-family: [deffont]'><A href='?src=\ref[src];write=[i]'>write</A></span>", 1)
+	info_links = info_links + "<span style='font-family: [deffont]'><A href='?src=\ref[src];write=end'>write</A></span>"
 
 
 /obj/item/paper/proc/clearpaper()
@@ -309,7 +309,7 @@
 		t = replacetext(t, "\[sign\]", "")
 
 	if (findtext(t, "\[sign\]"))
-		t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\" style=\"font-size: 1.5em\"><i>[get_signature(P, user)]</i></font>")
+		t = replacetext(t, "\[sign\]", "<span style='font-family: [signfont]; font-size: 1.5em'><i>[get_signature(P, user)]</i></span>")
 
 	if(iscrayon) // If it is a crayon, and he still tries to use these, make them empty!
 		t = replacetext(t, "\[*\]", "")
@@ -325,11 +325,11 @@
 		t = replacetext(t, "\[logo\]", "")
 
 	if(iscrayon)
-		t = "<font face=\"[crayonfont]\" color=[P ? P.colour : "black"]><b>[t]</b></font>"
+		t = "<span style='font-family: [crayonfont]; color: [P ? P.colour : "black"]'><b>[t]</b></span>"
 	else if(isfancy)
-		t = "<font face=\"[fancyfont]\" color=[P ? P.colour : "black"]>[t]</font>"
+		t = "<span style='font-family: [fancyfont]; color: [P ? P.colour : "black"]'>[t]</span>"
 	else
-		t = "<font face=\"[deffont]\" color=[P ? P.colour : "black"]>[t]</font>"
+		t = "<span style='font-family: [deffont]; color: [P ? P.colour : "black"]'>[t]</span>"
 
 	t = pencode2html(t)
 

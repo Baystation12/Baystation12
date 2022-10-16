@@ -11,11 +11,11 @@ var/global/const/commandos_possible = 6 //if more Commandos are needed in the fu
 		return
 
 	if(GAME_STATE < RUNLEVEL_GAME)
-		to_chat(usr, "<font color='red'>The game hasn't started yet!</font>")
+		to_chat(usr, SPAN_COLOR("red", "The game hasn't started yet!"))
 		return
 
 	if(world.time < 6000)
-		to_chat(usr, "<font color='red'>There are [(6000-world.time)/10] seconds remaining before it may be called.</font>")
+		to_chat(usr, SPAN_COLOR("red", "There are [(6000-world.time)/10] seconds remaining before it may be called."))
 		return
 
 	var/choice = input(usr, "Select type of strike team:") as null|anything in list("Heavy Asset Protection", "Mercenaries")
@@ -32,7 +32,7 @@ var/global/const/commandos_possible = 6 //if more Commandos are needed in the fu
 			return
 
 	if(team.deployed)
-		to_chat(usr, "<font color='red'>Someone is already sending a team.</font>")
+		to_chat(usr, SPAN_COLOR("red", "Someone is already sending a team."))
 		return
 
 	if(alert("Do you want to send in a strike team? Once enabled, this is irreversible.",,"Yes","No")!="Yes")

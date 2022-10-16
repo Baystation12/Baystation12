@@ -43,11 +43,11 @@
 /datum/codex_entry/proc/get_text(mob/presenting_to)
 	var/list/dat = list(get_header(presenting_to))
 	if(lore_text)
-		dat += "<font color = '[CODEX_COLOR_LORE]'>[lore_text]</font>"
+		dat += SPAN_COLOR(CODEX_COLOR_LORE, lore_text)
 	if(mechanics_text)
 		dat += "<h3>OOC Information</h3>"
-		dat += "<font color = '[CODEX_COLOR_MECHANICS]'>[mechanics_text]</font>"
+		dat += SPAN_COLOR(CODEX_COLOR_MECHANICS, mechanics_text)
 	if(antag_text && presenting_to.mind && player_is_antag(presenting_to.mind))
 		dat += "<h3>Antagonist Information</h3>"
-		dat += "<font color='[CODEX_COLOR_ANTAG]'>[antag_text]</font>"
+		dat += SPAN_COLOR(CODEX_COLOR_ANTAG, antag_text)
 	return jointext(dat, null)

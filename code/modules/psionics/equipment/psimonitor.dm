@@ -111,7 +111,7 @@
 
 
 /obj/machinery/psi_monitor/proc/report_failure(obj/item/implant/psi_control/implant)
-	psi_violations += "<font color='#FF0000'>Critical system failure - [implant.imp_in.name].</font>"
+	psi_violations += SPAN_COLOR("#ff0000", "Critical system failure - [implant.imp_in.name].")
 
 /obj/machinery/psi_monitor/proc/report_violation(obj/item/implant/psi_control/implant, stress)
 	psi_violations += "Sigma [round(stress/10)] event - [implant.imp_in.name]."

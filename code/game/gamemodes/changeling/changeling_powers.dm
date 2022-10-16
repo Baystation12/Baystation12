@@ -440,7 +440,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 			// charge the changeling chemical cost for stasis
 			changeling.chem_charges -= 20
 
-			to_chat(C, SPAN_NOTICE("<font size='5'>We are ready to rise.  Use the <b>Revive</b> verb when you are ready.</font>"))
+			to_chat(C, SPAN_NOTICE(FONT_GIANT("We are ready to rise.  Use the <b>Revive</b> verb when you are ready.")))
 			C.verbs += /mob/proc/changeling_revive
 	return 1
 

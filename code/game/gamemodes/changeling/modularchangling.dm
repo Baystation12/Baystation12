@@ -244,9 +244,9 @@ var/global/list/datum/power/changeling/powerinstances = list()
 
 					body += "</td><td align='center'>";
 
-					body += "<font size='2'><b>"+desc+"</b></font> <BR>"
+					body += "<span style='font-size: 2'><b>"+desc+"</b></span> <BR>"
 
-					body += "<font size='2'><font color = 'red'><b>"+helptext+"</b></font></font><BR>"
+					body += "<span style='font-size: 2; color: red'><b>"+helptext+"</b></span><BR>"
 
 					if(!ownsthis)
 					{
@@ -312,7 +312,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 						return;
 					locked_tabs.push(id);
 					var notice_span = document.getElementById(notice_span_id);
-					notice_span.innerHTML = "<font color='red'>Locked</font> ";
+					notice_span.innerHTML = "<span style='color: red'>Locked</span> ";
 					//link.setAttribute("onClick","attempt('"+id+"','"+link_id+"','"+notice_span_id+"');");
 					//document.write("removeFromLocked('"+id+"','"+link_id+"','"+notice_span_id+"')");
 					//document.write("aa - "+link.getAttribute("onClick"));
@@ -363,7 +363,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 		<table width='560' align='center' cellspacing='0' cellpadding='5' id='maintable'>
 			<tr id='title_tr'>
 				<td align='center'>
-					<font size='5'><b>Changling Evolution Menu</b></font><br>
+					<span styly='font-size: 5'><b>Changling Evolution Menu</b></span><br>
 					Hover over a power to see more information<br>
 					Current evolution points left to evolve with: [geneticpoints]<br>
 					Absorb genomes to acquire more evolution points

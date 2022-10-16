@@ -29,7 +29,7 @@
 		if(M)
 			dat += "<td><a href='?_src_=holder;adminplayeropts=\ref[M]'>[M.real_name]/([player.key])</a>"
 			if(!M.client)      dat += " <i>(logged out)</i>"
-			if(M.stat == DEAD) dat += " <b><font color=red>(DEAD)</font></b>"
+			if(M.stat == DEAD) dat += " <b>[SPAN_COLOR("red", "(DEAD)")]</b>"
 			dat += "</td>"
 			dat += "<td>\[<A href='?src=\ref[caller];priv_msg=\ref[M]'>PM</A>\]\[<A href='?src=\ref[caller];traitor=\ref[M]'>TP</A>\]</td>"
 		else

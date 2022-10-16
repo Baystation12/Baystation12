@@ -50,7 +50,7 @@
 			var/obj/item/paper/monitorkey/MK = new/obj/item/paper/monitorkey
 			MK.dropInto(loc)
 			// Will help make emagging the console not so easy to get away with.
-			MK.info += "<br><br><font color='red'>£%@%(*$%&(£&?*(%&£/{}</font>"
+			MK.info += "<br><br>[SPAN_COLOR("red", "£%@%(*$%&(£&?*(%&£/{}")]"
 			spawn(100*length(src.linkedServer.decryptkey)) UnmagConsole()
 			message = rebootmsg
 			update_icon()
@@ -83,14 +83,14 @@
 	var/list/dat = list()
 	dat += "<head><title>Message Monitor Console</title></head><body>"
 	dat += "<center><h2>Message Monitor Console</h2></center><hr>"
-	dat += "<center><h4><font color='blue'[message]</h5></center>"
+	dat += "<center><h4 style='color: blue'>[message]</h4></center>"
 
 	if(auth)
-		dat += "<h4><dd><A href='?src=\ref[src];auth=1'>&#09;<font color='green'>\[Authenticated\]</font></a>&#09;/"
-		dat += " Server Power: <A href='?src=\ref[src];active=1'>[src.linkedServer && src.linkedServer.active ? "<font color='green'>\[On\]</font>":"<font color='red'>\[Off\]</font>"]</a></h4>"
+		dat += "<h4><dd><A href='?src=\ref[src];auth=1'>&#09;[SPAN_COLOR("green", "\[Authenticated\]")]</a>&#09;/"
+		dat += " Server Power: <A href='?src=\ref[src];active=1'>[src.linkedServer && src.linkedServer.active ? SPAN_COLOR("green", "\[On\]") : SPAN_COLOR("red", "\[Off\]")]</a></h4>"
 	else
-		dat += "<h4><dd><A href='?src=\ref[src];auth=1'>&#09;<font color='red'>\[Unauthenticated\]</font></a>&#09;/"
-		dat += " Server Power: <u>[src.linkedServer && src.linkedServer.active ? "<font color='green'>\[On\]</font>":"<font color='red'>\[Off\]</font>"]</u></h4>"
+		dat += "<h4><dd><A href='?src=\ref[src];auth=1'>&#09;[SPAN_COLOR("red", "\[Unauthenticated\]")]</a>&#09;/"
+		dat += " Server Power: <u>[src.linkedServer && src.linkedServer.active ? SPAN_COLOR("green", "\[On\]") : SPAN_COLOR("red", "\[Off\]")]</u></h4>"
 
 	if(hacking || emag)
 		screen = 2
@@ -115,7 +115,7 @@
 				dat += "<br><hr><dd>[SPAN_NOTICE("Please authenticate with the server in order to show additional options.")]"
 			if((istype(user, /mob/living/silicon/ai) || istype(user, /mob/living/silicon/robot)) && (user.mind.special_role && user.mind.original == user))
 				//Malf/Traitor AIs can bruteforce into the system to gain the Key.
-				dat += "<dd><A href='?src=\ref[src];hack=1'><i><font color='Red'>*&@#. Bruteforce Key</font></i></font></a></dd>"
+				dat += "<dd><A href='?src=\ref[src];hack=1'>[SPAN_COLOR("red", "<i>*&@#. Bruteforce Key</i>")]</a></dd>"
 
 		//Hacking screen.
 		if(2)
