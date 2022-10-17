@@ -115,11 +115,20 @@
 	security_level = SUPPLY_SECURITY_HIGH
 
 /decl/hierarchy/supply_pack/security/bullpup
-	name = "Weapons - Ballistic rifles"
+	name = "Weapons - Heavy ballistic rifles"
 	contains = list(/obj/item/gun/projectile/automatic/bullpup_rifle = 2)
-	cost = 80 //Because 5.56 is OP as fuck right now.
+	cost = 100 //A little more expensive than the 5mmR variant. Hits harder!
 	containertype = /obj/structure/closet/crate/secure/weapon
-	containername = "bullpup automatic rifle crate"
+	containername = "bullpup heavy automatic rifle crate"
+	access = access_emergency_armory
+	security_level = SUPPLY_SECURITY_HIGH
+
+/decl/hierarchy/supply_pack/security/bullpup
+	name = "Weapons - Light ballistic rifles"
+	contains = list(/obj/item/gun/projectile/automatic/bullpup_rifle/light = 2)
+	cost = 80
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "bullpup light automatic rifle crate"
 	access = access_emergency_armory
 	security_level = SUPPLY_SECURITY_HIGH
 
