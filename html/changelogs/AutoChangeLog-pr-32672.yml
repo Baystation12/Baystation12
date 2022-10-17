@@ -1,0 +1,5 @@
+author: Spookerton
+delete-after: true
+changes:
+  - tweak: Adrenaline takes 4u to restart hearts, down from 5.
+  - bugfix: Adrenaline injectors can now actually restart hearts.
