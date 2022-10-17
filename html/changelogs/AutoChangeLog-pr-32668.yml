@@ -1,0 +1,9 @@
+author: PurplePinapple
+delete-after: true
+changes:
+  - rscadd: Added the light bullpup rifle, the Z9 Pitbull, as a more accurate but
+      slower ROF rifle in a smaller caliber that supply can order.
+  - rscadd: New icons added for the garand, pistol carbine, mauser pistol, mosin boltaction,
+      throwback pistols, and the current bullpup rifle
+  - tweak: Increases the price of the z8 bullpup to 100 credits in the supply system.
+      The new light rifle is 80 credits; the original price of the old bullpup.
