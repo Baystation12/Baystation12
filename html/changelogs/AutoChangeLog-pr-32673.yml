@@ -1,4 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fixed antag selection being able to choose FBP's as Changeling.
