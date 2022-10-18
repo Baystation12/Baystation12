@@ -7,7 +7,9 @@
 	throw_range = 8
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = DEFAULT_BOX_STORAGE
-	use_sound = 'sound/effects/storage/box.ogg'
+	matter = list(MATERIAL_PLASTIC = 2000, MATERIAL_GLASS = 300, MATERIAL_ALUMINIUM = 200)
+	origin_tech = list(TECH_MATERIAL = 2)
+	use_sound = 'sound/effects/storage/briefcase.ogg'
 	allow_slow_dump = TRUE
 
 
@@ -32,15 +34,10 @@
 	name = "trauma first-aid kit"
 	desc = "It's an emergency medical kit for when people brought ballistic weapons to a laser fight."
 	icon_state = "fak-trauma-1"
-	item_state = "firstaid-ointment"
+	item_state = "firstaid-brute"
 	startswith = list(
 		/obj/item/storage/med_pouch/trauma = 4
 	)
-
-
-/obj/item/storage/firstaid/trauma/Initialize()
-	. = ..()
-	icon_state = pick("fak-trauma-1", "fak-trauma-2")
 
 
 /obj/item/storage/firstaid/fire
@@ -53,11 +50,6 @@
 	)
 
 
-/obj/item/storage/firstaid/fire/Initialize()
-	. = ..()
-	icon_state = pick("fak-burns-1", "fak-burns-2")
-
-
 /obj/item/storage/firstaid/toxin
 	name = "toxin first aid"
 	desc = "Used to treat when you have a high amount of toxins in your body."
@@ -67,10 +59,6 @@
 		/obj/item/storage/med_pouch/toxin = 4
 	)
 
-
-/obj/item/storage/firstaid/toxin/Initialize()
-	. = ..()
-	icon_state = pick("fak-toxin-1", "fak-toxin-2")
 
 
 /obj/item/storage/firstaid/o2
@@ -93,11 +81,6 @@
 	)
 
 
-/obj/item/storage/firstaid/radiation/Initialize()
-	. = ..()
-	icon_state = pick("fak-radiation-1", "fak-radiation-2")
-
-
 /obj/item/storage/firstaid/adv
 	name = "advanced first-aid kit"
 	desc = "Contains advanced medical treatments."
@@ -115,7 +98,7 @@
 	name = "combat medical kit"
 	desc = "Contains advanced medical treatments."
 	icon_state = "fak-combat"
-	item_state = "firstaid-advanced"
+	item_state = "firstaid-combat"
 	startswith = list(
 		/obj/item/storage/pill_bottle/bicaridine,
 		/obj/item/storage/pill_bottle/dermaline,
@@ -162,7 +145,9 @@
 /obj/item/storage/firstaid/light
 	name = "light first-aid kit"
 	desc = "It's a small emergency medical kit."
+	use_sound = 'sound/effects/storage/pillbottle.ogg'
 	icon_state = "fak-light"
+	matter = list(MATERIAL_PLASTIC = 600)
 	storage_slots = 5
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_SMALL
@@ -188,7 +173,6 @@
 	storage_slots = 14
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = null
-	use_sound = 'sound/effects/storage/briefcase.ogg'
 	can_hold = list(
 		/obj/item/bonesetter,
 		/obj/item/cautery,
@@ -221,13 +205,15 @@
 	desc = "This nifty shock-resistant, self-refrigerating device will keep your 'groceries' nice and non-spoiled."
 	icon = 'icons/obj/medical.dmi'
 	icon_state = "freezer"
-	item_state = "medicalpack"
+	item_state = "firstaid-brute"
 	foldable = null
 	max_w_class = ITEM_SIZE_NORMAL
 	w_class = ITEM_SIZE_LARGE
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 	use_to_pickup = TRUE
 	temperature = -16 CELSIUS
+	matter = list(MATERIAL_PLASTIC = 350)
+	origin_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2)
 	can_hold = list(
 		/obj/item/organ,
 		/obj/item/reagent_containers
