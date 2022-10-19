@@ -403,7 +403,7 @@
 	reagent_state = SOLID
 	color = "#669900"
 	metabolism = REM
-	strength = 3
+	strength = 0.1
 	target_organ = BP_BRAIN
 	heating_message = "melts into a liquid slurry."
 	heating_products = list(/datum/reagent/toxin/carpotoxin, /datum/reagent/soporific, /datum/reagent/copper)
@@ -413,7 +413,7 @@
 	if (IS_METABOLICALLY_INERT(M))
 		return
 	M.status_flags |= FAKEDEATH
-	M.adjustOxyLoss(3 * removed)
+	M.adjustOxyLoss(-5 * removed)
 	M.Weaken(10)
 	M.silent = max(M.silent, 10)
 	if(M.chem_doses[type] <= removed) //half-assed attempt to make timeofdeath update only at the onset
@@ -424,6 +424,7 @@
 	if(holder && holder.my_atom && ismob(holder.my_atom))
 		var/mob/M = holder.my_atom
 		M.status_flags &= ~FAKEDEATH
+		M.reagents.add_reagent(/datum/reagent/adrenaline, 5)
 	. = ..()
 
 /datum/reagent/toxin/fertilizer //Reagents used for plant fertilizers.
