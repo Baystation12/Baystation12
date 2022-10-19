@@ -33,7 +33,7 @@
 		if(istype(var_value, /atom) || isnull(var_value) || var_value == "")	// Proper null or empty string is fine, 0 is not
 			AM.forceMove(var_value)
 		else
-			to_chat(client, "<span class='warning'>May only assign null or /atom types to loc.</span>")
+			to_chat(client, SPAN_WARNING("May only assign null or /atom types to loc."))
 	else if(variable == "x" || variable == "y" || variable == "z")
 		if(istext(var_value))
 			var_value = text2num(var_value)
@@ -56,7 +56,7 @@
 		if(T)
 			AM.forceMove(T)
 		else
-			to_chat(client, "<span class='warning'>Unable to locate a turf at [x]-[y]-[z].</span>")
+			to_chat(client, SPAN_WARNING("Unable to locate a turf at [x]-[y]-[z]."))
 
 /decl/vv_set_handler/opacity_hander
 	handled_type = /atom

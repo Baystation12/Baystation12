@@ -14,7 +14,7 @@ var/global/list/empty_playable_ai_cores = list()
 
 /obj/structure/AIcore/emag_act(remaining_charges, mob/user, emag_source)
 	if(!authorized)
-		to_chat(user, "<span class='warning'>You swipe [emag_source] at [src] and jury rig it into the systems of [GLOB.using_map.full_name]!</span>")
+		to_chat(user, SPAN_WARNING("You swipe [emag_source] at [src] and jury rig it into the systems of [GLOB.using_map.full_name]!"))
 		authorized = 1
 		return 1
 	. = ..()
@@ -22,14 +22,14 @@ var/global/list/empty_playable_ai_cores = list()
 /obj/structure/AIcore/attackby(obj/item/P as obj, mob/user as mob)
 	if(!authorized)
 		if(access_ai_upload in P.GetAccess())
-			to_chat(user, "<span class='notice'>You swipe [P] at [src] and authorize it to connect into the systems of [GLOB.using_map.full_name].</span>")
+			to_chat(user, SPAN_NOTICE("You swipe [P] at [src] and authorize it to connect into the systems of [GLOB.using_map.full_name]."))
 			authorized = 1
 	switch(state)
 		if(0)
 			if(isWrench(P))
 				playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 				if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
-					to_chat(user, "<span class='notice'>You wrench the frame into place.</span>")
+					to_chat(user, SPAN_NOTICE("You wrench the frame into place."))
 					anchored = TRUE
 					state = 1
 			if(isWelder(P))
@@ -40,7 +40,7 @@ var/global/list/empty_playable_ai_cores = list()
 				playsound(loc, 'sound/items/Welder.ogg', 50, 1)
 				if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
 					if(!src || !WT.remove_fuel(0, user)) return
-					to_chat(user, "<span class='notice'>You deconstruct the frame.</span>")
+					to_chat(user, SPAN_NOTICE("You deconstruct the frame."))
 					new /obj/item/stack/material/plasteel( loc, 4)
 					qdel(src)
 					return
@@ -48,22 +48,22 @@ var/global/list/empty_playable_ai_cores = list()
 			if(isWrench(P))
 				playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 				if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
-					to_chat(user, "<span class='notice'>You unfasten the frame.</span>")
+					to_chat(user, SPAN_NOTICE("You unfasten the frame."))
 					anchored = FALSE
 					state = 0
 			if(istype(P, /obj/item/stock_parts/circuitboard/aicore) && !circuit && user.unEquip(P, src))
 				playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
-				to_chat(user, "<span class='notice'>You place the circuit board inside the frame.</span>")
+				to_chat(user, SPAN_NOTICE("You place the circuit board inside the frame."))
 				icon_state = "1"
 				circuit = P
 			if(isScrewdriver(P) && circuit)
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-				to_chat(user, "<span class='notice'>You screw the circuit board into place.</span>")
+				to_chat(user, SPAN_NOTICE("You screw the circuit board into place."))
 				state = 2
 				icon_state = "2"
 			if(isCrowbar(P) && circuit)
 				playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-				to_chat(user, "<span class='notice'>You remove the circuit board.</span>")
+				to_chat(user, SPAN_NOTICE("You remove the circuit board."))
 				state = 1
 				icon_state = "0"
 				circuit.dropInto(loc)
@@ -71,21 +71,21 @@ var/global/list/empty_playable_ai_cores = list()
 		if(2)
 			if(isScrewdriver(P) && circuit)
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-				to_chat(user, "<span class='notice'>You unfasten the circuit board.</span>")
+				to_chat(user, SPAN_NOTICE("You unfasten the circuit board."))
 				state = 1
 				icon_state = "1"
 			if(isCoil(P))
 				var/obj/item/stack/cable_coil/C = P
 				if (C.get_amount() < 5)
-					to_chat(user, "<span class='warning'>You need five coils of wire to add them to the frame.</span>")
+					to_chat(user, SPAN_WARNING("You need five coils of wire to add them to the frame."))
 					return
-				to_chat(user, "<span class='notice'>You start to add cables to the frame.</span>")
+				to_chat(user, SPAN_NOTICE("You start to add cables to the frame."))
 				playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 				if (do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) && state == 2)
 					if (C.use(5))
 						state = 3
 						icon_state = "3"
-						to_chat(user, "<span class='notice'>You add cables to the frame.</span>")
+						to_chat(user, SPAN_NOTICE("You add cables to the frame."))
 				return
 		if(3)
 			if(isWirecutter(P))
@@ -93,7 +93,7 @@ var/global/list/empty_playable_ai_cores = list()
 					to_chat(user, "Get that brain out of there first")
 				else
 					playsound(loc, 'sound/items/Wirecutter.ogg', 50, 1)
-					to_chat(user, "<span class='notice'>You remove the cables.</span>")
+					to_chat(user, SPAN_NOTICE("You remove the cables."))
 					state = 2
 					icon_state = "2"
 					var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( loc )
@@ -103,13 +103,13 @@ var/global/list/empty_playable_ai_cores = list()
 				var/obj/item/stack/material/RG = P
 				if(RG.material.name == MATERIAL_GLASS && RG.reinf_material)
 					if (RG.get_amount() < 2)
-						to_chat(user, "<span class='warning'>You need two sheets of glass to put in the glass panel.</span>")
+						to_chat(user, SPAN_WARNING("You need two sheets of glass to put in the glass panel."))
 						return
-					to_chat(user, "<span class='notice'>You start to put in the glass panel.</span>")
+					to_chat(user, SPAN_NOTICE("You start to put in the glass panel."))
 					playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 					if (do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) && state == 3)
 						if(RG.use(2))
-							to_chat(user, "<span class='notice'>You put in the glass panel.</span>")
+							to_chat(user, SPAN_NOTICE("You put in the glass panel."))
 							state = 4
 							icon_state = "4"
 
@@ -144,14 +144,14 @@ var/global/list/empty_playable_ai_cores = list()
 					var/obj/item/organ/internal/posibrain/PB = P
 					B = PB.brainmob
 				if(!B)
-					to_chat(user, "<span class='warning'>Sticking an empty [P] into the frame would sort of defeat the purpose.</span>")
+					to_chat(user, SPAN_WARNING("Sticking an empty [P] into the frame would sort of defeat the purpose."))
 					return
 				if(B.stat == 2)
-					to_chat(user, "<span class='warning'>Sticking a dead [P] into the frame would sort of defeat the purpose.</span>")
+					to_chat(user, SPAN_WARNING("Sticking a dead [P] into the frame would sort of defeat the purpose."))
 					return
 
 				if(jobban_isbanned(B, "AI"))
-					to_chat(user, "<span class='warning'>This [P] does not seem to fit.</span>")
+					to_chat(user, SPAN_WARNING("This [P] does not seem to fit."))
 					return
 				if(!user.unEquip(P, src))
 					return
@@ -164,7 +164,7 @@ var/global/list/empty_playable_ai_cores = list()
 
 			if(isCrowbar(P) && brain)
 				playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-				to_chat(user, "<span class='notice'>You remove the brain.</span>")
+				to_chat(user, SPAN_NOTICE("You remove the brain."))
 				brain.dropInto(loc)
 				brain = null
 				icon_state = "3"
@@ -172,7 +172,7 @@ var/global/list/empty_playable_ai_cores = list()
 		if(4)
 			if(isCrowbar(P))
 				playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-				to_chat(user, "<span class='notice'>You remove the glass panel.</span>")
+				to_chat(user, SPAN_NOTICE("You remove the glass panel."))
 				state = 3
 				if (brain)
 					icon_state = "3b"
@@ -183,11 +183,11 @@ var/global/list/empty_playable_ai_cores = list()
 
 			if(isScrewdriver(P))
 				if(!authorized)
-					to_chat(user, "<span class='warning'>Core fails to connect to the systems of [GLOB.using_map.full_name]!</span>")
+					to_chat(user, SPAN_WARNING("Core fails to connect to the systems of [GLOB.using_map.full_name]!"))
 					return
 
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-				to_chat(user, "<span class='notice'>You connect the monitor.</span>")
+				to_chat(user, SPAN_NOTICE("You connect the monitor."))
 				if(!brain)
 					var/open_for_latejoin = alert(user, "Would you like this core to be open for latejoining AIs?", "Latejoin", "Yes", "Yes", "No") == "Yes"
 					var/obj/structure/AIcore/deactivated/D = new(loc)
@@ -222,7 +222,7 @@ var/global/list/empty_playable_ai_cores = list()
 	transfer.dropInto(src)
 	transfer.create_eyeobj()
 	transfer.cancel_camera()
-	to_chat(user, "<span class='notice'>Transfer successful:</span> [transfer.name] ([rand(1000,9999)].exe) downloaded to host terminal. Local copy wiped.")
+	to_chat(user, "[SPAN_NOTICE("Transfer successful:")] [transfer.name] ([rand(1000,9999)].exe) downloaded to host terminal. Local copy wiped.")
 	to_chat(transfer, "You have been uploaded to a stationary terminal. Remote device connection restored.")
 
 	if(card)
@@ -244,23 +244,23 @@ var/global/list/empty_playable_ai_cores = list()
 		if(transfer)
 			load_ai(transfer,card,user)
 		else
-			to_chat(user, "<span class='danger'>ERROR:</span> Unable to locate artificial intelligence.")
+			to_chat(user, "[SPAN_DANGER("ERROR:")] Unable to locate artificial intelligence.")
 		return
 	else if(istype(W, /obj/item/wrench))
 		if(anchored)
-			user.visible_message("<span class='notice'>\The [user] starts to unbolt \the [src] from the plating...</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] starts to unbolt \the [src] from the plating..."))
 			if(!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
-				user.visible_message("<span class='notice'>\The [user] decides not to unbolt \the [src].</span>")
+				user.visible_message(SPAN_NOTICE("\The [user] decides not to unbolt \the [src]."))
 				return
-			user.visible_message("<span class='notice'>\The [user] finishes unfastening \the [src]!</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] finishes unfastening \the [src]!"))
 			anchored = FALSE
 			return
 		else
-			user.visible_message("<span class='notice'>\The [user] starts to bolt \the [src] to the plating...</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] starts to bolt \the [src] to the plating..."))
 			if(!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
-				user.visible_message("<span class='notice'>\The [user] decides not to bolt \the [src].</span>")
+				user.visible_message(SPAN_NOTICE("\The [user] decides not to bolt \the [src]."))
 				return
-			user.visible_message("<span class='notice'>\The [user] finishes fastening down \the [src]!</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] finishes fastening down \the [src]!"))
 			anchored = TRUE
 			return
 	else
@@ -282,7 +282,7 @@ var/global/list/empty_playable_ai_cores = list()
 
 	if(D in empty_playable_ai_cores)
 		empty_playable_ai_cores -= D
-		to_chat(src, "\The [id] is now <font color=\"#ff0000\">not available</font> for latejoining AIs.")
+		to_chat(src, "\The [id] is now [SPAN_COLOR("#ff0000", "not available")] for latejoining AIs.")
 	else
 		empty_playable_ai_cores += D
-		to_chat(src, "\The [id] is now <font color=\"#008000\">available</font> for latejoining AIs.")
+		to_chat(src, "\The [id] is now [SPAN_COLOR("#008000", "available")] for latejoining AIs.")

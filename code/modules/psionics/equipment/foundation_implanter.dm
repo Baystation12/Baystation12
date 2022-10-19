@@ -8,10 +8,10 @@
 	if(!choice || user != loc) return
 	var/obj/item/implant/psi_control/implant = imp
 	if(!istype(implant))
-		to_chat(user, "<span class='warning'>The implanter reports there is no compatible implant loaded.</span>")
+		to_chat(user, SPAN_WARNING("The implanter reports there is no compatible implant loaded."))
 		return
 	implant.psi_mode = choice
-	to_chat(user, "<span class='notice'>You set \the [src] to configure implants with the '[implant.psi_mode]' setting.</span>")
+	to_chat(user, SPAN_NOTICE("You set \the [src] to configure implants with the '[implant.psi_mode]' setting."))
 
 /obj/item/implanter/psi/New()
 	..()

@@ -93,7 +93,7 @@
 	set src in view(1)
 
 	if(!CanPhysicallyInteract(usr))
-		to_chat(usr, "<span class='warning'>You can't reach it.</span>")
+		to_chat(usr, SPAN_WARNING("You can't reach it."))
 		return
 
 	if(ismob(usr))

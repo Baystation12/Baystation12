@@ -18,11 +18,11 @@
 			I.hidden_uplink.update_nano_data()
 			SSnano.update_uis(I.hidden_uplink)
 			use(amount)
-			to_chat(user, "<span class='notice'>You slot \the [src] into \the [I] and charge its internal uplink.</span>")
+			to_chat(user, SPAN_NOTICE("You slot \the [src] into \the [I] and charge its internal uplink."))
 
 /obj/item/stack/telecrystal/attack_self(mob/user)
 	if(use(Ceil(DEFAULT_TELECRYSTAL_AMOUNT/20)))
-		user.visible_message("<span class='warning'>\The [user] crushes a crystal!</span>", "<span class='warning'>You crush \a [src]!</span>", "You hear the sound of a crystal breaking just before a sudden crack of electricity.")
+		user.visible_message(SPAN_WARNING("\The [user] crushes a crystal!"), SPAN_WARNING("You crush \a [src]!"), "You hear the sound of a crystal breaking just before a sudden crack of electricity.")
 		var/turf/T = get_random_turf_in_range(user, 7, 3)
 		if(T)
 			user.phase_out(T, get_turf(user))

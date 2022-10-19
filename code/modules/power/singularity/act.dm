@@ -22,7 +22,7 @@
 				step_towards(item, S)
 				to_chat(src, SPAN_WARNING("\The [S] pulls \the [item] from your grip!"))
 		if(!lying && (!shoes || !(shoes.item_flags & ITEM_FLAG_NOSLIP)) && (!species || !(species.check_no_slip(src))) && prob(current_size*5))
-			to_chat(src, "<span class='danger'>A strong gravitational force slams you to the ground!</span>")
+			to_chat(src, SPAN_DANGER("A strong gravitational force slams you to the ground!"))
 			Weaken(current_size)
 	..()
 

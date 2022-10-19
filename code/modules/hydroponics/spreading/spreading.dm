@@ -20,7 +20,7 @@
 
 			log_and_message_admins("Spacevines spawned in \the [get_area(T)]", location = T)
 			return
-		log_and_message_admins("<span class='notice'>Event: Spacevines failed to find a viable turf.</span>")
+		log_and_message_admins(SPAN_NOTICE("Event: Spacevines failed to find a viable turf."))
 
 /obj/effect/dead_plant
 	anchored = TRUE
@@ -77,7 +77,7 @@
 	. = ..()
 
 	if(!SSplants)
-		log_error("<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
+		log_error(SPAN_DANGER("Plant controller does not exist and [src] requires it. Aborting."))
 		return INITIALIZE_HINT_QDEL
 	if(!istype(seed))
 		seed = SSplants.seeds[DEFAULT_SEED]

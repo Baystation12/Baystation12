@@ -186,7 +186,7 @@
 			return FALSE
 		coin = W
 		categories |= CAT_COIN
-		to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("You insert \the [W] into \the [src]."))
 		SSnano.update_uis(src)
 		return TRUE
 	if((user.a_intent == I_HELP) && attempt_to_stock(W, user))
@@ -220,10 +220,10 @@
 	if(currently_vending.price > cashmoney.worth)
 		// This is not a status display message, since it's something the character
 		// themselves is meant to see BEFORE putting the money in
-		to_chat(usr, "[icon2html(cashmoney, usr)] <span class='warning'>That is not enough money.</span>")
+		to_chat(usr, "[icon2html(cashmoney, usr)] [SPAN_WARNING("That is not enough money.")]")
 		return 0
 
-	visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
+	visible_message(SPAN_INFO("\The [usr] inserts some cash into \the [src]."))
 	cashmoney.worth -= currently_vending.price
 
 	if(cashmoney.worth <= 0)
@@ -242,7 +242,7 @@
  * successful, 0 if failed.
  */
 /obj/machinery/vending/proc/pay_with_ewallet(obj/item/spacecash/ewallet/wallet)
-	visible_message("<span class='info'>\The [usr] swipes \the [wallet] through \the [src].</span>")
+	visible_message(SPAN_INFO("\The [usr] swipes \the [wallet] through \the [src]."))
 	if(currently_vending.price > wallet.worth)
 		src.status_message = "Insufficient funds on chargecard."
 		src.status_error = 1
@@ -260,9 +260,9 @@
  */
 /obj/machinery/vending/proc/pay_with_card(obj/item/card/id/I, obj/item/ID_container)
 	if(I==ID_container || ID_container == null)
-		visible_message("<span class='info'>\The [usr] swipes \the [I] through \the [src].</span>")
+		visible_message(SPAN_INFO("\The [usr] swipes \the [I] through \the [src]."))
 	else
-		visible_message("<span class='info'>\The [usr] swipes \the [ID_container] through \the [src].</span>")
+		visible_message(SPAN_INFO("\The [usr] swipes \the [ID_container] through \the [src]."))
 	var/datum/money_account/customer_account = get_account(I.associated_account_number)
 	if (!customer_account)
 		src.status_message = "Error: Unable to access account. Please contact technical support if problem persists."
@@ -371,7 +371,7 @@
 		coin.dropInto(loc)
 		if(!user.get_active_hand())
 			user.put_in_hands(coin)
-		to_chat(user, "<span class='notice'>You remove \the [coin] from \the [src]</span>")
+		to_chat(user, SPAN_NOTICE("You remove \the [coin] from \the [src]"))
 		coin = null
 		categories &= ~CAT_COIN
 		return TOPIC_HANDLED
@@ -391,7 +391,7 @@
 		if(R.price <= 0)
 			vend(R, user)
 		else if(istype(user,/mob/living/silicon)) //If the item is not free, provide feedback if a synth is trying to buy something.
-			to_chat(user, "<span class='danger'>Artificial unit recognized.  Artificial units cannot complete this transaction.  Purchase canceled.</span>")
+			to_chat(user, SPAN_DANGER("Artificial unit recognized.  Artificial units cannot complete this transaction.  Purchase canceled."))
 		else
 			currently_vending = R
 			if(!vendor_account || vendor_account.suspended)
@@ -417,7 +417,7 @@
 
 /obj/machinery/vending/proc/vend(datum/stored_items/vending_products/R, mob/user)
 	if((!allowed(user)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
-		to_chat(user, "<span class='warning'>Access denied.</span>")//Unless emagged of course
+		to_chat(user, SPAN_WARNING("Access denied."))//Unless emagged of course
 		flick(src.icon_deny,src)
 		return
 	src.vend_ready = 0 //One thing at a time!!
@@ -427,13 +427,13 @@
 
 	if (R.category & CAT_COIN)
 		if(!coin)
-			to_chat(user, "<span class='notice'>You need to insert a coin to get this item.</span>")
+			to_chat(user, SPAN_NOTICE("You need to insert a coin to get this item."))
 			return
 		if(!isnull(coin.string_color))
 			if(prob(50))
-				to_chat(user, "<span class='notice'>You successfully pull the coin out before \the [src] could swallow it.</span>")
+				to_chat(user, SPAN_NOTICE("You successfully pull the coin out before \the [src] could swallow it."))
 			else
-				to_chat(user, "<span class='notice'>You weren't able to pull the coin out fast enough, the machine ate it, string and all.</span>")
+				to_chat(user, SPAN_NOTICE("You weren't able to pull the coin out fast enough, the machine ate it, string and all."))
 				qdel(coin)
 				coin = null
 				categories &= ~CAT_COIN
@@ -454,7 +454,7 @@
 		if(prob(diona_spawn_chance)) //Hehehe
 			var/turf/T = get_turf(src)
 			var/mob/living/carbon/alien/diona/S = new(T)
-			src.visible_message("<span class='notice'>\The [src] makes an odd grinding noise before coming to a halt as \a [S.name] slurmps out from the receptacle.</span>")
+			src.visible_message(SPAN_NOTICE("\The [src] makes an odd grinding noise before coming to a halt as \a [S.name] slurmps out from the receptacle."))
 		else //Just a normal vend, then
 			R.get_product(get_turf(src))
 			src.visible_message("\The [src] clunks as it vends \the [R.item_name].")
@@ -462,7 +462,7 @@
 			if(prob(1)) //The vending gods look favorably upon you
 				sleep(3)
 				if(R.get_product(get_turf(src)))
-					src.visible_message("<span class='notice'>\The [src] clunks as it vends an additional [R.item_name].</span>")
+					src.visible_message(SPAN_NOTICE("\The [src] clunks as it vends an additional [R.item_name]."))
 
 		src.status_message = ""
 		src.status_error = 0
@@ -481,7 +481,7 @@
 		return
 
 	if(R.add_product(W))
-		to_chat(user, "<span class='notice'>You insert \the [W] in the product receptor.</span>")
+		to_chat(user, SPAN_NOTICE("You insert \the [W] in the product receptor."))
 		SSnano.update_uis(src)
 		return 1
 
@@ -515,8 +515,7 @@
 	if (!message)
 		return
 
-	for(var/mob/O in hearers(src, null))
-		O.show_message("<span class='game say'><span class='name'>\The [src]</span> beeps, \"[message]\"</span>",2)
+	audible_message(SPAN_CLASS("game say", "[SPAN_CLASS("name", "\The [src]")] beeps, \"[message]\""))
 	return
 
 /obj/machinery/vending/powered()
@@ -557,7 +556,7 @@
 		return 0
 	spawn(0)
 		throw_item.throw_at(target, rand(1,2), 3)
-	src.visible_message("<span class='warning'>\The [src] launches \a [throw_item] at \the [target]!</span>")
+	src.visible_message(SPAN_WARNING("\The [src] launches \a [throw_item] at \the [target]!"))
 	return 1
 
 /*
@@ -1198,7 +1197,7 @@
 	if((istype(user) && user.species.name == SPECIES_ADHERENT) || emagged)
 		. = ..()
 	else
-		to_chat(user, "<span class='notice'>The vending machine emits a discordant note, and a small hole blinks several times. It looks like it wants something inserted.</span>")
+		to_chat(user, SPAN_NOTICE("The vending machine emits a discordant note, and a small hole blinks several times. It looks like it wants something inserted."))
 
 /obj/machinery/vending/engivend
 	name = "\improper Engi-Vend"

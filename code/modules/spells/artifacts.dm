@@ -14,11 +14,11 @@
 
 /obj/item/scrying/attack_self(mob/user as mob)
 	if((user.mind && !GLOB.wizards.is_antagonist(user.mind)))
-		to_chat(user, "<span class='warning'>You stare into the orb and see nothing but your own reflection.</span>")
+		to_chat(user, SPAN_WARNING("You stare into the orb and see nothing but your own reflection."))
 		return
 
-	to_chat(user, "<span class='info'>You can see... everything!</span>") // This never actually happens.
-	visible_message("<span class='danger'>[user] stares into [src], their eyes glazing over.</span>")
+	to_chat(user, SPAN_INFO("You can see... everything!")) // This never actually happens.
+	visible_message(SPAN_DANGER("[user] stares into [src], their eyes glazing over."))
 
 	user.teleop = user.ghostize(1)
 	announce_ghost_joinleave(user.teleop, 1, "You feel that they used a powerful artifact to [pick("invade","disturb","disrupt","infest","taint","spoil","blight")] this place with their presence.")

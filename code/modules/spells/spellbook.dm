@@ -53,7 +53,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 			to_chat(user, "You can't make heads or tails of this book.")
 			return
 		if (spellbook.book_flags & LOCKED)
-			to_chat(user, "<span class='warning'>Drat! This spellbook's apprentice-proof lock is on!</span>")
+			to_chat(user, SPAN_WARNING("Drat! This spellbook's apprentice-proof lock is on!"))
 			return
 	else if (spellbook.book_flags & LOCKED)
 		to_chat(user, "You notice the apprentice-proof lock is on. Luckily you are beyond such things.")
@@ -70,10 +70,10 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 		if(istype(I,/obj/item/stack))
 			var/obj/item/stack/S = I
 			if(S.amount < S.max_amount)
-				to_chat(usr, "<span class='warning'>You must sacrifice [S.max_amount] stacks of [S]!</span>")
+				to_chat(usr, SPAN_WARNING("You must sacrifice [S.max_amount] stacks of [S]!"))
 				return
 		qdel(I)
-	to_chat(user, "<span class='notice'>Your sacrifice was accepted!</span>")
+	to_chat(user, SPAN_NOTICE("Your sacrifice was accepted!"))
 	has_sacrificed = 1
 	investing_time = max(investing_time - 6000,1) //subtract 10 minutes. Make sure it doesn't act funky at the beginning of the game.
 
@@ -102,7 +102,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 		dat = "[temp]<br><a href='byond://?src=\ref[src];temp=1'>Return</a>"
 	else
 		dat = "<center><h3>[spellbook.title]</h3><i>[spellbook.title_desc]</i><br>You have [uses] spell slot[uses > 1 ? "s" : ""] left.</center><br>"
-		dat += "<center><font color='#ff33cc'>Requires Wizard Garb</font><br><font color='#ff6600'>Selectable Target</font><br><font color='#33cc33'>Spell Charge Type: Recharge, Sacrifice, Charges</font></center><br>"
+		dat += "<center>[SPAN_COLOR("#ff33cc", "Requires Wizard Garb")]<br>[SPAN_COLOR("#ff6600", "Selectable Target")]<br>[SPAN_COLOR("#33cc33", "Spell Charge Type: Recharge, Sacrifice, Charges")]</center><br>"
 		dat += "<center><b>To use a contract, first bind it to your soul, then give it to someone to sign. This will bind their soul to you.</b></center><br>"
 		for(var/i in 1 to spellbook.spells.len)
 			var/name = "" //name of target
@@ -112,7 +112,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 				var/datum/spellbook/S = spellbook.spells[i]
 				name = initial(S.name)
 				desc = initial(S.book_desc)
-				info = "<font color='#ff33cc'>[initial(S.max_uses)] Spell Slots</font>"
+				info = SPAN_COLOR("#ff33cc", "[initial(S.max_uses)] Spell Slots")
 			else if(ispath(spellbook.spells[i],/obj))
 				var/obj/O = spellbook.spells[i]
 				name = "Artefact: [capitalize(initial(O.name))]" //because 99.99% of objects don't have capitals in them and it makes it look weird.
@@ -123,7 +123,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 				desc = initial(S.desc)
 				var/testing = initial(S.spell_flags)
 				if(testing & NEEDSCLOTHES)
-					info = "<font color='#ff33cc'>W</font>"
+					info = SPAN_COLOR("#ff33cc", "W")
 				var/type = ""
 				switch(initial(S.charge_type))
 					if(Sp_RECHARGE)
@@ -132,7 +132,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 						type = "S"
 					if(Sp_CHARGES)
 						type = "C"
-				info += "<font color='#33cc33'>[type]</font>"
+				info += SPAN_COLOR("#33cc33", type)
 			dat += "<A href='byond://?src=\ref[src];path=\ref[spellbook.spells[i]]'>[name]</a>"
 			if(length(info))
 				dat += " ([info])"
@@ -191,7 +191,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 		if(!path)
 			return TOPIC_HANDLED
 		if(uses < spellbook.spells[path])
-			to_chat(user, "<span class='notice'>You do not have enough spell slots to purchase this.</span>")
+			to_chat(user, SPAN_NOTICE("You do not have enough spell slots to purchase this."))
 			return TOPIC_HANDLED
 		if(ispath(path,/datum/spellbook))
 			src.set_spellbook(path)
@@ -227,7 +227,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 			user.spellremove()
 			temp = "All spells and investments have been removed. You may now memorize a new set of spells."
 		else
-			to_chat(user, "<span class='warning'>You must be in the wizard academy to re-memorize your spells.</span>")
+			to_chat(user, SPAN_WARNING("You must be in the wizard academy to re-memorize your spells."))
 		. = TOPIC_REFRESH
 
 	src.interact(user)

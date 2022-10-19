@@ -93,7 +93,7 @@
 
 			if("probe")
 				if(machinelist.len > 0)
-					temp = "<font color = #d70b00>- FAILED: CANNOT PROBE WHEN BUFFER FULL -</font>"
+					temp = SPAN_COLOR("#d70b00", "- FAILED: CANNOT PROBE WHEN BUFFER FULL -")
 
 				else
 					for(var/obj/machinery/telecomms/T in range(25, src))
@@ -101,9 +101,9 @@
 							machinelist.Add(T)
 
 					if(!machinelist.len)
-						temp = "<font color = #d70b00>- FAILED: UNABLE TO LOCATE NETWORK ENTITIES IN \[[network]\] -</font>"
+						temp = SPAN_COLOR("#d70b00", "- FAILED: UNABLE TO LOCATE NETWORK ENTITIES IN \[[network]\] -")
 					else
-						temp = "<font color = #336699>- [machinelist.len] ENTITIES LOCATED & BUFFERED -</font>"
+						temp = SPAN_COLOR("#336699", "- [machinelist.len] ENTITIES LOCATED & BUFFERED -")
 
 					screen = 0
 
@@ -113,13 +113,13 @@
 		var/newnet = input(usr, "Which network do you want to view?", "Comm Monitor", network) as null|text
 		if(newnet && ((usr in range(1, src) || issilicon(usr))))
 			if(length(newnet) > 15)
-				temp = "<font color = #d70b00>- FAILED: NETWORK TAG STRING TOO LENGHTLY -</font>"
+				temp = SPAN_COLOR("#d70b00", "- FAILED: NETWORK TAG STRING TOO LENGHTLY -")
 
 			else
 				network = newnet
 				screen = 0
 				machinelist = list()
-				temp = "<font color = #336699>- NEW NETWORK TAG SET IN ADDRESS \[[network]\] -</font>"
+				temp = SPAN_COLOR("#336699", "- NEW NETWORK TAG SET IN ADDRESS \[[network]\] -")
 
 	updateUsrDialog()
 	return
@@ -129,6 +129,6 @@
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = TRUE
 		req_access.Cut()
-		to_chat(user, "<span class='notice'>You you disable the security protocols</span>")
+		to_chat(user, SPAN_NOTICE("You you disable the security protocols"))
 		src.updateUsrDialog()
 		return 1

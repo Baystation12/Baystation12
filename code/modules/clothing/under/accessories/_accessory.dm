@@ -91,7 +91,7 @@
 	parent.overlays += get_inv_overlay()
 
 	if(user)
-		to_chat(user, "<span class='notice'>You attach \the [src] to \the [parent].</span>")
+		to_chat(user, SPAN_NOTICE("You attach \the [src] to \the [parent]."))
 		src.add_fingerprint(user)
 
 

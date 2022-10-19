@@ -62,10 +62,10 @@
 
 	if(href_list["irc_msg"])
 		if(!holder && received_irc_pm < world.time - 6000) //Worse they can do is spam IRC for 10 minutes
-			to_chat(usr, "<span class='warning'>You are no longer able to use this, it's been more then 10 minutes since an admin on IRC has responded to you</span>")
+			to_chat(usr, SPAN_WARNING("You are no longer able to use this, it's been more then 10 minutes since an admin on IRC has responded to you"))
 			return
 		if(mute_irc)
-			to_chat(usr, "<span class='warning'You cannot use this as your client has been muted from sending messages to the admins on IRC</span>")
+			to_chat(usr, SPAN_WARNING("You cannot use this as your client has been muted from sending messages to the admins on IRC"))
 			return
 		cmd_admin_irc_pm(href_list["irc_msg"])
 		return
@@ -106,7 +106,7 @@
 	if(!user_acted(src))
 		return 0
 	if(filelength > UPLOAD_LIMIT)
-		to_chat(src, "<font color='red'>Error: AllowUpload(): File Upload too large. Upload Limit: [UPLOAD_LIMIT/1024]KiB.</font>")
+		to_chat(src, SPAN_COLOR("red", "Error: AllowUpload(): File Upload too large. Upload Limit: [UPLOAD_LIMIT/1024]KiB."))
 		return 0
 	return 1
 
@@ -156,9 +156,9 @@
 	else src.preload_rsc = 1 // If config.resource_urls is not set, preload like normal.
 
 	if(byond_version < DM_VERSION)
-		to_chat(src, "<span class='warning'>You are running an older version of BYOND than the server and may experience issues.</span>")
-		to_chat(src, "<span class='warning'>It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/.</span>")
-	to_chat(src, "<span class='warning'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</span>")
+		to_chat(src, SPAN_WARNING("You are running an older version of BYOND than the server and may experience issues."))
+		to_chat(src, SPAN_WARNING("It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/."))
+	to_chat(src, SPAN_WARNING("If the title screen is black, resources are still downloading. Please be patient until the title screen appears."))
 	GLOB.clients += src
 	GLOB.ckey_directory[ckey] = src
 
@@ -183,7 +183,7 @@
 	if (config.event)
 		to_chat(src, "<h1 class='alert'>Event</h1>")
 		to_chat(src, "<h2 class='alert'>An event is taking place. OOC Info:</h2>")
-		to_chat(src, "<span class='alert'>[config.event]</span>")
+		to_chat(src, SPAN_CLASS("alert", "[config.event]"))
 		to_chat(src, "<br>")
 
 	if(holder)
@@ -203,13 +203,13 @@
 	send_resources()
 
 	if (GLOB.changelog_hash && prefs.lastchangelog != GLOB.changelog_hash) //bolds the changelog button on the interface so we know there are updates.
-		to_chat(src, "<span class='info'>You have unread updates in the changelog.</span>")
+		to_chat(src, SPAN_INFO("You have unread updates in the changelog."))
 		winset(src, "rpane.changelog", "background-color=#eaeaea;font-style=bold")
 		if(config.aggressive_changelog)
 			src.changes()
 
 	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
-		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
+		to_chat(src, SPAN_WARNING("Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you."))
 
 	if(holder)
 		src.control_freak = 0 //Devs need 0 for profiler access

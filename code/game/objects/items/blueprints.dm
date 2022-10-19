@@ -89,20 +89,20 @@
 	if(!istype(res,/list))
 		switch(res)
 			if(ROOM_ERR_SPACE)
-				to_chat(usr, "<span class='warning'>The new area must be completely airtight!</span>")
+				to_chat(usr, SPAN_WARNING("The new area must be completely airtight!"))
 				return
 			if(ROOM_ERR_TOOLARGE)
-				to_chat(usr, "<span class='warning'>The new area too large!</span>")
+				to_chat(usr, SPAN_WARNING("The new area too large!"))
 				return
 			else
-				to_chat(usr, "<span class='warning'>Error! Please notify administration!</span>")
+				to_chat(usr, SPAN_WARNING("Error! Please notify administration!"))
 				return
 	var/list/turf/turfs = res
 	var/str = sanitizeSafe(input("New area name:","Blueprint Editing", ""), MAX_NAME_LEN)
 	if(!str || !length(str)) //cancel
 		return
 	if(length(str) > 50)
-		to_chat(usr, "<span class='warning'>Name too long.</span>")
+		to_chat(usr, SPAN_WARNING("Name too long."))
 		return
 	var/area/A = new
 	A.SetName(str)
@@ -123,11 +123,11 @@
 	if(!str || !length(str) || str==prevname) //cancel
 		return
 	if(length(str) > 50)
-		to_chat(usr, "<span class='warning'>Text too long.</span>")
+		to_chat(usr, SPAN_WARNING("Text too long."))
 		return
 	set_area_machinery_title(A,str,prevname)
 	A.SetName(str)
-	to_chat(usr, "<span class='notice'>You set the area '[prevname]' title to '[str]'.</span>")
+	to_chat(usr, SPAN_NOTICE("You set the area '[prevname]' title to '[str]'."))
 	interact()
 
 /obj/item/blueprints/proc/delete_area()
@@ -135,7 +135,7 @@
 	if (get_area_type(A)!=AREA_STATION || A.apc) //let's just check this one last time, just in case
 		interact()
 		return
-	to_chat(usr, "<span class='notice'>You scrub [A.name] off the blueprint.</span>")
+	to_chat(usr, SPAN_NOTICE("You scrub [A.name] off the blueprint."))
 	log_and_message_admins("deleted area [A.name] via station blueprints.")
 	qdel(A)
 	interact()

@@ -51,19 +51,19 @@
 		return
 
 	if(reagents && reagents.reagent_list.len)
-		to_chat(user, "<span class='notice'>It contains [reagents.total_volume] units of liquid.</span>")
+		to_chat(user, SPAN_NOTICE("It contains [reagents.total_volume] units of liquid."))
 	else
-		to_chat(user, "<span class='notice'>It is empty.</span>")
+		to_chat(user, SPAN_NOTICE("It is empty."))
 	if(!is_open_container())
-		to_chat(user, "<span class='notice'>The airtight lid seals it completely.</span>")
+		to_chat(user, SPAN_NOTICE("The airtight lid seals it completely."))
 
 /obj/item/reagent_containers/glass/attack_self()
 	..()
 	if(is_open_container())
-		to_chat(usr, "<span class = 'notice'>You put the lid on \the [src].</span>")
+		to_chat(usr, SPAN_NOTICE("You put the lid on \the [src]."))
 		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 	else
-		to_chat(usr, "<span class = 'notice'>You take the lid off \the [src].</span>")
+		to_chat(usr, SPAN_NOTICE("You take the lid off \the [src]."))
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	update_icon()
 
@@ -76,14 +76,14 @@
 
 /obj/item/reagent_containers/glass/standard_feed_mob(mob/user, mob/target)
 	if(!is_open_container())
-		to_chat(user, "<span class='notice'>You need to open \the [src] first.</span>")
+		to_chat(user, SPAN_NOTICE("You need to open \the [src] first."))
 		return 1
 	if(user.a_intent == I_HURT)
 		return 1
 	return ..()
 
 /obj/item/reagent_containers/glass/self_feed_message(mob/user)
-	to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
+	to_chat(user, SPAN_NOTICE("You swallow a gulp from \the [src]."))
 	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
 		for(var/datum/reagent/R in reagents.reagent_list)
 			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R.type)
@@ -302,10 +302,10 @@
 /obj/item/reagent_containers/glass/bucket/attackby(obj/D, mob/user as mob)
 	if(istype(D, /obj/item/mop))
 		if(reagents.total_volume < 1)
-			to_chat(user, "<span class='warning'>\The [src] is empty!</span>")
+			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 		else
 			reagents.trans_to_obj(D, 5)
-			to_chat(user, "<span class='notice'>You wet \the [D] in \the [src].</span>")
+			to_chat(user, SPAN_NOTICE("You wet \the [D] in \the [src]."))
 			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		return
 	else

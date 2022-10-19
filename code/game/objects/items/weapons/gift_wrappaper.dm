@@ -30,16 +30,16 @@
 /obj/effect/spresent/relaymove(mob/user as mob)
 	if (user.stat)
 		return
-	to_chat(user, "<span class='warning'>You can't move.</span>")
+	to_chat(user, SPAN_WARNING("You can't move."))
 
 /obj/effect/spresent/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 
 	if(!isWirecutter(W))
-		to_chat(user, "<span class='warning'>I need wirecutters for that.</span>")
+		to_chat(user, SPAN_WARNING("I need wirecutters for that."))
 		return
 
-	to_chat(user, "<span class='notice'>You cut open the present.</span>")
+	to_chat(user, SPAN_NOTICE("You cut open the present."))
 
 	for(var/mob/M in src) //Should only be one but whatever.
 		M.dropInto(loc)
@@ -139,7 +139,7 @@
 		user.put_in_active_hand(gift)
 		src.gift.add_fingerprint(user)
 	else
-		to_chat(user, "<span class='warning'>The gift was empty!</span>")
+		to_chat(user, SPAN_WARNING("The gift was empty!"))
 	qdel(src)
 	return
 
@@ -153,7 +153,7 @@
 /obj/item/wrapping_paper/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if (!( locate(/obj/structure/table, src.loc) ))
-		to_chat(user, "<span class='warning'>You MUST put the paper on a table!</span>")
+		to_chat(user, SPAN_WARNING("You MUST put the paper on a table!"))
 	if (W.w_class < ITEM_SIZE_HUGE)
 		var/is_wirecutter = FALSE
 		for (var/obj/item as anything in user.GetAllHeld())
@@ -163,11 +163,11 @@
 		if (is_wirecutter)
 			var/a_used = W.get_storage_cost()
 			if (a_used == ITEM_SIZE_NO_CONTAINER)
-				to_chat(user, "<span class='warning'>You can't wrap that!</span>")//no gift-wrapping lit welders
+				to_chat(user, SPAN_WARNING("You can't wrap that!"))//no gift-wrapping lit welders
 
 				return
 			if (src.amount < a_used)
-				to_chat(user, "<span class='warning'>You need more paper!</span>")
+				to_chat(user, SPAN_WARNING("You need more paper!"))
 				return
 			else
 				if(istype(W, /obj/item/smallDelivery) || istype(W, /obj/item/gift)) //No gift wrapping gifts!
@@ -184,9 +184,9 @@
 				qdel(src)
 				return
 		else
-			to_chat(user, "<span class='warning'>You need scissors!</span>")
+			to_chat(user, SPAN_WARNING("You need scissors!"))
 	else
-		to_chat(user, "<span class='warning'>The object is FAR too large!</span>")
+		to_chat(user, SPAN_WARNING("The object is FAR too large!"))
 	return
 
 
@@ -212,6 +212,6 @@
 			admin_attack_log(user, H, "Used \a [src] to wrap their victim", "Was wrapepd with \a [src]", "used \the [src] to wrap")
 
 		else
-			to_chat(user, "<span class='warning'>You need more paper.</span>")
+			to_chat(user, SPAN_WARNING("You need more paper."))
 	else
 		to_chat(user, "They are moving around too much. A straightjacket would help.")

@@ -41,10 +41,10 @@
 	if(projectile_vomit)
 		vomit_onto.AdjustStunned(3)
 		vomit_onto.AdjustWeakened(3)
-		vomit_onto.visible_message("<span class='danger'>\The [vomit_onto] blasts themselves full in the face with \the [src]!</span>")
+		vomit_onto.visible_message(SPAN_DANGER("\The [vomit_onto] blasts themselves full in the face with \the [src]!"))
 		playsound(T, "sound/weapons/gunshot/money_launcher_jackpot.ogg", 100, 1)
 	else
-		vomit_onto.visible_message("<span class='danger'>\The [vomit_onto] ejects a few [GLOB.using_map.local_currency_name] into their face.</span>")
+		vomit_onto.visible_message(SPAN_DANGER("\The [vomit_onto] ejects a few [GLOB.using_map.local_currency_name] into their face."))
 		playsound(T, 'sound/weapons/gunshot/money_launcher.ogg', 100, 1)
 
 	receptacle_value = 0
@@ -62,19 +62,19 @@
 
 /obj/item/gun/launcher/money/proc/unload_receptacle(mob/user)
 	if(receptacle_value < 1)
-		to_chat(user, "<span class='warning'>There's no money in [src].</span>")
+		to_chat(user, SPAN_WARNING("There's no money in [src]."))
 		return
 
 	var/obj/item/spacecash/bling = new /obj/item/spacecash/bundle()
 	bling.worth = receptacle_value
 	bling.update_icon()
 	user.put_in_hands(bling)
-	to_chat(user, "<span class='notice'>You eject [receptacle_value] [GLOB.using_map.local_currency_name_singular] from [src]'s receptacle.</span>")
+	to_chat(user, SPAN_NOTICE("You eject [receptacle_value] [GLOB.using_map.local_currency_name_singular] from [src]'s receptacle."))
 	receptacle_value = 0
 
 /obj/item/gun/launcher/money/proc/absorb_cash(obj/item/spacecash/bling, mob/user)
 	if(!istype(bling) || !bling.worth || bling.worth < 1)
-		to_chat(user, "<span class='warning'>[src] refuses to pick up [bling].</span>")
+		to_chat(user, SPAN_WARNING("[src] refuses to pick up [bling]."))
 		return
 	if(receptacle_value >= max_capacity)
 		to_chat(user, SPAN_WARNING("There's no space in the receptacle for [bling]."))
@@ -89,7 +89,7 @@
 			bling.update_icon()
 		return
 	receptacle_value += bling.worth
-	to_chat(user, "<span class='notice'>You load [bling] into [src].</span>")
+	to_chat(user, SPAN_NOTICE("You load [bling] into [src]."))
 	qdel(bling)
 
 /obj/item/gun/launcher/money/consume_next_projectile(mob/user=null)
@@ -117,11 +117,11 @@
 	var/disp_amount = min(input(user, "How many [GLOB.using_map.local_currency_name_singular] do you want to dispense at a time? (0 to [src.receptacle_value])", "Money Cannon Settings", 20) as num, receptacle_value)
 
 	if (disp_amount < 1)
-		to_chat(user, "<span class='warning'>You have to dispense at least one [GLOB.using_map.local_currency_name_singular] at a time!</span>")
+		to_chat(user, SPAN_WARNING("You have to dispense at least one [GLOB.using_map.local_currency_name_singular] at a time!"))
 		return
 
 	src.dispensing = disp_amount
-	to_chat(user, "<span class='notice'>You set [src] to dispense [dispensing] [GLOB.using_map.local_currency_name_singular] at a time.</span>")
+	to_chat(user, SPAN_NOTICE("You set [src] to dispense [dispensing] [GLOB.using_map.local_currency_name_singular] at a time."))
 
 /obj/item/gun/launcher/money/attack_hand(mob/user as mob)
 	if(user.get_inactive_hand() == src)
@@ -133,7 +133,7 @@
 	if(istype(W, /obj/item/spacecash))
 		var/obj/item/spacecash/bling = W
 		if(bling.worth < 1)
-			to_chat(user, "<span class='warning'>You can't seem to get the bills to slide into the receptacle.</span>")
+			to_chat(user, SPAN_WARNING("You can't seem to get the bills to slide into the receptacle."))
 			return
 		if(receptacle_value >= max_capacity)
 			to_chat(user, SPAN_WARNING("There's no space in the receptacle for [bling]."))
@@ -148,11 +148,11 @@
 				bling.update_icon()
 			return
 		receptacle_value += bling.worth
-		to_chat(user, "<span class='notice'>You slide [bling.worth] [GLOB.using_map.local_currency_name_singular] into [src]'s receptacle.</span>")
+		to_chat(user, SPAN_NOTICE("You slide [bling.worth] [GLOB.using_map.local_currency_name_singular] into [src]'s receptacle."))
 		qdel(bling)
 
 	else
-		to_chat(user, "<span class='warning'>That's not going to fit in there.</span>")
+		to_chat(user, SPAN_WARNING("That's not going to fit in there."))
 
 /obj/item/gun/launcher/money/examine(mob/user)
 	. = ..(user)
@@ -165,17 +165,17 @@
 		to_chat(user, "The receptacle is empty.")
 
 	if(emagged)
-		to_chat(user, "<span class='notice'>Its motors are severely overloaded.</span>")
+		to_chat(user, SPAN_NOTICE("Its motors are severely overloaded."))
 
 /obj/item/gun/launcher/money/handle_suicide(mob/living/user)
 	if(!ishuman(user))
 		return
 
 	var/mob/living/carbon/human/M = user
-	M.visible_message("<span class='danger'>[user] sticks [src] in their mouth, ready to pull the trigger...</span>")
+	M.visible_message(SPAN_DANGER("[user] sticks [src] in their mouth, ready to pull the trigger..."))
 
 	if(!do_after(user, 4 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT))
-		M.visible_message("<span class='notice'>[user] decided life was worth living.</span>")
+		M.visible_message(SPAN_NOTICE("[user] decided life was worth living."))
 		return
 
 	src.make_it_rain(user)
@@ -184,9 +184,9 @@
 	// Overloads the motors, causing it to shoot money harder and do harm.
 	if(!emagged)
 		emagged = TRUE
-		to_chat(user, "<span class='notice'>You slide the sequencer into [src]... only for it to spit it back out and emit a motorized squeal!</span>")
+		to_chat(user, SPAN_NOTICE("You slide the sequencer into [src]... only for it to spit it back out and emit a motorized squeal!"))
 		var/datum/effect/effect/system/spark_spread/s = new()
 		s.set_up(3, 1, src)
 		s.start()
 	else
-		to_chat(user, "<span class='notice'>[src] seems to have been tampered with already.</span>")
+		to_chat(user, SPAN_NOTICE("[src] seems to have been tampered with already."))

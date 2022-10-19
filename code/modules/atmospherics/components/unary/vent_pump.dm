@@ -268,32 +268,32 @@
 		var/obj/item/weldingtool/WT = W
 
 		if(!WT.isOn())
-			to_chat(user, "<span class='notice'>The welding tool needs to be on to start this task.</span>")
+			to_chat(user, SPAN_NOTICE("The welding tool needs to be on to start this task."))
 			return 1
 
 		if(!WT.remove_fuel(0,user))
-			to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
+			to_chat(user, SPAN_WARNING("You need more welding fuel to complete this task."))
 			return 1
 
-		to_chat(user, "<span class='notice'>Now welding \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("Now welding \the [src]."))
 		playsound(src, 'sound/items/Welder.ogg', 50, 1)
 
 		if(!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			to_chat(user, "<span class='notice'>You must remain close to finish this task.</span>")
+			to_chat(user, SPAN_NOTICE("You must remain close to finish this task."))
 			return 1
 
 		if(!src)
 			return 1
 
 		if(!WT.isOn())
-			to_chat(user, "<span class='notice'>The welding tool needs to be on to finish this task.</span>")
+			to_chat(user, SPAN_NOTICE("The welding tool needs to be on to finish this task."))
 			return 1
 
 		welded = !welded
 		update_icon()
 		playsound(src, 'sound/items/Welder2.ogg', 50, 1)
-		user.visible_message("<span class='notice'>\The [user] [welded ? "welds \the [src] shut" : "unwelds \the [src]"].</span>", \
-			"<span class='notice'>You [welded ? "weld \the [src] shut" : "unweld \the [src]"].</span>", \
+		user.visible_message(SPAN_NOTICE("\The [user] [welded ? "welds \the [src] shut" : "unwelds \the [src]"]."), \
+			SPAN_NOTICE("You [welded ? "weld \the [src] shut" : "unweld \the [src]"]."), \
 			"You hear welding.")
 		return 1
 
@@ -312,24 +312,24 @@
 /obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWrench(W))
 		if (is_powered() && use_power)
-			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>")
+			to_chat(user, SPAN_WARNING("You cannot unwrench \the [src], turn it off first."))
 			return 1
 		var/turf/T = src.loc
 		if (node && node.level==1 && isturf(T) && !T.is_plating())
-			to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
+			to_chat(user, SPAN_WARNING("You must remove the plating first."))
 			return 1
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()
 		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
+			to_chat(user, SPAN_WARNING("You cannot unwrench \the [src], it is too exerted due to internal pressure."))
 			add_fingerprint(user)
 			return 1
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
+		to_chat(user, SPAN_NOTICE("You begin to unfasten \the [src]..."))
 		if (do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			user.visible_message( \
-				"<span class='notice'>\The [user] unfastens \the [src].</span>", \
-				"<span class='notice'>You have unfastened \the [src].</span>", \
+				SPAN_NOTICE("\The [user] unfastens \the [src]."), \
+				SPAN_NOTICE("You have unfastened \the [src]."), \
 				"You hear a ratchet.")
 			new /obj/item/pipe(loc, src)
 			qdel(src)
@@ -345,7 +345,7 @@
 	. = list()
 	. += "<table>"
 	. += "<tr><td><b>Name:</b></td><td>[name]</td>"
-	. += "<tr><td><b>Pump Status:</b></td><td>[pump_direction?("<font color = 'green'>Releasing</font>"):("<font color = 'red'>Siphoning</font>")]</td><td><a href='?src=\ref[src];switchMode=\ref[src]'>Toggle</a></td></tr>"
+	. += "<tr><td><b>Pump Status:</b></td><td>[pump_direction ? SPAN_COLOR("green", "Releasing") : SPAN_COLOR("red", "Siphoning")]</td><td><a href='?src=\ref[src];switchMode=\ref[src]'>Toggle</a></td></tr>"
 	. = JOINTEXT(.)
 
 /obj/machinery/atmospherics/unary/vent_pump/OnTopic(mob/user, href_list, datum/topic_state/state)
@@ -353,7 +353,7 @@
 		return
 	if(href_list["switchMode"])
 		pump_direction = !pump_direction
-		to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
+		to_chat(user, SPAN_NOTICE("The multitool emits a short beep confirming the change."))
 		queue_icon_update() //force the icon to refresh after changing directional mode.
 		return TOPIC_REFRESH
 

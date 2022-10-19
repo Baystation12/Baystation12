@@ -31,7 +31,7 @@
 		return
 
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, "<span class='warning'>Uh ... how do those things work?!</span>")
+		to_chat(user, SPAN_WARNING("Uh ... how do those things work?!"))
 		place_handcuffs(user, user)
 		return
 
@@ -46,9 +46,9 @@
 			if(C.has_danger_grab(user))
 				place_handcuffs(C, user)
 			else
-				to_chat(user, "<span class='danger'>You need to have a firm grip on [C] before you can put \the [src] on!</span>")
+				to_chat(user, SPAN_DANGER("You need to have a firm grip on [C] before you can put \the [src] on!"))
 		else
-			to_chat(user, "<span class='warning'>\The [C] is already handcuffed!</span>")
+			to_chat(user, SPAN_WARNING("\The [C] is already handcuffed!"))
 	else
 		..()
 
@@ -69,14 +69,14 @@
 		return 0
 
 	if (!H.has_organ_for_slot(slot_handcuffed))
-		to_chat(user, "<span class='danger'>\The [H] needs at least two wrists before you can cuff them together!</span>")
+		to_chat(user, SPAN_DANGER("\The [H] needs at least two wrists before you can cuff them together!"))
 		return 0
 
 	if((H.gloves && H.gloves.item_flags & ITEM_FLAG_NOCUFFS) && !elastic)
-		to_chat(user, "<span class='danger'>\The [src] won't fit around \the [H.gloves]!</span>")
+		to_chat(user, SPAN_DANGER("\The [src] won't fit around \the [H.gloves]!"))
 		return 0
 
-	user.visible_message("<span class='danger'>\The [user] is attempting to put [cuff_type] on \the [H]!</span>")
+	user.visible_message(SPAN_DANGER("\The [user] is attempting to put [cuff_type] on \the [H]!"))
 
 	if(!do_after(user, 3 SECONDS, target, DO_EQUIP | DO_TARGET_UNIQUE_ACT))
 		return 0
@@ -95,7 +95,7 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(H)
 
-	user.visible_message("<span class='danger'>\The [user] has put [cuff_type] on \the [H]!</span>")
+	user.visible_message(SPAN_DANGER("\The [user] has put [cuff_type] on \the [H]!"))
 
 	// Apply cuffs.
 	target.equip_to_slot(cuffs,slot_handcuffed)
@@ -116,7 +116,7 @@ var/global/last_chew = 0
 	var/obj/item/organ/external/O = H.organs_by_name[(H.hand ? BP_L_HAND : BP_R_HAND)]
 	if (!O) return
 
-	H.visible_message("<span class='warning'>\The [H] chews on \his [O.name]!</span>", "<span class='warning'>You chew on your [O.name]!</span>")
+	H.visible_message(SPAN_WARNING("\The [H] chews on \his [O.name]!"), SPAN_WARNING("You chew on your [O.name]!"))
 	admin_attacker_log(H, "chewed on their [O.name]!")
 
 	O.take_external_damage(3,0, DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE ,"teeth marks")

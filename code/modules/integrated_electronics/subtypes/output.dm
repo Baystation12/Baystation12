@@ -48,7 +48,7 @@
 	var/list/nearby_things = range(0, get_turf(src))
 	for(var/mob/M in nearby_things)
 		var/obj/O = assembly ? assembly : src
-		to_chat(M, "<span class='notice'>[icon2html(O, M)] [stuff_to_display]</span>")
+		to_chat(M, SPAN_NOTICE("[icon2html(O, M)] [stuff_to_display]"))
 
 /obj/item/integrated_circuit/output/screen/large
 	name = "large screen"
@@ -60,7 +60,7 @@
 /obj/item/integrated_circuit/output/screen/large/do_work()
 	..()
 	var/obj/O = assembly ? get_turf(assembly) : loc
-	O.visible_message("<span class='notice'>[icon2html(O, viewers(get_turf(O)))]  [stuff_to_display]</span>")
+	O.visible_message(SPAN_NOTICE("[icon2html(O, viewers(get_turf(O)))]  [stuff_to_display]"))
 
 /obj/item/integrated_circuit/output/light
 	name = "light"
@@ -334,5 +334,5 @@
 		text_output += "\an [name]"
 	else
 		text_output += "\an ["\improper[name]"] labeled '[displayed_name]'"
-	text_output += " which is currently [get_pin_data(IC_INPUT, 1) ? "lit <font color=[led_color]>*</font>" : "unlit"]."
+	text_output += " which is currently [get_pin_data(IC_INPUT, 1) ? "lit [SPAN_COLOR(led_color, "*")]" : "unlit"]."
 	to_chat(user, text_output)

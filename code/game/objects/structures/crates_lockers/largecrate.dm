@@ -14,7 +14,7 @@
 		I.forceMove(src)
 
 /obj/structure/largecrate/attack_hand(mob/user as mob)
-	to_chat(user, "<span class='notice'>You need a crowbar to pry this open!</span>")
+	to_chat(user, SPAN_NOTICE("You need a crowbar to pry this open!"))
 	return
 
 /obj/structure/largecrate/attackby(obj/item/W as obj, mob/user as mob)
@@ -23,9 +23,9 @@
 		var/turf/T = get_turf(src)
 		for(var/atom/movable/AM in contents)
 			if(AM.simulated) AM.forceMove(T)
-		user.visible_message("<span class='notice'>[user] pries \the [src] open.</span>", \
-							 "<span class='notice'>You pry open \the [src].</span>", \
-							 "<span class='notice'>You hear splitting wood.</span>")
+		user.visible_message(SPAN_NOTICE("[user] pries \the [src] open."), \
+							 SPAN_NOTICE("You pry open \the [src]."), \
+							 SPAN_NOTICE("You hear splitting wood."))
 		qdel(src)
 	else
 		return attack_hand(user)

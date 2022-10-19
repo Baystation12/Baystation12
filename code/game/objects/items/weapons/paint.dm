@@ -27,7 +27,7 @@ var/global/list/cached_icons = list()
 				admin_attack_log(user, target, "Used \the [name] containing [contained] to splash the victim.", "Was splashed by \the [name] containing [contained].", "used \the [name] containing [contained] to splash")
 			else
 				admin_attacker_log(user, "Used \the [name] containing [contained] to splash \the [target]")
-		user.visible_message("<span class='warning'>\The [target] has been splashed with something by [user]!</span>")
+		user.visible_message(SPAN_WARNING("\The [target] has been splashed with something by [user]!"))
 		reagents.trans_to_turf(target, 5)
 	else
 		return ..()

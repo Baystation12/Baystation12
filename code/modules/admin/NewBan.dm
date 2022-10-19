@@ -106,10 +106,10 @@ var/global/savefile/Banlist
 
 	Banlist.cd = "/base"
 	if (Banlist.dir.Find("[ckey][computerid]"))
-		to_chat(usr, "<span class='warning'>Ban already exists.</span>")
+		to_chat(usr, SPAN_WARNING("Ban already exists."))
 		return 0
 	else if (!ckey)
-		to_chat(usr, "<span class='warning'>Ckey does not exist.</span>")
+		to_chat(usr, SPAN_WARNING("Ckey does not exist."))
 		return 0
 	else
 		Banlist.dir.Add("[ckey][computerid]")
@@ -170,7 +170,6 @@ var/global/savefile/Banlist
 /datum/admins/proc/unbanpanel()
 	var/count = 0
 	var/dat
-	//var/dat = "<HR><B>Unban Player:</B> <span class='notice'>(U) = Unban , (E) = Edit Ban</span> <span class='good'>(Total<HR><table border=1 rules=all frame=void cellspacing=0 cellpadding=3 ></span>"
 	Banlist.cd = "/base"
 	for (var/A in Banlist.dir)
 		count++
@@ -190,7 +189,7 @@ var/global/savefile/Banlist
 		dat += text("<tr><td><A href='?src=[ref];unbanf=[key][id]'>(U)</A><A href='?src=[ref];unbane=[key][id]'>(E)</A> Key: <B>[key]</B></td><td>ComputerID: <B>[id]</B></td><td>IP: <B>[ip]</B></td><td> [expiry]</td><td>(By: [by])</td><td>(Reason: [reason])</td></tr>")
 
 	dat += "</table>"
-	dat = "<HR><B>Bans:</B> <FONT COLOR=blue>(U) = Unban , (E) = Edit Ban</FONT> - <FONT COLOR=green>([count] Bans)</FONT><HR><table border=1 rules=all frame=void cellspacing=0 cellpadding=3 >[dat]"
+	dat = "<HR><B>Bans:</B> [SPAN_COLOR("blue", "(U) = Unban , (E) = Edit Ban")] - [SPAN_COLOR("green", "([count] Bans)")]<HR><table border=1 rules=all frame=void cellspacing=0 cellpadding=3 >[dat]"
 	show_browser(usr, dat, "window=unbanp;size=875x400")
 
 //////////////////////////////////// DEBUG ////////////////////////////////////

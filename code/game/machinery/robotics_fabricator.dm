@@ -145,7 +145,7 @@
 
 /obj/machinery/robotics_fabricator/attackby(obj/item/I, mob/user)
 	if(busy)
-		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation."))
 		return 1
 	if(!istype(I, /obj/item/stack/material))
 		return ..()
@@ -160,7 +160,7 @@
 		return
 
 	if(!(material in materials))
-		to_chat(user, "<span class=warning>\The [src] does not accept [stack_plural]!</span>")
+		to_chat(user, SPAN_WARNING("\The [src] does not accept [stack_plural]!"))
 		return
 
 	if(materials[material] + amnt <= res_max_amount)

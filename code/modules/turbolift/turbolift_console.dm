@@ -24,9 +24,9 @@
 /obj/structure/lift/proc/pressed(mob/user)
 	if(!istype(user, /mob/living/silicon))
 		if(user.a_intent == I_HURT)
-			user.visible_message("<span class='danger'>\The [user] hammers on the lift button!</span>")
+			user.visible_message(SPAN_DANGER("\The [user] hammers on the lift button!"))
 		else
-			user.visible_message("<span class='notice'>\The [user] presses the lift button.</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] presses the lift button."))
 
 
 /obj/structure/lift/New(newloc, datum/turbolift/_lift)
@@ -114,8 +114,7 @@
 	for(var/i in lift.floors.len to 1 step -1)
 		var/datum/turbolift_floor/floor = lift.floors[i]
 		var/label = floor.label? floor.label : "Level #[i]"
-		dat += "<font color = '[(floor in lift.queued_floors) ? COLOR_YELLOW : COLOR_WHITE]'>"
-		dat += "<a href='?src=\ref[src];move_to_floor=["\ref[floor]"]'>[label]</a>: [floor.name]</font><br>"
+		dat += "[SPAN_COLOR((floor in lift.queued_floors) ? COLOR_YELLOW : COLOR_WHITE, "<a href='?src=\ref[src];move_to_floor=["\ref[floor]"]'>[label]</a>: [floor.name]")]<br>"
 
 	dat += "<hr>"
 	if(lift.doors_are_open())

@@ -12,7 +12,7 @@
 	if(istype(A, /obj/item/device/electronic_assembly))
 		var/saved = "[A.name] analyzed! On circuit printers with cloning enabled, you may use the code below to clone the circuit:<br><br><code>[SScircuit.save_electronic_assembly(A)]</code>"
 		if(saved)
-			to_chat(user, "<span class='notice'>You scan [A].</span>")
+			to_chat(user, SPAN_NOTICE("You scan [A]."))
 			show_browser(user, saved, "window=circuit_scan;size=500x600;border=1;can_resize=1;can_close=1;can_minimize=1")
 		else
-			to_chat(user, "<span class='warning'>[A] is not complete enough to be encoded!</span>")
+			to_chat(user, SPAN_WARNING("[A] is not complete enough to be encoded!"))

@@ -7,7 +7,7 @@
 	target_turf_type = /turf/space
 
 /datum/random_map/noise/desert/get_map_char(value)
-	return "<font color='#[value][value][value][value][value][value]'>[pick(list(",",".","'","`"))]</font>"
+	return SPAN_COLOR("#[value][value][value][value][value][value]", pick(list(",",".","'","`")))
 
 /datum/random_map/noise/desert/get_appropriate_path(value)
 	var/val = min(9,max(0,round((value/cell_range)*10)))

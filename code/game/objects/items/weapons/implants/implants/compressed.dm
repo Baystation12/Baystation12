@@ -64,11 +64,11 @@
 		var/obj/item/implant/compressed/c = imp
 		if (c.scanned)
 			if (!istype(A,/obj/item/storage))
-				to_chat(user, "<span class='warning'>Something is already compressed inside the implant!</span>")
+				to_chat(user, SPAN_WARNING("Something is already compressed inside the implant!"))
 			return
 		else if(safe)
 			if (!istype(A,/obj/item/storage))
-				to_chat(user, "<span class='warning'>The matter compressor safeties prevent you from doing that.</span>")
+				to_chat(user, SPAN_WARNING("The matter compressor safeties prevent you from doing that."))
 			return
 		if(istype(A.loc,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = A.loc
@@ -88,5 +88,5 @@
 		return ..()
 
 	safe = !safe
-	to_chat(user, "<span class='notice'>You [safe ? "enable" : "disable"] the matter compressor safety.</span>")
+	to_chat(user, SPAN_NOTICE("You [safe ? "enable" : "disable"] the matter compressor safety."))
 	src.desc = "The matter compressor safety is [safe ? "on" : "off"]."

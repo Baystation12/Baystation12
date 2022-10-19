@@ -181,9 +181,9 @@
 
 		for(var/mob/observer/G in GLOB.dead_mobs)
 			if(G.mind && G.mind.current == target && G.client)
-				to_chat(G, SPAN_NOTICE("<font size = 3><b>Your body has been revived, <b>Re-Enter Corpse</b> to return to it.</b></font>"))
+				to_chat(G, SPAN_NOTICE(FONT_LARGE("<b>Your body has been revived, <b>Re-Enter Corpse</b> to return to it.</b>")))
 				break
-		to_chat(target, SPAN_NOTICE("<font size = 3><b>Life floods back into your body!</b></font>"))
+		to_chat(target, SPAN_NOTICE(FONT_LARGE("<b>Life floods back into your body!</b>")))
 		target.visible_message(SPAN_NOTICE("\The [target] shudders violently!"))
 		target.adjustOxyLoss(-rand(15,20))
 		target.basic_revival()

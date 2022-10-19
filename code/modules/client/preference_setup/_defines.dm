@@ -37,7 +37,7 @@ if(!decls_by_name) \
 #define BTN(key, label) FBTN(key, 1, label, "", "")
 
 #define COLOR_PREVIEW(color) \
-"<font size=\"2\" color=\"[color]\"><table style=\"display:inline\" bgcolor=\"[color]\"><tr><td>__</td></tr></table></font>"
+"<table style=\"display: inline; font-size: 2; color: [color]\" bgcolor=\"[color]\"><tr><td>__</td></tr></table>"
 
-#define UI_FONT_GOOD(X) "<font color='55cc55'>[X]</font>"
-#define UI_FONT_BAD(X) "<font color='cc5555'>[X]</font>"
+#define UI_FONT_GOOD(X) SPAN_COLOR("#55cc55", X)
+#define UI_FONT_BAD(X) SPAN_COLOR("#cc5555", X)

@@ -17,7 +17,7 @@
 		report_file.stored_data = owner.generate_pencode(user_access, no_html = 1) //TXT files can't have html; they use pencode only.
 		report_file.filename = owner.filename
 	if(perform_send(subject, body, report_file))
-		to_chat(user, "<span class='notice'>The email has been sent.</span>")
+		to_chat(user, SPAN_NOTICE("The email has been sent."))
 
 //Helper procs.
 /datum/report_field/people/proc/perform_send(subject, body, attach_report)
@@ -99,7 +99,7 @@
 		if(in_as_list(entry, new_value))
 			continue //ignore repeats
 		new_value += list(entry)
-	value = new_value	
+	value = new_value
 
 /datum/report_field/people/list_from_manifest/ask_value(mob/user)
 	var/alert = alert(user, "Would you like to add or remove a name?", "Form Input", "Add", "Remove")

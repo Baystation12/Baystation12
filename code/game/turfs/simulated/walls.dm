@@ -139,9 +139,9 @@
 	. = ..()
 
 	if(paint_color)
-		to_chat(user, "<span class='notice'>It has a coat of paint applied.</span>")
+		to_chat(user, SPAN_NOTICE("It has a coat of paint applied."))
 	if(locate(/obj/effect/overlay/wallrot) in src)
-		to_chat(user, "<span class='warning'>There is fungus growing on [src].</span>")
+		to_chat(user, SPAN_WARNING("There is fungus growing on [src]."))
 
 //Damage
 
@@ -157,7 +157,7 @@
 		return
 	F.burn_tile()
 	F.icon_state = "wall_thermite"
-	visible_message("<span class='danger'>\The [src] spontaneously combusts!.</span>") //!!OH SHIT!!
+	visible_message(SPAN_DANGER("\The [src] spontaneously combusts!.")) //!!OH SHIT!!
 	return
 
 /turf/simulated/wall/can_damage_health(damage, damage_type)
@@ -243,7 +243,7 @@
 	var/turf/simulated/floor/F = src
 	F.burn_tile()
 	F.icon_state = "wall_thermite"
-	to_chat(user, "<span class='warning'>The thermite starts melting through the wall.</span>")
+	to_chat(user, SPAN_WARNING("The thermite starts melting through the wall."))
 
 	spawn(100)
 		if(O)

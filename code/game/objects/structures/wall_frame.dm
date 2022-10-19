@@ -49,7 +49,7 @@
 	. = ..()
 
 	if(paint_color)
-		to_chat(user, "<span class='notice'>It has a smooth coat of paint applied.</span>")
+		to_chat(user, SPAN_NOTICE("It has a smooth coat of paint applied."))
 
 /obj/structure/wall_frame/attackby(obj/item/W, mob/user)
 	src.add_fingerprint(user)
@@ -62,7 +62,7 @@
 	if(istype(W, /obj/item/stack/material/rods))
 		for(var/obj/structure/window/WINDOW in loc)
 			if(WINDOW.dir == get_dir(src, user))
-				to_chat(user, "<span class='notice'>There is a window in the way.</span>")
+				to_chat(user, SPAN_NOTICE("There is a window in the way."))
 				return
 		place_grille(user, loc, W)
 		return
@@ -79,15 +79,15 @@
 	if(isWrench(W))
 		for(var/obj/structure/S in loc)
 			if(istype(S, /obj/structure/window))
-				to_chat(user, "<span class='notice'>There is still a window on the low wall!</span>")
+				to_chat(user, SPAN_NOTICE("There is still a window on the low wall!"))
 				return
 			else if(istype(S, /obj/structure/grille))
-				to_chat(user, "<span class='notice'>There is still a grille on the low wall!</span>")
+				to_chat(user, SPAN_NOTICE("There is still a grille on the low wall!"))
 				return
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-		to_chat(user, "<span class='notice'>Now disassembling the low wall...</span>")
+		to_chat(user, SPAN_NOTICE("Now disassembling the low wall..."))
 		if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			to_chat(user, "<span class='notice'>You dissasembled the low wall!</span>")
+			to_chat(user, SPAN_NOTICE("You dissasembled the low wall!"))
 			dismantle()
 		return
 
@@ -96,9 +96,9 @@
 		if(!cutter.slice(user))
 			return
 		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
-		to_chat(user, "<span class='notice'>Now slicing through the low wall...</span>")
+		to_chat(user, SPAN_NOTICE("Now slicing through the low wall..."))
 		if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
-			to_chat(user, "<span class='warning'>You have sliced through the low wall!</span>")
+			to_chat(user, SPAN_WARNING("You have sliced through the low wall!"))
 			dismantle()
 		return
 

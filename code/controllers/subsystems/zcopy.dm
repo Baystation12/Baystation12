@@ -386,7 +386,7 @@ SUBSYSTEM_DEF(zcopy)
 		"<head><meta charset='utf-8'/></head><body>",
 		"<h1>Analysis of [T] at [T.x],[T.y],[T.z]</h1>",
 		"<b>Queue occurrences:</b> [T.z_queued]",
-		"<b>Above space:</b> Apparent [T.z_eventually_space ? "Yes" : "No"], Actual [is_above_space ? "Yes" : "No"] - [T.z_eventually_space == is_above_space ? "<font color='green'>OK</font>" : "<font color='red'>MISMATCH</font>"]",
+		"<b>Above space:</b> Apparent [T.z_eventually_space ? "Yes" : "No"], Actual [is_above_space ? "Yes" : "No"] - [T.z_eventually_space == is_above_space ? SPAN_COLOR("green", "OK") : SPAN_COLOR("red", "MISMATCH")]",
 		"<b>Z Flags</b>: [english_list(bitfield2list(T.z_flags, GLOB.mimic_defines), "(none)")]",
 		"<b>Has Shadower:</b> [T.shadower ? "Yes" : "No"]",
 		"<b>Has turf proxy:</b> [T.mimic_proxy ? "Yes" : "No"]",
@@ -464,13 +464,13 @@ SUBSYSTEM_DEF(zcopy)
 		return "<li>\icon[A] <b>\[Turf Mimic\]</b> plane [A.plane], layer [A.layer], Z-level [A.z], delegate of \icon[DC.delegate] [DC.delegate] ([DC.delegate.type])</li>"
 	else if (isturf(A))
 		if (A == original)
-			return "<li>\icon[A] <b>\[Turf\]</b> plane [A.plane], layer [A.layer], depth [FMT_DEPTH(A:z_depth)], Z-level [A.z] - [A] ([A.type]) - <font color='green'>SELF</font></li>"
+			return "<li>\icon[A] <b>\[Turf\]</b> plane [A.plane], layer [A.layer], depth [FMT_DEPTH(A:z_depth)], Z-level [A.z] - [A] ([A.type]) - [SPAN_COLOR("green", "SELF")]</li>"
 		else	// foreign turfs - not visible here, but sometimes good for figuring out layering -- showing these is currently not enabled
-			return "<li>\icon[A] <b>\[Turf\]</b> <em><font color='#646464'>plane [A.plane], layer [A.layer], depth [FMT_DEPTH(A:z_depth)], Z-level [A.z] - [A] ([A.type])</font></em> - <font color='red'>FOREIGN</font></em></li>"
+			return "<li>\icon[A] <b>\[Turf\]</b> <em>[SPAN_COLOR("#646464", "plane [A.plane], layer [A.layer], depth [FMT_DEPTH(A:z_depth)], Z-level [A.z] - [A] ([A.type])")]</em> - [SPAN_COLOR("red", "FOREIGN")]</em></li>"
 	else if (A.type == /atom/movable/openspace/multiplier)
 		return "<li>\icon[A] <b>\[Shadower\]</b> plane [A.plane], layer [A.layer], Z-level [A.z] - [A] ([A.type])</li>"
 	else if (A.type == /atom/movable/openspace/debug)	// These are fake objects that exist just to show the shadower's overlays in this list.
-		return "<li>\icon[A] <b>\[Shadower True Overlay\]</b> plane [A.plane], layer [A.layer] - <font color='grey'>VIRTUAL</font></li>"
+		return "<li>\icon[A] <b>\[Shadower True Overlay\]</b> plane [A.plane], layer [A.layer] - [SPAN_COLOR("grey", "VIRTUAL")]</li>"
 	else if (A.type == /atom/movable/openspace/turf_proxy)
 		return "<li>\icon[A] <b>\[Turf Proxy\]</b> plane [A.plane], layer [A.layer], Z-level [A.z] - [A] ([A.type])</li>"
 	else

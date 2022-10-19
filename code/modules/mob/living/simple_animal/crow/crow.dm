@@ -82,16 +82,16 @@
 		if(removed)
 			removed.dropInto(loc)
 			usr.put_in_hands(removed)
-			visible_message("<span class='notice'>\The [usr] removes \the [removed] from \the [src]'s [href_list["remove_inv"]].</span>")
+			visible_message(SPAN_NOTICE("\The [usr] removes \the [removed] from \the [src]'s [href_list["remove_inv"]]."))
 			show_inv(usr)
 			update_icon()
 		else
-			to_chat(user, "<span class='warning'>There is nothing to remove from \the [src]'s [href_list["remove_inv"]].</span>")
+			to_chat(user, SPAN_WARNING("There is nothing to remove from \the [src]'s [href_list["remove_inv"]]."))
 		return TOPIC_HANDLED
 	if(href_list["add_inv"])
 		var/obj/item/equipping = user.get_active_hand()
 		if(!equipping)
-			to_chat(user, "<span class='warning'>You have nothing in your hand to put on \the [src]'s [href_list["add_inv"]].</span>")
+			to_chat(user, SPAN_WARNING("You have nothing in your hand to put on \the [src]'s [href_list["add_inv"]]."))
 			return 0
 		var/obj/item/equipped
 		var/checktype
@@ -103,10 +103,10 @@
 				equipped = messenger_bag
 				checktype = /obj/item/storage/messenger
 		if(equipped)
-			to_chat(user, "<span class='warning'>There is already something worn on \the [src]'s [href_list["add_inv"]].</span>")
+			to_chat(user, SPAN_WARNING("There is already something worn on \the [src]'s [href_list["add_inv"]]."))
 			return TOPIC_HANDLED
 		if(!istype(equipping, checktype))
-			to_chat(user, "<span class='warning'>\The [equipping] won't fit on \the [src]'s [href_list["add_inv"]].</span>")
+			to_chat(user, SPAN_WARNING("\The [equipping] won't fit on \the [src]'s [href_list["add_inv"]]."))
 			return TOPIC_HANDLED
 		switch(href_list["add_inv"])
 			if("access cuff")
@@ -115,7 +115,7 @@
 				messenger_bag = equipping
 		if(!user.unEquip(equipping, src))
 			return TOPIC_HANDLED
-		visible_message("<span class='notice'>\The [user] places \the [equipping] on to \the [src]'s [href_list["add_inv"]].</span>")
+		visible_message(SPAN_NOTICE("\The [user] places \the [equipping] on to \the [src]'s [href_list["add_inv"]]."))
 		update_icon()
 		show_inv(user)
 		return TOPIC_HANDLED

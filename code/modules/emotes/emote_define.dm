@@ -36,7 +36,7 @@
 	if(ismob(user) && check_restraints)
 		var/mob/M = user
 		if(M.restrained())
-			to_chat(user, "<span class='warning'>You are restrained and cannot do that.</span>")
+			to_chat(user, SPAN_WARNING("You are restrained and cannot do that."))
 			return
 
 	var/atom/target

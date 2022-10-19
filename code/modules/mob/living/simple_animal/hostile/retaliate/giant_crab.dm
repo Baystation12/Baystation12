@@ -69,7 +69,7 @@
 			release_grab()
 		ai_holder.attackers = list() //TODO: does this still work?
 		ai_holder.lose_target()
-		visible_message("<span class='notice'>\The [src] lowers its pincer.</span>")
+		visible_message(SPAN_NOTICE("\The [src] lowers its pincer."))
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/can_special_attack(mob/living/carbon/human/H)
 	. = ..()

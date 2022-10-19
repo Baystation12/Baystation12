@@ -303,12 +303,12 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		if (M.getBrainLoss() > 140)
 			H.zombify()
 		if (prob(1))
-			to_chat(M, SPAN_WARNING("<font style='font-size:[rand(1,2)]'>[pick(GLOB.zombie_messages["stage1"])]</font>"))
+			to_chat(M, SPAN_WARNING(SPAN_SIZE(rand(1,2), pick(GLOB.zombie_messages["stage1"]))))
 
 	if (true_dose >= 60)
 		M.bodytemperature += 7.5
 		if (prob(3))
-			to_chat(M, SPAN_WARNING("<font style='font-size:2'>[pick(GLOB.zombie_messages["stage1"])]</font>"))
+			to_chat(M, SPAN_WARNING(FONT_NORMAL(pick(GLOB.zombie_messages["stage1"]))))
 		if (M.getBrainLoss() < 20)
 			M.adjustBrainLoss(rand(1, 2))
 
@@ -321,14 +321,14 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 			H.seizure()
 			H.adjustBrainLoss(rand(12, 24))
 		if (prob(5))
-			to_chat(M, SPAN_DANGER("<font style='font-size:[rand(2,3)]'>[pick(GLOB.zombie_messages["stage2"])]</font>"))
+			to_chat(M, SPAN_DANGER(SPAN_SIZE(rand(2,3), pick(GLOB.zombie_messages["stage2"]))))
 		M.bodytemperature += 9
 
 	if (true_dose >= 110)
 		M.adjustHalLoss(5)
 		M.make_dizzy(10)
 		if (prob(8))
-			to_chat(M, SPAN_DANGER("<font style='font-size:[rand(3,4)]'>[pick(GLOB.zombie_messages["stage3"])]</font>"))
+			to_chat(M, SPAN_DANGER(SPAN_SIZE(rand(3,4), pick(GLOB.zombie_messages["stage3"]))))
 
 	if (true_dose >= 135)
 		if (prob(3))

@@ -45,20 +45,20 @@
 
 	loc = sanitize(loc)
 	if(!loc)
-		to_chat(src, "<span class='warning'>Must supply a location name</span>")
+		to_chat(src, SPAN_WARNING("Must supply a location name"))
 		return
 
 	if(stored_locations.len >= max_locations)
-		to_chat(src, "<span class='warning'>Cannot store additional locations. Remove one first</span>")
+		to_chat(src, SPAN_WARNING("Cannot store additional locations. Remove one first"))
 		return
 
 	if(loc in stored_locations)
-		to_chat(src, "<span class='warning'>There is already a stored location by this name</span>")
+		to_chat(src, SPAN_WARNING("There is already a stored location by this name"))
 		return
 
 	var/L = src.eyeobj.getLoc()
 	if (InvalidPlayerTurf(get_turf(L)))
-		to_chat(src, "<span class='warning'>Unable to store this location</span>")
+		to_chat(src, SPAN_WARNING("Unable to store this location"))
 		return
 
 	stored_locations[loc] = L
@@ -73,7 +73,7 @@
 	set desc = "Returns to the selected camera location."
 
 	if (!(loc in stored_locations))
-		to_chat(src, "<span class='warning'>Location [loc] not found</span>")
+		to_chat(src, SPAN_WARNING("Location [loc] not found"))
 		return
 
 	var/L = stored_locations[loc]
@@ -85,7 +85,7 @@
 	set desc = "Deletes the selected camera location."
 
 	if (!(loc in stored_locations))
-		to_chat(src, "<span class='warning'>Location [loc] not found</span>")
+		to_chat(src, SPAN_WARNING("Location [loc] not found"))
 		return
 
 	stored_locations.Remove(loc)
@@ -251,14 +251,14 @@
 /mob/living/silicon/robot/tracking_initiated()
 	tracking_entities++
 	if(tracking_entities == 1 && has_zeroth_law())
-		to_chat(src, "<span class='warning'>Internal camera is currently being accessed.</span>")
+		to_chat(src, SPAN_WARNING("Internal camera is currently being accessed."))
 
 /mob/living/proc/tracking_cancelled()
 
 /mob/living/silicon/robot/tracking_cancelled()
 	tracking_entities--
 	if(!tracking_entities && has_zeroth_law())
-		to_chat(src, "<span class='notice'>Internal camera is no longer being accessed.</span>")
+		to_chat(src, SPAN_NOTICE("Internal camera is no longer being accessed."))
 
 
 #undef TRACKING_POSSIBLE

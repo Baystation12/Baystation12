@@ -14,7 +14,7 @@
 	Southeast = [SOUTHEAST],\n\
 	Southwest = [SOUTHWEST]","[src] dir writing") as null|num
 	if(isnum(new_data) && holder.check_interactivity(user) )
-		to_chat(user, "<span class='notice'>You input [new_data] into the pin.</span>")
+		to_chat(user, SPAN_NOTICE("You input [new_data] into the pin."))
 		write_data_to_pin(new_data)
 
 /datum/integrated_io/dir/write_data_to_pin(new_data)

@@ -21,7 +21,7 @@
 	var/new_color_selection = input("What color would you like to use?", "Choose a Color", color_selection) as null|anything in GLOB.possible_cable_colours
 	if(new_color_selection && !user.incapacitated() && (src in user))
 		color_selection = new_color_selection
-		to_chat(user, "<span class='notice'>You change the paint mode to [lowertext(color_selection)].</span>")
+		to_chat(user, SPAN_NOTICE("You change the paint mode to [lowertext(color_selection)]."))
 
 /obj/item/device/cable_painter/afterattack(atom/A, mob/user, proximity)
 	if(!proximity)
@@ -31,7 +31,7 @@
 		if(!picked_color || A.color == picked_color)
 			return
 		A.color = picked_color
-		to_chat(user, "<span class='notice'>You set \the [A]'s color to [lowertext(color_selection)].</span>")
+		to_chat(user, SPAN_NOTICE("You set \the [A]'s color to [lowertext(color_selection)]."))
 	else if(isCoil(A))
 		var/obj/item/stack/cable_coil/c = A
 		c.SetCableColor(color_selection, user)

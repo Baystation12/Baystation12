@@ -26,11 +26,11 @@
 		if(volume < 5)
 			return
 		if(istype(O, /obj/item/book/tome))
-			to_chat(usr, "<span class='notice'>The solution does nothing. Whatever this is, it isn't normal ink.</span>")
+			to_chat(usr, SPAN_NOTICE("The solution does nothing. Whatever this is, it isn't normal ink."))
 			return
 		var/obj/item/book/affectedbook = O
 		affectedbook.dat = null
-		to_chat(usr, "<span class='notice'>The solution dissolves the ink on the book.</span>")
+		to_chat(usr, SPAN_NOTICE("The solution dissolves the ink on the book."))
 	return
 
 /datum/reagent/aluminium
@@ -182,11 +182,11 @@
 		if(volume < 5)
 			return
 		if(istype(O, /obj/item/book/tome))
-			to_chat(usr, "<span class='notice'>The solution does nothing. Whatever this is, it isn't normal ink.</span>")
+			to_chat(usr, SPAN_NOTICE("The solution does nothing. Whatever this is, it isn't normal ink."))
 			return
 		var/obj/item/book/affectedbook = O
 		affectedbook.dat = null
-		to_chat(usr, "<span class='notice'>The solution dissolves the ink on the book.</span>")
+		to_chat(usr, SPAN_NOTICE("The solution dissolves the ink on the book."))
 	return
 
 /datum/reagent/hydrazine
@@ -386,7 +386,7 @@
 		var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(O.loc)
 		I.desc = "Looks like this was \an [O] some time ago."
 		for(var/mob/M in viewers(5, O))
-			to_chat(M, "<span class='warning'>\The [O] melts.</span>")
+			to_chat(M, SPAN_WARNING("\The [O] melts."))
 		qdel(O)
 		remove_self(meltdose) // 10 units of acid will not melt EVERYTHING on the tile
 

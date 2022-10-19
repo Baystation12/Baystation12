@@ -33,16 +33,16 @@
 	playsound(loc, 'sound/effects/snap.ogg', 50, 1)
 	if(power_cell)
 		power_cell.charge = power_cell.maxcharge
-		to_chat(user, "<span class='notice'><b>Your [power_cell] has been charged to capacity.</b></span>")
+		to_chat(user, SPAN_NOTICE("<b>Your [power_cell] has been charged to capacity.</b>"))
 	if(istype(H) && H.species.name == SPECIES_ADHERENT)
 		return
 	if(isrobot(user))
 		user.apply_damage(150, DAMAGE_BURN, def_zone = BP_CHEST)
-		visible_message("<span class='danger'>Electricity arcs off [user] as it touches \the [src]!</span>")
-		to_chat(user, "<span class='danger'><b>You detect damage to your components!</b></span>")
+		visible_message(SPAN_DANGER("Electricity arcs off [user] as it touches \the [src]!"))
+		to_chat(user, SPAN_DANGER("<b>You detect damage to your components!</b>"))
 	else
 		user.electrocute_act(100, src, def_zone = BP_CHEST)
-		visible_message("<span class='danger'>\The [user] has been shocked by \the [src]!</span>")
+		visible_message(SPAN_DANGER("\The [user] has been shocked by \the [src]!"))
 	user.throw_at(get_step(user,get_dir(src,user)), 5, 10)
 
 /obj/structure/adherent_pylon/attackby(obj/item/grab/normal/G, mob/user)

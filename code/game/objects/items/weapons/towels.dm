@@ -11,7 +11,7 @@
 	desc = "A soft cotton towel."
 
 /obj/item/towel/attack_self(mob/living/user as mob)
-	user.visible_message("<span class='notice'>[user] uses [src] to towel themselves off.</span>")
+	user.visible_message(SPAN_NOTICE("[user] uses [src] to towel themselves off."))
 	playsound(user, 'sound/weapons/towelwipe.ogg', 25, 1)
 
 /obj/item/towel/random/New()

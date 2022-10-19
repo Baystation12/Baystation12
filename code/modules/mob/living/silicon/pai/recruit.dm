@@ -189,7 +189,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 
 	dat += {"
 	<body>
-		<b><font size="3px">pAI Personality Configuration</font></b>
+		<b><span style="font-size: 3px">pAI Personality Configuration</span></b>
 		<p class="top">Please configure your pAI personality's options. Remember, what you enter here could determine whether or not the user requesting a personality chooses you!</p>
 
 		<table>
@@ -250,7 +250,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 	if(allowSubmit)
 		dat += {"
 			<table>
-				<td class="button"><a href='byond://?src=\ref[src];option=submit;new=1;candidate=\ref[candidate]' class="button"><b><font size="4px">Submit Personality</font></b></a></td>
+				<td class="button"><a href='byond://?src=\ref[src];option=submit;new=1;candidate=\ref[candidate]' class="button"><b><span style="font-size: 4px">Submit Personality</span></b></a></td>
 			</table><br>
 			"}
 	dat += {"
@@ -337,7 +337,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 				</style>
 			</head>
 			<body>
-				<b><font size='3px'>pAI Availability List</font></b><br><br>
+				<b>[SPAN_SIZE("3px", "pAI Availability List")]</b><br><br>
 	"}
 	dat += "<p>Displaying available AI personalities from central database... If there are no entries, or if a suitable entry is not listed, check again later as more personalities may be added.</p>"
 

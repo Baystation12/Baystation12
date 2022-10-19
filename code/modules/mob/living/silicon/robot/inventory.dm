@@ -268,7 +268,7 @@
 	if(!(locate(O) in module.equipment) && O != src.module.emag)
 		return
 	if (IsHolding(O))
-		to_chat(src, "<span class='notice'>Already activated</span>")
+		to_chat(src, SPAN_NOTICE("Already activated"))
 		return
 	if (!HasFreeHand())
 		to_chat(src, SPAN_NOTICE("You need to disable a module first!"))

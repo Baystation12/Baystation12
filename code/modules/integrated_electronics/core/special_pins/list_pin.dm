@@ -40,7 +40,7 @@
 /datum/integrated_io/lists/proc/remove_from_list_by_position(mob/user, position)
 	var/list/my_list = data
 	if(!my_list.len)
-		to_chat(user, "<span class='warning'>The list is empty, there's nothing to remove.</span>")
+		to_chat(user, SPAN_WARNING("The list is empty, there's nothing to remove."))
 		return
 	if(!position)
 		return
@@ -51,7 +51,7 @@
 /datum/integrated_io/lists/proc/remove_from_list(mob/user, target_entry)
 	var/list/my_list = data
 	if(!my_list.len)
-		to_chat(user, "<span class='warning'>The list is empty, there's nothing to remove.</span>")
+		to_chat(user, SPAN_WARNING("The list is empty, there's nothing to remove."))
 		return
 	if(!target_entry)
 		target_entry = input(user, "Which piece of data do you want to remove?", "Remove") as null|anything in my_list
@@ -61,7 +61,7 @@
 /datum/integrated_io/lists/proc/edit_in_list(mob/user, target_entry)
 	var/list/my_list = data
 	if(!my_list.len)
-		to_chat(user, "<span class='warning'>The list is empty, there's nothing to modify.</span>")
+		to_chat(user, SPAN_WARNING("The list is empty, there's nothing to modify."))
 		return
 	if(!target_entry)
 		target_entry = input(user, "Which piece of data do you want to edit?", "Edit") as null|anything in my_list
@@ -73,7 +73,7 @@
 /datum/integrated_io/lists/proc/edit_in_list_by_position(mob/user, position)
 	var/list/my_list = data
 	if(!my_list.len)
-		to_chat(user, "<span class='warning'>The list is empty, there's nothing to modify.</span>")
+		to_chat(user, SPAN_WARNING("The list is empty, there's nothing to modify."))
 		return
 	if(!position)
 		return
@@ -86,7 +86,7 @@
 /datum/integrated_io/lists/proc/swap_inside_list(mob/user, first_target, second_target)
 	var/list/my_list = data
 	if(my_list.len <= 1)
-		to_chat(user, "<span class='warning'>The list is empty, or too small to do any meaningful swapping.</span>")
+		to_chat(user, SPAN_WARNING("The list is empty, or too small to do any meaningful swapping."))
 		return
 	if(!first_target)
 		first_target = input(user, "Which piece of data do you want to swap? (1)", "Swap") as null|anything in my_list

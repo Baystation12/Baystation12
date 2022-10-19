@@ -299,13 +299,13 @@
 
 /obj/item/gun/projectile/automatic/l6_saw/special_check(mob/user)
 	if(cover_open)
-		to_chat(user, "<span class='warning'>[src]'s cover is open! Close it before firing!</span>")
+		to_chat(user, SPAN_WARNING("[src]'s cover is open! Close it before firing!"))
 		return 0
 	return ..()
 
 /obj/item/gun/projectile/automatic/l6_saw/proc/toggle_cover(mob/user)
 	cover_open = !cover_open
-	to_chat(user, "<span class='notice'>You [cover_open ? "open" : "close"] [src]'s cover.</span>")
+	to_chat(user, SPAN_NOTICE("You [cover_open ? "open" : "close"] [src]'s cover."))
 	update_icon()
 
 /obj/item/gun/projectile/automatic/l6_saw/attack_self(mob/user as mob)
@@ -334,13 +334,13 @@
 
 /obj/item/gun/projectile/automatic/l6_saw/load_ammo(obj/item/A, mob/user)
 	if(!cover_open)
-		to_chat(user, "<span class='warning'>You need to open the cover to load that into [src].</span>")
+		to_chat(user, SPAN_WARNING("You need to open the cover to load that into [src]."))
 		return
 	..()
 
 /obj/item/gun/projectile/automatic/l6_saw/unload_ammo(mob/user, allow_dump=1)
 	if(!cover_open)
-		to_chat(user, "<span class='warning'>You need to open the cover to unload [src].</span>")
+		to_chat(user, SPAN_WARNING("You need to open the cover to unload [src]."))
 		return
 	..()
 

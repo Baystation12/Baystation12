@@ -73,7 +73,7 @@
 
 	user.set_machine(src)
 	var/list/dat = list()
-	dat += "<font face = \"Courier\"><HEAD><TITLE>[src.name]</TITLE></HEAD><center><H3>[src.name] Access</H3></center>"
+	dat += "<span style='font-family: Courier'><HEAD><TITLE>[src.name]</TITLE></HEAD><center><H3>[src.name] Access</H3></center>"
 	dat += "<br>[temp]<br>"
 	dat += "<br>Power Status: <a href='?src=\ref[src];input=toggle'>[src.toggled ? "On" : "Off"]</a>"
 	if(overloaded_for)
@@ -133,7 +133,7 @@
 			else
 				dat += "<br><br>MULTITOOL BUFFER: <a href='?src=\ref[src];buffer=1'>\[Add Machine\]</a>"
 
-	dat += "</font>"
+	dat += "</span>"
 	temp = ""
 
 	var/datum/browser/popup = new(user, "tcommmachine", "Telecommunications Machine Configuration Panel", 520, 600)
@@ -177,7 +177,7 @@
 /obj/machinery/telecomms/processor/Options_Topic(href, href_list)
 
 	if(href_list["process"])
-		temp = "<font color = #666633>-% Processing mode changed. %-</font>"
+		temp = SPAN_COLOR("#666633", "-% Processing mode changed. %-")
 		src.process_mode = !src.process_mode
 */
 
@@ -198,10 +198,10 @@
 					newfreq *= 10 // shift the decimal one place
 				if(newfreq < 10000)
 					change_frequency = newfreq
-					temp = "<font color = #666633>-% New frequency to change to assigned: \"[newfreq] GHz\" %-</font>"
+					temp = SPAN_COLOR("#666633", "-% New frequency to change to assigned: \"[newfreq] GHz\" %-")
 			else
 				change_frequency = 0
-				temp = "<font color = #666633>-% Frequency changing deactivated %-</font>"
+				temp = SPAN_COLOR("#666633", "-% Frequency changing deactivated %-")
 
 
 /obj/machinery/telecomms/Topic(href, href_list)
@@ -221,32 +221,32 @@
 
 			if("resetoverload")
 				overloaded_for = 0
-				temp = "<font color = #666633>-% Manual override accepted. \The [src] has been reset.</font>"
+				temp = SPAN_COLOR("#666633", "-% Manual override accepted. \The [src] has been reset.")
 
 			if("toggle")
 
 				src.toggled = !src.toggled
-				temp = "<font color = #666633>-% [src] has been [src.toggled ? "activated" : "deactivated"].</font>"
+				temp = SPAN_COLOR("#666633", "-% [src] has been [src.toggled ? "activated" : "deactivated"].")
 				update_power()
 
 			/*
 			if("hide")
 				src.hide = !hide
-				temp = "<font color = #666633>-% Shadow Link has been [src.hide ? "activated" : "deactivated"].</font>"
+				temp = SPAN_COLOR("#666633", "-% Shadow Link has been [src.hide ? "activated" : "deactivated"].")
 			*/
 
 			if("id")
 				var/newid = copytext(reject_bad_text(input(usr, "Specify the new ID for this machine", src, id) as null|text),1,MAX_MESSAGE_LEN)
 				if(newid && canAccess(usr))
 					id = newid
-					temp = "<font color = #666633>-% New ID assigned: \"[id]\" %-</font>"
+					temp = SPAN_COLOR("#666633", "-% New ID assigned: \"[id]\" %-")
 
 			if("network")
 				var/newnet = input(usr, "Specify the new network for this machine. This will break all current links.", src, network) as null|text
 				if(newnet && canAccess(usr))
 
 					if(length(newnet) > 15)
-						temp = "<font color = #666633>-% Too many characters in new network tag %-</font>"
+						temp = SPAN_COLOR("#666633", "-% Too many characters in new network tag %-")
 
 					else
 						for(var/obj/machinery/telecomms/T in links)
@@ -254,7 +254,7 @@
 
 						network = newnet
 						links = list()
-						temp = "<font color = #666633>-% New network tag assigned: \"[network]\" %-</font>"
+						temp = SPAN_COLOR("#666633", "-% New network tag assigned: \"[network]\" %-")
 
 
 			if("freq")
@@ -264,7 +264,7 @@
 						newfreq *= 10 // shift the decimal one place
 					if(!(newfreq in freq_listening) && newfreq < 10000)
 						freq_listening.Add(newfreq)
-						temp = "<font color = #666633>-% New frequency filter assigned: \"[newfreq] GHz\" %-</font>"
+						temp = SPAN_COLOR("#666633", "-% New frequency filter assigned: \"[newfreq] GHz\" %-")
 
 			if("tagrule")
 				var/freq = input(usr, "Specify frequency to tag (GHz). Decimals assigned automatically.", src, network) as null|num
@@ -273,13 +273,13 @@
 						freq *= 10
 
 					if(!(freq in freq_listening))
-						temp = "<font color = #660000>-% Not filtering specified frequency %-</font>"
+						temp = SPAN_COLOR("#660000", "-% Not filtering specified frequency %-")
 						updateUsrDialog()
 						return
 
 					for(var/list/rule in channel_tags)
 						if(rule[1] == freq)
-							temp = "<font color = #660000>-% Tagging rule already defined %-</font>"
+							temp = SPAN_COLOR("#660000", "-% Tagging rule already defined %-")
 							updateUsrDialog()
 							return
 
@@ -293,14 +293,14 @@
 
 					if(freq < 10000)
 						channel_tags.Add(list(list(freq, tag, color)))
-						temp = "<font color = #666633>-% New tagging rule assigned:[freq] GHz -> \"[tag]\" ([color]) %-</font>"
+						temp = SPAN_COLOR("#666633", "-% New tagging rule assigned:[freq] GHz -> \"[tag]\" ([color]) %-")
 
 	if(href_list["delete"])
 
 		// changed the layout about to workaround a pesky runtime -- Doohl
 
 		var/x = text2num(href_list["delete"])
-		temp = "<font color = #666633>-% Removed frequency filter [x] %-</font>"
+		temp = SPAN_COLOR("#666633", "-% Removed frequency filter [x] %-")
 		freq_listening.Remove(x)
 
 	if(href_list["deletetagrule"])
@@ -310,14 +310,14 @@
 		for(var/list/rule in channel_tags)
 			if(rule[1] == freq)
 				rule_delete = rule
-		temp = "<font color = #666633>-% Removed tagging rule: [rule_delete[1]] -> [rule_delete[2]] %-</font>"
+		temp = SPAN_COLOR("#666633", "-% Removed tagging rule: [rule_delete[1]] -> [rule_delete[2]] %-")
 		channel_tags.Remove(list(rule_delete))
 
 	if(href_list["unlink"])
 
 		if(text2num(href_list["unlink"]) <= length(links))
 			var/obj/machinery/telecomms/T = links[text2num(href_list["unlink"])]
-			temp = "<font color = #666633>-% Removed \ref[T] [T.name] from linked entities. %-</font>"
+			temp = SPAN_COLOR("#666633", "-% Removed \ref[T] [T.name] from linked entities. %-")
 
 			// Remove link entries from both T and src.
 
@@ -336,21 +336,21 @@
 				if(!(device in src.links))
 					src.links.Add(device)
 
-				temp = "<font color = #666633>-% Successfully linked with \ref[device] [device.name] %-</font>"
+				temp = SPAN_COLOR("#666633", "-% Successfully linked with \ref[device] [device.name] %-")
 
 			else
-				temp = "<font color = #666633>-% Unable to acquire buffer %-</font>"
+				temp = SPAN_COLOR("#666633", "-% Unable to acquire buffer %-")
 
 	if(href_list["buffer"])
 
 		P.set_buffer(src)
 		var/atom/buffer = P.get_buffer()
-		temp = "<font color = #666633>-% Successfully stored \ref[buffer] [buffer.name] in buffer %-</font>"
+		temp = SPAN_COLOR("#666633", "-% Successfully stored \ref[buffer] [buffer.name] in buffer %-")
 
 
 	if(href_list["flush"])
 
-		temp = "<font color = #666633>-% Buffer successfully flushed. %-</font>"
+		temp = SPAN_COLOR("#666633", "-% Buffer successfully flushed. %-")
 		P.set_buffer(null)
 
 	src.Options_Topic(href, href_list)

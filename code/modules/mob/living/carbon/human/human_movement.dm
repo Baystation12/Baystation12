@@ -104,7 +104,7 @@
 
 	if(thrust && thrust.on)
 		if(prob(skill_fail_chance(SKILL_EVA, 10, SKILL_ADEPT)))
-			to_chat(src, "<span class='warning'>You fumble with [thrust] controls!</span>")
+			to_chat(src, SPAN_WARNING("You fumble with [thrust] controls!"))
 			inertia_dir = pick(GLOB.cardinal)
 			return 0
 

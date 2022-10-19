@@ -273,7 +273,7 @@
 		if(cell && b_stat)
 			var/mob/user = usr
 			user.put_in_hands(cell)
-			to_chat(user, "<span class='notice'>You remove [cell] from \the [src].</span>")
+			to_chat(user, SPAN_NOTICE("You remove [cell] from \the [src]."))
 			cell = null
 		return TRUE
 
@@ -590,11 +590,11 @@
 	. = ..()
 	if (distance <= 1 || loc == user)
 		if (b_stat)
-			to_chat(user, "<span class='notice'>\The [src] can be attached and modified!</span>")
+			to_chat(user, SPAN_NOTICE("\The [src] can be attached and modified!"))
 		else
-			to_chat(user, "<span class='notice'>\The [src] can not be modified or attached!</span>")
+			to_chat(user, SPAN_NOTICE("\The [src] can not be modified or attached!"))
 		if (power_usage && cell)
-			to_chat(user, "<span class='notice'>\The [src] charge meter reads [round(cell.percent(), 0.1)]%.</span>")
+			to_chat(user, SPAN_NOTICE("\The [src] charge meter reads [round(cell.percent(), 0.1)]%."))
 
 /obj/item/device/radio/attackby(obj/item/W as obj, mob/user as mob)
 	..()
@@ -602,13 +602,13 @@
 	if(isScrewdriver(W))
 		b_stat = !b_stat
 		if (b_stat)
-			user.show_message("<span class='notice'>\The [src] can now be attached and modified!</span>")
+			user.show_message(SPAN_NOTICE("\The [src] can now be attached and modified!"))
 		else
-			user.show_message("<span class='notice'>\The [src] can no longer be modified or attached!</span>")
+			user.show_message(SPAN_NOTICE("\The [src] can no longer be modified or attached!"))
 		updateDialog()
 		return
 	if(!cell && power_usage && istype(W, /obj/item/cell/device) && user.unEquip(W, target = src))
-		to_chat(user, "<span class='notice'>You put [W] in \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("You put [W] in \the [src]."))
 		cell = W
 		return
 
@@ -746,9 +746,9 @@
 		if(enable_subspace_transmission != subspace_transmission)
 			subspace_transmission = !subspace_transmission
 			if(subspace_transmission)
-				to_chat(usr, "<span class='notice'>Subspace Transmission is enabled</span>")
+				to_chat(usr, SPAN_NOTICE("Subspace Transmission is enabled"))
 			else
-				to_chat(usr, "<span class='notice'>Subspace Transmission is disabled</span>")
+				to_chat(usr, SPAN_NOTICE("Subspace Transmission is disabled"))
 
 			if(subspace_transmission == 0)//Simple as fuck, clears the channel list to prevent talking/listening over them if subspace transmission is disabled
 				channels = list()
@@ -761,10 +761,10 @@
 			shut_up = !shut_up
 			if(shut_up)
 				canhear_range = 0
-				to_chat(usr, "<span class='notice'>Loadspeaker disabled.</span>")
+				to_chat(usr, SPAN_NOTICE("Loadspeaker disabled."))
 			else
 				canhear_range = 3
-				to_chat(usr, "<span class='notice'>Loadspeaker enabled.</span>")
+				to_chat(usr, SPAN_NOTICE("Loadspeaker enabled."))
 		. = 1
 
 	if(.)

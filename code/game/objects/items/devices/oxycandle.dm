@@ -27,7 +27,7 @@
 
 /obj/item/device/oxycandle/attack_self(mob/user)
 	if(!on)
-		to_chat(user, "<span class='notice'>You pull the cord and [src] ignites.</span>")
+		to_chat(user, SPAN_NOTICE("You pull the cord and [src] ignites."))
 		on = 1
 		update_icon()
 		playsound(src.loc, activation_sound, 75, 1)

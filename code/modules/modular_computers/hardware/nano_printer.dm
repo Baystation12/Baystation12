@@ -27,7 +27,7 @@
 		new paper_type(T, text_to_print, paper_title, md, print_language)
 		stored_paper--
 		playsound(T, "sound/machines/dotprinter.ogg", 30)
-		T.visible_message("<span class='notice'>\The [src] prints out a paper.</span>")
+		T.visible_message(SPAN_NOTICE("\The [src] prints out a paper."))
 		return TRUE
 
 /obj/item/stock_parts/computer/nano_printer/proc/printer_ready()

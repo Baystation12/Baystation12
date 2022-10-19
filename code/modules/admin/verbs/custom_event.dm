@@ -21,7 +21,7 @@
 
 	to_world("<h1 class='alert'>Event</h1>")
 	to_world("<h2 class='alert'>An event is starting. OOC Info:</h2>")
-	to_world("<span class='alert'>[config.event]</span>")
+	to_world(SPAN_CLASS("alert", "[config.event]"))
 	to_world("<br>")
 
 	SSwebhooks.send(WEBHOOK_CUSTOM_EVENT, list("text" = config.event))
@@ -38,5 +38,5 @@
 
 	to_chat(src, "<h1 class='alert'>Event</h1>")
 	to_chat(src, "<h2 class='alert'>An event is taking place. OOC Info:</h2>")
-	to_chat(src, "<span class='alert'>[config.event]</span>")
+	to_chat(src, SPAN_CLASS("alert", "[config.event]"))
 	to_chat(src, "<br>")

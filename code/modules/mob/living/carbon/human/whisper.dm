@@ -4,7 +4,7 @@
 
 	if (src.client)
 		if (src.client.prefs.muted & MUTE_IC)
-			to_chat(src, "<span class='warning'>You cannot whisper (muted).</span>")
+			to_chat(src, SPAN_WARNING("You cannot whisper (muted)."))
 			return
 
 	if (src.stat == 2)

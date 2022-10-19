@@ -34,7 +34,7 @@
 		if("singulo", "telesci")			//general one-round-only stuff
 			var/F = investigate_subject2file(subject)
 			if(!F)
-				to_chat(src, "<span class='warning'>Error: admin_investigate: [INVESTIGATE_DIR][subject] is an invalid path or cannot be accessed.</span>")
+				to_chat(src, SPAN_WARNING("Error: admin_investigate: [INVESTIGATE_DIR][subject] is an invalid path or cannot be accessed."))
 				return
 			show_browser(src, F,"window=investigate[subject];size=800x300")
 
@@ -42,4 +42,4 @@
 			if (GLOB.href_logfile)
 				show_browser(src, GLOB.href_logfile, "window=investigate[subject];size=800x300")
 			else
-				to_chat(src, "<span class='warning'>Error: admin_investigate: Href Logging [config.log_hrefs ? "failed to start" : "is disabled"].</span>")
+				to_chat(src, SPAN_WARNING("Error: admin_investigate: Href Logging [config.log_hrefs ? "failed to start" : "is disabled"]."))

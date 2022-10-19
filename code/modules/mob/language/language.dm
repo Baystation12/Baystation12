@@ -121,13 +121,13 @@
 	return scrambled_text
 
 /datum/language/proc/format_message(message, verb)
-	return "[verb], <span class='message'><span class='[colour]'>\"[capitalize(message)]\"</span></span>"
+	return "[verb], [SPAN_CLASS("message", "[SPAN_CLASS(colour, "\"[capitalize(message)]\"")]")]"
 
 /datum/language/proc/format_message_plain(message, verb)
 	return "[verb], \"[capitalize(message)]\""
 
 /datum/language/proc/format_message_radio(message, verb)
-	return "[verb], <span class='[colour]'>\"[capitalize(message)]\"</span>"
+	return "[verb], [SPAN_CLASS(colour, "\"[capitalize(message)]\"")]"
 
 /datum/language/proc/get_talkinto_msg_range(message)
 	// if you yell, you'll be heard from two tiles over instead of one
@@ -144,7 +144,7 @@
 
 /mob/proc/hear_broadcast(datum/language/language, mob/speaker, speaker_name, message)
 	if((language in languages) && language.check_special_condition(src))
-		var/msg = "<i><span class='game say'>[language.name], <span class='name'>[speaker_name]</span> [message]</span></i>"
+		var/msg = "<i>[SPAN_CLASS("game say", "[language.name], [SPAN_CLASS("name", "[speaker_name]")] [message]")]</i>"
 		to_chat(src, msg)
 
 /mob/new_player/hear_broadcast(datum/language/language, mob/speaker, speaker_name, message)
@@ -152,9 +152,9 @@
 
 /mob/observer/ghost/hear_broadcast(datum/language/language, mob/speaker, speaker_name, message)
 	if(speaker.name == speaker_name || antagHUD)
-		to_chat(src, "<i><span class='game say'>[language.name], <span class='name'>[speaker_name]</span> ([ghost_follow_link(speaker, src)]) [message]</span></i>")
+		to_chat(src, "<i>[SPAN_CLASS("game say", "[language.name], [SPAN_CLASS("name", "[speaker_name]")] ([ghost_follow_link(speaker, src)]) [message]")]</i>")
 	else
-		to_chat(src, "<i><span class='game say'>[language.name], <span class='name'>[speaker_name]</span> [message]</span></i>")
+		to_chat(src, "<i>[SPAN_CLASS("game say", "[language.name], [SPAN_CLASS("name", "[speaker_name]")] [message]")]</i>")
 
 /datum/language/proc/check_special_condition(mob/other)
 	return 1
@@ -214,7 +214,7 @@
 	set category = "IC"
 	set src = usr
 
-	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
+	var/dat = "<b>[FONT_GIANT("Known Languages")]</b><br/><br/>"
 
 	for(var/datum/language/L in languages)
 		if(!(L.flags & NONGLOBAL))
@@ -224,7 +224,7 @@
 	return
 
 /mob/living/check_languages()
-	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
+	var/dat = "<b>[FONT_GIANT("Known Languages")]</b><br/><br/>"
 
 	if(default_language)
 		dat += "Current default language: [default_language] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"

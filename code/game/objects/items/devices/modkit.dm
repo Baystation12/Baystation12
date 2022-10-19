@@ -23,7 +23,7 @@
 		return	//it shouldn't be null, okay?
 
 	if(!parts)
-		to_chat(user, "<span class='warning'>This kit has no parts for this modification left.</span>")
+		to_chat(user, SPAN_WARNING("This kit has no parts for this modification left."))
 		qdel(src)
 		return
 
@@ -34,22 +34,22 @@
 
 	var/obj/item/clothing/I = O
 	if (!istype(I) || !allowed)
-		to_chat(user, "<span class='notice'>[src] is unable to modify that.</span>")
+		to_chat(user, SPAN_NOTICE("[src] is unable to modify that."))
 		return
 
 	var/excluding = ("exclude" in I.species_restricted)
 	var/in_list = (target_species in I.species_restricted)
 	if (excluding ^ in_list)
-		to_chat(user, "<span class='notice'>[I] is already modified.</span>")
+		to_chat(user, SPAN_NOTICE("[I] is already modified."))
 		return
 
 	if(!isturf(O.loc))
-		to_chat(user, "<span class='warning'>[O] must be safely placed on the ground for modification.</span>")
+		to_chat(user, SPAN_WARNING("[O] must be safely placed on the ground for modification."))
 		return
 
 	playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 
-	user.visible_message("<span class='notice'>\The [user] opens \the [src] and modifies \the [O].</span>","<span class='notice'>You open \the [src] and modify \the [O].</span>")
+	user.visible_message(SPAN_NOTICE("\The [user] opens \the [src] and modifies \the [O]."),SPAN_NOTICE("You open \the [src] and modify \the [O]."))
 
 	I.refit_for_species(target_species)
 

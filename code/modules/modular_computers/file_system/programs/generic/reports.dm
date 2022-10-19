@@ -91,12 +91,12 @@
 		var/editing = alert(user, "Would you like to view or edit the report", "Loading Report", "View", "Edit")
 		if(editing == "View")
 			if(!chosen_report.verify_access(get_access(user)))
-				to_chat(user, "<span class='warning'>You lack access to view this report.</span>")
+				to_chat(user, SPAN_WARNING("You lack access to view this report."))
 				return
 			can_view_only = TRUE
 		else
 			if(!chosen_report.verify_access_edit(get_access(user)))
-				to_chat(user, "<span class='warning'>You lack access to edit this report.</span>")
+				to_chat(user, SPAN_WARNING("You lack access to edit this report."))
 				return
 			can_view_only = FALSE
 		saved_report = chosen_report

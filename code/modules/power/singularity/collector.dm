@@ -64,7 +64,7 @@ var/global/list/rad_collectors = list()
 
 	if(P)
 		if(P.air_contents.gas[GAS_PHORON] == 0)
-			investigate_log("<font color='red'>out of fuel</font>.","singulo")
+			investigate_log("[SPAN_COLOR("red", "out of fuel")].","singulo")
 			eject()
 		else
 			P.air_adjust_gas(GAS_PHORON, -0.01*drainratio*min(last_rads,max_rads)/max_rads) //fuel cost increases linearly with incoming radiation
@@ -79,22 +79,22 @@ var/global/list/rad_collectors = list()
 		return FALSE
 	. = TRUE
 	if(MACHINE_IS_BROKEN(src) || melted)
-		to_chat(user, "<span class='warning'>The [src] is completely destroyed!</span>")
+		to_chat(user, SPAN_WARNING("The [src] is completely destroyed!"))
 	if(!src.locked)
 		toggle_power()
 		user.visible_message("[user.name] turns the [src.name] [active? "on":"off"].", \
 		"You turn the [src.name] [active? "on":"off"].")
-		investigate_log("turned [active?"<font color='green'>on</font>":"<font color='red'>off</font>"] by [user.key]. [P?"Fuel: [round(P.air_contents.gas[GAS_PHORON]/0.29)]%":"<font color='red'>It is empty</font>"].","singulo")
+		investigate_log("turned [active ? SPAN_COLOR("green", "on") : SPAN_COLOR("red", "off")] by [user.key]. [P ? "Fuel: [round(P.air_contents.gas[GAS_PHORON]/0.29)]%" : SPAN_COLOR("red", "It is empty")].","singulo")
 	else
-		to_chat(user, "<span class='warning'>The controls are locked!</span>")
+		to_chat(user, SPAN_WARNING("The controls are locked!"))
 
 /obj/machinery/power/rad_collector/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/tank/phoron))
 		if(!src.anchored)
-			to_chat(user, "<span class='warning'>The [src] needs to be secured to the floor first.</span>")
+			to_chat(user, SPAN_WARNING("The [src] needs to be secured to the floor first."))
 			return 1
 		if(src.P)
-			to_chat(user, "<span class='warning'>There's already a phoron tank loaded.</span>")
+			to_chat(user, SPAN_WARNING("There's already a phoron tank loaded."))
 			return 1
 		if(!user.unEquip(W, src))
 			return
@@ -107,11 +107,11 @@ var/global/list/rad_collectors = list()
 			return 1
 	else if(isWrench(W))
 		if(P)
-			to_chat(user, "<span class='notice'>Remove the phoron tank first.</span>")
+			to_chat(user, SPAN_NOTICE("Remove the phoron tank first."))
 			return 1
 		for(var/obj/machinery/power/rad_collector/R in get_turf(src))
 			if(R != src)
-				to_chat(user, "<span class='warning'>You cannot install more than one collector on the same spot.</span>")
+				to_chat(user, SPAN_WARNING("You cannot install more than one collector on the same spot."))
 				return 1
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		src.anchored = !src.anchored
@@ -130,9 +130,9 @@ var/global/list/rad_collectors = list()
 				to_chat(user, "The controls are now [src.locked ? "locked." : "unlocked."]")
 			else
 				src.locked = 0 //just in case it somehow gets locked
-				to_chat(user, "<span class='warning'>The controls can only be locked when the [src] is active</span>")
+				to_chat(user, SPAN_WARNING("The controls can only be locked when the [src] is active"))
 		else
-			to_chat(user, "<span class='warning'>Access denied!</span>")
+			to_chat(user, SPAN_WARNING("Access denied!"))
 		return 1
 	return ..()
 

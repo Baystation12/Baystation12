@@ -3,7 +3,7 @@
 		return FALSE
 	if(istype(chirp.loc, /obj/structure/diona_gestalt) || istype(loc, /obj/structure/diona_gestalt))
 		return FALSE
-	visible_message("<span class='notice'>\The [chirp] and \the [src] twine together in gestalt!</span>")
+	visible_message(SPAN_NOTICE("\The [chirp] and \the [src] twine together in gestalt!"))
 	var/obj/structure/diona_gestalt/blob = new(get_turf(src))
 	blob.roll_up_atom(chirp, silent = TRUE)
 	blob.roll_up_atom(src, silent = TRUE)
@@ -13,7 +13,7 @@
 	if(!istype(chirp))
 		return
 	if(!silent)
-		visible_message("<span class='notice'>\The [chirp] is engulfed by \the [src].</span>")
+		visible_message(SPAN_NOTICE("\The [chirp] is engulfed by \the [src]."))
 	if(istype(chirp, /mob/living/carbon/alien/diona))
 		nymphs[chirp] = TRUE
 		queue_icon_update()
@@ -48,5 +48,5 @@
 			var/mob/living/carbon/alien/diona/chirp = nimp
 			if(chirp.client)
 				return
-	visible_message("<span class='danger'>\The [src] has completely split apart!</span>")
+	visible_message(SPAN_DANGER("\The [src] has completely split apart!"))
 	qdel(src)

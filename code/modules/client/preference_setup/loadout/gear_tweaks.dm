@@ -28,7 +28,7 @@
 	..()
 
 /datum/gear_tweak/color/get_contents(metadata)
-	return "Color: <font color='[metadata]'>&#9899;</font>"
+	return "Color: [SPAN_COLOR(metadata, "&#9899;")]"
 
 /datum/gear_tweak/color/get_default()
 	return valid_colors ? valid_colors[1] : COLOR_WHITE

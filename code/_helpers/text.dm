@@ -407,8 +407,8 @@
 	t = replacetext(t, "\[/u\]", "</U>")
 	t = replacetext(t, "\[time\]", "[stationtime2text()]")
 	t = replacetext(t, "\[date\]", "[stationdate2text()]")
-	t = replacetext(t, "\[large\]", "<font size=\"4\">")
-	t = replacetext(t, "\[/large\]", "</font>")
+	t = replacetext(t, "\[large\]", "<span style=\"font-size: 4\">")
+	t = replacetext(t, "\[/large\]", "</span>")
 	t = replacetext(t, "\[field\]", "<span class=\"paper_field\"></span>")
 	t = replacetext(t, "\[h1\]", "<H1>")
 	t = replacetext(t, "\[/h1\]", "</H1>")
@@ -418,8 +418,8 @@
 	t = replacetext(t, "\[/h3\]", "</H3>")
 	t = replacetext(t, "\[*\]", "<li>")
 	t = replacetext(t, "\[hr\]", "<HR>")
-	t = replacetext(t, "\[small\]", "<font size = \"1\">")
-	t = replacetext(t, "\[/small\]", "</font>")
+	t = replacetext(t, "\[small\]", "<span style=\"font-size: 1\">")
+	t = replacetext(t, "\[/small\]", "</span>")
 	t = replacetext(t, "\[list\]", "<ul>")
 	t = replacetext(t, "\[/list\]", "</ul>")
 	t = replacetext(t, "\[table\]", "<table border=1 cellspacing=0 cellpadding=3 style='border: 1px solid black;'>")
@@ -447,10 +447,10 @@
 /proc/digitalPencode2html(text)
 	text = replacetext(text, "\[pre\]", "<pre>")
 	text = replacetext(text, "\[/pre\]", "</pre>")
-	text = replacetext(text, "\[fontred\]", "<font color=\"red\">") //</font> to pass html tag integrity unit test
-	text = replacetext(text, "\[fontblue\]", "<font color=\"blue\">")//</font> to pass html tag integrity unit test
-	text = replacetext(text, "\[fontgreen\]", "<font color=\"green\">")
-	text = replacetext(text, "\[/font\]", "</font>")
+	text = replacetext(text, "\[fontred\]", "<span style=\"color: red\">") //</span> to pass html tag integrity unit test
+	text = replacetext(text, "\[fontblue\]", "<span style=\"color: blue\">")//</span> to pass html tag integrity unit test
+	text = replacetext(text, "\[fontgreen\]", "<span style=\"color: green\">")
+	text = replacetext(text, "\[/font\]", "</span>")
 	text = replacetext(text, "\[redacted\]", "<span class=\"redacted\">R E D A C T E D</span>")
 	return pencode2html(text)
 
@@ -458,10 +458,10 @@
 /proc/html2pencode(t)
 	t = replacetext(t, "<pre>", "\[pre\]")
 	t = replacetext(t, "</pre>", "\[/pre\]")
-	t = replacetext(t, "<font color=\"red\">", "\[fontred\]")//</font> to pass html tag integrity unit test
-	t = replacetext(t, "<font color=\"blue\">", "\[fontblue\]")//</font> to pass html tag integrity unit test
-	t = replacetext(t, "<font color=\"green\">", "\[fontgreen\]")
-	t = replacetext(t, "</font>", "\[/font\]")
+	t = replacetext(t, "<span style=\"color: red\">", "\[fontred\]")//</span> to pass html tag integrity unit test
+	t = replacetext(t, "<span style=\"color: blue\">", "\[fontblue\]")//</span> to pass html tag integrity unit test
+	t = replacetext(t, "<span style=\"color: green\">", "\[fontgreen\]")
+	t = replacetext(t, "</span>", "\[/font\]")
 	t = replacetext(t, "<BR>", "\[br\]")
 	t = replacetext(t, "<br>", "\[br\]")
 	t = replacetext(t, "<B>", "\[b\]")

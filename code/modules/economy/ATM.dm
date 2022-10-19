@@ -64,14 +64,14 @@
 
 		//display a message to the user
 		var/response = pick("Initiating withdraw. Have a nice day!", "CRITICAL ERROR: Activating cash chamber panic siphon.","PIN Code accepted! Emptying account balance.", "Jackpot!")
-		to_chat(user, "[icon2html(src, user)] <span class='warning'>[src] beeps: \"[response]\"</span>")
+		to_chat(user, "[icon2html(src, user)] [SPAN_WARNING("[src] beeps: \"[response]\"")]")
 		return 1
 
 /obj/machinery/atm/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/card/id))
 		if(emagged > 0)
 			//prevent inserting id into an emagged ATM
-			to_chat(user, "[icon2html(src, user)] <span class='warning'>CARD READER ERROR. This system has been compromised!</span>")
+			to_chat(user, "[icon2html(src, user)] [SPAN_WARNING("CARD READER ERROR. This system has been compromised!")]")
 			return
 		if(!is_powered())
 			to_chat(user, "You try to insert your card into [src], but nothing happens.")
@@ -97,7 +97,7 @@
 				else
 					playsound(loc, 'sound/items/polaroid2.ogg', 50, 1)
 
-				to_chat(user, "<span class='info'>You insert [I] into [src].</span>")
+				to_chat(user, SPAN_INFO("You insert [I] into [src]."))
 				src.attack_hand(user)
 				qdel(I)
 	else
@@ -110,7 +110,7 @@
 /obj/machinery/atm/interact(mob/user)
 
 	if(istype(user, /mob/living/silicon))
-		to_chat(user, "[icon2html(src, user)] <span class='warning'>Artificial unit recognized. Artificial units do not currently receive monetary compensation, as per system banking regulation #1005.</span>")
+		to_chat(user, "[icon2html(src, user)] [SPAN_WARNING("Artificial unit recognized. Artificial units do not currently receive monetary compensation, as per system banking regulation #1005.")]")
 		return
 
 	if(get_dist(src,user) <= 1)
@@ -118,21 +118,21 @@
 		var/list/t = list()
 
 		if(authenticated_account)
-			t += "<span class='highlight'>Welcome <b>[authenticated_account.owner_name]</b>.</span><BR>"
+			t += "[SPAN_CLASS("highlight", "Welcome <b>[authenticated_account.owner_name]</b>.")]<BR>"
 		else
-			t += "<span class='highlight'>Welcome. Please login below.</span><BR>"
+			t += "[SPAN_CLASS("highlight", "Welcome. Please login below.")]<BR>"
 
-		t += "<div class='statusDisplay'><span class='highlight'><b>Card: </b></span>"
+		t += "<div class='statusDisplay'>[SPAN_CLASS("highlight", "<b>Card: </b>")]"
 		if(emagged > 0)
-			t += "<span class='bad'><b>LOCKED</b><br>Unauthorized terminal access detected!<br>This ATM has been locked down.</span></div><BR>"
+			t += "[SPAN_BAD("<b>LOCKED</b><br>Unauthorized terminal access detected!<br>This ATM has been locked down.")]</div><BR>"
 		else
 			t += "<a href='?src=\ref[src];choice=insert_card'>[held_card ? held_card.name : "No card inserted"]</a></div><BR>"
 			t += "<div class='statusDisplay'>"
 			if(ticks_left_locked_down > 0)
-				t += "<span class='bad'>Maximum number of pin attempts exceeded! Access to this ATM has been temporarily disabled.</span></div>"
+				t += "[SPAN_BAD("Maximum number of pin attempts exceeded! Access to this ATM has been temporarily disabled.")]</div>"
 			else if(authenticated_account)
 				if(authenticated_account.suspended)
-					t += "<span class='bad'><b>Access to this account has been suspended, and the funds within frozen.</b></span></div>"
+					t += "[SPAN_BAD("<b>Access to this account has been suspended, and the funds within frozen.</b>")]</div>"
 				else
 					switch(view_screen)
 						if(CHANGE_SECURITY_LEVEL)
@@ -140,17 +140,17 @@
 							if(authenticated_account.security_level != 0)
 								t += "<A href='?src=\ref[src];choice=change_security_level;new_security_level=0'>Select Minimum Security</a><BR>"
 							else
-								t += "<span class='good'><b>Minimum security set: </b></span><BR>"
+								t += "[SPAN_GOOD("<b>Minimum security set: </b>")]<BR>"
 							t += "Either the account number or card is required to access this account. EFTPOS transactions will require a card and ask for a pin, but not verify the pin is correct.<hr>"
 							if(authenticated_account.security_level != 1)
 								t += "<A href='?src=\ref[src];choice=change_security_level;new_security_level=1'>Select Moderate Security</a><BR>"
 							else
-								t += "<span class='average'><b>Moderate Security set: </b></span><BR>"
+								t += "[SPAN_CLASS("average", "<b>Moderate Security set: </b>")]<BR>"
 							t += "An account number and pin must be manually entered to access this account and process transactions.<hr>"
 							if(authenticated_account.security_level != 2)
 								t += "<A href='?src=\ref[src];choice=change_security_level;new_security_level=2'>Select Maximum Security</a><BR>"
 							else
-								t += "<span class='bad'><b>Maximum security Set: </b></span><BR>"
+								t += "[SPAN_BAD("<b>Maximum security Set: </b>")]<BR>"
 							t += "High - In addition to account number, a pin and a card is required to access this account and process transactions.<hr><br>"
 						if(VIEW_TRANSACTION_LOGS)
 							t += "<b>Transaction logs</b><br>"
@@ -209,7 +209,7 @@
 				else if (account_security_level == 1)
 					t += "This account requires a PIN to access. For security reasons the account # will need re-entered or ID bound to this account re-scanned."
 				else
-					t += "<span class='bad'><b>Due to the security settings on this account, all information needs to be re-entered and the ID bound to this account placed in the slot above.</b></span><BR>"
+					t += "[SPAN_BAD("<b>Due to the security settings on this account, all information needs to be re-entered and the ID bound to this account placed in the slot above.</b>")]<BR>"
 				t += "<form name='atm_auth' action='?src=\ref[src]' method='get'>"
 				t += "<input type='hidden' name='src' value='\ref[src]'>"
 				t += "<input type='hidden' name='choice' value='attempt_auth'>"
@@ -243,12 +243,12 @@
 						var/transfer_purpose = href_list["purpose"]
 						var/datum/money_account/target_account = get_account(target_account_number)
 						if(target_account && authenticated_account.transfer(target_account, transfer_amount, transfer_purpose))
-							to_chat(usr, "[icon2html(src, usr)]<span class='info'>Funds transfer successful.</span>")
+							to_chat(usr, "[icon2html(src, usr)][SPAN_INFO("Funds transfer successful.")]")
 						else
-							to_chat(usr, "[icon2html(src, usr)]<span class='warning'>Funds transfer failed.</span>")
+							to_chat(usr, "[icon2html(src, usr)][SPAN_WARNING("Funds transfer failed.")]")
 
 					else
-						to_chat(usr, "[icon2html(src, usr)]<span class='warning'>You don't have enough funds to do that!</span>")
+						to_chat(usr, "[icon2html(src, usr)][SPAN_WARNING("You don't have enough funds to do that!")]")
 			if("view_screen")
 				view_screen = text2num(href_list["view_screen"])
 			if("change_security_level")
@@ -296,11 +296,11 @@
 								if(failed_account)
 									failed_account.log_msg("Unauthorized login attempt", machine_id)
 							else
-								to_chat(usr, "[icon2html(src, usr)] <span class='warning'>Incorrect pin/account combination entered, [max_pin_attempts - number_incorrect_tries] attempts remaining.</span>")
+								to_chat(usr, "[icon2html(src, usr)] [SPAN_WARNING("Incorrect pin/account combination entered, [max_pin_attempts - number_incorrect_tries] attempts remaining.")]")
 								previous_account_number = tried_account_num
 								playsound(src, 'sound/machines/buzz-sigh.ogg', 50, 1)
 						else
-							to_chat(usr, "[icon2html(src, usr)] <span class='warning'>Unable to log in to account, additional information may be required.</span>")
+							to_chat(usr, "[icon2html(src, usr)] [SPAN_WARNING("Unable to log in to account, additional information may be required.")]")
 							number_incorrect_tries = 0
 					else
 						playsound(src, 'sound/machines/twobeep.ogg', 50, 1)
@@ -310,7 +310,7 @@
 						//create a transaction log entry
 						authenticated_account.log_msg("Remote terminal access", machine_id)
 
-						to_chat(usr, "[icon2html(src, usr)] <span class='info'>Access granted. Welcome user '[authenticated_account.owner_name].'</span>")
+						to_chat(usr, "[icon2html(src, usr)] [SPAN_INFO("Access granted. Welcome user '[authenticated_account.owner_name].'")]")
 
 					previous_account_number = tried_account_num
 			if("e_withdrawal")
@@ -324,7 +324,7 @@
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
 						spawn_ewallet(amount,src.loc,usr)
 					else
-						to_chat(usr, "[icon2html(src, usr)]<span class='warning'>You don't have enough funds to do that!</span>")
+						to_chat(usr, "[icon2html(src, usr)][SPAN_WARNING("You don't have enough funds to do that!")]")
 			if("withdrawal")
 				var/amount = max(text2num(href_list["funds_amount"]),0)
 				amount = round(amount, 0.01)
@@ -336,7 +336,7 @@
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
 						spawn_money(amount,src.loc,usr)
 					else
-						to_chat(usr, "[icon2html(src, usr)]<span class='warning'>You don't have enough funds to do that!</span>")
+						to_chat(usr, "[icon2html(src, usr)][SPAN_WARNING("You don't have enough funds to do that!")]")
 			if("balance_statement")
 				if(authenticated_account)
 					var/obj/item/paper/R = new(src.loc)
@@ -408,7 +408,7 @@
 				if(!held_card)
 					//this might happen if the user had the browser window open when somebody emagged it
 					if(emagged > 0)
-						to_chat(usr, "[icon2html(src, usr)] <span class='warning'>The ATM card reader rejected your ID because this machine has been sabotaged!</span>")
+						to_chat(usr, "[icon2html(src, usr)] [SPAN_WARNING("The ATM card reader rejected your ID because this machine has been sabotaged!")]")
 					else
 						var/obj/item/I = usr.get_active_hand()
 						if (istype(I, /obj/item/card/id))

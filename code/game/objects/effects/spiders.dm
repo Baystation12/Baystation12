@@ -24,9 +24,9 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
 	if(W.attack_verb.len)
-		visible_message("<span class='warning'>\The [src] have been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]</span>")
+		visible_message(SPAN_WARNING("\The [src] have been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]"))
 	else
-		visible_message("<span class='warning'>\The [src] have been attacked with \the [W][(user ? " by [user]." : ".")]</span>")
+		visible_message(SPAN_WARNING("\The [src] have been attacked with \the [W][(user ? " by [user]." : ".")]"))
 
 	var/damage = W.force / 4.0
 
@@ -71,7 +71,7 @@
 		return 1
 	else if(istype(mover, /mob/living))
 		if(prob(50))
-			to_chat(mover, "<span class='warning'>You get stuck in \the [src] for a moment.</span>")
+			to_chat(mover, SPAN_WARNING("You get stuck in \the [src] for a moment."))
 			return 0
 	else if(istype(mover, /obj/item/projectile))
 		return prob(30)
@@ -213,7 +213,7 @@
 		..()
 
 /obj/effect/spider/spiderling/proc/die()
-	visible_message("<span class='alert'>[src] dies!</span>")
+	visible_message(SPAN_CLASS("alert", "[src] dies!"))
 	new /obj/effect/decal/cleanable/spiderling_remains(loc)
 	qdel(src)
 
@@ -281,7 +281,7 @@
 				var/target_atom = pick(nearby)
 				walk_to(src, target_atom, 5)
 				if(prob(10))
-					src.visible_message("<span class='notice'>\The [src] skitters[pick(" away"," around","")].</span>")
+					src.visible_message(SPAN_NOTICE("\The [src] skitters[pick(" away"," around","")]."))
 					// Reduces the risk of spiderlings hanging out at the extreme ranges of the shift range.
 					var/min_x = pixel_x <= -shift_range ? 0 : -2
 					var/max_x = pixel_x >=  shift_range ? 0 :  2
@@ -308,7 +308,7 @@
 			amount_grown = 20 //reset amount_grown so that people have some time to react to spiderlings before they grow big
 			O.implants -= src
 			forceMove(O.owner ? O.owner.loc : O.loc)
-			src.visible_message("<span class='warning'>\A [src] emerges from inside [O.owner ? "[O.owner]'s [O.name]" : "\the [O]"]!</span>")
+			src.visible_message(SPAN_WARNING("\A [src] emerges from inside [O.owner ? "[O.owner]'s [O.name]" : "\the [O]"]!"))
 			if(O.owner)
 				O.owner.apply_damage(5, DAMAGE_BRUTE, O.organ_tag)
 				O.owner.apply_damage(3, DAMAGE_TOXIN, O.organ_tag)
@@ -316,9 +316,9 @@
 			O.owner.apply_damage(1, DAMAGE_TOXIN, O.organ_tag)
 			if(world.time > last_itch + 30 SECONDS)
 				last_itch = world.time
-				to_chat(O.owner, "<span class='notice'>Your [O.name] itches...</span>")
+				to_chat(O.owner, SPAN_NOTICE("Your [O.name] itches..."))
 	else if(prob(1))
-		src.visible_message("<span class='notice'>\The [src] skitters.</span>")
+		src.visible_message(SPAN_NOTICE("\The [src] skitters."))
 
 	if(amount_grown > 0)
 		amount_grown += rand(0,2)
@@ -352,7 +352,7 @@
 					L.status_flags ^= NOTARGET
 
 /obj/effect/spider/cocoon/Destroy()
-	src.visible_message("<span class='warning'>\The [src] splits open.</span>")
+	src.visible_message(SPAN_WARNING("\The [src] splits open."))
 	for(var/atom/movable/A in contents)
 		A.dropInto(loc)
 		if (istype(A, /mob/living))

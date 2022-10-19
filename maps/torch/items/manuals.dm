@@ -78,7 +78,7 @@
 	..()
 	var/obj/effect/overmap/visitable/torch = map_sectors["[z]"]
 	var/memo = {"
-	<tt><center><b><font color='red'>SECRET - CODE WORDS: TORCH</font></b>
+	<tt><center><b>[SPAN_COLOR("red", "SECRET - CODE WORDS: TORCH")]</b>
 	<h3>SOL CENTRAL GOVERNMENT EXPEDITIONARY COMMAND</h3>
 	<img src = sollogo.png>
 	</center>
@@ -121,7 +121,7 @@
 /obj/item/paper/umbra
 	name = "UMBRA Protocol"
 	info = {"
-	<tt><center><b><font color='red'>TOP SECRET - CODE WORDS: TORCH UMBRA</font></b>
+	<tt><center><b><span style='color: red'>TOP SECRET - CODE WORDS: TORCH UMBRA</span></b>
 	<h3>OFFICE OF THE SECRETARY GENERAL OF SOL CENTRAL GOVERNMENT</h3>
 	<img src = sollogo.png>
 	</center>

@@ -353,7 +353,7 @@ var/global/list/admin_verbs_mod = list(
 	verbs.Remove(/client/proc/hide_most_verbs, admin_verbs_hideable)
 	verbs += /client/proc/show_verbs
 
-	to_chat(src, "<span class='interface'>Most of your adminverbs have been hidden.</span>")
+	to_chat(src, SPAN_CLASS("interface", "Most of your adminverbs have been hidden."))
 	return
 
 /client/proc/hide_verbs()
@@ -363,7 +363,7 @@ var/global/list/admin_verbs_mod = list(
 	remove_admin_verbs()
 	verbs += /client/proc/show_verbs
 
-	to_chat(src, "<span class='interface'>Almost all of your adminverbs have been hidden.</span>")
+	to_chat(src, SPAN_CLASS("interface", "Almost all of your adminverbs have been hidden."))
 	return
 
 /client/proc/show_verbs()
@@ -373,7 +373,7 @@ var/global/list/admin_verbs_mod = list(
 	verbs -= /client/proc/show_verbs
 	add_admin_verbs()
 
-	to_chat(src, "<span class='interface'>All of your adminverbs are now visible.</span>")
+	to_chat(src, SPAN_CLASS("interface", "All of your adminverbs are now visible."))
 
 
 
@@ -389,7 +389,7 @@ var/global/list/admin_verbs_mod = list(
 		ghost.reenter_corpse()
 
 	else if(istype(mob,/mob/new_player))
-		to_chat(src, "<font color='red'>Error: Aghost: Can't admin-ghost whilst in the lobby. Join or Observe first.</font>")
+		to_chat(src, SPAN_COLOR("red", "Error: Aghost: Can't admin-ghost whilst in the lobby. Join or Observe first."))
 	else
 		//ghostize
 		var/mob/body = mob
@@ -397,7 +397,7 @@ var/global/list/admin_verbs_mod = list(
 		sound_to(usr, sound(null))
 
 		if (!ghost)
-			to_chat(src, FONT_COLORED("red", "You are already admin-ghosted."))
+			to_chat(src, SPAN_COLOR("red", "You are already admin-ghosted."))
 			return
 		ghost.admin_ghosted = 1
 		if(body)
@@ -413,11 +413,11 @@ var/global/list/admin_verbs_mod = list(
 	if(holder && mob)
 		if(mob.invisibility == INVISIBILITY_OBSERVER)
 			mob.set_invisibility(initial(mob.invisibility))
-			to_chat(mob, "<span class='danger'>Invisimin off. Invisibility reset.</span>")
+			to_chat(mob, SPAN_DANGER("Invisimin off. Invisibility reset."))
 			mob.alpha = max(mob.alpha + 100, 255)
 		else
 			mob.set_invisibility(INVISIBILITY_OBSERVER)
-			to_chat(mob, "<span class='notice'>Invisimin on. You are now as invisible as a ghost.</span>")
+			to_chat(mob, SPAN_NOTICE("Invisimin on. You are now as invisible as a ghost."))
 			mob.alpha = max(mob.alpha - 100, 0)
 
 
@@ -489,7 +489,7 @@ var/global/list/admin_verbs_mod = list(
 	if(!warned_ckey || !istext(warned_ckey))
 		return
 	if(warned_ckey in admin_datums)
-		to_chat(usr, "<font color='red'>Error: warn(): You can't warn admins.</font>")
+		to_chat(usr, SPAN_COLOR("red", "Error: warn(): You can't warn admins."))
 		return
 	var/datum/preferences/D
 	var/client/C = GLOB.ckey_directory[warned_ckey]
@@ -498,7 +498,7 @@ var/global/list/admin_verbs_mod = list(
 	else
 		D = SScharacter_setup.preferences_datums[warned_ckey]
 	if(!D)
-		to_chat(src, "<font color='red'>Error: warn(): No such ckey found.</font>")
+		to_chat(src, SPAN_COLOR("red", "Error: warn(): No such ckey found."))
 		return
 	++D.warns
 	if (config.warn_autoban_threshold && D.warns >= config.warn_autoban_threshold)
@@ -506,14 +506,14 @@ var/global/list/admin_verbs_mod = list(
 		ban_unban_log_save("[ckey] warned [warned_ckey], resulting in a [mins_readable] autoban.")
 		if(C)
 			message_admins("[key_name_admin(src)] has warned [key_name_admin(C)] resulting in a [mins_readable] ban.")
-			to_chat(C, "<font color='red'><BIG><B>You have been autobanned due to a warning by [ckey].</B></BIG><br>This is a temporary ban, it will be removed in [mins_readable].</font>")
+			to_chat(C, SPAN_COLOR("red", "<BIG><B>You have been autobanned due to a warning by [ckey].</B></BIG><br>This is a temporary ban, it will be removed in [mins_readable]."))
 			qdel(C)
 		else
 			message_admins("[key_name_admin(src)] has warned [warned_ckey] resulting in a [mins_readable] ban.")
 		AddBan(warned_ckey, D.last_id, "Autobanning due to too many formal warnings", ckey, 1, config.warn_autoban_duration)
 	else
 		if(C)
-			to_chat(C, "<font color='red'><BIG><B>You have been formally warned by an administrator.</B></BIG><br>Further warnings will result in an autoban.</font>")
+			to_chat(C, SPAN_COLOR("red", "<BIG><B>You have been formally warned by an administrator.</B></BIG><br>Further warnings will result in an autoban."))
 			message_admins("[key_name_admin(src)] has warned [key_name_admin(C)]. They have [config.warn_autoban_threshold - D.warns] strikes remaining.")
 		else
 			message_admins("[key_name_admin(src)] has warned [warned_ckey] (DC). They have [config.warn_autoban_threshold - D.warns] strikes remaining.")
@@ -580,7 +580,7 @@ var/global/list/admin_verbs_mod = list(
 		deadmin_holder.reassociate()
 		log_admin("[src] re-admined themself.")
 		message_admins("[src] re-admined themself.", 1)
-		to_chat(src, "<span class='interface'>You now have the keys to control the planet, or at least [GLOB.using_map.full_name].</span>")
+		to_chat(src, SPAN_CLASS("interface", "You now have the keys to control the planet, or at least [GLOB.using_map.full_name]."))
 		verbs -= /client/proc/readmin_self
 
 /client/proc/deadmin_self()
@@ -592,7 +592,7 @@ var/global/list/admin_verbs_mod = list(
 			log_admin("[src] deadmined themself.")
 			message_admins("[src] deadmined themself.", 1)
 			deadmin()
-			to_chat(src, "<span class='interface'>You are now a normal player.</span>")
+			to_chat(src, SPAN_CLASS("interface", "You are now a normal player."))
 			verbs |= /client/proc/readmin_self
 
 /client/proc/toggle_log_hrefs()
@@ -704,7 +704,7 @@ var/global/list/admin_verbs_mod = list(
 	var/mob/living/carbon/human/M = input("Select mob.", "Edit Appearance") as null|anything in GLOB.human_mobs
 
 	if(!istype(M, /mob/living/carbon/human))
-		to_chat(usr, "<span class='warning'>You can only do this to humans!</span>")
+		to_chat(usr, SPAN_WARNING("You can only do this to humans!"))
 		return
 	switch(alert("Are you sure you wish to edit this mob's appearance? Skrell, Unathi and Vox can result in unintended consequences.",,"Yes","No"))
 		if("No")
@@ -873,8 +873,8 @@ var/global/list/admin_verbs_mod = list(
 	set name = "Man Up"
 	set desc = "Tells mob to man up and deal with it."
 
-	to_chat(T, "<span class='notice'><b><font size=3>Man up and deal with it.</font></b></span>")
-	to_chat(T, "<span class='notice'>Move on.</span>")
+	to_chat(T, SPAN_NOTICE("<b>[FONT_LARGE("Man up and deal with it.")]</b>"))
+	to_chat(T, SPAN_NOTICE("Move on."))
 
 	log_and_message_admins("told [key_name(T)] to man up and deal with it.")
 
@@ -884,7 +884,7 @@ var/global/list/admin_verbs_mod = list(
 	set desc = "Tells everyone to man up and deal with it."
 
 	for (var/mob/T as mob in SSmobs.mob_list)
-		to_chat(T, "<br><center><span class='notice'><b><font size=4>Man up.<br> Deal with it.</font></b><br>Move on.</span></center><br>")
+		to_chat(T, "<br><center>[SPAN_NOTICE("<b>[FONT_HUGE("Man up.<br> Deal with it.")]</b><br>Move on.")]</center><br>")
 		sound_to(T, 'sound/voice/ManUp1.ogg')
 
 	log_and_message_admins("told everyone to man up and deal with it.")

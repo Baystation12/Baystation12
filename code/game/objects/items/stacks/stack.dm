@@ -94,7 +94,7 @@
 			var/skill_label = ""
 			if(!user.skill_check(SKILL_CONSTRUCTION, R.difficulty))
 				var/decl/hierarchy/skill/S = decls_repository.get_decl(SKILL_CONSTRUCTION)
-				skill_label = "<font color='red'>\[[S.levels[R.difficulty]]]</font>"
+				skill_label = SPAN_COLOR("red", "\[[S.levels[R.difficulty]]\]")
 			if (can_build)
 				t1 +="[skill_label]<A href='?src=\ref[src];sublist=[recipes_sublist];make=[i];multiplier=1'>[title]</A>"
 			else
@@ -124,22 +124,22 @@
 
 	if (!can_use(required))
 		if (produced>1)
-			to_chat(user, "<span class='warning'>You haven't got enough [src] to build \the [produced] [recipe.display_name()]\s!</span>")
+			to_chat(user, SPAN_WARNING("You haven't got enough [src] to build \the [produced] [recipe.display_name()]\s!"))
 		else
-			to_chat(user, "<span class='warning'>You haven't got enough [src] to build \the [recipe.display_name()]!</span>")
+			to_chat(user, SPAN_WARNING("You haven't got enough [src] to build \the [recipe.display_name()]!"))
 		return
 
 	if(!recipe.can_make(user))
 		return
 
 	if (recipe.time)
-		to_chat(user, "<span class='notice'>Building [recipe.display_name()] ...</span>")
+		to_chat(user, SPAN_NOTICE("Building [recipe.display_name()] ..."))
 		if (!user.do_skilled(recipe.time, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT))
 			return
 
 	if (use(required))
 		if(user.skill_fail_prob(SKILL_CONSTRUCTION, 90, recipe.difficulty))
-			to_chat(user, "<span class='warning'>You waste some [name] and fail to build \the [recipe.display_name()]!</span>")
+			to_chat(user, SPAN_WARNING("You waste some [name] and fail to build \the [recipe.display_name()]!"))
 			return
 		var/atom/O = recipe.spawn_result(user, user.loc, produced)
 		O.add_fingerprint(user)
@@ -301,7 +301,7 @@
 			continue
 		var/transfer = src.transfer_to(item)
 		if (transfer)
-			to_chat(user, "<span class='notice'>You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s.</span>")
+			to_chat(user, SPAN_NOTICE("You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s."))
 		if(!amount)
 			break
 
@@ -382,12 +382,12 @@
 
 /datum/stack_recipe/proc/can_make(mob/user)
 	if (one_per_turf && (locate(result_type) in user.loc))
-		to_chat(user, "<span class='warning'>There is another [display_name()] here!</span>")
+		to_chat(user, SPAN_WARNING("There is another [display_name()] here!"))
 		return FALSE
 
 	var/turf/T = get_turf(user.loc)
 	if (on_floor && !T.is_floor())
-		to_chat(user, "<span class='warning'>\The [display_name()] must be constructed on the floor!</span>")
+		to_chat(user, SPAN_WARNING("\The [display_name()] must be constructed on the floor!"))
 		return FALSE
 
 	return TRUE

@@ -446,7 +446,7 @@ var/global/list/additional_antag_types = list()
 //Reports player logouts//
 //////////////////////////
 /proc/display_roundstart_logout_report()
-	var/msg = "<span class='notice'><b>Roundstart logout report</b>\n\n"
+	var/msg = "<b>Roundstart logout report</b>\n\n"
 	for(var/mob/living/L in SSmobs.mob_list)
 
 		if(L.ckey)
@@ -456,11 +456,11 @@ var/global/list/additional_antag_types = list()
 					found = 1
 					break
 			if(!found)
-				msg += "<b>[L.name]</b> ([L.ckey]), the [L.job] (<font color='#ffcc00'><b>Disconnected</b></font>)\n"
+				msg += "<b>[L.name]</b> ([L.ckey]), the [L.job] ([SPAN_COLOR("#ffcc00", "<b>Disconnected</b>")])\n"
 
 		if(L.ckey && L.client)
 			if(L.client.inactivity >= (ROUNDSTART_LOGOUT_REPORT_TIME / 2))	//Connected, but inactive (alt+tabbed or something)
-				msg += "<b>[L.name]</b> ([L.ckey]), the [L.job] (<font color='#ffcc00'><b>Connected, Inactive</b></font>)\n"
+				msg += "<b>[L.name]</b> ([L.ckey]), the [L.job] ([SPAN_COLOR("#ffcc00", "<b>Connected, Inactive</b>")])\n"
 				continue //AFK client
 			if(L.admin_paralyzed)
 				msg += "<b>[L.name]</b> ([L.ckey]), the [L.job] (Admin paralyzed)\n"
@@ -481,13 +481,13 @@ var/global/list/additional_antag_types = list()
 					continue //Dead mob, ghost abandoned
 				else
 					if(D.can_reenter_corpse)
-						msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] (<font color='red'><b>Adminghosted</b></font>)\n"
+						msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] ([SPAN_COLOR("red", "<b>Adminghosted</b>")])\n"
 						continue //Lolwhat
 					else
-						msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] (<font color='red'><b>Ghosted</b></font>)\n"
+						msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] ([SPAN_COLOR("red", "<b>Ghosted</b>")])\n"
 						continue //Ghosted while alive
 
-	msg += "</span>" // close the span from right at the top
+	msg = SPAN_NOTICE(msg)
 
 	for(var/mob/M in SSmobs.mob_list)
 		if(M.client && M.client.holder)
@@ -501,7 +501,7 @@ var/global/list/additional_antag_types = list()
 		return
 
 	var/obj_count = 1
-	to_chat(player.current, "<span class='notice'>Your current objectives:</span>")
+	to_chat(player.current, SPAN_NOTICE("Your current objectives:"))
 	for(var/datum/objective/objective in player.objectives)
 		to_chat(player.current, "<B>Objective #[obj_count]</B>: [objective.explanation_text]")
 		obj_count++

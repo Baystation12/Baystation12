@@ -59,7 +59,7 @@
 				fpcopy(copyitem)
 				sleep(15)
 			else
-				to_chat(user, "<span class='warning'>\The [copyitem] can't be copied by \the [src].</span>")
+				to_chat(user, SPAN_WARNING("\The [copyitem] can't be copied by \the [src]."))
 				break
 
 			use_power_oneoff(active_power_usage)
@@ -104,7 +104,7 @@
 /obj/machinery/photocopier/proc/OnRemove(mob/user)
 	if(copyitem)
 		user.put_in_hands(copyitem)
-		to_chat(user, "<span class='notice'>You take \the [copyitem] out of \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("You take \the [copyitem] out of \the [src]."))
 		copyitem = null
 
 /obj/machinery/photocopier/attackby(obj/item/O as obj, mob/user as mob)
@@ -113,22 +113,22 @@
 			if(!user.unEquip(O, src))
 				return
 			copyitem = O
-			to_chat(user, "<span class='notice'>You insert \the [O] into \the [src].</span>")
+			to_chat(user, SPAN_NOTICE("You insert \the [O] into \the [src]."))
 			flick(insert_anim, src)
 			updateUsrDialog()
 		else
-			to_chat(user, "<span class='notice'>There is already something in \the [src].</span>")
+			to_chat(user, SPAN_NOTICE("There is already something in \the [src]."))
 	else if(istype(O, /obj/item/device/toner))
 		if(toner <= 10) //allow replacing when low toner is affecting the print darkness
 			if(!user.unEquip(O, src))
 				return
-			to_chat(user, "<span class='notice'>You insert the toner cartridge into \the [src].</span>")
+			to_chat(user, SPAN_NOTICE("You insert the toner cartridge into \the [src]."))
 			var/obj/item/device/toner/T = O
 			toner += T.toner_amount
 			qdel(O)
 			updateUsrDialog()
 		else
-			to_chat(user, "<span class='notice'>This cartridge is not yet ready for replacement! Use up the rest of the toner.</span>")
+			to_chat(user, SPAN_NOTICE("This cartridge is not yet ready for replacement! Use up the rest of the toner."))
 	else ..()
 
 /obj/machinery/photocopier/ex_act(severity)
@@ -158,15 +158,12 @@
 
 	c.color = COLOR_WHITE
 
-	if(toner > 10)	//lots of toner, make it dark
-		c.info = "<font color = #101010>"
-	else			//no toner? shitty copies for you!
-		c.info = "<font color = #808080>"
+	c.info = "<span style='color: [toner > 10 ? "#101010" : "#808080"]'>"
 	var/copied = copy.info
-	copied = replacetext(copied, "<font face=\"[c.deffont]\" color=", "<font face=\"[c.deffont]\" nocolor=")	//state of the art techniques in action
-	copied = replacetext(copied, "<font face=\"[c.crayonfont]\" color=", "<font face=\"[c.crayonfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
+	copied = replacetext(copied, "<span style='font-family: [c.deffont]; color:", "<span style='font-family: [c.deffont]; nocolor:")	//state of the art techniques in action
+	copied = replacetext(copied, "<span style='font-family: [c.crayonfont]; color:", "<span style='font-family: [c.crayonfont]; nocolor:")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
 	c.info += copied
-	c.info += "</font>"//</font>
+	c.info += "</span>"
 	c.SetName(copy.name) // -- Doohl
 	c.fields = copy.fields
 	c.stamps = copy.stamps
@@ -190,7 +187,7 @@
 	if(need_toner)
 		toner--
 	if(toner == 0)
-		visible_message("<span class='notice'>A red light on \the [src] flashes, indicating that it is out of toner.</span>")
+		visible_message(SPAN_NOTICE("A red light on \the [src] flashes, indicating that it is out of toner."))
 	c.update_icon()
 	return c
 
@@ -208,7 +205,7 @@
 		toner -= 5	//photos use a lot of ink!
 	if(toner < 0)
 		toner = 0
-		visible_message("<span class='notice'>A red light on \the [src] flashes, indicating that it is out of toner.</span>")
+		visible_message(SPAN_NOTICE("A red light on \the [src] flashes, indicating that it is out of toner."))
 
 	return p
 
@@ -218,7 +215,7 @@
 	for(var/obj/item/W in bundle.pages)
 		if(toner <= 0 && need_toner)
 			toner = 0
-			visible_message("<span class='notice'>A red light on \the [src] flashes, indicating that it is out of toner.</span>")
+			visible_message(SPAN_NOTICE("A red light on \the [src] flashes, indicating that it is out of toner."))
 			break
 
 		if(istype(W, /obj/item/paper))

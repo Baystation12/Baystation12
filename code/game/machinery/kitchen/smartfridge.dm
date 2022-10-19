@@ -272,14 +272,14 @@
 		return
 
 	if(!is_powered())
-		to_chat(user, "<span class='notice'>\The [src] is unpowered and useless.</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] is unpowered and useless."))
 		return
 
 	if(accept_check(O))
 		if(!user.unEquip(O))
 			return
 		stock_item(O)
-		user.visible_message("<span class='notice'>\The [user] has added \the [O] to \the [src].</span>", "<span class='notice'>You add \the [O] to \the [src].</span>")
+		user.visible_message(SPAN_NOTICE("\The [user] has added \the [O] to \the [src]."), SPAN_NOTICE("You add \the [O] to \the [src]."))
 		update_icon()
 
 	else if(istype(O, /obj/item/storage))
@@ -292,16 +292,16 @@
 		P.finish_bulk_removal()
 
 		if(plants_loaded)
-			user.visible_message("<span class='notice'>\The [user] loads \the [src] with the contents of \the [P].</span>", "<span class='notice'>You load \the [src] with the contents of \the [P].</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] loads \the [src] with the contents of \the [P]."), SPAN_NOTICE("You load \the [src] with the contents of \the [P]."))
 			if(P.contents.len > 0)
-				to_chat(user, "<span class='notice'>Some items were refused.</span>")
+				to_chat(user, SPAN_NOTICE("Some items were refused."))
 
 	else if ((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(O))
 		wrench_floor_bolts(user)
 		power_change()
 
 	else
-		to_chat(user, "<span class='notice'>\The [src] smartly refuses [O].</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] smartly refuses [O]."))
 	return 1
 
 /obj/machinery/smartfridge/secure/emag_act(remaining_charges, mob/user)
@@ -404,7 +404,7 @@
 		return 0
 	spawn(0)
 		throw_item.throw_at(target,16,3)
-	src.visible_message("<span class='warning'>[src] launches [throw_item.name] at [target.name]!</span>")
+	src.visible_message(SPAN_WARNING("[src] launches [throw_item.name] at [target.name]!"))
 	update_icon()
 	return 1
 
@@ -414,6 +414,6 @@
 
 /obj/machinery/smartfridge/secure/CanUseTopic(mob/user, datum/topic_state/state, href_list)
 	if(!allowed(user) && !emagged && locked != -1 && href_list && href_list["vend"] && scan_id)
-		to_chat(user, "<span class='warning'>Access denied.</span>")
+		to_chat(user, SPAN_WARNING("Access denied."))
 		return STATUS_CLOSE
 	return ..()

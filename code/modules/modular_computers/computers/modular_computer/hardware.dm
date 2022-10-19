@@ -114,7 +114,7 @@
 		update_verbs()
 	if(critical && enabled)
 		if(user)
-			to_chat(user, "<span class='danger'>\The [src]'s screen freezes for few seconds and then displays an \"HARDWARE ERROR: Critical component disconnected. Please verify component connection and reboot the device. If the problem persists contact technical support for assistance.\" warning.</span>")
+			to_chat(user, SPAN_CLASS("danger", "\The [src]'s screen freezes for few seconds and then displays an \"HARDWARE ERROR: Critical component disconnected. Please verify component connection and reboot the device. If the problem persists contact technical support for assistance.\" warning."))
 		shutdown_computer()
 		update_icon()
 

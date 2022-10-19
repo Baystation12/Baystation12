@@ -11,6 +11,6 @@
 	var/light_colour = pick("#49f37c", "#fc0f29", "#599dff", "#fa7c0b", "#fef923")
 
 	playsound(src, 'sound/effects/snap.ogg', 80, 1)
-	audible_message("<span class='warning'>\The [src] detonates with a sharp crack!</span>")
+	audible_message(SPAN_WARNING("\The [src] detonates with a sharp crack!"))
 	set_light(1, 1, 12, 2, light_colour)
 	QDEL_IN(src, lifetime)

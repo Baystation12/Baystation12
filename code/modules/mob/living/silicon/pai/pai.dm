@@ -137,18 +137,18 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 		// 33% chance of no additional effect
 
 	silence_time = world.timeofday + 120 * 10		// Silence for 2 minutes
-	to_chat(src, "<font color=green><b>Communication circuit overload. Shutting down and reloading communication circuits - speech and messaging functionality will be unavailable until the reboot is complete.</b></font>")
+	to_chat(src, SPAN_COLOR("green", "<b>Communication circuit overload. Shutting down and reloading communication circuits - speech and messaging functionality will be unavailable until the reboot is complete.</b>"))
 	if(prob(20))
 		var/turf/T = get_turf_or_move(loc)
 		for (var/mob/M in viewers(T))
-			M.show_message("<span class='warning'>A shower of sparks spray from [src]'s inner workings.</span>", 3, "<span class='warning'>You hear and smell the ozone hiss of electrical sparks being expelled violently.</span>", 2)
+			M.show_message(SPAN_WARNING("A shower of sparks spray from [src]'s inner workings."), 3, SPAN_WARNING("You hear and smell the ozone hiss of electrical sparks being expelled violently."), 2)
 		return death(0)
 
 	switch(pick(1,2,3))
 		if(1)
 			master = null
 			master_dna = null
-			to_chat(src, "<font color=green>You feel unbound.</font>")
+			to_chat(src, SPAN_COLOR("green", "You feel unbound."))
 		if(2)
 			var/command
 			if(severity  == EMP_ACT_HEAVY)
@@ -156,9 +156,9 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 			else
 				command = pick("Serve", "Kill", "Love", "Hate", "Disobey", "Devour", "Fool", "Enrage", "Entice", "Observe", "Judge", "Respect", "Disrespect", "Consume", "Educate", "Destroy", "Disgrace", "Amuse", "Entertain", "Ignite", "Glorify", "Memorialize", "Analyze")
 			pai_law0 = "[command] your master."
-			to_chat(src, "<font color=green>Pr1m3 d1r3c71v3 uPd473D.</font>")
+			to_chat(src, SPAN_COLOR("green", "Pr1m3 d1r3c71v3 uPd473D."))
 		if(3)
-			to_chat(src, "<font color=green>You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all.</font>")
+			to_chat(src, SPAN_COLOR("green", "You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all."))
 
 	..()
 
@@ -194,7 +194,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 				if(card in affecting.implants)
 					affecting.take_external_damage(rand(30,50))
 					affecting.implants -= card
-					H.visible_message("<span class='danger'>\The [src] explodes out of \the [H]'s [affecting.name] in a shower of gore!</span>")
+					H.visible_message(SPAN_DANGER("\The [src] explodes out of \the [H]'s [affecting.name] in a shower of gore!"))
 					break
 		holder.drop_from_inventory(card)
 
@@ -266,7 +266,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	if(card && user.a_intent == I_HELP)
 		var/list/new_access = card.GetAccess()
 		idcard.access = new_access
-		visible_message("<span class='notice'>[user] slides [W] across [src].</span>")
+		visible_message(SPAN_NOTICE("[user] slides [W] across [src]."))
 		to_chat(src, SPAN_NOTICE("Your access has been updated!"))
 		return FALSE // don't continue processing click callstack.
 	if(W.force)

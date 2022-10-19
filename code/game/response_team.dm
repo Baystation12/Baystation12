@@ -12,13 +12,13 @@ var/global/can_call_ert
 	set desc = "Send an emergency response team"
 
 	if(!holder)
-		to_chat(usr, "<span class='danger'>Only administrators may use this command.</span>")
+		to_chat(usr, SPAN_DANGER("Only administrators may use this command."))
 		return
 	if(GAME_STATE < RUNLEVEL_GAME)
-		to_chat(usr, "<span class='danger'>The game hasn't started yet!</span>")
+		to_chat(usr, SPAN_DANGER("The game hasn't started yet!"))
 		return
 	if(send_emergency_team)
-		to_chat(usr, "<span class='danger'>[GLOB.using_map.boss_name] has already dispatched an emergency response team!</span>")
+		to_chat(usr, SPAN_DANGER("[GLOB.using_map.boss_name] has already dispatched an emergency response team!"))
 		return
 	if(alert("Do you want to dispatch an Emergency Response Team?",,"Yes","No") != "Yes")
 		return
@@ -52,7 +52,7 @@ var/global/can_call_ert
 	set category = "IC"
 
 	if(!MayRespawn(1))
-		to_chat(usr, "<span class='warning'>You cannot join the response team at this time.</span>")
+		to_chat(usr, SPAN_WARNING("You cannot join the response team at this time."))
 		return
 
 	if(isghost(usr) || isnewplayer(usr))
@@ -60,7 +60,7 @@ var/global/can_call_ert
 			to_chat(usr, "No emergency response team is currently being sent.")
 			return
 		if(jobban_isbanned(usr, MODE_ERT) || jobban_isbanned(usr, "Security Officer"))
-			to_chat(usr, "<span class='danger'>You are jobbanned from the emergency reponse team!</span>")
+			to_chat(usr, SPAN_DANGER("You are jobbanned from the emergency reponse team!"))
 			return
 		if(GLOB.ert.current_antagonists.len >= GLOB.ert.hard_cap)
 			to_chat(usr, "The emergency response team is already full!")
@@ -146,5 +146,5 @@ var/global/can_call_ert
 /datum/evacuation_predicate/ert/can_call(user)
 	if(world.time >= prevent_until)
 		return TRUE
-	to_chat(user, "<span class='warning'>An emergency response team has been dispatched. Evacuation requests will be denied until [duration2stationtime(prevent_until - world.time)].</span>")
+	to_chat(user, SPAN_WARNING("An emergency response team has been dispatched. Evacuation requests will be denied until [duration2stationtime(prevent_until - world.time)]."))
 	return FALSE

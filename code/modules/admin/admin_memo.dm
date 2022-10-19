@@ -36,7 +36,7 @@
 	var/savefile/F = new(MEMOFILE)
 	if(F)
 		for(var/ckey in F.dir)
-			to_chat(src, "<center><span class='motd'><b>Admin Memo</b><i> by [F[ckey]]</i></span></center>")
+			to_chat(src, "<center>[SPAN_CLASS("motd", "<b>Admin Memo</b><i> by [F[ckey]]</i>")]</center>")
 #endif
 
 //delete your own or somebody else's memo

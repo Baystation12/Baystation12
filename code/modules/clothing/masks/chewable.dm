@@ -24,7 +24,7 @@
 		if(user.check_has_mouth())
 			START_PROCESSING(SSobj, src)
 		else
-			to_chat(user, "<span class='notice'>You don't have a mouth, and can't make much use of \the [src].</span>")
+			to_chat(user, SPAN_NOTICE("You don't have a mouth, and can't make much use of \the [src]."))
 
 /obj/item/clothing/mask/chewable/dropped()
 	STOP_PROCESSING(SSobj, src)
@@ -78,7 +78,7 @@
 		if(ismob(loc))
 			var/mob/living/M = loc
 			if (!no_message)
-				to_chat(M, "<span class='notice'>You spit out the [name].</span>")
+				to_chat(M, SPAN_NOTICE("You spit out the [name]."))
 		qdel(src)
 
 /obj/item/clothing/mask/chewable/tobacco/lenni

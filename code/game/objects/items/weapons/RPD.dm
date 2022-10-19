@@ -97,12 +97,12 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 	. = list()
 	. += "<table>"
 	if(color_options)
-		. += "<tr><td>Color</td><td><a href='?src=\ref[src];color=\ref[src]'><font color = '[pipe_color]'>[pipe_color]</font></a></td></tr>"
+		. += "<tr><td>Color</td><td><a href='?src=\ref[src];color=\ref[src]'>[SPAN_COLOR(pipe_color, pipe_color)]</a></td></tr>"
 	for(var/category in pipe_categories)
 		var/datum/pipe/cat = category
-		. += "<tr><td><font color = '#517087'><strong>[initial(cat.category)]</strong></font></td></tr>"
+		. += "<tr><td>[SPAN_COLOR("#517087", "<strong>[initial(cat.category)]</strong>")]</td></tr>"
 		for(var/datum/pipe/pipe in pipe_categories[category])
-			. += "<tr><td>[pipe.name]</td><td>[P.type == pipe.type ? "<span class='linkOn'>Select</span>" : "<a href='?src=\ref[src];select=\ref[pipe]'>Select</a>"]</td></tr>"
+			. += "<tr><td>[pipe.name]</td><td>[P.type == pipe.type ? SPAN_CLASS("linkOn", "Select") : "<a href='?src=\ref[src];select=\ref[pipe]'>Select</a>"]</td></tr>"
 	.+= "</table>"
 	. = JOINTEXT(.)
 
@@ -156,7 +156,7 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 	. = ..()
 	if(distance <= 1)
 		if(user.skill_check(SKILL_ATMOS,SKILL_BASIC))
-			to_chat(user, "<span class='notice'>Current selection reads:</span> [P]")
+			to_chat(user, "[SPAN_NOTICE("Current selection reads:")] [P]")
 		else
 			to_chat(user, SPAN_WARNING("The readout is flashing some atmospheric jargon, you can't understand."))
 

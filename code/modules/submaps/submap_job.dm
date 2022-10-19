@@ -64,20 +64,20 @@
 /datum/job/submap/is_restricted(datum/preferences/prefs, feedback)
 	var/datum/species/S = all_species[prefs.species]
 	if(LAZYACCESS(minimum_character_age, S.get_bodytype()) && (prefs.age < minimum_character_age[S.get_bodytype()]))
-		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age[S.get_bodytype()]].</span>")
+		to_chat(feedback, SPAN_CLASS("boldannounce", "Not old enough. Minimum character age is [minimum_character_age[S.get_bodytype()]]."))
 		return TRUE
 	if(LAZYLEN(whitelisted_species) && !(prefs.species in whitelisted_species))
-		to_chat(feedback, "<span class='boldannounce'>Your current species, [prefs.species], is not permitted as [title] on \a [owner.archetype.descriptor].</span>")
+		to_chat(feedback, SPAN_CLASS("boldannounce", "Your current species, [prefs.species], is not permitted as [title] on \a [owner.archetype.descriptor]."))
 		return TRUE
 	if(prefs.species in blacklisted_species)
-		to_chat(feedback, "<span class='boldannounce'>Your current species, [prefs.species], is not permitted as [title] on \a [owner.archetype.descriptor].</span>")
+		to_chat(feedback, SPAN_CLASS("boldannounce", "Your current species, [prefs.species], is not permitted as [title] on \a [owner.archetype.descriptor]."))
 		return TRUE
 	if(owner && owner.archetype)
 		if(LAZYLEN(owner.archetype.whitelisted_species) && !(prefs.species in owner.archetype.whitelisted_species))
-			to_chat(feedback, "<span class='boldannounce'>Your current species, [prefs.species], is not permitted on \a [owner.archetype.descriptor].</span>")
+			to_chat(feedback, SPAN_CLASS("boldannounce", "Your current species, [prefs.species], is not permitted on \a [owner.archetype.descriptor]."))
 			return TRUE
 		if(prefs.species in owner.archetype.blacklisted_species)
-			to_chat(feedback, "<span class='boldannounce'>Your current species, [prefs.species], is not permitted on \a [owner.archetype.descriptor].</span>")
+			to_chat(feedback, SPAN_CLASS("boldannounce", "Your current species, [prefs.species], is not permitted on \a [owner.archetype.descriptor]."))
 			return TRUE
 	return FALSE
 

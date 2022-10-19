@@ -108,7 +108,7 @@
 	data["reagents"] = reagents.Copy()
 
 	if(istype(occupant))
-		var/scan = user.skill_check(SKILL_MEDICAL, SKILL_ADEPT) ? medical_scan_results(occupant) : "<span class='white'><b>Contains: \the [occupant]</b></span>"
+		var/scan = user.skill_check(SKILL_MEDICAL, SKILL_ADEPT) ? medical_scan_results(occupant) : SPAN_CLASS("white", "<b>Contains: \the [occupant]</b>")
 		scan = replacetext(scan,"'scan_notice'","'white'")
 		scan = replacetext(scan,"'scan_warning'","'average'")
 		scan = replacetext(scan,"'scan_danger'","'bad'")
@@ -133,7 +133,7 @@
 
 /obj/machinery/sleeper/CanUseTopic(user)
 	if(user == occupant)
-		to_chat(usr, "<span class='warning'>You can't reach the controls from the inside.</span>")
+		to_chat(usr, SPAN_WARNING("You can't reach the controls from the inside."))
 		return STATUS_CLOSE
 	. = ..()
 
@@ -177,9 +177,9 @@
 			if(!user.unEquip(I, src))
 				return
 			beaker = I
-			user.visible_message("<span class='notice'>\The [user] adds \a [I] to \the [src].</span>", "<span class='notice'>You add \a [I] to \the [src].</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] adds \a [I] to \the [src]."), SPAN_NOTICE("You add \a [I] to \the [src]."))
 		else
-			to_chat(user, "<span class='warning'>\The [src] has a beaker already.</span>")
+			to_chat(user, SPAN_WARNING("\The [src] has a beaker already."))
 		return TRUE
 	return ..()
 
@@ -189,10 +189,10 @@
 	if(!istype(target))
 		return
 	if(target.buckled)
-		to_chat(user, "<span class='warning'>Unbuckle the subject before attempting to move them.</span>")
+		to_chat(user, SPAN_WARNING("Unbuckle the subject before attempting to move them."))
 		return
 	if(panel_open)
-		to_chat(user, "<span class='warning'>Close the maintenance panel before attempting to place the subject in the sleeper.</span>")
+		to_chat(user, SPAN_WARNING("Close the maintenance panel before attempting to place the subject in the sleeper."))
 		return
 	go_in(target, user)
 
@@ -215,14 +215,14 @@
 	if(!occupant || !beaker)
 		filtering = 0
 		return
-	to_chat(occupant, "<span class='warning'>You feel like your blood is being sucked away.</span>")
+	to_chat(occupant, SPAN_WARNING("You feel like your blood is being sucked away."))
 	filtering = !filtering
 
 /obj/machinery/sleeper/proc/toggle_pump()
 	if(!occupant || !beaker)
 		pump = 0
 		return
-	to_chat(occupant, "<span class='warning'>You feel a tube jammed down your throat.</span>")
+	to_chat(occupant, SPAN_WARNING("You feel a tube jammed down your throat."))
 	pump = !pump
 
 /obj/machinery/sleeper/proc/go_in(mob/M, mob/user)
@@ -231,7 +231,7 @@
 	if(inoperable())
 		return
 	if(occupant)
-		to_chat(user, "<span class='warning'>\The [src] is already occupied.</span>")
+		to_chat(user, SPAN_WARNING("\The [src] is already occupied."))
 		return
 
 	if(M == user)
@@ -241,7 +241,7 @@
 
 	if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 		if(occupant)
-			to_chat(user, "<span class='warning'>\The [src] is already occupied.</span>")
+			to_chat(user, SPAN_WARNING("\The [src] is already occupied."))
 			return
 		set_occupant(M)
 
@@ -323,7 +323,7 @@
 
 /obj/machinery/sleeper/emag_act(remaining_charges, mob/user)
 	emagged = !emagged
-	to_chat(user, "<span class='danger'>You [emagged ? "disable" : "enable"] \the [src]'s chemical synthesis safety checks.</span>")
+	to_chat(user, SPAN_DANGER("You [emagged ? "disable" : "enable"] \the [src]'s chemical synthesis safety checks."))
 
 	if (emagged)
 		available_chemicals |= antag_chemicals

@@ -9,7 +9,7 @@
 
 /obj/item/contract/attack_self(mob/user as mob)
 	if(contract_master == null)
-		to_chat(user, "<span class='notice'>You bind the contract to your soul, making you the recipient of whatever poor fool's soul that decides to contract with you.</span>")
+		to_chat(user, SPAN_NOTICE("You bind the contract to your soul, making you the recipient of whatever poor fool's soul that decides to contract with you."))
 		contract_master = user
 		return
 
@@ -33,7 +33,7 @@
 		qdel(src)
 
 /obj/item/contract/proc/contract_effect(mob/user as mob)
-	to_chat(user, "<span class='warning'>You've signed your soul over to \the [contract_master] and with that your unbreakable vow of servitude begins.</span>")
+	to_chat(user, SPAN_WARNING("You've signed your soul over to \the [contract_master] and with that your unbreakable vow of servitude begins."))
 	return 1
 
 /obj/item/contract/apprentice
@@ -43,13 +43,13 @@
 
 /obj/item/contract/apprentice/contract_effect(mob/user as mob)
 	if(user.mind.special_role == ANTAG_APPRENTICE)
-		to_chat(user, "<span class='warning'>You are already a wizarding apprentice!</span>")
+		to_chat(user, SPAN_WARNING("You are already a wizarding apprentice!"))
 		return 0
 	if(user.mind.special_role == ANTAG_SERVANT)
-		to_chat(user, "<span class='notice'>You are a servant. You have no need of apprenticeship.</span>")
+		to_chat(user, SPAN_NOTICE("You are a servant. You have no need of apprenticeship."))
 		return 0
 	if(GLOB.wizards.add_antagonist_mind(user.mind,1,ANTAG_APPRENTICE,"<b>You are an apprentice! Your job is to learn the wizarding arts!</b>"))
-		to_chat(user, "<span class='notice'>With the signing of this paper you agree to become \the [contract_master]'s apprentice in the art of wizardry.</span>")
+		to_chat(user, SPAN_NOTICE("With the signing of this paper you agree to become \the [contract_master]'s apprentice in the art of wizardry."))
 		return 1
 	return 0
 
@@ -69,7 +69,7 @@
 		user.set_sight(user.sight|SEE_MOBS|SEE_OBJS|SEE_TURFS)
 		user.set_see_in_dark(8)
 		user.set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)
-		to_chat(user, "<span class='notice'>The walls suddenly disappear.</span>")
+		to_chat(user, SPAN_NOTICE("The walls suddenly disappear."))
 		return 1
 	return 0
 
@@ -87,7 +87,7 @@
 		return 0
 	H.mutations.Add(mRemotetalk)
 	H.verbs += /mob/living/carbon/human/proc/remotesay
-	to_chat(H, "<span class='notice'>You expand your mind outwards.</span>")
+	to_chat(H, SPAN_NOTICE("You expand your mind outwards."))
 	return 1
 
 /obj/item/contract/boon
@@ -111,7 +111,7 @@
 /obj/item/contract/boon/contract_effect(mob/user as mob)
 	..()
 	if(user.mind.special_role == ANTAG_SERVANT)
-		to_chat(user, "<span class='warning'>As a servant you find yourself unable to use this contract.</span>")
+		to_chat(user, SPAN_WARNING("As a servant you find yourself unable to use this contract."))
 		return 0
 	if(ispath(path,/spell))
 		user.add_spell(new path)

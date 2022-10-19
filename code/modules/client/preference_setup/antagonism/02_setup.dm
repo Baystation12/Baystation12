@@ -46,9 +46,9 @@
 		var/decl/uplink_source/US = entry
 		. +="[US.name] <a href='?src=\ref[src];move_source_up=\ref[US]'>Move Up</a> <a href='?src=\ref[src];move_source_down=\ref[US]'>Move Down</a> <a href='?src=\ref[src];remove_source=\ref[US]'>Remove</a><br>"
 		if(US.desc)
-			. += "<font size=1>[US.desc]</font><br>"
+			. += "[FONT_SMALL(US.desc)]<br>"
 	if(!pref.uplink_sources.len)
-		. += "<span class='warning'>You will not receive an uplink unless you add an uplink source!</span>"
+		. += SPAN_WARNING("You will not receive an uplink unless you add an uplink source!")
 	. +="<br>"
 	. +="Exploitable information:<br>"
 	if(jobban_isbanned(user, "Records"))

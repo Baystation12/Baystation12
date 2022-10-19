@@ -49,7 +49,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 		if(!user.unEquip(O, src))
 			return
 		scan = O
-		to_chat(user, "<span class='notice'>You insert \the [O] into \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("You insert \the [O] into \the [src]."))
 	if (isMultitool(O))
 		to_chat(user, SPAN_NOTICE("\The [src]'s department tag is set to [department]."))
 		if (!emagged)
@@ -256,9 +256,10 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 
 /obj/machinery/photocopier/faxmachine/proc/message_admins(mob/sender, faxname, obj/item/sent, reply_type)
-	var/msg = "<span class='notice'><b><font color='#006100'>[faxname]: </font>[get_options_bar(sender, 2,1,1)]"
+	var/msg = "<b>[SPAN_COLOR("#006100", "[faxname]: ")][get_options_bar(sender, 2,1,1)]"
 	msg += "(<A HREF='?_src_=holder;take_ic=\ref[sender]'>TAKE</a>) (<a href='?_src_=holder;FaxReply=\ref[sender];originfax=\ref[src];replyorigin=[reply_type]'>REPLY</a>)</b>: "
-	msg += "Receiving '[sent.name]' via secure connection ... <a href='?_src_=holder;AdminFaxView=\ref[sent]'>view message</a></span>"
+	msg += "Receiving '[sent.name]' via secure connection ... <a href='?_src_=holder;AdminFaxView=\ref[sent]'>view message</a>"
+	msg = SPAN_NOTICE(msg)
 
 	for(var/client/C as anything in GLOB.admins)
 		if(check_rights((R_ADMIN|R_MOD),0,C))

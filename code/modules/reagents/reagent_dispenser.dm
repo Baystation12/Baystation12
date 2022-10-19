@@ -32,23 +32,23 @@
 	if(distance > 2)
 		return
 
-	to_chat(user, "<span class='notice'>It contains:</span>")
+	to_chat(user, SPAN_NOTICE("It contains:"))
 	if(reagents && reagents.reagent_list.len)
 		for(var/datum/reagent/R in reagents.reagent_list)
-			to_chat(user, "<span class='notice'>[R.volume] units of [R.name]</span>")
+			to_chat(user, SPAN_NOTICE("[R.volume] units of [R.name]"))
 	else
-		to_chat(user, "<span class='notice'>Nothing.</span>")
+		to_chat(user, SPAN_NOTICE("Nothing."))
 
 /obj/structure/reagent_dispensers/verb/set_amount_per_transfer_from_this()
 	set name = "Set transfer amount"
 	set category = "Object"
 	set src in view(1)
 	if(!CanPhysicallyInteract(usr))
-		to_chat(usr, "<span class='notice'>You're in no condition to do that!'</span>")
+		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!'"))
 		return
 	var/N = input("Amount per transfer from this:","[src]") as null|anything in cached_number_list_decode(possible_transfer_amounts)
 	if(!CanPhysicallyInteract(usr))  // because input takes time and the situation can change
-		to_chat(usr, "<span class='notice'>You're in no condition to do that!'</span>")
+		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!'"))
 		return
 	if (N)
 		amount_per_transfer_from_this = N
@@ -117,7 +117,7 @@
 	. = ..()
 
 	if(modded)
-		to_chat(user, "<span class='warning'>Someone has wrenched open its tap - it's spilling everywhere!</span>")
+		to_chat(user, SPAN_WARNING("Someone has wrenched open its tap - it's spilling everywhere!"))
 
 /obj/structure/reagent_dispensers/watertank/attackby(obj/item/W, mob/user)
 
@@ -131,8 +131,8 @@
 
 	if(isWrench(W))
 		modded = !modded
-		user.visible_message("<span class='notice'>\The [user] wrenches \the [src]'s tap [modded ? "open" : "shut"].</span>", \
-			"<span class='notice'>You wrench [src]'s drain [modded ? "open" : "shut"].</span>")
+		user.visible_message(SPAN_NOTICE("\The [user] wrenches \the [src]'s tap [modded ? "open" : "shut"]."), \
+			SPAN_NOTICE("You wrench [src]'s drain [modded ? "open" : "shut"]."))
 
 		if (modded)
 			log_and_message_admins("opened a water tank at [get_area(loc)], leaking water.")
@@ -167,15 +167,15 @@
 	. = ..()
 
 	if (modded)
-		to_chat(user, "<span class='warning'>The faucet is wrenched open, leaking fuel!</span>")
+		to_chat(user, SPAN_WARNING("The faucet is wrenched open, leaking fuel!"))
 	if(rig)
-		to_chat(user, "<span class='notice'>There is some kind of device rigged to the tank.</span>")
+		to_chat(user, SPAN_NOTICE("There is some kind of device rigged to the tank."))
 
 /obj/structure/reagent_dispensers/fueltank/attack_hand()
 	if (rig)
-		usr.visible_message("<span class='notice'>\The [usr] begins to detach \the [rig] from \the [src].</span>", "<span class='notice'>You begin to detach \the [rig] from \the [src].</span>")
+		usr.visible_message(SPAN_NOTICE("\The [usr] begins to detach \the [rig] from \the [src]."), SPAN_NOTICE("You begin to detach \the [rig] from \the [src]."))
 		if(do_after(usr, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
-			usr.visible_message("<span class='notice'>\The [usr] detaches \the [rig] from \the [src].</span>", "<span class='notice'>You detach [rig] from \the [src]</span>")
+			usr.visible_message(SPAN_NOTICE("\The [usr] detaches \the [rig] from \the [src]."), SPAN_NOTICE("You detach [rig] from \the [src]"))
 			rig.dropInto(usr.loc)
 			rig = null
 			overlays.Cut()
@@ -191,13 +191,13 @@
 			leak_fuel(amount_per_transfer_from_this)
 	else if (istype(W,/obj/item/device/assembly_holder))
 		if (rig)
-			to_chat(user, "<span class='warning'>There is another device already in the way.</span>")
+			to_chat(user, SPAN_WARNING("There is another device already in the way."))
 			return ..()
 		user.visible_message("\The [user] begins rigging \the [W] to \the [src].", "You begin rigging \the [W] to \the [src]")
 		if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if(!user.unEquip(W, src))
 				return
-			user.visible_message("<span class='notice'>\The [user] rigs \the [W] to \the [src].</span>", "<span class='notice'>You rig \the [W] to \the [src].</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] rigs \the [W] to \the [src]."), SPAN_NOTICE("You rig \the [W] to \the [src]."))
 
 			var/obj/item/device/assembly_holder/H = W
 			if (istype(H.a_left,/obj/item/device/assembly/igniter) || istype(H.a_right,/obj/item/device/assembly/igniter))
@@ -210,13 +210,13 @@
 
 	else if(isflamesource(W))
 		if(user.a_intent != I_HURT)
-			to_chat(user, "<span class='warning'>You almost got \the [W] too close to [src]! That could have ended very badly for you.</span>")
+			to_chat(user, SPAN_WARNING("You almost got \the [W] too close to [src]! That could have ended very badly for you."))
 			return
 
-		user.visible_message("<span class='warning'>\The [user] draws closer to the fuel tank with \the [W].</span>", "<span class='warning'>You draw closer to the fuel tank with \the [W].</span>")
+		user.visible_message(SPAN_WARNING("\The [user] draws closer to the fuel tank with \the [W]."), SPAN_WARNING("You draw closer to the fuel tank with \the [W]."))
 		if(do_after(user, 5 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT)) // No public progress - Leave the people that might try to rush it guessing
 			log_and_message_admins("triggered a fuel tank explosion with \the [W].")
-			user.visible_message("<span class='danger'>\The [user] puts \the [W] to \the [src]!</span>", "<span class='danger'>You put \the [W] to \the [src] and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done.</span>")
+			user.visible_message(SPAN_DANGER("\The [user] puts \the [W] to \the [src]!"), SPAN_DANGER("You put \the [W] to \the [src] and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done."))
 			src.explode()
 
 		return
@@ -311,7 +311,7 @@
 
 		if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			if(!src) return
-			to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
+			to_chat(user, SPAN_NOTICE("You [anchored? "un" : ""]secured \the [src]!"))
 			anchored = !anchored
 		return
 	else

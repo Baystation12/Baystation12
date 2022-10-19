@@ -22,28 +22,28 @@
 			new_data = sanitize(new_data,trim = 0)
 			if(istext(new_data) && user.IsAdvancedToolUser())
 				data_to_write = new_data
-				to_chat(user, "<span class='notice'>You set \the [src]'s memory to \"[new_data]\".</span>")
+				to_chat(user, SPAN_NOTICE("You set \the [src]'s memory to \"[new_data]\"."))
 		if("number")
 			accepting_refs = FALSE
 			new_data = user.get_input("Now type in a number", "[src] number writing", null, MOB_INPUT_NUM, src)
 			if(isnum(new_data) && user.IsAdvancedToolUser())
 				data_to_write = new_data
-				to_chat(user, "<span class='notice'>You set \the [src]'s memory to [new_data].</span>")
+				to_chat(user, SPAN_NOTICE("You set \the [src]'s memory to [new_data]."))
 		if("ref")
 			accepting_refs = TRUE
-			to_chat(user, "<span class='notice'>You turn \the [src]'s ref scanner on.  Slide it across \
-			an object for a ref of that object to save it in memory.</span>")
+			to_chat(user, SPAN_NOTICE("You turn \the [src]'s ref scanner on.  Slide it across \
+			an object for a ref of that object to save it in memory."))
 		if("null")
 			data_to_write = null
-			to_chat(user, "<span class='notice'>You set \the [src]'s memory to absolutely nothing.</span>")
+			to_chat(user, SPAN_NOTICE("You set \the [src]'s memory to absolutely nothing."))
 
 /obj/item/device/integrated_electronics/debugger/afterattack(atom/target, mob/living/user, proximity)
 	. = ..()
 	if(accepting_refs && proximity)
 		data_to_write = weakref(target)
-		visible_message("<span class='notice'>[user] slides \a [src]'s over \the [target].</span>")
-		to_chat(user, "<span class='notice'>You set \the [src]'s memory to a reference to [target.name] \[Ref\].  The ref scanner is \
-		now off.</span>")
+		visible_message(SPAN_NOTICE("[user] slides \a [src]'s over \the [target]."))
+		to_chat(user, SPAN_NOTICE("You set \the [src]'s memory to a reference to [target.name] \[Ref\].  The ref scanner is \
+		now off."))
 		accepting_refs = FALSE
 
 /obj/item/device/integrated_electronics/debugger/proc/write_data(datum/integrated_io/io, mob/user)
@@ -54,12 +54,12 @@
 			var/weakref/w = data_to_write
 			var/atom/A = w.resolve()
 			if(!A)
-				to_chat(user, "<span class='warning'>\The [src]'s reference is stale and won't transfer to \the [io.holder]'s pin.</span>")
+				to_chat(user, SPAN_WARNING("\The [src]'s reference is stale and won't transfer to \the [io.holder]'s pin."))
 				return
 			data_to_show = A.name
-		to_chat(user, "<span class='notice'>You write '[data_to_write ? data_to_show : "NULL"]' to the '[io]' pin of \the [io.holder].</span>")
+		to_chat(user, SPAN_NOTICE("You write '[data_to_write ? data_to_show : "NULL"]' to the '[io]' pin of \the [io.holder]."))
 	else if(io.io_type == PULSE_CHANNEL)
 		io.holder.check_then_do_work(io.ord,ignore_power = TRUE)
-		to_chat(user, "<span class='notice'>You pulse \the [io.holder]'s [io].</span>")
+		to_chat(user, SPAN_NOTICE("You pulse \the [io.holder]'s [io]."))
 
 	io.holder.interact(user) // This is to update the UI.

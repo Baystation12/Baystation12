@@ -89,7 +89,7 @@ var/global/bomb_set
 					var/obj/item/weldingtool/WT = O
 					if(!WT.isOn()) return
 					if(WT.get_fuel() < 5) // uses up 5 fuel.
-						to_chat(user, "<span class='warning'>You need more fuel to complete this task.</span>")
+						to_chat(user, SPAN_WARNING("You need more fuel to complete this task."))
 						return
 
 					user.visible_message("[user] starts cutting loose the anchoring bolt covers on [src].", "You start cutting loose the anchoring bolt covers with [O]...")
@@ -115,7 +115,7 @@ var/global/bomb_set
 					var/obj/item/weldingtool/WT = O
 					if(!WT.isOn()) return
 					if (WT.get_fuel() < 5) // uses up 5 fuel.
-						to_chat(user, "<span class='warning'>You need more fuel to complete this task.</span>")
+						to_chat(user, SPAN_WARNING("You need more fuel to complete this task."))
 						return
 
 					user.visible_message("[user] starts cutting apart the anchoring system sealant on [src].", "You start cutting apart the anchoring system's sealant with [O]...")
@@ -151,9 +151,9 @@ var/global/bomb_set
 		. = TRUE
 		if(removal_stage < 5)
 			src.anchored = TRUE
-			visible_message("<span class='warning'>With a steely snap, bolts slide out of [src] and anchor it to the flooring!</span>")
+			visible_message(SPAN_WARNING("With a steely snap, bolts slide out of [src] and anchor it to the flooring!"))
 		else
-			visible_message("<span class='warning'>\The [src] makes a highly unpleasant crunching noise. It looks like the anchoring bolts have been cut.</span>")
+			visible_message(SPAN_WARNING("\The [src] makes a highly unpleasant crunching noise. It looks like the anchoring bolts have been cut."))
 		extended = 1
 		if(!src.lighthack)
 			flick("lock", src)
@@ -207,10 +207,10 @@ var/global/bomb_set
 		return
 
 	if(deployable)
-		to_chat(usr, "<span class='warning'>You close several panels to make [src] undeployable.</span>")
+		to_chat(usr, SPAN_WARNING("You close several panels to make [src] undeployable."))
 		deployable = 0
 	else
-		to_chat(usr, "<span class='warning'>You adjust some panels to make [src] deployable.</span>")
+		to_chat(usr, SPAN_WARNING("You adjust some panels to make [src] deployable."))
 		deployable = 1
 	return
 
@@ -260,7 +260,7 @@ var/global/bomb_set
 		if(yes_code)
 			if(href_list["time"])
 				if(timing)
-					to_chat(usr, "<span class='warning'>Cannot alter the timing during countdown.</span>")
+					to_chat(usr, SPAN_WARNING("Cannot alter the timing during countdown."))
 					return
 
 				var/time = text2num(href_list["time"])
@@ -270,13 +270,13 @@ var/global/bomb_set
 				if(timing == -1)
 					return 1
 				if(!anchored)
-					to_chat(usr, "<span class='warning'>\The [src] needs to be anchored.</span>")
+					to_chat(usr, SPAN_WARNING("\The [src] needs to be anchored."))
 					return 1
 				if(safety)
-					to_chat(usr, "<span class='warning'>The safety is still on.</span>")
+					to_chat(usr, SPAN_WARNING("The safety is still on."))
 					return 1
 				if(wires.IsIndexCut(NUCLEARBOMB_WIRE_TIMING))
-					to_chat(usr, "<span class='warning'>Nothing happens, something might be wrong with the wiring.</span>")
+					to_chat(usr, SPAN_WARNING("Nothing happens, something might be wrong with the wiring."))
 					return 1
 				if(!timing && !safety)
 					start_bomb()
@@ -284,7 +284,7 @@ var/global/bomb_set
 					check_cutoff()
 			if(href_list["safety"])
 				if (wires.IsIndexCut(NUCLEARBOMB_WIRE_SAFETY))
-					to_chat(usr, "<span class='warning'>Nothing happens, something might be wrong with the wiring.</span>")
+					to_chat(usr, SPAN_WARNING("Nothing happens, something might be wrong with the wiring."))
 					return 1
 				safety = !safety
 				if(safety)
@@ -293,18 +293,18 @@ var/global/bomb_set
 			if(href_list["anchor"])
 				if(removal_stage == 5)
 					anchored = FALSE
-					visible_message("<span class='warning'>\The [src] makes a highly unpleasant crunching noise. It looks like the anchoring bolts have been cut.</span>")
+					visible_message(SPAN_WARNING("\The [src] makes a highly unpleasant crunching noise. It looks like the anchoring bolts have been cut."))
 					return 1
 
 				if(!isinspace())
 					anchored = !anchored
 					if(anchored)
-						visible_message("<span class='warning'>With a steely snap, bolts slide out of \the [src] and anchor it to the flooring.</span>")
+						visible_message(SPAN_WARNING("With a steely snap, bolts slide out of \the [src] and anchor it to the flooring."))
 					else
 						secure_device()
-						visible_message("<span class='warning'>The anchoring bolts slide back into the depths of \the [src].</span>")
+						visible_message(SPAN_WARNING("The anchoring bolts slide back into the depths of \the [src]."))
 				else
-					to_chat(usr, "<span class='warning'>There is nothing to anchor to!</span>")
+					to_chat(usr, SPAN_WARNING("There is nothing to anchor to!"))
 	return 1
 
 /obj/machinery/nuclearbomb/proc/start_bomb()
@@ -488,14 +488,14 @@ var/global/bomb_set
 	for(var/inserter in inserters)
 		var/obj/machinery/self_destruct/sd = inserter
 		if(!istype(sd) || !sd.armed)
-			to_chat(usr, "<span class='warning'>An inserter has not been armed or is damaged.</span>")
+			to_chat(usr, SPAN_WARNING("An inserter has not been armed or is damaged."))
 			return
-	visible_message("<span class='warning'>Warning. The self-destruct sequence override will be disabled [self_destruct_cutoff] seconds before detonation.</span>")
+	visible_message(SPAN_WARNING("Warning. The self-destruct sequence override will be disabled [self_destruct_cutoff] seconds before detonation."))
 	..()
 
 /obj/machinery/nuclearbomb/station/check_cutoff()
 	if(timeleft <= self_destruct_cutoff)
-		visible_message("<span class='warning'>Self-Destruct abort is no longer possible.</span>")
+		visible_message(SPAN_WARNING("Self-Destruct abort is no longer possible."))
 		return
 	..()
 

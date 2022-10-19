@@ -17,7 +17,7 @@
 
 	if(istype(loc, /obj/structure/diona_gestalt)) // Handle nymph katamari.
 		var/obj/structure/diona_gestalt/gestalt = loc
-		gestalt.visible_message("<span class='notice'>\The [src] wriggles out of \the [gestalt] and plops to the ground.</span>")
+		gestalt.visible_message(SPAN_NOTICE("\The [src] wriggles out of \the [gestalt] and plops to the ground."))
 		gestalt.shed_atom(src, TRUE, FALSE)
 		return
 
@@ -58,8 +58,8 @@
 		transfer_languages(src, S)
 
 		if(mind)
-			to_chat(src, "<span class='info'>You're now in control of [S].</span>")
+			to_chat(src, SPAN_INFO("You're now in control of [S]."))
 			mind.transfer_to(S)
 			log_and_message_admins("has transfered to another nymph; player now controls [key_name_admin(S)]", src)
 	else
-		to_chat(src, "<span class='info'>There are no appropriate nymphs for you to jump into.</span>")
+		to_chat(src, SPAN_INFO("There are no appropriate nymphs for you to jump into."))

@@ -1,4 +1,4 @@
-#define SPAN_AOOC(X) "<span class='ooc'><span class='aooc'>[create_text_tag("aooc", "Antag-OOC:", target)] [X]</span></span>"
+#define SPAN_AOOC(X) SPAN_CLASS("ooc", SPAN_CLASS("aooc", "[create_text_tag("aooc", "Antag-OOC:", target)] [X]"))
 
 
 /decl/communication_channel/aooc
@@ -30,14 +30,14 @@
 
 	for(var/client/target in GLOB.clients)
 		if(check_rights(R_INVESTIGATE, FALSE, target))
-			receive_communication(C, target, SPAN_AOOC("<EM>[get_options_bar(C, 0, 1, 1)]:</EM> <span class='message linkify'>[message]</span>"))
+			receive_communication(C, target, SPAN_AOOC("<EM>[get_options_bar(C, 0, 1, 1)]:</EM> [SPAN_CLASS("message linkify", "[message]")]"))
 		else if(target.mob?.mind?.special_role)
 			var/display_name = C.key
 			var/player_display = holder ? "[display_name]([usr.client.holder.rank])" : display_name
-			receive_communication(C, target, SPAN_AOOC("<EM>[player_display]:</EM> <span class='message linkify'>[message]</span>"))
+			receive_communication(C, target, SPAN_AOOC("<EM>[player_display]:</EM> [SPAN_CLASS("message linkify", "[message]")]"))
 
 
 /decl/communication_channel/aooc/do_broadcast(message)
 	for (var/client/target in GLOB.clients)
 		if (check_rights(R_INVESTIGATE, FALSE, target) || target.mob?.mind?.special_role)
-			receive_broadcast(target, SPAN_AOOC("<strong>SYSTEM BROADCAST:</strong> <span class='message linkify'>[message]</span>"))
+			receive_broadcast(target, SPAN_AOOC("<strong>SYSTEM BROADCAST:</strong> [SPAN_CLASS("message linkify", "[message]")]"))

@@ -144,11 +144,11 @@ Buildable meters
 
 	for(var/obj/machinery/atmospherics/M in loc)
 		if((M.initialize_directions & pipe_dir) && M.check_connect_types_construction(M,src))	// matches at least one direction on either type of pipe & same connection type
-			to_chat(user, "<span class='warning'>There is already a pipe of the same type at this location.</span>")
+			to_chat(user, SPAN_WARNING("There is already a pipe of the same type at this location."))
 			return 1
 	// no conflicts found
 
-	var/pipefailtext = "<span class='warning'>There's nothing to connect this pipe section to!</span>" //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
+	var/pipefailtext = SPAN_WARNING("There's nothing to connect this pipe section to!") //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
 
 	//TODO: Move all of this stuff into the various pipe constructors.
 	var/obj/machinery/atmospherics/P = new constructed_path(get_turf(src))
@@ -182,7 +182,7 @@ Buildable meters
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	user.visible_message( \
 		"[user] fastens the [src].", \
-		"<span class='notice'>You have fastened the [src].</span>", \
+		SPAN_NOTICE("You have fastened the [src]."), \
 		"You hear ratchet.")
 	qdel(src)	// remove the pipe item
 
@@ -222,7 +222,7 @@ Buildable meters
 	if(machine.construct_state)
 		machine.construct_state.post_construct(machine)
 	playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-	to_chat(user, "<span class='notice'>You have fastened the [src].</span>")
+	to_chat(user, SPAN_NOTICE("You have fastened the [src]."))
 	qdel(src)
 
 /obj/item/machine_chassis/air_sensor

@@ -65,9 +65,9 @@
 		camera.set_status(!camera.status)
 		if(camera.status)
 			camera.c_tag = FindNameFromID(usr)
-			to_chat(usr, "<span class='notice'>User scanned as [camera.c_tag]. Camera activated.</span>")
+			to_chat(usr, SPAN_NOTICE("User scanned as [camera.c_tag]. Camera activated."))
 		else
-			to_chat(usr, "<span class='notice'>Camera deactivated.</span>")
+			to_chat(usr, SPAN_NOTICE("Camera deactivated."))
 
 /obj/item/clothing/head/helmet/space/examine(mob/user, distance)
 	. = ..()

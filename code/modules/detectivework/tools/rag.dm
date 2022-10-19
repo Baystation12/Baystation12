@@ -40,7 +40,7 @@
 
 /obj/item/reagent_containers/glass/rag/attack_self(mob/user as mob)
 	if(on_fire && user.unEquip(src))
-		user.visible_message("<span class='warning'>\The [user] stamps out [src].</span>", "<span class='warning'>You stamp out [src].</span>")
+		user.visible_message(SPAN_WARNING("\The [user] stamps out [src]."), SPAN_WARNING("You stamp out [src]."))
 		extinguish()
 	else
 		remove_contents(user)
@@ -101,7 +101,7 @@
 
 /obj/item/reagent_containers/glass/rag/proc/wipe_down(atom/A, mob/user)
 	if(!reagents.total_volume)
-		to_chat(user, "<span class='warning'>The [initial(name)] is dry!</span>")
+		to_chat(user, SPAN_WARNING("The [initial(name)] is dry!"))
 	else
 		user.visible_message("\The [user] starts to wipe down [A] with [src]!")
 		reagents.splash(A, 1) //get a small amount of liquid on the thing we're wiping.
@@ -188,11 +188,11 @@
 
 	if(istype(A, /obj/structure/reagent_dispensers))
 		if(!reagents.get_free_space())
-			to_chat(user, "<span class='warning'>\The [src] is already soaked.</span>")
+			to_chat(user, SPAN_WARNING("\The [src] is already soaked."))
 			return
 
 		if(A.reagents && A.reagents.trans_to_obj(src, reagents.maximum_volume))
-			user.visible_message("<span class='notice'>\The [user] soaks [src] using [A].</span>", "<span class='notice'>You soak [src] using [A].</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] soaks [src] using [A]."), SPAN_NOTICE("You soak [src] using [A]."))
 			update_name()
 		return
 
@@ -228,7 +228,7 @@
 
 	//also copied from matches
 	if(reagents.get_reagent_amount(/datum/reagent/toxin/phoron)) // the phoron explodes when exposed to fire
-		visible_message("<span class='danger'>\The [src] conflagrates violently!</span>")
+		visible_message(SPAN_DANGER("\The [src] conflagrates violently!"))
 		var/datum/effect/effect/system/reagents_explosion/e = new()
 		e.set_up(round(reagents.get_reagent_amount(/datum/reagent/toxin/phoron) / 2.5, 1), get_turf(src), 0, 0)
 		e.start()
@@ -249,7 +249,7 @@
 	//rags sitting around with 1 second of burn time left is dumb.
 	//ensures players always have a few seconds of burn time left when they light their rag
 	if(burn_time <= 5)
-		visible_message("<span class='warning'>\The [src] falls apart!</span>")
+		visible_message(SPAN_WARNING("\The [src] falls apart!"))
 		new /obj/effect/decal/cleanable/ash(get_turf(src))
 		qdel(src)
 	update_name()
@@ -257,7 +257,7 @@
 
 /obj/item/reagent_containers/glass/rag/Process()
 	if(!can_ignite())
-		visible_message("<span class='warning'>\The [src] burns out.</span>")
+		visible_message(SPAN_WARNING("\The [src] burns out."))
 		extinguish()
 
 	//copied from matches

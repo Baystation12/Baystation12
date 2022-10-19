@@ -121,7 +121,7 @@
 		// Update T.
 		T = get_step(src, get_dir(src, destination))
 		if (T.density)
-			to_chat(src, "<span class='critical'>You hit something really solid!</span>")
+			to_chat(src, SPAN_CLASS("critical", "You hit something really solid!"))
 			playsound(src, "punch", 75, 1)
 			Weaken(5)
 			return FALSE // Hit a wall.

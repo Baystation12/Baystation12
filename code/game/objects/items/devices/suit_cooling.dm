@@ -107,7 +107,7 @@
 		turn_off()
 	else
 		turn_on()
-	to_chat(user, "<span class='notice'>You switch \the [src] [on ? "on" : "off"].</span>")
+	to_chat(user, SPAN_NOTICE("You switch \the [src] [on ? "on" : "off"]."))
 
 /obj/item/device/suit_cooling_unit/attackby(obj/item/W as obj, mob/user as mob)
 	if(isScrewdriver(W))

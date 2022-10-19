@@ -107,7 +107,7 @@ else if(##equipment_var) {\
 		part_list += "\a [I]"
 	to_chat(user, "\The [src] has [english_list(part_list)] installed.")
 	if(tank && distance <= 1)
-		to_chat(user, "<span class='notice'>The wrist-mounted pressure gauge reads [max(round(tank.air_contents.return_pressure()),0)] kPa remaining in \the [tank].</span>")
+		to_chat(user, SPAN_NOTICE("The wrist-mounted pressure gauge reads [max(round(tank.air_contents.return_pressure()),0)] kPa remaining in \the [tank]."))
 
 /obj/item/clothing/suit/space/void/refit_for_species(target_species)
 	..()
@@ -188,19 +188,19 @@ else if(##equipment_var) {\
 	if(H.wear_suit != src) return
 
 	if(H.head == helmet)
-		to_chat(H, "<span class='notice'>You retract your suit helmet.</span>")
+		to_chat(H, SPAN_NOTICE("You retract your suit helmet."))
 		helmet.canremove = 1
 		playsound(loc, helmet_retract_sound, 30)
 		H.drop_from_inventory(helmet, src)
 	else
 		if(H.head)
-			to_chat(H, "<span class='danger'>You cannot deploy your helmet while wearing \the [H.head].</span>")
+			to_chat(H, SPAN_DANGER("You cannot deploy your helmet while wearing \the [H.head]."))
 			return
 		if(H.equip_to_slot_if_possible(helmet, slot_head))
 			helmet.pickup(H)
 			helmet.canremove = 0
 			playsound(loc, helmet_deploy_sound, 30)
-			to_chat(H, "<span class='info'>You deploy your suit helmet, sealing you off from the world.</span>")
+			to_chat(H, SPAN_INFO("You deploy your suit helmet, sealing you off from the world."))
 	helmet.update_light(H)
 
 /obj/item/clothing/suit/space/void/verb/eject_tank()
@@ -223,7 +223,7 @@ else if(##equipment_var) {\
 	if(slot != slot_wear_suit && slot != slot_l_hand && slot != slot_r_hand) return// let them eject those tanks when they're in hand or stuff for ease of use
 
 
-	to_chat(H, "<span class='info'>You press the emergency release, ejecting \the [tank] from your suit.</span>")
+	to_chat(H, SPAN_INFO("You press the emergency release, ejecting \the [tank] from your suit."))
 	tank.canremove = 1
 	H.drop_from_inventory(tank, src)
 	H.put_in_hands(tank)
@@ -239,7 +239,7 @@ else if(##equipment_var) {\
 
 	if(istype(W,/obj/item/screwdriver))
 		if(user.get_inventory_slot(src) == slot_wear_suit)//maybe I should make this into a proc?
-			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
+			to_chat(user, SPAN_WARNING("You cannot modify \the [src] while it is being worn."))
 			return
 
 		if(helmet || boots || tank)
@@ -264,7 +264,7 @@ else if(##equipment_var) {\
 		return
 	else if(istype(W,/obj/item/clothing/head/helmet/space))
 		if(user.get_inventory_slot(src) == slot_wear_suit)
-			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
+			to_chat(user, SPAN_WARNING("You cannot modify \the [src] while it is being worn."))
 			return
 		if(helmet)
 			to_chat(user, "\The [src] already has a helmet installed.")
@@ -277,7 +277,7 @@ else if(##equipment_var) {\
 		return
 	else if(istype(W,/obj/item/clothing/shoes/magboots))
 		if(user.get_inventory_slot(src) == slot_wear_suit)
-			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
+			to_chat(user, SPAN_WARNING("You cannot modify \the [src] while it is being worn."))
 			return
 		if(boots)
 			to_chat(user, "\The [src] already has magboots installed.")
@@ -290,7 +290,7 @@ else if(##equipment_var) {\
 		return
 	else if(istype(W,/obj/item/tank))
 		if(user.get_inventory_slot(src) == slot_wear_suit)
-			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
+			to_chat(user, SPAN_WARNING("You cannot modify \the [src] while it is being worn."))
 			return
 		if(tank)
 			to_chat(user, "\The [src] already has an airtank installed.")

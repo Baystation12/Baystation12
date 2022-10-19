@@ -14,16 +14,16 @@
 	if(W.GetIdCard())
 		if(subverted)
 			locked = 0
-			to_chat(user, "<span class='danger'>It looks like the locking system has been shorted out.</span>")
+			to_chat(user, SPAN_DANGER("It looks like the locking system has been shorted out."))
 			return
 
 		if(!length(req_access))
 			locked = 0
-			to_chat(user, "<span class='danger'>\The [src] doesn't seem to have a locking mechanism.</span>")
+			to_chat(user, SPAN_DANGER("\The [src] doesn't seem to have a locking mechanism."))
 			return
 
 		if(security_check_enabled && !src.allowed(user))
-			to_chat(user, "<span class='danger'>Access denied.</span>")
+			to_chat(user, SPAN_DANGER("Access denied."))
 			return
 
 		locked = !locked
@@ -195,5 +195,5 @@
 		req_access.Cut()
 		locked = 0
 		subverted = 1
-		to_chat(user, "<span class='danger'>You short out the access protocol for the suit.</span>")
+		to_chat(user, SPAN_DANGER("You short out the access protocol for the suit."))
 		return 1

@@ -15,11 +15,11 @@
 /obj/machinery/disperser/attackby(obj/item/I, mob/user)
 	if(isWrench(I))
 		if(panel_open)
-			user.visible_message("<span class='notice'>\The [user] rotates \the [src] with \the [I].</span>", "<span class='notice'>You rotate \the [src] with \the [I].</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] rotates \the [src] with \the [I]."), SPAN_NOTICE("You rotate \the [src] with \the [I]."))
 			set_dir(turn(dir, 90))
 			playsound(src, 'sound/items/jaws_pry.ogg', 50, 1)
 		else
-			to_chat(user,"<span class='notice'>The maintenance panel must be screwed open for this!</span>")
+			to_chat(user,SPAN_NOTICE("The maintenance panel must be screwed open for this!"))
 	else
 		return ..()
 

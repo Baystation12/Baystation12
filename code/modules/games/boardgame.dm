@@ -28,13 +28,13 @@
 
 /obj/item/board/proc/addPiece(obj/item/I as obj, mob/user as mob, tile = 0)
 	if(I.w_class != ITEM_SIZE_TINY) //only small stuff
-		user.show_message("<span class='warning'>\The [I] is too big to be used as a board piece.</span>")
+		user.show_message(SPAN_WARNING("\The [I] is too big to be used as a board piece."))
 		return 0
 	if(num == 64)
-		user.show_message("<span class='warning'>\The [src] is already full!</span>")
+		user.show_message(SPAN_WARNING("\The [src] is already full!"))
 		return 0
 	if(tile > 0 && board["[tile]"])
-		user.show_message("<span class='warning'>That space is already filled!</span>")
+		user.show_message(SPAN_WARNING("That space is already filled!"))
 		return 0
 	if(!user.Adjacent(src))
 		return 0

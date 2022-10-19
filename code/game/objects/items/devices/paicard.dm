@@ -130,7 +130,7 @@
 
 	if(pai)
 		dat += {"
-			<b><font size='3px'>Personal AI Device</font></b><br><br>
+			<b><span style='font-size: 3px'>Personal AI Device</span></b><br><br>
 			<table class="request">
 				<tr>
 					<td class="request">Installed Personality:</td>
@@ -169,22 +169,22 @@
 				<table class="request">
 					<tr>
 						<td class="radio">Transmit:</td>
-						<td><a href='byond://?src=\ref[src];wires=4'>[radio.broadcasting ? "<font color=#55ff55>En" : "<font color=#ff5555>Dis" ]abled</font></a>
+						<td><a href='byond://?src=\ref[src];wires=4'>[radio.broadcasting ? SPAN_COLOR("#55ff55", "Enabled") : SPAN_COLOR("#ff5555", "Disabled") ]</a>
 
 						</td>
 					</tr>
 					<tr>
 						<td class="radio">Receive:</td>
-						<td><a href='byond://?src=\ref[src];wires=2'>[radio.listening ? "<font color=#55ff55>En" : "<font color=#ff5555>Dis" ]abled</font></a>
+						<td><a href='byond://?src=\ref[src];wires=2'>[radio.listening ? SPAN_COLOR("#55ff55", "Enabled") : SPAN_COLOR("#ff5555", "Disabled") ]</a>
 
 						</td>
 					</tr>
 				</table>
 				<br>
 			"}
-		else //</font></font>
+		else
 			dat += "<b>Radio Uplink</b><br>"
-			dat += "<font color=red><i>Radio firmware not loaded. Please install a pAI personality to load firmware.</i></font><br>"
+			dat += "[SPAN_COLOR("red", "<i>Radio firmware not loaded. Please install a pAI personality to load firmware.</i>")]<br>"
 		dat += {"
 			<table>
 				<td class="button_red"><a href='byond://?src=\ref[src];wipe=1' class='button'>Wipe current pAI personality</a>
@@ -195,7 +195,7 @@
 	else
 		if(looking_for_personality)
 			dat += {"
-				<b><font size='3px'>pAI Request Module</font></b><br><br>
+				<b><span style='font-size: 3px'>pAI Request Module</span></b><br><br>
 				<p>Requesting AI personalities from central database... If there are no entries, or if a suitable entry is not listed, check again later as more personalities may be added.</p>
 				<img src='loading.gif' /> Searching for personalities<br><br>
 
@@ -209,7 +209,7 @@
 			"}
 		else
 			dat += {"
-				<b><font size='3px'>pAI Request Module</font></b><br><br>
+				<b><span style='font-size: 3px'>pAI Request Module</span></b><br><br>
 			    <p>No personality is installed.</p>
 				<table>
 					<tr>
@@ -239,12 +239,12 @@
 			return
 		var/mob/M = usr
 		if(!istype(M, /mob/living/carbon))
-			to_chat(usr, "<span class='notice'>You don't have any DNA, or your DNA is incompatible with this device.</span>")
+			to_chat(usr, SPAN_NOTICE("You don't have any DNA, or your DNA is incompatible with this device."))
 		else
 			var/datum/dna/dna = usr.dna
 			pai.master = M.real_name
 			pai.master_dna = dna.unique_enzymes
-			to_chat(pai, "<span class='warning'>You have been bound to a new master.</span>")
+			to_chat(pai, SPAN_WARNING("You have been bound to a new master."))
 	if(href_list["request"])
 		src.looking_for_personality = 1
 		paiController.findPAI(src, usr)
@@ -252,10 +252,10 @@
 		var/confirm = input("Are you CERTAIN you wish to delete the current personality? This action cannot be undone.", "Personality Wipe") in list("Yes", "No")
 		if(confirm == "Yes")
 			for(var/mob/M in src)
-				to_chat(M, "<font color = #ff0000><h2>You feel yourself slipping away from reality.</h2></font>")
-				to_chat(M, "<font color = #ff4d4d><h3>Byte by byte you lose your sense of self.</h3></font>")
-				to_chat(M, "<font color = #ff8787><h4>Your mental faculties leave you.</h4></font>")
-				to_chat(M, "<font color = #ffc4c4><h5>oblivion... </h5></font>")
+				to_chat(M, "<h2 style='font-color: #ff0000'>You feel yourself slipping away from reality.</h2>")
+				to_chat(M, "<h3 style='font-color: #ff4d4d'>Byte by byte you lose your sense of self.</h3>")
+				to_chat(M, "<h4 style='font-color: #ff8787'>Your mental faculties leave you.</h4>")
+				to_chat(M, "<h5 style='font-color: #ffc4c4'>oblivion... </h5>")
 				M.death(0)
 			removePersonality()
 	if(href_list["wires"])
@@ -313,7 +313,7 @@
 /obj/item/device/paicard/proc/alertUpdate()
 	var/turf/T = get_turf_or_move(src.loc)
 	for (var/mob/M in viewers(T))
-		M.show_message("<span class='notice'>\The [src] flashes a message across its screen, \"Additional personalities available for download.\"</span>", 3, "<span class='notice'>\The [src] bleeps electronically.</span>", 2)
+		M.show_message(SPAN_NOTICE("\The [src] flashes a message across its screen, \"Additional personalities available for download.\""), 3, SPAN_NOTICE("\The [src] bleeps electronically."), 2)
 
 /obj/item/device/paicard/emp_act(severity)
 	for(var/mob/M in src)
@@ -327,12 +327,12 @@
 
 /obj/item/device/paicard/see_emote(mob/living/M, text)
 	if(pai && pai.client && pai.stat == CONSCIOUS)
-		var/rendered = "<span class='message'>[text]</span>"
+		var/rendered = SPAN_CLASS("message", "[text]")
 		pai.show_message(rendered, 2)
 	..()
 
 /obj/item/device/paicard/show_message(msg, type, alt, alt_type)
 	if(pai && pai.client)
-		var/rendered = "<span class='message'>[msg]</span>"
+		var/rendered = SPAN_CLASS("message", "[msg]")
 		pai.show_message(rendered, type)
 	..()

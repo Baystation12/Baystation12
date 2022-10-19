@@ -10,7 +10,7 @@
 	var/antag = get_antag_info()
 	if(!lore && !mechanics && !antag)
 		return FALSE
-		
+
 	var/datum/codex_entry/entry = new(name, list(type), _lore_text = lore, _mechanics_text = mechanics, _antag_text = antag)
 	return entry
 
@@ -28,4 +28,4 @@
 	var/datum/codex_entry/entry = SScodex.get_codex_entry(get_codex_value())
 	//This odd check v is done in case an item only has antag text but someone isn't an antag, in which case they shouldn't get the notice
 	if(entry && (entry.lore_text || entry.mechanics_text || (entry.antag_text && player_is_antag(user.mind))) && user.can_use_codex())
-		to_chat(user, "<span class='notice'>The codex has <b><a href='?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>relevant information</a></b> available.</span>")
+		to_chat(user, SPAN_NOTICE("The codex has <b><a href='?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>relevant information</a></b> available."))

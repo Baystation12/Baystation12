@@ -168,8 +168,8 @@
 		if(!shock(user, 90))
 			playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			anchored = !anchored
-			user.visible_message("<span class='notice'>[user] [anchored ? "fastens" : "unfastens"] the grille.</span>", \
-								 "<span class='notice'>You have [anchored ? "fastened the grille to" : "unfastened the grill from"] the floor.</span>")
+			user.visible_message(SPAN_NOTICE("[user] [anchored ? "fastens" : "unfastens"] the grille."), \
+								 SPAN_NOTICE("You have [anchored ? "fastened the grille to" : "unfastened the grill from"] the floor."))
 			update_connections(1)
 			update_icon()
 		return
@@ -247,9 +247,9 @@
 	if(ST.in_use)
 		return
 	if(ST.get_amount() < 2)
-		to_chat(user, "<span class='warning'>You need at least two rods to do this.</span>")
+		to_chat(user, SPAN_WARNING("You need at least two rods to do this."))
 		return
-	to_chat(user, "<span class='notice'>Assembling grille...</span>")
+	to_chat(user, SPAN_NOTICE("Assembling grille..."))
 	ST.in_use = 1
 	if (!do_after(user, 1 SECOND, loc, DO_REPAIR_CONSTRUCT))
 		ST.in_use = 0
@@ -257,6 +257,6 @@
 	if(!ST.use(2))
 		return
 	var/obj/structure/grille/F = new /obj/structure/grille(loc, ST.material.name)
-	to_chat(user, "<span class='notice'>You assemble a grille</span>")
+	to_chat(user, SPAN_NOTICE("You assemble a grille"))
 	ST.in_use = 0
 	F.add_fingerprint(user)

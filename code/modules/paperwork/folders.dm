@@ -35,7 +35,7 @@
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo) || istype(W, /obj/item/paper_bundle))
 		if(!user.unEquip(W, src))
 			return
-		to_chat(user, "<span class='notice'>You put the [W] into \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("You put the [W] into \the [src]."))
 		update_icon()
 	else if(istype(W, /obj/item/pen))
 		var/n_name = sanitizeSafe(input(usr, "What would you like to label the folder?", "Folder Labelling", null)  as text, MAX_NAME_LEN)
@@ -68,7 +68,7 @@
 			if(P && (P.loc == src) && istype(P))
 				usr.put_in_hands(P)
 
-		else if(href_list["read"])			
+		else if(href_list["read"])
 			var/obj/item/paper/P = locate(href_list["read"])
 			if(P && (P.loc == src) && istype(P))
 				if(!(istype(usr, /mob/living/carbon/human) || isghost(usr) || istype(usr, /mob/living/silicon)))

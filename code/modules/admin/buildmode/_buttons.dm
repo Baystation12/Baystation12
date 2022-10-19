@@ -61,7 +61,7 @@
 			build_mode.Selected()
 			host.current_build_mode = build_mode
 			icon_state = build_mode.icon_state
-			to_chat(usr, "<span class='notice'>Build mode '[host.current_build_mode]' selected.</span>")
+			to_chat(usr, SPAN_NOTICE("Build mode '[host.current_build_mode]' selected."))
 	else if(parameters["right"])
 		host.current_build_mode.Configurate()
 

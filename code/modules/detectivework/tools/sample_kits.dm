@@ -37,7 +37,7 @@
 	evidence |= supplied.evidence
 	SetName("[initial(name)] (combined)")
 	object = supplied.object + ", " + object
-	to_chat(user, "<span class='notice'>You transfer the contents of \the [supplied] into \the [src].</span>")
+	to_chat(user, SPAN_NOTICE("You transfer the contents of \the [supplied] into \the [src]."))
 	return 1
 
 /obj/item/sample/print/merge_evidence(obj/item/sample/supplied, mob/user)
@@ -50,7 +50,7 @@
 			evidence[print] = supplied.evidence[print]
 	SetName("[initial(name)] (combined)")
 	object = supplied.object + ", " + object
-	to_chat(user, "<span class='notice'>You overlay \the [src] and \the [supplied], combining the print records.</span>")
+	to_chat(user, SPAN_NOTICE("You overlay \the [src] and \the [supplied], combining the print records."))
 	update_icon()
 	return 1
 
@@ -84,10 +84,10 @@
 		return
 	var/mob/living/carbon/human/H = user
 	if(H.gloves)
-		to_chat(user, "<span class='warning'>Take \the [H.gloves] off first.</span>")
+		to_chat(user, SPAN_WARNING("Take \the [H.gloves] off first."))
 		return
 
-	to_chat(user, "<span class='notice'>You firmly press your fingertips onto the card.</span>")
+	to_chat(user, SPAN_NOTICE("You firmly press your fingertips onto the card."))
 	var/fullprint = H.get_full_print()
 	evidence[fullprint] = fullprint
 	SetName("[initial(name)] (\the [H])")
@@ -104,11 +104,11 @@
 	var/mob/living/carbon/human/H = M
 
 	if(H.gloves)
-		to_chat(user, "<span class='warning'>\The [H] is wearing gloves.</span>")
+		to_chat(user, SPAN_WARNING("\The [H] is wearing gloves."))
 		return 1
 
 	if(user != H && H.a_intent != I_HELP && !H.lying)
-		user.visible_message("<span class='danger'>\The [user] tries to take prints from \the [H], but they move away.</span>")
+		user.visible_message(SPAN_DANGER("\The [user] tries to take prints from \the [H], but they move away."))
 		return 1
 
 	if(user.zone_sel.selecting == BP_R_HAND || user.zone_sel.selecting == BP_L_HAND)
@@ -121,7 +121,7 @@
 			if(istype(O) && !O.is_stump())
 				has_hand = 1
 		if(!has_hand)
-			to_chat(user, "<span class='warning'>They don't have any hands.</span>")
+			to_chat(user, SPAN_WARNING("They don't have any hands."))
 			return 1
 		user.visible_message("[user] takes a copy of \the [H]'s fingerprints.")
 		var/fullprint = H.get_full_print()
@@ -154,7 +154,7 @@
 
 /obj/item/forensics/sample_kit/proc/take_sample(mob/user, atom/supplied)
 	var/obj/item/sample/S = new evidence_path(get_turf(user), supplied)
-	to_chat(user, "<span class='notice'>You transfer [S.evidence.len] [S.evidence.len > 1 ? "[evidence_type]s" : "[evidence_type]"] to \the [S].</span>")
+	to_chat(user, SPAN_NOTICE("You transfer [S.evidence.len] [S.evidence.len > 1 ? "[evidence_type]s" : "[evidence_type]"] to \the [S]."))
 
 /obj/item/forensics/sample_kit/resolve_attackby(atom/A, mob/user, click_params)
 	if (user.a_intent != I_HELP) // Prevents putting sample kits in bags, on racks/tables, etc when trying to take samples
@@ -169,7 +169,7 @@
 		take_sample(user,A)
 		. = 1
 	else
-		to_chat(user, "<span class='warning'>You are unable to locate any [evidence_type]s on \the [A].</span>")
+		to_chat(user, SPAN_WARNING("You are unable to locate any [evidence_type]s on \the [A]."))
 		. = ..()
 
 /obj/item/forensics/sample_kit/MouseDrop(atom/over)

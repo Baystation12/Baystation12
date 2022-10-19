@@ -117,9 +117,9 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 		var/speed = round(linked.get_speed()*1000, 0.01)
 		if(linked.get_speed() < SHIP_SPEED_SLOW)
-			speed = "<span class='good'>[speed]</span>"
+			speed = SPAN_GOOD("[speed]")
 		if(linked.get_speed() > SHIP_SPEED_FAST)
-			speed = "<span class='average'>[speed]</span>"
+			speed = SPAN_CLASS("average", "[speed]")
 		data["speed"] = speed
 
 		if(linked.get_speed())
@@ -162,7 +162,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 			sec_name = "Sector #[known_sectors.len]"
 		R.fields["name"] = sec_name
 		if(sec_name in known_sectors)
-			to_chat(user, "<span class='warning'>Sector with that name already exists, please input a different name.</span>")
+			to_chat(user, SPAN_WARNING("Sector with that name already exists, please input a different name."))
 			return TOPIC_REFRESH
 		switch(href_list["add"])
 			if("current")

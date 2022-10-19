@@ -20,7 +20,7 @@
 	power_channel = ENVIRON
 
 /obj/machinery/keycard_auth/attack_ai(mob/user as mob)
-	to_chat(user, "<span class='warning'>A firewall prevents you from interfacing with this device!</span>")
+	to_chat(user, SPAN_WARNING("A firewall prevents you from interfacing with this device!"))
 	return
 
 /obj/machinery/keycard_auth/attackby(obj/item/W as obj, mob/user as mob)
@@ -36,7 +36,7 @@
 					event_source.confirmed = 1
 					event_source.event_confirmed_by = usr
 				else
-					to_chat(user, "<span class='warning'>Unable to confirm, DNA matches that of origin.</span>")
+					to_chat(user, SPAN_WARNING("Unable to confirm, DNA matches that of origin."))
 			else if(screen == 2)
 				event_triggered_by = usr
 				broadcast_request() //This is the device making the initial event request. It needs to broadcast to other devices
@@ -163,7 +163,7 @@
 			GLOB.using_map.revoke_maint_all_access()
 		if("Emergency Response Team")
 			if(is_ert_blocked())
-				to_chat(usr, "<span class='warning'>All emergency response teams are dispatched and can not be called at this time.</span>")
+				to_chat(usr, SPAN_WARNING("All emergency response teams are dispatched and can not be called at this time."))
 				return
 
 			trigger_armed_response_team(1)

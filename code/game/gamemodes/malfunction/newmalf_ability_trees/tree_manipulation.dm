@@ -125,7 +125,7 @@
 	// Verify if we can overload the target, if yes, calculate explosion strength. Some things have higher explosion strength than others, depending on charge(APCs, SMESs)
 	if(N && istype(N)) // /obj/machinery/power first, these create bigger explosions due to direct powernet connection
 		if(!istype(N, /obj/machinery/power/apc) && !istype(N, /obj/machinery/power/smes/buildable) && (!N.powernet || !N.powernet.avail)) // Directly connected machine which is not an APC or SMES. Either it has no powernet connection or it's powernet does not have enough power to overload
-			to_chat(user, "<span class='notice'>ERROR: Low network voltage. Unable to overload. Increase network power level and try again.</span>")
+			to_chat(user, SPAN_NOTICE("ERROR: Low network voltage. Unable to overload. Increase network power level and try again."))
 			return
 		else if (istype(N, /obj/machinery/power/apc)) // APC. Explosion is increased by available cell power.
 			var/obj/machinery/power/apc/A = N
@@ -133,7 +133,7 @@
 			if(cell && cell.charge)
 				explosion_intensity = 4 + round((cell.charge / CELLRATE) / 100000)
 			else
-				to_chat(user, "<span class='notice'>ERROR: APC Malfunction - Cell depleted or removed. Unable to overload.</span>")
+				to_chat(user, SPAN_NOTICE("ERROR: APC Malfunction - Cell depleted or removed. Unable to overload."))
 				return
 		else if (istype(N, /obj/machinery/power/smes/buildable)) // SMES. These explode in a very very very big boom. Similar to magnetic containment failure when messing with coils.
 			var/obj/machinery/power/smes/buildable/S = N
@@ -142,19 +142,19 @@
 			else
 				// Different error texts
 				if(!S.charge)
-					to_chat(user, "<span class='notice'>ERROR: SMES Depleted. Unable to overload. Please charge SMES unit and try again.</span>")
+					to_chat(user, SPAN_NOTICE("ERROR: SMES Depleted. Unable to overload. Please charge SMES unit and try again."))
 				else
-					to_chat(user, "<span class='notice'>ERROR: SMES RCon error - Unable to reach destination. Please verify wire connection.</span>")
+					to_chat(user, SPAN_NOTICE("ERROR: SMES RCon error - Unable to reach destination. Please verify wire connection."))
 				return
 	else if(M && istype(M)) // Not power machinery, so it's a regular machine instead. These have weak explosions.
 		if(!M.use_power) // Not using power at all
-			to_chat(user, "<span class='notice'>ERROR: No power grid connection. Unable to overload.</span>")
+			to_chat(user, SPAN_NOTICE("ERROR: No power grid connection. Unable to overload."))
 			return
 		if(M.inoperable()) // Not functional
-			to_chat(user, "<span class='notice'>ERROR: Unknown error. Machine is probably damaged or power supply is nonfunctional.</span>")
+			to_chat(user, SPAN_NOTICE("ERROR: Unknown error. Machine is probably damaged or power supply is nonfunctional."))
 			return
 	else // Not a machine at all (what the hell is this doing in Machines list anyway??)
-		to_chat(user, "<span class='notice'>ERROR: Unable to overload - target is not a machine.</span>")
+		to_chat(user, SPAN_NOTICE("ERROR: Unable to overload - target is not a machine."))
 		return
 
 	explosion_intensity = min(explosion_intensity, 12) // 3, 6, 12 explosion cap
@@ -177,7 +177,7 @@
 
 
 	log_ability_use(user, "machine overload", M)
-	M.visible_message("<span class='notice'>BZZZZZZZT</span>")
+	M.visible_message(SPAN_NOTICE("BZZZZZZZT"))
 	spawn(5 SECONDS)
 		explosion(get_turf(M), round(explosion_intensity/4),round(explosion_intensity/2),round(explosion_intensity),round(explosion_intensity * 2))
 		if(M)

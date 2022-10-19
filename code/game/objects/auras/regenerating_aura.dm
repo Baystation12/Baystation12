@@ -96,7 +96,7 @@
 
 /obj/aura/regenerating/human/proc/low_nut_warning(wound_type)
 	if (last_nutrition_warning + 1 MINUTE < world.time)
-		to_chat(user, "<span class='warning'>You need more energy to regenerate your [wound_type || "wounds"].</span>")
+		to_chat(user, SPAN_WARNING("You need more energy to regenerate your [wound_type || "wounds"]."))
 		last_nutrition_warning = world.time
 		return 1
 	return 0
@@ -152,8 +152,8 @@
 	return can_toggle()
 
 /obj/aura/regenerating/human/unathi/external_regeneration_effect(obj/item/organ/external/O, mob/living/carbon/human/H)
-	to_chat(H, "<span class='danger'>With a shower of fresh blood, a new [O.name] forms.</span>")
-	H.visible_message("<span class='danger'>With a shower of fresh blood, a length of biomass shoots from [H]'s [O.amputation_point], forming a new [O.name]!</span>")
+	to_chat(H, SPAN_DANGER("With a shower of fresh blood, a new [O.name] forms."))
+	H.visible_message(SPAN_DANGER("With a shower of fresh blood, a length of biomass shoots from [H]'s [O.amputation_point], forming a new [O.name]!"))
 	H.adjust_nutrition(-external_nutrition_mult)
 	var/datum/reagent/blood/B = locate(/datum/reagent/blood) in H.vessel.reagent_list
 	blood_splatter(H,B,1)
@@ -172,7 +172,7 @@
 	external_nutrition_mult = 60
 
 /obj/aura/regenerating/human/diona/external_regeneration_effect(obj/item/organ/external/O, mob/living/carbon/human/H)
-	to_chat(H, "<span class='warning'>Some of your nymphs split and hurry to reform your [O.name].</span>")
+	to_chat(H, SPAN_WARNING("Some of your nymphs split and hurry to reform your [O.name]."))
 	H.adjust_nutrition(-external_nutrition_mult)
 
 /obj/aura/regenerating/human/unathi/yeosa

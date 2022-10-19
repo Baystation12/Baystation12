@@ -170,14 +170,14 @@
 		if(is_powered())
 			set_active(!active)
 			if(active)
-				visible_message("<span class='notice'>\The [src] lurches downwards, grinding noisily.</span>")
+				visible_message(SPAN_NOTICE("\The [src] lurches downwards, grinding noisily."))
 				need_update_field = 1
 			else
-				visible_message("<span class='notice'>\The [src] shudders to a grinding halt.</span>")
+				visible_message(SPAN_NOTICE("\The [src] shudders to a grinding halt."))
 		else
-			to_chat(user, "<span class='notice'>The drill is unpowered.</span>")
+			to_chat(user, SPAN_NOTICE("The drill is unpowered."))
 	else
-		to_chat(user, "<span class='notice'>Turning on a piece of industrial machinery without sufficient bracing or wires exposed is a bad idea.</span>")
+		to_chat(user, SPAN_NOTICE("Turning on a piece of industrial machinery without sufficient bracing or wires exposed is a bad idea."))
 
 	update_icon()
 	return TRUE
@@ -219,7 +219,7 @@
 /obj/machinery/mining/drill/proc/system_error(error)
 
 	if(error)
-		src.visible_message("<span class='notice'>\The [src] flashes a '[error]' warning.</span>")
+		src.visible_message(SPAN_NOTICE("\The [src] flashes a '[error]' warning."))
 	need_player_check = 1
 	set_active(FALSE)
 	update_icon()
@@ -246,9 +246,9 @@
 	if(B)
 		for(var/obj/item/ore/O in contents)
 			O.forceMove(B)
-		to_chat(usr, "<span class='notice'>You unload the drill's storage cache into the ore box.</span>")
+		to_chat(usr, SPAN_NOTICE("You unload the drill's storage cache into the ore box."))
 	else
-		to_chat(usr, "<span class='notice'>You must move an ore box up to the drill before you can unload it.</span>")
+		to_chat(usr, SPAN_NOTICE("You must move an ore box up to the drill before you can unload it."))
 
 
 /obj/machinery/mining/brace
@@ -270,18 +270,18 @@
 
 /obj/machinery/mining/brace/attackby(obj/item/W as obj, mob/user as mob)
 	if(connected && connected.active)
-		to_chat(user, "<span class='notice'>You can't work with the brace of a running drill!</span>")
+		to_chat(user, SPAN_NOTICE("You can't work with the brace of a running drill!"))
 		return TRUE
 	if(component_attackby(W, user))
 		return TRUE
 	if(isWrench(W))
 
 		if(istype(get_turf(src), /turf/space))
-			to_chat(user, "<span class='notice'>You can't anchor something to empty space. Idiot.</span>")
+			to_chat(user, SPAN_NOTICE("You can't anchor something to empty space. Idiot."))
 			return
 
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-		to_chat(user, "<span class='notice'>You [anchored ? "un" : ""]anchor the brace.</span>")
+		to_chat(user, SPAN_NOTICE("You [anchored ? "un" : ""]anchor the brace."))
 
 		anchored = !anchored
 		if(anchored)

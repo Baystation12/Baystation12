@@ -20,7 +20,7 @@
 
 /datum/lock/proc/unlock(key = "", mob/user)
 	if(status ^ LOCK_LOCKED)
-		to_chat(user, "<span class='warning'>Its already unlocked!</span>")
+		to_chat(user, SPAN_WARNING("Its already unlocked!"))
 		return 2
 	key = get_key_data(key, user)
 	if(cmptext(lock_data,key) && (status ^ LOCK_BROKEN))
@@ -30,7 +30,7 @@
 
 /datum/lock/proc/lock(key = "", mob/user)
 	if(status & LOCK_LOCKED)
-		to_chat(user, "<span class='warning'>Its already locked!</span>")
+		to_chat(user, SPAN_WARNING("Its already locked!"))
 		return 2
 	key = get_key_data(key, user)
 	if(cmptext(lock_data,key) && (status ^ LOCK_BROKEN))
@@ -68,12 +68,12 @@
 	if (!do_after(user, 2 SECONDS, holder, DO_PUBLIC_UNIQUE))
 		return 0
 	if(prob(20*(unlock_power/getComplexity())))
-		to_chat(user, "<span class='notice'>You pick open \the [holder]'s lock!</span>")
+		to_chat(user, SPAN_NOTICE("You pick open \the [holder]'s lock!"))
 		unlock(lock_data)
 		return 1
 	else if(prob(5 * unlock_power))
-		to_chat(user, "<span class='warning'>You accidently break \the [holder]'s lock with your [I]!</span>")
+		to_chat(user, SPAN_WARNING("You accidently break \the [holder]'s lock with your [I]!"))
 		status |= LOCK_BROKEN
 	else
-		to_chat(user, "<span class='warning'>You fail to pick open \the [holder].</span>")
+		to_chat(user, SPAN_WARNING("You fail to pick open \the [holder]."))
 	return 0

@@ -172,12 +172,12 @@
 		deadman = 1
 		START_PROCESSING(SSobj, src)
 		log_and_message_admins("is threatening to trigger a signaler deadman's switch")
-		usr.visible_message("<span class='danger'>[usr] moves their finger over [src]'s signal button...</span>")
+		usr.visible_message(SPAN_DANGER("[usr] moves their finger over [src]'s signal button..."))
 	else
 		deadman = 0
 		STOP_PROCESSING(SSobj, src)
 		log_and_message_admins("stops threatening to trigger a signaler deadman's switch")
-		usr.visible_message("<span class='notice'>[usr] moves their finger away from [src]'s signal button.</span>")
+		usr.visible_message(SPAN_NOTICE("[usr] moves their finger away from [src]'s signal button."))
 
 
 /obj/item/device/assembly/signaler/Destroy()

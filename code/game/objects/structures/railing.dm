@@ -76,7 +76,7 @@
 	return TRUE
 
 /obj/structure/railing/on_death()
-	visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
+	visible_message(SPAN_DANGER("\The [src] [material.destruction_desc]!"))
 	playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
 	material.place_shard(get_turf(usr))
 	qdel(src)
@@ -172,11 +172,11 @@
 		return 0
 
 	if(anchored)
-		to_chat(usr, "<span class='warning'>It is fastened to the floor and cannot be flipped.</span>")
+		to_chat(usr, SPAN_WARNING("It is fastened to the floor and cannot be flipped."))
 		return 0
 
 	if(!turf_is_crowded())
-		to_chat(usr, "<span class='warning'>You can't flip \the [src] - something is in the way.</span>")
+		to_chat(usr, SPAN_WARNING("You can't flip \the [src] - something is in the way."))
 		return 0
 
 	forceMove(get_step(src, src.dir))
@@ -203,12 +203,12 @@
 		if(istype(G.affecting, /mob/living/carbon/human))
 			var/obj/occupied = turf_is_crowded()
 			if(occupied)
-				to_chat(user, "<span class='danger'>There's \a [occupied] in the way.</span>")
+				to_chat(user, SPAN_DANGER("There's \a [occupied] in the way."))
 				return
 
 			if(G.force_danger())
 				if(user.a_intent == I_HURT)
-					visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
+					visible_message(SPAN_DANGER("[G.assailant] slams [G.affecting]'s face against \the [src]!"))
 					playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
 					var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, DAMAGE_BRUTE, damage = 8)
 					if (prob(30 * (1 - blocked)))
@@ -220,9 +220,9 @@
 					else
 						G.affecting.dropInto(loc)
 					G.affecting.Weaken(5)
-					visible_message("<span class='danger'>[G.assailant] throws \the [G.affecting] over \the [src].</span>")
+					visible_message(SPAN_DANGER("[G.assailant] throws \the [G.affecting] over \the [src]."))
 			else
-				to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
+				to_chat(user, SPAN_DANGER("You need a better grip to do that!"))
 		return
 
 	// Dismantle
@@ -232,17 +232,17 @@
 			if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
 				if(anchored)
 					return
-				user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>", "<span class='notice'>You dismantle \the [src].</span>")
+				user.visible_message(SPAN_NOTICE("\The [user] dismantles \the [src]."), SPAN_NOTICE("You dismantle \the [src]."))
 				material.place_sheet(loc, 2)
 				qdel(src)
 	// Wrench Open
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			if(density)
-				user.visible_message("<span class='notice'>\The [user] wrenches \the [src] open.</span>", "<span class='notice'>You wrench \the [src] open.</span>")
+				user.visible_message(SPAN_NOTICE("\The [user] wrenches \the [src] open."), SPAN_NOTICE("You wrench \the [src] open."))
 				set_density(FALSE)
 			else
-				user.visible_message("<span class='notice'>\The [user] wrenches \the [src] closed.</span>", "<span class='notice'>You wrench \the [src] closed.</span>")
+				user.visible_message(SPAN_NOTICE("\The [user] wrenches \the [src] closed."), SPAN_NOTICE("You wrench \the [src] closed."))
 				set_density(TRUE)
 			update_icon()
 		return
@@ -252,25 +252,25 @@
 		var/obj/item/weldingtool/F = W
 		if(F.isOn())
 			if(!health_damaged())
-				to_chat(user, "<span class='warning'>\The [src] does not need repairs.</span>")
+				to_chat(user, SPAN_WARNING("\The [src] does not need repairs."))
 				return
 			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 			if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
 				if(!health_damaged())
 					return
-				user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>", "<span class='notice'>You repair some damage to \the [src].</span>")
+				user.visible_message(SPAN_NOTICE("\The [user] repairs some damage to \the [src]."), SPAN_NOTICE("You repair some damage to \the [src]."))
 				restore_health(get_max_health() / 5)
 		return
 
 	// Install
 	if(isScrewdriver(W))
 		if(!density)
-			to_chat(user, "<span class='notice'>You need to wrench \the [src] from back into place first.</span>")
+			to_chat(user, SPAN_NOTICE("You need to wrench \the [src] from back into place first."))
 			return
-		user.visible_message(anchored ? "<span class='notice'>\The [user] begins unscrew \the [src].</span>" : "<span class='notice'>\The [user] begins fasten \the [src].</span>" )
+		user.visible_message(anchored ? SPAN_NOTICE("\The [user] begins unscrew \the [src].") : SPAN_NOTICE("\The [user] begins fasten \the [src].") )
 		playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 		if(do_after(user, 1 SECOND, src, DO_REPAIR_CONSTRUCT) && density)
-			to_chat(user, (anchored ? "<span class='notice'>You have unfastened \the [src] from the floor.</span>" : "<span class='notice'>You have fastened \the [src] to the floor.</span>"))
+			to_chat(user, (anchored ? SPAN_NOTICE("You have unfastened \the [src] from the floor.") : SPAN_NOTICE("You have fastened \the [src] to the floor.")))
 			anchored = !anchored
 			update_icon()
 		return
@@ -282,7 +282,7 @@
 	if (. && get_turf(user) == get_turf(src))
 		var/turf/T = get_step(src, src.dir)
 		if (T.density || T.turf_is_crowded(user))
-			to_chat(user, "<span class='warning'>You can't climb there, the way is blocked.</span>")
+			to_chat(user, SPAN_WARNING("You can't climb there, the way is blocked."))
 			return 0
 
 /obj/structure/railing/do_climb(mob/living/user)

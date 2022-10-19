@@ -77,7 +77,7 @@
 	if(victim)
 		victim.Weaken(2)
 		victim.visible_message(SPAN_DANGER("\The [src] knocks down \the [victim]!"))
-		to_chat(victim, "<span class='critical'>\The [src] jumps on you!</span>")
+		to_chat(victim, SPAN_CLASS("critical", "\The [src] jumps on you!"))
 		. = TRUE
 
 	set_AI_busy(FALSE)

@@ -38,7 +38,7 @@
 		if(!inserted_battery)
 			if(!user.unEquip(I, src))
 				return
-			to_chat(user, "<span class='notice'>You insert the battery.</span>")
+			to_chat(user, SPAN_NOTICE("You insert the battery."))
 			inserted_battery = I
 			UpdateSprite()
 	else
@@ -131,13 +131,13 @@
 
 			//work out if we need to shutdown
 			if(inserted_battery.stored_charge <= 0)
-				src.loc.visible_message("<span class='notice'>[icon2html(src, viewers(src.loc))] [src] buzzes.</span>", "<span class='notice'>[icon2html(src, src.loc)] You hear something buzz.</span>")
+				src.loc.visible_message(SPAN_NOTICE("[icon2html(src, viewers(src.loc))] [src] buzzes."), SPAN_NOTICE("[icon2html(src, src.loc)] You hear something buzz."))
 				shutdown_emission()
 			else if(world.time > time_end)
-				src.loc.visible_message("<span class='notice'>[icon2html(src, viewers(src.loc))] [src] chimes.</span>", "<span class='notice'>[icon2html(src, src.loc)] You hear something chime.</span>")
+				src.loc.visible_message(SPAN_NOTICE("[icon2html(src, viewers(src.loc))] [src] chimes."), SPAN_NOTICE("[icon2html(src, src.loc)] You hear something chime."))
 				shutdown_emission()
 		else
-			src.visible_message("<span class='notice'>[icon2html(src, viewers(get_turf(src)))] [src] buzzes.</span>", "<span class='notice'>[icon2html(src, src)] You hear something buzz.</span>")
+			src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src] buzzes."), SPAN_NOTICE("[icon2html(src, src)] You hear something buzz."))
 			shutdown_emission()
 		last_process = world.time
 
@@ -170,7 +170,7 @@
 		if(inserted_battery && inserted_battery.battery_effect && (inserted_battery.stored_charge > 0) )
 			activated = 1
 			last_process = world.time
-			src.visible_message("<span class='notice'>[icon2html(src, viewers(get_turf(src)))] [src] whirrs.</span>", "<span class='notice'>[icon2html(src, src)] You hear something whirr.</span>")
+			src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src] whirrs."), SPAN_NOTICE("[icon2html(src, src)] You hear something whirr."))
 			if(!inserted_battery.battery_effect.activated)
 				inserted_battery.battery_effect.ToggleActivate(1)
 			time_end = world.time + duration
@@ -210,9 +210,9 @@
 	if(activated && inserted_battery.battery_effect.effect == EFFECT_TOUCH && !isnull(inserted_battery))
 		inserted_battery.battery_effect.DoEffectTouch(M)
 		inserted_battery.use_power(energy_consumed_on_touch)
-		user.visible_message("<span class='notice'>[user] taps [M] with [src], and it shudders on contact.</span>")
+		user.visible_message(SPAN_NOTICE("[user] taps [M] with [src], and it shudders on contact."))
 	else
-		user.visible_message("<span class='notice'>[user] taps [M] with [src], but nothing happens.</span>")
+		user.visible_message(SPAN_NOTICE("[user] taps [M] with [src], but nothing happens."))
 
 	if(inserted_battery.battery_effect)
 		admin_attack_log(user, M, "Tapped their victim with \a [src] (EFFECT: [inserted_battery.battery_effect.name])", "Was tapped by \a [src] (EFFECT: [inserted_battery.battery_effect.name])", "used \a [src] (EFFECT: [inserted_battery.battery_effect.name]) to tap")

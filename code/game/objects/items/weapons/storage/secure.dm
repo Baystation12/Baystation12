@@ -29,21 +29,21 @@
 	if (isScrewdriver(W))
 		if (do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			open = ! open
-			user.show_message(text("<span class='notice'>You [] the service panel.</span>", (src.open ? "open" : "close")))
+			user.show_message(SPAN_NOTICE("You [open ? "open" : "close"] the service panel."))
 		return
 	if (isMultitool(W) && (open == 1)&& (!l_hacking))
-		user.show_message("<span class='notice'>Now attempting to reset internal memory, please hold.</span>", 1)
+		user.show_message(SPAN_NOTICE("Now attempting to reset internal memory, please hold."), 1)
 		l_hacking = 1
 		if (do_after(usr, 10 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			if (prob(40))
 				l_setshort = 1
 				l_set = 0
-				user.show_message("<span class='notice'>Internal memory reset. Please give it a few seconds to reinitialize.</span>", 1)
+				user.show_message(SPAN_NOTICE("Internal memory reset. Please give it a few seconds to reinitialize."), 1)
 				sleep(80)
 				l_setshort = 0
 				l_hacking = 0
 			else
-				user.show_message("<span class='warning'>Unable to reset internal memory.</span>", 1)
+				user.show_message(SPAN_WARNING("Unable to reset internal memory."), 1)
 				l_hacking = 0
 		else
 			l_hacking = 0
@@ -63,9 +63,9 @@
 	if ((l_set == 0) && (!emagged) && (!l_setshort))
 		dat += text("<p>\n<b>5-DIGIT PASSCODE NOT SET.<br>ENTER NEW PASSCODE.</b>")
 	if (emagged)
-		dat += text("<p>\n<font color=red><b>LOCKING SYSTEM ERROR - 1701</b></font>")
+		dat += text("<p>\n[SPAN_COLOR("red", "<b>LOCKING SYSTEM ERROR - 1701</b>")]")
 	if (l_setshort)
-		dat += text("<p>\n<font color=red><b>ALERT: MEMORY SYSTEM ERROR - 6040 201</b></font>")
+		dat += text("<p>\n[SPAN_COLOR("red", "<b>ALERT: MEMORY SYSTEM ERROR - 6040 201</b>")]")
 	message = text("[]", src.code)
 	if (!locked)
 		message = "*****"
@@ -142,7 +142,7 @@
 
 /obj/item/storage/secure/briefcase/attack_hand(mob/user)
 	if ((loc == user) && (locked == 1))
-		to_chat(usr, "<span class='warning'>[src] is locked and cannot be opened!</span>")
+		to_chat(usr, SPAN_WARNING("[src] is locked and cannot be opened!"))
 	else if ((loc == user) && (!locked))
 		open(usr)
 	else

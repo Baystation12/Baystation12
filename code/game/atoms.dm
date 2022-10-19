@@ -200,7 +200,7 @@
 			f_name = "some "
 		else
 			f_name = "a "
-		f_name += "<font color ='[blood_color]'>stained</font> [name][infix]!"
+		f_name += "[SPAN_COLOR(blood_color, "stained")] [name][infix]!"
 
 	to_chat(user, "[icon2html(src, user)] That's [f_name] [suffix]")
 	to_chat(user, desc)
@@ -251,7 +251,7 @@
 	return
 
 /atom/proc/lava_act()
-	visible_message("<span class='danger'>\The [src] sizzles and melts away, consumed by the lava!</span>")
+	visible_message(SPAN_DANGER("\The [src] sizzles and melts away, consumed by the lava!"))
 	playsound(src, 'sound/effects/flare.ogg', 100, 3)
 	qdel(src)
 	. = TRUE
@@ -397,8 +397,8 @@
 /atom/attack_hand(mob/user)
 	..()
 	if(LAZYLEN(climbers) && !(user in climbers))
-		user.visible_message("<span class='warning'>[user.name] shakes \the [src].</span>", \
-					"<span class='notice'>You shake \the [src].</span>")
+		user.visible_message(SPAN_WARNING("[user.name] shakes \the [src]."), \
+					SPAN_NOTICE("You shake \the [src]."))
 		object_shaken()
 
 // Called when hitting the atom with a grab.
@@ -420,7 +420,7 @@
 		return 0
 
 	if (!user.Adjacent(src))
-		to_chat(user, "<span class='danger'>You can't climb there, the way is blocked.</span>")
+		to_chat(user, SPAN_DANGER("You can't climb there, the way is blocked."))
 		return 0
 
 	var/obj/occupied = turf_is_crowded(user)
@@ -444,7 +444,7 @@
 				return FALSE
 
 	if(occupied)
-		to_chat(user, "<span class='danger'>There's \a [occupied] in the way.</span>")
+		to_chat(user, SPAN_DANGER("There's \a [occupied] in the way."))
 		return 0
 	return 1
 
@@ -454,12 +454,12 @@
 	if(!Adjacent(user))
 		return 0
 	if (user.restrained() || user.buckled)
-		to_chat(user, "<span class='notice'>You need your hands and legs free for this.</span>")
+		to_chat(user, SPAN_NOTICE("You need your hands and legs free for this."))
 		return 0
 	if (user.incapacitated())
 		return 0
 	if (check_silicon && issilicon(user))
-		to_chat(user, "<span class='notice'>You need hands for this.</span>")
+		to_chat(user, SPAN_NOTICE("You need hands for this."))
 		return 0
 	return 1
 
@@ -481,7 +481,7 @@
 		return 0
 
 	add_fingerprint(user)
-	user.visible_message("<span class='warning'>\The [user] starts climbing onto \the [src]!</span>")
+	user.visible_message(SPAN_WARNING("\The [user] starts climbing onto \the [src]!"))
 	LAZYDISTINCTADD(climbers,user)
 
 	if(!do_after(user,(issmall(user) ? MOB_CLIMB_TIME_SMALL : MOB_CLIMB_TIME_MEDIUM) * climb_speed_mult, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_BAR_OVER_USER))
@@ -501,28 +501,28 @@
 	user.forceMove(target_turf)
 
 	if (get_turf(user) == target_turf)
-		user.visible_message("<span class='warning'>\The [user] climbs onto \the [src]!</span>")
+		user.visible_message(SPAN_WARNING("\The [user] climbs onto \the [src]!"))
 	LAZYREMOVE(climbers,user)
 	return 1
 
 /atom/proc/object_shaken()
 	for(var/mob/living/M in climbers)
 		M.Weaken(1)
-		to_chat(M, "<span class='danger'>You topple as you are shaken off \the [src]!</span>")
+		to_chat(M, SPAN_DANGER("You topple as you are shaken off \the [src]!"))
 		climbers.Cut(1,2)
 
 	for(var/mob/living/M in get_turf(src))
 		if(M.lying) return //No spamming this on people.
 
 		M.Weaken(3)
-		to_chat(M, "<span class='danger'>You topple as \the [src] moves under you!</span>")
+		to_chat(M, SPAN_DANGER("You topple as \the [src] moves under you!"))
 
 		if(prob(25))
 
 			var/damage = rand(15,30)
 			var/mob/living/carbon/human/H = M
 			if(!istype(H))
-				to_chat(H, "<span class='danger'>You land heavily!</span>")
+				to_chat(H, SPAN_DANGER("You land heavily!"))
 				M.adjustBruteLoss(damage)
 				return
 
@@ -532,12 +532,12 @@
 				affecting = H.get_organ(pick(limbs))
 
 			if(affecting)
-				to_chat(M, "<span class='danger'>You land heavily on your [affecting.name]!</span>")
+				to_chat(M, SPAN_DANGER("You land heavily on your [affecting.name]!"))
 				affecting.take_external_damage(damage, 0)
 				if(affecting.parent)
 					affecting.parent.add_autopsy_data("Misadventure", damage)
 			else
-				to_chat(H, "<span class='danger'>You land heavily!</span>")
+				to_chat(H, SPAN_DANGER("You land heavily!"))
 				H.adjustBruteLoss(damage)
 
 			H.UpdateDamageIcon()

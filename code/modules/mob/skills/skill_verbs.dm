@@ -83,14 +83,14 @@ Robots and antags can instruct.
 	if(!SV || !istype(target))
 		return
 	if(src == target)
-		to_chat(src, "<span class='notice'>Cannot instruct yourself.</span>")
+		to_chat(src, SPAN_NOTICE("Cannot instruct yourself."))
 		return
 	if(incapacitated() || target.incapacitated())
-		to_chat(src, "<span class='notice'>[incapacitated() ? "You are in no state to teach right now!" : "\the [target] is in no state to be taught right now!"]</span>")
+		to_chat(src, SPAN_NOTICE("[incapacitated() ? "You are in no state to teach right now!" : "\the [target] is in no state to be taught right now!"]"))
 		return
 
 	if(target.too_many_buffs(/datum/skill_buff/instruct))
-		to_chat(src, "<span class='notice'>\The [target] exhausted from all the training \he recieved.</span>")
+		to_chat(src, SPAN_NOTICE("\The [target] exhausted from all the training \he recieved."))
 		return
 
 	var/options = list()
@@ -98,7 +98,7 @@ Robots and antags can instruct.
 		if(!target.skill_check(S.type, SKILL_BASIC) && skill_check(S.type, SKILL_EXPERT))
 			options[S.name] = S
 	if(!length(options))
-		to_chat(src, "<span class='notice'>There is nothing you can teach \the [target].</span>")
+		to_chat(src, SPAN_NOTICE("There is nothing you can teach \the [target]."))
 	var/choice = input(src, "Select skill to instruct \the [target] in:", "Skill select") as null|anything in options
 	if(!(choice in options) || !(target in view(2)))
 		return
@@ -107,19 +107,19 @@ Robots and antags can instruct.
 	if(!do_skilled(6 SECONDS, skill.type, target, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return
 	if(incapacitated() || target.incapacitated())
-		to_chat(src, "<span class='notice'>[incapacitated() ? "You are in no state to teach right now!" : "\the [target] is in no state to be taught right now!"]</span>")
+		to_chat(src, SPAN_NOTICE("[incapacitated() ? "You are in no state to teach right now!" : "\the [target] is in no state to be taught right now!"]"))
 		return
 	if(target.too_many_buffs(/datum/skill_buff/instruct))
-		to_chat(src, "<span class='notice'>\The [target] exhausted from all the training \he recieved.</span>")
+		to_chat(src, SPAN_NOTICE("\The [target] exhausted from all the training \he recieved."))
 		return
 	if(target.skill_check(skill.type, SKILL_BASIC))
-		to_chat(src, "<span class='notice'>\The [target] is too skilled to gain any benefit from a short lesson.</span>")
+		to_chat(src, SPAN_NOTICE("\The [target] is too skilled to gain any benefit from a short lesson."))
 		return
 	if(!skill_check(skill.type, SKILL_EXPERT))
 		return
 
 	target.buff_skill(list(skill.type = 1), buff_type = /datum/skill_buff/instruct)
-	visible_message("<span class='notice'>\The [src] trained \the [target] in the basics of \the [skill.name].</span>")
+	visible_message(SPAN_NOTICE("\The [src] trained \the [target] in the basics of \the [skill.name]."))
 	SV.set_cooldown()
 
 /datum/skill_buff/instruct

@@ -136,15 +136,15 @@
 		if(ores_processing[ore])
 			switch(ores_processing[ore])
 				if(ORE_DISABLED)
-					status_string = "<font color='red'>not processing</font>"
+					status_string = SPAN_COLOR("red", "not processing")
 				if(ORE_SMELT)
-					status_string = "<font color='orange'>smelting</font>"
+					status_string = SPAN_COLOR("orange", "smelting")
 				if(ORE_COMPRESS)
-					status_string = "<font color='blue'>compressing</font>"
+					status_string = SPAN_COLOR("blue", "compressing")
 				if(ORE_ALLOY)
-					status_string = "<font color='gray'>alloying</font>"
+					status_string = SPAN_COLOR("gray", "alloying")
 		else
-			status_string = "<font color='red'>not processing</font>"
+			status_string = SPAN_COLOR("red", "not processing")
 		result += "<tr><td>[line]</td><td><a href='?src=\ref[src];toggle_smelting=[ore]'>[status_string]</a></td></tr>"
 	. += "<table>[result]</table>"
 	. += "Currently displaying [report_all_ores ? "all ore types" : "only available ore types"]. <A href='?src=\ref[src];toggle_ores=1'>[report_all_ores ? "Show less" : "Show more"]</a>"

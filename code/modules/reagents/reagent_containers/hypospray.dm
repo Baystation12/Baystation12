@@ -29,7 +29,7 @@
 
 /obj/item/reagent_containers/hypospray/attack(mob/living/M, mob/user)
 	if(!reagents.total_volume)
-		to_chat(user, "<span class='warning'>[src] is empty.</span>")
+		to_chat(user, SPAN_WARNING("[src] is empty."))
 		return
 	if (!istype(M))
 		return
@@ -63,7 +63,7 @@
 		H.custom_pain(SPAN_WARNING("You feel a tiny prick!"), 1, TRUE, H.get_organ(user.zone_sel.selecting))
 
 	playsound(src, 'sound/effects/hypospray.ogg',25)
-	user.visible_message("<span class='warning'>[user] injects [M] with [src].</span>")
+	user.visible_message(SPAN_WARNING("[user] injects [M] with [src]."))
 
 	if(M.reagents)
 		var/should_admin_log = reagents.should_admin_log()
@@ -71,7 +71,7 @@
 		var/trans = reagents.trans_to_mob(M, amount_per_transfer_from_this, CHEM_BLOOD)
 		if (should_admin_log)
 			admin_inject_log(user, M, src, contained, trans)
-		to_chat(user, "<span class='notice'>[trans] units injected. [reagents.total_volume] units remaining in \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("[trans] units injected. [reagents.total_volume] units remaining in \the [src]."))
 
 	return
 
@@ -106,7 +106,7 @@
 /obj/item/reagent_containers/hypospray/vial/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src)
 		if(!loaded_vial)
-			to_chat(user, "<span class='notice'>There is no vial loaded in the [src].</span>")
+			to_chat(user, SPAN_NOTICE("There is no vial loaded in the [src]."))
 			return
 		remove_vial(user)
 		update_icon()
@@ -132,7 +132,7 @@
 		loaded_vial = W
 		reagents.maximum_volume = loaded_vial.reagents.maximum_volume
 		loaded_vial.reagents.trans_to_holder(reagents,volume)
-		user.visible_message("<span class='notice'>[user] has loaded [W] into \the [src].</span>","<span class='notice'>[usermessage]</span>")
+		user.visible_message(SPAN_NOTICE("[user] has loaded [W] into \the [src]."),SPAN_NOTICE("[usermessage]"))
 		update_icon()
 		playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 		return
@@ -205,9 +205,9 @@
 /obj/item/reagent_containers/hypospray/autoinjector/examine(mob/user)
 	. = ..(user)
 	if(reagents && reagents.reagent_list.len)
-		to_chat(user, "<span class='notice'>It is currently loaded.</span>")
+		to_chat(user, SPAN_NOTICE("It is currently loaded."))
 	else
-		to_chat(user, "<span class='notice'>It is spent.</span>")
+		to_chat(user, SPAN_NOTICE("It is spent."))
 
 /obj/item/reagent_containers/hypospray/autoinjector/detox
 	name = "autoinjector (antitox)"

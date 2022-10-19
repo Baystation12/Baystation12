@@ -12,13 +12,13 @@
 		icon_state = "ghost-narsie"
 		overlays.Cut()
 		set_invisibility(0)
-		to_chat(src, "<span class='sinister'>Even as a non-corporal being, you can feel Nar-Sie's presence altering you. You are now visible to everyone.</span>")
+		to_chat(src, SPAN_CLASS("sinister", "Even as a non-corporal being, you can feel Nar-Sie's presence altering you. You are now visible to everyone."))
 
 /mob/living/cultify()
 	if(iscultist(src) && client)
 		var/mob/living/simple_animal/construct/harvester/C = new(get_turf(src))
 		mind.transfer_to(C)
-		to_chat(C, "<span class='sinister'>The Geometer of Blood is overjoyed to be reunited with its followers, and accepts your body in sacrifice. As reward, you have been gifted with the shell of an Harvester.<br>Your tendrils can use and draw runes without need for a tome, your eyes can see beings through walls, and your mind can open any door. Use these assets to serve Nar-Sie and bring him any remaining living human in the world.<br>You can teleport yourself back to Nar-Sie along with any being under yourself at any time using your \"Harvest\" spell.</span>")
+		to_chat(C, SPAN_CLASS("sinister", "The Geometer of Blood is overjoyed to be reunited with its followers, and accepts your body in sacrifice. As reward, you have been gifted with the shell of an Harvester.<br>Your tendrils can use and draw runes without need for a tome, your eyes can see beings through walls, and your mind can open any door. Use these assets to serve Nar-Sie and bring him any remaining living human in the world.<br>You can teleport yourself back to Nar-Sie along with any being under yourself at any time using your \"Harvest\" spell."))
 		dust()
 	else if(client)
 		var/mob/observer/ghost/G = (ghostize())
@@ -26,7 +26,7 @@
 		G.icon_state = "ghost-narsie"
 		G.overlays.Cut()
 		G.set_invisibility(0)
-		to_chat(G, "<span class='sinister'>You feel relieved as what's left of your soul finally escapes its prison of flesh.</span>")
+		to_chat(G, SPAN_CLASS("sinister", "You feel relieved as what's left of your soul finally escapes its prison of flesh."))
 	else
 		dust()
 

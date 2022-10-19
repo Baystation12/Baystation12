@@ -12,4 +12,4 @@
 	icon_state = "guitar"
 
 /obj/item/instrument/guitar/attack_self(mob/user as mob)
-	user.visible_message("<span class='notice'><b>\The [user]</b> strums [src]!</span>","<span class='notice'>You strum [src]!</span>")
+	user.visible_message(SPAN_NOTICE("<b>\The [user]</b> strums [src]!"),SPAN_NOTICE("You strum [src]!"))

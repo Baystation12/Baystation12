@@ -13,7 +13,7 @@
 /datum/map/torch/send_welcome()
 	var/obj/effect/overmap/visitable/ship/torch = SSshuttle.ship_by_type(/obj/effect/overmap/visitable/ship/torch)
 
-	var/welcome_text = "<center><img src = sollogo.png /><br /><font size = 3><b>SEV Torch</b> Sensor Readings:</font><br>"
+	var/welcome_text = "<center><img src = sollogo.png /><br />[FONT_LARGE("<b>SEV Torch</b> Sensor Readings:")]<br>"
 	welcome_text += "Report generated on [stationdate2text()] at [stationtime2text()]</center><br /><br />"
 	welcome_text += "<hr>Current system:<br /><b>[torch ? system_name : "Unknown"]</b><br /><br>"
 

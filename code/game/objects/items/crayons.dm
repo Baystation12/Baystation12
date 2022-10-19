@@ -111,7 +111,7 @@
 			if(uses)
 				uses--
 				if(!uses)
-					to_chat(user, "<span class='warning'>You used up your crayon!</span>")
+					to_chat(user, SPAN_WARNING("You used up your crayon!"))
 					qdel(src)
 	return
 
@@ -123,7 +123,7 @@
 		if(uses)
 			uses -= 5
 			if(uses <= 0)
-				to_chat(M, "<span class='warning'>You ate your crayon!</span>")
+				to_chat(M, SPAN_WARNING("You ate your crayon!"))
 				qdel(src)
 	else
 		..()

@@ -325,7 +325,7 @@
 			else
 				H.AdjustStunned(3)
 				H.AdjustWeakened(3)
-			to_chat(mob, "<span class='notice'>The sudden appearance of gravity makes you fall to the floor!</span>")
+			to_chat(mob, SPAN_NOTICE("The sudden appearance of gravity makes you fall to the floor!"))
 
 /// Trigger for the prison break event. Causes lighting to overload and dooes to open. Has no effect if the area lacks an APC or the APC is turned off.
 /area/proc/prison_break()

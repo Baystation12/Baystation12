@@ -7,11 +7,11 @@
 /atom/get_view_variables_header()
 	return {"
 		<a href='?_src_=vars;datumedit=\ref[src];varnameedit=name'><b>[src]</b></a>
-		<br><font size='1'>
+		<br><span style='font-size: 1'>
 		<a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><=</a>
 		<a href='?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a>
 		<a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>=></a>
-		</font>
+		</span>
 		"}
 
 /atom/movable/get_view_variables_options()
@@ -22,7 +22,7 @@
 
 /mob/living/get_view_variables_header()
 	return {"
-		<a href='?_src_=vars;rename=\ref[src]'><b>[src]</b></a><font size='1'>
+		<a href='?_src_=vars;rename=\ref[src]'><b>[src]</b></a><span style='font-size: 1'>
 		<br><a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><=</a> <a href='?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a> <a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>=></a>
 		<br><a href='?_src_=vars;datumedit=\ref[src];varnameedit=ckey'>[ckey ? ckey : "No ckey"]</a> / <a href='?_src_=vars;datumedit=\ref[src];varnameedit=real_name'>[real_name ? real_name : "No real name"]</a>
 		<br>
@@ -32,7 +32,7 @@
 		OXY:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=oxygen'>[getOxyLoss()]</a>
 		CLONE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=clone'>[getCloneLoss()]</a>
 		BRAIN:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=brain'>[getBrainLoss()]</a>
-		</font>
+		</span>
 		"}
 
 // Same for these as for get_view_variables_header() above
@@ -193,7 +193,7 @@
 	if(!user)
 		return FALSE
 	if(!(var_to_edit in vars))
-		to_chat(user, "<span class='warning'>\The [src] does not have a var '[var_to_edit]'</span>")
+		to_chat(user, SPAN_WARNING("\The [src] does not have a var '[var_to_edit]'"))
 		return FALSE
 	if(var_to_edit in VV_static())
 		return FALSE

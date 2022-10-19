@@ -231,7 +231,7 @@
 // Harvest an animal's delicious byproducts
 /mob/living/simple_animal/proc/harvest(mob/user, skill_level)
 	var/actual_meat_amount = round(max(1,(meat_amount / 2) + skill_level / 2))
-	user.visible_message("<span class='danger'>\The [user] chops up \the [src]!</span>")
+	user.visible_message(SPAN_DANGER("\The [user] chops up \the [src]!"))
 	if(meat_type && actual_meat_amount > 0 && (stat == DEAD))
 		for(var/i=0;i<actual_meat_amount;i++)
 			var/obj/item/meat = new meat_type(get_turf(src))

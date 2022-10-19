@@ -104,7 +104,7 @@
 		var/obj/item/reagent_containers/food/snacks/icecream/I = O
 		if(!I.ice_creamed)
 			if(product_types[dispense_flavour] > 0)
-				src.visible_message("[icon2html(src, viewers(get_turf(src)))] <span class='info'>[user] scoops delicious [flavour_name] icecream into [I].</span>")
+				src.visible_message("[icon2html(src, viewers(get_turf(src)))] [SPAN_INFO("[user] scoops delicious [flavour_name] icecream into [I].")]")
 				product_types[dispense_flavour] -= 1
 				I.add_ice_cream(flavour_name)
 			//	if(beaker)
@@ -112,9 +112,9 @@
 				if(I.reagents.total_volume < 10)
 					I.reagents.add_reagent(/datum/reagent/sugar, 10 - I.reagents.total_volume)
 			else
-				to_chat(user, "<span class='warning'>There is not enough icecream left!</span>")
+				to_chat(user, SPAN_WARNING("There is not enough icecream left!"))
 		else
-			to_chat(user, "<span class='notice'>[O] already has icecream in it.</span>")
+			to_chat(user, SPAN_NOTICE("[O] already has icecream in it."))
 		return 1
 	else if(O.is_open_container())
 		return
@@ -133,11 +133,11 @@
 		product_types[make_type] += amount
 		var/flavour = get_flavour_name(make_type)
 		if(make_type > 6)
-			src.visible_message("<span class='info'>[user] cooks up some [flavour] cones.</span>")
+			src.visible_message(SPAN_INFO("[user] cooks up some [flavour] cones."))
 		else
-			src.visible_message("<span class='info'>[user] whips up some [flavour] icecream.</span>")
+			src.visible_message(SPAN_INFO("[user] whips up some [flavour] icecream."))
 	else
-		to_chat(user, "<span class='warning'>You don't have the ingredients to make this.</span>")
+		to_chat(user, SPAN_WARNING("You don't have the ingredients to make this."))
 
 /obj/machinery/icecream_vat/OnTopic(user, href_list)
 	if(href_list["close"])
@@ -147,7 +147,7 @@
 	if(href_list["select"])
 		dispense_flavour = text2num(href_list["select"])
 		flavour_name = get_flavour_name(dispense_flavour)
-		src.visible_message("<span class='notice'>[user] sets [src] to dispense [flavour_name] flavoured icecream.</span>")
+		src.visible_message(SPAN_NOTICE("[user] sets [src] to dispense [flavour_name] flavoured icecream."))
 		. = TOPIC_HANDLED
 
 	else if(href_list["cone"])
@@ -159,9 +159,9 @@
 			I.cone_type = cone_name
 			I.icon_state = "icecream_cone_[cone_name]"
 			I.desc = "Delicious [cone_name] cone, but no ice cream."
-			src.visible_message("<span class='info'>[user] dispenses a crunchy [cone_name] cone from [src].</span>")
+			src.visible_message(SPAN_INFO("[user] dispenses a crunchy [cone_name] cone from [src]."))
 		else
-			to_chat(user, "<span class='warning'>There are no [cone_name] cones left!</span>")
+			to_chat(user, SPAN_WARNING("There are no [cone_name] cones left!"))
 		. = TOPIC_REFRESH
 
 	else if(href_list["make"])

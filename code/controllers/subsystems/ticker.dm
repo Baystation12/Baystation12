@@ -49,7 +49,7 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/Initialize(start_uptime)
 	pregame_timeleft = config.pre_game_time SECONDS
 	build_mode_cache()
-	to_world("<span class='info'><B>Welcome to the pre-game lobby!</B></span>")
+	to_world(SPAN_INFO("<B>Welcome to the pre-game lobby!</B>"))
 	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
 
 
@@ -175,7 +175,7 @@ SUBSYSTEM_DEF(ticker)
 
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup() // Drafts antags who don't override jobs.
-		to_world("<span class='info'><B>Enjoy the game!</B></span>")
+		to_world(SPAN_INFO("<B>Enjoy the game!</B>"))
 		sound_to(world, sound(GLOB.using_map.welcome_sound))
 
 		for (var/mob/new_player/player in GLOB.player_list)
@@ -210,11 +210,11 @@ SUBSYSTEM_DEF(ticker)
 			callHook("roundend")
 			if (game_over)
 				if(!delay_end)
-					to_world("<span class='notice'><b>Rebooting due to destruction of [station_name()] in [restart_timeout/10] seconds</b></span>")
+					to_world(SPAN_NOTICE("<b>Rebooting due to destruction of [station_name()] in [restart_timeout/10] seconds</b>"))
 
 			else
 				if(!delay_end)
-					to_world("<span class='notice'><b>Restarting in [restart_timeout/10] seconds</b></span>")
+					to_world(SPAN_NOTICE("<b>Restarting in [restart_timeout/10] seconds</b>"))
 			handle_tickets()
 		if(END_GAME_ENDING)
 			restart_timeout -= (world.time - last_fire)
@@ -477,18 +477,18 @@ Helpers
 
 /datum/controller/subsystem/ticker/proc/notify_delay()
 	if(!delay_notified)
-		to_world("<span class='notice'><b>An admin has delayed the round end</b></span>")
+		to_world(SPAN_NOTICE("<b>An admin has delayed the round end</b>"))
 	delay_notified = 1
 
 /datum/controller/subsystem/ticker/proc/handle_tickets()
 	for(var/datum/ticket/ticket in tickets)
 		if(ticket.is_active())
 			if(!delay_notified)
-				message_staff("<span class='warning'><b>Automatically delaying restart due to active tickets.</b></span>")
+				message_staff(SPAN_WARNING("<b>Automatically delaying restart due to active tickets.</b>"))
 			notify_delay()
 			end_game_state = END_GAME_AWAITING_TICKETS
 			return
-	message_staff("<span class='warning'><b>No active tickets remaining, restarting in [restart_timeout/10] seconds if an admin has not delayed the round end.</b></span>")
+	message_staff(SPAN_WARNING("<b>No active tickets remaining, restarting in [restart_timeout/10] seconds if an admin has not delayed the round end.</b>"))
 	end_game_state = END_GAME_ENDING
 
 /datum/controller/subsystem/ticker/proc/declare_completion()
@@ -542,8 +542,8 @@ Helpers
 				max_profit = D
 			if(saldo <= max_loss.get_balance())
 				max_loss = D
-		to_world("<b>[max_profit.owner_name]</b> received most <font color='green'><B>PROFIT</B></font> today, with net profit of <b>[GLOB.using_map.local_currency_name_short][max_profit.get_balance()]</b>.")
-		to_world("On the other hand, <b>[max_loss.owner_name]</b> had most <font color='red'><B>LOSS</B></font>, with total loss of <b>[GLOB.using_map.local_currency_name_short][max_loss.get_balance()]</b>.")
+		to_world("<b>[max_profit.owner_name]</b> received most [SPAN_COLOR("green", "<B>PROFIT</B>")] today, with net profit of <b>[GLOB.using_map.local_currency_name_short][max_profit.get_balance()]</b>.")
+		to_world("On the other hand, <b>[max_loss.owner_name]</b> had most [SPAN_COLOR("red", "<B>LOSS</B>")], with total loss of <b>[GLOB.using_map.local_currency_name_short][max_loss.get_balance()]</b>.")
 
 	mode.declare_completion()//To declare normal completion.
 

@@ -86,7 +86,7 @@
 		admin_attack_log(G.assailant, G.affecting, "tightens their grip on their victim to [upgrab.state_name]", "was grabbed more tightly to [upgrab.state_name]", "tightens grip to [upgrab.state_name] on")
 		return upgrab
 	else
-		to_chat(G.assailant, "<span class='warning'>[string_process(G, fail_up)]</span>")
+		to_chat(G.assailant, SPAN_WARNING("[string_process(G, fail_up)]"))
 		return
 
 /datum/grab/proc/downgrade(obj/item/grab/G)
@@ -95,7 +95,7 @@
 		downgrade_effect(G)
 		return downgrab
 	else
-		to_chat(G.assailant, "<span class='warning'>[string_process(G, fail_down)]</span>")
+		to_chat(G.assailant, SPAN_WARNING("[string_process(G, fail_down)]"))
 		return
 
 /datum/grab/proc/let_go(obj/item/grab/G)
@@ -161,7 +161,7 @@
 					make_log(G, harm_action)
 
 	else
-		to_chat(G.assailant, "<span class='warning'>You must wait before you can do that.</span>")
+		to_chat(G.assailant, SPAN_WARNING("You must wait before you can do that."))
 
 /datum/grab/proc/make_log(obj/item/grab/G, action)
 	admin_attack_log(G.assailant, G.affecting, "[action]s their victim", "was [action]ed", "used [action] on")
@@ -278,7 +278,7 @@
 	var/mob/living/carbon/human/assailant = G.assailant
 
 	if(affecting.incapacitated(INCAPACITATION_KNOCKOUT | INCAPACITATION_STUNNED))
-		to_chat(G.affecting, "<span class='warning'>You can't resist in your current state!</span>")
+		to_chat(G.affecting, SPAN_WARNING("You can't resist in your current state!"))
 	var/skill_mod = clamp(affecting.get_skill_difference(SKILL_COMBAT, assailant), -1, 1)
 	var/break_strength = breakability + size_difference(affecting, assailant) + skill_mod
 	var/shock = affecting.get_shock()
@@ -299,17 +299,17 @@
 		break_strength--
 
 	if(break_strength < 1)
-		to_chat(G.affecting, "<span class='warning'>You try to break free but feel that unless something changes, you'll never escape!</span>")
+		to_chat(G.affecting, SPAN_WARNING("You try to break free but feel that unless something changes, you'll never escape!"))
 		return
 
 	var/break_chance = break_chance_table[clamp(break_strength, 1, break_chance_table.len)]
 	if(prob(break_chance))
 		if(can_downgrade_on_resist && !prob((break_chance+100)/2))
-			affecting.visible_message("<span class='warning'>[affecting] has loosened [assailant]'s grip!</span>")
+			affecting.visible_message(SPAN_WARNING("[affecting] has loosened [assailant]'s grip!"))
 			G.downgrade()
 			return
 		else
-			affecting.visible_message("<span class='warning'>[affecting] has broken free of [assailant]'s grip!</span>")
+			affecting.visible_message(SPAN_WARNING("[affecting] has broken free of [assailant]'s grip!"))
 			let_go(G)
 
 /datum/grab/proc/size_difference(mob/A, mob/B)

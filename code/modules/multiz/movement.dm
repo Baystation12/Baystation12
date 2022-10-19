@@ -45,18 +45,18 @@
 	var/turf/destination = (direction == UP) ? GetAbove(pulling) : GetBelow(pulling)
 
 	if(!start.CanZPass(pulling, direction))
-		to_chat(src, "<span class='warning'>\The [start] blocked your pulled object!</span>")
+		to_chat(src, SPAN_WARNING("\The [start] blocked your pulled object!"))
 		stop_pulling()
 		return 0
 
 	if(!destination.CanZPass(pulling, direction))
-		to_chat(src, "<span class='warning'>The [pulling] you were pulling bumps up against \the [destination].</span>")
+		to_chat(src, SPAN_WARNING("The [pulling] you were pulling bumps up against \the [destination]."))
 		stop_pulling()
 		return 0
 
 	for(var/atom/A in destination)
 		if(!A.CanMoveOnto(pulling, start, 1.5, direction))
-			to_chat(src, "<span class='warning'>\The [A] blocks the [pulling] you were pulling.</span>")
+			to_chat(src, SPAN_WARNING("\The [A] blocks the [pulling] you were pulling."))
 			stop_pulling()
 			return 0
 
@@ -265,7 +265,7 @@
 		if(victims.len)
 			var/obj/item/organ/external/victim = pick(victims)
 			victim.dislocate()
-			to_chat(src, "<span class='warning'>You feel a sickening pop as your [victim.joint] is wrenched out of the socket.</span>")
+			to_chat(src, SPAN_WARNING("You feel a sickening pop as your [victim.joint] is wrenched out of the socket."))
 	updatehealth()
 
 
@@ -280,12 +280,12 @@
 		if(location.has_gravity && !can_overcome_gravity())
 			return FALSE
 
-		visible_message("<span class='notice'>[src] starts climbing onto \the [A]!</span>", "<span class='notice'>You start climbing onto \the [A]!</span>")
+		visible_message(SPAN_NOTICE("[src] starts climbing onto \the [A]!"), SPAN_NOTICE("You start climbing onto \the [A]!"))
 		if(do_after(src, 5 SECONDS, A, DO_PUBLIC_UNIQUE))
-			visible_message("<span class='notice'>[src] climbs onto \the [A]!</span>", "<span class='notice'>You climb onto \the [A]!</span>")
+			visible_message(SPAN_NOTICE("[src] climbs onto \the [A]!"), SPAN_NOTICE("You climb onto \the [A]!"))
 			src.Move(T)
 		else
-			visible_message("<span class='warning'>[src] gives up on trying to climb onto \the [A]!</span>", "<span class='warning'>You give up on trying to climb onto \the [A]!</span>")
+			visible_message(SPAN_WARNING("[src] gives up on trying to climb onto \the [A]!"), SPAN_WARNING("You give up on trying to climb onto \the [A]!"))
 		return TRUE
 
 /atom/movable/proc/can_float()

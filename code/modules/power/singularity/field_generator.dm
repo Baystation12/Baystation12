@@ -88,7 +88,7 @@ field_generator power level display
 					"You turn on the [src.name].", \
 					"You hear heavy droning")
 				turn_on()
-				investigate_log("<font color='green'>activated</font> by [user.key].","singulo")
+				investigate_log("[SPAN_COLOR("green", "activated")] by [user.key].","singulo")
 
 				src.add_fingerprint(user)
 				return TRUE
@@ -117,13 +117,13 @@ field_generator power level display
 					"You hear ratchet")
 				src.anchored = FALSE
 			if(2)
-				to_chat(user, "<span class='warning'> The [src.name] needs to be unwelded from the floor.</span>")
+				to_chat(user, SPAN_WARNING(" The [src.name] needs to be unwelded from the floor."))
 				return
 	else if(isWelder(W))
 		var/obj/item/weldingtool/WT = W
 		switch(state)
 			if(0)
-				to_chat(user, "<span class='warning'>The [src.name] needs to be wrenched to the floor.</span>")
+				to_chat(user, SPAN_WARNING("The [src.name] needs to be wrenched to the floor."))
 				return
 			if(1)
 				if (WT.remove_fuel(0,user))
@@ -209,9 +209,9 @@ field_generator power level display
 		return 1
 	else
 		for(var/mob/M in viewers(src))
-			M.show_message("<span class='warning'>\The [src] shuts down!</span>")
+			M.show_message(SPAN_WARNING("\The [src] shuts down!"))
 		turn_off()
-		investigate_log("ran out of power and <font color='red'>deactivated</font>","singulo")
+		investigate_log("ran out of power and [SPAN_COLOR("red", "deactivated")]","singulo")
 		src.power = 0
 		return 0
 
@@ -335,5 +335,5 @@ field_generator power level display
 				if((world.time - O.last_warning) > 50) //to stop message-spam
 					temp = 0
 					message_admins("A singulo exists and a containment field has failed.",1)
-					investigate_log("has <font color='red'>failed</font> whilst a singulo exists.","singulo")
+					investigate_log("has [SPAN_COLOR("red", "failed")] whilst a singulo exists.","singulo")
 			O.last_warning = world.time

@@ -111,7 +111,7 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 
 	for(var/colour in wires_used)
 		html += "<tr>"
-		html += "<td[row_options1]><font color='[colour]'>&#9724;</font>[capitalize(colour)]</td>"
+		html += "<td[row_options1]>[SPAN_COLOR(colour, "&#9724;")][capitalize(colour)]</td>"
 		html += "<td[row_options2]>"
 		html += "<A href='?src=\ref[src];action=1;cut=[colour]'>[IsColourCut(colour) ? "Mend" :  "Cut"]</A>"
 		html += " <A href='?src=\ref[src];action=1;pulse=[colour]'>Pulse</A>"
@@ -158,13 +158,13 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 					to_chat(usr, message)
 					playsound(usr.loc, "sound/items/Wirecutter.ogg", 20)
 				else
-					to_chat(L, "<span class='error'>You need wirecutters!</span>")
+					to_chat(L, SPAN_CLASS("error", "You need wirecutters!"))
 			else if(href_list["pulse"])
 				if(isMultitool(I) || isMultitool(offhand_item))
 					var/colour = href_list["pulse"]
 					if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 30, SKILL_ADEPT)))
 						RandomPulse()
-						to_chat(L, "<span class='danger'>You accidentally pulse another wire instead of the [colour] wire!</span>")
+						to_chat(L, SPAN_DANGER("You accidentally pulse another wire instead of the [colour] wire!"))
 						if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 60, SKILL_BASIC)))
 							RandomPulse() //or two
 					else
@@ -173,15 +173,15 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 					playsound(usr.loc, "sound/effects/pop.ogg", 20)
 					if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 50, SKILL_BASIC)))
 						wires = shuffle(wires) //Leaves them in a different order for anyone else.
-						to_chat(L, "<span class='danger'>You get the wires all tangled up!</span>")
+						to_chat(L, SPAN_DANGER("You get the wires all tangled up!"))
 				else
-					to_chat(L, "<span class='error'>You need a multitool!</span>")
+					to_chat(L, SPAN_CLASS("error", "You need a multitool!"))
 			else if(href_list["attach"])
 				var/colour = href_list["attach"]
 				var/failed = 0
 				if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 80, SKILL_EXPERT)))
 					colour = pick(wires)
-					to_chat(L, "<span class='danger'>Are you sure you got the right wire?</span>")
+					to_chat(L, SPAN_DANGER("Are you sure you got the right wire?"))
 					failed = 1
 				// Detach
 				if(IsAttached(colour))
@@ -198,7 +198,7 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 							if(!failed)
 								to_chat(usr, SPAN_NOTICE("You attach the signaller to the [colour] wire."))
 					else
-						to_chat(L, "<span class='error'>You need a remote signaller!</span>")
+						to_chat(L, SPAN_CLASS("error", "You need a remote signaller!"))
 			else if(href_list["examine"])
 				var/colour = href_list["examine"]
 				to_chat(usr, examine(GetIndex(colour), usr))

@@ -39,16 +39,16 @@
 /decl/surgery_step/bone/glue/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	var/bone = affected.encased ? "\the [target]'s [affected.encased]" : "bones in \the [target]'s [affected.name]"
-	user.visible_message("<span class='notice'>[user] applies some [tool.name] to [bone]</span>", \
-		"<span class='notice'>You apply some [tool.name] to [bone].</span>")
+	user.visible_message(SPAN_NOTICE("[user] applies some [tool.name] to [bone]"), \
+		SPAN_NOTICE("You apply some [tool.name] to [bone]."))
 	if(affected.stage == 0)
 		affected.stage = 1
 	affected.status &= ~ORGAN_BRITTLE
 
 /decl/surgery_step/bone/glue/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='warning'>[user]'s hand slips, smearing [tool] in the incision in [target]'s [affected.name]!</span>" , \
-	"<span class='warning'>Your hand slips, smearing [tool] in the incision in [target]'s [affected.name]!</span>")
+	user.visible_message(SPAN_WARNING("[user]'s hand slips, smearing [tool] in the incision in [target]'s [affected.name]!") , \
+	SPAN_WARNING("Your hand slips, smearing [tool] in the incision in [target]'s [affected.name]!"))
 
 
 //////////////////////////////////////////////////////////////////
@@ -84,21 +84,21 @@
 	var/bone = affected.encased ? "\the [target]'s [affected.encased]" : "bones in \the [target]'s [affected.name]"
 	if (affected.status & ORGAN_BROKEN)
 		if(affected.encased == "skull")
-			user.visible_message("<span class='notice'>\The [user] pieces [bone] back together with \the [tool].</span>", \
-				"<span class='notice'>You piece [bone] back together with \the [tool].</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] pieces [bone] back together with \the [tool]."), \
+				SPAN_NOTICE("You piece [bone] back together with \the [tool]."))
 		else
-			user.visible_message("<span class='notice'>\The [user] sets [bone] in place with \the [tool].</span>", \
-				"<span class='notice'>You set [bone] in place with \the [tool].</span>")
+			user.visible_message(SPAN_NOTICE("\The [user] sets [bone] in place with \the [tool]."), \
+				SPAN_NOTICE("You set [bone] in place with \the [tool]."))
 		affected.stage = 2
 	else
-		user.visible_message("<span class='notice'>\The [user] sets [bone]</span> <span class='warning'>in the WRONG place with \the [tool].</span>", \
-			"<span class='notice'>You set [bone]</span> <span class='warning'>in the WRONG place with \the [tool].</span>")
+		user.visible_message("[SPAN_NOTICE("\The [user] sets [bone]")] [SPAN_WARNING("in the WRONG place with \the [tool].")]", \
+			"[SPAN_NOTICE("You set [bone]")] [SPAN_WARNING("in the WRONG place with \the [tool].")]")
 		affected.fracture()
 
 /decl/surgery_step/bone/set_bone/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='warning'>\The [user]'s hand slips, damaging the [affected.encased ? affected.encased : "bones"] in \the [target]'s [affected.name] with \the [tool]!</span>" , \
-		"<span class='warning'>Your hand slips, damaging the [affected.encased ? affected.encased : "bones"] in \the [target]'s [affected.name] with \the [tool]!</span>")
+	user.visible_message(SPAN_WARNING("\The [user]'s hand slips, damaging the [affected.encased ? affected.encased : "bones"] in \the [target]'s [affected.name] with \the [tool]!") , \
+		SPAN_WARNING("Your hand slips, damaging the [affected.encased ? affected.encased : "bones"] in \the [target]'s [affected.name] with \the [tool]!"))
 	affected.fracture()
 	affected.take_external_damage(5, used_weapon = tool)
 
@@ -128,13 +128,13 @@
 /decl/surgery_step/bone/finish/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	var/bone = affected.encased ? "\the [target]'s damaged [affected.encased]" : "damaged bones in [target]'s [affected.name]"
-	user.visible_message("<span class='notice'>[user] has mended [bone] with \the [tool].</span>"  , \
-		"<span class='notice'>You have mended [bone] with \the [tool].</span>" )
+	user.visible_message(SPAN_NOTICE("[user] has mended [bone] with \the [tool].")  , \
+		SPAN_NOTICE("You have mended [bone] with \the [tool].") )
 	affected.status &= ~ORGAN_BROKEN
 	affected.stage = 0
 	affected.update_wounds()
 
 /decl/surgery_step/bone/finish/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='warning'>[user]'s hand slips, smearing [tool] in the incision in [target]'s [affected.name]!</span>" , \
-	"<span class='warning'>Your hand slips, smearing [tool] in the incision in [target]'s [affected.name]!</span>")
+	user.visible_message(SPAN_WARNING("[user]'s hand slips, smearing [tool] in the incision in [target]'s [affected.name]!") , \
+	SPAN_WARNING("Your hand slips, smearing [tool] in the incision in [target]'s [affected.name]!"))

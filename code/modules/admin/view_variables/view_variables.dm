@@ -45,8 +45,8 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 							<td><div align='center'>[D.get_view_variables_header()]</div></td>
 						</tr></table>
 						<div align='center'>
-							<b><font size='1'>[replacetext("[D.type]", "/", "/<wbr>")]</font></b>
-							[holder.marked_datum() == D ? "<br/><font size='1' color='red'><b>Marked Object</b></font>" : ""]
+							<b><span style='font-size: 1'>[replacetext("[D.type]", "/", "/<wbr>")]</span></b>
+							[holder.marked_datum() == D ? "<br/><span style='font-size: 1; color: red'><b>Marked Object</b></span>" : ""]
 						</div>
 					</td>
 					<td width='50%'>
@@ -72,11 +72,11 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 				</tr></table>
 			</div>
 			<hr/>
-			<font size='1'>
+			<span style='font-size: 1'>
 				<b>E</b> - Edit, tries to determine the variable type by itself.<br/>
 				<b>C</b> - Change, asks you for the var type first.<br/>
 				<b>M</b> - Mass modify: changes this variable for all objects of this type.<br/>
-			</font>
+			</span>
 			<hr/>
 			<table width='100%'><tr>
 				<td width='20%'>
@@ -192,7 +192,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 	else
 		vtext = "[value]"
 
-	return "<span class=value>[vtext]</span>[jointext(extra, null)]"
+	return "[SPAN_CLASS("value", "[vtext]")][jointext(extra, null)]"
 
 /proc/make_view_variables_var_entry(datum/D, varname, value, level=0)
 	var/ecm = null

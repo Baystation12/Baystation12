@@ -448,7 +448,7 @@
 
 /obj/item/sign/medipolma/attack_self(mob/user)
 	if(!claimant)
-		to_chat(user, "<span class='notice'>You fill in your name in the blanks with a permanent marker.</span>")
+		to_chat(user, SPAN_NOTICE("You fill in your name in the blanks with a permanent marker."))
 		claimant = user.real_name
 	..()
 

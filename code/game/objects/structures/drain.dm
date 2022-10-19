@@ -17,15 +17,15 @@
 		var/obj/item/weldingtool/WT = thing
 		if(WT.isOn())
 			welded = !welded
-			to_chat(user, "<span class='notice'>You weld \the [src] [welded ? "closed" : "open"].</span>")
+			to_chat(user, SPAN_NOTICE("You weld \the [src] [welded ? "closed" : "open"]."))
 		else
-			to_chat(user, "<span class='warning'>Turn \the [thing] on, first.</span>")
+			to_chat(user, SPAN_WARNING("Turn \the [thing] on, first."))
 		update_icon()
 		return
 	if(isWrench(thing))
 		new /obj/item/drain(src.loc)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		to_chat(user, "<span class='warning'>[user] unwrenches the [src].</span>")
+		to_chat(user, SPAN_WARNING("[user] unwrenches the [src]."))
 		qdel(src)
 		return
 	return ..()
@@ -55,7 +55,7 @@
 	if(isWrench(thing))
 		new constructed_type(src.loc)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		to_chat(user, "<span class='warning'>[user] wrenches the [src] down.</span>")
+		to_chat(user, SPAN_WARNING("[user] wrenches the [src] down."))
 		qdel(src)
 		return
 	return ..()

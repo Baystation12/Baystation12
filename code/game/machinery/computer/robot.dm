@@ -27,7 +27,7 @@
 
 /obj/machinery/computer/robotics/CanUseTopic(user)
 	if(!allowed(user))
-		to_chat(user, "<span class='warning'>Access Denied</span>")
+		to_chat(user, SPAN_WARNING("Access Denied"))
 		return STATUS_CLOSE
 	return ..()
 
@@ -39,11 +39,11 @@
 			return TOPIC_HANDLED
 
 		if(isAI(user) && (target.connected_ai != user))
-			to_chat(user, "<span class='warning'>Access Denied. This robot is not linked to you.</span>")
+			to_chat(user, SPAN_WARNING("Access Denied. This robot is not linked to you."))
 			return TOPIC_HANDLED
 
 		if(isrobot(user))
-			to_chat(user, "<span class='warning'>Access Denied.</span>")
+			to_chat(user, SPAN_WARNING("Access Denied."))
 			return TOPIC_HANDLED
 
 		var/choice = input("Really [target.lockcharge ? "unlock" : "lockdown"] [target.name] ?") in list ("Yes", "No")
@@ -56,11 +56,11 @@
 		if(target.SetLockdown(!target.lockcharge))
 			log_and_message_admins("[target.lockcharge ? "locked down" : "released"] [target.name]!")
 			if(target.lockcharge)
-				to_chat(target, "<span class='danger'>You have been locked down!</span>")
+				to_chat(target, SPAN_DANGER("You have been locked down!"))
 			else
-				to_chat(target, "<span class='notice'>Your lockdown has been lifted!</span>")
+				to_chat(target, SPAN_NOTICE("Your lockdown has been lifted!"))
 		else
-			to_chat(user, "<span class='warning'>ERROR: Lockdown attempt failed.</span>")
+			to_chat(user, SPAN_WARNING("ERROR: Lockdown attempt failed."))
 		. = TOPIC_REFRESH
 
 	// Remotely hacks the cyborg. Only antag AIs can do this and only to linked cyborgs.
@@ -71,7 +71,7 @@
 
 		// Antag AI checks
 		if(!istype(user, /mob/living/silicon/ai) || !(user.mind.special_role && user.mind.original == user))
-			to_chat(user, "<span class='warning'>Access Denied</span>")
+			to_chat(user, SPAN_WARNING("Access Denied"))
 			return TOPIC_HANDLED
 
 		if(target.emagged)
@@ -87,7 +87,7 @@
 
 		log_and_message_admins("emagged [target.name] using robotic console!")
 		target.emagged = TRUE
-		to_chat(target, "<span class='notice'>Failsafe protocols overriden. New tools available.</span>")
+		to_chat(target, SPAN_NOTICE("Failsafe protocols overriden. New tools available."))
 		. = TOPIC_REFRESH
 
 	else if (href_list["message"])
@@ -100,7 +100,7 @@
 			return
 
 		log_and_message_admins("sent message '[message]' to [target.name] using robotics control console!")
-		to_chat(target, "<span class='notice'>New remote message received using R-SSH protocol:</span>")
+		to_chat(target, SPAN_NOTICE("New remote message received using R-SSH protocol:"))
 		to_chat(target, message)
 		. = TOPIC_REFRESH
 

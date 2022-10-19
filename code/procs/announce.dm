@@ -55,18 +55,18 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 
 /datum/announcement/proc/FormMessage(message as text, message_title as text)
 	. = "<h2 class='alert'>[message_title]</h2>"
-	. += "<br><span class='alert'>[message]</span>"
+	. += "<br>[SPAN_CLASS("alert", "[message]")]"
 	if (announcer)
-		. += "<br><span class='alert'> -[html_encode(announcer)]</span>"
+		. += "<br>[SPAN_CLASS("alert", " -[html_encode(announcer)]")]"
 
 /datum/announcement/minor/FormMessage(message as text, message_title as text)
 	. = "<b>[message]</b>"
 
 /datum/announcement/priority/FormMessage(message as text, message_title as text)
 	. = "<h1 class='alert'>[message_title]</h1>"
-	. += "<br><span class='alert'>[message]</span>"
+	. += "<br>[SPAN_CLASS("alert", "[message]")]"
 	if(announcer)
-		. += "<br><span class='alert'> -[html_encode(announcer)]</span>"
+		. += "<br>[SPAN_CLASS("alert", " -[html_encode(announcer)]")]"
 	. += "<br>"
 
 /datum/announcement/priority/command/FormMessage(message as text, message_title as text)
@@ -74,12 +74,12 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	if (message_title)
 		. += "<br><h2 class='alert'>[message_title]</h2>"
 
-	. += "<br><span class='alert'>[message]</span><br>"
+	. += "<br>[SPAN_CLASS("alert", "[message]")]<br>"
 	. += "<br>"
 
 /datum/announcement/priority/security/FormMessage(message as text, message_title as text)
-	. = "<font size=4 color='red'>[message_title]</font>"
-	. += "<br><font color='red'>[message]</font>"
+	. = FONT_HUGE(SPAN_COLOR("red", message_title))
+	. += "<br>[SPAN_COLOR("red", message)]"
 
 
 /datum/announcement/proc/NewsCast(message, list/zlevels)

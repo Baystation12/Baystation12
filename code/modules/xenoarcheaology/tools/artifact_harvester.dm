@@ -24,11 +24,11 @@
 		if(!inserted_battery)
 			if(!user.unEquip(I, src))
 				return
-			to_chat(user, "<span class='notice'>You insert [I] into [src].</span>")
+			to_chat(user, SPAN_NOTICE("You insert [I] into [src]."))
 			src.inserted_battery = I
 			updateDialog()
 		else
-			to_chat(user, "<span class='warning'>There is already a battery in [src].</span>")
+			to_chat(user, SPAN_WARNING("There is already a battery in [src]."))
 	else
 		return..()
 
@@ -61,7 +61,7 @@
 			else
 				dat += "No battery inserted.<BR>"
 	else
-		dat += "<B><font color=red>Unable to locate analysis pad.</font><BR></b>"
+		dat += "<B>[SPAN_COLOR("red", "Unable to locate analysis pad.")]<BR></b>"
 	dat += "<A href='?src=\ref[src];close=1'>Close</a><BR>"
 	dat += "<HR>"
 	var/datum/browser/popup = new(user, "artifact_harvester", "Artifact Power Harvester", 450, 500)

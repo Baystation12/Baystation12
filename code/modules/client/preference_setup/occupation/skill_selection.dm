@@ -224,15 +224,15 @@
 	var/cost = skill.get_cost(effective_level)
 	var/button_label = "[level_name] ([cost])"
 	if(effective_level < min)
-		return "<th><span class='Unavailable'>[button_label]</span></th>"
+		return "<th>[SPAN_CLASS("Unavailable", "[button_label]")]</th>"
 	else if(effective_level < current_level)
 		return "<th>[add_link(skill, job, button_label, "'Current'", effective_level)]</th>"
 	else if(effective_level == current_level)
-		return "<th><span class='Current'>[button_label]</span></th>"
+		return "<th>[SPAN_CLASS("Current", "[button_label]")]</th>"
 	else if(effective_level <= max)
 		return "<th>[add_link(skill, job, button_label, "'Selectable'", effective_level)]</th>"
 	else
-		return "<th><span class='Toohigh'>[button_label]</span></th>"
+		return "<th>[SPAN_CLASS("Toohigh", "[button_label]")]</th>"
 
 /datum/category_item/player_setup_item/occupation/proc/add_link(decl/hierarchy/skill/skill, datum/job/job, text, style, value)
 	if(pref.check_skill_prerequisites(job, skill))

@@ -138,7 +138,7 @@
 
 /datum/species/vox/disfigure_msg(mob/living/carbon/human/H)
 	var/datum/gender/T = gender_datums[H.get_gender()]
-	return "<span class='danger'>[T.His] beak-segments are cracked and chipped! [T.He] [T.is] not even recognizable.</span>\n"
+	return "[SPAN_DANGER("[T.His] beak-segments are cracked and chipped! [T.He] [T.is] not even recognizable.")]\n"
 
 /datum/species/vox/skills_from_age(age)
 	. = 8

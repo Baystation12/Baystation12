@@ -337,7 +337,7 @@
 	pestlevel = 0
 	sampled = 0
 	update_icon()
-	visible_message("<span class='notice'>[src] has been overtaken by [seed.display_name].</span>")
+	visible_message(SPAN_NOTICE("[src] has been overtaken by [seed.display_name]."))
 
 	return
 
@@ -408,7 +408,7 @@
 	weedlevel = 0
 
 	update_icon()
-	visible_message("<span class='danger'>The </span><span class='notice'>[previous_plant]</span><span class='danger'> has suddenly mutated into \a </span><span class='notice'>[seed.display_name]!</span>")
+	visible_message(SPAN_DANGER("The [previous_plant] has suddenly mutated into \a [seed.display_name]!"))
 
 	return
 
@@ -474,7 +474,7 @@
 	else if (istype(O, /obj/item/material/minihoe))  // The minihoe
 
 		if(weedlevel > 0)
-			user.visible_message("<span class='notice'>[user] starts uprooting the weeds.</span>", "<span class='notice'>You remove the weeds from the [src].</span>")
+			user.visible_message(SPAN_NOTICE("[user] starts uprooting the weeds."), SPAN_NOTICE("You remove the weeds from the [src]."))
 			weedlevel = 0
 			if(seed)
 				var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
@@ -482,7 +482,7 @@
 					health -= rand(40,60)
 					check_health(1)
 		else
-			to_chat(user, "<span class='notice'>This plot is completely devoid of weeds. It doesn't need uprooting.</span>")
+			to_chat(user, SPAN_NOTICE("This plot is completely devoid of weeds. It doesn't need uprooting."))
 
 	else if (istype(O, /obj/item/storage/plants))
 
@@ -521,7 +521,7 @@
 
 	else if(O.force && seed)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		user.visible_message("<span class='danger'>\The [seed.display_name] has been attacked by [user] with \the [O]!</span>")
+		user.visible_message(SPAN_DANGER("\The [seed.display_name] has been attacked by [user] with \the [O]!"))
 		playsound(get_turf(src), O.hitsound, 100, 1)
 		if(!dead)
 			health -= O.force
@@ -532,7 +532,7 @@
 /obj/machinery/portable_atmospherics/hydroponics/proc/plant_seed(mob/user, obj/item/seeds/S)
 
 	if(seed)
-		to_chat(user, "<span class='warning'>\The [src] already has seeds in it!</span>")
+		to_chat(user, SPAN_WARNING("\The [src] already has seeds in it!"))
 		return
 
 	if(!S.seed)
@@ -575,18 +575,18 @@
 		to_chat(user, "\The [src] is empty.")
 		return
 
-	to_chat(user, "<span class='notice'>\An [seed.display_name] is growing here.</span>")
+	to_chat(user, SPAN_NOTICE("\An [seed.display_name] is growing here."))
 
 	if(user.skill_check(SKILL_BOTANY, SKILL_BASIC))
 		if(weedlevel >= 5)
-			to_chat(user, "\The [src] is <span class='danger'>infested with weeds</span>!")
+			to_chat(user, "\The [src] is [SPAN_DANGER("infested with weeds")]!")
 		if(pestlevel >= 5)
-			to_chat(user, "\The [src] is <span class='danger'>infested with tiny worms</span>!")
+			to_chat(user, "\The [src] is [SPAN_DANGER("infested with tiny worms")]!")
 
 		if(dead)
-			to_chat(user, "<span class='danger'>The [seed.display_name] is dead.</span>")
+			to_chat(user, SPAN_DANGER("The [seed.display_name] is dead."))
 		else if(health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
-			to_chat(user, "The [seed.display_name] looks <span class='danger'>unhealthy</span>.")
+			to_chat(user, "The [seed.display_name] looks [SPAN_DANGER("unhealthy")].")
 
 	if(mechanical && Adjacent(user))
 		var/turf/T = loc

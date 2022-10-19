@@ -57,4 +57,4 @@
 			else
 				colour = COLOR_BLACK
 				color_description = "black ink"
-		to_chat(usr, "<span class='info'>You select the [lowertext(selected_type)] ink container.</span>")
+		to_chat(usr, SPAN_INFO("You select the [lowertext(selected_type)] ink container."))

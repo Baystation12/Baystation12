@@ -12,9 +12,9 @@
 		if(!M.client)
 			continue
 		if(M.client.holder && M.client.get_preference_value(/datum/client_preference/staff/show_chat_prayers) == GLOB.PREF_SHOW)
-			receive_communication(communicator, M, "\[<A HREF='?_src_=holder;adminspawncookie=\ref[communicator]'>SC</a>\] \[<A HREF='?_src_=holder;narrateto=\ref[communicator]'>DN</a>\]<span class='notice'>[icon2html(cross, M)] <b><font color=purple>PRAY: </font>[key_name(communicator, 1)]: </b>[message]</span>")
+			receive_communication(communicator, M, "\[<A HREF='?_src_=holder;adminspawncookie=\ref[communicator]'>SC</a>\] \[<A HREF='?_src_=holder;narrateto=\ref[communicator]'>DN</a>\][SPAN_NOTICE("[icon2html(cross, M)] <b>[SPAN_COLOR("purple", "PRAY: ")][key_name(communicator, 1)]: </b>[message]")]")
 		else if(communicator == M) //Give it to ourselves
-			receive_communication(communicator, M, "<span class='notice'>[icon2html(cross, M)] <b>You send the prayer, \"[message]\" out into the heavens.</b></span>")
+			receive_communication(communicator, M, SPAN_NOTICE("[icon2html(cross, M)] <b>You send the prayer, \"[message]\" out into the heavens.</b>"))
 
 /decl/communication_channel/pray/receive_communication(mob/communicator, mob/receiver, message)
 	..()

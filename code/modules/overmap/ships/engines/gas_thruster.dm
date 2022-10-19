@@ -111,13 +111,13 @@
 	. = list()
 	.+= "Location: [get_area(src)]."
 	if(!is_powered())
-		.+= "<span class='average'>Insufficient power to operate.</span>"
+		.+= SPAN_CLASS("average", "Insufficient power to operate.")
 	if(!check_fuel())
-		.+= "<span class='average'>Insufficient fuel for a burn.</span>"
+		.+= SPAN_CLASS("average", "Insufficient fuel for a burn.")
 	if(MACHINE_IS_BROKEN(src))
-		.+= "<span class='average'>Inoperable engine configuration.</span>"
+		.+= SPAN_CLASS("average", "Inoperable engine configuration.")
 	if(blockage)
-		.+= "<span class='average'>Obstruction of airflow detected.</span>"
+		.+= SPAN_CLASS("average", "Obstruction of airflow detected.")
 
 	.+= "Propellant total mass: [round(air_contents.get_mass(),0.01)] kg."
 	.+= "Propellant used per burn: [round(air_contents.specific_mass() * moles_per_burn * thrust_limit,0.01)] kg."
@@ -163,7 +163,7 @@
 	if(!is_on())
 		return 0
 	if(!check_fuel() || (0 < use_power_oneoff(charge_per_burn)) || check_blockage())
-		audible_message("<span class='warning'>[src] coughs once and goes silent!</span>")
+		audible_message(SPAN_WARNING("[src] coughs once and goes silent!"))
 		update_use_power(POWER_USE_OFF)
 		return 0
 

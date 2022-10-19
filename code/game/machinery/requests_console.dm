@@ -215,7 +215,7 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 		if(inoperable() || GET_FLAGS(stat, MACHINE_STAT_MAINT)) return
 		if(screen == RCS_MESSAUTH)
 			var/obj/item/card/id/T = O
-			msgVerified = text("<font color='green'><b>Verified by [T.registered_name] ([T.assignment])</b></font>")
+			msgVerified = text(SPAN_COLOR("green", "<b>Verified by [T.registered_name] ([T.assignment])</b>"))
 			SSnano.update_uis(src)
 		if(screen == RCS_ANNOUNCE)
 			var/obj/item/card/id/ID = O
@@ -224,13 +224,13 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 				announcement.announcer = ID.assignment ? "[ID.assignment] [ID.registered_name]" : ID.registered_name
 			else
 				reset_message()
-				to_chat(user, "<span class='warning'>You are not authorized to send announcements.</span>")
+				to_chat(user, SPAN_WARNING("You are not authorized to send announcements."))
 			SSnano.update_uis(src)
 	if (istype(O, /obj/item/stamp))
 		if(inoperable() || GET_FLAGS(stat, MACHINE_STAT_MAINT)) return
 		if(screen == RCS_MESSAUTH)
 			var/obj/item/stamp/T = O
-			msgStamped = text("<font color='blue'><b>Stamped with the [T.name]</b></font>")
+			msgStamped = text(SPAN_COLOR("blue", "<b>Stamped with the [T.name]</b>"))
 			SSnano.update_uis(src)
 	return
 

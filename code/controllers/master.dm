@@ -153,7 +153,7 @@ var/global/datum/controller/master/Master = new
 				msg = "The [BadBoy.name] subsystem seems to be destabilizing the MC and will be offlined."
 				BadBoy.flags |= SS_NO_FIRE
 		if(msg)
-			to_chat(GLOB.admins, "<span class='boldannounce'>[msg]</span>")
+			to_chat(GLOB.admins, SPAN_CLASS("boldannounce", "[msg]"))
 			log_world(msg)
 
 	if (istype(Master.subsystems))
@@ -164,7 +164,7 @@ var/global/datum/controller/master/Master = new
 		total_run_times = Master.total_run_times
 		StartProcessing(10)
 	else
-		to_chat(world, "<span class='boldannounce'>The Master Controller is having some issues, we will need to re-initialize EVERYTHING</span>")
+		to_chat(world, SPAN_CLASS("boldannounce", "The Master Controller is having some issues, we will need to re-initialize EVERYTHING"))
 		Initialize(20, TRUE)
 
 

@@ -146,13 +146,13 @@
 			return
 
 		if(WT.remove_fuel(0,user))
-			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
+			to_chat(user, SPAN_NOTICE("You start repairing the damage to [src]."))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(do_after(user, max(5, damage / 5), src, DO_REPAIR_CONSTRUCT) && WT && WT.isOn())
-				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
+				to_chat(user, SPAN_NOTICE("You finish repairing the damage to [src]."))
 				take_damage(-damage)
 		else
-			to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
+			to_chat(user, SPAN_NOTICE("You need more welding fuel to complete this task."))
 			return
 		return
 	..()
@@ -176,9 +176,9 @@
 	if(health <= 0)
 		to_chat(user, "\The [src] is wrecked.")
 	else if(health < max_health * 0.25)
-		to_chat(user, "<span class='danger'>\The [src] looks like it's about to break!</span>")
+		to_chat(user, SPAN_DANGER("\The [src] looks like it's about to break!"))
 	else if(health < max_health * 0.5)
-		to_chat(user, "<span class='danger'>\The [src] looks seriously damaged!</span>")
+		to_chat(user, SPAN_DANGER("\The [src] looks seriously damaged!"))
 	else if(health < max_health * 0.75)
 		to_chat(user, "\The [src] shows signs of damage!")
 
@@ -199,7 +199,7 @@
 		if(!in_vacuum())
 			toggle()
 		if(heat > critical_heat)
-			src.visible_message("<span class='danger'>\The [src] violently spews out sparks!</span>")
+			src.visible_message(SPAN_DANGER("\The [src] violently spews out sparks!"))
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()

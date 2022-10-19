@@ -28,8 +28,8 @@
 	set category = "Object"
 
 	chamber_offset = 0
-	visible_message("<span class='warning'>\The [usr] spins the cylinder of \the [src]!</span>", \
-	"<span class='notice'>You hear something metallic spin and click.</span>")
+	visible_message(SPAN_WARNING("\The [usr] spins the cylinder of \the [src]!"), \
+	SPAN_NOTICE("You hear something metallic spin and click."))
 	playsound(src.loc, 'sound/weapons/revolver_spin.ogg', 100, 1)
 	loaded = shuffle(loaded)
 	if(rand(1,max_shells) > loaded.len)
@@ -80,7 +80,7 @@
 /obj/item/gun/projectile/revolver/capgun/attackby(obj/item/wirecutters/W, mob/user)
 	if(!istype(W) || icon_state == "revolver")
 		return ..()
-	to_chat(user, "<span class='notice'>You snip off the toy markings off the [src].</span>")
+	to_chat(user, SPAN_NOTICE("You snip off the toy markings off the [src]."))
 	name = "revolver"
 	icon_state = "revolver"
 	desc += " Someone snipped off the barrel's toy mark. How dastardly."

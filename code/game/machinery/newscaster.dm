@@ -227,7 +227,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 		switch(screen)
 			if(0)
 				dat += "Welcome to Newscasting Unit #[src.unit_no].<BR> Interface & News networks Operational."
-				dat += "<BR><FONT SIZE=1>Property of Ward-Takahashi GMB</FONT>"
+				dat += "<BR>[FONT_SMALL("Property of Ward-Takahashi GMB")]"
 				if(connected_group.wanted_issue)
 					dat+= "<HR><A href='?src=\ref[src];view_wanted=1'>Read Wanted Issue</A>"
 				dat+= "<HR><BR><A href='?src=\ref[src];create_channel=1'>Create Feed Channel</A>"
@@ -245,7 +245,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 					dat+="<BR><A href='?src=\ref[src];menu_wanted=1'>[(wanted_already) ? ("Manage") : ("Publish")] \"Wanted\" Issue</A>"
 					dat+="<BR><A href='?src=\ref[src];menu_censor_story=1'>Censor Feed Stories</A>"
 					dat+="<BR><A href='?src=\ref[src];menu_censor_channel=1'>Mark Feed Channel with [GLOB.using_map.company_name] D-Notice</A>"
-				dat+="<BR><HR>The newscaster recognises you as: <FONT COLOR='green'>[src.scanned_user]</FONT>"
+				dat+="<BR><HR>The newscaster recognises you as: [SPAN_COLOR("green", src.scanned_user)]"
 			if(1)
 				dat+= "Local Feed Channels<HR>"
 				if( !length(connected_group.network_channels) )
@@ -253,21 +253,21 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 				else
 					for(var/datum/feed_channel/CHANNEL in connected_group.network_channels)
 						if(CHANNEL.is_admin_channel)
-							dat+="<B><FONT style='BACKGROUND-COLOR: LightGreen '><A href='?src=\ref[src];show_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A></FONT></B><BR>"
+							dat+="<B>[SPAN_STYLE("background-color: LightGreen", "<A href='?src=\ref[src];show_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A>")]</B><BR>"
 						else
-							dat+="<B><A href='?src=\ref[src];show_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? ("<FONT COLOR='red'>***</FONT>") : null ]<BR></B>"
+							dat+="<B><A href='?src=\ref[src];show_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (SPAN_COLOR("red", "***")) : null ]<BR></B>"
 				dat+="<BR><HR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Back</A>"
 			if(2)
 				dat+="Creating new Feed Channel..."
 				dat+="<HR><B><A href='?src=\ref[src];set_channel_name=1'>Channel Name</A>:</B> [src.channel_name]<BR>"
-				dat+="<B>Channel Author:</B> <FONT COLOR='green'>[src.scanned_user]</FONT><BR>"
+				dat+="<B>Channel Author:</B> [SPAN_COLOR("green", src.scanned_user)]<BR>"
 				dat+="<B><A href='?src=\ref[src];set_channel_lock=1'>Will Accept Public Feeds</A>:</B> [(src.c_locked) ? ("NO") : ("YES")]<BR><BR>"
 				dat+="<BR><A href='?src=\ref[src];submit_new_channel=1'>Submit</A><BR><BR><A href='?src=\ref[src];setScreen=[0]'>Cancel</A><BR>"
 			if(3)
 				dat+="Creating new Feed Message..."
 				dat+="<HR><B><A href='?src=\ref[src];set_channel_receiving=1'>Receiving Channel</A>:</B> [src.channel_name]<BR>" //MARK
-				dat+="<B>Message Author:</B> <FONT COLOR='green'>[src.scanned_user]</FONT><BR>"
+				dat+="<B>Message Author:</B> [SPAN_COLOR("green", src.scanned_user)]<BR>"
 				dat+="<B><A href='?src=\ref[src];set_new_message=1'>Message Body</A>:</B> [src.msg] <BR>"
 				dat+="<B>Photo</B>: "
 				if(photo_data && photo_data.photo)
@@ -284,17 +284,17 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 				dat+="Feed Channel [src.channel_name] created successfully.<BR><BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Return</A><BR>"
 			if(6)
-				dat+="<B><FONT COLOR='maroon'>ERROR: Could not submit Feed story to Network.</B></FONT><HR><BR>"
+				dat+="[SPAN_COLOR("maroon", "<B>ERROR: Could not submit Feed story to Network.</B>")]<HR><BR>"
 				if(src.channel_name=="")
-					dat+="<FONT COLOR='maroon'>Invalid receiving channel name.</FONT><BR>"
+					dat+="[SPAN_COLOR("maroon", "Invalid receiving channel name.")]<BR>"
 				if(src.scanned_user=="Unknown")
-					dat+="<FONT COLOR='maroon'>Channel author unverified.</FONT><BR>"
+					dat+="[SPAN_COLOR("maroon", "Channel author unverified.")]<BR>"
 				if(src.msg == "" || src.msg == "\[REDACTED\]")
-					dat+="<FONT COLOR='maroon'>Invalid message body.</FONT><BR>"
+					dat+="[SPAN_COLOR("maroon", "Invalid message body.")]<BR>"
 
 				dat+="<BR><A href='?src=\ref[src];setScreen=[3]'>Return</A><BR>"
 			if(7)
-				dat+="<B><FONT COLOR='maroon'>ERROR: Could not submit Feed Channel to Network.</B></FONT><HR><BR>"
+				dat+="[SPAN_COLOR("maroon", "<B>ERROR: Could not submit Feed Channel to Network.</B>")]<HR><BR>"
 				var/list/existing_authors = list()
 				for(var/datum/feed_channel/FC in connected_group.network_channels)
 					if(FC.author == "\[REDACTED\]")
@@ -302,18 +302,18 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 					else
 						existing_authors += FC.author
 				if(src.scanned_user in existing_authors)
-					dat+="<FONT COLOR='maroon'>There already exists a Feed channel under your name.</FONT><BR>"
+					dat+="[SPAN_COLOR("maroon", "There already exists a Feed channel under your name.")]<BR>"
 				if(src.channel_name=="" || src.channel_name == "\[REDACTED\]")
-					dat+="<FONT COLOR='maroon'>Invalid channel name.</FONT><BR>"
+					dat+="[SPAN_COLOR("maroon", "Invalid channel name.")]<BR>"
 				var/check = 0
 				for(var/datum/feed_channel/FC in connected_group.network_channels)
 					if(FC.channel_name == src.channel_name)
 						check = 1
 						break
 				if(check)
-					dat+="<FONT COLOR='maroon'>Channel name already in use.</FONT><BR>"
+					dat+="[SPAN_COLOR("maroon", "Channel name already in use.")]<BR>"
 				if(src.scanned_user=="Unknown")
-					dat+="<FONT COLOR='maroon'>Channel author unverified.</FONT><BR>"
+					dat+="[SPAN_COLOR("maroon", "Channel author unverified.")]<BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[2]'>Return</A><BR>"
 			if(8)
 				var/total_num=length(connected_group.network_channels)
@@ -329,10 +329,10 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 				dat+="<BR><BR><A href='?src=\ref[src];print_paper=[0]'>Print Paper</A>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Cancel</A>"
 			if(9)
-				dat+="<B>[src.viewing_channel.channel_name]: </B><FONT SIZE=1>\[created by: <FONT COLOR='maroon'>[src.viewing_channel.author]</FONT>\] \[views: <FONT COLOR='maroon'>[++src.viewing_channel.views]</FONT>\]</FONT><HR>"
+				dat+="<B>[src.viewing_channel.channel_name]: </B>[FONT_SMALL("\[created by: [SPAN_COLOR("maroon", src.viewing_channel.author)]\] \[views: [SPAN_COLOR("maroon", ++src.viewing_channel.views)]\]")]<HR>"
 				if(src.viewing_channel.censored)
-					dat+="<FONT COLOR='red'><B>ATTENTION: </B></FONT>This channel has been deemed as threatening to the welfare of the [station_name()], and marked with a [GLOB.using_map.company_name] D-Notice.<BR>"
-					dat+="No further feed story additions are allowed while the D-Notice is in effect.</FONT><BR><BR>"
+					dat+=SPAN_COLOR("red", "<B>ATTENTION: </B>This channel has been deemed as threatening to the welfare of the [station_name()], and marked with a [GLOB.using_map.company_name] D-Notice.<BR>\
+						No further feed story additions are allowed while the D-Notice is in effect.<BR><BR>")
 				else
 					if( !length(viewing_channel.messages) )
 						dat+="<I>No feed messages found in channel...</I><BR>"
@@ -346,58 +346,58 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 								send_asset(usr.client, resourc_name)
 								dat+="<img src='[resourc_name]' width = '180'><BR>"
 								if(MESSAGE.caption)
-									dat+="<FONT SIZE=1><B>[MESSAGE.caption]</B></FONT><BR>"
+									dat+="[FONT_SMALL("<B>[MESSAGE.caption]</B>")]<BR>"
 								dat+="<BR>"
-							dat+="<FONT SIZE=1>\[Story by <FONT COLOR='maroon'>[MESSAGE.author] - [MESSAGE.time_stamp]</FONT>\]</FONT><BR>"
+							dat+="[FONT_SMALL("\[Story by [SPAN_COLOR("maroon", "[MESSAGE.author] - [MESSAGE.time_stamp]")]\]")]<BR>"
 				dat+="<BR><HR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[1]'>Back</A>"
 			if(10)
 				dat+="<B>[GLOB.using_map.company_name] Feed Censorship Tool</B><BR>"
-				dat+="<FONT SIZE=1>NOTE: Due to the nature of news Feeds, total deletion of a Feed Story is not possible.<BR>"
-				dat+="Keep in mind that users attempting to view a censored feed will instead see the \[REDACTED\] tag above it.</FONT>"
+				dat+=FONT_SMALL("NOTE: Due to the nature of news Feeds, total deletion of a Feed Story is not possible.<BR>\
+					Keep in mind that users attempting to view a censored feed will instead see the \[REDACTED\] tag above it.")
 				dat+="<HR>Select Feed channel to get Stories from:<BR>"
 				if(!length(connected_group.network_channels))
 					dat+="<I>No feed channels found active...</I><BR>"
 				else
 					for(var/datum/feed_channel/CHANNEL in connected_group.network_channels)
-						dat+="<A href='?src=\ref[src];pick_censor_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? ("<FONT COLOR='red'>***</FONT>") : null ]<BR>"
+						dat+="<A href='?src=\ref[src];pick_censor_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (SPAN_COLOR("red", "***")) : null ]<BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Cancel</A>"
 			if(11)
 				dat+="<B>[GLOB.using_map.company_name] D-Notice Handler</B><HR>"
-				dat+="<FONT SIZE=1>A D-Notice is to be bestowed upon the channel if the handling Authority deems it as harmful for the [station_name()]'s"
-				dat+="morale, integrity or disciplinary behaviour. A D-Notice will render a channel unable to be updated by anyone, without deleting any feed"
-				dat+="stories it might contain at the time. You can lift a D-Notice if you have the required access at any time.</FONT><HR>"
+				dat+="[FONT_SMALL("A D-Notice is to be bestowed upon the channel if the handling Authority deems it as harmful for the [station_name()]'s \
+					morale, integrity or disciplinary behaviour. A D-Notice will render a channel unable to be updated by anyone, without deleting any feed \
+					stories it might contain at the time. You can lift a D-Notice if you have the required access at any time.")]<HR>"
 				if(!length(connected_group.network_channels))
 					dat+="<I>No feed channels found active...</I><BR>"
 				else
 					for(var/datum/feed_channel/CHANNEL in connected_group.network_channels)
-						dat+="<A href='?src=\ref[src];pick_d_notice=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? ("<FONT COLOR='red'>***</FONT>") : null ]<BR>"
+						dat+="<A href='?src=\ref[src];pick_d_notice=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (SPAN_COLOR("red", "***")) : null ]<BR>"
 
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Back</A>"
 			if(12)
-				dat+="<B>[src.viewing_channel.channel_name]: </B><FONT SIZE=1>\[ created by: <FONT COLOR='maroon'>[src.viewing_channel.author]</FONT> \]</FONT><BR>"
-				dat+="<FONT SIZE=2><A href='?src=\ref[src];censor_channel_author=\ref[src.viewing_channel]'>[(src.viewing_channel.author=="\[REDACTED\]") ? ("Undo Author censorship") : ("Censor channel Author")]</A></FONT><HR>"
+				dat+="<B>[src.viewing_channel.channel_name]: </B>[FONT_SMALL("\[ created by: [SPAN_COLOR("maroon", src.viewing_channel.author)] \]")]<BR>"
+				dat+="[FONT_NORMAL("<A href='?src=\ref[src];censor_channel_author=\ref[src.viewing_channel]'>[(src.viewing_channel.author=="\[REDACTED\]") ? ("Undo Author censorship") : ("Censor channel Author")]</A>")]<HR>"
 
 
 				if( !length(viewing_channel.messages) )
 					dat+="<I>No feed messages found in channel...</I><BR>"
 				else
 					for(var/datum/feed_message/MESSAGE in src.viewing_channel.messages)
-						dat+="-[MESSAGE.body] <BR><FONT SIZE=1>\[[MESSAGE.message_type] by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR>"
-						dat+="<FONT SIZE=2><A href='?src=\ref[src];censor_channel_story_body=\ref[MESSAGE]'>[(MESSAGE.body == "\[REDACTED\]") ? ("Undo story censorship") : ("Censor story")]</A>  -  <A href='?src=\ref[src];censor_channel_story_author=\ref[MESSAGE]'>[(MESSAGE.author == "\[REDACTED\]") ? ("Undo Author Censorship") : ("Censor message Author")]</A></FONT><BR>"
+						dat+="-[MESSAGE.body] <BR>[FONT_SMALL("\[[MESSAGE.message_type] by [SPAN_COLOR("maroon", MESSAGE.author)]\]")]<BR>"
+						dat+="[FONT_NORMAL("<A href='?src=\ref[src];censor_channel_story_body=\ref[MESSAGE]'>[(MESSAGE.body == "\[REDACTED\]") ? ("Undo story censorship") : ("Censor story")]</A>  -  <A href='?src=\ref[src];censor_channel_story_author=\ref[MESSAGE]'>[(MESSAGE.author == "\[REDACTED\]") ? ("Undo Author Censorship") : ("Censor message Author")]</A>")]<BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[10]'>Back</A>"
 			if(13)
-				dat+="<B>[src.viewing_channel.channel_name]: </B><FONT SIZE=1>\[ created by: <FONT COLOR='maroon'>[src.viewing_channel.author]</FONT> \]</FONT><BR>"
+				dat+="<B>[src.viewing_channel.channel_name]: </B>[FONT_SMALL("\[ created by: [SPAN_COLOR("maroon", src.viewing_channel.author)] \]")]<BR>"
 				dat+="Channel messages listed below. If you deem them dangerous to the [station_name()], you can <A href='?src=\ref[src];toggle_d_notice=\ref[src.viewing_channel]'>Bestow a D-Notice upon the channel</A>.<HR>"
 				if(src.viewing_channel.censored)
-					dat+="<FONT COLOR='red'><B>ATTENTION: </B></FONT>This channel has been deemed as threatening to the welfare of the [station_name()], and marked with a [GLOB.using_map.company_name] D-Notice.<BR>"
+					dat+="[SPAN_COLOR("red", "<B>ATTENTION: </B>")]This channel has been deemed as threatening to the welfare of the [station_name()], and marked with a [GLOB.using_map.company_name] D-Notice.<BR>"
 					dat+="No further feed story additions are allowed while the D-Notice is in effect.<BR><BR>"
 				else
 					if( !length(viewing_channel.messages) )
 						dat+="<I>No feed messages found in channel...</I><BR>"
 					else
 						for(var/datum/feed_message/MESSAGE in src.viewing_channel.messages)
-							dat+="-[MESSAGE.body] <BR><FONT SIZE=1>\[[MESSAGE.message_type] by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR>"
+							dat+="-[MESSAGE.body] <BR>[FONT_SMALL("\[[MESSAGE.message_type] by [SPAN_COLOR("maroon", MESSAGE.author)]\]")]<BR>"
 
 				dat+="<BR><A href='?src=\ref[src];setScreen=[11]'>Back</A>"
 			if(14)
@@ -409,7 +409,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 					end_param = 2
 
 				if(wanted_already)
-					dat+="<FONT SIZE=2><BR><I>A wanted issue is already in Feed Circulation. You can edit or cancel it below.</FONT></I>"
+					dat+="<BR>[FONT_NORMAL("<I>A wanted issue is already in Feed Circulation. You can edit or cancel it below.</I>")]"
 				dat+="<HR>"
 				dat+="<A href='?src=\ref[src];set_wanted_name=1'>Criminal Name</A>: [src.channel_name] <BR>"
 				dat+="<A href='?src=\ref[src];set_wanted_desc=1'>Description</A>: [src.msg] <BR>"
@@ -421,30 +421,30 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 				else
 					dat+="<A href='?src=\ref[src];set_attachment=1'>Attach Photo</A><BR>"
 				if(wanted_already)
-					dat+="<B>Wanted Issue created by:</B><FONT COLOR='green'> [connected_group.wanted_issue.backup_author]</FONT><BR>"
+					dat+="<B>Wanted Issue created by:</B> [SPAN_COLOR("green", connected_group.wanted_issue.backup_author)]<BR>"
 				else
-					dat+="<B>Wanted Issue will be created under prosecutor:</B><FONT COLOR='green'> [src.scanned_user]</FONT><BR>"
+					dat+="<B>Wanted Issue will be created under prosecutor:</B> [SPAN_COLOR("green", src.scanned_user)]<BR>"
 				dat+="<BR><A href='?src=\ref[src];submit_wanted=[end_param]'>[(wanted_already) ? ("Edit Issue") : ("Submit")]</A>"
 				if(wanted_already)
 					dat+="<BR><A href='?src=\ref[src];cancel_wanted=1'>Take down Issue</A>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Cancel</A>"
 			if(15)
-				dat+="<FONT COLOR='green'>Wanted issue for [src.channel_name] is now in Network Circulation.</FONT><BR><BR>"
+				dat+="[SPAN_COLOR("green", "Wanted issue for [src.channel_name] is now in Network Circulation.")]<BR><BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Return</A><BR>"
 			if(16)
-				dat+="<B><FONT COLOR='maroon'>ERROR: Wanted Issue rejected by Network.</B></FONT><HR><BR>"
+				dat+="[SPAN_COLOR("maroon", "<B>ERROR: Wanted Issue rejected by Network.</B>")]<HR><BR>"
 				if(src.channel_name=="" || src.channel_name == "\[REDACTED\]")
-					dat+="<FONT COLOR='maroon'>Invalid name for person wanted.</FONT><BR>"
+					dat+="[SPAN_COLOR("maroon", "Invalid name for person wanted.")]<BR>"
 				if(src.scanned_user=="Unknown")
-					dat+="<FONT COLOR='maroon'>Issue author unverified.</FONT><BR>"
+					dat+="[SPAN_COLOR("maroon", "Issue author unverified.")]<BR>"
 				if(src.msg == "" || src.msg == "\[REDACTED\]")
-					dat+="<FONT COLOR='maroon'>Invalid description.</FONT><BR>"
+					dat+="[SPAN_COLOR("maroon", "Invalid description.")]<BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Return</A><BR>"
 			if(17)
 				dat+="<B>Wanted Issue successfully deleted from Circulation</B><BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Return</A><BR>"
 			if(18)
-				dat+="<B><FONT COLOR ='maroon'>-- STATIONWIDE WANTED ISSUE --</B></FONT><BR><FONT SIZE=2>\[Submitted by: <FONT COLOR='green'>[connected_group.wanted_issue.backup_author]</FONT>\]</FONT><HR>"
+				dat+="[SPAN_COLOR("maroon", "<B>-- STATIONWIDE WANTED ISSUE --</B>")]<BR>[FONT_NORMAL("\[Submitted by: [SPAN_COLOR("green", connected_group.wanted_issue.backup_author)]\]")]<HR>"
 				dat+="<B>Criminal</B>: [connected_group.wanted_issue.author]<BR>"
 				dat+="<B>Description</B>: [connected_group.wanted_issue.body]<BR>"
 				dat+="<B>Photo</B>: "
@@ -455,13 +455,13 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 					dat+="None"
 				dat+="<BR><BR><A href='?src=\ref[src];setScreen=[0]'>Back</A><BR>"
 			if(19)
-				dat+="<FONT COLOR='green'>Wanted issue for [src.channel_name] successfully edited.</FONT><BR><BR>"
+				dat+="[SPAN_COLOR("green", "Wanted issue for [src.channel_name] successfully edited.")]<BR><BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Return</A><BR>"
 			if(20)
-				dat+="<FONT COLOR='green'>Printing successful. Please receive your newspaper from the bottom of the machine.</FONT><BR><BR>"
+				dat+="[SPAN_COLOR("green", "Printing successful. Please receive your newspaper from the bottom of the machine.")]<BR><BR>"
 				dat+="<A href='?src=\ref[src];setScreen=[0]'>Return</A>"
 			if(21)
-				dat+="<FONT COLOR='maroon'>Unable to print newspaper. Insufficient paper. Please notify maintenance personnel to refill machine storage.</FONT><BR><BR>"
+				dat+="[SPAN_COLOR("maroon", "Unable to print newspaper. Insufficient paper. Please notify maintenance personnel to refill machine storage.")]<BR><BR>"
 				dat+="<A href='?src=\ref[src];setScreen=[0]'>Return</A>"
 			else
 				dat+="I'm sorry to break your immersion. This shit's bugged. Report this bug to Agouri, polyxenitopalidou@gmail.com"
@@ -801,11 +801,11 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 		src.pages = 0
 		switch(screen)
 			if(0) //Cover
-				dat+="<DIV ALIGN='center'><B><FONT SIZE=6>The Griffon</FONT></B></div>"
-				dat+="<DIV ALIGN='center'><FONT SIZE=2>[GLOB.using_map.company_name]-standard newspaper, for use on [GLOB.using_map.company_name] Space Facilities</FONT></div><HR>"
+				dat+="<DIV ALIGN='center'><B>[SPAN_SIZE(6, "The Griffon")]</B></div>"
+				dat+="<DIV ALIGN='center'>[FONT_NORMAL("[GLOB.using_map.company_name]-standard newspaper, for use on [GLOB.using_map.company_name] Space Facilities")]</div><HR>"
 				if(!length(news_content))
 					if(src.important_message)
-						dat+="Contents:<BR><ul><B><FONT COLOR='red'>**</FONT>Important Security Announcement<FONT COLOR='red'>**</FONT></B> <FONT SIZE=2>\[page [src.pages+2]\]</FONT><BR></ul>"
+						dat+="Contents:<BR><ul><B>[SPAN_COLOR("red", "**")]Important Security Announcement[SPAN_COLOR("red", "**")]</B> [FONT_NORMAL("\[page [src.pages+2]\]")]<BR></ul>"
 					else
 						dat+="<I>Other than the title, the rest of the newspaper is unprinted...</I>"
 				else
@@ -813,11 +813,11 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 					for(var/datum/feed_channel/NP in src.news_content)
 						src.pages++
 					if(src.important_message)
-						dat+="<B><FONT COLOR='red'>**</FONT>Important Security Announcement<FONT COLOR='red'>**</FONT></B> <FONT SIZE=2>\[page [src.pages+2]\]</FONT><BR>"
+						dat+="<B>[SPAN_COLOR("red", "**")]Important Security Announcement[SPAN_COLOR("red", "**")]</B> [FONT_NORMAL("\[page [src.pages+2]\]")]<BR>"
 					var/temp_page=0
 					for(var/datum/feed_channel/NP in src.news_content)
 						temp_page++
-						dat+="<B>[NP.channel_name]</B> <FONT SIZE=2>\[page [temp_page+1]\]</FONT><BR>"
+						dat+="<B>[NP.channel_name]</B> [FONT_NORMAL("\[page [temp_page+1]\]")]<BR>"
 					dat+="</ul>"
 				if(scribble_page==curr_page)
 					dat+="<BR><I>There is a small scribble near the end of this page... It reads: \"[src.scribble]\"</I>"
@@ -826,9 +826,9 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 				for(var/datum/feed_channel/NP in src.news_content)
 					src.pages++ //Let's get it right again.
 				var/datum/feed_channel/C = src.news_content[src.curr_page]
-				dat+="<FONT SIZE=4><B>[C.channel_name]</B></FONT><FONT SIZE=1> \[created by: <FONT COLOR='maroon'>[C.author]</FONT>\]</FONT><BR><BR>"
+				dat+="[FONT_HUGE("<B>[C.channel_name]</B>")][FONT_SMALL(" \[created by: [SPAN_COLOR("maroon", C.author)]\]")]<BR><BR>"
 				if(C.censored)
-					dat+="This channel was deemed dangerous to the general welfare of the [station_name()] and therefore marked with a <B><FONT COLOR='red'>D-Notice</B></FONT>. Its contents were not transferred to the newspaper at the time of printing."
+					dat+="This channel was deemed dangerous to the general welfare of the [station_name()] and therefore marked with a [SPAN_COLOR("red", "<B>D-Notice</B>")]. Its contents were not transferred to the newspaper at the time of printing."
 				else
 					if(!length(C.messages))
 						dat+="No Feed stories stem from this channel..."
@@ -842,7 +842,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 								var/resourc_name = "newscaster_photo_[sanitize(C.channel_name)]_[i].png"
 								send_asset(user.client, resourc_name)
 								dat+="<img src='[resourc_name]' width = '180'><BR>"
-							dat+="<FONT SIZE=1>\[[MESSAGE.message_type] by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR><BR>"
+							dat+="[FONT_SMALL("\[[MESSAGE.message_type] by [SPAN_COLOR("maroon", MESSAGE.author)]\]")]<BR><BR>"
 						dat+="</ul>"
 				if(scribble_page==curr_page)
 					dat+="<BR><I>There is a small scribble near the end of this page... It reads: \"[src.scribble]\"</I>"
@@ -851,8 +851,8 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 				for(var/datum/feed_channel/NP in src.news_content)
 					src.pages++
 				if(src.important_message!=null)
-					dat+="<DIV STYLE='float:center;'><FONT SIZE=4><B>Wanted Issue:</B></FONT SIZE></DIV><BR><BR>"
-					dat+="<B>Criminal name</B>: <FONT COLOR='maroon'>[important_message.author]</FONT><BR>"
+					dat+="<DIV STYLE='float:center;'>[FONT_HUGE("<B>Wanted Issue:</B>")]</DIV><BR><BR>"
+					dat+="<B>Criminal name</B>: [SPAN_COLOR("maroon", important_message.author)]<BR>"
 					dat+="<B>Description</B>: [important_message.body]<BR>"
 					dat+="<B>Photo:</B>: "
 					if(important_message.img)
@@ -910,7 +910,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 /obj/item/newspaper/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/pen))
 		if(src.scribble_page == src.curr_page)
-			to_chat(user, "<FONT COLOR='blue'>There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?</FONT>")
+			to_chat(user, SPAN_COLOR("blue", "There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?"))
 		else
 			var/s = sanitize(input(user, "Write something", "Newspaper", ""))
 			s = sanitize(s)
@@ -955,10 +955,8 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 //	return                                  //bode well with a newscaster network of 10+ machines. Let's just return it, as it's added in the machines list.
 
 /obj/machinery/newscaster/proc/newsAlert(news_call)   //This isn't Agouri's work, for it is ugly and vile.
-	var/turf/T = get_turf(src)                      //Who the fuck uses spawn(600) anyway, jesus christ
 	if(news_call)
-		for(var/mob/O in hearers(world.view-1, T))
-			O.show_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"[news_call]\"</span>",2)
+		audible_message(SPAN_CLASS("newscaster", "<EM>[name]</EM> beeps, \"[news_call]\""))
 		src.alert = 1
 		src.update_icon()
 		spawn(300)
@@ -966,7 +964,6 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 			src.update_icon()
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 75, 1)
 	else
-		for(var/mob/O in hearers(world.view-1, T))
-			O.show_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"Attention! Wanted issue distributed!\"</span>",2)
+		audible_message("newscaster", "<EM>[src.name]</EM> beeps, \"Attention! Wanted issue distributed!\"")
 		playsound(src.loc, 'sound/machines/warning-buzzer.ogg', 75, 1)
 	return

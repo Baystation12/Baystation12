@@ -296,7 +296,7 @@ ARMCHAIR(yellow)
 	if(.)
 		for(var/obj/structure/window/check_window in user.loc)
 			if(check_window.is_fulltile())
-				to_chat(user, "<span class='warning'>There is already a full-tile window here!</span>")
+				to_chat(user, SPAN_WARNING("There is already a full-tile window here!"))
 				return FALSE
 
 /datum/stack_recipe/furniture/fullwindow/spawn_result(mob/user, location, amount)
@@ -314,7 +314,7 @@ ARMCHAIR(yellow)
 	if(.)
 		for(var/obj/structure/window/check_window in user.loc)
 			if(check_window.dir == user.dir)
-				to_chat(user, "<span class='warning'>There is already a window facing that direction here!</span>")
+				to_chat(user, SPAN_WARNING("There is already a window facing that direction here!"))
 				return FALSE
 
 /datum/stack_recipe/furniture/borderwindow/spawn_result(mob/user, location, amount)
@@ -331,7 +331,7 @@ ARMCHAIR(yellow)
 	. = ..()
 	if(.)
 		if(locate(/obj/machinery/door/window) in user.loc)
-			to_chat(user, "<span class='warning'>There is already a windoor here!</span>")
+			to_chat(user, SPAN_WARNING("There is already a windoor here!"))
 			return FALSE
 
 /datum/stack_recipe/furniture/windoor/spawn_result(mob/user, location, amount)

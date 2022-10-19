@@ -87,11 +87,11 @@
 		if (A.can_use(5))
 			TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open/unwrenched)
 			A.use(5)
-			to_chat(user, "<span class='notice'>You insert the cables.</span>")
+			to_chat(user, SPAN_NOTICE("You insert the cables."))
 			machine.set_broken(FALSE, TRUE) // the machine's not borked anymore!
 			return
 		else
-			to_chat(user, "<span class='warning'>You need five coils of wire for this.</span>")
+			to_chat(user, SPAN_WARNING("You need five coils of wire for this."))
 			return TRUE
 	if(isCrowbar(I))
 		TRANSFER_STATE(/decl/machine_construction/default/deconstructed)

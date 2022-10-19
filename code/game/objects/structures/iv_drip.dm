@@ -15,11 +15,11 @@
 	set category = "Object"
 	set src in range(1)
 	if(!CanPhysicallyInteract(usr))
-		to_chat(usr, "<span class='notice'>You're in no condition to do that!'</span>")
+		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!'"))
 		return
 	var/N = input("Amount per transfer from this:","[src]") as null|anything in transfer_amounts
 	if(!CanPhysicallyInteract(usr)) // because input takes time and the situation can change
-		to_chat(usr, "<span class='notice'>You're in no condition to do that!'</span>")
+		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!'"))
 		return
 	if(N)
 		transfer_amount = N
@@ -169,7 +169,7 @@
 	set name = "Toggle IV Mode"
 	set src in view(1)
 	if(!CanPhysicallyInteract(usr))
-		to_chat(usr, "<span class='notice'>You're in no condition to do that!'</span>")
+		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!'"))
 		return
 	mode = !mode
 	to_chat(usr, "The IV drip is now [mode ? "injecting" : "taking blood"].")
@@ -185,13 +185,13 @@
 
 	if(beaker)
 		if(beaker.reagents && beaker.reagents.total_volume)
-			to_chat(usr, "<span class='notice'>Attached is \a [beaker] with [beaker.reagents.total_volume] units of liquid.</span>")
+			to_chat(usr, SPAN_NOTICE("Attached is \a [beaker] with [beaker.reagents.total_volume] units of liquid."))
 		else
-			to_chat(usr, "<span class='notice'>Attached is an empty [beaker].</span>")
+			to_chat(usr, SPAN_NOTICE("Attached is an empty [beaker]."))
 	else
-		to_chat(usr, "<span class='notice'>No chemicals are attached.</span>")
+		to_chat(usr, SPAN_NOTICE("No chemicals are attached."))
 
-	to_chat(usr, "<span class='notice'>[attached ? attached : "No one"] is hooked up to it.</span>")
+	to_chat(usr, SPAN_NOTICE("[attached ? attached : "No one"] is hooked up to it."))
 
 /obj/structure/iv_drip/proc/rip_out()
 	visible_message("The needle is ripped out of [src.attached], doesn't that hurt?")
@@ -204,7 +204,7 @@
 		START_PROCESSING(SSobj,src)
 
 /proc/do_IV_hookup(mob/living/carbon/human/target, mob/user, obj/IV)
-	to_chat(user, "<span class='notice'>You start to hook up \the [target] to \the [IV].</span>")
+	to_chat(user, SPAN_NOTICE("You start to hook up \the [target] to \the [IV]."))
 	if(!user.do_skilled(2 SECONDS, SKILL_MEDICAL, target))
 		return FALSE
 

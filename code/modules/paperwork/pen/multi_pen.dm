@@ -17,4 +17,4 @@
 	else
 		icon_state = "pen_[colour]"
 
-	to_chat(user, "<span class='notice'>Changed color to '[colour].'</span>")
+	to_chat(user, SPAN_NOTICE("Changed color to '[colour].'"))

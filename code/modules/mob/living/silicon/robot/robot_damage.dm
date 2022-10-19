@@ -126,11 +126,11 @@
 		cell.charge -= cost
 		if(cell.charge <= 0)
 			cell.charge = 0
-			to_chat(src, "<span class='warning'>Your shield has overloaded!</span>")
+			to_chat(src, SPAN_WARNING("Your shield has overloaded!"))
 		else
 			brute -= absorb_brute
 			burn -= absorb_burn
-			to_chat(src, "<span class='warning'>Your shield absorbs some of the impact!</span>")
+			to_chat(src, SPAN_WARNING("Your shield absorbs some of the impact!"))
 
 	var/datum/robot_component/armour/A = get_armour()
 	if(A)

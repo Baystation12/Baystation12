@@ -33,15 +33,15 @@
 		mybag = I
 		update_icon()
 		updateUsrDialog()
-		to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
+		to_chat(user, SPAN_NOTICE("You put [I] into [src]."))
 
 	else if(istype(I, /obj/item/mop))
 		if(I.reagents.total_volume < I.reagents.maximum_volume)	//if it's not completely soaked we assume they want to wet it, otherwise store it
 			if(reagents.total_volume < 1)
-				to_chat(user, "<span class='warning'>[src] is out of water!</span>")
+				to_chat(user, SPAN_WARNING("[src] is out of water!"))
 			else
 				reagents.trans_to_obj(I, I.reagents.maximum_volume)
-				to_chat(user, "<span class='notice'>You wet [I] in [src].</span>")
+				to_chat(user, SPAN_NOTICE("You wet [I] in [src]."))
 				playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 				return
 		if(!mymop)
@@ -50,7 +50,7 @@
 			mymop = I
 			update_icon()
 			updateUsrDialog()
-			to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
+			to_chat(user, SPAN_NOTICE("You put [I] into [src]."))
 
 	else if(istype(I, /obj/item/reagent_containers/spray) && !myspray)
 		if(!user.unEquip(I, src))
@@ -58,7 +58,7 @@
 		myspray = I
 		update_icon()
 		updateUsrDialog()
-		to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
+		to_chat(user, SPAN_NOTICE("You put [I] into [src]."))
 
 	else if(istype(I, /obj/item/device/lightreplacer) && !myreplacer)
 		if(!user.unEquip(I, src))
@@ -66,7 +66,7 @@
 		myreplacer = I
 		update_icon()
 		updateUsrDialog()
-		to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
+		to_chat(user, SPAN_NOTICE("You put [I] into [src]."))
 
 	else if(istype(I, /obj/item/caution))
 		if(signs < 4)
@@ -75,9 +75,9 @@
 			signs++
 			update_icon()
 			updateUsrDialog()
-			to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
+			to_chat(user, SPAN_NOTICE("You put [I] into [src]."))
 		else
-			to_chat(user, "<span class='notice'>[src] can't hold any more signs.</span>")
+			to_chat(user, SPAN_NOTICE("[src] can't hold any more signs."))
 
 	else if(istype(I, /obj/item/reagent_containers/glass))
 		return // So we do not put them in the trash bag as we mean to fill the mop bucket
@@ -117,29 +117,29 @@
 			if("garbage")
 				if(mybag)
 					user.put_in_hands(mybag)
-					to_chat(user, "<span class='notice'>You take [mybag] from [src].</span>")
+					to_chat(user, SPAN_NOTICE("You take [mybag] from [src]."))
 					mybag = null
 			if("mop")
 				if(mymop)
 					user.put_in_hands(mymop)
-					to_chat(user, "<span class='notice'>You take [mymop] from [src].</span>")
+					to_chat(user, SPAN_NOTICE("You take [mymop] from [src]."))
 					mymop = null
 			if("spray")
 				if(myspray)
 					user.put_in_hands(myspray)
-					to_chat(user, "<span class='notice'>You take [myspray] from [src].</span>")
+					to_chat(user, SPAN_NOTICE("You take [myspray] from [src]."))
 					myspray = null
 			if("replacer")
 				if(myreplacer)
 					user.put_in_hands(myreplacer)
-					to_chat(user, "<span class='notice'>You take [myreplacer] from [src].</span>")
+					to_chat(user, SPAN_NOTICE("You take [myreplacer] from [src]."))
 					myreplacer = null
 			if("sign")
 				if(signs)
 					var/obj/item/caution/Sign = locate() in src
 					if(Sign)
 						user.put_in_hands(Sign)
-						to_chat(user, "<span class='notice'>You take \a [Sign] from [src].</span>")
+						to_chat(user, SPAN_NOTICE("You take \a [Sign] from [src]."))
 						signs--
 					else
 						warning("[src] signs ([signs]) didn't match contents")
@@ -196,16 +196,16 @@
 	if(istype(I, /obj/item/mop))
 		if(reagents.total_volume > 1)
 			reagents.trans_to_obj(I, 2)
-			to_chat(user, "<span class='notice'>You wet [I] in the [callme].</span>")
+			to_chat(user, SPAN_NOTICE("You wet [I] in the [callme]."))
 			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		else
-			to_chat(user, "<span class='notice'>This [callme] is out of water!</span>")
+			to_chat(user, SPAN_NOTICE("This [callme] is out of water!"))
 	else if(istype(I, /obj/item/key))
 		to_chat(user, "Hold [I] in one of your hands while you drive this [callme].")
 	else if(istype(I, /obj/item/storage/bag/trash))
 		if(!user.unEquip(I, src))
 			return
-		to_chat(user, "<span class='notice'>You hook the trashbag onto the [callme].</span>")
+		to_chat(user, SPAN_NOTICE("You hook the trashbag onto the [callme]."))
 		mybag = I
 
 
@@ -224,7 +224,7 @@
 		step(src, direction)
 		update_mob()
 	else
-		to_chat(user, "<span class='notice'>You'll need the keys in one of your hands to drive this [callme].</span>")
+		to_chat(user, SPAN_NOTICE("You'll need the keys in one of your hands to drive this [callme]."))
 
 
 /obj/structure/bed/chair/janicart/Move()
@@ -278,7 +278,7 @@
 	if(buckled_mob)
 		if(prob(85))
 			return buckled_mob.bullet_act(Proj)
-	visible_message("<span class='warning'>[Proj] ricochets off the [callme]!</span>")
+	visible_message(SPAN_WARNING("[Proj] ricochets off the [callme]!"))
 
 
 /obj/item/key

@@ -89,7 +89,7 @@
 
 		if (messages.len > 0)
 			if (message_class != "none")
-				M.visible_message("<span class='[message_class]'>[pick(messages)]</span>")
+				M.visible_message(SPAN_CLASS("[message_class]", "[pick(messages)]"))
 			else
 				M.visible_message(pick(messages))
 

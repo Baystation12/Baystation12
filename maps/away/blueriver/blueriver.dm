@@ -190,9 +190,9 @@
 	user.do_attack_animation(src)
 	playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 50, 1)
 	user.visible_message(
-		"<span class='danger'>[user] hits \the [src] with \the [W]!</span>",
-		"<span class='danger'>You hit \the [src] with \the [W]!</span>",
-		"<span class='danger'>You hear something breaking!</span>"
+		SPAN_DANGER("[user] hits \the [src] with \the [W]!"),
+		SPAN_DANGER("You hit \the [src] with \the [W]!"),
+		SPAN_DANGER("You hear something breaking!")
 		)
 	damage_health(W.force, W.damtype)
 

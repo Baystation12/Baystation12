@@ -119,10 +119,10 @@
 
 	playsound(loc, 'sound/items/countdown.ogg', 75, 1, -3)
 	if(ismob(imp_in))
-		imp_in.audible_message("<span class='warning'>Something beeps inside [imp_in][part ? "'s [part.name]" : ""]!</span>")
+		imp_in.audible_message(SPAN_WARNING("Something beeps inside [imp_in][part ? "'s [part.name]" : ""]!"))
 		log_and_message_admins("Explosive implant triggered in [imp_in] ([imp_in.key]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[imp_in.x];Y=[imp_in.y];Z=[imp_in.z]'>JMP</a>) ")
 	else
-		audible_message("<span class='warning'>[src] beeps omniously!</span>")
+		audible_message(SPAN_WARNING("[src] beeps omniously!"))
 		log_and_message_admins("Explosive implant triggered in [T.loc]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>) ")
 
 	if(!elevel)

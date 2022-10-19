@@ -41,29 +41,29 @@
 
 /obj/item/device/multitool/hacktool/proc/attempt_hack(mob/user, atom/target)
 	if(is_hacking)
-		to_chat(user, "<span class='warning'>You are already hacking!</span>")
+		to_chat(user, SPAN_WARNING("You are already hacking!"))
 		return 1
 	if(!is_type_in_list(target, supported_types))
-		to_chat(user, "[icon2html(src, user)] <span class='warning'>Unable to hack this target.</span>")
+		to_chat(user, "[icon2html(src, user)] [SPAN_WARNING("Unable to hack this target.")]")
 		return 0
 	var/found = known_targets.Find(target)
 	if(found)
 		known_targets.Swap(1, found)	// Move the last hacked item first
 		return 1
 
-	to_chat(user, "<span class='notice'>You begin hacking \the [target]...</span>")
+	to_chat(user, SPAN_NOTICE("You begin hacking \the [target]..."))
 	is_hacking = 1
 	// Hackin takes roughly 15-25 seconds. Fairly small random span to avoid people simply aborting and trying again.
 	var/hack_result = do_after(user, (15 SECONDS + rand(0, 5 SECONDS) + rand(0, 5 SECONDS)), target, do_flags = (DO_DEFAULT | DO_BOTH_UNIQUE_ACT) & ~DO_SHOW_PROGRESS)
 	is_hacking = 0
 
 	if(hack_result && in_hack_mode)
-		to_chat(user, "<span class='notice'>Your hacking attempt was succesful!</span>")
+		to_chat(user, SPAN_NOTICE("Your hacking attempt was succesful!"))
 		user.playsound_local(get_turf(src), 'sound/piano/A#6.ogg', 50)
 		known_targets.Insert(1, target)	// Insert the newly hacked target first,
 		GLOB.destroyed_event.register(target, src, /obj/item/device/multitool/hacktool/proc/on_target_destroy)
 	else
-		to_chat(user, "<span class='warning'>Your hacking attempt failed!</span>")
+		to_chat(user, SPAN_WARNING("Your hacking attempt failed!"))
 	return 1
 
 /obj/item/device/multitool/hacktool/proc/sanity_check()

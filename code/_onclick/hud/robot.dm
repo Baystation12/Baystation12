@@ -167,11 +167,11 @@ var/global/obj/screen/robot_inventory
 		//r.client.screen += robot_inventory	//"store" icon
 
 		if(!r.module)
-			to_chat(usr, "<span class='danger'>No module selected</span>")
+			to_chat(usr, SPAN_DANGER("No module selected"))
 			return
 
 		if(!r.module.equipment)
-			to_chat(usr, "<span class='danger'>Selected module has no modules to select</span>")
+			to_chat(usr, SPAN_DANGER("Selected module has no modules to select"))
 			return
 
 		if(!r.robot_modules_background)

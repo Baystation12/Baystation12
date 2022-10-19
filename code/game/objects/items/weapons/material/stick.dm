@@ -13,13 +13,13 @@
 
 
 /obj/item/material/stick/attack_self(mob/user as mob)
-	user.visible_message("<span class='warning'>\The [user] snaps [src].</span>", "<span class='warning'>You snap [src].</span>")
+	user.visible_message(SPAN_WARNING("\The [user] snaps [src]."), SPAN_WARNING("You snap [src]."))
 	shatter(0)
 
 
 /obj/item/material/stick/attackby(obj/item/W as obj, mob/user as mob)
 	if(W.sharp && W.edge && !sharp)
-		user.visible_message("<span class='warning'>[user] sharpens [src] with [W].</span>", "<span class='warning'>You sharpen [src] using [W].</span>")
+		user.visible_message(SPAN_WARNING("[user] sharpens [src] with [W]."), SPAN_WARNING("You sharpen [src] using [W]."))
 		sharp = TRUE
 		SetName("sharpened " + name)
 		update_force()
@@ -29,7 +29,7 @@
 /obj/item/material/stick/attack(mob/M, mob/user)
 	if(user != M && user.a_intent == I_HELP)
 		//Playful poking is its own thing
-		user.visible_message("<span class='notice'>[user] pokes [M] with [src].</span>", "<span class='notice'>You poke [M] with [src].</span>")
+		user.visible_message(SPAN_NOTICE("[user] pokes [M] with [src]."), SPAN_NOTICE("You poke [M] with [src]."))
 		//Consider adding a check to see if target is dead
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(M)

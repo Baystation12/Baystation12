@@ -177,7 +177,7 @@
 		L.forceMove(effect)
 		var/time = (L.getBruteLoss() + L.getFireLoss()) * 20
 		L.status_flags &= GODMODE
-		to_chat(L,"<span class='notice'>You will be in stasis for [time/10] second\s.</span>")
+		to_chat(L,SPAN_NOTICE("You will be in stasis for [time/10] second\s."))
 		addtimer(CALLBACK(src,.proc/cancel_rift),time)
 
 /spell/targeted/heal_target/trance/Destroy()
@@ -244,7 +244,7 @@
 			revoke_spells()
 			return
 	charge_counter = charge_max
-	to_chat(holder,"<span class='notice'>\The [src] refreshes as it seems it could not bring back the souls of those you healed.</span>")
+	to_chat(holder,SPAN_NOTICE("\The [src] refreshes as it seems it could not bring back the souls of those you healed."))
 
 /spell/targeted/revoke/proc/revoke_spells()
 	if(!istype(holder, /mob/living))

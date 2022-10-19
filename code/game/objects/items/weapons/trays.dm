@@ -48,7 +48,7 @@
 /obj/item/tray/attackby(obj/item/W, mob/living/user)
 	if(istype(W, /obj/item/material/kitchen/rollingpin) && user.a_intent == I_HURT)
 		if(bash_cooldown < world.time)
-			user.visible_message("<span class='warning'>[user] bashes [src] with [W]!</span>")
+			user.visible_message(SPAN_WARNING("[user] bashes [src] with [W]!"))
 			playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, 1)
 			bash_cooldown = world.time + 25
 		return TRUE
@@ -99,7 +99,7 @@
 	var/grab_intent = ishuman(user) ? I_GRAB : I_HELP
 	if (user.a_intent != grab_intent || istype(A, /obj/item/storage) || istype(A, /obj/screen/storage))
 		return ..()
-	
+
 	var/turf/T = get_turf(A)
 
 	if (LAZYLEN(carrying))
@@ -139,12 +139,12 @@
 			if (can_add_item(I))
 				pickup_item(item)
 				added_items++
-	
+
 		if (!added_items)
 			to_chat(user, SPAN_WARNING("You fail to pick anything up with \the [src]."))
 		else
 			user.visible_message(SPAN_NOTICE("[user] scoops up some things with \the [src]."), SPAN_NOTICE("You put everything you could onto \the [src]."))
-		
+
 		return FALSE
 
 

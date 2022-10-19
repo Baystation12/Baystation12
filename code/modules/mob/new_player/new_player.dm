@@ -129,7 +129,7 @@
 
 	if(href_list["observe"])
 		if(GAME_STATE < RUNLEVEL_LOBBY)
-			to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
+			to_chat(src, SPAN_WARNING("Please wait for server initialization to complete..."))
 			return
 
 		if(!config.respawn_delay || client.holder || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
@@ -144,10 +144,10 @@
 			close_spawn_windows()
 			var/obj/O = locate("landmark*Observer-Start")
 			if(istype(O))
-				to_chat(src, "<span class='notice'>Now teleporting.</span>")
+				to_chat(src, SPAN_NOTICE("Now teleporting."))
 				observer.forceMove(O.loc)
 			else
-				to_chat(src, "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the map.</span>")
+				to_chat(src, SPAN_DANGER("Could not locate an observer spawn point. Use the Teleport verb to jump to the map."))
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
 			var/should_announce = client.get_preference_value(/datum/client_preference/announce_ghost_join) == GLOB.PREF_YES
@@ -208,10 +208,10 @@
 	if(src != usr)
 		return 0
 	if(GAME_STATE != RUNLEVEL_GAME)
-		to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
+		to_chat(usr, SPAN_WARNING("The round is either not ready, or has already finished..."))
 		return 0
 	if(!config.enter_allowed)
-		to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
+		to_chat(usr, SPAN_NOTICE("There is an administrative lock on entering the game!"))
 		return 0
 
 	if(!job || !job.is_available(client))
@@ -296,12 +296,12 @@
 	header += "Round Duration: [roundduration2text()]<br>"
 
 	if(evacuation_controller.has_evacuated())
-		header += "<font color='red'><b>\The [station_name()] has been evacuated.</b></font><br>"
+		header += "[SPAN_COLOR("red", "<b>\The [station_name()] has been evacuated.</b>")]<br>"
 	else if(evacuation_controller.is_evacuating())
 		if(evacuation_controller.emergency_evacuation) // Emergency shuttle is past the point of no recall
-			header += "<font color='red'>\The [station_name()] is currently undergoing evacuation procedures.</font><br>"
+			header += "[SPAN_COLOR("red", "\The [station_name()] is currently undergoing evacuation procedures.")]<br>"
 		else                                           // Crew transfer initiated
-			header += "<font color='red'>\The [station_name()] is currently undergoing crew transfer procedures.</font><br>"
+			header += "[SPAN_COLOR("red", "\The [station_name()] is currently undergoing crew transfer procedures.")]<br>"
 
 	var/list/dat = list()
 	dat += "Choose from the following open/valid positions:<br>"

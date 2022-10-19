@@ -147,7 +147,7 @@ var/global/list/mining_floors = list()
 //Not even going to touch this pile of spaghetti
 /turf/simulated/mineral/attackby(obj/item/W as obj, mob/user as mob)
 	if (!user.IsAdvancedToolUser())
-		to_chat(usr, "<span class='warning'>You don't have the dexterity to do this!</span>")
+		to_chat(usr, SPAN_WARNING("You don't have the dexterity to do this!"))
 		return
 
 	if (istype(W, /obj/item/device/core_sampler))
@@ -163,9 +163,9 @@ var/global/list/mining_floors = list()
 
 	if (istype(W, /obj/item/device/measuring_tape))
 		var/obj/item/device/measuring_tape/P = W
-		user.visible_message("<span class='notice'>\The [user] extends [P] towards [src].</span>","<span class='notice'>You extend [P] towards [src].</span>")
+		user.visible_message(SPAN_NOTICE("\The [user] extends [P] towards [src]."),SPAN_NOTICE("You extend [P] towards [src]."))
 		if(do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE))
-			to_chat(user, "<span class='notice'>\The [src] has been excavated to a depth of [excavation_level]cm.</span>")
+			to_chat(user, SPAN_NOTICE("\The [src] has been excavated to a depth of [excavation_level]cm."))
 		return
 
 	if (istype(W, /obj/item/pickaxe))
@@ -187,7 +187,7 @@ var/global/list/mining_floors = list()
 			if(newDepth > F.excavation_required) // Digging too deep can break the item. At least you won't summon a Balrog (probably)
 				fail_message = ". <b>[pick("There is a crunching noise","[W] collides with some different rock","Part of the rock face crumbles away","Something breaks under [W]")]</b>"
 
-		to_chat(user, "<span class='notice'>You start [P.drill_verb][fail_message].</span>")
+		to_chat(user, SPAN_NOTICE("You start [P.drill_verb][fail_message]."))
 
 		if(fail_message && prob(90))
 			if(prob(25))
@@ -205,7 +205,7 @@ var/global/list/mining_floors = list()
 				else if(newDepth > F.excavation_required - F.clearance_range) // Not quite right but you still extract your find, the closer to the bottom the better, but not above 80%
 					excavate_find(prob(80 * (F.excavation_required - newDepth) / F.clearance_range), F)
 
-			to_chat(user, "<span class='notice'>You finish [P.drill_verb] \the [src].</span>")
+			to_chat(user, SPAN_NOTICE("You finish [P.drill_verb] \the [src]."))
 
 			if(newDepth >= 200) // This means the rock is mined out fully
 				var/obj/structure/boulder/B
@@ -303,7 +303,7 @@ var/global/list/mining_floors = list()
 		if(prob(50))
 			pain = 1
 		for(var/mob/living/M in range(src, 200))
-			to_chat(M, "<font color='red'><b>[pick("A high pitched [pick("keening","wailing","whistle")]","A rumbling noise like [pick("thunder","heavy machinery")]")] somehow penetrates your mind before fading away!</b></font>")
+			to_chat(M, SPAN_COLOR("red", "<b>[pick("A high pitched [pick("keening","wailing","whistle")]","A rumbling noise like [pick("thunder","heavy machinery")]")] somehow penetrates your mind before fading away!</b>"))
 			if(pain)
 				flick("pain",M.pain)
 				if(prob(50))
@@ -331,7 +331,7 @@ var/global/list/mining_floors = list()
 	if(prob(F.prob_delicate))
 		var/obj/effect/suspension_field/S = locate() in src
 		if(!S)
-			visible_message("<span class='danger'>[pick("An object in the rock crumbles away into dust.","Something falls out of the rock and shatters onto the ground.")]</span>")
+			visible_message(SPAN_CLASS("danger", "[pick("An object in the rock crumbles away into dust.","Something falls out of the rock and shatters onto the ground.")]"))
 			finds.Remove(F)
 			return
 
@@ -468,19 +468,19 @@ var/global/list/mining_floors = list()
 
 	if(valid_tool)
 		if (dug)
-			to_chat(user, "<span class='warning'>This area has already been dug</span>")
+			to_chat(user, SPAN_WARNING("This area has already been dug"))
 			return
 
 		var/turf/T = user.loc
 		if (!(istype(T)))
 			return
 
-		to_chat(user, "<span class='warning'>You start digging.</span>")
+		to_chat(user, SPAN_WARNING("You start digging."))
 		playsound(user.loc, 'sound/effects/rustle1.ogg', 50, 1)
 
 		if(!do_after(user, 4 SECONDS, src,  DO_DEFAULT | DO_PUBLIC_PROGRESS)) return
 
-		to_chat(user, "<span class='notice'>You dug a hole.</span>")
+		to_chat(user, SPAN_NOTICE("You dug a hole."))
 		gets_dug()
 
 	else if(istype(W,/obj/item/storage/ore))

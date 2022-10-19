@@ -48,7 +48,7 @@
 /obj/item/implant/proc/can_implant(mob/M, mob/user, target_zone)
 	var/mob/living/carbon/human/H = M
 	if(istype(H) && !H.get_organ(target_zone))
-		to_chat(user, "<span class='warning'>\The [M] is missing that body part.</span>")
+		to_chat(user, SPAN_WARNING("\The [M] is missing that body part."))
 		return FALSE
 	return TRUE
 

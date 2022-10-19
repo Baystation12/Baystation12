@@ -35,16 +35,14 @@
 		var/copycontents = c.info
 		var/obj/item/paper/carbon/copy = new /obj/item/paper/carbon (usr.loc)
 		copy.language = language
-		// <font>
 		if(info)
-			copycontents = replacetext(copycontents, "<font face=\"[c.deffont]\" color=", "<font face=\"[c.deffont]\" nocolor=")	//state of the art techniques in action
-			copycontents = replacetext(copycontents, "<font face=\"[c.crayonfont]\" color=", "<font face=\"[c.crayonfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
+			copycontents = replacetext(copycontents, "<span style='font-family: [c.deffont]; color:", "<span style='font-family: [c.deffont]; nocolor:")	//state of the art techniques in action
+			copycontents = replacetext(copycontents, "<span style='font-family: [c.crayonfont]; color:", "<span style='font-family: [c.crayonfont]; nocolor:")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
 			copy.info += copycontents
-			copy.info += "</font>"
 			copy.SetName("Copy - " + c.name)
 			copy.fields = c.fields
 			copy.updateinfolinks()
-		to_chat(usr, "<span class='notice'>You tear off the carbon-copy!</span>")
+		to_chat(usr, SPAN_NOTICE("You tear off the carbon-copy!"))
 		c.copied = 1
 		copy.iscopy = 1
 		copy.update_icon()

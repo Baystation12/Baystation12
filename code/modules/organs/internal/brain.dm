@@ -74,7 +74,7 @@
 	if(H.mind)
 		H.mind.transfer_to(brainmob)
 
-	to_chat(brainmob, "<span class='notice'>You feel slightly disoriented. That's normal when you're just \a [initial(src.name)].</span>")
+	to_chat(brainmob, SPAN_NOTICE("You feel slightly disoriented. That's normal when you're just \a [initial(src.name)]."))
 	callHook("debrain", list(brainmob))
 
 /obj/item/organ/internal/brain/examine(mob/user)
@@ -127,15 +127,15 @@
 /obj/item/organ/internal/brain/proc/handle_severe_brain_damage()
 	set waitfor = FALSE
 	healed_threshold = 0
-	to_chat(owner, "<span class = 'notice' font size='10'><B>Where am I...?</B></span>")
+	to_chat(owner, SPAN_NOTICE(SPAN_STYLE("font-size: 10", "<B>Where am I...?</B>")))
 	sleep(5 SECONDS)
 	if (!owner || owner.stat == DEAD || (status & ORGAN_DEAD))
 		return
-	to_chat(owner, "<span class = 'notice' font size='10'><B>What's going on...?</B></span>")
+	to_chat(owner, SPAN_NOTICE(SPAN_STYLE("font-size: 10", "><B>What's going on...?</B>")))
 	sleep(10 SECONDS)
 	if (!owner || owner.stat == DEAD || (status & ORGAN_DEAD))
 		return
-	to_chat(owner, "<span class = 'notice' font size='10'><B>What happened...?</B></span>")
+	to_chat(owner, SPAN_NOTICE(SPAN_STYLE("font-size: 10", "<B>What happened...?</B>")))
 	alert(owner, "You have taken massive brain damage! This could affect speech, memory, or any other skill, but provided you've been treated, it shouldn't be permanent.", "Brain Damaged")
 	if (owner.psi)
 		owner.psi.check_latency_trigger(20, "physical trauma")
@@ -173,7 +173,7 @@
 						damage = max(damage-1, 0)
 				if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 					if(prob(1))
-						to_chat(owner, "<span class='warning'>You feel [pick("dizzy","woozy","faint")]...</span>")
+						to_chat(owner, SPAN_WARNING("You feel [pick("dizzy","woozy","faint")]..."))
 					damprob = owner.chem_effects[CE_STABLE] ? 30 : 60
 					if(!past_damage_threshold(2) && prob(damprob))
 						take_internal_damage(1)
@@ -184,7 +184,7 @@
 						take_internal_damage(1)
 					if(!owner.paralysis && prob(10))
 						owner.Paralyse(rand(1,3))
-						to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
+						to_chat(owner, SPAN_WARNING("You feel extremely [pick("dizzy","woozy","faint")]..."))
 				if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
 					owner.eye_blurry = max(owner.eye_blurry,6)
 					damprob = owner.chem_effects[CE_STABLE] ? 60 : 100
@@ -192,7 +192,7 @@
 						take_internal_damage(1)
 					if(!owner.paralysis && prob(15))
 						owner.Paralyse(3,5)
-						to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
+						to_chat(owner, SPAN_WARNING("You feel extremely [pick("dizzy","woozy","faint")]..."))
 				if(-(INFINITY) to BLOOD_VOLUME_SURVIVE) // Also see heart.dm, being below this point puts you into cardiac arrest.
 					owner.eye_blurry = max(owner.eye_blurry,6)
 					damprob = owner.chem_effects[CE_STABLE] ? 80 : 100
@@ -220,7 +220,7 @@
 	if (!owner || owner.stat == DEAD || (status & ORGAN_DEAD))
 		return
 
-	to_chat(owner, "<span class = 'notice' font size='10'><B>I can't remember which way is forward...</B></span>")
+	to_chat(owner, SPAN_NOTICE(SPAN_STYLE("font-size: 10", "<B>I can't remember which way is forward...</B>")))
 	owner.confused += damage
 
 /obj/item/organ/internal/brain/proc/handle_disabilities()
@@ -237,16 +237,16 @@
 	if(damage > 0 && prob(1))
 		owner.custom_pain("Your head feels numb and painful.",10)
 	if(is_bruised() && prob(1) && owner.eye_blurry <= 0)
-		to_chat(owner, "<span class='warning'>It becomes hard to see for some reason.</span>")
+		to_chat(owner, SPAN_WARNING("It becomes hard to see for some reason."))
 		owner.eye_blurry = 10
 	if(damage >= 0.5*max_damage && prob(1) && owner.get_active_hand())
-		to_chat(owner, "<span class='danger'>Your hand won't respond properly, and you drop what you are holding!</span>")
+		to_chat(owner, SPAN_DANGER("Your hand won't respond properly, and you drop what you are holding!"))
 		owner.unequip_item()
 	if(damage >= 0.6*max_damage)
 		owner.slurring = max(owner.slurring, 2)
 	if(is_broken())
 		if(!owner.lying)
-			to_chat(owner, "<span class='danger'>You black out!</span>")
+			to_chat(owner, SPAN_DANGER("You black out!"))
 		owner.Paralyse(10)
 
 /obj/item/organ/internal/brain/surgical_fix(mob/user)

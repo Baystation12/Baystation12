@@ -61,7 +61,7 @@ SUBSYSTEM_DEF(jobs)
 	if(!GLOB.skills.len)
 		decls_repository.get_decl(/decl/hierarchy/skill)
 	if(!GLOB.skills.len)
-		log_error("<span class='warning'>Error setting up job skill requirements, no skill datums found!</span>")
+		log_error(SPAN_WARNING("Error setting up job skill requirements, no skill datums found!"))
 
 	// Update title and path tracking, submap list, etc.
 	// Populate/set up map job lists.
@@ -138,13 +138,13 @@ SUBSYSTEM_DEF(jobs)
 		log_debug("Job assignment error for [joining] - job does not exist or is of the incorrect type.")
 		return FALSE
 	if(!job.is_position_available())
-		to_chat(joining, "<span class='warning'>Unfortunately, that job is no longer available.</span>")
+		to_chat(joining, SPAN_WARNING("Unfortunately, that job is no longer available."))
 		return FALSE
 	if(!config.enter_allowed)
-		to_chat(joining, "<span class='warning'>There is an administrative lock on entering the game!</span>")
+		to_chat(joining, SPAN_WARNING("There is an administrative lock on entering the game!"))
 		return FALSE
 	if(SSticker.mode && SSticker.mode.explosion_in_progress)
-		to_chat(joining, "<span class='warning'>The [station_name()] is currently exploding. Joining would go poorly.</span>")
+		to_chat(joining, SPAN_WARNING("The [station_name()] is currently exploding. Joining would go poorly."))
 		return FALSE
 	return TRUE
 
@@ -152,13 +152,13 @@ SUBSYSTEM_DEF(jobs)
 	if(!check_general_join_blockers(joining, job))
 		return FALSE
 	if(job.minimum_character_age && (joining.client.prefs.age < job.minimum_character_age))
-		to_chat(joining, "<span class='warning'>Your character's in-game age is too low for this job.</span>")
+		to_chat(joining, SPAN_WARNING("Your character's in-game age is too low for this job."))
 		return FALSE
 	if(!job.player_old_enough(joining.client))
-		to_chat(joining, "<span class='warning'>Your player age (days since first seen on the server) is too low for this job.</span>")
+		to_chat(joining, SPAN_WARNING("Your player age (days since first seen on the server) is too low for this job."))
 		return FALSE
 	if(GAME_STATE != RUNLEVEL_GAME)
-		to_chat(joining, "<span class='warning'>The round is either not ready, or has already finished...</span>")
+		to_chat(joining, SPAN_WARNING("The round is either not ready, or has already finished..."))
 		return FALSE
 	return TRUE
 
@@ -405,7 +405,7 @@ SUBSYSTEM_DEF(jobs)
 					permitted = 0
 
 				if(!permitted)
-					to_chat(H, "<span class='warning'>Your current species, job, branch, skills or whitelist status does not permit you to spawn with [thing]!</span>")
+					to_chat(H, SPAN_WARNING("Your current species, job, branch, skills or whitelist status does not permit you to spawn with [thing]!"))
 					continue
 
 				if(!G.slot || G.slot == slot_tie || (G.slot in loadout_taken_slots) || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.display_name]))
@@ -534,7 +534,7 @@ SUBSYSTEM_DEF(jobs)
 			W.buckled_mob = H
 			W.add_fingerprint(H)
 
-	to_chat(H, "<font size = 3><B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B></font>")
+	to_chat(H, FONT_LARGE("<B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B>"))
 
 	if(job.supervisors)
 		to_chat(H, "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")

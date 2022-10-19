@@ -6,7 +6,7 @@
 		can_roll_up_atom(user)
 		return
 
-	visible_message("<span class='danger'>\The [user] has [attack_message] \the [src]!</span>")
+	visible_message(SPAN_DANGER("\The [user] has [attack_message] \the [src]!"))
 	shed_atom(forcefully = TRUE)
 
 /obj/structure/diona_gestalt/attackby(obj/item/thing, mob/user)

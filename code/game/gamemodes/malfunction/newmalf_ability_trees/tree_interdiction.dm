@@ -115,8 +115,8 @@
 			to_chat(target, "Unlock signal received..")
 			target.SetLockdown(0)
 			if(target.lockcharge)
-				to_chat(user, "<span class='notice'>Unlock Failed, lockdown wire cut.</span>")
-				to_chat(target, "<span class='notice'>Unlock Failed, lockdown wire cut.</span>")
+				to_chat(user, SPAN_NOTICE("Unlock Failed, lockdown wire cut."))
+				to_chat(target, SPAN_NOTICE("Unlock Failed, lockdown wire cut."))
 			else
 				to_chat(user, "Cyborg unlocked.")
 				to_chat(target, "You have been unlocked.")
@@ -137,7 +137,7 @@
 
 	var/list/L = get_unlinked_cyborgs(user)
 	if(!L.len)
-		to_chat(user, "<span class='notice'>ERROR: No unlinked cyborgs detected!</span>")
+		to_chat(user, SPAN_NOTICE("ERROR: No unlinked cyborgs detected!"))
 
 	if(target && !istype(target))
 		to_chat(user, "This is not a cyborg.")
@@ -202,7 +202,7 @@
 
 	var/list/L = get_other_ais(user)
 	if(!L.len)
-		to_chat(user, "<span class='notice'>ERROR: No other AIs detected!</span>")
+		to_chat(user, SPAN_NOTICE("ERROR: No other AIs detected!"))
 	if(target && !istype(target))
 		to_chat(user, "This is not an AI.")
 		return
