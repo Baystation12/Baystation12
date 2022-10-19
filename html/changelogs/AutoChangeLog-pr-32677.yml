@@ -1,0 +1,4 @@
+author: Rootoo807
+delete-after: true
+changes:
+  - bugfix: Zombie Powder no longer kills you, only pretends to kill you.
