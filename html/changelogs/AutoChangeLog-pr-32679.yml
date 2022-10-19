@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Certain UI elements had really tiny fonts. That should be fixed now.
