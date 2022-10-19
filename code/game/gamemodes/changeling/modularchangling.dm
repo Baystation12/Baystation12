@@ -244,9 +244,9 @@ var/global/list/datum/power/changeling/powerinstances = list()
 
 					body += "</td><td align='center'>";
 
-					body += "<span style='font-size: 2'><b>"+desc+"</b></span> <BR>"
+					body += "<span style='font-size: 13px'><b>"+desc+"</b></span> <BR>"
 
-					body += "<span style='font-size: 2; color: red'><b>"+helptext+"</b></span><BR>"
+					body += "<span style='font-size: 13px; color: red'><b>"+helptext+"</b></span><BR>"
 
 					if(!ownsthis)
 					{
@@ -363,7 +363,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 		<table width='560' align='center' cellspacing='0' cellpadding='5' id='maintable'>
 			<tr id='title_tr'>
 				<td align='center'>
-					<span styly='font-size: 5'><b>Changling Evolution Menu</b></span><br>
+					<span styly='font-size: 24px'><b>Changling Evolution Menu</b></span><br>
 					Hover over a power to see more information<br>
 					Current evolution points left to evolve with: [geneticpoints]<br>
 					Absorb genomes to acquire more evolution points

@@ -71,7 +71,7 @@
 
 					body += "</td><td align='center'>";
 
-					body += "<span style='font-size: 2'><b>"+job+" "+name+"</b><br><b>Real name "+real_name+"</b><br><b>Played by "+key+" ("+ip+")</b></span>"
+					body += "<span style='font-size: 13px'><b>"+job+" "+name+"</b><br><b>Real name "+real_name+"</b><br><b>Played by "+key+" ("+ip+")</b></span>"
 
 					body += "</td><td align='center'>";
 
@@ -83,7 +83,7 @@
 					body += "<a href='?src=\ref[src];narrateto="+ref+"'>DN</a> - "
 					body += "<a href='?src=\ref[src];adminplayerobservefollow="+ref+"'>JMP</a><br>"
 					if(antagonist > 0)
-						body += "<span style='font-size: 2'><a href='?src=\ref[src];check_antagonist=1'><span style='color: red'><b>Antagonist</b></span></a></span>";
+						body += "<span style='font-size: 13px'><a href='?src=\ref[src];check_antagonist=1'><span style='color: red'><b>Antagonist</b></span></a></span>";
 
 					body += "</td></tr></table>";
 
@@ -193,7 +193,7 @@
 		<table width='560' align='center' cellspacing='0' cellpadding='5' id='maintable'>
 			<tr id='title_tr'>
 				<td align='center'>
-					<span style='font-size: 5'><b>Player panel</b></span><br>
+					<span style='font-size: 24px'><b>Player panel</b></span><br>
 					Hover over a line to see more information - <a href='?src=\ref[src];check_antagonist=1'>Check antagonists</a>
 					<p>
 				</td>

@@ -45,8 +45,8 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 							<td><div align='center'>[D.get_view_variables_header()]</div></td>
 						</tr></table>
 						<div align='center'>
-							<b><span style='font-size: 1'>[replacetext("[D.type]", "/", "/<wbr>")]</span></b>
-							[holder.marked_datum() == D ? "<br/><span style='font-size: 1; color: red'><b>Marked Object</b></span>" : ""]
+							<b><span style='font-size: 10px'>[replacetext("[D.type]", "/", "/<wbr>")]</span></b>
+							[holder.marked_datum() == D ? "<br/><span style='font-size: 10px; color: red'><b>Marked Object</b></span>" : ""]
 						</div>
 					</td>
 					<td width='50%'>
@@ -72,7 +72,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 				</tr></table>
 			</div>
 			<hr/>
-			<span style='font-size: 1'>
+			<span style='font-size: 10px'>
 				<b>E</b> - Edit, tries to determine the variable type by itself.<br/>
 				<b>C</b> - Change, asks you for the var type first.<br/>
 				<b>M</b> - Mass modify: changes this variable for all objects of this type.<br/>
