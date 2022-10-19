@@ -181,6 +181,7 @@
 	#include "../event/iccgn_ship/icgnv_hound.dm"
 	#include "../event/sfv_arbiter/sfv_arbiter.dm"
 	#include "../event/placeholders/placeholders.dm"
+	#include "../event/empty/empty.dm"
 
 
 	#define using_map_DATUM /datum/map/torch
