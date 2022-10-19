@@ -523,7 +523,7 @@ var/global/floorIsLava = 0
 		if(10)
 			dat+={"
 				<B>[GLOB.using_map.company_name] Feed Censorship Tool</B><BR>
-				<span style='font-size: 1'>NOTE: Due to the nature of news Feeds, total deletion of a Feed Story is not possible.<BR>
+				<span style='font-size: 10px'>NOTE: Due to the nature of news Feeds, total deletion of a Feed Story is not possible.<BR>
 				Keep in mind that users attempting to view a censored feed will instead see the \[REDACTED\] tag above it.</span>
 				<HR>Select Feed channel to get Stories from:<BR>
 			"}
@@ -536,7 +536,7 @@ var/global/floorIsLava = 0
 		if(11)
 			dat+={"
 				<B>[GLOB.using_map.company_name] D-Notice Handler</B><HR>
-				<span style='font-size: 1'>A D-Notice is to be bestowed upon the channel if the handling Authority deems it as harmful for the [station_name()]'s
+				<span style='font-size: 10px'>A D-Notice is to be bestowed upon the channel if the handling Authority deems it as harmful for the [station_name()]'s
 				morale, integrity or disciplinary behaviour. A D-Notice will render a channel unable to be updated by anyone, without deleting any feed
 				stories it might contain at the time. You can lift a D-Notice if you have the required access at any time.</span><HR>
 			"}

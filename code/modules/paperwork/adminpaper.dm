@@ -34,7 +34,7 @@
 	interactions = null
 
 	//Snapshot is crazy and likes putting each topic hyperlink on a seperate line from any other tags so it's nice and clean.
-	interactions += "<HR><center><span style='font-size: 1'>The fax will transmit everything above this line</span><br>"
+	interactions += "<HR><center><span style='font-size: 10px'>The fax will transmit everything above this line</span><br>"
 	interactions += "<A href='?src=\ref[src];confirm=1'>Send fax</A> "
 	interactions += "<A href='?src=\ref[src];penmode=1'>Pen mode: [isCrayon ? "Crayon" : "Pen"]</A> "
 	interactions += "<A href='?src=\ref[src];cancel=1'>Cancel fax</A> "
@@ -53,7 +53,7 @@
 	//TODO change logo based on who you're contacting.
 	text = "<center><img src = [logo]></br>"
 	text += "<b>[origin] Quantum Uplink Signed Message</b><br>"
-	text += "<span style='font-size: 1'>Encryption key: [originhash]<br>"
+	text += "<span style='font-size: 10px'>Encryption key: [originhash]<br>"
 	text += "Challenge: [challengehash]<br></span></center><hr>"
 
 	header = text
@@ -61,7 +61,7 @@
 /obj/item/paper/admin/proc/generateFooter()
 	var/text = null
 
-	text = "<hr><span style='font-size: 1'>"
+	text = "<hr><span style='font-size: 10px'>"
 	text += "This transmission is intended only for the addressee and may contain confidential information. Any unauthorized disclosure is strictly prohibited. <br><br>"
 	text += "If this transmission is recieved in error, please notify both the sender and the office of [GLOB.using_map.boss_name] Internal Affairs immediately so that corrective action may be taken."
 	text += "Failure to comply is a breach of regulation and may be prosecuted to the fullest extent of the law, where applicable."

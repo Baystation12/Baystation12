@@ -198,15 +198,15 @@ var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define SPAN_SIZE(size, text) SPAN_STYLE("font-size: [size]", "[text]")
 
-#define FONT_SMALL(X) SPAN_SIZE(1, "[X]")
+#define FONT_SMALL(X) SPAN_SIZE("10px", "[X]")
 
-#define FONT_NORMAL(X) SPAN_SIZE(2, "[X]")
+#define FONT_NORMAL(X) SPAN_SIZE("13px", "[X]")
 
-#define FONT_LARGE(X) SPAN_SIZE(3, "[X]")
+#define FONT_LARGE(X) SPAN_SIZE("16px", "[X]")
 
-#define FONT_HUGE(X) SPAN_SIZE(4, "[X]")
+#define FONT_HUGE(X) SPAN_SIZE("18px", "[X]")
 
-#define FONT_GIANT(X) SPAN_SIZE(5, "[X]")
+#define FONT_GIANT(X) SPAN_SIZE("24px", "[X]")
 
 #define crash_with(X) crash_at(X, __FILE__, __LINE__)
 
