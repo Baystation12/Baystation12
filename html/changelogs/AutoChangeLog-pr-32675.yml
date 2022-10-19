@@ -1,7 +1,0 @@
-author: SomeAngryMiner
-delete-after: true
-changes:
-  - rscadd: First aid kits, beakers, hyposprays, defibrillators, brute packs, ointments,
-      splints and other assorted medical equipment has received a resprite.
-  - rscadd: first-aid kits, hyposprays and other similar items that had no tech levels
-      or deconstructable matter now have it.

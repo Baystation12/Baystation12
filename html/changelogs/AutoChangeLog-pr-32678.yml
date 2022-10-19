@@ -1,5 +1,0 @@
-author: Rootoo807
-delete-after: true
-changes:
-  - bugfix: IV drips properly show the color of their contents, rather than always
-      appearing white.
