@@ -2273,6 +2273,7 @@
 #include "code\modules\mob\living\simple_animal\hostile\bad_drone.dm"
 #include "code\modules\mob\living\simple_animal\hostile\bat.dm"
 #include "code\modules\mob\living\simple_animal\hostile\bear.dm"
+#include "code\modules\mob\living\simple_animal\hostile\bluespace.dm"
 #include "code\modules\mob\living\simple_animal\hostile\creature.dm"
 #include "code\modules\mob\living\simple_animal\hostile\drake.dm"
 #include "code\modules\mob\living\simple_animal\hostile\faithful_hound.dm"
