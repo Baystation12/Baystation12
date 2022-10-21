@@ -2,7 +2,7 @@
 	display_name = "SolGov military award selection"
 	description = "A selection of military awards awarded by the Sol Central Government."
 	path = /obj/item/clothing/accessory/medal/solgov/mil
-	cost = 8
+	cost = 6
 	allowed_branches = SOLGOV_BRANCHES
 	flags = GEAR_HAS_NO_CUSTOMIZATION
 
@@ -37,7 +37,7 @@
 	display_name = "SolGov ribbon selection"
 	description = "A selection of decorations and medal ribbons awarded by the Sol Central Government."
 	path = /obj/item/clothing/accessory/ribbon/solgov
-	cost = 3
+	cost = 4
 	allowed_branches = SOLGOV_BRANCHES
 	flags = GEAR_HAS_NO_CUSTOMIZATION
 

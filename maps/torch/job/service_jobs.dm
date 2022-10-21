@@ -17,7 +17,9 @@
 		/datum/mil_branch/army = /decl/hierarchy/outfit/job/torch/crew/service/chaplain/army
 		)
 	allowed_ranks = list(
-		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/three ,
+		/datum/mil_rank/civ/second,
+		/datum/mil_rank/civ/first,
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/o2,
@@ -51,7 +53,8 @@
 		/datum/mil_branch/army = /decl/hierarchy/outfit/job/torch/crew/service/janitor/army
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/three,
+		/datum/mil_rank/civ/second,
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/fleet/e2,
 		/datum/mil_rank/ec/e3,
@@ -91,7 +94,9 @@
 		/datum/mil_branch/army = /decl/hierarchy/outfit/job/torch/crew/service/cook/army
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/three,
+		/datum/mil_rank/civ/second,
+		/datum/mil_rank/civ/first,
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e2,

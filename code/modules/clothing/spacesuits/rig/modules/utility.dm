@@ -132,7 +132,7 @@
 
 /obj/item/rig_module/chem_dispenser
 	name = "mounted chemical dispenser"
-	desc = "A complex web of tubing and needles suitable for hardsuit use."
+	desc = "A complex rechargeable web of tubing and needles suitable for hardsuit use."
 	icon_state = "injector"
 	usable = 1
 	selectable = 0
@@ -255,11 +255,27 @@
 		list("synaptizine", "synaptizine", /datum/reagent/synaptizine,       30),
 		list("hyperzine",   "hyperzine",   /datum/reagent/hyperzine,         30),
 		list("oxycodone",   "oxycodone",   /datum/reagent/tramadol/oxycodone,         30),
-		list("glucose",     "glucose",     /datum/reagent/nutriment/glucose, 80),
+		list("glucose",     "glucose",     /datum/reagent/nutriment/glucose, 80)
 		)
 
 	interface_name = "combat chem dispenser"
 	interface_desc = "Dispenses loaded chemicals directly into the bloodstream."
+
+/obj/item/rig_module/chem_dispenser/lite
+
+	name = "lite chemical injector"
+	desc = "A complex rechargeable web of tubing and needles suitable for hardsuit use."
+
+	charges = list(
+		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,         20),
+		list("inaprovaline",  "inaprovaline",  /datum/reagent/inaprovaline,     10),
+		list("dylovene",          "dylovene",  /datum/reagent/dylovene,         10),
+		list("tramadol",          "tramadol",  /datum/reagent/tramadol,         20),
+		list("glucose",            "glucose", /datum/reagent/nutriment/glucose, 30)
+		)
+
+	interface_name = "lite chem dispenser"
+	interface_desc = "Dispenses loaded chemicals directly into the bloodstream. It can be recharged and takes only those medications that were provided in advance."
 
 
 /obj/item/rig_module/chem_dispenser/injector

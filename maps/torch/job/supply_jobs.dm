@@ -75,7 +75,9 @@
 		/datum/mil_rank/army/e3,
 		/datum/mil_rank/army/e4_alt,
 		/datum/mil_rank/army/e5,
-		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/three,
+		/datum/mil_rank/civ/second,
+		/datum/mil_rank/civ/first,
 		/datum/mil_rank/civ/civ
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
@@ -120,7 +122,9 @@
 		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/passenger/research/prospector/ec
 		)
 	allowed_ranks = list(
-		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/three ,
+		/datum/mil_rank/civ/second,
+		/datum/mil_rank/civ/first,
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/ec/e3
 	)

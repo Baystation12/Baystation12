@@ -184,3 +184,8 @@
 	options += /obj/item/clothing/head/beret/pcrc
 	options += /obj/item/clothing/head/beret/saare
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(options)
+
+/datum/gear/head/federalberet
+	display_name = "federal police beret"
+	path = /obj/item/clothing/head/beret/sccfp
+	flags = GEAR_HAS_NO_CUSTOMIZATION

@@ -387,9 +387,36 @@ badges
 	desc = "A red leather-backed gold badge with silver 'SYNTH' letters written on it, displaying advanced EXO Corporative Shell IPC."
 	icon = 'maps/torch/icons/obj/obj_accessories_solgov.dmi'
 	icon_state = "solbadge"
+	badge_string = "EXO Corporative"
 	slot_flags = SLOT_BELT | SLOT_TIE | ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
 	slot = ACCESSORY_SLOT_RANK
 
+/obj/item/clothing/accessory/badge/solgov/tags/first
+	name = "contractor first class badge"
+	desc = "Plastic badge with gold inscription 'FIRST CLASS'. Owned by a corporate contractor. Shows the level of a top specialist."
+	icon = 'maps/torch/icons/obj/obj_accessories_solgov.dmi'
+	icon_state = "cont_c1"
+	badge_string = "Qualification System"
+	slot_flags = SLOT_BELT | SLOT_TIE | ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
+	slot = ACCESSORY_SLOT_RANK
+
+/obj/item/clothing/accessory/badge/solgov/tags/second
+	name = "contractor second class badge"
+	desc = "Plastic badge with gold inscription 'SECOND CLASS'. Owned by a corporate contractor. Shows the level of an average specialist."
+	icon = 'maps/torch/icons/obj/obj_accessories_solgov.dmi'
+	icon_state = "cont_c2"
+	badge_string = "Qualification System"
+	slot_flags = SLOT_BELT | SLOT_TIE | ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
+	slot = ACCESSORY_SLOT_RANK
+
+/obj/item/clothing/accessory/badge/solgov/tags/three
+	name = "contractor three class badge"
+	desc = "Plastic badge with gold inscription 'THREE CLASS'. Owned by a corporate contractor. Shows the level of a low specialist."
+	icon = 'maps/torch/icons/obj/obj_accessories_solgov.dmi'
+	icon_state = "cont_c3"
+	badge_string = "Qualification System"
+	slot_flags = SLOT_BELT | SLOT_TIE | ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
+	slot = ACCESSORY_SLOT_RANK
 
 /obj/item/clothing/accessory/badge/solgov/representative
 	name = "representative's badge"

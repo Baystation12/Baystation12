@@ -82,7 +82,9 @@
 		/datum/mil_rank/army/e3,
 		/datum/mil_rank/army/e4_alt,
 		/datum/mil_rank/army/e5,
-		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/three ,
+		/datum/mil_rank/civ/second,
+		/datum/mil_rank/civ/first,
 		/datum/mil_rank/civ/civ
 	)
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
@@ -200,7 +202,9 @@
 		/datum/mil_rank/army/e4_alt,
 		/datum/mil_rank/army/e5,
 		/datum/mil_rank/ec/e5,
-		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/three,
+		/datum/mil_rank/civ/second,
+		/datum/mil_rank/civ/first,
 		/datum/mil_rank/civ/civ
 
 	)

@@ -516,6 +516,9 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/item/stack/cable_coil/single
 	amount = 1
 
+/obj/item/stack/cable_coil/full
+	amount = 30
+
 /obj/item/stack/cable_coil/single/New(var/loc, var/length = 1, var/param_color = null)
 	..(loc, length, param_color)
 

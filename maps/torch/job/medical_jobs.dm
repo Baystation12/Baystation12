@@ -25,7 +25,8 @@
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/army/o1,
 		/datum/mil_rank/army/o2,
-		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/second,
+		/datum/mil_rank/civ/first,
 		/datum/mil_rank/civ/civ
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
@@ -71,7 +72,8 @@
 		/datum/mil_rank/ec/o1,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/army/o1,
-		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/second,
+		/datum/mil_rank/civ/first,
 		/datum/mil_rank/civ/civ
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
@@ -125,7 +127,8 @@
 		/datum/mil_rank/army/e4_alt,
 		/datum/mil_rank/army/e5,
 		/datum/mil_rank/army/e6,
-		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/three,
+		/datum/mil_rank/civ/second,
 		/datum/mil_rank/civ/civ
 	)
 	min_skill = list(   SKILL_EVA     = SKILL_BASIC,
@@ -219,7 +222,9 @@
 		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist/ec)
 
 	allowed_ranks = list(
-		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/three,
+		/datum/mil_rank/civ/second,
+		/datum/mil_rank/civ/first,
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/ec/o1)
 
@@ -262,7 +267,9 @@
 		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/ec,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/fleet)
 	allowed_ranks = list(
-		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/three,
+		/datum/mil_rank/civ/second,
+		/datum/mil_rank/civ/first,
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/o2,

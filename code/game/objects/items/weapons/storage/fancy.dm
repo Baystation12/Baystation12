@@ -294,10 +294,10 @@
 	max_w_class = ITEM_SIZE_TINY
 	throwforce = 2
 	slot_flags = SLOT_BELT
-	storage_slots = 7
+	storage_slots = 8
 
 	key_type = /obj/item/clothing/mask/smokable/cigarette/cigar
-	startswith = list(/obj/item/clothing/mask/smokable/cigarette/cigar = 6)
+	startswith = list(/obj/item/clothing/mask/smokable/cigarette/cigar = 8)
 
 /obj/item/storage/fancy/cigar/New()
 	..()

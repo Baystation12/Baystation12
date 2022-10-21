@@ -76,7 +76,8 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o1,
-		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/passenger/research/scientist,
+		/datum/mil_rank/civ/second = /decl/hierarchy/outfit/job/torch/passenger/research/scientist,
+		/datum/mil_rank/civ/first = /decl/hierarchy/outfit/job/torch/passenger/research/scientist,
 		/datum/mil_rank/sol/scientist = /decl/hierarchy/outfit/job/torch/passenger/research/scientist/solgov
 	)
 
@@ -117,7 +118,7 @@
 	allowed_ranks = list(
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/ec/e5,
-		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/passenger/research/assist,
+		/datum/mil_rank/civ/three = /decl/hierarchy/outfit/job/torch/passenger/research/assist,
 		/datum/mil_rank/sol/scientist = /decl/hierarchy/outfit/job/torch/passenger/research/assist/solgov
 	)
 	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
@@ -151,7 +152,9 @@
 	)
 
 	allowed_ranks = list(
-		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/three,
+		/datum/mil_rank/civ/second,
+		/datum/mil_rank/civ/first,
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/ec/e5
 	)

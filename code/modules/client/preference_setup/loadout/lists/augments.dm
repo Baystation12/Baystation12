@@ -44,6 +44,18 @@
 	options["recycler suite"] = /obj/item/organ/internal/augment/recycler_suite
 	gear_tweaks += new /datum/gear_tweak/path (options)
 
+/datum/gear/augment/head_major //PRX
+	display_name = "Iatric Monitor"
+	description = "A small computer system constantly tracks your physiological state and vital signs. A muscle gesture can be used to receive a simple diagnostic report, not unlike that from a handheld scanner."
+	path = /obj/item/organ/internal/augment
+	cost = 5
+
+/datum/gear/augment/head_major/New()
+	..()
+	var/list/options = list()
+	options["iatric monitor"] = /obj/item/organ/internal/augment/active/iatric_monitor
+	gear_tweaks += new /datum/gear_tweak/path (options)
+
 
 /datum/gear/augment/head_minor
 	display_name = "Head Augments (Minor)"

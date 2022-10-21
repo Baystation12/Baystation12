@@ -18554,6 +18554,9 @@
 	icon_state = "1-2"
 	},
 /obj/item/paper_bin,
+/obj/item/storage/secure/briefcase/resguard{
+	pixel_x = -14
+	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/rnd_sec)
 "hBb" = (
@@ -26057,10 +26060,6 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/xenobiology/xenoflora)
-"rcx" = (
-/obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/tiled,
-/area/hallway/primary/firstdeck/aft)
 "rdb" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 4
@@ -29688,6 +29687,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/security/wing)
+"wzn" = (
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/firstdeck/aft)
 "wzN" = (
 /obj/effect/floor_decal/corner/red{
 	dir = 9
@@ -52006,7 +52009,7 @@ mzb
 vIn
 ssg
 bEQ
-rcx
+wzn
 hvb
 hGb
 nKb

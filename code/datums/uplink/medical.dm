@@ -51,3 +51,9 @@
 	desc = "Contains most medicines you need to recover from injuries and illnesses, all in a convenient pill form. Splints for broken bones also included!"
 	item_cost = 40
 	path = /obj/item/storage/firstaid/combat
+
+/datum/uplink_item/item/medical/threeeye
+	name = "Three Eye pills"
+	desc = "Contains most medicines you need to recover from injuries and illnesses, all in a convenient pill form. Splints for broken bones also included!"
+	item_cost = 35
+	path = /obj/item/storage/pill_bottle/three_eye

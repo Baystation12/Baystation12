@@ -139,6 +139,13 @@
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	use_sound = 'sound/effects/storage/briefcase.ogg'
 
+/obj/item/storage/secure/briefcase/resguard
+	name = "EXO weapon briefcase"
+	desc = "A large briefcase with a digital locking system."
+	startswith = list(
+		/obj/item/gun/projectile/pistol/military = 1,
+		/obj/item/ammo_magazine/pistol/double/rubber = 5
+	)
 
 /obj/item/storage/secure/briefcase/attack_hand(mob/user)
 	if ((loc == user) && (locked == 1))

@@ -1,5 +1,5 @@
 /proc/generate_system_name()
-	return "[pick("Gilese","GSC", "Luyten", "GJ", "HD", "SCGECO")][prob(10) ? " Eridani" : ""] [rand(100,999)]"
+	return "[pick("Vega", "Arcturus", "Gilese", "GSC", "Luyten", "GJ", "HD", "SCGECO", "Fomalhaut ", "Polaris", "Mira", "Spica", "Sirius", "Cephei", "Aurigae", "Alaska", "Nona", "Toliman")][prob(10) ? " Eridani" : ""] [rand(100,999)]"
 
 /proc/generate_planet_name()
 	return "[capitalize(pick(GLOB.last_names))]-[pick(GLOB.greek_letters)]"
@@ -75,8 +75,8 @@
 	)
 
 	var/safety[] = list(1,2,3)//Tells the proc which options to remove later on.
-	var/nouns[] = list("love","hate","anger","peace","pride","sympathy","bravery","loyalty","honesty","integrity","compassion","charity","success","courage","deceit","skill","beauty","brilliance","pain","misery","beliefs","dreams","justice","truth","faith","liberty","knowledge","thought","information","culture","trust","dedication","progress","education","hospitality","leisure","trouble","friendships", "relaxation")
-	var/drinks[] = list("vodka and tonic","gin fizz","bahama mama","manhattan","black Russian","whiskey soda","long island tea","margarita","Irish coffee"," manly dwarf","Irish cream","doctor's delight","Beepksy Smash","tequilla sunrise","brave bull","gargle blaster","bloody mary","whiskey cola","white Russian","vodka martini","martini","Cuba libre","kahlua","vodka","wine","moonshine")
+	var/nouns[] = list("любовь","ненависть","гнев","мир","война","гордость","честь","симпатия","храбрость","лояльность","честность","целостность","сочувствие","благотворительность","успех","отвага","обман","умение","красота","ум","боль","горе","верования","мечты","справедливость","истина","вера","свобода","знание","мысль","информация","культура","доверие","посвящение","прогресс","образование","гостеприимство","досуг","проблема","дружба", "отдых") //bos translate
+	var/drinks[] = list("водка и тоник","шипучий джин","багама мама","манхэттан","чёрный русский","виски сода","чай лонг айленд","маргарита","ирландский кофе","мужественный дварф","ирландские сливки","услада доктора","бипским смэш","текилла санрайз","храбрый бык","горлодёр","кровавая мэри","виски кола","белый русский","водка мартини","мартини","куба либре","кахлуа","водка","вино","лунный свет") //bos translate
 	var/locations[] = length(stationlocs) ? stationlocs : drinks//if null, defaults to drinks instead.
 
 	var/names[] = list()

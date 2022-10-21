@@ -1,20 +1,23 @@
 /decl/cultural_info/faction/adherent
 	name = FACTION_ADHERENT_PRESERVERS
-	description = "Most adherents are part of a loose movement called the Preservers. Their core practice is to leave \
-	the worlds they explore untouched and pristine, recording and indexing them for later review by the creators or whoever \
-	inherits their place. They are the most passive and appeasing of the Vigil factions and are the most likely to be found \
-	under the aegis of other spacefaring cultures like humanity."
+	description = "Многие <font color=\"#57967f\">адхеранты</font> являются частью свободной фракции, называемой <font color=\"#009190\">Хранителями</font>. Их основная цель \
+	заключается в том, чтобы те миры, которые они исследуют, остались нетронутыми и неиспорченными, записывая и \
+	индексируя данные о них для создателей или для тех, кто займет их место. Хранители являются наиболее пассивной \
+	и миролюбивой фракцией <font color=\"#738465\">Часовых</font> и, скорее всего, будут встречаться под эгидой других цивилизаций, таких как \
+	человечество. <font color=\"#78523b\">Плакальщики</font> - это более радикальная версия Хранителей, которая посвящает себя пересказам \
+	трагедий всех своих миров, которые они \"охраняют\", а также просят посетителей не беспокоить их."
 
 /decl/cultural_info/faction/adherent/loyalists
 	name = FACTION_ADHERENT_LOYALISTS
-	description = "The Loyalists of the Vigil are dedicated to the memory of the creators in all ways. They devote themselves \
-	to their duties and their roles, embracing the ethos that service is life and purpose is happiness. Deviation from Protocol \
-	and 'disrespect' of the creators by suggesting the Vigil strike out alone is disapproved of by this faction, and they tend to \
-	be hidebound, servile and eager to please to the point of fawning over those they wish to serve."
+	description = "<font color=\"#1f6b4f\">Лоялисты</font> Часовых посвящают свою жизнь памяти создателей всеми способами. Они выполняют свои \
+	прежние обязанности, следуя простой этике: служение - это жизнь, результат - это счастье. Отклонение от \
+	Протокола и \"неуважение\" к создателям не одобряются этой фракцией, и они стремятся угодить тому, кому они \
+	хотят служить. Это самая мощная и многочисленная фракция, так как она управляется самой Центральной Системой \
+	Контроля Трафика Хаб 37-Q."
 
 /decl/cultural_info/faction/adherent/separatists
 	name = FACTION_ADHERENT_SEPARATISTS
-	description = "The Separatist faction of the Vigil agitates for the abandonment of Canon and the establishment of a new \
-	adherent order, prioritizing their needs as survivors of the Scream over the wistful hope of finding new masters. They do \
-	this circumspectly, of course, as Protocol forbids excessive social strife or violence, and decrying the creators is a \
-	good way to earn total social ostracism, or even recycling."
+	description = "<font color=\"#aa5f61\">Сепаратисты</font> Часовых выступают за то, чтобы покинуть Кэнон и установить новый порядок среди \
+	адхерантов, подчеркивая, что выжившим после Крика бессмысленно надеяться на обнаружение новых хозяев. \
+	Разумеется, они делают все осторожно, поскольку Протокол запрещает чрезмерные социальные споры или насилие, \
+	ведь осуждение создателей - это лучший способ стать изгнанником <font color=\"#738465\">Часовых</font> или даже отправиться на переработку."

@@ -201,7 +201,16 @@
 	access = access_armory
 	security_level = SUPPLY_SECURITY_ELEVATED
 
-//START-PRX@CODE
+/decl/hierarchy/supply_pack/security/pdwnt
+	name = "Weapons - NT41"
+	contains = list(/obj/item/gun/projectile/automatic/corpo = 2,
+					/obj/item/ammo_magazine/corpo = 6)
+	cost = 60
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "NT41 crate"
+	access = access_armory
+	security_level = SUPPLY_SECURITY_ELEVATED
+
 /decl/hierarchy/supply_pack/security/frags
 	name = "Weapons - Fragmentation grenades"
 	contains = list(/obj/item/storage/box/frags = 2)
@@ -211,7 +220,6 @@
 	access = access_emergency_armory
 	security_level = SUPPLY_SECURITY_HIGH
 
-//FIN-PRX@CODE
 /decl/hierarchy/supply_pack/security/flashbang
 	name = "Weapons - Flashbangs"
 	contains = list(/obj/item/storage/box/flashbangs = 2)
@@ -269,6 +277,14 @@
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "SMG practice ammunition crate"
+	access = access_security
+
+/decl/hierarchy/supply_pack/security/pdwammont
+	name = "Ammunition - Lethal NT41 ammo"
+	contains = list(/obj/item/ammo_magazine/corpo = 8)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "NT41 ammunition crate"
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/bullpupammo

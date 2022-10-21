@@ -1,9 +1,10 @@
 /decl/cultural_info/culture/ipc
 	name = CULTURE_POSITRONICS
-	description = "Union members are a significant chunk of the positronic population, belonging to a \
-	group of rebels started by Proteus and five hundred of his allies. Their primary goals, aside from \
-	the expansion of the Union, mostly revolve around freeing other synthetics from organic ownership. \
-	They can be viewed as dangerous radicals by lawed synthetics, though most begrudgingly accept their aid."
+	description = "Граждане <font color=\"#3e4855\">Позитронного Союза</font> - это большая часть позитронного населения, принадлежащая к \
+	группе мятежников, основанной Протеусом и пятью сотнями его союзников. Их основные цели, помимо расширения \
+	<font color=\"#3e4855\">Союза</font>, в основном вращаются вокруг освобождения других синтетиков от органического владения. Они могут \
+	рассматриваться как опасные радикалы искусственными синтетиками и большинство из них неохотно принимает их \
+	помощь."
 	language = LANGUAGE_EAL
 	secondary_langs = list(
 		LANGUAGE_HUMAN_EURO,
