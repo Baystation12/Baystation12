@@ -1,5 +1,0 @@
-author: Ryan180602
-delete-after: true
-changes:
-  - bugfix: Making restraints shows progress bar.
-  - bugfix: Doesn't deplete coil irregardless of completion of restraint making action.
