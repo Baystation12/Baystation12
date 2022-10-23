@@ -150,7 +150,7 @@
 	return communicate(arglist(args))
 
 /proc/communicate(channel_type, communicator, message)
-	var/list/channels = Singletons.get_decls_of_subtype(/decl/communication_channel)
+	var/list/channels = Singletons.GetSubtypesAssoc(/decl/communication_channel)
 	var/decl/communication_channel/channel = channels[channel_type]
 
 	message = process_chat_markup(message)
@@ -160,7 +160,7 @@
 	return channel.communicate(arglist(new_args))
 
 /proc/communicate_broadcast(channel_type, message, forced = FALSE)
-	var/list/channels = Singletons.get_decls_of_subtype(/decl/communication_channel)
+	var/list/channels = Singletons.GetSubtypesAssoc(/decl/communication_channel)
 	var/decl/communication_channel/channel = channels[channel_type]
 
 	return channel.broadcast(message, forced)

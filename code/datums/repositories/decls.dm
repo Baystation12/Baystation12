@@ -54,7 +54,7 @@ var/global/repository/singletons/Singletons = new
 
 
 /// Fetches an associative list of decl instances of the target type and its subtypes, creating and instantiating them if necessary.
-/repository/singletons/proc/get_decls_of_type(decl_path)
+/repository/singletons/proc/GetTypesAssoc(decl_path)
 	var/list/result = typesof_assoc[decl_path]
 	if (!result)
 		result = GetAssoc(typesof(decl_path))
@@ -63,7 +63,7 @@ var/global/repository/singletons/Singletons = new
 
 
 /// Fetches an associative list of decl instances of the target type's subtypes, creating and instantiating them if necessary.
-/repository/singletons/proc/get_decls_of_subtype(decl_path)
+/repository/singletons/proc/GetSubtypesAssoc(decl_path)
 	var/list/result = subtypesof_assoc[decl_path]
 	if (!result)
 		result = GetAssoc(subtypesof(decl_path))
@@ -72,7 +72,7 @@ var/global/repository/singletons/Singletons = new
 
 
 /// Fetches a plain list of decl instances of the target type and its subtypes, creating and instantiating them if necessary.
-/repository/singletons/proc/get_decls_of_type_plain(decl_path)
+/repository/singletons/proc/GetTypes(decl_path)
 	var/list/result = typesof_plain[decl_path]
 	if (!result)
 		result = GetList(typesof(decl_path))
@@ -81,7 +81,7 @@ var/global/repository/singletons/Singletons = new
 
 
 /// Fetches a plain list of decl instances of the target type's subtypes, creating and instantiating them if necessary.
-/repository/singletons/proc/get_decls_of_subtype_plain(decl_path)
+/repository/singletons/proc/GetSubtypes(decl_path)
 	var/list/result = subtypesof_plain[decl_path]
 	if (!result)
 		result = GetList(subtypesof(decl_path))

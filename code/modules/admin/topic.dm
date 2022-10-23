@@ -620,7 +620,7 @@
 
 	// Channels
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
-		var/list/channels = Singletons.get_decls_of_subtype(/decl/communication_channel)
+		var/list/channels = Singletons.GetSubtypesAssoc(/decl/communication_channel)
 		jobs += "<tr bgcolor='ccccff'><th colspan='[LAZYLEN(channels)]'>Channel Bans</th></tr><tr align='center'>"
 		for(var/channel_type in channels)
 			var/decl/communication_channel/channel = channels[channel_type]
