@@ -244,7 +244,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	add_log("Email address changed for [user]: [old_login] changed to [new_login]")
 	if(user.mind)
 		user.mind.initial_email_login["login"] = new_login
-		user.StoreMemory("Your email account address has been changed to [new_login].", /decl/memory_options/system)
+		user.StoreMemory("Your email account address has been changed to [new_login].", /singleton/memory_options/system)
 	if(issilicon(user))
 		var/mob/living/silicon/S = user
 		var/datum/nano_module/email_client/my_client = S.get_subsystem_from_path(/datum/nano_module/email_client)
@@ -262,14 +262,14 @@ var/global/datum/ntnet/ntnet_global = new()
 	// If even fallback login generation failed, just don't give them an email. The chance of this happening is astronomically low.
 	if(find_email_by_name(login))
 		to_chat(user, "You were not assigned an email address.")
-		user.StoreMemory("You were not assigned an email address.", /decl/memory_options/system)
+		user.StoreMemory("You were not assigned an email address.", /singleton/memory_options/system)
 	else
 		var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account(login, user.real_name, assignment)
 		EA.password = desired_password ? desired_password : GenerateKey()
 		if(user.mind)
 			user.mind.initial_email_login["login"] = EA.login
 			user.mind.initial_email_login["password"] = EA.password
-			user.StoreMemory("Your email account address is [EA.login] and the password is [EA.password].", /decl/memory_options/system)
+			user.StoreMemory("Your email account address is [EA.login] and the password is [EA.password].", /singleton/memory_options/system)
 		if(issilicon(user))
 			var/mob/living/silicon/S = user
 			var/datum/nano_module/email_client/my_client = S.get_subsystem_from_path(/datum/nano_module/email_client)

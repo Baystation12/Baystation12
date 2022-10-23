@@ -71,7 +71,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	hidden_from_codex = TRUE
 	has_fine_manipulation = FALSE
 	unarmed_types = list(/datum/unarmed_attack/bite/sharp/zombie)
-	move_intents = list(/decl/move_intent/creep)
+	move_intents = list(/singleton/move_intent/creep)
 	var/heal_rate = 1 // Regen.
 	var/mob/living/carbon/human/target = null
 	var/list/obstacles = list(
@@ -94,9 +94,9 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	H.mutations |= MUTATION_FERAL
 	H.mutations |= mNobreath //Byond doesn't like adding them all in one OR statement :(
 	H.verbs += /mob/living/carbon/proc/consume
-	H.move_intents = list(/decl/move_intent/creep) //Zooming days are over
+	H.move_intents = list(/singleton/move_intent/creep) //Zooming days are over
 	H.a_intent = "harm"
-	H.move_intent = new /decl/move_intent/creep
+	H.move_intent = new /singleton/move_intent/creep
 	H.default_run_intent = H.move_intent
 	H.default_walk_intent = H.move_intent
 
@@ -393,7 +393,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 	if (skillset && skillset.skill_list)
 		skillset.skill_list = list()
-		for(var/decl/hierarchy/skill/S in GLOB.skills) //Only want trained CQC and athletics
+		for(var/singleton/hierarchy/skill/S in GLOB.skills) //Only want trained CQC and athletics
 			skillset.skill_list[S.type] = SKILL_NONE
 		skillset.skill_list[SKILL_HAULING] = SKILL_ADEPT
 		skillset.skill_list[SKILL_COMBAT] = SKILL_ADEPT
@@ -513,15 +513,15 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 /mob/living/carbon/human/zombie/New(new_loc)
 	..(new_loc, SPECIES_ZOMBIE)
 
-	var/decl/cultural_info/culture = get_cultural_value(TAG_CULTURE)
+	var/singleton/cultural_info/culture = get_cultural_value(TAG_CULTURE)
 	SetName(culture.get_random_name(gender))
 	real_name = name
 
-	var/decl/hierarchy/outfit/outfit = pick(
-		/decl/hierarchy/outfit/job/science/scientist,\
-		/decl/hierarchy/outfit/job/engineering/engineer,\
-		/decl/hierarchy/outfit/job/cargo/mining,\
-		/decl/hierarchy/outfit/job/medical/chemist\
+	var/singleton/hierarchy/outfit/outfit = pick(
+		/singleton/hierarchy/outfit/job/science/scientist,\
+		/singleton/hierarchy/outfit/job/engineering/engineer,\
+		/singleton/hierarchy/outfit/job/cargo/mining,\
+		/singleton/hierarchy/outfit/job/medical/chemist\
 	)
 	outfit = outfit_by_type(outfit)
 	outfit.equip(src, OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR)

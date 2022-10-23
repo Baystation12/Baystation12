@@ -17,8 +17,8 @@ SUBSYSTEM_DEF(culture)
 
 /datum/controller/subsystem/culture/Initialize(start_uptime)
 
-	for(var/ftype in subtypesof(/decl/cultural_info))
-		var/decl/cultural_info/culture = ftype
+	for(var/ftype in subtypesof(/singleton/cultural_info))
+		var/singleton/cultural_info/culture = ftype
 		if(!initial(culture.name))
 			continue
 		culture = new culture

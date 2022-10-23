@@ -8,9 +8,9 @@
 //			/old_opacity: The opacity before the change.
 //			/new_opacity: The opacity after the change.
 
-GLOBAL_DATUM_INIT(opacity_set_event, /decl/observ/opacity_set, new)
+GLOBAL_DATUM_INIT(opacity_set_event, /singleton/observ/opacity_set, new)
 
-/decl/observ/opacity_set
+/singleton/observ/opacity_set
 	name = "Opacity Set"
 	expected_type = /atom
 

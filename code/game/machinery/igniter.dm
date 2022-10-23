@@ -13,12 +13,12 @@
 		/obj/item/stock_parts/power/apc
 	)
 	public_variables = list(
-		/decl/public_access/public_variable/igniter_on
+		/singleton/public_access/public_variable/igniter_on
 	)
 	public_methods = list(
-		/decl/public_access/public_method/igniter_toggle
+		/singleton/public_access/public_method/igniter_toggle
 	)
-	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/igniter = 1)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/receiver/igniter = 1)
 
 /obj/machinery/igniter/Initialize()
 	. = ..()
@@ -51,24 +51,24 @@
 		STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 	update_icon()
 
-/decl/public_access/public_variable/igniter_on
+/singleton/public_access/public_variable/igniter_on
 	expected_type = /obj/machinery/igniter
 	name = "igniter active"
 	desc = "Whether or not the igniter is igniting."
 	can_write = FALSE
 	has_updates = FALSE
 
-/decl/public_access/public_variable/holosign_on/access_var(obj/machinery/igniter/igniter)
+/singleton/public_access/public_variable/holosign_on/access_var(obj/machinery/igniter/igniter)
 	return igniter.on
 
-/decl/public_access/public_method/igniter_toggle
+/singleton/public_access/public_method/igniter_toggle
 	name = "igniter toggle"
 	desc = "Toggle the igniter on or off."
 	call_proc = /obj/machinery/igniter/proc/ignite
 
-/decl/stock_part_preset/radio/receiver/igniter
+/singleton/stock_part_preset/radio/receiver/igniter
 	frequency = BUTTON_FREQ
-	receive_and_call = list("button_active" = /decl/public_access/public_method/igniter_toggle)
+	receive_and_call = list("button_active" = /singleton/public_access/public_method/igniter_toggle)
 
 // Wall mounted remote-control igniter.
 
@@ -89,9 +89,9 @@
 		/obj/item/stock_parts/power/apc
 	)
 	public_methods = list(
-		/decl/public_access/public_method/sparker_spark
+		/singleton/public_access/public_method/sparker_spark
 	)
-	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/sparker = 1)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/receiver/sparker = 1)
 
 /obj/machinery/sparker/on_update_icon()
 	..()
@@ -148,14 +148,14 @@
 	ignite()
 	..(severity)
 
-/decl/public_access/public_method/sparker_spark
+/singleton/public_access/public_method/sparker_spark
 	name = "spark"
 	desc = "Creates sparks to ignite nearby gases."
 	call_proc = /obj/machinery/sparker/proc/ignite
 
-/decl/stock_part_preset/radio/receiver/sparker
+/singleton/stock_part_preset/radio/receiver/sparker
 	frequency = BUTTON_FREQ
-	receive_and_call = list("button_active" = /decl/public_access/public_method/sparker_spark)
+	receive_and_call = list("button_active" = /singleton/public_access/public_method/sparker_spark)
 
 /obj/machinery/button/ignition
 	name = "ignition switch"

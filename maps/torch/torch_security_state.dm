@@ -15,16 +15,16 @@
 #endif
 
 /datum/map/torch // setting the map to use this list
-	security_state = /decl/security_state/default/torchdept
+	security_state = /singleton/security_state/default/torchdept
 
 //Torch map alert levels. Refer to security_state.dm.
-/decl/security_state/default/torchdept
-	all_security_levels = list(/decl/security_level/default/torchdept/code_green, /decl/security_level/default/torchdept/code_violet, /decl/security_level/default/torchdept/code_orange, /decl/security_level/default/torchdept/code_blue, /decl/security_level/default/torchdept/code_red, /decl/security_level/default/torchdept/code_delta)
+/singleton/security_state/default/torchdept
+	all_security_levels = list(/singleton/security_level/default/torchdept/code_green, /singleton/security_level/default/torchdept/code_violet, /singleton/security_level/default/torchdept/code_orange, /singleton/security_level/default/torchdept/code_blue, /singleton/security_level/default/torchdept/code_red, /singleton/security_level/default/torchdept/code_delta)
 
-/decl/security_level/default/torchdept
+/singleton/security_level/default/torchdept
 	icon = 'maps/torch/icons/security_state.dmi'
 
-/decl/security_level/default/torchdept/code_green
+/singleton/security_level/default/torchdept/code_green
 	name = "code green"
 	icon = 'icons/misc/security_state.dmi'
 	alarm_level = "off"
@@ -41,11 +41,11 @@
 
 	var/static/datum/announcement/priority/security/security_announcement_green = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice2.ogg'))
 
-/decl/security_level/default/torchdept/code_green/switching_down_to()
+/singleton/security_level/default/torchdept/code_green/switching_down_to()
 	security_announcement_green.Announce("The situation has been resolved, and all crew are to return to their regular duties.", "Attention! Alert level lowered to code green.")
 	notify_station()
 
-/decl/security_level/default/torchdept/code_violet
+/singleton/security_level/default/torchdept/code_violet
 	name = "code violet"
 	alarm_level = "on"
 
@@ -64,7 +64,7 @@
 	up_description = "A major medical emergency has developed. Medical personnel are required to report to their supervisor for orders, and non-medical personnel are required to obey all relevant instructions from medical staff."
 	down_description = "Code violet procedures are now in effect; Medical personnel are required to report to their supervisor for orders, and non-medical personnel are required to obey relevant instructions from medical staff."
 
-/decl/security_level/default/torchdept/code_orange
+/singleton/security_level/default/torchdept/code_orange
 	name = "code orange"
 	alarm_level = "on"
 
@@ -83,7 +83,7 @@
 	down_description = "Code orange procedures are now in effect; Engineering personnel are required to report to their supervisor for orders, and non-engineering personnel are required to evacuate any affected areas and obey relevant instructions from engineering staff."
 
 
-/decl/security_level/default/torchdept/code_blue
+/singleton/security_level/default/torchdept/code_blue
 	name = "code blue"
 	icon = 'icons/misc/security_state.dmi'
 	alarm_level = "on"
@@ -102,7 +102,7 @@
 	up_description = "A major security emergency has developed. Security personnel are to report to their supervisor for orders, are permitted to search staff and facilities, and may have weapons visible on their person."
 	down_description = "Code blue procedures are now in effect. Security personnel are to report to their supervisor for orders, are permitted to search staff and facilities, and may have weapons visible on their person."
 
-/decl/security_level/default/torchdept/code_red
+/singleton/security_level/default/torchdept/code_red
 	name = "code red"
 	icon = 'icons/misc/security_state.dmi'
 	alarm_level = "on"
@@ -121,16 +121,16 @@
 
 	var/static/datum/announcement/priority/security/security_announcement_red = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/redalert1.ogg'))
 
-/decl/security_level/default/torchdept/code_red/switching_up_to()
+/singleton/security_level/default/torchdept/code_red/switching_up_to()
 	security_announcement_red.Announce(up_description, "Attention! Code red alert procedures now in effect!")
 	notify_station()
 	GLOB.using_map.unbolt_saferooms()
 
-/decl/security_level/default/torchdept/code_red/switching_down_to()
+/singleton/security_level/default/torchdept/code_red/switching_down_to()
 	security_announcement_red.Announce("Code Delta has been disengaged. All staff are to report to their supervisor for orders. All crew should obey orders from relevant emergency personnel. Security personnel are permitted to search staff and facilities, and may have weapons unholstered at any time.", "Attention! Code red alert procedures now in effect!")
 	notify_station()
 
-/decl/security_level/default/torchdept/code_delta
+/singleton/security_level/default/torchdept/code_delta
 	name = "code delta"
 	icon = 'icons/misc/security_state.dmi'
 	alarm_level = "on"
@@ -147,7 +147,7 @@
 
 	var/static/datum/announcement/priority/security/security_announcement_delta = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/effects/siren.ogg'))
 
-/decl/security_level/default/torchdept/code_delta/switching_up_to()
+/singleton/security_level/default/torchdept/code_delta/switching_up_to()
 	security_announcement_delta.Announce("Code Delta procedures have been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill.", "Attention! Delta security level reached!")
 	notify_station()
 

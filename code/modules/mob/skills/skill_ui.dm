@@ -52,24 +52,24 @@
 	.["hide_unskilled"] = hide_unskilled
 
 	var/list/skill_data = list()
-	var/decl/hierarchy/skill/skill = Singletons.Get(/decl/hierarchy/skill)
-	for(var/decl/hierarchy/skill/V in skill.children)
+	var/singleton/hierarchy/skill/skill = Singletons.Get(/singleton/hierarchy/skill)
+	for(var/singleton/hierarchy/skill/V in skill.children)
 		var/list/skill_cat = list()
 		skill_cat["name"] = V.name
 		var/list/skills_in_cat = list()
-		for(var/decl/hierarchy/skill/S in V.children)
+		for(var/singleton/hierarchy/skill/S in V.children)
 			var/offset = S.prerequisites ? S.prerequisites[S.parent.type] - 1 : 0
 			if(hide_unskilled && (get_value(S.type) + offset == SKILL_MIN))
 				continue
 			skills_in_cat += list(get_nano_row(S))
-			for(var/decl/hierarchy/skill/perk in S.children)
+			for(var/singleton/hierarchy/skill/perk in S.children)
 				skills_in_cat += list(get_nano_row(perk))
 		if(length(skills_in_cat))
 			skill_cat["skills"] = skills_in_cat
 			skill_data += list(skill_cat)
 	.["skills_by_cat"] = skill_data
 
-/datum/skillset/proc/get_nano_row(decl/hierarchy/skill/S)
+/datum/skillset/proc/get_nano_row(singleton/hierarchy/skill/S)
 	var/list/skill_item = list()
 	skill_item["name"] = S.name
 	var/value = get_value(S.type)
@@ -93,7 +93,7 @@
 	return skill_item
 
 /datum/skillset/proc/check_prerequisites(skill_type)
-	var/decl/hierarchy/skill/S = Singletons.Get(skill_type)
+	var/singleton/hierarchy/skill/S = Singletons.Get(skill_type)
 	if(!S.prerequisites)
 		return TRUE
 	for(var/prereq_type in S.prerequisites)
@@ -114,7 +114,7 @@ The generic antag version.
 	. = ..()
 	.["can_choose"] = can_choose()
 	var/list/selection_data = list()
-	var/decl/hierarchy/skill/skill = Singletons.Get(/decl/hierarchy/skill)
+	var/singleton/hierarchy/skill/skill = Singletons.Get(/singleton/hierarchy/skill)
 	for(var/i in 1 to length(max_choices))
 		var/choices = max_choices[i]
 		if(!choices)
@@ -125,7 +125,7 @@ The generic antag version.
 		var/selected = LAZYACCESS(currently_selected, i)
 		level_data["selected"] = list()
 		for(var/skill_type in selected)
-			var/decl/hierarchy/skill/S = skill_type // False type.
+			var/singleton/hierarchy/skill/S = skill_type // False type.
 			level_data["selected"] += list(list("name" = initial(S.name), "ref" = "\ref[skill_type]"))
 		level_data["remaining"] = choices - length(selected)
 		selection_data += list(level_data)
@@ -142,7 +142,7 @@ The generic antag version.
 			return 1
 		var/level = text2num(href_list["add_skill"])
 		var/list/choices = list()
-		for(var/decl/hierarchy/skill/S in GLOB.skills)
+		for(var/singleton/hierarchy/skill/S in GLOB.skills)
 			if(can_select(S.type, level))
 				choices[S.name] = S.type
 		var/choice = input(usr, "Which skill would you like to add?", "Add Skill") as null|anything in choices
@@ -187,7 +187,7 @@ The generic antag version.
 		return
 	if(skillset.get_value(skill_type) >= level)
 		return
-	var/decl/hierarchy/skill/S = Singletons.Get(skill_type)
+	var/singleton/hierarchy/skill/S = Singletons.Get(skill_type)
 	if(length(S.levels) < level)
 		return
 	if(S.prerequisites)

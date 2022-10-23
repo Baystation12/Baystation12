@@ -6,7 +6,7 @@
 	var/obj/item/stock_parts/radio/radio = holder
 	if(radio.status & PART_STAT_INSTALLED)
 		return STATUS_CLOSE
-	return ..()	
+	return ..()
 
 /datum/extension/interactive/multitool/radio/interact(obj/item/device/multitool/M, mob/user)
 	if(extension_status(user) != STATUS_INTERACTIVE)
@@ -100,7 +100,7 @@
 		. += "<tr>"
 		. += "<td><a href='?src=\ref[src];[table_tag]=1;remove=[thing]'>(-)</a></td>"
 		. += "<td><a href='?src=\ref[src];[table_tag]=1;rename=[thing]'>[thing]</a></td>"
-		var/decl/public_access/variable = selected_events[thing]
+		var/singleton/public_access/variable = selected_events[thing]
 		. += "<td><a href='?src=\ref[src];[table_tag]=1;new_val=[thing]'>[variable.name]</a></td>"
 		. += "<td><a href='?src=\ref[src];[table_tag]=1;desc=\ref[variable]'>(?)</a></td>"
 		. += "</tr>"
@@ -126,7 +126,7 @@
 		return MT_REFRESH
 	if(href_list["new_val"])
 		var/thing = href_list["new_val"]
-		var/decl/public_access/variable = selected_events && selected_events[thing]
+		var/singleton/public_access/variable = selected_events && selected_events[thing]
 		if(!variable || !LAZYLEN(valid_events))
 			return MT_REFRESH
 		var/valid_variables = list()
@@ -145,7 +145,7 @@
 		LAZYSET(selected_events, copytext(md5(num2text(rand(0, 1))), 1, 11), valid_events[pick(valid_events)]) // random key
 		return MT_REFRESH
 	if(href_list["desc"])
-		var/decl/public_access/variable = locate(href_list["desc"])
+		var/singleton/public_access/variable = locate(href_list["desc"])
 		if(istype(variable))
 			to_chat(user, variable.desc)
 		return MT_NOACTION

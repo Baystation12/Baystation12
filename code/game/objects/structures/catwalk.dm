@@ -6,7 +6,7 @@
 	density = FALSE
 	anchored = TRUE
 	layer = CATWALK_LAYER
-	footstep_type = /decl/footsteps/catwalk
+	footstep_type = /singleton/footsteps/catwalk
 	obj_flags = OBJ_FLAG_NOFALL
 	var/hatch_open = FALSE
 	var/obj/item/stack/tile/mono/plated_tile
@@ -111,9 +111,9 @@
 			ST.in_use = 0
 			src.add_fingerprint(user)
 			if(ST.use(1))
-				var/list/decls = Singletons.GetSubtypesAssoc(/decl/flooring)
-				for(var/flooring_type in decls)
-					var/decl/flooring/F = decls[flooring_type]
+				var/list/singletons = Singletons.GetSubtypesAssoc(/singleton/flooring)
+				for(var/flooring_type in singletons)
+					var/singleton/flooring/F = singletons[flooring_type]
 					if(!F.build_type)
 						continue
 					if(ispath(C.type, F.build_type))
@@ -132,7 +132,7 @@
 	anchored = TRUE
 	var/activated = FALSE
 	layer = CATWALK_LAYER
-	var/plating_type = /decl/flooring/tiling/mono
+	var/plating_type = /singleton/flooring/tiling/mono
 
 /obj/effect/catwalk_plated/Initialize(mapload)
 	. = ..()
@@ -170,8 +170,8 @@
 
 /obj/effect/catwalk_plated/dark
 	icon_state = "catwalk_plateddark"
-	plating_type = /decl/flooring/tiling/mono/dark
+	plating_type = /singleton/flooring/tiling/mono/dark
 
 /obj/effect/catwalk_plated/white
 	icon_state = "catwalk_platedwhite"
-	plating_type = /decl/flooring/tiling/mono/white
+	plating_type = /singleton/flooring/tiling/mono/white

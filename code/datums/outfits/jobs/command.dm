@@ -1,4 +1,4 @@
-/decl/hierarchy/outfit/job/captain
+/singleton/hierarchy/outfit/job/captain
 	name = OUTFIT_JOB_NAME("Captain")
 	head = /obj/item/clothing/head/caphat
 	glasses = /obj/item/clothing/glasses/sunglasses
@@ -9,13 +9,13 @@
 	pda_type = /obj/item/modular_computer/pda/captain
 	backpack_contents = list(/obj/item/storage/box/ids = 1)
 
-/decl/hierarchy/outfit/job/captain/New()
+/singleton/hierarchy/outfit/job/captain/New()
 	..()
-	backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/storage/backpack/command
-	backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/com
-	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/com
+	backpack_overrides[/singleton/backpack_outfit/backpack]      = /obj/item/storage/backpack/command
+	backpack_overrides[/singleton/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/com
+	backpack_overrides[/singleton/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/com
 
-/decl/hierarchy/outfit/job/captain/post_equip(mob/living/carbon/human/H)
+/singleton/hierarchy/outfit/job/captain/post_equip(mob/living/carbon/human/H)
 	..()
 	if(H.age>49)
 		// Since we can have something other than the default uniform at this
@@ -28,7 +28,7 @@
 			else
 				qdel(medal)
 
-/decl/hierarchy/outfit/job/hop
+/singleton/hierarchy/outfit/job/hop
 	name = OUTFIT_JOB_NAME("Head of Personnel")
 	uniform = /obj/item/clothing/under/rank/head_of_personnel
 	l_ear = /obj/item/device/radio/headset/heads/hop

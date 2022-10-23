@@ -34,5 +34,5 @@
 		if(!is_valid_event(machine, events[thing]))
 			LAZYREMOVE(events, thing)
 
-/obj/item/stock_parts/radio/proc/is_valid_event(obj/machinery/machine, decl/public_access/variable)
+/obj/item/stock_parts/radio/proc/is_valid_event(obj/machinery/machine, singleton/public_access/variable)
 	return istype(variable) && LAZYACCESS(machine.public_variables, variable.type)

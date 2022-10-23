@@ -4,28 +4,28 @@
 
 /turf/simulated/floor/shuttle/blue
 	icon_state = "floor"
-	initial_flooring = /decl/flooring/reinforced/shuttle/blue
+	initial_flooring = /singleton/flooring/reinforced/shuttle/blue
 
 /turf/simulated/floor/shuttle/yellow
 	icon_state = "floor2"
-	initial_flooring = /decl/flooring/reinforced/shuttle/yellow
+	initial_flooring = /singleton/flooring/reinforced/shuttle/yellow
 
 /turf/simulated/floor/shuttle/white
 	icon_state = "floor3"
-	initial_flooring = /decl/flooring/reinforced/shuttle/white
+	initial_flooring = /singleton/flooring/reinforced/shuttle/white
 
 /turf/simulated/floor/shuttle/red
 	icon_state = "floor4"
-	initial_flooring = /decl/flooring/reinforced/shuttle/red
+	initial_flooring = /singleton/flooring/reinforced/shuttle/red
 
 /turf/simulated/floor/shuttle/purple
 	icon_state = "floor5"
-	initial_flooring = /decl/flooring/reinforced/shuttle/purple
+	initial_flooring = /singleton/flooring/reinforced/shuttle/purple
 
 /turf/simulated/floor/shuttle/darkred
 	icon_state = "floor6"
-	initial_flooring = /decl/flooring/reinforced/shuttle/darkred
+	initial_flooring = /singleton/flooring/reinforced/shuttle/darkred
 
 /turf/simulated/floor/shuttle/black
 	icon_state = "floor7"
-	initial_flooring = /decl/flooring/reinforced/shuttle/black
+	initial_flooring = /singleton/flooring/reinforced/shuttle/black

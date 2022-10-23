@@ -1,12 +1,12 @@
-/decl/hierarchy/outfit/iccgn
-	hierarchy_type = /decl/hierarchy/outfit/iccgn
+/singleton/hierarchy/outfit/iccgn
+	hierarchy_type = /singleton/hierarchy/outfit/iccgn
 	flags = OUTFIT_RESET_EQUIPMENT | OUTFIT_ADJUSTMENT_ALL_SKIPS
 	l_ear = /obj/item/device/radio/headset/iccgn
 	back = /obj/item/storage/backpack/satchel/pocketbook/gray
 	l_hand = /obj/item/storage/backpack/dufflebag/iccgn_accessories
 
 
-/decl/hierarchy/outfit/iccgn/utility
+/singleton/hierarchy/outfit/iccgn/utility
 	name = "ICCGN - Utility"
 	head = /obj/item/clothing/head/iccgn/beret
 	uniform = /obj/item/clothing/under/iccgn/utility
@@ -16,7 +16,7 @@
 	belt = /obj/item/storage/belt/general
 
 
-/decl/hierarchy/outfit/iccgn/enlisted_service
+/singleton/hierarchy/outfit/iccgn/enlisted_service
 	name = "ICCGN - Enlisted Service"
 	head = /obj/item/clothing/head/iccgn/service
 	uniform = /obj/item/clothing/under/iccgn/service
@@ -26,7 +26,7 @@
 	belt = /obj/item/storage/belt/general
 
 
-/decl/hierarchy/outfit/iccgn/enlisted_dress
+/singleton/hierarchy/outfit/iccgn/enlisted_dress
 	name = "ICCGN - Enlisted Dress"
 	head = /obj/item/clothing/head/iccgn/service
 	uniform = /obj/item/clothing/under/iccgn/service
@@ -35,7 +35,7 @@
 	gloves = /obj/item/clothing/gloves/iccgn/duty
 
 
-/decl/hierarchy/outfit/iccgn/officer_service
+/singleton/hierarchy/outfit/iccgn/officer_service
 	name = "ICCGN - Officer Service"
 	head = /obj/item/clothing/head/iccgn/service
 	uniform = /obj/item/clothing/under/iccgn/service
@@ -45,7 +45,7 @@
 	belt = /obj/item/storage/belt/general
 
 
-/decl/hierarchy/outfit/iccgn/officer_dress
+/singleton/hierarchy/outfit/iccgn/officer_dress
 	name = "ICCGN - Officer Dress"
 	head = /obj/item/clothing/head/iccgn/service
 	uniform = /obj/item/clothing/under/iccgn/service
@@ -54,7 +54,7 @@
 	gloves = /obj/item/clothing/gloves/iccgn/duty
 
 
-/decl/hierarchy/outfit/iccgn/command_service
+/singleton/hierarchy/outfit/iccgn/command_service
 	name = "ICCGN - Command Service"
 	head = /obj/item/clothing/head/iccgn/service_command
 	uniform = /obj/item/clothing/under/iccgn/service_command
@@ -64,7 +64,7 @@
 	belt = /obj/item/storage/belt/general
 
 
-/decl/hierarchy/outfit/iccgn/command_dress
+/singleton/hierarchy/outfit/iccgn/command_dress
 	name ="ICCGN - Command Dress"
 	head = /obj/item/clothing/head/iccgn/service_command
 	uniform = /obj/item/clothing/under/iccgn/service_command

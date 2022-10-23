@@ -117,11 +117,11 @@
 	var/shakecamera = 0
 	var/a_intent = I_HELP//Living
 
-	var/decl/move_intent/move_intent = /decl/move_intent/walk
-	var/list/move_intents = list(/decl/move_intent/walk)
+	var/singleton/move_intent/move_intent = /singleton/move_intent/walk
+	var/list/move_intents = list(/singleton/move_intent/walk)
 
-	var/decl/move_intent/default_walk_intent
-	var/decl/move_intent/default_run_intent
+	var/singleton/move_intent/default_walk_intent
+	var/singleton/move_intent/default_run_intent
 
 	var/obj/buckled = null//Living
 	var/obj/item/l_hand = null//Living

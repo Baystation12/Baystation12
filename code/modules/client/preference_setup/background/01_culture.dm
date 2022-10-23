@@ -55,7 +55,7 @@
 /datum/category_item/player_setup_item/background/culture/content()
 	. = list()
 	for(var/token in tokens)
-		var/decl/cultural_info/culture = SSculture.get_culture(pref.cultural_info[token])
+		var/singleton/cultural_info/culture = SSculture.get_culture(pref.cultural_info[token])
 		var/title = "<a href='?src=\ref[src];expand_options_[token]=1'>[tokens[token]]</a><b>- </b>[pref.cultural_info[token]]"
 		var/append_text = "<a href='?src=\ref[src];toggle_verbose_[token]=1'>[hidden[token] ? "Expand" : "Collapse"]</a>"
 		. += culture.get_description(title, append_text, verbose = !hidden[token])
@@ -66,7 +66,7 @@
 				. += "<br>"
 			. += "<table width=100%><tr><td colspan=3>"
 			for (var/V in valid_values)
-				// this is yucky but we need to do it because, right now, the culture subsystem references decls by their string names
+				// this is yucky but we need to do it because, right now, the culture subsystem references singletons by their string names
 				// html_encode() doesn't properly sanitize + symbols, otherwise we could just use that
 				// instead, we manually rip out the plus symbol and then replace it on OnTopic
 				var/sanitized_value = html_encode(replacetext(V, "+", "PLUS"))

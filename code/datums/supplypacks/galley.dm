@@ -1,7 +1,7 @@
-/decl/hierarchy/supply_pack/galley
+/singleton/hierarchy/supply_pack/galley
 	name = "Galley"
 
-/decl/hierarchy/supply_pack/galley/food
+/singleton/hierarchy/supply_pack/galley/food
 	name = "General - Kitchen supplies"
 	contains = list(/obj/item/reagent_containers/food/condiment/flour = 6,
 					/obj/item/reagent_containers/food/drinks/milk = 4,
@@ -17,7 +17,7 @@
 	containername = "kitchen supplies crate"
 
 
-/decl/hierarchy/supply_pack/galley/donkpocket
+/singleton/hierarchy/supply_pack/galley/donkpocket
 	name = "General - Donk-Pocket Turnovers"
 	contains = list(
 		/obj/item/storage/box/donkpocket_protein = 2,
@@ -30,7 +30,7 @@
 	containername = "donk-pocket dufflebag"
 
 
-/decl/hierarchy/supply_pack/galley/donkpocket_premium
+/singleton/hierarchy/supply_pack/galley/donkpocket_premium
 	name = "General - Premium Donk-Pocket Turnovers"
 	contains = list(
 		/obj/item/storage/box/donkpocket_premium = 3
@@ -41,28 +41,28 @@
 	containername = "donk-pocket dufflebag"
 
 
-/decl/hierarchy/supply_pack/galley/beef
+/singleton/hierarchy/supply_pack/galley/beef
 	name = "Perishables - Beef"
 	contains = list(/obj/item/reagent_containers/food/snacks/meat/beef = 6)
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "cow meat crate"
 	cost = 20
 
-/decl/hierarchy/supply_pack/galley/goat
+/singleton/hierarchy/supply_pack/galley/goat
 	name = "Perishables - Goat meat"
 	contains = list(/obj/item/reagent_containers/food/snacks/meat/goat = 6)
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "goat meat crate"
 	cost = 20
 
-/decl/hierarchy/supply_pack/galley/chicken
+/singleton/hierarchy/supply_pack/galley/chicken
 	name = "Perishables - Poultry"
 	contains = list(/obj/item/reagent_containers/food/snacks/meat/chicken = 6)
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "chicken meat crate"
 	cost = 20
 
-/decl/hierarchy/supply_pack/galley/seafood
+/singleton/hierarchy/supply_pack/galley/seafood
 	name = "Perishables - Seafood"
 	contains = list(
 		/obj/random/fish = 8
@@ -71,14 +71,14 @@
 	containername = "seafood crate"
 	cost = 20
 
-/decl/hierarchy/supply_pack/galley/eggs
+/singleton/hierarchy/supply_pack/galley/eggs
 	name = "Perishables - Eggs"
 	contains = list(/obj/item/storage/fancy/egg_box = 2)
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "egg crate"
 	cost = 15
 
-/decl/hierarchy/supply_pack/galley/milk
+/singleton/hierarchy/supply_pack/galley/milk
 	name = "Perishables - Milk"
 	contains = list(/obj/item/reagent_containers/food/drinks/milk = 3)
 	containertype = /obj/structure/closet/crate/freezer
@@ -86,7 +86,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/galley/thoom
+/singleton/hierarchy/supply_pack/galley/thoom
 	name = "Perishables - Th'oom Juice"
 	contains = list(/obj/item/reagent_containers/food/drinks/bottle/thoom = 2)
 	containertype = /obj/structure/closet/crate/freezer
@@ -94,7 +94,7 @@
 	cost = 10
 
 
-/decl/hierarchy/supply_pack/galley/pizza
+/singleton/hierarchy/supply_pack/galley/pizza
 	num_contained = 5
 	name = "Emergency - Surprise pack of five pizzas"
 	contains = list(
@@ -107,9 +107,9 @@
 	cost = 15
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "pizza crate"
-	supply_method = /decl/supply_method/randomized
+	supply_method = /singleton/supply_method/randomized
 
-/decl/hierarchy/supply_pack/galley/rations
+/singleton/hierarchy/supply_pack/galley/rations
 	num_contained = 6
 	name = "Emergency - MREs"
 	contains = list(/obj/item/storage/mre,
@@ -125,9 +125,9 @@
 	cost = 30
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "emergency rations"
-	supply_method = /decl/supply_method/randomized
+	supply_method = /singleton/supply_method/randomized
 
-/decl/hierarchy/supply_pack/galley/party
+/singleton/hierarchy/supply_pack/galley/party
 	name = "Bar - Party equipment"
 	contains = list(
 			/obj/item/storage/box/mixedglasses = 2,
@@ -148,7 +148,7 @@
 	containername = "party equipment crate"
 
 // TODO; Add more premium drinks at a later date. Could be useful for diplomatic events or fancy parties.
-/decl/hierarchy/supply_pack/galley/premiumalcohol
+/singleton/hierarchy/supply_pack/galley/premiumalcohol
 	name = "Bar - Premium drinks"
 	contains = list(/obj/item/reagent_containers/food/drinks/bottle/premiumwine = 1,
 					/obj/item/reagent_containers/food/drinks/bottle/premiumvodka = 1)
@@ -156,7 +156,7 @@
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "premium drinks crate"
 
-/decl/hierarchy/supply_pack/galley/barsupplies
+/singleton/hierarchy/supply_pack/galley/barsupplies
 	name = "Bar - Bar supplies"
 	contains = list(
 			/obj/item/storage/box/glasses/cocktail,
@@ -175,7 +175,7 @@
 	containername = "bar supplies crate"
 
 
-/decl/hierarchy/supply_pack/galley/beer_dispenser
+/singleton/hierarchy/supply_pack/galley/beer_dispenser
 	name = "Equipment - Booze dispenser"
 	contains = list(
 			/obj/machinery/chemical_dispenser/bar_alc{anchored = FALSE}
@@ -184,7 +184,7 @@
 	containertype = /obj/structure/largecrate
 	containername = "booze dispenser crate"
 
-/decl/hierarchy/supply_pack/galley/soda_dispenser
+/singleton/hierarchy/supply_pack/galley/soda_dispenser
 	name = "Equipment - Soda dispenser"
 	contains = list(
 			/obj/machinery/chemical_dispenser/bar_soft{anchored = FALSE}
@@ -193,7 +193,7 @@
 	containertype = /obj/structure/largecrate
 	containername = "soda dispenser crate"
 
-/decl/hierarchy/supply_pack/galley/mre_dispenser
+/singleton/hierarchy/supply_pack/galley/mre_dispenser
 	name = "Equipment - MRE dispenser"
 	contains = list(
 			/obj/machinery/vending/mredispenser{anchored = FALSE}
@@ -203,7 +203,7 @@
 	containername = "MRE dispenser crate"
 
 
-/decl/hierarchy/supply_pack/galley/silverware
+/singleton/hierarchy/supply_pack/galley/silverware
 	name = "Equipment - Silver Cutlery"
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure

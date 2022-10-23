@@ -10,13 +10,13 @@ GLOBAL_LIST_EMPTY(event_listen_count)
 	if(GLOB.event_listen_count && GLOB.event_listen_count[source])
 		cleanup_event_listener(source, GLOB.event_listen_count[source])
 
-/decl/observ/register(datum/event_source, datum/listener, proc_call)
+/singleton/observ/register(datum/event_source, datum/listener, proc_call)
 	. = ..()
 	if(.)
 		GLOB.event_sources_count[event_source] += 1
 		GLOB.event_listen_count[listener] += 1
 
-/decl/observ/unregister(datum/event_source, datum/listener, proc_call)
+/singleton/observ/unregister(datum/event_source, datum/listener, proc_call)
 	. = ..()
 	if(.)
 		GLOB.event_sources_count[event_source] -= 1
@@ -27,12 +27,12 @@ GLOBAL_LIST_EMPTY(event_listen_count)
 		if(GLOB.event_listen_count[listener] <= 0)
 			GLOB.event_listen_count -= listener
 
-/decl/observ/register_global(datum/listener, proc_call)
+/singleton/observ/register_global(datum/listener, proc_call)
 	. = ..()
 	if(.)
 		GLOB.global_listen_count[listener] += 1
 
-/decl/observ/unregister_global(datum/listener, proc_call)
+/singleton/observ/unregister_global(datum/listener, proc_call)
 	. = ..()
 	if(.)
 		GLOB.global_listen_count[listener] -= 1
@@ -42,7 +42,7 @@ GLOBAL_LIST_EMPTY(event_listen_count)
 /proc/cleanup_global_listener(listener, listen_count)
 	GLOB.global_listen_count -= listener
 	for(var/entry in GLOB.all_observable_events)
-		var/decl/observ/event = entry
+		var/singleton/observ/event = entry
 		if(event.unregister_global(listener))
 			log_debug("[event] - [listener] was deleted while still registered to global events.")
 			if(!(--listen_count))
@@ -51,7 +51,7 @@ GLOBAL_LIST_EMPTY(event_listen_count)
 /proc/cleanup_source_listeners(event_source, source_listener_count)
 	GLOB.event_sources_count -= event_source
 	for(var/entry in GLOB.all_observable_events)
-		var/decl/observ/event = entry
+		var/singleton/observ/event = entry
 		var/proc_owners = event.event_sources[event_source]
 		if(proc_owners)
 			for(var/proc_owner in proc_owners)
@@ -63,7 +63,7 @@ GLOBAL_LIST_EMPTY(event_listen_count)
 /proc/cleanup_event_listener(listener, listener_count)
 	GLOB.event_listen_count -= listener
 	for(var/entry in GLOB.all_observable_events)
-		var/decl/observ/event = entry
+		var/singleton/observ/event = entry
 		for(var/event_source in event.event_sources)
 			if(event.unregister(event_source, listener))
 				log_debug("[event] - [listener] was deleted while still listening to [event_source].")

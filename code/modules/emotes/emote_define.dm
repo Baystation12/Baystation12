@@ -4,7 +4,7 @@
 //   gender-appropriate version of the same.
 // - Impaired messages do not do any substitutions.
 
-/decl/emote
+/singleton/emote
 
 	var/key                            // Command to use emote ie. '*[key]'
 	var/emote_message_1p               // First person message ('You do a flip!')
@@ -21,17 +21,17 @@
 	var/conscious = TRUE               // Do we need to be awake to emote this?
 	var/emote_range                    // falsy, or a range outside which the emote is not shown
 
-/decl/emote/proc/get_emote_message_1p(atom/user, atom/target, extra_params)
+/singleton/emote/proc/get_emote_message_1p(atom/user, atom/target, extra_params)
 	if(target)
 		return emote_message_1p_target
 	return emote_message_1p
 
-/decl/emote/proc/get_emote_message_3p(atom/user, atom/target, extra_params)
+/singleton/emote/proc/get_emote_message_3p(atom/user, atom/target, extra_params)
 	if(target)
 		return emote_message_3p_target
 	return emote_message_3p
 
-/decl/emote/proc/do_emote(atom/user, extra_params)
+/singleton/emote/proc/do_emote(atom/user, extra_params)
 
 	if(ismob(user) && check_restraints)
 		var/mob/M = user
@@ -102,14 +102,14 @@
 
 	do_extra(user, target)
 
-/decl/emote/proc/do_extra(atom/user, atom/target)
+/singleton/emote/proc/do_extra(atom/user, atom/target)
 	return
 
-/decl/emote/proc/check_user(atom/user)
+/singleton/emote/proc/check_user(atom/user)
 	return TRUE
 
-/decl/emote/proc/can_target()
+/singleton/emote/proc/can_target()
 	return (emote_message_1p_target || emote_message_3p_target)
 
-/decl/emote/dd_SortValue()
+/singleton/emote/dd_SortValue()
 	return key

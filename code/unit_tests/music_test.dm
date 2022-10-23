@@ -4,16 +4,16 @@
 
 /datum/unit_test/audio_track_validate/start_test()
 	var/list/failed = list()
-	var/list/available = Singletons.GetSubtypesAssoc(/decl/audio/track)
+	var/list/available = Singletons.GetSubtypesAssoc(/singleton/audio/track)
 	for (var/key in available)
-		var/decl/audio/track/track = available[key]
+		var/singleton/audio/track/track = available[key]
 		if (!isfile(track.source))
 			failed |= track
 			log_bad("Invalid Audio Track [track.type]: Invalid Source")
 		if (!istext(track.title))
 			failed |= track
 			log_bad("Invalid Audio Track [track.type]: Invalid Title")
-		if (!istype(track.license, /decl/license))
+		if (!istype(track.license, /singleton/license))
 			failed |= track
 			log_bad("Invalid Audio Track [track.type]: Invalid License")
 		else if (track.license.attribution_mandatory)

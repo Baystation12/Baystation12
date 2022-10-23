@@ -620,10 +620,10 @@
 
 	// Channels
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
-		var/list/channels = Singletons.GetSubtypesAssoc(/decl/communication_channel)
+		var/list/channels = Singletons.GetSubtypesAssoc(/singleton/communication_channel)
 		jobs += "<tr bgcolor='ccccff'><th colspan='[LAZYLEN(channels)]'>Channel Bans</th></tr><tr align='center'>"
 		for(var/channel_type in channels)
-			var/decl/communication_channel/channel = channels[channel_type]
+			var/singleton/communication_channel/channel = channels[channel_type]
 			if(jobban_isbanned(M, channel.name))
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[channel.name];jobban4=\ref[M]'>[SPAN_COLOR("red", "[channel.name]")]</a></td>"
 			else

@@ -6,7 +6,7 @@
 /datum/unit_test/cargo_crates_containment_test/start_test()
 	var/bad_tests = 0
 
-	for(var/decl/hierarchy/supply_pack/supply_pack in SSsupply.master_supply_list)
+	for(var/singleton/hierarchy/supply_pack/supply_pack in SSsupply.master_supply_list)
 		if(!ispath(supply_pack.containertype, /obj/structure/closet))
 			continue
 
@@ -39,7 +39,7 @@
 
 /datum/unit_test/cargo_sufficient_cost_test/start_test()
 	var/fail = FALSE
-	for(var/decl/hierarchy/supply_pack/supply_pack in SSsupply.master_supply_list)
+	for(var/singleton/hierarchy/supply_pack/supply_pack in SSsupply.master_supply_list)
 		var/sell_price = 0
 		if(ispath(supply_pack.containertype, /obj/structure/closet/crate))
 			var/obj/structure/closet/crate/crate = supply_pack.containertype

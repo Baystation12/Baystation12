@@ -3,12 +3,12 @@
 	desc = "A candle which releases pleasant-smelling oils into the air when burned."
 
 	var/scent //for the desc
-	var/decl/scent_type/style
-	var/list/scent_types = list(/decl/scent_type/rose,
-								/decl/scent_type/cinnamon,
-								/decl/scent_type/vanilla,
-								/decl/scent_type/seabreeze,
-								/decl/scent_type/lavender)
+	var/singleton/scent_type/style
+	var/list/scent_types = list(/singleton/scent_type/rose,
+								/singleton/scent_type/cinnamon,
+								/singleton/scent_type/vanilla,
+								/singleton/scent_type/seabreeze,
+								/singleton/scent_type/lavender)
 
 /obj/item/flame/candle/scented/Initialize()
 	. = ..()

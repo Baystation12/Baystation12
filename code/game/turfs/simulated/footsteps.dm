@@ -1,7 +1,7 @@
 /proc/get_footstep(footstep_type, mob/caller)
 	. = caller && caller.get_footstep(footstep_type)
 	if(!.)
-		var/decl/footsteps/FS = Singletons.Get(footstep_type)
+		var/singleton/footsteps/FS = Singletons.Get(footstep_type)
 		. = pick(FS.footstep_sounds)
 
 /turf/simulated/proc/get_footstep_sound(mob/caller)
@@ -10,19 +10,19 @@
 			return get_footstep(S.footstep_type, caller)
 
 	if(check_fluid_depth(10) && !is_flooded(TRUE))
-		return get_footstep(/decl/footsteps/water, caller)
+		return get_footstep(/singleton/footsteps/water, caller)
 
 	if(footstep_type)
 		return get_footstep(footstep_type, caller)
 
 	if(is_plating())
-		return get_footstep(/decl/footsteps/plating, caller)
+		return get_footstep(/singleton/footsteps/plating, caller)
 
 /turf/simulated/floor/get_footstep_sound(mob/caller)
 	. = ..()
 	if(!.)
 		if(!flooring || !flooring.footstep_type)
-			return get_footstep(/decl/footsteps/blank, caller)
+			return get_footstep(/singleton/footsteps/blank, caller)
 		else
 			return get_footstep(flooring.footstep_type, caller)
 
@@ -56,7 +56,7 @@
 	if((step_count % 3) && !has_gravity(src))
 		return
 
-	if(istype(move_intent, /decl/move_intent/creep)) //We don't make sounds if we're tiptoeing
+	if(istype(move_intent, /singleton/move_intent/creep)) //We don't make sounds if we're tiptoeing
 		return
 
 	var/turf/simulated/T = get_turf(src)

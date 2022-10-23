@@ -74,7 +74,7 @@ GLOBAL_DATUM_INIT(vox_raiders, /datum/antagonist/vox, new)
 		return FALSE
 
 	player.set_species(SPECIES_VOX)
-	var/decl/hierarchy/outfit/vox_raider = outfit_by_type(/decl/hierarchy/outfit/vox_raider)
+	var/singleton/hierarchy/outfit/vox_raider = outfit_by_type(/singleton/hierarchy/outfit/vox_raider)
 	vox_raider.equip(player)
 
 

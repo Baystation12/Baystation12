@@ -11,7 +11,7 @@
 	density = TRUE
 	idle_power_usage = 40
 	active_power_usage = 300
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
 
@@ -23,7 +23,7 @@
 	// These should be subtypes of /obj/item/organ
 	var/list/products = list()
 
-/obj/machinery/organ_printer/state_transition(decl/machine_construction/default/new_state)
+/obj/machinery/organ_printer/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state))
 		updateUsrDialog()

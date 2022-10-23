@@ -31,20 +31,20 @@
 
 
 ///////////////////////////////////crew
-/decl/hierarchy/outfit/corpse
-	hierarchy_type = /decl/hierarchy/outfit/corpse
+/singleton/hierarchy/outfit/corpse
+	hierarchy_type = /singleton/hierarchy/outfit/corpse
 
-/decl/hierarchy/outfit/corpse/miningstation
-	hierarchy_type = /decl/hierarchy/outfit/corpse/miningstation
+/singleton/hierarchy/outfit/corpse/miningstation
+	hierarchy_type = /singleton/hierarchy/outfit/corpse/miningstation
 
 /obj/effect/landmark/corpse/miningstation/deadminer
 	name = "Dead miner"
-	corpse_outfits = list(/decl/hierarchy/outfit/miningstation)
+	corpse_outfits = list(/singleton/hierarchy/outfit/miningstation)
 	hair_styles_per_species = list(SPECIES_HUMAN = list("cia"))
 	hair_colors_per_species = list(SPECIES_HUMAN = list("#523d28"))
 	genders_per_species = list(SPECIES_HUMAN = list(MALE))
 
-/decl/hierarchy/outfit/miningstation
+/singleton/hierarchy/outfit/miningstation
 	name = OUTFIT_JOB_NAME ("Grayson Engineer")
 	uniform = /obj/item/clothing/under/hazard
 	suit = /obj/item/clothing/suit/storage/hazardvest
@@ -56,19 +56,19 @@
 
 /obj/effect/landmark/corpse/miningstation/deadminerf
 	name = "Dead miner"
-	corpse_outfits = list(/decl/hierarchy/outfit/miningstation)
+	corpse_outfits = list(/singleton/hierarchy/outfit/miningstation)
 	hair_styles_per_species = list(SPECIES_HUMAN = list("Flaired Hair"))
 	hair_colors_per_species = list(SPECIES_HUMAN = list("#523d28"))
 	genders_per_species = list(SPECIES_HUMAN = list(FEMALE))
 
 /obj/effect/landmark/corpse/miningstation/deadminersuit
 	name = "Dead miner suit"
-	corpse_outfits = list(/decl/hierarchy/outfit/corpse/miningstation/deadminersuit)
+	corpse_outfits = list(/singleton/hierarchy/outfit/corpse/miningstation/deadminersuit)
 	hair_styles_per_species = list(SPECIES_HUMAN = list("cia"))
 	hair_colors_per_species = list(SPECIES_HUMAN = list("#523d28"))
 	genders_per_species = list(SPECIES_HUMAN = list(MALE))
 
-/decl/hierarchy/outfit/corpse/miningstation/deadminersuit
+/singleton/hierarchy/outfit/corpse/miningstation/deadminersuit
 	name = OUTFIT_JOB_NAME ("Grayson Miner Suit")
 	uniform = /obj/item/clothing/under/hazard
 	suit = /obj/item/clothing/suit/space/void/mining/alt
@@ -80,19 +80,19 @@
 
 /obj/effect/landmark/corpse/miningstation/deadmineroveralls
 	name = "Dead Miner"
-	corpse_outfits = list(/decl/hierarchy/outfit/corpse/miningstation/deadmineroveralls)
+	corpse_outfits = list(/singleton/hierarchy/outfit/corpse/miningstation/deadmineroveralls)
 	hair_styles_per_species = list(SPECIES_HUMAN = list("cia"))
 	hair_colors_per_species = list(SPECIES_HUMAN = list("#523d28"))
 	genders_per_species = list(SPECIES_HUMAN = list(MALE))
 
 /obj/effect/landmark/corpse/miningstation/deadmineroverallsf
 	name = "Dead miner"
-	corpse_outfits = list(/decl/hierarchy/outfit/corpse/miningstation/deadmineroveralls)
+	corpse_outfits = list(/singleton/hierarchy/outfit/corpse/miningstation/deadmineroveralls)
 	hair_styles_per_species = list(SPECIES_HUMAN = list("Flaired Hair"))
 	hair_colors_per_species = list(SPECIES_HUMAN = list("#523d28"))
 	genders_per_species = list(SPECIES_HUMAN = list(FEMALE))
 
-/decl/hierarchy/outfit/corpse/miningstation/deadmineroveralls
+/singleton/hierarchy/outfit/corpse/miningstation/deadmineroveralls
 	name = OUTFIT_JOB_NAME ("Grayson Miner Overalls")
 	uniform = /obj/item/clothing/under/grayson
 	shoes = /obj/item/clothing/shoes/jackboots

@@ -1,7 +1,7 @@
-/decl/appearance_handler/cardborg
+/singleton/appearance_handler/cardborg
 	var/static/list/appearances
 
-/decl/appearance_handler/cardborg/proc/item_equipped(obj/item/item, mob/user, slot)
+/singleton/appearance_handler/cardborg/proc/item_equipped(obj/item/item, mob/user, slot)
 	if(!(slot == slot_head || slot == slot_wear_suit|| slot == slot_back))
 		return
 	if(!ishuman(user))
@@ -17,21 +17,21 @@
 
 	var/image/I = get_image_from_backpack(H)
 	AddAltAppearance(H, I, GLOB.silicon_mobs+H) //you look like a robot to robots! (including yourself because you're totally a robot)
-	GLOB.logged_in_event.register_global(src, /decl/appearance_handler/cardborg/proc/mob_joined)	// Duplicate registration request are handled for us
+	GLOB.logged_in_event.register_global(src, /singleton/appearance_handler/cardborg/proc/mob_joined)	// Duplicate registration request are handled for us
 
-/decl/appearance_handler/cardborg/proc/item_removed(obj/item/item, mob/user)
+/singleton/appearance_handler/cardborg/proc/item_removed(obj/item/item, mob/user)
 	if((istype(item, /obj/item/clothing/suit/cardborg) || istype(item, /obj/item/clothing/head/cardborg)) || istype(item, /obj/item/storage/backpack))
 		RemoveAltAppearance(user)
 		if(!appearance_sources.len)
 			GLOB.logged_in_event.unregister_global(src)	// Only listen to the logged in event for as long as it's relevant
 
-/decl/appearance_handler/cardborg/proc/mob_joined(mob/user)
+/singleton/appearance_handler/cardborg/proc/mob_joined(mob/user)
 	if(issilicon(user))
 		DisplayAllAltAppearancesTo(user)
 
-/decl/appearance_handler/cardborg/proc/get_image_from_backpack(mob/living/carbon/human/H)
+/singleton/appearance_handler/cardborg/proc/get_image_from_backpack(mob/living/carbon/human/H)
 	init_appearances()
-	var/decl/cardborg_appearance/ca = appearances[H.back.type]
+	var/singleton/cardborg_appearance/ca = appearances[H.back.type]
 	if(!ca) ca = appearances[/obj/item/storage/backpack]
 
 	var/image/I = image(icon = 'icons/mob/robots.dmi', icon_state = ca.icon_state, loc = H)
@@ -39,67 +39,67 @@
 	I.overlays += image(icon = 'icons/mob/robots.dmi', icon_state = "eyes-[ca.icon_state]") //gotta look realistic
 	return I
 
-/decl/appearance_handler/cardborg/proc/init_appearances()
+/singleton/appearance_handler/cardborg/proc/init_appearances()
 	if(!appearances)
 		appearances = list()
-		for(var/decl/cardborg_appearance/ca in init_subtypes(/decl/cardborg_appearance))
+		for(var/singleton/cardborg_appearance/ca in init_subtypes(/singleton/cardborg_appearance))
 			appearances[ca.backpack_type] = ca
 
-/decl/cardborg_appearance
+/singleton/cardborg_appearance
 	var/backpack_type
 	var/icon_state
 	backpack_type = /obj/item/storage/backpack
 
-/decl/cardborg_appearance/standard
+/singleton/cardborg_appearance/standard
 	icon_state = "robot"
 
-/decl/cardborg_appearance/standard/satchel1
+/singleton/cardborg_appearance/standard/satchel1
 	backpack_type = /obj/item/storage/backpack/satchel
 
-/decl/cardborg_appearance/standard/satchel2
+/singleton/cardborg_appearance/standard/satchel2
 	backpack_type = /obj/item/storage/backpack/satchel/grey
 
-/decl/cardborg_appearance/engineering
+/singleton/cardborg_appearance/engineering
 	icon_state = "engineerrobot"
 	backpack_type = /obj/item/storage/backpack/industrial
 
-/decl/cardborg_appearance/engineering/satchel
+/singleton/cardborg_appearance/engineering/satchel
 	backpack_type = /obj/item/storage/backpack/satchel/eng
 
-/decl/cardborg_appearance/medical
+/singleton/cardborg_appearance/medical
 	icon_state = "Medbot"
 	backpack_type = /obj/item/storage/backpack/medic
 
-/decl/cardborg_appearance/medical/satchel
+/singleton/cardborg_appearance/medical/satchel
 	backpack_type = /obj/item/storage/backpack/satchel/med
 
-/decl/cardborg_appearance/science
+/singleton/cardborg_appearance/science
 	icon_state = "droid-science"
 	backpack_type = /obj/item/storage/backpack/toxins
 
-/decl/cardborg_appearance/science/satchel
+/singleton/cardborg_appearance/science/satchel
 	backpack_type = /obj/item/storage/backpack/satchel/tox
 
-/decl/cardborg_appearance/security
+/singleton/cardborg_appearance/security
 	icon_state = "securityrobot"
 	backpack_type = /obj/item/storage/backpack/security
 
-/decl/cardborg_appearance/security/satchel
+/singleton/cardborg_appearance/security/satchel
 	backpack_type = /obj/item/storage/backpack/satchel/sec
 
-/decl/cardborg_appearance/centcom
+/singleton/cardborg_appearance/centcom
 	icon_state = "centcomborg"
 	backpack_type = /obj/item/storage/backpack/command
 
-/decl/cardborg_appearance/centcom/satchel
+/singleton/cardborg_appearance/centcom/satchel
 	backpack_type = /obj/item/storage/backpack/satchel/com
 
-/decl/cardborg_appearance/syndicate
+/singleton/cardborg_appearance/syndicate
 	icon_state = "droid-combat"
 	backpack_type = /obj/item/storage/backpack/dufflebag/syndie
 
-/decl/cardborg_appearance/syndicate/med
+/singleton/cardborg_appearance/syndicate/med
 	backpack_type = /obj/item/storage/backpack/dufflebag/syndie/med
 
-/decl/cardborg_appearance/syndicate/ammo
+/singleton/cardborg_appearance/syndicate/ammo
 	backpack_type = /obj/item/storage/backpack/dufflebag/syndie/ammo

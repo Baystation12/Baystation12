@@ -90,7 +90,7 @@
 	var/list/outfits_by_name = list()
 
 	for(var/a in outfits())
-		var/decl/hierarchy/outfit/outfit = a
+		var/singleton/hierarchy/outfit/outfit = a
 		group_by(outfits_by_name, outfit.name, outfit.type)
 
 	var/number_of_issues = number_of_issues(outfits_by_name, "Names")
@@ -144,9 +144,9 @@
 /datum/unit_test/outfit_backpacks_shall_have_unique_names/start_test()
 	var/list/backpacks_by_name = list()
 
-	var/bos = Singletons.GetSubtypesAssoc(/decl/backpack_outfit)
+	var/bos = Singletons.GetSubtypesAssoc(/singleton/backpack_outfit)
 	for(var/bo in bos)
-		var/decl/backpack_outfit/backpack_outfit = bos[bo]
+		var/singleton/backpack_outfit/backpack_outfit = bos[bo]
 		group_by(backpacks_by_name, backpack_outfit.name, backpack_outfit)
 
 	var/number_of_issues = number_of_issues(backpacks_by_name, "Outfit Backpack Names")
@@ -162,9 +162,9 @@
 /datum/unit_test/space_suit_modifiers_shall_have_unique_names/start_test()
 	var/list/space_suit_modifiers_by_name = list()
 
-	var/sss = Singletons.GetSubtypesAssoc(/decl/item_modifier/space_suit)
+	var/sss = Singletons.GetSubtypesAssoc(/singleton/item_modifier/space_suit)
 	for(var/ss in sss)
-		var/decl/item_modifier/space_suit/space_suit_modifier = sss[ss]
+		var/singleton/item_modifier/space_suit/space_suit_modifier = sss[ss]
 		group_by(space_suit_modifiers_by_name, space_suit_modifier.name, space_suit_modifier)
 
 	var/number_of_issues = number_of_issues(space_suit_modifiers_by_name, "Space Suit Modifier Names")
@@ -174,24 +174,24 @@
 		pass("All space suit modifiers have unique names.")
 	return 1
 
-/datum/unit_test/proc/number_of_issues(list/entries, type, feedback = /decl/noi_feedback)
+/datum/unit_test/proc/number_of_issues(list/entries, type, feedback = /singleton/noi_feedback)
 	var/issues = 0
 	for(var/key in entries)
 		var/list/values = entries[key]
 		if(values.len > 1)
-			var/decl/noi_feedback/noif = Singletons.Get(feedback)
+			var/singleton/noi_feedback/noif = Singletons.Get(feedback)
 			noif.print(src, type, key, values)
 			issues++
 
 	return issues
 
-/decl/noi_feedback/proc/priv_print(datum/unit_test/ut, type, key, output_text)
+/singleton/noi_feedback/proc/priv_print(datum/unit_test/ut, type, key, output_text)
 	ut.log_bad("[type] - [key] - The following entries have the same value: [output_text]")
 
-/decl/noi_feedback/proc/print(datum/unit_test/ut, type, key, list/entries)
+/singleton/noi_feedback/proc/print(datum/unit_test/ut, type, key, list/entries)
 	priv_print(ut, type, key, english_list(entries))
 
-/decl/noi_feedback/detailed/print(datum/unit_test/ut, type, key, list/entries)
+/singleton/noi_feedback/detailed/print(datum/unit_test/ut, type, key, list/entries)
 	var/list/pretty_print = list()
 	pretty_print += ""
 	for(var/entry in entries)

@@ -1,8 +1,8 @@
-/decl/hierarchy/supply_pack/hydroponics
+/singleton/hierarchy/supply_pack/hydroponics
 	name = "Hydroponics"
 	containertype = /obj/structure/closet/crate/hydroponics
 
-/decl/hierarchy/supply_pack/hydroponics/hydroponics // -- Skie
+/singleton/hierarchy/supply_pack/hydroponics/hydroponics // -- Skie
 	name = "Gear - Hydroponics Supplies"
 	contains = list(/obj/item/reagent_containers/spray/plantbgone = 4,
 					/obj/item/reagent_containers/glass/bottle/ammonia = 2,
@@ -18,7 +18,7 @@
 	containername = "hydroponics supply crate"
 	access = access_hydroponics
 
-/decl/hierarchy/supply_pack/hydroponics/seeds
+/singleton/hierarchy/supply_pack/hydroponics/seeds
 	name = "Samples - Mundane Seeds"
 	contains = list(/obj/item/seeds/chiliseed,
 					/obj/item/seeds/berryseed,
@@ -41,7 +41,7 @@
 	containername = "seeds crate"
 	access = access_hydroponics
 
-/decl/hierarchy/supply_pack/hydroponics/weedcontrol
+/singleton/hierarchy/supply_pack/hydroponics/weedcontrol
 	name = "Gear - Weed control"
 	contains = list(/obj/item/material/hatchet = 2,
 					/obj/item/reagent_containers/spray/plantbgone = 4,
@@ -51,7 +51,7 @@
 	containername = "weed control crate"
 	access = access_hydroponics
 
-/decl/hierarchy/supply_pack/hydroponics/exoticseeds
+/singleton/hierarchy/supply_pack/hydroponics/exoticseeds
 	name = "Samples - Exotic seeds"
 	contains = list(/obj/item/seeds/replicapod = 2,
 					/obj/item/seeds/libertymycelium,
@@ -63,14 +63,14 @@
 	containername = "exotic Seeds crate"
 	access = access_xenobiology
 
-/decl/hierarchy/supply_pack/hydroponics/watertank
+/singleton/hierarchy/supply_pack/hydroponics/watertank
 	name = "Liquid - Water tank"
 	contains = list(/obj/structure/reagent_dispensers/watertank)
 	cost = 8
 	containertype = /obj/structure/largecrate
 	containername = "water tank crate"
 
-/decl/hierarchy/supply_pack/hydroponics/bee_keeper
+/singleton/hierarchy/supply_pack/hydroponics/bee_keeper
 	name = "Equipment - Beekeeping"
 	contains = list(/obj/item/beehive_assembly,
 					/obj/item/bee_smoker,
@@ -80,7 +80,7 @@
 	containername = "beekeeping crate"
 	access = access_hydroponics
 
-/decl/hierarchy/supply_pack/hydroponics/hydrotray
+/singleton/hierarchy/supply_pack/hydroponics/hydrotray
 	name = "Equipment - Hydroponics tray"
 	contains = list(/obj/machinery/portable_atmospherics/hydroponics{anchored = FALSE})
 	cost = 30
@@ -88,7 +88,7 @@
 	containername = "hydroponics tray crate"
 	access = access_hydroponics
 
-/decl/hierarchy/supply_pack/hydroponics/pottedplant
+/singleton/hierarchy/supply_pack/hydroponics/pottedplant
 	name = "Deco - Potted plants"
 	num_contained = 1
 	contains = list(/obj/structure/flora/pottedplant,
@@ -121,9 +121,9 @@
 	cost = 8
 	containertype = /obj/structure/closet/crate/large/hydroponics
 	containername = "potted plant crate"
-	supply_method = /decl/supply_method/randomized
+	supply_method = /singleton/supply_method/randomized
 
-/decl/hierarchy/supply_pack/hydroponics/aquaculture
+/singleton/hierarchy/supply_pack/hydroponics/aquaculture
 	name = "Samples - Aquaculture"
 	contains = list(
 					/obj/item/seeds/clam = 5,

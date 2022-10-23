@@ -43,7 +43,7 @@
 
 // Components made out of rods, or rails.
 
-/decl/crafting_stage/material/wired_rod
+/singleton/crafting_stage/material/wired_rod
 	begins_with_object_type = /obj/item/handcuffs/cable
 	item_icon_state = "wiredrod"
 	progress_message = "You wind the cable cuffs around the top of the rod."
@@ -51,13 +51,13 @@
 	completion_trigger_type = /obj/item/stack/material/rods
 	stack_consume_amount = 1
 	next_stages = list(
-		/decl/crafting_stage/spear_blade_shard,
-		/decl/crafting_stage/spear_blade_blade,
-		/decl/crafting_stage/stunprod_wirecutters,
-		/decl/crafting_stage/material/rail_assembly,
+		/singleton/crafting_stage/spear_blade_shard,
+		/singleton/crafting_stage/spear_blade_blade,
+		/singleton/crafting_stage/stunprod_wirecutters,
+		/singleton/crafting_stage/material/rail_assembly,
 	)
 
-/decl/crafting_stage/material/rail_assembly
+/singleton/crafting_stage/material/rail_assembly
 	completion_trigger_type = /obj/item/stack/material/rods
 	stack_consume_amount = 1
 	progress_message = "You wind the remaining length of cable around the new rod, securing them together."
@@ -72,24 +72,24 @@
 
 // Components made out of aluminum cans.
 
-/decl/crafting_stage/welding/hollow_can
+/singleton/crafting_stage/welding/hollow_can
 	begins_with_object_type = /obj/item/reagent_containers/food/drinks/cans
 	item_icon_state = "hollow_can"
 	progress_message = "You remove the top lid and weld the can seams shut."
 	item_desc = "An empty container with its edges welded shut."
 	next_stages = list(
-		/decl/crafting_stage/wiring/can_bomb,
-		/decl/crafting_stage/can_barrel,
+		/singleton/crafting_stage/wiring/can_bomb,
+		/singleton/crafting_stage/can_barrel,
 	)
 
-/decl/crafting_stage/can_barrel
+/singleton/crafting_stage/can_barrel
 	completion_trigger_type = /obj/item/reagent_containers/food/drinks/cans
 	item_icon_state = "can_stack"
 	progress_message = "You rip the label off the can and affix it on top of the hollow container."
 	item_desc = "Two cans that had their labels ripped off, tightly squeezed ontop of each other."
-	next_stages = list(/decl/crafting_stage/welding/can_barrel)
+	next_stages = list(/singleton/crafting_stage/welding/can_barrel)
 
-/decl/crafting_stage/welding/can_barrel
+/singleton/crafting_stage/welding/can_barrel
 	progress_message = "You weld both cans together, finishing off the makeshift barrel."
 	product = /obj/item/makeshift_barrel
 

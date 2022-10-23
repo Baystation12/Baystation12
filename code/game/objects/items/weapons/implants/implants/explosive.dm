@@ -155,7 +155,7 @@
 		return
 
 	var/memo = "Explosive implant in [target] can be activated by saying something containing the phrase ''[phrase]'', <B>say [phrase]</B> to attempt to activate. It can also be triggered with a radio signal on frequency <b>[format_frequency(src.frequency)]</b> with code <b>[code]</b>."
-	usr.StoreMemory(memo, /decl/memory_options/system)
+	usr.StoreMemory(memo, /singleton/memory_options/system)
 	to_chat(usr, memo)
 	return TRUE
 

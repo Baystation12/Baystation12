@@ -1,8 +1,8 @@
-/decl/item_modifier
+/singleton/item_modifier
 	var/name
 	var/list/type_setups
 
-/decl/item_modifier/proc/RefitItem(obj/item/I)
+/singleton/item_modifier/proc/RefitItem(obj/item/I)
 	if(!istype(I))
 		return FALSE
 

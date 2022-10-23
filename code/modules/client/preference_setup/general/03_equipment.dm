@@ -2,7 +2,7 @@
 	var/list/all_underwear
 	var/list/all_underwear_metadata
 
-	var/decl/backpack_outfit/backpack
+	var/singleton/backpack_outfit/backpack
 	var/list/backpack_metadata
 
 	var/sensor_setting
@@ -18,9 +18,9 @@
 	..()
 	if(!backpacks_by_name)
 		backpacks_by_name = list()
-		var/bos = Singletons.GetSubtypesAssoc(/decl/backpack_outfit)
+		var/bos = Singletons.GetSubtypesAssoc(/singleton/backpack_outfit)
 		for(var/bo in bos)
-			var/decl/backpack_outfit/backpack_outfit = bos[bo]
+			var/singleton/backpack_outfit/backpack_outfit = bos[bo]
 			backpacks_by_name[backpack_outfit.name] = backpack_outfit
 
 /datum/category_item/player_setup_item/physical/equipment/load_character(datum/pref_record_reader/R)
@@ -84,7 +84,7 @@
 			pref.backpack_metadata -= backpack_metadata_name
 
 	for(var/backpack_name in backpacks_by_name)
-		var/decl/backpack_outfit/backpack = backpacks_by_name[backpack_name]
+		var/singleton/backpack_outfit/backpack = backpacks_by_name[backpack_name]
 		var/list/tweak_metadata = pref.backpack_metadata["[backpack]"]
 		if(tweak_metadata)
 			for(var/tw in backpack.tweaks)
@@ -128,7 +128,7 @@
 		metadata["[gt]"] = tweak_data
 	return tweak_data
 
-/datum/category_item/player_setup_item/physical/equipment/proc/get_backpack_metadata(decl/backpack_outfit/backpack_outfit, datum/backpack_tweak/bt)
+/datum/category_item/player_setup_item/physical/equipment/proc/get_backpack_metadata(singleton/backpack_outfit/backpack_outfit, datum/backpack_tweak/bt)
 	var/metadata = pref.backpack_metadata[backpack_outfit.name]
 	if(!metadata)
 		metadata = list()
@@ -144,7 +144,7 @@
 	var/list/metadata = pref.all_underwear_metadata[underwear_category]
 	metadata["[gt]"] = new_metadata
 
-/datum/category_item/player_setup_item/physical/equipment/proc/set_backpack_metadata(decl/backpack_outfit/backpack_outfit, datum/backpack_tweak/bt, new_metadata)
+/datum/category_item/player_setup_item/physical/equipment/proc/set_backpack_metadata(singleton/backpack_outfit/backpack_outfit, datum/backpack_tweak/bt, new_metadata)
 	var/metadata = pref.backpack_metadata[backpack_outfit.name]
 	metadata["[bt]"] = new_metadata
 
@@ -177,7 +177,7 @@
 		var/backpack_name = href_list["backpack"]
 		if(!(backpack_name in backpacks_by_name))
 			return TOPIC_NOACTION
-		var/decl/backpack_outfit/bo = backpacks_by_name[backpack_name]
+		var/singleton/backpack_outfit/bo = backpacks_by_name[backpack_name]
 		var/datum/backpack_tweak/bt = locate(href_list["tweak"]) in bo.tweaks
 		if(!bt)
 			return TOPIC_NOACTION

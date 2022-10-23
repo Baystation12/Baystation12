@@ -8,9 +8,9 @@
 //			/old_invisibility: invisibility before the change
 //			/new_invisibility: invisibility after the change
 
-GLOBAL_DATUM_INIT(invisibility_set_event, /decl/observ/invisibility_set, new)
+GLOBAL_DATUM_INIT(invisibility_set_event, /singleton/observ/invisibility_set, new)
 
-/decl/observ/invisibility_set
+/singleton/observ/invisibility_set
 	name = "Invisibility Set"
 	expected_type = /atom
 

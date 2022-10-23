@@ -101,7 +101,7 @@ SUBSYSTEM_DEF(plants)
 	for (var/obj/item/seeds/seeds)
 		seeds.update_seed()
 
-	var/list/gene_datums = Singletons.GetSubtypesAssoc(/decl/plantgene)
+	var/list/gene_datums = Singletons.GetSubtypesAssoc(/singleton/plantgene)
 	var/list/used_masks = list()
 
 	for (var/tag in ALL_GENES)
@@ -109,9 +109,9 @@ SUBSYSTEM_DEF(plants)
 		while (mask in used_masks)
 			mask = uppertext(num2hex(rand(0, 0xFF)))
 
-		var/decl/plantgene/plantgene
+		var/singleton/plantgene/plantgene
 		for (var/key in gene_datums)
-			var/decl/plantgene/other = gene_datums[key]
+			var/singleton/plantgene/other = gene_datums[key]
 			if (tag == other.gene_tag)
 				gene_datums -= key
 				plantgene = other

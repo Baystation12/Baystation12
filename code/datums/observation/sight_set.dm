@@ -8,9 +8,9 @@
 //			/old_sight: sight before the change
 //			/new_sight: sight after the change
 
-GLOBAL_DATUM_INIT(sight_set_event, /decl/observ/sight_set, new)
+GLOBAL_DATUM_INIT(sight_set_event, /singleton/observ/sight_set, new)
 
-/decl/observ/sight_set
+/singleton/observ/sight_set
 	name = "Sight Set"
 	expected_type = /mob
 

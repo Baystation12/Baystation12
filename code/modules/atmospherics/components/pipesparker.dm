@@ -23,18 +23,18 @@
 		/obj/item/stock_parts/power/apc
 	)
 	public_methods = list(
-		/decl/public_access/public_method/pipe_sparker_spark
+		/singleton/public_access/public_method/pipe_sparker_spark
 	)
-	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/sparker/pipe = 1)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/receiver/sparker/pipe = 1)
 
-/decl/public_access/public_method/pipe_sparker_spark
+/singleton/public_access/public_method/pipe_sparker_spark
 	name = "pipespark"
 	desc = "Ignites gas in a pipeline."
 	call_proc = /obj/machinery/atmospherics/pipe/cap/sparker/proc/ignite
 
-/decl/stock_part_preset/radio/receiver/sparker/pipe
+/singleton/stock_part_preset/radio/receiver/sparker/pipe
 	frequency = BUTTON_FREQ
-	receive_and_call = list("button_active" = /decl/public_access/public_method/pipe_sparker_spark)
+	receive_and_call = list("button_active" = /singleton/public_access/public_method/pipe_sparker_spark)
 
 /obj/machinery/atmospherics/pipe/cap/sparker/visible
 	level = 2

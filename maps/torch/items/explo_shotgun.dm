@@ -115,7 +115,7 @@
 	name = "gun locker"
 	desc = "Wall locker holding the boomstick."
 	req_access = list(access_expedition_shuttle_helm)
-	closet_appearance = /decl/closet_appearance/wall/explo_gun
+	closet_appearance = /singleton/closet_appearance/wall/explo_gun
 	density = FALSE
 	anchored = TRUE
 	wall_mounted = TRUE
@@ -127,7 +127,7 @@
 		/obj/item/gun/projectile/shotgun/pump/exploration
 	)
 
-/decl/closet_appearance/wall/explo_gun
+/singleton/closet_appearance/wall/explo_gun
 	color = COLOR_GRAY20
 	decals = null
 	can_lock = 1

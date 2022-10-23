@@ -125,7 +125,7 @@ var/global/message_delay = 0 // To make sure restarting the recentmessages list 
 	machinetype = 6
 	produces_heat = 0
 	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/allinone
-	construct_state = /decl/machine_construction/tcomms/panel_closed/cannot_print
+	construct_state = /singleton/machine_construction/tcomms/panel_closed/cannot_print
 	machine_name = "telecommunications mainframe"
 	machine_desc = "An awkward, clunky machine that serves as an all-in-one telecommunications hub. Provides peer-to-peer communication, and not much else."
 	var/listening_freqs

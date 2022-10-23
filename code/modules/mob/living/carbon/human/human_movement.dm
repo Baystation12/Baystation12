@@ -1,5 +1,5 @@
 /mob/living/carbon/human
-	move_intents = list(/decl/move_intent/walk)
+	move_intents = list(/singleton/move_intent/walk)
 
 /mob/living/carbon/human/movement_delay()
 	var/tally = ..()

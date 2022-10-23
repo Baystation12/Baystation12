@@ -11,7 +11,7 @@
 	var/print_language = LANGUAGE_HUMAN_EURO
 
 /obj/machinery/computer/ship/sensors/spacer
-	construct_state = /decl/machine_construction/default/panel_closed/computer/no_deconstruct
+	construct_state = /singleton/machine_construction/default/panel_closed/computer/no_deconstruct
 	base_type = /obj/machinery/computer/ship/sensors
 	print_language = LANGUAGE_SPACER
 

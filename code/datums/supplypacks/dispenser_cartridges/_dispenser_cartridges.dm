@@ -1,7 +1,7 @@
-/decl/hierarchy/supply_pack/dispenser_cartridges
+/singleton/hierarchy/supply_pack/dispenser_cartridges
 	name = "Dispenser Cartridges"
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/empty
+/singleton/hierarchy/supply_pack/dispenser_cartridges/empty
 	name = "Empty dispenser cartridges"
 	containername = "empty reagent cartridge crate"
 	contains = list(

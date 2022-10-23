@@ -1,7 +1,7 @@
 /obj/structure/closet/athletic_mixed
 	name = "athletic wardrobe"
 	desc = "It's a storage unit for athletic wear."
-	closet_appearance = /decl/closet_appearance/wardrobe/mixed
+	closet_appearance = /singleton/closet_appearance/wardrobe/mixed
 
 /obj/structure/closet/athletic_mixed/WillContain()
 	return list(
@@ -43,7 +43,7 @@
 /obj/structure/closet/lasertag/red
 	name = "red laser tag equipment"
 	desc = "It's a storage unit for laser tag equipment."
-	closet_appearance = /decl/closet_appearance/wardrobe/red
+	closet_appearance = /singleton/closet_appearance/wardrobe/red
 
 /obj/structure/closet/lasertag/red/WillContain()
 	return list(
@@ -53,7 +53,7 @@
 /obj/structure/closet/lasertag/blue
 	name = "blue laser tag equipment"
 	desc = "It's a storage unit for laser tag equipment."
-	closet_appearance = /decl/closet_appearance/wardrobe
+	closet_appearance = /singleton/closet_appearance/wardrobe
 
 /obj/structure/closet/lasertag/blue/WillContain()
 	return list(

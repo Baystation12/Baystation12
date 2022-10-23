@@ -19,9 +19,9 @@
 		/obj/item/stock_parts/power/apc
 	)
 	public_methods = list(
-		/decl/public_access/public_method/flasher_flash
+		/singleton/public_access/public_method/flasher_flash
 	)
-	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/flasher = 1)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/receiver/flasher = 1)
 
 
 /obj/machinery/flasher/on_update_icon()
@@ -137,11 +137,11 @@
 	desc = "A remote control switch for a mounted flasher."
 	cooldown = 5 SECONDS
 
-/decl/public_access/public_method/flasher_flash
+/singleton/public_access/public_method/flasher_flash
 	name = "flash"
 	desc = "Performs a flash, if possible."
 	call_proc = /obj/machinery/flasher/proc/flash
 
-/decl/stock_part_preset/radio/receiver/flasher
+/singleton/stock_part_preset/radio/receiver/flasher
 	frequency = BUTTON_FREQ
-	receive_and_call = list("button_active" = /decl/public_access/public_method/flasher_flash)
+	receive_and_call = list("button_active" = /singleton/public_access/public_method/flasher_flash)

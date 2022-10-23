@@ -31,9 +31,9 @@
 
 /obj/effect/submap_landmark/joinable_submap/scavver_gantry
 	name =  "Salvage Gantry"
-	archetype = /decl/submap_archetype/derelict/scavver_gantry
+	archetype = /singleton/submap_archetype/derelict/scavver_gantry
 
-/decl/submap_archetype/derelict/scavver_gantry
+/singleton/submap_archetype/derelict/scavver_gantry
 	descriptor = "Salvage Gantry turned Ship."
 	map = "Salvage Gantry"
 	crew_jobs = list(

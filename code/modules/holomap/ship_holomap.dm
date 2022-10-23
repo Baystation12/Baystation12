@@ -13,7 +13,7 @@
 
 	uncreated_component_parts = null
 
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 	base_type = /obj/machinery/ship_map
 
 	var/light_power_on = 1

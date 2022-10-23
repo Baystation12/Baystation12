@@ -21,33 +21,33 @@
 
 	// Possible modifications to pick between
 	var/list/available_modifications = list(
-		/decl/item_modifier/space_suit/engineering,
-		/decl/item_modifier/space_suit/mining,
-		/decl/item_modifier/space_suit/medical,
-		/decl/item_modifier/space_suit/security,
-		/decl/item_modifier/space_suit/atmos,
-		/decl/item_modifier/space_suit/science,
-		/decl/item_modifier/space_suit/pilot,
-		/decl/item_modifier/space_suit/command
+		/singleton/item_modifier/space_suit/engineering,
+		/singleton/item_modifier/space_suit/mining,
+		/singleton/item_modifier/space_suit/medical,
+		/singleton/item_modifier/space_suit/security,
+		/singleton/item_modifier/space_suit/atmos,
+		/singleton/item_modifier/space_suit/science,
+		/singleton/item_modifier/space_suit/pilot,
+		/singleton/item_modifier/space_suit/command
 	)
 
 	// Extra modifications to add when emagged, duplicates won't be added
 	var/emagged_modifications = list(
-		/decl/item_modifier/space_suit/engineering,
-		/decl/item_modifier/space_suit/mining,
-		/decl/item_modifier/space_suit/medical,
-		/decl/item_modifier/space_suit/security,
-		/decl/item_modifier/space_suit/atmos,
-		/decl/item_modifier/space_suit/science,
-		/decl/item_modifier/space_suit/pilot,
-		/decl/item_modifier/space_suit/command,
-		/decl/item_modifier/space_suit/mercenary/emag
+		/singleton/item_modifier/space_suit/engineering,
+		/singleton/item_modifier/space_suit/mining,
+		/singleton/item_modifier/space_suit/medical,
+		/singleton/item_modifier/space_suit/security,
+		/singleton/item_modifier/space_suit/atmos,
+		/singleton/item_modifier/space_suit/science,
+		/singleton/item_modifier/space_suit/pilot,
+		/singleton/item_modifier/space_suit/command,
+		/singleton/item_modifier/space_suit/mercenary/emag
 	)
 
 	//Species that the suits can be configured to fit.
 	var/list/species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 
-	var/decl/item_modifier/target_modification
+	var/singleton/item_modifier/target_modification
 	var/target_species
 
 	var/mob/living/carbon/human/occupant = null

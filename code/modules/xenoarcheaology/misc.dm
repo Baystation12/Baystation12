@@ -14,7 +14,7 @@
 /obj/structure/closet/secure_closet/xenoarchaeologist
 	name = "Xenoarchaeologist Locker"
 	req_access = list(access_xenoarch)
-	closet_appearance = /decl/closet_appearance/secure_closet/expedition/science
+	closet_appearance = /singleton/closet_appearance/secure_closet/expedition/science
 
 /obj/structure/closet/secure_closet/xenoarchaeologist/New()
 	..()
@@ -37,7 +37,7 @@
 
 /obj/structure/closet/excavation
 	name = "excavation tools"
-	closet_appearance = /decl/closet_appearance/secure_closet/engineering/tools
+	closet_appearance = /singleton/closet_appearance/secure_closet/engineering/tools
 
 /obj/structure/closet/excavation/New()
 	..()

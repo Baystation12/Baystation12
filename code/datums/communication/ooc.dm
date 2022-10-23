@@ -1,4 +1,4 @@
-/decl/communication_channel/ooc
+/singleton/communication_channel/ooc
 	name = "OOC"
 	config_setting = "ooc_allowed"
 	expected_communicator_type = /client
@@ -7,7 +7,7 @@
 	mute_setting = MUTE_OOC
 	show_preference_setting = /datum/client_preference/show_ooc
 
-/decl/communication_channel/ooc/can_communicate(client/C, message)
+/singleton/communication_channel/ooc/can_communicate(client/C, message)
 	. = ..()
 	if(!.)
 		return
@@ -17,7 +17,7 @@
 			to_chat(C, SPAN_DANGER("[name] for dead mobs has been turned off."))
 			return FALSE
 
-/decl/communication_channel/ooc/do_communicate(client/C, message)
+/singleton/communication_channel/ooc/do_communicate(client/C, message)
 	var/datum/admins/holder = C.holder
 	var/is_stealthed = C.is_stealthed()
 

@@ -39,7 +39,7 @@
 /area/ship/scrap/crew/toilets
 	name = "Bathrooms"
 	icon_state = "toilet"
-	turf_initializer = /decl/turf_initializer/maintenance
+	turf_initializer = /singleton/turf_initializer/maintenance
 
 /area/ship/scrap/crew/wash
 	name = "Washroom"

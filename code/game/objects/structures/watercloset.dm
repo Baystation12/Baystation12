@@ -590,7 +590,7 @@
 /obj/item/faucet/attackby(obj/item/thing, mob/user)
 	if(isWrench(thing))
 		var/turf/simulated/floor/F = loc
-		if (istype(F) && istype(F.flooring, /decl/flooring/pool))
+		if (istype(F) && istype(F.flooring, /singleton/flooring/pool))
 			var/obj/O = new constructed_type (loc)
 			O.dir = dir
 			playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)

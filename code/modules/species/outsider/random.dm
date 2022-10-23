@@ -22,9 +22,9 @@
 	exertion_reagent_scale = 5
 	exertion_reagent_path = /datum/reagent/lactate
 	exertion_emotes_biological = list(
-		/decl/emote/exertion/biological,
-		/decl/emote/exertion/biological/breath,
-		/decl/emote/exertion/biological/pant
+		/singleton/emote/exertion/biological,
+		/singleton/emote/exertion/biological/breath,
+		/singleton/emote/exertion/biological/pant
 	)
 
 /datum/species/alium/New()
@@ -157,6 +157,6 @@
 	to_chat(user, "You can't speak GalCom or any other languages by default. You can use translator implant that spawns on top of this monolith - it will give you knowledge of any language if you hear it enough times.")
 	new/obj/item/implanter/translator(get_turf(src))
 	user.set_species(SPECIES_ALIEN)
-	var/decl/cultural_info/culture = user.get_cultural_value(TAG_CULTURE)
+	var/singleton/cultural_info/culture = user.get_cultural_value(TAG_CULTURE)
 	user.fully_replace_character_name(culture.get_random_name(user.gender))
 	user.rename_self("Humanoid Alien", 1)

@@ -203,10 +203,10 @@
 	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & INNATE) || (speaking in src.languages)))
 
 /mob/proc/get_language_prefix()
-	return get_prefix_key(/decl/prefix/language)
+	return get_prefix_key(/singleton/prefix/language)
 
 /mob/proc/is_language_prefix(prefix)
-	return prefix == get_prefix_key(/decl/prefix/language)
+	return prefix == get_prefix_key(/singleton/prefix/language)
 
 //TBD
 /mob/verb/check_languages()

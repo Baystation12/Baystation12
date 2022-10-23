@@ -23,13 +23,13 @@
 
 /mob/living/proc/SetTrait(trait_type, trait_level)
 	SHOULD_NOT_SLEEP(TRUE)
-	var/decl/trait/T = Singletons.Get(trait_type)
+	var/singleton/trait/T = Singletons.Get(trait_type)
 	if(!T.Validate(trait_level))
 		return FALSE
 
 	if (!LAZYISIN(traits, trait_type))
 		for (var/existing_trait_types in traits)
-			var/decl/trait/ET = Singletons.Get(existing_trait_types)
+			var/singleton/trait/ET = Singletons.Get(existing_trait_types)
 			if (trait_type in ET.incompatible_traits)
 				return FALSE
 
@@ -37,7 +37,7 @@
 	return TRUE
 
 /mob/living/carbon/human/SetTrait(trait_type, trait_level)
-	var/decl/trait/T = Singletons.Get(trait_type)
+	var/singleton/trait/T = Singletons.Get(trait_type)
 	if(!T.Validate(trait_level))
 		return FALSE
 
@@ -60,20 +60,20 @@
 	..(trait_type) // Could go through the trouble of nulling the traits list if it's again equal to the species list but eh
 	traits = traits || list() // But we do ensure that humans don't null their traits list, to avoid copying from species again
 
-/decl/trait
+/singleton/trait
 	var/name
 	var/description
 	/// Should either only contain TRAIT_LEVEL_EXISTS or a set of the other TRAIT_LEVEL_* levels
 	var/list/levels = list(TRAIT_LEVEL_EXISTS)
 	/// These trait types may not co-exist on the same mob/species
 	var/list/incompatible_traits
-	abstract_type = /decl/trait
+	abstract_type = /singleton/trait
 
-/decl/trait/New()
+/singleton/trait/New()
 	if(type == abstract_type)
 		CRASH("Invalid initialization")
 
-/decl/trait/proc/Validate(level)
+/singleton/trait/proc/Validate(level)
 	SHOULD_NOT_OVERRIDE(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 	SHOULD_BE_PURE(TRUE)

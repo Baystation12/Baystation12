@@ -81,7 +81,7 @@
 	if (flavor == 2 && !(augment.augment_flags & AUGMENT_CRYSTALINE))
 		to_chat(user, SPAN_WARNING("\The [augment] cannot be installed in crystaline organs."))
 		return
-	var/surgery_step = Singletons.Get(/decl/surgery_step/internal/replace_organ)
+	var/surgery_step = Singletons.Get(/singleton/surgery_step/internal/replace_organ)
 	if (augment.surgery_configure(user, user, parent, src, surgery_step))
 		return
 	var/occupied = user.internal_organs_by_name[augment.organ_tag]

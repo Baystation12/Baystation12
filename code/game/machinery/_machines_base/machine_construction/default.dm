@@ -1,25 +1,25 @@
 // Used to be called default_deconstruction_screwdriver -> default_deconstruction_crowbar and default_part_replacement
 
-/decl/machine_construction/default
+/singleton/machine_construction/default
 	needs_board = "machine"
 	var/up_state
 	var/down_state
 
-/decl/machine_construction/default/no_deconstruct/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/singleton/machine_construction/default/no_deconstruct/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	. = FALSE
 
-/decl/machine_construction/default/panel_closed
-	down_state = /decl/machine_construction/default/panel_open
+/singleton/machine_construction/default/panel_closed
+	down_state = /singleton/machine_construction/default/panel_open
 
-/decl/machine_construction/default/panel_closed/state_is_valid(obj/machinery/machine)
+/singleton/machine_construction/default/panel_closed/state_is_valid(obj/machinery/machine)
 	return !machine.panel_open
 
-/decl/machine_construction/default/panel_closed/validate_state(obj/machinery/machine)
+/singleton/machine_construction/default/panel_closed/validate_state(obj/machinery/machine)
 	. = ..()
 	if(!.)
 		try_change_state(machine, down_state)
 
-/decl/machine_construction/default/panel_closed/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/singleton/machine_construction/default/panel_closed/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
 	if (!machine.can_use_tools)
@@ -36,29 +36,29 @@
 		machine.display_parts(user)
 		return TRUE
 
-/decl/machine_construction/default/panel_closed/post_construct(obj/machinery/machine)
+/singleton/machine_construction/default/panel_closed/post_construct(obj/machinery/machine)
 	try_change_state(machine, down_state)
 	machine.panel_open = TRUE
 	machine.queue_icon_update()
 
-/decl/machine_construction/default/panel_closed/mechanics_info()
+/singleton/machine_construction/default/panel_closed/mechanics_info()
 	. = list()
 	. += "Use a screwdriver to open the panel."
 	. += "Use a parts replacer to view installed parts."
 
-/decl/machine_construction/default/panel_open
-	up_state = /decl/machine_construction/default/panel_closed
-	down_state = /decl/machine_construction/default/deconstructed
+/singleton/machine_construction/default/panel_open
+	up_state = /singleton/machine_construction/default/panel_closed
+	down_state = /singleton/machine_construction/default/deconstructed
 
-/decl/machine_construction/default/panel_open/state_is_valid(obj/machinery/machine)
+/singleton/machine_construction/default/panel_open/state_is_valid(obj/machinery/machine)
 	return machine.panel_open
 
-/decl/machine_construction/default/panel_open/validate_state(obj/machinery/machine)
+/singleton/machine_construction/default/panel_open/validate_state(obj/machinery/machine)
 	. = ..()
 	if(!.)
 		try_change_state(machine, up_state)
 
-/decl/machine_construction/default/panel_open/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/singleton/machine_construction/default/panel_open/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
 	if(isCrowbar(I))
@@ -82,7 +82,7 @@
 	if(istype(I))
 		return machine.part_insertion(user, I)
 
-/decl/machine_construction/default/panel_open/mechanics_info()
+/singleton/machine_construction/default/panel_open/mechanics_info()
 	. = list()
 	. += "Use a screwdriver to close the panel."
 	. += "Use a parts replacer to upgrade some parts."
@@ -91,4 +91,4 @@
 	. += "Remove installed parts with a wrench."
 
 // Not implemented fully as the machine will qdel on transition to this. Path needed for checks.
-/decl/machine_construction/default/deconstructed
+/singleton/machine_construction/default/deconstructed

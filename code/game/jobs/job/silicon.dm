@@ -10,7 +10,7 @@
 	minimal_player_age = 14
 	account_allowed = 0
 	economic_power = 0
-	outfit_type = /decl/hierarchy/outfit/job/silicon/ai
+	outfit_type = /singleton/hierarchy/outfit/job/silicon/ai
 	loadout_allowed = FALSE
 	hud_icon = "hudblank"
 	skill_points = 0
@@ -60,7 +60,7 @@
 	account_allowed = 0
 	economic_power = 0
 	loadout_allowed = FALSE
-	outfit_type = /decl/hierarchy/outfit/job/silicon/cyborg
+	outfit_type = /singleton/hierarchy/outfit/job/silicon/cyborg
 	hud_icon = "hudblank"
 	skill_points = 0
 	no_skill_buffs = TRUE

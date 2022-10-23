@@ -6,7 +6,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_state = "steel"
 	initial_flooring = null
-	footstep_type = /decl/footsteps/plating
+	footstep_type = /singleton/footsteps/plating
 
 /turf/simulated/floor/fixed/attackby(obj/item/C, mob/user)
 	if(istype(C, /obj/item/stack) && !isCoil(C))

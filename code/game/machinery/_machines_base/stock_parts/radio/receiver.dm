@@ -13,11 +13,11 @@
 	sanitize_events(machine, receive_and_write)
 	sanitize_events(machine, receive_and_call)
 
-/obj/item/stock_parts/radio/receiver/is_valid_event(obj/machinery/machine, decl/public_access/variable)
-	if(istype(variable, /decl/public_access/public_method))
+/obj/item/stock_parts/radio/receiver/is_valid_event(obj/machinery/machine, singleton/public_access/variable)
+	if(istype(variable, /singleton/public_access/public_method))
 		return LAZYACCESS(machine.public_methods, variable.type)
 	if(..())
-		var/decl/public_access/public_variable/thing = variable
+		var/singleton/public_access/public_variable/thing = variable
 		return thing.can_write
 
 /obj/item/stock_parts/radio/receiver/receive_signal(datum/signal/signal, receive_method, receive_param)
@@ -35,11 +35,11 @@
 		return
 	for(var/thing in receive_and_write)
 		if(!isnull(signal.data[thing]))
-			var/decl/public_access/public_variable/variable = receive_and_write[thing]
+			var/singleton/public_access/public_variable/variable = receive_and_write[thing]
 			variable.write_var_protected(machine, signal.data[thing])
 	for(var/thing in receive_and_call)
 		if(!isnull(signal.data[thing]))
-			var/decl/public_access/public_method/method = receive_and_call[thing]
+			var/singleton/public_access/public_method/method = receive_and_call[thing]
 			method.perform(machine, signal.data[thing])
 
 /obj/item/stock_parts/radio/receiver/buildable

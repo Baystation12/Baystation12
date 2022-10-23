@@ -108,7 +108,7 @@
 /obj/structure/closet/crate/plastic_smug_ammo
 	name = "dirty plastic crate"
 	desc = "Dirty and scrtached plastic crate."
-	closet_appearance = /decl/closet_appearance/crate/plastic
+	closet_appearance = /singleton/closet_appearance/crate/plastic
 
 /obj/structure/closet/crate/plastic_smug_ammo/WillContain()
 	return list(
@@ -121,7 +121,7 @@
 /obj/structure/closet/crate/plastic_smug_weapons
 	name = "dirty plastic crate"
 	desc = "Dirty and scrtached plastic crate."
-	closet_appearance = /decl/closet_appearance/crate/plastic
+	closet_appearance = /singleton/closet_appearance/crate/plastic
 
 /obj/structure/closet/crate/plastic_smug_weapons/WillContain()
 	return list(

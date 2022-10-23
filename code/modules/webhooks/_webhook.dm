@@ -1,12 +1,12 @@
-/decl/webhook
+/singleton/webhook
 	var/id
 	var/list/urls
 	var/mentions
 
-/decl/webhook/proc/get_message(list/data)
+/singleton/webhook/proc/get_message(list/data)
 	. = list()
 
-/decl/webhook/proc/http_post(target_url, payload)
+/singleton/webhook/proc/http_post(target_url, payload)
 	if (!target_url)
 		return -1
 
@@ -22,7 +22,7 @@
 		"body" = result["body"]
 	)
 
-/decl/webhook/proc/send(list/data)
+/singleton/webhook/proc/send(list/data)
 	var/message = get_message(data)
 	if(message)
 		if(mentions)

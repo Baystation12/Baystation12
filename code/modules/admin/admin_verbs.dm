@@ -682,9 +682,9 @@ var/global/list/admin_verbs_mod = list(
 
 	if(!check_rights(R_ADMIN))	return
 
-	var/decl/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
+	var/singleton/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
 
-	var/decl/security_level/new_security_level = input(usr, "It's currently [security_state.current_security_level.name].", "Select Security Level")  as null|anything in (security_state.all_security_levels - security_state.current_security_level)
+	var/singleton/security_level/new_security_level = input(usr, "It's currently [security_state.current_security_level.name].", "Select Security Level")  as null|anything in (security_state.all_security_levels - security_state.current_security_level)
 	if(!new_security_level)
 		return
 

@@ -46,7 +46,7 @@ SUBSYSTEM_DEF(jobs)
 	// Create abstract submap archetype jobs for use in prefs, etc.
 	archetype_job_datums.Cut()
 	for(var/atype in SSmapping.submap_archetypes)
-		var/decl/submap_archetype/arch = SSmapping.submap_archetypes[atype]
+		var/singleton/submap_archetype/arch = SSmapping.submap_archetypes[atype]
 		for(var/jobtype in arch.crew_jobs)
 			var/datum/job/job = get_by_path(jobtype)
 			if(!job && ispath(jobtype, /datum/job/submap))
@@ -59,7 +59,7 @@ SUBSYSTEM_DEF(jobs)
 
 	// Init skills.
 	if(!GLOB.skills.len)
-		Singletons.Get(/decl/hierarchy/skill)
+		Singletons.Get(/singleton/hierarchy/skill)
 	if(!GLOB.skills.len)
 		log_error(SPAN_WARNING("Error setting up job skill requirements, no skill datums found!"))
 
@@ -69,7 +69,7 @@ SUBSYSTEM_DEF(jobs)
 
 	for(var/atype in SSmapping.submap_archetypes)
 		var/list/submap_job_datums
-		var/decl/submap_archetype/arch = SSmapping.submap_archetypes[atype]
+		var/singleton/submap_archetype/arch = SSmapping.submap_archetypes[atype]
 		for(var/jobtype in arch.crew_jobs)
 			var/datum/job/job = get_by_path(jobtype)
 			if(job)
@@ -506,7 +506,7 @@ SUBSYSTEM_DEF(jobs)
 			remembered_info += "<b>Your department's account pin is:</b> [department_account.remote_access_pin]<br>"
 			remembered_info += "<b>Your department's account funds are:</b> [GLOB.using_map.local_currency_name_short][department_account.money]<br>"
 
-		H.StoreMemory(remembered_info, /decl/memory_options/system)
+		H.StoreMemory(remembered_info, /singleton/memory_options/system)
 
 	var/alt_title = null
 	if(H.mind)

@@ -6,7 +6,7 @@
 	announced = FALSE
 	create_record = FALSE
 	total_positions = 4
-	outfit_type = /decl/hierarchy/outfit/job/assistant
+	outfit_type = /singleton/hierarchy/outfit/job/assistant
 	hud_icon = "hudblank"
 	available_by_default = FALSE
 	allowed_ranks = null

@@ -363,7 +363,7 @@ badges
 	owner_rank = H.char_rank && H.char_rank.name
 	owner_name = H.real_name
 	owner_branch = H.char_branch && H.char_branch.name
-	var/decl/cultural_info/culture = H.get_cultural_value(TAG_RELIGION)
+	var/singleton/cultural_info/culture = H.get_cultural_value(TAG_RELIGION)
 	var/religion = culture ? culture.name : "Unset"
 	desc = "[initial(desc)]\nName: [H.real_name] ([H.get_species()])[H.char_branch ? "\nBranch: [H.char_branch.name]" : ""]\nReligion: [religion]\nBlood type: [H.b_type]"
 

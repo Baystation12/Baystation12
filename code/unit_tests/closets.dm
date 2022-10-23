@@ -5,7 +5,7 @@
 
 /datum/unit_test/closet_decal_test/start_test()
 
-	var/list/bad_decl
+	var/list/bad_singleton
 	var/list/bad_icon
 	var/list/bad_colour
 	var/list/bad_base_icon
@@ -14,10 +14,10 @@
 	var/list/bad_decal_colour
 	var/list/bad_decal_state
 
-	for(var/check_appearance in typesof(/decl/closet_appearance)-except_appearances)
-		var/decl/closet_appearance/closet = Singletons.Get(check_appearance)
+	for(var/check_appearance in typesof(/singleton/closet_appearance)-except_appearances)
+		var/singleton/closet_appearance/closet = Singletons.Get(check_appearance)
 		if(!closet)
-			LAZYADD(bad_decl, "[check_appearance]")
+			LAZYADD(bad_singleton, "[check_appearance]")
 			continue
 
 		if(!closet.icon)
@@ -42,7 +42,7 @@
 					LAZYADD(bad_decal_state, "[check_appearance] - [thing] - [closet.decal_icon]")
 
 	if( \
-		 LAZYLEN(bad_decl)         || \
+		 LAZYLEN(bad_singleton)         || \
 		 LAZYLEN(bad_icon)         || \
 		 LAZYLEN(bad_colour)       || \
 		 LAZYLEN(bad_base_icon)    || \
@@ -52,8 +52,8 @@
 		 LAZYLEN(bad_decal_state)     \
 		)
 		var/fail_msg = "Insane closet appearances found: "
-		if(LAZYLEN(bad_decl))
-			fail_msg += "\nDecl did not add itself to appropriate global list:\n[jointext("\t[bad_icon]", "\n")]."
+		if(LAZYLEN(bad_singleton))
+			fail_msg += "\nSingleton did not add itself to appropriate global list:\n[jointext("\t[bad_icon]", "\n")]."
 		if(LAZYLEN(bad_icon))
 			fail_msg += "\nNull final icon values:\n[jointext("\t[bad_icon]", "\n")]."
 		if(LAZYLEN(bad_colour))

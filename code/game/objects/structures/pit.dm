@@ -149,7 +149,7 @@
 /obj/structure/gravemarker/random/proc/generate()
 	icon_state = pick("wood","cross")
 
-	var/decl/cultural_info/S = SSculture.get_culture(CULTURE_HUMAN)
+	var/singleton/cultural_info/S = SSculture.get_culture(CULTURE_HUMAN)
 	var/nam = S.get_random_name(pick(MALE,FEMALE))
 	var/cur_year = GLOB.using_map.game_year
 	var/born = cur_year - rand(5,150)

@@ -4,11 +4,11 @@
 	base_type = /datum/extension/event_registration
 	expected_type = /datum
 	flags = EXTENSION_FLAG_IMMEDIATE
-	var/decl/observ/event
+	var/singleton/observ/event
 	var/datum/target
 	var/callproc
 
-/datum/extension/event_registration/New(datum/holder, decl/observ/event, datum/target, callproc)
+/datum/extension/event_registration/New(datum/holder, singleton/observ/event, datum/target, callproc)
 	..()
 	event.register(target, src, .proc/trigger)
 	GLOB.destroyed_event.register(target, src, .proc/qdel_self)
@@ -32,7 +32,7 @@
 	var/shuttle_moving = FALSE
 	var/given_area
 
-/datum/extension/event_registration/shuttle_stationary/New(datum/holder, decl/observ/event, datum/target, callproc, area/given_area)
+/datum/extension/event_registration/shuttle_stationary/New(datum/holder, singleton/observ/event, datum/target, callproc, area/given_area)
 	..()
 	src.given_area = given_area
 	register_shuttles()

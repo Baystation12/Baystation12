@@ -1,8 +1,8 @@
-/decl/webhook/roundend
+/singleton/webhook/roundend
 	id = WEBHOOK_ROUNDEND
 
 // Data expects three numerical fields: "survivors", "escaped", "ghosts"
-/decl/webhook/roundend/get_message(list/data)
+/singleton/webhook/roundend/get_message(list/data)
 	. = ..()
 	var/desc = "A round of **[SSticker.mode ? SSticker.mode.name : "Unknown"]** has ended.\n"
 	if(data)

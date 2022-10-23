@@ -1,4 +1,4 @@
-/decl/cultural_info/culture/skrell
+/singleton/cultural_info/culture/skrell
 	name = CULTURE_SKRELL_QERR
 	description = "Considered as the leaders of Skrellkind, the Qerr-Katish are the face and soul of skrellian society. \
 		Managers, diplomats, lawyers, they are notably the only caste allowed to fulfil the role of Qerr-Skria,\
@@ -17,7 +17,7 @@
 		LANGUAGE_SPACER
 	)
 
-/decl/cultural_info/culture/skrell/caste_malish
+/singleton/cultural_info/culture/skrell/caste_malish
 	name = CULTURE_SKRELL_MALISH
 	description = "If the Qerr-Katish are the face of Skrellkind, the Malish-Katish are its brain. Scientists of all sorts, \
 		researchers, scholars, they are the ones who allow skrellian society to grow, be it technologically or ideologically. \
@@ -29,7 +29,7 @@
 		Their skin is generally pale green, sky blue or pale yellow."
 	economic_power = 1.3
 
-/decl/cultural_info/culture/skrell/caste_kanin
+/singleton/cultural_info/culture/skrell/caste_kanin
 	name = CULTURE_SKRELL_KANIN
 	description = "The main workforce of the Skrell. While their population growth has decreased over the millennia of technological \
 		progress they are still one of the most populous castes. With activities ranging from goods production and services \
@@ -43,7 +43,7 @@
 	economic_power = 1.2
 
 
-/decl/cultural_info/culture/skrell/caste_talum
+/singleton/cultural_info/culture/skrell/caste_talum
 	name = CULTURE_SKRELL_TALUM
 	description = " Considering the Skrells' emphasis on functionality and practicality, one would be mistaken to think they do not consider arts much. \
 		This very important sector of skrellian society is handled by the Talum-Katish, artists, aesthetes, entertainers, chefs, actors, writers, singers. \
@@ -56,7 +56,7 @@
 		clothing that is colourful , adorned with embroidery and their headtails sparkling with various brilliant metals. Their skin is generally purple, blue, pink, orange, red or white."
 	economic_power = 1.3
 
-/decl/cultural_info/culture/skrell/caste_raskinta
+/singleton/cultural_info/culture/skrell/caste_raskinta
 	name = CULTURE_SKRELL_RASKINTA
 	description = "Rarely seen outside the skrellian society, the Raskinta-Katish are however recognised and respected by their entire species, for \
 		they are the ones who ensure the safety and stability of skrellian civilisation, both against internal and external threats. \

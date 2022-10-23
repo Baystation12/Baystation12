@@ -56,7 +56,7 @@
 /datum/skillset/proc/update_special_effects()
 	if(!owner)
 		return
-	for(var/decl/hierarchy/skill/skill in GLOB.skills)
+	for(var/singleton/hierarchy/skill/skill in GLOB.skills)
 		skill.update_special_effects(owner, get_value(skill.type))
 
 /datum/skillset/proc/obtain_from_client(datum/job/job, client/given_client, override = 0)
@@ -70,7 +70,7 @@
 	var/allocation = given_client.prefs.skills_allocated[job] || list()
 	skill_list = list()
 
-	for(var/decl/hierarchy/skill/S in GLOB.skills)
+	for(var/singleton/hierarchy/skill/S in GLOB.skills)
 		var/min = job ? given_client.prefs.get_min_skill(job, S) : SKILL_MIN
 		skill_list[S.type] = min + (allocation[S] || 0)
 	on_levels_change()
@@ -81,7 +81,7 @@
 
 	skill_list = list()
 
-	for(var/decl/hierarchy/skill/S in GLOB.skills)
+	for(var/singleton/hierarchy/skill/S in GLOB.skills)
 		skill_list[S.type] = job.get_min_skill(S)
 	on_levels_change()
 

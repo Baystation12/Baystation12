@@ -9,7 +9,7 @@
 	interact_offline = 1
 	layer = ABOVE_HUMAN_LAYER
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
 
@@ -192,7 +192,7 @@
 		go_out()
 		return TOPIC_REFRESH
 
-/obj/machinery/atmospherics/unary/cryo_cell/state_transition(decl/machine_construction/default/new_state)
+/obj/machinery/atmospherics/unary/cryo_cell/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state))
 		updateUsrDialog()

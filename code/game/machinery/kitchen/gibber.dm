@@ -7,7 +7,7 @@
 	density = TRUE
 	anchored = TRUE
 	req_access = list(access_kitchen,access_morgue)
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
 

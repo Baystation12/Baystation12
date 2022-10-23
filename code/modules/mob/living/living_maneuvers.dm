@@ -1,5 +1,5 @@
 /mob/living
-	var/decl/maneuver/prepared_maneuver
+	var/singleton/maneuver/prepared_maneuver
 	var/list/available_maneuvers = list()
 
 /mob/living/begin_falling(lastloc, below)
@@ -47,14 +47,14 @@
 		to_chat(src, SPAN_NOTICE("You are no longer preparing to perform a maneuver."))
 
 /mob/living/proc/perform_maneuver(maneuver, atom/target)
-	var/decl/maneuver/performing_maneuver = ispath(maneuver) ? Singletons.Get(maneuver) : maneuver
+	var/singleton/maneuver/performing_maneuver = ispath(maneuver) ? Singletons.Get(maneuver) : maneuver
 	if(istype(performing_maneuver))
 		. = performing_maneuver.perform(src, target, get_acrobatics_multiplier(performing_maneuver))
 
-/mob/living/proc/get_acrobatics_multiplier(decl/maneuver/attempting_maneuver)
+/mob/living/proc/get_acrobatics_multiplier(singleton/maneuver/attempting_maneuver)
 	return 1
 
-/mob/living/proc/can_do_maneuver(decl/maneuver/maneuver, silent = FALSE)
+/mob/living/proc/can_do_maneuver(singleton/maneuver/maneuver, silent = FALSE)
 	. = ((istype(maneuver) ? maneuver.type : maneuver) in available_maneuvers)
 
 /mob/living/proc/get_jump_distance()

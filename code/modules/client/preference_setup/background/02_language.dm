@@ -62,7 +62,7 @@
 		return
 
 	for(var/thing in pref.cultural_info)
-		var/decl/cultural_info/culture = SSculture.get_culture(pref.cultural_info[thing])
+		var/singleton/cultural_info/culture = SSculture.get_culture(pref.cultural_info[thing])
 		if(istype(culture))
 			var/list/langs = culture.get_spoken_languages()
 			if(LAZYLEN(langs))

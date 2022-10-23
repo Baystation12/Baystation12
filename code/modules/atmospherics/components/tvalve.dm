@@ -283,38 +283,38 @@
 		new /obj/item/pipe(loc, src)
 		qdel(src)
 
-/decl/public_access/public_variable/tvalve_state
+/singleton/public_access/public_variable/tvalve_state
 	expected_type = /obj/machinery/atmospherics/tvalve
 	name = "valve state"
 	desc = "If true, the output is diverted to the side; if false, the output goes straight."
 	can_write = FALSE
 	has_updates = FALSE
 
-/decl/public_access/public_variable/tvalve_state/access_var(obj/machinery/atmospherics/tvalve/tvalve)
+/singleton/public_access/public_variable/tvalve_state/access_var(obj/machinery/atmospherics/tvalve/tvalve)
 	return tvalve.state
 
-/decl/public_access/public_method/tvalve_go_straight
+/singleton/public_access/public_method/tvalve_go_straight
 	name = "valve go straight"
 	desc = "Sets the valve to send output straight."
 	call_proc = /obj/machinery/atmospherics/tvalve/proc/go_straight
 
-/decl/public_access/public_method/tvalve_go_side
+/singleton/public_access/public_method/tvalve_go_side
 	name = "valve go side"
 	desc = "Redirects output to the side."
 	call_proc = /obj/machinery/atmospherics/tvalve/proc/go_to_side
 
-/decl/public_access/public_method/tvalve_toggle
+/singleton/public_access/public_method/tvalve_toggle
 	name = "valve toggle"
 	desc = "Toggles the output direction."
 	call_proc = /obj/machinery/atmospherics/tvalve/proc/toggle
 
-/decl/stock_part_preset/radio/receiver/tvalve
+/singleton/stock_part_preset/radio/receiver/tvalve
 	frequency = FUEL_FREQ
 	filter = RADIO_ATMOSIA
 	receive_and_call = list(
-		"valve_open" = /decl/public_access/public_method/tvalve_go_side,
-		"valve_close" = /decl/public_access/public_method/tvalve_go_straight,
-		"valve_toggle" = /decl/public_access/public_method/tvalve_toggle
+		"valve_open" = /singleton/public_access/public_method/tvalve_go_side,
+		"valve_close" = /singleton/public_access/public_method/tvalve_go_straight,
+		"valve_toggle" = /singleton/public_access/public_method/tvalve_toggle
 	)
 
 //Mirrored editions
@@ -357,13 +357,13 @@
 		/obj/item/stock_parts/radio/receiver,
 		/obj/item/stock_parts/power/apc
 	)
-	public_variables = list(/decl/public_access/public_variable/tvalve_state)
+	public_variables = list(/singleton/public_access/public_variable/tvalve_state)
 	public_methods = list(
-		/decl/public_access/public_method/tvalve_go_side,
-		/decl/public_access/public_method/tvalve_go_straight,
-		/decl/public_access/public_method/tvalve_toggle
+		/singleton/public_access/public_method/tvalve_go_side,
+		/singleton/public_access/public_method/tvalve_go_straight,
+		/singleton/public_access/public_method/tvalve_toggle
 	)
-	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/tvalve = 1)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/receiver/tvalve = 1)
 
 /obj/machinery/atmospherics/tvalve/digital/on_update_icon()
 	..()
@@ -392,13 +392,13 @@
 		/obj/item/stock_parts/radio/receiver,
 		/obj/item/stock_parts/power/apc
 	)
-	public_variables = list(/decl/public_access/public_variable/tvalve_state)
+	public_variables = list(/singleton/public_access/public_variable/tvalve_state)
 	public_methods = list(
-		/decl/public_access/public_method/tvalve_go_side,
-		/decl/public_access/public_method/tvalve_go_straight,
-		/decl/public_access/public_method/tvalve_toggle
+		/singleton/public_access/public_method/tvalve_go_side,
+		/singleton/public_access/public_method/tvalve_go_straight,
+		/singleton/public_access/public_method/tvalve_toggle
 	)
-	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/tvalve = 1)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/receiver/tvalve = 1)
 
 /obj/machinery/atmospherics/tvalve/mirrored/digital/on_update_icon()
 	..()

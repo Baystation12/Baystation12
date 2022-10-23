@@ -5,7 +5,7 @@
 /obj/structure/closet/toolcloset/excavation
 	name = "excavation equipment closet"
 	desc = "It's a storage unit for excavation equipment."
-	closet_appearance = /decl/closet_appearance/secure_closet/engineering/tools
+	closet_appearance = /singleton/closet_appearance/secure_closet/engineering/tools
 
 /obj/structure/closet/toolcloset/excavation/WillContain()
 	return list(
@@ -30,7 +30,7 @@
 
 /obj/structure/closet/wardrobe/ptgear
 	name = "pt gear wardrobe"
-	closet_appearance = /decl/closet_appearance/wardrobe/white
+	closet_appearance = /singleton/closet_appearance/wardrobe/white
 
 /obj/structure/closet/wardrobe/ptgear/WillContain()
 	return list(

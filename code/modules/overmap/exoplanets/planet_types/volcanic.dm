@@ -138,7 +138,7 @@
 		return PROCESS_KILL
 
 /turf/simulated/floor/exoplanet/lava/get_footstep_sound(mob/caller)
-	return get_footstep(/decl/footsteps/lava, caller)
+	return get_footstep(/singleton/footsteps/lava, caller)
 
 /turf/simulated/mineral/volcanic
 	name = "volcanic rock"

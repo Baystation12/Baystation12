@@ -1,8 +1,8 @@
-/decl/security_state
+/singleton/security_state
 	// When defining any of these values type paths should be used, not instances. Instances will be acquired in /New()
 
-	var/decl/security_level/severe_security_level // At which security level (and higher) the use of nuclear fission devices and other extreme measures are allowed. Defaults to the last entry in all_security_levels if unset.
-	var/decl/security_level/high_security_level   // At which security level (and higher) transfer votes are disabled, ERT may be requested, and other similar high alert implications. Defaults to the second to last entry in all_security_levels if unset.
+	var/singleton/security_level/severe_security_level // At which security level (and higher) the use of nuclear fission devices and other extreme measures are allowed. Defaults to the last entry in all_security_levels if unset.
+	var/singleton/security_level/high_security_level   // At which security level (and higher) transfer votes are disabled, ERT may be requested, and other similar high alert implications. Defaults to the second to last entry in all_security_levels if unset.
 	// All security levels within the above convention: Low, Guarded, Elevated, High, Severe
 
 
@@ -10,15 +10,15 @@
 	// The crew may also not adjust the security level once it is above the highest_standard_security_level.
 	// Defaults to the second to last entry in all_security_levels if unset/null.
 	// Set to FALSE/0 if there should be no restrictions.
-	var/decl/security_level/highest_standard_security_level
+	var/singleton/security_level/highest_standard_security_level
 
-	var/decl/security_level/current_security_level  // The current security level. Defaults to the first entry in all_security_levels if unset.
-	var/decl/security_level/stored_security_level   // The security level that we are escalating to high security from - we will return to this level once we choose to revert.
+	var/singleton/security_level/current_security_level  // The current security level. Defaults to the first entry in all_security_levels if unset.
+	var/singleton/security_level/stored_security_level   // The security level that we are escalating to high security from - we will return to this level once we choose to revert.
 	var/list/all_security_levels                    // List of all available security levels
 	var/list/standard_security_levels               // List of all normally selectable security levels
 	var/list/comm_console_security_levels           // List of all selectable security levels for the command and communication console - basically standard_security_levels - 1
 
-/decl/security_state/New()
+/singleton/security_state/New()
 	// Setup the severe security level
 	if(!(severe_security_level in all_security_levels))
 		severe_security_level = all_security_levels[all_security_levels.len]
@@ -69,38 +69,38 @@
 	if(high_index > severe_index)
 		high_security_level = severe_security_level
 
-/decl/security_state/Initialize()
+/singleton/security_state/Initialize()
 	// Finally switch up to the default starting security level.
 	current_security_level.switching_up_to()
 	. = ..()
 
-/decl/security_state/proc/can_change_security_level()
+/singleton/security_state/proc/can_change_security_level()
 	return current_security_level in standard_security_levels
 
-/decl/security_state/proc/can_switch_to(given_security_level)
+/singleton/security_state/proc/can_switch_to(given_security_level)
 	if(!can_change_security_level())
 		return FALSE
 	return given_security_level in standard_security_levels
 
-/decl/security_state/proc/current_security_level_is_lower_than(given_security_level)
+/singleton/security_state/proc/current_security_level_is_lower_than(given_security_level)
 	var/current_index = all_security_levels.Find(current_security_level)
 	var/given_index   = all_security_levels.Find(given_security_level)
 
 	return given_index && current_index < given_index
 
-/decl/security_state/proc/current_security_level_is_same_or_higher_than(given_security_level)
+/singleton/security_state/proc/current_security_level_is_same_or_higher_than(given_security_level)
 	var/current_index = all_security_levels.Find(current_security_level)
 	var/given_index   = all_security_levels.Find(given_security_level)
 
 	return given_index && current_index >= given_index
 
-/decl/security_state/proc/current_security_level_is_higher_than(given_security_level)
+/singleton/security_state/proc/current_security_level_is_higher_than(given_security_level)
 	var/current_index = all_security_levels.Find(current_security_level)
 	var/given_index   = all_security_levels.Find(given_security_level)
 
 	return given_index && current_index > given_index
 
-/decl/security_state/proc/set_security_level(decl/security_level/new_security_level, force_change = FALSE)
+/singleton/security_state/proc/set_security_level(singleton/security_level/new_security_level, force_change = FALSE)
 	if(new_security_level == current_security_level)
 		return FALSE
 	if(!(new_security_level in all_security_levels))
@@ -108,7 +108,7 @@
 	if(!force_change && !can_switch_to(new_security_level))
 		return FALSE
 
-	var/decl/security_level/previous_security_level = current_security_level
+	var/singleton/security_level/previous_security_level = current_security_level
 	current_security_level = new_security_level
 
 	var/previous_index = all_security_levels.Find(previous_security_level)
@@ -129,13 +129,13 @@
 	return TRUE
 
 // This proc decreases the current security level, if possible
-/decl/security_state/proc/decrease_security_level(force_change = FALSE)
+/singleton/security_state/proc/decrease_security_level(force_change = FALSE)
 	var/current_index = all_security_levels.Find(current_security_level)
 	if(current_index == 1)
 		return FALSE
 	return set_security_level(all_security_levels[current_index - 1], force_change)
 
-/decl/security_level
+/singleton/security_level
 	var/icon
 	var/name
 	var/alarm_level = "off"
@@ -156,44 +156,44 @@
 	var/psionic_control_level = PSI_IMPLANT_WARN
 
 // Called when we're switching from a lower security level to this one.
-/decl/security_level/proc/switching_up_to()
+/singleton/security_level/proc/switching_up_to()
 	return
 
 // Called when we're switching from a higher security level to this one.
-/decl/security_level/proc/switching_down_to()
+/singleton/security_level/proc/switching_down_to()
 	return
 
 // Called when we're switching from this security level to a higher one.
-/decl/security_level/proc/switching_up_from()
+/singleton/security_level/proc/switching_up_from()
 	return
 
 // Called when we're switching from this security level to a lower one.
-/decl/security_level/proc/switching_down_from()
+/singleton/security_level/proc/switching_down_from()
 	return
 
 /*
 * The default security state and levels setup
 */
-/decl/security_state/default
-	all_security_levels = list(/decl/security_level/default/code_green, /decl/security_level/default/code_blue, /decl/security_level/default/code_red, /decl/security_level/default/code_delta)
+/singleton/security_state/default
+	all_security_levels = list(/singleton/security_level/default/code_green, /singleton/security_level/default/code_blue, /singleton/security_level/default/code_red, /singleton/security_level/default/code_delta)
 
-/decl/security_level/default
+/singleton/security_level/default
 	icon = 'icons/misc/security_state.dmi'
 
 	var/static/datum/announcement/priority/security/security_announcement_up = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice1.ogg'))
 	var/static/datum/announcement/priority/security/security_announcement_down = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice1.ogg'))
 
-/decl/security_level/default/switching_up_to()
+/singleton/security_level/default/switching_up_to()
 	if(up_description)
 		security_announcement_up.Announce(up_description, "Attention! Alert level elevated to [name]!")
 	notify_station()
 
-/decl/security_level/default/switching_down_to()
+/singleton/security_level/default/switching_down_to()
 	if(down_description)
 		security_announcement_down.Announce(down_description, "Attention! Alert level changed to [name]!")
 	notify_station()
 
-/decl/security_level/default/proc/notify_station()
+/singleton/security_level/default/proc/notify_station()
 	for(var/obj/machinery/firealarm/FA in SSmachines.machinery)
 		if(FA.z in GLOB.using_map.contact_levels)
 			FA.update_icon()
@@ -202,7 +202,7 @@
 			SA.set_alert(name, alarm_level, light_color_alarm)
 	post_status("alert")
 
-/decl/security_level/default/code_green
+/singleton/security_level/default/code_green
 	name = "code green"
 
 	light_max_bright = 0.25
@@ -218,7 +218,7 @@
 
 	down_description = "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
 
-/decl/security_level/default/code_blue
+/singleton/security_level/default/code_blue
 	name = "code blue"
 	alarm_level = "on"
 
@@ -237,7 +237,7 @@
 	up_description = "The station has received reliable information about possible hostile activity on the station. Security staff may have weapons visible, random searches are permitted."
 	down_description = "The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed."
 
-/decl/security_level/default/code_red
+/singleton/security_level/default/code_red
 	name = "code red"
 	alarm_level = "on"
 
@@ -256,7 +256,7 @@
 	up_description = "There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised."
 	down_description = "The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised."
 
-/decl/security_level/default/code_delta
+/singleton/security_level/default/code_delta
 	name = "code delta"
 	alarm_level = "on"
 
@@ -274,6 +274,6 @@
 
 	var/static/datum/announcement/priority/security/security_announcement_delta = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/effects/siren.ogg'))
 
-/decl/security_level/default/code_delta/switching_up_to()
+/singleton/security_level/default/code_delta/switching_up_to()
 	security_announcement_delta.Announce("The self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill.", "Attention! Delta security level reached!")
 	notify_station()

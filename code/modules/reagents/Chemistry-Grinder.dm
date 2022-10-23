@@ -9,7 +9,7 @@
 	idle_power_usage = 5
 	active_power_usage = 100
 	obj_flags = OBJ_FLAG_ANCHORABLE
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 	machine_name = "reagent grinder"
 	machine_desc = "An industrial grinder with durable blades that shreds objects into their component reagents."
 

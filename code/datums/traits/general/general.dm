@@ -1,7 +1,7 @@
 /// General traits generally come with both good and bad aspects
-/decl/trait/general
-	abstract_type = /decl/trait/general
+/singleton/trait/general
+	abstract_type = /singleton/trait/general
 
-/decl/trait/general/New()
+/singleton/trait/general/New()
 	..()
 	name = "General - " + name

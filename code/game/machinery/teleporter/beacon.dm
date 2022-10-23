@@ -18,7 +18,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 	machine_desc = "Teleporter beacons allow teleporter systems to target them, for accurate, instantaneous transport of objects and people."
 	base_type = /obj/machinery/tele_beacon
 	wires = /datum/wires/tele_beacon
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 
 	/// Name of the beacon in the teleporter UI.
 	var/beacon_name

@@ -573,7 +573,7 @@
 	. = ..()
 	if (METABOLIC_INERTNESS(M) > TRAIT_LEVEL_MINOR)
 		return
-	var/sleep_chance = M.GetTraitLevel(/decl/trait/malus/ethanol) || 1
+	var/sleep_chance = M.GetTraitLevel(/singleton/trait/malus/ethanol) || 1
 	if (prob(sleep_chance))
 		M.sleeping = max(M.sleeping, 1)
 
@@ -1523,7 +1523,7 @@
 
 /datum/reagent/ethanol/alien/qokkloa/affect_ingest(mob/living/carbon/M, removed)
 	..()
-	if(M.HasTrait(/decl/trait/boon/clear_mind))
+	if(M.HasTrait(/singleton/trait/boon/clear_mind))
 		return
 
 	if(M.chem_doses[type] < 5)

@@ -1,4 +1,4 @@
-/decl/cultural_info/faction/positronic
+/singleton/cultural_info/faction/positronic
 	name = FACTION_POSITRONICS
 	description = "The Positronic Union, commonly referred to as the PU, is a stellar entity holding a small amount of territory on the edge \
 	of Sol controlled space. Once a shadowy group, they have recently revealed their existence to the rest of the galaxy. They mostly conduct \

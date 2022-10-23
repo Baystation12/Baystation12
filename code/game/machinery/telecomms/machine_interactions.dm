@@ -12,7 +12,7 @@
 
 /obj/machinery/telecomms
 	var/temp = "" // output message
-	construct_state = /decl/machine_construction/tcomms/panel_closed
+	construct_state = /singleton/machine_construction/tcomms/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
 	maximum_component_parts = list(/obj/item/stock_parts = 15)
@@ -42,7 +42,7 @@
 	if(. != MCS_CHANGE)
 		return
 
-	if(state_path == /decl/machine_construction/default/deconstructed)
+	if(state_path == /singleton/machine_construction/default/deconstructed)
 		to_chat(user, "You begin prying out the circuit board other components...")
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 		if(do_after(user, 6 SECONDS, src, DO_REPAIR_CONSTRUCT))

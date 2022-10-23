@@ -9,7 +9,7 @@
 	economic_power = 1
 	access = list()
 	alt_titles = list("Technical Assistant","Medical Intern","Research Assistant","Visitor")
-	outfit_type = /decl/hierarchy/outfit/job/assistant
+	outfit_type = /singleton/hierarchy/outfit/job/assistant
 
 /datum/job/assistant/get_access()
 	return list()

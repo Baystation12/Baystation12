@@ -48,30 +48,30 @@
 		/obj/item/stock_parts/radio/transmitter/on_event,
 	)
 	public_variables = list(
-		/decl/public_access/public_variable/input_toggle,
-		/decl/public_access/public_variable/area_uid,
-		/decl/public_access/public_variable/identifier,
-		/decl/public_access/public_variable/use_power,
-		/decl/public_access/public_variable/pump_dir,
-		/decl/public_access/public_variable/pump_checks,
-		/decl/public_access/public_variable/pressure_bound,
-		/decl/public_access/public_variable/pressure_bound/external,
-		/decl/public_access/public_variable/power_draw,
-		/decl/public_access/public_variable/flow_rate,
-		/decl/public_access/public_variable/name
+		/singleton/public_access/public_variable/input_toggle,
+		/singleton/public_access/public_variable/area_uid,
+		/singleton/public_access/public_variable/identifier,
+		/singleton/public_access/public_variable/use_power,
+		/singleton/public_access/public_variable/pump_dir,
+		/singleton/public_access/public_variable/pump_checks,
+		/singleton/public_access/public_variable/pressure_bound,
+		/singleton/public_access/public_variable/pressure_bound/external,
+		/singleton/public_access/public_variable/power_draw,
+		/singleton/public_access/public_variable/flow_rate,
+		/singleton/public_access/public_variable/name
 	)
 	public_methods = list(
-		/decl/public_access/public_method/toggle_power,
-		/decl/public_access/public_method/purge_pump,
-		/decl/public_access/public_method/refresh
+		/singleton/public_access/public_method/toggle_power,
+		/singleton/public_access/public_method/purge_pump,
+		/singleton/public_access/public_method/refresh
 	)
 	stock_part_presets = list(
-		/decl/stock_part_preset/radio/receiver/vent_pump = 1,
-		/decl/stock_part_preset/radio/event_transmitter/vent_pump = 1
+		/singleton/stock_part_preset/radio/receiver/vent_pump = 1,
+		/singleton/stock_part_preset/radio/event_transmitter/vent_pump = 1
 	)
 
 	frame_type = /obj/item/pipe
-	construct_state = /decl/machine_construction/default/item_chassis
+	construct_state = /singleton/machine_construction/default/item_chassis
 	base_type = /obj/machinery/atmospherics/unary/vent_pump
 
 /obj/machinery/atmospherics/unary/vent_pump/on
@@ -357,7 +357,7 @@
 		queue_icon_update() //force the icon to refresh after changing directional mode.
 		return TOPIC_REFRESH
 
-/decl/public_access/public_variable/pump_dir
+/singleton/public_access/public_variable/pump_dir
 	expected_type = /obj/machinery/atmospherics/unary/vent_pump
 	name = "pump direction"
 	desc = "The pump mode of the vent. Expected values are \"siphon\" or \"release\"."
@@ -365,17 +365,17 @@
 	has_updates = TRUE
 	var_type = IC_FORMAT_STRING
 
-/decl/public_access/public_variable/pump_dir/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
+/singleton/public_access/public_variable/pump_dir/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
 	return machine.pump_direction ? "release" : "siphon"
 
-/decl/public_access/public_variable/pump_dir/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
+/singleton/public_access/public_variable/pump_dir/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
 	if(!(new_value in list("release", "siphon")))
 		return FALSE
 	. = ..()
 	if(.)
 		machine.pump_direction = (new_value == "release")
 
-/decl/public_access/public_variable/pump_checks
+/singleton/public_access/public_variable/pump_checks
 	expected_type = /obj/machinery/atmospherics/unary/vent_pump
 	name = "pump checks"
 	desc = "Numerical codes for whether the pump checks internal or internal pressure (or both) prior to operating. Can also be supplied the string keyword \"default\"."
@@ -383,10 +383,10 @@
 	has_updates = FALSE
 	var_type = IC_FORMAT_ANY
 
-/decl/public_access/public_variable/pump_checks/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
+/singleton/public_access/public_variable/pump_checks/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
 	return machine.pressure_checks
 
-/decl/public_access/public_variable/pump_checks/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
+/singleton/public_access/public_variable/pump_checks/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
 	if(new_value == "default")
 		new_value = machine.pressure_checks_default
 	var/sanitized = sanitize_integer(new_value, 0, 3)
@@ -396,7 +396,7 @@
 	if(.)
 		machine.pressure_checks = new_value
 
-/decl/public_access/public_variable/pressure_bound
+/singleton/public_access/public_variable/pressure_bound
 	expected_type = /obj/machinery/atmospherics/unary/vent_pump
 	name = "internal pressure bound"
 	desc = "The bound on internal pressure used in checks (a number). When writing, can be supplied the string keyword \"default\" instead."
@@ -404,10 +404,10 @@
 	has_updates = FALSE
 	var_type = IC_FORMAT_ANY
 
-/decl/public_access/public_variable/pressure_bound/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
+/singleton/public_access/public_variable/pressure_bound/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
 	return machine.internal_pressure_bound
 
-/decl/public_access/public_variable/pressure_bound/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
+/singleton/public_access/public_variable/pressure_bound/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
 	if(new_value == "default")
 		new_value = machine.internal_pressure_bound_default
 	new_value = clamp(text2num(new_value), 0, MAX_PUMP_PRESSURE)
@@ -415,15 +415,15 @@
 	if(.)
 		machine.internal_pressure_bound = new_value
 
-/decl/public_access/public_variable/pressure_bound/external
+/singleton/public_access/public_variable/pressure_bound/external
 	expected_type = /obj/machinery/atmospherics/unary/vent_pump
 	name = "external pressure bound"
 	desc = "The bound on external pressure used in checks (a number). When writing, can be supplied the string keyword \"default\" instead."
 
-/decl/public_access/public_variable/pressure_bound/external/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
+/singleton/public_access/public_variable/pressure_bound/external/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
 	return machine.external_pressure_bound
 
-/decl/public_access/public_variable/pressure_bound/external/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
+/singleton/public_access/public_variable/pressure_bound/external/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
 	if(new_value == "default")
 		new_value = machine.external_pressure_bound_default
 	new_value = clamp(text2num(new_value), 0, MAX_PUMP_PRESSURE)
@@ -431,123 +431,123 @@
 	if(.)
 		machine.external_pressure_bound = new_value
 
-/decl/public_access/public_method/purge_pump
+/singleton/public_access/public_method/purge_pump
 	name = "activate purge mode"
 	desc = "Activates purge mode, overriding pressure checks and removing air."
 	call_proc = /obj/machinery/atmospherics/unary/vent_pump/proc/purge
 
-/decl/stock_part_preset/radio/event_transmitter/vent_pump
+/singleton/stock_part_preset/radio/event_transmitter/vent_pump
 	frequency = PUMP_FREQ
 	filter = RADIO_TO_AIRALARM
-	event = /decl/public_access/public_variable/input_toggle
+	event = /singleton/public_access/public_variable/input_toggle
 	transmit_on_event = list(
-		"area" = /decl/public_access/public_variable/area_uid,
-		"device" = /decl/public_access/public_variable/identifier,
-		"power" = /decl/public_access/public_variable/use_power,
-		"direction" = /decl/public_access/public_variable/pump_dir,
-		"checks" = /decl/public_access/public_variable/pump_checks,
-		"internal" = /decl/public_access/public_variable/pressure_bound,
-		"external" = /decl/public_access/public_variable/pressure_bound/external,
-		"power_draw" = /decl/public_access/public_variable/power_draw,
-		"flow_rate" = /decl/public_access/public_variable/flow_rate
+		"area" = /singleton/public_access/public_variable/area_uid,
+		"device" = /singleton/public_access/public_variable/identifier,
+		"power" = /singleton/public_access/public_variable/use_power,
+		"direction" = /singleton/public_access/public_variable/pump_dir,
+		"checks" = /singleton/public_access/public_variable/pump_checks,
+		"internal" = /singleton/public_access/public_variable/pressure_bound,
+		"external" = /singleton/public_access/public_variable/pressure_bound/external,
+		"power_draw" = /singleton/public_access/public_variable/power_draw,
+		"flow_rate" = /singleton/public_access/public_variable/flow_rate
 	)
 
-/decl/stock_part_preset/radio/receiver/vent_pump
+/singleton/stock_part_preset/radio/receiver/vent_pump
 	frequency = PUMP_FREQ
 	filter = RADIO_FROM_AIRALARM
 	receive_and_call = list(
-		"power_toggle" = /decl/public_access/public_method/toggle_power,
-		"purge" = /decl/public_access/public_method/purge_pump,
-		"status" = /decl/public_access/public_method/refresh
+		"power_toggle" = /singleton/public_access/public_method/toggle_power,
+		"purge" = /singleton/public_access/public_method/purge_pump,
+		"status" = /singleton/public_access/public_method/refresh
 	)
 	receive_and_write = list(
-		"set_power" = /decl/public_access/public_variable/use_power,
-		"set_direction" = /decl/public_access/public_variable/pump_dir,
-		"set_checks" = /decl/public_access/public_variable/pump_checks,
-		"set_internal_pressure" = /decl/public_access/public_variable/pressure_bound,
-		"set_external_pressure" = /decl/public_access/public_variable/pressure_bound/external,
-		"init" = /decl/public_access/public_variable/name
+		"set_power" = /singleton/public_access/public_variable/use_power,
+		"set_direction" = /singleton/public_access/public_variable/pump_dir,
+		"set_checks" = /singleton/public_access/public_variable/pump_checks,
+		"set_internal_pressure" = /singleton/public_access/public_variable/pressure_bound,
+		"set_external_pressure" = /singleton/public_access/public_variable/pressure_bound/external,
+		"init" = /singleton/public_access/public_variable/name
 	)
 
-/decl/stock_part_preset/radio/receiver/vent_pump/tank
+/singleton/stock_part_preset/radio/receiver/vent_pump/tank
 	frequency = ATMOS_TANK_FREQ
 	filter = RADIO_ATMOSIA
 
-/decl/stock_part_preset/radio/event_transmitter/vent_pump/tank
+/singleton/stock_part_preset/radio/event_transmitter/vent_pump/tank
 	frequency = ATMOS_TANK_FREQ
 	filter = RADIO_ATMOSIA
 
 /obj/machinery/atmospherics/unary/vent_pump/tank
 	controlled = FALSE
 	stock_part_presets = list(
-		/decl/stock_part_preset/radio/receiver/vent_pump/tank = 1,
-		/decl/stock_part_preset/radio/event_transmitter/vent_pump/tank = 1
+		/singleton/stock_part_preset/radio/receiver/vent_pump/tank = 1,
+		/singleton/stock_part_preset/radio/event_transmitter/vent_pump/tank = 1
 	)
 
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos/tank
 	controlled = FALSE
 	stock_part_presets = list(
-		/decl/stock_part_preset/radio/receiver/vent_pump/tank = 1,
-		/decl/stock_part_preset/radio/event_transmitter/vent_pump/tank = 1
+		/singleton/stock_part_preset/radio/receiver/vent_pump/tank = 1,
+		/singleton/stock_part_preset/radio/event_transmitter/vent_pump/tank = 1
 	)
 
-/decl/stock_part_preset/radio/receiver/vent_pump/external_air
+/singleton/stock_part_preset/radio/receiver/vent_pump/external_air
 	frequency = EXTERNAL_AIR_FREQ
 
-/decl/stock_part_preset/radio/event_transmitter/vent_pump/external_air
+/singleton/stock_part_preset/radio/event_transmitter/vent_pump/external_air
 	frequency = EXTERNAL_AIR_FREQ
 	filter = RADIO_AIRLOCK
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air
 	controlled = FALSE
 	stock_part_presets = list(
-		/decl/stock_part_preset/radio/receiver/vent_pump/external_air = 1,
-		/decl/stock_part_preset/radio/event_transmitter/vent_pump/external_air = 1
+		/singleton/stock_part_preset/radio/receiver/vent_pump/external_air = 1,
+		/singleton/stock_part_preset/radio/event_transmitter/vent_pump/external_air = 1
 	)
 
-/decl/stock_part_preset/radio/receiver/vent_pump/shuttle
+/singleton/stock_part_preset/radio/receiver/vent_pump/shuttle
 	frequency = SHUTTLE_AIR_FREQ
 
-/decl/stock_part_preset/radio/event_transmitter/vent_pump/shuttle
+/singleton/stock_part_preset/radio/event_transmitter/vent_pump/shuttle
 	frequency = SHUTTLE_AIR_FREQ
 	filter = RADIO_AIRLOCK
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle
 	controlled = FALSE
 	stock_part_presets = list(
-		/decl/stock_part_preset/radio/receiver/vent_pump/shuttle = 1,
-		/decl/stock_part_preset/radio/event_transmitter/vent_pump/shuttle = 1
+		/singleton/stock_part_preset/radio/receiver/vent_pump/shuttle = 1,
+		/singleton/stock_part_preset/radio/event_transmitter/vent_pump/shuttle = 1
 	)
 
-/decl/stock_part_preset/radio/event_transmitter/vent_pump/shuttle/aux
+/singleton/stock_part_preset/radio/event_transmitter/vent_pump/shuttle/aux
 	filter = RADIO_TO_AIRALARM
 
 // This is intended for hybrid airlock-room setups, where unlike the above, this one is controlled by the air alarm and attached to the internal atmos system.
 /obj/machinery/atmospherics/unary/vent_pump/shuttle_auxiliary
 	stock_part_presets = list(
-		/decl/stock_part_preset/radio/receiver/vent_pump/shuttle = 1,
-		/decl/stock_part_preset/radio/event_transmitter/vent_pump/shuttle/aux = 1
+		/singleton/stock_part_preset/radio/receiver/vent_pump/shuttle = 1,
+		/singleton/stock_part_preset/radio/event_transmitter/vent_pump/shuttle/aux = 1
 	)
 
-/decl/stock_part_preset/radio/receiver/vent_pump/airlock
+/singleton/stock_part_preset/radio/receiver/vent_pump/airlock
 	frequency = AIRLOCK_AIR_FREQ
 
-/decl/stock_part_preset/radio/event_transmitter/vent_pump/airlock
+/singleton/stock_part_preset/radio/event_transmitter/vent_pump/airlock
 	frequency = AIRLOCK_AIR_FREQ
 	filter = RADIO_AIRLOCK
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock
 	controlled = FALSE
 	stock_part_presets = list(
-		/decl/stock_part_preset/radio/receiver/vent_pump/airlock = 1,
-		/decl/stock_part_preset/radio/event_transmitter/vent_pump/airlock = 1
+		/singleton/stock_part_preset/radio/receiver/vent_pump/airlock = 1,
+		/singleton/stock_part_preset/radio/event_transmitter/vent_pump/airlock = 1
 	)
 
-/decl/stock_part_preset/radio/receiver/vent_pump/engine
+/singleton/stock_part_preset/radio/receiver/vent_pump/engine
 	frequency = ATMOS_ENGINE_FREQ
 	filter = RADIO_ATMOSIA
 
-/decl/stock_part_preset/radio/event_transmitter/vent_pump/engine
+/singleton/stock_part_preset/radio/event_transmitter/vent_pump/engine
 	frequency = ATMOS_ENGINE_FREQ
 	filter = RADIO_ATMOSIA
 
@@ -557,8 +557,8 @@
 	power_rating = 30000
 	controlled = FALSE
 	stock_part_presets = list(
-		/decl/stock_part_preset/radio/receiver/vent_pump/engine = 1,
-		/decl/stock_part_preset/radio/event_transmitter/vent_pump/engine = 1
+		/singleton/stock_part_preset/radio/receiver/vent_pump/engine = 1,
+		/singleton/stock_part_preset/radio/event_transmitter/vent_pump/engine = 1
 	)
 
 /obj/machinery/atmospherics/unary/vent_pump/engine/Initialize()

@@ -16,12 +16,12 @@
 		/obj/item/stock_parts/power/apc
 	)
 	public_variables = list(
-		/decl/public_access/public_variable/holosign_on
+		/singleton/public_access/public_variable/holosign_on
 	)
 	public_methods = list(
-		/decl/public_access/public_method/holosign_toggle
+		/singleton/public_access/public_method/holosign_toggle
 	)
-	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/holosign = 1)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/receiver/holosign = 1)
 
 /obj/machinery/holosign/proc/toggle()
 	if (inoperable())
@@ -38,24 +38,24 @@
 		icon_state = on_icon
 		set_light(0.5, 0.5, 1, l_color = COLOR_CYAN_BLUE)
 
-/decl/public_access/public_variable/holosign_on
+/singleton/public_access/public_variable/holosign_on
 	expected_type = /obj/machinery/holosign
 	name = "holosign active"
 	desc = "Whether or not the holosign is active."
 	can_write = FALSE
 	has_updates = FALSE
 
-/decl/public_access/public_variable/holosign_on/access_var(obj/machinery/holosign/sign)
+/singleton/public_access/public_variable/holosign_on/access_var(obj/machinery/holosign/sign)
 	return sign.lit
 
-/decl/public_access/public_method/holosign_toggle
+/singleton/public_access/public_method/holosign_toggle
 	name = "holosign toggle"
 	desc = "Toggle the holosign's active state."
 	call_proc = /obj/machinery/holosign/proc/toggle
 
-/decl/stock_part_preset/radio/receiver/holosign
+/singleton/stock_part_preset/radio/receiver/holosign
 	frequency = BUTTON_FREQ
-	receive_and_call = list("button_active" = /decl/public_access/public_method/holosign_toggle)
+	receive_and_call = list("button_active" = /singleton/public_access/public_method/holosign_toggle)
 
 /obj/machinery/holosign/surgery
 	name = "surgery holosign"

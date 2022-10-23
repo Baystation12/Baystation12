@@ -3,12 +3,12 @@
 	desc = "Certifiable skills."
 
 /datum/codex_category/skills/Initialize()
-	for(var/decl/hierarchy/skill/skill in GLOB.skills)
+	for(var/singleton/hierarchy/skill/skill in GLOB.skills)
 		var/list/skill_info = list()
 		if(skill.prerequisites)
 			var/list/reqs = list()
 			for(var/req in skill.prerequisites)
-				var/decl/hierarchy/skill/skill_req = Singletons.Get(req)
+				var/singleton/hierarchy/skill/skill_req = Singletons.Get(req)
 				reqs += "[skill_req.levels[skill.prerequisites[req]]] [skill_req.name]"
 			skill_info += "Prerequisites: [english_list(reqs)]"
 		for(var/level in skill.levels)

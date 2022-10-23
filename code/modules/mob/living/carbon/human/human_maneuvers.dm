@@ -1,4 +1,4 @@
-/mob/living/carbon/human/get_acrobatics_multiplier(decl/maneuver/attempting_maneuver)
+/mob/living/carbon/human/get_acrobatics_multiplier(singleton/maneuver/attempting_maneuver)
 	. = ..() * 0.5
 
 	. += ((get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN))
@@ -17,7 +17,7 @@
 /mob/living/carbon/human/get_jump_distance()
 	return species.standing_jump_range
 
-/mob/living/carbon/human/can_do_maneuver(decl/maneuver/maneuver, silent = FALSE)
+/mob/living/carbon/human/can_do_maneuver(singleton/maneuver/maneuver, silent = FALSE)
 	. = ..()
 	if(.)
 		if(nutrition <= 20)

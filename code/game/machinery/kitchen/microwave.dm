@@ -10,7 +10,7 @@
 	idle_power_usage = 5
 	active_power_usage = 100
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT | ATOM_FLAG_OPEN_CONTAINER
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
 
@@ -221,7 +221,7 @@
 		return SPAN_NOTICE("\The [src] is too broken to do this!")
 	. = ..()
 
-/obj/machinery/microwave/state_transition(decl/machine_construction/new_state)
+/obj/machinery/microwave/state_transition(singleton/machine_construction/new_state)
 	..()
 	updateUsrDialog()
 

@@ -1,4 +1,4 @@
-/decl/cultural_info/location/epsilon
+/singleton/cultural_info/location/epsilon
 	name = HOME_SYSTEM_DIONAEA
 	description = "The diona home system is a trinary system, first discovered by the Skrell and later revisted by a mining \
 	consortium. It has no planets and no settled large bodies, but sports a massive debris ring composed of ancient habitats \

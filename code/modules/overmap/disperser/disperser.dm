@@ -5,7 +5,7 @@
 	icon = 'icons/obj/disperser.dmi'
 	density = TRUE
 	anchored = TRUE
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 
 /obj/machinery/disperser/examine(mob/user)
 	. = ..()

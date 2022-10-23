@@ -27,7 +27,7 @@ var/global/bomb_set
 	var/lastentered
 	var/previous_level = ""
 	wires = /datum/wires/nuclearbomb
-	var/decl/security_level/original_level
+	var/singleton/security_level/original_level
 
 /obj/machinery/nuclearbomb/New()
 	..()
@@ -311,7 +311,7 @@ var/global/bomb_set
 	timing = 1
 	log_and_message_admins("activated the detonation countdown of \the [src]")
 	bomb_set++ //There can still be issues with this resetting when there are multiple bombs. Not a big deal though for Nuke/N
-	var/decl/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
+	var/singleton/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
 	original_level = security_state.current_security_level
 	security_state.set_security_level(security_state.severe_security_level, TRUE)
 	update_icon()
@@ -322,7 +322,7 @@ var/global/bomb_set
 /obj/machinery/nuclearbomb/proc/secure_device()
 	if(timing <= 0)
 		return
-	var/decl/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
+	var/singleton/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
 	security_state.set_security_level(original_level, TRUE)
 	bomb_set--
 	safety = TRUE
@@ -467,7 +467,7 @@ var/global/bomb_set
 	. = ..()
 	verbs -= /obj/machinery/nuclearbomb/verb/toggle_deployable
 	for(var/turf/simulated/floor/T in get_area(src))
-		if(istype(T.flooring, /decl/flooring/reinforced/circuit/red))
+		if(istype(T.flooring, /singleton/flooring/reinforced/circuit/red))
 			flash_tiles += T
 	update_icon()
 	for(var/obj/machinery/self_destruct/ch in get_area(src))
@@ -552,7 +552,7 @@ var/global/bomb_set
 	if(!last_turf_state || target_icon_state != last_turf_state)
 		for(var/thing in flash_tiles)
 			var/turf/simulated/floor/T = thing
-			if(!istype(T.flooring, /decl/flooring/reinforced/circuit/red))
+			if(!istype(T.flooring, /singleton/flooring/reinforced/circuit/red))
 				flash_tiles -= T
 				continue
 			T.icon_state = target_icon_state

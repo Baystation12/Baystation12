@@ -24,9 +24,9 @@ SUBSYSTEM_DEF(fabrication)
 			if (!categories[type])
 				categories[type] = list()
 			categories[type] |= recipe.category
-	var/list/stages = Singletons.GetSubtypesAssoc(/decl/crafting_stage)
+	var/list/stages = Singletons.GetSubtypesAssoc(/singleton/crafting_stage)
 	for (var/id in stages)
-		var/decl/crafting_stage/stage = stages[id]
+		var/singleton/crafting_stage/stage = stages[id]
 		var/type = stage.begins_with_object_type
 		if (!ispath(type))
 			continue
@@ -58,7 +58,7 @@ SUBSYSTEM_DEF(fabrication)
 	if (!turf)
 		return
 	var/list/stages = SSfabrication.find_crafting_recipes(target.type)
-	for (var/decl/crafting_stage/stage in stages)
+	for (var/singleton/crafting_stage/stage in stages)
 		if (stage.can_begin_with(target) && stage.is_appropriate_tool(tool))
 			var/obj/item/crafting_holder/crafting = new (turf, stage, target, tool, user)
 			if (stage.progress_to(tool, user, crafting))

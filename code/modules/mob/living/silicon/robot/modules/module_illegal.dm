@@ -17,7 +17,7 @@
 	var/id
 
 /obj/item/robot_module/syndicate/Initialize()
-	for(var/decl/hierarchy/skill/skill in GLOB.skills)
+	for(var/singleton/hierarchy/skill/skill in GLOB.skills)
 		skills[skill.type] = SKILL_EXPERT
 	. = ..()
 

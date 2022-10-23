@@ -141,7 +141,7 @@
 		)
 	)
 	pain_emotes_with_pain_level = list(
-			list(/decl/emote/audible/bug_hiss) = 40
+			list(/singleton/emote/audible/bug_hiss) = 40
 	)
 
 	exertion_effect_chance = 10
@@ -149,14 +149,14 @@
 	exertion_reagent_scale = 5
 	exertion_reagent_path = /datum/reagent/lactate
 	exertion_emotes_biological = list(
-		/decl/emote/exertion/biological,
-		/decl/emote/exertion/biological/breath,
-		/decl/emote/exertion/biological/pant
+		/singleton/emote/exertion/biological,
+		/singleton/emote/exertion/biological/breath,
+		/singleton/emote/exertion/biological/pant
 	)
 
 	ingest_amount = 6
 
-	traits = list(/decl/trait/general/serpentid_adapted = TRAIT_LEVEL_EXISTS)
+	traits = list(/singleton/trait/general/serpentid_adapted = TRAIT_LEVEL_EXISTS)
 
 /datum/species/nabber/New()
 	equip_adjust = list(
@@ -400,7 +400,7 @@
 			out. [T.He] looks ready to attack."))
 
 /datum/species/nabber/check_background(datum/job/job, datum/preferences/prefs)
-	var/decl/cultural_info/culture/nabber/grade = SSculture.get_culture(prefs.cultural_info[TAG_CULTURE])
+	var/singleton/cultural_info/culture/nabber/grade = SSculture.get_culture(prefs.cultural_info[TAG_CULTURE])
 	. = istype(grade) ? (job.type in grade.valid_jobs) : ..()
 
 /datum/species/nabber/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.

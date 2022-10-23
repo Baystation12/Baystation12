@@ -12,7 +12,7 @@
 	death_msg = "expires with a pitiful chirrup..."
 	health = 60
 	maxHealth = 60
-	available_maneuvers = list(/decl/maneuver/leap)
+	available_maneuvers = list(/singleton/maneuver/leap)
 	status_flags = NO_ANTAG
 	density = FALSE
 

@@ -30,7 +30,7 @@
 	imp_in.SetParalysis(0)
 
 /obj/item/implant/adrenalin/implanted(mob/source)
-	source.StoreMemory("A implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.", /decl/memory_options/system)
+	source.StoreMemory("A implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.", /singleton/memory_options/system)
 	to_chat(source, "The implanted freedom implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.")
 	return TRUE
 

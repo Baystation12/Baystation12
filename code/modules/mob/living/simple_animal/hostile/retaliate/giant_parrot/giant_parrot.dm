@@ -24,13 +24,13 @@
 	bone_amount = 20
 	skin_amount = 20
 
-	var/list/subspecies = list(/decl/parrot_subspecies,
-								/decl/parrot_subspecies/purple,
-								/decl/parrot_subspecies/blue,
-								/decl/parrot_subspecies/green,
-								/decl/parrot_subspecies/red,
-								/decl/parrot_subspecies/brown,
-								/decl/parrot_subspecies/black)
+	var/list/subspecies = list(/singleton/parrot_subspecies,
+								/singleton/parrot_subspecies/purple,
+								/singleton/parrot_subspecies/blue,
+								/singleton/parrot_subspecies/green,
+								/singleton/parrot_subspecies/red,
+								/singleton/parrot_subspecies/brown,
+								/singleton/parrot_subspecies/black)
 	var/get_subspecies_name = TRUE
 
 	ai_holder = /datum/ai_holder/simple_animal/retaliate
@@ -40,7 +40,7 @@
 	. = ..()
 	var/subspecies_type = DEFAULTPICK(subspecies, null)
 	if(subspecies_type)
-		var/decl/parrot_subspecies/ps = Singletons.Get(subspecies_type)
+		var/singleton/parrot_subspecies/ps = Singletons.Get(subspecies_type)
 		icon_set = ps.icon_set
 		skin_material = ps.feathers
 		if(get_subspecies_name)
@@ -78,7 +78,7 @@
 //subtypes
 /mob/living/simple_animal/hostile/retaliate/parrot/space/lesser
 	name = "Avatar of the Howling Dark"
-	subspecies = list(/decl/parrot_subspecies/black)
+	subspecies = list(/singleton/parrot_subspecies/black)
 	get_subspecies_name = FALSE
 	natural_weapon = /obj/item/natural_weapon/large
 	health = 300

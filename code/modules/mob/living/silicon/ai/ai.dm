@@ -553,12 +553,12 @@ var/global/list/ai_verbs_default = list(
 
 	else
 		var/list/hologramsAICanUse = list()
-		var/holograms_by_type = Singletons.GetSubtypesAssoc(/decl/ai_holo)
+		var/holograms_by_type = Singletons.GetSubtypesAssoc(/singleton/ai_holo)
 		for (var/holo_type in holograms_by_type)
-			var/decl/ai_holo/holo = holograms_by_type[holo_type]
+			var/singleton/ai_holo/holo = holograms_by_type[holo_type]
 			if (holo.may_be_used_by_ai(src))
 				hologramsAICanUse.Add(holo)
-		var/decl/ai_holo/choice = input("Please select a hologram:") as null|anything in hologramsAICanUse
+		var/singleton/ai_holo/choice = input("Please select a hologram:") as null|anything in hologramsAICanUse
 		if(choice)
 			qdel(holo_icon)
 			qdel(holo_icon_longrange)

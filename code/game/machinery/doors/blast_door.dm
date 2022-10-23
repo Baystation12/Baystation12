@@ -45,11 +45,11 @@
 	)
 	// To be fleshed out and moved to parent door, but staying minimal for now.
 	public_methods = list(
-		/decl/public_access/public_method/open_door,
-		/decl/public_access/public_method/close_door_delayed,
-		/decl/public_access/public_method/toggle_door
+		/singleton/public_access/public_method/open_door,
+		/singleton/public_access/public_method/close_door_delayed,
+		/singleton/public_access/public_method/toggle_door
 	)
-	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/blast_door = 1)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/receiver/blast_door = 1)
 
 /obj/machinery/door/blast/Initialize()
 	. = ..()
@@ -217,17 +217,17 @@
 	sleep(5 SECONDS)
 	close()
 
-/decl/public_access/public_method/close_door_delayed
+/singleton/public_access/public_method/close_door_delayed
 	name = "delayed close door"
 	desc = "Closes the door if possible, after a short delay."
 	call_proc = /obj/machinery/door/blast/proc/delayed_close
 
-/decl/stock_part_preset/radio/receiver/blast_door
+/singleton/stock_part_preset/radio/receiver/blast_door
 	frequency = BLAST_DOORS_FREQ
 	receive_and_call = list(
-		"open_door" = /decl/public_access/public_method/open_door,
-		"close_door_delayed" = /decl/public_access/public_method/close_door_delayed,
-		"toggle_door" = /decl/public_access/public_method/toggle_door
+		"open_door" = /singleton/public_access/public_method/open_door,
+		"close_door_delayed" = /singleton/public_access/public_method/close_door_delayed,
+		"toggle_door" = /singleton/public_access/public_method/toggle_door
 	)
 
 /obj/machinery/button/blast_door
@@ -235,11 +235,11 @@
 	name = "remote blast door-control"
 	desc = "It controls blast doors, remotely."
 	icon_state = "blastctrl"
-	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/blast_door_button = 1)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/basic_transmitter/blast_door_button = 1)
 
-/decl/stock_part_preset/radio/basic_transmitter/blast_door_button
+/singleton/stock_part_preset/radio/basic_transmitter/blast_door_button
 	transmit_on_change = list(
-		"toggle_door" = /decl/public_access/public_variable/button_active,
+		"toggle_door" = /singleton/public_access/public_variable/button_active,
 	)
 	frequency = BLAST_DOORS_FREQ
 

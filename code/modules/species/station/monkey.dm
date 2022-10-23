@@ -172,7 +172,7 @@
 	)
 
 	traits = list(
-		/decl/trait/boon/filtered_blood = TRAIT_LEVEL_EXISTS,
-		/decl/trait/boon/cast_iron_stomach = TRAIT_LEVEL_EXISTS,
-		/decl/trait/malus/sugar = TRAIT_LEVEL_MAJOR
+		/singleton/trait/boon/filtered_blood = TRAIT_LEVEL_EXISTS,
+		/singleton/trait/boon/cast_iron_stomach = TRAIT_LEVEL_EXISTS,
+		/singleton/trait/malus/sugar = TRAIT_LEVEL_MAJOR
 	)

@@ -28,7 +28,7 @@
 
 /obj/effect/submap_landmark/joinable_submap/skrellscoutship
 	name = "Xilvuxix"
-	archetype = /decl/submap_archetype/skrellscoutship
+	archetype = /singleton/submap_archetype/skrellscoutship
 
 /obj/effect/submap_landmark/spawnpoint/skrellscoutship
 	name = "Qrri-Zuumqix"
@@ -37,10 +37,10 @@
 /obj/effect/submap_landmark/spawnpoint/skrellscoutship/leader
 	name = "Qrri-Vuxix"
 
-/decl/webhook/submap_loaded/skrell
+/singleton/webhook/submap_loaded/skrell
 	id = WEBHOOK_SUBMAP_LOADED_SKRELL
 
-/decl/submap_archetype/skrellscoutship
+/singleton/submap_archetype/skrellscoutship
 	descriptor = "Skrellian Scout Ship"
 	map = "Xilvuxix"
 	crew_jobs = list(
@@ -67,7 +67,7 @@ var/global/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
 	title = "Qrri-Vuxix"
 	supervisors = "your SDTF"
 	total_positions = 1
-	outfit_type = /decl/hierarchy/outfit/job/skrellscoutship
+	outfit_type = /singleton/hierarchy/outfit/job/skrellscoutship
 	info = "Your vessel is scouting through unknown space, working to map out any potential dangers, as well as potential allies."
 	is_semi_antagonist = TRUE
 	min_skill = list(SKILL_EVA = SKILL_ADEPT,
@@ -82,7 +82,7 @@ var/global/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
 	supervisors = "your Qrri-Vuxix"
 	total_positions = 5
 	whitelisted_species = list("Skrell")
-	outfit_type = /decl/hierarchy/outfit/job/skrellscoutship
+	outfit_type = /singleton/hierarchy/outfit/job/skrellscoutship
 	info = "Your vessel is scouting through unknown space, working to map out any potential dangers, as well as potential allies."
 	branch = /datum/mil_branch/skrell_fleet
 	rank = /datum/mil_rank/skrell_fleet
@@ -135,7 +135,7 @@ var/global/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
 	item_state = "skrell_suit"
 	worn_state = "skrell_suit"
 
-/decl/hierarchy/outfit/job/skrellscoutship
+/singleton/hierarchy/outfit/job/skrellscoutship
 	name = "Xilvuxix Crew"
 	uniform = /obj/item/clothing/under/skrelljumpsuit
 	shoes = /obj/item/clothing/shoes/dutyboots

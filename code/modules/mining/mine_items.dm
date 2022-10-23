@@ -2,7 +2,7 @@
 
 /obj/structure/closet/secure_closet/miner
 	name = "miner's equipment"
-	closet_appearance = /decl/closet_appearance/secure_closet/mining
+	closet_appearance = /singleton/closet_appearance/secure_closet/mining
 	req_access = list(access_mining)
 
 /obj/structure/closet/secure_closet/miner/WillContain()

@@ -95,10 +95,10 @@
 	)
 	// To be fleshed out and moved to parent door, but staying minimal for now.
 	public_methods = list(
-		/decl/public_access/public_method/toggle_door,
-		/decl/public_access/public_method/airlock_toggle_bolts
+		/singleton/public_access/public_method/toggle_door,
+		/singleton/public_access/public_method/airlock_toggle_bolts
 	)
-	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/airlock = 1)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/receiver/airlock = 1)
 
 /obj/machinery/door/airlock/get_material()
 	return SSmaterials.get_material_by_name(mineral ? mineral : MATERIAL_STEEL)
@@ -1469,14 +1469,14 @@ About the new airlock wires panel:
 
 // Public access
 
-/decl/public_access/public_method/airlock_toggle_bolts
+/singleton/public_access/public_method/airlock_toggle_bolts
 	name = "toggle bolts"
 	desc = "Toggles whether the airlock is bolted or not, if possible."
 	call_proc = /obj/machinery/door/airlock/proc/toggle_lock
 
-/decl/stock_part_preset/radio/receiver/airlock
+/singleton/stock_part_preset/radio/receiver/airlock
 	frequency = AIRLOCK_FREQ
 	receive_and_call = list(
-		"toggle_door" = /decl/public_access/public_method/toggle_door,
-		"toggle_bolts" = /decl/public_access/public_method/airlock_toggle_bolts
+		"toggle_door" = /singleton/public_access/public_method/toggle_door,
+		"toggle_bolts" = /singleton/public_access/public_method/airlock_toggle_bolts
 	)

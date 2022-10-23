@@ -14,7 +14,7 @@
 	clicksound = "button"
 	clickvol = 40
 	base_type = /obj/machinery/vending/assist
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 
 	machine_name = "vending machine"
@@ -198,7 +198,7 @@
 		power_change()
 		return
 
-/obj/machinery/vending/state_transition(decl/machine_construction/new_state)
+/obj/machinery/vending/state_transition(singleton/machine_construction/new_state)
 	. = ..()
 	SSnano.update_uis(src)
 

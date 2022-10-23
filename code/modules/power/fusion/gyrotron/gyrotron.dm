@@ -13,7 +13,7 @@
 	var/rate = 3
 	var/mega_energy = 1
 
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/radio/receiver,
 	)

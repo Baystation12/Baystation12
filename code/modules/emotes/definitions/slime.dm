@@ -1,30 +1,30 @@
-/decl/emote/slime
+/singleton/emote/slime
 	key = "nomood"
 	var/mood
 
-/decl/emote/slime/do_extra(mob/living/carbon/slime/user)
+/singleton/emote/slime/do_extra(mob/living/carbon/slime/user)
 	user.mood = mood
 	user.regenerate_icons()
 
-/decl/emote/slime/check_user(atom/user)
+/singleton/emote/slime/check_user(atom/user)
 	return istype(user, /mob/living/carbon/slime)
 
-/decl/emote/slime/pout
+/singleton/emote/slime/pout
 	key = "pout"
 	mood = "pout"
 
-/decl/emote/slime/sad
+/singleton/emote/slime/sad
 	key = "sad"
 	mood = "sad"
 
-/decl/emote/slime/angry
+/singleton/emote/slime/angry
 	key = "angry"
 	mood = "angry"
 
-/decl/emote/slime/frown
+/singleton/emote/slime/frown
 	key = "frown"
 	mood = "mischevous"
 
-/decl/emote/slime/smile
+/singleton/emote/slime/smile
 	key = "smile"
 	mood = ":3"

@@ -25,7 +25,7 @@
 	cultify_wall()
 
 /turf/simulated/floor/proc/cultify_floor()
-	set_flooring(Singletons.Get(/decl/flooring/reinforced/cult))
+	set_flooring(Singletons.Get(/singleton/flooring/reinforced/cult))
 	GLOB.cult.add_cultiness(CULTINESS_PER_TURF)
 
 

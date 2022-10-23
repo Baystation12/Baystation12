@@ -30,18 +30,18 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 
 	var/proximity_flags = 0
 
-	var/decl/turf_selection/turf_selection
+	var/singleton/turf_selection/turf_selection
 
 /datum/proximity_trigger/line
-	turf_selection = /decl/turf_selection/line
+	turf_selection = /singleton/turf_selection/line
 
 /datum/proximity_trigger/square
-	turf_selection = /decl/turf_selection/square
+	turf_selection = /singleton/turf_selection/square
 
 /datum/proximity_trigger/New(holder, on_turf_entered, on_turfs_changed, range = 2, proximity_flags = 0, proc_owner)
 	..()
 
-	if(!ispath(turf_selection, /decl/turf_selection))
+	if(!ispath(turf_selection, /singleton/turf_selection))
 		CRASH("Invalid turf selection type set: [turf_selection]")
 	turf_selection = Singletons.Get(turf_selection)
 

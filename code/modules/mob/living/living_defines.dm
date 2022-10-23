@@ -66,5 +66,5 @@
 
 	var/image/selected_image = null // Used for buildmode AI control stuff.
 
-	/// An associative list of /decl/trait and trait level - See individual traits for valid levels
+	/// An associative list of /singleton/trait and trait level - See individual traits for valid levels
 	var/list/traits

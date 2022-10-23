@@ -50,7 +50,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 
 	var/list/processed_parts = list()
 	for(var/path in stock_part_presets)
-		var/decl/stock_part_preset/preset = Singletons.Get(path)
+		var/singleton/stock_part_preset/preset = Singletons.Get(path)
 		var/number = stock_part_presets[path] || 1
 		for(var/obj/item/stock_parts/part in component_parts)
 			if(processed_parts[part])
@@ -62,18 +62,18 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 				if(number == 0)
 					break
 
-/// Returns the first valid preset decl for a given part, or `null`
+/// Returns the first valid preset singleton for a given part, or `null`
 /obj/machinery/proc/can_apply_preset_to(obj/item/stock_parts/part)
 	if(!stock_part_presets)
 		return
 	for(var/path in stock_part_presets)
-		var/decl/stock_part_preset/preset = Singletons.Get(path)
+		var/singleton/stock_part_preset/preset = Singletons.Get(path)
 		if(istype(part, preset.expected_part_type))
 			return preset
 
 // Applies the first valid preset to the given part. Returns preset applied, or null.
 /obj/machinery/proc/apply_preset_to(obj/item/stock_parts/part)
-	var/decl/stock_part_preset/preset = can_apply_preset_to(part)
+	var/singleton/stock_part_preset/preset = can_apply_preset_to(part)
 	if(preset)
 		preset.apply(null, part)
 		return preset

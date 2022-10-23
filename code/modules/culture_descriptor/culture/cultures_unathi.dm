@@ -1,4 +1,4 @@
-/decl/cultural_info/culture/unathi
+/singleton/cultural_info/culture/unathi
 	name = CULTURE_UNATHI_DIAMOND_PEAKS
 	description = "Haughty and warlike, unathi from the Diamond peaks are wary of the outsiders, especially offworlders. \
 	Hierarchy and tradition are the core values of their clans. From their mountainous strongholds they exercise power \
@@ -13,7 +13,7 @@
 		LANGUAGE_SPACER
 	)
 
-/decl/cultural_info/culture/unathi_polar
+/singleton/cultural_info/culture/unathi_polar
 	name = CULTURE_UNATHI_POLAR
 	description = "These unathi hail from the dense jungles of Moghes' poles. Generally, they're the most welcoming of outsiders and the most \
 	common to find off-world. Most of these unathi are followers of the Precursors or the Fruitful Lights, with technology and progress being \
@@ -26,7 +26,7 @@
 		LANGUAGE_SPACER
 	)
 
-/decl/cultural_info/culture/unathi_desert
+/singleton/cultural_info/culture/unathi_desert
 	name = CULTURE_UNATHI_DESERT
 	description = "These are the survivalists of the unathi. They hunker down in long-forgotten bunkers of the precursors and survive on \
 	whatever creatures that still live in the deserts. They're incredibly self-sufficient despite their living conditions. They have a heavy focus on \
@@ -39,7 +39,7 @@
 		LANGUAGE_SPACER
 	)
 
-/decl/cultural_info/culture/unathi_savannah
+/singleton/cultural_info/culture/unathi_savannah
 	name = CULTURE_UNATHI_SAVANNAH
 	description = "These unathi belong to the numerous rural and nomadic clans spread across the great plains of either hemisphere of Moghes. \
 	Excellent farmers, riders and herdsmen, most savannah unathi follow the Hand of the Vines."
@@ -51,7 +51,7 @@
 		LANGUAGE_SPACER
 	)
 
-/decl/cultural_info/culture/unathi_salt_swamp
+/singleton/cultural_info/culture/unathi_salt_swamp
 	name = CULTURE_UNATHI_SALT_SWAMP
 	description = "Combining assorted elements of various cultures with an adventurous spirit and resolve, salt swamp unathi are noted for their friendliness and openness to outsiders, \
 	along with their knack for rituals that often get mistaken as \"parties\" by humans. The Fruitful Lights and Hand of the Vines both have numerous \
@@ -64,7 +64,7 @@
 		LANGUAGE_SPACER
 	)
 
-/decl/cultural_info/culture/unathi_space
+/singleton/cultural_info/culture/unathi_space
 	name = CULTURE_UNATHI_SPACE
 	description = "With increased trade with humanity and Sol, unathi clans have gradually reached towards the stars. Space-faring clans owe \
 	much of their origins to the nomadic savannah clans, though it still varies greatly. Many of them still retain their traditions from their \
@@ -79,7 +79,7 @@
 	)
 
 
-/decl/cultural_info/culture/unathi_yeosa
+/singleton/cultural_info/culture/unathi_yeosa
 	name = CULTURE_UNATHI_YEOSA_LITTORAL
 	description = "On Moghes, the boundaries between regions, cultures, and even races are rarely set in stone the yeosa realm is by no means an exception. \
 	Spread wide along the coast of the World Sea, islander communities coexist (and sometimes cooperate) with their sinta brethren. This is especially \
@@ -99,7 +99,7 @@
 		LANGUAGE_SPACER
 	)
 
-/decl/cultural_info/culture/unathi_yeosa_abyss
+/singleton/cultural_info/culture/unathi_yeosa_abyss
 	name = CULTURE_UNATHI_YEOSA_ABYSS
 	description = "While the majority of yeosa gravitate toward the coastal areas, some have dwelled deeper into the ocean, following the migration \
 	of sea animals, seeking shelter, or driven by the spirit of adventure. Those who have settled in the volcanic islands and archipelagos of deep sea became \

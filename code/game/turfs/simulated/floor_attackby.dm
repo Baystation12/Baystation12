@@ -112,10 +112,10 @@
 					new /obj/structure/catwalk(src)
 				return
 			var/obj/item/stack/S = C
-			var/decl/flooring/use_flooring
-			var/list/decls = Singletons.GetSubtypesAssoc(/decl/flooring)
-			for(var/flooring_type in decls)
-				var/decl/flooring/F = decls[flooring_type]
+			var/singleton/flooring/use_flooring
+			var/list/singletons = Singletons.GetSubtypesAssoc(/singleton/flooring)
+			for(var/flooring_type in singletons)
+				var/singleton/flooring/F = singletons[flooring_type]
 				if(!F.build_type)
 					continue
 				if(S.type == F.build_type || S.build_type == F.build_type)

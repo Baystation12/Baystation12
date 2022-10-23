@@ -43,7 +43,7 @@
 	else
 		player.char_rank = GLOB.mil_branches.get_rank("Fleet", "Petty Officer First Class")
 
-	var/decl/hierarchy/outfit/ert_outfit = outfit_by_type((player.mind == leader) ? /decl/hierarchy/outfit/job/torch/ert/leader : /decl/hierarchy/outfit/job/torch/ert)
+	var/singleton/hierarchy/outfit/ert_outfit = outfit_by_type((player.mind == leader) ? /singleton/hierarchy/outfit/job/torch/ert/leader : /singleton/hierarchy/outfit/job/torch/ert)
 	ert_outfit.equip(player)
 
 	if(player.char_rank && player.char_rank.accessory)

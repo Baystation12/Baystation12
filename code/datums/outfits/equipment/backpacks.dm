@@ -6,53 +6,53 @@
 *******************/
 
 /* Setup new backpacks here */
-/decl/backpack_outfit/nothing
+/singleton/backpack_outfit/nothing
 	name = "Nothing"
 
-/decl/backpack_outfit/nothing/spawn_backpack(location, metadata, desired_type)
+/singleton/backpack_outfit/nothing/spawn_backpack(location, metadata, desired_type)
 	return
 
-/decl/backpack_outfit/backpack
+/singleton/backpack_outfit/backpack
 	name = "Backpack"
 	path = /obj/item/storage/backpack
 	is_default = TRUE
 
-/decl/backpack_outfit/rucksack
+/singleton/backpack_outfit/rucksack
 	name = "Rucksack"
 	path = /obj/item/storage/backpack/rucksack
 	flags = BACKPACK_HAS_TYPE_SELECTION
 
-/decl/backpack_outfit/satchel
+/singleton/backpack_outfit/satchel
 	name = "Satchel"
 	path = /obj/item/storage/backpack/satchel
 
-/decl/backpack_outfit/satchel/New()
+/singleton/backpack_outfit/satchel/New()
 	..()
 	tweaks += new/datum/backpack_tweak/selection/specified_types_as_list(typesof(/obj/item/storage/backpack/satchel/leather) + /obj/item/storage/backpack/satchel/grey)
 
-/decl/backpack_outfit/messenger_bag
+/singleton/backpack_outfit/messenger_bag
 	name = "Messenger bag"
 	path = /obj/item/storage/backpack/messenger
 
-/decl/backpack_outfit/pocketbook
+/singleton/backpack_outfit/pocketbook
 	name = "Pocketbook"
 	path = /obj/item/storage/backpack/satchel/pocketbook
 	flags = BACKPACK_HAS_TYPE_SELECTION
 
-/decl/backpack_outfit/dufflebag
+/singleton/backpack_outfit/dufflebag
 	name = "Dufflebag"
 	path = /obj/item/storage/backpack/dufflebag
 
 
 /* Code */
-/decl/backpack_outfit
+/singleton/backpack_outfit
 	var/flags
 	var/name
 	var/path
 	var/is_default = FALSE
 	var/list/tweaks
 
-/decl/backpack_outfit/New()
+/singleton/backpack_outfit/New()
 	tweaks = tweaks || list()
 
 	if(HAS_FLAGS(flags, BACKPACK_HAS_TYPE_SELECTION|BACKPACK_HAS_SUBTYPE_SELECTION))
@@ -63,7 +63,7 @@
 	if(flags & BACKPACK_HAS_SUBTYPE_SELECTION)
 		tweaks += new/datum/backpack_tweak/selection/subtypes(path)
 
-/decl/backpack_outfit/proc/spawn_backpack(location, metadata, desired_type)
+/singleton/backpack_outfit/proc/spawn_backpack(location, metadata, desired_type)
 	metadata = metadata || list()
 	desired_type = desired_type || path
 	for(var/t in tweaks)
@@ -168,7 +168,7 @@
 * Character setup *
 *******************/
 /datum/backpack_setup
-	var/decl/backpack_outfit/backpack
+	var/singleton/backpack_outfit/backpack
 	var/metadata
 
 /datum/backpack_setup/New(backpack, metadata)
@@ -179,9 +179,9 @@
 * Helpers *
 **********/
 /proc/get_default_outfit_backpack()
-	var backpacks = Singletons.GetSubtypesAssoc(/decl/backpack_outfit)
+	var backpacks = Singletons.GetSubtypesAssoc(/singleton/backpack_outfit)
 	for(var/backpack in backpacks)
-		var/decl/backpack_outfit/bo = backpacks[backpack]
+		var/singleton/backpack_outfit/bo = backpacks[backpack]
 		if(bo.is_default)
 			return bo
 

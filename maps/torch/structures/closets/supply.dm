@@ -1,20 +1,20 @@
 /*
  * Torch Supply
  */
-/decl/closet_appearance/secure_closet/torch/cargo
+/singleton/closet_appearance/secure_closet/torch/cargo
 	extra_decals = list(
 		"stripe_vertical_mid_full" = COLOR_BEASTY_BROWN,
 		"cargo_upper" = COLOR_BEASTY_BROWN
 	)
 
-/decl/closet_appearance/secure_closet/torch/cargo/worker
+/singleton/closet_appearance/secure_closet/torch/cargo/worker
 	extra_decals = list(
 		"stripe_vertical_left_full" = COLOR_BEASTY_BROWN,
 		"stripe_vertical_right_full" = COLOR_BEASTY_BROWN,
 		"cargo_upper" = COLOR_BEASTY_BROWN
 	)
 
-/decl/closet_appearance/secure_closet/torch/cargo/deck_officer
+/singleton/closet_appearance/secure_closet/torch/cargo/deck_officer
 	extra_decals = list(
 		"stripe_vertical_mid_full" = COLOR_CLOSET_GOLD,
 		"stripe_vertical_left_full" = COLOR_BEASTY_BROWN,
@@ -25,7 +25,7 @@
 /obj/structure/closet/secure_closet/decktech
 	name = "deck technician's locker"
 	req_access = list(access_cargo)
-	closet_appearance = /decl/closet_appearance/secure_closet/torch/cargo/worker
+	closet_appearance = /singleton/closet_appearance/secure_closet/torch/cargo/worker
 
 /obj/structure/closet/secure_closet/decktech/WillContain()
 	return list(
@@ -51,7 +51,7 @@
 /obj/structure/closet/secure_closet/deckofficer
 	name = "deck chief's locker"
 	req_access = list(access_qm)
-	closet_appearance = /decl/closet_appearance/secure_closet/torch/cargo/deck_officer
+	closet_appearance = /singleton/closet_appearance/secure_closet/torch/cargo/deck_officer
 
 /obj/structure/closet/secure_closet/deckofficer/WillContain()
 	return list(
@@ -80,7 +80,7 @@
 /obj/structure/closet/secure_closet/prospector
 	name = "prospector's locker"
 	req_access = list(access_mining)
-	closet_appearance = /decl/closet_appearance/secure_closet/torch/cargo
+	closet_appearance = /singleton/closet_appearance/secure_closet/torch/cargo
 
 /obj/structure/closet/secure_closet/prospector/WillContain()
 	return list(
