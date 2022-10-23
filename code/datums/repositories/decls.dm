@@ -32,7 +32,7 @@ var/global/repository/singletons/Singletons = new
 
 
 /// Fetches an associative list of decl instances, creating and instantiating them if necessary.
-/repository/singletons/proc/get_decls(list/decl_paths)
+/repository/singletons/proc/GetAssoc(list/decl_paths)
 	var/list/result = list()
 	for (var/decl_path in decl_paths)
 		var/decl/instance = Get(decl_path)
@@ -43,7 +43,7 @@ var/global/repository/singletons/Singletons = new
 
 
 /// Fetches a plain list of decl instances, creating and instantiating them if necessary.
-/repository/singletons/proc/get_decls_plain(list/decl_paths)
+/repository/singletons/proc/GetList(list/decl_paths)
 	var/list/result = list()
 	for (var/decl_path in decl_paths)
 		var/decl/instance = Get(decl_path)
@@ -57,7 +57,7 @@ var/global/repository/singletons/Singletons = new
 /repository/singletons/proc/get_decls_of_type(decl_path)
 	var/list/result = typesof_assoc[decl_path]
 	if (!result)
-		result = get_decls(typesof(decl_path))
+		result = GetAssoc(typesof(decl_path))
 		typesof_assoc[decl_path] = result
 	return result
 
@@ -66,7 +66,7 @@ var/global/repository/singletons/Singletons = new
 /repository/singletons/proc/get_decls_of_subtype(decl_path)
 	var/list/result = subtypesof_assoc[decl_path]
 	if (!result)
-		result = get_decls(subtypesof(decl_path))
+		result = GetAssoc(subtypesof(decl_path))
 		subtypesof_assoc[decl_path] = result
 	return result
 
@@ -75,7 +75,7 @@ var/global/repository/singletons/Singletons = new
 /repository/singletons/proc/get_decls_of_type_plain(decl_path)
 	var/list/result = typesof_plain[decl_path]
 	if (!result)
-		result = get_decls_plain(typesof(decl_path))
+		result = GetList(typesof(decl_path))
 		typesof_plain[decl_path] = result
 	return result
 
@@ -84,7 +84,7 @@ var/global/repository/singletons/Singletons = new
 /repository/singletons/proc/get_decls_of_subtype_plain(decl_path)
 	var/list/result = subtypesof_plain[decl_path]
 	if (!result)
-		result = get_decls_plain(subtypesof(decl_path))
+		result = GetList(subtypesof(decl_path))
 		subtypesof_plain[decl_path] = result
 	return result
 
