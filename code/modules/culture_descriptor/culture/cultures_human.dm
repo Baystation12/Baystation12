@@ -23,6 +23,11 @@
 	average level of comfort expected in Sol space. Most surfacers are like many across the galaxy, though a few harbour rivalries with other Martian cultural \
 	groups or are generally overly proud of their heritage, as is the case with the Gideons, to the point that they constantly refer to it."
 	economic_power = 1
+	allowed_accents = list(
+		/decl/accent/sol_core,
+		/decl/accent/mars_surface,
+		/decl/accent/mars_tunnel
+	)
 
 /decl/cultural_info/culture/human/martian_tunneller
 	name = CULTURE_HUMAN_MARSTUN

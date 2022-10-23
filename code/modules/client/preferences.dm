@@ -341,6 +341,9 @@
 	character.update_languages()
 	for(var/lang in alternate_languages)
 		character.add_language(lang)
+		character.accent = GLOB.accent_name_to_path[accent]
+	if (!character.accent)
+		character.accent = /decl/accent/unknown
 
 	character.flavor_texts["general"] = flavor_texts["general"]
 	character.flavor_texts["head"] = flavor_texts["head"]
