@@ -50,7 +50,7 @@
 
 /datum/preferences/proc/setup()
 	if(!length(GLOB.skills))
-		Singletons.get_decl(/decl/hierarchy/skill)
+		Singletons.Get(/decl/hierarchy/skill)
 	player_setup = new(src)
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender,species)

@@ -25,7 +25,7 @@
 	owner = _owner
 	tracks = list()
 	for (var/path in GLOB.jukebox_tracks)
-		var/decl/audio/track/track = Singletons.get_decl(path)
+		var/decl/audio/track/track = Singletons.Get(path)
 		AddTrack(track.display || track.title, track.source)
 	sound_id = "[/jukebox]_[sequential_id(/jukebox)]"
 	template = _template

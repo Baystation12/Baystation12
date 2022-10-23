@@ -9,7 +9,7 @@
 /decl/state/Initialize()
 	. = ..()
 	for(var/i in 1 to LAZYLEN(transitions))
-		var/decl/state_transition/T = Singletons.get_decl(transitions[i])
+		var/decl/state_transition/T = Singletons.Get(transitions[i])
 		LAZYADD(T.from, src)
 		transitions[i] = T
 

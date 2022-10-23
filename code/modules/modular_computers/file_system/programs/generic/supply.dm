@@ -48,7 +48,7 @@
 /datum/nano_module/supply/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()
 	var/is_admin = emagged || check_access(user, admin_access)
-	var/decl/security_state/security_state = Singletons.get_decl(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
 	if(!LAZYLEN(category_names) || !LAZYLEN(category_contents) || current_security_level != security_state.current_security_level || emagged_memory != emagged )
 		generate_categories()
 		current_security_level = security_state.current_security_level
@@ -295,7 +295,7 @@
 /datum/nano_module/supply/proc/generate_categories()
 	category_names.Cut()
 	category_contents.Cut()
-	var/decl/hierarchy/supply_pack/root = Singletons.get_decl(/decl/hierarchy/supply_pack)
+	var/decl/hierarchy/supply_pack/root = Singletons.Get(/decl/hierarchy/supply_pack)
 	for(var/decl/hierarchy/supply_pack/sp in root.children)
 		if(!sp.is_category())
 			continue // No children

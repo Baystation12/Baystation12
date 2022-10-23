@@ -19,7 +19,7 @@ var/global/repository/singletons/Singletons = new
 
 
 /// Fetches a decl instance, creating and instantiating it if necessary.
-/repository/singletons/proc/get_decl(decl_path)
+/repository/singletons/proc/Get(decl_path)
 	var/decl/result = decls[decl_path]
 	if (!result)
 		if (is_abstract(decl_path))
@@ -35,7 +35,7 @@ var/global/repository/singletons/Singletons = new
 /repository/singletons/proc/get_decls(list/decl_paths)
 	var/list/result = list()
 	for (var/decl_path in decl_paths)
-		var/decl/instance = get_decl(decl_path)
+		var/decl/instance = Get(decl_path)
 		if (!instance)
 			continue
 		result[decl_path] = instance
@@ -46,7 +46,7 @@ var/global/repository/singletons/Singletons = new
 /repository/singletons/proc/get_decls_plain(list/decl_paths)
 	var/list/result = list()
 	for (var/decl_path in decl_paths)
-		var/decl/instance = get_decl(decl_path)
+		var/decl/instance = Get(decl_path)
 		if (!instance)
 			continue
 		result += instance

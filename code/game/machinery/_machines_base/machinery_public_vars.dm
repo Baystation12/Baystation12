@@ -106,7 +106,7 @@ Machinery implementation
 
 /obj/machinery/Initialize()
 	for(var/path in public_variables)
-		public_variables[path] = Singletons.get_decl(path)
+		public_variables[path] = Singletons.Get(path)
 	for(var/path in public_methods)
-		public_methods[path] = Singletons.get_decl(path)
+		public_methods[path] = Singletons.Get(path)
 	. = ..()

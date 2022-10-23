@@ -41,7 +41,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 	if(check_cache && (client.cache.Find(asset_name) || client.sending.Find(asset_name)))
 		return 0
 
-	var/decl/asset_cache/asset_cache = Singletons.get_decl(/decl/asset_cache)
+	var/decl/asset_cache/asset_cache = Singletons.Get(/decl/asset_cache)
 	send_rsc(client, asset_cache.cache[asset_name], asset_name)
 	if(!verify || !winexists(client, "asset_cache_browser")) // Can't access the asset cache browser, rip.
 		if (client)
@@ -87,7 +87,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		return 0
 	if (unreceived.len >= ASSET_CACHE_TELL_CLIENT_AMOUNT)
 		to_chat(client, "Sending Resources...")
-	var/decl/asset_cache/asset_cache = Singletons.get_decl(/decl/asset_cache)
+	var/decl/asset_cache/asset_cache = Singletons.Get(/decl/asset_cache)
 	for(var/asset in unreceived)
 		if (asset in asset_cache.cache)
 			send_rsc(client, asset_cache.cache[asset], asset)
@@ -130,7 +130,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 //This proc "registers" an asset, it adds it to the cache for further use, you cannot touch it from this point on or you'll fuck things up.
 //if it's an icon or something be careful, you'll have to copy it before further use.
 /proc/register_asset(asset_name, asset)
-	var/decl/asset_cache/asset_cache = Singletons.get_decl(/decl/asset_cache)
+	var/decl/asset_cache/asset_cache = Singletons.Get(/decl/asset_cache)
 	asset_cache.cache[asset_name] = asset
 
 //Generated names do not include file extention.

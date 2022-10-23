@@ -179,7 +179,7 @@
 	for(var/key in entries)
 		var/list/values = entries[key]
 		if(values.len > 1)
-			var/decl/noi_feedback/noif = Singletons.get_decl(feedback)
+			var/decl/noi_feedback/noif = Singletons.Get(feedback)
 			noif.print(src, type, key, values)
 			issues++
 

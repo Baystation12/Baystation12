@@ -66,7 +66,7 @@
 			if (prob(25))
 				new /obj/effect/gibspawner/human(F)
 
-			F.set_flooring(Singletons.get_decl(/decl/flooring/flesh))
+			F.set_flooring(Singletons.Get(/decl/flooring/flesh))
 			F.desc = "Disgusting flooring made out of flesh, bone, eyes, and various other human bits and peices."
 
 

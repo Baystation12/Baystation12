@@ -154,7 +154,7 @@
 	if(mode != STATUS_DISPLAY_BLANK && mode != STATUS_DISPLAY_ALERT)
 		to_chat(user, "The display says:<br>\t[sanitize(message1)]<br>\t[sanitize(message2)]")
 	if(mode == STATUS_DISPLAY_ALERT || status_display_show_alert_border)
-		var/decl/security_state/security_state = Singletons.get_decl(GLOB.using_map.security_state)
+		var/decl/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
 		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
 /obj/machinery/status_display/proc/set_message(m1, m2)
@@ -176,7 +176,7 @@
 	status_display_show_alert_border = !status_display_show_alert_border
 
 /obj/machinery/status_display/proc/add_alert_border_to_display()
-	var/decl/security_state/security_state = Singletons.get_decl(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
 	var/decl/security_level/sl = security_state.current_security_level
 
 	var/border = image(sl.icon,sl.alert_border)
@@ -186,7 +186,7 @@
 /obj/machinery/status_display/proc/display_alert()
 	remove_display()
 
-	var/decl/security_state/security_state = Singletons.get_decl(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
 	var/decl/security_level/sl = security_state.current_security_level
 
 	var/image/alert = image(sl.icon, sl.overlay_status_display)

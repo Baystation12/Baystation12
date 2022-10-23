@@ -16,7 +16,7 @@
 
 /decl/audio/New()
 	. = ..()
-	license = Singletons.get_decl(license)
+	license = Singletons.Get(license)
 
 
 /decl/audio/VV_static()

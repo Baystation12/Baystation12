@@ -61,7 +61,7 @@
 //These procs convert to/from static save-data formats.
 /datum/category_item/player_setup_item/occupation/proc/load_skills()
 	if(!length(GLOB.skills))
-		Singletons.get_decl(/decl/hierarchy/skill)
+		Singletons.Get(/decl/hierarchy/skill)
 
 	pref.skills_allocated = list()
 	for(var/job_type in SSjobs.types_to_datums)
@@ -122,7 +122,7 @@
 	if(!S.prerequisites)
 		return TRUE
 	for(var/skill_type in S.prerequisites)
-		var/decl/hierarchy/skill/prereq = Singletons.get_decl(skill_type)
+		var/decl/hierarchy/skill/prereq = Singletons.Get(skill_type)
 		var/value = get_min_skill(job, prereq) + LAZYACCESS(skills_allocated[job], prereq)
 		if(value < S.prerequisites[skill_type])
 			return FALSE
@@ -187,7 +187,7 @@
 	dat += "</center></tt>"
 
 	dat += "<table>"
-	var/decl/hierarchy/skill/skill = Singletons.get_decl(/decl/hierarchy/skill)
+	var/decl/hierarchy/skill/skill = Singletons.Get(/decl/hierarchy/skill)
 	for(var/decl/hierarchy/skill/cat in skill.children)
 		dat += "<tr><th colspan = 4><b>[cat.name]</b>"
 		dat += "</th></tr>"

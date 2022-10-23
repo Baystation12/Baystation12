@@ -40,7 +40,7 @@
 	. = ..()
 	var/subspecies_type = DEFAULTPICK(subspecies, null)
 	if(subspecies_type)
-		var/decl/parrot_subspecies/ps = Singletons.get_decl(subspecies_type)
+		var/decl/parrot_subspecies/ps = Singletons.Get(subspecies_type)
 		icon_set = ps.icon_set
 		skin_material = ps.feathers
 		if(get_subspecies_name)

@@ -38,7 +38,7 @@
 	if(!floortype && initial_flooring)
 		floortype = initial_flooring
 	if(floortype)
-		set_flooring(Singletons.get_decl(floortype))
+		set_flooring(Singletons.Get(floortype))
 
 /turf/simulated/floor/proc/set_flooring(decl/flooring/newflooring)
 	make_plating(defer_icon_update = 1)

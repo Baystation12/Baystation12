@@ -128,7 +128,7 @@
 	if(!ability_prechecks(user, price))
 		return
 
-	var/decl/security_state/security_state = Singletons.get_decl(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
 	var/alert_target = input("Select new alert level:") as null|anything in (security_state.all_security_levels - security_state.current_security_level)
 	if(!alert_target || !ability_pay(user, price))
 		to_chat(user, "Hack Aborted")

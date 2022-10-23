@@ -52,7 +52,7 @@
 	.["hide_unskilled"] = hide_unskilled
 
 	var/list/skill_data = list()
-	var/decl/hierarchy/skill/skill = Singletons.get_decl(/decl/hierarchy/skill)
+	var/decl/hierarchy/skill/skill = Singletons.Get(/decl/hierarchy/skill)
 	for(var/decl/hierarchy/skill/V in skill.children)
 		var/list/skill_cat = list()
 		skill_cat["name"] = V.name
@@ -93,7 +93,7 @@
 	return skill_item
 
 /datum/skillset/proc/check_prerequisites(skill_type)
-	var/decl/hierarchy/skill/S = Singletons.get_decl(skill_type)
+	var/decl/hierarchy/skill/S = Singletons.Get(skill_type)
 	if(!S.prerequisites)
 		return TRUE
 	for(var/prereq_type in S.prerequisites)
@@ -114,7 +114,7 @@ The generic antag version.
 	. = ..()
 	.["can_choose"] = can_choose()
 	var/list/selection_data = list()
-	var/decl/hierarchy/skill/skill = Singletons.get_decl(/decl/hierarchy/skill)
+	var/decl/hierarchy/skill/skill = Singletons.Get(/decl/hierarchy/skill)
 	for(var/i in 1 to length(max_choices))
 		var/choices = max_choices[i]
 		if(!choices)
@@ -187,7 +187,7 @@ The generic antag version.
 		return
 	if(skillset.get_value(skill_type) >= level)
 		return
-	var/decl/hierarchy/skill/S = Singletons.get_decl(skill_type)
+	var/decl/hierarchy/skill/S = Singletons.Get(skill_type)
 	if(length(S.levels) < level)
 		return
 	if(S.prerequisites)

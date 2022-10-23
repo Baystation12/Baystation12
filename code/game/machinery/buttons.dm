@@ -46,7 +46,7 @@
 		return
 
 	operating = TRUE
-	var/decl/public_access/public_variable/variable = Singletons.get_decl(/decl/public_access/public_variable/button_active)
+	var/decl/public_access/public_variable/variable = Singletons.Get(/decl/public_access/public_variable/button_active)
 	variable.write_var(src, !active)
 	use_power_oneoff(500)
 	update_icon()

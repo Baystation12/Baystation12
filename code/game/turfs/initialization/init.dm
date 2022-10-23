@@ -8,5 +8,5 @@
 	. = ..()
 	for(var/turf/T in src)
 		if(turf_initializer)
-			var/decl/turf_initializer/ti = Singletons.get_decl(turf_initializer)
+			var/decl/turf_initializer/ti = Singletons.Get(turf_initializer)
 			ti.InitializeTurf(T)

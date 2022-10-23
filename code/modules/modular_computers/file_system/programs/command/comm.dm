@@ -67,7 +67,7 @@
 	data["boss_short"] = GLOB.using_map.boss_short
 	data["authenticated"] = authenticated
 
-	var/decl/security_state/security_state = Singletons.get_decl(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
 	data["current_security_level_ref"] = any2ref(security_state.current_security_level)
 	data["current_security_level_title"] = security_state.current_security_level.name
 
@@ -219,7 +219,7 @@
 		if("setalert")
 			. = TOPIC_HANDLED
 			if(is_authenticated(user) && !issilicon(usr) && ntn_cont && ntn_comm)
-				var/decl/security_state/security_state = Singletons.get_decl(GLOB.using_map.security_state)
+				var/decl/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
 				var/decl/security_level/target_level = locate(href_list["target"]) in security_state.comm_console_security_levels
 				if(target_level && security_state.can_switch_to(target_level))
 					var/confirm = alert("Are you sure you want to change the alert level to [target_level.name]?", name, "No", "Yes")

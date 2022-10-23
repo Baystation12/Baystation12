@@ -13,7 +13,7 @@
 /decl/crafting_stage/New()
 	var/stages = list()
 	for(var/nid in next_stages)
-		stages += Singletons.get_decl(nid)
+		stages += Singletons.Get(nid)
 	next_stages = stages
 	..()
 

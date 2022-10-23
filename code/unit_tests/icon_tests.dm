@@ -104,7 +104,7 @@
 	var/list/invalid_posters = list()
 
 	for(var/poster_type in subtypesof(/decl/poster))
-		var/decl/poster/P = Singletons.get_decl(poster_type)
+		var/decl/poster/P = Singletons.Get(poster_type)
 		if(!(P.icon_state in contraband_icons))
 			invalid_posters += poster_type
 
