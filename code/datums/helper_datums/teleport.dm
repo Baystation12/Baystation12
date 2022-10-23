@@ -51,5 +51,5 @@
 	do_spark(target)
 
 /proc/do_teleport(atom/movable/target, atom/destination, precision = 0, type = /decl/teleport/sparks)
-	var/decl/teleport/tele = decls_repository.get_decl(type)
+	var/decl/teleport/tele = Singletons.get_decl(type)
 	tele.teleport(target, destination, precision)

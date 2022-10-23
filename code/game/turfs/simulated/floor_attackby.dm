@@ -113,7 +113,7 @@
 				return
 			var/obj/item/stack/S = C
 			var/decl/flooring/use_flooring
-			var/list/decls = decls_repository.get_decls_of_subtype(/decl/flooring)
+			var/list/decls = Singletons.get_decls_of_subtype(/decl/flooring)
 			for(var/flooring_type in decls)
 				var/decl/flooring/F = decls[flooring_type]
 				if(!F.build_type)

@@ -15,7 +15,7 @@
 	var/list/bad_decal_state
 
 	for(var/check_appearance in typesof(/decl/closet_appearance)-except_appearances)
-		var/decl/closet_appearance/closet = decls_repository.get_decl(check_appearance)
+		var/decl/closet_appearance/closet = Singletons.get_decl(check_appearance)
 		if(!closet)
 			LAZYADD(bad_decl, "[check_appearance]")
 			continue

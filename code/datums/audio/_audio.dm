@@ -16,7 +16,7 @@
 
 /decl/audio/New()
 	. = ..()
-	license = decls_repository.get_decl(license)
+	license = Singletons.get_decl(license)
 
 
 /decl/audio/VV_static()

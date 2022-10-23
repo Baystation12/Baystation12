@@ -175,7 +175,7 @@
 			anchored = TRUE
 			if(do_after(src, 5 SECONDS, F, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				if(!F.flooring)
-					F.set_flooring(decls_repository.get_decl(floor_build_type))
+					F.set_flooring(Singletons.get_decl(floor_build_type))
 					addTiles(-1)
 			anchored = FALSE
 			target = null

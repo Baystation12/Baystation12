@@ -185,7 +185,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 
 	// What surgeries does our tool/target enable?
 	var/list/possible_surgeries
-	var/list/all_surgeries = decls_repository.get_decls_of_subtype(/decl/surgery_step)
+	var/list/all_surgeries = Singletons.get_decls_of_subtype(/decl/surgery_step)
 	for(var/decl in all_surgeries)
 		var/decl/surgery_step/S = all_surgeries[decl]
 		if(S.name && S.tool_quality(src) && S.can_use(user, M, zone, src))

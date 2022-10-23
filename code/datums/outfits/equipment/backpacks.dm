@@ -179,7 +179,7 @@
 * Helpers *
 **********/
 /proc/get_default_outfit_backpack()
-	var backpacks = decls_repository.get_decls_of_subtype(/decl/backpack_outfit)
+	var backpacks = Singletons.get_decls_of_subtype(/decl/backpack_outfit)
 	for(var/backpack in backpacks)
 		var/decl/backpack_outfit/bo = backpacks[backpack]
 		if(bo.is_default)

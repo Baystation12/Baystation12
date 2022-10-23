@@ -15,7 +15,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 ))
 
 #define FOR_ALL_EFFECTS \
-	var/list/all_effects = decls_repository.get_decls_unassociated(data);\
+	var/list/all_effects = Singletons.get_decls_plain(data);\
 	for(var/decl/random_chem_effect/effect in all_effects)
 
 /datum/reagent/random
@@ -49,7 +49,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 		effects_to_get.Cut(max_effect_number + 1)
 	effects_to_get += subtypesof(/decl/random_chem_effect/general_properties)
 
-	var/list/decls = decls_repository.get_decls_unassociated(effects_to_get)
+	var/list/decls = Singletons.get_decls_plain(effects_to_get)
 	for(var/item in decls)
 		var/decl/random_chem_effect/effect = item
 		effect.prototype_process(src, temperature)

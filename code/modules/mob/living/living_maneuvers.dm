@@ -36,7 +36,7 @@
 
 	var/list/maneuvers = list()
 	for(var/maneuver in available_maneuvers)
-		maneuvers += decls_repository.get_decl(maneuver)
+		maneuvers += Singletons.get_decl(maneuver)
 
 	var/next_maneuver = input(src, "Select a maneuver.") as null|anything in maneuvers
 	if(next_maneuver)
@@ -47,7 +47,7 @@
 		to_chat(src, SPAN_NOTICE("You are no longer preparing to perform a maneuver."))
 
 /mob/living/proc/perform_maneuver(maneuver, atom/target)
-	var/decl/maneuver/performing_maneuver = ispath(maneuver) ? decls_repository.get_decl(maneuver) : maneuver
+	var/decl/maneuver/performing_maneuver = ispath(maneuver) ? Singletons.get_decl(maneuver) : maneuver
 	if(istype(performing_maneuver))
 		. = performing_maneuver.perform(src, target, get_acrobatics_multiplier(performing_maneuver))
 

@@ -62,7 +62,7 @@
 		crash_with("Invalid setup: [log_info_line(src)]")
 		return INITIALIZE_HINT_QDEL
 
-	available_modifications = list_values(decls_repository.get_decls(available_modifications))
+	available_modifications = list_values(Singletons.get_decls(available_modifications))
 
 	target_modification = available_modifications[1]
 	target_species = species[1]
@@ -175,7 +175,7 @@
 	//Clear the access reqs, disable the safeties, and open up all paintjobs.
 	to_chat(user, SPAN_DANGER("You run the sequencer across the interface, corrupting the operating protocols."))
 
-	var/additional_modifications = list_values(decls_repository.get_decls(emagged_modifications))
+	var/additional_modifications = list_values(Singletons.get_decls(emagged_modifications))
 	available_modifications |= additional_modifications
 
 	emagged = TRUE

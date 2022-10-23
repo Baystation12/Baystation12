@@ -25,12 +25,12 @@
 	if(transmit_on_change)
 		part.transmit_on_change = list()
 		for(var/key in transmit_on_change)
-			part.transmit_on_change[key] = decls_repository.get_decl(transmit_on_change[key])
+			part.transmit_on_change[key] = Singletons.get_decl(transmit_on_change[key])
 
 	if(transmit_on_tick)
 		part.transmit_on_tick = list()
 		for(var/key in transmit_on_tick)
-			part.transmit_on_tick[key] = decls_repository.get_decl(transmit_on_tick[key])
+			part.transmit_on_tick[key] = Singletons.get_decl(transmit_on_tick[key])
 
 /decl/stock_part_preset/radio/event_transmitter
 	expected_part_type = /obj/item/stock_parts/radio/transmitter/on_event
@@ -41,12 +41,12 @@
 	..()
 
 	if(event)
-		part.event = decls_repository.get_decl(event)
+		part.event = Singletons.get_decl(event)
 
 	if(transmit_on_event)
 		part.transmit_on_event = list()
 		for(var/key in transmit_on_event)
-			part.transmit_on_event[key] = decls_repository.get_decl(transmit_on_event[key])
+			part.transmit_on_event[key] = Singletons.get_decl(transmit_on_event[key])
 
 /decl/stock_part_preset/radio/receiver
 	expected_part_type = /obj/item/stock_parts/radio/receiver
@@ -59,9 +59,9 @@
 	if(receive_and_write)
 		part.receive_and_write = list()
 		for(var/key in receive_and_write)
-			part.receive_and_write[key] = decls_repository.get_decl(receive_and_write[key])
+			part.receive_and_write[key] = Singletons.get_decl(receive_and_write[key])
 
 	if(receive_and_call)
 		part.receive_and_call = list()
 		for(var/key in receive_and_call)
-			part.receive_and_call[key] = decls_repository.get_decl(receive_and_call[key])
+			part.receive_and_call[key] = Singletons.get_decl(receive_and_call[key])

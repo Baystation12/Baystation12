@@ -34,7 +34,7 @@
 	. = ..()
 
 	if(!work_modes)
-		var/decl/hierarchy/h = decls_repository.get_decl(/decl/hierarchy/rcd_mode)
+		var/decl/hierarchy/h = Singletons.get_decl(/decl/hierarchy/rcd_mode)
 		work_modes = h.children
 	work_mode = work_modes[1]
 

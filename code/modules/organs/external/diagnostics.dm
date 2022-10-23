@@ -131,7 +131,7 @@
 		return
 
 	var/list/badness = list()
-	var/list/symptoms = decls_repository.get_decls_of_subtype(/decl/diagnostic_sign)
+	var/list/symptoms = Singletons.get_decls_of_subtype(/decl/diagnostic_sign)
 	for(var/S in symptoms)
 		var/decl/diagnostic_sign/sign = symptoms[S]
 		if(sign.manifested_in(src))

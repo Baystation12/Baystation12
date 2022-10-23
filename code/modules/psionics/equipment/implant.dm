@@ -56,7 +56,7 @@
 
 /obj/item/implant/psi_control/proc/get_psi_mode()
 	if(psi_mode == PSI_IMPLANT_AUTOMATIC)
-		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+		var/decl/security_state/security_state = Singletons.get_decl(GLOB.using_map.security_state)
 		return security_state.current_security_level.psionic_control_level
 	return psi_mode
 

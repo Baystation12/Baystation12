@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(webhooks)
 		return
 
 	var/list/all_webhooks_by_id = list()
-	var/list/all_webhooks = decls_repository.get_decls_of_subtype(/decl/webhook)
+	var/list/all_webhooks = Singletons.get_decls_of_subtype(/decl/webhook)
 	for(var/wid in all_webhooks)
 		var/decl/webhook/webhook = all_webhooks[wid]
 		if(webhook.id)

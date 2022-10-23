@@ -33,7 +33,7 @@ SUBSYSTEM_DEF(supply)
 	ordernum = rand(1,9000)
 
 	//Build master supply list
-	var/decl/hierarchy/supply_pack/root = decls_repository.get_decl(/decl/hierarchy/supply_pack)
+	var/decl/hierarchy/supply_pack/root = Singletons.get_decl(/decl/hierarchy/supply_pack)
 	for(var/decl/hierarchy/supply_pack/sp in root.children)
 		if(sp.is_category())
 			for(var/decl/hierarchy/supply_pack/spc in sp.get_descendents())

@@ -9,7 +9,7 @@
 
 /obj/machinery/Initialize()
 	if(construct_state)
-		construct_state = decls_repository.get_decl(construct_state)
+		construct_state = Singletons.get_decl(construct_state)
 	. = ..()
 
 /// Called on state transition; can intercept, but must call parent.
@@ -60,7 +60,7 @@
 /decl/machine_construction/proc/try_change_state(obj/machinery/machine, path, user)
 	if(machine.construct_state != src)
 		return MCS_BLOCK
-	var/decl/machine_construction/state = decls_repository.get_decl(path)
+	var/decl/machine_construction/state = Singletons.get_decl(path)
 	if(state)
 		var/fail = machine.cannot_transition_to(path, user)
 		if(fail == MCS_CHANGE)

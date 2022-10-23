@@ -2,7 +2,7 @@
 if(!decls_by_name) \
 {\
 	decls_by_name = list();\
-	var/decls_by_type = decls_repository.get_decls_of_subtype(decl_prototype);\
+	var/decls_by_type = Singletons.get_decls_of_subtype(decl_prototype);\
 	for(var/decl_type in decls_by_type) \
 	{\
 		var##decl_prototype/decl_instance = decls_by_type[decl_type];\

@@ -104,7 +104,7 @@
 	var/list/invalid_posters = list()
 
 	for(var/poster_type in subtypesof(/decl/poster))
-		var/decl/poster/P = decls_repository.get_decl(poster_type)
+		var/decl/poster/P = Singletons.get_decl(poster_type)
 		if(!(P.icon_state in contraband_icons))
 			invalid_posters += poster_type
 
@@ -120,7 +120,7 @@
 
 /datum/unit_test/icon_test/item_modifiers_shall_have_icon_states/start_test()
 	var/list/bad_modifiers = list()
-	var/item_modifiers = list_values(decls_repository.get_decls(/decl/item_modifier))
+	var/item_modifiers = list_values(Singletons.get_decls(/decl/item_modifier))
 
 	for(var/im in item_modifiers)
 		var/decl/item_modifier/item_modifier = im

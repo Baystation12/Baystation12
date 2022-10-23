@@ -311,7 +311,7 @@ var/global/bomb_set
 	timing = 1
 	log_and_message_admins("activated the detonation countdown of \the [src]")
 	bomb_set++ //There can still be issues with this resetting when there are multiple bombs. Not a big deal though for Nuke/N
-	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = Singletons.get_decl(GLOB.using_map.security_state)
 	original_level = security_state.current_security_level
 	security_state.set_security_level(security_state.severe_security_level, TRUE)
 	update_icon()
@@ -322,7 +322,7 @@ var/global/bomb_set
 /obj/machinery/nuclearbomb/proc/secure_device()
 	if(timing <= 0)
 		return
-	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = Singletons.get_decl(GLOB.using_map.security_state)
 	security_state.set_security_level(original_level, TRUE)
 	bomb_set--
 	safety = TRUE

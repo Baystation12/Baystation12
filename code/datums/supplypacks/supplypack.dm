@@ -25,7 +25,7 @@
 /decl/hierarchy/supply_pack/proc/sec_available()
 	if(isnull(security_level))
 		return TRUE
-	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = Singletons.get_decl(GLOB.using_map.security_state)
 	switch(security_level)
 		if(SUPPLY_SECURITY_ELEVATED)
 			if(security_state.all_security_levels.len > 1)

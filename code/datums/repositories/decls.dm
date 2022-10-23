@@ -1,7 +1,7 @@
-var/global/repository/decls/decls_repository = new
+var/global/repository/singletons/Singletons = new
 
 
-/repository/decls
+/repository/singletons
 	/// A cache of individual decls as (/decl/path = Instance, ...)
 	var/static/list/decls = list()
 
@@ -19,7 +19,7 @@ var/global/repository/decls/decls_repository = new
 
 
 /// Fetches a decl instance, creating and instantiating it if necessary.
-/repository/decls/proc/get_decl(decl_path)
+/repository/singletons/proc/get_decl(decl_path)
 	var/decl/result = decls[decl_path]
 	if (!result)
 		if (is_abstract(decl_path))
@@ -32,7 +32,7 @@ var/global/repository/decls/decls_repository = new
 
 
 /// Fetches an associative list of decl instances, creating and instantiating them if necessary.
-/repository/decls/proc/get_decls(list/decl_paths)
+/repository/singletons/proc/get_decls(list/decl_paths)
 	var/list/result = list()
 	for (var/decl_path in decl_paths)
 		var/decl/instance = get_decl(decl_path)
@@ -43,7 +43,7 @@ var/global/repository/decls/decls_repository = new
 
 
 /// Fetches a plain list of decl instances, creating and instantiating them if necessary.
-/repository/decls/proc/get_decls_plain(list/decl_paths)
+/repository/singletons/proc/get_decls_plain(list/decl_paths)
 	var/list/result = list()
 	for (var/decl_path in decl_paths)
 		var/decl/instance = get_decl(decl_path)
@@ -54,7 +54,7 @@ var/global/repository/decls/decls_repository = new
 
 
 /// Fetches an associative list of decl instances of the target type and its subtypes, creating and instantiating them if necessary.
-/repository/decls/proc/get_decls_of_type(decl_path)
+/repository/singletons/proc/get_decls_of_type(decl_path)
 	var/list/result = typesof_assoc[decl_path]
 	if (!result)
 		result = get_decls(typesof(decl_path))
@@ -63,7 +63,7 @@ var/global/repository/decls/decls_repository = new
 
 
 /// Fetches an associative list of decl instances of the target type's subtypes, creating and instantiating them if necessary.
-/repository/decls/proc/get_decls_of_subtype(decl_path)
+/repository/singletons/proc/get_decls_of_subtype(decl_path)
 	var/list/result = subtypesof_assoc[decl_path]
 	if (!result)
 		result = get_decls(subtypesof(decl_path))
@@ -72,7 +72,7 @@ var/global/repository/decls/decls_repository = new
 
 
 /// Fetches a plain list of decl instances of the target type and its subtypes, creating and instantiating them if necessary.
-/repository/decls/proc/get_decls_of_type_plain(decl_path)
+/repository/singletons/proc/get_decls_of_type_plain(decl_path)
 	var/list/result = typesof_plain[decl_path]
 	if (!result)
 		result = get_decls_plain(typesof(decl_path))
@@ -81,7 +81,7 @@ var/global/repository/decls/decls_repository = new
 
 
 /// Fetches a plain list of decl instances of the target type's subtypes, creating and instantiating them if necessary.
-/repository/decls/proc/get_decls_of_subtype_plain(decl_path)
+/repository/singletons/proc/get_decls_of_subtype_plain(decl_path)
 	var/list/result = subtypesof_plain[decl_path]
 	if (!result)
 		result = get_decls_plain(subtypesof(decl_path))

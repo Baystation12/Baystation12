@@ -33,6 +33,6 @@
 
 /obj/prefab/Initialize()
 	..()
-	var/decl/prefab/prefab = decls_repository.get_decl(prefab_type)
+	var/decl/prefab/prefab = Singletons.get_decl(prefab_type)
 	prefab.create(loc)
 	return INITIALIZE_HINT_QDEL

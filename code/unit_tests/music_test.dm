@@ -4,7 +4,7 @@
 
 /datum/unit_test/audio_track_validate/start_test()
 	var/list/failed = list()
-	var/list/available = decls_repository.get_decls_of_subtype(/decl/audio/track)
+	var/list/available = Singletons.get_decls_of_subtype(/decl/audio/track)
 	for (var/key in available)
 		var/decl/audio/track/track = available[key]
 		if (!isfile(track.source))

@@ -24,7 +24,7 @@ SUBSYSTEM_DEF(fabrication)
 			if (!categories[type])
 				categories[type] = list()
 			categories[type] |= recipe.category
-	var/list/stages = decls_repository.get_decls_of_subtype(/decl/crafting_stage)
+	var/list/stages = Singletons.get_decls_of_subtype(/decl/crafting_stage)
 	for (var/id in stages)
 		var/decl/crafting_stage/stage = stages[id]
 		var/type = stage.begins_with_object_type

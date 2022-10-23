@@ -383,7 +383,7 @@
 
 
 /client/proc/after_send_resources()
-	var/decl/asset_cache/asset_cache = decls_repository.get_decl(/decl/asset_cache)
+	var/decl/asset_cache/asset_cache = Singletons.get_decl(/decl/asset_cache)
 	getFilesSlow(src, asset_cache.cache, register_asset = FALSE)
 
 

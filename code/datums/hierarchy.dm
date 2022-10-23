@@ -7,7 +7,7 @@
 /decl/hierarchy/Initialize()
 	children = list()
 	for(var/subtype in subtypesof(type))
-		var/decl/hierarchy/child = decls_repository.get_decl(subtype) // Might be a grandchild, which has already been handled.
+		var/decl/hierarchy/child = Singletons.get_decl(subtype) // Might be a grandchild, which has already been handled.
 		if(child.parent_type == type)
 			dd_insertObjectList(children, child)
 			child.parent = src
