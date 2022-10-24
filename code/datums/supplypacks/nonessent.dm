@@ -287,7 +287,8 @@
 		/obj/item/clothing/accessory/pride_pin/pansexual = 2,
 		/obj/item/clothing/accessory/pride_pin/nonbinary = 2,
 		/obj/item/clothing/accessory/pride_pin/asexual = 2,
-		/obj/item/clothing/accessory/pride_pin/intersex = 2
+		/obj/item/clothing/accessory/pride_pin/intersex = 2,
+		/obj/item/clothing/accessory/pride_pin/aromantic = 2
 	)
 	cost = 20
 	containername = "pin crate"

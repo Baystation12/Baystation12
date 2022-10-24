@@ -47,6 +47,10 @@
 	desc = "A pin celebrating asexual pride."
 	icon_state = "asexualpin"
 
+/obj/item/clothing/accessory/pride_pin/aromantic
+	name = "aromantic pride pin"
+	desc = "A pin celebrating aromantic pride."
+	icon_state = "aromanticpin"
 
 /obj/item/clothing/accessory/pride_pin/intersex
 	name = "intersex pride pin"

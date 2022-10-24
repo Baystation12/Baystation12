@@ -207,6 +207,7 @@
 	options["nonbinary pride pin"] = /obj/item/clothing/accessory/pride_pin/nonbinary
 	options["asexual pride pin"] = /obj/item/clothing/accessory/pride_pin/asexual
 	options["intersex pride pin"] = /obj/item/clothing/accessory/pride_pin/intersex
+	options["aromantic pride pin"] = /obj/item/clothing/accessory/pride_pin/aromantic
 	gear_tweaks += new /datum/gear_tweak/path (options)
 
 
