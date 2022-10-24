@@ -127,15 +127,15 @@
 /obj/item/organ/internal/brain/proc/handle_severe_brain_damage()
 	set waitfor = FALSE
 	healed_threshold = 0
-	to_chat(owner, SPAN_NOTICE(SPAN_STYLE("font-size: 10", "<B>Where am I...?</B>")))
+	to_chat(owner, SPAN_NOTICE(FONT_GIANT("<B>Where am I...?</B>")))
 	sleep(5 SECONDS)
 	if (!owner || owner.stat == DEAD || (status & ORGAN_DEAD))
 		return
-	to_chat(owner, SPAN_NOTICE(SPAN_STYLE("font-size: 10", "><B>What's going on...?</B>")))
+	to_chat(owner, SPAN_NOTICE(FONT_GIANT("<B>What's going on...?</B>")))
 	sleep(10 SECONDS)
 	if (!owner || owner.stat == DEAD || (status & ORGAN_DEAD))
 		return
-	to_chat(owner, SPAN_NOTICE(SPAN_STYLE("font-size: 10", "<B>What happened...?</B>")))
+	to_chat(owner, SPAN_NOTICE(FONT_GIANT("<B>What happened...?</B>")))
 	alert(owner, "You have taken massive brain damage! This could affect speech, memory, or any other skill, but provided you've been treated, it shouldn't be permanent.", "Brain Damaged")
 	if (owner.psi)
 		owner.psi.check_latency_trigger(20, "physical trauma")
