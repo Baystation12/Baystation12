@@ -10,7 +10,7 @@ on:
     branches: [ "dev" ]
 env:
   BYOND_MAJOR: "514"
-  BYOND_MINOR: "1585"
+  BYOND_MINOR: "1589"
   SPACEMAN_DMM_VERSION: suite-1.7.2
 
 jobs:
