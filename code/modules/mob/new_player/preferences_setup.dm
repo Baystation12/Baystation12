@@ -34,7 +34,7 @@
 			var/datum/category_item/underwear/WRI = pick(WRC.items)
 			all_underwear[WRC.name] = WRI.name
 
-	backpack = Singletons.Get(pick(subtypesof(/singleton/backpack_outfit)))
+	backpack = Singletons.GetInstance(pick(subtypesof(/singleton/backpack_outfit)))
 	age = rand(current_species.min_age, current_species.max_age)
 	b_type = RANDOM_BLOOD_TYPE
 	if(H)

@@ -25,7 +25,7 @@
 /datum/category_item/player_setup_item/player_global/prefixes/save_preferences(datum/pref_record_writer/W)
 	var/list/prefix_keys_by_name = list()
 	for(var/prefix_type in pref.prefix_keys_by_type)
-		var/singleton/prefix/prefix_instance = Singletons.Get(prefix_type)
+		var/singleton/prefix/prefix_instance = Singletons.GetInstance(prefix_type)
 		prefix_keys_by_name[prefix_instance.name] = pref.prefix_keys_by_type[prefix_type]
 
 	W.write("prefix_keys", prefix_keys_by_name)
@@ -100,7 +100,7 @@
 						continue
 					var/prefix_key = pref.prefix_keys_by_type[prefix_type]
 					if(prefix_key == new_key)
-						var/singleton/prefix/pi = Singletons.Get(prefix_type)
+						var/singleton/prefix/pi = Singletons.GetInstance(prefix_type)
 						pref.prefix_keys_by_type[pi.type] = pi.default_key
 				// Then we reset any and all duplicates
 				reset_duplicate_keys()
@@ -133,11 +133,11 @@
 		var/list/prefix_types = prefixes_by_key[prefix_key]
 		if(prefix_types.len > 1)
 			for(var/prefix_type in prefix_types)
-				var/singleton/prefix/prefix_instance = Singletons.Get(prefix_type)
+				var/singleton/prefix/prefix_instance = Singletons.GetInstance(prefix_type)
 				pref.prefix_keys_by_type[prefix_instance.type] = prefix_instance.default_key
 
 /mob/proc/get_prefix_key(prefix_type)
 	if(client && client.prefs)
 		return client.prefs.prefix_keys_by_type[prefix_type]
-	var/singleton/prefix/prefix_instance = Singletons.Get(prefix_type)
+	var/singleton/prefix/prefix_instance = Singletons.GetInstance(prefix_type)
 	return prefix_instance.default_key

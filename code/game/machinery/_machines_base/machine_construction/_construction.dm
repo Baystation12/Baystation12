@@ -9,7 +9,7 @@
 
 /obj/machinery/Initialize()
 	if(construct_state)
-		construct_state = Singletons.Get(construct_state)
+		construct_state = Singletons.GetInstance(construct_state)
 	. = ..()
 
 /// Called on state transition; can intercept, but must call parent.
@@ -60,7 +60,7 @@
 /singleton/machine_construction/proc/try_change_state(obj/machinery/machine, path, user)
 	if(machine.construct_state != src)
 		return MCS_BLOCK
-	var/singleton/machine_construction/state = Singletons.Get(path)
+	var/singleton/machine_construction/state = Singletons.GetInstance(path)
 	if(state)
 		var/fail = machine.cannot_transition_to(path, user)
 		if(fail == MCS_CHANGE)

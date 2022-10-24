@@ -33,6 +33,6 @@
 
 /obj/prefab/Initialize()
 	..()
-	var/singleton/prefab/prefab = Singletons.Get(prefab_type)
+	var/singleton/prefab/prefab = Singletons.GetInstance(prefab_type)
 	prefab.create(loc)
 	return INITIALIZE_HINT_QDEL

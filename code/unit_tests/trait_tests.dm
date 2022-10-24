@@ -11,7 +11,7 @@
 
 /datum/unit_test/trait/all_traits_shall_have_valid_names/start_test()
 	var/list/invalid_traits = list()
-	for(var/trait in Singletons.GetSubtypes(/singleton/trait))
+	for(var/trait in Singletons.GetSubtypeList(/singleton/trait))
 		var/singleton/trait/T = trait
 		if(!T.name || !istext(T.name)) // Empty strings are valid texts
 			invalid_traits += T.type
@@ -30,7 +30,7 @@
 /datum/unit_test/trait/traits_with_incompabilities_shall_list_each_other/start_test()
 	var/list/invalid_traits = list()
 
-	var/traits_by_type = Singletons.GetSubtypesAssoc(/singleton/trait)
+	var/traits_by_type = Singletons.GetSubtypeMap(/singleton/trait)
 	for (var/trait_type in traits_by_type)
 		var/singleton/trait/trait = traits_by_type[trait_type]
 		for (var/incompatible_trait_type in trait.incompatible_traits)
@@ -52,7 +52,7 @@
 /datum/unit_test/trait/all_traits_shall_have_unique_name/start_test()
 	var/list/trait_names = list()
 
-	for(var/trait in Singletons.GetSubtypes(/singleton/trait))
+	for(var/trait in Singletons.GetSubtypeList(/singleton/trait))
 		var/singleton/trait/T = trait
 		group_by(trait_names, T.name, T.type)
 
@@ -69,7 +69,7 @@
 
 /datum/unit_test/trait/all_traits_shall_have_valid_levels/start_test()
 	var/list/invalid_traits = list()
-	for(var/trait in Singletons.GetSubtypes(/singleton/trait))
+	for(var/trait in Singletons.GetSubtypeList(/singleton/trait))
 		var/singleton/trait/T = trait
 		if(!length(T.levels) || (T.levels.len > 1 && (TRAIT_LEVEL_EXISTS in T.levels)))
 			invalid_traits += T.type
@@ -91,7 +91,7 @@
 		var/datum/species/S = all_species[species_name]
 		for(var/trait_type in S.traits)
 			var/trait_level = S.traits[trait_type]
-			var/singleton/trait/T = Singletons.Get(trait_type)
+			var/singleton/trait/T = Singletons.GetInstance(trait_type)
 			if(!T.Validate(trait_level))
 				invalid_species += S.type
 				break
@@ -113,7 +113,7 @@
 	for (var/species_name in all_species)
 		var/datum/species/S = all_species[species_name]
 		for (var/trait_type in S.traits)
-			var/singleton/trait/T = Singletons.Get(trait_type)
+			var/singleton/trait/T = Singletons.GetInstance(trait_type)
 			for (var/incompatible_trait_type in T.incompatible_traits)
 				if (incompatible_trait_type in S.traits)
 					invalid_species.Add(S.type)

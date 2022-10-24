@@ -122,7 +122,7 @@
 	be in command, and there are no variants as a result. Also no special CO uniform :(
 */
 /obj/machinery/uniform_vendor/proc/find_uniforms(datum/mil_rank/user_rank, datum/mil_branch/user_branch, department) //returns 1 if found branch and thus has a base uniform, 2, branch and department, 0 if failed.
-	var/singleton/hierarchy/mil_uniform/user_outfit = Singletons.Get(/singleton/hierarchy/mil_uniform)
+	var/singleton/hierarchy/mil_uniform/user_outfit = Singletons.GetInstance(/singleton/hierarchy/mil_uniform)
 	var/mil_uniforms = user_outfit
 	for(var/singleton/hierarchy/mil_uniform/child in user_outfit.children)
 		if(is_type_in_list(user_branch, child.branches))

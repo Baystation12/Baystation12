@@ -22,31 +22,31 @@
 	// Setup the severe security level
 	if(!(severe_security_level in all_security_levels))
 		severe_security_level = all_security_levels[all_security_levels.len]
-	severe_security_level = Singletons.Get(severe_security_level)
+	severe_security_level = Singletons.GetInstance(severe_security_level)
 
 	// Setup the high security level
 	if(!(high_security_level in all_security_levels))
 		high_security_level = all_security_levels[all_security_levels.len - 1]
-	high_security_level = Singletons.Get(high_security_level)
+	high_security_level = Singletons.GetInstance(high_security_level)
 
 	// Setup the highest standard security level
 	if(highest_standard_security_level || isnull(highest_standard_security_level))
 		if(!(highest_standard_security_level in all_security_levels))
 			highest_standard_security_level = all_security_levels[all_security_levels.len - 1]
-		highest_standard_security_level = Singletons.Get(highest_standard_security_level)
+		highest_standard_security_level = Singletons.GetInstance(highest_standard_security_level)
 	else
 		highest_standard_security_level = null
 
 	// Setup the current security level
 	if(current_security_level in all_security_levels)
-		current_security_level = Singletons.Get(current_security_level)
+		current_security_level = Singletons.GetInstance(current_security_level)
 	else
-		current_security_level = Singletons.Get(all_security_levels[1])
+		current_security_level = Singletons.GetInstance(all_security_levels[1])
 
 	// Setup the full list of available security levels now that we no longer need to use "x in all_security_levels"
 	var/list/security_level_instances = list()
 	for(var/security_level_type in all_security_levels)
-		security_level_instances += Singletons.Get(security_level_type)
+		security_level_instances += Singletons.GetInstance(security_level_type)
 	all_security_levels = security_level_instances
 
 	standard_security_levels = list()

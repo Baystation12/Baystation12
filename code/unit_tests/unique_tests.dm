@@ -144,7 +144,7 @@
 /datum/unit_test/outfit_backpacks_shall_have_unique_names/start_test()
 	var/list/backpacks_by_name = list()
 
-	var/bos = Singletons.GetSubtypesAssoc(/singleton/backpack_outfit)
+	var/bos = Singletons.GetSubtypeMap(/singleton/backpack_outfit)
 	for(var/bo in bos)
 		var/singleton/backpack_outfit/backpack_outfit = bos[bo]
 		group_by(backpacks_by_name, backpack_outfit.name, backpack_outfit)
@@ -162,7 +162,7 @@
 /datum/unit_test/space_suit_modifiers_shall_have_unique_names/start_test()
 	var/list/space_suit_modifiers_by_name = list()
 
-	var/sss = Singletons.GetSubtypesAssoc(/singleton/item_modifier/space_suit)
+	var/sss = Singletons.GetSubtypeMap(/singleton/item_modifier/space_suit)
 	for(var/ss in sss)
 		var/singleton/item_modifier/space_suit/space_suit_modifier = sss[ss]
 		group_by(space_suit_modifiers_by_name, space_suit_modifier.name, space_suit_modifier)
@@ -179,7 +179,7 @@
 	for(var/key in entries)
 		var/list/values = entries[key]
 		if(values.len > 1)
-			var/singleton/noi_feedback/noif = Singletons.Get(feedback)
+			var/singleton/noi_feedback/noif = Singletons.GetInstance(feedback)
 			noif.print(src, type, key, values)
 			issues++
 

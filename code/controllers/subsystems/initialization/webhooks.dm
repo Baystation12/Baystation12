@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(webhooks)
 		return
 
 	var/list/all_webhooks_by_id = list()
-	var/list/all_webhooks = Singletons.GetSubtypesAssoc(/singleton/webhook)
+	var/list/all_webhooks = Singletons.GetSubtypeMap(/singleton/webhook)
 	for(var/wid in all_webhooks)
 		var/singleton/webhook/webhook = all_webhooks[wid]
 		if(webhook.id)

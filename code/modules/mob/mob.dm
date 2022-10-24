@@ -51,7 +51,7 @@
 	if(!move_intent)
 		move_intent = move_intents[1]
 	if(ispath(move_intent))
-		move_intent = Singletons.Get(move_intent)
+		move_intent = Singletons.GetInstance(move_intent)
 	if (!isliving(src))
 		status_flags |= NOTARGET
 	START_PROCESSING_MOB(src)

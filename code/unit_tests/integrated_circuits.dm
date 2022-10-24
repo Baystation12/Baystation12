@@ -42,7 +42,7 @@
 /datum/unit_test/integrated_circuits/prefabs_shall_not_fail_to_create/start_test()
 	var/list/failed_prefabs = list()
 	for(var/prefab_type in subtypesof(/singleton/prefab/ic_assembly))
-		var/singleton/prefab/ic_assembly/prefab = Singletons.Get(prefab_type)
+		var/singleton/prefab/ic_assembly/prefab = Singletons.GetInstance(prefab_type)
 
 		try
 			var/built_item = prefab.create(get_safe_turf())

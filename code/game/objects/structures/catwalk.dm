@@ -111,7 +111,7 @@
 			ST.in_use = 0
 			src.add_fingerprint(user)
 			if(ST.use(1))
-				var/list/singletons = Singletons.GetSubtypesAssoc(/singleton/flooring)
+				var/list/singletons = Singletons.GetSubtypeMap(/singleton/flooring)
 				for(var/flooring_type in singletons)
 					var/singleton/flooring/F = singletons[flooring_type]
 					if(!F.build_type)

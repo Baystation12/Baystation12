@@ -1,7 +1,7 @@
 /proc/get_footstep(footstep_type, mob/caller)
 	. = caller && caller.get_footstep(footstep_type)
 	if(!.)
-		var/singleton/footsteps/FS = Singletons.Get(footstep_type)
+		var/singleton/footsteps/FS = Singletons.GetInstance(footstep_type)
 		. = pick(FS.footstep_sounds)
 
 /turf/simulated/proc/get_footstep_sound(mob/caller)

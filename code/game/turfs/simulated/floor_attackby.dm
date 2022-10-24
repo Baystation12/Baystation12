@@ -113,7 +113,7 @@
 				return
 			var/obj/item/stack/S = C
 			var/singleton/flooring/use_flooring
-			var/list/singletons = Singletons.GetSubtypesAssoc(/singleton/flooring)
+			var/list/singletons = Singletons.GetSubtypeMap(/singleton/flooring)
 			for(var/flooring_type in singletons)
 				var/singleton/flooring/F = singletons[flooring_type]
 				if(!F.build_type)

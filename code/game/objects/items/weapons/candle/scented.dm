@@ -31,7 +31,7 @@
 /obj/item/flame/candle/scented/proc/get_scent()
 	var/scent_type = DEFAULTPICK(scent_types, null)
 	if(scent_type)
-		style = Singletons.Get(scent_type)
+		style = Singletons.GetInstance(scent_type)
 		color = style.color
 		scent = style.scent
 	if(scent)

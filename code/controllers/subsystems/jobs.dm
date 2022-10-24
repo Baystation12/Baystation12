@@ -59,7 +59,7 @@ SUBSYSTEM_DEF(jobs)
 
 	// Init skills.
 	if(!GLOB.skills.len)
-		Singletons.Get(/singleton/hierarchy/skill)
+		Singletons.GetInstance(/singleton/hierarchy/skill)
 	if(!GLOB.skills.len)
 		log_error(SPAN_WARNING("Error setting up job skill requirements, no skill datums found!"))
 

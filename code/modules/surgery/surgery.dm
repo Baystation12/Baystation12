@@ -185,7 +185,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 
 	// What surgeries does our tool/target enable?
 	var/list/possible_surgeries
-	var/list/all_surgeries = Singletons.GetSubtypesAssoc(/singleton/surgery_step)
+	var/list/all_surgeries = Singletons.GetSubtypeMap(/singleton/surgery_step)
 	for(var/singleton in all_surgeries)
 		var/singleton/surgery_step/S = all_surgeries[singleton]
 		if(S.name && S.tool_quality(src) && S.can_use(user, M, zone, src))

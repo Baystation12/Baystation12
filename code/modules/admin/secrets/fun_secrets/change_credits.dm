@@ -7,7 +7,7 @@ GLOBAL_VAR_INIT(end_credits_title, null)
 
 /datum/admin_secret_item/fun_secret/change_credits_song/do_execute()
 	set waitfor = FALSE
-	var/list/available = Singletons.GetSubtypesAssoc(/singleton/audio/track)
+	var/list/available = Singletons.GetSubtypeMap(/singleton/audio/track)
 	var/list/tracks = list()
 	for (var/key in available)
 		var/singleton/audio/track/track = available[key]

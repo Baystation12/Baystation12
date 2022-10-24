@@ -59,7 +59,7 @@ var/global/list/state_machines = list()
 		current_state.exited_state(holder_instance)
 	current_state = initial(current_state)
 	if(ispath(current_state, /singleton/state))
-		current_state = Singletons.Get(current_state)
+		current_state = Singletons.GetInstance(current_state)
 		current_state.entered_state(holder_instance)
 	else
 		current_state = null
@@ -94,7 +94,7 @@ var/global/list/state_machines = list()
 	var/datum/holder_instance = get_holder()
 	if(istype(current_state))
 		current_state.exited_state(holder_instance)
-	current_state = Singletons.Get(new_state_type)
+	current_state = Singletons.GetInstance(new_state_type)
 	if(istype(current_state))
 		current_state.entered_state(holder_instance)
 		return current_state

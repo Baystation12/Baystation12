@@ -7,7 +7,7 @@
 /singleton/hierarchy/Initialize()
 	children = list()
 	for(var/subtype in subtypesof(type))
-		var/singleton/hierarchy/child = Singletons.Get(subtype) // Might be a grandchild, which has already been handled.
+		var/singleton/hierarchy/child = Singletons.GetInstance(subtype) // Might be a grandchild, which has already been handled.
 		if(child.parent_type == type)
 			dd_insertObjectList(children, child)
 			child.parent = src

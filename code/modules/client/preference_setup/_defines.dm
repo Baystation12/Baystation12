@@ -2,7 +2,7 @@
 if(!singletons_by_name) \
 {\
 	singletons_by_name = list();\
-	var/singletons_by_type = Singletons.GetSubtypesAssoc(singleton_prototype);\
+	var/singletons_by_type = Singletons.GetSubtypeMap(singleton_prototype);\
 	for(var/singleton_type in singletons_by_type) \
 	{\
 		var##singleton_prototype/singleton_instance = singletons_by_type[singleton_type];\
