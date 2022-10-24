@@ -321,3 +321,26 @@ else if(##equipment_var) {\
 	if(tank && slot == slot_back)
 		ret.overlays += tank.get_mob_overlay(user_mob, slot_back_str)
 	return ret
+
+/obj/item/clothing/suit/space/void/proc/forceDropEquipment(equipment)
+	var/mob/living/carbon/human/H
+	if(helmet && equipment == helmet)
+		H = helmet.loc
+		if(istype(H))
+			if(H.head == helmet)
+				helmet.canremove = TRUE
+				helmet.dropInto(loc)
+				helmet = null
+	if(boots && equipment == boots)
+		H = boots.loc
+		if(istype(H))
+			if(H.shoes == boots)
+				boots.canremove = TRUE
+				boots.dropInto(loc)
+				boots = null
+	if(tank && equipment == tank)
+		tank.canremove = TRUE
+		tank.dropInto(loc)
+		tank = null
+	else
+		return
