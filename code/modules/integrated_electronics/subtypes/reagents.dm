@@ -640,6 +640,8 @@
 	max_temp = 30 CELSIUS
 	mode = IC_HEATER_MODE_COOL
 
+//undefs
+
 #undef IC_HEATER_MODE_HEAT
 #undef IC_HEATER_MODE_COOL
 #undef IC_REAGENTS_DRAW

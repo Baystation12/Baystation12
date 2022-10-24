@@ -77,24 +77,11 @@
 		overlays += image(icon, icon_state = "dongle")
 
 
-/obj/item/reagent_containers/ivbag/MouseDrop(atom/over)
-	if (!ismob(loc))
-		return
-	var/mob/living/user = usr
-	if (!istype(user))
-		return
-	if (!CanMouseDrop(over, user))
-		return
-	if (patient)
-		RemoveDrip(user)
-	else if (ishuman(over))
-		AttachDrip(over, user)
-	update_icon()
-
-
 /obj/item/reagent_containers/ivbag/MouseDrop_T(atom/dropped, mob/living/user)
 	. = ..()
-	if (!Adjacent(dropped) || !Adjacent(user))
+	if (.)
+		return
+	if (!ishuman(user) && !isrobot(user))
 		return
 	if (patient == dropped)
 		RemoveDrip(user)
@@ -180,29 +167,34 @@
 	if (!CanPhysicallyInteractWith(user, src))
 		to_chat(user, SPAN_WARNING("You're in no condition to do that!"))
 		return
+	user.visible_message(
+		SPAN_ITALIC("\The [user] starts unhooking \the [patient] from \a [src]."),
+		SPAN_ITALIC("You extract \the [src]'s cannula from \the [patient]."),
+		range = 5
+	)
 	if (!user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
-		RipDrip()
+		RipDrip(user)
 		return
 	STOP_PROCESSING(SSobj, src)
 	user.visible_message(
 		SPAN_WARNING("\The [user] extracts \the [src]'s cannula from \the [patient]."),
 		SPAN_NOTICE("You extract \the [src]'s cannula from \the [patient]."),
-		range = 5
+		range = 1
 	)
 	patient = null
 	update_icon()
 
 
-/obj/item/reagent_containers/ivbag/proc/RipDrip()
+/obj/item/reagent_containers/ivbag/proc/RipDrip(mob/living/user)
 	if (!patient)
 		return
 	STOP_PROCESSING(SSobj, src)
 	patient.visible_message(
-		SPAN_WARNING("\The cannula from \a [src] is ripped out of \the [patient]!"),
-		SPAN_DANGER("\The cannula from \the [src] is ripped out of you!"),
+		SPAN_WARNING("\The cannula from \a [src] is ripped out of \the [patient][user ? " by \the [user]" : ""]!"),
+		SPAN_DANGER("\The cannula from \the [src] is ripped out of you[user ? " by \the [user]": ""]!"),
 		range = 5
 	)
-	patient.custom_pain("Ouch!", 20)
+	patient.custom_pain(power = 20)
 	patient.apply_damage(rand(1, 3), DAMAGE_BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags = DAMAGE_FLAG_SHARP, armor_pen = 100)
 	patient = null
 	update_icon()
@@ -233,7 +225,7 @@
 		return
 	user.visible_message(
 		SPAN_ITALIC("\The [user] adjusts the flow rate on \a [src]."),
-		SPAN_ITALIC("You adjust the flow rate on \the [src]."),
+		SPAN_ITALIC("You adjust the flow rate on \the [src] to [response]u."),
 		range = 1
 	)
 	transfer_amount = response

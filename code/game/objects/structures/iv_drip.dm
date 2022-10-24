@@ -80,20 +80,31 @@
 	overlays += light_overlay
 
 
-/obj/structure/iv_stand/MouseDrop(atom/over)
-	var/mob/living/user = usr
-	if (!istype(user))
+/obj/structure/iv_stand/MouseDrop(atom/over_atom, source_loc, over_loc)
+	if (!usr)
 		return
-	if (!CanMouseDrop(over, user))
+	if (!over_atom)
 		return
-	if (patient)
-		RemoveDrip(usr)
-	else if (ishuman(over))
-		AttachDrip(over, usr)
+	if (isloc(over_loc)) //Dropping on something in the map.
+		if (!Adjacent(usr) || !over_atom.Adjacent(usr))
+			return
+		if (isliving(over_atom))
+			MouseDrop_T(over_atom, usr)
+		else
+			over_atom.MouseDrop_T(src, usr)
+		return
+	..()
 
 
 /obj/structure/iv_stand/MouseDrop_T(atom/dropped, mob/living/user)
-	if (!Adjacent(dropped) || !Adjacent(user))
+	if (src == dropped && user.canClick())
+		user.ClickOn(src)
+		return
+	if (!CheckDexterity(user))
+		to_chat(user, SPAN_WARNING("You're not dextrous enough to do that."))
+		return
+	if (user.incapacitated())
+		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
 		return
 	if (patient == dropped)
 		RemoveDrip(user)
@@ -135,6 +146,7 @@
 	if (drip_mode == MODE_INJECT)
 		if (!iv_bag.reagents.total_volume)
 			if (prob(15))
+				playsound(src, 'sound/effects/3beep.ogg', 50, TRUE)
 				audible_message(
 					SPAN_NOTICE("\The [src] pings."),
 					hearing_distance = 5
@@ -147,6 +159,7 @@
 		var/difference = clamp(iv_bag.volume - iv_bag.reagents.total_volume, 0, transfer_amount)
 		if (!difference)
 			if (prob(15))
+				playsound(src, 'sound/effects/3beep.ogg', 50, TRUE)
 				audible_message(
 					SPAN_NOTICE("\The [src] pings."),
 					hearing_distance = 5
@@ -156,6 +169,7 @@
 			return
 		if (patient.get_blood_volume() < BLOOD_VOLUME_SAFE)
 			if (prob(30))
+				playsound(src, 'sound/effects/3beep.ogg', 50, TRUE)
 				audible_message(
 					SPAN_NOTICE("\The [src] pings."),
 					hearing_distance = 5
@@ -189,13 +203,13 @@
 		return
 	if (patient)
 		to_chat(user, "\The [patient] is hooked up to it.")
-	if (!iv_bag)
-		to_chat(user, "It has no IV bag attached.")
-		return
 	to_chat(user, {"\
 		It is set to [drip_mode == MODE_INJECT ? "inject" : drip_mode == MODE_EXTRACT ? "extract" : ""] \
 		[transfer_amount]u of fluid per cycle.\
 	"})
+	if (!iv_bag)
+		to_chat(user, "It has no IV bag attached.")
+		return
 	var/volume = iv_bag.reagents.total_volume
 	if (!volume)
 		to_chat(user, "It has an empty [iv_bag] attached.")
@@ -203,8 +217,13 @@
 	to_chat(user, "It has \a [iv_bag] attached with [Floor(volume)] units of liquid inside.")
 
 
+/obj/structure/iv_stand/CheckDexterity(mob/living/user)
+	return ishuman(user) || isrobot(user)
+
+
 /obj/structure/iv_stand/proc/AttachDrip(mob/living/carbon/human/target, mob/living/user)
 	if (patient)
+		to_chat(user, SPAN_WARNING("\The [patient] is already hooked up to \the [src]."))
 		return
 	user.visible_message(
 		SPAN_ITALIC("\The [user] starts to hook up \the [target] to \the [src]."),
@@ -234,29 +253,36 @@
 /obj/structure/iv_stand/proc/RemoveDrip(mob/living/user)
 	if (!patient)
 		return
+	user.visible_message(
+		SPAN_ITALIC("\The [user] starts unhooking \the [patient] from \a [src]."),
+		SPAN_ITALIC("You start extracting \the [src]'s cannula from \the [patient]."),
+		range = 5
+	)
+	if (!user.do_skilled(1.5 SECONDS, SKILL_MEDICAL, patient))
+		return
 	if (!user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
-		RipDrip()
+		RipDrip(user)
 		return
 	STOP_PROCESSING(SSobj, src)
 	user.visible_message(
 		SPAN_WARNING("\The [user] extracts \the [src]'s cannula from \the [patient]."),
-		SPAN_NOTICE("You extract \the [src]'s cannula from \the [patient]."),
-		range = 5
+		SPAN_NOTICE("You successfully unhook \the [patient] from \the [src]."),
+		range = 1
 	)
 	patient = null
 	update_icon()
 
 
-/obj/structure/iv_stand/proc/RipDrip()
+/obj/structure/iv_stand/proc/RipDrip(mob/living/user)
 	if (!patient)
 		return
 	STOP_PROCESSING(SSobj, src)
 	patient.visible_message(
-		SPAN_WARNING("\The cannula from \a [src] is ripped out of \the [patient]!"),
-		SPAN_DANGER("\The cannula from \the [src] is ripped out of you!"),
+		SPAN_WARNING("\The cannula from \a [src] is ripped out of \the [patient][user ? " by \the [user]" : ""]!"),
+		SPAN_DANGER("\The cannula from \the [src] is ripped out of you[user ? " by \the [user]": ""]!"),
 		range = 5
 	)
-	patient.custom_pain("Ouch!", 20)
+	patient.custom_pain(power = 20)
 	patient.apply_damage(rand(1, 3), DAMAGE_BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags = DAMAGE_FLAG_SHARP, armor_pen = 100)
 	patient = null
 	update_icon()
@@ -280,7 +306,7 @@
 		return
 	user.visible_message(
 		SPAN_ITALIC("\The [user] adjusts the flow rate on \a [src]."),
-		SPAN_ITALIC("You adjust the flow rate on \the [src]."),
+		SPAN_ITALIC("You adjust the flow rate on \the [src] to [response]u."),
 		range = 3
 	)
 	transfer_amount = response

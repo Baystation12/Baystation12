@@ -82,10 +82,10 @@
 		return
 	if (drip_active)
 		to_chat(user, "\The [buckled_mob] is hooked up to it.")
+	to_chat(user, "It is set to inject [transfer_amount]u of fluid per cycle.")
 	if (!iv_bag)
 		to_chat(user, "It has no IV bag attached.")
 		return
-	to_chat(user, "It is set to inject [transfer_amount]u of fluid per cycle.")
 	var/volume = iv_bag.reagents.total_volume
 	if (!volume)
 		to_chat(user, "It has an empty [iv_bag.name] attached.")
@@ -119,7 +119,7 @@
 		return
 	if (istype(item, /obj/item/grab))
 		if (buckled_mob)
-			to_chat(user, SPAN_WARNING("\The [src] is occupied."))
+			to_chat(user, SPAN_WARNING("\The [buckled_mob] is already on \the [src]."))
 			return
 		var/obj/item/grab/grab = item
 		user.visible_message(
@@ -129,7 +129,12 @@
 		)
 		if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			return
-		if (QDELETED(grab) || !user_buckle_mob(grab.affecting, user))
+		if (QDELETED(grab))
+			return
+		if (buckled_mob)
+			to_chat(user, SPAN_WARNING("\The [buckled_mob] is already on \the [src]."))
+			return
+		if (!AttemptBuckle(grab.affecting, user))
 			return
 		qdel(grab)
 		return
@@ -159,6 +164,7 @@
 		return
 	if (!iv_bag.reagents.total_volume)
 		if (prob(15))
+			playsound(src, 'sound/effects/3beep.ogg', 50, TRUE)
 			audible_message(
 				SPAN_NOTICE("\The [src] pings."),
 				hearing_distance = 5
@@ -170,43 +176,80 @@
 
 /obj/structure/roller_bed/attack_hand(mob/living/user)
 	if (iv_bag)
-		RemoveBag(user)
+		if (drip_active)
+			RemoveDrip(user)
+		else
+			RemoveBag(user)
 	else if (buckled_mob)
-		user_unbuckle_mob(user)
+		AttemptUnbuckle(user)
 	else
 		..()
 
 
-/obj/structure/roller_bed/MouseDrop(atom/over)
-	..()
-	if (!CanMouseDrop(over))
+/obj/structure/roller_bed/MouseDrop(atom/over_atom, source_loc, over_loc)
+	if (!usr)
 		return
-	var/mob/living/user = usr
-	if (!(ishuman(user) || isrobot(user)))
+	if (!over_atom)
 		return
-	if (over == buckled_mob && iv_bag)
-		if (drip_active)
-			RemoveDrip(buckled_mob, user)
-		else
-			AttachDrip(buckled_mob, user)
-		return
-	if (over != user && ishuman(over))
-		if (user_buckle_mob(over, user))
-			AttachDrip(buckled_mob, user)
+	if (isloc(over_loc)) //Dropping on something in the map.
+		if (!Adjacent(usr) || !over_atom.Adjacent(usr))
 			return
-	if (iv_bag)
-		RemoveBag(user)
+		if (usr == over_atom && CheckDexterity(usr) || !ismob(over_atom))
+			FoldBed(usr)
+			return
+		if (isliving(over_atom))
+			MouseDrop_T(over_atom, usr)
+		else
+			over_atom.MouseDrop_T(src, usr)
 		return
+	..()
+
+
+/obj/structure/roller_bed/MouseDrop_T(atom/dropped, mob/living/user)
+	if (src == dropped && user.canClick())
+		user.ClickOn(src)
+		return
+	if (!CheckDexterity(user))
+		to_chat(user, SPAN_WARNING("You're not dextrous enough to do that."))
+		return
+	if (user.incapacitated())
+		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+		return
+	if (!buckled_mob)
+		if (isliving(dropped))
+			AttemptBuckle(dropped, user)
+			return
+		FoldBed(user)
+		return
+	if (buckled_mob == dropped)
+		if (iv_bag)
+			if (drip_active)
+				RemoveDrip(user)
+			else
+				AttachDrip(buckled_mob, user)
+			return
+		to_chat(user, SPAN_WARNING("\The [src] has no IV bag attached."))
+
+
+/obj/structure/roller_bed/CheckDexterity(mob/living/user)
+	return ishuman(user) || isrobot(user)
+
+
+/obj/structure/roller_bed/proc/FoldBed(mob/living/user)
 	if (buckled_mob)
+		to_chat(user, SPAN_WARNING("\The [buckled_mob] is on \the [src]. Remove them first."))
 		return
 	user.visible_message(
-			SPAN_ITALIC("\The [user] begins folding \a [src]."),
-			SPAN_ITALIC("You begin folding \the [src]."),
-			range = 5
-		)
-	if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER) || density)
+		SPAN_ITALIC("\The [user] begins folding \a [src]."),
+		SPAN_ITALIC("You begin folding \the [src]."),
+		range = 5
+	)
+	if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER) || density)
 		return
-	new /obj/item/roller_bed (get_turf(src))
+	if (iv_bag)
+		iv_bag.dropInto(loc)
+		iv_bag = null
+	new /obj/item/roller_bed (loc)
 	qdel(src)
 
 
@@ -222,34 +265,41 @@
 	update_icon()
 
 
-/obj/structure/roller_bed/proc/RemoveDrip(mob/living/carbon/human/target, mob/living/user)
+/obj/structure/roller_bed/proc/RemoveDrip(mob/living/user)
 	if (!drip_active)
 		return
+	user.visible_message(
+		SPAN_ITALIC("\The [user] starts unhooking \the [buckled_mob] from \a [src]."),
+		SPAN_ITALIC("You start extracting \the [src]'s cannula from \the [buckled_mob]."),
+		range = 5
+	)
+	if (!user.do_skilled(1.5 SECONDS, SKILL_MEDICAL, buckled_mob))
+		return
 	if (!user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
-		RipDrip()
+		RipDrip(user)
 		return
 	STOP_PROCESSING(SSobj, src)
 	user.visible_message(
 		SPAN_WARNING("\The [user] extracts \the [src]'s cannula from \the [buckled_mob]."),
-		SPAN_NOTICE("You extract \the [src]'s cannula from \the [buckled_mob]."),
-		range = 5
+		SPAN_NOTICE("You successfully unhook \the [buckled_mob] from \the [src]."),
+		range = 1
 	)
 	drip_active = FALSE
 	update_icon()
 
 
-/obj/structure/roller_bed/proc/RipDrip()
+/obj/structure/roller_bed/proc/RipDrip(mob/living/user)
 	if (!buckled_mob)
 		return
 	STOP_PROCESSING(SSobj, src)
 	buckled_mob.visible_message(
-		SPAN_WARNING("\The cannula from \a [src] is ripped out of \the [buckled_mob]!"),
-		SPAN_DANGER("\The cannula from \the [src] is ripped out of you!"),
+		SPAN_WARNING("\The cannula from \a [src] is ripped out of \the [buckled_mob][user ? " by \the [user]" : ""]!"),
+		SPAN_DANGER("\The cannula from \the [src] is ripped out of you[user ? " by \the [user]": ""]!"),
 		range = 5
 	)
 	var/mob/living/carbon/human/human = buckled_mob
 	if (istype(human))
-		human.custom_pain("Ouch!", 20)
+		human.custom_pain(power = 20)
 	buckled_mob.apply_damage(rand(1, 3), DAMAGE_BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags = DAMAGE_FLAG_SHARP, armor_pen = 100)
 	buckled_mob = null
 	update_icon()
@@ -299,7 +349,7 @@
 		return
 	user.visible_message(
 		SPAN_ITALIC("\The [user] adjusts the flow rate on \a [src]."),
-		SPAN_ITALIC("You adjust the flow rate on \the [src]."),
+		SPAN_ITALIC("You adjust the flow rate on \the [src] to [response]u."),
 		range = 3
 	)
 	transfer_amount = response
@@ -359,7 +409,7 @@
 		SPAN_ITALIC("You start setting up \the [src]."),
 		range = 5
 	)
-	if (!do_after(user, 3 SECONDS, do_flags = DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER))
+	if (!do_after(user, 2 SECONDS, src, do_flags = DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER))
 		return
 	var/obj/structure/roller_bed/roller = new (user.loc)
 	roller.add_fingerprint(user)

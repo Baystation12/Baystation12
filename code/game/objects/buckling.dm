@@ -10,7 +10,7 @@
 	var/mob/living/buckled_mob
 	var/buckle_sound = 'sound/effects/buckle.ogg'
 
-	/*
+	/**
 	*  A list of (x, y, z) to offset buckled_mob by, or null.
 	*  Best assigned to reference a static list, eg:
 	*  /myobj

@@ -25,13 +25,18 @@
 		return FALSE // should stop you from dragging through windows
 	return TRUE
 
-/atom/MouseDrop(atom/over)
-	if (!usr || !over)
+// Refer to https://www.byond.com/docs/ref/#/atom/proc/MouseDrop
+/atom/MouseDrop(atom/over_atom, atom/source_loc, over_loc, source_control, over_control, list/mouse_params)
+	if (!usr)
 		return
-	if (!Adjacent(usr) || !over.Adjacent(usr))
+	if (!over_atom)
 		return
-	spawn(0)
-		over.MouseDrop_T(src, usr)
+	if (isloc(over_loc)) //Dropping on something in the map.
+		if (!Adjacent(usr) || !over_atom.Adjacent(usr))
+			return
+		over_atom.MouseDrop_T(src, usr)
+		return
+	// ... other behaviors if required
 
 
 /**
@@ -46,8 +51,20 @@
 	if (src == dropping && user.canClick())
 		user.ClickOn(src)
 		return TRUE
-	var/mob/living/living = user
-	if (istype(living) && can_climb(living) && dropped == user)
-		do_climb(dropped)
-		return TRUE
+	if (dropped == user && isliving(user))
+		var/mob/living/living = user
+		if (can_climb(living))
+			do_climb(living)
+			return TRUE
 	return FALSE
+
+
+/// Determine if the user is in a state that allows a MouseDrop or MouseDrop_T.
+/atom/proc/CanMouseDrop(atom/over, mob/user = usr, incapacitation_flags)
+	if (!user || !over)
+		return FALSE
+	if (user.incapacitated(incapacitation_flags))
+		return FALSE
+	if (!Adjacent(user) || !over.Adjacent(user))
+		return FALSE // should stop you from dragging through windows
+	return TRUE

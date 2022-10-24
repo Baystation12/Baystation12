@@ -94,7 +94,7 @@
 			SPAN_ITALIC("You begin folding \the [src]."),
 			range = 5
 		)
-		if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER) || density)
+		if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER) || density)
 			return
 		playsound(src, pick(move_sounds), 75, TRUE)
 		new item_type (loc)
@@ -156,7 +156,7 @@
 			return
 		if (buckled_mob)
 			if (user.a_intent != I_HURT)
-				to_chat(user, SPAN_WARNING("You refrain from hurting \the [buckled_mob]."))
+				to_chat(user, SPAN_WARNING("You refrain from touching \the [active_iron] to \the [buckled_mob]."))
 				return
 			var/zone = user.zone_sel.selecting
 			if (!active_iron.iron_enabled)
@@ -195,7 +195,10 @@
 		return
 	if (istype(item, /obj/item/grab))
 		if (buckled_mob)
-			to_chat(user, SPAN_WARNING("\The [src] is occupied."))
+			to_chat(user, SPAN_WARNING("\The [src] is occupied. Remove \the [buckled_mob] first."))
+			return
+		if (clothing)
+			to_chat(user, SPAN_WARNING("\The [src] is occupied. Remove \the [clothing] first."))
 			return
 		var/obj/item/grab/grab = item
 		user.visible_message(
@@ -239,7 +242,7 @@
 		SPAN_ITALIC("You start setting up \the [src]."),
 		range = 5
 	)
-	if (!do_after(user, 3 SECONDS, do_flags = DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER))
+	if (!do_after(user, 2 SECONDS, src, do_flags = DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER))
 		return
 	var/obj/structure/ironing_board/board = new structure_type (user.loc)
 	board.add_fingerprint(user)
@@ -259,10 +262,8 @@
 	icon_state = "iron"
 	item_state = "ironingiron"
 	slot_flags = SLOT_BELT
-	w_class = ITEM_SIZE_NORMAL
 	throwforce = 10
-	throw_speed = 2
-	throw_range = 10
+	throw_range = 6
 	force = 8
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
 
