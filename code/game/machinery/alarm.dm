@@ -1,4 +1,4 @@
-/decl/environment_data
+/singleton/environment_data
 	var/list/important_gasses = list(
 		GAS_OXYGEN =         TRUE,
 		GAS_NITROGEN =       TRUE,
@@ -101,20 +101,20 @@
 	var/co2_dangerlevel = 0
 	var/temperature_dangerlevel = 0
 	var/other_dangerlevel = 0
-	var/environment_type = /decl/environment_data
+	var/environment_type = /singleton/environment_data
 	var/report_danger_level = 1
 
 /obj/machinery/alarm/cold
 	target_temperature = T0C+4
 
-/decl/environment_data/finnish/Initialize()
+/singleton/environment_data/finnish/Initialize()
 	. = ..()
 	important_gasses[GAS_STEAM] = TRUE
 	dangerous_gasses -= GAS_STEAM
 
 /obj/machinery/alarm/warm
 	target_temperature = T0C+75
-	environment_type = /decl/environment_data/finnish
+	environment_type = /singleton/environment_data/finnish
 
 /obj/machinery/alarm/warm/Initialize()
 	. = ..()
@@ -167,7 +167,7 @@
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+40, T0C+66) // K
 
 
-	var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
+	var/singleton/environment_data/env_info = Singletons.Get(environment_type)
 	for(var/g in gas_data.gases)
 		if(!env_info.important_gasses[g])
 			trace_gas += g
@@ -534,7 +534,7 @@
 	if(total)
 		var/pressure = environment.return_pressure()
 		environment_data[++environment_data.len] = list("name" = "Pressure", "value" = pressure, "unit" = "kPa", "danger_level" = pressure_dangerlevel)
-		var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
+		var/singleton/environment_data/env_info = Singletons.Get(environment_type)
 		for(var/gas_id in env_info.important_gasses)
 			environment_data[++environment_data.len] = list(
 				"name" =  gas_data.name[gas_id],
@@ -589,7 +589,7 @@
 						"panic"		= info["panic"],
 						"filters"	= list()
 					)
-				var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
+				var/singleton/environment_data/env_info = Singletons.Get(environment_type)
 				for(var/gas_id in env_info.filter_gasses)
 					scrubbers[scrubbers.len]["filters"] += list(
 						list(
@@ -712,7 +712,7 @@
 					return TOPIC_REFRESH
 
 				if("set_scrub_gas")
-					var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
+					var/singleton/environment_data/env_info = Singletons.Get(environment_type)
 					if(env_info && (href_list["gas_id"] in env_info.filter_gasses))
 						send_signal(device_id, list(href_list["command"] = list(href_list["gas_id"] = text2num(href_list["val"]))) )
 					return TOPIC_REFRESH
@@ -920,7 +920,7 @@ FIRE ALARM
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..()
 	if(loc.z in GLOB.using_map.contact_levels)
-		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+		var/singleton/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
 		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
 /obj/machinery/firealarm/Initialize()
@@ -966,8 +966,8 @@ FIRE ALARM
 			overlays += get_cached_overlay("fire1")
 			set_light(0.25, 0.1, 1, 2, COLOR_RED)
 		else if(z in GLOB.using_map.contact_levels)
-			var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-			var/decl/security_level/sl = security_state.current_security_level
+			var/singleton/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
+			var/singleton/security_level/sl = security_state.current_security_level
 
 			set_light(sl.light_max_bright, sl.light_inner_range, sl.light_outer_range, 2, sl.light_color_alarm)
 			overlays += image(sl.icon, sl.overlay_alarm)
@@ -1074,7 +1074,7 @@ FIRE ALARM
 	var/d1
 	var/d2
 
-	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/singleton/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
 	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon))
 		A = A.loc
 

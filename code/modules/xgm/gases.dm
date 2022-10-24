@@ -1,4 +1,4 @@
-/decl/xgm_gas/oxygen
+/singleton/xgm_gas/oxygen
 	id = GAS_OXYGEN
 	name = "Oxygen"
 	specific_heat = 20	// J/(mol*K)
@@ -9,7 +9,7 @@
 	symbol = "O2"
 
 
-/decl/xgm_gas/nitrogen
+/singleton/xgm_gas/nitrogen
 	id = GAS_NITROGEN
 	name = "Nitrogen"
 	specific_heat = 20	// J/(mol*K)
@@ -17,7 +17,7 @@
 	symbol_html = "N<sub>2</sub>"
 	symbol = "N2"
 
-/decl/xgm_gas/carbon_dioxide
+/singleton/xgm_gas/carbon_dioxide
 	id = GAS_CO2
 	name = "Carbon Dioxide"
 	specific_heat = 30	// J/(mol*K)
@@ -25,7 +25,7 @@
 	symbol_html = "CO<sub>2</sub>"
 	symbol = "CO2"
 
-/decl/xgm_gas/methyl_bromide
+/singleton/xgm_gas/methyl_bromide
 	id = GAS_METHYL_BROMIDE
 	name = "Methyl Bromide"
 	specific_heat = 42.59 // J/(mol*K)
@@ -34,7 +34,7 @@
 	symbol_html = "CH<sub>3</sub>Br"
 	symbol = "CH3Br"
 
-/decl/xgm_gas/phoron
+/singleton/xgm_gas/phoron
 	id = GAS_PHORON
 	name = "Phoron"
 
@@ -54,7 +54,7 @@
 	symbol_html = "Ph"
 	symbol = "Ph"
 
-/decl/xgm_gas/sleeping_agent
+/singleton/xgm_gas/sleeping_agent
 	id = GAS_N2O
 	name = "Nitrous Oxide"
 	specific_heat = 40	// J/(mol*K)
@@ -64,7 +64,7 @@
 	symbol_html = "N<sub>2</sub>O"
 	symbol = "N2O"
 
-/decl/xgm_gas/methane
+/singleton/xgm_gas/methane
 	id = GAS_METHANE
 	name = "Methane"
 	specific_heat = 30	// J/(mol*K)
@@ -73,14 +73,14 @@
 	symbol_html = "CH<sub>4</sub>"
 	symbol = "CH4"
 
-/decl/xgm_gas/alium
+/singleton/xgm_gas/alium
 	id = GAS_ALIEN
 	name = "Aliether"
 	hidden_from_codex = TRUE
 	symbol_html = "X"
 	symbol = "X"
 
-/decl/xgm_gas/alium/New()
+/singleton/xgm_gas/alium/New()
 	var/num = rand(100,999)
 	name = "Compound #[num]"
 	specific_heat = rand(1, 400)	// J/(mol*K)
@@ -100,7 +100,7 @@
 		tile_color = RANDOM_RGB
 		overlay_limit = 0.5
 
-/decl/xgm_gas/hydrogen
+/singleton/xgm_gas/hydrogen
 	id = GAS_HYDROGEN
 	name = "Hydrogen"
 	specific_heat = 100	// J/(mol*K)
@@ -110,7 +110,7 @@
 	symbol_html = "H<sub>2</sub>"
 	symbol = "H2"
 
-/decl/xgm_gas/hydrogen/deuterium
+/singleton/xgm_gas/hydrogen/deuterium
 	id = GAS_DEUTERIUM
 	name = "Deuterium"
 	specific_heat = 80
@@ -118,7 +118,7 @@
 	symbol_html = "D"
 	symbol = "D"
 
-/decl/xgm_gas/hydrogen/tritium
+/singleton/xgm_gas/hydrogen/tritium
 	id = GAS_TRITIUM
 	name = "Tritium"
 	molar_mass = 0.006
@@ -126,7 +126,7 @@
 	symbol_html = "T"
 	symbol = "T"
 
-/decl/xgm_gas/helium
+/singleton/xgm_gas/helium
 	id = GAS_HELIUM
 	name = "Helium"
 	specific_heat = 80	// J/(mol*K)
@@ -136,7 +136,7 @@
 	symbol_html = "He"
 	symbol = "He"
 
-/decl/xgm_gas/argon
+/singleton/xgm_gas/argon
 	id = GAS_ARGON
 	name = "Argon"
 	specific_heat = 10	// J/(mol*K)
@@ -145,7 +145,7 @@
 	symbol = "Ar"
 
 // If narcosis is ever simulated, krypton has a narcotic potency seven times greater than regular airmix.
-/decl/xgm_gas/krypton
+/singleton/xgm_gas/krypton
 	id = GAS_KRYPTON
 	name = "Krypton"
 	specific_heat = 5	// J/(mol*K)
@@ -153,7 +153,7 @@
 	symbol_html = "Kr"
 	symbol = "Kr"
 
-/decl/xgm_gas/neon
+/singleton/xgm_gas/neon
 	id = GAS_NEON
 	name = "Neon"
 	specific_heat = 20	// J/(mol*K)
@@ -161,7 +161,7 @@
 	symbol_html = "Ne"
 	symbol = "Ne"
 
-/decl/xgm_gas/xenon
+/singleton/xgm_gas/xenon
 	id = GAS_XENON
 	name = "Xenon"
 	specific_heat = 3	// J/(mol*K)
@@ -170,7 +170,7 @@
 	symbol_html = "Xe"
 	symbol = "Xe"
 
-/decl/xgm_gas/nitrodioxide
+/singleton/xgm_gas/nitrodioxide
 	id = GAS_NO2
 	name = "Nitrogen Dioxide"
 	tile_color = "#ca6409"
@@ -181,7 +181,7 @@
 	symbol_html = "NO<sub>2</sub>"
 	symbol = "NO2"
 
-/decl/xgm_gas/nitricoxide
+/singleton/xgm_gas/nitricoxide
 	id = GAS_NO
 	name = "Nitric Oxide"
 
@@ -191,7 +191,7 @@
 	symbol_html = "NO"
 	symbol = "NO"
 
-/decl/xgm_gas/chlorine
+/singleton/xgm_gas/chlorine
 	id = GAS_CHLORINE
 	name = "Chlorine"
 	tile_color = "#c5f72d"
@@ -203,7 +203,7 @@
 	symbol_html = "Cl"
 	symbol = "Cl"
 
-/decl/xgm_gas/vapor
+/singleton/xgm_gas/vapor
 	id = GAS_STEAM
 	name = "Steam"
 	tile_overlay = "generic"
@@ -216,7 +216,7 @@
 	symbol_html = "H<sub>2</sub>O"
 	symbol = "H2O"
 
-/decl/xgm_gas/sulfurdioxide
+/singleton/xgm_gas/sulfurdioxide
 	id = GAS_SULFUR
 	name = "Sulfur Dioxide"
 
@@ -225,7 +225,7 @@
 	symbol_html = "SO<sub>2</sub>"
 	symbol = "SO2"
 
-/decl/xgm_gas/ammonia
+/singleton/xgm_gas/ammonia
 	id = GAS_AMMONIA
 	name = "Ammonia"
 
@@ -235,7 +235,7 @@
 	symbol_html = "NH<sub>3</sub>"
 	symbol = "NH3"
 
-/decl/xgm_gas/carbon_monoxide
+/singleton/xgm_gas/carbon_monoxide
 	id = GAS_CO
 	name = "Carbon Monoxide"
 	specific_heat = 30	// J/(mol*K)
@@ -244,7 +244,7 @@
 	symbol_html = "CO"
 	symbol = "CO"
 
-/decl/xgm_gas/boron
+/singleton/xgm_gas/boron
 	id = GAS_BORON
 	name = "Boron"
 	specific_heat = 11

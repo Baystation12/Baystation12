@@ -139,7 +139,7 @@
 
 //Broken scrubber Used in hanger atmoshperic storage
 /obj/machinery/portable_atmospherics/powered/scrubber/broken
-	construct_state = /decl/machine_construction/default/panel_open
+	construct_state = /singleton/machine_construction/default/panel_open
 	panel_open = 1
 
 /obj/machinery/portable_atmospherics/powered/scrubber/broken/Initialize()

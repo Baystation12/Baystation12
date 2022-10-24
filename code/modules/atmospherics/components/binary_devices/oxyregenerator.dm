@@ -9,7 +9,7 @@
 	idle_power_usage = 200		//internal circuitry, friction losses and stuff
 	power_rating = 10000
 	base_type = /obj/machinery/atmospherics/binary/oxyregenerator
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
 

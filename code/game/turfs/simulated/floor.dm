@@ -18,7 +18,7 @@
 	// Flooring data.
 	var/flooring_override
 	var/initial_flooring
-	var/decl/flooring/flooring
+	var/singleton/flooring/flooring
 	var/mineral = DEFAULT_WALL_MATERIAL
 
 	thermal_conductivity = 0.040
@@ -38,9 +38,9 @@
 	if(!floortype && initial_flooring)
 		floortype = initial_flooring
 	if(floortype)
-		set_flooring(decls_repository.get_decl(floortype))
+		set_flooring(Singletons.Get(floortype))
 
-/turf/simulated/floor/proc/set_flooring(decl/flooring/newflooring)
+/turf/simulated/floor/proc/set_flooring(singleton/flooring/newflooring)
 	make_plating(defer_icon_update = 1)
 	flooring = newflooring
 	update_icon(1)

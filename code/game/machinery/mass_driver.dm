@@ -18,10 +18,10 @@
 		/obj/item/stock_parts/power/apc
 	)
 	public_methods = list(
-		/decl/public_access/public_method/driver_drive,
-		/decl/public_access/public_method/driver_drive_delayed
+		/singleton/public_access/public_method/driver_drive,
+		/singleton/public_access/public_method/driver_drive_delayed
 	)
-	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/driver = 1)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/receiver/driver = 1)
 
 /obj/machinery/mass_driver/proc/drive(amount)
 	if(inoperable())
@@ -54,28 +54,28 @@
 	sleep(2 SECONDS)
 	drive()
 
-/decl/public_access/public_method/driver_drive
+/singleton/public_access/public_method/driver_drive
 	name = "launch"
 	desc = "Makes the mass driver launch immediately."
 	call_proc = /obj/machinery/mass_driver/proc/drive
 
-/decl/public_access/public_method/driver_drive_delayed
+/singleton/public_access/public_method/driver_drive_delayed
 	name = "delayed launch"
 	desc = "Makes the mass driver launch after a short delay."
 	call_proc = /obj/machinery/mass_driver/proc/delayed_drive
 
-/decl/stock_part_preset/radio/receiver/driver
+/singleton/stock_part_preset/radio/receiver/driver
 	frequency = BLAST_DOORS_FREQ
-	receive_and_call = list("button_active" = /decl/public_access/public_method/driver_drive_delayed)
+	receive_and_call = list("button_active" = /singleton/public_access/public_method/driver_drive_delayed)
 
 /obj/machinery/button/mass_driver
 	cooldown = 10 SECONDS // Whole thing with the doors takes a while.
-	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/driver_button = 1)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/basic_transmitter/driver_button = 1)
 
-/decl/stock_part_preset/radio/basic_transmitter/driver_button
+/singleton/stock_part_preset/radio/basic_transmitter/driver_button
 	transmit_on_change = list(
-		"open_door" = /decl/public_access/public_variable/button_active,
-		"button_active" = /decl/public_access/public_variable/button_active,
-		"close_door_delayed" = /decl/public_access/public_variable/button_active
+		"open_door" = /singleton/public_access/public_variable/button_active,
+		"button_active" = /singleton/public_access/public_variable/button_active,
+		"close_door_delayed" = /singleton/public_access/public_variable/button_active
 	)
 	frequency = BLAST_DOORS_FREQ

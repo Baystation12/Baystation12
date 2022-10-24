@@ -6,7 +6,7 @@
 	anchored = FALSE
 	stat_immune = MACHINE_STAT_NOSCREEN//Doesn't need screen, just input for the parts wanted
 
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 
 	idle_power_usage = 500

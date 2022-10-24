@@ -22,7 +22,7 @@
 						fails++
 						log_bad("Default cultural value '[val]' for [species_name] tag '[token]' is an invalid type, must be a string.")
 					else
-						var/decl/cultural_info/culture = SSculture.get_culture(val)
+						var/singleton/cultural_info/culture = SSculture.get_culture(val)
 						if(!istype(culture))
 							fails++
 							log_bad("Default cultural value '[val]' for [species_name] tag '[token]' is not a valid culture label.")
@@ -50,7 +50,7 @@
 						fails++
 						log_bad("Forced cultural value for [species_name] tag '[token]' is an invalid type, must be a string.")
 					else
-						var/decl/cultural_info/culture = SSculture.get_culture(val)
+						var/singleton/cultural_info/culture = SSculture.get_culture(val)
 						if(!istype(culture))
 							fails++
 							log_bad("Forced cultural value '[val]' for [species_name] tag '[token]' is not a valid culture label.")
@@ -74,7 +74,7 @@
 					log_bad("Available cultural info for [species_name] tag '[token]' is empty, must have at least one entry.")
 				else
 					for(var/val in species.available_cultural_info[token])
-						var/decl/cultural_info/culture = SSculture.get_culture(val)
+						var/singleton/cultural_info/culture = SSculture.get_culture(val)
 						if(!istype(culture))
 							fails++
 							log_bad("Available cultural value '[val]' for [species_name] tag '[token]' is not a valid culture label.")
@@ -90,4 +90,3 @@
 	else
 		pass("All cultural values are valid.")
 	return 1
-

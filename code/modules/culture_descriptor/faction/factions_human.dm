@@ -1,4 +1,4 @@
-/decl/cultural_info/faction/scg
+/singleton/cultural_info/faction/scg
 	name = FACTION_SOL_CENTRAL
 	description = "The Sol Central Government, commonly referred to as SolGov or the SCG, is a federal republic \
 	composed of numerous human member states spanning many systems.\
@@ -13,7 +13,7 @@
 	most advanced and powerful civilisations in the known galaxy."
 
 
-/decl/cultural_info/faction/scg/fleet
+/singleton/cultural_info/faction/scg/fleet
 	name = FACTION_FLEET
 	description = "The Fleet is the primary component of the SCG Defence Forces. It mostly protects SCG space from pirates, smugglers, \
 	and occasional vox raiders, with its last serious military engagement being the Gaia war over 10 years ago. \
@@ -26,7 +26,7 @@
 	Recently Sol-made IPCs were also permitted to enlist, provided they agree to install a law shackle."
 
 
-/decl/cultural_info/faction/torchco
+/singleton/cultural_info/faction/torchco
 	name = FACTION_CORPORATE
 	description = "The Expeditionary Corps Organisation is a government-owned, publically traded limited liability company assembled from the corporate \
 	backers who asssisted in funding the Torch project when it opened five years ago. Major players include NanoTrasen, Xynergy and \
@@ -39,7 +39,7 @@
 	economic_power = 1.2
 
 
-/decl/cultural_info/faction/gcc
+/singleton/cultural_info/faction/gcc
 	name = FACTION_INDIE_CONFED
 	description = "The Independent Colonial Confederation of Gilgamesh, commonly referred to as the Gilgamesh Colonial Confederation (GCC), is a regional power in human space,\
 	bordered by the Sol Central Government towards the galactic centre. The capital of the Confederation is the city of Ameranth on the planet of Terra \
@@ -52,7 +52,7 @@
 	economic_power = 0.9
 
 
-/decl/cultural_info/faction/remote
+/singleton/cultural_info/faction/remote
 	name = FACTION_EXPEDITIONARY
 	description = "The Expeditionary Corps is an SCG agency tasked with exploration of uncharted space and worlds, \
 	mineralogy surveys and xenoarchaeological studies and, more recently, the discovery of new alien life. \
@@ -64,7 +64,7 @@
 	Officer candidates are required to have at least a bachelor's degree in a relevant field (astrogation, engineering, xenoarcheology, etc)."
 
 
-/decl/cultural_info/faction/police
+/singleton/cultural_info/faction/police
 	name = FACTION_SPACECOPS
 	description = "The Sol Federal (SFP) is a government law enforcement agency tasked with enforcing Sol Central Government law, \
 	investigating breaches of law, fugitive recovery and transport, and securing ports of entry. \
@@ -74,7 +74,7 @@
 	The contractor SFP Trackers are also used find and arrest low-profile fugitives from justice."
 
 
-/decl/cultural_info/faction/remote/nanotrasen
+/singleton/cultural_info/faction/remote/nanotrasen
 	name = FACTION_NANOTRASEN
 	description = "The NanoTrasen Corporation, commonly referred to as NT, is one of the great megacorporations of the modern day.\
 	Currently headquartered in New Amsterdam on Luna and headed by CEO Jackson Trasen It deals in research of the most advanced sciences, \
@@ -86,7 +86,7 @@
 	economic_power = 1.2
 
 
-/decl/cultural_info/faction/remote/xynergy
+/singleton/cultural_info/faction/remote/xynergy
 	name = FACTION_XYNERGY
 	description = "Xynergy is a privately held company known for their work with xenobiological organisms. They develop and \
 	produce products such as the netgun and dociler used for capturing or taming xenofauna. In addition, they are the largest \
@@ -95,7 +95,7 @@
 	economic_power = 1.1
 
 
-/decl/cultural_info/faction/remote/hephaestus
+/singleton/cultural_info/faction/remote/hephaestus
 	name = FACTION_HEPHAESTUS
 	description = "Hephaestus Industries, known simply as Hephaestus, is one of the largest corporations in existence today. \
 	The leading manufacturer of military grade personal weapons, assault vehicles, defence systems and security measures, \
@@ -106,7 +106,7 @@
 	economic_power = 1.2
 
 
-/decl/cultural_info/faction/free
+/singleton/cultural_info/faction/free
 	name = FACTION_FREETRADE
 	description = "The Free Trade Union, commonly referred to as the FTU, is is an employee-owned conglomerate of tens of thousands of \
 	various traders and merchants from all over SCG space and beyond. Colloquially known as the 'fifth megacorp', they control a sizeable fleet \
@@ -117,7 +117,7 @@
 	economic_power = 1.3
 
 
-/decl/cultural_info/faction/pcrc
+/singleton/cultural_info/faction/pcrc
 	name = FACTION_PCRC
 	description = "Proxima Centauri Risk Control, often known as PCRC, is one of the largest suppliers of private security in Sol Space. \
 	PCRC handles numerous government, private and corporate contracts and provides a variety of services ranging from private law enforcement, \
@@ -126,7 +126,7 @@
 	competitor, SAARE."
 
 
-/decl/cultural_info/faction/saare
+/singleton/cultural_info/faction/saare
 	name = FACTION_SAARE
 	description = "SAARE (Strategic Assault and Asset Retention Enterprises) is a quickly growing Private Military Corporation catering to large \
 	firms requiring discrete military and private security services. The company has taken to hiring skilled veterans from both private and public \
@@ -135,7 +135,7 @@
 	company has recently signed onto a number of contracts with NanoTrasen to complement their own Asset Protection forces."
 
 
-/decl/cultural_info/faction/dais
+/singleton/cultural_info/faction/dais
 	name = FACTION_DAIS
 	description = "Deimos Advanced Information Systems (DAIS) is a large corporation specializing in information technology such as computer hardware \
 	and software, telecommunications equipment, and networking equipment based on Mars. It is the number one supplier of computer technology in The Sol Central \
@@ -146,6 +146,6 @@
 	economic_power = 1.1
 
 
-/decl/cultural_info/faction/other
+/singleton/cultural_info/faction/other
 	name = FACTION_OTHER
 	description = "You belong to one of the many other factions that operate in the galaxy. Numerous, too numerous to list, these factions represent a variety of interests, purposes, intents and goals."

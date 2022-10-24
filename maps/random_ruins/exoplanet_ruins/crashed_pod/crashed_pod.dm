@@ -15,7 +15,7 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 	name = "\improper Crashed Survival Pod"
 	icon_state = "blue"
 
-/decl/submap_archetype/crashed_pod
+/singleton/submap_archetype/crashed_pod
 	descriptor = "crashed survival pod"
 	crew_jobs = list(/datum/job/submap/pod)
 
@@ -25,10 +25,10 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 /datum/job/submap/pod
 	title = "Stranded Survivor"
 	info = "Your ship has been destroyed by a terrible disaster."
-	outfit_type = /decl/hierarchy/outfit/job/survivor
+	outfit_type = /singleton/hierarchy/outfit/job/survivor
 	total_positions = 2
 
-/decl/hierarchy/outfit/job/survivor
+/singleton/hierarchy/outfit/job/survivor
 	name = OUTFIT_JOB_NAME("Survivor")
 	id_types = null
 	pda_type = null
@@ -45,7 +45,7 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 
 /obj/effect/submap_landmark/joinable_submap/crashed_pod
 	name = "Crashed Survival Pod"
-	archetype = /decl/submap_archetype/crashed_pod
+	archetype = /singleton/submap_archetype/crashed_pod
 	submap_datum_type = /datum/submap/crashed_pod
 
 /obj/effect/submap_landmark/joinable_submap/crashed_pod/New()

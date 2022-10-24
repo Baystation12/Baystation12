@@ -1,5 +1,5 @@
-/decl/hierarchy/outfit/nanotrasen
-	hierarchy_type = /decl/hierarchy/outfit/nanotrasen
+/singleton/hierarchy/outfit/nanotrasen
+	hierarchy_type = /singleton/hierarchy/outfit/nanotrasen
 	uniform = /obj/item/clothing/under/rank/centcom
 	shoes = /obj/item/clothing/shoes/laceup
 	gloves = /obj/item/clothing/gloves/white
@@ -11,19 +11,19 @@
 	pda_slot = slot_r_store
 	pda_type = /obj/item/modular_computer/pda/heads
 
-/decl/hierarchy/outfit/nanotrasen/representative
+/singleton/hierarchy/outfit/nanotrasen/representative
 	name = "Corporate Representative"
 	belt = /obj/item/material/clipboard
 	id_pda_assignment = "Corporate Representative"
 
-/decl/hierarchy/outfit/nanotrasen/officer
+/singleton/hierarchy/outfit/nanotrasen/officer
 	name = "Corporate Officer"
 	head = /obj/item/clothing/head/beret/centcom/officer
 	l_ear = /obj/item/device/radio/headset/heads/captain
 	belt = /obj/item/gun/energy
 	id_pda_assignment = "Corporate Officer"
 
-/decl/hierarchy/outfit/nanotrasen/captain
+/singleton/hierarchy/outfit/nanotrasen/captain
 	name = "Corporate Captain"
 	uniform = /obj/item/clothing/under/rank/centcom_captain
 	l_ear = /obj/item/device/radio/headset/heads/captain
@@ -31,7 +31,7 @@
 	belt = /obj/item/gun/energy
 	id_pda_assignment = "Corporate Captain"
 
-/decl/hierarchy/outfit/nanotrasen/commander
+/singleton/hierarchy/outfit/nanotrasen/commander
 	name = "Corporate Commander"
 	head = /obj/item/clothing/head/centhat
 	mask = /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba

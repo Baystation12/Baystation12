@@ -1,4 +1,4 @@
-/decl/cultural_info/location/adherent
+/singleton/cultural_info/location/adherent
 	name = HOME_SYSTEM_ADHERENT
 	description = "The creators of the adherents once resided on a gleaming gas giant called Canon. After the solar flare called the Scream, \
 		nothing moves in the ocean of cloud other than the artificial weapon platforms and automated defences that enforce the eternal quarantine \
@@ -8,7 +8,7 @@
 	distance = "Unknown, more than 50 light years"
 	ruling_body = "Core System Traffic Control Hub 37-Q"
 
-/decl/cultural_info/location/adherent/monument
+/singleton/cultural_info/location/adherent/monument
 	name = HOME_SYSTEM_ADHERENT_MOURNER
 	description = "In their unending search across the stars, the Vigil has uncovered many so-called grave worlds or monument worlds - planets \
 		upon which a sentient species met an unkind end. The adherents build orbital stations over such worlds to add them to their vigil, watching \

@@ -3,4 +3,4 @@
 	set name = "AOOC"
 	set desc = "Antagonist OOC"
 
-	sanitize_and_communicate(/decl/communication_channel/aooc, src, msg)
+	sanitize_and_communicate(/singleton/communication_channel/aooc, src, msg)

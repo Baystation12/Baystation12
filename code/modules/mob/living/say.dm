@@ -168,9 +168,9 @@ var/global/list/channel_to_radio_key = new
 		return
 
 	var/prefix = copytext_char(message, 1, 2)
-	if(prefix == get_prefix_key(/decl/prefix/custom_emote))
+	if(prefix == get_prefix_key(/singleton/prefix/custom_emote))
 		return emote(copytext_char(message, 2))
-	if(prefix == get_prefix_key(/decl/prefix/visible_emote))
+	if(prefix == get_prefix_key(/singleton/prefix/visible_emote))
 		return custom_emote(1, copytext_char(message, 2))
 
 	//parse the language code and consume it

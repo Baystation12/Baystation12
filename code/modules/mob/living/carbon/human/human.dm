@@ -28,7 +28,7 @@
 		else
 			set_species()
 
-	var/decl/cultural_info/culture = SSculture.get_culture(cultural_info[TAG_CULTURE])
+	var/singleton/cultural_info/culture = SSculture.get_culture(cultural_info[TAG_CULTURE])
 	if(culture)
 		real_name = culture.get_random_name(gender, species.name)
 		name = real_name
@@ -1234,7 +1234,7 @@
 	default_run_intent = null
 	move_intent = null
 	move_intents = species.move_intents.Copy()
-	set_move_intent(decls_repository.get_decl(move_intents[1]))
+	set_move_intent(Singletons.Get(move_intents[1]))
 	if(!istype(move_intent))
 		set_next_usable_move_intent()
 
@@ -1259,7 +1259,7 @@
 	var/list/default_languages =   list()
 
 	for(var/thing in cultural_info)
-		var/decl/cultural_info/check = cultural_info[thing]
+		var/singleton/cultural_info/check = cultural_info[thing]
 		if(istype(check))
 			if(check.default_language)
 				free_languages    |= all_languages[check.default_language]
@@ -1782,7 +1782,7 @@
 	species.water_act(src, depth)
 	..(depth)
 
-/mob/living/carbon/human/proc/set_cultural_value(token, decl/cultural_info/_culture, defer_language_update)
+/mob/living/carbon/human/proc/set_cultural_value(token, singleton/cultural_info/_culture, defer_language_update)
 	if(!istype(_culture))
 		_culture = SSculture.get_culture(_culture)
 	if(istype(_culture))

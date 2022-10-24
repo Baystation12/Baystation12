@@ -6,7 +6,7 @@
 	anchored = TRUE
 	idle_power_usage = 300
 	active_power_usage = 300
-	construct_state = /decl/machine_construction/default/panel_closed/computer
+	construct_state = /singleton/machine_construction/default/panel_closed/computer
 	uncreated_component_parts = null
 	stat_immune = 0
 	frame_type = /obj/machinery/constructable_frame/computerframe/deconstruct

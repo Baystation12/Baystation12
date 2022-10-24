@@ -10,7 +10,7 @@
 
 /datum/category_item/player_setup_item/antagonism/basic/New()
 	..()
-	SETUP_SUBTYPE_DECLS_BY_NAME(/decl/uplink_source, uplink_sources_by_name)
+	SETUP_SUBTYPE_SINGLETONS_BY_NAME(/singleton/uplink_source, uplink_sources_by_name)
 
 /datum/category_item/player_setup_item/antagonism/basic/load_character(datum/pref_record_reader/R)
 	var/list/uplink_order
@@ -27,7 +27,7 @@
 /datum/category_item/player_setup_item/antagonism/basic/save_character(datum/pref_record_writer/W)
 	var/uplink_order = list()
 	for(var/entry in pref.uplink_sources)
-		var/decl/uplink_source/UL = entry
+		var/singleton/uplink_source/UL = entry
 		uplink_order += UL.name
 
 	W.write("uplink_sources", uplink_order)
@@ -37,13 +37,13 @@
 	if(!istype(pref.uplink_sources))
 		pref.uplink_sources = list()
 		for(var/entry in GLOB.default_uplink_source_priority)
-			pref.uplink_sources += decls_repository.get_decl(entry)
+			pref.uplink_sources += Singletons.Get(entry)
 
 /datum/category_item/player_setup_item/antagonism/basic/content(mob/user)
 	. +="<b>Antag Setup:</b><br>"
 	. +="Uplink Source Priority: <a href='?src=\ref[src];add_source=1'>Add</a><br>"
 	for(var/entry in pref.uplink_sources)
-		var/decl/uplink_source/US = entry
+		var/singleton/uplink_source/US = entry
 		. +="[US.name] <a href='?src=\ref[src];move_source_up=\ref[US]'>Move Up</a> <a href='?src=\ref[src];move_source_down=\ref[US]'>Move Down</a> <a href='?src=\ref[src];remove_source=\ref[US]'>Remove</a><br>"
 		if(US.desc)
 			. += "[FONT_SMALL(US.desc)]<br>"
@@ -64,12 +64,12 @@
 			return TOPIC_REFRESH
 
 	if(href_list["remove_source"])
-		var/decl/uplink_source/US = locate(href_list["remove_source"]) in pref.uplink_sources
+		var/singleton/uplink_source/US = locate(href_list["remove_source"]) in pref.uplink_sources
 		if(US && pref.uplink_sources.Remove(US))
 			return TOPIC_REFRESH
 
 	if(href_list["move_source_up"])
-		var/decl/uplink_source/US = locate(href_list["move_source_up"]) in pref.uplink_sources
+		var/singleton/uplink_source/US = locate(href_list["move_source_up"]) in pref.uplink_sources
 		if(!US)
 			return TOPIC_NOACTION
 		var/index = pref.uplink_sources.Find(US)
@@ -79,7 +79,7 @@
 		return TOPIC_REFRESH
 
 	if(href_list["move_source_down"])
-		var/decl/uplink_source/US = locate(href_list["move_source_down"]) in pref.uplink_sources
+		var/singleton/uplink_source/US = locate(href_list["move_source_down"]) in pref.uplink_sources
 		if(!US)
 			return TOPIC_NOACTION
 		var/index = pref.uplink_sources.Find(US)

@@ -1,21 +1,21 @@
 // Construction frames
 
-/decl/machine_construction/frame/unwrenched/state_is_valid(obj/machinery/machine)
+/singleton/machine_construction/frame/unwrenched/state_is_valid(obj/machinery/machine)
 	return !machine.anchored
 
-/decl/machine_construction/frame/unwrenched/validate_state(obj/machinery/constructable_frame/machine)
+/singleton/machine_construction/frame/unwrenched/validate_state(obj/machinery/constructable_frame/machine)
 	. = ..()
 	if(!.)
 		if(machine.circuit)
-			try_change_state(machine, /decl/machine_construction/frame/awaiting_parts)
+			try_change_state(machine, /singleton/machine_construction/frame/awaiting_parts)
 		else
-			try_change_state(machine, /decl/machine_construction/frame/wrenched)
+			try_change_state(machine, /singleton/machine_construction/frame/wrenched)
 
-/decl/machine_construction/frame/unwrenched/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/singleton/machine_construction/frame/unwrenched/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if(isWrench(I))
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user, 2 SECONDS, machine, DO_REPAIR_CONSTRUCT))
-			TRANSFER_STATE(/decl/machine_construction/frame/wrenched)
+			TRANSFER_STATE(/singleton/machine_construction/frame/wrenched)
 			to_chat(user, SPAN_NOTICE("You wrench \the [machine] into place."))
 			machine.anchored = TRUE
 	if(isWelder(I))
@@ -27,32 +27,32 @@
 		if(do_after(user, 2 SECONDS, machine, DO_REPAIR_CONSTRUCT))
 			if(!WT.isOn())
 				return TRUE
-			TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
+			TRANSFER_STATE(/singleton/machine_construction/default/deconstructed)
 			to_chat(user, SPAN_NOTICE("You deconstruct \the [machine]."))
 			machine.dismantle()
 
 
-/decl/machine_construction/frame/unwrenched/mechanics_info()
+/singleton/machine_construction/frame/unwrenched/mechanics_info()
 	. = list()
 	. += "Use a welder to break apart the frame."
 	. += "Use a wrench to secure the frame in place."
 
-/decl/machine_construction/frame/wrenched/state_is_valid(obj/machinery/constructable_frame/machine)
+/singleton/machine_construction/frame/wrenched/state_is_valid(obj/machinery/constructable_frame/machine)
 	return machine.anchored && !machine.circuit
 
-/decl/machine_construction/frame/wrenched/validate_state(obj/machinery/constructable_frame/machine)
+/singleton/machine_construction/frame/wrenched/validate_state(obj/machinery/constructable_frame/machine)
 	. = ..()
 	if(!.)
 		if(machine.circuit)
-			try_change_state(machine, /decl/machine_construction/frame/awaiting_parts)
+			try_change_state(machine, /singleton/machine_construction/frame/awaiting_parts)
 		else
-			try_change_state(machine, /decl/machine_construction/frame/unwrenched)
+			try_change_state(machine, /singleton/machine_construction/frame/unwrenched)
 
-/decl/machine_construction/frame/wrenched/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/singleton/machine_construction/frame/wrenched/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if(isWrench(I))
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user, 2 SECONDS, machine, DO_REPAIR_CONSTRUCT))
-			TRANSFER_STATE(/decl/machine_construction/frame/unwrenched)
+			TRANSFER_STATE(/singleton/machine_construction/frame/unwrenched)
 			to_chat(user, SPAN_NOTICE("You unfasten \the [machine]."))
 			machine.anchored = FALSE
 			return
@@ -64,34 +64,34 @@
 		playsound(machine.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("You start to add cables to the frame."))
 		if(do_after(user, 2 SECONDS, machine, DO_REPAIR_CONSTRUCT) && C.use(5))
-			TRANSFER_STATE(/decl/machine_construction/frame/awaiting_circuit)
+			TRANSFER_STATE(/singleton/machine_construction/frame/awaiting_circuit)
 			to_chat(user, SPAN_NOTICE("You add cables to the frame."))
 		return TRUE
 
 
-/decl/machine_construction/frame/wrenched/mechanics_info()
+/singleton/machine_construction/frame/wrenched/mechanics_info()
 	. = list()
 	. += "Use a wrench to unfasten the frame from the floor and prepare it for deconstruction."
 	. += "Add cables to make it ready for a circuit."
 
-/decl/machine_construction/frame/awaiting_circuit/state_is_valid(obj/machinery/constructable_frame/machine)
+/singleton/machine_construction/frame/awaiting_circuit/state_is_valid(obj/machinery/constructable_frame/machine)
 	return machine.anchored && !machine.circuit
 
-/decl/machine_construction/frame/awaiting_circuit/validate_state(obj/machinery/constructable_frame/machine)
+/singleton/machine_construction/frame/awaiting_circuit/validate_state(obj/machinery/constructable_frame/machine)
 	. = ..()
 	if(!.)
 		if(machine.circuit)
-			try_change_state(machine, /decl/machine_construction/frame/awaiting_parts)
+			try_change_state(machine, /singleton/machine_construction/frame/awaiting_parts)
 		else
-			try_change_state(machine, /decl/machine_construction/frame/unwrenched)
+			try_change_state(machine, /singleton/machine_construction/frame/unwrenched)
 
-/decl/machine_construction/frame/awaiting_circuit/attackby(obj/item/I, mob/user, obj/machinery/constructable_frame/machine)
+/singleton/machine_construction/frame/awaiting_circuit/attackby(obj/item/I, mob/user, obj/machinery/constructable_frame/machine)
 	if(istype(I, /obj/item/stock_parts/circuitboard))
 		var/obj/item/stock_parts/circuitboard/circuit = I
 		if(circuit.board_type == machine.expected_machine_type)
 			if(!user.canUnEquip(I))
 				return FALSE
-			TRANSFER_STATE(/decl/machine_construction/frame/awaiting_parts)
+			TRANSFER_STATE(/singleton/machine_construction/frame/awaiting_parts)
 			user.unEquip(I, machine)
 			playsound(machine.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			to_chat(user, SPAN_NOTICE("You add the circuit board to \the [machine]."))
@@ -101,30 +101,30 @@
 			to_chat(user, SPAN_WARNING("This frame does not accept circuit boards of this type!"))
 			return TRUE
 	if(isWirecutter(I))
-		TRANSFER_STATE(/decl/machine_construction/frame/wrenched)
+		TRANSFER_STATE(/singleton/machine_construction/frame/wrenched)
 		playsound(machine.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("You remove the cables."))
 		new /obj/item/stack/cable_coil(machine.loc, 5)
 
-/decl/machine_construction/frame/awaiting_circuit/mechanics_info()
+/singleton/machine_construction/frame/awaiting_circuit/mechanics_info()
 	. = list()
 	. += "Insert a circuit board to progress with constructing the machine."
 	. += "Use a wirecutter to remove the cables."
 
-/decl/machine_construction/frame/awaiting_parts/state_is_valid(obj/machinery/constructable_frame/machine)
+/singleton/machine_construction/frame/awaiting_parts/state_is_valid(obj/machinery/constructable_frame/machine)
 	return machine.anchored && machine.circuit
 
-/decl/machine_construction/frame/awaiting_parts/validate_state(obj/machinery/constructable_frame/machine)
+/singleton/machine_construction/frame/awaiting_parts/validate_state(obj/machinery/constructable_frame/machine)
 	. = ..()
 	if(!.)
 		if(machine.anchored)
-			try_change_state(machine, /decl/machine_construction/frame/wrenched)
+			try_change_state(machine, /singleton/machine_construction/frame/wrenched)
 		else
-			try_change_state(machine, /decl/machine_construction/frame/unwrenched)
+			try_change_state(machine, /singleton/machine_construction/frame/unwrenched)
 
-/decl/machine_construction/frame/awaiting_parts/attackby(obj/item/I, mob/user, obj/machinery/constructable_frame/machine)
+/singleton/machine_construction/frame/awaiting_parts/attackby(obj/item/I, mob/user, obj/machinery/constructable_frame/machine)
 	if(isCrowbar(I))
-		TRANSFER_STATE(/decl/machine_construction/frame/awaiting_circuit)
+		TRANSFER_STATE(/singleton/machine_construction/frame/awaiting_circuit)
 		playsound(machine.loc, 'sound/items/Crowbar.ogg', 50, 1)
 		machine.circuit.dropInto(machine.loc)
 		machine.circuit = null
@@ -144,7 +144,7 @@
 		qdel(machine)
 		return TRUE
 
-/decl/machine_construction/frame/awaiting_parts/mechanics_info()
+/singleton/machine_construction/frame/awaiting_parts/mechanics_info()
 	. = list()
 	. += "Use a crowbar to remove the circuitboard and any parts installed."
 	. += "Use a screwdriver to build the machine."

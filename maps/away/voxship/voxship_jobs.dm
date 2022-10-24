@@ -1,7 +1,7 @@
 /datum/job/submap/voxship_vox
 	title = "Shoal Scavenger"
 	total_positions = 2
-	outfit_type = /decl/hierarchy/outfit/job/voxship/crew
+	outfit_type = /singleton/hierarchy/outfit/job/voxship/crew
 	supervisors = "quill, apex and the arkship"
 	info = "Scrap is thin. Not much food is left, but thankfully the sector is quite rich, and it's time to get some more supplies. \
 	although staying on base is tempting. Plenty of nitrogen, and not much hazards to worry about."
@@ -115,7 +115,7 @@
 /datum/job/submap/voxship_vox/quill
 	title = "Quill"
 	total_positions = 1
-	outfit_type = /decl/hierarchy/outfit/job/voxship/crew
+	outfit_type = /singleton/hierarchy/outfit/job/voxship/crew
 	supervisors = "apex and the arkship"
 	info = "You're in charge. You fly the ship, and dictate what the crew does. Do not disappoint the Apex."
 	min_skill = list(
@@ -164,12 +164,12 @@ var/global/const/access_voxship = "ACCESS_VOXSHIP"
 /obj/machinery/door/airlock/hatch/voxship
 
 #define VOXSHIP_OUTFIT_JOB_NAME
-/decl/hierarchy/outfit/job/voxship
-	hierarchy_type = /decl/hierarchy/outfit/job/voxship
+/singleton/hierarchy/outfit/job/voxship
+	hierarchy_type = /singleton/hierarchy/outfit/job/voxship
 	l_ear = null
 	r_ear = null
 
-/decl/hierarchy/outfit/job/voxship/crew
+/singleton/hierarchy/outfit/job/voxship/crew
 	id_types = list(/obj/item/card/id/voxship)
 	name = ("Vox - Job - Shoal Scavenger")
 	uniform = /obj/item/clothing/under/vox/vox_robes

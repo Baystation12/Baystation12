@@ -85,7 +85,7 @@
 	result = /obj/item/reagent_containers/food/snacks/bacon/bugmeat
 
 
-/decl/hierarchy/supply_pack/galley/bugmeat
+/singleton/hierarchy/supply_pack/galley/bugmeat
 	name = "Perishables - Insect Protein"
 	contains = list(/obj/item/storage/fancy/bugmeat = 2)
 	containertype = /obj/item/storage/backpack/dufflebag

@@ -62,7 +62,7 @@
 	var/core_removal_stage = 0 //For removing cores.
 	var/datum/reagents/metabolism/ingested
 
-	traits = list(/decl/trait/malus/water = TRAIT_LEVEL_MODERATE)
+	traits = list(/singleton/trait/malus/water = TRAIT_LEVEL_MODERATE)
 
 /mob/living/carbon/slime/get_ingested_reagents()
 	return ingested

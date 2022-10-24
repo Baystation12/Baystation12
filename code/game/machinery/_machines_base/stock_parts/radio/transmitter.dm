@@ -33,7 +33,7 @@
 	var/list/transmit_on_change
 	var/list/transmit_on_tick
 
-/obj/item/stock_parts/radio/transmitter/basic/proc/var_changed(decl/public_access/public_variable/variable, obj/machinery/machine, old_value, new_value)
+/obj/item/stock_parts/radio/transmitter/basic/proc/var_changed(singleton/public_access/public_variable/variable, obj/machinery/machine, old_value, new_value)
 	var/list/L = list()
 	for(var/thing in transmit_on_change)
 		if(transmit_on_change[thing] == variable)
@@ -47,26 +47,26 @@
 	if(LAZYLEN(transmit_on_tick))
 		start_processing(machine)
 	for(var/thing in transmit_on_change)
-		var/decl/public_access/public_variable/variable = transmit_on_change[thing]
+		var/singleton/public_access/public_variable/variable = transmit_on_change[thing]
 		variable.register_listener(src, machine, .proc/var_changed)
 
 /obj/item/stock_parts/radio/transmitter/basic/on_uninstall(obj/machinery/machine)
 	for(var/thing in transmit_on_change)
-		var/decl/public_access/public_variable/variable = transmit_on_change[thing]
+		var/singleton/public_access/public_variable/variable = transmit_on_change[thing]
 		variable.unregister_listener(src, machine)
 	..()
 
 /obj/item/stock_parts/radio/transmitter/basic/Destroy()
 	if(istype(loc, /obj/machinery))
 		for(var/thing in transmit_on_change)
-			var/decl/public_access/public_variable/variable = transmit_on_change[thing]
+			var/singleton/public_access/public_variable/variable = transmit_on_change[thing]
 			variable.unregister_listener(src, loc)
 	. = ..()
 
 /obj/item/stock_parts/radio/transmitter/basic/machine_process(obj/machinery/machine)
 	var/list/L = list()
 	for(var/thing in transmit_on_tick)
-		var/decl/public_access/public_variable/variable = transmit_on_tick[thing]
+		var/singleton/public_access/public_variable/variable = transmit_on_tick[thing]
 		L[thing] = variable.access_var(machine)
 	queue_transmit(L)
 
@@ -74,11 +74,11 @@
 
 /obj/item/stock_parts/radio/transmitter/on_event
 	multitool_extension = /datum/extension/interactive/multitool/radio/event_transmitter
-	var/decl/public_access/public_variable/event
+	var/singleton/public_access/public_variable/event
 	var/list/transmit_on_event
 
-/obj/item/stock_parts/radio/transmitter/on_event/is_valid_event(obj/machinery/machine, decl/public_access/variable)
-	if(istype(variable, /decl/public_access/public_method))
+/obj/item/stock_parts/radio/transmitter/on_event/is_valid_event(obj/machinery/machine, singleton/public_access/variable)
+	if(istype(variable, /singleton/public_access/public_method))
 		return LAZYACCESS(machine.public_methods, variable.type)
 	return ..()
 
@@ -100,10 +100,10 @@
 		event.unregister_listener(src, loc)
 	. = ..()
 
-/obj/item/stock_parts/radio/transmitter/on_event/proc/trigger_event(decl/public_access/public_variable/variable, obj/machinery/machine, old_value, new_value)
+/obj/item/stock_parts/radio/transmitter/on_event/proc/trigger_event(singleton/public_access/public_variable/variable, obj/machinery/machine, old_value, new_value)
 	var/list/dat = list()
 	for(var/thing in transmit_on_event)
-		var/decl/public_access/public_variable/check_variable = transmit_on_event[thing]
+		var/singleton/public_access/public_variable/check_variable = transmit_on_event[thing]
 		dat[thing] = check_variable.access_var(machine)
 	queue_transmit(dat)
 

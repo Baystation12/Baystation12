@@ -28,7 +28,7 @@
 	event_delay_mod_moderate = 0.5		// As a bonus, more frequent events.
 	event_delay_mod_major = 0.3
 
-/decl/vv_set_handler/meteor_severity_handler
+/singleton/vv_set_handler/meteor_severity_handler
 	handled_type = /datum/game_mode/meteor
 	handled_vars = list(
 		"meteor_severity" = /datum/game_mode/meteor/proc/set_meteor_severity,

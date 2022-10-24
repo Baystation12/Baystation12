@@ -4,4 +4,4 @@
 /turf/simulated/floor/tiled/nullglass
 	name = "nullglass floor"
 	icon_state = "nullglass"
-	initial_flooring = /decl/flooring/tiling/nullglass
+	initial_flooring = /singleton/flooring/tiling/nullglass

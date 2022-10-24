@@ -594,12 +594,12 @@
 
 // Public access
 
-/decl/public_access/public_method/open_door
+/singleton/public_access/public_method/open_door
 	name = "open door"
 	desc = "Opens the door if possible."
 	call_proc = /obj/machinery/door/proc/open
 
-/decl/public_access/public_method/toggle_door
+/singleton/public_access/public_method/toggle_door
 	name = "toggle door"
 	desc = "Toggles whether the door is open or not, if possible."
 	call_proc = /obj/machinery/door/proc/toggle

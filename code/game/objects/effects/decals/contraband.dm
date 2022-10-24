@@ -15,16 +15,16 @@
 	var/poster_type
 
 /obj/item/contraband/poster/New(maploading, given_poster_type)
-	if(given_poster_type && !ispath(given_poster_type, /decl/poster))
+	if(given_poster_type && !ispath(given_poster_type, /singleton/poster))
 		CRASH("Invalid poster type: [log_info_line(given_poster_type)]")
 
 	poster_type = given_poster_type || poster_type
 	if(!poster_type)
-		poster_type = pick(subtypesof(/decl/poster))
+		poster_type = pick(subtypesof(/singleton/poster))
 	..()
 
 /obj/item/contraband/poster/Initialize()
-	var/list/posters = subtypesof(/decl/poster)
+	var/list/posters = subtypesof(/singleton/poster)
 	var/serial_number = posters.Find(poster_type)
 	name += " - No. [serial_number]"
 
@@ -91,13 +91,13 @@
 	var/torch_poster = FALSE //for torch-specific content
 
 /obj/structure/sign/poster/bay_9
-	poster_type = /decl/poster/bay_9
+	poster_type = /singleton/poster/bay_9
 
 /obj/structure/sign/poster/bay_50
-	poster_type = /decl/poster/bay_50
+	poster_type = /singleton/poster/bay_50
 
 /obj/structure/sign/poster/torch
-	poster_type = /decl/poster/torch
+	poster_type = /singleton/poster/torch
 	torch_poster = TRUE
 
 /obj/structure/sign/poster/New(newloc, placement_dir = null, give_poster_type = null)
@@ -107,9 +107,9 @@
 		if(give_poster_type)
 			poster_type = give_poster_type
 		else
-			poster_type = pick(subtypesof(/decl/poster) - typesof(/decl/poster/torch))
+			poster_type = pick(subtypesof(/singleton/poster) - typesof(/singleton/poster/torch))
 	if(torch_poster)
-		poster_type = pick(subtypesof(/decl/poster/torch))
+		poster_type = pick(subtypesof(/singleton/poster/torch))
 	set_poster(poster_type)
 
 	switch (placement_dir)
@@ -127,7 +127,7 @@
 			pixel_y = 0
 
 /obj/structure/sign/poster/proc/set_poster(poster_type)
-	var/decl/poster/design = decls_repository.get_decl(poster_type)
+	var/singleton/poster/design = Singletons.Get(poster_type)
 	SetName("[initial(name)] - [design.name]")
 	desc = "[initial(desc)] [design.desc]"
 	icon_state = design.icon_state
@@ -166,7 +166,7 @@
 	new/obj/item/contraband/poster(newloc, poster_type)
 	qdel(src)
 
-/decl/poster
+/singleton/poster
 	// Name suffix. Poster - [name]
 	var/name=""
 	// Description suffix

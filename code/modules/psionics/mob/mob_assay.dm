@@ -63,7 +63,7 @@
 			dat += "<hr>"
 
 			for(var/faculty_id in psi.ranks)
-				var/decl/psionic_faculty/faculty = SSpsi.get_faculty(faculty_id)
+				var/singleton/psionic_faculty/faculty = SSpsi.get_faculty(faculty_id)
 				if(psi.ranks[faculty.id] > 0)
 					dat += "[use_He_is] assayed at the rank of <b>[GLOB.psychic_ranks_to_strings[psi.ranks[faculty.id]]]</b> for the <b>[faculty.name] faculty</b>.<br>"
 				else
@@ -75,9 +75,9 @@
 				for(var/faculty_id in psi.ranks)
 					var/list/check_powers = psi.get_powers_by_faculty(faculty_id)
 					if(LAZYLEN(check_powers))
-						var/decl/psionic_faculty/faculty = SSpsi.get_faculty(faculty_id)
+						var/singleton/psionic_faculty/faculty = SSpsi.get_faculty(faculty_id)
 						dat += "<tr><td colspan = 2>[use_He_has] access to the following psi-powers within the <b>[faculty.name] faculty</b>:</td></tr>"
-						for(var/decl/psionic_power/power in check_powers)
+						for(var/singleton/psionic_power/power in check_powers)
 							dat += "<tr><td><b>[power.name]</b></td><td>[power.use_description]</td></tr>"
 				dat += "</table>"
 	else

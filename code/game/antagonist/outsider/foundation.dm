@@ -38,7 +38,7 @@ GLOBAL_DATUM_INIT(foundation_agents, /datum/antagonist/foundation, new)
 	player.set_psi_rank(PSI_ENERGISTICS,   3, defer_update = TRUE)
 	player.psi.update(TRUE)
 
-	var/decl/hierarchy/outfit/foundation = outfit_by_type(/decl/hierarchy/outfit/foundation)
+	var/singleton/hierarchy/outfit/foundation = outfit_by_type(/singleton/hierarchy/outfit/foundation)
 	foundation.equip(player)
 
 	create_id("Foundation Agent", player)

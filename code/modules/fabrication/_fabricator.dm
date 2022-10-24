@@ -13,7 +13,7 @@
 	stat_immune = 0
 	wires =           /datum/wires/fabricator
 	base_type =       /obj/machinery/fabricator
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 
 	machine_name = "autolathe"
 	machine_desc = "Autolathes can produce a very wide array of useful objects from raw materials."
@@ -77,7 +77,7 @@
 				var/datum/reagent/reg = mat
 				stored_substances_to_names[mat] = initial(reg.name)
 
-/obj/machinery/fabricator/state_transition(decl/machine_construction/default/new_state)
+/obj/machinery/fabricator/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state))
 		updateUsrDialog()

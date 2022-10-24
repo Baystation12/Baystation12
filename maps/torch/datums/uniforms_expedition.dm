@@ -1,4 +1,4 @@
-/decl/hierarchy/mil_uniform/ec/com //Can only be officers
+/singleton/hierarchy/mil_uniform/ec/com //Can only be officers
 	name = "EC command"
 	min_rank = 11
 	departments = COM
@@ -18,7 +18,7 @@
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-/decl/hierarchy/mil_uniform/ec/com/cdr //Can only be officers
+/singleton/hierarchy/mil_uniform/ec/com/cdr //Can only be officers
 	name = "EC senior command"
 	min_rank = 15
 
@@ -27,7 +27,7 @@
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command/cdr
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/senior_command
 
-/decl/hierarchy/mil_uniform/ec/com/capt //Can only be officers
+/singleton/hierarchy/mil_uniform/ec/com/capt //Can only be officers
 	name = "EC captain"
 	min_rank = 16
 
@@ -38,7 +38,7 @@
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command/capt
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/captain
 
-/decl/hierarchy/mil_uniform/ec/com/adm //Can only be officers
+/singleton/hierarchy/mil_uniform/ec/com/adm //Can only be officers
 	name = "EC admiral"
 	min_rank = 18
 
@@ -47,7 +47,7 @@
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command/adm
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/captain
 
-/decl/hierarchy/mil_uniform/ec/eng
+/singleton/hierarchy/mil_uniform/ec/eng
 	name = "EC engineering"
 	departments = ENG
 
@@ -64,19 +64,19 @@
 	dress_skirt = /obj/item/clothing/under/solgov/dress/expeditionary/skirt/engineering
 
 
-/decl/hierarchy/mil_uniform/ec/eng/senior
+/singleton/hierarchy/mil_uniform/ec/eng/senior
 	name = "EC engineering senior"
 	min_rank = 5
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/senior
 
-/decl/hierarchy/mil_uniform/ec/eng/chief
+/singleton/hierarchy/mil_uniform/ec/eng/chief
 	name = "EC engineering chief"
 	min_rank = 7
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/chief
 
-/decl/hierarchy/mil_uniform/ec/eng/officer
+/singleton/hierarchy/mil_uniform/ec/eng/officer
 	name = "EC engineering CO"
 	min_rank = 11
 
@@ -96,11 +96,11 @@
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-/decl/hierarchy/mil_uniform/ec/eng/officer/com //Can only be officers
+/singleton/hierarchy/mil_uniform/ec/eng/officer/com //Can only be officers
 	name = "EC engineering command"
 	departments = ENG|COM
 
-/decl/hierarchy/mil_uniform/ec/sec
+/singleton/hierarchy/mil_uniform/ec/sec
 	name = "EC security"
 	departments = SEC
 
@@ -115,19 +115,19 @@
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/security
 	dress_skirt = /obj/item/clothing/under/solgov/dress/expeditionary/skirt/security
 
-/decl/hierarchy/mil_uniform/ec/sec/senior
+/singleton/hierarchy/mil_uniform/ec/sec/senior
 	name = "EC security senior"
 	min_rank = 5
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/senior
 
-/decl/hierarchy/mil_uniform/ec/sec/chief
+/singleton/hierarchy/mil_uniform/ec/sec/chief
 	name = "EC security chief"
 	min_rank = 7
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/chief
 
-/decl/hierarchy/mil_uniform/ec/sec/officer
+/singleton/hierarchy/mil_uniform/ec/sec/officer
 	name = "EC security CO"
 	min_rank = 11
 
@@ -147,11 +147,11 @@
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-/decl/hierarchy/mil_uniform/ec/sec/officer/com //Can only be officers
+/singleton/hierarchy/mil_uniform/ec/sec/officer/com //Can only be officers
 	name = "EC security command"
 	departments = SEC|COM
 
-/decl/hierarchy/mil_uniform/ec/med
+/singleton/hierarchy/mil_uniform/ec/med
 	name = "EC medical"
 	departments = MED
 
@@ -166,19 +166,19 @@
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/medical
 	dress_skirt = /obj/item/clothing/under/solgov/dress/expeditionary/skirt/medical
 
-/decl/hierarchy/mil_uniform/ec/med/senior
+/singleton/hierarchy/mil_uniform/ec/med/senior
 	name = "EC medical senior"
 	min_rank = 5
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/senior
 
-/decl/hierarchy/mil_uniform/ec/med/chief
+/singleton/hierarchy/mil_uniform/ec/med/chief
 	name = "EC medical chief"
 	min_rank = 7
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/chief
 
-/decl/hierarchy/mil_uniform/ec/med/officer
+/singleton/hierarchy/mil_uniform/ec/med/officer
 	name = "EC medical CO"
 	min_rank = 11
 
@@ -198,11 +198,11 @@
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-/decl/hierarchy/mil_uniform/ec/med/officer/com //Can only be officers
+/singleton/hierarchy/mil_uniform/ec/med/officer/com //Can only be officers
 	name = "EC medical command"
 	departments = MED|COM
 
-/decl/hierarchy/mil_uniform/ec/sup
+/singleton/hierarchy/mil_uniform/ec/sup
 	name = "EC supply"
 	departments = SUP
 
@@ -217,19 +217,19 @@
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/supply
 	dress_skirt = /obj/item/clothing/under/solgov/dress/expeditionary/skirt/supply
 
-/decl/hierarchy/mil_uniform/ec/sup/senior
+/singleton/hierarchy/mil_uniform/ec/sup/senior
 	name = "EC supply senior"
 	min_rank = 5
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/senior
 
-/decl/hierarchy/mil_uniform/ec/sup/chief
+/singleton/hierarchy/mil_uniform/ec/sup/chief
 	name = "EC supply chief"
 	min_rank = 7
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/chief
 
-/decl/hierarchy/mil_uniform/ec/sup/officer
+/singleton/hierarchy/mil_uniform/ec/sup/officer
 	name = "EC supply CO"
 	min_rank = 11
 
@@ -249,7 +249,7 @@
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-/decl/hierarchy/mil_uniform/ec/srv
+/singleton/hierarchy/mil_uniform/ec/srv
 	name = "EC service"
 	departments = SRV
 
@@ -264,19 +264,19 @@
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/service
 	dress_skirt = /obj/item/clothing/under/solgov/dress/expeditionary/skirt/service
 
-/decl/hierarchy/mil_uniform/ec/srv/senior
+/singleton/hierarchy/mil_uniform/ec/srv/senior
 	name = "EC service senior"
 	min_rank = 5
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/senior
 
-/decl/hierarchy/mil_uniform/ec/srv/chief
+/singleton/hierarchy/mil_uniform/ec/srv/chief
 	name = "EC service chief"
 	min_rank = 7
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/chief
 
-/decl/hierarchy/mil_uniform/ec/srv/officer
+/singleton/hierarchy/mil_uniform/ec/srv/officer
 	name = "EC service CO"
 	min_rank = 11
 
@@ -296,7 +296,7 @@
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-/decl/hierarchy/mil_uniform/ec/exp
+/singleton/hierarchy/mil_uniform/ec/exp
 	name = "EC exploration"
 	departments = EXP
 
@@ -311,19 +311,19 @@
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/exploration
 	dress_skirt = /obj/item/clothing/under/solgov/dress/expeditionary/skirt/exploration
 
-/decl/hierarchy/mil_uniform/ec/exp/senior
+/singleton/hierarchy/mil_uniform/ec/exp/senior
 	name = "EC exploration senior"
 	min_rank = 5
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/senior
 
-/decl/hierarchy/mil_uniform/ec/exp/chief
+/singleton/hierarchy/mil_uniform/ec/exp/chief
 	name = "EC exploration chief"
 	min_rank = 7
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/chief
 
-/decl/hierarchy/mil_uniform/ec/exp/officer
+/singleton/hierarchy/mil_uniform/ec/exp/officer
 	name = "EC exploration CO"
 	min_rank = 11
 
@@ -343,7 +343,7 @@
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-/decl/hierarchy/mil_uniform/ec/spt
+/singleton/hierarchy/mil_uniform/ec/spt
 	name = "EC command support"
 	departments = SPT
 
@@ -359,19 +359,19 @@
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command
 	dress_skirt = /obj/item/clothing/under/solgov/dress/expeditionary/command/skirt
 
-/decl/hierarchy/mil_uniform/ec/spt/senior
+/singleton/hierarchy/mil_uniform/ec/spt/senior
 	name = "EC command support senior"
 	min_rank = 5
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/senior
 
-/decl/hierarchy/mil_uniform/ec/spt/chief
+/singleton/hierarchy/mil_uniform/ec/spt/chief
 	name = "EC command support chief"
 	min_rank = 7
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/chief
 
-/decl/hierarchy/mil_uniform/ec/spt/officer
+/singleton/hierarchy/mil_uniform/ec/spt/officer
 	name = "EC command support CO"
 	min_rank = 11
 
@@ -385,7 +385,7 @@
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-/decl/hierarchy/mil_uniform/ec/sci
+/singleton/hierarchy/mil_uniform/ec/sci
 	name = "EC science"
 	departments = SCI
 
@@ -400,19 +400,19 @@
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/research
 	dress_skirt = /obj/item/clothing/under/solgov/dress/expeditionary/skirt/research
 
-/decl/hierarchy/mil_uniform/ec/sci/senior
+/singleton/hierarchy/mil_uniform/ec/sci/senior
 	name = "EC science senior"
 	min_rank = 5
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/senior
 
-/decl/hierarchy/mil_uniform/ec/sci/chief
+/singleton/hierarchy/mil_uniform/ec/sci/chief
 	name = "EC science chief"
 	min_rank = 7
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/chief
 
-/decl/hierarchy/mil_uniform/ec/sci/officer
+/singleton/hierarchy/mil_uniform/ec/sci/officer
 	name = "EC science CO"
 	min_rank = 11
 
@@ -431,7 +431,7 @@
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
-/decl/hierarchy/mil_uniform/ec/sci/officer/com //Can only be officers
+/singleton/hierarchy/mil_uniform/ec/sci/officer/com //Can only be officers
 	name = "EC science command"
 	departments = SCI|COM
 

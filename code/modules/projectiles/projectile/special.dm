@@ -101,7 +101,7 @@
 	damage = 0
 	damage_type = DAMAGE_TOXIN
 	nodamage = TRUE
-	var/decl/plantgene/gene = null
+	var/singleton/plantgene/gene = null
 
 /obj/item/projectile/energy/florayield
 	name = "beta somatoray"

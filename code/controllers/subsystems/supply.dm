@@ -33,10 +33,10 @@ SUBSYSTEM_DEF(supply)
 	ordernum = rand(1,9000)
 
 	//Build master supply list
-	var/decl/hierarchy/supply_pack/root = decls_repository.get_decl(/decl/hierarchy/supply_pack)
-	for(var/decl/hierarchy/supply_pack/sp in root.children)
+	var/singleton/hierarchy/supply_pack/root = Singletons.Get(/singleton/hierarchy/supply_pack)
+	for(var/singleton/hierarchy/supply_pack/sp in root.children)
 		if(sp.is_category())
-			for(var/decl/hierarchy/supply_pack/spc in sp.get_descendents())
+			for(var/singleton/hierarchy/supply_pack/spc in sp.get_descendents())
 				spc.setup()
 				master_supply_list += spc
 
@@ -154,7 +154,7 @@ SUBSYSTEM_DEF(supply)
 		donelist += S
 
 		var/datum/supply_order/SO = S
-		var/decl/hierarchy/supply_pack/SP = SO.object
+		var/singleton/hierarchy/supply_pack/SP = SO.object
 
 		var/obj/A = new SP.containertype(pickedloc)
 		A.SetName("[SP.containername][SO.comment ? " ([SO.comment])":"" ]")
@@ -200,7 +200,7 @@ SUBSYSTEM_DEF(supply)
 
 /datum/supply_order
 	var/ordernum
-	var/decl/hierarchy/supply_pack/object = null
+	var/singleton/hierarchy/supply_pack/object = null
 	var/orderedby = null
 	var/comment = null
 	var/reason = null

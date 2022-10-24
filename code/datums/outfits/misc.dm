@@ -1,4 +1,4 @@
-/decl/hierarchy/outfit/standard_space_gear
+/singleton/hierarchy/outfit/standard_space_gear
 	name = "Standard space gear"
 	shoes = /obj/item/clothing/shoes/black
 	head = /obj/item/clothing/head/helmet/space/fishbowl
@@ -8,7 +8,7 @@
 	mask = /obj/item/clothing/mask/breath
 	flags = OUTFIT_HAS_JETPACK|OUTFIT_RESET_EQUIPMENT
 
-/decl/hierarchy/outfit/soviet_soldier
+/singleton/hierarchy/outfit/soviet_soldier
 	name = "Soviet soldier"
 	uniform = /obj/item/clothing/under/soviet
 	shoes = /obj/item/clothing/shoes/combat
@@ -17,7 +17,7 @@
 	back = /obj/item/storage/backpack/satchel
 	belt = /obj/item/gun/projectile/revolver
 
-/decl/hierarchy/outfit/soviet_soldier/admiral
+/singleton/hierarchy/outfit/soviet_soldier/admiral
 	name = "Soviet admiral"
 	head = /obj/item/clothing/head/hgpiratecap
 	l_ear = /obj/item/device/radio/headset/heads/captain
@@ -28,7 +28,7 @@
 	id_types = list(/obj/item/card/id/centcom/station)
 	id_pda_assignment = "Admiral"
 
-/decl/hierarchy/outfit/merchant
+/singleton/hierarchy/outfit/merchant
 	name = "Merchant"
 	shoes = /obj/item/clothing/shoes/black
 	l_ear = /obj/item/device/radio/headset/merchant
@@ -39,13 +39,13 @@
 	pda_type = /obj/item/modular_computer/pda //cause I like the look
 	id_pda_assignment = "Merchant"
 
-/decl/hierarchy/outfit/merchant/vox
+/singleton/hierarchy/outfit/merchant/vox
 	name = "Merchant - Vox"
 	shoes = /obj/item/clothing/shoes/jackboots/unathi
 	uniform = /obj/item/clothing/under/vox/vox_robes
 	suit = /obj/item/clothing/suit/armor/vox_scrap
 
-/decl/hierarchy/outfit/clown
+/singleton/hierarchy/outfit/clown
 	name = "Clown"
 	shoes = /obj/item/clothing/shoes/clown_shoes
 	mask = /obj/item/clothing/mask/gas/clown_hat
@@ -54,11 +54,11 @@
 	l_pocket = /obj/item/bikehorn
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_RESET_EQUIPMENT
 
-/decl/hierarchy/outfit/clown/New()
+/singleton/hierarchy/outfit/clown/New()
 	..()
-	backpack_overrides[/decl/backpack_outfit/backpack] = /obj/item/storage/backpack/clown
+	backpack_overrides[/singleton/backpack_outfit/backpack] = /obj/item/storage/backpack/clown
 
-/decl/hierarchy/outfit/vox_raider
+/singleton/hierarchy/outfit/vox_raider
 	name = "Vox Raider"
 	uniform = /obj/item/clothing/under/vox/vox_casual
 	shoes = /obj/item/clothing/shoes/magboots/vox
@@ -73,4 +73,3 @@
 
 
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_RESET_EQUIPMENT
-

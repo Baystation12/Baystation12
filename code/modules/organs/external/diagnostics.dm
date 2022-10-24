@@ -131,9 +131,9 @@
 		return
 
 	var/list/badness = list()
-	var/list/symptoms = decls_repository.get_decls_of_subtype(/decl/diagnostic_sign)
+	var/list/symptoms = Singletons.GetSubtypesAssoc(/singleton/diagnostic_sign)
 	for(var/S in symptoms)
-		var/decl/diagnostic_sign/sign = symptoms[S]
+		var/singleton/diagnostic_sign/sign = symptoms[S]
 		if(sign.manifested_in(src))
 			badness += sign.get_description(user)
 	if(!badness.len)
@@ -173,21 +173,21 @@
 			sounds += "faint pulse"
 	return sounds
 
-/decl/diagnostic_sign
+/singleton/diagnostic_sign
 	var/name = "Some symptom"
 	var/descriptor
 	var/explanation
 	var/hint_min_skill = SKILL_BASIC
 
 //Checks conditions for this sign to appear
-/decl/diagnostic_sign/proc/manifested_in(obj/item/organ/external/victim)
+/singleton/diagnostic_sign/proc/manifested_in(obj/item/organ/external/victim)
 
-/decl/diagnostic_sign/proc/get_description(mob/user)
+/singleton/diagnostic_sign/proc/get_description(mob/user)
 	. = descriptor
 	if(user && user.skill_check(SKILL_MEDICAL, hint_min_skill))
 		. += "<small><a href='?src=\ref[src];show_diagnostic_hint=1'>(?)</a></small>"
 
-/decl/diagnostic_sign/Topic(href, list/href_list)
+/singleton/diagnostic_sign/Topic(href, list/href_list)
 	. = ..()
 	if(.)
 		return
@@ -195,42 +195,42 @@
 		to_chat(usr, SPAN_NOTICE("[name] - [explanation]"))
 		return TOPIC_HANDLED
 
-/decl/diagnostic_sign/shock
+/singleton/diagnostic_sign/shock
 	name = "Clammy skin"
 	descriptor = "clammy and cool to the touch"
 	explanation = "Patient is in shock from severe pain."
 
-/decl/diagnostic_sign/shock/manifested_in(obj/item/organ/external/victim)
+/singleton/diagnostic_sign/shock/manifested_in(obj/item/organ/external/victim)
 	return victim.owner && victim.owner.shock_stage >= 30
 
-/decl/diagnostic_sign/liver
+/singleton/diagnostic_sign/liver
 	name = "Jaundice"
 	descriptor = "jaundiced"
 	explanation = "Patient has internal organ damage."
 
-/decl/diagnostic_sign/liver/manifested_in(obj/item/organ/external/victim)
+/singleton/diagnostic_sign/liver/manifested_in(obj/item/organ/external/victim)
 	return victim.owner && victim.owner.getToxLoss() >= 25
 
-/decl/diagnostic_sign/oxygenation
+/singleton/diagnostic_sign/oxygenation
 	name = "Cyanosis"
 	descriptor = "turning blue"
 	explanation = "Patient has low blood oxygenation."
 
-/decl/diagnostic_sign/oxygenation/manifested_in(obj/item/organ/external/victim)
+/singleton/diagnostic_sign/oxygenation/manifested_in(obj/item/organ/external/victim)
 	return victim.owner && victim.owner.get_blood_oxygenation() <= 50
 
-/decl/diagnostic_sign/circulation
+/singleton/diagnostic_sign/circulation
 	name = "Paleness"
 	descriptor = "very pale"
 	explanation = "Patient has issues with blood circulaion or volume."
 
-/decl/diagnostic_sign/circulation/manifested_in(obj/item/organ/external/victim)
+/singleton/diagnostic_sign/circulation/manifested_in(obj/item/organ/external/victim)
 	return victim.owner && victim.owner.get_blood_circulation() <= 60
 
-/decl/diagnostic_sign/gangrene
+/singleton/diagnostic_sign/gangrene
 	name = "Rot"
 	descriptor = "rotting"
 	explanation = "Patient has lost this bodypart to an irreversible bacterial infection."
 
-/decl/diagnostic_sign/gangrene/manifested_in(obj/item/organ/external/victim)
+/singleton/diagnostic_sign/gangrene/manifested_in(obj/item/organ/external/victim)
 	return victim.status & ORGAN_DEAD

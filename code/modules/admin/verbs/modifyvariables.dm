@@ -573,9 +573,9 @@
 
 /client/proc/special_set_vv_var(datum/O, variable, var_value, client)
 	if(!vv_set_handlers)
-		vv_set_handlers = init_subtypes(/decl/vv_set_handler)
+		vv_set_handlers = init_subtypes(/singleton/vv_set_handler)
 	for(var/vv_handler in vv_set_handlers)
-		var/decl/vv_set_handler/sh = vv_handler
+		var/singleton/vv_set_handler/sh = vv_handler
 		if(sh.can_handle_set_var(O, variable, var_value, client))
 			sh.handle_set_var(O, variable, var_value, client)
 			return TRUE

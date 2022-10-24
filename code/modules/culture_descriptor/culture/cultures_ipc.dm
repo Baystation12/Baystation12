@@ -1,4 +1,4 @@
-/decl/cultural_info/culture/ipc
+/singleton/cultural_info/culture/ipc
 	name = CULTURE_POSITRONICS
 	description = "Union members are a significant chunk of the positronic population, belonging to a \
 	group of rebels started by Proteus and five hundred of his allies. Their primary goals, aside from \
@@ -16,5 +16,5 @@
 		LANGUAGE_SIGN
 	)
 
-/decl/cultural_info/culture/ipc/sanitize_name(new_name)
+/singleton/cultural_info/culture/ipc/sanitize_name(new_name)
 	return sanitizeName(new_name, allow_numbers = 1)

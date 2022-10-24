@@ -7,4 +7,4 @@
 		to_chat(src, "Only administrators may use this command.")
 		return
 
-	sanitize_and_communicate(/decl/communication_channel/dsay, src, msg, /decl/dsay_communication/admin)
+	sanitize_and_communicate(/singleton/communication_channel/dsay, src, msg, /singleton/dsay_communication/admin)

@@ -5,7 +5,7 @@
 	icon_state = "generator0"
 	density = TRUE
 	base_type = /obj/machinery/power/shield_generator
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 	wires = /datum/wires/shield_generator
 	uncreated_component_parts = null
 	stat_immune = 0

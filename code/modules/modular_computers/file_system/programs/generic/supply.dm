@@ -48,7 +48,7 @@
 /datum/nano_module/supply/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()
 	var/is_admin = emagged || check_access(user, admin_access)
-	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/singleton/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
 	if(!LAZYLEN(category_names) || !LAZYLEN(category_contents) || current_security_level != security_state.current_security_level || emagged_memory != emagged )
 		generate_categories()
 		current_security_level = security_state.current_security_level
@@ -147,7 +147,7 @@
 
 	if(href_list["order"])
 		clear_order_contents()
-		var/decl/hierarchy/supply_pack/P = locate(href_list["order"]) in SSsupply.master_supply_list
+		var/singleton/hierarchy/supply_pack/P = locate(href_list["order"]) in SSsupply.master_supply_list
 		if(!istype(P))
 			return 1
 
@@ -295,13 +295,13 @@
 /datum/nano_module/supply/proc/generate_categories()
 	category_names.Cut()
 	category_contents.Cut()
-	var/decl/hierarchy/supply_pack/root = decls_repository.get_decl(/decl/hierarchy/supply_pack)
-	for(var/decl/hierarchy/supply_pack/sp in root.children)
+	var/singleton/hierarchy/supply_pack/root = Singletons.Get(/singleton/hierarchy/supply_pack)
+	for(var/singleton/hierarchy/supply_pack/sp in root.children)
 		if(!sp.is_category())
 			continue // No children
 		category_names.Add(sp.name)
 		var/list/category[0]
-		for(var/decl/hierarchy/supply_pack/spc in sp.get_descendents())
+		for(var/singleton/hierarchy/supply_pack/spc in sp.get_descendents())
 			if((spc.hidden || spc.contraband || !spc.sec_available()) && !emagged)
 				continue
 			category.Add(list(list(
@@ -312,7 +312,7 @@
 		category_contents[sp.name] = category
 
 /datum/nano_module/supply/proc/generate_order_contents(order_ref)
-	var/decl/hierarchy/supply_pack/sp = locate(order_ref) in SSsupply.master_supply_list
+	var/singleton/hierarchy/supply_pack/sp = locate(order_ref) in SSsupply.master_supply_list
 	if(!istype(sp))
 		return FALSE
 	contents_of_order.Cut()

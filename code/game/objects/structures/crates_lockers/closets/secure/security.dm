@@ -1,7 +1,7 @@
 /obj/structure/closet/secure_closet/captains
 	name = "captain's locker"
 	req_access = list(access_captain)
-	closet_appearance = /decl/closet_appearance/secure_closet/command
+	closet_appearance = /singleton/closet_appearance/secure_closet/command
 
 /obj/structure/closet/secure_closet/captains/WillContain()
 	return list(
@@ -26,7 +26,7 @@
 
 /obj/structure/closet/secure_closet/hop
 	name = "head of personnel's locker"
-	closet_appearance = /decl/closet_appearance/secure_closet/command/hop
+	closet_appearance = /singleton/closet_appearance/secure_closet/command/hop
 	req_access = list(access_hop)
 
 /obj/structure/closet/secure_closet/hop/WillContain()
@@ -42,7 +42,7 @@
 /obj/structure/closet/secure_closet/hop2
 	name = "head of personnel's attire"
 	req_access = list(access_hop)
-	closet_appearance = /decl/closet_appearance/secure_closet/command/hop
+	closet_appearance = /singleton/closet_appearance/secure_closet/command/hop
 
 /obj/structure/closet/secure_closet/hop2/WillContain()
 	return list(
@@ -64,7 +64,7 @@
 /obj/structure/closet/secure_closet/hos
 	name = "head of security's locker"
 	req_access = list(access_hos)
-	closet_appearance = /decl/closet_appearance/secure_closet/security/hos
+	closet_appearance = /singleton/closet_appearance/secure_closet/security/hos
 
 /obj/structure/closet/secure_closet/hos/WillContain()
 	return list(
@@ -96,7 +96,7 @@
 /obj/structure/closet/secure_closet/warden
 	name = "warden's locker"
 	req_access = list(access_armory)
-	closet_appearance = /decl/closet_appearance/secure_closet/security/warden
+	closet_appearance = /singleton/closet_appearance/secure_closet/security/warden
 
 /obj/structure/closet/secure_closet/warden/WillContain()
 	return list(
@@ -126,7 +126,7 @@
 /obj/structure/closet/secure_closet/security
 	name = "security officer's locker"
 	req_access = list(access_brig)
-	closet_appearance = /decl/closet_appearance/secure_closet/security
+	closet_appearance = /singleton/closet_appearance/secure_closet/security
 
 /obj/structure/closet/secure_closet/security/WillContain()
 	return list(
@@ -174,7 +174,7 @@
 /obj/structure/closet/secure_closet/detective
 	name = "detective's cabinet"
 	req_access = list(access_forensics_lockers)
-	closet_appearance = /decl/closet_appearance/cabinet/secure
+	closet_appearance = /singleton/closet_appearance/cabinet/secure
 
 /obj/structure/closet/secure_closet/detective/WillContain()
 	return list(
@@ -236,7 +236,7 @@
 /obj/structure/closet/secure_closet/wall
 	name = "wall locker"
 	req_access = list(access_security)
-	closet_appearance = /decl/closet_appearance/wall
+	closet_appearance = /singleton/closet_appearance/wall
 
 	//too small to put a man in
 	large = 0

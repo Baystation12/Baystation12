@@ -9,7 +9,7 @@
 	var/image/hud_overlay/hud_overlay
 
 	var/cleanable_scent
-	var/scent_intensity = /decl/scent_intensity/normal
+	var/scent_intensity = /singleton/scent_intensity/normal
 	var/scent_descriptor = SCENT_DESC_SMELL
 	var/scent_range = 2
 

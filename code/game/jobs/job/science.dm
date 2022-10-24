@@ -16,7 +16,7 @@
 			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch, access_network, access_network_admin, access_research_storage)
 	minimal_player_age = 14
 	ideal_character_age = 50
-	outfit_type = /decl/hierarchy/outfit/job/science/rd
+	outfit_type = /singleton/hierarchy/outfit/job/science/rd
 
 /datum/job/scientist
 	title = "Scientist"
@@ -31,7 +31,7 @@
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch, access_network, access_research_storage)
 	alt_titles = list("Xenoarcheologist", "Anomalist", "Phoron Researcher")
 	minimal_player_age = 7
-	outfit_type = /decl/hierarchy/outfit/job/science/scientist
+	outfit_type = /singleton/hierarchy/outfit/job/science/scientist
 
 /datum/job/xenobiologist
 	title = "Xenobiologist"
@@ -46,7 +46,7 @@
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_hydroponics, access_research_storage)
 	alt_titles = list("Xenobotanist")
 	minimal_player_age = 7
-	outfit_type = /decl/hierarchy/outfit/job/science/xenobiologist
+	outfit_type = /singleton/hierarchy/outfit/job/science/xenobiologist
 
 /datum/job/roboticist
 	title = "Roboticist"
@@ -61,4 +61,4 @@
 	access = list(access_robotics, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research, access_network) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	alt_titles = list("Biomechanical Engineer","Mechatronic Engineer")
 	minimal_player_age = 3
-	outfit_type = /decl/hierarchy/outfit/job/science/roboticist
+	outfit_type = /singleton/hierarchy/outfit/job/science/roboticist

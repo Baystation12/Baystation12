@@ -18,7 +18,7 @@
 
 	var/storage_types = CLOSET_STORAGE_ALL
 	var/setup = CLOSET_CAN_BE_WELDED
-	var/closet_appearance = /decl/closet_appearance
+	var/closet_appearance = /singleton/closet_appearance
 	material = MATERIAL_STEEL
 
 	// TODO: Turn these into flags. Skipped it for now because it requires updating 100+ locations...
@@ -33,7 +33,7 @@
 		verbs += /obj/structure/closet/proc/togglelock_verb
 
 	if(ispath(closet_appearance))
-		var/decl/closet_appearance/app = decls_repository.get_decl(closet_appearance)
+		var/singleton/closet_appearance/app = Singletons.Get(closet_appearance)
 		if(app)
 			icon = app.icon
 			color = null

@@ -15,7 +15,7 @@ Note: Must be placed within 3 tiles of the R&D Console
 
 	idle_power_usage = 30
 	active_power_usage = 2500
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 
 	machine_name = "destructive analyzer"
 	machine_desc = "Breaks down objects into their component parts, gaining new information in the process. Part of an R&D network."
@@ -35,7 +35,7 @@ Note: Must be placed within 3 tiles of the R&D Console
 	else
 		icon_state = "d_analyzer"
 
-/obj/machinery/r_n_d/destructive_analyzer/state_transition(decl/machine_construction/default/new_state)
+/obj/machinery/r_n_d/destructive_analyzer/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state) && linked_console)
 		linked_console.linked_destroy = null

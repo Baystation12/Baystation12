@@ -9,9 +9,9 @@
 //			/atom/old_loc: The atom the enterer came from
 //
 
-GLOBAL_DATUM_INIT(entered_event, /decl/observ/entered, new)
+GLOBAL_DATUM_INIT(entered_event, /singleton/observ/entered, new)
 
-/decl/observ/entered
+/singleton/observ/entered
 	name = "Entered"
 	expected_type = /atom
 

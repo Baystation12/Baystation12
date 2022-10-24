@@ -10,9 +10,9 @@
 /obj/machinery/constructable_frame/computerframe/on_update_icon()
 	overlays.Cut()
 	switch(construct_state && construct_state.type)
-		if(/decl/machine_construction/frame/awaiting_circuit)
+		if(/singleton/machine_construction/frame/awaiting_circuit)
 			icon_state = "wired"
-		if(/decl/machine_construction/frame/awaiting_parts)
+		if(/singleton/machine_construction/frame/awaiting_parts)
 			icon_state = "wired"
 			overlays += "circuit"
 		else
@@ -20,4 +20,4 @@
 
 /obj/machinery/constructable_frame/computerframe/deconstruct
 	anchored = TRUE
-	construct_state = /decl/machine_construction/frame/awaiting_circuit
+	construct_state = /singleton/machine_construction/frame/awaiting_circuit

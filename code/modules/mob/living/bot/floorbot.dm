@@ -13,7 +13,7 @@
 	var/improvefloors = 0
 	var/eattiles = 0
 	var/maketiles = 0
-	var/floor_build_type = /decl/flooring/tiling // Basic steel floor.
+	var/floor_build_type = /singleton/flooring/tiling // Basic steel floor.
 	var/boxtype = "blue"
 
 /mob/living/bot/floorbot/premade
@@ -175,7 +175,7 @@
 			anchored = TRUE
 			if(do_after(src, 5 SECONDS, F, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				if(!F.flooring)
-					F.set_flooring(decls_repository.get_decl(floor_build_type))
+					F.set_flooring(Singletons.Get(floor_build_type))
 					addTiles(-1)
 			anchored = FALSE
 			target = null

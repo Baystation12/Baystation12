@@ -18,17 +18,17 @@ PROCESSING_SUBSYSTEM_DEF(psi)
 	return faculties_by_name[faculty] || faculties_by_id[faculty]
 
 /datum/controller/subsystem/processing/psi/Initialize(start_uptime)
-	var/list/faculties = decls_repository.get_decls_of_subtype(/decl/psionic_faculty)
+	var/list/faculties = Singletons.GetSubtypesAssoc(/singleton/psionic_faculty)
 	for(var/ftype in faculties)
-		var/decl/psionic_faculty/faculty = faculties[ftype]
+		var/singleton/psionic_faculty/faculty = faculties[ftype]
 		faculties_by_id[faculty.id] = faculty
 		faculties_by_name[faculty.name] = faculty
 		faculties_by_intent[faculty.associated_intent] = faculty.id
 
-	var/list/powers = decls_repository.get_decls_of_subtype(/decl/psionic_power)
+	var/list/powers = Singletons.GetSubtypesAssoc(/singleton/psionic_power)
 	for(var/ptype in powers)
-		var/decl/psionic_power/power = powers[ptype]
+		var/singleton/psionic_power/power = powers[ptype]
 		if(!is_abstract(power) && power.faculty)
-			var/decl/psionic_faculty/faculty = get_faculty(power.faculty)
+			var/singleton/psionic_faculty/faculty = get_faculty(power.faculty)
 			if(faculty)
 				faculty.powers |= power

@@ -1,7 +1,7 @@
 /obj/structure/closet/crate/secure/loot
 	name = "abandoned crate"
 	desc = "What could be inside?"
-	closet_appearance = /decl/closet_appearance/crate/secure
+	closet_appearance = /singleton/closet_appearance/crate/secure
 	var/list/code = list()
 	var/list/lastattempt = list()
 	var/attempts = 10

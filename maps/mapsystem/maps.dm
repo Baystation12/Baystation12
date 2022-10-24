@@ -90,12 +90,12 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/list/lobby_screens = list('icons/default_lobby.png')    // The list of lobby screen images to pick() from.
 	var/current_lobby_screen
-	var/decl/audio/track/lobby_track                     // The track that will play in the lobby screen.
-	var/list/lobby_tracks = list()                  // The list of lobby tracks to pick() from. If left unset will randomly select among all available decl/audio/track subtypes.
+	var/singleton/audio/track/lobby_track                     // The track that will play in the lobby screen.
+	var/list/lobby_tracks = list()                  // The list of lobby tracks to pick() from. If left unset will randomly select among all available singleton/audio/track subtypes.
 	var/welcome_sound = 'sound/AI/welcome.ogg'		// Sound played on roundstart
 
 	var/default_law_type = /datum/ai_laws/nanotrasen  // The default lawset use by synth units, if not overriden by their laws var.
-	var/security_state = /decl/security_state/default // The default security state system to use.
+	var/security_state = /singleton/security_state/default // The default security state system to use.
 
 	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
 
@@ -237,19 +237,19 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 
 /datum/map/proc/get_lobby_track(banned)
-	var/path = /decl/audio/track/absconditus
+	var/path = /singleton/audio/track/absconditus
 	var/count = length(lobby_tracks)
 	if (count != 1)
 		var/allowed
 		if (count > 1)
 			allowed = lobby_tracks - banned
 		if (!length(allowed))
-			allowed = subtypesof(/decl/audio/track) - banned
+			allowed = subtypesof(/singleton/audio/track) - banned
 		if (length(allowed))
 			path = pickweight(allowed)
 	else
 		path = lobby_tracks[1]
-	return decls_repository.get_decl(path)
+	return Singletons.Get(path)
 
 
 /datum/map/proc/setup_config(name, value, filename)

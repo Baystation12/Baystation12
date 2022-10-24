@@ -6,7 +6,7 @@
 
 	for (var/occ in SSjobs.titles_to_datums)
 		var/datum/job/occupation = SSjobs.titles_to_datums[occ]
-		var/decl/hierarchy/outfit/job/outfit = outfit_by_type(occupation.outfit_type)
+		var/singleton/hierarchy/outfit/job/outfit = outfit_by_type(occupation.outfit_type)
 		if(!istype(outfit))
 			log_bad("[occupation.title] - [occupation.type]: Invalid outfit type [outfit ? outfit.type : "NULL"].")
 			failed_jobs++

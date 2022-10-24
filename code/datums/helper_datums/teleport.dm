@@ -1,14 +1,14 @@
-/decl/teleport
+/singleton/teleport
 	var/static/list/teleport_blacklist = list(/obj/item/disk/nuclear, /obj/item/storage/backpack/holding, /obj/effect/sparks) //Items that cannot be teleported, or be in the contents of someone who is teleporting.
 
-/decl/teleport/proc/teleport(atom/target, atom/destination, precision = 0)
+/singleton/teleport/proc/teleport(atom/target, atom/destination, precision = 0)
 	if(!can_teleport(target,destination))
 		target.visible_message(SPAN_WARNING("\The [target] bounces off the teleporter!"))
 		return
 
 	teleport_target(target, destination, precision)
 
-/decl/teleport/proc/teleport_target(atom/movable/target, atom/destination, precision)
+/singleton/teleport/proc/teleport_target(atom/movable/target, atom/destination, precision)
 	var/list/possible_turfs = circlerangeturfs(destination, precision)
 	destination = DEFAULTPICK(possible_turfs, null)
 	if (!destination)
@@ -22,7 +22,7 @@
 			buckled.forceMove(destination)
 
 
-/decl/teleport/proc/can_teleport(atom/movable/target, atom/destination)
+/singleton/teleport/proc/can_teleport(atom/movable/target, atom/destination)
 	if(!destination || !target || !target.loc || destination.z > max_default_z_level())
 		return 0
 
@@ -34,10 +34,10 @@
 			return 0
 	return 1
 
-/decl/teleport/sparks
+/singleton/teleport/sparks
 	var/datum/effect/effect/system/spark_spread/spark = new
 
-/decl/teleport/sparks/proc/do_spark(atom/target)
+/singleton/teleport/sparks/proc/do_spark(atom/target)
 	if(!target.simulated)
 		return
 	var/turf/T = get_turf(target)
@@ -45,11 +45,11 @@
 	spark.attach(T)
 	spark.start()
 
-/decl/teleport/sparks/teleport_target(atom/target, atom/destination, precision)
+/singleton/teleport/sparks/teleport_target(atom/target, atom/destination, precision)
 	do_spark(target)
 	..()
 	do_spark(target)
 
-/proc/do_teleport(atom/movable/target, atom/destination, precision = 0, type = /decl/teleport/sparks)
-	var/decl/teleport/tele = decls_repository.get_decl(type)
+/proc/do_teleport(atom/movable/target, atom/destination, precision = 0, type = /singleton/teleport/sparks)
+	var/singleton/teleport/tele = Singletons.Get(type)
 	tele.teleport(target, destination, precision)

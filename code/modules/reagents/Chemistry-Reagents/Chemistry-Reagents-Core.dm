@@ -95,13 +95,13 @@
 	value = 0
 
 /datum/reagent/water/affect_blood(mob/living/carbon/M, removed)
-	var/malus_level = M.GetTraitLevel(/decl/trait/malus/water)
+	var/malus_level = M.GetTraitLevel(/singleton/trait/malus/water)
 	if (malus_level)
 		M.adjustToxLoss(malus_level * removed)
 
 /datum/reagent/water/affect_ingest(mob/living/carbon/M, removed)
 
-	var/malus_level = M.GetTraitLevel(/decl/trait/malus/water)
+	var/malus_level = M.GetTraitLevel(/singleton/trait/malus/water)
 	if (malus_level)
 		M.adjustToxLoss(malus_level * removed)
 	M.adjust_hydration(removed * 10)
@@ -163,7 +163,7 @@
 			remove_self(amount)
 
 /datum/reagent/water/affect_touch(mob/living/carbon/M, removed)
-	var/trait_level = GET_TRAIT_LEVEL(M, /decl/trait/malus/water)
+	var/trait_level = GET_TRAIT_LEVEL(M, /singleton/trait/malus/water)
 	if (!trait_level)
 		return
 

@@ -1,4 +1,4 @@
-/decl/cultural_info/religion
+/singleton/cultural_info/religion
 	desc_type = "Religion"
 	category = TAG_RELIGION
 	language = null

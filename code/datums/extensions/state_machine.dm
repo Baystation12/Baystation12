@@ -32,13 +32,13 @@ var/global/list/state_machines = list()
 	return FALSE
 
 // This contains the current state of the FSM and should be held by whatever the FSM is controlling.
-// Unlike the individual states and their transitions, the state machine objects are not singletons, and hence aren't `/decl`s.
+// Unlike the individual states and their transitions, the state machine objects are not Singletons, and hence aren't `/singleton`s.
 /datum/state_machine
 	var/weakref/holder_ref
 	var/base_type = /datum/state_machine
 	var/expected_type = /datum
 	/// Acts both as a ref to the current state and holds which state it will default to on init.
-	var/decl/state/current_state = null
+	var/singleton/state/current_state = null
 
 /datum/state_machine/New(datum/_holder)
 	..()
@@ -58,8 +58,8 @@ var/global/list/state_machines = list()
 	if(istype(current_state))
 		current_state.exited_state(holder_instance)
 	current_state = initial(current_state)
-	if(ispath(current_state, /decl/state))
-		current_state = GET_DECL(current_state)
+	if(ispath(current_state, /singleton/state))
+		current_state = Singletons.Get(current_state)
 		current_state.entered_state(holder_instance)
 	else
 		current_state = null
@@ -77,7 +77,7 @@ var/global/list/state_machines = list()
 	var/datum/holder_instance = get_holder()
 	var/list/options = current_state.get_open_transitions(holder_instance)
 	if(LAZYLEN(options))
-		var/decl/state_transition/choice = choose_transition(options)
+		var/singleton/state_transition/choice = choose_transition(options)
 		current_state.exited_state(holder_instance)
 		current_state = choice.target
 		current_state.entered_state(holder_instance)
@@ -94,7 +94,7 @@ var/global/list/state_machines = list()
 	var/datum/holder_instance = get_holder()
 	if(istype(current_state))
 		current_state.exited_state(holder_instance)
-	current_state = GET_DECL(new_state_type)
+	current_state = Singletons.Get(new_state_type)
 	if(istype(current_state))
 		current_state.entered_state(holder_instance)
 		return current_state

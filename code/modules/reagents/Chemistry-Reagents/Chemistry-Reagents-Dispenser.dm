@@ -11,7 +11,7 @@
 	accelerant_quality = 3
 
 /datum/reagent/acetone/affect_blood(mob/living/carbon/M, removed)
-	if (HAS_TRAIT(M, /decl/trait/general/serpentid_adapted))
+	if (HAS_TRAIT(M, /singleton/trait/general/serpentid_adapted))
 		return
 
 	M.adjustToxLoss(removed * 3)
@@ -134,7 +134,7 @@
 /datum/reagent/ethanol/affect_ingest(mob/living/carbon/M, removed)
 	M.adjust_nutrition(nutriment_factor * removed)
 	M.adjust_hydration(hydration_factor * removed)
-	var/strength_mod = (M.GetTraitLevel(/decl/trait/malus/ethanol) * 2.5) || 1
+	var/strength_mod = (M.GetTraitLevel(/singleton/trait/malus/ethanol) * 2.5) || 1
 	if (IS_METABOLICALLY_INERT(M))
 		strength_mod = 0
 

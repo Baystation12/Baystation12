@@ -13,7 +13,7 @@
 	ideal_character_age = 50
 	alt_titles = list(
 		"Research Supervisor")
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/research/senior_scientist
+	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/research/senior_scientist
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps
 	)
@@ -68,7 +68,7 @@
 	                    SKILL_DEVICES     = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX)
 
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/research/scientist
+	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/research/scientist
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
 		/datum/mil_branch/solgov,
@@ -76,8 +76,8 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o1,
-		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/passenger/research/scientist,
-		/datum/mil_rank/sol/scientist = /decl/hierarchy/outfit/job/torch/passenger/research/scientist/solgov
+		/datum/mil_rank/civ/contractor = /singleton/hierarchy/outfit/job/torch/passenger/research/scientist,
+		/datum/mil_rank/sol/scientist = /singleton/hierarchy/outfit/job/torch/passenger/research/scientist/solgov
 	)
 
 	access = list(
@@ -102,13 +102,13 @@
 	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 30
 	alt_titles = list(
-		"Custodian" = /decl/hierarchy/outfit/job/torch/passenger/research/assist/janitor,
-		"Testing Assistant" = /decl/hierarchy/outfit/job/torch/passenger/research/assist/testsubject,
+		"Custodian" = /singleton/hierarchy/outfit/job/torch/passenger/research/assist/janitor,
+		"Testing Assistant" = /singleton/hierarchy/outfit/job/torch/passenger/research/assist/testsubject,
 		"Intern",
 		"Clerk",
 		"Field Assistant")
 
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/research
+	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/research
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
 		/datum/mil_branch/solgov,
@@ -117,8 +117,8 @@
 	allowed_ranks = list(
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/ec/e5,
-		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/passenger/research/assist,
-		/datum/mil_rank/sol/scientist = /decl/hierarchy/outfit/job/torch/passenger/research/assist/solgov
+		/datum/mil_rank/civ/contractor = /singleton/hierarchy/outfit/job/torch/passenger/research/assist,
+		/datum/mil_rank/sol/scientist = /singleton/hierarchy/outfit/job/torch/passenger/research/assist/solgov
 	)
 	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_DEVICES     = SKILL_MAX,

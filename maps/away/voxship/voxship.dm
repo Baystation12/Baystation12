@@ -100,7 +100,7 @@
 	vessel_size = SHIP_SIZE_TINY
 
 /obj/effect/submap_landmark/joinable_submap/voxship/scavship
-	archetype = /decl/submap_archetype/derelict/voxship
+	archetype = /singleton/submap_archetype/derelict/voxship
 	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 
 //shuttle APC terminal kept being deleted by z level changes
@@ -113,10 +113,10 @@
 	name = "[pidgin.get_random_name()]-[pidgin.get_random_name()]"
 	..()
 
-/decl/webhook/submap_loaded/vox
+/singleton/webhook/submap_loaded/vox
 	id = WEBHOOK_SUBMAP_LOADED_VOX
 
-/decl/submap_archetype/derelict/voxship
+/singleton/submap_archetype/derelict/voxship
 	descriptor = "Shoal Scavenger Vessel"
 	map = "Vox Scavenger Ship"
 	crew_jobs = list(

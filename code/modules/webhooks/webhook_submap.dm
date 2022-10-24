@@ -1,8 +1,8 @@
-/decl/webhook/submap_loaded
+/singleton/webhook/submap_loaded
 	id = WEBHOOK_SUBMAP_LOADED
 
 // Data expects a "name" field containing the name of the submap being announced.
-/decl/webhook/submap_loaded/get_message(list/data)
+/singleton/webhook/submap_loaded/get_message(list/data)
 	. = ..()
 	var/submap_name = data && data["name"]
 	if(submap_name)

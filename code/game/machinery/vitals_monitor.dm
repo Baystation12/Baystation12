@@ -13,7 +13,7 @@
 	active_power_usage = 100
 	stat_immune = MACHINE_STAT_NOINPUT
 	uncreated_component_parts = null
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 
 	var/mob/living/carbon/human/victim
 	var/obj/machinery/optable/connected_optable = null

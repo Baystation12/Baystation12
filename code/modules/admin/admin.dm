@@ -138,9 +138,9 @@ var/global/floorIsLava = 0
 			body += "<a href='?src=\ref[psyker.psi];trigger_psi_latencies=1'>Trigger latencies.</a><br/>"
 		body += "<table width = '100%'>"
 		for(var/faculty in list(PSI_COERCION, PSI_PSYCHOKINESIS, PSI_REDACTION, PSI_ENERGISTICS))
-			var/decl/psionic_faculty/faculty_decl = SSpsi.get_faculty(faculty)
+			var/singleton/psionic_faculty/faculty_singleton = SSpsi.get_faculty(faculty)
 			var/faculty_rank = psyker.psi ? psyker.psi.get_rank(faculty) : 0
-			body += "<tr><td><b>[faculty_decl.name]</b></td>"
+			body += "<tr><td><b>[faculty_singleton.name]</b></td>"
 			for(var/i = 1 to LAZYLEN(GLOB.psychic_ranks_to_strings))
 				var/psi_title = GLOB.psychic_ranks_to_strings[i]
 				if(i == faculty_rank)
@@ -783,9 +783,9 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 
 	config.aooc_allowed = !(config.aooc_allowed)
 	if (config.aooc_allowed)
-		communicate_broadcast(/decl/communication_channel/aooc, "The AOOC channel has been globally enabled!", TRUE)
+		communicate_broadcast(/singleton/communication_channel/aooc, "The AOOC channel has been globally enabled!", TRUE)
 	else
-		communicate_broadcast(/decl/communication_channel/aooc, "The AOOC channel has been globally disabled!", TRUE)
+		communicate_broadcast(/singleton/communication_channel/aooc, "The AOOC channel has been globally disabled!", TRUE)
 	log_and_message_admins("toggled AOOC.")
 
 /datum/admins/proc/togglelooc()
@@ -1021,7 +1021,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		log_admin("[key_name(usr)] mass-spawned closets (icon debug), if this is a live server you should yell at them.")
 		var/x = 0
 		var/y = 0
-		for(var/check_appearance in typesof(/decl/closet_appearance))
+		for(var/check_appearance in typesof(/singleton/closet_appearance))
 			x++
 			if(x > 10)
 				x = 0

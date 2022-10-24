@@ -1,4 +1,4 @@
-/decl/hierarchy/supply_pack/dispenser_cartridges/boron
+/singleton/hierarchy/supply_pack/dispenser_cartridges/boron
 	name = "Reagent refill - boron"
 	containername = "boron reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure

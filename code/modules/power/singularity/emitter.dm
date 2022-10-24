@@ -30,13 +30,13 @@
 		/obj/item/stock_parts/power/apc
 	)
 	public_variables = list(
-		/decl/public_access/public_variable/emitter_active,
-		/decl/public_access/public_variable/emitter_locked
+		/singleton/public_access/public_variable/emitter_active,
+		/singleton/public_access/public_variable/emitter_locked
 	)
 	public_methods = list(
-		/decl/public_access/public_method/toggle_emitter
+		/singleton/public_access/public_method/toggle_emitter
 	)
-	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/emitter = 1)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/receiver/emitter = 1)
 
 /obj/machinery/power/emitter/anchored
 	anchored = TRUE
@@ -305,31 +305,31 @@
 /obj/machinery/power/emitter/proc/get_emitter_beam()
 	return new /obj/item/projectile/beam/emitter(get_turf(src))
 
-/decl/public_access/public_method/toggle_emitter
+/singleton/public_access/public_method/toggle_emitter
 	name = "toggle emitter"
 	desc = "Toggles whether or not the emitter is active. It must be unlocked to work."
 	call_proc = /obj/machinery/power/emitter/proc/activate
 
-/decl/public_access/public_variable/emitter_active
+/singleton/public_access/public_variable/emitter_active
 	expected_type = /obj/machinery/power/emitter
 	name = "emitter active"
 	desc = "Whether or not the emitter is firing."
 	can_write = FALSE
 	has_updates = FALSE
 
-/decl/public_access/public_variable/emitter_active/access_var(obj/machinery/power/emitter/emitter)
+/singleton/public_access/public_variable/emitter_active/access_var(obj/machinery/power/emitter/emitter)
 	return emitter.active
 
-/decl/public_access/public_variable/emitter_locked
+/singleton/public_access/public_variable/emitter_locked
 	expected_type = /obj/machinery/power/emitter
 	name = "emitter locked"
 	desc = "Whether or not the emitter is locked. Being locked prevents one from changing the active state."
 	can_write = FALSE
 	has_updates = FALSE
 
-/decl/public_access/public_variable/emitter_locked/access_var(obj/machinery/power/emitter/emitter)
+/singleton/public_access/public_variable/emitter_locked/access_var(obj/machinery/power/emitter/emitter)
 	return emitter.locked
 
-/decl/stock_part_preset/radio/receiver/emitter
+/singleton/stock_part_preset/radio/receiver/emitter
 	frequency = BUTTON_FREQ
-	receive_and_call = list("button_active" = /decl/public_access/public_method/toggle_emitter)
+	receive_and_call = list("button_active" = /singleton/public_access/public_method/toggle_emitter)

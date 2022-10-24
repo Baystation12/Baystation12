@@ -1,4 +1,4 @@
-/decl/hierarchy/outfit/spec_op_officer
+/singleton/hierarchy/outfit/spec_op_officer
 	name = "Spec Ops - Officer"
 	uniform = /obj/item/clothing/under/syndicate/combat
 	suit = /obj/item/clothing/suit/armor/swat/officer
@@ -16,7 +16,7 @@
 	id_desc = "Special operations ID."
 	id_pda_assignment = "Special Operations Officer"
 
-/decl/hierarchy/outfit/spec_op_officer/space
+/singleton/hierarchy/outfit/spec_op_officer/space
 	name = "Spec Ops - Officer in space"
 	suit = /obj/item/clothing/suit/space/void/swat
 	back = /obj/item/tank/jetpack/oxygen
@@ -24,7 +24,7 @@
 
 	flags = OUTFIT_HAS_JETPACK|OUTFIT_RESET_EQUIPMENT
 
-/decl/hierarchy/outfit/ert
+/singleton/hierarchy/outfit/ert
 	name = "Spec Ops - Emergency response team"
 	uniform = /obj/item/clothing/under/ert
 	shoes = /obj/item/clothing/shoes/swat
@@ -37,21 +37,21 @@
 	id_slot = slot_wear_id
 	id_types = list(/obj/item/card/id/centcom/ERT)
 
-/decl/hierarchy/outfit/death_command
+/singleton/hierarchy/outfit/death_command
 	name = "Spec Ops - Death commando"
 
-/decl/hierarchy/outfit/death_command/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
+/singleton/hierarchy/outfit/death_command/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
 	GLOB.deathsquad.equip(H)
 	return 1
 
-/decl/hierarchy/outfit/syndicate_command
+/singleton/hierarchy/outfit/syndicate_command
 	name = "Spec Ops - Syndicate commando"
 
-/decl/hierarchy/outfit/syndicate_command/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
+/singleton/hierarchy/outfit/syndicate_command/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
 	GLOB.commandos.equip(H)
 	return 1
 
-/decl/hierarchy/outfit/mercenary
+/singleton/hierarchy/outfit/mercenary
 	name = "Spec Ops - Mercenary"
 	uniform = /obj/item/clothing/under/syndicate
 	shoes = /obj/item/clothing/shoes/combat
@@ -69,7 +69,7 @@
 
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_RESET_EQUIPMENT
 
-/decl/hierarchy/outfit/mercenary/syndicate
+/singleton/hierarchy/outfit/mercenary/syndicate
 	name = "Spec Ops - Syndicate"
 	suit = /obj/item/clothing/suit/armor/vest
 	mask = /obj/item/clothing/mask/gas
@@ -77,7 +77,7 @@
 	shoes = /obj/item/clothing/shoes/swat
 	id_desc = "Syndicate Operative"
 
-/decl/hierarchy/outfit/mercenary/syndicate/commando
+/singleton/hierarchy/outfit/mercenary/syndicate/commando
 	name = "Spec Ops - Syndicate Commando"
 	suit = /obj/item/clothing/suit/space/void/merc
 	mask = /obj/item/clothing/mask/gas/syndicate
@@ -85,7 +85,7 @@
 	back = /obj/item/tank/jetpack/oxygen
 	l_pocket = /obj/item/tank/oxygen_emergency
 
-/decl/hierarchy/outfit/foundation
+/singleton/hierarchy/outfit/foundation
 	name = "Cuchulain Foundation Agent"
 	glasses =  /obj/item/clothing/glasses/sunglasses
 	uniform =  /obj/item/clothing/under/suit_jacket/charcoal

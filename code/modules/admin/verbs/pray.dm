@@ -2,7 +2,7 @@
 	set category = "IC"
 	set name = "Pray"
 
-	sanitize_and_communicate(/decl/communication_channel/pray, src, msg)
+	sanitize_and_communicate(/singleton/communication_channel/pray, src, msg)
 
 /proc/Centcomm_announce(msg, mob/Sender, iamessage)
 	var/mob/intercepted = check_for_interception()

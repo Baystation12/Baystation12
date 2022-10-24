@@ -10,14 +10,14 @@
 	candle_outer_range = 1
 	candle_falloff = 2
 
-	scent_types = list(/decl/scent_type/rose,
-					   /decl/scent_type/citrus,
-					   /decl/scent_type/sage,
-					   /decl/scent_type/frankincense,
-					   /decl/scent_type/mint,
-					   /decl/scent_type/champa,
-					   /decl/scent_type/lavender,
-					   /decl/scent_type/sandalwood)
+	scent_types = list(/singleton/scent_type/rose,
+					   /singleton/scent_type/citrus,
+					   /singleton/scent_type/sage,
+					   /singleton/scent_type/frankincense,
+					   /singleton/scent_type/mint,
+					   /singleton/scent_type/champa,
+					   /singleton/scent_type/lavender,
+					   /singleton/scent_type/sandalwood)
 
 /obj/item/storage/candle_box/incense
 	name = "incense box"

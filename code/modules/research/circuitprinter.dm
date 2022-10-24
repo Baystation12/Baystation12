@@ -10,7 +10,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	icon_state = "circuit_imprinter"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	base_type = /obj/machinery/r_n_d/circuit_imprinter
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 
 	var/list/datum/design/queue = list()
 	var/progress = 0
@@ -82,7 +82,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	else
 		icon_state = "circuit_imprinter"
 
-/obj/machinery/r_n_d/circuit_imprinter/state_transition(decl/machine_construction/default/new_state)
+/obj/machinery/r_n_d/circuit_imprinter/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state) && linked_console)
 		linked_console.linked_imprinter = null

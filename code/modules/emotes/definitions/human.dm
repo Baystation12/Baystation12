@@ -1,56 +1,56 @@
-/decl/emote/human
+/singleton/emote/human
 	key = "vomit"
 
-/decl/emote/human/check_user(mob/living/carbon/human/user)
+/singleton/emote/human/check_user(mob/living/carbon/human/user)
 	return (istype(user) && user.check_has_mouth() && !user.isSynthetic())
 
-/decl/emote/human/do_emote(mob/living/carbon/human/user)
+/singleton/emote/human/do_emote(mob/living/carbon/human/user)
 	user.vomit()
 
-/decl/emote/human/deathgasp
+/singleton/emote/human/deathgasp
 	key = "deathgasp"
 
-/decl/emote/human/deathgasp/get_emote_message_3p(mob/living/carbon/human/user)
+/singleton/emote/human/deathgasp/get_emote_message_3p(mob/living/carbon/human/user)
 	return "USER [user.species.get_death_message()]"
 
-/decl/emote/human/swish
+/singleton/emote/human/swish
 	key = "swish"
 
-/decl/emote/human/swish/do_emote(mob/living/carbon/human/user)
+/singleton/emote/human/swish/do_emote(mob/living/carbon/human/user)
 	user.animate_tail_once()
 
-/decl/emote/human/wag
+/singleton/emote/human/wag
 	key = "wag"
 
-/decl/emote/human/wag/do_emote(mob/living/carbon/human/user)
+/singleton/emote/human/wag/do_emote(mob/living/carbon/human/user)
 	user.animate_tail_start()
 
-/decl/emote/human/sway
+/singleton/emote/human/sway
 	key = "sway"
 
-/decl/emote/human/sway/do_emote(mob/living/carbon/human/user)
+/singleton/emote/human/sway/do_emote(mob/living/carbon/human/user)
 	user.animate_tail_start()
 
-/decl/emote/human/qwag
+/singleton/emote/human/qwag
 	key = "qwag"
 
-/decl/emote/human/qwag/do_emote(mob/living/carbon/human/user)
+/singleton/emote/human/qwag/do_emote(mob/living/carbon/human/user)
 	user.animate_tail_fast()
 
-/decl/emote/human/fastsway
+/singleton/emote/human/fastsway
 	key = "fastsway"
 
-/decl/emote/human/fastsway/do_emote(mob/living/carbon/human/user)
+/singleton/emote/human/fastsway/do_emote(mob/living/carbon/human/user)
 	user.animate_tail_fast()
 
-/decl/emote/human/swag
+/singleton/emote/human/swag
 	key = "swag"
 
-/decl/emote/human/swag/do_emote(mob/living/carbon/human/user)
+/singleton/emote/human/swag/do_emote(mob/living/carbon/human/user)
 	user.animate_tail_stop()
 
-/decl/emote/human/stopsway
+/singleton/emote/human/stopsway
 	key = "stopsway"
 
-/decl/emote/human/stopsway/do_emote(mob/living/carbon/human/user)
+/singleton/emote/human/stopsway/do_emote(mob/living/carbon/human/user)
 	user.animate_tail_stop()

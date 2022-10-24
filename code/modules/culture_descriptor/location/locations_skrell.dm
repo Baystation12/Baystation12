@@ -1,4 +1,4 @@
-/decl/cultural_info/location/qerrbalak
+/singleton/cultural_info/location/qerrbalak
 	name = HOME_SYSTEM_QERRBALAK
 	description = "Qerr'Balak, in the Qerr'Valis system, is the ancient home of skrellkind. A large, swampy world, it consists of two continents separated by \
 		an archipelago filled ocean. The smaller continent, and original home of the Skrell civilisation, Qorr'gloa, is mostly swampland, with most cities being \
@@ -11,7 +11,7 @@
 	distance = "67 light years"
 	economic_power = 1.5
 
-/decl/cultural_info/location/talamira
+/singleton/cultural_info/location/talamira
 	name = HOME_SYSTEM_TALAMIRA
 	description = "Talamira, in the Ri'Qora system, is located far on the other side of Skrell space far into what is, to humans, unchartered and unexplored territory.\
 	Established some 500 years ago Talamira is considered a trade and commerce hub in its sector. This is largely a result of its central position between a large \
@@ -24,7 +24,7 @@
 	distance = "300 light years"
 	economic_power = 2.5
 
-/decl/cultural_info/location/roasora
+/singleton/cultural_info/location/roasora
 	name = HOME_SYSTEM_ROASORA
 	description = "Roa'Sora, in the Qrri'terr system, is a small planet consisting of a single city-state, Tri'sorr. Ro'moxi.Since its founding some 200 years prior \
 	The Skrell of Roa'Sora have been engaged in a state of constant defence against a nearby species that has made no diplomatic attempts to communicate known \
@@ -38,7 +38,7 @@
 	distance = "350 light years"
 	economic_power = 1.2
 
-/decl/cultural_info/location/mitorqi
+/singleton/cultural_info/location/mitorqi
 	name = HOME_SYSTEM_MITORQI
 	description = "Mi'tor'qi, in the Qoa'lo system, is one of a multitude of planets along the human-skrell border. One of the newest colonies of Skrellkind, the numerous \
 	city states of Mi'tor'qi show a great deal of human influence in their society. Many of the city states have adapted their economies to focus on interstellar trade with \
@@ -50,7 +50,7 @@
 	distance = "32 light years"
 	economic_power = 1.9
 
-/decl/cultural_info/location/skrellspace
+/singleton/cultural_info/location/skrellspace
 	name = HOME_SYSTEM_SKRELLSPACE
 	description = "A very different style of living from a more traditional city-state based Skrell, those who live and reside in space belong to no particular city-state \
 	and instead are governed by the SDTF of the system in which they reside, with all services and installations under the control of the local Raskinta SDTF Commander \
@@ -61,7 +61,7 @@
 	distance = "None"
 	economic_power = 1.9
 
-/decl/cultural_info/location/otherskrell
+/singleton/cultural_info/location/otherskrell
 	name = HOME_SYSTEM_OTHERSKRELL
 	description = "Skrell control a much wider region of space than humanity, and to many their space is seen as uncountably infinite. This planet is one of the many skrellian worlds \
 	 that are less known."

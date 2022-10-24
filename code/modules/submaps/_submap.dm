@@ -1,7 +1,7 @@
 /datum/submap
 	var/name
 	var/pref_name
-	var/decl/submap_archetype/archetype
+	var/singleton/submap_archetype/archetype
 	var/list/jobs
 	var/associated_z
 
@@ -13,7 +13,7 @@
 	SSmapping.submaps -= src
 	. = ..()
 
-/datum/submap/proc/setup_submap(decl/submap_archetype/_archetype)
+/datum/submap/proc/setup_submap(singleton/submap_archetype/_archetype)
 
 	if(!istype(_archetype))
 		testing( "Submap error - [name] - null or invalid archetype supplied ([_archetype]).")

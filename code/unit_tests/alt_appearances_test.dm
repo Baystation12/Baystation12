@@ -2,8 +2,8 @@
 	name = "ALT APPEARANCE: Cardborg shall have base backpack variant"
 
 /datum/unit_test/alt_appearance_cardborg_shall_have_base_backpack_variant/start_test()
-	for(var/ca_type in subtypesof(/decl/cardborg_appearance))
-		var/decl/cardborg_appearance/ca = ca_type
+	for(var/ca_type in subtypesof(/singleton/cardborg_appearance))
+		var/singleton/cardborg_appearance/ca = ca_type
 		var/obj/item/storage/backpack/backpack_type = initial(ca.backpack_type)
 		if(backpack_type == /obj/item/storage/backpack)
 			pass("Found a cardborg appearance using the base /obj/item/storage/backpack backpack.")
@@ -19,8 +19,8 @@
 	var/list/existing_icon_states = icon_states('icons/mob/robots.dmi')
 	var/failed = FALSE
 
-	for(var/ca_type in subtypesof(/decl/cardborg_appearance))
-		var/decl/cardborg_appearance/ca = ca_type
+	for(var/ca_type in subtypesof(/singleton/cardborg_appearance))
+		var/singleton/cardborg_appearance/ca = ca_type
 		var/icon_state = initial(ca.icon_state)
 		if(!(icon_state in existing_icon_states))
 			log_unit_test("Icon state [icon_state] is missing.")
@@ -37,8 +37,8 @@
 
 /datum/unit_test/alt_appearance_cardborg_shall_have_unique_backpack_types/start_test()
 	var/list/backpack_types = list()
-	for(var/ca_type in subtypesof(/decl/cardborg_appearance))
-		var/decl/cardborg_appearance/ca = ca_type
+	for(var/ca_type in subtypesof(/singleton/cardborg_appearance))
+		var/singleton/cardborg_appearance/ca = ca_type
 		group_by(backpack_types, initial(ca.backpack_type), ca)
 
 	var/number_of_issues = number_of_issues(backpack_types, "Backpack Types")

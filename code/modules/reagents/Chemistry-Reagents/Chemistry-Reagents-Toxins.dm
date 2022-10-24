@@ -282,7 +282,7 @@
 		L.adjust_fire_stacks(amount / fire_mult)
 
 /datum/reagent/toxin/phoron/affect_blood(mob/living/carbon/M, removed)
-	if (HAS_TRAIT(M, /decl/trait/general/serpentid_adapted))
+	if (HAS_TRAIT(M, /singleton/trait/general/serpentid_adapted))
 		return
 	..()
 
@@ -475,7 +475,7 @@
 
 /datum/reagent/toxin/plantbgone/affect_touch(mob/living/carbon/M, removed)
 	..()
-	if (HAS_TRAIT(M, /decl/trait/general/permeable_skin))
+	if (HAS_TRAIT(M, /singleton/trait/general/permeable_skin))
 		M.adjustToxLoss(50 * removed)
 
 /datum/reagent/acid/polyacid
@@ -508,7 +508,7 @@
 	if (M.species.breath_type != GAS_OXYGEN || IS_METABOLICALLY_INERT(M))
 		return
 
-	var/permeability = GET_TRAIT_LEVEL(carbon, /decl/trait/general/permeable_skin)
+	var/permeability = GET_TRAIT_LEVEL(carbon, /singleton/trait/general/permeable_skin)
 	M.take_organ_damage((10 - (2 * permeability)) * removed, 0, ORGAN_DAMAGE_FLESH_ONLY)
 	if (prob(10))
 		M.visible_message(
@@ -520,7 +520,7 @@
 	M.adjustOxyLoss(15 * removed)
 
 /datum/reagent/lexorin/affect_touch(mob/living/carbon/M, removed)
-	if (M.species.breath_type != GAS_OXYGEN || HAS_TRAIT(M, /decl/trait/general/nonpermeable_skin))
+	if (M.species.breath_type != GAS_OXYGEN || HAS_TRAIT(M, /singleton/trait/general/nonpermeable_skin))
 		return
 
 	touch_met = volume // immediately permiates the skin, also avoids bugs with chemical duplication.
@@ -531,7 +531,7 @@
 		SPAN_DANGER("You feel a painful fizzling and your skin begins to flake!.")
 	)
 
-	var/permeability = GET_TRAIT_LEVEL(carbon, /decl/trait/general/permeable_skin)
+	var/permeability = GET_TRAIT_LEVEL(carbon, /singleton/trait/general/permeable_skin)
 	M.reagents.add_reagent(/datum/reagent/lexorin, (0.5 + (2.5 * permeability)) * removed)
 
 /datum/reagent/mutagen
@@ -606,7 +606,7 @@
 	if (IS_METABOLICALLY_INERT(M))
 		return
 
-	var/threshold = 1 + (0.2 * GET_TRAIT_LEVEL(M, /decl/trait/boon/clear_mind))
+	var/threshold = 1 + (0.2 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
 
 	if(M.chem_doses[type] < 1 * threshold)
 		if(M.chem_doses[type] == metabolism * 2 || prob(5))
@@ -639,7 +639,7 @@
 	if (IS_METABOLICALLY_INERT(M))
 		return
 
-	var/threshold = 1 + (0.2 * GET_TRAIT_LEVEL(M, /decl/trait/boon/clear_mind))
+	var/threshold = 1 + (0.2 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
 	M.add_chemical_effect(CE_SEDATE, 1)
 
 	if(M.chem_doses[type] <= metabolism * threshold)
@@ -680,7 +680,7 @@
 	if (IS_METABOLICALLY_INERT(M))
 		return
 
-	var/threshold = 2 + (0.4 * GET_TRAIT_LEVEL(M, /decl/trait/boon/clear_mind))
+	var/threshold = 2 + (0.4 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
 
 	if(M.chem_doses[type] >= metabolism * threshold * 0.5)
 		M.confused = max(M.confused, 2)
@@ -845,7 +845,7 @@
 /datum/reagent/drugs/cryptobiolin/affect_blood(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return FALSE
-	var/drug_strength = 4 - (0.8 * GET_TRAIT_LEVEL(M, /decl/trait/boon/clear_mind))
+	var/drug_strength = 4 - (0.8 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
 
 	M.make_dizzy(drug_strength)
 	M.confused = max(M.confused, drug_strength * 5)
@@ -875,8 +875,8 @@
 		return
 	M.add_chemical_effect(CE_MIND, -2)
 
-	var/hallucination_duration = 50 - (25 * GET_TRAIT_LEVEL(M, /decl/trait/boon/clear_mind))
-	var/hallucination_power = 50 - (20 * GET_TRAIT_LEVEL(M, /decl/trait/boon/clear_mind))
+	var/hallucination_duration = 50 - (25 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
+	var/hallucination_power = 50 - (20 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
 
 	if (hallucination_duration && hallucination_power)
 		M.hallucination(hallucination_duration, hallucination_power)
@@ -900,7 +900,7 @@
 	if (IS_METABOLICALLY_INERT(M))
 		return
 
-	var/threshold = 1 + (0.2 * GET_TRAIT_LEVEL(M, /decl/trait/boon/clear_mind))
+	var/threshold = 1 + (0.2 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
 	M.druggy = max(M.druggy, 30)
 
 	if(M.chem_doses[type] < 1 * threshold)
@@ -1136,11 +1136,11 @@
 	heating_point = null
 
 /datum/reagent/toxin/methyl_bromide/affect_touch(mob/living/carbon/M, removed)
-	if (!HAS_TRAIT(M, /decl/trait/general/serpentid_adapted))
+	if (!HAS_TRAIT(M, /singleton/trait/general/serpentid_adapted))
 		return ..()
 
 /datum/reagent/toxin/methyl_bromide/affect_ingest(mob/living/carbon/M, removed)
-	if (!HAS_TRAIT(M, /decl/trait/general/serpentid_adapted))
+	if (!HAS_TRAIT(M, /singleton/trait/general/serpentid_adapted))
 		return ..()
 
 /datum/reagent/toxin/methyl_bromide/touch_turf(turf/simulated/T)
@@ -1149,7 +1149,7 @@
 		remove_self(volume)
 
 /datum/reagent/toxin/methyl_bromide/affect_blood(mob/living/carbon/M, removed)
-	if (!HAS_TRAIT(M, /decl/trait/general/serpentid_adapted))
+	if (!HAS_TRAIT(M, /singleton/trait/general/serpentid_adapted))
 		. = ..()
 	if(istype(M))
 		for(var/obj/item/organ/external/E in M.organs)

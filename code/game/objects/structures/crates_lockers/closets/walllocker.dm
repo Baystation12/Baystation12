@@ -4,7 +4,7 @@
 /obj/structure/closet/walllocker
 	desc = "A wall mounted storage locker."
 	name = "Wall Locker"
-	closet_appearance = /decl/closet_appearance/wall
+	closet_appearance = /singleton/closet_appearance/wall
 	density = FALSE
 	anchored = TRUE
 	wall_mounted = TRUE
@@ -18,7 +18,7 @@
 	desc = "A wall mounted locker with emergency supplies."
 	var/list/spawnitems = list(/obj/item/tank/oxygen_emergency,/obj/item/clothing/mask/breath)
 	var/amount = 2 // spawns each items X times.
-	closet_appearance = /decl/closet_appearance/wall/emergency
+	closet_appearance = /singleton/closet_appearance/wall/emergency
 
 /obj/structure/closet/walllocker/emerglocker/toggle(mob/user as mob)
 	src.attack_hand(user)

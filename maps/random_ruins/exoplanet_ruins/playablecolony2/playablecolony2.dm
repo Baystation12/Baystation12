@@ -15,7 +15,7 @@
 	)
 	spawn_weight = 0.4
 
-/decl/submap_archetype/playablecolony2
+/singleton/submap_archetype/playablecolony2
 	descriptor = "landed colony ship"
 	crew_jobs = list(/datum/job/submap/colonist2)
 
@@ -24,9 +24,9 @@
 	supervisors = "the trust of your fellow Colonists"
 	info = "You are a Colonist, living on the rim of explored, let alone inhabited, space in a recently landed colony ship."
 	total_positions = 3
-	outfit_type = /decl/hierarchy/outfit/job/colonist2
+	outfit_type = /singleton/hierarchy/outfit/job/colonist2
 
-/decl/hierarchy/outfit/job/colonist2
+/singleton/hierarchy/outfit/job/colonist2
 	name = OUTFIT_JOB_NAME("Colonist2")
 	id_types = list()
 	pda_type = null
@@ -37,7 +37,7 @@
 
 /obj/effect/submap_landmark/joinable_submap/colony2
 	name = "Landed Colony Ship"
-	archetype = /decl/submap_archetype/playablecolony
+	archetype = /singleton/submap_archetype/playablecolony
 
 // Areas //
 /area/map_template/colony2

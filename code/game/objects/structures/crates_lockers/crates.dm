@@ -1,7 +1,7 @@
 /obj/structure/closet/crate
 	name = "crate"
 	desc = "A rectangular steel crate."
-	closet_appearance = /decl/closet_appearance/crate
+	closet_appearance = /singleton/closet_appearance/crate
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	setup = 0
 	storage_types = CLOSET_STORAGE_ITEMS
@@ -62,7 +62,7 @@
 /obj/structure/closet/crate/secure
 	desc = "A secure crate."
 	name = "Secure crate"
-	closet_appearance = /decl/closet_appearance/crate/secure
+	closet_appearance = /singleton/closet_appearance/crate/secure
 	setup = CLOSET_HAS_LOCK
 	locked = TRUE
 
@@ -74,7 +74,7 @@
 	name = "plastic crate"
 	desc = "A rectangular plastic crate."
 	points_per_crate = 1
-	closet_appearance = /decl/closet_appearance/crate/plastic
+	closet_appearance = /singleton/closet_appearance/crate/plastic
 	material = MATERIAL_PLASTIC
 
 /obj/structure/closet/crate/internals
@@ -91,12 +91,12 @@
 /obj/structure/closet/crate/trashcart
 	name = "trash cart"
 	desc = "A heavy, metal trashcart with wheels."
-	closet_appearance = /decl/closet_appearance/cart/trash
+	closet_appearance = /singleton/closet_appearance/cart/trash
 
 /obj/structure/closet/crate/medical
 	name = "medical crate"
 	desc = "A medical crate."
-	closet_appearance = /decl/closet_appearance/crate/medical
+	closet_appearance = /singleton/closet_appearance/crate/medical
 
 /obj/structure/closet/crate/rcd
 	name = "\improper RCD crate"
@@ -129,7 +129,7 @@
 	name = "freezer"
 	desc = "A freezer."
 	temperature = -16 CELSIUS
-	closet_appearance = /decl/closet_appearance/crate/freezer
+	closet_appearance = /singleton/closet_appearance/crate/freezer
 
 	var/target_temp = T0C - 40
 	var/cooling_power = 40
@@ -175,12 +175,12 @@
 /obj/structure/closet/crate/radiation
 	name = "radioactive crate"
 	desc = "A leadlined crate with a radiation sign on it."
-	closet_appearance = /decl/closet_appearance/crate/radiation
+	closet_appearance = /singleton/closet_appearance/crate/radiation
 
 /obj/structure/closet/crate/radiation_gear
 	name = "radioactive gear crate"
 	desc = "A crate with a radiation sign on it."
-	closet_appearance = /decl/closet_appearance/crate/radiation
+	closet_appearance = /singleton/closet_appearance/crate/radiation
 
 /obj/structure/closet/crate/radiation_gear/WillContain()
 	return list(/obj/item/clothing/suit/radiation = 8)
@@ -188,49 +188,49 @@
 /obj/structure/closet/crate/secure/weapon
 	name = "weapons crate"
 	desc = "A secure weapons crate."
-	closet_appearance = /decl/closet_appearance/crate/secure/weapon
+	closet_appearance = /singleton/closet_appearance/crate/secure/weapon
 
 /obj/structure/closet/crate/secure/phoron
 	name = "phoron crate"
 	desc = "A secure phoron crate."
-	closet_appearance = /decl/closet_appearance/crate/secure/hazard
+	closet_appearance = /singleton/closet_appearance/crate/secure/hazard
 
 /obj/structure/closet/crate/secure/shuttle
 	name = "storage compartment"
 	desc = "A secure storage compartment bolted to the floor, to secure loose objects on Zero-G flights."
 	anchored = TRUE
-	closet_appearance = /decl/closet_appearance/crate/secure/shuttle
+	closet_appearance = /singleton/closet_appearance/crate/secure/shuttle
 
 /obj/structure/closet/crate/secure/gear
 	name = "gear crate"
 	desc = "A secure gear crate."
-	closet_appearance = /decl/closet_appearance/crate/secure/weapon
+	closet_appearance = /singleton/closet_appearance/crate/secure/weapon
 
 /obj/structure/closet/crate/secure/hydrosec
 	name = "secure hydroponics crate"
 	desc = "A crate with a lock on it, painted in the scheme of botany and botanists."
-	closet_appearance = /decl/closet_appearance/crate/secure/hydroponics
+	closet_appearance = /singleton/closet_appearance/crate/secure/hydroponics
 
 /obj/structure/closet/crate/large
 	name = "large crate"
 	desc = "A hefty metal crate."
 	storage_capacity = 2 * MOB_LARGE
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_STRUCTURES
-	closet_appearance = /decl/closet_appearance/large_crate
+	closet_appearance = /singleton/closet_appearance/large_crate
 
 /obj/structure/closet/crate/large/hydroponics
-	closet_appearance = /decl/closet_appearance/large_crate/hydroponics
+	closet_appearance = /singleton/closet_appearance/large_crate/hydroponics
 
 /obj/structure/closet/crate/secure/large
 	name = "large crate"
 	desc = "A hefty metal crate with an electronic locking system."
-	closet_appearance = /decl/closet_appearance/large_crate/secure
+	closet_appearance = /singleton/closet_appearance/large_crate/secure
 
 	storage_capacity = 2 * MOB_LARGE
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_STRUCTURES
 
 /obj/structure/closet/crate/secure/large/phoron
-	closet_appearance = /decl/closet_appearance/large_crate/secure/hazard
+	closet_appearance = /singleton/closet_appearance/large_crate/secure/hazard
 
 //fluff variant
 /obj/structure/closet/crate/secure/large/reinforced
@@ -239,7 +239,7 @@
 /obj/structure/closet/crate/hydroponics
 	name = "hydroponics crate"
 	desc = "All you need to destroy those pesky weeds and pests."
-	closet_appearance = /decl/closet_appearance/crate/hydroponics
+	closet_appearance = /singleton/closet_appearance/crate/hydroponics
 
 /obj/structure/closet/crate/hydroponics/prespawned/WillContain()
 	return list(
@@ -257,7 +257,7 @@
 	open_sound = 'sound/items/Deconstruct.ogg'
 	close_sound = 'sound/items/Deconstruct.ogg'
 	req_access = list(access_xenobiology)
-	closet_appearance = /decl/closet_appearance/cart/biohazard
+	closet_appearance = /singleton/closet_appearance/cart/biohazard
 	storage_capacity = 2 * MOB_LARGE
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_MOBS|CLOSET_STORAGE_STRUCTURES
 
@@ -274,7 +274,7 @@
 	name = "biowaste disposal cart"
 	desc = "A heavy cart used for organ disposal with markings indicating the things inside are probably gross."
 	req_access = list(access_surgery)
-	closet_appearance = /decl/closet_appearance/cart/biohazard/alt
+	closet_appearance = /singleton/closet_appearance/cart/biohazard/alt
 
 /obj/structure/closet/crate/paper_refill
 	name = "paper refill crate"
@@ -287,7 +287,7 @@
 /obj/structure/closet/crate/uranium
 	name = "fissibles crate"
 	desc = "A crate with a radiation sign on it."
-	closet_appearance = /decl/closet_appearance/crate/radiation
+	closet_appearance = /singleton/closet_appearance/crate/radiation
 
 /obj/structure/closet/crate/uranium/WillContain()
 	return list(/obj/item/stack/material/uranium/ten = 5)

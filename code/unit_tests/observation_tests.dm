@@ -29,7 +29,7 @@
 
 /datum/unit_test/observation/proc/sanity_check_events(phase)
 	for(var/entry in GLOB.all_observable_events)
-		var/decl/observ/event = entry
+		var/singleton/observ/event = entry
 		if(null in event.global_listeners)
 			fail("[phase]: [event] - The global listeners list contains a null entry.")
 

@@ -1,4 +1,4 @@
-/decl/hierarchy/supply_pack/dispenser_cartridges/hydrazine
+/singleton/hierarchy/supply_pack/dispenser_cartridges/hydrazine
 	name = "Reagent refill - hydrazine"
 	containername = "hydrazine reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -9,7 +9,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/lithium
+/singleton/hierarchy/supply_pack/dispenser_cartridges/lithium
 	name = "Reagent refill - lithium"
 	containername = "lithium reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -20,7 +20,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/carbon
+/singleton/hierarchy/supply_pack/dispenser_cartridges/carbon
 	name = "Reagent refill - carbon"
 	containername = "carbon reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -31,7 +31,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/ammonia
+/singleton/hierarchy/supply_pack/dispenser_cartridges/ammonia
 	name = "Reagent refill - ammonia"
 	containername = "ammonia reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -42,7 +42,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/acetone
+/singleton/hierarchy/supply_pack/dispenser_cartridges/acetone
 	name = "Reagent refill - acetone"
 	containername = "acetone reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -53,7 +53,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/sodium
+/singleton/hierarchy/supply_pack/dispenser_cartridges/sodium
 	name = "Reagent refill - sodium"
 	containername = "sodium reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -64,7 +64,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/aluminium
+/singleton/hierarchy/supply_pack/dispenser_cartridges/aluminium
 	name = "Reagent refill - aluminium"
 	containername = "aluminium reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -75,7 +75,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/silicon
+/singleton/hierarchy/supply_pack/dispenser_cartridges/silicon
 	name = "Reagent refill - silicon"
 	containername = "silicon reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -86,7 +86,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/phosphorus
+/singleton/hierarchy/supply_pack/dispenser_cartridges/phosphorus
 	name = "Reagent refill - phosphorus"
 	containername = "phosphorus reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -97,7 +97,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/sulfur
+/singleton/hierarchy/supply_pack/dispenser_cartridges/sulfur
 	name = "Reagent refill - sulfur"
 	containername = "sulfur reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -108,7 +108,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/hydrochloric
+/singleton/hierarchy/supply_pack/dispenser_cartridges/hydrochloric
 	name = "Reagent refill - hydrochloric"
 	containername = "hydrochloric reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -119,7 +119,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/potassium
+/singleton/hierarchy/supply_pack/dispenser_cartridges/potassium
 	name = "Reagent refill - potassium"
 	containername = "potassium reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -130,7 +130,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/iron
+/singleton/hierarchy/supply_pack/dispenser_cartridges/iron
 	name = "Reagent refill - iron"
 	containername = "iron reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -141,7 +141,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/copper
+/singleton/hierarchy/supply_pack/dispenser_cartridges/copper
 	name = "Reagent refill - copper"
 	containername = "copper reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -152,7 +152,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/mercury
+/singleton/hierarchy/supply_pack/dispenser_cartridges/mercury
 	name = "Reagent refill - mercury"
 	containername = "mercury reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -163,7 +163,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/radium
+/singleton/hierarchy/supply_pack/dispenser_cartridges/radium
 	name = "Reagent refill - radium"
 	containername = "radium reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -174,7 +174,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/ethanol
+/singleton/hierarchy/supply_pack/dispenser_cartridges/ethanol
 	name = "Reagent refill - ethanol"
 	containername = "ethanol reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -185,7 +185,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/acid
+/singleton/hierarchy/supply_pack/dispenser_cartridges/acid
 	name = "Reagent refill - sulfuric acid"
 	containername = "acid reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -196,7 +196,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/tungsten
+/singleton/hierarchy/supply_pack/dispenser_cartridges/tungsten
 	name = "Reagent refill - tungsten"
 	containername = "tungsten reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure

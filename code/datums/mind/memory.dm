@@ -7,7 +7,7 @@
 	. = mind.StoreMemory(memory, options)
 
 /datum/mind/proc/StoreMemory(memory, options)
-	var/decl/memory_options/MO = decls_repository.get_decl(options || /decl/memory_options/default)
+	var/singleton/memory_options/MO = Singletons.Get(options || /singleton/memory_options/default)
 	return MO.Create(src, memory)
 
 /datum/mind/proc/RemoveMemory(datum/memory/memory, mob/remover)
@@ -76,14 +76,14 @@
 * Memories *
 ***********/
 /datum/memory
-	var/decl/memory_options/creation_source
+	var/singleton/memory_options/creation_source
 	var/memory        // Sanitized strings expected. Remember to unsanitize if adding editing
 	var/list/tags
 	var/weakref/owner
 	var/_owner_name
 	var/_owner_ckey   // The ckey of the original creator. Shouldn't be overriden once set
 
-/datum/memory/New(decl/memory_options/creation_source, weakref/owner, memory, tags)
+/datum/memory/New(singleton/memory_options/creation_source, weakref/owner, memory, tags)
 	..()
 	src.creation_source = creation_source
 	src.owner = owner
@@ -122,20 +122,20 @@
 *****************/
 
 // General memory handling
-/decl/memory_options
+/singleton/memory_options
 	var/memory_type = /datum/memory
 
-/decl/memory_options/proc/Validate(datum/mind/target)
+/singleton/memory_options/proc/Validate(datum/mind/target)
 	if(!target.current)
 		return "Mind is detached from mob."
 
-/decl/memory_options/proc/MemoryTags(datum/mind/target)
+/singleton/memory_options/proc/MemoryTags(datum/mind/target)
 	return
 
-/decl/memory_options/proc/Log(message)
+/singleton/memory_options/proc/Log(message)
 	log_and_message_admins(message)
 
-/decl/memory_options/proc/Create(datum/mind/target, memory)
+/singleton/memory_options/proc/Create(datum/mind/target, memory)
 	var/error = Validate(target)
 	if(error)
 		return error
@@ -147,14 +147,14 @@
 	Log("created a memory")
 
 // Default memory handling
-/decl/memory_options/default
+/singleton/memory_options/default
 	memory_type = /datum/memory/user
 	var/const/memory_limit = 32
 
-/decl/memory_options/default/MemoryTags(datum/mind/target)
+/singleton/memory_options/default/MemoryTags(datum/mind/target)
 	return target.MemoryTags()
 
-/decl/memory_options/default/Validate(datum/mind/target)
+/singleton/memory_options/default/Validate(datum/mind/target)
 	if((. = ..()))
 		return
 
@@ -168,10 +168,10 @@
 		return "Memory limit reached. A maximum of [memory_limit] user added memories allowed."
 
 // System memory handling
-/decl/memory_options/system
+/singleton/memory_options/system
 	memory_type = /datum/memory/system
 
-/decl/memory_options/system/Log(message)
+/singleton/memory_options/system/Log(message)
 	return
 
 /********

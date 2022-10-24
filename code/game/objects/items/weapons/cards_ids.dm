@@ -293,7 +293,7 @@ var/global/const/NO_EMAG_ACT = -50
 	id_card.formal_name_suffix = initial(id_card.formal_name_suffix)
 	if(client && client.prefs)
 		for(var/culturetag in client.prefs.cultural_info)
-			var/decl/cultural_info/culture = SSculture.get_culture(client.prefs.cultural_info[culturetag])
+			var/singleton/cultural_info/culture = SSculture.get_culture(client.prefs.cultural_info[culturetag])
 			if(culture)
 				id_card.formal_name_prefix = "[culture.get_formal_name_prefix()][id_card.formal_name_prefix]"
 				id_card.formal_name_suffix = "[id_card.formal_name_suffix][culture.get_formal_name_suffix()]"
@@ -364,11 +364,11 @@ var/global/const/NO_EMAG_ACT = -50
 	to_chat(usr, "The fingerprint hash on the card is [fingerprint_hash].")
 	return
 
-/decl/vv_set_handler/id_card_military_branch
+/singleton/vv_set_handler/id_card_military_branch
 	handled_type = /obj/item/card/id
 	handled_vars = list("military_branch")
 
-/decl/vv_set_handler/id_card_military_branch/handle_set_var(obj/item/card/id/id, variable, var_value, client)
+/singleton/vv_set_handler/id_card_military_branch/handle_set_var(obj/item/card/id/id, variable, var_value, client)
 	if(!var_value)
 		id.military_branch = null
 		id.military_rank = null
@@ -390,11 +390,11 @@ var/global/const/NO_EMAG_ACT = -50
 
 	to_chat(client, SPAN_WARNING("Input, must be an existing branch - [var_value] is invalid"))
 
-/decl/vv_set_handler/id_card_military_rank
+/singleton/vv_set_handler/id_card_military_rank
 	handled_type = /obj/item/card/id
 	handled_vars = list("military_rank")
 
-/decl/vv_set_handler/id_card_military_rank/handle_set_var(obj/item/card/id/id, variable, var_value, client)
+/singleton/vv_set_handler/id_card_military_rank/handle_set_var(obj/item/card/id/id, variable, var_value, client)
 	if(!var_value)
 		id.military_rank = null
 		return

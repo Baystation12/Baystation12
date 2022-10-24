@@ -70,7 +70,7 @@ Robots and antags can instruct.
 /datum/skill_verb/instruct/should_see_verb()
 	if(!..())
 		return
-	for(var/decl/hierarchy/skill/S in GLOB.skills)
+	for(var/singleton/hierarchy/skill/S in GLOB.skills)
 		if(skillset.owner.skill_check(S.type, SKILL_EXPERT))
 			return 1
 
@@ -94,7 +94,7 @@ Robots and antags can instruct.
 		return
 
 	var/options = list()
-	for(var/decl/hierarchy/skill/S in GLOB.skills)
+	for(var/singleton/hierarchy/skill/S in GLOB.skills)
 		if(!target.skill_check(S.type, SKILL_BASIC) && skill_check(S.type, SKILL_EXPERT))
 			options[S.name] = S
 	if(!length(options))
@@ -102,7 +102,7 @@ Robots and antags can instruct.
 	var/choice = input(src, "Select skill to instruct \the [target] in:", "Skill select") as null|anything in options
 	if(!(choice in options) || !(target in view(2)))
 		return
-	var/decl/hierarchy/skill/skill = options[choice]
+	var/singleton/hierarchy/skill/skill = options[choice]
 
 	if(!do_skilled(6 SECONDS, skill.type, target, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return

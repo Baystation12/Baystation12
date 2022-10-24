@@ -6,7 +6,7 @@
 	density = TRUE
 	idle_power_usage = 0
 	active_power_usage = 1 KILOWATTS
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 	health_max = 200
 	health_resistances = DAMAGE_RESIST_ELECTRICAL
 	health_min_damage = 10

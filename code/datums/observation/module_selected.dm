@@ -7,9 +7,9 @@
 //			/mob/living/silicon/robot/robot:  The robot that selected the module.
 //			/obj/item/module:                 The selected module.
 
-GLOBAL_DATUM_INIT(module_selected_event, /decl/observ/module_selected, new)
+GLOBAL_DATUM_INIT(module_selected_event, /singleton/observ/module_selected, new)
 
-/decl/observ/module_selected
+/singleton/observ/module_selected
 	name = "Module Selected"
 	expected_type = /mob/living/silicon/robot
 

@@ -428,7 +428,7 @@
 		checked_cameras++
 		group_by(cameras_by_ctag, C.c_tag, C)
 
-	var/number_of_issues = number_of_issues(cameras_by_ctag, "Camera c_tags", /decl/noi_feedback/detailed)
+	var/number_of_issues = number_of_issues(cameras_by_ctag, "Camera c_tags", /singleton/noi_feedback/detailed)
 	if(number_of_issues)
 		fail("[number_of_issues] issue\s with camera c_tags found.")
 	else

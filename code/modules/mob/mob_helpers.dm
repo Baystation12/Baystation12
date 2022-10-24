@@ -440,7 +440,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 			message = "The ghost of [SPAN_CLASS("name", "[name]")] now [pick("skulks","lurks","prowls","creeps","stalks")] among the dead[diedat]. [message]"
 		else
 			message = "[SPAN_CLASS("name", "[name]")] no longer [pick("skulks","lurks","prowls","creeps","stalks")] in the realm of the dead. [message]"
-		communicate(/decl/communication_channel/dsay, C || O, message, /decl/dsay_communication/direct)
+		communicate(/singleton/communication_channel/dsay, C || O, message, /singleton/dsay_communication/direct)
 
 /mob/proc/switch_to_camera(obj/machinery/camera/C)
 	if (!C.can_use() || stat || (get_dist(C, src) > 1 || machine != src || blinded))

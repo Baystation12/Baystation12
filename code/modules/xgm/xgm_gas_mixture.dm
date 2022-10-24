@@ -9,7 +9,7 @@
 	var/total_moles = 0
 	//Volume of this mix.
 	var/volume = CELL_VOLUME
-	//Size of the group this gas_mixture is representing.  1 for singletons.
+	//Size of the group this gas_mixture is representing.  1 for Singletons.
 	var/group_multiplier = 1
 
 	//List of active tile overlays for this gas_mixture.  Updated by check_tile_graphic()

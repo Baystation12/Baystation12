@@ -35,17 +35,17 @@
 /obj/item/paper_fortune_teller/on_update_icon()
 	. = ..()
 	var/datum/state_machine/fsm = get_state_machine(src, /datum/state_machine/paper_fortune)
-	if(fsm && istype(fsm.current_state, /decl/state/paper_fortune))
-		var/decl/state/paper_fortune/fsm_state = fsm.current_state
+	if(fsm && istype(fsm.current_state, /singleton/state/paper_fortune))
+		var/singleton/state/paper_fortune/fsm_state = fsm.current_state
 		icon_state = "[initial(icon_state)]-[fsm_state.icon_state]"
 
 /obj/item/paper_fortune_teller/attack_self(mob/user)
 	var/datum/state_machine/fsm = get_state_machine(src, /datum/state_machine/paper_fortune)
-	if(!fsm || !istype(fsm.current_state, /decl/state/paper_fortune))
+	if(!fsm || !istype(fsm.current_state, /singleton/state/paper_fortune))
 		to_chat(user, SPAN_WARNING("You can't seem to work out how \the [src] works."))
 		return TRUE
 
-	var/decl/state/paper_fortune/fsm_state = fsm.current_state
+	var/singleton/state/paper_fortune/fsm_state = fsm.current_state
 	var/current_fsm = get_state_machine(src, /datum/state_machine/paper_fortune)
 	if(current_fsm != fsm || fsm_state != fsm.current_state || QDELETED(src) || QDELETED(user) || loc != user)
 		return TRUE

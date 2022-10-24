@@ -25,21 +25,21 @@
 /obj/item/deck/inherit_custom_item_data(datum/custom_item/citem)
 	. = ..()
 	if(islist(citem.additional_data["extra_cards"]))
-		for(var/card_decl in citem.additional_data["extra_cards"])
-			if(islist(card_decl))
+		for(var/card_singleton in citem.additional_data["extra_cards"])
+			if(islist(card_singleton))
 				var/datum/playingcard/custom/P = new()
-				if(!isnull(card_decl["name"]))
-					P.name = card_decl["name"]
-				if(!isnull(card_decl["card_icon"]))
-					P.card_icon = card_decl["card_icon"]
-				if(!isnull(card_decl["back_icon"]))
-					P.back_icon = card_decl["back_icon"]
-				if(!isnull(card_decl["desc"]))
-					P.desc = card_decl["desc"]
-				if(!isnull(card_decl["use_custom_front"]))
-					P.use_custom_front = card_decl["use_custom_front"]
-				if(!isnull(card_decl["use_custom_back"]))
-					P.use_custom_back = card_decl["use_custom_back"]
+				if(!isnull(card_singleton["name"]))
+					P.name = card_singleton["name"]
+				if(!isnull(card_singleton["card_icon"]))
+					P.card_icon = card_singleton["card_icon"]
+				if(!isnull(card_singleton["back_icon"]))
+					P.back_icon = card_singleton["back_icon"]
+				if(!isnull(card_singleton["desc"]))
+					P.desc = card_singleton["desc"]
+				if(!isnull(card_singleton["use_custom_front"]))
+					P.use_custom_front = card_singleton["use_custom_front"]
+				if(!isnull(card_singleton["use_custom_back"]))
+					P.use_custom_back = card_singleton["use_custom_back"]
 				cards += P
 
 /obj/item/deck/holder

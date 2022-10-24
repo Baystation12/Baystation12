@@ -2,7 +2,7 @@
 	name = "secure locker"
 	desc = "It's a card-locked storage unit."
 
-	closet_appearance = /decl/closet_appearance/secure_closet
+	closet_appearance = /singleton/closet_appearance/secure_closet
 	setup = CLOSET_HAS_LOCK | CLOSET_CAN_BE_WELDED
 	locked = TRUE
 	health_max = 200

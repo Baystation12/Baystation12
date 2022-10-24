@@ -1,7 +1,7 @@
 /// Maluses generally only come with negative aspects
-/decl/trait/malus
-	abstract_type = /decl/trait/malus
+/singleton/trait/malus
+	abstract_type = /singleton/trait/malus
 
-/decl/trait/malus/New()
+/singleton/trait/malus/New()
 	..()
 	name = "Malus - " + name

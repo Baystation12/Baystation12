@@ -47,13 +47,13 @@
 	exertion_reagent_scale = 5
 	exertion_reagent_path = /datum/reagent/lactate
 	exertion_emotes_biological = list(
-		/decl/emote/exertion/biological,
-		/decl/emote/exertion/biological/breath,
-		/decl/emote/exertion/biological/pant
+		/singleton/emote/exertion/biological,
+		/singleton/emote/exertion/biological/breath,
+		/singleton/emote/exertion/biological/pant
 	)
 	exertion_emotes_synthetic = list(
-		/decl/emote/exertion/synthetic,
-		/decl/emote/exertion/synthetic/creak
+		/singleton/emote/exertion/synthetic,
+		/singleton/emote/exertion/synthetic/creak
 	)
 
 /datum/species/human/get_bodytype(mob/living/carbon/human/H)
@@ -239,22 +239,22 @@
 	exertion_reagent_scale = 5
 	exertion_reagent_path = /datum/reagent/lactate
 	exertion_emotes_biological = list(
-		/decl/emote/exertion/biological,
-		/decl/emote/exertion/biological/breath,
-		/decl/emote/exertion/biological/pant
+		/singleton/emote/exertion/biological,
+		/singleton/emote/exertion/biological/breath,
+		/singleton/emote/exertion/biological/pant
 	)
 	exertion_emotes_synthetic = list(
-		/decl/emote/exertion/synthetic,
-		/decl/emote/exertion/synthetic/creak
+		/singleton/emote/exertion/synthetic,
+		/singleton/emote/exertion/synthetic/creak
 	)
 
 	ingest_amount = 15
 
 	traits = list(
-		/decl/trait/boon/clear_mind = TRAIT_LEVEL_MINOR,
-		/decl/trait/malus/animal_protein = TRAIT_LEVEL_MAJOR,
-		/decl/trait/malus/ethanol = TRAIT_LEVEL_MODERATE,
-		/decl/trait/general/permeable_skin = TRAIT_LEVEL_MINOR
+		/singleton/trait/boon/clear_mind = TRAIT_LEVEL_MINOR,
+		/singleton/trait/malus/animal_protein = TRAIT_LEVEL_MAJOR,
+		/singleton/trait/malus/ethanol = TRAIT_LEVEL_MODERATE,
+		/singleton/trait/general/permeable_skin = TRAIT_LEVEL_MINOR
 	)
 
 /datum/species/skrell/get_sex(mob/living/carbon/human/H)
@@ -276,7 +276,7 @@
 	deform = 'icons/mob/human_races/species/diona/deformed_body.dmi'
 	preview_icon = 'icons/mob/human_races/species/diona/preview.dmi'
 	hidden_from_codex = FALSE
-	move_intents = list(/decl/move_intent/walk, /decl/move_intent/creep)
+	move_intents = list(/singleton/move_intent/walk, /singleton/move_intent/creep)
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
 	//primitive_form = "Nymph"
 	slowdown = 5
@@ -365,9 +365,9 @@
 	)
 
 	traits = list(
-		/decl/trait/boon/clear_mind = TRAIT_LEVEL_MAJOR,
-		/decl/trait/general/metabolically_inert = TRAIT_LEVEL_MODERATE,
-		/decl/trait/general/nonpermeable_skin = TRAIT_LEVEL_EXISTS
+		/singleton/trait/boon/clear_mind = TRAIT_LEVEL_MAJOR,
+		/singleton/trait/general/metabolically_inert = TRAIT_LEVEL_MODERATE,
+		/singleton/trait/general/nonpermeable_skin = TRAIT_LEVEL_EXISTS
 	)
 
 /proc/spawn_diona_nymph(turf/target)

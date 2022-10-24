@@ -71,7 +71,7 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 
 	var/heal_rate = 5 // Temp. Regen per tick.
 
-	traits = list(/decl/trait/malus/water = TRAIT_LEVEL_MODERATE)
+	traits = list(/singleton/trait/malus/water = TRAIT_LEVEL_MODERATE)
 
 /datum/species/shapeshifter/promethean/New()
 	..()

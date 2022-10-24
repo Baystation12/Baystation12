@@ -132,7 +132,7 @@
 	glass_desc = "A glass of deadly juice."
 
 /datum/reagent/toxin/poisonberryjuice/affect_blood(mob/living/carbon/M, removed)
-	if(M.HasTrait(/decl/trait/boon/filtered_blood))
+	if(M.HasTrait(/singleton/trait/boon/filtered_blood))
 		return
 	return ..()
 
@@ -256,11 +256,11 @@
 	if (IS_METABOLICALLY_INERT(carbon))
 		return
 
-	if (HAS_TRAIT(carbon, /decl/trait/boon/clear_mind))
+	if (HAS_TRAIT(carbon, /singleton/trait/boon/clear_mind))
 		carbon.heal_organ_damage(1 * removed, 0)
 		carbon.add_chemical_effect(CE_PULSE, 1)
 		carbon.add_chemical_effect(CE_STIMULANT, 2)
-	if (!HAS_TRAIT(carbon, /decl/trait/boon/cast_iron_stomach))
+	if (!HAS_TRAIT(carbon, /singleton/trait/boon/cast_iron_stomach))
 		carbon.heal_organ_damage(0.3 * removed, 0)
 
 

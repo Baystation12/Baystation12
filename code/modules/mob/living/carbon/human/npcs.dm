@@ -14,7 +14,7 @@
 			C = new/obj/item/clothing/head/collectable/petehat(src)
 			equip_to_appropriate_slot(C)
 
-/decl/hierarchy/outfit/blank_subject
+/singleton/hierarchy/outfit/blank_subject
 	name = "Test Subject"
 	uniform = /obj/item/clothing/under/color/white
 	shoes = /obj/item/clothing/shoes/white
@@ -22,7 +22,7 @@
 	mask = /obj/item/clothing/mask/muzzle
 	suit = /obj/item/clothing/suit/straight_jacket
 
-/decl/hierarchy/outfit/blank_subject/post_equip(mob/living/carbon/human/H)
+/singleton/hierarchy/outfit/blank_subject/post_equip(mob/living/carbon/human/H)
 	..()
 	var/obj/item/clothing/under/color/white/C = locate() in H
 	if(C)
@@ -39,7 +39,7 @@
 /mob/living/carbon/human/blank/LateInitialize()
 	var/number = "[pick(possible_changeling_IDs)]-[rand(1,30)]"
 	fully_replace_character_name("Subject [number]")
-	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/blank_subject)
+	var/singleton/hierarchy/outfit/outfit = outfit_by_type(/singleton/hierarchy/outfit/blank_subject)
 	outfit.equip(src)
 	var/obj/item/clothing/head/helmet/facecover/F = locate() in src
 	if (F)

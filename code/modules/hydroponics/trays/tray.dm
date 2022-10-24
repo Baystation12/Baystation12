@@ -7,7 +7,7 @@
 	anchored = TRUE
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	volume = 100
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
 	init_flags = EMPTY_BITFIELD

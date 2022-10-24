@@ -9,7 +9,7 @@
 	active_power_usage = 5000
 	req_access = list(access_robotics)
 	base_type = /obj/machinery/robotics_fabricator
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
 

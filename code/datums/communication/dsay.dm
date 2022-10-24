@@ -1,7 +1,7 @@
 #define DSAY_CAN_COMMUNICATE 1
 #define DSAY_ASK_BASE 2
 
-/decl/communication_channel/dsay
+/singleton/communication_channel/dsay
 	name = "DSAY"
 	config_setting = "dsay_allowed"
 	expected_communicator_type = /client
@@ -10,19 +10,19 @@
 	mute_setting = MUTE_DEADCHAT
 	show_preference_setting = /datum/client_preference/show_dsay
 
-/decl/communication_channel/dsay/communicate(communicator, message, speech_method = /decl/dsay_communication/say)
+/singleton/communication_channel/dsay/communicate(communicator, message, speech_method = /singleton/dsay_communication/say)
 	..()
 
-/decl/communication_channel/dsay/can_communicate(client/communicator, message, speech_method_type)
-	var/decl/dsay_communication/speech_method = decls_repository.get_decl(speech_method_type)
+/singleton/communication_channel/dsay/can_communicate(client/communicator, message, speech_method_type)
+	var/singleton/dsay_communication/speech_method = Singletons.Get(speech_method_type)
 	switch(speech_method.can_communicate(communicator, message))
 		if(DSAY_CAN_COMMUNICATE)
 			return TRUE
 		if(DSAY_ASK_BASE)
 			return ..()
 
-/decl/communication_channel/dsay/do_communicate(client/communicator, message, speech_method_type)
-	var/decl/dsay_communication/speech_method = decls_repository.get_decl(speech_method_type)
+/singleton/communication_channel/dsay/do_communicate(client/communicator, message, speech_method_type)
+	var/singleton/dsay_communication/speech_method = Singletons.Get(speech_method_type)
 
 	speech_method.adjust_channel(src)
 
@@ -32,7 +32,7 @@
 		var/sent_message = speech_method.get_message(communicator, M, message)
 		receive_communication(communicator, M, SPAN_CLASS("deadsay", "[create_text_tag("dead", "DEAD:", M.client)] [sent_message]"))
 
-/decl/dsay_communication/proc/can_communicate(client/communicator, message)
+/singleton/dsay_communication/proc/can_communicate(client/communicator, message)
 	if(!istype(communicator))
 		return FALSE
 	if(communicator.mob.stat != DEAD)
@@ -40,7 +40,7 @@
 		return FALSE
 	return DSAY_ASK_BASE
 
-/decl/dsay_communication/proc/can_receive(client/C, mob/M)
+/singleton/dsay_communication/proc/can_receive(client/C, mob/M)
 	if(istype(C) && C.mob == M)
 		return TRUE
 	if(M.get_preference_value(/datum/client_preference/show_dsay) == GLOB.PREF_HIDE)
@@ -55,7 +55,7 @@
 		return FALSE
 	return TRUE
 
-/decl/dsay_communication/proc/get_name(client/C, mob/M)
+/singleton/dsay_communication/proc/get_name(client/C, mob/M)
 	var/name
 	var/keyname
 
@@ -89,25 +89,25 @@
 			lname = name
 	return SPAN_CLASS("name", "[lname]")
 
-/decl/dsay_communication/proc/get_message(client/C, mob/M, message)
+/singleton/dsay_communication/proc/get_message(client/C, mob/M, message)
 	var say_verb = pick("complains","moans","whines","laments","blubbers")
 	return "[get_name(C, M)] [say_verb], [SPAN_CLASS("message linkify", "\"[message]\"")]"
 
-/decl/dsay_communication/emote/get_message(client/C, mob/M, message)
+/singleton/dsay_communication/emote/get_message(client/C, mob/M, message)
 	return "[get_name(C, M)] [SPAN_CLASS("message linkify", "[message]")]"
 
-/decl/dsay_communication/proc/adjust_channel(decl/communication_channel/dsay)
+/singleton/dsay_communication/proc/adjust_channel(singleton/communication_channel/dsay)
 	dsay.flags |= COMMUNICATION_ADMIN_FOLLOW|COMMUNICATION_GHOST_FOLLOW // Add admin and ghost follow
 
-/decl/dsay_communication/say/adjust_channel(decl/communication_channel/dsay)
+/singleton/dsay_communication/say/adjust_channel(singleton/communication_channel/dsay)
 	dsay.log_proc = /proc/log_say
 	..()
 
-/decl/dsay_communication/emote/adjust_channel(decl/communication_channel/dsay)
+/singleton/dsay_communication/emote/adjust_channel(singleton/communication_channel/dsay)
 	dsay.log_proc = /proc/log_emote
 	..()
 
-/decl/dsay_communication/admin/can_communicate(client/communicator, message, decl/communication_channel/dsay)
+/singleton/dsay_communication/admin/can_communicate(client/communicator, message, singleton/communication_channel/dsay)
 	if(!istype(communicator))
 		return FALSE
 	if(!communicator.holder)
@@ -115,23 +115,23 @@
 		return FALSE
 	return DSAY_ASK_BASE
 
-/decl/dsay_communication/admin/get_message(client/communicator, mob/M, message)
+/singleton/dsay_communication/admin/get_message(client/communicator, mob/M, message)
 	var/stafftype = uppertext(communicator.holder.rank)
 	return "[SPAN_CLASS("name", "[stafftype]([communicator.key])")] says, [SPAN_CLASS("message linkify", "\"[message]\"")]"
 
-/decl/dsay_communication/admin/adjust_channel(decl/communication_channel/dsay)
+/singleton/dsay_communication/admin/adjust_channel(singleton/communication_channel/dsay)
 	dsay.log_proc = /proc/log_say
 	dsay.flags |= COMMUNICATION_ADMIN_FOLLOW  // Add admin follow
 	dsay.flags &= ~COMMUNICATION_GHOST_FOLLOW // Remove ghost follow
 
-/decl/dsay_communication/direct/adjust_channel(decl/communication_channel/dsay, communicator)
+/singleton/dsay_communication/direct/adjust_channel(singleton/communication_channel/dsay, communicator)
 	dsay.log_proc = /proc/log_say
 	dsay.flags &= ~(COMMUNICATION_ADMIN_FOLLOW|COMMUNICATION_GHOST_FOLLOW) // Remove admin and ghost follow
 
-/decl/dsay_communication/direct/can_communicate()
+/singleton/dsay_communication/direct/can_communicate()
 	return DSAY_CAN_COMMUNICATE
 
-/decl/dsay_communication/direct/get_message(client/communicator, mob/M, message)
+/singleton/dsay_communication/direct/get_message(client/communicator, mob/M, message)
 	return message
 
 #undef DSAY_CAN_COMMUNICATE

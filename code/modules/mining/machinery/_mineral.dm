@@ -2,7 +2,7 @@
 	icon = 'icons/obj/machines/mining_machines.dmi'
 	density =  TRUE
 	anchored = TRUE
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
 
@@ -25,7 +25,7 @@
 	find_console()
 	. = ..()
 
-/obj/machinery/mineral/state_transition(decl/machine_construction/default/new_state)
+/obj/machinery/mineral/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state))
 		updateUsrDialog()

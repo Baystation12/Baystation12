@@ -12,14 +12,14 @@
 		/obj/item/stock_parts/power/apc
 	)
 	public_variables = list(
-		/decl/public_access/public_variable/gas,
-		/decl/public_access/public_variable/pressure,
-		/decl/public_access/public_variable/temperature
+		/singleton/public_access/public_variable/gas,
+		/singleton/public_access/public_variable/pressure,
+		/singleton/public_access/public_variable/temperature
 	)
-	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/meter = 1)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/basic_transmitter/meter = 1)
 
 	frame_type = /obj/item/machine_chassis/pipe_meter
-	construct_state = /decl/machine_construction/default/item_chassis
+	construct_state = /singleton/machine_construction/default/item_chassis
 	base_type = /obj/machinery/meter
 
 /obj/machinery/meter/Initialize()
@@ -120,8 +120,8 @@
 		/obj/item/stock_parts/power/apc/buildable
 	)
 
-/decl/stock_part_preset/radio/basic_transmitter/meter
+/singleton/stock_part_preset/radio/basic_transmitter/meter
 	transmit_on_tick = list(
-		"pressure" = /decl/public_access/public_variable/pressure,
+		"pressure" = /singleton/public_access/public_variable/pressure,
 	)
 	frequency = ATMOS_TANK_FREQ

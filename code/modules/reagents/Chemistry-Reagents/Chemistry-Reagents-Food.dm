@@ -50,7 +50,7 @@
 /datum/reagent/nutriment/proc/adjust_nutrition(mob/living/carbon/M, removed)
 	var/nut_removed = removed
 	var/hyd_removed = removed
-	if (HAS_TRAIT(M, /decl/trait/boon/cast_iron_stomach))
+	if (HAS_TRAIT(M, /singleton/trait/boon/cast_iron_stomach))
 		removed *= 0.1 // Unathi get most of their nutrition from meat.
 	if(nutriment_factor)
 		M.adjust_nutrition(nutriment_factor * nut_removed) // For hunger and fatness
@@ -71,9 +71,9 @@
 	protein_amount = 1
 
 /datum/reagent/nutriment/protein/adjust_nutrition(mob/living/carbon/M, removed)
-	if (HAS_TRAIT(M, /decl/trait/malus/animal_protein))
+	if (HAS_TRAIT(M, /singleton/trait/malus/animal_protein))
 		return
-	if (HAS_TRAIT(M, /decl/trait/boon/cast_iron_stomach))
+	if (HAS_TRAIT(M, /singleton/trait/boon/cast_iron_stomach))
 		removed *= 2.25
 	M.adjust_nutrition(nutriment_factor * removed)
 
@@ -377,7 +377,7 @@
 	M.adjustToxLoss(0.5 * removed)
 
 /datum/reagent/capsaicin/affect_ingest(mob/living/carbon/M, removed)
-	if(IS_METABOLICALLY_INERT(M) || M.HasTrait(/decl/trait/boon/cast_iron_stomach))
+	if(IS_METABOLICALLY_INERT(M) || M.HasTrait(/singleton/trait/boon/cast_iron_stomach))
 		return
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -418,7 +418,7 @@
 	var/obj/item/face_protection = null
 	var/obj/item/partial_face_protection = null
 
-	var/permeability = GET_TRAIT_LEVEL(M, /decl/trait/general/permeable_skin)
+	var/permeability = GET_TRAIT_LEVEL(M, /singleton/trait/general/permeable_skin)
 	var/effective_strength = 5 + (3 * permeability)
 
 	var/list/protection

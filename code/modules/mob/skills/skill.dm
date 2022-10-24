@@ -1,9 +1,9 @@
 GLOBAL_LIST_EMPTY(skills)
 
-/decl/hierarchy/skill
+/singleton/hierarchy/skill
 	var/ID = "none"                        // ID of this skill. Needs to be unique.
 	name = "None"                          // Name of the skill. This is what the player sees.
-	hierarchy_type = /decl/hierarchy/skill // Don't mess with this without changing how Initialize works.
+	hierarchy_type = /singleton/hierarchy/skill // Don't mess with this without changing how Initialize works.
 	var/desc = "Placeholder skill"         // Generic description of this skill.
 
    	// Names for different skill values, in order from 1 up.
@@ -16,7 +16,7 @@ GLOBAL_LIST_EMPTY(skills)
 	var/default_max = SKILL_ADEPT          //Makes the skill capped at this value in selection unless overriden at job level.
 	var/prerequisites                      // A list of skill prerequisites, if needed.
 
-/decl/hierarchy/skill/proc/get_cost(level)
+/singleton/hierarchy/skill/proc/get_cost(level)
 	switch(level)
 		if(SKILL_BASIC, SKILL_ADEPT)
 			return difficulty
@@ -25,51 +25,51 @@ GLOBAL_LIST_EMPTY(skills)
 		else
 			return 0
 
-/decl/hierarchy/skill/proc/update_special_effects(mob/mob, level)
+/singleton/hierarchy/skill/proc/update_special_effects(mob/mob, level)
 
-/decl/hierarchy/skill/Initialize()
+/singleton/hierarchy/skill/Initialize()
 	. = ..()
 	if(is_hidden_category())
 		if(!GLOB.skills.len)
-			for(var/decl/hierarchy/skill/C in children)
+			for(var/singleton/hierarchy/skill/C in children)
 				GLOB.skills += C.get_descendents()
 		else
-			CRASH("Warning: multiple instances of /decl/hierarchy/skill have been created!")
+			CRASH("Warning: multiple instances of /singleton/hierarchy/skill have been created!")
 
-/decl/hierarchy/skill/dd_SortValue()
+/singleton/hierarchy/skill/dd_SortValue()
 	return ID
 
-/decl/hierarchy/skill/organizational
+/singleton/hierarchy/skill/organizational
 	name = "Organizational"
 	ID	 = "1"
 	difficulty = SKILL_EASY
 	default_max = SKILL_MAX
 
-/decl/hierarchy/skill/general
+/singleton/hierarchy/skill/general
 	name = "General"
 	ID	 = "2"
 	difficulty = SKILL_EASY
 	default_max = SKILL_MAX
 
-/decl/hierarchy/skill/service
+/singleton/hierarchy/skill/service
 	name = "Service"
 	ID	 = "service"
 	difficulty = SKILL_EASY
 	default_max = SKILL_MAX
 
-/decl/hierarchy/skill/security
+/singleton/hierarchy/skill/security
 	name = "Security"
 	ID	 = "security"
 
-/decl/hierarchy/skill/engineering
+/singleton/hierarchy/skill/engineering
 	name = "Engineering"
 	ID	 = "engineering"
 
-/decl/hierarchy/skill/research
+/singleton/hierarchy/skill/research
 	name = "Research"
 	ID	 = "research"
 
-/decl/hierarchy/skill/medical
+/singleton/hierarchy/skill/medical
 	name = "Medical"
 	ID	 = "medical"
 	difficulty = SKILL_HARD
@@ -77,7 +77,7 @@ GLOBAL_LIST_EMPTY(skills)
 // ONLY SKILL DEFINITIONS BELOW THIS LINE
 // Category: Organizational
 
-/decl/hierarchy/skill/organizational/bureaucracy
+/singleton/hierarchy/skill/organizational/bureaucracy
 	ID = "bureaucracy"
 	name = "Bureaucracy"
 	desc = "Your ability to write and complete paperwork, navigate complex organiztions, and understand laws and regulations."
@@ -87,7 +87,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "With your experience, you can easily create paperwork for any eventuality, and write reports which are clear and understandable. You have an excellent knowledge of the law, possibly including formal legal training.",
 						"Master"		= "You can make paperwork dance to your bidding, and navigate the most byzantine bureaucratic structures with ease and familiarity. Your reports are works of literature. Your knowledge of the law is both broad and intimate, and you may be certified to practice law.")
 
-/decl/hierarchy/skill/organizational/finance
+/singleton/hierarchy/skill/organizational/finance
 	ID = "finance"
 	name = "Finance"
 	desc = "Your ability to manage money and investments."
@@ -99,7 +99,7 @@ GLOBAL_LIST_EMPTY(skills)
 
 // Category: General
 
-/decl/hierarchy/skill/general/EVA
+/singleton/hierarchy/skill/general/EVA
 	ID = "EVA"
 	name = "Extra-vehicular activity"
 	desc = "This skill describes your skill and knowledge of space-suits and working in vacuum."
@@ -109,7 +109,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You can use all kinds of space suits, including specialized versions. Your years of experience in EVA keep you from being disoriented in space, and you have experience using a jetpack to move around. <br>- You cannot slip anymore.",
 						"Master"		= "You are just as much at home in a vacuum as in atmosphere. You probably do your job almost entirely EVA.<br>- You cannot get floored anymore.<br>- You get bonus speed in zero-G.")
 
-/decl/hierarchy/skill/general/EVA/mech
+/singleton/hierarchy/skill/general/EVA/mech
 	ID = "exosuit"
 	name = "Exosuit Operation"
 	desc = "Allows you to operate exosuits well."
@@ -119,7 +119,7 @@ GLOBAL_LIST_EMPTY(skills)
 	default_max = SKILL_BASIC
 	difficulty = SKILL_AVERAGE
 
-/decl/hierarchy/skill/general/pilot
+/singleton/hierarchy/skill/general/pilot
 	ID = "pilot"
 	name = "Piloting"
 	desc = "Describes your experience and understanding of piloting spacecraft, from small and short-range pods to corvette sized vessels."
@@ -131,7 +131,7 @@ GLOBAL_LIST_EMPTY(skills)
 	difficulty = SKILL_AVERAGE
 	default_max = SKILL_ADEPT
 
-/decl/hierarchy/skill/general/hauling
+/singleton/hierarchy/skill/general/hauling
 	ID = "hauling"
 	name = "Athletics"
 	desc = "Your ability to perform tasks requiring great strength, dexterity, or endurance."
@@ -141,7 +141,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You likely have experience with heavy work in trying physical conditions, and are in excellent shape. You may visit the gym frequently.",
 						"Master"		= "You are in excellent shape. You're well-adapted to performing heavy physical labor, and may have requested extra PT.")
 
-/decl/hierarchy/skill/general/computer
+/singleton/hierarchy/skill/general/computer
 	ID = "computer"
 	name = "Information Technology"
 	desc = "Describes your understanding of computers, software and communication. Not a requirement for using computers, but definitely helps. Used in telecommunications and programming of computers and AIs."
@@ -153,7 +153,7 @@ GLOBAL_LIST_EMPTY(skills)
 
 // Category: Service
 
-/decl/hierarchy/skill/service/botany
+/singleton/hierarchy/skill/service/botany
 	ID = "botany"
 	name = "Botany"
 	desc = "Describes how good a character is at growing and maintaining plants."
@@ -163,7 +163,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You're a botanist or farmer, capable of running a facility's hydroponics farms or doing botanical research. You are adept at creating custom hybrids and modified strains.",
 						"Master"		= "You're a specialized botanist. You can care for even the most exotic, fragile, or dangerous plants. You can use gene manipulation machinery with precision, and are often able to avoid the degradation of samples.")
 
-/decl/hierarchy/skill/service/cooking
+/singleton/hierarchy/skill/service/cooking
 	ID = "cooking"
 	name = "Cooking"
 	desc = "Describes a character's skill at preparing meals and other consumable goods. This includes mixing alcoholic beverages."
@@ -175,7 +175,7 @@ GLOBAL_LIST_EMPTY(skills)
 
 // Category: Security
 
-/decl/hierarchy/skill/security/combat
+/singleton/hierarchy/skill/security/combat
 	ID = "combat"
 	name = "Close Combat"
 	desc = "This skill describes your training in hand-to-hand combat or melee weapon usage. While expertise in this area is rare in the era of firearms, experts still exist among athletes."
@@ -185,7 +185,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You're good at hand-to-hand combat. You've trained explicitly in a martial art or as a close combatant as part of a military or police unit. You can use weaponry competently and you can think strategically and quickly in a melee. You're in good shape and you spend time training.",
 						"Master"		= "You specialize in hand-to-hand combat. You're well-trained in a practical martial art, and in good shape. You spend a lot of time practicing. You can take on just about anyone, use just about any weapon, and usually come out on top. You may be a professional athlete or special forces member.")
 
-/decl/hierarchy/skill/security/combat/get_cost(level)
+/singleton/hierarchy/skill/security/combat/get_cost(level)
 	switch(level)
 		if(SKILL_BASIC)
 			return difficulty
@@ -196,7 +196,7 @@ GLOBAL_LIST_EMPTY(skills)
 		else
 			return 0
 
-/decl/hierarchy/skill/security/weapons
+/singleton/hierarchy/skill/security/weapons
 	ID = "weapons"
 	name = "Weapons Expertise"
 	desc = "This skill describes your expertise with and knowledge of weapons. A low level in this skill implies knowledge of simple weapons, for example flashes. A high level in this skill implies knowledge of complex weapons, such as unconfigured grenades, riot shields, pulse rifles or bombs. A low-medium level in this skill is typical for security officers, a high level of this skill is typical for special agents and soldiers."
@@ -206,7 +206,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You've used firearms and other ranged weapons in high-stress situations, and your skills have become automatic. Your aim is good.<br>-You will automatically unsafety a gun when firing it on harm intent.<br>-You can perform tactical and speed reloads. The time taken decreases with level.",
 						"Master"		= "You are an exceptional shot with a variety of weapons, from simple to exotic. You use a weapon as naturally as though it were a part of your own body. You may be a sniper or special forces operator of some kind.<br>- You get extra accuracy for sniper rifles.<br>- You automatically eject shells from bolt-action firearms.")
 
-/decl/hierarchy/skill/security/weapons/get_cost(level)
+/singleton/hierarchy/skill/security/weapons/get_cost(level)
 	switch(level)
 		if(SKILL_BASIC)
 			return difficulty
@@ -219,7 +219,7 @@ GLOBAL_LIST_EMPTY(skills)
 		else
 			return 0
 
-/decl/hierarchy/skill/security/forensics
+/singleton/hierarchy/skill/security/forensics
 	ID = "forensics"
 	name = "Forensics"
 	desc = "Describes your skill at performing forensic examinations and identifying vital evidence. Does not cover analytical abilities, and as such isn't the only indicator for your investigation skill. Note that in order to perform autopsy, the surgery skill is also required."
@@ -230,7 +230,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Master"		= "You're a big name in forensic science. You might be an investigator who cracked a famous case, or you published papers on new methods of forensics. Either way, if there's a forensic trail, you will find it, period.<br>- You can notice traces of wiped off blood.")
 
 
-/decl/hierarchy/skill/security/forensics/get_cost(level)
+/singleton/hierarchy/skill/security/forensics/get_cost(level)
 	switch(level)
 		if(SKILL_BASIC, SKILL_ADEPT, SKILL_EXPERT)
 			return difficulty * 2
@@ -241,7 +241,7 @@ GLOBAL_LIST_EMPTY(skills)
 
 // Category: Engineering
 
-/decl/hierarchy/skill/engineering/construction
+/singleton/hierarchy/skill/engineering/construction
 	ID = "construction"
 	name = "Construction"
 	desc = "Your ability to construct various buildings, such as walls, floors, tables and so on. Note that constructing devices such as APCs additionally requires the Electronics skill. A low level of this skill is typical for janitors, a high level of this skill is typical for engineers."
@@ -252,7 +252,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Master"		= "You are a construction worker or engineer. You could pretty much rebuild the installation or ship from the ground up, given supplies, and you're efficient and skilled at repairing damage.")
 	difficulty = SKILL_EASY
 
-/decl/hierarchy/skill/engineering/electrical
+/singleton/hierarchy/skill/engineering/electrical
 	ID = "electrical"
 	name = "Electrical Engineering"
 	desc = "This skill describes your knowledge of electronics and the underlying physics. A low level of this skill implies you know how to lay out wiring and configure powernets, a high level of this skill is required for working complex electronic devices such as circuits or bots."
@@ -262,7 +262,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You can repair, build, and diagnose any electrical devices with ease. You know your way around APCs, SMES units, and monitoring software, and take apart or hack most objects.<br>- You can safely place remote signaling devices.<br>- You can examine one or two wires on the hacking panel.",
 						"Master"		= "You are an electrical engineer or the equivalent. You can design, upgrade, and modify electrical equipment and you are good at maximizing the efficiency of your power network. You can hack anything on the installation you can deal with power outages and electrical problems easily and efficiently.<br>- You can examine most wires on the hacking panel.")
 
-/decl/hierarchy/skill/engineering/atmos
+/singleton/hierarchy/skill/engineering/atmos
 	ID = "atmos"
 	name = "Atmospherics"
 	desc = "Describes your knowledge of piping, air distribution and gas dynamics."
@@ -272,7 +272,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "Your atmospherics experience lets you find, diagnose, and fix breaches efficiently. You can manage complex atmospherics systems without fear of making mistakes, and are proficient with all monitoring and pumping equipment at your disposal.<br>- You can dispense a larger selection of pipes from the RPD.",
 						"Master"		= "You are an atmospherics specialist. You monitor, modify, and optimize the installation atmospherics system, and you can quickly and easily deal with emergencies. You can modify atmospherics systems to do pretty much whatever you want them to. You can easily handle a fire or breach, and are proficient at securing an area and rescuing civilians, but you're equally likely to have simply prevented it from happening in the first place.")
 
-/decl/hierarchy/skill/engineering/engines
+/singleton/hierarchy/skill/engineering/engines
 	ID = "engines"
 	name = "Engines"
 	desc = "Describes your knowledge of the various engine types common on space stations, such as the PACMAN, singularity, supermatter or RUST engine."
@@ -285,7 +285,7 @@ GLOBAL_LIST_EMPTY(skills)
 
 // Category: Research
 
-/decl/hierarchy/skill/research/devices
+/singleton/hierarchy/skill/research/devices
 	ID = "devices"
 	name = "Complex Devices"
 	desc = "Describes the ability to assemble complex devices, such as computers, circuits, printers, robots or gas tank assemblies (bombs). Note that if a device requires electronics or programming, those skills are also required in addition to this skill."
@@ -295,7 +295,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You have years of experience building or reverse-engineering complex devices. Your use of the lathes and destructive analyzers is efficient and methodical. You can design contraptions to order, and likely sell those designs at a profit.",
 						"Master"		= "You are an inventor or researcher. You can design, build, and modify equipment that most people don't even know exists. You are at home in the lab and the workshop and you've never met a gadget you couldn't take apart, put back together, and replicate.")
 
-/decl/hierarchy/skill/research/science
+/singleton/hierarchy/skill/research/science
 	ID = "science"
 	name = "Science"
 	desc = "Your experience and knowledge with scientific methods and processes."
@@ -307,7 +307,7 @@ GLOBAL_LIST_EMPTY(skills)
 
 // Category: Medical
 
-/decl/hierarchy/skill/medical/medical
+/singleton/hierarchy/skill/medical/medical
 	ID = "medical"
 	name = "Medicine"
 	desc = "Covers an understanding of the human body and medicine. At a low level, this skill gives a basic understanding of applying common types of medicine, and a rough understanding of medical devices like the health analyzer. At a high level, this skill grants exact knowledge of all the medicine available on the installation, as well as the ability to use complex medical devices like the body scanner or mass spectrometer."
@@ -317,7 +317,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You are a senior nurse or paramedic, or a practicing doctor. You know how to use all of the medical devices available to treat a patient. Your deep knowledge of the body and medications will let you diagnose and come up with a course of treatment for most ailments. You can perform a full-body scan thoroughly and find important information.<br>- You can perform all surgery steps safely if you have Experienced Anatomy skill.",
 						"Master"		= "You are an experienced doctor or an expert nurse or EMT. You've seen almost everything there is to see when it comes to injuries and illness and even when it comes to something you haven't seen, you can apply your wide knowledge base to put together a treatment. In a pinch, you can do just about any medicine-related task, but your specialty, whatever it may be, is where you really shine.")
 
-/decl/hierarchy/skill/medical/anatomy
+/singleton/hierarchy/skill/medical/anatomy
 	ID = "anatomy"
 	name = "Anatomy"
 	desc = "Gives you a detailed insight of the human body. A high skill in this is required to perform surgery. This skill may also help in examining alien biology."
@@ -327,7 +327,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You're a surgical resident, or an experienced medical doctor. You can put together broken bones, fix a damaged lung, patch up a liver, or remove an appendix without problems. But tricky surgeries, with an unstable patient or delicate manipulation of vital organs like the heart and brain, are at the edge of your ability, and you prefer to leave them to specialized surgeons. You can recognize when someone's anatomy is noticeably unusual. You're trained in working with several species, but you're probably better at surgery on your own species.<br>- You can do all surgery steps safely, if you have Experienced Medicine skill too.",
 						"Master"		= "You are an experienced surgeon. You can handle anything that gets rolled, pushed, or dragged into the OR, and you can keep a patient alive and stable even if there's no one to assist you. You can handle severe trauma cases or multiple organ failure, repair brain damage, and perform heart surgery. By now, you've probably specialized in one field, where you may have made new contributions to surgical technique. You can detect even small variations in the anatomy of a patient--even a changeling probably wouldn't slip by your notice, provided you could get one on the operating table.<br>- The penalty from operating on improper operating surfaces is reduced.")
 
-/decl/hierarchy/skill/medical/chemistry
+/singleton/hierarchy/skill/medical/chemistry
 	ID = "chemistry"
 	name = "Chemistry"
 	desc = "Experience with mixing chemicals, and an understanding of what the effect will be. This doesn't cover an understanding of the effect of chemicals on the human body, as such the medical skill is also required for medical chemists."

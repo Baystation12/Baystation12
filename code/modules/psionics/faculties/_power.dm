@@ -1,5 +1,5 @@
-/decl/psionic_power
-	abstract_type = /decl/psionic_power
+/singleton/psionic_power
+	abstract_type = /singleton/psionic_power
 	var/name             // Name. If null, psipower won't be generated on roundstart.
 	var/faculty          // Associated psi faculty.
 	var/min_rank         // Minimum psi rank to use this power.
@@ -14,7 +14,7 @@
 	// A sound effect to play when the power is used.
 	var/use_sound = 'sound/effects/psi/power_used.ogg'
 
-/decl/psionic_power/proc/invoke(mob/living/user, atom/target)
+/singleton/psionic_power/proc/invoke(mob/living/user, atom/target)
 
 	if(!user.psi)
 		return FALSE
@@ -38,7 +38,7 @@
 
 	return TRUE
 
-/decl/psionic_power/proc/handle_post_power(mob/living/user, atom/target)
+/singleton/psionic_power/proc/handle_post_power(mob/living/user, atom/target)
 	if(cooldown)
 		user.psi.set_cooldown(cooldown)
 	if(admin_log && ismob(user) && ismob(target))

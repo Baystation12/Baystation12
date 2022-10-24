@@ -41,14 +41,14 @@
 	name = "dirty steel floor"
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_state = "steel_dirty"
-	initial_flooring = /decl/flooring/tiling
+	initial_flooring = /singleton/flooring/tiling
 
 // Lockers
 
 /obj/structure/closet/dilapidated
 	name = "dilapidated closet"
 	desc = "A dilpidated closet, the paint is flecking off."
-	closet_appearance = /decl/closet_appearance/tactical
+	closet_appearance = /singleton/closet_appearance/tactical
 
 // Areas
 

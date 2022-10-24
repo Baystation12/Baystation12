@@ -55,7 +55,7 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_POWER = 3)
 	modifystate = "floramut"
 	self_recharge = 1
-	var/decl/plantgene/gene = null
+	var/singleton/plantgene/gene = null
 	combustion = 0
 
 	firemodes = list(

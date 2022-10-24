@@ -217,26 +217,26 @@
 	base_area = /area/scavver/gantry/down1
 	base_turf = /turf/simulated/floor/airless
 
-/decl/stock_part_preset/radio/receiver/vent_pump/vulcan
+/singleton/stock_part_preset/radio/receiver/vent_pump/vulcan
 	frequency = 1431
 
-/decl/stock_part_preset/radio/event_transmitter/vent_pump/vulcan
+/singleton/stock_part_preset/radio/event_transmitter/vent_pump/vulcan
 	frequency = 1431
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/vulcan
 	stock_part_presets = list(
-		/decl/stock_part_preset/radio/receiver/vent_pump/vulcan = 1,
-		/decl/stock_part_preset/radio/event_transmitter/vent_pump/vulcan = 1
+		/singleton/stock_part_preset/radio/receiver/vent_pump/vulcan = 1,
+		/singleton/stock_part_preset/radio/event_transmitter/vent_pump/vulcan = 1
 	)
 
-/decl/stock_part_preset/radio/receiver/vent_scrubber/vulcan
+/singleton/stock_part_preset/radio/receiver/vent_scrubber/vulcan
 	frequency = 1431
 
-/decl/stock_part_preset/radio/event_transmitter/vent_scrubber/vulcan
+/singleton/stock_part_preset/radio/event_transmitter/vent_scrubber/vulcan
 	frequency = 1431
 
 /obj/machinery/atmospherics/unary/vent_scrubber/vulcan
 	stock_part_presets = list(
-		/decl/stock_part_preset/radio/receiver/vent_scrubber/vulcan = 1,
-		/decl/stock_part_preset/radio/event_transmitter/vent_scrubber/vulcan = 1
+		/singleton/stock_part_preset/radio/receiver/vent_scrubber/vulcan = 1,
+		/singleton/stock_part_preset/radio/event_transmitter/vent_scrubber/vulcan = 1
 	)

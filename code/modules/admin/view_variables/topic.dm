@@ -29,7 +29,7 @@
 		if(!istype(H))
 			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
 			return
-		var/decl/hierarchy/outfit/outfit = input("Select outfit.", "Select equipment.") as null|anything in outfits()
+		var/singleton/hierarchy/outfit/outfit = input("Select outfit.", "Select equipment.") as null|anything in outfits()
 		if(!outfit)
 			return
 

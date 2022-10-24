@@ -1,4 +1,4 @@
-/decl/cultural_info/location/root
+/singleton/cultural_info/location/root
 	name = HOME_SYSTEM_ROOT
 	description = "Root, the claimed homeworld of the Positronic Union, is a verdant world slowly falling \
 	to mass mechanization. Although there are populations of positronics living directly on the surface, \

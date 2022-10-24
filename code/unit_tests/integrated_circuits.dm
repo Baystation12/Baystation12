@@ -24,8 +24,8 @@
 
 /datum/unit_test/integrated_circuits/prefabs_are_valid/start_test()
 	var/list/failed_prefabs = list()
-	for(var/prefab_type in subtypesof(/decl/prefab/ic_assembly))
-		var/decl/prefab/ic_assembly/prefab = prefab_type
+	for(var/prefab_type in subtypesof(/singleton/prefab/ic_assembly))
+		var/singleton/prefab/ic_assembly/prefab = prefab_type
 		var/result = SScircuit.validate_electronic_assembly(initial(prefab.data))
 		if(istext(result)) //Returned some error
 			failed_prefabs += "[prefab_type]: [result]"
@@ -41,8 +41,8 @@
 
 /datum/unit_test/integrated_circuits/prefabs_shall_not_fail_to_create/start_test()
 	var/list/failed_prefabs = list()
-	for(var/prefab_type in subtypesof(/decl/prefab/ic_assembly))
-		var/decl/prefab/ic_assembly/prefab = decls_repository.get_decl(prefab_type)
+	for(var/prefab_type in subtypesof(/singleton/prefab/ic_assembly))
+		var/singleton/prefab/ic_assembly/prefab = Singletons.Get(prefab_type)
 
 		try
 			var/built_item = prefab.create(get_safe_turf())

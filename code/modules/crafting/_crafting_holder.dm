@@ -1,8 +1,8 @@
 /obj/item/crafting_holder
-	var/decl/crafting_stage/current_crafting_stage
+	var/singleton/crafting_stage/current_crafting_stage
 	var/label_name
 
-/obj/item/crafting_holder/Initialize(ml, decl/crafting_stage/initial_stage, obj/item/target, obj/item/tool, mob/user)
+/obj/item/crafting_holder/Initialize(ml, singleton/crafting_stage/initial_stage, obj/item/target, obj/item/tool, mob/user)
 	. = ..()
 	name = "[target.name] assembly"
 	var/mob/M = target.loc
@@ -28,14 +28,14 @@
 		return
 
 	if(current_crafting_stage)
-		var/decl/crafting_stage/next_stage = current_crafting_stage.get_next_stage(W)
+		var/singleton/crafting_stage/next_stage = current_crafting_stage.get_next_stage(W)
 		if(next_stage && next_stage.progress_to(W, user, src))
 			advance_to(next_stage, user, W)
 			return
 
 	. = ..()
 
-/obj/item/crafting_holder/proc/advance_to(decl/crafting_stage/next_stage, mob/user, obj/item/tool)
+/obj/item/crafting_holder/proc/advance_to(singleton/crafting_stage/next_stage, mob/user, obj/item/tool)
 	var/obj/item/product = next_stage && next_stage.get_product(src)
 	if(product)
 		if(ismob(product) && label_name)

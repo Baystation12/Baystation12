@@ -7,11 +7,11 @@
 	power_channel = ENVIRON
 	idle_power_usage = 10
 	public_variables = list(
-		/decl/public_access/public_variable/button_active,
-		/decl/public_access/public_variable/input_toggle
+		/singleton/public_access/public_variable/button_active,
+		/singleton/public_access/public_variable/input_toggle
 	)
-	public_methods = list(/decl/public_access/public_method/toggle_input_toggle)
-	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/button = 1)
+	public_methods = list(/singleton/public_access/public_method/toggle_input_toggle)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/basic_transmitter/button = 1)
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/power/apc,
 		/obj/item/stock_parts/radio/transmitter/basic
@@ -46,7 +46,7 @@
 		return
 
 	operating = TRUE
-	var/decl/public_access/public_variable/variable = decls_repository.get_decl(/decl/public_access/public_variable/button_active)
+	var/singleton/public_access/public_variable/variable = Singletons.Get(/singleton/public_access/public_variable/button_active)
 	variable.write_var(src, !active)
 	use_power_oneoff(500)
 	update_icon()
@@ -61,23 +61,23 @@
 	else
 		icon_state = "launcherbtt"
 
-/decl/public_access/public_variable/button_active
+/singleton/public_access/public_variable/button_active
 	expected_type = /obj/machinery/button
 	name = "button active"
 	desc = "Whether the button is currently in the on state."
 	can_write = FALSE
 	has_updates = TRUE
 
-/decl/public_access/public_variable/button_active/access_var(obj/machinery/button/button)
+/singleton/public_access/public_variable/button_active/access_var(obj/machinery/button/button)
 	return button.active
 
-/decl/public_access/public_variable/button_active/write_var(obj/machinery/button/button, new_val)
+/singleton/public_access/public_variable/button_active/write_var(obj/machinery/button/button, new_val)
 	. = ..()
 	if(.)
 		button.active = new_val
 
-/decl/stock_part_preset/radio/basic_transmitter/button
-	transmit_on_change = list("button_active" = /decl/public_access/public_variable/button_active)
+/singleton/stock_part_preset/radio/basic_transmitter/button
+	transmit_on_change = list("button_active" = /singleton/public_access/public_variable/button_active)
 	frequency = BUTTON_FREQ
 
 //alternate button with the same functionality, except has a lightswitch sprite instead
@@ -141,7 +141,7 @@
 /obj/machinery/button/alternate/door
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "doorctrl"
-	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/button/door)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/basic_transmitter/button/door)
 
 /obj/machinery/button/alternate/door/on_update_icon()
 	if(operating)
@@ -149,22 +149,22 @@
 	else
 		icon_state = "[initial(icon_state)]"
 
-/decl/stock_part_preset/radio/basic_transmitter/button/door
+/singleton/stock_part_preset/radio/basic_transmitter/button/door
 	frequency = AIRLOCK_FREQ
-	transmit_on_change = list("toggle_door" = /decl/public_access/public_variable/button_active)
+	transmit_on_change = list("toggle_door" = /singleton/public_access/public_variable/button_active)
 
 /obj/machinery/button/alternate/door/bolts
-	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/button/airlock_bolt)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/basic_transmitter/button/airlock_bolt)
 
-/decl/stock_part_preset/radio/basic_transmitter/button/airlock_bolt
+/singleton/stock_part_preset/radio/basic_transmitter/button/airlock_bolt
 	frequency = AIRLOCK_FREQ
-	transmit_on_change = list("toggle_bolts" = /decl/public_access/public_variable/button_active)
+	transmit_on_change = list("toggle_bolts" = /singleton/public_access/public_variable/button_active)
 
 // Valve control
 
 /obj/machinery/button/toggle/valve
 	name = "remote valve control"
-	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/button/atmosia)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/basic_transmitter/button/atmosia)
 
 /obj/machinery/button/toggle/valve/on_update_icon()
 	if(!active)
@@ -172,7 +172,7 @@
 	else
 		icon_state = "launcheract"
 
-/decl/stock_part_preset/radio/basic_transmitter/button/atmosia
-	transmit_on_change = list("valve_toggle" = /decl/public_access/public_variable/button_active)
+/singleton/stock_part_preset/radio/basic_transmitter/button/atmosia
+	transmit_on_change = list("valve_toggle" = /singleton/public_access/public_variable/button_active)
 	frequency = FUEL_FREQ
 	filter = RADIO_ATMOSIA

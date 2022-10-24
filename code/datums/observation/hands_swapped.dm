@@ -7,8 +7,8 @@
 //			/mob/swapper: The mob that swapped hands.
 //
 
-GLOBAL_DATUM_INIT(hands_swapped_event, /decl/observ/hands_swapped, new)
+GLOBAL_DATUM_INIT(hands_swapped_event, /singleton/observ/hands_swapped, new)
 
-/decl/observ/hands_swapped
+/singleton/observ/hands_swapped
 	name = "Hands Swapped"
 	expected_type = /mob

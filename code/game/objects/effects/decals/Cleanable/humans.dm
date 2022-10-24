@@ -164,7 +164,7 @@ var/global/list/image/splatter_cache=list()
 	random_icon_states = list("mgibbl1", "mgibbl2", "mgibbl3", "mgibbl4", "mgibbl5")
 	amount = 2
 	blood_size = BLOOD_SIZE_BIG
-	scent_intensity = /decl/scent_intensity/strong
+	scent_intensity = /singleton/scent_intensity/strong
 	scent_range = 3
 
 /obj/effect/decal/cleanable/blood/drip
@@ -176,7 +176,7 @@ var/global/list/image/splatter_cache=list()
 	random_icon_states = list("1","2","3","4","5")
 	amount = 0
 	blood_size = BLOOD_SIZE_SMALL
-	scent_intensity = /decl/scent_intensity
+	scent_intensity = /singleton/scent_intensity
 	scent_range = 1
 
 	var/list/drips
@@ -194,7 +194,7 @@ var/global/list/image/splatter_cache=list()
 	amount = 0
 	var/message
 	blood_size = BLOOD_SIZE_BIG
-	scent_intensity = /decl/scent_intensity
+	scent_intensity = /singleton/scent_intensity
 	scent_range = 1
 
 /obj/effect/decal/cleanable/blood/writing/New()
@@ -220,7 +220,7 @@ var/global/list/image/splatter_cache=list()
 	var/fleshcolor = "#ffffff"
 	blood_size = BLOOD_SIZE_NO_MERGE
 	cleanable_scent = "viscera"
-	scent_intensity = /decl/scent_intensity/overpowering
+	scent_intensity = /singleton/scent_intensity/overpowering
 	scent_range = 4
 
 /obj/effect/decal/cleanable/blood/gibs/on_update_icon()

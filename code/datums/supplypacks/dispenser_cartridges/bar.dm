@@ -1,4 +1,4 @@
-/decl/hierarchy/supply_pack/dispenser_cartridges/beer
+/singleton/hierarchy/supply_pack/dispenser_cartridges/beer
 	name = "Reagent refill - beer"
 	containername = "beer reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -10,7 +10,7 @@
 
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/kahlua
+/singleton/hierarchy/supply_pack/dispenser_cartridges/kahlua
 	name = "Reagent refill - kahlua"
 	containername = "kahlua reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -21,7 +21,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/whiskey
+/singleton/hierarchy/supply_pack/dispenser_cartridges/whiskey
 	name = "Reagent refill - whiskey"
 	containername = "whiskey reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -32,7 +32,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/wine
+/singleton/hierarchy/supply_pack/dispenser_cartridges/wine
 	name = "Reagent refill - wine"
 	containername = "wine reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -43,7 +43,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/vodka
+/singleton/hierarchy/supply_pack/dispenser_cartridges/vodka
 	name = "Reagent refill - vodka"
 	containername = "vodka reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -54,7 +54,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/gin
+/singleton/hierarchy/supply_pack/dispenser_cartridges/gin
 	name = "Reagent refill - gin"
 	containername = "gin reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -65,7 +65,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/rum
+/singleton/hierarchy/supply_pack/dispenser_cartridges/rum
 	name = "Reagent refill - rum"
 	containername = "rum reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -76,7 +76,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/tequila
+/singleton/hierarchy/supply_pack/dispenser_cartridges/tequila
 	name = "Reagent refill - tequila"
 	containername = "tequila reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -87,7 +87,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/vermouth
+/singleton/hierarchy/supply_pack/dispenser_cartridges/vermouth
 	name = "Reagent refill - vermouth"
 	containername = "vermouth reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -98,7 +98,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/cognac
+/singleton/hierarchy/supply_pack/dispenser_cartridges/cognac
 	name = "Reagent refill - cognac"
 	containername = "cognac reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -109,7 +109,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/ale
+/singleton/hierarchy/supply_pack/dispenser_cartridges/ale
 	name = "Reagent refill - ale"
 	containername = "ale reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -120,7 +120,7 @@
 	cost = 15
 
 
-/decl/hierarchy/supply_pack/dispenser_cartridges/mead
+/singleton/hierarchy/supply_pack/dispenser_cartridges/mead
 	name = "Reagent refill - mead"
 	containername = "mead reagent cartridge crate"
 	containertype = /obj/structure/closet/crate/secure

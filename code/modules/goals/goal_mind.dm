@@ -26,7 +26,7 @@
 	if(ishuman(current))
 		var/mob/living/carbon/human/H = current
 		for(var/token in H.cultural_info)
-			var/decl/cultural_info/culture = H.get_cultural_value(token)
+			var/singleton/cultural_info/culture = H.get_cultural_value(token)
 			var/list/new_goals = culture.get_possible_personal_goals(job ? job.department_flag : null)
 			if(LAZYLEN(new_goals))
 				available_goals |= new_goals

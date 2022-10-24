@@ -1,7 +1,7 @@
 /obj/structure/closet/wizard
 	name = "artifact closet"
 	desc = "a special lead lined closet used to hold artifacts of immense power."
-	closet_appearance = /decl/closet_appearance/alien
+	closet_appearance = /singleton/closet_appearance/alien
 
 /obj/structure/closet/wizard/New()
 	..()

@@ -13,7 +13,7 @@
 	anchored = TRUE
 	idle_power_usage = 40
 	base_type = /obj/machinery/biogenerator
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
 	machine_name = "biogenerator"

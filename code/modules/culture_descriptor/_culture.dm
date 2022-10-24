@@ -1,4 +1,4 @@
-/decl/cultural_info
+/singleton/cultural_info
 	var/name
 	var/desc_type
 	var/description
@@ -13,7 +13,7 @@
 	var/hidden_from_codex
 	var/list/qualifications
 
-/decl/cultural_info/New()
+/singleton/cultural_info/New()
 
 	if(!default_language)
 		default_language = language
@@ -38,7 +38,7 @@
 
 	..()
 
-/decl/cultural_info/proc/get_random_name(gender)
+/singleton/cultural_info/proc/get_random_name(gender)
 	var/datum/language/_language
 	if(name_language)
 		_language = all_languages[name_language]
@@ -50,11 +50,11 @@
 		return _language.get_random_name(gender)
 	return capitalize(pick(gender==FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 
-/decl/cultural_info/proc/sanitize_name(new_name)
+/singleton/cultural_info/proc/sanitize_name(new_name)
 	return sanitizeName(new_name)
 
 #define COLLAPSED_CULTURE_BLURB_LEN 48
-/decl/cultural_info/proc/get_description(header, append, verbose = TRUE)
+/singleton/cultural_info/proc/get_description(header, append, verbose = TRUE)
 	var/list/dat = list()
 	dat += "<table padding='8px'><tr>"
 	dat += "<td width='260px'>"
@@ -75,10 +75,10 @@
 	return jointext(dat, null)
 #undef COLLAPSED_CULTURE_BLURB_LEN
 
-/decl/cultural_info/proc/get_text_body()
+/singleton/cultural_info/proc/get_text_body()
 	return description
 
-/decl/cultural_info/proc/get_text_details()
+/singleton/cultural_info/proc/get_text_details()
 	. = list()
 	var/list/spoken_langs = get_spoken_languages()
 	if(LAZYLEN(spoken_langs))
@@ -88,20 +88,20 @@
 	if(!isnull(economic_power))
 		. += "<b>Economic power:</b> [round(100 * economic_power)]%"
 
-/decl/cultural_info/proc/get_spoken_languages()
+/singleton/cultural_info/proc/get_spoken_languages()
 	. = list()
 	if(language)                  . |= language
 	if(default_language)          . |= default_language
 	if(LAZYLEN(additional_langs)) . |= additional_langs
 
-/decl/cultural_info/proc/get_formal_name_suffix()
+/singleton/cultural_info/proc/get_formal_name_suffix()
 	return
 
-/decl/cultural_info/proc/get_formal_name_prefix()
+/singleton/cultural_info/proc/get_formal_name_prefix()
 	return
 
-/decl/cultural_info/proc/get_qualifications()
+/singleton/cultural_info/proc/get_qualifications()
 	return qualifications
 
-/decl/cultural_info/proc/get_possible_personal_goals(department_flag)
+/singleton/cultural_info/proc/get_possible_personal_goals(department_flag)
 	return

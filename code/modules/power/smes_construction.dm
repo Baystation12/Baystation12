@@ -290,7 +290,7 @@
 	if(failing)
 		return SPAN_WARNING("\The [src]'s screen is flashing with alerts. It seems to be overloaded! Touching it now is probably not a good idea.")
 
-	if(state_path == /decl/machine_construction/default/deconstructed)
+	if(state_path == /singleton/machine_construction/default/deconstructed)
 		if(charge > (capacity/100) && safeties_enabled)
 			return SPAN_WARNING("\The [src]'s safety circuit is preventing modifications while it's charged!")
 		if(output_attempt || input_attempt)

@@ -86,8 +86,8 @@
 	exertion_effect_chance = 10
 	exertion_charge_scale = 1
 	exertion_emotes_synthetic = list(
-		/decl/emote/exertion/synthetic,
-		/decl/emote/exertion/synthetic/creak
+		/singleton/emote/exertion/synthetic,
+		/singleton/emote/exertion/synthetic/creak
 	)
 
 /datum/species/machine/handle_death(mob/living/carbon/human/H)

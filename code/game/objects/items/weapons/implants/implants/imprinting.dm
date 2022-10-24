@@ -48,7 +48,7 @@
 	var/msg = get_instructions()
 	to_chat(M, msg)
 	if(M.mind)
-		M.StoreMemory(msg, /decl/memory_options/system)
+		M.StoreMemory(msg, /singleton/memory_options/system)
 	if(brainwashing)
 		log_and_message_admins("was implanted with a brainwashing implant holding following laws: [jointext(instructions, ";")].", M)
 	addtimer(CALLBACK(src,.proc/activate),3000,(TIMER_UNIQUE|TIMER_OVERRIDE))

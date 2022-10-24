@@ -1,7 +1,7 @@
 /// Boons generally only come with positive aspects
-/decl/trait/boon
-	abstract_type = /decl/trait/boon
+/singleton/trait/boon
+	abstract_type = /singleton/trait/boon
 
-/decl/trait/boon/New()
+/singleton/trait/boon/New()
 	..()
 	name = "Boon - " + name

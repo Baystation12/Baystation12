@@ -6,7 +6,7 @@
 //////////////////////////////////////////////////////////////////
 //	generic ribcage surgery step datum
 //////////////////////////////////////////////////////////////////
-/decl/surgery_step/open_encased
+/singleton/surgery_step/open_encased
 	name = "Saw through bone"
 	allowed_tools = list(
 		/obj/item/circular_saw = 100,
@@ -22,25 +22,25 @@
 	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_CRYSTAL | SURGERY_NO_STUMP | SURGERY_NEEDS_RETRACTED
 	strict_access_requirement = TRUE
 
-/decl/surgery_step/open_encased/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/singleton/surgery_step/open_encased/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
 	if(affected && affected.encased)
 		return affected
 
-/decl/surgery_step/open_encased/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/singleton/surgery_step/open_encased/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] begins to cut through [target]'s [affected.encased] with \the [tool].", \
 	"You begin to cut through [target]'s [affected.encased] with \the [tool].")
 	target.custom_pain("Something hurts horribly in your [affected.name]!",60, affecting = affected)
 	..()
 
-/decl/surgery_step/open_encased/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/singleton/surgery_step/open_encased/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message(SPAN_NOTICE("[user] has cut [target]'s [affected.encased] open with \the [tool]."),		\
 	SPAN_NOTICE("You have cut [target]'s [affected.encased] open with \the [tool]."))
 	affected.fracture()
 
-/decl/surgery_step/open_encased/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/singleton/surgery_step/open_encased/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message(SPAN_WARNING("[user]'s hand slips, cracking [target]'s [affected.encased] with \the [tool]!") , \
 	SPAN_WARNING("Your hand slips, cracking [target]'s [affected.encased] with \the [tool]!") )

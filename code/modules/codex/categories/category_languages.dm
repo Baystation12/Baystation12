@@ -11,7 +11,7 @@
 		if(L.type == L.category)
 			continue
 		var/list/lang_info = list()
-		var/decl/prefix/P = /decl/prefix/language
+		var/singleton/prefix/P = /singleton/prefix/language
 		lang_info += "Key to use it: '[initial(P.default_key)][L.key]'"
 		if(L.flags & NONVERBAL)
 			lang_info += "It has a significant non-verbal component. Speech is garbled without line-of-sight."
@@ -29,7 +29,7 @@
 			lang_lore += "It sounds like this:"
 			lang_lore += ""
 			lang_lore += "<b>CodexBot</b> [lang_example]"
-			
+
 		var/datum/codex_entry/entry = new(_display_name = "[L.name] (language)", _lore_text = jointext(lang_lore, "<br>"), _mechanics_text = jointext(lang_info, "<br>"))
 		entry.associated_strings += L.name
 		entry.associated_strings += L.shorthand

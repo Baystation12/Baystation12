@@ -9,9 +9,9 @@
 //          new_zone: the newly selected zone
 //
 
-GLOBAL_DATUM_INIT(zone_selected_event, /decl/observ/zone_selected, new)
+GLOBAL_DATUM_INIT(zone_selected_event, /singleton/observ/zone_selected, new)
 
-/decl/observ/zone_selected
+/singleton/observ/zone_selected
 	name = "Zone Selected"
 	expected_type = /obj/screen/zone_sel
 

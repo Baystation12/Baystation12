@@ -75,7 +75,7 @@
 
 /datum/extension/scent/cheese_aged
 	scent = "sharp cheese"
-	intensity = /decl/scent_intensity
+	intensity = /singleton/scent_intensity
 	descriptor = SCENT_DESC_ODOR
 	range = 2
 
@@ -123,7 +123,7 @@
 
 /datum/extension/scent/cheese_blue
 	scent = "funky cheese"
-	intensity = /decl/scent_intensity/strong
+	intensity = /singleton/scent_intensity/strong
 	descriptor = SCENT_DESC_ODOR
 	range = 3
 

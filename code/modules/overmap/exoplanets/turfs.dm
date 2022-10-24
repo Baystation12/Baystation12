@@ -3,7 +3,7 @@
 	icon = 'icons/turf/desert.dmi'
 	icon_state = "desert"
 	has_resources = 1
-	footstep_type = /decl/footsteps/asteroid
+	footstep_type = /singleton/footsteps/asteroid
 	var/diggable = 1
 	var/dirt_color = "#7c5e42"
 
@@ -91,7 +91,7 @@
 	icon = 'icons/misc/beach.dmi'
 	icon_state = "seashallow"
 	movement_delay = 2
-	footstep_type = /decl/footsteps/water
+	footstep_type = /singleton/footsteps/water
 	var/reagent_type = /datum/reagent/water
 
 /turf/simulated/floor/exoplanet/water/shallow/attackby(obj/item/O, mob/living/user)
@@ -120,7 +120,7 @@
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "snow"
 	dirt_color = "#e3e7e8"
-	footstep_type = /decl/footsteps/snow
+	footstep_type = /singleton/footsteps/snow
 
 /turf/simulated/floor/exoplanet/snow/Initialize()
 	. = ..()
@@ -132,7 +132,7 @@
 /turf/simulated/floor/exoplanet/snow/melt()
 	SetName("permafrost")
 	icon_state = "permafrost"
-	footstep_type = /decl/footsteps/asteroid
+	footstep_type = /singleton/footsteps/asteroid
 
 //Grass
 /turf/simulated/floor/exoplanet/grass
@@ -140,7 +140,7 @@
 	icon = 'icons/turf/jungle.dmi'
 	icon_state = "greygrass"
 	color = "#799c4b"
-	footstep_type = /decl/footsteps/grass
+	footstep_type = /singleton/footsteps/grass
 
 /turf/simulated/floor/exoplanet/grass/Initialize()
 	. = ..()
@@ -164,7 +164,7 @@
 /turf/simulated/floor/exoplanet/grass/melt()
 	SetName("scorched ground")
 	icon_state = "scorched"
-	footstep_type = /decl/footsteps/asteroid
+	footstep_type = /singleton/footsteps/asteroid
 	color = null
 
 //Sand
@@ -172,7 +172,7 @@
 	name = "sand"
 	desc = "It's coarse and gets everywhere."
 	dirt_color = "#ae9e66"
-	footstep_type = /decl/footsteps/sand
+	footstep_type = /singleton/footsteps/sand
 
 /turf/simulated/floor/exoplanet/desert/Initialize()
 	. = ..()

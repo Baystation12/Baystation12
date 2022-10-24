@@ -1,4 +1,4 @@
-/decl/cultural_info/location/moghes
+/singleton/cultural_info/location/moghes
 	name = HOME_SYSTEM_MOGHES
 	description = "A dead world full of strange, monstrous creatures and mysterious and dangerous landscapes, \
 	this is the home of the unathi. Unathi believe this world was once lush and full of life, but due to the \
@@ -14,7 +14,7 @@
 		LANGUAGE_SPACER
 	)
 
-/decl/cultural_info/location/ouere
+/singleton/cultural_info/location/ouere
 	name = HOME_SYSTEM_OUERE
 	description = "The recently discovered system of precursor gateway devices connecting Moghes to its smaller sister \
 planet of Ouere has seen many clans and small groups stepping through it into this new world. There is \
@@ -31,7 +31,7 @@ flocked to the planet, with Markesheli communities growing quite rapidly in numb
 		LANGUAGE_SPACER
 	)
 
-/decl/cultural_info/location/offworld
+/singleton/cultural_info/location/offworld
 	name = HOME_SYSTEM_OFFWORLD
 	description = "Whether through unfortunate circumstances or your own volition, you've left Moghes behind in search of your \
 	purpose. You are one of many unathi who have braved the dangers and left their own planet to make their own destiny, whether \

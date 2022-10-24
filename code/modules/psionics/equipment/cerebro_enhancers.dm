@@ -53,7 +53,7 @@
 
 	var/removed
 	var/slots_left = max_boosted_faculties - LAZYLEN(boosted_faculties)
-	var/decl/psionic_faculty/faculty = SSpsi.get_faculty(choice)
+	var/singleton/psionic_faculty/faculty = SSpsi.get_faculty(choice)
 	if(faculty.id in boosted_faculties)
 		LAZYREMOVE(boosted_faculties, faculty.id)
 		removed = TRUE

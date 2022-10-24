@@ -7,7 +7,7 @@
 	idle_power_usage = 30
 	active_power_usage = 5000
 	base_type = /obj/machinery/r_n_d/protolathe
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 
 	machine_name = "protolathe"
 	machine_desc = "Uses raw materials to produce prototypes. Part of an R&D network."
@@ -77,7 +77,7 @@
 	else
 		icon_state = "protolathe"
 
-/obj/machinery/r_n_d/protolathe/state_transition(decl/machine_construction/default/new_state)
+/obj/machinery/r_n_d/protolathe/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state) && linked_console)
 		linked_console.linked_lathe = null

@@ -59,7 +59,7 @@
 	var/value = 1
 
 	var/scent //refer to _scent.dm
-	var/scent_intensity = /decl/scent_intensity/normal
+	var/scent_intensity = /singleton/scent_intensity/normal
 	var/scent_descriptor = SCENT_DESC_SMELL
 	var/scent_range = 1
 

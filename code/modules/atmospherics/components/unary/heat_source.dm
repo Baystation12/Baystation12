@@ -11,7 +11,7 @@
 	use_power = POWER_USE_OFF
 	idle_power_usage = 5			//5 Watts for thermostat related circuitry
 	base_type = /obj/machinery/atmospherics/unary/heater
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
 

@@ -9,7 +9,7 @@
 	base_type = /obj/machinery/recharge_station
 	uncreated_component_parts = null
 	stat_immune = 0
-	construct_state = /decl/machine_construction/default/panel_closed
+	construct_state = /singleton/machine_construction/default/panel_closed
 
 	machine_name = "cyborg recharging station"
 	machine_desc = "A station for recharging robots, cyborgs, and silicon-based humanoids such as IPCs and full-body prosthetics."

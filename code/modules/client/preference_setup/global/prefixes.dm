@@ -1,29 +1,29 @@
-/decl/prefix
+/singleton/prefix
 	var/name
 	var/default_key
 	var/is_locked = FALSE
 
-/decl/prefix/language
+/singleton/prefix/language
 	name = "Language"
 	default_key = ","
 
-/decl/prefix/radio_channel_selection
+/singleton/prefix/radio_channel_selection
 	name = "Radio, channel selection"
 	default_key = ":"
 	is_locked = TRUE
 
-/decl/prefix/radio_main_channel
+/singleton/prefix/radio_main_channel
 	name = "Radio, main channel"
 	default_key = ";"
 
-/decl/prefix/audible_emote
+/singleton/prefix/audible_emote
 	name = "Emote, audible"
 	default_key = "!"
 
-/decl/prefix/visible_emote
+/singleton/prefix/visible_emote
 	name = "Emote, visible"
 	default_key = "^"
 
-/decl/prefix/custom_emote
+/singleton/prefix/custom_emote
 	name = "Emote, custom"
 	default_key = "/"

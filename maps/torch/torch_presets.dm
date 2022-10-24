@@ -213,26 +213,26 @@ var/global/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
 		num2text(HAIL_FREQ)  = list(),
 	)
 
-/decl/stock_part_preset/radio/receiver/vent_pump/guppy
+/singleton/stock_part_preset/radio/receiver/vent_pump/guppy
 	frequency = 1431
 
-/decl/stock_part_preset/radio/event_transmitter/vent_pump/guppy
+/singleton/stock_part_preset/radio/event_transmitter/vent_pump/guppy
 	frequency = 1431
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy
 	stock_part_presets = list(
-		/decl/stock_part_preset/radio/receiver/vent_pump/guppy = 1,
-		/decl/stock_part_preset/radio/event_transmitter/vent_pump/guppy = 1
+		/singleton/stock_part_preset/radio/receiver/vent_pump/guppy = 1,
+		/singleton/stock_part_preset/radio/event_transmitter/vent_pump/guppy = 1
 	)
 
-/decl/stock_part_preset/radio/receiver/vent_scrubber/guppy
+/singleton/stock_part_preset/radio/receiver/vent_scrubber/guppy
 	frequency = 1431
 
-/decl/stock_part_preset/radio/event_transmitter/vent_scrubber/guppy
+/singleton/stock_part_preset/radio/event_transmitter/vent_scrubber/guppy
 	frequency = 1431
 
 /obj/machinery/atmospherics/unary/vent_scrubber/guppy
 	stock_part_presets = list(
-		/decl/stock_part_preset/radio/receiver/vent_scrubber/guppy = 1,
-		/decl/stock_part_preset/radio/event_transmitter/vent_scrubber/guppy = 1
+		/singleton/stock_part_preset/radio/receiver/vent_scrubber/guppy = 1,
+		/singleton/stock_part_preset/radio/event_transmitter/vent_scrubber/guppy = 1
 	)

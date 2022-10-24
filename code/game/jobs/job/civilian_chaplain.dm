@@ -8,7 +8,7 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel"
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels)
-	outfit_type = /decl/hierarchy/outfit/job/chaplain
+	outfit_type = /singleton/hierarchy/outfit/job/chaplain
 
 /datum/job/chaplain/equip(mob/living/carbon/human/H, alt_title, ask_questions = TRUE)
 	. = ..()

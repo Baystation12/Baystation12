@@ -677,7 +677,7 @@
 	desc = "An industrial rotating alarm light. This one is used to monitor supermatter engines."
 
 	frame_type = /obj/item/frame/supermatter_alarm
-	construct_state = /decl/machine_construction/default/item_chassis
+	construct_state = /singleton/machine_construction/default/item_chassis
 	base_type = /obj/machinery/rotating_alarm/supermatter
 
 /obj/machinery/rotating_alarm/supermatter/Initialize()

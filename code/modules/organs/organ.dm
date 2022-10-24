@@ -382,5 +382,5 @@ var/global/list/organ_cache = list()
 * Pre-surgery modification of the organ if it has status|ORGAN_CONFIGURE
 * Halts surgery if the return value is truthy
 */
-/obj/item/organ/proc/surgery_configure(mob/living/user, mob/living/carbon/human/target, obj/item/organ/parent, obj/item/tool, decl/surgery_step/action)
+/obj/item/organ/proc/surgery_configure(mob/living/user, mob/living/carbon/human/target, obj/item/organ/parent, obj/item/tool, singleton/surgery_step/action)
 	return

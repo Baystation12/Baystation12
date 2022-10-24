@@ -42,7 +42,7 @@
 		act = copytext(tempstr,1,splitpoint)
 		message = copytext(tempstr,splitpoint+1,0)
 
-	var/decl/emote/use_emote = usable_emotes[act]
+	var/singleton/emote/use_emote = usable_emotes[act]
 	if(!use_emote)
 		to_chat(src, SPAN_WARNING("Unknown emote '[act]'. Type <b>say *help</b> for a list of usable emotes."))
 		return
@@ -67,7 +67,7 @@
 	var/end_char
 	var/start_char
 	var/name_anchor
-	var/anchor_char = get_prefix_key(/decl/prefix/visible_emote)
+	var/anchor_char = get_prefix_key(/singleton/prefix/visible_emote)
 
 	if(!message || !emoter)
 		return
@@ -154,4 +154,4 @@
 
 /mob/observer/ghost/emote(act, type, message)
 	if(message && act == "me")
-		communicate(/decl/communication_channel/dsay, client, message, /decl/dsay_communication/emote)
+		communicate(/singleton/communication_channel/dsay, client, message, /singleton/dsay_communication/emote)

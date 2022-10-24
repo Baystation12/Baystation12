@@ -474,7 +474,7 @@
 	return
 
 /mob/new_player/say(message)
-	sanitize_and_communicate(/decl/communication_channel/ooc, client, message)
+	sanitize_and_communicate(/singleton/communication_channel/ooc, client, message)
 
 /mob/new_player/verb/next_lobby_track()
 	set name = "Play Different Lobby Track"
@@ -482,6 +482,6 @@
 
 	if(get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_NO)
 		return
-	var/decl/audio/track/track = GLOB.using_map.get_lobby_track(GLOB.using_map.lobby_track.type)
+	var/singleton/audio/track/track = GLOB.using_map.get_lobby_track(GLOB.using_map.lobby_track.type)
 	sound_to(src, track.get_sound())
 	to_chat(src, track.get_info())

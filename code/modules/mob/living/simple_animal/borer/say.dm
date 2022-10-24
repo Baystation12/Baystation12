@@ -17,7 +17,7 @@
 			to_chat(src, SPAN_WARNING("You cannot speak in IC (muted)."))
 			return
 
-	if (copytext_char(message, 1, 2) == get_prefix_key(/decl/prefix/custom_emote))
+	if (copytext_char(message, 1, 2) == get_prefix_key(/singleton/prefix/custom_emote))
 		return emote(copytext_char(message, 2))
 
 	var/datum/language/L = parse_language(message)

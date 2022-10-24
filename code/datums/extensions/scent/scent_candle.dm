@@ -1,6 +1,6 @@
 /datum/extension/scent/candle
-	intensity = /decl/scent_intensity/normal
-	descriptor = SCENT_DESC_FRAGRANCE 
+	intensity = /singleton/scent_intensity/normal
+	descriptor = SCENT_DESC_FRAGRANCE
 	range = 4
 
 /datum/extension/scent/candle/rose

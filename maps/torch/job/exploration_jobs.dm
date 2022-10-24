@@ -10,7 +10,7 @@
 	economic_power = 10
 	minimum_character_age = list(SPECIES_HUMAN = 25)
 	ideal_character_age = 35
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/pathfinder
+	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/exploration/pathfinder
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o1
@@ -52,14 +52,14 @@
 	minimal_player_age = 0
 	minimum_character_age = list(SPECIES_HUMAN = 24)
 	ideal_character_age = 25
-	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/pilot
+	outfit_type = /singleton/hierarchy/outfit/job/torch/passenger/pilot
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
-		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/exploration/pilot,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/exploration/pilot/fleet
+		/datum/mil_branch/expeditionary_corps = /singleton/hierarchy/outfit/job/torch/crew/exploration/pilot,
+		/datum/mil_branch/fleet = /singleton/hierarchy/outfit/job/torch/crew/exploration/pilot/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot,
+		/datum/mil_rank/civ/contractor = /singleton/hierarchy/outfit/job/torch/passenger/research/nt_pilot,
 		/datum/mil_rank/ec/e7,
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/fleet/e7
@@ -87,7 +87,7 @@
 	selection_color = "#68099e"
 	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 20
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/explorer
+	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/exploration/explorer
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
 
 	allowed_ranks = list(
