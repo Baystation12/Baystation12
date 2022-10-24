@@ -841,7 +841,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		var/pain_level = pain_emotes_with_pain_level[pain_emotes]
 		if(pain_level >= pain_power)
 			// This assumes that if a pain-level has been defined it also has a list of emotes to go with it
-			var/singleton/emote/E = Singletons.GetInstance(pick(pain_emotes))
+			var/singleton/emote/E = GET_SINGLETON(pick(pain_emotes))
 			return E.key
 
 /datum/species/proc/handle_exertion(mob/living/carbon/human/H)
@@ -864,6 +864,6 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				H.make_reagent(REM * exertion_reagent_scale, exertion_reagent_path)
 		if (prob(10))
 			var/list/active_emotes = synthetic ? exertion_emotes_synthetic : exertion_emotes_biological
-			var/singleton/emote/exertion_emote = Singletons.GetInstance(pick(active_emotes))
+			var/singleton/emote/exertion_emote = GET_SINGLETON(pick(active_emotes))
 			if (exertion_emote)
 				exertion_emote.do_emote(H)

@@ -91,7 +91,7 @@
 		var/datum/species/S = all_species[species_name]
 		for(var/trait_type in S.traits)
 			var/trait_level = S.traits[trait_type]
-			var/singleton/trait/T = Singletons.GetInstance(trait_type)
+			var/singleton/trait/T = GET_SINGLETON(trait_type)
 			if(!T.Validate(trait_level))
 				invalid_species += S.type
 				break
@@ -113,7 +113,7 @@
 	for (var/species_name in all_species)
 		var/datum/species/S = all_species[species_name]
 		for (var/trait_type in S.traits)
-			var/singleton/trait/T = Singletons.GetInstance(trait_type)
+			var/singleton/trait/T = GET_SINGLETON(trait_type)
 			for (var/incompatible_trait_type in T.incompatible_traits)
 				if (incompatible_trait_type in S.traits)
 					invalid_species.Add(S.type)

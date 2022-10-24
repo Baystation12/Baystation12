@@ -16,7 +16,7 @@
 
 /singleton/audio/New()
 	. = ..()
-	license = Singletons.GetInstance(license)
+	license = GET_SINGLETON(license)
 
 
 /singleton/audio/VV_static()

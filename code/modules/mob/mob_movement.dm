@@ -268,7 +268,7 @@
 	var/checking_intent = (istype(move_intent) ? move_intent.type : move_intents[1])
 	for(var/i = 1 to length(move_intents)) // One full iteration of the move set.
 		checking_intent = next_in_list(checking_intent, move_intents)
-		if(set_move_intent(Singletons.GetInstance(checking_intent)))
+		if(set_move_intent(GET_SINGLETON(checking_intent)))
 			return
 
 /mob/proc/set_move_intent(singleton/move_intent/next_intent)
@@ -281,27 +281,27 @@
 
 /mob/proc/get_movement_datum_by_flag(move_flag = MOVE_INTENT_DELIBERATE)
 	for(var/m_intent in move_intents)
-		var/singleton/move_intent/check_move_intent = Singletons.GetInstance(m_intent)
+		var/singleton/move_intent/check_move_intent = GET_SINGLETON(m_intent)
 		if(check_move_intent.flags & move_flag)
 			return check_move_intent
 
 /mob/proc/get_movement_datum_by_missing_flag(move_flag = MOVE_INTENT_DELIBERATE)
 	for(var/m_intent in move_intents)
-		var/singleton/move_intent/check_move_intent = Singletons.GetInstance(m_intent)
+		var/singleton/move_intent/check_move_intent = GET_SINGLETON(m_intent)
 		if(!(check_move_intent.flags & move_flag))
 			return check_move_intent
 
 /mob/proc/get_movement_datums_by_flag(move_flag = MOVE_INTENT_DELIBERATE)
 	. = list()
 	for(var/m_intent in move_intents)
-		var/singleton/move_intent/check_move_intent = Singletons.GetInstance(m_intent)
+		var/singleton/move_intent/check_move_intent = GET_SINGLETON(m_intent)
 		if(check_move_intent.flags & move_flag)
 			. += check_move_intent
 
 /mob/proc/get_movement_datums_by_missing_flag(move_flag = MOVE_INTENT_DELIBERATE)
 	. = list()
 	for(var/m_intent in move_intents)
-		var/singleton/move_intent/check_move_intent = Singletons.GetInstance(m_intent)
+		var/singleton/move_intent/check_move_intent = GET_SINGLETON(m_intent)
 		if(!(check_move_intent.flags & move_flag))
 			. += check_move_intent
 

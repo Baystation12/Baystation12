@@ -33,7 +33,7 @@ SUBSYSTEM_DEF(supply)
 	ordernum = rand(1,9000)
 
 	//Build master supply list
-	var/singleton/hierarchy/supply_pack/root = Singletons.GetInstance(/singleton/hierarchy/supply_pack)
+	var/singleton/hierarchy/supply_pack/root = GET_SINGLETON(/singleton/hierarchy/supply_pack)
 	for(var/singleton/hierarchy/supply_pack/sp in root.children)
 		if(sp.is_category())
 			for(var/singleton/hierarchy/supply_pack/spc in sp.get_descendents())

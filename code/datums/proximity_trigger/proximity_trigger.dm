@@ -43,7 +43,7 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 
 	if(!ispath(turf_selection, /singleton/turf_selection))
 		CRASH("Invalid turf selection type set: [turf_selection]")
-	turf_selection = Singletons.GetInstance(turf_selection)
+	turf_selection = GET_SINGLETON(turf_selection)
 
 	src.holder = holder
 	src.on_turf_entered = on_turf_entered

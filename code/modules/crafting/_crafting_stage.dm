@@ -13,7 +13,7 @@
 /singleton/crafting_stage/New()
 	var/stages = list()
 	for(var/nid in next_stages)
-		stages += Singletons.GetInstance(nid)
+		stages += GET_SINGLETON(nid)
 	next_stages = stages
 	..()
 

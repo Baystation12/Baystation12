@@ -383,7 +383,7 @@
 
 
 /client/proc/after_send_resources()
-	var/singleton/asset_cache/asset_cache = Singletons.GetInstance(/singleton/asset_cache)
+	var/singleton/asset_cache/asset_cache = GET_SINGLETON(/singleton/asset_cache)
 	getFilesSlow(src, asset_cache.cache, register_asset = FALSE)
 
 

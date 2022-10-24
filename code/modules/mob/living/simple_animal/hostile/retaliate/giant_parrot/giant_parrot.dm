@@ -40,7 +40,7 @@
 	. = ..()
 	var/subspecies_type = DEFAULTPICK(subspecies, null)
 	if(subspecies_type)
-		var/singleton/parrot_subspecies/ps = Singletons.GetInstance(subspecies_type)
+		var/singleton/parrot_subspecies/ps = GET_SINGLETON(subspecies_type)
 		icon_set = ps.icon_set
 		skin_material = ps.feathers
 		if(get_subspecies_name)

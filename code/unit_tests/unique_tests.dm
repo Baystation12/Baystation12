@@ -179,7 +179,7 @@
 	for(var/key in entries)
 		var/list/values = entries[key]
 		if(values.len > 1)
-			var/singleton/noi_feedback/noif = Singletons.GetInstance(feedback)
+			var/singleton/noi_feedback/noif = GET_SINGLETON(feedback)
 			noif.print(src, type, key, values)
 			issues++
 

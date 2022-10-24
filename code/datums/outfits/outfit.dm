@@ -17,7 +17,7 @@ var/global/list/outfits_singletons_by_type_
 		return
 	outfits_singletons_ = list()
 	outfits_singletons_by_type_ = list()
-	outfits_singletons_root_ = Singletons.GetInstance(/singleton/hierarchy/outfit)
+	outfits_singletons_root_ = GET_SINGLETON(/singleton/hierarchy/outfit)
 
 /singleton/hierarchy/outfit
 	name = "Naked"

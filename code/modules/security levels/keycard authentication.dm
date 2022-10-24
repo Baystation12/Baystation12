@@ -64,7 +64,7 @@
 	if(screen == 1)
 		dat += "Select an event to trigger:<ul>"
 
-		var/singleton/security_state/security_state = Singletons.GetInstance(GLOB.using_map.security_state)
+		var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 		if(security_state.current_security_level == security_state.severe_security_level)
 			dat += "<li>Cannot modify the alert level at this time: [security_state.severe_security_level.name] engaged.</li>"
 		else
@@ -151,11 +151,11 @@
 /obj/machinery/keycard_auth/proc/trigger_event()
 	switch(event)
 		if("Red alert")
-			var/singleton/security_state/security_state = Singletons.GetInstance(GLOB.using_map.security_state)
+			var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 			security_state.stored_security_level = security_state.current_security_level
 			security_state.set_security_level(security_state.high_security_level)
 		if("Revert alert")
-			var/singleton/security_state/security_state = Singletons.GetInstance(GLOB.using_map.security_state)
+			var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 			security_state.set_security_level(security_state.stored_security_level)
 		if("Grant Emergency Maintenance Access")
 			GLOB.using_map.make_maint_all_access()

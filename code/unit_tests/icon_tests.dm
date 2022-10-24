@@ -104,7 +104,7 @@
 	var/list/invalid_posters = list()
 
 	for(var/poster_type in subtypesof(/singleton/poster))
-		var/singleton/poster/P = Singletons.GetInstance(poster_type)
+		var/singleton/poster/P = GET_SINGLETON(poster_type)
 		if(!(P.icon_state in contraband_icons))
 			invalid_posters += poster_type
 

@@ -25,7 +25,7 @@
 /singleton/hierarchy/supply_pack/proc/sec_available()
 	if(isnull(security_level))
 		return TRUE
-	var/singleton/security_state/security_state = Singletons.GetInstance(GLOB.using_map.security_state)
+	var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 	switch(security_level)
 		if(SUPPLY_SECURITY_ELEVATED)
 			if(security_state.all_security_levels.len > 1)

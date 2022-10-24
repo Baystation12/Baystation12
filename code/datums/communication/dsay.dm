@@ -14,7 +14,7 @@
 	..()
 
 /singleton/communication_channel/dsay/can_communicate(client/communicator, message, speech_method_type)
-	var/singleton/dsay_communication/speech_method = Singletons.GetInstance(speech_method_type)
+	var/singleton/dsay_communication/speech_method = GET_SINGLETON(speech_method_type)
 	switch(speech_method.can_communicate(communicator, message))
 		if(DSAY_CAN_COMMUNICATE)
 			return TRUE
@@ -22,7 +22,7 @@
 			return ..()
 
 /singleton/communication_channel/dsay/do_communicate(client/communicator, message, speech_method_type)
-	var/singleton/dsay_communication/speech_method = Singletons.GetInstance(speech_method_type)
+	var/singleton/dsay_communication/speech_method = GET_SINGLETON(speech_method_type)
 
 	speech_method.adjust_channel(src)
 

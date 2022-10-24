@@ -249,7 +249,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			path = pickweight(allowed)
 	else
 		path = lobby_tracks[1]
-	return Singletons.GetInstance(path)
+	return GET_SINGLETON(path)
 
 
 /datum/map/proc/setup_config(name, value, filename)

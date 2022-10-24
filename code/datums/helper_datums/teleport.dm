@@ -51,5 +51,5 @@
 	do_spark(target)
 
 /proc/do_teleport(atom/movable/target, atom/destination, precision = 0, type = /singleton/teleport/sparks)
-	var/singleton/teleport/tele = Singletons.GetInstance(type)
+	var/singleton/teleport/tele = GET_SINGLETON(type)
 	tele.teleport(target, destination, precision)

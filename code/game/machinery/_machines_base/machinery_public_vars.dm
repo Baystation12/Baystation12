@@ -106,7 +106,7 @@ Machinery implementation
 
 /obj/machinery/Initialize()
 	for(var/path in public_variables)
-		public_variables[path] = Singletons.GetInstance(path)
+		public_variables[path] = GET_SINGLETON(path)
 	for(var/path in public_methods)
-		public_methods[path] = Singletons.GetInstance(path)
+		public_methods[path] = GET_SINGLETON(path)
 	. = ..()

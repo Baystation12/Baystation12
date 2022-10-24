@@ -137,7 +137,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 
 /proc/get_announcement_frequency(datum/job/job)
 	// During red alert all jobs are announced on main frequency.
-	var/singleton/security_state/security_state = Singletons.GetInstance(GLOB.using_map.security_state)
+	var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 	if (security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
 		return "Common"
 

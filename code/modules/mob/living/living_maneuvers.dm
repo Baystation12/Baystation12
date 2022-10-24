@@ -36,7 +36,7 @@
 
 	var/list/maneuvers = list()
 	for(var/maneuver in available_maneuvers)
-		maneuvers += Singletons.GetInstance(maneuver)
+		maneuvers += GET_SINGLETON(maneuver)
 
 	var/next_maneuver = input(src, "Select a maneuver.") as null|anything in maneuvers
 	if(next_maneuver)
@@ -47,7 +47,7 @@
 		to_chat(src, SPAN_NOTICE("You are no longer preparing to perform a maneuver."))
 
 /mob/living/proc/perform_maneuver(maneuver, atom/target)
-	var/singleton/maneuver/performing_maneuver = ispath(maneuver) ? Singletons.GetInstance(maneuver) : maneuver
+	var/singleton/maneuver/performing_maneuver = ispath(maneuver) ? GET_SINGLETON(maneuver) : maneuver
 	if(istype(performing_maneuver))
 		. = performing_maneuver.perform(src, target, get_acrobatics_multiplier(performing_maneuver))
 
