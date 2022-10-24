@@ -33,7 +33,10 @@ var/global/repository/singletons/Singletons = new
 	var/static/list/resolved_subtype_lists = list()
 
 
-/// Get a singleton instance according to path. Creates it if necessary. Null if abstract or not a singleton.
+/**
+* Get a singleton instance according to path. Creates it if necessary. Null if abstract or not a singleton.
+* Prefer the GET_SINGLETON macro to minimize proc calls.
+*/
 /repository/singletons/proc/GetInstance(singleton/path)
 	if (!ispath(path, /singleton))
 		return
@@ -70,7 +73,10 @@ var/global/repository/singletons/Singletons = new
 	return result
 
 
-/// Get a (path = instance) map of valid singletons according to typesof(path).
+/**
+* Get a (path = instance) map of valid singletons according to typesof(path).
+* Prefer the GET_SINGLETON_TYPE_MAP macro to minimize proc calls.
+*/
 /repository/singletons/proc/GetTypeMap(singleton/path)
 	if (resolved_type_maps[path])
 		return type_maps[path] || list()
@@ -80,7 +86,10 @@ var/global/repository/singletons/Singletons = new
 	return result
 
 
-/// Get a (path = instance) map of valid singletons according to subtypesof(path).
+/**
+* Get a (path = instance) map of valid singletons according to subtypesof(path).
+* Prefer the GET_SINGLETON_TYPE_MAP macro to minimize proc calls.
+*/
 /repository/singletons/proc/GetSubtypeMap(singleton/path)
 	if (resolved_subtype_maps[path])
 		return subtype_maps[path] || list()
@@ -90,7 +99,10 @@ var/global/repository/singletons/Singletons = new
 	return result
 
 
-/// Get a list of valid singletons according to typesof(path).
+/**
+* Get a list of valid singletons according to typesof(path).
+* Prefer the GET_SINGLETON_TYPE_LIST macro to minimize proc calls.
+*/
 /repository/singletons/proc/GetTypeList(singleton/path)
 	if (resolved_type_lists[path])
 		return type_lists[path] || list()
@@ -100,7 +112,10 @@ var/global/repository/singletons/Singletons = new
 	return result
 
 
-/// Get a list of valid singletons according to subtypesof(path).
+/**
+* Get a list of valid singletons according to subtypesof(path).
+* Prefer the GET_SINGLETON_SUBTYPE_LIST macro to minimize proc calls.
+*/
 /repository/singletons/proc/GetSubtypeList(singleton/path)
 	if (resolved_subtype_lists[path])
 		return subtype_lists[path] || list()

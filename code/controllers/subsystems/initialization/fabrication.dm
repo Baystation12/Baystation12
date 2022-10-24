@@ -24,7 +24,7 @@ SUBSYSTEM_DEF(fabrication)
 			if (!categories[type])
 				categories[type] = list()
 			categories[type] |= recipe.category
-	var/list/stages = Singletons.GetSubtypeMap(/singleton/crafting_stage)
+	var/list/stages = GET_SINGLETON_SUBTYPE_MAP(/singleton/crafting_stage)
 	for (var/id in stages)
 		var/singleton/crafting_stage/stage = stages[id]
 		var/type = stage.begins_with_object_type

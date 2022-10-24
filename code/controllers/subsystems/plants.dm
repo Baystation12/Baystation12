@@ -101,7 +101,7 @@ SUBSYSTEM_DEF(plants)
 	for (var/obj/item/seeds/seeds)
 		seeds.update_seed()
 
-	var/list/gene_datums = Singletons.GetSubtypeMap(/singleton/plantgene)
+	var/list/gene_datums = GET_SINGLETON_SUBTYPE_MAP(/singleton/plantgene)
 	var/list/used_masks = list()
 
 	for (var/tag in ALL_GENES)

@@ -131,7 +131,7 @@
 		return
 
 	var/list/badness = list()
-	var/list/symptoms = Singletons.GetSubtypeMap(/singleton/diagnostic_sign)
+	var/list/symptoms = GET_SINGLETON_SUBTYPE_MAP(/singleton/diagnostic_sign)
 	for(var/S in symptoms)
 		var/singleton/diagnostic_sign/sign = symptoms[S]
 		if(sign.manifested_in(src))
