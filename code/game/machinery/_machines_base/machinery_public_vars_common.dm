@@ -29,7 +29,7 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 
 /// Handles toggling the machine's toggle variable. Used by the `toggle_input_toggle` public method.
 /obj/machinery/proc/toggle_input_toggle()
-	var/singleton/public_access/public_variable/variable = Singletons.Get(/singleton/public_access/public_variable/input_toggle)
+	var/singleton/public_access/public_variable/variable = GET_SINGLETON(/singleton/public_access/public_variable/input_toggle)
 	variable.write_var(src, !input_toggle)
 
 /singleton/public_access/public_variable/area_uid

@@ -23,13 +23,13 @@
 
 /mob/living/proc/SetTrait(trait_type, trait_level)
 	SHOULD_NOT_SLEEP(TRUE)
-	var/singleton/trait/T = Singletons.Get(trait_type)
+	var/singleton/trait/T = GET_SINGLETON(trait_type)
 	if(!T.Validate(trait_level))
 		return FALSE
 
 	if (!LAZYISIN(traits, trait_type))
 		for (var/existing_trait_types in traits)
-			var/singleton/trait/ET = Singletons.Get(existing_trait_types)
+			var/singleton/trait/ET = GET_SINGLETON(existing_trait_types)
 			if (trait_type in ET.incompatible_traits)
 				return FALSE
 
@@ -37,7 +37,7 @@
 	return TRUE
 
 /mob/living/carbon/human/SetTrait(trait_type, trait_level)
-	var/singleton/trait/T = Singletons.Get(trait_type)
+	var/singleton/trait/T = GET_SINGLETON(trait_type)
 	if(!T.Validate(trait_level))
 		return FALSE
 

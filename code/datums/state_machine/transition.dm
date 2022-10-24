@@ -8,7 +8,7 @@
 /singleton/state_transition/Initialize()
 	. = ..()
 	if(ispath(target))
-		target = Singletons.Get(target)
+		target = GET_SINGLETON(target)
 
 /// Tells the FSM if it should or should not be allowed to transfer to the target state.
 /singleton/state_transition/proc/is_open(datum/holder)

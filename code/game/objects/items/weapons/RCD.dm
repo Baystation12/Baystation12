@@ -34,7 +34,7 @@
 	. = ..()
 
 	if(!work_modes)
-		var/singleton/hierarchy/h = Singletons.Get(/singleton/hierarchy/rcd_mode)
+		var/singleton/hierarchy/h = GET_SINGLETON(/singleton/hierarchy/rcd_mode)
 		work_modes = h.children
 	work_mode = work_modes[1]
 

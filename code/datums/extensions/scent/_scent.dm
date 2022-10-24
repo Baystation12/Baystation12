@@ -82,7 +82,7 @@ Scent intensity
 /datum/extension/scent/New()
 	..()
 	if(ispath(intensity))
-		intensity = Singletons.Get(intensity)
+		intensity = GET_SINGLETON(intensity)
 	START_PROCESSING(SSprocessing, src)
 
 /datum/extension/scent/Destroy()
@@ -117,7 +117,7 @@ This will let you set an extension without needing to define it beforehand. Note
 	if(provided_scent && provided_intensity && provided_descriptor && provided_range)
 		scent = provided_scent
 		if(ispath(provided_intensity))
-			intensity = Singletons.Get(provided_intensity)
+			intensity = GET_SINGLETON(provided_intensity)
 		descriptor = provided_descriptor
 		range = provided_range
 	else
@@ -141,7 +141,7 @@ To add a scent extension to an atom using a reagent's info, where R. is the reag
 		var/datum/reagent/R = reagent_to_compare
 		if(!R.scent)
 			continue
-		var/singleton/scent_intensity/SI = Singletons.Get(R.scent_intensity)
+		var/singleton/scent_intensity/SI = GET_SINGLETON(R.scent_intensity)
 		var/r_scent_intensity = R.volume * SI.intensity
 		if(r_scent_intensity > scent_intensity)
 			smelliest = R

@@ -93,7 +93,7 @@
 			title+= " ([R.req_amount] [src.singular_name]\s)"
 			var/skill_label = ""
 			if(!user.skill_check(SKILL_CONSTRUCTION, R.difficulty))
-				var/singleton/hierarchy/skill/S = Singletons.Get(SKILL_CONSTRUCTION)
+				var/singleton/hierarchy/skill/S = GET_SINGLETON(SKILL_CONSTRUCTION)
 				skill_label = SPAN_COLOR("red", "\[[S.levels[R.difficulty]]\]")
 			if (can_build)
 				t1 +="[skill_label]<A href='?src=\ref[src];sublist=[recipes_sublist];make=[i];multiplier=1'>[title]</A>"

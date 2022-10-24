@@ -91,7 +91,7 @@ GLOBAL_LIST_INIT(secure_weapons, list())
 	return length(req_access)
 
 /obj/item/gun/proc/free_fire()
-	var/singleton/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
+	var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 	return security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level)
 
 /obj/item/gun/special_check()

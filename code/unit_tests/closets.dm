@@ -15,7 +15,7 @@
 	var/list/bad_decal_state
 
 	for(var/check_appearance in typesof(/singleton/closet_appearance)-except_appearances)
-		var/singleton/closet_appearance/closet = Singletons.Get(check_appearance)
+		var/singleton/closet_appearance/closet = GET_SINGLETON(check_appearance)
 		if(!closet)
 			LAZYADD(bad_singleton, "[check_appearance]")
 			continue

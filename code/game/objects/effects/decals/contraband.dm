@@ -127,7 +127,7 @@
 			pixel_y = 0
 
 /obj/structure/sign/poster/proc/set_poster(poster_type)
-	var/singleton/poster/design = Singletons.Get(poster_type)
+	var/singleton/poster/design = GET_SINGLETON(poster_type)
 	SetName("[initial(name)] - [design.name]")
 	desc = "[initial(desc)] [design.desc]"
 	icon_state = design.icon_state

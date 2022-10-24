@@ -35,7 +35,7 @@
 		if(client.get_preference_value(/datum/client_preference/goonchat) == GLOB.PREF_YES)
 			client.chatOutput.start()
 
-	var/singleton/security_state/security_state = Singletons.Get(GLOB.using_map.security_state)
+	var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 	var/singleton/security_level/SL = security_state.current_security_level
 	var/alert_desc = ""
 	if(SL.up_description)

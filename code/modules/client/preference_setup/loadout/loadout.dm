@@ -218,7 +218,7 @@ var/global/list/gear_datums = list()
 		if(allowed && G.allowed_skills)
 			var/list/skills_required = list()//make it into instances? instead of path
 			for(var/skill in G.allowed_skills)
-				var/singleton/hierarchy/skill/instance = Singletons.Get(skill)
+				var/singleton/hierarchy/skill/instance = GET_SINGLETON(skill)
 				skills_required[instance] = G.allowed_skills[skill]
 
 			allowed = skill_check(jobs, skills_required)//Checks if a single job has all the skills required
@@ -388,7 +388,7 @@ var/global/list/gear_datums = list()
 			to_chat(subject, SPAN_WARNING("Failed to find a valid organ to install \the [augment] into!"))
 			qdel(augment)
 			return
-		var/surgery_step = Singletons.Get(/singleton/surgery_step/internal/replace_organ)
+		var/surgery_step = GET_SINGLETON(/singleton/surgery_step/internal/replace_organ)
 		if (augment.surgery_configure(subject, subject, parent, null, surgery_step))
 			to_chat(subject, SPAN_WARNING("Failed to set up \the [augment] for installation in your [parent.name]!"))
 			qdel(augment)

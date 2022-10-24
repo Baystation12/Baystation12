@@ -25,12 +25,12 @@
 	if(transmit_on_change)
 		part.transmit_on_change = list()
 		for(var/key in transmit_on_change)
-			part.transmit_on_change[key] = Singletons.Get(transmit_on_change[key])
+			part.transmit_on_change[key] = GET_SINGLETON(transmit_on_change[key])
 
 	if(transmit_on_tick)
 		part.transmit_on_tick = list()
 		for(var/key in transmit_on_tick)
-			part.transmit_on_tick[key] = Singletons.Get(transmit_on_tick[key])
+			part.transmit_on_tick[key] = GET_SINGLETON(transmit_on_tick[key])
 
 /singleton/stock_part_preset/radio/event_transmitter
 	expected_part_type = /obj/item/stock_parts/radio/transmitter/on_event
@@ -41,12 +41,12 @@
 	..()
 
 	if(event)
-		part.event = Singletons.Get(event)
+		part.event = GET_SINGLETON(event)
 
 	if(transmit_on_event)
 		part.transmit_on_event = list()
 		for(var/key in transmit_on_event)
-			part.transmit_on_event[key] = Singletons.Get(transmit_on_event[key])
+			part.transmit_on_event[key] = GET_SINGLETON(transmit_on_event[key])
 
 /singleton/stock_part_preset/radio/receiver
 	expected_part_type = /obj/item/stock_parts/radio/receiver
@@ -59,9 +59,9 @@
 	if(receive_and_write)
 		part.receive_and_write = list()
 		for(var/key in receive_and_write)
-			part.receive_and_write[key] = Singletons.Get(receive_and_write[key])
+			part.receive_and_write[key] = GET_SINGLETON(receive_and_write[key])
 
 	if(receive_and_call)
 		part.receive_and_call = list()
 		for(var/key in receive_and_call)
-			part.receive_and_call[key] = Singletons.Get(receive_and_call[key])
+			part.receive_and_call[key] = GET_SINGLETON(receive_and_call[key])

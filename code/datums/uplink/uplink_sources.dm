@@ -124,7 +124,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	if(!priority_order || !priority_order.len)
 		priority_order = list()
 		for(var/entry in GLOB.default_uplink_source_priority)
-			priority_order += Singletons.Get(entry)
+			priority_order += GET_SINGLETON(entry)
 
 	for(var/entry in priority_order)
 		var/singleton/uplink_source/US = entry

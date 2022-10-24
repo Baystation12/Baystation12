@@ -179,7 +179,7 @@
 * Helpers *
 **********/
 /proc/get_default_outfit_backpack()
-	var backpacks = Singletons.GetSubtypesAssoc(/singleton/backpack_outfit)
+	var backpacks = GET_SINGLETON_SUBTYPE_MAP(/singleton/backpack_outfit)
 	for(var/backpack in backpacks)
 		var/singleton/backpack_outfit/bo = backpacks[backpack]
 		if(bo.is_default)

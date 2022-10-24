@@ -1234,7 +1234,7 @@
 	default_run_intent = null
 	move_intent = null
 	move_intents = species.move_intents.Copy()
-	set_move_intent(Singletons.Get(move_intents[1]))
+	set_move_intent(GET_SINGLETON(move_intents[1]))
 	if(!istype(move_intent))
 		set_next_usable_move_intent()
 

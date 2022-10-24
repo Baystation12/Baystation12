@@ -18,7 +18,7 @@
 	..()
 	if(!backpacks_by_name)
 		backpacks_by_name = list()
-		var/bos = Singletons.GetSubtypesAssoc(/singleton/backpack_outfit)
+		var/bos = GET_SINGLETON_SUBTYPE_MAP(/singleton/backpack_outfit)
 		for(var/bo in bos)
 			var/singleton/backpack_outfit/backpack_outfit = bos[bo]
 			backpacks_by_name[backpack_outfit.name] = backpack_outfit

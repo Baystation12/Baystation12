@@ -33,7 +33,7 @@
 		verbs += /obj/structure/closet/proc/togglelock_verb
 
 	if(ispath(closet_appearance))
-		var/singleton/closet_appearance/app = Singletons.Get(closet_appearance)
+		var/singleton/closet_appearance/app = GET_SINGLETON(closet_appearance)
 		if(app)
 			icon = app.icon
 			color = null

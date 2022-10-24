@@ -7,7 +7,7 @@
 	. = mind.StoreMemory(memory, options)
 
 /datum/mind/proc/StoreMemory(memory, options)
-	var/singleton/memory_options/MO = Singletons.Get(options || /singleton/memory_options/default)
+	var/singleton/memory_options/MO = GET_SINGLETON(options || /singleton/memory_options/default)
 	return MO.Create(src, memory)
 
 /datum/mind/proc/RemoveMemory(datum/memory/memory, mob/remover)

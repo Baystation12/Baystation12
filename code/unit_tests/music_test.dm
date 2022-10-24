@@ -4,7 +4,7 @@
 
 /datum/unit_test/audio_track_validate/start_test()
 	var/list/failed = list()
-	var/list/available = Singletons.GetSubtypesAssoc(/singleton/audio/track)
+	var/list/available = GET_SINGLETON_SUBTYPE_MAP(/singleton/audio/track)
 	for (var/key in available)
 		var/singleton/audio/track/track = available[key]
 		if (!isfile(track.source))
