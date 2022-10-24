@@ -45,3 +45,21 @@
 				salvaged = prob(25) //Sometimes more, sometimes less
 		else
 			to_chat(user, SPAN_NOTICE("It doesn't seem like there's anything of use left on this thing."))
+
+/obj/structure/decorative/md_slug
+	name = "charred mass driver slug"
+	desc = "A damaged, and used mass-driver slug. This one has likely seen the broad-end of an armoured hull. It has a small stamp, etched on the side. 'SFV Nathan Hale, INV: 654-2305'. "
+	icon = 'icons/obj/munitions.dmi'
+	icon_state = "hale_slug"
+	var/list/move_sounds = list(
+		'sound/effects/metalscrape1.ogg',
+		'sound/effects/metalscrape2.ogg',
+		'sound/effects/metalscrape3.ogg'
+	)
+
+/obj/structure/decorative/md_slug/Move()
+	. = ..()
+	if(.)
+		var/turf/T = get_turf(src)
+		if(!isspace(T) && !istype(T, /turf/simulated/floor/carpet))
+			playsound(T, pick(move_sounds), 75, 1)

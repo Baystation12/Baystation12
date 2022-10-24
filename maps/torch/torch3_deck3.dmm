@@ -15948,6 +15948,10 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/thirddeck/center)
+"Np" = (
+/obj/structure/decorative/md_slug,
+/turf/simulated/floor/plating,
+/area/vacant/brig)
 "Nq" = (
 /obj/structure/closet/crate/trashcart,
 /obj/random/junk,
@@ -41315,7 +41319,7 @@ ae
 ag
 av
 ag
-ag
+Np
 eA
 aE
 ae
