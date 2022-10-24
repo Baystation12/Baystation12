@@ -240,6 +240,18 @@
 	base_name = "teacup"
 	base_icon = "teacup"
 
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/beaglemug
+	name = "beagle mug"
+	desc = "A heavy mug. A beagle mug. Careful not to break it!"
+	icon_state = "beaglemug"
+	item_state = "coffee"
+	icon = 'icons/obj/drink_glasses/mug.dmi'
+	filling_states = "100"
+	volume = 40
+	center_of_mass = "x=17;y=13"
+	base_name = "beaglemug"
+	base_icon = "beaglemug"
+
 /obj/item/reagent_containers/food/drinks/glass2/coffeecup/custom/inherit_custom_item_data(datum/custom_item/citem)
 	. = ..()
 	if(citem.additional_data["base_name"])
