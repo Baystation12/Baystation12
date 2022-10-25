@@ -2,7 +2,7 @@
 
 var/global/list/whitelist = list()
 
-/hook/startup/proc/loadWhitelist()
+/datum/hook/startup/proc/loadWhitelist()
 	if(config.usewhitelist)
 		load_whitelist()
 	return 1
@@ -18,7 +18,7 @@ var/global/list/whitelist = list()
 
 var/global/list/alien_whitelist = list()
 
-/hook/startup/proc/loadAlienWhitelist()
+/datum/hook/startup/proc/loadAlienWhitelist()
 	if(config.usealienwhitelist)
 		if(config.usealienwhitelistSQL)
 			if(!load_alienwhitelistSQL())

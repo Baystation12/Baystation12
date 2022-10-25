@@ -15,7 +15,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 	var/say_verb = "Robotic"
 
 
-/hook/startup/proc/paiControllerSetup()
+/datum/hook/startup/proc/paiControllerSetup()
 	paiController = new /datum/paiController()
 	return 1
 

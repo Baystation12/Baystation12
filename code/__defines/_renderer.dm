@@ -150,7 +150,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 //Z Mimic planemasters -> Could apply scaling for parallax though that requires copying appearances from adjacent turfs
 GLOBAL_LIST_EMPTY(zmimic_renderers)
 
-/hook/startup/proc/create_global_renderers() //Some (most) renderers probably do not need to be instantiated per mob. So may as well make them global and just add to screen
+/datum/hook/startup/proc/create_global_renderers() //Some (most) renderers probably do not need to be instantiated per mob. So may as well make them global and just add to screen
 	//Zmimic planemasters
 	for(var/i = 0 to OPENTURF_MAX_DEPTH)
 		GLOB.zmimic_renderers += new /atom/movable/renderer/shared/zmimic(null, null, OPENTURF_MAX_PLANE - i)

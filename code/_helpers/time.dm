@@ -150,7 +150,7 @@ var/global/next_duration_update = 0
 var/global/last_round_duration = 0
 var/global/round_start_time = 0
 
-/hook/roundstart/proc/start_timer()
+/datum/hook/roundstart/proc/start_timer()
 	round_start_time = world.time
 	return 1
 
@@ -172,7 +172,7 @@ var/global/round_start_time = 0
 	next_duration_update = world.time + 1 MINUTES
 	return last_round_duration
 
-/hook/startup/proc/set_roundstart_hour()
+/datum/hook/startup/proc/set_roundstart_hour()
 	roundstart_hour = rand(0, 23)
 	return 1
 

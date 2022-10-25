@@ -145,7 +145,7 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
 /**
  *  Populate the global branches list from GLOB.using_map
  */
-/hook/startup/proc/populate_branches()
+/datum/hook/startup/proc/populate_branches()
 	if(!(GLOB.using_map.flags & MAP_HAS_BRANCH) && !(GLOB.using_map.flags & MAP_HAS_RANK))
 		GLOB.mil_branches.branches  = null
 		GLOB.mil_branches.spawn_branches_ = null

@@ -16,7 +16,7 @@ var/global/list/gear_datums = list()
 	category = cat
 	..()
 
-/hook/startup/proc/populate_gear_list()
+/datum/hook/startup/proc/populate_gear_list()
 
 	//create a list of gear datums to sort
 	for(var/geartype in typesof(/datum/gear)-/datum/gear)

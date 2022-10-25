@@ -53,6 +53,6 @@
 	else
 		. += "[world.address]:[world.port]"
 
-/hook/startup/proc/ircNotify()
+/datum/hook/startup/proc/ircNotify()
 	send2mainirc("Server starting up on [get_world_url()]")
 	return 1

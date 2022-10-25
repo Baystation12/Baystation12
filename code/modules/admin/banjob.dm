@@ -39,7 +39,7 @@ var/global/jobban_keylist[0]		//to store the keys & ranks
 			return "Reason Unspecified"
 	return 0
 
-/hook/startup/proc/loadJobBans()
+/datum/hook/startup/proc/loadJobBans()
 	jobban_loadbanfile()
 	return 1
 

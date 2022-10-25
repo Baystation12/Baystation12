@@ -1,7 +1,7 @@
 
 var/global/list/gender_datums = list()
 
-/hook/startup/proc/populate_gender_datum_list()
+/datum/hook/startup/proc/populate_gender_datum_list()
 	for(var/type in subtypesof(/datum/gender))
 		var/datum/gender/G = new type
 		gender_datums[G.key] = G

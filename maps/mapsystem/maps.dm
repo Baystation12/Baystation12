@@ -5,7 +5,7 @@ GLOBAL_LIST_EMPTY(all_maps)
 var/global/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
 var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
-/hook/startup/proc/initialise_map_list()
+/datum/hook/startup/proc/initialise_map_list()
 	for(var/type in subtypesof(/datum/map))
 		var/datum/map/M
 		if(type == GLOB.using_map.type)

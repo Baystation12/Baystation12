@@ -91,7 +91,7 @@ var/global/list/string_slot_flags = list(
 	return GLOB.mannequins[ckey]
 
 
-/hook/global_init/proc/makeDatumRefLists()
+/datum/hook/global_init/proc/makeDatumRefLists()
 	var/list/paths
 
 	//Hair - Initialise all /datum/sprite_accessory/hair into an list indexed by hair-style name

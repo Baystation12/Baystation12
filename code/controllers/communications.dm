@@ -300,7 +300,7 @@ GLOBAL_LIST_INIT(all_selectable_radio_filters, list(
 
 var/global/datum/controller/radio/radio_controller
 
-/hook/startup/proc/createRadioController()
+/datum/hook/startup/proc/createRadioController()
 	radio_controller = new /datum/controller/radio()
 	return 1
 

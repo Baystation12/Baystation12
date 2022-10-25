@@ -9,7 +9,7 @@ var/global/game_id = null
 
 GLOBAL_VAR(href_logfile)
 
-/hook/global_init/proc/generate_gameid()
+/datum/hook/global_init/proc/generate_gameid()
 	if(game_id != null)
 		return
 	game_id = ""
@@ -86,7 +86,7 @@ GLOBAL_VAR(href_logfile)
 
 
 #ifndef UNIT_TEST
-/hook/startup/proc/set_visibility()
+/datum/hook/startup/proc/set_visibility()
 	world.update_hub_visibility(config.hub_visible)
 #endif
 
@@ -484,7 +484,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 	..(reason)
 
 
-/hook/startup/proc/loadMode()
+/datum/hook/startup/proc/loadMode()
 	world.load_mode()
 	return 1
 
@@ -524,7 +524,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 var/global/failed_db_connections = 0
 var/global/failed_old_db_connections = 0
 
-/hook/startup/proc/connectDB()
+/datum/hook/startup/proc/connectDB()
 	if(!setup_database_connection())
 		to_world_log("Your server failed to establish a connection with the feedback database.")
 	else
@@ -564,7 +564,7 @@ var/global/failed_old_db_connections = 0
 		return 1
 
 
-/hook/startup/proc/connectOldDB()
+/datum/hook/startup/proc/connectOldDB()
 	if(!setup_old_database_connection())
 		to_world_log("Your server failed to establish a connection with the SQL database.")
 	else

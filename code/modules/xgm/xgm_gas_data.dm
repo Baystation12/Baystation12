@@ -52,7 +52,7 @@ var/global/datum/xgm_gas_data/gas_data
 	var/symbol = "X"
 
 
-/hook/startup/proc/generateGasData()
+/datum/hook/startup/proc/generateGasData()
 	gas_data = new
 	for(var/p in (typesof(/singleton/xgm_gas) - /singleton/xgm_gas))
 		var/singleton/xgm_gas/gas = new p //avoid initial() because of potential New() actions

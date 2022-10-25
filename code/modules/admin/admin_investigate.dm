@@ -11,7 +11,7 @@
 /proc/investigate_subject2file(subject)
 	return file("[INVESTIGATE_DIR][subject].html")
 
-/hook/startup/proc/resetInvestigate()
+/datum/hook/startup/proc/resetInvestigate()
 	investigate_reset()
 	return 1
 

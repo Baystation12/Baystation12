@@ -24,9 +24,9 @@
  * @returns		1 if all hooked code runs successfully, 0 otherwise.
  */
 /proc/callHook(hook, list/args=null)
-	var/hook_path = text2path("/hook/[hook]")
+	var/hook_path = text2path("/datum/hook/[hook]")
 	if(!hook_path)
-		error("Invalid hook '/hook/[hook]' called.")
+		error("Invalid hook '/datum/hook/[hook]' called.")
 		return 0
 
 	var/caller = new hook_path
