@@ -1,5 +1,0 @@
-author: Rootoo807
-delete-after: true
-changes:
-  - bugfix: Voidsuit helmets and magboots properly de-link from the suit when the
-      wearer loses their head/feet, instead of dropping broken items.
