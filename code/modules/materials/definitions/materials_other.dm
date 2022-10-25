@@ -1,4 +1,4 @@
-/material/waste
+/datum/material/waste
 	name = MATERIAL_WASTE
 	stack_type = null
 	icon_colour = "#2e3a07"
@@ -7,7 +7,7 @@
 	ore_icon_overlay = "lump"
 	hidden_from_codex = TRUE
 
-/material/cult
+/datum/material/cult
 	name = MATERIAL_CULT
 	display_name = "disturbing stone"
 	icon_base = "cult"
@@ -20,9 +20,9 @@
 	construction_difficulty = MATERIAL_NORMAL_DIY
 	hidden_from_codex = TRUE
 
-/material/cult/place_dismantled_girder(turf/target)
+/datum/material/cult/place_dismantled_girder(turf/target)
 	new /obj/structure/girder/cult(target)
 
-/material/cult/reinf
+/datum/material/cult/reinf
 	name = MATERIAL_REINFORCED_CULT
 	display_name = "runic inscriptions"

@@ -40,7 +40,7 @@ SUBSYSTEM_DEF(supply)
 				spc.setup()
 				master_supply_list += spc
 
-	for(var/material/mat in SSmaterials.materials)
+	for(var/datum/material/mat in SSmaterials.materials)
 		if(mat.sale_price > 0)
 			point_source_descriptions[mat.display_name] = "From exported [mat.display_name]"
 

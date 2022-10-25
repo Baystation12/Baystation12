@@ -1,4 +1,4 @@
-/material/pitchblende
+/datum/material/pitchblende
 	name = MATERIAL_PITCHBLENDE
 	ore_compresses_to = MATERIAL_PITCHBLENDE
 	icon_colour = "#917d1a"
@@ -22,7 +22,7 @@
 	sheet_plural_name = "bricks"
 	sale_price = 2
 
-/material/graphite
+/datum/material/graphite
 	name = MATERIAL_GRAPHITE
 	ore_compresses_to = MATERIAL_GRAPHITE
 	icon_colour = "#444444"
@@ -39,7 +39,7 @@
 		)
 	sale_price = 1
 
-/material/quartz
+/datum/material/quartz
 	name = MATERIAL_QUARTZ
 	ore_compresses_to = MATERIAL_QUARTZ
 	ore_name = "quartz"
@@ -60,7 +60,7 @@
 	icon_reinf = "reinf_stone"
 	sale_price = 2
 
-/material/pyrite
+/datum/material/pyrite
 	name = MATERIAL_PYRITE
 	ore_name = "pyrite"
 	ore_result_amount = 10
@@ -81,7 +81,7 @@
 	ore_compresses_to = MATERIAL_PYRITE
 	sale_price = 2
 
-/material/spodumene
+/datum/material/spodumene
 	name = MATERIAL_SPODUMENE
 	ore_compresses_to = MATERIAL_SPODUMENE
 	ore_name = "spodumene"
@@ -101,7 +101,7 @@
 	icon_reinf = "reinf_stone"
 	sale_price = 2
 
-/material/cinnabar
+/datum/material/cinnabar
 	name = MATERIAL_CINNABAR
 	ore_compresses_to = MATERIAL_CINNABAR
 	ore_name = "cinnabar"
@@ -121,7 +121,7 @@
 	icon_reinf = "reinf_stone"
 	sale_price = 2
 
-/material/phosphorite
+/datum/material/phosphorite
 	name = MATERIAL_PHOSPHORITE
 	ore_compresses_to = MATERIAL_PHOSPHORITE
 	ore_name = "phosphorite"
@@ -141,7 +141,7 @@
 	icon_reinf = "reinf_stone"
 	sale_price = 2
 
-/material/rocksalt
+/datum/material/rocksalt
 	name = MATERIAL_ROCK_SALT
 	ore_compresses_to = MATERIAL_ROCK_SALT
 	ore_name = "rock salt"
@@ -161,7 +161,7 @@
 	icon_reinf = "reinf_stone"
 	sale_price = 2
 
-/material/potash
+/datum/material/potash
 	name = MATERIAL_POTASH
 	ore_compresses_to = MATERIAL_POTASH
 	ore_name = "potash"
@@ -181,7 +181,7 @@
 	icon_reinf = "reinf_stone"
 	sale_price = 2
 
-/material/bauxite
+/datum/material/bauxite
 	name = MATERIAL_BAUXITE
 	ore_name = "bauxite"
 	ore_result_amount = 10
@@ -202,7 +202,7 @@
 	ore_compresses_to = MATERIAL_BAUXITE
 	sale_price = 1
 
-/material/sand
+/datum/material/sand
 	name = MATERIAL_SAND
 	stack_type = null
 	icon_colour = "#e2dbb5"
@@ -214,7 +214,7 @@
 		/datum/reagent/silicon = 20
 		)
 
-/material/phoron
+/datum/material/phoron
 	name = MATERIAL_PHORON
 	stack_type = /obj/item/stack/material/phoron
 	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE
@@ -248,7 +248,7 @@
 	sale_price = 5
 	value = 200
 
-/material/phoron/supermatter
+/datum/material/phoron/supermatter
 	name = MATERIAL_SUPERMATTER
 	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in bluespace technology."
 	icon_colour = "#ffff00"
@@ -260,7 +260,7 @@
 	sale_price = null
 
 //Controls phoron and phoron based objects reaction to being in a turf over 200c -- Phoron's flashpoint.
-/material/phoron/combustion_effect(turf/T, temperature, effect_multiplier)
+/datum/material/phoron/combustion_effect(turf/T, temperature, effect_multiplier)
 	if(isnull(ignition_point))
 		return 0
 	if(temperature < ignition_point)

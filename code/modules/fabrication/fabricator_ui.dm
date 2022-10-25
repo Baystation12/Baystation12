@@ -7,7 +7,7 @@
 	data["category"] =   show_category
 	data["functional"] = is_functioning()
 
-	if(is_functioning())	
+	if(is_functioning())
 
 		var/current_storage =  list()
 		data["material_storage"] =  current_storage
@@ -18,7 +18,7 @@
 			material_data["stored"] =      stored_material[material]
 			material_data["max"] =         storage_capacity[material]
 			material_data["eject_key"] = stored_substances_to_names[material]
-			material_data["eject_label"] =   ispath(material, /material) ? "Eject" : "Flush"
+			material_data["eject_label"] =   ispath(material, /datum/material) ? "Eject" : "Flush"
 			data["material_storage"] += list(material_data)
 
 		var/list/current_build = list()

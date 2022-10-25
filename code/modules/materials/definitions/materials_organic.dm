@@ -1,4 +1,4 @@
-/material/plastic
+/datum/material/plastic
 	name = MATERIAL_PLASTIC
 	lore_text = "A generic polymeric material. Probably the most flexible and useful substance ever created by human science; mostly used to make disposable cutlery."
 	stack_type = /obj/item/stack/material/plastic
@@ -19,7 +19,7 @@
 	sale_price = 1
 	dooropen_noise = 'sound/effects/doorcreaky.ogg'
 
-/material/plastic/holographic
+/datum/material/plastic/holographic
 	name = "holo" + MATERIAL_PLASTIC
 	display_name = MATERIAL_PLASTIC
 	stack_type = null
@@ -27,7 +27,7 @@
 	sale_price = null
 	hidden_from_codex = TRUE
 
-/material/cardboard
+/datum/material/cardboard
 	name = MATERIAL_CARDBOARD
 	lore_text = "What with the difficulties presented by growing plants in orbit, a stock of cardboard in space is probably more valuable than gold."
 	stack_type = /obj/item/stack/material/cardboard
@@ -47,7 +47,7 @@
 	conductive = 0
 	value = 0
 
-/material/cloth //todo
+/datum/material/cloth //todo
 	name = MATERIAL_CLOTH
 	display_name ="cotton"
 	use_name = "cotton"
@@ -63,7 +63,7 @@
 	hidden_from_codex = TRUE
 	construction_difficulty = MATERIAL_NORMAL_DIY
 
-/material/cloth/carpet
+/datum/material/cloth/carpet
 	name = "carpet"
 	display_name = "red"
 	use_name = "red upholstery"
@@ -71,55 +71,55 @@
 	sheet_singular_name = "tile"
 	sheet_plural_name = "tiles"
 
-/material/cloth/yellow
+/datum/material/cloth/yellow
 	name = "yellow"
 	display_name ="yellow"
 	use_name = "yellow cloth"
 	icon_colour = "#ffbf00"
 
-/material/cloth/teal
+/datum/material/cloth/teal
 	name = "teal"
 	display_name = "teal"
 	use_name = "teal cloth"
 	icon_colour = "#00e1ff"
 
-/material/cloth/black
+/datum/material/cloth/black
 	name = "black"
 	display_name = "black"
 	use_name = "black cloth"
 	icon_colour = "#505050"
 
-/material/cloth/green
+/datum/material/cloth/green
 	name = "green"
 	display_name = "green"
 	use_name = "green cloth"
 	icon_colour = "#b7f27d"
 
-/material/cloth/puple
+/datum/material/cloth/puple
 	name = "purple"
 	display_name = "purple"
 	use_name = "purple cloth"
 	icon_colour = "#9933ff"
 
-/material/cloth/blue
+/datum/material/cloth/blue
 	name = "blue"
 	display_name = "blue"
 	use_name = "blue cloth"
 	icon_colour = "#46698c"
 
-/material/cloth/beige
+/datum/material/cloth/beige
 	name = "beige"
 	display_name = "beige"
 	use_name = "beige cloth"
 	icon_colour = "#ceb689"
 
-/material/cloth/lime
+/datum/material/cloth/lime
 	name = "lime"
 	display_name = "lime"
 	use_name = "lime cloth"
 	icon_colour = "#62e36c"
 
-/material/carpet
+/datum/material/carpet
 	name = MATERIAL_CARPET
 	display_name = "red"
 	use_name = "red upholstery"
@@ -133,7 +133,7 @@
 	stack_type = null
 	construction_difficulty = MATERIAL_NORMAL_DIY
 
-/material/skin
+/datum/material/skin
 	name = MATERIAL_SKIN_GENERIC
 	stack_type = /obj/item/stack/material/generic/skin
 	icon_colour = "#9e8c72"
@@ -150,14 +150,14 @@
 	explosion_resistance = 1
 	var/tans_to = MATERIAL_LEATHER_GENERIC
 
-/material/skin/lizard
+/datum/material/skin/lizard
 	name = MATERIAL_SKIN_LIZARD
 	icon_colour = "#626952"
 	tans_to = MATERIAL_LEATHER_LIZARD
 	hardness = MATERIAL_FLEXIBLE
 	weight = 10
 
-/material/skin/insect
+/datum/material/skin/insect
 	name = MATERIAL_SKIN_CHITIN
 	icon_colour = "#7a726d"
 	tans_to = MATERIAL_LEATHER_CHITIN
@@ -166,78 +166,78 @@
 	weight = 15
 	brute_armor = 2
 
-/material/skin/fur
+/datum/material/skin/fur
 	name = MATERIAL_SKIN_FUR
 	icon_colour = "#7a726d"
 	tans_to = MATERIAL_LEATHER_FUR
 
-/material/skin/fur/gray
+/datum/material/skin/fur/gray
 	name = MATERIAL_SKIN_FUR_GRAY
 
-/material/skin/fur/white
+/datum/material/skin/fur/white
 	name = MATERIAL_SKIN_FUR_WHITE
 
-/material/skin/fur/orange
+/datum/material/skin/fur/orange
 	name = MATERIAL_SKIN_FUR_ORANGE
 	icon_colour = COLOR_ORANGE
 
-/material/skin/fur/black
+/datum/material/skin/fur/black
 	name = MATERIAL_SKIN_FUR_BLACK
 	icon_colour = COLOR_GRAY20
 
-/material/skin/fur/heavy
+/datum/material/skin/fur/heavy
 	name = MATERIAL_SKIN_FUR_HEAVY
 	icon_colour = COLOR_GUNMETAL
 
-/material/skin/goat
+/datum/material/skin/goat
 	name = MATERIAL_SKIN_GOATHIDE
 	icon_colour = COLOR_SILVER
 
-/material/skin/cow
+/datum/material/skin/cow
 	name = MATERIAL_SKIN_COWHIDE
 	icon_colour = COLOR_GRAY40
 
-/material/skin/shark
+/datum/material/skin/shark
 	name = MATERIAL_SKIN_SHARK
 	icon_colour = COLOR_PURPLE_GRAY
 
-/material/skin/fish
+/datum/material/skin/fish
 	name = MATERIAL_SKIN_FISH
 	icon_colour = COLOR_BOTTLE_GREEN
 
-/material/skin/fish/purple
+/datum/material/skin/fish/purple
 	name = MATERIAL_SKIN_FISH_PURPLE
 	icon_colour = COLOR_PALE_PURPLE_GRAY
 
-/material/skin/feathers
+/datum/material/skin/feathers
 	name = MATERIAL_SKIN_FEATHERS
 	icon_colour = COLOR_SILVER
 
-/material/skin/feathers/purple
+/datum/material/skin/feathers/purple
 	name = MATERIAL_SKIN_FEATHERS_PURPLE
 	icon_colour = COLOR_PALE_PURPLE_GRAY
 
-/material/skin/feathers/blue
+/datum/material/skin/feathers/blue
 	name = MATERIAL_SKIN_FEATHERS_BLUE
 	icon_colour = COLOR_SKY_BLUE
 
-/material/skin/feathers/green
+/datum/material/skin/feathers/green
 	name = MATERIAL_SKIN_FEATHERS_GREEN
 	icon_colour = COLOR_BOTTLE_GREEN
 
-/material/skin/feathers/brown
+/datum/material/skin/feathers/brown
 	name = MATERIAL_SKIN_FEATHERS_BROWN
 	icon_colour = COLOR_BEASTY_BROWN
 
-/material/skin/feathers/red
+/datum/material/skin/feathers/red
 	name = MATERIAL_SKIN_FEATHERS_RED
 	icon_colour = COLOR_RED
 
-/material/skin/feathers/black
+/datum/material/skin/feathers/black
 	name = MATERIAL_SKIN_FEATHERS_BLACK
 	icon_colour = COLOR_GRAY15
 
-/material/bone
+/datum/material/bone
 	name = MATERIAL_BONE_GENERIC
 	sheet_singular_name = "length"
 	sheet_plural_name = "lengths"
@@ -254,17 +254,17 @@
 	weight = 18
 	value = 1
 
-/material/bone/fish
+/datum/material/bone/fish
 	name = MATERIAL_BONE_FISH
 	hardness = MATERIAL_FLEXIBLE
 	weight = 13
 
-/material/bone/cartilage
+/datum/material/bone/cartilage
 	name = MATERIAL_BONE_CARTILAGE
 	hardness = 0
 	weight = 10
 
-/material/leather
+/datum/material/leather
 	name = MATERIAL_LEATHER_GENERIC
 	icon_colour = "#5c4831"
 	stack_origin_tech = list(TECH_MATERIAL = 2)
@@ -280,23 +280,23 @@
 	hardness = MATERIAL_FLEXIBLE
 	weight = 10
 
-/material/leather/lizard
+/datum/material/leather/lizard
 	name = MATERIAL_LEATHER_LIZARD
 	integrity = 75
 	hardness = MATERIAL_RIGID
 	weight = 15
 
-/material/leather/fur
+/datum/material/leather/fur
 	name = MATERIAL_LEATHER_FUR
 
-/material/leather/chitin
+/datum/material/leather/chitin
 	name = MATERIAL_LEATHER_CHITIN
 	integrity = 100
 	hardness = MATERIAL_HARD
 	weight = 18
 	brute_armor = 2
 
-/material/growth
+/datum/material/growth
 	name = MATERIAL_GROWTH
 	display_name = "organic material"
 	icon_base = "cult"
@@ -312,7 +312,7 @@
 	construction_difficulty = 10
 	hidden_from_codex = TRUE
 
-/material/growth/place_dismantled_girder(turf/target)
+/datum/material/growth/place_dismantled_girder(turf/target)
 	for(var/i = 0; i < 4; i++)
 		var/obj/item/reagent_containers/food/snacks/meat/M = new(target)
 		M.reagents.add_reagent(/datum/reagent/toxin/fertilizer, 5)

@@ -41,7 +41,7 @@
 /mob/living/proc/harvest_skin()
 	. = list()
 	if(skin_material && skin_amount)
-		var/material/M = SSmaterials.get_material_by_name(skin_material)
+		var/datum/material/M = SSmaterials.get_material_by_name(skin_material)
 		. += new M.stack_type(get_turf(src), skin_amount, skin_material)
 		blood_splatter(get_turf(src), src, large = TRUE)
 
@@ -49,7 +49,7 @@
 	. = list()
 	var/turf/T = get_turf(src)
 	if(bone_material && bone_amount)
-		var/material/M = SSmaterials.get_material_by_name(bone_material)
+		var/datum/material/M = SSmaterials.get_material_by_name(bone_material)
 		. += new M.stack_type(T, bone_amount, bone_material)
 		blood_splatter(T, src, large = TRUE)
 	if(skull_type)

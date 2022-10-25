@@ -10,7 +10,7 @@
 	health_max = 10
 
 	var/default_material = MATERIAL_STEEL
-	var/material/material
+	var/datum/material/material
 
 	var/applies_material_colour = 1
 	var/applies_material_name = 1 //if false, does not rename item to 'material item.name'

@@ -32,7 +32,7 @@
 	var/stacks_used = 1
 	var/mat_colour = thing.color
 	for(var/mat in thing.matter)
-		var/material/material_def = SSmaterials.get_material_by_name(mat)
+		var/datum/material/material_def = SSmaterials.get_material_by_name(mat)
 		if(!material_def || !base_storage_capacity[material_def.type])
 			continue
 		var/taking_material = min(thing.matter[mat], storage_capacity[material_def.type] - stored_material[material_def.type])

@@ -357,7 +357,7 @@
 	var/send_material_data = 0 //Whether the recipe will send the material name as an argument when creating product.
 	var/apply_material_name = 1 //Whether the recipe will prepend a material name to the title - 'steel clipboard' vs 'clipboard'
 
-/datum/stack_recipe/New(material/material, reinforce_material)
+/datum/stack_recipe/New(datum/material/material, reinforce_material)
 	if(material)
 		use_material = material.name
 		difficulty += material.construction_difficulty

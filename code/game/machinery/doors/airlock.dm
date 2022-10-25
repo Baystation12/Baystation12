@@ -72,7 +72,7 @@
 	var/symbol_color = null
 	var/window_color = null
 	var/init_material_window = MATERIAL_GLASS
-	var/material/window_material
+	var/datum/material/window_material
 
 	var/fill_file = 'icons/obj/doors/station/fill_steel.dmi'
 	var/color_file = 'icons/obj/doors/station/color.dmi'

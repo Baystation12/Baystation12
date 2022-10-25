@@ -55,7 +55,7 @@
 	var/maintenance_protocols
 
 	// Material
-	var/material/material
+	var/datum/material/material
 
 	// Cockpit access vars.
 	var/hatch_closed = FALSE

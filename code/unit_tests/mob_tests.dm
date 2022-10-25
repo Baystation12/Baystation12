@@ -638,7 +638,7 @@ var/global/default_mobloc = null
 			failed[mobtype] = "invalid meat_type ([mtype]) but meat_amount above zero"
 
 		var/smat =   initial(animal.skin_material)
-		var/stype =  (smat && istype(SSmaterials.get_material_by_name(smat), /material))
+		var/stype =  (smat && istype(SSmaterials.get_material_by_name(smat), /datum/material))
 		var/scount = initial(animal.skin_amount) > 0
 		if(stype && scount)
 			check_skin += mobtype
@@ -648,7 +648,7 @@ var/global/default_mobloc = null
 			failed[mobtype] = "invalid skin_material ([smat]) but skin_amount above zero"
 
 		var/bmat =   initial(animal.bone_material)
-		var/btype =  (bmat && istype(SSmaterials.get_material_by_name(bmat), /material))
+		var/btype =  (bmat && istype(SSmaterials.get_material_by_name(bmat), /datum/material))
 		var/bcount = initial(animal.bone_amount) > 0
 		if(btype && bcount)
 			check_bones += mobtype

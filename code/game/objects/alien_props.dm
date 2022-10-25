@@ -26,7 +26,7 @@
 	update_state = 0 //Don't pixelshift us on wall
 	cell_type = /obj/item/cell/alien
 	autoname = 0
-	
+
 /obj/machinery/power/apc/alien/on_update_icon()
 	check_updates()
 	if(update_state & APC_UPDATE_ALLGOOD)
@@ -71,7 +71,7 @@
 
 /obj/machinery/door/airlock/alien/Initialize()
 	. = ..()
-	var/material/A = SSmaterials.get_material_by_name(MATERIAL_ALIENALLOY)
+	var/datum/material/A = SSmaterials.get_material_by_name(MATERIAL_ALIENALLOY)
 	if(A)
 		door_color = A.icon_colour
 	stripe_color = get_random_colour(FALSE, 0, 255)

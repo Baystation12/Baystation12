@@ -36,7 +36,7 @@
 
 /turf/simulated/floor/fixed/alium/New()
 	..()
-	var/material/A = SSmaterials.get_material_by_name(MATERIAL_ALIENALLOY)
+	var/datum/material/A = SSmaterials.get_material_by_name(MATERIAL_ALIENALLOY)
 	if(!A)
 		return
 	color = A.icon_colour
@@ -48,7 +48,7 @@
 	temperature = TCMB
 
 /turf/simulated/floor/fixed/alium/ex_act(severity)
-	var/material/A = SSmaterials.get_material_by_name(MATERIAL_ALIENALLOY)
+	var/datum/material/A = SSmaterials.get_material_by_name(MATERIAL_ALIENALLOY)
 	if(prob(A.explosion_resistance))
 		return
 	if(severity == EX_ACT_DEVASTATING)

@@ -1,4 +1,4 @@
-/material/diamond
+/datum/material/diamond
 	name = MATERIAL_DIAMOND
 	lore_text = "An extremely hard allotrope of carbon. Valued for its use in industrial tools."
 	stack_type = /obj/item/stack/material/diamond
@@ -26,7 +26,7 @@
 	sheet_plural_name = "gems"
 	value = 70
 
-/material/diamond/crystal
+/datum/material/diamond/crystal
 	name = MATERIAL_CRYSTAL
 	hardness = MATERIAL_VERY_HARD
 	stack_type = null
@@ -34,7 +34,7 @@
 	sale_price = null
 	hidden_from_codex = TRUE
 
-/material/stone
+/datum/material/stone
 	name = MATERIAL_SANDSTONE
 	lore_text = "A clastic sedimentary rock. The cost of boosting it to orbit is almost universally much higher than the actual value of the material."
 	stack_type = /obj/item/stack/material/sandstone
@@ -57,7 +57,7 @@
 	sale_price = 1
 	value = 4
 
-/material/stone/marble
+/datum/material/stone/marble
 	name = MATERIAL_MARBLE
 	lore_text = "A metamorphic rock largely sourced from Earth. Prized for use in extremely expensive decorative surfaces."
 	icon_colour = "#aaaaaa"
@@ -71,7 +71,7 @@
 	sale_price = 4
 	value = 20
 
-/material/stone/concrete
+/datum/material/stone/concrete
 	name = MATERIAL_CONCRETE
 	lore_text = "The most ubiquitous building material of old Earth, now in space. Consists of mineral aggregate bound with some sort of cementing solution."
 	stack_type = /obj/item/stack/material/generic/brick
@@ -79,10 +79,10 @@
 	value = 1
 	var/image/texture
 
-/material/stone/concrete/New()
+/datum/material/stone/concrete/New()
 	..()
 	texture = image('icons/turf/wall_texture.dmi', "concrete")
 	texture.blend_mode = BLEND_MULTIPLY
 
-/material/stone/concrete/get_wall_texture()
+/datum/material/stone/concrete/get_wall_texture()
 	return texture

@@ -4,7 +4,7 @@
 	icon = 'icons/obj/materials/ore.dmi'
 	randpixel = 8
 	w_class = 2
-	var/material/material
+	var/datum/material/material
 	var/datum/geosample/geologic_data
 
 /obj/item/ore/get_material()
@@ -25,7 +25,7 @@
 
 /obj/item/ore/Initialize()
 	for(var/stuff in matter)
-		var/material/M = SSmaterials.get_material_by_name(stuff)
+		var/datum/material/M = SSmaterials.get_material_by_name(stuff)
 		if(M)
 			name = M.ore_name
 			desc = M.ore_desc ? M.ore_desc : "A lump of ore."

@@ -31,17 +31,17 @@
 
 //mostly for convenience
 /obj/proc/get_material_name()
-	var/material/material = get_material()
+	var/datum/material/material = get_material()
 	if(material)
 		return material.name
 
 /obj/proc/get_material_display_name()
-	var/material/material = get_material()
+	var/datum/material/material = get_material()
 	if (material)
 		return material.display_name
 
 // Material definition and procs follow.
-/material
+/datum/material
 	var/name	                          // Unique name for use in indexing the list.
 	var/display_name                      // Prettier name for display.
 	var/adjective_name
@@ -127,7 +127,7 @@
 	var/xarch_source_mineral = "iron"
 
 // Placeholders for light tiles and rglass.
-/material/proc/reinforce(mob/user, obj/item/stack/material/used_stack, obj/item/stack/material/target_stack)
+/datum/material/proc/reinforce(mob/user, obj/item/stack/material/used_stack, obj/item/stack/material/target_stack)
 	if(!used_stack.can_use(1))
 		to_chat(user, SPAN_WARNING("You need need at least one [used_stack.singular_name] to reinforce [target_stack]."))
 		return
@@ -137,7 +137,7 @@
 		to_chat(user, SPAN_WARNING("You need need at least [needed_sheets] [target_stack.plural_name] for reinforcement with [used_stack]."))
 		return
 
-	var/material/reinf_mat = used_stack.material
+	var/datum/material/reinf_mat = used_stack.material
 	if(reinf_mat.integrity <= integrity || reinf_mat.is_brittle())
 		to_chat(user, SPAN_WARNING("The [reinf_mat.display_name] is too structurally weak to reinforce the [display_name]."))
 		return
@@ -151,7 +151,7 @@
 	S.update_icon()
 	S.dropInto(target_loc)
 
-/material/proc/build_wired_product(mob/user, obj/item/stack/used_stack, obj/item/stack/target_stack)
+/datum/material/proc/build_wired_product(mob/user, obj/item/stack/used_stack, obj/item/stack/target_stack)
 	if(!wire_product)
 		to_chat(user, SPAN_WARNING("You cannot make anything out of \the [target_stack]"))
 		return
@@ -167,7 +167,7 @@
 		user.put_in_hands(product)
 
 // Make sure we have a display name and shard icon even if they aren't explicitly set.
-/material/New()
+/datum/material/New()
 	..()
 	if(!display_name)
 		display_name = name
@@ -181,20 +181,20 @@
 		burn_armor = brute_armor
 
 // Return the matter comprising this material.
-/material/proc/get_matter()
+/datum/material/proc/get_matter()
 	var/list/temp_matter = list()
 	temp_matter[name] = SHEET_MATERIAL_AMOUNT
 	return temp_matter
 
 // Weapons handle applying a divisor for this value locally.
-/material/proc/get_blunt_damage()
+/datum/material/proc/get_blunt_damage()
 	return weight //todo
 
 // As above.
-/material/proc/get_edge_damage()
+/datum/material/proc/get_edge_damage()
 	return hardness //todo
 
-/material/proc/get_attack_cooldown()
+/datum/material/proc/get_attack_cooldown()
 	if(weight <= MATERIAL_LIGHT)
 		return FAST_WEAPON_COOLDOWN
 	if(weight >= MATERIAL_HEAVY)
@@ -202,19 +202,19 @@
 	return DEFAULT_WEAPON_COOLDOWN
 
 // Snowflakey, only checked for alien doors at the moment.
-/material/proc/can_open_material_door(mob/living/user)
+/datum/material/proc/can_open_material_door(mob/living/user)
 	return 1
 
 // Currently used for weapons and objects made of uranium to irradiate things.
-/material/proc/products_need_process()
+/datum/material/proc/products_need_process()
 	return (radioactivity>0) //todo
 
 // Used by walls when qdel()ing to avoid neighbor merging.
-/material/placeholder
+/datum/material/placeholder
 	name = "placeholder"
 
 // Places a girder object when a wall is dismantled, also applies reinforced material.
-/material/proc/place_dismantled_girder(turf/target, material/reinf_material)
+/datum/material/proc/place_dismantled_girder(turf/target, datum/material/reinf_material)
 	var/obj/structure/girder/G = new(target)
 	if(reinf_material)
 		G.reinf_material = reinf_material
@@ -222,7 +222,7 @@
 
 // General wall debris product placement.
 // Not particularly necessary aside from snowflakey cult girders.
-/material/proc/place_dismantled_product(turf/target,is_devastated)
+/datum/material/proc/place_dismantled_product(turf/target,is_devastated)
 	if (is_devastated)
 		var/return_count = rand(1, 2)
 		if (place_shard(target, return_count) == null)
@@ -231,21 +231,21 @@
 		place_sheet(target, 2)
 
 // Debris product. Used ALL THE TIME.
-/material/proc/place_sheet(turf/target, amount = 1)
+/datum/material/proc/place_sheet(turf/target, amount = 1)
 	return stack_type ? new stack_type(target, amount, name) : null
 
 // As above.
-/material/proc/place_shard(turf/target)
+/datum/material/proc/place_shard(turf/target)
 	if(shard_type)
 		return new /obj/item/material/shard(target, src.name)
 
 // Used by walls and weapons to determine if they break or not.
-/material/proc/is_brittle()
+/datum/material/proc/is_brittle()
 	return !!(flags & MATERIAL_BRITTLE)
 
-/material/proc/combustion_effect(turf/T, temperature)
+/datum/material/proc/combustion_effect(turf/T, temperature)
 	return
 
 // Dumb overlay to apply over wall sprite for cheap texture effect
-/material/proc/get_wall_texture()
+/datum/material/proc/get_wall_texture()
 	return

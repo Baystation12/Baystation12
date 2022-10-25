@@ -26,7 +26,7 @@
 	if(output_turf)
 		for(var/sheet in stacks)
 			if(stacks[sheet] >= stack_amt)
-				var/material/stackmat = SSmaterials.get_material_by_name(sheet)
+				var/datum/material/stackmat = SSmaterials.get_material_by_name(sheet)
 				stackmat.place_sheet(output_turf, stack_amt)
 				stacks[sheet] -= stack_amt
 
@@ -49,7 +49,7 @@
 		stack_amt = choice
 		. = TRUE
 	else if(href_list["release_stack"] && stacks[href_list["release_stack"]] > 0)
-		var/material/stackmat = SSmaterials.get_material_by_name(href_list["release_stack"])
+		var/datum/material/stackmat = SSmaterials.get_material_by_name(href_list["release_stack"])
 		stackmat.place_sheet(output_turf, stacks[href_list["release_stack"]])
 		stacks[href_list["release_stack"]] = 0
 		. = TRUE

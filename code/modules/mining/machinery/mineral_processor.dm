@@ -54,7 +54,7 @@
 			if(ores_stored[metal] <= 0 || ores_processing[metal] == ORE_DISABLED)
 				continue
 
-			var/material/M = SSmaterials.get_material_by_name(metal)
+			var/datum/material/M = SSmaterials.get_material_by_name(metal)
 			var/result = 0 // For reference: a positive result indicates sheets were produced,
 			               // and a negative result indicates slag was produced.
 			var/ore_mode = ores_processing[metal]
@@ -80,7 +80,7 @@
 
 			var/list/making_alloys = list()
 			for(var/thing in SSmaterials.alloy_products)
-				var/material/M = thing
+				var/datum/material/M = thing
 				var/failed = FALSE
 				for(var/otherthing in M.alloy_materials)
 					if(!attempt_to_alloy[otherthing] || ores_stored[otherthing] < M.alloy_materials[otherthing])
@@ -90,7 +90,7 @@
 
 			for(var/thing in making_alloys)
 				if(sheets >= sheets_per_tick) break
-				var/material/M = thing
+				var/datum/material/M = thing
 				var/making
 				for(var/otherthing in M.alloy_materials)
 					var/_make = Floor(ores_stored[otherthing] / M.alloy_materials[otherthing])
@@ -103,21 +103,21 @@
 					M.place_sheet(output_turf, making)
 					break
 
-/obj/machinery/mineral/processing_unit/proc/attempt_smelt(material/metal, max_result)
+/obj/machinery/mineral/processing_unit/proc/attempt_smelt(datum/material/metal, max_result)
 	. = clamp(Floor(ores_stored[metal.name]/metal.units_per_sheet),1,max_result)
 	ores_stored[metal.name] -= . * metal.units_per_sheet
-	var/material/M = SSmaterials.get_material_by_name(metal.ore_smelts_to)
+	var/datum/material/M = SSmaterials.get_material_by_name(metal.ore_smelts_to)
 	if(istype(M))
 		M.place_sheet(output_turf, .)
 	else
 		. = -(.)
 
-/obj/machinery/mineral/processing_unit/proc/attempt_compression(material/metal, max_result)
+/obj/machinery/mineral/processing_unit/proc/attempt_compression(datum/material/metal, max_result)
 	var/making = clamp(Floor(ores_stored[metal.name]/metal.units_per_sheet),1,max_result)
 	if(making >= 2)
 		ores_stored[metal.name] -= making * metal.units_per_sheet
 		. = Floor(making * 0.5)
-		var/material/M = SSmaterials.get_material_by_name(metal.ore_compresses_to)
+		var/datum/material/M = SSmaterials.get_material_by_name(metal.ore_compresses_to)
 		if(istype(M))
 			M.place_sheet(output_turf, .)
 		else
@@ -130,7 +130,7 @@
 	var/result = ""
 	for(var/ore in ores_processing)
 		if(!ores_stored[ore] && !report_all_ores) continue
-		var/material/M = SSmaterials.get_material_by_name(ore)
+		var/datum/material/M = SSmaterials.get_material_by_name(ore)
 		var/line = "[capitalize(M.display_name)]</td><td>[Floor(ores_stored[ore] / M.units_per_sheet)] ([ores_stored[ore]]u)"
 		var/status_string
 		if(ores_processing[ore])

@@ -31,10 +31,10 @@
 	var/list/stored_material
 	var/list/storage_capacity
 	var/list/base_storage_capacity = list(
-		/material/steel =     25000,
-		/material/aluminium = 25000,
-		/material/glass =     12500,
-		/material/plastic =   12500
+		/datum/material/steel =     25000,
+		/datum/material/aluminium = 25000,
+		/datum/material/glass =     12500,
+		/datum/material/plastic =   12500
 	)
 
 	var/show_category = "All"
@@ -68,8 +68,8 @@
 
 		// Update global type to string cache.
 		if(!stored_substances_to_names[mat])
-			if(ispath(mat, /material))
-				var/material/mat_instance = mat
+			if(ispath(mat, /datum/material))
+				var/datum/material/mat_instance = mat
 				mat_instance = SSmaterials.get_material_by_name(initial(mat_instance.name))
 				if(istype(mat_instance))
 					stored_substances_to_names[mat] = mat_instance.display_name
@@ -129,9 +129,9 @@
 
 /obj/machinery/fabricator/dismantle()
 	for(var/mat in stored_material)
-		if(ispath(mat, /material))
+		if(ispath(mat, /datum/material))
 			var/mat_name = stored_substances_to_names[mat]
-			var/material/M = SSmaterials.get_material_by_name(mat_name)
+			var/datum/material/M = SSmaterials.get_material_by_name(mat_name)
 			if(stored_material[mat] > M.units_per_sheet)
 				M.place_sheet(get_turf(src), round(stored_material[mat] / M.units_per_sheet), M.name)
 	..()

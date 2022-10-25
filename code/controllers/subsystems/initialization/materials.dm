@@ -29,8 +29,8 @@ SUBSYSTEM_DEF(materials)
 	alloy_products =    list()
 	processable_ores =  list()
 
-	for(var/type in subtypesof(/material))
-		var/material/new_mineral = new type
+	for(var/type in subtypesof(/datum/material))
+		var/datum/material/new_mineral = new type
 		if(new_mineral.name)
 			materials += new_mineral
 			materials_by_name[lowertext(new_mineral.name)] = new_mineral
@@ -51,7 +51,7 @@ SUBSYSTEM_DEF(materials)
 		log_error("Unable to acquire material by name '[name]'")
 
 /proc/material_display_name(name)
-	var/material/material = SSmaterials.get_material_by_name(name)
+	var/datum/material/material = SSmaterials.get_material_by_name(name)
 	if(material)
 		return material.display_name
 	return null

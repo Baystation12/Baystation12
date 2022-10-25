@@ -86,7 +86,7 @@
 	spiky = TRUE
 
 	var/spike_overlay = "cheval_spikes"
-	var/material/rod_material
+	var/datum/material/rod_material
 	var/damage //how badly it smarts when you run into this like a rube
 	var/list/poke_description = list("gored", "spiked", "speared", "stuck", "stabbed")
 

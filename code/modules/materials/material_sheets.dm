@@ -10,9 +10,9 @@
 	icon = 'icons/obj/materials.dmi'
 
 	var/default_type = MATERIAL_STEEL
-	var/material/material
+	var/datum/material/material
 	var/default_reinf_type
-	var/material/reinf_material
+	var/datum/material/reinf_material
 	var/perunit = SHEET_MATERIAL_AMOUNT
 	var/material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 	var/matter_multiplier = 1

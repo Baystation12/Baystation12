@@ -9,7 +9,7 @@
 	var/list/other_connections = list("0", "0", "0", "0")
 	var/list/blend_objects = newlist() // Objects which to blend with
 	var/list/noblend_objects = newlist() //Objects to avoid blending with (such as children of listed blend objects.)
-	var/material/material = null
+	var/datum/material/material = null
 	var/footstep_type
 	var/mob_offset = 0 //used for on_structure_offset mob animation
 

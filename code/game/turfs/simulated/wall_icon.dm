@@ -31,7 +31,7 @@
 	calculate_damage_data()
 
 
-/turf/simulated/wall/proc/set_material(material/newmaterial, material/newrmaterial)
+/turf/simulated/wall/proc/set_material(datum/material/newmaterial, datum/material/newrmaterial)
 	material = newmaterial
 	reinf_material = newrmaterial
 	update_material()

@@ -388,7 +388,7 @@
 	icon_state = "pew"
 	base_icon = "pew"
 	color = WOOD_COLOR_GENERIC
-	var/material/pew_material = MATERIAL_WOOD
+	var/datum/material/pew_material = MATERIAL_WOOD
 	obj_flags = 0
 	buckle_movable = FALSE
 

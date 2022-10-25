@@ -26,7 +26,7 @@
 		fuel_colour = initial(R.color)
 		initial_amount = 50000
 
-	var/material/material = SSmaterials.get_material_by_name(fuel_type)
+	var/datum/material/material = SSmaterials.get_material_by_name(fuel_type)
 	if(istype(material))
 		initial_amount = material.units_per_sheet * 5 // Fuel compressor eats 5 sheets.
 		SetName("[material.use_name] fuel rod assembly")

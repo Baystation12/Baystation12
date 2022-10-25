@@ -80,7 +80,7 @@
 		if (I.reagents?.total_volume)
 			I.reagents.trans_to(container, I.reagents.total_volume, skill_multiplier)
 			I.reagents.clear_reagents()
-		var/material/M = I.get_material()
+		var/datum/material/M = I.get_material()
 		if (M?.chem_products?.len)
 			if (isstack(I))
 				var/sheet_volume = 0
@@ -104,7 +104,7 @@
 /obj/machinery/reagentgrinder/proc/grindable(obj/item/I)
 	if (I.reagents?.total_volume)
 		return TRUE
-	var/material/M = I.get_material()
+	var/datum/material/M = I.get_material()
 	if (M?.chem_products?.len)
 		return TRUE
 	return FALSE

@@ -12,7 +12,7 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CAN_BE_PAINTED | ATOM_FLAG_CHECKS_BORDER
 	obj_flags = OBJ_FLAG_ROTATABLE
 	alpha = 180
-	var/material/reinf_material
+	var/datum/material/reinf_material
 	var/damaged_reinf = FALSE
 	var/init_material = MATERIAL_GLASS
 	var/init_reinf_material = null

@@ -3,7 +3,7 @@
 	icon = 'icons/obj/doors/material_doors.dmi'
 	icon_state = "metal"
 
-	var/material/material
+	var/datum/material/material
 	var/icon_base
 	hitsound = 'sound/weapons/genhit.ogg'
 	var/datum/lock/lock

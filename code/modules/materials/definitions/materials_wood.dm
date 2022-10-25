@@ -1,4 +1,4 @@
-/material/wood
+/datum/material/wood
 	name = MATERIAL_WOOD
 	lore_text = "A fibrous structural material harvested from an indeterminable plant. Don't get a splinter."
 	adjective_name = "wooden"
@@ -31,7 +31,7 @@
 	sale_price = 1
 	value = 3
 
-/material/wood/holographic
+/datum/material/wood/holographic
 	name = "holo" + MATERIAL_WOOD
 	icon_colour = WOOD_COLOR_CHOCOLATE //the very concept of wood should be brown
 	display_name = "wood"
@@ -41,7 +41,7 @@
 	value = 0
 	hidden_from_codex = TRUE
 
-/material/wood/mahogany
+/datum/material/wood/mahogany
 	name = MATERIAL_MAHOGANY
 	lore_text = "Mahogany is prized for its beautiful grain and rich colour, and as such is typically used for fine furniture and cabinetry."
 	adjective_name = MATERIAL_MAHOGANY
@@ -50,13 +50,13 @@
 	sale_price = 3
 	value = 45
 
-/material/wood/maple
+/datum/material/wood/maple
 	name = MATERIAL_MAPLE
 	lore_text = "Owing to its fast growth and ease of working, silver maple is a popular wood for flooring and furniture."
 	adjective_name = MATERIAL_MAPLE
 	icon_colour = WOOD_COLOR_PALE
 
-/material/wood/ebony
+/datum/material/wood/ebony
 	name = MATERIAL_EBONY
 	lore_text = "Ebony is the name for a group of dark coloured, extremely dense, and fine grained hardwoods. \
 				Despite gene modification to produce larger source trees and ample land to plant them on, \
@@ -70,7 +70,7 @@
 	sale_price = 6
 	value = 85
 
-/material/wood/walnut
+/datum/material/wood/walnut
 	name = MATERIAL_WALNUT
 	lore_text = "Walnut is a dense hardwood that polishes to a very fine finish. \
 				Walnut is especially favoured for construction of figurines (where it contrasts with lighter coloured woods) and tables. \
@@ -82,7 +82,7 @@
 	sale_price = 2
 	value = 21
 
-/material/wood/bamboo
+/datum/material/wood/bamboo
 	name = MATERIAL_BAMBOO
 	lore_text = "Bamboo is a fast-growing grass which can be used similar to wood after processing. Due to its swift growth \
 				and high strength, various species of bamboo area common building materials in developing societies."
@@ -91,7 +91,7 @@
 	weight = 16
 	hardness = MATERIAL_RIGID
 
-/material/wood/yew
+/datum/material/wood/yew
 	name = MATERIAL_YEW
 	lore_text = "Although favoured in days past for the construction of bows, yew has a multitude of uses, including medicine. The yew \
 				tree can live for nearly a thousand years thanks to its natural disease resistance."
@@ -103,7 +103,7 @@
 				/datum/reagent/toxin/taxine = 0.05
 				)
 
-/material/wood/vox
+/datum/material/wood/vox
 	name = MATERIAL_VOXRES
 	ignition_point = T0C+300
 	melting_point = T0C+300
@@ -120,4 +120,4 @@
 	integrity = 60
 	hardness = MATERIAL_FLEXIBLE
 	weight = 12
-	brute_armor = 1 
+	brute_armor = 1

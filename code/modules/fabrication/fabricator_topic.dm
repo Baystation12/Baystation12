@@ -27,8 +27,8 @@
 /obj/machinery/fabricator/proc/try_dump_material(mat_name)
 	for(var/mat_path in stored_substances_to_names)
 		if(stored_substances_to_names[mat_path] == mat_name)
-			if(ispath(mat_path, /material))
-				var/material/mat = SSmaterials.get_material_by_name(mat_name)
+			if(ispath(mat_path, /datum/material))
+				var/datum/material/mat = SSmaterials.get_material_by_name(mat_name)
 				if(mat && stored_material[mat_path] > mat.units_per_sheet && mat.stack_type)
 					var/sheet_count = Floor(stored_material[mat_path]/mat.units_per_sheet)
 					stored_material[mat_path] -= sheet_count * mat.units_per_sheet

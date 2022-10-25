@@ -28,7 +28,7 @@ var/global/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL
 /obj/machinery/r_n_d/proc/eject(material, amount)
 	if(!(material in materials))
 		return
-	var/material/mat = SSmaterials.get_material_by_name(material)
+	var/datum/material/mat = SSmaterials.get_material_by_name(material)
 	var/eject = clamp(round(materials[material] / mat.units_per_sheet), 0, amount)
 	if(eject > 0)
 		mat.place_sheet(loc, eject)

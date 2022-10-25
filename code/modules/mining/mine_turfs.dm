@@ -22,7 +22,7 @@ var/global/list/mining_floors = list()
 	color = COLOR_ASTEROID_ROCK
 	turf_flags = TURF_DISALLOW_BLOB
 	var/mined_turf = /turf/simulated/floor/asteroid
-	var/material/mineral
+	var/datum/material/mineral
 	var/mined_ore = 0
 	var/last_act = 0
 	var/emitter_blasts_taken = 0 // EMITTER MINING! Muhehe.
