@@ -36,9 +36,9 @@ length to avoid portals or something i guess?? Not that they're counted right no
 
 // Also added 'exclude' turf to avoid travelling over; defaults to null
 
-/PathNode
+/datum/PathNode
 	var/datum/position
-	var/PathNode/previous_node
+	var/datum/PathNode/previous_node
 	var/best_estimated_cost
 	var/estimated_cost
 	var/known_cost
@@ -46,7 +46,7 @@ length to avoid portals or something i guess?? Not that they're counted right no
 	var/nodes_traversed
 
 
-/PathNode/New(_position, _previous_node, _known_cost, _cost, _nodes_traversed)
+/datum/PathNode/New(_position, _previous_node, _known_cost, _cost, _nodes_traversed)
 	position = _position
 	previous_node = _previous_node
 	known_cost = _known_cost
@@ -56,7 +56,7 @@ length to avoid portals or something i guess?? Not that they're counted right no
 	nodes_traversed = _nodes_traversed
 
 
-/proc/PathWeightCompare(PathNode/a, PathNode/b)
+/proc/PathWeightCompare(datum/PathNode/a, datum/PathNode/b)
 	return a.estimated_cost - b.estimated_cost
 
 
@@ -68,9 +68,9 @@ length to avoid portals or something i guess?? Not that they're counted right no
 	start = get_turf(start)
 	if(!start)
 		return 0
-	open.Enqueue(new /PathNode(start, null, 0, call(start, dist)(end), 0))
+	open.Enqueue(new /datum/PathNode(start, null, 0, call(start, dist)(end), 0))
 	while(!open.IsEmpty() && !path)
-		var/PathNode/current = open.Dequeue()
+		var/datum/PathNode/current = open.Dequeue()
 		closed.Add(current.position)
 		if(current.position == end || call(current.position, dist)(end) <= min_target_dist)
 			path = new /list(current.nodes_traversed + 1)
@@ -92,13 +92,13 @@ length to avoid portals or something i guess?? Not that they're counted right no
 			var/best_estimated_cost = current.estimated_cost + call(current.position, dist)(datum)
 			//handle removal of sub-par positions
 			if(datum in path_node_by_position)
-				var/PathNode/target = path_node_by_position[datum]
+				var/datum/PathNode/target = path_node_by_position[datum]
 				if(target.best_estimated_cost)
 					if(best_estimated_cost + call(datum, dist)(end) < target.best_estimated_cost)
 						open.Remove(target)
 					else
 						continue
-			var/PathNode/next_node = new (datum, current, best_estimated_cost, call(datum, dist)(end), current.nodes_traversed + 1)
+			var/datum/PathNode/next_node = new (datum, current, best_estimated_cost, call(datum, dist)(end), current.nodes_traversed + 1)
 			path_node_by_position[datum] = next_node
 			open.Enqueue(next_node)
 			if(max_nodes && open.Length() > max_nodes)
