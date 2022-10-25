@@ -49,16 +49,16 @@ Class Procs:
 
 */
 
-/connection/var/turf/simulated/A
-/connection/var/turf/simulated/B
-/connection/var/zone/zoneA
-/connection/var/zone/zoneB
+/datum/connection/var/turf/simulated/A
+/datum/connection/var/turf/simulated/B
+/datum/connection/var/zone/zoneA
+/datum/connection/var/zone/zoneB
 
-/connection/var/datum/connection_edge/edge
+/datum/connection/var/datum/connection_edge/edge
 
-/connection/var/state = 0
+/datum/connection/var/state = 0
 
-/connection/New(turf/simulated/A, turf/simulated/B)
+/datum/connection/New(turf/simulated/A, turf/simulated/B)
 	#ifdef ZASDBG
 	ASSERT(SSair.has_valid_zone(A))
 	//ASSERT(SSair.has_valid_zone(B))
@@ -75,33 +75,33 @@ Class Procs:
 		edge = SSair.get_edge(A.zone,B.zone)
 		edge.add_connection(src)
 
-/connection/proc/mark_direct()
+/datum/connection/proc/mark_direct()
 	if(!direct())
 		state |= CONNECTION_DIRECT
 		edge.direct++
 //	log_debug("Marked direct.")
 
-/connection/proc/mark_indirect()
+/datum/connection/proc/mark_indirect()
 	if(direct())
 		state &= ~CONNECTION_DIRECT
 		edge.direct--
 //	log_debug("Marked indirect.")
 
-/connection/proc/mark_space()
+/datum/connection/proc/mark_space()
 	state |= CONNECTION_SPACE
 
-/connection/proc/direct()
+/datum/connection/proc/direct()
 	return (state & CONNECTION_DIRECT)
 
-/connection/proc/valid()
+/datum/connection/proc/valid()
 	return !(state & CONNECTION_INVALID)
 
-/connection/proc/erase()
+/datum/connection/proc/erase()
 	edge.remove_connection(src)
 	state |= CONNECTION_INVALID
 //	log_debug("Connection Erased: [state]")
 
-/connection/proc/update()
+/datum/connection/proc/update()
 //	log_debug("Updated, \...")
 	if(!istype(A,/turf/simulated))
 //		log_debug("Invalid A.")

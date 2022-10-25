@@ -268,6 +268,6 @@
 		manager.update_all()
 
 
-/datum/build_mode/atmosphere/proc/set_zone_update(connection/C)
+/datum/build_mode/atmosphere/proc/set_zone_update(datum/connection/C)
 	C.zoneA = null
 	C.zoneB = null

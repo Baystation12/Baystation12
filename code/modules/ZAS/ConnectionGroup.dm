@@ -30,10 +30,10 @@ Class Vars:
 
 Class Procs:
 
-	add_connection(connection/c)
+	add_connection(datum/connection/c)
 		Adds a connection to this edge. Usually increments the coefficient and adds a turf to connecting_turfs.
 
-	remove_connection(connection/c)
+	remove_connection(datum/connection/c)
 		Removes a connection from this edge. This works even if c is not in the edge, so be careful.
 		If the coefficient reaches zero as a result, the edge is erased.
 
@@ -69,13 +69,13 @@ Class Procs:
 /datum/connection_edge/New()
 	CRASH("Cannot make connection edge without specifications.")
 
-/datum/connection_edge/proc/add_connection(connection/c)
+/datum/connection_edge/proc/add_connection(datum/connection/c)
 	coefficient++
 	if(c.direct()) direct++
 //	log_debug("Connection added: [type] Coefficient: [coefficient]")
 
 
-/datum/connection_edge/proc/remove_connection(connection/c)
+/datum/connection_edge/proc/remove_connection(datum/connection/c)
 //	log_debug("Connection removed: [type] Coefficient: [coefficient-1]")
 
 	coefficient--
@@ -134,11 +134,11 @@ Class Procs:
 //	log_debug("New edge between [A] and [B]")
 
 
-/datum/connection_edge/zone/add_connection(connection/c)
+/datum/connection_edge/zone/add_connection(datum/connection/c)
 	. = ..()
 	connecting_turfs.Add(c.A)
 
-/datum/connection_edge/zone/remove_connection(connection/c)
+/datum/connection_edge/zone/remove_connection(datum/connection/c)
 	connecting_turfs.Remove(c.A)
 	. = ..()
 
@@ -205,12 +205,12 @@ Class Procs:
 //	log_debug("New edge from [A] to [B].")
 
 
-/datum/connection_edge/unsimulated/add_connection(connection/c)
+/datum/connection_edge/unsimulated/add_connection(datum/connection/c)
 	. = ..()
 	connecting_turfs.Add(c.B)
 	air.group_multiplier = coefficient
 
-/datum/connection_edge/unsimulated/remove_connection(connection/c)
+/datum/connection_edge/unsimulated/remove_connection(datum/connection/c)
 	connecting_turfs.Remove(c.B)
 	air.group_multiplier = coefficient
 	. = ..()

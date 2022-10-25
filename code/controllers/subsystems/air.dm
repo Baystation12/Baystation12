@@ -342,7 +342,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 		if(A.zone == B.zone) return
 
 
-	var/connection/c = new /connection(A,B)
+	var/datum/connection/c = new /datum/connection(A,B)
 
 	A.connections.place(c, a_to_b)
 	B.connections.place(c, b_to_a)
