@@ -54,7 +54,7 @@ Class Procs:
 /connection/var/zone/zoneA
 /connection/var/zone/zoneB
 
-/connection/var/connection_edge/edge
+/connection/var/datum/connection_edge/edge
 
 /connection/var/state = 0
 

@@ -106,7 +106,7 @@ Class Procs:
 		#endif
 
 	//rebuild the old zone's edges so that they will be possessed by the new zone
-	for(var/connection_edge/E in edges)
+	for(var/datum/connection_edge/E in edges)
 		if(E.contains_zone(into))
 			continue //don't need to rebuild this edge
 		for(var/turf/T in E.connecting_turfs)
@@ -153,7 +153,7 @@ Class Procs:
 		graphic_remove.len = 0
 
 	// Update connected edges.
-	for(var/connection_edge/E in edges)
+	for(var/datum/connection_edge/E in edges)
 		if(E.sleeping)
 			E.recheck()
 
@@ -194,8 +194,8 @@ Class Procs:
 	var/zone_edges = 0
 	var/space_edges = 0
 	var/space_coefficient = 0
-	for(var/connection_edge/E in edges)
-		if(E.type == /connection_edge/zone) zone_edges++
+	for(var/datum/connection_edge/E in edges)
+		if(E.type == /datum/connection_edge/zone) zone_edges++
 		else
 			space_edges++
 			space_coefficient += E.coefficient

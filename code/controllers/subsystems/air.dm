@@ -53,10 +53,10 @@ Class Procs:
 
 	has_same_air(turf/A, turf/B)
 		Used to determine if an unsimulated edge represents a specific turf.
-		Simulated edges use connection_edge/contains_zone() for the same purpose.
+		Simulated edges use datum/connection_edge/contains_zone() for the same purpose.
 		Returns 1 if A has identical gases and temperature to B.
 
-	remove_edge(connection_edge/edge)
+	remove_edge(datum/connection_edge/edge)
 		Called when an edge is erased. Removes it from processing.
 
 */
@@ -218,7 +218,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 			return
 
 	while (curr_edges.len)
-		var/connection_edge/edge = curr_edges[curr_edges.len]
+		var/datum/connection_edge/edge = curr_edges[curr_edges.len]
 		curr_edges.len--
 
 		if (!edge)
@@ -370,7 +370,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 	zones_to_update += Z
 	Z.needs_update = 1
 
-/datum/controller/subsystem/air/proc/mark_edge_sleeping(connection_edge/E)
+/datum/controller/subsystem/air/proc/mark_edge_sleeping(datum/connection_edge/E)
 	#ifdef ZASDBG
 	ASSERT(istype(E))
 	#endif
@@ -379,7 +379,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 	active_edges -= E
 	E.sleeping = 1
 
-/datum/controller/subsystem/air/proc/mark_edge_active(connection_edge/E)
+/datum/controller/subsystem/air/proc/mark_edge_active(datum/connection_edge/E)
 	#ifdef ZASDBG
 	ASSERT(istype(E))
 	#endif
@@ -393,18 +393,18 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 
 /datum/controller/subsystem/air/proc/get_edge(zone/A, zone/B)
 	if(istype(B))
-		for(var/connection_edge/zone/edge in A.edges)
+		for(var/datum/connection_edge/zone/edge in A.edges)
 			if(edge.contains_zone(B))
 				return edge
-		var/connection_edge/edge = new/connection_edge/zone(A,B)
+		var/datum/connection_edge/edge = new/datum/connection_edge/zone(A,B)
 		edges += edge
 		edge.recheck()
 		return edge
 	else
-		for(var/connection_edge/unsimulated/edge in A.edges)
+		for(var/datum/connection_edge/unsimulated/edge in A.edges)
 			if(has_same_air(edge.B,B))
 				return edge
-		var/connection_edge/edge = new/connection_edge/unsimulated(A,B)
+		var/datum/connection_edge/edge = new/datum/connection_edge/unsimulated(A,B)
 		edges += edge
 		edge.recheck()
 		return edge
@@ -426,7 +426,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 		return 0
 	return 1
 
-/datum/controller/subsystem/air/proc/remove_edge(connection_edge/E)
+/datum/controller/subsystem/air/proc/remove_edge(datum/connection_edge/E)
 	edges -= E
 	if(!E.sleeping)
 		active_edges -= E

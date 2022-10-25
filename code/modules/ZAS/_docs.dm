@@ -22,7 +22,7 @@ SSair.mark_for_update(turf)
 Notes for people who used ZAS before:
 	There is no connected_zones anymore.
 	To get the zones that are connected to a zone, use this loop:
-	for(var/connection_edge/zone/edge in zone.edges)
+	for(var/datum/connection_edge/zone/edge in zone.edges)
 		var/zone/connected_zone = edge.get_connected_zone(zone)
 
 */
