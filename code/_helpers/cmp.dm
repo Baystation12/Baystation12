@@ -7,7 +7,7 @@
 /proc/cmp_camera_ctag_dsc(obj/machinery/camera/a, obj/machinery/camera/b)
 	return sorttext(a.c_tag, b.c_tag)
 
-/proc/cmp_crew_sensor_modifier(crew_sensor_modifier/a, crew_sensor_modifier/b)
+/proc/cmp_crew_sensor_modifier(datum/crew_sensor_modifier/a, datum/crew_sensor_modifier/b)
 	return b.priority - a.priority
 
 /proc/cmp_follow_holder(datum/follow_holder/a, datum/follow_holder/b)
