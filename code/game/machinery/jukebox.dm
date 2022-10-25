@@ -11,7 +11,7 @@
 	clicksound = 'sound/machines/buttonbeep.ogg'
 	pixel_x = -8
 
-	var/jukebox/jukebox
+	var/datum/jukebox/jukebox
 
 
 /obj/machinery/jukebox/Initialize()

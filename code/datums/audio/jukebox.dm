@@ -1,4 +1,4 @@
-/jukebox //abstraction of music player behavior for jukeboxes, headphones, etc
+/datum/jukebox //abstraction of music player behavior for jukeboxes, headphones, etc
 	var/atom/owner
 	var/sound_id
 	var/datum/sound_token/token
@@ -17,7 +17,7 @@
 	var/playing
 
 
-/jukebox/New(atom/_owner, _template, _ui_title, _ui_width, _ui_height)
+/datum/jukebox/New(atom/_owner, _template, _ui_title, _ui_width, _ui_height)
 	. = ..()
 	if (QDELETED(_owner) || !isatom(_owner))
 		qdel(src)
@@ -27,30 +27,30 @@
 	for (var/path in GLOB.jukebox_tracks)
 		var/singleton/audio/track/track = GET_SINGLETON(path)
 		AddTrack(track.display || track.title, track.source)
-	sound_id = "[/jukebox]_[sequential_id(/jukebox)]"
+	sound_id = "jukebox_[sequential_id(/datum/jukebox)]"
 	template = _template
 	ui_title = _ui_title
 	ui_width = _ui_width
 	ui_height = _ui_height
 
 
-/jukebox/Destroy()
+/datum/jukebox/Destroy()
 	QDEL_NULL_LIST(tracks)
 	QDEL_NULL(token)
 	owner = null
 	. = ..()
 
 
-/jukebox/proc/AddTrack(title = "Track [length(tracks) + 1]", source)
+/datum/jukebox/proc/AddTrack(title = "Track [length(tracks) + 1]", source)
 	tracks += new /jukebox_track (title, source)
 
 
-/jukebox/proc/ClearTracks()
+/datum/jukebox/proc/ClearTracks()
 	QDEL_NULL_LIST(tracks)
 	tracks = list()
 
 
-/jukebox/proc/Next()
+/datum/jukebox/proc/Next()
 	if (++index > length(tracks))
 		index = 1
 	if (playing)
@@ -58,7 +58,7 @@
 		Play()
 
 
-/jukebox/proc/Last()
+/datum/jukebox/proc/Last()
 	if (--index < 1)
 		index = length(tracks)
 	if (playing)
@@ -66,7 +66,7 @@
 		Play()
 
 
-/jukebox/proc/Track(_index)
+/datum/jukebox/proc/Track(_index)
 	_index = text2num(_index)
 	if (!IsInteger(_index))
 		return
@@ -76,13 +76,13 @@
 		Play()
 
 
-/jukebox/proc/Stop()
+/datum/jukebox/proc/Stop()
 	playing = FALSE
 	QDEL_NULL(token)
 	owner.queue_icon_update()
 
 
-/jukebox/proc/Play()
+/datum/jukebox/proc/Play()
 	if (playing)
 		return
 	var/jukebox_track/track = tracks[index]
@@ -94,7 +94,7 @@
 	owner.queue_icon_update()
 
 
-/jukebox/proc/Volume(_volume)
+/datum/jukebox/proc/Volume(_volume)
 	_volume = text2num(_volume)
 	if (!isfinite(_volume))
 		return
@@ -108,11 +108,11 @@
 		token.SetVolume(volume)
 
 
-/jukebox/nano_host()
+/datum/jukebox/nano_host()
 	return owner
 
 
-/jukebox/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui, force_open = TRUE, datum/topic_state/state = GLOB.default_state)//, datum/topic_state/state = GLOB.jukebox_state)
+/datum/jukebox/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui, force_open = TRUE, datum/topic_state/state = GLOB.default_state)//, datum/topic_state/state = GLOB.jukebox_state)
 	var/list/data_tracks = list()
 	for (var/i = 1 to length(tracks))
 		var/jukebox_track/track = tracks[i]
@@ -131,7 +131,7 @@
 		ui.open()
 
 
-/jukebox/Topic(href, href_list)
+/datum/jukebox/Topic(href, href_list)
 	switch ("[href_list["act"]]")
 		if ("next") Next()
 		if ("last") Last()

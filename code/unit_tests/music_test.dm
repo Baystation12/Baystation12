@@ -37,7 +37,7 @@
 
 /datum/unit_test/jukebox_validate/start_test()
 	var/list/failed = list()
-	for (var/jukebox/jukebox)
+	for (var/datum/jukebox/jukebox)
 		for (var/entry in jukebox.tracks)
 			var/jukebox_track/track = entry
 			if (!track.title || !isfile(track.source))

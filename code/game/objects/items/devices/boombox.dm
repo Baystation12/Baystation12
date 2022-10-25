@@ -11,7 +11,7 @@
 	w_class = ITEM_SIZE_HUGE //forbid putting something that emits loud sounds forever into a backpack
 	origin_tech = list(TECH_MAGNET = 2, TECH_COMBAT = 1)
 
-	var/jukebox/jukebox
+	var/datum/jukebox/jukebox
 	var/boombox_flags
 
 
