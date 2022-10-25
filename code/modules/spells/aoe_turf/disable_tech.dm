@@ -1,4 +1,4 @@
-/spell/aoe_turf/disable_tech
+/datum/spell/aoe_turf/disable_tech
 	name = "Disable Tech"
 	desc = "This spell disables all weapons, cameras and most other technology in range."
 	feedback = "DT"
@@ -18,13 +18,13 @@
 	hud_state = "wiz_tech"
 	cast_sound = 'sound/magic/disable_tech.ogg'
 
-/spell/aoe_turf/disable_tech/cast(list/targets)
+/datum/spell/aoe_turf/disable_tech/cast(list/targets)
 
 	for(var/turf/target in targets)
 		empulse(get_turf(target), emp_heavy, emp_light)
 	return
 
-/spell/aoe_turf/disable_tech/empower_spell()
+/datum/spell/aoe_turf/disable_tech/empower_spell()
 	if(!..())
 		return 0
 	emp_heavy += 2
@@ -32,6 +32,6 @@
 
 	return "You've increased the range of [src]."
 
-/spell/aoe_turf/disable_tech/starlight
+/datum/spell/aoe_turf/disable_tech/starlight
 	charge_max = 600
 	spell_flags = 0

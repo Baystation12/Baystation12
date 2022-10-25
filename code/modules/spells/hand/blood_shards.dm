@@ -1,4 +1,4 @@
-/spell/hand/charges/blood_shard
+/datum/spell/hand/charges/blood_shard
 	name = "Blood Shards"
 	desc = "Invoke a corrupted projectile forward that causes an enemy's blood to fly out in painful shards."
 
@@ -13,7 +13,7 @@
 	hud_state = "wiz_bshard"
 	cast_sound = 'sound/magic/demon_attack1.ogg'
 
-/spell/hand/charges/blood_shard/cast_hand(atom/A,mob/user)
+/datum/spell/hand/charges/blood_shard/cast_hand(atom/A,mob/user)
 	var/obj/item/projectile/blood_shard/B = new(get_turf(user))
 	B.firer = user
 	B.launch(A, BP_CHEST)

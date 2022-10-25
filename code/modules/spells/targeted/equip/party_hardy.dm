@@ -1,4 +1,4 @@
-/spell/targeted/equip_item/party_hardy
+/datum/spell/targeted/equip_item/party_hardy
 	name = "Summon Party"
 	desc = "This spell was invented for the sole purpose of getting crunked at 11am on a Tuesday. Does not require wizard garb."
 	feedback = "PY"
@@ -19,7 +19,7 @@
 	compatible_mobs = list(/mob/living/carbon/human)
 	equipped_summons = list("active hand" = /obj/item/reagent_containers/food/drinks/bottle/small/beer)
 
-/spell/targeted/equip_item/party_hardy/empower_spell()
+/datum/spell/targeted/equip_item/party_hardy/empower_spell()
 	if(!..())
 		return 0
 	switch(spell_levels[Sp_POWER])

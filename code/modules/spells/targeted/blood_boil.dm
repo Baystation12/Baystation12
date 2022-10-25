@@ -1,4 +1,4 @@
-/spell/targeted/blood_boil
+/datum/spell/targeted/blood_boil
 	name = "Blood Boil"
 	desc = "This spell allows the caster to heat up an adversary's body so much their blood boils."
 	feedback = "BO"
@@ -15,7 +15,7 @@
 
 	hud_state = "wiz_boilblood"
 
-/spell/targeted/blood_boil/cast(list/targets, mob/user)
+/datum/spell/targeted/blood_boil/cast(list/targets, mob/user)
 	var/mob/living/carbon/human/H = targets[1]
 	H.bodytemperature += 40
 	if(prob(10))

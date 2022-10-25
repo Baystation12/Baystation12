@@ -1,4 +1,4 @@
-/spell/targeted/subjugation
+/datum/spell/targeted/subjugation
 	name = "Subjugation"
 	desc = "This spell temporarily subjugates a target's mind and does not require wizard garb."
 	feedback = "SJ"
@@ -22,7 +22,7 @@
 
 	hud_state = "wiz_subj"
 
-/spell/targeted/subjugation/empower_spell()
+/datum/spell/targeted/subjugation/empower_spell()
 	if(!..())
 		return 0
 

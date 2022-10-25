@@ -1,4 +1,4 @@
-/spell/targeted/equip_item/shield
+/datum/spell/targeted/equip_item/shield
 	name = "Summon Shield"
 	desc = "Summons the most holy of shields, the riot shield. Commonly used during wizard riots."
 	feedback = "SH"
@@ -23,7 +23,7 @@
 
 	hud_state = "wiz_shield"
 
-/spell/targeted/equip_item/shield/summon_item(new_type)
+/datum/spell/targeted/equip_item/shield/summon_item(new_type)
 	var/obj/item/shield/I = new new_type()
 	I.icon_state = "buckler"
 	I.color = item_color
@@ -31,7 +31,7 @@
 	I.base_block_chance = block_chance
 	return I
 
-/spell/targeted/equip_item/shield/empower_spell()
+/datum/spell/targeted/equip_item/shield/empower_spell()
 	if(!..())
 		return 0
 
@@ -40,5 +40,5 @@
 
 	return "Your summoned shields will now block more often."
 
-/spell/targeted/equip_item/shield/tower
+/datum/spell/targeted/equip_item/shield/tower
 	charge_max = 1

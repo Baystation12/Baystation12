@@ -1,6 +1,6 @@
 //////////////////////////////Construct Spells/////////////////////////
 
-/spell/aoe_turf/conjure/construct
+/datum/spell/aoe_turf/conjure/construct
 	name = "Artificer"
 	desc = "This spell conjures a construct which may be controlled by Shades."
 
@@ -16,13 +16,13 @@
 	hud_state = "artificer"
 	cast_sound = 'sound/items/Deconstruct.ogg'
 
-/spell/aoe_turf/conjure/construct/lesser
+/datum/spell/aoe_turf/conjure/construct/lesser
 	charge_max = 1800
 	summon_type = list(/obj/structure/constructshell/cult)
 	hud_state = "const_shell"
 	override_base = "const"
 
-/spell/aoe_turf/conjure/floor
+/datum/spell/aoe_turf/conjure/floor
 	name = "Floor Construction"
 	desc = "This spell constructs a cult floor."
 
@@ -36,7 +36,7 @@
 	hud_state = "const_floor"
 	cast_sound = 'sound/items/Welder.ogg'
 
-/spell/aoe_turf/conjure/wall
+/datum/spell/aoe_turf/conjure/wall
 	name = "Lesser Construction"
 	desc = "This spell constructs a cult wall."
 
@@ -50,7 +50,7 @@
 	hud_state = "const_wall"
 	cast_sound = 'sound/items/Welder.ogg'
 
-/spell/aoe_turf/conjure/wall/reinforced
+/datum/spell/aoe_turf/conjure/wall/reinforced
 	name = "Greater Construction"
 	desc = "This spell constructs a reinforced metal wall."
 
@@ -64,7 +64,7 @@
 	summon_type = list(/turf/simulated/wall/r_wall)
 	cast_sound = 'sound/items/Welder.ogg'
 
-/spell/aoe_turf/conjure/soulstone
+/datum/spell/aoe_turf/conjure/soulstone
 	name = "Summon Soulstone"
 	desc = "This spell reaches into Nar-Sie's realm, summoning one of the legendary fragments across time and space."
 
@@ -80,7 +80,7 @@
 	override_base = "const"
 	cast_sound = 'sound/items/Welder.ogg'
 
-/spell/aoe_turf/conjure/pylon
+/datum/spell/aoe_turf/conjure/pylon
 	name = "Red Pylon"
 	desc = "This spell conjures a fragile crystal from Nar-Sie's realm. Makes for a convenient light source."
 
@@ -95,7 +95,7 @@
 	hud_state = "const_pylon"
 	cast_sound = 'sound/items/Welder.ogg'
 
-/spell/aoe_turf/conjure/forcewall/lesser
+/datum/spell/aoe_turf/conjure/forcewall/lesser
 	name = "Shield"
 	desc = "Allows you to pull up a shield to protect yourself and allies from incoming threats"
 

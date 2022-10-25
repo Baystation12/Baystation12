@@ -1,4 +1,4 @@
-/spell/area_teleport
+/datum/spell/area_teleport
 	name = "Teleport"
 	desc = "This spell teleports you to a type of area of your selection."
 	feedback = "TP"
@@ -19,10 +19,10 @@
 
 	hud_state = "wiz_tele"
 
-/spell/area_teleport/before_cast()
+/datum/spell/area_teleport/before_cast()
 	return
 
-/spell/area_teleport/choose_targets()
+/datum/spell/area_teleport/choose_targets()
 	var/area/thearea
 	if(!randomise_selection)
 		thearea = input("Area to teleport to", "Teleport") as null|anything in wizteleportlocs
@@ -32,7 +32,7 @@
 		thearea = pick(wizteleportlocs)
 	return list(wizteleportlocs[thearea])
 
-/spell/area_teleport/cast(area/thearea, mob/user)
+/datum/spell/area_teleport/cast(area/thearea, mob/user)
 	playsound(get_turf(user),cast_sound,50,1)
 	var/turf/end = user.try_teleport(thearea)
 
@@ -41,15 +41,15 @@
 		return
 	return
 
-/spell/area_teleport/check_valid_targets(list/targets)
+/datum/spell/area_teleport/check_valid_targets(list/targets)
 	// Teleport should function across z's, so we make sure that happens
 	// without this check, it only works for teleporting to areas you can see
 	return targets && islist(targets) && targets.len > 0
 
-/spell/area_teleport/after_cast()
+/datum/spell/area_teleport/after_cast()
 	return
 
-/spell/area_teleport/invocation(mob/user, area/chosenarea)
+/datum/spell/area_teleport/invocation(mob/user, area/chosenarea)
 	if(!istype(chosenarea))
 		return //can't have that, can we
 	if(!invocation_area || !chosenarea)

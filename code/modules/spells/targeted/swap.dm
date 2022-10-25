@@ -1,4 +1,4 @@
-/spell/targeted/swap
+/datum/spell/targeted/swap
 	name = "swap"
 	desc = "This spell swaps the positions of the wizard and a target. Causes brain damage."
 	feedback = "SW"
@@ -22,7 +22,7 @@
 
 	cast_sound = 'sound/magic/mandswap.ogg'
 
-/spell/targeted/swap/cast(list/targets, mob/user)
+/datum/spell/targeted/swap/cast(list/targets, mob/user)
 	for(var/mob/T in targets)
 		var/turf/aT = get_turf(T)
 		var/turf/bT = get_turf(user)
@@ -32,7 +32,7 @@
 
 		apply_spell_damage(T)
 
-/spell/targeted/swap/empower_spell()
+/datum/spell/targeted/swap/empower_spell()
 	if(!..())
 		return 0
 

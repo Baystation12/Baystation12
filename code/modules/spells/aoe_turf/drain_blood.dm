@@ -1,4 +1,4 @@
-/spell/aoe_turf/drain_blood
+/datum/spell/aoe_turf/drain_blood
 	name = "Drain Blood"
 	desc = "this spell allows the caster to borrow blood from those around them. Sharing is caring!"
 	feedback = "DB"
@@ -14,7 +14,7 @@
 	cast_sound = 'sound/effects/squelch2.ogg'
 	hud_state = "const_rune"
 
-/spell/aoe_turf/drain_blood/cast(list/targets, mob/user)
+/datum/spell/aoe_turf/drain_blood/cast(list/targets, mob/user)
 	for(var/t in targets)
 		for(var/mob/living/L in t)
 			if(L.stat == DEAD || L == user)

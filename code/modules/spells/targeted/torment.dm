@@ -1,4 +1,4 @@
-/spell/targeted/torment
+/datum/spell/targeted/torment
 	name = "Torment"
 	desc = "this spell causes pain to all those in its radius."
 	feedback = "TM"
@@ -20,12 +20,12 @@
 	hud_state = "wiz_horse"
 	cast_sound = 'sound/magic/cowhead_curse.ogg'
 
-/spell/targeted/torment/cast(list/targets, mob/user)
+/datum/spell/targeted/torment/cast(list/targets, mob/user)
 	gibs(user.loc)
 	for(var/mob/living/carbon/human/H in targets)
 		H.adjustHalLoss(loss)
 
-/spell/targeted/torment/empower_spell()
+/datum/spell/targeted/torment/empower_spell()
 	if(!..())
 		return 0
 

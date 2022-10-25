@@ -1,4 +1,4 @@
-/spell/targeted/glimpse_of_eternity
+/datum/spell/targeted/glimpse_of_eternity
 	name = "Glimpse of Eternity"
 	desc = "Show the non-believers what enlightenment truely means."
 	feedback = "GE"
@@ -12,7 +12,7 @@
 
 	hud_state = "wiz_glimpse"
 
-/spell/targeted/glimpse_of_eternity/cast(list/targets, mob/user)
+/datum/spell/targeted/glimpse_of_eternity/cast(list/targets, mob/user)
 	for(var/t in targets)
 		var/mob/living/L = t
 		if(L.faction != user.faction) //Worse for non-allies

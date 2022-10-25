@@ -1,4 +1,4 @@
-/spell/targeted/ethereal_jaunt/shift
+/datum/spell/targeted/ethereal_jaunt/shift
 	name = "Phase Shift"
 	desc = "This spell allows you to pass through walls."
 
@@ -10,17 +10,17 @@
 
 	hud_state = "const_shift"
 
-/spell/targeted/ethereal_jaunt/shift/jaunt_disappear(atom/movable/overlay/animation, mob/living/target)
+/datum/spell/targeted/ethereal_jaunt/shift/jaunt_disappear(atom/movable/overlay/animation, mob/living/target)
 	to_chat(target, SPAN_DANGER("You silently phase out.")) // no visible message - phase shift is silent
 	animation.icon_state = "phase_shift"
 	animation.dir = target.dir
 	flick("phase_shift", animation)
 
-/spell/targeted/ethereal_jaunt/shift/jaunt_reappear(atom/movable/overlay/animation, mob/living/target)
+/datum/spell/targeted/ethereal_jaunt/shift/jaunt_reappear(atom/movable/overlay/animation, mob/living/target)
 	to_chat(target, SPAN_DANGER("You return from your jaunt."))
 	animation.icon_state = "phase_shift2"
 	animation.dir = target.dir
 	flick("phase_shift2", animation)
 
-/spell/targeted/ethereal_jaunt/shift/jaunt_steam(mobloc)
+/datum/spell/targeted/ethereal_jaunt/shift/jaunt_steam(mobloc)
 	return

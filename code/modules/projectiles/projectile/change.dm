@@ -81,7 +81,7 @@
 				A.randomize_appearance_and_body_for(H)
 
 		if(new_mob)
-			for (var/spell/S in M.mind.learned_spells)
+			for (var/datum/spell/S in M.mind.learned_spells)
 				new_mob.add_spell(new S.type)
 
 			new_mob.a_intent = "hurt"

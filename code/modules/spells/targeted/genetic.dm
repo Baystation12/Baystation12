@@ -4,7 +4,7 @@ code\game\dna\genes\vg_powers.dm //hulk is in this file
 code\game\dna\genes\goon_disabilities.dm
 code\game\dna\genes\goon_powers.dm
 */
-/spell/targeted/genetic
+/datum/spell/targeted/genetic
 	name = "Genetic modifier"
 	desc = "This spell inflicts a set of mutations and disabilities upon the target."
 
@@ -13,7 +13,7 @@ code\game\dna\genes\goon_powers.dm
 	duration = 100 //deciseconds
 
 
-/spell/targeted/genetic/cast(list/targets)
+/datum/spell/targeted/genetic/cast(list/targets)
 	..()
 	for(var/mob/living/target in targets)
 		for(var/x in mutations)
@@ -27,7 +27,7 @@ code\game\dna\genes\goon_powers.dm
 			target.update_mutations()
 	return
 
-/spell/targeted/genetic/blind
+/datum/spell/targeted/genetic/blind
 	name = "Blind"
 	desc = "This spell inflicts a target with temporary blindness. Does not require wizard garb."
 	feedback = "BD"
@@ -53,14 +53,14 @@ code\game\dna\genes\goon_powers.dm
 	hud_state = "wiz_blind"
 	cast_sound = 'sound/magic/blind.ogg'
 
-/spell/targeted/genetic/blind/empower_spell()
+/datum/spell/targeted/genetic/blind/empower_spell()
 	if(!..())
 		return 0
 	duration += 100
 
 	return "[src] will now blind for a longer period of time."
 
-/spell/targeted/genetic/mutate
+/datum/spell/targeted/genetic/mutate
 	name = "Mutate"
 	desc = "This spell causes you to turn into a hulk and gain laser vision for a short while."
 	feedback = "MU"
@@ -85,7 +85,7 @@ code\game\dna\genes\goon_powers.dm
 	effect_duration = 5
 	effect_color = "#ff0000"
 
-/spell/targeted/genetic/blind/hysteria
+/datum/spell/targeted/genetic/blind/hysteria
 	name = "Hysteria"
 	desc = "A spell used to make someone look like a blind fool, and also makes them a blind fool."
 	feedback = "HY"
@@ -97,7 +97,7 @@ code\game\dna\genes\goon_powers.dm
 	amt_dizziness = 10
 	hud_state = "hysteria"
 
-/spell/targeted/genetic/blind/starburst
+/datum/spell/targeted/genetic/blind/starburst
 	name = "Starburst"
 	desc = "Send a jolt of electricity through everyone's nerve center, blinding and stunning them."
 	feedback = "SB"

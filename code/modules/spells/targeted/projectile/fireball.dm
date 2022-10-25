@@ -1,4 +1,4 @@
-/spell/targeted/projectile/dumbfire/fireball
+/datum/spell/targeted/projectile/dumbfire/fireball
 	name = "Fireball"
 	desc = "This spell fires a fireball at a target and does not require wizard garb."
 	feedback = "FB"
@@ -29,12 +29,12 @@
 	hud_state = "wiz_fireball"
 	cast_sound = 'sound/magic/fireball.ogg'
 
-/spell/targeted/projectile/dumbfire/fireball/prox_cast(list/targets, spell_holder)
+/datum/spell/targeted/projectile/dumbfire/fireball/prox_cast(list/targets, spell_holder)
 	for(var/mob/living/M in targets)
 		apply_spell_damage(M)
 	explosion(get_turf(spell_holder), ex_severe, ex_heavy, ex_light, ex_flash)
 
-/spell/targeted/projectile/dumbfire/fireball/empower_spell()
+/datum/spell/targeted/projectile/dumbfire/fireball/empower_spell()
 	if(!..())
 		return 0
 
@@ -46,7 +46,7 @@
 
 	return "The spell [src] now has a larger explosion."
 
-/spell/targeted/projectile/dumbfire/fireball/tower
+/datum/spell/targeted/projectile/dumbfire/fireball/tower
 	charge_max = 2
 
 //PROJECTILE
@@ -55,7 +55,7 @@
 	name = "fireball"
 	icon_state = "fireball"
 
-/spell/targeted/projectile/dumbfire/fireball/firebolt
+/datum/spell/targeted/projectile/dumbfire/fireball/firebolt
 	name = "Firebolt"
 	desc = "A quick-casted fireball. Burns the user, and their enemies, but is much faster to shoot."
 	feedback = "FO"

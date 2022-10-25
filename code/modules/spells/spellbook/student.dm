@@ -13,12 +13,13 @@
 	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE
 	max_uses = 5
 
-	spells = list(/spell/aoe_turf/knock = 						1,
-				/spell/targeted/ethereal_jaunt = 				1,
-				/spell/targeted/projectile/magic_missile = 		1,
-				/obj/item/gun/energy/staff/focus = 		1,
-				/obj/item/contract/wizard/xray = 		1
-					)
+	spells = list(
+		/datum/spell/aoe_turf/knock = 1,
+		/datum/spell/targeted/ethereal_jaunt = 1,
+		/datum/spell/targeted/projectile/magic_missile = 1,
+		/obj/item/gun/energy/staff/focus = 1,
+		/obj/item/contract/wizard/xray = 1
+	)
 
 /datum/spellbook/student/apprentice
 	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE|NOREVERT|NO_LOCKING

@@ -65,7 +65,7 @@
 
 	min_gas = null
 
-	wizardy_spells = list(/spell/aoe_turf/conjure/forcewall)
+	wizardy_spells = list(/datum/spell/aoe_turf/conjure/forcewall)
 
 /mob/living/simple_animal/familiar/pike/Allow_Spacemove(check_drift = 0)
 	return 1	//No drifting in space for space carp!	//original comments do not steal
@@ -85,7 +85,7 @@
 	maxHealth = 150
 	natural_weapon = /obj/item/natural_weapon/horror
 
-	wizardy_spells = list(/spell/targeted/torment)
+	wizardy_spells = list(/datum/spell/targeted/torment)
 
 /obj/item/natural_weapon/horror
 	name = "foul touch"
@@ -115,8 +115,10 @@
 	health = 25
 	maxHealth = 25
 
-	wizardy_spells = list(/spell/targeted/heal_target,
-						/spell/targeted/heal_target/area)
+	wizardy_spells = list(
+		/datum/spell/targeted/heal_target,
+		/datum/spell/targeted/heal_target/area
+	)
 
 
 
@@ -154,7 +156,7 @@
 	can_escape = TRUE
 	density = FALSE
 
-	wizardy_spells = list(/spell/aoe_turf/smoke)
+	wizardy_spells = list(/datum/spell/aoe_turf/smoke)
 
 /mob/living/simple_animal/familiar/pet/mouse/New()
 	..()
@@ -180,4 +182,4 @@
 	natural_weapon = /obj/item/natural_weapon/claws/weak
 	density = FALSE
 
-	wizardy_spells = list(/spell/targeted/subjugation)
+	wizardy_spells = list(/datum/spell/targeted/subjugation)

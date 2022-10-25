@@ -1,22 +1,22 @@
-/spell/aoe_turf/conjure/summon
+/datum/spell/aoe_turf/conjure/summon
 	var/name_summon = 0
 	cast_sound = 'sound/weapons/wave.ogg'
 
-/spell/aoe_turf/conjure/summon/before_cast()
+/datum/spell/aoe_turf/conjure/summon/before_cast()
 	..()
 	if(name_summon)
 		var/newName = sanitize(input("Would you like to name your summon?") as null|text, MAX_NAME_LEN)
 		if(newName)
 			newVars["name"] = newName
 
-/spell/aoe_turf/conjure/summon/conjure_animation(atom/movable/overlay/animation, turf/target)
+/datum/spell/aoe_turf/conjure/summon/conjure_animation(atom/movable/overlay/animation, turf/target)
 	animation.icon_state = "shield2"
 	flick("shield2",animation)
 	sleep(10)
 	..()
 
 
-/spell/aoe_turf/conjure/summon/bats
+/datum/spell/aoe_turf/conjure/summon/bats
 	name = "Summon Space Bats"
 	desc = "This spell summons a flock of spooky space bats."
 	feedback = "SB"
@@ -35,7 +35,7 @@
 
 	hud_state = "wiz_bats"
 
-/spell/aoe_turf/conjure/summon/bats/empower_spell()
+/datum/spell/aoe_turf/conjure/summon/bats/empower_spell()
 	if(!..())
 		return 0
 
@@ -67,11 +67,11 @@
 
 // 	hud_state = "wiz_bear"
 
-/spell/aoe_turf/conjure/summon/bear/before_cast()
+/datum/spell/aoe_turf/conjure/summon/bear/before_cast()
 	..()
 	newVars["master"] = holder //why not do this in the beginning? MIND SWITCHING.
 
-/spell/aoe_turf/conjure/summon/bear/empower_spell()
+/datum/spell/aoe_turf/conjure/summon/bear/empower_spell()
 	if(!..())
 		return 0
 	switch(spell_levels[Sp_POWER])

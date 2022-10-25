@@ -1,4 +1,4 @@
-/spell/portal_teleport
+/datum/spell/portal_teleport
 	name = "Create Portal"
 	desc = "This spell creates a long lasting portal to an area of your selection."
 	feedback = "TP"
@@ -19,10 +19,10 @@
 
 	hud_state = "wiz_tele"
 
-/spell/portal_teleport/before_cast()
+/datum/spell/portal_teleport/before_cast()
 	return
 
-/spell/portal_teleport/choose_targets()
+/datum/spell/portal_teleport/choose_targets()
 	var/area/thearea
 	var/message = alert("Would you like to show station areas?\nNote: it can take up to 5 minutes for the away sites to load in and show up.",, "Yes", "No")
 	switch(message)
@@ -36,7 +36,7 @@
 
 	return list(select_areas[thearea])
 
-/spell/portal_teleport/cast(area/thearea, mob/user)
+/datum/spell/portal_teleport/cast(area/thearea, mob/user)
 	playsound(get_turf(user),cast_sound,50,1)
 	var/turf/start = get_turf(user)
 	var/turf/end = user.try_teleport(thearea)
@@ -50,10 +50,10 @@
 
 	return
 
-/spell/portal_teleport/after_cast()
+/datum/spell/portal_teleport/after_cast()
 	return
 
-/spell/portal_teleport/invocation(mob/user, area/chosenarea)
+/datum/spell/portal_teleport/invocation(mob/user, area/chosenarea)
 	if(!chosenarea || !istype(chosenarea))
 		..()
 	else

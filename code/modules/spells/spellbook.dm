@@ -117,8 +117,8 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 				var/obj/O = spellbook.spells[i]
 				name = "Artefact: [capitalize(initial(O.name))]" //because 99.99% of objects don't have capitals in them and it makes it look weird.
 				desc = initial(O.desc)
-			else if(ispath(spellbook.spells[i],/spell))
-				var/spell/S = spellbook.spells[i]
+			else if(ispath(spellbook.spells[i],/datum/spell))
+				var/datum/spell/S = spellbook.spells[i]
 				name = initial(S.name)
 				desc = initial(S.desc)
 				var/testing = initial(S.spell_flags)
@@ -205,7 +205,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 				var/obj/O = new /obj/item/contract/boon(get_turf(user),path)
 				temp = "You have purchased \the [O]."
 			else
-				if(ispath(path,/spell))
+				if(ispath(path,/datum/spell))
 					temp = src.add_spell(user,path)
 					if(temp)
 						uses -= spellbook.spells[path]
@@ -259,7 +259,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 
 
 /obj/item/spellbook/proc/add_spell(mob/user, spell_path)
-	for(var/spell/S in user.mind.learned_spells)
+	for(var/datum/spell/S in user.mind.learned_spells)
 		if(istype(S,spell_path))
 			if(!S.can_improve())
 				return
@@ -276,7 +276,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 			else if(S.can_improve(Sp_SPEED))
 				return S.quicken_spell()
 
-	var/spell/S = new spell_path()
+	var/datum/spell/S = new spell_path()
 	user.add_spell(S)
 	return "You learn the spell [S]"
 

@@ -98,7 +98,7 @@
 	environment_smash = 2
 	status_flags = 0
 	resistance = 10
-	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
+	construct_spells = list(/datum/spell/aoe_turf/conjure/forcewall/lesser)
 	can_escape = TRUE
 
 /obj/item/natural_weapon/juggernaut
@@ -156,7 +156,7 @@
 	speed = -1
 	environment_smash = 1
 	see_in_dark = 7
-	construct_spells = list(/spell/targeted/ethereal_jaunt/shift)
+	construct_spells = list(/datum/spell/targeted/ethereal_jaunt/shift)
 
 /mob/living/simple_animal/construct/wraith/can_fall(anchor_bypass, turf/location_override)
 	return FALSE
@@ -190,12 +190,13 @@
 	natural_weapon = /obj/item/natural_weapon/cult_builder
 	speed = 0
 	environment_smash = 1
-	construct_spells = list(/spell/aoe_turf/conjure/construct/lesser,
-							/spell/aoe_turf/conjure/wall,
-							/spell/aoe_turf/conjure/floor,
-							/spell/aoe_turf/conjure/soulstone,
-							/spell/aoe_turf/conjure/pylon
-							)
+	construct_spells = list(
+		/datum/spell/aoe_turf/conjure/construct/lesser,
+		/datum/spell/aoe_turf/conjure/wall,
+		/datum/spell/aoe_turf/conjure/floor,
+		/datum/spell/aoe_turf/conjure/soulstone,
+		/datum/spell/aoe_turf/conjure/pylon
+	)
 
 /obj/item/natural_weapon/cult_builder
 	name = "heavy arms"
@@ -234,7 +235,7 @@
 	resistance = 10
 	var/energy = 0
 	var/max_energy = 1000
-	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
+	construct_spells = list(/datum/spell/aoe_turf/conjure/forcewall/lesser)
 	can_escape = TRUE
 
 /obj/item/natural_weapon/juggernaut/behemoth
@@ -260,8 +261,8 @@
 	see_in_dark = 7
 
 	construct_spells = list(
-			/spell/targeted/harvest
-		)
+		/datum/spell/targeted/harvest
+	)
 
 /obj/item/natural_weapon/harvester
 	name = "malicious spike"

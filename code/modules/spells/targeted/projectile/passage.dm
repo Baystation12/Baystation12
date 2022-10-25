@@ -1,4 +1,4 @@
-/spell/targeted/projectile/dumbfire/passage
+/datum/spell/targeted/projectile/dumbfire/passage
 	name = "Passage"
 	desc = "throw a spell towards an area and teleport to it."
 	feedback = "PA"
@@ -22,7 +22,7 @@
 	hud_state = "gen_project"
 	cast_sound = 'sound/magic/lightning_bolt.ogg'
 
-/spell/targeted/projectile/dumbfire/passage/prox_cast(list/targets, atom/spell_holder)
+/datum/spell/targeted/projectile/dumbfire/passage/prox_cast(list/targets, atom/spell_holder)
 	for(var/mob/living/L in targets)
 		apply_spell_damage(L)
 
@@ -34,7 +34,7 @@
 	S.start()
 	playsound(src, 'sound/magic/lightningshock.ogg', 50)
 
-/spell/targeted/projectile/dumbfire/passage/empower_spell()
+/datum/spell/targeted/projectile/dumbfire/passage/empower_spell()
 	if(!..())
 		return 0
 

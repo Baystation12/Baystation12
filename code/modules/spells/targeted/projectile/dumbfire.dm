@@ -1,8 +1,8 @@
-/spell/targeted/projectile/dumbfire
+/datum/spell/targeted/projectile/dumbfire
 	name = "dumbfire spell"
 	selection_type = "range"
 
-/spell/targeted/projectile/dumbfire/choose_targets(mob/user = usr)
+/datum/spell/targeted/projectile/dumbfire/choose_targets(mob/user = usr)
 	var/list/targets = list()
 
 	var/starting_dir = user.dir //where are we facing at the time of casting?

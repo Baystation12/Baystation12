@@ -1,4 +1,4 @@
-/spell/aoe_turf/exchange_wounds
+/datum/spell/aoe_turf/exchange_wounds
 	name = "Exchange Wounds"
 	desc = "Syphon the wounds from your allies."
 	feedback = "EW"
@@ -17,11 +17,11 @@
 
 	hud_state = "wiz_exchange"
 
-/spell/aoe_turf/exchange_wounds/perform()
+/datum/spell/aoe_turf/exchange_wounds/perform()
 	amt_healed = 0
 	..()
 
-/spell/aoe_turf/exchange_wounds/cast(list/targets, mob/living/user)
+/datum/spell/aoe_turf/exchange_wounds/cast(list/targets, mob/living/user)
 	new /obj/effect/temporary(get_turf(user),10,'icons/effects/effects.dmi',"purple_electricity_constant")
 	for(var/t in targets)
 		for(var/mob/living/L in t)
@@ -37,7 +37,7 @@
 				user.adjustFireLoss(2)
 				amt_healed += 5
 
-/spell/aoe_turf/exchange_wounds/check_valid_targets()
+/datum/spell/aoe_turf/exchange_wounds/check_valid_targets()
 	if(amt_healed > heal_max)
 		return FALSE
 	return ..()

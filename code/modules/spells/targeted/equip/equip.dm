@@ -1,6 +1,6 @@
 //You can set duration to 0 to have the items last forever
 
-/spell/targeted/equip_item
+/datum/spell/targeted/equip_item
 	name = "equipment spell"
 	cast_sound = 'sound/magic/summonitems_generic.ogg'
 
@@ -10,7 +10,7 @@
 
 	var/delete_old = 1 //if the item previously in the slot is deleted - otherwise, it's dropped
 
-/spell/targeted/equip_item/cast(list/targets, mob/user = usr)
+/datum/spell/targeted/equip_item/cast(list/targets, mob/user = usr)
 	..()
 	for(var/mob/living/L in targets)
 		for(var/slot_id in equipped_summons)
@@ -38,5 +38,5 @@
 			for(var/obj/item/to_remove in summoned_items)
 				qdel(to_remove)
 
-/spell/targeted/equip_item/proc/summon_item(newtype)
+/datum/spell/targeted/equip_item/proc/summon_item(newtype)
 	return new newtype

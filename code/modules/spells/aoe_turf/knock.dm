@@ -1,4 +1,4 @@
-/spell/aoe_turf/knock
+/datum/spell/aoe_turf/knock
 	name = "Knock"
 	desc = "This spell opens nearby doors and does not require wizard garb."
 	feedback = "KN"
@@ -14,7 +14,7 @@
 	hud_state = "wiz_knock"
 	cast_sound = 'sound/magic/knock.ogg'
 
-/spell/aoe_turf/knock/cast(list/targets)
+/datum/spell/aoe_turf/knock/cast(list/targets)
 	for(var/turf/T in targets)
 		for(var/obj/machinery/door/door in T.contents)
 			spawn(1)
@@ -25,16 +25,16 @@
 	return
 
 
-/spell/aoe_turf/knock/empower_spell()
+/datum/spell/aoe_turf/knock/empower_spell()
 	if(!..())
 		return 0
 	range *= 2
 
 	return "You've doubled the range of [src]."
 
-/spell/aoe_turf/knock/slow
+/datum/spell/aoe_turf/knock/slow
 	name = "Slow Knock"
 	charge_max = 200
 
-/spell/aoe_turf/knock/tower
+/datum/spell/aoe_turf/knock/tower
 	charge_max = 2

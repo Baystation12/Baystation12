@@ -1,4 +1,4 @@
-/spell/aoe_turf/charge
+/datum/spell/aoe_turf/charge
 	name = "Charge"
 	desc = "This spell can be used to charge up spent magical artifacts, among other things."
 
@@ -13,29 +13,29 @@
 	hud_state = "wiz_charge"
 	cast_sound = 'sound/magic/charge.ogg'
 
-/spell/aoe_turf/charge/cast(list/targets, mob/user)
+/datum/spell/aoe_turf/charge/cast(list/targets, mob/user)
 	for(var/turf/T in targets)
 		depth_cast(T)
 
-/spell/aoe_turf/charge/proc/depth_cast(list/targets)
+/datum/spell/aoe_turf/charge/proc/depth_cast(list/targets)
 	for(var/atom/A in targets)
 		if(A.contents.len)
 			depth_cast(A.contents)
 		cast_charge(A)
 
-/spell/aoe_turf/charge/proc/mob_charge(mob/living/M)
+/datum/spell/aoe_turf/charge/proc/mob_charge(mob/living/M)
 	if(!M.mind)
 		return
 	if(M.mind.learned_spells.len != 0)
-		for(var/spell/S in M.mind.learned_spells)
-			if(!istype(S, /spell/aoe_turf/charge))
+		for(var/datum/spell/S in M.mind.learned_spells)
+			if(!istype(S, /datum/spell/aoe_turf/charge))
 				S.charge_counter = S.charge_max
 		to_chat(M, SPAN_NOTICE("You feel raw magic flowing through you, it feels good!"))
 	else
 		to_chat(M, SPAN_NOTICE("You feel very strange for a moment, but then it passes."))
 	return M
 
-/spell/aoe_turf/charge/proc/cast_charge(atom/target)
+/datum/spell/aoe_turf/charge/proc/cast_charge(atom/target)
 	var/atom/charged_item
 
 	if(istype(target, /mob/living))
@@ -63,7 +63,7 @@
 		return 1
 
 
-/spell/aoe_turf/charge/blood
+/datum/spell/aoe_turf/charge/blood
 	name = "blood charge"
 	desc = "This spell charges things around it using the lifeforce gained by sacrificed blood."
 

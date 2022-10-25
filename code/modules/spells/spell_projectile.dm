@@ -4,7 +4,7 @@
 
 	nodamage = TRUE
 
-	var/spell/targeted/projectile/carried
+	var/datum/spell/targeted/projectile/carried
 
 	penetrating = 0
 	life_span = 10 //set by the duration of the spell

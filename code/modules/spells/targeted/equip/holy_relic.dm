@@ -1,4 +1,4 @@
-/spell/targeted/equip_item/holy_relic
+/datum/spell/targeted/equip_item/holy_relic
 	name = "Summon Holy Relic"
 	desc = "This spell summons a relic of purity into your hand for a short while. The relic will disrupt occult and magical energies - be wary, as this includes your own."
 	feedback = "SR"
@@ -20,12 +20,12 @@
 
 	equipped_summons = list("active hand" = /obj/item/nullrod)
 
-/spell/targeted/equip_item/holy_relic/cast(list/targets, mob/user = usr)
+/datum/spell/targeted/equip_item/holy_relic/cast(list/targets, mob/user = usr)
 	..()
 	for(var/mob/M in targets)
 		M.visible_message(SPAN_DANGER("A rod of metal appears in \the [M]'s hand!"))
 
-/spell/targeted/equip_item/holy_relic/empower_spell()
+/datum/spell/targeted/equip_item/holy_relic/empower_spell()
 	if(!..())
 		return 0
 

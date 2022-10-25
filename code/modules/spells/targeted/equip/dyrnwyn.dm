@@ -1,4 +1,4 @@
-/spell/targeted/equip_item/dyrnwyn
+/datum/spell/targeted/equip_item/dyrnwyn
 	name = "Summon Dyrnwyn"
 	desc = "Summons the legendary sword of Rhydderch Hael, said to draw in flame when held by a worthy man."
 	feedback = "SD"
@@ -20,7 +20,7 @@
 	hud_state = "gen_immolate"
 
 
-/spell/targeted/equip_item/dyrnwyn/summon_item(new_type)
+/datum/spell/targeted/equip_item/dyrnwyn/summon_item(new_type)
 	var/obj/item/W = new new_type (null, material)
 	W.SetName("\improper Dyrnwyn")
 	W.damtype = DAMAGE_BURN
@@ -29,12 +29,12 @@
 	W.slowdown_per_slot[slot_r_hand] = 0.25
 	return W
 
-/spell/targeted/equip_item/dyrnwyn/empower_spell()
+/datum/spell/targeted/equip_item/dyrnwyn/empower_spell()
 	if(!..())
 		return 0
 
 	material = MATERIAL_SILVER
 	return "Dyrnwyn has been made pure: it is now made of silver."
 
-/spell/targeted/equip_item/dyrnwyn/tower
+/datum/spell/targeted/equip_item/dyrnwyn/tower
 	charge_max = 1

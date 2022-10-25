@@ -1,4 +1,4 @@
-/spell/targeted/ethereal_jaunt
+/datum/spell/targeted/ethereal_jaunt
 	name = "Ethereal Jaunt"
 	desc = "This spell creates your ethereal form, temporarily making you invisible and able to pass through walls."
 	feedback = "EJ"
@@ -19,7 +19,7 @@
 	var/obj/effect/dummy/spell_jaunt/jaunt_holder
 	var/atom/movable/overlay/animation
 
-/spell/targeted/ethereal_jaunt/Destroy()
+/datum/spell/targeted/ethereal_jaunt/Destroy()
 	if (jaunt_holder) // eject our user in case something happens and we get deleted
 		var/turf/T = get_turf(jaunt_holder)
 		for(var/mob/living/L in jaunt_holder)
@@ -28,7 +28,7 @@
 	QDEL_NULL(animation)
 	return ..()
 
-/spell/targeted/ethereal_jaunt/cast(list/targets) //magnets, so mostly hardcoded
+/datum/spell/targeted/ethereal_jaunt/cast(list/targets) //magnets, so mostly hardcoded
 	for(var/mob/living/target in targets)
 		if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(target))
 			continue
@@ -52,7 +52,7 @@
 			target.forceMove(jaunt_holder)
 			addtimer(CALLBACK(src, .proc/start_reappear, target), duration)
 
-/spell/targeted/ethereal_jaunt/proc/start_reappear(mob/living/user)
+/datum/spell/targeted/ethereal_jaunt/proc/start_reappear(mob/living/user)
 	var/mob_loc = jaunt_holder.last_valid_turf
 	jaunt_holder.reappearing = TRUE
 	jaunt_steam(mob_loc)
@@ -60,7 +60,7 @@
 	animation.forceMove(mob_loc)
 	addtimer(CALLBACK(src, .proc/reappear, mob_loc, user), reappear_duration)
 
-/spell/targeted/ethereal_jaunt/proc/reappear(mob_loc, mob/living/user)
+/datum/spell/targeted/ethereal_jaunt/proc/reappear(mob_loc, mob/living/user)
 	if(!user.forceMove(mob_loc))
 		for(var/direction in list(1,2,4,8,5,6,9,10))
 			var/turf/T = get_step(mob_loc, direction)
@@ -70,23 +70,23 @@
 	QDEL_NULL(animation)
 	QDEL_NULL(jaunt_holder)
 
-/spell/targeted/ethereal_jaunt/empower_spell()
+/datum/spell/targeted/ethereal_jaunt/empower_spell()
 	if(!..())
 		return 0
 	duration += 2 SECONDS
 
 	return "[src] now lasts longer."
 
-/spell/targeted/ethereal_jaunt/proc/jaunt_disappear(atom/movable/overlay/animation, mob/living/target)
+/datum/spell/targeted/ethereal_jaunt/proc/jaunt_disappear(atom/movable/overlay/animation, mob/living/target)
 	animation.icon_state = "liquify"
 	flick("liquify",animation)
 	playsound(get_turf(target), 'sound/magic/ethereal_enter.ogg', 30)
 
-/spell/targeted/ethereal_jaunt/proc/jaunt_reappear(atom/movable/overlay/animation, mob/living/target)
+/datum/spell/targeted/ethereal_jaunt/proc/jaunt_reappear(atom/movable/overlay/animation, mob/living/target)
 	flick("reappear",animation)
 	playsound(get_turf(target), 'sound/magic/ethereal_exit.ogg', 30)
 
-/spell/targeted/ethereal_jaunt/proc/jaunt_steam(mobloc)
+/datum/spell/targeted/ethereal_jaunt/proc/jaunt_steam(mobloc)
 	var/datum/effect/effect/system/steam_spread/steam = new /datum/effect/effect/system/steam_spread()
 	steam.set_up(10, 0, mobloc)
 	steam.start()
@@ -134,6 +134,6 @@
 /obj/effect/dummy/spell_jaunt/bullet_act(blah)
 	return
 
-/spell/targeted/ethereal_jaunt/tower
+/datum/spell/targeted/ethereal_jaunt/tower
 	charge_max = 2
 	spell_flags = Z2NOCAST | INCLUDEUSER

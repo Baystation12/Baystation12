@@ -1,4 +1,4 @@
-/spell/aoe_turf/blink
+/datum/spell/aoe_turf/blink
 	name = "Blink"
 	desc = "This spell randomly teleports you a short distance."
 	feedback = "BL"
@@ -15,7 +15,7 @@
 	hud_state = "wiz_blink"
 	cast_sound = 'sound/magic/blink.ogg'
 
-/spell/aoe_turf/blink/cast(list/targets, mob/user)
+/datum/spell/aoe_turf/blink/cast(list/targets, mob/user)
 	if(!targets.len)
 		return
 
@@ -36,7 +36,7 @@
 
 	return
 
-/spell/aoe_turf/blink/empower_spell()
+/datum/spell/aoe_turf/blink/empower_spell()
 	if(!..())
 		return 0
 	inner_radius += 1

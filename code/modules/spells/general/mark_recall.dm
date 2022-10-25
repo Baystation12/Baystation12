@@ -1,4 +1,4 @@
-/spell/mark_recall
+/datum/spell/mark_recall
 	name = "Mark and Recall"
 	desc = "This spell was created so wizards could get home from the bar without driving. Does not require wizard garb."
 	feedback = "MK"
@@ -18,13 +18,13 @@
 	hud_state = "wiz_mark"
 	var/mark = null
 
-/spell/mark_recall/choose_targets()
+/datum/spell/mark_recall/choose_targets()
 	if(!mark)
 		return list("magical fairy dust") //because why not
 	else
 		return list(mark)
 
-/spell/mark_recall/cast(list/targets,mob/user)
+/datum/spell/mark_recall/cast(list/targets,mob/user)
 	if(!targets.len)
 		return 0
 	var/target = targets[1]
@@ -39,7 +39,7 @@
 	user.forceMove(T)
 	..()
 
-/spell/mark_recall/empower_spell()
+/datum/spell/mark_recall/empower_spell()
 	if(!..())
 		return 0
 
@@ -57,7 +57,7 @@
 	unacidable = TRUE
 	layer = TURF_LAYER
 
-	var/spell/mark_recall/spell
+	var/datum/spell/mark_recall/spell
 
 /obj/effect/cleanable/wizard_mark/New(newloc,mrspell)
 	..()

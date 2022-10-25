@@ -1,4 +1,4 @@
-/spell/targeted/equip_item/horsemask
+/datum/spell/targeted/equip_item/horsemask
 	name = "Curse of the Horseman"
 	desc = "This spell triggers a curse on a target, causing them to wield an unremovable horse head mask. They will speak like a horse! Any masks they are wearing will be disintegrated. This spell does not require robes."
 	school = "transmutation"
@@ -19,18 +19,18 @@
 	hud_state = "wiz_horse"
 	cast_sound = 'sound/magic/horsehead_curse.ogg'
 
-/spell/targeted/equip_item/horsemask/New()
+/datum/spell/targeted/equip_item/horsemask/New()
 	..()
 	equipped_summons = list("[slot_wear_mask]" = /obj/item/clothing/mask/horsehead)
 
-/spell/targeted/equip_item/horsemask/cast(list/targets, mob/user = usr)
+/datum/spell/targeted/equip_item/horsemask/cast(list/targets, mob/user = usr)
 	..()
 	for(var/mob/living/target in targets)
 		target.visible_message(	SPAN_DANGER("[target]'s face  lights up in fire, and after the event a horse's head takes its place!"), \
 								SPAN_DANGER("Your face burns up, and shortly after the fire you realise you have the face of a horse!"))
 		target.flash_eyes()
 
-/spell/targeted/equip_item/horsemask/summon_item(new_type)
+/datum/spell/targeted/equip_item/horsemask/summon_item(new_type)
 	var/obj/item/new_item = new new_type
 	new_item.canremove = 0		//curses!
 	if(istype(new_item, /obj/item/clothing/mask/horsehead))
@@ -39,7 +39,7 @@
 		magichead.voicechange = 1	//NEEEEIIGHH
 	return new_item
 
-/spell/targeted/equip_item/horsemask/empower_spell()
+/datum/spell/targeted/equip_item/horsemask/empower_spell()
 	if(!..())
 		return 0
 

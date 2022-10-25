@@ -1,4 +1,4 @@
-/spell/contract/return_master
+/datum/spell/contract/return_master
 	name = "Return to Master"
 	desc = "Teleport back to your master."
 
@@ -15,7 +15,7 @@
 	hud_state = "wiz_tele"
 
 
-/spell/contract/return_master/cast(mob/target,mob/user)
+/datum/spell/contract/return_master/cast(mob/target,mob/user)
 	target = ..(target,user)
 	if(!target)
 		return

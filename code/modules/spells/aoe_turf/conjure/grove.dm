@@ -1,4 +1,4 @@
-/spell/aoe_turf/conjure/grove
+/datum/spell/aoe_turf/conjure/grove
 	name = "Grove"
 	desc = "Creates a sanctuary of nature around the wizard as well as creating a healing plant."
 
@@ -18,20 +18,20 @@
 	var/seed_type = /datum/seed/merlin_tear
 	cast_sound = 'sound/magic/repulse.ogg'
 
-/spell/aoe_turf/conjure/grove/New()
+/datum/spell/aoe_turf/conjure/grove/New()
 	..()
 	if(seed_type)
 		seed = new seed_type()
 	else
 		seed = SSplants.create_random_seed(1)
 
-/spell/aoe_turf/conjure/grove/before_cast()
+/datum/spell/aoe_turf/conjure/grove/before_cast()
 	var/turf/T = get_turf(holder)
 	var/obj/effect/vine/P = new(T,seed)
 	P.spread_chance = spread
 
 
-/spell/aoe_turf/conjure/grove/sanctuary
+/datum/spell/aoe_turf/conjure/grove/sanctuary
 	name = "Sanctuary"
 	desc = "Creates a sanctuary of nature around the wizard as well as creating a healing plant."
 	feedback = "SY"
@@ -46,7 +46,7 @@
 	newVars = list("name" = "sanctuary", "desc" = "This grass makes you feel comfortable. Peaceful.","blessed" = 1)
 
 	hud_state = "wiz_grove"
-/spell/aoe_turf/conjure/grove/sanctuary/empower_spell()
+/datum/spell/aoe_turf/conjure/grove/sanctuary/empower_spell()
 	if(!..())
 		return 0
 

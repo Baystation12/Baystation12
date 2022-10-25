@@ -4,7 +4,7 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 */
 
 
-/spell/targeted //can mean aoe for mobs (limited/unlimited number) or one target mob
+/datum/spell/targeted //can mean aoe for mobs (limited/unlimited number) or one target mob
 	var/max_targets = 1 //leave 0 for unlimited targets in range, more for limited number of casts (can all target one guy, depends on target_ignore_prev) in range
 	var/target_ignore_prev = 1 //only important if max_targets > 1, affects if the spell can be cast multiple times at one person from one cast
 
@@ -38,7 +38,7 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 	var/list/compatible_mobs = list()
 
 
-/spell/targeted/choose_targets(mob/user = usr)
+/datum/spell/targeted/choose_targets(mob/user = usr)
 	var/list/targets = list()
 
 	if(max_targets == 0) //unlimited
@@ -131,7 +131,7 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 
 	return targets
 
-/spell/targeted/cast(list/targets, mob/user)
+/datum/spell/targeted/cast(list/targets, mob/user)
 	for(var/mob/living/target in targets)
 		if(range >= 0)
 			if(!(target in view_or_range(range, holder, selection_type))) //filter at time of casting
@@ -139,7 +139,7 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 				continue
 		apply_spell_damage(target)
 
-/spell/targeted/proc/apply_spell_damage(mob/living/target)
+/datum/spell/targeted/proc/apply_spell_damage(mob/living/target)
 	target.adjustBruteLoss(amt_dam_brute)
 	target.adjustFireLoss(amt_dam_fire)
 	target.adjustToxLoss(amt_dam_tox)

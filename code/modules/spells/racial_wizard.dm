@@ -11,11 +11,12 @@
 	force = 15
 	var/list/potentials = list(
 		SPECIES_HUMAN = /obj/item/storage/bag/cash/infinite,
-		SPECIES_VOX = /spell/targeted/shapeshift/true_form,
-		SPECIES_UNATHI = /spell/moghes_blessing,
-		SPECIES_DIONA = /spell/aoe_turf/conjure/grove/gestalt,
+		SPECIES_VOX = /datum/spell/targeted/shapeshift/true_form,
+		SPECIES_UNATHI = /datum/spell/moghes_blessing,
+		SPECIES_DIONA = /datum/spell/aoe_turf/conjure/grove/gestalt,
 		SPECIES_SKRELL = /obj/item/contract/apprentice/skrell,
-		SPECIES_IPC = /spell/camera_connection)
+		SPECIES_IPC = /datum/spell/camera_connection
+	)
 
 /obj/item/magic_rock/attack_self(mob/user)
 	if(!istype(user,/mob/living/carbon/human))
@@ -26,12 +27,12 @@
 	if(!reward)
 		to_chat(user, "\The [src] does not know what to make of you.")
 		return
-	for(var/spell/S in user.mind.learned_spells)
+	for(var/datum/spell/S in user.mind.learned_spells)
 		if(istype(S,reward))
 			to_chat(user, "\The [src] can do no more for you.")
 			return
 	var/a = new reward()
-	if(ispath(reward,/spell))
+	if(ispath(reward,/datum/spell))
 		H.add_spell(a)
 	else if(ispath(reward,/obj))
 		H.put_in_hands(a)
@@ -49,10 +50,10 @@
 			var/obj/item/I = new /obj/item/spacecash/bundle/c1000()
 			src.handle_item_insertion(I,1)
 
-/spell/messa_shroud/choose_targets()
+/datum/spell/messa_shroud/choose_targets()
 	return list(get_turf(holder))
 
-/spell/messa_shroud/cast(list/targets, mob/user)
+/datum/spell/messa_shroud/cast(list/targets, mob/user)
 	var/turf/T = targets[1]
 
 	if(!istype(T))
@@ -65,7 +66,7 @@
 		qdel(O)
 
 //VOX
-/spell/targeted/shapeshift/true_form
+/datum/spell/targeted/shapeshift/true_form
 	name = "True Form"
 	desc = "Pay respect to your heritage. Become what you once were."
 
@@ -91,7 +92,7 @@
 
 
 //UNATHI
-/spell/moghes_blessing
+/datum/spell/moghes_blessing
 	name = "Moghes Blessing"
 	desc = "Imbue your weapon with memories of Moghes."
 
@@ -105,7 +106,7 @@
 
 	hud_state = "wiz_unathi"
 
-/spell/moghes_blessing/choose_targets(mob/user = usr)
+/datum/spell/moghes_blessing/choose_targets(mob/user = usr)
 	var/list/hands = list()
 	for (var/obj/item/item as anything in user.GetAllHeld())
 		//make sure it's not already blessed
@@ -113,7 +114,7 @@
 			hands += item
 	return hands
 
-/spell/moghes_blessing/cast(list/targets, mob/user)
+/datum/spell/moghes_blessing/cast(list/targets, mob/user)
 	for(var/obj/item/I in targets)
 		set_extension(I, /datum/extension/moghes_blessing)
 
@@ -134,7 +135,7 @@
 	I.color = "#663300"
 
 //DIONA
-/spell/aoe_turf/conjure/grove/gestalt
+/datum/spell/aoe_turf/conjure/grove/gestalt
 	name = "Convert Gestalt"
 	desc = "Converts the surrounding area into a diona gestalt."
 
@@ -158,7 +159,7 @@
 	name = "skrellian apprenticeship contract"
 	var/obj/item/spellbook/linked
 	color = "#3366ff"
-	contract_spells = list(/spell/contract/return_master) //somewhat of a necessity due to how many spells they would have after a while.
+	contract_spells = list(/datum/spell/contract/return_master) //somewhat of a necessity due to how many spells they would have after a while.
 
 /obj/item/contract/apprentice/skrell/New(newloc,spellbook, owner)
 	..()
@@ -189,7 +190,7 @@
 		new /obj/item/contract/apprentice/skrell(get_turf(src),linked,contract_master)
 
 //IPC
-/spell/camera_connection
+/datum/spell/camera_connection
 	name = "Camera Connection"
 	desc = "This spell allows the wizard to connect to the local camera network and see what it sees."
 
@@ -207,30 +208,30 @@
 	var/mob/observer/eye/vision
 	var/eye_type = /mob/observer/eye/wizard_eye
 
-/spell/camera_connection/New()
+/datum/spell/camera_connection/New()
 	..()
 	vision = new eye_type(src)
 
-/spell/camera_connection/Destroy()
+/datum/spell/camera_connection/Destroy()
 	qdel(vision)
 	vision = null
 	. = ..()
 
-/spell/camera_connection/choose_targets()
+/datum/spell/camera_connection/choose_targets()
 	var/mob/living/L = holder
 	if(!istype(L) || L.eyeobj) //no using if we already have an eye on.
 		return null
 	return list(holder)
 
-/spell/camera_connection/cast(list/targets, mob/user)
+/datum/spell/camera_connection/cast(list/targets, mob/user)
 	var/mob/living/L = targets[1]
 
 	vision.possess(L)
-	GLOB.destroyed_event.register(L, src, /spell/camera_connection/proc/release)
-	GLOB.logged_out_event.register(L, src, /spell/camera_connection/proc/release)
+	GLOB.destroyed_event.register(L, src, /datum/spell/camera_connection/proc/release)
+	GLOB.logged_out_event.register(L, src, /datum/spell/camera_connection/proc/release)
 	L.verbs += /mob/living/proc/release_eye
 
-/spell/camera_connection/proc/release(mob/living/L)
+/datum/spell/camera_connection/proc/release(mob/living/L)
 	vision.release(L)
 	L.verbs -= /mob/living/proc/release_eye
 	GLOB.destroyed_event.unregister(L, src)

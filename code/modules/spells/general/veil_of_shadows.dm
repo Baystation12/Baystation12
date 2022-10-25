@@ -1,4 +1,4 @@
-/spell/veil_of_shadows
+/datum/spell/veil_of_shadows
 	name = "Veil of Shadows"
 	desc = "Become intangable, invisible. Like a ghost."
 	charge_max = 400
@@ -12,12 +12,12 @@
 
 	hud_state = "wiz_statue"
 
-/spell/veil_of_shadows/choose_targets()
+/datum/spell/veil_of_shadows/choose_targets()
 	if(!timer_id && istype(holder,/mob/living/carbon/human))
 		return list(holder)
 	. = null
 
-/spell/veil_of_shadows/cast(list/targets, mob/user)
+/datum/spell/veil_of_shadows/cast(list/targets, mob/user)
 	var/mob/living/carbon/human/H = user
 	H.AddMovementHandler(/datum/movement_handler/mob/incorporeal)
 	if(H.add_cloaking_source(src))
@@ -25,7 +25,7 @@
 	GLOB.moved_event.register(H,src,.proc/check_light)
 	timer_id = addtimer(CALLBACK(src,.proc/cancel_veil),duration, TIMER_STOPPABLE)
 
-/spell/veil_of_shadows/proc/cancel_veil()
+/datum/spell/veil_of_shadows/proc/cancel_veil()
 	var/mob/living/carbon/human/H = holder
 	H.RemoveMovementHandler(/datum/movement_handler/mob/incorporeal)
 	deltimer(timer_id)
@@ -37,13 +37,13 @@
 		GLOB.moved_event.unregister(H,src)
 		GLOB.moved_event.register(H,src,.proc/drop_cloak)
 
-/spell/veil_of_shadows/proc/drop_cloak()
+/datum/spell/veil_of_shadows/proc/drop_cloak()
 	var/mob/living/carbon/human/H = holder
 	if(H.remove_cloaking_source(src))
 		H.visible_message(SPAN_NOTICE("\The [H] appears from nowhere!"))
 	GLOB.moved_event.unregister(H,src)
 
-/spell/veil_of_shadows/proc/check_light()
+/datum/spell/veil_of_shadows/proc/check_light()
 	if(light_steps)
 		light_steps--
 		return
@@ -51,7 +51,7 @@
 	for(var/obj/machinery/light/light in view(1,holder))
 		light.flicker(20)
 
-/spell/veil_of_shadows/Destroy()
+/datum/spell/veil_of_shadows/Destroy()
 	deltimer(timer_id)
 	cancel_veil()
 	.= ..()

@@ -1,4 +1,4 @@
-/spell/targeted/shatter
+/datum/spell/targeted/shatter
 	name = "Shatter Mind"
 	desc = "this spell allows the caster to literally break an enemy's mind. Permanently."
 	feedback = "SM"
@@ -15,7 +15,7 @@
 
 	hud_state = "wiz_statue"
 
-/spell/targeted/shatter/cast(list/targets, mob/user)
+/datum/spell/targeted/shatter/cast(list/targets, mob/user)
 	var/mob/living/carbon/human/H = targets[1]
 	if(prob(50))
 		sound_to(user, get_sfx("swing_hit"))

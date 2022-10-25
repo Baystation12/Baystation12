@@ -1,4 +1,4 @@
-/spell/invisibility
+/datum/spell/invisibility
 	name = "invisibility"
 	desc = "A simple spell of invisibility, for when you really just can't afford a paper bag."
 	feedback = "IV"
@@ -9,11 +9,11 @@
 	var/on = 0
 	hud_state = "invisibility"
 
-/spell/invisibility/choose_targets()
+/datum/spell/invisibility/choose_targets()
 	if(istype(holder, /mob/living/carbon/human))
 		return holder
 
-/spell/invisibility/cast(mob/living/carbon/human/H, mob/user)
+/datum/spell/invisibility/cast(mob/living/carbon/human/H, mob/user)
 	on = !on
 	if(on)
 		if(H.add_cloaking_source(src))
