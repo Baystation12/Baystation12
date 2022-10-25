@@ -10,9 +10,9 @@
 	var/active = FALSE
 	var/range = 2 // This is a radius, thus a range of 7 covers the entire visible screen
 	var/obj/item/cell/bcell = /obj/item/cell/high
-	var/suit_sensor_jammer_method/jammer_method
-	var/list/suit_sensor_jammer_methods_by_type
-	var/list/suit_sensor_jammer_methods
+	var/datum/suit_sensor_jammer_method/jammer_method
+	var/list/datum/suit_sensor_jammer_methods_by_type
+	var/list/datum/suit_sensor_jammer_methods
 
 /obj/item/device/suit_sensor_jammer/New()
 	..()
@@ -20,7 +20,7 @@
 		bcell = new bcell(src)
 	suit_sensor_jammer_methods = list()
 	suit_sensor_jammer_methods_by_type = list()
-	for(var/jammer_method_type in subtypesof(/suit_sensor_jammer_method))
+	for(var/jammer_method_type in subtypesof(/datum/suit_sensor_jammer_method))
 		var/new_method = new jammer_method_type(src, /obj/item/device/suit_sensor_jammer/proc/may_process_crew_data)
 		dd_insertObjectList(suit_sensor_jammer_methods, new_method)
 		suit_sensor_jammer_methods_by_type[jammer_method_type] = new_method
@@ -96,7 +96,7 @@
 		disable()
 
 	if(prob(90/severity))
-		set_method(suit_sensor_jammer_methods_by_type[/suit_sensor_jammer_method/random])
+		set_method(suit_sensor_jammer_methods_by_type[/datum/suit_sensor_jammer_method/random])
 	else
 		set_method(pick(suit_sensor_jammer_methods))
 
@@ -121,7 +121,7 @@
 
 /obj/item/device/suit_sensor_jammer/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/list/methods = new
-	for(var/suit_sensor_jammer_method/ssjm in suit_sensor_jammer_methods)
+	for(var/datum/suit_sensor_jammer_method/ssjm in suit_sensor_jammer_methods)
 		methods[++methods.len] = list("name" = ssjm.name, "cost" = ssjm.energy_cost, "ref" = "\ref[ssjm]")
 
 	var/list/data = list(
@@ -197,7 +197,7 @@
 	range = clamp(new_range, 0, JAMMER_MAX_RANGE) // 0 range still covers the current turf
 	return range != new_range
 
-/obj/item/device/suit_sensor_jammer/proc/set_method(suit_sensor_jammer_method/sjm)
+/obj/item/device/suit_sensor_jammer/proc/set_method(datum/suit_sensor_jammer_method/sjm)
 	if(sjm == jammer_method)
 		return
 	if(active)

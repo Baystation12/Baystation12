@@ -124,7 +124,7 @@
 /obj/item/device/uplink_service/jamming
 	service_duration = 10 MINUTES
 	service_label = "Suit Sensor Shutdown"
-	var/suit_sensor_jammer_method/ssjm = /suit_sensor_jammer_method/cap_off
+	var/datum/suit_sensor_jammer_method/ssjm = /datum/suit_sensor_jammer_method/cap_off
 
 /obj/item/device/uplink_service/jamming/New()
 	..()
@@ -144,7 +144,7 @@
 
 /obj/item/device/uplink_service/jamming/garble
 	service_label = "Suit Sensor Garble"
-	ssjm = /suit_sensor_jammer_method/random/moderate
+	ssjm = /datum/suit_sensor_jammer_method/random/moderate
 
 /**********************
 * Fake Command Report *
