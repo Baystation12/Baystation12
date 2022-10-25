@@ -1,5 +1,3 @@
-#define WEBHOOK_SUBMAP_LOADED_VOX "webhook_submap_vox"
-
 #include "voxship_areas.dm"
 #include "voxship_jobs.dm"
 #include "voxship_radio.dm"
@@ -113,21 +111,6 @@
 	name = "[pidgin.get_random_name()]-[pidgin.get_random_name()]"
 	..()
 
-/singleton/webhook/submap_loaded/vox
-	id = WEBHOOK_SUBMAP_LOADED_VOX
-
-/singleton/submap_archetype/derelict/voxship
-	descriptor = "Shoal Scavenger Vessel"
-	map = "Vox Scavenger Ship"
-	crew_jobs = list(
-		/datum/job/submap/voxship_vox,
-		/datum/job/submap/voxship_vox/doc,
-		/datum/job/submap/voxship_vox/engineer,
-		/datum/job/submap/voxship_vox/quill
-	)
-	whitelisted_species = list(SPECIES_VOX)
-	blacklisted_species = null
-	call_webhook = WEBHOOK_SUBMAP_LOADED_VOX
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~site 2 code end~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -178,4 +161,20 @@
 	return list(/obj/item/stack/material/uranium/fifty = 4)
 
 
-#undef WEBHOOK_SUBMAP_LOADED_VOX
+/singleton/webhook/discord/submap/vox
+	config_key = "submap_vox"
+	submap_name = "Shoal Scavenger Vessel"
+
+
+/singleton/submap_archetype/derelict/voxship
+	descriptor = "Shoal Scavenger Vessel"
+	map = "Vox Scavenger Ship"
+	crew_jobs = list(
+		/datum/job/submap/voxship_vox,
+		/datum/job/submap/voxship_vox/doc,
+		/datum/job/submap/voxship_vox/engineer,
+		/datum/job/submap/voxship_vox/quill
+	)
+	whitelisted_species = list(SPECIES_VOX)
+	blacklisted_species = null
+	call_webhook = /singleton/webhook/discord/submap/vox

@@ -108,9 +108,6 @@ This system is confusing and is still a WIP. It's primary goal is speeding up th
 reducing processing costs. So please bear with me while I iron out the kinks. It will be worth it, I promise.
 If I can eventually free var/lying stuff from the life() process altogether, stuns/death/status stuff
 will become less affected by lag-spikes and will be instantaneous! :3
-
-If you have any questions/constructive-comments/bugs-to-report/or have a massivly devestated butt...
-Please contact me on #coderbus IRC. ~Carn x
 */
 
 //Human Overlays Indexes/////////

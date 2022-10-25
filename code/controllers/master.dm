@@ -63,6 +63,9 @@ var/global/datum/controller/master/Master = new
 	//used by CHECK_TICK as well so that the procs subsystems call can obey that SS's tick limits
 	var/static/current_ticklimit = tick_limit_default
 
+	/// Truthy after we reach the lobby for the first time.
+	var/static/reached_lobby
+
 
 /datum/controller/master/New()
 	Uptime() //Uptime as close to boot as possible to set its statics
@@ -218,8 +221,10 @@ var/global/datum/controller/master/Master = new
 	var/old_runlevel = current_runlevel
 	if(isnull(old_runlevel))
 		old_runlevel = "NULL"
-
 	current_runlevel = log(2, new_runlevel) + 1
+	if (new_runlevel == RUNLEVEL_LOBBY && !reached_lobby)
+		reached_lobby = TRUE
+		callHook("lobby")
 	report_progress("MC: Runlevel changed from [old_runlevel] to [current_runlevel]")
 	if(current_runlevel < 1)
 		CRASH("Attempted to set invalid runlevel: [new_runlevel]")

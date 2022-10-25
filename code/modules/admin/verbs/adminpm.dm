@@ -131,43 +131,24 @@
 		sound_to(C, 'sound/ui/pm-notify.ogg')
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
-	adminmsg2adminirc(src, C, html_decode(msg))
 
 	ticket.msgs += new /datum/ticket_msg(src.ckey, C.ckey, msg)
 	update_ticket_panels()
 
-	//we don't use message_admins here because the sender/receiver might get it too
+	var/active_staff = length(GLOB.admins)
 	for(var/client/X as anything in GLOB.admins)
 		//check client/X is an admin and isn't the sender or recipient
-		if(X == C || X == src)
+		if (X == src)
 			continue
+		if(X == C)
+			--active_staff
+			continue
+		if (X.is_afk())
+			--active_staff
 		if(X.key != key && X.key != C.key && (X.holder.rights & R_ADMIN|R_MOD))
 			to_chat(X, "[SPAN_CLASS("pm", "[SPAN_CLASS("other", create_text_tag("pm_other", "PM:", X) + " [SPAN_CLASS("name", key_name(src, X, 0, ticket))] to [SPAN_CLASS("name", key_name(C, X, 0, ticket))] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [SPAN_CLASS("message linkify", msg)]")]")]")
 
-/client/proc/cmd_admin_irc_pm(sender)
-	if(prefs.muted & MUTE_ADMINHELP)
-		to_chat(src, SPAN_WARNING("Error: Private-Message: You are unable to use PM-s (muted)."))
-		return
-
-	var/msg = input(src,"Message:", "Reply private message to [sender] on IRC / 400 character limit") as text|null
-
-	if(!msg)
-		return
-
-	// Handled on Bot32's end, unsure about other bots
-//	if(length(msg) > 400) // TODO: if message length is over 400, divide it up into separate messages, the message length restriction is based on IRC limitations.  Probably easier to do this on the bots ends.
-//		to_chat(src, SPAN_WARNING("Your message was not sent because it was more then 400 characters find your message below for ease of copy/pasting"))
-//		to_chat(src, SPAN_NOTICE("[msg]"))
-//		return
-
-	adminmsg2adminirc(src, sender, html_decode(msg))
-	msg = sanitize(msg)
-	log_admin("PM: [key_name(src)]->IRC-[sender]: [msg]")
-	admin_pm_repository.store_pm(src, "IRC-[sender]", msg)
-
-	to_chat(src, "[SPAN_CLASS("pm", "[SPAN_CLASS("out", create_text_tag("pm_out_alt", "PM", src) + " to [SPAN_CLASS("name", sender)]: [SPAN_CLASS("message linkify", msg)]")]")]")
-	for(var/client/X as anything in GLOB.admins)
-		if(X == src)
-			continue
-		if(X.holder.rights & R_ADMIN|R_MOD)
-			to_chat(X, "[SPAN_CLASS("pm", "[SPAN_CLASS("other", create_text_tag("pm_other", "PM:", X) + " [SPAN_CLASS("name", key_name(src, X, 0))] to [SPAN_CLASS("name", sender)]: [SPAN_CLASS("message linkify", msg)]")]")]")
+	var/staff_ckey
+	if (sender_lite.ckey != ticket.owner.ckey)
+		staff_ckey = sender_lite.ckey
+	callHook("ticket", list(ticket.id, active_staff, ticket.owner.ckey, staff_ckey, msg))

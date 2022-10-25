@@ -200,7 +200,6 @@ var/global/list/admin_verbs_debug = list(
 	/client/proc/cmd_analyse_health_panel,
 	/client/proc/visualpower,
 	/client/proc/visualpower_remove,
-	/client/proc/ping_webhook,
 	/client/proc/reload_webhooks,
 	/client/proc/toggle_planet_repopulating,
 	/client/proc/spawn_exoplanet

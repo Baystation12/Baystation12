@@ -110,27 +110,19 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 	ticket.msgs += new /datum/ticket_msg(src.ckey, null, original_msg)
 	update_ticket_panels()
 
+	to_chat(src, SPAN_CLASS("staff_pm", "PM to-<b>Staff</b> (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]"))
 
 	//Options bar:  mob, details ( admin = 2, dev = 3, character name (0 = just ckey, 1 = ckey and character name), link? (0 no don't make it a link, 1 do so),
 	//		highlight special roles (0 = everyone has same looking name, 1 = antags / special roles get a golden name)
-
 	msg = SPAN_NOTICE("<b>[SPAN_COLOR("red", "HELP: ")][get_options_bar(mob, 2, 1, 1, 1, ticket)] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]")
-
-	var/admin_number_afk = 0
-
-	for(var/client/X as anything in GLOB.admins)
-		if((R_ADMIN|R_MOD) & X.holder.rights)
-			if(X.is_afk())
-				admin_number_afk++
-			if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == GLOB.PREF_HEAR)
-				sound_to(X, 'sound/ui/pm-notify.ogg')
-			to_chat(X, msg)
-	//show it to the person adminhelping too
-	to_chat(src, SPAN_CLASS("staff_pm", "PM to-<b>Staff</b> (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]"))
-	var/admin_number_present = GLOB.admins.len - admin_number_afk
-	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] non-AFK admins.")
-	if(admin_number_present <= 0)
-		adminmsg2adminirc(src, null, "[html_decode(original_msg)] - !![admin_number_afk ? "All admins AFK ([admin_number_afk])" : "No admins online"]!!")
-	else
-		adminmsg2adminirc(src, null, "[html_decode(original_msg)]")
-	return
+	var/active_staff = length(GLOB.admins)
+	for(var/client/staff as anything in GLOB.admins)
+		if (!check_rights(R_MOD, FALSE, staff))
+			continue
+		if (staff.is_afk())
+			--active_staff
+		if (staff.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == GLOB.PREF_HEAR)
+			sound_to(staff, 'sound/misc/staff_message.ogg')
+		to_chat(staff, msg)
+	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [active_staff] non-AFK admins.")
+	callHook("ticket", list(ticket.id, active_staff, ticket.owner.ckey, null, original_msg))

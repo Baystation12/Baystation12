@@ -103,8 +103,5 @@
 			msg.Insert(1, line)
 		else
 			msg += line
-
-	if(config.admin_irc)
-		to_chat(src, SPAN_INFO("Adminhelps are also sent to IRC. If no admins are available in game try anyway and an admin on IRC may see it and respond."))
 	to_chat(src, "<b>Current Staff ([active_staff]/[total_staff]):</b>")
 	to_chat(src, jointext(msg,"\n"))

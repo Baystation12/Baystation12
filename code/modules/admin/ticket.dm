@@ -56,7 +56,6 @@ var/global/list/ticket_panels = list()
 		src.closed_by = closed_by
 		to_chat(client_by_ckey(src.owner.ckey), SPAN_NOTICE("<b>Your ticket has been closed by [closed_by.key].</b>"))
 		message_staff(SPAN_NOTICE("<b>[src.owner.key_name(0)]</b>'s ticket has been closed by <b>[closed_by.key]</b>."))
-		send2adminirc("[src.owner.key_name(0)]'s ticket has been closed by [closed_by.key].")
 
 	update_ticket_panels()
 
@@ -79,7 +78,6 @@ var/global/list/ticket_panels = list()
 	src.status = TICKET_ASSIGNED
 
 	message_staff(SPAN_NOTICE("<b>[assigned_admin.key]</b> has assigned themself to <b>[src.owner.key_name(0)]'s</b> ticket."))
-	send2adminirc("[assigned_admin.key] has assigned themself to [src.owner.key_name(0)]'s ticket.")
 	to_chat(client_by_ckey(src.owner.ckey), SPAN_NOTICE("<b>[assigned_admin.key] has added themself to your ticket and should respond shortly. Thanks for your patience!</b>"))
 
 	update_ticket_panels()

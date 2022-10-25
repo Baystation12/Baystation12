@@ -180,9 +180,6 @@ SUBSYSTEM_DEF(ticker)
 		for (var/mob/new_player/player in GLOB.player_list)
 			player.new_player_panel()
 
-	if(!GLOB.admins.len)
-		send2adminirc("Round has started with no admins online.")
-
 /datum/controller/subsystem/ticker/proc/playing_tick()
 	mode.process()
 	var/mode_finished = mode_finished()

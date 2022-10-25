@@ -307,16 +307,6 @@
 
 	var/static/player_limit = FALSE
 
-	var/static/use_irc_bot = FALSE
-
-	var/static/irc_bot_host = ""
-
-	var/static/main_irc = ""
-
-	var/static/admin_irc = ""
-
-	var/static/announce_evac_to_irc = FALSE
-
 	var/static/expected_round_length = 3 HOURS
 
 	/// Whether the first delay per level has a custom start time
@@ -665,8 +655,6 @@
 				allow_random_events = TRUE
 			if ("kick_inactive")
 				kick_inactive = text2num(value)
-			if ("use_irc_bot")
-				use_irc_bot = TRUE
 			if ("fps")
 				fps = round(text2num(value))
 				if (fps <= 0)
@@ -701,14 +689,6 @@
 				minimum_byond_build = text2num(value)
 			if ("login_export_addr")
 				login_export_addr = value
-			if ("irc_bot_host")
-				irc_bot_host = value
-			if ("main_irc")
-				main_irc = value
-			if ("admin_irc")
-				admin_irc = value
-			if ("announce_evac_to_irc")
-				announce_evac_to_irc = TRUE
 			if ("allow_cult_ghostwriter")
 				cult_ghostwriter = TRUE
 			if ("req_cult_ghostwriter")
