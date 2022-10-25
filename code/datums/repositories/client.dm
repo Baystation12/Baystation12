@@ -1,16 +1,16 @@
 var/global/const/NO_CLIENT_CKEY = "*no ckey*"
 
-var/global/repository/client/client_repository = new()
+var/global/datum/repository/client/client_repository = new()
 
-/repository/client
+/datum/repository/client
 	var/list/clients_
 
-/repository/client/New()
+/datum/repository/client/New()
 	..()
 	clients_ = list()
 
 // A lite client is unique per ckey and mob ref (save for ref conflicts.. oh well)
-/repository/client/proc/get_lite_client(mob/M)
+/datum/repository/client/proc/get_lite_client(mob/M)
 	if(isclient(M))
 		var/client/C = M // BYOND is supposed to ensure clients always have a mob
 		M = C.mob

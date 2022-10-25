@@ -1,19 +1,19 @@
-var/global/repository/uplink_purchases/uplink_purchase_repository = new()
+var/global/datum/repository/uplink_purchases/uplink_purchase_repository = new()
 
-/repository/uplink_purchases
+/datum/repository/uplink_purchases
 	var/list/purchases_by_mind
 
-/repository/uplink_purchases/New()
+/datum/repository/uplink_purchases/New()
 	purchases_by_mind = list()
 
-/repository/uplink_purchases/proc/add_entry(datum/mind/m, item, cost)
+/datum/repository/uplink_purchases/proc/add_entry(datum/mind/m, item, cost)
 	var/uplink_purchase_entry/upe = purchases_by_mind[m]
 	if(!upe)
 		upe = new()
 		purchases_by_mind[m] = upe
 	upe.add_entry(item, cost)
 
-/repository/uplink_purchases/proc/print_entries()
+/datum/repository/uplink_purchases/proc/print_entries()
 	if(purchases_by_mind.len)
 		to_world("<b>The following went shopping:</b>")
 

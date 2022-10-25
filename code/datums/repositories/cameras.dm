@@ -1,25 +1,25 @@
-var/global/repository/cameras/camera_repository = new()
+var/global/datum/repository/cameras/camera_repository = new()
 
 /proc/invalidateCameraCache()
 	camera_repository.networks.Cut()
 	camera_repository.invalidated = 1
 	camera_repository.camera_cache_id = ++camera_repository.camera_cache_id
 
-/repository/cameras
+/datum/repository/cameras
 	var/list/networks
 	var/invalidated = 1
 	var/camera_cache_id = 1
 
-/repository/cameras/New()
+/datum/repository/cameras/New()
 	networks = list()
 	..()
 
-/repository/cameras/proc/cameras_in_network(network)
+/datum/repository/cameras/proc/cameras_in_network(network)
 	setup_cache()
 	var/list/network_list = networks[network]
 	return network_list
 
-/repository/cameras/proc/setup_cache()
+/datum/repository/cameras/proc/setup_cache()
 	if(!invalidated)
 		return
 	invalidated = 0

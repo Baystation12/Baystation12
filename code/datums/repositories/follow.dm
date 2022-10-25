@@ -1,6 +1,6 @@
-var/global/repository/follow/follow_repository = new()
+var/global/datum/repository/follow/follow_repository = new()
 
-/repository/follow
+/datum/repository/follow
 	var/datum/cache_entry/valid_until/cache
 
 	var/list/followed_objects
@@ -12,7 +12,7 @@ var/global/repository/follow/follow_repository = new()
 		/mob/living/carbon/human/dummy/mannequin
 	)
 
-/repository/follow/New()
+/datum/repository/follow/New()
 	..()
 	followed_objects = list()
 	followed_objects_assoc = list()
@@ -22,7 +22,7 @@ var/global/repository/follow/follow_repository = new()
 		var/datum/follow_holder/fh = fht
 		followed_subtypes[initial(fh.followed_type)] = fht
 
-/repository/follow/proc/add_subject(atom/movable/AM)
+/datum/repository/follow/proc/add_subject(atom/movable/AM)
 	cache = null
 
 	var/follow_holder_type = get_follow_type(AM)
@@ -31,9 +31,9 @@ var/global/repository/follow/follow_repository = new()
 	followed_objects_assoc[AM] = follow_holder
 	followed_objects.Add(follow_holder)
 
-	GLOB.destroyed_event.register(AM, src, /repository/follow/proc/remove_subject)
+	GLOB.destroyed_event.register(AM, src, /datum/repository/follow/proc/remove_subject)
 
-/repository/follow/proc/remove_subject(atom/movable/AM)
+/datum/repository/follow/proc/remove_subject(atom/movable/AM)
 	cache = null
 
 	var/follow_holder = followed_objects_assoc[AM]
@@ -41,16 +41,16 @@ var/global/repository/follow/follow_repository = new()
 	followed_objects_assoc -= AM
 	followed_objects.Remove(follow_holder)
 
-	GLOB.destroyed_event.unregister(AM, src, /repository/follow/proc/remove_subject)
+	GLOB.destroyed_event.unregister(AM, src, /datum/repository/follow/proc/remove_subject)
 
 	qdel(follow_holder)
 
-/repository/follow/proc/get_follow_type(atom/movable/AM)
+/datum/repository/follow/proc/get_follow_type(atom/movable/AM)
 	for(var/follow_type in followed_subtypes)
 		if(istype(AM, follow_type))
 			return followed_subtypes[follow_type]
 
-/repository/follow/proc/get_follow_targets()
+/datum/repository/follow/proc/get_follow_targets()
 	if(cache && cache.is_valid())
 		return cache.data
 	// The previous cache entry should have no further references and will thus be GCd eventually without qdel

@@ -1,13 +1,13 @@
-var/global/repository/unique/uniqueness_repository = new()
+var/global/datum/repository/unique/uniqueness_repository = new()
 
-/repository/unique
+/datum/repository/unique
 	var/list/generators
 
-/repository/unique/New()
+/datum/repository/unique/New()
 	..()
 	generators = list()
 
-/repository/unique/proc/Generate()
+/datum/repository/unique/proc/Generate()
 	var/generator_type = args[1]
 	var/datum/uniqueness_generator/generator = generators[generator_type]
 	if(!generator)

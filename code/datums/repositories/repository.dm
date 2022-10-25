@@ -1,4 +1,4 @@
-/repository/New()
+/datum/repository/New()
 	return
 
 /datum/cache_entry

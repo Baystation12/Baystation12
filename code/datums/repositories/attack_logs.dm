@@ -1,13 +1,13 @@
-var/global/repository/attack_logs/attack_log_repository = new()
+var/global/datum/repository/attack_logs/attack_log_repository = new()
 
-/repository/attack_logs
+/datum/repository/attack_logs
 	var/list/attack_logs_
 
-/repository/attack_logs/New()
+/datum/repository/attack_logs/New()
 	..()
 	attack_logs_ = list()
 
-/repository/attack_logs/proc/store_attack_log(mob/attacker, mob/victim, action_message)
+/datum/repository/attack_logs/proc/store_attack_log(mob/attacker, mob/victim, action_message)
 	// Newest logs first
 	attack_logs_.Insert(1, new/datum/attack_log(attacker, victim, action_message))
 
