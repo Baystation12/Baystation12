@@ -56,6 +56,8 @@
 		'sound/effects/metalscrape2.ogg',
 		'sound/effects/metalscrape3.ogg'
 	)
+	anchored = FALSE
+	density = TRUE
 
 /obj/structure/decorative/md_slug/Move()
 	. = ..()
