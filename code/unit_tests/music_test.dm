@@ -39,7 +39,7 @@
 	var/list/failed = list()
 	for (var/datum/jukebox/jukebox)
 		for (var/entry in jukebox.tracks)
-			var/jukebox_track/track = entry
+			var/datum/jukebox_track/track = entry
 			if (!track.title || !isfile(track.source))
 				log_bad("Invalid Jukebox Track: [log_info_line(jukebox)]")
 				failed += jukebox

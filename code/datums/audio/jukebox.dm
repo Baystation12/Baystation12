@@ -42,7 +42,7 @@
 
 
 /datum/jukebox/proc/AddTrack(title = "Track [length(tracks) + 1]", source)
-	tracks += new /jukebox_track (title, source)
+	tracks += new /datum/jukebox_track (title, source)
 
 
 /datum/jukebox/proc/ClearTracks()
@@ -85,7 +85,7 @@
 /datum/jukebox/proc/Play()
 	if (playing)
 		return
-	var/jukebox_track/track = tracks[index]
+	var/datum/jukebox_track/track = tracks[index]
 	if (!track.source)
 		return
 	playing = TRUE
@@ -115,9 +115,9 @@
 /datum/jukebox/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui, force_open = TRUE, datum/topic_state/state = GLOB.default_state)//, datum/topic_state/state = GLOB.jukebox_state)
 	var/list/data_tracks = list()
 	for (var/i = 1 to length(tracks))
-		var/jukebox_track/track = tracks[i]
+		var/datum/jukebox_track/track = tracks[i]
 		data_tracks += list(list("track" = track.title, "index" = i))
-	var/jukebox_track/track = tracks[index]
+	var/datum/jukebox_track/track = tracks[index]
 	var/list/data = list(
 		"track" = track.title,
 		"playing" = playing,
@@ -143,12 +143,12 @@
 
 
 
-/jukebox_track
+/datum/jukebox_track
 	var/title
 	var/source
 
 
-/jukebox_track/New(_title, _source, _volume)
+/datum/jukebox_track/New(_title, _source, _volume)
 	title = _title
 	source = _source
 
