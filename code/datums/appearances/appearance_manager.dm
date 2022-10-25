@@ -15,9 +15,9 @@ var/global/singleton/appearance_manager/appearance_manager = new()
 	return appearance_handlers_[handler_type]
 
 /singleton/appearance_manager/proc/add_appearance(mob/viewer, datum/appearance_data/ad)
-	var/PriorityQueue/pq = appearances_[viewer]
+	var/datum/PriorityQueue/pq = appearances_[viewer]
 	if(!pq)
-		pq = new/PriorityQueue(/proc/cmp_appearance_data)
+		pq = new/datum/PriorityQueue(/proc/cmp_appearance_data)
 		appearances_[viewer] = pq
 		GLOB.logged_in_event.register(viewer, src, /singleton/appearance_manager/proc/apply_appearance_images)
 		GLOB.destroyed_event.register(viewer, src, /singleton/appearance_manager/proc/remove_appearances)
@@ -25,7 +25,7 @@ var/global/singleton/appearance_manager/appearance_manager = new()
 	reset_appearance_images(viewer)
 
 /singleton/appearance_manager/proc/remove_appearance(mob/viewer, datum/appearance_data/ad, refresh_images)
-	var/PriorityQueue/pq = appearances_[viewer]
+	var/datum/PriorityQueue/pq = appearances_[viewer]
 	pq.Remove(ad)
 	if(viewer.client)
 		viewer.client.images -= ad.images
@@ -35,7 +35,7 @@ var/global/singleton/appearance_manager/appearance_manager = new()
 		appearances_ -= viewer
 
 /singleton/appearance_manager/proc/remove_appearances(mob/viewer)
-	var/PriorityQueue/pq = appearances_[viewer]
+	var/datum/PriorityQueue/pq = appearances_[viewer]
 	for(var/entry in pq.L)
 		var/datum/appearance_data/ad = entry
 		ad.RemoveViewer(viewer, FALSE)
@@ -48,7 +48,7 @@ var/global/singleton/appearance_manager/appearance_manager = new()
 /singleton/appearance_manager/proc/clear_appearance_images(mob/viewer)
 	if(!viewer.client)
 		return
-	var/PriorityQueue/pq = appearances_[viewer]
+	var/datum/PriorityQueue/pq = appearances_[viewer]
 	if(!pq)
 		return
 	for(var/entry in pq.L)
@@ -58,7 +58,7 @@ var/global/singleton/appearance_manager/appearance_manager = new()
 /singleton/appearance_manager/proc/apply_appearance_images(mob/viewer)
 	if(!viewer.client)
 		return
-	var/PriorityQueue/pq = appearances_[viewer]
+	var/datum/PriorityQueue/pq = appearances_[viewer]
 	if(!pq)
 		return
 	for(var/entry in pq.L)
