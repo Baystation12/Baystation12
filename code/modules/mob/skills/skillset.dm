@@ -50,14 +50,7 @@
 
 /datum/skillset/proc/on_levels_change()
 	update_verbs()
-	update_special_effects()
 	refresh_uis()
-
-/datum/skillset/proc/update_special_effects()
-	if(!owner)
-		return
-	for(var/singleton/hierarchy/skill/skill in GLOB.skills)
-		skill.update_special_effects(owner, get_value(skill.type))
 
 /datum/skillset/proc/obtain_from_client(datum/job/job, client/given_client, override = 0)
 	if(!skills_transferable)
@@ -70,9 +63,9 @@
 	var/allocation = given_client.prefs.skills_allocated[job] || list()
 	skill_list = list()
 
-	for(var/singleton/hierarchy/skill/S in GLOB.skills)
-		var/min = job ? given_client.prefs.get_min_skill(job, S) : SKILL_MIN
-		skill_list[S.type] = min + (allocation[S] || 0)
+	for (var/singleton/skill/skill in GLOB.skills.skills)
+		var/min = job ? given_client.prefs.get_min_skill(job, skill) : SKILL_MIN
+		skill_list[skill.type] = min + (allocation[skill] || 0)
 	on_levels_change()
 
 /datum/skillset/proc/obtain_from_job(datum/job/job)
@@ -81,8 +74,8 @@
 
 	skill_list = list()
 
-	for(var/singleton/hierarchy/skill/S in GLOB.skills)
-		skill_list[S.type] = job.get_min_skill(S)
+	for (var/singleton/skill/skill in GLOB.skills.skills)
+		skill_list[skill.type] = job.get_min_skill(skill)
 	on_levels_change()
 
 //Skill-related mob helper procs

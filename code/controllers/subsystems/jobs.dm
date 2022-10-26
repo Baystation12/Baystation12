@@ -56,15 +56,6 @@ SUBSYSTEM_DEF(jobs)
 				job = get_by_path(jobtype)
 			if(job)
 				archetype_job_datums |= job
-
-	// Init skills.
-	if(!GLOB.skills.len)
-		GET_SINGLETON(/singleton/hierarchy/skill)
-	if(!GLOB.skills.len)
-		log_error(SPAN_WARNING("Error setting up job skill requirements, no skill datums found!"))
-
-	// Update title and path tracking, submap list, etc.
-	// Populate/set up map job lists.
 	job_lists_by_map_name = list("[GLOB.using_map.full_name]" = list("jobs" = primary_job_datums, "default_to_hidden" = FALSE))
 
 	for(var/atype in SSmapping.submap_archetypes)

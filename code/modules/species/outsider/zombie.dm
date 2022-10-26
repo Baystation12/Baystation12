@@ -393,8 +393,8 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 	if (skillset && skillset.skill_list)
 		skillset.skill_list = list()
-		for(var/singleton/hierarchy/skill/S in GLOB.skills) //Only want trained CQC and athletics
-			skillset.skill_list[S.type] = SKILL_NONE
+		for (var/path in GLOB.skills.skills_by_path)
+			skillset.skill_list[path] = SKILL_NONE
 		skillset.skill_list[SKILL_HAULING] = SKILL_ADEPT
 		skillset.skill_list[SKILL_COMBAT] = SKILL_ADEPT
 		skillset.on_levels_change()

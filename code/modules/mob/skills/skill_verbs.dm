@@ -70,8 +70,8 @@ Robots and antags can instruct.
 /datum/skill_verb/instruct/should_see_verb()
 	if(!..())
 		return
-	for(var/singleton/hierarchy/skill/S in GLOB.skills)
-		if(skillset.owner.skill_check(S.type, SKILL_EXPERT))
+	for(var/path in GLOB.skills.skills_by_path)
+		if(skillset.owner.skill_check(path, SKILL_EXPERT))
 			return 1
 
 /mob/proc/instruct(mob/living/carbon/human/target as mob in oview(2))
@@ -94,12 +94,12 @@ Robots and antags can instruct.
 		return
 
 	var/options = list()
-	for(var/singleton/hierarchy/skill/S in GLOB.skills)
-		if(!target.skill_check(S.type, SKILL_BASIC) && skill_check(S.type, SKILL_EXPERT))
-			options[S.name] = S
+	for (var/singleton/skill/skill in GLOB.skills.skills)
+		if(!target.skill_check(skill.type, SKILL_BASIC) && skill_check(skill.type, SKILL_EXPERT))
+			options[skill.name] = skill
 	if(!length(options))
 		to_chat(src, SPAN_NOTICE("There is nothing you can teach \the [target]."))
-	var/choice = input(src, "Select skill to instruct \the [target] in:", "Skill select") as null|anything in options
+	var/choice = input(src, "Select skill to instruct \the [target] in:", "Skill select") as null | anything in options
 	if(!(choice in options) || !(target in view(2)))
 		return
 	var/singleton/hierarchy/skill/skill = options[choice]

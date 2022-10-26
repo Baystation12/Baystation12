@@ -142,10 +142,10 @@ The generic antag version.
 			return 1
 		var/level = text2num(href_list["add_skill"])
 		var/list/choices = list()
-		for(var/singleton/hierarchy/skill/S in GLOB.skills)
-			if(can_select(S.type, level))
-				choices[S.name] = S.type
-		var/choice = input(usr, "Which skill would you like to add?", "Add Skill") as null|anything in choices
+		for(var/singleton/hierarchy/skill/skill in GLOB.skills.skills)
+			if(can_select(skill.type, level))
+				choices[skill.name] = skill.type
+		var/choice = input(usr, "Which skill would you like to add?", "Add Skill") as null | anything in choices
 		if(!can_choose() || !choices[choice])
 			return 1
 		if(!can_select(choices[choice], level))

@@ -17,8 +17,8 @@
 	var/id
 
 /obj/item/robot_module/syndicate/Initialize()
-	for(var/singleton/hierarchy/skill/skill in GLOB.skills)
-		skills[skill.type] = SKILL_EXPERT
+	for (var/path in GLOB.skills.skills_by_path)
+		skills[path] = SKILL_EXPERT
 	. = ..()
 
 /obj/item/robot_module/syndicate/build_equipment(mob/living/silicon/robot/R)

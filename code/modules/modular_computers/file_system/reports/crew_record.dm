@@ -115,7 +115,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 	if(H)
 		var/skills = list()
-		for(var/singleton/hierarchy/skill/S in GLOB.skills)
+		for(var/singleton/skill/skill in GLOB.skills.skills)
 			var/level = H.get_skill_value(S.type)
 			if(level > SKILL_NONE)
 				skills += "[S.name], [S.levels[level]]"
