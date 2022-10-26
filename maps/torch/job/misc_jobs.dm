@@ -35,7 +35,6 @@ Civilian
 		"Historian",
 		"Botanist",
 		"Investor" = /singleton/hierarchy/outfit/job/torch/passenger/passenger/investor,
-		"Psychologist" = /singleton/hierarchy/outfit/job/torch/passenger/passenger/psychologist,
 		"Naturalist",
 		"Ecologist",
 		"Entertainer",
