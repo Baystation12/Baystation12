@@ -105,4 +105,5 @@
 	for(var/obj/item/organ/external/E in organs)
 		E.status |= ORGAN_DISFIGURED
 	update_body(1)
+	playsound(src.loc, 'sound/effects/bonerattle.ogg', 50, 1)
 	return
