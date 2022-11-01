@@ -423,7 +423,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		C.received_irc_pm = world.time
 		C.irc_admin = input["sender"]
 
-		sound_to(C, 'sound/misc/staff_message.ogg')
+		sound_to(C, 'sound/ui/pm-notify.ogg')
 		to_chat(C, message)
 
 		for(var/client/A as anything in GLOB.admins)
