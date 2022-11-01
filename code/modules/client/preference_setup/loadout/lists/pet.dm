@@ -53,6 +53,9 @@
 	pet = /mob/living/simple_animal/passive/mouse/white
 	w_class = ITEM_SIZE_TINY
 
+/obj/item/holder/gear/mouse_rat
+	pet = /mob/living/simple_animal/passive/mouse/rat/chill
+	w_class = ITEM_SIZE_TINY
 
 /datum/gear/pet
 	display_name = "pet selection"
@@ -70,4 +73,5 @@
 	options["mouse, brown"] = /obj/item/holder/gear/mouse_brown
 	options["mouse, grey"] = /obj/item/holder/gear/mouse_gray
 	options["mouse, white"] = /obj/item/holder/gear/mouse_white
+	options["rat"]	= /obj/item/holder/gear/mouse_rat
 	gear_tweaks += new /datum/gear_tweak/path (options)

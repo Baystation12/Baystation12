@@ -112,6 +112,18 @@
 	name = "Tom"
 	desc = "Jerry the cat is not amused."
 
+/mob/living/simple_animal/passive/mouse/rat
+	name = "rat"
+	desc = "A large rodent, often seen in maintenance areas."
+	body_color = "rat"
+	icon_state = "mouse_rat"
+	maxHealth = 20
+	health = 20
+
+	ai_holder = /datum/ai_holder/simple_animal/melee/evasive
+
+/mob/living/simple_animal/passive/mouse/rat/chill
+	ai_holder = /datum/ai_holder/simple_animal/passive/mouse
 
 /datum/ai_holder/simple_animal/passive/mouse
 	speak_chance = 1
