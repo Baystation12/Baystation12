@@ -53,7 +53,7 @@
 
 	log_vote(text)
 	to_world(SPAN_COLOR("purple", "<b>[text]</b>\nType <b>vote</b> or click <a href='?src=\ref[SSvote];vote_panel=1'>here</a> to place your votes.\nYou have [config.vote_period/10] seconds to vote."))
-	sound_to(world, sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = GLOB.vote_sound_channel))
+	sound_to(world, sound('sound/ui/vote-notify.ogg', repeat = 0, wait = 0, volume = 50, channel = GLOB.vote_sound_channel))
 
 /datum/vote/proc/get_start_text()
 	return "[capitalize(name)] vote started by [initiator]."

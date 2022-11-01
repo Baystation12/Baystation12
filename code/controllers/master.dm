@@ -201,6 +201,8 @@ var/global/datum/controller/master/Master = new
 	initializing = FALSE
 
 	if (!current_runlevel)
+		for (var/client/client as anything in GLOB.clients)
+			sound_to(client, 'sound/ui/lobby-notify.ogg')
 		SetRunLevel(RUNLEVEL_LOBBY)
 
 	// Sort subsystems by display setting for easy access.
