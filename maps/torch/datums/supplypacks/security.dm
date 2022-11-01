@@ -123,7 +123,7 @@
 	access = access_emergency_armory
 	security_level = SUPPLY_SECURITY_HIGH
 
-/singleton/hierarchy/supply_pack/security/bullpup
+/singleton/hierarchy/supply_pack/security/light_bullpup
 	name = "Weapons - Light ballistic rifles"
 	contains = list(/obj/item/gun/projectile/automatic/bullpup_rifle/light = 2)
 	cost = 80
