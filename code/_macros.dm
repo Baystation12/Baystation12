@@ -33,6 +33,10 @@ var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define isatom(A) (isloc(A) && !isarea(A))
 
+#define isprojectile(A) istype(A, /obj/item/projectile)
+
+#define isbeam(A) istype(A, /obj/item/projectile/beam)
+
 #define isbrain(A) istype(A, /mob/living/carbon/brain)
 
 #define iscarbon(A) istype(A, /mob/living/carbon)
