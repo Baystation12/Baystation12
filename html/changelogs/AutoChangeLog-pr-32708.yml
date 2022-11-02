@@ -1,6 +1,0 @@
-author: SealCure
-delete-after: true
-changes:
-  - rscadd: Adds the skeletonise artefact effect. Now you can finally allow your inner
-      skeleton to hatch!
-  - tweak: Adds a rattling sound to the ChangeToSkeleton() proc.
