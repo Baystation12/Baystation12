@@ -176,7 +176,6 @@ SUBSYSTEM_DEF(ticker)
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup() // Drafts antags who don't override jobs.
 		to_world(SPAN_INFO("<B>Enjoy the game!</B>"))
-		sound_to(world, sound(GLOB.using_map.welcome_sound))
 
 		for (var/mob/new_player/player in GLOB.player_list)
 			player.new_player_panel()
@@ -575,3 +574,13 @@ Helpers
 		bypass_gamemode_vote = 1
 	Master.SetRunLevel(RUNLEVEL_SETUP)
 	return 1
+
+
+/hook/roundstart/proc/PlayWelcomeSound()
+	if (!GLOB.using_map.welcome_sound)
+		return TRUE
+	var/welcome_sound = GLOB.using_map.welcome_sound
+	if (islist(welcome_sound))
+		welcome_sound = pick(welcome_sound)
+	sound_to(world, welcome_sound)
+	return TRUE
