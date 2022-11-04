@@ -1,6 +1,8 @@
 /atom/movable
 	layer = OBJ_LAYER
 
+	appearance_flags = TILE_BOUND | LONG_GLIDE
+
 	glide_size = 6
 
 	var/waterproof = TRUE

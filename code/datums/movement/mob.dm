@@ -127,23 +127,39 @@
 // Movement delay
 /datum/movement_handler/mob/delay
 	var/next_move
+	var/delay = 1
 
 /datum/movement_handler/mob/delay/DoMove(var/direction, var/mover, var/is_external)
 	if(is_external)
 		return
-	next_move = world.time + max(1, mob.movement_delay())
+	delay = max(1, mob.movement_delay() + GetGrabSlowdown())
+	next_move = world.time + delay
+	UpdateGlideSize()
 
 /datum/movement_handler/mob/delay/MayMove(var/mover, var/is_external)
 	if(IS_NOT_SELF(mover) && is_external)
 		return MOVEMENT_PROCEED
 	return ((mover && mover != mob) ||  world.time >= next_move) ? MOVEMENT_PROCEED : MOVEMENT_STOP
 
-/datum/movement_handler/mob/delay/proc/SetDelay(var/delay)
+/datum/movement_handler/mob/delay/proc/SetDelay(var/new_delay)
+	delay = new_delay
 	next_move = max(next_move, world.time + delay)
+	UpdateGlideSize()
 
-/datum/movement_handler/mob/delay/proc/AddDelay(var/delay)
-	next_move += max(0, delay)
+/datum/movement_handler/mob/delay/proc/AddDelay(var/add_delay)
+	delay += add_delay
+	next_move += max(0, add_delay)
+	UpdateGlideSize()
 
+/datum/movement_handler/mob/delay/proc/UpdateGlideSize()
+	host.set_glide_size(DELAY2GLIDESIZE(delay))
+
+/datum/movement_handler/mob/delay/proc/GetGrabSlowdown()
+	. = 0
+	for (var/obj/item/grab/G in mob)
+		if(G.assailant == G.affecting)
+			return
+		. = max(., G.grab_slowdown())
 // Stop effect
 /datum/movement_handler/mob/stop_effect/DoMove()
 	if(MayMove() == MOVEMENT_STOP)
@@ -216,6 +232,7 @@
 
 // Finally.. the last of the mob movement junk
 /datum/movement_handler/mob/movement/DoMove(var/direction, var/mob/mover)
+	set waitfor = FALSE
 	. = MOVEMENT_HANDLED
 
 	if(mob.moving)
@@ -242,8 +259,7 @@
 		return
 
 	// Something with pulling things
-	var/extra_delay = HandleGrabs(direction, old_turf)
-	mob.ExtraMoveCooldown(extra_delay)
+	HandleGrabs(direction, old_turf)
 
 	for (var/obj/item/grab/G in mob)
 		if (G.assailant_reverse_facing())
@@ -293,7 +309,7 @@
 					if (get_dist(old_turf, M) <= 1)
 						if (isturf(M.loc) && isturf(mob.loc))
 							if (mob.loc != old_turf && M.loc != mob.loc)
-								step(M, get_dir(M.loc, old_turf))
+								step_glide(M, get_dir(M.loc, old_turf), host.glide_size)
 			else
 				for(var/mob/M in L)
 					M.other_mobs = 1

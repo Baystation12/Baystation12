@@ -82,7 +82,6 @@
 /// The cotangent of degrees
 #define Cot(degrees) (1 / tan(degrees))
 
-
 /// The 2-argument arctangent of x and y
 /proc/Atan2(x, y)
 	if (!x && !y)
@@ -135,6 +134,8 @@
 		return sum / ((x * y) - x)
 	return sum + x
 
+/proc/Ceiling(x)
+	return -round(-x)
 
 /// An aproximate, fairly granular random normal real number in 0..1
 #define Nrand Drand(4, 6, TRUE)
