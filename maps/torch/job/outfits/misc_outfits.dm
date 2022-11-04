@@ -6,11 +6,6 @@
 	pda_type = /obj/item/modular_computer/pda
 	id_types = list(/obj/item/card/id/torch/passenger)
 
-/singleton/hierarchy/outfit/job/torch/passenger/passenger/psychologist
-	name = OUTFIT_JOB_NAME("Passenger - Psychologist")
-	uniform = /obj/item/clothing/under/rank/psych/turtleneck
-	shoes = /obj/item/clothing/shoes/laceup
-
 /singleton/hierarchy/outfit/job/torch/passenger/passenger/journalist
 	name = OUTFIT_JOB_NAME("Journalist - Torch")
 	backpack_contents = list(/obj/item/device/camera/tvcamera = 1,

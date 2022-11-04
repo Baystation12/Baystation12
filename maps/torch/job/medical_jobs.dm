@@ -227,6 +227,7 @@
 	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/medical/counselor
 	alt_titles = list(
 		"Psychiatrist",
+		"Psychologist",
 		"Psionic Counselor",
 		"Mentalist"
 
