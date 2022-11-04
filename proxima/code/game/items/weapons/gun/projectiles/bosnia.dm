@@ -10,14 +10,13 @@
 		)
 	fire_sound = 'sound/weapons/pulse2.ogg'
 	origin_tech = list(TECH_COMBAT = 7, TECH_PHORON = 7, TECH_MATERIAL = 7)
-	charge_meter = 0
 	slot_flags = SLOT_BACK
 	force = 20
 	projectile_type = /obj/item/projectile/beam/smalllaser
 	max_shots = 350
-	burst = 10
+	charge_cost = 1
 	burst_delay = 3
-	fire_delay = 8
+	w_class = ITEM_SIZE_LARGE
 
 	init_firemodes = list(
 		list(mode_name="20-shoot bursts", mode_desc = "Short, controlled bursts", burst=20, fire_delay=null, move_delay=6, one_hand_penalty=6),
@@ -29,8 +28,8 @@
 /obj/item/gun/projectile/pistol/goodman
 	name = "military pistol"
 	desc = "The Hephaestus Industries P20 - a mass produced kinetic sidearm in widespread service with the SCGDF."
-	magazine_type = /obj/item/ammo_magazine/pistol/double
-	allowed_magazines = /obj/item/ammo_magazine/pistol/double
+	caliber = CALIBER_PISTOL
+	magazine_type = /obj/item/ammo_magazine/pistol
 	icon = 'proxima/icons/obj/guns/aurora_port/sol_pistol.dmi'
 	icon_state = "m8"
 	item_state = "m8"
@@ -40,6 +39,10 @@
 		)
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	fire_delay = 7
+
+/obj/item/gun/projectile/pistol/goodman/on_update_icon()
+	..()
+	icon_state = (ammo_magazine)? "adhomian_heavy_pistol" : "adhomian_heavy_pistol-e"
 
 /obj/item/gun/projectile/pistol/magnum_pistol/sol
 	name = "magnum pistol"
@@ -59,8 +62,12 @@
 	one_hand_penalty = 2
 	bulk = 3
 
+/obj/item/gun/projectile/pistol/magnum_pistol/sol/on_update_icon()
+	..()
+	icon_state = (ammo_magazine)? "adhomian_heavy_pistol" : "adhomian_heavy_pistol-e"
+
 /obj/item/gun/projectile/revolver/auto
-	name = "revolver"
+	name = "auto revolver"
 	icon = 'proxima/icons/obj/guns/aurora_port/autorevolver.dmi'
 	icon_state = "autorevolver"
 	item_state = "autorevolver"
@@ -74,6 +81,7 @@
 	accuracy = 1
 	bulk = 0
 	fire_delay = 3
+	has_safety = FALSE
 
 /obj/item/gun/projectile/automatic/bandit
 	name = "old submachine gun"
@@ -86,13 +94,12 @@
 		slot_l_hand_str = 'proxima/icons/mob/onmob/lefthand.dmi',
 		)
 
-	caliber = CALIBER_PISTOL_FAST
+	caliber = CALIBER_PISTOL_FLECHETTE
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3)
 	slot_flags = SLOT_BELT
-	ammo_type = /obj/item/ammo_casing/corpo
+	ammo_type = /obj/item/ammo_casing/flechette
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/corpo
-	allowed_magazines = /obj/item/ammo_magazine/corpo
+	magazine_type = /obj/item/ammo_magazine/proto_smg
 	screen_shake = 0.5 //SMG
 
 	init_firemodes = list(
@@ -106,7 +113,11 @@
 	w_class = ITEM_SIZE_NORMAL
 	one_hand_penalty = 2
 
-/obj/item/gun/projectile/heavysniper/mag
+/obj/item/gun/projectile/automatic/bandit/on_update_icon()
+	..()
+	icon_state = (ammo_magazine)? "coltauto" : "coltauto-e"
+
+/obj/item/gun/projectile/automatic/drag
 	name = "dragunov sniper rifle"
 	desc = "Dragunov is a semi-auto heavy sniper rifle was originally designed to be used against heavy infantry."
 	icon = 'proxima/icons/obj/guns/aurora_port/dragunov.dmi'
@@ -125,21 +136,24 @@
 	screen_shake = 1
 	handle_casings = EJECT_CASINGS
 	load_method = MAGAZINE
-	max_shells = 1
 	ammo_type = /obj/item/ammo_casing/rifle/military
 	one_hand_penalty = 6
 	accuracy = -2
-	recoil_buildup = 75
+	recoil_buildup = 3
 	bulk = 8
-	scoped_accuracy = 6
+	scoped_accuracy = -4
 	scope_zoom = 3
 	wielded_item_state = "dragunov-wielded"
 	load_sound = 'sound/weapons/guns/interaction/batrifle_magin.ogg'
 	fire_delay = 7
 
+/obj/item/gun/projectile/automatic/drag/on_update_icon()
+	..()
+	icon_state = (ammo_magazine)? "dragunov" : "dragunov-e"
+
 /obj/item/gun/projectile/sniper/semistrip/stealth
 	name = "stealth sniper rifle"
-	desc = "it's special design weapon that was designed for stealt assassination."
+	desc = "it's special design weapon that was designed for stealth assassination."
 	icon = 'proxima/icons/obj/guns/aurora_port/heavysniper.dmi'
 	icon_state = "heavysniper"
 	item_state = "heavysniper"

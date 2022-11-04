@@ -30,7 +30,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	one_hand_penalty = 2
 
-/obj/item/gun/projectile/automatic/nt41/on_update_icon()
+/obj/item/gun/projectile/automatic/corpo/on_update_icon()
 	..()
 	icon_state = (ammo_magazine)? "nt41" : "nt41-e"
 
@@ -95,6 +95,6 @@
 	w_class = ITEM_SIZE_NORMAL
 	one_hand_penalty = 3
 
-/obj/item/gun/projectile/automatic/bp15/on_update_icon()
+/obj/item/gun/projectile/automatic/pdw/on_update_icon()
 	icon_state = (ammo_magazine)? "pdw" : "pdw-empty"
 	..()
