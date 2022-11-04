@@ -88,6 +88,12 @@
 			if (GLOB.PREF_LONG)
 				display_controls = "([ghost_follow_link(speaker, src, short_links = FALSE)])"
 
+	var/accent_tag = ""
+	if (speaker.accent)
+		var/decl/accent/accent = decls_repository.get_decl(speaker.accent)
+		if (accent)
+			accent_tag = accent.GetTag(client)
+
 	var/display_verb = verb
 	if (!language)
 		display_message = {"[display_verb], <span class="message"><span class="body">"[display_message]"</span></span>"}
@@ -108,7 +114,7 @@
 				display_verb = "[verb] ([language.shorthand])"
 		display_message = language.format_message(display_message, display_verb)
 
-	on_hear_say({"<span class="game say">[display_controls]<span class="name">[display_name]</span>[alt_name] [display_message]</span>"})
+	on_hear_say({"[accent_tag] <span class="game say">[display_controls]<span class="name">[display_name]</span>[alt_name] [display_message]</span>"})
 
 
 /mob/proc/on_hear_say(var/message)
