@@ -303,7 +303,7 @@
 
 
 /obj/item/stack/cable_coil/cyborg/verb/SetCableColorVerb()
-	set name = "Change Colour"
+	set name = "Change Cable Colour"
 	set category = "Object"
 	var/response = input("Pick new colour:", "Cable Colour", null, null) as null | anything in GLOB.possible_cable_colours
 	if (isnull(response))
