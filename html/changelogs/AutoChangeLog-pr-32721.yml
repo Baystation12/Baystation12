@@ -1,0 +1,6 @@
+author: Rootoo807
+delete-after: true
+changes:
+  - rscadd: Adds the bluespace dragon mob from the 10/22 event
+  - tweak: Resprites puppies and corgi mob-holders to match new corgi sprites
+  - bugfix: Makes the rejuv proc be more functional on simple-mobs
