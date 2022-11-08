@@ -651,8 +651,10 @@ default behaviour is:
 	if(H != src.loc) return
 
 	var/mob/M = H.loc //Get our mob holder (if any).
-
-	if(istype(M))
+	if(istype(H.loc, /obj/item/organ/internal/stomach))
+		to_chat(src, SPAN_WARNING("You are stuck inside of \the [H]!"))
+		return
+	else if(istype(M))
 		M.drop_from_inventory(H)
 		to_chat(M, SPAN_WARNING("\The [H] wriggles out of your grip!"))
 		to_chat(src, SPAN_WARNING("You wriggle out of \the [M]'s grip!"))
