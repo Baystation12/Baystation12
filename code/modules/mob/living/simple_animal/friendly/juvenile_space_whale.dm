@@ -3,6 +3,7 @@
 	desc = "A majestic spaceborne cetacean. This one is a little baby."
 	icon = 'icons/mob/simple_animal/juvenile_space_whale.dmi'
 	icon_state = "alive"
+	icon_living = "alive"
 	icon_dead = "dead"
 
 	health = 80
