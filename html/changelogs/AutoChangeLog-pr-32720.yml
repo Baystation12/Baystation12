@@ -1,0 +1,8 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscadd: Cable coils now have a codex entry describing how to use them. This includes
+      the creation of multi-z cables, cable ties, color changing, and basic prosthetic
+      repair.
+  - tweak: The verb to change a borg's cable color has been renamed to specify it's
+      changing cables.
