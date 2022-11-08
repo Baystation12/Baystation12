@@ -38,6 +38,24 @@
 	update_icon()
 
 
+/obj/item/stack/cable_coil/get_mechanics_info()
+	. = ..()
+	. += {"
+		<h5>Placing Cables</h5>
+		<p>Cable coils can be used to place cables on the ground. To do this, click an adjacent plating turf with a cable coil while on help intent. Placing cables requires 1 unit of cable.</p>
+		<p>You can create continuous cables without cable knots by clicking on an existing cable knot instead of the turf.</p>
+		<p>You can wire across z-levels with cables by clicking on an open space turf with the cable coil. This creates a cable that descends down to the lower z-level's turf. If the open space turf has a lattice on it, this behaviour is overridden to allow placing normal cables in space. You can get around this by removing the lattice, placing the cable, then re-placing the lattice. Creating multi-z cables requires 2 lengths of cable.</p>
+
+		<h5>Robotics Repairs</h5>
+		<p>Using cable coil on a mob while targeting a body part that is robotic allows you to perform rudimentary burn damage repair. This uses up to 5 lengths of cable at a time depending on the amount of damage, and may require multiple uses. You must be on help intent to perform this interaction.</p>
+
+		<h5>Other Uses</h5>
+		<p>Multiple cable coils can be merged together like other material stacks by clicking on one coil with another coil. If the two coils are of different colors, the new stack will use the color of the coil that was in your active hand.</p>
+		<p>You can create cable ties, which are a weaker form of handcuffs, by right-clicking on a cable coil in your hand and selecting 'Make Cable Restraints' or selecting the verb from the 'Object' tab. This requires 15 lengths of cables to create and requires you to remain still for 10 seconds.</p>
+		<p>You can change the color of the cable coil by using a multitool or a paint sprayer on it. Cyborg cable coils can be recolored by right clicking the coil or going to the Object tab and selecting 'Change Cable Colour' while it is an active module.</p>
+	"}
+
+
 /obj/item/stack/cable_coil/on_update_icon()
 	if (!color)
 		color = GLOB.possible_cable_colours[pick(GLOB.possible_cable_colours)]
@@ -303,7 +321,7 @@
 
 
 /obj/item/stack/cable_coil/cyborg/verb/SetCableColorVerb()
-	set name = "Change Colour"
+	set name = "Change Cable Colour"
 	set category = "Object"
 	var/response = input("Pick new colour:", "Cable Colour", null, null) as null | anything in GLOB.possible_cable_colours
 	if (isnull(response))
