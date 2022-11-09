@@ -151,8 +151,12 @@ var/global/list/organ_cache = list()
 	show_decay_status(user)
 
 /obj/item/organ/proc/show_decay_status(mob/user)
-	if(status & ORGAN_DEAD)
-		to_chat(user, SPAN_NOTICE("The decay has set into \the [src]."))
+	if(BP_IS_ROBOTIC(src))
+		if(status & ORGAN_DEAD)
+			to_chat(user, SPAN_NOTICE("\The [src] looks completely spent."))
+	else
+		if(status & ORGAN_DEAD)
+			to_chat(user, SPAN_NOTICE("The decay has set into \the [src]."))
 
 /obj/item/organ/proc/handle_germ_effects()
 	//** Handle the effects of infections
@@ -341,10 +345,16 @@ var/global/list/organ_cache = list()
 	if(status & ORGAN_MUTATED)
 		. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_RADIATION]'>Genetic Deformation</span>" : "Genetic Deformation"
 	if(status & ORGAN_DEAD)
-		if(can_recover())
-			. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_INTERNAL_DANGER]'>Decaying</span>" : "Decaying"
+		if(BP_IS_ROBOTIC(src))
+			if(can_recover())
+				. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_INTERNAL_DANGER]'>Failing</span>" : "Failing"
+			else
+				. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_NECROTIC]'>Irreparably Damaged</span>" : "Irreperably Damaged"
 		else
-			. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_NECROTIC]'>Necrotic</span>" : "Necrotic"
+			if(can_recover())
+				. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_INTERNAL_DANGER]'>Decaying</span>" : "Decaying"
+			else
+				. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_NECROTIC]'>Necrotic</span>" : "Necrotic"
 	if(BP_IS_BRITTLE(src))
 		. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_CRYSTAL]'>Brittle</span>" : "Brittle"
 
