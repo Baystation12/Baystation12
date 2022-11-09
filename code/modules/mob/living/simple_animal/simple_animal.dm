@@ -156,8 +156,6 @@
 	. = ..()
 	if(LAZYLEN(natural_armor))
 		set_extension(src, armor_type, natural_armor)
-	if(!icon_living)
-		icon_living = initial(icon_state)
 
 /mob/living/simple_animal/Destroy()
 	if(istype(natural_weapon))
@@ -363,10 +361,3 @@
 	else
 		visible_message(SPAN_NOTICE("\The [user] is interrupted."))
 		set_AI_busy(FALSE)
-
-/mob/living/simple_animal/rejuvenate()
-	..()
-	icon_state = icon_living
-	update_icon()
-	bleed_ticks = 0
-	ai_holder.handle_stance_tactical()

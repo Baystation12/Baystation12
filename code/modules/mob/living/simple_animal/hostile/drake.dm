@@ -76,14 +76,3 @@
 /datum/say_list/drake
 	emote_hear = list("clicks")
 	emote_see = list("flaps its wings idly")
-
-
-/mob/living/simple_animal/hostile/drake/bluespace
-	name = "bluespace dragon"
-	desc = "A large, reptilian interloper from another dimension."
-	icon = 'icons/mob/simple_animal/bluespace_dragon.dmi'
-	icon_state = "bluespace_dragon"
-	icon_living = "bluespace_dragon"
-	icon_dead = "bluespace_dragon_dead"
-	faction = "bluespace"
-	bleed_colour = "#71faff"
