@@ -137,15 +137,12 @@
 			return (base_block_chance / 2)
 	return base_block_chance
 
-/*
- * Energy Shield
- */
 
 /obj/item/shield/energy
 	name = "energy combat shield"
 	desc = "A shield capable of stopping most projectile and melee attacks. It can be retracted, expanded, and stored anywhere."
 	icon = 'icons/obj/weapons/melee_energy.dmi'
-	icon_state = "eshield0" // eshield1 for expanded
+	icon_state = "eshield0"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 3.0
 	throwforce = 5.0
@@ -154,56 +151,74 @@
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 3, TECH_ESOTERIC = 4)
 	attack_verb = list("shoved", "bashed")
-	var/active = 0
+	var/active = FALSE
+	var/next_action
+	var/sound_token
+	var/sound_id
+	var/datum/effect/effect/system/spark_spread/sparks
 
-/obj/item/shield/energy/handle_shield(mob/user)
-	if(!active)
-		return 0 //turn it on first!
+
+/obj/item/shield/energy/Destroy()
+	QDEL_NULL(sound_token)
+	QDEL_NULL(sparks)
+	return ..()
+
+
+/obj/item/shield/energy/Initialize()
 	. = ..()
+	sound_id = "[sequential_id(/obj/item/shield/energy)]"
+	sparks = new
 
-	if(.)
-		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-		spark_system.set_up(5, 0, user.loc)
-		spark_system.start()
-		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
-
-/obj/item/shield/energy/get_block_chance(mob/user, damage, atom/damage_source = null, mob/attacker = null)
-	if(istype(damage_source, /obj/item/projectile))
-		var/obj/item/projectile/P = damage_source
-		if((is_sharp(P) && damage > 10) || istype(P, /obj/item/projectile/beam))
-			return (base_block_chance - round(damage / 2.5)) //block bullets and beams using the old block chance
-	return base_block_chance
-
-/obj/item/shield/energy/attack_self(mob/living/user as mob)
-	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, SPAN_WARNING("You beat yourself in the head with [src]."))
-		user.take_organ_damage(5, 0)
-	active = !active
-	if (active)
-		force = 10
-		update_icon()
-		w_class = ITEM_SIZE_HUGE
-		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("\The [src] is now active."))
-
-	else
-		force = 3
-		update_icon()
-		w_class = ITEM_SIZE_TINY
-		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("\The [src] can now be concealed."))
-
-	if(istype(user,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = user
-		H.update_inv_l_hand()
-		H.update_inv_r_hand()
-
-	add_fingerprint(user)
-	return
 
 /obj/item/shield/energy/on_update_icon()
 	icon_state = "eshield[active]"
-	if(active)
-		set_light(0.4, 0.1, 1, 2, "#006aff")
+	if (active)
+		set_light(0.6, 0.1, 2, 1, "#006aff")
 	else
 		set_light(0)
+
+
+/obj/item/shield/energy/attack_self(mob/living/user)
+	var/time = world.time
+	if (time < next_action)
+		return
+	next_action = time + 3 SECONDS
+	active = !active
+	if (active)
+		addtimer(CALLBACK(src, /obj/item/shield/energy/proc/UpdateSoundLoop), 0.25 SECONDS)
+		playsound(src, 'sound/obj/item/shield/energy/shield-start.ogg', 40)
+		force = 10
+		w_class = ITEM_SIZE_NO_CONTAINER
+	else
+		addtimer(CALLBACK(src, /obj/item/shield/energy/proc/UpdateSoundLoop), 0.1 SECONDS)
+		playsound(src, 'sound/obj/item/shield/energy/shield-stop.ogg', 40)
+		force = initial(force)
+		w_class = initial(w_class)
+	add_fingerprint(user)
+	user.update_inv_l_hand()
+	user.update_inv_r_hand()
+	update_icon()
+
+
+/obj/item/shield/energy/handle_shield(mob/living/user)
+	if (!active)
+		return FALSE
+	. = ..()
+	if (!.)
+		return
+	sparks.set_up(2, loca = user)
+	sparks.start()
+
+
+/obj/item/shield/energy/get_block_chance(mob/living/user, damage, atom/damage_source, mob/living/attacker)
+	if (isprojectile(damage_source))
+		if (damage > 10 && is_sharp(damage_source) || isbeam(damage_source))
+			return base_block_chance - round(damage / 2.5)
+	return base_block_chance
+
+
+/obj/item/shield/energy/proc/UpdateSoundLoop()
+	if (!active)
+		QDEL_NULL(sound_token)
+		return
+	sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id,'sound/obj/item/shield/energy/shield-loop.ogg', 10, 4)
