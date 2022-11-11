@@ -139,9 +139,6 @@
 
 /obj/item/gun/projectile/pistol/holdout/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/silencer))
-		if (!user.IsHolding())
-			to_chat(user, SPAN_WARNING("You'll need \the [src] in your hands to do that."))
-			return
 		if (silenced)
 			to_chat(user, SPAN_WARNING("\The [src] is already silenced."))
 			return
