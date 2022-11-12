@@ -1,0 +1,8 @@
+author: ozwe11
+delete-after: true
+changes:
+  - spellcheck: Prosthetic organs now fail and become irreparably damaged rather than
+      decay and go necrotic.
+  - spellcheck: Upon examination of a necrotic/irreparably damaged synthetic organ
+      you will no longer see that the decay has set in but will instead see it looks
+      completely spent.
