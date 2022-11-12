@@ -1,5 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - tweak: Energy shields have sounds.
-  - bugfix: Energy shield lighting is large enough to exist.

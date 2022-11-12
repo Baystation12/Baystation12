@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Silencers can now be attached to pistols again.
-  - tweak: You no longer need to hold the target gun in your hand to attach a silencer.
