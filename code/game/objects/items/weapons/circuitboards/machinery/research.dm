@@ -143,3 +143,29 @@
 		/obj/item/stock_parts/power/battery/buildable/stock = 1,
 		/obj/item/cell/high = 1
 	)
+
+/obj/item/stock_parts/circuitboard/cracker
+	name = T_BOARD("molecular cracking unit")
+	build_path = /obj/machinery/portable_atmospherics/cracker
+	board_type = "machine"
+	origin_tech = list(TECH_MAGNET = 4, TECH_ENGINEERING = 3, TECH_MATERIAL = 3)
+	req_components = list(
+							/obj/item/stock_parts/matter_bin = 3,
+							/obj/item/stock_parts/micro_laser = 3,
+							/obj/item/stock_parts/manipulator = 1)
+	additional_spawn_components = list(
+		/obj/item/stock_parts/power/apc/buildable = 1
+	)
+
+/obj/item/stock_parts/circuitboard/doppler_array
+	name = T_BOARD("doppler array")
+	build_path = /obj/machinery/doppler_array
+	board_type = "machine"
+	origin_tech = list(TECH_ENGINEERING = 7, TECH_MATERIAL = 4, TECH_DATA = 4, TECH_BLUESPACE = 3)
+	req_components = list(
+							/obj/item/stock_parts/scanning_module = 2,
+							/obj/item/stock_parts/computer/hard_drive/cluster = 2,
+							/obj/item/stock_parts/computer/processor_unit/photonic= 1)
+	additional_spawn_components = list(
+		/obj/item/stock_parts/power/apc/buildable = 1
+	)
