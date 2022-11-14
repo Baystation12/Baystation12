@@ -13,7 +13,7 @@ GLOBAL_DATUM_INIT(skills, /datum/skills_repository, new)
 		/singleton/skill_category/security
 	)
 	var/list/categories_by_path = list()
-	var/list/singleton/skill/skills = list()
+	var/list/singleton/skill/instances = list()
 	var/list/skills_by_path = list()
 	var/list/skills_by_key = list()
 
@@ -133,7 +133,7 @@ GLOBAL_DATUM_INIT(skills, /datum/skills_repository, new)
 	var/list/levels
 
 
-/singleton/hierarchy/skill/proc/get_cost(level)
+/singleton/skill/proc/get_cost(level)
 	switch(level)
 		if(SKILL_BASIC, SKILL_ADEPT)
 			return difficulty

@@ -114,7 +114,7 @@ The generic antag version.
 	. = ..()
 	.["can_choose"] = can_choose()
 	var/list/selection_data = list()
-	var/singleton/hierarchy/skill/skill = GET_SINGLETON(/singleton/hierarchy/skill)
+	var/singleton/skill/skill = GET_SINGLETON(/singleton/skill) //SINGLETODO: FIX THIS PROBABLY
 	for(var/i in 1 to length(max_choices))
 		var/choices = max_choices[i]
 		if(!choices)
@@ -125,7 +125,7 @@ The generic antag version.
 		var/selected = LAZYACCESS(currently_selected, i)
 		level_data["selected"] = list()
 		for(var/skill_type in selected)
-			var/singleton/hierarchy/skill/S = skill_type // False type.
+			var/singleton/skill/S = skill_type // False type.
 			level_data["selected"] += list(list("name" = initial(S.name), "ref" = "\ref[skill_type]"))
 		level_data["remaining"] = choices - length(selected)
 		selection_data += list(level_data)
@@ -142,7 +142,7 @@ The generic antag version.
 			return 1
 		var/level = text2num(href_list["add_skill"])
 		var/list/choices = list()
-		for(var/singleton/hierarchy/skill/skill in GLOB.skills.skills)
+		for (var/singleton/skill/skill as anything in GLOB.skills.instances)
 			if(can_select(skill.type, level))
 				choices[skill.name] = skill.type
 		var/choice = input(usr, "Which skill would you like to add?", "Add Skill") as null | anything in choices
@@ -187,7 +187,7 @@ The generic antag version.
 		return
 	if(skillset.get_value(skill_type) >= level)
 		return
-	var/singleton/hierarchy/skill/S = GET_SINGLETON(skill_type)
+	var/singleton/skill/S = GET_SINGLETON(skill_type)
 	if(length(S.levels) < level)
 		return
 	if(S.prerequisites)

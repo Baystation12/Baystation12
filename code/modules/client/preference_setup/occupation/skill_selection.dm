@@ -60,7 +60,7 @@
 
 //These procs convert to/from static save-data formats.
 /datum/category_item/player_setup_item/occupation/proc/load_skills()
-	///// SKILLS SAVE EDIT HERE
+	//SINGLETODO: SAVE FILTERING HERE
 
 	pref.skills_allocated = list()
 	for(var/job_type in SSjobs.types_to_datums)

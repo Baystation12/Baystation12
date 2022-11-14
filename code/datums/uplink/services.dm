@@ -315,12 +315,12 @@
 	var/datum/job/job = SSjobs.get_by_title(new_record.get_job())
 	if(job)
 		var/skills = list()
-		for(var/singleton/hierarchy/skill/S in GLOB.skills)
-			var/level = job.min_skill[S.type]
+		for (var/singleton/skill/skill as anything in GLOB.skills.instances)
+			var/level = job.min_skill[skill.type]
 			if(prob(10))
-				level = min(rand(1,3), job.max_skill[S.type])
+				level = min(rand(1,3), job.max_skill[skill.type])
 			if(level > SKILL_NONE)
-				skills += "[S.name], [S.levels[level]]"
+				skills += "[skill.name], [skill.levels[level]]"
 		new_record.set_skillset(jointext(skills,"\n"))
 
 	if(istype(job) && job.announced)

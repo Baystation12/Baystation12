@@ -63,7 +63,7 @@
 	var/allocation = given_client.prefs.skills_allocated[job] || list()
 	skill_list = list()
 
-	for (var/singleton/skill/skill in GLOB.skills.skills)
+	for (var/singleton/skill/skill as anything in GLOB.skills.instances)
 		var/min = job ? given_client.prefs.get_min_skill(job, skill) : SKILL_MIN
 		skill_list[skill.type] = min + (allocation[skill] || 0)
 	on_levels_change()
@@ -74,7 +74,7 @@
 
 	skill_list = list()
 
-	for (var/singleton/skill/skill in GLOB.skills.skills)
+	for (var/singleton/skill/skill as anything in GLOB.skills.instances)
 		skill_list[skill.type] = job.get_min_skill(skill)
 	on_levels_change()
 
