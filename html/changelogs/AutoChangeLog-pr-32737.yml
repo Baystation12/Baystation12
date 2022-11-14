@@ -1,4 +1,0 @@
-author: SomeAngryMiner
-delete-after: true
-changes:
-  - rscadd: Atom cracker and doppler arrays are now printable.
