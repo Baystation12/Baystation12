@@ -39,11 +39,11 @@
 	var/min = get_min_skill(job, S)
 	return get_level_cost(job, S, min + allocated[S])
 
-/datum/preferences/proc/get_level_cost(datum/job/job, singleton/skill/S, level)
-	var/min = get_min_skill(job, S)
+/datum/preferences/proc/get_level_cost(datum/job/job, singleton/skill/skill, singleton/skill_level/level) //SKILLTODO: FIX ALL THIS
+	var/min_skill = get_min_skill(job, skill)
 	. = 0
 	for(var/i=min+1, i <= level, i++)
-		. += S.get_cost(i)
+		. += skill.GetPointCost(i)
 
 /datum/preferences/proc/get_max_affordable(datum/job/job, singleton/skill/S)
 	var/current_level = get_min_skill(job, S)
@@ -54,13 +54,13 @@
 	var/budget = points_by_job[job]
 	. = max
 	for(var/i=current_level+1, i <= max, i++)
-		if(budget - S.get_cost(i) < 0)
+		if(budget - S.GetPointCost(i) < 0)
 			return i-1
-		budget -= S.get_cost(i)
+		budget -= S.GetPointCost(i)
 
 //These procs convert to/from static save-data formats.
 /datum/category_item/player_setup_item/occupation/proc/load_skills()
-	//SINGLETODO: SAVE FILTERING HERE
+	//SKILLTODO: SAVE FILTERING HERE
 
 	pref.skills_allocated = list()
 	for(var/job_type in SSjobs.types_to_datums)
@@ -68,8 +68,8 @@
 		if("[job.type]" in pref.skills_saved)
 			var/S = pref.skills_saved["[job.type]"]
 			var/L = list()
-			for(var/singleton/skill/skill in GLOB.skills.instances)
-				if("[skill.type]" in S)//SINGLETODO: FIX THIS
+			for(var/singleton/skill/skill in GLOB.skills.skills)
+				if("[skill.type]" in S)//SKILLTODO: FIX THIS
 					L[skill] = S["[skill.type]"]
 			if(length(L))
 				pref.skills_allocated[job] = L
@@ -79,7 +79,7 @@
 	for(var/datum/job/job in pref.skills_allocated)
 		var/S = pref.skills_allocated[job]
 		var/L = list()
-		for(var/singleton/skill/skill in S)//SINGLETODO: FIX THIS
+		for(var/singleton/skill/skill in S)//SKILLTODO: FIX THIS
 			L["[skill.type]"] = S[skill]
 		if(length(L))
 			pref.skills_saved["[job.type]"] = L
@@ -97,7 +97,7 @@
 		var/L = list()
 		var/sum = 0
 
-		for(var/singleton/skill/skill in GLOB.skills.instances)
+		for(var/singleton/skill/skill in GLOB.skills.skills)
 			if(skill in input_skills)
 				var/min = get_min_skill(job, skill)
 				var/max = get_max_skill(job, skill)
@@ -117,11 +117,11 @@
 			points_by_job[job] -= sum						//if we overspent, or did no spending, default to not including the job at all
 		purge_skills_missing_prerequisites(job)
 
-/datum/preferences/proc/check_skill_prerequisites(datum/job/job, singleton/skill/S)//SINGLETODO: FIX THIS
+/datum/preferences/proc/check_skill_prerequisites(datum/job/job, singleton/skill/S)//SKILLTODO: FIX THIS
 	if(!S.prerequisites)
 		return TRUE
 	for(var/skill_type in S.prerequisites)
-		var/singleton/skill/prereq = GET_SINGLETON(skill_type)//SINGLETODO: FIX THIS
+		var/singleton/skill/prereq = GET_SINGLETON(skill_type)//SKILLTODO: FIX THIS
 		var/value = get_min_skill(job, prereq) + LAZYACCESS(skills_allocated[job], prereq)
 		if(value < S.prerequisites[skill_type])
 			return FALSE
@@ -186,13 +186,13 @@
 	dat += "</center></tt>"
 
 	dat += "<table>"
-	var/singleton/skill/skill = GET_SINGLETON(/singleton/skill)//SINGLETODO: FIX THIS
+	var/singleton/skill/skill = GET_SINGLETON(/singleton/skill)//SKILLTODO: FIX THIS
 	for(var/singleton/skill/cat in skill.children)
 		dat += "<tr><th colspan = 4><b>[cat.name]</b>"
 		dat += "</th></tr>"
-		for(var/singleton/skill/S in cat.children)//SINGLETODO: FIX THIS
+		for(var/singleton/skill/S in cat.children)//SKILLTODO: FIX THIS
 			dat += get_skill_row(job, S)
-			for(var/singleton/skill/perk in S.children)//SINGLETODO: FIX THIS
+			for(var/singleton/skill/perk in S.children)//SKILLTODO: FIX THIS
 				dat += get_skill_row(job, perk)
 	dat += "</table>"
 	return JOINTEXT(dat)
@@ -220,7 +220,7 @@
 	if(effective_level <= 0 || effective_level > length(skill.levels))
 		return "<th></th>"
 	var/level_name = skill.levels[effective_level]
-	var/cost = skill.get_cost(effective_level)
+	var/cost = skill.GetPointCost(effective_level)
 	var/button_label = "[level_name] ([cost])"
 	if(effective_level < min)
 		return "<th>[SPAN_CLASS("Unavailable", "[button_label]")]</th>"

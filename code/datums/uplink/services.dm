@@ -315,7 +315,7 @@
 	var/datum/job/job = SSjobs.get_by_title(new_record.get_job())
 	if(job)
 		var/skills = list()
-		for (var/singleton/skill/skill as anything in GLOB.skills.instances)
+		for (var/singleton/skill/skill as anything in GLOB.skills.skills)
 			var/level = job.min_skill[skill.type]
 			if(prob(10))
 				level = min(rand(1,3), job.max_skill[skill.type])

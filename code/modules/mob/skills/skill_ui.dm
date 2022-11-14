@@ -52,17 +52,17 @@
 	.["hide_unskilled"] = hide_unskilled
 
 	var/list/skill_data = list()
-	var/singleton/skill/skill = GET_SINGLETON(/singleton/skill) //SINGLETODO: FIX THIS
-	for(var/singleton/skill/V in skill.children) //SINGLETODO: FIX THIS
+	var/singleton/skill/skill = GET_SINGLETON(/singleton/skill) //SKILLTODO: FIX THIS
+	for(var/singleton/skill/V in skill.children) //SKILLTODO: FIX THIS
 		var/list/skill_cat = list()
 		skill_cat["name"] = V.name
 		var/list/skills_in_cat = list()
-		for(var/singleton/skill/S in V.children) //SINGLETODO: FIX THIS
+		for(var/singleton/skill/S in V.children) //SKILLTODO: FIX THIS
 			var/offset = S.prerequisites ? S.prerequisites[S.parent.type] - 1 : 0
 			if(hide_unskilled && (get_value(S.type) + offset == SKILL_MIN))
 				continue
 			skills_in_cat += list(get_nano_row(S))
-			for(var/singleton/skill/perk in S.children) //SINGLETODO: FIX THIS
+			for(var/singleton/skill/perk in S.children) //SKILLTODO: FIX THIS
 				skills_in_cat += list(get_nano_row(perk))
 		if(length(skills_in_cat))
 			skill_cat["skills"] = skills_in_cat
@@ -114,7 +114,7 @@ The generic antag version.
 	. = ..()
 	.["can_choose"] = can_choose()
 	var/list/selection_data = list()
-	var/singleton/skill/skill = GET_SINGLETON(/singleton/skill) //SINGLETODO: FIX THIS PROBABLY
+	var/singleton/skill/skill = GET_SINGLETON(/singleton/skill) //SKILLTODO: FIX THIS PROBABLY
 	for(var/i in 1 to length(max_choices))
 		var/choices = max_choices[i]
 		if(!choices)
@@ -142,7 +142,7 @@ The generic antag version.
 			return 1
 		var/level = text2num(href_list["add_skill"])
 		var/list/choices = list()
-		for (var/singleton/skill/skill as anything in GLOB.skills.instances)
+		for (var/singleton/skill/skill as anything in GLOB.skills.skills)
 			if(can_select(skill.type, level))
 				choices[skill.name] = skill.type
 		var/choice = input(usr, "Which skill would you like to add?", "Add Skill") as null | anything in choices

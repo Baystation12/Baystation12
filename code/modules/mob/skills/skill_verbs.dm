@@ -94,7 +94,7 @@ Robots and antags can instruct.
 		return
 
 	var/options = list()
-	for (var/singleton/skill/skill as anything in GLOB.skills.instances)
+	for (var/singleton/skill/skill as anything in GLOB.skills.skills)
 		if(!target.skill_check(skill.type, SKILL_BASIC) && skill_check(skill.type, SKILL_EXPERT))
 			options[skill.name] = skill
 	if(!length(options))
