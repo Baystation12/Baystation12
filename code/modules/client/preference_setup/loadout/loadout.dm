@@ -218,7 +218,7 @@ var/global/list/gear_datums = list()
 		if(allowed && G.allowed_skills)
 			var/list/skills_required = list()//make it into instances? instead of path
 			for(var/skill in G.allowed_skills)
-				var/singleton/hierarchy/skill/instance = GET_SINGLETON(skill)
+				var/singleton/skill/instance = GET_SINGLETON(skill)//SINGLETODO: FIX THIS
 				skills_required[instance] = G.allowed_skills[skill]
 
 			allowed = skill_check(jobs, skills_required)//Checks if a single job has all the skills required
@@ -226,7 +226,7 @@ var/global/list/gear_datums = list()
 			entry += "<br><i>"
 			var/list/skill_checks = list()
 			for(var/R in skills_required)
-				var/singleton/hierarchy/skill/S = R
+				var/singleton/skill/S = R
 				var/skill_entry
 				skill_entry += "[S.levels[skills_required[R]]]"
 				if(allowed)

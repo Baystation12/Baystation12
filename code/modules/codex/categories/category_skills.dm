@@ -2,13 +2,14 @@
 	name = "Skills"
 	desc = "Certifiable skills."
 
+//SINGLETODO: HATE CODEX HARDER
 /datum/codex_category/skills/Initialize()
-	for(var/singleton/hierarchy/skill/skill in GLOB.skills)
+	for(var/singleton/skill/skill as anything in GLOB.skills.instances)
 		var/list/skill_info = list()
 		if(skill.prerequisites)
 			var/list/reqs = list()
-			for(var/req in skill.prerequisites)
-				var/singleton/hierarchy/skill/skill_req = GET_SINGLETON(req)
+			for(var/req in skill.prerequisites)//SINGLETODO: FIX THIS
+				var/singleton/skill/skill_req = GET_SINGLETON(req)
 				reqs += "[skill_req.levels[skill.prerequisites[req]]] [skill_req.name]"
 			skill_info += "Prerequisites: [english_list(reqs)]"
 		for(var/level in skill.levels)

@@ -35,7 +35,7 @@
 
 	var/hud_icon						  //icon used for Sec HUD overlay
 
-	var/min_skill = list()				  //Minimum skills allowed for the job. List should contain skill (as in /singleton/hierarchy/skill path), with values which are numbers.
+	var/min_skill = list()				  //Minimum skills allowed for the job. List should contain skill (as in /singleton/skill path), with values which are numbers.
 	var/max_skill = list()				  //Maximum skills allowed for the job.
 	var/skill_points = 16				  //The number of unassigned skill points the job comes with (on top of the minimum skills).
 	var/no_skill_buffs = FALSE			  //Whether skills can be buffed by age/species modifiers.
@@ -480,7 +480,7 @@
 /datum/job/proc/handle_variant_join(mob/living/carbon/human/H, alt_title)
 	return
 
-/datum/job/proc/get_min_skill(singleton/hierarchy/skill/S)
+/datum/job/proc/get_min_skill(singleton/skill/S)
 	if(min_skill)
 		. = min_skill[S.type]
 	if(!.)

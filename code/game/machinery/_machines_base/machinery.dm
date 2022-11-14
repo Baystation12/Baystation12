@@ -416,7 +416,7 @@
 		. += "<p>It draws [active_power_usage] watts while active.</p>"
 
 	if (core_skill)
-		var/singleton/hierarchy/skill/core_skill_singleton = core_skill
+		var/singleton/skill/core_skill_singleton = core_skill
 		. += "<p>It utilizes the [initial(core_skill_singleton.name)] skill.</p>"
 
 	var/wire_mechanics = wires?.get_mechanics_info()

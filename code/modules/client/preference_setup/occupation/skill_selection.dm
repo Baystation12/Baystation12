@@ -1,9 +1,9 @@
 /datum/preferences
-	var/list/skills_saved	 	= list()	   //List of /datum/job paths, with values (lists of "/singleton/hierarchy/skill" , with values saved skill points spent). Should only include entries with nonzero spending.
+	var/list/skills_saved	 	= list()	   //List of /datum/job paths, with values (lists of "/singleton/skill" , with values saved skill points spent). Should only include entries with nonzero spending.
 	var/list/skills_allocated	= list()	   //Same as above, but using instances rather than path strings for both jobs and skills.
 	var/list/points_by_job		= list()	   //List of jobs, with value the number of free skill points remaining
 
-/datum/preferences/proc/get_max_skill(datum/job/job, singleton/hierarchy/skill/S)
+/datum/preferences/proc/get_max_skill(datum/job/job, singleton/skill/S)
 	var/min = get_min_skill(job, S)
 	if(job && job.max_skill)
 		. = job.max_skill[S.type]
@@ -13,14 +13,14 @@
 		. = SKILL_MAX
 	. = max(min, .)
 
-/datum/preferences/proc/get_total_skill_value(datum/job/job, singleton/hierarchy/skill/req_skill)
+/datum/preferences/proc/get_total_skill_value(datum/job/job, singleton/skill/req_skill)
 	if(!(job in skills_allocated))
 		return get_min_skill(job, req_skill)
 	var/allocated = skills_allocated[job]
 	if(req_skill in allocated)
 		return allocated[req_skill] + get_min_skill(job, req_skill)
 
-/datum/preferences/proc/get_min_skill(datum/job/job, singleton/hierarchy/skill/S)
+/datum/preferences/proc/get_min_skill(datum/job/job, singleton/skill/S)
 	if(job && job.min_skill)
 		. = job.min_skill[S.type]
 	if(!.)
@@ -30,7 +30,7 @@
 	if(!.)
 		. = SKILL_MIN
 
-/datum/preferences/proc/get_spent_points(datum/job/job, singleton/hierarchy/skill/S)
+/datum/preferences/proc/get_spent_points(datum/job/job, singleton/skill/S)
 	if(!(job in skills_allocated))
 		return 0
 	var/allocated = skills_allocated[job]
@@ -39,13 +39,13 @@
 	var/min = get_min_skill(job, S)
 	return get_level_cost(job, S, min + allocated[S])
 
-/datum/preferences/proc/get_level_cost(datum/job/job, singleton/hierarchy/skill/S, level)
+/datum/preferences/proc/get_level_cost(datum/job/job, singleton/skill/S, level)
 	var/min = get_min_skill(job, S)
 	. = 0
 	for(var/i=min+1, i <= level, i++)
 		. += S.get_cost(i)
 
-/datum/preferences/proc/get_max_affordable(datum/job/job, singleton/hierarchy/skill/S)
+/datum/preferences/proc/get_max_affordable(datum/job/job, singleton/skill/S)
 	var/current_level = get_min_skill(job, S)
 	var/allocation = skills_allocated[job]
 	if(allocation && allocation[S])
@@ -68,8 +68,8 @@
 		if("[job.type]" in pref.skills_saved)
 			var/S = pref.skills_saved["[job.type]"]
 			var/L = list()
-			for(var/singleton/hierarchy/skill/skill in GLOB.skills)
-				if("[skill.type]" in S)
+			for(var/singleton/skill/skill in GLOB.skills.instances)
+				if("[skill.type]" in S)//SINGLETODO: FIX THIS
 					L[skill] = S["[skill.type]"]
 			if(length(L))
 				pref.skills_allocated[job] = L
@@ -79,7 +79,7 @@
 	for(var/datum/job/job in pref.skills_allocated)
 		var/S = pref.skills_allocated[job]
 		var/L = list()
-		for(var/singleton/hierarchy/skill/skill in S)
+		for(var/singleton/skill/skill in S)//SINGLETODO: FIX THIS
 			L["[skill.type]"] = S[skill]
 		if(length(L))
 			pref.skills_saved["[job.type]"] = L
@@ -97,7 +97,7 @@
 		var/L = list()
 		var/sum = 0
 
-		for(var/singleton/hierarchy/skill/skill in GLOB.skills)
+		for(var/singleton/skill/skill in GLOB.skills.instances)
 			if(skill in input_skills)
 				var/min = get_min_skill(job, skill)
 				var/max = get_max_skill(job, skill)
@@ -117,11 +117,11 @@
 			points_by_job[job] -= sum						//if we overspent, or did no spending, default to not including the job at all
 		purge_skills_missing_prerequisites(job)
 
-/datum/preferences/proc/check_skill_prerequisites(datum/job/job, singleton/hierarchy/skill/S)
+/datum/preferences/proc/check_skill_prerequisites(datum/job/job, singleton/skill/S)//SINGLETODO: FIX THIS
 	if(!S.prerequisites)
 		return TRUE
 	for(var/skill_type in S.prerequisites)
-		var/singleton/hierarchy/skill/prereq = GET_SINGLETON(skill_type)
+		var/singleton/skill/prereq = GET_SINGLETON(skill_type)//SINGLETODO: FIX THIS
 		var/value = get_min_skill(job, prereq) + LAZYACCESS(skills_allocated[job], prereq)
 		if(value < S.prerequisites[skill_type])
 			return FALSE
@@ -131,13 +131,13 @@
 	var/allocation = skills_allocated[job]
 	if(!allocation)
 		return
-	for(var/singleton/hierarchy/skill/S in allocation)
+	for(var/singleton/skill/S in allocation)
 		if(!check_skill_prerequisites(job, S))
 			clear_skill(job, S)
 			.() // restart checking from the beginning, as after doing this we don't know whether what we've already checked is still fine.
 			return
 
-/datum/preferences/proc/clear_skill(datum/job/job, singleton/hierarchy/skill/S)
+/datum/preferences/proc/clear_skill(datum/job/job, singleton/skill/S)
 	if(job in skills_allocated)
 		var/min = get_min_skill(job,S)
 		var/T = skills_allocated[job]
@@ -147,7 +147,7 @@
 		if(!length(T))
 			skills_allocated -= job		  //Don't keep track of a job with no allocation
 
-/datum/category_item/player_setup_item/occupation/proc/update_skill_value(datum/job/job, singleton/hierarchy/skill/S, new_level)
+/datum/category_item/player_setup_item/occupation/proc/update_skill_value(datum/job/job, singleton/skill/S, new_level)
 	if(!isnum(new_level) || (round(new_level) != new_level))
 		return											//Checks to make sure we were fed an integer.
 	if(!pref.check_skill_prerequisites(job, S))
@@ -186,18 +186,18 @@
 	dat += "</center></tt>"
 
 	dat += "<table>"
-	var/singleton/hierarchy/skill/skill = GET_SINGLETON(/singleton/hierarchy/skill)
-	for(var/singleton/hierarchy/skill/cat in skill.children)
+	var/singleton/skill/skill = GET_SINGLETON(/singleton/skill)//SINGLETODO: FIX THIS
+	for(var/singleton/skill/cat in skill.children)
 		dat += "<tr><th colspan = 4><b>[cat.name]</b>"
 		dat += "</th></tr>"
-		for(var/singleton/hierarchy/skill/S in cat.children)
+		for(var/singleton/skill/S in cat.children)//SINGLETODO: FIX THIS
 			dat += get_skill_row(job, S)
-			for(var/singleton/hierarchy/skill/perk in S.children)
+			for(var/singleton/skill/perk in S.children)//SINGLETODO: FIX THIS
 				dat += get_skill_row(job, perk)
 	dat += "</table>"
 	return JOINTEXT(dat)
 
-/datum/category_item/player_setup_item/occupation/proc/get_skill_row(datum/job/job, singleton/hierarchy/skill/S)
+/datum/category_item/player_setup_item/occupation/proc/get_skill_row(datum/job/job, singleton/skill/S)
 	var/list/dat = list()
 	var/min = pref.get_min_skill(job,S)
 	var/level = min + (pref.skills_allocated[job] ? pref.skills_allocated[job][S] : 0)				//the current skill level
@@ -214,7 +214,7 @@
 	panel.set_content(generate_skill_content(job))
 	panel.open()
 
-/datum/category_item/player_setup_item/occupation/proc/skill_to_button(singleton/hierarchy/skill/skill, datum/job/job, current_level, selection_level, min, max)
+/datum/category_item/player_setup_item/occupation/proc/skill_to_button(singleton/skill/skill, datum/job/job, current_level, selection_level, min, max)
 	var/offset = skill.prerequisites ? skill.prerequisites[skill.parent.type] - 1 : 0
 	var/effective_level = selection_level - offset
 	if(effective_level <= 0 || effective_level > length(skill.levels))
@@ -233,7 +233,7 @@
 	else
 		return "<th>[SPAN_CLASS("Toohigh", "[button_label]")]</th>"
 
-/datum/category_item/player_setup_item/occupation/proc/add_link(singleton/hierarchy/skill/skill, datum/job/job, text, style, value)
+/datum/category_item/player_setup_item/occupation/proc/add_link(singleton/skill/skill, datum/job/job, text, style, value)
 	if(pref.check_skill_prerequisites(job, skill))
 		return "<a class=[style] href='?src=\ref[src];hit_skill_button=\ref[skill];at_job=\ref[job];newvalue=[value]'>[text]</a>"
 	return text

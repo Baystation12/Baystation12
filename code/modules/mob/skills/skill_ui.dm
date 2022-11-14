@@ -52,24 +52,24 @@
 	.["hide_unskilled"] = hide_unskilled
 
 	var/list/skill_data = list()
-	var/singleton/hierarchy/skill/skill = GET_SINGLETON(/singleton/hierarchy/skill)
-	for(var/singleton/hierarchy/skill/V in skill.children)
+	var/singleton/skill/skill = GET_SINGLETON(/singleton/skill) //SINGLETODO: FIX THIS
+	for(var/singleton/skill/V in skill.children) //SINGLETODO: FIX THIS
 		var/list/skill_cat = list()
 		skill_cat["name"] = V.name
 		var/list/skills_in_cat = list()
-		for(var/singleton/hierarchy/skill/S in V.children)
+		for(var/singleton/skill/S in V.children) //SINGLETODO: FIX THIS
 			var/offset = S.prerequisites ? S.prerequisites[S.parent.type] - 1 : 0
 			if(hide_unskilled && (get_value(S.type) + offset == SKILL_MIN))
 				continue
 			skills_in_cat += list(get_nano_row(S))
-			for(var/singleton/hierarchy/skill/perk in S.children)
+			for(var/singleton/skill/perk in S.children) //SINGLETODO: FIX THIS
 				skills_in_cat += list(get_nano_row(perk))
 		if(length(skills_in_cat))
 			skill_cat["skills"] = skills_in_cat
 			skill_data += list(skill_cat)
 	.["skills_by_cat"] = skill_data
 
-/datum/skillset/proc/get_nano_row(singleton/hierarchy/skill/S)
+/datum/skillset/proc/get_nano_row(singleton/skill/S)
 	var/list/skill_item = list()
 	skill_item["name"] = S.name
 	var/value = get_value(S.type)
@@ -93,7 +93,7 @@
 	return skill_item
 
 /datum/skillset/proc/check_prerequisites(skill_type)
-	var/singleton/hierarchy/skill/S = GET_SINGLETON(skill_type)
+	var/singleton/skill/S = GET_SINGLETON(skill_type)
 	if(!S.prerequisites)
 		return TRUE
 	for(var/prereq_type in S.prerequisites)
