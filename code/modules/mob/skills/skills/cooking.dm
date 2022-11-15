@@ -1,8 +1,8 @@
 /singleton/skill/cooking
 	name = "Cooking"
 	save_key = "cooking"
-	default_max = SKILL_MAX
-	difficulty = SKILL_EASY
+	default_max = /singleton/skill_level/professional
+	difficulty = DIFFICULTY_EASY
 	desc = {"\
 		Describes a character's skill at preparing meals and other consumable goods. \
 		This includes mixing alcoholic beverages.\

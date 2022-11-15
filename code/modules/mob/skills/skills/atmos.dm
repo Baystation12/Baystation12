@@ -1,8 +1,8 @@
 /singleton/skill/atmos
 	name = "Atmospherics"
 	save_key = "atmos"
-	default_max = SKILL_ADEPT
-	difficulty = SKILL_AVERAGE
+	default_max = /singleton/skill_level/adept
+	difficulty = DIFFICULTY_AVERAGE
 	desc = "Describes your knowledge of piping, air distribution and gas dynamics."
 	levels = list(
 		/singleton/skill_level/none = {"\

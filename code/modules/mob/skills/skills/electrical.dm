@@ -1,8 +1,8 @@
 /singleton/skill/electrical
 	name = "Electrical Engineering"
 	save_key = "electrical"
-	default_max = SKILL_ADEPT
-	difficulty = SKILL_AVERAGE
+	default_max = /singleton/skill_level/adept
+	difficulty = DIFFICULTY_AVERAGE
 	desc = {"\
 		This skill describes your knowledge of electronics and the underlying physics. A \
 		low level of this skill implies you know how to lay out wiring and configure \

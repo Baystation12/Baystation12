@@ -1,8 +1,8 @@
 /singleton/skill/forensics
 	name = "Forensics"
 	save_key = "forensics"
-	default_max = SKILL_ADEPT
-	difficulty = SKILL_AVERAGE
+	default_max = /singleton/skill_level/adept
+	difficulty = DIFFICULTY_AVERAGE
 	desc = {"\
 		Describes your skill at performing forensic examinations and identifying vital evidence. \
 		Does not cover analytical abilities, and as such isn't the only indicator for your \

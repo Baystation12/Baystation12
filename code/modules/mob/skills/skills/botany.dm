@@ -1,8 +1,8 @@
 /singleton/skill/botany
 	name = "Botany"
 	save_key = "botany"
-	default_max = SKILL_MAX
-	difficulty = SKILL_EASY
+	default_max = /singleton/skill_level/professional
+	difficulty = DIFFICULTY_EASY
 	desc = "Describes how good a character is at growing and maintaining plants."
 	levels = list(
 		/singleton/skill_level/none = {"\

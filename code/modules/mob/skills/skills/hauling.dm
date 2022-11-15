@@ -1,8 +1,8 @@
 /singleton/skill/hauling
 	name = "Athletics"
 	save_key = "hauling"
-	default_max = SKILL_MAX
-	difficulty = SKILL_EASY
+	default_max = /singleton/skill_level/professional
+	difficulty = DIFFICULTY_EASY
 	desc = "Your ability to perform tasks requiring great strength, dexterity, or endurance."
 	levels = list(
 		/singleton/skill_level/none = {"\

@@ -1,8 +1,8 @@
 /singleton/skill/pilot
 	name = "Piloting"
 	save_key = "pilot"
-	default_max = SKILL_ADEPT
-	difficulty = SKILL_AVERAGE
+	default_max = /singleton/skill_level/adept
+	difficulty = DIFFICULTY_AVERAGE
 	desc = {"\
 		Describes your experience and understanding of piloting spacecraft, from \
 		small and short-range pods to corvette sized vessels.\

@@ -1,8 +1,8 @@
 /singleton/skill/weapons
 	name = "Weapons Expertise"
 	save_key = "weapons"
-	default_max = SKILL_ADEPT
-	difficulty = SKILL_AVERAGE
+	default_max = /singleton/skill_level/adept
+	difficulty = DIFFICULTY_AVERAGE
 	desc = {"\
 		This skill describes your expertise with and knowledge of weapons. A low level in \
 		this skill implies knowledge of simple weapons, for example flashes. A high level \

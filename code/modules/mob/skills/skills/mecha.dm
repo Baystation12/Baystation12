@@ -1,8 +1,8 @@
 /singleton/skill/mecha
 	name = "Exosuit Operation"
 	save_key = "mecha"
-	default_max = SKILL_BASIC
-	difficulty = SKILL_AVERAGE
+	default_max = /singleton/skill_level/basic
+	difficulty = DIFFICULTY_AVERAGE
 	prerequisites = list(
 		/singleton/skill/eva = /singleton/skill_level/adept
 	)
@@ -12,7 +12,7 @@
 			You are unfamiliar with exosuit controls, and if you attempt to use them you are \
 			liable to make mistakes.\
 		"},
-		/singleton/skill_level/adept = {"\
+		/singleton/skill_level/basic = {"\
 			You are proficient in exosuit operation and safety, and can use them without penalties.\
 		"}
 	)

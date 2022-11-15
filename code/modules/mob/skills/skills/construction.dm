@@ -1,8 +1,8 @@
 /singleton/skill/construction
 	name = "Construction"
 	save_key = "construction"
-	default_max = SKILL_ADEPT
-	difficulty = SKILL_EASY
+	default_max = /singleton/skill_level/adept
+	difficulty = DIFFICULTY_EASY
 	desc = {"\
 		Your ability to construct various buildings, such as walls, floors,  tables \
 		and so on. Note that constructing devices such as APCs additionally requires \

@@ -1,18 +1,3 @@
-#define SKILL_NONE     1
-#define SKILL_BASIC    2
-#define SKILL_ADEPT    3
-#define SKILL_EXPERT   4
-#define SKILL_PROF     5
-#define HAS_PERK       SKILL_NONE + 1
-
-#define SKILL_MIN      1 // Min skill value selectable
-#define SKILL_MAX      5 // Max skill value selectable
-#define SKILL_DEFAULT  4 //most mobs will default to this
-
-#define SKILL_EASY     1
-#define SKILL_AVERAGE  2
-#define SKILL_HARD     4
-
 #define SKILL_BUREAUCRACY   /singleton/skill/bureaucracy
 #define SKILL_FINANCE       /singleton/skill/finance
 #define SKILL_EVA           /singleton/skill/eva

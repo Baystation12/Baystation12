@@ -1,8 +1,8 @@
 /singleton/skill/eva
 	name = "Extra-vehicular activity"
 	save_key = "eva"
-	default_max = SKILL_MAX
-	difficulty = SKILL_EASY
+	default_max = /singleton/skill_level/professional
+	difficulty = DIFFICULTY_EASY
 	desc = "This skill describes your skill and knowledge of space-suits and working in vacuum."
 	levels = list(
 		/singleton/skill_level/none = {"\

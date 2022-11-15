@@ -1,8 +1,8 @@
 /singleton/skill/chemistry
 	name = "Chemistry"
 	save_key = "chemistry"
-	default_max = SKILL_ADEPT
-	difficulty = SKILL_HARD
+	default_max = /singleton/skill_level/adept
+	difficulty = DIFFICULTY_HARD
 	desc = {"\
 		Experience with mixing chemicals, and an understanding of what the effect will \
 		be. This doesn't cover an understanding of the effect of chemicals on the human \

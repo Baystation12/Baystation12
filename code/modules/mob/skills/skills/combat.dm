@@ -1,8 +1,8 @@
 /singleton/skill/combat
 	name = "Close Combat"
 	save_key = "combat"
-	default_max = SKILL_ADEPT
-	difficulty = SKILL_AVERAGE
+	default_max = /singleton/skill_level/adept
+	difficulty = DIFFICULTY_AVERAGE
 	desc = {"\
 		This skill describes your training in hand-to-hand combat or melee weapon \
 		usage. While expertise in this area is rare in the era of firearms, \

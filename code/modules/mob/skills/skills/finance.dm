@@ -1,8 +1,8 @@
 /singleton/skill/finance
 	name = "Finance"
 	save_key = "finance"
-	default_max = SKILL_MAX
-	difficulty = SKILL_EASY
+	default_max = /singleton/skill_level/professional
+	difficulty = DIFFICULTY_EASY
 	desc = "Your ability to manage money and investments."
 	levels = list(
 		/singleton/skill_level/none = {"\

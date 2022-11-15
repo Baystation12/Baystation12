@@ -1,8 +1,8 @@
 /singleton/skill/anatomy
 	name = "Anatomy"
 	save_key = "anatomy"
-	default_max = SKILL_ADEPT
-	difficulty = SKILL_HARD
+	default_max = /singleton/skill_level/professional
+	difficulty = DIFFICULTY_HARD
 	desc = {"\
 		Gives you a detailed insight of the human body. A high skill in this is required \
 		to perform surgery. This skill may also help in examining alien biology.\

@@ -1,8 +1,8 @@
 /singleton/skill/devices
 	name = "Complex Devices"
 	save_key = "devices"
-	default_max = SKILL_ADEPT
-	difficulty = SKILL_AVERAGE
+	default_max = /singleton/skill_level/adept
+	difficulty = DIFFICULTY_AVERAGE
 	desc = {"\
 		Describes the ability to assemble complex devices, such as computers, circuits, \
 		printers, robots or gas tank assemblies (bombs). Note that if a device requires \

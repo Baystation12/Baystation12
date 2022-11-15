@@ -1,8 +1,8 @@
 /singleton/skill/engines
 	name = "Engines"
 	save_key = "engines"
-	default_max = SKILL_ADEPT
-	difficulty = SKILL_HARD
+	default_max = /singleton/skill_level/adept
+	difficulty = DIFFICULTY_HARD
 	desc = {"\
 		Describes your knowledge of the various engine types common on space stations, such as \
 		the PACMAN, singularity, supermatter or RUST engine.\

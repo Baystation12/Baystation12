@@ -2,8 +2,8 @@
 	save_key = "science"
 	name = "Science"
 	save_key = "devices"
-	default_max = SKILL_ADEPT
-	difficulty = SKILL_AVERAGE
+	default_max = /singleton/skill_level/adept
+	difficulty = DIFFICULTY_AVERAGE
 	desc = "Your experience and knowledge with scientific methods and processes."
 	levels = list(
 		/singleton/skill_level/none = {"\

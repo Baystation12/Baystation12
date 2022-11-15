@@ -1,8 +1,8 @@
 /singleton/skill/medical
 	name = "Medicine"
 	save_key = "medical"
-	default_max = SKILL_ADEPT
-	difficulty = SKILL_HARD
+	default_max = /singleton/skill_level/adept
+	difficulty = DIFFICULTY_HARD
 	desc = {"\
 		Covers an understanding of the human body and medicine. At a low level, this skill \
 		gives a basic understanding of applying common types of medicine, and a rough \

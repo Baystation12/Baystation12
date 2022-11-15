@@ -1,8 +1,8 @@
 /singleton/skill/bureaucracy
 	name = "Bureaucracy"
 	save_key = "bureaucracy"
-	default_max = SKILL_MAX
-	difficulty = SKILL_EASY
+	default_max = /singleton/skill_level/professional
+	difficulty = DIFFICULTY_EASY
 	desc = {"\
 		Your ability to write and complete paperwork, navigate complex organiztions, \
 		and understand laws and regulations.\

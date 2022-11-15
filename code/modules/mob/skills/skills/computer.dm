@@ -1,8 +1,8 @@
 /singleton/skill/computer
 	name = "Information Technology"
 	save_key = "computer"
-	default_max = SKILL_MAX
-	difficulty = SKILL_EASY
+	default_max = /singleton/skill_level/professional
+	difficulty = DIFFICULTY_EASY
 	desc = {"\
 		Describes your understanding of computers, software and communication. Not a \
 		requirement for using computers, but definitely helps. Used in telecommunications \
