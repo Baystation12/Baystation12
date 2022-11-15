@@ -28,6 +28,10 @@
 /datum/codex_entry/optable
 	associated_paths = list(/obj/machinery/optable)
 	mechanics_text = "Click your target with Grab intent, then click on the table with an empty hand, to place them on it.<br>Click on table after that to enable knockout function."
+	
+/datum/codex_entry/roboptable
+	associated_paths = list(/obj/machinery/roboptable)
+	mechanics_text = "Click your target with Grab intent, then click on the table with an empty hand, to place them on it."
 
 /datum/codex_entry/vitals_monitor
 	associated_paths = list(/obj/machinery/vitals_monitor)

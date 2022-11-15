@@ -984,6 +984,8 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/turf/T = get_turf(M)
 	if(locate(/obj/machinery/optable, T))
 		. = TRUE
+	if(locate(/obj/machinery/roboptable,T))
+		. = TRUE
 	if(locate(/obj/structure/bed, T))
 		. = TRUE
 	if(locate(/obj/structure/table, T))
