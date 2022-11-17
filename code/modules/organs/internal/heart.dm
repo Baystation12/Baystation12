@@ -226,3 +226,10 @@
 
 /obj/item/organ/internal/heart/get_mechanical_assisted_descriptor()
 	return "pacemaker-assisted [name]"
+
+/obj/item/organ/internal/heart/take_internal_damage(amount, silent)
+	..()
+	if ((damage >= min_broken_damage) && (amount >= 10))
+		if (owner)
+			owner.Paralyse(6)
+
