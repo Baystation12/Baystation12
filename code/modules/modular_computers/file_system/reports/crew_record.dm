@@ -1,6 +1,6 @@
 GLOBAL_LIST_EMPTY(all_crew_records)
 GLOBAL_LIST_INIT(blood_types, list("A-", "A+", "B-", "B+", "AB-", "AB+", "O-", "O+"))
-GLOBAL_LIST_INIT(physical_statuses, list("Active", "Disabled", "SSD", "Deceased", "MIA"))
+GLOBAL_LIST_INIT(physical_statuses, list("Active", "Disabled", "Deceased", "SSD", "KIA", "MIA", "CIA", "WIA"))
 GLOBAL_VAR_INIT(default_physical_status, "Active")
 GLOBAL_LIST_INIT(security_statuses, list("None", "Released", "Parolled", "Incarcerated", "Arrest"))
 GLOBAL_VAR_INIT(default_security_status, "None")

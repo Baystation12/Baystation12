@@ -183,7 +183,6 @@
 		return // Moved here to avoid nullrefs below
 
 	var/datum/movement_handler/H = mob.GetMovementHandler(/datum/movement_handler/mob/delay)
-	if(.)
 	if(H && H.MayMove() != MOVEMENT_PROCEED)
 		return
 

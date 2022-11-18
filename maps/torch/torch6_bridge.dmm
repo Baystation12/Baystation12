@@ -3774,12 +3774,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/aquila/cockpit)
-"hg" = (
-/obj/machinery/rotating_alarm/security_alarm{
-	dir = 4
-	},
-/turf/space,
-/area/space)
 "hi" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack{
@@ -23996,7 +23990,7 @@ aa
 pe
 aa
 aa
-hg
+aa
 aa
 aa
 aa

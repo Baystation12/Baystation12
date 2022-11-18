@@ -2133,13 +2133,12 @@
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "asW" = (
-/obj/item/stool,
+/obj/structure/bed/chair/comfy/black,
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "asX" = (
 /obj/structure/table/rack,
-/obj/item/rig/light/internalaffairs/equipped,
-/obj/item/rig/light/internalaffairs/equipped,
+/obj/item/storage/toolbox/emergency,
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "asY" = (
@@ -2147,10 +2146,12 @@
 	dir = 1
 	},
 /obj/structure/table/reinforced,
+/obj/item/storage/pill_bottle/paracetamol,
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "asZ" = (
-/obj/machinery/sleeper,
+/obj/structure/hygiene/shower,
+/obj/structure/curtain/open/shower,
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "atb" = (
@@ -2167,8 +2168,10 @@
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "ate" = (
-/obj/structure/table/reinforced,
-/obj/item/storage/box/donkpocket_premium,
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/structure/dispenser,
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "atf" = (
@@ -2177,12 +2180,13 @@
 	},
 /obj/structure/table/reinforced,
 /obj/item/deck/cards,
+/obj/item/storage/box/donkpocket_premium,
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "atg" = (
-/obj/structure/bed/padded,
-/obj/item/bedsheet/captain,
-/turf/simulated/floor/shuttle/red,
+/obj/structure/table/steel_reinforced,
+/obj/item/storage/belt/medical/emt,
+/turf/simulated/floor/shuttle/white,
 /area/shuttle/administration/centcom)
 "ath" = (
 /turf/unsimulated/wall,
@@ -2215,15 +2219,13 @@
 	},
 /area/prison/solitary)
 "atn" = (
-/obj/machinery/vending/coffee{
-	prices = list()
-	},
+/obj/structure/table/steel_reinforced,
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "ato" = (
-/obj/item/flame/lighter/zippo/random,
-/obj/structure/table/reinforced,
-/turf/simulated/floor/shuttle/red,
+/obj/structure/iv_drip,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/shuttle/white,
 /area/shuttle/administration/centcom)
 "atp" = (
 /obj/item/storage/fancy/cigarettes,
@@ -2304,13 +2306,14 @@
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "atE" = (
-/obj/machinery/sleeper{
-	dir = 1
-	},
+/obj/machinery/vending/security,
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "atG" = (
-/obj/structure/bookcase,
+/obj/structure/extinguisher_cabinet{
+	pixel_y = -32
+	},
+/obj/structure/table/steel_reinforced,
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "atH" = (
@@ -2463,6 +2466,7 @@
 /area/shuttle/administration/centcom)
 "aui" = (
 /obj/structure/table/reinforced,
+/obj/item/storage/med_pouch/trauma,
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "auj" = (
@@ -2553,7 +2557,8 @@
 /turf/simulated/floor/shuttle/white,
 /area/shuttle/administration/centcom)
 "auF" = (
-/obj/structure/bed/roller,
+/obj/structure/table/steel_reinforced,
+/obj/item/storage/box/bodybags,
 /turf/simulated/floor/shuttle/white,
 /area/shuttle/administration/centcom)
 "auG" = (
@@ -2685,6 +2690,7 @@
 /area/shuttle/administration/centcom)
 "avc" = (
 /obj/machinery/recharge_station,
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "avd" = (
@@ -2695,11 +2701,15 @@
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "ave" = (
-/obj/machinery/fabricator/hacked,
+/obj/machinery/fabricator/hacked{
+	name = "autolathe"
+	},
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "avf" = (
-/obj/structure/dispenser,
+/obj/structure/bed/chair/shuttle{
+	dir = 4
+	},
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "avg" = (
@@ -2885,18 +2895,24 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/structure/sign/warning/internals_required{
+	pixel_x = 28
+	},
 /turf/simulated/floor/plating,
 /area/shuttle/administration/centcom)
 "avK" = (
 /obj/item/device/multitool,
 /obj/item/reagent_containers/spray/cleaner,
-/obj/structure/table/reinforced,
+/obj/item/storage/toolbox/mechanical,
+/obj/structure/closet/crate/plastic,
+/obj/item/storage/belt/utility/full,
+/obj/item/tape/bureaucracy,
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "avL" = (
-/obj/item/storage/toolbox/mechanical,
-/obj/structure/table/reinforced,
-/turf/simulated/floor/shuttle/red,
+/obj/structure/bed/roller,
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/simulated/floor/shuttle/white,
 /area/shuttle/administration/centcom)
 "avM" = (
 /obj/structure/bed,
@@ -7939,7 +7955,7 @@
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
 	prices = list();
-	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/storage/fancy/cigarettes=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo/random=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
 	},
 /turf/unsimulated/floor{
 	icon_state = "plating";
@@ -8390,7 +8406,7 @@
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
 	prices = list();
-	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/storage/fancy/cigarettes=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo/random=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
 	},
 /obj/structure/window/reinforced{
 	dir = 1
@@ -10998,9 +11014,8 @@
 	},
 /area/centcom/holding)
 "bBb" = (
-/obj/machinery/computer/modular/preset/library{
-	dir = 8;
-	icon_state = "console"
+/obj/structure/bed/chair/comfy/black{
+	dir = 1
 	},
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
@@ -11302,6 +11317,12 @@
 "hJx" = (
 /turf/simulated/wall/r_titanium,
 /area/centcom/evac)
+"hPB" = (
+/obj/structure/morgue{
+	dir = 1
+	},
+/turf/simulated/floor/shuttle/white,
+/area/shuttle/administration/centcom)
 "icO" = (
 /obj/structure/bed/chair/wood{
 	dir = 1;
@@ -11472,6 +11493,12 @@
 	},
 /turf/simulated/floor/holofloor/tiled/stone,
 /area/holodeck/source_temple)
+"lyG" = (
+/obj/machinery/vending/wallmed1{
+	pixel_x = -32
+	},
+/turf/simulated/floor/shuttle/red,
+/area/shuttle/administration/centcom)
 "lGk" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/unsimulated/floor/plating,
@@ -11492,6 +11519,10 @@
 /obj/machinery/door/airlock/centcom,
 /turf/simulated/floor/shuttle/blue,
 /area/shuttle/transport1/centcom)
+"lRp" = (
+/obj/structure/closet/walllocker/emerglocker/west,
+/turf/simulated/floor/shuttle/red,
+/area/shuttle/administration/centcom)
 "lRq" = (
 /obj/structure/bed/chair/wood{
 	holographic = 1
@@ -12003,6 +12034,13 @@
 	icon_state = "desert2"
 	},
 /area/holodeck/source_volleyball)
+"xUX" = (
+/obj/structure/table/rack,
+/obj/item/storage/mre/random,
+/obj/item/storage/mre/random,
+/obj/item/storage/mre/random,
+/turf/simulated/floor/shuttle/red,
+/area/shuttle/administration/centcom)
 "xXB" = (
 /obj/effect/floor_decal/spline/plain,
 /turf/simulated/floor/holofloor/beach/sand,
@@ -17535,9 +17573,9 @@ asR
 izl
 atB
 atU
-izl
 asR
-izl
+asR
+asR
 atB
 atU
 izl
@@ -17941,7 +17979,7 @@ atD
 atV
 aug
 izl
-auD
+ato
 auR
 auY
 izl
@@ -18138,12 +18176,12 @@ asR
 izl
 izl
 atc
-atn
+asV
 atd
 atd
 auh
 izl
-auD
+auE
 auD
 auZ
 avj
@@ -18338,14 +18376,14 @@ aab
 asP
 asR
 izl
-asV
+atd
 atd
 atd
 atd
 atd
 aui
 izl
-auE
+hPB
 auD
 auD
 auD
@@ -18540,14 +18578,14 @@ aab
 asP
 asR
 izl
-asW
-ate
-ato
-asW
+atd
+aut
+aut
+atd
 atd
 auj
 izl
-auD
+atg
 auD
 auD
 auD
@@ -18745,13 +18783,13 @@ izl
 asW
 atf
 atp
-asW
+bBb
 atd
 auk
 izl
 auF
 auD
-auD
+avL
 avk
 avq
 avH
@@ -18945,16 +18983,16 @@ asP
 asR
 izl
 izl
+aum
+aum
+izl
+atr
 izl
 izl
 izl
 atr
 izl
-izl
-izl
-atr
-izl
-izl
+aum
 izl
 izl
 izl
@@ -19148,15 +19186,15 @@ asR
 izl
 asX
 atd
-atq
-atd
-atd
 atd
 atq
 atd
-atd
+lyG
+atq
+lRp
 atd
 atq
+atd
 wkp
 avI
 wkp
@@ -19348,7 +19386,7 @@ aab
 asP
 asR
 izl
-asX
+xUX
 atd
 atd
 atd
@@ -19553,11 +19591,11 @@ izl
 asY
 atd
 atd
-atd
+atE
 izl
-atd
-aut
-atd
+atn
+avf
+atG
 izl
 izl
 atr
@@ -19752,15 +19790,15 @@ aab
 asP
 asR
 izl
-asZ
-atd
-atd
-atE
+izl
+izl
+atr
+izl
 izl
 aul
 auu
 auG
-izl
+aum
 ava
 atd
 atq
@@ -19957,7 +19995,7 @@ asS
 asZ
 atd
 atd
-atE
+atd
 asS
 aum
 aum
@@ -19966,7 +20004,7 @@ asS
 avb
 atd
 atd
-avL
+avu
 asS
 asR
 avY
@@ -20157,9 +20195,9 @@ asP
 asR
 asS
 asS
-asS
-atr
-asS
+atd
+atd
+atd
 asS
 asR
 asR
@@ -20359,7 +20397,7 @@ asP
 asR
 asS
 asS
-atg
+asS
 atd
 atd
 asS
@@ -20369,7 +20407,7 @@ asR
 asS
 avd
 atd
-avu
+asS
 asS
 asS
 asR
@@ -20563,7 +20601,7 @@ asR
 asS
 asS
 atd
-bBb
+atd
 asS
 asR
 asR
@@ -20762,19 +20800,19 @@ aab
 asP
 asR
 asR
-asS
-asS
-ats
-atG
-asS
-asR
-asR
 asR
 asS
-avf
 ats
 asS
 asS
+asR
+asR
+asR
+asS
+asS
+ate
+asS
+asR
 asR
 asR
 avZ
@@ -20968,11 +21006,11 @@ asR
 asS
 asS
 asS
-asS
 asR
 asR
 asR
-asS
+asR
+asR
 asS
 asS
 asS
