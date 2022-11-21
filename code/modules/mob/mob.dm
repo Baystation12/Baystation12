@@ -183,10 +183,16 @@
 			return TRUE
 	return FALSE
 
-// Returns an amount of power drawn from the object (-1 if it's not viable).
-// If drain_check is set it will not actually drain power, just return a value.
-// If surge is set, it will destroy/damage the recipient and not return any power.
-// Not sure where to define this, so it can sit here for the rest of time.
+/**
+ * Returns an amount of power drawn from the atom or `-1` if it's not viable.
+ *
+ * **Parameters**:
+ * - `drain_check` Boolean - If set, does not actually drain power, only returns an amount.
+ * - `surge` Boolean - If set, this will damage the recipient and not return any power.
+ * - `amount` - The amount of power to attempt to drain.
+ *
+ * Returns integer.
+ */
 /atom/proc/drain_power(drain_check,surge, amount = 0)
 	return -1
 

@@ -305,3 +305,14 @@
 #define EX_ACT_DEVASTATING 1 // Within devastation range - Destructive/deadly, unlikely to survive.
 #define EX_ACT_HEAVY 2 // Within heavy range - Heavy damage, very dangerous
 #define EX_ACT_LIGHT 3 // Within light range - Minor damage.
+
+
+// Atom layering/visibility levels on turfs. See `/atom/var/level`.
+#define ATOM_LEVEL_UNDER_TILE 1 // Hidden under floor tiles, visible on plating
+#define ATOM_LEVEL_OVER_TILE 2 // Visible on all turf tiles
+
+
+// Atom flourescence
+#define ATOM_FLOURESCENCE_NONE 0 // Not flourescent
+#define ATOM_FLOURESCENCE_INACTIVE 1 // Flourescent but not actively lit
+#define ATOM_FLOURESCENCE_ACTVE 2 // Flourescent and actively lit. Helps prevent repeated processing on a flourescent atom by multiple UV lights

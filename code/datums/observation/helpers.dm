@@ -16,6 +16,14 @@
 	if(new_loc != loc)
 		forceMove(new_loc)
 
+/**
+ * Handler for setting an atom's dir when mimicking movements. Calls `set_dir()`.
+ *
+ * **Parameters**:
+ * - `a` - The atom triggering the event.
+ * - `old_dir` - The atom's prior `dir`.
+ * - `new_dir` - The new `dir` to set.
+ */
 /atom/proc/recursive_dir_set(atom/a, old_dir, new_dir)
 	set_dir(new_dir)
 

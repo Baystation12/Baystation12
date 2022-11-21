@@ -106,18 +106,38 @@
 /******************
 * Assisting procs *
 ******************/
+/**
+ * Determines the alarm's z-level.
+ *
+ * TODO: Possibly redundant. Check how areas respond to `get_z()` and potentially just replace this call with that.
+ *
+ * Returns integer.
+ */
 /atom/proc/get_alarm_z()
 	return get_z(src)
 
 /area/get_alarm_z()
 	return contents.len ? get_z(contents[1]) : 0
 
+/**
+ * Retrieves the atom's area for alarms.
+ *
+ * TODO: Redundant. Replace with `get_area()`.
+ *
+ * Returns instance of `/area`.
+ */
 /atom/proc/get_alarm_area()
 	return get_area(src)
 
 /area/get_alarm_area()
 	return src
 
+/**
+ * Retrieves the name to use for alarms. For mobs, this is the mob's name. For everything else, this is the arom's
+ * area's name.
+ *
+ * Returns string.
+ */
 /atom/proc/get_alarm_name()
 	var/area/A = get_area(src)
 	return A.name
@@ -128,12 +148,24 @@
 /mob/get_alarm_name()
 	return name
 
+/**
+ * Retrieves an alarm's origin name. Generally this is the atom's name or, for cameras, `c_tag`.
+ *
+ * Returns string.
+ */
 /atom/proc/get_source_name()
 	return name
 
 /obj/machinery/camera/get_source_name()
 	return c_tag
 
+/**
+ * Retrieves a list of cameras from the atom's area.
+ *
+ * TODO: Redundant. Replace with `get_area()` and `get_cameras()`.
+ *
+ * Returns list (Instances of `/obj/machinery/camera`). All cameras in the atom's area.
+ */
 /atom/proc/get_alarm_cameras()
 	var/area/A = get_area(src)
 	return A.get_cameras()

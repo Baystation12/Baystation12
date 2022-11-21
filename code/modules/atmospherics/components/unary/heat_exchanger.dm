@@ -72,7 +72,7 @@
 	if(!isWrench(W))
 		return ..()
 	var/turf/T = src.loc
-	if (level==1 && isturf(T) && !T.is_plating())
+	if (level==ATOM_LEVEL_UNDER_TILE && isturf(T) && !T.is_plating())
 		to_chat(user, SPAN_WARNING("You must remove the plating first."))
 		return 1
 	var/datum/gas_mixture/int_air = return_air()

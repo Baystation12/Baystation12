@@ -10,10 +10,6 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 /turf/var/obj/hotspot/hotspot = null
 
-//Some legacy definitions so fires can be started.
-/atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	return null
-
 /atom/movable/proc/is_burnable()
 	return FALSE
 

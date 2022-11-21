@@ -187,6 +187,7 @@
 #define MOUSE_OPACITY_PRIORITY 2
 
 
+/// Integer (One of `*_PLANE`). The atom's rendering plane. See `code\__defines\__renderer.dm` for a list of valid planes. Also see the DM Reference for `plane var (atom)`.
 /atom/plane = DEFAULT_PLANE
 
 #define DEFAULT_APPEARANCE_FLAGS (PIXEL_SCALE)

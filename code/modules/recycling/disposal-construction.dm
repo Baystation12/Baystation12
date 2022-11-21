@@ -9,7 +9,6 @@
 	anchored = FALSE
 	density = FALSE
 	matter = list(MATERIAL_STEEL = 1850)
-	level = 2
 	obj_flags = OBJ_FLAG_ROTATABLE
 	var/sort_type = ""
 	var/dpdir = 0	// directions as disposalpipe
@@ -67,7 +66,7 @@
 // hide called by levelupdate if turf intact status changes
 // change visibility status and force update of icon
 /obj/structure/disposalconstruct/hide(intact)
-	set_invisibility((intact && level==1) ? 101: 0)	// hide if floor is intact
+	set_invisibility((intact && level==ATOM_LEVEL_UNDER_TILE) ? 101: 0)	// hide if floor is intact
 	update()
 
 /obj/structure/disposalconstruct/proc/flip()
@@ -181,11 +180,11 @@
 /obj/structure/disposalconstruct/proc/wrench_down(anchor)
 	if(anchor)
 		anchored = TRUE
-		level = 1 // We don't want disposal bins to disappear under the floors
+		level = ATOM_LEVEL_UNDER_TILE // We don't want disposal bins to disappear under the floors
 		set_density(0)
 	else
 		anchored = FALSE
-		level = 2
+		level = ATOM_LEVEL_OVER_TILE
 		set_density(1)
 
 /obj/structure/disposalconstruct/machine/check_buildability(obj/structure/disposalpipe/CP, mob/user)

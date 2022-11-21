@@ -8,7 +8,7 @@
 	active_power_usage = 2000
 	anchored = TRUE
 	density = FALSE
-	level = 1
+	level = ATOM_LEVEL_UNDER_TILE
 	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0

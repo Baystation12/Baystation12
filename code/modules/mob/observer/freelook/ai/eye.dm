@@ -73,6 +73,9 @@
 	destroy_eyeobj()
 	. = ..()
 
+/**
+ * Handles moving an AI's 'eye' to a location on click.
+ */
 /atom/proc/move_camera_by_click()
 	if(istype(usr, /mob/living/silicon/ai))
 		var/mob/living/silicon/ai/AI = usr

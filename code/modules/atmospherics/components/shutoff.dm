@@ -11,7 +11,6 @@
 	clickvol = 20
 	var/close_on_leaks = TRUE	// If false it will be always open
 	var/shutoff_state = 0
-	level = 1
 	connect_types = CONNECT_TYPE_REGULAR
 	build_icon_state = "svalve"
 

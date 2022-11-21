@@ -1,3 +1,9 @@
+/**
+ * Whether or not this atom or its contents will disrupt psionics. Top-level proc recursively checks all contents.
+ *
+ * Returns instance of `/atom/movable` or `FALSE`. Either the atom that can disrupt psionics, or `FALSE` if nothing will
+ * disrupt.
+ */
 /atom/proc/disrupts_psionics()
 	for(var/thing in contents)
 		var/atom/movable/AM = thing

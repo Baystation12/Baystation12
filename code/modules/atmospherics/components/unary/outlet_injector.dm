@@ -22,7 +22,7 @@
 	var/datum/radio_frequency/radio_connection
 
 
-	level = 1
+	level = ATOM_LEVEL_UNDER_TILE
 
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 
@@ -58,7 +58,7 @@
 		var/turf/T = get_turf(src)
 		if(!istype(T))
 			return
-		if(!T.is_plating() && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
+		if(!T.is_plating() && node && node.level == ATOM_LEVEL_UNDER_TILE && istype(node, /obj/machinery/atmospherics/pipe))
 			return
 		else
 			if(node)

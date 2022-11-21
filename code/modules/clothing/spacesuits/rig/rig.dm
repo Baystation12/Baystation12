@@ -997,7 +997,11 @@
 	cell.use(aimove_power_usage * CELLRATE)
 	wearer.DoMove(direction, user)
 
-// This returns the rig if you are contained inside one, but not if you are wearing it
+/**
+ * Retrieves the rig the atom is located inside of, recursively checking parent locs until it find one.
+ *
+ * Returns instead of `/obj/item/rig`.
+ */
 /atom/proc/get_rig()
 	if(loc)
 		return loc.get_rig()

@@ -18,7 +18,7 @@
 	power_rating = 30000			// 30000 W ~ 40 HP
 
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_FUEL //connects to regular, supply pipes, and fuel pipes
-	level = 1
+	level = ATOM_LEVEL_UNDER_TILE
 	identifier = "AVP"
 
 	var/hibernate = 0 //Do we even process?
@@ -135,7 +135,7 @@
 	if(!istype(T))
 		return
 
-	if(!T.is_plating() && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
+	if(!T.is_plating() && node && node.level == ATOM_LEVEL_UNDER_TILE && istype(node, /obj/machinery/atmospherics/pipe))
 		vent_icon += "h"
 
 	if(welded)
@@ -153,7 +153,7 @@
 		var/turf/T = get_turf(src)
 		if(!istype(T))
 			return
-		if(!T.is_plating() && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
+		if(!T.is_plating() && node && node.level == ATOM_LEVEL_UNDER_TILE && istype(node, /obj/machinery/atmospherics/pipe))
 			return
 		else
 			if(node)
@@ -315,7 +315,7 @@
 			to_chat(user, SPAN_WARNING("You cannot unwrench \the [src], turn it off first."))
 			return 1
 		var/turf/T = src.loc
-		if (node && node.level==1 && isturf(T) && !T.is_plating())
+		if (node && node.level==ATOM_LEVEL_UNDER_TILE && isturf(T) && !T.is_plating())
 			to_chat(user, SPAN_WARNING("You must remove the plating first."))
 			return 1
 		var/datum/gas_mixture/int_air = return_air()

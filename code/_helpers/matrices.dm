@@ -1,3 +1,10 @@
+/**
+ * Performs a spin/rotation animation on the atom's sprite.
+ *
+ * **Parameters**:
+ * - `speed` (int) - How quickly the atom should rotate.
+ * - `loops` (int) - How many times the spin animation should occur. Set to `-1` for infinite looping.
+ */
 /atom/proc/SpinAnimation(speed = 10, loops = -1)
 	var/matrix/m120 = matrix(transform).Update(rotation = 120)
 	var/matrix/m240 = matrix(transform).Update(rotation = 240)
@@ -6,6 +13,12 @@
 	animate(transform = m240, time = speed / 3)
 	animate(transform = m360, time = speed / 3)
 
+/**
+ * Performs a shaking animation on the atom's sprite.
+ *
+ * **Parameters**:
+ * - `intensity` integer - The intensity of the shaking.
+ */
 /atom/proc/shake_animation(intensity = 8)
 	var/init_px = pixel_x
 	var/shake_dir = pick(-1, 1)

@@ -1,6 +1,6 @@
 /turf
 	icon = 'icons/turf/floors.dmi'
-	level = 1
+	level = ATOM_LEVEL_UNDER_TILE
 
 	layer = TURF_LAYER
 
@@ -205,9 +205,9 @@ var/global/const/enterloopsanity = 100
 			objects++
 			spawn(0)
 				if(A)
-					A.HasProximity(thing, 1)
+					A.HasProximity(thing)
 					if ((thing && A) && (thing.movable_flags & MOVABLE_FLAG_PROXMOVE))
-						thing.HasProximity(A, 1)
+						thing.HasProximity(A)
 	return
 
 /turf/proc/adjacent_fire_act(turf/simulated/floor/source, exposed_temperature, exposed_volume)
