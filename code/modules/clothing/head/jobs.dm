@@ -93,6 +93,7 @@
 	name = "beret"
 	desc = "A beret, an artists favorite headwear."
 	icon_state = "beret"
+	slot_flags = SLOT_HEAD | SLOT_BELT
 	body_parts_covered = 0
 
 /obj/item/clothing/head/beret/sec
