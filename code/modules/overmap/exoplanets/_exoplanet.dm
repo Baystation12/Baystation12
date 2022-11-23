@@ -280,7 +280,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 
 /obj/effect/overmap/visitable/sector/exoplanet/get_scan_data(mob/user)
 	. = ..()
-	var/list/extra_data = list("<hr>")
+	var/list/extra_data = list("<br>")
 	if (atmosphere)
 		if (user.skill_check(SKILL_SCIENCE, SKILL_ADEPT))
 			var/list/gases = list()
@@ -292,7 +292,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 			extra_data += "Atmosphere pressure [atmosphere.return_pressure()*inaccuracy] kPa, temperature [atmosphere.temperature*inaccuracy] K"
 		else if (user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
 			extra_data += "Atmosphere present"
-		extra_data += "<hr>"
+		extra_data += "<br>"
 
 	if (seeds.len && user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
 		extra_data += "Xenoflora detected"
@@ -306,7 +306,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 			if (!(R.ruin_tags & RUIN_NATURAL))
 				ruin_num++
 		if (ruin_num)
-			extra_data += "<hr>[ruin_num] possible artificial structure\s detected."
+			extra_data += "<br>[ruin_num] possible artificial structure\s detected."
 
 	for (var/datum/exoplanet_theme/T in themes)
 		if (T.get_sensor_data())

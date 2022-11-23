@@ -1,49 +1,39 @@
-<h3>Sensors control console</h3>
-{{if data.viewing_silicon}}
-	<div class="block">
-		<div class="item">
-			<div class="itemContent bad">
-				Remote AI systems detected. Firewall protections forbid remote AI control.
-			</div>
-		</div>
-	</div>
-{{/if}}
 
-<div class='block'>
-	{{:helper.link(data.on ? 'Switch off' : 'Switch on', 'gear', { 'toggle' : 1 }, data.status != 'MISSING' ? null : 'disabled', data.on ? 'selected' : null)}}
+<fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
+	<legend style="text-align:center">Controls</legend> 
 	<div class='item'>
 		<div class="itemLabel">
-			<span class='white'>Status:</span>
+			Power
 		</div>
 		<div class="itemContent">
-			{{:data.status}}
+			{{:helper.link(data.on ? 'On' : 'Off', 'power', { 'toggle' : 1 }, data.status != 'MISSING' ? null : 'disabled', data.on ? 'selected' : null)}}
 		</div>
 	</div>
 	<div class='item'>
 		<div class="itemLabel">
-			<span class='white'>Range:</span>
+			Range
 		</div>
 		<div class="itemContent">
 			{{:helper.link(data.range, null, { 'range' : 1 }, null, null)}}
 		</div>
 	</div>
-</div>
-<div class='block'>
 	<div class='item'>
 		<div class="itemLabel">
-			Integrity:
+			Sector map view
 		</div>
 		<div class="itemContent">
-			{{if data.health < (data.max_health * 0.25)}}
-				{{:helper.displayBar(data.health, 0, data.max_health, 'bad')}}
-				<br><span class="bad">{{:data.health}}/{{:data.max_health}}</span>
-			{{else data.health < data.max_health *.75}}
-				{{:helper.displayBar(data.health, 0, data.max_health, 'average')}}
-				<br><span class="average">{{:data.health}}/{{:data.max_health}}</span>
-			{{else}}
-				{{:helper.displayBar(data.health, 0, data.max_health, 'good')}}
-				<br><span class="good">{{:data.health}}/{{:data.max_health}}</span>
-			{{/if}}
+			{{:helper.link(data.viewing ? 'Engaged' : 'Disengaged', 'shuffle', { 'viewing' : 1 }, null, data.viewing ? 'selected' : null)}}
+		</div>
+	</div>
+</fieldset>
+<fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
+	<legend style="text-align:center">Status</legend> 
+	<div class='item'>
+		<div class="itemLabel">
+			Status:
+		</div>
+		<div class="itemContent">
+			{{:data.status}}
 		</div>
 	</div>
 	<div class='item'>
@@ -69,30 +59,36 @@
 			{{/if}}
 		</div>
 	</div>
-</div>
-<div class='item'>
-	<div class="itemContent">
-		<div class='item'>
-			<span class='white'>Sector map view</span>
-			{{:helper.link(data.viewing ? 'Engaged' : 'Disengaged', 'shuffle', { 'viewing' : 1 }, null, data.viewing ? 'selected' : null)}}
-		</div>
-	</div>
-</div>
-<h4>Sensor contacts</h4>
-<div class='block'>
+</fieldset>
+<fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
+	<legend style="text-align:center">Contacts</legend> 
 {{if data.contacts}}
 	<table>
 	{{for data.contacts}}
 	<tr>
 	<div class='item'>
 		<td>{{:helper.link('Scan', 'search' ,{ 'scan' : value.ref }, null, null)}}</td>
-		<td><span class='white'>{{:value.name}}</span>, bearing {{:value.bearing}}</td>
+		<td><span style="color: {{:value.color}};">{{:value.name}}</span>, bearing {{:value.bearing}}</td>
 	</div>
 	</tr>
 	{{/for}}
 	</table>
+{{else}}
+	None
 {{/if}}
-</div>
+</fieldset>
+<fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
+	<legend style="text-align:center">Scan data</legend> 
+	{{if data.last_scan}}
+		<b>{{:data.last_scan.name}}</b> at {{:data.last_scan.location}}
+		{{:helper.link('Print', 'print' ,{ 'print' : 1 }, null, null)}}
+		<div class='block'>
+			{{:data.last_scan.data}}
+		</div>
+	{{else}}
+		N/A
+	{{/if}}
+</fieldset>
 {{if data.status == 'MISSING'}}
 	<div class='item'>
 		{{:helper.link('Link up with the sensor suite', 'gear', { 'link' : 1 }, data.status == 'MISSING' ? null : 'disabled', null)}}

@@ -2583,6 +2583,7 @@
 #include "code\modules\overmap\exoplanets\planet_types\shrouded.dm"
 #include "code\modules\overmap\exoplanets\planet_types\snow.dm"
 #include "code\modules\overmap\exoplanets\planet_types\volcanic.dm"
+#include "code\modules\overmap\ships\beacon.dm"
 #include "code\modules\overmap\ships\landable.dm"
 #include "code\modules\overmap\ships\ship.dm"
 #include "code\modules\overmap\ships\computers\engine_control.dm"
