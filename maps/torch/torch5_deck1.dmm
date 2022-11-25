@@ -26861,7 +26861,7 @@
 /obj/effect/floor_decal/corner/research/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/vending/hydronutrients{
-	categories = 3;
+	vendor_flags = 3;
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white/monotile,

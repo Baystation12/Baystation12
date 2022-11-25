@@ -28,7 +28,7 @@ var/global/const/VENDING_WIRE_IDSCAN = 8
 	. += ..()
 	. += "<BR>The orange light is [V.seconds_electrified ? "off" : "on"].<BR>"
 	. += "The red light is [V.shoot_inventory ? "blinking" : "off"].<BR>"
-	. += "The green light is [(V.categories & CAT_HIDDEN) ? "on" : "off"].<BR>"
+	. += "The green light is [(V.vendor_flags & CAT_HIDDEN) ? "on" : "off"].<BR>"
 	. += "The [V.scan_id ? "purple" : "yellow"] light is on.<BR>"
 
 /datum/wires/vending/UpdatePulsed(index)
@@ -37,7 +37,7 @@ var/global/const/VENDING_WIRE_IDSCAN = 8
 		if(VENDING_WIRE_THROW)
 			V.shoot_inventory = !V.shoot_inventory
 		if(VENDING_WIRE_CONTRABAND)
-			V.categories ^= CAT_HIDDEN
+			V.vendor_flags ^= CAT_HIDDEN
 		if(VENDING_WIRE_ELECTRIFY)
 			V.seconds_electrified = 30
 		if(VENDING_WIRE_IDSCAN)
@@ -50,9 +50,9 @@ var/global/const/VENDING_WIRE_IDSCAN = 8
 			V.shoot_inventory = !mended
 		if(VENDING_WIRE_CONTRABAND)
 			if(mended)
-				V.categories &= ~CAT_HIDDEN
+				V.vendor_flags &= ~CAT_HIDDEN
 			else
-				V.categories |= CAT_HIDDEN
+				V.vendor_flags |= CAT_HIDDEN
 		if(VENDING_WIRE_ELECTRIFY)
 			if(mended)
 				V.seconds_electrified = 0
