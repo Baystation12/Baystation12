@@ -1,7 +1,10 @@
-//FOR ACTORS GUILD - Containers
 /obj/machinery/vending/containers
-	name = "container dispenser"
+	name = "\improper Containers"
 	desc = "A container that dispenses containers."
 	icon_state = "robotics"
 	base_type = /obj/machinery/vending/containers
-	products = list(/obj/structure/closet/crate/freezer = 2, /obj/structure/closet = 3, /obj/structure/closet/crate = 3)
+	products = list(
+		/obj/structure/closet/crate/freezer = 2,
+		/obj/structure/closet = 3,
+		/obj/structure/closet/crate = 3
+	)

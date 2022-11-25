@@ -4,10 +4,18 @@
 	icon_state = "med"
 	icon_deny = "med-deny"
 	icon_vend = "med-vend"
-	vend_delay = 18
 	base_type = /obj/machinery/vending/medical
-	product_ads = "Go save some lives!;The best stuff for your medbay.;Only the finest tools.;Natural chemicals!;This stuff saves lives.;Don't you want some?;Ping!"
 	req_access = list(access_medical_equip)
+	idle_power_usage = 200
+	product_ads = {"\
+		Go save some lives!;\
+		The best stuff for your medbay.;\
+		Only the finest tools.;\
+		Natural chemicals!;\
+		This stuff saves lives.;\
+		Don't you want some?;\
+		Ping!\
+	"}
 	products = list(
 		/obj/item/reagent_containers/glass/bottle/antitoxin = 4,
 		/obj/item/reagent_containers/glass/bottle/inaprovaline = 4,
@@ -23,7 +31,6 @@
 		/obj/item/stack/medical/splint = 2,
 		/obj/item/reagent_containers/hypospray/autoinjector/pain = 4
 	)
-
 	contraband = list(
 		/obj/item/clothing/mask/chewable/candy/lolli/meds = 8,
 		/obj/item/reagent_containers/pill/tox = 3,
@@ -31,4 +38,3 @@
 		/obj/item/reagent_containers/glass/bottle/toxin = 4,
 		/obj/item/reagent_containers/hypospray/autoinjector/combatpain = 2
 	)
-	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
