@@ -140,15 +140,6 @@
 	return 1
 
 
-/obj/machinery/vending/proc/UpdateShowContraband(show)
-	if (isnull(show))
-		FLIP_FLAGS(vendor_flags, VENDOR_CATEGORY_HIDDEN)
-	else if (show)
-		SET_FLAGS(vendor_flags, VENDOR_CATEGORY_HIDDEN)
-	else
-		CLEAR_FLAGS(vendor_flags, VENDOR_CATEGORY_HIDDEN)
-
-
 /obj/machinery/vending/attackby(obj/item/item, mob/living/user)
 	var/obj/item/card/id/id = item.GetIdCard()
 	if (currently_vending && vendor_account && !vendor_account.suspended)
@@ -180,7 +171,7 @@
 		if (!user.unEquip(item, src))
 			return FALSE
 		coin = item
-		vendor_flags |= VENDOR_CATEGORY_COIN
+		UpdateShowPremium(TRUE)
 		to_chat(user, SPAN_NOTICE("You insert \the [item] into \the [src]."))
 		SSnano.update_uis(src)
 		return TRUE
@@ -265,7 +256,7 @@
 			user.put_in_hands(coin)
 		to_chat(user, SPAN_NOTICE("You remove \the [coin] from \the [src]"))
 		coin = null
-		vendor_flags &= ~VENDOR_CATEGORY_COIN
+		UpdateShowPremium(FALSE)
 		return TOPIC_HANDLED
 	if (href_list["vend"] && vend_ready && !currently_vending)
 		var/key = text2num(href_list["vend"])
@@ -403,11 +394,11 @@
 				to_chat(user, SPAN_NOTICE("You weren't able to pull the coin out fast enough, the machine ate it, string and all."))
 				qdel(coin)
 				coin = null
-				vendor_flags &= ~VENDOR_CATEGORY_COIN
+				UpdateShowPremium(FALSE)
 		else
 			qdel(coin)
 			coin = null
-			vendor_flags &= ~VENDOR_CATEGORY_COIN
+			UpdateShowPremium(FALSE)
 	if (vend_reply && (last_reply + 20 SECONDS) <= world.time)
 		spawn(0)
 			speak(vend_reply)
@@ -495,9 +486,39 @@
 	return HAS_FLAGS(vendor_flags, VENDOR_CATEGORY_NORMAL)
 
 
+/// Update whether the vendor should show the normal products category, flipping if null.
+/obj/machinery/vending/proc/UpdateShowProducts(show)
+	if (isnull(show))
+		FLIP_FLAGS(vendor_flags, VENDOR_CATEGORY_NORMAL)
+	else if (show)
+		SET_FLAGS(vendor_flags, VENDOR_CATEGORY_NORMAL)
+	else
+		CLEAR_FLAGS(vendor_flags, VENDOR_CATEGORY_NORMAL)
+
+
 /obj/machinery/vending/proc/IsShowingContraband()
 	return HAS_FLAGS(vendor_flags, VENDOR_CATEGORY_HIDDEN)
 
 
+/// Update whether the vendor should show the contraband category, flipping if null.
+/obj/machinery/vending/proc/UpdateShowContraband(show)
+	if (isnull(show))
+		FLIP_FLAGS(vendor_flags, VENDOR_CATEGORY_HIDDEN)
+	else if (show)
+		SET_FLAGS(vendor_flags, VENDOR_CATEGORY_HIDDEN)
+	else
+		CLEAR_FLAGS(vendor_flags, VENDOR_CATEGORY_HIDDEN)
+
+
 /obj/machinery/vending/proc/IsShowingPremium()
 	return HAS_FLAGS(vendor_flags, VENDOR_CATEGORY_COIN)
+
+
+/// Update whether the vendor should show the premium category, flipping if null.
+/obj/machinery/vending/proc/UpdateShowPremium(show)
+	if (isnull(show))
+		FLIP_FLAGS(vendor_flags, VENDOR_CATEGORY_COIN)
+	else if (show)
+		SET_FLAGS(vendor_flags, VENDOR_CATEGORY_COIN)
+	else
+		CLEAR_FLAGS(vendor_flags, VENDOR_CATEGORY_COIN)

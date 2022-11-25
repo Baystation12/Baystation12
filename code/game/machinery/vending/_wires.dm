@@ -76,9 +76,19 @@
 				vendor.scan_id = !vendor.scan_id
 
 
+/// Returns truthy when the throw products wire is cut.
+/datum/wires/vending/proc/GetThrowProducts()
+	return HAS_FLAGS(wires_status, WIRE_THROW_PRODUCTS)
+
+
 /// Update the throw products wire index, flipping if null.
 /datum/wires/vending/proc/UpdateThrowProducts(cut_wire)
 	UpdateWire(WIRE_THROW_PRODUCTS, cut_wire)
+
+
+/// Returns truthy when the show contraband wire is cut.
+/datum/wires/vending/proc/GetShowContraband()
+	return HAS_FLAGS(wires_status, WIRE_SHOW_CONTRABAND)
 
 
 /// Update the show contraband wire index, flipping if null.
@@ -86,9 +96,19 @@
 	UpdateWire(WIRE_SHOW_CONTRABAND, cut_wire)
 
 
+/// Returns truthy when the shock users wire is cut.
+/datum/wires/vending/proc/GetShockUsers()
+	return HAS_FLAGS(wires_status, WIRE_SHOCK_USERS)
+
+
 /// Update the shock users wire index, flipping if null.
 /datum/wires/vending/proc/UpdateShockUsers(cut_wire)
 	UpdateWire(WIRE_SHOCK_USERS, cut_wire)
+
+
+/// Returns truthy when the scan ID wire is cut.
+/datum/wires/vending/proc/GetScanIdCut()
+	return HAS_FLAGS(wires_status, WIRE_SCAN_ID)
 
 
 /// Update the scan id wire index, flipping if null.
