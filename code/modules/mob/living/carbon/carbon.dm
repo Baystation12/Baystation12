@@ -269,6 +269,11 @@
 	return
 
 /mob/living/carbon/throw_item(atom/target)
+	if (istype(loc, /obj/item/holder))
+		var/obj/item/holder/H = loc
+		if (istype(H.loc, /obj/item/organ/internal/stomach))
+			return
+
 	src.throw_mode_off()
 	if(src.stat || !target)
 		return
