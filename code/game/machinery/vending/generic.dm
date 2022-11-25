@@ -1,4 +1,5 @@
-/obj/machinery/vending/assist
+/obj/machinery/vending/generic
+	base_type = /obj/machinery/vending/generic
 	product_ads = {"\
 		Only the finest!;\
 		Have some tools.;\

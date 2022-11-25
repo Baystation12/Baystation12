@@ -10,7 +10,7 @@
 	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
 	clicksound = "button"
 	clickvol = 40
-	base_type = /obj/machinery/vending/assist
+	base_type = /obj/machinery/vending/generic //NB: Ugly hack. Allows products to be added to vendors that don't specify a correct base type.
 	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	machine_name = "vending machine"

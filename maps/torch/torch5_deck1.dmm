@@ -25518,7 +25518,7 @@
 /area/maintenance/firstdeck/foreport)
 "qDb" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/vending/assist{
+/obj/machinery/vending/generic{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,

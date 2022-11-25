@@ -386,7 +386,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/disposal)
 "aJ" = (
-/obj/machinery/vending/assist,
+/obj/machinery/vending/generic,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/power/apc{
 	dir = 8;
@@ -14896,7 +14896,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/disposal)
 "NW" = (
-/obj/machinery/vending/assist,
+/obj/machinery/vending/generic,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/forestarboard)
 "NX" = (

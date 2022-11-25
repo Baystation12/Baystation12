@@ -11216,7 +11216,7 @@
 /area/storage/tools)
 "AL" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/vending/assist,
+/obj/machinery/vending/generic,
 /turf/simulated/floor/tiled/monotile,
 /area/storage/tools)
 "AM" = (

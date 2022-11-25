@@ -1,5 +1,11 @@
-/obj/machinery/vending/assist/antag
-	contraband = list()
+/obj/machinery/vending/antag
+	base_type = /obj/machinery/vending/antag
+	product_ads = {"\
+		Only the finest!;\
+		Have some tools.;\
+		The most robust equipment.;\
+		The finest gear in space!\
+	"}
 	products = list(
 		/obj/item/device/assembly/prox_sensor = 5,
 		/obj/item/device/assembly/signaler = 4,
