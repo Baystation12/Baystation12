@@ -282,6 +282,17 @@
 	return ..()
 
 
+/obj/machinery/vending/dismantle()
+	var/obj/structure/vending_refill/dump = new (loc)
+	dump.SetName("[dump.name] ([name])")
+	dump.expected_type = base_type || type
+	for (var/datum/stored_items/vending_products/product in product_records)
+		product.migrate(dump)
+	dump.product_records = product_records
+	product_records = null
+	return ..()
+
+
 /obj/machinery/vending/proc/attempt_to_stock(obj/item/item, mob/living/user)
 	for (var/datum/stored_items/vending_products/product in product_records)
 		if (item.type == product.item_path)
