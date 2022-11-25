@@ -388,3 +388,16 @@ var/global/const/POWER = 8
 /datum/wires/proc/Shuffle()
 	wires_status = 0
 	GenerateWires()
+
+
+/// Update the wire at wire_flag according to cut, flipping if null.
+/datum/wires/proc/UpdateWire(wire_flag, cut)
+	var/state = HAS_FLAGS(wires_status, wire_flag)
+	if (isnull(cut))
+		FLIP_FLAGS(wires_status, wire_flag)
+	else if (cut)
+		SET_FLAGS(wires_status, wire_flag)
+	else
+		CLEAR_FLAGS(wires_status, wire_flag)
+	if (HAS_FLAGS(wires_status, wire_flag) != state)
+		UpdateCut(wire_flag, !state)

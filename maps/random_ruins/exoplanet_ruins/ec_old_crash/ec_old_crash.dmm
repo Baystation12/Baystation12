@@ -762,7 +762,7 @@
 	dir = 8
 	},
 /obj/machinery/vending/hydronutrients{
-	categories = 3
+	vendor_flags = 3
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/ecship/science)

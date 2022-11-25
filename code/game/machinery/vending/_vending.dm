@@ -1,4 +1,5 @@
 /obj/machinery/vending
+	abstract_type = /obj/machinery/vending
 	name = "\improper Vendomat"
 	desc = "A generic vending machine."
 	icon = 'icons/obj/vending.dmi'
@@ -17,6 +18,9 @@
 	idle_power_usage = 10
 	wires = /datum/wires/vending
 
+	/// The machine's wires, but typed.
+	var/datum/wires/vending/vendor_wires
+
 	/// icon_state to flick() when vending
 	var/icon_vend
 
@@ -29,8 +33,12 @@
 	var/active = TRUE //No sales pitches if off!
 	var/vend_ready = TRUE //Are we ready to vend?? Is it time??
 
-	/// A field of flags associated with vending machines.
-	var/vendor_flags = CAT_NORMAL
+	/// A field associated with vending machines from the below flags.
+	var/vendor_flags = VENDOR_CATEGORY_NORMAL
+
+	var/const/VENDOR_CATEGORY_NORMAL = FLAG(0)
+	var/const/VENDOR_CATEGORY_HIDDEN = FLAG(1)
+	var/const/VENDOR_CATEGORY_COIN = FLAG(2)
 
 	var/datum/stored_items/vending_products/currently_vending // What we're requesting payment for right now
 	var/status_message = "" // Status screen messages like "insufficient funds", displayed in NanoUI
@@ -58,13 +66,16 @@
 
 
 /obj/machinery/vending/Destroy()
-	QDEL_NULL(coin)
+	vendor_wires = null
+	currently_vending = null
 	QDEL_NULL_LIST(product_records)
+	QDEL_NULL(coin)
 	return ..()
 
 
 /obj/machinery/vending/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
+	vendor_wires = wires
 	if (product_slogans)
 		slogan_list += splittext(product_slogans, ";")
 		last_slogan = world.time + rand(0, slogan_delay)
@@ -118,14 +129,24 @@
 					malfunction()
 
 
-/obj/machinery/vending/emag_act(remaining_charges, mob/user)
-	if (!emagged)
-		emagged = TRUE
-		wires.CutWireIndex(VENDING_WIRE_CONTRABAND, FALSE)
-		req_access.Cut()
-		SSnano.update_uis(src)
-		to_chat(user, "You short out the product lock on \the [src]")
-		return 1
+/obj/machinery/vending/emag_act(remaining_charges, mob/living/user)
+	if (emagged)
+		return
+	emagged = TRUE
+	req_access.Cut()
+	vendor_wires.UpdateShowContraband(TRUE)
+	SSnano.update_uis(src)
+	to_chat(user, "You short out the product lock on \the [src].")
+	return 1
+
+
+/obj/machinery/vending/proc/UpdateShowContraband(show)
+	if (isnull(show))
+		FLIP_FLAGS(vendor_flags, VENDOR_CATEGORY_HIDDEN)
+	else if (show)
+		SET_FLAGS(vendor_flags, VENDOR_CATEGORY_HIDDEN)
+	else
+		CLEAR_FLAGS(vendor_flags, VENDOR_CATEGORY_HIDDEN)
 
 
 /obj/machinery/vending/attackby(obj/item/item, mob/living/user)
@@ -159,7 +180,7 @@
 		if (!user.unEquip(item, src))
 			return FALSE
 		coin = item
-		vendor_flags |= CAT_COIN
+		vendor_flags |= VENDOR_CATEGORY_COIN
 		to_chat(user, SPAN_NOTICE("You insert \the [item] into \the [src]."))
 		SSnano.update_uis(src)
 		return TRUE
@@ -244,7 +265,7 @@
 			user.put_in_hands(coin)
 		to_chat(user, SPAN_NOTICE("You remove \the [coin] from \the [src]"))
 		coin = null
-		vendor_flags &= ~CAT_COIN
+		vendor_flags &= ~VENDOR_CATEGORY_COIN
 		return TOPIC_HANDLED
 	if (href_list["vend"] && vend_ready && !currently_vending)
 		var/key = text2num(href_list["vend"])
@@ -371,7 +392,7 @@
 	status_message = "Vending..."
 	status_error = FALSE
 	SSnano.update_uis(src)
-	if (product.category & CAT_COIN)
+	if (product.category & VENDOR_CATEGORY_COIN)
 		if(!coin)
 			to_chat(user, SPAN_NOTICE("You need to insert a coin to get this item."))
 			return
@@ -382,11 +403,11 @@
 				to_chat(user, SPAN_NOTICE("You weren't able to pull the coin out fast enough, the machine ate it, string and all."))
 				qdel(coin)
 				coin = null
-				vendor_flags &= ~CAT_COIN
+				vendor_flags &= ~VENDOR_CATEGORY_COIN
 		else
 			qdel(coin)
 			coin = null
-			vendor_flags &= ~CAT_COIN
+			vendor_flags &= ~VENDOR_CATEGORY_COIN
 	if (vend_reply && (last_reply + 20 SECONDS) <= world.time)
 		spawn(0)
 			speak(vend_reply)
@@ -455,9 +476,9 @@
 
 /obj/machinery/vending/proc/build_inventory(populate_parts)
 	var/list/all_products = list(
-		list(products, CAT_NORMAL),
-		list(contraband, CAT_HIDDEN),
-		list(premium, CAT_COIN)
+		list(products, VENDOR_CATEGORY_NORMAL),
+		list(contraband, VENDOR_CATEGORY_HIDDEN),
+		list(premium, VENDOR_CATEGORY_COIN)
 	)
 	for (var/list/current_list in all_products)
 		var/category = current_list[2]
@@ -468,3 +489,15 @@
 				product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
 			product.category = category
 			product_records.Add(product)
+
+
+/obj/machinery/vending/proc/IsShowingProducts()
+	return HAS_FLAGS(vendor_flags, VENDOR_CATEGORY_NORMAL)
+
+
+/obj/machinery/vending/proc/IsShowingContraband()
+	return HAS_FLAGS(vendor_flags, VENDOR_CATEGORY_HIDDEN)
+
+
+/obj/machinery/vending/proc/IsShowingPremium()
+	return HAS_FLAGS(vendor_flags, VENDOR_CATEGORY_COIN)
