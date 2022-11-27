@@ -1,0 +1,723 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ac" = (
+/obj/random/junk,
+/turf/simulated/floor/asteroid,
+/area/map_template/deepmaint)
+"ae" = (
+/obj/random/junk,
+/obj/random/junk,
+/turf/simulated/floor/asteroid,
+/area/map_template/deepmaint)
+"af" = (
+/turf/simulated/floor/asteroid,
+/area/map_template/deepmaint)
+"ah" = (
+/turf/simulated/mineral,
+/area/map_template/deepmaint)
+"aj" = (
+/obj/random/junk,
+/obj/random/junk,
+/turf/simulated/floor/plating,
+/area/map_template/deepmaint)
+"ak" = (
+/turf/simulated/wall,
+/area/map_template/deepmaint)
+"an" = (
+/turf/simulated/floor/plating,
+/area/map_template/deepmaint)
+"ao" = (
+/obj/item/remains/human,
+/turf/simulated/floor/plating,
+/area/map_template/deepmaint)
+"ap" = (
+/obj/item/remains/human,
+/turf/simulated/floor/asteroid,
+/area/map_template/deepmaint)
+"aq" = (
+/obj/structure/ore_box,
+/turf/simulated/floor/asteroid,
+/area/map_template/deepmaint)
+"ar" = (
+/obj/machinery/door/blast/shutters{
+	dir = 2;
+	name = "Maintenance Hatch"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/deepmaint)
+"at" = (
+/obj/random/scrap,
+/turf/simulated/floor/asteroid,
+/area/map_template/deepmaint)
+"au" = (
+/obj/machinery/mining/drill,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"av" = (
+/obj/machinery/mining/brace,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"aw" = (
+/obj/structure/table/standard,
+/obj/random/pack/tech_loot,
+/obj/random/pack/tech_loot,
+/obj/random/tech_supply,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"ax" = (
+/obj/machinery/mining/brace,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"ay" = (
+/obj/machinery/floodlight,
+/turf/simulated/floor/asteroid,
+/area/map_template/deepmaint)
+"aA" = (
+/obj/structure/ore_box,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"aB" = (
+/obj/structure/table/standard,
+/obj/random/pack/tech_loot,
+/obj/random/pack/tech_loot,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"aC" = (
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"aJ" = (
+/obj/structure/table/standard,
+/obj/random/pack/tech_loot,
+/obj/random/pack/tech_loot,
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"aK" = (
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"aL" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/asteroid,
+/area/map_template/deepmaint)
+"aM" = (
+/obj/structure/table/standard,
+/obj/random/material,
+/obj/random/material,
+/obj/random/material,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"aN" = (
+/obj/structure/table/standard,
+/obj/random/maintenance,
+/obj/random/maintenance,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"aO" = (
+/obj/structure/table/standard,
+/obj/random/firstaid,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"aP" = (
+/obj/structure/table/standard,
+/obj/random/maintenance,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"aQ" = (
+/obj/structure/table/woodentable,
+/obj/item/seeds/ambrosiavulgarisseed,
+/turf/simulated/floor/asteroid,
+/area/map_template/deepmaint)
+"aT" = (
+/obj/machinery/portable_atmospherics/hydroponics,
+/turf/simulated/floor/asteroid,
+/area/map_template/deepmaint)
+"aV" = (
+/obj/structure/closet/cabinet,
+/obj/random/lilgun,
+/obj/random/clothing,
+/obj/random/clothing,
+/turf/simulated/floor/carpet,
+/area/map_template/deepmaint)
+"aW" = (
+/obj/structure/closet/cabinet,
+/obj/random/pack/rare,
+/obj/random/pack/rare,
+/obj/random/clothing,
+/turf/simulated/floor/carpet,
+/area/map_template/deepmaint)
+"aX" = (
+/obj/structure/table/woodentable,
+/obj/random/mre/main,
+/turf/simulated/floor/carpet,
+/area/map_template/deepmaint)
+"aY" = (
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/deepmaint)
+"ba" = (
+/turf/simulated/floor/carpet,
+/area/map_template/deepmaint)
+"bb" = (
+/obj/machinery/door/airlock,
+/area/map_template/deepmaint)
+"bc" = (
+/obj/structure/table/woodentable,
+/obj/random/plushie,
+/obj/random/drinkbottle,
+/turf/simulated/floor/carpet,
+/area/map_template/deepmaint)
+"bd" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet,
+/turf/simulated/floor/carpet,
+/area/map_template/deepmaint)
+"be" = (
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/carpet,
+/area/map_template/deepmaint)
+"bf" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/item/remains/mouse,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/deepmaint)
+"bg" = (
+/obj/random/junk,
+/turf/simulated/floor/plating,
+/area/map_template/deepmaint)
+"bh" = (
+/obj/random/junk,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"eh" = (
+/mob/living/simple_animal/hostile/faithless,
+/turf/simulated/floor/asteroid,
+/area/map_template/deepmaint)
+"vg" = (
+/obj/item/pickaxe/drill,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"Cg" = (
+/mob/living/simple_animal/hostile/faithless,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"EB" = (
+/obj/structure/table/woodentable,
+/obj/item/seeds/ambrosiavulgarisseed,
+/obj/item/seeds/ambrosiavulgarisseed,
+/obj/item/seeds/ambrosiavulgarisseed,
+/turf/simulated/floor/asteroid,
+/area/map_template/deepmaint)
+"JJ" = (
+/obj/item/remains/robot,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/deepmaint)
+"JZ" = (
+/obj/item/remains/mouse,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"Om" = (
+/obj/item/remains/human,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+"Xa" = (
+/obj/item/material/knife/utility,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/deepmaint)
+
+(1,1,1) = {"
+an
+an
+bg
+an
+bg
+an
+an
+an
+an
+bg
+an
+an
+bg
+an
+an
+an
+bg
+an
+an
+bg
+an
+"}
+(2,1,1) = {"
+an
+bg
+bg
+bg
+an
+bg
+bg
+an
+bg
+an
+bg
+an
+an
+bg
+af
+ac
+af
+bg
+bg
+bg
+an
+"}
+(3,1,1) = {"
+bg
+bg
+ac
+ah
+ah
+ah
+ah
+ac
+ac
+af
+ac
+ah
+ah
+ah
+ah
+af
+ah
+ah
+ah
+af
+bg
+"}
+(4,1,1) = {"
+an
+ac
+ah
+ah
+ah
+ah
+ah
+ah
+ac
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+bg
+"}
+(5,1,1) = {"
+ac
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+an
+"}
+(6,1,1) = {"
+ac
+ah
+ak
+ak
+ak
+ak
+ak
+ak
+ak
+ak
+ak
+ak
+ak
+ak
+ak
+ak
+ak
+ah
+ah
+an
+bg
+"}
+(7,1,1) = {"
+ac
+ah
+ak
+an
+ak
+au
+aA
+aw
+aC
+aB
+aJ
+aM
+ak
+aV
+ba
+bc
+ak
+ah
+ah
+bg
+an
+"}
+(8,1,1) = {"
+af
+ah
+ak
+an
+ak
+au
+aC
+Cg
+aC
+aC
+Xa
+aN
+ak
+aW
+ba
+bd
+ak
+ah
+ah
+an
+bg
+"}
+(9,1,1) = {"
+ac
+ah
+ak
+an
+ar
+av
+aC
+aC
+aC
+aC
+Om
+aP
+ak
+aX
+ba
+be
+ak
+ah
+ah
+an
+an
+"}
+(10,1,1) = {"
+ae
+ah
+ak
+ao
+ak
+av
+vg
+aC
+aC
+aC
+aC
+aO
+ak
+ak
+bb
+ak
+ak
+ah
+af
+bh
+aC
+"}
+(11,1,1) = {"
+af
+ah
+ak
+ak
+ak
+ax
+Om
+aC
+aC
+aC
+Cg
+aC
+bb
+aY
+aY
+bf
+bb
+af
+af
+aC
+aC
+"}
+(12,1,1) = {"
+af
+ah
+ah
+ap
+ak
+av
+aC
+aB
+aC
+aC
+aK
+JZ
+bb
+aY
+aY
+aY
+bb
+af
+ac
+aC
+aC
+"}
+(13,1,1) = {"
+an
+ac
+ah
+af
+ak
+ak
+ak
+ak
+JJ
+aY
+ak
+ak
+ak
+an
+an
+an
+ak
+ah
+af
+aC
+bh
+"}
+(14,1,1) = {"
+bg
+ac
+ah
+af
+af
+af
+af
+ak
+bb
+bb
+ak
+af
+aT
+aT
+af
+aT
+aT
+ah
+ah
+an
+an
+"}
+(15,1,1) = {"
+an
+ac
+ah
+ah
+ah
+ah
+at
+af
+af
+af
+aL
+af
+af
+af
+eh
+af
+af
+af
+ah
+bg
+bg
+"}
+(16,1,1) = {"
+an
+an
+af
+aq
+ah
+ah
+ah
+ah
+af
+af
+af
+af
+ap
+af
+af
+af
+af
+ay
+ah
+bg
+an
+"}
+(17,1,1) = {"
+an
+bg
+af
+af
+af
+ay
+ah
+ah
+ah
+af
+af
+aQ
+aT
+aT
+aT
+aT
+aT
+ah
+ah
+bg
+bg
+"}
+(18,1,1) = {"
+bg
+bg
+af
+af
+af
+af
+ay
+ah
+ah
+af
+af
+EB
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+bg
+an
+"}
+(19,1,1) = {"
+an
+an
+af
+af
+af
+af
+af
+ah
+ah
+ay
+at
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+an
+an
+an
+"}
+(20,1,1) = {"
+bg
+aj
+bg
+af
+af
+af
+af
+aq
+ah
+ah
+ah
+ah
+ah
+ah
+an
+bg
+an
+bg
+bg
+bg
+an
+"}
+(21,1,1) = {"
+an
+an
+an
+bg
+bg
+bg
+an
+bg
+an
+bg
+bg
+bg
+an
+bg
+bg
+an
+bg
+an
+an
+an
+an
+"}

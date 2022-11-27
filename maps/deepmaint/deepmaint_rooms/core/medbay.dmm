@@ -1,0 +1,1024 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ah" = (
+/obj/item/material/shard,
+/turf/simulated/floor/tiled/steel/techfloor,
+/area/map_template/deepmaint)
+"bN" = (
+/obj/effect/decal/cleanable/blood/gibs,
+/turf/simulated/floor/tiled/steel/techfloor,
+/area/map_template/deepmaint)
+"bW" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/structure/girder,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"cc" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/decal/cleanable/blood/gibs/xeno,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/deepmaint)
+"ch" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"cX" = (
+/obj/structure/table/reinforced,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/random/firstaid/low_chance,
+/obj/random/firstaid/low_chance,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"dc" = (
+/obj/structure/table/glass,
+/obj/item/storage/firstaid/surgery,
+/turf/simulated/floor/tiled/steel/techfloor,
+/area/map_template/deepmaint)
+"dw" = (
+/obj/structure/filingcabinet/filingcabinet,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"dy" = (
+/obj/structure/closet/secure_closet/freezer/blood,
+/turf/simulated/floor/tiled/steel/techfloor,
+/area/map_template/deepmaint)
+"dF" = (
+/obj/structure/low_wall,
+/obj/item/material/shard,
+/obj/item/material/shard,
+/obj/item/material/shard,
+/turf/simulated/floor/tiled/dark/gray_perforated,
+/area/map_template/deepmaint)
+"dT" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"ep" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/simulated/floor/wood,
+/area/map_template/deepmaint)
+"fa" = (
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"fA" = (
+/obj/effect/floor_decal/industrial/loading/white{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/deepmaint)
+"gu" = (
+/obj/effect/decal/cleanable/blood/writing{
+	desc = "It looks like a writing in blood. It says: ''NOT SAFE ANYWHERE!''."
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"gL" = (
+/turf/simulated/floor/tiled/steel/techfloor,
+/area/map_template/deepmaint)
+"in" = (
+/obj/machinery/door/firedoor,
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/blood/tracks,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"jt" = (
+/obj/machinery/optable,
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/blood/gibs,
+/turf/simulated/floor/tiled/steel/techfloor,
+/area/map_template/deepmaint)
+"jB" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/decal/cleanable/blood/gibs/xeno,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"jF" = (
+/obj/structure/girder,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"jY" = (
+/obj/item/stock_parts/manipulator,
+/turf/simulated/floor/tiled/dark/gray_perforated,
+/area/map_template/deepmaint)
+"kI" = (
+/obj/structure/firedoor_assembly,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"lM" = (
+/obj/effect/floor_decal/industrial/botright,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/deepmaint)
+"lN" = (
+/obj/effect/decal/cleanable/blood/tracks,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"mr" = (
+/obj/effect/decal/cleanable/blood/gibs/body,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"my" = (
+/obj/structure/filingcabinet/filingcabinet,
+/turf/simulated/floor/wood,
+/area/map_template/deepmaint)
+"mX" = (
+/obj/structure/bed/chair/comfy/black,
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/simulated/floor/wood,
+/area/map_template/deepmaint)
+"nv" = (
+/turf/simulated/floor/tiled/dark/gray_perforated,
+/area/map_template/deepmaint)
+"pc" = (
+/obj/structure/table/glass,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical/low_chance,
+/obj/random/medical/low_chance,
+/obj/random/medical/low_chance,
+/obj/random/medical/low_chance,
+/obj/random/medical/low_chance,
+/turf/simulated/floor/tiled/steel/techfloor,
+/area/map_template/deepmaint)
+"ph" = (
+/obj/machinery/vending/wallmed/lobby{
+	pixel_x = -25
+	},
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"pB" = (
+/turf/simulated/wall,
+/area/map_template/deepmaint)
+"pR" = (
+/obj/machinery/body_scanconsole,
+/turf/simulated/floor/tiled/dark/gray_perforated,
+/area/map_template/deepmaint)
+"qe" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/decal/cleanable/blood/gibs/xeno/body,
+/obj/item/frame/light{
+	dir = 4;
+	pixel_x = 15
+	},
+/obj/item/material/shard,
+/obj/random/medical_lowcost/low_chance,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"qq" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/structure/barricade,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"qW" = (
+/obj/machinery/constructable_frame/machine_frame,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"rw" = (
+/obj/item/stock_parts/capacitor,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"rB" = (
+/obj/structure/table/woodentable,
+/obj/item/paper_bin,
+/obj/item/pen,
+/obj/random/psi_megafauna,
+/turf/simulated/floor/wood,
+/area/map_template/deepmaint)
+"uc" = (
+/obj/machinery/door/blast/regular,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"uZ" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"vg" = (
+/obj/machinery/smartfridge,
+/turf/simulated/floor/tiled/dark/gray_perforated,
+/area/map_template/deepmaint)
+"vC" = (
+/turf/simulated/floor/tiled/steel/brown_perforated,
+/area/map_template/deepmaint)
+"vP" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/turf/simulated/floor/wood,
+/area/map_template/deepmaint)
+"wp" = (
+/obj/effect/decal/cleanable/blood/gibs/xeno/body,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"wq" = (
+/obj/structure/sign/medsci/bluecross2,
+/turf/simulated/wall,
+/area/map_template/deepmaint)
+"wU" = (
+/obj/machinery/door/blast/regular/open,
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"xb" = (
+/obj/structure/bed/chair/office/dark,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"xq" = (
+/obj/machinery/vending/medical,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"xA" = (
+/obj/effect/decal/cleanable/blood/gibs/xeno,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"yi" = (
+/obj/machinery/door/airlock/command{
+	name = "Chief Medical Officer"
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"yH" = (
+/obj/structure/table/woodentable,
+/obj/item/device/lighting/toggleable/lamp/green,
+/turf/simulated/floor/wood,
+/area/map_template/deepmaint)
+"zm" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/random/medical_lowcost/low_chance,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"zr" = (
+/obj/effect/decal/cleanable/blood/gibs,
+/turf/simulated/floor/tiled/steel/brown_perforated,
+/area/map_template/deepmaint)
+"zu" = (
+/obj/item/frame/light{
+	pixel_y = -15
+	},
+/obj/item/material/shard,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"zT" = (
+/obj/item/material/shard,
+/obj/effect/decal/cleanable/blood/gibs/xeno,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Aw" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"AD" = (
+/obj/random/cluster/psi_monster/low_chance,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"AO" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Be" = (
+/obj/machinery/photocopier,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"BV" = (
+/turf/simulated/wall/r_wall,
+/area/map_template/deepmaint)
+"Ci" = (
+/obj/structure/table/glass,
+/obj/item/storage/freezer/medical,
+/turf/simulated/floor/tiled/steel/techfloor,
+/area/map_template/deepmaint)
+"CC" = (
+/obj/structure/table/reinforced,
+/obj/machinery/reagentgrinder,
+/obj/item/material/shard,
+/obj/item/circuitboard/chemical_dispenser,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"CK" = (
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Do" = (
+/obj/effect/decal/cleanable/blood/gibs/xeno/limb,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Eb" = (
+/obj/structure/low_wall,
+/obj/item/material/shard,
+/obj/item/material/shard,
+/turf/simulated/floor/tiled/dark/gray_perforated,
+/area/map_template/deepmaint)
+"Ej" = (
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/tiled/dark/gray_platform,
+/area/map_template/deepmaint)
+"Ev" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/random/medical_lowcost/low_chance,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Ez" = (
+/obj/structure/table/glass,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical/low_chance,
+/obj/random/medical/low_chance,
+/obj/random/medical/low_chance,
+/obj/random/medical/low_chance,
+/turf/simulated/floor/tiled/steel/techfloor,
+/area/map_template/deepmaint)
+"EW" = (
+/obj/structure/table/reinforced,
+/obj/structure/windoor_assembly{
+	dir = 2
+	},
+/obj/structure/windoor_assembly,
+/obj/item/material/shard,
+/obj/effect/decal/cleanable/blood/gibs/xeno,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Gg" = (
+/obj/structure/table/reinforced,
+/obj/item/pen,
+/obj/item/paper_bin,
+/obj/item/stock_parts/console_screen,
+/obj/item/oddity/common/old_id,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Go" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/random/medical_lowcost/low_chance,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Gp" = (
+/obj/machinery/door/airlock/glass_medical,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Gs" = (
+/obj/structure/table/glass,
+/obj/item/storage/freezer/medical,
+/obj/item/cell/medium/high,
+/turf/simulated/floor/tiled/steel/techfloor,
+/area/map_template/deepmaint)
+"GP" = (
+/obj/effect/decal/cleanable/blood/gibs/xeno,
+/turf/simulated/floor/tiled/steel/techfloor,
+/area/map_template/deepmaint)
+"Id" = (
+/obj/random/medical_lowcost/low_chance,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Iu" = (
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"ID" = (
+/obj/random/cluster/psi_monster/low_chance,
+/turf/simulated/floor/tiled/steel,
+/area/map_template/deepmaint)
+"Jk" = (
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/deepmaint)
+"JJ" = (
+/obj/structure/bed/chair/office/dark,
+/obj/item/material/shard,
+/obj/item/material/shard,
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Ll" = (
+/obj/structure/medical_stand,
+/turf/simulated/floor/tiled/steel/techfloor,
+/area/map_template/deepmaint)
+"LO" = (
+/turf/simulated/floor/tiled/dark,
+/area/map_template/deepmaint)
+"Mu" = (
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/tiled/steel/brown_perforated,
+/area/map_template/deepmaint)
+"MF" = (
+/obj/structure/door_assembly,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"MR" = (
+/obj/machinery/chem_master,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Ng" = (
+/obj/structure/table/reinforced,
+/obj/item/storage/box/syringes,
+/obj/item/storage/box/beakers,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Nx" = (
+/obj/effect/floor_decal/industrial/botleft,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/deepmaint)
+"Or" = (
+/obj/item/material/shard,
+/turf/simulated/floor/wood,
+/area/map_template/deepmaint)
+"OL" = (
+/obj/effect/window_lwall_spawn/smartspawn,
+/turf/simulated/floor/tiled/dark/gray_perforated,
+/area/map_template/deepmaint)
+"Qo" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Sa" = (
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Sj" = (
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/tiled/steel/techfloor,
+/area/map_template/deepmaint)
+"SR" = (
+/obj/machinery/sleeper,
+/turf/simulated/floor/tiled/dark/gray_perforated,
+/area/map_template/deepmaint)
+"SW" = (
+/turf/simulated/floor/tiled/steel,
+/area/map_template/deepmaint)
+"Te" = (
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"UA" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/structure/girder,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"UY" = (
+/obj/machinery/optable,
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/tiled/steel/techfloor,
+/area/map_template/deepmaint)
+"Vy" = (
+/obj/structure/sign/directions/cryo{
+	dir = 4
+	},
+/turf/simulated/wall,
+/area/map_template/deepmaint)
+"VO" = (
+/obj/structure/closet/secure_closet/freezer/blood,
+/obj/item/stock_parts/matter_bin,
+/obj/item/stock_parts/matter_bin,
+/turf/simulated/floor/tiled/steel/techfloor,
+/area/map_template/deepmaint)
+"Wl" = (
+/obj/structure/barricade,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"WG" = (
+/turf/simulated/floor/wood,
+/area/map_template/deepmaint)
+"Xe" = (
+/obj/random/medical_lowcost/low_chance,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/deepmaint)
+"Xh" = (
+/obj/structure/curtain/medical,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"XK" = (
+/obj/structure/showcase/horrific_experiment_cryo,
+/turf/simulated/floor/tiled/dark/gray_platform,
+/area/map_template/deepmaint)
+"YS" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/decal/cleanable/blood/gibs/xeno/body,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"ZE" = (
+/obj/machinery/bodyscanner,
+/turf/simulated/floor/tiled/dark/gray_perforated,
+/area/map_template/deepmaint)
+"ZZ" = (
+/obj/item/frame/light{
+	dir = 1;
+	pixel_y = 15
+	},
+/obj/item/material/shard,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+
+(1,1,1) = {"
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+"}
+(2,1,1) = {"
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+ID
+SW
+"}
+(3,1,1) = {"
+SW
+SW
+BV
+BV
+BV
+BV
+BV
+pB
+pB
+pB
+pB
+pB
+pB
+pB
+pB
+wq
+uc
+uc
+pB
+SW
+SW
+"}
+(4,1,1) = {"
+SW
+SW
+BV
+my
+yH
+vP
+BV
+dT
+pB
+Be
+Gg
+pB
+ph
+AO
+Qo
+fa
+mr
+jB
+wU
+SW
+SW
+"}
+(5,1,1) = {"
+SW
+SW
+BV
+mX
+rB
+Or
+yi
+fa
+pB
+fa
+fa
+OL
+fa
+fa
+fa
+fa
+fa
+CK
+uc
+SW
+SW
+"}
+(6,1,1) = {"
+SW
+SW
+BV
+WG
+ep
+Or
+Eb
+fa
+pB
+Aw
+JJ
+EW
+fa
+fa
+AD
+Sa
+fa
+zu
+wq
+SW
+SW
+"}
+(7,1,1) = {"
+SW
+SW
+BV
+BV
+BV
+BV
+BV
+Id
+pB
+dw
+zT
+OL
+fa
+mr
+fa
+fa
+CK
+lN
+pB
+SW
+SW
+"}
+(8,1,1) = {"
+SW
+SW
+pB
+MR
+qW
+Ng
+pB
+fa
+pB
+dw
+fa
+pB
+fa
+Te
+Iu
+fa
+uZ
+lN
+pB
+SW
+SW
+"}
+(9,1,1) = {"
+SW
+SW
+pB
+rw
+xb
+uZ
+Gp
+Do
+pB
+pB
+MF
+pB
+pB
+pB
+pB
+pB
+kI
+in
+pB
+SW
+SW
+"}
+(10,1,1) = {"
+SW
+SW
+pB
+uZ
+cX
+CC
+dF
+fa
+gu
+Wl
+uZ
+Id
+jF
+qq
+bW
+xA
+fa
+lN
+pB
+SW
+SW
+"}
+(11,1,1) = {"
+SW
+SW
+pB
+vg
+pB
+pB
+pB
+Aw
+jF
+Id
+CK
+fa
+wp
+CK
+Wl
+wp
+Ev
+UA
+pB
+SW
+SW
+"}
+(12,1,1) = {"
+SW
+SW
+pB
+fa
+xA
+fa
+zm
+jB
+Wl
+CK
+jF
+YS
+jF
+uZ
+CK
+jF
+YS
+fa
+pB
+SW
+SW
+"}
+(13,1,1) = {"
+SW
+SW
+pB
+ZZ
+Id
+fa
+fa
+fa
+Wl
+fa
+ch
+fa
+fa
+UA
+qe
+fa
+CK
+ch
+pB
+SW
+SW
+"}
+(14,1,1) = {"
+SW
+SW
+pB
+xq
+CK
+AD
+fa
+Go
+CK
+Id
+pB
+OL
+Gp
+pB
+pB
+Eb
+Gp
+pB
+pB
+SW
+SW
+"}
+(15,1,1) = {"
+SW
+SW
+pB
+fA
+Xe
+fA
+Vy
+xA
+fa
+fa
+pB
+gL
+Sj
+gL
+pB
+ah
+gL
+GP
+pB
+SW
+SW
+"}
+(16,1,1) = {"
+SW
+SW
+pB
+SR
+cc
+ZE
+pB
+Xh
+Xh
+Xh
+pB
+dy
+zr
+bN
+pB
+VO
+vC
+gL
+pB
+SW
+SW
+"}
+(17,1,1) = {"
+SW
+SW
+pB
+Nx
+LO
+pR
+pB
+jY
+nv
+nv
+pB
+Ez
+Mu
+UY
+pB
+pc
+Mu
+jt
+pB
+SW
+SW
+"}
+(18,1,1) = {"
+SW
+SW
+pB
+SR
+Jk
+lM
+pB
+XK
+Ej
+XK
+pB
+Gs
+dc
+Ll
+pB
+Ci
+dc
+Ll
+pB
+SW
+SW
+"}
+(19,1,1) = {"
+SW
+SW
+pB
+pB
+pB
+pB
+pB
+pB
+pB
+pB
+pB
+pB
+pB
+pB
+pB
+pB
+pB
+pB
+pB
+SW
+SW
+"}
+(20,1,1) = {"
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+"}
+(21,1,1) = {"
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+SW
+"}

@@ -1,0 +1,947 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ae" = (
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"ar" = (
+/obj/structure/hygiene/sink/kitchen{
+	pixel_y = -32
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 4
+	},
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"aD" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"bp" = (
+/obj/machinery/door/airlock,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"bz" = (
+/obj/machinery/cooker/grill,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"bD" = (
+/obj/machinery/cooker/fryer,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"bE" = (
+/obj/machinery/light/small/red{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/deepmaint)
+"bW" = (
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"bX" = (
+/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/deepmaint)
+"bZ" = (
+/obj/structure/table/steel,
+/obj/random/trash,
+/obj/item/reagent_containers/food/snacks/old/burger,
+/obj/item/reagent_containers/food/snacks/old/burger,
+/obj/item/reagent_containers/food/snacks/old/burger,
+/obj/item/reagent_containers/food/snacks/old/burger,
+/obj/item/reagent_containers/food/snacks/old/burger,
+/obj/item/reagent_containers/food/snacks/old/burger,
+/obj/item/reagent_containers/food/snacks/old/burger,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"ca" = (
+/obj/structure/kitchenspike,
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/deepmaint)
+"ci" = (
+/obj/structure/table/steel,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"cl" = (
+/obj/effect/floor_decal/corner/red/diagonal,
+/obj/effect/landmark/corpse/pirate,
+/obj/effect/gibspawner/human,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"cq" = (
+/obj/structure/flora/pottedplant/subterranean,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"cB" = (
+/obj/machinery/fabricator/micro/bartender,
+/obj/structure/table/standard,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/deepmaint)
+"cL" = (
+/obj/structure/window/reinforced,
+/obj/machinery/door/window/westleft,
+/obj/effect/floor_decal/spline/fancy/wood,
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"fo" = (
+/obj/structure/window/reinforced,
+/obj/structure/bed/chair/armchair/red{
+	dir = 1
+	},
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"gg" = (
+/obj/structure/table/marble,
+/obj/item/storage/box/ammo/shotgunshells,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"gA" = (
+/obj/structure/table/marble,
+/obj/item/reagent_containers/spray/cleaner,
+/obj/item/reagent_containers/glass/rag,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"hT" = (
+/obj/structure/table/steel,
+/obj/random/energy,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"iQ" = (
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 8
+	},
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"jr" = (
+/obj/structure/table/marble,
+/obj/item/gun/projectile/shotgun/doublebarrel,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"ju" = (
+/obj/structure/table/marble,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"ld" = (
+/obj/structure/table/standard,
+/obj/machinery/chemical_dispenser/bar_alc/full,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/deepmaint)
+"lQ" = (
+/obj/machinery/light/small/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/deepmaint)
+"oc" = (
+/obj/structure/table/steel,
+/obj/item/reagent_containers/food/condiment/small/peppermill,
+/obj/item/reagent_containers/food/condiment/small/saltshaker,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"rT" = (
+/obj/effect/spider/spiderling/growing,
+/obj/structure/table/marble,
+/obj/item/material/knife/kitchen/cleaver/bronze,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"sJ" = (
+/obj/effect/landmark/corpse/pirate,
+/obj/effect/gibspawner/human,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"td" = (
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/deepmaint)
+"uA" = (
+/obj/machinery/door/airlock,
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/deepmaint)
+"uS" = (
+/obj/structure/table/steel,
+/obj/random/trash,
+/obj/item/reagent_containers/food/snacks/old/taco,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"vp" = (
+/obj/effect/landmark/corpse/chef,
+/obj/effect/gibspawner/human,
+/obj/effect/floor_decal/corner/grey/diagonal{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"wf" = (
+/obj/structure/table/marble,
+/obj/item/material/bell,
+/obj/effect/floor_decal/corner/grey/diagonal{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"wH" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/obj/random/trash,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"wZ" = (
+/obj/structure/table/steel,
+/obj/item/reagent_containers/food/condiment/ketchup,
+/obj/item/reagent_containers/food/condiment/mayo,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"yS" = (
+/obj/structure/table/marble,
+/obj/machinery/microwave{
+	pixel_x = -3;
+	pixel_y = 6
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"zk" = (
+/obj/effect/spider/spiderling/growing,
+/obj/effect/floor_decal/corner/grey/diagonal{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"zH" = (
+/obj/machinery/jukebox/old,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"zM" = (
+/obj/effect/floor_decal/corner/red/diagonal,
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Aw" = (
+/obj/machinery/light/small/red{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/deepmaint)
+"Ax" = (
+/obj/structure/table/marble,
+/obj/machinery/reagentgrinder/juicer,
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/effect/floor_decal/corner/grey/diagonal{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"Bc" = (
+/obj/effect/floor_decal/corner/grey/diagonal{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Br" = (
+/turf/simulated/floor/tiled/dark,
+/area/map_template/deepmaint)
+"Dt" = (
+/obj/structure/table/steel,
+/obj/random/energy,
+/obj/item/reagent_containers/food/snacks/old/pizza,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"Dy" = (
+/obj/structure/table/marble,
+/obj/item/reagent_containers/food/snacks/old/hotdog,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"DO" = (
+/obj/machinery/light/spot,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"Fv" = (
+/obj/effect/paint/black,
+/turf/simulated/wall,
+/area/map_template/deepmaint)
+"He" = (
+/obj/effect/spider/spiderling/growing,
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/deepmaint)
+"HV" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/machinery/door/window/westright,
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"HX" = (
+/obj/structure/table/marble,
+/obj/item/reagent_containers/food/snacks/old/burger,
+/obj/item/reagent_containers/food/snacks/old/burger,
+/obj/item/reagent_containers/food/snacks/old/burger,
+/obj/item/reagent_containers/food/snacks/old/burger,
+/obj/item/reagent_containers/food/snacks/old/burger,
+/obj/item/reagent_containers/food/snacks/old/burger,
+/obj/item/reagent_containers/food/snacks/old/burger,
+/obj/effect/floor_decal/corner/grey/diagonal{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Is" = (
+/obj/structure/table/standard,
+/obj/machinery/chemical_dispenser/bar_soft/full,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/deepmaint)
+"Li" = (
+/obj/structure/hygiene/sink/kitchen{
+	pixel_y = -32
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"Lr" = (
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 4
+	},
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"LL" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/bed/chair/armchair/red,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"LZ" = (
+/obj/machinery/gibber,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"My" = (
+/obj/random/trash,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"MQ" = (
+/obj/structure/table/marble,
+/obj/effect/floor_decal/corner/grey/diagonal{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"Na" = (
+/obj/item/stool/bar/padded,
+/obj/machinery/floor_light/mapped_on,
+/obj/effect/landmark/corpse/pirate,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"Ox" = (
+/obj/machinery/light/small,
+/obj/effect/floor_decal/corner/grey/diagonal{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Oz" = (
+/obj/effect/spider/spiderling/growing,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"OQ" = (
+/obj/effect/floor_decal/corner/red/diagonal,
+/obj/machinery/door/unpowered/simple/ebony,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Ps" = (
+/obj/effect/floor_decal/corner/red/diagonal,
+/obj/effect/spider/spiderling/growing,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"PU" = (
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"QB" = (
+/obj/machinery/door/airlock/multi_tile,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"QE" = (
+/obj/structure/table/marble,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"Rs" = (
+/obj/structure/closet/secure_closet/freezer/meat,
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/deepmaint)
+"Ru" = (
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"SU" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/bed/chair/armchair/red,
+/obj/item/trash/beef,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"Td" = (
+/obj/machinery/vending/boozeomat{
+	req_access = null
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/deepmaint)
+"Tp" = (
+/obj/structure/table/steel,
+/obj/random/trash,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"Tv" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/obj/effect/landmark/corpse/russian,
+/obj/effect/gibspawner/human,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"TA" = (
+/obj/structure/table/standard,
+/obj/machinery/chemical_dispenser/bar_coffee/full,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/deepmaint)
+"UR" = (
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/deepmaint)
+"WS" = (
+/obj/item/stool/bar/padded,
+/obj/machinery/floor_light/mapped_on,
+/turf/simulated/floor/wood/yew,
+/area/map_template/deepmaint)
+"Xc" = (
+/obj/machinery/vending/dinnerware{
+	dir = 4;
+	req_access = null
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"Yn" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 4
+	},
+/obj/effect/spider/spiderling/growing,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"Za" = (
+/obj/effect/floor_decal/corner/red/diagonal,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Zc" = (
+/obj/machinery/light/small/red,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/deepmaint)
+"ZO" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 4
+	},
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+
+(1,1,1) = {"
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+"}
+(2,1,1) = {"
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Aw
+Br
+Br
+Br
+Br
+Br
+Aw
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+"}
+(3,1,1) = {"
+Br
+Br
+Fv
+Fv
+bX
+bX
+bX
+Fv
+Fv
+bX
+bX
+bX
+Fv
+Fv
+bX
+bX
+bX
+Fv
+Fv
+Br
+Br
+"}
+(4,1,1) = {"
+Br
+Br
+Fv
+cq
+LL
+ci
+fo
+Za
+Za
+Za
+Za
+Za
+Za
+Za
+LL
+ci
+fo
+cq
+Fv
+Br
+Br
+"}
+(5,1,1) = {"
+Br
+Br
+Fv
+ae
+LL
+bZ
+fo
+Za
+Za
+bW
+oc
+bW
+Za
+Ps
+SU
+Dt
+fo
+DO
+Fv
+Br
+Br
+"}
+(6,1,1) = {"
+Br
+Br
+bX
+Ru
+Za
+Za
+cl
+Ps
+Za
+My
+zH
+bW
+Za
+Za
+cl
+Za
+Za
+Ru
+bX
+Br
+Br
+"}
+(7,1,1) = {"
+Br
+Br
+bX
+Ru
+Za
+Za
+Za
+Za
+Za
+bW
+wZ
+bW
+Za
+Za
+Za
+Za
+Ps
+Ru
+bX
+Br
+Br
+"}
+(8,1,1) = {"
+Br
+Zc
+Fv
+ae
+LL
+ci
+fo
+Za
+Za
+sJ
+hT
+bW
+Za
+Za
+LL
+uS
+fo
+DO
+Fv
+Br
+Br
+"}
+(9,1,1) = {"
+Br
+Br
+Fv
+Ru
+LL
+ci
+fo
+Za
+Za
+Za
+Za
+Za
+Za
+Za
+LL
+Tp
+fo
+Ru
+Fv
+lQ
+Br
+"}
+(10,1,1) = {"
+Br
+Br
+Fv
+cq
+Za
+Za
+Za
+Za
+Za
+zM
+Za
+Za
+Za
+Za
+Za
+Za
+Za
+Za
+OQ
+Br
+Br
+"}
+(11,1,1) = {"
+Br
+Br
+Fv
+Fv
+Fv
+Fv
+Fv
+bp
+Fv
+Fv
+Za
+Za
+Za
+Za
+Za
+Za
+Za
+Za
+OQ
+Br
+Br
+"}
+(12,1,1) = {"
+Br
+Br
+Fv
+ju
+rT
+yS
+Xc
+Bc
+Bc
+HX
+bW
+bW
+bW
+Oz
+bW
+bW
+bW
+bW
+Fv
+lQ
+Br
+"}
+(13,1,1) = {"
+Br
+Br
+Fv
+bz
+vp
+Bc
+Bc
+Bc
+Bc
+wf
+bW
+bW
+bW
+bW
+bW
+bW
+bW
+bW
+Fv
+Br
+Br
+"}
+(14,1,1) = {"
+Br
+Br
+Fv
+bD
+Bc
+Bc
+Bc
+Bc
+Bc
+Fv
+WS
+WS
+WS
+bW
+bW
+WS
+Na
+WS
+Fv
+Br
+Br
+"}
+(15,1,1) = {"
+Br
+Zc
+Fv
+LZ
+Bc
+Bc
+Bc
+zk
+Ox
+Fv
+gA
+QE
+QE
+HV
+cL
+jr
+gg
+Dy
+Fv
+Br
+Br
+"}
+(16,1,1) = {"
+Br
+Br
+Fv
+Fv
+uA
+Fv
+Fv
+Bc
+Bc
+QB
+wH
+wH
+aD
+Lr
+iQ
+Tv
+aD
+Li
+Fv
+Br
+Br
+"}
+(17,1,1) = {"
+Br
+Br
+Fv
+He
+UR
+td
+Fv
+Bc
+Bc
+PU
+ZO
+ZO
+ZO
+ZO
+ZO
+ZO
+Yn
+ar
+Fv
+Br
+Br
+"}
+(18,1,1) = {"
+Br
+Br
+Fv
+Rs
+ca
+Rs
+Fv
+Ax
+MQ
+Fv
+Is
+TA
+ld
+Td
+cB
+ld
+TA
+Is
+Fv
+Br
+Br
+"}
+(19,1,1) = {"
+Br
+Br
+Fv
+Fv
+Fv
+Fv
+Fv
+Fv
+Fv
+Fv
+Fv
+Fv
+Fv
+Fv
+Fv
+Fv
+Fv
+Fv
+Fv
+Br
+Br
+"}
+(20,1,1) = {"
+Br
+Br
+Br
+Br
+Br
+Br
+bE
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+bE
+Br
+Br
+Br
+Br
+"}
+(21,1,1) = {"
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+Br
+"}

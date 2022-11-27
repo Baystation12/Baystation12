@@ -1,0 +1,593 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"b" = (
+/obj/structure/bed/chair/padded/brown{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"c" = (
+/obj/structure/hygiene/sink{
+	dir = 4;
+	pixel_x = 12
+	},
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"d" = (
+/obj/effect/floor_decal/corner/lightgrey/diagonal,
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"e" = (
+/obj/structure/table/marble,
+/obj/structure/reagent_dispensers/beerkeg,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"f" = (
+/obj/effect/floor_decal/asteroid,
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"g" = (
+/obj/effect/floor_decal/corner/lightgrey{
+	dir = 6
+	},
+/obj/effect/floor_decal/corner/lightgrey{
+	dir = 1
+	},
+/obj/machinery/light/small{
+	dir = 4;
+	icon_state = "bulb1"
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"h" = (
+/turf/simulated/wall,
+/area/map_template/deepmaint)
+"i" = (
+/obj/structure/table/marble,
+/obj/item/reagent_containers/food/drinks/glass2/rocks,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"j" = (
+/obj/effect/catwalk_plated,
+/turf/simulated/floor/plating,
+/area/map_template/deepmaint)
+"k" = (
+/obj/structure/bed/chair/padded/brown{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/lightgrey/mono,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"l" = (
+/obj/effect/floor_decal/asteroid,
+/turf/simulated/floor/plating{
+	icon_state = "asteroidplating"
+	},
+/area/map_template/deepmaint)
+"m" = (
+/obj/structure/bed/chair/padded/brown{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/lightgrey/mono,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"o" = (
+/obj/effect/floor_decal/industrial/warning/dust/corner{
+	dir = 8
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"p" = (
+/obj/structure/table/standard,
+/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/item/reagent_containers/food/drinks/cans/dr_gibb,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"q" = (
+/obj/effect/floor_decal/corner/brown{
+	dir = 6
+	},
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"r" = (
+/obj/structure/table/marble,
+/obj/machinery/reagentgrinder/juicer,
+/obj/item/reagent_containers/glass/beaker/large,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"s" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/map_template/deepmaint)
+"t" = (
+/obj/structure/table/marble,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"u" = (
+/turf/simulated/floor/plating{
+	icon_state = "asteroidplating"
+	},
+/area/map_template/deepmaint)
+"v" = (
+/obj/structure/bed/chair/padded/brown{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/lightgrey/mono,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"w" = (
+/obj/structure/table/marble,
+/obj/item/reagent_containers/food/drinks/glass2/square/bodaplus,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"x" = (
+/obj/effect/floor_decal/corner/brown{
+	dir = 9
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"y" = (
+/obj/structure/table/marble,
+/obj/machinery/chemical_dispenser/bar_soft{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"z" = (
+/obj/effect/floor_decal/industrial/warning/dust,
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"A" = (
+/obj/structure/table/marble,
+/obj/item/reagent_containers/food/drinks/flask/shiny,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"B" = (
+/obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
+	icon = 'icons/obj/hydroponics_growing.dmi';
+	icon_state = null
+	},
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"C" = (
+/obj/effect/floor_decal/industrial/warning/dust{
+	dir = 9
+	},
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"D" = (
+/obj/structure/table/marble,
+/obj/machinery/chemical_dispenser/bar_coffee{
+	dir = 4
+	},
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"E" = (
+/turf/simulated/mineral/random,
+/area/map_template/deepmaint)
+"F" = (
+/obj/structure/bed/chair/padded/brown{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"G" = (
+/obj/effect/floor_decal/industrial/warning/dust,
+/obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
+	icon = 'icons/obj/hydroponics_growing.dmi';
+	icon_state = null
+	},
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"H" = (
+/obj/machinery/vending/dinnerware{
+	dir = 4
+	},
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"I" = (
+/obj/structure/table/marble,
+/obj/machinery/chemical_dispenser/bar_alc{
+	dir = 4
+	},
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"J" = (
+/obj/effect/floor_decal/corner/lightgrey{
+	dir = 9
+	},
+/obj/effect/floor_decal/corner/lightgrey,
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"K" = (
+/obj/item/stool/bar/padded,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"L" = (
+/obj/effect/floor_decal/corner/brown{
+	dir = 6
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"M" = (
+/obj/structure/bed/chair/padded/brown,
+/obj/effect/floor_decal/corner/lightgrey/mono,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"N" = (
+/obj/effect/floor_decal/industrial/warning/dust{
+	dir = 8
+	},
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"O" = (
+/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/item/stool/bar/padded,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"P" = (
+/obj/structure/table/standard,
+/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/random/drinkbottle,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"Q" = (
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"R" = (
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"S" = (
+/obj/effect/floor_decal/corner/lightgrey{
+	dir = 6
+	},
+/obj/effect/floor_decal/corner/lightgrey{
+	dir = 1
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"T" = (
+/obj/structure/table/standard,
+/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/machinery/fabricator/micro/bartender,
+/obj/item/stack/material/steel/ten,
+/obj/item/stack/material/glass/ten,
+/obj/item/stack/material/plastic/ten,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"U" = (
+/obj/structure/table/standard,
+/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/item/reagent_containers/food/drinks/coffee,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"V" = (
+/obj/effect/floor_decal/corner/lightgrey{
+	dir = 6
+	},
+/obj/effect/floor_decal/corner/lightgrey{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"W" = (
+/obj/effect/floor_decal/industrial/warning/dust{
+	dir = 4
+	},
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"X" = (
+/obj/machinery/door/airlock/glass/mining,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/map_template/deepmaint)
+"Y" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/plating{
+	icon_state = "asteroidplating"
+	},
+/area/map_template/deepmaint)
+"Z" = (
+/obj/structure/table/marble,
+/obj/item/paper/exodus_bartender,
+/obj/item/clothing/under/rank/bartender,
+/obj/item/gun/projectile/shotgun/doublebarrel,
+/obj/item/storage/box/ammo/stunshells,
+/obj/item/reagent_containers/spray/pepper,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+a
+"}
+(3,1,1) = {"
+a
+h
+E
+G
+h
+h
+T
+e
+H
+y
+I
+D
+Z
+h
+a
+"}
+(4,1,1) = {"
+a
+h
+E
+z
+s
+b
+d
+Q
+Q
+K
+Q
+Q
+Q
+h
+a
+"}
+(5,1,1) = {"
+a
+h
+E
+z
+s
+p
+d
+i
+w
+t
+A
+r
+c
+h
+a
+"}
+(6,1,1) = {"
+a
+h
+B
+z
+s
+v
+d
+O
+O
+O
+O
+h
+h
+h
+a
+"}
+(7,1,1) = {"
+a
+h
+R
+z
+s
+k
+d
+J
+J
+J
+J
+J
+s
+J
+a
+"}
+(8,1,1) = {"
+a
+h
+R
+z
+s
+P
+d
+d
+d
+d
+d
+d
+X
+d
+a
+"}
+(9,1,1) = {"
+a
+h
+f
+z
+s
+F
+V
+V
+V
+S
+V
+V
+s
+g
+a
+"}
+(10,1,1) = {"
+a
+h
+R
+o
+h
+h
+M
+U
+m
+h
+X
+s
+h
+h
+a
+"}
+(11,1,1) = {"
+a
+h
+W
+W
+W
+h
+s
+s
+s
+h
+x
+x
+x
+h
+a
+"}
+(12,1,1) = {"
+a
+h
+u
+u
+l
+Y
+u
+u
+u
+X
+j
+j
+j
+h
+a
+"}
+(13,1,1) = {"
+a
+h
+u
+C
+N
+N
+N
+N
+N
+s
+L
+q
+L
+h
+a
+"}
+(14,1,1) = {"
+a
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+h
+a
+"}
+(15,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}

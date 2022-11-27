@@ -1,0 +1,545 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"b" = (
+/obj/effect/floor_decal/corner/brown{
+	dir = 9
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"d" = (
+/mob/living/simple_animal/hostile/hivebot,
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"e" = (
+/obj/effect/floor_decal/asteroid,
+/turf/simulated/floor/plating{
+	icon_state = "asteroidplating"
+	},
+/area/map_template/deepmaint)
+"g" = (
+/obj/effect/floor_decal/industrial/warning/dust{
+	dir = 4
+	},
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"h" = (
+/obj/structure/closet/emcloset,
+/obj/effect/floor_decal/corner/brown/mono,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"i" = (
+/obj/effect/floor_decal/industrial/warning/dust,
+/obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
+	icon = 'icons/obj/hydroponics_growing.dmi';
+	icon_state = null
+	},
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"j" = (
+/obj/effect/floor_decal/industrial/warning/dust{
+	dir = 8
+	},
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"k" = (
+/obj/effect/floor_decal/corner/brown{
+	dir = 10
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"l" = (
+/obj/structure/table/standard,
+/obj/effect/floor_decal/corner/brown/mono,
+/obj/random/firstaid,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"m" = (
+/obj/structure/table/standard,
+/obj/machinery/recharger/wallcharger{
+	dir = 8;
+	pixel_x = 22
+	},
+/obj/machinery/cell_charger,
+/obj/effect/floor_decal/corner/brown/mono,
+/obj/random/powercell,
+/obj/random/powercell,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"n" = (
+/obj/effect/floor_decal/corner/brown{
+	dir = 9
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"o" = (
+/obj/machinery/door/airlock/glass/mining,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/map_template/deepmaint)
+"p" = (
+/obj/effect/floor_decal/industrial/warning/dust/corner{
+	dir = 4
+	},
+/obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
+	icon = 'icons/obj/hydroponics_growing.dmi';
+	icon_state = null
+	},
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"q" = (
+/obj/effect/floor_decal/industrial/warning/dust/corner,
+/obj/machinery/light/small{
+	dir = 4;
+	icon_state = "bulb1"
+	},
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"r" = (
+/obj/effect/floor_decal/industrial/warning/dust/corner{
+	dir = 8
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"s" = (
+/obj/effect/floor_decal/industrial/warning/dust,
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"t" = (
+/obj/effect/floor_decal/corner/brown/full,
+/mob/living/simple_animal/hostile/hivebot/ranged_damage/laser,
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"u" = (
+/obj/effect/floor_decal/corner/brown/mono,
+/obj/machinery/computer/modular/preset{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"v" = (
+/turf/simulated/mineral/random,
+/area/map_template/deepmaint)
+"w" = (
+/turf/simulated/floor/plating{
+	icon_state = "asteroidplating"
+	},
+/area/map_template/deepmaint)
+"x" = (
+/obj/effect/floor_decal/corner/brown{
+	dir = 5
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"y" = (
+/obj/effect/floor_decal/industrial/warning/dust/corner{
+	dir = 4
+	},
+/obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
+	icon = 'icons/obj/hydroponics_growing.dmi';
+	icon_state = null
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"A" = (
+/obj/effect/floor_decal/corner/brown/full,
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"B" = (
+/obj/structure/closet,
+/obj/effect/floor_decal/corner/brown/mono,
+/obj/random/energy,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"D" = (
+/obj/effect/floor_decal/industrial/warning/dust{
+	dir = 1
+	},
+/obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
+	icon = 'icons/obj/hydroponics_growing.dmi';
+	icon_state = null
+	},
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"E" = (
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"H" = (
+/obj/effect/floor_decal/industrial/warning/dust{
+	dir = 1
+	},
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"I" = (
+/obj/structure/closet,
+/obj/effect/floor_decal/corner/brown/mono,
+/obj/random/biggun,
+/obj/random/ammo,
+/obj/random/ammo,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"J" = (
+/obj/effect/floor_decal/industrial/warning/dust,
+/mob/living/simple_animal/hostile/hivebot,
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"K" = (
+/obj/structure/closet/crate/trashcart,
+/obj/effect/floor_decal/corner/brown/mono,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"L" = (
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"M" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/map_template/deepmaint)
+"O" = (
+/obj/structure/table/standard,
+/obj/effect/floor_decal/corner/brown/mono,
+/obj/random/loot,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"P" = (
+/obj/effect/floor_decal/industrial/warning/dust,
+/mob/living/simple_animal/hostile/hivebot/rapid,
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"R" = (
+/obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
+	icon = 'icons/obj/hydroponics_growing.dmi';
+	icon_state = null
+	},
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"T" = (
+/obj/structure/bed/chair/padded/brown{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/brown/mono,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"U" = (
+/obj/effect/floor_decal/industrial/warning/dust{
+	dir = 6
+	},
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+"V" = (
+/turf/simulated/wall,
+/area/map_template/deepmaint)
+"X" = (
+/obj/effect/catwalk_plated,
+/turf/simulated/floor/plating,
+/area/map_template/deepmaint)
+"Z" = (
+/obj/effect/floor_decal/industrial/warning/dust{
+	dir = 8
+	},
+/obj/machinery/light/small{
+	dir = 4;
+	icon_state = "bulb1"
+	},
+/turf/simulated/floor/asteroid{
+	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
+	},
+/area/map_template/deepmaint)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+a
+"}
+(3,1,1) = {"
+a
+V
+L
+L
+L
+L
+L
+d
+L
+L
+v
+v
+v
+V
+a
+"}
+(4,1,1) = {"
+a
+V
+R
+v
+v
+q
+g
+g
+g
+p
+v
+v
+v
+V
+a
+"}
+(5,1,1) = {"
+a
+V
+L
+v
+V
+V
+M
+M
+M
+V
+V
+v
+v
+V
+a
+"}
+(6,1,1) = {"
+a
+V
+L
+v
+V
+B
+I
+u
+u
+O
+V
+y
+s
+V
+a
+"}
+(7,1,1) = {"
+a
+V
+L
+i
+M
+l
+A
+t
+T
+O
+M
+H
+s
+V
+a
+"}
+(8,1,1) = {"
+a
+V
+L
+J
+M
+m
+A
+A
+A
+O
+M
+D
+P
+V
+a
+"}
+(9,1,1) = {"
+a
+V
+L
+r
+V
+V
+n
+b
+b
+V
+V
+v
+s
+V
+a
+"}
+(10,1,1) = {"
+a
+V
+g
+g
+g
+V
+V
+o
+V
+V
+v
+v
+s
+V
+a
+"}
+(11,1,1) = {"
+a
+V
+w
+w
+w
+V
+x
+E
+k
+V
+v
+g
+U
+V
+a
+"}
+(12,1,1) = {"
+a
+V
+w
+w
+w
+o
+X
+X
+X
+o
+w
+w
+e
+V
+a
+"}
+(13,1,1) = {"
+a
+V
+j
+j
+j
+V
+K
+X
+h
+V
+v
+v
+Z
+V
+a
+"}
+(14,1,1) = {"
+a
+V
+V
+V
+V
+V
+M
+o
+M
+V
+V
+V
+V
+V
+a
+"}
+(15,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
