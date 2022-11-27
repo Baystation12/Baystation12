@@ -976,9 +976,9 @@ Ccomp's first proc.
 	var/high_intensity
 	var/low_intensity
 	while(booms > 0)
-		range = rand(0, 2)
-		high_intensity = rand(5,8)
-		low_intensity = rand(7,10)
+		range = prob(45)
+		high_intensity = rand(2,5)
+		low_intensity = rand(6,8)
 		var/turf/T
 		if (connected == "Yes")
 			T = pick_area_turf_in_connected_z_levels(list(/proc/is_not_space_area), z_level = zlevel)
