@@ -3,6 +3,7 @@
 	desc = "An integrated catalytic water cracking system used to break H2O down into H and O. An advanced molecular extractor also allows it to isolate liquid deuterium from seawater."
 	icon = 'icons/obj/machines/cracker.dmi'
 	icon_state = "cracker"
+	construct_state = /singleton/machine_construction/default/panel_closed
 	density = TRUE
 	anchored = TRUE
 	waterproof = TRUE
