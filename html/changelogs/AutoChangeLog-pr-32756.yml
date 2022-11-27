@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - admin: Lowered the explosion sizes from the bombard z level verb.
+  - admin: Ghosted admins can now use APC's as if they were unlocked.
