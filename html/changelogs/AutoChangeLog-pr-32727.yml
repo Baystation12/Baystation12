@@ -1,0 +1,10 @@
+author: SomeAngryMiner, Rootoo807, Andromeda-K22, Chinsky, Sierrakomodo
+delete-after: true
+changes:
+  - rscadd: Sensor console UI has been improved visually, and is able to scan without
+      printing papers. Ambience sounds have been included
+  - rscadd: 'Every ship now has a transmission beacon: these comms machines can be
+      setup to broadcast one-way signals to every overmap entity nearby.'
+  - rscadd: As an alternateaction, you can toggle the transmission beacon's mode to
+      distress, which will notify all helm consoles in the sector of an emergency,
+      but no extra information.
