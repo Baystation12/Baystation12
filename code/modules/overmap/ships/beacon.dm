@@ -45,7 +45,7 @@
 	if(!O)
 		to_chat(user, SPAN_WARNING("You cannot deploy \the [src] here."))
 		return
-	var/toggle_prompt = alert(user, "Turn the beacon...", "[src] Options", "[signal ? "On" : "Off"]", "Distress", "Cancel")
+	var/toggle_prompt = alert(user, "Turn the beacon...", "[src] Options", "[signal ? "Off" : "On"]", "Distress", "Cancel")
 
 	if (toggle_prompt == "Cancel")
 		return
