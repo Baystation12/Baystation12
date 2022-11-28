@@ -366,7 +366,7 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	flags_inv = CLOTHING_BULKY
-	slowdown_general = 1
+	slowdown_general = 0.5
 	siemens_coefficient = 0.5
 	accessories = list(/obj/item/clothing/accessory/arm_guards/riot, /obj/item/clothing/accessory/leg_guards/riot)
 
@@ -387,7 +387,7 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	flags_inv = CLOTHING_BULKY
-	slowdown_general = 1
+	slowdown_general = 0.5
 	siemens_coefficient = 0.7
 	accessories = list(/obj/item/clothing/accessory/arm_guards/ballistic, /obj/item/clothing/accessory/leg_guards/ballistic)
 
@@ -410,7 +410,7 @@
 		energy = ARMOR_ENERGY_RESISTANT
 		)
 	flags_inv = CLOTHING_BULKY
-	slowdown_general = 1
+	slowdown_general = 0.5
 	siemens_coefficient = 0
 	accessories = list(/obj/item/clothing/accessory/arm_guards/ablative, /obj/item/clothing/accessory/leg_guards/ablative)
 
