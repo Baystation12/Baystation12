@@ -1,5 +1,8 @@
 name: Compile changelogs
 
+permissions:
+  contents: read
+
 on:
   schedule:
     - cron: "0 0 * * *"
@@ -7,6 +10,8 @@ on:
 
 jobs:
   CompileCL:
+    permissions:
+      contents: write # required to push the updated changelog commit
     runs-on: ubuntu-latest
     if: github.repository == 'Proxima-Project/Proxi-Bay12' # to prevent this running on forks
     steps:
