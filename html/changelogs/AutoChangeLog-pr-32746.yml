@@ -1,5 +1,0 @@
-author: SomeAngryMiner
-delete-after: true
-changes:
-  - rscadd: fixes an oversight where the tachyon array had absolutely no icons.
-  - rscadd: you can no longer duplicate atomic crackers.
