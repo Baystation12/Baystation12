@@ -1,0 +1,522 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"b" = (
+/obj/item/stack/cable_coil/single,
+/obj/effect/landmark/scorcher,
+/turf/simulated/floor/airless{
+	icon_state = "dmg2"
+	},
+/area/map_template/deepmaint)
+"c" = (
+/obj/effect/landmark/scorcher,
+/obj/structure/closet/crate/plastic,
+/obj/item/material/twohanded/fireaxe,
+/turf/simulated/floor/airless{
+	icon_state = "dmg1"
+	},
+/area/map_template/deepmaint)
+"d" = (
+/obj/item/stack/material/rods,
+/turf/space,
+/area/map_template/deepmaint)
+"e" = (
+/obj/effect/landmark/scorcher,
+/obj/structure/closet/crate/plastic,
+/turf/simulated/floor/airless,
+/area/map_template/deepmaint)
+"f" = (
+/obj/item/material/shard/shrapnel/titanium,
+/obj/effect/landmark/scorcher,
+/turf/simulated/floor/airless,
+/area/map_template/deepmaint)
+"g" = (
+/turf/simulated/floor/airless{
+	icon_state = "dmg2"
+	},
+/area/map_template/deepmaint)
+"h" = (
+/obj/structure/door_assembly/door_assembly_ext,
+/turf/simulated/floor/airless,
+/area/map_template/deepmaint)
+"i" = (
+/obj/item/material/shard/shrapnel/titanium,
+/turf/space,
+/area/map_template/deepmaint)
+"j" = (
+/obj/structure/bed/chair/shuttle/white{
+	dir = 4
+	},
+/obj/effect/landmark/scorcher,
+/obj/effect/decal/cleanable/liquid_fuel,
+/mob/living/simple_animal/hostile/carp,
+/turf/simulated/floor/airless{
+	icon_state = "dmg1"
+	},
+/area/map_template/deepmaint)
+"k" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 8
+	},
+/turf/simulated/floor/airless,
+/area/map_template/deepmaint)
+"l" = (
+/obj/machinery/door/airlock/external,
+/obj/effect/mech_shield,
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"m" = (
+/obj/effect/landmark/scorcher,
+/turf/simulated/floor/airless{
+	icon_state = "dmg1"
+	},
+/area/map_template/deepmaint)
+"n" = (
+/obj/item/stack/material/rods,
+/obj/effect/landmark/scorcher,
+/obj/effect/decal/cleanable/liquid_fuel,
+/turf/simulated/floor/airless,
+/area/map_template/deepmaint)
+"o" = (
+/obj/effect/landmark/scorcher,
+/turf/simulated/floor/airless,
+/area/map_template/deepmaint)
+"p" = (
+/obj/item/stack/cable_coil/single,
+/turf/simulated/floor/asteroid,
+/area/map_template/deepmaint)
+"q" = (
+/obj/effect/mech_shield,
+/turf/simulated/wall,
+/area/map_template/deepmaint)
+"r" = (
+/obj/effect/landmark/scorcher,
+/obj/random/toolbox,
+/turf/simulated/floor/airless{
+	icon_state = "dmg1"
+	},
+/area/map_template/deepmaint)
+"s" = (
+/obj/structure/bed/chair/shuttle/white{
+	dir = 4
+	},
+/obj/effect/gibspawner/robot,
+/obj/effect/landmark/scorcher,
+/turf/simulated/floor/airless,
+/area/map_template/deepmaint)
+"t" = (
+/turf/simulated/floor/airless,
+/area/map_template/deepmaint)
+"v" = (
+/obj/structure/lattice,
+/turf/space,
+/area/map_template/deepmaint)
+"w" = (
+/mob/living/simple_animal/hostile/carp/pike,
+/turf/space,
+/area/map_template/deepmaint)
+"x" = (
+/obj/structure/wall_frame/titanium,
+/obj/item/stack/material/rods,
+/obj/item/stack/material/rods,
+/turf/simulated/floor/airless,
+/area/map_template/deepmaint)
+"y" = (
+/obj/structure/inflatable/door,
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"z" = (
+/obj/structure/mech_wreckage/powerloader,
+/turf/space,
+/area/map_template/deepmaint)
+"A" = (
+/mob/living/exosuit/premade/firefighter,
+/turf/simulated/floor/asteroid,
+/area/map_template/deepmaint)
+"B" = (
+/obj/item/material/shard,
+/obj/structure/door_assembly/door_assembly_ext,
+/turf/simulated/floor/airless,
+/area/map_template/deepmaint)
+"C" = (
+/obj/structure/sign/warning/vacuum{
+	dir = 1;
+	pixel_y = -32
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/machinery/suit_storage_unit/retro,
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"D" = (
+/obj/random/junk,
+/turf/space,
+/area/map_template/deepmaint)
+"E" = (
+/obj/structure/sign/warning/internals_required{
+	dir = 1;
+	pixel_y = -32
+	},
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/machinery/suit_storage_unit/retro,
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"F" = (
+/obj/effect/landmark/scorcher,
+/turf/simulated/floor/airless{
+	icon_state = "dmg3"
+	},
+/area/map_template/deepmaint)
+"G" = (
+/turf/simulated/mineral,
+/area/map_template/deepmaint)
+"H" = (
+/turf/space,
+/area/map_template/deepmaint)
+"K" = (
+/obj/structure/inflatable/door,
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"L" = (
+/obj/structure/wall_frame/titanium,
+/obj/item/material/shard,
+/obj/item/stack/material/rods,
+/turf/simulated/floor/airless{
+	icon_state = "dmg1"
+	},
+/area/map_template/deepmaint)
+"M" = (
+/obj/item/stack/material/rods,
+/obj/effect/landmark/scorcher,
+/turf/simulated/floor/airless,
+/area/map_template/deepmaint)
+"N" = (
+/obj/item/stack/material/rods,
+/mob/living/simple_animal/hostile/carp,
+/turf/space,
+/area/map_template/deepmaint)
+"O" = (
+/obj/structure/wall_frame/titanium,
+/obj/item/material/shard,
+/turf/simulated/floor/airless{
+	icon_state = "dmg3"
+	},
+/area/map_template/deepmaint)
+"P" = (
+/obj/item/material/shard,
+/obj/effect/landmark/scorcher,
+/obj/effect/decal/cleanable/liquid_fuel,
+/turf/simulated/floor/airless,
+/area/map_template/deepmaint)
+"Q" = (
+/obj/item/extinguisher/empty,
+/turf/space,
+/area/map_template/deepmaint)
+"R" = (
+/turf/simulated/floor/asteroid,
+/area/map_template/deepmaint)
+"S" = (
+/obj/item/material/shard/shrapnel/titanium,
+/obj/effect/landmark/scorcher,
+/turf/simulated/floor/airless{
+	icon_state = "dmg1"
+	},
+/area/map_template/deepmaint)
+"T" = (
+/turf/simulated/wall/titanium,
+/area/map_template/deepmaint)
+"U" = (
+/obj/machinery/constructable_frame/computerframe/deconstruct{
+	dir = 8
+	},
+/obj/effect/landmark/scorcher,
+/turf/simulated/floor/airless,
+/area/map_template/deepmaint)
+"V" = (
+/obj/item/stack/material/titanium,
+/turf/space,
+/area/map_template/deepmaint)
+"W" = (
+/turf/simulated/wall,
+/area/map_template/deepmaint)
+"X" = (
+/obj/effect/landmark/scorcher,
+/turf/simulated/floor/airless{
+	icon_state = "dmg2"
+	},
+/area/map_template/deepmaint)
+"Y" = (
+/obj/effect/landmark/scorcher,
+/obj/item/stack/material/titanium,
+/turf/simulated/floor/airless{
+	icon_state = "dmg1"
+	},
+/area/map_template/deepmaint)
+"Z" = (
+/obj/structure/wall_frame/titanium,
+/obj/item/stack/material/rods,
+/turf/simulated/floor/airless,
+/area/map_template/deepmaint)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+a
+"}
+(3,1,1) = {"
+a
+W
+N
+G
+k
+H
+H
+p
+A
+T
+w
+H
+d
+W
+a
+"}
+(4,1,1) = {"
+a
+W
+d
+g
+T
+T
+H
+h
+B
+T
+T
+k
+H
+W
+a
+"}
+(5,1,1) = {"
+a
+W
+H
+H
+t
+G
+S
+m
+e
+H
+T
+T
+i
+W
+a
+"}
+(6,1,1) = {"
+a
+W
+W
+V
+H
+H
+G
+o
+m
+G
+T
+H
+H
+W
+a
+"}
+(7,1,1) = {"
+a
+C
+q
+H
+H
+T
+M
+Y
+F
+H
+v
+H
+H
+W
+a
+"}
+(8,1,1) = {"
+a
+K
+l
+y
+H
+T
+r
+S
+f
+G
+v
+H
+H
+W
+a
+"}
+(9,1,1) = {"
+a
+E
+q
+z
+v
+x
+o
+X
+c
+T
+H
+H
+p
+W
+a
+"}
+(10,1,1) = {"
+a
+W
+W
+G
+H
+L
+F
+s
+j
+o
+O
+R
+R
+W
+a
+"}
+(11,1,1) = {"
+a
+W
+R
+Q
+H
+T
+b
+U
+P
+n
+T
+H
+H
+W
+a
+"}
+(12,1,1) = {"
+a
+W
+R
+H
+D
+T
+T
+Z
+v
+T
+G
+G
+i
+W
+a
+"}
+(13,1,1) = {"
+a
+W
+i
+i
+H
+d
+H
+H
+V
+H
+H
+H
+H
+W
+a
+"}
+(14,1,1) = {"
+a
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+a
+"}
+(15,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}

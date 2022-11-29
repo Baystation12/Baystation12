@@ -1,0 +1,867 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"bf" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "warning"
+	},
+/obj/random/trash,
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"bD" = (
+/obj/structure/table/woodentable,
+/obj/random/powercell,
+/obj/random/powercell,
+/obj/random/powercell,
+/obj/random/tool,
+/turf/simulated/floor/carpet/orange,
+/area/map_template/deepmaint)
+"cf" = (
+/obj/item/stool/padded,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"eX" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	dir = 4
+	},
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"fO" = (
+/obj/machinery/conveyor{
+	id = "garbag2"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
+/obj/random/trash,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/map_template/deepmaint)
+"gj" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"gm" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/machinery/light,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"gz" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/machinery/portable_atmospherics/powered/scrubber,
+/obj/effect/floor_decal/industrial/outline/blue,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"gH" = (
+/mob/living/simple_animal/hostile/retaliate/malf_drone,
+/turf/simulated/floor/wood,
+/area/map_template/deepmaint)
+"hW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/meter,
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"iv" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "warning"
+	},
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"iK" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"iU" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"jr" = (
+/obj/structure/closet/crate/internals/fuel,
+/turf/simulated/floor/wood,
+/area/map_template/deepmaint)
+"jw" = (
+/obj/structure/table/standard,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/random/maintenance/clean,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"jz" = (
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"ka" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/closet/crate/trashcart,
+/obj/random/junk,
+/obj/random/junk,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"kE" = (
+/turf/simulated/floor/wood{
+	icon_state = "wood_broken2"
+	},
+/area/map_template/deepmaint)
+"lp" = (
+/turf/simulated/floor/wood{
+	icon_state = "wood_broken5"
+	},
+/area/map_template/deepmaint)
+"lE" = (
+/obj/structure/closet/crate/trashcart,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/firstaid,
+/obj/random/firstaid,
+/obj/machinery/light/small,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"ni" = (
+/mob/living/simple_animal/hostile/retaliate/malf_drone,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"nD" = (
+/obj/structure/table/gamblingtable,
+/obj/item/deck/cards{
+	pixel_x = 5;
+	pixel_y = -5
+	},
+/turf/simulated/floor/wood,
+/area/map_template/deepmaint)
+"nR" = (
+/obj/structure/table/woodentable,
+/obj/item/device/flashlight/lamp/green,
+/turf/simulated/floor/carpet/orange,
+/area/map_template/deepmaint)
+"oI" = (
+/obj/random/trash,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"pr" = (
+/obj/structure/closet/toolcloset,
+/turf/simulated/floor/carpet/orange,
+/area/map_template/deepmaint)
+"qN" = (
+/obj/machinery/atmospherics/unary/tank/air{
+	dir = 1
+	},
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"qO" = (
+/obj/machinery/atmospherics/unary/tank/air,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"qS" = (
+/turf/simulated/wall,
+/area/map_template/deepmaint)
+"rb" = (
+/obj/item/stool/padded,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/wood{
+	icon_state = "wood_broken3"
+	},
+/area/map_template/deepmaint)
+"rK" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"rO" = (
+/obj/machinery/atmospherics/binary/passive_gate/on{
+	dir = 8
+	},
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"tT" = (
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"uZ" = (
+/obj/structure/table/standard,
+/obj/random/loot,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"vh" = (
+/turf/simulated/floor/wood,
+/area/map_template/deepmaint)
+"vZ" = (
+/turf/simulated/floor/carpet/orange,
+/area/map_template/deepmaint)
+"wF" = (
+/obj/structure/flora/pottedplant/drooping,
+/turf/simulated/floor/wood,
+/area/map_template/deepmaint)
+"xf" = (
+/obj/structure/table/gamblingtable,
+/turf/simulated/floor/wood{
+	icon_state = "wood_broken0"
+	},
+/area/map_template/deepmaint)
+"yx" = (
+/obj/machinery/portable_atmospherics/canister/air,
+/obj/effect/floor_decal/industrial/outline/blue,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"yZ" = (
+/turf/simulated/wall/r_wall,
+/area/map_template/deepmaint)
+"zd" = (
+/obj/machinery/atmospherics/pipe/manifold/visible{
+	dir = 4
+	},
+/mob/living/simple_animal/hostile/retaliate/malf_drone,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"zm" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"zB" = (
+/obj/structure/closet/radiation,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/wood{
+	icon_state = "wood_broken5"
+	},
+/area/map_template/deepmaint)
+"zC" = (
+/obj/machinery/atmospherics/valve/shutoff/scrubbers,
+/obj/effect/floor_decal/industrial/shutoff,
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"zG" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"Al" = (
+/obj/machinery/conveyor{
+	id = "garbag2"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
+/obj/random/junk,
+/turf/simulated/floor/plating,
+/area/map_template/deepmaint)
+"Ar" = (
+/obj/structure/table/standard,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/random/cash,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"AH" = (
+/turf/simulated/floor/wood{
+	icon_state = "wood_broken3"
+	},
+/area/map_template/deepmaint)
+"Be" = (
+/obj/structure/table/rack,
+/obj/item/gun/launcher/pneumatic,
+/obj/item/material/shard,
+/obj/item/material/shard,
+/obj/item/material/shard,
+/obj/item/material/shard,
+/obj/item/material/shard,
+/obj/item/material/shard,
+/obj/item/material/shard,
+/obj/item/tank/oxygen,
+/turf/simulated/floor/wood,
+/area/map_template/deepmaint)
+"Dl" = (
+/obj/machinery/atmospherics/binary/pump{
+	dir = 4
+	},
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"DF" = (
+/obj/machinery/atmospherics/pipe/manifold4w/visible,
+/obj/machinery/meter,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"EG" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/catwalk_plated,
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"Gu" = (
+/obj/machinery/conveyor_switch/oneway{
+	convdir = -1;
+	id = "garbag2";
+	name = "disposal conveyor"
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"Hf" = (
+/turf/simulated/floor/wood{
+	icon_state = "wood_broken6"
+	},
+/area/map_template/deepmaint)
+"Hg" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/effect/catwalk_plated,
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"HA" = (
+/obj/item/stack/material/aluminium/fifty,
+/obj/item/stack/material/cardboard/fifty,
+/obj/structure/table/rack,
+/obj/item/stack/material/glass/fifty,
+/obj/item/stack/material/glass/reinforced/fifty,
+/obj/item/stack/material/plasteel/fifty,
+/obj/item/stack/material/plastic/fifty,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/titanium/fifty,
+/obj/item/stack/material/wood/fifty,
+/turf/simulated/floor/wood,
+/area/map_template/deepmaint)
+"In" = (
+/obj/item/stool/padded,
+/turf/simulated/floor/wood,
+/area/map_template/deepmaint)
+"Ks" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/machinery/portable_atmospherics/powered/pump/filled,
+/obj/effect/floor_decal/industrial/outline/blue,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"Ku" = (
+/obj/structure/table/standard,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/random/energy,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"Kx" = (
+/obj/machinery/atmospherics/pipe/cap/hidden/supply{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/cap/hidden/scrubbers{
+	dir = 1
+	},
+/turf/simulated/wall,
+/area/map_template/deepmaint)
+"KW" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/random/trash,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"Lo" = (
+/obj/structure/bed/chair/office/dark,
+/turf/simulated/floor/carpet/orange,
+/area/map_template/deepmaint)
+"LC" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/catwalk_plated,
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"LE" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/machinery/floodlight,
+/obj/effect/floor_decal/industrial/outline/blue,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"Nj" = (
+/obj/structure/table/woodentable,
+/obj/random/tank,
+/obj/random/tank,
+/turf/simulated/floor/carpet/orange,
+/area/map_template/deepmaint)
+"NQ" = (
+/obj/machinery/door/window/westleft,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"Ox" = (
+/turf/simulated/floor/wood{
+	icon_state = "wood_broken4"
+	},
+/area/map_template/deepmaint)
+"OM" = (
+/obj/structure/lattice,
+/obj/structure/disposaloutlet{
+	dir = 8
+	},
+/obj/structure/disposalpipe/trunk,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/space,
+/area/map_template/deepmaint)
+"OX" = (
+/obj/structure/table/woodentable,
+/obj/machinery/cell_charger,
+/obj/item/stack/cable_coil/random,
+/turf/simulated/floor/carpet/orange,
+/area/map_template/deepmaint)
+"Pd" = (
+/obj/effect/floor_decal/industrial/loading{
+	dir = 4
+	},
+/obj/structure/closet/crate/trashcart,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/trash,
+/obj/random/ammo,
+/obj/random/ammo,
+/obj/random/smokes,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"PW" = (
+/obj/machinery/disposal/deliveryChute,
+/obj/structure/disposalpipe/trunk{
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/deepmaint)
+"QP" = (
+/obj/item/stool/padded,
+/turf/simulated/floor/wood{
+	icon_state = "wood_broken2"
+	},
+/area/map_template/deepmaint)
+"QS" = (
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 9
+	},
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"RB" = (
+/obj/machinery/conveyor{
+	id = "garbag2"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
+/obj/random/junk,
+/obj/random/smokes,
+/turf/simulated/floor/plating,
+/area/map_template/deepmaint)
+"RC" = (
+/obj/effect/mech_shield,
+/obj/effect/wallframe_spawn,
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"SU" = (
+/obj/structure/table/rack,
+/obj/item/tank/oxygen/onetankbomb,
+/obj/item/tank/phoron/onetankbomb,
+/turf/simulated/floor/wood{
+	icon_state = "wood_broken1"
+	},
+/area/map_template/deepmaint)
+"TP" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/wood,
+/area/map_template/deepmaint)
+"UU" = (
+/obj/item/stool/padded,
+/turf/simulated/floor/wood{
+	icon_state = "wood_broken4"
+	},
+/area/map_template/deepmaint)
+"Ve" = (
+/obj/structure/table/woodentable,
+/obj/random/tech_supply,
+/obj/random/tech_supply,
+/obj/random/tech_supply,
+/obj/random/tech_supply,
+/turf/simulated/floor/carpet/orange,
+/area/map_template/deepmaint)
+"Vg" = (
+/obj/machinery/conveyor{
+	id = "garbag2"
+	},
+/obj/structure/plasticflaps,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
+/obj/random/trash,
+/obj/random/loot,
+/turf/simulated/floor/plating,
+/area/map_template/deepmaint)
+"Vi" = (
+/obj/structure/closet/crate/solar_assembly,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/wood{
+	icon_state = "wood_broken6"
+	},
+/area/map_template/deepmaint)
+"Vl" = (
+/obj/structure/table/rack,
+/obj/item/gun/magnetic/preloaded,
+/obj/item/stack/material/rods/ten,
+/obj/item/cell/high,
+/obj/item/cell/high,
+/turf/simulated/floor/wood{
+	icon_state = "wood_broken2"
+	},
+/area/map_template/deepmaint)
+"VV" = (
+/turf/space,
+/area/map_template/deepmaint)
+"Wf" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/meter,
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"Ww" = (
+/obj/machinery/atmospherics/valve/shutoff/supply,
+/obj/effect/floor_decal/industrial/shutoff,
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"Yy" = (
+/obj/machinery/atmospherics/pipe/cap/hidden/supply,
+/obj/machinery/atmospherics/pipe/cap/hidden/scrubbers,
+/obj/machinery/door/airlock/engineering,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"YH" = (
+/obj/structure/table/woodentable,
+/obj/random/snack,
+/turf/simulated/floor/carpet/orange,
+/area/map_template/deepmaint)
+"Zm" = (
+/obj/machinery/atmospherics/pipe/manifold4w/visible,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"Zw" = (
+/obj/item/stool/padded,
+/turf/simulated/floor/wood{
+	icon_state = "wood_broken5"
+	},
+/area/map_template/deepmaint)
+
+(1,1,1) = {"
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+"}
+(2,1,1) = {"
+tT
+qS
+qS
+qS
+qS
+qS
+qS
+qS
+qS
+qS
+qS
+qS
+qS
+qS
+tT
+"}
+(3,1,1) = {"
+tT
+qS
+Be
+TP
+QP
+rb
+lp
+Vi
+jr
+zB
+pr
+bD
+Ve
+qS
+tT
+"}
+(4,1,1) = {"
+tT
+qS
+Vl
+Zw
+nD
+xf
+In
+gH
+Ox
+kE
+vZ
+Lo
+OX
+qS
+tT
+"}
+(5,1,1) = {"
+tT
+qS
+SU
+vh
+In
+UU
+Hf
+AH
+wF
+HA
+Nj
+nR
+YH
+qS
+tT
+"}
+(6,1,1) = {"
+tT
+qS
+qS
+LE
+Ks
+gz
+jz
+jz
+rK
+iK
+iK
+iK
+KW
+qS
+tT
+"}
+(7,1,1) = {"
+tT
+jz
+qS
+gj
+jz
+jz
+jz
+jz
+jz
+iv
+zC
+hW
+gm
+qS
+tT
+"}
+(8,1,1) = {"
+tT
+jz
+Yy
+LC
+LC
+LC
+LC
+LC
+EG
+bf
+Ww
+Wf
+Hg
+Kx
+tT
+"}
+(9,1,1) = {"
+tT
+jz
+qS
+yx
+jz
+oI
+jz
+jz
+jz
+iU
+zm
+zG
+eX
+qS
+tT
+"}
+(10,1,1) = {"
+tT
+qS
+qS
+qS
+Ar
+jw
+NQ
+rK
+ka
+qS
+qS
+rO
+Dl
+qS
+tT
+"}
+(11,1,1) = {"
+tT
+qS
+yZ
+qS
+Ku
+cf
+jz
+ni
+lE
+qS
+qO
+DF
+QS
+qS
+tT
+"}
+(12,1,1) = {"
+tT
+qS
+VV
+qS
+uZ
+jz
+Gu
+oI
+Pd
+qS
+qO
+Zm
+qN
+qS
+tT
+"}
+(13,1,1) = {"
+tT
+qS
+OM
+RC
+PW
+Vg
+fO
+RB
+Al
+qS
+qO
+zd
+qN
+qS
+tT
+"}
+(14,1,1) = {"
+tT
+qS
+qS
+qS
+qS
+qS
+qS
+qS
+qS
+qS
+qS
+qS
+qS
+qS
+tT
+"}
+(15,1,1) = {"
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+tT
+"}

@@ -1,0 +1,625 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"at" = (
+/obj/structure/table/woodentable_reinforced/walnut,
+/obj/item/device/flashlight/lamp/green,
+/obj/structure/sign/warning/smoking{
+	pixel_y = 24
+	},
+/turf/simulated/floor/carpet/red,
+/area/map_template/deepmaint)
+"cF" = (
+/obj/structure/table/marble,
+/obj/item/book/manual/barman_recipes,
+/obj/item/reagent_containers/food/snacks/canned/caviar/true,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"dp" = (
+/obj/random/trash,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"dt" = (
+/obj/machinery/door/airlock/glass/civilian,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/map_template/deepmaint)
+"fb" = (
+/obj/structure/table/woodentable_reinforced/walnut,
+/obj/item/device/paicard,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"fu" = (
+/obj/structure/window/reinforced/tinted/frosted{
+	dir = 8
+	},
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"fM" = (
+/mob/living/simple_animal/hostile/syndicate/melee,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"fO" = (
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"gD" = (
+/obj/structure/sign/double/barsign,
+/turf/simulated/wall,
+/area/map_template/deepmaint)
+"iu" = (
+/obj/effect/floor_decal/corner/blue/diagonal{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"iF" = (
+/obj/effect/floor_decal/corner/blue/diagonal{
+	dir = 4
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"ji" = (
+/obj/structure/bed/chair/armchair/brown{
+	dir = 8
+	},
+/turf/simulated/floor/carpet/red,
+/area/map_template/deepmaint)
+"ku" = (
+/obj/structure/table/woodentable_reinforced/walnut,
+/obj/item/flame/candle,
+/obj/machinery/light/spot,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"mi" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/machinery/reagentgrinder/juicer,
+/obj/structure/table/marble,
+/obj/item/reagent_containers/glass/beaker/large,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"mt" = (
+/obj/machinery/vending/dinnerware{
+	dir = 8
+	},
+/obj/structure/window/reinforced,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"mx" = (
+/obj/structure/table/marble,
+/obj/machinery/chemical_dispenser/bar_alc{
+	dir = 8
+	},
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"mJ" = (
+/obj/structure/table/marble,
+/obj/item/reagent_containers/food/snacks/dehydrated_carp,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"nd" = (
+/obj/structure/bed/chair/armchair/brown{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/red,
+/area/map_template/deepmaint)
+"ow" = (
+/obj/structure/flora/pottedplant/fern,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"qr" = (
+/obj/structure/table/marble,
+/obj/item/reagent_containers/food/drinks/glass2/square/bodaplus,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"qs" = (
+/obj/structure/window/reinforced/tinted/frosted,
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/obj/structure/flora/pottedplant/fern,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"ra" = (
+/obj/structure/bed/chair/wood/walnut{
+	dir = 4
+	},
+/obj/structure/window/reinforced/tinted/frosted{
+	dir = 8
+	},
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"rn" = (
+/obj/effect/wingrille_spawn,
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"sG" = (
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"tx" = (
+/obj/structure/table/woodentable_reinforced/walnut,
+/obj/item/reagent_containers/glass/bucket/wood,
+/obj/item/reagent_containers/spray/cleaner/deodorant,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"ud" = (
+/obj/structure/table/woodentable_reinforced/walnut,
+/obj/item/reagent_containers/food/snacks/slice/meatpizza,
+/obj/item/reagent_containers/food/snacks/slice/meatpizza,
+/obj/item/reagent_containers/food/snacks/slice/meatpizza,
+/obj/item/reagent_containers/food/snacks/slice/meatpizza,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"uK" = (
+/obj/structure/table/marble,
+/obj/item/reagent_containers/food/snacks/cracker,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"vV" = (
+/obj/machinery/door/window/southright,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"wj" = (
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/obj/structure/flora/pottedplant/fern,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"wy" = (
+/obj/structure/table/marble,
+/obj/machinery/chemical_dispenser/bar_coffee{
+	dir = 8
+	},
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"yb" = (
+/obj/structure/table/marble,
+/obj/machinery/fabricator/micro/bartender,
+/obj/item/stack/material/plastic/ten,
+/obj/item/stack/material/glass/ten,
+/obj/item/stack/material/steel/ten,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"yt" = (
+/obj/structure/table/woodentable_reinforced/walnut,
+/obj/item/reagent_containers/food/snacks/dionaroast,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"zl" = (
+/obj/structure/hygiene/sink{
+	dir = 8;
+	icon_state = "sink";
+	pixel_x = -12;
+	pixel_y = 2
+	},
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"zW" = (
+/obj/structure/table/woodentable_reinforced/walnut,
+/obj/item/storage/candle_box,
+/obj/random/single/lighter,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"Ak" = (
+/obj/item/stool/bar/padded,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"BS" = (
+/obj/structure/table/woodentable_reinforced/walnut,
+/obj/item/reagent_containers/food/condiment/small/saltshaker{
+	pixel_x = -3
+	},
+/obj/item/reagent_containers/food/condiment/small/peppermill{
+	pixel_x = 3
+	},
+/obj/machinery/light/spot,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"Cw" = (
+/obj/structure/table/marble,
+/obj/item/reagent_containers/food/drinks/cans/ale,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"CQ" = (
+/obj/structure/table/marble,
+/obj/item/reagent_containers/food/drinks/glass2/shot,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"Ep" = (
+/obj/effect/wingrille_spawn,
+/turf/simulated/wall,
+/area/map_template/deepmaint)
+"Gt" = (
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"HU" = (
+/obj/machinery/door/window/northright,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"It" = (
+/obj/item/stool/bar/padded,
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"ID" = (
+/obj/structure/table/marble,
+/obj/item/reagent_containers/food/snacks/checker/king/red,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"Jw" = (
+/obj/structure/bed/chair/wood/walnut{
+	dir = 8
+	},
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"Lx" = (
+/obj/structure/table/woodentable_reinforced/walnut,
+/obj/item/storage/lunchbox/syndicate/filled,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"NV" = (
+/obj/item/stool/bar/padded,
+/mob/living/simple_animal/hostile/syndicate,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"OF" = (
+/turf/simulated/floor/carpet/red,
+/area/map_template/deepmaint)
+"OH" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"Pd" = (
+/obj/item/stool/bar/padded,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"QU" = (
+/mob/living/simple_animal/hostile/syndicate/ranged,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"Rh" = (
+/obj/random/junk,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"RQ" = (
+/obj/structure/table/marble,
+/obj/item/reagent_containers/food/drinks/glass2/cognac,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"Sj" = (
+/obj/structure/bed/chair/armchair/brown,
+/turf/simulated/floor/carpet/red,
+/area/map_template/deepmaint)
+"Ux" = (
+/obj/structure/table/marble,
+/obj/item/reagent_containers/food/drinks/flask/barflask,
+/obj/item/reagent_containers/glass/rag,
+/obj/item/reagent_containers/spray/cleaner,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"VN" = (
+/obj/structure/reagent_dispensers/beerkeg,
+/obj/structure/table/woodentable_reinforced/walnut,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"VY" = (
+/obj/structure/table/woodentable_reinforced/walnut,
+/obj/random/single/lighter,
+/obj/random/smokes,
+/obj/item/material/ashtray/plastic,
+/turf/simulated/floor/carpet/red,
+/area/map_template/deepmaint)
+"Wr" = (
+/obj/structure/bed/chair/wood/walnut{
+	dir = 4
+	},
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"WV" = (
+/obj/structure/bed/chair/wood/walnut{
+	dir = 4
+	},
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"Xa" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"Xs" = (
+/obj/structure/table/marble,
+/obj/item/paper/exodus_bartender,
+/obj/item/clothing/under/rank/bartender,
+/obj/item/gun/projectile/shotgun/doublebarrel,
+/obj/item/storage/box/ammo/stunshells,
+/obj/item/reagent_containers/spray/pepper,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"Yf" = (
+/turf/simulated/wall,
+/area/map_template/deepmaint)
+"YK" = (
+/obj/machinery/door/window/westleft,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/deepmaint)
+"YS" = (
+/obj/structure/table/marble,
+/obj/item/reagent_containers/food/drinks/bottle/rakia,
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+"ZY" = (
+/obj/structure/table/marble,
+/obj/machinery/chemical_dispenser/bar_soft{
+	dir = 8
+	},
+/turf/simulated/floor/lino,
+/area/map_template/deepmaint)
+
+(1,1,1) = {"
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+"}
+(2,1,1) = {"
+sG
+Yf
+Yf
+Yf
+Yf
+gD
+OH
+Xa
+iu
+Yf
+Yf
+Yf
+Yf
+Yf
+sG
+"}
+(3,1,1) = {"
+sG
+Yf
+Ak
+It
+Ak
+Yf
+OH
+Xa
+iF
+Yf
+Sj
+OF
+nd
+Yf
+sG
+"}
+(4,1,1) = {"
+sG
+Yf
+Ak
+Lx
+Ak
+Yf
+rn
+dt
+Ep
+Yf
+at
+OF
+VY
+Yf
+sG
+"}
+(5,1,1) = {"
+sG
+Yf
+Ak
+ud
+Ak
+wj
+Gt
+Gt
+Gt
+qs
+Sj
+OF
+ji
+Yf
+sG
+"}
+(6,1,1) = {"
+sG
+Yf
+Ak
+Ak
+Ak
+dp
+Gt
+Gt
+Gt
+Gt
+fu
+YK
+ra
+Yf
+sG
+"}
+(7,1,1) = {"
+sG
+Yf
+Wr
+Gt
+Gt
+Gt
+Ak
+NV
+Ak
+Gt
+Gt
+Gt
+ku
+Yf
+sG
+"}
+(8,1,1) = {"
+sG
+Yf
+fb
+fM
+Ak
+mJ
+cF
+Ux
+qr
+ID
+Ak
+Gt
+Jw
+Yf
+sG
+"}
+(9,1,1) = {"
+sG
+Yf
+Jw
+Gt
+Ak
+CQ
+fO
+Pd
+fO
+RQ
+Ak
+QU
+ow
+Yf
+sG
+"}
+(10,1,1) = {"
+sG
+Yf
+ow
+Gt
+Ak
+CQ
+fO
+Xs
+fO
+Cw
+Ak
+Gt
+WV
+Yf
+sG
+"}
+(11,1,1) = {"
+sG
+Yf
+Wr
+Gt
+Ak
+YS
+fO
+yb
+fO
+uK
+Ak
+Gt
+BS
+Yf
+sG
+"}
+(12,1,1) = {"
+sG
+Yf
+yt
+Gt
+Gt
+HU
+fO
+zl
+fO
+vV
+Gt
+Rh
+Jw
+Yf
+sG
+"}
+(13,1,1) = {"
+sG
+Yf
+Jw
+Gt
+Gt
+mi
+ZY
+mx
+wy
+mt
+VN
+tx
+zW
+Yf
+sG
+"}
+(14,1,1) = {"
+sG
+Yf
+Yf
+Yf
+Yf
+Yf
+Yf
+Yf
+Yf
+Yf
+Yf
+Yf
+Yf
+Yf
+sG
+"}
+(15,1,1) = {"
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+sG
+"}

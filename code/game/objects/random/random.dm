@@ -1416,3 +1416,38 @@ var/global/list/random_useful_
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = "cola"
 	spawn_object = /obj/item/reagent_containers/food/drinks/cans/cola
+
+
+/* Place holders */
+/obj/random/rare
+
+/obj/random/rare/spawn_choices()
+	return list(
+		/obj/random/single/playing_cards,
+		/obj/item/device/flashlight/flashdark
+		)
+
+
+/obj/random/tech_loot
+
+/obj/random/tech_loot/spawn_choices()
+	return list(/obj/random/single/lighter)
+
+/obj/random/machine
+
+/obj/random/machine/spawn_choices()
+	return list(/obj/machinery/jukebox)
+/obj/random/scrap/dense_even
+
+/obj/random/scrap/dense_even/spawn_choices()
+	return list(/obj/structure/rubble/lab)
+
+/obj/random/rare
+
+/obj/random/rare/spawn_choices()
+	return list(/obj/random/single/cola)
+
+/obj/random/junkfood
+
+/obj/random/junkfood/spawn_choices()
+	return list(/obj/item/trash/chips)

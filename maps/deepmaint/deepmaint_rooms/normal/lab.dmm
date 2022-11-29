@@ -1,0 +1,806 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ad" = (
+/obj/structure/bed/chair/padded/green{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/lime/full,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"av" = (
+/obj/structure/hygiene/shower{
+	pixel_y = 28
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"bs" = (
+/obj/machinery/door/airlock/virology{
+	locked = 1;
+	frequency = 1379;
+	id_tag = "deep_maint_viro_inner"
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"bM" = (
+/obj/machinery/access_button/airlock_interior{
+	pixel_x = 24;
+	master_tag = "deep_maint_viro"
+	},
+/obj/effect/floor_decal/corner/lime{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"bX" = (
+/obj/structure/virology/console_broken,
+/obj/effect/floor_decal/corner/lime/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"co" = (
+/obj/structure/bed/chair,
+/obj/effect/gibspawner/human,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"dF" = (
+/obj/structure/bed/chair/padded/green{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/lime{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"el" = (
+/obj/effect/decal/cleanable/blood,
+/obj/effect/floor_decal/corner/purple{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"eY" = (
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"fk" = (
+/obj/structure/closet/l3closet/virology,
+/obj/machinery/access_button/airlock_exterior{
+	pixel_x = -24;
+	master_tag = "deep_maint_viro"
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"fC" = (
+/obj/structure/table/standard,
+/obj/item/scalpel,
+/obj/effect/floor_decal/corner/lime/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"fM" = (
+/obj/machinery/door/window/brigdoor/southleft,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"fY" = (
+/obj/effect/floor_decal/corner/lime/three_quarters{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"gc" = (
+/obj/machinery/door/airlock/virology,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"gu" = (
+/obj/structure/table/rack,
+/obj/item/storage/box/masks,
+/obj/item/storage/box/gloves,
+/obj/effect/floor_decal/corner/lime/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"hJ" = (
+/obj/structure/hygiene/sink{
+	dir = 1;
+	pixel_y = 24
+	},
+/obj/effect/floor_decal/corner/lime{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"ij" = (
+/obj/structure/virology/centrifuge_broken,
+/obj/effect/floor_decal/corner/lime/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"ix" = (
+/obj/structure/table/standard,
+/obj/item/pen/red,
+/obj/item/folder/red,
+/obj/effect/floor_decal/corner/lime/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"jB" = (
+/obj/structure/bed/chair/padded/green{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/lime/full,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"kN" = (
+/mob/living/simple_animal/hostile/creature,
+/obj/effect/floor_decal/corner/lime{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"kU" = (
+/obj/effect/floor_decal/corner/lime{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"mC" = (
+/obj/machinery/light/spot,
+/obj/effect/floor_decal/corner/lime{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"mM" = (
+/obj/item/stool/padded,
+/obj/effect/floor_decal/corner/purple{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"nz" = (
+/obj/machinery/computer/arcade,
+/obj/effect/floor_decal/corner/purple/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"nL" = (
+/obj/structure/bed/chair,
+/obj/effect/decal/cleanable/vomit,
+/mob/living/carbon/human/monkey,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"nO" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/floor_decal/corner/red{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"oe" = (
+/obj/effect/floor_decal/corner/lime{
+	dir = 10
+	},
+/obj/item/stool/padded,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"of" = (
+/obj/structure/table/standard,
+/obj/item/reagent_containers/glass/beaker/vial/random,
+/obj/item/reagent_containers/glass/beaker/vial/random,
+/obj/effect/floor_decal/corner/lime/mono,
+/obj/item/device/flashlight/lamp,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"pm" = (
+/obj/structure/table/standard,
+/obj/random/junkfood,
+/obj/effect/floor_decal/corner/purple/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"qg" = (
+/obj/machinery/door/window/brigdoor/southright,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"qs" = (
+/obj/structure/closet/l3closet/virology,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"qx" = (
+/mob/living/simple_animal/hostile/creature,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/lime{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"rx" = (
+/obj/item/stool/padded,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"so" = (
+/obj/structure/table/standard,
+/obj/item/ammo_magazine/speedloader/magnum,
+/obj/item/gun/projectile/revolver{
+	starts_loaded = 0
+	},
+/obj/effect/floor_decal/corner/red/mono,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"ve" = (
+/obj/structure/virology/iso,
+/obj/effect/floor_decal/corner/lime/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"vn" = (
+/obj/effect/decal/cleanable/blood/drip,
+/mob/living/simple_animal/hostile/creature,
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"vS" = (
+/obj/effect/decal/cleanable/generic,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"vV" = (
+/obj/structure/closet/l3closet/virology,
+/obj/effect/floor_decal/corner/lime/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"we" = (
+/obj/structure/table/standard,
+/obj/random/donkpocket_box,
+/obj/effect/floor_decal/corner/purple/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"wW" = (
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"xZ" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"ym" = (
+/obj/structure/closet/crate/plastic,
+/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/hand_labeler,
+/obj/item/handcuffs,
+/obj/item/handcuffs,
+/obj/item/handcuffs,
+/obj/item/handcuffs,
+/obj/effect/floor_decal/corner/lime/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"yK" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/floor_decal/corner/red{
+	dir = 9
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"yM" = (
+/obj/random/trash,
+/obj/effect/floor_decal/corner/purple{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"yO" = (
+/obj/effect/floor_decal/corner/purple{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"zL" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/lime{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"BI" = (
+/obj/structure/table/standard,
+/obj/machinery/microwave,
+/obj/effect/floor_decal/corner/purple/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"BU" = (
+/obj/item/stool/padded,
+/obj/effect/floor_decal/corner/red{
+	dir = 6
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"CB" = (
+/obj/structure/table/standard,
+/obj/item/storage/box/freezer,
+/obj/effect/floor_decal/corner/lime/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"CC" = (
+/obj/item/stool/padded,
+/obj/machinery/light/spot,
+/obj/effect/floor_decal/corner/purple/full,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"CH" = (
+/obj/item/stool/padded,
+/obj/effect/floor_decal/corner/purple{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"CP" = (
+/obj/structure/table/standard,
+/obj/item/material/clipboard/plastic,
+/obj/effect/floor_decal/corner/lime/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"DB" = (
+/obj/effect/decal/cleanable/generic,
+/obj/effect/floor_decal/corner/purple/full,
+/obj/structure/flora/pottedplant/large,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Eh" = (
+/obj/structure/table/standard,
+/obj/item/storage/box/monkeycubes,
+/obj/item/storage/box/monkeycubes,
+/obj/item/reagent_containers/food/drinks/cans/waterbottle,
+/obj/machinery/light/small,
+/obj/effect/floor_decal/corner/red/mono,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/deepmaint)
+"Em" = (
+/obj/structure/table/standard,
+/obj/item/storage/lockbox/vials,
+/obj/effect/floor_decal/corner/lime/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"Eq" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/item/ammo_casing/pistol/magnum/used,
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"EA" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/floor_decal/corner/lime{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"FG" = (
+/obj/machinery/door/airlock/virology{
+	locked = 1;
+	frequency = 1379;
+	id_tag = "deep_maint_viro_outter"
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"Gd" = (
+/obj/effect/floor_decal/corner/lime{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"GB" = (
+/obj/effect/decal/cleanable/vomit,
+/obj/effect/floor_decal/corner/purple{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"GD" = (
+/mob/living/simple_animal/hostile/creature,
+/obj/effect/floor_decal/corner/purple{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"GQ" = (
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+"Hv" = (
+/turf/simulated/floor,
+/area/map_template/deepmaint)
+"Ks" = (
+/obj/machinery/embedded_controller/radio/airlock/access_controller{
+	id_tag = "deep_maint_viro";
+	pixel_y = 24;
+	tag_exterior_door = "deep_maint_viro_outter";
+	tag_interior_door = "deep_maint_viro_inner"
+	},
+/obj/effect/floor_decal/corner/lime{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Mf" = (
+/obj/structure/hygiene/shower{
+	pixel_y = 28
+	},
+/obj/effect/floor_decal/corner/lime{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Ms" = (
+/obj/structure/table/standard,
+/obj/random/junk,
+/obj/effect/floor_decal/corner/purple/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"MZ" = (
+/obj/structure/table/standard,
+/obj/item/reagent_containers/glass/beaker/vial,
+/obj/item/reagent_containers/dropper,
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/lime/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"NQ" = (
+/obj/structure/virology/analyser_off,
+/obj/effect/floor_decal/corner/lime/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"Og" = (
+/obj/structure/table/standard,
+/obj/effect/floor_decal/corner/purple/mono,
+/obj/random/junk,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"PQ" = (
+/obj/effect/floor_decal/corner/lime/three_quarters,
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"QF" = (
+/obj/machinery/door/airlock/glass/virology,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"QS" = (
+/turf/simulated/wall,
+/area/map_template/deepmaint)
+"RP" = (
+/obj/item/storage/box/autoinjectors,
+/obj/item/storage/box/syringes,
+/obj/structure/table/rack,
+/obj/item/storage/box/pillbottles,
+/obj/item/storage/box/beakers,
+/obj/effect/floor_decal/corner/lime/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"SG" = (
+/obj/effect/floor_decal/corner/lime{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Tg" = (
+/obj/structure/table/standard,
+/obj/item/device/radio/phone,
+/obj/effect/floor_decal/corner/lime/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"Tw" = (
+/obj/effect/floor_decal/corner/lime{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"TR" = (
+/obj/structure/table/standard,
+/obj/item/dice/d100,
+/obj/machinery/light/spot,
+/obj/effect/floor_decal/corner/purple/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"Ui" = (
+/obj/item/stool/padded,
+/obj/effect/floor_decal/corner/purple/three_quarters{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Vn" = (
+/obj/effect/floor_decal/corner/purple/mono,
+/obj/structure/reagent_dispensers/water_cooler{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"WE" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/floor_decal/corner/purple{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"WV" = (
+/obj/structure/closet/crate/secure/biohazard/alt,
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/steel_dirty,
+/area/map_template/deepmaint)
+"Xe" = (
+/obj/machinery/door/airlock/virology,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/deepmaint)
+"Xq" = (
+/obj/machinery/light/small{
+	dir = 4;
+	icon_state = "bulb1"
+	},
+/obj/effect/floor_decal/corner/lime{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/deepmaint)
+"Yf" = (
+/obj/structure/hygiene/sink{
+	dir = 1;
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/deepmaint)
+
+(1,1,1) = {"
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+"}
+(2,1,1) = {"
+Hv
+QS
+QS
+QS
+QS
+QS
+QS
+QS
+QS
+QS
+QS
+QS
+QS
+QS
+Hv
+"}
+(3,1,1) = {"
+Hv
+QS
+Tg
+CP
+ix
+NQ
+ij
+ve
+bX
+QS
+vV
+vV
+ym
+QS
+Hv
+"}
+(4,1,1) = {"
+Hv
+QS
+fC
+jB
+fY
+kN
+dF
+kU
+PQ
+Xe
+kU
+qx
+kU
+QS
+Hv
+"}
+(5,1,1) = {"
+Hv
+QS
+MZ
+Em
+SG
+Gd
+wW
+SG
+mC
+QS
+QS
+QS
+QS
+QS
+Hv
+"}
+(6,1,1) = {"
+Hv
+QS
+of
+ad
+SG
+Gd
+wW
+SG
+oe
+xZ
+rx
+yO
+Og
+QS
+Hv
+"}
+(7,1,1) = {"
+Hv
+QS
+CB
+RP
+gu
+nO
+Tw
+EA
+WE
+QF
+el
+CH
+TR
+QS
+Hv
+"}
+(8,1,1) = {"
+Hv
+QS
+QS
+QS
+QS
+gc
+QS
+SG
+bM
+xZ
+wW
+yM
+Vn
+QS
+Hv
+"}
+(9,1,1) = {"
+Hv
+QS
+nL
+fM
+GQ
+yK
+QS
+bs
+QS
+QS
+wW
+yO
+nz
+QS
+Hv
+"}
+(10,1,1) = {"
+Hv
+QS
+QS
+QS
+Yf
+BU
+QS
+Ks
+zL
+xZ
+vS
+GD
+BI
+QS
+Hv
+"}
+(11,1,1) = {"
+Hv
+QS
+WV
+eY
+vn
+Eh
+QS
+Mf
+Gd
+xZ
+wW
+GB
+DB
+QS
+Hv
+"}
+(12,1,1) = {"
+Hv
+QS
+QS
+QS
+av
+so
+QS
+hJ
+Xq
+xZ
+mM
+Ui
+CC
+QS
+Hv
+"}
+(13,1,1) = {"
+Hv
+QS
+co
+qg
+Eq
+QS
+QS
+FG
+QS
+QS
+Ms
+pm
+we
+QS
+Hv
+"}
+(14,1,1) = {"
+Hv
+QS
+QS
+QS
+QS
+QS
+qs
+wW
+fk
+QS
+QS
+QS
+QS
+QS
+Hv
+"}
+(15,1,1) = {"
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+Hv
+"}
