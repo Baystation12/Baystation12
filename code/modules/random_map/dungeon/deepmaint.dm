@@ -13,24 +13,26 @@ var/global/list/big_deepmaint_room_templates = list()
 	if(big_deepmaint_room_templates.len || small_deepmaint_room_templates.len)
 		return
 	for(var/item in subtypesof(/datum/map_template/deepmaint_template/room))
-		var/datum/map_template/deepmaint_template/S = new item()
+		var/datum/map_template/deepmaint_template/temp = item
+		var/datum/map_template/deepmaint_template/S = new temp()
 		small_deepmaint_room_templates += S
 
 	for(var/item in subtypesof(/datum/map_template/deepmaint_template/big))
-		var/datum/map_template/deepmaint_template/S = new item()
+		var/datum/map_template/deepmaint_template/temp = item
+		var/datum/map_template/deepmaint_template/S = new temp()
 		big_deepmaint_room_templates += S
 
 /obj/procedural/jp_dungeonroom/preexist/square/submap/deepmaint
 	name = "deepmaint room"
 
-/obj/procedural/jp_dungeonroom/preexist/square/submap/deepmaint/Initialize()
+/obj/procedural/jp_dungeonroom/preexist/square/submap/deepmaint/New()
 	. = ..()
 	my_map = pick(small_deepmaint_room_templates)
 
 /obj/procedural/jp_dungeonroom/preexist/square/submap/deepmaint/big
 	name = "deepmaint core room"
 
-/obj/procedural/jp_dungeonroom/preexist/square/submap/deepmaint/big/Initialize()
+/obj/procedural/jp_dungeonroom/preexist/square/submap/deepmaint/big/New()
 	. = ..()
 	my_map = pick(big_deepmaint_room_templates)
 
@@ -40,10 +42,10 @@ var/global/list/big_deepmaint_room_templates = list()
 
 /obj/procedural/jp_DungeonGenerator/deepmaint
 	name = "Deep Maintenance Procedural Generator"
+
 /**
 	Finds a line of walls adjacent to the line of turfs given
 */
-
 /obj/procedural/jp_DungeonGenerator/deepmaint/proc/checkForWalls(list/line)
 	var/turf/t1 = line[1]
 	var/turf/t2 = line[2]
@@ -67,9 +69,6 @@ var/global/list/big_deepmaint_room_templates = list()
 
 	return list()
 
-/**
-	Generates burrow-linked ladders
-*/
 
 /obj/procedural/jp_DungeonGenerator/deepmaint/proc/makeLadders()
 	var/ladders_to_place = 3

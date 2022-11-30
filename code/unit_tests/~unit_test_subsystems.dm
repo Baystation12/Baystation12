@@ -44,6 +44,10 @@ SUBSYSTEM_DEF(unit_tests)
 			report_progress("Skipping template '[map_template]' ([map_template.type]): Is an Away Site")
 			continue
 
+		if (istype(map_template, /datum/map_template/deepmaint_template))
+			report_progress("Skipping template '[map_template]' ([map_template.type]): Is a Deepmaint submap.")
+			continue
+
 		// Suggestion: Do smart things here to squeeze as many templates as possible into the same Z-level
 		if(map_template.tallness == 1)
 			INCREMENT_WORLD_Z_SIZE
@@ -130,4 +134,3 @@ SUBSYSTEM_DEF(unit_tests)
 			unit_test_final_message()
 			log_unit_test("Caught [GLOB.total_runtimes] Runtime\s.")
 			del world
-
