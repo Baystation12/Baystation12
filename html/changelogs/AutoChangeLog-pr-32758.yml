@@ -1,4 +1,0 @@
-author: SomeAngryMiner
-delete-after: true
-changes:
-  - rscadd: reduces mercenary voidsuit laser resistance from laser_major to laser_handguns.
