@@ -17,6 +17,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Otherwise, we will fail to push refs
+          ref: remastered_new_dev_proxima_2022_gold_edition
+          token: ${{ secrets.BOT_TOKEN }}
       - name: Python setup
         uses: actions/setup-python@v4
         with:
@@ -28,8 +32,8 @@ jobs:
         run: python tools/changelog/ss13_genchangelog.py html/changelog.html html/changelogs
       - name: Commit And Push
         run: |
-          git config --global user.name "Changelogs"
-          git config --global user.email "action@github.com"
+          git config --global user.name "${{ secrets.BOT_NAME }}"
+          git config --global user.email "${{ secrets.BOT_EMAIL }}"
           git diff --quiet --exit-code && echo "No changes found, aborting." && exit 0
           git commit -am "Automatic changelog generation"
           git push
