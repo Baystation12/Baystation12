@@ -96,14 +96,6 @@
 /obj/effect/shuttle_landmark/nav_casino/nav5,
 /turf/space,
 /area/space)
-"al" = (
-/obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
-	},
-/obj/machinery/radio_beacon,
-/turf/simulated/floor/tiled,
-/area/casino/casino_bridge)
 "am" = (
 /turf/simulated/wall/r_wall,
 /area/casino/casino_bridge)
@@ -328,6 +320,14 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/casino/casino_bridge)
+"ba" = (
+/obj/structure/closet/emcloset,
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
@@ -4858,6 +4858,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
+"qB" = (
+/obj/machinery/radio_beacon,
+/turf/simulated/floor/tiled,
+/area/casino/casino_bridge)
 "rb" = (
 /obj/item/ammo_casing/rifle/used,
 /obj/item/ammo_casing/rifle/used,
@@ -9560,7 +9564,7 @@ gb
 ax
 ax
 ax
-ap
+qB
 aV
 am
 bj
@@ -10071,7 +10075,7 @@ aA
 Kb
 aM
 ap
-al
+ba
 am
 bo
 Pb

@@ -3,23 +3,6 @@
 /obj/effect/shuttle_landmark/scavver_gantry/generic/aquila,
 /turf/space,
 /area/space)
-"ab" = (
-/obj/machinery/alarm{
-	dir = 4;
-	locked = 0;
-	pixel_x = -25;
-	req_access = list()
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/blue{
-	dir = 10
-	},
-/obj/machinery/light,
-/obj/machinery/radio_beacon,
-/turf/simulated/floor/tiled,
-/area/scavver/calypso)
 "ak" = (
 /obj/machinery/suspension_gen,
 /turf/simulated/floor/airless,
@@ -1916,6 +1899,22 @@
 	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtdown)
+"Gq" = (
+/obj/machinery/alarm{
+	dir = 4;
+	locked = 0;
+	pixel_x = -25;
+	req_access = list()
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 10
+	},
+/obj/machinery/light,
+/turf/simulated/floor/tiled,
+/area/scavver/calypso)
 "Gr" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel,
 /turf/simulated/floor/airless,
@@ -1924,6 +1923,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/machinery/radio_beacon,
 /turf/simulated/floor/airless,
 /area/scavver/calypso)
 "Gz" = (
@@ -16380,7 +16380,7 @@ UM
 gs
 sN
 vX
-ab
+Gq
 ry
 ry
 qQ

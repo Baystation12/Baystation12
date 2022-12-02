@@ -931,6 +931,8 @@
 /obj/structure/table/rack,
 /obj/item/device/radio/headset/iccgn,
 /obj/item/device/radio/headset/iccgn,
+/obj/item/storage/toolbox/syndicate,
+/obj/item/storage/toolbox/syndicate,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/icgnv_hound)
 "Po" = (
@@ -1040,9 +1042,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 10
 	},
-/obj/structure/table/rack,
-/obj/item/storage/toolbox/syndicate,
-/obj/item/storage/toolbox/syndicate,
+/obj/machinery/radio_beacon,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/icgnv_hound)
 "TO" = (

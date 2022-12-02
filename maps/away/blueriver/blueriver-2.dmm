@@ -829,10 +829,6 @@
 	temperature = 233
 	},
 /area/bluespaceriver/ground)
-"cE" = (
-/obj/machinery/radio_beacon,
-/turf/simulated/wall/titanium,
-/area/bluespaceriver/ship)
 "hN" = (
 /obj/machinery/door/airlock/science,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3648,7 +3644,7 @@ aR
 Lk
 bi
 bx
-cE
+ay
 ay
 ay
 ay

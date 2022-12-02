@@ -14,16 +14,6 @@
 /obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/map_template/colony2/engineering)
-"ac" = (
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner_steel_grid/diagonal{
-	dir = 4
-	},
-/obj/machinery/radio_beacon,
-/turf/simulated/floor/tiled/techmaint,
-/area/map_template/colony2/ship)
 "an" = (
 /obj/machinery/light/spot{
 	dir = 1
@@ -680,6 +670,16 @@
 /obj/effect/paint/ocean,
 /turf/simulated/wall,
 /area/map_template/colony2/atmospherics)
+"lW" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
+	},
+/obj/machinery/radio_beacon,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
 "lZ" = (
 /obj/machinery/atmospherics/omni/mixer{
 	tag_east = 1;
@@ -3227,7 +3227,7 @@ Og
 (11,1,1) = {"
 PU
 dj
-ac
+lW
 ci
 ZJ
 UN

@@ -1037,6 +1037,11 @@
 /obj/random/cash,
 /obj/random/cash,
 /obj/item/spacecash/bundle/c1000,
+/obj/random/contraband,
+/obj/random/contraband,
+/obj/random/contraband,
+/obj/random/contraband,
+/obj/random/contraband,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/tcomms)
 "ck" = (

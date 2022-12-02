@@ -182,14 +182,6 @@
 "aB" = (
 /turf/simulated/wall/titanium,
 /area/yacht/living)
-"aC" = (
-/obj/structure/window/reinforced,
-/obj/machinery/atmospherics/pipe/simple/visible/black{
-	dir = 6
-	},
-/obj/machinery/radio_beacon,
-/turf/simulated/floor/plating,
-/area/yacht/engine)
 "aD" = (
 /obj/structure/hygiene/shower{
 	pixel_y = 20
@@ -1203,6 +1195,14 @@
 /obj/structure/window/reinforced,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/recharge_station,
+/turf/simulated/floor/plating,
+/area/yacht/engine)
+"dC" = (
+/obj/structure/window/reinforced,
+/obj/machinery/atmospherics/pipe/simple/visible/black{
+	dir = 6
+	},
+/obj/machinery/radio_beacon,
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "dD" = (
@@ -6833,7 +6833,7 @@ df
 dk
 dt
 dw
-aC
+dC
 dE
 aa
 aa

@@ -489,10 +489,10 @@
 /area/hallway/primary/bridge/aft)
 "aY" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/uniform_vendor,
 /obj/machinery/recharger/wallcharger{
 	pixel_y = 24
 	},
-/obj/machinery/radio_beacon,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "aZ" = (
@@ -6759,6 +6759,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
+/obj/machinery/radio_beacon,
 /turf/simulated/floor/plating,
 /area/aquila/power)
 "qE" = (
@@ -11528,7 +11529,7 @@
 /obj/machinery/newscaster/security_unit{
 	pixel_y = 32
 	},
-/obj/machinery/computer/modular/preset/cardslot/command,
+/obj/machinery/radio_beacon,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "GZ" = (
