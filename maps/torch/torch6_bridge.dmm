@@ -577,7 +577,7 @@
 "qz" = (/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/effect/floor_decal/corner/blue{dir = 10},/turf/simulated/floor/tiled,/area/hallway/primary/bridge/fore)
 "qA" = (/obj/machinery/camera/network/command{c_tag = "Bridge Exterior - Port"; dir = 1},/turf/space,/area/space)
 "qB" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 1},/turf/simulated/floor/wood/walnut,/area/crew_quarters/heads/office/sgr)
-"qD" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/simulated/floor/plating,/area/aquila/power)
+"qD" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/machinery/radio_beacon,/turf/simulated/floor/plating,/area/aquila/power)
 "qE" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/simulated/floor/plating,/area/aquila/power)
 "qF" = (/obj/effect/floor_decal/industrial/warning/corner,/obj/structure/cable/cyan{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/simulated/floor/plating,/area/aquila/power)
 "qH" = (/turf/simulated/wall/prepainted,/area/crew_quarters/heads/office/sea)
