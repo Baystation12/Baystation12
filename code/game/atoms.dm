@@ -323,6 +323,16 @@
 	return found
 
 /**
+ * Recursively searches containers for a given path, and returns the first match.
+ */
+/atom/proc/get_container(container_type)
+	var/atom/A = src
+	while (!istype(A, /area))
+		if (istype(A.loc, container_type))
+			return A.loc
+		A = A.loc
+
+/**
  * Called when a user examines the atom. This proc and its overrides handle displaying the text that appears in chat
  * during examines.
  *
