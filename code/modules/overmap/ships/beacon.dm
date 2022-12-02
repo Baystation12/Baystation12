@@ -38,22 +38,26 @@
 
 
 /obj/machinery/radio_beacon/interface_interact(mob/user, skip_time_check = FALSE)
+	if (!CanInteract(user, DefaultTopicState()))
+		return
+
 	if (inoperable())
 		to_chat(user, SPAN_WARNING("A small red light flashes on \the [src]."))
 		return
+
 	var/obj/effect/overmap/visitable/O = map_sectors["[get_z(src)]"]
 	if(!O)
 		to_chat(user, SPAN_WARNING("You cannot deploy \the [src] here."))
 		return
-	var/toggle_prompt = alert(user, "Turn the beacon...", "[src] Options", "[signal ? "Off" : "On"]", "Distress", "Cancel")
+
+	var/toggle_prompt = alert(user, "Turn the beacon...", "[src] Options", "[signal || emergency_signal ? "Off" : "On"]", "Distress", "Cancel")
 
 	if (toggle_prompt == "Cancel")
 		return
 
-	if (!toggle_prompt || QDELETED(src) || stat)
+	if (QDELETED(src) || stat)
 		return
-	if (!Adjacent(user) || user.stat)
-		to_chat(user, SPAN_WARNING("You're not able to do that to \the [src] right now."))
+
 	switch(toggle_prompt)
 		if ("On")
 			if (emergency_signal)
@@ -67,8 +71,12 @@
 			if (signal)
 				to_chat(user, SPAN_WARNING("Turn off the radio broadcast first!"))
 				return
-			else
-				activate_distress()
+
+			if (emergency_signal)
+				to_chat(user, SPAN_WARNING("This beacon is already broadcasting a distress signal!"))
+				return
+
+			activate_distress()
 
 /obj/machinery/radio_beacon/proc/activate()
 	var/obj/effect/overmap/visitable/O = map_sectors["[get_z(src)]"]
