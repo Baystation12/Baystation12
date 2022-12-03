@@ -1,0 +1,18 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - maptweak: The locations of radio beacons have been tweaked to be less intrusive
+      and resolve various issues of blocking access to other areas/items, or outright
+      replacing them.
+  - maptweak: The bridge uniform vendor has been restored.
+  - maptweak: The SEV Aquila now has a radio beacon.
+  - maptweak: The Casino's radio beacon has been moved to the bridge area.
+  - maptweak: Radio beacons have been removed from the blueriver and oldpod maps.
+  - maptweak: Salvage Gantry's radio beacon has been moved to the rear section of
+      the cockpit area.
+  - maptweak: Skrell ship's radio beacon has been moved to the bridge area.
+  - maptweak: Radio beacon has been removed from the Guppy pending a planned update
+      to use wall-mounted beacons and a decision on whether or not the pod should
+      even have one.
+  - maptweak: Added radio beacons to the mercenary ship, as well as the fleet and
+      terran event ships.
