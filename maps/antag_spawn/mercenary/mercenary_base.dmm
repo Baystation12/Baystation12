@@ -144,11 +144,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle)
 "ax" = (
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 8
-	},
 /obj/effect/floor_decal/industrial/warning{
-	dir = 1
+	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
@@ -2300,14 +2297,8 @@
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/merc_spawn)
 "Bh" = (
-/obj/structure/handrail{
-	dir = 4
-	},
-/obj/effect/floor_decal/industrial/warning,
-/obj/effect/floor_decal/industrial/warning{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/obj/machinery/radio_beacon,
+/turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle)
 "Bj" = (
 /obj/effect/floor_decal/industrial/outline/red,

@@ -1,11 +1,4 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"aa" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/radio_beacon,
-/turf/simulated/floor/tiled/monotile,
-/area/map_template/oldpod)
 "ab" = (
 /obj/structure/shuttle/engine/propulsion{
 	dir = 1
@@ -553,7 +546,7 @@ Kh
 (3,1,1) = {"
 MA
 MA
-aa
+am
 as
 az
 am

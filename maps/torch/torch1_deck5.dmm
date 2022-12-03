@@ -76,17 +76,6 @@
 /obj/effect/paint/silver,
 /turf/simulated/wall/ocp_wall,
 /area/shuttle/petrov/toxins)
-"ak" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/fuel,
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/machinery/radio_beacon,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/techfloor,
-/area/guppy_hangar/start)
 "al" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable{
@@ -106,23 +95,6 @@
 "an" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/fifthdeck/fore)
-"ao" = (
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 4;
-	icon_state = "warning"
-	},
-/obj/machinery/firealarm{
-	pixel_y = 24
-	},
-/obj/machinery/radio_beacon,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/exploration_shuttle/power)
 "ap" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -643,6 +615,15 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/expedition/storage)
+"br" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel,
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/guppy_hangar/start)
 "bs" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 8;
@@ -2163,6 +2144,22 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/hangar)
+"eK" = (
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/machinery/firealarm{
+	pixel_y = 24
+	},
+/obj/machinery/radio_beacon,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/exploration_shuttle/power)
 "eM" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4;
@@ -35362,7 +35359,7 @@ dv
 dJ
 ed
 eh
-ao
+eK
 fq
 fP
 gi
@@ -37169,7 +37166,7 @@ aJ
 aX
 ee
 aZ
-ak
+br
 bI
 cg
 Zn

@@ -22,23 +22,6 @@
 /obj/machinery/portable_atmospherics/canister/empty,
 /turf/simulated/floor/tiled/skrell/orange,
 /area/ship/skrellscoutship/maintenance/atmos)
-"ae" = (
-/obj/machinery/power/apc/critical{
-	dir = 1;
-	name = "north bump";
-	pixel_y = 24;
-	req_access = list("ACCESS_SKRELLSCOUT")
-	},
-/obj/machinery/power/terminal{
-	dir = 1
-	},
-/obj/structure/cable{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/obj/machinery/radio_beacon,
-/turf/simulated/floor/tiled/skrell/orange,
-/area/ship/skrellscoutship/maintenance/power)
 "ag" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/cyan{
 	dir = 4
@@ -268,6 +251,22 @@
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutshuttle)
+"bh" = (
+/obj/machinery/power/apc/critical{
+	dir = 1;
+	name = "north bump";
+	pixel_y = 24;
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/obj/machinery/power/terminal{
+	dir = 1
+	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/tiled/skrell/orange,
+/area/ship/skrellscoutship/maintenance/power)
 "bi" = (
 /obj/effect/catwalk_plated/dark,
 /obj/structure/cable{
@@ -3760,6 +3759,11 @@
 /obj/machinery/door/firedoor/autoset,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/skrellscoutship/maintenance/power)
+"nw" = (
+/obj/machinery/light/skrell,
+/obj/machinery/radio_beacon,
+/turf/simulated/floor/tiled/skrell/red,
+/area/ship/skrellscoutship/command/bridge)
 "nD" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
@@ -8490,7 +8494,7 @@ AU
 AU
 Eq
 ig
-QA
+nw
 CX
 CX
 CX
@@ -11853,7 +11857,7 @@ dl
 gy
 oj
 mI
-ae
+bh
 by
 Qr
 Lw

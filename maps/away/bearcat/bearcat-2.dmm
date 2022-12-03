@@ -40,10 +40,6 @@
 	},
 /turf/simulated/floor,
 /area/ship/scrap/command/bridge)
-"ae" = (
-/obj/machinery/radio_beacon,
-/turf/simulated/floor/bluegrid,
-/area/ship/scrap/comms)
 "ag" = (
 /obj/machinery/computer/modular/preset/cardslot/command,
 /turf/simulated/floor/bluegrid/airless,
@@ -5655,6 +5651,10 @@
 /obj/machinery/power/port_gen/pacman/super,
 /turf/simulated/floor,
 /area/ship/scrap/hidden)
+"PZ" = (
+/obj/machinery/radio_beacon,
+/turf/simulated/floor/bluegrid,
+/area/ship/scrap/comms)
 "Qd" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -12381,7 +12381,7 @@ Yv
 Yv
 ed
 ar
-ae
+PZ
 aO
 aX
 Yv

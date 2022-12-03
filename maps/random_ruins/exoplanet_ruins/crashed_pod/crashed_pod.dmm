@@ -1,9 +1,4 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"aa" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/radio_beacon,
-/turf/simulated/floor/tiled/dark,
-/area/map_template/crashed_pod)
 "ab" = (
 /turf/simulated/wall/r_wall,
 /area/map_template/crashed_pod)
@@ -1022,6 +1017,11 @@
 /obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
 /area/map_template/crashed_pod)
+"pO" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/radio_beacon,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/crashed_pod)
 "vG" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/outline/blue,
@@ -1222,7 +1222,7 @@ gw
 gG
 ay
 hm
-aa
+pO
 lG
 "}
 (10,1,1) = {"

@@ -614,10 +614,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
-"bK" = (
-/obj/machinery/radio_beacon,
-/turf/simulated/floor/plating,
-/area/errant_pisces/enginering)
 "bL" = (
 /obj/structure/table/steel,
 /obj/random/tool,
@@ -6836,6 +6832,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_f)
+"si" = (
+/obj/machinery/radio_beacon,
+/turf/simulated/floor/plating,
+/area/errant_pisces/enginering)
 "tb" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
@@ -28362,7 +28362,7 @@ at
 aA
 aP
 aZ
-bK
+si
 bn
 bn
 co

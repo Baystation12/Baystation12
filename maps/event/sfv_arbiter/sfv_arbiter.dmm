@@ -334,8 +334,8 @@
 /area/map_template/sfv_arbiter)
 "kU" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	id_tag = "sfv_arbiter_shuttle_pump_out_internal";
-	dir = 4
+	dir = 4;
+	id_tag = "sfv_arbiter_shuttle_pump_out_internal"
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	dir = 4;
@@ -589,23 +589,24 @@
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/floor_decal/industrial/warning,
+/obj/machinery/radio_beacon,
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "sN" = (
 /obj/effect/floor_decal/corner/b_green/mono,
 /obj/structure/table/rack,
 /obj/machinery/door/window/eastleft{
-	req_access = list("ACCESS_SYNDICATE");
-	autoset_access = 0
+	autoset_access = 0;
+	req_access = list("ACCESS_SYNDICATE")
 	},
 /obj/item/rig/ert/fleet,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/sfv_arbiter)
 "sS" = (
 /obj/machinery/airlock_sensor{
-	pixel_y = 24;
+	frequency = 1380;
 	id_tag = s;
-	frequency = 1380
+	pixel_y = 24
 	},
 /turf/template_noop,
 /area/template_noop)
@@ -680,9 +681,9 @@
 /area/map_template/sfv_arbiter)
 "uY" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
 	icon_state = "map_vent_in";
-	pump_direction = 0;
-	dir = 1
+	pump_direction = 0
 	},
 /turf/simulated/floor/airless,
 /area/map_template/sfv_arbiter)
@@ -706,8 +707,8 @@
 /obj/effect/floor_decal/corner/b_green/mono,
 /obj/structure/table/rack,
 /obj/machinery/door/window/eastleft{
-	req_access = list("ACCESS_SYNDICATE");
-	autoset_access = 0
+	autoset_access = 0;
+	req_access = list("ACCESS_SYNDICATE")
 	},
 /obj/item/rig/ert/fleet,
 /turf/simulated/floor/tiled/dark,
@@ -886,8 +887,8 @@
 /obj/effect/floor_decal/corner/b_green/mono,
 /obj/structure/table/rack,
 /obj/machinery/door/window/eastleft{
-	req_access = list("ACCESS_SYNDICATE");
-	autoset_access = 0
+	autoset_access = 0;
+	req_access = list("ACCESS_SYNDICATE")
 	},
 /obj/item/rig/ert/fleet,
 /turf/simulated/floor/tiled/dark,
@@ -1115,9 +1116,9 @@
 	dir = 1
 	},
 /obj/machinery/airlock_sensor{
-	pixel_y = 24;
+	frequency = 1380;
 	id_tag = "sfv_arbiter_shuttle_sensor";
-	frequency = 1380
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/sfv_arbiter)
@@ -1904,8 +1905,8 @@
 /area/map_template/sfv_arbiter)
 "RA" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	id_tag = "sfv_arbiter_shuttle_pump_out_internal";
-	dir = 4
+	dir = 4;
+	id_tag = "sfv_arbiter_shuttle_pump_out_internal"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/sfv_arbiter)
@@ -2512,8 +2513,8 @@
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 2
+	dir = 2;
+	icon_state = "warningcorner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 6
