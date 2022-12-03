@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fixed being unable to turn off beacon distress signals.
-  - bugfix: Fixed ghosts being able to interact with beacons.
