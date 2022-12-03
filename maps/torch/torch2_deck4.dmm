@@ -5222,7 +5222,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/storage/primary)
 "sx" = (
-/obj/machinery/vending/assist,
+/obj/machinery/vending/generic,
 /turf/simulated/floor/tiled/monotile,
 /area/storage/primary)
 "sy" = (

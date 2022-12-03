@@ -3268,7 +3268,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "hC" = (
-/obj/machinery/vending/assist,
+/obj/machinery/vending/generic,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "hD" = (
@@ -4305,7 +4305,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "kD" = (
-/obj/machinery/vending/assist,
+/obj/machinery/vending/generic,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "kE" = (

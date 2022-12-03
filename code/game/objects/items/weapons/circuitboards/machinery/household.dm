@@ -73,7 +73,7 @@
 
 /obj/item/stock_parts/circuitboard/vending
 	name = T_BOARD("vending machine")
-	build_path = /obj/machinery/vending/assist
+	build_path = /obj/machinery/vending/generic
 	board_type = "machine"
 	origin_tech = list(TECH_ENGINEERING = 2)
 	req_components = list(

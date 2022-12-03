@@ -1908,7 +1908,7 @@
 	},
 /area/map_template/rescue_base/base)
 "dJ" = (
-/obj/machinery/vending/assist,
+/obj/machinery/vending/generic,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"

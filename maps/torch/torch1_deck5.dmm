@@ -16090,7 +16090,7 @@
 /turf/simulated/floor/reinforced/airless,
 /area/shuttle/petrov/toxins)
 "Ur" = (
-/obj/machinery/vending/assist,
+/obj/machinery/vending/generic,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},

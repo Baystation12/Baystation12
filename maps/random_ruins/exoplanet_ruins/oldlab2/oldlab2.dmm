@@ -4255,7 +4255,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/oldlab2/recandlockers)
 "wt" = (
-/obj/machinery/vending/assist{
+/obj/machinery/vending/generic{
 	pixel_y = 12
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -4527,7 +4527,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/oldlab2/living5)
 "yd" = (
-/obj/machinery/vending/assist{
+/obj/machinery/vending/generic{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,

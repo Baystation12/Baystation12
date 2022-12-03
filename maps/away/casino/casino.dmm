@@ -1595,7 +1595,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "eL" = (
-/obj/machinery/vending/assist,
+/obj/machinery/vending/generic,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "eM" = (
