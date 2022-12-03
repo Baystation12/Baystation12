@@ -7,8 +7,6 @@
 	can_reinforce = 0
 	flipped = -1
 
-	material = DEFAULT_FURNITURE_MATERIAL
-
 /obj/structure/table/rack/New()
 	..()
 	verbs -= /obj/structure/table/verb/do_flip
