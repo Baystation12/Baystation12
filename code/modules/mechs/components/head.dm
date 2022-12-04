@@ -6,7 +6,7 @@
 	var/vision_flags = 0
 	var/see_invisible = 0
 	var/obj/item/robot_parts/robot_component/radio/radio
-	var/obj/item/robot_parts/robot_component/camera
+	var/obj/item/robot_parts/robot_component/camera/camera
 	var/obj/item/mech_component/control_module/software
 	has_hardpoints = list(HARDPOINT_HEAD)
 	var/active_sensors = 0
