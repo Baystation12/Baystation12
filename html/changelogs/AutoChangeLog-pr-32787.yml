@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Mininghome now includes ground ores for the big drill.
