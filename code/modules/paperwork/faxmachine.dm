@@ -18,6 +18,8 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	var/authenticated = 0
 	var/department = null // our department
 	var/destination = null // the department we're sending to
+	/// LAZYLIST (Instances of `/obj/item/modular_computer/pda`). List of PDAs linked to this faxmachine
+	var/list/linked_pdas
 
 /obj/machinery/photocopier/faxmachine/Initialize()
 	. = ..()
@@ -38,6 +40,15 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 	if (department && !(("[department]" in GLOB.alldepartments) || ("[department]" in GLOB.admin_departments)))
 		GLOB.alldepartments |= department
+
+
+/obj/machinery/photocopier/faxmachine/Destroy()
+	if (LAZYLEN(linked_pdas))
+		for (var/obj/item/modular_computer/pda/pda as anything in linked_pdas)
+			unlink_pda(pda)
+		linked_pdas = null
+	. = ..()
+
 
 /obj/machinery/photocopier/faxmachine/attackby(obj/item/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/paper))
@@ -68,13 +79,24 @@ GLOBAL_LIST_EMPTY(admin_departments)
 			return
 		department = new_department
 		to_chat(user, SPAN_NOTICE("You reconfigure \the [src]'s department tag to [department]."))
-	else
-		..()
+		return
+
+	if (istype(O, /obj/item/modular_computer/pda))
+		if (LAZYISIN(linked_pdas, O))
+			unlink_pda(O)
+			to_chat(user, SPAN_NOTICE("You remove \the [O] from \the [src]'s notifications list."))
+			return
+		link_pda(O)
+		to_chat(user, SPAN_NOTICE("You add \the [O] to \the [src]'s notifications list. It will now be pinged whenever a fax is received."))
+		return
+
+	..()
 
 /obj/machinery/photocopier/faxmachine/get_mechanics_info()
 	. = "<p>The fax machine can be used to transmit paper faxes to other fax machines on the map, or to off-ship organizations handled by server administration. To use the fax machine, you'll need to insert both a paper and your ID card, authenticate, select a destination, the transmit the fax.</p>"
 	. += "<p>You can also fax paper bundles, including photos, using this machine.</p>"
 	. += "<p>You can check the machine's department origin tag using a multitool.</p>"
+	. += "<p>You can link a PDA to it to receive notifications of inbound faxes by clicking on it with the PDA in hand.</p>"
 	. += ..()
 
 /obj/machinery/photocopier/faxmachine/get_antag_info()
@@ -98,6 +120,8 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	user.set_machine(src)
 
 	var/dat = "Fax Machine ([department])<BR>"
+
+	dat += "Linked PDAs: [LAZYLEN(linked_pdas)]<br />"
 
 	var/scan_name
 	if(scan)
@@ -209,6 +233,13 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	playsound(loc, "sound/machines/dotprinter.ogg", 50, 1)
 	visible_message(SPAN_NOTICE("\The [src] pings, \"New fax received from [origin_department].\""))
 
+	// Notify any linked PDAs
+	if (LAZYLEN(linked_pdas))
+		for (var/obj/item/modular_computer/pda/pda as anything in linked_pdas)
+			if (!AreConnectedZLevels(get_z(src), get_z(pda)))
+				continue
+			pda.receive_notification("Fax from [origin_department] received in [department].")
+
 	// give the sprite some time to flick
 	sleep(20)
 
@@ -226,6 +257,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 	use_power_oneoff(active_power_usage)
 	return
+
 
 /obj/machinery/photocopier/faxmachine/proc/send_admin_fax(mob/sender, destination)
 	if(inoperable())
@@ -265,6 +297,18 @@ GLOBAL_LIST_EMPTY(admin_departments)
 		if(check_rights((R_ADMIN|R_MOD),0,C))
 			to_chat(C, msg)
 			sound_to(C, 'sound/machines/dotprinter.ogg')
+
+
+/obj/machinery/photocopier/faxmachine/proc/link_pda(obj/item/modular_computer/pda/pda)
+	if (!istype(pda))
+		return
+	LAZYADD(linked_pdas, pda)
+	GLOB.destroyed_event.register(pda, src, .proc/unlink_pda)
+
+
+/obj/machinery/photocopier/faxmachine/proc/unlink_pda(obj/item/modular_computer/pda/pda)
+	LAZYREMOVE(linked_pdas, pda)
+	GLOB.destroyed_event.unregister(pda, src, .proc/unlink_pda)
 
 
 /// Retrieves a list of all fax machines matching the given department tag.
