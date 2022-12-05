@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - maptweak: Area boundaries for deck 1 and deck 3 aft hallways have been pushed
+      back to line up with the physical boundaries created by the doors and windows
+      in the hallways.
