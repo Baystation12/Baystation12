@@ -3,33 +3,35 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "labeler0"
 	item_state = "flight"
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	var/label = null
 	var/labels_left = 30
 	var/mode = 0	//off or on.
 	matter = list(MATERIAL_PLASTIC = 100)
 
-/obj/item/hand_labeler/attack()
-	return
+/obj/item/hand_labeler/get_mechanics_info()
+	. = ..()
+	. += {"
+		<p>The hand labeler can be used to attach labels to objects. To do this, first set a label by using the labeler in your hand and typing in the text to use. Then click on any object.</p>
+		<p>You can turn the labeler back off by using it in hand again.</p>
+		<p>If the labeler is turned on, this will bypass all other interactions - This means you can use the labeler on bags without also storing it, and other such interactions.</p>
+	"}
 
-/obj/item/hand_labeler/afterattack(atom/A, mob/user as mob, proximity)
-	if(!proximity)
-		return
-	if(!mode)	//if it's off, give up.
-		return
-	if(A == loc)	// if placing the labeller into something (e.g. backpack)
-		return		// don't set a label
-
-	if(!labels_left)
-		to_chat(user, SPAN_NOTICE("No labels left."))
-		return
-	if(!label || !length(label))
-		to_chat(user, SPAN_NOTICE("No label text set."))
-		return
-	if(has_extension(A, /datum/extension/labels))
-		var/datum/extension/labels/L = get_extension(A, /datum/extension/labels)
+/obj/item/hand_labeler/attack(atom/target, mob/living/user, target_zone, animate)
+	if (!mode)
+		return FALSE
+	if (!labels_left)
+		to_chat(user, SPAN_WARNING("\The [src] has no labels left."))
+		return TRUE
+	if (!label || !length(label))
+		to_chat(user, SPAN_WARNING("\The [src] does not have label text set."))
+		return TRUE
+	if(has_extension(target, /datum/extension/labels))
+		var/datum/extension/labels/L = get_extension(target, /datum/extension/labels)
 		if(!L.CanAttachLabel(user, label))
-			return
-	A.attach_label(user, src, label)
+			return TRUE
+	target.attach_label(user, src, label)
+	return TRUE
 
 
 /**
