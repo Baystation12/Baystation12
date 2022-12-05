@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Guest pass terminals now allow guest passes to have a time limit of 60
-      minutes, up from 30 minutes.
