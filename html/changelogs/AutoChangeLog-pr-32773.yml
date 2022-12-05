@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscadd: You can now link PDAs to fax machines to receive notifications of received
+      faxes from anywhere on the ship. You can do this by clicking the fax machine
+      with your PDA.
