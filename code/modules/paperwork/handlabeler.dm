@@ -62,16 +62,21 @@
 	L.AttachLabel(user, label_text)
 
 /obj/item/hand_labeler/attack_self(mob/user as mob)
-	mode = !mode
-	icon_state = "labeler[mode]"
-	if(mode)
-		to_chat(user, SPAN_NOTICE("You turn on \the [src]."))
-		//Now let them chose the text.
+	if (!mode)
 		var/str = sanitizeSafe(input(user,"Label text?","Set label",""), MAX_LNAME_LEN)
-		if(!str || !length(str))
-			to_chat(user, SPAN_NOTICE("Invalid text."))
+		if (!str || !length(str))
+			to_chat(user, SPAN_WARNING("Invalid text."))
 			return
 		label = str
-		to_chat(user, SPAN_NOTICE("You set the text to '[str]'."))
+		mode = TRUE
+		update_icon()
+		to_chat(user, SPAN_NOTICE("You turn \the [src] on and set it's text to '[label]'."))
 	else
+		label = null
+		mode = FALSE
+		update_icon()
 		to_chat(user, SPAN_NOTICE("You turn off \the [src]."))
+
+
+/obj/item/hand_labeler/on_update_icon()
+	icon_state = "labeler[mode]"
