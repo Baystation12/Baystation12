@@ -6932,6 +6932,7 @@
 /obj/item/clothing/head/helmet/space/void/atmos,
 /obj/item/tank/oxygen_emergency_extended,
 /obj/item/tank/oxygen_emergency_extended,
+/obj/item/device/suit_cooling_unit,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/airlock)
 "mE" = (
@@ -7299,6 +7300,7 @@
 /obj/item/clothing/head/helmet/space/void/engineering/salvage,
 /obj/item/tank/oxygen_emergency_extended,
 /obj/item/tank/oxygen_emergency_extended,
+/obj/item/device/suit_cooling_unit,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/airlock)
 "ni" = (
@@ -7437,6 +7439,7 @@
 /obj/item/clothing/head/helmet/space/void/mining/alt,
 /obj/item/tank/oxygen_emergency_extended,
 /obj/item/tank/oxygen_emergency_extended,
+/obj/item/device/suit_cooling_unit,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/airlock)
 "nx" = (

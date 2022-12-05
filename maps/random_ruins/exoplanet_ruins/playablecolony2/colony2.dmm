@@ -2380,6 +2380,8 @@
 /obj/item/crowbar/prybar,
 /obj/item/device/radio/map_preset/playablecolony2,
 /obj/item/device/radio/map_preset/playablecolony2,
+/obj/item/device/suit_cooling_unit,
+/obj/item/device/suit_cooling_unit,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/atmospherics)
 "SR" = (
