@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Titanium (And other materials with high crafting costs) can now have their
+      crafting menus opened again.
+  - bugfix: Claymores now use the correct material when they are crafted.
