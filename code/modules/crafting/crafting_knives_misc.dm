@@ -33,7 +33,7 @@
 	completion_trigger_type = /obj/item/stack/material/rods
 	product = /obj/item/material/sword/makeshift
 
-/singleton/crafting_stage/sword_handle/get_product(obj/item/work)
+/singleton/crafting_stage/material/sword_handle/get_product(obj/item/work)
 	var/obj/item/material/large_blade/blade = locate() in work
 	. = ispath(product, /obj/item/material) && new product(get_turf(work), blade?.material?.name)
 

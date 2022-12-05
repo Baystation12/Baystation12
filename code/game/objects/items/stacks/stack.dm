@@ -361,6 +361,7 @@
 	if(material)
 		use_material = material.name
 		difficulty += material.construction_difficulty
+		difficulty = clamp(difficulty, MATERIAL_EASY_DIY, MATERIAL_VERY_HARD_DIY)
 	if(reinforce_material)
 		use_reinf_material = reinforce_material
 
