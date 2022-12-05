@@ -96,6 +96,9 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 	if (config.log_adminchat)
 		game_log("ADMINSAY", text)
 
+/proc/log_fax(text)
+	game_log("FAX: [html_decode(text)]")
+
 /proc/log_adminwarn(text)
 	if (config.log_adminwarn)
 		game_log("ADMINWARN", text)

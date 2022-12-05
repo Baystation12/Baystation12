@@ -146,6 +146,11 @@ SUBSYSTEM_DEF(jobs)
 	if(SSticker.mode && SSticker.mode.explosion_in_progress)
 		to_chat(joining, SPAN_WARNING("The [station_name()] is currently exploding. Joining would go poorly."))
 		return FALSE
+//[INF]
+	if(!job.is_required_roles_filled())
+		to_chat(joining, SPAN_WARNING("For joining as <b>\a [job.title]</b> there should be <b>\a [jointext(job.required_role, ", ")]</b> in crew."))
+		return FALSE
+//[/INF]
 	return TRUE
 
 /datum/controller/subsystem/jobs/proc/check_latejoin_blockers(mob/new_player/joining, datum/job/job)
