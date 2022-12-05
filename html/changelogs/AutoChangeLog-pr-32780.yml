@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Prebuilt mechs, including the cargo powerloader, now have valid cameras
+      in their sensors.
