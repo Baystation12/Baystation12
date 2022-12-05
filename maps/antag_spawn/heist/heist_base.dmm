@@ -1651,6 +1651,8 @@
 /obj/item/stack/material/steel{
 	amount = 50
 	},
+/obj/item/stack/material/aluminium/fifty,
+/obj/item/stack/material/plastic/fifty,
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dS" = (
