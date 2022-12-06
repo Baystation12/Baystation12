@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - maptweak: Zombie juice is no longer a spawnable option from data capsules.
