@@ -27,7 +27,7 @@
 	if(istype(req_access))
 		access.req_access = req_access
 	else if(req_access)
-		log_debug("\The [src] was given an unepxected req_access: [req_access]")
+		log_debug("\The [src] was given an unexpected req_access: [req_access]")
 
 	if(monitored_alarm_ids)
 		for(var/obj/machinery/alarm/alarm in SSmachines.machinery)
