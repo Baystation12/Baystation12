@@ -23,9 +23,8 @@
 	poison_type = /datum/reagent/toxin/phoron
 
 	var/exploded = FALSE
-	var/explosion_dev_range		= 1
-	var/explosion_heavy_range	= 2
-	var/explosion_light_range	= 4
+	var/explosion_radius = 7
+	var/explosion_max_power = EX_ACT_DEVASTATING
 
 	/// Lower bound for explosion delay.
 	var/explosion_delay_lower	= 3 SECONDS
@@ -59,7 +58,7 @@
 	if (src && !exploded)
 		visible_message(SPAN_DANGER("\The [src]'s body detonates!"))
 		exploded = TRUE
-		explosion(loc, explosion_dev_range, explosion_heavy_range, explosion_light_range)
+		explosion(loc, explosion_radius, explosion_max_power)
 		qdel(src)
 
 /obj/item/natural_weapon/bite/spider/phorogenic

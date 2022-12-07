@@ -240,11 +240,11 @@
 	products.adjust_multi(GAS_NO, 0.1 * gas_moles, GAS_NO2, 0.1 * gas_moles, GAS_NITROGEN, 0.6 * gas_moles, GAS_HYDROGEN, 0.02 * gas_moles)
 	T.assume_air(products)
 	if(volume > 500)
-		explosion(T,1,2,4)
+		explosion(T, 7)
 	else if(volume > 100)
-		explosion(T,0,1,3)
+		explosion(T, 4, EX_ACT_HEAVY)
 	else if(volume > 50)
-		explosion(T,-1,1,2)
+		explosion(T, 3, EX_ACT_HEAVY)
 	remove_self(volume)
 
 /datum/reagent/coagulated_blood

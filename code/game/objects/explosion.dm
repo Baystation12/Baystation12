@@ -1,4 +1,9 @@
-/proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, adminlog = 1, z_transfer = UP|DOWN, shaped, turf_breaker)
+#define EXPLOSION_RATIO_DEVASTATION 1
+#define EXPLOSION_RATIO_HEAVY 2
+#define EXPLOSION_RATIO_LIGHT 4
+
+
+/proc/explosion(turf/epicenter, range, max_power = EX_ACT_DEVASTATING, adminlog = 1, z_transfer = UP|DOWN, shaped, turf_breaker)
 	set waitfor = FALSE
 
 	var/multi_z_scalar = 0.35
@@ -6,18 +11,49 @@
 	epicenter = get_turf(epicenter)
 	if(!epicenter) return
 
+	/// Range, in tiles, of `EX_ACT_DEVASTATING` damage.
+	var/devastation_range = 0
+	/// Range, in tiles, of `EX_ACT_HEAVY` damage.
+	var/heavy_impact_range = 0
+	/// Range, in tiles, of `EX_ACT_LIGHT` damage.
+	var/light_impact_range = 0
+	/// Ratio multiplier based on `max_power` and `range` used to determine the above three range values.
+	var/explosion_ratio = 0
+
+	switch (max_power)
+		if (EX_ACT_DEVASTATING)
+			explosion_ratio = range / (EXPLOSION_RATIO_DEVASTATION + EXPLOSION_RATIO_HEAVY + EXPLOSION_RATIO_LIGHT)
+			devastation_range = round(explosion_ratio * EXPLOSION_RATIO_DEVASTATION)
+			heavy_impact_range = round(explosion_ratio * EXPLOSION_RATIO_HEAVY)
+			light_impact_range = round(explosion_ratio * EXPLOSION_RATIO_LIGHT)
+		if (EX_ACT_HEAVY)
+			explosion_ratio = range / (EXPLOSION_RATIO_HEAVY + EXPLOSION_RATIO_LIGHT)
+			heavy_impact_range = round(explosion_ratio * EXPLOSION_RATIO_HEAVY)
+			light_impact_range = round(explosion_ratio * EXPLOSION_RATIO_LIGHT)
+		if (EX_ACT_LIGHT)
+			explosion_ratio = range
+			light_impact_range = range
+
 	// Handles recursive propagation of explosions.
 	if(z_transfer)
 		var/adj_dev   = max(0, (multi_z_scalar * devastation_range) - (shaped ? 2 : 0) )
 		var/adj_heavy = max(0, (multi_z_scalar * heavy_impact_range) - (shaped ? 2 : 0) )
 		var/adj_light = max(0, (multi_z_scalar * light_impact_range) - (shaped ? 2 : 0) )
+		var/adj_range = adj_dev + adj_heavy + adj_light
 
+		var/adj_max_power
+		if (adj_dev)
+			adj_max_power = EX_ACT_DEVASTATING
+		else if (adj_heavy)
+			adj_max_power = EX_ACT_HEAVY
+		else
+			adj_max_power = EX_ACT_LIGHT
 
 		if(adj_dev > 0 || adj_heavy > 0)
 			if(HasAbove(epicenter.z) && z_transfer & UP)
-				explosion(GetAbove(epicenter), round(adj_dev), round(adj_heavy), round(adj_light), 0, UP, shaped)
+				explosion(GetAbove(epicenter), adj_range, adj_max_power, 0, UP, shaped)
 			if(HasBelow(epicenter.z) && z_transfer & DOWN)
-				explosion(GetBelow(epicenter), round(adj_dev), round(adj_heavy), round(adj_light), 0, DOWN, shaped)
+				explosion(GetBelow(epicenter), adj_range, adj_max_power, 0, DOWN, shaped)
 
 	var/max_range = max(devastation_range, heavy_impact_range, light_impact_range)
 
@@ -65,3 +101,8 @@
 /proc/secondaryexplosion(turf/epicenter, range)
 	for(var/turf/tile in range(range, epicenter))
 		tile.ex_act(EX_ACT_HEAVY)
+
+
+#undef EXPLOSION_RATIO_DEVASTATION
+#undef EXPLOSION_RATIO_HEAVY
+#undef EXPLOSION_RATIO_LIGHT

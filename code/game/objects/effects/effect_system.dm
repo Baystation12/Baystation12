@@ -509,12 +509,17 @@ would spawn and follow the beaker, even if it is carried or thrown.
 		if (round(amount/3) > 0)
 			light = light + amount/3
 
+		var/range = min(devst + heavy + light, BOMBCAP_RADIUS)
+
+		var/max_power
+		if (devst)
+			max_power = EX_ACT_DEVASTATING
+		else if (heavy)
+			max_power = EX_ACT_HEAVY
+		else
+			max_power = EX_ACT_LIGHT
+
 		for(var/mob/M in viewers(8, location))
 			to_chat(M, SPAN_WARNING("The solution violently explodes."))
 
-		explosion(
-			location,
-			round(min(devst, BOMBCAP_DVSTN_RADIUS)),
-			round(min(heavy, BOMBCAP_HEAVY_RADIUS)),
-			round(min(light, BOMBCAP_LIGHT_RADIUS))
-			)
+		explosion(location, range, max_power)

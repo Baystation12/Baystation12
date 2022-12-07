@@ -144,5 +144,5 @@
 		playsound(src, 'sound/effects/screech.ogg', 100, 1, 1)
 	if(power_drained >= max_power)
 		STOP_PROCESSING_POWER_OBJECT(src)
-		explosion(src.loc, 3,6,9)
+		explosion(src.loc, 18)
 		qdel(src)

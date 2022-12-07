@@ -78,7 +78,7 @@
 
 /obj/item/grenade/frag/proc/on_explosion(turf/O)
 	if(explosion_size)
-		explosion(O, -1, -1, explosion_size, 0)
+		explosion(O, explosion_size, EX_ACT_LIGHT, 0)
 
 /obj/item/grenade/frag/shell
 	name = "fragmentation grenade"
@@ -102,7 +102,7 @@
 
 /obj/item/grenade/frag/high_yield/on_explosion(turf/O)
 	if(explosion_size)
-		explosion(O, -1, round(explosion_size/2), explosion_size, 0) //has a chance to blow a hole in the floor
+		explosion(O, round(explosion_size * 1.5), EX_ACT_HEAVY, 0) //has a chance to blow a hole in the floor
 
 /obj/item/grenade/frag/makeshift
 	name = "improvised explosive device"
