@@ -33,7 +33,7 @@
 			if (color == "RANDOM")
 				color = get_random_colour(0,75,190)
 			S.set_trait(TRAIT_LEAVES_COLOUR,color)
-			S.chems[/datum/reagent/woodpulp] = 1
+			S.chems[/datum/reagent/woodpulp] = list(1)
 			big_flora_types += S
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/adapt_seed(datum/seed/S)
