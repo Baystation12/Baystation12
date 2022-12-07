@@ -23,6 +23,7 @@
 /obj/machinery/door/airlock/multi_tile/New()
 	..()
 	SetBounds()
+	update_filler_turfs()
 
 /obj/machinery/door/airlock/multi_tile/Move()
 	. = ..()
