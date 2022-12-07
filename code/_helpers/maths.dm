@@ -9,6 +9,7 @@
 /// The mathematical constant pi to f32 precision
 #define PI 3.141592
 
+#define CEILING(x, y) ( -round(-(x) / (y)) * (y) )
 
 /// A random real number between low and high inclusive
 #define Frand(low, high) ( rand() * ((high) - (low)) + (low) )
@@ -119,6 +120,9 @@
 		sum += part * part
 	return sum
 
+
+/proc/Ceiling(x)
+	return -round(-x)
 
 /// Returns the euclidian magnitude of a vector of either a list or variadic arguments: VecMag(list(3, 4)) = 5 , VecMag(3, 4) = 5
 /proc/VecMag(...)
