@@ -5334,18 +5334,12 @@
 /area/ship/skrellscoutship/crew/rec)
 "NR" = (
 /obj/structure/table/glass,
-/obj/item/reagent_containers/ivbag/nanoblood{
-	pixel_x = -9
-	},
-/obj/item/reagent_containers/ivbag/nanoblood{
-	pixel_x = -9
-	},
-/obj/item/reagent_containers/ivbag/nanoblood{
-	pixel_x = -9
-	},
-/obj/item/reagent_containers/ivbag/nanoblood{
-	pixel_x = -10
-	},
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
 /obj/item/storage/firstaid/combat{
 	pixel_x = 1;
 	pixel_y = 8
