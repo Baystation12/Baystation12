@@ -21,7 +21,6 @@
 	var/placement_explosion_dev =   1
 	var/placement_explosion_heavy = 2
 	var/placement_explosion_light = 6
-	var/placement_explosion_flash = 4
 
 /datum/random_map/droppod/New(seed, tx, ty, tz, tlx, tly, do_not_apply, do_not_announce, supplied_drop, list/supplied_drops, automated)
 
@@ -79,10 +78,10 @@
 	return 1
 
 /datum/random_map/droppod/apply_to_map()
-	if(placement_explosion_dev || placement_explosion_heavy || placement_explosion_light || placement_explosion_flash)
+	if(placement_explosion_dev || placement_explosion_heavy || placement_explosion_light)
 		var/turf/T = locate((origin_x + Ceil(limit_x / 2)-1), (origin_y + Ceil(limit_y / 2)-1), origin_z)
 		if(istype(T))
-			explosion(T, placement_explosion_dev, placement_explosion_heavy, placement_explosion_light, placement_explosion_flash)
+			explosion(T, placement_explosion_dev, placement_explosion_heavy, placement_explosion_light)
 			sleep(15) // Let the explosion finish proccing before we ChangeTurf(), otherwise it might destroy our spawned objects.
 	return ..()
 

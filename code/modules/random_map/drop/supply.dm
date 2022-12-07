@@ -4,7 +4,6 @@
 	limit_y = 5
 
 	placement_explosion_light = 7
-	placement_explosion_flash = 5
 
 // UNLIKE THE DROP POD, this map deals ENTIRELY with strings and types.
 // Drop type is a string representing a mode rather than an atom or path.

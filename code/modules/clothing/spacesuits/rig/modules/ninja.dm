@@ -169,7 +169,7 @@
 
 	interface_name = "dead man's switch"
 	interface_desc = "An integrated automatic self-destruct module. When the wearer dies, so does the surrounding area. Can be triggered manually."
-	var/list/explosion_values = list(1,2,4,5)
+	var/list/explosion_values = list(1,2,4)
 	var/blinking = 0
 	var/blink_mode = 0
 	var/blink_delay = 10
@@ -180,7 +180,7 @@
 	var/self_destructing = 0 //used to prevent toggling the switch, then dying and having it toggled again
 
 /obj/item/rig_module/self_destruct/small
-	explosion_values = list(0,0,3,4)
+	explosion_values = list(0,0,3)
 
 
 /obj/item/rig_module/self_destruct/activate()
@@ -220,7 +220,7 @@
 	src.blink_mode = 0
 	src.holder.set_light(0, 0, 0, 2, "#000000")
 
-	explosion(get_turf(src), explosion_values[1], explosion_values[2], explosion_values[3], explosion_values[4])
+	explosion(get_turf(src), explosion_values[1], explosion_values[2], explosion_values[3])
 	if(holder && holder.wearer)
 		holder.wearer.gib()
 		qdel(holder)

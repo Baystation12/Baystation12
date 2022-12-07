@@ -247,7 +247,7 @@ var/global/list/meteors_cataclysm = list(\
 
 /obj/effect/meteor/medium/meteor_effect()
 	..()
-	explosion(src.loc, 0, 1, 2, 3, 0, turf_breaker = TRUE)
+	explosion(src.loc, 0, 1, 2, 0, turf_breaker = TRUE)
 
 //Large-sized
 /obj/effect/meteor/big
@@ -259,7 +259,7 @@ var/global/list/meteors_cataclysm = list(\
 
 /obj/effect/meteor/big/meteor_effect()
 	..()
-	explosion(src.loc, 1, 2, 3, 4, 0, turf_breaker = TRUE)
+	explosion(src.loc, 1, 2, 3, 0, turf_breaker = TRUE)
 
 //Flaming meteor
 /obj/effect/meteor/flaming
@@ -271,7 +271,7 @@ var/global/list/meteors_cataclysm = list(\
 
 /obj/effect/meteor/flaming/meteor_effect()
 	..()
-	explosion(src.loc, 1, 2, 3, 4, 0, 0, 5, TRUE)
+	explosion(src.loc, 1, 2, 3, 0, 0, 5, TRUE)
 
 //Radiation meteor
 /obj/effect/meteor/irradiated
@@ -282,7 +282,7 @@ var/global/list/meteors_cataclysm = list(\
 
 /obj/effect/meteor/irradiated/meteor_effect()
 	..()
-	explosion(src.loc, 0, 0, 4, 3, 0, turf_breaker = TRUE)
+	explosion(src.loc, 0, 0, 4, 0, turf_breaker = TRUE)
 	new /obj/effect/decal/cleanable/greenglow(get_turf(src))
 	SSradiation.radiate(src, 50)
 
@@ -326,7 +326,7 @@ var/global/list/meteors_cataclysm = list(\
 
 /obj/effect/meteor/tunguska/meteor_effect()
 	..()
-	explosion(src.loc, 3, 6, 9, 20, 0, turf_breaker = TRUE)
+	explosion(src.loc, 3, 6, 9, 0, turf_breaker = TRUE)
 
 // This is the final solution against shields - a single impact can bring down most shield generators.
 /obj/effect/meteor/supermatter
@@ -337,7 +337,7 @@ var/global/list/meteors_cataclysm = list(\
 
 /obj/effect/meteor/supermatter/meteor_effect()
 	..()
-	explosion(src.loc, 1, 2, 3, 4, 0, turf_breaker = TRUE)
+	explosion(src.loc, 1, 2, 3, 0, turf_breaker = TRUE)
 	for(var/obj/machinery/power/apc/A in range(rand(12, 20), src))
 		A.energy_fail(round(10 * rand(8, 12)))
 
@@ -401,7 +401,7 @@ var/global/list/meteors_cataclysm = list(\
 	hits = 6
 
 /obj/effect/meteor/supermatter/missile/admin_missile/meteor_effect()
-	explosion(loc, 1, 2, 4, 0, 0, shaped = get_dir(src, dest), turf_breaker = TRUE)
+	explosion(loc, 1, 2, 4, 0, shaped = get_dir(src, dest), turf_breaker = TRUE)
 
 
 /obj/effect/meteor/supermatter/missile/sabot_round
@@ -415,7 +415,7 @@ var/global/list/meteors_cataclysm = list(\
 	hits = 6
 
 /obj/effect/meteor/supermatter/missile/sabot_round/meteor_effect()
-	explosion(loc, 0, 1, 4, 0, 0, shaped = TRUE, turf_breaker = TRUE)
+	explosion(loc, 0, 1, 4, 0, shaped = TRUE, turf_breaker = TRUE)
 	var/obj/effect/meteor/supermatter/missile/sabot_secondary_round/M = new(get_turf(src))
 	M.dest = dest
 	spawn(0)
@@ -432,4 +432,4 @@ var/global/list/meteors_cataclysm = list(\
 	hits = 4
 
 /obj/effect/meteor/supermatter/missile/sabot_secondary_round/meteor_effect()
-	explosion(loc, 0.5, 2, 3, 0, shaped = get_dir(src, dest), turf_breaker = TRUE)
+	explosion(loc, 0.5, 2, 3, shaped = get_dir(src, dest), turf_breaker = TRUE)

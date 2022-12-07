@@ -674,20 +674,18 @@ Ccomp's first proc.
 	if(heavy == null) return
 	var/light = input("Range of light impact. -1 to none", text("Input"))  as num|null
 	if(light == null) return
-	var/flash = input("Range of flash. -1 to none", text("Input"))  as num|null
-	if(flash == null) return
 	var/shaped = 0
 	if(alert(src, "Shaped explosion?", "Shape", "Yes", "No") == "Yes")
 		shaped = input("Shaped where to?", "Input")  as anything in list("NORTH","SOUTH","EAST","WEST")
 		shaped = text2dir(shaped)
-	if ((devastation != -1) || (heavy != -1) || (light != -1) || (flash != -1))
+	if ((devastation != -1) || (heavy != -1) || (light != -1))
 		if ((devastation > 20) || (heavy > 20) || (light > 20))
 			if (alert(src, "Are you sure you want to do this? It will laaag.", "Confirmation", "Yes", "No") == "No")
 				return
 
-		explosion(O, devastation, heavy, light, flash, shaped=shaped)
-		log_admin("[key_name(usr)] created an explosion ([devastation],[heavy],[light],[flash]) at ([O.x],[O.y],[O.z])")
-		message_admins("[key_name_admin(usr)] created an explosion ([devastation],[heavy],[light],[flash]) at ([O.x],[O.y],[O.z])", 1)
+		explosion(O, devastation, heavy, light, shaped=shaped)
+		log_admin("[key_name(usr)] created an explosion ([devastation],[heavy],[light]) at ([O.x],[O.y],[O.z])")
+		message_admins("[key_name_admin(usr)] created an explosion ([devastation],[heavy],[light]) at ([O.x],[O.y],[O.z])", 1)
 		return
 	else
 		return

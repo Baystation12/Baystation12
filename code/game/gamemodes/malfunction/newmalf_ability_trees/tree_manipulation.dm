@@ -179,7 +179,7 @@
 	log_ability_use(user, "machine overload", M)
 	M.visible_message(SPAN_NOTICE("BZZZZZZZT"))
 	spawn(5 SECONDS)
-		explosion(get_turf(M), round(explosion_intensity/4),round(explosion_intensity/2),round(explosion_intensity),round(explosion_intensity * 2))
+		explosion(get_turf(M), round(explosion_intensity/4),round(explosion_intensity/2),round(explosion_intensity))
 		if(M)
 			qdel(M)
 

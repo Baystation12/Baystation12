@@ -1,6 +1,4 @@
-//TODO: Flash range does nothing currently
-
-/proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN, shaped, turf_breaker)
+/proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, adminlog = 1, z_transfer = UP|DOWN, shaped, turf_breaker)
 	set waitfor = FALSE
 
 	var/multi_z_scalar = 0.35
@@ -13,16 +11,15 @@
 		var/adj_dev   = max(0, (multi_z_scalar * devastation_range) - (shaped ? 2 : 0) )
 		var/adj_heavy = max(0, (multi_z_scalar * heavy_impact_range) - (shaped ? 2 : 0) )
 		var/adj_light = max(0, (multi_z_scalar * light_impact_range) - (shaped ? 2 : 0) )
-		var/adj_flash = max(0, (multi_z_scalar * flash_range) - (shaped ? 2 : 0) )
 
 
 		if(adj_dev > 0 || adj_heavy > 0)
 			if(HasAbove(epicenter.z) && z_transfer & UP)
-				explosion(GetAbove(epicenter), round(adj_dev), round(adj_heavy), round(adj_light), round(adj_flash), 0, UP, shaped)
+				explosion(GetAbove(epicenter), round(adj_dev), round(adj_heavy), round(adj_light), 0, UP, shaped)
 			if(HasBelow(epicenter.z) && z_transfer & DOWN)
-				explosion(GetBelow(epicenter), round(adj_dev), round(adj_heavy), round(adj_light), round(adj_flash), 0, DOWN, shaped)
+				explosion(GetBelow(epicenter), round(adj_dev), round(adj_heavy), round(adj_light), 0, DOWN, shaped)
 
-	var/max_range = max(devastation_range, heavy_impact_range, light_impact_range, flash_range)
+	var/max_range = max(devastation_range, heavy_impact_range, light_impact_range)
 
 	// Play sounds; we want sounds to be different depending on distance so we will manually do it ourselves.
 	// Stereo users will also hear the direction of the explosion!

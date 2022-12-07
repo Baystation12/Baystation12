@@ -24,7 +24,6 @@
 	var/ex_severe = -1
 	var/ex_heavy = 1
 	var/ex_light = 2
-	var/ex_flash = 5
 
 	hud_state = "wiz_fireball"
 	cast_sound = 'sound/magic/fireball.ogg'
@@ -32,7 +31,7 @@
 /spell/targeted/projectile/dumbfire/fireball/prox_cast(list/targets, spell_holder)
 	for(var/mob/living/M in targets)
 		apply_spell_damage(M)
-	explosion(get_turf(spell_holder), ex_severe, ex_heavy, ex_light, ex_flash)
+	explosion(get_turf(spell_holder), ex_severe, ex_heavy, ex_light)
 
 /spell/targeted/projectile/dumbfire/fireball/empower_spell()
 	if(!..())
@@ -42,7 +41,6 @@
 		ex_severe++
 	ex_heavy++
 	ex_light++
-	ex_flash++
 
 	return "The spell [src] now has a larger explosion."
 
@@ -67,5 +65,4 @@
 	amt_dam_fire = 15
 	ex_heavy = -1
 	ex_light = 1
-	ex_flash = 3
 	hud_state = "firebolt"

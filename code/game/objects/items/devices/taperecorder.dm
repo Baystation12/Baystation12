@@ -147,7 +147,7 @@
 		to_chat(M, SPAN_DANGER("\The [src] explodes!"))
 	if(T)
 		T.hotspot_expose(700,125)
-		explosion(T, -1, -1, 0, 4)
+		explosion(T, -1, -1, 0)
 	qdel(src)
 	return
 

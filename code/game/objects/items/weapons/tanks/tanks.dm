@@ -457,8 +457,7 @@ var/global/list/tank_gauge_cache = list()
 				get_turf(loc),
 				round(min(BOMBCAP_DVSTN_RADIUS, ((mult)*strength)*0.15)),
 				round(min(BOMBCAP_HEAVY_RADIUS, ((mult)*strength)*0.35)),
-				round(min(BOMBCAP_LIGHT_RADIUS, ((mult)*strength)*0.80)),
-				round(min(BOMBCAP_FLASH_RADIUS, ((mult)*strength)*1.20)),
+				round(min(BOMBCAP_LIGHT_RADIUS, ((mult)*strength)*0.80))
 				)
 
 			var/num_fragments = round(rand(8,10) * sqrt(strength * mult))

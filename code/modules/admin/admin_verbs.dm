@@ -531,11 +531,11 @@ var/global/list/admin_verbs_mod = list(
 		if (null)
 			return
 		if("Small Bomb")
-			explosion(epicenter, 1, 2, 3, 3)
+			explosion(epicenter, 1, 2, 3)
 		if("Medium Bomb")
-			explosion(epicenter, 2, 3, 4, 4)
+			explosion(epicenter, 2, 3, 4)
 		if("Big Bomb")
-			explosion(epicenter, 3, 5, 7, 5)
+			explosion(epicenter, 3, 5, 7)
 		if("Custom Bomb")
 			var/devastation_range = input("Devastation range (in tiles):") as num|null
 			if (isnull(devastation_range))
@@ -546,10 +546,7 @@ var/global/list/admin_verbs_mod = list(
 			var/light_impact_range = input("Light impact range (in tiles):") as num|null
 			if (isnull(light_impact_range))
 				return
-			var/flash_range = input("Flash range (in tiles):") as num|null
-			if (isnull(flash_range))
-				return
-			explosion(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range)
+			explosion(epicenter, devastation_range, heavy_impact_range, light_impact_range)
 	log_and_message_admins("created an admin explosion at [epicenter.loc].")
 
 /client/proc/togglebuildmodeself()
