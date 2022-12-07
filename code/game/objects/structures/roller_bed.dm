@@ -404,16 +404,23 @@
 	if (!isturf(user.loc))
 		to_chat(user, SPAN_WARNING("You don't have enough space to set up \the [src]."))
 		return
-	user.visible_message(
-		SPAN_ITALIC("\The [user] starts setting up \a [src]."),
-		SPAN_ITALIC("You start setting up \the [src]."),
-		range = 5
-	)
-	if (!do_after(user, 2 SECONDS, src, do_flags = DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER))
-		return
-	var/obj/structure/roller_bed/roller = new (user.loc)
-	roller.add_fingerprint(user)
-	user.drop_from_inventory(src)
+	CreateStructure(user, user.loc, TRUE)
+
+
+/obj/item/roller_bed/proc/CreateStructure(mob/living/user, atom/target, unequip)
+	if (user)
+		if (unequip && !user.unEquip(src, target))
+			return
+		user.visible_message(
+			SPAN_ITALIC("\The [user] starts setting up \a [src]."),
+			SPAN_ITALIC("You start setting up \the [src]."),
+			range = 5
+		)
+		if (!do_after(user, 2 SECONDS, src, do_flags = DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER))
+			return
+	var/obj/structure/roller_bed/roller = new (target)
+	if (user)
+		roller.add_fingerprint(user)
 	qdel(src)
 
 
@@ -424,3 +431,39 @@
 	icon_state = "item"
 	object_type = /obj/item/roller_bed
 	interact_type = /obj/structure/roller_bed
+	item_flags = ITEM_FLAG_TRY_ATTACK
+
+
+/obj/item/robot_rack/roller_bed/resolve_attackby(atom/target, mob/living/user, click_params)
+	if (!target.Adjacent(user))
+		return TRUE
+	if (user.incapacitated())
+		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+		return TRUE
+	if (!length(held))
+		if (istype(target, object_type))
+			user.visible_message(
+				SPAN_ITALIC("\The [user] scoops \a [target] into their [name]."),
+				SPAN_ITALIC("You scoop \the [target] into your [name]."),
+				SPAN_ITALIC("You hear metal clattering on metal.")
+			)
+			contents += target
+			held += target
+		else if (istype(target, interact_type))
+			target.MouseDrop(src, over_loc = get_turf(target))
+		return TRUE
+	if (istype(target, object_type))
+		to_chat(user, SPAN_WARNING("You already have \a [target] in your [name]."))
+		return TRUE
+	if (!isturf(target))
+		return
+	if (target.density)
+		return
+	var/blocking = target.turf_is_crowded()
+	if (blocking && !ismob(blocking))
+		to_chat(user, SPAN_WARNING("\The [blocking] is in the way."))
+		return TRUE
+	var/obj/item/roller_bed/roller = pop(held)
+	roller.dropInto(target)
+	roller.CreateStructure(user, target, FALSE)
+	return TRUE

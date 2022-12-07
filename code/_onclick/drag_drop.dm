@@ -6,24 +6,6 @@
 	almost anything into a trash can.
 */
 
-/**
- * Whether or not an atom can be dropped onto this atom. Called when a user click+drag's `src` onto `over`.
- *
- * **Parameters**:
- * - `over` - The atom that `src` was dropped onto.
- * - `user` - The mob click+dragging `src`.
- * - `incapacitation_flags` (Bitflag - Any of `INCAPACITATION_*`) - Additional incapacitation flags that should be checked. Used to verify `user` can perform the action. Passed directly to `user.incapacitated()`.
- *
- * Returns boolean.
- */
-/atom/proc/CanMouseDrop(atom/over, mob/user = usr, incapacitation_flags)
-	if(!user || !over)
-		return FALSE
-	if(user.incapacitated(incapacitation_flags))
-		return FALSE
-	if(!src.Adjacent(user) || !over.Adjacent(user))
-		return FALSE // should stop you from dragging through windows
-	return TRUE
 
 // Refer to https://www.byond.com/docs/ref/#/atom/proc/MouseDrop
 /atom/MouseDrop(atom/over_atom, atom/source_loc, over_loc, source_control, over_control, list/mouse_params)
@@ -51,7 +33,7 @@
 	if (src == dropping && user.canClick())
 		user.ClickOn(src)
 		return TRUE
-	if (dropped == user && isliving(user))
+	if (dropping == user && isliving(user))
 		var/mob/living/living = user
 		if (can_climb(living))
 			do_climb(living)
@@ -59,7 +41,16 @@
 	return FALSE
 
 
-/// Determine if the user is in a state that allows a MouseDrop or MouseDrop_T.
+/**
+ * Whether or not an atom can be dropped onto this atom. Called when a user click+drag's `src` onto `over`.
+ *
+ * **Parameters**:
+ * - `over` - The atom that `src` was dropped onto.
+ * - `user` - The mob click+dragging `src`.
+ * - `incapacitation_flags` (Bitflag - Any of `INCAPACITATION_*`) - Additional incapacitation flags that should be checked. Used to verify `user` can perform the action. Passed directly to `user.incapacitated()`.
+ *
+ * Returns boolean.
+ */
 /atom/proc/CanMouseDrop(atom/over, mob/user = usr, incapacitation_flags)
 	if (!user || !over)
 		return FALSE
