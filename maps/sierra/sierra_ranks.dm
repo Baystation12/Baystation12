@@ -1,6 +1,6 @@
 /datum/job/submap
 	branch = /datum/mil_branch/civilian
-	rank =   /datum/mil_rank/civ/civ
+	rank = /datum/mil_rank/civ/civ
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
 
@@ -161,7 +161,6 @@
 
 /datum/mil_rank/civ/civ
 	name = "Civilian"
-	name_short = null
 
 /datum/mil_rank/civ/nt
 	name = "NanoTrasen Employee"

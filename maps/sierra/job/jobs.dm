@@ -136,7 +136,6 @@
 		/datum/mil_rank/civ/civ
 	)
 	required_language = LANGUAGE_HUMAN_EURO
-	psi_latency_chance = 8
 
 /datum/map/sierra
 	default_assistant_title = "Crewman"
@@ -145,7 +144,6 @@
 
 /datum/job
 	var/required_role = null //a role which necessery to join as the job. For an example, explorers cannot be without EL
-	var/good_genome_prob = 10
 
 /datum/job/proc/is_required_roles_filled()
 	if(!required_role) return 1

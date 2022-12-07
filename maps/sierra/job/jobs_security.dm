@@ -82,7 +82,6 @@
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
-	good_genome_prob = 25
 
 /datum/job/detective/get_description_blurb()
 	return "Детектив занимается расследованием преступлений, взятием отпечатков пальцев, поиском потенциальных преступников и разрешением самых запутанных дел.\
@@ -123,7 +122,6 @@
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
-	good_genome_prob = 15
 
 /datum/job/officer/get_description_blurb()
 	return "Охранник - это основная должность отдела безопасности. Офицеры представляют собой первую линию защиты корабля от криминальных элементов и враждебных форм жизни. \

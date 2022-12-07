@@ -1,7 +1,9 @@
+
 /datum/map/sierra
-	name = "Sierra"
-	full_name = "NSV Sierra"
+	name = "\improper Sierra"
+	full_name = "\improper NSV Sierra"
 	path = "sierra"
+	config_path = "config/sierra_config.txt"
 	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
 
 	load_legacy_saves = TRUE
@@ -27,7 +29,7 @@
 
 	map_admin_faxes = list("NanoTrasen Central Office")
 
-	evac_controller_type = /datum/evacuation_controller/starship/fast
+	evac_controller_type = /datum/evacuation_controller/starship
 
 	lockdown_support = TRUE
 
@@ -54,21 +56,8 @@
 			HOME_SYSTEM_TAU_CETI,
 			HOME_SYSTEM_HELIOS,
 			HOME_SYSTEM_TERRA,
-			HOME_SYSTEM_TERSTEN,
-			HOME_SYSTEM_LORRIMAN,
-			HOME_SYSTEM_CINU,
-			HOME_SYSTEM_YUKLID,
-			HOME_SYSTEM_LORDANIA,
-			HOME_SYSTEM_KINGSTON,
 			HOME_SYSTEM_GAIA,
 			HOME_SYSTEM_MAGNITKA,
-			HOME_SYSTEM_AVALON,
-			HOME_SYSTEM_MIRANIA,
-			HOME_SYSTEM_NYX_BRINKBURN,
-			HOME_SYSTEM_NYX_KALDARK,
-			HOME_SYSTEM_NYX_ROANOK,
-			HOME_SYSTEM_NYX_YUKLIT,
-			HOME_SYSTEM_NYX_CASSER,
 			HOME_SYSTEM_OTHER
 		),
 		TAG_FACTION = list(
@@ -76,19 +65,7 @@
 			FACTION_INDIE_CONFED,
 			FACTION_NANOTRASEN,
 			FACTION_HEPHAESTUS,
-			FACTION_WARD_TAKAHASHI,
-			FACTION_SEPTENERGO,
-			FACTION_FOCAL_POINT,
-			FACTION_AERTHER,
 			FACTION_DAIS,
-			FACTION_XION,
-			FACTION_GRAYSON,
-			FACTION_MAJOR_BILL,
-			FACTION_BISHOP,
-			FACTION_MORPHEUS,
-			FACTION_VEY_MED,
-			FACTION_ZENG_HU,
-			FACTION_ZPCI,
 			FACTION_PCRC,
 			FACTION_SAARE,
 			FACTION_XYNERGY,
@@ -110,9 +87,6 @@
 			CULTURE_HUMAN_SPAFRO,
 			CULTURE_HUMAN_CONFED,
 			CULTURE_HUMAN_OTHER,
-			CULTURE_HUMAN_LORRIMAN,
-			CULTURE_HUMAN_AVANOBLE,
-			CULTURE_HUMAN_AVACOMMON,
 			CULTURE_OTHER
 		),
 		TAG_RELIGION = list(

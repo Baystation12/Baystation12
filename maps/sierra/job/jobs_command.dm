@@ -42,7 +42,7 @@
 	return "Капитан ответственен за ИКН Сьерра и всё, что на нем находится.\
 	Его обязанность заключается в том, чтобы убедиться, что ИКН Сьерра выполняет свою миссию и вернется обратно в порт СолПрава в целостности и сохранности.\
 	От капитана ожидают проявления эффективных управленческих навыков, чтобы обеспечить бесперебойную работу всех отделов. Он является высшим авторитетом на Сьерре и имеет доступ к любому отсеку на борту, а также возможность выносить приказы практически без ограничений."
-
+/*
 /datum/job/hop
 	title = "Head of Personnel"
 	supervisors = "Капитану"
@@ -107,6 +107,58 @@
 	return "В роли Главы Персонала, или ГП, как Вас иногда будут звать, Вы обязаны отвечать за то, чтобы все отделы были укомплектованы персоналом и работали ради прибыли своей корпорации.\
 	Вам доверена возможность менять должность и уровни доступа каждого члена экипажа на борту через программу модификации ID-карт, что еще могут делать только капитан и ИИ.\
 	Вы также отвечаете за управление отделами снабжения и обслуживания, а также за управление любым персоналом без активного главы. Помните: корпорация рассчитывает на вас!"
+*/
+
+/datum/job/hop
+	title = "Executive Officer"
+	supervisors = "the Commanding Officer"
+	department = "Command"
+	department_flag = COM
+	minimal_player_age = 14
+	economic_power = 14
+	minimum_character_age = list(SPECIES_HUMAN = 35)
+	ideal_character_age = 45
+	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/command/hop
+	allowed_branches = list(
+		/datum/mil_branch/employee
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/nt
+	)
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
+	                    SKILL_COMPUTER    = SKILL_BASIC,
+	                    SKILL_PILOT       = SKILL_BASIC)
+
+	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
+	                    SKILL_SCIENCE     = SKILL_MAX)
+	skill_points = 30
+
+	access = list(
+		access_seceva, access_guard, access_security, access_brig, access_armory,
+		access_forensics_lockers, access_heads, access_medical, access_morgue,
+		access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks,
+		access_emergency_storage, access_change_ids, access_ai_upload, access_teleporter,
+		access_eva, access_bridge, access_all_personal_lockers, access_chapel_office,
+		access_tech_storage, access_atmospherics, access_janitor, access_crematorium,
+		access_robotics, access_kitchen, access_cargo, access_construction, access_chemistry,
+		access_cargo_bot, access_hydroponics, access_library, access_virology, access_cmo,
+		access_qm, access_network, access_surgery, access_mailsorting, access_heads_vault,
+		access_ce, access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat,
+		access_gateway, access_sec_doors, access_psychiatrist, access_medical_equip, access_gun,
+		access_expedition_shuttle, access_guppy, access_seneng, access_senmed, access_hangar,
+		access_guppy_helm, access_expedition_shuttle_helm, access_explorer, access_el, access_tox,
+		access_tox_storage, access_research, access_mining, access_mining_office, access_mining_station,
+		access_xenobiology, access_xenoarch, access_petrov, access_petrov_helm, access_actor
+	)
+
+	software_on_spawn = list(/datum/computer_file/program/comm,
+							 /datum/computer_file/program/card_mod,
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/reports)
+
+/datum/job/hop/get_description_blurb()
+	return "You are the Executive Officer. You are an experienced senior officer, second in command of the ship, and are responsible for the smooth operation of the ship under your Commanding Officer. In their absence, you are expected to take their place. Your primary duty is directly managing department heads and all those outside a department heading. You are also responsible for the contractors and passengers aboard the ship. Consider the Senior Enlisted Advisor and Bridge Officers tools at your disposal."
+
 
 /datum/job/rd
 	title = "Research Director"
@@ -457,7 +509,6 @@
 		/datum/computer_file/program/reports,
 		/datum/computer_file/program/deck_management
 	)
-	good_genome_prob = 45
 
 /datum/job/adjutant/get_description_blurb()
 	return "Адъютант является помощником для командующего состава и персонала. Он отвечает за мониторинг различных систем и коммуникаций корабля, пилотирование Сьерры и привлечение ко вниманию соответствующего персонала при возникновении проблем или вопросов.\

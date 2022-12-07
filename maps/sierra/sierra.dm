@@ -1,5 +1,7 @@
 #if !defined(using_map_DATUM)
 
+	#include "sierra_setup.dm"
+	#include "sierra_define.dm"
 	#include "sierra_announcements.dm"
 	#include "sierra_antagonism.dm"
 	#include "sierra_areas.dm"
@@ -12,7 +14,6 @@
 	#include "sierra_procs.dm"
 	#include "sierra_ranks.dm"
 	#include "sierra_security_state.dm"
-	#include "sierra_setup.dm"
 	#include "sierra_shuttles.dm"
 	#include "sierra_submaps.dm"
 	#include "sierra_turfs.dm"
@@ -141,9 +142,6 @@
 	#include "../away/slavers/slavers_base.dm"
 	#include "../away/voxship/voxship.dm"
 	#include "../event/iccgn_ship/icgnv_hound.dm"
-// #include "../away/ascent_caulship/_ascent_caulship.dm"
-
-	//#include "../random_ruins/exoplanet_ruins/playablecolony_inf/playablecolony.dm"
 
 	#define using_map_DATUM /datum/map/sierra
 
