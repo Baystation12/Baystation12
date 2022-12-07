@@ -308,6 +308,8 @@ var/global/list/channel_to_radio_key = new
 				if(O) //It's possible that it could be deleted in the meantime.
 					O.hear_talk(src, stars(message), verb, speaking)
 
+	INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, message, speaking, italics, speech_bubble_recipients)
+
 	if(whispering)
 		log_whisper("[name]/[key] : [message]")
 	else
