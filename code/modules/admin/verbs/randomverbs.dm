@@ -677,10 +677,9 @@ Ccomp's first proc.
 	var/flash = input("Range of flash. -1 to none", text("Input"))  as num|null
 	if(flash == null) return
 	var/shaped = 0
-	if(config.use_recursive_explosions)
-		if(alert(src, "Shaped explosion?", "Shape", "Yes", "No") == "Yes")
-			shaped = input("Shaped where to?", "Input")  as anything in list("NORTH","SOUTH","EAST","WEST")
-			shaped = text2dir(shaped)
+	if(alert(src, "Shaped explosion?", "Shape", "Yes", "No") == "Yes")
+		shaped = input("Shaped where to?", "Input")  as anything in list("NORTH","SOUTH","EAST","WEST")
+		shaped = text2dir(shaped)
 	if ((devastation != -1) || (heavy != -1) || (light != -1) || (flash != -1))
 		if ((devastation > 20) || (heavy > 20) || (light > 20))
 			if (alert(src, "Are you sure you want to do this? It will laaag.", "Confirmation", "Yes", "No") == "No")

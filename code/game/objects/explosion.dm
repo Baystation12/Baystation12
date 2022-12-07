@@ -55,28 +55,8 @@
 			E.set_up(epicenter)
 			E.start()
 
-		var/x0 = epicenter.x
-		var/y0 = epicenter.y
-		var/z0 = epicenter.z
-		if(config.use_recursive_explosions)
-			var/power = devastation_range * 2 + heavy_impact_range + light_impact_range //The ranges add up, ie light 14 includes both heavy 7 and devestation 3. So this calculation means devestation counts for 4, heavy for 2 and light for 1 power, giving us a cap of 27 power.
-			explosion_rec(epicenter, power, shaped)
-		else
-			for(var/turf/T in trange(max_range, epicenter))
-				var/dist = sqrt((T.x - x0)**2 + (T.y - y0)**2)
-
-				if(dist < devastation_range)		dist = EX_ACT_DEVASTATING
-				else if(dist < heavy_impact_range)	dist = EX_ACT_HEAVY
-				else if(dist < light_impact_range)	dist = EX_ACT_LIGHT
-				else								continue
-
-				T.ex_act(dist)
-				if(!T)
-					T = locate(x0,y0,z0)
-				for(var/atom_movable in T.contents)	//bypass type checking since only atom/movable can be contained by turfs anyway
-					var/atom/movable/AM = atom_movable
-					if(AM && AM.simulated && !T.protects_atom(AM))
-						AM.ex_act(dist, turf_breaker)
+		var/power = devastation_range * 2 + heavy_impact_range + light_impact_range //The ranges add up, ie light 14 includes both heavy 7 and devestation 3. So this calculation means devestation counts for 4, heavy for 2 and light for 1 power, giving us a cap of 27 power.
+		explosion_rec(epicenter, power, shaped)
 
 		sleep(8)
 
