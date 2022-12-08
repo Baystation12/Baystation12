@@ -120,6 +120,12 @@
 		sum += part * part
 	return sum
 
+// Vector algebra.
+/proc/squaredNorm(x, y)
+	return x*x + y*y
+
+/proc/norm(x, y)
+	return sqrt(squaredNorm(x, y))
 
 /proc/Ceiling(x)
 	return -round(-x)

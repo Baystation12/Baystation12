@@ -308,6 +308,25 @@
 			thunk(M)
 		M.update_floating()
 
+/area/proc/throw_unbuckled_occupants(var/maxrange, var/speed, var/direction = null)
+	for(var/mob/M in src)
+		addtimer(CALLBACK(src, .proc/throw_unbuckled_occupant, M, maxrange, speed, direction), 0)
+
+/area/proc/throw_unbuckled_occupant(var/mob/M, var/maxrange, var/speed, var/direction = null)
+	if(iscarbon(M))
+		if(M.buckled)
+			to_chat(M, SPAN_WARNING("Sudden acceleration presses you into your chair!"))
+			shake_camera(M, 3, 1)
+		else
+			shake_camera(M, 10, 1)
+			M.visible_message(SPAN_WARNING("[M.name] is tossed around by the sudden acceleration!"), SPAN_WARNING("The floor lurches beneath you!"))
+			if(!direction)
+				M.throw_at_random(FALSE, maxrange, speed)
+			else
+				var/turf/T = get_ranged_target_turf(M, direction, maxrange)
+				M.throw_at(T, maxrange, speed)
+
+
 /// Causes the provided mob to 'slam' down to the floor if certain conditions are not met. Primarily used for gravity changes.
 /area/proc/thunk(mob/mob)
 	if(istype(get_turf(mob), /turf/space)) // Can't fall onto nothing.
