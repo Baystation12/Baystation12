@@ -1,4 +1,0 @@
-author: Sennalen
-delete-after: true
-changes:
-  - bugfix: Fixed a runtime that could cause an exoplanet flora to lack reagents.
