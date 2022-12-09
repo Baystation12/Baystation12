@@ -2,7 +2,7 @@
 // Only way to do that is to tie the behavior into the focus's keyLoop().
 
 /atom/movable/keyLoop(client/user)
-	var/movement_dir = null
+	var/movement_dir = 0
 	for(var/_key in user.keys_held)
 		movement_dir = movement_dir | user.movement_keys[_key]
 	if(user.next_move_dir_add)
@@ -26,7 +26,10 @@
 	if(movement_dir) //If we're not moving, don't compensate, as byond will auto-fill dir otherwise
 		movement_dir = turn(movement_dir, -dir2angle(user.dir)) //By doing this we ensure that our input direction is offset by the client (camera) direction
 
-	if(user.movement_locked)
-		keybind_face_direction(movement_dir)
-	else
-		user.Move(get_step(src, movement_dir), movement_dir)
+		if(user.movement_locked)
+			keybind_face_direction(movement_dir)
+		else
+			user.Move(get_step(src, movement_dir), movement_dir)
+
+	user.next_move_dir_add = 0
+	user.next_move_dir_sub = 0
