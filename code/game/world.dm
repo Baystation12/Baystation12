@@ -6,6 +6,7 @@
 
 var/global/server_name = "Baystation 12"
 var/global/game_id = null
+var/global/list/stack_trace_storage
 
 GLOBAL_VAR(href_logfile)
 
@@ -76,6 +77,13 @@ GLOBAL_VAR(href_logfile)
 /proc/stack_trace(msg)
 	CRASH(msg)
 
+
+/proc/gib_stack_trace()
+	stack_trace_storage = list()
+	stack_trace()
+	stack_trace_storage.Cut(1, min(3,stack_trace_storage.len))
+	. = stack_trace_storage
+	stack_trace_storage = null
 
 /proc/enable_debugging(mode, port)
 	CRASH("auxtools not loaded")
