@@ -639,6 +639,11 @@
 	pixel_x = -20;
 	req_access = list("ACCESS_ENGINEERING")
 	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_y = 24
+	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
 "bD" = (
@@ -4547,7 +4552,7 @@
 /obj/structure/table/rack,
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
-	dir = 1;
+	dir = 1
 	},
 /obj/random/maintenance,
 /obj/random/single{
@@ -4706,7 +4711,7 @@
 /obj/structure/table/rack,
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
-	dir = 1;
+	dir = 1
 	},
 /obj/random/maintenance,
 /obj/random/single{
@@ -5538,7 +5543,7 @@
 /obj/structure/table/rack,
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
-	dir = 1;
+	dir = 1
 	},
 /obj/random/maintenance,
 /obj/random/single{
@@ -6032,7 +6037,7 @@
 /obj/structure/table/rack,
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
-	dir = 1;
+	dir = 1
 	},
 /obj/random/maintenance,
 /obj/machinery/door/window/westleft{
@@ -7200,7 +7205,7 @@
 	dir = 8
 	},
 /obj/structure/window/reinforced{
-	dir = 1;
+	dir = 1
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -8094,7 +8099,7 @@
 "mY" = (
 /obj/structure/table/rack,
 /obj/structure/window/reinforced{
-	dir = 1;
+	dir = 1
 	},
 /obj/structure/window/reinforced{
 	dir = 8
@@ -8678,7 +8683,7 @@
 /obj/machinery/door/window/brigdoor/northleft{
 	dir = 2;
 	name = "Quartermaster";
-	req_access = newlist();
+	req_access = newlist()
 	},
 /obj/machinery/door/blast/shutters{
 	dir = 2;
@@ -10757,6 +10762,7 @@
 /area/shuttle/petrov/cell1)
 "rc" = (
 /obj/machinery/artifact,
+/obj/machinery/anomaly_container,
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/cell1)
 "rd" = (
@@ -10851,6 +10857,7 @@
 	pixel_x = -18
 	},
 /obj/machinery/artifact,
+/obj/machinery/anomaly_container,
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/cell2)
 "rp" = (
@@ -13222,6 +13229,7 @@
 	dir = 4;
 	id_tag = "d2portnacelle"
 	},
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "vg" = (
@@ -14287,6 +14295,7 @@
 	id_tag = "RE2F";
 	name = "RE2F digital valve"
 	},
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "wU" = (
@@ -14615,6 +14624,7 @@
 	dir = 2;
 	id_tag = "d2portnacelle"
 	},
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "xt" = (
@@ -14665,6 +14675,7 @@
 	id_tag = "RE1F";
 	name = "RE1 digital valve"
 	},
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
 "xA" = (
@@ -14736,6 +14747,7 @@
 	dir = 2;
 	id_tag = "d1portnacelle"
 	},
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
 "xF" = (
@@ -16074,6 +16086,7 @@
 "zR" = (
 /obj/structure/flora/seaweed,
 /obj/effect/fluid_mapped,
+/turf/simulated/floor/beach/sand,
 /area/rnd/xenobiology/level2)
 "zS" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -16686,6 +16699,7 @@
 	dir = 4;
 	id_tag = "d1portnacelle"
 	},
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
 "Bb" = (
@@ -19603,6 +19617,7 @@
 /area/shuttle/escape_pod/escape_pod4/station)
 "Gl" = (
 /obj/effect/fluid_mapped,
+/turf/simulated/floor/beach/sand,
 /area/rnd/xenobiology/level2)
 "Gm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -19969,6 +19984,7 @@
 /obj/structure/flora/seaweed/glow,
 /obj/effect/fluid_mapped,
 /mob/living/simple_animal/aquatic/fish,
+/turf/simulated/floor/beach/sand,
 /area/rnd/xenobiology/level2)
 "GO" = (
 /obj/machinery/photocopier/faxmachine{
@@ -20489,6 +20505,10 @@
 	dir = 1
 	},
 /obj/structure/cable/green,
+/obj/machinery/power/apc{
+	name = "south bump";
+	pixel_y = -24
+	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "HA" = (
@@ -20529,6 +20549,7 @@
 	c_tag = "Xenobio - level two - aqua chamber"
 	},
 /obj/effect/fluid_mapped,
+/turf/simulated/floor/beach/sand,
 /area/rnd/xenobiology/level2)
 "HF" = (
 /obj/structure/bed/chair/shuttle/white{
@@ -21447,6 +21468,7 @@
 "Jb" = (
 /obj/effect/fluid_mapped,
 /mob/living/simple_animal/aquatic/fish/grump,
+/turf/simulated/floor/beach/sand,
 /area/rnd/xenobiology/level2)
 "Jc" = (
 /obj/structure/cable/green{
@@ -23089,6 +23111,7 @@
 "Ma" = (
 /obj/structure/flora/seaweed/mid,
 /obj/effect/fluid_mapped,
+/turf/simulated/floor/beach/sand,
 /area/rnd/xenobiology/level2)
 "Mb" = (
 /obj/effect/floor_decal/techfloor{
@@ -23270,6 +23293,7 @@
 "Mo" = (
 /obj/structure/flora/seaweed/large,
 /obj/effect/fluid_mapped,
+/turf/simulated/floor/beach/sand,
 /area/rnd/xenobiology/level2)
 "Mp" = (
 /obj/machinery/firealarm{
@@ -23332,10 +23356,12 @@
 "Mu" = (
 /obj/effect/fluid_mapped,
 /mob/living/simple_animal/aquatic/fish,
+/turf/simulated/floor/beach/sand,
 /area/rnd/xenobiology/level2)
 "Mv" = (
 /obj/structure/flora/seaweed/glow,
 /obj/effect/fluid_mapped,
+/turf/simulated/floor/beach/sand,
 /area/rnd/xenobiology/level2)
 "Mw" = (
 /obj/machinery/door/airlock/multi_tile/research{
@@ -23718,15 +23744,18 @@
 	dir = 4
 	},
 /obj/effect/fluid_mapped,
+/turf/simulated/floor/beach/sand,
 /area/rnd/xenobiology/level2)
 "Na" = (
 /obj/effect/fluid_mapped,
 /mob/living/simple_animal/aquatic/fish/judge,
+/turf/simulated/floor/beach/sand,
 /area/rnd/xenobiology/level2)
 "Nb" = (
 /obj/structure/flora/seaweed,
 /obj/effect/fluid_mapped,
 /mob/living/simple_animal/aquatic/fish/grump,
+/turf/simulated/floor/beach/sand,
 /area/rnd/xenobiology/level2)
 "Nc" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -27921,6 +27950,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
+/turf/simulated/floor/beach/sand,
 /area/rnd/xenobiology/level2)
 "UW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{

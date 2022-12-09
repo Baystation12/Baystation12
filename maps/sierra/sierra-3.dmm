@@ -1505,6 +1505,11 @@
 /obj/machinery/camera/network/engineering{
 	c_tag = "First Deck - Starbound Necelle"
 	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_y = 24
+	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "adp" = (
@@ -2970,6 +2975,7 @@
 	id_tag = "RE3F";
 	name = "RE3 digital valve"
 	},
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "afY" = (
@@ -2978,6 +2984,7 @@
 	dir = 2;
 	id_tag = "d3portnacelle"
 	},
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "afZ" = (
@@ -3621,6 +3628,7 @@
 	dir = 4;
 	id_tag = "d3portnacelle"
 	},
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "ahi" = (
@@ -3989,6 +3997,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/morgue)
 "ahQ" = (
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/medical/staging)
 "ahR" = (
@@ -4801,6 +4810,7 @@
 	id_tag = "infimary_window_lockdown";
 	name = "Infirmary Window Shutters"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cmo)
 "ajm" = (
@@ -4906,7 +4916,7 @@
 /area/medical/morgue)
 "ajv" = (
 /obj/structure/window/reinforced{
-	dir = 8;
+	dir = 8
 	},
 /obj/structure/closet{
 	anchored = 1
@@ -5678,7 +5688,7 @@
 	},
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
-	dir = 8;
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
 /obj/effect/floor_decal/corner/black/mono,
@@ -6291,6 +6301,7 @@
 	id_tag = "infimary_window_lockdown";
 	name = "Infirmary Window Shutters"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/medical/office)
 "alw" = (
@@ -6890,6 +6901,7 @@
 /obj/machinery/door/firedoor{
 	dir = 4
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/medical/office)
 "amu" = (
@@ -7149,6 +7161,7 @@
 /obj/machinery/door/firedoor{
 	dir = 4
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/medical/office)
 "amP" = (
@@ -7680,6 +7693,7 @@
 	name = "Infirmary Window Shutters"
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/medical/office)
 "anD" = (
@@ -11477,7 +11491,7 @@
 	},
 /obj/machinery/door/window/brigdoor/eastright{
 	id_tag = null;
-	req_access = newlist();
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/iaa)
@@ -11493,7 +11507,7 @@
 	},
 /obj/machinery/door/window/brigdoor/westleft{
 	id_tag = null;
-	req_access = newlist();
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/iaa)
@@ -13025,6 +13039,7 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/sierra/forensic)
 "ayg" = (
@@ -13038,6 +13053,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/sierra/forensic)
 "ayh" = (
@@ -13060,6 +13076,7 @@
 	icon_state = "1-4"
 	},
 /obj/structure/cable/green,
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/sierra/interrogation)
 "ayj" = (
@@ -13073,6 +13090,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/sierra/interrogation)
 "ayk" = (
@@ -14103,6 +14121,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/iaa)
 "azV" = (
@@ -14116,6 +14135,7 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment,
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/iaa)
 "azX" = (
@@ -14201,6 +14221,7 @@
 	id_tag = "infimary_window_lockdown";
 	name = "Infirmary Window Shutters"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cmo)
 "aAo" = (
@@ -14227,6 +14248,7 @@
 /obj/machinery/door/firedoor{
 	dir = 4
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/medical/mentalhealth)
 "aAu" = (
@@ -17255,6 +17277,7 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/hos)
 "aEh" = (
@@ -17293,6 +17316,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/hos)
 "aEj" = (
@@ -17307,6 +17331,7 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/sierra/equipment)
 "aEm" = (
@@ -17399,6 +17424,7 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/sierra/sergeant)
 "aEw" = (
@@ -17412,6 +17438,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/sierra/sergeant)
 "aEx" = (
@@ -17425,6 +17452,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/sierra/sergeant)
 "aEy" = (
@@ -17432,6 +17460,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/sierra/sergeant)
 "aEz" = (
@@ -18148,6 +18177,7 @@
 /obj/machinery/door/firedoor{
 	dir = 4
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/medical/mentalhealth)
 "aFL" = (
@@ -18704,6 +18734,7 @@
 	id_tag = "security_lockdown";
 	name = "Security Department Lockdown"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/sierra/sergeant)
 "aGt" = (
@@ -19032,6 +19063,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/rd)
 "aGY" = (
@@ -19048,6 +19080,7 @@
 	opacity = 0
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/rd)
 "aGZ" = (
@@ -19504,6 +19537,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/sierra/sergeant)
 "aHH" = (
@@ -19572,7 +19606,7 @@
 /obj/machinery/door/window/northleft{
 	dir = 8;
 	name = "Security Sergeant's Desk";
-	req_access = newlist();
+	req_access = newlist()
 	},
 /obj/machinery/door/blast/shutters{
 	dir = 4;
@@ -19584,6 +19618,7 @@
 	id_tag = "security_lockdown";
 	name = "Security Department Lockdown"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/sierra/sergeant)
 "aHO" = (
@@ -20890,6 +20925,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/hop)
 "aJD" = (
@@ -20903,6 +20939,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/hop)
 "aJE" = (
@@ -20911,13 +20948,13 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/hop)
 "aJF" = (
 /obj/machinery/door/window/southleft{
 	name = "HoP's Desk";
-
-	req_access = newlist();
+	req_access = newlist()
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/shutters{
@@ -21260,6 +21297,7 @@
 	opacity = 0
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/rd)
 "aKh" = (
@@ -21770,6 +21808,7 @@
 	id_tag = "security_lockdown";
 	name = "Security Department Lockdown"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/sierra/sergeant)
 "aKS" = (
@@ -22730,6 +22769,7 @@
 /obj/machinery/door/blast/shutters/open{
 	id_tag = "security_permabrig_sergeant_shutters"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/sierra/sergeant)
 "aMr" = (
@@ -31505,12 +31545,12 @@
 /area/rnd/servers)
 "bbK" = (
 /obj/item/storage/mirror{
-	pixel_x = -32;
+	pixel_x = -26;
 	pixel_y = 1
 	},
 /obj/structure/hygiene/sink{
 	dir = 8;
-	pixel_x = -22
+	pixel_x = -14
 	},
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 8
@@ -31759,6 +31799,7 @@
 	dir = 4;
 	id_tag = "d4portnacelle"
 	},
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "bcn" = (
@@ -32248,6 +32289,7 @@
 	id_tag = "RE4F";
 	name = "RE4 digital valve"
 	},
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "bdq" = (
@@ -32255,6 +32297,7 @@
 /obj/machinery/door/blast/regular{
 	id_tag = "d4portnacelle"
 	},
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "bdr" = (
@@ -33509,6 +33552,10 @@
 /obj/machinery/camera/network/engineering{
 	c_tag = "First Deck - Port Necelle";
 	dir = 1
+	},
+/obj/machinery/power/apc{
+	name = "south bump";
+	pixel_y = -24
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
@@ -35052,6 +35099,11 @@
 	c_tag = "Command - Bridge Upper Hallway Stairs";
 	dir = 4
 	},
+/obj/machinery/power/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/hall/level_two)
 "bkM" = (
@@ -35790,6 +35842,7 @@
 	name = "Security Department Lockdown"
 	},
 /obj/structure/cable/green,
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/range)
 "dXY" = (
@@ -36815,6 +36868,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/range)
 "hnV" = (
@@ -37444,6 +37498,7 @@
 	id_tag = "infimary_staging_lockdown";
 	name = "Infirmary Staging Shutters"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/medical/staging)
 "iWD" = (
@@ -38055,6 +38110,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/range)
 "lkn" = (
@@ -38290,6 +38346,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/range)
 "lGo" = (
@@ -38435,6 +38492,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/range)
 "lZg" = (
@@ -38931,6 +38989,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/range)
 "nrB" = (
@@ -39429,6 +39488,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/range)
 "pbm" = (
@@ -39632,6 +39692,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/medical/office)
 "pFf" = (
@@ -40133,6 +40194,7 @@
 	name = "Infirmary Staging Shutters"
 	},
 /obj/structure/cable/cyan,
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/medical/staging)
 "sdp" = (
@@ -40934,6 +40996,7 @@
 	icon_state = "1-4"
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/medical/office)
 "uCE" = (

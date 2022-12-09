@@ -4501,6 +4501,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/ce)
 "aiH" = (
@@ -6065,6 +6066,7 @@
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
+/obj/structure/table/steel_reinforced,
 /turf/simulated/floor/plating,
 /area/engineering/engineering_monitoring)
 "alJ" = (
@@ -6615,6 +6617,11 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/bluespace/chamber)
 "amM" = (
@@ -6751,6 +6758,7 @@
 /mob/living/simple_animal/aquatic/fish/grump{
 	name = "Titus"
 	},
+/turf/simulated/floor/beach/sand,
 /area/crew_quarters/cafe)
 "and" = (
 /obj/machinery/door/airlock/hatch/maintenance,
@@ -9067,6 +9075,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/captain/office_anteroom)
 "ard" = (
@@ -9194,6 +9203,7 @@
 /mob/living/simple_animal/aquatic/fish{
 	name = "Marry"
 	},
+/turf/simulated/floor/beach/sand,
 /area/crew_quarters/cafe)
 "arn" = (
 /obj/machinery/power/apc/super/critical{
@@ -9720,6 +9730,7 @@
 	id_tag = "SupermatterPort";
 	name = "Reactor Blast Door"
 	},
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/engineering/engine_room)
 "asv" = (
@@ -10552,7 +10563,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck/fore)
 "atT" = (
-/obj/machinery/gravity_generator,
+/obj/machinery/inertial_damper,
 /turf/simulated/floor/greengrid,
 /area/engineering/gravitaional_generator)
 "atU" = (
@@ -11144,6 +11155,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/door/airlock/glass/engineering{
+	name = "Engineering Hallway"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/hallway)
@@ -11742,6 +11756,7 @@
 	id_tag = "SupermatterPort";
 	name = "Reactor Blast Door"
 	},
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/engineering/engine_room)
 "avP" = (
@@ -12296,12 +12311,15 @@
 /area/crew_quarters/heads/office/captain)
 "awT" = (
 /obj/machinery/door/firedoor,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/airlock/glass/engineering{
+	name = "Engineering Bay"
+	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "eng_lockdown_emg1";
 	name = "Emergency Exit"
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/engineering_monitoring)
 "awU" = (
@@ -17481,6 +17499,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
 	dir = 4
 	},
+/obj/machinery/door/airlock/glass/engineering{
+	name = "Quick Access Warehouse"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/locker_room)
 "aGg" = (
@@ -19660,7 +19681,7 @@
 	},
 /obj/item/stack/material/rods/fifty,
 /obj/structure/window/reinforced{
-	dir = 8;
+	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/materials_storage)
@@ -19723,7 +19744,7 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/item/stack/material/glass/reinforced/fifty,
 /obj/structure/window/reinforced{
-	dir = 8;
+	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/materials_storage)
@@ -21375,7 +21396,7 @@
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /obj/effect/floor_decal/industrial/outline/blue,
 /obj/structure/window/reinforced{
-	dir = 8;
+	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
@@ -22672,13 +22693,16 @@
 	},
 /obj/effect/floor_decal/techfloor,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	dir = 4
+	},
+/obj/machinery/door/airlock/glass/engineering{
+	name = "Quick Access Warehouse"
+	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "eng_lockdown";
 	name = "Engineering Lockdown"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/materials_storage)
@@ -23483,9 +23507,6 @@
 /obj/effect/floor_decal/industrial/warning/full,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
-"aRX" = (
-/turf/simulated/floor/beach/water/ocean,
-/area/crew_quarters/sauna)
 "aRY" = (
 /obj/structure/table/woodentable/walnut,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -25644,6 +25665,7 @@
 "aVV" = (
 /obj/structure/flora/seaweed/mid,
 /obj/effect/fluid_mapped,
+/turf/simulated/floor/beach/sand,
 /area/bridge/meeting_room)
 "aVW" = (
 /obj/structure/bed/chair/pew/left/mahogany,
@@ -26487,7 +26509,7 @@
 	},
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
-	dir = 8;
+	dir = 8
 	},
 /obj/item/rig/eva/equipped,
 /obj/machinery/door/window/brigdoor/southleft{
@@ -27281,6 +27303,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/captain/office_anteroom)
 "aZm" = (
@@ -28014,6 +28037,7 @@
 /obj/structure/window/reinforced,
 /obj/effect/fluid_mapped,
 /obj/structure/flora/seaweed/mid,
+/turf/simulated/floor/beach/sand,
 /area/crew_quarters/cafe)
 "bau" = (
 /obj/structure/closet/crate,
@@ -28814,8 +28838,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/abandoned_hydroponics)
 "bch" = (
-/turf/simulated/floor/beach/water/ocean{
-	},
+/turf/simulated/floor/beach/water/ocean,
 /area/crew_quarters/sauna)
 "bci" = (
 /obj/machinery/door/firedoor,
@@ -28933,6 +28956,11 @@
 /obj/structure/disposalpipe/segment,
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 4
+	},
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/nano)
@@ -29844,11 +29872,13 @@
 /obj/structure/flora/seaweed,
 /obj/structure/flora/seaweed/large,
 /mob/living/simple_animal/aquatic/fish,
+/turf/simulated/floor/beach/sand,
 /area/bridge/meeting_room)
 "bev" = (
 /obj/structure/flora/seaweed/glow,
 /mob/living/simple_animal/aquatic/fish/grump,
 /obj/effect/fluid_mapped,
+/turf/simulated/floor/beach/sand,
 /area/bridge/meeting_room)
 "bew" = (
 /obj/machinery/vending/coffee{
@@ -29925,11 +29955,13 @@
 /obj/structure/flora/seaweed/glow,
 /mob/living/simple_animal/aquatic/fish/judge,
 /obj/effect/fluid_mapped,
+/turf/simulated/floor/beach/sand,
 /area/bridge/meeting_room)
 "beG" = (
 /obj/effect/fluid_mapped,
 /obj/structure/flora/seaweed,
 /mob/living/simple_animal/aquatic/fish,
+/turf/simulated/floor/beach/sand,
 /area/bridge/meeting_room)
 "beH" = (
 /obj/machinery/requests_console{
@@ -33647,7 +33679,7 @@
 /obj/machinery/light/small,
 /obj/item/stack/material/steel/fifty,
 /obj/structure/window/reinforced{
-	dir = 8;
+	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/materials_storage)
@@ -34032,6 +34064,9 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/airlock/glass/engineering{
+	name = "Quick Access Warehouse"
+	},
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "eng_lockdown";
@@ -34239,6 +34274,13 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/sleep/cryo)
+"hGy" = (
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/simulated/floor/bluegrid,
+/area/engineering/bluespace/chamber)
 "hGK" = (
 /obj/machinery/door/airlock/multi_tile/research{
 	dir = 8;
@@ -36230,6 +36272,7 @@
 /obj/machinery/door/firedoor,
 /obj/effect/fluid_mapped,
 /obj/structure/flora/seaweed/mid,
+/turf/simulated/floor/beach/sand,
 /area/crew_quarters/cafe)
 "otd" = (
 /obj/effect/floor_decal/corner/blue/bordercorner,
@@ -37522,6 +37565,9 @@
 	dir = 4
 	},
 /obj/structure/window/phoronreinforced{
+	dir = 8
+	},
+/obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -52089,7 +52135,7 @@ agw
 agw
 alT
 amL
-alT
+hGy
 agw
 agw
 bhc
@@ -55147,7 +55193,7 @@ awP
 bbe
 aMx
 bch
-aRX
+bch
 bbZ
 bbY
 bbe
@@ -55349,7 +55395,7 @@ awP
 bbe
 aMz
 bch
-aRX
+bch
 aZd
 bcc
 bbe
