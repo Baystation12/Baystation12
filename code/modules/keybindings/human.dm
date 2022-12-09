@@ -34,7 +34,7 @@
 				if(!H.get_active_hand())
 					to_chat(H, SPAN_WARNING("You're not holding anything to holster."))
 					return
-				E.holster(H.get_active_hand(), src)
+				E.holster(H.get_active_hand(), H)
 				return
 			else
 				E.unholster(H, TRUE)
@@ -47,7 +47,7 @@
 			if(!H.get_active_hand())
 				to_chat(H, SPAN_WARNING("You're not holding anything to holster."))
 				return
-			E.holster(H.get_active_hand(), src)
+			E.holster(H.get_active_hand(), H)
 			return
 		else
 			E.unholster(H, TRUE)

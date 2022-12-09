@@ -137,6 +137,6 @@
 	full_name = "Move Down"
 	description = "Makes you go down"
 
-/datum/keybinding/mob/move_up/down(client/user)
+/datum/keybinding/mob/move_down/down(client/user)
 	var/mob/M = user.mob
-	M.SelfMove(DOWN)
+	M.down()
