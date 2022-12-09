@@ -35,3 +35,33 @@ SUBSYSTEM_DEF(modpacks)
 			crash_with("Modpack [(istype(manifest) && manifest.name) || "Unknown"] failed to post-initialize: [fail_msg]")
 
 	. = ..()
+
+/client/verb/modpacks_list()
+	set name = "Modpacks List"
+	set category = "OOC"
+
+	if(!mob || !SSmodpacks.initialized)
+		return
+
+	if(SSmodpacks.loaded_modpacks.len)
+		. = "<hr><br><center><b><font size = 3>Modpacks List</font></b></center><br><hr><br>"
+		for(var/modpack in SSmodpacks.loaded_modpacks)
+			var/singleton/modpack/M = SSmodpacks.loaded_modpacks[modpack]
+
+			if(M.name)
+				. += "<div class = 'statusDisplay'>"
+				. += "<center><b>[M.name]</b></center>"
+
+				if(M.desc || M.author)
+					. += "<br>"
+					if(M.desc)
+						. += "<br>Description: [M.desc]"
+					if(M.author)
+						. += "<br><i>Author: [M.author]</i>"
+				. += "</div><br>"
+
+		var/datum/browser/popup = new(mob, "modpacks_list", "Modpacks List", 480, 580)
+		popup.set_content(.)
+		popup.open()
+	else
+		to_chat(src, SPAN_WARNING("This server does not include any modpacks."))

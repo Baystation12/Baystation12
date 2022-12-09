@@ -34,8 +34,8 @@
 	electrical_storm_moderate_sound = sound('sound/AI/torch/electricalstormmoderate.ogg', volume = 45)
 	electrical_storm_major_sound = sound('sound/AI/torch/electricalstormmajor.ogg', volume = 45)
 
-	//use_job_frequency_announcement = FALSE
-	//use_radio_announcement = TRUE
+	use_job_frequency_announcement = FALSE
+	use_radio_announcement = TRUE
 
 /datum/map/sierra/level_x_biohazard_announcement(var/bio_level)
 	if(!isnum(bio_level))

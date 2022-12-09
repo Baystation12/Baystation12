@@ -21,6 +21,9 @@
 
 	var/space_time_anomaly_sound
 
+	var/use_job_frequency_announcement = TRUE
+	var/use_radio_announcement = TRUE
+
 	var/unidentified_lifesigns_message = "Unidentified lifesigns detected coming aboard the %STATION_NAME%. Please lockdown all exterior access points, including ducting and ventilation."
 	var/unidentified_lifesigns_sound
 

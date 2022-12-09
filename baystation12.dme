@@ -3176,6 +3176,7 @@
 #include "code\modules\ventcrawl\ventcrawl_atmospherics.dm"
 #include "code\modules\ventcrawl\ventcrawl_multiz.dm"
 #include "code\modules\ventcrawl\ventcrawl_verb.dm"
+#include "mods\eris_announcer\_eris_announcer.dme"
 #include "code\modules\webhooks\_webhook.dm"
 #include "code\modules\webhooks\webhook_custom_event.dm"
 #include "code\modules\webhooks\webhook_roundend.dm"
