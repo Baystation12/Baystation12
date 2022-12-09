@@ -226,6 +226,7 @@
 #include "code\controllers\subsystems\initialization\misc.dm"
 #include "code\controllers\subsystems\initialization\misc_early.dm"
 #include "code\controllers\subsystems\initialization\misc_late.dm"
+#include "code\controllers\subsystems\initialization\modpacks.dm"
 #include "code\controllers\subsystems\initialization\persistence.dm"
 #include "code\controllers\subsystems\initialization\robots.dm"
 #include "code\controllers\subsystems\initialization\webhooks.dm"
@@ -3302,5 +3303,6 @@
 #include "maps\deepmaint\deepmaint_rooms\template.dm"
 #include "maps\deepmaint\deepmaint_rooms\core\_core_rooms.dm"
 #include "maps\deepmaint\deepmaint_rooms\normal\_normal_rooms.dm"
+#include "mods\_modpack.dm"
 #include "~code\global_init.dm"
 // END_INCLUDE
