@@ -149,7 +149,6 @@
 	var/health = 200
 	var/critical_heat = 50 // sparks and takes damage when active & above this heat
 	var/heat_reduction = 1.5 // mitigates this much heat per tick
-	var/heat_reduction_minimum = 1.5 //minimum amount of heat mitigation unupgraded
 	var/heat = 0
 	var/range = 1
 	idle_power_usage = 5000
@@ -256,7 +255,7 @@
 
 /obj/machinery/shipsensors/RefreshParts()
 	..()
-	heat_reduction = round(clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator) / 3), heat_reduction_minimum, 5)
+	heat_reduction = round(total_component_rating_of_type(/obj/item/stock_parts/manipulator) / 3)
 
 /obj/item/stock_parts/circuitboard/shipsensors
 	name = T_BOARD("broad-band sensor suite")
