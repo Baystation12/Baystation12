@@ -97,3 +97,9 @@
  * Parameters: var/obj/structure/closet/crate/sold, var/area/shuttle
  */
 /hook/sell_crate
+
+// PRX\BOS Banned unbanned hook
+/hook/banned
+/hook/unbanned
+/hook/playerNotes
+/hook/oocMessage
