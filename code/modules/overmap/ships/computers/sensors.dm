@@ -256,7 +256,7 @@
 
 /obj/machinery/shipsensors/RefreshParts()
 	..()
-	heat_reduction = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), heat_reduction_minimum, 5)
+	heat_reduction = round(clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator) / 3), heat_reduction_minimum, 5)
 
 /obj/item/stock_parts/circuitboard/shipsensors
 	name = T_BOARD("broad-band sensor suite")
