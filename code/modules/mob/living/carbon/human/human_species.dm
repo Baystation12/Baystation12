@@ -25,6 +25,10 @@
 	head_hair_style = "Skrell Male Tentacles"
 	..(new_loc, SPECIES_SKRELL)
 
+/mob/living/carbon/human/resomi/New(var/new_loc)
+	head_hair_style = "Resomi Plumage"
+	..(new_loc, SPECIES_RESOMI)
+
 /mob/living/carbon/human/unathi/New(new_loc)
 	head_hair_style = "Unathi Horns"
 	..(new_loc, SPECIES_UNATHI)

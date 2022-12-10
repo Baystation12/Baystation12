@@ -69,6 +69,9 @@
 	var/taste_sensitivity = TASTE_NORMAL      // How sensitive the species is to minute tastes.
 	var/silent_steps
 
+	var/pulse_rate_mod = 1
+
+
 	var/min_age = 17
 	var/max_age = 70
 

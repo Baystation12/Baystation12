@@ -291,7 +291,8 @@
 		LANGUAGE_HUMAN_RUSSIAN,
 		LANGUAGE_HUMAN_SELENIAN,
 		LANGUAGE_SKRELLIAN,
-		LANGUAGE_UNATHI_SINTA
+		LANGUAGE_UNATHI_SINTA,
+		LANGUAGE_RESOMI
 	)
 
 /datum/pai_software/translator/toggle(mob/living/silicon/pai/user)

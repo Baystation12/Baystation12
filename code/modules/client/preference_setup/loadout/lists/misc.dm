@@ -111,6 +111,7 @@
 	plushes["lizard plush"] = /obj/item/toy/plushie/lizard
 	plushes["spider plush"] = /obj/item/toy/plushie/spider
 	plushes["farwa plush"] = /obj/item/toy/plushie/farwa
+	plushes["resomi plush"]= /obj/item/toy/plushie/resomi
 	plushes["golden carp plush"] = /obj/item/toy/plushie/carp_gold
 	plushes["purple carp plush"] = /obj/item/toy/plushie/carp_purple
 	plushes["pink carp plush"] = /obj/item/toy/plushie/carp_pink

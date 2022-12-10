@@ -143,6 +143,7 @@
 	#include "../away/voxship/voxship.dm"
 	#include "../event/iccgn_ship/icgnv_hound.dm"
 	#include "../../mods/eris_announcer/_eris_announcer.dme"
+	#include "../../mods/species/resomi/_resomi.dme"
 
 	#define using_map_DATUM /datum/map/sierra
 

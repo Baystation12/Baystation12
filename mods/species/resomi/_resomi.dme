@@ -1,0 +1,19 @@
+#ifndef CONTENT_PACK_RESOMI
+#define CONTENT_PACK_RESOMI
+#include "_resomi.dm"
+
+//clothing
+#include "clothing/clothing.dm"
+#include "clothing/glasses.dm"
+#include "clothing/misc.dm"
+#include "clothing/suits.dm"
+#include "clothing/under.dm"
+
+//body and organs
+#include "datum/body/organs.dm"
+#include "datum/culture/resomi_culture.dm"
+#include "datum/species.dm"
+
+//language
+#include "language/language.dm"
+#endif

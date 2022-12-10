@@ -12,7 +12,7 @@
 
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/misc.dmi',
-		SPECIES_RESOMI = 'infinity/icons/mob/species/resomi/misc.dmi'
+		SPECIES_RESOMI = 'packs/infinity/icons/mob/species/resomi/misc.dmi'
 	)
 	var/renameable = FALSE
 

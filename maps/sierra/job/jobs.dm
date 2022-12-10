@@ -26,6 +26,8 @@
 									/datum/job/adjutant, /datum/job/exploration_leader, /datum/job/senior_engineer,\
 									/datum/job/warden, /datum/job/detective, /datum/job/officer,
 									/datum/job/qm, /datum/job/senior_scientist) */
+		/datum/species/resomi  		 = list(HUMAN_ONLY_JOBS, /datum/job/officer, /datum/job/exploration_leader,\
+									/datum/job/warden, /datum/job/chief_engineer, /datum/job/rd, /datum/job/iaa, /datum/job/security_assistant),
 	)
 #undef HUMAN_ONLY_JOBS
 

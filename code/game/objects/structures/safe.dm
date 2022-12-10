@@ -86,7 +86,7 @@ FLOOR SAFES
 	var/mob/living/carbon/human/user = usr
 
 	var/canhear = 0
-	if (user.IsHolding(/obj/item/clothing/accessory/stethoscope))
+	if (user.IsHolding(/obj/item/clothing/accessory/stethoscope || user.get_species() == SPECIES_RESOMI))
 		canhear = 1
 
 	if(href_list["open"])
