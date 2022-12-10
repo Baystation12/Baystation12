@@ -64,11 +64,3 @@
 		/singleton/emote/audible/chirp,
 		/singleton/emote/audible/multichirp
 	)
-
-/datum/species/resomi
-	default_emotes = list(
-		/singleton/emote/audible/chuckle/resomi,
-		/singleton/emote/audible/cough/resomi,
-		/singleton/emote/audible/laugh/resomi,
-		/singleton/emote/audible/scream/resomi,
-		)

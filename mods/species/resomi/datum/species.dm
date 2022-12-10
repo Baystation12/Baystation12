@@ -41,6 +41,7 @@
 	burn_mod =  1.35
 	metabolism_mod = 2.0
 	mob_size = MOB_SMALL
+	holder_type = /obj/item/holder
 	light_sensitive = 6
 	gluttonous = GLUT_TINY
 	blood_volume = 280
@@ -191,3 +192,11 @@
 		if(18 to 25)	. = 0
 		if(26 to 35)	. = 4
 		else			. = 8
+
+/datum/species/resomi
+	default_emotes = list(
+		/singleton/emote/audible/chuckle/resomi,
+		/singleton/emote/audible/cough/resomi,
+		/singleton/emote/audible/laugh/resomi,
+		/singleton/emote/audible/scream/resomi,
+		)

@@ -484,7 +484,7 @@
 		if(href_list["mach_close"])
 			var/t1 = text("window=[href_list["mach_close"]]")
 			unset_machine()
-			show_browser(src, null, t1)
+			close_browser(src, t1)
 			return TOPIC_HANDLED
 		if(href_list["flavor_change"])
 			update_flavor_text(href_list["flavor_change"])

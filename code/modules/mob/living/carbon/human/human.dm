@@ -525,7 +525,7 @@
 	var/msg
 	switch(key)
 		if("done")
-			show_browser(src, null, "window=flavor_changes")
+			close_browser(src, "window=flavor_changes")
 			return
 		if("general")
 			msg = sanitize(input(src,"Update the general description of your character. This will be shown regardless of clothing. Do not include OOC information here.","Flavor Text",html_decode(flavor_texts[key])) as message, extra = 0)

@@ -123,7 +123,7 @@ SUBSYSTEM_DEF(vote)
 	onclose(user, "vote", src)
 
 /datum/controller/subsystem/vote/proc/close_panel(mob/user)
-	show_browser(user, null, "window=vote")
+	close_browser(user, "window=vote")
 	if(user)
 		voting -= user.client
 
