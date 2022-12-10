@@ -269,6 +269,9 @@ var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 #define FLIP_FLAGS(FIELD, MASK) ((FIELD) ^= (MASK))
 
 
+#define GLOBAL_REAL_VAR(X) var/global/##X
+
+
 #define hex2num(hex) (text2num(hex, 16) || 0)
 
 
