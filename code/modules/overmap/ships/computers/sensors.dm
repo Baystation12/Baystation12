@@ -258,14 +258,6 @@
 	..()
 	heat_reduction = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), heat_reduction_minimum, 5)
 
-/obj/machinery/shipsensors/weak
-	heat_reduction_minimum = 0.2
-	desc = "Miniturized gravity scanner with various other sensors, used to detect irregularities in surrounding space. Can only run in vacuum to protect delicate quantum BS elements."
-
-/obj/machinery/shipsensors/weak/RefreshParts()
-	..()
-	heat_reduction = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), heat_reduction_minimum, 5)
-
 /obj/item/stock_parts/circuitboard/shipsensors
 	name = T_BOARD("broad-band sensor suite")
 	board_type = "machine"
@@ -280,6 +272,3 @@
 	additional_spawn_components = list(
 		/obj/item/stock_parts/power/apc/buildable = 1
 	)
-
-/obj/item/stock_parts/circuitboard/shipsensors/weak
-	build_path = /obj/machinery/shipsensors/weak

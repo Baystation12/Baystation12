@@ -2836,7 +2836,7 @@
 /turf/simulated/floor/tiled,
 /area/scavver/calypso)
 "XQ" = (
-/obj/machinery/shipsensors/weak{
+/obj/machinery/shipsensors{
 	use_power = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
