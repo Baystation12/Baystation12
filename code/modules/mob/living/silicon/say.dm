@@ -55,6 +55,8 @@
 	if (!speaking)
 		if (istype(other, /mob/living/carbon))
 			return 1
+		if(istype(other, /mob/announcer))
+			return 1
 		if (istype(other, /mob/living/silicon))
 			return 1
 		if (istype(other, /mob/living/carbon/brain))
