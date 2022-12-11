@@ -118,6 +118,8 @@
 
 	var/static/list/resource_urls
 
+	var/static/minimum_byondacc_age = 0
+
 	/// Ghosts can turn on Antagovision to see a HUD of who is the bad guys this round.
 	var/static/antag_hud_allowed = FALSE
 
@@ -182,6 +184,8 @@
 	/// Set to 1 to prevent newly-spawned mice from understanding human speech
 	var/static/uneducated_mice = FALSE
 
+	var/static/usewhitelist_database = FALSE
+
 	var/static/usealienwhitelist = FALSE
 
 	var/static/usealienwhitelistSQL = FALSE
@@ -211,6 +215,8 @@
 	var/static/discord_url
 
 	var/static/issue_url
+
+	var/static/overflow_server_url
 
 	var/static/list/chat_markup
 
@@ -610,6 +616,10 @@
 				source_url = value
 			if ("issue_url")
 				issue_url = value
+			if ("overflow_server_url")
+				overflow_server_url = value
+			if("minimum_byondacc_age")
+				minimum_byondacc_age = text2num(value)
 			if ("discord_url")
 				discord_url = value
 			if ("ghosts_can_possess_animals")
@@ -688,6 +698,8 @@
 				secret_disabled = TRUE
 			if ("usealienwhitelist")
 				usealienwhitelist = TRUE
+			if("usewhitelist_database")
+				usewhitelist_database = TRUE
 			if ("usealienwhitelist_sql")
 				usealienwhitelistSQL = TRUE
 			if ("continuous_rounds")

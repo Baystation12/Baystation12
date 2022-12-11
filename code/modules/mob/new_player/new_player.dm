@@ -122,12 +122,26 @@
 		client.link_url(config.lore_url, "Lore", TRUE)
 		return 1
 	if (href_list["ready"])
+		if(config.minimum_byondacc_age && client.player_age <= config.minimum_byondacc_age)
+			if(!client.discord_id || (client.discord_id && length(client.discord_id) == 32))
+				client.load_player_discord(client)
+				to_chat(usr, "<span class='danger'>Вам необходимо привязать дискорд-профиль к аккаунту!</span>")
+				to_chat(usr, "<span class='warning'>Нажмите 'Привязка Discord' во вкладке 'Special Verbs' для получения инструкций.</span>")
+				return FALSE
+
 		ready = GAME_STATE > RUNLEVEL_LOBBY ? 0 : text2num(href_list["ready"])
 	if (href_list["refresh"])
 		panel.close()
 		new_player_panel()
 
 	if(href_list["observe"])
+		if(config.minimum_byondacc_age && client.player_age <= config.minimum_byondacc_age)
+			if(!client.discord_id || (client.discord_id && length(client.discord_id) == 32))
+				client.load_player_discord(client)
+				to_chat(usr, "<span class='danger'>Вам необходимо привязать дискорд-профиль к аккаунту!</span>")
+				to_chat(usr, "<span class='warning'>Нажмите 'Привязка Discord' во вкладке 'Special Verbs' для получения инструкций.</span>")
+				return FALSE
+
 		if(GAME_STATE < RUNLEVEL_LOBBY)
 			to_chat(src, SPAN_WARNING("Please wait for server initialization to complete..."))
 			return
@@ -170,6 +184,13 @@
 			return 1
 
 	if(href_list["late_join"])
+		if(config.minimum_byondacc_age && client.player_age <= config.minimum_byondacc_age)
+			if(!client.discord_id || (client.discord_id && length(client.discord_id) == 32))
+				client.load_player_discord(client)
+				to_chat(usr, "<span class='danger'>Вам необходимо привязать дискорд-профиль к аккаунту!</span>")
+				to_chat(usr, "<span class='warning'>Нажмите 'Привязка Discord' во вкладке 'Special Verbs' для получения инструкций.</span>")
+				return FALSE
+
 		if(GAME_STATE != RUNLEVEL_GAME)
 			to_chat(usr, SPAN_WARNING("The round has either not started yet or already ended."))
 			return

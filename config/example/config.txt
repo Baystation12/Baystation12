@@ -464,3 +464,9 @@ RADIATION_LOWER_LIMIT 0.15
 ## Uncomment this to bypass empty z-level checks in certain subsystems. For testing and development purposes only.
 ## Not recommended for live use.
 #RUN_EMPTY_LEVELS
+
+## Uncomment to use ckey whitelist ticket system with SQL
+#USEWHITELIST_DATABASE
+
+## Server to reroute to. Used when USEWHITELIST_DATABASE enabled
+#OVERFLOW_SERVER_URL byond://example.com:1234

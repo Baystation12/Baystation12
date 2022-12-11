@@ -8,5 +8,6 @@ var/global/sqlpass      = ""
 var/global/sqlfdbkdb    = ""
 var/global/sqlfdbklogin = ""
 var/global/sqlfdbkpass  = ""
+var/global/sqlfdbkdbutil = "test"
 var/global/DBConnection/dbcon = new
 var/global/DBConnection/dbcon_old = new

@@ -1,5 +1,9 @@
 /mob/new_player/Login()
 	update_Login_details()	//handles setting lastKnownIP and computer_id for use by the ban systems as well as checking for multikeying
+
+	if(config.usewhitelist_database && config.overflow_server_url && !whitelist_check())
+		src << link(config.overflow_server_url)
+
 	if (config.motd)
 		to_chat(src, "<div class=\"motd\">[config.motd]</div>", handle_whitespace=FALSE)
 	to_chat(src, "<div class='info'>Game ID: <div class='danger'>[game_id]</div></div>")
@@ -41,3 +45,26 @@
 	if(SL.up_description)
 		alert_desc = SL.up_description
 	to_chat(src, SPAN_NOTICE("The alert level on the [station_name()] is currently: [SPAN_COLOR(SL.light_color_alarm, "<B>[SL.name]</B>")]. [alert_desc]"))
+
+
+/mob/new_player/proc/whitelist_check()
+	// Admins are immune to overflow rerouting
+	if(!config.usewhitelist_database)
+		return TRUE
+	if(check_rights(rights_required = 0, show_msg = 0))
+		return TRUE
+	establish_db_connection()
+	//Whitelisted people are immune to overflow rerouting.
+	if(dbcon.IsConnected())
+		var/dbckey = sql_sanitize_text(src.ckey)
+		var/DBQuery/find_ticket = dbcon.NewQuery(
+			"SELECT ckey FROM [sqlfdbkdbutil].ckey_whitelist WHERE ckey='[dbckey]' AND is_valid=true AND port=[world.port] AND date_start<=NOW() AND (NOW()<date_end OR date_end IS NULL)"
+		)
+
+		if(!find_ticket.Execute())
+			to_world_log(dbcon.ErrorMsg())
+			return FALSE
+		if(!find_ticket.NextRow())
+			return FALSE
+		return TRUE
+	return FALSE

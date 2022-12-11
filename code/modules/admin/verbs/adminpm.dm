@@ -134,6 +134,11 @@
 	adminmsg2adminirc(src, C, html_decode(msg))
 
 	ticket.msgs += new /datum/ticket_msg(src.ckey, C.ckey, msg)
+	if(establish_db_connection())
+		var/sql_text = "[src.ckey] -> [C.ckey]: [sanitizeSQL(msg)]\n"
+		var/DBQuery/ticket_text = dbcon.NewQuery("UPDATE erro_admin_tickets SET text = CONCAT(COALESCE(text,''), '[sql_text]') WHERE round = '[game_id]' AND inround_id = '[ticket.id]';")
+		ticket_text.Execute()
+
 	update_ticket_panels()
 
 	//we don't use message_admins here because the sender/receiver might get it too

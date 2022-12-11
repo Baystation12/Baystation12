@@ -108,6 +108,10 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 		return
 
 	ticket.msgs += new /datum/ticket_msg(src.ckey, null, original_msg)
+	if(establish_db_connection())
+		var/sql_text = "HELP [src.ckey]: [sanitizeSQL(original_msg)]\n"
+		var/DBQuery/ticket_text = dbcon.NewQuery("UPDATE erro_admin_tickets SET text = '[sql_text]' WHERE round = '[game_id]' AND inround_id = '[ticket.id]';")
+		ticket_text.Execute()
 	update_ticket_panels()
 
 

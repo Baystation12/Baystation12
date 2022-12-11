@@ -19,6 +19,9 @@
 
 	var/staffwarn = null
 
+	var/discord_id = null
+	var/discord_name = null
+
 		///////////////
 		//SOUND STUFF//
 		///////////////

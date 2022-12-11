@@ -89,6 +89,33 @@ var/global/floorIsLava = 0
 		<A href='?src=\ref[src];notes=show;mob=\ref[M]'>Notes</A> |
 	"}
 
+	// INF START
+	body += "<br>"
+	body += "<b>Client Information:</b><br>"
+
+	body += "<br>\[<b>Client [M.client ? "On" : "Off"]line</b>\]"
+	body += "<br>\[<b>Ckey:</b> [M.client ? M.client.ckey : M.ckey]\]"
+	body += "<br>\[<b>Client Age:</b> [M.client ? "[M.client.player_age] days" : "Logged out"]\]"
+	body += "<br>\[<b>Client Gender:</b> [M.client ? M.client.gender : "Logged out"]\]"
+	body += "<br>\[<b>CID:</b> [M.client ?  M.client.computer_id : M.computer_id]\]"
+	body += "<br>\[<b>CID Related Accounts:</b> [M.client ? M.client.related_accounts_cid : "Logged out"]\]"
+	body += "<br>\[<b>IP:</b> [M.client ?  M.client.address : M.lastKnownIP]\]"
+	body += "<br>\[<b>IP Related Accounts:</b> [M.client ? M.client.related_accounts_ip : "Logged out"]\]"
+	var/full_version = "Unknown"
+	if(M.client.byond_version)
+		full_version = "[M.client.byond_version].[M.client.byond_build ? M.client.byond_build : "xxx"]"
+	body += "<br>\[<b>Byond version:</b> [full_version]\]"
+	if(M.client.discord_id)
+		if(length(M.client.discord_id) < 32)
+			body += "<br>\[<b>Discord:</b> <@[M.client.discord_id]>  <b>[M.client.discord_name]</b>\]"
+		else
+			body += "<br>\[<b>Discord: привязка не завершена!</b>\]"
+	else
+		body += "<br>\[<b>Discord: не привязан!</b>\]"
+	body += "<br><br>"
+	// INF END
+
+
 	if (!istype(M, /mob/new_player) && !istype(M, /mob/observer))
 		body += "<A HREF='?src=\ref[src];cryo=\ref[M]'>Cryo Character</A> | "
 
