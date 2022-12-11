@@ -29,7 +29,7 @@
 /area/proc/power_change()
 	for(var/obj/machinery/M in machinery_list)	// for each machine in the area
 		M.power_change()			// reverify power status (to update icons etc.)
-	if (fire || eject || party)
+	if (atmosalm || fire || eject || party)
 		update_icon()
 
 /// Returns Integer. The total amount of power usage queued for the area from both `used_*` and `oneoff_*` for the given power channel, or all channels if `TOTAL` is passed instead.
