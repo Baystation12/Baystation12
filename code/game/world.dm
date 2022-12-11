@@ -108,7 +108,10 @@ GLOBAL_REAL_VAR(list/stack_trace_storage)
 	//logs
 	SetupLogs()
 	var/date_string = time2text(world.realtime, "YYYY/MM/DD")
-	to_file(global.diary, "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]")
+	//to_file(global.diary, "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]")
+
+	GLOB.world_game_log = "[GLOB.log_directory]/game.log"
+	start_log(GLOB.world_game_log)
 
 	if(config && config.server_name != null && config.server_suffix && world.port > 0)
 		config.server_name += " #[(world.port % 1000) / 100]"

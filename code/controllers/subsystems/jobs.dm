@@ -203,6 +203,7 @@ SUBSYSTEM_DEF(jobs)
 			player.mind.assigned_role = rank
 			player.mind.role_alt_title = job.get_alt_title_for(player.client)
 			unassigned_roundstart -= player
+			log_game("Игрок [player.mind.key] вошел в раунд с профессией [rank] ([job.current_positions]/[position_limit])")
 			job.current_positions++
 			return 1
 	return 0

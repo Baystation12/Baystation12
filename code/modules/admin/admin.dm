@@ -17,7 +17,7 @@ var/global/floorIsLava = 0
 		if(C && C.holder && (R_INVESTIGATE & C.holder.rights))
 			to_chat(C, msg)
 /proc/msg_admin_attack(text) //Toggleable Attack Messages
-	log_attack(text)
+	log_attack()
 	var/rendered = SPAN_CLASS("log_message", "[SPAN_CLASS("prefix", "ATTACK:")] [SPAN_CLASS("message", text)]")
 	for(var/client/C as anything in GLOB.admins)
 		if(check_rights(R_INVESTIGATE, 0, C))

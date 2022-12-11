@@ -169,6 +169,8 @@
 			log_admin("[key_name(usr)] edited the admin rank of [adm_ckey] to [new_rank]")
 			log_admin_rank_modification(adm_ckey, new_rank)
 
+			log_permissions("[key_name(usr)] edited the admin rank of [adm_ckey] to [new_rank]")
+
 		else if(task == "permissions")
 			if(!D)	return
 			var/list/permissionlist = list()

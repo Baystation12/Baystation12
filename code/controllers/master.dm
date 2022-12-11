@@ -195,7 +195,6 @@ var/global/datum/controller/master/Master = new
 		CHECK_TICK
 	current_ticklimit = tick_limit_default
 	var/msg = "Initializations complete within [(Uptime() - start_uptime) / 10] second\s!"
-	report_progress(msg)
 	log_world(msg)
 
 	initializing = FALSE
