@@ -12556,7 +12556,7 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/hallwaya)
 "Gq" = (
-/obj/machinery/shipsensors/weak,
+/obj/machinery/shipsensors,
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
 "Gr" = (

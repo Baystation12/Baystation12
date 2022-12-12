@@ -526,7 +526,7 @@
 /turf/simulated/floor/airless,
 /area/scavver/gantry/up2)
 "ef" = (
-/obj/machinery/shipsensors/weak{
+/obj/machinery/shipsensors{
 	use_power = 0
 	},
 /turf/simulated/floor/airless,
@@ -2314,7 +2314,7 @@
 /turf/simulated/floor/tiled,
 /area/scavver/hab)
 "sp" = (
-/obj/machinery/shipsensors/weak{
+/obj/machinery/shipsensors{
 	use_power = 0
 	},
 /obj/structure/handrail{

@@ -102,7 +102,7 @@
 			if(!CanInteract(user,state))
 				return TOPIC_NOACTION
 			if (nrange)
-				sensors.set_range(clamp(nrange, 1, world.view))
+				sensors.set_range(clamp(round(nrange), 1, world.view))
 			return TOPIC_REFRESH
 		if (href_list["toggle"])
 			sensors.toggle()
@@ -149,7 +149,6 @@
 	var/health = 200
 	var/critical_heat = 50 // sparks and takes damage when active & above this heat
 	var/heat_reduction = 1.5 // mitigates this much heat per tick
-	var/heat_reduction_minimum = 1.5 //minimum amount of heat mitigation unupgraded
 	var/heat = 0
 	var/range = 1
 	idle_power_usage = 5000
@@ -256,15 +255,7 @@
 
 /obj/machinery/shipsensors/RefreshParts()
 	..()
-	heat_reduction = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), heat_reduction_minimum, 5)
-
-/obj/machinery/shipsensors/weak
-	heat_reduction_minimum = 0.2
-	desc = "Miniturized gravity scanner with various other sensors, used to detect irregularities in surrounding space. Can only run in vacuum to protect delicate quantum BS elements."
-
-/obj/machinery/shipsensors/weak/RefreshParts()
-	..()
-	heat_reduction = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), heat_reduction_minimum, 5)
+	heat_reduction = round(total_component_rating_of_type(/obj/item/stock_parts/manipulator) / 3)
 
 /obj/item/stock_parts/circuitboard/shipsensors
 	name = T_BOARD("broad-band sensor suite")
@@ -280,6 +271,3 @@
 	additional_spawn_components = list(
 		/obj/item/stock_parts/power/apc/buildable = 1
 	)
-
-/obj/item/stock_parts/circuitboard/shipsensors/weak
-	build_path = /obj/machinery/shipsensors/weak
