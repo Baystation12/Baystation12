@@ -88,7 +88,7 @@
 /// Final death act handler for the drive where it explodes. You really shouldn't call this directly or you'll make weird broken things regarding health tracking. Use `kill_health()` instead, the death handler calls this.
 /obj/machinery/bluespacedrive/proc/explode()
 	visible_message(SPAN_DANGER(FONT_LARGE("\The [src]'s containment field is wracked by a series of horrendous distortions, buckling and twisting like a living thing before bursting in a flash of light!")))
-	explosion(get_turf(src), -1, 5, 10)
+	explosion(get_turf(src), 15, EX_ACT_HEAVY)
 	empulse(get_turf(src), 7, 14)
 	state |= STATE_BROKEN
 	for (var/verb in verbs)

@@ -115,10 +115,7 @@
 #define WALL_CAN_OPEN 1
 #define WALL_OPENING 2
 
-#define BOMBCAP_DVSTN_RADIUS (config.max_explosion_range / 4)
-#define BOMBCAP_HEAVY_RADIUS (config.max_explosion_range / 2)
-#define BOMBCAP_LIGHT_RADIUS (config.max_explosion_range)
-#define BOMBCAP_FLASH_RADIUS (config.max_explosion_range * 1.5)
+#define BOMBCAP_RADIUS (config.max_explosion_range * 1.75)
 									// NTNet module-configuration values. Do not change these. If you need to add another use larger number (5..6..7 etc)
 #define NTNET_SOFTWAREDOWNLOAD 1 	// Downloads of software from NTNet
 #define NTNET_PEERTOPEER 2			// P2P transfers of files between devices
@@ -305,6 +302,8 @@
 #define EX_ACT_DEVASTATING 1 // Within devastation range - Destructive/deadly, unlikely to survive.
 #define EX_ACT_HEAVY 2 // Within heavy range - Heavy damage, very dangerous
 #define EX_ACT_LIGHT 3 // Within light range - Minor damage.
+
+#define EX_ACT_TO_STRING(X) (X == EX_ACT_DEVASTATING ? "Devastating" : X == EX_ACT_HEAVY ? "Heavy" : "Light")
 
 
 // Atom layering/visibility levels on turfs. See `/atom/var/level`.

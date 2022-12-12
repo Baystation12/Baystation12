@@ -25,14 +25,14 @@
 		distance++
 		if(T.density)
 			if(distance < 7)
-				explosion(T,1,2,3)
+				explosion(T, 6)
 				continue
 			else
 				T.ex_act(EX_ACT_DEVASTATING)
 		for(var/atom/A in T)
 			if(A.density)
 				if(distance < 7)
-					explosion(A,1,2,3)
+					explosion(A, 6)
 					break
 				else
 					A.ex_act(EX_ACT_DEVASTATING)
@@ -73,7 +73,7 @@
 
 	//Some moron disregarded the cooldown warning. Let's blow in their face.
 	if(prob(cool_failchance()))
-		explosion(middle,rand(1,2),rand(2,3),rand(3,4))
+		explosion(middle, rand(6, 9))
 	next_shot = coolinterval + world.time
 
 	//Success, but we missed.

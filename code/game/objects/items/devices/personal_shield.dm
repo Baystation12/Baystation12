@@ -103,7 +103,7 @@
 		power_cell.emp_act(severity)
 		if(shield)
 			visible_message(SPAN_DANGER("\The [src] explodes!"))
-			explosion(src, -1, -1, 1, 2)
+			explosion(src, 1, EX_ACT_LIGHT)
 			qdel(src)
 	..()
 

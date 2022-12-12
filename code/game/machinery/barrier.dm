@@ -155,5 +155,5 @@
 	qdel(src)
 	new /obj/item/stack/material/rods(T, rand(1, 4))
 	new /obj/item/stack/material/steel(T, rand(1, 4))
-	explosion(T, -1, -1, 0)
+	explosion(T, 2, EX_ACT_LIGHT)
 	sparks(3, 1, T)

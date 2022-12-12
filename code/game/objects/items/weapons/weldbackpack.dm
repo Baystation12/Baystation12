@@ -33,7 +33,7 @@
 					SPAN_DANGER("You hold \the [T] up to \the [src], causing an explosion!")
 				)
 				log_and_message_admins("triggered a fueltank explosion.", user)
-				explosion(get_turf(src), -1, 1, 3)
+				explosion(get_turf(src), 4, EX_ACT_HEAVY)
 				if (!QDELETED(src))
 					qdel(src)
 				return
