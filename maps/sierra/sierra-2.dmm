@@ -9804,6 +9804,7 @@
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 1
 	},
+/obj/structure/bed/chair/comfy/blue,
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/cafe)
 "asB" = (
@@ -10362,6 +10363,7 @@
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 5
 	},
+/obj/structure/bed/chair/comfy/blue,
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/cafe)
 "att" = (
@@ -14027,9 +14029,6 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/blue/mono,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/nano)
 "azF" = (
@@ -16357,6 +16356,9 @@
 	},
 /obj/effect/landmark/start{
 	name = "Captain"
+	},
+/obj/structure/bed/chair/office/comfy{
+	dir = 1
 	},
 /turf/simulated/floor/lino,
 /area/bridge/meeting_room)
@@ -28545,7 +28547,9 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/blue/mono,
-/obj/structure/table/steel_reinforced,
+/obj/machinery/computer/modular/preset/cardslot/command{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/nano)
 "bbF" = (
@@ -28557,7 +28561,6 @@
 	icon_state = "console"
 	},
 /obj/effect/floor_decal/corner/blue/mono,
-/obj/structure/window/reinforced,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/nano)
 "bbG" = (
@@ -33217,6 +33220,9 @@
 	},
 /obj/item/storage/candle_box/scented,
 /obj/item/storage/candle_box/scented,
+/obj/structure/bed/chair/comfy/blue{
+	dir = 4
+	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/cafe)
 "eoE" = (
@@ -34247,6 +34253,9 @@
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 4
 	},
+/obj/structure/bed/chair/comfy/blue{
+	dir = 1
+	},
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/cafe)
 "hEA" = (
@@ -34943,6 +34952,9 @@
 /obj/item/device/radio/intercom{
 	pixel_y = 26
 	},
+/obj/structure/bed/chair/comfy/blue{
+	dir = 8
+	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/cafe)
 "jVF" = (
@@ -35111,6 +35123,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/engineering/engineering_monitoring)
+"kqV" = (
+/obj/structure/bed/chair/office/comfy,
+/turf/simulated/floor/lino,
+/area/bridge/meeting_room)
 "kua" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/yellow{
 	dir = 4
@@ -35143,7 +35159,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/game_room)
 "kAj" = (
-/obj/structure/window/reinforced,
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 6
 	},
@@ -35532,9 +35547,6 @@
 /obj/machinery/computer/ship/engines{
 	dir = 8
 	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 5
 	},
@@ -35773,6 +35785,9 @@
 /area/shield/seconddeck)
 "mCE" = (
 /obj/effect/landmark/start,
+/obj/structure/bed/chair/comfy/blue{
+	dir = 8
+	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/cafe)
 "mFm" = (
@@ -36618,6 +36633,9 @@
 	pixel_y = -6;
 	range = 3
 	},
+/obj/structure/bed/chair/comfy/blue{
+	dir = 4
+	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/cafe)
 "pnB" = (
@@ -37013,6 +37031,9 @@
 	pixel_y = 1
 	},
 /obj/effect/landmark/start,
+/obj/structure/bed/chair/comfy/blue{
+	dir = 1
+	},
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/cafe)
 "qel" = (
@@ -37429,6 +37450,12 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head_big)
+"rlk" = (
+/obj/structure/bed/chair/office/comfy{
+	dir = 1
+	},
+/turf/simulated/floor/lino,
+/area/bridge/meeting_room)
 "rmJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -37586,6 +37613,12 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/sleep/cryo)
+"rMC" = (
+/obj/structure/bed/chair/comfy/blue{
+	dir = 8
+	},
+/turf/simulated/floor/carpet/blue2,
+/area/crew_quarters/cafe)
 "rNS" = (
 /obj/structure/hygiene/sink{
 	dir = 1;
@@ -39362,6 +39395,12 @@
 /obj/structure/closet/l3closet/scientist,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/xenobio)
+"wCV" = (
+/obj/structure/bed/chair/comfy/blue{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/blue2,
+/area/crew_quarters/cafe)
 "wEB" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
@@ -48511,11 +48550,11 @@ bjK
 pVD
 lPA
 xWS
-aQS
+kqV
 aRm
 aPT
 bgI
-aQS
+rlk
 bdE
 bev
 aKj
@@ -48713,7 +48752,7 @@ bjL
 rDI
 lPA
 xWS
-aQS
+kqV
 bgr
 bgz
 bgL
@@ -48915,11 +48954,11 @@ llI
 bkr
 lPA
 xWS
-aQS
+kqV
 bgs
 bgA
 bhd
-aQS
+rlk
 bdE
 beF
 aKj
@@ -58799,7 +58838,7 @@ aeY
 oeW
 amq
 enD
-jGl
+wCV
 pmM
 amr
 qak
@@ -59203,7 +59242,7 @@ aMn
 amP
 amq
 jRQ
-jGl
+rMC
 mCE
 jGl
 gOB

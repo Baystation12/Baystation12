@@ -8702,6 +8702,7 @@
 /obj/effect/floor_decal/corner/grey/border{
 	dir = 4
 	},
+/obj/structure/table/standard,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/deckofficer)
 "nP" = (
@@ -10531,9 +10532,6 @@
 "qL" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 1
-	},
-/obj/structure/sign/poster{
-	pixel_y = 30
 	},
 /obj/effect/floor_decal/corner/purple/border{
 	dir = 1
@@ -13930,6 +13928,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/yellow/border,
+/obj/structure/table/steel,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/office)
 "wk" = (
@@ -19278,6 +19277,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/quartermaster/storage)
+"FD" = (
+/obj/effect/wallframe_spawn/no_grille,
+/turf/simulated/wall/prepainted,
+/area/quartermaster/exploration)
 "FE" = (
 /turf/simulated/wall/r_titanium,
 /area/shuttle/petrov/airlock)
@@ -25976,6 +25979,11 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/cell3)
+"QQ" = (
+/obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/no_grille,
+/turf/simulated/floor/plating,
+/area/quartermaster/exploration)
 "QR" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -27794,6 +27802,14 @@
 /obj/effect/floor_decal/techfloor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/quartermaster/expedition/storage)
+"Uu" = (
+/obj/machinery/door/firedoor,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/sign/poster{
+	pixel_y = 30
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/hallway/primary/thirddeck/aft)
 "Uw" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -48820,7 +48836,7 @@ tw
 tw
 tw
 tw
-qK
+Uu
 Sm
 qK
 ES
@@ -49223,7 +49239,7 @@ FZ
 Co
 Cu
 mn
-Kg
+FD
 qL
 sj
 tM
@@ -49627,7 +49643,7 @@ jd
 Gm
 Em
 mu
-gQ
+QQ
 oP
 sl
 Qt

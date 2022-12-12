@@ -8282,6 +8282,11 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/door/airlock/glass/security{
+	id_tag = "BrigFoyer";
+	name = "Storage";
+	req_access = newlist()
+	},
 /turf/simulated/floor/tiled/white,
 /area/security/sierra/forensic/lab)
 "aox" = (
@@ -10075,6 +10080,10 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/machinery/door/airlock/glass/security{
+	name = "Forensics";
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/security/sierra/evidence)
@@ -12980,6 +12989,9 @@
 	icon_state = "2-8"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/airlock/glass/security{
+	req_access = newlist()
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/security/range)
 "ayc" = (
@@ -13066,6 +13078,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
+/obj/machinery/door/airlock/glass/security{
+	id_tag = "forensicswindow";
+	name = "Suits Storage";
+	req_access = newlist()
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/security/sierra/forensic)
 "ayi" = (
@@ -13103,6 +13120,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
+/obj/machinery/door/airlock/glass/security{
+	id_tag = "BrigFoyer";
+	name = "Processings";
+	req_access = newlist()
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/security/sierra/interrogation)
 "ayl" = (
@@ -16066,6 +16088,11 @@
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/red/border,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/airlock/multi_tile/glass/security{
+	dir = 8;
+	name = "Brig";
+	req_access = newlist()
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/security/sierra/hallway/aft)
 "aCM" = (
@@ -16081,6 +16108,11 @@
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/red/border,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/airlock/multi_tile/glass/security{
+	dir = 8;
+	name = "Brig";
+	req_access = newlist()
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/security/sierra/hallway/aft)
 "aCN" = (
@@ -17350,6 +17382,10 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/airlock/glass/security{
+	id_tag = "ge_windows";
+	req_access = newlist()
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/security/sierra/equipment)
 "aEn" = (
@@ -18453,7 +18489,7 @@
 	dir = 8
 	},
 /obj/machinery/button/windowtint{
-	id = "ge_windows";
+	id = "s";
 	pixel_x = 6;
 	pixel_y = 29
 	},
@@ -20965,6 +21001,7 @@
 	name = "HoP Desk's Shutters";
 	opacity = 0
 	},
+/obj/structure/table/standard,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/hop)
 "aJG" = (
@@ -35528,6 +35565,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/security/sierra/interrogation)
 "csN" = (
@@ -35675,6 +35713,30 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/misc_lab)
+"duw" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
+/obj/structure/disposalpipe/segment,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/floor_decal/borderfloor{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/red/border{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/airlock/multi_tile/glass/security{
+	dir = 8;
+	name = "Security door";
+	req_access = newlist()
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/security/sierra/hallway/port)
 "dxt" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -36715,6 +36777,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/security/sierra/interrogation)
 "gOq" = (
@@ -53039,7 +53102,7 @@ ayh
 azG
 aAP
 aCG
-aQM
+duw
 aGj
 aHD
 aJn
