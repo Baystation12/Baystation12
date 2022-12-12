@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Luminol now properly reveals cleaned blood decals, unless they were cleaned
-      with sterilizine.
