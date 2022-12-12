@@ -1005,6 +1005,8 @@
 	amount = 50
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/item/stack/material/plastic/fifty,
+/obj/item/stack/material/aluminium/fifty,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
