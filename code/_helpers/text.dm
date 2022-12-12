@@ -8,6 +8,9 @@
  *			Misc
  */
 
+/proc/format_table_name(table as text)
+	return sqlfdbktableprefix + table
+
 
 /*
  * SQL sanitization

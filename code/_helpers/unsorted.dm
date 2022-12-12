@@ -12,6 +12,13 @@
 //Checks if all high bits in req_mask are set in bitfield
 #define BIT_TEST_ALL(bitfield, req_mask) ((~(bitfield) & (req_mask)) == 0)
 
+//datum may be null, but it does need to be a typed var
+#define NAMEOF(datum, X) (#X || ##datum.##X)
+
+/// Waits at a line of code until X is true
+#define UNTIL(X) while(!(X)) stoplag()
+
+
 //Inverts the colour of an HTML string
 /proc/invertHTML(HTMLstring)
 

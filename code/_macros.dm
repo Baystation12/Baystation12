@@ -148,6 +148,10 @@ var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define QDEL_NULL(x) if(x) { qdel(x) ; x = null }
 
+#define QDEL_LIST_ASSOC(L) if(L) { for(var/I in L) { qdel(L[I]); qdel(I); } L.Cut(); }
+
+#define QDEL_LIST_ASSOC_VAL(L) if(L) { for(var/I in L) qdel(L[I]); L.Cut(); }
+
 #define QDEL_IN(item, time) addtimer(CALLBACK(GLOBAL_PROC, .proc/qdel, item), time, TIMER_STOPPABLE)
 
 #define DROP_NULL(x) if(x) { x.dropInto(loc); x = null; }
@@ -171,6 +175,8 @@ var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 #define SPAN_ITALIC(X) SPAN_CLASS("italic", "[X]")
 
 #define SPAN_BOLD(X) SPAN_CLASS("bold", "[X]")
+
+#define SPAN_BOLDANNOUNCE(X) "<span class='boldannounce'>[X]</span>"
 
 #define SPAN_NOTICE(X) SPAN_CLASS("notice", "[X]")
 

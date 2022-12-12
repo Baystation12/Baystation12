@@ -444,6 +444,11 @@
 
 	var/static/allow_diagonal_movement = FALSE
 
+	/// Timeout (seconds) for async SQL queries
+	var/static/async_sql_query_timeout = 10 SECONDS
+
+	/// Limit of how many SQL threads can run at once
+	var/static/rust_sql_thread_limit = 50
 
 /datum/configuration/New()
 	load_config()
@@ -953,6 +958,14 @@
 				sqlfdbklogin = value
 			if ("feedback_password")
 				sqlfdbkpass = value
+			if("feedback_tableprefix")
+				sqlfdbktableprefix = value
+			if("db_version")
+				db_version = text2num(value)
+			if ("async_sql_query_timeout")
+				async_sql_query_timeout = text2num(value) SECONDS
+			if ("rust_sql_thread_limit")
+				rust_sql_thread_limit = text2num(value)
 			else
 				log_misc("Unknown setting in config/dbconfig.txt: '[name]'")
 
