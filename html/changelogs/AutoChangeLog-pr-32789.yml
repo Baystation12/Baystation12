@@ -1,0 +1,10 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Hand labelers will now skip all other interactions except labeling while
+      turned on. This means they won't toggle locker locks or any other weirdness
+      while also attaching labels. While the labeler is turned off, it will go into
+      containers and behave as usual.
+  - bugfix: Hand labelers will no long turn on if you provide an invalid or empty
+      string as the label text.
+  - rscadd: Added codex mechanics to hand labelers.
