@@ -1,0 +1,4 @@
+author: Spookerton
+delete-after: true
+changes:
+  - bugfix: Shuttles don't add to their power cost every time they change landmarks.
