@@ -166,6 +166,16 @@
 	shuttle_moved(destination, translation)
 	GLOB.shuttle_moved_event.raise_event(src, old_location, destination)
 	destination.shuttle_arrived(src)
+	// + BANDAID
+	// /obj/machinery/proc/area_changed and /proc/translate_turfs cause problems with power cost duplication.
+	var/list/area/retally_areas
+	if (isarea(shuttle_area))
+		retally_areas = list(shuttle_area)
+	else if (islist(shuttle_area))
+		retally_areas = shuttle_area
+	for (var/area/area as anything in retally_areas)
+		area.retally_power()
+	// - BANDAID
 	return TRUE
 
 //just moves the shuttle from A to B, if it can be moved
