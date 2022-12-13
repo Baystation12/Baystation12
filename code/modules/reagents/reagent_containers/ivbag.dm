@@ -77,6 +77,19 @@
 		overlays += image(icon, icon_state = "dongle")
 
 
+/obj/item/reagent_containers/ivbag/MouseDrop(atom/over_atom)
+	if (!usr)
+		return
+	if (!over_atom)
+		return
+	if (!Adjacent(usr) || !over_atom.Adjacent(usr))
+		return
+	if (isliving(over_atom))
+		MouseDrop_T(over_atom, usr)
+	else
+		over_atom.MouseDrop_T(src, usr)
+
+
 /obj/item/reagent_containers/ivbag/MouseDrop_T(atom/dropped, mob/living/user)
 	. = ..()
 	if (.)
