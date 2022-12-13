@@ -11,12 +11,6 @@
 	/// The IV stand is configured to add reagents to the attached mob.
 	var/const/MODE_INJECT = 1
 
-	/// The set of options for the amount of reagents the IV stand will try to transfer per process.
-	var/static/list/allowed_transfer_amounts = list(4, 2, 1, REM, 0)
-
-	/// The configured amount of reagents the IV stand will try to transfer per process.
-	var/transfer_amount = 2
-
 	/// One of the IV stand's MODE_* constants.
 	var/drip_mode = MODE_INJECT
 
@@ -141,7 +135,7 @@
 		return
 	if (SSobj.times_fired & 1)
 		return
-	if (!transfer_amount)
+	if (!iv_bag.transfer_amount)
 		return
 	if (drip_mode == MODE_INJECT)
 		if (!iv_bag.reagents.total_volume)
@@ -152,11 +146,11 @@
 					hearing_distance = 5
 				)
 			return
-		iv_bag.reagents.trans_to_mob(patient, transfer_amount, CHEM_BLOOD)
+		iv_bag.reagents.trans_to_mob(patient, iv_bag.transfer_amount, CHEM_BLOOD)
 		update_icon()
 		return
 	if (drip_mode == MODE_EXTRACT)
-		var/difference = clamp(iv_bag.volume - iv_bag.reagents.total_volume, 0, transfer_amount)
+		var/difference = clamp(iv_bag.volume - iv_bag.reagents.total_volume, 0, iv_bag.transfer_amount)
 		if (!difference)
 			if (prob(15))
 				playsound(src, 'sound/effects/3beep.ogg', 50, TRUE)
@@ -203,18 +197,18 @@
 		return
 	if (patient)
 		to_chat(user, "\The [patient] is hooked up to it.")
-	to_chat(user, {"\
-		It is set to [drip_mode == MODE_INJECT ? "inject" : drip_mode == MODE_EXTRACT ? "extract" : ""] \
-		[transfer_amount]u of fluid per cycle.\
-	"})
 	if (!iv_bag)
 		to_chat(user, "It has no IV bag attached.")
 		return
-	var/volume = iv_bag.reagents.total_volume
+	var/volume = Floor(iv_bag.reagents.total_volume)
 	if (!volume)
 		to_chat(user, "It has an empty [iv_bag] attached.")
 		return
-	to_chat(user, "It has \a [iv_bag] attached with [Floor(volume)] units of liquid inside.")
+	to_chat(user, "It has \a [iv_bag] attached with [volume] units of liquid inside.")
+	to_chat(user, {"\
+		It is set to [drip_mode == MODE_INJECT ? "inject" : drip_mode == MODE_EXTRACT ? "extract" : ""] \
+		[iv_bag.transfer_amount]u of fluid per cycle.\
+	"})
 
 
 /obj/structure/iv_stand/CheckDexterity(mob/living/user)
@@ -289,27 +283,19 @@
 
 
 /obj/structure/iv_stand/verb/TransferAmountVerb()
-	set name = "Set Stand IV Drip Rate"
+	set name = "Set IV Bag Rate"
 	set category = "Object"
 	set src in range(1)
 	var/mob/living/user = usr
 	if (!istype(user))
 		return
 	if (!Adjacent(user) || user.incapacitated())
-		to_chat(usr, SPAN_WARNING("You're in no condition to do that."))
+		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
 		return
-	var/response = input("Set Drip Rate:", "[src]") as null | anything in allowed_transfer_amounts
-	if (isnull(response) || !(response in allowed_transfer_amounts))
+	if (!iv_bag)
+		to_chat(user, SPAN_WARNING("\The [src] does not have an attached IV bag."))
 		return
-	if (!Adjacent(user) || user.incapacitated())
-		to_chat(usr, SPAN_WARNING("You're in no condition to do that."))
-		return
-	user.visible_message(
-		SPAN_ITALIC("\The [user] adjusts the flow rate on \a [src]."),
-		SPAN_ITALIC("You adjust the flow rate on \the [src] to [response]u."),
-		range = 3
-	)
-	transfer_amount = response
+	iv_bag.UpdateTransferAmount(user, src)
 
 
 /obj/structure/iv_stand/verb/RemoveDripVerb()

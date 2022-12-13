@@ -58,7 +58,7 @@
 			message = "two thirds full"
 		else
 			message = "full"
-	to_chat(user, "It has a flow rate of [transfer_amount] and looks [message].")
+	to_chat(user, "It has a flow rate of [transfer_amount]u of fluid per cycle and looks [message].")
 
 
 /obj/item/reagent_containers/ivbag/on_reagent_change()
@@ -207,28 +207,39 @@
 		w_class = ITEM_SIZE_TINY
 
 
+/obj/item/reagent_containers/ivbag/proc/UpdateTransferAmount(mob/living/user, atom/origin)
+	if (!origin.Adjacent(user) || user.incapacitated())
+		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+		return
+	var/title = "[origin]"
+	if (origin != src)
+		title = "[title] - [src]"
+	var/response = input(user, "Set Drip Rate:", title) as null | anything in allowed_transfer_amounts
+	if (isnull(response) || !(response in allowed_transfer_amounts))
+		return
+	if (!origin.Adjacent(user) || user.incapacitated())
+		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+		return
+	user.visible_message(
+		SPAN_ITALIC("\The [user] adjusts the flow rate on \a [origin]'s IV bag."),
+		SPAN_ITALIC("You adjust the flow rate on \the [origin]'s IV bag to [response]u."),
+		range = 1
+	)
+	transfer_amount = response
+
+
 /obj/item/reagent_containers/ivbag/verb/TransferAmountVerb()
-	set name = "Set IV bag drip rate"
+	set name = "Set IV Bag Rate"
 	set category = "Object"
 	set src in usr
 	var/mob/living/user = usr
 	if (!istype(user))
 		return
-	if (!Adjacent(user) || user.incapacitated())
-		to_chat(usr, SPAN_WARNING("You're in no condition to do that."))
-		return
-	var/response = input("Set Drip Rate:", "[src]") as null | anything in allowed_transfer_amounts
-	if (isnull(response) || !(response in allowed_transfer_amounts))
-		return
-	if (!Adjacent(user) || user.incapacitated())
-		to_chat(usr, SPAN_WARNING("You're in no condition to do that."))
-		return
-	user.visible_message(
-		SPAN_ITALIC("\The [user] adjusts the flow rate on \a [src]."),
-		SPAN_ITALIC("You adjust the flow rate on \the [src] to [response]u."),
-		range = 1
-	)
-	transfer_amount = response
+	UpdateTransferAmount(user, src)
+
+
+/obj/item/reagent_containers/ivbag/nanoblood
+	name = "blood pack (Nanoblood)"
 
 
 /obj/item/reagent_containers/ivbag/nanoblood/Initialize()

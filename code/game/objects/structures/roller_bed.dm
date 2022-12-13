@@ -9,12 +9,6 @@
 	/// A shared list of pixel offsets for roller beds to move their buckled mobs by.
 	var/static/list/roller_bed_buckle_pixel_shift = list(0, 0, 6)
 
-	/// The set of options for the amount of reagents the roller bed will try to transfer per process.
-	var/static/list/allowed_transfer_amounts = list(4, 2, 1, REM, 0)
-
-	/// The configured amount of reagents the roller bed will try to transfer per process.
-	var/transfer_amount = 2
-
 	/// The IV bag currently attached to this roller bed, if any.
 	var/obj/item/reagent_containers/ivbag/iv_bag
 
@@ -82,15 +76,15 @@
 		return
 	if (drip_active)
 		to_chat(user, "\The [buckled_mob] is hooked up to it.")
-	to_chat(user, "It is set to inject [transfer_amount]u of fluid per cycle.")
 	if (!iv_bag)
 		to_chat(user, "It has no IV bag attached.")
 		return
-	var/volume = iv_bag.reagents.total_volume
+	var/volume = Floor(iv_bag.reagents.total_volume)
 	if (!volume)
 		to_chat(user, "It has an empty [iv_bag.name] attached.")
 		return
-	to_chat(user, "It has \a [iv_bag] attached with [Floor(volume)] units of liquid inside.")
+	to_chat(user, "It has \a [iv_bag] attached with [volume] units of liquid inside.")
+	to_chat(user, "It is set to inject [iv_bag.transfer_amount]u of fluid per cycle.")
 
 
 /obj/structure/roller_bed/CanPass(atom/movable/movable, turf/target, height, air_group)
@@ -160,7 +154,7 @@
 		return PROCESS_KILL
 	if (SSobj.times_fired & 1)
 		return
-	if (!transfer_amount)
+	if (!iv_bag.transfer_amount)
 		return
 	if (!iv_bag.reagents.total_volume)
 		if (prob(15))
@@ -170,7 +164,7 @@
 				hearing_distance = 5
 			)
 		return
-	iv_bag.reagents.trans_to_mob(buckled_mob, transfer_amount, CHEM_BLOOD)
+	iv_bag.reagents.trans_to_mob(buckled_mob, iv_bag.transfer_amount, CHEM_BLOOD)
 	update_icon()
 
 
@@ -332,27 +326,19 @@
 
 
 /obj/structure/roller_bed/verb/TransferAmountVerb()
-	set name = "Set Bed IV Rate"
+	set name = "Set IV Bag Rate"
 	set category = "Object"
 	set src in range(1)
 	var/mob/living/user = usr
 	if (!istype(user))
 		return
 	if (!Adjacent(user) || user.incapacitated())
-		to_chat(usr, SPAN_WARNING("You're in no condition to do that."))
+		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
 		return
-	var/response = input("Set Drip Rate:", "[src]") as null | anything in allowed_transfer_amounts
-	if (isnull(response) || !(response in allowed_transfer_amounts))
+	if (!iv_bag)
+		to_chat(user, SPAN_WARNING("\The [src] does not have an attached IV bag."))
 		return
-	if (!Adjacent(user) || user.incapacitated())
-		to_chat(usr, SPAN_WARNING("You're in no condition to do that."))
-		return
-	user.visible_message(
-		SPAN_ITALIC("\The [user] adjusts the flow rate on \a [src]."),
-		SPAN_ITALIC("You adjust the flow rate on \the [src] to [response]u."),
-		range = 3
-	)
-	transfer_amount = response
+	iv_bag.UpdateTransferAmount(user, src)
 
 
 /obj/structure/roller_bed/verb/RemoveDripVerb()
