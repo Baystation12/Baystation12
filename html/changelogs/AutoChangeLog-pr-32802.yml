@@ -1,0 +1,4 @@
+author: 10sc
+delete-after: true
+changes:
+  - rscadd: The exoplanetary trash heap no longer gets spawned in walls.
