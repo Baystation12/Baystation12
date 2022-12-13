@@ -1,24 +1,15 @@
 /*
-	MouseDrop:
-
-	Called on the atom you're dragging.  In a lot of circumstances we want to use the
-	recieving object instead, so that's the default action.  This allows you to drag
-	almost anything into a trash can.
+* Called when this atom is drag-dropped onto over_atom with the mouse.
+* atom/ typing of params is convenience-only; refer to https://www.byond.com/docs/ref/#/atom/proc/MouseDrop
 */
-
-
-// Refer to https://www.byond.com/docs/ref/#/atom/proc/MouseDrop
-/atom/MouseDrop(atom/over_atom, atom/source_loc, over_loc, source_control, over_control, list/mouse_params)
+/atom/MouseDrop(atom/over_atom, atom/source_loc, atom/over_loc, source_control, over_control, list/mouse_params)
 	if (!usr)
 		return
 	if (!over_atom)
 		return
-	if (isloc(over_loc)) //Dropping on something in the map.
-		if (!Adjacent(usr) || !over_atom.Adjacent(usr))
-			return
-		over_atom.MouseDrop_T(src, usr)
+	if (!Adjacent(usr) || !over_atom.Adjacent(usr))
 		return
-	// ... other behaviors if required
+	over_atom.MouseDrop_T(src, usr)
 
 
 /**

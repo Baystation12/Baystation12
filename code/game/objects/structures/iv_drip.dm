@@ -79,15 +79,12 @@
 		return
 	if (!over_atom)
 		return
-	if (isloc(over_loc)) //Dropping on something in the map.
-		if (!Adjacent(usr) || !over_atom.Adjacent(usr))
-			return
-		if (isliving(over_atom))
-			MouseDrop_T(over_atom, usr)
-		else
-			over_atom.MouseDrop_T(src, usr)
+	if (!Adjacent(usr) || !over_atom.Adjacent(usr))
 		return
-	..()
+	if (isliving(over_atom))
+		MouseDrop_T(over_atom, usr)
+	else
+		over_atom.MouseDrop_T(src, usr)
 
 
 /obj/structure/iv_stand/MouseDrop_T(atom/dropped, mob/living/user)

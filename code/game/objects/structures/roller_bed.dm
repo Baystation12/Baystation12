@@ -180,23 +180,20 @@
 		..()
 
 
-/obj/structure/roller_bed/MouseDrop(atom/over_atom, source_loc, over_loc)
+/obj/structure/roller_bed/MouseDrop(atom/over_atom)
 	if (!usr)
 		return
 	if (!over_atom)
 		return
-	if (isloc(over_loc)) //Dropping on something in the map.
-		if (!Adjacent(usr) || !over_atom.Adjacent(usr))
-			return
-		if (usr == over_atom && CheckDexterity(usr) || !ismob(over_atom))
-			FoldBed(usr)
-			return
-		if (isliving(over_atom))
-			MouseDrop_T(over_atom, usr)
-		else
-			over_atom.MouseDrop_T(src, usr)
+	if (!Adjacent(usr) || !over_atom.Adjacent(usr))
 		return
-	..()
+	if (usr == over_atom && CheckDexterity(usr) || !ismob(over_atom))
+		FoldBed(usr)
+		return
+	if (isliving(over_atom))
+		MouseDrop_T(over_atom, usr)
+	else
+		over_atom.MouseDrop_T(src, usr)
 
 
 /obj/structure/roller_bed/MouseDrop_T(atom/dropped, mob/living/user)
