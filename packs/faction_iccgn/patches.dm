@@ -1,6 +1,6 @@
 /datum/gear/accessory/iccgn_patch
 	display_name = "ICCGN Patch Selection"
-	description = "Uniform patches of the confederation navy."
+	description = "A selection of Confederation Navy uniform patches."
 	path = /obj/item/clothing/accessory/iccgn_patch
 	flags = GEAR_HAS_SUBTYPE_SELECTION | GEAR_HAS_NO_CUSTOMIZATION
 	allowed_branches = list(
@@ -30,48 +30,48 @@
 
 /obj/item/clothing/accessory/iccgn_patch/gilgamesh
 	name = "uniform patch, Gilgamesh Flotilla"
-	desc = "An embroidered patch with confederation navy iconography. This one indicates that its wearer is part of the Gilgamesh Flotilla."
+	desc = "An embroidered patch with Confederation Navy iconography. This one indicates that its wearer is part of the Gilgamesh Flotilla."
 	icon_state = "gilgamesh"
 	overlay_state = "gilgamesh_worn"
 
 
 /obj/item/clothing/accessory/iccgn_patch/sestris
 	name = "uniform patch, Sestris Flotilla"
-	desc = "An embroidered patch with confederation navy iconography. This one indicates that its wearer is part of the Sestris Flotilla."
+	desc = "An embroidered patch with Confederation Navy iconography. This one indicates that its wearer is part of the Sestris Flotilla."
 	icon_state = "sestris"
 	overlay_state = "sestris_worn"
 
 
 /obj/item/clothing/accessory/iccgn_patch/pioneer
 	name = "uniform patch, Pioneering Corps"
-	desc = "An embroidered patch with confederation navy iconography. This one indicates that its wearer is part of the Pioneering Corps."
+	desc = "An embroidered patch with Confederation Navy iconography. This one indicates that its wearer is part of the Pioneering Corps."
 	icon_state = "pioneer"
 	overlay_state = "pioneer_worn"
 
 
 /obj/item/clothing/accessory/iccgn_patch/ordnance
 	name = "uniform patch, Ordnance Corps"
-	desc = "An embroidered patch with confederation navy iconography. This one indicates that its wearer is part of the Ordnance Corps."
+	desc = "An embroidered patch with Confederation Navy iconography. This one indicates that its wearer is part of the Ordnance Corps."
 	icon_state = "ordnance"
 	overlay_state = "ordnance_worn"
 
 
 /obj/item/clothing/accessory/iccgn_patch/security
 	name = "uniform patch, Internal Security"
-	desc = "An embroidered patch with confederation navy iconography. This one indicates that its wearer is part of the Office of Internal Security."
+	desc = "An embroidered patch with Confederation Navy iconography. This one indicates that its wearer is part of the Office of Internal Security."
 	icon_state = "security"
 	overlay_state = "security_worn"
 
 
 /obj/item/clothing/accessory/iccgn_patch/research
 	name = "uniform patch, Defense Research"
-	desc = "An embroidered patch with confederation navy iconography. This one indicates that its wearer is part of the Office of Defense Research."
+	desc = "An embroidered patch with Confederation Navy iconography. This one indicates that its wearer is part of the Office of Defense Research."
 	icon_state = "research"
 	overlay_state = "research_worn"
 
 
 /obj/item/clothing/accessory/iccgn_patch/guard
 	name = "uniform patch, Colonial Guard"
-	desc = "An embroidered patch with confederation navy iconography. This one indicates that its wearer is part of the Colonial Guard."
+	desc = "An embroidered patch with Confederation Navy iconography. This one indicates that its wearer is part of the Colonial Guard."
 	icon_state = "guard"
 	overlay_state = "guard_worn"
