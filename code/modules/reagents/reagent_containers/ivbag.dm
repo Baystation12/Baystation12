@@ -251,20 +251,16 @@
 	UpdateTransferAmount(user, src)
 
 
-/obj/item/reagent_containers/ivbag/nanoblood
-	name = "blood pack (Nanoblood)"
-
-
 /obj/item/reagent_containers/ivbag/nanoblood/Initialize()
 	. = ..()
 	transfer_amount = REM
 	reagents.add_reagent(/datum/reagent/nanoblood, volume)
+	AddLabel("Nanoblood")
 	UpdateItemSize()
 
 
 /obj/item/reagent_containers/ivbag/blood
 	abstract_type = /obj/item/reagent_containers/ivbag/blood
-	name = "blood pack"
 
 
 /obj/item/reagent_containers/ivbag/blood/Initialize(mapload, blood_type, blood_species)
@@ -276,7 +272,6 @@
 	if (!species)
 		crash_with({"Invalid blood_species supplied to [src]- "[blood_species]""})
 		return INITIALIZE_HINT_QDEL
-	name = "blood pack [blood_type] ([blood_species])"
 	reagents.add_reagent(/datum/reagent/blood, volume, list(
 		"donor" = null,
 		"blood_DNA" = null,
@@ -285,6 +280,7 @@
 		"blood_species" = blood_species,
 		"blood_colour" = species.blood_color
 	))
+	AddLabel("[blood_species] [blood_type]")
 	UpdateItemSize()
 
 
