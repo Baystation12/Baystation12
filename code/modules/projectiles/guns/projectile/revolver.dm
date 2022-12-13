@@ -1,6 +1,6 @@
 /obj/item/gun/projectile/revolver
 	name = "revolver"
-	desc = "The al-Maliki & Mosley Magnum Double Action is a choice revolver for when you absolutely, positively need to put a hole in the other guy."
+	desc = "The al-Maliki & Mosley Magnum Double Action is a choice revolver for when you absolutely, positively need to put a hole in the other guy. You feelin' lucky punk?"
 	icon = 'icons/obj/guns/revolvers.dmi'
 	icon_state = "revolver"
 	item_state = "revolver"
@@ -83,5 +83,5 @@
 	to_chat(user, SPAN_NOTICE("You snip off the toy markings off the [src]."))
 	name = "revolver"
 	icon_state = "revolver"
-	desc += " Someone snipped off the barrel's toy mark. How dastardly."
+	desc += " Someone snipped off the barrel's toy mark. How dastardly, this could get someone shot."
 	return 1
