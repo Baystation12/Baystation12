@@ -1,0 +1,6 @@
+author: The_Spanish_Inquisition
+delete-after: true
+changes:
+  - tweak: edited some of the projectile firearm descriptions and tweaked values slightly.
+  - rscadd: you can now saw the stock off the normal pump action shotgun to make it
+      a riot shotgun! have fun sweeping maint tunnels
