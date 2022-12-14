@@ -1,6 +1,6 @@
 /obj/item/gun/projectile/shotgun/pump
 	name = "shotgun"
-	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys."
+	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys or ship corridors."
 	icon = 'icons/obj/guns/shotguns.dmi'
 	icon_state = "shotgun"
 	item_state = "shotgun"
@@ -82,6 +82,120 @@
 		chambered = AC
 
 	update_icon()
+
+/obj/item/gun/projectile/shotgun/pump/attackby(obj/item/item, mob/living/user)
+	if (type != /obj/item/gun/projectile/shotgun/pump)
+		return ..() // ugly hack for now, /pump needs abstracting
+	. = TRUE
+	var/outcome // if null, ..() - otherwise, true on success
+	if (istype(item, /obj/item/melee/energy))
+		var/obj/item/melee/energy/energy = item
+		outcome = !!energy.active
+		if (outcome)
+			playsound(src, 'sound/weapons/blade1.ogg', 50, TRUE)
+	else if (istype(item, /obj/item/gun/energy/plasmacutter))
+		var/obj/item/gun/energy/plasmacutter/plasmacutter = item
+		if (!plasmacutter.safety_state)
+			playsound(src, 'sound/weapons/plasma_cutter.ogg', 50, TRUE)
+		outcome = plasmacutter.slice(user)
+	else if (istype(item, /obj/item/circular_saw))
+		user.visible_message(
+			SPAN_ITALIC("\The [user] begins to saw the stock off \a [src]."),
+			SPAN_ITALIC("You begin to saw the stock off \the [src].")
+		)
+		playsound(src, 'sound/weapons/circsawhit.ogg', 50, TRUE)
+		var/initial_loc = loc
+		outcome = do_after(user, 5 SECONDS, item, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER)
+		if (initial_loc != loc)
+			to_chat(user, SPAN_WARNING("\The [src] must stay still."))
+			outcome = FALSE
+	if (isnull(outcome))
+		return ..()
+	if (!outcome)
+		return
+	if (!user.unEquip(src))
+		return
+	user.visible_message(
+		SPAN_ITALIC("\The [user] slices the stock off \a [src] with \a [item]."),
+		SPAN_ITALIC("You slice the stock off \the [src] with \the [item].")
+	)
+	var/obj/item/gun/projectile/shotgun/pump/sawn/sawn = new (user.loc)
+	transfer_fingerprints_to(sawn)
+	qdel(src)
+
+/obj/item/gun/projectile/shotgun/pump/sawn
+	name = "riot shotgun"
+	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys or ship corridors. This one's had it's stock cut off."
+	icon = 'icons/obj/guns/shotguns.dmi'
+	icon_state = "riotshotgun"
+	item_state = "riotshotgun"
+	max_shells = 4
+	w_class = ITEM_SIZE_LARGE
+	force = 10
+	obj_flags =  OBJ_FLAG_CONDUCTIBLE
+	slot_flags = SLOT_BELT|SLOT_BACK
+	caliber = CALIBER_SHOTGUN
+	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2)
+	load_method = SINGLE_CASING
+	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
+	handle_casings = HOLD_CASINGS
+	one_hand_penalty = 4
+	bulk = 4
+	var/recentpumpr = 0 // to prevent spammage
+	wielded_item_state = "shotgun-wielded"
+	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
+
+/obj/item/gun/projectile/shotgun/pump/sawn/attack_self(mob/living/user)
+	if(world.time >= recentpump + 10)
+		if(!is_held_twohanded(user))
+			var/fail_chance = user.skill_fail_chance(SKILL_WEAPONS, 90, SKILL_EXPERT, 0.25)
+			var/drop_chance = user.skill_fail_chance(SKILL_WEAPONS, 50, SKILL_EXPERT, 0.5)
+
+			if (!fail_chance)
+				user.visible_message(
+					SPAN_NOTICE("\The [user] racks \the [src] with one hand."),
+					SPAN_NOTICE("You manage to rack \the [src] with one hand.")
+				)
+				pump(user)
+			else if (prob(fail_chance))
+				if (prob(drop_chance) && user.unEquip(src, user.loc))
+					user.visible_message(
+						SPAN_WARNING("\The [user] attempts to rack \the [src], but it falls out of their hands!"),
+						SPAN_WARNING("You attempt to rack \the [src], but it falls out of your hands!")
+					)
+				else
+					user.visible_message(
+						SPAN_WARNING("\The [user] fails to rack \the [src]!"),
+						SPAN_WARNING("You fail to rack \the [src]!")
+					)
+			else
+				user.visible_message(
+					SPAN_NOTICE("\The [user] manages to akwardly rack \the [src] with one hand."),
+					SPAN_NOTICE("You manage to awkwardly rack \the [src] with one hand.")
+				)
+				pump(user)
+
+		else
+			pump(user)
+
+		recentpumpr = world.time
+
+/obj/item/gun/projectile/shotgun/pump/sawn/proc/pumpr(mob/living/user)
+	playsound(user, 'sound/weapons/shotgunpump.ogg', 60, 1)
+
+	if(chambered)//We have a shell in the chamber
+		chambered.dropInto(loc)//Eject casing
+		if(length(chambered.fall_sounds))
+			playsound(loc, pick(chambered.fall_sounds), 50, 1)
+		chambered = null
+
+	if(length(loaded))
+		var/obj/item/ammo_casing/AC = loaded[1] //load next casing.
+		loaded -= AC //Remove casing from loaded list.
+		chambered = AC
+
+	update_icon()
+
 
 /obj/item/gun/projectile/shotgun/pump/combat
 	name = "combat shotgun"
