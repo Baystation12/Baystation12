@@ -24,19 +24,14 @@ jobs:
           key: ${{ runner.os }}-spacemandmm-${{ env.SPACEMAN_DMM_VERSION }}
       - name: Install Dreamchecker
         run:  scripts/install-spaceman-dmm.sh dreamchecker
-      - name: Run Dreamchecker
-        run: ~/dreamchecker
-      - name: Run Failure Webhook
-        env:
-          JOB_STATUS: ${{ job.status }}
-          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-          HOOK_OS_NAME: ${{ runner.os }}
-          WORKFLOW_NAME: ${{ github.workflow }}
-        if: ${{ failure() }}
-        run: |
-          wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
-          chmod +x send.sh
-          ./send.sh failure $WEBHOOK_URL
+      - name: Run dreamchecker
+        id: runDreamchecker
+        run: ~/dreamchecker > ${GITHUB_WORKSPACE}/output-annotations.txt 2>&1
+      - name: Annotate Lints
+        if: failure() && steps.runDreamchecker.outcome == 'failure'
+        uses: yogstation13/DreamAnnotate@v1
+        with:
+          outputFile: output-annotations.txt
   Code:
     runs-on: ubuntu-latest
     steps:
