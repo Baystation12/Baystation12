@@ -142,7 +142,7 @@
 	one_hand_penalty = 4
 	bulk = 4
 	var/recentpumpr = 0 // to prevent spammage
-	wielded_item_state = "shotgun-wielded"
+	wielded_item_state = "rshotgun-wielded"
 	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
 
 /obj/item/gun/projectile/shotgun/pump/sawn/attack_self(mob/living/user)
