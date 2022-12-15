@@ -139,3 +139,28 @@
 	add_field(/datum/report_field/signature, "Подпись", required = 1)
 	add_field(/datum/report_field/text_label/instruction, "Документ имеет юридическую силу исключительно в случае наличия подписи сотрудника, \
 	а также печати Главного Врача, либо любых двух и более печатей действующих на объекте сотрудников командного отдела.")
+
+/datum/computer_file/report/recipient/medical/psionic_registration
+	form_name = "SCG-MED-77"
+	title = "Регистрация Обладателя Псионических Способностей"
+	logo = "\[solcrest\]"
+	available_on_ntnet = TRUE
+
+/datum/computer_file/report/recipient/medical/psionic_registration/generate_fields()
+	..()
+	var/list/med_fields = list()
+	add_field(/datum/report_field/text_label/header, "ГЭК \"Факел\" - Медицинский отдел")
+	add_field(/datum/report_field/people/from_manifest, "Полное имя и звание Медицинского сотрудника, проводившего осмотр", required = 1)
+	add_field(/datum/report_field/people/from_manifest, "Полное имя и звание(при наличии) Обладателя Псионических Способностей", required = 1)
+	add_field(/datum/report_field/simple_text, "Фракция ОПС")
+	add_field(/datum/report_field/simple_text, "Место жительства ОПС")
+	add_field(/datum/report_field/pencode_text, "Школа(ы), которой(ыми) обладает ОПС", required = 1)
+	add_field(/datum/report_field/pencode_text, "Уровень псионических способностей", required = 1)
+	add_field(/datum/report_field/date, "Дата заполнения")
+	add_field(/datum/report_field/time, "Время заполнения")
+	add_field(/datum/report_field/text_label/instruction, "К документу должен быть приложен отчёт сканера псионических способностей или показания лица, проводившего осмотр.")
+	add_field(/datum/report_field/signature, "Подпись ОПС(при возможности)")
+	med_fields += add_field(/datum/report_field/signature, "Подпись Медицинского работника", required = 1)
+	for(var/datum/report_field/field in med_fields)
+		field.set_access(access_edit = access_medical_equip)
+	set_access(list(list(access_chapel_office, access_heads, access_representative, access_cent_creed, access_senadv)), override = 0)
