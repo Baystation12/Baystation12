@@ -41,7 +41,7 @@
 	icon = 'icons/obj/hydroponics_growing.dmi'
 	icon_state = ""
 	pass_flags = PASS_FLAG_TABLE
-	mouse_opacity = 1
+	buckle_sound = null
 
 	var/health = 10
 	var/max_health = 100

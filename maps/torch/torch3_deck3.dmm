@@ -333,7 +333,7 @@
 /turf/simulated/wall/prepainted,
 /area/storage/tools)
 "bh" = (
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
@@ -5659,7 +5659,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos/aux)
 "ls" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/forestarboard)
 "lt" = (

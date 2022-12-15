@@ -3346,7 +3346,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/infirmary)
 "hR" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -3759,7 +3759,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/infirmary)
 "jj" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "jk" = (
@@ -3909,7 +3909,7 @@
 /area/errant_pisces/infirmary)
 "jE" = (
 /obj/structure/table/standard,
-/obj/item/roller,
+/obj/item/roller_bed,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},

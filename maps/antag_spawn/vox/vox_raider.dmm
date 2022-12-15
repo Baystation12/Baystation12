@@ -23,8 +23,9 @@
 /area/map_template/vox_raider)
 "ak" = (
 /obj/item/reagent_containers/ivbag/nanoblood,
-/obj/item/reagent_containers/ivbag/nanoblood,
-/obj/structure/iv_drip,
+/obj/item/reagent_containers/ivbag/blood/vox/oneg,
+/obj/item/reagent_containers/ivbag/blood/vox/oneg,
+/obj/structure/iv_stand,
 /obj/effect/floor_decal/corner/yellow/full,
 /turf/simulated/floor/tiled/freezer{
 	initial_gas = list("nitrogen" = 101.383)
@@ -104,6 +105,8 @@
 /obj/item/storage/firstaid/radiation,
 /obj/item/bodybag/cryobag,
 /obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/blood/vox/oneg,
+/obj/item/reagent_containers/ivbag/blood/vox/oneg,
 /obj/item/storage/firstaid/adv,
 /obj/structure/table/standard,
 /obj/machinery/atmospherics/unary/vent_pump/on{
