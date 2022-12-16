@@ -127,8 +127,8 @@
 	name = "riot shotgun"
 	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys or ship corridors. This one's had it's stock cut off."
 	icon = 'icons/obj/guns/shotguns.dmi'
-	icon_state = "riotshotgun"
-	item_state = "riotshotgun"
+	icon_state = "rshotgun"
+	item_state = "rshotgun"
 	max_shells = 4
 	w_class = ITEM_SIZE_LARGE
 	force = 10
