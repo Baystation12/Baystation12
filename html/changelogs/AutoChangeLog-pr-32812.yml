@@ -1,0 +1,4 @@
+author: The_Spanish_Inquisition
+delete-after: true
+changes:
+  - bugfix: sometimes you just miss more wrong code strings when you add a new shotgun
