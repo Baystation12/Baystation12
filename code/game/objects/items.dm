@@ -152,6 +152,8 @@
 
 /obj/item/ex_act(severity)
 	..()
+	if (health_max)
+		return
 	switch(severity)
 		if(EX_ACT_DEVASTATING)
 			qdel(src)
