@@ -56,8 +56,8 @@
 		return
 
 	//Take damage from bad environment if any
-	adjust_health(-seed.handle_environment(T,T.return_air(),null,1))
-	if(health <= 0)
+	damage_health(seed.handle_environment(T, T.return_air(), null, 1))
+	if(health_dead)
 		return
 
 	//Vine fight!
@@ -66,9 +66,9 @@
 			other.vine_overrun(seed, src)
 
 	//Growing up
-	if(health < max_health)
-		adjust_health(1)
-		if(round(growth_threshold) && !(health % growth_threshold))
+	if(health_damaged())
+		restore_health(1)
+		if(round(growth_threshold) && !(get_current_health() % growth_threshold))
 			update_icon()
 
 	if(is_mature())
@@ -107,14 +107,14 @@
 
 /obj/effect/vine/proc/can_spawn_plant()
 	var/turf/simulated/T = get_turf(src)
-	return parent == src && health == max_health && !plant && istype(T) && !T.CanZPass(src, DOWN)
+	return parent == src && !health_damaged() && !plant && istype(T) && !T.CanZPass(src, DOWN)
 
 /obj/effect/vine/proc/should_sleep()
 	if(buckled_mob) //got a victim to fondle
 		return FALSE
 	if(length(get_neighbors())) //got places to spread to
 		return FALSE
-	if(health < max_health) //got some growth to do
+	if(health_damaged()) //got some growth to do
 		return FALSE
 	if(targets_in_range()) //got someone to grab
 		return FALSE
@@ -155,11 +155,5 @@
 				targets |= M
 	if(targets.len)
 		return targets
-
-/obj/effect/vine/proc/die_off()
-	// Kill off our plant.
-	if(plant) plant.die()
-	wake_neighbors()
-	qdel(src)
 
 #undef NEIGHBOR_REFRESH_TIME

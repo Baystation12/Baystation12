@@ -95,8 +95,8 @@
 	opacity = 0
 	mouse_opacity = 1
 	anchored = TRUE
+	health_max = 25
 
-	var/health = 25
 	var/countdown = 15
 	var/temporary = 1
 	var/mob/living/carbon/captured = null
@@ -108,7 +108,7 @@
 	desc = "An energized net meant to subdue animals."
 
 	anchored = FALSE
-	health = 5
+	health_max = 5
 	temporary = 0
 	min_free_time = 5
 	max_free_time = 10
@@ -134,12 +134,12 @@
 	if(temporary)
 		countdown--
 	if(!captured || captured.buckled != src)
-		health = 0
+		kill_health()
 	if(get_turf(src) != get_turf(captured))  //just in case they somehow teleport around or
 		countdown = 0
 	if(countdown <= 0)
-		health = 0
-	healthcheck()
+		visible_message(SPAN_WARNING("\The [src] fades away!"))
+		qdel(src)
 
 /obj/effect/energy_net/Move()
 	..()
@@ -169,48 +169,30 @@
 		to_chat(M,SPAN_WARNING("You are free of the net!"))
 		reset_plane_and_layer()
 
-/obj/effect/energy_net/proc/healthcheck()
-	if(health <=0)
-		set_density(0)
-		if(countdown <= 0)
-			visible_message(SPAN_WARNING("\The [src] fades away!"))
-		else
-			visible_message(SPAN_DANGER("\The [src] is torn apart!"))
-		qdel(src)
-
-/obj/effect/energy_net/bullet_act(obj/item/projectile/Proj)
-	health -= Proj.get_structure_damage()
-	healthcheck()
-	return 0
-
-/obj/effect/energy_net/ex_act()
-	health = 0
-	healthcheck()
+/obj/effect/energy_net/on_death()
+	visible_message(SPAN_DANGER("\The [src] is torn apart!"))
+	qdel(src)
 
 /obj/effect/energy_net/attack_hand(mob/user)
+	if (user.a_intent != I_HURT)
+		return
 
+	user.visible_message(
+		SPAN_WARNING("\The [user] claws at \the [src]!"),
+		SPAN_WARNING("You claw at \the [src]!")
+	)
 	var/mob/living/carbon/human/H = user
 	if(istype(H))
 		if(H.species.can_shred(H))
 			playsound(src.loc, 'sound/weapons/slash.ogg', 80, 1)
-			health -= rand(10, 20)
+			damage_health(rand(10, 20))
 		else
-			health -= rand(1,3)
+			damage_health(rand(1, 3))
 
 	else if (MUTATION_HULK in user.mutations)
-		health = 0
+		kill_health()
 	else
-		health -= rand(5,8)
-
-	to_chat(H,SPAN_DANGER("You claw at the energy net."))
-
-	healthcheck()
-	return
-
-/obj/effect/energy_net/attackby(obj/item/W as obj, mob/user as mob)
-	health -= W.force
-	healthcheck()
-	..()
+		damage_health(rand(5, 8))
 
 /obj/effect/energy_net/user_unbuckle_mob(mob/user)
 	return escape_net(user)
@@ -220,10 +202,9 @@
 	visible_message(
 		SPAN_WARNING("\The [user] attempts to free themselves from \the [src]!"),
 		SPAN_WARNING("You attempt to free yourself from \the [src]!")
-		)
-	if(do_after(user, rand(min_free_time, max_free_time), src, DO_PUBLIC_UNIQUE, INCAPACITATION_DISABLED))
-		health = 0
-		healthcheck()
-		return 1
+	)
+	if (do_after(user, rand(min_free_time, max_free_time), src, DO_PUBLIC_UNIQUE, INCAPACITATION_DISABLED))
+		kill_health()
+		return TRUE
 	else
-		return 0
+		return FALSE
