@@ -340,7 +340,7 @@
 	. = ..()
 	if (get_max_health())
 		var/damage = P.damage
-		if (istype(src, /obj/structure) || istype(src, /turf/simulated/wall)) // TODO Better conditions for non-structures that want to use structure damage
+		if (istype(src, /obj/structure) || istype(src, /turf/simulated/wall) || istype(src, /obj/machinery)) // TODO Better conditions for non-structures that want to use structure damage
 			damage = P.get_structure_damage()
 		if (!can_damage_health(damage, P.damage_type))
 			return
