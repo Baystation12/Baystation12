@@ -51,7 +51,7 @@
 
 
 /obj/item/storage/firstaid/toxin
-	name = "toxin first aid"
+	name = "toxin first aid kit"
 	desc = "Used to treat when you have a high amount of toxins in your body."
 	icon_state = "fak-toxin-1"
 	item_state = "firstaid-toxin"
@@ -111,7 +111,7 @@
 
 
 /obj/item/storage/firstaid/stab
-	name = "stabilisation first aid"
+	name = "stabilisation first aid kit"
 	desc = "Stocked with medical pouches."
 	icon_state = "fak-multi"
 	item_state = "firstaid-advanced"
