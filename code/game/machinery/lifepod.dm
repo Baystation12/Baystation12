@@ -1,15 +1,3 @@
-#define HATCH_CLOSED		0 //The hatch to the passenger compartment is closed.
-#define HATCH_OPEN			1 //The hatch is opened.
-#define HATCH_LOCKED		2 //The hatch has been locked by the passenger.
-#define HATCH_BROKEN		3 //The hatch was forced open while locked and has been broken, or has been damaged too much.
-
-#define READY 		0 //Lifepod onboard.
-#define LAUNCHED	1 //Lifepod in space.
-#define LANDED		2 //Lifepod landed. Can only occur after LAUNCHED.
-#define FAILURE		3 //Occurs if the lifepod has no mass driver.
-
-#define PODEDGE	TRANSITIONEDGE + 20 //Leave before the border.
-
 /*
 
 For too long, the escape pod debate has plagued us all. Shuttle-based pods are stupid but nobody has successfully implemented object pods.
@@ -21,6 +9,23 @@ I know no God but camel case.
 ~10sc
 
 */
+
+/mob/proc/escapedViaPod(mob/lastLivingForm) //FUNNY PROC TIME! (It is for the end-round data collection.)
+	if(!lastLivingForm)
+		lastLivingForm = src
+
+	var/obj/machinery/lifepod/pod
+
+	if(istype(lastLivingForm.loc, /obj/machinery/lifepod)) //Are they in a lifepod?
+		pod = loc
+
+		if(pod.launchStatus == 0 || 3) //Is the lifepod still onboard or did it fail to launch?
+			return FALSE //You did not escape because the pod did not launch.
+		else
+			return TRUE //You did escape because the pod is in space or landed somewhere.
+
+	else
+		return FALSE //You did not escape... because you're not in a pod.
 
 /obj/machinery/lifepod
 	name = "\improper NT-31B lifepod"
@@ -38,18 +43,30 @@ I know no God but camel case.
 	power_channel = EQUIP
 	active_power_usage = 100 //Power keeps stasis on, nothing else.
 
+	var/hatch = HATCH_CLOSED //Status of the passenger hatch
+
+	var/const/HATCH_CLOSED = 0 //The lifepod is closed.
+	var/const/HATCH_OPEN = 1 //The lifepod is open.
+	var/const/HATCH_LOCKED = 2 //The lifepod has been locked by the passenger.
+	var/const/HATCH_BROKEN = 3 //The lifepod was forced open while locked or damaged too much. It is not usable in this state.
+
+	var/const/PODEDGE = TRANSITIONEDGE + 20 //The distance from the Z-level border in which the lifepod will attempt to land.
 
 	var/atom/movable/storedThing //Whatever is occupying the passenger compartment.
 	var/timeEntered //The time it entered.
 	var/maxSize = MOB_MEDIUM //The max size of a mob that can enter.
-	var/hatch = HATCH_CLOSED //Status of the passenger hatch
 
-	var/list/supplies = list(/obj/item/storage/toolbox/emergency, /obj/item/storage/firstaid/stab) //Supplies that can be ejected (spawned).
+	var/list/supplies = list(/obj/item/storage/toolbox/emergency, /obj/item/storage/firstaid/stab, /obj/item/pickaxe) //Supplies that can be ejected (spawned).
 	var/suppliesEjected = FALSE //Were the supplies already ejected?
 
 	var/obj/machinery/door/blast/launchHatch //The door it gets shot out of.
 	var/obj/machinery/mass_driver/launchDriver //The driver it gets shot from.
-	var/launched = READY //Did it get launched?
+	var/launchStatus = LIFEPOD_READY //Did it get launched?
+
+	var/const/LIFEPOD_READY = 0 //The lifepod is waiting to be launched.
+	var/const/LIFEPOD_LAUNCHED = 1 //The lifepod has been launched and is in space.
+	var/const/LIFEPOD_LANDED = 2 //The lifepod has landed, somewhere.
+	var/const/LIFEPOD_FAILURE = 3 //The lifepod failed to launch due to a mass driver not being present.
 
 	var/datum/gas_mixture/airSupply //The air supply for the lifepod.
 	var/lowAirWarning = FALSE //Have they been warned?
@@ -61,6 +78,7 @@ I know no God but camel case.
 		return
 	var/turf/hatchTurf = get_step(launchDriver, launchDriver.dir)
 	launchHatch = locate(/obj/machinery/door/blast) in hatchTurf
+	launchStatus = LIFEPOD_READY
 
 /obj/machinery/lifepod/proc/processOccupant()
 	var/mob/living/carbon/passenger = storedThing
@@ -89,23 +107,23 @@ I know no God but camel case.
 	thing.forceMove(src)
 	storedThing = thing
 
-	visible_message(SPAN_NOTICE("\The <b>[src]</b> starts up and whirrs as its passenger hatch is closed."))
+	visible_message(SPAN_NOTICE("\The <b>[src]</b> starts up and whirrs as it is closed."))
 	update_use_power(POWER_USE_ACTIVE)
 	timeEntered = world.time
 	hatch = HATCH_CLOSED
 	update_icon()
 
 /obj/machinery/lifepod/proc/exitLifepod()
-	//Open the hatch if closed.
+
 	switch(hatch)
-		if(HATCH_LOCKED)
+		if(HATCH_LOCKED) //Fail if locked.
 			storedThing.visible_message(
 				SPAN_NOTICE("\The [storedThing] pushes the bolted hatch of \the [src] to no avail."),
 				SPAN_NOTICE("You can't open the hatch of \the [src]. Try unlocking or breaking it.")
 			)
 			return
 
-		if(HATCH_CLOSED)
+		if(HATCH_CLOSED) //Open if closed.
 			storedThing.visible_message(
 				SPAN_NOTICE("\The [storedThing] opens the hatch of \the [src]."),
 				SPAN_NOTICE("You open the hatch of \the [src].")
@@ -140,7 +158,7 @@ I know no God but camel case.
 			return
 
 		if(HATCH_BROKEN) //Broken hatches are unusuable.
-			to_chat(user, SPAN_WARNING("\The [src]'s hatch is broken, rendering the lifepod useless."))
+			to_chat(user, SPAN_WARNING("\The [src]'s hatch is broken, rendering it useless."))
 			return
 
 		if(HATCH_CLOSED) //Gotta open the hatch.
@@ -173,22 +191,21 @@ I know no God but camel case.
 
 /obj/machinery/lifepod/proc/launch()
 	if(!launchDriver) //Fail if there's nothing to throw it.
-		launched = FAILURE
+		launchStatus = LIFEPOD_FAILURE
 		visible_message(SPAN_WARNING("\The <b>[src]</b> blares, \"MASS DRIVER NOT DETECTED, LAUNCH FAILURE!\""))
 		return
 
 	if(launchHatch && launchHatch.density) //Start by opening the launch hatch.
 		visible_message(SPAN_NOTICE("\The <b>[src]</b> blares, \"OPENING BLAST DOOR!\""))
-		sleep(5)
 		launchHatch.force_open()
 
 	visible_message(SPAN_NOTICE("\The <b>[src]</b> blares, \"MASS DRIVER ACTIVE! BRACE FOR LAUNCH!\"")) //IT'S HAPPENING.
-	launched = LAUNCHED
+	launchStatus = LIFEPOD_LAUNCHED
 	launchDriver.delayed_drive() //IT HAPPENED.
 
 
 /obj/machinery/lifepod/proc/launchProcess() //For checking the turf and landing
-	if(!istype(loc, /turf/space)) //If you're not in space, stop running.
+	if(!istype(loc, /turf/space)) //If you're not in space, don't try to land.
 		return
 
 	if(y <= PODEDGE || y >= world.maxy-PODEDGE || x <= PODEDGE || x <= world.maxx-PODEDGE) //... manually of course.
@@ -202,25 +219,29 @@ I know no God but camel case.
 
 		var/newZ = null //Set as null because we will sacrifice them to the border if there are no available Zs.
 
-		if(possibleSites.len) //If there are no locations
+		if(possibleSites.len) //If there are no locations, should be rare if not impossible.
 			var/obj/effect/overmap/visitable/targetSite = pick(possibleSites)
 			newZ = pick(targetSite.map_z && prob(40))
 		else
-			return
+			newZ = pick(GLOB.using_map.escape_levels) //Send them to an escape level if nothing else.
+			forceMove(rand(PODEDGE, world.maxx-PODEDGE), rand(PODEDGE, world.maxy-PODEDGE), newZ)
 
-		visible_message(SPAN_WARNING("\The <b>[src]</b> blares, \"SUBDIMENSIONAL PARTICLE ALIGNMENT CONFIRMED! IMPACT SOON!\"")) //Warn them.
+			//Since they are stuck in baby jail, tell them that they can ghost.
+			to_chat(storedThing, FONT_LARGE(SPAN_NOTICE("Your lifepod has directed itself to the designated rescue sector. You may ghost and be counted as alive.")))
+
 
 		var/turf/landingTurf = locate(/turf/simulated/floor) in newZ
 
-		if(!landingTurf)
-			var/turf/emergencyTurf = locate(/turf) in newZ
-			forceMove(emergencyTurf) //Actually get them to their original destination.
-			throw_at(get_step(src, 1), 50, 1) //Sploink them into the target turf.
+		if(!landingTurf) //If you manage to be the unlucky bastard to find an away site with no simulated floors, I feel bad for you.
+			return
+
 		else
+			visible_message(SPAN_WARNING("\The <b>[src]</b> blares, \"DIRECT SUBDIMENSIONAL PARTICLE ALIGNMENT CONFIRMED! IMPACT SOON!\"")) //Warn them.
+			sleep(5)
 			explosion(landingTurf, 6)
 			forceMove(landingTurf) //Just get them there.
 			playsound(loc,'sound/effects/meteorimpact.ogg', 100)
-			launched = LANDED
+			launchStatus = LIFEPOD_LANDED
 
 	else
 		return
@@ -283,7 +304,7 @@ Lock light.
 			to_chat(user, SPAN_WARNING("The hatch is broken, rendering \the [src] inoperable."))
 
 	//Other things to notice.
-	if(launched >= LAUNCHED && launched != FAILURE) //It realistically should be impossible should encounter a lifepod while it is LIFEPOD_LAUNCHED, but just in case.
+	if(launchStatus >= LIFEPOD_LAUNCHED && launchStatus != LIFEPOD_FAILURE) //It realistically should be impossible should encounter a lifepod while it is LIFEPOD_LAUNCHED, but just in case.
 		to_chat(user, SPAN_WARNING("There are significant wear marks on the sails.")) //Trying to not be obvious.
 	if(suppliesEjected)
 		to_chat(user, SPAN_WARNING("The emergency supplies have been ejected.")) //Indicate it's already looted.
@@ -295,7 +316,7 @@ Lock light.
 		to_chat(user, SPAN_NOTICE("The 'MANUAL BOLT' light is flickering."))
 
 /obj/machinery/lifepod/Process()
-	if(launched == LAUNCHED)
+	if(launchStatus == LIFEPOD_LAUNCHED)
 		launchProcess()
 	if(storedThing && iscarbon(storedThing))
 		processOccupant()
