@@ -27,6 +27,10 @@
 
 
 /mob/new_player/proc/new_player_panel(force)
+
+	var/datum/asset/assets = get_asset_datum(/datum/asset/simple/lobby) //Sending pictures to the client
+	assets.send(src)
+
 	if (!force && !SScharacter_setup.initialized)
 		return
 	var/list/output = list()
@@ -42,26 +46,28 @@
 		if (config.lore_url)
 			output += "<a href='byond://?src=\ref[src];show_lore=1'>Lore</a>"
 	output += "<hr>"
-	if (GAME_STATE > RUNLEVEL_LOBBY)
-		output += "<a href='byond://?src=\ref[src];manifest=1'>Manifest</a>"
-	output += "<a href='byond://?src=\ref[src];show_preferences=1'>Options</a>"
-	output += "<hr>"
-	output += "<b>Playing As</b><br>"
-	output += "<a href='byond://?src=\ref[client.prefs];load=1;details=1'>[client.prefs.real_name || "(Random)"]</a><br>"
-	output += client.prefs.job_high ? "[client.prefs.job_high]" : null
-	output += "<hr>"
-	output += "<a href='byond://?src=\ref[src];observe=1'>Join As Observer</a>"
-	if (GAME_STATE > RUNLEVEL_LOBBY)
-		output += "<a href='byond://?src=\ref[src];late_join=1'>Join As Selected</a>"
+	output += "<a href='byond://?src=\ref[src];lobby_setup=1'>Setup Character</A> "
+
+	if(GAME_STATE > RUNLEVEL_LOBBY)
+		output += "<a href='byond://?src=\ref[src];lobby_crew=1'>View the Crew Manifest</A> "
+
+	output += "<a href='byond://?src=\ref[src];lobby_observe=1'>Observe</A> "
+
+	output += "<hr>Current character: <a href='byond://?src=\ref[client.prefs];load=1'><b>[client.prefs.real_name]</b></a>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
+	if(GAME_STATE <= RUNLEVEL_LOBBY)
+		if(ready)
+			output += "<a class='linkOn' href='byond://?src=\ref[src];lobby_ready=1'>Un-Ready</a>"
+		else
+			output += "<a href='byond://?src=\ref[src];lobby_ready=1'>Ready Up</a>"
 	else
-		output += "<a [ready?"class='linkOn'":""] href='byond://?src=\ref[src];ready=[!ready]'>Round Start Join</a>"
-	output += "<hr>"
-	output += "<i>[GLOB.using_map.get_map_info()||"No information available for the current map."]</i>"
+		output += "<a href='byond://?src=\ref[src];lobby_join=1'>Join Game!</A>"
+
 	output += "</div>"
-	panel = new (src, "Welcome","Welcome to [GLOB.using_map.full_name]", 560, 340, src)
+
+	panel = new(src, "Welcome","Welcome to [GLOB.using_map.full_name]", 560, 280, src)
 	panel.set_window_options("can_close=0")
-	panel.set_content(output.Join())
-	panel.open()
+	panel.set_content(JOINTEXT(output))
+//	panel.open() // Пока что просто не открываем, надо будет удалить
 
 
 /mob/new_player/Stat()
@@ -105,13 +111,17 @@
 			stat("Next Continue Vote:", "[max(round(transfer_controller.time_till_transfer_vote() / 600, 1), 0)] minutes")
 
 /mob/new_player/Topic(href, href_list) // This is a full override; does not call parent.
-	if (usr != src)
+	if(usr != src || !client)
 		return TOPIC_NOACTION
-	if (!client)
-		return TOPIC_NOACTION
-	if (href_list["show_preferences"])
+
+	if(href_list["lobby_changelog"])
+		client.changes()
+		return
+
+	if(href_list["lobby_setup"])
 		client.prefs.open_setup_window(src)
 		return 1
+
 	if (href_list["show_wiki"])
 		client.link_url(config.wiki_url, "Wiki", TRUE)
 		return 1
@@ -121,7 +131,13 @@
 	if (href_list["show_lore"])
 		client.link_url(config.lore_url, "Lore", TRUE)
 		return 1
-	if (href_list["ready"])
+
+	if(href_list["lobby_ready"])
+
+		if(GAME_STATE <= RUNLEVEL_LOBBY)
+			ready = !ready
+			client << output(ready, "lobbybrowser:setReadyStatus")
+
 		if(config.minimum_byondacc_age && client.player_age <= config.minimum_byondacc_age)
 			if(!client.discord_id || (client.discord_id && length(client.discord_id) == 32))
 				client.load_player_discord(client)
@@ -129,12 +145,11 @@
 				to_chat(usr, "<span class='warning'>Нажмите 'Привязка Discord' во вкладке 'Special Verbs' для получения инструкций.</span>")
 				return FALSE
 
-		ready = GAME_STATE > RUNLEVEL_LOBBY ? 0 : text2num(href_list["ready"])
 	if (href_list["refresh"])
 		panel.close()
 		new_player_panel()
 
-	if(href_list["observe"])
+	if(href_list["lobby_observe"])
 		if(config.minimum_byondacc_age && client.player_age <= config.minimum_byondacc_age)
 			if(!client.discord_id || (client.discord_id && length(client.discord_id) == 32))
 				client.load_player_discord(client)
@@ -147,7 +162,7 @@
 			return
 
 		if(!config.respawn_delay || client.holder || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
-			if(!client)	return 1
+			if(!client)	return
 			var/mob/observer/ghost/observer = new()
 
 			spawning = 1
@@ -181,9 +196,9 @@
 			observer.key = key
 			qdel(src)
 
-			return 1
+			return
 
-	if(href_list["late_join"])
+	if(href_list["lobby_join"])
 		if(config.minimum_byondacc_age && client.player_age <= config.minimum_byondacc_age)
 			if(!client.discord_id || (client.discord_id && length(client.discord_id) == 32))
 				client.load_player_discord(client)
@@ -201,7 +216,7 @@
 				return
 		LateChoices() //show the latejoin job selection menu
 
-	if(href_list["manifest"])
+	if(href_list["lobby_crew"])
 		ViewManifest()
 
 	if(href_list["SelectedJob"])
@@ -221,7 +236,7 @@
 		if(client)
 			client.prefs.process_link(src, href_list)
 
-	else if(!href_list["late_join"])
+	else if(!href_list["lobby_join"])
 		new_player_panel()
 
 /mob/new_player/proc/AttemptLateSpawn(datum/job/job, spawning_at)
@@ -506,3 +521,8 @@
 	var/singleton/audio/track/track = GLOB.using_map.get_lobby_track(GLOB.using_map.lobby_track.type)
 	sound_to(src, track.get_sound())
 	to_chat(src, track.get_info())
+
+
+/hook/roundstart/proc/update_lobby_browsers()
+	GLOB.using_map.refresh_lobby_browsers()
+	return TRUE

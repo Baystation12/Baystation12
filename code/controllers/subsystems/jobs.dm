@@ -360,8 +360,9 @@ SUBSYSTEM_DEF(jobs)
 	//For ones returning to lobby
 	for(var/mob/new_player/player in unassigned_roundstart)
 		if(player.client.prefs.alternate_option == RETURN_TO_LOBBY)
-			player.ready = 0
+			player.ready = FALSE
 			player.new_player_panel()
+			player.client << output(player.ready, "lobbybrowser:setReadyStatus")
 			unassigned_roundstart -= player
 	return TRUE
 

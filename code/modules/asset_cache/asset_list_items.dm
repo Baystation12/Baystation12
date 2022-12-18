@@ -80,3 +80,9 @@
 		"font-awesome.css"    = file("html/font-awesome/css/all.min.css"),
 		"v4shim.css"          = file("html/font-awesome/css/v4-shims.min.css")
 	)
+
+
+/datum/asset/simple/lobby
+	assets = list(
+		"FixedsysExcelsior3.01Regular.ttf" = 'html/browser/FixedsysExcelsior3.01Regular.ttf',
+	)
