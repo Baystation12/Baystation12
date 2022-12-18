@@ -1071,7 +1071,7 @@
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
 "acr" = (
@@ -1087,7 +1087,7 @@
 "acs" = (
 /obj/structure/catwalk,
 /obj/random/junk,
-/obj/item/roller{
+/obj/item/roller_bed{
 	pixel_y = 16
 	},
 /turf/simulated/floor/plating,
@@ -2806,7 +2806,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/effect/floor_decal/techfloor,
 /obj/effect/floor_decal/techfloor{
 	dir = 1
@@ -2815,7 +2815,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/medical/backstorage)
 "afJ" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
@@ -3300,7 +3300,7 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery/second)
 "agH" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/item/device/radio/intercom{
 	pixel_y = 26
 	},
@@ -3712,7 +3712,7 @@
 /area/medical/surgery)
 "aho" = (
 /obj/effect/floor_decal/floordetail/edgedrain,
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/machinery/body_scan_display{
 	pixel_y = -28
 	},
@@ -4625,7 +4625,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "aiY" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/paleblue/border,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -5477,7 +5477,7 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "akm" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/machinery/alarm{
 	dir = 8;
 	pixel_x = 24
@@ -7910,16 +7910,16 @@
 "anT" = (
 /obj/machinery/light/small,
 /obj/structure/table/rack,
-/obj/item/roller{
+/obj/item/roller_bed{
 	pixel_y = 6
 	},
-/obj/item/roller{
+/obj/item/roller_bed{
 	pixel_y = 4
 	},
-/obj/item/roller{
+/obj/item/roller_bed{
 	pixel_y = 2
 	},
-/obj/item/roller,
+/obj/item/roller_bed,
 /obj/machinery/alarm{
 	dir = 4;
 	pixel_x = -24
@@ -8796,7 +8796,7 @@
 /turf/simulated/floor/tiled/white,
 /area/hallway/infirmary)
 "api" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/structure/hygiene/sink{
 	dir = 1;
 	pixel_y = 27
@@ -33561,7 +33561,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftport)
 "bfT" = (
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftport)
 "bfU" = (
@@ -35619,7 +35619,7 @@
 /obj/machinery/body_scan_display{
 	pixel_y = 24
 	},
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
 	},
@@ -36116,7 +36116,7 @@
 /turf/simulated/floor/greengrid,
 /area/turret_protected/ai)
 "eQs" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
@@ -37263,13 +37263,13 @@
 "icV" = (
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/structure/table/reinforced,
-/obj/item/roller{
+/obj/item/roller_bed{
 	pixel_y = 7
 	},
-/obj/item/roller{
+/obj/item/roller_bed{
 	pixel_y = 4
 	},
-/obj/item/roller,
+/obj/item/roller_bed,
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = -24

@@ -5162,7 +5162,7 @@
 /area/maintenance/seconddeck/forestarboard)
 "akc" = (
 /obj/random/trash,
-/obj/item/roller{
+/obj/item/roller_bed{
 	pixel_y = 16
 	},
 /obj/random/medical,
@@ -11928,8 +11928,8 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/bed/roller/ironingboard,
-/obj/item/ironingiron,
+/obj/random/ironing_board_structure,
+/obj/item/ironing_iron,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head_big)
 "awk" = (
@@ -19253,7 +19253,7 @@
 /obj/structure/table/standard,
 /obj/item/storage/box/detergent,
 /obj/item/storage/box/detergent,
-/obj/item/ironingiron,
+/obj/item/ironing_iron,
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
@@ -21920,7 +21920,7 @@
 	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/bed/roller/ironingboard,
+/obj/random/ironing_board_structure,
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 24
@@ -22877,7 +22877,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/obj/structure/bed/roller/ironingboard,
+/obj/random/ironing_board_structure,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -32315,8 +32315,8 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/bed/roller/ironingboard,
-/obj/item/ironingiron,
+/obj/random/ironing_board_structure,
+/obj/item/ironing_iron,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head_big)
 "byN" = (

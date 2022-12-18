@@ -942,7 +942,7 @@
 /turf/simulated/floor/tiled,
 /area/command/bsa)
 "ce" = (
-/obj/machinery/shipsensors/weak,
+/obj/machinery/shipsensors,
 /obj/structure/cable/cyan{
 	d1 = 2;
 	d2 = 4;
@@ -6965,7 +6965,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/hangar)
 "lz" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /turf/simulated/floor/plating,
 /area/vacant/infirmary)
 "lA" = (
@@ -12474,8 +12474,8 @@
 /obj/structure/closet/crate/plastic,
 /obj/effect/decal/cleanable/cobweb2,
 /obj/item/bodybag,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
 /turf/simulated/floor/plating,
 /area/vacant/infirmary)
 "tO" = (
@@ -14983,8 +14983,8 @@
 /obj/item/bodybag/cryobag,
 /obj/item/bodybag/rescue/loaded,
 /obj/item/bodybag/rescue/loaded,
-/obj/item/roller,
-/obj/item/roller,
+/obj/item/roller_bed,
+/obj/item/roller_bed,
 /obj/item/auto_cpr,
 /obj/item/storage/box/freezer,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -20745,8 +20745,8 @@
 /obj/item/contraband/poster,
 /obj/item/device/paicard,
 /obj/item/device/paicard,
-/obj/item/roller/ironingboard,
-/obj/item/ironingiron,
+/obj/random/ironing_board_item,
+/obj/item/ironing_iron,
 /obj/item/device/toner,
 /obj/structure/closet/crate,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -21131,8 +21131,8 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aft)
 "IB" = (
-/obj/structure/bed/roller,
-/obj/structure/iv_drip,
+/obj/structure/roller_bed,
+/obj/structure/iv_stand,
 /obj/effect/floor_decal/borderfloor{
 	color = null;
 	dir = 9
@@ -29834,7 +29834,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
 "Zj" = (
-/obj/machinery/shipsensors/weak,
+/obj/machinery/shipsensors,
 /obj/structure/railing/mapped{
 	dir = 8
 	},
