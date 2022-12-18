@@ -10,14 +10,11 @@ I know no God but camel case.
 
 */
 
-/mob/proc/escapedViaPod(mob/lastLivingForm) //FUNNY PROC TIME! (It is for the end-round data collection.)
-	if(!lastLivingForm)
-		lastLivingForm = src
-
+/proc/escapedViaPod(mob/sample) //FUNNY PROC TIME! (It is for the end-round data collection.)
 	var/obj/machinery/lifepod/pod
 
-	if(istype(lastLivingForm.loc, /obj/machinery/lifepod)) //Are they in a lifepod?
-		pod = loc
+	if(istype(sample.loc, /obj/machinery/lifepod)) //Are they in a lifepod?
+		pod = sample.loc
 
 		if(pod.launchStatus == 0 || 3) //Is the lifepod still onboard or did it fail to launch?
 			return FALSE //You did not escape because the pod did not launch.
@@ -38,10 +35,6 @@ I know no God but camel case.
 	machine_desc = "An NT-31B model lifepod with licensed Vey-Med stasis technology and a patented oxygen AND nitrogen candle. It utilizes \
 	old-school subdimensional particle navigation in combination with high-velocity launch to violently land at any nearby physical entity. \
 	It also has an internal radioisotope thermoelectric generator that produces just enough power to sustain the pod and open its blast door."
-	construct_state = /singleton/machine_construction/default/panel_closed
-	uncreated_component_parts = null
-	power_channel = EQUIP
-	active_power_usage = 100 //Power keeps stasis on, nothing else.
 
 	var/hatch = HATCH_CLOSED //Status of the passenger hatch
 
@@ -54,6 +47,7 @@ I know no God but camel case.
 
 	var/atom/movable/storedThing //Whatever is occupying the passenger compartment.
 	var/timeEntered //The time it entered.
+	var/timeRadiated //You think you can just sit next to an RTG and not be mildly green?
 	var/maxSize = MOB_MEDIUM //The max size of a mob that can enter.
 
 	var/list/supplies = list(/obj/item/storage/toolbox/emergency, /obj/item/storage/firstaid/stab, /obj/item/pickaxe) //Supplies that can be ejected (spawned).
@@ -69,12 +63,31 @@ I know no God but camel case.
 	var/const/LIFEPOD_FAILURE = 3 //The lifepod failed to launch due to a mass driver not being present.
 
 	var/datum/gas_mixture/airSupply //The air supply for the lifepod.
-	var/lowAirWarning = FALSE //Have they been warned?
+	var/lastAirWarningTime //When was the last time they got warned about air pressure?
+
+//This thing talks so much as I might as well give it its own proc to do so efficiently and in a cool way.
+/obj/machinery/lifepod/proc/microphone(message, danger = 0, emote)
+	if(!emote)
+		switch(danger)
+			if(0)
+				emote = pick("beeps", "buzzes", "blips", "coldly states", "chimes")
+			if(1)
+				emote = pick("urgently beeps", "loudly buzzes", "violently beeps", "loudly states", "rings")
+			if(2)
+				emote = pick("blares", "earsplittingly blips", "coldly screams")
+
+	switch(danger)
+		if(0)
+			return visible_message(SPAN_NOTICE("\The <b>[src]</b> [emote], \"[message]\""))
+		if(1)
+			return visible_message(SPAN_WARNING("\The <b>[src]</b> [emote], \"[message]\""))
+		if(2)
+			return visible_message(SPAN_DANGER("\The [src] [emote], \"[message]\""))
 
 /obj/machinery/lifepod/proc/linkLaunchSystems() //This can actually be done with a multitool ingame.
 	launchDriver = locate(/obj/machinery/mass_driver) in loc //Get the mass driver
 	if(!launchDriver) //If there is no mass driver, don't bother.
-		visible_message(SPAN_WARNING("\The <b>[src]</b> beeps, \"Unable to connect to external launch systems.\""))
+		microphone("Unable to connect to external launch systems.", 1)
 		return
 	var/turf/hatchTurf = get_step(launchDriver, launchDriver.dir)
 	launchHatch = locate(/obj/machinery/door/blast) in hatchTurf
@@ -83,14 +96,20 @@ I know no God but camel case.
 /obj/machinery/lifepod/proc/processOccupant()
 	var/mob/living/carbon/passenger = storedThing
 	if(powered())
-		var/stasisPower = min((world.time - timeEntered) * 0.01, 2) //Slowly increasing stasis
-		passenger.SetStasis(stasisPower)
+		var/stasisPower = round((world.time-timeEntered)*0.1) //Slowly increase.
 
-	if(airSupply && !lowAirWarning && airSupply.return_pressure() < ONE_ATMOSPHERE * 0.8) //Scream at them that they have low air.
-		visible_message(SPAN_NOTICE("\The <b>[src]</b> blares, \"LOW AIR LEVELS DETECTED!\""))
-		lowAirWarning = TRUE
-		if(airSupply.return_pressure() < ONE_ATMOSPHERE * 0.75) //Toggle environmental succ, pray person knows what they're doing.
-			visible_message(SPAN_NOTICE("\The <b>[src]</b> blares, \"HAZARDOUS AIR LEVELS DETECTED! TOGGLING EXTERNAL VENTS! BRACE FOR ENVIRONMENTAL EXPOSURE!\""))
+		if(stasisPower)
+			passenger.SetStasis(stasisPower)
+
+		if(world.time - timeRadiated >= 10 MINUTES) //Very slow radiation poisoning.
+			passenger.apply_radiation(1)
+			microphone("Minor generator-sourced radiation emission detected.", 1)
+
+	if(airSupply && airSupply.return_pressure() < ONE_ATMOSPHERE * 0.8 && (world.time - lastAirWarningTime) >= 1 MINUTE) //Scream at them that they have low air.
+		microphone("LOW AIR LEVELS DETECTED!", 1)
+		lastAirWarningTime = world.time
+		if(airSupply.return_pressure() < ONE_ATMOSPHERE * 0.75 && !istype(loc, /turf/space)) //Toggle environmental succ, pray person knows what they're doing.
+			microphone("HAZARDOUS AIR LEVELS DETECTED! TOGGLING EXTERNAL VENTS! BRACE FOR ENVIRONMENTAL EXPOSURE!", 2)
 			airSupply = null
 			qdel(airSupply) //We won't be needing this anymore. Single usage because this is an emergency thing.
 
@@ -108,28 +127,13 @@ I know no God but camel case.
 	storedThing = thing
 
 	visible_message(SPAN_NOTICE("\The <b>[src]</b> starts up and whirrs as it is closed."))
-	update_use_power(POWER_USE_ACTIVE)
 	timeEntered = world.time
 	hatch = HATCH_CLOSED
 	update_icon()
 
 /obj/machinery/lifepod/proc/exitLifepod()
 
-	switch(hatch)
-		if(HATCH_LOCKED) //Fail if locked.
-			storedThing.visible_message(
-				SPAN_NOTICE("\The [storedThing] pushes the bolted hatch of \the [src] to no avail."),
-				SPAN_NOTICE("You can't open the hatch of \the [src]. Try unlocking or breaking it.")
-			)
-			return
 
-		if(HATCH_CLOSED) //Open if closed.
-			storedThing.visible_message(
-				SPAN_NOTICE("\The [storedThing] opens the hatch of \the [src]."),
-				SPAN_NOTICE("You open the hatch of \the [src].")
-			)
-			hatch = HATCH_OPEN
-			update_icon()
 
 	//Reset their sight and such.
 	if(ismob(storedThing))
@@ -137,17 +141,42 @@ I know no God but camel case.
 
 		if(mobThing.client)
 			mobThing.client.perspective = mobThing.client.mob
-			mobThing.client.eye = EYE_PERSPECTIVE
+			mobThing.client.eye = MOB_PERSPECTIVE
 
 	storedThing.dropInto(loc) //Physically throw them back into the world.
 	storedThing = null //Now nothing is inside.
 
+/obj/machinery/lifepod/proc/attemptExit(mob/user)
+	var/voluntary = FALSE
+	if(!user) //Assume people take themselves out of the lifepod if not told otherwise.
+		user = storedThing
+	if(storedThing == user)
+		voluntary = TRUE
+
+	switch(hatch)
+		if(HATCH_LOCKED) //Fail if locked.
+			storedThing.visible_message(
+				SPAN_WARNING("[voluntary ? "Something pushes the bolted hatch from the inside" : "\The [user] pulls on the bolted hatch"] of \the [src] to no avail."),
+				SPAN_WARNING("You can't open the hatch of \the [src]. Try unlocking or breaking it.")
+			)
+			return
+
+		if(HATCH_CLOSED) //Open if closed.
+			storedThing.visible_message(
+				SPAN_NOTICE("\The [user] opens the hatch of \the [src]."),
+				SPAN_NOTICE("You open the hatch of \the [src].")
+			)
+			hatch = HATCH_OPEN
+			update_icon()
+
+	exitLifepod()
+
 /obj/machinery/lifepod/proc/attemptEnter(atom/movable/target, mob/user)
-	if(target.anchored) return //No more ladders in lifepods.
+	if(!ismovable(target) || target.anchored) return //No more ladders in lifepods.
 
 	add_fingerprint(user)
 	var/voluntary = FALSE
-	if(!user) //Assume people put themselves in the lifepod if not told otherwise
+	if(!user) //Assume people put themselves in the lifepod if not told otherwise.
 		user = target
 	if(target == user)
 		voluntary = TRUE
@@ -192,15 +221,19 @@ I know no God but camel case.
 /obj/machinery/lifepod/proc/launch()
 	if(!launchDriver) //Fail if there's nothing to throw it.
 		launchStatus = LIFEPOD_FAILURE
-		visible_message(SPAN_WARNING("\The <b>[src]</b> blares, \"MASS DRIVER NOT DETECTED, LAUNCH FAILURE!\""))
+		microphone("MASS DRIVER NOT DETECTED, LAUNCH FAILURE!", 2)
 		return
 
 	if(launchHatch && launchHatch.density) //Start by opening the launch hatch.
-		visible_message(SPAN_NOTICE("\The <b>[src]</b> blares, \"OPENING BLAST DOOR!\""))
+		microphone("OPENING BLAST DOOR! ANCHORING MAGNETS POWERED!", 1)
+		anchored = TRUE //temporarily anchor us to account for atmos
 		launchHatch.force_open()
+		sleep(5 SECONDS)
+		microphone("Anchoring magnets disabled.", 0)
+		anchored = FALSE //Get ready to get thrown.
 
-	visible_message(SPAN_NOTICE("\The <b>[src]</b> blares, \"MASS DRIVER ACTIVE! BRACE FOR LAUNCH!\"")) //IT'S HAPPENING.
-	launchStatus = LIFEPOD_LAUNCHED
+	microphone("MASS DRIVER ACTIVE! BRACE FOR LAUNCH!", 1) //IT'S HAPPENING.
+	launchStatus = LIFEPOD_LAUNCHED //Even is the mass driver isn't powered, pretend you still launched.
 	launchDriver.delayed_drive() //IT HAPPENED.
 
 
@@ -236,7 +269,7 @@ I know no God but camel case.
 			return
 
 		else
-			visible_message(SPAN_WARNING("\The <b>[src]</b> blares, \"DIRECT SUBDIMENSIONAL PARTICLE ALIGNMENT CONFIRMED! IMPACT SOON!\"")) //Warn them.
+			microphone("DIRECT SUBDIMENSIONAL PARTICLE ALIGNMENT CONFIRMED! IMPACT SOON!", 2) //Warn them.
 			sleep(5)
 			explosion(landingTurf, 6)
 			forceMove(landingTurf) //Just get them there.
@@ -247,8 +280,8 @@ I know no God but camel case.
 		return
 
 /obj/machinery/lifepod/verb/ejectSupplies() //Spawn your supplies!
-	set name = "Open lifepod supply hatch"
-	set category = "Object"
+	set name = "Eject emergency supplies"
+	set category = "Lifepod"
 	set src in oview(1)
 
 	usr.visible_message(
@@ -264,6 +297,23 @@ I know no God but camel case.
 		suppliesEjected = TRUE
 	else
 		to_chat(usr, SPAN_WARNING("\The [src]'s ejection cord does nothing."))
+
+/obj/machinery/lifepod/verb/lockHatch()
+	set name = "Toggle lock"
+	set category = "Lifepod"
+	set src in range(0)
+
+	switch(hatch)
+		if(HATCH_LOCKED)
+			hatch = HATCH_CLOSED
+			to_chat(storedThing, SPAN_NOTICE("You unlock \the [src]."))
+			playsound(loc,'sound/machines/BoltsDown.ogg', 50) //Using old door noises for nostalgia points.
+		if(HATCH_CLOSED)
+			hatch = HATCH_LOCKED
+			to_chat(storedThing, SPAN_NOTICE("You lock \the [src]."))
+			playsound(loc,'sound/machines/BoltsUp.ogg', 50) //Using old door noises for nostalgia points.
+
+	update_icon()
 
 /obj/machinery/lifepod/Initialize(populate_parts = TRUE)
 	. = ..()
@@ -296,11 +346,11 @@ Lock light.
 			if(storedThing && user.Adjacent(src)) //You'd also need to be close to see it.
 				to_chat(user, SPAN_NOTICE("\The [storedThing] is inside the passenger compartment."))
 
-		if(HATCH_CLOSED || HATCH_LOCKED)
+		if(HATCH_CLOSED, HATCH_LOCKED)
 			if(storedThing && user.Adjacent(src)) //You'd ALSO need to be close to see it.
 				to_chat(user, SPAN_WARNING("Something is inside the passenger compartment."))
 
-		if(HATCH_BROKEN)
+		if(HATCH_BROKEN) //Tell them it is broken.
 			to_chat(user, SPAN_WARNING("The hatch is broken, rendering \the [src] inoperable."))
 
 	//Other things to notice.
@@ -310,7 +360,7 @@ Lock light.
 		to_chat(user, SPAN_WARNING("The emergency supplies have been ejected.")) //Indicate it's already looted.
 
 	//Lights. Can be visually added later.
-	if((launchHatch || launchDriver) && user.Adjacent(src)) //You'd need to be close to see it.
+	if(launchDriver && user.Adjacent(src)) //You'd need to be close to see it.
 		to_chat(user, SPAN_NOTICE("The 'EXT-LAUNCH-SYS CONNECTION' light is flickering.")) //Don't pull the launch lever unless you want to vent something.
 	if(hatch == HATCH_LOCKED)
 		to_chat(user, SPAN_NOTICE("The 'MANUAL BOLT' light is flickering."))
@@ -327,12 +377,12 @@ Lock light.
 	else
 		return loc.return_air()
 
-/obj/machinery/lifepod/MouseDrop_T(atom/movable/target, mob/user)
+/obj/machinery/lifepod/MouseDrop_T(atom/movable/target, mob/user) //Throwing them in.
 	attemptEnter(target, user)
 
 /obj/machinery/lifepod/physical_attack_hand(mob/user)
 	if(user == storedThing) //If you are inside, get out.
-		exitLifepod()
+		attemptExit()
 		return
 
 	switch(hatch)
