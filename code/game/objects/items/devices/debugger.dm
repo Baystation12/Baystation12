@@ -32,7 +32,7 @@
 		return 1
 	if(istype(O, /obj/machinery/door))
 		var/obj/machinery/door/D = O
-		if(D.operating == -1)
+		if (D.operating == DOOR_OPERATING_BROKEN)
 			to_chat(user, SPAN_WARNING("There is a software error with the device."))
 		else
 			to_chat(user, SPAN_NOTICE("The device's software appears to be fine."))
