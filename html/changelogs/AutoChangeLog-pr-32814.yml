@@ -1,0 +1,8 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Attacking energy nets with your bare hands or melee weapons now requires
+      you to be on harm intent.
+  - tweak: You can now damage doors that are open.
+  - bugfix: Items and machinery that use standardize health will no longer delete
+      themselves from explosions if the explosion didn't kill them.
