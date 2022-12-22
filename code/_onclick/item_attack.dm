@@ -64,7 +64,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if (user.a_intent == I_HURT && get_max_health() && !(W.item_flags & ITEM_FLAG_NO_BLUDGEON))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
-		if (!can_damage_health(W.force, W.damtype))
+		var/damage_flags = W.damage_flags()
+		if (!can_damage_health(W.force, W.damtype, damage_flags))
 			playsound(src, damage_hitsound, 50)
 			user.visible_message(
 				SPAN_WARNING("\The [user] hits \the [src] with \a [W], but it bounces off!"),
@@ -76,7 +77,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 			SPAN_DANGER("\The [user] hits \the [src] with \a [W]!"),
 			SPAN_DANGER("You hit \the [src] with \the [W]!")
 		)
-		damage_health(W.force, W.damtype, skip_can_damage_check = TRUE)
+		damage_health(W.force, W.damtype, damage_flags, skip_can_damage_check = TRUE)
 		return TRUE
 	return FALSE
 

@@ -91,7 +91,7 @@
  * Should be called before `damage_health()` in most cases.
  * Returns `null` if health is not in use.
  */
-/atom/proc/can_damage_health(damage, damage_type = null)
+/atom/proc/can_damage_health(damage, damage_type = null, damage_flags = EMPTY_BITFIELD)
 	SHOULD_CALL_PARENT(TRUE)
 	if (!health_max)
 		return
@@ -168,7 +168,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if (!health_max)
 		return
-	if (!skip_can_damage_check && !can_damage_health(damage, damage_type))
+	if (!skip_can_damage_check && !can_damage_health(damage, damage_type, damage_flags))
 		return FALSE
 
 	// Apply resistance/weakness modifiers

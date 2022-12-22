@@ -285,10 +285,10 @@
 		var/damage = P.damage
 		if (istype(src, /obj/structure) || istype(src, /turf/simulated/wall) || istype(src, /obj/machinery)) // TODO Better conditions for non-structures that want to use structure damage
 			damage = P.get_structure_damage()
-		if (!can_damage_health(damage, P.damage_type))
+		if (!can_damage_health(damage, P.damage_type, P.damage_flags))
 			return
 		playsound(src, damage_hitsound, 75)
-		damage_health(damage, P.damage_type, skip_can_damage_check = TRUE)
+		damage_health(damage, P.damage_type, P.damage_flags, skip_can_damage_check = TRUE)
 
 /**
  * Determines whether or not the atom is in the contents of the container or an instance of container if provided as a
