@@ -98,12 +98,8 @@
 		return
 
 	for (var/obj/machinery/door/D in T)
-		if (D.density)
-			if (MACHINE_IS_BROKEN(D))
-				D.open(TRUE)
-				return
-			playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
-			D.take_damage(damage)
+		if (D.density && MACHINE_IS_BROKEN(D))
+			D.open(TRUE)
 			return
 
 	var/obj/structure/foamedmetal/F = locate() in T

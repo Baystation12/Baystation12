@@ -186,8 +186,8 @@
 	if (operating == DOOR_OPERATING_YES)
 		return
 
-	if (check_force(I, user))
-		return
+	if (user.a_intent == I_HURT)
+		return ..()
 
 	src.add_fingerprint(user)
 	if (!src.requiresID())

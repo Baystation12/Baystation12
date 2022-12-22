@@ -5,17 +5,11 @@
 
 	var/material/material
 	var/icon_base
-	hitsound = 'sound/weapons/genhit.ogg'
+	damage_hitsound = 'sound/weapons/genhit.ogg'
 	var/datum/lock/lock
 	var/initial_lock_value //for mapping purposes. Basically if this value is set, it sets the lock to this value.
 	autoset_access = FALSE // Doesn't even use access
 	pry_mod = 0.1
-
-/obj/machinery/door/unpowered/simple/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	TemperatureAct(exposed_temperature)
-
-/obj/machinery/door/unpowered/simple/proc/TemperatureAct(temperature)
-	take_damage(100*material.combustion_effect(get_turf(src),temperature, 0.3))
 
 /obj/machinery/door/unpowered/simple/New(newloc, material_name, locked)
 	..()
@@ -24,11 +18,10 @@
 	material = SSmaterials.get_material_by_name(material_name)
 	if(!material)
 		return INITIALIZE_HINT_QDEL
-	maxhealth = max(100, material.integrity*2)
-	health = maxhealth
+	set_max_health(max(100, material.integrity * 2))
 	if(!icon_base)
 		icon_base = material.door_icon_base
-	hitsound = material.hitsound
+	damage_hitsound = material.hitsound
 	name = "[material.display_name] door"
 	color = material.icon_colour
 	if(initial_lock_value)
@@ -58,12 +51,6 @@
 
 /obj/machinery/door/unpowered/simple/get_material_name()
 	return material.name
-
-/obj/machinery/door/unpowered/simple/bullet_act(obj/item/projectile/Proj)
-	var/damage = Proj.get_structure_damage()
-	if(damage)
-		//cap projectile damage so that there's still a minimum number of hits required to break the door
-		take_damage(min(damage, 100))
 
 /obj/machinery/door/unpowered/simple/on_update_icon()
 	update_dir()
@@ -120,22 +107,12 @@
 		if(Adjacent(user)) //not remotely though
 			return attack_hand(user)
 
-/obj/machinery/door/unpowered/simple/ex_act(severity)
-	switch(severity)
-		if(EX_ACT_DEVASTATING)
-			set_broken(TRUE)
-		if(EX_ACT_HEAVY)
-			if(prob(25))
-				set_broken(TRUE)
-			else
-				take_damage(300)
-		if(EX_ACT_LIGHT)
-			if(prob(20))
-				take_damage(150)
-
 
 /obj/machinery/door/unpowered/simple/attackby(obj/item/I as obj, mob/user as mob)
 	src.add_fingerprint(user, 0, I)
+	if (user.a_intent == I_HURT)
+		return ..()
+
 	if(istype(I, /obj/item/key) && lock)
 		var/obj/item/key/K = I
 		if(!lock.toggle(I))
@@ -156,7 +133,7 @@
 		if(MACHINE_IS_BROKEN(src))
 			to_chat(user, SPAN_NOTICE("It looks like \the [src] is pretty busted. It's going to need more than just patching up now."))
 			return
-		if(health >= maxhealth)
+		if (!get_damage_value())
 			to_chat(user, SPAN_NOTICE("Nothing to fix!"))
 			return
 		if(!density)
@@ -165,15 +142,12 @@
 
 		//figure out how much metal we need
 		var/obj/item/stack/stack = I
-		var/amount_needed = Ceil((maxhealth - health)/DOOR_REPAIR_AMOUNT)
+		var/amount_needed = Ceil(get_damage_value() / DOOR_REPAIR_AMOUNT)
 		var/used = min(amount_needed,stack.amount)
 		if (used)
 			to_chat(user, SPAN_NOTICE("You fit [used] [stack.singular_name]\s to damaged and broken parts on \the [src]."))
 			stack.use(used)
-			health = clamp(health + used * DOOR_REPAIR_AMOUNT, health, maxhealth)
-		return
-
-	if (check_force(I, user))
+			restore_health(used * DOOR_REPAIR_AMOUNT)
 		return
 
 	if(src.operating) return
