@@ -235,9 +235,9 @@
 	..()
 
 /obj/machinery/shipsensors/on_death()
-	. = ..()
 	if (use_power)
 		toggle()
+	..()
 
 /obj/machinery/shipsensors/RefreshParts()
 	..()

@@ -155,10 +155,10 @@
 	destroyed = TRUE
 	playsound(src, 'sound/effects/spray.ogg', 10, TRUE, -3)
 	set_density(FALSE)
-	update_icon()
 	if (holding)
 		holding.dropInto(loc)
 		holding = null
+	..()
 
 /obj/machinery/portable_atmospherics/canister/Process()
 	if (destroyed)

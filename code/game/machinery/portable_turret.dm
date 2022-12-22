@@ -403,9 +403,9 @@ var/global/list/turret_icons
 		disabled = 0
 
 /obj/machinery/porta_turret/on_death()
-	set_broken(TRUE)
 	spark_system.start()	//creates some sparks because they look cool
 	atom_flags |= ATOM_FLAG_CLIMBABLE // they're now climbable
+	..()
 
 /obj/machinery/porta_turret/Process()
 	if(inoperable())

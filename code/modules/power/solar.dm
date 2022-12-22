@@ -127,13 +127,12 @@ var/global/solar_gen_rate = 1500
 		kill_health()
 
 /obj/machinery/power/solar/on_death()
-	. = ..()
-	set_broken(TRUE)
 	new /obj/item/material/shard(src.loc)
 	new /obj/item/material/shard(src.loc)
 	var/obj/item/solar_assembly/S = locate() in src
 	S.glass_type = null
 	unset_control()
+	..()
 
 /obj/machinery/power/solar/ex_act(severity)
 	switch(severity)

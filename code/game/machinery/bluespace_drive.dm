@@ -79,10 +79,10 @@
 
 
 /obj/machinery/bluespacedrive/on_death()
-	. = ..()
 	playsound(loc, 'sound/machines/BSD_explosion.ogg', 100)
 	visible_message(SPAN_DANGER(FONT_LARGE("\The [src] begins emitting an ear-splitting, horrible shrill! Get back!")))
 	addtimer(CALLBACK(src, .proc/explode), 5 SECONDS)
+	..()
 
 
 /// Final death act handler for the drive where it explodes. You really shouldn't call this directly or you'll make weird broken things regarding health tracking. Use `kill_health()` instead, the death handler calls this.

@@ -39,7 +39,7 @@
 	. = ..()
 
 /obj/machinery/computer/on_death()
-	set_broken(TRUE)
+	..()
 	visible_message(SPAN_WARNING("\The [src] breaks!"))
 
 /obj/machinery/computer/on_update_icon()

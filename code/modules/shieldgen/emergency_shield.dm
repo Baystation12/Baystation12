@@ -152,7 +152,6 @@
 		malfunction = TRUE
 
 /obj/machinery/shieldgen/on_death()
-	. = ..()
 	explosion(get_turf(src), 1, EX_ACT_LIGHT, 0, 0)
 	qdel(src)
 
