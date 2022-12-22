@@ -30,7 +30,6 @@
 	/// Boolean. Whether or not the door is heat proof. Affects turf thermal conductivity for non-opaque doors. Provided for mapping use.
 	var/heat_proof = FALSE
 	/// Integer. The door's maximum health. TODO: Replace this with standardized health.
-	var/air_properties_vary_with_direction = 0
 	var/maxhealth = 300
 	/// Integer. The door's current health. TODO: Replace this with standardized health.
 	var/health

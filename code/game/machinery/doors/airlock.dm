@@ -30,7 +30,6 @@
 	/// Integer. World time when we may next beep due to doors being blocked by mobs. Spam prevention.
 	var/next_beep_at = 0
 	/// Boolean. Whether or not the door is welded shut.
-	var/spawnPowerRestoreRunning = 0
 	var/welded = FALSE
 	/// Boolean. Whether or not the door is locked/bolted.
 	var/locked = FALSE
@@ -42,9 +41,6 @@
 	var/aiDisabledIdScanner = FALSE
 	/// Boolean. Whether or not the AI is currently hacking the door.
 	var/aiHacking = FALSE
-	var/obj/machinery/door/airlock/closeOther = null
-	var/closeOtherId = null
-	var/lockdownbyai = 0
 	autoclose = TRUE
 	/// Path. The assembly structure used to create this door. Used during disassembly steps.
 	var/assembly_type = /obj/structure/door_assembly
@@ -1256,8 +1252,6 @@ About the new airlock wires panel:
 	else
 		playsound(src.loc, open_sound_unpowered, 100, 1)
 
-	if(src.closeOther != null && istype(src.closeOther, /obj/machinery/door/airlock) && !src.closeOther.density)
-		src.closeOther.close()
 	return ..()
 
 /obj/machinery/door/airlock/can_open(forced=0)
@@ -1393,11 +1387,6 @@ About the new airlock wires panel:
 		wires = new/datum/wires/airlock(src)
 
 /obj/machinery/door/airlock/Initialize()
-	if(src.closeOtherId != null)
-		for (var/obj/machinery/door/airlock/A in world)
-			if(A.closeOtherId == src.closeOtherId && A != src)
-				src.closeOther = A
-				break
 	var/turf/T = loc
 	var/obj/item/airlock_brace/A = locate(/obj/item/airlock_brace) in T
 	if(!brace && A)
