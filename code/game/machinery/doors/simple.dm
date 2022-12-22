@@ -39,7 +39,7 @@
 		set_light(0.5, 1, material.luminescence, l_color = material.icon_colour)
 
 	if(material.opacity < 0.5)
-		glass = 1
+		glass = TRUE
 		alpha = 180
 		set_opacity(0)
 

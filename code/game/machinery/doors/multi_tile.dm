@@ -133,7 +133,7 @@
 /obj/machinery/door/airlock/multi_tile/glass
 	name = "Glass Airlock"
 	hitsound = 'sound/effects/Glasshit.ogg'
-	glass = 1
+	glass = TRUE
 
 /obj/machinery/door/airlock/multi_tile/glass/command
 	door_color = COLOR_COMMAND_BLUE

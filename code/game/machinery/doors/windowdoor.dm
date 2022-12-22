@@ -8,7 +8,7 @@
 	hitsound = 'sound/effects/Glasshit.ogg'
 	maxhealth = 150 //If you change this, consiter changing ../door/window/brigdoor/ health at the bottom of this .dm file
 	health = 150
-	visible = 0.0
+	visible = FALSE
 	use_power = POWER_USE_OFF
 	stat_immune = MACHINE_STAT_NOSCREEN | MACHINE_STAT_NOINPUT | MACHINE_STAT_NOPOWER
 	uncreated_component_parts = null
@@ -55,9 +55,9 @@
 	ae = electronics
 	electronics = null
 	ae.dropInto(loc)
-	if(operating == -1)
+	if (operating == DOOR_OPERATING_BROKEN)
 		ae.icon_state = "door_electronics_smoked"
-		operating = 0
+		operating = DOOR_OPERATING_NO
 	set_density(0)
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
@@ -111,10 +111,10 @@
 		return 1
 
 /obj/machinery/door/window/open()
-	if (operating == 1) //doors can still open when emag-disabled
+	if (operating == DOOR_OPERATING_YES) //doors can still open when emag-disabled
 		return 0
 	if (!src.operating) //in case of emag
-		src.operating = 1
+		src.operating = DOOR_OPERATING_YES
 
 	icon_state = "[src.base_state]open";
 	flick("[src.base_state]opening", src)
@@ -129,13 +129,13 @@
 	update_icon()
 	update_nearby_tiles()
 
-	if(operating == 1) //emag again
-		operating = 0
+	if(operating == DOOR_OPERATING_YES) //emag again
+		operating = DOOR_OPERATING_NO
 
 /obj/machinery/door/window/close()
 	if (src.operating)
 		return 0
-	operating = 1
+	operating = DOOR_OPERATING_YES
 	flick(text("[]closing", src.base_state), src)
 	playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
 	set_density(1)
@@ -147,7 +147,7 @@
 	return TRUE
 
 /obj/machinery/door/window/proc/close_final()
-	operating = 0
+	operating = DOOR_OPERATING_NO
 
 /obj/machinery/door/window/take_damage(damage)
 	src.health = max(0, src.health - damage)
@@ -172,7 +172,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] is not functioning and doesn't respond to your attempt to short the circuitry."))
 		return FALSE
 
-	operating = -1
+	operating = DOOR_OPERATING_BROKEN
 	emagged = TRUE
 	to_chat(user, SPAN_NOTICE("You short out \the [src]'s internal circuitry, locking it open!"))
 	if (density)
@@ -192,7 +192,7 @@
 /obj/machinery/door/window/attackby(obj/item/I as obj, mob/user as mob)
 
 	//If it's in the process of opening/closing, ignore the click
-	if (src.operating == 1)
+	if (operating == DOOR_OPERATING_YES)
 		return
 
 	//Emags and ninja swords? You may pass.
@@ -207,7 +207,7 @@
 		return 1
 
 	//If it's emagged, crowbar can pry electronics out.
-	if (src.operating == -1 && isCrowbar(I))
+	if (operating == DOOR_OPERATING_BROKEN && isCrowbar(I))
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		user.visible_message("[user] removes the electronics from the windoor.", "You start to remove electronics from the windoor.")
 		if (do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
@@ -226,7 +226,7 @@
 			wa.update_icon()
 
 			shatter(src)
-			operating = 0
+			operating = DOOR_OPERATING_NO
 			return
 
 	if (check_force(I, user))
@@ -257,7 +257,7 @@
 	base_state = "leftsecure"
 	var/id = null
 	maxhealth = 300
-	health = 300.0 //Stronger doors for prison (regular window door health is 150)
+	health = 300 //Stronger doors for prison (regular window door health is 150)
 	pry_mod = 0.65
 
 

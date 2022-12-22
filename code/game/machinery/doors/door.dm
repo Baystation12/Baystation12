@@ -7,7 +7,7 @@
 	icon = 'icons/obj/doors/Doorint.dmi'
 	icon_state = "door1"
 	anchored = TRUE
-	opacity = 1
+	opacity = TRUE
 	density = TRUE
 	layer = CLOSED_DOOR_LAYER
 	interact_offline = TRUE
@@ -15,33 +15,50 @@
 	var/open_layer = OPEN_DOOR_LAYER
 	var/closed_layer = CLOSED_DOOR_LAYER
 
-	var/visible = 1
-	var/p_open = 0
-	var/operating = 0
-	var/autoclose = 0
-	var/glass = 0
-	var/normalspeed = 1
-	var/heat_proof = 0 // For glass airlocks/opacity firedoors
+	/// Boolean. Whether or not the door blocks vision.
+	var/visible = TRUE
+	/// Boolean. Whether or not the door's panel is open.
+	var/p_open = FALSE
+	/// Integer (One of `DOOR_OPERATING_*`). The door's operating state.
+	var/operating = DOOR_OPERATING_NO
+	/// Boolean. Whether or not the door will automatically close.
+	var/autoclose = FALSE
+	/// Boolean. Whether or not the door is considered a glass door.
+	var/glass = FALSE
+	/// Boolean. Whether or not the door waits before closing. Generally tied to the timing wire.
+	var/normalspeed = TRUE
+	/// Boolean. Whether or not the door is heat proof. Affects turf thermal conductivity for non-opaque doors. Provided for mapping use.
+	var/heat_proof = FALSE
+	/// Integer. The door's maximum health. TODO: Replace this with standardized health.
 	var/air_properties_vary_with_direction = 0
 	var/maxhealth = 300
+	/// Integer. The door's current health. TODO: Replace this with standardized health.
 	var/health
-	var/destroy_hits = 10 //How many strong hits it takes to destroy the door
-	var/min_force = 10 //minimum amount of force needed to damage the door with a melee weapon
-	var/hitsound = 'sound/weapons/smash.ogg' //sound door makes when hit with a weapon
-	var/pry_mod = 1 //difficulty scaling for simple animal door prying
+	/// Integer. How many strong projectile hits it takes to destroy the door. Primarily used for emitters.
+	var/destroy_hits = 10
+	/// Integer. Minimum amount of force needed to damage the door with a melee weapon. TODO: Replace this with standardized health.
+	var/min_force = 10
+	/// Sound file. Sound the door makes when hit with a weapon. TODO: Replace with standardized health.
+	var/hitsound = 'sound/weapons/smash.ogg'
+	/// Float. Multiplier applied to mob AI door prying time.
+	var/pry_mod = 1.0
+	/// Instance of material stack that's been added to the door for repairs.
 	var/obj/item/stack/material/repairing
-	var/block_air_zones = 1 //If set, air zones cannot merge across the door even when it is opened.
-	var/close_door_at = 0 //When to automatically close the door, if possible
+	/// Boolean. If set, air zones cannot merge across the door even when it is opened.
+	var/block_air_zones = TRUE
+	/// Integer. The world.time to automatically close the door, if possible. TODO: Replace with timers.
+	var/close_door_at = 0
+	/// List. Directions the door has wall connections in.
 	var/list/connections = list("0", "0", "0", "0")
-	var/list/blend_objects = list(/obj/structure/wall_frame, /obj/structure/window, /obj/structure/grille) // Objects which to blend with
+	/// List. Objects to blend sprite connections with.
+	var/list/blend_objects = list(/obj/structure/wall_frame, /obj/structure/window, /obj/structure/grille)
+	/// Boolean. Determines whether the door will automatically set its access from the areas surrounding it during init. Can be used for mapping.
+	var/autoset_access = TRUE
 
-	var/autoset_access = TRUE // Determines whether the door will automatically set its access from the areas surrounding it. Can be used for mapping.
-
-	//Multi-tile doors
-	dir = SOUTH
+	/// Integer. Width of the door in tiles.
 	var/width = 1
 
-	//Used for intercepting clicks on our turf. Set 0 to disable click interception
+	// Integer. Used for intercepting clicks on our turf. Set 0 to disable click interception. Passed directly to `/datum/extension/turf_hand`.
 	var/turf_hand_priority = 3
 
 	// turf animation
@@ -129,7 +146,8 @@
 	return 1
 
 /obj/machinery/door/Bumped(atom/AM)
-	if(p_open || operating) return
+	if (p_open || operating)
+		return
 	if(ismob(AM))
 		var/mob/M = AM
 		if(world.time - M.last_bumped <= 10) return	//Can bump-open one airlock per second. This is to prevent shock spam.
@@ -282,7 +300,8 @@
 	if (check_force(I, user))
 		return
 
-	if(src.operating > 0 || isrobot(user))	return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
+	if (operating == DOOR_OPERATING_YES || isrobot(user))
+		return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
 
 	if(src.operating) return
 
@@ -303,7 +322,7 @@
 		do_animate("emag")
 		sleep(6)
 		open()
-		operating = -1
+		operating = DOOR_OPERATING_BROKEN
 		set_broken(TRUE)
 		return 1
 
@@ -400,12 +419,12 @@
 /obj/machinery/door/proc/do_animate(animation)
 	switch(animation)
 		if("opening")
-			if(p_open)
+			if (p_open)
 				flick("o_doorc0", src)
 			else
 				flick("doorc0", src)
 		if("closing")
-			if(p_open)
+			if (p_open)
 				flick("o_doorc1", src)
 			else
 				flick("doorc1", src)
@@ -425,7 +444,7 @@
 	set waitfor = FALSE
 	if(!can_open(forced))
 		return
-	operating = 1
+	operating = DOOR_OPERATING_YES
 
 	do_animate("opening")
 	icon_state = "door0"
@@ -437,7 +456,7 @@
 	src.layer = open_layer
 	update_icon()
 	set_opacity(0)
-	operating = 0
+	operating = DOOR_OPERATING_NO
 
 	if(autoclose)
 		close_door_at = next_close_time()
@@ -451,7 +470,7 @@
 	set waitfor = FALSE
 	if(!can_close(forced))
 		return
-	operating = 1
+	operating = DOOR_OPERATING_YES
 
 	close_door_at = 0
 	do_animate("closing")
@@ -461,9 +480,9 @@
 	update_nearby_tiles()
 	sleep(7)
 	update_icon()
-	if(visible && !glass)
+	if (visible && !glass)
 		set_opacity(1)	//caaaaarn!
-	operating = 0
+	operating = DOOR_OPERATING_NO
 
 	//I shall not add a check every x ticks if a door has closed over some fire.
 	var/obj/hotspot/fire = locate() in loc
