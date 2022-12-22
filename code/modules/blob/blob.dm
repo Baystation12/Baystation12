@@ -107,12 +107,6 @@
 		qdel(F)
 		return
 
-	var/obj/machinery/camera/CA = locate() in T
-	if (CA && !MACHINE_IS_BROKEN(CA))
-		playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
-		CA.take_damage(30)
-		return
-
 	var/sound_played
 
 	for(var/mob/living/L in T)
