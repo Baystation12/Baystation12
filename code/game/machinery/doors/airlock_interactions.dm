@@ -43,11 +43,6 @@
 /obj/structure/window/airlock_crush(crush_damage)
 	shatter(TRUE)
 
-/obj/machinery/portable_atmospherics/canister/airlock_crush(crush_damage)
-	. = ..()
-	health -= crush_damage
-	healthcheck()
-
 /obj/effect/energy_field/airlock_crush(crush_damage)
 	Stress(crush_damage)
 

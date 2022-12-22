@@ -171,13 +171,14 @@
 			to_chat(user, "\The [W] is off.")
 			return
 
-		if(!damage)
+		if(!get_damage_value())
 			to_chat(user, "\The [src] does not require repairs.")
 			return
 
 		to_chat(user, "You begin repairing damage to \the [src]...")
-		if(WT.remove_fuel(round(damage/75)) && do_after(usr, damage/10, src, DO_REPAIR_CONSTRUCT))
-			damage = 0
+		var/damage = get_damage_value()
+		if(WT.remove_fuel(round(damage / 75)) && do_after(user, damage / 10, src, DO_REPAIR_CONSTRUCT))
+			revive_health()
 			to_chat(user, "You repair \the [src].")
 		return
 
