@@ -244,7 +244,10 @@
  * - `severity` Integer. The strength of the EMP, ranging from 1 to 3. NOTE: Lower numbers are stronger.
  */
 /atom/proc/emp_act(severity)
-	return
+	if (get_max_health())
+		// No hitsound here - Doesn't make sense for EMPs.
+		// Generalized - 75-125 damage at max, 38-63 at medium, 25-42 at minimum severities.
+		damage_health(rand(75, 125) / severity, DAMAGE_EMP, severity = severity)
 
 
 /**
@@ -278,6 +281,14 @@
 /atom/proc/bullet_act(obj/item/projectile/P, def_zone)
 	P.on_hit(src, 0, def_zone)
 	. = 0
+	if (get_max_health())
+		var/damage = P.damage
+		if (istype(src, /obj/structure) || istype(src, /turf/simulated/wall) || istype(src, /obj/machinery)) // TODO Better conditions for non-structures that want to use structure damage
+			damage = P.get_structure_damage()
+		if (!can_damage_health(damage, P.damage_type))
+			return
+		playsound(src, damage_hitsound, 75)
+		damage_health(damage, P.damage_type, skip_can_damage_check = TRUE)
 
 /**
  * Determines whether or not the atom is in the contents of the container or an instance of container if provided as a
@@ -431,8 +442,21 @@
  * - `severity` Integer (One of `EX_ACT_*`) - The strength of the explosion affecting the atom. NOTE: Lower numbers are
  * stronger.
  */
-/atom/proc/ex_act(severity)
-	return
+/atom/proc/ex_act(severity, turf_breaker)
+	if (get_max_health())
+		// No hitsound here to avoid noise spam.
+		// Damage is based on severity and maximum health, with DEVASTATING being guaranteed death without any resistances.
+		var/damage_flags = turf_breaker ? DAMAGE_FLAG_TURF_BREAKER : EMPTY_BITFIELD
+		var/damage = 0
+		switch (severity)
+			if (EX_ACT_DEVASTATING)
+				damage = round(health_max * (rand(100, 200) / 100)) // So that even atoms resistant to explosions may still be heavily damaged at this severity. Effective range of 100% to 200%.
+			if (EX_ACT_HEAVY)
+				damage = round(health_max * (rand(50, 100) / 100)) // Effective range of 50% to 100%.
+			if (EX_ACT_LIGHT)
+				damage = round(health_max * (rand(10, 50) / 100)) // Effective range of 10% to 50%.
+		if (damage)
+			damage_health(damage, DAMAGE_EXPLODE, damage_flags, severity)
 
 
 /**
@@ -460,7 +484,10 @@
  * - `exposed_volume` - The volume of the air for the fire affecting the atom. Usually, this is `air.volume`.
  */
 /atom/proc/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	return
+	if (get_max_health())
+		// No hitsound here to avoid noise spam.
+		// 1 point of damage for every 100 kelvin above 300 (~27 C).
+		damage_health(round(max(exposed_temperature - 300, 0) / 100), DAMAGE_FIRE)
 
 /**
  * Handler for melting from heat or other sources. Called by terrain generation and some instances of `fire_act()` or
@@ -474,7 +501,13 @@
  *
  * Returns boolean. Whether or not the atom was destroyed.
  */
-/atom/proc/lava_act()
+/atom/proc/lava_act(datum/gas_mixture/air, temperature, pressure)
+	if (is_damage_immune(DAMAGE_FIRE))
+		return FALSE
+	if (get_max_health())
+		fire_act(air, temperature)
+		if (!health_dead)
+			return FALSE
 	visible_message(SPAN_DANGER("\The [src] sizzles and melts away, consumed by the lava!"))
 	playsound(src, 'sound/effects/flare.ogg', 100, 3)
 	qdel(src)
