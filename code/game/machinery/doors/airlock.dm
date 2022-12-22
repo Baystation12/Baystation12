@@ -46,12 +46,10 @@
 	var/assembly_type = /obj/structure/door_assembly
 	/// String (One of `MATERIAL_*`). The material the door is made from. If not set, defaults to steel.
 	var/mineral = null
-	/// Boolean. Whether or not the door has just electrocuted someone.
-	var/justzap = FALSE
 	/// Boolean. Whether or not the door's safeties are enabled. Tied to the safety wire.
 	var/safe = TRUE
 	var/obj/item/airlock_electronics/electronics = null
-	/// Boolean. Whether or not the door has just electrocuted someone. TODO: Redundant with var/justzap
+	/// Boolean. Whether or not the door has just electrocuted someone.
 	var/hasShocked = FALSE
 	/// Boolean. Whether or not the door has secure wiring that scrambles the wire panel.
 	var/secured_wires = FALSE
@@ -455,13 +453,8 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/bumpopen(mob/living/user as mob) //Airlocks now zap you when you 'bump' them open when they're electrified. --NeoFite
 	if(!issilicon(usr))
-		if(src.isElectrified())
-			if(!src.justzap)
-				if(src.shock(user, 100))
-					src.justzap = TRUE
-					addtimer(CALLBACK(src, .proc/set_justzap, FALSE), 1 SECOND)
-					return
-			else
+		if (isElectrified())
+			if (shock(user, 100))
 				return
 		else if (prob(10) && operating == DOOR_OPERATING_NO)
 			var/mob/living/carbon/C = user
@@ -471,9 +464,6 @@ About the new airlock wires panel:
 				user.Stun(5)
 				return
 	..(user)
-
-/obj/machinery/door/airlock/proc/set_justzap(val)
-	justzap = val
 
 /obj/machinery/door/airlock/bumpopen(mob/living/simple_animal/user as mob)
 	..(user)
