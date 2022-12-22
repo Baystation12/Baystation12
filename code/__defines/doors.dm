@@ -7,17 +7,6 @@
 #define DOOR_OPERATING_BROKEN -1
 
 
-// Values for `/obj/machinery/door/airlock/var/aiControlDisabled`
-/// The control is enabled but the AI has bypassed it previously.
-#define AIRLOCK_AI_BYPASS_ENABLED -1
-/// The control is enabled.
-#define AIRLOCK_AI_ENABLED 0
-/// The control is disabled.
-#define AIRLOCK_AI_DISABLED 1
-/// The control has been bypassed by the AI.
-#define AIRLOCK_AI_BYPASSED 2
-
-
 // Flags for `/obj/machinery/door/airlock/var/paintable`
 /// The main airlock body is paintable.
 #define AIRLOCK_PAINTABLE_MAIN FLAG(0)

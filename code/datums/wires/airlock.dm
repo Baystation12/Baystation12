@@ -57,7 +57,7 @@ var/global/const/AIRLOCK_WIRE_LIGHT = 2048
 	((A.lights && haspower) ? "The door bolt lights are on." : "The door bolt lights are off!"),
 	((haspower) ? "The test light is on." : "The test light is off!"),
 	((A.backup_power_lost_until) ? "The backup power light is off!" : "The backup power light is on."),
-	((A.aiControlDisabled == AIRLOCK_AI_ENABLED && !A.emagged && haspower)? "The 'AI control allowed' light is on." : "The 'AI control allowed' light is off."),
+	((!A.ai_control_disabled && !A.emagged && haspower)? "The 'AI control allowed' light is on." : "The 'AI control allowed' light is off."),
 	((!A.safe && haspower)? "The 'Check Wiring' light is on." : "The 'Check Wiring' light is off."),
 	((!A.normalspeed && haspower)? "The 'Check Timing Mechanism' light is on." : "The 'Check Timing Mechanism' light is off."),
 	((!A.aiDisabledIdScanner && haspower)? "The IDScan light is on." : "The IDScan light is off."))
@@ -99,16 +99,9 @@ var/global/const/AIRLOCK_WIRE_LIGHT = 2048
 
 			if(!mended)
 				//one wire for AI control. Cutting this prevents the AI from controlling the door unless it has hacked the door through the power connection (which takes about a minute). If both main and backup power are cut, as well as this wire, then the AI cannot operate or hack the door at all.
-				//aiControlDisabled: If 1, AI control is disabled until the AI hacks back in and disables the lock. If 2, the AI has bypassed the lock. If -1, the control is enabled but the AI had bypassed it earlier, so if it is disabled again the AI would have no trouble getting back in.
-				if (A.aiControlDisabled == AIRLOCK_AI_ENABLED)
-					A.aiControlDisabled = AIRLOCK_AI_DISABLED
-				else if (A.aiControlDisabled == AIRLOCK_AI_BYPASS_ENABLED)
-					A.aiControlDisabled = AIRLOCK_AI_BYPASSED
+				A.ai_control_disabled = TRUE
 			else
-				if (A.aiControlDisabled == AIRLOCK_AI_DISABLED)
-					A.aiControlDisabled = AIRLOCK_AI_ENABLED
-				else if (A.aiControlDisabled == AIRLOCK_AI_BYPASSED)
-					A.aiControlDisabled = AIRLOCK_AI_BYPASS_ENABLED
+				A.ai_control_disabled = FALSE
 
 		if(AIRLOCK_WIRE_ELECTRIFY)
 			if(!mended)
@@ -155,17 +148,11 @@ var/global/const/AIRLOCK_WIRE_LIGHT = 2048
 			//two wires for backup power. Sending a pulse through either one causes a breaker to trip, but this does not disable it unless main power is down too (in which case it is disabled for 1 minute or however long it takes main power to come back, whichever is shorter).
 			A.loseBackupPower()
 		if(AIRLOCK_WIRE_AI_CONTROL)
-			if (A.aiControlDisabled == AIRLOCK_AI_ENABLED)
-				A.aiControlDisabled = AIRLOCK_AI_DISABLED
-			else if (A.aiControlDisabled == AIRLOCK_AI_BYPASS_ENABLED)
-				A.aiControlDisabled = AIRLOCK_AI_BYPASSED
+			A.ai_control_disabled = TRUE
 
 			spawn(10)
 				if(A)
-					if (A.aiControlDisabled == AIRLOCK_AI_DISABLED)
-						A.aiControlDisabled = AIRLOCK_AI_ENABLED
-					else if (A.aiControlDisabled == AIRLOCK_AI_BYPASSED)
-						A.aiControlDisabled = AIRLOCK_AI_BYPASS_ENABLED
+					A.ai_control_disabled = FALSE
 
 		if(AIRLOCK_WIRE_ELECTRIFY)
 			//one wire for electrifying the door. Sending a pulse through this electrifies the door for 30 seconds.

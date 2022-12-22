@@ -17,8 +17,10 @@
 	interact_offline = FALSE
 
 	explosion_resistance = 10
-	/// Integer (One of `AIRLOCK_AI_*`). Whether or not the AI control mechanism is disabled.
-	var/aiControlDisabled = AIRLOCK_AI_ENABLED
+	/// Boolean. Whether or not the AI control mechanism is disabled.
+	var/ai_control_disabled = FALSE
+	/// Boolean. Whether or not the AI has bypassed a disabled control mechanism.
+	var/ai_control_bypassed = FALSE
 	/// Boolean. If set, the door cannot by hacked or bypassed by the AI.
 	var/hackProof = FALSE
 	/// Integer. World time when the door is no longer electrified. -1 if it is permanently electrified until someone fixes it.
@@ -478,10 +480,10 @@ About the new airlock wires panel:
 	return wires.IsIndexCut(wireIndex)
 
 /obj/machinery/door/airlock/proc/canAIControl()
-	return ((aiControlDisabled != AIRLOCK_AI_DISABLED) && (!src.isAllPowerLoss()));
+	return ((!ai_control_disabled || ai_control_bypassed) && !isAllPowerLoss())
 
 /obj/machinery/door/airlock/proc/canAIHack()
-	return ((aiControlDisabled == AIRLOCK_AI_DISABLED) && (!hackProof) && (!src.isAllPowerLoss()));
+	return (ai_control_disabled && !ai_control_bypassed && !hackProof && !isAllPowerLoss())
 
 /obj/machinery/door/airlock/proc/arePowerSystemsOn()
 	if (inoperable())
@@ -857,7 +859,7 @@ About the new airlock wires panel:
 			to_chat(user, "Transfer complete. Forcing airlock to execute program.")
 			sleep(50)
 			//disable blocked control
-			aiControlDisabled = AIRLOCK_AI_BYPASSED
+			ai_control_bypassed = TRUE
 			to_chat(user, "Receiving control information from airlock.")
 			sleep(10)
 			//bring up airlock dialog
