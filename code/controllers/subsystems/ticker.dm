@@ -191,8 +191,8 @@ SUBSYSTEM_DEF(ticker)
 		Master.SetRunLevel(RUNLEVEL_POSTGAME)
 		end_game_state = END_GAME_READY_TO_END
 		INVOKE_ASYNC(src, .proc/declare_completion)
-		//if(config.allow_map_switching && config.auto_map_vote && GLOB.all_maps.len > 1)
-		//	SSvote.initiate_vote(/datum/vote/map/end_game, automatic = 1)
+		if(config.allow_map_switching && config.auto_map_vote && GLOB.all_maps.len > 1)
+			SSvote.initiate_vote(/datum/vote/map/end_game, automatic = 1)
 
 	else if(mode_finished && (end_game_state <= END_GAME_NOT_OVER))
 		end_game_state = END_GAME_MODE_FINISH_DONE
@@ -442,16 +442,16 @@ Helpers
 			return 1
 		else
 			if(antag.initial_spawn_req > 1)
-				log_and_message_admins("Failed to find enough [antag.role_text_plural].")
+				to_world("Failed to find enough [antag.role_text_plural].")
 
 			else
-				log_and_message_admins("Failed to find a [antag.role_text].")
+				to_world("Failed to find a [antag.role_text].")
 
 			antag_choices -= antag
 			if(length(antag_choices))
 				antag = antag_choices[1]
 				if(antag)
-					log_and_message_admins("Attempting to spawn [antag.role_text_plural].")
+					to_world("Attempting to spawn [antag.role_text_plural].")
 	return 0
 
 /datum/controller/subsystem/ticker/proc/game_finished()

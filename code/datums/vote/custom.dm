@@ -3,10 +3,13 @@
 	var/abort = 0 // Lets us exit the vote setup due to bad input, etc.
 
 /datum/vote/custom/can_run(mob/creator, automatic)
+	if(automatic)
+		return FALSE
+	if(!isadmin(creator))
+		return FALSE
 	if(abort)
 		return FALSE
-	if(check_rights(R_ADMIN|R_SERVER, 0, creator))
-		return TRUE
+	return ..()
 
 /datum/vote/custom/setup_vote(mob/creator, automatic)
 	question = sanitizeSafe(input(creator,"What is the vote for?") as text|null)
