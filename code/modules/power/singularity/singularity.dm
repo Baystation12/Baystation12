@@ -480,7 +480,7 @@
 	if(current_size <= size)
 		var/gain = (energy/2)
 		var/dist = max((current_size - 2), 1)
-		explosion(src.loc,(dist),(dist*2),(dist*4))
+		explosion(src.loc, dist * 7)
 		spawn(0)
 			qdel(src)
 		return gain

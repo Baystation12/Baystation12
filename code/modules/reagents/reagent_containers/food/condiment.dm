@@ -33,10 +33,10 @@
 
 /obj/item/reagent_containers/food/condiment/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/pen) || istype(W, /obj/item/device/flashlight/pen))
-		var/tmp_label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
-		var/datum/extension/labels/L = get_or_create_extension(src, /datum/extension/labels)
-		L.AttachLabel(user, tmp_label)
-		return
+		var/label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
+		if (!label)
+			return
+		AddLabel(label, user)
 
 /obj/item/reagent_containers/food/condiment/attack_self(mob/user as mob)
 	return

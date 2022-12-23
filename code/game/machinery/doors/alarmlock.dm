@@ -3,11 +3,11 @@
 	name = "Glass Alarm Airlock"
 	icon = 'icons/obj/doors/Doorglass.dmi'
 	opacity = 0
-	glass = 1
+	glass = TRUE
 
 	var/datum/radio_frequency/air_connection
 	var/air_frequency = 1437
-	autoclose = 0
+	autoclose = FALSE
 
 /obj/machinery/door/airlock/alarmlock/New()
 	..()
@@ -38,8 +38,8 @@
 	if(alarm_area == our_area.name)
 		switch(alert)
 			if("severe")
-				autoclose = 1
+				autoclose = TRUE
 				close()
 			if("minor", "clear")
-				autoclose = 0
+				autoclose = FALSE
 				open()

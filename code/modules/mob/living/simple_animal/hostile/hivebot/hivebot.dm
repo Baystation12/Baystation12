@@ -122,7 +122,7 @@ Special projectiles
 */
 /obj/item/projectile/bullet/gyro/megabot
 	name = "microrocket"
-	gyro_light_impact = 1
+	explosion_radius = 1
 	distance_falloff = 1.3
 
 /obj/item/projectile/beam/megabot

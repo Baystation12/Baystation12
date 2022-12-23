@@ -294,9 +294,6 @@
 	/// Do antags use account age restrictions? --requires database
 	var/static/use_age_restriction_for_antags = FALSE
 
-	/// Whether the server uses recursive or circular explosions.
-	var/static/use_recursive_explosions = FALSE
-
 	var/static/comms_password
 
 	var/static/ban_comms_password
@@ -507,8 +504,6 @@
 				use_age_restriction_for_jobs = TRUE
 			if ("use_age_restriction_for_antags")
 				use_age_restriction_for_antags = TRUE
-			if ("use_recursive_explosions")
-				use_recursive_explosions = TRUE
 			if ("log_ooc")
 				log_ooc = TRUE
 			if ("log_access")

@@ -340,7 +340,7 @@
 	. = ..()
 	if (get_max_health())
 		var/damage = P.damage
-		if (istype(src, /obj/structure) || istype(src, /turf/simulated/wall)) // TODO Better conditions for non-structures that want to use structure damage
+		if (istype(src, /obj/structure) || istype(src, /turf/simulated/wall) || istype(src, /obj/machinery)) // TODO Better conditions for non-structures that want to use structure damage
 			damage = P.get_structure_damage()
 		if (!can_damage_health(damage, P.damage_type))
 			return
@@ -360,7 +360,6 @@
 
 
 /atom/attackby(obj/item/W, mob/user, click_params)
-	. = ..()
 	if (user.a_intent == I_HURT && get_max_health() && !(W.item_flags & ITEM_FLAG_NO_BLUDGEON))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
@@ -377,3 +376,5 @@
 			SPAN_DANGER("You hit \the [src] with \the [W]!")
 		)
 		damage_health(W.force, W.damtype, skip_can_damage_check = TRUE)
+		return TRUE
+	return ..()

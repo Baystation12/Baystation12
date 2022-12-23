@@ -49,10 +49,10 @@
 /obj/item/defibrillator/loaded{
 	pixel_y = 7
 	},
-/obj/item/roller{
+/obj/item/roller_bed{
 	pixel_x = 6
 	},
-/obj/item/roller{
+/obj/item/roller_bed{
 	pixel_x = -8
 	},
 /turf/simulated/floor/tiled/white,
@@ -2069,7 +2069,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Uv" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/structure/closet/secure_closet/medical_wall{
 	name = "IV Equipment Cabinet";
 	pixel_x = 0;
@@ -2079,10 +2079,10 @@
 /obj/item/reagent_containers/ivbag/nanoblood,
 /obj/item/reagent_containers/ivbag,
 /obj/effect/floor_decal/corner/white/mono,
-/obj/item/reagent_containers/ivbag/blood/OPlus,
-/obj/item/reagent_containers/ivbag/blood/OPlus,
-/obj/item/reagent_containers/ivbag/blood/OPlus,
-/obj/item/reagent_containers/ivbag/blood/OPlus,
+/obj/item/reagent_containers/ivbag/blood/human/opos,
+/obj/item/reagent_containers/ivbag/blood/human/opos,
+/obj/item/reagent_containers/ivbag/blood/human/opos,
+/obj/item/reagent_containers/ivbag/blood/human/opos,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/sfv_arbiter)
 "UF" = (

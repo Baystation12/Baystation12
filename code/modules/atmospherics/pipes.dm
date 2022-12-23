@@ -16,9 +16,8 @@
 		//minimum pressure before check_pressure(...) should be called
 	var/obj/machinery/clamp/clamp // Linked stasis clamp
 
-	can_buckle = 1
-	buckle_require_restraints = 1
-	buckle_lying = -1
+	can_buckle = TRUE
+	buckle_require_restraints = TRUE
 	var/datum/sound_token/sound_token
 	build_icon_state = "simple"
 	build_icon = 'icons/obj/pipe-item.dmi'

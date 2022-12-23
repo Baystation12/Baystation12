@@ -20,9 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     concurrency: gen-docs
     steps:
-      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+      - uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b
       - name: Setup Cache
-        uses: actions/cache@9b0c1fce7a93df8e3bb8926b0d6e9d89e92f20a7
+        uses: actions/cache@c17f4bf4666a8001b1a45c09eb7a485c41aa64c3
         with:
           path: $HOME/spaceman_dmm/$SPACEMAN_DMM_VERSION
           key: ${{ runner.os }}-spacemandmm-${{ env.SPACEMAN_DMM_VERSION }}
@@ -31,12 +31,11 @@ jobs:
       - name: Generate documentation
         run: |
           ~/dmdoc
-          touch dmdoc/.nojekyll
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@ba1486788b0490a235422264426c45848eac35c6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages-dmdoc
-          single-commit: true
+          branch: gh-pages
           folder: dmdoc
+          target-folder: docs/dmdoc
           clean: true

@@ -1773,7 +1773,12 @@
 "dQ" = (
 /obj/structure/closet/crate/freezer,
 /obj/item/reagent_containers/ivbag/nanoblood,
-/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/unathi/oneg,
+/obj/item/reagent_containers/ivbag/blood/unathi/oneg,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/surgery)
 "dR" = (
@@ -1880,7 +1885,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony/medbay)
 "eb" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/machinery/alarm{
 	locked = 0;
 	pixel_y = 20
@@ -4519,8 +4524,8 @@
 /area/map_template/colony/jail)
 "iy" = (
 /obj/effect/floor_decal/borderfloorwhite,
-/obj/structure/bed/roller/ironingboard,
-/obj/item/ironingiron,
+/obj/random/ironing_board_structure,
+/obj/item/ironing_iron,
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony/bathroom)
 "iz" = (
@@ -6932,6 +6937,7 @@
 /obj/item/clothing/head/helmet/space/void/atmos,
 /obj/item/tank/oxygen_emergency_extended,
 /obj/item/tank/oxygen_emergency_extended,
+/obj/item/device/suit_cooling_unit,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/airlock)
 "mE" = (
@@ -7299,6 +7305,7 @@
 /obj/item/clothing/head/helmet/space/void/engineering/salvage,
 /obj/item/tank/oxygen_emergency_extended,
 /obj/item/tank/oxygen_emergency_extended,
+/obj/item/device/suit_cooling_unit,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/airlock)
 "ni" = (
@@ -7437,6 +7444,7 @@
 /obj/item/clothing/head/helmet/space/void/mining/alt,
 /obj/item/tank/oxygen_emergency_extended,
 /obj/item/tank/oxygen_emergency_extended,
+/obj/item/device/suit_cooling_unit,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/airlock)
 "nx" = (

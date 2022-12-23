@@ -2359,7 +2359,11 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/structure/closet/crate/uranium,
+/obj/structure/table/steel,
+/obj/item/storage/firstaid/radiation{
+	pixel_y = 8
+	},
+/obj/item/storage/firstaid/toxin,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/engineering)
 "ft" = (
@@ -2391,6 +2395,10 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/item/cane,
+/obj/structure/table/rack,
+/obj/item/reagent_containers/chem_disp_cartridge/vodka,
+/obj/item/reagent_containers/glass/beaker,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/engineering)
 "fv" = (
@@ -2415,7 +2423,7 @@
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/fore)
 "fy" = (
-/obj/item/roller,
+/obj/item/roller_bed,
 /obj/item/auto_cpr,
 /obj/structure/hygiene/sink/kitchen{
 	pixel_x = -32
@@ -2491,7 +2499,7 @@
 /turf/simulated/floor/plating/vox,
 /area/voxship/engineering)
 "fK" = (
-/obj/structure/closet/crate/uranium,
+/obj/structure/closet/crate/vox_uranium,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/engineering)
 "fL" = (
@@ -2596,8 +2604,16 @@
 /turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/thrusters)
 "gc" = (
-/obj/machinery/power/port_gen/pacman/super/potato,
-/obj/structure/cable,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor/plating/vox,
 /area/voxship/engineering)
 "gd" = (
@@ -3057,6 +3073,14 @@
 	initial_gas = list("nitrogen"=101.383)
 	},
 /area/voxship/fore)
+"xa" = (
+/obj/machinery/power/port_gen/pacman/super/potato,
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
 "Dc" = (
 /obj/machinery/telecomms/broadcaster/map_preset/voxship,
 /turf/simulated/floor/plating/vox,
@@ -3083,6 +3107,14 @@
 /obj/machinery/telecomms/receiver/map_preset/voxship,
 /turf/simulated/floor/plating/vox,
 /area/voxship/thrusters)
+"SN" = (
+/obj/machinery/power/port_gen/pacman/super/potato,
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
 
 (1,1,1) = {"
 fX
@@ -9259,7 +9291,7 @@ cg
 ac
 ac
 ac
-fX
+ac
 fX
 fX
 fX
@@ -9360,7 +9392,7 @@ cg
 fs
 fF
 cg
-ac
+xa
 ac
 fX
 fX
@@ -9564,7 +9596,7 @@ cg
 fu
 fK
 cg
-ac
+SN
 ac
 fX
 fX
@@ -9667,7 +9699,7 @@ cg
 cg
 cg
 ac
-fX
+ac
 fX
 fX
 fX

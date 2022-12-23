@@ -1429,7 +1429,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/oldlab2/lab)
 "hJ" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/machinery/power/apc{
 	dir = 8;
 	name = "west bump";
@@ -1699,8 +1699,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/oldlab2/engineerhall)
 "jI" = (
-/obj/structure/bed/roller/ironingboard,
-/obj/item/ironingiron,
+/obj/random/ironing_board_structure,
+/obj/item/ironing_iron,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/oldlab2/recandlockers)
 "jJ" = (
@@ -3011,7 +3011,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab2/medical)
 "qJ" = (
@@ -5020,7 +5020,7 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /obj/machinery/alarm{
 	dir = 8;
 	pixel_x = 25
@@ -5242,7 +5242,7 @@
 /area/map_template/oldlab2/test1)
 "BJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -6219,7 +6219,7 @@
 /obj/effect/floor_decal/corner/pink{
 	dir = 9
 	},
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab2/medical)
 "Gn" = (
@@ -8619,13 +8619,13 @@
 /area/map_template/oldlab2/test1)
 "Tv" = (
 /obj/structure/table/standard,
-/obj/item/roller{
+/obj/item/roller_bed{
 	pixel_y = 16
 	},
-/obj/item/roller{
+/obj/item/roller_bed{
 	pixel_y = 8
 	},
-/obj/item/roller{
+/obj/item/roller_bed{
 	pixel_y = 16
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -9653,6 +9653,10 @@
 	dir = 1
 	},
 /obj/structure/closet/crate/freezer,
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/nanoblood,
 /obj/item/reagent_containers/ivbag/nanoblood,
 /obj/item/reagent_containers/ivbag/nanoblood,
 /obj/item/reagent_containers/ivbag/nanoblood,

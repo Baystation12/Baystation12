@@ -254,3 +254,7 @@
 
 /atom/movable/proc/get_bullet_impact_effect_type()
 	return BULLET_IMPACT_NONE
+
+
+/atom/movable/proc/CheckDexterity(mob/living/user)
+	return TRUE

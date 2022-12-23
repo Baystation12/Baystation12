@@ -274,11 +274,11 @@
 /obj/item/device/paint_sprayer/proc/select_airlock_region(obj/machinery/door/airlock/D, mob/user, input_text)
 	var/choice
 	var/list/choices = list()
-	if (D.paintable & AIRLOCK_PAINTABLE)
+	if (D.paintable & AIRLOCK_PAINTABLE_MAIN)
 		choices |= AIRLOCK_REGION_PAINT
-	if (D.paintable & AIRLOCK_STRIPABLE)
+	if (D.paintable & AIRLOCK_PAINTABLE_STRIPE)
 		choices |= AIRLOCK_REGION_STRIPE
-	if (D.paintable & AIRLOCK_WINDOW_PAINTABLE)
+	if (D.paintable & AIRLOCK_PAINTABLE_WINDOW)
 		choices |= AIRLOCK_REGION_WINDOW
 	choice = input(user, input_text) as null|anything in sortList(choices)
 	if (user.incapacitated() || !D || !user.Adjacent(D))

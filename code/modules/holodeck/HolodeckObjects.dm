@@ -183,7 +183,7 @@
 
 /obj/machinery/door/window/holowindoor/attackby(obj/item/I as obj, mob/user as mob)
 
-	if (src.operating == 1)
+	if (operating == DOOR_OPERATING_YES)
 		return
 
 	if (check_force(I, user))

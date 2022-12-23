@@ -252,7 +252,7 @@
 
 	// Effect 4: Medium scale explosion
 	spawn(0)
-		explosion(TS, explosion_power/2, explosion_power, explosion_power * 2, explosion_power * 4, 1)
+		explosion(TS, explosion_power * 3.5)
 		qdel(src)
 
 /obj/machinery/power/supermatter/examine(mob/user)

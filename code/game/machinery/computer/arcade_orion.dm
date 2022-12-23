@@ -501,7 +501,7 @@
 	src.audible_message("<b>\The [src]</b> says, 'Oh, God! Code Eight! CODE EIGHT! IT'S GONNA BL-'")
 	sleep(3.6)
 	src.visible_message(SPAN_DANGER("[src] explodes!"))
-	explosion(src.loc, 1,2,4)
+	explosion(src.loc, 7)
 	qdel(src)
 
 #undef ORION_TRAIL_RAIDERS

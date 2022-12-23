@@ -32,7 +32,7 @@
 
 	//Most blast doors are infrequently toggled and sometimes used with regular doors anyways,
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
-	block_air_zones = 0
+	block_air_zones = FALSE
 
 	var/begins_closed = TRUE
 	var/material/implicit_material
@@ -97,7 +97,7 @@
 // Parameters: None
 // Description: Opens the door. No checks are done inside this proc.
 /obj/machinery/door/blast/proc/force_open()
-	operating = 1
+	operating = DOOR_OPERATING_YES
 	playsound(src.loc, open_sound, 100, 1)
 	flick(icon_state_opening, src)
 	set_density(0)
@@ -106,13 +106,13 @@
 	set_opacity(0)
 	sleep(15)
 	layer = open_layer
-	operating = 0
+	operating = DOOR_OPERATING_NO
 
 // Proc: force_close()
 // Parameters: None
 // Description: Closes the door. No checks are done inside this proc.
 /obj/machinery/door/blast/proc/force_close()
-	operating = 1
+	operating = DOOR_OPERATING_YES
 	playsound(src.loc, close_sound, 100, 1)
 	layer = closed_layer
 	flick(icon_state_closing, src)
@@ -121,7 +121,7 @@
 	update_icon()
 	set_opacity(1)
 	sleep(15)
-	operating = 0
+	operating = DOOR_OPERATING_NO
 
 // Proc: force_toggle()
 // Parameters: None
@@ -264,7 +264,7 @@
 
 	min_force = 30
 	maxhealth = 1000
-	block_air_zones = 1
+	block_air_zones = TRUE
 
 /obj/machinery/door/blast/regular/escape_pod
 	name = "Escape Pod release Door"

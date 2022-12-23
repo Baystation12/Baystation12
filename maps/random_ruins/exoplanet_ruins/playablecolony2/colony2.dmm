@@ -429,7 +429,12 @@
 /obj/item/storage/firstaid/adv,
 /obj/item/storage/firstaid/adv,
 /obj/item/reagent_containers/ivbag/nanoblood,
-/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/unathi/oneg,
+/obj/item/reagent_containers/ivbag/blood/unathi/oneg,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony2/ship)
@@ -444,7 +449,7 @@
 	dir = 1;
 	pixel_y = 16
 	},
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony2/ship)
 "gi" = (
@@ -1156,8 +1161,8 @@
 	pixel_y = 28;
 	pixel_z = 3
 	},
-/obj/item/ironingiron,
-/obj/item/roller/ironingboard,
+/obj/item/ironing_iron,
+/obj/random/ironing_board_item,
 /obj/item/soap,
 /obj/item/storage/box/detergent,
 /obj/item/storage/box/detergent,
@@ -2380,6 +2385,8 @@
 /obj/item/crowbar/prybar,
 /obj/item/device/radio/map_preset/playablecolony2,
 /obj/item/device/radio/map_preset/playablecolony2,
+/obj/item/device/suit_cooling_unit,
+/obj/item/device/suit_cooling_unit,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/atmospherics)
 "SR" = (

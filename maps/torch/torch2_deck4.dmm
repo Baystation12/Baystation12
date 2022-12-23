@@ -3804,8 +3804,8 @@
 /area/maintenance/fourthdeck/foreport)
 "mM" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/ironingiron,
-/obj/item/ironingiron,
+/obj/item/ironing_iron,
+/obj/item/ironing_iron,
 /obj/item/storage/box/detergent,
 /obj/item/storage/box/detergent,
 /obj/structure/table/rack,
@@ -4093,7 +4093,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
 "nT" = (
-/obj/structure/bed/roller/ironingboard,
+/obj/random/ironing_board_structure,
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/item/device/radio/intercom{
 	dir = 4;
@@ -4353,7 +4353,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/turbolift/cargo_lift)
 "pf" = (
-/obj/structure/bed/roller/ironingboard,
+/obj/random/ironing_board_structure,
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/alarm{
 	dir = 4;

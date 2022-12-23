@@ -20,7 +20,7 @@
 			spawn(1)
 				if(istype(door,/obj/machinery/door/airlock))
 					var/obj/machinery/door/airlock/AL = door //casting is important
-					AL.locked = 0
+					AL.locked = FALSE
 				door.open()
 	return
 

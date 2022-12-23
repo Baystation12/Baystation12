@@ -1970,7 +1970,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "fb" = (
-/obj/item/roller,
+/obj/item/roller_bed,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "fc" = (

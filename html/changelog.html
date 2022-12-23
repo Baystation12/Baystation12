@@ -56,6 +56,92 @@
 		-->
 		<div class="commit sansserif">
 
+			<h2 class="date">22 December 2022</h2>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Attacking energy nets with your bare hands or melee weapons now requires you to be on harm intent.</li>
+				<li class="tweak">You can now damage doors that are open.</li>
+				<li class="bugfix">Items and machinery that use standardize health will no longer delete themselves from explosions if the explosion didn't kill them.</li>
+			</ul>
+
+			<h2 class="date">18 December 2022</h2>
+			<h3 class="author">JoeyNosegay updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Removes 'Grandpa' from male human names.</li>
+			</ul>
+
+			<h2 class="date">17 December 2022</h2>
+			<h3 class="author">The_Spanish_Inquisition updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">sometimes you just miss more wrong code strings when you add a new shotgun</li>
+			</ul>
+
+			<h2 class="date">16 December 2022</h2>
+			<h3 class="author">The_Spanish_Inquisition updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Fixed icon paths for the riot shotgun</li>
+			</ul>
+
+			<h2 class="date">15 December 2022</h2>
+			<h3 class="author">Spookerton updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">IV stands and roller beds use IV bag transfer rates and allow setting their currently hung bag rate. IV bags can be set to 2, 1, REM, or 0.</li>
+				<li class="tweak">It's easier to mess up with IVs. With less than basic medicine you'll be slow and likely to stab people by accident on rollers and stands. IV bags want trained instead.</li>
+				<li class="tweak">You can hook up IV bags to people and squeeze them every three seconds to force in extra fluid. Harm intent is painful but pushes an extra three times the transfer rate. Other intents only push twice as much, but also only itch.</li>
+				<li class="tweak">Setting up and collapsing roller beds takes a few seconds. The horror.</li>
+				<li class="tweak">You can iron people on ironing boards. They sizzle. Also implements the fancy ironing board icon.</li>
+				<li class="tweak">Roller beds and ironing boards with mobs buckled to them become turf-level mouse opaque. Clicking the mob will still interact with the mob, but you can click anywhere on the turf to interact with the bed / board.</li>
+				<li class="tweak">Mapped blood pack distribution changed to include less nanoblood (but still some) and a mixture of other bloods.</li>
+				<li class="tweak">IV bag contents is indicated with labels. You can remove the labels. Isn't that lovely?</li>
+			</ul>
+
+			<h2 class="date">14 December 2022</h2>
+			<h3 class="author">10sc updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">The exoplanetary trash heap no longer gets spawned in walls.</li>
+			</ul>
+			<h3 class="author">Spookerton updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Shuttles don't add to their power cost every time they change landmarks.</li>
+			</ul>
+			<h3 class="author">The_Spanish_Inquisition updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">edited some of the projectile firearm descriptions and tweaked values slightly.</li>
+				<li class="rscadd">you can now saw the stock off the normal pump action shotgun to make it a riot shotgun! have fun sweeping maint tunnels</li>
+			</ul>
+
+			<h2 class="date">13 December 2022</h2>
+			<h3 class="author">Spookerton updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Doubled vox ship power generators, doubled vox ship generator fuel, added vox ship generator coolant, added vox ship generator stoking stick.</li>
+			</ul>
+
+			<h2 class="date">12 December 2022</h2>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Hand labelers will now skip all other interactions except labeling while turned on. This means they won't toggle locker locks or any other weirdness while also attaching labels. While the labeler is turned off, it will go into containers and behave as usual.</li>
+				<li class="bugfix">Hand labelers will no long turn on if you provide an invalid or empty string as the label text.</li>
+				<li class="rscadd">Added codex mechanics to hand labelers.</li>
+				<li class="tweak">Default ship sensor range overheat threshhold reduced to 3, bringing it back in line to previous values. This allows upgrading the sensors with better manipulators to become viable. Maximum possible upgraded range before overheating is 6.</li>
+				<li class="tweak">Ship sensor range inputs now only accept whole numbers, and will round any decimal value entered.</li>
+				<li class="rscdel">The weak variant of ship sensors has been removed. The GUP's sensors are now equivalent to all other sensors.</li>
+				<li class="maptweak">Raider and ninja now have aluminum and plastic added to their autolathes.</li>
+				<li class="maptweak">Crashed survivor pod and colony sites now have suit cooling units.</li>
+				<li class="bugfix">Luminol now properly reveals cleaned blood decals, unless they were cleaned with sterilizine.</li>
+			</ul>
+
+			<h2 class="date">08 December 2022</h2>
+			<h3 class="author">Sennalen updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Fixed a runtime that could cause an exoplanet flora to lack reagents.</li>
+			</ul>
+
+			<h2 class="date">06 December 2022</h2>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">Zombie juice is no longer a spawnable option from data capsules.</li>
+			</ul>
+
 			<h2 class="date">05 December 2022</h2>
 			<h3 class="author">SierraKomodo updated:</h3>
 			<ul class="changes bgimages16">
@@ -63,6 +149,13 @@
 				<li class="bugfix">Disassembling racks no longer gives you free aluminum.</li>
 				<li class="tweak">Guest pass terminals now allow guest passes to have a time limit of 60 minutes, up from 30 minutes.</li>
 				<li class="rscadd">You can now link PDAs to fax machines to receive notifications of received faxes from anywhere on the ship. You can do this by clicking the fax machine with your PDA.</li>
+				<li class="bugfix">You can no longer create new inflatables by spam clicking them.</li>
+				<li class="rscadd">Bunny slippers can now be found in the footwear section of character loadout.</li>
+				<li class="bugfix">Titanium (And other materials with high crafting costs) can now have their crafting menus opened again.</li>
+				<li class="bugfix">Claymores now use the correct material when they are crafted.</li>
+				<li class="bugfix">Mininghome now includes ground ores for the big drill.</li>
+				<li class="maptweak">Medbay has nanoblood again.</li>
+				<li class="bugfix">Prebuilt mechs, including the cargo powerloader, now have valid cameras in their sensors.</li>
 			</ul>
 
 			<h2 class="date">04 December 2022</h2>
@@ -234,173 +327,6 @@
 			<h3 class="author">Rootoo807 updated:</h3>
 			<ul class="changes bgimages16">
 				<li class="rscadd">Adds a bluespace ghost simplemob, with hostile and non-hostile variants.</li>
-			</ul>
-
-			<h2 class="date">21 October 2022</h2>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Making restraints shows progress bar.</li>
-				<li class="bugfix">Doesn't deplete coil irregardless of completion of restraint making action.</li>
-			</ul>
-
-			<h2 class="date">19 October 2022</h2>
-			<h3 class="author">Rootoo807 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Zombie Powder no longer kills you, only pretends to kill you.</li>
-				<li class="bugfix">IV drips properly show the color of their contents, rather than always appearing white.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Certain UI elements had really tiny fonts. That should be fixed now.</li>
-			</ul>
-			<h3 class="author">SomeAngryMiner updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">First aid kits, beakers, hyposprays, defibrillators, brute packs, ointments, splints and other assorted medical equipment has received a resprite.</li>
-				<li class="rscadd">first-aid kits, hyposprays and other similar items that had no tech levels or deconstructable matter now have it.</li>
-			</ul>
-
-			<h2 class="date">18 October 2022</h2>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fixed antag selection being able to choose FBP's as Changeling.</li>
-			</ul>
-			<h3 class="author">PurplePinapple updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Added the light bullpup rifle, the Z9 Pitbull, as a more accurate but slower ROF rifle in a smaller caliber that supply can order.</li>
-				<li class="rscadd">New icons added for the garand, pistol carbine, mauser pistol, mosin boltaction, throwback pistols, and the current bullpup rifle</li>
-				<li class="tweak">Increases the price of the z8 bullpup to 100 credits in the supply system. The new light rifle is 80 credits; the original price of the old bullpup.</li>
-			</ul>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Adrenaline takes 4u to restart hearts, down from 5.</li>
-				<li class="bugfix">Adrenaline injectors can now actually restart hearts.</li>
-			</ul>
-
-			<h2 class="date">16 October 2022</h2>
-			<h3 class="author">Ninetailed updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Surgeon, Crisis, and Emergency modules now have space cleaner</li>
-				<li class="rscadd">Surgeon module now has sterilizine</li>
-				<li class="tweak">Examining spray bottles now shows a message more like the ones beakers have.</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Ports sprites for fire extinguishers, wall safes, drills, shield gens, plasma cutter and more. See #32658 for origins.</li>
-				<li class="tweak">Ports in new corgi sprites. https://github.com/Aurorastation/Aurora.3/pull/14870 for origins.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Atoms with a damage hit sound now properly play that sound when hit.</li>
-			</ul>
-
-			<h2 class="date">15 October 2022</h2>
-			<h3 class="author">ComradeCheekiBreeki & Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Added challenge coins for sol, confederation, and misc organizations, available in loadout.</li>
-				<li class="tweak">You can tap coins against things on harm intent, and drop them with the Object/Drop Coin verb.</li>
-				<li class="tweak">Removed and uranium coins from simple coin types, added a bunch of others instead.</li>
-				<li class="bugfix">Bronze no longer grinds into gold.</li>
-				<li class="tweak">Added the Trinkets category in loadout, moved coins to it and added challenge coins there.</li>
-			</ul>
-			<h3 class="author">SealCure updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Adds a hostile skeleton mob. Rattle me bones!</li>
-			</ul>
-			<h3 class="author">SomeAngryMiner updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Chemical heaters (and coolers), and point defense batteries can be modified and moved once again.</li>
-				<li class="tweak">Circuit boards and robot components (including broken ones) can be recycled at autolathes, protolathes or grinders, like most other pieces.</li>
-				<li class="rscdel">Removed Dufflebag of holding.</li>
-				<li class="tweak">Bags of holding can hold the same item sizes as normal backpacks now.</li>
-				<li class="tweak">Swiss knives can now use their tools with most items, with the exception of the biggest ones (anything bigger than a voidsuit)</li>
-				<li class="tweak">bioprinter boards can't be printed on RnD anymore.</li>
-				<li class="tweak">Organ freezer designs are no longer considered weapons, on the protolathe: Moved to the medical tab.</li>
-				<li class="tweak">Nullglass sheets are no longer invisible. Reflavored to gems, hidden from codex and added a new sprite for the tiles.</li>
-				<li class="tweak">Crystallizing agent no longer has a 25% chance of exploding your head; Instead, it now also affects cybernetics and internal organs.</li>
-			</ul>
-
-			<h2 class="date">14 October 2022</h2>
-			<h3 class="author">Gy1ta23 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">helmets can do volume multipliers, deck crew helmets now muffle sound</li>
-			</ul>
-			<h3 class="author">Rootoo807 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Shrimp no longer drop clam shells when eaten.</li>
-			</ul>
-			<h3 class="author">SealCure updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Increases font size of ghost trap messages and adds a sound.</li>
-			</ul>
-			<h3 class="author">SomeAngryMiner updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Resprites medical tools.</li>
-				<li class="rscadd">Resprites Organ Freezers.</li>
-				<li class="rscadd">Organ Freezers can now hold any reagent container: from beakers, bottles, pills, or simply food and glasses.</li>
-				<li class="rscadd">IV bags can be recycled, now.</li>
-				<li class="rscadd">Renames Fix-O-Vein to vascular recoupler.</li>
-				<li class="rscadd">Resprites IV stands.</li>
-				<li class="rscadd">Resprites IV bags.</li>
-				<li class="rscadd">Resprites nanopaste</li>
-				<li class="rscadd">Resprites the NASA voidsuit.</li>
-			</ul>
-			<h3 class="author">gy1ta23 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">janitors rejoice; your closet has a rag, your belts will fit it</li>
-			</ul>
-
-			<h2 class="date">12 October 2022</h2>
-			<h3 class="author">ComradeCheekiBreeki updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">There are now possible negative consequences when trying to rack pump shotguns one-handed, which are dependent on the user's skillset.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Bloodbags now spawn with the correct blood color based on their initial contents.</li>
-				<li class="maptweak">Medbay's nanoblood supply has been replaced with O- human blood. The number of pre-filled blood bags has been doubled to counter the reduced efficiency compared to nanoblood bags. Two packs of skrellian and two packs of unathi blood has also been added to the blood locker.</li>
-				<li class="rscadd">Human, unathi, and skrell O- blood packs are now available through supply. Costs of nanoblood and blood packs have been adjusted: Nanoblood is now 30 credits, skrell and unathi blood is 20 credits, and human blood is 15.</li>
-			</ul>
-			<h3 class="author">SomeAngryMiner updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">RCDs can now print low walls, wired computer frames and wired machine frames.</li>
-				<li class="tweak">RCDs can now deconstruct firelock assemblies and airlock assemblies.</li>
-			</ul>
-
-			<h2 class="date">10 October 2022</h2>
-			<h3 class="author">AzlanonPc, Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Change how Anomaly Containers are and make them machinery.</li>
-			</ul>
-			<h3 class="author">JoeyNosegay updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Separates 'White Hazard Vest' and 'Medical Hazard Vest'</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Add more Soap.</li>
-			</ul>
-			<h3 class="author">SealCure updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Adds a single-shot shotgun to the uplink, concealed within a cane. Beware the old man.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fire extinguishers now properly put out fires on tiles that have no atmosphere or no temperature.</li>
-				<li class="bugfix">Unrefillable welding tool tanks can no longer be refueled using a weldpack.</li>
-				<li class="tweak">Welding packs now inform you if the tool you are attempting to refill is already full</li>
-				<li class="tweak">Weldpacks no longer have a 50% chance of exploding when you use a lit torch on them. Instead, they will only explode if you're on harm intent. Otherwise, it tells you no and does nothing.</li>
-				<li class="admin">Client join and disconnect logs can now appear to staff that enable the new Show Join Logs preference.</li>
-				<li class="bugfix">Various on-connect messages now wait for goon chat to load, allowing users with goon chat enabled to see said on-connect messages.</li>
-			</ul>
-			<h3 class="author">SingingSpock updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">SEA and bridge officers now have command backpack options</li>
-			</ul>
-
-			<h2 class="date">09 October 2022</h2>
-			<h3 class="author">Gy1ta23 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="imageadd">saws off the sawn-off's sprite stock</li>
 			</ul>
 		</div>
 

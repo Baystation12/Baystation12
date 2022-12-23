@@ -50,6 +50,10 @@
 	// Fill the object up with the appropriate reagents.
 	for(var/rid in seed.chems)
 		var/list/reagent_data = seed.chems[rid]
+		if(reagent_data && !islist(reagent_data))
+			log_debug(append_admin_tools("A fill_reagents list was created as a non-list. Seed: [seed] ([seed.type]). Reagent: [rid] = [seed.chems[rid]].", location = get_turf(src)))
+			reagent_data = list(reagent_data)
+
 		if(reagent_data && reagent_data.len)
 			var/rtotal = reagent_data[1]
 			var/list/data = list()

@@ -604,7 +604,7 @@
 /turf/space,
 /area/space)
 "jJ" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
@@ -794,7 +794,7 @@
 "mV" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/storage/firstaid/adv,
-/obj/item/roller,
+/obj/item/roller_bed,
 /obj/item/storage/backpack/satchel/med,
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/random/firstaid,
@@ -820,7 +820,7 @@
 /area/scavver/yachtdown)
 "np" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/item/reagent_containers/food/drinks/cans/waterbottle,
 /obj/item/reagent_containers/food/drinks/cans/waterbottle,
@@ -2836,7 +2836,7 @@
 /turf/simulated/floor/tiled,
 /area/scavver/calypso)
 "XQ" = (
-/obj/machinery/shipsensors/weak{
+/obj/machinery/shipsensors{
 	use_power = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{

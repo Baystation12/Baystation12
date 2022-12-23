@@ -10,7 +10,7 @@
 // power decides how much painkillers will stop the message
 // force means it ignores anti-spam timer
 /mob/living/carbon/proc/custom_pain(message, power, force, obj/item/organ/external/affecting, nohalloss)
-	if(!message || stat || !can_feel_pain() || chem_effects[CE_PAINKILLER] > power)
+	if(stat || !can_feel_pain() || chem_effects[CE_PAINKILLER] > power)
 		return 0
 
 	power -= chem_effects[CE_PAINKILLER]/2	//Take the edge off.
@@ -25,7 +25,7 @@
 	flash_pain(min(round(2*power)+55, 255))
 
 	// Anti message spam checks
-	if(force || (message != last_pain_message) || (world.time >= next_pain_time))
+	if(message && (force || (message != last_pain_message) || (world.time >= next_pain_time)))
 		last_pain_message = message
 		custom_pain_emote(message, power)
 

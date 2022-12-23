@@ -79,8 +79,13 @@
 /area/map_template/ninja_dojo/dojo)
 "an" = (
 /obj/structure/table/glass,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/unathi/oneg,
+/obj/item/reagent_containers/ivbag/blood/unathi/oneg,
 /obj/structure/window/reinforced/crescent{
 	dir = 4
 	},
@@ -256,7 +261,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "aI" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/structure/window/reinforced/crescent,
 /turf/unsimulated/floor{
 	icon_state = "white"
@@ -1005,6 +1010,8 @@
 	amount = 50
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/item/stack/material/plastic/fifty,
+/obj/item/stack/material/aluminium/fifty,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},

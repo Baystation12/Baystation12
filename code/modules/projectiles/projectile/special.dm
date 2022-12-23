@@ -29,7 +29,7 @@
 	damage_flags = DAMAGE_FLAG_BULLET | DAMAGE_FLAG_SHARP | DAMAGE_FLAG_EDGE
 
 /obj/item/projectile/bullet/gyro/on_hit(atom/target, blocked = 0)
-	explosion(target, -1, 0, 2)
+	explosion(target, 2, EX_ACT_LIGHT)
 	return 1
 
 /obj/item/projectile/meteor
@@ -207,7 +207,7 @@
 
 /obj/item/missile/throw_impact(atom/hit_atom)
 	if(primed)
-		explosion(hit_atom, 0, 1, 2, 4)
+		explosion(hit_atom, 3, EX_ACT_HEAVY)
 		qdel(src)
 	else
 		..()
