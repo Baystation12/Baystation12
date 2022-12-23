@@ -25,6 +25,14 @@
 	SetBounds()
 	update_filler_turfs()
 
+/obj/machinery/door/airlock/multi_tile/Initialize()
+	. = ..()
+	SetBounds()
+	update_connections()
+	update_filler_turfs()
+
+
+
 /obj/machinery/door/airlock/multi_tile/Move()
 	. = ..()
 	SetBounds()
