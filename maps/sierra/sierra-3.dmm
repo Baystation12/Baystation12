@@ -2904,7 +2904,6 @@
 /obj/random/blood_packs,
 /obj/random/blood_packs,
 /obj/random/blood_packs,
-/obj/item/reagent_containers/ivbag/blood,
 /obj/item/reagent_containers/food/snacks/candy/donor,
 /obj/item/reagent_containers/food/snacks/candy/donor,
 /obj/item/reagent_containers/food/snacks/candy/donor,
@@ -2916,6 +2915,7 @@
 	dir = 8
 	},
 /obj/structure/closet/secure_closet/medical1,
+/obj/item/reagent_containers/ivbag,
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "afQ" = (
