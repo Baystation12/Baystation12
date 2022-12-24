@@ -51,6 +51,19 @@
 #define MATERIAL_NULLGLASS               "nullglass"
 #define MATERIAL_GROWTH                  "growth"
 
+
+			//SOFA DEFINES//
+
+#define MATERIAL_RED_CLOTH               "red_cloth"
+#define MATERIAL_YELLOW_CLOTH            "yellow_cloth"
+#define MATERIAL_TEAL_CLOTH              "teal_cloth"
+#define MATERIAL_BLACK_CLOTH             "black_cloth"
+#define MATERIAL_GREEN_CLOTH             "green_cloth"
+#define MATERIAL_PURPLE_CLOTH            "purple_cloth"
+#define MATERIAL_BLUE_CLOTH              "blue_cloth"
+#define MATERIAL_BEIGE_CLOTH             "beige_cloth"
+#define MATERIAL_LIME_CLOTH              "lime_cloth"
+
 //woods
 #define MATERIAL_WOOD                    "wood"
 #define MATERIAL_MAHOGANY                "mahogany"

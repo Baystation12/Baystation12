@@ -1,0 +1,14 @@
+#ifndef MODPACK_SOFA
+#define MODPACK_SOFA
+#include "_sofa.dm"
+#include "sofa.dm"
+#endif
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+// END_PREFERENCES
+// BEGIN_INCLUDE
+// END_INCLUDE

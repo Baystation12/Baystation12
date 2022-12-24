@@ -3318,6 +3318,5 @@
 #include "maps\deepmaint\deepmaint_rooms\core\_core_rooms.dm"
 #include "maps\deepmaint\deepmaint_rooms\normal\_normal_rooms.dm"
 #include "mods\_modpack.dm"
-#include "packs\Infinity\_pack.dm"
 #include "~code\global_init.dm"
 // END_INCLUDE

@@ -144,6 +144,7 @@
 	#include "../event/iccgn_ship/icgnv_hound.dm"
 	#include "../../mods/eris_announcer/_eris_announcer.dme"
 	#include "../../mods/species/resomi/_resomi.dme"
+	#include "../../mods/sofa/_sofa.dme"
 
 	#define using_map_DATUM /datum/map/sierra
 
