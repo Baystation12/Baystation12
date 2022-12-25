@@ -86,26 +86,20 @@
 	RefreshParts()
 	power_change()
 
-	var/area/A = get_area(src)
-	if(A)
-		LAZYADD(A.machinery_list, src)
-
 /obj/machinery/Destroy()
 	if(istype(wires))
 		QDEL_NULL(wires)
 	SSmachines.machinery -= src
 	QDEL_NULL_LIST(component_parts) // Further handling is done via destroyed events.
 	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_ALL)
-	var/area/A = get_area(src)
-	if(A)
-		LAZYREMOVE(A.machinery_list, src)
 	. = ..()
 
 /// Part of the machinery subsystem's process stack. Processes everything defined by `processing_flags`.
 /obj/machinery/proc/ProcessAll(wait)
 	if(processing_flags & MACHINERY_PROCESS_COMPONENTS)
-		for(var/obj/item/stock_parts/part as anything in processing_parts)
-			if(istype(part) && part.machine_process(src) == PROCESS_KILL)
+		for(var/thing in processing_parts)
+			var/obj/item/stock_parts/part = thing
+			if(part.machine_process(src) == PROCESS_KILL)
 				part.stop_processing()
 
 	if((processing_flags & MACHINERY_PROCESS_SELF) && Process(wait) == PROCESS_KILL)
@@ -451,11 +445,3 @@
 /// Called by `/mob/Login()` if the mob has an associated `machine`.
 /obj/machinery/proc/on_user_login(mob/M)
 	return
-
-/obj/machinery/wrench_floor_bolts(mob/user, delay)
-	. = ..()
-	var/area/A = get_area(src)
-	if(anchored)
-		A.machinery_list |= src
-	else
-		A.machinery_list -= src
