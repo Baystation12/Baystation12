@@ -562,7 +562,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if(!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated() || !id_tag)
 		return
 	var/found = 0
-	for(var/obj/structure/disposalpipe/diversion_junction/D in world)
+	for(var/obj/structure/disposalpipe/diversion_junction/D in GLOB.diversion_junctions)
 		if(D.id_tag == src.id_tag)
 			found = 1
 			break

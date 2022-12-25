@@ -544,6 +544,7 @@
 	updatedesc()
 
 /obj/structure/disposalpipe/diversion_junction/Destroy()
+	GLOB.diversion_junctions -= src
 	if(linked)
 		linked.junctions.Remove(src)
 	linked = null

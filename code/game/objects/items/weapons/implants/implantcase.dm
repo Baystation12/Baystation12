@@ -18,6 +18,10 @@
 	..()
 	update_icon()
 
+/obj/item/implantcase/Destroy()
+	QDEL_NULL(imp)
+	. = ..()
+
 /obj/item/implantcase/proc/update_description()
 	if (imp)
 		desc = "A case containing \a [imp]."

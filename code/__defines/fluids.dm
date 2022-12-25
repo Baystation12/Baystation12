@@ -7,11 +7,11 @@
 #define FLUID_PUSH_THRESHOLD 20            // Amount of water flow needed to push items.
 
 // Expects /turf for T.
-#define ADD_ACTIVE_FLUID_SOURCE(T)    SSfluids.water_sources[T] = TRUE
+#define ADD_ACTIVE_FLUID_SOURCE(T)    if(!T.changing_turf) { SSfluids.water_sources[T] = TRUE; }
 #define REMOVE_ACTIVE_FLUID_SOURCE(T) SSfluids.water_sources -= T
 
 // Expects /obj/effect/fluid for F.
-#define ADD_ACTIVE_FLUID(F)           SSfluids.active_fluids[F] = TRUE
+#define ADD_ACTIVE_FLUID(F)           if(!QDELETED(F)) { SSfluids.active_fluids[F] = TRUE; }
 #define REMOVE_ACTIVE_FLUID(F)        SSfluids.active_fluids -= F
 
 // Expects /obj/effect/fluid for F, int for amt.

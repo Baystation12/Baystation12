@@ -25,4 +25,4 @@
 
 /obj/effect/fake_fire/Destroy()
 	STOP_PROCESSING(SSobj,src)
-	..()
+	. = ..()

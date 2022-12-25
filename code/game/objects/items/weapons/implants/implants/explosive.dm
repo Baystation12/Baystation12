@@ -161,6 +161,8 @@
 
 /obj/item/implant/explosive/Destroy()
 	removed()
+	radio_controller.remove_object(src, frequency)
+	radio_connection = null
 	GLOB.listening_objects -= src
 	return ..()
 

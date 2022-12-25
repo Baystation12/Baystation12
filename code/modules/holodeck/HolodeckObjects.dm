@@ -148,11 +148,6 @@
 	dir = 5
 	icon_state = "window_full"
 
-/obj/structure/window/holowindow/full/Destroy()
-	..()
-
-/obj/structure/window/reinforced/holowindow/Destroy()
-	..()
 
 /obj/structure/window/reinforced/holowindow/attackby(obj/item/W as obj, mob/user as mob)
 
@@ -175,11 +170,7 @@
 	qdel(src)
 	return
 
-/obj/structure/window/reinforced/holowindow/disappearing/Destroy()
-	..()
-
-/obj/machinery/door/window/holowindoor/Destroy()
-	..()
+/obj/structure/window/reinforced/holowindow/disappearing
 
 /obj/machinery/door/window/holowindoor/attackby(obj/item/I as obj, mob/user as mob)
 
@@ -211,8 +202,6 @@
 		visible_message("[src] fades away as it shatters!")
 	qdel(src)
 
-/obj/structure/bed/chair/holochair/Destroy()
-	..()
 
 /obj/structure/bed/chair/holochair/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/wrench))

@@ -56,12 +56,6 @@
 
 	overlays.Cut()
 	underlays.Cut()
-	if(istype(src,/turf/simulated))
-		//Yeah, we're just going to rebuild the whole thing.
-		//Despite this being called a bunch during explosions,
-		//the zone will only really do heavy lifting once.
-		var/turf/simulated/S = src
-		if(S.zone) S.zone.rebuild()
 
 	// Run the Destroy() chain.
 	qdel(src)

@@ -257,7 +257,7 @@
 	..(newloc, newmaterial, MATERIAL_CLOTH)
 
 /obj/structure/bed/chair/office/dark/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "black")
+	..(newloc, newmaterial, MATERIAL_BLACK_CLOTH)
 
 /obj/structure/bed/chair/office/comfy
 	name = "comfy office chair"

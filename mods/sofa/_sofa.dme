@@ -1,7 +1,5 @@
 #ifndef MODPACK_SOFA
 #define MODPACK_SOFA
-#include "_sofa.dm"
-#include "sofa.dm"
 #endif
 // BEGIN_INTERNALS
 // END_INTERNALS

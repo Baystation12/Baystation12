@@ -41,17 +41,22 @@
 	for(var/A in src)
 		qdel(A)
 	forceMove(null)
+
 	if (pulledby)
 		if (pulledby.pulling == src)
 			pulledby.pulling = null
 		pulledby = null
+
 	if(LAZYLEN(movement_handlers) && !ispath(movement_handlers[1]))
 		QDEL_NULL_LIST(movement_handlers)
+
 	if (bound_overlay)
 		QDEL_NULL(bound_overlay)
+
 	if(virtual_mob && !ispath(virtual_mob))
 		qdel(virtual_mob)
 		virtual_mob = null
+
 	return ..()
 
 /atom/movable/Bump(atom/A, yes)
@@ -64,7 +69,7 @@
 	..()
 
 /atom/movable/proc/forceMove(atom/destination)
-	if((gc_destroyed && gc_destroyed != GC_CURRENTLY_BEING_QDELETED) && !isnull(destination))
+	if(QDELETED(src) && !QDESTROYING(src) && !isnull(destination))
 		CRASH("Attempted to forceMove a QDELETED [src] out of nullspace!!!")
 	if(loc == destination)
 		return 0
