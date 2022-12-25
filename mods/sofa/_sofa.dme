@@ -11,4 +11,6 @@
 // BEGIN_PREFERENCES
 // END_PREFERENCES
 // BEGIN_INCLUDE
+#include "_sofa.dm"
+#include "sofa.dm"
 // END_INCLUDE
