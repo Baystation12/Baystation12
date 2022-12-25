@@ -247,7 +247,7 @@ SUBSYSTEM_DEF(garbage)
 	var/type = D.type
 	var/refID = "\ref[D]"
 
-	//del(D)
+	del(D)
 
 	tick = world.tick_usage - tick + ((world.time - ticktime) / world.tick_lag * 100)
 
