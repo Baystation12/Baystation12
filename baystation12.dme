@@ -347,6 +347,7 @@
 #include "code\datums\movement\robot.dm"
 #include "code\datums\movement\~defines.dm"
 #include "code\datums\observation\_defines.dm"
+#include "code\datums\observation\area_power_change.dm"
 #include "code\datums\observation\death.dm"
 #include "code\datums\observation\density_set.dm"
 #include "code\datums\observation\destroyed.dm"

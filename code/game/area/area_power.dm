@@ -24,8 +24,7 @@
 
 /// Called whenever the area's power or power usage state should change.
 /area/proc/power_change()
-	for(var/obj/machinery/M in src)	// for each machine in the area
-		M.power_change()			// reverify power status (to update icons etc.)
+	GLOB.area_power_change.raise_event(src)
 	if (atmosalm || fire || eject || party)
 		update_icon()
 

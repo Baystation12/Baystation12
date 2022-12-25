@@ -2,27 +2,30 @@
 
 /obj/machinery/atmospherics/pipe
 
-	var/datum/gas_mixture/air_temporary // used when reconstructing a pipeline that broke
-	var/datum/pipeline/parent
-	var/volume = 0
-	var/leaking = 0		// Do not set directly, use set_leaking(TRUE/FALSE)
 	use_power = POWER_USE_OFF
+	stat_immune = MACHINE_STAT_NOINPUT | MACHINE_STAT_NOSCREEN | MACHINE_STAT_NOPOWER
 	uncreated_component_parts = null // No apc connection
 
-	var/maximum_pressure = 210 * ONE_ATMOSPHERE
-	var/fatigue_pressure = 170 * ONE_ATMOSPHERE
-	var/alert_pressure = 170 * ONE_ATMOSPHERE
 	var/in_stasis = 0
-		//minimum pressure before check_pressure(...) should be called
 	var/obj/machinery/clamp/clamp // Linked stasis clamp
 
 	can_buckle = TRUE
 	buckle_require_restraints = TRUE
-	var/datum/sound_token/sound_token
 	build_icon_state = "simple"
 	build_icon = 'icons/obj/pipe-item.dmi'
 	pipe_class = PIPE_CLASS_BINARY
 	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
+
+	var/datum/gas_mixture/air_temporary    // used when reconstructing a pipeline that broke
+	var/datum/pipeline/parent
+	var/volume = 0
+	var/leaking = 0		// Do not set directly, use set_leaking(TRUE/FALSE)
+
+	//minimum pressure before check_pressure(...) should be called
+	var/maximum_pressure = 210 * ONE_ATMOSPHERE
+	var/fatigue_pressure = 170 * ONE_ATMOSPHERE
+	var/alert_pressure = 170 * ONE_ATMOSPHERE
+	var/datum/sound_token/sound_token
 
 /obj/machinery/atmospherics/pipe/drain_power()
 	return -1
