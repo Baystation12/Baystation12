@@ -35,6 +35,9 @@
 	. = ..()
 
 /atom/movable/Destroy()
+
+	unregister_all_movement(loc, src) // unregister events before destroy to avoid expensive checking
+
 	if(!(atom_flags & ATOM_FLAG_INITIALIZED))
 		crash_with("Was deleted before initalization")
 	walk(src, 0)
@@ -53,9 +56,8 @@
 	if (bound_overlay)
 		QDEL_NULL(bound_overlay)
 
-	if(virtual_mob && !ispath(virtual_mob))
-		qdel(virtual_mob)
-		virtual_mob = null
+	if(ismob(virtual_mob))
+		QDEL_NULL(virtual_mob)
 
 	return ..()
 
