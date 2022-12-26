@@ -38,10 +38,10 @@ I know no God but camel case.
 
 	var/hatch = HATCH_CLOSED //Status of the passenger hatch
 
-	var/const/HATCH_CLOSED = 0 //The lifepod is closed.
-	var/const/HATCH_OPEN = 1 //The lifepod is open.
-	var/const/HATCH_LOCKED = 2 //The lifepod has been locked by the passenger.
-	var/const/HATCH_BROKEN = 3 //The lifepod was forced open while locked or damaged too much. It is not usable in this state.
+	var/const/HATCH_CLOSED = 1 //The lifepod is closed. We count from 1 just to see if DreamChecker stops screaming.
+	var/const/HATCH_OPEN = 2 //The lifepod is open.
+	var/const/HATCH_LOCKED = 3 //The lifepod has been locked by the passenger.
+	var/const/HATCH_BROKEN = 4 //The lifepod was forced open while locked or damaged too much. It is not usable in this state.
 
 	var/const/PODEDGE = TRANSITIONEDGE + 20 //The distance from the Z-level border in which the lifepod will attempt to land.
 
@@ -57,10 +57,10 @@ I know no God but camel case.
 	var/obj/machinery/mass_driver/launchDriver //The driver it gets shot from.
 	var/launchStatus = LIFEPOD_READY //Did it get launched?
 
-	var/const/LIFEPOD_READY = 0 //The lifepod is waiting to be launched.
-	var/const/LIFEPOD_LAUNCHED = 1 //The lifepod has been launched and is in space.
-	var/const/LIFEPOD_LANDED = 2 //The lifepod has landed, somewhere.
-	var/const/LIFEPOD_FAILURE = 3 //The lifepod failed to launch due to a mass driver not being present.
+	var/const/LIFEPOD_READY = 1 //The lifepod is waiting to be launched.
+	var/const/LIFEPOD_LAUNCHED = 2 //The lifepod has been launched and is in space.
+	var/const/LIFEPOD_LANDED = 3 //The lifepod has landed, somewhere.
+	var/const/LIFEPOD_FAILURE = 4 //The lifepod failed to launch due to a mass driver not being present.
 
 	var/datum/gas_mixture/airSupply //The air supply for the lifepod.
 	var/lastAirWarningTime //When was the last time they got warned about air pressure?
@@ -96,7 +96,7 @@ I know no God but camel case.
 /obj/machinery/lifepod/proc/processOccupant()
 	var/mob/living/carbon/passenger = storedThing
 	if(powered())
-		var/stasisPower = round((world.time-timeEntered)*0.1) //Slowly increase.
+		var/stasisPower = round((world.time-timeEntered)*0.05) //Slowly increase.
 
 		if(stasisPower)
 			passenger.SetStasis(stasisPower)
