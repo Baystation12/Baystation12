@@ -32,7 +32,7 @@
 
 /datum/category_item/player_setup_item/physical/basic/content()
 	. = list()
-	//. += "[TBTN("spawnpoint", pref.spawnpoint, "Spawn Point")]<br />"
+	. += "[TBTN("spawnpoint", pref.spawnpoint, "Spawn Point")]<br />"
 	. += "[TBTN("rename", pref.real_name, "Name")] [BTN("random_name", "Randomize")]"
 	. = jointext(., null)
 
