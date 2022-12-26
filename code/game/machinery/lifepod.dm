@@ -10,11 +10,11 @@ I know no God but camel case.
 
 */
 
-/proc/escapedViaPod(mob/sample) //FUNNY PROC TIME! (It is for the end-round data collection.)
+/proc/escapedViaPod(mob/testCase) //FUNNY PROC TIME! (It is for the end-round data collection.)
 	var/obj/machinery/lifepod/pod
 
-	if(istype(sample.loc, /obj/machinery/lifepod)) //Are they in a lifepod?
-		pod = sample.loc
+	if(istype(testCase.loc, /obj/machinery/lifepod)) //Are they in a lifepod?
+		pod = testCase.loc
 
 		if(pod.launchStatus == 0 || 3) //Is the lifepod still onboard or did it fail to launch?
 			return FALSE //You did not escape because the pod did not launch.
@@ -33,17 +33,15 @@ I know no God but camel case.
 	anchored = FALSE //Lightweight!
 	machine_name = "lifepod"
 	machine_desc = "An NT-31B model lifepod with licensed Vey-Med stasis technology and a patented oxygen AND nitrogen candle. It utilizes \
-	old-school subdimensional particle navigation in combination with high-velocity launch to violently land at any nearby physical entity. \
+	old-school subdimensional particle navigation in combination with a high-velocity launch to violently land at any nearby physical entity. \
 	It also has an internal radioisotope thermoelectric generator that produces just enough power to sustain the pod and open its blast door."
 
+	var/const/HATCH_CLOSED = 0 //The lifepod is closed. We count from 1 just to see if DreamChecker stops screaming.
+	var/const/HATCH_OPEN = 1 //The lifepod is open.
+	var/const/HATCH_LOCKED = 2 //The lifepod has been locked by the passenger.
+	var/const/HATCH_BROKEN = 3 //The lifepod was forced open while locked or damaged too much. It is not usable in this state.
+
 	var/hatch = HATCH_CLOSED //Status of the passenger hatch
-
-	var/const/HATCH_CLOSED = 1 //The lifepod is closed. We count from 1 just to see if DreamChecker stops screaming.
-	var/const/HATCH_OPEN = 2 //The lifepod is open.
-	var/const/HATCH_LOCKED = 3 //The lifepod has been locked by the passenger.
-	var/const/HATCH_BROKEN = 4 //The lifepod was forced open while locked or damaged too much. It is not usable in this state.
-
-	var/const/PODEDGE = TRANSITIONEDGE + 20 //The distance from the Z-level border in which the lifepod will attempt to land.
 
 	var/atom/movable/storedThing //Whatever is occupying the passenger compartment.
 	var/timeEntered //The time it entered.
@@ -55,12 +53,15 @@ I know no God but camel case.
 
 	var/obj/machinery/door/blast/launchHatch //The door it gets shot out of.
 	var/obj/machinery/mass_driver/launchDriver //The driver it gets shot from.
+
+	var/const/LIFEPOD_READY = 0 //The lifepod is waiting to be launched.
+	var/const/LIFEPOD_LAUNCHED = 1 //The lifepod has been launched and is in space.
+	var/const/LIFEPOD_LANDED = 2 //The lifepod has landed, somewhere.
+	var/const/LIFEPOD_FAILURE = 3 //The lifepod failed to launch due to a mass driver not being present.
+
 	var/launchStatus = LIFEPOD_READY //Did it get launched?
 
-	var/const/LIFEPOD_READY = 1 //The lifepod is waiting to be launched.
-	var/const/LIFEPOD_LAUNCHED = 2 //The lifepod has been launched and is in space.
-	var/const/LIFEPOD_LANDED = 3 //The lifepod has landed, somewhere.
-	var/const/LIFEPOD_FAILURE = 4 //The lifepod failed to launch due to a mass driver not being present.
+
 
 	var/datum/gas_mixture/airSupply //The air supply for the lifepod.
 	var/lastAirWarningTime //When was the last time they got warned about air pressure?
@@ -237,47 +238,40 @@ I know no God but camel case.
 	launchDriver.delayed_drive() //IT HAPPENED.
 
 
-/obj/machinery/lifepod/proc/launchProcess() //For checking the turf and landing
+/obj/machinery/lifepod/touch_map_edge() //THERE IS A MAP BORDER PROC HOLY HELL.
 	if(!istype(loc, /turf/space)) //If you're not in space, don't try to land.
 		return
 
-	if(y <= PODEDGE || y >= world.maxy-PODEDGE || x <= PODEDGE || x <= world.maxx-PODEDGE) //... manually of course.
+	var/list/possibleSites = list()
+	if(GLOB.using_map.use_overmap) //I hope this would be used only in overmap-compatible maps, because outside of that there will be limited viablity.
+		var/obj/effect/overmap/visitable/mothership = map_sectors["[z]"]
+		for(var/obj/effect/overmap/visitable/nearPlace in orange(mothership, 5))
+			if(nearPlace.in_space || istype(nearPlace, /obj/effect/overmap/visitable/sector/exoplanet))
+				possibleSites += nearPlace
 
-		var/list/possibleSites = list()
-		if(GLOB.using_map.use_overmap)
-			var/obj/effect/overmap/visitable/mothership = map_sectors["[z]"]
-			for(var/obj/effect/overmap/visitable/nearPlace in range(mothership, 2))
-				if(nearPlace.in_space || istype(nearPlace, /obj/effect/overmap/visitable/sector/exoplanet) && nearPlace != mothership)
-					possibleSites += nearPlace
+	var/newZ //The Z-level they are getting sent to.
 
-		var/newZ = null //Set as null because we will sacrifice them to the border if there are no available Zs.
-
-		if(possibleSites.len) //If there are no locations, should be rare if not impossible.
-			var/obj/effect/overmap/visitable/targetSite = pick(possibleSites)
-			newZ = pick(targetSite.map_z && prob(40))
-		else
-			newZ = pick(GLOB.using_map.escape_levels) //Send them to an escape level if nothing else.
-			forceMove(rand(PODEDGE, world.maxx-PODEDGE), rand(PODEDGE, world.maxy-PODEDGE), newZ)
-
-			//Since they are stuck in baby jail, tell them that they can ghost.
-			to_chat(storedThing, FONT_LARGE(SPAN_NOTICE("Your lifepod has directed itself to the designated rescue sector. You may ghost and be counted as alive.")))
-
-
-		var/turf/landingTurf = locate(/turf/simulated/floor) in newZ
-
-		if(!landingTurf) //If you manage to be the unlucky bastard to find an away site with no simulated floors, I feel bad for you.
-			return
-
-		else
-			microphone("DIRECT SUBDIMENSIONAL PARTICLE ALIGNMENT CONFIRMED! IMPACT SOON!", 2) //Warn them.
-			sleep(5)
-			explosion(landingTurf, 6)
-			forceMove(landingTurf) //Just get them there.
-			playsound(loc,'sound/effects/meteorimpact.ogg', 100)
-			launchStatus = LIFEPOD_LANDED
-
+	if(possibleSites.len) //If there are locations, pick one.
+		var/obj/effect/overmap/visitable/targetSite = pick(possibleSites)
+		newZ = pick(targetSite.map_z) //Fetch actual Z-level
 	else
+		newZ = pick(GLOB.using_map.escape_levels) //Send them to an escape level if nothing else.
+		forceMove(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE), newZ)
+
+		//Since they are stuck in baby jail, tell them that they can ghost.
+		to_chat(storedThing, FONT_LARGE(SPAN_NOTICE("Your lifepod has navigated itself to the designated rescue sector. You may ghost and be counted as escaped.")))
 		return
+
+	var/turf/landingTurf = locate(/turf/simulated/floor) in newZ
+
+	if(!landingTurf) //If you manage to be the unlucky bastard to find an away site with no simulated floors, I feel bad for you.
+		..()
+	else
+		microphone("DIRECT SUBDIMENSIONAL PARTICLE ALIGNMENT CONFIRMED! IMPACT SOON!", 2) //Warn them.
+		explosion(landingTurf, 6)
+		forceMove(landingTurf) //Just get them there.
+		playsound(loc,'sound/effects/meteorimpact.ogg', 100)
+		launchStatus = LIFEPOD_LANDED
 
 /obj/machinery/lifepod/verb/ejectSupplies() //Spawn your supplies!
 	set name = "Eject emergency supplies"
@@ -291,12 +285,12 @@ I know no God but camel case.
 
 	if(do_after(usr, 1 SECONDS, src, DO_PUBLIC_UNIQUE) && usr.IsAdvancedToolUser() && !suppliesEjected)
 		visible_message(SPAN_DANGER("The ejection piston fires and shoots the supplies out!"))
-		for(var/supply in supplies) //This feels very hacky.
-			var/obj/item/object = new supply(loc)
-			object.throw_at(usr, 2, 3)
+		for(var/supply in supplies) //Can be defined up above in the supplies list
+			var/obj/item/object = new supply(loc) //Actually spawn the supplies
+			object.throw_at(usr, 2, 3) //Throw them at them for comedic purposes.
 		suppliesEjected = TRUE
 	else
-		to_chat(usr, SPAN_WARNING("\The [src]'s ejection cord does nothing."))
+		to_chat(usr, SPAN_WARNING("\The [src]'s ejection cord does nothing.")) //Don't actually tell them it's empty until they pull it.
 
 /obj/machinery/lifepod/verb/lockHatch()
 	set name = "Toggle lock"
@@ -366,8 +360,6 @@ Lock light.
 		to_chat(user, SPAN_NOTICE("The 'MANUAL BOLT' light is flickering."))
 
 /obj/machinery/lifepod/Process()
-	if(launchStatus == LIFEPOD_LAUNCHED)
-		launchProcess()
 	if(storedThing && iscarbon(storedThing))
 		processOccupant()
 
