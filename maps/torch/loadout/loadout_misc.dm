@@ -1,9 +1,8 @@
 /datum/gear/trinket/scg_challenge_coin
 	display_name = "sol challenge coin selection"
-	description = "A selection of challenge coins for identification, collection or simply bragging rights"
+	description = "A selection of Sol challenge coins for identification, collection or bragging rights."
 	path = /obj/item/material/coin/challenge/sol
 	cost = 1
-
 
 /datum/gear/trinket/scg_challenge_coin/New()
 	..()
@@ -17,13 +16,11 @@
 	options["torch"] = /obj/item/material/coin/challenge/sol/torch
 	gear_tweaks += new /datum/gear_tweak/path (options)
 
-
 /datum/gear/trinket/misc_challenge_coin
 	display_name = "misc challenge coin selection"
-	description = "A selection of challenge coins for identification, collection or simply bragging rights"
+	description = "A selection of challenge coins for identification, collection or bragging rights."
 	path = /obj/item/material/coin/challenge/misc
 	cost = 1
-
 
 /datum/gear/trinket/misc_challenge_coin/New()
 	..()
@@ -31,7 +28,6 @@
 	options["PCRC"] = /obj/item/material/coin/challenge/misc/pcrc
 	options["SAARE"] = /obj/item/material/coin/challenge/misc/saare
 	gear_tweaks += new /datum/gear_tweak/path (options)
-
 
 /datum/gear/trinket/gcc_challenge_coin/allowed_branches = list(
 	/datum/mil_branch/civilian,
