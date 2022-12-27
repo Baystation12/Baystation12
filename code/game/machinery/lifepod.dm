@@ -61,10 +61,18 @@ I know no God but camel case.
 
 	var/launchStatus = LIFEPOD_READY //Did it get launched?
 
+	var/landingAttempts = 0 //How many times has it tried landing already?
 
+	var/obj/effect/overmap/visitable/mothership //If it is in the overmap, it has a mothership.
 
 	var/datum/gas_mixture/airSupply //The air supply for the lifepod.
 	var/lastAirWarningTime //When was the last time they got warned about air pressure?
+
+	var/emagBombRig = FALSE //Was it emagged and rigged to explode?
+	var/emagEscape //Was it emagged and rigged to automatically go to a designated target?
+	var/emagLoop = FALSE //Was it emagged and rigged to return to the original Z?
+
+	var/list/move_sounds = list('sound/effects/metalscrape1.ogg', 'sound/effects/metalscrape2.ogg', 'sound/effects/metalscrape3.ogg') //Funny noises to make when moving.
 
 //This thing talks so much as I might as well give it its own proc to do so efficiently and in a cool way.
 /obj/machinery/lifepod/proc/microphone(message, danger = 0, emote)
@@ -83,7 +91,7 @@ I know no God but camel case.
 		if(1)
 			return visible_message(SPAN_WARNING("\The <b>[src]</b> [emote], \"[message]\""))
 		if(2)
-			return visible_message(SPAN_DANGER("\The [src] [emote], \"[message]\""))
+			return visible_message(SPAN_DANGER("\The <b>[src]</b> [emote], \"[message]\""))
 
 /obj/machinery/lifepod/proc/linkLaunchSystems() //This can actually be done with a multitool ingame.
 	launchDriver = locate(/obj/machinery/mass_driver) in loc //Get the mass driver
@@ -105,12 +113,14 @@ I know no God but camel case.
 		if(world.time - timeRadiated >= 10 MINUTES) //Very slow radiation poisoning.
 			passenger.apply_radiation(1)
 			microphone("Minor generator-sourced radiation emission detected.", 1)
+			timeRadiated = world.time //Reset time.
 
 	if(airSupply && airSupply.return_pressure() < ONE_ATMOSPHERE * 0.8 && (world.time - lastAirWarningTime) >= 1 MINUTE) //Scream at them that they have low air.
 		microphone("LOW AIR LEVELS DETECTED!", 1)
 		lastAirWarningTime = world.time
 		if(airSupply.return_pressure() < ONE_ATMOSPHERE * 0.75 && !istype(loc, /turf/space)) //Toggle environmental succ, pray person knows what they're doing.
 			microphone("HAZARDOUS AIR LEVELS DETECTED! TOGGLING EXTERNAL VENTS! BRACE FOR ENVIRONMENTAL EXPOSURE!", 2)
+			sleep(5)
 			airSupply = null
 			qdel(airSupply) //We won't be needing this anymore. Single usage because this is an emergency thing.
 
@@ -133,11 +143,7 @@ I know no God but camel case.
 	update_icon()
 
 /obj/machinery/lifepod/proc/exitLifepod()
-
-
-
-	//Reset their sight and such.
-	if(ismob(storedThing))
+	if(ismob(storedThing)) 	//Reset their sight and such.
 		var/mob/mobThing = storedThing
 
 		if(mobThing.client)
@@ -241,57 +247,88 @@ I know no God but camel case.
 	launchStatus = LIFEPOD_LAUNCHED //Even is the mass driver isn't powered, pretend you still launched.
 	launchDriver.delayed_drive() //IT HAPPENED.
 
+/obj/machinery/lifepod/proc/escape() //Send them to an escape level if nothing else.
+	if(emagEscape) //Teleport them to antag heaven beach area
+		var/obj/effect/landmark/escapePlace = pick(endgame_safespawns)
+		forceMove(escapePlace.loc)
+		//Since they are stuck in the beach, supposedly, tell them they can ghost.
+		to_chat(storedThing, FONT_LARGE(SPAN_COLOR("red", "With the addition of programmed bias to the lifepod's particle sails from your hacking, you have escaped to your intended destination. You may ghost and be counted as escaped.")))
+	else //Teleport them to space-escape area.
+		forceMove(locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE),  pick(GLOB.using_map.escape_levels)))
+		//Since they are stuck in baby jail, tell them that they can ghost.
+		to_chat(storedThing, FONT_LARGE(SPAN_NOTICE("Your lifepod has navigated itself to the designated rescue sector. You may ghost and be counted as escaped.")))
+
+/*.
+
+1. If it is landed, it will not try to land.
+2. If it is on the overmap, it will try to land on an away site or exoplanet.
+3. If it cannot find a suitable turf on said site, it will continue with regular border-looping travel.
+
+*/
 
 /obj/machinery/lifepod/touch_map_edge() //THERE IS A MAP BORDER PROC HOLY HELL.
+	landingAttempts++
+
+	if(landingAttempts >= 4)
+		escape() //Escape if you really can't find anywhere and don't end up back home.
+
+	if(emagEscape)
+		escape()
+
 	if(launchStatus == LIFEPOD_LANDED) //If you're not in space, don't try to land.
-		log_debug("\ref[src] failed to land due to having already landed.")
-		return
+		return ..()
 
-	var/list/possibleSites = list()
-	if(GLOB.using_map.use_overmap) //I hope this would be used only in overmap-compatible maps, because outside of that there will be limited viablity.
-		log_debug("\ref[src] confirmed the existence of the overmap.")
-		var/obj/effect/overmap/visitable/mothership = map_sectors["[z]"]
-		for(var/obj/effect/overmap/visitable/nearPlace in range(mothership, 1))
-			if(nearPlace.in_space || istype(nearPlace, /obj/effect/overmap/visitable/sector/exoplanet))
-				log_debug("\ref[src] added \ref[nearPlace] as a destination.")
+	var/list/possibleSites = list() //All the possible places they could land.
+
+	if(mothership) //I hope this would be used only in overmap-compatible maps, because outside of that there will be limited viablity.
+		for(var/obj/effect/overmap/visitable/nearPlace in range(mothership, 5))
+			if(nearPlace == mothership)
+				continue
+			else if(nearPlace.in_space || istype(nearPlace, /obj/effect/overmap/visitable/sector/exoplanet))
 				possibleSites += nearPlace
+	else
+		escape() //Go to escape-z if there is no overmap.
 
-		possibleSites -= mothership
-
-	log_debug("\ref[src] has [possibleSites.len] destinations.")
 	var/newZ //The Z-level they are getting sent to.
+
+	if(emagLoop)
+		newZ = z //RETURN TO SENDER
 
 	if(possibleSites.len) //If there are locations, pick one.
 		var/obj/effect/overmap/visitable/targetSite = pick(possibleSites)
 		newZ = pick(targetSite.map_z) //Fetch actual Z-level
-
 	else
-		newZ = pick(GLOB.using_map.escape_levels) //Send them to an escape level if nothing else.
-		forceMove(locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE), newZ))
+		..() //Border-roam if there are no nearby Zs.
 
-		//Since they are stuck in baby jail, tell them that they can ghost.
-		to_chat(storedThing, FONT_LARGE(SPAN_NOTICE("Your lifepod has navigated itself to the designated rescue sector. You may ghost and be counted as escaped.")))
-		return
+	var/turf/landingTurf //The target turf that the lifepod will move to.
+	var/cycles = 1000
 
-	var/turf/landingTurf //The turf they will land on.
-	var/searchAttempts = 0 //The amount of times it attempts to search for a landing turf
+	//Shoutout to Mothblocks for showing me this. It actually seems pretty obvious but over-complication is over-complication.
+	for(var/cycle in 1 to cycles)
+		var/checkX = rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE)
+		var/checkY = rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE)
 
-	while(!istype(landingTurf, /turf/simulated/floor) && searchAttempts > 10)
-		landingTurf = locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE), newZ)
-		searchAttempts ++
-		log_debug("\ref [src] has made [searchAttempts] attempts to find a simulated floor to land on.")
+		var/checkTurf = locate(checkX, checkY, newZ)
 
-	if(searchAttempts == 10 || !istype(landingTurf, /turf/simulated/floor)) //If you manage to be the unlucky bastard to find an away site with no simulated floors, I feel bad for you.
-		log_debug("\ref[src] failed to land due to being unable to find a simulated floor to land on.")
-		..()
+		if(istype(checkTurf, /turf/simulated/floor) || istype(checkTurf, /turf/simulated/wall))
+			landingTurf = checkTurf
+			break
 
-	else
+	if(landingTurf)
 		microphone("DIRECT SUBDIMENSIONAL PARTICLE ALIGNMENT CONFIRMED! IMPACT SOON!", 2) //Warn them.
+
+		if(istype(landingTurf, /turf/simulated/wall))
+			new /obj/effect/landmark/clear(landingTurf) //Dismantle wall if available.
+
+		new /obj/effect/landmark/scorcher(landingTurf)
 		explosion(landingTurf, 6)
+
 		forceMove(landingTurf) //Just get them there.
 		playsound(loc,'sound/effects/meteorimpact.ogg', 100)
 		launchStatus = LIFEPOD_LANDED
 		anchored = TRUE
+	else
+		..() //Let them continue to float if this somehow occurs.
 
 /obj/machinery/lifepod/verb/ejectSupplies() //Spawn your supplies!
 	set name = "Eject emergency supplies"
@@ -340,6 +377,8 @@ I know no God but camel case.
 
 	linkLaunchSystems() //Remember to put these in a properly mapped area, but there is a contigency (manual multitooling or lenient checking before launch) if they don't.
 
+	if(GLOB.using_map.use_overmap) //I hope this would be used only in overmap-compatible maps, because outside of that there will be limited viablity.
+		mothership = map_sectors["[z]"]
 /obj/machinery/lifepod/update_icon()
 	icon_state = "lifepod_[hatch]" //Open or close the hatch appropiately.
 
@@ -368,9 +407,9 @@ Lock light.
 			to_chat(user, SPAN_WARNING("The hatch is broken, rendering \the [src] inoperable."))
 
 	//Other things to notice.
-	if(launchStatus >= LIFEPOD_LAUNCHED && launchStatus != LIFEPOD_FAILURE) //It realistically should be impossible should encounter a lifepod while it is LIFEPOD_LAUNCHED, but just in case.
+	if(landingAttempts > 0) //Show any signs of landing attempts.
 		to_chat(user, SPAN_WARNING("There are significant wear marks on the sails.")) //Trying to not be obvious.
-	if(suppliesEjected)
+	if(suppliesEjected) //Someone already spawned supplies.
 		to_chat(user, SPAN_WARNING("The emergency supplies have been ejected.")) //Indicate it's already looted.
 
 	//Lights. Can be visually added later.
@@ -380,7 +419,7 @@ Lock light.
 		to_chat(user, SPAN_NOTICE("The 'MANUAL BOLT' light is flickering."))
 
 /obj/machinery/lifepod/Process()
-	if(storedThing && iscarbon(storedThing))
+	if(storedThing && iscarbon(storedThing) && launchStatus >= LIFEPOD_LAUNCHED && launchStatus != LIFEPOD_FAILURE)
 		processOccupant()
 
 /obj/machinery/lifepod/return_air()
@@ -428,3 +467,11 @@ Lock light.
 
 /obj/machinery/lifepod/is_powered()
 	return TRUE //No matter what, it's powered. God could smite it, it's still powered.
+
+//Stolen from mass driver slugs.
+/obj/machinery/lifepod/Move()
+	. = ..()
+	if(.)
+		var/turf/T = get_turf(src)
+		if(!isspace(T) && !istype(T, /turf/simulated/floor/carpet))
+			playsound(T, pick(move_sounds), 75, 1)
