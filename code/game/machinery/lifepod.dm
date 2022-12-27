@@ -243,37 +243,46 @@ I know no God but camel case.
 
 
 /obj/machinery/lifepod/touch_map_edge() //THERE IS A MAP BORDER PROC HOLY HELL.
-	if(!istype(loc, /turf/space)) //If you're not in space, don't try to land.
+	if(launchStatus == LIFEPOD_LANDED) //If you're not in space, don't try to land.
+		log_debug("\ref[src] failed to land due to having already landed.")
 		return
 
 	var/list/possibleSites = list()
 	if(GLOB.using_map.use_overmap) //I hope this would be used only in overmap-compatible maps, because outside of that there will be limited viablity.
+		log_debug("\ref[src] confirmed the existence of the overmap.")
 		var/obj/effect/overmap/visitable/mothership = map_sectors["[z]"]
-		for(var/obj/effect/overmap/visitable/nearPlace in orange(mothership, 5))
+		for(var/obj/effect/overmap/visitable/nearPlace in range(mothership, 1))
 			if(nearPlace.in_space || istype(nearPlace, /obj/effect/overmap/visitable/sector/exoplanet))
+				log_debug("\ref[src] added \ref[nearPlace] as a destination.")
 				possibleSites += nearPlace
 
+		possibleSites -= mothership
+
+	log_debug("\ref[src] has [possibleSites.len] destinations.")
 	var/newZ //The Z-level they are getting sent to.
 
 	if(possibleSites.len) //If there are locations, pick one.
 		var/obj/effect/overmap/visitable/targetSite = pick(possibleSites)
 		newZ = pick(targetSite.map_z) //Fetch actual Z-level
+
 	else
 		newZ = pick(GLOB.using_map.escape_levels) //Send them to an escape level if nothing else.
-		forceMove(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE), newZ)
+		forceMove(locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE), newZ))
 
 		//Since they are stuck in baby jail, tell them that they can ghost.
 		to_chat(storedThing, FONT_LARGE(SPAN_NOTICE("Your lifepod has navigated itself to the designated rescue sector. You may ghost and be counted as escaped.")))
 		return
 
 	var/turf/landingTurf //The turf they will land on.
-	var/searchAttempts //The amount of times it attempts to search for a landing turf
+	var/searchAttempts = 0 //The amount of times it attempts to search for a landing turf
 
 	while(!istype(landingTurf, /turf/simulated/floor) && searchAttempts > 10)
 		landingTurf = locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE), newZ)
 		searchAttempts ++
+		log_debug("\ref [src] has made [searchAttempts] attempts to find a simulated floor to land on.")
 
 	if(searchAttempts == 10 || !istype(landingTurf, /turf/simulated/floor)) //If you manage to be the unlucky bastard to find an away site with no simulated floors, I feel bad for you.
+		log_debug("\ref[src] failed to land due to being unable to find a simulated floor to land on.")
 		..()
 
 	else
@@ -282,6 +291,7 @@ I know no God but camel case.
 		forceMove(landingTurf) //Just get them there.
 		playsound(loc,'sound/effects/meteorimpact.ogg', 100)
 		launchStatus = LIFEPOD_LANDED
+		anchored = TRUE
 
 /obj/machinery/lifepod/verb/ejectSupplies() //Spawn your supplies!
 	set name = "Eject emergency supplies"
