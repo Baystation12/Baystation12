@@ -142,13 +142,8 @@
 
 	selected_system = null
 
-	for(var/thing in pilots)
-		var/mob/pilot = thing
-		if(pilot && pilot.client)
-			pilot.client.screen -= hud_elements
-			pilot.client.images -= hud_elements
-		pilot.forceMove(get_turf(src))
-	pilots = null
+	for (var/mob/pilot as anything in pilots)
+		remove_pilot(pilot)
 
 	hud_health = null
 	hud_open = null
@@ -156,13 +151,12 @@
 	hud_power_control = null
 	hud_camera = null
 
-	for(var/thing in hud_elements)
-		qdel(thing)
-	hud_elements.Cut()
+	QDEL_NULL_LIST(hud_elements)
 
-	for(var/hardpoint in hardpoints)
+	for (var/hardpoint in hardpoints)
 		qdel(hardpoints[hardpoint])
 	hardpoints.Cut()
+	hardpoints = null
 
 	QDEL_NULL(access_card)
 	QDEL_NULL(arms)
@@ -176,6 +170,7 @@
 		H.holding = null
 		qdel(H)
 	hardpoint_hud_elements.Cut()
+	hardpoint_hud_elements = null
 
 	. = ..()
 
