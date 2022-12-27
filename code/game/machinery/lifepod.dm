@@ -36,12 +36,12 @@ I know no God but camel case.
 	old-school subdimensional particle navigation in combination with a high-velocity launch to violently land at any nearby physical entity. \
 	It also has an internal radioisotope thermoelectric generator that produces just enough power to sustain the pod and open its blast door."
 
-	var/const/HATCH_CLOSED = 0 //The lifepod is closed. We count from 1 just to see if DreamChecker stops screaming.
-	var/const/HATCH_OPEN = 1 //The lifepod is open.
-	var/const/HATCH_LOCKED = 2 //The lifepod has been locked by the passenger.
-	var/const/HATCH_BROKEN = 3 //The lifepod was forced open while locked or damaged too much. It is not usable in this state.
+	var/const/LIFEPOD_CLOSED = 0 //The lifepod is closed. We count from 1 just to see if DreamChecker stops screaming.
+	var/const/LIFEPOD_OPEN = 1 //The lifepod is open.
+	var/const/LIFEPOD_LOCKED = 2 //The lifepod has been locked by the passenger.
+	var/const/LIFEPOD_BROKEN = 3 //The lifepod was forced open while locked or damaged too much. It is not usable in this state.
 
-	var/hatch = HATCH_CLOSED //Status of the passenger hatch
+	var/hatch = LIFEPOD_CLOSED //Status of the passenger hatch
 
 	var/atom/movable/storedThing //Whatever is occupying the passenger compartment.
 	var/timeEntered //The time it entered.
@@ -89,10 +89,10 @@ I know no God but camel case.
 	launchDriver = locate(/obj/machinery/mass_driver) in loc //Get the mass driver
 	if(!launchDriver) //If there is no mass driver, don't bother.
 		microphone("Unable to connect to external launch systems.", 1)
-		return
+		return FALSE
 	var/turf/hatchTurf = get_step(launchDriver, launchDriver.dir)
 	launchHatch = locate(/obj/machinery/door/blast) in hatchTurf
-	launchStatus = LIFEPOD_READY
+	return TRUE
 
 /obj/machinery/lifepod/proc/processOccupant()
 	var/mob/living/carbon/passenger = storedThing
@@ -129,7 +129,7 @@ I know no God but camel case.
 
 	visible_message(SPAN_NOTICE("\The <b>[src]</b> starts up and whirrs as it is closed."))
 	timeEntered = world.time
-	hatch = HATCH_CLOSED
+	hatch = LIFEPOD_CLOSED
 	update_icon()
 
 /obj/machinery/lifepod/proc/exitLifepod()
@@ -155,19 +155,19 @@ I know no God but camel case.
 		voluntary = TRUE
 
 	switch(hatch)
-		if(HATCH_LOCKED) //Fail if locked.
+		if(LIFEPOD_LOCKED) //Fail if locked.
 			storedThing.visible_message(
 				SPAN_WARNING("[voluntary ? "Something pushes the bolted hatch from the inside" : "\The [user] pulls on the bolted hatch"] of \the [src] to no avail."),
 				SPAN_WARNING("You can't open the hatch of \the [src]. Try unlocking or breaking it.")
 			)
 			return
 
-		if(HATCH_CLOSED) //Open if closed.
+		if(LIFEPOD_CLOSED) //Open if closed.
 			storedThing.visible_message(
 				SPAN_NOTICE("\The [user] opens the hatch of \the [src]."),
 				SPAN_NOTICE("You open the hatch of \the [src].")
 			)
-			hatch = HATCH_OPEN
+			hatch = LIFEPOD_OPEN
 			update_icon()
 
 	exitLifepod()
@@ -183,21 +183,21 @@ I know no God but camel case.
 		voluntary = TRUE
 
 	switch(hatch)
-		if(HATCH_LOCKED) //The hatch is locked from the inside.
+		if(LIFEPOD_LOCKED) //The hatch is locked from the inside.
 			to_chat(user, SPAN_WARNING("\The [src]'s hatch is locked and cannot be opened."))
 			return
 
-		if(HATCH_BROKEN) //Broken hatches are unusuable.
+		if(LIFEPOD_BROKEN) //Broken hatches are unusuable.
 			to_chat(user, SPAN_WARNING("\The [src]'s hatch is broken, rendering it useless."))
 			return
 
-		if(HATCH_CLOSED) //Gotta open the hatch.
+		if(LIFEPOD_CLOSED) //Gotta open the hatch.
 			if(user.IsAdvancedToolUser())
 				user.visible_message(
 					SPAN_NOTICE("\The [user] opens the hatch of \the [src]."),
 					SPAN_NOTICE("You open the hatch of \the [src].")
 				)
-				hatch = HATCH_OPEN //Open the hatch.
+				hatch = LIFEPOD_OPEN //Open the hatch.
 				update_icon()
 			else
 				to_chat(user, SPAN_WARNING("You can't operate the hatch."))
@@ -222,16 +222,20 @@ I know no God but camel case.
 /obj/machinery/lifepod/proc/launch()
 	if(!launchDriver) //Fail if there's nothing to throw it.
 		launchStatus = LIFEPOD_FAILURE
-		microphone("MASS DRIVER NOT DETECTED, LAUNCH FAILURE!", 2)
-		return
+		microphone("MASS DRIVER NOT DETECTED, ATTEMPTING LAUNCH SYSTEM SEARCH!", 2) //Try one more time
+
+		if(!linkLaunchSystems()) //Try one more time to link launch systems, don't be too cruel.
+			microphone("UNABLE TO FIND MASS DRIVER! LAUNCH SYSTEM FAILURE!", 2)
+			return
 
 	if(launchHatch && launchHatch.density) //Start by opening the launch hatch.
 		microphone("OPENING BLAST DOOR! ANCHORING MAGNETS POWERED!", 1)
 		anchored = TRUE //temporarily anchor us to account for atmos
 		launchHatch.force_open()
-		sleep(5 SECONDS)
+		sleep(5)
 		microphone("Anchoring magnets disabled.", 0)
 		anchored = FALSE //Get ready to get thrown.
+		sleep(5)
 
 	microphone("MASS DRIVER ACTIVE! BRACE FOR LAUNCH!", 1) //IT'S HAPPENING.
 	launchStatus = LIFEPOD_LAUNCHED //Even is the mass driver isn't powered, pretend you still launched.
@@ -262,10 +266,16 @@ I know no God but camel case.
 		to_chat(storedThing, FONT_LARGE(SPAN_NOTICE("Your lifepod has navigated itself to the designated rescue sector. You may ghost and be counted as escaped.")))
 		return
 
-	var/turf/landingTurf = locate(/turf/simulated/floor) in newZ
+	var/turf/landingTurf //The turf they will land on.
+	var/searchAttempts //The amount of times it attempts to search for a landing turf
 
-	if(!landingTurf) //If you manage to be the unlucky bastard to find an away site with no simulated floors, I feel bad for you.
+	while(!istype(landingTurf, /turf/simulated/floor) && searchAttempts > 10)
+		landingTurf = locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE), newZ)
+		searchAttempts ++
+
+	if(searchAttempts == 10 || !istype(landingTurf, /turf/simulated/floor)) //If you manage to be the unlucky bastard to find an away site with no simulated floors, I feel bad for you.
 		..()
+
 	else
 		microphone("DIRECT SUBDIMENSIONAL PARTICLE ALIGNMENT CONFIRMED! IMPACT SOON!", 2) //Warn them.
 		explosion(landingTurf, 6)
@@ -298,12 +308,12 @@ I know no God but camel case.
 	set src in range(0)
 
 	switch(hatch)
-		if(HATCH_LOCKED)
-			hatch = HATCH_CLOSED
+		if(LIFEPOD_LOCKED)
+			hatch = LIFEPOD_CLOSED
 			to_chat(storedThing, SPAN_NOTICE("You unlock \the [src]."))
 			playsound(loc,'sound/machines/BoltsDown.ogg', 50) //Using old door noises for nostalgia points.
-		if(HATCH_CLOSED)
-			hatch = HATCH_LOCKED
+		if(LIFEPOD_CLOSED)
+			hatch = LIFEPOD_LOCKED
 			to_chat(storedThing, SPAN_NOTICE("You lock \the [src]."))
 			playsound(loc,'sound/machines/BoltsUp.ogg', 50) //Using old door noises for nostalgia points.
 
@@ -318,7 +328,7 @@ I know no God but camel case.
 	airSupply.adjust_gas(GAS_OXYGEN, MOLES_O2STANDARD, 0)
 	airSupply.adjust_gas(GAS_NITROGEN, MOLES_N2STANDARD)
 
-	linkLaunchSystems() //Remember to put these in a properly mapped area, but there is a contigency (manual multitooling) if they don't.
+	linkLaunchSystems() //Remember to put these in a properly mapped area, but there is a contigency (manual multitooling or lenient checking before launch) if they don't.
 
 /obj/machinery/lifepod/update_icon()
 	icon_state = "lifepod_[hatch]" //Open or close the hatch appropiately.
@@ -336,15 +346,15 @@ Lock light.
 
 	//Hatch status.
 	switch(hatch)
-		if(HATCH_OPEN)
+		if(LIFEPOD_OPEN)
 			if(storedThing && user.Adjacent(src)) //You'd also need to be close to see it.
 				to_chat(user, SPAN_NOTICE("\The [storedThing] is inside the passenger compartment."))
 
-		if(HATCH_CLOSED, HATCH_LOCKED)
+		if(LIFEPOD_CLOSED, LIFEPOD_LOCKED)
 			if(storedThing && user.Adjacent(src)) //You'd ALSO need to be close to see it.
 				to_chat(user, SPAN_WARNING("Something is inside the passenger compartment."))
 
-		if(HATCH_BROKEN) //Tell them it is broken.
+		if(LIFEPOD_BROKEN) //Tell them it is broken.
 			to_chat(user, SPAN_WARNING("The hatch is broken, rendering \the [src] inoperable."))
 
 	//Other things to notice.
@@ -356,7 +366,7 @@ Lock light.
 	//Lights. Can be visually added later.
 	if(launchDriver && user.Adjacent(src)) //You'd need to be close to see it.
 		to_chat(user, SPAN_NOTICE("The 'EXT-LAUNCH-SYS CONNECTION' light is flickering.")) //Don't pull the launch lever unless you want to vent something.
-	if(hatch == HATCH_LOCKED)
+	if(hatch == LIFEPOD_LOCKED)
 		to_chat(user, SPAN_NOTICE("The 'MANUAL BOLT' light is flickering."))
 
 /obj/machinery/lifepod/Process()
@@ -364,7 +374,7 @@ Lock light.
 		processOccupant()
 
 /obj/machinery/lifepod/return_air()
-	if(airSupply && (hatch == HATCH_CLOSED || HATCH_LOCKED))
+	if(airSupply && (hatch == LIFEPOD_CLOSED || LIFEPOD_LOCKED))
 		return airSupply //Return
 	else
 		return loc.return_air()
@@ -378,29 +388,29 @@ Lock light.
 		return
 
 	switch(hatch)
-		if(HATCH_LOCKED) //The hatch is locked from the inside.
+		if(LIFEPOD_LOCKED) //The hatch is locked from the inside.
 			to_chat(user, SPAN_WARNING("\The [src]'s hatch is locked and cannot be opened."))
 			return
 
-		if(HATCH_CLOSED) //Opening the hatch.
+		if(LIFEPOD_CLOSED) //Opening the hatch.
 			if(user.IsAdvancedToolUser())
 				user.visible_message(
 					SPAN_NOTICE("\The [user] opens the hatch of \the [src]."),
 					SPAN_NOTICE("You open the hatch of \the [src].")
 				)
-				hatch = HATCH_OPEN //Open the hatch.
+				hatch = LIFEPOD_OPEN //Open the hatch.
 				update_icon()
 			else
 				to_chat(user, SPAN_WARNING("You can't operate the hatch."))
 				return
 
-		if(HATCH_OPEN) //Closing the hatch.
+		if(LIFEPOD_OPEN) //Closing the hatch.
 			if(user.IsAdvancedToolUser())
 				user.visible_message(
 					SPAN_NOTICE("\The [user] closes the hatch of \the [src]."),
 					SPAN_NOTICE("You closes the hatch of \the [src].")
 				)
-				hatch = HATCH_CLOSED
+				hatch = LIFEPOD_CLOSED
 				update_icon()
 			else
 				to_chat(user, SPAN_WARNING("You can't operate the hatch."))
