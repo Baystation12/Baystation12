@@ -11,6 +11,7 @@
 	)
 	machine_name = "replicator"
 	machine_desc = "A voice-operated machine that dispenses bland food from raw nutriment."
+	base_type = /obj/machinery/fabricator/replicator
 
 /obj/machinery/fabricator/replicator/replicator/Initialize()
 	. = ..()
