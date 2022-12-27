@@ -35,7 +35,7 @@
 	energy = starting_energy
 
 	if (temp)
-		addtimer(CALLBACK(null, /proc/qdel, src), temp)
+		QDEL_IN(src, temp)
 
 	..()
 	START_PROCESSING(SSobj, src)

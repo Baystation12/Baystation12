@@ -119,7 +119,7 @@
 		pulse2.anchored = TRUE
 		pulse2.set_dir(pick(GLOB.cardinal))
 
-		addtimer(CALLBACK(GLOBAL_PROC, /proc/qdel, pulse2), 1 SECOND)
+		QDEL_IN(pulse2, 1 SECOND)
 	..()
 
 /obj/machinery/ex_act(severity)
