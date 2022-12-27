@@ -310,7 +310,8 @@
 	if (self && self.mind)
 		self.visible_message("\The [self] unceremoniously falls lifeless.")
 		var/mob/observer/ghost/G = self.ghostize(FALSE)
-		G.timeofdeath = world.time
+		if (G) // In case of aghosts or keyless mobs
+			G.timeofdeath = world.time
 
 /*
 	This is for law stuff directly. This is how a human mob will be able to communicate with the posi_brainmob in the
