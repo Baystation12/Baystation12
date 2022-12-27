@@ -12150,9 +12150,6 @@
 	start_pressure = 450
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/rotating_alarm/security_alarm{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/bridge)
 "IG" = (
@@ -14582,6 +14579,9 @@
 	},
 /obj/effect/floor_decal/techfloor{
 	dir = 8
+	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/bridge)
