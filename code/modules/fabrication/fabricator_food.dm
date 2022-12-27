@@ -13,13 +13,6 @@
 	machine_desc = "A voice-operated machine that dispenses bland food from raw nutriment."
 	base_type = /obj/machinery/fabricator/replicator
 
-/obj/machinery/fabricator/replicator/replicator/Initialize()
-	. = ..()
-	if (prob(1))
-		machine_desc = "\
-		<i>\"Fish!\" \
-		<br>\"Today's fish is trout a la creme. Enjoy your meal.\"</i>"
-
 /obj/machinery/fabricator/replicator/hear_talk(mob/M, text, verb, datum/language/speaking)
 	if(speaking && !speaking.machine_understands)
 		return ..()
