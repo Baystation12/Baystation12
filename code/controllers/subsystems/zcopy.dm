@@ -191,6 +191,11 @@ SUBSYSTEM_DEF(zcopy)
 		while (Td.below)
 			Td = Td.below
 
+		// Debug checking for #32286 - https://github.com/Baystation12/Baystation12/issues/32286
+		if (Td.z > length(zlev_maximums))
+			crash_with("zcopy hit a z-level not included in zlev_maximums: [Td.z] - Maximum z-level: [length(zlev_maximums)] - Source turf: [Td] ([Td.type]) in [get_area(Td)] ([Td.x], [Td.y], [Td.z]).")
+			continue // Prevents the subsystem from halting on the next line
+
 		// Depth must be the depth of the *visible* turf, not self.
 		var/turf_depth
 		turf_depth = T.z_depth = zlev_maximums[Td.z] - Td.z
