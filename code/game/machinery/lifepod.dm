@@ -1,22 +1,11 @@
-/*
-
-For too long, the escape pod debate has plagued us all. Shuttle-based pods are stupid but nobody has successfully implemented object pods.
-
-There is a solution in the ancient ways, they just had these really weird looking pods. This is that reinvented, after the lifepod (unintentionally?) reinvented it.
-
-I know no God but camel case.
-
-~10sc
-
-*/
-
-/proc/escapedViaPod(mob/testCase) //FUNNY PROC TIME! (It is for the end-round data collection.)
+/// This is used for end-round summaries and pseudo-greentext (escaped versus died).
+/proc/escapedViaPod(mob/testCase)
 	var/obj/machinery/lifepod/pod
 
-	if(istype(testCase.loc, /obj/machinery/lifepod)) //Are they in a lifepod?
+	if(istype(testCase.loc, /obj/machinery/lifepod))
 		pod = testCase.loc
 
-		if(pod.launchStatus == 0 || 3) //Is the lifepod still onboard or did it fail to launch?
+		if(pod.landed == TRUE) //Is the lifepod still onboard or did it fail to launch?
 			return FALSE //You did not escape because the pod did not launch.
 		else
 			return TRUE //You did escape because the pod is in space or landed somewhere.
@@ -24,76 +13,214 @@ I know no God but camel case.
 	else
 		return FALSE //You did not escape... because you're not in a pod.
 
+/// A lifepod that can be used in lieu of shuttle-based escape pods.
 /obj/machinery/lifepod
 	name = "\improper NT-31B lifepod"
 	desc = "A barebones lifepod with subdimensional particle sails. It has shiny NanoTrasen branding, however is probably obselete."
 	icon = 'icons/obj/machines/lifepod.dmi'
 	icon_state = "lifepod_0"
 	density = TRUE
-	anchored = FALSE //Lightweight!
+	anchored = FALSE
 	machine_name = "lifepod"
 	machine_desc = "An NT-31B model lifepod with licensed Vey-Med stasis technology and a patented oxygen AND nitrogen candle. It utilizes \
 	old-school subdimensional particle navigation in combination with a high-velocity launch to violently land at any nearby physical entity. \
 	It also has an internal radioisotope thermoelectric generator that produces just enough power to sustain the pod and open its blast door."
 
-	var/const/LIFEPOD_CLOSED = 0 //The lifepod is closed. We count from 1 just to see if DreamChecker stops screaming.
-	var/const/LIFEPOD_OPEN = 1 //The lifepod is open.
-	var/const/LIFEPOD_LOCKED = 2 //The lifepod has been locked by the passenger.
-	var/const/LIFEPOD_BROKEN = 3 //The lifepod was forced open while locked or damaged too much. It is not usable in this state.
+	/// The lifepod is closed.
+	var/const/LIFEPOD_CLOSED = 0
+	/// The lifepod is open.
+	var/const/LIFEPOD_OPEN = 1
+	/// The lifepod is locked by the passenger.
+	var/const/LIFEPOD_LOCKED = 2
+	/// The lifepod was forced open while locked or damaged too much. It is not usable in this state.
+	var/const/LIFEPOD_BROKEN = 3
+	/// The status of the lifepod in terms of the above constants.
+	var/hatch = LIFEPOD_CLOSED
+	/// The thing occupying the lifepod.
+	var/atom/movable/storedThing
+	/// The time the above thing entered the lifepod.
+	var/timeEntered
+	/// The last time it was irradiated. Usually, they are irradiated every 10 minutes.
+	var/timeRadiated
+	/// The maximum size mob that can fit into the lifepod.
+	var/maxSize = MOB_MEDIUM
+	/// Supplies that can be spawned one time with a verb.
+	var/list/supplies = list(
+		/obj/item/storage/toolbox/emergency,
+		/obj/item/storage/firstaid/stab,
+		/obj/item/pickaxe
+	)
+	/// Whether or not the supplies listed above were ejected.
+	var/suppliesEjected = FALSE
+	/// The blast door that the lifepod will open if present and not already open.
+	var/obj/machinery/door/blast/launchHatch
+	/// The mass driver that will throw the lifepod.
+	var/obj/machinery/mass_driver/launchDriver
+	/// Whether or not the lifepod has landed.
+	var/landed = TRUE
+	/// How many attempts the lifepod has made to land.
+	var/landingAttempts = 0
+	/// If an overmap is present, the site it originated from.
+	var/obj/effect/overmap/visitable/mothership
+	/// The spawned, nonrenewable air that is used by any occupying mob.
+	var/datum/gas_mixture/airSupply
+	/// The last time they recieved a warning about low air pressure.
+	var/lastAirWarningTime
+	/// Whether or not it was emagged with the option of exploding upon launch.
+	var/emagBombRig = FALSE
+	/// Whether or not it was emagged with the option of going to an escape-z upon launch.
+	var/emagEscape = FALSE
+	/// Whether or not it was emagged with the option of going back to its original Z before launch.
+	var/emagLoop = FALSE
+	/// Funny noises it makes while moving.
+	var/list/move_sounds = list(
+		'sound/effects/metalscrape1.ogg',
+		'sound/effects/metalscrape2.ogg',
+		'sound/effects/metalscrape3.ogg'
+	)
+	/// It will speak using mundane emotes and blue text.
+	var/const/LIFEPOD_SPEECH_NOTICE = 0
+	/// It will speak using mildly serious emotes and red text.
+	var/const/LIFEPOD_SPEECH_WARNING = 1
+	/// It will practically scream.
+	var/const/LIFEPOD_SPEECH_DANGER = 2
 
-	var/hatch = LIFEPOD_CLOSED //Status of the passenger hatch
+/obj/machinery/lifepod/Initialize(populate_parts = TRUE)
+	. = ..()
 
-	var/atom/movable/storedThing //Whatever is occupying the passenger compartment.
-	var/timeEntered //The time it entered.
-	var/timeRadiated //You think you can just sit next to an RTG and not be mildly green?
-	var/maxSize = MOB_MEDIUM //The max size of a mob that can enter.
+	airSupply = new()
+	airSupply.temperature = T0C
+	airSupply.adjust_gas(GAS_OXYGEN, MOLES_O2STANDARD, 0)
+	airSupply.adjust_gas(GAS_NITROGEN, MOLES_N2STANDARD)
 
-	var/list/supplies = list(/obj/item/storage/toolbox/emergency, /obj/item/storage/firstaid/stab, /obj/item/pickaxe) //Supplies that can be ejected (spawned).
-	var/suppliesEjected = FALSE //Were the supplies already ejected?
+	linkLaunchSystems()
 
-	var/obj/machinery/door/blast/launchHatch //The door it gets shot out of.
-	var/obj/machinery/mass_driver/launchDriver //The driver it gets shot from.
+	if(GLOB.using_map.use_overmap)
+		mothership = map_sectors["[z]"]
 
-	var/const/LIFEPOD_READY = 0 //The lifepod is waiting to be launched.
-	var/const/LIFEPOD_LAUNCHED = 1 //The lifepod has been launched and is in space.
-	var/const/LIFEPOD_LANDED = 2 //The lifepod has landed, somewhere.
-	var/const/LIFEPOD_FAILURE = 3 //The lifepod failed to launch due to a mass driver not being present.
+/obj/machinery/lifepod/on_update_icon()
+	icon_state = "lifepod_[hatch]"
 
-	var/launchStatus = LIFEPOD_READY //Did it get launched?
+/obj/machinery/lifepod/examine(mob/user)
+	. = ..()
 
-	var/landingAttempts = 0 //How many times has it tried landing already?
+	if(user == storedThing)
+		return
 
-	var/obj/effect/overmap/visitable/mothership //If it is in the overmap, it has a mothership.
+	switch(hatch)
+		if(LIFEPOD_OPEN)
+			if(storedThing && user.Adjacent(src)) //You'd also need to be close to see it.
+				to_chat(user, SPAN_NOTICE("\The [storedThing] is inside the passenger compartment."))
 
-	var/datum/gas_mixture/airSupply //The air supply for the lifepod.
-	var/lastAirWarningTime //When was the last time they got warned about air pressure?
+		if(LIFEPOD_CLOSED, LIFEPOD_LOCKED)
+			if(storedThing && user.Adjacent(src)) //You'd ALSO need to be close to see it.
+				to_chat(user, SPAN_WARNING("Something is inside the passenger compartment."))
 
-	var/emagBombRig = FALSE //Was it emagged and rigged to explode?
-	var/emagEscape //Was it emagged and rigged to automatically go to a designated target?
-	var/emagLoop = FALSE //Was it emagged and rigged to return to the original Z?
+		if(LIFEPOD_BROKEN)
+			to_chat(user, SPAN_WARNING("The hatch is broken, rendering \the [src] inoperable."))
 
-	var/list/move_sounds = list('sound/effects/metalscrape1.ogg', 'sound/effects/metalscrape2.ogg', 'sound/effects/metalscrape3.ogg') //Funny noises to make when moving.
 
-//This thing talks so much as I might as well give it its own proc to do so efficiently and in a cool way.
+	if(landingAttempts > 0)
+		to_chat(user, SPAN_WARNING("There are significant wear marks on the sails.")) //Trying to not be obvious.
+	if(suppliesEjected)
+		to_chat(user, SPAN_WARNING("The emergency supplies have been ejected.")) //Indicate it's already looted.
+	if(launchDriver && user.Adjacent(src))
+		to_chat(user, SPAN_NOTICE("The 'EXT-LAUNCH-SYS CONNECTION' light is flickering."))
+	if(hatch == LIFEPOD_LOCKED)
+		to_chat(user, SPAN_NOTICE("The 'MANUAL BOLT' light is flickering."))
+
+/obj/machinery/lifepod/Process()
+	if(storedThing && iscarbon(storedThing))
+		processOccupant()
+
+/obj/machinery/lifepod/return_air()
+	if(airSupply && (hatch == LIFEPOD_CLOSED || LIFEPOD_LOCKED))
+		return airSupply //Return
+	else
+		return loc.return_air()
+
+/obj/machinery/lifepod/is_powered()
+	return TRUE //No matter what, it's powered. God could smite it, it's still powered.
+
+/obj/machinery/lifepod/Move()
+	. = ..()
+	if(.)
+		var/turf/T = get_turf(src)
+		if(!isspace(T) && !istype(T, /turf/simulated/floor/carpet))
+			playsound(T, pick(move_sounds), 75, 1)
+
+
+/obj/machinery/lifepod/physical_attack_hand(mob/user)
+	if(user == storedThing) //If you are inside, get out.
+		attemptExit()
+		return
+	switch(user.a_intent)
+
+		if(I_DISARM)
+			switch(hatch)
+				if(LIFEPOD_LOCKED) //The hatch is locked from the inside.
+					to_chat(user, SPAN_WARNING("\The [src]'s hatch is locked and cannot be opened."))
+					return
+
+				if(LIFEPOD_CLOSED) //Opening the hatch.
+					if(user.IsAdvancedToolUser())
+						user.visible_message(
+							SPAN_NOTICE("\The [user] opens the hatch of \the [src]."),
+							SPAN_NOTICE("You open the hatch of \the [src].")
+						)
+						hatch = LIFEPOD_OPEN //Open the hatch.
+						update_icon()
+					else
+						to_chat(user, SPAN_WARNING("You can't operate the hatch."))
+						return
+
+				if(LIFEPOD_OPEN) //Closing the hatch.
+					if(user.IsAdvancedToolUser())
+						user.visible_message(
+							SPAN_NOTICE("\The [user] closes the hatch of \the [src]."),
+							SPAN_NOTICE("You closes the hatch of \the [src].")
+						)
+						hatch = LIFEPOD_CLOSED
+						update_icon()
+					else
+						to_chat(user, SPAN_WARNING("You can't operate the hatch."))
+						return
+		if(I_HELP)
+			ejectSupplies()
+
+/obj/machinery/lifepod/attackby(obj/item/object, mob/user)
+	if(istype(object, /obj/item/grab))
+		var/obj/item/grab/enteringGrab = object
+
+		if(ismob(enteringGrab.affecting))
+			attemptEnter(enteringGrab.affecting, user)
+	else
+		..()
+
+/obj/machinery/lifepod/MouseDrop_T(atom/movable/target, mob/user) //Throwing them in.
+	attemptEnter(target, user)
+
+/// A proc that simplifies the repeated usage of the lifepod talking.
 /obj/machinery/lifepod/proc/microphone(message, danger = 0, emote)
 	if(!emote)
 		switch(danger)
-			if(0)
+			if(LIFEPOD_SPEECH_NOTICE)
 				emote = pick("beeps", "buzzes", "blips", "coldly states", "chimes")
-			if(1)
+			if(LIFEPOD_SPEECH_WARNING)
 				emote = pick("urgently beeps", "loudly buzzes", "violently beeps", "loudly states", "rings")
-			if(2)
+			if(LIFEPOD_SPEECH_DANGER)
 				emote = pick("blares", "earsplittingly blips", "coldly screams")
 
 	switch(danger)
-		if(0)
+		if(LIFEPOD_SPEECH_NOTICE)
 			return visible_message(SPAN_NOTICE("\The <b>[src]</b> [emote], \"[message]\""))
-		if(1)
+		if(LIFEPOD_SPEECH_WARNING)
 			return visible_message(SPAN_WARNING("\The <b>[src]</b> [emote], \"[message]\""))
-		if(2)
+		if(LIFEPOD_SPEECH_DANGER)
 			return visible_message(SPAN_DANGER("\The <b>[src]</b> [emote], \"[message]\""))
 
-/obj/machinery/lifepod/proc/linkLaunchSystems() //This can actually be done with a multitool ingame.
+/// Fetches a mass driver on the same turf as it, and then fetches a blast door in whatever direction the mass driver is facing.
+/obj/machinery/lifepod/proc/linkLaunchSystems()
 	launchDriver = locate(/obj/machinery/mass_driver) in loc //Get the mass driver
 	if(!launchDriver) //If there is no mass driver, don't bother.
 		microphone("Unable to connect to external launch systems.", 1)
@@ -102,28 +229,31 @@ I know no God but camel case.
 	launchHatch = locate(/obj/machinery/door/blast) in hatchTurf
 	return TRUE
 
+/// Ran during process(), slowly applies increasing stasis and occasional radiation to carbon occupant. Also manages air supply.
 /obj/machinery/lifepod/proc/processOccupant()
 	var/mob/living/carbon/passenger = storedThing
 	if(powered())
+		/// 5% of the amount of time they have been in the pod.
 		var/stasisPower = round((world.time-timeEntered)*0.05) //Slowly increase.
 
 		if(stasisPower)
 			passenger.SetStasis(stasisPower)
 
-		if(world.time - timeRadiated >= 10 MINUTES) //Very slow radiation poisoning.
+		if(world.time - timeRadiated >= 10 MINUTES)
 			passenger.apply_radiation(1)
 			microphone("Minor generator-sourced radiation emission detected.", 1)
 			timeRadiated = world.time //Reset time.
 
 	if(airSupply && airSupply.return_pressure() < ONE_ATMOSPHERE * 0.8 && (world.time - lastAirWarningTime) >= 1 MINUTE) //Scream at them that they have low air.
-		microphone("LOW AIR LEVELS DETECTED!", 1)
+		microphone("LOW AIR LEVELS DETECTED!", LIFEPOD_SPEECH_WARNING)
 		lastAirWarningTime = world.time
 		if(airSupply.return_pressure() < ONE_ATMOSPHERE * 0.75 && !istype(loc, /turf/space)) //Toggle environmental succ, pray person knows what they're doing.
-			microphone("HAZARDOUS AIR LEVELS DETECTED! TOGGLING EXTERNAL VENTS! BRACE FOR ENVIRONMENTAL EXPOSURE!", 2)
+			microphone("HAZARDOUS AIR LEVELS DETECTED! TOGGLING EXTERNAL VENTS! BRACE FOR ENVIRONMENTAL EXPOSURE!", LIFEPOD_SPEECH_DANGER)
 			sleep(5)
 			airSupply = null
 			qdel(airSupply) //We won't be needing this anymore. Single usage because this is an emergency thing.
 
+/// The actual transfer of something into it.
 /obj/machinery/lifepod/proc/enterLifepod(atom/movable/thing)
 	if(ismob(thing))
 		var/mob/mobThing = thing
@@ -137,47 +267,12 @@ I know no God but camel case.
 	thing.forceMove(src)
 	storedThing = thing
 
-	visible_message(SPAN_NOTICE("\The <b>[src]</b> starts up and whirrs as it is closed."))
+	visible_message(SPAN_NOTICE("\The [src] starts up and whirrs as it is closed."))
 	timeEntered = world.time
 	hatch = LIFEPOD_CLOSED
 	update_icon()
 
-/obj/machinery/lifepod/proc/exitLifepod()
-	if(ismob(storedThing)) 	//Reset their sight and such.
-		var/mob/mobThing = storedThing
-
-		if(mobThing.client)
-			mobThing.client.perspective = mobThing.client.mob
-			mobThing.client.eye = MOB_PERSPECTIVE
-
-	storedThing.dropInto(loc) //Physically throw them back into the world.
-	storedThing = null //Now nothing is inside.
-
-/obj/machinery/lifepod/proc/attemptExit(mob/user)
-	var/voluntary = FALSE
-	if(!user) //Assume people take themselves out of the lifepod if not told otherwise.
-		user = storedThing
-	if(storedThing == user)
-		voluntary = TRUE
-
-	switch(hatch)
-		if(LIFEPOD_LOCKED) //Fail if locked.
-			storedThing.visible_message(
-				SPAN_WARNING("[voluntary ? "Something pushes the bolted hatch from the inside" : "\The [user] pulls on the bolted hatch"] of \the [src] to no avail."),
-				SPAN_WARNING("You can't open the hatch of \the [src]. Try unlocking or breaking it.")
-			)
-			return
-
-		if(LIFEPOD_CLOSED) //Open if closed.
-			storedThing.visible_message(
-				SPAN_NOTICE("\The [user] opens the hatch of \the [src]."),
-				SPAN_NOTICE("You open the hatch of \the [src].")
-			)
-			hatch = LIFEPOD_OPEN
-			update_icon()
-
-	exitLifepod()
-
+/// Called whenever someone tries to enter it.
 /obj/machinery/lifepod/proc/attemptEnter(atom/movable/target, mob/user)
 	if(!ismovable(target) || target.anchored) return //No more ladders in lifepods.
 
@@ -225,11 +320,49 @@ I know no God but camel case.
 	if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 		enterLifepod(target)
 
+/// The actual exit of something from it.
+/obj/machinery/lifepod/proc/exitLifepod()
+	if(ismob(storedThing)) 	//Reset their sight and such.
+		var/mob/mobThing = storedThing
+
+		if(mobThing.client)
+			mobThing.client.perspective = mobThing.client.mob
+			mobThing.client.eye = MOB_PERSPECTIVE
+
+	storedThing.dropInto(loc) //Physically throw them back into the world.
+	storedThing = null //Now nothing is inside.
+
+/// Called whenever someone tries to leave it.
+/obj/machinery/lifepod/proc/attemptExit(mob/user)
+	var/voluntary = FALSE
+	if(!user) //Assume people take themselves out of the lifepod if not told otherwise.
+		user = storedThing
+	if(storedThing == user)
+		voluntary = TRUE
+
+	switch(hatch)
+		if(LIFEPOD_LOCKED) //Fail if locked.
+			storedThing.visible_message(
+				SPAN_WARNING("[voluntary ? "Something pushes the bolted hatch from the inside" : "\The [user] pulls on the bolted hatch"] of \the [src] to no avail."),
+				SPAN_WARNING("You can't open the hatch of \the [src]. Try unlocking or breaking it.")
+			)
+			return
+
+		if(LIFEPOD_CLOSED) //Open if closed.
+			storedThing.visible_message(
+				SPAN_NOTICE("\The [user] opens the hatch of \the [src]."),
+				SPAN_NOTICE("You open the hatch of \the [src].")
+			)
+			hatch = LIFEPOD_OPEN
+			update_icon()
+
+	exitLifepod()
+
+/// The chain of events for the pod to get thrown.
 /obj/machinery/lifepod/proc/launch()
 	if(!launchDriver) //Fail if there's nothing to throw it.
-		launchStatus = LIFEPOD_FAILURE
 		microphone("MASS DRIVER NOT DETECTED, ATTEMPTING LAUNCH SYSTEM SEARCH!", 2) //Try one more time
-
+		sleep(5)
 		if(!linkLaunchSystems()) //Try one more time to link launch systems, don't be too cruel.
 			microphone("UNABLE TO FIND MASS DRIVER! LAUNCH SYSTEM FAILURE!", 2)
 			return
@@ -240,14 +373,14 @@ I know no God but camel case.
 		launchHatch.force_open()
 		sleep(5)
 		microphone("Anchoring magnets disabled.", 0)
-		anchored = FALSE //Get ready to get thrown.
 		sleep(5)
 
 	microphone("MASS DRIVER ACTIVE! BRACE FOR LAUNCH!", 1) //IT'S HAPPENING.
-	launchStatus = LIFEPOD_LAUNCHED //Even is the mass driver isn't powered, pretend you still launched.
+	anchored = FALSE
 	launchDriver.delayed_drive() //IT HAPPENED.
 
-/obj/machinery/lifepod/proc/escape() //Send them to an escape level if nothing else.
+/// This sends them to a place where they cannot return to the regular map.
+/obj/machinery/lifepod/proc/escape()
 	if(emagEscape) //Teleport them to antag heaven beach area
 		var/obj/effect/landmark/escapePlace = pick(endgame_safespawns)
 		forceMove(escapePlace.loc)
@@ -257,16 +390,9 @@ I know no God but camel case.
 		forceMove(locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE),  pick(GLOB.using_map.escape_levels)))
 		//Since they are stuck in baby jail, tell them that they can ghost.
 		to_chat(storedThing, FONT_LARGE(SPAN_NOTICE("Your lifepod has navigated itself to the designated rescue sector. You may ghost and be counted as escaped.")))
+	landed = TRUE
 
-/*.
-
-1. If it is landed, it will not try to land.
-2. If it is on the overmap, it will try to land on an away site or exoplanet.
-3. If it cannot find a suitable turf on said site, it will continue with regular border-looping travel.
-
-*/
-
-/obj/machinery/lifepod/touch_map_edge() //THERE IS A MAP BORDER PROC HOLY HELL.
+/obj/machinery/lifepod/touch_map_edge()
 	landingAttempts++
 
 	if(landingAttempts >= 4)
@@ -275,7 +401,7 @@ I know no God but camel case.
 	if(emagEscape)
 		escape()
 
-	if(launchStatus == LIFEPOD_LANDED) //If you're not in space, don't try to land.
+	if(landed == TRUE) //If you're not in space, don't try to land.
 		return ..()
 
 	var/list/possibleSites = list() //All the possible places they could land.
@@ -325,7 +451,7 @@ I know no God but camel case.
 
 		forceMove(landingTurf) //Just get them there.
 		playsound(loc,'sound/effects/meteorimpact.ogg', 100)
-		launchStatus = LIFEPOD_LANDED
+		landed = TRUE
 		anchored = TRUE
 	else
 		..() //Let them continue to float if this somehow occurs.
@@ -365,113 +491,3 @@ I know no God but camel case.
 			playsound(loc,'sound/machines/BoltsUp.ogg', 50) //Using old door noises for nostalgia points.
 
 	update_icon()
-
-/obj/machinery/lifepod/Initialize(populate_parts = TRUE)
-	. = ..()
-
-	//Generate the air supply
-	airSupply = new()
-	airSupply.temperature = T0C
-	airSupply.adjust_gas(GAS_OXYGEN, MOLES_O2STANDARD, 0)
-	airSupply.adjust_gas(GAS_NITROGEN, MOLES_N2STANDARD)
-
-	linkLaunchSystems() //Remember to put these in a properly mapped area, but there is a contigency (manual multitooling or lenient checking before launch) if they don't.
-
-	if(GLOB.using_map.use_overmap) //I hope this would be used only in overmap-compatible maps, because outside of that there will be limited viablity.
-		mothership = map_sectors["[z]"]
-/obj/machinery/lifepod/update_icon()
-	icon_state = "lifepod_[hatch]" //Open or close the hatch appropiately.
-
-/* The order of the examine() goes:
-Hatch appearance.
-Launch status.
-Supplies ejected.
-Launch systems light.
-Lock light.
-*/
-
-/obj/machinery/lifepod/examine(mob/user)
-	. = ..()
-
-	//Hatch status.
-	switch(hatch)
-		if(LIFEPOD_OPEN)
-			if(storedThing && user.Adjacent(src)) //You'd also need to be close to see it.
-				to_chat(user, SPAN_NOTICE("\The [storedThing] is inside the passenger compartment."))
-
-		if(LIFEPOD_CLOSED, LIFEPOD_LOCKED)
-			if(storedThing && user.Adjacent(src)) //You'd ALSO need to be close to see it.
-				to_chat(user, SPAN_WARNING("Something is inside the passenger compartment."))
-
-		if(LIFEPOD_BROKEN) //Tell them it is broken.
-			to_chat(user, SPAN_WARNING("The hatch is broken, rendering \the [src] inoperable."))
-
-	//Other things to notice.
-	if(landingAttempts > 0) //Show any signs of landing attempts.
-		to_chat(user, SPAN_WARNING("There are significant wear marks on the sails.")) //Trying to not be obvious.
-	if(suppliesEjected) //Someone already spawned supplies.
-		to_chat(user, SPAN_WARNING("The emergency supplies have been ejected.")) //Indicate it's already looted.
-
-	//Lights. Can be visually added later.
-	if(launchDriver && user.Adjacent(src)) //You'd need to be close to see it.
-		to_chat(user, SPAN_NOTICE("The 'EXT-LAUNCH-SYS CONNECTION' light is flickering.")) //Don't pull the launch lever unless you want to vent something.
-	if(hatch == LIFEPOD_LOCKED)
-		to_chat(user, SPAN_NOTICE("The 'MANUAL BOLT' light is flickering."))
-
-/obj/machinery/lifepod/Process()
-	if(storedThing && iscarbon(storedThing) && launchStatus >= LIFEPOD_LAUNCHED && launchStatus != LIFEPOD_FAILURE)
-		processOccupant()
-
-/obj/machinery/lifepod/return_air()
-	if(airSupply && (hatch == LIFEPOD_CLOSED || LIFEPOD_LOCKED))
-		return airSupply //Return
-	else
-		return loc.return_air()
-
-/obj/machinery/lifepod/MouseDrop_T(atom/movable/target, mob/user) //Throwing them in.
-	attemptEnter(target, user)
-
-/obj/machinery/lifepod/physical_attack_hand(mob/user)
-	if(user == storedThing) //If you are inside, get out.
-		attemptExit()
-		return
-
-	switch(hatch)
-		if(LIFEPOD_LOCKED) //The hatch is locked from the inside.
-			to_chat(user, SPAN_WARNING("\The [src]'s hatch is locked and cannot be opened."))
-			return
-
-		if(LIFEPOD_CLOSED) //Opening the hatch.
-			if(user.IsAdvancedToolUser())
-				user.visible_message(
-					SPAN_NOTICE("\The [user] opens the hatch of \the [src]."),
-					SPAN_NOTICE("You open the hatch of \the [src].")
-				)
-				hatch = LIFEPOD_OPEN //Open the hatch.
-				update_icon()
-			else
-				to_chat(user, SPAN_WARNING("You can't operate the hatch."))
-				return
-
-		if(LIFEPOD_OPEN) //Closing the hatch.
-			if(user.IsAdvancedToolUser())
-				user.visible_message(
-					SPAN_NOTICE("\The [user] closes the hatch of \the [src]."),
-					SPAN_NOTICE("You closes the hatch of \the [src].")
-				)
-				hatch = LIFEPOD_CLOSED
-				update_icon()
-			else
-				to_chat(user, SPAN_WARNING("You can't operate the hatch."))
-				return
-
-/obj/machinery/lifepod/is_powered()
-	return TRUE //No matter what, it's powered. God could smite it, it's still powered.
-
-//Stolen from mass driver slugs.
-/obj/machinery/lifepod/Move()
-	. = ..()
-	if(.)
-		var/turf/T = get_turf(src)
-		if(!isspace(T) && !istype(T, /turf/simulated/floor/carpet))
-			playsound(T, pick(move_sounds), 75, 1)
