@@ -49,10 +49,10 @@
 	name = "Quantum Mechanic"
 	glasses =  /obj/item/clothing/glasses/sunglasses/quantum
 	uniform =  /obj/item/clothing/under/quantum/suit
-	shoes =    /obj/item/clothing/shoes/color/black/quantum
-	l_ear =    /obj/item/radio/headset/ert/quantum
+	shoes =    /obj/item/clothing/shoes/black/quantum
+	l_ear =    /obj/item/device/radio/headset/specops/quantum
 	back =     /obj/item/storage/backpack/holding/quantum
-	head =     /obj/item/clothing/head/beret
+	head =     /obj/item/clothing/head/helmet/quantum/helmet
 	belt =     /obj/item/storage/belt/utility/full/quantum
 	id_slot = slot_wear_id
 	id_types = list(/obj/item/card/id/quantum)
@@ -154,6 +154,7 @@
 /obj/item/storage/backpack/holding/quantum
 	storage_slots = 56
 	max_w_class = 400
+	startswith = list(/obj/item/clothing/glasses/sunglasses/quantum = 1)
 
 /obj/item/storage/backpack/holding/quantum/attack_hand(mob/user)
 	if(!user)
@@ -166,13 +167,14 @@
 	return ..()
 
 // Headset
-/obj/item/device/radio/headset/ert/quantum
+/obj/item/device/radio/headset/specops/quantum
 	name = "quantum mechanic's headset"
 	desc = "A quantum mechanic's headset. The letter 'Ω' is stamped on the side."
 	translate_binary = TRUE
-	ks1type = /obj/item/device/encryptionkey/binary
+	ks1type = /obj/item/device/encryptionkey/full_access
 
-/obj/item/radio/headset/ert/quantum/attack_hand(mob/user)
+
+/obj/item/device/radio/headset/specops/quantum/attack_hand(mob/user)
 	if(!user)
 		return TRUE
 
@@ -183,7 +185,7 @@
 	return ..()
 
 // overload this so we can force translate flags without the required keys
-/obj/item/device/radio/headset/ert/quantum/recalculateChannels(setDescription = FALSE)
+/obj/item/device/radio/headset/specops/quantum/recalculateChannels(setDescription = FALSE)
 	. = ..(setDescription)
 	translate_binary = TRUE
 
@@ -194,6 +196,7 @@
 	abstract_type = /obj/item/clothing/head/helmet/quantum
 	name = "quantum mechanic's helmet"
 	desc = "A quantum mechanic's helmet. There is a letter on front that reads 'Q'."
+	icon = 'mods/quantum_mechanic/uniform_quantum.dmi'
 	item_icons = list(
 		slot_head_str = 'mods/quantum_mechanic/uniform_quantum.dmi'
 	)
@@ -260,13 +263,13 @@
 	return ..()
 
 // Gloves
-/obj/item/clothing/gloves/color/white/quantum
+/obj/item/clothing/gloves/white/quantum
 	name = "quantum mechanic's gloves"
 	desc = "A pair of modified gloves. The letter 'Ω' is stamped on the side."
 	siemens_coefficient = 0
 	permeability_coefficient = 0
 
-/obj/item/clothing/gloves/color/white/quantum/attack_hand(mob/user)
+/obj/item/clothing/gloves/white/quantum/attack_hand(mob/user)
 	if(!user)
 		return TRUE
 
@@ -314,12 +317,12 @@
 	return ..()
 
 // Shoes
-/obj/item/clothing/shoes/color/black/quantum
+/obj/item/clothing/shoes/black/quantum
 	name = "quantum mechanic's shoes"
 	desc = "A pair of black shoes with extra grip. The letter 'Ω' is stamped on the side."
 	item_flags = ITEM_FLAG_NOSLIP
 
-/obj/item/clothing/shoes/color/black/quantum/attack_hand(mob/user)
+/obj/item/clothing/shoes/black/quantum/attack_hand(mob/user)
 	if(!user)
 		return TRUE
 

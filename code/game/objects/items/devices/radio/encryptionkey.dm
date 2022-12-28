@@ -156,3 +156,9 @@
 	name = "prospector radio encryption key"
 	icon_state = "srv_cypherkey"
 	channels = list("Supply" = 1)
+
+/obj/item/device/encryptionkey/full_access
+	name = "\improper Admin radio encryption key"
+	icon_state = "bin_cypherkey"
+	translate_binary = 1
+	channels = list("Response Team" = 1, "Science" = 1, "Command" = 1, "Medical" = 1, "Engineering" = 1, "Security" = 1, "Supply" = 1, "Service" = 1, "Hailing" = 1, "AI Private" = 1)
