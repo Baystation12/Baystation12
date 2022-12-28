@@ -140,7 +140,9 @@ var/global/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_atom,		// allows us to spawn instances,
 	/datum/admins/proc/spawn_artifact,
 	/client/proc/spawn_chemdisp_cartridge,
-	/datum/admins/proc/mass_debug_closet_icons
+	/datum/admins/proc/mass_debug_closet_icons,
+	/client/proc/respawn_as_self,
+	/client/proc/spawn_quantum_mechanic
 	)
 var/global/list/admin_verbs_server = list(
 	/datum/admins/proc/capture_map_part,

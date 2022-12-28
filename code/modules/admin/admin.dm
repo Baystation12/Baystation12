@@ -120,6 +120,7 @@ var/global/floorIsLava = 0
 		body += "<A HREF='?src=\ref[src];cryo=\ref[M]'>Cryo Character</A> | "
 
 	if(M.client)
+		body += "\ <A HREF='?src=\ref[src];sendbacktolobby=\ref[M]'>Send back to Lobby</A> | "
 		body += "<A HREF='?src=\ref[src];sendtoprison=\ref[M]'>Prison</A> | "
 		body += "<A HREF='?src=\ref[src];reloadsave=\ref[M]'>Reload Save</A> | "
 		body += "<A HREF='?src=\ref[src];reloadchar=\ref[M]'>Reload Character</A> | "

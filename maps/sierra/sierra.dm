@@ -145,6 +145,7 @@
 	#include "../../mods/eris_announcer/_eris_announcer.dme"
 	#include "../../mods/species/resomi/_resomi.dme"
 	#include "../../mods/sofa/_sofa.dme"
+	#include "../../mods/quantum_mechanic/_quantum_mechanic.dme"
 
 	#define using_map_DATUM /datum/map/sierra
 

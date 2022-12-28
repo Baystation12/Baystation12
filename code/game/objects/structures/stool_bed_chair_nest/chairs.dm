@@ -119,7 +119,7 @@
 	..(newloc, newmaterial, MATERIAL_LIME_CLOTH)
 
 /obj/structure/bed/chair/padded/yellow/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "yellow")
+	..(newloc, newmaterial, MATERIAL_YELLOW_CLOTH)
 
 // Leaving this in for the sake of compilation.
 /obj/structure/bed/chair/comfy
