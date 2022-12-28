@@ -234,12 +234,15 @@
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/command/bridge)
 "aF" = (
-/obj/machinery/cryopod/lifepod,
 /obj/machinery/door/window/southright,
 /obj/machinery/computer/cryopod{
 	pixel_x = 32
 	},
-/turf/simulated/floor/wood,
+/obj/machinery/mass_driver{
+	dir = 1
+	},
+/obj/machinery/lifepod,
+/turf/simulated/floor,
 /area/ship/scrap/command/captain)
 "aH" = (
 /turf/simulated/floor/bluegrid,

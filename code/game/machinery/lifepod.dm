@@ -119,15 +119,8 @@
 		if(LIFEPOD_BROKEN)
 			to_chat(user, SPAN_WARNING("The hatch is broken, rendering \the [src] inoperable."))
 
-
 	if(landingAttempts > 0)
 		to_chat(user, SPAN_WARNING("There are significant wear marks on the sails.")) //Trying to not be obvious.
-	if(suppliesEjected)
-		to_chat(user, SPAN_WARNING("The emergency supplies have been ejected.")) //Indicate it's already looted.
-	if(launchDriver && user.Adjacent(src))
-		to_chat(user, SPAN_NOTICE("The 'EXT-LAUNCH-SYS CONNECTION' light is flickering."))
-	if(hatch == LIFEPOD_LOCKED)
-		to_chat(user, SPAN_NOTICE("The 'MANUAL BOLT' light is flickering."))
 
 /obj/machinery/lifepod/Process()
 	if(storedThing && iscarbon(storedThing))
@@ -223,7 +216,7 @@
 /obj/machinery/lifepod/proc/linkLaunchSystems()
 	launchDriver = locate(/obj/machinery/mass_driver) in loc //Get the mass driver
 	if(!launchDriver) //If there is no mass driver, don't bother.
-		microphone("Unable to connect to external launch systems.", 1)
+		microphone("Unable to connect to external launch systems.", LIFEPOD_SPEECH_WARNING)
 		return FALSE
 	var/turf/hatchTurf = get_step(launchDriver, launchDriver.dir)
 	launchHatch = locate(/obj/machinery/door/blast) in hatchTurf
@@ -241,7 +234,7 @@
 
 		if(world.time - timeRadiated >= 10 MINUTES)
 			passenger.apply_radiation(1)
-			microphone("Minor generator-sourced radiation emission detected.", 1)
+			microphone("Minor generator-sourced radiation emission detected.", LIFEPOD_SPEECH_WARNING)
 			timeRadiated = world.time //Reset time.
 
 	if(airSupply && airSupply.return_pressure() < ONE_ATMOSPHERE * 0.8 && (world.time - lastAirWarningTime) >= 1 MINUTE) //Scream at them that they have low air.
@@ -361,23 +354,22 @@
 /// The chain of events for the pod to get thrown.
 /obj/machinery/lifepod/proc/launch()
 	if(!launchDriver) //Fail if there's nothing to throw it.
-		microphone("MASS DRIVER NOT DETECTED, ATTEMPTING LAUNCH SYSTEM SEARCH!", 2) //Try one more time
+		microphone("Mass driver not detected, checking local network...", LIFEPOD_SPEECH_WARNING) //Try one more time
 		sleep(5)
 		if(!linkLaunchSystems()) //Try one more time to link launch systems, don't be too cruel.
-			microphone("UNABLE TO FIND MASS DRIVER! LAUNCH SYSTEM FAILURE!", 2)
+			microphone("Unable to find mass driver! Launch aborted!", LIFEPOD_SPEECH_DANGER)
 			return
 
 	if(launchHatch && launchHatch.density) //Start by opening the launch hatch.
-		microphone("OPENING BLAST DOOR! ANCHORING MAGNETS POWERED!", 1)
+		microphone("Opening blast door. Anchoring magnets powered.", LIFEPOD_SPEECH_WARNING)
 		anchored = TRUE //temporarily anchor us to account for atmos
 		launchHatch.force_open()
-		sleep(5)
-		microphone("Anchoring magnets disabled.", 0)
+
 		sleep(5)
 
-	microphone("MASS DRIVER ACTIVE! BRACE FOR LAUNCH!", 1) //IT'S HAPPENING.
-	anchored = FALSE
-	launchDriver.delayed_drive() //IT HAPPENED.
+		microphone("Anchoring magnets disabled. Brace for launch!", LIFEPOD_SPEECH_NOTICE)
+		anchored = FALSE
+		launchDriver.delayed_drive() //IT HAPPENED.
 
 /// This sends them to a place where they cannot return to the regular map.
 /obj/machinery/lifepod/proc/escape()
