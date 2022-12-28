@@ -218,8 +218,7 @@
 "aaC" = (
 /obj/machinery/power/solar_control{
 	id = "auxsolarstarboard";
-	name = "Starboard Solar Control";
-	track = 0
+	name = "Starboard Solar Control"
 	},
 /obj/structure/cable/yellow{
 	d2 = 4;
@@ -3288,7 +3287,6 @@
 	pixel_y = 29
 	},
 /obj/machinery/button/windowtint{
-	dir = 2;
 	id = "sierra_surgery2";
 	pixel_x = -5;
 	pixel_y = 28
@@ -7384,7 +7382,6 @@
 /area/security/sierra/evidence)
 "ang" = (
 /obj/structure/closet/secure_closet/cabinet/forensics{
-	icon_state = "cabinet";
 	name = "forensics technician's cabinet"
 	},
 /obj/effect/floor_decal/borderfloorwhite{
@@ -8454,6 +8451,11 @@
 /obj/machinery/computer/cryopod/robot{
 	pixel_y = 30
 	},
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
+	},
 /turf/simulated/floor/plating,
 /area/turret_protected/ai_cyborg_station)
 "aoO" = (
@@ -8974,6 +8976,9 @@
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/structure/bed/sofa/m/black{
+	dir = 4
+	},
 /turf/simulated/floor/wood/walnut,
 /area/bridge/adjutants)
 "apv" = (
@@ -8999,6 +9004,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/structure/bed/sofa/r/black,
 /turf/simulated/floor/wood/walnut,
 /area/bridge/adjutants)
 "apz" = (
@@ -11740,6 +11746,7 @@
 /obj/effect/floor_decal/corner/red/border{
 	dir = 8
 	},
+/obj/item/stool/padded,
 /turf/simulated/floor/tiled/steel_grid,
 /area/security/range)
 "avn" = (
@@ -12151,8 +12158,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/structure/extinguisher_cabinet{
 	dir = 4;
-	pixel_x = -24;
-	pixel_y = 0
+	pixel_x = -24
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/eva)
@@ -13149,6 +13155,9 @@
 "ayn" = (
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/lightgrey/border,
+/obj/structure/bed/chair/padded/red{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore_stairwell)
 "ayo" = (
@@ -13157,6 +13166,9 @@
 /obj/structure/sign/deck/first{
 	dir = 1;
 	pixel_y = -32
+	},
+/obj/structure/bed/chair/padded/red{
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore_stairwell)
@@ -15295,7 +15307,6 @@
 /area/hallway/primary/firstdeck/aft)
 "aBE" = (
 /obj/structure/closet/secure_closet/cabinet/forensics{
-	icon_state = "cabinet";
 	name = "forensics technician's cabinet"
 	},
 /obj/effect/floor_decal/borderfloorwhite{
@@ -17263,6 +17274,9 @@
 	dir = 1;
 	pixel_y = -29
 	},
+/obj/structure/bed/sofa/m/black{
+	dir = 1
+	},
 /turf/simulated/floor/wood/walnut,
 /area/bridge/adjutants)
 "aEd" = (
@@ -18421,6 +18435,7 @@
 	pixel_y = -12;
 	req_access = list("ACCESS_HEAD_OF_SECURITY")
 	},
+/obj/machinery/computer/modular/preset/cardslot/command,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/hos)
 "aFZ" = (
@@ -22728,6 +22743,7 @@
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 1
 	},
+/obj/structure/bed/sofa/l/red,
 /turf/simulated/floor/tiled/dark,
 /area/security/sierra/breakroom)
 "aMk" = (
@@ -22737,6 +22753,7 @@
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 1
 	},
+/obj/structure/bed/sofa/r/red,
 /turf/simulated/floor/tiled/dark,
 /area/security/sierra/breakroom)
 "aMl" = (
@@ -23721,6 +23738,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/machinery/door/airlock/glass/security{
+	id_tag = "ge_windows";
+	req_access = newlist()
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/sierra/breakroom)
 "aNH" = (
@@ -24400,8 +24421,8 @@
 	},
 /obj/item/clothing/gloves/latex,
 /obj/machinery/vending/wallmed1{
-	pixel_x = 25;
-	dir = 8
+	dir = 8;
+	pixel_x = 25
 	},
 /turf/simulated/floor/tiled/white,
 /area/assembly/robotics)
@@ -24585,6 +24606,10 @@
 "aOV" = (
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/airlock/glass/security{
+	id_tag = "ge_windows";
+	req_access = newlist()
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/security/sierra/equipment)
 "aOW" = (
@@ -26701,8 +26726,7 @@
 	},
 /obj/structure/extinguisher_cabinet{
 	dir = 4;
-	pixel_x = -24;
-	pixel_y = 0
+	pixel_x = -24
 	},
 /turf/simulated/floor/tiled/white,
 /area/assembly/robotics)
@@ -28611,8 +28635,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/extinguisher_cabinet{
 	dir = 4;
-	pixel_x = -24;
-	pixel_y = 0
+	pixel_x = -24
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/bridge)
@@ -29799,8 +29822,7 @@
 /obj/item/device/multitool,
 /obj/structure/extinguisher_cabinet{
 	dir = 8;
-	pixel_x = 24;
-	pixel_y = 0
+	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/tcommsat/computer)
@@ -34297,8 +34319,7 @@
 /obj/machinery/power/solar_control{
 	dir = 1;
 	id = "auxsolarport";
-	name = "Port Solar Control";
-	track = 0
+	name = "Port Solar Control"
 	},
 /obj/structure/cable/yellow{
 	d2 = 4;
@@ -35523,6 +35544,12 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/firstdeck/forestarboard)
+"cpF" = (
+/obj/structure/bed/sofa/m/black{
+	dir = 5
+	},
+/turf/simulated/floor/wood/walnut,
+/area/bridge/adjutants)
 "cqL" = (
 /obj/structure/bed/chair/comfy/beige{
 	dir = 4
@@ -35597,6 +35624,14 @@
 	},
 /turf/simulated/floor/bluegrid,
 /area/turret_protected/ai)
+"cGp" = (
+/obj/item/beartrap{
+	anchored = 1;
+	deployed = 1;
+	icon_state = "beartrap1"
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/firstdeck/forestarboard)
 "cKN" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -35631,6 +35666,12 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/misc_lab)
+"cXv" = (
+/obj/structure/bed/sofa/m/black{
+	dir = 6
+	},
+/turf/simulated/floor/wood/walnut,
+/area/bridge/adjutants)
 "cXM" = (
 /obj/structure/bed/chair/wheelchair,
 /obj/machinery/light/small,
@@ -36135,6 +36176,12 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/medical/backstorage)
+"eWy" = (
+/obj/structure/bed/sofa/l/black{
+	dir = 1
+	},
+/turf/simulated/floor/wood/walnut,
+/area/bridge/adjutants)
 "eXg" = (
 /obj/machinery/floodlight{
 	dir = 8
@@ -37041,6 +37088,10 @@
 	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge/upper)
+"hJp" = (
+/obj/item/stool/padded,
+/turf/simulated/floor/tiled,
+/area/security/range)
 "hKi" = (
 /obj/machinery/light{
 	dir = 8
@@ -37203,9 +37254,9 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/medical{
-	name = "Mental Health";
 	dir = 4;
-	id_tag = "mental_health_door"
+	id_tag = "mental_health_door";
+	name = "Mental Health"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/mentalhealth)
@@ -37493,6 +37544,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore_stairwell)
+"iMi" = (
+/obj/effect/floor_decal/borderfloorblack{
+	dir = 4
+	},
+/obj/structure/flora/pottedplant/bamboo,
+/turf/simulated/floor/tiled/dark,
+/area/bridge/hall/level_two)
 "iOs" = (
 /obj/effect/floor_decal/borderfloor/corner{
 	dir = 4
@@ -37878,6 +37936,12 @@
 	},
 /turf/simulated/floor/bluegrid,
 /area/turret_protected/ai_upload)
+"kvv" = (
+/obj/structure/bed/chair/padded/red{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/firstdeck/fore_stairwell)
 "kvK" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 4
@@ -39101,8 +39165,7 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/extinguisher_cabinet{
 	dir = 8;
-	pixel_x = 24;
-	pixel_y = 0
+	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/heads/office/hop)
@@ -39482,8 +39545,7 @@
 /area/turret_protected/ai)
 "oPb" = (
 /obj/machinery/light/small{
-	dir = 1;
-	on = 1
+	dir = 1
 	},
 /obj/structure/railing/mapped,
 /turf/simulated/floor/tiled/white,
@@ -47234,9 +47296,9 @@ aiw
 aiw
 amN
 akJ
-apz
+cXv
 apu
-apz
+cpF
 akJ
 aKz
 aKz
@@ -47640,7 +47702,7 @@ akJ
 aob
 apz
 ard
-apz
+eWy
 akJ
 aKz
 aKz
@@ -49065,7 +49127,7 @@ aCn
 aEe
 aFi
 aHp
-aHp
+iMi
 aKB
 ari
 aNv
@@ -49864,7 +49926,7 @@ apF
 ark
 asr
 hWw
-avn
+hJp
 awK
 amP
 azq
@@ -54294,7 +54356,7 @@ aaA
 aaA
 acS
 adD
-amM
+cGp
 afi
 agj
 abs
@@ -55113,7 +55175,7 @@ sjO
 sjO
 sjO
 lOA
-mgp
+kvv
 mgp
 auj
 avJ
