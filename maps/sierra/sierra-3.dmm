@@ -2677,6 +2677,9 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
+/obj/machinery/light/spot{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "afy" = (
@@ -3449,6 +3452,9 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/machinery/light/spot{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery/second)
 "agS" = (
@@ -4082,6 +4088,9 @@
 	dir = 5
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/light/small{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/staging)
 "ahX" = (
@@ -5395,6 +5404,7 @@
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/pink/border,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/light/spot,
 /turf/simulated/floor/tiled/white,
 /area/medical/staging)
 "akj" = (
@@ -6305,7 +6315,7 @@
 "alw" = (
 /obj/machinery/optable,
 /obj/effect/floor_decal/industrial/outline/blue,
-/obj/machinery/light/small,
+/obj/machinery/light/spot,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/morgue)
 "alx" = (
@@ -6861,6 +6871,9 @@
 	},
 /obj/effect/floor_decal/corner/paleblue/bordercorner2{
 	dir = 10
+	},
+/obj/machinery/light/spot{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
@@ -7795,6 +7808,9 @@
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment,
+/obj/machinery/light/spot{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "anL" = (
@@ -8221,6 +8237,7 @@
 /obj/effect/landmark/start{
 	name = "Detective"
 	},
+/obj/structure/bed/chair/office/comfy/red,
 /turf/simulated/floor/tiled/white,
 /area/security/sierra/forensic/lab)
 "aos" = (
@@ -9066,9 +9083,6 @@
 /obj/effect/floor_decal/corner/red/border,
 /turf/simulated/floor/tiled,
 /area/security/range)
-"apG" = (
-/turf/simulated/floor/plating,
-/area/medical/infirmreception)
 "apH" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -10380,6 +10394,7 @@
 	},
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/paleblue/border,
+/obj/machinery/light/spot,
 /turf/simulated/floor/tiled/white,
 /area/hallway/infirmary)
 "asb" = (
@@ -20740,6 +20755,12 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/door/airlock/glass/security{
+	dir = 4;
+	id_tag = "detdoor";
+	name = "Warden";
+	req_access = newlist()
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/sierra/sergeant)
 "aJr" = (
@@ -23887,6 +23908,12 @@
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals4{
 	dir = 6
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_y = 24;
+	req_access = list("ACCESS_ENGINEERING")
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/prison)
@@ -37074,6 +37101,9 @@
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 1
 	},
+/obj/machinery/light/spot{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "hFB" = (
@@ -38786,9 +38816,6 @@
 	},
 /obj/effect/floor_decal/corner/pink/border{
 	dir = 6
-	},
-/obj/machinery/light/small{
-	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white,
@@ -40905,6 +40932,9 @@
 /area/rnd/misc_lab)
 "tQx" = (
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/light/spot{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/hallway/infirmary)
 "tQT" = (
@@ -63866,7 +63896,7 @@ atp
 atp
 atp
 esL
-apG
+spL
 spL
 aBM
 aDE

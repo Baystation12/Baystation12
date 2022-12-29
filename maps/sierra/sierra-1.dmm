@@ -12288,6 +12288,9 @@
 /obj/effect/floor_decal/steeldecal/steel_decals4{
 	dir = 4
 	},
+/obj/structure/bed/chair/office/comfy/blue{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/deckofficer)
 "tu" = (
@@ -14754,6 +14757,7 @@
 	dir = 10
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals4,
+/obj/structure/bed/chair/office/comfy/teal,
 /turf/simulated/floor/tiled,
 /area/quartermaster/office)
 "xG" = (
@@ -19605,6 +19609,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
+/obj/structure/bed/chair/comfy/blue,
 /turf/simulated/floor/tiled,
 /area/command/exploration_leader)
 "Gj" = (
@@ -20141,6 +20146,9 @@
 /obj/effect/floor_decal/corner/b_green/bordercorner2{
 	dir = 6
 	},
+/obj/structure/bed/chair/shuttle{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/seats_place)
 "Ha" = (
@@ -20471,6 +20479,7 @@
 /obj/effect/floor_decal/corner/b_green/border{
 	dir = 1
 	},
+/obj/structure/bed/chair/shuttle,
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/seats_place)
 "Hy" = (
@@ -20735,6 +20744,9 @@
 /obj/machinery/light,
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/b_green/border,
+/obj/structure/bed/chair/shuttle{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/seats_place)
 "HU" = (
@@ -21112,6 +21124,7 @@
 /obj/effect/floor_decal/corner/yellow/bordercorner2{
 	dir = 5
 	},
+/obj/machinery/computer/modular/preset/dock,
 /turf/simulated/floor/tiled,
 /area/quartermaster/office)
 "IA" = (
@@ -21962,6 +21975,9 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -20
+	},
+/obj/structure/bed/chair/shuttle{
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/seats_place)
