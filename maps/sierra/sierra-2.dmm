@@ -5312,6 +5312,7 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 8
 	},
+/obj/machinery/disposal,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "aku" = (
@@ -5365,9 +5366,6 @@
 /turf/simulated/floor/tiled,
 /area/hydroponics/storage)
 "akx" = (
-/obj/structure/bed/chair/comfy/beige{
-	dir = 4
-	},
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 8
 	},
@@ -5378,6 +5376,9 @@
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/structure/bed/sofa/r/blue{
 	dir = 4
 	},
 /turf/simulated/floor/wood/ebony,
@@ -9804,7 +9805,7 @@
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 1
 	},
-/obj/structure/bed/chair/comfy/blue,
+/obj/structure/bed/sofa/l/brown,
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/cafe)
 "asB" = (
@@ -10363,7 +10364,7 @@
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 5
 	},
-/obj/structure/bed/chair/comfy/blue,
+/obj/structure/bed/sofa/r/brown,
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/cafe)
 "att" = (
@@ -10769,6 +10770,9 @@
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
+	},
+/obj/structure/bed/sofa/r/brown{
+	dir = 8
 	},
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/lounge_big)
@@ -15345,6 +15349,9 @@
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 9
+	},
+/obj/structure/bed/sofa/m/brown{
+	dir = 6
 	},
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/lounge_big)
@@ -31769,6 +31776,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/chapel/office)
 "biq" = (
+/obj/structure/bed/chair/armchair/blue,
 /turf/simulated/floor/carpet/red,
 /area/crew_quarters/heads/office/captain)
 "bit" = (
@@ -31794,6 +31802,9 @@
 /turf/simulated/floor/tiled/dark,
 /area/chapel/main)
 "biA" = (
+/obj/machinery/computer/modular/preset/cardslot/command{
+	dir = 1
+	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/captain/office_anteroom)
 "biB" = (
@@ -32178,6 +32189,9 @@
 	dir = 5
 	},
 /obj/effect/floor_decal/techfloor,
+/obj/machinery/computer/modular{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/bridge/hall/level_one)
 "bkV" = (
@@ -32538,6 +32552,7 @@
 	},
 /obj/effect/fluid_mapped,
 /obj/machinery/door/firedoor,
+/turf/simulated/floor/beach/sand,
 /area/crew_quarters/game_room)
 "ccS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -32569,6 +32584,9 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/structure/bed/sofa/m/brown{
+	dir = 4
+	},
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/lounge_big)
 "ciC" = (
@@ -32608,6 +32626,9 @@
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
+	},
+/obj/structure/bed/sofa/l/brown{
+	dir = 4
 	},
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/lounge_big)
@@ -32650,6 +32671,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
+/obj/structure/bed/sofa/l/brown,
 /turf/simulated/floor/carpet/purple,
 /area/crew_quarters/game_room)
 "cyn" = (
@@ -32825,6 +32847,7 @@
 /obj/structure/flora/seaweed/mid,
 /obj/effect/fluid_mapped,
 /obj/machinery/door/firedoor,
+/turf/simulated/floor/beach/sand,
 /area/crew_quarters/game_room)
 "dal" = (
 /obj/structure/disposalpipe/segment{
@@ -32883,11 +32906,11 @@
 /turf/simulated/floor/carpet/purple,
 /area/crew_quarters/game_room)
 "deW" = (
-/obj/structure/bed/chair/comfy/beige{
-	dir = 4
-	},
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 10
+	},
+/obj/structure/bed/sofa/l/blue{
+	dir = 4
 	},
 /turf/simulated/floor/wood/ebony,
 /area/crew_quarters/cafe)
@@ -32986,6 +33009,9 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/structure/bed/sofa/m/brown{
+	dir = 8
+	},
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/lounge_big)
 "dEj" = (
@@ -33062,6 +33088,7 @@
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 1
 	},
+/obj/machinery/computer/modular,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/nano)
 "dSg" = (
@@ -33218,11 +33245,10 @@
 /obj/structure/closet/walllocker{
 	pixel_y = 30
 	},
-/obj/item/storage/candle_box/scented,
-/obj/item/storage/candle_box/scented,
-/obj/structure/bed/chair/comfy/blue{
+/obj/structure/bed/sofa/r/lime{
 	dir = 4
 	},
+/obj/item/storage/candle_box/scented,
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/cafe)
 "eoE" = (
@@ -33276,6 +33302,9 @@
 "eul" = (
 /obj/effect/landmark/start,
 /obj/effect/floor_decal/spline/fancy/wood,
+/obj/structure/bed/sofa/m/brown{
+	dir = 1
+	},
 /turf/simulated/floor/carpet/purple,
 /area/crew_quarters/lounge_big)
 "euq" = (
@@ -33460,6 +33489,9 @@
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 5
+	},
+/obj/structure/bed/sofa/m/brown{
+	dir = 10
 	},
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/lounge_big)
@@ -33677,6 +33709,12 @@
 /obj/machinery/light,
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/sleep/bunk_big/room_two)
+"fHS" = (
+/obj/structure/bed/sofa/r/brown{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/purple,
+/area/crew_quarters/game_room)
 "fIG" = (
 /obj/structure/table/rack{
 	dir = 8
@@ -33719,6 +33757,9 @@
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
+	},
+/obj/structure/bed/sofa/l/brown{
+	dir = 8
 	},
 /turf/simulated/floor/carpet/purple,
 /area/crew_quarters/game_room)
@@ -33823,6 +33864,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
+/obj/structure/bed/sofa/m/brown,
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/lounge_big)
 "gjF" = (
@@ -34253,7 +34295,7 @@
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 4
 	},
-/obj/structure/bed/chair/comfy/blue{
+/obj/structure/bed/sofa/l/brown{
 	dir = 1
 	},
 /turf/simulated/floor/wood/mahogany,
@@ -34471,6 +34513,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
+/obj/structure/bed/sofa/l/blue{
+	dir = 8
+	},
 /turf/simulated/floor/wood/ebony,
 /area/crew_quarters/cafe)
 "iew" = (
@@ -34512,6 +34557,10 @@
 	},
 /turf/simulated/floor/wood/bamboo,
 /area/crew_quarters/cafe)
+"iil" = (
+/obj/structure/bed/chair/comfy/blue,
+/turf/space,
+/area/space)
 "ijX" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
@@ -34694,6 +34743,9 @@
 /area/crew_quarters/lounge_big)
 "jcq" = (
 /obj/effect/floor_decal/spline/fancy/wood,
+/obj/structure/bed/sofa/l/brown{
+	dir = 1
+	},
 /turf/simulated/floor/carpet/purple,
 /area/crew_quarters/lounge_big)
 "jeY" = (
@@ -34952,7 +35004,7 @@
 /obj/item/device/radio/intercom{
 	pixel_y = 26
 	},
-/obj/structure/bed/chair/comfy/blue{
+/obj/structure/bed/sofa/l/lime{
 	dir = 8
 	},
 /turf/simulated/floor/carpet/blue2,
@@ -35466,6 +35518,7 @@
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 1
 	},
+/obj/machinery/computer/modular,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/nano)
 "lIG" = (
@@ -35785,7 +35838,7 @@
 /area/shield/seconddeck)
 "mCE" = (
 /obj/effect/landmark/start,
-/obj/structure/bed/chair/comfy/blue{
+/obj/structure/bed/sofa/r/lime{
 	dir = 8
 	},
 /turf/simulated/floor/carpet/blue2,
@@ -35803,6 +35856,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/level1)
+"mFK" = (
+/obj/structure/bed/chair/comfy/blue,
+/turf/simulated/floor/carpet/blue2,
+/area/crew_quarters/heads/captain/office_anteroom)
 "mGH" = (
 /obj/structure/table/gamblingtable,
 /turf/simulated/floor/carpet/purple,
@@ -36200,6 +36257,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
+/obj/structure/bed/sofa/r/brown,
 /turf/simulated/floor/carpet/purple,
 /area/crew_quarters/game_room)
 "oen" = (
@@ -36633,7 +36691,7 @@
 	pixel_y = -6;
 	range = 3
 	},
-/obj/structure/bed/chair/comfy/blue{
+/obj/structure/bed/sofa/l/lime{
 	dir = 4
 	},
 /turf/simulated/floor/carpet/blue2,
@@ -36707,6 +36765,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/bridge/hall/level_one)
+"pzu" = (
+/obj/effect/floor_decal/spline/fancy/wood,
+/obj/structure/bed/sofa/r/brown{
+	dir = 1
+	},
+/turf/simulated/floor/carpet/purple,
+/area/crew_quarters/lounge_big)
 "pCm" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -37031,7 +37096,7 @@
 	pixel_y = 1
 	},
 /obj/effect/landmark/start,
-/obj/structure/bed/chair/comfy/blue{
+/obj/structure/bed/sofa/r/brown{
 	dir = 1
 	},
 /turf/simulated/floor/wood/mahogany,
@@ -37143,6 +37208,12 @@
 "qsC" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/bridge/nano)
+"qsY" = (
+/obj/structure/bed/sofa/l/brown{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/purple,
+/area/crew_quarters/game_room)
 "qtA" = (
 /obj/structure/cable/green{
 	d1 = 2;
@@ -37614,7 +37685,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/sleep/cryo)
 "rMC" = (
-/obj/structure/bed/chair/comfy/blue{
+/obj/structure/bed/sofa/m/lime{
 	dir = 8
 	},
 /turf/simulated/floor/carpet/blue2,
@@ -38866,6 +38937,10 @@
 	},
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/lounge_big)
+"uLg" = (
+/obj/machinery/space_heater,
+/turf/simulated/wall/r_wall/prepainted,
+/area/engineering/bluespace/chamber)
 "uLL" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -39098,6 +39173,7 @@
 	},
 /obj/effect/fluid_mapped,
 /obj/machinery/door/firedoor,
+/turf/simulated/floor/beach/sand,
 /area/crew_quarters/game_room)
 "vwM" = (
 /obj/effect/floor_decal/techfloor/orange{
@@ -39396,7 +39472,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/xenobio)
 "wCV" = (
-/obj/structure/bed/chair/comfy/blue{
+/obj/structure/bed/sofa/m/lime{
 	dir = 4
 	},
 /turf/simulated/floor/carpet/blue2,
@@ -39527,6 +39603,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/bed/sofa/r/blue{
+	dir = 8
+	},
 /turf/simulated/floor/wood/ebony,
 /area/crew_quarters/cafe)
 "wWL" = (
@@ -39777,6 +39856,15 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck/center)
+"xyb" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 4
+	},
+/obj/structure/bed/sofa/r/brown{
+	dir = 8
+	},
+/turf/simulated/floor/carpet/purple,
+/area/crew_quarters/game_room)
 "xzn" = (
 /obj/effect/floor_decal/corner/blue/bordercorner{
 	dir = 4
@@ -47323,7 +47411,7 @@ bfg
 aam
 aam
 aam
-aam
+iil
 abI
 abI
 aJr
@@ -48945,7 +49033,7 @@ azD
 aGq
 aHL
 ayF
-biA
+mFK
 biA
 arb
 aqX
@@ -51564,7 +51652,7 @@ awL
 ahU
 abG
 bhG
-agw
+uLg
 afK
 agD
 aCQ
@@ -51766,7 +51854,7 @@ ahQ
 ahU
 abG
 agv
-agw
+uLg
 aMw
 alx
 aIT
@@ -51968,7 +52056,7 @@ ahQ
 wsO
 adz
 adz
-agw
+uLg
 afK
 alT
 lim
@@ -59424,8 +59512,8 @@ vkG
 vER
 bfk
 mHR
-mhS
-mhS
+fHS
+qsY
 mhS
 saF
 gww
@@ -60031,7 +60119,7 @@ vER
 bfk
 sas
 fPm
-ppv
+xyb
 ppv
 tJf
 hrb
@@ -62462,7 +62550,7 @@ dSv
 oQr
 oAY
 qSo
-jcq
+pzu
 aaa
 acj
 acj

@@ -66,6 +66,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	/// LAZYLIST (`/obj/machinery/door/firedoor`). Contains a list of all firedoors within and adjacent to this area. Updated during a firedoor's `Initialize()` and `Destroy()` calls. Do not modify directly.
 	var/list/all_doors = null
 	/// Boolean. Whether or not the area's firedoors are activated (closed). Tied to area alarm processing. Do not modify directly; Use `air_doors_close()` or `air_doors_open()` instead.
+	var/list/all_arfgs = null		//Similar, but a list of all arfgs adjacent to this area
+	var/arfgs_active = 0
 	var/air_doors_activated = 0
 	/// List (`file (sounds)`). List of sounds that can be played to mobs in the area as ambience. See `./play_ambience()`.
 	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')

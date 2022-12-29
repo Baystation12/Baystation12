@@ -146,6 +146,8 @@
 	#include "../../mods/species/resomi/_resomi.dme"
 	#include "../../mods/sofa/_sofa.dme"
 	#include "../../mods/quantum_mechanic/_quantum_mechanic.dme"
+	#include "../../mods/machinery/atmos_ret_field/_atm_ret_field.dme"
+
 
 	#define using_map_DATUM /datum/map/sierra
 
