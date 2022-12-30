@@ -1,0 +1,8 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Certain trader types should no longer break when asking them what they
+      want.
+  - bugfix: The Randomize button in character setup will no longer randomly break/crash.
+  - bugfix: Ore processing consoles that are not connected to valid machinery now
+      display a prompt to scan for adjacent machinery instead of crashing.
